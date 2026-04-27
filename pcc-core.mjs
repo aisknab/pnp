@@ -1189,3 +1189,78 @@ export function makeMinimalBootstrapContext() {
 
   return ctx;
 }
+export function installDeclarationSchema(ctx, packageId, schemaId, kindName) {
+  const key = `${packageId}:${schemaId}`;
+
+  if (!ctx.schemas) {
+    ctx.schemas = new Map();
+  }
+
+  ctx.schemas.set(key, {
+    normalize(innerCtx, rawObj) {
+      return nf0(innerCtx, rawObj);
+    },
+
+    kindKey() {
+      return name(kindName);
+    },
+
+    arityKey(innerCtx, normObj) {
+      if (normObj && normObj.kind === KIND.RECORD && Array.isArray(normObj.fields)) {
+        return nat(BigInt(normObj.fields.length));
+      }
+
+      if (normObj && Array.isArray(normObj.items)) {
+        return nat(BigInt(normObj.items.length));
+      }
+
+      return nat(0n);
+    },
+
+    modeKey() {
+      return name(MODE.STRUCT);
+    },
+
+    payloadKey(innerCtx, normObj) {
+      return digestObject0(innerCtx, normObj);
+    },
+  });
+
+  return ctx.schemas.get(key);
+}
+
+export function installTruthEvalSchema(ctx, packageId, schemaId) {
+  const key = `${packageId}:${schemaId}`;
+
+  if (!ctx.schemas) {
+    ctx.schemas = new Map();
+  }
+
+  ctx.schemas.set(key, {
+    normalize(innerCtx, rawObj) {
+      return nf0(innerCtx, rawObj);
+    },
+
+    kindKey() {
+      return name('TruthEvalKernel');
+    },
+
+    arityKey(innerCtx, normObj) {
+      return digestObject0(innerCtx, normObj);
+    },
+
+    modeKey() {
+      return name(MODE.FULL);
+    },
+
+    semanticKey() {
+      return name('TruthEvalKernelSemantic');
+    },
+
+    payloadKey(innerCtx, normObj) {
+      return digestObject0(innerCtx, normObj);
+    },
+  });
+
+  return ctx.schemas.get(key);
+}
