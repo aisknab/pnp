@@ -1264,3 +1264,556 @@ export function installTruthEvalSchema(ctx, packageId, schemaId) {
 
   return ctx.schemas.get(key);
 }
+export function Parse0(inputBytes) {
+  const parsed = parseVerifierFrag0ScalarBytes0(inputBytes);
+
+  if (parsed.tag === 'reject') {
+    return parsed;
+  }
+
+  return parsed.value;
+}
+
+export function Encode0(value) {
+  if (!value || typeof value !== 'object') {
+    throw new TypeError('Encode0 expects a tagged object');
+  }
+
+  const tag = String(value.tag ?? value.kind ?? '').trim().toLowerCase();
+
+  if (tag === 'nat') {
+    return encodeNat0(BigInt(value.value));
+  }
+
+  if (tag === 'int') {
+    return encodeInt0(BigInt(value.value));
+  }
+
+  if (tag === 'name') {
+    return encodeName0(String(value.value));
+  }
+
+  if (tag === 'bytes') {
+    return encodeBytes0(value.value);
+  }
+
+  throw new TypeError(`Encode0 does not know how to encode tag ${String(value.tag ?? value.kind)}`);
+}
+
+export function DigestObject0(value) {
+  const canonical = verifierFrag0StableString0(value);
+  const hex = createHash('sha256').update(canonical, 'utf8').digest('hex');
+
+  return {
+    tag: 'Digest0',
+    alg: 'SHA256',
+    bytes: 'canonical-json-v0',
+    hex,
+  };
+}
+
+export function ComputeRowKey0(row) {
+  const material = verifierFrag0RowKeyMaterial0(row);
+  const hex = createHash('sha256')
+    .update(verifierFrag0StableString0(material), 'utf8')
+    .digest('hex');
+
+  return {
+    tag: 'RowKey0',
+    alg: 'SHA256',
+    material,
+    hex,
+  };
+}
+
+export function CheckRowKey0(row, rowKey) {
+  if (!row || typeof row !== 'object' || Array.isArray(row)) {
+    return verifierFrag0Reject0('Type.Row.Shape', [], {
+      reason: 'row must be an object',
+    });
+  }
+
+  if (!Number.isInteger(row.ArityKey) || row.ArityKey < 0) {
+    return verifierFrag0Reject0('Type.RowKeyArity', ['ArityKey'], {
+      expected: 'non-negative integer',
+      actual: row.ArityKey,
+    });
+  }
+
+  const expected = ComputeRowKey0(row);
+
+  if (verifierFrag0StableString0(expected) !== verifierFrag0StableString0(rowKey)) {
+    return verifierFrag0Reject0('RowKey.Mismatch', ['RowKey'], {
+      expected,
+      actual: rowKey,
+    });
+  }
+
+  return verifierFrag0Accept0({
+    checker: 'CheckRowKey0',
+    rowKey: expected,
+  });
+}
+
+export function CheckDuplicateRows0(ctxOrRows, maybeRows) {
+  const rows = maybeRows === undefined ? ctxOrRows : maybeRows;
+
+  if (Array.isArray(rows)) {
+    const seen = new Map();
+
+    for (let index = 0; index < rows.length; index += 1) {
+      const row = rows[index];
+      const key = verifierFrag0StableString0(
+        row && typeof row === 'object' && 'RowKey' in row
+          ? row.RowKey
+          : ComputeRowKey0(row)
+      );
+
+      const route = row && typeof row === 'object'
+        ? row.SelectedRoute ?? row.selectedRoute ?? row.route ?? null
+        : null;
+
+      if (seen.has(key)) {
+        const previous = seen.get(key);
+
+        if (verifierFrag0StableString0(previous.route) !== verifierFrag0StableString0(route)) {
+          return verifierFrag0Reject0('Row.DuplicateConflict', ['rows', index], {
+            previousIndex: previous.index,
+            index,
+            rowKey: row && typeof row === 'object' ? row.RowKey : key,
+            previousRoute: previous.route,
+            route,
+          });
+        }
+      } else {
+        seen.set(key, {
+          index,
+          route,
+        });
+      }
+    }
+
+    return verifierFrag0Accept0({
+      checker: 'CheckDuplicateRows0',
+      rowCount: rows.length,
+    });
+  }
+
+  return verifierFrag0FromCoreResult0(checkDuplicateRows0(ctxOrRows, maybeRows));
+}
+
+export function CheckModeUse0(modeOrRecord, maybeConsumerKind) {
+  let eqMode = modeOrRecord;
+  let consumerKind = maybeConsumerKind;
+
+  if (
+    maybeConsumerKind === undefined &&
+    modeOrRecord !== null &&
+    typeof modeOrRecord === 'object' &&
+    !Array.isArray(modeOrRecord)
+  ) {
+    eqMode =
+      modeOrRecord.eqMode ??
+      modeOrRecord.mode ??
+      modeOrRecord.equalityKind;
+
+    consumerKind =
+      modeOrRecord.consumerKind ??
+      modeOrRecord.consumer ??
+      modeOrRecord.consumedAs ??
+      modeOrRecord.use;
+  }
+
+  const normalizedMode = verifierFrag0NormalizeMode0(eqMode);
+  const normalizedConsumer = verifierFrag0NormalizeConsumer0(consumerKind);
+
+  const coreResult = checkModeUse0(normalizedMode, normalizedConsumer);
+  const converted = verifierFrag0FromCoreResult0(coreResult);
+
+  if (
+    converted.tag === 'accept' &&
+    normalizedMode === MODE.QUOT &&
+    normalizedConsumer === 'replacement-equality'
+  ) {
+    return verifierFrag0Reject0('Mode.QuotientAsReplacementEquality', ['mode'], {
+      mode: normalizedMode,
+      consumerKind: normalizedConsumer,
+    });
+  }
+
+  return converted;
+}
+
+export function CheckNoHiddenMin0(ctxOrAst, maybeAst) {
+  const ast = maybeAst === undefined ? ctxOrAst : maybeAst;
+  const hit = verifierFrag0FindForbiddenExecutableSymbol0(ast);
+
+  if (hit !== null) {
+    return verifierFrag0Reject0('HiddenMin.ExecCall', hit.path, {
+      symbol: hit.symbol,
+    });
+  }
+
+  if (maybeAst === undefined) {
+    return verifierFrag0FromCoreResult0(checkNoHiddenMin0({}, ast));
+  }
+
+  return verifierFrag0FromCoreResult0(checkNoHiddenMin0(ctxOrAst, maybeAst));
+}
+
+function parseVerifierFrag0ScalarBytes0(inputBytes) {
+  const bytes = toUint8Array(inputBytes);
+
+  if (bytes.length < 4) {
+    return verifierFrag0Reject0('Parse.Truncated', [], {
+      need: 4,
+      actual: bytes.length,
+    });
+  }
+
+  const len =
+    bytes[0] * 2 ** 24 +
+    bytes[1] * 2 ** 16 +
+    bytes[2] * 2 ** 8 +
+    bytes[3];
+
+  const available = bytes.length - 4;
+
+  if (available < len) {
+    return verifierFrag0Reject0('Parse.Truncated', [], {
+      len,
+      available,
+    });
+  }
+
+  if (available > len) {
+    return verifierFrag0Reject0('Parse.TrailingBytes', [], {
+      pos: 4 + len,
+      limit: bytes.length,
+    });
+  }
+
+  if (len === 0) {
+    return {
+      tag: 'accept',
+      value: {
+        tag: 'nat',
+        value: 0,
+      },
+    };
+  }
+
+  const magnitude = bytes.slice(4, 4 + len);
+
+  if (magnitude[0] === 0) {
+    return verifierFrag0Reject0('Parse.Nat.NonCanonicalLeadingZero', [], {
+      len,
+    });
+  }
+
+  let decoded = null;
+
+  try {
+    decoded = utf8Decoder.decode(magnitude);
+  } catch {
+    return verifierFrag0Reject0('Parse.Name.InvalidUTF8', [], {
+      len,
+    });
+  }
+
+  if (decoded.normalize('NFC') !== decoded) {
+    return verifierFrag0Reject0('Parse.Name.NonCanonicalForm', [], {
+      decoded,
+    });
+  }
+
+  if (/^[\x20-\x7e]*$/.test(decoded) && /[A-Za-z_./:-]/.test(decoded)) {
+    return {
+      tag: 'accept',
+      value: {
+        tag: 'name',
+        value: decoded,
+      },
+    };
+  }
+
+  let n = 0n;
+
+  for (const byte of magnitude) {
+    n = (n << 8n) + BigInt(byte);
+  }
+
+  return {
+    tag: 'accept',
+    value: {
+      tag: 'nat',
+      value: Number(n),
+    },
+  };
+}
+
+function verifierFrag0RowKeyMaterial0(row) {
+  if (!row || typeof row !== 'object' || Array.isArray(row)) {
+    return {
+      malformed: true,
+      value: row,
+    };
+  }
+
+  return {
+    PackageID: row.PackageID ?? null,
+    SchemaID: row.SchemaID ?? null,
+    KindKey: row.KindKey ?? null,
+    ArityKey: row.ArityKey ?? null,
+    ModeKey: row.ModeKey ?? null,
+    FrontKey: row.FrontKey ?? null,
+    SemanticKey: row.SemanticKey ?? null,
+    IncidenceKey: row.IncidenceKey ?? null,
+    DependencyKey: row.DependencyKey ?? null,
+    ProfileKey: row.ProfileKey ?? null,
+    ChargeKey: row.ChargeKey ?? null,
+    ObligationKey: row.ObligationKey ?? null,
+    BudgetKey: row.BudgetKey ?? null,
+    ActivationKey: row.ActivationKey ?? null,
+    RankKey: row.RankKey ?? null,
+    PayloadKey: row.PayloadKey ?? null,
+  };
+}
+
+function verifierFrag0FromCoreResult0(result) {
+  if (result && typeof result === 'object') {
+    const kind = String(result.kind ?? result.tag ?? '').trim().toLowerCase();
+
+    if (kind === RESULT.ERR || kind === 'err' || kind === 'reject') {
+      return verifierFrag0Reject0(result.coord ?? 'Core.Reject', result.path ?? [], {
+        result,
+      });
+    }
+
+    if (kind === RESULT.OK || kind === 'ok' || kind === 'accept') {
+      return verifierFrag0Accept0({
+        result,
+      });
+    }
+  }
+
+  return verifierFrag0Accept0({
+    result,
+  });
+}
+
+function verifierFrag0Accept0(value = {}) {
+  return {
+    tag: 'accept',
+    kind: 'accept',
+    value,
+  };
+}
+
+function verifierFrag0Reject0(coord, path = [], witness = null) {
+  return {
+    tag: 'reject',
+    kind: 'reject',
+    coord,
+    path,
+    witness,
+  };
+}
+
+function verifierFrag0NormalizeMode0(value) {
+  if (typeof value !== 'string') {
+    return value;
+  }
+
+  const normalized = value.trim().toLowerCase();
+
+  if (
+    normalized === 'quot' ||
+    normalized === 'quotient' ||
+    normalized === 'quotequality' ||
+    normalized === 'quotient-equality'
+  ) {
+    return MODE.QUOT;
+  }
+
+  if (
+    normalized === 'full' ||
+    normalized === 'fullequality' ||
+    normalized === 'full-equality' ||
+    normalized === 'replacement'
+  ) {
+    return MODE.FULL;
+  }
+
+  return value;
+}
+
+function verifierFrag0NormalizeConsumer0(value) {
+  if (typeof value !== 'string') {
+    return value;
+  }
+
+  const normalized = value.trim().toLowerCase();
+
+  if (
+    normalized === 'replacement' ||
+    normalized === 'replacement-equality' ||
+    normalized === 'replacementequality' ||
+    normalized === 'full-replacement'
+  ) {
+    return 'replacement-equality';
+  }
+
+  return normalized;
+}
+
+function verifierFrag0FindForbiddenExecutableSymbol0(value, path = []) {
+  const forbidden = new Set([
+    'µ',
+    'µ*',
+    'µ#',
+    'Can',
+    'argmin',
+    'maxG',
+    'minimumEquivalent',
+    'optimalCircuit',
+    'exactMinSearch',
+    'canonicalMinimizer',
+    'maximizeGain',
+  ]);
+
+  if (typeof value === 'string') {
+    return forbidden.has(value)
+      ? {
+          symbol: value,
+          path,
+        }
+      : null;
+  }
+
+  if (Array.isArray(value)) {
+    for (let index = 0; index < value.length; index += 1) {
+      const hit = verifierFrag0FindForbiddenExecutableSymbol0(value[index], [...path, index]);
+
+      if (hit !== null) {
+        return hit;
+      }
+    }
+
+    return null;
+  }
+
+  if (value && typeof value === 'object') {
+    for (const key of Object.keys(value)) {
+      const hit = verifierFrag0FindForbiddenExecutableSymbol0(value[key], [...path, key]);
+
+      if (hit !== null) {
+        return hit;
+      }
+    }
+  }
+
+  return null;
+}
+
+function verifierFrag0StableString0(value) {
+  return JSON.stringify(verifierFrag0Canonical0(value, new WeakSet()));
+}
+
+function verifierFrag0Canonical0(value, stack) {
+  if (value === null) {
+    return null;
+  }
+
+  if (value === undefined) {
+    return {
+      type: 'undefined',
+    };
+  }
+
+  if (typeof value === 'boolean' || typeof value === 'string') {
+    return value;
+  }
+
+  if (typeof value === 'number') {
+    if (Number.isNaN(value)) {
+      return {
+        type: 'number',
+        value: 'NaN',
+      };
+    }
+
+    if (value === Infinity) {
+      return {
+        type: 'number',
+        value: 'Infinity',
+      };
+    }
+
+    if (value === -Infinity) {
+      return {
+        type: 'number',
+        value: '-Infinity',
+      };
+    }
+
+    if (Object.is(value, -0)) {
+      return {
+        type: 'number',
+        value: '-0',
+      };
+    }
+
+    return value;
+  }
+
+  if (typeof value === 'bigint') {
+    return {
+      type: 'bigint',
+      value: value.toString(10),
+    };
+  }
+
+  if (value instanceof Uint8Array) {
+    return {
+      type: 'bytes',
+      hex: Buffer.from(value).toString('hex'),
+    };
+  }
+
+  if (Array.isArray(value)) {
+    if (stack.has(value)) {
+      return {
+        type: 'cycle',
+      };
+    }
+
+    stack.add(value);
+    const out = value.map((entry) => verifierFrag0Canonical0(entry, stack));
+    stack.delete(value);
+    return out;
+  }
+
+  if (typeof value === 'object') {
+    if (stack.has(value)) {
+      return {
+        type: 'cycle',
+      };
+    }
+
+    stack.add(value);
+    const out = {};
+
+    for (const key of Object.keys(value).sort()) {
+      out[key] = verifierFrag0Canonical0(value[key], stack);
+    }
+
+    stack.delete(value);
+    return out;
+  }
+
+  return {
+    type: typeof value,
+    value: String(value),
+  };
+}
