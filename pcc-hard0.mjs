@@ -925,7 +925,7 @@ function findOpaqueProof0(value, path = []) {
   }
 
   for (const key of Object.keys(value)) {
-    if (/opaque|proofblob|trustedblob|assumeproof/i.test(key)) {
+    if (isOpaqueProofMaterialKey0(key)) {
       return {
         key,
         path: [...path, key],
@@ -941,6 +941,19 @@ function findOpaqueProof0(value, path = []) {
   }
 
   return null;
+}
+
+function isOpaqueProofMaterialKey0(key) {
+  const normalized = String(key).replace(/[_\-\s]/g, '').toLowerCase();
+
+  return (
+    normalized === 'opaqueproof' ||
+    normalized === 'opaqueproofblob' ||
+    normalized === 'proofblob' ||
+    normalized === 'trustedblob' ||
+    normalized === 'trustedproofblob' ||
+    normalized === 'assumeproof'
+  );
 }
 
 function findForbiddenExecutableUse0(value, path = [], inExecutablePosition = false) {
