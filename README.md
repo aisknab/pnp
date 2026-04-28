@@ -35,3 +35,35 @@ npm run check
 npm test
 npm run validate
 ```
+
+## Public RunAll0 entry point
+
+The public entry point is `RunAll0`.
+
+```bash
+npm run smoke
+```
+
+For the full replay record:
+
+```bash
+npm run smoke:full
+```
+
+The emitted public conclusion is conditional:
+
+```text
+CheckPCCPackexp(GeneratePCCPack())=accept implies P = NP
+```
+
+The generator is untrusted. The checker validates the materialized package, compares canonical bytes rather than digest equality, and emits a public `P = NP` conclusion only after the final replay accepts. A reject run emits a replayable first failure and no public theorem conclusion.
+
+The package entry point is:
+
+```js
+import { RunAll0 } from '@aisknab/pnp';
+
+const out = await RunAll0();
+console.log(out.tag, out.NF.publicConclusion);
+```
+
