@@ -45,6 +45,7 @@ export const RELEASE_AUDIT_REQUIRED_MODULES0 = Object.freeze([
 export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-core.test.mjs',
   'pcc-core.negative.test.mjs',
+  'pcc-release-audit0-negative.test.mjs',
   'pcc-verifier-frag0.test.mjs',
   'pcc-verifier-frag0-current-suite.test.mjs',
   'pcc-boot0.test.mjs',
@@ -90,6 +91,8 @@ export function makeReleaseAuditConfig0(overrides = {}) {
     runRunAll: true,
     runMutationCheck: true,
     runCliSmoke: false,
+    mutationInputFactory: null,
+    mutationRunner: null,
     ...overrides,
   };
 }
@@ -439,9 +442,16 @@ async function validateRunAllMutation0(cfg) {
     });
   }
 
-  const input = makeSyntheticRunAllInput0();
+  const input = typeof cfg.mutationInputFactory === 'function'
+    ? cfg.mutationInputFactory()
+    : makeSyntheticRunAllInput0();
+
+  const runner = typeof cfg.mutationRunner === 'function'
+    ? cfg.mutationRunner
+    : CheckRunAll0;
+
   const before = stableStringify0(input);
-  const out = await CheckRunAll0(input);
+  const out = await runner(input);
   const after = stableStringify0(input);
 
   if (out.tag !== 'accept') {
@@ -523,6 +533,7 @@ function expectedModuleForTest0(testFile) {
     'pcc-verifier-frag0-current-suite': 'pcc-verifier-frag0.mjs',
     'pcc-boot0-batch0-coverage': 'pcc-boot0.mjs',
     'pcc-public-entry0': 'index.mjs',
+    'pcc-release-audit0-negative': 'pcc-release-audit0.mjs',
   };
 
   if (Object.prototype.hasOwnProperty.call(explicit, stem)) {
