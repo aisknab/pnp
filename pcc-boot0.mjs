@@ -81,6 +81,141 @@ const REQUIRED_FORBIDDEN_SYMBOLS = [
   'maximizeGain',
 ];
 
+const REQUIRED_B0_ROW_COVERAGE0 = Object.freeze([
+  Object.freeze({
+    family: 'BIface',
+    packageId: 'BIface',
+    schemaId: 'DeclarationRow',
+    kindKey: 'interface-declaration',
+    arityKey: 1,
+    payloadKey: 'IfaceDict0.Declaration',
+    purpose: 'interface declarations',
+    proofRule: 'Record',
+    bound: 'B0.iface',
+  }),
+  Object.freeze({
+    family: 'BSched',
+    packageId: 'BSched',
+    schemaId: 'ScheduleRow',
+    kindKey: 'schedule-constant',
+    arityKey: 1,
+    payloadKey: 'Sched0.Core',
+    purpose: 'schedule constants and derived bounds',
+    proofRule: 'IntArith',
+    bound: 'B0.sched',
+  }),
+  Object.freeze({
+    family: 'BNF',
+    packageId: 'BNF',
+    schemaId: 'NormalFormRow',
+    kindKey: 'normal-form',
+    arityKey: 1,
+    payloadKey: 'NF0.Protocol',
+    purpose: 'deterministic normal forms',
+    proofRule: 'Record',
+    bound: 'B0.nf',
+  }),
+  Object.freeze({
+    family: 'BTruthEval',
+    packageId: 'BTruthEval',
+    schemaId: 'TruthEvalRow',
+    kindKey: 'truth-evaluator',
+    arityKey: 3,
+    payloadKey: 'TruthEvalRow(beta,k,o)',
+    purpose: 'bounded NAND truth evaluation',
+    proofRule: 'TruthVec',
+    bound: 'B0.truth-eval',
+  }),
+  Object.freeze({
+    family: 'BRel',
+    packageId: 'BRel',
+    schemaId: 'FiniteRelationRow',
+    kindKey: 'finite-relation',
+    arityKey: 2,
+    payloadKey: 'FiniteRel0',
+    purpose: 'finite relation equality and composition',
+    proofRule: 'FiniteRel',
+    bound: 'B0.rel',
+  }),
+  Object.freeze({
+    family: 'BCharge',
+    packageId: 'BCharge',
+    schemaId: 'ChargeRow',
+    kindKey: 'charge',
+    arityKey: 1,
+    payloadKey: 'ChargeLedger0',
+    purpose: 'charge record validity and telescoping',
+    proofRule: 'LedgerInd',
+    bound: 'B0.charge',
+  }),
+  Object.freeze({
+    family: 'BObl',
+    packageId: 'BObl',
+    schemaId: 'ObligationRow',
+    kindKey: 'obligation',
+    arityKey: 1,
+    payloadKey: 'ObligationLifecycle0',
+    purpose: 'obligation lifecycle',
+    proofRule: 'OblTopoInd',
+    bound: 'B0.obligation',
+  }),
+  Object.freeze({
+    family: 'BArith',
+    packageId: 'BArith',
+    schemaId: 'ArithmeticRow',
+    kindKey: 'arithmetic',
+    arityKey: 2,
+    payloadKey: 'PresburgerCell0',
+    purpose: 'Presburger arithmetic',
+    proofRule: 'IntArith',
+    bound: 'B0.arith',
+  }),
+  Object.freeze({
+    family: 'BMode',
+    packageId: 'BMode',
+    schemaId: 'ModeFirewallRow',
+    kindKey: 'mode-firewall',
+    arityKey: 2,
+    payloadKey: 'ModeFirewall0',
+    purpose: 'mode firewall',
+    proofRule: 'Transport',
+    bound: 'B0.mode',
+  }),
+  Object.freeze({
+    family: 'BRoute',
+    packageId: 'BRoute',
+    schemaId: 'RoutePriorityRow',
+    kindKey: 'route-priority',
+    arityKey: 2,
+    payloadKey: 'RoutePriority0',
+    purpose: 'route-priority selection',
+    proofRule: 'FiniteExhaust',
+    bound: 'B0.route',
+  }),
+  Object.freeze({
+    family: 'BHash',
+    packageId: 'BHash',
+    schemaId: 'HashProtocolRow',
+    kindKey: 'hash-protocol',
+    arityKey: 1,
+    payloadKey: 'HashAsIndex0',
+    purpose: 'hash-as-index discipline',
+    proofRule: 'Record',
+    bound: 'B0.hash',
+  }),
+  Object.freeze({
+    family: 'BImport',
+    packageId: 'BImport',
+    schemaId: 'ImportAcyclicityRow',
+    kindKey: 'import-acyclicity',
+    arityKey: 1,
+    payloadKey: 'ImportGraph0',
+    purpose: 'acyclic imports and nonconstructive token edges',
+    proofRule: 'DAGInd',
+    bound: 'B0.import',
+  }),
+]);
+
 export function makeBootRow0({
   PackageID,
   SchemaID,
@@ -167,6 +302,56 @@ export function makeBootRow0({
   row.HashKey = DigestObject0(row.RowKey);
 
   return row;
+}
+
+export function makeBootstrapB0Rows0({
+  IfaceHash = 'IfaceDict0.synthetic',
+  SelectedRoute = 'Accept',
+} = {}) {
+  return REQUIRED_B0_ROW_COVERAGE0.map((rowSpec) => {
+    const rawObj = {
+      tag: 'B0SeedRow0',
+      family: rowSpec.family,
+      packageId: rowSpec.packageId,
+      schemaId: rowSpec.schemaId,
+      purpose: rowSpec.purpose,
+      proofRule: rowSpec.proofRule,
+      bound: rowSpec.bound,
+    };
+
+    return makeBootRow0({
+      IfaceHash,
+      PackageID: rowSpec.packageId,
+      SchemaID: rowSpec.schemaId,
+      KindKey: rowSpec.kindKey,
+      ArityKey: rowSpec.arityKey,
+      ModeKey: 'Full',
+      PayloadKey: rowSpec.payloadKey,
+      RawObj: rawObj,
+      NormObj: {
+        ...rawObj,
+        normalized: true,
+      },
+      TransportProof: {
+        tag: 'TransportProof0',
+        kind: 'identity',
+        family: rowSpec.family,
+      },
+      CandidateRoutes: [SelectedRoute],
+      ActiveRouteSet: [SelectedRoute],
+      SelectedRoute,
+      ProofRef: {
+        tag: 'ProofRef0',
+        id: `B0.${rowSpec.family}.proof`,
+        rule: rowSpec.proofRule,
+      },
+      BoundsRef: {
+        tag: 'BoundsRef0',
+        id: `B0.${rowSpec.family}.bounds`,
+        bound: rowSpec.bound,
+      },
+    });
+  });
 }
 
 export async function CheckBoot0(boot) {
@@ -340,6 +525,24 @@ export async function CheckBootBatch0(batch) {
     });
   }
 
+  const coverageResult = validateBootBatchCoverage0(batch, rows);
+
+  ledger.push({
+    phase: 'coverage',
+    status: coverageResult.ok ? 'pass' : 'fail',
+    digest: digestCanonical0(coverageResult.nf ?? coverageResult.witness ?? null),
+  });
+
+  if (!coverageResult.ok) {
+    return makeRejectRecord({
+      checker,
+      coord: `${checker}.coverage`,
+      path: coverageResult.path,
+      witness: coverageResult.witness,
+      ledger,
+    });
+  }
+
   const nf = {
     kind: 'BootBatch0NF',
     checker,
@@ -348,6 +551,7 @@ export async function CheckBootBatch0(batch) {
     rowCount: rows.length,
     packages: sortedUnique0(rows.map((row) => row.PackageID)),
     schemas: sortedUnique0(rows.map((row) => `${row.PackageID}:${row.SchemaID}`)),
+    coverage: coverageResult.nf,
     rowDigests: rows.map((row, index) => ({
       index,
       packageId: row.PackageID,
@@ -642,6 +846,90 @@ function validateCodec0(codec) {
     kind: 'Codec0NF',
     canonical: codec.canonical !== false,
   });
+}
+
+function validateBootBatchCoverage0(batch, rows) {
+  const batchId = getBatchId0(batch);
+
+  if (batchId !== 'B0') {
+    return validationAccept({
+      kind: 'BootBatchCoverage0NF',
+      batchId,
+      required: false,
+      familyCount: 0,
+      families: [],
+    });
+  }
+
+  const families = [];
+
+  for (const required of REQUIRED_B0_ROW_COVERAGE0) {
+    const index = rows.findIndex((row) => rowMatchesBootBatchCoverage0(row, required));
+
+    if (index === -1) {
+      return validationReject(
+        ['rows', 'coverage', required.family],
+        'B0 is missing required bootstrap row family',
+        {
+          required,
+        }
+      );
+    }
+
+    const row = rows[index];
+
+    if (row.ModeKey !== 'Full') {
+      return validationReject(
+        ['rows', index, 'ModeKey'],
+        'B0 coverage row must be full-mode',
+        {
+          family: required.family,
+          expected: 'Full',
+          actual: row.ModeKey,
+        }
+      );
+    }
+
+    if (row.SelectedRoute !== 'Accept') {
+      return validationReject(
+        ['rows', index, 'SelectedRoute'],
+        'B0 coverage row must select Accept',
+        {
+          family: required.family,
+          expected: 'Accept',
+          actual: row.SelectedRoute,
+        }
+      );
+    }
+
+    families.push({
+      family: required.family,
+      index,
+      packageId: row.PackageID,
+      schemaId: row.SchemaID,
+      kindKey: row.KindKey,
+      proofRef: row.ProofRef,
+      boundsRef: row.BoundsRef,
+    });
+  }
+
+  return validationAccept({
+    kind: 'BootBatchCoverage0NF',
+    batchId,
+    required: true,
+    familyCount: families.length,
+    families,
+  });
+}
+
+function rowMatchesBootBatchCoverage0(row, required) {
+  return (
+    row &&
+    typeof row === 'object' &&
+    row.PackageID === required.packageId &&
+    row.SchemaID === required.schemaId &&
+    row.KindKey === required.kindKey
+  );
 }
 
 function validateDigest0(digest) {
@@ -997,3 +1285,5 @@ function isPlainObject(value) {
   const proto = Object.getPrototypeOf(value);
   return proto === Object.prototype || proto === null;
 }
+
+export const BOOT_BATCH0_REQUIRED_ROWS = REQUIRED_B0_ROW_COVERAGE0;

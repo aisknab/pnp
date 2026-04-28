@@ -2,10 +2,12 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import {
+  BOOT_BATCH0_REQUIRED_ROWS,
   CheckBoot0,
   CheckBootAudit0,
   CheckBootBatch0,
   makeBootRow0,
+  makeBootstrapB0Rows0,
 } from '../pcc-boot0.mjs';
 
 import {
@@ -14,35 +16,7 @@ import {
 } from '../pcc-verifier-frag0.mjs';
 
 function makeSyntheticBoot0(overrides = {}) {
-  const rows = [
-    makeBootRow0({
-      PackageID: 'BIface',
-      SchemaID: 'DeclarationRow',
-      KindKey: 'iface-declaration',
-      ArityKey: 0,
-      ModeKey: 'Full',
-      PayloadKey: 'IfaceDict0',
-      SelectedRoute: 'Accept',
-    }),
-    makeBootRow0({
-      PackageID: 'BSched',
-      SchemaID: 'ScheduleCoreRow',
-      KindKey: 'schedule-core',
-      ArityKey: 0,
-      ModeKey: 'Full',
-      PayloadKey: 'Sched0',
-      SelectedRoute: 'Accept',
-    }),
-    makeBootRow0({
-      PackageID: 'BMode',
-      SchemaID: 'ModeFirewallRow',
-      KindKey: 'mode-firewall',
-      ArityKey: 2,
-      ModeKey: 'Full',
-      PayloadKey: 'ModeFirewall0',
-      SelectedRoute: 'Accept',
-    }),
-  ];
+  const rows = makeBootstrapB0Rows0();
 
   return {
     kind: 'Boot0',
@@ -196,11 +170,12 @@ function makeSyntheticBoot0(overrides = {}) {
 test('CheckBootBatch0 accepts a correctly shaped B0 batch', async () => {
   const boot = makeSyntheticBoot0();
   const out = await CheckBootBatch0(boot.B0);
+  const rows = makeBootstrapB0Rows0();
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckBootBatch0');
   assert.equal(out.NF.batchId, 'B0');
-  assert.equal(out.NF.rowCount, 3);
+  assert.equal(out.NF.rowCount, BOOT_BATCH0_REQUIRED_ROWS.length);
   assert.equal(out.Digest.alg, 'SHA256');
   assert.match(out.Digest.hex, /^[0-9a-f]{64}$/);
 });
@@ -222,7 +197,7 @@ test('CheckBoot0 accepts the synthetic bootstrap seed', async () => {
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckBoot0');
   assert.equal(out.NF.kind, 'Boot0NF');
-  assert.equal(out.NF.rowCount, 3);
+  assert.equal(out.NF.rowCount, BOOT_BATCH0_REQUIRED_ROWS.length);
   assert.equal(out.NF.kernelRuleCount, 16);
   assert.deepEqual(out.NF.scheduleCore, {
     B0: 64,
