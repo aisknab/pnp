@@ -21,3 +21,12 @@ export {
   makeSyntheticAcceptRun0,
   makeSyntheticRejectAcceptRun0,
 } from './pcc-accept-run0.mjs';
+
+export {
+  CheckReleaseAudit0,
+  RELEASE_AUDIT_REQUIRED_EXPORTS0,
+  RELEASE_AUDIT_REQUIRED_MODULES0,
+  RELEASE_AUDIT_REQUIRED_SCRIPTS0,
+  RELEASE_AUDIT_REQUIRED_TESTS0,
+  makeReleaseAuditConfig0,
+} from './pcc-release-audit0.mjs';

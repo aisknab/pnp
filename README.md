@@ -67,3 +67,19 @@ const out = await RunAll0();
 console.log(out.tag, out.NF.publicConclusion);
 ```
 
+## Release audit
+
+Run the release audit after the public smoke test:
+
+```bash
+npm run release:audit
+```
+
+For the full release audit record:
+
+```bash
+npm run release:audit:full
+```
+
+The release audit checks the public package surface, package exports, README claim boundary, stale duplicate ES modules under `src`, orphaned tests, syntax of checker modules, deterministic repeated `RunAll0` execution, and mutation safety of the synthetic full-stack input.
+
