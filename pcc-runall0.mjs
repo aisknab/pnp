@@ -8,6 +8,11 @@ import {
   makeSyntheticIntegratedPipeline0,
 } from './pcc-integrated-pipeline0.mjs';
 
+import {
+  CheckMaterialized0,
+  makeMaterializedGateConfig0,
+} from './pcc-materialized0.mjs';
+
 const CHECKER_VERSION = 0;
 
 export const RUNALL_PUBLIC_CONCLUSION0 = Object.freeze({
@@ -61,6 +66,8 @@ export function makeSyntheticRunAllInput0(overrides = {}) {
     RequiredPhaseOrder: INTEGRATED_PIPELINE_PHASES0,
     RequiredCheckers: RUNALL_CHECKER_COVERAGE0,
     RequiredPublicConclusion: RUNALL_PUBLIC_CONCLUSION0,
+    RequireMaterialized: false,
+    MaterializedConfig: makeMaterializedGateConfig0(),
     ...overrides,
   };
 }
@@ -90,6 +97,31 @@ export async function CheckRunAll0(input = makeSyntheticRunAllInput0()) {
       witness: shape.witness,
       ledger,
     });
+  }
+
+    if (normalized.RequireMaterialized === true) {
+    const materializedRecord = await CheckMaterialized0(
+      normalized.Pipeline,
+      normalized.MaterializedConfig,
+    );
+
+    const materialized = recordToValidation0(materializedRecord, ['Pipeline']);
+
+    ledger.push({
+      phase: 'CheckMaterialized0',
+      status: materialized.ok ? 'pass' : 'fail',
+      digest: materializedRecord.Digest ?? materializedRecord.digest ?? digestCanonical0(materializedRecord),
+    });
+
+    if (!materialized.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.materialized`,
+        path: materialized.path,
+        witness: materialized.witness,
+        ledger,
+      });
+    }
   }
 
   const integratedRecord = await CheckIntegratedPipeline0(normalized.Pipeline);
@@ -146,6 +178,7 @@ export async function CheckRunAll0(input = makeSyntheticRunAllInput0()) {
     integratedDigest: integratedRecord.Digest ?? integratedRecord.digest,
     packDigest: integratedNF.packDigest,
     acceptRunDigest: integratedNF.acceptRunDigest,
+    requireMaterialized: normalized.RequireMaterialized,
   };
 
   return makeAcceptRecord({
@@ -163,6 +196,7 @@ function normalizeRunAllInput0(input) {
   if (isPlainObject(input) && input.kind === 'IntegratedPipeline0') {
     return makeSyntheticRunAllInput0({
       Pipeline: input,
+      RequireMaterialized: false,
     });
   }
 
@@ -174,6 +208,8 @@ function normalizeRunAllInput0(input) {
       RequiredPhaseOrder: input.RequiredPhaseOrder ?? INTEGRATED_PIPELINE_PHASES0,
       RequiredCheckers: input.RequiredCheckers ?? RUNALL_CHECKER_COVERAGE0,
       RequiredPublicConclusion: input.RequiredPublicConclusion ?? RUNALL_PUBLIC_CONCLUSION0,
+      RequireMaterialized: input.RequireMaterialized ?? input.requireMaterialized ?? false,
+      MaterializedConfig: input.MaterializedConfig ?? input.materializedConfig ?? makeMaterializedGateConfig0(),
     };
   }
 
@@ -185,6 +221,8 @@ function normalizeRunAllInput0(input) {
       RequiredPhaseOrder: input.RequiredPhaseOrder ?? INTEGRATED_PIPELINE_PHASES0,
       RequiredCheckers: input.RequiredCheckers ?? RUNALL_CHECKER_COVERAGE0,
       RequiredPublicConclusion: input.RequiredPublicConclusion ?? RUNALL_PUBLIC_CONCLUSION0,
+      RequireMaterialized: input.RequireMaterialized ?? input.requireMaterialized ?? false,
+      MaterializedConfig: input.MaterializedConfig ?? input.materializedConfig ?? makeMaterializedGateConfig0(),
     };
   }
 
@@ -261,6 +299,12 @@ function validateRunAllInput0(input) {
     return validationReject0(['RequiredPublicConclusion', 'consequent'], 'RunAll0 public conclusion consequent mismatch', {
       expected: RUNALL_PUBLIC_CONCLUSION0.consequent,
       actual: input.RequiredPublicConclusion.consequent,
+    });
+  }
+
+    if (typeof input.RequireMaterialized !== 'boolean') {
+    return validationReject0(['RequireMaterialized'], 'RunAllInput0 RequireMaterialized must be boolean', {
+      actual: input.RequireMaterialized,
     });
   }
 
