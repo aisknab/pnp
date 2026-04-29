@@ -398,7 +398,7 @@ export function makeSyntheticPCCPack0(overrides = {}) {
         alg: 'canonical-json-v0',
         digest: {
           alg: 'SHA256',
-          hex: 'synthetic.core.bytes',
+          hex: 'c27a582a059b496b7114f22aebff586a1f418358ac10350f83877e5db1eb1288',
         },
       },
     },

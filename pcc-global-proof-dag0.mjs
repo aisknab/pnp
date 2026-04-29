@@ -355,11 +355,11 @@ export function makeSyntheticGlobalProofDAG0(overrides = {}) {
     version: CHECKER_VERSION,
     SchedHash: {
       alg: 'SHA256',
-      hex: 'sched.synthetic',
+      hex: '8844bb7a7d8d6ad2551417ef2cb42fe8bbb544c62e1f4626c1f3d519bb1640d9',
     },
     IfaceHash: {
       alg: 'SHA256',
-      hex: 'iface.synthetic',
+      hex: '969b39fad3f508e8f9764d2a98b55bbd19e8e2f804968fbf91b87ca7b5f3f442',
     },
     BatchIDs: ROW_BATCH_IDS0,
     Nodes: nodes,

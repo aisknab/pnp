@@ -286,15 +286,15 @@ export function makeSyntheticLocalPackages0(overrides = {}) {
     version: CHECKER_VERSION,
     SchedHash: {
       alg: 'SHA256',
-      hex: 'sched.synthetic',
+      hex: '43da1d5b7b91a0f11729290d4b90afd6ddca86a1de8a8441ff5bb1fd88d95bc3',
     },
     IfaceHash: {
       alg: 'SHA256',
-      hex: 'iface.synthetic',
+      hex: '202b39296313eb7096ea0b9de1294d4edd74efba18a48b323a57e64c5dd73b2b',
     },
     RowPackDigest: {
       alg: 'SHA256',
-      hex: 'rowpack.synthetic',
+      hex: '073f9ca20cfda96871cbac63e05ca107aac55a9e9315750cd09d3f5894e848ce',
     },
     PackageInv: makeLocalPackageInventory0(packages),
     Packages: packages,

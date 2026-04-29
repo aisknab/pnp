@@ -217,11 +217,11 @@ export function makeSyntheticGlobalFirewalls0(overrides = {}) {
     version: CHECKER_VERSION,
     SchedHash: {
       alg: 'SHA256',
-      hex: 'sched.synthetic',
+      hex: '29a492bf0c6cb37f167c59da4ab014bcecb014e333a1503d7b9aac25e613ccc7',
     },
     IfaceHash: {
       alg: 'SHA256',
-      hex: 'iface.synthetic',
+      hex: 'ed2221f06a028c9b9224cae6abdda43d767f8611a5d236bc7bd0affcb4d317b5',
     },
     ImportGraph: makeSyntheticImportGraph0(),
     NoHiddenMinScan: makeSyntheticNoHiddenMinScan0(),

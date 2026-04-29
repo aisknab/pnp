@@ -219,11 +219,11 @@ export function makeSyntheticKImpl0(overrides = {}) {
     version: CHECKER_VERSION,
     IfaceHash: {
       alg: 'SHA256',
-      hex: 'iface.synthetic',
+      hex: '7c923cae83c49a867df1a6a9e1b6367ef0deeae87fc836996f0e01ef1593f130',
     },
     SchedHash: {
       alg: 'SHA256',
-      hex: 'sched.synthetic',
+      hex: '5b5be0411b2ac555e237b4d6470bab10a7e2f52ef0c7c344e261da638b0648c6',
     },
     Sorts: {
       Term: 'Term',

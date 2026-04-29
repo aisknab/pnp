@@ -268,7 +268,7 @@ export function makeSyntheticPreNAND0(overrides = {}) {
     },
     formulaDigest: {
       alg: 'SHA256',
-      hex: 'formula.synthetic',
+      hex: '6ea78bc9abbdfe1681af7024ad75ade93c7768d58ce81e0496250517010f0ae6',
     },
     ...overrides,
   };
@@ -312,12 +312,12 @@ export function makeSyntheticGPack0(overrides = {}) {
 
     SchedHash: {
       alg: 'SHA256',
-      hex: 'sched.synthetic',
+      hex: 'f5c44e65ea7bd052ef9ea3bf0a542fbae487d604feb21f12b0bee486587bc261',
     },
 
     IfaceHash: {
       alg: 'SHA256',
-      hex: 'iface.synthetic',
+      hex: 'e6f16343329a1df64f53903d9ba83a07df3f32cab92baa0996c6e291afdec009',
     },
 
     PreNAND: preNAND,

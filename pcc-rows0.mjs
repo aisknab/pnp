@@ -618,11 +618,11 @@ export function makeSyntheticRowPack0(overrides = {}) {
     version: CHECKER_VERSION,
     SchedHash: {
       alg: 'SHA256',
-      hex: 'sched.synthetic',
+      hex: '6bb960d1e8414fe1044625c0fd549f0d05a5a3aadccb806c461847b5ab21fdac',
     },
     IfaceHash: {
       alg: 'SHA256',
-      hex: 'iface.synthetic',
+      hex: '12384535df3bb742e73236a20a9a8ee47949f7273e77020aecb60b90e9ab7502',
     },
     SchemaInv: makeSchemaInventory0(),
     BatchInv: makeBatchInventory0(),
