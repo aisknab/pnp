@@ -52,6 +52,7 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-boot0-batch0-coverage.test.mjs',
   'pcc-kimpl0.test.mjs',
   'pcc-hard0.test.mjs',
+  'pcc-public-api0.test.mjs',
   'pcc-rows0.test.mjs',
   'pcc-global-proof-dag0.test.mjs',
   'pcc-local-packages0.test.mjs',
@@ -530,9 +531,11 @@ function expectedModuleForTest0(testFile) {
   const explicit = {
     'pcc-core': 'pcc-core.mjs',
     'pcc-core.negative': 'pcc-core.mjs',
+    'pcc-core-negative': 'pcc-core.mjs',
     'pcc-verifier-frag0-current-suite': 'pcc-verifier-frag0.mjs',
     'pcc-boot0-batch0-coverage': 'pcc-boot0.mjs',
     'pcc-public-entry0': 'index.mjs',
+    'pcc-public-api0': 'index.mjs',
     'pcc-release-audit0-negative': 'pcc-release-audit0.mjs',
   };
 
