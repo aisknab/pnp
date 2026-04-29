@@ -66,6 +66,7 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-runall0.test.mjs',
   'pcc-public-entry0.test.mjs',
   'pcc-release-audit0.test.mjs',
+  'pcc-integrated-pipeline-tamper0.test.mjs',
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
@@ -536,9 +537,10 @@ function expectedModuleForTest0(testFile) {
     'pcc-boot0-batch0-coverage': 'pcc-boot0.mjs',
     'pcc-public-entry0': 'index.mjs',
     'pcc-public-api0': 'index.mjs',
+    'pcc-integrated-pipeline-tamper0': 'pcc-integrated-pipeline0.mjs',
     'pcc-release-audit0-negative': 'pcc-release-audit0.mjs',
   };
-
+  
   if (Object.prototype.hasOwnProperty.call(explicit, stem)) {
     return explicit[stem];
   }
