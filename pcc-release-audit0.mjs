@@ -61,7 +61,9 @@ export const RELEASE_AUDIT_REQUIRED_MODULES0 = Object.freeze([
   'pcc-materialized-fixture-writer0.mjs',
   'bin/write-materialized-fixtures0.mjs',
   'pcc-materialized-fixture-roundtrip0.mjs',
-  'bin/check-materialized-fixture-roundtrip0.mjs',                             
+  'bin/check-materialized-fixture-roundtrip0.mjs',
+  'pcc-materialized-digest-resolver0.mjs',
+  'bin/resolve-materialized-digest0.mjs',                               
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
@@ -108,7 +110,8 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-materialized-acceptance-bridge-cli0.test.mjs',
   'pcc-materialized-path-readme0.test.mjs',
   'pcc-materialized-fixture-writer0.test.mjs',
-  'pcc-materialized-fixture-roundtrip0.test.mjs',                    
+  'pcc-materialized-fixture-roundtrip0.test.mjs',
+  'pcc-materialized-digest-resolver0.test.mjs',                      
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
@@ -131,7 +134,9 @@ export const RELEASE_AUDIT_REQUIRED_SCRIPTS0 = Object.freeze([
   'materialized:bridge',
   'materialized:bridge:full',
   'materialized:write-fixtures',
-  'materialized:write-fixtures:full',  
+  'materialized:write-fixtures:full',
+  'materialized:resolve-digest',
+  'materialized:resolve-digest:full',    
 ]);
 
 export function makeReleaseAuditConfig0(overrides = {}) {

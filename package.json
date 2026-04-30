@@ -32,7 +32,9 @@
     "materialized:bridge": "node ./bin/check-materialized-acceptance-bridge0.mjs",
     "materialized:bridge:full": "node ./bin/check-materialized-acceptance-bridge0.mjs --full",
     "materialized:write-fixtures": "node ./bin/write-materialized-fixtures0.mjs",
-    "materialized:write-fixtures:full": "node ./bin/write-materialized-fixtures0.mjs --full"
+    "materialized:write-fixtures:full": "node ./bin/write-materialized-fixtures0.mjs --full",
+    "materialized:resolve-digest": "node ./bin/resolve-materialized-digest0.mjs",
+    "materialized:resolve-digest:full": "node ./bin/resolve-materialized-digest0.mjs --full"
   },
   "engines": {
     "node": ">=20"

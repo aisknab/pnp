@@ -145,6 +145,12 @@ CheckPCCPackexp(GeneratePCCPack())=accept implies P = NP
 
 The internal materialized fixture writer emits example external JSON files that can be checked by the materialized path scripts.
 
+A materialized fixture digest can be resolved only against known written fixture files:
+
+npm run materialized:resolve-digest -- <sha256-hex> --dir ./materialized-fixtures0
+
+This is a checked reverse lookup over indexed fixture bytes. It is not cryptographic inversion.
+
 ```bash
 npm run materialized:write-fixtures -- ./materialized-fixtures0
 ```
