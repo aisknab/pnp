@@ -67,7 +67,8 @@ export const RELEASE_AUDIT_REQUIRED_MODULES0 = Object.freeze([
   'pcc-materialized-accept-run0.mjs',
   'bin/check-materialized-accept-run0.mjs',
   'pcc-materialized-accept-run-fixtures0.mjs',
-  'bin/write-materialized-accept-run-fixtures0.mjs',                                     
+  'bin/write-materialized-accept-run-fixtures0.mjs',
+  'pcc-materialized-final-verdict0.mjs',                                       
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
@@ -118,7 +119,8 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-materialized-digest-resolver0.test.mjs',
   'pcc-materialized-accept-run0.test.mjs',
   'pcc-materialized-accept-run-cli0.test.mjs',
-  'pcc-materialized-accept-run-fixtures0.test.mjs',                            
+  'pcc-materialized-accept-run-fixtures0.test.mjs',
+  'pcc-materialized-final-verdict0.test.mjs',                              
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
