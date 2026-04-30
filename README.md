@@ -352,3 +352,33 @@ acceptedPublicConclusionOnly = true
 
 This makes the materialized public-status release gate visible in the final release audit artefact rather than only present as an internal ledger phase.
 
+## Release audit surface freeze
+
+The release audit normal form and CLI summary have a frozen key surface. The surface freeze is checked by the release audit itself.
+
+The frozen normal form keys include:
+
+```text
+kind
+checker
+version
+rootDir
+moduleCount
+testCount
+requiredExports
+requiredScripts
+checkerCoverageCount
+materializedPublicStatusGate
+materializedPublicStatusGateSummary
+materializedPublicStatusGateDigest
+materializedPublicStatusGateFileCount
+materializedPublicStatusGateDirectRecordCount
+materializedPublicStatusGateCliRecordCount
+materializedPublicStatusGateAcceptedPublicConclusionOnly
+publicConclusion
+```
+
+The frozen CLI summary exposes the same materialized gate proof fields plus the release audit digest.
+
+Future changes to the release surface should fail the surface-freeze tests and the `surfaceFreeze` ledger phase unless the frozen key lists are intentionally updated.
+
