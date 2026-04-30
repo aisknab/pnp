@@ -276,3 +276,30 @@ The claim boundary remains conditional:
 CheckPCCPackexp(GeneratePCCPack())=accept implies P = NP
 ```
 
+## Internal materialized public status release gate
+
+The materialized public status roundtrip command is the internal release gate for the materialized status path.
+
+```bash
+npm run materialized:public-status-roundtrip -- ./materialized-public-status-roundtrip0
+npm run materialized:public-status-roundtrip:full -- ./materialized-public-status-roundtrip0
+```
+
+It writes final-run fixtures, compares repeated fixture bytes for determinism, checks the package fixture through the materialized aggregate checker, and checks pending, rejected, and accepted accept-run files through the materialized public status checker.
+
+The gate verifies:
+
+```text
+pending  -> no public P = NP conclusion
+rejected -> no public P = NP conclusion
+accepted -> emits the conditional public conclusion
+```
+
+This path is separate from synthetic `RunAll0`. It is an external materialized-file path for future generated package candidates.
+
+The claim boundary remains conditional:
+
+```text
+CheckPCCPackexp(GeneratePCCPack())=accept implies P = NP
+```
+

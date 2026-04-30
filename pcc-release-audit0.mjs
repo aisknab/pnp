@@ -135,7 +135,8 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-materialized-final-run-roundtrip0.test.mjs',
   'pcc-materialized-public-status0.test.mjs',
   'pcc-materialized-public-status-cli0.test.mjs',
-  'pcc-materialized-public-status-roundtrip0.test.mjs',                                          
+  'pcc-materialized-public-status-roundtrip0.test.mjs',
+  'pcc-materialized-public-status-release-gate0.test.mjs',                                            
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
@@ -170,7 +171,9 @@ export const RELEASE_AUDIT_REQUIRED_SCRIPTS0 = Object.freeze([
   'materialized:write-final-runs',
   'materialized:write-final-runs:full',
   'materialized:public-status',
-  'materialized:public-status:full',              
+  'materialized:public-status:full',
+  'materialized:public-status-roundtrip',
+  'materialized:public-status-roundtrip:full',                
 ]);
 
 export function makeReleaseAuditConfig0(overrides = {}) {
@@ -633,7 +636,8 @@ function expectedModuleForTest0(testFile) {
     'pcc-materialized-path-readme0': 'README.md',
     'pcc-materialized-accept-run-cli0': 'bin/check-materialized-accept-run0.mjs',
     'pcc-materialized-final-verdict-cli0': 'bin/check-materialized-final-verdict0.mjs',
-    'pcc-materialized-public-status-cli0': 'bin/check-materialized-public-status0.mjs',  
+    'pcc-materialized-public-status-cli0': 'bin/check-materialized-public-status0.mjs',
+    'pcc-materialized-public-status-release-gate0': 'README.md',  
   };
 
   if (Object.prototype.hasOwnProperty.call(explicit, stem)) {
