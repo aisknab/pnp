@@ -98,6 +98,17 @@ test('CheckReleaseAudit0 validates materialized public status gate config shape'
   assert.equal(out.Witness.reason, 'ReleaseAuditConfig0 runMaterializedPublicStatusGate must be boolean');
 });
 
+test('README documents release audit materialized gate flags', async () => {
+  const readme = await fs.readFile(new URL('../README.md', import.meta.url), 'utf8');
+
+  assert.equal(readme.includes('Release audit materialized gate flags'), true);
+  assert.equal(readme.includes('npm run release:audit -- --materialized-gate'), true);
+  assert.equal(readme.includes('npm run release:audit -- --no-materialized-gate'), true);
+  assert.equal(readme.includes('--materialized-gate-out'), true);
+  assert.equal(readme.includes('--no-materialized-gate-cli'), true);
+  assert.equal(readme.includes('separate from synthetic `RunAll0`'), true);
+});
+
 async function makeTempDir0(t) {
   const dir = await fs.mkdtemp(path.join(os.tmpdir(), 'pnp-release-audit-materialized-gate-'));
 
