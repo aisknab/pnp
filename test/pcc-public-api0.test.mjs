@@ -53,7 +53,9 @@ const REQUIRED_PUBLIC_SCRIPTS0 = Object.freeze([
   'materialized:aggregate',
   'materialized:aggregate:full',
   'materialized:bridge',
-  'materialized:bridge:full',  
+  'materialized:bridge:full',
+  'materialized:write-fixtures',
+  'materialized:write-fixtures:full',  
 ]);
 
 test('index.mjs exports exactly the intended public API surface', () => {

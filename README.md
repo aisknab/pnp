@@ -141,3 +141,27 @@ The public claim boundary remains conditional:
 CheckPCCPackexp(GeneratePCCPack())=accept implies P = NP
 ```
 
+## Internal materialized fixture writer
+
+The internal materialized fixture writer emits example external JSON files that can be checked by the materialized path scripts.
+
+```bash
+npm run materialized:write-fixtures -- ./materialized-fixtures0
+```
+
+This writes:
+
+```text
+MaterializedPCCPack0.json
+MaterializedAcceptanceBridge.pending0.json
+MaterializedAcceptanceBridge.accepted0.json
+```
+
+The generated files are engineering fixtures. They are useful for validating the external materialized checker path. They are not a proof package acceptance claim.
+
+A canonical-envelope version can be written with:
+
+```bash
+npm run materialized:write-fixtures -- ./materialized-fixtures0 --canonical
+```
+
