@@ -95,7 +95,15 @@ function summarizeReleaseAudit0(out) {
       moduleCount: out.NF.moduleCount,
       testCount: out.NF.testCount,
       checkerCoverageCount: out.NF.checkerCoverageCount,
+
       materializedPublicStatusGate: out.NF.materializedPublicStatusGate,
+      materializedPublicStatusGateSummary: out.NF.materializedPublicStatusGateSummary,
+      materializedPublicStatusGateDigest: out.NF.materializedPublicStatusGateDigest,
+      materializedPublicStatusGateFileCount: out.NF.materializedPublicStatusGateFileCount,
+      materializedPublicStatusGateDirectRecordCount: out.NF.materializedPublicStatusGateDirectRecordCount,
+      materializedPublicStatusGateCliRecordCount: out.NF.materializedPublicStatusGateCliRecordCount,
+      materializedPublicStatusGateAcceptedPublicConclusionOnly: out.NF.materializedPublicStatusGateAcceptedPublicConclusionOnly,
+
       publicConclusion: out.NF.publicConclusion,
       digest: out.Digest,
     };

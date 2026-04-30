@@ -144,7 +144,8 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-materialized-public-status-release-gate0.test.mjs',
   'pcc-release-audit-materialized-gate0.test.mjs',
   'pcc-release-audit-materialized-gate-negative0.test.mjs',
-  'pcc-release-audit-cli-materialized-gate0.test.mjs',                                                
+  'pcc-release-audit-cli-materialized-gate0.test.mjs',
+  'pcc-release-audit-full-mode-gate-summary0.test.mjs',                                                  
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
@@ -208,6 +209,7 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
   const checker = 'CheckReleaseAudit0';
   const ledger = [];
   const cfg = makeReleaseAuditConfig0(config);
+  let materializedPublicStatusGateNF = null;
 
   const phases = [
     ['shape', `${checker}.input`, () => validateConfig0(cfg)],
@@ -241,7 +243,16 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
         ledger,
       });
     }
+
+    if (phase === 'materializedPublicStatusGate') {
+      materializedPublicStatusGateNF = result.nf ?? null;
+    }
   }
+
+  const materializedPublicStatusGateSummary = summarizeMaterializedPublicStatusGateNF0(
+    materializedPublicStatusGateNF,
+    cfg,
+  );
 
   const nf = {
     kind: 'ReleaseAudit0NF',
@@ -253,7 +264,15 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
     requiredExports: RELEASE_AUDIT_REQUIRED_EXPORTS0,
     requiredScripts: RELEASE_AUDIT_REQUIRED_SCRIPTS0,
     checkerCoverageCount: RUNALL_CHECKER_COVERAGE0.length,
+
     materializedPublicStatusGate: cfg.runMaterializedPublicStatusGate,
+    materializedPublicStatusGateSummary,
+    materializedPublicStatusGateDigest: materializedPublicStatusGateSummary.gateDigest,
+    materializedPublicStatusGateFileCount: materializedPublicStatusGateSummary.fileCount,
+    materializedPublicStatusGateDirectRecordCount: materializedPublicStatusGateSummary.directRecordCount,
+    materializedPublicStatusGateCliRecordCount: materializedPublicStatusGateSummary.cliRecordCount,
+    materializedPublicStatusGateAcceptedPublicConclusionOnly: materializedPublicStatusGateSummary.acceptedPublicConclusionOnly,
+
     publicConclusion: RUNALL_PUBLIC_CONCLUSION0,
   };
 
@@ -779,6 +798,44 @@ async function validateMaterializedPublicStatusGate0(cfg) {
   }
 }
 
+function summarizeMaterializedPublicStatusGateNF0(gateNF, cfg) {
+  if (!isPlainObject(gateNF) || gateNF.kind === 'MaterializedPublicStatusGateSkipped0NF') {
+    return {
+      kind: 'ReleaseMaterializedPublicStatusGateSummary0',
+      enabled: cfg.runMaterializedPublicStatusGate === true,
+      skipped: true,
+      outputDir: null,
+      canonicalEnvelopeBytes: cfg.materializedPublicStatusGateCanonicalEnvelopeBytes,
+      runCliChecks: cfg.materializedPublicStatusGateRunCliChecks,
+      deterministic: null,
+      materializedPath: null,
+      syntheticRunAll: null,
+      acceptedPublicConclusionOnly: null,
+      fileCount: 0,
+      directRecordCount: 0,
+      cliRecordCount: 0,
+      gateDigest: null,
+    };
+  }
+
+  return {
+    kind: 'ReleaseMaterializedPublicStatusGateSummary0',
+    enabled: true,
+    skipped: false,
+    outputDir: gateNF.outputDir ?? null,
+    canonicalEnvelopeBytes: gateNF.canonicalEnvelopeBytes ?? cfg.materializedPublicStatusGateCanonicalEnvelopeBytes,
+    runCliChecks: gateNF.runCliChecks ?? cfg.materializedPublicStatusGateRunCliChecks,
+    deterministic: gateNF.deterministic === true,
+    materializedPath: gateNF.materializedPath === true,
+    syntheticRunAll: gateNF.syntheticRunAll === false ? false : gateNF.syntheticRunAll ?? null,
+    acceptedPublicConclusionOnly: gateNF.acceptedPublicConclusionOnly === true,
+    fileCount: gateNF.fileCount ?? null,
+    directRecordCount: gateNF.directRecordCount ?? null,
+    cliRecordCount: gateNF.cliRecordCount ?? null,
+    gateDigest: gateNF.gateDigest ?? null,
+  };
+}
+
 function expectedModuleForTest0(testFile) {
   const stem = testFile.replace(/\.test\.mjs$/, '');
 
@@ -801,7 +858,8 @@ function expectedModuleForTest0(testFile) {
     'pcc-materialized-public-status-release-gate0': 'README.md',
     'pcc-release-audit-materialized-gate0': 'pcc-release-audit0.mjs',
     'pcc-release-audit-materialized-gate-negative0': 'pcc-release-audit0.mjs',
-    'pcc-release-audit-cli-materialized-gate0': 'bin/release-audit0.mjs',              
+    'pcc-release-audit-cli-materialized-gate0': 'bin/release-audit0.mjs',
+    'pcc-release-audit-full-mode-gate-summary0': 'bin/release-audit0.mjs',                  
   };
 
   if (Object.prototype.hasOwnProperty.call(explicit, stem)) {

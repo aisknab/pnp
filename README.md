@@ -327,3 +327,28 @@ npm run release:audit -- --materialized-gate --no-materialized-gate-cli
 
 The materialized gate remains separate from synthetic `RunAll0`. It verifies deterministic external-file fixtures and the rule that only accepted replay emits the conditional public conclusion.
 
+## Release audit materialized gate summary
+
+The release audit normal form and CLI summary expose the materialized public status gate result.
+
+The summary includes:
+
+```text
+materializedPublicStatusGateDigest
+materializedPublicStatusGateFileCount
+materializedPublicStatusGateDirectRecordCount
+materializedPublicStatusGateCliRecordCount
+materializedPublicStatusGateAcceptedPublicConclusionOnly
+```
+
+When the gate is enabled, the release audit requires the materialized path to prove:
+
+```text
+deterministic repeated fixture bytes
+materializedPath = true
+syntheticRunAll = false
+acceptedPublicConclusionOnly = true
+```
+
+This makes the materialized public-status release gate visible in the final release audit artefact rather than only present as an internal ledger phase.
+
