@@ -40,7 +40,9 @@
     "materialized:write-accept-runs": "node ./bin/write-materialized-accept-run-fixtures0.mjs",
     "materialized:write-accept-runs:full": "node ./bin/write-materialized-accept-run-fixtures0.mjs --full",
     "materialized:final-verdict": "node ./bin/check-materialized-final-verdict0.mjs",
-    "materialized:final-verdict:full": "node ./bin/check-materialized-final-verdict0.mjs --full"
+    "materialized:final-verdict:full": "node ./bin/check-materialized-final-verdict0.mjs --full",
+    "materialized:write-final-runs": "node ./bin/write-materialized-final-run-fixtures0.mjs",
+    "materialized:write-final-runs:full": "node ./bin/write-materialized-final-run-fixtures0.mjs --full"
   },
   "engines": {
     "node": ">=20"

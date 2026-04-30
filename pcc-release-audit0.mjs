@@ -69,7 +69,9 @@ export const RELEASE_AUDIT_REQUIRED_MODULES0 = Object.freeze([
   'pcc-materialized-accept-run-fixtures0.mjs',
   'bin/write-materialized-accept-run-fixtures0.mjs',
   'pcc-materialized-final-verdict0.mjs',
-  'bin/check-materialized-final-verdict0.mjs',                                         
+  'bin/check-materialized-final-verdict0.mjs',
+  'pcc-materialized-final-run-fixtures0.mjs',
+  'bin/write-materialized-final-run-fixtures0.mjs',                                           
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
@@ -122,7 +124,8 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-materialized-accept-run-cli0.test.mjs',
   'pcc-materialized-accept-run-fixtures0.test.mjs',
   'pcc-materialized-final-verdict0.test.mjs',
-  'pcc-materialized-final-verdict-cli0.test.mjs',                                
+  'pcc-materialized-final-verdict-cli0.test.mjs',
+  'pcc-materialized-final-run-fixtures0.test.mjs',                                  
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
@@ -153,7 +156,9 @@ export const RELEASE_AUDIT_REQUIRED_SCRIPTS0 = Object.freeze([
   'materialized:write-accept-runs',
   'materialized:write-accept-runs:full',
   'materialized:final-verdict',
-  'materialized:final-verdict:full',          
+  'materialized:final-verdict:full',
+  'materialized:write-final-runs',
+  'materialized:write-final-runs:full',            
 ]);
 
 export function makeReleaseAuditConfig0(overrides = {}) {

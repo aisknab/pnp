@@ -244,6 +244,9 @@ function makeMiniPackageJson0() {
 
       'materialized:final-verdict': 'node ./bin/check-materialized-final-verdict0.mjs',
       'materialized:final-verdict:full': 'node ./bin/check-materialized-final-verdict0.mjs --full',
+
+      'materialized:write-final-runs': 'node ./bin/write-materialized-final-run-fixtures0.mjs',
+      'materialized:write-final-runs:full': 'node ./bin/write-materialized-final-run-fixtures0.mjs --full',      
     },
   };
 }

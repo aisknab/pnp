@@ -229,3 +229,23 @@ The claim boundary remains conditional:
 CheckPCCPackexp(GeneratePCCPack())=accept implies P = NP
 ```
 
+## Internal materialized final-run fixture writer
+
+The internal materialized final-run fixture writer emits final-verdict-ready accept-run envelopes:
+
+```bash
+npm run materialized:write-final-runs -- ./materialized-final-run-fixtures0
+```
+
+This writes the package fixture and:
+
+```text
+MaterializedAcceptRun.pending0.json
+MaterializedAcceptRun.reject0.json
+MaterializedAcceptRun.accepted0.json
+```
+
+Each file is verified through `CheckMaterializedFinalVerdictFile0` and the final verdict CLI.
+
+Pending and reject final-run fixtures emit no public conclusion. The accepted final-run fixture emits the conditional public conclusion only after accepted replay.
+
