@@ -210,3 +210,22 @@ MaterializedAcceptRun.accepted0.json
 
 Each accept-run fixture is checked by `CheckMaterializedAcceptRunFile0` and the accept-run CLI. The pending and reject fixtures emit no public conclusion. The accepted fixture records public conclusion emission only after accepted replay.
 
+## Internal materialized final verdict check
+
+The materialized final verdict checker reads an external `MaterializedAcceptRun0.json` file, verifies it through `CheckMaterializedAcceptRunFile0`, and emits the final materialized verdict summary.
+
+```bash
+npm run materialized:final-verdict -- ./path/to/MaterializedAcceptRun0.json
+npm run materialized:final-verdict:full -- ./path/to/MaterializedAcceptRun0.json
+```
+
+The final verdict may be `pending`, `reject`, or `accept`.
+
+For `pending` and `reject`, no public `P = NP` conclusion is emitted. For `accept`, the public conclusion is emitted only after the materialized accept-run replay is accepted.
+
+The claim boundary remains conditional:
+
+```text
+CheckPCCPackexp(GeneratePCCPack())=accept implies P = NP
+```
+

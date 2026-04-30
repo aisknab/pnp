@@ -219,20 +219,31 @@ function makeMiniPackageJson0() {
       'smoke:full': 'node ./bin/runall0.mjs --full',
       runall: 'node ./bin/runall0.mjs',
       'release:audit': 'node ./bin/release-audit0.mjs',
+      'release:audit:full': 'node ./bin/release-audit0.mjs --full',
+
       'materialized:shell': 'node ./bin/check-materialized-shell0.mjs',
       'materialized:shell:full': 'node ./bin/check-materialized-shell0.mjs --full',
+
       'materialized:aggregate': 'node ./bin/check-materialized-aggregate0.mjs',
       'materialized:aggregate:full': 'node ./bin/check-materialized-aggregate0.mjs --full',
+
       'materialized:bridge': 'node ./bin/check-materialized-acceptance-bridge0.mjs',
       'materialized:bridge:full': 'node ./bin/check-materialized-acceptance-bridge0.mjs --full',
+
       'materialized:write-fixtures': 'node ./bin/write-materialized-fixtures0.mjs',
       'materialized:write-fixtures:full': 'node ./bin/write-materialized-fixtures0.mjs --full',
+
       'materialized:resolve-digest': 'node ./bin/resolve-materialized-digest0.mjs',
       'materialized:resolve-digest:full': 'node ./bin/resolve-materialized-digest0.mjs --full',
+
       'materialized:accept-run': 'node ./bin/check-materialized-accept-run0.mjs',
       'materialized:accept-run:full': 'node ./bin/check-materialized-accept-run0.mjs --full',
+
       'materialized:write-accept-runs': 'node ./bin/write-materialized-accept-run-fixtures0.mjs',
-      'materialized:write-accept-runs:full': 'node ./bin/write-materialized-accept-run-fixtures0.mjs --full',                       
+      'materialized:write-accept-runs:full': 'node ./bin/write-materialized-accept-run-fixtures0.mjs --full',
+
+      'materialized:final-verdict': 'node ./bin/check-materialized-final-verdict0.mjs',
+      'materialized:final-verdict:full': 'node ./bin/check-materialized-final-verdict0.mjs --full',
     },
   };
 }
