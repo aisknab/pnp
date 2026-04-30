@@ -36,7 +36,9 @@
     "materialized:resolve-digest": "node ./bin/resolve-materialized-digest0.mjs",
     "materialized:resolve-digest:full": "node ./bin/resolve-materialized-digest0.mjs --full",
     "materialized:accept-run": "node ./bin/check-materialized-accept-run0.mjs",
-    "materialized:accept-run:full": "node ./bin/check-materialized-accept-run0.mjs --full"
+    "materialized:accept-run:full": "node ./bin/check-materialized-accept-run0.mjs --full",
+    "materialized:write-accept-runs": "node ./bin/write-materialized-accept-run-fixtures0.mjs",
+    "materialized:write-accept-runs:full": "node ./bin/write-materialized-accept-run-fixtures0.mjs --full"
   },
   "engines": {
     "node": ">=20"

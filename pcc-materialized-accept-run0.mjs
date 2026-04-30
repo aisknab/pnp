@@ -455,6 +455,8 @@ export async function CheckMaterializedAcceptRunFile0(filePath, config = {}) {
     });
   }
 
+  const checkedNF = checked.NF ?? checked.nf;
+
   const nf = {
     kind: 'MaterializedAcceptRunFile0NF',
     checker,
@@ -463,9 +465,14 @@ export async function CheckMaterializedAcceptRunFile0(filePath, config = {}) {
     byteLength: loaded.nf.byteLength,
     fileDigest: loaded.nf.fileDigest,
     acceptRunDigest: checked.Digest ?? checked.digest,
-    verdict: checked.NF.verdict,
-    replayAccepted: checked.NF.replayAccepted,
-    publicConclusionEmitted: checked.NF.publicConclusionEmitted,
+    verdict: checkedNF.verdict,
+    replayAccepted: checkedNF.replayAccepted,
+    rejectLogCount: checkedNF.rejectLogCount,
+    publicConclusionEmitted: checkedNF.publicConclusionEmitted,
+    publicConclusion: checkedNF.publicConclusion,
+    transcriptDigest: checkedNF.transcriptDigest,
+    generatedPackagePath: checkedNF.generatedPackagePath,
+    aggregateDigest: checkedNF.aggregateDigest,
   };
 
   return makeAcceptRecord({

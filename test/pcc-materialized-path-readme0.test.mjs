@@ -71,7 +71,9 @@ test('package.json exposes materialized path smoke scripts', async () => {
     'materialized:resolve-digest',
     'materialized:resolve-digest:full',
     'materialized:accept-run',
-    'materialized:accept-run:full',        
+    'materialized:accept-run:full',
+    'materialized:write-accept-runs',
+    'materialized:write-accept-runs:full',            
   ]) {
     assert.equal(typeof pkg.scripts[script], 'string');
     assert.equal(pkg.scripts[script].length > 0, true);

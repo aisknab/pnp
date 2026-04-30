@@ -191,3 +191,22 @@ ReplayTranscript.replayAccepted = true
 
 For `pending` or `reject`, no public `P = NP` conclusion is emitted.
 
+## Internal materialized accept-run fixture writer
+
+The internal materialized accept-run fixture writer emits a package fixture and three accept-run envelopes:
+
+```bash
+npm run materialized:write-accept-runs -- ./materialized-accept-run-fixtures0
+```
+
+This writes:
+
+```text
+MaterializedPCCPack0.json
+MaterializedAcceptRun.pending0.json
+MaterializedAcceptRun.reject0.json
+MaterializedAcceptRun.accepted0.json
+```
+
+Each accept-run fixture is checked by `CheckMaterializedAcceptRunFile0` and the accept-run CLI. The pending and reject fixtures emit no public conclusion. The accepted fixture records public conclusion emission only after accepted replay.
+
