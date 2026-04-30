@@ -2,11 +2,16 @@ import { spawnSync } from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import os from 'node:os';
 
 import {
   digestCanonical0,
   stableStringify0,
 } from './pcc-verifier-frag0.mjs';
+
+import {
+  CheckMaterializedPublicStatusRoundtrip0,
+} from './pcc-materialized-public-status-roundtrip0.mjs';
 
 import {
   CheckRunAll0,
@@ -77,7 +82,7 @@ export const RELEASE_AUDIT_REQUIRED_MODULES0 = Object.freeze([
   'pcc-materialized-public-status0.mjs',
   'bin/check-materialized-public-status0.mjs',
   'pcc-materialized-public-status-roundtrip0.mjs',
-  'bin/check-materialized-public-status-roundtrip0.mjs',                                                   
+  'bin/check-materialized-public-status-roundtrip0.mjs',                                                     
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
@@ -136,7 +141,8 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-materialized-public-status0.test.mjs',
   'pcc-materialized-public-status-cli0.test.mjs',
   'pcc-materialized-public-status-roundtrip0.test.mjs',
-  'pcc-materialized-public-status-release-gate0.test.mjs',                                            
+  'pcc-materialized-public-status-release-gate0.test.mjs',
+  'pcc-release-audit-materialized-gate0.test.mjs',                                              
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
@@ -185,6 +191,11 @@ export function makeReleaseAuditConfig0(overrides = {}) {
     runRunAll: true,
     runMutationCheck: true,
     runCliSmoke: false,
+    runMaterializedPublicStatusGate: true,
+    materializedPublicStatusGateRunner: null,
+    materializedPublicStatusGateOutputDir: null,
+    materializedPublicStatusGateCanonicalEnvelopeBytes: false,
+    materializedPublicStatusGateRunCliChecks: true,
     mutationInputFactory: null,
     mutationRunner: null,
     ...overrides,
@@ -207,6 +218,7 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
     ['runAllDeterminism', `${checker}.runAllDeterminism`, () => validateRunAllDeterminism0(cfg)],
     ['runAllMutation', `${checker}.runAllMutation`, () => validateRunAllMutation0(cfg)],
     ['cliSmoke', `${checker}.cliSmoke`, () => validateCliSmoke0(cfg)],
+    ['materializedPublicStatusGate', `${checker}.materializedPublicStatusGate`, () => validateMaterializedPublicStatusGate0(cfg)],
   ];
 
   for (const [phase, coord, run] of phases) {
@@ -239,6 +251,7 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
     requiredExports: RELEASE_AUDIT_REQUIRED_EXPORTS0,
     requiredScripts: RELEASE_AUDIT_REQUIRED_SCRIPTS0,
     checkerCoverageCount: RUNALL_CHECKER_COVERAGE0.length,
+    materializedPublicStatusGate: cfg.runMaterializedPublicStatusGate,
     publicConclusion: RUNALL_PUBLIC_CONCLUSION0,
   };
 
@@ -259,6 +272,40 @@ function validateConfig0(cfg) {
   if (!isNonEmptyString(cfg.rootDir)) {
     return validationReject0(['rootDir'], 'ReleaseAuditConfig0 rootDir must be a non-empty string', {
       actual: cfg.rootDir,
+    });
+  }
+
+  for (const field of [
+    'runSyntaxCheck',
+    'runRunAll',
+    'runMutationCheck',
+    'runCliSmoke',
+    'runMaterializedPublicStatusGate',
+    'materializedPublicStatusGateCanonicalEnvelopeBytes',
+    'materializedPublicStatusGateRunCliChecks',
+  ]) {
+    if (typeof cfg[field] !== 'boolean') {
+      return validationReject0([field], `ReleaseAuditConfig0 ${field} must be boolean`, {
+        actual: cfg[field],
+      });
+    }
+  }
+
+  if (
+    cfg.materializedPublicStatusGateRunner !== null &&
+    typeof cfg.materializedPublicStatusGateRunner !== 'function'
+  ) {
+    return validationReject0(['materializedPublicStatusGateRunner'], 'ReleaseAuditConfig0 materializedPublicStatusGateRunner must be null or a function', {
+      actual: typeof cfg.materializedPublicStatusGateRunner,
+    });
+  }
+
+  if (
+    cfg.materializedPublicStatusGateOutputDir !== null &&
+    !isNonEmptyString(cfg.materializedPublicStatusGateOutputDir)
+  ) {
+    return validationReject0(['materializedPublicStatusGateOutputDir'], 'ReleaseAuditConfig0 materializedPublicStatusGateOutputDir must be null or a non-empty string', {
+      actual: cfg.materializedPublicStatusGateOutputDir,
     });
   }
 
@@ -618,6 +665,118 @@ async function validateCliSmoke0(cfg) {
   });
 }
 
+async function validateMaterializedPublicStatusGate0(cfg) {
+  if (cfg.runMaterializedPublicStatusGate !== true) {
+    return validationAccept0({
+      kind: 'MaterializedPublicStatusGateSkipped0NF',
+    });
+  }
+
+  const usesTemporaryOutputDir = !isNonEmptyString(cfg.materializedPublicStatusGateOutputDir);
+  const outputDir = usesTemporaryOutputDir
+    ? await fs.mkdtemp(path.join(os.tmpdir(), 'pnp-release-audit-materialized-public-status-'))
+    : cfg.materializedPublicStatusGateOutputDir;
+
+  const runner = typeof cfg.materializedPublicStatusGateRunner === 'function'
+    ? cfg.materializedPublicStatusGateRunner
+    : CheckMaterializedPublicStatusRoundtrip0;
+
+  try {
+    const record = await runner({
+      outputDir,
+      canonicalEnvelopeBytes: cfg.materializedPublicStatusGateCanonicalEnvelopeBytes,
+      runCliChecks: cfg.materializedPublicStatusGateRunCliChecks,
+    });
+
+    if (record?.tag !== 'accept') {
+      return validationReject0(['materializedPublicStatusGate'], 'materialized public status roundtrip gate rejected', {
+        inner: compactReject0(record),
+      });
+    }
+
+    const nf = record.NF ?? record.nf;
+
+    if (!isPlainObject(nf)) {
+      return validationReject0(['materializedPublicStatusGate', 'NF'], 'materialized public status roundtrip gate must emit an NF object', {
+        actual: typeof nf,
+      });
+    }
+
+    if (nf.kind !== 'MaterializedPublicStatusRoundtrip0NF') {
+      return validationReject0(['materializedPublicStatusGate', 'NF', 'kind'], 'materialized public status roundtrip gate emitted the wrong NF kind', {
+        actual: nf.kind,
+      });
+    }
+
+    if (nf.deterministic !== true) {
+      return validationReject0(['materializedPublicStatusGate', 'NF', 'deterministic'], 'materialized public status roundtrip gate must prove deterministic fixture bytes', {
+        actual: nf.deterministic,
+      });
+    }
+
+    if (nf.materializedPath !== true) {
+      return validationReject0(['materializedPublicStatusGate', 'NF', 'materializedPath'], 'materialized public status roundtrip gate must certify materializedPath=true', {
+        actual: nf.materializedPath,
+      });
+    }
+
+    if (nf.syntheticRunAll !== false) {
+      return validationReject0(['materializedPublicStatusGate', 'NF', 'syntheticRunAll'], 'materialized public status roundtrip gate must remain separate from synthetic RunAll0', {
+        actual: nf.syntheticRunAll,
+      });
+    }
+
+    if (nf.acceptedPublicConclusionOnly !== true) {
+      return validationReject0(['materializedPublicStatusGate', 'NF', 'acceptedPublicConclusionOnly'], 'materialized public status roundtrip gate must prove only accepted replay emits the public conclusion', {
+        actual: nf.acceptedPublicConclusionOnly,
+      });
+    }
+
+    if (!Number.isInteger(nf.fileCount) || nf.fileCount < 4) {
+      return validationReject0(['materializedPublicStatusGate', 'NF', 'fileCount'], 'materialized public status roundtrip gate must check the package plus all public status fixtures', {
+        actual: nf.fileCount,
+      });
+    }
+
+    if (!Array.isArray(nf.directRecords) || nf.directRecords.length < 4) {
+      return validationReject0(['materializedPublicStatusGate', 'NF', 'directRecords'], 'materialized public status roundtrip gate must include direct checker records', {
+        actual: nf.directRecords,
+      });
+    }
+
+    if (
+      cfg.materializedPublicStatusGateRunCliChecks === true &&
+      (!Array.isArray(nf.cliRecords) || nf.cliRecords.length < 4)
+    ) {
+      return validationReject0(['materializedPublicStatusGate', 'NF', 'cliRecords'], 'materialized public status roundtrip gate must include CLI checker records when CLI checks are enabled', {
+        actual: nf.cliRecords,
+      });
+    }
+
+    return validationAccept0({
+      kind: 'ReleaseMaterializedPublicStatusGate0NF',
+      outputDir: usesTemporaryOutputDir ? 'temporary' : outputDir,
+      canonicalEnvelopeBytes: cfg.materializedPublicStatusGateCanonicalEnvelopeBytes,
+      runCliChecks: cfg.materializedPublicStatusGateRunCliChecks,
+      deterministic: nf.deterministic,
+      materializedPath: nf.materializedPath,
+      syntheticRunAll: nf.syntheticRunAll,
+      acceptedPublicConclusionOnly: nf.acceptedPublicConclusionOnly,
+      fileCount: nf.fileCount,
+      directRecordCount: nf.directRecords.length,
+      cliRecordCount: Array.isArray(nf.cliRecords) ? nf.cliRecords.length : 0,
+      gateDigest: record.Digest ?? record.digest,
+    });
+  } finally {
+    if (usesTemporaryOutputDir) {
+      await fs.rm(outputDir, {
+        recursive: true,
+        force: true,
+      });
+    }
+  }
+}
+
 function expectedModuleForTest0(testFile) {
   const stem = testFile.replace(/\.test\.mjs$/, '');
 
@@ -637,7 +796,8 @@ function expectedModuleForTest0(testFile) {
     'pcc-materialized-accept-run-cli0': 'bin/check-materialized-accept-run0.mjs',
     'pcc-materialized-final-verdict-cli0': 'bin/check-materialized-final-verdict0.mjs',
     'pcc-materialized-public-status-cli0': 'bin/check-materialized-public-status0.mjs',
-    'pcc-materialized-public-status-release-gate0': 'README.md',  
+    'pcc-materialized-public-status-release-gate0': 'README.md',
+    'pcc-release-audit-materialized-gate0': 'pcc-release-audit0.mjs',      
   };
 
   if (Object.prototype.hasOwnProperty.call(explicit, stem)) {
