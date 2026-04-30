@@ -149,7 +149,8 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-release-audit-full-mode-gate-summary0.test.mjs',
   'pcc-release-audit-surface-freeze0.test.mjs',
   'pcc-public-surface-freeze0.test.mjs',
-  'pcc-release-audit-public-surface-freeze0.test.mjs',                                                        
+  'pcc-release-audit-public-surface-freeze0.test.mjs',
+  'pcc-release-audit-public-surface-summary0.test.mjs',                                                          
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
@@ -216,6 +217,16 @@ export const RELEASE_AUDIT_NF_KEYS0 = Object.freeze([
   'requiredExports',
   'requiredScripts',
   'checkerCoverageCount',
+
+  'publicSurfaceFreeze',
+  'publicSurfaceFreezeSummary',
+  'publicSurfaceFreezeDigest',
+  'publicSurfaceFreezePublicEntryExportCount',
+  'publicSurfaceFreezePackageExportCount',
+  'publicSurfaceFreezePackageBinCount',
+  'publicSurfaceFreezePackageScriptCount',
+  'publicSurfaceFreezeSurfaceFrozen',
+
   'materializedPublicStatusGate',
   'materializedPublicStatusGateSummary',
   'materializedPublicStatusGateDigest',
@@ -223,6 +234,7 @@ export const RELEASE_AUDIT_NF_KEYS0 = Object.freeze([
   'materializedPublicStatusGateDirectRecordCount',
   'materializedPublicStatusGateCliRecordCount',
   'materializedPublicStatusGateAcceptedPublicConclusionOnly',
+
   'publicConclusion',
 ]);
 
@@ -232,6 +244,16 @@ export const RELEASE_AUDIT_CLI_SUMMARY_KEYS0 = Object.freeze([
   'moduleCount',
   'testCount',
   'checkerCoverageCount',
+
+  'publicSurfaceFreeze',
+  'publicSurfaceFreezeSummary',
+  'publicSurfaceFreezeDigest',
+  'publicSurfaceFreezePublicEntryExportCount',
+  'publicSurfaceFreezePackageExportCount',
+  'publicSurfaceFreezePackageBinCount',
+  'publicSurfaceFreezePackageScriptCount',
+  'publicSurfaceFreezeSurfaceFrozen',
+
   'materializedPublicStatusGate',
   'materializedPublicStatusGateSummary',
   'materializedPublicStatusGateDigest',
@@ -239,8 +261,21 @@ export const RELEASE_AUDIT_CLI_SUMMARY_KEYS0 = Object.freeze([
   'materializedPublicStatusGateDirectRecordCount',
   'materializedPublicStatusGateCliRecordCount',
   'materializedPublicStatusGateAcceptedPublicConclusionOnly',
+
   'publicConclusion',
   'digest',
+]);
+
+export const RELEASE_AUDIT_PUBLIC_SURFACE_FREEZE_SUMMARY_KEYS0 = Object.freeze([
+  'kind',
+  'enabled',
+  'skipped',
+  'publicEntryExportCount',
+  'packageExportCount',
+  'packageBinCount',
+  'packageScriptCount',
+  'surfaceFrozen',
+  'publicSurfaceDigest',
 ]);
 
 export function makeReleaseAuditConfig0(overrides = {}) {
@@ -269,6 +304,7 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
   const checker = 'CheckReleaseAudit0';
   const ledger = [];
   const cfg = makeReleaseAuditConfig0(config);
+  let publicSurfaceFreezeNF = null;
   let materializedPublicStatusGateNF = null;
 
   const phases = [
@@ -305,10 +341,19 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
       });
     }
 
+    if (phase === 'publicSurfaceFreeze') {
+      publicSurfaceFreezeNF = result.nf ?? null;
+    }
+
     if (phase === 'materializedPublicStatusGate') {
       materializedPublicStatusGateNF = result.nf ?? null;
     }
   }
+
+  const publicSurfaceFreezeSummary = summarizePublicSurfaceFreezeNF0(
+    publicSurfaceFreezeNF,
+    cfg,
+  );
 
   const materializedPublicStatusGateSummary = summarizeMaterializedPublicStatusGateNF0(
     materializedPublicStatusGateNF,
@@ -325,6 +370,15 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
     requiredExports: RELEASE_AUDIT_REQUIRED_EXPORTS0,
     requiredScripts: RELEASE_AUDIT_REQUIRED_SCRIPTS0,
     checkerCoverageCount: RUNALL_CHECKER_COVERAGE0.length,
+
+    publicSurfaceFreeze: cfg.runPublicSurfaceFreeze,
+    publicSurfaceFreezeSummary,
+    publicSurfaceFreezeDigest: publicSurfaceFreezeSummary.publicSurfaceDigest,
+    publicSurfaceFreezePublicEntryExportCount: publicSurfaceFreezeSummary.publicEntryExportCount,
+    publicSurfaceFreezePackageExportCount: publicSurfaceFreezeSummary.packageExportCount,
+    publicSurfaceFreezePackageBinCount: publicSurfaceFreezeSummary.packageBinCount,
+    publicSurfaceFreezePackageScriptCount: publicSurfaceFreezeSummary.packageScriptCount,
+    publicSurfaceFreezeSurfaceFrozen: publicSurfaceFreezeSummary.surfaceFrozen,
 
     materializedPublicStatusGate: cfg.runMaterializedPublicStatusGate,
     materializedPublicStatusGateSummary,
@@ -1005,6 +1059,34 @@ function summarizeMaterializedPublicStatusGateNF0(gateNF, cfg) {
   };
 }
 
+function summarizePublicSurfaceFreezeNF0(publicSurfaceNF, cfg) {
+  if (!isPlainObject(publicSurfaceNF) || publicSurfaceNF.kind === 'PublicSurfaceFreezeSkipped0NF') {
+    return {
+      kind: 'ReleasePublicSurfaceFreezeSummary0',
+      enabled: cfg.runPublicSurfaceFreeze === true,
+      skipped: true,
+      publicEntryExportCount: 0,
+      packageExportCount: 0,
+      packageBinCount: 0,
+      packageScriptCount: 0,
+      surfaceFrozen: null,
+      publicSurfaceDigest: null,
+    };
+  }
+
+  return {
+    kind: 'ReleasePublicSurfaceFreezeSummary0',
+    enabled: true,
+    skipped: false,
+    publicEntryExportCount: publicSurfaceNF.publicEntryExportCount ?? null,
+    packageExportCount: publicSurfaceNF.packageExportCount ?? null,
+    packageBinCount: publicSurfaceNF.packageBinCount ?? null,
+    packageScriptCount: publicSurfaceNF.packageScriptCount ?? null,
+    surfaceFrozen: publicSurfaceNF.surfaceFrozen === true,
+    publicSurfaceDigest: publicSurfaceNF.publicSurfaceDigest ?? null,
+  };
+}
+
 export function summarizeReleaseAudit0(out) {
   if (out.tag === 'accept') {
     const summary = {
@@ -1013,6 +1095,15 @@ export function summarizeReleaseAudit0(out) {
       moduleCount: out.NF.moduleCount,
       testCount: out.NF.testCount,
       checkerCoverageCount: out.NF.checkerCoverageCount,
+
+      publicSurfaceFreeze: out.NF.publicSurfaceFreeze,
+      publicSurfaceFreezeSummary: out.NF.publicSurfaceFreezeSummary,
+      publicSurfaceFreezeDigest: out.NF.publicSurfaceFreezeDigest,
+      publicSurfaceFreezePublicEntryExportCount: out.NF.publicSurfaceFreezePublicEntryExportCount,
+      publicSurfaceFreezePackageExportCount: out.NF.publicSurfaceFreezePackageExportCount,
+      publicSurfaceFreezePackageBinCount: out.NF.publicSurfaceFreezePackageBinCount,
+      publicSurfaceFreezePackageScriptCount: out.NF.publicSurfaceFreezePackageScriptCount,
+      publicSurfaceFreezeSurfaceFrozen: out.NF.publicSurfaceFreezeSurfaceFrozen,
 
       materializedPublicStatusGate: out.NF.materializedPublicStatusGate,
       materializedPublicStatusGateSummary: out.NF.materializedPublicStatusGateSummary,
@@ -1059,6 +1150,16 @@ export function validateReleaseAuditSurface0(nf) {
     return nfKeys;
   }
 
+  const publicSurfaceSummaryKeys = validateExactObjectKeys0(
+    nf.publicSurfaceFreezeSummary,
+    RELEASE_AUDIT_PUBLIC_SURFACE_FREEZE_SUMMARY_KEYS0,
+    ['NF', 'publicSurfaceFreezeSummary'],
+  );
+
+  if (!publicSurfaceSummaryKeys.ok) {
+    return publicSurfaceSummaryKeys;
+  }
+
   const gateSummaryKeys = validateExactObjectKeys0(
     nf.materializedPublicStatusGateSummary,
     RELEASE_AUDIT_MATERIALIZED_GATE_SUMMARY_KEYS0,
@@ -1072,6 +1173,7 @@ export function validateReleaseAuditSurface0(nf) {
   return validationAccept0({
     kind: 'ReleaseAuditSurfaceFreeze0NF',
     nfKeys: RELEASE_AUDIT_NF_KEYS0,
+    publicSurfaceSummaryKeys: RELEASE_AUDIT_PUBLIC_SURFACE_FREEZE_SUMMARY_KEYS0,
     materializedGateSummaryKeys: RELEASE_AUDIT_MATERIALIZED_GATE_SUMMARY_KEYS0,
   });
 }
@@ -1081,6 +1183,16 @@ export function validateReleaseAuditCliSummarySurface0(summary) {
 
   if (!summaryKeys.ok) {
     return summaryKeys;
+  }
+
+  const publicSurfaceSummaryKeys = validateExactObjectKeys0(
+    summary.publicSurfaceFreezeSummary,
+    RELEASE_AUDIT_PUBLIC_SURFACE_FREEZE_SUMMARY_KEYS0,
+    ['summary', 'publicSurfaceFreezeSummary'],
+  );
+
+  if (!publicSurfaceSummaryKeys.ok) {
+    return publicSurfaceSummaryKeys;
   }
 
   const gateSummaryKeys = validateExactObjectKeys0(
@@ -1096,6 +1208,7 @@ export function validateReleaseAuditCliSummarySurface0(summary) {
   return validationAccept0({
     kind: 'ReleaseAuditCliSummarySurfaceFreeze0NF',
     summaryKeys: RELEASE_AUDIT_CLI_SUMMARY_KEYS0,
+    publicSurfaceSummaryKeys: RELEASE_AUDIT_PUBLIC_SURFACE_FREEZE_SUMMARY_KEYS0,
     materializedGateSummaryKeys: RELEASE_AUDIT_MATERIALIZED_GATE_SUMMARY_KEYS0,
   });
 }
@@ -1149,7 +1262,8 @@ function expectedModuleForTest0(testFile) {
     'pcc-release-audit-cli-materialized-gate0': 'bin/release-audit0.mjs',
     'pcc-release-audit-full-mode-gate-summary0': 'bin/release-audit0.mjs',
     'pcc-release-audit-surface-freeze0': 'pcc-release-audit0.mjs',
-    'pcc-release-audit-public-surface-freeze0': 'pcc-release-audit0.mjs',                          
+    'pcc-release-audit-public-surface-freeze0': 'pcc-release-audit0.mjs',
+    'pcc-release-audit-public-surface-summary0': 'pcc-release-audit0.mjs',                              
   };
 
   if (Object.prototype.hasOwnProperty.call(explicit, stem)) {

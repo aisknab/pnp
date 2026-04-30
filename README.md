@@ -416,3 +416,30 @@ The phase is separate from the materialized public-status gate. It protects the 
 
 The phase can be disabled only by configuration in internal tests. The default release audit enables it.
 
+## Release audit public surface freeze summary
+
+The release audit normal form and CLI summary expose the public surface freeze result.
+
+The summary includes:
+
+```text
+publicSurfaceFreezeDigest
+publicSurfaceFreezePublicEntryExportCount
+publicSurfaceFreezePackageExportCount
+publicSurfaceFreezePackageBinCount
+publicSurfaceFreezePackageScriptCount
+publicSurfaceFreezeSurfaceFrozen
+```
+
+When enabled, the release audit requires the public surface freeze checker to prove:
+
+```text
+surfaceFrozen = true
+index.mjs exports are frozen
+package exports are frozen
+package bin entries are frozen
+package scripts are frozen
+```
+
+This makes the public API and command surface freeze visible in the final release audit artefact.
+
