@@ -82,7 +82,8 @@ export const RELEASE_AUDIT_REQUIRED_MODULES0 = Object.freeze([
   'pcc-materialized-public-status0.mjs',
   'bin/check-materialized-public-status0.mjs',
   'pcc-materialized-public-status-roundtrip0.mjs',
-  'bin/check-materialized-public-status-roundtrip0.mjs',                                                     
+  'bin/check-materialized-public-status-roundtrip0.mjs',
+  'pcc-public-surface-freeze0.mjs',                                                       
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
@@ -146,7 +147,8 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-release-audit-materialized-gate-negative0.test.mjs',
   'pcc-release-audit-cli-materialized-gate0.test.mjs',
   'pcc-release-audit-full-mode-gate-summary0.test.mjs',
-  'pcc-release-audit-surface-freeze0.test.mjs',                                                    
+  'pcc-release-audit-surface-freeze0.test.mjs',
+  'pcc-public-surface-freeze0.test.mjs',                                                      
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([

@@ -382,3 +382,20 @@ The frozen CLI summary exposes the same materialized gate proof fields plus the 
 
 Future changes to the release surface should fail the surface-freeze tests and the `surfaceFreeze` ledger phase unless the frozen key lists are intentionally updated.
 
+## Public entry release surface freeze
+
+The public release surface is frozen by `CheckPublicEntryReleaseSurface0`.
+
+The freeze covers:
+
+```text
+index.mjs export names
+package.json exports keys and values
+package.json bin keys and values
+package.json script keys and values
+```
+
+The checker rejects missing keys, extra keys, and changed mapping values. This makes accidental changes to the public release surface fail loudly before they can alter the acceptance artefact.
+
+This checker is internal. It freezes the current public entry rather than adding new public exports.
+
