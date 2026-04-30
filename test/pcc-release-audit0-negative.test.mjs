@@ -219,6 +219,12 @@ function makeMiniPackageJson0() {
       'smoke:full': 'node ./bin/runall0.mjs --full',
       runall: 'node ./bin/runall0.mjs',
       'release:audit': 'node ./bin/release-audit0.mjs',
+      'materialized:shell': 'node ./bin/check-materialized-shell0.mjs',
+      'materialized:shell:full': 'node ./bin/check-materialized-shell0.mjs --full',
+      'materialized:aggregate': 'node ./bin/check-materialized-aggregate0.mjs',
+      'materialized:aggregate:full': 'node ./bin/check-materialized-aggregate0.mjs --full',
+      'materialized:bridge': 'node ./bin/check-materialized-acceptance-bridge0.mjs',
+      'materialized:bridge:full': 'node ./bin/check-materialized-acceptance-bridge0.mjs --full',     
     },
   };
 }

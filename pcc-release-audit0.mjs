@@ -101,7 +101,8 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-materialized-aggregate0.test.mjs',
   'pcc-materialized-aggregate-cli0.test.mjs',
   'pcc-materialized-acceptance-bridge0.test.mjs',
-  'pcc-materialized-acceptance-bridge-cli0.test.mjs',              
+  'pcc-materialized-acceptance-bridge-cli0.test.mjs',
+  'pcc-materialized-path-readme0.test.mjs',                
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
@@ -117,6 +118,12 @@ export const RELEASE_AUDIT_REQUIRED_SCRIPTS0 = Object.freeze([
   'smoke:full',
   'runall',
   'release:audit',
+  'materialized:shell',
+  'materialized:shell:full',
+  'materialized:aggregate',
+  'materialized:aggregate:full',
+  'materialized:bridge',
+  'materialized:bridge:full',
 ]);
 
 export function makeReleaseAuditConfig0(overrides = {}) {
@@ -575,7 +582,8 @@ function expectedModuleForTest0(testFile) {
     'pcc-integrated-pipeline-tamper0': 'pcc-integrated-pipeline0.mjs',
     'pcc-release-audit0-negative': 'pcc-release-audit0.mjs',
     'pcc-materialized-aggregate-cli0': 'bin/check-materialized-aggregate0.mjs',
-    'pcc-materialized-acceptance-bridge-cli0': 'bin/check-materialized-acceptance-bridge0.mjs',  
+    'pcc-materialized-acceptance-bridge-cli0': 'bin/check-materialized-acceptance-bridge0.mjs',
+    'pcc-materialized-path-readme0': 'README.md',
   };
 
   if (Object.prototype.hasOwnProperty.call(explicit, stem)) {
