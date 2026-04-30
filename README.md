@@ -303,3 +303,27 @@ The claim boundary remains conditional:
 CheckPCCPackexp(GeneratePCCPack())=accept implies P = NP
 ```
 
+## Release audit materialized gate flags
+
+The release audit CLI can explicitly include or skip the materialized public status gate.
+
+```bash
+npm run release:audit -- --materialized-gate
+npm run release:audit -- --no-materialized-gate
+npm run release:audit:full -- --materialized-gate
+```
+
+The materialized gate can write its temporary fixtures to a chosen directory:
+
+```bash
+npm run release:audit -- --materialized-gate --materialized-gate-out ./materialized-public-status-roundtrip0
+```
+
+The inner CLI checks can be disabled for a faster local structural check:
+
+```bash
+npm run release:audit -- --materialized-gate --no-materialized-gate-cli
+```
+
+The materialized gate remains separate from synthetic `RunAll0`. It verifies deterministic external-file fixtures and the rule that only accepted replay emits the conditional public conclusion.
+

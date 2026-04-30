@@ -143,7 +143,8 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-materialized-public-status-roundtrip0.test.mjs',
   'pcc-materialized-public-status-release-gate0.test.mjs',
   'pcc-release-audit-materialized-gate0.test.mjs',
-  'pcc-release-audit-materialized-gate-negative0.test.mjs',                                                
+  'pcc-release-audit-materialized-gate-negative0.test.mjs',
+  'pcc-release-audit-cli-materialized-gate0.test.mjs',                                                
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
@@ -799,7 +800,8 @@ function expectedModuleForTest0(testFile) {
     'pcc-materialized-public-status-cli0': 'bin/check-materialized-public-status0.mjs',
     'pcc-materialized-public-status-release-gate0': 'README.md',
     'pcc-release-audit-materialized-gate0': 'pcc-release-audit0.mjs',
-    'pcc-release-audit-materialized-gate-negative0': 'pcc-release-audit0.mjs',          
+    'pcc-release-audit-materialized-gate-negative0': 'pcc-release-audit0.mjs',
+    'pcc-release-audit-cli-materialized-gate0': 'bin/release-audit0.mjs',              
   };
 
   if (Object.prototype.hasOwnProperty.call(explicit, stem)) {
