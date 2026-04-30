@@ -228,7 +228,9 @@ function makeMiniPackageJson0() {
       'materialized:write-fixtures': 'node ./bin/write-materialized-fixtures0.mjs',
       'materialized:write-fixtures:full': 'node ./bin/write-materialized-fixtures0.mjs --full',
       'materialized:resolve-digest': 'node ./bin/resolve-materialized-digest0.mjs',
-      'materialized:resolve-digest:full': 'node ./bin/resolve-materialized-digest0.mjs --full',           
+      'materialized:resolve-digest:full': 'node ./bin/resolve-materialized-digest0.mjs --full',
+      'materialized:accept-run': 'node ./bin/check-materialized-accept-run0.mjs',
+      'materialized:accept-run:full': 'node ./bin/check-materialized-accept-run0.mjs --full',                 
     },
   };
 }

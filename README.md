@@ -171,3 +171,23 @@ A canonical-envelope version can be written with:
 npm run materialized:write-fixtures -- ./materialized-fixtures0 --canonical
 ```
 
+## Internal materialized accept-run check
+
+The materialized accept-run checker reads an external `MaterializedAcceptRun0.json` file. It validates the generated package reference, aggregate check digest, replay transcript, audit logs, first-failure log, verdict, and public claim boundary.
+
+```bash
+npm run materialized:accept-run -- ./path/to/MaterializedAcceptRun0.json
+npm run materialized:accept-run:full -- ./path/to/MaterializedAcceptRun0.json
+```
+
+The accept-run envelope must not embed `Pgen`, `CoreBytes`, or `PackBytes`. It refers to the generated package by file path and checks the materialized aggregate digest.
+
+A public conclusion is emitted only when:
+
+```text
+ReplayTranscript.verdict = accept
+ReplayTranscript.replayAccepted = true
+```
+
+For `pending` or `reject`, no public `P = NP` conclusion is emitted.
+
