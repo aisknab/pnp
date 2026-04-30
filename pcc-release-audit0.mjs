@@ -52,7 +52,8 @@ export const RELEASE_AUDIT_REQUIRED_MODULES0 = Object.freeze([
   'pcc-materialized-artefact-deps0.mjs',
   'pcc-materialized-proof-refs0.mjs',
   'pcc-materialized-bounds0.mjs',
-  'pcc-materialized-no-hidden-min0.mjs',                 
+  'pcc-materialized-no-hidden-min0.mjs',
+  'pcc-materialized-imports0.mjs',                   
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
@@ -91,7 +92,8 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-materialized-artefact-deps0.test.mjs',
   'pcc-materialized-proof-refs0.test.mjs',
   'pcc-materialized-bounds0.test.mjs',
-  'pcc-materialized-no-hidden-min0.test.mjs',    
+  'pcc-materialized-no-hidden-min0.test.mjs',
+  'pcc-materialized-imports0.test.mjs',      
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
