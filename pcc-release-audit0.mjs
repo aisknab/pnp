@@ -148,7 +148,8 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-release-audit-cli-materialized-gate0.test.mjs',
   'pcc-release-audit-full-mode-gate-summary0.test.mjs',
   'pcc-release-audit-surface-freeze0.test.mjs',
-  'pcc-public-surface-freeze0.test.mjs',                                                      
+  'pcc-public-surface-freeze0.test.mjs',
+  'pcc-release-audit-public-surface-freeze0.test.mjs',                                                        
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
@@ -251,6 +252,8 @@ export function makeReleaseAuditConfig0(overrides = {}) {
     runRunAll: true,
     runMutationCheck: true,
     runCliSmoke: false,
+    runPublicSurfaceFreeze: true,
+    publicSurfaceFreezeRunner: null,
     runMaterializedPublicStatusGate: true,
     materializedPublicStatusGateRunner: null,
     materializedPublicStatusGateOutputDir: null,
@@ -279,6 +282,7 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
     ['runAllDeterminism', `${checker}.runAllDeterminism`, () => validateRunAllDeterminism0(cfg)],
     ['runAllMutation', `${checker}.runAllMutation`, () => validateRunAllMutation0(cfg)],
     ['cliSmoke', `${checker}.cliSmoke`, () => validateCliSmoke0(cfg)],
+    ['publicSurfaceFreeze', `${checker}.publicSurfaceFreeze`, () => validatePublicSurfaceFreeze0(cfg)],
     ['materializedPublicStatusGate', `${checker}.materializedPublicStatusGate`, () => validateMaterializedPublicStatusGate0(cfg)],
   ];
 
@@ -376,6 +380,7 @@ function validateConfig0(cfg) {
     'runRunAll',
     'runMutationCheck',
     'runCliSmoke',
+    'runPublicSurfaceFreeze',
     'runMaterializedPublicStatusGate',
     'materializedPublicStatusGateCanonicalEnvelopeBytes',
     'materializedPublicStatusGateRunCliChecks',
@@ -385,6 +390,15 @@ function validateConfig0(cfg) {
         actual: cfg[field],
       });
     }
+  }
+
+  if (
+    cfg.publicSurfaceFreezeRunner !== null &&
+    typeof cfg.publicSurfaceFreezeRunner !== 'function'
+  ) {
+    return validationReject0(['publicSurfaceFreezeRunner'], 'ReleaseAuditConfig0 publicSurfaceFreezeRunner must be null or a function', {
+      actual: typeof cfg.publicSurfaceFreezeRunner,
+    });
   }
 
   if (
@@ -761,6 +775,86 @@ async function validateCliSmoke0(cfg) {
   });
 }
 
+async function validatePublicSurfaceFreeze0(cfg) {
+  if (cfg.runPublicSurfaceFreeze !== true) {
+    return validationAccept0({
+      kind: 'PublicSurfaceFreezeSkipped0NF',
+    });
+  }
+
+  const runner = typeof cfg.publicSurfaceFreezeRunner === 'function'
+    ? cfg.publicSurfaceFreezeRunner
+    : async (runnerConfig) => {
+        const mod = await import('./pcc-public-surface-freeze0.mjs');
+
+        return mod.CheckPublicEntryReleaseSurface0(runnerConfig);
+      };
+
+  const record = await runner({
+    rootDir: cfg.rootDir,
+  });
+
+  if (record?.tag !== 'accept') {
+    return validationReject0(['publicSurfaceFreeze'], 'public release surface freeze checker rejected', {
+      inner: compactReject0(record),
+    });
+  }
+
+  const nf = record.NF ?? record.nf;
+
+  if (!isPlainObject(nf)) {
+    return validationReject0(['publicSurfaceFreeze', 'NF'], 'public release surface freeze checker must emit an NF object', {
+      actual: typeof nf,
+    });
+  }
+
+  if (nf.kind !== 'PublicEntryReleaseSurface0NF') {
+    return validationReject0(['publicSurfaceFreeze', 'NF', 'kind'], 'public release surface freeze checker emitted the wrong NF kind', {
+      actual: nf.kind,
+    });
+  }
+
+  if (nf.surfaceFrozen !== true) {
+    return validationReject0(['publicSurfaceFreeze', 'NF', 'surfaceFrozen'], 'public release surface freeze checker must certify surfaceFrozen=true', {
+      actual: nf.surfaceFrozen,
+    });
+  }
+
+  if (!Number.isInteger(nf.publicEntryExportCount) || nf.publicEntryExportCount <= 0) {
+    return validationReject0(['publicSurfaceFreeze', 'NF', 'publicEntryExportCount'], 'public release surface freeze checker must count public entry exports', {
+      actual: nf.publicEntryExportCount,
+    });
+  }
+
+  if (!Number.isInteger(nf.packageExportCount) || nf.packageExportCount <= 0) {
+    return validationReject0(['publicSurfaceFreeze', 'NF', 'packageExportCount'], 'public release surface freeze checker must count package exports', {
+      actual: nf.packageExportCount,
+    });
+  }
+
+  if (!Number.isInteger(nf.packageBinCount) || nf.packageBinCount <= 0) {
+    return validationReject0(['publicSurfaceFreeze', 'NF', 'packageBinCount'], 'public release surface freeze checker must count package bin entries', {
+      actual: nf.packageBinCount,
+    });
+  }
+
+  if (!Number.isInteger(nf.packageScriptCount) || nf.packageScriptCount <= 0) {
+    return validationReject0(['publicSurfaceFreeze', 'NF', 'packageScriptCount'], 'public release surface freeze checker must count package scripts', {
+      actual: nf.packageScriptCount,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'ReleasePublicSurfaceFreeze0NF',
+    publicEntryExportCount: nf.publicEntryExportCount,
+    packageExportCount: nf.packageExportCount,
+    packageBinCount: nf.packageBinCount,
+    packageScriptCount: nf.packageScriptCount,
+    surfaceFrozen: nf.surfaceFrozen,
+    publicSurfaceDigest: record.Digest ?? record.digest,
+  });
+}
+
 async function validateMaterializedPublicStatusGate0(cfg) {
   if (cfg.runMaterializedPublicStatusGate !== true) {
     return validationAccept0({
@@ -1054,7 +1148,8 @@ function expectedModuleForTest0(testFile) {
     'pcc-release-audit-materialized-gate-negative0': 'pcc-release-audit0.mjs',
     'pcc-release-audit-cli-materialized-gate0': 'bin/release-audit0.mjs',
     'pcc-release-audit-full-mode-gate-summary0': 'bin/release-audit0.mjs',
-    'pcc-release-audit-surface-freeze0': 'pcc-release-audit0.mjs',                      
+    'pcc-release-audit-surface-freeze0': 'pcc-release-audit0.mjs',
+    'pcc-release-audit-public-surface-freeze0': 'pcc-release-audit0.mjs',                          
   };
 
   if (Object.prototype.hasOwnProperty.call(explicit, stem)) {

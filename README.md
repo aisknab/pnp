@@ -399,3 +399,20 @@ The checker rejects missing keys, extra keys, and changed mapping values. This m
 
 This checker is internal. It freezes the current public entry rather than adding new public exports.
 
+## Release audit public surface freeze phase
+
+The release audit executes the public entry release surface freeze checker as a ledger phase named `publicSurfaceFreeze`.
+
+The phase verifies:
+
+```text
+index.mjs public export names
+package.json exports map
+package.json bin map
+package.json script map
+```
+
+The phase is separate from the materialized public-status gate. It protects the release API and command surface, while the materialized gate protects the external materialized acceptance path.
+
+The phase can be disabled only by configuration in internal tests. The default release audit enables it.
+
