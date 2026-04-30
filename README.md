@@ -83,3 +83,61 @@ npm run release:audit:full
 
 The release audit checks the public package surface, package exports, README claim boundary, stale duplicate ES modules under `src`, orphaned tests, syntax of checker modules, deterministic repeated `RunAll0` execution, and mutation safety of the synthetic full-stack input.
 
+## Internal materialized package path
+
+The materialized path is separate from synthetic `RunAll0` fixtures. It is for checking external JSON envelopes that represent future real generated proof artefacts.
+
+The current internal file-based flow is:
+
+```text
+MaterializedPCCPack0.json
+  -> CheckMaterializedPCCPackShell0
+  -> ExtractMaterializedCore0
+  -> CheckMaterializedPhaseManifest0
+  -> CheckMaterializedArtefactInventory0
+  -> CheckMaterializedArtefactDeps0
+  -> CheckMaterializedProofRefs0
+  -> CheckMaterializedBounds0
+  -> CheckMaterializedNoHiddenMin0
+  -> CheckMaterializedImports0
+  -> CheckMaterializedAggregate0
+```
+
+Run a shell check:
+
+```bash
+npm run materialized:shell -- ./path/to/MaterializedPCCPack0.json
+```
+
+Run the full aggregate check:
+
+```bash
+npm run materialized:aggregate -- ./path/to/MaterializedPCCPack0.json
+```
+
+Run the full aggregate check with complete output:
+
+```bash
+npm run materialized:aggregate:full -- ./path/to/MaterializedPCCPack0.json
+```
+
+The materialized acceptance bridge is separate. It verifies that a public conclusion is emitted only when both the materialized package precondition and the external replay are accepted.
+
+```bash
+npm run materialized:bridge -- ./path/to/MaterializedAcceptanceBridge0.json
+npm run materialized:bridge:full -- ./path/to/MaterializedAcceptanceBridge0.json
+```
+
+The bridge must not emit `P = NP` unless:
+
+```text
+CheckPCCPackexp status = accepted
+ExternalAcceptRunReplay verdict = accept
+```
+
+The public claim boundary remains conditional:
+
+```text
+CheckPCCPackexp(GeneratePCCPack())=accept implies P = NP
+```
+
