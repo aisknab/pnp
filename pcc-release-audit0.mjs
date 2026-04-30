@@ -55,7 +55,8 @@ export const RELEASE_AUDIT_REQUIRED_MODULES0 = Object.freeze([
   'pcc-materialized-no-hidden-min0.mjs',
   'pcc-materialized-imports0.mjs',
   'pcc-materialized-aggregate0.mjs',
-  'bin/check-materialized-aggregate0.mjs',                       
+  'bin/check-materialized-aggregate0.mjs',
+  'pcc-materialized-acceptance-bridge0.mjs',                       
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
@@ -97,7 +98,8 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-materialized-no-hidden-min0.test.mjs',
   'pcc-materialized-imports0.test.mjs',
   'pcc-materialized-aggregate0.test.mjs',
-  'pcc-materialized-aggregate-cli0.test.mjs',          
+  'pcc-materialized-aggregate-cli0.test.mjs',
+  'pcc-materialized-acceptance-bridge0.test.mjs',            
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
