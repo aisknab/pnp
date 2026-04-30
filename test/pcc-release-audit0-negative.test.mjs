@@ -246,7 +246,10 @@ function makeMiniPackageJson0() {
       'materialized:final-verdict:full': 'node ./bin/check-materialized-final-verdict0.mjs --full',
 
       'materialized:write-final-runs': 'node ./bin/write-materialized-final-run-fixtures0.mjs',
-      'materialized:write-final-runs:full': 'node ./bin/write-materialized-final-run-fixtures0.mjs --full',      
+      'materialized:write-final-runs:full': 'node ./bin/write-materialized-final-run-fixtures0.mjs --full',
+      
+      'materialized:public-status': 'node ./bin/check-materialized-public-status0.mjs',
+      'materialized:public-status:full': 'node ./bin/check-materialized-public-status0.mjs --full',      
     },
   };
 }

@@ -74,7 +74,8 @@ export const RELEASE_AUDIT_REQUIRED_MODULES0 = Object.freeze([
   'bin/write-materialized-final-run-fixtures0.mjs',
   'pcc-materialized-final-run-roundtrip0.mjs',
   'bin/check-materialized-final-run-roundtrip0.mjs',
-  'pcc-materialized-public-status0.mjs',                                               
+  'pcc-materialized-public-status0.mjs',
+  'bin/check-materialized-public-status0.mjs',                                                 
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
@@ -130,7 +131,8 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-materialized-final-verdict-cli0.test.mjs',
   'pcc-materialized-final-run-fixtures0.test.mjs',
   'pcc-materialized-final-run-roundtrip0.test.mjs',
-  'pcc-materialized-public-status0.test.mjs',                                      
+  'pcc-materialized-public-status0.test.mjs',
+  'pcc-materialized-public-status-cli0.test.mjs',                                        
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
@@ -163,7 +165,9 @@ export const RELEASE_AUDIT_REQUIRED_SCRIPTS0 = Object.freeze([
   'materialized:final-verdict',
   'materialized:final-verdict:full',
   'materialized:write-final-runs',
-  'materialized:write-final-runs:full',            
+  'materialized:write-final-runs:full',
+  'materialized:public-status',
+  'materialized:public-status:full',              
 ]);
 
 export function makeReleaseAuditConfig0(overrides = {}) {
@@ -626,6 +630,7 @@ function expectedModuleForTest0(testFile) {
     'pcc-materialized-path-readme0': 'README.md',
     'pcc-materialized-accept-run-cli0': 'bin/check-materialized-accept-run0.mjs',
     'pcc-materialized-final-verdict-cli0': 'bin/check-materialized-final-verdict0.mjs',
+    'pcc-materialized-public-status-cli0': 'bin/check-materialized-public-status0.mjs',  
   };
 
   if (Object.prototype.hasOwnProperty.call(explicit, stem)) {

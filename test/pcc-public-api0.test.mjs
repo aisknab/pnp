@@ -65,7 +65,9 @@ const REQUIRED_PUBLIC_SCRIPTS0 = Object.freeze([
   'materialized:final-verdict',
   'materialized:final-verdict:full',
   'materialized:write-final-runs',
-  'materialized:write-final-runs:full',          
+  'materialized:write-final-runs:full',
+  'materialized:public-status',
+  'materialized:public-status:full',            
 ]);
 
 test('index.mjs exports exactly the intended public API surface', () => {

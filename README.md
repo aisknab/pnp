@@ -249,3 +249,30 @@ Each file is verified through `CheckMaterializedFinalVerdictFile0` and the final
 
 Pending and reject final-run fixtures emit no public conclusion. The accepted final-run fixture emits the conditional public conclusion only after accepted replay.
 
+## Internal materialized public status check
+
+The materialized public status checker reads an external `MaterializedAcceptRun0.json` file, verifies it through the materialized final verdict checker, and emits a compact materialized-path status record.
+
+```bash
+npm run materialized:public-status -- ./path/to/MaterializedAcceptRun0.json
+npm run materialized:public-status:full -- ./path/to/MaterializedAcceptRun0.json
+```
+
+The materialized public status path is separate from synthetic `RunAll0`.
+
+The status is one of:
+
+```text
+pending
+rejected
+accepted
+```
+
+Only `accepted` emits the public conclusion. `pending` and `rejected` emit no public `P = NP` conclusion.
+
+The claim boundary remains conditional:
+
+```text
+CheckPCCPackexp(GeneratePCCPack())=accept implies P = NP
+```
+
