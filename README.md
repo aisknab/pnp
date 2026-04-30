@@ -443,3 +443,27 @@ package scripts are frozen
 
 This makes the public API and command surface freeze visible in the final release audit artefact.
 
+## Release audit public surface freeze negative coverage
+
+The release audit includes negative coverage for the public surface freeze phase.
+
+The negative checks prove that `CheckReleaseAudit0` rejects if the public surface freeze checker returns an accepted record with:
+
+```text
+wrong normal-form kind
+surfaceFrozen = false
+zero public entry export count
+zero package export count
+zero package bin count
+zero package script count
+missing normal form
+```
+
+All such failures surface at:
+
+```text
+CheckReleaseAudit0.publicSurfaceFreeze
+```
+
+This makes the public release surface freeze a checked release-audit invariant rather than a passive file inventory entry.
+
