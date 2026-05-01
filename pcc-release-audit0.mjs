@@ -83,7 +83,8 @@ export const RELEASE_AUDIT_REQUIRED_MODULES0 = Object.freeze([
   'bin/check-materialized-public-status0.mjs',
   'pcc-materialized-public-status-roundtrip0.mjs',
   'bin/check-materialized-public-status-roundtrip0.mjs',
-  'pcc-public-surface-freeze0.mjs',                                                       
+  'pcc-public-surface-freeze0.mjs',
+  'pcc-readme-release-boundary0.mjs',                                                         
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
@@ -153,8 +154,9 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-release-audit-public-surface-summary0.test.mjs', 
   'pcc-release-audit-public-surface-summary-negative0.test.mjs',
   'pcc-release-audit-phase-order-freeze0.test.mjs',
-  'pcc-release-audit-cli-hard-gate0.test.mjs',                                                               
-]);
+  'pcc-release-audit-cli-hard-gate0.test.mjs',
+  'pcc-readme-release-boundary0.test.mjs',
+]);    
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
   '.',
@@ -680,27 +682,28 @@ async function validateTestInventory0(cfg) {
 }
 
 async function validateReadme0(cfg) {
-  const readmePath = path.join(cfg.rootDir, 'README.md');
-  const text = await fs.readFile(readmePath, 'utf8');
+  const {
+    CheckReadmeReleaseBoundary0,
+  } = await import('./pcc-readme-release-boundary0.mjs');
 
-  const requiredSnippets = [
-    'Public RunAll0 entry point',
-    'CheckPCCPackexp(GeneratePCCPack())=accept implies P = NP',
-    'The generator is untrusted',
-    'canonical bytes rather than digest equality',
-    'Release audit',
-  ];
+  const record = await CheckReadmeReleaseBoundary0({
+    rootDir: cfg.rootDir,
+    readmePath: path.join(cfg.rootDir, 'README.md'),
+  });
 
-  for (const snippet of requiredSnippets) {
-    if (!text.includes(snippet)) {
-      return validationReject0(['README.md'], 'README is missing required public release wording', {
-        snippet,
-      });
-    }
+  if (record?.tag !== 'accept') {
+    return validationReject0(['README.md'], 'README release boundary checker rejected', {
+      inner: compactReject0(record),
+    });
   }
 
   return validationAccept0({
     kind: 'ReadmeReleaseWording0NF',
+    readmeBoundaryDigest: record.Digest ?? record.digest,
+    requiredSnippetCount: record.NF.requiredSnippetCount,
+    forbiddenSnippetCount: record.NF.forbiddenSnippetCount,
+    conditionalClaimBoundaryFrozen: record.NF.conditionalClaimBoundaryFrozen,
+    staleLayoutWordingRejected: record.NF.staleLayoutWordingRejected,
   });
 }
 

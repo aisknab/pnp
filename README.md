@@ -517,3 +517,11 @@ npm run release:audit -- --no-materialized-gate
 npm run release:audit -- --materialized-gate --materialized-gate-out ./materialized-public-status-roundtrip0
 ```
 
+## Release audit README wording freeze
+
+The README release-boundary wording is checked by `CheckReadmeReleaseBoundary0`.
+
+The checker freezes the conditional theorem boundary, release audit wording, hard-gate CLI wording, materialized status gate wording, public surface freeze wording, and stale-layout exclusions.
+
+It rejects missing required release-boundary snippets and legacy layout descriptions before they can enter the release audit artefact.
+
