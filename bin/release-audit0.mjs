@@ -8,6 +8,7 @@ import {
 const args = process.argv.slice(2);
 
 const full = hasFlag0('--full');
+const fastLocal = hasFlag0('--fast-local');
 const materializedGate = hasFlag0('--materialized-gate');
 const noMaterializedGate = hasFlag0('--no-materialized-gate');
 const materializedGateCli = hasFlag0('--materialized-gate-cli');
@@ -29,9 +30,13 @@ if (!argCheck.ok) {
 
   process.exitCode = 1;
 } else {
+  const runMaterializedPublicStatusGate = fastLocal
+    ? false
+    : (noMaterializedGate ? false : true);
+
   const out = await CheckReleaseAudit0({
     runCliSmoke: false,
-    runMaterializedPublicStatusGate: noMaterializedGate ? false : true,
+    runMaterializedPublicStatusGate,
     materializedPublicStatusGateRunCliChecks: noMaterializedGateCli ? false : true,
     materializedPublicStatusGateCanonicalEnvelopeBytes: materializedGateCanonical,
     ...(materializedGateOut === null ? {} : {
@@ -47,6 +52,36 @@ if (!argCheck.ok) {
 }
 
 function validateArgs0() {
+  if (fastLocal && materializedGate) {
+    return {
+      ok: false,
+      path: ['argv'],
+      witness: {
+        reason: 'release audit CLI cannot use both --fast-local and --materialized-gate',
+      },
+    };
+  }
+
+  if (fastLocal && materializedGateOut !== null) {
+    return {
+      ok: false,
+      path: ['argv', '--materialized-gate-out'],
+      witness: {
+        reason: 'release audit CLI cannot use --materialized-gate-out with --fast-local',
+      },
+    };
+  }
+
+  if (fastLocal && materializedGateCanonical) {
+    return {
+      ok: false,
+      path: ['argv'],
+      witness: {
+        reason: 'release audit CLI cannot use --materialized-gate-canonical with --fast-local',
+      },
+    };
+  }
+
   if (materializedGate && noMaterializedGate) {
     return {
       ok: false,

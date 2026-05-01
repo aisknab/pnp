@@ -81,7 +81,7 @@ For the full release audit record:
 npm run release:audit:full
 ```
 
-The release audit checks the public package surface, package exports, README claim boundary, stale duplicate ES modules under `src`, orphaned tests, syntax of checker modules, deterministic repeated `RunAll0` execution, and mutation safety of the synthetic full-stack input.
+The release audit checks the public package surface, package exports, README claim boundary, orphaned tests, syntax of checker modules, deterministic repeated `RunAll0` execution, mutation safety of the synthetic full-stack input, the public surface freeze phase, and the materialized public-status release gate.
 
 ## Internal materialized package path
 
@@ -490,4 +490,30 @@ surfaceFreeze
 ```
 
 The `surfaceFreeze` phase validates both the output surface and the phase order. Future phase insertions, deletions, or reorderings should fail loudly unless the frozen phase list is intentionally updated.
+
+## Release audit hard-gate default
+
+The default release audit CLI run executes the public surface freeze and the materialized public-status gate.
+
+```bash
+npm run release:audit
+npm run release:audit:full
+```
+
+For fast local structural checks, use:
+
+```bash
+npm run release:audit -- --fast-local
+npm run release:audit:full -- --fast-local
+```
+
+Fast local mode keeps the public surface freeze enabled and skips only the heavier materialized public-status roundtrip gate.
+
+The explicit gate flags remain available:
+
+```bash
+npm run release:audit -- --materialized-gate
+npm run release:audit -- --no-materialized-gate
+npm run release:audit -- --materialized-gate --materialized-gate-out ./materialized-public-status-roundtrip0
+```
 
