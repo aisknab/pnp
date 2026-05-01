@@ -467,3 +467,27 @@ CheckReleaseAudit0.publicSurfaceFreeze
 
 This makes the public release surface freeze a checked release-audit invariant rather than a passive file inventory entry.
 
+## Release audit phase-order freeze
+
+The release audit ledger phase order is frozen.
+
+The expected order is:
+
+```text
+shape
+requiredFiles
+staleSrc
+packageJson
+testInventory
+readme
+syntax
+runAllDeterminism
+runAllMutation
+cliSmoke
+publicSurfaceFreeze
+materializedPublicStatusGate
+surfaceFreeze
+```
+
+The `surfaceFreeze` phase validates both the output surface and the phase order. Future phase insertions, deletions, or reorderings should fail loudly unless the frozen phase list is intentionally updated.
+

@@ -151,7 +151,8 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-public-surface-freeze0.test.mjs',
   'pcc-release-audit-public-surface-freeze0.test.mjs',
   'pcc-release-audit-public-surface-summary0.test.mjs', 
-  'pcc-release-audit-public-surface-summary-negative0.test.mjs',                                                           
+  'pcc-release-audit-public-surface-summary-negative0.test.mjs',
+  'pcc-release-audit-phase-order-freeze0.test.mjs',                                                             
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
@@ -279,6 +280,22 @@ export const RELEASE_AUDIT_PUBLIC_SURFACE_FREEZE_SUMMARY_KEYS0 = Object.freeze([
   'publicSurfaceDigest',
 ]);
 
+export const RELEASE_AUDIT_PHASE_ORDER0 = Object.freeze([
+  'shape',
+  'requiredFiles',
+  'staleSrc',
+  'packageJson',
+  'testInventory',
+  'readme',
+  'syntax',
+  'runAllDeterminism',
+  'runAllMutation',
+  'cliSmoke',
+  'publicSurfaceFreeze',
+  'materializedPublicStatusGate',
+  'surfaceFreeze',
+]);
+
 export function makeReleaseAuditConfig0(overrides = {}) {
   return {
     kind: 'ReleaseAuditConfig0',
@@ -392,7 +409,12 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
     publicConclusion: RUNALL_PUBLIC_CONCLUSION0,
   };
 
-  const surface = validateReleaseAuditSurface0(nf);
+  const phaseOrderForSurfaceFreeze = [
+    ...ledger.map((entry) => entry.phase),
+    'surfaceFreeze',
+  ];
+
+  const surface = validateReleaseAuditSurface0(nf, phaseOrderForSurfaceFreeze);
 
   ledger.push({
     phase: 'surfaceFreeze',
@@ -1144,7 +1166,7 @@ export function summarizeReleaseAudit0(out) {
   };
 }
 
-export function validateReleaseAuditSurface0(nf) {
+export function validateReleaseAuditSurface0(nf, phaseOrder = null) {
   const nfKeys = validateExactObjectKeys0(nf, RELEASE_AUDIT_NF_KEYS0, ['NF']);
 
   if (!nfKeys.ok) {
@@ -1171,11 +1193,42 @@ export function validateReleaseAuditSurface0(nf) {
     return gateSummaryKeys;
   }
 
+  if (phaseOrder !== null) {
+    const phaseOrderCheck = validateReleaseAuditPhaseOrder0(phaseOrder);
+
+    if (!phaseOrderCheck.ok) {
+      return phaseOrderCheck;
+    }
+  }
+
   return validationAccept0({
     kind: 'ReleaseAuditSurfaceFreeze0NF',
     nfKeys: RELEASE_AUDIT_NF_KEYS0,
     publicSurfaceSummaryKeys: RELEASE_AUDIT_PUBLIC_SURFACE_FREEZE_SUMMARY_KEYS0,
     materializedGateSummaryKeys: RELEASE_AUDIT_MATERIALIZED_GATE_SUMMARY_KEYS0,
+    phaseOrder: phaseOrder ?? RELEASE_AUDIT_PHASE_ORDER0,
+  });
+}
+
+export function validateReleaseAuditPhaseOrder0(phaseOrder) {
+  if (!Array.isArray(phaseOrder)) {
+    return validationReject0(['Ledger'], 'release audit phase order must be an array', {
+      actual: typeof phaseOrder,
+    });
+  }
+
+  if (stableStringify0(phaseOrder) !== stableStringify0(RELEASE_AUDIT_PHASE_ORDER0)) {
+    return validationReject0(['Ledger', 'phaseOrder'], 'release audit phase order changed', {
+      expectedPhaseOrder: RELEASE_AUDIT_PHASE_ORDER0,
+      actualPhaseOrder: phaseOrder,
+      missingPhases: RELEASE_AUDIT_PHASE_ORDER0.filter((phase) => !phaseOrder.includes(phase)),
+      extraPhases: phaseOrder.filter((phase) => !RELEASE_AUDIT_PHASE_ORDER0.includes(phase)),
+    });
+  }
+
+  return validationAccept0({
+    kind: 'ReleaseAuditPhaseOrderFreeze0NF',
+    phaseOrder,
   });
 }
 
@@ -1265,7 +1318,8 @@ function expectedModuleForTest0(testFile) {
     'pcc-release-audit-surface-freeze0': 'pcc-release-audit0.mjs',
     'pcc-release-audit-public-surface-freeze0': 'pcc-release-audit0.mjs',
     'pcc-release-audit-public-surface-summary0': 'pcc-release-audit0.mjs',
-    'pcc-release-audit-public-surface-summary-negative0': 'pcc-release-audit0.mjs',                                  
+    'pcc-release-audit-public-surface-summary-negative0': 'pcc-release-audit0.mjs',
+    'pcc-release-audit-phase-order-freeze0': 'pcc-release-audit0.mjs',                                      
   };
 
   if (Object.prototype.hasOwnProperty.call(explicit, stem)) {
