@@ -525,3 +525,15 @@ The checker freezes the conditional theorem boundary, release audit wording, har
 
 It rejects missing required release-boundary snippets and legacy layout descriptions before they can enter the release audit artefact.
 
+## Release audit README negative integration
+
+The release audit README phase is backed by `CheckReadmeReleaseBoundary0`.
+
+The integration proves that stale layout wording, overclaiming theorem wording, malformed README-boundary normal forms, and disabled README boundary claims reject at:
+
+```text
+CheckReleaseAudit0.readme
+```
+
+This makes README claim-boundary validation an active release-audit gate rather than passive prose checking.
+

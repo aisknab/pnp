@@ -28,6 +28,7 @@ export const README_RELEASE_BOUNDARY_REQUIRED_SNIPPETS0 = Object.freeze([
   'Public entry release surface freeze',
   'Release audit phase-order freeze',
   'Release audit README wording freeze',
+  'Release audit README negative integration',  
 ]);
 
 export const README_RELEASE_BOUNDARY_FORBIDDEN_SNIPPETS0 = Object.freeze([

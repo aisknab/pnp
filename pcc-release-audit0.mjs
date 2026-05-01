@@ -156,6 +156,7 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-release-audit-phase-order-freeze0.test.mjs',
   'pcc-release-audit-cli-hard-gate0.test.mjs',
   'pcc-readme-release-boundary0.test.mjs',
+  'pcc-release-audit-readme-negative0.test.mjs',  
 ]);    
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
@@ -308,6 +309,7 @@ export function makeReleaseAuditConfig0(overrides = {}) {
     runRunAll: true,
     runMutationCheck: true,
     runCliSmoke: false,
+    readmeReleaseBoundaryRunner: null,
     runPublicSurfaceFreeze: true,
     publicSurfaceFreezeRunner: null,
     runMaterializedPublicStatusGate: true,
@@ -470,6 +472,15 @@ function validateConfig0(cfg) {
         actual: cfg[field],
       });
     }
+  }
+
+  if (
+    cfg.readmeReleaseBoundaryRunner !== null &&
+    typeof cfg.readmeReleaseBoundaryRunner !== 'function'
+  ) {
+    return validationReject0(['readmeReleaseBoundaryRunner'], 'ReleaseAuditConfig0 readmeReleaseBoundaryRunner must be null or a function', {
+      actual: typeof cfg.readmeReleaseBoundaryRunner,
+    });
   }
 
   if (
@@ -682,13 +693,21 @@ async function validateTestInventory0(cfg) {
 }
 
 async function validateReadme0(cfg) {
-  const {
-    CheckReadmeReleaseBoundary0,
-  } = await import('./pcc-readme-release-boundary0.mjs');
+  const readmePath = path.join(cfg.rootDir, 'README.md');
 
-  const record = await CheckReadmeReleaseBoundary0({
+  const runner = typeof cfg.readmeReleaseBoundaryRunner === 'function'
+    ? cfg.readmeReleaseBoundaryRunner
+    : async (runnerConfig) => {
+        const {
+          CheckReadmeReleaseBoundary0,
+        } = await import('./pcc-readme-release-boundary0.mjs');
+
+        return CheckReadmeReleaseBoundary0(runnerConfig);
+      };
+
+  const record = await runner({
     rootDir: cfg.rootDir,
-    readmePath: path.join(cfg.rootDir, 'README.md'),
+    readmePath,
   });
 
   if (record?.tag !== 'accept') {
@@ -697,13 +716,51 @@ async function validateReadme0(cfg) {
     });
   }
 
+  const nf = record.NF ?? record.nf;
+
+  if (!isPlainObject(nf)) {
+    return validationReject0(['README.md', 'NF'], 'README release boundary checker must emit an NF object', {
+      actual: typeof nf,
+    });
+  }
+
+  if (nf.kind !== 'ReadmeReleaseBoundary0NF') {
+    return validationReject0(['README.md', 'NF', 'kind'], 'README release boundary checker emitted the wrong NF kind', {
+      actual: nf.kind,
+    });
+  }
+
+  if (!Number.isInteger(nf.requiredSnippetCount) || nf.requiredSnippetCount <= 0) {
+    return validationReject0(['README.md', 'NF', 'requiredSnippetCount'], 'README release boundary checker must count required snippets', {
+      actual: nf.requiredSnippetCount,
+    });
+  }
+
+  if (!Number.isInteger(nf.forbiddenSnippetCount) || nf.forbiddenSnippetCount <= 0) {
+    return validationReject0(['README.md', 'NF', 'forbiddenSnippetCount'], 'README release boundary checker must count forbidden snippets', {
+      actual: nf.forbiddenSnippetCount,
+    });
+  }
+
+  if (nf.conditionalClaimBoundaryFrozen !== true) {
+    return validationReject0(['README.md', 'NF', 'conditionalClaimBoundaryFrozen'], 'README release boundary checker must certify conditionalClaimBoundaryFrozen=true', {
+      actual: nf.conditionalClaimBoundaryFrozen,
+    });
+  }
+
+  if (nf.staleLayoutWordingRejected !== true) {
+    return validationReject0(['README.md', 'NF', 'staleLayoutWordingRejected'], 'README release boundary checker must certify staleLayoutWordingRejected=true', {
+      actual: nf.staleLayoutWordingRejected,
+    });
+  }
+
   return validationAccept0({
     kind: 'ReadmeReleaseWording0NF',
     readmeBoundaryDigest: record.Digest ?? record.digest,
-    requiredSnippetCount: record.NF.requiredSnippetCount,
-    forbiddenSnippetCount: record.NF.forbiddenSnippetCount,
-    conditionalClaimBoundaryFrozen: record.NF.conditionalClaimBoundaryFrozen,
-    staleLayoutWordingRejected: record.NF.staleLayoutWordingRejected,
+    requiredSnippetCount: nf.requiredSnippetCount,
+    forbiddenSnippetCount: nf.forbiddenSnippetCount,
+    conditionalClaimBoundaryFrozen: nf.conditionalClaimBoundaryFrozen,
+    staleLayoutWordingRejected: nf.staleLayoutWordingRejected,
   });
 }
 
@@ -1324,7 +1381,8 @@ function expectedModuleForTest0(testFile) {
     'pcc-release-audit-public-surface-summary0': 'pcc-release-audit0.mjs',
     'pcc-release-audit-public-surface-summary-negative0': 'pcc-release-audit0.mjs',
     'pcc-release-audit-phase-order-freeze0': 'pcc-release-audit0.mjs',
-    'pcc-release-audit-cli-hard-gate0': 'bin/release-audit0.mjs',                                          
+    'pcc-release-audit-cli-hard-gate0': 'bin/release-audit0.mjs',
+    'pcc-release-audit-readme-negative0': 'pcc-release-audit0.mjs',                                              
   };
 
   if (Object.prototype.hasOwnProperty.call(explicit, stem)) {
