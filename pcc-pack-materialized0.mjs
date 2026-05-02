@@ -34,6 +34,11 @@ import {
 } from './pcc-rows-materialized0.mjs';
 
 import {
+  CheckConcreteMaterializedRows0,
+  makeConcreteMaterializedRows0,
+} from './pcc-rows-concrete-materialized0.mjs';
+
+import {
   CheckMaterializedGlobalProofDAG0,
   makeMaterializedGlobalProofDAG0,
 } from './pcc-global-proof-dag-materialized0.mjs';
@@ -101,7 +106,9 @@ export async function makeMaterializedPCCPack0({
   const hardEnvelope = HardEnvelope ?? makeMaterializedHard0();
   const hardCheck = resolveHardCheck0(hardEnvelope);
 
-  const rowsEnvelope = RowsEnvelope ?? makeMaterializedRows0();
+  const rowsEnvelope = RowsEnvelope ?? await makeConcreteMaterializedRows0({
+    Boot0: boot0,
+  });
   const rowPack = resolveRowPack0(rowsEnvelope);
 
   const globalProofDAGEnvelope = GlobalProofDAGEnvelope ?? await makeMaterializedGlobalProofDAG0({
@@ -499,6 +506,8 @@ export async function CheckMaterializedPCCPack0(input, config = makeMaterialized
     theoremIds: packNF.theoremIds ?? [],
     publicConclusion: packNF.publicConclusion ?? null,
     generatedPackageAssumption: packNF.generatedPackageAssumption ?? null,
+    rowsEnvelopeKind: envelope.RowsEnvelope?.kind ?? null,
+    concreteRows: isPlainObject(envelope.RowsEnvelope) && envelope.RowsEnvelope.kind === 'ConcreteMaterializedRows0',
     syntheticMarkerCount: markerInventory.syntheticMarkerCount,
     forbiddenMarkerCount: markerInventory.forbiddenMarkerCount,
     allowSyntheticScaffoldMarker: cfg.allowSyntheticScaffoldMarker,
@@ -676,12 +685,20 @@ function validateShape0(envelope) {
   });
 }
 
+async function checkMaterializedRowsEnvelope0(value) {
+  if (isPlainObject(value) && value.kind === 'ConcreteMaterializedRows0') {
+    return CheckConcreteMaterializedRows0(value);
+  }
+
+  return CheckMaterializedRows0(value);
+}
+
 async function validateMaterializedComponents0(envelope) {
   const componentChecks = [
     ['MaterializedBoot0', await CheckMaterializedBoot0(resolveBoot0(envelope.MaterializedBoot0) ?? envelope.PCCPack.Boot0)],
     ['KBundleEnvelope', await CheckMaterializedKBundle0(envelope.KBundleEnvelope)],
     ['HardEnvelope', await CheckMaterializedHard0(envelope.HardEnvelope)],
-    ['RowsEnvelope', await CheckMaterializedRows0(envelope.RowsEnvelope)],
+    ['RowsEnvelope', await checkMaterializedRowsEnvelope0(envelope.RowsEnvelope)],
     ['GlobalProofDAGEnvelope', await CheckMaterializedGlobalProofDAG0(envelope.GlobalProofDAGEnvelope)],
     ['LocalPackagesEnvelope', await CheckMaterializedLocalPackages0(envelope.LocalPackagesEnvelope)],
     ['GlobalFirewallsEnvelope', await CheckMaterializedGlobalFirewalls0(envelope.GlobalFirewallsEnvelope)],

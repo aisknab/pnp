@@ -120,8 +120,24 @@ test('CheckMaterializedPCCPack0 rejects forbidden fixture marker text', async ()
   assert.equal(out.Coord, 'CheckMaterializedPCCPack0.fixtureMarkers');
 });
 
-test('CheckMaterializedPCCPack0 can strictly reject current synthetic scaffold markers', async () => {
+test('CheckMaterializedPCCPack0 strictly rejects an injected synthetic scaffold marker', async () => {
   const envelope = await makeMaterializedPCCPack0();
+
+  envelope.PCCPack = {
+    ...envelope.PCCPack,
+    PackSufficiencyTheorem: {
+      ...envelope.PCCPack.PackSufficiencyTheorem,
+      PiPackSufficiency: {
+        ...envelope.PCCPack.PackSufficiencyTheorem.PiPackSufficiency,
+        note: 'synthetic marker must reject in strict marker mode',
+      },
+    },
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    pccPackDigest: undefined,
+  };
 
   const out = await CheckMaterializedPCCPack0(envelope, {
     allowSyntheticScaffoldMarker: false,
@@ -130,6 +146,7 @@ test('CheckMaterializedPCCPack0 can strictly reject current synthetic scaffold m
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedPCCPack0');
   assert.equal(out.Coord, 'CheckMaterializedPCCPack0.fixtureMarkers');
+  assert.equal(out.Witness.detail.hit.marker, 'synthetic');
 });
 
 test('CheckMaterializedPCCPack0 rejects stale linkage digest', async () => {
@@ -179,4 +196,21 @@ test('writeMaterializedPCCPackFiles0 writes replayable JSON artefacts', async (t
 
     assert.equal(typeof value, 'object');
   }
+});
+
+test('makeMaterializedPCCPack0 uses concrete materialized rows by default', async () => {
+  const envelope = await makeMaterializedPCCPack0();
+
+  assert.equal(envelope.RowsEnvelope.kind, 'ConcreteMaterializedRows0');
+  assert.equal(envelope.RowsEnvelope.RowPack.kind, 'RowPack0');
+  assert.equal(envelope.PCCPack.RowPack.IfaceHash.hex, envelope.RowsEnvelope.RowPack.IfaceHash.hex);
+  assert.equal(envelope.PCCPack.RowPack.SchedHash.hex, envelope.RowsEnvelope.RowPack.SchedHash.hex);
+  assert.equal(envelope.PCCPack.RowPack.Rows.some((row) => row.IfaceHash === 'IfaceDict0.synthetic'), false);
+
+  const out = await CheckMaterializedPCCPack0(envelope);
+
+  assert.equal(out.tag, 'accept');
+  assert.equal(out.checker, 'CheckMaterializedPCCPack0');
+  assert.equal(out.NF.rowsEnvelopeKind, 'ConcreteMaterializedRows0');
+  assert.equal(out.NF.concreteRows, true);
 });
