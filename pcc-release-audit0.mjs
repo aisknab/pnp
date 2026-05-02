@@ -211,6 +211,9 @@ export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
   './integrated-pipeline0',
   './accept-run0',
   './release-audit0',
+  './final-certificate0',
+  './final-certificate-public-status0',
+  './release-audit-final-certificate-gate0',
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_SCRIPTS0 = Object.freeze([
@@ -749,6 +752,9 @@ async function validatePackageJson0(cfg) {
     './integrated-pipeline0': './pcc-integrated-pipeline0.mjs',
     './accept-run0': './pcc-accept-run0.mjs',
     './release-audit0': './pcc-release-audit0.mjs',
+    './final-certificate0': './pcc-final-certificate-materialized0.mjs',
+    './final-certificate-public-status0': './pcc-final-certificate-public-status0.mjs',
+    './release-audit-final-certificate-gate0': './pcc-release-audit-final-certificate-gate0.mjs',
   };
 
   for (const [key, expected] of Object.entries(expectedExports)) {

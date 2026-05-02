@@ -55,6 +55,9 @@ export const PUBLIC_PACKAGE_EXPORTS0 = Object.freeze({
   './accept-run0': './pcc-accept-run0.mjs',
   './integrated-pipeline0': './pcc-integrated-pipeline0.mjs',
   './release-audit0': './pcc-release-audit0.mjs',
+  './final-certificate0': './pcc-final-certificate-materialized0.mjs',
+  './final-certificate-public-status0': './pcc-final-certificate-public-status0.mjs',
+  './release-audit-final-certificate-gate0': './pcc-release-audit-final-certificate-gate0.mjs',
   './runall0': './pcc-runall0.mjs',
 });
 

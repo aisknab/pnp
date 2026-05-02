@@ -48,6 +48,9 @@ const EXPECTED_PACKAGE_EXPORTS0 = Object.freeze({
   './integrated-pipeline0': './pcc-integrated-pipeline0.mjs',
   './accept-run0': './pcc-accept-run0.mjs',
   './release-audit0': './pcc-release-audit0.mjs',
+  './final-certificate0': './pcc-final-certificate-materialized0.mjs',
+  './final-certificate-public-status0': './pcc-final-certificate-public-status0.mjs',
+  './release-audit-final-certificate-gate0': './pcc-release-audit-final-certificate-gate0.mjs',
 });
 
 const EXPECTED_BIN_EXPORTS0 = Object.freeze({
@@ -163,4 +166,22 @@ test('release audit constants agree with package exports and scripts', () => {
   for (const script of publicApi.RELEASE_AUDIT_REQUIRED_SCRIPTS0) {
     assert.equal(REQUIRED_PUBLIC_SCRIPTS0.includes(script), true);
   }
+});
+
+test('package subpath exports expose final-certificate gates', async () => {
+  const finalCertificate = await import('@aisknab/pnp/final-certificate0');
+  const publicStatus = await import('@aisknab/pnp/final-certificate-public-status0');
+  const releaseGate = await import('@aisknab/pnp/release-audit-final-certificate-gate0');
+
+  assert.equal(typeof finalCertificate.CheckMaterializedFinalCertificate0, 'function');
+  assert.equal(typeof finalCertificate.makeMaterializedFinalCertificate0, 'function');
+  assert.equal(typeof finalCertificate.writeMaterializedFinalCertificateFiles0, 'function');
+
+  assert.equal(typeof publicStatus.CheckFinalCertificatePublicStatus0, 'function');
+  assert.equal(typeof publicStatus.makeFinalCertificatePublicStatus0, 'function');
+  assert.equal(Array.isArray(publicStatus.FINAL_CERTIFICATE_PUBLIC_STATUS_PHASES0), true);
+
+  assert.equal(typeof releaseGate.CheckReleaseAuditFinalCertificateGate0, 'function');
+  assert.equal(typeof releaseGate.makeReleaseAuditFinalCertificateGate0, 'function');
+  assert.equal(Array.isArray(releaseGate.RELEASE_AUDIT_FINAL_CERTIFICATE_GATE_PHASES0), true);
 });
