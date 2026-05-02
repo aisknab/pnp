@@ -26,6 +26,20 @@ const EXPECTED_INDEX_EXPORTS0 = Object.freeze([
   'makeSyntheticIntegratedPipeline0',
   'makeSyntheticRejectAcceptRun0',
   'makeSyntheticRunAllInput0',
+  'CheckMaterializedFinalCertificate0',
+  'makeMaterializedFinalCertificate0',
+  'makeMaterializedFinalCertificateConfig0',
+  'writeMaterializedFinalCertificateFiles0',
+  'CheckFinalCertificatePublicStatus0',
+  'FINAL_CERTIFICATE_PUBLIC_STATUS_PHASES0',
+  'makeFinalCertificatePublicStatus0',
+  'makeFinalCertificatePublicStatusConfig0',
+  'writeFinalCertificatePublicStatusFiles0',
+  'CheckReleaseAuditFinalCertificateGate0',
+  'RELEASE_AUDIT_FINAL_CERTIFICATE_GATE_PHASES0',
+  'makeReleaseAuditFinalCertificateGate0',
+  'makeReleaseAuditFinalCertificateGateConfig0',
+  'writeReleaseAuditFinalCertificateGateFiles0',
 ].sort());
 
 const EXPECTED_PACKAGE_EXPORTS0 = Object.freeze({
@@ -70,6 +84,12 @@ const REQUIRED_PUBLIC_SCRIPTS0 = Object.freeze([
   'materialized:public-status:full',
   'materialized:public-status-roundtrip',
   'materialized:public-status-roundtrip:full',              
+  'materialized:final-certificate',
+  'materialized:final-certificate:full',
+  'materialized:final-certificate-public-status',
+  'materialized:final-certificate-public-status:full',
+  'release:audit:final-certificate-gate',
+  'release:audit:final-certificate-gate:full',
 ]);
 
 test('index.mjs exports exactly the intended public API surface', () => {

@@ -30,3 +30,26 @@ export {
   RELEASE_AUDIT_REQUIRED_TESTS0,
   makeReleaseAuditConfig0,
 } from './pcc-release-audit0.mjs';
+
+export {
+  CheckMaterializedFinalCertificate0,
+  makeMaterializedFinalCertificate0,
+  makeMaterializedFinalCertificateConfig0,
+  writeMaterializedFinalCertificateFiles0,
+} from './pcc-final-certificate-materialized0.mjs';
+
+export {
+  CheckFinalCertificatePublicStatus0,
+  FINAL_CERTIFICATE_PUBLIC_STATUS_PHASES0,
+  makeFinalCertificatePublicStatus0,
+  makeFinalCertificatePublicStatusConfig0,
+  writeFinalCertificatePublicStatusFiles0,
+} from './pcc-final-certificate-public-status0.mjs';
+
+export {
+  CheckReleaseAuditFinalCertificateGate0,
+  RELEASE_AUDIT_FINAL_CERTIFICATE_GATE_PHASES0,
+  makeReleaseAuditFinalCertificateGate0,
+  makeReleaseAuditFinalCertificateGateConfig0,
+  writeReleaseAuditFinalCertificateGateFiles0,
+} from './pcc-release-audit-final-certificate-gate0.mjs';
