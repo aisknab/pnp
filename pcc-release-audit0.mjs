@@ -21,6 +21,12 @@ import {
   makeSyntheticRunAllInput0,
 } from './pcc-runall0.mjs';
 
+import {
+  CheckFinalCertificatePublicStatus0,
+  makeFinalCertificatePublicStatus0,
+  writeFinalCertificatePublicStatusFiles0,
+} from './pcc-final-certificate-public-status0.mjs';
+
 const CHECKER_VERSION = 0;
 const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
 
@@ -83,6 +89,32 @@ export const RELEASE_AUDIT_REQUIRED_MODULES0 = Object.freeze([
   'bin/check-materialized-public-status0.mjs',
   'pcc-materialized-public-status-roundtrip0.mjs',
   'bin/check-materialized-public-status-roundtrip0.mjs',
+  'pcc-boot-materialized0.mjs',
+  'bin/write-materialized-boot0.mjs',
+  'pcc-k-materialized0.mjs',
+  'bin/write-materialized-kbundle0.mjs',
+  'pcc-global-proof-dag-materialized0.mjs',
+  'bin/write-materialized-global-proof-dag0.mjs',
+  'pcc-hard-materialized0.mjs',
+  'bin/write-materialized-hard0.mjs',
+  'pcc-rows-materialized0.mjs',
+  'bin/write-materialized-rows0.mjs',
+  'pcc-local-packages-materialized0.mjs',
+  'bin/write-materialized-local-packages0.mjs',
+  'pcc-global-firewalls-materialized0.mjs',
+  'bin/write-materialized-global-firewalls0.mjs',
+  'pcc-final-integration-materialized0.mjs',
+  'bin/write-materialized-final-integration0.mjs',
+  'pcc-pack-materialized0.mjs',
+  'bin/write-materialized-pcc-pack0.mjs',
+  'pcc-accept-run-materialized0.mjs',
+  'bin/write-materialized-accept-run0.mjs',
+  'pcc-final-certificate-materialized0.mjs',
+  'bin/write-materialized-final-certificate0.mjs',
+  'pcc-final-certificate-public-status0.mjs',
+  'bin/write-final-certificate-public-status0.mjs',
+  'pcc-release-audit-final-certificate-gate0.mjs',
+  'bin/write-release-audit-final-certificate-gate0.mjs',  
   'pcc-public-surface-freeze0.mjs',
   'pcc-readme-release-boundary0.mjs',                                                         
 ]);
@@ -148,6 +180,19 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-release-audit-materialized-gate-negative0.test.mjs',
   'pcc-release-audit-cli-materialized-gate0.test.mjs',
   'pcc-release-audit-full-mode-gate-summary0.test.mjs',
+  'pcc-boot-materialized0.test.mjs',
+  'pcc-k-materialized0.test.mjs',
+  'pcc-global-proof-dag-materialized0.test.mjs',
+  'pcc-hard-materialized0.test.mjs',
+  'pcc-rows-materialized0.test.mjs',
+  'pcc-local-packages-materialized0.test.mjs',
+  'pcc-global-firewalls-materialized0.test.mjs',
+  'pcc-final-integration-materialized0.test.mjs',
+  'pcc-pack-materialized0.test.mjs',
+  'pcc-accept-run-materialized0.test.mjs',
+  'pcc-final-certificate-materialized0.test.mjs',
+  'pcc-final-certificate-public-status0.test.mjs',
+  'pcc-release-audit-final-certificate-gate0.test.mjs',  
   'pcc-release-audit-surface-freeze0.test.mjs',
   'pcc-public-surface-freeze0.test.mjs',
   'pcc-release-audit-public-surface-freeze0.test.mjs',
@@ -156,7 +201,8 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-release-audit-phase-order-freeze0.test.mjs',
   'pcc-release-audit-cli-hard-gate0.test.mjs',
   'pcc-readme-release-boundary0.test.mjs',
-  'pcc-release-audit-readme-negative0.test.mjs',  
+  'pcc-release-audit-readme-negative0.test.mjs',
+  'pcc-release-audit-final-certificate-surface0.test.mjs',    
 ]);    
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
@@ -213,6 +259,30 @@ export const RELEASE_AUDIT_MATERIALIZED_GATE_SUMMARY_KEYS0 = Object.freeze([
   'gateDigest',
 ]);
 
+export const RELEASE_AUDIT_FINAL_CERTIFICATE_PUBLIC_STATUS_SUMMARY_KEYS0 = Object.freeze([
+  'kind',
+  'enabled',
+  'skipped',
+  'outputDir',
+  'canonicalEnvelopeBytes',
+  'status',
+  'verdict',
+  'materializedPath',
+  'syntheticRunAll',
+  'publicConclusionEmitted',
+  'publicConclusion',
+  'certificateDigest',
+  'finalVerdictDigest',
+  'acceptRunDigest',
+  'pccPackDigest',
+  'canonicalByteRoots',
+  'acceptanceTranscript',
+  'releaseAuditAttached',
+  'releaseAuditDigest',
+  'releaseAuditStatus',
+  'gateDigest',
+]);
+
 export const RELEASE_AUDIT_NF_KEYS0 = Object.freeze([
   'kind',
   'checker',
@@ -241,6 +311,18 @@ export const RELEASE_AUDIT_NF_KEYS0 = Object.freeze([
   'materializedPublicStatusGateCliRecordCount',
   'materializedPublicStatusGateAcceptedPublicConclusionOnly',
 
+  'finalCertificatePublicStatusGate',
+  'finalCertificatePublicStatusGateSummary',
+  'finalCertificatePublicStatusGateDigest',
+  'finalCertificatePublicStatusGateStatus',
+  'finalCertificatePublicStatusGateVerdict',
+  'finalCertificatePublicStatusGatePublicConclusionEmitted',
+  'finalCertificatePublicStatusGateCertificateDigest',
+  'finalCertificatePublicStatusGateFinalVerdictDigest',
+  'finalCertificatePublicStatusGateAcceptRunDigest',
+  'finalCertificatePublicStatusGatePccPackDigest',
+  'finalCertificatePublicStatusGateReleaseAuditAttached',  
+
   'publicConclusion',
 ]);
 
@@ -267,6 +349,18 @@ export const RELEASE_AUDIT_CLI_SUMMARY_KEYS0 = Object.freeze([
   'materializedPublicStatusGateDirectRecordCount',
   'materializedPublicStatusGateCliRecordCount',
   'materializedPublicStatusGateAcceptedPublicConclusionOnly',
+
+  'finalCertificatePublicStatusGate',
+  'finalCertificatePublicStatusGateSummary',
+  'finalCertificatePublicStatusGateDigest',
+  'finalCertificatePublicStatusGateStatus',
+  'finalCertificatePublicStatusGateVerdict',
+  'finalCertificatePublicStatusGatePublicConclusionEmitted',
+  'finalCertificatePublicStatusGateCertificateDigest',
+  'finalCertificatePublicStatusGateFinalVerdictDigest',
+  'finalCertificatePublicStatusGateAcceptRunDigest',
+  'finalCertificatePublicStatusGatePccPackDigest',
+  'finalCertificatePublicStatusGateReleaseAuditAttached',  
 
   'publicConclusion',
   'digest',
@@ -297,6 +391,7 @@ export const RELEASE_AUDIT_PHASE_ORDER0 = Object.freeze([
   'cliSmoke',
   'publicSurfaceFreeze',
   'materializedPublicStatusGate',
+  'finalCertificatePublicStatusGate',  
   'surfaceFreeze',
 ]);
 
@@ -319,6 +414,10 @@ export function makeReleaseAuditConfig0(overrides = {}) {
     materializedPublicStatusGateRunCliChecks: true,
     mutationInputFactory: null,
     mutationRunner: null,
+    runFinalCertificatePublicStatusGate: true,
+    finalCertificatePublicStatusGateRunner: null,
+    finalCertificatePublicStatusGateOutputDir: null,
+    finalCertificatePublicStatusGateCanonicalEnvelopeBytes: false,  
     ...overrides,
   };
 }
@@ -327,6 +426,7 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
   const checker = 'CheckReleaseAudit0';
   const ledger = [];
   const cfg = makeReleaseAuditConfig0(config);
+  let finalCertificatePublicStatusGateNF = null;  
   let publicSurfaceFreezeNF = null;
   let materializedPublicStatusGateNF = null;
 
@@ -343,6 +443,7 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
     ['cliSmoke', `${checker}.cliSmoke`, () => validateCliSmoke0(cfg)],
     ['publicSurfaceFreeze', `${checker}.publicSurfaceFreeze`, () => validatePublicSurfaceFreeze0(cfg)],
     ['materializedPublicStatusGate', `${checker}.materializedPublicStatusGate`, () => validateMaterializedPublicStatusGate0(cfg)],
+    ['finalCertificatePublicStatusGate', `${checker}.finalCertificatePublicStatusGate`, () => validateFinalCertificatePublicStatusGate0(cfg)],  
   ];
 
   for (const [phase, coord, run] of phases) {
@@ -371,6 +472,10 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
     if (phase === 'materializedPublicStatusGate') {
       materializedPublicStatusGateNF = result.nf ?? null;
     }
+
+    if (phase === 'finalCertificatePublicStatusGate') {
+      finalCertificatePublicStatusGateNF = result.nf ?? null;
+    }    
   }
 
   const publicSurfaceFreezeSummary = summarizePublicSurfaceFreezeNF0(
@@ -382,6 +487,11 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
     materializedPublicStatusGateNF,
     cfg,
   );
+
+  const finalCertificatePublicStatusGateSummary = summarizeFinalCertificatePublicStatusGateNF0(
+    finalCertificatePublicStatusGateNF,
+    cfg,
+  );  
 
   const nf = {
     kind: 'ReleaseAudit0NF',
@@ -410,6 +520,18 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
     materializedPublicStatusGateDirectRecordCount: materializedPublicStatusGateSummary.directRecordCount,
     materializedPublicStatusGateCliRecordCount: materializedPublicStatusGateSummary.cliRecordCount,
     materializedPublicStatusGateAcceptedPublicConclusionOnly: materializedPublicStatusGateSummary.acceptedPublicConclusionOnly,
+
+    finalCertificatePublicStatusGate: cfg.runFinalCertificatePublicStatusGate,
+    finalCertificatePublicStatusGateSummary,
+    finalCertificatePublicStatusGateDigest: finalCertificatePublicStatusGateSummary.gateDigest,
+    finalCertificatePublicStatusGateStatus: finalCertificatePublicStatusGateSummary.status,
+    finalCertificatePublicStatusGateVerdict: finalCertificatePublicStatusGateSummary.verdict,
+    finalCertificatePublicStatusGatePublicConclusionEmitted: finalCertificatePublicStatusGateSummary.publicConclusionEmitted,
+    finalCertificatePublicStatusGateCertificateDigest: finalCertificatePublicStatusGateSummary.certificateDigest,
+    finalCertificatePublicStatusGateFinalVerdictDigest: finalCertificatePublicStatusGateSummary.finalVerdictDigest,
+    finalCertificatePublicStatusGateAcceptRunDigest: finalCertificatePublicStatusGateSummary.acceptRunDigest,
+    finalCertificatePublicStatusGatePccPackDigest: finalCertificatePublicStatusGateSummary.pccPackDigest,
+    finalCertificatePublicStatusGateReleaseAuditAttached: finalCertificatePublicStatusGateSummary.releaseAuditAttached,
 
     publicConclusion: RUNALL_PUBLIC_CONCLUSION0,
   };
@@ -466,6 +588,8 @@ function validateConfig0(cfg) {
     'runMaterializedPublicStatusGate',
     'materializedPublicStatusGateCanonicalEnvelopeBytes',
     'materializedPublicStatusGateRunCliChecks',
+    'runFinalCertificatePublicStatusGate',
+    'finalCertificatePublicStatusGateCanonicalEnvelopeBytes',    
   ]) {
     if (typeof cfg[field] !== 'boolean') {
       return validationReject0([field], `ReleaseAuditConfig0 ${field} must be boolean`, {
@@ -500,6 +624,24 @@ function validateConfig0(cfg) {
       actual: typeof cfg.materializedPublicStatusGateRunner,
     });
   }
+
+  if (
+    cfg.finalCertificatePublicStatusGateRunner !== null &&
+    typeof cfg.finalCertificatePublicStatusGateRunner !== 'function'
+  ) {
+    return validationReject0(['finalCertificatePublicStatusGateRunner'], 'ReleaseAuditConfig0 finalCertificatePublicStatusGateRunner must be null or a function', {
+      actual: typeof cfg.finalCertificatePublicStatusGateRunner,
+    });
+  }
+
+  if (
+    cfg.finalCertificatePublicStatusGateOutputDir !== null &&
+    !isNonEmptyString(cfg.finalCertificatePublicStatusGateOutputDir)
+  ) {
+    return validationReject0(['finalCertificatePublicStatusGateOutputDir'], 'ReleaseAuditConfig0 finalCertificatePublicStatusGateOutputDir must be null or a non-empty string', {
+      actual: cfg.finalCertificatePublicStatusGateOutputDir,
+    });
+  }  
 
   if (
     cfg.materializedPublicStatusGateOutputDir !== null &&
@@ -1103,6 +1245,223 @@ async function validateMaterializedPublicStatusGate0(cfg) {
       });
     }
   }
+}async function validateFinalCertificatePublicStatusGate0(cfg) {
+  if (cfg.runFinalCertificatePublicStatusGate !== true) {
+    return validationAccept0({
+      kind: 'ReleaseAuditFinalCertificatePublicStatusGate0NF',
+      enabled: false,
+      skipped: true,
+      outputDir: cfg.finalCertificatePublicStatusGateOutputDir,
+      canonicalEnvelopeBytes: cfg.finalCertificatePublicStatusGateCanonicalEnvelopeBytes,
+      status: null,
+      verdict: null,
+      materializedPath: false,
+      syntheticRunAll: null,
+      publicConclusionEmitted: false,
+      publicConclusion: null,
+      certificateDigest: null,
+      finalVerdictDigest: null,
+      acceptRunDigest: null,
+      pccPackDigest: null,
+      canonicalByteRoots: null,
+      acceptanceTranscript: null,
+      releaseAuditAttached: false,
+      releaseAuditDigest: null,
+      releaseAuditStatus: 'skipped',
+      gateDigest: null,
+    });
+  }
+
+  const runner = typeof cfg.finalCertificatePublicStatusGateRunner === 'function'
+    ? cfg.finalCertificatePublicStatusGateRunner
+    : async () => {
+        if (cfg.finalCertificatePublicStatusGateOutputDir !== null) {
+          const written = await writeFinalCertificatePublicStatusFiles0(
+            cfg.finalCertificatePublicStatusGateOutputDir,
+          );
+
+          return written.checked;
+        }
+
+        const envelope = await makeFinalCertificatePublicStatus0();
+
+        return CheckFinalCertificatePublicStatus0(envelope, {
+          checkReleaseAuditRecord: false,
+        });
+      };
+
+  const record = await runner({
+    outputDir: cfg.finalCertificatePublicStatusGateOutputDir,
+    canonicalEnvelopeBytes: cfg.finalCertificatePublicStatusGateCanonicalEnvelopeBytes,
+  });
+
+  if (record?.tag !== 'accept') {
+    return validationReject0(['finalCertificatePublicStatusGate'], 'final-certificate public-status gate rejected', {
+      inner: compactReject0(record),
+    });
+  }
+
+  const nf = record.NF ?? record.nf;
+
+  if (!isPlainObject(nf)) {
+    return validationReject0(['finalCertificatePublicStatusGate', 'NF'], 'final-certificate public-status gate must emit an NF object', {
+      actual: typeof nf,
+    });
+  }
+
+  if (nf.kind !== 'FinalCertificatePublicStatus0NF') {
+    return validationReject0(['finalCertificatePublicStatusGate', 'NF', 'kind'], 'final-certificate public-status gate emitted wrong NF kind', {
+      actual: nf.kind,
+    });
+  }
+
+  if (nf.materializedPath !== true) {
+    return validationReject0(['finalCertificatePublicStatusGate', 'NF', 'materializedPath'], 'final-certificate public-status gate must certify materializedPath=true', {
+      actual: nf.materializedPath,
+    });
+  }
+
+  if (nf.syntheticRunAll !== false) {
+    return validationReject0(['finalCertificatePublicStatusGate', 'NF', 'syntheticRunAll'], 'final-certificate public-status gate must remain separate from synthetic RunAll0', {
+      actual: nf.syntheticRunAll,
+    });
+  }
+
+  if (nf.status !== 'accepted' || nf.verdict !== 'accept') {
+    return validationReject0(['finalCertificatePublicStatusGate', 'NF', 'status'], 'final-certificate public-status gate must be accepted', {
+      status: nf.status,
+      verdict: nf.verdict,
+    });
+  }
+
+  if (nf.publicConclusionEmitted !== true) {
+    return validationReject0(['finalCertificatePublicStatusGate', 'NF', 'publicConclusionEmitted'], 'accepted final-certificate public-status gate must emit the public conclusion', {
+      actual: nf.publicConclusionEmitted,
+    });
+  }
+
+  if (!sameReleaseAuditPublicConclusion0(nf.publicConclusion)) {
+    return validationReject0(['finalCertificatePublicStatusGate', 'NF', 'publicConclusion'], 'final-certificate public conclusion mismatch', {
+      actual: nf.publicConclusion,
+    });
+  }
+
+  for (const field of [
+    'certificateDigest',
+    'finalVerdictDigest',
+    'acceptRunDigest',
+    'pccPackDigest',
+  ]) {
+    if (!isDigestLike0(nf[field])) {
+      return validationReject0(['finalCertificatePublicStatusGate', 'NF', field], `final-certificate public-status gate must expose ${field}`, {
+        actual: nf[field],
+      });
+    }
+  }
+
+  if (!isPlainObject(nf.canonicalByteRoots)) {
+    return validationReject0(['finalCertificatePublicStatusGate', 'NF', 'canonicalByteRoots'], 'final-certificate public-status gate must expose canonicalByteRoots', {
+      actual: typeof nf.canonicalByteRoots,
+    });
+  }
+
+  if (!isPlainObject(nf.acceptanceTranscript)) {
+    return validationReject0(['finalCertificatePublicStatusGate', 'NF', 'acceptanceTranscript'], 'final-certificate public-status gate must expose acceptanceTranscript', {
+      actual: typeof nf.acceptanceTranscript,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'ReleaseAuditFinalCertificatePublicStatusGate0NF',
+    enabled: true,
+    skipped: false,
+    outputDir: cfg.finalCertificatePublicStatusGateOutputDir,
+    canonicalEnvelopeBytes: cfg.finalCertificatePublicStatusGateCanonicalEnvelopeBytes,
+    status: nf.status,
+    verdict: nf.verdict,
+    materializedPath: nf.materializedPath,
+    syntheticRunAll: nf.syntheticRunAll,
+    publicConclusionEmitted: nf.publicConclusionEmitted,
+    publicConclusion: nf.publicConclusion,
+    certificateDigest: nf.certificateDigest,
+    finalVerdictDigest: nf.finalVerdictDigest,
+    acceptRunDigest: nf.acceptRunDigest,
+    pccPackDigest: nf.pccPackDigest,
+    canonicalByteRoots: nf.canonicalByteRoots,
+    acceptanceTranscript: nf.acceptanceTranscript,
+    releaseAuditAttached: nf.releaseAuditAttached,
+    releaseAuditDigest: nf.releaseAuditDigest,
+    releaseAuditStatus: nf.releaseAuditStatus,
+    gateDigest: record.Digest ?? record.digest,
+  });
+}
+
+function summarizeFinalCertificatePublicStatusGateNF0(nf, cfg) {
+  const summary = {
+    kind: 'ReleaseAuditFinalCertificatePublicStatusGateSummary0',
+    enabled: cfg.runFinalCertificatePublicStatusGate,
+    skipped: cfg.runFinalCertificatePublicStatusGate !== true,
+    outputDir: cfg.finalCertificatePublicStatusGateOutputDir,
+    canonicalEnvelopeBytes: cfg.finalCertificatePublicStatusGateCanonicalEnvelopeBytes,
+    status: null,
+    verdict: null,
+    materializedPath: false,
+    syntheticRunAll: null,
+    publicConclusionEmitted: false,
+    publicConclusion: null,
+    certificateDigest: null,
+    finalVerdictDigest: null,
+    acceptRunDigest: null,
+    pccPackDigest: null,
+    canonicalByteRoots: null,
+    acceptanceTranscript: null,
+    releaseAuditAttached: false,
+    releaseAuditDigest: null,
+    releaseAuditStatus: cfg.runFinalCertificatePublicStatusGate === true ? 'not-attached' : 'skipped',
+    gateDigest: null,
+  };
+
+  if (!isPlainObject(nf)) {
+    return summary;
+  }
+
+  return {
+    ...summary,
+    skipped: nf.skipped === true,
+    status: nf.status ?? null,
+    verdict: nf.verdict ?? null,
+    materializedPath: nf.materializedPath ?? false,
+    syntheticRunAll: nf.syntheticRunAll ?? null,
+    publicConclusionEmitted: nf.publicConclusionEmitted ?? false,
+    publicConclusion: nf.publicConclusion ?? null,
+    certificateDigest: nf.certificateDigest ?? null,
+    finalVerdictDigest: nf.finalVerdictDigest ?? null,
+    acceptRunDigest: nf.acceptRunDigest ?? null,
+    pccPackDigest: nf.pccPackDigest ?? null,
+    canonicalByteRoots: nf.canonicalByteRoots ?? null,
+    acceptanceTranscript: nf.acceptanceTranscript ?? null,
+    releaseAuditAttached: nf.releaseAuditAttached ?? false,
+    releaseAuditDigest: nf.releaseAuditDigest ?? null,
+    releaseAuditStatus: nf.releaseAuditStatus ?? null,
+    gateDigest: nf.gateDigest ?? null,
+  };
+}
+
+function sameReleaseAuditPublicConclusion0(value) {
+  return (
+    isPlainObject(value) &&
+    value.antecedent === 'CheckPCCPackexp(GeneratePCCPack())=accept' &&
+    value.consequent === 'P = NP' &&
+    value.conditional === true
+  );
+}
+
+function isDigestLike0(value) {
+  return (
+    isPlainObject(value) &&
+    typeof value.hex === 'string' &&
+    /^[0-9a-f]{64}$/.test(value.hex)
+  );
 }
 
 function summarizeMaterializedPublicStatusGateNF0(gateNF, cfg) {
@@ -1354,6 +1713,10 @@ function validateExactObjectKeys0(value, expectedKeys, path) {
 
 function expectedModuleForTest0(testFile) {
   const stem = testFile.replace(/\.test\.mjs$/, '');
+
+  if (testFile === 'pcc-release-audit-final-certificate-surface0.test.mjs') {
+    return 'pcc-release-audit0.mjs';
+  }  
 
   const explicit = {
     'pcc-core': 'pcc-core.mjs',
