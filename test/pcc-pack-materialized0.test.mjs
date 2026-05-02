@@ -214,3 +214,18 @@ test('makeMaterializedPCCPack0 uses concrete materialized rows by default', asyn
   assert.equal(out.NF.rowsEnvelopeKind, 'ConcreteMaterializedRows0');
   assert.equal(out.NF.concreteRows, true);
 });
+
+test('makeMaterializedPCCPack0 uses concrete materialized local packages by default', async () => {
+  const envelope = await makeMaterializedPCCPack0();
+
+  assert.equal(envelope.LocalPackagesEnvelope.kind, 'ConcreteMaterializedLocalPackages0');
+  assert.equal(envelope.LocalPackagesEnvelope.ConcreteRowsEnvelope.kind, 'ConcreteMaterializedRows0');
+  assert.equal(envelope.PCCPack.LocalPackages.RowPackDigest.hex, envelope.PCCPack.RowPack ? envelope.LocalPackagesEnvelope.RowPack ? envelope.LocalPackagesEnvelope.RowPackDigest?.hex ?? envelope.LocalPackagesEnvelope.Linkage.rowPackDigest.hex : envelope.LocalPackagesEnvelope.Linkage.rowPackDigest.hex : envelope.LocalPackagesEnvelope.Linkage.rowPackDigest.hex);
+
+  const out = await CheckMaterializedPCCPack0(envelope);
+
+  assert.equal(out.tag, 'accept');
+  assert.equal(out.checker, 'CheckMaterializedPCCPack0');
+  assert.equal(out.NF.localPackagesEnvelopeKind, 'ConcreteMaterializedLocalPackages0');
+  assert.equal(out.NF.concreteLocalPackages, true);
+});

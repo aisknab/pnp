@@ -20,6 +20,10 @@ import {
   makeMaterializedLocalPackages0,
 } from './pcc-local-packages-materialized0.mjs';
 
+import {
+  CheckConcreteMaterializedLocalPackages0,
+} from './pcc-local-packages-concrete-materialized0.mjs';
+
 const CHECKER_VERSION = 0;
 
 const MATERIALIZED_FIREWALL_FORBIDDEN_MARKERS0 = Object.freeze([
@@ -186,7 +190,7 @@ export async function CheckMaterializedGlobalFirewalls0(input, config = makeMate
   }
 
   if (cfg.checkLocalPackages === true) {
-    const localRecord = await CheckMaterializedLocalPackages0(envelope.LocalPackagesEnvelope);
+    const localRecord = await checkMaterializedLocalPackagesEnvelope0(envelope.LocalPackagesEnvelope);
     const local = recordToValidation0(localRecord, ['LocalPackagesEnvelope']);
 
     ledger.push({
@@ -383,6 +387,14 @@ export async function writeMaterializedGlobalFirewallsFiles0(outDir, options = {
       checkPath,
     },
   };
+}
+
+async function checkMaterializedLocalPackagesEnvelope0(value) {
+  if (isPlainObject(value) && value.kind === 'ConcreteMaterializedLocalPackages0') {
+    return CheckConcreteMaterializedLocalPackages0(value);
+  }
+
+  return CheckMaterializedLocalPackages0(value);
 }
 
 function normalizeEnvelope0(input) {

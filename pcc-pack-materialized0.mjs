@@ -49,6 +49,11 @@ import {
 } from './pcc-local-packages-materialized0.mjs';
 
 import {
+  CheckConcreteMaterializedLocalPackages0,
+  makeConcreteMaterializedLocalPackages0,
+} from './pcc-local-packages-concrete-materialized0.mjs';
+
+import {
   CheckMaterializedGlobalFirewalls0,
   makeMaterializedGlobalFirewalls0,
 } from './pcc-global-firewalls-materialized0.mjs';
@@ -117,8 +122,8 @@ export async function makeMaterializedPCCPack0({
   });
   const globalProofDAG = resolveGlobalProofDAG0(globalProofDAGEnvelope);
 
-  const localPackagesEnvelope = LocalPackagesEnvelope ?? makeMaterializedLocalPackages0({
-    RowPack: rowPack,
+  const localPackagesEnvelope = LocalPackagesEnvelope ?? await makeConcreteMaterializedLocalPackages0({
+    ConcreteRowsEnvelope: rowsEnvelope,
   });
   const localPackages = resolveLocalPackages0(localPackagesEnvelope);
 
@@ -508,6 +513,8 @@ export async function CheckMaterializedPCCPack0(input, config = makeMaterialized
     generatedPackageAssumption: packNF.generatedPackageAssumption ?? null,
     rowsEnvelopeKind: envelope.RowsEnvelope?.kind ?? null,
     concreteRows: isPlainObject(envelope.RowsEnvelope) && envelope.RowsEnvelope.kind === 'ConcreteMaterializedRows0',
+    localPackagesEnvelopeKind: envelope.LocalPackagesEnvelope?.kind ?? null,
+    concreteLocalPackages: isPlainObject(envelope.LocalPackagesEnvelope) && envelope.LocalPackagesEnvelope.kind === 'ConcreteMaterializedLocalPackages0',
     syntheticMarkerCount: markerInventory.syntheticMarkerCount,
     forbiddenMarkerCount: markerInventory.forbiddenMarkerCount,
     allowSyntheticScaffoldMarker: cfg.allowSyntheticScaffoldMarker,
@@ -685,6 +692,14 @@ function validateShape0(envelope) {
   });
 }
 
+async function checkMaterializedLocalPackagesEnvelope0(value) {
+  if (isPlainObject(value) && value.kind === 'ConcreteMaterializedLocalPackages0') {
+    return CheckConcreteMaterializedLocalPackages0(value);
+  }
+
+  return CheckMaterializedLocalPackages0(value);
+}
+
 async function checkMaterializedRowsEnvelope0(value) {
   if (isPlainObject(value) && value.kind === 'ConcreteMaterializedRows0') {
     return CheckConcreteMaterializedRows0(value);
@@ -700,7 +715,7 @@ async function validateMaterializedComponents0(envelope) {
     ['HardEnvelope', await CheckMaterializedHard0(envelope.HardEnvelope)],
     ['RowsEnvelope', await checkMaterializedRowsEnvelope0(envelope.RowsEnvelope)],
     ['GlobalProofDAGEnvelope', await CheckMaterializedGlobalProofDAG0(envelope.GlobalProofDAGEnvelope)],
-    ['LocalPackagesEnvelope', await CheckMaterializedLocalPackages0(envelope.LocalPackagesEnvelope)],
+    ['LocalPackagesEnvelope', await checkMaterializedLocalPackagesEnvelope0(envelope.LocalPackagesEnvelope)],
     ['GlobalFirewallsEnvelope', await CheckMaterializedGlobalFirewalls0(envelope.GlobalFirewallsEnvelope)],
     ['FinalIntegrationEnvelope', await CheckMaterializedFinalIntegration0(envelope.FinalIntegrationEnvelope)],
   ];
