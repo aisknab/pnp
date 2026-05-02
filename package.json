@@ -46,7 +46,13 @@
     "materialized:public-status": "node ./bin/check-materialized-public-status0.mjs",
     "materialized:public-status:full": "node ./bin/check-materialized-public-status0.mjs --full",
     "materialized:public-status-roundtrip": "node ./bin/check-materialized-public-status-roundtrip0.mjs",
-    "materialized:public-status-roundtrip:full": "node ./bin/check-materialized-public-status-roundtrip0.mjs --full"
+    "materialized:public-status-roundtrip:full": "node ./bin/check-materialized-public-status-roundtrip0.mjs --full",
+    "materialized:final-certificate": "node ./bin/write-materialized-final-certificate0.mjs",
+    "materialized:final-certificate:full": "node ./bin/write-materialized-final-certificate0.mjs --full",
+    "materialized:final-certificate-public-status": "node ./bin/write-final-certificate-public-status0.mjs",
+    "materialized:final-certificate-public-status:full": "node ./bin/write-final-certificate-public-status0.mjs --full",
+    "release:audit:final-certificate-gate": "node ./bin/write-release-audit-final-certificate-gate0.mjs",
+    "release:audit:final-certificate-gate:full": "node ./bin/write-release-audit-final-certificate-gate0.mjs --full"
   },
   "engines": {
     "node": ">=20"

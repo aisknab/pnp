@@ -28,6 +28,13 @@ export const README_RELEASE_BOUNDARY_REQUIRED_SNIPPETS0 = Object.freeze([
   'Public entry release surface freeze',
   'Release audit phase-order freeze',
   'Release audit README wording freeze',
+  'Final certificate public-status gate',
+  'finalCertificatePublicStatusGateDigest',
+  'finalCertificatePublicStatusGateCertificateDigest',
+  'finalCertificatePublicStatusGateFinalVerdictDigest',
+  'finalCertificatePublicStatusGateAcceptRunDigest',
+  'finalCertificatePublicStatusGatePccPackDigest',
+  'canonical-byte roots',
   'Release audit README negative integration',  
 ]);
 

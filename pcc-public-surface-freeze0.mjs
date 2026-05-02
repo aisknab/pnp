@@ -80,6 +80,12 @@ export const PUBLIC_PACKAGE_SCRIPT_TARGETS0 = Object.freeze({
   'smoke:full': 'node ./bin/runall0.mjs --full',
   test: 'node --test',
   validate: 'npm run check && npm test',
+  'materialized:final-certificate': 'node ./bin/write-materialized-final-certificate0.mjs',
+  'materialized:final-certificate:full': 'node ./bin/write-materialized-final-certificate0.mjs --full',
+  'materialized:final-certificate-public-status': 'node ./bin/write-final-certificate-public-status0.mjs',
+  'materialized:final-certificate-public-status:full': 'node ./bin/write-final-certificate-public-status0.mjs --full',
+  'release:audit:final-certificate-gate': 'node ./bin/write-release-audit-final-certificate-gate0.mjs',
+  'release:audit:final-certificate-gate:full': 'node ./bin/write-release-audit-final-certificate-gate0.mjs --full',  
 });
 
 export const PUBLIC_PACKAGE_SCRIPT_KEYS0 = Object.freeze(Object.keys(PUBLIC_PACKAGE_SCRIPT_TARGETS0).sort());

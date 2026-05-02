@@ -29,6 +29,7 @@ test('CheckReleaseAudit0 NF exposes public surface freeze proof summary', async 
     runCliSmoke: false,
     runPublicSurfaceFreeze: true,
     runMaterializedPublicStatusGate: false,
+    runFinalCertificatePublicStatusGate: false,
   }));
 
   assert.equal(out.tag, 'accept');
@@ -63,6 +64,7 @@ test('CheckReleaseAudit0 NF exposes skipped public surface freeze summary', asyn
     runCliSmoke: false,
     runPublicSurfaceFreeze: false,
     runMaterializedPublicStatusGate: false,
+    runFinalCertificatePublicStatusGate: false,
   }));
 
   assert.equal(out.tag, 'accept');
@@ -85,6 +87,7 @@ test('summarizeReleaseAudit0 exposes public surface freeze proof summary', async
     runCliSmoke: false,
     runPublicSurfaceFreeze: true,
     runMaterializedPublicStatusGate: false,
+    runFinalCertificatePublicStatusGate: false,
   }));
 
   const summary = summarizeReleaseAudit0(out);
@@ -103,7 +106,7 @@ test('summarizeReleaseAudit0 exposes public surface freeze proof summary', async
 test('release audit CLI summary exposes public surface freeze proof summary', () => {
   const cliPath = fileURLToPath(new URL('../bin/release-audit0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, '--no-materialized-gate'], {
+  const child = spawnSync(process.execPath, [cliPath, '--no-materialized-gate', '--no-final-certificate-gate'], {
     encoding: 'utf8',
   });
 
@@ -123,7 +126,7 @@ test('release audit CLI summary exposes public surface freeze proof summary', ()
 test('release audit CLI full mode exposes public surface freeze proof summary in NF', () => {
   const cliPath = fileURLToPath(new URL('../bin/release-audit0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, '--no-materialized-gate', '--full'], {
+  const child = spawnSync(process.execPath, [cliPath, '--no-materialized-gate', '--no-final-certificate-gate', '--full'], {
     encoding: 'utf8',
   });
 

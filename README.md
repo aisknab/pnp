@@ -537,3 +537,9 @@ CheckReleaseAudit0.readme
 
 This makes README claim-boundary validation an active release-audit gate rather than passive prose checking.
 
+
+### Final certificate public-status gate
+
+The final certificate public-status gate records the accepted final certificate while preserving the conditional claim boundary. It reports `finalCertificatePublicStatusGateDigest`, `finalCertificatePublicStatusGateCertificateDigest`, `finalCertificatePublicStatusGateFinalVerdictDigest`, `finalCertificatePublicStatusGateAcceptRunDigest`, and `finalCertificatePublicStatusGatePccPackDigest`.
+
+The gate also exposes canonical-byte roots and acceptance transcript digests. The public theorem statement remains conditional on accepted replay: `CheckPCCPackexp(GeneratePCCPack())=accept implies P = NP`.
