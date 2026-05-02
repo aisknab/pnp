@@ -1872,3 +1872,13 @@ function isPlainObject(value) {
   const proto = Object.getPrototypeOf(value);
   return proto === Object.prototype || proto === null;
 }
+
+export {
+  makeNFMap0,
+  makeHashIndex0,
+  makeDupLedger0,
+  makeCoverageLedger0,
+  makeRouteLedger0,
+  makeProofRefLedger0,
+  makeBoundsLedger0,
+};
