@@ -209,6 +209,9 @@ function makeMiniPackageJson0() {
       './integrated-pipeline0': './pcc-integrated-pipeline0.mjs',
       './accept-run0': './pcc-accept-run0.mjs',
       './release-audit0': './pcc-release-audit0.mjs',
+      './final-certificate0': './pcc-final-certificate-materialized0.mjs',
+      './final-certificate-public-status0': './pcc-final-certificate-public-status0.mjs',
+      './release-audit-final-certificate-gate0': './pcc-release-audit-final-certificate-gate0.mjs',
     },
     bin: {
       'pnp-runall0': './bin/runall0.mjs',
@@ -253,6 +256,12 @@ function makeMiniPackageJson0() {
       
       'materialized:public-status-roundtrip': 'node ./bin/check-materialized-public-status-roundtrip0.mjs',
       'materialized:public-status-roundtrip:full': 'node ./bin/check-materialized-public-status-roundtrip0.mjs --full',      
+      'materialized:final-certificate': 'node ./bin/write-materialized-final-certificate0.mjs',
+      'materialized:final-certificate:full': 'node ./bin/write-materialized-final-certificate0.mjs --full',
+      'materialized:final-certificate-public-status': 'node ./bin/write-final-certificate-public-status0.mjs',
+      'materialized:final-certificate-public-status:full': 'node ./bin/write-final-certificate-public-status0.mjs --full',
+      'release:audit:final-certificate-gate': 'node ./bin/write-release-audit-final-certificate-gate0.mjs',
+      'release:audit:final-certificate-gate:full': 'node ./bin/write-release-audit-final-certificate-gate0.mjs --full',
     },
   };
 }
