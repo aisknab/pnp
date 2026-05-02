@@ -179,11 +179,15 @@ test('CheckReleaseAuditFinalCertificateGate0 rejects forbidden fixture marker te
   assert.equal(out.Coord, 'CheckReleaseAuditFinalCertificateGate0.fixtureMarkers');
 });
 
-test('CheckReleaseAuditFinalCertificateGate0 can strictly reject current synthetic scaffold markers', async () => {
+
+test('CheckReleaseAuditFinalCertificateGate0 strictly rejects an injected synthetic scaffold marker', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
   const envelope = await makeReleaseAuditFinalCertificateGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
+    overrides: {
+      GateNote: 'synthetic marker must reject in strict marker mode',
+    },
   });
 
   const out = await CheckReleaseAuditFinalCertificateGate0(envelope, {
@@ -193,7 +197,9 @@ test('CheckReleaseAuditFinalCertificateGate0 can strictly reject current synthet
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckReleaseAuditFinalCertificateGate0');
   assert.equal(out.Coord, 'CheckReleaseAuditFinalCertificateGate0.fixtureMarkers');
+  assert.equal(out.Witness.detail.hit.marker, 'synthetic');
 });
+
 
 test('CheckReleaseAuditFinalCertificateGate0 rejects stale linkage digest', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();

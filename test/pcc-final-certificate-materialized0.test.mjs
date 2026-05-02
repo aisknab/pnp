@@ -113,8 +113,19 @@ test('CheckMaterializedFinalCertificate0 rejects forbidden fixture marker text',
   assert.equal(out.Coord, 'CheckMaterializedFinalCertificate0.fixtureMarkers');
 });
 
-test('CheckMaterializedFinalCertificate0 can strictly reject current synthetic scaffold markers', async () => {
+
+test('CheckMaterializedFinalCertificate0 strictly rejects an injected synthetic scaffold marker', async () => {
   const envelope = await makeMaterializedFinalCertificate0();
+
+  envelope.Certificate = {
+    ...envelope.Certificate,
+    ScaffoldWitness: 'synthetic marker must reject in strict marker mode',
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    certificateDigest: undefined,
+  };
 
   const out = await CheckMaterializedFinalCertificate0(envelope, {
     allowSyntheticScaffoldMarker: false,
@@ -123,7 +134,9 @@ test('CheckMaterializedFinalCertificate0 can strictly reject current synthetic s
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedFinalCertificate0');
   assert.equal(out.Coord, 'CheckMaterializedFinalCertificate0.fixtureMarkers');
+  assert.equal(out.Witness.detail.hit.marker, 'synthetic');
 });
+
 
 test('CheckMaterializedFinalCertificate0 rejects stale linkage digest', async () => {
   const envelope = await makeMaterializedFinalCertificate0();

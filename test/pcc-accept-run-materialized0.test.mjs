@@ -117,8 +117,22 @@ test('CheckMaterializedGeneratedAcceptRun0 rejects forbidden fixture marker text
   assert.equal(out.Coord, 'CheckMaterializedGeneratedAcceptRun0.fixtureMarkers');
 });
 
-test('CheckMaterializedGeneratedAcceptRun0 can strictly reject current synthetic scaffold markers', async () => {
+
+test('CheckMaterializedGeneratedAcceptRun0 strictly rejects an injected synthetic scaffold marker', async () => {
   const envelope = await makeMaterializedGeneratedAcceptRun0();
+
+  envelope.AcceptRun = {
+    ...envelope.AcceptRun,
+    PiRun: {
+      ...envelope.AcceptRun.PiRun,
+      note: 'synthetic marker must reject in strict marker mode',
+    },
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    acceptRunDigest: undefined,
+  };
 
   const out = await CheckMaterializedGeneratedAcceptRun0(envelope, {
     allowSyntheticScaffoldMarker: false,
@@ -127,7 +141,9 @@ test('CheckMaterializedGeneratedAcceptRun0 can strictly reject current synthetic
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedGeneratedAcceptRun0');
   assert.equal(out.Coord, 'CheckMaterializedGeneratedAcceptRun0.fixtureMarkers');
+  assert.equal(out.Witness.detail.hit.marker, 'synthetic');
 });
+
 
 test('CheckMaterializedGeneratedAcceptRun0 rejects stale linkage digest', async () => {
   const envelope = await makeMaterializedGeneratedAcceptRun0();
