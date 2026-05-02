@@ -29,6 +29,9 @@ test('CheckMaterializedAggregate0 accepts the complete materialized shell skelet
   assert.equal(out.NF.phaseCount, MATERIALIZED_AGGREGATE_PHASES0.length);
   assert.equal(out.NF.phaseDigests.length, MATERIALIZED_AGGREGATE_PHASES0.length);
   assert.match(out.Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.checkPCCPackStatus, 'pending');
+  assert.equal(out.NF.checkPCCPackAccepted, false);
+  assert.equal(out.NF.checkPCCPackStrict, false);  
 });
 
 test('CheckMaterializedAggregateFile0 accepts an aggregate shell file', async (t) => {

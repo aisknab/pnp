@@ -43,6 +43,10 @@ import {
   makeMaterializedImportShell0,
 } from './pcc-materialized-imports0.mjs';
 
+import {
+  CheckMaterializedCheckPCCPack0,
+} from './pcc-materialized-checkpack0.mjs';
+
 const CHECKER_VERSION = 0;
 
 export const MATERIALIZED_AGGREGATE_PHASES0 = Object.freeze([
@@ -55,6 +59,7 @@ export const MATERIALIZED_AGGREGATE_PHASES0 = Object.freeze([
   'CheckMaterializedBounds0',
   'CheckMaterializedNoHiddenMin0',
   'CheckMaterializedImports0',
+  'CheckMaterializedCheckPCCPack0',
 ]);
 
 export function makeMaterializedAggregateShell0(overrides = {}) {
@@ -113,6 +118,12 @@ export async function CheckMaterializedAggregate0(shell, config = {}) {
       path: ['Shell'],
       run: () => CheckMaterializedImports0(shell, config.importsConfig ?? {}),
     },
+
+    {
+      phase: 'CheckMaterializedCheckPCCPack0',
+      path: ['Shell'],
+      run: () => CheckMaterializedCheckPCCPack0(shell, config.checkPCCPackConfig ?? {}),
+    },    
   ];
 
   let finalRecord = null;
@@ -160,6 +171,10 @@ export async function CheckMaterializedAggregate0(shell, config = {}) {
     artefactImportCount: finalNF.artefactImportCount ?? null,
     packageImportEdgeCount: finalNF.packageImportEdgeCount ?? null,
     finalPhaseDigest: finalRecord.Digest ?? finalRecord.digest,
+    checkPCCPackStatus: finalNF.status ?? null,
+    checkPCCPackAccepted: finalNF.accepted ?? false,
+    checkPCCPackStrict: finalNF.strict ?? false,
+    checkPCCPackDigest: finalRecord.Digest ?? finalRecord.digest,    
   };
 
   return makeAcceptRecord({
@@ -221,6 +236,8 @@ export async function CheckMaterializedAggregateFile0(filePath, config = {}) {
     aggregateDigest: checked.Digest ?? checked.digest,
     phaseCount: checked.NF.phaseCount,
     packDigest: checked.NF.packDigest,
+    checkPCCPackStatus: checked.NF.checkPCCPackStatus,
+    checkPCCPackAccepted: checked.NF.checkPCCPackAccepted,    
   };
 
   return makeAcceptRecord({
