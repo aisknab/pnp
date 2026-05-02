@@ -1531,6 +1531,8 @@ function summarizePublicSurfaceFreezeNF0(publicSurfaceNF, cfg) {
 }
 
 export function summarizeReleaseAudit0(out) {
+  const nf = out?.NF ?? out?.nf ?? {};
+
   if (out.tag === 'accept') {
     const summary = {
       tag: out.tag,
@@ -1555,6 +1557,28 @@ export function summarizeReleaseAudit0(out) {
       materializedPublicStatusGateDirectRecordCount: out.NF.materializedPublicStatusGateDirectRecordCount,
       materializedPublicStatusGateCliRecordCount: out.NF.materializedPublicStatusGateCliRecordCount,
       materializedPublicStatusGateAcceptedPublicConclusionOnly: out.NF.materializedPublicStatusGateAcceptedPublicConclusionOnly,
+
+      finalCertificatePublicStatusGate: nf.finalCertificatePublicStatusGate,
+
+      finalCertificatePublicStatusGateSummary: nf.finalCertificatePublicStatusGateSummary,
+
+      finalCertificatePublicStatusGateDigest: nf.finalCertificatePublicStatusGateDigest,
+
+      finalCertificatePublicStatusGateStatus: nf.finalCertificatePublicStatusGateStatus,
+
+      finalCertificatePublicStatusGateVerdict: nf.finalCertificatePublicStatusGateVerdict,
+
+      finalCertificatePublicStatusGatePublicConclusionEmitted: nf.finalCertificatePublicStatusGatePublicConclusionEmitted,
+
+      finalCertificatePublicStatusGateCertificateDigest: nf.finalCertificatePublicStatusGateCertificateDigest,
+
+      finalCertificatePublicStatusGateFinalVerdictDigest: nf.finalCertificatePublicStatusGateFinalVerdictDigest,
+
+      finalCertificatePublicStatusGateAcceptRunDigest: nf.finalCertificatePublicStatusGateAcceptRunDigest,
+
+      finalCertificatePublicStatusGatePccPackDigest: nf.finalCertificatePublicStatusGatePccPackDigest,
+
+      finalCertificatePublicStatusGateReleaseAuditAttached: nf.finalCertificatePublicStatusGateReleaseAuditAttached,
 
       publicConclusion: out.NF.publicConclusion,
       digest: out.Digest,
