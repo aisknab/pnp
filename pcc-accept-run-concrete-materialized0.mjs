@@ -80,6 +80,13 @@ export function summarizeConcreteGeneratedAcceptRunChain0(generatedAcceptRunEnve
   const localPackagesEnvelope = materializedPCCPack?.LocalPackagesEnvelope ?? null;
   const globalFirewallsEnvelope = materializedPCCPack?.GlobalFirewallsEnvelope ?? null;
   const globalProofDAGEnvelope = materializedPCCPack?.GlobalProofDAGEnvelope ?? null;
+  const kBundleEnvelope = materializedPCCPack?.KBundleEnvelope ?? null;
+  const hardEnvelope = materializedPCCPack?.HardEnvelope ?? null;
+  const finalIntegrationEnvelope = materializedPCCPack?.FinalIntegrationEnvelope ?? null;
+
+  const kBundleInventory = kBundleEnvelope?.ProofInventory ?? null;
+  const hardCoverage = hardEnvelope?.Coverage ?? null;
+  const finalIntegrationLinks = finalIntegrationEnvelope?.ConcreteLinks ?? null;
 
   const rowPack = resolveRowPack0(rowsEnvelope);
   const localPackages = resolveLocalPackages0(localPackagesEnvelope);
@@ -103,10 +110,45 @@ export function summarizeConcreteGeneratedAcceptRunChain0(generatedAcceptRunEnve
     concreteGlobalFirewalls: globalFirewallsEnvelope?.kind === 'ConcreteMaterializedGlobalFirewalls0',
     concreteGlobalProofDAG: globalProofDAGEnvelope?.kind === 'ConcreteMaterializedGlobalProofDAG0',
 
+    concreteKBundle: kBundleEnvelope?.kind === 'ConcreteMaterializedKBundle0',
+    kBundleKernelRuleCoverageComplete: kBundleInventory?.kernelRuleCoverageComplete === true,
+    kBundleSigmaProofRefsResolve: kBundleInventory?.sigmaProofRefsResolve === true,
+    kBundleReflectionProofRefsResolve: kBundleInventory?.reflectionProofRefsResolve === true,
+
+    concreteHardCheck: hardEnvelope?.kind === 'ConcreteMaterializedHardCheck0',
+    hardCheckerCoverageComplete: hardCoverage?.checkerCoverageComplete === true,
+    hardRowKeyCoverageComplete: hardCoverage?.rowKeyCoverageComplete === true,
+    hardRoutePriorityComplete: hardCoverage?.routePriorityComplete === true,
+    hardProofRefPolicyComplete: hardCoverage?.proofRefPolicyComplete === true,
+    hardHashDisciplineComplete: hardCoverage?.hashDisciplineComplete === true,
+    hardNoMinCoverageComplete: hardCoverage?.noMinCoverageComplete === true,
+    hardImportPolicyComplete: hardCoverage?.importPolicyComplete === true,
+    hardReflectionPolicyComplete: hardCoverage?.reflectionPolicyComplete === true,
+    hardBoundsPolicyComplete: hardCoverage?.boundsPolicyComplete === true,
+    hardDiagnosticsPolicyComplete: hardCoverage?.diagnosticsPolicyComplete === true,
+
+    concreteFinalIntegration: finalIntegrationEnvelope?.kind === 'ConcreteMaterializedFinalIntegration0',
+    finalIntegrationConcreteGlobalProofDAG: finalIntegrationLinks?.concreteGlobalProofDAG === true,
+    finalIntegrationGPackFieldCoverageComplete: finalIntegrationLinks?.gpackFieldCoverageComplete === true,
+    finalIntegrationRowFamGCoverageComplete: finalIntegrationLinks?.rowFamGCoverageComplete === true,
+    finalIntegrationUsesGPack: finalIntegrationLinks?.finalIntegrationUsesGPack === true,
+    rowFamGUsesGPack: finalIntegrationLinks?.rowFamGUsesGPack === true,
+    finalTheoremUsesFinalIntegration: finalIntegrationLinks?.finalTheoremUsesFinalIntegration === true,
+    rowFamFinalUsesFinalTheorem: finalIntegrationLinks?.rowFamFinalUsesFinalTheorem === true,
+    finalMatchUsesGPack: finalIntegrationLinks?.finalMatchUsesGPack === true,
+    satDecisionUsesGPack: finalIntegrationLinks?.satDecisionUsesGPack === true,
+
     rowsEnvelopeKind: rowsEnvelope?.kind ?? null,
     localPackagesEnvelopeKind: localPackagesEnvelope?.kind ?? null,
     globalFirewallsEnvelopeKind: globalFirewallsEnvelope?.kind ?? null,
     globalProofDAGEnvelopeKind: globalProofDAGEnvelope?.kind ?? null,
+    kBundleEnvelopeKind: kBundleEnvelope?.kind ?? null,
+    hardEnvelopeKind: hardEnvelope?.kind ?? null,
+    finalIntegrationEnvelopeKind: finalIntegrationEnvelope?.kind ?? null,
+
+    kBundleCoverageDigest: isPlainObject(kBundleInventory) ? digestCanonical0(kBundleInventory) : null,
+    hardCoverageDigest: isPlainObject(hardCoverage) ? digestCanonical0(hardCoverage) : null,
+    finalIntegrationLinksDigest: isPlainObject(finalIntegrationLinks) ? digestCanonical0(finalIntegrationLinks) : null,
 
     pccPackDigest,
     acceptRunPgenDigest,
@@ -273,10 +315,45 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
     concreteGlobalFirewalls: recomputedChain.concreteGlobalFirewalls,
     concreteGlobalProofDAG: recomputedChain.concreteGlobalProofDAG,
 
+    concreteKBundle: recomputedChain.concreteKBundle,
+    kBundleKernelRuleCoverageComplete: recomputedChain.kBundleKernelRuleCoverageComplete,
+    kBundleSigmaProofRefsResolve: recomputedChain.kBundleSigmaProofRefsResolve,
+    kBundleReflectionProofRefsResolve: recomputedChain.kBundleReflectionProofRefsResolve,
+
+    concreteHardCheck: recomputedChain.concreteHardCheck,
+    hardCheckerCoverageComplete: recomputedChain.hardCheckerCoverageComplete,
+    hardRowKeyCoverageComplete: recomputedChain.hardRowKeyCoverageComplete,
+    hardRoutePriorityComplete: recomputedChain.hardRoutePriorityComplete,
+    hardProofRefPolicyComplete: recomputedChain.hardProofRefPolicyComplete,
+    hardHashDisciplineComplete: recomputedChain.hardHashDisciplineComplete,
+    hardNoMinCoverageComplete: recomputedChain.hardNoMinCoverageComplete,
+    hardImportPolicyComplete: recomputedChain.hardImportPolicyComplete,
+    hardReflectionPolicyComplete: recomputedChain.hardReflectionPolicyComplete,
+    hardBoundsPolicyComplete: recomputedChain.hardBoundsPolicyComplete,
+    hardDiagnosticsPolicyComplete: recomputedChain.hardDiagnosticsPolicyComplete,
+
+    concreteFinalIntegration: recomputedChain.concreteFinalIntegration,
+    finalIntegrationConcreteGlobalProofDAG: recomputedChain.finalIntegrationConcreteGlobalProofDAG,
+    finalIntegrationGPackFieldCoverageComplete: recomputedChain.finalIntegrationGPackFieldCoverageComplete,
+    finalIntegrationRowFamGCoverageComplete: recomputedChain.finalIntegrationRowFamGCoverageComplete,
+    finalIntegrationUsesGPack: recomputedChain.finalIntegrationUsesGPack,
+    rowFamGUsesGPack: recomputedChain.rowFamGUsesGPack,
+    finalTheoremUsesFinalIntegration: recomputedChain.finalTheoremUsesFinalIntegration,
+    rowFamFinalUsesFinalTheorem: recomputedChain.rowFamFinalUsesFinalTheorem,
+    finalMatchUsesGPack: recomputedChain.finalMatchUsesGPack,
+    satDecisionUsesGPack: recomputedChain.satDecisionUsesGPack,
+
     rowsEnvelopeKind: recomputedChain.rowsEnvelopeKind,
     localPackagesEnvelopeKind: recomputedChain.localPackagesEnvelopeKind,
     globalFirewallsEnvelopeKind: recomputedChain.globalFirewallsEnvelopeKind,
     globalProofDAGEnvelopeKind: recomputedChain.globalProofDAGEnvelopeKind,
+    kBundleEnvelopeKind: recomputedChain.kBundleEnvelopeKind,
+    hardEnvelopeKind: recomputedChain.hardEnvelopeKind,
+    finalIntegrationEnvelopeKind: recomputedChain.finalIntegrationEnvelopeKind,
+
+    kBundleCoverageDigest: recomputedChain.kBundleCoverageDigest,
+    hardCoverageDigest: recomputedChain.hardCoverageDigest,
+    finalIntegrationLinksDigest: recomputedChain.finalIntegrationLinksDigest,
 
     pccPackLinkedToAcceptRun: recomputedChain.pccPackLinkedToAcceptRun,
     rowPackLinkedToPCCPack: recomputedChain.rowPackLinkedToPCCPack,
@@ -455,6 +532,35 @@ function validateConcreteChain0(actual, expected) {
     'concreteLocalPackages',
     'concreteGlobalFirewalls',
     'concreteGlobalProofDAG',
+
+    'concreteKBundle',
+    'kBundleKernelRuleCoverageComplete',
+    'kBundleSigmaProofRefsResolve',
+    'kBundleReflectionProofRefsResolve',
+
+    'concreteHardCheck',
+    'hardCheckerCoverageComplete',
+    'hardRowKeyCoverageComplete',
+    'hardRoutePriorityComplete',
+    'hardProofRefPolicyComplete',
+    'hardHashDisciplineComplete',
+    'hardNoMinCoverageComplete',
+    'hardImportPolicyComplete',
+    'hardReflectionPolicyComplete',
+    'hardBoundsPolicyComplete',
+    'hardDiagnosticsPolicyComplete',
+
+    'concreteFinalIntegration',
+    'finalIntegrationConcreteGlobalProofDAG',
+    'finalIntegrationGPackFieldCoverageComplete',
+    'finalIntegrationRowFamGCoverageComplete',
+    'finalIntegrationUsesGPack',
+    'rowFamGUsesGPack',
+    'finalTheoremUsesFinalIntegration',
+    'rowFamFinalUsesFinalTheorem',
+    'finalMatchUsesGPack',
+    'satDecisionUsesGPack',
+
     'pccPackLinkedToAcceptRun',
     'rowPackLinkedToPCCPack',
     'localPackagesLinkedToPCCPack',

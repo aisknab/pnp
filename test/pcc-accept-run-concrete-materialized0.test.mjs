@@ -30,6 +30,34 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 accepts an accept run over th
   assert.equal(out.NF.concreteGlobalFirewalls, true);
   assert.equal(out.NF.concreteGlobalProofDAG, true);
 
+  assert.equal(out.NF.concreteKBundle, true);
+  assert.equal(out.NF.kBundleKernelRuleCoverageComplete, true);
+  assert.equal(out.NF.kBundleSigmaProofRefsResolve, true);
+  assert.equal(out.NF.kBundleReflectionProofRefsResolve, true);
+
+  assert.equal(out.NF.concreteHardCheck, true);
+  assert.equal(out.NF.hardCheckerCoverageComplete, true);
+  assert.equal(out.NF.hardRowKeyCoverageComplete, true);
+  assert.equal(out.NF.hardRoutePriorityComplete, true);
+  assert.equal(out.NF.hardProofRefPolicyComplete, true);
+  assert.equal(out.NF.hardHashDisciplineComplete, true);
+  assert.equal(out.NF.hardNoMinCoverageComplete, true);
+  assert.equal(out.NF.hardImportPolicyComplete, true);
+  assert.equal(out.NF.hardReflectionPolicyComplete, true);
+  assert.equal(out.NF.hardBoundsPolicyComplete, true);
+  assert.equal(out.NF.hardDiagnosticsPolicyComplete, true);
+
+  assert.equal(out.NF.concreteFinalIntegration, true);
+  assert.equal(out.NF.finalIntegrationConcreteGlobalProofDAG, true);
+  assert.equal(out.NF.finalIntegrationGPackFieldCoverageComplete, true);
+  assert.equal(out.NF.finalIntegrationRowFamGCoverageComplete, true);
+  assert.equal(out.NF.finalIntegrationUsesGPack, true);
+  assert.equal(out.NF.rowFamGUsesGPack, true);
+  assert.equal(out.NF.finalTheoremUsesFinalIntegration, true);
+  assert.equal(out.NF.rowFamFinalUsesFinalTheorem, true);
+  assert.equal(out.NF.finalMatchUsesGPack, true);
+  assert.equal(out.NF.satDecisionUsesGPack, true);
+
   assert.equal(out.NF.pccPackLinkedToAcceptRun, true);
   assert.equal(out.NF.rowPackLinkedToPCCPack, true);
   assert.equal(out.NF.localPackagesLinkedToPCCPack, true);
@@ -141,4 +169,82 @@ test('writeConcreteMaterializedGeneratedAcceptRunFiles0 writes replayable JSON a
 
     assert.equal(typeof value, 'object');
   }
+});
+
+test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects incomplete concrete HardCheck coverage', async () => {
+  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+
+  envelope.GeneratedAcceptRunEnvelope = {
+    ...envelope.GeneratedAcceptRunEnvelope,
+    MaterializedPCCPack: {
+      ...envelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack,
+      HardEnvelope: {
+        ...envelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack.HardEnvelope,
+        Coverage: {
+          ...envelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack.HardEnvelope.Coverage,
+          noMinCoverageComplete: false,
+        },
+      },
+    },
+  };
+
+  envelope.ConcreteChain = summarizeConcreteGeneratedAcceptRunChain0(
+    envelope.GeneratedAcceptRunEnvelope,
+  );
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    generatedAcceptRunEnvelopeDigest: undefined,
+    materializedPCCPackDigest: undefined,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+    checkGeneratedAcceptRun: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedGeneratedAcceptRun0.concreteChain');
+  assert.deepEqual(out.Path, ['ConcreteChain', 'hardNoMinCoverageComplete']);
+});
+
+test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects incomplete concrete final-integration coverage', async () => {
+  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+
+  envelope.GeneratedAcceptRunEnvelope = {
+    ...envelope.GeneratedAcceptRunEnvelope,
+    MaterializedPCCPack: {
+      ...envelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack,
+      FinalIntegrationEnvelope: {
+        ...envelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack.FinalIntegrationEnvelope,
+        ConcreteLinks: {
+          ...envelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack.FinalIntegrationEnvelope.ConcreteLinks,
+          rowFamGCoverageComplete: false,
+        },
+      },
+    },
+  };
+
+  envelope.ConcreteChain = summarizeConcreteGeneratedAcceptRunChain0(
+    envelope.GeneratedAcceptRunEnvelope,
+  );
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    generatedAcceptRunEnvelopeDigest: undefined,
+    materializedPCCPackDigest: undefined,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+    checkGeneratedAcceptRun: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedGeneratedAcceptRun0.concreteChain');
+  assert.deepEqual(out.Path, ['ConcreteChain', 'finalIntegrationRowFamGCoverageComplete']);
 });
