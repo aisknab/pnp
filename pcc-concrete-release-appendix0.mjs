@@ -109,6 +109,7 @@ export function makeConcreteReleaseAppendixRecord0(gateEnvelope) {
   const acceptRun = concreteFinalCertificate.ConcreteGeneratedAcceptRunEnvelope.GeneratedAcceptRunEnvelope.AcceptRun;
   const concreteChain = concreteStatusEnvelope.ConcreteChain;
   const hardCoverage = summarizeHardCoverageFromReleaseGate0(gateEnvelope);
+  const packageCoverage = summarizeConcretePackageCoverageFromReleaseGate0(gateEnvelope);
 
   return {
     kind: 'ConcreteReleaseAppendixRecord0',
@@ -131,6 +132,26 @@ export function makeConcreteReleaseAppendixRecord0(gateEnvelope) {
     concreteLocalPackages: concreteChain.concreteLocalPackages,
     concreteGlobalFirewalls: concreteChain.concreteGlobalFirewalls,
     concreteGlobalProofDAG: concreteChain.concreteGlobalProofDAG,
+    concreteKBundle: packageCoverage.concreteKBundle,
+    kBundleEnvelopeKind: packageCoverage.kBundleEnvelopeKind,
+    kBundleKernelRuleCoverageComplete: packageCoverage.kBundleKernelRuleCoverageComplete,
+    kBundleSigmaProofRefsResolve: packageCoverage.kBundleSigmaProofRefsResolve,
+    kBundleReflectionProofRefsResolve: packageCoverage.kBundleReflectionProofRefsResolve,
+    kBundleCoverageDigest: packageCoverage.kBundleCoverageDigest,
+
+    concreteFinalIntegration: packageCoverage.concreteFinalIntegration,
+    finalIntegrationEnvelopeKind: packageCoverage.finalIntegrationEnvelopeKind,
+    finalIntegrationConcreteGlobalProofDAG: packageCoverage.finalIntegrationConcreteGlobalProofDAG,
+    finalIntegrationGPackFieldCoverageComplete: packageCoverage.finalIntegrationGPackFieldCoverageComplete,
+    finalIntegrationRowFamGCoverageComplete: packageCoverage.finalIntegrationRowFamGCoverageComplete,
+    finalIntegrationUsesGPack: packageCoverage.finalIntegrationUsesGPack,
+    rowFamGUsesGPack: packageCoverage.rowFamGUsesGPack,
+    finalTheoremUsesFinalIntegration: packageCoverage.finalTheoremUsesFinalIntegration,
+    rowFamFinalUsesFinalTheorem: packageCoverage.rowFamFinalUsesFinalTheorem,
+    finalMatchUsesGPack: packageCoverage.finalMatchUsesGPack,
+    satDecisionUsesGPack: packageCoverage.satDecisionUsesGPack,
+    finalIntegrationLinksDigest: packageCoverage.finalIntegrationLinksDigest,
+
 
     hardEnvelopeKind: hardCoverage.hardEnvelopeKind,
     concreteHardCheck: hardCoverage.concreteHardCheck,
@@ -347,6 +368,26 @@ export async function CheckConcreteReleaseAppendix0(
     concreteLocalPackages: appendix.concreteLocalPackages,
     concreteGlobalFirewalls: appendix.concreteGlobalFirewalls,
     concreteGlobalProofDAG: appendix.concreteGlobalProofDAG,
+    concreteKBundle: appendix.concreteKBundle,
+    kBundleEnvelopeKind: appendix.kBundleEnvelopeKind,
+    kBundleKernelRuleCoverageComplete: appendix.kBundleKernelRuleCoverageComplete,
+    kBundleSigmaProofRefsResolve: appendix.kBundleSigmaProofRefsResolve,
+    kBundleReflectionProofRefsResolve: appendix.kBundleReflectionProofRefsResolve,
+    kBundleCoverageDigest: appendix.kBundleCoverageDigest,
+
+    concreteFinalIntegration: appendix.concreteFinalIntegration,
+    finalIntegrationEnvelopeKind: appendix.finalIntegrationEnvelopeKind,
+    finalIntegrationConcreteGlobalProofDAG: appendix.finalIntegrationConcreteGlobalProofDAG,
+    finalIntegrationGPackFieldCoverageComplete: appendix.finalIntegrationGPackFieldCoverageComplete,
+    finalIntegrationRowFamGCoverageComplete: appendix.finalIntegrationRowFamGCoverageComplete,
+    finalIntegrationUsesGPack: appendix.finalIntegrationUsesGPack,
+    rowFamGUsesGPack: appendix.rowFamGUsesGPack,
+    finalTheoremUsesFinalIntegration: appendix.finalTheoremUsesFinalIntegration,
+    rowFamFinalUsesFinalTheorem: appendix.rowFamFinalUsesFinalTheorem,
+    finalMatchUsesGPack: appendix.finalMatchUsesGPack,
+    satDecisionUsesGPack: appendix.satDecisionUsesGPack,
+    finalIntegrationLinksDigest: appendix.finalIntegrationLinksDigest,
+
 
     hardEnvelopeKind: appendix.hardEnvelopeKind,
     concreteHardCheck: appendix.concreteHardCheck,
@@ -445,6 +486,46 @@ export async function writeConcreteReleaseAppendixFiles0(outDir, options = {}) {
   };
 }
 
+
+
+function summarizeConcretePackageCoverageFromReleaseGate0(gateEnvelope) {
+  const generatedAcceptRunEnvelope =
+    gateEnvelope?.ConcreteFinalCertificatePublicStatusEnvelope
+      ?.ConcreteFinalCertificateEnvelope
+      ?.ConcreteGeneratedAcceptRunEnvelope
+      ?.GeneratedAcceptRunEnvelope ?? null;
+
+  const materializedPCCPack = generatedAcceptRunEnvelope?.MaterializedPCCPack ?? null;
+  const kBundleEnvelope = materializedPCCPack?.KBundleEnvelope ?? null;
+  const kBundleCoverage = kBundleEnvelope?.ProofInventory ?? null;
+  const finalIntegrationEnvelope = materializedPCCPack?.FinalIntegrationEnvelope ?? null;
+  const finalIntegrationLinks = finalIntegrationEnvelope?.ConcreteLinks ?? null;
+
+  return {
+    kind: 'ConcreteReleaseAppendixPackageCoverage0',
+    version: CHECKER_VERSION,
+
+    kBundleEnvelopeKind: kBundleEnvelope?.kind ?? null,
+    concreteKBundle: kBundleEnvelope?.kind === 'ConcreteMaterializedKBundle0',
+    kBundleKernelRuleCoverageComplete: kBundleCoverage?.kernelRuleCoverageComplete === true,
+    kBundleSigmaProofRefsResolve: kBundleCoverage?.sigmaProofRefsResolve === true,
+    kBundleReflectionProofRefsResolve: kBundleCoverage?.reflectionProofRefsResolve === true,
+    kBundleCoverageDigest: isPlainObject(kBundleCoverage) ? digestCanonical0(kBundleCoverage) : null,
+
+    finalIntegrationEnvelopeKind: finalIntegrationEnvelope?.kind ?? null,
+    concreteFinalIntegration: finalIntegrationEnvelope?.kind === 'ConcreteMaterializedFinalIntegration0',
+    finalIntegrationConcreteGlobalProofDAG: finalIntegrationLinks?.concreteGlobalProofDAG === true,
+    finalIntegrationGPackFieldCoverageComplete: finalIntegrationLinks?.gpackFieldCoverageComplete === true,
+    finalIntegrationRowFamGCoverageComplete: finalIntegrationLinks?.rowFamGCoverageComplete === true,
+    finalIntegrationUsesGPack: finalIntegrationLinks?.finalIntegrationUsesGPack === true,
+    rowFamGUsesGPack: finalIntegrationLinks?.rowFamGUsesGPack === true,
+    finalTheoremUsesFinalIntegration: finalIntegrationLinks?.finalTheoremUsesFinalIntegration === true,
+    rowFamFinalUsesFinalTheorem: finalIntegrationLinks?.rowFamFinalUsesFinalTheorem === true,
+    finalMatchUsesGPack: finalIntegrationLinks?.finalMatchUsesGPack === true,
+    satDecisionUsesGPack: finalIntegrationLinks?.satDecisionUsesGPack === true,
+    finalIntegrationLinksDigest: isPlainObject(finalIntegrationLinks) ? digestCanonical0(finalIntegrationLinks) : null,
+  };
+}
 
 function summarizeHardCoverageFromReleaseGate0(gateEnvelope) {
   const generatedAcceptRunEnvelope =
@@ -578,6 +659,22 @@ function validateAppendixRecord0(actual, expected) {
     'concreteLocalPackages',
     'concreteGlobalFirewalls',
     'concreteGlobalProofDAG',
+    'concreteKBundle',
+    'kBundleKernelRuleCoverageComplete',
+    'kBundleSigmaProofRefsResolve',
+    'kBundleReflectionProofRefsResolve',
+
+    'concreteFinalIntegration',
+    'finalIntegrationConcreteGlobalProofDAG',
+    'finalIntegrationGPackFieldCoverageComplete',
+    'finalIntegrationRowFamGCoverageComplete',
+    'finalIntegrationUsesGPack',
+    'rowFamGUsesGPack',
+    'finalTheoremUsesFinalIntegration',
+    'rowFamFinalUsesFinalTheorem',
+    'finalMatchUsesGPack',
+    'satDecisionUsesGPack',
+
     'concreteHardCheck',
     'hardCheckerCoverageComplete',
     'hardRowKeyCoverageComplete',

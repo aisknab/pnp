@@ -86,6 +86,24 @@ test('CheckConcreteReleaseAppendix0 accepts the concrete release appendix', asyn
   assert.equal(out.NF.concreteLocalPackages, true);
   assert.equal(out.NF.concreteGlobalFirewalls, true);
   assert.equal(out.NF.concreteGlobalProofDAG, true);
+  assert.equal(out.NF.concreteKBundle, true);
+  assert.equal(out.NF.kBundleKernelRuleCoverageComplete, true);
+  assert.equal(out.NF.kBundleSigmaProofRefsResolve, true);
+  assert.equal(out.NF.kBundleReflectionProofRefsResolve, true);
+
+  assert.equal(out.NF.concreteFinalIntegration, true);
+  assert.equal(out.NF.finalIntegrationConcreteGlobalProofDAG, true);
+  assert.equal(out.NF.finalIntegrationGPackFieldCoverageComplete, true);
+  assert.equal(out.NF.finalIntegrationRowFamGCoverageComplete, true);
+  assert.equal(out.NF.finalIntegrationUsesGPack, true);
+  assert.equal(out.NF.rowFamGUsesGPack, true);
+  assert.equal(out.NF.finalTheoremUsesFinalIntegration, true);
+  assert.equal(out.NF.rowFamFinalUsesFinalTheorem, true);
+  assert.equal(out.NF.finalMatchUsesGPack, true);
+  assert.equal(out.NF.satDecisionUsesGPack, true);
+  assert.match(out.NF.kBundleCoverageDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.finalIntegrationLinksDigest.hex, /^[0-9a-f]{64}$/);
+
   assert.equal(out.NF.finalCertificateUsesConcreteAcceptRun, true);
   assert.equal(out.NF.statusUsesConcreteFinalCertificate, true);
 
@@ -292,4 +310,74 @@ test('CheckConcreteReleaseAppendix0 rejects appendix without concrete HardCheck 
   assert.equal(out.checker, 'CheckConcreteReleaseAppendix0');
   assert.equal(out.Coord, 'CheckConcreteReleaseAppendix0.appendix');
   assert.deepEqual(out.Path, ['Appendix', 'hardNoMinCoverageComplete']);
+});
+
+test('CheckConcreteReleaseAppendix0 rejects appendix without concrete KBundle proof coverage', async () => {
+  const gate = await makeGate0();
+
+  gate.ConcreteFinalCertificatePublicStatusEnvelope
+    .ConcreteFinalCertificateEnvelope
+    .ConcreteGeneratedAcceptRunEnvelope
+    .GeneratedAcceptRunEnvelope
+    .MaterializedPCCPack
+    .KBundleEnvelope
+    .ProofInventory = {
+      ...gate.ConcreteFinalCertificatePublicStatusEnvelope
+        .ConcreteFinalCertificateEnvelope
+        .ConcreteGeneratedAcceptRunEnvelope
+        .GeneratedAcceptRunEnvelope
+        .MaterializedPCCPack
+        .KBundleEnvelope
+        .ProofInventory,
+      sigmaProofRefsResolve: false,
+    };
+
+  const envelope = await makeConcreteReleaseAppendix0({
+    ReleaseAuditConcreteFinalCertificateGateEnvelope: gate,
+  });
+
+  const out = await CheckConcreteReleaseAppendix0(envelope, {
+    checkConcreteReleaseGate: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteReleaseAppendix0');
+  assert.equal(out.Coord, 'CheckConcreteReleaseAppendix0.appendix');
+  assert.deepEqual(out.Path, ['Appendix', 'kBundleSigmaProofRefsResolve']);
+});
+
+test('CheckConcreteReleaseAppendix0 rejects appendix without concrete final-integration coverage', async () => {
+  const gate = await makeGate0();
+
+  gate.ConcreteFinalCertificatePublicStatusEnvelope
+    .ConcreteFinalCertificateEnvelope
+    .ConcreteGeneratedAcceptRunEnvelope
+    .GeneratedAcceptRunEnvelope
+    .MaterializedPCCPack
+    .FinalIntegrationEnvelope
+    .ConcreteLinks = {
+      ...gate.ConcreteFinalCertificatePublicStatusEnvelope
+        .ConcreteFinalCertificateEnvelope
+        .ConcreteGeneratedAcceptRunEnvelope
+        .GeneratedAcceptRunEnvelope
+        .MaterializedPCCPack
+        .FinalIntegrationEnvelope
+        .ConcreteLinks,
+      rowFamGCoverageComplete: false,
+    };
+
+  const envelope = await makeConcreteReleaseAppendix0({
+    ReleaseAuditConcreteFinalCertificateGateEnvelope: gate,
+  });
+
+  const out = await CheckConcreteReleaseAppendix0(envelope, {
+    checkConcreteReleaseGate: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteReleaseAppendix0');
+  assert.equal(out.Coord, 'CheckConcreteReleaseAppendix0.appendix');
+  assert.deepEqual(out.Path, ['Appendix', 'finalIntegrationRowFamGCoverageComplete']);
 });
