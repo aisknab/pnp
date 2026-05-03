@@ -45,6 +45,7 @@ export async function makeConcreteMaterializedGeneratedAcceptRun0({
 } = {}) {
   const generatedAcceptRunEnvelope = GeneratedAcceptRunEnvelope ?? await makeMaterializedGeneratedAcceptRun0();
   const concreteChain = summarizeConcreteGeneratedAcceptRunChain0(generatedAcceptRunEnvelope);
+  const checkPCCPackexpRecord = await CheckPCCPackexp0(generatedAcceptRunEnvelope.MaterializedPCCPack);
 
   const linkage = {
     kind: 'ConcreteMaterializedGeneratedAcceptRunLinkage0',
@@ -54,6 +55,7 @@ export async function makeConcreteMaterializedGeneratedAcceptRun0({
     pccPackDigest: digestCanonical0(resolvePCCPack0(generatedAcceptRunEnvelope.MaterializedPCCPack)),
     acceptRunDigest: digestCanonical0(generatedAcceptRunEnvelope.AcceptRun),
     generatedPackageDigest: digestCanonical0(generatedAcceptRunEnvelope.GeneratedPackage),
+    checkPCCPackexpRecordDigest: digestFromRecord0(checkPCCPackexpRecord),
     concreteChainDigest: digestCanonical0(concreteChain),
   };
 
@@ -61,6 +63,7 @@ export async function makeConcreteMaterializedGeneratedAcceptRun0({
     kind: 'ConcreteMaterializedGeneratedAcceptRun0',
     version: CHECKER_VERSION,
     GeneratedAcceptRunEnvelope: generatedAcceptRunEnvelope,
+    CheckPCCPackexpRecord: checkPCCPackexpRecord,
     ConcreteChain: concreteChain,
     Linkage: linkage,
     PiConcreteMaterializedGeneratedAcceptRun: {
@@ -73,6 +76,11 @@ export async function makeConcreteMaterializedGeneratedAcceptRun0({
           kind: 'MaterializedRef0',
           target: 'GeneratedAcceptRunEnvelope',
           digest: linkage.generatedAcceptRunEnvelopeDigest,
+        },
+        {
+          kind: 'MaterializedRef0',
+          target: 'CheckPCCPackexpRecord',
+          digest: linkage.checkPCCPackexpRecordDigest,
         },
         {
           kind: 'MaterializedRef0',
@@ -229,6 +237,7 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
   const cfg = makeConcreteMaterializedGeneratedAcceptRunConfig0(config);
   const envelope = normalizeInput0(input);
   let checkPCCPackexpRecord = null;
+  let materializedCheckPCCPackexpRecord = null;
 
   const cfgCheck = validateConfig0(cfg);
 
@@ -324,7 +333,7 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
     ledger.push({
       phase: 'CheckPCCPackexp0',
       status: result.ok ? 'pass' : 'fail',
-      digest: checkPCCPackexpRecord.Digest ?? checkPCCPackexpRecord.digest ?? digestCanonical0(checkPCCPackexpRecord),
+      digest: digestFromRecord0(checkPCCPackexpRecord) ?? digestCanonical0(checkPCCPackexpRecord),
     });
 
     if (!result.ok) {
@@ -336,6 +345,29 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
         ledger,
       });
     }
+
+    const materializedRecord = validateMaterializedCheckPCCPackexpRecord0(
+      envelope.CheckPCCPackexpRecord,
+      checkPCCPackexpRecord,
+    );
+
+    ledger.push({
+      phase: 'CheckPCCPackexpRecord',
+      status: materializedRecord.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(materializedRecord.nf ?? materializedRecord.witness ?? null),
+    });
+
+    if (!materializedRecord.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.CheckPCCPackexp`,
+        path: materializedRecord.path,
+        witness: materializedRecord.witness,
+        ledger,
+      });
+    }
+
+    materializedCheckPCCPackexpRecord = envelope.CheckPCCPackexpRecord;
   }
 
   const recomputedChain = summarizeConcreteGeneratedAcceptRunChain0(envelope.GeneratedAcceptRunEnvelope);
@@ -454,9 +486,16 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
     pccPackLinkedToFinalTheorem: recomputedChain.pccPackLinkedToFinalTheorem,
 
     checkPCCPackexp: cfg.checkPCCPackexp === true,
-    checkPCCPackexpRecordDigest: checkPCCPackexpRecord?.Digest ?? checkPCCPackexpRecord?.digest ?? null,
+    checkPCCPackexpRecordDigest: digestFromRecord0(checkPCCPackexpRecord),
     checkPCCPackexpRecordAccepted: checkPCCPackexpRecord === null ? null : checkPCCPackexpRecord.tag === 'accept',
     checkPCCPackexpRecordChecker: checkPCCPackexpRecord?.checker ?? null,
+    checkPCCPackexpMaterializedRecordPresent: isPlainObject(materializedCheckPCCPackexpRecord),
+    checkPCCPackexpMaterializedRecordDigest: digestFromRecord0(materializedCheckPCCPackexpRecord),
+    checkPCCPackexpMaterializedRecordMatchesFresh: (
+      materializedCheckPCCPackexpRecord === null
+        ? null
+        : sameDigestHex0(digestFromRecord0(materializedCheckPCCPackexpRecord), digestFromRecord0(checkPCCPackexpRecord))
+    ),
 
     rowsEnvelopeKind: recomputedChain.rowsEnvelopeKind,
     localPackagesEnvelopeKind: recomputedChain.localPackagesEnvelopeKind,
@@ -505,6 +544,7 @@ export async function writeConcreteMaterializedGeneratedAcceptRunFiles0(outDir, 
   const envelopePath = path.join(outDir, 'ConcreteMaterializedGeneratedAcceptRun0.json');
   const generatedAcceptRunPath = path.join(outDir, 'MaterializedGeneratedAcceptRun0.json');
   const concreteChainPath = path.join(outDir, 'ConcreteGeneratedAcceptRunChain0.json');
+  const checkPCCPackexpRecordPath = path.join(outDir, 'CheckPCCPackexp0.json');
   const acceptRunPath = path.join(outDir, 'AcceptRun0.json');
   const pccPackPath = path.join(outDir, 'PCCPack0.json');
   const checkPath = path.join(outDir, 'ConcreteMaterializedGeneratedAcceptRun0.check.json');
@@ -512,6 +552,7 @@ export async function writeConcreteMaterializedGeneratedAcceptRunFiles0(outDir, 
   await writeJsonFile0(envelopePath, envelope);
   await writeJsonFile0(generatedAcceptRunPath, envelope.GeneratedAcceptRunEnvelope);
   await writeJsonFile0(concreteChainPath, envelope.ConcreteChain);
+  await writeJsonFile0(checkPCCPackexpRecordPath, envelope.CheckPCCPackexpRecord);
   await writeJsonFile0(acceptRunPath, envelope.GeneratedAcceptRunEnvelope.AcceptRun);
   await writeJsonFile0(pccPackPath, envelope.GeneratedAcceptRunEnvelope.AcceptRun.Pgen);
   await writeJsonFile0(checkPath, checked);
@@ -523,6 +564,7 @@ export async function writeConcreteMaterializedGeneratedAcceptRunFiles0(outDir, 
       envelopePath,
       generatedAcceptRunPath,
       concreteChainPath,
+      checkPCCPackexpRecordPath,
       acceptRunPath,
       pccPackPath,
       checkPath,
@@ -547,6 +589,7 @@ function normalizeInput0(input) {
         pccPackDigest: digestCanonical0(resolvePCCPack0(input.MaterializedPCCPack)),
         acceptRunDigest: digestCanonical0(input.AcceptRun),
         generatedPackageDigest: digestCanonical0(input.GeneratedPackage),
+        checkPCCPackexpRecordDigest: null,
         concreteChainDigest: digestCanonical0(concreteChain),
       },
     };
@@ -753,6 +796,70 @@ function validateJsonMaterialized0(value) {
   });
 }
 
+function validateMaterializedCheckPCCPackexpRecord0(actual, expected) {
+  if (!isPlainObject(actual)) {
+    return validationReject0(['CheckPCCPackexpRecord'], 'ConcreteMaterializedGeneratedAcceptRun0 must include CheckPCCPackexpRecord', {
+      actual: typeof actual,
+    });
+  }
+
+  if (actual.tag !== 'accept') {
+    return validationReject0(['CheckPCCPackexpRecord', 'tag'], 'CheckPCCPackexpRecord must be accepted', {
+      actual: actual.tag,
+    });
+  }
+
+  if (actual.checker !== 'CheckPCCPackexp0') {
+    return validationReject0(['CheckPCCPackexpRecord', 'checker'], 'CheckPCCPackexpRecord checker mismatch', {
+      actual: actual.checker,
+    });
+  }
+
+  const actualNF = actual.NF ?? actual.nf;
+  const expectedNF = expected?.NF ?? expected?.nf;
+
+  if (!isPlainObject(actualNF)) {
+    return validationReject0(['CheckPCCPackexpRecord', 'NF'], 'CheckPCCPackexpRecord must expose NF', {
+      actual: typeof actualNF,
+    });
+  }
+
+  if (!isPlainObject(expectedNF)) {
+    return validationReject0(['CheckPCCPackexpRecord'], 'fresh CheckPCCPackexp0 record must expose NF', {
+      actual: typeof expectedNF,
+    });
+  }
+
+  const actualDigest = digestFromRecord0(actual);
+  const actualNFDigest = digestCanonical0(actualNF);
+
+  if (!sameDigestHex0(actualDigest, actualNFDigest)) {
+    return validationReject0(['CheckPCCPackexpRecord', 'Digest'], 'CheckPCCPackexpRecord Digest must match its NF', {
+      expected: actualNFDigest,
+      actual: actualDigest,
+    });
+  }
+
+  if (stableStringify0(actualNF) !== stableStringify0(expectedNF)) {
+    return validationReject0(['CheckPCCPackexpRecord', 'NF'], 'materialized CheckPCCPackexpRecord must match fresh CheckPCCPackexp0 replay', {
+      expectedDigest: digestCanonical0(expectedNF),
+      actualDigest: digestCanonical0(actualNF),
+    });
+  }
+
+  if (!sameDigestHex0(actualDigest, digestFromRecord0(expected))) {
+    return validationReject0(['CheckPCCPackexpRecord', 'Digest'], 'materialized CheckPCCPackexpRecord digest must match fresh replay digest', {
+      expected: digestFromRecord0(expected),
+      actual: actualDigest,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'ConcreteGeneratedAcceptRunCheckPCCPackexpRecord0NF',
+    checkPCCPackexpRecordDigest: actualDigest,
+  });
+}
+
 function validateLinkage0(envelope, concreteChain) {
   if (envelope.Linkage === null || envelope.Linkage === undefined) {
     return validationAccept0({
@@ -775,6 +882,7 @@ function validateLinkage0(envelope, concreteChain) {
     pccPackDigest: digestCanonical0(resolvePCCPack0(generated.MaterializedPCCPack)),
     acceptRunDigest: digestCanonical0(generated.AcceptRun),
     generatedPackageDigest: digestCanonical0(generated.GeneratedPackage),
+    checkPCCPackexpRecordDigest: digestFromRecord0(envelope.CheckPCCPackexpRecord),
     concreteChainDigest: digestCanonical0(concreteChain),
   };
 
@@ -850,6 +958,14 @@ function resolveGlobalProofDAG0(value) {
 
 function allTrue0(...values) {
   return values.every((value) => value === true);
+}
+
+function digestFromRecord0(record) {
+  if (!isPlainObject(record)) {
+    return null;
+  }
+
+  return record.Digest ?? record.digest ?? null;
 }
 
 function sameDigestHex0(actual, expected) {
