@@ -72,6 +72,17 @@ function makeAcceptedConcreteFinalCertificatePublicStatusRecord0() {
     pccPackLinkedToGPack: true,
     pccPackLinkedToFinalIntegration: true,
     pccPackLinkedToFinalTheorem: true,
+    checkPCCPackexpRecordPresent: true,
+    checkPCCPackexpRecordAccepted: true,
+    checkPCCPackexpRecordChecker: 'CheckPCCPackexp0',
+    checkPCCPackexpRecordDigest: digestOf0('dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd'),
+    checkPCCPackexpRecordDigestMatchesNF: true,
+    checkPCCPackexpRecordConcretePCCPack: true,
+    checkPCCPackexpRecordPccPackDigest: digestOf0('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'),
+    checkPCCPackexpRecordPccPackDigestMatchesConcreteRun: true,
+    checkPCCPackexpRecordPublicConclusionOnlyAfterAcceptRun: true,
+    checkPCCPackexpRecordPublicConclusionNotEmitted: true,
+    checkPCCPackexpRecordClaimBoundaryConditional: true,
 
     finalCertificateUsesConcreteAcceptRun: true,
     statusUsesConcreteFinalCertificate: true,
@@ -191,6 +202,17 @@ test('CheckReleaseAudit0 reports the concrete final-certificate public-status ga
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGatePccPackLinkedToGPack, true);
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGatePccPackLinkedToFinalIntegration, true);
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGatePccPackLinkedToFinalTheorem, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordPresent, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordAccepted, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordChecker, 'CheckPCCPackexp0');
+  assert.match(out.NF.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordDigestMatchesNF, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordConcretePCCPack, true);
+  assert.match(out.NF.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordPccPackDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordPccPackDigestMatchesConcreteRun, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordPublicConclusionOnlyAfterAcceptRun, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordPublicConclusionNotEmitted, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordClaimBoundaryConditional, true);
 
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateStatusUsesConcreteFinalCertificate, true);
 
@@ -214,6 +236,17 @@ test('CheckReleaseAudit0 reports the concrete final-certificate public-status ga
   assert.equal(summary.concreteFinalCertificatePublicStatusGatePccPackLinkedToGPack, true);
   assert.equal(summary.concreteFinalCertificatePublicStatusGatePccPackLinkedToFinalIntegration, true);
   assert.equal(summary.concreteFinalCertificatePublicStatusGatePccPackLinkedToFinalTheorem, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordPresent, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordAccepted, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordChecker, 'CheckPCCPackexp0');
+  assert.match(summary.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordDigestMatchesNF, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordConcretePCCPack, true);
+  assert.match(summary.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordPccPackDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordPccPackDigestMatchesConcreteRun, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordPublicConclusionOnlyAfterAcceptRun, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordPublicConclusionNotEmitted, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateCheckPCCPackexpRecordClaimBoundaryConditional, true);
 
   assert.equal(summary.concreteFinalCertificatePublicStatusGateSummary.publicConclusion.consequent, 'P = NP');
 });
@@ -274,4 +307,37 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without concr
   assert.equal(out.checker, 'CheckReleaseAudit0');
   assert.equal(out.Coord, 'CheckReleaseAudit0.concreteFinalCertificatePublicStatusGate');
   assert.deepEqual(out.Path, ['concreteFinalCertificatePublicStatusGate', 'NF', 'concretePCCPack']);
+});
+
+test('CheckReleaseAudit0 rejects a concrete final-certificate gate without CheckPCCPackexp0 evidence', async () => {
+  const bad = makeAcceptedConcreteFinalCertificatePublicStatusRecord0();
+
+  bad.NF = {
+    ...bad.NF,
+    checkPCCPackexpRecordPresent: false,
+  };
+  bad.nf = bad.NF;
+  bad.Digest = digestCanonical0(bad.NF);
+  bad.digest = bad.Digest;
+
+  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+    runSyntaxCheck: false,
+    runRunAll: false,
+    runMutationCheck: false,
+    runCliSmoke: false,
+    runPublicSurfaceFreeze: false,
+    runMaterializedPublicStatusGate: false,
+    runFinalCertificatePublicStatusGate: false,
+    runConcreteFinalCertificatePublicStatusGate: true,
+    concreteFinalCertificatePublicStatusGateRunner: async () => bad,
+  }));
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAudit0');
+  assert.equal(out.Coord, 'CheckReleaseAudit0.concreteFinalCertificatePublicStatusGate');
+  assert.deepEqual(out.Path, [
+    'concreteFinalCertificatePublicStatusGate',
+    'NF',
+    'checkPCCPackexpRecordPresent',
+  ]);
 });
