@@ -45,6 +45,19 @@ test('CheckConcreteFinalCertificatePublicStatus0 accepts public status over conc
   assert.equal(out.NF.finalIntegrationGPackFieldCoverageComplete, true);
   assert.equal(out.NF.finalIntegrationRowFamGCoverageComplete, true);
 
+  assert.equal(out.NF.concretePCCPack, true);
+  assert.match(out.NF.concretePCCPackCoverageDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.pccPackPublicConclusionOnlyAfterAcceptRun, true);
+  assert.equal(out.NF.pccPackLinkedToKBundle, true);
+  assert.equal(out.NF.pccPackLinkedToHardCheck, true);
+  assert.equal(out.NF.pccPackLinkedToRows, true);
+  assert.equal(out.NF.pccPackLinkedToLocalPackages, true);
+  assert.equal(out.NF.pccPackLinkedToGlobalFirewalls, true);
+  assert.equal(out.NF.pccPackLinkedToGlobalProofDAG, true);
+  assert.equal(out.NF.pccPackLinkedToGPack, true);
+  assert.equal(out.NF.pccPackLinkedToFinalIntegration, true);
+  assert.equal(out.NF.pccPackLinkedToFinalTheorem, true);
+
   assert.equal(out.NF.statusUsesConcreteFinalCertificate, true);
   assert.equal(out.NF.publicStatusCertificateDigestMatchesConcrete, true);
   assert.equal(out.NF.publicStatusFinalVerdictDigestMatchesConcrete, true);
@@ -126,6 +139,52 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects status envelope not tie
   assert.equal(out.checker, 'CheckConcreteFinalCertificatePublicStatus0');
   assert.equal(out.Coord, 'CheckConcreteFinalCertificatePublicStatus0.concreteChain');
   assert.deepEqual(out.Path, ['ConcreteChain', 'statusUsesConcreteFinalCertificate']);
+});
+
+test('CheckConcreteFinalCertificatePublicStatus0 rejects concrete PCCPack component drift', async () => {
+  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+
+  envelope.ConcreteFinalCertificateEnvelope
+    .ConcreteGeneratedAcceptRunEnvelope
+    .GeneratedAcceptRunEnvelope
+    .MaterializedPCCPack
+    .PCCPack = {
+      ...envelope.ConcreteFinalCertificateEnvelope
+        .ConcreteGeneratedAcceptRunEnvelope
+        .GeneratedAcceptRunEnvelope
+        .MaterializedPCCPack
+        .PCCPack,
+      HardCheck: {
+        ...envelope.ConcreteFinalCertificateEnvelope
+          .ConcreteGeneratedAcceptRunEnvelope
+          .GeneratedAcceptRunEnvelope
+          .MaterializedPCCPack
+          .PCCPack
+          .HardCheck,
+        DriftWitness: 'changed-hard-check',
+      },
+    };
+
+  envelope.ConcreteChain = summarizeConcreteFinalCertificatePublicStatusChain0({
+    concreteFinalCertificateEnvelope: envelope.ConcreteFinalCertificateEnvelope,
+    finalCertificatePublicStatusEnvelope: envelope.FinalCertificatePublicStatusEnvelope,
+  });
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+    checkConcreteFinalCertificate: false,
+    checkFinalCertificatePublicStatus: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteFinalCertificatePublicStatus0');
+  assert.equal(out.Coord, 'CheckConcreteFinalCertificatePublicStatus0.concreteChain');
+  assert.deepEqual(out.Path, ['ConcreteChain', 'concretePCCPack']);
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 strictly rejects an injected synthetic scaffold marker', async () => {
