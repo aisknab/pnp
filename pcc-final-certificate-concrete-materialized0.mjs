@@ -120,6 +120,13 @@ export function summarizeConcreteFinalCertificateChain0({
   const certificate = finalCertificateEnvelope?.Certificate ?? null;
   const finalVerdict = finalCertificateEnvelope?.FinalVerdict ?? null;
 
+  const checkPCCPackexpRecord = concreteGeneratedAcceptRunEnvelope?.CheckPCCPackexpRecord ?? null;
+  const checkPCCPackexpRecordNF = checkPCCPackexpRecord?.NF ?? checkPCCPackexpRecord?.nf ?? null;
+  const checkPCCPackexpRecordDigest = digestFromRecord0(checkPCCPackexpRecord);
+  const checkPCCPackexpRecordNFDigest = isPlainObject(checkPCCPackexpRecordNF)
+    ? digestCanonical0(checkPCCPackexpRecordNF)
+    : null;
+
   const generatedAcceptRunDigest = digestCanonical0(generatedAcceptRunEnvelope);
   const finalGeneratedAcceptRunDigest = digestCanonical0(finalGeneratedAcceptRunEnvelope);
 
@@ -181,6 +188,31 @@ export function summarizeConcreteFinalCertificateChain0({
     pccPackLinkedToGPack: concreteGeneratedChain.pccPackLinkedToGPack,
     pccPackLinkedToFinalIntegration: concreteGeneratedChain.pccPackLinkedToFinalIntegration,
     pccPackLinkedToFinalTheorem: concreteGeneratedChain.pccPackLinkedToFinalTheorem,
+
+    checkPCCPackexpRecordPresent: isPlainObject(checkPCCPackexpRecord),
+    checkPCCPackexpRecordAccepted: checkPCCPackexpRecord?.tag === 'accept',
+    checkPCCPackexpRecordChecker: checkPCCPackexpRecord?.checker ?? null,
+    checkPCCPackexpRecordDigest,
+    checkPCCPackexpRecordDigestMatchesNF: sameDigestHex0(
+      checkPCCPackexpRecordDigest,
+      checkPCCPackexpRecordNFDigest,
+    ),
+    checkPCCPackexpRecordConcretePCCPack: checkPCCPackexpRecordNF?.concretePCCPack === true,
+    checkPCCPackexpRecordPccPackDigest: checkPCCPackexpRecordNF?.pccPackDigest ?? null,
+    checkPCCPackexpRecordPccPackDigestMatchesConcreteRun: sameDigestHex0(
+      checkPCCPackexpRecordNF?.pccPackDigest ?? null,
+      concreteGeneratedChain.pccPackDigest,
+    ),
+    checkPCCPackexpRecordPublicConclusionOnlyAfterAcceptRun: (
+      checkPCCPackexpRecordNF?.publicConclusionOnlyAfterAcceptRun === true
+    ),
+    checkPCCPackexpRecordPublicConclusionNotEmitted: (
+      checkPCCPackexpRecordNF?.publicConclusionEmitted === false
+    ),
+    checkPCCPackexpRecordClaimBoundaryConditional: samePublicConclusion0(
+      checkPCCPackexpRecordNF?.publicConclusion ?? null,
+      makeClaimBoundary0(),
+    ),
 
     rowsEnvelopeKind: concreteGeneratedChain.rowsEnvelopeKind,
     localPackagesEnvelopeKind: concreteGeneratedChain.localPackagesEnvelopeKind,
@@ -460,6 +492,18 @@ export async function CheckConcreteMaterializedFinalCertificate0(
     pccPackLinkedToFinalIntegration: recomputedChain.pccPackLinkedToFinalIntegration,
     pccPackLinkedToFinalTheorem: recomputedChain.pccPackLinkedToFinalTheorem,
 
+    checkPCCPackexpRecordPresent: recomputedChain.checkPCCPackexpRecordPresent,
+    checkPCCPackexpRecordAccepted: recomputedChain.checkPCCPackexpRecordAccepted,
+    checkPCCPackexpRecordChecker: recomputedChain.checkPCCPackexpRecordChecker,
+    checkPCCPackexpRecordDigest: recomputedChain.checkPCCPackexpRecordDigest,
+    checkPCCPackexpRecordDigestMatchesNF: recomputedChain.checkPCCPackexpRecordDigestMatchesNF,
+    checkPCCPackexpRecordConcretePCCPack: recomputedChain.checkPCCPackexpRecordConcretePCCPack,
+    checkPCCPackexpRecordPccPackDigest: recomputedChain.checkPCCPackexpRecordPccPackDigest,
+    checkPCCPackexpRecordPccPackDigestMatchesConcreteRun: recomputedChain.checkPCCPackexpRecordPccPackDigestMatchesConcreteRun,
+    checkPCCPackexpRecordPublicConclusionOnlyAfterAcceptRun: recomputedChain.checkPCCPackexpRecordPublicConclusionOnlyAfterAcceptRun,
+    checkPCCPackexpRecordPublicConclusionNotEmitted: recomputedChain.checkPCCPackexpRecordPublicConclusionNotEmitted,
+    checkPCCPackexpRecordClaimBoundaryConditional: recomputedChain.checkPCCPackexpRecordClaimBoundaryConditional,
+
     kBundleEnvelopeKind: recomputedChain.kBundleEnvelopeKind,
     hardEnvelopeKind: recomputedChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: recomputedChain.finalIntegrationEnvelopeKind,
@@ -702,6 +746,15 @@ function validateConcreteFinalCertificateChain0(actual, expected) {
     'pccPackLinkedToFinalIntegration',
     'pccPackLinkedToFinalTheorem',
 
+    'checkPCCPackexpRecordPresent',
+    'checkPCCPackexpRecordAccepted',
+    'checkPCCPackexpRecordDigestMatchesNF',
+    'checkPCCPackexpRecordConcretePCCPack',
+    'checkPCCPackexpRecordPccPackDigestMatchesConcreteRun',
+    'checkPCCPackexpRecordPublicConclusionOnlyAfterAcceptRun',
+    'checkPCCPackexpRecordPublicConclusionNotEmitted',
+    'checkPCCPackexpRecordClaimBoundaryConditional',
+
     'finalCertificateUsesConcreteAcceptRun',
     'certificatePccPackDigestMatchesConcreteRun',
     'certificateAcceptRunDigestMatchesConcreteRun',
@@ -876,6 +929,22 @@ function scanFixtureMarkers0(value, path, hits) {
   for (const key of Object.keys(value)) {
     scanFixtureMarkers0(value[key], [...path, key], hits);
   }
+}
+
+function makeClaimBoundary0() {
+  return {
+    antecedent: 'CheckPCCPackexp(GeneratePCCPack())=accept',
+    consequent: 'P = NP',
+    conditional: true,
+  };
+}
+
+function digestFromRecord0(record) {
+  if (!isPlainObject(record)) {
+    return null;
+  }
+
+  return record.Digest ?? record.digest ?? null;
 }
 
 function samePublicConclusion0(a, b) {

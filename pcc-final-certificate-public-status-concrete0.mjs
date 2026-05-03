@@ -199,6 +199,18 @@ export function summarizeConcreteFinalCertificatePublicStatusChain0({
     pccPackLinkedToFinalIntegration: concreteCertificateChain.pccPackLinkedToFinalIntegration,
     pccPackLinkedToFinalTheorem: concreteCertificateChain.pccPackLinkedToFinalTheorem,
 
+    checkPCCPackexpRecordPresent: concreteCertificateChain.checkPCCPackexpRecordPresent,
+    checkPCCPackexpRecordAccepted: concreteCertificateChain.checkPCCPackexpRecordAccepted,
+    checkPCCPackexpRecordChecker: concreteCertificateChain.checkPCCPackexpRecordChecker,
+    checkPCCPackexpRecordDigest: concreteCertificateChain.checkPCCPackexpRecordDigest,
+    checkPCCPackexpRecordDigestMatchesNF: concreteCertificateChain.checkPCCPackexpRecordDigestMatchesNF,
+    checkPCCPackexpRecordConcretePCCPack: concreteCertificateChain.checkPCCPackexpRecordConcretePCCPack,
+    checkPCCPackexpRecordPccPackDigest: concreteCertificateChain.checkPCCPackexpRecordPccPackDigest,
+    checkPCCPackexpRecordPccPackDigestMatchesConcreteRun: concreteCertificateChain.checkPCCPackexpRecordPccPackDigestMatchesConcreteRun,
+    checkPCCPackexpRecordPublicConclusionOnlyAfterAcceptRun: concreteCertificateChain.checkPCCPackexpRecordPublicConclusionOnlyAfterAcceptRun,
+    checkPCCPackexpRecordPublicConclusionNotEmitted: concreteCertificateChain.checkPCCPackexpRecordPublicConclusionNotEmitted,
+    checkPCCPackexpRecordClaimBoundaryConditional: concreteCertificateChain.checkPCCPackexpRecordClaimBoundaryConditional,
+
     kBundleEnvelopeKind: concreteCertificateChain.kBundleEnvelopeKind,
     hardEnvelopeKind: concreteCertificateChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: concreteCertificateChain.finalIntegrationEnvelopeKind,
@@ -505,6 +517,18 @@ export async function CheckConcreteFinalCertificatePublicStatus0(
     pccPackLinkedToFinalIntegration: recomputedChain.pccPackLinkedToFinalIntegration,
     pccPackLinkedToFinalTheorem: recomputedChain.pccPackLinkedToFinalTheorem,
 
+    checkPCCPackexpRecordPresent: recomputedChain.checkPCCPackexpRecordPresent,
+    checkPCCPackexpRecordAccepted: recomputedChain.checkPCCPackexpRecordAccepted,
+    checkPCCPackexpRecordChecker: recomputedChain.checkPCCPackexpRecordChecker,
+    checkPCCPackexpRecordDigest: recomputedChain.checkPCCPackexpRecordDigest,
+    checkPCCPackexpRecordDigestMatchesNF: recomputedChain.checkPCCPackexpRecordDigestMatchesNF,
+    checkPCCPackexpRecordConcretePCCPack: recomputedChain.checkPCCPackexpRecordConcretePCCPack,
+    checkPCCPackexpRecordPccPackDigest: recomputedChain.checkPCCPackexpRecordPccPackDigest,
+    checkPCCPackexpRecordPccPackDigestMatchesConcreteRun: recomputedChain.checkPCCPackexpRecordPccPackDigestMatchesConcreteRun,
+    checkPCCPackexpRecordPublicConclusionOnlyAfterAcceptRun: recomputedChain.checkPCCPackexpRecordPublicConclusionOnlyAfterAcceptRun,
+    checkPCCPackexpRecordPublicConclusionNotEmitted: recomputedChain.checkPCCPackexpRecordPublicConclusionNotEmitted,
+    checkPCCPackexpRecordClaimBoundaryConditional: recomputedChain.checkPCCPackexpRecordClaimBoundaryConditional,
+
     kBundleEnvelopeKind: recomputedChain.kBundleEnvelopeKind,
     hardEnvelopeKind: recomputedChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: recomputedChain.finalIntegrationEnvelopeKind,
@@ -739,6 +763,15 @@ function validateConcretePublicStatusChain0(actual, expected) {
     'pccPackLinkedToFinalIntegration',
     'pccPackLinkedToFinalTheorem',
 
+    'checkPCCPackexpRecordPresent',
+    'checkPCCPackexpRecordAccepted',
+    'checkPCCPackexpRecordDigestMatchesNF',
+    'checkPCCPackexpRecordConcretePCCPack',
+    'checkPCCPackexpRecordPccPackDigestMatchesConcreteRun',
+    'checkPCCPackexpRecordPublicConclusionOnlyAfterAcceptRun',
+    'checkPCCPackexpRecordPublicConclusionNotEmitted',
+    'checkPCCPackexpRecordClaimBoundaryConditional',
+
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',
     'publicStatusCertificateDigestMatchesConcrete',
@@ -934,6 +967,22 @@ function scanFixtureMarkers0(value, path, hits) {
   for (const key of Object.keys(value)) {
     scanFixtureMarkers0(value[key], [...path, key], hits);
   }
+}
+
+function makeClaimBoundary0() {
+  return {
+    antecedent: 'CheckPCCPackexp(GeneratePCCPack())=accept',
+    consequent: 'P = NP',
+    conditional: true,
+  };
+}
+
+function digestFromRecord0(record) {
+  if (!isPlainObject(record)) {
+    return null;
+  }
+
+  return record.Digest ?? record.digest ?? null;
 }
 
 function samePublicConclusion0(a, b) {
