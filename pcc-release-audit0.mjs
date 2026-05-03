@@ -139,6 +139,8 @@ export const RELEASE_AUDIT_REQUIRED_MODULES0 = Object.freeze([
   'pcc-readme-release-boundary0.mjs',
   'pcc-release-audit-final-certificate-concrete-gate0.mjs',
   'bin/write-release-audit-concrete-final-certificate-gate0.mjs',
+  'pcc-concrete-release-appendix0.mjs',
+  'bin/write-concrete-release-appendix0.mjs',
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
@@ -234,6 +236,7 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-release-audit-final-certificate-surface0.test.mjs',
   'pcc-release-audit-final-certificate-concrete-gate0.test.mjs',
   'pcc-release-audit-concrete-final-certificate-surface0.test.mjs',
+  'pcc-concrete-release-appendix0.test.mjs',
 ]);    
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
