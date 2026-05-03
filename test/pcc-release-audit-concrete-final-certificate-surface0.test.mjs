@@ -32,6 +32,34 @@ function makeAcceptedConcreteFinalCertificatePublicStatusRecord0() {
     concreteGlobalFirewalls: true,
     concreteGlobalProofDAG: true,
 
+    concreteKBundle: true,
+    kBundleKernelRuleCoverageComplete: true,
+    kBundleSigmaProofRefsResolve: true,
+    kBundleReflectionProofRefsResolve: true,
+
+    concreteHardCheck: true,
+    hardCheckerCoverageComplete: true,
+    hardRowKeyCoverageComplete: true,
+    hardRoutePriorityComplete: true,
+    hardProofRefPolicyComplete: true,
+    hardHashDisciplineComplete: true,
+    hardNoMinCoverageComplete: true,
+    hardImportPolicyComplete: true,
+    hardReflectionPolicyComplete: true,
+    hardBoundsPolicyComplete: true,
+    hardDiagnosticsPolicyComplete: true,
+
+    concreteFinalIntegration: true,
+    finalIntegrationConcreteGlobalProofDAG: true,
+    finalIntegrationGPackFieldCoverageComplete: true,
+    finalIntegrationRowFamGCoverageComplete: true,
+    finalIntegrationUsesGPack: true,
+    rowFamGUsesGPack: true,
+    finalTheoremUsesFinalIntegration: true,
+    rowFamFinalUsesFinalTheorem: true,
+    finalMatchUsesGPack: true,
+    satDecisionUsesGPack: true,
+
     finalCertificateUsesConcreteAcceptRun: true,
     statusUsesConcreteFinalCertificate: true,
     publicStatusCertificateDigestMatchesConcrete: true,
@@ -124,6 +152,20 @@ test('CheckReleaseAudit0 reports the concrete final-certificate public-status ga
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateConcreteLocalPackages, true);
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateConcreteGlobalFirewalls, true);
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateConcreteGlobalProofDAG, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateConcreteKBundle, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateKBundleKernelRuleCoverageComplete, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateKBundleSigmaProofRefsResolve, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateKBundleReflectionProofRefsResolve, true);
+
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateConcreteHardCheck, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateHardCheckerCoverageComplete, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateHardNoMinCoverageComplete, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateHardImportPolicyComplete, true);
+
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateConcreteFinalIntegration, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateFinalIntegrationGPackFieldCoverageComplete, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateFinalIntegrationRowFamGCoverageComplete, true);
+
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateStatusUsesConcreteFinalCertificate, true);
 
   const summary = summarizeReleaseAudit0(out);
@@ -131,6 +173,9 @@ test('CheckReleaseAudit0 reports the concrete final-certificate public-status ga
   assert.equal(summary.tag, 'accept');
   assert.equal(summary.concreteFinalCertificatePublicStatusGateSummary.status, 'accepted');
   assert.equal(summary.concreteFinalCertificatePublicStatusGateConcreteRows, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateConcreteKBundle, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateConcreteHardCheck, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateConcreteFinalIntegration, true);
   assert.equal(summary.concreteFinalCertificatePublicStatusGateSummary.publicConclusion.consequent, 'P = NP');
 });
 

@@ -90,6 +90,20 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 accepts attached release au
   assert.equal(out.NF.concreteLocalPackages, true);
   assert.equal(out.NF.concreteGlobalFirewalls, true);
   assert.equal(out.NF.concreteGlobalProofDAG, true);
+  assert.equal(out.NF.concreteKBundle, true);
+  assert.equal(out.NF.kBundleKernelRuleCoverageComplete, true);
+  assert.equal(out.NF.kBundleSigmaProofRefsResolve, true);
+  assert.equal(out.NF.kBundleReflectionProofRefsResolve, true);
+
+  assert.equal(out.NF.concreteHardCheck, true);
+  assert.equal(out.NF.hardCheckerCoverageComplete, true);
+  assert.equal(out.NF.hardNoMinCoverageComplete, true);
+  assert.equal(out.NF.hardImportPolicyComplete, true);
+
+  assert.equal(out.NF.concreteFinalIntegration, true);
+  assert.equal(out.NF.finalIntegrationGPackFieldCoverageComplete, true);
+  assert.equal(out.NF.finalIntegrationRowFamGCoverageComplete, true);
+
   assert.equal(out.NF.finalCertificateUsesConcreteAcceptRun, true);
   assert.equal(out.NF.statusUsesConcreteFinalCertificate, true);
 
@@ -274,4 +288,33 @@ test('writeReleaseAuditConcreteFinalCertificateGateFiles0 writes replayable JSON
 
     assert.equal(typeof value, 'object');
   }
+});
+
+test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects incomplete concrete HardCheck coverage', async () => {
+  const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
+  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+    ReleaseAuditRecord: releaseAuditRecord,
+    runReleaseAudit: false,
+  });
+
+  envelope.ConcreteFinalCertificatePublicStatusEnvelope.ConcreteChain = {
+    ...envelope.ConcreteFinalCertificatePublicStatusEnvelope.ConcreteChain,
+    hardNoMinCoverageComplete: false,
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concretePublicStatusEnvelopeDigest: undefined,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+    checkConcretePublicStatus: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAuditConcreteFinalCertificateGate0');
+  assert.equal(out.Coord, 'CheckReleaseAuditConcreteFinalCertificateGate0.PublicConclusion');
+  assert.deepEqual(out.Path, ['ConcreteFinalCertificatePublicStatusEnvelope', 'ConcreteChain', 'hardNoMinCoverageComplete']);
 });
