@@ -78,6 +78,11 @@ import {
   makeMaterializedFinalIntegrationEnvelope0,
 } from './pcc-final-integration-materialized0.mjs';
 
+import {
+  CheckConcreteMaterializedFinalIntegration0,
+  makeConcreteMaterializedFinalIntegration0,
+} from './pcc-final-integration-concrete-materialized0.mjs';
+
 const CHECKER_VERSION = 0;
 
 const MATERIALIZED_PACK_FORBIDDEN_MARKERS0 = Object.freeze([
@@ -150,7 +155,9 @@ export async function makeMaterializedPCCPack0({
   });
   const globalProofDAG = resolveGlobalProofDAG0(globalProofDAGEnvelope);
 
-  const finalIntegrationEnvelope = FinalIntegrationEnvelope ?? makeMaterializedFinalIntegrationEnvelope0();
+  const finalIntegrationEnvelope = FinalIntegrationEnvelope ?? await makeConcreteMaterializedFinalIntegration0({
+    ConcreteGlobalProofDAGEnvelope: globalProofDAGEnvelope,
+  });
   const gpack = resolveGPack0(finalIntegrationEnvelope);
   const rowFamG = resolveRowFamG0(finalIntegrationEnvelope);
   const finalIntegration = resolveFinalIntegration0(finalIntegrationEnvelope);
@@ -542,6 +549,11 @@ export async function CheckMaterializedPCCPack0(input, config = makeMaterialized
     kBundleKernelRuleCoverageComplete: envelope.KBundleEnvelope?.ProofInventory?.kernelRuleCoverageComplete === true,
     kBundleSigmaProofRefsResolve: envelope.KBundleEnvelope?.ProofInventory?.sigmaProofRefsResolve === true,
     kBundleReflectionProofRefsResolve: envelope.KBundleEnvelope?.ProofInventory?.reflectionProofRefsResolve === true,
+    finalIntegrationEnvelopeKind: envelope.FinalIntegrationEnvelope?.kind ?? null,
+    concreteFinalIntegration: isPlainObject(envelope.FinalIntegrationEnvelope) && envelope.FinalIntegrationEnvelope.kind === 'ConcreteMaterializedFinalIntegration0',
+    finalIntegrationConcreteGlobalProofDAG: envelope.FinalIntegrationEnvelope?.ConcreteLinks?.concreteGlobalProofDAG === true,
+    finalIntegrationGPackFieldCoverageComplete: envelope.FinalIntegrationEnvelope?.ConcreteLinks?.gpackFieldCoverageComplete === true,
+    finalIntegrationRowFamGCoverageComplete: envelope.FinalIntegrationEnvelope?.ConcreteLinks?.rowFamGCoverageComplete === true,
     syntheticMarkerCount: markerInventory.syntheticMarkerCount,
     forbiddenMarkerCount: markerInventory.forbiddenMarkerCount,
     allowSyntheticScaffoldMarker: cfg.allowSyntheticScaffoldMarker,
@@ -719,6 +731,14 @@ function validateShape0(envelope) {
   });
 }
 
+async function checkMaterializedFinalIntegrationEnvelope0(value) {
+  if (isPlainObject(value) && value.kind === 'ConcreteMaterializedFinalIntegration0') {
+    return CheckConcreteMaterializedFinalIntegration0(value);
+  }
+
+  return CheckMaterializedFinalIntegration0(value);
+}
+
 async function checkMaterializedKBundleEnvelope0(value) {
   if (isPlainObject(value) && value.kind === 'ConcreteMaterializedKBundle0') {
     return CheckConcreteMaterializedKBundle0(value);
@@ -768,7 +788,7 @@ async function validateMaterializedComponents0(envelope) {
     ['GlobalProofDAGEnvelope', await checkMaterializedGlobalProofDAGEnvelope0(envelope.GlobalProofDAGEnvelope)],
     ['LocalPackagesEnvelope', await checkMaterializedLocalPackagesEnvelope0(envelope.LocalPackagesEnvelope)],
     ['GlobalFirewallsEnvelope', await checkMaterializedGlobalFirewallsEnvelope0(envelope.GlobalFirewallsEnvelope)],
-    ['FinalIntegrationEnvelope', await CheckMaterializedFinalIntegration0(envelope.FinalIntegrationEnvelope)],
+    ['FinalIntegrationEnvelope', await checkMaterializedFinalIntegrationEnvelope0(envelope.FinalIntegrationEnvelope)],
   ];
 
   const componentDigests = [];

@@ -284,3 +284,24 @@ test('makeMaterializedPCCPack0 uses concrete materialized KBundle proof coverage
   assert.equal(out.NF.kBundleSigmaProofRefsResolve, true);
   assert.equal(out.NF.kBundleReflectionProofRefsResolve, true);
 });
+
+test('makeMaterializedPCCPack0 uses concrete materialized final integration by default', async () => {
+  const envelope = await makeMaterializedPCCPack0();
+
+  assert.equal(envelope.FinalIntegrationEnvelope.kind, 'ConcreteMaterializedFinalIntegration0');
+  assert.equal(envelope.FinalIntegrationEnvelope.ConcreteGlobalProofDAGEnvelope.kind, 'ConcreteMaterializedGlobalProofDAG0');
+  assert.equal(envelope.FinalIntegrationEnvelope.ConcreteLinks.concreteKBundle, true);
+  assert.equal(envelope.FinalIntegrationEnvelope.ConcreteLinks.concreteGlobalProofDAG, true);
+  assert.equal(envelope.FinalIntegrationEnvelope.ConcreteLinks.gpackFieldCoverageComplete, true);
+  assert.equal(envelope.FinalIntegrationEnvelope.ConcreteLinks.rowFamGCoverageComplete, true);
+
+  const out = await CheckMaterializedPCCPack0(envelope);
+
+  assert.equal(out.tag, 'accept');
+  assert.equal(out.checker, 'CheckMaterializedPCCPack0');
+  assert.equal(out.NF.finalIntegrationEnvelopeKind, 'ConcreteMaterializedFinalIntegration0');
+  assert.equal(out.NF.concreteFinalIntegration, true);
+  assert.equal(out.NF.finalIntegrationConcreteGlobalProofDAG, true);
+  assert.equal(out.NF.finalIntegrationGPackFieldCoverageComplete, true);
+  assert.equal(out.NF.finalIntegrationRowFamGCoverageComplete, true);
+});

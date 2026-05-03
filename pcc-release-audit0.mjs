@@ -143,6 +143,8 @@ export const RELEASE_AUDIT_REQUIRED_MODULES0 = Object.freeze([
   'bin/write-concrete-release-appendix0.mjs',
   'pcc-k-concrete-materialized0.mjs',
   'bin/write-concrete-materialized-kbundle0.mjs',
+  'pcc-final-integration-concrete-materialized0.mjs',
+  'bin/write-concrete-materialized-final-integration0.mjs',
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
@@ -240,6 +242,7 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-release-audit-concrete-final-certificate-surface0.test.mjs',
   'pcc-concrete-release-appendix0.test.mjs',
   'pcc-k-concrete-materialized0.test.mjs',
+  'pcc-final-integration-concrete-materialized0.test.mjs',
 ]);    
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
