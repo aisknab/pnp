@@ -356,6 +356,19 @@ export async function CheckReleaseAuditConcreteFinalCertificateGate0(
     finalMatchUsesGPack: concreteStatus.ConcreteChain.finalMatchUsesGPack,
     satDecisionUsesGPack: concreteStatus.ConcreteChain.satDecisionUsesGPack,
 
+    concretePCCPack: concreteStatus.ConcreteChain.concretePCCPack,
+    concretePCCPackCoverageDigest: concreteStatus.ConcreteChain.concretePCCPackCoverageDigest,
+    pccPackPublicConclusionOnlyAfterAcceptRun: concreteStatus.ConcreteChain.pccPackPublicConclusionOnlyAfterAcceptRun,
+    pccPackLinkedToKBundle: concreteStatus.ConcreteChain.pccPackLinkedToKBundle,
+    pccPackLinkedToHardCheck: concreteStatus.ConcreteChain.pccPackLinkedToHardCheck,
+    pccPackLinkedToRows: concreteStatus.ConcreteChain.pccPackLinkedToRows,
+    pccPackLinkedToLocalPackages: concreteStatus.ConcreteChain.pccPackLinkedToLocalPackages,
+    pccPackLinkedToGlobalFirewalls: concreteStatus.ConcreteChain.pccPackLinkedToGlobalFirewalls,
+    pccPackLinkedToGlobalProofDAG: concreteStatus.ConcreteChain.pccPackLinkedToGlobalProofDAG,
+    pccPackLinkedToGPack: concreteStatus.ConcreteChain.pccPackLinkedToGPack,
+    pccPackLinkedToFinalIntegration: concreteStatus.ConcreteChain.pccPackLinkedToFinalIntegration,
+    pccPackLinkedToFinalTheorem: concreteStatus.ConcreteChain.pccPackLinkedToFinalTheorem,
+
     finalCertificateUsesConcreteAcceptRun: concreteStatus.ConcreteChain.finalCertificateUsesConcreteAcceptRun,
     statusUsesConcreteFinalCertificate: concreteStatus.ConcreteChain.statusUsesConcreteFinalCertificate,
 
@@ -613,6 +626,18 @@ function validateConcretePublicConclusionAlignment0(envelope) {
     'rowFamFinalUsesFinalTheorem',
     'finalMatchUsesGPack',
     'satDecisionUsesGPack',
+
+    'concretePCCPack',
+    'pccPackPublicConclusionOnlyAfterAcceptRun',
+    'pccPackLinkedToKBundle',
+    'pccPackLinkedToHardCheck',
+    'pccPackLinkedToRows',
+    'pccPackLinkedToLocalPackages',
+    'pccPackLinkedToGlobalFirewalls',
+    'pccPackLinkedToGlobalProofDAG',
+    'pccPackLinkedToGPack',
+    'pccPackLinkedToFinalIntegration',
+    'pccPackLinkedToFinalTheorem',
 
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',
