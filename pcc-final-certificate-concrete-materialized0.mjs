@@ -1,0 +1,926 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+
+import {
+  digestCanonical0,
+  stableStringify0,
+} from './pcc-verifier-frag0.mjs';
+
+import {
+  CheckMaterializedFinalCertificate0,
+  makeMaterializedFinalCertificate0,
+} from './pcc-final-certificate-materialized0.mjs';
+
+import {
+  CheckConcreteMaterializedGeneratedAcceptRun0,
+  makeConcreteMaterializedGeneratedAcceptRun0,
+  summarizeConcreteGeneratedAcceptRunChain0,
+} from './pcc-accept-run-concrete-materialized0.mjs';
+
+const CHECKER_VERSION = 0;
+
+const CONCRETE_CERT_FORBIDDEN_MARKERS0 = Object.freeze([
+  'placeholder',
+  'stub',
+  'mock',
+  'fixture-only',
+  'todo',
+]);
+
+const CONCRETE_CERT_SYNTHETIC_MARKER0 = 'synthetic';
+
+export function makeConcreteMaterializedFinalCertificateConfig0(overrides = {}) {
+  return {
+    kind: 'ConcreteMaterializedFinalCertificateConfig0',
+    version: CHECKER_VERSION,
+    checkConcreteGeneratedAcceptRun: true,
+    checkFinalCertificate: true,
+    checkConcreteChain: true,
+    checkJsonMaterialized: true,
+    rejectFixtureMarkers: true,
+    allowSyntheticScaffoldMarker: true,
+    checkLinkage: true,
+    concreteGeneratedAcceptRunConfig: {},
+    finalCertificateConfig: {},
+    ...overrides,
+  };
+}
+
+export async function makeConcreteMaterializedFinalCertificate0({
+  ConcreteGeneratedAcceptRunEnvelope = null,
+  FinalCertificateEnvelope = null,
+  overrides = {},
+} = {}) {
+  const concreteGeneratedAcceptRunEnvelope = ConcreteGeneratedAcceptRunEnvelope ?? await makeConcreteMaterializedGeneratedAcceptRun0();
+
+  const finalCertificateEnvelope = FinalCertificateEnvelope ?? await makeMaterializedFinalCertificate0({
+    GeneratedAcceptRunEnvelope: concreteGeneratedAcceptRunEnvelope.GeneratedAcceptRunEnvelope,
+  });
+
+  const concreteChain = summarizeConcreteFinalCertificateChain0({
+    concreteGeneratedAcceptRunEnvelope,
+    finalCertificateEnvelope,
+  });
+
+  const linkage = {
+    kind: 'ConcreteMaterializedFinalCertificateLinkage0',
+    version: CHECKER_VERSION,
+    concreteGeneratedAcceptRunEnvelopeDigest: digestCanonical0(concreteGeneratedAcceptRunEnvelope),
+    generatedAcceptRunEnvelopeDigest: digestCanonical0(concreteGeneratedAcceptRunEnvelope.GeneratedAcceptRunEnvelope),
+    finalCertificateEnvelopeDigest: digestCanonical0(finalCertificateEnvelope),
+    finalCertificateDigest: digestCanonical0(finalCertificateEnvelope.Certificate),
+    finalVerdictDigest: digestCanonical0(finalCertificateEnvelope.FinalVerdict),
+    finalVerdictRecordDigest: finalCertificateEnvelope.FinalVerdict.Digest ?? finalCertificateEnvelope.FinalVerdict.digest ?? null,
+    acceptRunDigest: digestCanonical0(concreteGeneratedAcceptRunEnvelope.GeneratedAcceptRunEnvelope.AcceptRun),
+    pccPackDigest: digestCanonical0(concreteGeneratedAcceptRunEnvelope.GeneratedAcceptRunEnvelope.AcceptRun.Pgen),
+    concreteChainDigest: digestCanonical0(concreteChain),
+  };
+
+  return {
+    kind: 'ConcreteMaterializedFinalCertificate0',
+    version: CHECKER_VERSION,
+    ConcreteGeneratedAcceptRunEnvelope: concreteGeneratedAcceptRunEnvelope,
+    FinalCertificateEnvelope: finalCertificateEnvelope,
+    ConcreteChain: concreteChain,
+    Linkage: linkage,
+    PiConcreteMaterializedFinalCertificate: {
+      kind: 'PiConcreteMaterializedFinalCertificate0',
+      version: CHECKER_VERSION,
+      materialized: true,
+      externalJson: true,
+      refs: [
+        {
+          kind: 'MaterializedRef0',
+          target: 'ConcreteGeneratedAcceptRunEnvelope',
+          digest: linkage.concreteGeneratedAcceptRunEnvelopeDigest,
+        },
+        {
+          kind: 'MaterializedRef0',
+          target: 'FinalCertificateEnvelope',
+          digest: linkage.finalCertificateEnvelopeDigest,
+        },
+        {
+          kind: 'MaterializedRef0',
+          target: 'ConcreteFinalCertificateChain',
+          digest: linkage.concreteChainDigest,
+        },
+      ],
+    },
+    ...overrides,
+  };
+}
+
+export function summarizeConcreteFinalCertificateChain0({
+  concreteGeneratedAcceptRunEnvelope,
+  finalCertificateEnvelope,
+}) {
+  const generatedAcceptRunEnvelope = concreteGeneratedAcceptRunEnvelope?.GeneratedAcceptRunEnvelope ?? null;
+  const finalGeneratedAcceptRunEnvelope = finalCertificateEnvelope?.GeneratedAcceptRunEnvelope ?? null;
+  const concreteGeneratedChain = summarizeConcreteGeneratedAcceptRunChain0(generatedAcceptRunEnvelope);
+  const certificate = finalCertificateEnvelope?.Certificate ?? null;
+  const finalVerdict = finalCertificateEnvelope?.FinalVerdict ?? null;
+
+  const generatedAcceptRunDigest = digestCanonical0(generatedAcceptRunEnvelope);
+  const finalGeneratedAcceptRunDigest = digestCanonical0(finalGeneratedAcceptRunEnvelope);
+
+  const pccPackDigest = concreteGeneratedChain.pccPackDigest;
+  const certificatePccPackDigest = certificate?.artefactDigests?.pccPackDigest ?? null;
+
+  const acceptRunDigest = digestCanonical0(generatedAcceptRunEnvelope?.AcceptRun ?? null);
+  const certificateAcceptRunDigest = certificate?.artefactDigests?.acceptRunDigest ?? null;
+
+  const finalVerdictRecordDigest = finalVerdict?.Digest ?? finalVerdict?.digest ?? null;
+  const certificateFinalVerdictRecordDigest = certificate?.artefactDigests?.finalVerdictRecordDigest ?? null;
+
+  return {
+    kind: 'ConcreteFinalCertificateChain0',
+    version: CHECKER_VERSION,
+
+    concreteRows: concreteGeneratedChain.concreteRows,
+    concreteLocalPackages: concreteGeneratedChain.concreteLocalPackages,
+    concreteGlobalFirewalls: concreteGeneratedChain.concreteGlobalFirewalls,
+    concreteGlobalProofDAG: concreteGeneratedChain.concreteGlobalProofDAG,
+
+    rowsEnvelopeKind: concreteGeneratedChain.rowsEnvelopeKind,
+    localPackagesEnvelopeKind: concreteGeneratedChain.localPackagesEnvelopeKind,
+    globalFirewallsEnvelopeKind: concreteGeneratedChain.globalFirewallsEnvelopeKind,
+    globalProofDAGEnvelopeKind: concreteGeneratedChain.globalProofDAGEnvelopeKind,
+
+    generatedAcceptRunDigest,
+    finalCertificateGeneratedAcceptRunDigest: finalGeneratedAcceptRunDigest,
+    finalCertificateUsesConcreteAcceptRun: sameDigestHex0(generatedAcceptRunDigest, finalGeneratedAcceptRunDigest),
+
+    pccPackDigest,
+    certificatePccPackDigest,
+    certificatePccPackDigestMatchesConcreteRun: sameDigestHex0(pccPackDigest, certificatePccPackDigest),
+
+    acceptRunDigest,
+    certificateAcceptRunDigest,
+    certificateAcceptRunDigestMatchesConcreteRun: sameDigestHex0(acceptRunDigest, certificateAcceptRunDigest),
+
+    finalVerdictRecordDigest,
+    certificateFinalVerdictRecordDigest,
+    certificateFinalVerdictDigestMatchesRecord: sameDigestHex0(finalVerdictRecordDigest, certificateFinalVerdictRecordDigest),
+
+    publicTheorem: certificate?.publicTheorem ?? null,
+    publicTheoremMatchesAcceptedFinalVerdict: samePublicConclusion0(
+      certificate?.publicTheorem ?? null,
+      finalVerdict?.NF?.publicConclusion ?? finalVerdict?.nf?.publicConclusion ?? null,
+    ),
+
+    canonicalByteRoots: certificate?.canonicalByteRoots ?? null,
+    acceptanceTranscript: certificate?.acceptanceTranscript ?? null,
+  };
+}
+
+export async function CheckConcreteMaterializedFinalCertificate0(
+  input,
+  config = makeConcreteMaterializedFinalCertificateConfig0(),
+) {
+  const checker = 'CheckConcreteMaterializedFinalCertificate0';
+  const ledger = [];
+  const cfg = makeConcreteMaterializedFinalCertificateConfig0(config);
+  const envelope = normalizeInput0(input);
+
+  const cfgCheck = validateConfig0(cfg);
+
+  ledger.push({
+    phase: 'config',
+    status: cfgCheck.ok ? 'pass' : 'fail',
+    digest: digestCanonical0(cfgCheck.nf ?? cfgCheck.witness ?? null),
+  });
+
+  if (!cfgCheck.ok) {
+    return makeRejectRecord({
+      checker,
+      coord: `${checker}.config`,
+      path: cfgCheck.path,
+      witness: cfgCheck.witness,
+      ledger,
+    });
+  }
+
+  const shape = validateShape0(envelope);
+
+  ledger.push({
+    phase: 'shape',
+    status: shape.ok ? 'pass' : 'fail',
+    digest: digestCanonical0(shape.nf ?? shape.witness ?? null),
+  });
+
+  if (!shape.ok) {
+    return makeRejectRecord({
+      checker,
+      coord: `${checker}.input`,
+      path: shape.path,
+      witness: shape.witness,
+      ledger,
+    });
+  }
+
+  if (cfg.checkConcreteGeneratedAcceptRun === true) {
+    const record = await CheckConcreteMaterializedGeneratedAcceptRun0(
+      envelope.ConcreteGeneratedAcceptRunEnvelope,
+      cfg.concreteGeneratedAcceptRunConfig ?? {},
+    );
+    const result = recordToValidation0(record, ['ConcreteGeneratedAcceptRunEnvelope']);
+
+    ledger.push({
+      phase: 'CheckConcreteMaterializedGeneratedAcceptRun0',
+      status: result.ok ? 'pass' : 'fail',
+      digest: record.Digest ?? record.digest ?? digestCanonical0(record),
+    });
+
+    if (!result.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.ConcreteGeneratedAcceptRun`,
+        path: result.path,
+        witness: result.witness,
+        ledger,
+      });
+    }
+  }
+
+  if (cfg.checkFinalCertificate === true) {
+    const record = await CheckMaterializedFinalCertificate0(
+      envelope.FinalCertificateEnvelope,
+      cfg.finalCertificateConfig ?? {},
+    );
+    const result = recordToValidation0(record, ['FinalCertificateEnvelope']);
+
+    ledger.push({
+      phase: 'CheckMaterializedFinalCertificate0',
+      status: result.ok ? 'pass' : 'fail',
+      digest: record.Digest ?? record.digest ?? digestCanonical0(record),
+    });
+
+    if (!result.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.FinalCertificate`,
+        path: result.path,
+        witness: result.witness,
+        ledger,
+      });
+    }
+  }
+
+  const recomputedChain = summarizeConcreteFinalCertificateChain0({
+    concreteGeneratedAcceptRunEnvelope: envelope.ConcreteGeneratedAcceptRunEnvelope,
+    finalCertificateEnvelope: envelope.FinalCertificateEnvelope,
+  });
+
+  if (cfg.checkConcreteChain === true) {
+    const chain = validateConcreteFinalCertificateChain0(envelope.ConcreteChain, recomputedChain);
+
+    ledger.push({
+      phase: 'concreteChain',
+      status: chain.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(chain.nf ?? chain.witness ?? null),
+    });
+
+    if (!chain.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.concreteChain`,
+        path: chain.path,
+        witness: chain.witness,
+        ledger,
+      });
+    }
+  }
+
+  if (cfg.checkJsonMaterialized === true) {
+    const json = validateJsonMaterialized0(envelope);
+
+    ledger.push({
+      phase: 'jsonMaterialized',
+      status: json.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(json.nf ?? json.witness ?? null),
+    });
+
+    if (!json.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.json`,
+        path: json.path,
+        witness: json.witness,
+        ledger,
+      });
+    }
+  }
+
+  const markerInventory = collectFixtureMarkers0(envelope, ['ConcreteMaterializedFinalCertificate0']);
+
+  ledger.push({
+    phase: 'fixtureMarkerInventory',
+    status: 'pass',
+    digest: digestCanonical0(markerInventory),
+  });
+
+  if (cfg.rejectFixtureMarkers === true) {
+    const markers = validateNoForbiddenFixtureMarkers0(markerInventory, cfg);
+
+    ledger.push({
+      phase: 'fixtureMarkers',
+      status: markers.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(markers.nf ?? markers.witness ?? null),
+    });
+
+    if (!markers.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.fixtureMarkers`,
+        path: markers.path,
+        witness: markers.witness,
+        ledger,
+      });
+    }
+  }
+
+  if (cfg.checkLinkage === true) {
+    const linkage = validateLinkage0(envelope, recomputedChain);
+
+    ledger.push({
+      phase: 'linkage',
+      status: linkage.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(linkage.nf ?? linkage.witness ?? null),
+    });
+
+    if (!linkage.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.linkage`,
+        path: linkage.path,
+        witness: linkage.witness,
+        ledger,
+      });
+    }
+  }
+
+  const nf = {
+    kind: 'ConcreteMaterializedFinalCertificate0NF',
+    checker,
+    version: CHECKER_VERSION,
+    materializedPath: true,
+    syntheticRunAll: false,
+
+    concreteRows: recomputedChain.concreteRows,
+    concreteLocalPackages: recomputedChain.concreteLocalPackages,
+    concreteGlobalFirewalls: recomputedChain.concreteGlobalFirewalls,
+    concreteGlobalProofDAG: recomputedChain.concreteGlobalProofDAG,
+
+    finalCertificateUsesConcreteAcceptRun: recomputedChain.finalCertificateUsesConcreteAcceptRun,
+    certificatePccPackDigestMatchesConcreteRun: recomputedChain.certificatePccPackDigestMatchesConcreteRun,
+    certificateAcceptRunDigestMatchesConcreteRun: recomputedChain.certificateAcceptRunDigestMatchesConcreteRun,
+    certificateFinalVerdictDigestMatchesRecord: recomputedChain.certificateFinalVerdictDigestMatchesRecord,
+    publicTheoremMatchesAcceptedFinalVerdict: recomputedChain.publicTheoremMatchesAcceptedFinalVerdict,
+
+    pccPackDigest: recomputedChain.pccPackDigest,
+    acceptRunDigest: recomputedChain.acceptRunDigest,
+    finalVerdictRecordDigest: recomputedChain.finalVerdictRecordDigest,
+    finalCertificateDigest: digestCanonical0(envelope.FinalCertificateEnvelope.Certificate),
+    finalCertificateEnvelopeDigest: digestCanonical0(envelope.FinalCertificateEnvelope),
+    concreteGeneratedAcceptRunEnvelopeDigest: digestCanonical0(envelope.ConcreteGeneratedAcceptRunEnvelope),
+    concreteChainDigest: digestCanonical0(recomputedChain),
+    linkageDigest: digestCanonical0(envelope.Linkage ?? null),
+
+    publicTheorem: recomputedChain.publicTheorem,
+    canonicalByteRoots: recomputedChain.canonicalByteRoots,
+    acceptanceTranscript: recomputedChain.acceptanceTranscript,
+
+    syntheticMarkerCount: markerInventory.syntheticMarkerCount,
+    forbiddenMarkerCount: markerInventory.forbiddenMarkerCount,
+    allowSyntheticScaffoldMarker: cfg.allowSyntheticScaffoldMarker,
+  };
+
+  return makeAcceptRecord({
+    checker,
+    nf,
+    ledger,
+  });
+}
+
+export async function writeConcreteMaterializedFinalCertificateFiles0(outDir, options = {}) {
+  if (typeof outDir !== 'string' || outDir.length === 0) {
+    throw new TypeError('writeConcreteMaterializedFinalCertificateFiles0 requires a non-empty output directory');
+  }
+
+  const envelope = await makeConcreteMaterializedFinalCertificate0(options);
+  const checked = await CheckConcreteMaterializedFinalCertificate0(envelope, options.checkConfig ?? {});
+
+  await fs.mkdir(outDir, {
+    recursive: true,
+  });
+
+  const envelopePath = path.join(outDir, 'ConcreteMaterializedFinalCertificate0.json');
+  const concreteAcceptRunPath = path.join(outDir, 'ConcreteMaterializedGeneratedAcceptRun0.json');
+  const finalCertificateEnvelopePath = path.join(outDir, 'MaterializedFinalCertificate0.json');
+  const certificatePath = path.join(outDir, 'FinalCertificate0.json');
+  const chainPath = path.join(outDir, 'ConcreteFinalCertificateChain0.json');
+  const checkPath = path.join(outDir, 'ConcreteMaterializedFinalCertificate0.check.json');
+
+  await writeJsonFile0(envelopePath, envelope);
+  await writeJsonFile0(concreteAcceptRunPath, envelope.ConcreteGeneratedAcceptRunEnvelope);
+  await writeJsonFile0(finalCertificateEnvelopePath, envelope.FinalCertificateEnvelope);
+  await writeJsonFile0(certificatePath, envelope.FinalCertificateEnvelope.Certificate);
+  await writeJsonFile0(chainPath, envelope.ConcreteChain);
+  await writeJsonFile0(checkPath, checked);
+
+  return {
+    envelope,
+    checked,
+    files: {
+      envelopePath,
+      concreteAcceptRunPath,
+      finalCertificateEnvelopePath,
+      certificatePath,
+      chainPath,
+      checkPath,
+    },
+  };
+}
+
+function normalizeInput0(input) {
+  if (isPlainObject(input) && input.kind === 'MaterializedFinalCertificate0') {
+    return {
+      kind: 'ConcreteMaterializedFinalCertificate0',
+      version: CHECKER_VERSION,
+      ConcreteGeneratedAcceptRunEnvelope: null,
+      FinalCertificateEnvelope: input,
+      ConcreteChain: null,
+      Linkage: null,
+    };
+  }
+
+  return input;
+}
+
+function validateConfig0(config) {
+  if (!isPlainObject(config)) {
+    return validationReject0([], 'ConcreteMaterializedFinalCertificateConfig0 must be an object', {
+      actual: typeof config,
+    });
+  }
+
+  if (config.kind !== undefined && config.kind !== 'ConcreteMaterializedFinalCertificateConfig0') {
+    return validationReject0(['kind'], 'ConcreteMaterializedFinalCertificateConfig0 kind mismatch', {
+      actual: config.kind,
+    });
+  }
+
+  if (config.version !== undefined && config.version !== CHECKER_VERSION) {
+    return validationReject0(['version'], `ConcreteMaterializedFinalCertificateConfig0 version must be ${CHECKER_VERSION} when present`, {
+      actual: config.version,
+    });
+  }
+
+  for (const field of [
+    'checkConcreteGeneratedAcceptRun',
+    'checkFinalCertificate',
+    'checkConcreteChain',
+    'checkJsonMaterialized',
+    'rejectFixtureMarkers',
+    'allowSyntheticScaffoldMarker',
+    'checkLinkage',
+  ]) {
+    if (typeof config[field] !== 'boolean') {
+      return validationReject0([field], `ConcreteMaterializedFinalCertificateConfig0 ${field} must be boolean`, {
+        actual: config[field],
+      });
+    }
+  }
+
+  if (!isPlainObject(config.concreteGeneratedAcceptRunConfig)) {
+    return validationReject0(['concreteGeneratedAcceptRunConfig'], 'concreteGeneratedAcceptRunConfig must be an object', {
+      actual: typeof config.concreteGeneratedAcceptRunConfig,
+    });
+  }
+
+  if (!isPlainObject(config.finalCertificateConfig)) {
+    return validationReject0(['finalCertificateConfig'], 'finalCertificateConfig must be an object', {
+      actual: typeof config.finalCertificateConfig,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'ConcreteMaterializedFinalCertificateConfig0NF',
+  });
+}
+
+function validateShape0(envelope) {
+  if (!isPlainObject(envelope)) {
+    return validationReject0([], 'ConcreteMaterializedFinalCertificate0 must be an object', {
+      actual: typeof envelope,
+    });
+  }
+
+  if (envelope.kind !== undefined && envelope.kind !== 'ConcreteMaterializedFinalCertificate0') {
+    return validationReject0(['kind'], 'ConcreteMaterializedFinalCertificate0 kind mismatch', {
+      actual: envelope.kind,
+    });
+  }
+
+  if (envelope.version !== undefined && envelope.version !== CHECKER_VERSION) {
+    return validationReject0(['version'], `ConcreteMaterializedFinalCertificate0 version must be ${CHECKER_VERSION} when present`, {
+      actual: envelope.version,
+    });
+  }
+
+  if (!isPlainObject(envelope.ConcreteGeneratedAcceptRunEnvelope)) {
+    return validationReject0(['ConcreteGeneratedAcceptRunEnvelope'], 'ConcreteMaterializedFinalCertificate0 must include ConcreteGeneratedAcceptRunEnvelope', {
+      actual: typeof envelope.ConcreteGeneratedAcceptRunEnvelope,
+    });
+  }
+
+  if (!isPlainObject(envelope.FinalCertificateEnvelope)) {
+    return validationReject0(['FinalCertificateEnvelope'], 'ConcreteMaterializedFinalCertificate0 must include FinalCertificateEnvelope', {
+      actual: typeof envelope.FinalCertificateEnvelope,
+    });
+  }
+
+  if (!isPlainObject(envelope.ConcreteChain)) {
+    return validationReject0(['ConcreteChain'], 'ConcreteMaterializedFinalCertificate0 must include ConcreteChain', {
+      actual: typeof envelope.ConcreteChain,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'ConcreteMaterializedFinalCertificateShape0NF',
+  });
+}
+
+function validateConcreteFinalCertificateChain0(actual, expected) {
+  if (stableStringify0(actual) !== stableStringify0(expected)) {
+    return validationReject0(['ConcreteChain'], 'Concrete final-certificate chain must match recomputed chain summary', {
+      expectedDigest: digestCanonical0(expected),
+      actualDigest: digestCanonical0(actual),
+    });
+  }
+
+  const requiredTrue = [
+    'concreteRows',
+    'concreteLocalPackages',
+    'concreteGlobalFirewalls',
+    'concreteGlobalProofDAG',
+    'finalCertificateUsesConcreteAcceptRun',
+    'certificatePccPackDigestMatchesConcreteRun',
+    'certificateAcceptRunDigestMatchesConcreteRun',
+    'certificateFinalVerdictDigestMatchesRecord',
+    'publicTheoremMatchesAcceptedFinalVerdict',
+  ];
+
+  for (const field of requiredTrue) {
+    if (expected[field] !== true) {
+      return validationReject0(['ConcreteChain', field], `Concrete final-certificate chain must certify ${field}`, {
+        actual: expected[field],
+      });
+    }
+  }
+
+  return validationAccept0({
+    kind: 'ConcreteFinalCertificateChain0NF',
+    concreteChainDigest: digestCanonical0(expected),
+    pccPackDigest: expected.pccPackDigest,
+    finalVerdictRecordDigest: expected.finalVerdictRecordDigest,
+  });
+}
+
+function validateJsonMaterialized0(value) {
+  let bytes;
+  let parsed;
+
+  try {
+    bytes = stableStringify0(value);
+    parsed = JSON.parse(bytes);
+  } catch (error) {
+    return validationReject0(['ConcreteMaterializedFinalCertificate0'], 'ConcreteMaterializedFinalCertificate0 must serialize and parse as JSON', {
+      error: error.message,
+    });
+  }
+
+  const reparsedBytes = stableStringify0(parsed);
+
+  if (reparsedBytes !== bytes) {
+    return validationReject0(['ConcreteMaterializedFinalCertificate0'], 'ConcreteMaterializedFinalCertificate0 canonical JSON bytes must roundtrip', {
+      expectedDigest: digestCanonical0(value),
+      actualDigest: digestCanonical0(parsed),
+    });
+  }
+
+  return validationAccept0({
+    kind: 'ConcreteFinalCertificateJson0NF',
+    byteLength: bytes.length,
+    envelopeDigest: digestCanonical0(value),
+  });
+}
+
+function validateLinkage0(envelope, concreteChain) {
+  if (envelope.Linkage === null || envelope.Linkage === undefined) {
+    return validationAccept0({
+      kind: 'ConcreteFinalCertificateLinkage0NF',
+      present: false,
+    });
+  }
+
+  if (!isPlainObject(envelope.Linkage)) {
+    return validationReject0(['Linkage'], 'ConcreteMaterializedFinalCertificate0 Linkage must be an object when present', {
+      actual: typeof envelope.Linkage,
+    });
+  }
+
+  const expected = {
+    concreteGeneratedAcceptRunEnvelopeDigest: digestCanonical0(envelope.ConcreteGeneratedAcceptRunEnvelope),
+    generatedAcceptRunEnvelopeDigest: digestCanonical0(envelope.ConcreteGeneratedAcceptRunEnvelope.GeneratedAcceptRunEnvelope),
+    finalCertificateEnvelopeDigest: digestCanonical0(envelope.FinalCertificateEnvelope),
+    finalCertificateDigest: digestCanonical0(envelope.FinalCertificateEnvelope.Certificate),
+    finalVerdictDigest: digestCanonical0(envelope.FinalCertificateEnvelope.FinalVerdict),
+    finalVerdictRecordDigest: envelope.FinalCertificateEnvelope.FinalVerdict.Digest ?? envelope.FinalCertificateEnvelope.FinalVerdict.digest,
+    acceptRunDigest: digestCanonical0(envelope.ConcreteGeneratedAcceptRunEnvelope.GeneratedAcceptRunEnvelope.AcceptRun),
+    pccPackDigest: digestCanonical0(envelope.ConcreteGeneratedAcceptRunEnvelope.GeneratedAcceptRunEnvelope.AcceptRun.Pgen),
+    concreteChainDigest: digestCanonical0(concreteChain),
+  };
+
+  for (const [field, expectedDigest] of Object.entries(expected)) {
+    if (!sameDigestHex0(envelope.Linkage[field], expectedDigest)) {
+      return validationReject0(['Linkage', field], `Linkage ${field} mismatch`, {
+        expected: expectedDigest,
+        actual: envelope.Linkage[field],
+      });
+    }
+  }
+
+  return validationAccept0({
+    kind: 'ConcreteFinalCertificateLinkage0NF',
+    present: true,
+    ...expected,
+  });
+}
+
+function collectFixtureMarkers0(value, rootPath) {
+  const hits = [];
+
+  scanFixtureMarkers0(value, rootPath, hits);
+
+  return {
+    kind: 'ConcreteFinalCertificateFixtureMarkerInventory0NF',
+    syntheticMarkerCount: hits.filter((hit) => hit.marker === CONCRETE_CERT_SYNTHETIC_MARKER0).length,
+    forbiddenMarkerCount: hits.filter((hit) => hit.marker !== CONCRETE_CERT_SYNTHETIC_MARKER0).length,
+    hits,
+  };
+}
+
+function validateNoForbiddenFixtureMarkers0(markerInventory, config) {
+  const disallowed = markerInventory.hits.filter((hit) => (
+    hit.marker !== CONCRETE_CERT_SYNTHETIC_MARKER0 ||
+    config.allowSyntheticScaffoldMarker !== true
+  ));
+
+  if (disallowed.length > 0) {
+    return validationReject0(disallowed[0].path, 'concrete materialized final certificate contains forbidden fixture-marker text', {
+      hit: disallowed[0],
+      hitCount: disallowed.length,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'ConcreteFinalCertificateNoForbiddenFixtureMarkers0NF',
+    syntheticMarkerCount: markerInventory.syntheticMarkerCount,
+    forbiddenMarkerCount: markerInventory.forbiddenMarkerCount,
+  });
+}
+
+function scanFixtureMarkers0(value, path, hits) {
+  if (value === null || value === undefined) {
+    return;
+  }
+
+  if (typeof value === 'string') {
+    const lower = value.toLowerCase();
+
+    for (const marker of [
+      CONCRETE_CERT_SYNTHETIC_MARKER0,
+      ...CONCRETE_CERT_FORBIDDEN_MARKERS0,
+    ]) {
+      if (lower.includes(marker)) {
+        hits.push({
+          path,
+          marker,
+          value,
+        });
+      }
+    }
+
+    return;
+  }
+
+  if (
+    typeof value === 'number' ||
+    typeof value === 'boolean' ||
+    typeof value === 'bigint'
+  ) {
+    return;
+  }
+
+  if (Array.isArray(value)) {
+    for (let index = 0; index < value.length; index += 1) {
+      scanFixtureMarkers0(value[index], [...path, index], hits);
+    }
+
+    return;
+  }
+
+  if (!isPlainObject(value)) {
+    return;
+  }
+
+  for (const key of Object.keys(value)) {
+    scanFixtureMarkers0(value[key], [...path, key], hits);
+  }
+}
+
+function samePublicConclusion0(a, b) {
+  return (
+    isPlainObject(a) &&
+    isPlainObject(b) &&
+    a.antecedent === b.antecedent &&
+    a.consequent === b.consequent &&
+    a.conditional === b.conditional
+  );
+}
+
+async function writeJsonFile0(filePath, value) {
+  await fs.writeFile(filePath, `${stableStringify0(value)}\n`, 'utf8');
+}
+
+function sameDigestHex0(actual, expected) {
+  return (
+    isPlainObject(actual) &&
+    isPlainObject(expected) &&
+    typeof actual.hex === 'string' &&
+    typeof expected.hex === 'string' &&
+    actual.hex === expected.hex &&
+    (
+      actual.alg === undefined ||
+      expected.alg === undefined ||
+      actual.alg === expected.alg
+    )
+  );
+}
+
+function recordToValidation0(record, path) {
+  if (isRejectRecord0(record)) {
+    return validationReject0(path, `${record.checker} rejected`, {
+      inner: compactReject0(record),
+    });
+  }
+
+  return validationAccept0(record.NF ?? record.nf ?? record);
+}
+
+function makeAcceptRecord({
+  checker,
+  nf,
+  ledger,
+}) {
+  const digest = digestCanonical0(nf);
+
+  return {
+    tag: 'accept',
+    kind: 'accept',
+    checker,
+    version: CHECKER_VERSION,
+    NF: nf,
+    Digest: digest,
+    Ledger: ledger,
+    nf,
+    digest,
+    ledger,
+  };
+}
+
+function makeRejectRecord({
+  checker,
+  coord,
+  path,
+  witness,
+  ledger,
+}) {
+  const rejectNF = {
+    kind: `${checker}RejectNF`,
+    checker,
+    version: CHECKER_VERSION,
+    coord,
+    path,
+    witness,
+    ledger,
+  };
+
+  const digest = digestCanonical0(rejectNF);
+
+  return {
+    tag: 'reject',
+    kind: 'reject',
+    checker,
+    version: CHECKER_VERSION,
+    Coord: coord,
+    Path: path,
+    Witness: witness,
+    Digest: digest,
+    Ledger: ledger,
+    coord,
+    path,
+    witness,
+    digest,
+    ledger,
+  };
+}
+
+function validationAccept0(nf) {
+  return {
+    ok: true,
+    nf,
+  };
+}
+
+function validationReject0(path, reason, detail) {
+  return {
+    ok: false,
+    path,
+    witness: {
+      reason,
+      detail,
+    },
+  };
+}
+
+function isRejectRecord0(value) {
+  return classifyRecord0(value) === 'reject';
+}
+
+function classifyRecord0(value) {
+  if (!isPlainObject(value)) {
+    return 'unknown';
+  }
+
+  const raw =
+    value.tag ??
+    value.kind ??
+    value.verdict ??
+    value.status ??
+    value.result ??
+    value.outcome;
+
+  if (typeof raw !== 'string') {
+    return 'unknown';
+  }
+
+  const normalized = raw.trim().toLowerCase();
+
+  if (
+    normalized === 'accept' ||
+    normalized === 'accepted' ||
+    normalized === 'ok' ||
+    normalized === 'pass' ||
+    normalized === 'passed'
+  ) {
+    return 'accept';
+  }
+
+  if (
+    normalized === 'reject' ||
+    normalized === 'rejected' ||
+    normalized === 'err' ||
+    normalized === 'error' ||
+    normalized === 'fail' ||
+    normalized === 'failed'
+  ) {
+    return 'reject';
+  }
+
+  return 'unknown';
+}
+
+function compactReject0(value) {
+  if (!isPlainObject(value)) {
+    return value;
+  }
+
+  return {
+    checker: value.checker ?? null,
+    coord: value.Coord ?? value.coord ?? null,
+    path: value.Path ?? value.path ?? null,
+    witness: value.Witness ?? value.witness ?? null,
+    digest: value.Digest ?? value.digest ?? null,
+  };
+}
+
+function isPlainObject(value) {
+  if (value === null || typeof value !== 'object') {
+    return false;
+  }
+
+  const proto = Object.getPrototypeOf(value);
+  return proto === Object.prototype || proto === null;
+}
