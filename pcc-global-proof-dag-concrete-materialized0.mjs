@@ -17,6 +17,11 @@ import {
 } from './pcc-k-materialized0.mjs';
 
 import {
+  CheckConcreteMaterializedKBundle0,
+  makeConcreteMaterializedKBundle0,
+} from './pcc-k-concrete-materialized0.mjs';
+
+import {
   CheckConcreteMaterializedRows0,
   makeConcreteMaterializedRows0,
 } from './pcc-rows-concrete-materialized0.mjs';
@@ -58,6 +63,7 @@ export function makeConcreteMaterializedGlobalProofDAGConfig0(overrides = {}) {
     version: CHECKER_VERSION,
     checkBoot: true,
     checkKBundle: true,
+    checkConcreteKBundle: true,
     checkConcreteRows: true,
     checkConcreteLocalPackages: true,
     checkConcreteGlobalFirewalls: true,
@@ -83,7 +89,7 @@ export async function makeConcreteMaterializedGlobalProofDAG0({
 } = {}) {
   const boot0 = Boot0 ?? await makeMaterializedBoot0();
 
-  const kBundleEnvelope = KBundleEnvelope ?? await makeMaterializedKBundle0({
+  const kBundleEnvelope = KBundleEnvelope ?? await makeConcreteMaterializedKBundle0({
     Boot0: boot0,
   });
 
@@ -101,7 +107,7 @@ export async function makeConcreteMaterializedGlobalProofDAG0({
 
   const materializedGlobalProofDAGEnvelope = MaterializedGlobalProofDAGEnvelope ?? await makeMaterializedGlobalProofDAG0({
     Boot0: boot0,
-    KBundle: kBundleEnvelope,
+    KBundle: resolveMaterializedKBundle0(kBundleEnvelope),
     GlobalProofDAG,
   });
 
@@ -234,8 +240,29 @@ export async function CheckConcreteMaterializedGlobalProofDAG0(
     }
   }
 
+  if (cfg.checkConcreteKBundle === true) {
+    const record = await CheckConcreteMaterializedKBundle0(envelope.KBundleEnvelope);
+    const result = recordToValidation0(record, ['KBundleEnvelope']);
+
+    ledger.push({
+      phase: 'CheckConcreteMaterializedKBundle0',
+      status: result.ok ? 'pass' : 'fail',
+      digest: record.Digest ?? record.digest ?? digestCanonical0(record),
+    });
+
+    if (!result.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.ConcreteKBundle`,
+        path: result.path,
+        witness: result.witness,
+        ledger,
+      });
+    }
+  }
+
   if (cfg.checkKBundle === true) {
-    const record = await CheckMaterializedKBundle0(envelope.KBundleEnvelope);
+    const record = await CheckMaterializedKBundle0(resolveMaterializedKBundle0(envelope.KBundleEnvelope));
     const result = recordToValidation0(record, ['KBundleEnvelope']);
 
     ledger.push({
@@ -444,6 +471,12 @@ export async function CheckConcreteMaterializedGlobalProofDAG0(
     concreteRows: true,
     concreteLocalPackages: true,
     concreteGlobalFirewalls: true,
+    concreteKBundle: envelope.KBundleEnvelope?.kind === 'ConcreteMaterializedKBundle0',
+    kBundleEnvelopeKind: envelope.KBundleEnvelope?.kind ?? null,
+    kBundleProofInventoryDigest: digestCanonical0(envelope.KBundleEnvelope?.ProofInventory ?? null),
+    kBundleKernelRuleCoverageComplete: envelope.KBundleEnvelope?.ProofInventory?.kernelRuleCoverageComplete === true,
+    kBundleSigmaProofRefsResolve: envelope.KBundleEnvelope?.ProofInventory?.sigmaProofRefsResolve === true,
+    kBundleReflectionProofRefsResolve: envelope.KBundleEnvelope?.ProofInventory?.reflectionProofRefsResolve === true,
     globalProofDAGDigest: dagRecord.Digest ?? dagRecord.digest,
     globalProofDAGObjectDigest: digestCanonical0(envelope.GlobalProofDAG),
     materializedGlobalProofDAGDigest: digestCanonical0(envelope.MaterializedGlobalProofDAGEnvelope),
@@ -543,6 +576,7 @@ function validateConfig0(config) {
   for (const field of [
     'checkBoot',
     'checkKBundle',
+    'checkConcreteKBundle',
     'checkConcreteRows',
     'checkConcreteLocalPackages',
     'checkConcreteGlobalFirewalls',
@@ -641,6 +675,13 @@ function validateJsonMaterialized0(value) {
 }
 
 function validateLinkage0(envelope) {
+  if (envelope.KBundleEnvelope?.kind !== 'ConcreteMaterializedKBundle0') {
+    return validationReject0(['KBundleEnvelope', 'kind'], 'ConcreteMaterializedGlobalProofDAG0 must use ConcreteMaterializedKBundle0', {
+      actual: envelope.KBundleEnvelope?.kind ?? null,
+    });
+  }
+
+
   const kimpl = resolveKImpl0(envelope.KBundleEnvelope);
   const rowPack = resolveRowPack0(envelope.ConcreteRowsEnvelope);
   const localPackages = resolveLocalPackages0(envelope.ConcreteLocalPackagesEnvelope);
@@ -822,6 +863,16 @@ function resolveGlobalProofDAG0(value) {
   return value.kind === 'GlobalProofDAG0'
     ? value
     : value.GlobalProofDAG ?? value.globalProofDAG ?? null;
+}
+
+function resolveMaterializedKBundle0(value) {
+  if (!isPlainObject(value)) {
+    return null;
+  }
+
+  return value.kind === 'MaterializedKBundle0'
+    ? value
+    : value.MaterializedKBundleEnvelope ?? value.materializedKBundleEnvelope ?? value;
 }
 
 function resolveKImpl0(value) {

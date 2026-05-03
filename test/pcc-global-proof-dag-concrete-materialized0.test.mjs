@@ -166,3 +166,47 @@ test('writeConcreteMaterializedGlobalProofDAGFiles0 writes replayable JSON artef
     assert.equal(typeof value, 'object');
   }
 });
+
+test('makeConcreteMaterializedGlobalProofDAG0 uses concrete KBundle proof coverage by default', async () => {
+  const envelope = await makeConcreteMaterializedGlobalProofDAG0();
+
+  assert.equal(envelope.KBundleEnvelope.kind, 'ConcreteMaterializedKBundle0');
+  assert.equal(envelope.KBundleEnvelope.ProofInventory.kernelRuleCoverageComplete, true);
+  assert.equal(envelope.KBundleEnvelope.ProofInventory.sigmaProofRefsResolve, true);
+  assert.equal(envelope.KBundleEnvelope.ProofInventory.reflectionProofRefsResolve, true);
+
+  const out = await CheckConcreteMaterializedGlobalProofDAG0(envelope);
+
+  assert.equal(out.tag, 'accept');
+  assert.equal(out.NF.concreteKBundle, true);
+  assert.equal(out.NF.kBundleEnvelopeKind, 'ConcreteMaterializedKBundle0');
+  assert.equal(out.NF.kBundleKernelRuleCoverageComplete, true);
+  assert.equal(out.NF.kBundleSigmaProofRefsResolve, true);
+  assert.equal(out.NF.kBundleReflectionProofRefsResolve, true);
+});
+
+test('CheckConcreteMaterializedGlobalProofDAG0 rejects a non-concrete KBundle envelope', async () => {
+  const envelope = await makeConcreteMaterializedGlobalProofDAG0();
+
+  envelope.KBundleEnvelope = {
+    ...envelope.KBundleEnvelope,
+    kind: 'MaterializedKBundle0',
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    kBundleDigest: undefined,
+  };
+
+  const out = await CheckConcreteMaterializedGlobalProofDAG0(envelope, {
+    checkConcreteKBundle: false,
+    checkKBundle: false,
+    checkMaterializedGlobalProofDAG: false,
+    checkGlobalProofDAG: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedGlobalProofDAG0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedGlobalProofDAG0.linkage');
+  assert.deepEqual(out.Path, ['KBundleEnvelope', 'kind']);
+});

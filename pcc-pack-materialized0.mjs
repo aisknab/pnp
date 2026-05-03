@@ -24,6 +24,11 @@ import {
 } from './pcc-k-materialized0.mjs';
 
 import {
+  CheckConcreteMaterializedKBundle0,
+  makeConcreteMaterializedKBundle0,
+} from './pcc-k-concrete-materialized0.mjs';
+
+import {
   CheckMaterializedHard0,
   makeMaterializedHard0,
 } from './pcc-hard-materialized0.mjs';
@@ -113,7 +118,7 @@ export async function makeMaterializedPCCPack0({
 } = {}) {
   const boot0 = resolveBoot0(Boot0) ?? await makeMaterializedBoot0();
 
-  const kBundleEnvelope = KBundleEnvelope ?? await makeMaterializedKBundle0({
+  const kBundleEnvelope = KBundleEnvelope ?? await makeConcreteMaterializedKBundle0({
     Boot0: boot0,
   });
   const kBundle = resolveKBundle0(kBundleEnvelope);
@@ -532,6 +537,11 @@ export async function CheckMaterializedPCCPack0(input, config = makeMaterialized
     concreteGlobalFirewalls: isPlainObject(envelope.GlobalFirewallsEnvelope) && envelope.GlobalFirewallsEnvelope.kind === 'ConcreteMaterializedGlobalFirewalls0',
     globalProofDAGEnvelopeKind: envelope.GlobalProofDAGEnvelope?.kind ?? null,
     concreteGlobalProofDAG: isPlainObject(envelope.GlobalProofDAGEnvelope) && envelope.GlobalProofDAGEnvelope.kind === 'ConcreteMaterializedGlobalProofDAG0',
+    kBundleEnvelopeKind: envelope.KBundleEnvelope?.kind ?? null,
+    concreteKBundle: isPlainObject(envelope.KBundleEnvelope) && envelope.KBundleEnvelope.kind === 'ConcreteMaterializedKBundle0',
+    kBundleKernelRuleCoverageComplete: envelope.KBundleEnvelope?.ProofInventory?.kernelRuleCoverageComplete === true,
+    kBundleSigmaProofRefsResolve: envelope.KBundleEnvelope?.ProofInventory?.sigmaProofRefsResolve === true,
+    kBundleReflectionProofRefsResolve: envelope.KBundleEnvelope?.ProofInventory?.reflectionProofRefsResolve === true,
     syntheticMarkerCount: markerInventory.syntheticMarkerCount,
     forbiddenMarkerCount: markerInventory.forbiddenMarkerCount,
     allowSyntheticScaffoldMarker: cfg.allowSyntheticScaffoldMarker,
@@ -709,6 +719,14 @@ function validateShape0(envelope) {
   });
 }
 
+async function checkMaterializedKBundleEnvelope0(value) {
+  if (isPlainObject(value) && value.kind === 'ConcreteMaterializedKBundle0') {
+    return CheckConcreteMaterializedKBundle0(value);
+  }
+
+  return CheckMaterializedKBundle0(value);
+}
+
 async function checkMaterializedGlobalProofDAGEnvelope0(value) {
   if (isPlainObject(value) && value.kind === 'ConcreteMaterializedGlobalProofDAG0') {
     return CheckConcreteMaterializedGlobalProofDAG0(value);
@@ -744,7 +762,7 @@ async function checkMaterializedRowsEnvelope0(value) {
 async function validateMaterializedComponents0(envelope) {
   const componentChecks = [
     ['MaterializedBoot0', await CheckMaterializedBoot0(resolveBoot0(envelope.MaterializedBoot0) ?? envelope.PCCPack.Boot0)],
-    ['KBundleEnvelope', await CheckMaterializedKBundle0(envelope.KBundleEnvelope)],
+    ['KBundleEnvelope', await checkMaterializedKBundleEnvelope0(envelope.KBundleEnvelope)],
     ['HardEnvelope', await CheckMaterializedHard0(envelope.HardEnvelope)],
     ['RowsEnvelope', await checkMaterializedRowsEnvelope0(envelope.RowsEnvelope)],
     ['GlobalProofDAGEnvelope', await checkMaterializedGlobalProofDAGEnvelope0(envelope.GlobalProofDAGEnvelope)],

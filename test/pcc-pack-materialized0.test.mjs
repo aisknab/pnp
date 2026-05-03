@@ -263,3 +263,24 @@ test('makeMaterializedPCCPack0 uses concrete materialized global proof DAG by de
   assert.equal(out.NF.globalProofDAGEnvelopeKind, 'ConcreteMaterializedGlobalProofDAG0');
   assert.equal(out.NF.concreteGlobalProofDAG, true);
 });
+
+test('makeMaterializedPCCPack0 uses concrete materialized KBundle proof coverage by default', async () => {
+  const envelope = await makeMaterializedPCCPack0();
+
+  assert.equal(envelope.KBundleEnvelope.kind, 'ConcreteMaterializedKBundle0');
+  assert.equal(envelope.KBundleEnvelope.ProofInventory.kernelRuleCoverageComplete, true);
+  assert.equal(envelope.KBundleEnvelope.ProofInventory.sigmaProofRefsResolve, true);
+  assert.equal(envelope.KBundleEnvelope.ProofInventory.reflectionProofRefsResolve, true);
+
+  assert.equal(envelope.GlobalProofDAGEnvelope.KBundleEnvelope.kind, 'ConcreteMaterializedKBundle0');
+
+  const out = await CheckMaterializedPCCPack0(envelope);
+
+  assert.equal(out.tag, 'accept');
+  assert.equal(out.checker, 'CheckMaterializedPCCPack0');
+  assert.equal(out.NF.kBundleEnvelopeKind, 'ConcreteMaterializedKBundle0');
+  assert.equal(out.NF.concreteKBundle, true);
+  assert.equal(out.NF.kBundleKernelRuleCoverageComplete, true);
+  assert.equal(out.NF.kBundleSigmaProofRefsResolve, true);
+  assert.equal(out.NF.kBundleReflectionProofRefsResolve, true);
+});
