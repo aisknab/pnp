@@ -245,3 +245,21 @@ test('makeMaterializedPCCPack0 uses concrete materialized global firewalls by de
   assert.equal(out.NF.globalFirewallsEnvelopeKind, 'ConcreteMaterializedGlobalFirewalls0');
   assert.equal(out.NF.concreteGlobalFirewalls, true);
 });
+
+test('makeMaterializedPCCPack0 uses concrete materialized global proof DAG by default', async () => {
+  const envelope = await makeMaterializedPCCPack0();
+
+  assert.equal(envelope.GlobalProofDAGEnvelope.kind, 'ConcreteMaterializedGlobalProofDAG0');
+  assert.equal(envelope.GlobalProofDAGEnvelope.ConcreteRowsEnvelope.kind, 'ConcreteMaterializedRows0');
+  assert.equal(envelope.GlobalProofDAGEnvelope.ConcreteLocalPackagesEnvelope.kind, 'ConcreteMaterializedLocalPackages0');
+  assert.equal(envelope.GlobalProofDAGEnvelope.ConcreteGlobalFirewallsEnvelope.kind, 'ConcreteMaterializedGlobalFirewalls0');
+  assert.deepEqual(envelope.PCCPack.GlobalProofDAG.IfaceHash, envelope.GlobalProofDAGEnvelope.GlobalProofDAG.IfaceHash);
+  assert.deepEqual(envelope.PCCPack.GlobalProofDAG.SchedHash, envelope.GlobalProofDAGEnvelope.GlobalProofDAG.SchedHash);
+
+  const out = await CheckMaterializedPCCPack0(envelope);
+
+  assert.equal(out.tag, 'accept');
+  assert.equal(out.checker, 'CheckMaterializedPCCPack0');
+  assert.equal(out.NF.globalProofDAGEnvelopeKind, 'ConcreteMaterializedGlobalProofDAG0');
+  assert.equal(out.NF.concreteGlobalProofDAG, true);
+});

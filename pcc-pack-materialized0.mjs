@@ -44,6 +44,11 @@ import {
 } from './pcc-global-proof-dag-materialized0.mjs';
 
 import {
+  CheckConcreteMaterializedGlobalProofDAG0,
+  makeConcreteMaterializedGlobalProofDAG0,
+} from './pcc-global-proof-dag-concrete-materialized0.mjs';
+
+import {
   CheckMaterializedLocalPackages0,
   makeMaterializedLocalPackages0,
 } from './pcc-local-packages-materialized0.mjs';
@@ -121,12 +126,6 @@ export async function makeMaterializedPCCPack0({
   });
   const rowPack = resolveRowPack0(rowsEnvelope);
 
-  const globalProofDAGEnvelope = GlobalProofDAGEnvelope ?? await makeMaterializedGlobalProofDAG0({
-    Boot0: boot0,
-    KBundle: kBundleEnvelope,
-  });
-  const globalProofDAG = resolveGlobalProofDAG0(globalProofDAGEnvelope);
-
   const localPackagesEnvelope = LocalPackagesEnvelope ?? await makeConcreteMaterializedLocalPackages0({
     ConcreteRowsEnvelope: rowsEnvelope,
   });
@@ -136,6 +135,15 @@ export async function makeMaterializedPCCPack0({
     ConcreteLocalPackagesEnvelope: localPackagesEnvelope,
   });
   const globalFirewalls = resolveGlobalFirewalls0(globalFirewallsEnvelope);
+
+  const globalProofDAGEnvelope = GlobalProofDAGEnvelope ?? await makeConcreteMaterializedGlobalProofDAG0({
+    Boot0: boot0,
+    KBundleEnvelope: kBundleEnvelope,
+    ConcreteRowsEnvelope: rowsEnvelope,
+    ConcreteLocalPackagesEnvelope: localPackagesEnvelope,
+    ConcreteGlobalFirewallsEnvelope: globalFirewallsEnvelope,
+  });
+  const globalProofDAG = resolveGlobalProofDAG0(globalProofDAGEnvelope);
 
   const finalIntegrationEnvelope = FinalIntegrationEnvelope ?? makeMaterializedFinalIntegrationEnvelope0();
   const gpack = resolveGPack0(finalIntegrationEnvelope);
@@ -522,6 +530,8 @@ export async function CheckMaterializedPCCPack0(input, config = makeMaterialized
     concreteLocalPackages: isPlainObject(envelope.LocalPackagesEnvelope) && envelope.LocalPackagesEnvelope.kind === 'ConcreteMaterializedLocalPackages0',
     globalFirewallsEnvelopeKind: envelope.GlobalFirewallsEnvelope?.kind ?? null,
     concreteGlobalFirewalls: isPlainObject(envelope.GlobalFirewallsEnvelope) && envelope.GlobalFirewallsEnvelope.kind === 'ConcreteMaterializedGlobalFirewalls0',
+    globalProofDAGEnvelopeKind: envelope.GlobalProofDAGEnvelope?.kind ?? null,
+    concreteGlobalProofDAG: isPlainObject(envelope.GlobalProofDAGEnvelope) && envelope.GlobalProofDAGEnvelope.kind === 'ConcreteMaterializedGlobalProofDAG0',
     syntheticMarkerCount: markerInventory.syntheticMarkerCount,
     forbiddenMarkerCount: markerInventory.forbiddenMarkerCount,
     allowSyntheticScaffoldMarker: cfg.allowSyntheticScaffoldMarker,
@@ -699,6 +709,14 @@ function validateShape0(envelope) {
   });
 }
 
+async function checkMaterializedGlobalProofDAGEnvelope0(value) {
+  if (isPlainObject(value) && value.kind === 'ConcreteMaterializedGlobalProofDAG0') {
+    return CheckConcreteMaterializedGlobalProofDAG0(value);
+  }
+
+  return CheckMaterializedGlobalProofDAG0(value);
+}
+
 async function checkMaterializedGlobalFirewallsEnvelope0(value) {
   if (isPlainObject(value) && value.kind === 'ConcreteMaterializedGlobalFirewalls0') {
     return CheckConcreteMaterializedGlobalFirewalls0(value);
@@ -729,7 +747,7 @@ async function validateMaterializedComponents0(envelope) {
     ['KBundleEnvelope', await CheckMaterializedKBundle0(envelope.KBundleEnvelope)],
     ['HardEnvelope', await CheckMaterializedHard0(envelope.HardEnvelope)],
     ['RowsEnvelope', await checkMaterializedRowsEnvelope0(envelope.RowsEnvelope)],
-    ['GlobalProofDAGEnvelope', await CheckMaterializedGlobalProofDAG0(envelope.GlobalProofDAGEnvelope)],
+    ['GlobalProofDAGEnvelope', await checkMaterializedGlobalProofDAGEnvelope0(envelope.GlobalProofDAGEnvelope)],
     ['LocalPackagesEnvelope', await checkMaterializedLocalPackagesEnvelope0(envelope.LocalPackagesEnvelope)],
     ['GlobalFirewallsEnvelope', await checkMaterializedGlobalFirewallsEnvelope0(envelope.GlobalFirewallsEnvelope)],
     ['FinalIntegrationEnvelope', await CheckMaterializedFinalIntegration0(envelope.FinalIntegrationEnvelope)],
