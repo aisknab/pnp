@@ -22,6 +22,11 @@ const noFinalCertificateGate = hasFlag0('--no-final-certificate-gate');
 const finalCertificateGateCanonical = hasFlag0('--final-certificate-gate-canonical');
 const finalCertificateGateOut = readFlagValue0('--final-certificate-gate-out');
 
+const concreteFinalCertificateGate = hasFlag0('--concrete-final-certificate-gate');
+const noConcreteFinalCertificateGate = hasFlag0('--no-concrete-final-certificate-gate');
+const concreteFinalCertificateGateCanonical = hasFlag0('--concrete-final-certificate-gate-canonical');
+const concreteFinalCertificateGateOut = readFlagValue0('--concrete-final-certificate-gate-out');
+
 const argCheck = validateArgs0();
 
 if (!argCheck.ok) {
@@ -43,6 +48,14 @@ if (!argCheck.ok) {
     ? false
     : (noFinalCertificateGate ? false : true);
 
+  const runConcreteFinalCertificatePublicStatusGate = fastLocal
+    ? false
+    : (
+        noConcreteFinalCertificateGate
+          ? false
+          : (concreteFinalCertificateGate ? true : !noFinalCertificateGate)
+      );
+
   const out = await CheckReleaseAudit0({
     runCliSmoke: false,
 
@@ -57,6 +70,12 @@ if (!argCheck.ok) {
     finalCertificatePublicStatusGateCanonicalEnvelopeBytes: finalCertificateGateCanonical,
     ...(finalCertificateGateOut === null ? {} : {
       finalCertificatePublicStatusGateOutputDir: finalCertificateGateOut,
+    }),
+
+    runConcreteFinalCertificatePublicStatusGate,
+    concreteFinalCertificatePublicStatusGateCanonicalEnvelopeBytes: concreteFinalCertificateGateCanonical,
+    ...(concreteFinalCertificateGateOut === null ? {} : {
+      concreteFinalCertificatePublicStatusGateOutputDir: concreteFinalCertificateGateOut,
     }),
   });
 
@@ -104,6 +123,22 @@ function validateArgs0() {
     return rejectArg0(['argv'], 'release audit CLI cannot use both --final-certificate-gate and --no-final-certificate-gate');
   }
 
+  if (fastLocal && concreteFinalCertificateGate) {
+    return rejectArg0(['argv'], 'release audit CLI cannot use both --fast-local and --concrete-final-certificate-gate');
+  }
+
+  if (fastLocal && concreteFinalCertificateGateOut !== null) {
+    return rejectArg0(['argv', '--concrete-final-certificate-gate-out'], 'release audit CLI cannot use --concrete-final-certificate-gate-out with --fast-local');
+  }
+
+  if (fastLocal && concreteFinalCertificateGateCanonical) {
+    return rejectArg0(['argv'], 'release audit CLI cannot use --concrete-final-certificate-gate-canonical with --fast-local');
+  }
+
+  if (concreteFinalCertificateGate && noConcreteFinalCertificateGate) {
+    return rejectArg0(['argv'], 'release audit CLI cannot use both --concrete-final-certificate-gate and --no-concrete-final-certificate-gate');
+  }
+
   const materializedOutIndex = args.indexOf('--materialized-gate-out');
 
   if (materializedOutIndex >= 0) {
@@ -121,6 +156,16 @@ function validateArgs0() {
 
     if (value === undefined || value.startsWith('--')) {
       return rejectArg0(['argv', '--final-certificate-gate-out'], '--final-certificate-gate-out requires a directory argument');
+    }
+  }
+
+  const concreteFinalCertificateOutIndex = args.indexOf('--concrete-final-certificate-gate-out');
+
+  if (concreteFinalCertificateOutIndex >= 0) {
+    const value = args[concreteFinalCertificateOutIndex + 1];
+
+    if (value === undefined || value.startsWith('--')) {
+      return rejectArg0(['argv', '--concrete-final-certificate-gate-out'], '--concrete-final-certificate-gate-out requires a directory argument');
     }
   }
 

@@ -27,6 +27,12 @@ import {
   writeFinalCertificatePublicStatusFiles0,
 } from './pcc-final-certificate-public-status0.mjs';
 
+import {
+  CheckConcreteFinalCertificatePublicStatus0,
+  makeConcreteFinalCertificatePublicStatus0,
+  writeConcreteFinalCertificatePublicStatusFiles0,
+} from './pcc-final-certificate-public-status-concrete0.mjs';
+
 const CHECKER_VERSION = 0;
 const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
 
@@ -227,6 +233,7 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-release-audit-readme-negative0.test.mjs',
   'pcc-release-audit-final-certificate-surface0.test.mjs',
   'pcc-release-audit-final-certificate-concrete-gate0.test.mjs',
+  'pcc-release-audit-concrete-final-certificate-surface0.test.mjs',
 ]);    
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
@@ -310,6 +317,41 @@ export const RELEASE_AUDIT_FINAL_CERTIFICATE_PUBLIC_STATUS_SUMMARY_KEYS0 = Objec
   'gateDigest',
 ]);
 
+
+export const RELEASE_AUDIT_CONCRETE_FINAL_CERTIFICATE_PUBLIC_STATUS_SUMMARY_KEYS0 = Object.freeze([
+  'kind',
+  'enabled',
+  'skipped',
+  'outputDir',
+  'canonicalEnvelopeBytes',
+  'status',
+  'verdict',
+  'materializedPath',
+  'syntheticRunAll',
+  'publicConclusionEmitted',
+  'publicConclusion',
+  'certificateDigest',
+  'finalVerdictDigest',
+  'acceptRunDigest',
+  'pccPackDigest',
+  'canonicalByteRoots',
+  'acceptanceTranscript',
+  'releaseAuditAttached',
+  'releaseAuditDigest',
+  'releaseAuditStatus',
+  'concreteRows',
+  'concreteLocalPackages',
+  'concreteGlobalFirewalls',
+  'concreteGlobalProofDAG',
+  'finalCertificateUsesConcreteAcceptRun',
+  'statusUsesConcreteFinalCertificate',
+  'publicStatusCertificateDigestMatchesConcrete',
+  'publicStatusFinalVerdictDigestMatchesConcrete',
+  'publicStatusAcceptRunDigestMatchesConcrete',
+  'publicStatusPccPackDigestMatchesConcrete',
+  'gateDigest',
+]);
+
 export const RELEASE_AUDIT_NF_KEYS0 = Object.freeze([
   'kind',
   'checker',
@@ -350,6 +392,22 @@ export const RELEASE_AUDIT_NF_KEYS0 = Object.freeze([
   'finalCertificatePublicStatusGatePccPackDigest',
   'finalCertificatePublicStatusGateReleaseAuditAttached',  
 
+  'concreteFinalCertificatePublicStatusGate',
+  'concreteFinalCertificatePublicStatusGateSummary',
+  'concreteFinalCertificatePublicStatusGateDigest',
+  'concreteFinalCertificatePublicStatusGateStatus',
+  'concreteFinalCertificatePublicStatusGateVerdict',
+  'concreteFinalCertificatePublicStatusGatePublicConclusionEmitted',
+  'concreteFinalCertificatePublicStatusGateCertificateDigest',
+  'concreteFinalCertificatePublicStatusGateFinalVerdictDigest',
+  'concreteFinalCertificatePublicStatusGateAcceptRunDigest',
+  'concreteFinalCertificatePublicStatusGatePccPackDigest',
+  'concreteFinalCertificatePublicStatusGateReleaseAuditAttached',
+  'concreteFinalCertificatePublicStatusGateConcreteRows',
+  'concreteFinalCertificatePublicStatusGateConcreteLocalPackages',
+  'concreteFinalCertificatePublicStatusGateConcreteGlobalFirewalls',
+  'concreteFinalCertificatePublicStatusGateConcreteGlobalProofDAG',
+  'concreteFinalCertificatePublicStatusGateStatusUsesConcreteFinalCertificate',
   'publicConclusion',
 ]);
 
@@ -389,6 +447,22 @@ export const RELEASE_AUDIT_CLI_SUMMARY_KEYS0 = Object.freeze([
   'finalCertificatePublicStatusGatePccPackDigest',
   'finalCertificatePublicStatusGateReleaseAuditAttached',  
 
+  'concreteFinalCertificatePublicStatusGate',
+  'concreteFinalCertificatePublicStatusGateSummary',
+  'concreteFinalCertificatePublicStatusGateDigest',
+  'concreteFinalCertificatePublicStatusGateStatus',
+  'concreteFinalCertificatePublicStatusGateVerdict',
+  'concreteFinalCertificatePublicStatusGatePublicConclusionEmitted',
+  'concreteFinalCertificatePublicStatusGateCertificateDigest',
+  'concreteFinalCertificatePublicStatusGateFinalVerdictDigest',
+  'concreteFinalCertificatePublicStatusGateAcceptRunDigest',
+  'concreteFinalCertificatePublicStatusGatePccPackDigest',
+  'concreteFinalCertificatePublicStatusGateReleaseAuditAttached',
+  'concreteFinalCertificatePublicStatusGateConcreteRows',
+  'concreteFinalCertificatePublicStatusGateConcreteLocalPackages',
+  'concreteFinalCertificatePublicStatusGateConcreteGlobalFirewalls',
+  'concreteFinalCertificatePublicStatusGateConcreteGlobalProofDAG',
+  'concreteFinalCertificatePublicStatusGateStatusUsesConcreteFinalCertificate',
   'publicConclusion',
   'digest',
 ]);
@@ -419,6 +493,7 @@ export const RELEASE_AUDIT_PHASE_ORDER0 = Object.freeze([
   'publicSurfaceFreeze',
   'materializedPublicStatusGate',
   'finalCertificatePublicStatusGate',  
+  'concreteFinalCertificatePublicStatusGate',
   'surfaceFreeze',
 ]);
 
@@ -444,7 +519,11 @@ export function makeReleaseAuditConfig0(overrides = {}) {
     runFinalCertificatePublicStatusGate: true,
     finalCertificatePublicStatusGateRunner: null,
     finalCertificatePublicStatusGateOutputDir: null,
-    finalCertificatePublicStatusGateCanonicalEnvelopeBytes: false,  
+    finalCertificatePublicStatusGateCanonicalEnvelopeBytes: false,
+    runConcreteFinalCertificatePublicStatusGate: true,
+    concreteFinalCertificatePublicStatusGateRunner: null,
+    concreteFinalCertificatePublicStatusGateOutputDir: null,
+    concreteFinalCertificatePublicStatusGateCanonicalEnvelopeBytes: false,  
     ...overrides,
   };
 }
@@ -453,7 +532,8 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
   const checker = 'CheckReleaseAudit0';
   const ledger = [];
   const cfg = makeReleaseAuditConfig0(config);
-  let finalCertificatePublicStatusGateNF = null;  
+  let finalCertificatePublicStatusGateNF = null;
+  let concreteFinalCertificatePublicStatusGateNF = null;  
   let publicSurfaceFreezeNF = null;
   let materializedPublicStatusGateNF = null;
 
@@ -470,7 +550,8 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
     ['cliSmoke', `${checker}.cliSmoke`, () => validateCliSmoke0(cfg)],
     ['publicSurfaceFreeze', `${checker}.publicSurfaceFreeze`, () => validatePublicSurfaceFreeze0(cfg)],
     ['materializedPublicStatusGate', `${checker}.materializedPublicStatusGate`, () => validateMaterializedPublicStatusGate0(cfg)],
-    ['finalCertificatePublicStatusGate', `${checker}.finalCertificatePublicStatusGate`, () => validateFinalCertificatePublicStatusGate0(cfg)],  
+    ['finalCertificatePublicStatusGate', `${checker}.finalCertificatePublicStatusGate`, () => validateFinalCertificatePublicStatusGate0(cfg)],
+    ['concreteFinalCertificatePublicStatusGate', `${checker}.concreteFinalCertificatePublicStatusGate`, () => validateConcreteFinalCertificatePublicStatusGate0(cfg)],  
   ];
 
   for (const [phase, coord, run] of phases) {
@@ -502,6 +583,10 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
 
     if (phase === 'finalCertificatePublicStatusGate') {
       finalCertificatePublicStatusGateNF = result.nf ?? null;
+    }
+
+    if (phase === 'concreteFinalCertificatePublicStatusGate') {
+      concreteFinalCertificatePublicStatusGateNF = result.nf ?? null;
     }    
   }
 
@@ -517,6 +602,11 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
 
   const finalCertificatePublicStatusGateSummary = summarizeFinalCertificatePublicStatusGateNF0(
     finalCertificatePublicStatusGateNF,
+    cfg,
+  );
+
+  const concreteFinalCertificatePublicStatusGateSummary = summarizeConcreteFinalCertificatePublicStatusGateNF0(
+    concreteFinalCertificatePublicStatusGateNF,
     cfg,
   );  
 
@@ -559,6 +649,23 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
     finalCertificatePublicStatusGateAcceptRunDigest: finalCertificatePublicStatusGateSummary.acceptRunDigest,
     finalCertificatePublicStatusGatePccPackDigest: finalCertificatePublicStatusGateSummary.pccPackDigest,
     finalCertificatePublicStatusGateReleaseAuditAttached: finalCertificatePublicStatusGateSummary.releaseAuditAttached,
+
+    concreteFinalCertificatePublicStatusGate: cfg.runConcreteFinalCertificatePublicStatusGate,
+    concreteFinalCertificatePublicStatusGateSummary,
+    concreteFinalCertificatePublicStatusGateDigest: concreteFinalCertificatePublicStatusGateSummary.gateDigest,
+    concreteFinalCertificatePublicStatusGateStatus: concreteFinalCertificatePublicStatusGateSummary.status,
+    concreteFinalCertificatePublicStatusGateVerdict: concreteFinalCertificatePublicStatusGateSummary.verdict,
+    concreteFinalCertificatePublicStatusGatePublicConclusionEmitted: concreteFinalCertificatePublicStatusGateSummary.publicConclusionEmitted,
+    concreteFinalCertificatePublicStatusGateCertificateDigest: concreteFinalCertificatePublicStatusGateSummary.certificateDigest,
+    concreteFinalCertificatePublicStatusGateFinalVerdictDigest: concreteFinalCertificatePublicStatusGateSummary.finalVerdictDigest,
+    concreteFinalCertificatePublicStatusGateAcceptRunDigest: concreteFinalCertificatePublicStatusGateSummary.acceptRunDigest,
+    concreteFinalCertificatePublicStatusGatePccPackDigest: concreteFinalCertificatePublicStatusGateSummary.pccPackDigest,
+    concreteFinalCertificatePublicStatusGateReleaseAuditAttached: concreteFinalCertificatePublicStatusGateSummary.releaseAuditAttached,
+    concreteFinalCertificatePublicStatusGateConcreteRows: concreteFinalCertificatePublicStatusGateSummary.concreteRows,
+    concreteFinalCertificatePublicStatusGateConcreteLocalPackages: concreteFinalCertificatePublicStatusGateSummary.concreteLocalPackages,
+    concreteFinalCertificatePublicStatusGateConcreteGlobalFirewalls: concreteFinalCertificatePublicStatusGateSummary.concreteGlobalFirewalls,
+    concreteFinalCertificatePublicStatusGateConcreteGlobalProofDAG: concreteFinalCertificatePublicStatusGateSummary.concreteGlobalProofDAG,
+    concreteFinalCertificatePublicStatusGateStatusUsesConcreteFinalCertificate: concreteFinalCertificatePublicStatusGateSummary.statusUsesConcreteFinalCertificate,
 
     publicConclusion: RUNALL_PUBLIC_CONCLUSION0,
   };
@@ -616,7 +723,9 @@ function validateConfig0(cfg) {
     'materializedPublicStatusGateCanonicalEnvelopeBytes',
     'materializedPublicStatusGateRunCliChecks',
     'runFinalCertificatePublicStatusGate',
-    'finalCertificatePublicStatusGateCanonicalEnvelopeBytes',    
+    'finalCertificatePublicStatusGateCanonicalEnvelopeBytes',
+    'runConcreteFinalCertificatePublicStatusGate',
+    'concreteFinalCertificatePublicStatusGateCanonicalEnvelopeBytes',    
   ]) {
     if (typeof cfg[field] !== 'boolean') {
       return validationReject0([field], `ReleaseAuditConfig0 ${field} must be boolean`, {
@@ -1560,6 +1669,280 @@ function summarizePublicSurfaceFreezeNF0(publicSurfaceNF, cfg) {
   };
 }
 
+
+async function validateConcreteFinalCertificatePublicStatusGate0(cfg) {
+  if (cfg.runConcreteFinalCertificatePublicStatusGate !== true) {
+    return validationAccept0({
+      kind: 'ReleaseAuditConcreteFinalCertificatePublicStatusGate0NF',
+      enabled: false,
+      skipped: true,
+      outputDir: cfg.concreteFinalCertificatePublicStatusGateOutputDir,
+      canonicalEnvelopeBytes: cfg.concreteFinalCertificatePublicStatusGateCanonicalEnvelopeBytes,
+      status: null,
+      verdict: null,
+      materializedPath: false,
+      syntheticRunAll: null,
+      publicConclusionEmitted: false,
+      publicConclusion: null,
+      certificateDigest: null,
+      finalVerdictDigest: null,
+      acceptRunDigest: null,
+      pccPackDigest: null,
+      canonicalByteRoots: null,
+      acceptanceTranscript: null,
+      releaseAuditAttached: false,
+      releaseAuditDigest: null,
+      releaseAuditStatus: 'skipped',
+      concreteRows: false,
+      concreteLocalPackages: false,
+      concreteGlobalFirewalls: false,
+      concreteGlobalProofDAG: false,
+      finalCertificateUsesConcreteAcceptRun: false,
+      statusUsesConcreteFinalCertificate: false,
+      publicStatusCertificateDigestMatchesConcrete: false,
+      publicStatusFinalVerdictDigestMatchesConcrete: false,
+      publicStatusAcceptRunDigestMatchesConcrete: false,
+      publicStatusPccPackDigestMatchesConcrete: false,
+      gateDigest: null,
+    });
+  }
+
+  const runner = typeof cfg.concreteFinalCertificatePublicStatusGateRunner === 'function'
+    ? cfg.concreteFinalCertificatePublicStatusGateRunner
+    : async () => {
+        if (cfg.concreteFinalCertificatePublicStatusGateOutputDir !== null) {
+          const written = await writeConcreteFinalCertificatePublicStatusFiles0(
+            cfg.concreteFinalCertificatePublicStatusGateOutputDir,
+          );
+
+          return written.checked;
+        }
+
+        const envelope = await makeConcreteFinalCertificatePublicStatus0();
+
+        return CheckConcreteFinalCertificatePublicStatus0(envelope, {
+          finalCertificatePublicStatusConfig: {
+            checkReleaseAuditRecord: false,
+          },
+        });
+      };
+
+  const record = await runner({
+    outputDir: cfg.concreteFinalCertificatePublicStatusGateOutputDir,
+    canonicalEnvelopeBytes: cfg.concreteFinalCertificatePublicStatusGateCanonicalEnvelopeBytes,
+  });
+
+  if (record?.tag !== 'accept') {
+    return validationReject0(['concreteFinalCertificatePublicStatusGate'], 'concrete final-certificate public-status gate rejected', {
+      inner: compactReject0(record),
+    });
+  }
+
+  const nf = record.NF ?? record.nf;
+
+  if (!isPlainObject(nf)) {
+    return validationReject0(['concreteFinalCertificatePublicStatusGate', 'NF'], 'concrete final-certificate public-status gate must emit an NF object', {
+      actual: typeof nf,
+    });
+  }
+
+  if (nf.kind !== 'ConcreteFinalCertificatePublicStatus0NF') {
+    return validationReject0(['concreteFinalCertificatePublicStatusGate', 'NF', 'kind'], 'concrete final-certificate public-status gate emitted wrong NF kind', {
+      actual: nf.kind,
+    });
+  }
+
+  const requiredTrue = [
+    'materializedPath',
+    'publicConclusionEmitted',
+    'concreteRows',
+    'concreteLocalPackages',
+    'concreteGlobalFirewalls',
+    'concreteGlobalProofDAG',
+    'finalCertificateUsesConcreteAcceptRun',
+    'statusUsesConcreteFinalCertificate',
+    'publicStatusCertificateDigestMatchesConcrete',
+    'publicStatusFinalVerdictDigestMatchesConcrete',
+    'publicStatusAcceptRunDigestMatchesConcrete',
+    'publicStatusPccPackDigestMatchesConcrete',
+  ];
+
+  for (const field of requiredTrue) {
+    if (nf[field] !== true) {
+      return validationReject0(['concreteFinalCertificatePublicStatusGate', 'NF', field], `concrete final-certificate public-status gate must certify ${field}`, {
+        actual: nf[field],
+      });
+    }
+  }
+
+  if (nf.syntheticRunAll !== false) {
+    return validationReject0(['concreteFinalCertificatePublicStatusGate', 'NF', 'syntheticRunAll'], 'concrete final-certificate public-status gate must remain separate from synthetic RunAll0', {
+      actual: nf.syntheticRunAll,
+    });
+  }
+
+  if (nf.status !== 'accepted' || nf.verdict !== 'accept') {
+    return validationReject0(['concreteFinalCertificatePublicStatusGate', 'NF', 'status'], 'concrete final-certificate public-status gate must be accepted', {
+      status: nf.status,
+      verdict: nf.verdict,
+    });
+  }
+
+  if (!sameConcreteReleaseAuditPublicConclusion0(nf.publicConclusion)) {
+    return validationReject0(['concreteFinalCertificatePublicStatusGate', 'NF', 'publicConclusion'], 'concrete final-certificate public conclusion mismatch', {
+      actual: nf.publicConclusion,
+    });
+  }
+
+  for (const field of [
+    'certificateDigest',
+    'finalVerdictDigest',
+    'acceptRunDigest',
+    'pccPackDigest',
+  ]) {
+    if (!isConcreteDigestLike0(nf[field])) {
+      return validationReject0(['concreteFinalCertificatePublicStatusGate', 'NF', field], `concrete final-certificate public-status gate must expose ${field}`, {
+        actual: nf[field],
+      });
+    }
+  }
+
+  if (!isPlainObject(nf.canonicalByteRoots)) {
+    return validationReject0(['concreteFinalCertificatePublicStatusGate', 'NF', 'canonicalByteRoots'], 'concrete final-certificate public-status gate must expose canonicalByteRoots', {
+      actual: typeof nf.canonicalByteRoots,
+    });
+  }
+
+  if (!isPlainObject(nf.acceptanceTranscript)) {
+    return validationReject0(['concreteFinalCertificatePublicStatusGate', 'NF', 'acceptanceTranscript'], 'concrete final-certificate public-status gate must expose acceptanceTranscript', {
+      actual: typeof nf.acceptanceTranscript,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'ReleaseAuditConcreteFinalCertificatePublicStatusGate0NF',
+    enabled: true,
+    skipped: false,
+    outputDir: cfg.concreteFinalCertificatePublicStatusGateOutputDir,
+    canonicalEnvelopeBytes: cfg.concreteFinalCertificatePublicStatusGateCanonicalEnvelopeBytes,
+    status: nf.status,
+    verdict: nf.verdict,
+    materializedPath: nf.materializedPath,
+    syntheticRunAll: nf.syntheticRunAll,
+    publicConclusionEmitted: nf.publicConclusionEmitted,
+    publicConclusion: nf.publicConclusion,
+    certificateDigest: nf.certificateDigest,
+    finalVerdictDigest: nf.finalVerdictDigest,
+    acceptRunDigest: nf.acceptRunDigest,
+    pccPackDigest: nf.pccPackDigest,
+    canonicalByteRoots: nf.canonicalByteRoots,
+    acceptanceTranscript: nf.acceptanceTranscript,
+    releaseAuditAttached: nf.releaseAuditAttached,
+    releaseAuditDigest: nf.releaseAuditDigest,
+    releaseAuditStatus: nf.releaseAuditStatus,
+    concreteRows: nf.concreteRows,
+    concreteLocalPackages: nf.concreteLocalPackages,
+    concreteGlobalFirewalls: nf.concreteGlobalFirewalls,
+    concreteGlobalProofDAG: nf.concreteGlobalProofDAG,
+    finalCertificateUsesConcreteAcceptRun: nf.finalCertificateUsesConcreteAcceptRun,
+    statusUsesConcreteFinalCertificate: nf.statusUsesConcreteFinalCertificate,
+    publicStatusCertificateDigestMatchesConcrete: nf.publicStatusCertificateDigestMatchesConcrete,
+    publicStatusFinalVerdictDigestMatchesConcrete: nf.publicStatusFinalVerdictDigestMatchesConcrete,
+    publicStatusAcceptRunDigestMatchesConcrete: nf.publicStatusAcceptRunDigestMatchesConcrete,
+    publicStatusPccPackDigestMatchesConcrete: nf.publicStatusPccPackDigestMatchesConcrete,
+    gateDigest: record.Digest ?? record.digest,
+  });
+}
+
+function summarizeConcreteFinalCertificatePublicStatusGateNF0(nf, cfg) {
+  const summary = {
+    kind: 'ReleaseAuditConcreteFinalCertificatePublicStatusGateSummary0',
+    enabled: cfg.runConcreteFinalCertificatePublicStatusGate,
+    skipped: cfg.runConcreteFinalCertificatePublicStatusGate !== true,
+    outputDir: cfg.concreteFinalCertificatePublicStatusGateOutputDir,
+    canonicalEnvelopeBytes: cfg.concreteFinalCertificatePublicStatusGateCanonicalEnvelopeBytes,
+    status: null,
+    verdict: null,
+    materializedPath: false,
+    syntheticRunAll: null,
+    publicConclusionEmitted: false,
+    publicConclusion: null,
+    certificateDigest: null,
+    finalVerdictDigest: null,
+    acceptRunDigest: null,
+    pccPackDigest: null,
+    canonicalByteRoots: null,
+    acceptanceTranscript: null,
+    releaseAuditAttached: false,
+    releaseAuditDigest: null,
+    releaseAuditStatus: cfg.runConcreteFinalCertificatePublicStatusGate === true ? 'not-attached' : 'skipped',
+    concreteRows: false,
+    concreteLocalPackages: false,
+    concreteGlobalFirewalls: false,
+    concreteGlobalProofDAG: false,
+    finalCertificateUsesConcreteAcceptRun: false,
+    statusUsesConcreteFinalCertificate: false,
+    publicStatusCertificateDigestMatchesConcrete: false,
+    publicStatusFinalVerdictDigestMatchesConcrete: false,
+    publicStatusAcceptRunDigestMatchesConcrete: false,
+    publicStatusPccPackDigestMatchesConcrete: false,
+    gateDigest: null,
+  };
+
+  if (!isPlainObject(nf)) {
+    return summary;
+  }
+
+  return {
+    ...summary,
+    skipped: nf.skipped === true,
+    status: nf.status ?? null,
+    verdict: nf.verdict ?? null,
+    materializedPath: nf.materializedPath ?? false,
+    syntheticRunAll: nf.syntheticRunAll ?? null,
+    publicConclusionEmitted: nf.publicConclusionEmitted ?? false,
+    publicConclusion: nf.publicConclusion ?? null,
+    certificateDigest: nf.certificateDigest ?? null,
+    finalVerdictDigest: nf.finalVerdictDigest ?? null,
+    acceptRunDigest: nf.acceptRunDigest ?? null,
+    pccPackDigest: nf.pccPackDigest ?? null,
+    canonicalByteRoots: nf.canonicalByteRoots ?? null,
+    acceptanceTranscript: nf.acceptanceTranscript ?? null,
+    releaseAuditAttached: nf.releaseAuditAttached ?? false,
+    releaseAuditDigest: nf.releaseAuditDigest ?? null,
+    releaseAuditStatus: nf.releaseAuditStatus ?? null,
+    concreteRows: nf.concreteRows ?? false,
+    concreteLocalPackages: nf.concreteLocalPackages ?? false,
+    concreteGlobalFirewalls: nf.concreteGlobalFirewalls ?? false,
+    concreteGlobalProofDAG: nf.concreteGlobalProofDAG ?? false,
+    finalCertificateUsesConcreteAcceptRun: nf.finalCertificateUsesConcreteAcceptRun ?? false,
+    statusUsesConcreteFinalCertificate: nf.statusUsesConcreteFinalCertificate ?? false,
+    publicStatusCertificateDigestMatchesConcrete: nf.publicStatusCertificateDigestMatchesConcrete ?? false,
+    publicStatusFinalVerdictDigestMatchesConcrete: nf.publicStatusFinalVerdictDigestMatchesConcrete ?? false,
+    publicStatusAcceptRunDigestMatchesConcrete: nf.publicStatusAcceptRunDigestMatchesConcrete ?? false,
+    publicStatusPccPackDigestMatchesConcrete: nf.publicStatusPccPackDigestMatchesConcrete ?? false,
+    gateDigest: nf.gateDigest ?? null,
+  };
+}
+
+function sameConcreteReleaseAuditPublicConclusion0(value) {
+  return (
+    isPlainObject(value) &&
+    value.antecedent === 'CheckPCCPackexp(GeneratePCCPack())=accept' &&
+    value.consequent === 'P = NP' &&
+    value.conditional === true
+  );
+}
+
+function isConcreteDigestLike0(value) {
+  return (
+    isPlainObject(value) &&
+    typeof value.hex === 'string' &&
+    /^[0-9a-f]{64}$/.test(value.hex)
+  );
+}
+
+
 export function summarizeReleaseAudit0(out) {
   const nf = out?.NF ?? out?.nf ?? {};
 
@@ -1609,6 +1992,38 @@ export function summarizeReleaseAudit0(out) {
       finalCertificatePublicStatusGatePccPackDigest: nf.finalCertificatePublicStatusGatePccPackDigest,
 
       finalCertificatePublicStatusGateReleaseAuditAttached: nf.finalCertificatePublicStatusGateReleaseAuditAttached,
+
+      concreteFinalCertificatePublicStatusGate: nf.concreteFinalCertificatePublicStatusGate,
+
+      concreteFinalCertificatePublicStatusGateSummary: nf.concreteFinalCertificatePublicStatusGateSummary,
+
+      concreteFinalCertificatePublicStatusGateDigest: nf.concreteFinalCertificatePublicStatusGateDigest,
+
+      concreteFinalCertificatePublicStatusGateStatus: nf.concreteFinalCertificatePublicStatusGateStatus,
+
+      concreteFinalCertificatePublicStatusGateVerdict: nf.concreteFinalCertificatePublicStatusGateVerdict,
+
+      concreteFinalCertificatePublicStatusGatePublicConclusionEmitted: nf.concreteFinalCertificatePublicStatusGatePublicConclusionEmitted,
+
+      concreteFinalCertificatePublicStatusGateCertificateDigest: nf.concreteFinalCertificatePublicStatusGateCertificateDigest,
+
+      concreteFinalCertificatePublicStatusGateFinalVerdictDigest: nf.concreteFinalCertificatePublicStatusGateFinalVerdictDigest,
+
+      concreteFinalCertificatePublicStatusGateAcceptRunDigest: nf.concreteFinalCertificatePublicStatusGateAcceptRunDigest,
+
+      concreteFinalCertificatePublicStatusGatePccPackDigest: nf.concreteFinalCertificatePublicStatusGatePccPackDigest,
+
+      concreteFinalCertificatePublicStatusGateReleaseAuditAttached: nf.concreteFinalCertificatePublicStatusGateReleaseAuditAttached,
+
+      concreteFinalCertificatePublicStatusGateConcreteRows: nf.concreteFinalCertificatePublicStatusGateConcreteRows,
+
+      concreteFinalCertificatePublicStatusGateConcreteLocalPackages: nf.concreteFinalCertificatePublicStatusGateConcreteLocalPackages,
+
+      concreteFinalCertificatePublicStatusGateConcreteGlobalFirewalls: nf.concreteFinalCertificatePublicStatusGateConcreteGlobalFirewalls,
+
+      concreteFinalCertificatePublicStatusGateConcreteGlobalProofDAG: nf.concreteFinalCertificatePublicStatusGateConcreteGlobalProofDAG,
+
+      concreteFinalCertificatePublicStatusGateStatusUsesConcreteFinalCertificate: nf.concreteFinalCertificatePublicStatusGateStatusUsesConcreteFinalCertificate,
 
       publicConclusion: out.NF.publicConclusion,
       digest: out.Digest,
@@ -1773,6 +2188,7 @@ function expectedModuleForTest0(testFile) {
   }  
 
   const explicit = {
+    'pcc-release-audit-concrete-final-certificate-surface0': 'pcc-release-audit0.mjs',
     'pcc-core': 'pcc-core.mjs',
     'pcc-core.negative': 'pcc-core.mjs',
     'pcc-core-negative': 'pcc-core.mjs',
