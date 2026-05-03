@@ -233,3 +233,63 @@ test('writeConcreteReleaseAppendixFiles0 writes replayable JSON artefacts', asyn
     assert.equal(typeof value, 'object');
   }
 });
+
+test('CheckConcreteReleaseAppendix0 reports concrete HardCheck coverage in the appendix', async () => {
+  const gate = await makeGate0();
+  const envelope = await makeConcreteReleaseAppendix0({
+    ReleaseAuditConcreteFinalCertificateGateEnvelope: gate,
+  });
+
+  const out = await CheckConcreteReleaseAppendix0(envelope);
+
+  assert.equal(out.tag, 'accept');
+  assert.equal(out.NF.hardEnvelopeKind, 'ConcreteMaterializedHardCheck0');
+  assert.equal(out.NF.concreteHardCheck, true);
+  assert.equal(out.NF.hardCheckerCoverageComplete, true);
+  assert.equal(out.NF.hardRowKeyCoverageComplete, true);
+  assert.equal(out.NF.hardRoutePriorityComplete, true);
+  assert.equal(out.NF.hardProofRefPolicyComplete, true);
+  assert.equal(out.NF.hardHashDisciplineComplete, true);
+  assert.equal(out.NF.hardNoMinCoverageComplete, true);
+  assert.equal(out.NF.hardImportPolicyComplete, true);
+  assert.equal(out.NF.hardReflectionPolicyComplete, true);
+  assert.equal(out.NF.hardBoundsPolicyComplete, true);
+  assert.equal(out.NF.hardDiagnosticsPolicyComplete, true);
+  assert.match(out.NF.hardCoverageDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.hardCheckDigest.hex, /^[0-9a-f]{64}$/);
+});
+
+test('CheckConcreteReleaseAppendix0 rejects appendix without concrete HardCheck no-min coverage', async () => {
+  const gate = await makeGate0();
+
+  gate.ConcreteFinalCertificatePublicStatusEnvelope
+    .ConcreteFinalCertificateEnvelope
+    .ConcreteGeneratedAcceptRunEnvelope
+    .GeneratedAcceptRunEnvelope
+    .MaterializedPCCPack
+    .HardEnvelope
+    .Coverage = {
+      ...gate.ConcreteFinalCertificatePublicStatusEnvelope
+        .ConcreteFinalCertificateEnvelope
+        .ConcreteGeneratedAcceptRunEnvelope
+        .GeneratedAcceptRunEnvelope
+        .MaterializedPCCPack
+        .HardEnvelope
+        .Coverage,
+      noMinCoverageComplete: false,
+    };
+
+  const envelope = await makeConcreteReleaseAppendix0({
+    ReleaseAuditConcreteFinalCertificateGateEnvelope: gate,
+  });
+
+  const out = await CheckConcreteReleaseAppendix0(envelope, {
+    checkConcreteReleaseGate: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteReleaseAppendix0');
+  assert.equal(out.Coord, 'CheckConcreteReleaseAppendix0.appendix');
+  assert.deepEqual(out.Path, ['Appendix', 'hardNoMinCoverageComplete']);
+});

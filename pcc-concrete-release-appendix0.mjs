@@ -108,6 +108,7 @@ export function makeConcreteReleaseAppendixRecord0(gateEnvelope) {
   const finalVerdict = concreteFinalCertificate.FinalCertificateEnvelope.FinalVerdict;
   const acceptRun = concreteFinalCertificate.ConcreteGeneratedAcceptRunEnvelope.GeneratedAcceptRunEnvelope.AcceptRun;
   const concreteChain = concreteStatusEnvelope.ConcreteChain;
+  const hardCoverage = summarizeHardCoverageFromReleaseGate0(gateEnvelope);
 
   return {
     kind: 'ConcreteReleaseAppendixRecord0',
@@ -130,6 +131,22 @@ export function makeConcreteReleaseAppendixRecord0(gateEnvelope) {
     concreteLocalPackages: concreteChain.concreteLocalPackages,
     concreteGlobalFirewalls: concreteChain.concreteGlobalFirewalls,
     concreteGlobalProofDAG: concreteChain.concreteGlobalProofDAG,
+
+    hardEnvelopeKind: hardCoverage.hardEnvelopeKind,
+    concreteHardCheck: hardCoverage.concreteHardCheck,
+    hardCheckerCoverageComplete: hardCoverage.hardCheckerCoverageComplete,
+    hardRowKeyCoverageComplete: hardCoverage.hardRowKeyCoverageComplete,
+    hardRoutePriorityComplete: hardCoverage.hardRoutePriorityComplete,
+    hardProofRefPolicyComplete: hardCoverage.hardProofRefPolicyComplete,
+    hardHashDisciplineComplete: hardCoverage.hardHashDisciplineComplete,
+    hardNoMinCoverageComplete: hardCoverage.hardNoMinCoverageComplete,
+    hardImportPolicyComplete: hardCoverage.hardImportPolicyComplete,
+    hardReflectionPolicyComplete: hardCoverage.hardReflectionPolicyComplete,
+    hardBoundsPolicyComplete: hardCoverage.hardBoundsPolicyComplete,
+    hardDiagnosticsPolicyComplete: hardCoverage.hardDiagnosticsPolicyComplete,
+    hardCoverageDigest: hardCoverage.hardCoverageDigest,
+    hardCheckDigest: hardCoverage.hardCheckDigest,
+
     finalCertificateUsesConcreteAcceptRun: concreteChain.finalCertificateUsesConcreteAcceptRun,
     statusUsesConcreteFinalCertificate: concreteChain.statusUsesConcreteFinalCertificate,
 
@@ -330,6 +347,22 @@ export async function CheckConcreteReleaseAppendix0(
     concreteLocalPackages: appendix.concreteLocalPackages,
     concreteGlobalFirewalls: appendix.concreteGlobalFirewalls,
     concreteGlobalProofDAG: appendix.concreteGlobalProofDAG,
+
+    hardEnvelopeKind: appendix.hardEnvelopeKind,
+    concreteHardCheck: appendix.concreteHardCheck,
+    hardCheckerCoverageComplete: appendix.hardCheckerCoverageComplete,
+    hardRowKeyCoverageComplete: appendix.hardRowKeyCoverageComplete,
+    hardRoutePriorityComplete: appendix.hardRoutePriorityComplete,
+    hardProofRefPolicyComplete: appendix.hardProofRefPolicyComplete,
+    hardHashDisciplineComplete: appendix.hardHashDisciplineComplete,
+    hardNoMinCoverageComplete: appendix.hardNoMinCoverageComplete,
+    hardImportPolicyComplete: appendix.hardImportPolicyComplete,
+    hardReflectionPolicyComplete: appendix.hardReflectionPolicyComplete,
+    hardBoundsPolicyComplete: appendix.hardBoundsPolicyComplete,
+    hardDiagnosticsPolicyComplete: appendix.hardDiagnosticsPolicyComplete,
+    hardCoverageDigest: appendix.hardCoverageDigest,
+    hardCheckDigest: appendix.hardCheckDigest,
+
     finalCertificateUsesConcreteAcceptRun: appendix.finalCertificateUsesConcreteAcceptRun,
     statusUsesConcreteFinalCertificate: appendix.statusUsesConcreteFinalCertificate,
 
@@ -409,6 +442,44 @@ export async function writeConcreteReleaseAppendixFiles0(outDir, options = {}) {
       gateCheckPath,
       checkPath,
     },
+  };
+}
+
+
+function summarizeHardCoverageFromReleaseGate0(gateEnvelope) {
+  const generatedAcceptRunEnvelope =
+    gateEnvelope?.ConcreteFinalCertificatePublicStatusEnvelope
+      ?.ConcreteFinalCertificateEnvelope
+      ?.ConcreteGeneratedAcceptRunEnvelope
+      ?.GeneratedAcceptRunEnvelope ?? null;
+
+  const materializedPCCPack = generatedAcceptRunEnvelope?.MaterializedPCCPack ?? null;
+  const hardEnvelope = materializedPCCPack?.HardEnvelope ?? null;
+  const hardCoverage = hardEnvelope?.Coverage ?? null;
+  const hardCheck =
+    hardEnvelope?.HardCheck ??
+    hardEnvelope?.MaterializedHardEnvelope?.HardCheck ??
+    materializedPCCPack?.PCCPack?.HardCheck ??
+    generatedAcceptRunEnvelope?.AcceptRun?.Pgen?.HardCheck ??
+    null;
+
+  return {
+    kind: 'ConcreteReleaseAppendixHardCoverage0',
+    version: CHECKER_VERSION,
+    hardEnvelopeKind: hardEnvelope?.kind ?? null,
+    concreteHardCheck: hardEnvelope?.kind === 'ConcreteMaterializedHardCheck0',
+    hardCheckerCoverageComplete: hardCoverage?.checkerCoverageComplete === true,
+    hardRowKeyCoverageComplete: hardCoverage?.rowKeyCoverageComplete === true,
+    hardRoutePriorityComplete: hardCoverage?.routePriorityComplete === true,
+    hardProofRefPolicyComplete: hardCoverage?.proofRefPolicyComplete === true,
+    hardHashDisciplineComplete: hardCoverage?.hashDisciplineComplete === true,
+    hardNoMinCoverageComplete: hardCoverage?.noMinCoverageComplete === true,
+    hardImportPolicyComplete: hardCoverage?.importPolicyComplete === true,
+    hardReflectionPolicyComplete: hardCoverage?.reflectionPolicyComplete === true,
+    hardBoundsPolicyComplete: hardCoverage?.boundsPolicyComplete === true,
+    hardDiagnosticsPolicyComplete: hardCoverage?.diagnosticsPolicyComplete === true,
+    hardCoverageDigest: isPlainObject(hardCoverage) ? digestCanonical0(hardCoverage) : null,
+    hardCheckDigest: isPlainObject(hardCheck) ? digestCanonical0(hardCheck) : null,
   };
 }
 
@@ -507,6 +578,17 @@ function validateAppendixRecord0(actual, expected) {
     'concreteLocalPackages',
     'concreteGlobalFirewalls',
     'concreteGlobalProofDAG',
+    'concreteHardCheck',
+    'hardCheckerCoverageComplete',
+    'hardRowKeyCoverageComplete',
+    'hardRoutePriorityComplete',
+    'hardProofRefPolicyComplete',
+    'hardHashDisciplineComplete',
+    'hardNoMinCoverageComplete',
+    'hardImportPolicyComplete',
+    'hardReflectionPolicyComplete',
+    'hardBoundsPolicyComplete',
+    'hardDiagnosticsPolicyComplete',
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',
     'publicConclusionEmitted',
