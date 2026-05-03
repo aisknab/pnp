@@ -13,12 +13,18 @@ import {
 
 import {
   CheckConcreteMaterializedPCCPack0,
+  makeConcreteMaterializedPCCPack0,
   summarizeConcretePCCPackCoverage0,
 } from './pcc-pack-concrete-materialized0.mjs';
 
 import {
   CheckPCCPackexp0,
 } from './pcc-check-pcc-pack-exp0.mjs';
+
+import {
+  CheckGeneratedPCCPackexp0,
+  makeGeneratedPCCPackexp0,
+} from './pcc-generate-pcc-pack0.mjs';
 
 const CHECKER_VERSION = 0;
 
@@ -29,23 +35,33 @@ export function makeConcreteMaterializedGeneratedAcceptRunConfig0(overrides = {}
     checkGeneratedAcceptRun: true,
     checkConcretePCCPack: true,
     checkPCCPackexp: true,
+    checkGeneratedPCCPackexp: true,
     checkConcreteChain: true,
     checkJsonMaterialized: true,
     checkLinkage: true,
     generatedAcceptRunConfig: {},
     concretePCCPackConfig: {},
     checkPCCPackexpConfig: {},
+    generatedPCCPackexpConfig: {},
     ...overrides,
   };
 }
 
 export async function makeConcreteMaterializedGeneratedAcceptRun0({
   GeneratedAcceptRunEnvelope = null,
+  GeneratedPCCPackexpEnvelope = null,
   overrides = {},
 } = {}) {
   const generatedAcceptRunEnvelope = GeneratedAcceptRunEnvelope ?? await makeMaterializedGeneratedAcceptRun0();
   const concreteChain = summarizeConcreteGeneratedAcceptRunChain0(generatedAcceptRunEnvelope);
   const checkPCCPackexpRecord = await CheckPCCPackexp0(generatedAcceptRunEnvelope.MaterializedPCCPack);
+  const generatedPCCPack = await makeConcreteMaterializedPCCPack0({
+    MaterializedPCCPackEnvelope: generatedAcceptRunEnvelope.MaterializedPCCPack,
+  });
+  const generatedPCCPackexpEnvelope = GeneratedPCCPackexpEnvelope ?? await makeGeneratedPCCPackexp0({
+    GeneratedPCCPack: generatedPCCPack,
+    CheckPCCPackexpRecord: checkPCCPackexpRecord,
+  });
 
   const linkage = {
     kind: 'ConcreteMaterializedGeneratedAcceptRunLinkage0',
@@ -56,6 +72,8 @@ export async function makeConcreteMaterializedGeneratedAcceptRun0({
     acceptRunDigest: digestCanonical0(generatedAcceptRunEnvelope.AcceptRun),
     generatedPackageDigest: digestCanonical0(generatedAcceptRunEnvelope.GeneratedPackage),
     checkPCCPackexpRecordDigest: digestFromRecord0(checkPCCPackexpRecord),
+    generatedPCCPackexpEnvelopeDigest: digestCanonical0(generatedPCCPackexpEnvelope),
+    generatedPCCPackDigest: digestCanonical0(generatedPCCPackexpEnvelope.GeneratedPCCPack),
     concreteChainDigest: digestCanonical0(concreteChain),
   };
 
@@ -64,6 +82,7 @@ export async function makeConcreteMaterializedGeneratedAcceptRun0({
     version: CHECKER_VERSION,
     GeneratedAcceptRunEnvelope: generatedAcceptRunEnvelope,
     CheckPCCPackexpRecord: checkPCCPackexpRecord,
+    GeneratedPCCPackexpEnvelope: generatedPCCPackexpEnvelope,
     ConcreteChain: concreteChain,
     Linkage: linkage,
     PiConcreteMaterializedGeneratedAcceptRun: {
@@ -81,6 +100,11 @@ export async function makeConcreteMaterializedGeneratedAcceptRun0({
           kind: 'MaterializedRef0',
           target: 'CheckPCCPackexpRecord',
           digest: linkage.checkPCCPackexpRecordDigest,
+        },
+        {
+          kind: 'MaterializedRef0',
+          target: 'GeneratedPCCPackexpEnvelope',
+          digest: linkage.generatedPCCPackexpEnvelopeDigest,
         },
         {
           kind: 'MaterializedRef0',
@@ -238,6 +262,8 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
   const envelope = normalizeInput0(input);
   let checkPCCPackexpRecord = null;
   let materializedCheckPCCPackexpRecord = null;
+  let generatedPCCPackexpRecord = null;
+  let materializedGeneratedPCCPackexpEnvelope = null;
 
   const cfgCheck = validateConfig0(cfg);
 
@@ -370,6 +396,55 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
     materializedCheckPCCPackexpRecord = envelope.CheckPCCPackexpRecord;
   }
 
+  if (cfg.checkGeneratedPCCPackexp === true) {
+    generatedPCCPackexpRecord = await CheckGeneratedPCCPackexp0(
+      envelope.GeneratedPCCPackexpEnvelope,
+      cfg.generatedPCCPackexpConfig ?? {},
+    );
+    const result = recordToValidation0(generatedPCCPackexpRecord, ['GeneratedPCCPackexpEnvelope']);
+
+    ledger.push({
+      phase: 'CheckGeneratedPCCPackexp0',
+      status: result.ok ? 'pass' : 'fail',
+      digest: digestFromRecord0(generatedPCCPackexpRecord) ?? digestCanonical0(generatedPCCPackexpRecord),
+    });
+
+    if (!result.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.GeneratedPCCPackexp`,
+        path: result.path,
+        witness: result.witness,
+        ledger,
+      });
+    }
+
+    const generatedAlignment = validateGeneratedPCCPackexpEnvelope0({
+      generatedPCCPackexpEnvelope: envelope.GeneratedPCCPackexpEnvelope,
+      materializedPCCPack: envelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack,
+      checkPCCPackexpRecord: envelope.CheckPCCPackexpRecord,
+      generatedPCCPackexpRecord,
+    });
+
+    ledger.push({
+      phase: 'GeneratedPCCPackexpEnvelope',
+      status: generatedAlignment.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(generatedAlignment.nf ?? generatedAlignment.witness ?? null),
+    });
+
+    if (!generatedAlignment.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.GeneratedPCCPackexp`,
+        path: generatedAlignment.path,
+        witness: generatedAlignment.witness,
+        ledger,
+      });
+    }
+
+    materializedGeneratedPCCPackexpEnvelope = envelope.GeneratedPCCPackexpEnvelope;
+  }
+
   const recomputedChain = summarizeConcreteGeneratedAcceptRunChain0(envelope.GeneratedAcceptRunEnvelope);
 
   if (cfg.checkConcreteChain === true) {
@@ -497,6 +572,52 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
         : sameDigestHex0(digestFromRecord0(materializedCheckPCCPackexpRecord), digestFromRecord0(checkPCCPackexpRecord))
     ),
 
+    generatedPCCPackexp: cfg.checkGeneratedPCCPackexp === true,
+    generatedPCCPackexpEnvelopePresent: isPlainObject(materializedGeneratedPCCPackexpEnvelope),
+    generatedPCCPackexpEnvelopeDigest: (
+      isPlainObject(materializedGeneratedPCCPackexpEnvelope)
+        ? digestCanonical0(materializedGeneratedPCCPackexpEnvelope)
+        : null
+    ),
+    generatedPCCPackexpRecordAccepted: (
+      generatedPCCPackexpRecord === null
+        ? null
+        : generatedPCCPackexpRecord.tag === 'accept'
+    ),
+    generatedPCCPackexpRecordChecker: generatedPCCPackexpRecord?.checker ?? null,
+    generatedPCCPackexpRecordDigest: digestFromRecord0(generatedPCCPackexpRecord),
+    generatedPCCPackexpPackageMatchesAcceptRun: (
+      isPlainObject(materializedGeneratedPCCPackexpEnvelope)
+        ? sameDigestHex0(
+            digestCanonical0(materializedGeneratedPCCPackexpEnvelope.GeneratedPCCPack?.MaterializedPCCPackEnvelope ?? null),
+            digestCanonical0(envelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack),
+          )
+        : null
+    ),
+    generatedPCCPackexpCheckRecordMatchesMaterialized: (
+      isPlainObject(materializedGeneratedPCCPackexpEnvelope)
+        ? sameDigestHex0(
+            digestFromRecord0(materializedGeneratedPCCPackexpEnvelope.CheckPCCPackexpRecord),
+            digestFromRecord0(envelope.CheckPCCPackexpRecord),
+          )
+        : null
+    ),
+    generatedPCCPackexpRecordMatchesMaterialized: (
+      isPlainObject(materializedGeneratedPCCPackexpEnvelope) &&
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (
+            sameDigestHex0(
+              (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).generatedPackageDigest,
+              digestCanonical0(materializedGeneratedPCCPackexpEnvelope.GeneratedPCCPack),
+            ) &&
+            sameDigestHex0(
+              (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).checkPCCPackexpRecordDigest,
+              digestFromRecord0(materializedGeneratedPCCPackexpEnvelope.CheckPCCPackexpRecord),
+            )
+          )
+        : null
+    ),
+
     rowsEnvelopeKind: recomputedChain.rowsEnvelopeKind,
     localPackagesEnvelopeKind: recomputedChain.localPackagesEnvelopeKind,
     globalFirewallsEnvelopeKind: recomputedChain.globalFirewallsEnvelopeKind,
@@ -545,6 +666,7 @@ export async function writeConcreteMaterializedGeneratedAcceptRunFiles0(outDir, 
   const generatedAcceptRunPath = path.join(outDir, 'MaterializedGeneratedAcceptRun0.json');
   const concreteChainPath = path.join(outDir, 'ConcreteGeneratedAcceptRunChain0.json');
   const checkPCCPackexpRecordPath = path.join(outDir, 'CheckPCCPackexp0.json');
+  const generatedPCCPackexpEnvelopePath = path.join(outDir, 'GeneratedPCCPackexp0.json');
   const acceptRunPath = path.join(outDir, 'AcceptRun0.json');
   const pccPackPath = path.join(outDir, 'PCCPack0.json');
   const checkPath = path.join(outDir, 'ConcreteMaterializedGeneratedAcceptRun0.check.json');
@@ -553,6 +675,7 @@ export async function writeConcreteMaterializedGeneratedAcceptRunFiles0(outDir, 
   await writeJsonFile0(generatedAcceptRunPath, envelope.GeneratedAcceptRunEnvelope);
   await writeJsonFile0(concreteChainPath, envelope.ConcreteChain);
   await writeJsonFile0(checkPCCPackexpRecordPath, envelope.CheckPCCPackexpRecord);
+  await writeJsonFile0(generatedPCCPackexpEnvelopePath, envelope.GeneratedPCCPackexpEnvelope);
   await writeJsonFile0(acceptRunPath, envelope.GeneratedAcceptRunEnvelope.AcceptRun);
   await writeJsonFile0(pccPackPath, envelope.GeneratedAcceptRunEnvelope.AcceptRun.Pgen);
   await writeJsonFile0(checkPath, checked);
@@ -565,6 +688,7 @@ export async function writeConcreteMaterializedGeneratedAcceptRunFiles0(outDir, 
       generatedAcceptRunPath,
       concreteChainPath,
       checkPCCPackexpRecordPath,
+      generatedPCCPackexpEnvelopePath,
       acceptRunPath,
       pccPackPath,
       checkPath,
@@ -621,6 +745,7 @@ function validateConfig0(config) {
     'checkGeneratedAcceptRun',
     'checkConcretePCCPack',
     'checkPCCPackexp',
+    'checkGeneratedPCCPackexp',
     'checkConcreteChain',
     'checkJsonMaterialized',
     'checkLinkage',
@@ -647,6 +772,12 @@ function validateConfig0(config) {
   if (!isPlainObject(config.checkPCCPackexpConfig)) {
     return validationReject0(['checkPCCPackexpConfig'], 'checkPCCPackexpConfig must be an object', {
       actual: typeof config.checkPCCPackexpConfig,
+    });
+  }
+
+  if (!isPlainObject(config.generatedPCCPackexpConfig)) {
+    return validationReject0(['generatedPCCPackexpConfig'], 'generatedPCCPackexpConfig must be an object', {
+      actual: typeof config.generatedPCCPackexpConfig,
     });
   }
 
@@ -860,6 +991,87 @@ function validateMaterializedCheckPCCPackexpRecord0(actual, expected) {
   });
 }
 
+function validateGeneratedPCCPackexpEnvelope0({
+  generatedPCCPackexpEnvelope,
+  materializedPCCPack,
+  checkPCCPackexpRecord,
+  generatedPCCPackexpRecord,
+}) {
+  if (!isPlainObject(generatedPCCPackexpEnvelope)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope'], 'ConcreteMaterializedGeneratedAcceptRun0 must include GeneratedPCCPackexpEnvelope', {
+      actual: typeof generatedPCCPackexpEnvelope,
+    });
+  }
+
+  if (!isPlainObject(generatedPCCPackexpEnvelope.GeneratedPCCPack)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'GeneratedPCCPack'], 'GeneratedPCCPackexpEnvelope must include GeneratedPCCPack', {
+      actual: typeof generatedPCCPackexpEnvelope.GeneratedPCCPack,
+    });
+  }
+
+  if (!isPlainObject(generatedPCCPackexpEnvelope.CheckPCCPackexpRecord)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'CheckPCCPackexpRecord'], 'GeneratedPCCPackexpEnvelope must include CheckPCCPackexpRecord', {
+      actual: typeof generatedPCCPackexpEnvelope.CheckPCCPackexpRecord,
+    });
+  }
+
+  if (generatedPCCPackexpRecord?.tag !== 'accept') {
+    return validationReject0(['GeneratedPCCPackexpEnvelope'], 'CheckGeneratedPCCPackexp0 record must be accepted', {
+      actual: generatedPCCPackexpRecord?.tag ?? null,
+    });
+  }
+
+  if (!sameDigestHex0(
+    digestCanonical0(generatedPCCPackexpEnvelope.GeneratedPCCPack.MaterializedPCCPackEnvelope ?? null),
+    digestCanonical0(materializedPCCPack),
+  )) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'GeneratedPCCPack'], 'GeneratedPCCPackexpEnvelope package must match accept-run materialized package', {
+      expected: digestCanonical0(materializedPCCPack),
+      actual: digestCanonical0(generatedPCCPackexpEnvelope.GeneratedPCCPack.MaterializedPCCPackEnvelope ?? null),
+    });
+  }
+
+  if (!sameDigestHex0(
+    digestFromRecord0(generatedPCCPackexpEnvelope.CheckPCCPackexpRecord),
+    digestFromRecord0(checkPCCPackexpRecord),
+  )) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'CheckPCCPackexpRecord'], 'GeneratedPCCPackexpEnvelope CheckPCCPackexpRecord must match accept-run record', {
+      expected: digestFromRecord0(checkPCCPackexpRecord),
+      actual: digestFromRecord0(generatedPCCPackexpEnvelope.CheckPCCPackexpRecord),
+    });
+  }
+
+  const generatedNF = generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf;
+
+  if (!sameDigestHex0(
+    generatedNF?.generatedPackageDigest ?? null,
+    digestCanonical0(generatedPCCPackexpEnvelope.GeneratedPCCPack),
+  )) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'GeneratedPCCPack'], 'CheckGeneratedPCCPackexp0 NF must digest the materialized generated package', {
+      expected: digestCanonical0(generatedPCCPackexpEnvelope.GeneratedPCCPack),
+      actual: generatedNF?.generatedPackageDigest ?? null,
+    });
+  }
+
+  if (!sameDigestHex0(
+    generatedNF?.checkPCCPackexpRecordDigest ?? null,
+    digestFromRecord0(checkPCCPackexpRecord),
+  )) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'CheckPCCPackexpRecord'], 'CheckGeneratedPCCPackexp0 NF must digest the materialized CheckPCCPackexpRecord', {
+      expected: digestFromRecord0(checkPCCPackexpRecord),
+      actual: generatedNF?.checkPCCPackexpRecordDigest ?? null,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'ConcreteGeneratedAcceptRunGeneratedPCCPackexpEnvelope0NF',
+    generatedPCCPackexpEnvelopeDigest: digestCanonical0(generatedPCCPackexpEnvelope),
+    generatedPCCPackexpRecordDigest: digestFromRecord0(generatedPCCPackexpRecord),
+    generatedPackageDigest: digestCanonical0(generatedPCCPackexpEnvelope.GeneratedPCCPack),
+    checkPCCPackexpRecordDigest: digestFromRecord0(checkPCCPackexpRecord),
+  });
+}
+
 function validateLinkage0(envelope, concreteChain) {
   if (envelope.Linkage === null || envelope.Linkage === undefined) {
     return validationAccept0({
@@ -883,6 +1095,16 @@ function validateLinkage0(envelope, concreteChain) {
     acceptRunDigest: digestCanonical0(generated.AcceptRun),
     generatedPackageDigest: digestCanonical0(generated.GeneratedPackage),
     checkPCCPackexpRecordDigest: digestFromRecord0(envelope.CheckPCCPackexpRecord),
+    generatedPCCPackexpEnvelopeDigest: (
+      isPlainObject(envelope.GeneratedPCCPackexpEnvelope)
+        ? digestCanonical0(envelope.GeneratedPCCPackexpEnvelope)
+        : null
+    ),
+    generatedPCCPackDigest: (
+      isPlainObject(envelope.GeneratedPCCPackexpEnvelope?.GeneratedPCCPack)
+        ? digestCanonical0(envelope.GeneratedPCCPackexpEnvelope.GeneratedPCCPack)
+        : null
+    ),
     concreteChainDigest: digestCanonical0(concreteChain),
   };
 
