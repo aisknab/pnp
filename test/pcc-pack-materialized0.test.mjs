@@ -305,3 +305,30 @@ test('makeMaterializedPCCPack0 uses concrete materialized final integration by d
   assert.equal(out.NF.finalIntegrationGPackFieldCoverageComplete, true);
   assert.equal(out.NF.finalIntegrationRowFamGCoverageComplete, true);
 });
+
+test('makeMaterializedPCCPack0 uses concrete materialized HardCheck coverage by default', async () => {
+  const envelope = await makeMaterializedPCCPack0();
+
+  assert.equal(envelope.HardEnvelope.kind, 'ConcreteMaterializedHardCheck0');
+  assert.equal(envelope.HardEnvelope.Coverage.checkerCoverageComplete, true);
+  assert.equal(envelope.HardEnvelope.Coverage.rowKeyCoverageComplete, true);
+  assert.equal(envelope.HardEnvelope.Coverage.routePriorityComplete, true);
+  assert.equal(envelope.HardEnvelope.Coverage.proofRefPolicyComplete, true);
+  assert.equal(envelope.HardEnvelope.Coverage.hashDisciplineComplete, true);
+  assert.equal(envelope.HardEnvelope.Coverage.noMinCoverageComplete, true);
+  assert.equal(envelope.HardEnvelope.Coverage.importPolicyComplete, true);
+
+  const out = await CheckMaterializedPCCPack0(envelope);
+
+  assert.equal(out.tag, 'accept');
+  assert.equal(out.checker, 'CheckMaterializedPCCPack0');
+  assert.equal(out.NF.hardEnvelopeKind, 'ConcreteMaterializedHardCheck0');
+  assert.equal(out.NF.concreteHardCheck, true);
+  assert.equal(out.NF.hardCheckerCoverageComplete, true);
+  assert.equal(out.NF.hardRowKeyCoverageComplete, true);
+  assert.equal(out.NF.hardRoutePriorityComplete, true);
+  assert.equal(out.NF.hardProofRefPolicyComplete, true);
+  assert.equal(out.NF.hardHashDisciplineComplete, true);
+  assert.equal(out.NF.hardNoMinCoverageComplete, true);
+  assert.equal(out.NF.hardImportPolicyComplete, true);
+});

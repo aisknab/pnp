@@ -34,6 +34,11 @@ import {
 } from './pcc-hard-materialized0.mjs';
 
 import {
+  CheckConcreteMaterializedHard0,
+  makeConcreteMaterializedHard0,
+} from './pcc-hard-concrete-materialized0.mjs';
+
+import {
   CheckMaterializedRows0,
   makeMaterializedRows0,
 } from './pcc-rows-materialized0.mjs';
@@ -128,7 +133,7 @@ export async function makeMaterializedPCCPack0({
   });
   const kBundle = resolveKBundle0(kBundleEnvelope);
 
-  const hardEnvelope = HardEnvelope ?? makeMaterializedHard0();
+  const hardEnvelope = HardEnvelope ?? makeConcreteMaterializedHard0();
   const hardCheck = resolveHardCheck0(hardEnvelope);
 
   const rowsEnvelope = RowsEnvelope ?? await makeConcreteMaterializedRows0({
@@ -549,6 +554,15 @@ export async function CheckMaterializedPCCPack0(input, config = makeMaterialized
     kBundleKernelRuleCoverageComplete: envelope.KBundleEnvelope?.ProofInventory?.kernelRuleCoverageComplete === true,
     kBundleSigmaProofRefsResolve: envelope.KBundleEnvelope?.ProofInventory?.sigmaProofRefsResolve === true,
     kBundleReflectionProofRefsResolve: envelope.KBundleEnvelope?.ProofInventory?.reflectionProofRefsResolve === true,
+    hardEnvelopeKind: envelope.HardEnvelope?.kind ?? null,
+    concreteHardCheck: isPlainObject(envelope.HardEnvelope) && envelope.HardEnvelope.kind === 'ConcreteMaterializedHardCheck0',
+    hardCheckerCoverageComplete: envelope.HardEnvelope?.Coverage?.checkerCoverageComplete === true,
+    hardRowKeyCoverageComplete: envelope.HardEnvelope?.Coverage?.rowKeyCoverageComplete === true,
+    hardRoutePriorityComplete: envelope.HardEnvelope?.Coverage?.routePriorityComplete === true,
+    hardProofRefPolicyComplete: envelope.HardEnvelope?.Coverage?.proofRefPolicyComplete === true,
+    hardHashDisciplineComplete: envelope.HardEnvelope?.Coverage?.hashDisciplineComplete === true,
+    hardNoMinCoverageComplete: envelope.HardEnvelope?.Coverage?.noMinCoverageComplete === true,
+    hardImportPolicyComplete: envelope.HardEnvelope?.Coverage?.importPolicyComplete === true,
     finalIntegrationEnvelopeKind: envelope.FinalIntegrationEnvelope?.kind ?? null,
     concreteFinalIntegration: isPlainObject(envelope.FinalIntegrationEnvelope) && envelope.FinalIntegrationEnvelope.kind === 'ConcreteMaterializedFinalIntegration0',
     finalIntegrationConcreteGlobalProofDAG: envelope.FinalIntegrationEnvelope?.ConcreteLinks?.concreteGlobalProofDAG === true,
@@ -731,6 +745,14 @@ function validateShape0(envelope) {
   });
 }
 
+async function checkMaterializedHardEnvelope0(value) {
+  if (isPlainObject(value) && value.kind === 'ConcreteMaterializedHardCheck0') {
+    return CheckConcreteMaterializedHard0(value);
+  }
+
+  return CheckMaterializedHard0(value);
+}
+
 async function checkMaterializedFinalIntegrationEnvelope0(value) {
   if (isPlainObject(value) && value.kind === 'ConcreteMaterializedFinalIntegration0') {
     return CheckConcreteMaterializedFinalIntegration0(value);
@@ -783,7 +805,7 @@ async function validateMaterializedComponents0(envelope) {
   const componentChecks = [
     ['MaterializedBoot0', await CheckMaterializedBoot0(resolveBoot0(envelope.MaterializedBoot0) ?? envelope.PCCPack.Boot0)],
     ['KBundleEnvelope', await checkMaterializedKBundleEnvelope0(envelope.KBundleEnvelope)],
-    ['HardEnvelope', await CheckMaterializedHard0(envelope.HardEnvelope)],
+    ['HardEnvelope', await checkMaterializedHardEnvelope0(envelope.HardEnvelope)],
     ['RowsEnvelope', await checkMaterializedRowsEnvelope0(envelope.RowsEnvelope)],
     ['GlobalProofDAGEnvelope', await checkMaterializedGlobalProofDAGEnvelope0(envelope.GlobalProofDAGEnvelope)],
     ['LocalPackagesEnvelope', await checkMaterializedLocalPackagesEnvelope0(envelope.LocalPackagesEnvelope)],
