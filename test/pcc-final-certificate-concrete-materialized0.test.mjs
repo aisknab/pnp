@@ -30,6 +30,21 @@ test('CheckConcreteMaterializedFinalCertificate0 accepts a final certificate ove
   assert.equal(out.NF.concreteGlobalFirewalls, true);
   assert.equal(out.NF.concreteGlobalProofDAG, true);
 
+  assert.equal(out.NF.concreteKBundle, true);
+  assert.equal(out.NF.kBundleKernelRuleCoverageComplete, true);
+  assert.equal(out.NF.kBundleSigmaProofRefsResolve, true);
+  assert.equal(out.NF.kBundleReflectionProofRefsResolve, true);
+
+  assert.equal(out.NF.concreteHardCheck, true);
+  assert.equal(out.NF.hardCheckerCoverageComplete, true);
+  assert.equal(out.NF.hardNoMinCoverageComplete, true);
+  assert.equal(out.NF.hardImportPolicyComplete, true);
+
+  assert.equal(out.NF.concreteFinalIntegration, true);
+  assert.equal(out.NF.finalIntegrationConcreteGlobalProofDAG, true);
+  assert.equal(out.NF.finalIntegrationGPackFieldCoverageComplete, true);
+  assert.equal(out.NF.finalIntegrationRowFamGCoverageComplete, true);
+
   assert.equal(out.NF.finalCertificateUsesConcreteAcceptRun, true);
   assert.equal(out.NF.certificatePccPackDigestMatchesConcreteRun, true);
   assert.equal(out.NF.certificateAcceptRunDigestMatchesConcreteRun, true);
@@ -167,4 +182,64 @@ test('writeConcreteMaterializedFinalCertificateFiles0 writes replayable JSON art
 
     assert.equal(typeof value, 'object');
   }
+});
+
+test('CheckConcreteMaterializedFinalCertificate0 rejects incomplete concrete HardCheck coverage', async () => {
+  const envelope = await makeConcreteMaterializedFinalCertificate0();
+
+  envelope.ConcreteGeneratedAcceptRunEnvelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack.HardEnvelope.Coverage = {
+    ...envelope.ConcreteGeneratedAcceptRunEnvelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack.HardEnvelope.Coverage,
+    noMinCoverageComplete: false,
+  };
+
+  envelope.ConcreteChain = summarizeConcreteFinalCertificateChain0({
+    concreteGeneratedAcceptRunEnvelope: envelope.ConcreteGeneratedAcceptRunEnvelope,
+    finalCertificateEnvelope: envelope.FinalCertificateEnvelope,
+  });
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckConcreteMaterializedFinalCertificate0(envelope, {
+    checkConcreteGeneratedAcceptRun: false,
+    checkFinalCertificate: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedFinalCertificate0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedFinalCertificate0.concreteChain');
+  assert.deepEqual(out.Path, ['ConcreteChain', 'hardNoMinCoverageComplete']);
+});
+
+test('CheckConcreteMaterializedFinalCertificate0 rejects incomplete concrete final-integration coverage', async () => {
+  const envelope = await makeConcreteMaterializedFinalCertificate0();
+
+  envelope.ConcreteGeneratedAcceptRunEnvelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack.FinalIntegrationEnvelope.ConcreteLinks = {
+    ...envelope.ConcreteGeneratedAcceptRunEnvelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack.FinalIntegrationEnvelope.ConcreteLinks,
+    rowFamGCoverageComplete: false,
+  };
+
+  envelope.ConcreteChain = summarizeConcreteFinalCertificateChain0({
+    concreteGeneratedAcceptRunEnvelope: envelope.ConcreteGeneratedAcceptRunEnvelope,
+    finalCertificateEnvelope: envelope.FinalCertificateEnvelope,
+  });
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckConcreteMaterializedFinalCertificate0(envelope, {
+    checkConcreteGeneratedAcceptRun: false,
+    checkFinalCertificate: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedFinalCertificate0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedFinalCertificate0.concreteChain');
+  assert.deepEqual(out.Path, ['ConcreteChain', 'finalIntegrationRowFamGCoverageComplete']);
 });
