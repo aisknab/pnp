@@ -16,6 +16,10 @@ import {
   summarizeConcretePCCPackCoverage0,
 } from './pcc-pack-concrete-materialized0.mjs';
 
+import {
+  CheckPCCPackexp0,
+} from './pcc-check-pcc-pack-exp0.mjs';
+
 const CHECKER_VERSION = 0;
 
 export function makeConcreteMaterializedGeneratedAcceptRunConfig0(overrides = {}) {
@@ -24,11 +28,13 @@ export function makeConcreteMaterializedGeneratedAcceptRunConfig0(overrides = {}
     version: CHECKER_VERSION,
     checkGeneratedAcceptRun: true,
     checkConcretePCCPack: true,
+    checkPCCPackexp: true,
     checkConcreteChain: true,
     checkJsonMaterialized: true,
     checkLinkage: true,
     generatedAcceptRunConfig: {},
     concretePCCPackConfig: {},
+    checkPCCPackexpConfig: {},
     ...overrides,
   };
 }
@@ -222,6 +228,7 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
   const ledger = [];
   const cfg = makeConcreteMaterializedGeneratedAcceptRunConfig0(config);
   const envelope = normalizeInput0(input);
+  let checkPCCPackexpRecord = null;
 
   const cfgCheck = validateConfig0(cfg);
 
@@ -300,6 +307,30 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
       return makeRejectRecord({
         checker,
         coord: `${checker}.ConcretePCCPack`,
+        path: result.path,
+        witness: result.witness,
+        ledger,
+      });
+    }
+  }
+
+  if (cfg.checkPCCPackexp === true) {
+    checkPCCPackexpRecord = await CheckPCCPackexp0(
+      envelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack,
+      cfg.checkPCCPackexpConfig ?? {},
+    );
+    const result = recordToValidation0(checkPCCPackexpRecord, ['GeneratedAcceptRunEnvelope', 'MaterializedPCCPack']);
+
+    ledger.push({
+      phase: 'CheckPCCPackexp0',
+      status: result.ok ? 'pass' : 'fail',
+      digest: checkPCCPackexpRecord.Digest ?? checkPCCPackexpRecord.digest ?? digestCanonical0(checkPCCPackexpRecord),
+    });
+
+    if (!result.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.CheckPCCPackexp`,
         path: result.path,
         witness: result.witness,
         ledger,
@@ -422,6 +453,11 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
     pccPackLinkedToFinalIntegration: recomputedChain.pccPackLinkedToFinalIntegration,
     pccPackLinkedToFinalTheorem: recomputedChain.pccPackLinkedToFinalTheorem,
 
+    checkPCCPackexp: cfg.checkPCCPackexp === true,
+    checkPCCPackexpRecordDigest: checkPCCPackexpRecord?.Digest ?? checkPCCPackexpRecord?.digest ?? null,
+    checkPCCPackexpRecordAccepted: checkPCCPackexpRecord === null ? null : checkPCCPackexpRecord.tag === 'accept',
+    checkPCCPackexpRecordChecker: checkPCCPackexpRecord?.checker ?? null,
+
     rowsEnvelopeKind: recomputedChain.rowsEnvelopeKind,
     localPackagesEnvelopeKind: recomputedChain.localPackagesEnvelopeKind,
     globalFirewallsEnvelopeKind: recomputedChain.globalFirewallsEnvelopeKind,
@@ -541,6 +577,7 @@ function validateConfig0(config) {
   for (const field of [
     'checkGeneratedAcceptRun',
     'checkConcretePCCPack',
+    'checkPCCPackexp',
     'checkConcreteChain',
     'checkJsonMaterialized',
     'checkLinkage',
@@ -561,6 +598,12 @@ function validateConfig0(config) {
   if (!isPlainObject(config.concretePCCPackConfig)) {
     return validationReject0(['concretePCCPackConfig'], 'concretePCCPackConfig must be an object', {
       actual: typeof config.concretePCCPackConfig,
+    });
+  }
+
+  if (!isPlainObject(config.checkPCCPackexpConfig)) {
+    return validationReject0(['checkPCCPackexpConfig'], 'checkPCCPackexpConfig must be an object', {
+      actual: typeof config.checkPCCPackexpConfig,
     });
   }
 

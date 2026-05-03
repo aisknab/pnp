@@ -71,6 +71,15 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 accepts an accept run over th
   assert.equal(out.NF.pccPackLinkedToFinalTheorem, true);
   assert.match(out.NF.concretePCCPackCoverageDigest.hex, /^[0-9a-f]{64}$/);
 
+  assert.equal(out.NF.checkPCCPackexp, true);
+  assert.equal(out.NF.checkPCCPackexpRecordAccepted, true);
+  assert.equal(out.NF.checkPCCPackexpRecordChecker, 'CheckPCCPackexp0');
+  assert.match(out.NF.checkPCCPackexpRecordDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.Ledger.some((entry) => (
+    entry.phase === 'CheckPCCPackexp0' &&
+    entry.status === 'pass'
+  )), true);
+
   assert.equal(out.NF.pccPackLinkedToAcceptRun, true);
   assert.equal(out.NF.rowPackLinkedToPCCPack, true);
   assert.equal(out.NF.localPackagesLinkedToPCCPack, true);
@@ -150,6 +159,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a non-concrete global
   const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
+    checkPCCPackexp: false,
     checkLinkage: false,
   });
 
@@ -182,6 +192,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects stale ConcreteChain s
   const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
+    checkPCCPackexp: false,
     checkLinkage: false,
   });
 
@@ -251,6 +262,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects incomplete concrete H
   const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
+    checkPCCPackexp: false,
     checkLinkage: false,
   });
 
@@ -291,6 +303,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects incomplete concrete f
   const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
+    checkPCCPackexp: false,
     checkLinkage: false,
   });
 
@@ -298,4 +311,39 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects incomplete concrete f
   assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
   assert.equal(out.Coord, 'CheckConcreteMaterializedGeneratedAcceptRun0.concreteChain');
   assert.deepEqual(out.Path, ['ConcreteChain', 'finalIntegrationRowFamGCoverageComplete']);
+});
+
+test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects through CheckPCCPackexp0 before chain validation', async () => {
+  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+
+  envelope.GeneratedAcceptRunEnvelope = {
+    ...envelope.GeneratedAcceptRunEnvelope,
+    MaterializedPCCPack: {
+      ...envelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack,
+      HardEnvelope: {
+        ...envelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack.HardEnvelope,
+        Coverage: {
+          ...envelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack.HardEnvelope.Coverage,
+          noMinCoverageComplete: false,
+        },
+      },
+    },
+  };
+
+  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+    checkGeneratedAcceptRun: false,
+    checkConcretePCCPack: false,
+    checkLinkage: false,
+    checkPCCPackexpConfig: {
+      checkConcreteMaterializedPCCPack: false,
+      checkRecordAlignment: false,
+    },
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedGeneratedAcceptRun0.CheckPCCPackexp');
+  assert.deepEqual(out.Path, ['GeneratedAcceptRunEnvelope', 'MaterializedPCCPack']);
+  assert.equal(out.Witness.detail.inner.coord, 'CheckPCCPackexp0.concreteCoverage');
+  assert.deepEqual(out.Witness.detail.inner.path, ['ConcreteCoverage', 'hardNoMinCoverageComplete']);
 });
