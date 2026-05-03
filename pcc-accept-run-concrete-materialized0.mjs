@@ -11,6 +11,11 @@ import {
   makeMaterializedGeneratedAcceptRun0,
 } from './pcc-accept-run-materialized0.mjs';
 
+import {
+  CheckConcreteMaterializedPCCPack0,
+  summarizeConcretePCCPackCoverage0,
+} from './pcc-pack-concrete-materialized0.mjs';
+
 const CHECKER_VERSION = 0;
 
 export function makeConcreteMaterializedGeneratedAcceptRunConfig0(overrides = {}) {
@@ -18,10 +23,12 @@ export function makeConcreteMaterializedGeneratedAcceptRunConfig0(overrides = {}
     kind: 'ConcreteMaterializedGeneratedAcceptRunConfig0',
     version: CHECKER_VERSION,
     checkGeneratedAcceptRun: true,
+    checkConcretePCCPack: true,
     checkConcreteChain: true,
     checkJsonMaterialized: true,
     checkLinkage: true,
     generatedAcceptRunConfig: {},
+    concretePCCPackConfig: {},
     ...overrides,
   };
 }
@@ -87,6 +94,7 @@ export function summarizeConcreteGeneratedAcceptRunChain0(generatedAcceptRunEnve
   const kBundleInventory = kBundleEnvelope?.ProofInventory ?? null;
   const hardCoverage = hardEnvelope?.Coverage ?? null;
   const finalIntegrationLinks = finalIntegrationEnvelope?.ConcreteLinks ?? null;
+  const concretePCCPackCoverage = summarizeConcretePCCPackCoverage0(materializedPCCPack);
 
   const rowPack = resolveRowPack0(rowsEnvelope);
   const localPackages = resolveLocalPackages0(localPackagesEnvelope);
@@ -137,6 +145,40 @@ export function summarizeConcreteGeneratedAcceptRunChain0(generatedAcceptRunEnve
     rowFamFinalUsesFinalTheorem: finalIntegrationLinks?.rowFamFinalUsesFinalTheorem === true,
     finalMatchUsesGPack: finalIntegrationLinks?.finalMatchUsesGPack === true,
     satDecisionUsesGPack: finalIntegrationLinks?.satDecisionUsesGPack === true,
+
+    concretePCCPack: (
+      concretePCCPackCoverage.pccPackKind === 'PCCPack0' &&
+      allTrue0(
+        concretePCCPackCoverage.publicConclusionOnlyAfterAcceptRun,
+        concretePCCPackCoverage.concreteKBundle,
+        concretePCCPackCoverage.concreteHardCheck,
+        concretePCCPackCoverage.concreteRows,
+        concretePCCPackCoverage.concreteLocalPackages,
+        concretePCCPackCoverage.concreteGlobalFirewalls,
+        concretePCCPackCoverage.concreteGlobalProofDAG,
+        concretePCCPackCoverage.concreteFinalIntegration,
+        concretePCCPackCoverage.pccPackLinkedToKBundle,
+        concretePCCPackCoverage.pccPackLinkedToHardCheck,
+        concretePCCPackCoverage.pccPackLinkedToRows,
+        concretePCCPackCoverage.pccPackLinkedToLocalPackages,
+        concretePCCPackCoverage.pccPackLinkedToGlobalFirewalls,
+        concretePCCPackCoverage.pccPackLinkedToGlobalProofDAG,
+        concretePCCPackCoverage.pccPackLinkedToGPack,
+        concretePCCPackCoverage.pccPackLinkedToFinalIntegration,
+        concretePCCPackCoverage.pccPackLinkedToFinalTheorem
+      )
+    ),
+    concretePCCPackCoverageDigest: digestCanonical0(concretePCCPackCoverage),
+    pccPackPublicConclusionOnlyAfterAcceptRun: concretePCCPackCoverage.publicConclusionOnlyAfterAcceptRun === true,
+    pccPackLinkedToKBundle: concretePCCPackCoverage.pccPackLinkedToKBundle === true,
+    pccPackLinkedToHardCheck: concretePCCPackCoverage.pccPackLinkedToHardCheck === true,
+    pccPackLinkedToRows: concretePCCPackCoverage.pccPackLinkedToRows === true,
+    pccPackLinkedToLocalPackages: concretePCCPackCoverage.pccPackLinkedToLocalPackages === true,
+    pccPackLinkedToGlobalFirewalls: concretePCCPackCoverage.pccPackLinkedToGlobalFirewalls === true,
+    pccPackLinkedToGlobalProofDAG: concretePCCPackCoverage.pccPackLinkedToGlobalProofDAG === true,
+    pccPackLinkedToGPack: concretePCCPackCoverage.pccPackLinkedToGPack === true,
+    pccPackLinkedToFinalIntegration: concretePCCPackCoverage.pccPackLinkedToFinalIntegration === true,
+    pccPackLinkedToFinalTheorem: concretePCCPackCoverage.pccPackLinkedToFinalTheorem === true,
 
     rowsEnvelopeKind: rowsEnvelope?.kind ?? null,
     localPackagesEnvelopeKind: localPackagesEnvelope?.kind ?? null,
@@ -234,6 +276,30 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
       return makeRejectRecord({
         checker,
         coord: `${checker}.GeneratedAcceptRun`,
+        path: result.path,
+        witness: result.witness,
+        ledger,
+      });
+    }
+  }
+
+  if (cfg.checkConcretePCCPack === true) {
+    const record = await CheckConcreteMaterializedPCCPack0(
+      envelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack,
+      cfg.concretePCCPackConfig ?? {},
+    );
+    const result = recordToValidation0(record, ['GeneratedAcceptRunEnvelope', 'MaterializedPCCPack']);
+
+    ledger.push({
+      phase: 'CheckConcreteMaterializedPCCPack0',
+      status: result.ok ? 'pass' : 'fail',
+      digest: record.Digest ?? record.digest ?? digestCanonical0(record),
+    });
+
+    if (!result.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.ConcretePCCPack`,
         path: result.path,
         witness: result.witness,
         ledger,
@@ -342,6 +408,19 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
     rowFamFinalUsesFinalTheorem: recomputedChain.rowFamFinalUsesFinalTheorem,
     finalMatchUsesGPack: recomputedChain.finalMatchUsesGPack,
     satDecisionUsesGPack: recomputedChain.satDecisionUsesGPack,
+
+    concretePCCPack: recomputedChain.concretePCCPack,
+    concretePCCPackCoverageDigest: recomputedChain.concretePCCPackCoverageDigest,
+    pccPackPublicConclusionOnlyAfterAcceptRun: recomputedChain.pccPackPublicConclusionOnlyAfterAcceptRun,
+    pccPackLinkedToKBundle: recomputedChain.pccPackLinkedToKBundle,
+    pccPackLinkedToHardCheck: recomputedChain.pccPackLinkedToHardCheck,
+    pccPackLinkedToRows: recomputedChain.pccPackLinkedToRows,
+    pccPackLinkedToLocalPackages: recomputedChain.pccPackLinkedToLocalPackages,
+    pccPackLinkedToGlobalFirewalls: recomputedChain.pccPackLinkedToGlobalFirewalls,
+    pccPackLinkedToGlobalProofDAG: recomputedChain.pccPackLinkedToGlobalProofDAG,
+    pccPackLinkedToGPack: recomputedChain.pccPackLinkedToGPack,
+    pccPackLinkedToFinalIntegration: recomputedChain.pccPackLinkedToFinalIntegration,
+    pccPackLinkedToFinalTheorem: recomputedChain.pccPackLinkedToFinalTheorem,
 
     rowsEnvelopeKind: recomputedChain.rowsEnvelopeKind,
     localPackagesEnvelopeKind: recomputedChain.localPackagesEnvelopeKind,
@@ -461,6 +540,7 @@ function validateConfig0(config) {
 
   for (const field of [
     'checkGeneratedAcceptRun',
+    'checkConcretePCCPack',
     'checkConcreteChain',
     'checkJsonMaterialized',
     'checkLinkage',
@@ -475,6 +555,12 @@ function validateConfig0(config) {
   if (!isPlainObject(config.generatedAcceptRunConfig)) {
     return validationReject0(['generatedAcceptRunConfig'], 'generatedAcceptRunConfig must be an object', {
       actual: typeof config.generatedAcceptRunConfig,
+    });
+  }
+
+  if (!isPlainObject(config.concretePCCPackConfig)) {
+    return validationReject0(['concretePCCPackConfig'], 'concretePCCPackConfig must be an object', {
+      actual: typeof config.concretePCCPackConfig,
     });
   }
 
@@ -560,6 +646,18 @@ function validateConcreteChain0(actual, expected) {
     'rowFamFinalUsesFinalTheorem',
     'finalMatchUsesGPack',
     'satDecisionUsesGPack',
+
+    'concretePCCPack',
+    'pccPackPublicConclusionOnlyAfterAcceptRun',
+    'pccPackLinkedToKBundle',
+    'pccPackLinkedToHardCheck',
+    'pccPackLinkedToRows',
+    'pccPackLinkedToLocalPackages',
+    'pccPackLinkedToGlobalFirewalls',
+    'pccPackLinkedToGlobalProofDAG',
+    'pccPackLinkedToGPack',
+    'pccPackLinkedToFinalIntegration',
+    'pccPackLinkedToFinalTheorem',
 
     'pccPackLinkedToAcceptRun',
     'rowPackLinkedToPCCPack',
@@ -705,6 +803,10 @@ function resolveGlobalProofDAG0(value) {
   return value.kind === 'GlobalProofDAG0'
     ? value
     : value.GlobalProofDAG ?? value.globalProofDAG ?? null;
+}
+
+function allTrue0(...values) {
+  return values.every((value) => value === true);
 }
 
 function sameDigestHex0(actual, expected) {

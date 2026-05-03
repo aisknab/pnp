@@ -58,6 +58,19 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 accepts an accept run over th
   assert.equal(out.NF.finalMatchUsesGPack, true);
   assert.equal(out.NF.satDecisionUsesGPack, true);
 
+  assert.equal(out.NF.concretePCCPack, true);
+  assert.equal(out.NF.pccPackPublicConclusionOnlyAfterAcceptRun, true);
+  assert.equal(out.NF.pccPackLinkedToKBundle, true);
+  assert.equal(out.NF.pccPackLinkedToHardCheck, true);
+  assert.equal(out.NF.pccPackLinkedToRows, true);
+  assert.equal(out.NF.pccPackLinkedToLocalPackages, true);
+  assert.equal(out.NF.pccPackLinkedToGlobalFirewalls, true);
+  assert.equal(out.NF.pccPackLinkedToGlobalProofDAG, true);
+  assert.equal(out.NF.pccPackLinkedToGPack, true);
+  assert.equal(out.NF.pccPackLinkedToFinalIntegration, true);
+  assert.equal(out.NF.pccPackLinkedToFinalTheorem, true);
+  assert.match(out.NF.concretePCCPackCoverageDigest.hex, /^[0-9a-f]{64}$/);
+
   assert.equal(out.NF.pccPackLinkedToAcceptRun, true);
   assert.equal(out.NF.rowPackLinkedToPCCPack, true);
   assert.equal(out.NF.localPackagesLinkedToPCCPack, true);
@@ -73,6 +86,40 @@ test('inner materialized generated accept-run accepts the concrete-chain run', a
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedGeneratedAcceptRun0');
+});
+
+test('CheckConcreteMaterializedGeneratedAcceptRun0 invokes the concrete PCCPack checker before chain validation', async () => {
+  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+
+  envelope.GeneratedAcceptRunEnvelope = {
+    ...envelope.GeneratedAcceptRunEnvelope,
+    MaterializedPCCPack: {
+      ...envelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack,
+      HardEnvelope: {
+        ...envelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack.HardEnvelope,
+        Coverage: {
+          ...envelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack.HardEnvelope.Coverage,
+          noMinCoverageComplete: false,
+        },
+      },
+    },
+  };
+
+  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+    checkGeneratedAcceptRun: false,
+    checkLinkage: false,
+    concretePCCPackConfig: {
+      checkMaterializedPCCPack: false,
+      checkLinkage: false,
+    },
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedGeneratedAcceptRun0.ConcretePCCPack');
+  assert.deepEqual(out.Path, ['GeneratedAcceptRunEnvelope', 'MaterializedPCCPack']);
+  assert.equal(out.Witness.detail.inner.coord, 'CheckConcreteMaterializedPCCPack0.concreteCoverage');
+  assert.deepEqual(out.Witness.detail.inner.path, ['ConcreteCoverage', 'hardNoMinCoverageComplete']);
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a non-concrete global proof DAG envelope', async () => {
@@ -102,6 +149,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a non-concrete global
 
   const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
+    checkConcretePCCPack: false,
     checkLinkage: false,
   });
 
@@ -133,6 +181,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects stale ConcreteChain s
 
   const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
+    checkConcretePCCPack: false,
     checkLinkage: false,
   });
 
@@ -201,6 +250,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects incomplete concrete H
 
   const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
+    checkConcretePCCPack: false,
     checkLinkage: false,
   });
 
@@ -240,6 +290,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects incomplete concrete f
 
   const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
+    checkConcretePCCPack: false,
     checkLinkage: false,
   });
 
