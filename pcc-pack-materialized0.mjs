@@ -59,6 +59,11 @@ import {
 } from './pcc-global-firewalls-materialized0.mjs';
 
 import {
+  CheckConcreteMaterializedGlobalFirewalls0,
+  makeConcreteMaterializedGlobalFirewalls0,
+} from './pcc-global-firewalls-concrete-materialized0.mjs';
+
+import {
   CheckMaterializedFinalIntegration0,
   makeMaterializedFinalIntegrationEnvelope0,
 } from './pcc-final-integration-materialized0.mjs';
@@ -127,8 +132,8 @@ export async function makeMaterializedPCCPack0({
   });
   const localPackages = resolveLocalPackages0(localPackagesEnvelope);
 
-  const globalFirewallsEnvelope = GlobalFirewallsEnvelope ?? makeMaterializedGlobalFirewalls0({
-    LocalPackagesEnvelope: localPackagesEnvelope,
+  const globalFirewallsEnvelope = GlobalFirewallsEnvelope ?? await makeConcreteMaterializedGlobalFirewalls0({
+    ConcreteLocalPackagesEnvelope: localPackagesEnvelope,
   });
   const globalFirewalls = resolveGlobalFirewalls0(globalFirewallsEnvelope);
 
@@ -515,6 +520,8 @@ export async function CheckMaterializedPCCPack0(input, config = makeMaterialized
     concreteRows: isPlainObject(envelope.RowsEnvelope) && envelope.RowsEnvelope.kind === 'ConcreteMaterializedRows0',
     localPackagesEnvelopeKind: envelope.LocalPackagesEnvelope?.kind ?? null,
     concreteLocalPackages: isPlainObject(envelope.LocalPackagesEnvelope) && envelope.LocalPackagesEnvelope.kind === 'ConcreteMaterializedLocalPackages0',
+    globalFirewallsEnvelopeKind: envelope.GlobalFirewallsEnvelope?.kind ?? null,
+    concreteGlobalFirewalls: isPlainObject(envelope.GlobalFirewallsEnvelope) && envelope.GlobalFirewallsEnvelope.kind === 'ConcreteMaterializedGlobalFirewalls0',
     syntheticMarkerCount: markerInventory.syntheticMarkerCount,
     forbiddenMarkerCount: markerInventory.forbiddenMarkerCount,
     allowSyntheticScaffoldMarker: cfg.allowSyntheticScaffoldMarker,
@@ -692,6 +699,14 @@ function validateShape0(envelope) {
   });
 }
 
+async function checkMaterializedGlobalFirewallsEnvelope0(value) {
+  if (isPlainObject(value) && value.kind === 'ConcreteMaterializedGlobalFirewalls0') {
+    return CheckConcreteMaterializedGlobalFirewalls0(value);
+  }
+
+  return CheckMaterializedGlobalFirewalls0(value);
+}
+
 async function checkMaterializedLocalPackagesEnvelope0(value) {
   if (isPlainObject(value) && value.kind === 'ConcreteMaterializedLocalPackages0') {
     return CheckConcreteMaterializedLocalPackages0(value);
@@ -716,7 +731,7 @@ async function validateMaterializedComponents0(envelope) {
     ['RowsEnvelope', await checkMaterializedRowsEnvelope0(envelope.RowsEnvelope)],
     ['GlobalProofDAGEnvelope', await CheckMaterializedGlobalProofDAG0(envelope.GlobalProofDAGEnvelope)],
     ['LocalPackagesEnvelope', await checkMaterializedLocalPackagesEnvelope0(envelope.LocalPackagesEnvelope)],
-    ['GlobalFirewallsEnvelope', await CheckMaterializedGlobalFirewalls0(envelope.GlobalFirewallsEnvelope)],
+    ['GlobalFirewallsEnvelope', await checkMaterializedGlobalFirewallsEnvelope0(envelope.GlobalFirewallsEnvelope)],
     ['FinalIntegrationEnvelope', await CheckMaterializedFinalIntegration0(envelope.FinalIntegrationEnvelope)],
   ];
 

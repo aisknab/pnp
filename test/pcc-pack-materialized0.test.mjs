@@ -229,3 +229,19 @@ test('makeMaterializedPCCPack0 uses concrete materialized local packages by defa
   assert.equal(out.NF.localPackagesEnvelopeKind, 'ConcreteMaterializedLocalPackages0');
   assert.equal(out.NF.concreteLocalPackages, true);
 });
+
+test('makeMaterializedPCCPack0 uses concrete materialized global firewalls by default', async () => {
+  const envelope = await makeMaterializedPCCPack0();
+
+  assert.equal(envelope.GlobalFirewallsEnvelope.kind, 'ConcreteMaterializedGlobalFirewalls0');
+  assert.equal(envelope.GlobalFirewallsEnvelope.ConcreteLocalPackagesEnvelope.kind, 'ConcreteMaterializedLocalPackages0');
+  assert.deepEqual(envelope.PCCPack.GlobalFirewalls.SchedHash, envelope.GlobalFirewallsEnvelope.GlobalFirewalls.SchedHash);
+  assert.deepEqual(envelope.PCCPack.GlobalFirewalls.IfaceHash, envelope.GlobalFirewallsEnvelope.GlobalFirewalls.IfaceHash);
+
+  const out = await CheckMaterializedPCCPack0(envelope);
+
+  assert.equal(out.tag, 'accept');
+  assert.equal(out.checker, 'CheckMaterializedPCCPack0');
+  assert.equal(out.NF.globalFirewallsEnvelopeKind, 'ConcreteMaterializedGlobalFirewalls0');
+  assert.equal(out.NF.concreteGlobalFirewalls, true);
+});
