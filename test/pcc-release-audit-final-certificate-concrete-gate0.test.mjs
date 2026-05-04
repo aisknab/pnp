@@ -197,6 +197,60 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 accepts attached release au
   assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversRoute, true);
   assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversHash, true);
   assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversImport, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0Kind, 'KernelSeed0');
+  assert.match(out.NF.generatedPCCPackexpKernelSeed0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0RuleCount, 16);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0RequiredRuleCount, 16);
+  assert.deepEqual(out.NF.generatedPCCPackexpKernelSeed0Rules, [
+    'Eq',
+    'Subst',
+    'Record',
+    'DAGInd',
+    'LedgerInd',
+    'OblTopoInd',
+    'TraceInd',
+    'FiniteExhaust',
+    'DPInd',
+    'Hall',
+    'RankInd',
+    'MinCounterexample',
+    'IntArith',
+    'Transport',
+    'TruthVec',
+    'FiniteRel',
+  ]);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0AllRequiredRulesPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasEq, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasSubst, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasRecord, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasDAGInd, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasLedgerInd, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasOblTopoInd, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasTraceInd, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasFiniteExhaust, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasDPInd, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasHall, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasRankInd, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasMinCounterexample, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasIntArith, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasTransport, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasTruthVec, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasFiniteRel, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0ProofNodeKindCount, 5);
+  assert.deepEqual(out.NF.generatedPCCPackexpKernelSeed0ProofNodeKinds, [
+    'PrimitiveRule',
+    'SigmaInstance',
+    'ReflectionInstance',
+    'RowProof',
+    'PackageTheorem',
+  ]);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0AllRequiredProofNodeKindsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0ProofRefsRejectOpaque, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0ProofRefsTypedAcyclic, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0ProofRefsHashIndependent, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0PiBootDigestMatches, true);
 
   assert.equal(out.NF.finalCertificateUsesConcreteAcceptRun, true);
   assert.equal(out.NF.statusUsesConcreteFinalCertificate, true);
@@ -604,5 +658,71 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing B0 row-fami
     'ConcreteFinalCertificatePublicStatusEnvelope',
     'ConcreteChain',
     'generatedPCCPackexpBoot0B0CoversTruthEval',
+  ]);
+});
+
+test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing KernelSeed0 primitive rule evidence', async () => {
+  const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
+  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+    ReleaseAuditRecord: releaseAuditRecord,
+    runReleaseAudit: false,
+  });
+
+  envelope.ConcreteFinalCertificatePublicStatusEnvelope.ConcreteChain = {
+    ...envelope.ConcreteFinalCertificatePublicStatusEnvelope.ConcreteChain,
+    generatedPCCPackexpKernelSeed0HasHall: false,
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concretePublicStatusEnvelopeDigest: undefined,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+    checkConcretePublicStatus: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAuditConcreteFinalCertificateGate0');
+  assert.equal(out.Coord, 'CheckReleaseAuditConcreteFinalCertificateGate0.PublicConclusion');
+  assert.deepEqual(out.Path, [
+    'ConcreteFinalCertificatePublicStatusEnvelope',
+    'ConcreteChain',
+    'generatedPCCPackexpKernelSeed0HasHall',
+  ]);
+});
+
+test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects unsafe KernelSeed0 proof-reference policy evidence', async () => {
+  const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
+  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+    ReleaseAuditRecord: releaseAuditRecord,
+    runReleaseAudit: false,
+  });
+
+  envelope.ConcreteFinalCertificatePublicStatusEnvelope.ConcreteChain = {
+    ...envelope.ConcreteFinalCertificatePublicStatusEnvelope.ConcreteChain,
+    generatedPCCPackexpKernelSeed0ProofRefsRejectOpaque: false,
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concretePublicStatusEnvelopeDigest: undefined,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+    checkConcretePublicStatus: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAuditConcreteFinalCertificateGate0');
+  assert.equal(out.Coord, 'CheckReleaseAuditConcreteFinalCertificateGate0.PublicConclusion');
+  assert.deepEqual(out.Path, [
+    'ConcreteFinalCertificatePublicStatusEnvelope',
+    'ConcreteChain',
+    'generatedPCCPackexpKernelSeed0ProofRefsRejectOpaque',
   ]);
 });

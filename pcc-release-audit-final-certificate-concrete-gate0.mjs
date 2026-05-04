@@ -467,6 +467,68 @@ export async function CheckReleaseAuditConcreteFinalCertificateGate0(
       concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0CoversHash,
     generatedPCCPackexpBoot0B0CoversImport:
       concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0CoversImport,
+    generatedPCCPackexpKernelSeed0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0,
+    generatedPCCPackexpKernelSeed0Accepted:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0Accepted,
+    generatedPCCPackexpKernelSeed0Kind:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0Kind,
+    generatedPCCPackexpKernelSeed0Digest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0Digest,
+    generatedPCCPackexpKernelSeed0RuleCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0RuleCount,
+    generatedPCCPackexpKernelSeed0RequiredRuleCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0RequiredRuleCount,
+    generatedPCCPackexpKernelSeed0Rules:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0Rules,
+    generatedPCCPackexpKernelSeed0AllRequiredRulesPresent:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0AllRequiredRulesPresent,
+    generatedPCCPackexpKernelSeed0HasEq:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0HasEq,
+    generatedPCCPackexpKernelSeed0HasSubst:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0HasSubst,
+    generatedPCCPackexpKernelSeed0HasRecord:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0HasRecord,
+    generatedPCCPackexpKernelSeed0HasDAGInd:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0HasDAGInd,
+    generatedPCCPackexpKernelSeed0HasLedgerInd:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0HasLedgerInd,
+    generatedPCCPackexpKernelSeed0HasOblTopoInd:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0HasOblTopoInd,
+    generatedPCCPackexpKernelSeed0HasTraceInd:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0HasTraceInd,
+    generatedPCCPackexpKernelSeed0HasFiniteExhaust:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0HasFiniteExhaust,
+    generatedPCCPackexpKernelSeed0HasDPInd:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0HasDPInd,
+    generatedPCCPackexpKernelSeed0HasHall:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0HasHall,
+    generatedPCCPackexpKernelSeed0HasRankInd:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0HasRankInd,
+    generatedPCCPackexpKernelSeed0HasMinCounterexample:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0HasMinCounterexample,
+    generatedPCCPackexpKernelSeed0HasIntArith:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0HasIntArith,
+    generatedPCCPackexpKernelSeed0HasTransport:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0HasTransport,
+    generatedPCCPackexpKernelSeed0HasTruthVec:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0HasTruthVec,
+    generatedPCCPackexpKernelSeed0HasFiniteRel:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0HasFiniteRel,
+    generatedPCCPackexpKernelSeed0ProofNodeKindCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0ProofNodeKindCount,
+    generatedPCCPackexpKernelSeed0ProofNodeKinds:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0ProofNodeKinds,
+    generatedPCCPackexpKernelSeed0AllRequiredProofNodeKindsPresent:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0AllRequiredProofNodeKindsPresent,
+    generatedPCCPackexpKernelSeed0ProofRefsRejectOpaque:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0ProofRefsRejectOpaque,
+    generatedPCCPackexpKernelSeed0ProofRefsTypedAcyclic:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0ProofRefsTypedAcyclic,
+    generatedPCCPackexpKernelSeed0ProofRefsHashIndependent:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0ProofRefsHashIndependent,
+    generatedPCCPackexpKernelSeed0PiBootDigestMatches:
+      concreteStatus.ConcreteChain.generatedPCCPackexpKernelSeed0PiBootDigestMatches,
 
     finalCertificateUsesConcreteAcceptRun: concreteStatus.ConcreteChain.finalCertificateUsesConcreteAcceptRun,
     statusUsesConcreteFinalCertificate: concreteStatus.ConcreteChain.statusUsesConcreteFinalCertificate,
@@ -784,6 +846,30 @@ function validateConcretePublicConclusionAlignment0(envelope) {
     'generatedPCCPackexpBoot0B0CoversRoute',
     'generatedPCCPackexpBoot0B0CoversHash',
     'generatedPCCPackexpBoot0B0CoversImport',
+    'generatedPCCPackexpKernelSeed0',
+    'generatedPCCPackexpKernelSeed0Accepted',
+    'generatedPCCPackexpKernelSeed0AllRequiredRulesPresent',
+    'generatedPCCPackexpKernelSeed0HasEq',
+    'generatedPCCPackexpKernelSeed0HasSubst',
+    'generatedPCCPackexpKernelSeed0HasRecord',
+    'generatedPCCPackexpKernelSeed0HasDAGInd',
+    'generatedPCCPackexpKernelSeed0HasLedgerInd',
+    'generatedPCCPackexpKernelSeed0HasOblTopoInd',
+    'generatedPCCPackexpKernelSeed0HasTraceInd',
+    'generatedPCCPackexpKernelSeed0HasFiniteExhaust',
+    'generatedPCCPackexpKernelSeed0HasDPInd',
+    'generatedPCCPackexpKernelSeed0HasHall',
+    'generatedPCCPackexpKernelSeed0HasRankInd',
+    'generatedPCCPackexpKernelSeed0HasMinCounterexample',
+    'generatedPCCPackexpKernelSeed0HasIntArith',
+    'generatedPCCPackexpKernelSeed0HasTransport',
+    'generatedPCCPackexpKernelSeed0HasTruthVec',
+    'generatedPCCPackexpKernelSeed0HasFiniteRel',
+    'generatedPCCPackexpKernelSeed0AllRequiredProofNodeKindsPresent',
+    'generatedPCCPackexpKernelSeed0ProofRefsRejectOpaque',
+    'generatedPCCPackexpKernelSeed0ProofRefsTypedAcyclic',
+    'generatedPCCPackexpKernelSeed0ProofRefsHashIndependent',
+    'generatedPCCPackexpKernelSeed0PiBootDigestMatches',
 
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',
