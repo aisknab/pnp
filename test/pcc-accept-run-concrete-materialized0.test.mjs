@@ -92,6 +92,16 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 accepts an accept run over th
   assert.equal(out.NF.generatedPCCPackexpPackageMatchesAcceptRun, true);
   assert.equal(out.NF.generatedPCCPackexpCheckRecordMatchesMaterialized, true);
   assert.equal(out.NF.generatedPCCPackexpRecordMatchesMaterialized, true);
+  assert.equal(out.NF.checkGeneratedPCCPackexpRecordPresent, true);
+  assert.equal(out.NF.checkGeneratedPCCPackexpRecordAccepted, true);
+  assert.equal(out.NF.checkGeneratedPCCPackexpRecordChecker, 'CheckGeneratedPCCPackexp0');
+  assert.match(out.NF.checkGeneratedPCCPackexpRecordDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.checkGeneratedPCCPackexpRecordDigestMatchesNF, true);
+  assert.equal(out.NF.checkGeneratedPCCPackexpRecordMatchesFresh, true);
+  assert.equal(out.Ledger.some((entry) => (
+    entry.phase === 'CheckGeneratedPCCPackexpRecord' &&
+    entry.status === 'pass'
+  )), true);
 
   assert.equal(out.NF.generatedPCCPackexpBoot0, true);
   assert.equal(out.NF.generatedPCCPackexpBoot0Accepted, true);
@@ -266,6 +276,7 @@ test('writeConcreteMaterializedGeneratedAcceptRunFiles0 writes replayable JSON a
     result.files.concreteChainPath,
     result.files.checkPCCPackexpRecordPath,
     result.files.generatedPCCPackexpEnvelopePath,
+    result.files.checkGeneratedPCCPackexpRecordPath,
     result.files.acceptRunPath,
     result.files.pccPackPath,
     result.files.checkPath,
@@ -526,4 +537,54 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp w
   assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
   assert.equal(out.Coord, 'CheckConcreteMaterializedGeneratedAcceptRun0.GeneratedPCCPackexp');
   assert.deepEqual(out.Path, ['GeneratedPCCPackexpEnvelope', 'NF', 'generatedPackageBoot0']);
+});
+
+test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a missing CheckGeneratedPCCPackexp0 record', async () => {
+  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+
+  delete envelope.CheckGeneratedPCCPackexpRecord;
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    checkGeneratedPCCPackexpRecordDigest: undefined,
+  };
+
+  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+    checkGeneratedAcceptRun: false,
+    checkConcretePCCPack: false,
+    checkPCCPackexp: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedGeneratedAcceptRun0.CheckGeneratedPCCPackexpRecord');
+  assert.deepEqual(out.Path, ['CheckGeneratedPCCPackexpRecord']);
+});
+
+test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a stale CheckGeneratedPCCPackexp0 record', async () => {
+  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+
+  envelope.CheckGeneratedPCCPackexpRecord = {
+    ...envelope.CheckGeneratedPCCPackexpRecord,
+    NF: {
+      ...envelope.CheckGeneratedPCCPackexpRecord.NF,
+      generatedPackageBoot0: false,
+    },
+    nf: {
+      ...envelope.CheckGeneratedPCCPackexpRecord.nf,
+      generatedPackageBoot0: false,
+    },
+  };
+
+  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+    checkGeneratedAcceptRun: false,
+    checkConcretePCCPack: false,
+    checkPCCPackexp: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedGeneratedAcceptRun0.CheckGeneratedPCCPackexpRecord');
+  assert.deepEqual(out.Path, ['CheckGeneratedPCCPackexpRecord', 'Digest']);
 });
