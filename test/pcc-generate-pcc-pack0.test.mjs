@@ -87,6 +87,61 @@ test('CheckGeneratedPCCPackexp0 accepts generated package with accepted CheckPCC
   assert.equal(out.NF.boot0LinkedToPCCPack, true);
   assert.equal(out.NF.boot0LinkedToCoreDigestMap, true);
 
+  assert.equal(out.NF.generatedPackageKernelSeed0, true);
+  assert.equal(out.NF.kernelSeed0Accepted, true);
+  assert.equal(out.NF.kernelSeed0Kind, 'KernelSeed0');
+  assert.match(out.NF.kernelSeed0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.kernelSeed0RuleCount, 16);
+  assert.equal(out.NF.kernelSeed0RequiredRuleCount, 16);
+  assert.deepEqual(out.NF.kernelSeed0Rules, [
+    'Eq',
+    'Subst',
+    'Record',
+    'DAGInd',
+    'LedgerInd',
+    'OblTopoInd',
+    'TraceInd',
+    'FiniteExhaust',
+    'DPInd',
+    'Hall',
+    'RankInd',
+    'MinCounterexample',
+    'IntArith',
+    'Transport',
+    'TruthVec',
+    'FiniteRel',
+  ]);
+  assert.equal(out.NF.kernelSeed0AllRequiredRulesPresent, true);
+  assert.equal(out.NF.kernelSeed0HasEq, true);
+  assert.equal(out.NF.kernelSeed0HasSubst, true);
+  assert.equal(out.NF.kernelSeed0HasRecord, true);
+  assert.equal(out.NF.kernelSeed0HasDAGInd, true);
+  assert.equal(out.NF.kernelSeed0HasLedgerInd, true);
+  assert.equal(out.NF.kernelSeed0HasOblTopoInd, true);
+  assert.equal(out.NF.kernelSeed0HasTraceInd, true);
+  assert.equal(out.NF.kernelSeed0HasFiniteExhaust, true);
+  assert.equal(out.NF.kernelSeed0HasDPInd, true);
+  assert.equal(out.NF.kernelSeed0HasHall, true);
+  assert.equal(out.NF.kernelSeed0HasRankInd, true);
+  assert.equal(out.NF.kernelSeed0HasMinCounterexample, true);
+  assert.equal(out.NF.kernelSeed0HasIntArith, true);
+  assert.equal(out.NF.kernelSeed0HasTransport, true);
+  assert.equal(out.NF.kernelSeed0HasTruthVec, true);
+  assert.equal(out.NF.kernelSeed0HasFiniteRel, true);
+  assert.equal(out.NF.kernelSeed0ProofNodeKindCount, 5);
+  assert.deepEqual(out.NF.kernelSeed0ProofNodeKinds, [
+    'PrimitiveRule',
+    'SigmaInstance',
+    'ReflectionInstance',
+    'RowProof',
+    'PackageTheorem',
+  ]);
+  assert.equal(out.NF.kernelSeed0AllRequiredProofNodeKindsPresent, true);
+  assert.equal(out.NF.kernelSeed0ProofRefsRejectOpaque, true);
+  assert.equal(out.NF.kernelSeed0ProofRefsTypedAcyclic, true);
+  assert.equal(out.NF.kernelSeed0ProofRefsHashIndependent, true);
+  assert.equal(out.NF.kernelSeed0PiBootDigestMatches, true);
+
   assert.equal(out.NF.checkPCCPackexp, true);
   assert.equal(out.NF.checkPCCPackexpRecordAccepted, true);
   assert.equal(out.NF.checkPCCPackexpRecordChecker, 'CheckPCCPackexp0');
@@ -121,6 +176,7 @@ test('makeGeneratePCCPackConfig0 fills default validation switches', () => {
   assert.equal(config.checkDeterministicGenerator, true);
   assert.equal(config.checkGeneratedPackageCoreBoundary, true);
   assert.equal(config.checkMaterializedBoot0, true);
+  assert.equal(config.checkKernelSeed0, true);
   assert.equal(config.checkJsonMaterialized, false);
   assert.equal(typeof config.checkPCCPackexpConfig, 'object');
 });
@@ -282,4 +338,87 @@ test('CheckGeneratedPCCPackexp0 rejects generated package missing a B0 row famil
   assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
   assert.equal(out.Coord, 'CheckGeneratedPCCPackexp0.Boot0');
   assert.deepEqual(out.Path, ['GeneratedPCCPack', 'Boot0', 'B0']);
+});
+
+test('CheckGeneratedPCCPackexp0 rejects generated package missing a KernelSeed0 primitive rule', async () => {
+  const envelope = await makeGeneratedPCCPackexp0();
+
+  envelope.GeneratedPCCPack = {
+    ...envelope.GeneratedPCCPack,
+    MaterializedPCCPackEnvelope: {
+      ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope,
+      MaterializedBoot0: {
+        ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.MaterializedBoot0,
+        KernelSeed0: {
+          ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.MaterializedBoot0.KernelSeed0,
+          rules: envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.MaterializedBoot0.KernelSeed0.rules.filter((rule) => (
+            rule !== 'Hall'
+          )),
+        },
+      },
+    },
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    generatedPackageDigest: undefined,
+  };
+
+  const out = await CheckGeneratedPCCPackexp0(envelope, {
+    checkDeterministicGenerator: false,
+    checkMaterializedBoot0: false,
+    checkCheckPCCPackexpRecord: false,
+    checkPublicClaimBoundary: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
+  assert.equal(out.Coord, 'CheckGeneratedPCCPackexp0.KernelSeed0');
+  assert.deepEqual(out.Path, ['GeneratedPCCPack', 'Boot0', 'KernelSeed0', 'rules']);
+});
+
+test('CheckGeneratedPCCPackexp0 rejects KernelSeed0 opaque proof references', async () => {
+  const envelope = await makeGeneratedPCCPackexp0();
+
+  envelope.GeneratedPCCPack = {
+    ...envelope.GeneratedPCCPack,
+    MaterializedPCCPackEnvelope: {
+      ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope,
+      MaterializedBoot0: {
+        ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.MaterializedBoot0,
+        KernelSeed0: {
+          ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.MaterializedBoot0.KernelSeed0,
+          proofReferencePolicy: {
+            ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.MaterializedBoot0.KernelSeed0.proofReferencePolicy,
+            rejectsOpaqueProofBlobs: false,
+          },
+        },
+      },
+    },
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    generatedPackageDigest: undefined,
+  };
+
+  const out = await CheckGeneratedPCCPackexp0(envelope, {
+    checkDeterministicGenerator: false,
+    checkMaterializedBoot0: false,
+    checkCheckPCCPackexpRecord: false,
+    checkPublicClaimBoundary: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
+  assert.equal(out.Coord, 'CheckGeneratedPCCPackexp0.KernelSeed0');
+  assert.deepEqual(out.Path, [
+    'GeneratedPCCPack',
+    'Boot0',
+    'KernelSeed0',
+    'proofReferencePolicy',
+    'rejectsOpaqueProofBlobs',
+  ]);
 });

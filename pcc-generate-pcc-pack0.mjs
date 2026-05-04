@@ -40,6 +40,33 @@ const GENERATED_PCCPACK_BOOT_B0_REQUIRED_FAMILIES0 = Object.freeze([
   'BImport',
 ]);
 
+const GENERATED_PCCPACK_KERNEL_SEED_REQUIRED_RULES0 = Object.freeze([
+  'Eq',
+  'Subst',
+  'Record',
+  'DAGInd',
+  'LedgerInd',
+  'OblTopoInd',
+  'TraceInd',
+  'FiniteExhaust',
+  'DPInd',
+  'Hall',
+  'RankInd',
+  'MinCounterexample',
+  'IntArith',
+  'Transport',
+  'TruthVec',
+  'FiniteRel',
+]);
+
+const GENERATED_PCCPACK_KERNEL_SEED_REQUIRED_PROOF_NODE_KINDS0 = Object.freeze([
+  'PrimitiveRule',
+  'SigmaInstance',
+  'ReflectionInstance',
+  'RowProof',
+  'PackageTheorem',
+]);
+
 const GENERATED_CORE_FORBIDDEN_KEYS0 = Object.freeze([
   'AcceptRun',
   'AcceptRunEnvelope',
@@ -60,6 +87,7 @@ export function makeGeneratePCCPackConfig0(overrides = {}) {
     checkDeterministicGenerator: true,
     checkGeneratedPackageCoreBoundary: true,
     checkMaterializedBoot0: true,
+    checkKernelSeed0: true,
     checkCheckPCCPackexpRecord: true,
     checkPublicClaimBoundary: true,
     checkJsonMaterialized: true,
@@ -161,6 +189,7 @@ export async function CheckGeneratedPCCPackexp0(
   let deterministicNF = null;
   let coreBoundaryNF = null;
   let boot0NF = null;
+  let kernelSeedNF = null;
   let freshCheckPCCPackexpRecord = null;
   let recordAlignmentNF = null;
 
@@ -264,6 +293,28 @@ export async function CheckGeneratedPCCPackexp0(
     }
 
     boot0NF = boot0.nf;
+  }
+
+  if (cfg.checkKernelSeed0 === true) {
+    const kernelSeed = validateGeneratedKernelSeed0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'KernelSeed0',
+      status: kernelSeed.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(kernelSeed.nf ?? kernelSeed.witness ?? null),
+    });
+
+    if (!kernelSeed.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.KernelSeed0`,
+        path: kernelSeed.path,
+        witness: kernelSeed.witness,
+        ledger,
+      });
+    }
+
+    kernelSeedNF = kernelSeed.nf;
   }
 
   if (cfg.checkCheckPCCPackexpRecord === true) {
@@ -426,6 +477,39 @@ export async function CheckGeneratedPCCPackexp0(
     boot0LinkedToPCCPack: boot0NF?.boot0LinkedToPCCPack ?? null,
     boot0LinkedToCoreDigestMap: boot0NF?.boot0LinkedToCoreDigestMap ?? null,
 
+    generatedPackageKernelSeed0: kernelSeedNF?.kernelSeed0 ?? null,
+    kernelSeed0Accepted: kernelSeedNF?.kernelSeed0Accepted ?? null,
+    kernelSeed0Kind: kernelSeedNF?.kernelSeed0Kind ?? null,
+    kernelSeed0Digest: kernelSeedNF?.kernelSeed0Digest ?? null,
+    kernelSeed0RuleCount: kernelSeedNF?.kernelSeed0RuleCount ?? null,
+    kernelSeed0RequiredRuleCount: kernelSeedNF?.kernelSeed0RequiredRuleCount ?? null,
+    kernelSeed0Rules: kernelSeedNF?.kernelSeed0Rules ?? null,
+    kernelSeed0AllRequiredRulesPresent: kernelSeedNF?.kernelSeed0AllRequiredRulesPresent ?? null,
+    kernelSeed0HasEq: kernelSeedNF?.kernelSeed0HasEq ?? null,
+    kernelSeed0HasSubst: kernelSeedNF?.kernelSeed0HasSubst ?? null,
+    kernelSeed0HasRecord: kernelSeedNF?.kernelSeed0HasRecord ?? null,
+    kernelSeed0HasDAGInd: kernelSeedNF?.kernelSeed0HasDAGInd ?? null,
+    kernelSeed0HasLedgerInd: kernelSeedNF?.kernelSeed0HasLedgerInd ?? null,
+    kernelSeed0HasOblTopoInd: kernelSeedNF?.kernelSeed0HasOblTopoInd ?? null,
+    kernelSeed0HasTraceInd: kernelSeedNF?.kernelSeed0HasTraceInd ?? null,
+    kernelSeed0HasFiniteExhaust: kernelSeedNF?.kernelSeed0HasFiniteExhaust ?? null,
+    kernelSeed0HasDPInd: kernelSeedNF?.kernelSeed0HasDPInd ?? null,
+    kernelSeed0HasHall: kernelSeedNF?.kernelSeed0HasHall ?? null,
+    kernelSeed0HasRankInd: kernelSeedNF?.kernelSeed0HasRankInd ?? null,
+    kernelSeed0HasMinCounterexample: kernelSeedNF?.kernelSeed0HasMinCounterexample ?? null,
+    kernelSeed0HasIntArith: kernelSeedNF?.kernelSeed0HasIntArith ?? null,
+    kernelSeed0HasTransport: kernelSeedNF?.kernelSeed0HasTransport ?? null,
+    kernelSeed0HasTruthVec: kernelSeedNF?.kernelSeed0HasTruthVec ?? null,
+    kernelSeed0HasFiniteRel: kernelSeedNF?.kernelSeed0HasFiniteRel ?? null,
+    kernelSeed0ProofNodeKindCount: kernelSeedNF?.kernelSeed0ProofNodeKindCount ?? null,
+    kernelSeed0ProofNodeKinds: kernelSeedNF?.kernelSeed0ProofNodeKinds ?? null,
+    kernelSeed0AllRequiredProofNodeKindsPresent:
+      kernelSeedNF?.kernelSeed0AllRequiredProofNodeKindsPresent ?? null,
+    kernelSeed0ProofRefsRejectOpaque: kernelSeedNF?.kernelSeed0ProofRefsRejectOpaque ?? null,
+    kernelSeed0ProofRefsTypedAcyclic: kernelSeedNF?.kernelSeed0ProofRefsTypedAcyclic ?? null,
+    kernelSeed0ProofRefsHashIndependent: kernelSeedNF?.kernelSeed0ProofRefsHashIndependent ?? null,
+    kernelSeed0PiBootDigestMatches: kernelSeedNF?.kernelSeed0PiBootDigestMatches ?? null,
+
     generatedPackageKind: envelope.GeneratedPCCPack.kind ?? null,
     generatedPackageDigest: digestCanonical0(envelope.GeneratedPCCPack),
 
@@ -521,6 +605,7 @@ function validateConfig0(config) {
     'checkDeterministicGenerator',
     'checkGeneratedPackageCoreBoundary',
     'checkMaterializedBoot0',
+    'checkKernelSeed0',
     'checkCheckPCCPackexpRecord',
     'checkPublicClaimBoundary',
     'checkJsonMaterialized',
@@ -661,6 +746,168 @@ function scanForbiddenCoreKeys0(value, pathNow, hits) {
 
     scanForbiddenCoreKeys0(child, childPath, hits);
   }
+}
+
+function validateGeneratedKernelSeed0(generatedPackage) {
+  const materializedPCCPack = generatedPackage?.MaterializedPCCPackEnvelope ?? generatedPackage?.MaterializedPCCPack ?? null;
+  const boot0 = materializedPCCPack?.MaterializedBoot0 ?? materializedPCCPack?.PCCPack?.Boot0 ?? null;
+  const kernelSeed0 = boot0?.KernelSeed0 ?? null;
+
+  if (!isPlainObject(kernelSeed0)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'KernelSeed0'], 'GeneratedPCCPack must include concrete KernelSeed0', {
+      actual: typeof kernelSeed0,
+    });
+  }
+
+  if (kernelSeed0.kind !== undefined && kernelSeed0.kind !== 'KernelSeed0') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'KernelSeed0', 'kind'], 'KernelSeed0 kind mismatch', {
+      actual: kernelSeed0.kind,
+    });
+  }
+
+  if (!Array.isArray(kernelSeed0.rules)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'KernelSeed0', 'rules'], 'KernelSeed0 rules must be an array', {
+      actual: typeof kernelSeed0.rules,
+    });
+  }
+
+  const duplicateRule = firstDuplicate0(kernelSeed0.rules);
+
+  if (duplicateRule !== null) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'KernelSeed0', 'rules'], 'KernelSeed0 rules must be unique', {
+      duplicateRule,
+    });
+  }
+
+  const missingRules = GENERATED_PCCPACK_KERNEL_SEED_REQUIRED_RULES0.filter((rule) => !kernelSeed0.rules.includes(rule));
+
+  if (missingRules.length > 0) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'KernelSeed0', 'rules'], 'KernelSeed0 is missing required primitive rules', {
+      missingRules,
+      actual: kernelSeed0.rules,
+    });
+  }
+
+  if (!Array.isArray(kernelSeed0.proofNodeKinds)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'KernelSeed0', 'proofNodeKinds'], 'KernelSeed0 proofNodeKinds must be an array', {
+      actual: typeof kernelSeed0.proofNodeKinds,
+    });
+  }
+
+  const missingProofNodeKinds = GENERATED_PCCPACK_KERNEL_SEED_REQUIRED_PROOF_NODE_KINDS0.filter((kind) => (
+    !kernelSeed0.proofNodeKinds.includes(kind)
+  ));
+
+  if (missingProofNodeKinds.length > 0) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'KernelSeed0', 'proofNodeKinds'], 'KernelSeed0 is missing required proof node kinds', {
+      missingProofNodeKinds,
+      actual: kernelSeed0.proofNodeKinds,
+    });
+  }
+
+  const proofReferencePolicy = kernelSeed0.proofReferencePolicy ?? {};
+
+  if (proofReferencePolicy.rejectsOpaqueProofBlobs !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'KernelSeed0', 'proofReferencePolicy', 'rejectsOpaqueProofBlobs'], 'KernelSeed0 must reject opaque proof blobs', {
+      actual: proofReferencePolicy.rejectsOpaqueProofBlobs,
+    });
+  }
+
+  if (proofReferencePolicy.requiresTypedAcyclicRefs !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'KernelSeed0', 'proofReferencePolicy', 'requiresTypedAcyclicRefs'], 'KernelSeed0 must require typed acyclic proof refs', {
+      actual: proofReferencePolicy.requiresTypedAcyclicRefs,
+    });
+  }
+
+  if (proofReferencePolicy.hashIndependent !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'KernelSeed0', 'proofReferencePolicy', 'hashIndependent'], 'KernelSeed0 proof references must be hash independent', {
+      actual: proofReferencePolicy.hashIndependent,
+    });
+  }
+
+  const kernelSeedDigest = digestCanonical0(kernelSeed0);
+  const piBootRefs = Array.isArray(boot0?.PiBoot?.refs) ? boot0.PiBoot.refs : [];
+  const piBootKernelSeedRef = piBootRefs.find((ref) => (
+    ref?.label === 'KernelSeed0' ||
+    ref?.target === 'KernelSeed0'
+  ));
+
+  if (!isPlainObject(piBootKernelSeedRef)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs'], 'PiBoot must reference KernelSeed0', {
+      refs: piBootRefs,
+    });
+  }
+
+  if (!sameDigestHex0(piBootKernelSeedRef.digest, kernelSeedDigest)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs', 'KernelSeed0'], 'PiBoot KernelSeed0 digest must match concrete KernelSeed0', {
+      expected: kernelSeedDigest,
+      actual: piBootKernelSeedRef.digest,
+    });
+  }
+
+  const ruleFlags = Object.fromEntries(
+    GENERATED_PCCPACK_KERNEL_SEED_REQUIRED_RULES0.map((rule) => [
+      kernelSeedRuleFlagName0(rule),
+      kernelSeed0.rules.includes(rule),
+    ]),
+  );
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackKernelSeed0NF',
+    kernelSeed0: true,
+    kernelSeed0Accepted: true,
+    kernelSeed0Kind: kernelSeed0.kind ?? 'KernelSeed0',
+    kernelSeed0Digest: kernelSeedDigest,
+    kernelSeed0RuleCount: kernelSeed0.rules.length,
+    kernelSeed0RequiredRuleCount: GENERATED_PCCPACK_KERNEL_SEED_REQUIRED_RULES0.length,
+    kernelSeed0Rules: kernelSeed0.rules,
+    kernelSeed0AllRequiredRulesPresent: missingRules.length === 0,
+    ...ruleFlags,
+    kernelSeed0ProofNodeKindCount: kernelSeed0.proofNodeKinds.length,
+    kernelSeed0ProofNodeKinds: kernelSeed0.proofNodeKinds,
+    kernelSeed0AllRequiredProofNodeKindsPresent: missingProofNodeKinds.length === 0,
+    kernelSeed0ProofRefsRejectOpaque: proofReferencePolicy.rejectsOpaqueProofBlobs === true,
+    kernelSeed0ProofRefsTypedAcyclic: proofReferencePolicy.requiresTypedAcyclicRefs === true,
+    kernelSeed0ProofRefsHashIndependent: proofReferencePolicy.hashIndependent === true,
+    kernelSeed0PiBootDigestMatches: true,
+  });
+}
+
+function kernelSeedRuleFlagName0(rule) {
+  const map = {
+    Eq: 'kernelSeed0HasEq',
+    Subst: 'kernelSeed0HasSubst',
+    Record: 'kernelSeed0HasRecord',
+    DAGInd: 'kernelSeed0HasDAGInd',
+    LedgerInd: 'kernelSeed0HasLedgerInd',
+    OblTopoInd: 'kernelSeed0HasOblTopoInd',
+    TraceInd: 'kernelSeed0HasTraceInd',
+    FiniteExhaust: 'kernelSeed0HasFiniteExhaust',
+    DPInd: 'kernelSeed0HasDPInd',
+    Hall: 'kernelSeed0HasHall',
+    RankInd: 'kernelSeed0HasRankInd',
+    MinCounterexample: 'kernelSeed0HasMinCounterexample',
+    IntArith: 'kernelSeed0HasIntArith',
+    Transport: 'kernelSeed0HasTransport',
+    TruthVec: 'kernelSeed0HasTruthVec',
+    FiniteRel: 'kernelSeed0HasFiniteRel',
+  };
+
+  return map[rule] ?? `kernelSeed0Has${rule}`;
+}
+
+function firstDuplicate0(values) {
+  const seen = new Set();
+
+  for (const value of values) {
+    if (seen.has(value)) {
+      return value;
+    }
+
+    seen.add(value);
+  }
+
+  return null;
 }
 
 async function validateGeneratedBootBatch0(batch) {
