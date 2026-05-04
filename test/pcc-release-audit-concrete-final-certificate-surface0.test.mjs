@@ -153,6 +153,60 @@ function makeAcceptedConcreteFinalCertificatePublicStatusRecord0() {
     generatedPCCPackexpBoot0B0CoversRoute: true,
     generatedPCCPackexpBoot0B0CoversHash: true,
     generatedPCCPackexpBoot0B0CoversImport: true,
+    generatedPCCPackexpKernelSeed0: true,
+    generatedPCCPackexpKernelSeed0Accepted: true,
+    generatedPCCPackexpKernelSeed0Kind: 'KernelSeed0',
+    generatedPCCPackexpKernelSeed0Digest: digestOf0('2020202020202020202020202020202020202020202020202020202020202020'),
+    generatedPCCPackexpKernelSeed0RuleCount: 16,
+    generatedPCCPackexpKernelSeed0RequiredRuleCount: 16,
+    generatedPCCPackexpKernelSeed0Rules: [
+      'Eq',
+      'Subst',
+      'Record',
+      'DAGInd',
+      'LedgerInd',
+      'OblTopoInd',
+      'TraceInd',
+      'FiniteExhaust',
+      'DPInd',
+      'Hall',
+      'RankInd',
+      'MinCounterexample',
+      'IntArith',
+      'Transport',
+      'TruthVec',
+      'FiniteRel',
+    ],
+    generatedPCCPackexpKernelSeed0AllRequiredRulesPresent: true,
+    generatedPCCPackexpKernelSeed0HasEq: true,
+    generatedPCCPackexpKernelSeed0HasSubst: true,
+    generatedPCCPackexpKernelSeed0HasRecord: true,
+    generatedPCCPackexpKernelSeed0HasDAGInd: true,
+    generatedPCCPackexpKernelSeed0HasLedgerInd: true,
+    generatedPCCPackexpKernelSeed0HasOblTopoInd: true,
+    generatedPCCPackexpKernelSeed0HasTraceInd: true,
+    generatedPCCPackexpKernelSeed0HasFiniteExhaust: true,
+    generatedPCCPackexpKernelSeed0HasDPInd: true,
+    generatedPCCPackexpKernelSeed0HasHall: true,
+    generatedPCCPackexpKernelSeed0HasRankInd: true,
+    generatedPCCPackexpKernelSeed0HasMinCounterexample: true,
+    generatedPCCPackexpKernelSeed0HasIntArith: true,
+    generatedPCCPackexpKernelSeed0HasTransport: true,
+    generatedPCCPackexpKernelSeed0HasTruthVec: true,
+    generatedPCCPackexpKernelSeed0HasFiniteRel: true,
+    generatedPCCPackexpKernelSeed0ProofNodeKindCount: 5,
+    generatedPCCPackexpKernelSeed0ProofNodeKinds: [
+      'PrimitiveRule',
+      'SigmaInstance',
+      'ReflectionInstance',
+      'RowProof',
+      'PackageTheorem',
+    ],
+    generatedPCCPackexpKernelSeed0AllRequiredProofNodeKindsPresent: true,
+    generatedPCCPackexpKernelSeed0ProofRefsRejectOpaque: true,
+    generatedPCCPackexpKernelSeed0ProofRefsTypedAcyclic: true,
+    generatedPCCPackexpKernelSeed0ProofRefsHashIndependent: true,
+    generatedPCCPackexpKernelSeed0PiBootDigestMatches: true,
 
     finalCertificateUsesConcreteAcceptRun: true,
     statusUsesConcreteFinalCertificate: true,
@@ -353,6 +407,60 @@ test('CheckReleaseAudit0 reports the concrete final-certificate public-status ga
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBoot0B0CoversRoute, true);
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBoot0B0CoversHash, true);
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBoot0B0CoversImport, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0Accepted, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0Kind, 'KernelSeed0');
+  assert.match(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0RuleCount, 16);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0RequiredRuleCount, 16);
+  assert.deepEqual(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0Rules, [
+    'Eq',
+    'Subst',
+    'Record',
+    'DAGInd',
+    'LedgerInd',
+    'OblTopoInd',
+    'TraceInd',
+    'FiniteExhaust',
+    'DPInd',
+    'Hall',
+    'RankInd',
+    'MinCounterexample',
+    'IntArith',
+    'Transport',
+    'TruthVec',
+    'FiniteRel',
+  ]);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0AllRequiredRulesPresent, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasEq, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasSubst, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasRecord, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasDAGInd, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasLedgerInd, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasOblTopoInd, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasTraceInd, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasFiniteExhaust, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasDPInd, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasHall, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasRankInd, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasMinCounterexample, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasIntArith, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasTransport, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasTruthVec, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasFiniteRel, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0ProofNodeKindCount, 5);
+  assert.deepEqual(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0ProofNodeKinds, [
+    'PrimitiveRule',
+    'SigmaInstance',
+    'ReflectionInstance',
+    'RowProof',
+    'PackageTheorem',
+  ]);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0AllRequiredProofNodeKindsPresent, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0ProofRefsRejectOpaque, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0ProofRefsTypedAcyclic, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0ProofRefsHashIndependent, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0PiBootDigestMatches, true);
 
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateStatusUsesConcreteFinalCertificate, true);
 
@@ -457,6 +565,60 @@ test('CheckReleaseAudit0 reports the concrete final-certificate public-status ga
   assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBoot0B0CoversRoute, true);
   assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBoot0B0CoversHash, true);
   assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBoot0B0CoversImport, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0Accepted, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0Kind, 'KernelSeed0');
+  assert.match(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0RuleCount, 16);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0RequiredRuleCount, 16);
+  assert.deepEqual(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0Rules, [
+    'Eq',
+    'Subst',
+    'Record',
+    'DAGInd',
+    'LedgerInd',
+    'OblTopoInd',
+    'TraceInd',
+    'FiniteExhaust',
+    'DPInd',
+    'Hall',
+    'RankInd',
+    'MinCounterexample',
+    'IntArith',
+    'Transport',
+    'TruthVec',
+    'FiniteRel',
+  ]);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0AllRequiredRulesPresent, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasEq, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasSubst, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasRecord, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasDAGInd, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasLedgerInd, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasOblTopoInd, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasTraceInd, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasFiniteExhaust, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasDPInd, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasHall, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasRankInd, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasMinCounterexample, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasIntArith, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasTransport, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasTruthVec, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0HasFiniteRel, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0ProofNodeKindCount, 5);
+  assert.deepEqual(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0ProofNodeKinds, [
+    'PrimitiveRule',
+    'SigmaInstance',
+    'ReflectionInstance',
+    'RowProof',
+    'PackageTheorem',
+  ]);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0AllRequiredProofNodeKindsPresent, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0ProofRefsRejectOpaque, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0ProofRefsTypedAcyclic, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0ProofRefsHashIndependent, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0PiBootDigestMatches, true);
 
   assert.equal(summary.concreteFinalCertificatePublicStatusGateSummary.publicConclusion.consequent, 'P = NP');
 });
@@ -681,5 +843,71 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without B0 ro
     'concreteFinalCertificatePublicStatusGate',
     'NF',
     'generatedPCCPackexpBoot0B0CoversTruthEval',
+  ]);
+});
+
+test('CheckReleaseAudit0 rejects a concrete final-certificate gate without KernelSeed0 primitive rule evidence', async () => {
+  const bad = makeAcceptedConcreteFinalCertificatePublicStatusRecord0();
+
+  bad.NF = {
+    ...bad.NF,
+    generatedPCCPackexpKernelSeed0HasHall: false,
+  };
+  bad.nf = bad.NF;
+  bad.Digest = digestCanonical0(bad.NF);
+  bad.digest = bad.Digest;
+
+  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+    runSyntaxCheck: false,
+    runRunAll: false,
+    runMutationCheck: false,
+    runCliSmoke: false,
+    runPublicSurfaceFreeze: false,
+    runMaterializedPublicStatusGate: false,
+    runFinalCertificatePublicStatusGate: false,
+    runConcreteFinalCertificatePublicStatusGate: true,
+    concreteFinalCertificatePublicStatusGateRunner: async () => bad,
+  }));
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAudit0');
+  assert.equal(out.Coord, 'CheckReleaseAudit0.concreteFinalCertificatePublicStatusGate');
+  assert.deepEqual(out.Path, [
+    'concreteFinalCertificatePublicStatusGate',
+    'NF',
+    'generatedPCCPackexpKernelSeed0HasHall',
+  ]);
+});
+
+test('CheckReleaseAudit0 rejects a concrete final-certificate gate with unsafe KernelSeed0 proof refs', async () => {
+  const bad = makeAcceptedConcreteFinalCertificatePublicStatusRecord0();
+
+  bad.NF = {
+    ...bad.NF,
+    generatedPCCPackexpKernelSeed0ProofRefsRejectOpaque: false,
+  };
+  bad.nf = bad.NF;
+  bad.Digest = digestCanonical0(bad.NF);
+  bad.digest = bad.Digest;
+
+  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+    runSyntaxCheck: false,
+    runRunAll: false,
+    runMutationCheck: false,
+    runCliSmoke: false,
+    runPublicSurfaceFreeze: false,
+    runMaterializedPublicStatusGate: false,
+    runFinalCertificatePublicStatusGate: false,
+    runConcreteFinalCertificatePublicStatusGate: true,
+    concreteFinalCertificatePublicStatusGateRunner: async () => bad,
+  }));
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAudit0');
+  assert.equal(out.Coord, 'CheckReleaseAudit0.concreteFinalCertificatePublicStatusGate');
+  assert.deepEqual(out.Path, [
+    'concreteFinalCertificatePublicStatusGate',
+    'NF',
+    'generatedPCCPackexpKernelSeed0ProofRefsRejectOpaque',
   ]);
 });
