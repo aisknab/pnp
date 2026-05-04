@@ -149,6 +149,60 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 accepts an accept run over th
   assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversRoute, true);
   assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversHash, true);
   assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversImport, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0Kind, 'KernelSeed0');
+  assert.match(out.NF.generatedPCCPackexpKernelSeed0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0RuleCount, 16);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0RequiredRuleCount, 16);
+  assert.deepEqual(out.NF.generatedPCCPackexpKernelSeed0Rules, [
+    'Eq',
+    'Subst',
+    'Record',
+    'DAGInd',
+    'LedgerInd',
+    'OblTopoInd',
+    'TraceInd',
+    'FiniteExhaust',
+    'DPInd',
+    'Hall',
+    'RankInd',
+    'MinCounterexample',
+    'IntArith',
+    'Transport',
+    'TruthVec',
+    'FiniteRel',
+  ]);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0AllRequiredRulesPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasEq, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasSubst, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasRecord, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasDAGInd, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasLedgerInd, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasOblTopoInd, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasTraceInd, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasFiniteExhaust, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasDPInd, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasHall, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasRankInd, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasMinCounterexample, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasIntArith, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasTransport, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasTruthVec, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasFiniteRel, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0ProofNodeKindCount, 5);
+  assert.deepEqual(out.NF.generatedPCCPackexpKernelSeed0ProofNodeKinds, [
+    'PrimitiveRule',
+    'SigmaInstance',
+    'ReflectionInstance',
+    'RowProof',
+    'PackageTheorem',
+  ]);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0AllRequiredProofNodeKindsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0ProofRefsRejectOpaque, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0ProofRefsTypedAcyclic, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0ProofRefsHashIndependent, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0PiBootDigestMatches, true);
 
   assert.equal(out.Ledger.some((entry) => (
     entry.phase === 'CheckGeneratedPCCPackexp0' &&
@@ -619,4 +673,23 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a stale CheckGenerate
   assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
   assert.equal(out.Coord, 'CheckConcreteMaterializedGeneratedAcceptRun0.CheckGeneratedPCCPackexpRecord');
   assert.deepEqual(out.Path, ['CheckGeneratedPCCPackexpRecord', 'Digest']);
+});
+
+test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp without KernelSeed0 bridge evidence', async () => {
+  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+
+  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+    checkGeneratedAcceptRun: false,
+    checkConcretePCCPack: false,
+    checkPCCPackexp: false,
+    checkLinkage: false,
+    generatedPCCPackexpConfig: {
+      checkKernelSeed0: false,
+    },
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedGeneratedAcceptRun0.GeneratedPCCPackexp');
+  assert.deepEqual(out.Path, ['GeneratedPCCPackexpEnvelope', 'NF', 'generatedPackageKernelSeed0']);
 });

@@ -840,6 +840,162 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
         : null
     ),
 
+    generatedPCCPackexpKernelSeed0: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).generatedPackageKernelSeed0 === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0Accepted: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0Accepted === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0Kind: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0Kind
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0Digest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0Digest
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0RuleCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0RuleCount
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0RequiredRuleCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0RequiredRuleCount
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0Rules: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0Rules
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0AllRequiredRulesPresent: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0AllRequiredRulesPresent === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0HasEq: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0HasEq === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0HasSubst: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0HasSubst === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0HasRecord: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0HasRecord === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0HasDAGInd: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0HasDAGInd === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0HasLedgerInd: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0HasLedgerInd === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0HasOblTopoInd: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0HasOblTopoInd === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0HasTraceInd: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0HasTraceInd === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0HasFiniteExhaust: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0HasFiniteExhaust === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0HasDPInd: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0HasDPInd === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0HasHall: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0HasHall === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0HasRankInd: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0HasRankInd === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0HasMinCounterexample: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0HasMinCounterexample === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0HasIntArith: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0HasIntArith === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0HasTransport: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0HasTransport === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0HasTruthVec: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0HasTruthVec === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0HasFiniteRel: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0HasFiniteRel === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0ProofNodeKindCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0ProofNodeKindCount
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0ProofNodeKinds: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0ProofNodeKinds
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0AllRequiredProofNodeKindsPresent: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0AllRequiredProofNodeKindsPresent === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0ProofRefsRejectOpaque: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0ProofRefsRejectOpaque === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0ProofRefsTypedAcyclic: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0ProofRefsTypedAcyclic === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0ProofRefsHashIndependent: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0ProofRefsHashIndependent === true
+        : null
+    ),
+    generatedPCCPackexpKernelSeed0PiBootDigestMatches: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).kernelSeed0PiBootDigestMatches === true
+        : null
+    ),
+
     rowsEnvelopeKind: recomputedChain.rowsEnvelopeKind,
     localPackagesEnvelopeKind: recomputedChain.localPackagesEnvelopeKind,
     globalFirewallsEnvelopeKind: recomputedChain.globalFirewallsEnvelopeKind,
@@ -1388,6 +1544,119 @@ function validateGeneratedPCCPackexpEnvelope0({
     return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'boot0B0Digest'], 'GeneratedPCCPackexp0 NF B0 digest must match Boot0 boot-batch digest', {
       expected: generatedNF.boot0BootBatchDigest,
       actual: generatedNF.boot0B0Digest,
+    });
+  }
+
+  for (const field of [
+    'generatedPackageKernelSeed0',
+    'kernelSeed0Accepted',
+    'kernelSeed0AllRequiredRulesPresent',
+    'kernelSeed0HasEq',
+    'kernelSeed0HasSubst',
+    'kernelSeed0HasRecord',
+    'kernelSeed0HasDAGInd',
+    'kernelSeed0HasLedgerInd',
+    'kernelSeed0HasOblTopoInd',
+    'kernelSeed0HasTraceInd',
+    'kernelSeed0HasFiniteExhaust',
+    'kernelSeed0HasDPInd',
+    'kernelSeed0HasHall',
+    'kernelSeed0HasRankInd',
+    'kernelSeed0HasMinCounterexample',
+    'kernelSeed0HasIntArith',
+    'kernelSeed0HasTransport',
+    'kernelSeed0HasTruthVec',
+    'kernelSeed0HasFiniteRel',
+    'kernelSeed0AllRequiredProofNodeKindsPresent',
+    'kernelSeed0ProofRefsRejectOpaque',
+    'kernelSeed0ProofRefsTypedAcyclic',
+    'kernelSeed0ProofRefsHashIndependent',
+    'kernelSeed0PiBootDigestMatches',
+  ]) {
+    if (generatedNF[field] !== true) {
+      return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', field], `GeneratedPCCPackexp0 NF must certify ${field}`, {
+        actual: generatedNF[field],
+      });
+    }
+  }
+
+  if (generatedNF.kernelSeed0Kind !== 'KernelSeed0') {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'kernelSeed0Kind'], 'GeneratedPCCPackexp0 NF must certify KernelSeed0 kind', {
+      actual: generatedNF.kernelSeed0Kind,
+    });
+  }
+
+  if (!(typeof generatedNF.kernelSeed0RuleCount === 'number' && generatedNF.kernelSeed0RuleCount === 16)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'kernelSeed0RuleCount'], 'GeneratedPCCPackexp0 NF must certify complete KernelSeed0 primitive rule count', {
+      actual: generatedNF.kernelSeed0RuleCount,
+    });
+  }
+
+  if (!(typeof generatedNF.kernelSeed0RequiredRuleCount === 'number' && generatedNF.kernelSeed0RequiredRuleCount === 16)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'kernelSeed0RequiredRuleCount'], 'GeneratedPCCPackexp0 NF must certify expected KernelSeed0 required rule count', {
+      actual: generatedNF.kernelSeed0RequiredRuleCount,
+    });
+  }
+
+  if (!Array.isArray(generatedNF.kernelSeed0Rules)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'kernelSeed0Rules'], 'GeneratedPCCPackexp0 NF must expose KernelSeed0 rule list', {
+      actual: typeof generatedNF.kernelSeed0Rules,
+    });
+  }
+
+  for (const rule of [
+    'Eq',
+    'Subst',
+    'Record',
+    'DAGInd',
+    'LedgerInd',
+    'OblTopoInd',
+    'TraceInd',
+    'FiniteExhaust',
+    'DPInd',
+    'Hall',
+    'RankInd',
+    'MinCounterexample',
+    'IntArith',
+    'Transport',
+    'TruthVec',
+    'FiniteRel',
+  ]) {
+    if (!generatedNF.kernelSeed0Rules.includes(rule)) {
+      return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'kernelSeed0Rules'], 'GeneratedPCCPackexp0 NF KernelSeed0 rule list is missing a required primitive rule', {
+        rule,
+        actual: generatedNF.kernelSeed0Rules,
+      });
+    }
+  }
+
+  if (!Array.isArray(generatedNF.kernelSeed0ProofNodeKinds)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'kernelSeed0ProofNodeKinds'], 'GeneratedPCCPackexp0 NF must expose KernelSeed0 proof node kinds', {
+      actual: typeof generatedNF.kernelSeed0ProofNodeKinds,
+    });
+  }
+
+  for (const proofNodeKind of [
+    'PrimitiveRule',
+    'SigmaInstance',
+    'ReflectionInstance',
+    'RowProof',
+    'PackageTheorem',
+  ]) {
+    if (!generatedNF.kernelSeed0ProofNodeKinds.includes(proofNodeKind)) {
+      return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'kernelSeed0ProofNodeKinds'], 'GeneratedPCCPackexp0 NF KernelSeed0 proof node kinds are incomplete', {
+        proofNodeKind,
+        actual: generatedNF.kernelSeed0ProofNodeKinds,
+      });
+    }
+  }
+
+  const generatedKernelSeed0 = generatedPCCPackexpEnvelope.GeneratedPCCPack?.MaterializedPCCPackEnvelope?.MaterializedBoot0?.KernelSeed0 ?? null;
+
+  if (!sameDigestHex0(generatedNF.kernelSeed0Digest, digestCanonical0(generatedKernelSeed0))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'kernelSeed0Digest'], 'GeneratedPCCPackexp0 NF kernelSeed0Digest must match generated package KernelSeed0 bytes', {
+      expected: digestCanonical0(generatedKernelSeed0),
+      actual: generatedNF.kernelSeed0Digest,
     });
   }
 
