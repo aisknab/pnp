@@ -141,6 +141,30 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 accepts attached release au
   assert.equal(out.NF.generatedPCCPackexpCheckRecordClaimBoundaryConditional, true);
   assert.equal(out.NF.generatedPCCPackexpLinkageGeneratedPackageDigestMatches, true);
   assert.equal(out.NF.generatedPCCPackexpLinkageCheckRecordDigestMatches, true);
+  assert.equal(out.NF.checkGeneratedPCCPackexpRecordPresent, true);
+  assert.equal(out.NF.checkGeneratedPCCPackexpRecordAccepted, true);
+  assert.equal(out.NF.checkGeneratedPCCPackexpRecordChecker, 'CheckGeneratedPCCPackexp0');
+  assert.match(out.NF.checkGeneratedPCCPackexpRecordDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.checkGeneratedPCCPackexpRecordDigestMatchesNF, true);
+  assert.equal(out.NF.checkGeneratedPCCPackexpRecordGeneratedPackageDigestMatchesEnvelope, true);
+  assert.equal(out.NF.checkGeneratedPCCPackexpRecordCheckPCCPackexpDigestMatchesEnvelope, true);
+
+  assert.equal(out.NF.generatedPCCPackexpBoot0, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0Kind, 'Boot0');
+  assert.match(out.NF.generatedPCCPackexpBoot0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpBoot0CheckDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpBoot0CanonicalByteDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpBoot0RowCount > 0, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0KernelRuleCount > 0, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0JsonMaterialized, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0NoFixtureMarkers, true);
+  assert.match(out.NF.generatedPCCPackexpBoot0BootBatchDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpBoot0BootAuditDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpBoot0LinkedToPCCPack, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0LinkedToCoreDigestMap, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0DigestMatchesGeneratedPackage, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0DigestMatchesCoreDigestMap, true);
 
   assert.equal(out.NF.finalCertificateUsesConcreteAcceptRun, true);
   assert.equal(out.NF.statusUsesConcreteFinalCertificate, true);
@@ -449,5 +473,71 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing GeneratedPC
     'ConcreteFinalCertificatePublicStatusEnvelope',
     'ConcreteChain',
     'generatedPCCPackexpEnvelopePresent',
+  ]);
+});
+
+test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing CheckGeneratedPCCPackexp0 record evidence', async () => {
+  const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
+  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+    ReleaseAuditRecord: releaseAuditRecord,
+    runReleaseAudit: false,
+  });
+
+  envelope.ConcreteFinalCertificatePublicStatusEnvelope.ConcreteChain = {
+    ...envelope.ConcreteFinalCertificatePublicStatusEnvelope.ConcreteChain,
+    checkGeneratedPCCPackexpRecordPresent: false,
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concretePublicStatusEnvelopeDigest: undefined,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+    checkConcretePublicStatus: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAuditConcreteFinalCertificateGate0');
+  assert.equal(out.Coord, 'CheckReleaseAuditConcreteFinalCertificateGate0.PublicConclusion');
+  assert.deepEqual(out.Path, [
+    'ConcreteFinalCertificatePublicStatusEnvelope',
+    'ConcreteChain',
+    'checkGeneratedPCCPackexpRecordPresent',
+  ]);
+});
+
+test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing Boot0 bridge evidence', async () => {
+  const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
+  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+    ReleaseAuditRecord: releaseAuditRecord,
+    runReleaseAudit: false,
+  });
+
+  envelope.ConcreteFinalCertificatePublicStatusEnvelope.ConcreteChain = {
+    ...envelope.ConcreteFinalCertificatePublicStatusEnvelope.ConcreteChain,
+    generatedPCCPackexpBoot0: false,
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concretePublicStatusEnvelopeDigest: undefined,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+    checkConcretePublicStatus: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAuditConcreteFinalCertificateGate0');
+  assert.equal(out.Coord, 'CheckReleaseAuditConcreteFinalCertificateGate0.PublicConclusion');
+  assert.deepEqual(out.Path, [
+    'ConcreteFinalCertificatePublicStatusEnvelope',
+    'ConcreteChain',
+    'generatedPCCPackexpBoot0',
   ]);
 });

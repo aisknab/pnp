@@ -393,6 +393,42 @@ export async function CheckReleaseAuditConcreteFinalCertificateGate0(
     generatedPCCPackexpCheckRecordClaimBoundaryConditional: concreteStatus.ConcreteChain.generatedPCCPackexpCheckRecordClaimBoundaryConditional,
     generatedPCCPackexpLinkageGeneratedPackageDigestMatches: concreteStatus.ConcreteChain.generatedPCCPackexpLinkageGeneratedPackageDigestMatches,
     generatedPCCPackexpLinkageCheckRecordDigestMatches: concreteStatus.ConcreteChain.generatedPCCPackexpLinkageCheckRecordDigestMatches,
+    checkGeneratedPCCPackexpRecordPresent: concreteStatus.ConcreteChain.checkGeneratedPCCPackexpRecordPresent,
+    checkGeneratedPCCPackexpRecordAccepted: concreteStatus.ConcreteChain.checkGeneratedPCCPackexpRecordAccepted,
+    checkGeneratedPCCPackexpRecordChecker: concreteStatus.ConcreteChain.checkGeneratedPCCPackexpRecordChecker,
+    checkGeneratedPCCPackexpRecordDigest: concreteStatus.ConcreteChain.checkGeneratedPCCPackexpRecordDigest,
+    checkGeneratedPCCPackexpRecordDigestMatchesNF: concreteStatus.ConcreteChain.checkGeneratedPCCPackexpRecordDigestMatchesNF,
+    checkGeneratedPCCPackexpRecordGeneratedPackageDigestMatchesEnvelope:
+      concreteStatus.ConcreteChain.checkGeneratedPCCPackexpRecordGeneratedPackageDigestMatchesEnvelope,
+    checkGeneratedPCCPackexpRecordCheckPCCPackexpDigestMatchesEnvelope:
+      concreteStatus.ConcreteChain.checkGeneratedPCCPackexpRecordCheckPCCPackexpDigestMatchesEnvelope,
+
+    generatedPCCPackexpBoot0: concreteStatus.ConcreteChain.generatedPCCPackexpBoot0,
+    generatedPCCPackexpBoot0Accepted: concreteStatus.ConcreteChain.generatedPCCPackexpBoot0Accepted,
+    generatedPCCPackexpBoot0Kind: concreteStatus.ConcreteChain.generatedPCCPackexpBoot0Kind,
+    generatedPCCPackexpBoot0Digest: concreteStatus.ConcreteChain.generatedPCCPackexpBoot0Digest,
+    generatedPCCPackexpBoot0CheckDigest: concreteStatus.ConcreteChain.generatedPCCPackexpBoot0CheckDigest,
+    generatedPCCPackexpBoot0CanonicalByteDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0CanonicalByteDigest,
+    generatedPCCPackexpBoot0RowCount: concreteStatus.ConcreteChain.generatedPCCPackexpBoot0RowCount,
+    generatedPCCPackexpBoot0KernelRuleCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0KernelRuleCount,
+    generatedPCCPackexpBoot0JsonMaterialized:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0JsonMaterialized,
+    generatedPCCPackexpBoot0NoFixtureMarkers:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0NoFixtureMarkers,
+    generatedPCCPackexpBoot0BootBatchDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0BootBatchDigest,
+    generatedPCCPackexpBoot0BootAuditDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0BootAuditDigest,
+    generatedPCCPackexpBoot0LinkedToPCCPack:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0LinkedToPCCPack,
+    generatedPCCPackexpBoot0LinkedToCoreDigestMap:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0LinkedToCoreDigestMap,
+    generatedPCCPackexpBoot0DigestMatchesGeneratedPackage:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0DigestMatchesGeneratedPackage,
+    generatedPCCPackexpBoot0DigestMatchesCoreDigestMap:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0DigestMatchesCoreDigestMap,
 
     finalCertificateUsesConcreteAcceptRun: concreteStatus.ConcreteChain.finalCertificateUsesConcreteAcceptRun,
     statusUsesConcreteFinalCertificate: concreteStatus.ConcreteChain.statusUsesConcreteFinalCertificate,
@@ -682,6 +718,20 @@ function validateConcretePublicConclusionAlignment0(envelope) {
     'generatedPCCPackexpCheckRecordClaimBoundaryConditional',
     'generatedPCCPackexpLinkageGeneratedPackageDigestMatches',
     'generatedPCCPackexpLinkageCheckRecordDigestMatches',
+    'checkGeneratedPCCPackexpRecordPresent',
+    'checkGeneratedPCCPackexpRecordAccepted',
+    'checkGeneratedPCCPackexpRecordDigestMatchesNF',
+    'checkGeneratedPCCPackexpRecordGeneratedPackageDigestMatchesEnvelope',
+    'checkGeneratedPCCPackexpRecordCheckPCCPackexpDigestMatchesEnvelope',
+
+    'generatedPCCPackexpBoot0',
+    'generatedPCCPackexpBoot0Accepted',
+    'generatedPCCPackexpBoot0JsonMaterialized',
+    'generatedPCCPackexpBoot0NoFixtureMarkers',
+    'generatedPCCPackexpBoot0LinkedToPCCPack',
+    'generatedPCCPackexpBoot0LinkedToCoreDigestMap',
+    'generatedPCCPackexpBoot0DigestMatchesGeneratedPackage',
+    'generatedPCCPackexpBoot0DigestMatchesCoreDigestMap',
 
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',
