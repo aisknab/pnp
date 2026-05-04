@@ -15,6 +15,10 @@ import {
   CheckPCCPackexp0,
 } from './pcc-check-pcc-pack-exp0.mjs';
 
+import {
+  CheckMaterializedBoot0,
+} from './pcc-boot-materialized0.mjs';
+
 const CHECKER_VERSION = 0;
 
 const GENERATED_CORE_FORBIDDEN_KEYS0 = Object.freeze([
@@ -36,6 +40,7 @@ export function makeGeneratePCCPackConfig0(overrides = {}) {
     version: CHECKER_VERSION,
     checkDeterministicGenerator: true,
     checkGeneratedPackageCoreBoundary: true,
+    checkMaterializedBoot0: true,
     checkCheckPCCPackexpRecord: true,
     checkPublicClaimBoundary: true,
     checkJsonMaterialized: true,
@@ -136,6 +141,7 @@ export async function CheckGeneratedPCCPackexp0(
   const envelope = input;
   let deterministicNF = null;
   let coreBoundaryNF = null;
+  let boot0NF = null;
   let freshCheckPCCPackexpRecord = null;
   let recordAlignmentNF = null;
 
@@ -217,6 +223,28 @@ export async function CheckGeneratedPCCPackexp0(
     }
 
     coreBoundaryNF = coreBoundary.nf;
+  }
+
+  if (cfg.checkMaterializedBoot0 === true) {
+    const boot0 = await validateGeneratedBoot0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'CheckMaterializedBoot0',
+      status: boot0.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(boot0.nf ?? boot0.witness ?? null),
+    });
+
+    if (!boot0.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.Boot0`,
+        path: boot0.path,
+        witness: boot0.witness,
+        ledger,
+      });
+    }
+
+    boot0NF = boot0.nf;
   }
 
   if (cfg.checkCheckPCCPackexpRecord === true) {
@@ -344,6 +372,21 @@ export async function CheckGeneratedPCCPackexp0(
     generatedPackageCoreOnly: coreBoundaryNF?.coreOnly ?? null,
     generatorCoreExcludesAcceptRun: coreBoundaryNF?.excludesAcceptRun ?? null,
 
+    generatedPackageBoot0: boot0NF?.boot0 ?? null,
+    boot0Accepted: boot0NF?.boot0Accepted ?? null,
+    boot0Kind: boot0NF?.boot0Kind ?? null,
+    boot0Digest: boot0NF?.boot0Digest ?? null,
+    boot0CheckDigest: boot0NF?.boot0CheckDigest ?? null,
+    boot0CanonicalByteDigest: boot0NF?.boot0CanonicalByteDigest ?? null,
+    boot0RowCount: boot0NF?.rowCount ?? null,
+    boot0KernelRuleCount: boot0NF?.kernelRuleCount ?? null,
+    boot0JsonMaterialized: boot0NF?.jsonMaterialized ?? null,
+    boot0NoFixtureMarkers: boot0NF?.noFixtureMarkers ?? null,
+    boot0BootBatchDigest: boot0NF?.bootBatchDigest ?? null,
+    boot0BootAuditDigest: boot0NF?.bootAuditDigest ?? null,
+    boot0LinkedToPCCPack: boot0NF?.boot0LinkedToPCCPack ?? null,
+    boot0LinkedToCoreDigestMap: boot0NF?.boot0LinkedToCoreDigestMap ?? null,
+
     generatedPackageKind: envelope.GeneratedPCCPack.kind ?? null,
     generatedPackageDigest: digestCanonical0(envelope.GeneratedPCCPack),
 
@@ -438,6 +481,7 @@ function validateConfig0(config) {
   for (const field of [
     'checkDeterministicGenerator',
     'checkGeneratedPackageCoreBoundary',
+    'checkMaterializedBoot0',
     'checkCheckPCCPackexpRecord',
     'checkPublicClaimBoundary',
     'checkJsonMaterialized',
@@ -578,6 +622,76 @@ function scanForbiddenCoreKeys0(value, pathNow, hits) {
 
     scanForbiddenCoreKeys0(child, childPath, hits);
   }
+}
+
+async function validateGeneratedBoot0(generatedPackage) {
+  const materializedPCCPack = generatedPackage?.MaterializedPCCPackEnvelope ?? generatedPackage?.MaterializedPCCPack ?? null;
+  const pccPack = materializedPCCPack?.PCCPack ?? generatedPackage?.PCCPack ?? null;
+  const boot0 = materializedPCCPack?.MaterializedBoot0 ?? pccPack?.Boot0 ?? null;
+
+  if (!isPlainObject(boot0)) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'MaterializedBoot0'], 'GeneratedPCCPack must include materialized Boot0', {
+      actual: typeof boot0,
+    });
+  }
+
+  const bootRecord = await CheckMaterializedBoot0(boot0);
+  const bootResult = recordToValidation0(bootRecord, ['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'MaterializedBoot0']);
+
+  if (!bootResult.ok) {
+    return validationReject0(bootResult.path, 'CheckMaterializedBoot0 rejected generated package Boot0', {
+      inner: bootResult.witness?.detail?.inner ?? bootResult.witness,
+    });
+  }
+
+  const bootRecordNF = bootRecord.NF ?? bootRecord.nf;
+  const bootObjectDigest = digestCanonical0(boot0);
+  const pccPackBootDigest = digestCanonical0(pccPack?.Boot0 ?? null);
+  const coreBootDigest = pccPack?.Core?.artefactDigests?.Boot0 ?? null;
+
+  if (!sameDigestHex0(pccPackBootDigest, bootObjectDigest)) {
+    return validationReject0(['GeneratedPCCPack', 'PCCPack', 'Boot0'], 'PCCPack Boot0 must match materialized Boot0', {
+      expected: bootObjectDigest,
+      actual: pccPackBootDigest,
+    });
+  }
+
+  if (!sameDigestHex0(coreBootDigest, bootObjectDigest)) {
+    return validationReject0(['GeneratedPCCPack', 'PCCPack', 'Core', 'artefactDigests', 'Boot0'], 'PCCPack Core artefactDigests.Boot0 must match materialized Boot0', {
+      expected: bootObjectDigest,
+      actual: coreBootDigest,
+    });
+  }
+
+  if (bootRecordNF?.jsonMaterializable !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'jsonMaterializable'], 'materialized Boot0 must be JSON materializable', {
+      actual: bootRecordNF?.jsonMaterializable ?? null,
+    });
+  }
+
+  if (bootRecordNF?.noFixtureMarkers !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'noFixtureMarkers'], 'materialized Boot0 must contain no fixture markers', {
+      actual: bootRecordNF?.noFixtureMarkers ?? null,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackBoot0Bridge0NF',
+    boot0: true,
+    boot0Accepted: true,
+    boot0Kind: boot0.kind ?? null,
+    boot0Digest: bootObjectDigest,
+    boot0CheckDigest: bootRecord.Digest ?? bootRecord.digest,
+    boot0CanonicalByteDigest: bootRecordNF.canonicalByteDigest ?? null,
+    rowCount: bootRecordNF.rowCount ?? null,
+    kernelRuleCount: bootRecordNF.kernelRuleCount ?? null,
+    jsonMaterialized: bootRecordNF.jsonMaterializable === true,
+    noFixtureMarkers: bootRecordNF.noFixtureMarkers === true,
+    bootBatchDigest: bootRecordNF.bootBatchDigest ?? null,
+    bootAuditDigest: bootRecordNF.bootAuditDigest ?? null,
+    boot0LinkedToPCCPack: true,
+    boot0LinkedToCoreDigestMap: true,
+  });
 }
 
 function validateMaterializedCheckPCCPackexpRecord0(actual, expected) {

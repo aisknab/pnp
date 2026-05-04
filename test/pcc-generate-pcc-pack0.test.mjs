@@ -39,6 +39,21 @@ test('CheckGeneratedPCCPackexp0 accepts generated package with accepted CheckPCC
   assert.equal(out.NF.generatedPackageCoreOnly, true);
   assert.equal(out.NF.generatorCoreExcludesAcceptRun, true);
 
+  assert.equal(out.NF.generatedPackageBoot0, true);
+  assert.equal(out.NF.boot0Accepted, true);
+  assert.equal(out.NF.boot0Kind, 'Boot0');
+  assert.match(out.NF.boot0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.boot0CheckDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.boot0CanonicalByteDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.boot0RowCount > 0, true);
+  assert.equal(out.NF.boot0KernelRuleCount > 0, true);
+  assert.equal(out.NF.boot0JsonMaterialized, true);
+  assert.equal(out.NF.boot0NoFixtureMarkers, true);
+  assert.match(out.NF.boot0BootBatchDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.boot0BootAuditDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.boot0LinkedToPCCPack, true);
+  assert.equal(out.NF.boot0LinkedToCoreDigestMap, true);
+
   assert.equal(out.NF.checkPCCPackexp, true);
   assert.equal(out.NF.checkPCCPackexpRecordAccepted, true);
   assert.equal(out.NF.checkPCCPackexpRecordChecker, 'CheckPCCPackexp0');
@@ -72,6 +87,7 @@ test('makeGeneratePCCPackConfig0 fills default validation switches', () => {
   assert.equal(config.kind, 'GeneratePCCPackConfig0');
   assert.equal(config.checkDeterministicGenerator, true);
   assert.equal(config.checkGeneratedPackageCoreBoundary, true);
+  assert.equal(config.checkMaterializedBoot0, true);
   assert.equal(config.checkJsonMaterialized, false);
   assert.equal(typeof config.checkPCCPackexpConfig, 'object');
 });
@@ -154,4 +170,46 @@ test('writeGeneratedPCCPackexpFiles0 writes replayable JSON artefacts', async (t
 
     assert.equal(typeof value, 'object');
   }
+});
+
+test('CheckGeneratedPCCPackexp0 rejects generated package whose Boot0 core digest is stale', async () => {
+  const envelope = await makeGeneratedPCCPackexp0();
+
+  envelope.GeneratedPCCPack = {
+    ...envelope.GeneratedPCCPack,
+    MaterializedPCCPackEnvelope: {
+      ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope,
+      PCCPack: {
+        ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.PCCPack,
+        Core: {
+          ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.PCCPack.Core,
+          artefactDigests: {
+            ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.PCCPack.Core.artefactDigests,
+            Boot0: {
+              alg: 'SHA256',
+              bytes: 'canonical-json-v0',
+              hex: '0000000000000000000000000000000000000000000000000000000000000000',
+            },
+          },
+        },
+      },
+    },
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    generatedPackageDigest: undefined,
+  };
+
+  const out = await CheckGeneratedPCCPackexp0(envelope, {
+    checkDeterministicGenerator: false,
+    checkCheckPCCPackexpRecord: false,
+    checkPublicClaimBoundary: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
+  assert.equal(out.Coord, 'CheckGeneratedPCCPackexp0.Boot0');
+  assert.deepEqual(out.Path, ['GeneratedPCCPack', 'PCCPack', 'Core', 'artefactDigests', 'Boot0']);
 });
