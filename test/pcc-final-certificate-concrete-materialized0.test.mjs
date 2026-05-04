@@ -70,6 +70,21 @@ test('CheckConcreteMaterializedFinalCertificate0 accepts a final certificate ove
   assert.equal(out.NF.checkPCCPackexpRecordPublicConclusionNotEmitted, true);
   assert.equal(out.NF.checkPCCPackexpRecordClaimBoundaryConditional, true);
 
+  assert.equal(out.NF.generatedPCCPackexpEnvelopePresent, true);
+  assert.match(out.NF.generatedPCCPackexpEnvelopeDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpGenCallGeneratePCCPack, true);
+  assert.equal(out.NF.generatedPCCPackexpCoreOnly, true);
+  assert.equal(out.NF.generatedPCCPackexpExcludesAcceptRun, true);
+  assert.equal(out.NF.generatedPCCPackexpPackageMatchesConcreteRun, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckRecordMatchesConcreteRun, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckRecordAccepted, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckRecordChecker, 'CheckPCCPackexp0');
+  assert.match(out.NF.generatedPCCPackexpCheckRecordDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpCheckRecordDigestMatchesNF, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckRecordClaimBoundaryConditional, true);
+  assert.equal(out.NF.generatedPCCPackexpLinkageGeneratedPackageDigestMatches, true);
+  assert.equal(out.NF.generatedPCCPackexpLinkageCheckRecordDigestMatches, true);
+
   assert.equal(out.NF.finalCertificateUsesConcreteAcceptRun, true);
   assert.equal(out.NF.certificatePccPackDigestMatchesConcreteRun, true);
   assert.equal(out.NF.certificateAcceptRunDigestMatchesConcreteRun, true);
@@ -332,4 +347,37 @@ test('CheckConcreteMaterializedFinalCertificate0 rejects missing materialized Ch
   assert.equal(out.checker, 'CheckConcreteMaterializedFinalCertificate0');
   assert.equal(out.Coord, 'CheckConcreteMaterializedFinalCertificate0.concreteChain');
   assert.deepEqual(out.Path, ['ConcreteChain', 'checkPCCPackexpRecordPresent']);
+});
+
+test('CheckConcreteMaterializedFinalCertificate0 rejects missing GeneratedPCCPackexp0 evidence', async () => {
+  const envelope = await makeConcreteMaterializedFinalCertificate0();
+
+  delete envelope.ConcreteGeneratedAcceptRunEnvelope.GeneratedPCCPackexpEnvelope;
+
+  envelope.ConcreteGeneratedAcceptRunEnvelope.Linkage = {
+    ...envelope.ConcreteGeneratedAcceptRunEnvelope.Linkage,
+    generatedPCCPackexpEnvelopeDigest: undefined,
+    generatedPCCPackDigest: undefined,
+  };
+
+  envelope.ConcreteChain = summarizeConcreteFinalCertificateChain0({
+    concreteGeneratedAcceptRunEnvelope: envelope.ConcreteGeneratedAcceptRunEnvelope,
+    finalCertificateEnvelope: envelope.FinalCertificateEnvelope,
+  });
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckConcreteMaterializedFinalCertificate0(envelope, {
+    checkConcreteGeneratedAcceptRun: false,
+    checkFinalCertificate: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedFinalCertificate0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedFinalCertificate0.concreteChain');
+  assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpEnvelopePresent']);
 });

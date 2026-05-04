@@ -127,6 +127,18 @@ export function summarizeConcreteFinalCertificateChain0({
     ? digestCanonical0(checkPCCPackexpRecordNF)
     : null;
 
+  const generatedPCCPackexpEnvelope = concreteGeneratedAcceptRunEnvelope?.GeneratedPCCPackexpEnvelope ?? null;
+  const generatedPCCPackexpGeneratedPackage = generatedPCCPackexpEnvelope?.GeneratedPCCPack ?? null;
+  const generatedPCCPackexpMaterializedPackage =
+    generatedPCCPackexpGeneratedPackage?.MaterializedPCCPackEnvelope ?? null;
+  const generatedPCCPackexpCheckRecord = generatedPCCPackexpEnvelope?.CheckPCCPackexpRecord ?? null;
+  const generatedPCCPackexpCheckRecordNF =
+    generatedPCCPackexpCheckRecord?.NF ?? generatedPCCPackexpCheckRecord?.nf ?? null;
+  const generatedPCCPackexpCheckRecordDigest = digestFromRecord0(generatedPCCPackexpCheckRecord);
+  const generatedPCCPackexpCheckRecordNFDigest = isPlainObject(generatedPCCPackexpCheckRecordNF)
+    ? digestCanonical0(generatedPCCPackexpCheckRecordNF)
+    : null;
+
   const generatedAcceptRunDigest = digestCanonical0(generatedAcceptRunEnvelope);
   const finalGeneratedAcceptRunDigest = digestCanonical0(finalGeneratedAcceptRunEnvelope);
 
@@ -212,6 +224,41 @@ export function summarizeConcreteFinalCertificateChain0({
     checkPCCPackexpRecordClaimBoundaryConditional: samePublicConclusion0(
       checkPCCPackexpRecordNF?.publicConclusion ?? null,
       makeClaimBoundary0(),
+    ),
+
+    generatedPCCPackexpEnvelopePresent: isPlainObject(generatedPCCPackexpEnvelope),
+    generatedPCCPackexpEnvelopeDigest: isPlainObject(generatedPCCPackexpEnvelope)
+      ? digestCanonical0(generatedPCCPackexpEnvelope)
+      : null,
+    generatedPCCPackexpGenCallGeneratePCCPack: generatedPCCPackexpEnvelope?.GenCall?.generator === 'GeneratePCCPack0',
+    generatedPCCPackexpCoreOnly: generatedPCCPackexpEnvelope?.GenCall?.coreOnly === true,
+    generatedPCCPackexpExcludesAcceptRun: generatedPCCPackexpEnvelope?.GenCall?.excludesAcceptRun === true,
+    generatedPCCPackexpPackageMatchesConcreteRun: sameDigestHex0(
+      digestCanonical0(generatedPCCPackexpMaterializedPackage ?? null),
+      digestCanonical0(generatedAcceptRunEnvelope?.MaterializedPCCPack ?? null),
+    ),
+    generatedPCCPackexpCheckRecordMatchesConcreteRun: sameDigestHex0(
+      generatedPCCPackexpCheckRecordDigest,
+      checkPCCPackexpRecordDigest,
+    ),
+    generatedPCCPackexpCheckRecordAccepted: generatedPCCPackexpCheckRecord?.tag === 'accept',
+    generatedPCCPackexpCheckRecordChecker: generatedPCCPackexpCheckRecord?.checker ?? null,
+    generatedPCCPackexpCheckRecordDigest,
+    generatedPCCPackexpCheckRecordDigestMatchesNF: sameDigestHex0(
+      generatedPCCPackexpCheckRecordDigest,
+      generatedPCCPackexpCheckRecordNFDigest,
+    ),
+    generatedPCCPackexpCheckRecordClaimBoundaryConditional: samePublicConclusion0(
+      generatedPCCPackexpCheckRecordNF?.publicConclusion ?? null,
+      makeClaimBoundary0(),
+    ),
+    generatedPCCPackexpLinkageGeneratedPackageDigestMatches: sameDigestHex0(
+      generatedPCCPackexpEnvelope?.Linkage?.generatedPackageDigest ?? null,
+      digestCanonical0(generatedPCCPackexpGeneratedPackage ?? null),
+    ),
+    generatedPCCPackexpLinkageCheckRecordDigestMatches: sameDigestHex0(
+      generatedPCCPackexpEnvelope?.Linkage?.checkPCCPackexpRecordDigest ?? null,
+      generatedPCCPackexpCheckRecordDigest,
     ),
 
     rowsEnvelopeKind: concreteGeneratedChain.rowsEnvelopeKind,
@@ -504,6 +551,21 @@ export async function CheckConcreteMaterializedFinalCertificate0(
     checkPCCPackexpRecordPublicConclusionNotEmitted: recomputedChain.checkPCCPackexpRecordPublicConclusionNotEmitted,
     checkPCCPackexpRecordClaimBoundaryConditional: recomputedChain.checkPCCPackexpRecordClaimBoundaryConditional,
 
+    generatedPCCPackexpEnvelopePresent: recomputedChain.generatedPCCPackexpEnvelopePresent,
+    generatedPCCPackexpEnvelopeDigest: recomputedChain.generatedPCCPackexpEnvelopeDigest,
+    generatedPCCPackexpGenCallGeneratePCCPack: recomputedChain.generatedPCCPackexpGenCallGeneratePCCPack,
+    generatedPCCPackexpCoreOnly: recomputedChain.generatedPCCPackexpCoreOnly,
+    generatedPCCPackexpExcludesAcceptRun: recomputedChain.generatedPCCPackexpExcludesAcceptRun,
+    generatedPCCPackexpPackageMatchesConcreteRun: recomputedChain.generatedPCCPackexpPackageMatchesConcreteRun,
+    generatedPCCPackexpCheckRecordMatchesConcreteRun: recomputedChain.generatedPCCPackexpCheckRecordMatchesConcreteRun,
+    generatedPCCPackexpCheckRecordAccepted: recomputedChain.generatedPCCPackexpCheckRecordAccepted,
+    generatedPCCPackexpCheckRecordChecker: recomputedChain.generatedPCCPackexpCheckRecordChecker,
+    generatedPCCPackexpCheckRecordDigest: recomputedChain.generatedPCCPackexpCheckRecordDigest,
+    generatedPCCPackexpCheckRecordDigestMatchesNF: recomputedChain.generatedPCCPackexpCheckRecordDigestMatchesNF,
+    generatedPCCPackexpCheckRecordClaimBoundaryConditional: recomputedChain.generatedPCCPackexpCheckRecordClaimBoundaryConditional,
+    generatedPCCPackexpLinkageGeneratedPackageDigestMatches: recomputedChain.generatedPCCPackexpLinkageGeneratedPackageDigestMatches,
+    generatedPCCPackexpLinkageCheckRecordDigestMatches: recomputedChain.generatedPCCPackexpLinkageCheckRecordDigestMatches,
+
     kBundleEnvelopeKind: recomputedChain.kBundleEnvelopeKind,
     hardEnvelopeKind: recomputedChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: recomputedChain.finalIntegrationEnvelopeKind,
@@ -754,6 +816,18 @@ function validateConcreteFinalCertificateChain0(actual, expected) {
     'checkPCCPackexpRecordPublicConclusionOnlyAfterAcceptRun',
     'checkPCCPackexpRecordPublicConclusionNotEmitted',
     'checkPCCPackexpRecordClaimBoundaryConditional',
+
+    'generatedPCCPackexpEnvelopePresent',
+    'generatedPCCPackexpGenCallGeneratePCCPack',
+    'generatedPCCPackexpCoreOnly',
+    'generatedPCCPackexpExcludesAcceptRun',
+    'generatedPCCPackexpPackageMatchesConcreteRun',
+    'generatedPCCPackexpCheckRecordMatchesConcreteRun',
+    'generatedPCCPackexpCheckRecordAccepted',
+    'generatedPCCPackexpCheckRecordDigestMatchesNF',
+    'generatedPCCPackexpCheckRecordClaimBoundaryConditional',
+    'generatedPCCPackexpLinkageGeneratedPackageDigestMatches',
+    'generatedPCCPackexpLinkageCheckRecordDigestMatches',
 
     'finalCertificateUsesConcreteAcceptRun',
     'certificatePccPackDigestMatchesConcreteRun',
