@@ -328,6 +328,45 @@ export function summarizeConcreteFinalCertificateChain0({
       generatedPCCPackexpCoreBootDigest,
     ),
 
+    generatedPCCPackexpBoot0B0Accepted:
+      checkGeneratedPCCPackexpRecordNF?.boot0B0Accepted === true,
+    generatedPCCPackexpBoot0B0Digest:
+      checkGeneratedPCCPackexpRecordNF?.boot0B0Digest ?? null,
+    generatedPCCPackexpBoot0B0CoverageDigest:
+      checkGeneratedPCCPackexpRecordNF?.boot0B0CoverageDigest ?? null,
+    generatedPCCPackexpBoot0B0FamilyCount:
+      checkGeneratedPCCPackexpRecordNF?.boot0B0FamilyCount ?? null,
+    generatedPCCPackexpBoot0B0RequiredFamilyCount:
+      checkGeneratedPCCPackexpRecordNF?.boot0B0RequiredFamilyCount ?? null,
+    generatedPCCPackexpBoot0B0Families:
+      checkGeneratedPCCPackexpRecordNF?.boot0B0Families ?? null,
+    generatedPCCPackexpBoot0B0AllRequiredFamiliesPresent:
+      checkGeneratedPCCPackexpRecordNF?.boot0B0AllRequiredFamiliesPresent === true,
+    generatedPCCPackexpBoot0B0CoversIface:
+      checkGeneratedPCCPackexpRecordNF?.boot0B0CoversIface === true,
+    generatedPCCPackexpBoot0B0CoversSched:
+      checkGeneratedPCCPackexpRecordNF?.boot0B0CoversSched === true,
+    generatedPCCPackexpBoot0B0CoversNF:
+      checkGeneratedPCCPackexpRecordNF?.boot0B0CoversNF === true,
+    generatedPCCPackexpBoot0B0CoversTruthEval:
+      checkGeneratedPCCPackexpRecordNF?.boot0B0CoversTruthEval === true,
+    generatedPCCPackexpBoot0B0CoversRel:
+      checkGeneratedPCCPackexpRecordNF?.boot0B0CoversRel === true,
+    generatedPCCPackexpBoot0B0CoversCharge:
+      checkGeneratedPCCPackexpRecordNF?.boot0B0CoversCharge === true,
+    generatedPCCPackexpBoot0B0CoversObl:
+      checkGeneratedPCCPackexpRecordNF?.boot0B0CoversObl === true,
+    generatedPCCPackexpBoot0B0CoversArith:
+      checkGeneratedPCCPackexpRecordNF?.boot0B0CoversArith === true,
+    generatedPCCPackexpBoot0B0CoversMode:
+      checkGeneratedPCCPackexpRecordNF?.boot0B0CoversMode === true,
+    generatedPCCPackexpBoot0B0CoversRoute:
+      checkGeneratedPCCPackexpRecordNF?.boot0B0CoversRoute === true,
+    generatedPCCPackexpBoot0B0CoversHash:
+      checkGeneratedPCCPackexpRecordNF?.boot0B0CoversHash === true,
+    generatedPCCPackexpBoot0B0CoversImport:
+      checkGeneratedPCCPackexpRecordNF?.boot0B0CoversImport === true,
+
     rowsEnvelopeKind: concreteGeneratedChain.rowsEnvelopeKind,
     localPackagesEnvelopeKind: concreteGeneratedChain.localPackagesEnvelopeKind,
     globalFirewallsEnvelopeKind: concreteGeneratedChain.globalFirewallsEnvelopeKind,
@@ -670,6 +709,45 @@ export async function CheckConcreteMaterializedFinalCertificate0(
     generatedPCCPackexpBoot0DigestMatchesCoreDigestMap:
       recomputedChain.generatedPCCPackexpBoot0DigestMatchesCoreDigestMap,
 
+    generatedPCCPackexpBoot0B0Accepted:
+      recomputedChain.generatedPCCPackexpBoot0B0Accepted,
+    generatedPCCPackexpBoot0B0Digest:
+      recomputedChain.generatedPCCPackexpBoot0B0Digest,
+    generatedPCCPackexpBoot0B0CoverageDigest:
+      recomputedChain.generatedPCCPackexpBoot0B0CoverageDigest,
+    generatedPCCPackexpBoot0B0FamilyCount:
+      recomputedChain.generatedPCCPackexpBoot0B0FamilyCount,
+    generatedPCCPackexpBoot0B0RequiredFamilyCount:
+      recomputedChain.generatedPCCPackexpBoot0B0RequiredFamilyCount,
+    generatedPCCPackexpBoot0B0Families:
+      recomputedChain.generatedPCCPackexpBoot0B0Families,
+    generatedPCCPackexpBoot0B0AllRequiredFamiliesPresent:
+      recomputedChain.generatedPCCPackexpBoot0B0AllRequiredFamiliesPresent,
+    generatedPCCPackexpBoot0B0CoversIface:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversIface,
+    generatedPCCPackexpBoot0B0CoversSched:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversSched,
+    generatedPCCPackexpBoot0B0CoversNF:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversNF,
+    generatedPCCPackexpBoot0B0CoversTruthEval:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversTruthEval,
+    generatedPCCPackexpBoot0B0CoversRel:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversRel,
+    generatedPCCPackexpBoot0B0CoversCharge:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversCharge,
+    generatedPCCPackexpBoot0B0CoversObl:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversObl,
+    generatedPCCPackexpBoot0B0CoversArith:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversArith,
+    generatedPCCPackexpBoot0B0CoversMode:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversMode,
+    generatedPCCPackexpBoot0B0CoversRoute:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversRoute,
+    generatedPCCPackexpBoot0B0CoversHash:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversHash,
+    generatedPCCPackexpBoot0B0CoversImport:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversImport,
+
     kBundleEnvelopeKind: recomputedChain.kBundleEnvelopeKind,
     hardEnvelopeKind: recomputedChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: recomputedChain.finalIntegrationEnvelopeKind,
@@ -947,6 +1025,21 @@ function validateConcreteFinalCertificateChain0(actual, expected) {
     'generatedPCCPackexpBoot0LinkedToCoreDigestMap',
     'generatedPCCPackexpBoot0DigestMatchesGeneratedPackage',
     'generatedPCCPackexpBoot0DigestMatchesCoreDigestMap',
+
+    'generatedPCCPackexpBoot0B0Accepted',
+    'generatedPCCPackexpBoot0B0AllRequiredFamiliesPresent',
+    'generatedPCCPackexpBoot0B0CoversIface',
+    'generatedPCCPackexpBoot0B0CoversSched',
+    'generatedPCCPackexpBoot0B0CoversNF',
+    'generatedPCCPackexpBoot0B0CoversTruthEval',
+    'generatedPCCPackexpBoot0B0CoversRel',
+    'generatedPCCPackexpBoot0B0CoversCharge',
+    'generatedPCCPackexpBoot0B0CoversObl',
+    'generatedPCCPackexpBoot0B0CoversArith',
+    'generatedPCCPackexpBoot0B0CoversMode',
+    'generatedPCCPackexpBoot0B0CoversRoute',
+    'generatedPCCPackexpBoot0B0CoversHash',
+    'generatedPCCPackexpBoot0B0CoversImport',
 
     'finalCertificateUsesConcreteAcceptRun',
     'certificatePccPackDigestMatchesConcreteRun',

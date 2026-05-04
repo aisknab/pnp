@@ -268,6 +268,45 @@ export function summarizeConcreteFinalCertificatePublicStatusChain0({
     generatedPCCPackexpBoot0DigestMatchesCoreDigestMap:
       concreteCertificateChain.generatedPCCPackexpBoot0DigestMatchesCoreDigestMap,
 
+    generatedPCCPackexpBoot0B0Accepted:
+      concreteCertificateChain.generatedPCCPackexpBoot0B0Accepted,
+    generatedPCCPackexpBoot0B0Digest:
+      concreteCertificateChain.generatedPCCPackexpBoot0B0Digest,
+    generatedPCCPackexpBoot0B0CoverageDigest:
+      concreteCertificateChain.generatedPCCPackexpBoot0B0CoverageDigest,
+    generatedPCCPackexpBoot0B0FamilyCount:
+      concreteCertificateChain.generatedPCCPackexpBoot0B0FamilyCount,
+    generatedPCCPackexpBoot0B0RequiredFamilyCount:
+      concreteCertificateChain.generatedPCCPackexpBoot0B0RequiredFamilyCount,
+    generatedPCCPackexpBoot0B0Families:
+      concreteCertificateChain.generatedPCCPackexpBoot0B0Families,
+    generatedPCCPackexpBoot0B0AllRequiredFamiliesPresent:
+      concreteCertificateChain.generatedPCCPackexpBoot0B0AllRequiredFamiliesPresent,
+    generatedPCCPackexpBoot0B0CoversIface:
+      concreteCertificateChain.generatedPCCPackexpBoot0B0CoversIface,
+    generatedPCCPackexpBoot0B0CoversSched:
+      concreteCertificateChain.generatedPCCPackexpBoot0B0CoversSched,
+    generatedPCCPackexpBoot0B0CoversNF:
+      concreteCertificateChain.generatedPCCPackexpBoot0B0CoversNF,
+    generatedPCCPackexpBoot0B0CoversTruthEval:
+      concreteCertificateChain.generatedPCCPackexpBoot0B0CoversTruthEval,
+    generatedPCCPackexpBoot0B0CoversRel:
+      concreteCertificateChain.generatedPCCPackexpBoot0B0CoversRel,
+    generatedPCCPackexpBoot0B0CoversCharge:
+      concreteCertificateChain.generatedPCCPackexpBoot0B0CoversCharge,
+    generatedPCCPackexpBoot0B0CoversObl:
+      concreteCertificateChain.generatedPCCPackexpBoot0B0CoversObl,
+    generatedPCCPackexpBoot0B0CoversArith:
+      concreteCertificateChain.generatedPCCPackexpBoot0B0CoversArith,
+    generatedPCCPackexpBoot0B0CoversMode:
+      concreteCertificateChain.generatedPCCPackexpBoot0B0CoversMode,
+    generatedPCCPackexpBoot0B0CoversRoute:
+      concreteCertificateChain.generatedPCCPackexpBoot0B0CoversRoute,
+    generatedPCCPackexpBoot0B0CoversHash:
+      concreteCertificateChain.generatedPCCPackexpBoot0B0CoversHash,
+    generatedPCCPackexpBoot0B0CoversImport:
+      concreteCertificateChain.generatedPCCPackexpBoot0B0CoversImport,
+
     kBundleEnvelopeKind: concreteCertificateChain.kBundleEnvelopeKind,
     hardEnvelopeKind: concreteCertificateChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: concreteCertificateChain.finalIntegrationEnvelopeKind,
@@ -638,6 +677,45 @@ export async function CheckConcreteFinalCertificatePublicStatus0(
     generatedPCCPackexpBoot0DigestMatchesCoreDigestMap:
       recomputedChain.generatedPCCPackexpBoot0DigestMatchesCoreDigestMap,
 
+    generatedPCCPackexpBoot0B0Accepted:
+      recomputedChain.generatedPCCPackexpBoot0B0Accepted,
+    generatedPCCPackexpBoot0B0Digest:
+      recomputedChain.generatedPCCPackexpBoot0B0Digest,
+    generatedPCCPackexpBoot0B0CoverageDigest:
+      recomputedChain.generatedPCCPackexpBoot0B0CoverageDigest,
+    generatedPCCPackexpBoot0B0FamilyCount:
+      recomputedChain.generatedPCCPackexpBoot0B0FamilyCount,
+    generatedPCCPackexpBoot0B0RequiredFamilyCount:
+      recomputedChain.generatedPCCPackexpBoot0B0RequiredFamilyCount,
+    generatedPCCPackexpBoot0B0Families:
+      recomputedChain.generatedPCCPackexpBoot0B0Families,
+    generatedPCCPackexpBoot0B0AllRequiredFamiliesPresent:
+      recomputedChain.generatedPCCPackexpBoot0B0AllRequiredFamiliesPresent,
+    generatedPCCPackexpBoot0B0CoversIface:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversIface,
+    generatedPCCPackexpBoot0B0CoversSched:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversSched,
+    generatedPCCPackexpBoot0B0CoversNF:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversNF,
+    generatedPCCPackexpBoot0B0CoversTruthEval:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversTruthEval,
+    generatedPCCPackexpBoot0B0CoversRel:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversRel,
+    generatedPCCPackexpBoot0B0CoversCharge:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversCharge,
+    generatedPCCPackexpBoot0B0CoversObl:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversObl,
+    generatedPCCPackexpBoot0B0CoversArith:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversArith,
+    generatedPCCPackexpBoot0B0CoversMode:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversMode,
+    generatedPCCPackexpBoot0B0CoversRoute:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversRoute,
+    generatedPCCPackexpBoot0B0CoversHash:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversHash,
+    generatedPCCPackexpBoot0B0CoversImport:
+      recomputedChain.generatedPCCPackexpBoot0B0CoversImport,
+
     kBundleEnvelopeKind: recomputedChain.kBundleEnvelopeKind,
     hardEnvelopeKind: recomputedChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: recomputedChain.finalIntegrationEnvelopeKind,
@@ -907,6 +985,21 @@ function validateConcretePublicStatusChain0(actual, expected) {
     'generatedPCCPackexpBoot0LinkedToCoreDigestMap',
     'generatedPCCPackexpBoot0DigestMatchesGeneratedPackage',
     'generatedPCCPackexpBoot0DigestMatchesCoreDigestMap',
+
+    'generatedPCCPackexpBoot0B0Accepted',
+    'generatedPCCPackexpBoot0B0AllRequiredFamiliesPresent',
+    'generatedPCCPackexpBoot0B0CoversIface',
+    'generatedPCCPackexpBoot0B0CoversSched',
+    'generatedPCCPackexpBoot0B0CoversNF',
+    'generatedPCCPackexpBoot0B0CoversTruthEval',
+    'generatedPCCPackexpBoot0B0CoversRel',
+    'generatedPCCPackexpBoot0B0CoversCharge',
+    'generatedPCCPackexpBoot0B0CoversObl',
+    'generatedPCCPackexpBoot0B0CoversArith',
+    'generatedPCCPackexpBoot0B0CoversMode',
+    'generatedPCCPackexpBoot0B0CoversRoute',
+    'generatedPCCPackexpBoot0B0CoversHash',
+    'generatedPCCPackexpBoot0B0CoversImport',
 
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',

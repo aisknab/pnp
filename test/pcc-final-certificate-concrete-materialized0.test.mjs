@@ -5,6 +5,10 @@ import path from 'node:path';
 import { test } from 'node:test';
 
 import {
+  digestCanonical0,
+} from '../pcc-verifier-frag0.mjs';
+
+import {
   CheckConcreteMaterializedFinalCertificate0,
   makeConcreteMaterializedFinalCertificate0,
   summarizeConcreteFinalCertificateChain0,
@@ -109,6 +113,39 @@ test('CheckConcreteMaterializedFinalCertificate0 accepts a final certificate ove
   assert.equal(out.NF.generatedPCCPackexpBoot0LinkedToCoreDigestMap, true);
   assert.equal(out.NF.generatedPCCPackexpBoot0DigestMatchesGeneratedPackage, true);
   assert.equal(out.NF.generatedPCCPackexpBoot0DigestMatchesCoreDigestMap, true);
+
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0Accepted, true);
+  assert.match(out.NF.generatedPCCPackexpBoot0B0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpBoot0B0CoverageDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0FamilyCount, 12);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0RequiredFamilyCount, 12);
+  assert.deepEqual(out.NF.generatedPCCPackexpBoot0B0Families, [
+    'BIface',
+    'BSched',
+    'BNF',
+    'BTruthEval',
+    'BRel',
+    'BCharge',
+    'BObl',
+    'BArith',
+    'BMode',
+    'BRoute',
+    'BHash',
+    'BImport',
+  ]);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0AllRequiredFamiliesPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversIface, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversSched, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversNF, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversTruthEval, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversRel, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversCharge, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversObl, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversArith, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversMode, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversRoute, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversHash, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversImport, true);
 
   assert.equal(out.NF.finalCertificateUsesConcreteAcceptRun, true);
   assert.equal(out.NF.certificatePccPackDigestMatchesConcreteRun, true);
@@ -437,4 +474,43 @@ test('CheckConcreteMaterializedFinalCertificate0 rejects missing CheckGeneratedP
   assert.equal(out.checker, 'CheckConcreteMaterializedFinalCertificate0');
   assert.equal(out.Coord, 'CheckConcreteMaterializedFinalCertificate0.concreteChain');
   assert.deepEqual(out.Path, ['ConcreteChain', 'checkGeneratedPCCPackexpRecordPresent']);
+});
+
+test('CheckConcreteMaterializedFinalCertificate0 rejects stale B0 row-family evidence', async () => {
+  const envelope = await makeConcreteMaterializedFinalCertificate0();
+
+  const record = envelope.ConcreteGeneratedAcceptRunEnvelope.CheckGeneratedPCCPackexpRecord;
+  const nf = {
+    ...record.NF,
+    boot0B0CoversTruthEval: false,
+  };
+
+  envelope.ConcreteGeneratedAcceptRunEnvelope.CheckGeneratedPCCPackexpRecord = {
+    ...record,
+    NF: nf,
+    nf,
+    Digest: digestCanonical0(nf),
+    digest: digestCanonical0(nf),
+  };
+
+  envelope.ConcreteChain = summarizeConcreteFinalCertificateChain0({
+    concreteGeneratedAcceptRunEnvelope: envelope.ConcreteGeneratedAcceptRunEnvelope,
+    finalCertificateEnvelope: envelope.FinalCertificateEnvelope,
+  });
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckConcreteMaterializedFinalCertificate0(envelope, {
+    checkConcreteGeneratedAcceptRun: false,
+    checkFinalCertificate: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedFinalCertificate0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedFinalCertificate0.concreteChain');
+  assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpBoot0B0CoversTruthEval']);
 });
