@@ -19,7 +19,26 @@ import {
   CheckMaterializedBoot0,
 } from './pcc-boot-materialized0.mjs';
 
+import {
+  CheckBootBatch0,
+} from './pcc-boot0.mjs';
+
 const CHECKER_VERSION = 0;
+
+const GENERATED_PCCPACK_BOOT_B0_REQUIRED_FAMILIES0 = Object.freeze([
+  'BIface',
+  'BSched',
+  'BNF',
+  'BTruthEval',
+  'BRel',
+  'BCharge',
+  'BObl',
+  'BArith',
+  'BMode',
+  'BRoute',
+  'BHash',
+  'BImport',
+]);
 
 const GENERATED_CORE_FORBIDDEN_KEYS0 = Object.freeze([
   'AcceptRun',
@@ -384,6 +403,26 @@ export async function CheckGeneratedPCCPackexp0(
     boot0NoFixtureMarkers: boot0NF?.noFixtureMarkers ?? null,
     boot0BootBatchDigest: boot0NF?.bootBatchDigest ?? null,
     boot0BootAuditDigest: boot0NF?.bootAuditDigest ?? null,
+    boot0B0Accepted: boot0NF?.boot0B0Accepted ?? null,
+    boot0B0Digest: boot0NF?.boot0B0Digest ?? null,
+    boot0B0CoverageDigest: boot0NF?.boot0B0CoverageDigest ?? null,
+    boot0B0FamilyCount: boot0NF?.boot0B0FamilyCount ?? null,
+    boot0B0RequiredFamilyCount: boot0NF?.boot0B0RequiredFamilyCount ?? null,
+    boot0B0Families: boot0NF?.boot0B0Families ?? null,
+    boot0B0AllRequiredFamiliesPresent: boot0NF?.boot0B0AllRequiredFamiliesPresent ?? null,
+    boot0B0CoversIface: boot0NF?.boot0B0CoversIface ?? null,
+    boot0B0CoversSched: boot0NF?.boot0B0CoversSched ?? null,
+    boot0B0CoversNF: boot0NF?.boot0B0CoversNF ?? null,
+    boot0B0CoversTruthEval: boot0NF?.boot0B0CoversTruthEval ?? null,
+    boot0B0CoversRel: boot0NF?.boot0B0CoversRel ?? null,
+    boot0B0CoversCharge: boot0NF?.boot0B0CoversCharge ?? null,
+    boot0B0CoversObl: boot0NF?.boot0B0CoversObl ?? null,
+    boot0B0CoversArith: boot0NF?.boot0B0CoversArith ?? null,
+    boot0B0CoversMode: boot0NF?.boot0B0CoversMode ?? null,
+    boot0B0CoversRoute: boot0NF?.boot0B0CoversRoute ?? null,
+    boot0B0CoversHash: boot0NF?.boot0B0CoversHash ?? null,
+    boot0B0CoversImport: boot0NF?.boot0B0CoversImport ?? null,
+
     boot0LinkedToPCCPack: boot0NF?.boot0LinkedToPCCPack ?? null,
     boot0LinkedToCoreDigestMap: boot0NF?.boot0LinkedToCoreDigestMap ?? null,
 
@@ -624,6 +663,70 @@ function scanForbiddenCoreKeys0(value, pathNow, hits) {
   }
 }
 
+async function validateGeneratedBootBatch0(batch) {
+  const record = await CheckBootBatch0(batch);
+  const result = recordToValidation0(record, ['GeneratedPCCPack', 'Boot0', 'B0']);
+
+  if (!result.ok) {
+    return validationReject0(result.path, 'CheckBootBatch0 rejected generated package B0', {
+      inner: result.witness?.detail?.inner ?? result.witness,
+    });
+  }
+
+  const nf = record.NF ?? record.nf;
+  const coverage = nf?.coverage ?? null;
+  const families = Array.isArray(coverage?.families)
+    ? coverage.families.map((entry) => entry.family)
+    : [];
+
+  const missing = GENERATED_PCCPACK_BOOT_B0_REQUIRED_FAMILIES0.filter((family) => !families.includes(family));
+
+  if (missing.length > 0) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'B0', 'coverage'], 'Generated package B0 is missing required bootstrap row families', {
+      missing,
+      families,
+    });
+  }
+
+  const flags = Object.fromEntries(
+    GENERATED_PCCPACK_BOOT_B0_REQUIRED_FAMILIES0.map((family) => [
+      boot0FamilyFlagName0(family),
+      families.includes(family),
+    ]),
+  );
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackB0Coverage0NF',
+    boot0B0Accepted: true,
+    boot0B0Digest: record.Digest ?? record.digest,
+    boot0B0CoverageDigest: digestCanonical0(coverage),
+    boot0B0FamilyCount: families.length,
+    boot0B0RequiredFamilyCount: GENERATED_PCCPACK_BOOT_B0_REQUIRED_FAMILIES0.length,
+    boot0B0Families: families,
+    boot0B0AllRequiredFamiliesPresent: missing.length === 0,
+    ...flags,
+  });
+}
+
+function boot0FamilyFlagName0(family) {
+  const map = {
+    BIface: 'boot0B0CoversIface',
+    BSched: 'boot0B0CoversSched',
+    BNF: 'boot0B0CoversNF',
+    BTruthEval: 'boot0B0CoversTruthEval',
+    BRel: 'boot0B0CoversRel',
+    BCharge: 'boot0B0CoversCharge',
+    BObl: 'boot0B0CoversObl',
+    BArith: 'boot0B0CoversArith',
+    BMode: 'boot0B0CoversMode',
+    BRoute: 'boot0B0CoversRoute',
+    BHash: 'boot0B0CoversHash',
+    BImport: 'boot0B0CoversImport',
+  };
+
+  return map[family] ?? `boot0B0Covers${family}`;
+}
+
 async function validateGeneratedBoot0(generatedPackage) {
   const materializedPCCPack = generatedPackage?.MaterializedPCCPackEnvelope ?? generatedPackage?.MaterializedPCCPack ?? null;
   const pccPack = materializedPCCPack?.PCCPack ?? generatedPackage?.PCCPack ?? null;
@@ -633,6 +736,12 @@ async function validateGeneratedBoot0(generatedPackage) {
     return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'MaterializedBoot0'], 'GeneratedPCCPack must include materialized Boot0', {
       actual: typeof boot0,
     });
+  }
+
+  const bootBatch = await validateGeneratedBootBatch0(boot0.B0);
+
+  if (!bootBatch.ok) {
+    return bootBatch;
   }
 
   const bootRecord = await CheckMaterializedBoot0(boot0);
@@ -689,6 +798,7 @@ async function validateGeneratedBoot0(generatedPackage) {
     noFixtureMarkers: bootRecordNF.noFixtureMarkers === true,
     bootBatchDigest: bootRecordNF.bootBatchDigest ?? null,
     bootAuditDigest: bootRecordNF.bootAuditDigest ?? null,
+    ...bootBatch.nf,
     boot0LinkedToPCCPack: true,
     boot0LinkedToCoreDigestMap: true,
   });

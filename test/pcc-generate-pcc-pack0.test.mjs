@@ -51,6 +51,39 @@ test('CheckGeneratedPCCPackexp0 accepts generated package with accepted CheckPCC
   assert.equal(out.NF.boot0NoFixtureMarkers, true);
   assert.match(out.NF.boot0BootBatchDigest.hex, /^[0-9a-f]{64}$/);
   assert.match(out.NF.boot0BootAuditDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.boot0B0Accepted, true);
+  assert.match(out.NF.boot0B0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.boot0B0CoverageDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.boot0B0FamilyCount, 12);
+  assert.equal(out.NF.boot0B0RequiredFamilyCount, 12);
+  assert.deepEqual(out.NF.boot0B0Families, [
+    'BIface',
+    'BSched',
+    'BNF',
+    'BTruthEval',
+    'BRel',
+    'BCharge',
+    'BObl',
+    'BArith',
+    'BMode',
+    'BRoute',
+    'BHash',
+    'BImport',
+  ]);
+  assert.equal(out.NF.boot0B0AllRequiredFamiliesPresent, true);
+  assert.equal(out.NF.boot0B0CoversIface, true);
+  assert.equal(out.NF.boot0B0CoversSched, true);
+  assert.equal(out.NF.boot0B0CoversNF, true);
+  assert.equal(out.NF.boot0B0CoversTruthEval, true);
+  assert.equal(out.NF.boot0B0CoversRel, true);
+  assert.equal(out.NF.boot0B0CoversCharge, true);
+  assert.equal(out.NF.boot0B0CoversObl, true);
+  assert.equal(out.NF.boot0B0CoversArith, true);
+  assert.equal(out.NF.boot0B0CoversMode, true);
+  assert.equal(out.NF.boot0B0CoversRoute, true);
+  assert.equal(out.NF.boot0B0CoversHash, true);
+  assert.equal(out.NF.boot0B0CoversImport, true);
+
   assert.equal(out.NF.boot0LinkedToPCCPack, true);
   assert.equal(out.NF.boot0LinkedToCoreDigestMap, true);
 
@@ -212,4 +245,41 @@ test('CheckGeneratedPCCPackexp0 rejects generated package whose Boot0 core diges
   assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
   assert.equal(out.Coord, 'CheckGeneratedPCCPackexp0.Boot0');
   assert.deepEqual(out.Path, ['GeneratedPCCPack', 'PCCPack', 'Core', 'artefactDigests', 'Boot0']);
+});
+
+test('CheckGeneratedPCCPackexp0 rejects generated package missing a B0 row family', async () => {
+  const envelope = await makeGeneratedPCCPackexp0();
+
+  envelope.GeneratedPCCPack = {
+    ...envelope.GeneratedPCCPack,
+    MaterializedPCCPackEnvelope: {
+      ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope,
+      MaterializedBoot0: {
+        ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.MaterializedBoot0,
+        B0: {
+          ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.MaterializedBoot0.B0,
+          rows: envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.MaterializedBoot0.B0.rows.filter((row) => (
+            row.PackageID !== 'BTruthEval'
+          )),
+        },
+      },
+    },
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    generatedPackageDigest: undefined,
+  };
+
+  const out = await CheckGeneratedPCCPackexp0(envelope, {
+    checkDeterministicGenerator: false,
+    checkCheckPCCPackexpRecord: false,
+    checkPublicClaimBoundary: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
+  assert.equal(out.Coord, 'CheckGeneratedPCCPackexp0.Boot0');
+  assert.deepEqual(out.Path, ['GeneratedPCCPack', 'Boot0', 'B0']);
 });
