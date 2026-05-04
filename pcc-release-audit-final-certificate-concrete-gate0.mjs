@@ -429,6 +429,44 @@ export async function CheckReleaseAuditConcreteFinalCertificateGate0(
       concreteStatus.ConcreteChain.generatedPCCPackexpBoot0DigestMatchesGeneratedPackage,
     generatedPCCPackexpBoot0DigestMatchesCoreDigestMap:
       concreteStatus.ConcreteChain.generatedPCCPackexpBoot0DigestMatchesCoreDigestMap,
+    generatedPCCPackexpBoot0B0Accepted:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0Accepted,
+    generatedPCCPackexpBoot0B0Digest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0Digest,
+    generatedPCCPackexpBoot0B0CoverageDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0CoverageDigest,
+    generatedPCCPackexpBoot0B0FamilyCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0FamilyCount,
+    generatedPCCPackexpBoot0B0RequiredFamilyCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0RequiredFamilyCount,
+    generatedPCCPackexpBoot0B0Families:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0Families,
+    generatedPCCPackexpBoot0B0AllRequiredFamiliesPresent:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0AllRequiredFamiliesPresent,
+    generatedPCCPackexpBoot0B0CoversIface:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0CoversIface,
+    generatedPCCPackexpBoot0B0CoversSched:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0CoversSched,
+    generatedPCCPackexpBoot0B0CoversNF:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0CoversNF,
+    generatedPCCPackexpBoot0B0CoversTruthEval:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0CoversTruthEval,
+    generatedPCCPackexpBoot0B0CoversRel:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0CoversRel,
+    generatedPCCPackexpBoot0B0CoversCharge:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0CoversCharge,
+    generatedPCCPackexpBoot0B0CoversObl:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0CoversObl,
+    generatedPCCPackexpBoot0B0CoversArith:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0CoversArith,
+    generatedPCCPackexpBoot0B0CoversMode:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0CoversMode,
+    generatedPCCPackexpBoot0B0CoversRoute:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0CoversRoute,
+    generatedPCCPackexpBoot0B0CoversHash:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0CoversHash,
+    generatedPCCPackexpBoot0B0CoversImport:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBoot0B0CoversImport,
 
     finalCertificateUsesConcreteAcceptRun: concreteStatus.ConcreteChain.finalCertificateUsesConcreteAcceptRun,
     statusUsesConcreteFinalCertificate: concreteStatus.ConcreteChain.statusUsesConcreteFinalCertificate,
@@ -732,6 +770,20 @@ function validateConcretePublicConclusionAlignment0(envelope) {
     'generatedPCCPackexpBoot0LinkedToCoreDigestMap',
     'generatedPCCPackexpBoot0DigestMatchesGeneratedPackage',
     'generatedPCCPackexpBoot0DigestMatchesCoreDigestMap',
+    'generatedPCCPackexpBoot0B0Accepted',
+    'generatedPCCPackexpBoot0B0AllRequiredFamiliesPresent',
+    'generatedPCCPackexpBoot0B0CoversIface',
+    'generatedPCCPackexpBoot0B0CoversSched',
+    'generatedPCCPackexpBoot0B0CoversNF',
+    'generatedPCCPackexpBoot0B0CoversTruthEval',
+    'generatedPCCPackexpBoot0B0CoversRel',
+    'generatedPCCPackexpBoot0B0CoversCharge',
+    'generatedPCCPackexpBoot0B0CoversObl',
+    'generatedPCCPackexpBoot0B0CoversArith',
+    'generatedPCCPackexpBoot0B0CoversMode',
+    'generatedPCCPackexpBoot0B0CoversRoute',
+    'generatedPCCPackexpBoot0B0CoversHash',
+    'generatedPCCPackexpBoot0B0CoversImport',
 
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',

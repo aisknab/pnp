@@ -165,6 +165,38 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 accepts attached release au
   assert.equal(out.NF.generatedPCCPackexpBoot0LinkedToCoreDigestMap, true);
   assert.equal(out.NF.generatedPCCPackexpBoot0DigestMatchesGeneratedPackage, true);
   assert.equal(out.NF.generatedPCCPackexpBoot0DigestMatchesCoreDigestMap, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0Accepted, true);
+  assert.match(out.NF.generatedPCCPackexpBoot0B0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpBoot0B0CoverageDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0FamilyCount, 12);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0RequiredFamilyCount, 12);
+  assert.deepEqual(out.NF.generatedPCCPackexpBoot0B0Families, [
+    'BIface',
+    'BSched',
+    'BNF',
+    'BTruthEval',
+    'BRel',
+    'BCharge',
+    'BObl',
+    'BArith',
+    'BMode',
+    'BRoute',
+    'BHash',
+    'BImport',
+  ]);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0AllRequiredFamiliesPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversIface, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversSched, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversNF, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversTruthEval, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversRel, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversCharge, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversObl, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversArith, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversMode, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversRoute, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversHash, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversImport, true);
 
   assert.equal(out.NF.finalCertificateUsesConcreteAcceptRun, true);
   assert.equal(out.NF.statusUsesConcreteFinalCertificate, true);
@@ -539,5 +571,38 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing Boot0 bridg
     'ConcreteFinalCertificatePublicStatusEnvelope',
     'ConcreteChain',
     'generatedPCCPackexpBoot0',
+  ]);
+});
+
+test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing B0 row-family coverage', async () => {
+  const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
+  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+    ReleaseAuditRecord: releaseAuditRecord,
+    runReleaseAudit: false,
+  });
+
+  envelope.ConcreteFinalCertificatePublicStatusEnvelope.ConcreteChain = {
+    ...envelope.ConcreteFinalCertificatePublicStatusEnvelope.ConcreteChain,
+    generatedPCCPackexpBoot0B0CoversTruthEval: false,
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concretePublicStatusEnvelopeDigest: undefined,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+    checkConcretePublicStatus: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAuditConcreteFinalCertificateGate0');
+  assert.equal(out.Coord, 'CheckReleaseAuditConcreteFinalCertificateGate0.PublicConclusion');
+  assert.deepEqual(out.Path, [
+    'ConcreteFinalCertificatePublicStatusEnvelope',
+    'ConcreteChain',
+    'generatedPCCPackexpBoot0B0CoversTruthEval',
   ]);
 });
