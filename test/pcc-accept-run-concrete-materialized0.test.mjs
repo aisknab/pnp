@@ -117,6 +117,38 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 accepts an accept run over th
   assert.match(out.NF.generatedPCCPackexpBoot0BootAuditDigest.hex, /^[0-9a-f]{64}$/);
   assert.equal(out.NF.generatedPCCPackexpBoot0LinkedToPCCPack, true);
   assert.equal(out.NF.generatedPCCPackexpBoot0LinkedToCoreDigestMap, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0Accepted, true);
+  assert.match(out.NF.generatedPCCPackexpBoot0B0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpBoot0B0CoverageDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0FamilyCount, 12);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0RequiredFamilyCount, 12);
+  assert.deepEqual(out.NF.generatedPCCPackexpBoot0B0Families, [
+    'BIface',
+    'BSched',
+    'BNF',
+    'BTruthEval',
+    'BRel',
+    'BCharge',
+    'BObl',
+    'BArith',
+    'BMode',
+    'BRoute',
+    'BHash',
+    'BImport',
+  ]);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0AllRequiredFamiliesPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversIface, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversSched, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversNF, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversTruthEval, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversRel, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversCharge, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversObl, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversArith, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversMode, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversRoute, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversHash, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversImport, true);
 
   assert.equal(out.Ledger.some((entry) => (
     entry.phase === 'CheckGeneratedPCCPackexp0' &&

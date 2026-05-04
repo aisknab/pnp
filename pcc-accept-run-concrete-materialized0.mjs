@@ -744,6 +744,102 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
         : null
     ),
 
+    generatedPCCPackexpBoot0B0Accepted: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0B0Accepted === true
+        : null
+    ),
+    generatedPCCPackexpBoot0B0Digest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0B0Digest
+        : null
+    ),
+    generatedPCCPackexpBoot0B0CoverageDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0B0CoverageDigest
+        : null
+    ),
+    generatedPCCPackexpBoot0B0FamilyCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0B0FamilyCount
+        : null
+    ),
+    generatedPCCPackexpBoot0B0RequiredFamilyCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0B0RequiredFamilyCount
+        : null
+    ),
+    generatedPCCPackexpBoot0B0Families: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0B0Families
+        : null
+    ),
+    generatedPCCPackexpBoot0B0AllRequiredFamiliesPresent: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0B0AllRequiredFamiliesPresent === true
+        : null
+    ),
+    generatedPCCPackexpBoot0B0CoversIface: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0B0CoversIface === true
+        : null
+    ),
+    generatedPCCPackexpBoot0B0CoversSched: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0B0CoversSched === true
+        : null
+    ),
+    generatedPCCPackexpBoot0B0CoversNF: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0B0CoversNF === true
+        : null
+    ),
+    generatedPCCPackexpBoot0B0CoversTruthEval: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0B0CoversTruthEval === true
+        : null
+    ),
+    generatedPCCPackexpBoot0B0CoversRel: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0B0CoversRel === true
+        : null
+    ),
+    generatedPCCPackexpBoot0B0CoversCharge: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0B0CoversCharge === true
+        : null
+    ),
+    generatedPCCPackexpBoot0B0CoversObl: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0B0CoversObl === true
+        : null
+    ),
+    generatedPCCPackexpBoot0B0CoversArith: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0B0CoversArith === true
+        : null
+    ),
+    generatedPCCPackexpBoot0B0CoversMode: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0B0CoversMode === true
+        : null
+    ),
+    generatedPCCPackexpBoot0B0CoversRoute: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0B0CoversRoute === true
+        : null
+    ),
+    generatedPCCPackexpBoot0B0CoversHash: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0B0CoversHash === true
+        : null
+    ),
+    generatedPCCPackexpBoot0B0CoversImport: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0B0CoversImport === true
+        : null
+    ),
+
     rowsEnvelopeKind: recomputedChain.rowsEnvelopeKind,
     localPackagesEnvelopeKind: recomputedChain.localPackagesEnvelopeKind,
     globalFirewallsEnvelopeKind: recomputedChain.globalFirewallsEnvelopeKind,
@@ -1222,6 +1318,76 @@ function validateGeneratedPCCPackexpEnvelope0({
   if (!(typeof generatedNF.boot0KernelRuleCount === 'number' && generatedNF.boot0KernelRuleCount > 0)) {
     return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'boot0KernelRuleCount'], 'GeneratedPCCPackexp0 NF must certify nonempty KernelSeed0 rule set', {
       actual: generatedNF.boot0KernelRuleCount,
+    });
+  }
+
+  for (const field of [
+    'boot0B0Accepted',
+    'boot0B0AllRequiredFamiliesPresent',
+    'boot0B0CoversIface',
+    'boot0B0CoversSched',
+    'boot0B0CoversNF',
+    'boot0B0CoversTruthEval',
+    'boot0B0CoversRel',
+    'boot0B0CoversCharge',
+    'boot0B0CoversObl',
+    'boot0B0CoversArith',
+    'boot0B0CoversMode',
+    'boot0B0CoversRoute',
+    'boot0B0CoversHash',
+    'boot0B0CoversImport',
+  ]) {
+    if (generatedNF[field] !== true) {
+      return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', field], `GeneratedPCCPackexp0 NF must certify ${field}`, {
+        actual: generatedNF[field],
+      });
+    }
+  }
+
+  if (!(typeof generatedNF.boot0B0FamilyCount === 'number' && generatedNF.boot0B0FamilyCount >= 12)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'boot0B0FamilyCount'], 'GeneratedPCCPackexp0 NF must certify complete B0 family count', {
+      actual: generatedNF.boot0B0FamilyCount,
+    });
+  }
+
+  if (!(typeof generatedNF.boot0B0RequiredFamilyCount === 'number' && generatedNF.boot0B0RequiredFamilyCount === 12)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'boot0B0RequiredFamilyCount'], 'GeneratedPCCPackexp0 NF must certify expected B0 required family count', {
+      actual: generatedNF.boot0B0RequiredFamilyCount,
+    });
+  }
+
+  if (!Array.isArray(generatedNF.boot0B0Families)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'boot0B0Families'], 'GeneratedPCCPackexp0 NF must expose B0 family list', {
+      actual: typeof generatedNF.boot0B0Families,
+    });
+  }
+
+  for (const family of [
+    'BIface',
+    'BSched',
+    'BNF',
+    'BTruthEval',
+    'BRel',
+    'BCharge',
+    'BObl',
+    'BArith',
+    'BMode',
+    'BRoute',
+    'BHash',
+    'BImport',
+  ]) {
+    if (!generatedNF.boot0B0Families.includes(family)) {
+      return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'boot0B0Families'], 'GeneratedPCCPackexp0 NF B0 family list is missing a required family', {
+        family,
+        actual: generatedNF.boot0B0Families,
+      });
+    }
+  }
+
+  if (!sameDigestHex0(generatedNF.boot0B0Digest, generatedNF.boot0BootBatchDigest)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'boot0B0Digest'], 'GeneratedPCCPackexp0 NF B0 digest must match Boot0 boot-batch digest', {
+      expected: generatedNF.boot0BootBatchDigest,
+      actual: generatedNF.boot0B0Digest,
     });
   }
 
