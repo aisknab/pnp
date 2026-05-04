@@ -618,6 +618,77 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
         : null
     ),
 
+    generatedPCCPackexpBoot0: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).generatedPackageBoot0 === true
+        : null
+    ),
+    generatedPCCPackexpBoot0Accepted: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0Accepted === true
+        : null
+    ),
+    generatedPCCPackexpBoot0Kind: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0Kind
+        : null
+    ),
+    generatedPCCPackexpBoot0Digest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0Digest
+        : null
+    ),
+    generatedPCCPackexpBoot0CheckDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0CheckDigest
+        : null
+    ),
+    generatedPCCPackexpBoot0CanonicalByteDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0CanonicalByteDigest
+        : null
+    ),
+    generatedPCCPackexpBoot0RowCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0RowCount
+        : null
+    ),
+    generatedPCCPackexpBoot0KernelRuleCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0KernelRuleCount
+        : null
+    ),
+    generatedPCCPackexpBoot0JsonMaterialized: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0JsonMaterialized === true
+        : null
+    ),
+    generatedPCCPackexpBoot0NoFixtureMarkers: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0NoFixtureMarkers === true
+        : null
+    ),
+    generatedPCCPackexpBoot0BootBatchDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0BootBatchDigest
+        : null
+    ),
+    generatedPCCPackexpBoot0BootAuditDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0BootAuditDigest
+        : null
+    ),
+    generatedPCCPackexpBoot0LinkedToPCCPack: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0LinkedToPCCPack === true
+        : null
+    ),
+    generatedPCCPackexpBoot0LinkedToCoreDigestMap: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).boot0LinkedToCoreDigestMap === true
+        : null
+    ),
+
     rowsEnvelopeKind: recomputedChain.rowsEnvelopeKind,
     localPackagesEnvelopeKind: recomputedChain.localPackagesEnvelopeKind,
     globalFirewallsEnvelopeKind: recomputedChain.globalFirewallsEnvelopeKind,
@@ -1060,6 +1131,58 @@ function validateGeneratedPCCPackexpEnvelope0({
     return validationReject0(['GeneratedPCCPackexpEnvelope', 'CheckPCCPackexpRecord'], 'CheckGeneratedPCCPackexp0 NF must digest the materialized CheckPCCPackexpRecord', {
       expected: digestFromRecord0(checkPCCPackexpRecord),
       actual: generatedNF?.checkPCCPackexpRecordDigest ?? null,
+    });
+  }
+
+  for (const field of [
+    'generatedPackageBoot0',
+    'boot0Accepted',
+    'boot0JsonMaterialized',
+    'boot0NoFixtureMarkers',
+    'boot0LinkedToPCCPack',
+    'boot0LinkedToCoreDigestMap',
+  ]) {
+    if (generatedNF[field] !== true) {
+      return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', field], `GeneratedPCCPackexp0 NF must certify ${field}`, {
+        actual: generatedNF[field],
+      });
+    }
+  }
+
+  if (generatedNF.boot0Kind !== 'Boot0') {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'boot0Kind'], 'GeneratedPCCPackexp0 NF must certify Boot0 kind', {
+      actual: generatedNF.boot0Kind,
+    });
+  }
+
+  if (!(typeof generatedNF.boot0RowCount === 'number' && generatedNF.boot0RowCount > 0)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'boot0RowCount'], 'GeneratedPCCPackexp0 NF must certify nonempty Boot0 row batch', {
+      actual: generatedNF.boot0RowCount,
+    });
+  }
+
+  if (!(typeof generatedNF.boot0KernelRuleCount === 'number' && generatedNF.boot0KernelRuleCount > 0)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'boot0KernelRuleCount'], 'GeneratedPCCPackexp0 NF must certify nonempty KernelSeed0 rule set', {
+      actual: generatedNF.boot0KernelRuleCount,
+    });
+  }
+
+  const generatedBoot0 = generatedPCCPackexpEnvelope.GeneratedPCCPack?.MaterializedPCCPackEnvelope?.MaterializedBoot0 ?? null;
+
+  if (!sameDigestHex0(generatedNF.boot0Digest, digestCanonical0(generatedBoot0))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'boot0Digest'], 'GeneratedPCCPackexp0 NF boot0Digest must match generated package Boot0 bytes', {
+      expected: digestCanonical0(generatedBoot0),
+      actual: generatedNF.boot0Digest,
+    });
+  }
+
+  if (!sameDigestHex0(
+    generatedNF.boot0Digest,
+    generatedPCCPackexpEnvelope.GeneratedPCCPack?.MaterializedPCCPackEnvelope?.PCCPack?.Core?.artefactDigests?.Boot0 ?? null,
+  )) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'GeneratedPCCPack', 'PCCPack', 'Core', 'artefactDigests', 'Boot0'], 'GeneratedPCCPackexp0 Boot0 digest must match PCCPack core digest map', {
+      expected: generatedNF.boot0Digest,
+      actual: generatedPCCPackexpEnvelope.GeneratedPCCPack?.MaterializedPCCPackEnvelope?.PCCPack?.Core?.artefactDigests?.Boot0 ?? null,
     });
   }
 
