@@ -88,6 +88,7 @@ export function makeGeneratePCCPackConfig0(overrides = {}) {
     checkGeneratedPackageCoreBoundary: true,
     checkMaterializedBoot0: true,
     checkKernelSeed0: true,
+    checkCodecDigest0: true,
     checkCheckPCCPackexpRecord: true,
     checkPublicClaimBoundary: true,
     checkJsonMaterialized: true,
@@ -190,6 +191,7 @@ export async function CheckGeneratedPCCPackexp0(
   let coreBoundaryNF = null;
   let boot0NF = null;
   let kernelSeedNF = null;
+  let codecDigestNF = null;
   let freshCheckPCCPackexpRecord = null;
   let recordAlignmentNF = null;
 
@@ -315,6 +317,28 @@ export async function CheckGeneratedPCCPackexp0(
     }
 
     kernelSeedNF = kernelSeed.nf;
+  }
+
+  if (cfg.checkCodecDigest0 === true) {
+    const codecDigest = validateGeneratedCodecDigest0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'CodecDigest0',
+      status: codecDigest.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(codecDigest.nf ?? codecDigest.witness ?? null),
+    });
+
+    if (!codecDigest.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.CodecDigest0`,
+        path: codecDigest.path,
+        witness: codecDigest.witness,
+        ledger,
+      });
+    }
+
+    codecDigestNF = codecDigest.nf;
   }
 
   if (cfg.checkCheckPCCPackexpRecord === true) {
@@ -510,6 +534,29 @@ export async function CheckGeneratedPCCPackexp0(
     kernelSeed0ProofRefsHashIndependent: kernelSeedNF?.kernelSeed0ProofRefsHashIndependent ?? null,
     kernelSeed0PiBootDigestMatches: kernelSeedNF?.kernelSeed0PiBootDigestMatches ?? null,
 
+    generatedPackageCodec0: codecDigestNF?.codec0 ?? null,
+    codec0Accepted: codecDigestNF?.codec0Accepted ?? null,
+    codec0Kind: codecDigestNF?.codec0Kind ?? null,
+    codec0Digest: codecDigestNF?.codec0Digest ?? null,
+    codec0Canonical: codecDigestNF?.codec0Canonical ?? null,
+    codec0NaturalEncoding: codecDigestNF?.codec0NaturalEncoding ?? null,
+    codec0IntegerEncoding: codecDigestNF?.codec0IntegerEncoding ?? null,
+    codec0StringEncoding: codecDigestNF?.codec0StringEncoding ?? null,
+    codec0TopLevelConsumesAllBytes: codecDigestNF?.codec0TopLevelConsumesAllBytes ?? null,
+    codec0NormalFormSerialization: codecDigestNF?.codec0NormalFormSerialization ?? null,
+    codec0PiBootDigestMatches: codecDigestNF?.codec0PiBootDigestMatches ?? null,
+
+    generatedPackageDigest0: codecDigestNF?.digest0 ?? null,
+    digest0Accepted: codecDigestNF?.digest0Accepted ?? null,
+    digest0Kind: codecDigestNF?.digest0Kind ?? null,
+    digest0Digest: codecDigestNF?.digest0Digest ?? null,
+    digest0Alg: codecDigestNF?.digest0Alg ?? null,
+    digest0Bytes: codecDigestNF?.digest0Bytes ?? null,
+    digest0EqualityNotObjectEquality: codecDigestNF?.digest0EqualityNotObjectEquality ?? null,
+    digest0FullKeyComparisonAfterHashLookup:
+      codecDigestNF?.digest0FullKeyComparisonAfterHashLookup ?? null,
+    digest0PiBootDigestMatches: codecDigestNF?.digest0PiBootDigestMatches ?? null,
+
     generatedPackageKind: envelope.GeneratedPCCPack.kind ?? null,
     generatedPackageDigest: digestCanonical0(envelope.GeneratedPCCPack),
 
@@ -606,6 +653,7 @@ function validateConfig0(config) {
     'checkGeneratedPackageCoreBoundary',
     'checkMaterializedBoot0',
     'checkKernelSeed0',
+    'checkCodecDigest0',
     'checkCheckPCCPackexpRecord',
     'checkPublicClaimBoundary',
     'checkJsonMaterialized',
@@ -746,6 +794,163 @@ function scanForbiddenCoreKeys0(value, pathNow, hits) {
 
     scanForbiddenCoreKeys0(child, childPath, hits);
   }
+}
+
+function validateGeneratedCodecDigest0(generatedPackage) {
+  const materializedPCCPack = generatedPackage?.MaterializedPCCPackEnvelope ?? generatedPackage?.MaterializedPCCPack ?? null;
+  const boot0 = materializedPCCPack?.MaterializedBoot0 ?? materializedPCCPack?.PCCPack?.Boot0 ?? null;
+  const codec0 = boot0?.Codec0 ?? null;
+  const digest0 = boot0?.Digest0 ?? null;
+
+  if (!isPlainObject(codec0)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Codec0'], 'GeneratedPCCPack must include concrete Codec0', {
+      actual: typeof codec0,
+    });
+  }
+
+  if (codec0.kind !== undefined && codec0.kind !== 'Codec0') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Codec0', 'kind'], 'Codec0 kind mismatch', {
+      actual: codec0.kind,
+    });
+  }
+
+  if (codec0.canonical !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Codec0', 'canonical'], 'Codec0 must require canonical encoding', {
+      actual: codec0.canonical,
+    });
+  }
+
+  if (codec0.naturalEncoding !== 'u32be-length-shortest-big-endian-magnitude') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Codec0', 'naturalEncoding'], 'Codec0 natural encoding must be shortest big-endian magnitude with u32be length', {
+      actual: codec0.naturalEncoding,
+    });
+  }
+
+  if (codec0.integerEncoding !== 'sign-byte-plus-canonical-natural-no-negative-zero') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Codec0', 'integerEncoding'], 'Codec0 integer encoding must reject negative zero', {
+      actual: codec0.integerEncoding,
+    });
+  }
+
+  if (codec0.stringEncoding !== 'utf8-nfc-length-prefixed') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Codec0', 'stringEncoding'], 'Codec0 string encoding must be UTF-8 NFC length-prefixed', {
+      actual: codec0.stringEncoding,
+    });
+  }
+
+  if (codec0.topLevelConsumesAllBytes !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Codec0', 'topLevelConsumesAllBytes'], 'Codec0 top-level parser must consume all bytes', {
+      actual: codec0.topLevelConsumesAllBytes,
+    });
+  }
+
+  if (codec0.normalFormSerialization !== 'canonical-json-v0') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Codec0', 'normalFormSerialization'], 'Codec0 normal-form serialization must be canonical-json-v0', {
+      actual: codec0.normalFormSerialization,
+    });
+  }
+
+  if (!isPlainObject(digest0)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Digest0'], 'GeneratedPCCPack must include concrete Digest0', {
+      actual: typeof digest0,
+    });
+  }
+
+  if (digest0.kind !== undefined && digest0.kind !== 'Digest0') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Digest0', 'kind'], 'Digest0 kind mismatch', {
+      actual: digest0.kind,
+    });
+  }
+
+  if (digest0.alg !== 'SHA256') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Digest0', 'alg'], 'Digest0 algorithm must be SHA256', {
+      actual: digest0.alg,
+    });
+  }
+
+  if (digest0.bytes !== 'canonical-json-v0') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Digest0', 'bytes'], 'Digest0 byte discipline must be canonical-json-v0', {
+      actual: digest0.bytes,
+    });
+  }
+
+  if (digest0.digestEqualityIsNotObjectEquality !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Digest0', 'digestEqualityIsNotObjectEquality'], 'Digest0 must record that digest equality is not object equality', {
+      actual: digest0.digestEqualityIsNotObjectEquality,
+    });
+  }
+
+  if (digest0.fullKeyComparisonAfterHashLookup !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Digest0', 'fullKeyComparisonAfterHashLookup'], 'Digest0 hash lookups must be followed by full key comparison', {
+      actual: digest0.fullKeyComparisonAfterHashLookup,
+    });
+  }
+
+  const codecDigest = digestCanonical0(codec0);
+  const digestDigest = digestCanonical0(digest0);
+  const piBootRefs = Array.isArray(boot0?.PiBoot?.refs) ? boot0.PiBoot.refs : [];
+
+  const codecRef = piBootRefs.find((ref) => (
+    ref?.label === 'Codec0' ||
+    ref?.target === 'Codec0'
+  ));
+
+  if (!isPlainObject(codecRef)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs'], 'PiBoot must reference Codec0', {
+      refs: piBootRefs,
+    });
+  }
+
+  if (!sameDigestHex0(codecRef.digest, codecDigest)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs', 'Codec0'], 'PiBoot Codec0 digest must match concrete Codec0', {
+      expected: codecDigest,
+      actual: codecRef.digest,
+    });
+  }
+
+  const digestRef = piBootRefs.find((ref) => (
+    ref?.label === 'Digest0' ||
+    ref?.target === 'Digest0'
+  ));
+
+  if (!isPlainObject(digestRef)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs'], 'PiBoot must reference Digest0', {
+      refs: piBootRefs,
+    });
+  }
+
+  if (!sameDigestHex0(digestRef.digest, digestDigest)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs', 'Digest0'], 'PiBoot Digest0 digest must match concrete Digest0', {
+      expected: digestDigest,
+      actual: digestRef.digest,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackCodecDigest0NF',
+
+    codec0: true,
+    codec0Accepted: true,
+    codec0Kind: codec0.kind ?? 'Codec0',
+    codec0Digest: codecDigest,
+    codec0Canonical: codec0.canonical === true,
+    codec0NaturalEncoding: codec0.naturalEncoding,
+    codec0IntegerEncoding: codec0.integerEncoding,
+    codec0StringEncoding: codec0.stringEncoding,
+    codec0TopLevelConsumesAllBytes: codec0.topLevelConsumesAllBytes === true,
+    codec0NormalFormSerialization: codec0.normalFormSerialization,
+    codec0PiBootDigestMatches: true,
+
+    digest0: true,
+    digest0Accepted: true,
+    digest0Kind: digest0.kind ?? 'Digest0',
+    digest0Digest: digestDigest,
+    digest0Alg: digest0.alg,
+    digest0Bytes: digest0.bytes,
+    digest0EqualityNotObjectEquality: digest0.digestEqualityIsNotObjectEquality === true,
+    digest0FullKeyComparisonAfterHashLookup: digest0.fullKeyComparisonAfterHashLookup === true,
+    digest0PiBootDigestMatches: true,
+  });
 }
 
 function validateGeneratedKernelSeed0(generatedPackage) {

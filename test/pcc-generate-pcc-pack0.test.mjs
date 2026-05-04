@@ -141,6 +141,27 @@ test('CheckGeneratedPCCPackexp0 accepts generated package with accepted CheckPCC
   assert.equal(out.NF.kernelSeed0ProofRefsTypedAcyclic, true);
   assert.equal(out.NF.kernelSeed0ProofRefsHashIndependent, true);
   assert.equal(out.NF.kernelSeed0PiBootDigestMatches, true);
+  assert.equal(out.NF.generatedPackageCodec0, true);
+  assert.equal(out.NF.codec0Accepted, true);
+  assert.equal(out.NF.codec0Kind, 'Codec0');
+  assert.match(out.NF.codec0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.codec0Canonical, true);
+  assert.equal(out.NF.codec0NaturalEncoding, 'u32be-length-shortest-big-endian-magnitude');
+  assert.equal(out.NF.codec0IntegerEncoding, 'sign-byte-plus-canonical-natural-no-negative-zero');
+  assert.equal(out.NF.codec0StringEncoding, 'utf8-nfc-length-prefixed');
+  assert.equal(out.NF.codec0TopLevelConsumesAllBytes, true);
+  assert.equal(out.NF.codec0NormalFormSerialization, 'canonical-json-v0');
+  assert.equal(out.NF.codec0PiBootDigestMatches, true);
+
+  assert.equal(out.NF.generatedPackageDigest0, true);
+  assert.equal(out.NF.digest0Accepted, true);
+  assert.equal(out.NF.digest0Kind, 'Digest0');
+  assert.match(out.NF.digest0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.digest0Alg, 'SHA256');
+  assert.equal(out.NF.digest0Bytes, 'canonical-json-v0');
+  assert.equal(out.NF.digest0EqualityNotObjectEquality, true);
+  assert.equal(out.NF.digest0FullKeyComparisonAfterHashLookup, true);
+  assert.equal(out.NF.digest0PiBootDigestMatches, true);
 
   assert.equal(out.NF.checkPCCPackexp, true);
   assert.equal(out.NF.checkPCCPackexpRecordAccepted, true);
@@ -177,6 +198,7 @@ test('makeGeneratePCCPackConfig0 fills default validation switches', () => {
   assert.equal(config.checkGeneratedPackageCoreBoundary, true);
   assert.equal(config.checkMaterializedBoot0, true);
   assert.equal(config.checkKernelSeed0, true);
+  assert.equal(config.checkCodecDigest0, true);
   assert.equal(config.checkJsonMaterialized, false);
   assert.equal(typeof config.checkPCCPackexpConfig, 'object');
 });
@@ -420,5 +442,84 @@ test('CheckGeneratedPCCPackexp0 rejects KernelSeed0 opaque proof references', as
     'KernelSeed0',
     'proofReferencePolicy',
     'rejectsOpaqueProofBlobs',
+  ]);
+});
+
+test('CheckGeneratedPCCPackexp0 rejects noncanonical Codec0 natural encoding', async () => {
+  const envelope = await makeGeneratedPCCPackexp0();
+
+  envelope.GeneratedPCCPack = {
+    ...envelope.GeneratedPCCPack,
+    MaterializedPCCPackEnvelope: {
+      ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope,
+      MaterializedBoot0: {
+        ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.MaterializedBoot0,
+        Codec0: {
+          ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.MaterializedBoot0.Codec0,
+          naturalEncoding: 'noncanonical-natural-encoding',
+        },
+      },
+    },
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    generatedPackageDigest: undefined,
+  };
+
+  const out = await CheckGeneratedPCCPackexp0(envelope, {
+    checkDeterministicGenerator: false,
+    checkMaterializedBoot0: false,
+    checkKernelSeed0: false,
+    checkCheckPCCPackexpRecord: false,
+    checkPublicClaimBoundary: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
+  assert.equal(out.Coord, 'CheckGeneratedPCCPackexp0.CodecDigest0');
+  assert.deepEqual(out.Path, ['GeneratedPCCPack', 'Boot0', 'Codec0', 'naturalEncoding']);
+});
+
+test('CheckGeneratedPCCPackexp0 rejects Digest0 object-equality misuse', async () => {
+  const envelope = await makeGeneratedPCCPackexp0();
+
+  envelope.GeneratedPCCPack = {
+    ...envelope.GeneratedPCCPack,
+    MaterializedPCCPackEnvelope: {
+      ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope,
+      MaterializedBoot0: {
+        ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.MaterializedBoot0,
+        Digest0: {
+          ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.MaterializedBoot0.Digest0,
+          digestEqualityIsNotObjectEquality: false,
+        },
+      },
+    },
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    generatedPackageDigest: undefined,
+  };
+
+  const out = await CheckGeneratedPCCPackexp0(envelope, {
+    checkDeterministicGenerator: false,
+    checkMaterializedBoot0: false,
+    checkKernelSeed0: false,
+    checkCheckPCCPackexpRecord: false,
+    checkPublicClaimBoundary: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
+  assert.equal(out.Coord, 'CheckGeneratedPCCPackexp0.CodecDigest0');
+  assert.deepEqual(out.Path, [
+    'GeneratedPCCPack',
+    'Boot0',
+    'Digest0',
+    'digestEqualityIsNotObjectEquality',
   ]);
 });
