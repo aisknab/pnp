@@ -307,6 +307,69 @@ export function summarizeConcreteFinalCertificatePublicStatusChain0({
     generatedPCCPackexpBoot0B0CoversImport:
       concreteCertificateChain.generatedPCCPackexpBoot0B0CoversImport,
 
+    generatedPCCPackexpKernelSeed0:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0,
+    generatedPCCPackexpKernelSeed0Accepted:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0Accepted,
+    generatedPCCPackexpKernelSeed0Kind:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0Kind,
+    generatedPCCPackexpKernelSeed0Digest:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0Digest,
+    generatedPCCPackexpKernelSeed0RuleCount:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0RuleCount,
+    generatedPCCPackexpKernelSeed0RequiredRuleCount:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0RequiredRuleCount,
+    generatedPCCPackexpKernelSeed0Rules:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0Rules,
+    generatedPCCPackexpKernelSeed0AllRequiredRulesPresent:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0AllRequiredRulesPresent,
+    generatedPCCPackexpKernelSeed0HasEq:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0HasEq,
+    generatedPCCPackexpKernelSeed0HasSubst:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0HasSubst,
+    generatedPCCPackexpKernelSeed0HasRecord:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0HasRecord,
+    generatedPCCPackexpKernelSeed0HasDAGInd:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0HasDAGInd,
+    generatedPCCPackexpKernelSeed0HasLedgerInd:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0HasLedgerInd,
+    generatedPCCPackexpKernelSeed0HasOblTopoInd:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0HasOblTopoInd,
+    generatedPCCPackexpKernelSeed0HasTraceInd:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0HasTraceInd,
+    generatedPCCPackexpKernelSeed0HasFiniteExhaust:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0HasFiniteExhaust,
+    generatedPCCPackexpKernelSeed0HasDPInd:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0HasDPInd,
+    generatedPCCPackexpKernelSeed0HasHall:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0HasHall,
+    generatedPCCPackexpKernelSeed0HasRankInd:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0HasRankInd,
+    generatedPCCPackexpKernelSeed0HasMinCounterexample:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0HasMinCounterexample,
+    generatedPCCPackexpKernelSeed0HasIntArith:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0HasIntArith,
+    generatedPCCPackexpKernelSeed0HasTransport:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0HasTransport,
+    generatedPCCPackexpKernelSeed0HasTruthVec:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0HasTruthVec,
+    generatedPCCPackexpKernelSeed0HasFiniteRel:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0HasFiniteRel,
+    generatedPCCPackexpKernelSeed0ProofNodeKindCount:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0ProofNodeKindCount,
+    generatedPCCPackexpKernelSeed0ProofNodeKinds:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0ProofNodeKinds,
+    generatedPCCPackexpKernelSeed0AllRequiredProofNodeKindsPresent:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0AllRequiredProofNodeKindsPresent,
+    generatedPCCPackexpKernelSeed0ProofRefsRejectOpaque:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0ProofRefsRejectOpaque,
+    generatedPCCPackexpKernelSeed0ProofRefsTypedAcyclic:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0ProofRefsTypedAcyclic,
+    generatedPCCPackexpKernelSeed0ProofRefsHashIndependent:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0ProofRefsHashIndependent,
+    generatedPCCPackexpKernelSeed0PiBootDigestMatches:
+      concreteCertificateChain.generatedPCCPackexpKernelSeed0PiBootDigestMatches,
+
     kBundleEnvelopeKind: concreteCertificateChain.kBundleEnvelopeKind,
     hardEnvelopeKind: concreteCertificateChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: concreteCertificateChain.finalIntegrationEnvelopeKind,
@@ -716,6 +779,69 @@ export async function CheckConcreteFinalCertificatePublicStatus0(
     generatedPCCPackexpBoot0B0CoversImport:
       recomputedChain.generatedPCCPackexpBoot0B0CoversImport,
 
+    generatedPCCPackexpKernelSeed0:
+      recomputedChain.generatedPCCPackexpKernelSeed0,
+    generatedPCCPackexpKernelSeed0Accepted:
+      recomputedChain.generatedPCCPackexpKernelSeed0Accepted,
+    generatedPCCPackexpKernelSeed0Kind:
+      recomputedChain.generatedPCCPackexpKernelSeed0Kind,
+    generatedPCCPackexpKernelSeed0Digest:
+      recomputedChain.generatedPCCPackexpKernelSeed0Digest,
+    generatedPCCPackexpKernelSeed0RuleCount:
+      recomputedChain.generatedPCCPackexpKernelSeed0RuleCount,
+    generatedPCCPackexpKernelSeed0RequiredRuleCount:
+      recomputedChain.generatedPCCPackexpKernelSeed0RequiredRuleCount,
+    generatedPCCPackexpKernelSeed0Rules:
+      recomputedChain.generatedPCCPackexpKernelSeed0Rules,
+    generatedPCCPackexpKernelSeed0AllRequiredRulesPresent:
+      recomputedChain.generatedPCCPackexpKernelSeed0AllRequiredRulesPresent,
+    generatedPCCPackexpKernelSeed0HasEq:
+      recomputedChain.generatedPCCPackexpKernelSeed0HasEq,
+    generatedPCCPackexpKernelSeed0HasSubst:
+      recomputedChain.generatedPCCPackexpKernelSeed0HasSubst,
+    generatedPCCPackexpKernelSeed0HasRecord:
+      recomputedChain.generatedPCCPackexpKernelSeed0HasRecord,
+    generatedPCCPackexpKernelSeed0HasDAGInd:
+      recomputedChain.generatedPCCPackexpKernelSeed0HasDAGInd,
+    generatedPCCPackexpKernelSeed0HasLedgerInd:
+      recomputedChain.generatedPCCPackexpKernelSeed0HasLedgerInd,
+    generatedPCCPackexpKernelSeed0HasOblTopoInd:
+      recomputedChain.generatedPCCPackexpKernelSeed0HasOblTopoInd,
+    generatedPCCPackexpKernelSeed0HasTraceInd:
+      recomputedChain.generatedPCCPackexpKernelSeed0HasTraceInd,
+    generatedPCCPackexpKernelSeed0HasFiniteExhaust:
+      recomputedChain.generatedPCCPackexpKernelSeed0HasFiniteExhaust,
+    generatedPCCPackexpKernelSeed0HasDPInd:
+      recomputedChain.generatedPCCPackexpKernelSeed0HasDPInd,
+    generatedPCCPackexpKernelSeed0HasHall:
+      recomputedChain.generatedPCCPackexpKernelSeed0HasHall,
+    generatedPCCPackexpKernelSeed0HasRankInd:
+      recomputedChain.generatedPCCPackexpKernelSeed0HasRankInd,
+    generatedPCCPackexpKernelSeed0HasMinCounterexample:
+      recomputedChain.generatedPCCPackexpKernelSeed0HasMinCounterexample,
+    generatedPCCPackexpKernelSeed0HasIntArith:
+      recomputedChain.generatedPCCPackexpKernelSeed0HasIntArith,
+    generatedPCCPackexpKernelSeed0HasTransport:
+      recomputedChain.generatedPCCPackexpKernelSeed0HasTransport,
+    generatedPCCPackexpKernelSeed0HasTruthVec:
+      recomputedChain.generatedPCCPackexpKernelSeed0HasTruthVec,
+    generatedPCCPackexpKernelSeed0HasFiniteRel:
+      recomputedChain.generatedPCCPackexpKernelSeed0HasFiniteRel,
+    generatedPCCPackexpKernelSeed0ProofNodeKindCount:
+      recomputedChain.generatedPCCPackexpKernelSeed0ProofNodeKindCount,
+    generatedPCCPackexpKernelSeed0ProofNodeKinds:
+      recomputedChain.generatedPCCPackexpKernelSeed0ProofNodeKinds,
+    generatedPCCPackexpKernelSeed0AllRequiredProofNodeKindsPresent:
+      recomputedChain.generatedPCCPackexpKernelSeed0AllRequiredProofNodeKindsPresent,
+    generatedPCCPackexpKernelSeed0ProofRefsRejectOpaque:
+      recomputedChain.generatedPCCPackexpKernelSeed0ProofRefsRejectOpaque,
+    generatedPCCPackexpKernelSeed0ProofRefsTypedAcyclic:
+      recomputedChain.generatedPCCPackexpKernelSeed0ProofRefsTypedAcyclic,
+    generatedPCCPackexpKernelSeed0ProofRefsHashIndependent:
+      recomputedChain.generatedPCCPackexpKernelSeed0ProofRefsHashIndependent,
+    generatedPCCPackexpKernelSeed0PiBootDigestMatches:
+      recomputedChain.generatedPCCPackexpKernelSeed0PiBootDigestMatches,
+
     kBundleEnvelopeKind: recomputedChain.kBundleEnvelopeKind,
     hardEnvelopeKind: recomputedChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: recomputedChain.finalIntegrationEnvelopeKind,
@@ -1000,6 +1126,31 @@ function validateConcretePublicStatusChain0(actual, expected) {
     'generatedPCCPackexpBoot0B0CoversRoute',
     'generatedPCCPackexpBoot0B0CoversHash',
     'generatedPCCPackexpBoot0B0CoversImport',
+
+    'generatedPCCPackexpKernelSeed0',
+    'generatedPCCPackexpKernelSeed0Accepted',
+    'generatedPCCPackexpKernelSeed0AllRequiredRulesPresent',
+    'generatedPCCPackexpKernelSeed0HasEq',
+    'generatedPCCPackexpKernelSeed0HasSubst',
+    'generatedPCCPackexpKernelSeed0HasRecord',
+    'generatedPCCPackexpKernelSeed0HasDAGInd',
+    'generatedPCCPackexpKernelSeed0HasLedgerInd',
+    'generatedPCCPackexpKernelSeed0HasOblTopoInd',
+    'generatedPCCPackexpKernelSeed0HasTraceInd',
+    'generatedPCCPackexpKernelSeed0HasFiniteExhaust',
+    'generatedPCCPackexpKernelSeed0HasDPInd',
+    'generatedPCCPackexpKernelSeed0HasHall',
+    'generatedPCCPackexpKernelSeed0HasRankInd',
+    'generatedPCCPackexpKernelSeed0HasMinCounterexample',
+    'generatedPCCPackexpKernelSeed0HasIntArith',
+    'generatedPCCPackexpKernelSeed0HasTransport',
+    'generatedPCCPackexpKernelSeed0HasTruthVec',
+    'generatedPCCPackexpKernelSeed0HasFiniteRel',
+    'generatedPCCPackexpKernelSeed0AllRequiredProofNodeKindsPresent',
+    'generatedPCCPackexpKernelSeed0ProofRefsRejectOpaque',
+    'generatedPCCPackexpKernelSeed0ProofRefsTypedAcyclic',
+    'generatedPCCPackexpKernelSeed0ProofRefsHashIndependent',
+    'generatedPCCPackexpKernelSeed0PiBootDigestMatches',
 
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',

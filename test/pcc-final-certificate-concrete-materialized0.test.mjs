@@ -146,6 +146,60 @@ test('CheckConcreteMaterializedFinalCertificate0 accepts a final certificate ove
   assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversRoute, true);
   assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversHash, true);
   assert.equal(out.NF.generatedPCCPackexpBoot0B0CoversImport, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0Kind, 'KernelSeed0');
+  assert.match(out.NF.generatedPCCPackexpKernelSeed0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0RuleCount, 16);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0RequiredRuleCount, 16);
+  assert.deepEqual(out.NF.generatedPCCPackexpKernelSeed0Rules, [
+    'Eq',
+    'Subst',
+    'Record',
+    'DAGInd',
+    'LedgerInd',
+    'OblTopoInd',
+    'TraceInd',
+    'FiniteExhaust',
+    'DPInd',
+    'Hall',
+    'RankInd',
+    'MinCounterexample',
+    'IntArith',
+    'Transport',
+    'TruthVec',
+    'FiniteRel',
+  ]);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0AllRequiredRulesPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasEq, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasSubst, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasRecord, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasDAGInd, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasLedgerInd, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasOblTopoInd, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasTraceInd, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasFiniteExhaust, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasDPInd, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasHall, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasRankInd, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasMinCounterexample, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasIntArith, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasTransport, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasTruthVec, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0HasFiniteRel, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0ProofNodeKindCount, 5);
+  assert.deepEqual(out.NF.generatedPCCPackexpKernelSeed0ProofNodeKinds, [
+    'PrimitiveRule',
+    'SigmaInstance',
+    'ReflectionInstance',
+    'RowProof',
+    'PackageTheorem',
+  ]);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0AllRequiredProofNodeKindsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0ProofRefsRejectOpaque, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0ProofRefsTypedAcyclic, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0ProofRefsHashIndependent, true);
+  assert.equal(out.NF.generatedPCCPackexpKernelSeed0PiBootDigestMatches, true);
 
   assert.equal(out.NF.finalCertificateUsesConcreteAcceptRun, true);
   assert.equal(out.NF.certificatePccPackDigestMatchesConcreteRun, true);
@@ -513,4 +567,43 @@ test('CheckConcreteMaterializedFinalCertificate0 rejects stale B0 row-family evi
   assert.equal(out.checker, 'CheckConcreteMaterializedFinalCertificate0');
   assert.equal(out.Coord, 'CheckConcreteMaterializedFinalCertificate0.concreteChain');
   assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpBoot0B0CoversTruthEval']);
+});
+
+test('CheckConcreteMaterializedFinalCertificate0 rejects stale KernelSeed0 evidence', async () => {
+  const envelope = await makeConcreteMaterializedFinalCertificate0();
+
+  const record = envelope.ConcreteGeneratedAcceptRunEnvelope.CheckGeneratedPCCPackexpRecord;
+  const nf = {
+    ...record.NF,
+    kernelSeed0HasHall: false,
+  };
+
+  envelope.ConcreteGeneratedAcceptRunEnvelope.CheckGeneratedPCCPackexpRecord = {
+    ...record,
+    NF: nf,
+    nf,
+    Digest: digestCanonical0(nf),
+    digest: digestCanonical0(nf),
+  };
+
+  envelope.ConcreteChain = summarizeConcreteFinalCertificateChain0({
+    concreteGeneratedAcceptRunEnvelope: envelope.ConcreteGeneratedAcceptRunEnvelope,
+    finalCertificateEnvelope: envelope.FinalCertificateEnvelope,
+  });
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckConcreteMaterializedFinalCertificate0(envelope, {
+    checkConcreteGeneratedAcceptRun: false,
+    checkFinalCertificate: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedFinalCertificate0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedFinalCertificate0.concreteChain');
+  assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpKernelSeed0HasHall']);
 });
