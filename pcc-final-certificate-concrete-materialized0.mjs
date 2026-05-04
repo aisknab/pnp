@@ -139,6 +139,25 @@ export function summarizeConcreteFinalCertificateChain0({
     ? digestCanonical0(generatedPCCPackexpCheckRecordNF)
     : null;
 
+  const checkGeneratedPCCPackexpRecord =
+    concreteGeneratedAcceptRunEnvelope?.CheckGeneratedPCCPackexpRecord ?? null;
+  const checkGeneratedPCCPackexpRecordNF =
+    checkGeneratedPCCPackexpRecord?.NF ?? checkGeneratedPCCPackexpRecord?.nf ?? null;
+  const checkGeneratedPCCPackexpRecordDigest = digestFromRecord0(checkGeneratedPCCPackexpRecord);
+  const checkGeneratedPCCPackexpRecordNFDigest = isPlainObject(checkGeneratedPCCPackexpRecordNF)
+    ? digestCanonical0(checkGeneratedPCCPackexpRecordNF)
+    : null;
+  const generatedPCCPackexpBoot0 =
+    generatedPCCPackexpEnvelope?.GeneratedPCCPack?.MaterializedPCCPackEnvelope?.MaterializedBoot0 ?? null;
+  const generatedPCCPackexpCoreBootDigest =
+    generatedPCCPackexpEnvelope
+      ?.GeneratedPCCPack
+      ?.MaterializedPCCPackEnvelope
+      ?.PCCPack
+      ?.Core
+      ?.artefactDigests
+      ?.Boot0 ?? null;
+
   const generatedAcceptRunDigest = digestCanonical0(generatedAcceptRunEnvelope);
   const finalGeneratedAcceptRunDigest = digestCanonical0(finalGeneratedAcceptRunEnvelope);
 
@@ -259,6 +278,54 @@ export function summarizeConcreteFinalCertificateChain0({
     generatedPCCPackexpLinkageCheckRecordDigestMatches: sameDigestHex0(
       generatedPCCPackexpEnvelope?.Linkage?.checkPCCPackexpRecordDigest ?? null,
       generatedPCCPackexpCheckRecordDigest,
+    ),
+
+    checkGeneratedPCCPackexpRecordPresent: isPlainObject(checkGeneratedPCCPackexpRecord),
+    checkGeneratedPCCPackexpRecordAccepted: checkGeneratedPCCPackexpRecord?.tag === 'accept',
+    checkGeneratedPCCPackexpRecordChecker: checkGeneratedPCCPackexpRecord?.checker ?? null,
+    checkGeneratedPCCPackexpRecordDigest,
+    checkGeneratedPCCPackexpRecordDigestMatchesNF: sameDigestHex0(
+      checkGeneratedPCCPackexpRecordDigest,
+      checkGeneratedPCCPackexpRecordNFDigest,
+    ),
+    checkGeneratedPCCPackexpRecordGeneratedPackageDigestMatchesEnvelope: sameDigestHex0(
+      checkGeneratedPCCPackexpRecordNF?.generatedPackageDigest ?? null,
+      digestCanonical0(generatedPCCPackexpEnvelope?.GeneratedPCCPack ?? null),
+    ),
+    checkGeneratedPCCPackexpRecordCheckPCCPackexpDigestMatchesEnvelope: sameDigestHex0(
+      checkGeneratedPCCPackexpRecordNF?.checkPCCPackexpRecordDigest ?? null,
+      digestFromRecord0(generatedPCCPackexpEnvelope?.CheckPCCPackexpRecord ?? null),
+    ),
+
+    generatedPCCPackexpBoot0: checkGeneratedPCCPackexpRecordNF?.generatedPackageBoot0 === true,
+    generatedPCCPackexpBoot0Accepted: checkGeneratedPCCPackexpRecordNF?.boot0Accepted === true,
+    generatedPCCPackexpBoot0Kind: checkGeneratedPCCPackexpRecordNF?.boot0Kind ?? null,
+    generatedPCCPackexpBoot0Digest: checkGeneratedPCCPackexpRecordNF?.boot0Digest ?? null,
+    generatedPCCPackexpBoot0CheckDigest: checkGeneratedPCCPackexpRecordNF?.boot0CheckDigest ?? null,
+    generatedPCCPackexpBoot0CanonicalByteDigest:
+      checkGeneratedPCCPackexpRecordNF?.boot0CanonicalByteDigest ?? null,
+    generatedPCCPackexpBoot0RowCount: checkGeneratedPCCPackexpRecordNF?.boot0RowCount ?? null,
+    generatedPCCPackexpBoot0KernelRuleCount:
+      checkGeneratedPCCPackexpRecordNF?.boot0KernelRuleCount ?? null,
+    generatedPCCPackexpBoot0JsonMaterialized:
+      checkGeneratedPCCPackexpRecordNF?.boot0JsonMaterialized === true,
+    generatedPCCPackexpBoot0NoFixtureMarkers:
+      checkGeneratedPCCPackexpRecordNF?.boot0NoFixtureMarkers === true,
+    generatedPCCPackexpBoot0BootBatchDigest:
+      checkGeneratedPCCPackexpRecordNF?.boot0BootBatchDigest ?? null,
+    generatedPCCPackexpBoot0BootAuditDigest:
+      checkGeneratedPCCPackexpRecordNF?.boot0BootAuditDigest ?? null,
+    generatedPCCPackexpBoot0LinkedToPCCPack:
+      checkGeneratedPCCPackexpRecordNF?.boot0LinkedToPCCPack === true,
+    generatedPCCPackexpBoot0LinkedToCoreDigestMap:
+      checkGeneratedPCCPackexpRecordNF?.boot0LinkedToCoreDigestMap === true,
+    generatedPCCPackexpBoot0DigestMatchesGeneratedPackage: sameDigestHex0(
+      checkGeneratedPCCPackexpRecordNF?.boot0Digest ?? null,
+      digestCanonical0(generatedPCCPackexpBoot0),
+    ),
+    generatedPCCPackexpBoot0DigestMatchesCoreDigestMap: sameDigestHex0(
+      checkGeneratedPCCPackexpRecordNF?.boot0Digest ?? null,
+      generatedPCCPackexpCoreBootDigest,
     ),
 
     rowsEnvelopeKind: concreteGeneratedChain.rowsEnvelopeKind,
@@ -566,6 +633,43 @@ export async function CheckConcreteMaterializedFinalCertificate0(
     generatedPCCPackexpLinkageGeneratedPackageDigestMatches: recomputedChain.generatedPCCPackexpLinkageGeneratedPackageDigestMatches,
     generatedPCCPackexpLinkageCheckRecordDigestMatches: recomputedChain.generatedPCCPackexpLinkageCheckRecordDigestMatches,
 
+    checkGeneratedPCCPackexpRecordPresent: recomputedChain.checkGeneratedPCCPackexpRecordPresent,
+    checkGeneratedPCCPackexpRecordAccepted: recomputedChain.checkGeneratedPCCPackexpRecordAccepted,
+    checkGeneratedPCCPackexpRecordChecker: recomputedChain.checkGeneratedPCCPackexpRecordChecker,
+    checkGeneratedPCCPackexpRecordDigest: recomputedChain.checkGeneratedPCCPackexpRecordDigest,
+    checkGeneratedPCCPackexpRecordDigestMatchesNF:
+      recomputedChain.checkGeneratedPCCPackexpRecordDigestMatchesNF,
+    checkGeneratedPCCPackexpRecordGeneratedPackageDigestMatchesEnvelope:
+      recomputedChain.checkGeneratedPCCPackexpRecordGeneratedPackageDigestMatchesEnvelope,
+    checkGeneratedPCCPackexpRecordCheckPCCPackexpDigestMatchesEnvelope:
+      recomputedChain.checkGeneratedPCCPackexpRecordCheckPCCPackexpDigestMatchesEnvelope,
+
+    generatedPCCPackexpBoot0: recomputedChain.generatedPCCPackexpBoot0,
+    generatedPCCPackexpBoot0Accepted: recomputedChain.generatedPCCPackexpBoot0Accepted,
+    generatedPCCPackexpBoot0Kind: recomputedChain.generatedPCCPackexpBoot0Kind,
+    generatedPCCPackexpBoot0Digest: recomputedChain.generatedPCCPackexpBoot0Digest,
+    generatedPCCPackexpBoot0CheckDigest: recomputedChain.generatedPCCPackexpBoot0CheckDigest,
+    generatedPCCPackexpBoot0CanonicalByteDigest:
+      recomputedChain.generatedPCCPackexpBoot0CanonicalByteDigest,
+    generatedPCCPackexpBoot0RowCount: recomputedChain.generatedPCCPackexpBoot0RowCount,
+    generatedPCCPackexpBoot0KernelRuleCount: recomputedChain.generatedPCCPackexpBoot0KernelRuleCount,
+    generatedPCCPackexpBoot0JsonMaterialized:
+      recomputedChain.generatedPCCPackexpBoot0JsonMaterialized,
+    generatedPCCPackexpBoot0NoFixtureMarkers:
+      recomputedChain.generatedPCCPackexpBoot0NoFixtureMarkers,
+    generatedPCCPackexpBoot0BootBatchDigest:
+      recomputedChain.generatedPCCPackexpBoot0BootBatchDigest,
+    generatedPCCPackexpBoot0BootAuditDigest:
+      recomputedChain.generatedPCCPackexpBoot0BootAuditDigest,
+    generatedPCCPackexpBoot0LinkedToPCCPack:
+      recomputedChain.generatedPCCPackexpBoot0LinkedToPCCPack,
+    generatedPCCPackexpBoot0LinkedToCoreDigestMap:
+      recomputedChain.generatedPCCPackexpBoot0LinkedToCoreDigestMap,
+    generatedPCCPackexpBoot0DigestMatchesGeneratedPackage:
+      recomputedChain.generatedPCCPackexpBoot0DigestMatchesGeneratedPackage,
+    generatedPCCPackexpBoot0DigestMatchesCoreDigestMap:
+      recomputedChain.generatedPCCPackexpBoot0DigestMatchesCoreDigestMap,
+
     kBundleEnvelopeKind: recomputedChain.kBundleEnvelopeKind,
     hardEnvelopeKind: recomputedChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: recomputedChain.finalIntegrationEnvelopeKind,
@@ -828,6 +932,21 @@ function validateConcreteFinalCertificateChain0(actual, expected) {
     'generatedPCCPackexpCheckRecordClaimBoundaryConditional',
     'generatedPCCPackexpLinkageGeneratedPackageDigestMatches',
     'generatedPCCPackexpLinkageCheckRecordDigestMatches',
+
+    'checkGeneratedPCCPackexpRecordPresent',
+    'checkGeneratedPCCPackexpRecordAccepted',
+    'checkGeneratedPCCPackexpRecordDigestMatchesNF',
+    'checkGeneratedPCCPackexpRecordGeneratedPackageDigestMatchesEnvelope',
+    'checkGeneratedPCCPackexpRecordCheckPCCPackexpDigestMatchesEnvelope',
+
+    'generatedPCCPackexpBoot0',
+    'generatedPCCPackexpBoot0Accepted',
+    'generatedPCCPackexpBoot0JsonMaterialized',
+    'generatedPCCPackexpBoot0NoFixtureMarkers',
+    'generatedPCCPackexpBoot0LinkedToPCCPack',
+    'generatedPCCPackexpBoot0LinkedToCoreDigestMap',
+    'generatedPCCPackexpBoot0DigestMatchesGeneratedPackage',
+    'generatedPCCPackexpBoot0DigestMatchesCoreDigestMap',
 
     'finalCertificateUsesConcreteAcceptRun',
     'certificatePccPackDigestMatchesConcreteRun',

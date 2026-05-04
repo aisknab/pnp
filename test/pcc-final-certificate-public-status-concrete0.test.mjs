@@ -85,6 +85,31 @@ test('CheckConcreteFinalCertificatePublicStatus0 accepts public status over conc
   assert.equal(out.NF.generatedPCCPackexpLinkageGeneratedPackageDigestMatches, true);
   assert.equal(out.NF.generatedPCCPackexpLinkageCheckRecordDigestMatches, true);
 
+  assert.equal(out.NF.checkGeneratedPCCPackexpRecordPresent, true);
+  assert.equal(out.NF.checkGeneratedPCCPackexpRecordAccepted, true);
+  assert.equal(out.NF.checkGeneratedPCCPackexpRecordChecker, 'CheckGeneratedPCCPackexp0');
+  assert.match(out.NF.checkGeneratedPCCPackexpRecordDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.checkGeneratedPCCPackexpRecordDigestMatchesNF, true);
+  assert.equal(out.NF.checkGeneratedPCCPackexpRecordGeneratedPackageDigestMatchesEnvelope, true);
+  assert.equal(out.NF.checkGeneratedPCCPackexpRecordCheckPCCPackexpDigestMatchesEnvelope, true);
+
+  assert.equal(out.NF.generatedPCCPackexpBoot0, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0Kind, 'Boot0');
+  assert.match(out.NF.generatedPCCPackexpBoot0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpBoot0CheckDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpBoot0CanonicalByteDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpBoot0RowCount > 0, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0KernelRuleCount > 0, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0JsonMaterialized, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0NoFixtureMarkers, true);
+  assert.match(out.NF.generatedPCCPackexpBoot0BootBatchDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpBoot0BootAuditDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpBoot0LinkedToPCCPack, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0LinkedToCoreDigestMap, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0DigestMatchesGeneratedPackage, true);
+  assert.equal(out.NF.generatedPCCPackexpBoot0DigestMatchesCoreDigestMap, true);
+
   assert.equal(out.NF.statusUsesConcreteFinalCertificate, true);
   assert.equal(out.NF.publicStatusCertificateDigestMatchesConcrete, true);
   assert.equal(out.NF.publicStatusFinalVerdictDigestMatchesConcrete, true);
@@ -428,4 +453,42 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects missing GeneratedPCCPac
   assert.equal(out.checker, 'CheckConcreteFinalCertificatePublicStatus0');
   assert.equal(out.Coord, 'CheckConcreteFinalCertificatePublicStatus0.concreteChain');
   assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpEnvelopePresent']);
+});
+
+test('CheckConcreteFinalCertificatePublicStatus0 rejects missing CheckGeneratedPCCPackexp0 evidence', async () => {
+  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+
+  delete envelope.ConcreteFinalCertificateEnvelope
+    .ConcreteGeneratedAcceptRunEnvelope
+    .CheckGeneratedPCCPackexpRecord;
+
+  envelope.ConcreteFinalCertificateEnvelope
+    .ConcreteGeneratedAcceptRunEnvelope
+    .Linkage = {
+      ...envelope.ConcreteFinalCertificateEnvelope
+        .ConcreteGeneratedAcceptRunEnvelope
+        .Linkage,
+      checkGeneratedPCCPackexpRecordDigest: undefined,
+    };
+
+  envelope.ConcreteChain = summarizeConcreteFinalCertificatePublicStatusChain0({
+    concreteFinalCertificateEnvelope: envelope.ConcreteFinalCertificateEnvelope,
+    finalCertificatePublicStatusEnvelope: envelope.FinalCertificatePublicStatusEnvelope,
+  });
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+    checkConcreteFinalCertificate: false,
+    checkFinalCertificatePublicStatus: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteFinalCertificatePublicStatus0');
+  assert.equal(out.Coord, 'CheckConcreteFinalCertificatePublicStatus0.concreteChain');
+  assert.deepEqual(out.Path, ['ConcreteChain', 'checkGeneratedPCCPackexpRecordPresent']);
 });

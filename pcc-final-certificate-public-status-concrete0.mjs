@@ -226,6 +226,48 @@ export function summarizeConcreteFinalCertificatePublicStatusChain0({
     generatedPCCPackexpLinkageGeneratedPackageDigestMatches: concreteCertificateChain.generatedPCCPackexpLinkageGeneratedPackageDigestMatches,
     generatedPCCPackexpLinkageCheckRecordDigestMatches: concreteCertificateChain.generatedPCCPackexpLinkageCheckRecordDigestMatches,
 
+    checkGeneratedPCCPackexpRecordPresent:
+      concreteCertificateChain.checkGeneratedPCCPackexpRecordPresent,
+    checkGeneratedPCCPackexpRecordAccepted:
+      concreteCertificateChain.checkGeneratedPCCPackexpRecordAccepted,
+    checkGeneratedPCCPackexpRecordChecker:
+      concreteCertificateChain.checkGeneratedPCCPackexpRecordChecker,
+    checkGeneratedPCCPackexpRecordDigest:
+      concreteCertificateChain.checkGeneratedPCCPackexpRecordDigest,
+    checkGeneratedPCCPackexpRecordDigestMatchesNF:
+      concreteCertificateChain.checkGeneratedPCCPackexpRecordDigestMatchesNF,
+    checkGeneratedPCCPackexpRecordGeneratedPackageDigestMatchesEnvelope:
+      concreteCertificateChain.checkGeneratedPCCPackexpRecordGeneratedPackageDigestMatchesEnvelope,
+    checkGeneratedPCCPackexpRecordCheckPCCPackexpDigestMatchesEnvelope:
+      concreteCertificateChain.checkGeneratedPCCPackexpRecordCheckPCCPackexpDigestMatchesEnvelope,
+
+    generatedPCCPackexpBoot0: concreteCertificateChain.generatedPCCPackexpBoot0,
+    generatedPCCPackexpBoot0Accepted: concreteCertificateChain.generatedPCCPackexpBoot0Accepted,
+    generatedPCCPackexpBoot0Kind: concreteCertificateChain.generatedPCCPackexpBoot0Kind,
+    generatedPCCPackexpBoot0Digest: concreteCertificateChain.generatedPCCPackexpBoot0Digest,
+    generatedPCCPackexpBoot0CheckDigest: concreteCertificateChain.generatedPCCPackexpBoot0CheckDigest,
+    generatedPCCPackexpBoot0CanonicalByteDigest:
+      concreteCertificateChain.generatedPCCPackexpBoot0CanonicalByteDigest,
+    generatedPCCPackexpBoot0RowCount: concreteCertificateChain.generatedPCCPackexpBoot0RowCount,
+    generatedPCCPackexpBoot0KernelRuleCount:
+      concreteCertificateChain.generatedPCCPackexpBoot0KernelRuleCount,
+    generatedPCCPackexpBoot0JsonMaterialized:
+      concreteCertificateChain.generatedPCCPackexpBoot0JsonMaterialized,
+    generatedPCCPackexpBoot0NoFixtureMarkers:
+      concreteCertificateChain.generatedPCCPackexpBoot0NoFixtureMarkers,
+    generatedPCCPackexpBoot0BootBatchDigest:
+      concreteCertificateChain.generatedPCCPackexpBoot0BootBatchDigest,
+    generatedPCCPackexpBoot0BootAuditDigest:
+      concreteCertificateChain.generatedPCCPackexpBoot0BootAuditDigest,
+    generatedPCCPackexpBoot0LinkedToPCCPack:
+      concreteCertificateChain.generatedPCCPackexpBoot0LinkedToPCCPack,
+    generatedPCCPackexpBoot0LinkedToCoreDigestMap:
+      concreteCertificateChain.generatedPCCPackexpBoot0LinkedToCoreDigestMap,
+    generatedPCCPackexpBoot0DigestMatchesGeneratedPackage:
+      concreteCertificateChain.generatedPCCPackexpBoot0DigestMatchesGeneratedPackage,
+    generatedPCCPackexpBoot0DigestMatchesCoreDigestMap:
+      concreteCertificateChain.generatedPCCPackexpBoot0DigestMatchesCoreDigestMap,
+
     kBundleEnvelopeKind: concreteCertificateChain.kBundleEnvelopeKind,
     hardEnvelopeKind: concreteCertificateChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: concreteCertificateChain.finalIntegrationEnvelopeKind,
@@ -559,6 +601,43 @@ export async function CheckConcreteFinalCertificatePublicStatus0(
     generatedPCCPackexpLinkageGeneratedPackageDigestMatches: recomputedChain.generatedPCCPackexpLinkageGeneratedPackageDigestMatches,
     generatedPCCPackexpLinkageCheckRecordDigestMatches: recomputedChain.generatedPCCPackexpLinkageCheckRecordDigestMatches,
 
+    checkGeneratedPCCPackexpRecordPresent: recomputedChain.checkGeneratedPCCPackexpRecordPresent,
+    checkGeneratedPCCPackexpRecordAccepted: recomputedChain.checkGeneratedPCCPackexpRecordAccepted,
+    checkGeneratedPCCPackexpRecordChecker: recomputedChain.checkGeneratedPCCPackexpRecordChecker,
+    checkGeneratedPCCPackexpRecordDigest: recomputedChain.checkGeneratedPCCPackexpRecordDigest,
+    checkGeneratedPCCPackexpRecordDigestMatchesNF:
+      recomputedChain.checkGeneratedPCCPackexpRecordDigestMatchesNF,
+    checkGeneratedPCCPackexpRecordGeneratedPackageDigestMatchesEnvelope:
+      recomputedChain.checkGeneratedPCCPackexpRecordGeneratedPackageDigestMatchesEnvelope,
+    checkGeneratedPCCPackexpRecordCheckPCCPackexpDigestMatchesEnvelope:
+      recomputedChain.checkGeneratedPCCPackexpRecordCheckPCCPackexpDigestMatchesEnvelope,
+
+    generatedPCCPackexpBoot0: recomputedChain.generatedPCCPackexpBoot0,
+    generatedPCCPackexpBoot0Accepted: recomputedChain.generatedPCCPackexpBoot0Accepted,
+    generatedPCCPackexpBoot0Kind: recomputedChain.generatedPCCPackexpBoot0Kind,
+    generatedPCCPackexpBoot0Digest: recomputedChain.generatedPCCPackexpBoot0Digest,
+    generatedPCCPackexpBoot0CheckDigest: recomputedChain.generatedPCCPackexpBoot0CheckDigest,
+    generatedPCCPackexpBoot0CanonicalByteDigest:
+      recomputedChain.generatedPCCPackexpBoot0CanonicalByteDigest,
+    generatedPCCPackexpBoot0RowCount: recomputedChain.generatedPCCPackexpBoot0RowCount,
+    generatedPCCPackexpBoot0KernelRuleCount: recomputedChain.generatedPCCPackexpBoot0KernelRuleCount,
+    generatedPCCPackexpBoot0JsonMaterialized:
+      recomputedChain.generatedPCCPackexpBoot0JsonMaterialized,
+    generatedPCCPackexpBoot0NoFixtureMarkers:
+      recomputedChain.generatedPCCPackexpBoot0NoFixtureMarkers,
+    generatedPCCPackexpBoot0BootBatchDigest:
+      recomputedChain.generatedPCCPackexpBoot0BootBatchDigest,
+    generatedPCCPackexpBoot0BootAuditDigest:
+      recomputedChain.generatedPCCPackexpBoot0BootAuditDigest,
+    generatedPCCPackexpBoot0LinkedToPCCPack:
+      recomputedChain.generatedPCCPackexpBoot0LinkedToPCCPack,
+    generatedPCCPackexpBoot0LinkedToCoreDigestMap:
+      recomputedChain.generatedPCCPackexpBoot0LinkedToCoreDigestMap,
+    generatedPCCPackexpBoot0DigestMatchesGeneratedPackage:
+      recomputedChain.generatedPCCPackexpBoot0DigestMatchesGeneratedPackage,
+    generatedPCCPackexpBoot0DigestMatchesCoreDigestMap:
+      recomputedChain.generatedPCCPackexpBoot0DigestMatchesCoreDigestMap,
+
     kBundleEnvelopeKind: recomputedChain.kBundleEnvelopeKind,
     hardEnvelopeKind: recomputedChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: recomputedChain.finalIntegrationEnvelopeKind,
@@ -813,6 +892,21 @@ function validateConcretePublicStatusChain0(actual, expected) {
     'generatedPCCPackexpCheckRecordClaimBoundaryConditional',
     'generatedPCCPackexpLinkageGeneratedPackageDigestMatches',
     'generatedPCCPackexpLinkageCheckRecordDigestMatches',
+
+    'checkGeneratedPCCPackexpRecordPresent',
+    'checkGeneratedPCCPackexpRecordAccepted',
+    'checkGeneratedPCCPackexpRecordDigestMatchesNF',
+    'checkGeneratedPCCPackexpRecordGeneratedPackageDigestMatchesEnvelope',
+    'checkGeneratedPCCPackexpRecordCheckPCCPackexpDigestMatchesEnvelope',
+
+    'generatedPCCPackexpBoot0',
+    'generatedPCCPackexpBoot0Accepted',
+    'generatedPCCPackexpBoot0JsonMaterialized',
+    'generatedPCCPackexpBoot0NoFixtureMarkers',
+    'generatedPCCPackexpBoot0LinkedToPCCPack',
+    'generatedPCCPackexpBoot0LinkedToCoreDigestMap',
+    'generatedPCCPackexpBoot0DigestMatchesGeneratedPackage',
+    'generatedPCCPackexpBoot0DigestMatchesCoreDigestMap',
 
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',
