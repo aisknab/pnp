@@ -1463,6 +1463,122 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
         : null
     ),
 
+    generatedPCCPackexpConcreteKBundle0: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).generatedPackageConcreteKBundle0 === true
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0Accepted: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0Accepted === true
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0Checker: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0Checker
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0Digest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0Digest
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0MaterializedKBundleDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0MaterializedKBundleDigest
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0BootDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0BootDigest
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0KImplDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0KImplDigest
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0K0Digest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0K0Digest
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0SigmaDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0SigmaDigest
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0ReflectionDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0ReflectionDigest
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0ProofInventoryDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0ProofInventoryDigest
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0KernelRuleCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0KernelRuleCount
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0ConformanceNodeCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0ConformanceNodeCount
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0KernelRuleCoverageComplete: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0KernelRuleCoverageComplete === true
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0SigmaTheoremCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0SigmaTheoremCount
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0SigmaCoverageComplete: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0SigmaCoverageComplete === true
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0SigmaProofRefsResolve: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0SigmaProofRefsResolve === true
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0ReflectionCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0ReflectionCount
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0ReflectionCoverageComplete: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0ReflectionCoverageComplete === true
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0ReflectionProofRefsResolve: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0ReflectionProofRefsResolve === true
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0NoOpaqueProofRefs: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0NoOpaqueProofRefs === true
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0NoExecutableMinSymbols: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0NoExecutableMinSymbols === true
+        : null
+    ),
+    generatedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteKBundle0LinkedToGeneratedBoot0 === true
+        : null
+    ),
+
     rowsEnvelopeKind: recomputedChain.rowsEnvelopeKind,
     localPackagesEnvelopeKind: recomputedChain.localPackagesEnvelopeKind,
     globalFirewallsEnvelopeKind: recomputedChain.globalFirewallsEnvelopeKind,
@@ -2458,6 +2574,111 @@ function validateGeneratedPCCPackexpEnvelope0({
     return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'piBoot0Digest'], 'GeneratedPCCPackexp0 NF piBoot0Digest must match generated package PiBoot bytes', {
       expected: digestCanonical0(generatedPiBoot0),
       actual: generatedNF.piBoot0Digest,
+    });
+  }
+
+  for (const field of [
+    'generatedPackageConcreteKBundle0',
+    'concreteKBundle0Accepted',
+    'concreteKBundle0KernelRuleCoverageComplete',
+    'concreteKBundle0SigmaCoverageComplete',
+    'concreteKBundle0SigmaProofRefsResolve',
+    'concreteKBundle0ReflectionCoverageComplete',
+    'concreteKBundle0ReflectionProofRefsResolve',
+    'concreteKBundle0NoOpaqueProofRefs',
+    'concreteKBundle0NoExecutableMinSymbols',
+    'concreteKBundle0LinkedToGeneratedBoot0',
+  ]) {
+    if (generatedNF[field] !== true) {
+      return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', field], `GeneratedPCCPackexp0 NF must certify ${field}`, {
+        actual: generatedNF[field],
+      });
+    }
+  }
+
+  if (generatedNF.concreteKBundle0Checker !== 'CheckConcreteMaterializedKBundle0') {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteKBundle0Checker'], 'GeneratedPCCPackexp0 NF must certify concrete KBundle checker', {
+      actual: generatedNF.concreteKBundle0Checker,
+    });
+  }
+
+  if (generatedNF.concreteKBundle0KernelRuleCount !== 16) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteKBundle0KernelRuleCount'], 'GeneratedPCCPackexp0 NF must certify complete PCC-K primitive rule count', {
+      expected: 16,
+      actual: generatedNF.concreteKBundle0KernelRuleCount,
+    });
+  }
+
+  if (generatedNF.concreteKBundle0ConformanceNodeCount !== 16) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteKBundle0ConformanceNodeCount'], 'GeneratedPCCPackexp0 NF must certify complete PCC-K conformance node count', {
+      expected: 16,
+      actual: generatedNF.concreteKBundle0ConformanceNodeCount,
+    });
+  }
+
+  if (generatedNF.concreteKBundle0SigmaTheoremCount !== 2) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteKBundle0SigmaTheoremCount'], 'GeneratedPCCPackexp0 NF must certify PCC-K Sigma theorem count', {
+      expected: 2,
+      actual: generatedNF.concreteKBundle0SigmaTheoremCount,
+    });
+  }
+
+  if (!(typeof generatedNF.concreteKBundle0ReflectionCount === 'number' && generatedNF.concreteKBundle0ReflectionCount >= 5)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteKBundle0ReflectionCount'], 'GeneratedPCCPackexp0 NF must certify reflection registry coverage count', {
+      actual: generatedNF.concreteKBundle0ReflectionCount,
+    });
+  }
+
+  const generatedMaterializedPCCPack = generatedPCCPackexpEnvelope.GeneratedPCCPack?.MaterializedPCCPackEnvelope ?? null;
+  const generatedKBundleEnvelope = generatedMaterializedPCCPack?.KBundleEnvelope ?? null;
+  const generatedConcreteKBundleBoot0 = generatedMaterializedPCCPack?.MaterializedBoot0 ?? generatedMaterializedPCCPack?.PCCPack?.Boot0 ?? null;
+
+  if (!sameDigestHex0(generatedNF.concreteKBundle0BootDigest, digestCanonical0(generatedConcreteKBundleBoot0))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteKBundle0BootDigest'], 'GeneratedPCCPackexp0 NF concrete KBundle Boot0 digest must match generated package Boot0 bytes', {
+      expected: digestCanonical0(generatedConcreteKBundleBoot0),
+      actual: generatedNF.concreteKBundle0BootDigest,
+    });
+  }
+
+  if (!sameDigestHex0(generatedNF.concreteKBundle0MaterializedKBundleDigest, digestCanonical0(generatedKBundleEnvelope?.MaterializedKBundleEnvelope ?? null))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteKBundle0MaterializedKBundleDigest'], 'GeneratedPCCPackexp0 NF concrete KBundle materialized digest must match generated package KBundle bytes', {
+      expected: digestCanonical0(generatedKBundleEnvelope?.MaterializedKBundleEnvelope ?? null),
+      actual: generatedNF.concreteKBundle0MaterializedKBundleDigest,
+    });
+  }
+
+  if (!sameDigestHex0(generatedNF.concreteKBundle0KImplDigest, digestCanonical0(generatedKBundleEnvelope?.KImpl ?? null))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteKBundle0KImplDigest'], 'GeneratedPCCPackexp0 NF KImpl digest must match generated package KImpl bytes', {
+      expected: digestCanonical0(generatedKBundleEnvelope?.KImpl ?? null),
+      actual: generatedNF.concreteKBundle0KImplDigest,
+    });
+  }
+
+  if (!sameDigestHex0(generatedNF.concreteKBundle0K0Digest, digestCanonical0(generatedKBundleEnvelope?.K0 ?? null))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteKBundle0K0Digest'], 'GeneratedPCCPackexp0 NF K0 digest must match generated package K0 bytes', {
+      expected: digestCanonical0(generatedKBundleEnvelope?.K0 ?? null),
+      actual: generatedNF.concreteKBundle0K0Digest,
+    });
+  }
+
+  if (!sameDigestHex0(generatedNF.concreteKBundle0SigmaDigest, digestCanonical0(generatedKBundleEnvelope?.PSigma ?? null))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteKBundle0SigmaDigest'], 'GeneratedPCCPackexp0 NF Sigma digest must match generated package PΣ bytes', {
+      expected: digestCanonical0(generatedKBundleEnvelope?.PSigma ?? null),
+      actual: generatedNF.concreteKBundle0SigmaDigest,
+    });
+  }
+
+  if (!sameDigestHex0(generatedNF.concreteKBundle0ReflectionDigest, digestCanonical0(generatedKBundleEnvelope?.ReflectionRegistry ?? null))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteKBundle0ReflectionDigest'], 'GeneratedPCCPackexp0 NF reflection digest must match generated package reflection registry bytes', {
+      expected: digestCanonical0(generatedKBundleEnvelope?.ReflectionRegistry ?? null),
+      actual: generatedNF.concreteKBundle0ReflectionDigest,
+    });
+  }
+
+  if (!sameDigestHex0(generatedNF.concreteKBundle0ProofInventoryDigest, digestCanonical0(generatedKBundleEnvelope?.ProofInventory ?? null))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteKBundle0ProofInventoryDigest'], 'GeneratedPCCPackexp0 NF proof inventory digest must match generated package proof inventory bytes', {
+      expected: digestCanonical0(generatedKBundleEnvelope?.ProofInventory ?? null),
+      actual: generatedNF.concreteKBundle0ProofInventoryDigest,
     });
   }
 
