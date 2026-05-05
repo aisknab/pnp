@@ -542,6 +542,35 @@ export function summarizeConcreteFinalCertificateChain0({
     generatedPCCPackexpSched0PiBootDigestMatches:
       checkGeneratedPCCPackexpRecordNF?.sched0PiBootDigestMatches === true,
 
+    generatedPCCPackexpByteLang0:
+      checkGeneratedPCCPackexpRecordNF?.generatedPackageByteLang0 === true,
+    generatedPCCPackexpByteLang0Accepted:
+      checkGeneratedPCCPackexpRecordNF?.byteLang0Accepted === true,
+    generatedPCCPackexpByteLang0Kind:
+      checkGeneratedPCCPackexpRecordNF?.byteLang0Kind ?? null,
+    generatedPCCPackexpByteLang0Digest:
+      checkGeneratedPCCPackexpRecordNF?.byteLang0Digest ?? null,
+    generatedPCCPackexpByteLang0TagCount:
+      checkGeneratedPCCPackexpRecordNF?.byteLang0TagCount ?? null,
+    generatedPCCPackexpByteLang0TagsUnique:
+      checkGeneratedPCCPackexpRecordNF?.byteLang0TagsUnique === true,
+    generatedPCCPackexpByteLang0RequiredTagsPresent:
+      checkGeneratedPCCPackexpRecordNF?.byteLang0RequiredTagsPresent === true,
+    generatedPCCPackexpByteLang0SortCount:
+      checkGeneratedPCCPackexpRecordNF?.byteLang0SortCount ?? null,
+    generatedPCCPackexpByteLang0RequiredSortsPresent:
+      checkGeneratedPCCPackexpRecordNF?.byteLang0RequiredSortsPresent === true,
+    generatedPCCPackexpByteLang0ConstructorCount:
+      checkGeneratedPCCPackexpRecordNF?.byteLang0ConstructorCount ?? null,
+    generatedPCCPackexpByteLang0RequiredConstructorsPresent:
+      checkGeneratedPCCPackexpRecordNF?.byteLang0RequiredConstructorsPresent === true,
+    generatedPCCPackexpByteLang0RecordCount:
+      checkGeneratedPCCPackexpRecordNF?.byteLang0RecordCount ?? null,
+    generatedPCCPackexpByteLang0RequiredRecordAritiesPresent:
+      checkGeneratedPCCPackexpRecordNF?.byteLang0RequiredRecordAritiesPresent === true,
+    generatedPCCPackexpByteLang0PiBootDigestMatches:
+      checkGeneratedPCCPackexpRecordNF?.byteLang0PiBootDigestMatches === true,
+
     rowsEnvelopeKind: concreteGeneratedChain.rowsEnvelopeKind,
     localPackagesEnvelopeKind: concreteGeneratedChain.localPackagesEnvelopeKind,
     globalFirewallsEnvelopeKind: concreteGeneratedChain.globalFirewallsEnvelopeKind,
@@ -1098,6 +1127,35 @@ export async function CheckConcreteMaterializedFinalCertificate0(
     generatedPCCPackexpSched0PiBootDigestMatches:
       recomputedChain.generatedPCCPackexpSched0PiBootDigestMatches,
 
+    generatedPCCPackexpByteLang0:
+      recomputedChain.generatedPCCPackexpByteLang0,
+    generatedPCCPackexpByteLang0Accepted:
+      recomputedChain.generatedPCCPackexpByteLang0Accepted,
+    generatedPCCPackexpByteLang0Kind:
+      recomputedChain.generatedPCCPackexpByteLang0Kind,
+    generatedPCCPackexpByteLang0Digest:
+      recomputedChain.generatedPCCPackexpByteLang0Digest,
+    generatedPCCPackexpByteLang0TagCount:
+      recomputedChain.generatedPCCPackexpByteLang0TagCount,
+    generatedPCCPackexpByteLang0TagsUnique:
+      recomputedChain.generatedPCCPackexpByteLang0TagsUnique,
+    generatedPCCPackexpByteLang0RequiredTagsPresent:
+      recomputedChain.generatedPCCPackexpByteLang0RequiredTagsPresent,
+    generatedPCCPackexpByteLang0SortCount:
+      recomputedChain.generatedPCCPackexpByteLang0SortCount,
+    generatedPCCPackexpByteLang0RequiredSortsPresent:
+      recomputedChain.generatedPCCPackexpByteLang0RequiredSortsPresent,
+    generatedPCCPackexpByteLang0ConstructorCount:
+      recomputedChain.generatedPCCPackexpByteLang0ConstructorCount,
+    generatedPCCPackexpByteLang0RequiredConstructorsPresent:
+      recomputedChain.generatedPCCPackexpByteLang0RequiredConstructorsPresent,
+    generatedPCCPackexpByteLang0RecordCount:
+      recomputedChain.generatedPCCPackexpByteLang0RecordCount,
+    generatedPCCPackexpByteLang0RequiredRecordAritiesPresent:
+      recomputedChain.generatedPCCPackexpByteLang0RequiredRecordAritiesPresent,
+    generatedPCCPackexpByteLang0PiBootDigestMatches:
+      recomputedChain.generatedPCCPackexpByteLang0PiBootDigestMatches,
+
     kBundleEnvelopeKind: recomputedChain.kBundleEnvelopeKind,
     hardEnvelopeKind: recomputedChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: recomputedChain.finalIntegrationEnvelopeKind,
@@ -1447,6 +1505,15 @@ function validateConcreteFinalCertificateChain0(actual, expected) {
     'generatedPCCPackexpSched0ScaleFactorsPresent',
     'generatedPCCPackexpSched0SelectorBoundsPresent',
     'generatedPCCPackexpSched0PiBootDigestMatches',
+
+    'generatedPCCPackexpByteLang0',
+    'generatedPCCPackexpByteLang0Accepted',
+    'generatedPCCPackexpByteLang0TagsUnique',
+    'generatedPCCPackexpByteLang0RequiredTagsPresent',
+    'generatedPCCPackexpByteLang0RequiredSortsPresent',
+    'generatedPCCPackexpByteLang0RequiredConstructorsPresent',
+    'generatedPCCPackexpByteLang0RequiredRecordAritiesPresent',
+    'generatedPCCPackexpByteLang0PiBootDigestMatches',
 
     'finalCertificateUsesConcreteAcceptRun',
     'certificatePccPackDigestMatchesConcreteRun',
