@@ -308,6 +308,29 @@ function makeAcceptedConcreteFinalCertificatePublicStatusRecord0() {
     generatedPCCPackexpPiBoot0RefsIncludeKernelSeed0: true,
     generatedPCCPackexpPiBoot0RefsIncludeB0: true,
     generatedPCCPackexpPiBoot0RefsIncludeBootAudit0: true,
+    generatedPCCPackexpConcreteKBundle0: true,
+    generatedPCCPackexpConcreteKBundle0Accepted: true,
+    generatedPCCPackexpConcreteKBundle0Checker: 'CheckConcreteMaterializedKBundle0',
+    generatedPCCPackexpConcreteKBundle0Digest: digestOf0('2a'.repeat(32)),
+    generatedPCCPackexpConcreteKBundle0MaterializedKBundleDigest: digestOf0('2b'.repeat(32)),
+    generatedPCCPackexpConcreteKBundle0BootDigest: digestOf0('2c'.repeat(32)),
+    generatedPCCPackexpConcreteKBundle0KImplDigest: digestOf0('2d'.repeat(32)),
+    generatedPCCPackexpConcreteKBundle0K0Digest: digestOf0('2e'.repeat(32)),
+    generatedPCCPackexpConcreteKBundle0SigmaDigest: digestOf0('2f'.repeat(32)),
+    generatedPCCPackexpConcreteKBundle0ReflectionDigest: digestOf0('30'.repeat(32)),
+    generatedPCCPackexpConcreteKBundle0ProofInventoryDigest: digestOf0('31'.repeat(32)),
+    generatedPCCPackexpConcreteKBundle0KernelRuleCount: 16,
+    generatedPCCPackexpConcreteKBundle0ConformanceNodeCount: 16,
+    generatedPCCPackexpConcreteKBundle0KernelRuleCoverageComplete: true,
+    generatedPCCPackexpConcreteKBundle0SigmaTheoremCount: 2,
+    generatedPCCPackexpConcreteKBundle0SigmaCoverageComplete: true,
+    generatedPCCPackexpConcreteKBundle0SigmaProofRefsResolve: true,
+    generatedPCCPackexpConcreteKBundle0ReflectionCount: 5,
+    generatedPCCPackexpConcreteKBundle0ReflectionCoverageComplete: true,
+    generatedPCCPackexpConcreteKBundle0ReflectionProofRefsResolve: true,
+    generatedPCCPackexpConcreteKBundle0NoOpaqueProofRefs: true,
+    generatedPCCPackexpConcreteKBundle0NoExecutableMinSymbols: true,
+    generatedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0: true,
 
     finalCertificateUsesConcreteAcceptRun: true,
     statusUsesConcreteFinalCertificate: true,
@@ -663,6 +686,29 @@ test('CheckReleaseAudit0 reports the concrete final-certificate public-status ga
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeKernelSeed0, true);
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeB0, true);
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeBootAudit0, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0Accepted, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0Checker, 'CheckConcreteMaterializedKBundle0');
+  assert.match(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0MaterializedKBundleDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0BootDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0KImplDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0K0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0SigmaDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0ReflectionDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0ProofInventoryDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0KernelRuleCount, 16);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0ConformanceNodeCount, 16);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0KernelRuleCoverageComplete, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0SigmaTheoremCount, 2);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0SigmaCoverageComplete, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0SigmaProofRefsResolve, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0ReflectionCount >= 5, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0ReflectionCoverageComplete, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0ReflectionProofRefsResolve, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0NoOpaqueProofRefs, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0NoExecutableMinSymbols, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0, true);
 
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateStatusUsesConcreteFinalCertificate, true);
 
@@ -922,6 +968,29 @@ test('CheckReleaseAudit0 reports the concrete final-certificate public-status ga
   assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeKernelSeed0, true);
   assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeB0, true);
   assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeBootAudit0, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0Accepted, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0Checker, 'CheckConcreteMaterializedKBundle0');
+  assert.match(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0MaterializedKBundleDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0BootDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0KImplDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0K0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0SigmaDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0ReflectionDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0ProofInventoryDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0KernelRuleCount, 16);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0ConformanceNodeCount, 16);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0KernelRuleCoverageComplete, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0SigmaTheoremCount, 2);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0SigmaCoverageComplete, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0SigmaProofRefsResolve, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0ReflectionCount >= 5, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0ReflectionCoverageComplete, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0ReflectionProofRefsResolve, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0NoOpaqueProofRefs, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0NoExecutableMinSymbols, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0, true);
 
   assert.equal(summary.concreteFinalCertificatePublicStatusGateSummary.publicConclusion.consequent, 'P = NP');
 });
@@ -1476,5 +1545,71 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without PiBoo
     'concreteFinalCertificatePublicStatusGate',
     'NF',
     'generatedPCCPackexpPiBoot0RefsMatchBootObjects',
+  ]);
+});
+
+test('CheckReleaseAudit0 rejects a concrete final-certificate gate without concrete KBundle Sigma proof-ref evidence', async () => {
+  const bad = makeAcceptedConcreteFinalCertificatePublicStatusRecord0();
+
+  bad.NF = {
+    ...bad.NF,
+    generatedPCCPackexpConcreteKBundle0SigmaProofRefsResolve: false,
+  };
+  bad.nf = bad.NF;
+  bad.Digest = digestCanonical0(bad.NF);
+  bad.digest = bad.Digest;
+
+  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+    runSyntaxCheck: false,
+    runRunAll: false,
+    runMutationCheck: false,
+    runCliSmoke: false,
+    runPublicSurfaceFreeze: false,
+    runMaterializedPublicStatusGate: false,
+    runFinalCertificatePublicStatusGate: false,
+    runConcreteFinalCertificatePublicStatusGate: true,
+    concreteFinalCertificatePublicStatusGateRunner: async () => bad,
+  }));
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAudit0');
+  assert.equal(out.Coord, 'CheckReleaseAudit0.concreteFinalCertificatePublicStatusGate');
+  assert.deepEqual(out.Path, [
+    'concreteFinalCertificatePublicStatusGate',
+    'NF',
+    'generatedPCCPackexpConcreteKBundle0SigmaProofRefsResolve',
+  ]);
+});
+
+test('CheckReleaseAudit0 rejects a concrete final-certificate gate without concrete KBundle no-opaque-proof evidence', async () => {
+  const bad = makeAcceptedConcreteFinalCertificatePublicStatusRecord0();
+
+  bad.NF = {
+    ...bad.NF,
+    generatedPCCPackexpConcreteKBundle0NoOpaqueProofRefs: false,
+  };
+  bad.nf = bad.NF;
+  bad.Digest = digestCanonical0(bad.NF);
+  bad.digest = bad.Digest;
+
+  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+    runSyntaxCheck: false,
+    runRunAll: false,
+    runMutationCheck: false,
+    runCliSmoke: false,
+    runPublicSurfaceFreeze: false,
+    runMaterializedPublicStatusGate: false,
+    runFinalCertificatePublicStatusGate: false,
+    runConcreteFinalCertificatePublicStatusGate: true,
+    concreteFinalCertificatePublicStatusGateRunner: async () => bad,
+  }));
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAudit0');
+  assert.equal(out.Coord, 'CheckReleaseAudit0.concreteFinalCertificatePublicStatusGate');
+  assert.deepEqual(out.Path, [
+    'concreteFinalCertificatePublicStatusGate',
+    'NF',
+    'generatedPCCPackexpConcreteKBundle0NoOpaqueProofRefs',
   ]);
 });
