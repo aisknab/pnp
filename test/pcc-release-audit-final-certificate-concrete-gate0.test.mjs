@@ -307,6 +307,20 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 accepts attached release au
   assert.equal(out.NF.generatedPCCPackexpSched0SelectorBoundBTheta, 12);
   assert.equal(out.NF.generatedPCCPackexpSched0PolynomialExponent, 36);
   assert.equal(out.NF.generatedPCCPackexpSched0PiBootDigestMatches, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0Kind, 'ByteLang0');
+  assert.match(out.NF.generatedPCCPackexpByteLang0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0TagCount >= 12, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0TagsUnique, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0RequiredTagsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0SortCount >= 8, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0RequiredSortsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0ConstructorCount >= 7, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0RequiredConstructorsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0RecordCount >= 9, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0RequiredRecordAritiesPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0PiBootDigestMatches, true);
 
   assert.equal(out.NF.finalCertificateUsesConcreteAcceptRun, true);
   assert.equal(out.NF.statusUsesConcreteFinalCertificate, true);
@@ -912,5 +926,71 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale Sched0 select
     'ConcreteFinalCertificatePublicStatusEnvelope',
     'ConcreteChain',
     'generatedPCCPackexpSched0SelectorBoundsPresent',
+  ]);
+});
+
+test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale ByteLang0 tag uniqueness evidence', async () => {
+  const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
+  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+    ReleaseAuditRecord: releaseAuditRecord,
+    runReleaseAudit: false,
+  });
+
+  envelope.ConcreteFinalCertificatePublicStatusEnvelope.ConcreteChain = {
+    ...envelope.ConcreteFinalCertificatePublicStatusEnvelope.ConcreteChain,
+    generatedPCCPackexpByteLang0TagsUnique: false,
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concretePublicStatusEnvelopeDigest: undefined,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+    checkConcretePublicStatus: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAuditConcreteFinalCertificateGate0');
+  assert.equal(out.Coord, 'CheckReleaseAuditConcreteFinalCertificateGate0.PublicConclusion');
+  assert.deepEqual(out.Path, [
+    'ConcreteFinalCertificatePublicStatusEnvelope',
+    'ConcreteChain',
+    'generatedPCCPackexpByteLang0TagsUnique',
+  ]);
+});
+
+test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale ByteLang0 record-arity evidence', async () => {
+  const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
+  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+    ReleaseAuditRecord: releaseAuditRecord,
+    runReleaseAudit: false,
+  });
+
+  envelope.ConcreteFinalCertificatePublicStatusEnvelope.ConcreteChain = {
+    ...envelope.ConcreteFinalCertificatePublicStatusEnvelope.ConcreteChain,
+    generatedPCCPackexpByteLang0RequiredRecordAritiesPresent: false,
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concretePublicStatusEnvelopeDigest: undefined,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+    checkConcretePublicStatus: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAuditConcreteFinalCertificateGate0');
+  assert.equal(out.Coord, 'CheckReleaseAuditConcreteFinalCertificateGate0.PublicConclusion');
+  assert.deepEqual(out.Path, [
+    'ConcreteFinalCertificatePublicStatusEnvelope',
+    'ConcreteChain',
+    'generatedPCCPackexpByteLang0RequiredRecordAritiesPresent',
   ]);
 });

@@ -639,6 +639,34 @@ export async function CheckReleaseAuditConcreteFinalCertificateGate0(
       concreteStatus.ConcreteChain.generatedPCCPackexpSched0PolynomialExponent,
     generatedPCCPackexpSched0PiBootDigestMatches:
       concreteStatus.ConcreteChain.generatedPCCPackexpSched0PiBootDigestMatches,
+    generatedPCCPackexpByteLang0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpByteLang0,
+    generatedPCCPackexpByteLang0Accepted:
+      concreteStatus.ConcreteChain.generatedPCCPackexpByteLang0Accepted,
+    generatedPCCPackexpByteLang0Kind:
+      concreteStatus.ConcreteChain.generatedPCCPackexpByteLang0Kind,
+    generatedPCCPackexpByteLang0Digest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpByteLang0Digest,
+    generatedPCCPackexpByteLang0TagCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpByteLang0TagCount,
+    generatedPCCPackexpByteLang0TagsUnique:
+      concreteStatus.ConcreteChain.generatedPCCPackexpByteLang0TagsUnique,
+    generatedPCCPackexpByteLang0RequiredTagsPresent:
+      concreteStatus.ConcreteChain.generatedPCCPackexpByteLang0RequiredTagsPresent,
+    generatedPCCPackexpByteLang0SortCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpByteLang0SortCount,
+    generatedPCCPackexpByteLang0RequiredSortsPresent:
+      concreteStatus.ConcreteChain.generatedPCCPackexpByteLang0RequiredSortsPresent,
+    generatedPCCPackexpByteLang0ConstructorCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpByteLang0ConstructorCount,
+    generatedPCCPackexpByteLang0RequiredConstructorsPresent:
+      concreteStatus.ConcreteChain.generatedPCCPackexpByteLang0RequiredConstructorsPresent,
+    generatedPCCPackexpByteLang0RecordCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpByteLang0RecordCount,
+    generatedPCCPackexpByteLang0RequiredRecordAritiesPresent:
+      concreteStatus.ConcreteChain.generatedPCCPackexpByteLang0RequiredRecordAritiesPresent,
+    generatedPCCPackexpByteLang0PiBootDigestMatches:
+      concreteStatus.ConcreteChain.generatedPCCPackexpByteLang0PiBootDigestMatches,
 
     finalCertificateUsesConcreteAcceptRun: concreteStatus.ConcreteChain.finalCertificateUsesConcreteAcceptRun,
     statusUsesConcreteFinalCertificate: concreteStatus.ConcreteChain.statusUsesConcreteFinalCertificate,
@@ -1010,6 +1038,14 @@ function validateConcretePublicConclusionAlignment0(envelope) {
     'generatedPCCPackexpSched0ScaleFactorsPresent',
     'generatedPCCPackexpSched0SelectorBoundsPresent',
     'generatedPCCPackexpSched0PiBootDigestMatches',
+    'generatedPCCPackexpByteLang0',
+    'generatedPCCPackexpByteLang0Accepted',
+    'generatedPCCPackexpByteLang0TagsUnique',
+    'generatedPCCPackexpByteLang0RequiredTagsPresent',
+    'generatedPCCPackexpByteLang0RequiredSortsPresent',
+    'generatedPCCPackexpByteLang0RequiredConstructorsPresent',
+    'generatedPCCPackexpByteLang0RequiredRecordAritiesPresent',
+    'generatedPCCPackexpByteLang0PiBootDigestMatches',
 
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',
