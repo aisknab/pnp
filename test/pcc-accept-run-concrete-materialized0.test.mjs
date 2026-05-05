@@ -267,6 +267,37 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 accepts an accept run over th
   assert.equal(out.NF.generatedPCCPackexpByteLang0RecordCount >= 9, true);
   assert.equal(out.NF.generatedPCCPackexpByteLang0RequiredRecordAritiesPresent, true);
   assert.equal(out.NF.generatedPCCPackexpByteLang0PiBootDigestMatches, true);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0, true);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0Checker, 'CheckVerifierFrag0');
+  assert.match(out.NF.generatedPCCPackexpBootAudit0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0DigestMatchesNF, true);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0NFKind, 'VerifierFrag0AuditNF');
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0SuiteId, 'boot0.materialized.audit');
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0CaseCount, 3);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0PositiveCount, 1);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0NegativeCount, 2);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0CoversB0Accept, true);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0CoversB0MissingCoverageReject, true);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0CoversB0HashKeyTamperReject, true);
+
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0Kind, 'PiBoot0');
+  assert.match(out.NF.generatedPCCPackexpPiBoot0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0Materialized, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0ExternalJson, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefCount, 8);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0AllBootRefsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsMatchBootObjects, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeByteLang0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeCodec0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeDigest0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeIfaceDict0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeSched0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeKernelSeed0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeB0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeBootAudit0, true);
 
   assert.equal(out.Ledger.some((entry) => (
     entry.phase === 'CheckGeneratedPCCPackexp0' &&
@@ -813,4 +844,23 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp w
   assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
   assert.equal(out.Coord, 'CheckConcreteMaterializedGeneratedAcceptRun0.GeneratedPCCPackexp');
   assert.deepEqual(out.Path, ['GeneratedPCCPackexpEnvelope', 'NF', 'generatedPackageByteLang0']);
+});
+
+test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp without BootAudit0/PiBoot evidence', async () => {
+  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+
+  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+    checkGeneratedAcceptRun: false,
+    checkConcretePCCPack: false,
+    checkPCCPackexp: false,
+    checkLinkage: false,
+    generatedPCCPackexpConfig: {
+      checkBootAuditPiBoot0: false,
+    },
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedGeneratedAcceptRun0.GeneratedPCCPackexp');
+  assert.deepEqual(out.Path, ['GeneratedPCCPackexpEnvelope', 'NF', 'generatedPackageBootAudit0']);
 });
