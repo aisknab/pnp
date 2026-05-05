@@ -620,6 +620,51 @@ export function summarizeConcreteFinalCertificatePublicStatusChain0({
     generatedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0:
       concreteCertificateChain.generatedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0,
 
+    generatedPCCPackexpConcreteHard0:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0,
+    generatedPCCPackexpConcreteHard0Accepted:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0Accepted,
+    generatedPCCPackexpConcreteHard0Checker:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0Checker,
+    generatedPCCPackexpConcreteHard0Digest:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0Digest,
+    generatedPCCPackexpConcreteHard0MaterializedHardDigest:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0MaterializedHardDigest,
+    generatedPCCPackexpConcreteHard0HardCheckDigest:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0HardCheckDigest,
+    generatedPCCPackexpConcreteHard0CoverageDigest:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0CoverageDigest,
+    generatedPCCPackexpConcreteHard0CheckerCount:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0CheckerCount,
+    generatedPCCPackexpConcreteHard0CheckerCoverageComplete:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0CheckerCoverageComplete,
+    generatedPCCPackexpConcreteHard0RowKeyFieldCount:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0RowKeyFieldCount,
+    generatedPCCPackexpConcreteHard0RowKeyCoverageComplete:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0RowKeyCoverageComplete,
+    generatedPCCPackexpConcreteHard0RoutePriorityComplete:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0RoutePriorityComplete,
+    generatedPCCPackexpConcreteHard0ProofRefPolicyComplete:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0ProofRefPolicyComplete,
+    generatedPCCPackexpConcreteHard0HashDisciplineComplete:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0HashDisciplineComplete,
+    generatedPCCPackexpConcreteHard0NoMinCoverageComplete:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0NoMinCoverageComplete,
+    generatedPCCPackexpConcreteHard0ForbiddenSymbolCount:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0ForbiddenSymbolCount,
+    generatedPCCPackexpConcreteHard0ImportPolicyComplete:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0ImportPolicyComplete,
+    generatedPCCPackexpConcreteHard0ForbiddenImportEdgeCount:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0ForbiddenImportEdgeCount,
+    generatedPCCPackexpConcreteHard0ReflectionPolicyComplete:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0ReflectionPolicyComplete,
+    generatedPCCPackexpConcreteHard0BoundsPolicyComplete:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0BoundsPolicyComplete,
+    generatedPCCPackexpConcreteHard0DiagnosticsPolicyComplete:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0DiagnosticsPolicyComplete,
+    generatedPCCPackexpConcreteHard0LinkedToPCCPack:
+      concreteCertificateChain.generatedPCCPackexpConcreteHard0LinkedToPCCPack,
+
     kBundleEnvelopeKind: concreteCertificateChain.kBundleEnvelopeKind,
     hardEnvelopeKind: concreteCertificateChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: concreteCertificateChain.finalIntegrationEnvelopeKind,
@@ -1342,6 +1387,51 @@ export async function CheckConcreteFinalCertificatePublicStatus0(
     generatedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0:
       recomputedChain.generatedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0,
 
+    generatedPCCPackexpConcreteHard0:
+      recomputedChain.generatedPCCPackexpConcreteHard0,
+    generatedPCCPackexpConcreteHard0Accepted:
+      recomputedChain.generatedPCCPackexpConcreteHard0Accepted,
+    generatedPCCPackexpConcreteHard0Checker:
+      recomputedChain.generatedPCCPackexpConcreteHard0Checker,
+    generatedPCCPackexpConcreteHard0Digest:
+      recomputedChain.generatedPCCPackexpConcreteHard0Digest,
+    generatedPCCPackexpConcreteHard0MaterializedHardDigest:
+      recomputedChain.generatedPCCPackexpConcreteHard0MaterializedHardDigest,
+    generatedPCCPackexpConcreteHard0HardCheckDigest:
+      recomputedChain.generatedPCCPackexpConcreteHard0HardCheckDigest,
+    generatedPCCPackexpConcreteHard0CoverageDigest:
+      recomputedChain.generatedPCCPackexpConcreteHard0CoverageDigest,
+    generatedPCCPackexpConcreteHard0CheckerCount:
+      recomputedChain.generatedPCCPackexpConcreteHard0CheckerCount,
+    generatedPCCPackexpConcreteHard0CheckerCoverageComplete:
+      recomputedChain.generatedPCCPackexpConcreteHard0CheckerCoverageComplete,
+    generatedPCCPackexpConcreteHard0RowKeyFieldCount:
+      recomputedChain.generatedPCCPackexpConcreteHard0RowKeyFieldCount,
+    generatedPCCPackexpConcreteHard0RowKeyCoverageComplete:
+      recomputedChain.generatedPCCPackexpConcreteHard0RowKeyCoverageComplete,
+    generatedPCCPackexpConcreteHard0RoutePriorityComplete:
+      recomputedChain.generatedPCCPackexpConcreteHard0RoutePriorityComplete,
+    generatedPCCPackexpConcreteHard0ProofRefPolicyComplete:
+      recomputedChain.generatedPCCPackexpConcreteHard0ProofRefPolicyComplete,
+    generatedPCCPackexpConcreteHard0HashDisciplineComplete:
+      recomputedChain.generatedPCCPackexpConcreteHard0HashDisciplineComplete,
+    generatedPCCPackexpConcreteHard0NoMinCoverageComplete:
+      recomputedChain.generatedPCCPackexpConcreteHard0NoMinCoverageComplete,
+    generatedPCCPackexpConcreteHard0ForbiddenSymbolCount:
+      recomputedChain.generatedPCCPackexpConcreteHard0ForbiddenSymbolCount,
+    generatedPCCPackexpConcreteHard0ImportPolicyComplete:
+      recomputedChain.generatedPCCPackexpConcreteHard0ImportPolicyComplete,
+    generatedPCCPackexpConcreteHard0ForbiddenImportEdgeCount:
+      recomputedChain.generatedPCCPackexpConcreteHard0ForbiddenImportEdgeCount,
+    generatedPCCPackexpConcreteHard0ReflectionPolicyComplete:
+      recomputedChain.generatedPCCPackexpConcreteHard0ReflectionPolicyComplete,
+    generatedPCCPackexpConcreteHard0BoundsPolicyComplete:
+      recomputedChain.generatedPCCPackexpConcreteHard0BoundsPolicyComplete,
+    generatedPCCPackexpConcreteHard0DiagnosticsPolicyComplete:
+      recomputedChain.generatedPCCPackexpConcreteHard0DiagnosticsPolicyComplete,
+    generatedPCCPackexpConcreteHard0LinkedToPCCPack:
+      recomputedChain.generatedPCCPackexpConcreteHard0LinkedToPCCPack,
+
     kBundleEnvelopeKind: recomputedChain.kBundleEnvelopeKind,
     hardEnvelopeKind: recomputedChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: recomputedChain.finalIntegrationEnvelopeKind,
@@ -1724,6 +1814,20 @@ function validateConcretePublicStatusChain0(actual, expected) {
     'generatedPCCPackexpConcreteKBundle0NoOpaqueProofRefs',
     'generatedPCCPackexpConcreteKBundle0NoExecutableMinSymbols',
     'generatedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0',
+
+    'generatedPCCPackexpConcreteHard0',
+    'generatedPCCPackexpConcreteHard0Accepted',
+    'generatedPCCPackexpConcreteHard0CheckerCoverageComplete',
+    'generatedPCCPackexpConcreteHard0RowKeyCoverageComplete',
+    'generatedPCCPackexpConcreteHard0RoutePriorityComplete',
+    'generatedPCCPackexpConcreteHard0ProofRefPolicyComplete',
+    'generatedPCCPackexpConcreteHard0HashDisciplineComplete',
+    'generatedPCCPackexpConcreteHard0NoMinCoverageComplete',
+    'generatedPCCPackexpConcreteHard0ImportPolicyComplete',
+    'generatedPCCPackexpConcreteHard0ReflectionPolicyComplete',
+    'generatedPCCPackexpConcreteHard0BoundsPolicyComplete',
+    'generatedPCCPackexpConcreteHard0DiagnosticsPolicyComplete',
+    'generatedPCCPackexpConcreteHard0LinkedToPCCPack',
 
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',
