@@ -28,6 +28,10 @@ import {
   CheckConcreteMaterializedKBundle0,
 } from './pcc-k-concrete-materialized0.mjs';
 
+import {
+  CheckConcreteMaterializedHard0,
+} from './pcc-hard-concrete-materialized0.mjs';
+
 const CHECKER_VERSION = 0;
 
 const GENERATED_PCCPACK_BOOT_B0_REQUIRED_FAMILIES0 = Object.freeze([
@@ -216,6 +220,7 @@ export function makeGeneratePCCPackConfig0(overrides = {}) {
     checkByteLang0: true,
     checkBootAuditPiBoot0: true,
     checkConcreteKBundle0: true,
+    checkConcreteHard0: true,
     checkCheckPCCPackexpRecord: true,
     checkPublicClaimBoundary: true,
     checkJsonMaterialized: true,
@@ -323,6 +328,7 @@ export async function CheckGeneratedPCCPackexp0(
   let byteLangNF = null;
   let bootAuditPiBootNF = null;
   let concreteKBundleNF = null;
+  let concreteHardNF = null;
   let freshCheckPCCPackexpRecord = null;
   let recordAlignmentNF = null;
 
@@ -558,6 +564,28 @@ export async function CheckGeneratedPCCPackexp0(
     }
 
     concreteKBundleNF = concreteKBundle.nf;
+  }
+
+  if (cfg.checkConcreteHard0 === true) {
+    const concreteHard = await validateGeneratedConcreteHard0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'ConcreteHard0',
+      status: concreteHard.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(concreteHard.nf ?? concreteHard.witness ?? null),
+    });
+
+    if (!concreteHard.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.ConcreteHard0`,
+        path: concreteHard.path,
+        witness: concreteHard.witness,
+        ledger,
+      });
+    }
+
+    concreteHardNF = concreteHard.nf;
   }
 
   if (cfg.checkCheckPCCPackexpRecord === true) {
@@ -894,6 +922,44 @@ export async function CheckGeneratedPCCPackexp0(
     concreteKBundle0LinkedToGeneratedBoot0:
       concreteKBundleNF?.concreteKBundle0LinkedToGeneratedBoot0 ?? null,
 
+    generatedPackageConcreteHard0: concreteHardNF?.concreteHard0 ?? null,
+    concreteHard0Accepted: concreteHardNF?.concreteHard0Accepted ?? null,
+    concreteHard0Checker: concreteHardNF?.concreteHard0Checker ?? null,
+    concreteHard0Digest: concreteHardNF?.concreteHard0Digest ?? null,
+    concreteHard0MaterializedHardDigest:
+      concreteHardNF?.concreteHard0MaterializedHardDigest ?? null,
+    concreteHard0HardCheckDigest: concreteHardNF?.concreteHard0HardCheckDigest ?? null,
+    concreteHard0CoverageDigest: concreteHardNF?.concreteHard0CoverageDigest ?? null,
+    concreteHard0CheckerCount: concreteHardNF?.concreteHard0CheckerCount ?? null,
+    concreteHard0CheckerCoverageComplete:
+      concreteHardNF?.concreteHard0CheckerCoverageComplete ?? null,
+    concreteHard0RowKeyFieldCount:
+      concreteHardNF?.concreteHard0RowKeyFieldCount ?? null,
+    concreteHard0RowKeyCoverageComplete:
+      concreteHardNF?.concreteHard0RowKeyCoverageComplete ?? null,
+    concreteHard0RoutePriorityComplete:
+      concreteHardNF?.concreteHard0RoutePriorityComplete ?? null,
+    concreteHard0ProofRefPolicyComplete:
+      concreteHardNF?.concreteHard0ProofRefPolicyComplete ?? null,
+    concreteHard0HashDisciplineComplete:
+      concreteHardNF?.concreteHard0HashDisciplineComplete ?? null,
+    concreteHard0NoMinCoverageComplete:
+      concreteHardNF?.concreteHard0NoMinCoverageComplete ?? null,
+    concreteHard0ForbiddenSymbolCount:
+      concreteHardNF?.concreteHard0ForbiddenSymbolCount ?? null,
+    concreteHard0ImportPolicyComplete:
+      concreteHardNF?.concreteHard0ImportPolicyComplete ?? null,
+    concreteHard0ForbiddenImportEdgeCount:
+      concreteHardNF?.concreteHard0ForbiddenImportEdgeCount ?? null,
+    concreteHard0ReflectionPolicyComplete:
+      concreteHardNF?.concreteHard0ReflectionPolicyComplete ?? null,
+    concreteHard0BoundsPolicyComplete:
+      concreteHardNF?.concreteHard0BoundsPolicyComplete ?? null,
+    concreteHard0DiagnosticsPolicyComplete:
+      concreteHardNF?.concreteHard0DiagnosticsPolicyComplete ?? null,
+    concreteHard0LinkedToPCCPack:
+      concreteHardNF?.concreteHard0LinkedToPCCPack ?? null,
+
     generatedPackageKind: envelope.GeneratedPCCPack.kind ?? null,
     generatedPackageDigest: digestCanonical0(envelope.GeneratedPCCPack),
 
@@ -995,6 +1061,7 @@ function validateConfig0(config) {
     'checkByteLang0',
     'checkBootAuditPiBoot0',
     'checkConcreteKBundle0',
+    'checkConcreteHard0',
     'checkCheckPCCPackexpRecord',
     'checkPublicClaimBoundary',
     'checkJsonMaterialized',
@@ -1135,6 +1202,122 @@ function scanForbiddenCoreKeys0(value, pathNow, hits) {
 
     scanForbiddenCoreKeys0(child, childPath, hits);
   }
+}
+
+async function validateGeneratedConcreteHard0(generatedPackage) {
+  const materializedPCCPack =
+    generatedPackage?.MaterializedPCCPackEnvelope ??
+    generatedPackage?.MaterializedPCCPack ??
+    null;
+
+  const concreteHard =
+    materializedPCCPack?.HardEnvelope ??
+    materializedPCCPack?.ConcreteHardEnvelope ??
+    null;
+
+  if (!isPlainObject(concreteHard)) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'HardEnvelope'], 'GeneratedPCCPack must include concrete HardCheck envelope', {
+      actual: typeof concreteHard,
+    });
+  }
+
+  const record = await CheckConcreteMaterializedHard0(concreteHard);
+  const result = recordToValidation0(record, ['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'HardEnvelope']);
+
+  if (!result.ok) {
+    return validationReject0(result.path, 'CheckConcreteMaterializedHard0 rejected generated package HardEnvelope', {
+      inner: result.witness?.detail?.inner ?? result.witness,
+    });
+  }
+
+  const nf = record.NF ?? record.nf;
+
+  for (const field of [
+    'checkerCoverageComplete',
+    'rowKeyCoverageComplete',
+    'routePriorityComplete',
+    'proofRefPolicyComplete',
+    'hashDisciplineComplete',
+    'noMinCoverageComplete',
+    'importPolicyComplete',
+    'reflectionPolicyComplete',
+    'boundsPolicyComplete',
+    'diagnosticsPolicyComplete',
+  ]) {
+    if (nf[field] !== true) {
+      return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'HardEnvelope', 'NF', field], `Concrete HardCheck NF must certify ${field}`, {
+        actual: nf[field],
+      });
+    }
+  }
+
+  if (nf.checkerCount !== 13) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'HardEnvelope', 'NF', 'checkerCount'], 'Concrete HardCheck NF must certify complete hardened checker descriptor inventory', {
+      expected: 13,
+      actual: nf.checkerCount,
+    });
+  }
+
+  if (nf.rowKeyFieldCount !== 17) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'HardEnvelope', 'NF', 'rowKeyFieldCount'], 'Concrete HardCheck NF must certify complete row-key field inventory', {
+      expected: 17,
+      actual: nf.rowKeyFieldCount,
+    });
+  }
+
+  if (nf.forbiddenSymbolCount !== 11) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'HardEnvelope', 'NF', 'forbiddenSymbolCount'], 'Concrete HardCheck NF must certify no-hidden-minimization forbidden symbol inventory', {
+      expected: 11,
+      actual: nf.forbiddenSymbolCount,
+    });
+  }
+
+  if (nf.forbiddenImportEdgeCount !== 6) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'HardEnvelope', 'NF', 'forbiddenImportEdgeCount'], 'Concrete HardCheck NF must certify forbidden import edge inventory', {
+      expected: 6,
+      actual: nf.forbiddenImportEdgeCount,
+    });
+  }
+
+  const pccPackHardCheck = materializedPCCPack?.PCCPack?.HardCheck ?? null;
+  const concreteHardCheck = concreteHard?.HardCheck ?? concreteHard?.MaterializedHardEnvelope?.HardCheck ?? null;
+  const linkedToPCCPack = sameDigestHex0(
+    digestCanonical0(pccPackHardCheck),
+    digestCanonical0(concreteHardCheck),
+  );
+
+  if (linkedToPCCPack !== true) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'HardEnvelope', 'HardCheck'], 'Concrete HardCheck must match generated package PCCPack.HardCheck', {
+      expected: digestCanonical0(pccPackHardCheck),
+      actual: digestCanonical0(concreteHardCheck),
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackConcreteHard0NF',
+    concreteHard0: true,
+    concreteHard0Accepted: true,
+    concreteHard0Checker: record.checker,
+    concreteHard0Digest: record.Digest ?? record.digest,
+    concreteHard0MaterializedHardDigest: nf.materializedHardDigest,
+    concreteHard0HardCheckDigest: nf.hardCheckDigest,
+    concreteHard0CoverageDigest: nf.coverageDigest,
+    concreteHard0CheckerCount: nf.checkerCount,
+    concreteHard0CheckerCoverageComplete: nf.checkerCoverageComplete === true,
+    concreteHard0RowKeyFieldCount: nf.rowKeyFieldCount,
+    concreteHard0RowKeyCoverageComplete: nf.rowKeyCoverageComplete === true,
+    concreteHard0RoutePriorityComplete: nf.routePriorityComplete === true,
+    concreteHard0ProofRefPolicyComplete: nf.proofRefPolicyComplete === true,
+    concreteHard0HashDisciplineComplete: nf.hashDisciplineComplete === true,
+    concreteHard0NoMinCoverageComplete: nf.noMinCoverageComplete === true,
+    concreteHard0ForbiddenSymbolCount: nf.forbiddenSymbolCount,
+    concreteHard0ImportPolicyComplete: nf.importPolicyComplete === true,
+    concreteHard0ForbiddenImportEdgeCount: nf.forbiddenImportEdgeCount,
+    concreteHard0ReflectionPolicyComplete: nf.reflectionPolicyComplete === true,
+    concreteHard0BoundsPolicyComplete: nf.boundsPolicyComplete === true,
+    concreteHard0DiagnosticsPolicyComplete: nf.diagnosticsPolicyComplete === true,
+    concreteHard0LinkedToPCCPack: linkedToPCCPack,
+  });
 }
 
 async function validateGeneratedConcreteKBundle0(generatedPackage) {

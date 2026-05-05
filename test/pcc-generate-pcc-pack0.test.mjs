@@ -259,6 +259,28 @@ test('CheckGeneratedPCCPackexp0 accepts generated package with accepted CheckPCC
   assert.equal(out.NF.concreteKBundle0NoOpaqueProofRefs, true);
   assert.equal(out.NF.concreteKBundle0NoExecutableMinSymbols, true);
   assert.equal(out.NF.concreteKBundle0LinkedToGeneratedBoot0, true);
+  assert.equal(out.NF.generatedPackageConcreteHard0, true);
+  assert.equal(out.NF.concreteHard0Accepted, true);
+  assert.equal(out.NF.concreteHard0Checker, 'CheckConcreteMaterializedHard0');
+  assert.match(out.NF.concreteHard0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteHard0MaterializedHardDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteHard0HardCheckDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteHard0CoverageDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.concreteHard0CheckerCount, 13);
+  assert.equal(out.NF.concreteHard0CheckerCoverageComplete, true);
+  assert.equal(out.NF.concreteHard0RowKeyFieldCount, 17);
+  assert.equal(out.NF.concreteHard0RowKeyCoverageComplete, true);
+  assert.equal(out.NF.concreteHard0RoutePriorityComplete, true);
+  assert.equal(out.NF.concreteHard0ProofRefPolicyComplete, true);
+  assert.equal(out.NF.concreteHard0HashDisciplineComplete, true);
+  assert.equal(out.NF.concreteHard0NoMinCoverageComplete, true);
+  assert.equal(out.NF.concreteHard0ForbiddenSymbolCount, 11);
+  assert.equal(out.NF.concreteHard0ImportPolicyComplete, true);
+  assert.equal(out.NF.concreteHard0ForbiddenImportEdgeCount, 6);
+  assert.equal(out.NF.concreteHard0ReflectionPolicyComplete, true);
+  assert.equal(out.NF.concreteHard0BoundsPolicyComplete, true);
+  assert.equal(out.NF.concreteHard0DiagnosticsPolicyComplete, true);
+  assert.equal(out.NF.concreteHard0LinkedToPCCPack, true);
 
   assert.equal(out.NF.checkPCCPackexp, true);
   assert.equal(out.NF.checkPCCPackexpRecordAccepted, true);
@@ -300,6 +322,7 @@ test('makeGeneratePCCPackConfig0 fills default validation switches', () => {
   assert.equal(config.checkByteLang0, true);
   assert.equal(config.checkBootAuditPiBoot0, true);
   assert.equal(config.checkConcreteKBundle0, true);
+  assert.equal(config.checkConcreteHard0, true);
   assert.equal(config.checkJsonMaterialized, false);
   assert.equal(typeof config.checkPCCPackexpConfig, 'object');
 });
@@ -958,5 +981,81 @@ test('CheckGeneratedPCCPackexp0 rejects stale concrete KBundle proof inventory',
     'GeneratedPCCPack',
     'MaterializedPCCPackEnvelope',
     'KBundleEnvelope',
+  ]);
+});
+
+test('CheckGeneratedPCCPackexp0 rejects missing concrete HardCheck envelope', async () => {
+  const envelope = await makeGeneratedPCCPackexp0();
+
+  delete envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.HardEnvelope;
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    generatedPackageDigest: undefined,
+  };
+
+  const out = await CheckGeneratedPCCPackexp0(envelope, {
+    checkDeterministicGenerator: false,
+    checkGeneratedPackageCoreBoundary: false,
+    checkMaterializedBoot0: false,
+    checkKernelSeed0: false,
+    checkCodecDigest0: false,
+    checkIfaceSched0: false,
+    checkByteLang0: false,
+    checkBootAuditPiBoot0: false,
+    checkConcreteKBundle0: false,
+    checkCheckPCCPackexpRecord: false,
+    checkPublicClaimBoundary: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
+  assert.equal(out.Coord, 'CheckGeneratedPCCPackexp0.ConcreteHard0');
+  assert.deepEqual(out.Path, [
+    'GeneratedPCCPack',
+    'MaterializedPCCPackEnvelope',
+    'HardEnvelope',
+  ]);
+});
+
+test('CheckGeneratedPCCPackexp0 rejects stale concrete HardCheck coverage', async () => {
+  const envelope = await makeGeneratedPCCPackexp0();
+
+  envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.HardEnvelope = {
+    ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.HardEnvelope,
+    Coverage: {
+      ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.HardEnvelope.Coverage,
+      noMinCoverageComplete: false,
+    },
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    generatedPackageDigest: undefined,
+  };
+
+  const out = await CheckGeneratedPCCPackexp0(envelope, {
+    checkDeterministicGenerator: false,
+    checkGeneratedPackageCoreBoundary: false,
+    checkMaterializedBoot0: false,
+    checkKernelSeed0: false,
+    checkCodecDigest0: false,
+    checkIfaceSched0: false,
+    checkByteLang0: false,
+    checkBootAuditPiBoot0: false,
+    checkConcreteKBundle0: false,
+    checkCheckPCCPackexpRecord: false,
+    checkPublicClaimBoundary: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
+  assert.equal(out.Coord, 'CheckGeneratedPCCPackexp0.ConcreteHard0');
+  assert.deepEqual(out.Path, [
+    'GeneratedPCCPack',
+    'MaterializedPCCPackEnvelope',
+    'HardEnvelope',
   ]);
 });
