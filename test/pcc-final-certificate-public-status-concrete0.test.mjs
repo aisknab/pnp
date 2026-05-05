@@ -200,6 +200,33 @@ test('CheckConcreteFinalCertificatePublicStatus0 accepts public status over conc
   assert.equal(out.NF.generatedPCCPackexpKernelSeed0ProofRefsTypedAcyclic, true);
   assert.equal(out.NF.generatedPCCPackexpKernelSeed0ProofRefsHashIndependent, true);
   assert.equal(out.NF.generatedPCCPackexpKernelSeed0PiBootDigestMatches, true);
+  assert.equal(out.NF.generatedPCCPackexpCodec0, true);
+  assert.equal(out.NF.generatedPCCPackexpCodec0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpCodec0Kind, 'Codec0');
+  assert.match(out.NF.generatedPCCPackexpCodec0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpCodec0Canonical, true);
+  assert.equal(out.NF.generatedPCCPackexpCodec0NaturalEncoding, 'u32be-length-shortest-big-endian-magnitude');
+  assert.equal(out.NF.generatedPCCPackexpCodec0NaturalEncodingCanonical, true);
+  assert.equal(out.NF.generatedPCCPackexpCodec0IntegerEncoding, 'sign-byte-plus-canonical-natural-no-negative-zero');
+  assert.equal(out.NF.generatedPCCPackexpCodec0IntegerEncodingCanonical, true);
+  assert.equal(out.NF.generatedPCCPackexpCodec0StringEncoding, 'utf8-nfc-length-prefixed');
+  assert.equal(out.NF.generatedPCCPackexpCodec0StringEncodingCanonical, true);
+  assert.equal(out.NF.generatedPCCPackexpCodec0TopLevelConsumesAllBytes, true);
+  assert.equal(out.NF.generatedPCCPackexpCodec0NormalFormSerialization, 'canonical-json-v0');
+  assert.equal(out.NF.generatedPCCPackexpCodec0NormalFormSerializationCanonical, true);
+  assert.equal(out.NF.generatedPCCPackexpCodec0PiBootDigestMatches, true);
+
+  assert.equal(out.NF.generatedPCCPackexpDigest0, true);
+  assert.equal(out.NF.generatedPCCPackexpDigest0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpDigest0Kind, 'Digest0');
+  assert.match(out.NF.generatedPCCPackexpDigest0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpDigest0Alg, 'SHA256');
+  assert.equal(out.NF.generatedPCCPackexpDigest0AlgSHA256, true);
+  assert.equal(out.NF.generatedPCCPackexpDigest0Bytes, 'canonical-json-v0');
+  assert.equal(out.NF.generatedPCCPackexpDigest0BytesCanonicalJson, true);
+  assert.equal(out.NF.generatedPCCPackexpDigest0EqualityNotObjectEquality, true);
+  assert.equal(out.NF.generatedPCCPackexpDigest0FullKeyComparisonAfterHashLookup, true);
+  assert.equal(out.NF.generatedPCCPackexpDigest0PiBootDigestMatches, true);
 
   assert.equal(out.NF.statusUsesConcreteFinalCertificate, true);
   assert.equal(out.NF.publicStatusCertificateDigestMatchesConcrete, true);
@@ -670,4 +697,48 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale KernelSeed0 evide
   assert.equal(out.checker, 'CheckConcreteFinalCertificatePublicStatus0');
   assert.equal(out.Coord, 'CheckConcreteFinalCertificatePublicStatus0.concreteChain');
   assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpKernelSeed0HasHall']);
+});
+
+test('CheckConcreteFinalCertificatePublicStatus0 rejects stale Codec0/Digest0 evidence', async () => {
+  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+
+  const record = envelope.ConcreteFinalCertificateEnvelope
+    .ConcreteGeneratedAcceptRunEnvelope
+    .CheckGeneratedPCCPackexpRecord;
+
+  const nf = {
+    ...record.NF,
+    digest0EqualityNotObjectEquality: false,
+  };
+
+  envelope.ConcreteFinalCertificateEnvelope
+    .ConcreteGeneratedAcceptRunEnvelope
+    .CheckGeneratedPCCPackexpRecord = {
+      ...record,
+      NF: nf,
+      nf,
+      Digest: digestCanonical0(nf),
+      digest: digestCanonical0(nf),
+    };
+
+  envelope.ConcreteChain = summarizeConcreteFinalCertificatePublicStatusChain0({
+    concreteFinalCertificateEnvelope: envelope.ConcreteFinalCertificateEnvelope,
+    finalCertificatePublicStatusEnvelope: envelope.FinalCertificatePublicStatusEnvelope,
+  });
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+    checkConcreteFinalCertificate: false,
+    checkFinalCertificatePublicStatus: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteFinalCertificatePublicStatus0');
+  assert.equal(out.Coord, 'CheckConcreteFinalCertificatePublicStatus0.concreteChain');
+  assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpDigest0EqualityNotObjectEquality']);
 });

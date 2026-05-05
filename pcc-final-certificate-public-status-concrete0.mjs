@@ -370,6 +370,60 @@ export function summarizeConcreteFinalCertificatePublicStatusChain0({
     generatedPCCPackexpKernelSeed0PiBootDigestMatches:
       concreteCertificateChain.generatedPCCPackexpKernelSeed0PiBootDigestMatches,
 
+    generatedPCCPackexpCodec0:
+      concreteCertificateChain.generatedPCCPackexpCodec0,
+    generatedPCCPackexpCodec0Accepted:
+      concreteCertificateChain.generatedPCCPackexpCodec0Accepted,
+    generatedPCCPackexpCodec0Kind:
+      concreteCertificateChain.generatedPCCPackexpCodec0Kind,
+    generatedPCCPackexpCodec0Digest:
+      concreteCertificateChain.generatedPCCPackexpCodec0Digest,
+    generatedPCCPackexpCodec0Canonical:
+      concreteCertificateChain.generatedPCCPackexpCodec0Canonical,
+    generatedPCCPackexpCodec0NaturalEncoding:
+      concreteCertificateChain.generatedPCCPackexpCodec0NaturalEncoding,
+    generatedPCCPackexpCodec0NaturalEncodingCanonical:
+      concreteCertificateChain.generatedPCCPackexpCodec0NaturalEncodingCanonical,
+    generatedPCCPackexpCodec0IntegerEncoding:
+      concreteCertificateChain.generatedPCCPackexpCodec0IntegerEncoding,
+    generatedPCCPackexpCodec0IntegerEncodingCanonical:
+      concreteCertificateChain.generatedPCCPackexpCodec0IntegerEncodingCanonical,
+    generatedPCCPackexpCodec0StringEncoding:
+      concreteCertificateChain.generatedPCCPackexpCodec0StringEncoding,
+    generatedPCCPackexpCodec0StringEncodingCanonical:
+      concreteCertificateChain.generatedPCCPackexpCodec0StringEncodingCanonical,
+    generatedPCCPackexpCodec0TopLevelConsumesAllBytes:
+      concreteCertificateChain.generatedPCCPackexpCodec0TopLevelConsumesAllBytes,
+    generatedPCCPackexpCodec0NormalFormSerialization:
+      concreteCertificateChain.generatedPCCPackexpCodec0NormalFormSerialization,
+    generatedPCCPackexpCodec0NormalFormSerializationCanonical:
+      concreteCertificateChain.generatedPCCPackexpCodec0NormalFormSerializationCanonical,
+    generatedPCCPackexpCodec0PiBootDigestMatches:
+      concreteCertificateChain.generatedPCCPackexpCodec0PiBootDigestMatches,
+
+    generatedPCCPackexpDigest0:
+      concreteCertificateChain.generatedPCCPackexpDigest0,
+    generatedPCCPackexpDigest0Accepted:
+      concreteCertificateChain.generatedPCCPackexpDigest0Accepted,
+    generatedPCCPackexpDigest0Kind:
+      concreteCertificateChain.generatedPCCPackexpDigest0Kind,
+    generatedPCCPackexpDigest0Digest:
+      concreteCertificateChain.generatedPCCPackexpDigest0Digest,
+    generatedPCCPackexpDigest0Alg:
+      concreteCertificateChain.generatedPCCPackexpDigest0Alg,
+    generatedPCCPackexpDigest0AlgSHA256:
+      concreteCertificateChain.generatedPCCPackexpDigest0AlgSHA256,
+    generatedPCCPackexpDigest0Bytes:
+      concreteCertificateChain.generatedPCCPackexpDigest0Bytes,
+    generatedPCCPackexpDigest0BytesCanonicalJson:
+      concreteCertificateChain.generatedPCCPackexpDigest0BytesCanonicalJson,
+    generatedPCCPackexpDigest0EqualityNotObjectEquality:
+      concreteCertificateChain.generatedPCCPackexpDigest0EqualityNotObjectEquality,
+    generatedPCCPackexpDigest0FullKeyComparisonAfterHashLookup:
+      concreteCertificateChain.generatedPCCPackexpDigest0FullKeyComparisonAfterHashLookup,
+    generatedPCCPackexpDigest0PiBootDigestMatches:
+      concreteCertificateChain.generatedPCCPackexpDigest0PiBootDigestMatches,
+
     kBundleEnvelopeKind: concreteCertificateChain.kBundleEnvelopeKind,
     hardEnvelopeKind: concreteCertificateChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: concreteCertificateChain.finalIntegrationEnvelopeKind,
@@ -842,6 +896,60 @@ export async function CheckConcreteFinalCertificatePublicStatus0(
     generatedPCCPackexpKernelSeed0PiBootDigestMatches:
       recomputedChain.generatedPCCPackexpKernelSeed0PiBootDigestMatches,
 
+    generatedPCCPackexpCodec0:
+      recomputedChain.generatedPCCPackexpCodec0,
+    generatedPCCPackexpCodec0Accepted:
+      recomputedChain.generatedPCCPackexpCodec0Accepted,
+    generatedPCCPackexpCodec0Kind:
+      recomputedChain.generatedPCCPackexpCodec0Kind,
+    generatedPCCPackexpCodec0Digest:
+      recomputedChain.generatedPCCPackexpCodec0Digest,
+    generatedPCCPackexpCodec0Canonical:
+      recomputedChain.generatedPCCPackexpCodec0Canonical,
+    generatedPCCPackexpCodec0NaturalEncoding:
+      recomputedChain.generatedPCCPackexpCodec0NaturalEncoding,
+    generatedPCCPackexpCodec0NaturalEncodingCanonical:
+      recomputedChain.generatedPCCPackexpCodec0NaturalEncodingCanonical,
+    generatedPCCPackexpCodec0IntegerEncoding:
+      recomputedChain.generatedPCCPackexpCodec0IntegerEncoding,
+    generatedPCCPackexpCodec0IntegerEncodingCanonical:
+      recomputedChain.generatedPCCPackexpCodec0IntegerEncodingCanonical,
+    generatedPCCPackexpCodec0StringEncoding:
+      recomputedChain.generatedPCCPackexpCodec0StringEncoding,
+    generatedPCCPackexpCodec0StringEncodingCanonical:
+      recomputedChain.generatedPCCPackexpCodec0StringEncodingCanonical,
+    generatedPCCPackexpCodec0TopLevelConsumesAllBytes:
+      recomputedChain.generatedPCCPackexpCodec0TopLevelConsumesAllBytes,
+    generatedPCCPackexpCodec0NormalFormSerialization:
+      recomputedChain.generatedPCCPackexpCodec0NormalFormSerialization,
+    generatedPCCPackexpCodec0NormalFormSerializationCanonical:
+      recomputedChain.generatedPCCPackexpCodec0NormalFormSerializationCanonical,
+    generatedPCCPackexpCodec0PiBootDigestMatches:
+      recomputedChain.generatedPCCPackexpCodec0PiBootDigestMatches,
+
+    generatedPCCPackexpDigest0:
+      recomputedChain.generatedPCCPackexpDigest0,
+    generatedPCCPackexpDigest0Accepted:
+      recomputedChain.generatedPCCPackexpDigest0Accepted,
+    generatedPCCPackexpDigest0Kind:
+      recomputedChain.generatedPCCPackexpDigest0Kind,
+    generatedPCCPackexpDigest0Digest:
+      recomputedChain.generatedPCCPackexpDigest0Digest,
+    generatedPCCPackexpDigest0Alg:
+      recomputedChain.generatedPCCPackexpDigest0Alg,
+    generatedPCCPackexpDigest0AlgSHA256:
+      recomputedChain.generatedPCCPackexpDigest0AlgSHA256,
+    generatedPCCPackexpDigest0Bytes:
+      recomputedChain.generatedPCCPackexpDigest0Bytes,
+    generatedPCCPackexpDigest0BytesCanonicalJson:
+      recomputedChain.generatedPCCPackexpDigest0BytesCanonicalJson,
+    generatedPCCPackexpDigest0EqualityNotObjectEquality:
+      recomputedChain.generatedPCCPackexpDigest0EqualityNotObjectEquality,
+    generatedPCCPackexpDigest0FullKeyComparisonAfterHashLookup:
+      recomputedChain.generatedPCCPackexpDigest0FullKeyComparisonAfterHashLookup,
+    generatedPCCPackexpDigest0PiBootDigestMatches:
+      recomputedChain.generatedPCCPackexpDigest0PiBootDigestMatches,
+
     kBundleEnvelopeKind: recomputedChain.kBundleEnvelopeKind,
     hardEnvelopeKind: recomputedChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: recomputedChain.finalIntegrationEnvelopeKind,
@@ -1151,6 +1259,23 @@ function validateConcretePublicStatusChain0(actual, expected) {
     'generatedPCCPackexpKernelSeed0ProofRefsTypedAcyclic',
     'generatedPCCPackexpKernelSeed0ProofRefsHashIndependent',
     'generatedPCCPackexpKernelSeed0PiBootDigestMatches',
+
+    'generatedPCCPackexpCodec0',
+    'generatedPCCPackexpCodec0Accepted',
+    'generatedPCCPackexpCodec0Canonical',
+    'generatedPCCPackexpCodec0NaturalEncodingCanonical',
+    'generatedPCCPackexpCodec0IntegerEncodingCanonical',
+    'generatedPCCPackexpCodec0StringEncodingCanonical',
+    'generatedPCCPackexpCodec0TopLevelConsumesAllBytes',
+    'generatedPCCPackexpCodec0NormalFormSerializationCanonical',
+    'generatedPCCPackexpCodec0PiBootDigestMatches',
+    'generatedPCCPackexpDigest0',
+    'generatedPCCPackexpDigest0Accepted',
+    'generatedPCCPackexpDigest0AlgSHA256',
+    'generatedPCCPackexpDigest0BytesCanonicalJson',
+    'generatedPCCPackexpDigest0EqualityNotObjectEquality',
+    'generatedPCCPackexpDigest0FullKeyComparisonAfterHashLookup',
+    'generatedPCCPackexpDigest0PiBootDigestMatches',
 
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',
