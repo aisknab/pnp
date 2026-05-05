@@ -665,6 +665,51 @@ export function summarizeConcreteFinalCertificatePublicStatusChain0({
     generatedPCCPackexpConcreteHard0LinkedToPCCPack:
       concreteCertificateChain.generatedPCCPackexpConcreteHard0LinkedToPCCPack,
 
+    generatedPCCPackexpConcreteRows0:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0,
+    generatedPCCPackexpConcreteRows0Accepted:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0Accepted,
+    generatedPCCPackexpConcreteRows0Checker:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0Checker,
+    generatedPCCPackexpConcreteRows0Digest:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0Digest,
+    generatedPCCPackexpConcreteRows0RowPackDigest:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0RowPackDigest,
+    generatedPCCPackexpConcreteRows0RowPackObjectDigest:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0RowPackObjectDigest,
+    generatedPCCPackexpConcreteRows0BootDigest:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0BootDigest,
+    generatedPCCPackexpConcreteRows0IfaceHash:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0IfaceHash,
+    generatedPCCPackexpConcreteRows0SchedHash:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0SchedHash,
+    generatedPCCPackexpConcreteRows0RowCount:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0RowCount,
+    generatedPCCPackexpConcreteRows0RowCountComplete:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0RowCountComplete,
+    generatedPCCPackexpConcreteRows0BatchCount:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0BatchCount,
+    generatedPCCPackexpConcreteRows0BatchCountComplete:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0BatchCountComplete,
+    generatedPCCPackexpConcreteRows0FamilyCount:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0FamilyCount,
+    generatedPCCPackexpConcreteRows0FamilyCountComplete:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0FamilyCountComplete,
+    generatedPCCPackexpConcreteRows0ConcreteIfaceHash:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0ConcreteIfaceHash,
+    generatedPCCPackexpConcreteRows0SyntheticIfaceHashCount:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0SyntheticIfaceHashCount,
+    generatedPCCPackexpConcreteRows0NoSyntheticIfaceHash:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0NoSyntheticIfaceHash,
+    generatedPCCPackexpConcreteRows0ScaffoldMarkerCount:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0ScaffoldMarkerCount,
+    generatedPCCPackexpConcreteRows0NoScaffoldMarkers:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0NoScaffoldMarkers,
+    generatedPCCPackexpConcreteRows0LinkedToGeneratedBoot0:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0LinkedToGeneratedBoot0,
+    generatedPCCPackexpConcreteRows0LinkedToPCCPack:
+      concreteCertificateChain.generatedPCCPackexpConcreteRows0LinkedToPCCPack,
+
     kBundleEnvelopeKind: concreteCertificateChain.kBundleEnvelopeKind,
     hardEnvelopeKind: concreteCertificateChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: concreteCertificateChain.finalIntegrationEnvelopeKind,
@@ -1432,6 +1477,51 @@ export async function CheckConcreteFinalCertificatePublicStatus0(
     generatedPCCPackexpConcreteHard0LinkedToPCCPack:
       recomputedChain.generatedPCCPackexpConcreteHard0LinkedToPCCPack,
 
+    generatedPCCPackexpConcreteRows0:
+      recomputedChain.generatedPCCPackexpConcreteRows0,
+    generatedPCCPackexpConcreteRows0Accepted:
+      recomputedChain.generatedPCCPackexpConcreteRows0Accepted,
+    generatedPCCPackexpConcreteRows0Checker:
+      recomputedChain.generatedPCCPackexpConcreteRows0Checker,
+    generatedPCCPackexpConcreteRows0Digest:
+      recomputedChain.generatedPCCPackexpConcreteRows0Digest,
+    generatedPCCPackexpConcreteRows0RowPackDigest:
+      recomputedChain.generatedPCCPackexpConcreteRows0RowPackDigest,
+    generatedPCCPackexpConcreteRows0RowPackObjectDigest:
+      recomputedChain.generatedPCCPackexpConcreteRows0RowPackObjectDigest,
+    generatedPCCPackexpConcreteRows0BootDigest:
+      recomputedChain.generatedPCCPackexpConcreteRows0BootDigest,
+    generatedPCCPackexpConcreteRows0IfaceHash:
+      recomputedChain.generatedPCCPackexpConcreteRows0IfaceHash,
+    generatedPCCPackexpConcreteRows0SchedHash:
+      recomputedChain.generatedPCCPackexpConcreteRows0SchedHash,
+    generatedPCCPackexpConcreteRows0RowCount:
+      recomputedChain.generatedPCCPackexpConcreteRows0RowCount,
+    generatedPCCPackexpConcreteRows0RowCountComplete:
+      recomputedChain.generatedPCCPackexpConcreteRows0RowCountComplete,
+    generatedPCCPackexpConcreteRows0BatchCount:
+      recomputedChain.generatedPCCPackexpConcreteRows0BatchCount,
+    generatedPCCPackexpConcreteRows0BatchCountComplete:
+      recomputedChain.generatedPCCPackexpConcreteRows0BatchCountComplete,
+    generatedPCCPackexpConcreteRows0FamilyCount:
+      recomputedChain.generatedPCCPackexpConcreteRows0FamilyCount,
+    generatedPCCPackexpConcreteRows0FamilyCountComplete:
+      recomputedChain.generatedPCCPackexpConcreteRows0FamilyCountComplete,
+    generatedPCCPackexpConcreteRows0ConcreteIfaceHash:
+      recomputedChain.generatedPCCPackexpConcreteRows0ConcreteIfaceHash,
+    generatedPCCPackexpConcreteRows0SyntheticIfaceHashCount:
+      recomputedChain.generatedPCCPackexpConcreteRows0SyntheticIfaceHashCount,
+    generatedPCCPackexpConcreteRows0NoSyntheticIfaceHash:
+      recomputedChain.generatedPCCPackexpConcreteRows0NoSyntheticIfaceHash,
+    generatedPCCPackexpConcreteRows0ScaffoldMarkerCount:
+      recomputedChain.generatedPCCPackexpConcreteRows0ScaffoldMarkerCount,
+    generatedPCCPackexpConcreteRows0NoScaffoldMarkers:
+      recomputedChain.generatedPCCPackexpConcreteRows0NoScaffoldMarkers,
+    generatedPCCPackexpConcreteRows0LinkedToGeneratedBoot0:
+      recomputedChain.generatedPCCPackexpConcreteRows0LinkedToGeneratedBoot0,
+    generatedPCCPackexpConcreteRows0LinkedToPCCPack:
+      recomputedChain.generatedPCCPackexpConcreteRows0LinkedToPCCPack,
+
     kBundleEnvelopeKind: recomputedChain.kBundleEnvelopeKind,
     hardEnvelopeKind: recomputedChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: recomputedChain.finalIntegrationEnvelopeKind,
@@ -1828,6 +1918,17 @@ function validateConcretePublicStatusChain0(actual, expected) {
     'generatedPCCPackexpConcreteHard0BoundsPolicyComplete',
     'generatedPCCPackexpConcreteHard0DiagnosticsPolicyComplete',
     'generatedPCCPackexpConcreteHard0LinkedToPCCPack',
+
+    'generatedPCCPackexpConcreteRows0',
+    'generatedPCCPackexpConcreteRows0Accepted',
+    'generatedPCCPackexpConcreteRows0RowCountComplete',
+    'generatedPCCPackexpConcreteRows0BatchCountComplete',
+    'generatedPCCPackexpConcreteRows0FamilyCountComplete',
+    'generatedPCCPackexpConcreteRows0ConcreteIfaceHash',
+    'generatedPCCPackexpConcreteRows0NoSyntheticIfaceHash',
+    'generatedPCCPackexpConcreteRows0NoScaffoldMarkers',
+    'generatedPCCPackexpConcreteRows0LinkedToGeneratedBoot0',
+    'generatedPCCPackexpConcreteRows0LinkedToPCCPack',
 
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',

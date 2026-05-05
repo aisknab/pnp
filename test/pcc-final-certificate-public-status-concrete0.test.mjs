@@ -346,6 +346,28 @@ test('CheckConcreteFinalCertificatePublicStatus0 accepts public status over conc
   assert.equal(out.NF.generatedPCCPackexpConcreteHard0BoundsPolicyComplete, true);
   assert.equal(out.NF.generatedPCCPackexpConcreteHard0DiagnosticsPolicyComplete, true);
   assert.equal(out.NF.generatedPCCPackexpConcreteHard0LinkedToPCCPack, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteRows0, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteRows0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteRows0Checker, 'CheckConcreteMaterializedRows0');
+  assert.match(out.NF.generatedPCCPackexpConcreteRows0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteRows0RowPackDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteRows0RowPackObjectDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteRows0BootDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteRows0IfaceHash.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteRows0SchedHash.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpConcreteRows0RowCount, 39);
+  assert.equal(out.NF.generatedPCCPackexpConcreteRows0RowCountComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteRows0BatchCount, 13);
+  assert.equal(out.NF.generatedPCCPackexpConcreteRows0BatchCountComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteRows0FamilyCount, 39);
+  assert.equal(out.NF.generatedPCCPackexpConcreteRows0FamilyCountComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteRows0ConcreteIfaceHash, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteRows0SyntheticIfaceHashCount, 0);
+  assert.equal(out.NF.generatedPCCPackexpConcreteRows0NoSyntheticIfaceHash, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteRows0ScaffoldMarkerCount, 0);
+  assert.equal(out.NF.generatedPCCPackexpConcreteRows0NoScaffoldMarkers, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteRows0LinkedToGeneratedBoot0, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteRows0LinkedToPCCPack, true);
 
   assert.equal(out.NF.statusUsesConcreteFinalCertificate, true);
   assert.equal(out.NF.publicStatusCertificateDigestMatchesConcrete, true);
@@ -1080,4 +1102,48 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete HardChec
   assert.equal(out.checker, 'CheckConcreteFinalCertificatePublicStatus0');
   assert.equal(out.Coord, 'CheckConcreteFinalCertificatePublicStatus0.concreteChain');
   assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpConcreteHard0ProofRefPolicyComplete']);
+});
+
+test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete RowPack evidence', async () => {
+  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+
+  const record = envelope.ConcreteFinalCertificateEnvelope
+    .ConcreteGeneratedAcceptRunEnvelope
+    .CheckGeneratedPCCPackexpRecord;
+
+  const nf = {
+    ...record.NF,
+    concreteRows0LinkedToPCCPack: false,
+  };
+
+  envelope.ConcreteFinalCertificateEnvelope
+    .ConcreteGeneratedAcceptRunEnvelope
+    .CheckGeneratedPCCPackexpRecord = {
+      ...record,
+      NF: nf,
+      nf,
+      Digest: digestCanonical0(nf),
+      digest: digestCanonical0(nf),
+    };
+
+  envelope.ConcreteChain = summarizeConcreteFinalCertificatePublicStatusChain0({
+    concreteFinalCertificateEnvelope: envelope.ConcreteFinalCertificateEnvelope,
+    finalCertificatePublicStatusEnvelope: envelope.FinalCertificatePublicStatusEnvelope,
+  });
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+    checkConcreteFinalCertificate: false,
+    checkFinalCertificatePublicStatus: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteFinalCertificatePublicStatus0');
+  assert.equal(out.Coord, 'CheckConcreteFinalCertificatePublicStatus0.concreteChain');
+  assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpConcreteRows0LinkedToPCCPack']);
 });
