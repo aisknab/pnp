@@ -321,6 +321,28 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 accepts an accept run over th
   assert.equal(out.NF.generatedPCCPackexpConcreteKBundle0NoOpaqueProofRefs, true);
   assert.equal(out.NF.generatedPCCPackexpConcreteKBundle0NoExecutableMinSymbols, true);
   assert.equal(out.NF.generatedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteHard0, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteHard0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteHard0Checker, 'CheckConcreteMaterializedHard0');
+  assert.match(out.NF.generatedPCCPackexpConcreteHard0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteHard0MaterializedHardDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteHard0HardCheckDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteHard0CoverageDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpConcreteHard0CheckerCount, 13);
+  assert.equal(out.NF.generatedPCCPackexpConcreteHard0CheckerCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteHard0RowKeyFieldCount, 17);
+  assert.equal(out.NF.generatedPCCPackexpConcreteHard0RowKeyCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteHard0RoutePriorityComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteHard0ProofRefPolicyComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteHard0HashDisciplineComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteHard0NoMinCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteHard0ForbiddenSymbolCount, 11);
+  assert.equal(out.NF.generatedPCCPackexpConcreteHard0ImportPolicyComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteHard0ForbiddenImportEdgeCount, 6);
+  assert.equal(out.NF.generatedPCCPackexpConcreteHard0ReflectionPolicyComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteHard0BoundsPolicyComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteHard0DiagnosticsPolicyComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteHard0LinkedToPCCPack, true);
 
   assert.equal(out.Ledger.some((entry) => (
     entry.phase === 'CheckGeneratedPCCPackexp0' &&
@@ -905,4 +927,23 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp w
   assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
   assert.equal(out.Coord, 'CheckConcreteMaterializedGeneratedAcceptRun0.GeneratedPCCPackexp');
   assert.deepEqual(out.Path, ['GeneratedPCCPackexpEnvelope', 'NF', 'generatedPackageConcreteKBundle0']);
+});
+
+test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp without ConcreteHard bridge evidence', async () => {
+  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+
+  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+    checkGeneratedAcceptRun: false,
+    checkConcretePCCPack: false,
+    checkPCCPackexp: false,
+    checkLinkage: false,
+    generatedPCCPackexpConfig: {
+      checkConcreteHard0: false,
+    },
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedGeneratedAcceptRun0.GeneratedPCCPackexp');
+  assert.deepEqual(out.Path, ['GeneratedPCCPackexpEnvelope', 'NF', 'generatedPackageConcreteHard0']);
 });
