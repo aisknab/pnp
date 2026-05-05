@@ -1690,6 +1690,92 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
         : null
     ),
 
+    generatedPCCPackexpConcreteRows0: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).generatedPackageConcreteRows0 === true
+        : null
+    ),
+    generatedPCCPackexpConcreteRows0Accepted: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteRows0Accepted === true
+        : null
+    ),
+    generatedPCCPackexpConcreteRows0Checker: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteRows0Checker
+        : null
+    ),
+    generatedPCCPackexpConcreteRows0Digest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteRows0Digest
+        : null
+    ),
+    generatedPCCPackexpConcreteRows0RowPackDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteRows0RowPackDigest
+        : null
+    ),
+    generatedPCCPackexpConcreteRows0RowPackObjectDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteRows0RowPackObjectDigest
+        : null
+    ),
+    generatedPCCPackexpConcreteRows0BootDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteRows0BootDigest
+        : null
+    ),
+    generatedPCCPackexpConcreteRows0IfaceHash: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteRows0IfaceHash
+        : null
+    ),
+    generatedPCCPackexpConcreteRows0SchedHash: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteRows0SchedHash
+        : null
+    ),
+    generatedPCCPackexpConcreteRows0RowCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteRows0RowCount
+        : null
+    ),
+    generatedPCCPackexpConcreteRows0BatchCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteRows0BatchCount
+        : null
+    ),
+    generatedPCCPackexpConcreteRows0FamilyCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteRows0FamilyCount
+        : null
+    ),
+    generatedPCCPackexpConcreteRows0ConcreteIfaceHash: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteRows0ConcreteIfaceHash === true
+        : null
+    ),
+    generatedPCCPackexpConcreteRows0SyntheticIfaceHashCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteRows0SyntheticIfaceHashCount
+        : null
+    ),
+    generatedPCCPackexpConcreteRows0ScaffoldMarkerCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteRows0ScaffoldMarkerCount
+        : null
+    ),
+    generatedPCCPackexpConcreteRows0LinkedToGeneratedBoot0: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteRows0LinkedToGeneratedBoot0 === true
+        : null
+    ),
+    generatedPCCPackexpConcreteRows0LinkedToPCCPack: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteRows0LinkedToPCCPack === true
+        : null
+    ),
+
     rowsEnvelopeKind: recomputedChain.rowsEnvelopeKind,
     localPackagesEnvelopeKind: recomputedChain.localPackagesEnvelopeKind,
     globalFirewallsEnvelopeKind: recomputedChain.globalFirewallsEnvelopeKind,
@@ -2879,6 +2965,108 @@ function validateGeneratedPCCPackexpEnvelope0({
     return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteHard0LinkedToPCCPack'], 'GeneratedPCCPackexp0 NF concrete HardCheck linkage must match PCCPack.HardCheck bytes', {
       expected: digestCanonical0(generatedMaterializedPCCPackForHard0?.PCCPack?.HardCheck ?? null),
       actual: digestCanonical0(generatedHardEnvelope?.HardCheck ?? null),
+    });
+  }
+
+  for (const field of [
+    'generatedPackageConcreteRows0',
+    'concreteRows0Accepted',
+    'concreteRows0ConcreteIfaceHash',
+    'concreteRows0LinkedToGeneratedBoot0',
+    'concreteRows0LinkedToPCCPack',
+  ]) {
+    if (generatedNF[field] !== true) {
+      return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', field], `GeneratedPCCPackexp0 NF must certify ${field}`, {
+        actual: generatedNF[field],
+      });
+    }
+  }
+
+  if (generatedNF.concreteRows0Checker !== 'CheckConcreteMaterializedRows0') {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteRows0Checker'], 'GeneratedPCCPackexp0 NF must certify concrete Rows checker', {
+      actual: generatedNF.concreteRows0Checker,
+    });
+  }
+
+  if (generatedNF.concreteRows0RowCount !== 39) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteRows0RowCount'], 'GeneratedPCCPackexp0 NF must certify complete concrete row coverage', {
+      expected: 39,
+      actual: generatedNF.concreteRows0RowCount,
+    });
+  }
+
+  if (generatedNF.concreteRows0BatchCount !== 13) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteRows0BatchCount'], 'GeneratedPCCPackexp0 NF must certify B0 through B12 batch coverage', {
+      expected: 13,
+      actual: generatedNF.concreteRows0BatchCount,
+    });
+  }
+
+  if (generatedNF.concreteRows0FamilyCount !== 39) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteRows0FamilyCount'], 'GeneratedPCCPackexp0 NF must certify complete row-family coverage', {
+      expected: 39,
+      actual: generatedNF.concreteRows0FamilyCount,
+    });
+  }
+
+  if (generatedNF.concreteRows0SyntheticIfaceHashCount !== 0) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteRows0SyntheticIfaceHashCount'], 'GeneratedPCCPackexp0 NF must certify no synthetic row IfaceHash markers', {
+      expected: 0,
+      actual: generatedNF.concreteRows0SyntheticIfaceHashCount,
+    });
+  }
+
+  if (generatedNF.concreteRows0ScaffoldMarkerCount !== 0) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteRows0ScaffoldMarkerCount'], 'GeneratedPCCPackexp0 NF must certify no row scaffold markers', {
+      expected: 0,
+      actual: generatedNF.concreteRows0ScaffoldMarkerCount,
+    });
+  }
+
+  const generatedMaterializedPCCPackForRows0 =
+    generatedPCCPackexpEnvelope.GeneratedPCCPack?.MaterializedPCCPackEnvelope ?? null;
+  const generatedRowsEnvelope =
+    generatedMaterializedPCCPackForRows0?.RowsEnvelope ?? null;
+  const generatedRowsBoot0 =
+    generatedMaterializedPCCPackForRows0?.MaterializedBoot0 ??
+    generatedMaterializedPCCPackForRows0?.PCCPack?.Boot0 ??
+    null;
+
+  if (!sameDigestHex0(generatedNF.concreteRows0BootDigest, digestCanonical0(generatedRowsBoot0))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteRows0BootDigest'], 'GeneratedPCCPackexp0 NF concrete Rows Boot0 digest must match generated package Boot0 bytes', {
+      expected: digestCanonical0(generatedRowsBoot0),
+      actual: generatedNF.concreteRows0BootDigest,
+    });
+  }
+
+  if (!sameDigestHex0(generatedNF.concreteRows0RowPackObjectDigest, digestCanonical0(generatedRowsEnvelope?.RowPack ?? null))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteRows0RowPackObjectDigest'], 'GeneratedPCCPackexp0 NF concrete RowPack object digest must match generated package RowPack bytes', {
+      expected: digestCanonical0(generatedRowsEnvelope?.RowPack ?? null),
+      actual: generatedNF.concreteRows0RowPackObjectDigest,
+    });
+  }
+
+  if (!sameDigestHex0(generatedNF.concreteRows0IfaceHash, digestCanonical0(generatedRowsBoot0?.IfaceDict0 ?? null))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteRows0IfaceHash'], 'GeneratedPCCPackexp0 NF concrete Rows IfaceHash must match generated Boot0 IfaceDict0 digest', {
+      expected: digestCanonical0(generatedRowsBoot0?.IfaceDict0 ?? null),
+      actual: generatedNF.concreteRows0IfaceHash,
+    });
+  }
+
+  if (!sameDigestHex0(generatedNF.concreteRows0SchedHash, digestCanonical0(generatedRowsBoot0?.Sched0 ?? null))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteRows0SchedHash'], 'GeneratedPCCPackexp0 NF concrete Rows SchedHash must match generated Boot0 Sched0 digest', {
+      expected: digestCanonical0(generatedRowsBoot0?.Sched0 ?? null),
+      actual: generatedNF.concreteRows0SchedHash,
+    });
+  }
+
+  if (!sameDigestHex0(
+    digestCanonical0(generatedMaterializedPCCPackForRows0?.PCCPack?.RowPack ?? null),
+    digestCanonical0(generatedRowsEnvelope?.RowPack ?? null),
+  )) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteRows0LinkedToPCCPack'], 'GeneratedPCCPackexp0 NF concrete Rows linkage must match PCCPack.RowPack bytes', {
+      expected: digestCanonical0(generatedMaterializedPCCPackForRows0?.PCCPack?.RowPack ?? null),
+      actual: digestCanonical0(generatedRowsEnvelope?.RowPack ?? null),
     });
   }
 
