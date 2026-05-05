@@ -277,6 +277,37 @@ function makeAcceptedConcreteFinalCertificatePublicStatusRecord0() {
     generatedPCCPackexpByteLang0RecordCount: 9,
     generatedPCCPackexpByteLang0RequiredRecordAritiesPresent: true,
     generatedPCCPackexpByteLang0PiBootDigestMatches: true,
+    generatedPCCPackexpBootAudit0: true,
+    generatedPCCPackexpBootAudit0Accepted: true,
+    generatedPCCPackexpBootAudit0Checker: 'CheckVerifierFrag0',
+    generatedPCCPackexpBootAudit0Digest: digestOf0('2828282828282828282828282828282828282828282828282828282828282828'),
+    generatedPCCPackexpBootAudit0DigestMatchesNF: true,
+    generatedPCCPackexpBootAudit0NFKind: 'VerifierFrag0AuditNF',
+    generatedPCCPackexpBootAudit0SuiteId: 'boot0.materialized.audit',
+    generatedPCCPackexpBootAudit0CaseCount: 3,
+    generatedPCCPackexpBootAudit0PositiveCount: 1,
+    generatedPCCPackexpBootAudit0NegativeCount: 2,
+    generatedPCCPackexpBootAudit0CoversB0Accept: true,
+    generatedPCCPackexpBootAudit0CoversB0MissingCoverageReject: true,
+    generatedPCCPackexpBootAudit0CoversB0HashKeyTamperReject: true,
+
+    generatedPCCPackexpPiBoot0: true,
+    generatedPCCPackexpPiBoot0Accepted: true,
+    generatedPCCPackexpPiBoot0Kind: 'PiBoot0',
+    generatedPCCPackexpPiBoot0Digest: digestOf0('2929292929292929292929292929292929292929292929292929292929292929'),
+    generatedPCCPackexpPiBoot0Materialized: true,
+    generatedPCCPackexpPiBoot0ExternalJson: true,
+    generatedPCCPackexpPiBoot0RefCount: 8,
+    generatedPCCPackexpPiBoot0AllBootRefsPresent: true,
+    generatedPCCPackexpPiBoot0RefsMatchBootObjects: true,
+    generatedPCCPackexpPiBoot0RefsIncludeByteLang0: true,
+    generatedPCCPackexpPiBoot0RefsIncludeCodec0: true,
+    generatedPCCPackexpPiBoot0RefsIncludeDigest0: true,
+    generatedPCCPackexpPiBoot0RefsIncludeIfaceDict0: true,
+    generatedPCCPackexpPiBoot0RefsIncludeSched0: true,
+    generatedPCCPackexpPiBoot0RefsIncludeKernelSeed0: true,
+    generatedPCCPackexpPiBoot0RefsIncludeB0: true,
+    generatedPCCPackexpPiBoot0RefsIncludeBootAudit0: true,
 
     finalCertificateUsesConcreteAcceptRun: true,
     statusUsesConcreteFinalCertificate: true,
@@ -601,6 +632,37 @@ test('CheckReleaseAudit0 reports the concrete final-certificate public-status ga
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0RecordCount >= 9, true);
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0RequiredRecordAritiesPresent, true);
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0PiBootDigestMatches, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0Accepted, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0Checker, 'CheckVerifierFrag0');
+  assert.match(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0DigestMatchesNF, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0NFKind, 'VerifierFrag0AuditNF');
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0SuiteId, 'boot0.materialized.audit');
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0CaseCount, 3);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0PositiveCount, 1);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0NegativeCount, 2);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0CoversB0Accept, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0CoversB0MissingCoverageReject, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0CoversB0HashKeyTamperReject, true);
+
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0Accepted, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0Kind, 'PiBoot0');
+  assert.match(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0Materialized, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0ExternalJson, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefCount, 8);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0AllBootRefsPresent, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsMatchBootObjects, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeByteLang0, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeCodec0, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeDigest0, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeIfaceDict0, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeSched0, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeKernelSeed0, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeB0, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeBootAudit0, true);
 
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateStatusUsesConcreteFinalCertificate, true);
 
@@ -829,6 +891,37 @@ test('CheckReleaseAudit0 reports the concrete final-certificate public-status ga
   assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0RecordCount >= 9, true);
   assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0RequiredRecordAritiesPresent, true);
   assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0PiBootDigestMatches, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0Accepted, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0Checker, 'CheckVerifierFrag0');
+  assert.match(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0DigestMatchesNF, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0NFKind, 'VerifierFrag0AuditNF');
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0SuiteId, 'boot0.materialized.audit');
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0CaseCount, 3);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0PositiveCount, 1);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0NegativeCount, 2);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0CoversB0Accept, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0CoversB0MissingCoverageReject, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpBootAudit0CoversB0HashKeyTamperReject, true);
+
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0Accepted, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0Kind, 'PiBoot0');
+  assert.match(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0Materialized, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0ExternalJson, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefCount, 8);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0AllBootRefsPresent, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsMatchBootObjects, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeByteLang0, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeCodec0, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeDigest0, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeIfaceDict0, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeSched0, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeKernelSeed0, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeB0, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpPiBoot0RefsIncludeBootAudit0, true);
 
   assert.equal(summary.concreteFinalCertificatePublicStatusGateSummary.publicConclusion.consequent, 'P = NP');
 });
@@ -1317,5 +1410,71 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without ByteL
     'concreteFinalCertificatePublicStatusGate',
     'NF',
     'generatedPCCPackexpByteLang0RequiredRecordAritiesPresent',
+  ]);
+});
+
+test('CheckReleaseAudit0 rejects a concrete final-certificate gate without BootAudit0 audit evidence', async () => {
+  const bad = makeAcceptedConcreteFinalCertificatePublicStatusRecord0();
+
+  bad.NF = {
+    ...bad.NF,
+    generatedPCCPackexpBootAudit0CoversB0HashKeyTamperReject: false,
+  };
+  bad.nf = bad.NF;
+  bad.Digest = digestCanonical0(bad.NF);
+  bad.digest = bad.Digest;
+
+  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+    runSyntaxCheck: false,
+    runRunAll: false,
+    runMutationCheck: false,
+    runCliSmoke: false,
+    runPublicSurfaceFreeze: false,
+    runMaterializedPublicStatusGate: false,
+    runFinalCertificatePublicStatusGate: false,
+    runConcreteFinalCertificatePublicStatusGate: true,
+    concreteFinalCertificatePublicStatusGateRunner: async () => bad,
+  }));
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAudit0');
+  assert.equal(out.Coord, 'CheckReleaseAudit0.concreteFinalCertificatePublicStatusGate');
+  assert.deepEqual(out.Path, [
+    'concreteFinalCertificatePublicStatusGate',
+    'NF',
+    'generatedPCCPackexpBootAudit0CoversB0HashKeyTamperReject',
+  ]);
+});
+
+test('CheckReleaseAudit0 rejects a concrete final-certificate gate without PiBoot reference evidence', async () => {
+  const bad = makeAcceptedConcreteFinalCertificatePublicStatusRecord0();
+
+  bad.NF = {
+    ...bad.NF,
+    generatedPCCPackexpPiBoot0RefsMatchBootObjects: false,
+  };
+  bad.nf = bad.NF;
+  bad.Digest = digestCanonical0(bad.NF);
+  bad.digest = bad.Digest;
+
+  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+    runSyntaxCheck: false,
+    runRunAll: false,
+    runMutationCheck: false,
+    runCliSmoke: false,
+    runPublicSurfaceFreeze: false,
+    runMaterializedPublicStatusGate: false,
+    runFinalCertificatePublicStatusGate: false,
+    runConcreteFinalCertificatePublicStatusGate: true,
+    concreteFinalCertificatePublicStatusGateRunner: async () => bad,
+  }));
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAudit0');
+  assert.equal(out.Coord, 'CheckReleaseAudit0.concreteFinalCertificatePublicStatusGate');
+  assert.deepEqual(out.Path, [
+    'concreteFinalCertificatePublicStatusGate',
+    'NF',
+    'generatedPCCPackexpPiBoot0RefsMatchBootObjects',
   ]);
 });
