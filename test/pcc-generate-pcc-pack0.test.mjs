@@ -205,6 +205,37 @@ test('CheckGeneratedPCCPackexp0 accepts generated package with accepted CheckPCC
   assert.equal(out.NF.byteLang0RecordCount >= 9, true);
   assert.equal(out.NF.byteLang0RequiredRecordAritiesPresent, true);
   assert.equal(out.NF.byteLang0PiBootDigestMatches, true);
+  assert.equal(out.NF.generatedPackageBootAudit0, true);
+  assert.equal(out.NF.bootAudit0Accepted, true);
+  assert.equal(out.NF.bootAudit0Checker, 'CheckVerifierFrag0');
+  assert.match(out.NF.bootAudit0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.bootAudit0DigestMatchesNF, true);
+  assert.equal(out.NF.bootAudit0NFKind, 'VerifierFrag0AuditNF');
+  assert.equal(out.NF.bootAudit0SuiteId, 'boot0.materialized.audit');
+  assert.equal(out.NF.bootAudit0CaseCount, 3);
+  assert.equal(out.NF.bootAudit0PositiveCount, 1);
+  assert.equal(out.NF.bootAudit0NegativeCount, 2);
+  assert.equal(out.NF.bootAudit0CoversB0Accept, true);
+  assert.equal(out.NF.bootAudit0CoversB0MissingCoverageReject, true);
+  assert.equal(out.NF.bootAudit0CoversB0HashKeyTamperReject, true);
+
+  assert.equal(out.NF.generatedPackagePiBoot0, true);
+  assert.equal(out.NF.piBoot0Accepted, true);
+  assert.equal(out.NF.piBoot0Kind, 'PiBoot0');
+  assert.match(out.NF.piBoot0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.piBoot0Materialized, true);
+  assert.equal(out.NF.piBoot0ExternalJson, true);
+  assert.equal(out.NF.piBoot0RefCount, 8);
+  assert.equal(out.NF.piBoot0AllBootRefsPresent, true);
+  assert.equal(out.NF.piBoot0RefsMatchBootObjects, true);
+  assert.equal(out.NF.piBoot0RefsIncludeByteLang0, true);
+  assert.equal(out.NF.piBoot0RefsIncludeCodec0, true);
+  assert.equal(out.NF.piBoot0RefsIncludeDigest0, true);
+  assert.equal(out.NF.piBoot0RefsIncludeIfaceDict0, true);
+  assert.equal(out.NF.piBoot0RefsIncludeSched0, true);
+  assert.equal(out.NF.piBoot0RefsIncludeKernelSeed0, true);
+  assert.equal(out.NF.piBoot0RefsIncludeB0, true);
+  assert.equal(out.NF.piBoot0RefsIncludeBootAudit0, true);
 
   assert.equal(out.NF.checkPCCPackexp, true);
   assert.equal(out.NF.checkPCCPackexpRecordAccepted, true);
@@ -244,6 +275,7 @@ test('makeGeneratePCCPackConfig0 fills default validation switches', () => {
   assert.equal(config.checkCodecDigest0, true);
   assert.equal(config.checkIfaceSched0, true);
   assert.equal(config.checkByteLang0, true);
+  assert.equal(config.checkBootAuditPiBoot0, true);
   assert.equal(config.checkJsonMaterialized, false);
   assert.equal(typeof config.checkPCCPackexpConfig, 'object');
 });
@@ -732,4 +764,103 @@ test('CheckGeneratedPCCPackexp0 rejects stale ByteLang0 record arity', async () 
   assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
   assert.equal(out.Coord, 'CheckGeneratedPCCPackexp0.ByteLang0');
   assert.deepEqual(out.Path, ['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'records', 'Boot0']);
+});
+
+test('CheckGeneratedPCCPackexp0 rejects stale BootAudit0 digest evidence', async () => {
+  const envelope = await makeGeneratedPCCPackexp0();
+  const record = envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.MaterializedBoot0.BootAudit0;
+
+  envelope.GeneratedPCCPack = {
+    ...envelope.GeneratedPCCPack,
+    MaterializedPCCPackEnvelope: {
+      ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope,
+      MaterializedBoot0: {
+        ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.MaterializedBoot0,
+        BootAudit0: {
+          ...record,
+          NF: {
+            ...record.NF,
+            caseCount: 2,
+          },
+          nf: {
+            ...record.nf,
+            caseCount: 2,
+          },
+        },
+      },
+    },
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    generatedPackageDigest: undefined,
+  };
+
+  const out = await CheckGeneratedPCCPackexp0(envelope, {
+    checkDeterministicGenerator: false,
+    checkMaterializedBoot0: false,
+    checkKernelSeed0: false,
+    checkCodecDigest0: false,
+    checkIfaceSched0: false,
+    checkByteLang0: false,
+    checkCheckPCCPackexpRecord: false,
+    checkPublicClaimBoundary: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
+  assert.equal(out.Coord, 'CheckGeneratedPCCPackexp0.BootAuditPiBoot0');
+  assert.deepEqual(out.Path, ['GeneratedPCCPack', 'Boot0', 'BootAudit0', 'Digest']);
+});
+
+test('CheckGeneratedPCCPackexp0 rejects stale PiBoot BootAudit0 reference', async () => {
+  const envelope = await makeGeneratedPCCPackexp0();
+
+  envelope.GeneratedPCCPack = {
+    ...envelope.GeneratedPCCPack,
+    MaterializedPCCPackEnvelope: {
+      ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope,
+      MaterializedBoot0: {
+        ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.MaterializedBoot0,
+        PiBoot: {
+          ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.MaterializedBoot0.PiBoot,
+          refs: envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.MaterializedBoot0.PiBoot.refs.map((ref) => (
+            ref.label === 'BootAudit0'
+              ? {
+                  ...ref,
+                  digest: {
+                    alg: 'SHA256',
+                    bytes: 'canonical-json-v0',
+                    hex: '0000000000000000000000000000000000000000000000000000000000000000',
+                  },
+                }
+              : ref
+          )),
+        },
+      },
+    },
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    generatedPackageDigest: undefined,
+  };
+
+  const out = await CheckGeneratedPCCPackexp0(envelope, {
+    checkDeterministicGenerator: false,
+    checkMaterializedBoot0: false,
+    checkKernelSeed0: false,
+    checkCodecDigest0: false,
+    checkIfaceSched0: false,
+    checkByteLang0: false,
+    checkCheckPCCPackexpRecord: false,
+    checkPublicClaimBoundary: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
+  assert.equal(out.Coord, 'CheckGeneratedPCCPackexp0.BootAuditPiBoot0');
+  assert.deepEqual(out.Path, ['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs', 'BootAudit0']);
 });

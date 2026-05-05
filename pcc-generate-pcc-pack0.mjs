@@ -20,6 +20,7 @@ import {
 } from './pcc-boot-materialized0.mjs';
 
 import {
+  CheckBootAudit0,
   CheckBootBatch0,
 } from './pcc-boot0.mjs';
 
@@ -209,6 +210,7 @@ export function makeGeneratePCCPackConfig0(overrides = {}) {
     checkCodecDigest0: true,
     checkIfaceSched0: true,
     checkByteLang0: true,
+    checkBootAuditPiBoot0: true,
     checkCheckPCCPackexpRecord: true,
     checkPublicClaimBoundary: true,
     checkJsonMaterialized: true,
@@ -314,6 +316,7 @@ export async function CheckGeneratedPCCPackexp0(
   let codecDigestNF = null;
   let ifaceSchedNF = null;
   let byteLangNF = null;
+  let bootAuditPiBootNF = null;
   let freshCheckPCCPackexpRecord = null;
   let recordAlignmentNF = null;
 
@@ -505,6 +508,28 @@ export async function CheckGeneratedPCCPackexp0(
     }
 
     byteLangNF = byteLang.nf;
+  }
+
+  if (cfg.checkBootAuditPiBoot0 === true) {
+    const bootAuditPiBoot = await validateGeneratedBootAuditPiBoot0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'BootAuditPiBoot0',
+      status: bootAuditPiBoot.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(bootAuditPiBoot.nf ?? bootAuditPiBoot.witness ?? null),
+    });
+
+    if (!bootAuditPiBoot.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.BootAuditPiBoot0`,
+        path: bootAuditPiBoot.path,
+        witness: bootAuditPiBoot.witness,
+        ledger,
+      });
+    }
+
+    bootAuditPiBootNF = bootAuditPiBoot.nf;
   }
 
   if (cfg.checkCheckPCCPackexpRecord === true) {
@@ -769,6 +794,40 @@ export async function CheckGeneratedPCCPackexp0(
     byteLang0RequiredRecordAritiesPresent: byteLangNF?.byteLang0RequiredRecordAritiesPresent ?? null,
     byteLang0PiBootDigestMatches: byteLangNF?.byteLang0PiBootDigestMatches ?? null,
 
+    generatedPackageBootAudit0: bootAuditPiBootNF?.bootAudit0 ?? null,
+    bootAudit0Accepted: bootAuditPiBootNF?.bootAudit0Accepted ?? null,
+    bootAudit0Checker: bootAuditPiBootNF?.bootAudit0Checker ?? null,
+    bootAudit0Digest: bootAuditPiBootNF?.bootAudit0Digest ?? null,
+    bootAudit0DigestMatchesNF: bootAuditPiBootNF?.bootAudit0DigestMatchesNF ?? null,
+    bootAudit0NFKind: bootAuditPiBootNF?.bootAudit0NFKind ?? null,
+    bootAudit0SuiteId: bootAuditPiBootNF?.bootAudit0SuiteId ?? null,
+    bootAudit0CaseCount: bootAuditPiBootNF?.bootAudit0CaseCount ?? null,
+    bootAudit0PositiveCount: bootAuditPiBootNF?.bootAudit0PositiveCount ?? null,
+    bootAudit0NegativeCount: bootAuditPiBootNF?.bootAudit0NegativeCount ?? null,
+    bootAudit0CoversB0Accept: bootAuditPiBootNF?.bootAudit0CoversB0Accept ?? null,
+    bootAudit0CoversB0MissingCoverageReject:
+      bootAuditPiBootNF?.bootAudit0CoversB0MissingCoverageReject ?? null,
+    bootAudit0CoversB0HashKeyTamperReject:
+      bootAuditPiBootNF?.bootAudit0CoversB0HashKeyTamperReject ?? null,
+
+    generatedPackagePiBoot0: bootAuditPiBootNF?.piBoot0 ?? null,
+    piBoot0Accepted: bootAuditPiBootNF?.piBoot0Accepted ?? null,
+    piBoot0Kind: bootAuditPiBootNF?.piBoot0Kind ?? null,
+    piBoot0Digest: bootAuditPiBootNF?.piBoot0Digest ?? null,
+    piBoot0Materialized: bootAuditPiBootNF?.piBoot0Materialized ?? null,
+    piBoot0ExternalJson: bootAuditPiBootNF?.piBoot0ExternalJson ?? null,
+    piBoot0RefCount: bootAuditPiBootNF?.piBoot0RefCount ?? null,
+    piBoot0AllBootRefsPresent: bootAuditPiBootNF?.piBoot0AllBootRefsPresent ?? null,
+    piBoot0RefsMatchBootObjects: bootAuditPiBootNF?.piBoot0RefsMatchBootObjects ?? null,
+    piBoot0RefsIncludeByteLang0: bootAuditPiBootNF?.piBoot0RefsIncludeByteLang0 ?? null,
+    piBoot0RefsIncludeCodec0: bootAuditPiBootNF?.piBoot0RefsIncludeCodec0 ?? null,
+    piBoot0RefsIncludeDigest0: bootAuditPiBootNF?.piBoot0RefsIncludeDigest0 ?? null,
+    piBoot0RefsIncludeIfaceDict0: bootAuditPiBootNF?.piBoot0RefsIncludeIfaceDict0 ?? null,
+    piBoot0RefsIncludeSched0: bootAuditPiBootNF?.piBoot0RefsIncludeSched0 ?? null,
+    piBoot0RefsIncludeKernelSeed0: bootAuditPiBootNF?.piBoot0RefsIncludeKernelSeed0 ?? null,
+    piBoot0RefsIncludeB0: bootAuditPiBootNF?.piBoot0RefsIncludeB0 ?? null,
+    piBoot0RefsIncludeBootAudit0: bootAuditPiBootNF?.piBoot0RefsIncludeBootAudit0 ?? null,
+
     generatedPackageKind: envelope.GeneratedPCCPack.kind ?? null,
     generatedPackageDigest: digestCanonical0(envelope.GeneratedPCCPack),
 
@@ -868,6 +927,7 @@ function validateConfig0(config) {
     'checkCodecDigest0',
     'checkIfaceSched0',
     'checkByteLang0',
+    'checkBootAuditPiBoot0',
     'checkCheckPCCPackexpRecord',
     'checkPublicClaimBoundary',
     'checkJsonMaterialized',
@@ -1008,6 +1068,216 @@ function scanForbiddenCoreKeys0(value, pathNow, hits) {
 
     scanForbiddenCoreKeys0(child, childPath, hits);
   }
+}
+
+async function validateGeneratedBootAuditPiBoot0(generatedPackage) {
+  const materializedPCCPack = generatedPackage?.MaterializedPCCPackEnvelope ?? generatedPackage?.MaterializedPCCPack ?? null;
+  const boot0 = materializedPCCPack?.MaterializedBoot0 ?? materializedPCCPack?.PCCPack?.Boot0 ?? null;
+  const bootAudit0 = boot0?.BootAudit0 ?? null;
+  const piBoot0 = boot0?.PiBoot ?? null;
+
+  if (!isPlainObject(bootAudit0)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'BootAudit0'], 'GeneratedPCCPack must include concrete BootAudit0', {
+      actual: typeof bootAudit0,
+    });
+  }
+
+  if (bootAudit0.tag !== 'accept') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'BootAudit0', 'tag'], 'BootAudit0 must be an accepted verifier audit record', {
+      actual: bootAudit0.tag,
+    });
+  }
+
+  if (bootAudit0.checker !== 'CheckVerifierFrag0') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'BootAudit0', 'checker'], 'BootAudit0 must be produced by CheckVerifierFrag0', {
+      actual: bootAudit0.checker,
+    });
+  }
+
+  const bootAuditNF = bootAudit0.NF ?? bootAudit0.nf;
+
+  if (!isPlainObject(bootAuditNF)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'BootAudit0', 'NF'], 'BootAudit0 must expose NF', {
+      actual: typeof bootAuditNF,
+    });
+  }
+
+  if (bootAuditNF.kind !== 'VerifierFrag0AuditNF') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'BootAudit0', 'NF', 'kind'], 'BootAudit0 NF kind mismatch', {
+      actual: bootAuditNF.kind,
+    });
+  }
+
+  const bootAuditDigest = digestFromRecord0(bootAudit0);
+  const bootAuditNFDigest = digestCanonical0(bootAuditNF);
+
+  if (!sameDigestHex0(bootAuditDigest, bootAuditNFDigest)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'BootAudit0', 'Digest'], 'BootAudit0 digest must match its NF', {
+      expected: bootAuditNFDigest,
+      actual: bootAuditDigest,
+    });
+  }
+
+  if (bootAuditNF.suiteId !== 'boot0.materialized.audit') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'BootAudit0', 'NF', 'suiteId'], 'BootAudit0 suite ID mismatch', {
+      expected: 'boot0.materialized.audit',
+      actual: bootAuditNF.suiteId,
+    });
+  }
+
+  const cases = Array.isArray(bootAuditNF.cases) ? bootAuditNF.cases : [];
+
+  const coversB0Accept = cases.some((entry) => (
+    entry.id === 'boot0.materialized.b0.accepts' &&
+    entry.target === 'CheckBootBatch0' &&
+    entry.status === 'pass'
+  ));
+
+  const coversB0MissingCoverageReject = cases.some((entry) => (
+    entry.id === 'boot0.materialized.b0.rejects.missing.coverage' &&
+    entry.target === 'CheckBootBatch0' &&
+    entry.status === 'pass'
+  ));
+
+  const coversB0HashKeyTamperReject = cases.some((entry) => (
+    entry.id === 'boot0.materialized.b0.rejects.hashkey.tamper' &&
+    entry.target === 'CheckBootBatch0' &&
+    entry.status === 'pass'
+  ));
+
+  if (coversB0Accept !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'BootAudit0', 'NF', 'cases'], 'BootAudit0 must include the positive B0 acceptance audit', {
+      actual: cases.map((entry) => entry.id),
+    });
+  }
+
+  if (coversB0MissingCoverageReject !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'BootAudit0', 'NF', 'cases'], 'BootAudit0 must include the missing-coverage negative B0 audit', {
+      actual: cases.map((entry) => entry.id),
+    });
+  }
+
+  if (coversB0HashKeyTamperReject !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'BootAudit0', 'NF', 'cases'], 'BootAudit0 must include the hash-key-tamper negative B0 audit', {
+      actual: cases.map((entry) => entry.id),
+    });
+  }
+
+  const auditWrapper = await CheckBootAudit0(bootAudit0);
+  const auditWrapperResult = recordToValidation0(auditWrapper, ['GeneratedPCCPack', 'Boot0', 'BootAudit0']);
+
+  if (!auditWrapperResult.ok) {
+    return validationReject0(auditWrapperResult.path, 'CheckBootAudit0 rejected generated package BootAudit0', {
+      inner: auditWrapperResult.witness?.detail?.inner ?? auditWrapperResult.witness,
+    });
+  }
+
+  if (!isPlainObject(piBoot0)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot'], 'GeneratedPCCPack must include concrete PiBoot', {
+      actual: typeof piBoot0,
+    });
+  }
+
+  if (piBoot0.kind !== 'PiBoot0') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'kind'], 'PiBoot kind mismatch', {
+      actual: piBoot0.kind,
+    });
+  }
+
+  if (piBoot0.materialized !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'materialized'], 'PiBoot must be materialized', {
+      actual: piBoot0.materialized,
+    });
+  }
+
+  if (piBoot0.externalJson !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'externalJson'], 'PiBoot must be external JSON evidence', {
+      actual: piBoot0.externalJson,
+    });
+  }
+
+  const refs = Array.isArray(piBoot0.refs) ? piBoot0.refs : null;
+
+  if (!Array.isArray(refs)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs'], 'PiBoot refs must be an array', {
+      actual: typeof piBoot0.refs,
+    });
+  }
+
+  const expectedRefs = {
+    ByteLang0: digestCanonical0(boot0.ByteLang0),
+    Codec0: digestCanonical0(boot0.Codec0),
+    Digest0: digestCanonical0(boot0.Digest0),
+    IfaceDict0: digestCanonical0(boot0.IfaceDict0),
+    Sched0: digestCanonical0(boot0.Sched0),
+    KernelSeed0: digestCanonical0(boot0.KernelSeed0),
+    B0: digestCanonical0(boot0.B0),
+    BootAudit0: bootAuditDigest,
+  };
+
+  const present = {};
+  let refsMatchBootObjects = true;
+
+  for (const [label, expectedDigest] of Object.entries(expectedRefs)) {
+    const ref = refs.find((entry) => (
+      entry?.label === label ||
+      entry?.target === label
+    ));
+
+    present[label] = isPlainObject(ref);
+
+    if (!isPlainObject(ref)) {
+      return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs'], 'PiBoot is missing a required bootstrap reference', {
+        label,
+        refs,
+      });
+    }
+
+    if (!sameDigestHex0(ref.digest, expectedDigest)) {
+      refsMatchBootObjects = false;
+
+      return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs', label], 'PiBoot reference digest must match concrete boot object', {
+        expected: expectedDigest,
+        actual: ref.digest,
+      });
+    }
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackBootAuditPiBoot0NF',
+
+    bootAudit0: true,
+    bootAudit0Accepted: true,
+    bootAudit0Checker: bootAudit0.checker,
+    bootAudit0Digest: bootAuditDigest,
+    bootAudit0DigestMatchesNF: true,
+    bootAudit0NFKind: bootAuditNF.kind,
+    bootAudit0SuiteId: bootAuditNF.suiteId,
+    bootAudit0CaseCount: bootAuditNF.caseCount,
+    bootAudit0PositiveCount: bootAuditNF.positiveCount,
+    bootAudit0NegativeCount: bootAuditNF.negativeCount,
+    bootAudit0CoversB0Accept: coversB0Accept,
+    bootAudit0CoversB0MissingCoverageReject: coversB0MissingCoverageReject,
+    bootAudit0CoversB0HashKeyTamperReject: coversB0HashKeyTamperReject,
+
+    piBoot0: true,
+    piBoot0Accepted: true,
+    piBoot0Kind: piBoot0.kind,
+    piBoot0Digest: digestCanonical0(piBoot0),
+    piBoot0Materialized: piBoot0.materialized === true,
+    piBoot0ExternalJson: piBoot0.externalJson === true,
+    piBoot0RefCount: refs.length,
+    piBoot0AllBootRefsPresent: Object.values(present).every((value) => value === true),
+    piBoot0RefsMatchBootObjects: refsMatchBootObjects,
+    piBoot0RefsIncludeByteLang0: present.ByteLang0 === true,
+    piBoot0RefsIncludeCodec0: present.Codec0 === true,
+    piBoot0RefsIncludeDigest0: present.Digest0 === true,
+    piBoot0RefsIncludeIfaceDict0: present.IfaceDict0 === true,
+    piBoot0RefsIncludeSched0: present.Sched0 === true,
+    piBoot0RefsIncludeKernelSeed0: present.KernelSeed0 === true,
+    piBoot0RefsIncludeB0: present.B0 === true,
+    piBoot0RefsIncludeBootAudit0: present.BootAudit0 === true,
+  });
 }
 
 function validateGeneratedByteLang0(generatedPackage) {
