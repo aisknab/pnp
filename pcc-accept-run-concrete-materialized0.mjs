@@ -996,6 +996,108 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
         : null
     ),
 
+    generatedPCCPackexpCodec0: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).generatedPackageCodec0 === true
+        : null
+    ),
+    generatedPCCPackexpCodec0Accepted: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).codec0Accepted === true
+        : null
+    ),
+    generatedPCCPackexpCodec0Kind: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).codec0Kind
+        : null
+    ),
+    generatedPCCPackexpCodec0Digest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).codec0Digest
+        : null
+    ),
+    generatedPCCPackexpCodec0Canonical: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).codec0Canonical === true
+        : null
+    ),
+    generatedPCCPackexpCodec0NaturalEncoding: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).codec0NaturalEncoding
+        : null
+    ),
+    generatedPCCPackexpCodec0IntegerEncoding: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).codec0IntegerEncoding
+        : null
+    ),
+    generatedPCCPackexpCodec0StringEncoding: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).codec0StringEncoding
+        : null
+    ),
+    generatedPCCPackexpCodec0TopLevelConsumesAllBytes: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).codec0TopLevelConsumesAllBytes === true
+        : null
+    ),
+    generatedPCCPackexpCodec0NormalFormSerialization: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).codec0NormalFormSerialization
+        : null
+    ),
+    generatedPCCPackexpCodec0PiBootDigestMatches: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).codec0PiBootDigestMatches === true
+        : null
+    ),
+
+    generatedPCCPackexpDigest0: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).generatedPackageDigest0 === true
+        : null
+    ),
+    generatedPCCPackexpDigest0Accepted: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).digest0Accepted === true
+        : null
+    ),
+    generatedPCCPackexpDigest0Kind: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).digest0Kind
+        : null
+    ),
+    generatedPCCPackexpDigest0Digest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).digest0Digest
+        : null
+    ),
+    generatedPCCPackexpDigest0Alg: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).digest0Alg
+        : null
+    ),
+    generatedPCCPackexpDigest0Bytes: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).digest0Bytes
+        : null
+    ),
+    generatedPCCPackexpDigest0EqualityNotObjectEquality: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).digest0EqualityNotObjectEquality === true
+        : null
+    ),
+    generatedPCCPackexpDigest0FullKeyComparisonAfterHashLookup: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).digest0FullKeyComparisonAfterHashLookup === true
+        : null
+    ),
+    generatedPCCPackexpDigest0PiBootDigestMatches: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).digest0PiBootDigestMatches === true
+        : null
+    ),
+
     rowsEnvelopeKind: recomputedChain.rowsEnvelopeKind,
     localPackagesEnvelopeKind: recomputedChain.localPackagesEnvelopeKind,
     globalFirewallsEnvelopeKind: recomputedChain.globalFirewallsEnvelopeKind,
@@ -1657,6 +1759,90 @@ function validateGeneratedPCCPackexpEnvelope0({
     return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'kernelSeed0Digest'], 'GeneratedPCCPackexp0 NF kernelSeed0Digest must match generated package KernelSeed0 bytes', {
       expected: digestCanonical0(generatedKernelSeed0),
       actual: generatedNF.kernelSeed0Digest,
+    });
+  }
+
+  for (const field of [
+    'generatedPackageCodec0',
+    'codec0Accepted',
+    'codec0Canonical',
+    'codec0TopLevelConsumesAllBytes',
+    'codec0PiBootDigestMatches',
+    'generatedPackageDigest0',
+    'digest0Accepted',
+    'digest0EqualityNotObjectEquality',
+    'digest0FullKeyComparisonAfterHashLookup',
+    'digest0PiBootDigestMatches',
+  ]) {
+    if (generatedNF[field] !== true) {
+      return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', field], `GeneratedPCCPackexp0 NF must certify ${field}`, {
+        actual: generatedNF[field],
+      });
+    }
+  }
+
+  if (generatedNF.codec0Kind !== 'Codec0') {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'codec0Kind'], 'GeneratedPCCPackexp0 NF must certify Codec0 kind', {
+      actual: generatedNF.codec0Kind,
+    });
+  }
+
+  if (generatedNF.codec0NaturalEncoding !== 'u32be-length-shortest-big-endian-magnitude') {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'codec0NaturalEncoding'], 'GeneratedPCCPackexp0 NF must certify canonical natural encoding', {
+      actual: generatedNF.codec0NaturalEncoding,
+    });
+  }
+
+  if (generatedNF.codec0IntegerEncoding !== 'sign-byte-plus-canonical-natural-no-negative-zero') {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'codec0IntegerEncoding'], 'GeneratedPCCPackexp0 NF must certify canonical integer encoding', {
+      actual: generatedNF.codec0IntegerEncoding,
+    });
+  }
+
+  if (generatedNF.codec0StringEncoding !== 'utf8-nfc-length-prefixed') {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'codec0StringEncoding'], 'GeneratedPCCPackexp0 NF must certify UTF-8 NFC length-prefixed string encoding', {
+      actual: generatedNF.codec0StringEncoding,
+    });
+  }
+
+  if (generatedNF.codec0NormalFormSerialization !== 'canonical-json-v0') {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'codec0NormalFormSerialization'], 'GeneratedPCCPackexp0 NF must certify canonical-json-v0 normal-form serialization', {
+      actual: generatedNF.codec0NormalFormSerialization,
+    });
+  }
+
+  if (generatedNF.digest0Kind !== 'Digest0') {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'digest0Kind'], 'GeneratedPCCPackexp0 NF must certify Digest0 kind', {
+      actual: generatedNF.digest0Kind,
+    });
+  }
+
+  if (generatedNF.digest0Alg !== 'SHA256') {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'digest0Alg'], 'GeneratedPCCPackexp0 NF must certify SHA256 digest algorithm', {
+      actual: generatedNF.digest0Alg,
+    });
+  }
+
+  if (generatedNF.digest0Bytes !== 'canonical-json-v0') {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'digest0Bytes'], 'GeneratedPCCPackexp0 NF must certify canonical-json-v0 digest byte discipline', {
+      actual: generatedNF.digest0Bytes,
+    });
+  }
+
+  const generatedCodec0 = generatedPCCPackexpEnvelope.GeneratedPCCPack?.MaterializedPCCPackEnvelope?.MaterializedBoot0?.Codec0 ?? null;
+  const generatedDigest0 = generatedPCCPackexpEnvelope.GeneratedPCCPack?.MaterializedPCCPackEnvelope?.MaterializedBoot0?.Digest0 ?? null;
+
+  if (!sameDigestHex0(generatedNF.codec0Digest, digestCanonical0(generatedCodec0))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'codec0Digest'], 'GeneratedPCCPackexp0 NF codec0Digest must match generated package Codec0 bytes', {
+      expected: digestCanonical0(generatedCodec0),
+      actual: generatedNF.codec0Digest,
+    });
+  }
+
+  if (!sameDigestHex0(generatedNF.digest0Digest, digestCanonical0(generatedDigest0))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'digest0Digest'], 'GeneratedPCCPackexp0 NF digest0Digest must match generated package Digest0 bytes', {
+      expected: digestCanonical0(generatedDigest0),
+      actual: generatedNF.digest0Digest,
     });
   }
 
