@@ -32,6 +32,10 @@ import {
   CheckConcreteMaterializedHard0,
 } from './pcc-hard-concrete-materialized0.mjs';
 
+import {
+  CheckConcreteMaterializedRows0,
+} from './pcc-rows-concrete-materialized0.mjs';
+
 const CHECKER_VERSION = 0;
 
 const GENERATED_PCCPACK_BOOT_B0_REQUIRED_FAMILIES0 = Object.freeze([
@@ -221,6 +225,7 @@ export function makeGeneratePCCPackConfig0(overrides = {}) {
     checkBootAuditPiBoot0: true,
     checkConcreteKBundle0: true,
     checkConcreteHard0: true,
+    checkConcreteRows0: true,
     checkCheckPCCPackexpRecord: true,
     checkPublicClaimBoundary: true,
     checkJsonMaterialized: true,
@@ -329,6 +334,7 @@ export async function CheckGeneratedPCCPackexp0(
   let bootAuditPiBootNF = null;
   let concreteKBundleNF = null;
   let concreteHardNF = null;
+  let concreteRowsNF = null;
   let freshCheckPCCPackexpRecord = null;
   let recordAlignmentNF = null;
 
@@ -586,6 +592,28 @@ export async function CheckGeneratedPCCPackexp0(
     }
 
     concreteHardNF = concreteHard.nf;
+  }
+
+  if (cfg.checkConcreteRows0 === true) {
+    const concreteRows = await validateGeneratedConcreteRows0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'ConcreteRows0',
+      status: concreteRows.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(concreteRows.nf ?? concreteRows.witness ?? null),
+    });
+
+    if (!concreteRows.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.ConcreteRows0`,
+        path: concreteRows.path,
+        witness: concreteRows.witness,
+        ledger,
+      });
+    }
+
+    concreteRowsNF = concreteRows.nf;
   }
 
   if (cfg.checkCheckPCCPackexpRecord === true) {
@@ -960,6 +988,30 @@ export async function CheckGeneratedPCCPackexp0(
     concreteHard0LinkedToPCCPack:
       concreteHardNF?.concreteHard0LinkedToPCCPack ?? null,
 
+    generatedPackageConcreteRows0: concreteRowsNF?.concreteRows0 ?? null,
+    concreteRows0Accepted: concreteRowsNF?.concreteRows0Accepted ?? null,
+    concreteRows0Checker: concreteRowsNF?.concreteRows0Checker ?? null,
+    concreteRows0Digest: concreteRowsNF?.concreteRows0Digest ?? null,
+    concreteRows0RowPackDigest: concreteRowsNF?.concreteRows0RowPackDigest ?? null,
+    concreteRows0RowPackObjectDigest:
+      concreteRowsNF?.concreteRows0RowPackObjectDigest ?? null,
+    concreteRows0BootDigest: concreteRowsNF?.concreteRows0BootDigest ?? null,
+    concreteRows0IfaceHash: concreteRowsNF?.concreteRows0IfaceHash ?? null,
+    concreteRows0SchedHash: concreteRowsNF?.concreteRows0SchedHash ?? null,
+    concreteRows0RowCount: concreteRowsNF?.concreteRows0RowCount ?? null,
+    concreteRows0BatchCount: concreteRowsNF?.concreteRows0BatchCount ?? null,
+    concreteRows0FamilyCount: concreteRowsNF?.concreteRows0FamilyCount ?? null,
+    concreteRows0ConcreteIfaceHash:
+      concreteRowsNF?.concreteRows0ConcreteIfaceHash ?? null,
+    concreteRows0SyntheticIfaceHashCount:
+      concreteRowsNF?.concreteRows0SyntheticIfaceHashCount ?? null,
+    concreteRows0ScaffoldMarkerCount:
+      concreteRowsNF?.concreteRows0ScaffoldMarkerCount ?? null,
+    concreteRows0LinkedToGeneratedBoot0:
+      concreteRowsNF?.concreteRows0LinkedToGeneratedBoot0 ?? null,
+    concreteRows0LinkedToPCCPack:
+      concreteRowsNF?.concreteRows0LinkedToPCCPack ?? null,
+
     generatedPackageKind: envelope.GeneratedPCCPack.kind ?? null,
     generatedPackageDigest: digestCanonical0(envelope.GeneratedPCCPack),
 
@@ -1062,6 +1114,7 @@ function validateConfig0(config) {
     'checkBootAuditPiBoot0',
     'checkConcreteKBundle0',
     'checkConcreteHard0',
+    'checkConcreteRows0',
     'checkCheckPCCPackexpRecord',
     'checkPublicClaimBoundary',
     'checkJsonMaterialized',
@@ -1202,6 +1255,136 @@ function scanForbiddenCoreKeys0(value, pathNow, hits) {
 
     scanForbiddenCoreKeys0(child, childPath, hits);
   }
+}
+
+async function validateGeneratedConcreteRows0(generatedPackage) {
+  const materializedPCCPack =
+    generatedPackage?.MaterializedPCCPackEnvelope ??
+    generatedPackage?.MaterializedPCCPack ??
+    null;
+
+  const concreteRows =
+    materializedPCCPack?.RowsEnvelope ??
+    materializedPCCPack?.ConcreteRowsEnvelope ??
+    null;
+
+  if (!isPlainObject(concreteRows)) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope'], 'GeneratedPCCPack must include concrete Rows envelope', {
+      actual: typeof concreteRows,
+    });
+  }
+
+  const record = await CheckConcreteMaterializedRows0(concreteRows);
+  const result = recordToValidation0(record, ['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope']);
+
+  if (!result.ok) {
+    return validationReject0(result.path, 'CheckConcreteMaterializedRows0 rejected generated package RowsEnvelope', {
+      inner: result.witness?.detail?.inner ?? result.witness,
+    });
+  }
+
+  const nf = record.NF ?? record.nf;
+
+  for (const field of [
+    'materializedPath',
+    'concreteIfaceHash',
+  ]) {
+    if (nf[field] !== true) {
+      return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope', 'NF', field], `Concrete Rows NF must certify ${field}`, {
+        actual: nf[field],
+      });
+    }
+  }
+
+  if (nf.syntheticRunAll !== false) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope', 'NF', 'syntheticRunAll'], 'Concrete Rows NF must remain separate from synthetic RunAll0', {
+      expected: false,
+      actual: nf.syntheticRunAll,
+    });
+  }
+
+  if (nf.rowCount !== 39) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope', 'NF', 'rowCount'], 'Concrete Rows NF must certify complete row-family coverage', {
+      expected: 39,
+      actual: nf.rowCount,
+    });
+  }
+
+  if (nf.batchCount !== 13) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope', 'NF', 'batchCount'], 'Concrete Rows NF must certify B0 through B12 batch coverage', {
+      expected: 13,
+      actual: nf.batchCount,
+    });
+  }
+
+  if (nf.familyCount !== 39) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope', 'NF', 'familyCount'], 'Concrete Rows NF must certify required row-family count', {
+      expected: 39,
+      actual: nf.familyCount,
+    });
+  }
+
+  if (nf.syntheticIfaceHashCount !== 0) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope', 'NF', 'syntheticIfaceHashCount'], 'Concrete Rows must not use synthetic IfaceHash markers', {
+      actual: nf.syntheticIfaceHashCount,
+    });
+  }
+
+  if (nf.scaffoldMarkerCount !== 0) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope', 'NF', 'scaffoldMarkerCount'], 'Concrete Rows must not contain scaffold markers', {
+      actual: nf.scaffoldMarkerCount,
+    });
+  }
+
+  const generatedBoot0 =
+    materializedPCCPack?.MaterializedBoot0 ??
+    materializedPCCPack?.PCCPack?.Boot0 ??
+    null;
+
+  const linkedToGeneratedBoot0 = sameDigestHex0(
+    nf.bootDigest,
+    digestCanonical0(generatedBoot0),
+  );
+
+  if (linkedToGeneratedBoot0 !== true) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope', 'Boot0'], 'Concrete Rows Boot0 digest must match generated package Boot0', {
+      expected: digestCanonical0(generatedBoot0),
+      actual: nf.bootDigest,
+    });
+  }
+
+  const linkedToPCCPack = sameDigestHex0(
+    digestCanonical0(materializedPCCPack?.PCCPack?.RowPack ?? null),
+    digestCanonical0(concreteRows?.RowPack ?? null),
+  );
+
+  if (linkedToPCCPack !== true) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope', 'RowPack'], 'Concrete Rows RowPack must match generated PCCPack.RowPack', {
+      expected: digestCanonical0(materializedPCCPack?.PCCPack?.RowPack ?? null),
+      actual: digestCanonical0(concreteRows?.RowPack ?? null),
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackConcreteRows0NF',
+    concreteRows0: true,
+    concreteRows0Accepted: true,
+    concreteRows0Checker: record.checker,
+    concreteRows0Digest: record.Digest ?? record.digest,
+    concreteRows0RowPackDigest: nf.rowPackDigest,
+    concreteRows0RowPackObjectDigest: nf.rowPackObjectDigest,
+    concreteRows0BootDigest: nf.bootDigest,
+    concreteRows0IfaceHash: nf.ifaceHash,
+    concreteRows0SchedHash: nf.schedHash,
+    concreteRows0RowCount: nf.rowCount,
+    concreteRows0BatchCount: nf.batchCount,
+    concreteRows0FamilyCount: nf.familyCount,
+    concreteRows0ConcreteIfaceHash: nf.concreteIfaceHash === true,
+    concreteRows0SyntheticIfaceHashCount: nf.syntheticIfaceHashCount,
+    concreteRows0ScaffoldMarkerCount: nf.scaffoldMarkerCount,
+    concreteRows0LinkedToGeneratedBoot0: linkedToGeneratedBoot0,
+    concreteRows0LinkedToPCCPack: linkedToPCCPack,
+  });
 }
 
 async function validateGeneratedConcreteHard0(generatedPackage) {
