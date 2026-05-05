@@ -67,6 +67,76 @@ const GENERATED_PCCPACK_KERNEL_SEED_REQUIRED_PROOF_NODE_KINDS0 = Object.freeze([
   'PackageTheorem',
 ]);
 
+const GENERATED_PCCPACK_IFACE_REQUIRED_FORBIDDEN_SYMBOLS0 = Object.freeze([
+  'µ',
+  'µ*',
+  'µ#',
+  'Can',
+  'argmin',
+  'maxG',
+  'minimumEquivalent',
+  'optimalCircuit',
+  'exactMinSearch',
+  'canonicalMinimizer',
+  'maximizeGain',
+]);
+
+const GENERATED_PCCPACK_IFACE_PUBLIC_CONSTRUCTORS0 = Object.freeze([
+  'Gain',
+  'Minimum',
+  'ZeroSlack',
+  'NoBudget',
+  'NoHereditary',
+  'SelectorSilent',
+  'Faithful',
+  'Token',
+]);
+
+const GENERATED_PCCPACK_IFACE_CRITICAL_KINDS0 = Object.freeze([
+  'CritC',
+  'Q',
+  'E',
+  'L',
+  'X1',
+  'X2',
+  'X3',
+  'X4',
+]);
+
+const GENERATED_PCCPACK_IFACE_ROUTE_TOKENS0 = Object.freeze([
+  'UnaryWindow',
+  'BCLeak',
+  'HNShape',
+  'BudgetShape',
+  'SelectorSeed',
+  'ExactRoute',
+  'StrictDescent',
+]);
+
+const GENERATED_PCCPACK_SCHED_REQUIRED_CORE0 = Object.freeze({
+  B0: 64,
+  K0: 512,
+  R0: 64,
+  H0: 128,
+  O0: 64,
+  Rel0: 16,
+});
+
+const GENERATED_PCCPACK_SCHED_REQUIRED_SCALE_FACTORS0 = Object.freeze({
+  FT: 1,
+  X: 2,
+  Splice: 2,
+  BC: 4,
+  UN: 4,
+  HN: 8,
+  BUD: 8,
+  RW: 8,
+  BN: 8,
+  PkgC: 16,
+  Packet: 16,
+  R: 16,
+});
+
 const GENERATED_CORE_FORBIDDEN_KEYS0 = Object.freeze([
   'AcceptRun',
   'AcceptRunEnvelope',
@@ -89,6 +159,7 @@ export function makeGeneratePCCPackConfig0(overrides = {}) {
     checkMaterializedBoot0: true,
     checkKernelSeed0: true,
     checkCodecDigest0: true,
+    checkIfaceSched0: true,
     checkCheckPCCPackexpRecord: true,
     checkPublicClaimBoundary: true,
     checkJsonMaterialized: true,
@@ -192,6 +263,7 @@ export async function CheckGeneratedPCCPackexp0(
   let boot0NF = null;
   let kernelSeedNF = null;
   let codecDigestNF = null;
+  let ifaceSchedNF = null;
   let freshCheckPCCPackexpRecord = null;
   let recordAlignmentNF = null;
 
@@ -339,6 +411,28 @@ export async function CheckGeneratedPCCPackexp0(
     }
 
     codecDigestNF = codecDigest.nf;
+  }
+
+  if (cfg.checkIfaceSched0 === true) {
+    const ifaceSched = validateGeneratedIfaceSched0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'IfaceSched0',
+      status: ifaceSched.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(ifaceSched.nf ?? ifaceSched.witness ?? null),
+    });
+
+    if (!ifaceSched.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.IfaceSched0`,
+        path: ifaceSched.path,
+        witness: ifaceSched.witness,
+        ledger,
+      });
+    }
+
+    ifaceSchedNF = ifaceSched.nf;
   }
 
   if (cfg.checkCheckPCCPackexpRecord === true) {
@@ -557,6 +651,37 @@ export async function CheckGeneratedPCCPackexp0(
       codecDigestNF?.digest0FullKeyComparisonAfterHashLookup ?? null,
     digest0PiBootDigestMatches: codecDigestNF?.digest0PiBootDigestMatches ?? null,
 
+    generatedPackageIfaceDict0: ifaceSchedNF?.ifaceDict0 ?? null,
+    ifaceDict0Accepted: ifaceSchedNF?.ifaceDict0Accepted ?? null,
+    ifaceDict0Kind: ifaceSchedNF?.ifaceDict0Kind ?? null,
+    ifaceDict0Digest: ifaceSchedNF?.ifaceDict0Digest ?? null,
+    ifaceDict0ForbiddenSymbolCount: ifaceSchedNF?.ifaceDict0ForbiddenSymbolCount ?? null,
+    ifaceDict0RequiredForbiddenSymbolsPresent:
+      ifaceSchedNF?.ifaceDict0RequiredForbiddenSymbolsPresent ?? null,
+    ifaceDict0NoExecutableMinSymbols: ifaceSchedNF?.ifaceDict0NoExecutableMinSymbols ?? null,
+    ifaceDict0PublicConstructorsPresent: ifaceSchedNF?.ifaceDict0PublicConstructorsPresent ?? null,
+    ifaceDict0CriticalKindsPresent: ifaceSchedNF?.ifaceDict0CriticalKindsPresent ?? null,
+    ifaceDict0RouteTokensPresent: ifaceSchedNF?.ifaceDict0RouteTokensPresent ?? null,
+    ifaceDict0PiBootDigestMatches: ifaceSchedNF?.ifaceDict0PiBootDigestMatches ?? null,
+
+    generatedPackageSched0: ifaceSchedNF?.sched0 ?? null,
+    sched0Accepted: ifaceSchedNF?.sched0Accepted ?? null,
+    sched0Kind: ifaceSchedNF?.sched0Kind ?? null,
+    sched0Digest: ifaceSchedNF?.sched0Digest ?? null,
+    sched0CoreMatchesExpected: ifaceSchedNF?.sched0CoreMatchesExpected ?? null,
+    sched0CoreB0: ifaceSchedNF?.sched0CoreB0 ?? null,
+    sched0CoreK0: ifaceSchedNF?.sched0CoreK0 ?? null,
+    sched0CoreR0: ifaceSchedNF?.sched0CoreR0 ?? null,
+    sched0CoreH0: ifaceSchedNF?.sched0CoreH0 ?? null,
+    sched0CoreO0: ifaceSchedNF?.sched0CoreO0 ?? null,
+    sched0CoreRel0: ifaceSchedNF?.sched0CoreRel0 ?? null,
+    sched0ScaleFactorsPresent: ifaceSchedNF?.sched0ScaleFactorsPresent ?? null,
+    sched0SelectorBoundsPresent: ifaceSchedNF?.sched0SelectorBoundsPresent ?? null,
+    sched0SelectorBoundBH: ifaceSchedNF?.sched0SelectorBoundBH ?? null,
+    sched0SelectorBoundBTheta: ifaceSchedNF?.sched0SelectorBoundBTheta ?? null,
+    sched0PolynomialExponent: ifaceSchedNF?.sched0PolynomialExponent ?? null,
+    sched0PiBootDigestMatches: ifaceSchedNF?.sched0PiBootDigestMatches ?? null,
+
     generatedPackageKind: envelope.GeneratedPCCPack.kind ?? null,
     generatedPackageDigest: digestCanonical0(envelope.GeneratedPCCPack),
 
@@ -654,6 +779,7 @@ function validateConfig0(config) {
     'checkMaterializedBoot0',
     'checkKernelSeed0',
     'checkCodecDigest0',
+    'checkIfaceSched0',
     'checkCheckPCCPackexpRecord',
     'checkPublicClaimBoundary',
     'checkJsonMaterialized',
@@ -794,6 +920,236 @@ function scanForbiddenCoreKeys0(value, pathNow, hits) {
 
     scanForbiddenCoreKeys0(child, childPath, hits);
   }
+}
+
+function validateGeneratedIfaceSched0(generatedPackage) {
+  const materializedPCCPack = generatedPackage?.MaterializedPCCPackEnvelope ?? generatedPackage?.MaterializedPCCPack ?? null;
+  const boot0 = materializedPCCPack?.MaterializedBoot0 ?? materializedPCCPack?.PCCPack?.Boot0 ?? null;
+  const ifaceDict0 = boot0?.IfaceDict0 ?? null;
+  const sched0 = boot0?.Sched0 ?? null;
+
+  if (!isPlainObject(ifaceDict0)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'IfaceDict0'], 'GeneratedPCCPack must include concrete IfaceDict0', {
+      actual: typeof ifaceDict0,
+    });
+  }
+
+  if (ifaceDict0.kind !== undefined && ifaceDict0.kind !== 'IfaceDict0') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'IfaceDict0', 'kind'], 'IfaceDict0 kind mismatch', {
+      actual: ifaceDict0.kind,
+    });
+  }
+
+  if (!Array.isArray(ifaceDict0.forbiddenSymbols)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'IfaceDict0', 'forbiddenSymbols'], 'IfaceDict0 forbiddenSymbols must be an array', {
+      actual: typeof ifaceDict0.forbiddenSymbols,
+    });
+  }
+
+  const missingForbiddenSymbols = GENERATED_PCCPACK_IFACE_REQUIRED_FORBIDDEN_SYMBOLS0.filter((symbol) => (
+    !ifaceDict0.forbiddenSymbols.includes(symbol)
+  ));
+
+  if (missingForbiddenSymbols.length > 0) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'IfaceDict0', 'forbiddenSymbols'], 'IfaceDict0 is missing required forbidden executable symbols', {
+      missingForbiddenSymbols,
+      actual: ifaceDict0.forbiddenSymbols,
+    });
+  }
+
+  if (!Array.isArray(ifaceDict0.publicConstructors)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'IfaceDict0', 'publicConstructors'], 'IfaceDict0 publicConstructors must be an array', {
+      actual: typeof ifaceDict0.publicConstructors,
+    });
+  }
+
+  const missingPublicConstructors = GENERATED_PCCPACK_IFACE_PUBLIC_CONSTRUCTORS0.filter((constructorName) => (
+    !ifaceDict0.publicConstructors.includes(constructorName)
+  ));
+
+  if (missingPublicConstructors.length > 0) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'IfaceDict0', 'publicConstructors'], 'IfaceDict0 is missing required public constructors', {
+      missingPublicConstructors,
+      actual: ifaceDict0.publicConstructors,
+    });
+  }
+
+  if (!Array.isArray(ifaceDict0.criticalKinds)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'IfaceDict0', 'criticalKinds'], 'IfaceDict0 criticalKinds must be an array', {
+      actual: typeof ifaceDict0.criticalKinds,
+    });
+  }
+
+  const missingCriticalKinds = GENERATED_PCCPACK_IFACE_CRITICAL_KINDS0.filter((kind) => (
+    !ifaceDict0.criticalKinds.includes(kind)
+  ));
+
+  if (missingCriticalKinds.length > 0) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'IfaceDict0', 'criticalKinds'], 'IfaceDict0 is missing critical route kinds', {
+      missingCriticalKinds,
+      actual: ifaceDict0.criticalKinds,
+    });
+  }
+
+  if (!Array.isArray(ifaceDict0.routeTokens)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'IfaceDict0', 'routeTokens'], 'IfaceDict0 routeTokens must be an array', {
+      actual: typeof ifaceDict0.routeTokens,
+    });
+  }
+
+  const missingRouteTokens = GENERATED_PCCPACK_IFACE_ROUTE_TOKENS0.filter((token) => (
+    !ifaceDict0.routeTokens.includes(token)
+  ));
+
+  if (missingRouteTokens.length > 0) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'IfaceDict0', 'routeTokens'], 'IfaceDict0 is missing required route tokens', {
+      missingRouteTokens,
+      actual: ifaceDict0.routeTokens,
+    });
+  }
+
+  if (!isPlainObject(sched0)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Sched0'], 'GeneratedPCCPack must include concrete Sched0', {
+      actual: typeof sched0,
+    });
+  }
+
+  if (sched0.kind !== undefined && sched0.kind !== 'Sched0') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Sched0', 'kind'], 'Sched0 kind mismatch', {
+      actual: sched0.kind,
+    });
+  }
+
+  if (!isPlainObject(sched0.core)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Sched0', 'core'], 'Sched0 core must be an object', {
+      actual: typeof sched0.core,
+    });
+  }
+
+  for (const [field, expected] of Object.entries(GENERATED_PCCPACK_SCHED_REQUIRED_CORE0)) {
+    if (sched0.core[field] !== expected) {
+      return validationReject0(['GeneratedPCCPack', 'Boot0', 'Sched0', 'core', field], 'Sched0 core constant mismatch', {
+        expected,
+        actual: sched0.core[field],
+      });
+    }
+  }
+
+  if (!isPlainObject(sched0.packageScaleFactors)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Sched0', 'packageScaleFactors'], 'Sched0 packageScaleFactors must be an object', {
+      actual: typeof sched0.packageScaleFactors,
+    });
+  }
+
+  for (const [field, expected] of Object.entries(GENERATED_PCCPACK_SCHED_REQUIRED_SCALE_FACTORS0)) {
+    if (sched0.packageScaleFactors[field] !== expected) {
+      return validationReject0(['GeneratedPCCPack', 'Boot0', 'Sched0', 'packageScaleFactors', field], 'Sched0 package scale factor mismatch', {
+        expected,
+        actual: sched0.packageScaleFactors[field],
+      });
+    }
+  }
+
+  if (!isPlainObject(sched0.selectorBounds)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Sched0', 'selectorBounds'], 'Sched0 selectorBounds must be an object', {
+      actual: typeof sched0.selectorBounds,
+    });
+  }
+
+  if (sched0.selectorBounds.bH !== 8) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Sched0', 'selectorBounds', 'bH'], 'Sched0 selector bound bH mismatch', {
+      expected: 8,
+      actual: sched0.selectorBounds.bH,
+    });
+  }
+
+  if (sched0.selectorBounds.bTheta !== 12) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Sched0', 'selectorBounds', 'bTheta'], 'Sched0 selector bound bTheta mismatch', {
+      expected: 12,
+      actual: sched0.selectorBounds.bTheta,
+    });
+  }
+
+  if (sched0.selectorBounds.polynomialExponent !== 36) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Sched0', 'selectorBounds', 'polynomialExponent'], 'Sched0 selector polynomial exponent mismatch', {
+      expected: 36,
+      actual: sched0.selectorBounds.polynomialExponent,
+    });
+  }
+
+  const ifaceDigest = digestCanonical0(ifaceDict0);
+  const schedDigest = digestCanonical0(sched0);
+  const piBootRefs = Array.isArray(boot0?.PiBoot?.refs) ? boot0.PiBoot.refs : [];
+
+  const ifaceRef = piBootRefs.find((ref) => (
+    ref?.label === 'IfaceDict0' ||
+    ref?.target === 'IfaceDict0'
+  ));
+
+  if (!isPlainObject(ifaceRef)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs'], 'PiBoot must reference IfaceDict0', {
+      refs: piBootRefs,
+    });
+  }
+
+  if (!sameDigestHex0(ifaceRef.digest, ifaceDigest)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs', 'IfaceDict0'], 'PiBoot IfaceDict0 digest must match concrete IfaceDict0', {
+      expected: ifaceDigest,
+      actual: ifaceRef.digest,
+    });
+  }
+
+  const schedRef = piBootRefs.find((ref) => (
+    ref?.label === 'Sched0' ||
+    ref?.target === 'Sched0'
+  ));
+
+  if (!isPlainObject(schedRef)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs'], 'PiBoot must reference Sched0', {
+      refs: piBootRefs,
+    });
+  }
+
+  if (!sameDigestHex0(schedRef.digest, schedDigest)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs', 'Sched0'], 'PiBoot Sched0 digest must match concrete Sched0', {
+      expected: schedDigest,
+      actual: schedRef.digest,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackIfaceSched0NF',
+
+    ifaceDict0: true,
+    ifaceDict0Accepted: true,
+    ifaceDict0Kind: ifaceDict0.kind ?? 'IfaceDict0',
+    ifaceDict0Digest: ifaceDigest,
+    ifaceDict0ForbiddenSymbolCount: ifaceDict0.forbiddenSymbols.length,
+    ifaceDict0RequiredForbiddenSymbolsPresent: missingForbiddenSymbols.length === 0,
+    ifaceDict0NoExecutableMinSymbols: true,
+    ifaceDict0PublicConstructorsPresent: missingPublicConstructors.length === 0,
+    ifaceDict0CriticalKindsPresent: missingCriticalKinds.length === 0,
+    ifaceDict0RouteTokensPresent: missingRouteTokens.length === 0,
+    ifaceDict0PiBootDigestMatches: true,
+
+    sched0: true,
+    sched0Accepted: true,
+    sched0Kind: sched0.kind ?? 'Sched0',
+    sched0Digest: schedDigest,
+    sched0CoreMatchesExpected: true,
+    sched0CoreB0: sched0.core.B0,
+    sched0CoreK0: sched0.core.K0,
+    sched0CoreR0: sched0.core.R0,
+    sched0CoreH0: sched0.core.H0,
+    sched0CoreO0: sched0.core.O0,
+    sched0CoreRel0: sched0.core.Rel0,
+    sched0ScaleFactorsPresent: true,
+    sched0SelectorBoundsPresent: true,
+    sched0SelectorBoundBH: sched0.selectorBounds.bH,
+    sched0SelectorBoundBTheta: sched0.selectorBounds.bTheta,
+    sched0PolynomialExponent: sched0.selectorBounds.polynomialExponent,
+    sched0PiBootDigestMatches: true,
+  });
 }
 
 function validateGeneratedCodecDigest0(generatedPackage) {
