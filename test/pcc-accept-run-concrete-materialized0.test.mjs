@@ -253,6 +253,20 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 accepts an accept run over th
   assert.equal(out.NF.generatedPCCPackexpSched0SelectorBoundBTheta, 12);
   assert.equal(out.NF.generatedPCCPackexpSched0PolynomialExponent, 36);
   assert.equal(out.NF.generatedPCCPackexpSched0PiBootDigestMatches, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0Kind, 'ByteLang0');
+  assert.match(out.NF.generatedPCCPackexpByteLang0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0TagCount >= 12, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0TagsUnique, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0RequiredTagsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0SortCount >= 8, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0RequiredSortsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0ConstructorCount >= 7, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0RequiredConstructorsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0RecordCount >= 9, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0RequiredRecordAritiesPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpByteLang0PiBootDigestMatches, true);
 
   assert.equal(out.Ledger.some((entry) => (
     entry.phase === 'CheckGeneratedPCCPackexp0' &&
@@ -780,4 +794,23 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp w
   assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
   assert.equal(out.Coord, 'CheckConcreteMaterializedGeneratedAcceptRun0.GeneratedPCCPackexp');
   assert.deepEqual(out.Path, ['GeneratedPCCPackexpEnvelope', 'NF', 'generatedPackageIfaceDict0']);
+});
+
+test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp without ByteLang0 evidence', async () => {
+  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+
+  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+    checkGeneratedAcceptRun: false,
+    checkConcretePCCPack: false,
+    checkPCCPackexp: false,
+    checkLinkage: false,
+    generatedPCCPackexpConfig: {
+      checkByteLang0: false,
+    },
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedGeneratedAcceptRun0.GeneratedPCCPackexp');
+  assert.deepEqual(out.Path, ['GeneratedPCCPackexpEnvelope', 'NF', 'generatedPackageByteLang0']);
 });

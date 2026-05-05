@@ -1240,6 +1240,77 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
         : null
     ),
 
+    generatedPCCPackexpByteLang0: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).generatedPackageByteLang0 === true
+        : null
+    ),
+    generatedPCCPackexpByteLang0Accepted: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).byteLang0Accepted === true
+        : null
+    ),
+    generatedPCCPackexpByteLang0Kind: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).byteLang0Kind
+        : null
+    ),
+    generatedPCCPackexpByteLang0Digest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).byteLang0Digest
+        : null
+    ),
+    generatedPCCPackexpByteLang0TagCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).byteLang0TagCount
+        : null
+    ),
+    generatedPCCPackexpByteLang0TagsUnique: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).byteLang0TagsUnique === true
+        : null
+    ),
+    generatedPCCPackexpByteLang0RequiredTagsPresent: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).byteLang0RequiredTagsPresent === true
+        : null
+    ),
+    generatedPCCPackexpByteLang0SortCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).byteLang0SortCount
+        : null
+    ),
+    generatedPCCPackexpByteLang0RequiredSortsPresent: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).byteLang0RequiredSortsPresent === true
+        : null
+    ),
+    generatedPCCPackexpByteLang0ConstructorCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).byteLang0ConstructorCount
+        : null
+    ),
+    generatedPCCPackexpByteLang0RequiredConstructorsPresent: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).byteLang0RequiredConstructorsPresent === true
+        : null
+    ),
+    generatedPCCPackexpByteLang0RecordCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).byteLang0RecordCount
+        : null
+    ),
+    generatedPCCPackexpByteLang0RequiredRecordAritiesPresent: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).byteLang0RequiredRecordAritiesPresent === true
+        : null
+    ),
+    generatedPCCPackexpByteLang0PiBootDigestMatches: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).byteLang0PiBootDigestMatches === true
+        : null
+    ),
+
     rowsEnvelopeKind: recomputedChain.rowsEnvelopeKind,
     localPackagesEnvelopeKind: recomputedChain.localPackagesEnvelopeKind,
     globalFirewallsEnvelopeKind: recomputedChain.globalFirewallsEnvelopeKind,
@@ -2082,6 +2153,62 @@ function validateGeneratedPCCPackexpEnvelope0({
     return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'sched0Digest'], 'GeneratedPCCPackexp0 NF sched0Digest must match generated package Sched0 bytes', {
       expected: digestCanonical0(generatedSched0),
       actual: generatedNF.sched0Digest,
+    });
+  }
+
+  for (const field of [
+    'generatedPackageByteLang0',
+    'byteLang0Accepted',
+    'byteLang0TagsUnique',
+    'byteLang0RequiredTagsPresent',
+    'byteLang0RequiredSortsPresent',
+    'byteLang0RequiredConstructorsPresent',
+    'byteLang0RequiredRecordAritiesPresent',
+    'byteLang0PiBootDigestMatches',
+  ]) {
+    if (generatedNF[field] !== true) {
+      return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', field], `GeneratedPCCPackexp0 NF must certify ${field}`, {
+        actual: generatedNF[field],
+      });
+    }
+  }
+
+  if (generatedNF.byteLang0Kind !== 'ByteLang0') {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'byteLang0Kind'], 'GeneratedPCCPackexp0 NF must certify ByteLang0 kind', {
+      actual: generatedNF.byteLang0Kind,
+    });
+  }
+
+  if (!(typeof generatedNF.byteLang0TagCount === 'number' && generatedNF.byteLang0TagCount >= 12)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'byteLang0TagCount'], 'GeneratedPCCPackexp0 NF must certify required ByteLang0 tag inventory', {
+      actual: generatedNF.byteLang0TagCount,
+    });
+  }
+
+  if (!(typeof generatedNF.byteLang0SortCount === 'number' && generatedNF.byteLang0SortCount >= 8)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'byteLang0SortCount'], 'GeneratedPCCPackexp0 NF must certify required ByteLang0 sorts', {
+      actual: generatedNF.byteLang0SortCount,
+    });
+  }
+
+  if (!(typeof generatedNF.byteLang0ConstructorCount === 'number' && generatedNF.byteLang0ConstructorCount >= 7)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'byteLang0ConstructorCount'], 'GeneratedPCCPackexp0 NF must certify required ByteLang0 constructors', {
+      actual: generatedNF.byteLang0ConstructorCount,
+    });
+  }
+
+  if (!(typeof generatedNF.byteLang0RecordCount === 'number' && generatedNF.byteLang0RecordCount >= 9)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'byteLang0RecordCount'], 'GeneratedPCCPackexp0 NF must certify required ByteLang0 record arities', {
+      actual: generatedNF.byteLang0RecordCount,
+    });
+  }
+
+  const generatedByteLang0 = generatedPCCPackexpEnvelope.GeneratedPCCPack?.MaterializedPCCPackEnvelope?.MaterializedBoot0?.ByteLang0 ?? null;
+
+  if (!sameDigestHex0(generatedNF.byteLang0Digest, digestCanonical0(generatedByteLang0))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'byteLang0Digest'], 'GeneratedPCCPackexp0 NF byteLang0Digest must match generated package ByteLang0 bytes', {
+      expected: digestCanonical0(generatedByteLang0),
+      actual: generatedNF.byteLang0Digest,
     });
   }
 
