@@ -24,6 +24,10 @@ import {
   CheckBootBatch0,
 } from './pcc-boot0.mjs';
 
+import {
+  CheckConcreteMaterializedKBundle0,
+} from './pcc-k-concrete-materialized0.mjs';
+
 const CHECKER_VERSION = 0;
 
 const GENERATED_PCCPACK_BOOT_B0_REQUIRED_FAMILIES0 = Object.freeze([
@@ -211,6 +215,7 @@ export function makeGeneratePCCPackConfig0(overrides = {}) {
     checkIfaceSched0: true,
     checkByteLang0: true,
     checkBootAuditPiBoot0: true,
+    checkConcreteKBundle0: true,
     checkCheckPCCPackexpRecord: true,
     checkPublicClaimBoundary: true,
     checkJsonMaterialized: true,
@@ -317,6 +322,7 @@ export async function CheckGeneratedPCCPackexp0(
   let ifaceSchedNF = null;
   let byteLangNF = null;
   let bootAuditPiBootNF = null;
+  let concreteKBundleNF = null;
   let freshCheckPCCPackexpRecord = null;
   let recordAlignmentNF = null;
 
@@ -530,6 +536,28 @@ export async function CheckGeneratedPCCPackexp0(
     }
 
     bootAuditPiBootNF = bootAuditPiBoot.nf;
+  }
+
+  if (cfg.checkConcreteKBundle0 === true) {
+    const concreteKBundle = await validateGeneratedConcreteKBundle0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'ConcreteKBundle0',
+      status: concreteKBundle.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(concreteKBundle.nf ?? concreteKBundle.witness ?? null),
+    });
+
+    if (!concreteKBundle.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.ConcreteKBundle0`,
+        path: concreteKBundle.path,
+        witness: concreteKBundle.witness,
+        ledger,
+      });
+    }
+
+    concreteKBundleNF = concreteKBundle.nf;
   }
 
   if (cfg.checkCheckPCCPackexpRecord === true) {
@@ -828,6 +856,44 @@ export async function CheckGeneratedPCCPackexp0(
     piBoot0RefsIncludeB0: bootAuditPiBootNF?.piBoot0RefsIncludeB0 ?? null,
     piBoot0RefsIncludeBootAudit0: bootAuditPiBootNF?.piBoot0RefsIncludeBootAudit0 ?? null,
 
+    generatedPackageConcreteKBundle0: concreteKBundleNF?.concreteKBundle0 ?? null,
+    concreteKBundle0Accepted: concreteKBundleNF?.concreteKBundle0Accepted ?? null,
+    concreteKBundle0Checker: concreteKBundleNF?.concreteKBundle0Checker ?? null,
+    concreteKBundle0Digest: concreteKBundleNF?.concreteKBundle0Digest ?? null,
+    concreteKBundle0MaterializedKBundleDigest:
+      concreteKBundleNF?.concreteKBundle0MaterializedKBundleDigest ?? null,
+    concreteKBundle0BootDigest: concreteKBundleNF?.concreteKBundle0BootDigest ?? null,
+    concreteKBundle0KImplDigest: concreteKBundleNF?.concreteKBundle0KImplDigest ?? null,
+    concreteKBundle0K0Digest: concreteKBundleNF?.concreteKBundle0K0Digest ?? null,
+    concreteKBundle0SigmaDigest: concreteKBundleNF?.concreteKBundle0SigmaDigest ?? null,
+    concreteKBundle0ReflectionDigest: concreteKBundleNF?.concreteKBundle0ReflectionDigest ?? null,
+    concreteKBundle0ProofInventoryDigest:
+      concreteKBundleNF?.concreteKBundle0ProofInventoryDigest ?? null,
+    concreteKBundle0KernelRuleCount:
+      concreteKBundleNF?.concreteKBundle0KernelRuleCount ?? null,
+    concreteKBundle0ConformanceNodeCount:
+      concreteKBundleNF?.concreteKBundle0ConformanceNodeCount ?? null,
+    concreteKBundle0KernelRuleCoverageComplete:
+      concreteKBundleNF?.concreteKBundle0KernelRuleCoverageComplete ?? null,
+    concreteKBundle0SigmaTheoremCount:
+      concreteKBundleNF?.concreteKBundle0SigmaTheoremCount ?? null,
+    concreteKBundle0SigmaCoverageComplete:
+      concreteKBundleNF?.concreteKBundle0SigmaCoverageComplete ?? null,
+    concreteKBundle0SigmaProofRefsResolve:
+      concreteKBundleNF?.concreteKBundle0SigmaProofRefsResolve ?? null,
+    concreteKBundle0ReflectionCount:
+      concreteKBundleNF?.concreteKBundle0ReflectionCount ?? null,
+    concreteKBundle0ReflectionCoverageComplete:
+      concreteKBundleNF?.concreteKBundle0ReflectionCoverageComplete ?? null,
+    concreteKBundle0ReflectionProofRefsResolve:
+      concreteKBundleNF?.concreteKBundle0ReflectionProofRefsResolve ?? null,
+    concreteKBundle0NoOpaqueProofRefs:
+      concreteKBundleNF?.concreteKBundle0NoOpaqueProofRefs ?? null,
+    concreteKBundle0NoExecutableMinSymbols:
+      concreteKBundleNF?.concreteKBundle0NoExecutableMinSymbols ?? null,
+    concreteKBundle0LinkedToGeneratedBoot0:
+      concreteKBundleNF?.concreteKBundle0LinkedToGeneratedBoot0 ?? null,
+
     generatedPackageKind: envelope.GeneratedPCCPack.kind ?? null,
     generatedPackageDigest: digestCanonical0(envelope.GeneratedPCCPack),
 
@@ -928,6 +994,7 @@ function validateConfig0(config) {
     'checkIfaceSched0',
     'checkByteLang0',
     'checkBootAuditPiBoot0',
+    'checkConcreteKBundle0',
     'checkCheckPCCPackexpRecord',
     'checkPublicClaimBoundary',
     'checkJsonMaterialized',
@@ -1068,6 +1135,94 @@ function scanForbiddenCoreKeys0(value, pathNow, hits) {
 
     scanForbiddenCoreKeys0(child, childPath, hits);
   }
+}
+
+async function validateGeneratedConcreteKBundle0(generatedPackage) {
+  const materializedPCCPack =
+    generatedPackage?.MaterializedPCCPackEnvelope ??
+    generatedPackage?.MaterializedPCCPack ??
+    null;
+
+  const concreteKBundle =
+    materializedPCCPack?.KBundleEnvelope ??
+    materializedPCCPack?.ConcreteKBundleEnvelope ??
+    null;
+
+  if (!isPlainObject(concreteKBundle)) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'KBundleEnvelope'], 'GeneratedPCCPack must include concrete KBundle envelope', {
+      actual: typeof concreteKBundle,
+    });
+  }
+
+  const record = await CheckConcreteMaterializedKBundle0(concreteKBundle);
+  const result = recordToValidation0(record, ['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'KBundleEnvelope']);
+
+  if (!result.ok) {
+    return validationReject0(result.path, 'CheckConcreteMaterializedKBundle0 rejected generated package KBundleEnvelope', {
+      inner: result.witness?.detail?.inner ?? result.witness,
+    });
+  }
+
+  const nf = record.NF ?? record.nf;
+  const generatedBoot0 =
+    materializedPCCPack?.MaterializedBoot0 ??
+    materializedPCCPack?.PCCPack?.Boot0 ??
+    null;
+
+  const linkedToGeneratedBoot0 = sameDigestHex0(
+    nf.bootDigest,
+    digestCanonical0(generatedBoot0),
+  );
+
+  if (linkedToGeneratedBoot0 !== true) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'KBundleEnvelope', 'Boot0'], 'Concrete KBundle Boot0 digest must match generated package Boot0', {
+      expected: digestCanonical0(generatedBoot0),
+      actual: nf.bootDigest,
+    });
+  }
+
+  for (const field of [
+    'kernelRuleCoverageComplete',
+    'sigmaCoverageComplete',
+    'sigmaProofRefsResolve',
+    'reflectionCoverageComplete',
+    'reflectionProofRefsResolve',
+    'noOpaqueProofRefs',
+    'noExecutableMinSymbols',
+  ]) {
+    if (nf[field] !== true) {
+      return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'KBundleEnvelope', 'NF', field], `Concrete KBundle NF must certify ${field}`, {
+        actual: nf[field],
+      });
+    }
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackConcreteKBundle0NF',
+    concreteKBundle0: true,
+    concreteKBundle0Accepted: true,
+    concreteKBundle0Checker: record.checker,
+    concreteKBundle0Digest: record.Digest ?? record.digest,
+    concreteKBundle0MaterializedKBundleDigest: nf.materializedKBundleDigest,
+    concreteKBundle0BootDigest: nf.bootDigest,
+    concreteKBundle0KImplDigest: nf.kimplDigest,
+    concreteKBundle0K0Digest: nf.k0Digest,
+    concreteKBundle0SigmaDigest: nf.sigmaDigest,
+    concreteKBundle0ReflectionDigest: nf.reflectionDigest,
+    concreteKBundle0ProofInventoryDigest: nf.proofInventoryDigest,
+    concreteKBundle0KernelRuleCount: nf.kernelRuleCount,
+    concreteKBundle0ConformanceNodeCount: nf.conformanceNodeCount,
+    concreteKBundle0KernelRuleCoverageComplete: nf.kernelRuleCoverageComplete === true,
+    concreteKBundle0SigmaTheoremCount: nf.sigmaTheoremCount,
+    concreteKBundle0SigmaCoverageComplete: nf.sigmaCoverageComplete === true,
+    concreteKBundle0SigmaProofRefsResolve: nf.sigmaProofRefsResolve === true,
+    concreteKBundle0ReflectionCount: nf.reflectionCount,
+    concreteKBundle0ReflectionCoverageComplete: nf.reflectionCoverageComplete === true,
+    concreteKBundle0ReflectionProofRefsResolve: nf.reflectionProofRefsResolve === true,
+    concreteKBundle0NoOpaqueProofRefs: nf.noOpaqueProofRefs === true,
+    concreteKBundle0NoExecutableMinSymbols: nf.noExecutableMinSymbols === true,
+    concreteKBundle0LinkedToGeneratedBoot0: linkedToGeneratedBoot0,
+  });
 }
 
 async function validateGeneratedBootAuditPiBoot0(generatedPackage) {

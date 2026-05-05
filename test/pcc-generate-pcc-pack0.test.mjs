@@ -236,6 +236,29 @@ test('CheckGeneratedPCCPackexp0 accepts generated package with accepted CheckPCC
   assert.equal(out.NF.piBoot0RefsIncludeKernelSeed0, true);
   assert.equal(out.NF.piBoot0RefsIncludeB0, true);
   assert.equal(out.NF.piBoot0RefsIncludeBootAudit0, true);
+  assert.equal(out.NF.generatedPackageConcreteKBundle0, true);
+  assert.equal(out.NF.concreteKBundle0Accepted, true);
+  assert.equal(out.NF.concreteKBundle0Checker, 'CheckConcreteMaterializedKBundle0');
+  assert.match(out.NF.concreteKBundle0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteKBundle0MaterializedKBundleDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteKBundle0BootDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteKBundle0KImplDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteKBundle0K0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteKBundle0SigmaDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteKBundle0ReflectionDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteKBundle0ProofInventoryDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.concreteKBundle0KernelRuleCount, 16);
+  assert.equal(out.NF.concreteKBundle0ConformanceNodeCount, 16);
+  assert.equal(out.NF.concreteKBundle0KernelRuleCoverageComplete, true);
+  assert.equal(out.NF.concreteKBundle0SigmaTheoremCount, 2);
+  assert.equal(out.NF.concreteKBundle0SigmaCoverageComplete, true);
+  assert.equal(out.NF.concreteKBundle0SigmaProofRefsResolve, true);
+  assert.equal(out.NF.concreteKBundle0ReflectionCount >= 5, true);
+  assert.equal(out.NF.concreteKBundle0ReflectionCoverageComplete, true);
+  assert.equal(out.NF.concreteKBundle0ReflectionProofRefsResolve, true);
+  assert.equal(out.NF.concreteKBundle0NoOpaqueProofRefs, true);
+  assert.equal(out.NF.concreteKBundle0NoExecutableMinSymbols, true);
+  assert.equal(out.NF.concreteKBundle0LinkedToGeneratedBoot0, true);
 
   assert.equal(out.NF.checkPCCPackexp, true);
   assert.equal(out.NF.checkPCCPackexpRecordAccepted, true);
@@ -276,6 +299,7 @@ test('makeGeneratePCCPackConfig0 fills default validation switches', () => {
   assert.equal(config.checkIfaceSched0, true);
   assert.equal(config.checkByteLang0, true);
   assert.equal(config.checkBootAuditPiBoot0, true);
+  assert.equal(config.checkConcreteKBundle0, true);
   assert.equal(config.checkJsonMaterialized, false);
   assert.equal(typeof config.checkPCCPackexpConfig, 'object');
 });
@@ -863,4 +887,76 @@ test('CheckGeneratedPCCPackexp0 rejects stale PiBoot BootAudit0 reference', asyn
   assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
   assert.equal(out.Coord, 'CheckGeneratedPCCPackexp0.BootAuditPiBoot0');
   assert.deepEqual(out.Path, ['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs', 'BootAudit0']);
+});
+
+test('CheckGeneratedPCCPackexp0 rejects missing concrete KBundle envelope', async () => {
+  const envelope = await makeGeneratedPCCPackexp0();
+
+  delete envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.KBundleEnvelope;
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    generatedPackageDigest: undefined,
+  };
+
+  const out = await CheckGeneratedPCCPackexp0(envelope, {
+    checkDeterministicGenerator: false,
+    checkMaterializedBoot0: false,
+    checkKernelSeed0: false,
+    checkCodecDigest0: false,
+    checkIfaceSched0: false,
+    checkByteLang0: false,
+    checkBootAuditPiBoot0: false,
+    checkCheckPCCPackexpRecord: false,
+    checkPublicClaimBoundary: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
+  assert.equal(out.Coord, 'CheckGeneratedPCCPackexp0.ConcreteKBundle0');
+  assert.deepEqual(out.Path, [
+    'GeneratedPCCPack',
+    'MaterializedPCCPackEnvelope',
+    'KBundleEnvelope',
+  ]);
+});
+
+test('CheckGeneratedPCCPackexp0 rejects stale concrete KBundle proof inventory', async () => {
+  const envelope = await makeGeneratedPCCPackexp0();
+
+  envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.KBundleEnvelope = {
+    ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.KBundleEnvelope,
+    ProofInventory: {
+      ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.KBundleEnvelope.ProofInventory,
+      sigmaProofRefsResolve: false,
+    },
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    generatedPackageDigest: undefined,
+  };
+
+  const out = await CheckGeneratedPCCPackexp0(envelope, {
+    checkDeterministicGenerator: false,
+    checkMaterializedBoot0: false,
+    checkKernelSeed0: false,
+    checkCodecDigest0: false,
+    checkIfaceSched0: false,
+    checkByteLang0: false,
+    checkBootAuditPiBoot0: false,
+    checkCheckPCCPackexpRecord: false,
+    checkPublicClaimBoundary: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
+  assert.equal(out.Coord, 'CheckGeneratedPCCPackexp0.ConcreteKBundle0');
+  assert.deepEqual(out.Path, [
+    'GeneratedPCCPack',
+    'MaterializedPCCPackEnvelope',
+    'KBundleEnvelope',
+  ]);
 });
