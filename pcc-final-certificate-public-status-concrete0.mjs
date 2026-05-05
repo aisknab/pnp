@@ -511,6 +511,68 @@ export function summarizeConcreteFinalCertificatePublicStatusChain0({
     generatedPCCPackexpByteLang0PiBootDigestMatches:
       concreteCertificateChain.generatedPCCPackexpByteLang0PiBootDigestMatches,
 
+    generatedPCCPackexpBootAudit0:
+      concreteCertificateChain.generatedPCCPackexpBootAudit0,
+    generatedPCCPackexpBootAudit0Accepted:
+      concreteCertificateChain.generatedPCCPackexpBootAudit0Accepted,
+    generatedPCCPackexpBootAudit0Checker:
+      concreteCertificateChain.generatedPCCPackexpBootAudit0Checker,
+    generatedPCCPackexpBootAudit0Digest:
+      concreteCertificateChain.generatedPCCPackexpBootAudit0Digest,
+    generatedPCCPackexpBootAudit0DigestMatchesNF:
+      concreteCertificateChain.generatedPCCPackexpBootAudit0DigestMatchesNF,
+    generatedPCCPackexpBootAudit0NFKind:
+      concreteCertificateChain.generatedPCCPackexpBootAudit0NFKind,
+    generatedPCCPackexpBootAudit0SuiteId:
+      concreteCertificateChain.generatedPCCPackexpBootAudit0SuiteId,
+    generatedPCCPackexpBootAudit0CaseCount:
+      concreteCertificateChain.generatedPCCPackexpBootAudit0CaseCount,
+    generatedPCCPackexpBootAudit0PositiveCount:
+      concreteCertificateChain.generatedPCCPackexpBootAudit0PositiveCount,
+    generatedPCCPackexpBootAudit0NegativeCount:
+      concreteCertificateChain.generatedPCCPackexpBootAudit0NegativeCount,
+    generatedPCCPackexpBootAudit0CoversB0Accept:
+      concreteCertificateChain.generatedPCCPackexpBootAudit0CoversB0Accept,
+    generatedPCCPackexpBootAudit0CoversB0MissingCoverageReject:
+      concreteCertificateChain.generatedPCCPackexpBootAudit0CoversB0MissingCoverageReject,
+    generatedPCCPackexpBootAudit0CoversB0HashKeyTamperReject:
+      concreteCertificateChain.generatedPCCPackexpBootAudit0CoversB0HashKeyTamperReject,
+
+    generatedPCCPackexpPiBoot0:
+      concreteCertificateChain.generatedPCCPackexpPiBoot0,
+    generatedPCCPackexpPiBoot0Accepted:
+      concreteCertificateChain.generatedPCCPackexpPiBoot0Accepted,
+    generatedPCCPackexpPiBoot0Kind:
+      concreteCertificateChain.generatedPCCPackexpPiBoot0Kind,
+    generatedPCCPackexpPiBoot0Digest:
+      concreteCertificateChain.generatedPCCPackexpPiBoot0Digest,
+    generatedPCCPackexpPiBoot0Materialized:
+      concreteCertificateChain.generatedPCCPackexpPiBoot0Materialized,
+    generatedPCCPackexpPiBoot0ExternalJson:
+      concreteCertificateChain.generatedPCCPackexpPiBoot0ExternalJson,
+    generatedPCCPackexpPiBoot0RefCount:
+      concreteCertificateChain.generatedPCCPackexpPiBoot0RefCount,
+    generatedPCCPackexpPiBoot0AllBootRefsPresent:
+      concreteCertificateChain.generatedPCCPackexpPiBoot0AllBootRefsPresent,
+    generatedPCCPackexpPiBoot0RefsMatchBootObjects:
+      concreteCertificateChain.generatedPCCPackexpPiBoot0RefsMatchBootObjects,
+    generatedPCCPackexpPiBoot0RefsIncludeByteLang0:
+      concreteCertificateChain.generatedPCCPackexpPiBoot0RefsIncludeByteLang0,
+    generatedPCCPackexpPiBoot0RefsIncludeCodec0:
+      concreteCertificateChain.generatedPCCPackexpPiBoot0RefsIncludeCodec0,
+    generatedPCCPackexpPiBoot0RefsIncludeDigest0:
+      concreteCertificateChain.generatedPCCPackexpPiBoot0RefsIncludeDigest0,
+    generatedPCCPackexpPiBoot0RefsIncludeIfaceDict0:
+      concreteCertificateChain.generatedPCCPackexpPiBoot0RefsIncludeIfaceDict0,
+    generatedPCCPackexpPiBoot0RefsIncludeSched0:
+      concreteCertificateChain.generatedPCCPackexpPiBoot0RefsIncludeSched0,
+    generatedPCCPackexpPiBoot0RefsIncludeKernelSeed0:
+      concreteCertificateChain.generatedPCCPackexpPiBoot0RefsIncludeKernelSeed0,
+    generatedPCCPackexpPiBoot0RefsIncludeB0:
+      concreteCertificateChain.generatedPCCPackexpPiBoot0RefsIncludeB0,
+    generatedPCCPackexpPiBoot0RefsIncludeBootAudit0:
+      concreteCertificateChain.generatedPCCPackexpPiBoot0RefsIncludeBootAudit0,
+
     kBundleEnvelopeKind: concreteCertificateChain.kBundleEnvelopeKind,
     hardEnvelopeKind: concreteCertificateChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: concreteCertificateChain.finalIntegrationEnvelopeKind,
@@ -1124,6 +1186,68 @@ export async function CheckConcreteFinalCertificatePublicStatus0(
     generatedPCCPackexpByteLang0PiBootDigestMatches:
       recomputedChain.generatedPCCPackexpByteLang0PiBootDigestMatches,
 
+    generatedPCCPackexpBootAudit0:
+      recomputedChain.generatedPCCPackexpBootAudit0,
+    generatedPCCPackexpBootAudit0Accepted:
+      recomputedChain.generatedPCCPackexpBootAudit0Accepted,
+    generatedPCCPackexpBootAudit0Checker:
+      recomputedChain.generatedPCCPackexpBootAudit0Checker,
+    generatedPCCPackexpBootAudit0Digest:
+      recomputedChain.generatedPCCPackexpBootAudit0Digest,
+    generatedPCCPackexpBootAudit0DigestMatchesNF:
+      recomputedChain.generatedPCCPackexpBootAudit0DigestMatchesNF,
+    generatedPCCPackexpBootAudit0NFKind:
+      recomputedChain.generatedPCCPackexpBootAudit0NFKind,
+    generatedPCCPackexpBootAudit0SuiteId:
+      recomputedChain.generatedPCCPackexpBootAudit0SuiteId,
+    generatedPCCPackexpBootAudit0CaseCount:
+      recomputedChain.generatedPCCPackexpBootAudit0CaseCount,
+    generatedPCCPackexpBootAudit0PositiveCount:
+      recomputedChain.generatedPCCPackexpBootAudit0PositiveCount,
+    generatedPCCPackexpBootAudit0NegativeCount:
+      recomputedChain.generatedPCCPackexpBootAudit0NegativeCount,
+    generatedPCCPackexpBootAudit0CoversB0Accept:
+      recomputedChain.generatedPCCPackexpBootAudit0CoversB0Accept,
+    generatedPCCPackexpBootAudit0CoversB0MissingCoverageReject:
+      recomputedChain.generatedPCCPackexpBootAudit0CoversB0MissingCoverageReject,
+    generatedPCCPackexpBootAudit0CoversB0HashKeyTamperReject:
+      recomputedChain.generatedPCCPackexpBootAudit0CoversB0HashKeyTamperReject,
+
+    generatedPCCPackexpPiBoot0:
+      recomputedChain.generatedPCCPackexpPiBoot0,
+    generatedPCCPackexpPiBoot0Accepted:
+      recomputedChain.generatedPCCPackexpPiBoot0Accepted,
+    generatedPCCPackexpPiBoot0Kind:
+      recomputedChain.generatedPCCPackexpPiBoot0Kind,
+    generatedPCCPackexpPiBoot0Digest:
+      recomputedChain.generatedPCCPackexpPiBoot0Digest,
+    generatedPCCPackexpPiBoot0Materialized:
+      recomputedChain.generatedPCCPackexpPiBoot0Materialized,
+    generatedPCCPackexpPiBoot0ExternalJson:
+      recomputedChain.generatedPCCPackexpPiBoot0ExternalJson,
+    generatedPCCPackexpPiBoot0RefCount:
+      recomputedChain.generatedPCCPackexpPiBoot0RefCount,
+    generatedPCCPackexpPiBoot0AllBootRefsPresent:
+      recomputedChain.generatedPCCPackexpPiBoot0AllBootRefsPresent,
+    generatedPCCPackexpPiBoot0RefsMatchBootObjects:
+      recomputedChain.generatedPCCPackexpPiBoot0RefsMatchBootObjects,
+    generatedPCCPackexpPiBoot0RefsIncludeByteLang0:
+      recomputedChain.generatedPCCPackexpPiBoot0RefsIncludeByteLang0,
+    generatedPCCPackexpPiBoot0RefsIncludeCodec0:
+      recomputedChain.generatedPCCPackexpPiBoot0RefsIncludeCodec0,
+    generatedPCCPackexpPiBoot0RefsIncludeDigest0:
+      recomputedChain.generatedPCCPackexpPiBoot0RefsIncludeDigest0,
+    generatedPCCPackexpPiBoot0RefsIncludeIfaceDict0:
+      recomputedChain.generatedPCCPackexpPiBoot0RefsIncludeIfaceDict0,
+    generatedPCCPackexpPiBoot0RefsIncludeSched0:
+      recomputedChain.generatedPCCPackexpPiBoot0RefsIncludeSched0,
+    generatedPCCPackexpPiBoot0RefsIncludeKernelSeed0:
+      recomputedChain.generatedPCCPackexpPiBoot0RefsIncludeKernelSeed0,
+    generatedPCCPackexpPiBoot0RefsIncludeB0:
+      recomputedChain.generatedPCCPackexpPiBoot0RefsIncludeB0,
+    generatedPCCPackexpPiBoot0RefsIncludeBootAudit0:
+      recomputedChain.generatedPCCPackexpPiBoot0RefsIncludeBootAudit0,
+
     kBundleEnvelopeKind: recomputedChain.kBundleEnvelopeKind,
     hardEnvelopeKind: recomputedChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: recomputedChain.finalIntegrationEnvelopeKind,
@@ -1474,6 +1598,27 @@ function validateConcretePublicStatusChain0(actual, expected) {
     'generatedPCCPackexpByteLang0RequiredConstructorsPresent',
     'generatedPCCPackexpByteLang0RequiredRecordAritiesPresent',
     'generatedPCCPackexpByteLang0PiBootDigestMatches',
+
+    'generatedPCCPackexpBootAudit0',
+    'generatedPCCPackexpBootAudit0Accepted',
+    'generatedPCCPackexpBootAudit0DigestMatchesNF',
+    'generatedPCCPackexpBootAudit0CoversB0Accept',
+    'generatedPCCPackexpBootAudit0CoversB0MissingCoverageReject',
+    'generatedPCCPackexpBootAudit0CoversB0HashKeyTamperReject',
+    'generatedPCCPackexpPiBoot0',
+    'generatedPCCPackexpPiBoot0Accepted',
+    'generatedPCCPackexpPiBoot0Materialized',
+    'generatedPCCPackexpPiBoot0ExternalJson',
+    'generatedPCCPackexpPiBoot0AllBootRefsPresent',
+    'generatedPCCPackexpPiBoot0RefsMatchBootObjects',
+    'generatedPCCPackexpPiBoot0RefsIncludeByteLang0',
+    'generatedPCCPackexpPiBoot0RefsIncludeCodec0',
+    'generatedPCCPackexpPiBoot0RefsIncludeDigest0',
+    'generatedPCCPackexpPiBoot0RefsIncludeIfaceDict0',
+    'generatedPCCPackexpPiBoot0RefsIncludeSched0',
+    'generatedPCCPackexpPiBoot0RefsIncludeKernelSeed0',
+    'generatedPCCPackexpPiBoot0RefsIncludeB0',
+    'generatedPCCPackexpPiBoot0RefsIncludeBootAudit0',
 
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',

@@ -270,6 +270,37 @@ test('CheckConcreteMaterializedFinalCertificate0 accepts a final certificate ove
   assert.equal(out.NF.generatedPCCPackexpByteLang0RecordCount >= 9, true);
   assert.equal(out.NF.generatedPCCPackexpByteLang0RequiredRecordAritiesPresent, true);
   assert.equal(out.NF.generatedPCCPackexpByteLang0PiBootDigestMatches, true);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0, true);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0Checker, 'CheckVerifierFrag0');
+  assert.match(out.NF.generatedPCCPackexpBootAudit0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0DigestMatchesNF, true);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0NFKind, 'VerifierFrag0AuditNF');
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0SuiteId, 'boot0.materialized.audit');
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0CaseCount, 3);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0PositiveCount, 1);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0NegativeCount, 2);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0CoversB0Accept, true);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0CoversB0MissingCoverageReject, true);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0CoversB0HashKeyTamperReject, true);
+
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0Kind, 'PiBoot0');
+  assert.match(out.NF.generatedPCCPackexpPiBoot0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0Materialized, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0ExternalJson, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefCount, 8);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0AllBootRefsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsMatchBootObjects, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeByteLang0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeCodec0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeDigest0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeIfaceDict0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeSched0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeKernelSeed0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeB0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeBootAudit0, true);
 
   assert.equal(out.NF.finalCertificateUsesConcreteAcceptRun, true);
   assert.equal(out.NF.certificatePccPackDigestMatchesConcreteRun, true);
@@ -793,4 +824,43 @@ test('CheckConcreteMaterializedFinalCertificate0 rejects stale ByteLang0 evidenc
   assert.equal(out.checker, 'CheckConcreteMaterializedFinalCertificate0');
   assert.equal(out.Coord, 'CheckConcreteMaterializedFinalCertificate0.concreteChain');
   assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpByteLang0RequiredRecordAritiesPresent']);
+});
+
+test('CheckConcreteMaterializedFinalCertificate0 rejects stale BootAudit0 evidence', async () => {
+  const envelope = await makeConcreteMaterializedFinalCertificate0();
+
+  const record = envelope.ConcreteGeneratedAcceptRunEnvelope.CheckGeneratedPCCPackexpRecord;
+  const nf = {
+    ...record.NF,
+    bootAudit0CoversB0HashKeyTamperReject: false,
+  };
+
+  envelope.ConcreteGeneratedAcceptRunEnvelope.CheckGeneratedPCCPackexpRecord = {
+    ...record,
+    NF: nf,
+    nf,
+    Digest: digestCanonical0(nf),
+    digest: digestCanonical0(nf),
+  };
+
+  envelope.ConcreteChain = summarizeConcreteFinalCertificateChain0({
+    concreteGeneratedAcceptRunEnvelope: envelope.ConcreteGeneratedAcceptRunEnvelope,
+    finalCertificateEnvelope: envelope.FinalCertificateEnvelope,
+  });
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckConcreteMaterializedFinalCertificate0(envelope, {
+    checkConcreteGeneratedAcceptRun: false,
+    checkFinalCertificate: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedFinalCertificate0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedFinalCertificate0.concreteChain');
+  assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpBootAudit0CoversB0HashKeyTamperReject']);
 });

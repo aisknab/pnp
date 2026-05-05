@@ -270,6 +270,37 @@ test('CheckConcreteFinalCertificatePublicStatus0 accepts public status over conc
   assert.equal(out.NF.generatedPCCPackexpByteLang0RecordCount >= 9, true);
   assert.equal(out.NF.generatedPCCPackexpByteLang0RequiredRecordAritiesPresent, true);
   assert.equal(out.NF.generatedPCCPackexpByteLang0PiBootDigestMatches, true);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0, true);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0Checker, 'CheckVerifierFrag0');
+  assert.match(out.NF.generatedPCCPackexpBootAudit0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0DigestMatchesNF, true);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0NFKind, 'VerifierFrag0AuditNF');
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0SuiteId, 'boot0.materialized.audit');
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0CaseCount, 3);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0PositiveCount, 1);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0NegativeCount, 2);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0CoversB0Accept, true);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0CoversB0MissingCoverageReject, true);
+  assert.equal(out.NF.generatedPCCPackexpBootAudit0CoversB0HashKeyTamperReject, true);
+
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0Kind, 'PiBoot0');
+  assert.match(out.NF.generatedPCCPackexpPiBoot0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0Materialized, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0ExternalJson, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefCount, 8);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0AllBootRefsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsMatchBootObjects, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeByteLang0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeCodec0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeDigest0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeIfaceDict0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeSched0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeKernelSeed0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeB0, true);
+  assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeBootAudit0, true);
 
   assert.equal(out.NF.statusUsesConcreteFinalCertificate, true);
   assert.equal(out.NF.publicStatusCertificateDigestMatchesConcrete, true);
@@ -872,4 +903,48 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale ByteLang0 evidenc
   assert.equal(out.checker, 'CheckConcreteFinalCertificatePublicStatus0');
   assert.equal(out.Coord, 'CheckConcreteFinalCertificatePublicStatus0.concreteChain');
   assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpByteLang0TagsUnique']);
+});
+
+test('CheckConcreteFinalCertificatePublicStatus0 rejects stale PiBoot evidence', async () => {
+  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+
+  const record = envelope.ConcreteFinalCertificateEnvelope
+    .ConcreteGeneratedAcceptRunEnvelope
+    .CheckGeneratedPCCPackexpRecord;
+
+  const nf = {
+    ...record.NF,
+    piBoot0RefsMatchBootObjects: false,
+  };
+
+  envelope.ConcreteFinalCertificateEnvelope
+    .ConcreteGeneratedAcceptRunEnvelope
+    .CheckGeneratedPCCPackexpRecord = {
+      ...record,
+      NF: nf,
+      nf,
+      Digest: digestCanonical0(nf),
+      digest: digestCanonical0(nf),
+    };
+
+  envelope.ConcreteChain = summarizeConcreteFinalCertificatePublicStatusChain0({
+    concreteFinalCertificateEnvelope: envelope.ConcreteFinalCertificateEnvelope,
+    finalCertificatePublicStatusEnvelope: envelope.FinalCertificatePublicStatusEnvelope,
+  });
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+    checkConcreteFinalCertificate: false,
+    checkFinalCertificatePublicStatus: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteFinalCertificatePublicStatus0');
+  assert.equal(out.Coord, 'CheckConcreteFinalCertificatePublicStatus0.concreteChain');
+  assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpPiBoot0RefsMatchBootObjects']);
 });
