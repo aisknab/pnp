@@ -667,6 +667,67 @@ export async function CheckReleaseAuditConcreteFinalCertificateGate0(
       concreteStatus.ConcreteChain.generatedPCCPackexpByteLang0RequiredRecordAritiesPresent,
     generatedPCCPackexpByteLang0PiBootDigestMatches:
       concreteStatus.ConcreteChain.generatedPCCPackexpByteLang0PiBootDigestMatches,
+    generatedPCCPackexpBootAudit0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBootAudit0,
+    generatedPCCPackexpBootAudit0Accepted:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBootAudit0Accepted,
+    generatedPCCPackexpBootAudit0Checker:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBootAudit0Checker,
+    generatedPCCPackexpBootAudit0Digest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBootAudit0Digest,
+    generatedPCCPackexpBootAudit0DigestMatchesNF:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBootAudit0DigestMatchesNF,
+    generatedPCCPackexpBootAudit0NFKind:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBootAudit0NFKind,
+    generatedPCCPackexpBootAudit0SuiteId:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBootAudit0SuiteId,
+    generatedPCCPackexpBootAudit0CaseCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBootAudit0CaseCount,
+    generatedPCCPackexpBootAudit0PositiveCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBootAudit0PositiveCount,
+    generatedPCCPackexpBootAudit0NegativeCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBootAudit0NegativeCount,
+    generatedPCCPackexpBootAudit0CoversB0Accept:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBootAudit0CoversB0Accept,
+    generatedPCCPackexpBootAudit0CoversB0MissingCoverageReject:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBootAudit0CoversB0MissingCoverageReject,
+    generatedPCCPackexpBootAudit0CoversB0HashKeyTamperReject:
+      concreteStatus.ConcreteChain.generatedPCCPackexpBootAudit0CoversB0HashKeyTamperReject,
+
+    generatedPCCPackexpPiBoot0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpPiBoot0,
+    generatedPCCPackexpPiBoot0Accepted:
+      concreteStatus.ConcreteChain.generatedPCCPackexpPiBoot0Accepted,
+    generatedPCCPackexpPiBoot0Kind:
+      concreteStatus.ConcreteChain.generatedPCCPackexpPiBoot0Kind,
+    generatedPCCPackexpPiBoot0Digest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpPiBoot0Digest,
+    generatedPCCPackexpPiBoot0Materialized:
+      concreteStatus.ConcreteChain.generatedPCCPackexpPiBoot0Materialized,
+    generatedPCCPackexpPiBoot0ExternalJson:
+      concreteStatus.ConcreteChain.generatedPCCPackexpPiBoot0ExternalJson,
+    generatedPCCPackexpPiBoot0RefCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpPiBoot0RefCount,
+    generatedPCCPackexpPiBoot0AllBootRefsPresent:
+      concreteStatus.ConcreteChain.generatedPCCPackexpPiBoot0AllBootRefsPresent,
+    generatedPCCPackexpPiBoot0RefsMatchBootObjects:
+      concreteStatus.ConcreteChain.generatedPCCPackexpPiBoot0RefsMatchBootObjects,
+    generatedPCCPackexpPiBoot0RefsIncludeByteLang0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpPiBoot0RefsIncludeByteLang0,
+    generatedPCCPackexpPiBoot0RefsIncludeCodec0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpPiBoot0RefsIncludeCodec0,
+    generatedPCCPackexpPiBoot0RefsIncludeDigest0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpPiBoot0RefsIncludeDigest0,
+    generatedPCCPackexpPiBoot0RefsIncludeIfaceDict0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpPiBoot0RefsIncludeIfaceDict0,
+    generatedPCCPackexpPiBoot0RefsIncludeSched0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpPiBoot0RefsIncludeSched0,
+    generatedPCCPackexpPiBoot0RefsIncludeKernelSeed0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpPiBoot0RefsIncludeKernelSeed0,
+    generatedPCCPackexpPiBoot0RefsIncludeB0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpPiBoot0RefsIncludeB0,
+    generatedPCCPackexpPiBoot0RefsIncludeBootAudit0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpPiBoot0RefsIncludeBootAudit0,
 
     finalCertificateUsesConcreteAcceptRun: concreteStatus.ConcreteChain.finalCertificateUsesConcreteAcceptRun,
     statusUsesConcreteFinalCertificate: concreteStatus.ConcreteChain.statusUsesConcreteFinalCertificate,
@@ -1046,6 +1107,26 @@ function validateConcretePublicConclusionAlignment0(envelope) {
     'generatedPCCPackexpByteLang0RequiredConstructorsPresent',
     'generatedPCCPackexpByteLang0RequiredRecordAritiesPresent',
     'generatedPCCPackexpByteLang0PiBootDigestMatches',
+    'generatedPCCPackexpBootAudit0',
+    'generatedPCCPackexpBootAudit0Accepted',
+    'generatedPCCPackexpBootAudit0DigestMatchesNF',
+    'generatedPCCPackexpBootAudit0CoversB0Accept',
+    'generatedPCCPackexpBootAudit0CoversB0MissingCoverageReject',
+    'generatedPCCPackexpBootAudit0CoversB0HashKeyTamperReject',
+    'generatedPCCPackexpPiBoot0',
+    'generatedPCCPackexpPiBoot0Accepted',
+    'generatedPCCPackexpPiBoot0Materialized',
+    'generatedPCCPackexpPiBoot0ExternalJson',
+    'generatedPCCPackexpPiBoot0AllBootRefsPresent',
+    'generatedPCCPackexpPiBoot0RefsMatchBootObjects',
+    'generatedPCCPackexpPiBoot0RefsIncludeByteLang0',
+    'generatedPCCPackexpPiBoot0RefsIncludeCodec0',
+    'generatedPCCPackexpPiBoot0RefsIncludeDigest0',
+    'generatedPCCPackexpPiBoot0RefsIncludeIfaceDict0',
+    'generatedPCCPackexpPiBoot0RefsIncludeSched0',
+    'generatedPCCPackexpPiBoot0RefsIncludeKernelSeed0',
+    'generatedPCCPackexpPiBoot0RefsIncludeB0',
+    'generatedPCCPackexpPiBoot0RefsIncludeBootAudit0',
 
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',
