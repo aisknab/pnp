@@ -207,6 +207,33 @@ function makeAcceptedConcreteFinalCertificatePublicStatusRecord0() {
     generatedPCCPackexpKernelSeed0ProofRefsTypedAcyclic: true,
     generatedPCCPackexpKernelSeed0ProofRefsHashIndependent: true,
     generatedPCCPackexpKernelSeed0PiBootDigestMatches: true,
+    generatedPCCPackexpCodec0: true,
+    generatedPCCPackexpCodec0Accepted: true,
+    generatedPCCPackexpCodec0Kind: 'Codec0',
+    generatedPCCPackexpCodec0Digest: digestOf0('2323232323232323232323232323232323232323232323232323232323232323'),
+    generatedPCCPackexpCodec0Canonical: true,
+    generatedPCCPackexpCodec0NaturalEncoding: 'u32be-length-shortest-big-endian-magnitude',
+    generatedPCCPackexpCodec0NaturalEncodingCanonical: true,
+    generatedPCCPackexpCodec0IntegerEncoding: 'sign-byte-plus-canonical-natural-no-negative-zero',
+    generatedPCCPackexpCodec0IntegerEncodingCanonical: true,
+    generatedPCCPackexpCodec0StringEncoding: 'utf8-nfc-length-prefixed',
+    generatedPCCPackexpCodec0StringEncodingCanonical: true,
+    generatedPCCPackexpCodec0TopLevelConsumesAllBytes: true,
+    generatedPCCPackexpCodec0NormalFormSerialization: 'canonical-json-v0',
+    generatedPCCPackexpCodec0NormalFormSerializationCanonical: true,
+    generatedPCCPackexpCodec0PiBootDigestMatches: true,
+
+    generatedPCCPackexpDigest0: true,
+    generatedPCCPackexpDigest0Accepted: true,
+    generatedPCCPackexpDigest0Kind: 'Digest0',
+    generatedPCCPackexpDigest0Digest: digestOf0('2424242424242424242424242424242424242424242424242424242424242424'),
+    generatedPCCPackexpDigest0Alg: 'SHA256',
+    generatedPCCPackexpDigest0AlgSHA256: true,
+    generatedPCCPackexpDigest0Bytes: 'canonical-json-v0',
+    generatedPCCPackexpDigest0BytesCanonicalJson: true,
+    generatedPCCPackexpDigest0EqualityNotObjectEquality: true,
+    generatedPCCPackexpDigest0FullKeyComparisonAfterHashLookup: true,
+    generatedPCCPackexpDigest0PiBootDigestMatches: true,
 
     finalCertificateUsesConcreteAcceptRun: true,
     statusUsesConcreteFinalCertificate: true,
@@ -461,6 +488,33 @@ test('CheckReleaseAudit0 reports the concrete final-certificate public-status ga
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0ProofRefsTypedAcyclic, true);
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0ProofRefsHashIndependent, true);
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0PiBootDigestMatches, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0Accepted, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0Kind, 'Codec0');
+  assert.match(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0Canonical, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0NaturalEncoding, 'u32be-length-shortest-big-endian-magnitude');
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0NaturalEncodingCanonical, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0IntegerEncoding, 'sign-byte-plus-canonical-natural-no-negative-zero');
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0IntegerEncodingCanonical, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0StringEncoding, 'utf8-nfc-length-prefixed');
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0StringEncodingCanonical, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0TopLevelConsumesAllBytes, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0NormalFormSerialization, 'canonical-json-v0');
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0NormalFormSerializationCanonical, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0PiBootDigestMatches, true);
+
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0Accepted, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0Kind, 'Digest0');
+  assert.match(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0Alg, 'SHA256');
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0AlgSHA256, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0Bytes, 'canonical-json-v0');
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0BytesCanonicalJson, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0EqualityNotObjectEquality, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0FullKeyComparisonAfterHashLookup, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0PiBootDigestMatches, true);
 
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateStatusUsesConcreteFinalCertificate, true);
 
@@ -619,6 +673,33 @@ test('CheckReleaseAudit0 reports the concrete final-certificate public-status ga
   assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0ProofRefsTypedAcyclic, true);
   assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0ProofRefsHashIndependent, true);
   assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpKernelSeed0PiBootDigestMatches, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0Accepted, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0Kind, 'Codec0');
+  assert.match(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0Canonical, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0NaturalEncoding, 'u32be-length-shortest-big-endian-magnitude');
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0NaturalEncodingCanonical, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0IntegerEncoding, 'sign-byte-plus-canonical-natural-no-negative-zero');
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0IntegerEncodingCanonical, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0StringEncoding, 'utf8-nfc-length-prefixed');
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0StringEncodingCanonical, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0TopLevelConsumesAllBytes, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0NormalFormSerialization, 'canonical-json-v0');
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0NormalFormSerializationCanonical, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpCodec0PiBootDigestMatches, true);
+
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0Accepted, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0Kind, 'Digest0');
+  assert.match(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0Alg, 'SHA256');
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0AlgSHA256, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0Bytes, 'canonical-json-v0');
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0BytesCanonicalJson, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0EqualityNotObjectEquality, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0FullKeyComparisonAfterHashLookup, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpDigest0PiBootDigestMatches, true);
 
   assert.equal(summary.concreteFinalCertificatePublicStatusGateSummary.publicConclusion.consequent, 'P = NP');
 });
@@ -909,5 +990,71 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate with unsafe K
     'concreteFinalCertificatePublicStatusGate',
     'NF',
     'generatedPCCPackexpKernelSeed0ProofRefsRejectOpaque',
+  ]);
+});
+
+test('CheckReleaseAudit0 rejects a concrete final-certificate gate without canonical Codec0 evidence', async () => {
+  const bad = makeAcceptedConcreteFinalCertificatePublicStatusRecord0();
+
+  bad.NF = {
+    ...bad.NF,
+    generatedPCCPackexpCodec0NaturalEncodingCanonical: false,
+  };
+  bad.nf = bad.NF;
+  bad.Digest = digestCanonical0(bad.NF);
+  bad.digest = bad.Digest;
+
+  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+    runSyntaxCheck: false,
+    runRunAll: false,
+    runMutationCheck: false,
+    runCliSmoke: false,
+    runPublicSurfaceFreeze: false,
+    runMaterializedPublicStatusGate: false,
+    runFinalCertificatePublicStatusGate: false,
+    runConcreteFinalCertificatePublicStatusGate: true,
+    concreteFinalCertificatePublicStatusGateRunner: async () => bad,
+  }));
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAudit0');
+  assert.equal(out.Coord, 'CheckReleaseAudit0.concreteFinalCertificatePublicStatusGate');
+  assert.deepEqual(out.Path, [
+    'concreteFinalCertificatePublicStatusGate',
+    'NF',
+    'generatedPCCPackexpCodec0NaturalEncodingCanonical',
+  ]);
+});
+
+test('CheckReleaseAudit0 rejects a concrete final-certificate gate with Digest0 object-equality misuse evidence', async () => {
+  const bad = makeAcceptedConcreteFinalCertificatePublicStatusRecord0();
+
+  bad.NF = {
+    ...bad.NF,
+    generatedPCCPackexpDigest0EqualityNotObjectEquality: false,
+  };
+  bad.nf = bad.NF;
+  bad.Digest = digestCanonical0(bad.NF);
+  bad.digest = bad.Digest;
+
+  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+    runSyntaxCheck: false,
+    runRunAll: false,
+    runMutationCheck: false,
+    runCliSmoke: false,
+    runPublicSurfaceFreeze: false,
+    runMaterializedPublicStatusGate: false,
+    runFinalCertificatePublicStatusGate: false,
+    runConcreteFinalCertificatePublicStatusGate: true,
+    concreteFinalCertificatePublicStatusGateRunner: async () => bad,
+  }));
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAudit0');
+  assert.equal(out.Coord, 'CheckReleaseAudit0.concreteFinalCertificatePublicStatusGate');
+  assert.deepEqual(out.Path, [
+    'concreteFinalCertificatePublicStatusGate',
+    'NF',
+    'generatedPCCPackexpDigest0EqualityNotObjectEquality',
   ]);
 });
