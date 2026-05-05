@@ -484,6 +484,64 @@ export function summarizeConcreteFinalCertificateChain0({
     generatedPCCPackexpDigest0PiBootDigestMatches:
       checkGeneratedPCCPackexpRecordNF?.digest0PiBootDigestMatches === true,
 
+    generatedPCCPackexpIfaceDict0:
+      checkGeneratedPCCPackexpRecordNF?.generatedPackageIfaceDict0 === true,
+    generatedPCCPackexpIfaceDict0Accepted:
+      checkGeneratedPCCPackexpRecordNF?.ifaceDict0Accepted === true,
+    generatedPCCPackexpIfaceDict0Kind:
+      checkGeneratedPCCPackexpRecordNF?.ifaceDict0Kind ?? null,
+    generatedPCCPackexpIfaceDict0Digest:
+      checkGeneratedPCCPackexpRecordNF?.ifaceDict0Digest ?? null,
+    generatedPCCPackexpIfaceDict0ForbiddenSymbolCount:
+      checkGeneratedPCCPackexpRecordNF?.ifaceDict0ForbiddenSymbolCount ?? null,
+    generatedPCCPackexpIfaceDict0RequiredForbiddenSymbolsPresent:
+      checkGeneratedPCCPackexpRecordNF?.ifaceDict0RequiredForbiddenSymbolsPresent === true,
+    generatedPCCPackexpIfaceDict0NoExecutableMinSymbols:
+      checkGeneratedPCCPackexpRecordNF?.ifaceDict0NoExecutableMinSymbols === true,
+    generatedPCCPackexpIfaceDict0PublicConstructorsPresent:
+      checkGeneratedPCCPackexpRecordNF?.ifaceDict0PublicConstructorsPresent === true,
+    generatedPCCPackexpIfaceDict0CriticalKindsPresent:
+      checkGeneratedPCCPackexpRecordNF?.ifaceDict0CriticalKindsPresent === true,
+    generatedPCCPackexpIfaceDict0RouteTokensPresent:
+      checkGeneratedPCCPackexpRecordNF?.ifaceDict0RouteTokensPresent === true,
+    generatedPCCPackexpIfaceDict0PiBootDigestMatches:
+      checkGeneratedPCCPackexpRecordNF?.ifaceDict0PiBootDigestMatches === true,
+
+    generatedPCCPackexpSched0:
+      checkGeneratedPCCPackexpRecordNF?.generatedPackageSched0 === true,
+    generatedPCCPackexpSched0Accepted:
+      checkGeneratedPCCPackexpRecordNF?.sched0Accepted === true,
+    generatedPCCPackexpSched0Kind:
+      checkGeneratedPCCPackexpRecordNF?.sched0Kind ?? null,
+    generatedPCCPackexpSched0Digest:
+      checkGeneratedPCCPackexpRecordNF?.sched0Digest ?? null,
+    generatedPCCPackexpSched0CoreMatchesExpected:
+      checkGeneratedPCCPackexpRecordNF?.sched0CoreMatchesExpected === true,
+    generatedPCCPackexpSched0CoreB0:
+      checkGeneratedPCCPackexpRecordNF?.sched0CoreB0 ?? null,
+    generatedPCCPackexpSched0CoreK0:
+      checkGeneratedPCCPackexpRecordNF?.sched0CoreK0 ?? null,
+    generatedPCCPackexpSched0CoreR0:
+      checkGeneratedPCCPackexpRecordNF?.sched0CoreR0 ?? null,
+    generatedPCCPackexpSched0CoreH0:
+      checkGeneratedPCCPackexpRecordNF?.sched0CoreH0 ?? null,
+    generatedPCCPackexpSched0CoreO0:
+      checkGeneratedPCCPackexpRecordNF?.sched0CoreO0 ?? null,
+    generatedPCCPackexpSched0CoreRel0:
+      checkGeneratedPCCPackexpRecordNF?.sched0CoreRel0 ?? null,
+    generatedPCCPackexpSched0ScaleFactorsPresent:
+      checkGeneratedPCCPackexpRecordNF?.sched0ScaleFactorsPresent === true,
+    generatedPCCPackexpSched0SelectorBoundsPresent:
+      checkGeneratedPCCPackexpRecordNF?.sched0SelectorBoundsPresent === true,
+    generatedPCCPackexpSched0SelectorBoundBH:
+      checkGeneratedPCCPackexpRecordNF?.sched0SelectorBoundBH ?? null,
+    generatedPCCPackexpSched0SelectorBoundBTheta:
+      checkGeneratedPCCPackexpRecordNF?.sched0SelectorBoundBTheta ?? null,
+    generatedPCCPackexpSched0PolynomialExponent:
+      checkGeneratedPCCPackexpRecordNF?.sched0PolynomialExponent ?? null,
+    generatedPCCPackexpSched0PiBootDigestMatches:
+      checkGeneratedPCCPackexpRecordNF?.sched0PiBootDigestMatches === true,
+
     rowsEnvelopeKind: concreteGeneratedChain.rowsEnvelopeKind,
     localPackagesEnvelopeKind: concreteGeneratedChain.localPackagesEnvelopeKind,
     globalFirewallsEnvelopeKind: concreteGeneratedChain.globalFirewallsEnvelopeKind,
@@ -982,6 +1040,64 @@ export async function CheckConcreteMaterializedFinalCertificate0(
     generatedPCCPackexpDigest0PiBootDigestMatches:
       recomputedChain.generatedPCCPackexpDigest0PiBootDigestMatches,
 
+    generatedPCCPackexpIfaceDict0:
+      recomputedChain.generatedPCCPackexpIfaceDict0,
+    generatedPCCPackexpIfaceDict0Accepted:
+      recomputedChain.generatedPCCPackexpIfaceDict0Accepted,
+    generatedPCCPackexpIfaceDict0Kind:
+      recomputedChain.generatedPCCPackexpIfaceDict0Kind,
+    generatedPCCPackexpIfaceDict0Digest:
+      recomputedChain.generatedPCCPackexpIfaceDict0Digest,
+    generatedPCCPackexpIfaceDict0ForbiddenSymbolCount:
+      recomputedChain.generatedPCCPackexpIfaceDict0ForbiddenSymbolCount,
+    generatedPCCPackexpIfaceDict0RequiredForbiddenSymbolsPresent:
+      recomputedChain.generatedPCCPackexpIfaceDict0RequiredForbiddenSymbolsPresent,
+    generatedPCCPackexpIfaceDict0NoExecutableMinSymbols:
+      recomputedChain.generatedPCCPackexpIfaceDict0NoExecutableMinSymbols,
+    generatedPCCPackexpIfaceDict0PublicConstructorsPresent:
+      recomputedChain.generatedPCCPackexpIfaceDict0PublicConstructorsPresent,
+    generatedPCCPackexpIfaceDict0CriticalKindsPresent:
+      recomputedChain.generatedPCCPackexpIfaceDict0CriticalKindsPresent,
+    generatedPCCPackexpIfaceDict0RouteTokensPresent:
+      recomputedChain.generatedPCCPackexpIfaceDict0RouteTokensPresent,
+    generatedPCCPackexpIfaceDict0PiBootDigestMatches:
+      recomputedChain.generatedPCCPackexpIfaceDict0PiBootDigestMatches,
+
+    generatedPCCPackexpSched0:
+      recomputedChain.generatedPCCPackexpSched0,
+    generatedPCCPackexpSched0Accepted:
+      recomputedChain.generatedPCCPackexpSched0Accepted,
+    generatedPCCPackexpSched0Kind:
+      recomputedChain.generatedPCCPackexpSched0Kind,
+    generatedPCCPackexpSched0Digest:
+      recomputedChain.generatedPCCPackexpSched0Digest,
+    generatedPCCPackexpSched0CoreMatchesExpected:
+      recomputedChain.generatedPCCPackexpSched0CoreMatchesExpected,
+    generatedPCCPackexpSched0CoreB0:
+      recomputedChain.generatedPCCPackexpSched0CoreB0,
+    generatedPCCPackexpSched0CoreK0:
+      recomputedChain.generatedPCCPackexpSched0CoreK0,
+    generatedPCCPackexpSched0CoreR0:
+      recomputedChain.generatedPCCPackexpSched0CoreR0,
+    generatedPCCPackexpSched0CoreH0:
+      recomputedChain.generatedPCCPackexpSched0CoreH0,
+    generatedPCCPackexpSched0CoreO0:
+      recomputedChain.generatedPCCPackexpSched0CoreO0,
+    generatedPCCPackexpSched0CoreRel0:
+      recomputedChain.generatedPCCPackexpSched0CoreRel0,
+    generatedPCCPackexpSched0ScaleFactorsPresent:
+      recomputedChain.generatedPCCPackexpSched0ScaleFactorsPresent,
+    generatedPCCPackexpSched0SelectorBoundsPresent:
+      recomputedChain.generatedPCCPackexpSched0SelectorBoundsPresent,
+    generatedPCCPackexpSched0SelectorBoundBH:
+      recomputedChain.generatedPCCPackexpSched0SelectorBoundBH,
+    generatedPCCPackexpSched0SelectorBoundBTheta:
+      recomputedChain.generatedPCCPackexpSched0SelectorBoundBTheta,
+    generatedPCCPackexpSched0PolynomialExponent:
+      recomputedChain.generatedPCCPackexpSched0PolynomialExponent,
+    generatedPCCPackexpSched0PiBootDigestMatches:
+      recomputedChain.generatedPCCPackexpSched0PiBootDigestMatches,
+
     kBundleEnvelopeKind: recomputedChain.kBundleEnvelopeKind,
     hardEnvelopeKind: recomputedChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: recomputedChain.finalIntegrationEnvelopeKind,
@@ -1316,6 +1432,21 @@ function validateConcreteFinalCertificateChain0(actual, expected) {
     'generatedPCCPackexpDigest0EqualityNotObjectEquality',
     'generatedPCCPackexpDigest0FullKeyComparisonAfterHashLookup',
     'generatedPCCPackexpDigest0PiBootDigestMatches',
+
+    'generatedPCCPackexpIfaceDict0',
+    'generatedPCCPackexpIfaceDict0Accepted',
+    'generatedPCCPackexpIfaceDict0RequiredForbiddenSymbolsPresent',
+    'generatedPCCPackexpIfaceDict0NoExecutableMinSymbols',
+    'generatedPCCPackexpIfaceDict0PublicConstructorsPresent',
+    'generatedPCCPackexpIfaceDict0CriticalKindsPresent',
+    'generatedPCCPackexpIfaceDict0RouteTokensPresent',
+    'generatedPCCPackexpIfaceDict0PiBootDigestMatches',
+    'generatedPCCPackexpSched0',
+    'generatedPCCPackexpSched0Accepted',
+    'generatedPCCPackexpSched0CoreMatchesExpected',
+    'generatedPCCPackexpSched0ScaleFactorsPresent',
+    'generatedPCCPackexpSched0SelectorBoundsPresent',
+    'generatedPCCPackexpSched0PiBootDigestMatches',
 
     'finalCertificateUsesConcreteAcceptRun',
     'certificatePccPackDigestMatchesConcreteRun',

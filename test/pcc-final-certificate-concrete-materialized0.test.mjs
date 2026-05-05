@@ -227,6 +227,35 @@ test('CheckConcreteMaterializedFinalCertificate0 accepts a final certificate ove
   assert.equal(out.NF.generatedPCCPackexpDigest0EqualityNotObjectEquality, true);
   assert.equal(out.NF.generatedPCCPackexpDigest0FullKeyComparisonAfterHashLookup, true);
   assert.equal(out.NF.generatedPCCPackexpDigest0PiBootDigestMatches, true);
+  assert.equal(out.NF.generatedPCCPackexpIfaceDict0, true);
+  assert.equal(out.NF.generatedPCCPackexpIfaceDict0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpIfaceDict0Kind, 'IfaceDict0');
+  assert.match(out.NF.generatedPCCPackexpIfaceDict0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpIfaceDict0ForbiddenSymbolCount >= 11, true);
+  assert.equal(out.NF.generatedPCCPackexpIfaceDict0RequiredForbiddenSymbolsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpIfaceDict0NoExecutableMinSymbols, true);
+  assert.equal(out.NF.generatedPCCPackexpIfaceDict0PublicConstructorsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpIfaceDict0CriticalKindsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpIfaceDict0RouteTokensPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpIfaceDict0PiBootDigestMatches, true);
+
+  assert.equal(out.NF.generatedPCCPackexpSched0, true);
+  assert.equal(out.NF.generatedPCCPackexpSched0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpSched0Kind, 'Sched0');
+  assert.match(out.NF.generatedPCCPackexpSched0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpSched0CoreMatchesExpected, true);
+  assert.equal(out.NF.generatedPCCPackexpSched0CoreB0, 64);
+  assert.equal(out.NF.generatedPCCPackexpSched0CoreK0, 512);
+  assert.equal(out.NF.generatedPCCPackexpSched0CoreR0, 64);
+  assert.equal(out.NF.generatedPCCPackexpSched0CoreH0, 128);
+  assert.equal(out.NF.generatedPCCPackexpSched0CoreO0, 64);
+  assert.equal(out.NF.generatedPCCPackexpSched0CoreRel0, 16);
+  assert.equal(out.NF.generatedPCCPackexpSched0ScaleFactorsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpSched0SelectorBoundsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpSched0SelectorBoundBH, 8);
+  assert.equal(out.NF.generatedPCCPackexpSched0SelectorBoundBTheta, 12);
+  assert.equal(out.NF.generatedPCCPackexpSched0PolynomialExponent, 36);
+  assert.equal(out.NF.generatedPCCPackexpSched0PiBootDigestMatches, true);
 
   assert.equal(out.NF.finalCertificateUsesConcreteAcceptRun, true);
   assert.equal(out.NF.certificatePccPackDigestMatchesConcreteRun, true);
@@ -672,4 +701,43 @@ test('CheckConcreteMaterializedFinalCertificate0 rejects stale Codec0/Digest0 ev
   assert.equal(out.checker, 'CheckConcreteMaterializedFinalCertificate0');
   assert.equal(out.Coord, 'CheckConcreteMaterializedFinalCertificate0.concreteChain');
   assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpCodec0NaturalEncodingCanonical']);
+});
+
+test('CheckConcreteMaterializedFinalCertificate0 rejects stale IfaceDict0/Sched0 evidence', async () => {
+  const envelope = await makeConcreteMaterializedFinalCertificate0();
+
+  const record = envelope.ConcreteGeneratedAcceptRunEnvelope.CheckGeneratedPCCPackexpRecord;
+  const nf = {
+    ...record.NF,
+    ifaceDict0RouteTokensPresent: false,
+  };
+
+  envelope.ConcreteGeneratedAcceptRunEnvelope.CheckGeneratedPCCPackexpRecord = {
+    ...record,
+    NF: nf,
+    nf,
+    Digest: digestCanonical0(nf),
+    digest: digestCanonical0(nf),
+  };
+
+  envelope.ConcreteChain = summarizeConcreteFinalCertificateChain0({
+    concreteGeneratedAcceptRunEnvelope: envelope.ConcreteGeneratedAcceptRunEnvelope,
+    finalCertificateEnvelope: envelope.FinalCertificateEnvelope,
+  });
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckConcreteMaterializedFinalCertificate0(envelope, {
+    checkConcreteGeneratedAcceptRun: false,
+    checkFinalCertificate: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedFinalCertificate0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedFinalCertificate0.concreteChain');
+  assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpIfaceDict0RouteTokensPresent']);
 });
