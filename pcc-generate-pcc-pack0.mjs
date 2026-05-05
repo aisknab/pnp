@@ -137,6 +137,54 @@ const GENERATED_PCCPACK_SCHED_REQUIRED_SCALE_FACTORS0 = Object.freeze({
   R: 16,
 });
 
+const GENERATED_PCCPACK_BYTELANG_REQUIRED_TAGS0 = Object.freeze({
+  Boot0: 0x0001,
+  BootBatch0: 0x0002,
+  Row0: 0x0003,
+  Digest0: 0x0004,
+  IfaceDict0: 0x0005,
+  Sched0: 0x0006,
+  KernelSeed0: 0x0007,
+  BootAudit0: 0x0008,
+  PiBoot0: 0x0009,
+  ProofRef0: 0x000a,
+  BoundsRef0: 0x000b,
+  TransportProof0: 0x000c,
+});
+
+const GENERATED_PCCPACK_BYTELANG_REQUIRED_SORTS0 = Object.freeze([
+  'Unit',
+  'Name',
+  'Record',
+  'Row',
+  'Digest',
+  'Route',
+  'ProofRef',
+  'BoundsRef',
+]);
+
+const GENERATED_PCCPACK_BYTELANG_REQUIRED_CONSTRUCTORS0 = Object.freeze([
+  'accept',
+  'reject',
+  'row',
+  'digest',
+  'proofRef',
+  'boundsRef',
+  'transport',
+]);
+
+const GENERATED_PCCPACK_BYTELANG_REQUIRED_RECORD_ARITIES0 = Object.freeze({
+  Boot0: 9,
+  BootBatch0: 3,
+  Row0: 12,
+  Digest0: 4,
+  IfaceDict0: 4,
+  Sched0: 3,
+  KernelSeed0: 3,
+  BootAudit0: 3,
+  PiBoot0: 4,
+});
+
 const GENERATED_CORE_FORBIDDEN_KEYS0 = Object.freeze([
   'AcceptRun',
   'AcceptRunEnvelope',
@@ -160,6 +208,7 @@ export function makeGeneratePCCPackConfig0(overrides = {}) {
     checkKernelSeed0: true,
     checkCodecDigest0: true,
     checkIfaceSched0: true,
+    checkByteLang0: true,
     checkCheckPCCPackexpRecord: true,
     checkPublicClaimBoundary: true,
     checkJsonMaterialized: true,
@@ -264,6 +313,7 @@ export async function CheckGeneratedPCCPackexp0(
   let kernelSeedNF = null;
   let codecDigestNF = null;
   let ifaceSchedNF = null;
+  let byteLangNF = null;
   let freshCheckPCCPackexpRecord = null;
   let recordAlignmentNF = null;
 
@@ -433,6 +483,28 @@ export async function CheckGeneratedPCCPackexp0(
     }
 
     ifaceSchedNF = ifaceSched.nf;
+  }
+
+  if (cfg.checkByteLang0 === true) {
+    const byteLang = validateGeneratedByteLang0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'ByteLang0',
+      status: byteLang.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(byteLang.nf ?? byteLang.witness ?? null),
+    });
+
+    if (!byteLang.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.ByteLang0`,
+        path: byteLang.path,
+        witness: byteLang.witness,
+        ledger,
+      });
+    }
+
+    byteLangNF = byteLang.nf;
   }
 
   if (cfg.checkCheckPCCPackexpRecord === true) {
@@ -682,6 +754,21 @@ export async function CheckGeneratedPCCPackexp0(
     sched0PolynomialExponent: ifaceSchedNF?.sched0PolynomialExponent ?? null,
     sched0PiBootDigestMatches: ifaceSchedNF?.sched0PiBootDigestMatches ?? null,
 
+    generatedPackageByteLang0: byteLangNF?.byteLang0 ?? null,
+    byteLang0Accepted: byteLangNF?.byteLang0Accepted ?? null,
+    byteLang0Kind: byteLangNF?.byteLang0Kind ?? null,
+    byteLang0Digest: byteLangNF?.byteLang0Digest ?? null,
+    byteLang0TagCount: byteLangNF?.byteLang0TagCount ?? null,
+    byteLang0TagsUnique: byteLangNF?.byteLang0TagsUnique ?? null,
+    byteLang0RequiredTagsPresent: byteLangNF?.byteLang0RequiredTagsPresent ?? null,
+    byteLang0SortCount: byteLangNF?.byteLang0SortCount ?? null,
+    byteLang0RequiredSortsPresent: byteLangNF?.byteLang0RequiredSortsPresent ?? null,
+    byteLang0ConstructorCount: byteLangNF?.byteLang0ConstructorCount ?? null,
+    byteLang0RequiredConstructorsPresent: byteLangNF?.byteLang0RequiredConstructorsPresent ?? null,
+    byteLang0RecordCount: byteLangNF?.byteLang0RecordCount ?? null,
+    byteLang0RequiredRecordAritiesPresent: byteLangNF?.byteLang0RequiredRecordAritiesPresent ?? null,
+    byteLang0PiBootDigestMatches: byteLangNF?.byteLang0PiBootDigestMatches ?? null,
+
     generatedPackageKind: envelope.GeneratedPCCPack.kind ?? null,
     generatedPackageDigest: digestCanonical0(envelope.GeneratedPCCPack),
 
@@ -780,6 +867,7 @@ function validateConfig0(config) {
     'checkKernelSeed0',
     'checkCodecDigest0',
     'checkIfaceSched0',
+    'checkByteLang0',
     'checkCheckPCCPackexpRecord',
     'checkPublicClaimBoundary',
     'checkJsonMaterialized',
@@ -920,6 +1008,148 @@ function scanForbiddenCoreKeys0(value, pathNow, hits) {
 
     scanForbiddenCoreKeys0(child, childPath, hits);
   }
+}
+
+function validateGeneratedByteLang0(generatedPackage) {
+  const materializedPCCPack = generatedPackage?.MaterializedPCCPackEnvelope ?? generatedPackage?.MaterializedPCCPack ?? null;
+  const boot0 = materializedPCCPack?.MaterializedBoot0 ?? materializedPCCPack?.PCCPack?.Boot0 ?? null;
+  const byteLang0 = boot0?.ByteLang0 ?? null;
+
+  if (!isPlainObject(byteLang0)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0'], 'GeneratedPCCPack must include concrete ByteLang0', {
+      actual: typeof byteLang0,
+    });
+  }
+
+  if (byteLang0.kind !== undefined && byteLang0.kind !== 'ByteLang0') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'kind'], 'ByteLang0 kind mismatch', {
+      actual: byteLang0.kind,
+    });
+  }
+
+  if (!isPlainObject(byteLang0.tags)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'tags'], 'ByteLang0 tags must be an object', {
+      actual: typeof byteLang0.tags,
+    });
+  }
+
+  const duplicateTagValue = firstDuplicateObjectValue0(byteLang0.tags);
+
+  if (duplicateTagValue !== null) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'tags'], 'ByteLang0 tag values must be unique', {
+      duplicateTagValue,
+      tags: byteLang0.tags,
+    });
+  }
+
+  for (const [tagName, expected] of Object.entries(GENERATED_PCCPACK_BYTELANG_REQUIRED_TAGS0)) {
+    if (byteLang0.tags[tagName] !== expected) {
+      return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'tags', tagName], 'ByteLang0 required tag mismatch', {
+        expected,
+        actual: byteLang0.tags[tagName],
+      });
+    }
+  }
+
+  if (!isPlainObject(byteLang0.sorts)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'sorts'], 'ByteLang0 sorts must be an object', {
+      actual: typeof byteLang0.sorts,
+    });
+  }
+
+  for (const sortName of GENERATED_PCCPACK_BYTELANG_REQUIRED_SORTS0) {
+    if (byteLang0.sorts[sortName] !== sortName) {
+      return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'sorts', sortName], 'ByteLang0 required sort mismatch', {
+        expected: sortName,
+        actual: byteLang0.sorts[sortName],
+      });
+    }
+  }
+
+  if (!isPlainObject(byteLang0.constructors)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'constructors'], 'ByteLang0 constructors must be an object', {
+      actual: typeof byteLang0.constructors,
+    });
+  }
+
+  for (const constructorName of GENERATED_PCCPACK_BYTELANG_REQUIRED_CONSTRUCTORS0) {
+    if (byteLang0.constructors[constructorName] !== constructorName) {
+      return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'constructors', constructorName], 'ByteLang0 required constructor mismatch', {
+        expected: constructorName,
+        actual: byteLang0.constructors[constructorName],
+      });
+    }
+  }
+
+  if (!isPlainObject(byteLang0.records)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'records'], 'ByteLang0 records must be an object', {
+      actual: typeof byteLang0.records,
+    });
+  }
+
+  for (const [recordName, expected] of Object.entries(GENERATED_PCCPACK_BYTELANG_REQUIRED_RECORD_ARITIES0)) {
+    if (byteLang0.records[recordName] !== expected) {
+      return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'records', recordName], 'ByteLang0 required record arity mismatch', {
+        expected,
+        actual: byteLang0.records[recordName],
+      });
+    }
+  }
+
+  const byteLangDigest = digestCanonical0(byteLang0);
+  const piBootRefs = Array.isArray(boot0?.PiBoot?.refs) ? boot0.PiBoot.refs : [];
+
+  const byteLangRef = piBootRefs.find((ref) => (
+    ref?.label === 'ByteLang0' ||
+    ref?.target === 'ByteLang0'
+  ));
+
+  if (!isPlainObject(byteLangRef)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs'], 'PiBoot must reference ByteLang0', {
+      refs: piBootRefs,
+    });
+  }
+
+  if (!sameDigestHex0(byteLangRef.digest, byteLangDigest)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs', 'ByteLang0'], 'PiBoot ByteLang0 digest must match concrete ByteLang0', {
+      expected: byteLangDigest,
+      actual: byteLangRef.digest,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackByteLang0NF',
+    byteLang0: true,
+    byteLang0Accepted: true,
+    byteLang0Kind: byteLang0.kind ?? 'ByteLang0',
+    byteLang0Digest: byteLangDigest,
+    byteLang0TagCount: Object.keys(byteLang0.tags).length,
+    byteLang0TagsUnique: duplicateTagValue === null,
+    byteLang0RequiredTagsPresent: true,
+    byteLang0SortCount: Object.keys(byteLang0.sorts).length,
+    byteLang0RequiredSortsPresent: true,
+    byteLang0ConstructorCount: Object.keys(byteLang0.constructors).length,
+    byteLang0RequiredConstructorsPresent: true,
+    byteLang0RecordCount: Object.keys(byteLang0.records).length,
+    byteLang0RequiredRecordAritiesPresent: true,
+    byteLang0PiBootDigestMatches: true,
+  });
+}
+
+function firstDuplicateObjectValue0(value) {
+  const seen = new Set();
+
+  for (const item of Object.values(value)) {
+    const key = JSON.stringify(item);
+
+    if (seen.has(key)) {
+      return item;
+    }
+
+    seen.add(key);
+  }
+
+  return null;
 }
 
 function validateGeneratedIfaceSched0(generatedPackage) {
