@@ -728,6 +728,52 @@ export async function CheckReleaseAuditConcreteFinalCertificateGate0(
       concreteStatus.ConcreteChain.generatedPCCPackexpPiBoot0RefsIncludeB0,
     generatedPCCPackexpPiBoot0RefsIncludeBootAudit0:
       concreteStatus.ConcreteChain.generatedPCCPackexpPiBoot0RefsIncludeBootAudit0,
+    generatedPCCPackexpConcreteKBundle0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0,
+    generatedPCCPackexpConcreteKBundle0Accepted:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0Accepted,
+    generatedPCCPackexpConcreteKBundle0Checker:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0Checker,
+    generatedPCCPackexpConcreteKBundle0Digest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0Digest,
+    generatedPCCPackexpConcreteKBundle0MaterializedKBundleDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0MaterializedKBundleDigest,
+    generatedPCCPackexpConcreteKBundle0BootDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0BootDigest,
+    generatedPCCPackexpConcreteKBundle0KImplDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0KImplDigest,
+    generatedPCCPackexpConcreteKBundle0K0Digest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0K0Digest,
+    generatedPCCPackexpConcreteKBundle0SigmaDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0SigmaDigest,
+    generatedPCCPackexpConcreteKBundle0ReflectionDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0ReflectionDigest,
+    generatedPCCPackexpConcreteKBundle0ProofInventoryDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0ProofInventoryDigest,
+    generatedPCCPackexpConcreteKBundle0KernelRuleCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0KernelRuleCount,
+    generatedPCCPackexpConcreteKBundle0ConformanceNodeCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0ConformanceNodeCount,
+    generatedPCCPackexpConcreteKBundle0KernelRuleCoverageComplete:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0KernelRuleCoverageComplete,
+    generatedPCCPackexpConcreteKBundle0SigmaTheoremCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0SigmaTheoremCount,
+    generatedPCCPackexpConcreteKBundle0SigmaCoverageComplete:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0SigmaCoverageComplete,
+    generatedPCCPackexpConcreteKBundle0SigmaProofRefsResolve:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0SigmaProofRefsResolve,
+    generatedPCCPackexpConcreteKBundle0ReflectionCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0ReflectionCount,
+    generatedPCCPackexpConcreteKBundle0ReflectionCoverageComplete:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0ReflectionCoverageComplete,
+    generatedPCCPackexpConcreteKBundle0ReflectionProofRefsResolve:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0ReflectionProofRefsResolve,
+    generatedPCCPackexpConcreteKBundle0NoOpaqueProofRefs:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0NoOpaqueProofRefs,
+    generatedPCCPackexpConcreteKBundle0NoExecutableMinSymbols:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0NoExecutableMinSymbols,
+    generatedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0,
 
     finalCertificateUsesConcreteAcceptRun: concreteStatus.ConcreteChain.finalCertificateUsesConcreteAcceptRun,
     statusUsesConcreteFinalCertificate: concreteStatus.ConcreteChain.statusUsesConcreteFinalCertificate,
@@ -1127,6 +1173,16 @@ function validateConcretePublicConclusionAlignment0(envelope) {
     'generatedPCCPackexpPiBoot0RefsIncludeKernelSeed0',
     'generatedPCCPackexpPiBoot0RefsIncludeB0',
     'generatedPCCPackexpPiBoot0RefsIncludeBootAudit0',
+    'generatedPCCPackexpConcreteKBundle0',
+    'generatedPCCPackexpConcreteKBundle0Accepted',
+    'generatedPCCPackexpConcreteKBundle0KernelRuleCoverageComplete',
+    'generatedPCCPackexpConcreteKBundle0SigmaCoverageComplete',
+    'generatedPCCPackexpConcreteKBundle0SigmaProofRefsResolve',
+    'generatedPCCPackexpConcreteKBundle0ReflectionCoverageComplete',
+    'generatedPCCPackexpConcreteKBundle0ReflectionProofRefsResolve',
+    'generatedPCCPackexpConcreteKBundle0NoOpaqueProofRefs',
+    'generatedPCCPackexpConcreteKBundle0NoExecutableMinSymbols',
+    'generatedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0',
 
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',
