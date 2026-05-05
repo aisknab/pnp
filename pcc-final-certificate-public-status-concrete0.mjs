@@ -573,6 +573,53 @@ export function summarizeConcreteFinalCertificatePublicStatusChain0({
     generatedPCCPackexpPiBoot0RefsIncludeBootAudit0:
       concreteCertificateChain.generatedPCCPackexpPiBoot0RefsIncludeBootAudit0,
 
+    generatedPCCPackexpConcreteKBundle0:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0,
+    generatedPCCPackexpConcreteKBundle0Accepted:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0Accepted,
+    generatedPCCPackexpConcreteKBundle0Checker:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0Checker,
+    generatedPCCPackexpConcreteKBundle0Digest:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0Digest,
+    generatedPCCPackexpConcreteKBundle0MaterializedKBundleDigest:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0MaterializedKBundleDigest,
+    generatedPCCPackexpConcreteKBundle0BootDigest:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0BootDigest,
+    generatedPCCPackexpConcreteKBundle0KImplDigest:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0KImplDigest,
+    generatedPCCPackexpConcreteKBundle0K0Digest:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0K0Digest,
+    generatedPCCPackexpConcreteKBundle0SigmaDigest:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0SigmaDigest,
+    generatedPCCPackexpConcreteKBundle0ReflectionDigest:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0ReflectionDigest,
+    generatedPCCPackexpConcreteKBundle0ProofInventoryDigest:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0ProofInventoryDigest,
+    generatedPCCPackexpConcreteKBundle0KernelRuleCount:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0KernelRuleCount,
+    generatedPCCPackexpConcreteKBundle0ConformanceNodeCount:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0ConformanceNodeCount,
+    generatedPCCPackexpConcreteKBundle0KernelRuleCoverageComplete:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0KernelRuleCoverageComplete,
+    generatedPCCPackexpConcreteKBundle0SigmaTheoremCount:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0SigmaTheoremCount,
+    generatedPCCPackexpConcreteKBundle0SigmaCoverageComplete:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0SigmaCoverageComplete,
+    generatedPCCPackexpConcreteKBundle0SigmaProofRefsResolve:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0SigmaProofRefsResolve,
+    generatedPCCPackexpConcreteKBundle0ReflectionCount:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0ReflectionCount,
+    generatedPCCPackexpConcreteKBundle0ReflectionCoverageComplete:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0ReflectionCoverageComplete,
+    generatedPCCPackexpConcreteKBundle0ReflectionProofRefsResolve:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0ReflectionProofRefsResolve,
+    generatedPCCPackexpConcreteKBundle0NoOpaqueProofRefs:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0NoOpaqueProofRefs,
+    generatedPCCPackexpConcreteKBundle0NoExecutableMinSymbols:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0NoExecutableMinSymbols,
+    generatedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0:
+      concreteCertificateChain.generatedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0,
+
     kBundleEnvelopeKind: concreteCertificateChain.kBundleEnvelopeKind,
     hardEnvelopeKind: concreteCertificateChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: concreteCertificateChain.finalIntegrationEnvelopeKind,
@@ -1248,6 +1295,53 @@ export async function CheckConcreteFinalCertificatePublicStatus0(
     generatedPCCPackexpPiBoot0RefsIncludeBootAudit0:
       recomputedChain.generatedPCCPackexpPiBoot0RefsIncludeBootAudit0,
 
+    generatedPCCPackexpConcreteKBundle0:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0,
+    generatedPCCPackexpConcreteKBundle0Accepted:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0Accepted,
+    generatedPCCPackexpConcreteKBundle0Checker:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0Checker,
+    generatedPCCPackexpConcreteKBundle0Digest:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0Digest,
+    generatedPCCPackexpConcreteKBundle0MaterializedKBundleDigest:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0MaterializedKBundleDigest,
+    generatedPCCPackexpConcreteKBundle0BootDigest:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0BootDigest,
+    generatedPCCPackexpConcreteKBundle0KImplDigest:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0KImplDigest,
+    generatedPCCPackexpConcreteKBundle0K0Digest:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0K0Digest,
+    generatedPCCPackexpConcreteKBundle0SigmaDigest:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0SigmaDigest,
+    generatedPCCPackexpConcreteKBundle0ReflectionDigest:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0ReflectionDigest,
+    generatedPCCPackexpConcreteKBundle0ProofInventoryDigest:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0ProofInventoryDigest,
+    generatedPCCPackexpConcreteKBundle0KernelRuleCount:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0KernelRuleCount,
+    generatedPCCPackexpConcreteKBundle0ConformanceNodeCount:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0ConformanceNodeCount,
+    generatedPCCPackexpConcreteKBundle0KernelRuleCoverageComplete:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0KernelRuleCoverageComplete,
+    generatedPCCPackexpConcreteKBundle0SigmaTheoremCount:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0SigmaTheoremCount,
+    generatedPCCPackexpConcreteKBundle0SigmaCoverageComplete:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0SigmaCoverageComplete,
+    generatedPCCPackexpConcreteKBundle0SigmaProofRefsResolve:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0SigmaProofRefsResolve,
+    generatedPCCPackexpConcreteKBundle0ReflectionCount:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0ReflectionCount,
+    generatedPCCPackexpConcreteKBundle0ReflectionCoverageComplete:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0ReflectionCoverageComplete,
+    generatedPCCPackexpConcreteKBundle0ReflectionProofRefsResolve:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0ReflectionProofRefsResolve,
+    generatedPCCPackexpConcreteKBundle0NoOpaqueProofRefs:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0NoOpaqueProofRefs,
+    generatedPCCPackexpConcreteKBundle0NoExecutableMinSymbols:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0NoExecutableMinSymbols,
+    generatedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0:
+      recomputedChain.generatedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0,
+
     kBundleEnvelopeKind: recomputedChain.kBundleEnvelopeKind,
     hardEnvelopeKind: recomputedChain.hardEnvelopeKind,
     finalIntegrationEnvelopeKind: recomputedChain.finalIntegrationEnvelopeKind,
@@ -1619,6 +1713,17 @@ function validateConcretePublicStatusChain0(actual, expected) {
     'generatedPCCPackexpPiBoot0RefsIncludeKernelSeed0',
     'generatedPCCPackexpPiBoot0RefsIncludeB0',
     'generatedPCCPackexpPiBoot0RefsIncludeBootAudit0',
+
+    'generatedPCCPackexpConcreteKBundle0',
+    'generatedPCCPackexpConcreteKBundle0Accepted',
+    'generatedPCCPackexpConcreteKBundle0KernelRuleCoverageComplete',
+    'generatedPCCPackexpConcreteKBundle0SigmaCoverageComplete',
+    'generatedPCCPackexpConcreteKBundle0SigmaProofRefsResolve',
+    'generatedPCCPackexpConcreteKBundle0ReflectionCoverageComplete',
+    'generatedPCCPackexpConcreteKBundle0ReflectionProofRefsResolve',
+    'generatedPCCPackexpConcreteKBundle0NoOpaqueProofRefs',
+    'generatedPCCPackexpConcreteKBundle0NoExecutableMinSymbols',
+    'generatedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0',
 
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',

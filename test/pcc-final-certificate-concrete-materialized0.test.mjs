@@ -301,6 +301,29 @@ test('CheckConcreteMaterializedFinalCertificate0 accepts a final certificate ove
   assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeKernelSeed0, true);
   assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeB0, true);
   assert.equal(out.NF.generatedPCCPackexpPiBoot0RefsIncludeBootAudit0, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteKBundle0, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteKBundle0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteKBundle0Checker, 'CheckConcreteMaterializedKBundle0');
+  assert.match(out.NF.generatedPCCPackexpConcreteKBundle0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteKBundle0MaterializedKBundleDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteKBundle0BootDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteKBundle0KImplDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteKBundle0K0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteKBundle0SigmaDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteKBundle0ReflectionDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteKBundle0ProofInventoryDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpConcreteKBundle0KernelRuleCount, 16);
+  assert.equal(out.NF.generatedPCCPackexpConcreteKBundle0ConformanceNodeCount, 16);
+  assert.equal(out.NF.generatedPCCPackexpConcreteKBundle0KernelRuleCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteKBundle0SigmaTheoremCount, 2);
+  assert.equal(out.NF.generatedPCCPackexpConcreteKBundle0SigmaCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteKBundle0SigmaProofRefsResolve, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteKBundle0ReflectionCount >= 5, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteKBundle0ReflectionCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteKBundle0ReflectionProofRefsResolve, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteKBundle0NoOpaqueProofRefs, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteKBundle0NoExecutableMinSymbols, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0, true);
 
   assert.equal(out.NF.finalCertificateUsesConcreteAcceptRun, true);
   assert.equal(out.NF.certificatePccPackDigestMatchesConcreteRun, true);
@@ -863,4 +886,43 @@ test('CheckConcreteMaterializedFinalCertificate0 rejects stale BootAudit0 eviden
   assert.equal(out.checker, 'CheckConcreteMaterializedFinalCertificate0');
   assert.equal(out.Coord, 'CheckConcreteMaterializedFinalCertificate0.concreteChain');
   assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpBootAudit0CoversB0HashKeyTamperReject']);
+});
+
+test('CheckConcreteMaterializedFinalCertificate0 rejects stale concrete KBundle evidence', async () => {
+  const envelope = await makeConcreteMaterializedFinalCertificate0();
+
+  const record = envelope.ConcreteGeneratedAcceptRunEnvelope.CheckGeneratedPCCPackexpRecord;
+  const nf = {
+    ...record.NF,
+    concreteKBundle0SigmaProofRefsResolve: false,
+  };
+
+  envelope.ConcreteGeneratedAcceptRunEnvelope.CheckGeneratedPCCPackexpRecord = {
+    ...record,
+    NF: nf,
+    nf,
+    Digest: digestCanonical0(nf),
+    digest: digestCanonical0(nf),
+  };
+
+  envelope.ConcreteChain = summarizeConcreteFinalCertificateChain0({
+    concreteGeneratedAcceptRunEnvelope: envelope.ConcreteGeneratedAcceptRunEnvelope,
+    finalCertificateEnvelope: envelope.FinalCertificateEnvelope,
+  });
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckConcreteMaterializedFinalCertificate0(envelope, {
+    checkConcreteGeneratedAcceptRun: false,
+    checkFinalCertificate: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedFinalCertificate0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedFinalCertificate0.concreteChain');
+  assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpConcreteKBundle0SigmaProofRefsResolve']);
 });
