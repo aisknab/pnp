@@ -331,6 +331,28 @@ function makeAcceptedConcreteFinalCertificatePublicStatusRecord0() {
     generatedPCCPackexpConcreteKBundle0NoOpaqueProofRefs: true,
     generatedPCCPackexpConcreteKBundle0NoExecutableMinSymbols: true,
     generatedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0: true,
+    generatedPCCPackexpConcreteHard0: true,
+    generatedPCCPackexpConcreteHard0Accepted: true,
+    generatedPCCPackexpConcreteHard0Checker: 'CheckConcreteMaterializedHard0',
+    generatedPCCPackexpConcreteHard0Digest: digestOf0('32'.repeat(32)),
+    generatedPCCPackexpConcreteHard0MaterializedHardDigest: digestOf0('33'.repeat(32)),
+    generatedPCCPackexpConcreteHard0HardCheckDigest: digestOf0('34'.repeat(32)),
+    generatedPCCPackexpConcreteHard0CoverageDigest: digestOf0('35'.repeat(32)),
+    generatedPCCPackexpConcreteHard0CheckerCount: 13,
+    generatedPCCPackexpConcreteHard0CheckerCoverageComplete: true,
+    generatedPCCPackexpConcreteHard0RowKeyFieldCount: 17,
+    generatedPCCPackexpConcreteHard0RowKeyCoverageComplete: true,
+    generatedPCCPackexpConcreteHard0RoutePriorityComplete: true,
+    generatedPCCPackexpConcreteHard0ProofRefPolicyComplete: true,
+    generatedPCCPackexpConcreteHard0HashDisciplineComplete: true,
+    generatedPCCPackexpConcreteHard0NoMinCoverageComplete: true,
+    generatedPCCPackexpConcreteHard0ForbiddenSymbolCount: 11,
+    generatedPCCPackexpConcreteHard0ImportPolicyComplete: true,
+    generatedPCCPackexpConcreteHard0ForbiddenImportEdgeCount: 6,
+    generatedPCCPackexpConcreteHard0ReflectionPolicyComplete: true,
+    generatedPCCPackexpConcreteHard0BoundsPolicyComplete: true,
+    generatedPCCPackexpConcreteHard0DiagnosticsPolicyComplete: true,
+    generatedPCCPackexpConcreteHard0LinkedToPCCPack: true,
 
     finalCertificateUsesConcreteAcceptRun: true,
     statusUsesConcreteFinalCertificate: true,
@@ -709,6 +731,28 @@ test('CheckReleaseAudit0 reports the concrete final-certificate public-status ga
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0NoOpaqueProofRefs, true);
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0NoExecutableMinSymbols, true);
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0Accepted, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0Checker, 'CheckConcreteMaterializedHard0');
+  assert.match(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0MaterializedHardDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0HardCheckDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0CoverageDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0CheckerCount, 13);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0CheckerCoverageComplete, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0RowKeyFieldCount, 17);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0RowKeyCoverageComplete, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0RoutePriorityComplete, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0ProofRefPolicyComplete, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0HashDisciplineComplete, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0NoMinCoverageComplete, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0ForbiddenSymbolCount, 11);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0ImportPolicyComplete, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0ForbiddenImportEdgeCount, 6);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0ReflectionPolicyComplete, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0BoundsPolicyComplete, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0DiagnosticsPolicyComplete, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0LinkedToPCCPack, true);
 
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateStatusUsesConcreteFinalCertificate, true);
 
@@ -991,6 +1035,28 @@ test('CheckReleaseAudit0 reports the concrete final-certificate public-status ga
   assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0NoOpaqueProofRefs, true);
   assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0NoExecutableMinSymbols, true);
   assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteKBundle0LinkedToGeneratedBoot0, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0Accepted, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0Checker, 'CheckConcreteMaterializedHard0');
+  assert.match(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0MaterializedHardDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0HardCheckDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0CoverageDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0CheckerCount, 13);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0CheckerCoverageComplete, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0RowKeyFieldCount, 17);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0RowKeyCoverageComplete, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0RoutePriorityComplete, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0ProofRefPolicyComplete, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0HashDisciplineComplete, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0NoMinCoverageComplete, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0ForbiddenSymbolCount, 11);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0ImportPolicyComplete, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0ForbiddenImportEdgeCount, 6);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0ReflectionPolicyComplete, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0BoundsPolicyComplete, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0DiagnosticsPolicyComplete, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpConcreteHard0LinkedToPCCPack, true);
 
   assert.equal(summary.concreteFinalCertificatePublicStatusGateSummary.publicConclusion.consequent, 'P = NP');
 });
@@ -1611,5 +1677,71 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without concr
     'concreteFinalCertificatePublicStatusGate',
     'NF',
     'generatedPCCPackexpConcreteKBundle0NoOpaqueProofRefs',
+  ]);
+});
+
+test('CheckReleaseAudit0 rejects a concrete final-certificate gate without concrete HardCheck no-min evidence', async () => {
+  const bad = makeAcceptedConcreteFinalCertificatePublicStatusRecord0();
+
+  bad.NF = {
+    ...bad.NF,
+    generatedPCCPackexpConcreteHard0NoMinCoverageComplete: false,
+  };
+  bad.nf = bad.NF;
+  bad.Digest = digestCanonical0(bad.NF);
+  bad.digest = bad.Digest;
+
+  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+    runSyntaxCheck: false,
+    runRunAll: false,
+    runMutationCheck: false,
+    runCliSmoke: false,
+    runPublicSurfaceFreeze: false,
+    runMaterializedPublicStatusGate: false,
+    runFinalCertificatePublicStatusGate: false,
+    runConcreteFinalCertificatePublicStatusGate: true,
+    concreteFinalCertificatePublicStatusGateRunner: async () => bad,
+  }));
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAudit0');
+  assert.equal(out.Coord, 'CheckReleaseAudit0.concreteFinalCertificatePublicStatusGate');
+  assert.deepEqual(out.Path, [
+    'concreteFinalCertificatePublicStatusGate',
+    'NF',
+    'generatedPCCPackexpConcreteHard0NoMinCoverageComplete',
+  ]);
+});
+
+test('CheckReleaseAudit0 rejects a concrete final-certificate gate without concrete HardCheck proof-ref evidence', async () => {
+  const bad = makeAcceptedConcreteFinalCertificatePublicStatusRecord0();
+
+  bad.NF = {
+    ...bad.NF,
+    generatedPCCPackexpConcreteHard0ProofRefPolicyComplete: false,
+  };
+  bad.nf = bad.NF;
+  bad.Digest = digestCanonical0(bad.NF);
+  bad.digest = bad.Digest;
+
+  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+    runSyntaxCheck: false,
+    runRunAll: false,
+    runMutationCheck: false,
+    runCliSmoke: false,
+    runPublicSurfaceFreeze: false,
+    runMaterializedPublicStatusGate: false,
+    runFinalCertificatePublicStatusGate: false,
+    runConcreteFinalCertificatePublicStatusGate: true,
+    concreteFinalCertificatePublicStatusGateRunner: async () => bad,
+  }));
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAudit0');
+  assert.equal(out.Coord, 'CheckReleaseAudit0.concreteFinalCertificatePublicStatusGate');
+  assert.deepEqual(out.Path, [
+    'concreteFinalCertificatePublicStatusGate',
+    'NF',
+    'generatedPCCPackexpConcreteHard0ProofRefPolicyComplete',
   ]);
 });
