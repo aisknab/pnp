@@ -224,6 +224,35 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 accepts an accept run over th
   assert.equal(out.NF.generatedPCCPackexpDigest0EqualityNotObjectEquality, true);
   assert.equal(out.NF.generatedPCCPackexpDigest0FullKeyComparisonAfterHashLookup, true);
   assert.equal(out.NF.generatedPCCPackexpDigest0PiBootDigestMatches, true);
+  assert.equal(out.NF.generatedPCCPackexpIfaceDict0, true);
+  assert.equal(out.NF.generatedPCCPackexpIfaceDict0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpIfaceDict0Kind, 'IfaceDict0');
+  assert.match(out.NF.generatedPCCPackexpIfaceDict0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpIfaceDict0ForbiddenSymbolCount >= 11, true);
+  assert.equal(out.NF.generatedPCCPackexpIfaceDict0RequiredForbiddenSymbolsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpIfaceDict0NoExecutableMinSymbols, true);
+  assert.equal(out.NF.generatedPCCPackexpIfaceDict0PublicConstructorsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpIfaceDict0CriticalKindsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpIfaceDict0RouteTokensPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpIfaceDict0PiBootDigestMatches, true);
+
+  assert.equal(out.NF.generatedPCCPackexpSched0, true);
+  assert.equal(out.NF.generatedPCCPackexpSched0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpSched0Kind, 'Sched0');
+  assert.match(out.NF.generatedPCCPackexpSched0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpSched0CoreMatchesExpected, true);
+  assert.equal(out.NF.generatedPCCPackexpSched0CoreB0, 64);
+  assert.equal(out.NF.generatedPCCPackexpSched0CoreK0, 512);
+  assert.equal(out.NF.generatedPCCPackexpSched0CoreR0, 64);
+  assert.equal(out.NF.generatedPCCPackexpSched0CoreH0, 128);
+  assert.equal(out.NF.generatedPCCPackexpSched0CoreO0, 64);
+  assert.equal(out.NF.generatedPCCPackexpSched0CoreRel0, 16);
+  assert.equal(out.NF.generatedPCCPackexpSched0ScaleFactorsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpSched0SelectorBoundsPresent, true);
+  assert.equal(out.NF.generatedPCCPackexpSched0SelectorBoundBH, 8);
+  assert.equal(out.NF.generatedPCCPackexpSched0SelectorBoundBTheta, 12);
+  assert.equal(out.NF.generatedPCCPackexpSched0PolynomialExponent, 36);
+  assert.equal(out.NF.generatedPCCPackexpSched0PiBootDigestMatches, true);
 
   assert.equal(out.Ledger.some((entry) => (
     entry.phase === 'CheckGeneratedPCCPackexp0' &&
@@ -732,4 +761,23 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp w
   assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
   assert.equal(out.Coord, 'CheckConcreteMaterializedGeneratedAcceptRun0.GeneratedPCCPackexp');
   assert.deepEqual(out.Path, ['GeneratedPCCPackexpEnvelope', 'NF', 'generatedPackageCodec0']);
+});
+
+test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp without IfaceDict0/Sched0 evidence', async () => {
+  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+
+  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+    checkGeneratedAcceptRun: false,
+    checkConcretePCCPack: false,
+    checkPCCPackexp: false,
+    checkLinkage: false,
+    generatedPCCPackexpConfig: {
+      checkIfaceSched0: false,
+    },
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedGeneratedAcceptRun0.GeneratedPCCPackexp');
+  assert.deepEqual(out.Path, ['GeneratedPCCPackexpEnvelope', 'NF', 'generatedPackageIfaceDict0']);
 });

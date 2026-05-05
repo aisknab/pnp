@@ -1098,6 +1098,148 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
         : null
     ),
 
+    generatedPCCPackexpIfaceDict0: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).generatedPackageIfaceDict0 === true
+        : null
+    ),
+    generatedPCCPackexpIfaceDict0Accepted: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).ifaceDict0Accepted === true
+        : null
+    ),
+    generatedPCCPackexpIfaceDict0Kind: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).ifaceDict0Kind
+        : null
+    ),
+    generatedPCCPackexpIfaceDict0Digest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).ifaceDict0Digest
+        : null
+    ),
+    generatedPCCPackexpIfaceDict0ForbiddenSymbolCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).ifaceDict0ForbiddenSymbolCount
+        : null
+    ),
+    generatedPCCPackexpIfaceDict0RequiredForbiddenSymbolsPresent: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).ifaceDict0RequiredForbiddenSymbolsPresent === true
+        : null
+    ),
+    generatedPCCPackexpIfaceDict0NoExecutableMinSymbols: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).ifaceDict0NoExecutableMinSymbols === true
+        : null
+    ),
+    generatedPCCPackexpIfaceDict0PublicConstructorsPresent: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).ifaceDict0PublicConstructorsPresent === true
+        : null
+    ),
+    generatedPCCPackexpIfaceDict0CriticalKindsPresent: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).ifaceDict0CriticalKindsPresent === true
+        : null
+    ),
+    generatedPCCPackexpIfaceDict0RouteTokensPresent: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).ifaceDict0RouteTokensPresent === true
+        : null
+    ),
+    generatedPCCPackexpIfaceDict0PiBootDigestMatches: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).ifaceDict0PiBootDigestMatches === true
+        : null
+    ),
+
+    generatedPCCPackexpSched0: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).generatedPackageSched0 === true
+        : null
+    ),
+    generatedPCCPackexpSched0Accepted: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).sched0Accepted === true
+        : null
+    ),
+    generatedPCCPackexpSched0Kind: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).sched0Kind
+        : null
+    ),
+    generatedPCCPackexpSched0Digest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).sched0Digest
+        : null
+    ),
+    generatedPCCPackexpSched0CoreMatchesExpected: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).sched0CoreMatchesExpected === true
+        : null
+    ),
+    generatedPCCPackexpSched0CoreB0: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).sched0CoreB0
+        : null
+    ),
+    generatedPCCPackexpSched0CoreK0: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).sched0CoreK0
+        : null
+    ),
+    generatedPCCPackexpSched0CoreR0: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).sched0CoreR0
+        : null
+    ),
+    generatedPCCPackexpSched0CoreH0: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).sched0CoreH0
+        : null
+    ),
+    generatedPCCPackexpSched0CoreO0: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).sched0CoreO0
+        : null
+    ),
+    generatedPCCPackexpSched0CoreRel0: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).sched0CoreRel0
+        : null
+    ),
+    generatedPCCPackexpSched0ScaleFactorsPresent: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).sched0ScaleFactorsPresent === true
+        : null
+    ),
+    generatedPCCPackexpSched0SelectorBoundsPresent: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).sched0SelectorBoundsPresent === true
+        : null
+    ),
+    generatedPCCPackexpSched0SelectorBoundBH: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).sched0SelectorBoundBH
+        : null
+    ),
+    generatedPCCPackexpSched0SelectorBoundBTheta: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).sched0SelectorBoundBTheta
+        : null
+    ),
+    generatedPCCPackexpSched0PolynomialExponent: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).sched0PolynomialExponent
+        : null
+    ),
+    generatedPCCPackexpSched0PiBootDigestMatches: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).sched0PiBootDigestMatches === true
+        : null
+    ),
+
     rowsEnvelopeKind: recomputedChain.rowsEnvelopeKind,
     localPackagesEnvelopeKind: recomputedChain.localPackagesEnvelopeKind,
     globalFirewallsEnvelopeKind: recomputedChain.globalFirewallsEnvelopeKind,
@@ -1843,6 +1985,103 @@ function validateGeneratedPCCPackexpEnvelope0({
     return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'digest0Digest'], 'GeneratedPCCPackexp0 NF digest0Digest must match generated package Digest0 bytes', {
       expected: digestCanonical0(generatedDigest0),
       actual: generatedNF.digest0Digest,
+    });
+  }
+
+  for (const field of [
+    'generatedPackageIfaceDict0',
+    'ifaceDict0Accepted',
+    'ifaceDict0RequiredForbiddenSymbolsPresent',
+    'ifaceDict0NoExecutableMinSymbols',
+    'ifaceDict0PublicConstructorsPresent',
+    'ifaceDict0CriticalKindsPresent',
+    'ifaceDict0RouteTokensPresent',
+    'ifaceDict0PiBootDigestMatches',
+    'generatedPackageSched0',
+    'sched0Accepted',
+    'sched0CoreMatchesExpected',
+    'sched0ScaleFactorsPresent',
+    'sched0SelectorBoundsPresent',
+    'sched0PiBootDigestMatches',
+  ]) {
+    if (generatedNF[field] !== true) {
+      return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', field], `GeneratedPCCPackexp0 NF must certify ${field}`, {
+        actual: generatedNF[field],
+      });
+    }
+  }
+
+  if (generatedNF.ifaceDict0Kind !== 'IfaceDict0') {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'ifaceDict0Kind'], 'GeneratedPCCPackexp0 NF must certify IfaceDict0 kind', {
+      actual: generatedNF.ifaceDict0Kind,
+    });
+  }
+
+  if (!(typeof generatedNF.ifaceDict0ForbiddenSymbolCount === 'number' && generatedNF.ifaceDict0ForbiddenSymbolCount >= 11)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'ifaceDict0ForbiddenSymbolCount'], 'GeneratedPCCPackexp0 NF must certify hidden-minimization forbidden symbol inventory', {
+      actual: generatedNF.ifaceDict0ForbiddenSymbolCount,
+    });
+  }
+
+  if (generatedNF.sched0Kind !== 'Sched0') {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'sched0Kind'], 'GeneratedPCCPackexp0 NF must certify Sched0 kind', {
+      actual: generatedNF.sched0Kind,
+    });
+  }
+
+  const expectedCore = {
+    sched0CoreB0: 64,
+    sched0CoreK0: 512,
+    sched0CoreR0: 64,
+    sched0CoreH0: 128,
+    sched0CoreO0: 64,
+    sched0CoreRel0: 16,
+  };
+
+  for (const [field, expected] of Object.entries(expectedCore)) {
+    if (generatedNF[field] !== expected) {
+      return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', field], 'GeneratedPCCPackexp0 NF must certify fixed schedule core constants', {
+        expected,
+        actual: generatedNF[field],
+      });
+    }
+  }
+
+  if (generatedNF.sched0SelectorBoundBH !== 8) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'sched0SelectorBoundBH'], 'GeneratedPCCPackexp0 NF must certify selector bound bH', {
+      expected: 8,
+      actual: generatedNF.sched0SelectorBoundBH,
+    });
+  }
+
+  if (generatedNF.sched0SelectorBoundBTheta !== 12) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'sched0SelectorBoundBTheta'], 'GeneratedPCCPackexp0 NF must certify selector bound bTheta', {
+      expected: 12,
+      actual: generatedNF.sched0SelectorBoundBTheta,
+    });
+  }
+
+  if (generatedNF.sched0PolynomialExponent !== 36) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'sched0PolynomialExponent'], 'GeneratedPCCPackexp0 NF must certify selector polynomial exponent', {
+      expected: 36,
+      actual: generatedNF.sched0PolynomialExponent,
+    });
+  }
+
+  const generatedIfaceDict0 = generatedPCCPackexpEnvelope.GeneratedPCCPack?.MaterializedPCCPackEnvelope?.MaterializedBoot0?.IfaceDict0 ?? null;
+  const generatedSched0 = generatedPCCPackexpEnvelope.GeneratedPCCPack?.MaterializedPCCPackEnvelope?.MaterializedBoot0?.Sched0 ?? null;
+
+  if (!sameDigestHex0(generatedNF.ifaceDict0Digest, digestCanonical0(generatedIfaceDict0))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'ifaceDict0Digest'], 'GeneratedPCCPackexp0 NF ifaceDict0Digest must match generated package IfaceDict0 bytes', {
+      expected: digestCanonical0(generatedIfaceDict0),
+      actual: generatedNF.ifaceDict0Digest,
+    });
+  }
+
+  if (!sameDigestHex0(generatedNF.sched0Digest, digestCanonical0(generatedSched0))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'sched0Digest'], 'GeneratedPCCPackexp0 NF sched0Digest must match generated package Sched0 bytes', {
+      expected: digestCanonical0(generatedSched0),
+      actual: generatedNF.sched0Digest,
     });
   }
 
