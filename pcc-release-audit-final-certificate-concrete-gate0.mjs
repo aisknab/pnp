@@ -582,6 +582,63 @@ export async function CheckReleaseAuditConcreteFinalCertificateGate0(
       concreteStatus.ConcreteChain.generatedPCCPackexpDigest0FullKeyComparisonAfterHashLookup,
     generatedPCCPackexpDigest0PiBootDigestMatches:
       concreteStatus.ConcreteChain.generatedPCCPackexpDigest0PiBootDigestMatches,
+    generatedPCCPackexpIfaceDict0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpIfaceDict0,
+    generatedPCCPackexpIfaceDict0Accepted:
+      concreteStatus.ConcreteChain.generatedPCCPackexpIfaceDict0Accepted,
+    generatedPCCPackexpIfaceDict0Kind:
+      concreteStatus.ConcreteChain.generatedPCCPackexpIfaceDict0Kind,
+    generatedPCCPackexpIfaceDict0Digest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpIfaceDict0Digest,
+    generatedPCCPackexpIfaceDict0ForbiddenSymbolCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpIfaceDict0ForbiddenSymbolCount,
+    generatedPCCPackexpIfaceDict0RequiredForbiddenSymbolsPresent:
+      concreteStatus.ConcreteChain.generatedPCCPackexpIfaceDict0RequiredForbiddenSymbolsPresent,
+    generatedPCCPackexpIfaceDict0NoExecutableMinSymbols:
+      concreteStatus.ConcreteChain.generatedPCCPackexpIfaceDict0NoExecutableMinSymbols,
+    generatedPCCPackexpIfaceDict0PublicConstructorsPresent:
+      concreteStatus.ConcreteChain.generatedPCCPackexpIfaceDict0PublicConstructorsPresent,
+    generatedPCCPackexpIfaceDict0CriticalKindsPresent:
+      concreteStatus.ConcreteChain.generatedPCCPackexpIfaceDict0CriticalKindsPresent,
+    generatedPCCPackexpIfaceDict0RouteTokensPresent:
+      concreteStatus.ConcreteChain.generatedPCCPackexpIfaceDict0RouteTokensPresent,
+    generatedPCCPackexpIfaceDict0PiBootDigestMatches:
+      concreteStatus.ConcreteChain.generatedPCCPackexpIfaceDict0PiBootDigestMatches,
+
+    generatedPCCPackexpSched0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpSched0,
+    generatedPCCPackexpSched0Accepted:
+      concreteStatus.ConcreteChain.generatedPCCPackexpSched0Accepted,
+    generatedPCCPackexpSched0Kind:
+      concreteStatus.ConcreteChain.generatedPCCPackexpSched0Kind,
+    generatedPCCPackexpSched0Digest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpSched0Digest,
+    generatedPCCPackexpSched0CoreMatchesExpected:
+      concreteStatus.ConcreteChain.generatedPCCPackexpSched0CoreMatchesExpected,
+    generatedPCCPackexpSched0CoreB0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpSched0CoreB0,
+    generatedPCCPackexpSched0CoreK0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpSched0CoreK0,
+    generatedPCCPackexpSched0CoreR0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpSched0CoreR0,
+    generatedPCCPackexpSched0CoreH0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpSched0CoreH0,
+    generatedPCCPackexpSched0CoreO0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpSched0CoreO0,
+    generatedPCCPackexpSched0CoreRel0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpSched0CoreRel0,
+    generatedPCCPackexpSched0ScaleFactorsPresent:
+      concreteStatus.ConcreteChain.generatedPCCPackexpSched0ScaleFactorsPresent,
+    generatedPCCPackexpSched0SelectorBoundsPresent:
+      concreteStatus.ConcreteChain.generatedPCCPackexpSched0SelectorBoundsPresent,
+    generatedPCCPackexpSched0SelectorBoundBH:
+      concreteStatus.ConcreteChain.generatedPCCPackexpSched0SelectorBoundBH,
+    generatedPCCPackexpSched0SelectorBoundBTheta:
+      concreteStatus.ConcreteChain.generatedPCCPackexpSched0SelectorBoundBTheta,
+    generatedPCCPackexpSched0PolynomialExponent:
+      concreteStatus.ConcreteChain.generatedPCCPackexpSched0PolynomialExponent,
+    generatedPCCPackexpSched0PiBootDigestMatches:
+      concreteStatus.ConcreteChain.generatedPCCPackexpSched0PiBootDigestMatches,
 
     finalCertificateUsesConcreteAcceptRun: concreteStatus.ConcreteChain.finalCertificateUsesConcreteAcceptRun,
     statusUsesConcreteFinalCertificate: concreteStatus.ConcreteChain.statusUsesConcreteFinalCertificate,
@@ -939,6 +996,20 @@ function validateConcretePublicConclusionAlignment0(envelope) {
     'generatedPCCPackexpDigest0EqualityNotObjectEquality',
     'generatedPCCPackexpDigest0FullKeyComparisonAfterHashLookup',
     'generatedPCCPackexpDigest0PiBootDigestMatches',
+    'generatedPCCPackexpIfaceDict0',
+    'generatedPCCPackexpIfaceDict0Accepted',
+    'generatedPCCPackexpIfaceDict0RequiredForbiddenSymbolsPresent',
+    'generatedPCCPackexpIfaceDict0NoExecutableMinSymbols',
+    'generatedPCCPackexpIfaceDict0PublicConstructorsPresent',
+    'generatedPCCPackexpIfaceDict0CriticalKindsPresent',
+    'generatedPCCPackexpIfaceDict0RouteTokensPresent',
+    'generatedPCCPackexpIfaceDict0PiBootDigestMatches',
+    'generatedPCCPackexpSched0',
+    'generatedPCCPackexpSched0Accepted',
+    'generatedPCCPackexpSched0CoreMatchesExpected',
+    'generatedPCCPackexpSched0ScaleFactorsPresent',
+    'generatedPCCPackexpSched0SelectorBoundsPresent',
+    'generatedPCCPackexpSched0PiBootDigestMatches',
 
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',
