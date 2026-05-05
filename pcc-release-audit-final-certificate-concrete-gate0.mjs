@@ -818,6 +818,50 @@ export async function CheckReleaseAuditConcreteFinalCertificateGate0(
       concreteStatus.ConcreteChain.generatedPCCPackexpConcreteHard0DiagnosticsPolicyComplete,
     generatedPCCPackexpConcreteHard0LinkedToPCCPack:
       concreteStatus.ConcreteChain.generatedPCCPackexpConcreteHard0LinkedToPCCPack,
+    generatedPCCPackexpConcreteRows0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0,
+    generatedPCCPackexpConcreteRows0Accepted:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0Accepted,
+    generatedPCCPackexpConcreteRows0Checker:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0Checker,
+    generatedPCCPackexpConcreteRows0Digest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0Digest,
+    generatedPCCPackexpConcreteRows0RowPackDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0RowPackDigest,
+    generatedPCCPackexpConcreteRows0RowPackObjectDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0RowPackObjectDigest,
+    generatedPCCPackexpConcreteRows0BootDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0BootDigest,
+    generatedPCCPackexpConcreteRows0IfaceHash:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0IfaceHash,
+    generatedPCCPackexpConcreteRows0SchedHash:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0SchedHash,
+    generatedPCCPackexpConcreteRows0RowCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0RowCount,
+    generatedPCCPackexpConcreteRows0RowCountComplete:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0RowCountComplete,
+    generatedPCCPackexpConcreteRows0BatchCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0BatchCount,
+    generatedPCCPackexpConcreteRows0BatchCountComplete:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0BatchCountComplete,
+    generatedPCCPackexpConcreteRows0FamilyCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0FamilyCount,
+    generatedPCCPackexpConcreteRows0FamilyCountComplete:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0FamilyCountComplete,
+    generatedPCCPackexpConcreteRows0ConcreteIfaceHash:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0ConcreteIfaceHash,
+    generatedPCCPackexpConcreteRows0SyntheticIfaceHashCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0SyntheticIfaceHashCount,
+    generatedPCCPackexpConcreteRows0NoSyntheticIfaceHash:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0NoSyntheticIfaceHash,
+    generatedPCCPackexpConcreteRows0ScaffoldMarkerCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0ScaffoldMarkerCount,
+    generatedPCCPackexpConcreteRows0NoScaffoldMarkers:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0NoScaffoldMarkers,
+    generatedPCCPackexpConcreteRows0LinkedToGeneratedBoot0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0LinkedToGeneratedBoot0,
+    generatedPCCPackexpConcreteRows0LinkedToPCCPack:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0LinkedToPCCPack,
 
     finalCertificateUsesConcreteAcceptRun: concreteStatus.ConcreteChain.finalCertificateUsesConcreteAcceptRun,
     statusUsesConcreteFinalCertificate: concreteStatus.ConcreteChain.statusUsesConcreteFinalCertificate,
@@ -1240,6 +1284,16 @@ function validateConcretePublicConclusionAlignment0(envelope) {
     'generatedPCCPackexpConcreteHard0BoundsPolicyComplete',
     'generatedPCCPackexpConcreteHard0DiagnosticsPolicyComplete',
     'generatedPCCPackexpConcreteHard0LinkedToPCCPack',
+    'generatedPCCPackexpConcreteRows0',
+    'generatedPCCPackexpConcreteRows0Accepted',
+    'generatedPCCPackexpConcreteRows0RowCountComplete',
+    'generatedPCCPackexpConcreteRows0BatchCountComplete',
+    'generatedPCCPackexpConcreteRows0FamilyCountComplete',
+    'generatedPCCPackexpConcreteRows0ConcreteIfaceHash',
+    'generatedPCCPackexpConcreteRows0NoSyntheticIfaceHash',
+    'generatedPCCPackexpConcreteRows0NoScaffoldMarkers',
+    'generatedPCCPackexpConcreteRows0LinkedToGeneratedBoot0',
+    'generatedPCCPackexpConcreteRows0LinkedToPCCPack',
 
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',
