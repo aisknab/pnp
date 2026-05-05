@@ -263,6 +263,20 @@ function makeAcceptedConcreteFinalCertificatePublicStatusRecord0() {
     generatedPCCPackexpSched0SelectorBoundBTheta: 12,
     generatedPCCPackexpSched0PolynomialExponent: 36,
     generatedPCCPackexpSched0PiBootDigestMatches: true,
+    generatedPCCPackexpByteLang0: true,
+    generatedPCCPackexpByteLang0Accepted: true,
+    generatedPCCPackexpByteLang0Kind: 'ByteLang0',
+    generatedPCCPackexpByteLang0Digest: digestOf0('2727272727272727272727272727272727272727272727272727272727272727'),
+    generatedPCCPackexpByteLang0TagCount: 12,
+    generatedPCCPackexpByteLang0TagsUnique: true,
+    generatedPCCPackexpByteLang0RequiredTagsPresent: true,
+    generatedPCCPackexpByteLang0SortCount: 8,
+    generatedPCCPackexpByteLang0RequiredSortsPresent: true,
+    generatedPCCPackexpByteLang0ConstructorCount: 7,
+    generatedPCCPackexpByteLang0RequiredConstructorsPresent: true,
+    generatedPCCPackexpByteLang0RecordCount: 9,
+    generatedPCCPackexpByteLang0RequiredRecordAritiesPresent: true,
+    generatedPCCPackexpByteLang0PiBootDigestMatches: true,
 
     finalCertificateUsesConcreteAcceptRun: true,
     statusUsesConcreteFinalCertificate: true,
@@ -573,6 +587,20 @@ test('CheckReleaseAudit0 reports the concrete final-certificate public-status ga
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpSched0SelectorBoundBTheta, 12);
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpSched0PolynomialExponent, 36);
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpSched0PiBootDigestMatches, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0Accepted, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0Kind, 'ByteLang0');
+  assert.match(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0TagCount >= 12, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0TagsUnique, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0RequiredTagsPresent, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0SortCount >= 8, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0RequiredSortsPresent, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0ConstructorCount >= 7, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0RequiredConstructorsPresent, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0RecordCount >= 9, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0RequiredRecordAritiesPresent, true);
+  assert.equal(out.NF.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0PiBootDigestMatches, true);
 
   assert.equal(out.NF.concreteFinalCertificatePublicStatusGateStatusUsesConcreteFinalCertificate, true);
 
@@ -787,6 +815,20 @@ test('CheckReleaseAudit0 reports the concrete final-certificate public-status ga
   assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpSched0SelectorBoundBTheta, 12);
   assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpSched0PolynomialExponent, 36);
   assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpSched0PiBootDigestMatches, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0Accepted, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0Kind, 'ByteLang0');
+  assert.match(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0TagCount >= 12, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0TagsUnique, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0RequiredTagsPresent, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0SortCount >= 8, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0RequiredSortsPresent, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0ConstructorCount >= 7, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0RequiredConstructorsPresent, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0RecordCount >= 9, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0RequiredRecordAritiesPresent, true);
+  assert.equal(summary.concreteFinalCertificatePublicStatusGateGeneratedPCCPackexpByteLang0PiBootDigestMatches, true);
 
   assert.equal(summary.concreteFinalCertificatePublicStatusGateSummary.publicConclusion.consequent, 'P = NP');
 });
@@ -1209,5 +1251,71 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate with stale Sc
     'concreteFinalCertificatePublicStatusGate',
     'NF',
     'generatedPCCPackexpSched0SelectorBoundsPresent',
+  ]);
+});
+
+test('CheckReleaseAudit0 rejects a concrete final-certificate gate without ByteLang0 tag uniqueness evidence', async () => {
+  const bad = makeAcceptedConcreteFinalCertificatePublicStatusRecord0();
+
+  bad.NF = {
+    ...bad.NF,
+    generatedPCCPackexpByteLang0TagsUnique: false,
+  };
+  bad.nf = bad.NF;
+  bad.Digest = digestCanonical0(bad.NF);
+  bad.digest = bad.Digest;
+
+  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+    runSyntaxCheck: false,
+    runRunAll: false,
+    runMutationCheck: false,
+    runCliSmoke: false,
+    runPublicSurfaceFreeze: false,
+    runMaterializedPublicStatusGate: false,
+    runFinalCertificatePublicStatusGate: false,
+    runConcreteFinalCertificatePublicStatusGate: true,
+    concreteFinalCertificatePublicStatusGateRunner: async () => bad,
+  }));
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAudit0');
+  assert.equal(out.Coord, 'CheckReleaseAudit0.concreteFinalCertificatePublicStatusGate');
+  assert.deepEqual(out.Path, [
+    'concreteFinalCertificatePublicStatusGate',
+    'NF',
+    'generatedPCCPackexpByteLang0TagsUnique',
+  ]);
+});
+
+test('CheckReleaseAudit0 rejects a concrete final-certificate gate without ByteLang0 record-arity evidence', async () => {
+  const bad = makeAcceptedConcreteFinalCertificatePublicStatusRecord0();
+
+  bad.NF = {
+    ...bad.NF,
+    generatedPCCPackexpByteLang0RequiredRecordAritiesPresent: false,
+  };
+  bad.nf = bad.NF;
+  bad.Digest = digestCanonical0(bad.NF);
+  bad.digest = bad.Digest;
+
+  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+    runSyntaxCheck: false,
+    runRunAll: false,
+    runMutationCheck: false,
+    runCliSmoke: false,
+    runPublicSurfaceFreeze: false,
+    runMaterializedPublicStatusGate: false,
+    runFinalCertificatePublicStatusGate: false,
+    runConcreteFinalCertificatePublicStatusGate: true,
+    concreteFinalCertificatePublicStatusGateRunner: async () => bad,
+  }));
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckReleaseAudit0');
+  assert.equal(out.Coord, 'CheckReleaseAudit0.concreteFinalCertificatePublicStatusGate');
+  assert.deepEqual(out.Path, [
+    'concreteFinalCertificatePublicStatusGate',
+    'NF',
+    'generatedPCCPackexpByteLang0RequiredRecordAritiesPresent',
   ]);
 });
