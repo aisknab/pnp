@@ -932,6 +932,82 @@ export async function CheckReleaseAuditConcreteFinalCertificateGate0(
       concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0LinkedToGlobalFirewalls,
     generatedPCCPackexpConcreteGlobalProofDAG0LinkedToPCCPack:
       concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0LinkedToPCCPack,
+    generatedPCCPackexpConcreteFinalIntegration0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0,
+    generatedPCCPackexpConcreteFinalIntegration0Accepted:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0Accepted,
+    generatedPCCPackexpConcreteFinalIntegration0Checker:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0Checker,
+    generatedPCCPackexpConcreteFinalIntegration0Digest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0Digest,
+    generatedPCCPackexpConcreteFinalIntegration0ConcreteGlobalProofDAGDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0ConcreteGlobalProofDAGDigest,
+    generatedPCCPackexpConcreteFinalIntegration0MaterializedFinalIntegrationDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0MaterializedFinalIntegrationDigest,
+    generatedPCCPackexpConcreteFinalIntegration0GPackDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0GPackDigest,
+    generatedPCCPackexpConcreteFinalIntegration0RowFamGDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0RowFamGDigest,
+    generatedPCCPackexpConcreteFinalIntegration0FinalIntegrationDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0FinalIntegrationDigest,
+    generatedPCCPackexpConcreteFinalIntegration0FinalTheoremDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0FinalTheoremDigest,
+    generatedPCCPackexpConcreteFinalIntegration0RowFamFinalDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0RowFamFinalDigest,
+    generatedPCCPackexpConcreteFinalIntegration0ConcreteLinksDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0ConcreteLinksDigest,
+    generatedPCCPackexpConcreteFinalIntegration0ConcreteGlobalProofDAG:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0ConcreteGlobalProofDAG,
+    generatedPCCPackexpConcreteFinalIntegration0ConcreteKBundle:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0ConcreteKBundle,
+    generatedPCCPackexpConcreteFinalIntegration0ConcreteRows:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0ConcreteRows,
+    generatedPCCPackexpConcreteFinalIntegration0ConcreteLocalPackages:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0ConcreteLocalPackages,
+    generatedPCCPackexpConcreteFinalIntegration0ConcreteGlobalFirewalls:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0ConcreteGlobalFirewalls,
+    generatedPCCPackexpConcreteFinalIntegration0KBundleKernelRuleCoverageComplete:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0KBundleKernelRuleCoverageComplete,
+    generatedPCCPackexpConcreteFinalIntegration0KBundleSigmaProofRefsResolve:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0KBundleSigmaProofRefsResolve,
+    generatedPCCPackexpConcreteFinalIntegration0KBundleReflectionProofRefsResolve:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0KBundleReflectionProofRefsResolve,
+    generatedPCCPackexpConcreteFinalIntegration0GPackFieldCoverageComplete:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0GPackFieldCoverageComplete,
+    generatedPCCPackexpConcreteFinalIntegration0RowFamGCoverageComplete:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0RowFamGCoverageComplete,
+    generatedPCCPackexpConcreteFinalIntegration0FinalIntegrationUsesGPack:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0FinalIntegrationUsesGPack,
+    generatedPCCPackexpConcreteFinalIntegration0RowFamGUsesGPack:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0RowFamGUsesGPack,
+    generatedPCCPackexpConcreteFinalIntegration0FinalTheoremUsesFinalIntegration:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0FinalTheoremUsesFinalIntegration,
+    generatedPCCPackexpConcreteFinalIntegration0RowFamFinalUsesFinalTheorem:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0RowFamFinalUsesFinalTheorem,
+    generatedPCCPackexpConcreteFinalIntegration0FinalMatchUsesGPack:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0FinalMatchUsesGPack,
+    generatedPCCPackexpConcreteFinalIntegration0SATDecisionUsesGPack:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0SATDecisionUsesGPack,
+    generatedPCCPackexpConcreteFinalIntegration0SyntheticMarkerCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0SyntheticMarkerCount,
+    generatedPCCPackexpConcreteFinalIntegration0ForbiddenMarkerCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0ForbiddenMarkerCount,
+    generatedPCCPackexpConcreteFinalIntegration0NoForbiddenMarkers:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0NoForbiddenMarkers,
+    generatedPCCPackexpConcreteFinalIntegration0LinkedToGeneratedGlobalProofDAG:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0LinkedToGeneratedGlobalProofDAG,
+    generatedPCCPackexpConcreteFinalIntegration0LinkedToGPack:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0LinkedToGPack,
+    generatedPCCPackexpConcreteFinalIntegration0LinkedToRowFamG:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0LinkedToRowFamG,
+    generatedPCCPackexpConcreteFinalIntegration0LinkedToFinalIntegration:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0LinkedToFinalIntegration,
+    generatedPCCPackexpConcreteFinalIntegration0LinkedToFinalTheorem:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0LinkedToFinalTheorem,
+    generatedPCCPackexpConcreteFinalIntegration0LinkedToRowFamFinal:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0LinkedToRowFamFinal,
+    generatedPCCPackexpConcreteFinalIntegration0LinkedToPCCPack:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteFinalIntegration0LinkedToPCCPack,
 
     finalCertificateUsesConcreteAcceptRun: concreteStatus.ConcreteChain.finalCertificateUsesConcreteAcceptRun,
     statusUsesConcreteFinalCertificate: concreteStatus.ConcreteChain.statusUsesConcreteFinalCertificate,
@@ -1383,6 +1459,32 @@ function validateConcretePublicConclusionAlignment0(envelope) {
     'generatedPCCPackexpConcreteGlobalProofDAG0LinkedToLocalPackages',
     'generatedPCCPackexpConcreteGlobalProofDAG0LinkedToGlobalFirewalls',
     'generatedPCCPackexpConcreteGlobalProofDAG0LinkedToPCCPack',
+    'generatedPCCPackexpConcreteFinalIntegration0',
+    'generatedPCCPackexpConcreteFinalIntegration0Accepted',
+    'generatedPCCPackexpConcreteFinalIntegration0ConcreteGlobalProofDAG',
+    'generatedPCCPackexpConcreteFinalIntegration0ConcreteKBundle',
+    'generatedPCCPackexpConcreteFinalIntegration0ConcreteRows',
+    'generatedPCCPackexpConcreteFinalIntegration0ConcreteLocalPackages',
+    'generatedPCCPackexpConcreteFinalIntegration0ConcreteGlobalFirewalls',
+    'generatedPCCPackexpConcreteFinalIntegration0KBundleKernelRuleCoverageComplete',
+    'generatedPCCPackexpConcreteFinalIntegration0KBundleSigmaProofRefsResolve',
+    'generatedPCCPackexpConcreteFinalIntegration0KBundleReflectionProofRefsResolve',
+    'generatedPCCPackexpConcreteFinalIntegration0GPackFieldCoverageComplete',
+    'generatedPCCPackexpConcreteFinalIntegration0RowFamGCoverageComplete',
+    'generatedPCCPackexpConcreteFinalIntegration0FinalIntegrationUsesGPack',
+    'generatedPCCPackexpConcreteFinalIntegration0RowFamGUsesGPack',
+    'generatedPCCPackexpConcreteFinalIntegration0FinalTheoremUsesFinalIntegration',
+    'generatedPCCPackexpConcreteFinalIntegration0RowFamFinalUsesFinalTheorem',
+    'generatedPCCPackexpConcreteFinalIntegration0FinalMatchUsesGPack',
+    'generatedPCCPackexpConcreteFinalIntegration0SATDecisionUsesGPack',
+    'generatedPCCPackexpConcreteFinalIntegration0NoForbiddenMarkers',
+    'generatedPCCPackexpConcreteFinalIntegration0LinkedToGeneratedGlobalProofDAG',
+    'generatedPCCPackexpConcreteFinalIntegration0LinkedToGPack',
+    'generatedPCCPackexpConcreteFinalIntegration0LinkedToRowFamG',
+    'generatedPCCPackexpConcreteFinalIntegration0LinkedToFinalIntegration',
+    'generatedPCCPackexpConcreteFinalIntegration0LinkedToFinalTheorem',
+    'generatedPCCPackexpConcreteFinalIntegration0LinkedToRowFamFinal',
+    'generatedPCCPackexpConcreteFinalIntegration0LinkedToPCCPack',
 
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',
