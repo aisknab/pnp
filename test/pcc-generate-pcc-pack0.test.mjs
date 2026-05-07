@@ -332,6 +332,44 @@ test('CheckGeneratedPCCPackexp0 accepts generated package with accepted CheckPCC
   assert.equal(out.NF.concreteGlobalProofDAG0LinkedToLocalPackages, true);
   assert.equal(out.NF.concreteGlobalProofDAG0LinkedToGlobalFirewalls, true);
   assert.equal(out.NF.concreteGlobalProofDAG0LinkedToPCCPack, true);
+  assert.equal(out.NF.generatedPackageConcreteFinalIntegration0, true);
+  assert.equal(out.NF.concreteFinalIntegration0Accepted, true);
+  assert.equal(out.NF.concreteFinalIntegration0Checker, 'CheckConcreteMaterializedFinalIntegration0');
+  assert.match(out.NF.concreteFinalIntegration0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteFinalIntegration0ConcreteGlobalProofDAGDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteFinalIntegration0MaterializedFinalIntegrationDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteFinalIntegration0GPackDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteFinalIntegration0RowFamGDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteFinalIntegration0FinalIntegrationDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteFinalIntegration0FinalTheoremDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteFinalIntegration0RowFamFinalDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteFinalIntegration0ConcreteLinksDigest.hex, /^[0-9a-f]{64}$/);
+
+  assert.equal(out.NF.concreteFinalIntegration0ConcreteGlobalProofDAG, true);
+  assert.equal(out.NF.concreteFinalIntegration0ConcreteKBundle, true);
+  assert.equal(out.NF.concreteFinalIntegration0ConcreteRows, true);
+  assert.equal(out.NF.concreteFinalIntegration0ConcreteLocalPackages, true);
+  assert.equal(out.NF.concreteFinalIntegration0ConcreteGlobalFirewalls, true);
+  assert.equal(out.NF.concreteFinalIntegration0KBundleKernelRuleCoverageComplete, true);
+  assert.equal(out.NF.concreteFinalIntegration0KBundleSigmaProofRefsResolve, true);
+  assert.equal(out.NF.concreteFinalIntegration0KBundleReflectionProofRefsResolve, true);
+  assert.equal(out.NF.concreteFinalIntegration0GPackFieldCoverageComplete, true);
+  assert.equal(out.NF.concreteFinalIntegration0RowFamGCoverageComplete, true);
+  assert.equal(out.NF.concreteFinalIntegration0FinalIntegrationUsesGPack, true);
+  assert.equal(out.NF.concreteFinalIntegration0RowFamGUsesGPack, true);
+  assert.equal(out.NF.concreteFinalIntegration0FinalTheoremUsesFinalIntegration, true);
+  assert.equal(out.NF.concreteFinalIntegration0RowFamFinalUsesFinalTheorem, true);
+  assert.equal(out.NF.concreteFinalIntegration0FinalMatchUsesGPack, true);
+  assert.equal(out.NF.concreteFinalIntegration0SATDecisionUsesGPack, true);
+  assert.equal(out.NF.concreteFinalIntegration0ForbiddenMarkerCount, 0);
+  assert.equal(out.NF.concreteFinalIntegration0NoForbiddenMarkers, true);
+  assert.equal(out.NF.concreteFinalIntegration0LinkedToGeneratedGlobalProofDAG, true);
+  assert.equal(out.NF.concreteFinalIntegration0LinkedToGPack, true);
+  assert.equal(out.NF.concreteFinalIntegration0LinkedToRowFamG, true);
+  assert.equal(out.NF.concreteFinalIntegration0LinkedToFinalIntegration, true);
+  assert.equal(out.NF.concreteFinalIntegration0LinkedToFinalTheorem, true);
+  assert.equal(out.NF.concreteFinalIntegration0LinkedToRowFamFinal, true);
+  assert.equal(out.NF.concreteFinalIntegration0LinkedToPCCPack, true);
 
   assert.equal(out.NF.checkPCCPackexp, true);
   assert.equal(out.NF.checkPCCPackexpRecordAccepted, true);
@@ -376,6 +414,7 @@ test('makeGeneratePCCPackConfig0 fills default validation switches', () => {
   assert.equal(config.checkConcreteHard0, true);
   assert.equal(config.checkConcreteRows0, true);
   assert.equal(config.checkConcreteGlobalProofDAG0, true);
+  assert.equal(config.checkConcreteFinalIntegration0, true);
   assert.equal(config.checkJsonMaterialized, false);
   assert.equal(typeof config.checkPCCPackexpConfig, 'object');
 });
@@ -1281,5 +1320,87 @@ test('CheckGeneratedPCCPackexp0 rejects incomplete concrete GlobalProofDAG final
     'GeneratedPCCPack',
     'MaterializedPCCPackEnvelope',
     'GlobalProofDAGEnvelope',
+  ]);
+});
+
+test('CheckGeneratedPCCPackexp0 rejects missing concrete FinalIntegration envelope', async () => {
+  const envelope = await makeGeneratedPCCPackexp0();
+
+  delete envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.FinalIntegrationEnvelope;
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    generatedPackageDigest: undefined,
+  };
+
+  const out = await CheckGeneratedPCCPackexp0(envelope, {
+    checkDeterministicGenerator: false,
+    checkGeneratedPackageCoreBoundary: false,
+    checkMaterializedBoot0: false,
+    checkKernelSeed0: false,
+    checkCodecDigest0: false,
+    checkIfaceSched0: false,
+    checkByteLang0: false,
+    checkBootAuditPiBoot0: false,
+    checkConcreteKBundle0: false,
+    checkConcreteHard0: false,
+    checkConcreteRows0: false,
+    checkConcreteGlobalProofDAG0: false,
+    checkCheckPCCPackexpRecord: false,
+    checkPublicClaimBoundary: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
+  assert.equal(out.Coord, 'CheckGeneratedPCCPackexp0.ConcreteFinalIntegration0');
+  assert.deepEqual(out.Path, [
+    'GeneratedPCCPack',
+    'MaterializedPCCPackEnvelope',
+    'FinalIntegrationEnvelope',
+  ]);
+});
+
+test('CheckGeneratedPCCPackexp0 rejects stale concrete FinalIntegration linkage', async () => {
+  const envelope = await makeGeneratedPCCPackexp0();
+
+  envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.FinalIntegrationEnvelope = {
+    ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.FinalIntegrationEnvelope,
+    ConcreteLinks: {
+      ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.FinalIntegrationEnvelope.ConcreteLinks,
+      finalTheoremUsesFinalIntegration: false,
+    },
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    generatedPackageDigest: undefined,
+  };
+
+  const out = await CheckGeneratedPCCPackexp0(envelope, {
+    checkDeterministicGenerator: false,
+    checkGeneratedPackageCoreBoundary: false,
+    checkMaterializedBoot0: false,
+    checkKernelSeed0: false,
+    checkCodecDigest0: false,
+    checkIfaceSched0: false,
+    checkByteLang0: false,
+    checkBootAuditPiBoot0: false,
+    checkConcreteKBundle0: false,
+    checkConcreteHard0: false,
+    checkConcreteRows0: false,
+    checkConcreteGlobalProofDAG0: false,
+    checkCheckPCCPackexpRecord: false,
+    checkPublicClaimBoundary: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
+  assert.equal(out.Coord, 'CheckGeneratedPCCPackexp0.ConcreteFinalIntegration0');
+  assert.deepEqual(out.Path, [
+    'GeneratedPCCPack',
+    'MaterializedPCCPackEnvelope',
+    'FinalIntegrationEnvelope',
   ]);
 });

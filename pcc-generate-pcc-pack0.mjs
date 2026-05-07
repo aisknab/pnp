@@ -40,6 +40,10 @@ import {
   CheckConcreteMaterializedGlobalProofDAG0,
 } from './pcc-global-proof-dag-concrete-materialized0.mjs';
 
+import {
+  CheckConcreteMaterializedFinalIntegration0,
+} from './pcc-final-integration-concrete-materialized0.mjs';
+
 const CHECKER_VERSION = 0;
 
 const GENERATED_PCCPACK_BOOT_B0_REQUIRED_FAMILIES0 = Object.freeze([
@@ -231,6 +235,7 @@ export function makeGeneratePCCPackConfig0(overrides = {}) {
     checkConcreteHard0: true,
     checkConcreteRows0: true,
     checkConcreteGlobalProofDAG0: true,
+    checkConcreteFinalIntegration0: true,
     checkCheckPCCPackexpRecord: true,
     checkPublicClaimBoundary: true,
     checkJsonMaterialized: true,
@@ -341,6 +346,7 @@ export async function CheckGeneratedPCCPackexp0(
   let concreteHardNF = null;
   let concreteRowsNF = null;
   let concreteGlobalProofDAGNF = null;
+  let concreteFinalIntegrationNF = null;
   let freshCheckPCCPackexpRecord = null;
   let recordAlignmentNF = null;
 
@@ -642,6 +648,28 @@ export async function CheckGeneratedPCCPackexp0(
     }
 
     concreteGlobalProofDAGNF = concreteGlobalProofDAG.nf;
+  }
+
+  if (cfg.checkConcreteFinalIntegration0 === true) {
+    const concreteFinalIntegration = await validateGeneratedConcreteFinalIntegration0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'ConcreteFinalIntegration0',
+      status: concreteFinalIntegration.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(concreteFinalIntegration.nf ?? concreteFinalIntegration.witness ?? null),
+    });
+
+    if (!concreteFinalIntegration.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.ConcreteFinalIntegration0`,
+        path: concreteFinalIntegration.path,
+        witness: concreteFinalIntegration.witness,
+        ledger,
+      });
+    }
+
+    concreteFinalIntegrationNF = concreteFinalIntegration.nf;
   }
 
   if (cfg.checkCheckPCCPackexpRecord === true) {
@@ -1111,6 +1139,88 @@ export async function CheckGeneratedPCCPackexp0(
     concreteGlobalProofDAG0LinkedToPCCPack:
       concreteGlobalProofDAGNF?.concreteGlobalProofDAG0LinkedToPCCPack ?? null,
 
+    generatedPackageConcreteFinalIntegration0:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0 ?? null,
+    concreteFinalIntegration0Accepted:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0Accepted ?? null,
+    concreteFinalIntegration0Checker:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0Checker ?? null,
+    concreteFinalIntegration0Digest:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0Digest ?? null,
+    concreteFinalIntegration0ConcreteGlobalProofDAGDigest:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0ConcreteGlobalProofDAGDigest ?? null,
+    concreteFinalIntegration0MaterializedFinalIntegrationDigest:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0MaterializedFinalIntegrationDigest ?? null,
+    concreteFinalIntegration0GPackDigest:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0GPackDigest ?? null,
+    concreteFinalIntegration0RowFamGDigest:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0RowFamGDigest ?? null,
+    concreteFinalIntegration0FinalIntegrationDigest:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0FinalIntegrationDigest ?? null,
+    concreteFinalIntegration0FinalTheoremDigest:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0FinalTheoremDigest ?? null,
+    concreteFinalIntegration0RowFamFinalDigest:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0RowFamFinalDigest ?? null,
+    concreteFinalIntegration0ConcreteLinksDigest:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0ConcreteLinksDigest ?? null,
+
+    concreteFinalIntegration0ConcreteGlobalProofDAG:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0ConcreteGlobalProofDAG ?? null,
+    concreteFinalIntegration0ConcreteKBundle:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0ConcreteKBundle ?? null,
+    concreteFinalIntegration0ConcreteRows:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0ConcreteRows ?? null,
+    concreteFinalIntegration0ConcreteLocalPackages:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0ConcreteLocalPackages ?? null,
+    concreteFinalIntegration0ConcreteGlobalFirewalls:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0ConcreteGlobalFirewalls ?? null,
+
+    concreteFinalIntegration0KBundleKernelRuleCoverageComplete:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0KBundleKernelRuleCoverageComplete ?? null,
+    concreteFinalIntegration0KBundleSigmaProofRefsResolve:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0KBundleSigmaProofRefsResolve ?? null,
+    concreteFinalIntegration0KBundleReflectionProofRefsResolve:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0KBundleReflectionProofRefsResolve ?? null,
+
+    concreteFinalIntegration0GPackFieldCoverageComplete:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0GPackFieldCoverageComplete ?? null,
+    concreteFinalIntegration0RowFamGCoverageComplete:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0RowFamGCoverageComplete ?? null,
+    concreteFinalIntegration0FinalIntegrationUsesGPack:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0FinalIntegrationUsesGPack ?? null,
+    concreteFinalIntegration0RowFamGUsesGPack:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0RowFamGUsesGPack ?? null,
+    concreteFinalIntegration0FinalTheoremUsesFinalIntegration:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0FinalTheoremUsesFinalIntegration ?? null,
+    concreteFinalIntegration0RowFamFinalUsesFinalTheorem:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0RowFamFinalUsesFinalTheorem ?? null,
+    concreteFinalIntegration0FinalMatchUsesGPack:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0FinalMatchUsesGPack ?? null,
+    concreteFinalIntegration0SATDecisionUsesGPack:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0SATDecisionUsesGPack ?? null,
+
+    concreteFinalIntegration0SyntheticMarkerCount:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0SyntheticMarkerCount ?? null,
+    concreteFinalIntegration0ForbiddenMarkerCount:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0ForbiddenMarkerCount ?? null,
+    concreteFinalIntegration0NoForbiddenMarkers:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0NoForbiddenMarkers ?? null,
+
+    concreteFinalIntegration0LinkedToGeneratedGlobalProofDAG:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0LinkedToGeneratedGlobalProofDAG ?? null,
+    concreteFinalIntegration0LinkedToGPack:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0LinkedToGPack ?? null,
+    concreteFinalIntegration0LinkedToRowFamG:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0LinkedToRowFamG ?? null,
+    concreteFinalIntegration0LinkedToFinalIntegration:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0LinkedToFinalIntegration ?? null,
+    concreteFinalIntegration0LinkedToFinalTheorem:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0LinkedToFinalTheorem ?? null,
+    concreteFinalIntegration0LinkedToRowFamFinal:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0LinkedToRowFamFinal ?? null,
+    concreteFinalIntegration0LinkedToPCCPack:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0LinkedToPCCPack ?? null,
+
     generatedPackageKind: envelope.GeneratedPCCPack.kind ?? null,
     generatedPackageDigest: digestCanonical0(envelope.GeneratedPCCPack),
 
@@ -1215,6 +1325,7 @@ function validateConfig0(config) {
     'checkConcreteHard0',
     'checkConcreteRows0',
     'checkConcreteGlobalProofDAG0',
+    'checkConcreteFinalIntegration0',
     'checkCheckPCCPackexpRecord',
     'checkPublicClaimBoundary',
     'checkJsonMaterialized',
@@ -1355,6 +1466,178 @@ function scanForbiddenCoreKeys0(value, pathNow, hits) {
 
     scanForbiddenCoreKeys0(child, childPath, hits);
   }
+}
+
+async function validateGeneratedConcreteFinalIntegration0(generatedPackage) {
+  const materializedPCCPack =
+    generatedPackage?.MaterializedPCCPackEnvelope ??
+    generatedPackage?.MaterializedPCCPack ??
+    null;
+
+  const concreteFinalIntegration =
+    materializedPCCPack?.FinalIntegrationEnvelope ??
+    materializedPCCPack?.ConcreteFinalIntegrationEnvelope ??
+    null;
+
+  if (!isPlainObject(concreteFinalIntegration)) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'FinalIntegrationEnvelope'], 'GeneratedPCCPack must include concrete FinalIntegration envelope', {
+      actual: typeof concreteFinalIntegration,
+    });
+  }
+
+  const record = await CheckConcreteMaterializedFinalIntegration0(concreteFinalIntegration);
+  const result = recordToValidation0(record, ['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'FinalIntegrationEnvelope']);
+
+  if (!result.ok) {
+    return validationReject0(result.path, 'CheckConcreteMaterializedFinalIntegration0 rejected generated package FinalIntegrationEnvelope', {
+      inner: result.witness?.detail?.inner ?? result.witness,
+    });
+  }
+
+  const nf = record.NF ?? record.nf;
+
+  for (const field of [
+    'materializedPath',
+    'concreteGlobalProofDAG',
+    'concreteKBundle',
+    'concreteRows',
+    'concreteLocalPackages',
+    'concreteGlobalFirewalls',
+    'kBundleKernelRuleCoverageComplete',
+    'kBundleSigmaProofRefsResolve',
+    'kBundleReflectionProofRefsResolve',
+    'gpackFieldCoverageComplete',
+    'rowFamGCoverageComplete',
+    'finalIntegrationUsesGPack',
+    'rowFamGUsesGPack',
+    'finalTheoremUsesFinalIntegration',
+    'rowFamFinalUsesFinalTheorem',
+    'finalMatchUsesGPack',
+    'satDecisionUsesGPack',
+  ]) {
+    if (nf[field] !== true) {
+      return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'FinalIntegrationEnvelope', 'NF', field], `Concrete FinalIntegration NF must certify ${field}`, {
+        actual: nf[field],
+      });
+    }
+  }
+
+  if (nf.syntheticRunAll !== false) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'FinalIntegrationEnvelope', 'NF', 'syntheticRunAll'], 'Concrete FinalIntegration NF must remain separate from synthetic RunAll0', {
+      expected: false,
+      actual: nf.syntheticRunAll,
+    });
+  }
+
+  if ((nf.forbiddenMarkerCount ?? 0) !== 0) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'FinalIntegrationEnvelope', 'NF', 'forbiddenMarkerCount'], 'Concrete FinalIntegration must not contain forbidden scaffold markers', {
+      actual: nf.forbiddenMarkerCount,
+    });
+  }
+
+  const generatedPCCPack = materializedPCCPack?.PCCPack ?? null;
+
+  const linkedToGeneratedGlobalProofDAG = sameDigestHex0(
+    nf.concreteGlobalProofDAGDigest,
+    digestCanonical0(materializedPCCPack?.GlobalProofDAGEnvelope ?? null),
+  );
+
+  const linkedToGPack = sameDigestHex0(
+    nf.gpackDigest,
+    digestCanonical0(generatedPCCPack?.GPack ?? null),
+  );
+
+  const linkedToRowFamG = sameDigestHex0(
+    nf.rowFamGDigest,
+    digestCanonical0(generatedPCCPack?.RowFamG ?? null),
+  );
+
+  const linkedToFinalIntegration = sameDigestHex0(
+    nf.finalIntegrationDigest,
+    digestCanonical0(generatedPCCPack?.FinalIntegration ?? null),
+  );
+
+  const linkedToFinalTheorem = sameDigestHex0(
+    nf.finalTheoremDigest,
+    digestCanonical0(generatedPCCPack?.FinalTheorem ?? null),
+  );
+
+  const linkedToRowFamFinal = sameDigestHex0(
+    nf.rowFamFinalDigest,
+    digestCanonical0(generatedPCCPack?.RowFamFinal ?? null),
+  );
+
+  const linkedToPCCPack = [
+    linkedToGeneratedGlobalProofDAG,
+    linkedToGPack,
+    linkedToRowFamG,
+    linkedToFinalIntegration,
+    linkedToFinalTheorem,
+    linkedToRowFamFinal,
+  ].every((value) => value === true);
+
+  for (const [field, value] of Object.entries({
+    linkedToGeneratedGlobalProofDAG,
+    linkedToGPack,
+    linkedToRowFamG,
+    linkedToFinalIntegration,
+    linkedToFinalTheorem,
+    linkedToRowFamFinal,
+    linkedToPCCPack,
+  })) {
+    if (value !== true) {
+      return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'FinalIntegrationEnvelope', field], 'Concrete FinalIntegration linkage must match generated package component bytes', {
+        field,
+      });
+    }
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackConcreteFinalIntegration0NF',
+    concreteFinalIntegration0: true,
+    concreteFinalIntegration0Accepted: true,
+    concreteFinalIntegration0Checker: record.checker,
+    concreteFinalIntegration0Digest: record.Digest ?? record.digest,
+    concreteFinalIntegration0ConcreteGlobalProofDAGDigest: nf.concreteGlobalProofDAGDigest,
+    concreteFinalIntegration0MaterializedFinalIntegrationDigest: nf.materializedFinalIntegrationDigest,
+    concreteFinalIntegration0GPackDigest: nf.gpackDigest,
+    concreteFinalIntegration0RowFamGDigest: nf.rowFamGDigest,
+    concreteFinalIntegration0FinalIntegrationDigest: nf.finalIntegrationDigest,
+    concreteFinalIntegration0FinalTheoremDigest: nf.finalTheoremDigest,
+    concreteFinalIntegration0RowFamFinalDigest: nf.rowFamFinalDigest,
+    concreteFinalIntegration0ConcreteLinksDigest: nf.concreteLinksDigest,
+
+    concreteFinalIntegration0ConcreteGlobalProofDAG: nf.concreteGlobalProofDAG === true,
+    concreteFinalIntegration0ConcreteKBundle: nf.concreteKBundle === true,
+    concreteFinalIntegration0ConcreteRows: nf.concreteRows === true,
+    concreteFinalIntegration0ConcreteLocalPackages: nf.concreteLocalPackages === true,
+    concreteFinalIntegration0ConcreteGlobalFirewalls: nf.concreteGlobalFirewalls === true,
+
+    concreteFinalIntegration0KBundleKernelRuleCoverageComplete: nf.kBundleKernelRuleCoverageComplete === true,
+    concreteFinalIntegration0KBundleSigmaProofRefsResolve: nf.kBundleSigmaProofRefsResolve === true,
+    concreteFinalIntegration0KBundleReflectionProofRefsResolve: nf.kBundleReflectionProofRefsResolve === true,
+
+    concreteFinalIntegration0GPackFieldCoverageComplete: nf.gpackFieldCoverageComplete === true,
+    concreteFinalIntegration0RowFamGCoverageComplete: nf.rowFamGCoverageComplete === true,
+    concreteFinalIntegration0FinalIntegrationUsesGPack: nf.finalIntegrationUsesGPack === true,
+    concreteFinalIntegration0RowFamGUsesGPack: nf.rowFamGUsesGPack === true,
+    concreteFinalIntegration0FinalTheoremUsesFinalIntegration: nf.finalTheoremUsesFinalIntegration === true,
+    concreteFinalIntegration0RowFamFinalUsesFinalTheorem: nf.rowFamFinalUsesFinalTheorem === true,
+    concreteFinalIntegration0FinalMatchUsesGPack: nf.finalMatchUsesGPack === true,
+    concreteFinalIntegration0SATDecisionUsesGPack: nf.satDecisionUsesGPack === true,
+
+    concreteFinalIntegration0SyntheticMarkerCount: nf.syntheticMarkerCount,
+    concreteFinalIntegration0ForbiddenMarkerCount: nf.forbiddenMarkerCount,
+    concreteFinalIntegration0NoForbiddenMarkers: (nf.forbiddenMarkerCount ?? 0) === 0,
+
+    concreteFinalIntegration0LinkedToGeneratedGlobalProofDAG: linkedToGeneratedGlobalProofDAG,
+    concreteFinalIntegration0LinkedToGPack: linkedToGPack,
+    concreteFinalIntegration0LinkedToRowFamG: linkedToRowFamG,
+    concreteFinalIntegration0LinkedToFinalIntegration: linkedToFinalIntegration,
+    concreteFinalIntegration0LinkedToFinalTheorem: linkedToFinalTheorem,
+    concreteFinalIntegration0LinkedToRowFamFinal: linkedToRowFamFinal,
+    concreteFinalIntegration0LinkedToPCCPack: linkedToPCCPack,
+  });
 }
 
 async function validateGeneratedConcreteGlobalProofDAG0(generatedPackage) {
