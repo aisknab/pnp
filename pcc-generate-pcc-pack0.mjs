@@ -36,6 +36,10 @@ import {
   CheckConcreteMaterializedRows0,
 } from './pcc-rows-concrete-materialized0.mjs';
 
+import {
+  CheckConcreteMaterializedGlobalProofDAG0,
+} from './pcc-global-proof-dag-concrete-materialized0.mjs';
+
 const CHECKER_VERSION = 0;
 
 const GENERATED_PCCPACK_BOOT_B0_REQUIRED_FAMILIES0 = Object.freeze([
@@ -226,6 +230,7 @@ export function makeGeneratePCCPackConfig0(overrides = {}) {
     checkConcreteKBundle0: true,
     checkConcreteHard0: true,
     checkConcreteRows0: true,
+    checkConcreteGlobalProofDAG0: true,
     checkCheckPCCPackexpRecord: true,
     checkPublicClaimBoundary: true,
     checkJsonMaterialized: true,
@@ -335,6 +340,7 @@ export async function CheckGeneratedPCCPackexp0(
   let concreteKBundleNF = null;
   let concreteHardNF = null;
   let concreteRowsNF = null;
+  let concreteGlobalProofDAGNF = null;
   let freshCheckPCCPackexpRecord = null;
   let recordAlignmentNF = null;
 
@@ -614,6 +620,28 @@ export async function CheckGeneratedPCCPackexp0(
     }
 
     concreteRowsNF = concreteRows.nf;
+  }
+
+  if (cfg.checkConcreteGlobalProofDAG0 === true) {
+    const concreteGlobalProofDAG = await validateGeneratedConcreteGlobalProofDAG0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'ConcreteGlobalProofDAG0',
+      status: concreteGlobalProofDAG.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(concreteGlobalProofDAG.nf ?? concreteGlobalProofDAG.witness ?? null),
+    });
+
+    if (!concreteGlobalProofDAG.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.ConcreteGlobalProofDAG0`,
+        path: concreteGlobalProofDAG.path,
+        witness: concreteGlobalProofDAG.witness,
+        ledger,
+      });
+    }
+
+    concreteGlobalProofDAGNF = concreteGlobalProofDAG.nf;
   }
 
   if (cfg.checkCheckPCCPackexpRecord === true) {
@@ -1012,6 +1040,77 @@ export async function CheckGeneratedPCCPackexp0(
     concreteRows0LinkedToPCCPack:
       concreteRowsNF?.concreteRows0LinkedToPCCPack ?? null,
 
+    generatedPackageConcreteGlobalProofDAG0:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0 ?? null,
+    concreteGlobalProofDAG0Accepted:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0Accepted ?? null,
+    concreteGlobalProofDAG0Checker:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0Checker ?? null,
+    concreteGlobalProofDAG0Digest:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0Digest ?? null,
+    concreteGlobalProofDAG0GlobalProofDAGDigest:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0GlobalProofDAGDigest ?? null,
+    concreteGlobalProofDAG0GlobalProofDAGObjectDigest:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0GlobalProofDAGObjectDigest ?? null,
+    concreteGlobalProofDAG0MaterializedGlobalProofDAGDigest:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0MaterializedGlobalProofDAGDigest ?? null,
+    concreteGlobalProofDAG0KImplDigest:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0KImplDigest ?? null,
+    concreteGlobalProofDAG0RowPackDigest:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0RowPackDigest ?? null,
+    concreteGlobalProofDAG0LocalPackagesDigest:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0LocalPackagesDigest ?? null,
+    concreteGlobalProofDAG0GlobalFirewallsDigest:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0GlobalFirewallsDigest ?? null,
+    concreteGlobalProofDAG0KBundleProofInventoryDigest:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0KBundleProofInventoryDigest ?? null,
+    concreteGlobalProofDAG0KBundleKernelRuleCoverageComplete:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0KBundleKernelRuleCoverageComplete ?? null,
+    concreteGlobalProofDAG0KBundleSigmaProofRefsResolve:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0KBundleSigmaProofRefsResolve ?? null,
+    concreteGlobalProofDAG0KBundleReflectionProofRefsResolve:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0KBundleReflectionProofRefsResolve ?? null,
+    concreteGlobalProofDAG0NodeCount:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0NodeCount ?? null,
+    concreteGlobalProofDAG0NodeCountMinimum:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0NodeCountMinimum ?? null,
+    concreteGlobalProofDAG0FinalTheoremCount:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0FinalTheoremCount ?? null,
+    concreteGlobalProofDAG0FinalPackageSoundness:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0FinalPackageSoundness ?? null,
+    concreteGlobalProofDAG0FinalGeneratedPackageSufficiency:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0FinalGeneratedPackageSufficiency ?? null,
+    concreteGlobalProofDAG0FinalAcceptedPackageImpliesSATinP:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0FinalAcceptedPackageImpliesSATinP ?? null,
+    concreteGlobalProofDAG0FinalAcceptedPackageImpliesPEqualsNP:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0FinalAcceptedPackageImpliesPEqualsNP ?? null,
+    concreteGlobalProofDAG0IfaceHash:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0IfaceHash ?? null,
+    concreteGlobalProofDAG0SchedHash:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0SchedHash ?? null,
+    concreteGlobalProofDAG0IfaceMatchesRows:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0IfaceMatchesRows ?? null,
+    concreteGlobalProofDAG0SchedMatchesKImpl:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0SchedMatchesKImpl ?? null,
+    concreteGlobalProofDAG0SyntheticMarkerCount:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0SyntheticMarkerCount ?? null,
+    concreteGlobalProofDAG0ForbiddenMarkerCount:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0ForbiddenMarkerCount ?? null,
+    concreteGlobalProofDAG0NoForbiddenMarkers:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0NoForbiddenMarkers ?? null,
+    concreteGlobalProofDAG0LinkedToGeneratedBoot0:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0LinkedToGeneratedBoot0 ?? null,
+    concreteGlobalProofDAG0LinkedToKImpl:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0LinkedToKImpl ?? null,
+    concreteGlobalProofDAG0LinkedToConcreteRows:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0LinkedToConcreteRows ?? null,
+    concreteGlobalProofDAG0LinkedToLocalPackages:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0LinkedToLocalPackages ?? null,
+    concreteGlobalProofDAG0LinkedToGlobalFirewalls:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0LinkedToGlobalFirewalls ?? null,
+    concreteGlobalProofDAG0LinkedToPCCPack:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0LinkedToPCCPack ?? null,
+
     generatedPackageKind: envelope.GeneratedPCCPack.kind ?? null,
     generatedPackageDigest: digestCanonical0(envelope.GeneratedPCCPack),
 
@@ -1115,6 +1214,7 @@ function validateConfig0(config) {
     'checkConcreteKBundle0',
     'checkConcreteHard0',
     'checkConcreteRows0',
+    'checkConcreteGlobalProofDAG0',
     'checkCheckPCCPackexpRecord',
     'checkPublicClaimBoundary',
     'checkJsonMaterialized',
@@ -1255,6 +1355,227 @@ function scanForbiddenCoreKeys0(value, pathNow, hits) {
 
     scanForbiddenCoreKeys0(child, childPath, hits);
   }
+}
+
+async function validateGeneratedConcreteGlobalProofDAG0(generatedPackage) {
+  const materializedPCCPack =
+    generatedPackage?.MaterializedPCCPackEnvelope ??
+    generatedPackage?.MaterializedPCCPack ??
+    null;
+
+  const concreteGlobalProofDAG =
+    materializedPCCPack?.GlobalProofDAGEnvelope ??
+    materializedPCCPack?.ConcreteGlobalProofDAGEnvelope ??
+    null;
+
+  if (!isPlainObject(concreteGlobalProofDAG)) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'GlobalProofDAGEnvelope'], 'GeneratedPCCPack must include concrete GlobalProofDAG envelope', {
+      actual: typeof concreteGlobalProofDAG,
+    });
+  }
+
+  const record = await CheckConcreteMaterializedGlobalProofDAG0(concreteGlobalProofDAG);
+  const result = recordToValidation0(record, ['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'GlobalProofDAGEnvelope']);
+
+  if (!result.ok) {
+    return validationReject0(result.path, 'CheckConcreteMaterializedGlobalProofDAG0 rejected generated package GlobalProofDAGEnvelope', {
+      inner: result.witness?.detail?.inner ?? result.witness,
+    });
+  }
+
+  const nf = record.NF ?? record.nf;
+
+  for (const field of [
+    'materializedPath',
+    'concreteRows',
+    'concreteLocalPackages',
+    'concreteGlobalFirewalls',
+    'concreteKBundle',
+    'kBundleKernelRuleCoverageComplete',
+    'kBundleSigmaProofRefsResolve',
+    'kBundleReflectionProofRefsResolve',
+  ]) {
+    if (nf[field] !== true) {
+      return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'GlobalProofDAGEnvelope', 'NF', field], `Concrete GlobalProofDAG NF must certify ${field}`, {
+        actual: nf[field],
+      });
+    }
+  }
+
+  if (nf.syntheticRunAll !== false) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'GlobalProofDAGEnvelope', 'NF', 'syntheticRunAll'], 'Concrete GlobalProofDAG NF must remain separate from synthetic RunAll0', {
+      expected: false,
+      actual: nf.syntheticRunAll,
+    });
+  }
+
+  if (!(typeof nf.nodeCount === 'number' && nf.nodeCount >= 90)) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'GlobalProofDAGEnvelope', 'NF', 'nodeCount'], 'Concrete GlobalProofDAG NF must certify a complete global proof node inventory', {
+      minimum: 90,
+      actual: nf.nodeCount,
+    });
+  }
+
+  const finalTheorems = Array.isArray(nf.finalTheorems) ? nf.finalTheorems : [];
+  const requiredFinalTheorems = [
+    'Final.PackageSoundness',
+    'Final.GeneratedPackageSufficiency',
+    'Final.AcceptedPackageImpliesSATinP',
+    'Final.AcceptedPackageImpliesPEqualsNP',
+  ];
+
+  for (const theorem of requiredFinalTheorems) {
+    if (!finalTheorems.includes(theorem)) {
+      return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'GlobalProofDAGEnvelope', 'NF', 'finalTheorems'], 'Concrete GlobalProofDAG NF must certify all final theorem nodes', {
+        missing: theorem,
+        finalTheorems,
+      });
+    }
+  }
+
+  if ((nf.forbiddenMarkerCount ?? 0) !== 0) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'GlobalProofDAGEnvelope', 'NF', 'forbiddenMarkerCount'], 'Concrete GlobalProofDAG must not contain forbidden scaffold markers', {
+      actual: nf.forbiddenMarkerCount,
+    });
+  }
+
+  const generatedBoot0 =
+    materializedPCCPack?.MaterializedBoot0 ??
+    materializedPCCPack?.PCCPack?.Boot0 ??
+    null;
+
+  const generatedKBundleEnvelope = materializedPCCPack?.KBundleEnvelope ?? null;
+  const generatedRowsEnvelope = materializedPCCPack?.RowsEnvelope ?? null;
+  const generatedLocalPackagesEnvelope = materializedPCCPack?.LocalPackagesEnvelope ?? null;
+  const generatedGlobalFirewallsEnvelope = materializedPCCPack?.GlobalFirewallsEnvelope ?? null;
+
+  const generatedKImpl =
+    generatedKBundleEnvelope?.KImpl ??
+    generatedKBundleEnvelope?.kimpl ??
+    generatedKBundleEnvelope?.KBundle?.KImpl ??
+    generatedKBundleEnvelope?.MaterializedKBundleEnvelope?.KImpl ??
+    generatedKBundleEnvelope?.MaterializedKBundleEnvelope?.KBundle?.KImpl ??
+    null;
+
+  const generatedRowPack =
+    generatedRowsEnvelope?.RowPack ??
+    generatedRowsEnvelope?.rowPack ??
+    null;
+
+  const generatedLocalPackages =
+    generatedLocalPackagesEnvelope?.LocalPackages ??
+    generatedLocalPackagesEnvelope?.localPackages ??
+    generatedLocalPackagesEnvelope?.LocalPackagePack ??
+    generatedLocalPackagesEnvelope?.localPackagePack ??
+    null;
+
+  const generatedGlobalFirewalls =
+    generatedGlobalFirewallsEnvelope?.GlobalFirewalls ??
+    generatedGlobalFirewallsEnvelope?.globalFirewalls ??
+    generatedGlobalFirewallsEnvelope?.GlobalFirewallPack ??
+    generatedGlobalFirewallsEnvelope?.globalFirewallPack ??
+    null;
+
+  const globalProofDAG =
+    concreteGlobalProofDAG?.GlobalProofDAG ??
+    concreteGlobalProofDAG?.MaterializedGlobalProofDAGEnvelope?.GlobalProofDAG ??
+    null;
+
+  const linkedToGeneratedBoot0 = sameDigestHex0(
+    concreteGlobalProofDAG?.Linkage?.bootDigest,
+    digestCanonical0(generatedBoot0),
+  );
+
+  const linkedToKImpl = sameDigestHex0(
+    nf.kImplDigest,
+    digestCanonical0(generatedKImpl),
+  );
+
+  const linkedToConcreteRows = sameDigestHex0(
+    nf.rowPackDigest,
+    digestCanonical0(generatedRowPack),
+  );
+
+  const linkedToLocalPackages = sameDigestHex0(
+    nf.localPackagesDigest,
+    digestCanonical0(generatedLocalPackages),
+  );
+
+  const linkedToGlobalFirewalls = sameDigestHex0(
+    nf.globalFirewallsDigest,
+    digestCanonical0(generatedGlobalFirewalls),
+  );
+
+  const linkedToPCCPack = sameDigestHex0(
+    digestCanonical0(materializedPCCPack?.PCCPack?.GlobalProofDAG ?? null),
+    digestCanonical0(globalProofDAG),
+  );
+
+  const ifaceMatchesRows = sameDigestHex0(
+    nf.ifaceHash,
+    generatedRowPack?.IfaceHash,
+  );
+
+  const schedMatchesKImpl = sameDigestHex0(
+    nf.schedHash,
+    generatedKImpl?.SchedHash,
+  );
+
+  for (const [field, value] of Object.entries({
+    linkedToGeneratedBoot0,
+    linkedToKImpl,
+    linkedToConcreteRows,
+    linkedToLocalPackages,
+    linkedToGlobalFirewalls,
+    linkedToPCCPack,
+    ifaceMatchesRows,
+    schedMatchesKImpl,
+  })) {
+    if (value !== true) {
+      return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'GlobalProofDAGEnvelope', field], 'Concrete GlobalProofDAG linkage must match generated package component bytes', {
+        field,
+      });
+    }
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackConcreteGlobalProofDAG0NF',
+    concreteGlobalProofDAG0: true,
+    concreteGlobalProofDAG0Accepted: true,
+    concreteGlobalProofDAG0Checker: record.checker,
+    concreteGlobalProofDAG0Digest: record.Digest ?? record.digest,
+    concreteGlobalProofDAG0GlobalProofDAGDigest: nf.globalProofDAGDigest,
+    concreteGlobalProofDAG0GlobalProofDAGObjectDigest: nf.globalProofDAGObjectDigest,
+    concreteGlobalProofDAG0MaterializedGlobalProofDAGDigest: nf.materializedGlobalProofDAGDigest,
+    concreteGlobalProofDAG0KImplDigest: nf.kImplDigest,
+    concreteGlobalProofDAG0RowPackDigest: nf.rowPackDigest,
+    concreteGlobalProofDAG0LocalPackagesDigest: nf.localPackagesDigest,
+    concreteGlobalProofDAG0GlobalFirewallsDigest: nf.globalFirewallsDigest,
+    concreteGlobalProofDAG0KBundleProofInventoryDigest: nf.kBundleProofInventoryDigest,
+    concreteGlobalProofDAG0KBundleKernelRuleCoverageComplete: nf.kBundleKernelRuleCoverageComplete === true,
+    concreteGlobalProofDAG0KBundleSigmaProofRefsResolve: nf.kBundleSigmaProofRefsResolve === true,
+    concreteGlobalProofDAG0KBundleReflectionProofRefsResolve: nf.kBundleReflectionProofRefsResolve === true,
+    concreteGlobalProofDAG0NodeCount: nf.nodeCount,
+    concreteGlobalProofDAG0NodeCountMinimum: nf.nodeCount >= 90,
+    concreteGlobalProofDAG0FinalTheoremCount: finalTheorems.length,
+    concreteGlobalProofDAG0FinalPackageSoundness: finalTheorems.includes('Final.PackageSoundness'),
+    concreteGlobalProofDAG0FinalGeneratedPackageSufficiency: finalTheorems.includes('Final.GeneratedPackageSufficiency'),
+    concreteGlobalProofDAG0FinalAcceptedPackageImpliesSATinP: finalTheorems.includes('Final.AcceptedPackageImpliesSATinP'),
+    concreteGlobalProofDAG0FinalAcceptedPackageImpliesPEqualsNP: finalTheorems.includes('Final.AcceptedPackageImpliesPEqualsNP'),
+    concreteGlobalProofDAG0IfaceHash: nf.ifaceHash,
+    concreteGlobalProofDAG0SchedHash: nf.schedHash,
+    concreteGlobalProofDAG0IfaceMatchesRows: ifaceMatchesRows,
+    concreteGlobalProofDAG0SchedMatchesKImpl: schedMatchesKImpl,
+    concreteGlobalProofDAG0SyntheticMarkerCount: nf.syntheticMarkerCount,
+    concreteGlobalProofDAG0ForbiddenMarkerCount: nf.forbiddenMarkerCount,
+    concreteGlobalProofDAG0NoForbiddenMarkers: (nf.forbiddenMarkerCount ?? 0) === 0,
+    concreteGlobalProofDAG0LinkedToGeneratedBoot0: linkedToGeneratedBoot0,
+    concreteGlobalProofDAG0LinkedToKImpl: linkedToKImpl,
+    concreteGlobalProofDAG0LinkedToConcreteRows: linkedToConcreteRows,
+    concreteGlobalProofDAG0LinkedToLocalPackages: linkedToLocalPackages,
+    concreteGlobalProofDAG0LinkedToGlobalFirewalls: linkedToGlobalFirewalls,
+    concreteGlobalProofDAG0LinkedToPCCPack: linkedToPCCPack,
+  });
 }
 
 async function validateGeneratedConcreteRows0(generatedPackage) {

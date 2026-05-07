@@ -298,6 +298,40 @@ test('CheckGeneratedPCCPackexp0 accepts generated package with accepted CheckPCC
   assert.equal(out.NF.concreteRows0ScaffoldMarkerCount, 0);
   assert.equal(out.NF.concreteRows0LinkedToGeneratedBoot0, true);
   assert.equal(out.NF.concreteRows0LinkedToPCCPack, true);
+  assert.equal(out.NF.generatedPackageConcreteGlobalProofDAG0, true);
+  assert.equal(out.NF.concreteGlobalProofDAG0Accepted, true);
+  assert.equal(out.NF.concreteGlobalProofDAG0Checker, 'CheckConcreteMaterializedGlobalProofDAG0');
+  assert.match(out.NF.concreteGlobalProofDAG0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteGlobalProofDAG0GlobalProofDAGDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteGlobalProofDAG0GlobalProofDAGObjectDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteGlobalProofDAG0MaterializedGlobalProofDAGDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteGlobalProofDAG0KImplDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteGlobalProofDAG0RowPackDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteGlobalProofDAG0LocalPackagesDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteGlobalProofDAG0GlobalFirewallsDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteGlobalProofDAG0KBundleProofInventoryDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.concreteGlobalProofDAG0KBundleKernelRuleCoverageComplete, true);
+  assert.equal(out.NF.concreteGlobalProofDAG0KBundleSigmaProofRefsResolve, true);
+  assert.equal(out.NF.concreteGlobalProofDAG0KBundleReflectionProofRefsResolve, true);
+  assert.equal(out.NF.concreteGlobalProofDAG0NodeCount >= 90, true);
+  assert.equal(out.NF.concreteGlobalProofDAG0NodeCountMinimum, true);
+  assert.equal(out.NF.concreteGlobalProofDAG0FinalTheoremCount, 4);
+  assert.equal(out.NF.concreteGlobalProofDAG0FinalPackageSoundness, true);
+  assert.equal(out.NF.concreteGlobalProofDAG0FinalGeneratedPackageSufficiency, true);
+  assert.equal(out.NF.concreteGlobalProofDAG0FinalAcceptedPackageImpliesSATinP, true);
+  assert.equal(out.NF.concreteGlobalProofDAG0FinalAcceptedPackageImpliesPEqualsNP, true);
+  assert.match(out.NF.concreteGlobalProofDAG0IfaceHash.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.concreteGlobalProofDAG0SchedHash.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.concreteGlobalProofDAG0IfaceMatchesRows, true);
+  assert.equal(out.NF.concreteGlobalProofDAG0SchedMatchesKImpl, true);
+  assert.equal(out.NF.concreteGlobalProofDAG0ForbiddenMarkerCount, 0);
+  assert.equal(out.NF.concreteGlobalProofDAG0NoForbiddenMarkers, true);
+  assert.equal(out.NF.concreteGlobalProofDAG0LinkedToGeneratedBoot0, true);
+  assert.equal(out.NF.concreteGlobalProofDAG0LinkedToKImpl, true);
+  assert.equal(out.NF.concreteGlobalProofDAG0LinkedToConcreteRows, true);
+  assert.equal(out.NF.concreteGlobalProofDAG0LinkedToLocalPackages, true);
+  assert.equal(out.NF.concreteGlobalProofDAG0LinkedToGlobalFirewalls, true);
+  assert.equal(out.NF.concreteGlobalProofDAG0LinkedToPCCPack, true);
 
   assert.equal(out.NF.checkPCCPackexp, true);
   assert.equal(out.NF.checkPCCPackexpRecordAccepted, true);
@@ -341,6 +375,7 @@ test('makeGeneratePCCPackConfig0 fills default validation switches', () => {
   assert.equal(config.checkConcreteKBundle0, true);
   assert.equal(config.checkConcreteHard0, true);
   assert.equal(config.checkConcreteRows0, true);
+  assert.equal(config.checkConcreteGlobalProofDAG0, true);
   assert.equal(config.checkJsonMaterialized, false);
   assert.equal(typeof config.checkPCCPackexpConfig, 'object');
 });
@@ -1164,5 +1199,87 @@ test('CheckGeneratedPCCPackexp0 rejects stale concrete Rows interface hash', asy
     'GeneratedPCCPack',
     'MaterializedPCCPackEnvelope',
     'RowsEnvelope',
+  ]);
+});
+
+test('CheckGeneratedPCCPackexp0 rejects missing concrete GlobalProofDAG envelope', async () => {
+  const envelope = await makeGeneratedPCCPackexp0();
+
+  delete envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.GlobalProofDAGEnvelope;
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    generatedPackageDigest: undefined,
+  };
+
+  const out = await CheckGeneratedPCCPackexp0(envelope, {
+    checkDeterministicGenerator: false,
+    checkGeneratedPackageCoreBoundary: false,
+    checkMaterializedBoot0: false,
+    checkKernelSeed0: false,
+    checkCodecDigest0: false,
+    checkIfaceSched0: false,
+    checkByteLang0: false,
+    checkBootAuditPiBoot0: false,
+    checkConcreteKBundle0: false,
+    checkConcreteHard0: false,
+    checkConcreteRows0: false,
+    checkCheckPCCPackexpRecord: false,
+    checkPublicClaimBoundary: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
+  assert.equal(out.Coord, 'CheckGeneratedPCCPackexp0.ConcreteGlobalProofDAG0');
+  assert.deepEqual(out.Path, [
+    'GeneratedPCCPack',
+    'MaterializedPCCPackEnvelope',
+    'GlobalProofDAGEnvelope',
+  ]);
+});
+
+test('CheckGeneratedPCCPackexp0 rejects incomplete concrete GlobalProofDAG final theorem coverage', async () => {
+  const envelope = await makeGeneratedPCCPackexp0();
+
+  envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.GlobalProofDAGEnvelope = {
+    ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.GlobalProofDAGEnvelope,
+    GlobalProofDAG: {
+      ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.GlobalProofDAGEnvelope.GlobalProofDAG,
+      Nodes: envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.GlobalProofDAGEnvelope.GlobalProofDAG.Nodes.filter((node) => (
+        node.id !== 'Final.AcceptedPackageImpliesPEqualsNP'
+      )),
+    },
+  };
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    generatedPackageDigest: undefined,
+  };
+
+  const out = await CheckGeneratedPCCPackexp0(envelope, {
+    checkDeterministicGenerator: false,
+    checkGeneratedPackageCoreBoundary: false,
+    checkMaterializedBoot0: false,
+    checkKernelSeed0: false,
+    checkCodecDigest0: false,
+    checkIfaceSched0: false,
+    checkByteLang0: false,
+    checkBootAuditPiBoot0: false,
+    checkConcreteKBundle0: false,
+    checkConcreteHard0: false,
+    checkConcreteRows0: false,
+    checkCheckPCCPackexpRecord: false,
+    checkPublicClaimBoundary: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
+  assert.equal(out.Coord, 'CheckGeneratedPCCPackexp0.ConcreteGlobalProofDAG0');
+  assert.deepEqual(out.Path, [
+    'GeneratedPCCPack',
+    'MaterializedPCCPackEnvelope',
+    'GlobalProofDAGEnvelope',
   ]);
 });
