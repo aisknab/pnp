@@ -368,6 +368,40 @@ test('CheckConcreteFinalCertificatePublicStatus0 accepts public status over conc
   assert.equal(out.NF.generatedPCCPackexpConcreteRows0NoScaffoldMarkers, true);
   assert.equal(out.NF.generatedPCCPackexpConcreteRows0LinkedToGeneratedBoot0, true);
   assert.equal(out.NF.generatedPCCPackexpConcreteRows0LinkedToPCCPack, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0Checker, 'CheckConcreteMaterializedGlobalProofDAG0');
+  assert.match(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0GlobalProofDAGDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0GlobalProofDAGObjectDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0MaterializedGlobalProofDAGDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0KImplDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0RowPackDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0LocalPackagesDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0GlobalFirewallsDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0KBundleProofInventoryDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0KBundleKernelRuleCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0KBundleSigmaProofRefsResolve, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0KBundleReflectionProofRefsResolve, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0NodeCount >= 90, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0NodeCountMinimum, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0FinalTheoremCount, 4);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0FinalPackageSoundness, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0FinalGeneratedPackageSufficiency, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0FinalAcceptedPackageImpliesSATinP, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0FinalAcceptedPackageImpliesPEqualsNP, true);
+  assert.match(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0IfaceHash.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0SchedHash.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0IfaceMatchesRows, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0SchedMatchesKImpl, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0ForbiddenMarkerCount, 0);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0NoForbiddenMarkers, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0LinkedToGeneratedBoot0, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0LinkedToKImpl, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0LinkedToConcreteRows, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0LinkedToLocalPackages, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0LinkedToGlobalFirewalls, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0LinkedToPCCPack, true);
 
   assert.equal(out.NF.statusUsesConcreteFinalCertificate, true);
   assert.equal(out.NF.publicStatusCertificateDigestMatchesConcrete, true);
@@ -1146,4 +1180,48 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete RowPack 
   assert.equal(out.checker, 'CheckConcreteFinalCertificatePublicStatus0');
   assert.equal(out.Coord, 'CheckConcreteFinalCertificatePublicStatus0.concreteChain');
   assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpConcreteRows0LinkedToPCCPack']);
+});
+
+test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete GlobalProofDAG evidence', async () => {
+  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+
+  const record = envelope.ConcreteFinalCertificateEnvelope
+    .ConcreteGeneratedAcceptRunEnvelope
+    .CheckGeneratedPCCPackexpRecord;
+
+  const nf = {
+    ...record.NF,
+    concreteGlobalProofDAG0LinkedToPCCPack: false,
+  };
+
+  envelope.ConcreteFinalCertificateEnvelope
+    .ConcreteGeneratedAcceptRunEnvelope
+    .CheckGeneratedPCCPackexpRecord = {
+      ...record,
+      NF: nf,
+      nf,
+      Digest: digestCanonical0(nf),
+      digest: digestCanonical0(nf),
+    };
+
+  envelope.ConcreteChain = summarizeConcreteFinalCertificatePublicStatusChain0({
+    concreteFinalCertificateEnvelope: envelope.ConcreteFinalCertificateEnvelope,
+    finalCertificatePublicStatusEnvelope: envelope.FinalCertificatePublicStatusEnvelope,
+  });
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+    checkConcreteFinalCertificate: false,
+    checkFinalCertificatePublicStatus: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteFinalCertificatePublicStatus0');
+  assert.equal(out.Coord, 'CheckConcreteFinalCertificatePublicStatus0.concreteChain');
+  assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpConcreteGlobalProofDAG0LinkedToPCCPack']);
 });
