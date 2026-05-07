@@ -862,6 +862,76 @@ export async function CheckReleaseAuditConcreteFinalCertificateGate0(
       concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0LinkedToGeneratedBoot0,
     generatedPCCPackexpConcreteRows0LinkedToPCCPack:
       concreteStatus.ConcreteChain.generatedPCCPackexpConcreteRows0LinkedToPCCPack,
+    generatedPCCPackexpConcreteGlobalProofDAG0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0,
+    generatedPCCPackexpConcreteGlobalProofDAG0Accepted:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0Accepted,
+    generatedPCCPackexpConcreteGlobalProofDAG0Checker:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0Checker,
+    generatedPCCPackexpConcreteGlobalProofDAG0Digest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0Digest,
+    generatedPCCPackexpConcreteGlobalProofDAG0GlobalProofDAGDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0GlobalProofDAGDigest,
+    generatedPCCPackexpConcreteGlobalProofDAG0GlobalProofDAGObjectDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0GlobalProofDAGObjectDigest,
+    generatedPCCPackexpConcreteGlobalProofDAG0MaterializedGlobalProofDAGDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0MaterializedGlobalProofDAGDigest,
+    generatedPCCPackexpConcreteGlobalProofDAG0KImplDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0KImplDigest,
+    generatedPCCPackexpConcreteGlobalProofDAG0RowPackDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0RowPackDigest,
+    generatedPCCPackexpConcreteGlobalProofDAG0LocalPackagesDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0LocalPackagesDigest,
+    generatedPCCPackexpConcreteGlobalProofDAG0GlobalFirewallsDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0GlobalFirewallsDigest,
+    generatedPCCPackexpConcreteGlobalProofDAG0KBundleProofInventoryDigest:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0KBundleProofInventoryDigest,
+    generatedPCCPackexpConcreteGlobalProofDAG0KBundleKernelRuleCoverageComplete:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0KBundleKernelRuleCoverageComplete,
+    generatedPCCPackexpConcreteGlobalProofDAG0KBundleSigmaProofRefsResolve:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0KBundleSigmaProofRefsResolve,
+    generatedPCCPackexpConcreteGlobalProofDAG0KBundleReflectionProofRefsResolve:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0KBundleReflectionProofRefsResolve,
+    generatedPCCPackexpConcreteGlobalProofDAG0NodeCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0NodeCount,
+    generatedPCCPackexpConcreteGlobalProofDAG0NodeCountMinimum:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0NodeCountMinimum,
+    generatedPCCPackexpConcreteGlobalProofDAG0FinalTheoremCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0FinalTheoremCount,
+    generatedPCCPackexpConcreteGlobalProofDAG0FinalPackageSoundness:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0FinalPackageSoundness,
+    generatedPCCPackexpConcreteGlobalProofDAG0FinalGeneratedPackageSufficiency:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0FinalGeneratedPackageSufficiency,
+    generatedPCCPackexpConcreteGlobalProofDAG0FinalAcceptedPackageImpliesSATinP:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0FinalAcceptedPackageImpliesSATinP,
+    generatedPCCPackexpConcreteGlobalProofDAG0FinalAcceptedPackageImpliesPEqualsNP:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0FinalAcceptedPackageImpliesPEqualsNP,
+    generatedPCCPackexpConcreteGlobalProofDAG0IfaceHash:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0IfaceHash,
+    generatedPCCPackexpConcreteGlobalProofDAG0SchedHash:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0SchedHash,
+    generatedPCCPackexpConcreteGlobalProofDAG0IfaceMatchesRows:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0IfaceMatchesRows,
+    generatedPCCPackexpConcreteGlobalProofDAG0SchedMatchesKImpl:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0SchedMatchesKImpl,
+    generatedPCCPackexpConcreteGlobalProofDAG0SyntheticMarkerCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0SyntheticMarkerCount,
+    generatedPCCPackexpConcreteGlobalProofDAG0ForbiddenMarkerCount:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0ForbiddenMarkerCount,
+    generatedPCCPackexpConcreteGlobalProofDAG0NoForbiddenMarkers:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0NoForbiddenMarkers,
+    generatedPCCPackexpConcreteGlobalProofDAG0LinkedToGeneratedBoot0:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0LinkedToGeneratedBoot0,
+    generatedPCCPackexpConcreteGlobalProofDAG0LinkedToKImpl:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0LinkedToKImpl,
+    generatedPCCPackexpConcreteGlobalProofDAG0LinkedToConcreteRows:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0LinkedToConcreteRows,
+    generatedPCCPackexpConcreteGlobalProofDAG0LinkedToLocalPackages:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0LinkedToLocalPackages,
+    generatedPCCPackexpConcreteGlobalProofDAG0LinkedToGlobalFirewalls:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0LinkedToGlobalFirewalls,
+    generatedPCCPackexpConcreteGlobalProofDAG0LinkedToPCCPack:
+      concreteStatus.ConcreteChain.generatedPCCPackexpConcreteGlobalProofDAG0LinkedToPCCPack,
 
     finalCertificateUsesConcreteAcceptRun: concreteStatus.ConcreteChain.finalCertificateUsesConcreteAcceptRun,
     statusUsesConcreteFinalCertificate: concreteStatus.ConcreteChain.statusUsesConcreteFinalCertificate,
@@ -1294,6 +1364,25 @@ function validateConcretePublicConclusionAlignment0(envelope) {
     'generatedPCCPackexpConcreteRows0NoScaffoldMarkers',
     'generatedPCCPackexpConcreteRows0LinkedToGeneratedBoot0',
     'generatedPCCPackexpConcreteRows0LinkedToPCCPack',
+    'generatedPCCPackexpConcreteGlobalProofDAG0',
+    'generatedPCCPackexpConcreteGlobalProofDAG0Accepted',
+    'generatedPCCPackexpConcreteGlobalProofDAG0KBundleKernelRuleCoverageComplete',
+    'generatedPCCPackexpConcreteGlobalProofDAG0KBundleSigmaProofRefsResolve',
+    'generatedPCCPackexpConcreteGlobalProofDAG0KBundleReflectionProofRefsResolve',
+    'generatedPCCPackexpConcreteGlobalProofDAG0NodeCountMinimum',
+    'generatedPCCPackexpConcreteGlobalProofDAG0FinalPackageSoundness',
+    'generatedPCCPackexpConcreteGlobalProofDAG0FinalGeneratedPackageSufficiency',
+    'generatedPCCPackexpConcreteGlobalProofDAG0FinalAcceptedPackageImpliesSATinP',
+    'generatedPCCPackexpConcreteGlobalProofDAG0FinalAcceptedPackageImpliesPEqualsNP',
+    'generatedPCCPackexpConcreteGlobalProofDAG0IfaceMatchesRows',
+    'generatedPCCPackexpConcreteGlobalProofDAG0SchedMatchesKImpl',
+    'generatedPCCPackexpConcreteGlobalProofDAG0NoForbiddenMarkers',
+    'generatedPCCPackexpConcreteGlobalProofDAG0LinkedToGeneratedBoot0',
+    'generatedPCCPackexpConcreteGlobalProofDAG0LinkedToKImpl',
+    'generatedPCCPackexpConcreteGlobalProofDAG0LinkedToConcreteRows',
+    'generatedPCCPackexpConcreteGlobalProofDAG0LinkedToLocalPackages',
+    'generatedPCCPackexpConcreteGlobalProofDAG0LinkedToGlobalFirewalls',
+    'generatedPCCPackexpConcreteGlobalProofDAG0LinkedToPCCPack',
 
     'finalCertificateUsesConcreteAcceptRun',
     'statusUsesConcreteFinalCertificate',
