@@ -1,4 +1,8 @@
 import assert from 'node:assert/strict';
+import {
+  digestCanonical0,
+} from '../pcc-verifier-frag0.mjs';
+
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
@@ -432,6 +436,40 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 accepts an accept run over th
   assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0LinkedToFinalTheorem, true);
   assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0LinkedToRowFamFinal, true);
   assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0LinkedToPCCPack, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0Checker, 'CheckPCCPackexp0');
+  assert.match(out.NF.generatedPCCPackexpCheckPCCPackexp0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0MaterializedPath, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0SyntheticRunAll, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0PackageKind, 'PCCPack0');
+  assert.match(out.NF.generatedPCCPackexpCheckPCCPackexp0PCCPackDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpCheckPCCPackexp0MaterializedPCCPackDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcretePCCPackRecordDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteCoverageDigest.hex, /^[0-9a-f]{64}$/);
+
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0PublicConclusionOnlyAfterAcceptRun, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0PublicConclusionEmitted, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0NoPrematurePublicConclusion, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ClaimBoundaryConditional, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ClaimBoundaryAntecedent, 'CheckPCCPackexp(GeneratePCCPack())=accept');
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ClaimBoundaryConsequent, 'P = NP');
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0GeneratedPackageImplication, true);
+
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcretePCCPack, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteKBundle, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteHardCheck, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteRows, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteLocalPackages, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteGlobalFirewalls, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteGlobalProofDAG, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteFinalIntegration, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0KBundleCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0HardCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0FinalIntegrationCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0PCCPackLinkageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcretePCCPackRecordAccepted, true);
 
   assert.equal(out.Ledger.some((entry) => (
     entry.phase === 'CheckGeneratedPCCPackexp0' &&
@@ -1092,4 +1130,35 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp w
   assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
   assert.equal(out.Coord, 'CheckConcreteMaterializedGeneratedAcceptRun0.GeneratedPCCPackexp');
   assert.deepEqual(out.Path, ['GeneratedPCCPackexpEnvelope', 'NF', 'generatedPackageConcreteFinalIntegration0']);
+});
+
+test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects stale CheckPCCPackexp0 central contract evidence', async () => {
+  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+
+  const record = envelope.CheckGeneratedPCCPackexpRecord;
+  const nf = {
+    ...record.NF,
+    checkPCCPackexp0ConcreteCoverageComplete: false,
+  };
+
+  envelope.CheckGeneratedPCCPackexpRecord = {
+    ...record,
+    NF: nf,
+    nf,
+    Digest: digestCanonical0(nf),
+    digest: digestCanonical0(nf),
+  };
+
+  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+    checkGeneratedAcceptRun: false,
+    checkConcretePCCPack: false,
+    checkPCCPackexp: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedGeneratedAcceptRun0.CheckGeneratedPCCPackexpRecord');
+  assert.equal(Array.isArray(out.Path), true);
+  assert.notEqual(out.Path.length, 0);
 });
