@@ -1221,6 +1221,161 @@ export async function CheckGeneratedPCCPackexp0(
     concreteFinalIntegration0LinkedToPCCPack:
       concreteFinalIntegrationNF?.concreteFinalIntegration0LinkedToPCCPack ?? null,
 
+    generatedPackageCheckPCCPackexp0:
+      checkNF?.checkPCCPackexp === true,
+    checkPCCPackexp0Accepted:
+      envelope.CheckPCCPackexpRecord?.tag === 'accept',
+    checkPCCPackexp0Checker:
+      envelope.CheckPCCPackexpRecord?.checker ?? null,
+    checkPCCPackexp0Digest:
+      digestFromRecord0(envelope.CheckPCCPackexpRecord),
+    checkPCCPackexp0MaterializedPath:
+      checkNF?.materializedPath === true,
+    checkPCCPackexp0SyntheticRunAll:
+      checkNF?.syntheticRunAll === false,
+    checkPCCPackexp0PackageKind:
+      checkNF?.packageKind ?? null,
+    checkPCCPackexp0MaterializedPCCPackKind:
+      checkNF?.materializedPCCPackKind ?? null,
+    checkPCCPackexp0PCCPackDigest:
+      checkNF?.pccPackDigest ?? null,
+    checkPCCPackexp0MaterializedPCCPackDigest:
+      checkNF?.materializedPCCPackDigest ?? null,
+    checkPCCPackexp0ConcretePCCPackRecordDigest:
+      checkNF?.concretePCCPackRecordDigest ?? null,
+    checkPCCPackexp0ConcreteCoverageDigest:
+      checkNF?.concreteCoverageDigest ?? null,
+
+    checkPCCPackexp0PublicConclusionOnlyAfterAcceptRun:
+      checkNF?.publicConclusionOnlyAfterAcceptRun === true,
+    checkPCCPackexp0PublicConclusionEmitted:
+      checkNF?.publicConclusionEmitted === false,
+    checkPCCPackexp0NoPrematurePublicConclusion:
+      checkNF?.publicConclusionOnlyAfterAcceptRun === true &&
+      checkNF?.publicConclusionEmitted === false,
+    checkPCCPackexp0ClaimBoundaryConditional:
+      checkNF?.claimBoundary?.conditional === true,
+    checkPCCPackexp0ClaimBoundaryAntecedent:
+      checkNF?.claimBoundary?.antecedent ?? null,
+    checkPCCPackexp0ClaimBoundaryConsequent:
+      checkNF?.claimBoundary?.consequent ?? null,
+    checkPCCPackexp0GeneratedPackageImplication:
+      checkNF?.claimBoundary?.antecedent === 'CheckPCCPackexp(GeneratePCCPack())=accept' &&
+      checkNF?.claimBoundary?.consequent === 'P = NP' &&
+      checkNF?.claimBoundary?.conditional === true,
+
+    checkPCCPackexp0ConcretePCCPack:
+      checkNF?.concretePCCPack === true,
+    checkPCCPackexp0ConcreteKBundle:
+      checkNF?.concreteKBundle === true,
+    checkPCCPackexp0ConcreteHardCheck:
+      checkNF?.concreteHardCheck === true,
+    checkPCCPackexp0ConcreteRows:
+      checkNF?.concreteRows === true,
+    checkPCCPackexp0ConcreteLocalPackages:
+      checkNF?.concreteLocalPackages === true,
+    checkPCCPackexp0ConcreteGlobalFirewalls:
+      checkNF?.concreteGlobalFirewalls === true,
+    checkPCCPackexp0ConcreteGlobalProofDAG:
+      checkNF?.concreteGlobalProofDAG === true,
+    checkPCCPackexp0ConcreteFinalIntegration:
+      checkNF?.concreteFinalIntegration === true,
+
+    checkPCCPackexp0KBundleCoverageComplete:
+      checkNF?.kBundleKernelRuleCoverageComplete === true &&
+      checkNF?.kBundleSigmaProofRefsResolve === true &&
+      checkNF?.kBundleReflectionProofRefsResolve === true &&
+      checkNF?.kBundleNoOpaqueProofRefs === true &&
+      checkNF?.kBundleNoExecutableMinSymbols === true,
+    checkPCCPackexp0HardCoverageComplete:
+      checkNF?.hardCheckerCoverageComplete === true &&
+      checkNF?.hardRowKeyCoverageComplete === true &&
+      checkNF?.hardRoutePriorityComplete === true &&
+      checkNF?.hardProofRefPolicyComplete === true &&
+      checkNF?.hardHashDisciplineComplete === true &&
+      checkNF?.hardNoMinCoverageComplete === true &&
+      checkNF?.hardImportPolicyComplete === true &&
+      checkNF?.hardReflectionPolicyComplete === true &&
+      checkNF?.hardBoundsPolicyComplete === true &&
+      checkNF?.hardDiagnosticsPolicyComplete === true,
+    checkPCCPackexp0FinalIntegrationCoverageComplete:
+      checkNF?.finalIntegrationConcreteGlobalProofDAG === true &&
+      checkNF?.finalIntegrationGPackFieldCoverageComplete === true &&
+      checkNF?.finalIntegrationRowFamGCoverageComplete === true &&
+      checkNF?.finalIntegrationUsesGPack === true &&
+      checkNF?.rowFamGUsesGPack === true &&
+      checkNF?.finalTheoremUsesFinalIntegration === true &&
+      checkNF?.rowFamFinalUsesFinalTheorem === true &&
+      checkNF?.finalMatchUsesGPack === true &&
+      checkNF?.satDecisionUsesGPack === true,
+
+    checkPCCPackexp0PCCPackLinkedToKBundle:
+      checkNF?.pccPackLinkedToKBundle === true,
+    checkPCCPackexp0PCCPackLinkedToHardCheck:
+      checkNF?.pccPackLinkedToHardCheck === true,
+    checkPCCPackexp0PCCPackLinkedToRows:
+      checkNF?.pccPackLinkedToRows === true,
+    checkPCCPackexp0PCCPackLinkedToLocalPackages:
+      checkNF?.pccPackLinkedToLocalPackages === true,
+    checkPCCPackexp0PCCPackLinkedToGlobalFirewalls:
+      checkNF?.pccPackLinkedToGlobalFirewalls === true,
+    checkPCCPackexp0PCCPackLinkedToGlobalProofDAG:
+      checkNF?.pccPackLinkedToGlobalProofDAG === true,
+    checkPCCPackexp0PCCPackLinkedToGPack:
+      checkNF?.pccPackLinkedToGPack === true,
+    checkPCCPackexp0PCCPackLinkedToFinalIntegration:
+      checkNF?.pccPackLinkedToFinalIntegration === true,
+    checkPCCPackexp0PCCPackLinkedToFinalTheorem:
+      checkNF?.pccPackLinkedToFinalTheorem === true,
+    checkPCCPackexp0PCCPackLinkageComplete:
+      checkNF?.pccPackLinkedToKBundle === true &&
+      checkNF?.pccPackLinkedToHardCheck === true &&
+      checkNF?.pccPackLinkedToRows === true &&
+      checkNF?.pccPackLinkedToLocalPackages === true &&
+      checkNF?.pccPackLinkedToGlobalFirewalls === true &&
+      checkNF?.pccPackLinkedToGlobalProofDAG === true &&
+      checkNF?.pccPackLinkedToGPack === true &&
+      checkNF?.pccPackLinkedToFinalIntegration === true &&
+      checkNF?.pccPackLinkedToFinalTheorem === true,
+    checkPCCPackexp0ConcreteCoverageComplete:
+      checkNF?.concretePCCPack === true &&
+      checkNF?.concreteKBundle === true &&
+      checkNF?.concreteHardCheck === true &&
+      checkNF?.concreteRows === true &&
+      checkNF?.concreteLocalPackages === true &&
+      checkNF?.concreteGlobalFirewalls === true &&
+      checkNF?.concreteGlobalProofDAG === true &&
+      checkNF?.concreteFinalIntegration === true &&
+      checkNF?.kBundleKernelRuleCoverageComplete === true &&
+      checkNF?.kBundleSigmaProofRefsResolve === true &&
+      checkNF?.kBundleReflectionProofRefsResolve === true &&
+      checkNF?.kBundleNoOpaqueProofRefs === true &&
+      checkNF?.kBundleNoExecutableMinSymbols === true &&
+      checkNF?.hardCheckerCoverageComplete === true &&
+      checkNF?.hardRowKeyCoverageComplete === true &&
+      checkNF?.hardRoutePriorityComplete === true &&
+      checkNF?.hardProofRefPolicyComplete === true &&
+      checkNF?.hardHashDisciplineComplete === true &&
+      checkNF?.hardNoMinCoverageComplete === true &&
+      checkNF?.hardImportPolicyComplete === true &&
+      checkNF?.hardReflectionPolicyComplete === true &&
+      checkNF?.hardBoundsPolicyComplete === true &&
+      checkNF?.hardDiagnosticsPolicyComplete === true &&
+      checkNF?.finalIntegrationConcreteGlobalProofDAG === true &&
+      checkNF?.finalIntegrationGPackFieldCoverageComplete === true &&
+      checkNF?.finalIntegrationRowFamGCoverageComplete === true &&
+      checkNF?.finalIntegrationUsesGPack === true &&
+      checkNF?.rowFamGUsesGPack === true &&
+      checkNF?.finalTheoremUsesFinalIntegration === true &&
+      checkNF?.rowFamFinalUsesFinalTheorem === true &&
+      checkNF?.finalMatchUsesGPack === true &&
+      checkNF?.satDecisionUsesGPack === true,
+
+    checkPCCPackexp0ConcretePCCPackRecordKind:
+      checkNF?.concretePCCPackRecordKind ?? null,
+    checkPCCPackexp0ConcretePCCPackRecordAccepted:
+      checkNF?.concretePCCPackRecordAccepted === true,
+
     generatedPackageKind: envelope.GeneratedPCCPack.kind ?? null,
     generatedPackageDigest: digestCanonical0(envelope.GeneratedPCCPack),
 

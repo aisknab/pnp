@@ -370,6 +370,40 @@ test('CheckGeneratedPCCPackexp0 accepts generated package with accepted CheckPCC
   assert.equal(out.NF.concreteFinalIntegration0LinkedToFinalTheorem, true);
   assert.equal(out.NF.concreteFinalIntegration0LinkedToRowFamFinal, true);
   assert.equal(out.NF.concreteFinalIntegration0LinkedToPCCPack, true);
+  assert.equal(out.NF.generatedPackageCheckPCCPackexp0, true);
+  assert.equal(out.NF.checkPCCPackexp0Accepted, true);
+  assert.equal(out.NF.checkPCCPackexp0Checker, 'CheckPCCPackexp0');
+  assert.match(out.NF.checkPCCPackexp0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.checkPCCPackexp0MaterializedPath, true);
+  assert.equal(out.NF.checkPCCPackexp0SyntheticRunAll, true);
+  assert.equal(out.NF.checkPCCPackexp0PackageKind, 'PCCPack0');
+  assert.match(out.NF.checkPCCPackexp0PCCPackDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.checkPCCPackexp0MaterializedPCCPackDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.checkPCCPackexp0ConcretePCCPackRecordDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.checkPCCPackexp0ConcreteCoverageDigest.hex, /^[0-9a-f]{64}$/);
+
+  assert.equal(out.NF.checkPCCPackexp0PublicConclusionOnlyAfterAcceptRun, true);
+  assert.equal(out.NF.checkPCCPackexp0PublicConclusionEmitted, true);
+  assert.equal(out.NF.checkPCCPackexp0NoPrematurePublicConclusion, true);
+  assert.equal(out.NF.checkPCCPackexp0ClaimBoundaryConditional, true);
+  assert.equal(out.NF.checkPCCPackexp0ClaimBoundaryAntecedent, 'CheckPCCPackexp(GeneratePCCPack())=accept');
+  assert.equal(out.NF.checkPCCPackexp0ClaimBoundaryConsequent, 'P = NP');
+  assert.equal(out.NF.checkPCCPackexp0GeneratedPackageImplication, true);
+
+  assert.equal(out.NF.checkPCCPackexp0ConcretePCCPack, true);
+  assert.equal(out.NF.checkPCCPackexp0ConcreteKBundle, true);
+  assert.equal(out.NF.checkPCCPackexp0ConcreteHardCheck, true);
+  assert.equal(out.NF.checkPCCPackexp0ConcreteRows, true);
+  assert.equal(out.NF.checkPCCPackexp0ConcreteLocalPackages, true);
+  assert.equal(out.NF.checkPCCPackexp0ConcreteGlobalFirewalls, true);
+  assert.equal(out.NF.checkPCCPackexp0ConcreteGlobalProofDAG, true);
+  assert.equal(out.NF.checkPCCPackexp0ConcreteFinalIntegration, true);
+  assert.equal(out.NF.checkPCCPackexp0KBundleCoverageComplete, true);
+  assert.equal(out.NF.checkPCCPackexp0HardCoverageComplete, true);
+  assert.equal(out.NF.checkPCCPackexp0FinalIntegrationCoverageComplete, true);
+  assert.equal(out.NF.checkPCCPackexp0PCCPackLinkageComplete, true);
+  assert.equal(out.NF.checkPCCPackexp0ConcreteCoverageComplete, true);
+  assert.equal(out.NF.checkPCCPackexp0ConcretePCCPackRecordAccepted, true);
 
   assert.equal(out.NF.checkPCCPackexp, true);
   assert.equal(out.NF.checkPCCPackexpRecordAccepted, true);
@@ -1403,4 +1437,17 @@ test('CheckGeneratedPCCPackexp0 rejects stale concrete FinalIntegration linkage'
     'MaterializedPCCPackEnvelope',
     'FinalIntegrationEnvelope',
   ]);
+});
+
+test('CheckGeneratedPCCPackexp0 exposes the central conditional package-check boundary', async () => {
+  const envelope = await makeGeneratedPCCPackexp0();
+  const out = await CheckGeneratedPCCPackexp0(envelope);
+
+  assert.equal(out.tag, 'accept');
+  assert.equal(out.NF.generatedPackageCheckPCCPackexp0, true);
+  assert.equal(out.NF.checkPCCPackexp0Accepted, true);
+  assert.equal(out.NF.checkPCCPackexp0GeneratedPackageImplication, true);
+  assert.equal(out.NF.checkPCCPackexp0NoPrematurePublicConclusion, true);
+  assert.equal(out.NF.checkPCCPackexp0ConcreteCoverageComplete, true);
+  assert.equal(out.NF.checkPCCPackexp0PCCPackLinkageComplete, true);
 });
