@@ -439,6 +439,38 @@ test('CheckConcreteFinalCertificatePublicStatus0 accepts public status over conc
   assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0LinkedToFinalTheorem, true);
   assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0LinkedToRowFamFinal, true);
   assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0LinkedToPCCPack, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0Checker, 'CheckPCCPackexp0');
+  assert.match(out.NF.generatedPCCPackexpCheckPCCPackexp0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0MaterializedPath, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0SyntheticRunAll, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0PackageKind, 'PCCPack0');
+  assert.match(out.NF.generatedPCCPackexpCheckPCCPackexp0PCCPackDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpCheckPCCPackexp0MaterializedPCCPackDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcretePCCPackRecordDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteCoverageDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0PublicConclusionOnlyAfterAcceptRun, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0PublicConclusionEmitted, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0NoPrematurePublicConclusion, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ClaimBoundaryConditional, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ClaimBoundaryAntecedent, 'CheckPCCPackexp(GeneratePCCPack())=accept');
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ClaimBoundaryConsequent, 'P = NP');
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0GeneratedPackageImplication, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcretePCCPack, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteKBundle, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteHardCheck, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteRows, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteLocalPackages, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteGlobalFirewalls, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteGlobalProofDAG, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteFinalIntegration, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0KBundleCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0HardCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0FinalIntegrationCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0PCCPackLinkageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcretePCCPackRecordAccepted, true);
 
   assert.equal(out.NF.statusUsesConcreteFinalCertificate, true);
   assert.equal(out.NF.publicStatusCertificateDigestMatchesConcrete, true);
@@ -1305,4 +1337,48 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete FinalInt
   assert.equal(out.checker, 'CheckConcreteFinalCertificatePublicStatus0');
   assert.equal(out.Coord, 'CheckConcreteFinalCertificatePublicStatus0.concreteChain');
   assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpConcreteFinalIntegration0LinkedToPCCPack']);
+});
+
+test('CheckConcreteFinalCertificatePublicStatus0 rejects stale CheckPCCPackexp0 contract evidence', async () => {
+  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+
+  const record = envelope.ConcreteFinalCertificateEnvelope
+    .ConcreteGeneratedAcceptRunEnvelope
+    .CheckGeneratedPCCPackexpRecord;
+
+  const nf = {
+    ...record.NF,
+    checkPCCPackexp0ConcreteCoverageComplete: false,
+  };
+
+  envelope.ConcreteFinalCertificateEnvelope
+    .ConcreteGeneratedAcceptRunEnvelope
+    .CheckGeneratedPCCPackexpRecord = {
+      ...record,
+      NF: nf,
+      nf,
+      Digest: digestCanonical0(nf),
+      digest: digestCanonical0(nf),
+    };
+
+  envelope.ConcreteChain = summarizeConcreteFinalCertificatePublicStatusChain0({
+    concreteFinalCertificateEnvelope: envelope.ConcreteFinalCertificateEnvelope,
+    finalCertificatePublicStatusEnvelope: envelope.FinalCertificatePublicStatusEnvelope,
+  });
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+    checkConcreteFinalCertificate: false,
+    checkFinalCertificatePublicStatus: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteFinalCertificatePublicStatus0');
+  assert.equal(out.Coord, 'CheckConcreteFinalCertificatePublicStatus0.concreteChain');
+  assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpCheckPCCPackexp0ConcreteCoverageComplete']);
 });
