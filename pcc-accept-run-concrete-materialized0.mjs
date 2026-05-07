@@ -1776,6 +1776,182 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
         : null
     ),
 
+    generatedPCCPackexpConcreteGlobalProofDAG0: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).generatedPackageConcreteGlobalProofDAG0 === true
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0Accepted: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0Accepted === true
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0Checker: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0Checker
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0Digest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0Digest
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0GlobalProofDAGDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0GlobalProofDAGDigest
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0GlobalProofDAGObjectDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0GlobalProofDAGObjectDigest
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0MaterializedGlobalProofDAGDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0MaterializedGlobalProofDAGDigest
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0KImplDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0KImplDigest
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0RowPackDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0RowPackDigest
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0LocalPackagesDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0LocalPackagesDigest
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0GlobalFirewallsDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0GlobalFirewallsDigest
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0KBundleProofInventoryDigest: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0KBundleProofInventoryDigest
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0KBundleKernelRuleCoverageComplete: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0KBundleKernelRuleCoverageComplete === true
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0KBundleSigmaProofRefsResolve: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0KBundleSigmaProofRefsResolve === true
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0KBundleReflectionProofRefsResolve: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0KBundleReflectionProofRefsResolve === true
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0NodeCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0NodeCount
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0NodeCountMinimum: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0NodeCountMinimum === true
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0FinalTheoremCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0FinalTheoremCount
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0FinalPackageSoundness: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0FinalPackageSoundness === true
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0FinalGeneratedPackageSufficiency: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0FinalGeneratedPackageSufficiency === true
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0FinalAcceptedPackageImpliesSATinP: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0FinalAcceptedPackageImpliesSATinP === true
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0FinalAcceptedPackageImpliesPEqualsNP: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0FinalAcceptedPackageImpliesPEqualsNP === true
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0IfaceHash: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0IfaceHash
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0SchedHash: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0SchedHash
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0IfaceMatchesRows: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0IfaceMatchesRows === true
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0SchedMatchesKImpl: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0SchedMatchesKImpl === true
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0SyntheticMarkerCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0SyntheticMarkerCount
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0ForbiddenMarkerCount: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0ForbiddenMarkerCount
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0NoForbiddenMarkers: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0NoForbiddenMarkers === true
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0LinkedToGeneratedBoot0: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0LinkedToGeneratedBoot0 === true
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0LinkedToKImpl: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0LinkedToKImpl === true
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0LinkedToConcreteRows: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0LinkedToConcreteRows === true
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0LinkedToLocalPackages: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0LinkedToLocalPackages === true
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0LinkedToGlobalFirewalls: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0LinkedToGlobalFirewalls === true
+        : null
+    ),
+    generatedPCCPackexpConcreteGlobalProofDAG0LinkedToPCCPack: (
+      isPlainObject(generatedPCCPackexpRecord?.NF ?? generatedPCCPackexpRecord?.nf)
+        ? (generatedPCCPackexpRecord.NF ?? generatedPCCPackexpRecord.nf).concreteGlobalProofDAG0LinkedToPCCPack === true
+        : null
+    ),
+
     rowsEnvelopeKind: recomputedChain.rowsEnvelopeKind,
     localPackagesEnvelopeKind: recomputedChain.localPackagesEnvelopeKind,
     globalFirewallsEnvelopeKind: recomputedChain.globalFirewallsEnvelopeKind,
@@ -3067,6 +3243,184 @@ function validateGeneratedPCCPackexpEnvelope0({
     return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteRows0LinkedToPCCPack'], 'GeneratedPCCPackexp0 NF concrete Rows linkage must match PCCPack.RowPack bytes', {
       expected: digestCanonical0(generatedMaterializedPCCPackForRows0?.PCCPack?.RowPack ?? null),
       actual: digestCanonical0(generatedRowsEnvelope?.RowPack ?? null),
+    });
+  }
+
+  for (const field of [
+    'generatedPackageConcreteGlobalProofDAG0',
+    'concreteGlobalProofDAG0Accepted',
+    'concreteGlobalProofDAG0KBundleKernelRuleCoverageComplete',
+    'concreteGlobalProofDAG0KBundleSigmaProofRefsResolve',
+    'concreteGlobalProofDAG0KBundleReflectionProofRefsResolve',
+    'concreteGlobalProofDAG0NodeCountMinimum',
+    'concreteGlobalProofDAG0FinalPackageSoundness',
+    'concreteGlobalProofDAG0FinalGeneratedPackageSufficiency',
+    'concreteGlobalProofDAG0FinalAcceptedPackageImpliesSATinP',
+    'concreteGlobalProofDAG0FinalAcceptedPackageImpliesPEqualsNP',
+    'concreteGlobalProofDAG0IfaceMatchesRows',
+    'concreteGlobalProofDAG0SchedMatchesKImpl',
+    'concreteGlobalProofDAG0NoForbiddenMarkers',
+    'concreteGlobalProofDAG0LinkedToGeneratedBoot0',
+    'concreteGlobalProofDAG0LinkedToKImpl',
+    'concreteGlobalProofDAG0LinkedToConcreteRows',
+    'concreteGlobalProofDAG0LinkedToLocalPackages',
+    'concreteGlobalProofDAG0LinkedToGlobalFirewalls',
+    'concreteGlobalProofDAG0LinkedToPCCPack',
+  ]) {
+    if (generatedNF[field] !== true) {
+      return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', field], `GeneratedPCCPackexp0 NF must certify ${field}`, {
+        actual: generatedNF[field],
+      });
+    }
+  }
+
+  if (generatedNF.concreteGlobalProofDAG0Checker !== 'CheckConcreteMaterializedGlobalProofDAG0') {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteGlobalProofDAG0Checker'], 'GeneratedPCCPackexp0 NF must certify concrete GlobalProofDAG checker', {
+      actual: generatedNF.concreteGlobalProofDAG0Checker,
+    });
+  }
+
+  if (!(typeof generatedNF.concreteGlobalProofDAG0NodeCount === 'number' && generatedNF.concreteGlobalProofDAG0NodeCount >= 90)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteGlobalProofDAG0NodeCount'], 'GeneratedPCCPackexp0 NF must certify complete concrete GlobalProofDAG node inventory', {
+      minimum: 90,
+      actual: generatedNF.concreteGlobalProofDAG0NodeCount,
+    });
+  }
+
+  if (generatedNF.concreteGlobalProofDAG0FinalTheoremCount !== 4) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteGlobalProofDAG0FinalTheoremCount'], 'GeneratedPCCPackexp0 NF must certify four final theorem nodes', {
+      expected: 4,
+      actual: generatedNF.concreteGlobalProofDAG0FinalTheoremCount,
+    });
+  }
+
+  if (generatedNF.concreteGlobalProofDAG0ForbiddenMarkerCount !== 0) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteGlobalProofDAG0ForbiddenMarkerCount'], 'GeneratedPCCPackexp0 NF must certify no forbidden GlobalProofDAG scaffold markers', {
+      expected: 0,
+      actual: generatedNF.concreteGlobalProofDAG0ForbiddenMarkerCount,
+    });
+  }
+
+  const generatedMaterializedPCCPackForGlobalDAG0 =
+    generatedPCCPackexpEnvelope.GeneratedPCCPack?.MaterializedPCCPackEnvelope ?? null;
+
+  const generatedGlobalProofDAGEnvelopeForGlobalDAG0 =
+    generatedMaterializedPCCPackForGlobalDAG0?.GlobalProofDAGEnvelope ?? null;
+
+  const generatedGlobalProofDAGForGlobalDAG0 =
+    generatedGlobalProofDAGEnvelopeForGlobalDAG0?.GlobalProofDAG ??
+    generatedGlobalProofDAGEnvelopeForGlobalDAG0?.MaterializedGlobalProofDAGEnvelope?.GlobalProofDAG ??
+    null;
+
+  const generatedKBundleEnvelopeForGlobalDAG0 =
+    generatedMaterializedPCCPackForGlobalDAG0?.KBundleEnvelope ?? null;
+
+  const generatedRowsEnvelopeForGlobalDAG0 =
+    generatedMaterializedPCCPackForGlobalDAG0?.RowsEnvelope ?? null;
+
+  const generatedLocalPackagesEnvelopeForGlobalDAG0 =
+    generatedMaterializedPCCPackForGlobalDAG0?.LocalPackagesEnvelope ?? null;
+
+  const generatedGlobalFirewallsEnvelopeForGlobalDAG0 =
+    generatedMaterializedPCCPackForGlobalDAG0?.GlobalFirewallsEnvelope ?? null;
+
+  const generatedKImplForGlobalDAG0 =
+    generatedKBundleEnvelopeForGlobalDAG0?.KImpl ??
+    generatedKBundleEnvelopeForGlobalDAG0?.kimpl ??
+    generatedKBundleEnvelopeForGlobalDAG0?.KBundle?.KImpl ??
+    generatedKBundleEnvelopeForGlobalDAG0?.MaterializedKBundleEnvelope?.KImpl ??
+    generatedKBundleEnvelopeForGlobalDAG0?.MaterializedKBundleEnvelope?.KBundle?.KImpl ??
+    null;
+
+  const generatedRowPackForGlobalDAG0 =
+    generatedRowsEnvelopeForGlobalDAG0?.RowPack ??
+    generatedRowsEnvelopeForGlobalDAG0?.rowPack ??
+    null;
+
+  const generatedLocalPackagesForGlobalDAG0 =
+    generatedLocalPackagesEnvelopeForGlobalDAG0?.LocalPackages ??
+    generatedLocalPackagesEnvelopeForGlobalDAG0?.localPackages ??
+    generatedLocalPackagesEnvelopeForGlobalDAG0?.LocalPackagePack ??
+    generatedLocalPackagesEnvelopeForGlobalDAG0?.localPackagePack ??
+    null;
+
+  const generatedGlobalFirewallsForGlobalDAG0 =
+    generatedGlobalFirewallsEnvelopeForGlobalDAG0?.GlobalFirewalls ??
+    generatedGlobalFirewallsEnvelopeForGlobalDAG0?.globalFirewalls ??
+    generatedGlobalFirewallsEnvelopeForGlobalDAG0?.GlobalFirewallPack ??
+    generatedGlobalFirewallsEnvelopeForGlobalDAG0?.globalFirewallPack ??
+    null;
+
+  if (!sameDigestHex0(generatedNF.concreteGlobalProofDAG0GlobalProofDAGObjectDigest, digestCanonical0(generatedGlobalProofDAGForGlobalDAG0))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteGlobalProofDAG0GlobalProofDAGObjectDigest'], 'GeneratedPCCPackexp0 NF concrete GlobalProofDAG object digest must match generated package GlobalProofDAG bytes', {
+      expected: digestCanonical0(generatedGlobalProofDAGForGlobalDAG0),
+      actual: generatedNF.concreteGlobalProofDAG0GlobalProofDAGObjectDigest,
+    });
+  }
+
+  if (!sameDigestHex0(generatedNF.concreteGlobalProofDAG0MaterializedGlobalProofDAGDigest, digestCanonical0(generatedGlobalProofDAGEnvelopeForGlobalDAG0?.MaterializedGlobalProofDAGEnvelope ?? null))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteGlobalProofDAG0MaterializedGlobalProofDAGDigest'], 'GeneratedPCCPackexp0 NF materialized GlobalProofDAG digest must match generated package bytes', {
+      expected: digestCanonical0(generatedGlobalProofDAGEnvelopeForGlobalDAG0?.MaterializedGlobalProofDAGEnvelope ?? null),
+      actual: generatedNF.concreteGlobalProofDAG0MaterializedGlobalProofDAGDigest,
+    });
+  }
+
+  if (!sameDigestHex0(generatedNF.concreteGlobalProofDAG0KImplDigest, digestCanonical0(generatedKImplForGlobalDAG0))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteGlobalProofDAG0KImplDigest'], 'GeneratedPCCPackexp0 NF KImpl digest must match generated package KImpl bytes', {
+      expected: digestCanonical0(generatedKImplForGlobalDAG0),
+      actual: generatedNF.concreteGlobalProofDAG0KImplDigest,
+    });
+  }
+
+  if (!sameDigestHex0(generatedNF.concreteGlobalProofDAG0RowPackDigest, digestCanonical0(generatedRowPackForGlobalDAG0))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteGlobalProofDAG0RowPackDigest'], 'GeneratedPCCPackexp0 NF row-pack digest must match generated package RowPack bytes', {
+      expected: digestCanonical0(generatedRowPackForGlobalDAG0),
+      actual: generatedNF.concreteGlobalProofDAG0RowPackDigest,
+    });
+  }
+
+  if (!sameDigestHex0(generatedNF.concreteGlobalProofDAG0LocalPackagesDigest, digestCanonical0(generatedLocalPackagesForGlobalDAG0))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteGlobalProofDAG0LocalPackagesDigest'], 'GeneratedPCCPackexp0 NF local-packages digest must match generated package local package bytes', {
+      expected: digestCanonical0(generatedLocalPackagesForGlobalDAG0),
+      actual: generatedNF.concreteGlobalProofDAG0LocalPackagesDigest,
+    });
+  }
+
+  if (!sameDigestHex0(generatedNF.concreteGlobalProofDAG0GlobalFirewallsDigest, digestCanonical0(generatedGlobalFirewallsForGlobalDAG0))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteGlobalProofDAG0GlobalFirewallsDigest'], 'GeneratedPCCPackexp0 NF global-firewalls digest must match generated package global firewall bytes', {
+      expected: digestCanonical0(generatedGlobalFirewallsForGlobalDAG0),
+      actual: generatedNF.concreteGlobalProofDAG0GlobalFirewallsDigest,
+    });
+  }
+
+  if (!sameDigestHex0(generatedNF.concreteGlobalProofDAG0KBundleProofInventoryDigest, digestCanonical0(generatedKBundleEnvelopeForGlobalDAG0?.ProofInventory ?? null))) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteGlobalProofDAG0KBundleProofInventoryDigest'], 'GeneratedPCCPackexp0 NF KBundle proof-inventory digest must match generated package proof inventory bytes', {
+      expected: digestCanonical0(generatedKBundleEnvelopeForGlobalDAG0?.ProofInventory ?? null),
+      actual: generatedNF.concreteGlobalProofDAG0KBundleProofInventoryDigest,
+    });
+  }
+
+  if (!sameDigestHex0(generatedNF.concreteGlobalProofDAG0IfaceHash, generatedRowPackForGlobalDAG0?.IfaceHash)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteGlobalProofDAG0IfaceHash'], 'GeneratedPCCPackexp0 NF GlobalProofDAG IfaceHash must match generated RowPack IfaceHash', {
+      expected: generatedRowPackForGlobalDAG0?.IfaceHash,
+      actual: generatedNF.concreteGlobalProofDAG0IfaceHash,
+    });
+  }
+
+  if (!sameDigestHex0(generatedNF.concreteGlobalProofDAG0SchedHash, generatedKImplForGlobalDAG0?.SchedHash)) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteGlobalProofDAG0SchedHash'], 'GeneratedPCCPackexp0 NF GlobalProofDAG SchedHash must match generated KImpl SchedHash', {
+      expected: generatedKImplForGlobalDAG0?.SchedHash,
+      actual: generatedNF.concreteGlobalProofDAG0SchedHash,
+    });
+  }
+
+  if (!sameDigestHex0(
+    digestCanonical0(generatedMaterializedPCCPackForGlobalDAG0?.PCCPack?.GlobalProofDAG ?? null),
+    digestCanonical0(generatedGlobalProofDAGForGlobalDAG0),
+  )) {
+    return validationReject0(['GeneratedPCCPackexpEnvelope', 'NF', 'concreteGlobalProofDAG0LinkedToPCCPack'], 'GeneratedPCCPackexp0 NF concrete GlobalProofDAG linkage must match PCCPack.GlobalProofDAG bytes', {
+      expected: digestCanonical0(generatedMaterializedPCCPackForGlobalDAG0?.PCCPack?.GlobalProofDAG ?? null),
+      actual: digestCanonical0(generatedGlobalProofDAGForGlobalDAG0),
     });
   }
 
