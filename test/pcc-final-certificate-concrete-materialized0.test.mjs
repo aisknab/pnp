@@ -402,6 +402,43 @@ test('CheckConcreteMaterializedFinalCertificate0 accepts a final certificate ove
   assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0LinkedToLocalPackages, true);
   assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0LinkedToGlobalFirewalls, true);
   assert.equal(out.NF.generatedPCCPackexpConcreteGlobalProofDAG0LinkedToPCCPack, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0Checker, 'CheckConcreteMaterializedFinalIntegration0');
+  assert.match(out.NF.generatedPCCPackexpConcreteFinalIntegration0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteFinalIntegration0ConcreteGlobalProofDAGDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteFinalIntegration0MaterializedFinalIntegrationDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteFinalIntegration0GPackDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteFinalIntegration0RowFamGDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteFinalIntegration0FinalIntegrationDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteFinalIntegration0FinalTheoremDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteFinalIntegration0RowFamFinalDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpConcreteFinalIntegration0ConcreteLinksDigest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0ConcreteGlobalProofDAG, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0ConcreteKBundle, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0ConcreteRows, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0ConcreteLocalPackages, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0ConcreteGlobalFirewalls, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0KBundleKernelRuleCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0KBundleSigmaProofRefsResolve, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0KBundleReflectionProofRefsResolve, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0GPackFieldCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0RowFamGCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0FinalIntegrationUsesGPack, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0RowFamGUsesGPack, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0FinalTheoremUsesFinalIntegration, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0RowFamFinalUsesFinalTheorem, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0FinalMatchUsesGPack, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0SATDecisionUsesGPack, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0ForbiddenMarkerCount, 0);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0NoForbiddenMarkers, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0LinkedToGeneratedGlobalProofDAG, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0LinkedToGPack, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0LinkedToRowFamG, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0LinkedToFinalIntegration, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0LinkedToFinalTheorem, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0LinkedToRowFamFinal, true);
+  assert.equal(out.NF.generatedPCCPackexpConcreteFinalIntegration0LinkedToPCCPack, true);
 
   assert.equal(out.NF.finalCertificateUsesConcreteAcceptRun, true);
   assert.equal(out.NF.certificatePccPackDigestMatchesConcreteRun, true);
@@ -1120,4 +1157,43 @@ test('CheckConcreteMaterializedFinalCertificate0 rejects stale concrete GlobalPr
   assert.equal(out.checker, 'CheckConcreteMaterializedFinalCertificate0');
   assert.equal(out.Coord, 'CheckConcreteMaterializedFinalCertificate0.concreteChain');
   assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpConcreteGlobalProofDAG0FinalAcceptedPackageImpliesPEqualsNP']);
+});
+
+test('CheckConcreteMaterializedFinalCertificate0 rejects stale concrete FinalIntegration evidence', async () => {
+  const envelope = await makeConcreteMaterializedFinalCertificate0();
+
+  const record = envelope.ConcreteGeneratedAcceptRunEnvelope.CheckGeneratedPCCPackexpRecord;
+  const nf = {
+    ...record.NF,
+    concreteFinalIntegration0SATDecisionUsesGPack: false,
+  };
+
+  envelope.ConcreteGeneratedAcceptRunEnvelope.CheckGeneratedPCCPackexpRecord = {
+    ...record,
+    NF: nf,
+    nf,
+    Digest: digestCanonical0(nf),
+    digest: digestCanonical0(nf),
+  };
+
+  envelope.ConcreteChain = summarizeConcreteFinalCertificateChain0({
+    concreteGeneratedAcceptRunEnvelope: envelope.ConcreteGeneratedAcceptRunEnvelope,
+    finalCertificateEnvelope: envelope.FinalCertificateEnvelope,
+  });
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    concreteChainDigest: undefined,
+  };
+
+  const out = await CheckConcreteMaterializedFinalCertificate0(envelope, {
+    checkConcreteGeneratedAcceptRun: false,
+    checkFinalCertificate: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedFinalCertificate0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedFinalCertificate0.concreteChain');
+  assert.deepEqual(out.Path, ['ConcreteChain', 'generatedPCCPackexpConcreteFinalIntegration0SATDecisionUsesGPack']);
 });
