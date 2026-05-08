@@ -84,3 +84,11 @@ export {
   makeFinalPNPCertificateConfig0,
   writeFinalPNPCertificateFiles0,
 } from './pcc-final-pnp-certificate0.mjs';
+
+export {
+  CheckFinalPNPReleaseGate0,
+  FINAL_PNP_RELEASE_GATE_PHASES0,
+  makeFinalPNPReleaseGate0,
+  makeFinalPNPReleaseGateConfig0,
+  writeFinalPNPReleaseGateFiles0,
+} from './pcc-final-pnp-release-gate0.mjs';
