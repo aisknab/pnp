@@ -109,6 +109,40 @@ test('CheckConcreteReleaseAppendix0 accepts the concrete release appendix', asyn
 
   assert.equal(out.NF.publicConclusionEmitted, true);
   assert.equal(out.NF.publicConclusion.consequent, 'P = NP');
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0Accepted, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0Checker, 'CheckPCCPackexp0');
+  assert.match(out.NF.generatedPCCPackexpCheckPCCPackexp0Digest.hex, /^[0-9a-f]{64}$/);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0MaterializedPath, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0SyntheticRunAll, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0PackageKind, 'PCCPack0');
+  assert.match(out.NF.generatedPCCPackexpCheckPCCPackexp0PCCPackDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpCheckPCCPackexp0MaterializedPCCPackDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcretePCCPackRecordDigest.hex, /^[0-9a-f]{64}$/);
+  assert.match(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteCoverageDigest.hex, /^[0-9a-f]{64}$/);
+
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0PublicConclusionOnlyAfterAcceptRun, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0PublicConclusionEmitted, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0NoPrematurePublicConclusion, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ClaimBoundaryConditional, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ClaimBoundaryAntecedent, 'CheckPCCPackexp(GeneratePCCPack())=accept');
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ClaimBoundaryConsequent, 'P = NP');
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0GeneratedPackageImplication, true);
+
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcretePCCPack, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteKBundle, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteHardCheck, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteRows, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteLocalPackages, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteGlobalFirewalls, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteGlobalProofDAG, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteFinalIntegration, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0KBundleCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0HardCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0FinalIntegrationCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0PCCPackLinkageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteCoverageComplete, true);
+  assert.equal(out.NF.generatedPCCPackexpCheckPCCPackexp0ConcretePCCPackRecordAccepted, true);
 
   assert.match(out.Digest.hex, /^[0-9a-f]{64}$/);
 });
@@ -380,4 +414,50 @@ test('CheckConcreteReleaseAppendix0 rejects appendix without concrete final-inte
   assert.equal(out.checker, 'CheckConcreteReleaseAppendix0');
   assert.equal(out.Coord, 'CheckConcreteReleaseAppendix0.appendix');
   assert.deepEqual(out.Path, ['Appendix', 'finalIntegrationRowFamGCoverageComplete']);
+});
+
+test('CheckConcreteReleaseAppendix0 rejects appendix without CheckPCCPackexp0 implication evidence', async () => {
+  const gate = await makeGate0();
+
+  gate.ConcreteFinalCertificatePublicStatusEnvelope.ConcreteChain = {
+    ...gate.ConcreteFinalCertificatePublicStatusEnvelope.ConcreteChain,
+    generatedPCCPackexpCheckPCCPackexp0GeneratedPackageImplication: false,
+  };
+
+  const envelope = await makeConcreteReleaseAppendix0({
+    ReleaseAuditConcreteFinalCertificateGateEnvelope: gate,
+  });
+
+  const out = await CheckConcreteReleaseAppendix0(envelope, {
+    checkConcreteReleaseGate: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteReleaseAppendix0');
+  assert.equal(out.Coord, 'CheckConcreteReleaseAppendix0.appendix');
+  assert.deepEqual(out.Path, ['Appendix', 'generatedPCCPackexpCheckPCCPackexp0GeneratedPackageImplication']);
+});
+
+test('CheckConcreteReleaseAppendix0 rejects appendix without CheckPCCPackexp0 concrete coverage evidence', async () => {
+  const gate = await makeGate0();
+
+  gate.ConcreteFinalCertificatePublicStatusEnvelope.ConcreteChain = {
+    ...gate.ConcreteFinalCertificatePublicStatusEnvelope.ConcreteChain,
+    generatedPCCPackexpCheckPCCPackexp0ConcreteCoverageComplete: false,
+  };
+
+  const envelope = await makeConcreteReleaseAppendix0({
+    ReleaseAuditConcreteFinalCertificateGateEnvelope: gate,
+  });
+
+  const out = await CheckConcreteReleaseAppendix0(envelope, {
+    checkConcreteReleaseGate: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteReleaseAppendix0');
+  assert.equal(out.Coord, 'CheckConcreteReleaseAppendix0.appendix');
+  assert.deepEqual(out.Path, ['Appendix', 'generatedPCCPackexpCheckPCCPackexp0ConcreteCoverageComplete']);
 });
