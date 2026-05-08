@@ -54,6 +54,11 @@ const EXPECTED_INDEX_EXPORTS0 = Object.freeze([
   'makeConcreteFinalAcceptanceReplay0',
   'makeConcreteFinalAcceptanceReplayConfig0',
   'writeConcreteFinalAcceptanceReplayFiles0',
+  'CheckFinalPNPCertificate0',
+  'FINAL_PNP_CERTIFICATE_PHASES0',
+  'makeFinalPNPCertificate0',
+  'makeFinalPNPCertificateConfig0',
+  'writeFinalPNPCertificateFiles0',
 ].sort());
 
 const EXPECTED_PACKAGE_EXPORTS0 = Object.freeze({
@@ -68,6 +73,7 @@ const EXPECTED_PACKAGE_EXPORTS0 = Object.freeze({
   './release-audit-concrete-final-certificate-gate0': './pcc-release-audit-final-certificate-concrete-gate0.mjs',
   './concrete-release-appendix0': './pcc-concrete-release-appendix0.mjs',
   './concrete-final-acceptance-replay0': './pcc-final-acceptance-replay0.mjs',
+  './final-pnp-certificate0': './pcc-final-pnp-certificate0.mjs',
 });
 
 const EXPECTED_BIN_EXPORTS0 = Object.freeze({
@@ -116,6 +122,8 @@ const REQUIRED_PUBLIC_SCRIPTS0 = Object.freeze([
   'release:audit:concrete-release-appendix:full',
   'release:audit:concrete-final-acceptance-replay',
   'release:audit:concrete-final-acceptance-replay:full',
+  'release:audit:final-pnp-certificate',
+  'release:audit:final-pnp-certificate:full',
 ]);
 
 test('index.mjs exports exactly the intended public API surface', () => {
@@ -198,6 +206,7 @@ test('package subpath exports expose final-certificate gates', async () => {
   const concreteReleaseGate = await import('@aisknab/pnp/release-audit-concrete-final-certificate-gate0');
   const concreteReleaseAppendix = await import('@aisknab/pnp/concrete-release-appendix0');
   const concreteFinalAcceptanceReplay = await import('@aisknab/pnp/concrete-final-acceptance-replay0');
+  const finalPNPCertificate = await import('@aisknab/pnp/final-pnp-certificate0');
 
   assert.equal(typeof finalCertificate.CheckMaterializedFinalCertificate0, 'function');
   assert.equal(typeof finalCertificate.makeMaterializedFinalCertificate0, 'function');
@@ -226,4 +235,10 @@ test('package subpath exports expose final-certificate gates', async () => {
   assert.equal(typeof concreteFinalAcceptanceReplay.makeConcreteFinalAcceptanceReplay0, 'function');
   assert.equal(typeof concreteFinalAcceptanceReplay.makeConcreteFinalAcceptanceReplayConfig0, 'function');
   assert.equal(typeof concreteFinalAcceptanceReplay.writeConcreteFinalAcceptanceReplayFiles0, 'function');
+
+  assert.equal(typeof finalPNPCertificate.CheckFinalPNPCertificate0, 'function');
+  assert.equal(Array.isArray(finalPNPCertificate.FINAL_PNP_CERTIFICATE_PHASES0), true);
+  assert.equal(typeof finalPNPCertificate.makeFinalPNPCertificate0, 'function');
+  assert.equal(typeof finalPNPCertificate.makeFinalPNPCertificateConfig0, 'function');
+  assert.equal(typeof finalPNPCertificate.writeFinalPNPCertificateFiles0, 'function');
 });

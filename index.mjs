@@ -76,3 +76,11 @@ export {
   makeConcreteFinalAcceptanceReplayConfig0,
   writeConcreteFinalAcceptanceReplayFiles0,
 } from './pcc-final-acceptance-replay0.mjs';
+
+export {
+  CheckFinalPNPCertificate0,
+  FINAL_PNP_CERTIFICATE_PHASES0,
+  makeFinalPNPCertificate0,
+  makeFinalPNPCertificateConfig0,
+  writeFinalPNPCertificateFiles0,
+} from './pcc-final-pnp-certificate0.mjs';
