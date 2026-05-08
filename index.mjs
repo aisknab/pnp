@@ -68,3 +68,11 @@ export {
   makeConcreteReleaseAppendixConfig0,
   writeConcreteReleaseAppendixFiles0,
 } from './pcc-concrete-release-appendix0.mjs';
+
+export {
+  CheckConcreteFinalAcceptanceReplay0,
+  CONCRETE_FINAL_ACCEPTANCE_REPLAY_PHASES0,
+  makeConcreteFinalAcceptanceReplay0,
+  makeConcreteFinalAcceptanceReplayConfig0,
+  writeConcreteFinalAcceptanceReplayFiles0,
+} from './pcc-final-acceptance-replay0.mjs';

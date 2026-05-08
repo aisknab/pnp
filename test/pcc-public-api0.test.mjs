@@ -49,6 +49,11 @@ const EXPECTED_INDEX_EXPORTS0 = Object.freeze([
   'makeConcreteReleaseAppendix0',
   'makeConcreteReleaseAppendixConfig0',
   'writeConcreteReleaseAppendixFiles0',
+  'CheckConcreteFinalAcceptanceReplay0',
+  'CONCRETE_FINAL_ACCEPTANCE_REPLAY_PHASES0',
+  'makeConcreteFinalAcceptanceReplay0',
+  'makeConcreteFinalAcceptanceReplayConfig0',
+  'writeConcreteFinalAcceptanceReplayFiles0',
 ].sort());
 
 const EXPECTED_PACKAGE_EXPORTS0 = Object.freeze({
@@ -62,6 +67,7 @@ const EXPECTED_PACKAGE_EXPORTS0 = Object.freeze({
   './release-audit-final-certificate-gate0': './pcc-release-audit-final-certificate-gate0.mjs',
   './release-audit-concrete-final-certificate-gate0': './pcc-release-audit-final-certificate-concrete-gate0.mjs',
   './concrete-release-appendix0': './pcc-concrete-release-appendix0.mjs',
+  './concrete-final-acceptance-replay0': './pcc-final-acceptance-replay0.mjs',
 });
 
 const EXPECTED_BIN_EXPORTS0 = Object.freeze({
@@ -108,6 +114,8 @@ const REQUIRED_PUBLIC_SCRIPTS0 = Object.freeze([
   'release:audit:concrete-final-certificate-gate:full',
   'release:audit:concrete-release-appendix',
   'release:audit:concrete-release-appendix:full',
+  'release:audit:concrete-final-acceptance-replay',
+  'release:audit:concrete-final-acceptance-replay:full',
 ]);
 
 test('index.mjs exports exactly the intended public API surface', () => {
@@ -189,6 +197,7 @@ test('package subpath exports expose final-certificate gates', async () => {
   const releaseGate = await import('@aisknab/pnp/release-audit-final-certificate-gate0');
   const concreteReleaseGate = await import('@aisknab/pnp/release-audit-concrete-final-certificate-gate0');
   const concreteReleaseAppendix = await import('@aisknab/pnp/concrete-release-appendix0');
+  const concreteFinalAcceptanceReplay = await import('@aisknab/pnp/concrete-final-acceptance-replay0');
 
   assert.equal(typeof finalCertificate.CheckMaterializedFinalCertificate0, 'function');
   assert.equal(typeof finalCertificate.makeMaterializedFinalCertificate0, 'function');
@@ -211,4 +220,10 @@ test('package subpath exports expose final-certificate gates', async () => {
   assert.equal(typeof concreteReleaseAppendix.makeConcreteReleaseAppendix0, 'function');
   assert.equal(typeof concreteReleaseAppendix.makeConcreteReleaseAppendixConfig0, 'function');
   assert.equal(typeof concreteReleaseAppendix.writeConcreteReleaseAppendixFiles0, 'function');
+
+  assert.equal(typeof concreteFinalAcceptanceReplay.CheckConcreteFinalAcceptanceReplay0, 'function');
+  assert.equal(Array.isArray(concreteFinalAcceptanceReplay.CONCRETE_FINAL_ACCEPTANCE_REPLAY_PHASES0), true);
+  assert.equal(typeof concreteFinalAcceptanceReplay.makeConcreteFinalAcceptanceReplay0, 'function');
+  assert.equal(typeof concreteFinalAcceptanceReplay.makeConcreteFinalAcceptanceReplayConfig0, 'function');
+  assert.equal(typeof concreteFinalAcceptanceReplay.writeConcreteFinalAcceptanceReplayFiles0, 'function');
 });

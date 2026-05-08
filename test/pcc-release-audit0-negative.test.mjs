@@ -214,6 +214,7 @@ function makeMiniPackageJson0() {
       './release-audit-final-certificate-gate0': './pcc-release-audit-final-certificate-gate0.mjs',
       './release-audit-concrete-final-certificate-gate0': './pcc-release-audit-final-certificate-concrete-gate0.mjs',
       './concrete-release-appendix0': './pcc-concrete-release-appendix0.mjs',
+      './concrete-final-acceptance-replay0': './pcc-final-acceptance-replay0.mjs',
     },
     bin: {
       'pnp-runall0': './bin/runall0.mjs',
@@ -268,6 +269,8 @@ function makeMiniPackageJson0() {
       'release:audit:concrete-final-certificate-gate:full': 'node ./bin/write-release-audit-concrete-final-certificate-gate0.mjs --full',
       'release:audit:concrete-release-appendix': 'node ./bin/write-concrete-release-appendix0.mjs',
       'release:audit:concrete-release-appendix:full': 'node ./bin/write-concrete-release-appendix0.mjs --full',
+      'release:audit:concrete-final-acceptance-replay': 'node ./bin/write-concrete-final-acceptance-replay0.mjs',
+      'release:audit:concrete-final-acceptance-replay:full': 'node ./bin/write-concrete-final-acceptance-replay0.mjs --full',
     },
   };
 }

@@ -57,6 +57,11 @@ export const PUBLIC_ENTRY_EXPORT_KEYS0 = Object.freeze([
   'makeConcreteReleaseAppendix0',
   'makeConcreteReleaseAppendixConfig0',
   'writeConcreteReleaseAppendixFiles0',
+  'CheckConcreteFinalAcceptanceReplay0',
+  'CONCRETE_FINAL_ACCEPTANCE_REPLAY_PHASES0',
+  'makeConcreteFinalAcceptanceReplay0',
+  'makeConcreteFinalAcceptanceReplayConfig0',
+  'writeConcreteFinalAcceptanceReplayFiles0',
 ].sort());
 
 export const PUBLIC_PACKAGE_EXPORTS0 = Object.freeze({
@@ -70,6 +75,7 @@ export const PUBLIC_PACKAGE_EXPORTS0 = Object.freeze({
   './runall0': './pcc-runall0.mjs',
   './release-audit-concrete-final-certificate-gate0': './pcc-release-audit-final-certificate-concrete-gate0.mjs',
   './concrete-release-appendix0': './pcc-concrete-release-appendix0.mjs',
+  './concrete-final-acceptance-replay0': './pcc-final-acceptance-replay0.mjs',
 });
 
 export const PUBLIC_PACKAGE_BIN0 = Object.freeze({
@@ -118,6 +124,8 @@ export const PUBLIC_PACKAGE_SCRIPT_TARGETS0 = Object.freeze({
   'release:audit:concrete-final-certificate-gate:full': 'node ./bin/write-release-audit-concrete-final-certificate-gate0.mjs --full',
   'release:audit:concrete-release-appendix': 'node ./bin/write-concrete-release-appendix0.mjs',
   'release:audit:concrete-release-appendix:full': 'node ./bin/write-concrete-release-appendix0.mjs --full',
+  'release:audit:concrete-final-acceptance-replay': 'node ./bin/write-concrete-final-acceptance-replay0.mjs',
+  'release:audit:concrete-final-acceptance-replay:full': 'node ./bin/write-concrete-final-acceptance-replay0.mjs --full',
 });
 
 export const PUBLIC_PACKAGE_SCRIPT_KEYS0 = Object.freeze(Object.keys(PUBLIC_PACKAGE_SCRIPT_TARGETS0).sort());
