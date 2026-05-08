@@ -264,6 +264,8 @@ export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
   './final-certificate0',
   './final-certificate-public-status0',
   './release-audit-final-certificate-gate0',
+  './release-audit-concrete-final-certificate-gate0',
+  './concrete-release-appendix0',
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_SCRIPTS0 = Object.freeze([
@@ -293,6 +295,10 @@ export const RELEASE_AUDIT_REQUIRED_SCRIPTS0 = Object.freeze([
   'materialized:public-status:full',
   'materialized:public-status-roundtrip',
   'materialized:public-status-roundtrip:full',                
+  'release:audit:concrete-final-certificate-gate',
+  'release:audit:concrete-final-certificate-gate:full',
+  'release:audit:concrete-release-appendix',
+  'release:audit:concrete-release-appendix:full',
 ]);
 
 export const RELEASE_AUDIT_MATERIALIZED_GATE_SUMMARY_KEYS0 = Object.freeze([

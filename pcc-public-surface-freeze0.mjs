@@ -48,6 +48,15 @@ export const PUBLIC_ENTRY_EXPORT_KEYS0 = Object.freeze([
   'makeReleaseAuditFinalCertificateGate0',
   'makeReleaseAuditFinalCertificateGateConfig0',
   'writeReleaseAuditFinalCertificateGateFiles0',
+  'CheckReleaseAuditConcreteFinalCertificateGate0',
+  'RELEASE_AUDIT_CONCRETE_FINAL_CERTIFICATE_GATE_PHASES0',
+  'makeReleaseAuditConcreteFinalCertificateGate0',
+  'makeReleaseAuditConcreteFinalCertificateGateConfig0',
+  'writeReleaseAuditConcreteFinalCertificateGateFiles0',
+  'CheckConcreteReleaseAppendix0',
+  'makeConcreteReleaseAppendix0',
+  'makeConcreteReleaseAppendixConfig0',
+  'writeConcreteReleaseAppendixFiles0',
 ].sort());
 
 export const PUBLIC_PACKAGE_EXPORTS0 = Object.freeze({
@@ -59,6 +68,8 @@ export const PUBLIC_PACKAGE_EXPORTS0 = Object.freeze({
   './final-certificate-public-status0': './pcc-final-certificate-public-status0.mjs',
   './release-audit-final-certificate-gate0': './pcc-release-audit-final-certificate-gate0.mjs',
   './runall0': './pcc-runall0.mjs',
+  './release-audit-concrete-final-certificate-gate0': './pcc-release-audit-final-certificate-concrete-gate0.mjs',
+  './concrete-release-appendix0': './pcc-concrete-release-appendix0.mjs',
 });
 
 export const PUBLIC_PACKAGE_BIN0 = Object.freeze({
@@ -103,6 +114,10 @@ export const PUBLIC_PACKAGE_SCRIPT_TARGETS0 = Object.freeze({
   'materialized:final-certificate-public-status:full': 'node ./bin/write-final-certificate-public-status0.mjs --full',
   'release:audit:final-certificate-gate': 'node ./bin/write-release-audit-final-certificate-gate0.mjs',
   'release:audit:final-certificate-gate:full': 'node ./bin/write-release-audit-final-certificate-gate0.mjs --full',  
+  'release:audit:concrete-final-certificate-gate': 'node ./bin/write-release-audit-concrete-final-certificate-gate0.mjs',
+  'release:audit:concrete-final-certificate-gate:full': 'node ./bin/write-release-audit-concrete-final-certificate-gate0.mjs --full',
+  'release:audit:concrete-release-appendix': 'node ./bin/write-concrete-release-appendix0.mjs',
+  'release:audit:concrete-release-appendix:full': 'node ./bin/write-concrete-release-appendix0.mjs --full',
 });
 
 export const PUBLIC_PACKAGE_SCRIPT_KEYS0 = Object.freeze(Object.keys(PUBLIC_PACKAGE_SCRIPT_TARGETS0).sort());

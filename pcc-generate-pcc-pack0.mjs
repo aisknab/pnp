@@ -2389,6 +2389,7 @@ async function validateGeneratedBootAuditPiBoot0(generatedPackage) {
   }
 
   const bootAuditDigest = digestFromRecord0(bootAudit0);
+  const bootAudit0Digest = bootAuditDigest;
   const bootAuditNFDigest = digestCanonical0(bootAuditNF);
 
   if (!sameDigestHex0(bootAuditDigest, bootAuditNFDigest)) {

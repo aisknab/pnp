@@ -36,6 +36,15 @@ if (full) {
     finalVerdictDigest: result.checked.NF.finalVerdictDigest,
     pccPackDigest: result.checked.NF.pccPackDigest,
     publicConclusion: result.checked.NF.publicConclusion,
+    generatedPCCPackexpCheckPCCPackexp0: result.checked.NF.generatedPCCPackexpCheckPCCPackexp0,
+    generatedPCCPackexpCheckPCCPackexp0Accepted: result.checked.NF.generatedPCCPackexpCheckPCCPackexp0Accepted,
+    generatedPCCPackexpCheckPCCPackexp0Checker: result.checked.NF.generatedPCCPackexpCheckPCCPackexp0Checker,
+    generatedPCCPackexpCheckPCCPackexp0GeneratedPackageImplication:
+      result.checked.NF.generatedPCCPackexpCheckPCCPackexp0GeneratedPackageImplication,
+    generatedPCCPackexpCheckPCCPackexp0ConcreteCoverageComplete:
+      result.checked.NF.generatedPCCPackexpCheckPCCPackexp0ConcreteCoverageComplete,
+    generatedPCCPackexpCheckPCCPackexp0PCCPackLinkageComplete:
+      result.checked.NF.generatedPCCPackexpCheckPCCPackexp0PCCPackLinkageComplete,
     files: result.files,
   }, null, 2));
 }

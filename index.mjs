@@ -53,3 +53,18 @@ export {
   makeReleaseAuditFinalCertificateGateConfig0,
   writeReleaseAuditFinalCertificateGateFiles0,
 } from './pcc-release-audit-final-certificate-gate0.mjs';
+
+export {
+  CheckReleaseAuditConcreteFinalCertificateGate0,
+  RELEASE_AUDIT_CONCRETE_FINAL_CERTIFICATE_GATE_PHASES0,
+  makeReleaseAuditConcreteFinalCertificateGate0,
+  makeReleaseAuditConcreteFinalCertificateGateConfig0,
+  writeReleaseAuditConcreteFinalCertificateGateFiles0,
+} from './pcc-release-audit-final-certificate-concrete-gate0.mjs';
+
+export {
+  CheckConcreteReleaseAppendix0,
+  makeConcreteReleaseAppendix0,
+  makeConcreteReleaseAppendixConfig0,
+  writeConcreteReleaseAppendixFiles0,
+} from './pcc-concrete-release-appendix0.mjs';
