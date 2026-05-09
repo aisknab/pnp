@@ -72,6 +72,11 @@ export const PUBLIC_ENTRY_EXPORT_KEYS0 = Object.freeze([
   'makeFinalPNPReleaseGate0',
   'makeFinalPNPReleaseGateConfig0',
   'writeFinalPNPReleaseGateFiles0',
+  'CheckFinalPNPProofReport0',
+  'FINAL_PNP_PROOF_REPORT_PHASES0',
+  'makeFinalPNPProofReport0',
+  'makeFinalPNPProofReportConfig0',
+  'writeFinalPNPProofReportFiles0',
 ].sort());
 
 export const PUBLIC_PACKAGE_EXPORTS0 = Object.freeze({
@@ -88,6 +93,7 @@ export const PUBLIC_PACKAGE_EXPORTS0 = Object.freeze({
   './concrete-final-acceptance-replay0': './pcc-final-acceptance-replay0.mjs',
   './final-pnp-certificate0': './pcc-final-pnp-certificate0.mjs',
   './final-pnp-release-gate0': './pcc-final-pnp-release-gate0.mjs',
+  './final-pnp-proof-report0': './pcc-final-proof-report0.mjs',
 });
 
 export const PUBLIC_PACKAGE_BIN0 = Object.freeze({
@@ -142,6 +148,8 @@ export const PUBLIC_PACKAGE_SCRIPT_TARGETS0 = Object.freeze({
   'release:audit:final-pnp-certificate:full': 'node ./bin/write-final-pnp-certificate0.mjs --full',
   'release:audit:final-pnp-release-gate': 'node ./bin/write-final-pnp-release-gate0.mjs',
   'release:audit:final-pnp-release-gate:full': 'node ./bin/write-final-pnp-release-gate0.mjs --full',
+  'release:audit:final-pnp-proof-report': 'node ./bin/write-final-pnp-proof-report0.mjs',
+  'release:audit:final-pnp-proof-report:full': 'node ./bin/write-final-pnp-proof-report0.mjs --full',
 });
 
 export const PUBLIC_PACKAGE_SCRIPT_KEYS0 = Object.freeze(Object.keys(PUBLIC_PACKAGE_SCRIPT_TARGETS0).sort());

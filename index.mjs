@@ -92,3 +92,11 @@ export {
   makeFinalPNPReleaseGateConfig0,
   writeFinalPNPReleaseGateFiles0,
 } from './pcc-final-pnp-release-gate0.mjs';
+
+export {
+  CheckFinalPNPProofReport0,
+  FINAL_PNP_PROOF_REPORT_PHASES0,
+  makeFinalPNPProofReport0,
+  makeFinalPNPProofReportConfig0,
+  writeFinalPNPProofReportFiles0,
+} from './pcc-final-proof-report0.mjs';

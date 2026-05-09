@@ -64,6 +64,11 @@ const EXPECTED_INDEX_EXPORTS0 = Object.freeze([
   'makeFinalPNPReleaseGate0',
   'makeFinalPNPReleaseGateConfig0',
   'writeFinalPNPReleaseGateFiles0',
+  'CheckFinalPNPProofReport0',
+  'FINAL_PNP_PROOF_REPORT_PHASES0',
+  'makeFinalPNPProofReport0',
+  'makeFinalPNPProofReportConfig0',
+  'writeFinalPNPProofReportFiles0',
 ].sort());
 
 const EXPECTED_PACKAGE_EXPORTS0 = Object.freeze({
@@ -80,6 +85,7 @@ const EXPECTED_PACKAGE_EXPORTS0 = Object.freeze({
   './concrete-final-acceptance-replay0': './pcc-final-acceptance-replay0.mjs',
   './final-pnp-certificate0': './pcc-final-pnp-certificate0.mjs',
   './final-pnp-release-gate0': './pcc-final-pnp-release-gate0.mjs',
+  './final-pnp-proof-report0': './pcc-final-proof-report0.mjs',
 });
 
 const EXPECTED_BIN_EXPORTS0 = Object.freeze({
@@ -132,6 +138,8 @@ const REQUIRED_PUBLIC_SCRIPTS0 = Object.freeze([
   'release:audit:final-pnp-certificate:full',
   'release:audit:final-pnp-release-gate',
   'release:audit:final-pnp-release-gate:full',
+  'release:audit:final-pnp-proof-report',
+  'release:audit:final-pnp-proof-report:full',
 ]);
 
 test('index.mjs exports exactly the intended public API surface', () => {
@@ -216,6 +224,7 @@ test('package subpath exports expose final-certificate gates', async () => {
   const concreteFinalAcceptanceReplay = await import('@aisknab/pnp/concrete-final-acceptance-replay0');
   const finalPNPCertificate = await import('@aisknab/pnp/final-pnp-certificate0');
   const finalPNPReleaseGate = await import('@aisknab/pnp/final-pnp-release-gate0');
+  const finalPNPProofReport = await import('@aisknab/pnp/final-pnp-proof-report0');
 
   assert.equal(typeof finalCertificate.CheckMaterializedFinalCertificate0, 'function');
   assert.equal(typeof finalCertificate.makeMaterializedFinalCertificate0, 'function');
@@ -256,4 +265,10 @@ test('package subpath exports expose final-certificate gates', async () => {
   assert.equal(typeof finalPNPReleaseGate.makeFinalPNPReleaseGate0, 'function');
   assert.equal(typeof finalPNPReleaseGate.makeFinalPNPReleaseGateConfig0, 'function');
   assert.equal(typeof finalPNPReleaseGate.writeFinalPNPReleaseGateFiles0, 'function');
+
+  assert.equal(typeof finalPNPProofReport.CheckFinalPNPProofReport0, 'function');
+  assert.equal(Array.isArray(finalPNPProofReport.FINAL_PNP_PROOF_REPORT_PHASES0), true);
+  assert.equal(typeof finalPNPProofReport.makeFinalPNPProofReport0, 'function');
+  assert.equal(typeof finalPNPProofReport.makeFinalPNPProofReportConfig0, 'function');
+  assert.equal(typeof finalPNPProofReport.writeFinalPNPProofReportFiles0, 'function');
 });
