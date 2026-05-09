@@ -157,6 +157,7 @@ export const RELEASE_AUDIT_REQUIRED_MODULES0 = Object.freeze([
   'bin/write-final-pnp-certificate0.mjs',
   'pcc-final-pnp-release-gate0.mjs',
   'bin/write-final-pnp-release-gate0.mjs',
+  'pcc-final-proof-report0.mjs',
 ]);
 
 export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
@@ -262,6 +263,7 @@ export const RELEASE_AUDIT_REQUIRED_TESTS0 = Object.freeze([
   'pcc-final-acceptance-replay0.test.mjs',
   'pcc-final-pnp-certificate0.test.mjs',
   'pcc-final-pnp-release-gate0.test.mjs',
+  'pcc-final-proof-report0.test.mjs',
 ]);    
 
 export const RELEASE_AUDIT_REQUIRED_EXPORTS0 = Object.freeze([
