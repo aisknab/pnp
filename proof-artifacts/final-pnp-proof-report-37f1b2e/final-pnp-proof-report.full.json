@@ -1,0 +1,368 @@
+{
+  "tag": "accept",
+  "kind": "accept",
+  "checker": "CheckFinalPNPProofReport0",
+  "version": 0,
+  "NF": {
+    "kind": "FinalPNPProofReport0NF",
+    "checker": "CheckFinalPNPProofReport0",
+    "version": 0,
+    "phaseOrder": [
+      "CheckFinalPNPProofReportInput0",
+      "CheckFinalPNPReleaseGate0",
+      "CheckFinalPNPProofReportRecord0",
+      "CheckFinalPNPProofReportContract0",
+      "CheckFinalPNPProofReportJson0",
+      "CheckFinalPNPProofReportLinkage0",
+      "EmitFinalPNPProofReport0"
+    ],
+    "materializedPath": true,
+    "syntheticRunAll": false,
+    "finalPNPProofReportAccepted": true,
+    "status": "accepted",
+    "theorem": {
+      "statement": "P = NP",
+      "antecedent": "CheckPCCPackexp(GeneratePCCPack())=accept",
+      "consequent": "P = NP",
+      "conditional": true
+    },
+    "claimBoundary": "accepted-final-pnp-release-gate",
+    "noClaimBeforeAccept": true,
+    "finalPNPReleaseGateAccepted": true,
+    "finalPNPCertificateAccepted": true,
+    "releaseAuditAccepted": true,
+    "finalAcceptanceReplayClosed": true,
+    "verdict": "accept",
+    "generator": "GeneratePCCPack",
+    "checkerName": "CheckPCCPackexp0",
+    "generatorIsGeneratePCCPack": true,
+    "checkPCCPackexpAccepted": true,
+    "checkAcceptRunAccepted": true,
+    "replayAccepted": true,
+    "finalVerdictAccepted": true,
+    "publicConclusionEmitted": true,
+    "publicConclusionAntecedent": "CheckPCCPackexp(GeneratePCCPack())=accept",
+    "publicConclusionConsequent": "P = NP",
+    "publicConclusionConditional": true,
+    "checkPCCPackexpGeneratedPackageImplication": true,
+    "checkPCCPackexpConcreteCoverageComplete": true,
+    "checkPCCPackexpPCCPackLinkageComplete": true,
+    "finalPNPReleaseGateEnvelopeDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "1eac3a19668ebd363743b426a0c32ab603a565ab4c01e47f8474c5b68f41a2e6"
+    },
+    "finalPNPReleaseGateRecordDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "57e9954f16632cd5d76c1d0a89d75faea35b7bb952bad25aba220fb5a066486a"
+    },
+    "releaseAuditDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "f0a62203ad3f5cdfbafdaab43374e4cac853016d6d9cb992d4252605a0ae52c0"
+    },
+    "certificateDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "d075f970a96deb4388a2b5c57dc4474a933315981d14f9fc241a827dd6a82e3c"
+    },
+    "acceptRunDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "26a4328fb6faa9b3321c73cc2b1ba9c7cd1f6af226ea44d444c9d7d3c0af98f8"
+    },
+    "pccPackDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "a1ba992d1773721b175f10a5ef559cefa54642dd88a0175e37fe25139ca1e633"
+    },
+    "acceptanceTranscriptDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "9e0cf6766ecc56f062f9a3252ca54ebb4e3704852a1b4b4dcfaeea41dd0513f7"
+    },
+    "finalVerdictRecordDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "645a065d8935e59b89ae346e33a7c50f637655a711e4f2ea88b2e9c4dde4eccd"
+    },
+    "checkPCCPackexpRecordDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "8b8cde59b074b4837d9320ba60e6c84937cdac9eefeb95b1783c4ffbd2b0c98b"
+    },
+    "publicTheoremStatement": "P = NP",
+    "publicConclusionStatement": "CheckPCCPackexp(GeneratePCCPack())=accept => P = NP",
+    "reportDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "f5c3c6c3adedfd1176794ae7d34c4f5f5596193fb0760c885198755da7c51472"
+    },
+    "linkageDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "55d4499a85250cb3c7aee93cea6dc55e604ba7a8df151181de7167f932234d44"
+    }
+  },
+  "Digest": {
+    "alg": "SHA256",
+    "bytes": "canonical-json-v0",
+    "hex": "4353a9da06466bcbb7d1ae4a0927fc6f0cc1bdc19c01aeb35e2e5866d17fac29"
+  },
+  "Ledger": [
+    {
+      "phase": "config",
+      "status": "pass",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "3f8748dd6071e6f83ecc4d93325cc131cf576352f7e63d821a177364bcd5e2ba"
+      }
+    },
+    {
+      "phase": "CheckFinalPNPProofReportInput0",
+      "status": "pass",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "4968007e531b25b74ab73632a5193e73b1f62e8465de2a450bd7f37c1697d2bc"
+      }
+    },
+    {
+      "phase": "CheckFinalPNPReleaseGate0",
+      "status": "pass",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "57e9954f16632cd5d76c1d0a89d75faea35b7bb952bad25aba220fb5a066486a"
+      }
+    },
+    {
+      "phase": "CheckFinalPNPReleaseGateRecord",
+      "status": "pass",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "4fa9876d4707794ed3952fb6f82045463ea714d5e252e22fd12b1838c0020fb3"
+      }
+    },
+    {
+      "phase": "CheckFinalPNPProofReportRecord0",
+      "status": "pass",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "24c6c73c71d130e9ea8ba1f7f775fc69ae6ca131312665cc4d243c39fdc23f59"
+      }
+    },
+    {
+      "phase": "CheckFinalPNPProofReportContract0",
+      "status": "pass",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "3bf0273c82e420b0e612fe0defe25515ca7d9094b025b9aa5cdd932f09a834c7"
+      }
+    },
+    {
+      "phase": "CheckFinalPNPProofReportJson0",
+      "status": "pass",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "45af1a6a03c689f095133489ba1990a2158c31aa77c3bc5dc8f0f759488083e4"
+      }
+    },
+    {
+      "phase": "CheckFinalPNPProofReportLinkage0",
+      "status": "pass",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "55d4499a85250cb3c7aee93cea6dc55e604ba7a8df151181de7167f932234d44"
+      }
+    }
+  ],
+  "nf": {
+    "kind": "FinalPNPProofReport0NF",
+    "checker": "CheckFinalPNPProofReport0",
+    "version": 0,
+    "phaseOrder": [
+      "CheckFinalPNPProofReportInput0",
+      "CheckFinalPNPReleaseGate0",
+      "CheckFinalPNPProofReportRecord0",
+      "CheckFinalPNPProofReportContract0",
+      "CheckFinalPNPProofReportJson0",
+      "CheckFinalPNPProofReportLinkage0",
+      "EmitFinalPNPProofReport0"
+    ],
+    "materializedPath": true,
+    "syntheticRunAll": false,
+    "finalPNPProofReportAccepted": true,
+    "status": "accepted",
+    "theorem": {
+      "statement": "P = NP",
+      "antecedent": "CheckPCCPackexp(GeneratePCCPack())=accept",
+      "consequent": "P = NP",
+      "conditional": true
+    },
+    "claimBoundary": "accepted-final-pnp-release-gate",
+    "noClaimBeforeAccept": true,
+    "finalPNPReleaseGateAccepted": true,
+    "finalPNPCertificateAccepted": true,
+    "releaseAuditAccepted": true,
+    "finalAcceptanceReplayClosed": true,
+    "verdict": "accept",
+    "generator": "GeneratePCCPack",
+    "checkerName": "CheckPCCPackexp0",
+    "generatorIsGeneratePCCPack": true,
+    "checkPCCPackexpAccepted": true,
+    "checkAcceptRunAccepted": true,
+    "replayAccepted": true,
+    "finalVerdictAccepted": true,
+    "publicConclusionEmitted": true,
+    "publicConclusionAntecedent": "CheckPCCPackexp(GeneratePCCPack())=accept",
+    "publicConclusionConsequent": "P = NP",
+    "publicConclusionConditional": true,
+    "checkPCCPackexpGeneratedPackageImplication": true,
+    "checkPCCPackexpConcreteCoverageComplete": true,
+    "checkPCCPackexpPCCPackLinkageComplete": true,
+    "finalPNPReleaseGateEnvelopeDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "1eac3a19668ebd363743b426a0c32ab603a565ab4c01e47f8474c5b68f41a2e6"
+    },
+    "finalPNPReleaseGateRecordDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "57e9954f16632cd5d76c1d0a89d75faea35b7bb952bad25aba220fb5a066486a"
+    },
+    "releaseAuditDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "f0a62203ad3f5cdfbafdaab43374e4cac853016d6d9cb992d4252605a0ae52c0"
+    },
+    "certificateDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "d075f970a96deb4388a2b5c57dc4474a933315981d14f9fc241a827dd6a82e3c"
+    },
+    "acceptRunDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "26a4328fb6faa9b3321c73cc2b1ba9c7cd1f6af226ea44d444c9d7d3c0af98f8"
+    },
+    "pccPackDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "a1ba992d1773721b175f10a5ef559cefa54642dd88a0175e37fe25139ca1e633"
+    },
+    "acceptanceTranscriptDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "9e0cf6766ecc56f062f9a3252ca54ebb4e3704852a1b4b4dcfaeea41dd0513f7"
+    },
+    "finalVerdictRecordDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "645a065d8935e59b89ae346e33a7c50f637655a711e4f2ea88b2e9c4dde4eccd"
+    },
+    "checkPCCPackexpRecordDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "8b8cde59b074b4837d9320ba60e6c84937cdac9eefeb95b1783c4ffbd2b0c98b"
+    },
+    "publicTheoremStatement": "P = NP",
+    "publicConclusionStatement": "CheckPCCPackexp(GeneratePCCPack())=accept => P = NP",
+    "reportDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "f5c3c6c3adedfd1176794ae7d34c4f5f5596193fb0760c885198755da7c51472"
+    },
+    "linkageDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "55d4499a85250cb3c7aee93cea6dc55e604ba7a8df151181de7167f932234d44"
+    }
+  },
+  "digest": {
+    "alg": "SHA256",
+    "bytes": "canonical-json-v0",
+    "hex": "4353a9da06466bcbb7d1ae4a0927fc6f0cc1bdc19c01aeb35e2e5866d17fac29"
+  },
+  "ledger": [
+    {
+      "phase": "config",
+      "status": "pass",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "3f8748dd6071e6f83ecc4d93325cc131cf576352f7e63d821a177364bcd5e2ba"
+      }
+    },
+    {
+      "phase": "CheckFinalPNPProofReportInput0",
+      "status": "pass",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "4968007e531b25b74ab73632a5193e73b1f62e8465de2a450bd7f37c1697d2bc"
+      }
+    },
+    {
+      "phase": "CheckFinalPNPReleaseGate0",
+      "status": "pass",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "57e9954f16632cd5d76c1d0a89d75faea35b7bb952bad25aba220fb5a066486a"
+      }
+    },
+    {
+      "phase": "CheckFinalPNPReleaseGateRecord",
+      "status": "pass",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "4fa9876d4707794ed3952fb6f82045463ea714d5e252e22fd12b1838c0020fb3"
+      }
+    },
+    {
+      "phase": "CheckFinalPNPProofReportRecord0",
+      "status": "pass",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "24c6c73c71d130e9ea8ba1f7f775fc69ae6ca131312665cc4d243c39fdc23f59"
+      }
+    },
+    {
+      "phase": "CheckFinalPNPProofReportContract0",
+      "status": "pass",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "3bf0273c82e420b0e612fe0defe25515ca7d9094b025b9aa5cdd932f09a834c7"
+      }
+    },
+    {
+      "phase": "CheckFinalPNPProofReportJson0",
+      "status": "pass",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "45af1a6a03c689f095133489ba1990a2158c31aa77c3bc5dc8f0f759488083e4"
+      }
+    },
+    {
+      "phase": "CheckFinalPNPProofReportLinkage0",
+      "status": "pass",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "55d4499a85250cb3c7aee93cea6dc55e604ba7a8df151181de7167f932234d44"
+      }
+    }
+  ]
+}
