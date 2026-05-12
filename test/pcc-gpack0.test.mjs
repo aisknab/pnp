@@ -389,3 +389,68 @@ test('CheckGPack0 and CheckRowFamG0 bind locked NAND derivations to proof refs',
     assert.equal(typeof out.Witness.reason, 'string');
   });
 });
+
+
+test('CheckGPack0 resolves locked NAND derivation proof refs to typed non-opaque acyclic proof nodes', async (t) => {
+  await t.test('rejects missing PiG proofNodes', async () => {
+    const gpack = makeSyntheticGPack0();
+
+    delete gpack.PiG.proofNodes;
+
+    const out = await CheckGPack0(gpack);
+
+    assert.equal(out.tag, 'reject');
+    assert.equal(out.checker, 'CheckGPack0');
+    assert.equal(out.Coord, 'CheckGPack0.derivationProofNodes');
+    assert.deepEqual(out.Path, ['PiG', 'proofNodes']);
+    assert.equal(out.Witness.reason, 'PiG must include proofNodes');
+  });
+
+  await t.test('rejects wrong ThresholdCert proof-node rule', async () => {
+    const gpack = makeSyntheticGPack0();
+    const node = gpack.PiG.proofNodes.find((entry) => entry.id === 'G.ThresholdCert.proof');
+
+    node.rule = 'WrongRule0';
+
+    const out = await CheckGPack0(gpack);
+
+    assert.equal(out.tag, 'reject');
+    assert.equal(out.checker, 'CheckGPack0');
+    assert.equal(out.Coord, 'CheckGPack0.derivationProofNodes');
+    assert.deepEqual(out.Path, ['PiG', 'proofNodes', 'G.ThresholdCert.proof', 'rule']);
+    assert.equal(out.Witness.reason, 'G proof node field mismatch');
+  });
+
+  await t.test('rejects opaque proof material inside a G proof node', async () => {
+    const gpack = makeSyntheticGPack0();
+    const node = gpack.PiG.proofNodes.find((entry) => entry.id === 'G.BaselineCert.proof');
+
+    node.proofBlob = {
+      bytes: 'opaque',
+    };
+
+    const out = await CheckGPack0(gpack);
+
+    assert.equal(out.tag, 'reject');
+    assert.equal(out.checker, 'CheckGPack0');
+    assert.equal(out.Coord, 'CheckGPack0.derivationProofNodes');
+    assert.deepEqual(out.Path, ['PiG', 'proofNodes', 'G.BaselineCert.proof', 'proofBlob']);
+    assert.equal(out.Witness.reason, 'G proof node must not contain opaque proof material');
+  });
+
+  await t.test('rejects cyclic G proof-node premises', async () => {
+    const gpack = makeSyntheticGPack0();
+    const baseline = gpack.PiG.proofNodes.find((entry) => entry.id === 'G.BaselineCert.proof');
+
+    baseline.premises = [
+      'G.ThresholdCert.proof',
+    ];
+
+    const out = await CheckGPack0(gpack);
+
+    assert.equal(out.tag, 'reject');
+    assert.equal(out.checker, 'CheckGPack0');
+    assert.equal(out.Coord, 'CheckGPack0.derivationProofNodes');
+    assert.equal(typeof out.Witness.reason, 'string');
+  });
+});

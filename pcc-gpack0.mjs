@@ -429,6 +429,12 @@ export function makeSyntheticGPack0(overrides = {}) {
     PiG: {
       kind: 'PiG0',
       version: CHECKER_VERSION,
+      proofOrder: [
+        'G.BaselineCert.proof',
+        'G.TraceCert.proof',
+        'G.ThresholdCert.proof',
+      ],
+      proofNodes: makeGProofNodes0(preNAND, baseline),
       note: 'synthetic locked NAND proof marker',
     },
   };
@@ -499,6 +505,7 @@ export async function CheckGPack0(gpack) {
     ['baseline', `${checker}.baseline`, () => validateBaselineCertHardened0(gpack)],
     ['trace', `${checker}.trace`, () => validateTraceCertHardened0(gpack)],
     ['threshold', `${checker}.threshold`, () => validateThresholdCertHardened0(gpack)],
+    ['derivationProofNodes', `${checker}.derivationProofNodes`, () => validateGDerivationProofNodes0(gpack)],
     ['bounds', `${checker}.bounds`, () => validateBoundsCert0(gpack.BoundsCert)],
     ['noHiddenMinMetadata', `${checker}.noHiddenMinMetadata`, () => validateNoMinCert0(gpack.NoMinCert)],
     ['noHiddenMin', `${checker}.noHiddenMin`, () => validateNoHiddenExecutableMin0(gpack, ['GPack0'])],
@@ -1914,6 +1921,569 @@ function makeGProofRef0(rowKind) {
     id: `G.${rowKind}.proof`,
   };
 }
+
+function makeGProofNodes0(preNAND, baseline) {
+  const baselineDerivation = makeBaselineDerivation0(preNAND, baseline);
+  const traceDerivation = makeTraceDerivation0(preNAND);
+  const thresholdDerivation = makeThresholdDerivation0(preNAND, baseline);
+
+  return [
+    {
+      kind: 'KProofNode0',
+      id: 'G.BaselineCert.proof',
+      refKind: 'KPrimitive',
+      rowKind: 'BaselineCert',
+      rule: 'BaselineDistinctDirectWire0',
+      mode: 'full',
+      premises: [],
+      conclusion: {
+        kind: 'GProofConclusion0',
+        rowKind: 'BaselineCert',
+        theorem: 'BaselineDistinct',
+        accepted: true,
+      },
+      payload: {
+        derivationKind: 'BaselineDerivation0',
+        baseline: baselineDerivation.baseline,
+        totalFunctions: baselineDerivation.totalFunctions,
+        directWireOutputConvention: baselineDerivation.directWireOutputConvention,
+        pairwiseDistinctNonconstantNonprojection:
+          baselineDerivation.pairwiseDistinctNonconstantNonprojection,
+        lowerBoundRuleApplied: baselineDerivation.lowerBoundRuleApplied,
+        gateOutputInjection: baselineDerivation.gateOutputInjection,
+        proofRef: baselineDerivation.proofRef,
+      },
+      boundsRef: {
+        kind: 'BoundsRef0',
+        id: 'G.BaselineCert.bounds',
+        finite: true,
+        polynomial: true,
+      },
+    },
+    {
+      kind: 'KProofNode0',
+      id: 'G.TraceCert.proof',
+      refKind: 'KPrimitive',
+      rowKind: 'TraceCert',
+      rule: 'NANDTraceCoherence0',
+      mode: 'full',
+      premises: [],
+      conclusion: {
+        kind: 'GProofConclusion0',
+        rowKind: 'TraceCert',
+        theorem: 'TraceCoherence',
+        accepted: true,
+      },
+      payload: {
+        derivationKind: 'TraceDerivation0',
+        gateTraceCount: traceDerivation.gateTraceCount,
+        sourceOccurrenceCount: traceDerivation.sourceOccurrenceCount,
+        traceEquivalence: traceDerivation.traceEquivalence,
+        topologicalInduction: traceDerivation.topologicalInduction,
+        traceCoherent: traceDerivation.traceCoherent,
+        allTraceMacrosAccepted: traceDerivation.allTraceMacrosAccepted,
+        proofRef: traceDerivation.proofRef,
+      },
+      boundsRef: {
+        kind: 'BoundsRef0',
+        id: 'G.TraceCert.bounds',
+        finite: true,
+        polynomial: true,
+      },
+    },
+    {
+      kind: 'KProofNode0',
+      id: 'G.ThresholdCert.proof',
+      refKind: 'KPrimitive',
+      rowKind: 'ThresholdCert',
+      rule: 'LockedNANDThreshold0',
+      mode: 'full',
+      premises: [
+        'G.BaselineCert.proof',
+        'G.TraceCert.proof',
+      ],
+      conclusion: {
+        kind: 'GProofConclusion0',
+        rowKind: 'ThresholdCert',
+        theorem: 'LockedNANDThreshold',
+        accepted: true,
+      },
+      payload: {
+        derivationKind: 'ThresholdDerivation0',
+        baseline: thresholdDerivation.baseline,
+        fullWordSize: thresholdDerivation.fullWordSize,
+        residualSlackMax: thresholdDerivation.residualSlackMax,
+        lockedThreshold: thresholdDerivation.lockedThreshold,
+        satIffMinAboveBaseline: thresholdDerivation.satIffMinAboveBaseline,
+        unsatMinEqualsBaseline: thresholdDerivation.unsatMinEqualsBaseline,
+        finalOutputGates: thresholdDerivation.finalOutputGates,
+        noHiddenMinimization: thresholdDerivation.noHiddenMinimization,
+        proofRef: thresholdDerivation.proofRef,
+      },
+      boundsRef: {
+        kind: 'BoundsRef0',
+        id: 'G.ThresholdCert.bounds',
+        finite: true,
+        polynomial: true,
+      },
+    },
+  ];
+}
+
+
+function expectedGProofNodeSpec0(rowKind) {
+  if (rowKind === 'BaselineCert') {
+    return {
+      id: 'G.BaselineCert.proof',
+      rule: 'BaselineDistinctDirectWire0',
+      theorem: 'BaselineDistinct',
+      premises: [],
+    };
+  }
+
+  if (rowKind === 'TraceCert') {
+    return {
+      id: 'G.TraceCert.proof',
+      rule: 'NANDTraceCoherence0',
+      theorem: 'TraceCoherence',
+      premises: [],
+    };
+  }
+
+  if (rowKind === 'ThresholdCert') {
+    return {
+      id: 'G.ThresholdCert.proof',
+      rule: 'LockedNANDThreshold0',
+      theorem: 'LockedNANDThreshold',
+      premises: [
+        'G.BaselineCert.proof',
+        'G.TraceCert.proof',
+      ],
+    };
+  }
+
+  return null;
+}
+
+function validateGDerivationProofNodes0(gpack) {
+  const piG = getPiG0(gpack);
+
+  if (!isPlainObject(piG)) {
+    return validationReject0(['PiG'], 'GPack must expose PiG for derivation proof-node checking', {
+      actual: typeof piG,
+    });
+  }
+
+  const expectedIds = [
+    'G.BaselineCert.proof',
+    'G.TraceCert.proof',
+    'G.ThresholdCert.proof',
+  ];
+
+  if (!Array.isArray(piG.proofOrder)) {
+    return validationReject0(['PiG', 'proofOrder'], 'PiG must include proofOrder', {
+      actual: typeof piG.proofOrder,
+    });
+  }
+
+  for (let index = 0; index < expectedIds.length; index += 1) {
+    if (piG.proofOrder[index] !== expectedIds[index]) {
+      return validationReject0(['PiG', 'proofOrder', index], 'PiG proofOrder mismatch', {
+        expected: expectedIds[index],
+        actual: piG.proofOrder[index],
+      });
+    }
+  }
+
+  if (piG.proofOrder.length !== expectedIds.length) {
+    return validationReject0(['PiG', 'proofOrder'], 'PiG proofOrder must contain exactly the G derivation proof nodes', {
+      expected: expectedIds.length,
+      actual: piG.proofOrder.length,
+    });
+  }
+
+  if (!Array.isArray(piG.proofNodes)) {
+    return validationReject0(['PiG', 'proofNodes'], 'PiG must include proofNodes', {
+      actual: typeof piG.proofNodes,
+    });
+  }
+
+  const nodeById = new Map();
+
+  for (let index = 0; index < piG.proofNodes.length; index += 1) {
+    const node = piG.proofNodes[index];
+
+    if (!isPlainObject(node)) {
+      return validationReject0(['PiG', 'proofNodes', index], 'PiG proof node must be an object', {
+        actual: typeof node,
+      });
+    }
+
+    if (typeof node.id !== 'string' || node.id.length === 0) {
+      return validationReject0(['PiG', 'proofNodes', index, 'id'], 'PiG proof node id must be a non-empty string', {
+        actual: node.id,
+      });
+    }
+
+    if (nodeById.has(node.id)) {
+      return validationReject0(['PiG', 'proofNodes', index, 'id'], 'PiG proof node ids must be unique', {
+        id: node.id,
+      });
+    }
+
+    nodeById.set(node.id, node);
+  }
+
+  const certRows = [
+    ['BaselineCert', gpack.BaselineCert],
+    ['TraceCert', gpack.TraceCert],
+    ['ThresholdCert', gpack.ThresholdCert],
+  ];
+
+  for (const [rowKind, cert] of certRows) {
+    const ref = cert?.derivation?.proofRef;
+    const refCheck = validateGDerivationProofRef0(
+      ref,
+      ['GPack', rowKind, 'derivation', 'proofRef'],
+      rowKind,
+    );
+
+    if (!refCheck.ok) {
+      return refCheck;
+    }
+
+    const node = nodeById.get(ref.id);
+
+    if (!isPlainObject(node)) {
+      return validationReject0(['PiG', 'proofNodes', ref.id], 'G derivation proofRef must resolve to a PiG proof node', {
+        id: ref.id,
+      });
+    }
+
+    const nodeCheck = validateGProofNode0(
+      node,
+      ['PiG', 'proofNodes', ref.id],
+      rowKind,
+      cert,
+    );
+
+    if (!nodeCheck.ok) {
+      return nodeCheck;
+    }
+  }
+
+  const acyclic = validateGProofNodeAcyclic0(nodeById, expectedIds);
+
+  if (!acyclic.ok) {
+    return acyclic;
+  }
+
+  return validationAccept0({
+    kind: 'GDerivationProofNodes0NF',
+    proofNodeCount: expectedIds.length,
+    proofOrder: expectedIds,
+  });
+}
+
+function validateGProofNode0(node, path, rowKind, cert) {
+  const spec = expectedGProofNodeSpec0(rowKind);
+
+  if (!isPlainObject(spec)) {
+    return validationReject0(path, 'unknown G proof node row kind', {
+      rowKind,
+    });
+  }
+
+  const expected = {
+    kind: 'KProofNode0',
+    id: spec.id,
+    refKind: 'KPrimitive',
+    rowKind,
+    rule: spec.rule,
+    mode: 'full',
+  };
+
+  for (const [field, expectedValue] of Object.entries(expected)) {
+    if (node[field] !== expectedValue) {
+      return validationReject0([...path, field], 'G proof node field mismatch', {
+        expected: expectedValue,
+        actual: node[field],
+      });
+    }
+  }
+
+  if (!Array.isArray(node.premises)) {
+    return validationReject0([...path, 'premises'], 'G proof node premises must be an array', {
+      actual: typeof node.premises,
+    });
+  }
+
+  if (node.premises.length !== spec.premises.length) {
+    return validationReject0([...path, 'premises'], 'G proof node premise count mismatch', {
+      expected: spec.premises.length,
+      actual: node.premises.length,
+    });
+  }
+
+  for (let index = 0; index < spec.premises.length; index += 1) {
+    if (node.premises[index] !== spec.premises[index]) {
+      return validationReject0([...path, 'premises', index], 'G proof node premise mismatch', {
+        expected: spec.premises[index],
+        actual: node.premises[index],
+      });
+    }
+  }
+
+  if (!isPlainObject(node.conclusion)) {
+    return validationReject0([...path, 'conclusion'], 'G proof node conclusion must be an object', {
+      actual: typeof node.conclusion,
+    });
+  }
+
+  const expectedConclusion = {
+    kind: 'GProofConclusion0',
+    rowKind,
+    theorem: spec.theorem,
+    accepted: true,
+  };
+
+  for (const [field, expectedValue] of Object.entries(expectedConclusion)) {
+    if (node.conclusion[field] !== expectedValue) {
+      return validationReject0([...path, 'conclusion', field], 'G proof node conclusion mismatch', {
+        expected: expectedValue,
+        actual: node.conclusion[field],
+      });
+    }
+  }
+
+  const opaque = validateGProofNodeNoOpaque0(node, path);
+
+  if (!opaque.ok) {
+    return opaque;
+  }
+
+  const bounds = validateGProofNodeBounds0(node.boundsRef, [...path, 'boundsRef'], rowKind);
+
+  if (!bounds.ok) {
+    return bounds;
+  }
+
+  const payload = validateGProofNodePayload0(node.payload, [...path, 'payload'], rowKind, cert);
+
+  if (!payload.ok) {
+    return payload;
+  }
+
+  return validationAccept0({
+    kind: 'GProofNode0NF',
+    rowKind,
+    id: spec.id,
+  });
+}
+
+function validateGProofNodePayload0(payload, path, rowKind, cert) {
+  if (!isPlainObject(payload)) {
+    return validationReject0(path, 'G proof node payload must be an object', {
+      actual: typeof payload,
+    });
+  }
+
+  const derivation = cert?.derivation;
+
+  if (!isPlainObject(derivation)) {
+    return validationReject0(path, 'G proof node payload requires derivation object', {
+      actual: typeof derivation,
+    });
+  }
+
+  if (rowKind === 'BaselineCert') {
+    const expected = {
+      derivationKind: 'BaselineDerivation0',
+      baseline: derivation.baseline,
+      totalFunctions: derivation.totalFunctions,
+      directWireOutputConvention: true,
+      pairwiseDistinctNonconstantNonprojection: true,
+      lowerBoundRuleApplied: true,
+      gateOutputInjection: 'distinct-noninput-outputs-map-to-distinct-NAND-gates',
+    };
+
+    return validateGProofPayloadFields0(payload, path, expected);
+  }
+
+  if (rowKind === 'TraceCert') {
+    const expected = {
+      derivationKind: 'TraceDerivation0',
+      gateTraceCount: derivation.gateTraceCount,
+      sourceOccurrenceCount: derivation.sourceOccurrenceCount,
+      traceEquivalence:
+        'all distinguished checks one iff trace slots encode a valid NAND evaluation',
+      topologicalInduction: true,
+      traceCoherent: true,
+      allTraceMacrosAccepted: true,
+    };
+
+    return validateGProofPayloadFields0(payload, path, expected);
+  }
+
+  if (rowKind === 'ThresholdCert') {
+    const expected = {
+      derivationKind: 'ThresholdDerivation0',
+      baseline: derivation.baseline,
+      fullWordSize: derivation.fullWordSize,
+      residualSlackMax: 4,
+      lockedThreshold: true,
+      satIffMinAboveBaseline: true,
+      unsatMinEqualsBaseline: true,
+      finalOutputGates: 4,
+      noHiddenMinimization: true,
+    };
+
+    return validateGProofPayloadFields0(payload, path, expected);
+  }
+
+  return validationReject0(path, 'unknown G proof node payload row kind', {
+    rowKind,
+  });
+}
+
+function validateGProofPayloadFields0(payload, path, expected) {
+  for (const [field, expectedValue] of Object.entries(expected)) {
+    if (payload[field] !== expectedValue) {
+      return validationReject0([...path, field], 'G proof node payload mismatch', {
+        expected: expectedValue,
+        actual: payload[field],
+      });
+    }
+  }
+
+  if (!isPlainObject(payload.proofRef)) {
+    return validationReject0([...path, 'proofRef'], 'G proof node payload must carry proofRef', {
+      actual: typeof payload.proofRef,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GProofPayload0NF',
+  });
+}
+
+function validateGProofNodeNoOpaque0(node, path) {
+  if (node.opaque === true) {
+    return validationReject0([...path, 'opaque'], 'G proof node must not be opaque', {
+      actual: node.opaque,
+    });
+  }
+
+  for (const field of ['proofBlob', 'opaqueBytes', 'bytes']) {
+    if (Object.prototype.hasOwnProperty.call(node, field)) {
+      return validationReject0([...path, field], 'G proof node must not contain opaque proof material', {
+        field,
+      });
+    }
+  }
+
+  return validationAccept0({
+    kind: 'GProofNodeNoOpaque0NF',
+  });
+}
+
+function validateGProofNodeBounds0(boundsRef, path, rowKind) {
+  if (!isPlainObject(boundsRef)) {
+    return validationReject0(path, 'G proof node boundsRef must be an object', {
+      actual: typeof boundsRef,
+    });
+  }
+
+  const expectedId = `G.${rowKind}.bounds`;
+
+  if (
+    boundsRef.kind !== 'BoundsRef0' ||
+    boundsRef.id !== expectedId ||
+    boundsRef.finite !== true ||
+    boundsRef.polynomial !== true
+  ) {
+    return validationReject0(path, 'G proof node boundsRef mismatch', {
+      expected: {
+        kind: 'BoundsRef0',
+        id: expectedId,
+        finite: true,
+        polynomial: true,
+      },
+      actual: boundsRef,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GProofNodeBounds0NF',
+    id: expectedId,
+  });
+}
+
+function validateGProofNodeAcyclic0(nodeById, requiredIds) {
+  const visiting = new Set();
+  const visited = new Set();
+
+  function visit(id, stack) {
+    if (visiting.has(id)) {
+      return validationReject0(['PiG', 'proofNodes', id], 'G proof nodes must be acyclic', {
+        cycle: [...stack, id],
+      });
+    }
+
+    if (visited.has(id)) {
+      return validationAccept0({
+        kind: 'GProofNodeAcyclicStep0NF',
+      });
+    }
+
+    const node = nodeById.get(id);
+
+    if (!isPlainObject(node)) {
+      return validationReject0(['PiG', 'proofNodes', id], 'G proof node premise must resolve', {
+        id,
+      });
+    }
+
+    visiting.add(id);
+
+    for (let index = 0; index < (node.premises ?? []).length; index += 1) {
+      const premise = node.premises[index];
+
+      if (typeof premise !== 'string' || !nodeById.has(premise)) {
+        return validationReject0(['PiG', 'proofNodes', id, 'premises', index], 'G proof node premise must resolve', {
+          premise,
+        });
+      }
+
+      const child = visit(premise, [...stack, id]);
+
+      if (!child.ok) {
+        return child;
+      }
+    }
+
+    visiting.delete(id);
+    visited.add(id);
+
+    return validationAccept0({
+      kind: 'GProofNodeAcyclicStep0NF',
+    });
+  }
+
+  for (const id of requiredIds) {
+    const result = visit(id, []);
+
+    if (!result.ok) {
+      return result;
+    }
+  }
+
+  return validationAccept0({
+    kind: 'GProofNodeAcyclic0NF',
+    proofNodeCount: requiredIds.length,
+  });
+}
+
 
 function validateGDerivationProofRef0(value, path, rowKind) {
   if (!isPlainObject(value)) {
