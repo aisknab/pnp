@@ -273,3 +273,55 @@ test('CheckFinalIntegration0 rejects opaque proof material', async () => {
   assert.deepEqual(out.Path, ['FinalIntegration0', 'PiFinalIntegration', 'proofBlob']);
   assert.equal(out.Witness.reason, 'opaque proof material is not allowed in final integration');
 });
+
+test('CheckFinalIntegration0 binds GPack to GlobalProofDAG locked NAND theorem', async (t) => {
+  await t.test('rejects SATDecision drift from accepted GPack digest', async () => {
+    const integration = makeSyntheticFinalIntegration0();
+
+    integration.SATDecision.LockedWord.gpackDigest = {
+      ...integration.SATDecision.LockedWord.gpackDigest,
+      hex: '0'.repeat(64),
+    };
+
+    const out = await CheckFinalIntegration0(integration);
+
+    assert.equal(out.tag, 'reject');
+    assert.equal(out.checker, 'CheckFinalIntegration0');
+    assert.equal(out.Coord, 'CheckFinalIntegration0.globalGLinkage');
+    assert.deepEqual(out.Path, ['SATDecision', 'LockedWord', 'gpackDigest']);
+    assert.equal(out.Witness.reason, 'FinalIntegration0 must bind SATDecision and FinalMatch to the accepted GPack digest');
+  });
+
+  await t.test('rejects GlobalProofDAG G threshold payload drift', async () => {
+    const integration = makeSyntheticFinalIntegration0();
+    const node = integration.GlobalProofDAG.Nodes.find((entry) => entry.id === 'G.ThresholdCert.proof');
+
+    node.payload = {
+      ...node.payload,
+      residualSlackMax: 5,
+    };
+
+    const out = await CheckFinalIntegration0(integration);
+
+    assert.equal(out.tag, 'reject');
+    assert.equal(out.checker, 'CheckFinalIntegration0');
+    assert.equal(out.Coord, 'CheckFinalIntegration0.GlobalProofDAG');
+    assert.deepEqual(out.Path, ['GlobalProofDAG']);
+    assert.equal(out.Witness.detail.inner.coord, 'CheckGlobalProofDAG0.gLockedNANDProofs');
+  });
+
+  await t.test('rejects missing final SAT-in-P dependency on Package.G.LockedNANDThreshold', async () => {
+    const integration = makeSyntheticFinalIntegration0();
+    const node = integration.GlobalProofDAG.Nodes.find((entry) => entry.id === 'Final.AcceptedPackageImpliesSATinP');
+
+    node.premises = node.premises.filter((premise) => premise !== 'Package.G.LockedNANDThreshold');
+
+    const out = await CheckFinalIntegration0(integration);
+
+    assert.equal(out.tag, 'reject');
+    assert.equal(out.checker, 'CheckFinalIntegration0');
+    assert.equal(out.Coord, 'CheckFinalIntegration0.globalGLinkage');
+    assert.deepEqual(out.Path, ['GlobalProofDAG', 'Nodes', 'Final.AcceptedPackageImpliesSATinP', 'premises']);
+    assert.equal(out.Witness.reason, 'Final SAT-in-P theorem must depend on Package.G.LockedNANDThreshold');
+  });
+});

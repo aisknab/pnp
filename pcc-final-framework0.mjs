@@ -8,6 +8,11 @@ import {
   makeSyntheticGPack0,
 } from './pcc-gpack0.mjs';
 
+import {
+  CheckGlobalProofDAG0,
+  makeSyntheticGlobalProofDAG0,
+} from './pcc-global-proof-dag0.mjs';
+
 const CHECKER_VERSION = 0;
 
 export const FINAL_FRAMEWORK_REQUIRED_FIELDS0 = Object.freeze([
@@ -41,6 +46,7 @@ export const SAT_BOUNDS_REQUIRED_FIELDS0 = Object.freeze([
 
 export const FINAL_INTEGRATION_PHASES0 = Object.freeze([
   'CheckGPack0',
+  'CheckGlobalProofDAG0',
   'CheckFinalFrameworkMatch0',
   'CheckSATDecision0',
   'CheckSATBounds0',
@@ -462,6 +468,7 @@ export function makeSyntheticFinalIntegration0({
     kind: 'FinalIntegration0',
     version: CHECKER_VERSION,
     GPack: gpack,
+    GlobalProofDAG: makeSyntheticGlobalProofDAG0(),
     FinalMatch: makeSyntheticFinalFrameworkMatch0({
       gpack,
     }),
@@ -671,6 +678,7 @@ export async function CheckFinalIntegration0(integration) {
 
   const phases = [
     ['CheckGPack0', `${checker}.GPack`, ['GPack'], await CheckGPack0(integration.GPack)],
+    ['CheckGlobalProofDAG0', `${checker}.GlobalProofDAG`, ['GlobalProofDAG'], await CheckGlobalProofDAG0(integration.GlobalProofDAG)],
     ['CheckFinalFrameworkMatch0', `${checker}.FinalMatch`, ['FinalMatch'], await CheckFinalFrameworkMatch0(integration.FinalMatch)],
     ['CheckSATDecision0', `${checker}.SATDecision`, ['SATDecision'], await CheckSATDecision0(integration.SATDecision)],
     ['CheckSATBounds0', `${checker}.SATBounds`, ['SATBounds'], await CheckSATBounds0(integration.SATBounds)],
@@ -694,6 +702,24 @@ export async function CheckFinalIntegration0(integration) {
         ledger,
       });
     }
+  }
+
+  const globalGLinkage = validateFinalIntegrationGlobalGLinkage0(integration);
+
+  ledger.push({
+    phase: 'globalGLinkage',
+    status: globalGLinkage.ok ? 'pass' : 'fail',
+    digest: digestCanonical0(globalGLinkage.nf ?? globalGLinkage.witness ?? null),
+  });
+
+  if (!globalGLinkage.ok) {
+    return makeRejectRecord({
+      checker,
+      coord: `${checker}.globalGLinkage`,
+      path: globalGLinkage.path,
+      witness: globalGLinkage.witness,
+      ledger,
+    });
   }
 
   const noOpaque = validateNoOpaqueProof0(integration, ['FinalIntegration0']);
@@ -720,6 +746,7 @@ export async function CheckFinalIntegration0(integration) {
     version: CHECKER_VERSION,
     phases: FINAL_INTEGRATION_PHASES0,
     gpackDigest: digestCanonical0(integration.GPack),
+    globalProofDAGDigest: digestCanonical0(integration.GlobalProofDAG),
     finalMatchDigest: digestCanonical0(integration.FinalMatch),
     satDecisionDigest: digestCanonical0(integration.SATDecision),
     satBoundsDigest: digestCanonical0(integration.SATBounds),
@@ -732,6 +759,119 @@ export async function CheckFinalIntegration0(integration) {
     ledger,
   });
 }
+
+function validateFinalIntegrationGlobalGLinkage0(integration) {
+  if (!isPlainObject(integration.GlobalProofDAG)) {
+    return validationReject0(['GlobalProofDAG'], 'FinalIntegration0 must include GlobalProofDAG', {
+      actual: typeof integration.GlobalProofDAG,
+    });
+  }
+
+  const gpackDigest = digestCanonical0(integration.GPack);
+  const expectedGProofId = 'G.ThresholdCert.proof';
+
+  const gProofRef = integration.GPack?.ThresholdCert?.derivation?.proofRef;
+
+  if (
+    !isPlainObject(gProofRef) ||
+    gProofRef.kind !== 'ProofRef0' ||
+    gProofRef.refKind !== 'KPrimitive' ||
+    gProofRef.id !== expectedGProofId
+  ) {
+    return validationReject0(['GPack', 'ThresholdCert', 'derivation', 'proofRef'], 'FinalIntegration0 requires GPack threshold derivation proofRef G.ThresholdCert.proof', {
+      actual: gProofRef,
+    });
+  }
+
+  const nodeById = new Map();
+
+  for (const node of integration.GlobalProofDAG.Nodes ?? []) {
+    if (isPlainObject(node) && typeof node.id === 'string') {
+      nodeById.set(node.id, node);
+    }
+  }
+
+  const thresholdNode = nodeById.get(expectedGProofId);
+
+  if (!isPlainObject(thresholdNode)) {
+    return validationReject0(['GlobalProofDAG', 'Nodes', expectedGProofId], 'GlobalProofDAG must contain G.ThresholdCert.proof', null);
+  }
+
+  const proofRef = thresholdNode.conclusion?.proofRef;
+
+  if (
+    !isPlainObject(proofRef) ||
+    proofRef.kind !== 'ProofRef0' ||
+    proofRef.refKind !== 'KPrimitive' ||
+    proofRef.id !== expectedGProofId
+  ) {
+    return validationReject0(['GlobalProofDAG', 'Nodes', expectedGProofId, 'conclusion', 'proofRef'], 'GlobalProofDAG G threshold proofRef mismatch', {
+      actual: proofRef,
+    });
+  }
+
+  for (const [field, expected] of Object.entries({
+    package: 'G',
+    rule: 'LockedNANDThreshold0',
+    derivationKind: 'ThresholdDerivation0',
+    residualSlackMax: 4,
+    satIffMinAboveBaseline: true,
+    unsatMinEqualsBaseline: true,
+    finalOutputGates: 4,
+    baselineDerivation: 'G.BaselineCert.proof',
+    traceDerivation: 'G.TraceCert.proof',
+    nonOpaque: true,
+  })) {
+    if (thresholdNode.payload?.[field] !== expected) {
+      return validationReject0(['GlobalProofDAG', 'Nodes', expectedGProofId, 'payload', field], 'GlobalProofDAG G threshold payload mismatch', {
+        expected,
+        actual: thresholdNode.payload?.[field],
+      });
+    }
+  }
+
+  const packageNode = nodeById.get('Package.G.LockedNANDThreshold');
+
+  if (!isPlainObject(packageNode) || !Array.isArray(packageNode.premises)) {
+    return validationReject0(['GlobalProofDAG', 'Nodes', 'Package.G.LockedNANDThreshold'], 'GlobalProofDAG must contain Package.G.LockedNANDThreshold', null);
+  }
+
+  if (!packageNode.premises.includes(expectedGProofId)) {
+    return validationReject0(['GlobalProofDAG', 'Nodes', 'Package.G.LockedNANDThreshold', 'premises'], 'Package.G.LockedNANDThreshold must depend on G.ThresholdCert.proof', {
+      actual: packageNode.premises,
+    });
+  }
+
+  const finalNode = nodeById.get('Final.AcceptedPackageImpliesSATinP');
+
+  if (!isPlainObject(finalNode) || !Array.isArray(finalNode.premises) || !finalNode.premises.includes('Package.G.LockedNANDThreshold')) {
+    return validationReject0(['GlobalProofDAG', 'Nodes', 'Final.AcceptedPackageImpliesSATinP', 'premises'], 'Final SAT-in-P theorem must depend on Package.G.LockedNANDThreshold', {
+      actual: finalNode?.premises,
+    });
+  }
+
+  const lockedWordDigest = integration.SATDecision?.LockedWord?.gpackDigest;
+  const finalMatchDigest = integration.FinalMatch?.PG?.gpackDigest;
+
+  for (const [path, actual] of [
+    [['SATDecision', 'LockedWord', 'gpackDigest'], lockedWordDigest],
+    [['FinalMatch', 'PG', 'gpackDigest'], finalMatchDigest],
+  ]) {
+    if (!isPlainObject(actual) || actual.hex !== gpackDigest.hex || actual.alg !== gpackDigest.alg) {
+      return validationReject0(path, 'FinalIntegration0 must bind SATDecision and FinalMatch to the accepted GPack digest', {
+        expected: gpackDigest,
+        actual,
+      });
+    }
+  }
+
+  return validationAccept0({
+    kind: 'FinalIntegrationGlobalGLinkage0NF',
+    gpackDigest,
+    thresholdProofRef: expectedGProofId,
+  });
+}
+
 
 function validateFinalMatchShape0(match) {
   if (!isPlainObject(match)) {
