@@ -32,6 +32,10 @@ import {
   makeSyntheticRowFamFinal0,
 } from './pcc-final0.mjs';
 
+import {
+  makeSyntheticGlobalProofDAG0,
+} from './pcc-global-proof-dag0.mjs';
+
 const CHECKER_VERSION = 0;
 
 const MATERIALIZED_FINAL_FORBIDDEN_MARKERS0 = Object.freeze([
@@ -60,6 +64,25 @@ export function makeMaterializedFinalIntegrationConfig0(overrides = {}) {
   };
 }
 
+function makeMaterializedGlobalProofDAGForFinal0(overrides = {}) {
+  const dag = makeSyntheticGlobalProofDAG0();
+
+  return {
+    ...dag,
+    PiGlobalDAG: {
+      kind: 'PiGlobalDAG0',
+      version: CHECKER_VERSION,
+      materialized: true,
+      externalJson: true,
+      proofStatus: 'materialized-global-proof-dag',
+      note: 'materialized global proof DAG witness',
+      refs: [],
+    },
+    ...overrides,
+  };
+}
+
+
 export function makeMaterializedGPack0(overrides = {}) {
   return makeSyntheticGPack0({
     CohCert: {
@@ -71,8 +94,7 @@ export function makeMaterializedGPack0(overrides = {}) {
       },
     },
     PiG: {
-      kind: 'PiG0',
-      version: CHECKER_VERSION,
+      ...makeSyntheticGPack0().PiG,
       materialized: true,
       externalJson: true,
       proofStatus: 'materialized-locked-nand',
@@ -196,10 +218,12 @@ export function makeMaterializedFinalIntegration0({
   const finalMatch = FinalMatch ?? makeMaterializedFinalFrameworkMatch0(gpack);
   const satDecision = SATDecision ?? makeMaterializedSATDecision0(gpack);
   const satBounds = SATBounds ?? makeMaterializedSATBounds0();
+  const globalProofDAG = makeMaterializedGlobalProofDAGForFinal0();
 
   return makeSyntheticFinalIntegration0({
     gpack,
     overrides: {
+      GlobalProofDAG: globalProofDAG,
       FinalMatch: finalMatch,
       SATDecision: satDecision,
       SATBounds: satBounds,
@@ -230,6 +254,11 @@ export function makeMaterializedFinalIntegration0({
             kind: 'MaterializedRef0',
             target: 'SATBounds',
             digest: digestCanonical0(satBounds),
+          },
+          {
+            kind: 'MaterializedRef0',
+            target: 'GlobalProofDAG',
+            digest: digestCanonical0(globalProofDAG),
           },
         ],
       },

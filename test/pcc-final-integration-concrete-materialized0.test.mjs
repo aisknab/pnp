@@ -43,6 +43,14 @@ test('CheckConcreteMaterializedFinalIntegration0 accepts final integration over 
   assert.equal(out.NF.rowFamFinalUsesFinalTheorem, true);
   assert.equal(out.NF.finalMatchUsesGPack, true);
   assert.equal(out.NF.satDecisionUsesGPack, true);
+  assert.equal(out.NF.globalProofDAGHasGThresholdProofNode, true);
+  assert.equal(out.NF.globalProofDAGPackageGDependsOnGThresholdProof, true);
+  assert.equal(out.NF.globalProofDAGFinalSATinPDependsOnPackageG, true);
+  assert.equal(out.NF.finalIntegrationGlobalGLinkageComplete, true);
+  assert.equal(out.NF.finalTheoremGLinkageComplete, true);
+  assert.equal(out.NF.finalTheoremUsesGlobalGThreshold, true);
+  assert.equal(out.NF.finalTheoremUsesGThresholdProofRef, true);
+  assert.equal(out.NF.finalTheoremUsesFinalIntegrationGlobalGLinkage, true);
 
   assert.match(out.Digest.hex, /^[0-9a-f]{64}$/);
 });
@@ -161,4 +169,53 @@ test('writeConcreteMaterializedFinalIntegrationFiles0 writes replayable JSON art
 
     assert.equal(typeof value, 'object');
   }
+});
+
+
+test('CheckConcreteMaterializedFinalIntegration0 rejects missing final theorem G linkage', async () => {
+  const envelope = await makeConcreteMaterializedFinalIntegration0();
+
+  envelope.FinalIntegrationEnvelope = {
+    ...envelope.FinalIntegrationEnvelope,
+    FinalTheorem: {
+      ...envelope.FinalIntegrationEnvelope.FinalTheorem,
+      AcceptedPackageImpliesSATinP: {
+        ...envelope.FinalIntegrationEnvelope.FinalTheorem.AcceptedPackageImpliesSATinP,
+        usesGlobalGThreshold: false,
+      },
+    },
+  };
+
+  envelope.FinalTheorem = envelope.FinalIntegrationEnvelope.FinalTheorem;
+  envelope.FinalIntegrationEnvelope = {
+    ...envelope.FinalIntegrationEnvelope,
+    RowFamFinal: {
+      ...envelope.FinalIntegrationEnvelope.RowFamFinal,
+      FinalTheorem: envelope.FinalIntegrationEnvelope.FinalTheorem,
+    },
+  };
+  envelope.RowFamFinal = envelope.FinalIntegrationEnvelope.RowFamFinal;
+
+  envelope.ConcreteLinks = makeConcreteFinalIntegrationLinks0({
+    concreteGlobalProofDAGEnvelope: envelope.ConcreteGlobalProofDAGEnvelope,
+    finalIntegrationEnvelope: envelope.FinalIntegrationEnvelope,
+  });
+
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    materializedFinalIntegrationDigest: undefined,
+    finalTheoremDigest: undefined,
+    concreteLinksDigest: undefined,
+  };
+
+  const out = await CheckConcreteMaterializedFinalIntegration0(envelope, {
+    checkConcreteGlobalProofDAG: false,
+    checkMaterializedFinalIntegration: false,
+    checkLinkage: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckConcreteMaterializedFinalIntegration0');
+  assert.equal(out.Coord, 'CheckConcreteMaterializedFinalIntegration0.concreteLinks');
+  assert.deepEqual(out.Path, ['ConcreteLinks', 'finalTheoremGLinkageComplete']);
 });

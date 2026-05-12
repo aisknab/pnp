@@ -64,6 +64,14 @@ test('CheckPCCPackexp0 accepts a concrete materialized PCCPack candidate', async
   assert.equal(out.NF.rowFamFinalUsesFinalTheorem, true);
   assert.equal(out.NF.finalMatchUsesGPack, true);
   assert.equal(out.NF.satDecisionUsesGPack, true);
+  assert.equal(out.NF.globalProofDAGHasGThresholdProofNode, true);
+  assert.equal(out.NF.globalProofDAGPackageGDependsOnGThresholdProof, true);
+  assert.equal(out.NF.globalProofDAGFinalSATinPDependsOnPackageG, true);
+  assert.equal(out.NF.finalIntegrationGlobalGLinkageComplete, true);
+  assert.equal(out.NF.finalTheoremGLinkageComplete, true);
+  assert.equal(out.NF.finalTheoremUsesGlobalGThreshold, true);
+  assert.equal(out.NF.finalTheoremUsesGThresholdProofRef, true);
+  assert.equal(out.NF.finalTheoremUsesFinalIntegrationGlobalGLinkage, true);
 
   assert.equal(out.NF.pccPackLinkedToKBundle, true);
   assert.equal(out.NF.pccPackLinkedToHardCheck, true);
@@ -173,4 +181,38 @@ test('CheckPCCPackexp0 surfaces inner concrete PCCPack rejection diagnostics', a
   assert.deepEqual(out.Path, ['PCCPack']);
   assert.equal(out.Witness.detail.inner.coord, 'CheckConcreteMaterializedPCCPack0.concreteCoverage');
   assert.deepEqual(out.Witness.detail.inner.path, ['ConcreteCoverage', 'pccPackLinkedToHardCheck']);
+});
+
+
+test('CheckPCCPackexp0 rejects package candidates without final G proof-chain coverage', async () => {
+  const envelope = await makeConcreteMaterializedPCCPack0();
+
+  envelope.MaterializedPCCPackEnvelope = {
+    ...envelope.MaterializedPCCPackEnvelope,
+    FinalIntegrationEnvelope: {
+      ...envelope.MaterializedPCCPackEnvelope.FinalIntegrationEnvelope,
+      ConcreteLinks: {
+        ...envelope.MaterializedPCCPackEnvelope.FinalIntegrationEnvelope.ConcreteLinks,
+        finalTheoremGLinkageComplete: false,
+      },
+    },
+  };
+
+  envelope.ConcreteCoverage = summarizeConcretePCCPackCoverage0(envelope.MaterializedPCCPackEnvelope);
+  envelope.Linkage = {
+    ...envelope.Linkage,
+    materializedPCCPackDigest: undefined,
+    pccPackDigest: undefined,
+    concreteCoverageDigest: undefined,
+  };
+
+  const out = await CheckPCCPackexp0(envelope, {
+    checkConcreteMaterializedPCCPack: false,
+    checkRecordAlignment: false,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'CheckPCCPackexp0');
+  assert.equal(out.Coord, 'CheckPCCPackexp0.concreteCoverage');
+  assert.deepEqual(out.Path, ['ConcreteCoverage', 'finalTheoremGLinkageComplete']);
 });

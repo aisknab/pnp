@@ -123,6 +123,19 @@ export async function makeConcreteMaterializedFinalIntegration0({
   };
 }
 
+function findConcreteGlobalProofNode0(dag, id) {
+  if (!isPlainObject(dag) || !Array.isArray(dag.Nodes)) {
+    return null;
+  }
+
+  return dag.Nodes.find((node) => isPlainObject(node) && node.id === id) ?? null;
+}
+
+function concreteListIncludes0(value, item) {
+  return Array.isArray(value) && value.includes(item);
+}
+
+
 export function makeConcreteFinalIntegrationLinks0({
   concreteGlobalProofDAGEnvelope,
   finalIntegrationEnvelope,
@@ -136,6 +149,20 @@ export function makeConcreteFinalIntegrationLinks0({
   const finalIntegration = finalIntegrationEnvelope?.FinalIntegration ?? null;
   const finalTheorem = finalIntegrationEnvelope?.FinalTheorem ?? null;
   const rowFamFinal = finalIntegrationEnvelope?.RowFamFinal ?? null;
+
+  const globalProofDAG = concreteGlobalProofDAGEnvelope?.GlobalProofDAG ?? null;
+  const thresholdProofNode = findConcreteGlobalProofNode0(globalProofDAG, 'G.ThresholdCert.proof');
+  const packageGNode = findConcreteGlobalProofNode0(globalProofDAG, 'Package.G.LockedNANDThreshold');
+  const finalSATNode = findConcreteGlobalProofNode0(globalProofDAG, 'Final.AcceptedPackageImpliesSATinP');
+
+  const finalIntegrationGlobalProofDAG = finalIntegration?.GlobalProofDAG ?? null;
+  const finalIntegrationThresholdProofNode = findConcreteGlobalProofNode0(finalIntegrationGlobalProofDAG, 'G.ThresholdCert.proof');
+  const finalIntegrationPackageGNode = findConcreteGlobalProofNode0(finalIntegrationGlobalProofDAG, 'Package.G.LockedNANDThreshold');
+  const finalIntegrationSATNode = findConcreteGlobalProofNode0(finalIntegrationGlobalProofDAG, 'Final.AcceptedPackageImpliesSATinP');
+
+  const finalSatImplication = finalTheorem?.AcceptedPackageImpliesSATinP ?? null;
+  const finalSourceTheorems = finalTheorem?.PCCMinBridge?.sourceTheorems ?? [];
+  const finalSatAssumptions = finalSatImplication?.assumptions ?? [];
 
   const gpackDigest = digestCanonical0(gpack);
   const finalIntegrationDigest = digestCanonical0(finalIntegration);
@@ -204,6 +231,48 @@ export function makeConcreteFinalIntegrationLinks0({
       finalIntegration?.SATDecision?.LockedWord?.gpackDigest ?? null,
       gpackDigest,
     ),
+
+    globalProofDAGHasGThresholdProofNode:
+      thresholdProofNode?.conclusion?.theorem === 'LockedNANDThreshold' &&
+      thresholdProofNode?.conclusion?.proofRef?.id === 'G.ThresholdCert.proof' &&
+      thresholdProofNode?.payload?.rule === 'LockedNANDThreshold0' &&
+      thresholdProofNode?.payload?.residualSlackMax === 4 &&
+      thresholdProofNode?.payload?.transparentProof === true,
+
+    globalProofDAGPackageGDependsOnGThresholdProof:
+      concreteListIncludes0(packageGNode?.premises, 'G.ThresholdCert.proof'),
+
+    globalProofDAGFinalSATinPDependsOnPackageG:
+      concreteListIncludes0(finalSATNode?.premises, 'Package.G.LockedNANDThreshold'),
+
+    finalIntegrationGlobalGLinkageComplete:
+      finalIntegrationThresholdProofNode?.conclusion?.theorem === 'LockedNANDThreshold' &&
+      finalIntegrationThresholdProofNode?.conclusion?.proofRef?.id === 'G.ThresholdCert.proof' &&
+      concreteListIncludes0(finalIntegrationPackageGNode?.premises, 'G.ThresholdCert.proof') &&
+      concreteListIncludes0(finalIntegrationSATNode?.premises, 'Package.G.LockedNANDThreshold') &&
+      sameDigestHex0(digestCanonical0(finalIntegration?.GPack ?? null), gpackDigest),
+
+    finalTheoremGLinkageComplete:
+      concreteListIncludes0(finalSourceTheorems, 'GlobalProofDAG.Package.G.LockedNANDThreshold') &&
+      concreteListIncludes0(finalSourceTheorems, 'G.ThresholdCert.proof') &&
+      concreteListIncludes0(finalSatAssumptions, 'CheckGPack0(GPack)=accept') &&
+      concreteListIncludes0(finalSatAssumptions, 'CheckGlobalProofDAG0(GlobalProofDAG)=accept') &&
+      concreteListIncludes0(finalSatAssumptions, 'Package.G.LockedNANDThreshold') &&
+      concreteListIncludes0(finalSatAssumptions, 'G.ThresholdCert.proof') &&
+      finalSatImplication?.usesAcceptedGPack === true &&
+      finalSatImplication?.usesAcceptedGlobalProofDAG === true &&
+      finalSatImplication?.usesGlobalGThreshold === true &&
+      finalSatImplication?.usesGThresholdProofRef === true &&
+      finalSatImplication?.usesFinalIntegrationGlobalGLinkage === true,
+
+    finalTheoremUsesGlobalGThreshold:
+      finalSatImplication?.usesGlobalGThreshold === true,
+
+    finalTheoremUsesGThresholdProofRef:
+      finalSatImplication?.usesGThresholdProofRef === true,
+
+    finalTheoremUsesFinalIntegrationGlobalGLinkage:
+      finalSatImplication?.usesFinalIntegrationGlobalGLinkage === true,
 
     concreteGlobalProofDAGDigest: digestCanonical0(concreteGlobalProofDAGEnvelope),
     concreteGlobalProofDAGNF: concreteDAGNF === null ? null : digestCanonical0(concreteDAGNF),
@@ -421,6 +490,14 @@ export async function CheckConcreteMaterializedFinalIntegration0(
     rowFamFinalUsesFinalTheorem: recomputedLinks.rowFamFinalUsesFinalTheorem,
     finalMatchUsesGPack: recomputedLinks.finalMatchUsesGPack,
     satDecisionUsesGPack: recomputedLinks.satDecisionUsesGPack,
+    globalProofDAGHasGThresholdProofNode: recomputedLinks.globalProofDAGHasGThresholdProofNode,
+    globalProofDAGPackageGDependsOnGThresholdProof: recomputedLinks.globalProofDAGPackageGDependsOnGThresholdProof,
+    globalProofDAGFinalSATinPDependsOnPackageG: recomputedLinks.globalProofDAGFinalSATinPDependsOnPackageG,
+    finalIntegrationGlobalGLinkageComplete: recomputedLinks.finalIntegrationGlobalGLinkageComplete,
+    finalTheoremGLinkageComplete: recomputedLinks.finalTheoremGLinkageComplete,
+    finalTheoremUsesGlobalGThreshold: recomputedLinks.finalTheoremUsesGlobalGThreshold,
+    finalTheoremUsesGThresholdProofRef: recomputedLinks.finalTheoremUsesGThresholdProofRef,
+    finalTheoremUsesFinalIntegrationGlobalGLinkage: recomputedLinks.finalTheoremUsesFinalIntegrationGlobalGLinkage,
 
     concreteGlobalProofDAGDigest: digestCanonical0(envelope.ConcreteGlobalProofDAGEnvelope),
     materializedFinalIntegrationDigest: digestCanonical0(envelope.FinalIntegrationEnvelope),
@@ -599,6 +676,14 @@ function validateConcreteLinks0(actual, expected) {
     'rowFamFinalUsesFinalTheorem',
     'finalMatchUsesGPack',
     'satDecisionUsesGPack',
+    'globalProofDAGHasGThresholdProofNode',
+    'globalProofDAGPackageGDependsOnGThresholdProof',
+    'globalProofDAGFinalSATinPDependsOnPackageG',
+    'finalIntegrationGlobalGLinkageComplete',
+    'finalTheoremGLinkageComplete',
+    'finalTheoremUsesGlobalGThreshold',
+    'finalTheoremUsesGThresholdProofRef',
+    'finalTheoremUsesFinalIntegrationGlobalGLinkage',
   ]) {
     if (expected[field] !== true) {
       return validationReject0(['ConcreteLinks', field], `ConcreteFinalIntegrationLinks0 must certify ${field}`, {
