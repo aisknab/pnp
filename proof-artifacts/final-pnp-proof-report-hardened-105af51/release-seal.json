@@ -1,0 +1,85 @@
+{
+  "kind": "PNPFinalProofReportHardenedArtefactBundle0",
+  "version": 0,
+  "sourceCommit": "105af516128fa0f7cc9978e6381bb6d8afdc7058",
+  "sourceTag": "final-pnp-proof-report-hardened-105af51",
+  "generatedArtifactCommitBeforeMetadataSeal": "82e1a234a5a589c96c64dc12b2dd285e4b7d9b30",
+  "sealedArtifactTag": "final-pnp-proof-report-artifacts-hardened-105af51-sealed",
+  "bundlePath": "proof-artifacts/final-pnp-proof-report-hardened-105af51",
+  "previousSourceTag": "final-pnp-proof-report-37f1b2e",
+  "previousArtifactTag": "final-pnp-proof-report-artifacts-6fa512c",
+  "validation": {
+    "command": "npm run validate",
+    "tests": 984,
+    "pass": 984,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "theorem": {
+    "statement": "P = NP",
+    "antecedent": "CheckPCCPackexp(GeneratePCCPack())=accept",
+    "consequent": "P = NP",
+    "conditional": true
+  },
+  "publicConclusionStatement": "CheckPCCPackexp(GeneratePCCPack())=accept => P = NP",
+  "acceptedFields": {
+    "summaryTag": "accept",
+    "summaryChecker": "CheckFinalPNPProofReport0",
+    "summaryStatus": "accepted",
+    "summaryFinalPNPProofReportAccepted": true,
+    "summaryCheckPCCPackexpAccepted": true,
+    "fullTag": "accept",
+    "fullChecker": "CheckFinalPNPProofReport0",
+    "fullFinalPNPProofReportAccepted": true,
+    "fullCheckPCCPackexpAccepted": true,
+    "fullPublicConclusionStatement": "CheckPCCPackexp(GeneratePCCPack())=accept => P = NP"
+  },
+  "digests": {
+    "summaryCanonicalDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "6541fab03ff1d00bd475368f41fd33608ff8ee610d8a22c9cb474db0874208bf"
+    },
+    "summaryInnerCheckDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "e9181f479ccb71d4821989d5e4cc740ff26e7f95ce0e74a08720597322dd64a5"
+    },
+    "fullCheckRecordDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "c3bb9bff6e790b849e33ffe3f9193abd59875ad9007d75a0252ca5a0a6574bf4"
+    },
+    "fullCanonicalDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "bff0149a94501afe178a88e4d303c33335a80eddd94d0ddda3ff2a434d0e6500"
+    },
+    "pccPackDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "dbc5cb7af4f4872fd6de0418a2e4c50899f4d70f751ed7450368c4d12dc7d57f"
+    },
+    "checkPCCPackexpRecordDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "0c94de2d11bbde3253e11d0111f73535f4efc01476e20bc888747d20899bea20"
+    },
+    "acceptRunDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "497c7250aa2af0858d474756575c0b746e16810cf4813f88e045b53fcff73908"
+    },
+    "finalVerdictRecordDigest": {
+      "alg": "SHA256",
+      "bytes": "canonical-json-v0",
+      "hex": "891175b2493965e84dfea660cecb1c63316f6ee222e45544b8f7d5c535b5e2c5"
+    }
+  },
+  "checksumPolicy": {
+    "sha256sumsSelfEntry": false,
+    "detachedSHA256SUMSHash": true
+  }
+}
