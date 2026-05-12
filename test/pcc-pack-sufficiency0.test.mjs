@@ -12,6 +12,15 @@ import {
   makeSyntheticGPack0,
 } from '../pcc-gpack0.mjs';
 
+import {
+  makeSyntheticFinalIntegration0,
+} from '../pcc-final-framework0.mjs';
+
+import {
+  makeSyntheticFinalTheorem0,
+  makeSyntheticRowFamFinal0,
+} from '../pcc-final0.mjs';
+
 test('CheckPackSufficiency0 accepts the synthetic top-level package', async () => {
   const out = await CheckPackSufficiency0(makeSyntheticPCCPack0());
 
@@ -87,16 +96,24 @@ test('CheckPackSufficiency0 wraps a GPack rejection', async () => {
 test('CheckPackSufficiency0 rejects cross artefact GPack mismatch', async () => {
   const pack = makeSyntheticPCCPack0();
 
-  pack.FinalIntegration = {
-    ...pack.FinalIntegration,
-    GPack: {
-      ...makeSyntheticGPack0(),
-      SchedHash: {
-        alg: 'SHA256',
-        hex: 'different.valid.synthetic.sched',
-      },
-    },
+  const alternateGPack = {
+    ...makeSyntheticGPack0(),
+    acceptedAlternateGPackNonce: 1,
   };
+
+  const alternateFinalIntegration = makeSyntheticFinalIntegration0({
+    gpack: alternateGPack,
+  });
+
+  const alternateFinalTheorem = makeSyntheticFinalTheorem0({
+    finalIntegration: alternateFinalIntegration,
+  });
+
+  const alternateRowFamFinal = makeSyntheticRowFamFinal0(alternateFinalTheorem);
+
+  pack.FinalIntegration = alternateFinalIntegration;
+  pack.FinalTheorem = alternateFinalTheorem;
+  pack.RowFamFinal = alternateRowFamFinal;
 
   const out = await CheckPackSufficiency0(pack);
 
