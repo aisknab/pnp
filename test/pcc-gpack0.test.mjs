@@ -887,3 +887,123 @@ test('CheckGPack0 rejects detailed ZeroOutputConvention obligation tampering', a
     });
   }
 });
+
+
+test('CheckGPack0 rejects detailed FinalLockSeparation obligation tampering', async (t) => {
+  const cases = [
+    {
+      name: 'ThresholdCert.satWitnessMakesTraceAndOutputOne=false',
+      coord: 'CheckGPack0.threshold',
+      path0: 'ThresholdCert',
+      mutate(gpack) {
+        gpack.ThresholdCert.satWitnessMakesTraceAndOutputOne = false;
+      },
+    },
+    {
+      name: 'ThresholdCert.finalLockFreshOnlyFinal=false',
+      coord: 'CheckGPack0.threshold',
+      path0: 'ThresholdCert',
+      mutate(gpack) {
+        gpack.ThresholdCert.finalLockFreshOnlyFinal = false;
+      },
+    },
+    {
+      name: 'ThresholdCert.finalOutputEssentiallyDependsOnZ=false',
+      coord: 'CheckGPack0.threshold',
+      path0: 'ThresholdCert',
+      mutate(gpack) {
+        gpack.ThresholdCert.finalOutputEssentiallyDependsOnZ = false;
+      },
+    },
+    {
+      name: 'ThresholdCert.baselineOutputsDoNotMentionZ=false',
+      coord: 'CheckGPack0.threshold',
+      path0: 'ThresholdCert',
+      mutate(gpack) {
+        gpack.ThresholdCert.baselineOutputsDoNotMentionZ = false;
+      },
+    },
+    {
+      name: 'ThresholdCert.finalOutputNonconstant=false',
+      coord: 'CheckGPack0.threshold',
+      path0: 'ThresholdCert',
+      mutate(gpack) {
+        gpack.ThresholdCert.finalOutputNonconstant = false;
+      },
+    },
+    {
+      name: 'ThresholdCert.finalOutputNonprojection=false',
+      coord: 'CheckGPack0.threshold',
+      path0: 'ThresholdCert',
+      mutate(gpack) {
+        gpack.ThresholdCert.finalOutputNonprojection = false;
+      },
+    },
+    {
+      name: 'ThresholdCert.finalOutputDistinctFromBaseline=false',
+      coord: 'CheckGPack0.threshold',
+      path0: 'ThresholdCert',
+      mutate(gpack) {
+        gpack.ThresholdCert.finalOutputDistinctFromBaseline = false;
+      },
+    },
+    {
+      name: 'ThresholdCert.satLowerBoundExtraGateByFinalLock=false',
+      coord: 'CheckGPack0.threshold',
+      path0: 'ThresholdCert',
+      mutate(gpack) {
+        gpack.ThresholdCert.satLowerBoundExtraGateByFinalLock = false;
+      },
+    },
+    {
+      name: 'ThresholdCert.derivation.finalOutputEssentiallyDependsOnZ=false',
+      coord: 'CheckGPack0.threshold',
+      path0: 'ThresholdCert',
+      mutate(gpack) {
+        gpack.ThresholdCert.derivation.finalOutputEssentiallyDependsOnZ = false;
+      },
+    },
+    {
+      name: 'ThresholdCert.derivation.finalOutputDistinctFromBaseline=false',
+      coord: 'CheckGPack0.threshold',
+      path0: 'ThresholdCert',
+      mutate(gpack) {
+        gpack.ThresholdCert.derivation.finalOutputDistinctFromBaseline = false;
+      },
+    },
+    {
+      name: 'PiG Threshold proof payload finalOutputEssentiallyDependsOnZ=false',
+      coord: 'CheckGPack0.derivationProofNodes',
+      path0: 'PiG',
+      mutate(gpack) {
+        const node = gpack.PiG.proofNodes.find((entry) => entry.id === 'G.ThresholdCert.proof');
+        node.payload.finalOutputEssentiallyDependsOnZ = false;
+      },
+    },
+    {
+      name: 'PiG Threshold proof payload satLowerBoundExtraGateByFinalLock=false',
+      coord: 'CheckGPack0.derivationProofNodes',
+      path0: 'PiG',
+      mutate(gpack) {
+        const node = gpack.PiG.proofNodes.find((entry) => entry.id === 'G.ThresholdCert.proof');
+        node.payload.satLowerBoundExtraGateByFinalLock = false;
+      },
+    },
+  ];
+
+  for (const testCase of cases) {
+    await t.test(testCase.name, async () => {
+      const gpack = makeSyntheticGPack0();
+
+      testCase.mutate(gpack);
+
+      const out = await CheckGPack0(gpack);
+
+      assert.equal(out.tag, 'reject');
+      assert.equal(out.checker, 'CheckGPack0');
+      assert.equal(out.Coord, testCase.coord);
+      assert.equal(out.Path[0], testCase.path0);
+      assert.equal(typeof out.Witness.reason, 'string');
+    });
+  }
+});
