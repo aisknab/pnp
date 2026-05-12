@@ -1431,14 +1431,41 @@ its macro instance and fresh lock or occurrence slot.  The exposed baseline func
 nonconstant, and nonprojection.  Therefore the baseline tuple forces exactly \(B^{NAND}_\varphi\) NAND gates.
 \end{lemma}
 \begin{proof}
-For the equality, constant, and NAND trace macros, Appendix~A lists the complete truth signatures and the
-positive projection signatures in the declared variable order.  The listed exposed signatures are pairwise
-distinct, nonconstant, and distinct from the projections.  \(G\)-Sep+ makes the lock and occurrence variables
-of different macro instances disjoint and also assigns fresh occurrence slots to duplicate NAND sources.  Thus
-truth signatures from different macro instances become distinct carrier-tagged functions.  Prefix-conjunction
-outputs are functions of their own check-lock sets and are separated from macro outputs by the same fresh-tag
-invariant.  Applying DirectWireOutputLowerBound gives the baseline lower bound; the displayed construction
-has exactly \(B^{NAND}_\varphi\) exposed baseline NAND outputs, so the baseline is exact.
+The accepted \(G\) certificate separates this lemma into the following explicit obligations: macro truth signatures
+are pairwise distinct, macro outputs are nonconstant, macro outputs are nonprojections, cross-instance copies are
+carrier-tagged, prefix outputs are separated from macro outputs, duplicate source occurrences use fresh slots, and
+the projection boundary is the positive boundary-coordinate convention of the direct-wire model.
+
+For a single equality, constant, or NAND-trace macro instance, Appendix~A gives the complete output truth
+signatures and the positive projection signatures in the declared variable order.  Direct comparison of those
+finite bit strings shows that the exposed outputs of the instance are pairwise distinct and nonconstant.  It also
+shows that no exposed output equals any positive projection of an input coordinate.  This is the relevant
+projection test for the direct-wire convention: a boundary wire supplies a positive boundary coordinate, while
+negations and other derived functions require NAND gates unless they are carrier constants or already available
+outputs.
+
+Now consider two different macro instances.  By \(G\)-Sep+, their private locks and occurrence variables are
+renamed into disjoint carrier coordinates.  If two same-shape local signatures are copied into different instances,
+the resulting global functions depend on different carrier coordinates.  Assign the first instance's active lock and
+vary the local data coordinate on which its output essentially depends while holding the second instance's carrier
+fixed; the first output changes and the second does not.  Hence cross-instance copies are distinct global
+functions.  Fresh occurrence slots for duplicate NAND sources are needed here: two occurrences of the same
+source value may be semantically equal on coherent traces, but they are distinct carrier functions before the trace
+constraints are imposed, so their exposed macro outputs do not collapse in the baseline tuple.
+
+The prefix-conjunction outputs are separated for the same reason.  Each prefix node uses its own check-lock set
+and depends essentially on a prefix check coordinate not used by any equality, constant, or NAND-trace macro
+output.  \(G\)-Sep+ gives distinct check-lock sets for different prefix nodes and keeps them disjoint from macro
+locks.  Therefore a prefix output cannot equal a macro output or another prefix output unless the two tagged
+carrier supports are identical, which the construction forbids.  The exposed negated prefix output \(\neg p\) is
+also not a free projection: it is a NAND-derived function over the prefix node's local carrier and is counted as an
+exposed baseline output.
+
+Thus the whole baseline tuple contains exactly the displayed number of pairwise distinct nonconstant
+nonprojection functions: \(18m\) trace-macro outputs, \(10w_=\) equality outputs, \(3w_0\) constant-zero outputs,
+\(2w_1\) constant-one outputs, and \(2(3m-1)\) prefix outputs.  Applying DirectWireOutputLowerBound gives
+\(\mu(\text{baseline})\ge B^{NAND}_\varphi\).  The constructed baseline exposes exactly those
+\(B^{NAND}_\varphi\) NAND outputs, so the lower bound is tight and the baseline is exact.
 \end{proof}
 
 \begin{lemma}[TraceEquivalence]
