@@ -663,3 +663,115 @@ test('CheckGPack0 rejects detailed TraceEquivalence obligation tampering', async
     });
   }
 });
+
+
+test('CheckGPack0 rejects detailed MacroDistinct obligation tampering', async (t) => {
+  const cases = [
+    {
+      name: 'BaselineCert.macroTruthSignaturesPairwiseDistinct=false',
+      coord: 'CheckGPack0.baseline',
+      path0: 'BaselineCert',
+      mutate(gpack) {
+        gpack.BaselineCert.macroTruthSignaturesPairwiseDistinct = false;
+      },
+    },
+    {
+      name: 'BaselineCert.macroOutputsNonconstant=false',
+      coord: 'CheckGPack0.baseline',
+      path0: 'BaselineCert',
+      mutate(gpack) {
+        gpack.BaselineCert.macroOutputsNonconstant = false;
+      },
+    },
+    {
+      name: 'BaselineCert.macroOutputsNonprojection=false',
+      coord: 'CheckGPack0.baseline',
+      path0: 'BaselineCert',
+      mutate(gpack) {
+        gpack.BaselineCert.macroOutputsNonprojection = false;
+      },
+    },
+    {
+      name: 'BaselineCert.carrierTaggedCrossInstanceDistinct=false',
+      coord: 'CheckGPack0.baseline',
+      path0: 'BaselineCert',
+      mutate(gpack) {
+        gpack.BaselineCert.carrierTaggedCrossInstanceDistinct = false;
+      },
+    },
+    {
+      name: 'BaselineCert.prefixOutputsSeparatedFromMacros=false',
+      coord: 'CheckGPack0.baseline',
+      path0: 'BaselineCert',
+      mutate(gpack) {
+        gpack.BaselineCert.prefixOutputsSeparatedFromMacros = false;
+      },
+    },
+    {
+      name: 'BaselineCert.duplicateSourceOccurrenceSlotsFresh=false',
+      coord: 'CheckGPack0.baseline',
+      path0: 'BaselineCert',
+      mutate(gpack) {
+        gpack.BaselineCert.duplicateSourceOccurrenceSlotsFresh = false;
+      },
+    },
+    {
+      name: 'BaselineCert.projectionModelPositiveBoundaryOnly=false',
+      coord: 'CheckGPack0.baseline',
+      path0: 'BaselineCert',
+      mutate(gpack) {
+        gpack.BaselineCert.projectionModelPositiveBoundaryOnly = false;
+      },
+    },
+    {
+      name: 'BaselineCert.derivation.carrierTaggedCrossInstanceDistinct=false',
+      coord: 'CheckGPack0.baseline',
+      path0: 'BaselineCert',
+      mutate(gpack) {
+        gpack.BaselineCert.derivation.carrierTaggedCrossInstanceDistinct = false;
+      },
+    },
+    {
+      name: 'BaselineCert.derivation.prefixOutputsSeparatedFromMacros=false',
+      coord: 'CheckGPack0.baseline',
+      path0: 'BaselineCert',
+      mutate(gpack) {
+        gpack.BaselineCert.derivation.prefixOutputsSeparatedFromMacros = false;
+      },
+    },
+    {
+      name: 'PiG Baseline proof payload macroOutputsNonprojection=false',
+      coord: 'CheckGPack0.derivationProofNodes',
+      path0: 'PiG',
+      mutate(gpack) {
+        const node = gpack.PiG.proofNodes.find((entry) => entry.id === 'G.BaselineCert.proof');
+        node.payload.macroOutputsNonprojection = false;
+      },
+    },
+    {
+      name: 'PiG Baseline proof payload carrierTaggedCrossInstanceDistinct=false',
+      coord: 'CheckGPack0.derivationProofNodes',
+      path0: 'PiG',
+      mutate(gpack) {
+        const node = gpack.PiG.proofNodes.find((entry) => entry.id === 'G.BaselineCert.proof');
+        node.payload.carrierTaggedCrossInstanceDistinct = false;
+      },
+    },
+  ];
+
+  for (const testCase of cases) {
+    await t.test(testCase.name, async () => {
+      const gpack = makeSyntheticGPack0();
+
+      testCase.mutate(gpack);
+
+      const out = await CheckGPack0(gpack);
+
+      assert.equal(out.tag, 'reject');
+      assert.equal(out.checker, 'CheckGPack0');
+      assert.equal(out.Coord, testCase.coord);
+      assert.equal(out.Path[0], testCase.path0);
+      assert.equal(typeof out.Witness.reason, 'string');
+    });
+  }
+});

@@ -369,6 +369,13 @@ export function makeSyntheticGPack0(overrides = {}) {
       distinctNonconstantNonprojection: true,
       lowerBound: true,
       directWireOutputLowerBound: true,
+      macroTruthSignaturesPairwiseDistinct: true,
+      macroOutputsNonconstant: true,
+      macroOutputsNonprojection: true,
+      carrierTaggedCrossInstanceDistinct: true,
+      prefixOutputsSeparatedFromMacros: true,
+      duplicateSourceOccurrenceSlotsFresh: true,
+      projectionModelPositiveBoundaryOnly: true,
       derivation: makeBaselineDerivation0(preNAND, baseline),
     },
 
@@ -1862,6 +1869,13 @@ function makeBaselineDerivation0(preNAND, baseline) {
     directWireOutputConvention: true,
     directWireOutputLowerBound: true,
     pairwiseDistinctNonconstantNonprojection: true,
+    macroTruthSignaturesPairwiseDistinct: true,
+    macroOutputsNonconstant: true,
+    macroOutputsNonprojection: true,
+    carrierTaggedCrossInstanceDistinct: true,
+    prefixOutputsSeparatedFromMacros: true,
+    duplicateSourceOccurrenceSlotsFresh: true,
+    projectionModelPositiveBoundaryOnly: true,
     privateLocksFresh: true,
     macroSignaturesChecked: true,
     crossMacroSharingForbiddenBySep: true,
@@ -1973,6 +1987,18 @@ function makeGProofNodes0(preNAND, baseline) {
         directWireOutputLowerBound: baselineDerivation.directWireOutputLowerBound,
         pairwiseDistinctNonconstantNonprojection:
           baselineDerivation.pairwiseDistinctNonconstantNonprojection,
+        macroTruthSignaturesPairwiseDistinct:
+          baselineDerivation.macroTruthSignaturesPairwiseDistinct,
+        macroOutputsNonconstant: baselineDerivation.macroOutputsNonconstant,
+        macroOutputsNonprojection: baselineDerivation.macroOutputsNonprojection,
+        carrierTaggedCrossInstanceDistinct:
+          baselineDerivation.carrierTaggedCrossInstanceDistinct,
+        prefixOutputsSeparatedFromMacros:
+          baselineDerivation.prefixOutputsSeparatedFromMacros,
+        duplicateSourceOccurrenceSlotsFresh:
+          baselineDerivation.duplicateSourceOccurrenceSlotsFresh,
+        projectionModelPositiveBoundaryOnly:
+          baselineDerivation.projectionModelPositiveBoundaryOnly,
         lowerBoundRuleApplied: baselineDerivation.lowerBoundRuleApplied,
         gateOutputInjection: baselineDerivation.gateOutputInjection,
         proofRef: baselineDerivation.proofRef,
@@ -2341,6 +2367,13 @@ function validateGProofNodePayload0(payload, path, rowKind, cert) {
       directWireOutputConvention: true,
       directWireOutputLowerBound: true,
       pairwiseDistinctNonconstantNonprojection: true,
+      macroTruthSignaturesPairwiseDistinct: true,
+      macroOutputsNonconstant: true,
+      macroOutputsNonprojection: true,
+      carrierTaggedCrossInstanceDistinct: true,
+      prefixOutputsSeparatedFromMacros: true,
+      duplicateSourceOccurrenceSlotsFresh: true,
+      projectionModelPositiveBoundaryOnly: true,
       lowerBoundRuleApplied: true,
       gateOutputInjection: 'distinct-noninput-outputs-map-to-distinct-NAND-gates',
     };
@@ -2666,6 +2699,13 @@ function validateBaselineCertHardened0(gpack) {
     'distinctNonconstantNonprojection',
     'lowerBound',
     'directWireOutputLowerBound',
+    'macroTruthSignaturesPairwiseDistinct',
+    'macroOutputsNonconstant',
+    'macroOutputsNonprojection',
+    'carrierTaggedCrossInstanceDistinct',
+    'prefixOutputsSeparatedFromMacros',
+    'duplicateSourceOccurrenceSlotsFresh',
+    'projectionModelPositiveBoundaryOnly',
   ]) {
     if (cert[field] !== true) {
       return validationReject0(['BaselineCert', field], `BaselineCert must certify ${field}`, {
@@ -2876,6 +2916,13 @@ function validateBaselineDerivation0(value, preNAND, baseline) {
     'directWireOutputConvention',
     'directWireOutputLowerBound',
     'pairwiseDistinctNonconstantNonprojection',
+    'macroTruthSignaturesPairwiseDistinct',
+    'macroOutputsNonconstant',
+    'macroOutputsNonprojection',
+    'carrierTaggedCrossInstanceDistinct',
+    'prefixOutputsSeparatedFromMacros',
+    'duplicateSourceOccurrenceSlotsFresh',
+    'projectionModelPositiveBoundaryOnly',
     'privateLocksFresh',
     'macroSignaturesChecked',
     'crossMacroSharingForbiddenBySep',
