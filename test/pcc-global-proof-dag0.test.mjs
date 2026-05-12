@@ -249,3 +249,56 @@ test('CheckGlobalProofDAG0 rejects opaque proof material', async () => {
   assert.deepEqual(out.Path, ['GlobalProofDAG0', 'PiGlobalDAG', 'opaqueProof']);
   assert.equal(out.Witness.reason, 'opaque proof material is not allowed in GlobalProofDAG0');
 });
+
+test('CheckGlobalProofDAG0 binds G locked NAND theorem to explicit global proof nodes', async (t) => {
+  await t.test('rejects missing G threshold proof dependency from package theorem', async () => {
+    const dag = makeSyntheticGlobalProofDAG0();
+    const node = dag.Nodes.find((entry) => entry.id === 'Package.G.LockedNANDThreshold');
+
+    node.premises = node.premises.filter((premise) => premise !== 'G.ThresholdCert.proof');
+
+    const out = await CheckGlobalProofDAG0(dag);
+
+    assert.equal(out.tag, 'reject');
+    assert.equal(out.checker, 'CheckGlobalProofDAG0');
+    assert.equal(out.Coord, 'CheckGlobalProofDAG0.gLockedNANDProofs');
+    assert.deepEqual(out.Path, ['Nodes', 'gLockedNANDProofs', 'Package.G.LockedNANDThreshold', 'premises']);
+    assert.equal(out.Witness.reason, 'Package.G.LockedNANDThreshold must depend on G.ThresholdCert.proof and global safety roots');
+  });
+
+  await t.test('rejects wrong G threshold proof conclusion theorem', async () => {
+    const dag = makeSyntheticGlobalProofDAG0();
+    const node = dag.Nodes.find((entry) => entry.id === 'G.ThresholdCert.proof');
+
+    node.conclusion = {
+      ...node.conclusion,
+      theorem: 'WrongTheorem',
+    };
+
+    const out = await CheckGlobalProofDAG0(dag);
+
+    assert.equal(out.tag, 'reject');
+    assert.equal(out.checker, 'CheckGlobalProofDAG0');
+    assert.equal(out.Coord, 'CheckGlobalProofDAG0.gLockedNANDProofs');
+    assert.deepEqual(out.Path, ['Nodes', 'gLockedNANDProofs', 'G.ThresholdCert.proof', 'conclusion', 'theorem']);
+    assert.equal(out.Witness.reason, 'G locked NAND proof node conclusion mismatch');
+  });
+
+  await t.test('rejects wrong G threshold proof payload residual slack', async () => {
+    const dag = makeSyntheticGlobalProofDAG0();
+    const node = dag.Nodes.find((entry) => entry.id === 'G.ThresholdCert.proof');
+
+    node.payload = {
+      ...node.payload,
+      residualSlackMax: 5,
+    };
+
+    const out = await CheckGlobalProofDAG0(dag);
+
+    assert.equal(out.tag, 'reject');
+    assert.equal(out.checker, 'CheckGlobalProofDAG0');
+    assert.equal(out.Coord, 'CheckGlobalProofDAG0.gLockedNANDProofs');
+    assert.deepEqual(out.Path, ['Nodes', 'gLockedNANDProofs', 'G.ThresholdCert.proof', 'payload', 'residualSlackMax']);
+    assert.equal(out.Witness.reason, 'G threshold proof node payload mismatch');
+  });
+});

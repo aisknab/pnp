@@ -153,6 +153,128 @@ export function makeGlobalProofDAGNode0({
   };
 }
 
+function makeGlobalGLockedNANDProofNodes0() {
+  return [
+    makeGlobalProofDAGNode0({
+      id: 'G.BaselineCert.proof',
+      kind: 'row',
+      label: 'G.BaselineCert.proof',
+      premises: [
+        'K.Record',
+        'K.DAGInd',
+      ],
+      conclusion: {
+        tag: 'GProofNodeAccepted0',
+        rowKind: 'BaselineCert',
+        theorem: 'BaselineDistinct',
+        proofRef: {
+          kind: 'ProofRef0',
+          refKind: 'KPrimitive',
+          id: 'G.BaselineCert.proof',
+        },
+      },
+      payload: {
+        package: 'G',
+        rule: 'BaselineDistinctDirectWire0',
+        derivationKind: 'BaselineDerivation0',
+        directWireOutputConvention: true,
+        lowerBoundRuleApplied: true,
+        nonOpaque: true,
+      },
+      bounds: {
+        polynomial: true,
+        exponent: 4,
+      },
+    }),
+    makeGlobalProofDAGNode0({
+      id: 'G.TraceCert.proof',
+      kind: 'row',
+      label: 'G.TraceCert.proof',
+      premises: [
+        'K.Record',
+        'K.TraceInd',
+      ],
+      conclusion: {
+        tag: 'GProofNodeAccepted0',
+        rowKind: 'TraceCert',
+        theorem: 'TraceCoherence',
+        proofRef: {
+          kind: 'ProofRef0',
+          refKind: 'KPrimitive',
+          id: 'G.TraceCert.proof',
+        },
+      },
+      payload: {
+        package: 'G',
+        rule: 'NANDTraceCoherence0',
+        derivationKind: 'TraceDerivation0',
+        topologicalInduction: true,
+        traceCoherent: true,
+        nonOpaque: true,
+      },
+      bounds: {
+        polynomial: true,
+        exponent: 4,
+      },
+    }),
+    makeGlobalProofDAGNode0({
+      id: 'G.ThresholdCert.proof',
+      kind: 'row',
+      label: 'G.ThresholdCert.proof',
+      premises: [
+        'G.BaselineCert.proof',
+        'G.TraceCert.proof',
+        'K.IntArith',
+      ],
+      conclusion: {
+        tag: 'GProofNodeAccepted0',
+        rowKind: 'ThresholdCert',
+        theorem: 'LockedNANDThreshold',
+        proofRef: {
+          kind: 'ProofRef0',
+          refKind: 'KPrimitive',
+          id: 'G.ThresholdCert.proof',
+        },
+      },
+      payload: {
+        package: 'G',
+        rule: 'LockedNANDThreshold0',
+        derivationKind: 'ThresholdDerivation0',
+        baselineDerivation: 'G.BaselineCert.proof',
+        traceDerivation: 'G.TraceCert.proof',
+        residualSlackMax: 4,
+        satIffMinAboveBaseline: true,
+        unsatMinEqualsBaseline: true,
+        finalOutputGates: 4,
+        nonOpaque: true,
+      },
+      bounds: {
+        polynomial: true,
+        exponent: 4,
+      },
+    }),
+  ];
+}
+
+function packageTheoremPremises0(theorem) {
+  const base = [
+    'Bounds.Polynomial',
+    'NoMin.Global',
+    'Mode.Firewall',
+    'Import.Acyclic',
+  ];
+
+  if (theorem === 'G.LockedNANDThreshold') {
+    return [
+      ...base,
+      'G.ThresholdCert.proof',
+    ];
+  }
+
+  return base;
+}
+
+
 export function makeSyntheticGlobalProofDAG0(overrides = {}) {
   const nodes = [];
 
@@ -278,17 +400,16 @@ export function makeSyntheticGlobalProofDAG0(overrides = {}) {
     },
   }));
 
+  for (const node of makeGlobalGLockedNANDProofNodes0()) {
+    nodes.push(node);
+  }
+
   for (const theorem of GLOBAL_DAG_REQUIRED_PACKAGE_THEOREMS0) {
     nodes.push(makeGlobalProofDAGNode0({
       id: `Package.${theorem}`,
       kind: 'package',
       label: theorem,
-      premises: [
-        'Bounds.Polynomial',
-        'NoMin.Global',
-        'Mode.Firewall',
-        'Import.Acyclic',
-      ],
+      premises: packageTheoremPremises0(theorem),
       conclusion: {
         tag: 'PackageTheoremAccepted0',
         theorem,
@@ -411,6 +532,7 @@ export async function CheckGlobalProofDAG0(dag) {
     ['shape', `${checker}.input`, () => validateGlobalDAGShape0(dag)],
     ['nodes', `${checker}.nodes`, () => validateGlobalNodes0(dag.Nodes)],
     ['coverage', `${checker}.coverage`, () => validateGlobalCoverage0(dag)],
+    ['gLockedNANDProofs', `${checker}.gLockedNANDProofs`, () => validateGlobalGLockedNANDProofs0(dag)],
     ['imports', `${checker}.imports`, () => validateGlobalImports0(dag)],
     ['mode', `${checker}.mode`, () => validateGlobalMode0(dag)],
     ['bounds', `${checker}.bounds`, () => validateGlobalBounds0(dag)],
@@ -674,6 +796,215 @@ function validateGlobalCoverage0(dag) {
     finalTheoremCount: GLOBAL_DAG_REQUIRED_FINALS0.length,
   });
 }
+
+function validateGlobalGLockedNANDProofs0(dag) {
+  const nodeById = new Map();
+
+  for (const node of dag.Nodes ?? []) {
+    if (isPlainObject(node) && typeof node.id === 'string') {
+      nodeById.set(node.id, node);
+    }
+  }
+
+  const required = [
+    {
+      id: 'G.BaselineCert.proof',
+      rowKind: 'BaselineCert',
+      theorem: 'BaselineDistinct',
+      rule: 'BaselineDistinctDirectWire0',
+      premises: [
+        'K.Record',
+        'K.DAGInd',
+      ],
+    },
+    {
+      id: 'G.TraceCert.proof',
+      rowKind: 'TraceCert',
+      theorem: 'TraceCoherence',
+      rule: 'NANDTraceCoherence0',
+      premises: [
+        'K.Record',
+        'K.TraceInd',
+      ],
+    },
+    {
+      id: 'G.ThresholdCert.proof',
+      rowKind: 'ThresholdCert',
+      theorem: 'LockedNANDThreshold',
+      rule: 'LockedNANDThreshold0',
+      premises: [
+        'G.BaselineCert.proof',
+        'G.TraceCert.proof',
+        'K.IntArith',
+      ],
+    },
+  ];
+
+  for (const spec of required) {
+    const node = nodeById.get(spec.id);
+
+    if (!isPlainObject(node)) {
+      return validationReject0(['Nodes', 'gLockedNANDProofs', spec.id], 'GlobalProofDAG0 is missing a G locked NAND proof node', {
+        id: spec.id,
+      });
+    }
+
+    const nodeCheck = validateGlobalGLockedNANDProofNode0(node, spec);
+
+    if (!nodeCheck.ok) {
+      return nodeCheck;
+    }
+  }
+
+  const packageNode = nodeById.get('Package.G.LockedNANDThreshold');
+
+  if (!isPlainObject(packageNode)) {
+    return validationReject0(['Nodes', 'gLockedNANDProofs', 'Package.G.LockedNANDThreshold'], 'GlobalProofDAG0 is missing Package.G.LockedNANDThreshold', null);
+  }
+
+  for (const premise of [
+    'Bounds.Polynomial',
+    'NoMin.Global',
+    'Mode.Firewall',
+    'Import.Acyclic',
+    'G.ThresholdCert.proof',
+  ]) {
+    if (!packageNode.premises.includes(premise)) {
+      return validationReject0(['Nodes', 'gLockedNANDProofs', 'Package.G.LockedNANDThreshold', 'premises'], 'Package.G.LockedNANDThreshold must depend on G.ThresholdCert.proof and global safety roots', {
+        missing: premise,
+        actual: packageNode.premises,
+      });
+    }
+  }
+
+  const finalNode = nodeById.get('Final.AcceptedPackageImpliesSATinP');
+
+  if (!isPlainObject(finalNode) || !finalNode.premises.includes('Package.G.LockedNANDThreshold')) {
+    return validationReject0(['Nodes', 'gLockedNANDProofs', 'Final.AcceptedPackageImpliesSATinP'], 'Final SAT-in-P theorem must depend on Package.G.LockedNANDThreshold', {
+      actual: finalNode?.premises,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GlobalGLockedNANDProofs0NF',
+    proofNodeCount: required.length,
+  });
+}
+
+function validateGlobalGLockedNANDProofNode0(node, spec) {
+  if (node.nodeKind !== 'row') {
+    return validationReject0(['Nodes', 'gLockedNANDProofs', spec.id, 'nodeKind'], 'G locked NAND proof node must be a row node', {
+      expected: 'row',
+      actual: node.nodeKind,
+    });
+  }
+
+  if (!Array.isArray(node.premises)) {
+    return validationReject0(['Nodes', 'gLockedNANDProofs', spec.id, 'premises'], 'G locked NAND proof node premises must be an array', {
+      actual: typeof node.premises,
+    });
+  }
+
+  if (node.premises.length !== spec.premises.length) {
+    return validationReject0(['Nodes', 'gLockedNANDProofs', spec.id, 'premises'], 'G locked NAND proof node premise count mismatch', {
+      expected: spec.premises,
+      actual: node.premises,
+    });
+  }
+
+  for (let index = 0; index < spec.premises.length; index += 1) {
+    if (node.premises[index] !== spec.premises[index]) {
+      return validationReject0(['Nodes', 'gLockedNANDProofs', spec.id, 'premises', index], 'G locked NAND proof node premise mismatch', {
+        expected: spec.premises[index],
+        actual: node.premises[index],
+      });
+    }
+  }
+
+  if (!isPlainObject(node.conclusion)) {
+    return validationReject0(['Nodes', 'gLockedNANDProofs', spec.id, 'conclusion'], 'G locked NAND proof node conclusion must be an object', {
+      actual: typeof node.conclusion,
+    });
+  }
+
+  const expectedConclusion = {
+    tag: 'GProofNodeAccepted0',
+    rowKind: spec.rowKind,
+    theorem: spec.theorem,
+  };
+
+  for (const [field, expected] of Object.entries(expectedConclusion)) {
+    if (node.conclusion[field] !== expected) {
+      return validationReject0(['Nodes', 'gLockedNANDProofs', spec.id, 'conclusion', field], 'G locked NAND proof node conclusion mismatch', {
+        expected,
+        actual: node.conclusion[field],
+      });
+    }
+  }
+
+  const proofRef = node.conclusion.proofRef;
+
+  if (
+    !isPlainObject(proofRef) ||
+    proofRef.kind !== 'ProofRef0' ||
+    proofRef.refKind !== 'KPrimitive' ||
+    proofRef.id !== spec.id
+  ) {
+    return validationReject0(['Nodes', 'gLockedNANDProofs', spec.id, 'conclusion', 'proofRef'], 'G locked NAND proof node conclusion proofRef mismatch', {
+      expected: {
+        kind: 'ProofRef0',
+        refKind: 'KPrimitive',
+        id: spec.id,
+      },
+      actual: proofRef,
+    });
+  }
+
+  if (!isPlainObject(node.payload)) {
+    return validationReject0(['Nodes', 'gLockedNANDProofs', spec.id, 'payload'], 'G locked NAND proof node payload must be an object', {
+      actual: typeof node.payload,
+    });
+  }
+
+  if (
+    node.payload.package !== 'G' ||
+    node.payload.rule !== spec.rule ||
+    node.payload.nonOpaque !== true
+  ) {
+    return validationReject0(['Nodes', 'gLockedNANDProofs', spec.id, 'payload'], 'G locked NAND proof node payload mismatch', {
+      expected: {
+        package: 'G',
+        rule: spec.rule,
+        nonOpaque: true,
+      },
+      actual: node.payload,
+    });
+  }
+
+  if (spec.id === 'G.ThresholdCert.proof') {
+    for (const [field, expected] of Object.entries({
+      residualSlackMax: 4,
+      satIffMinAboveBaseline: true,
+      unsatMinEqualsBaseline: true,
+      finalOutputGates: 4,
+      baselineDerivation: 'G.BaselineCert.proof',
+      traceDerivation: 'G.TraceCert.proof',
+    })) {
+      if (node.payload[field] !== expected) {
+        return validationReject0(['Nodes', 'gLockedNANDProofs', spec.id, 'payload', field], 'G threshold proof node payload mismatch', {
+          expected,
+          actual: node.payload[field],
+        });
+      }
+    }
+  }
+
+  return validationAccept0({
+    kind: 'GlobalGLockedNANDProofNode0NF',
+    id: spec.id,
+  });
+}
+
 
 function validateGlobalImports0(dag) {
   if (!isPlainObject(dag.ImportGraph)) {
