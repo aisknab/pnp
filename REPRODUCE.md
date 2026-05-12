@@ -15,21 +15,21 @@ This is the only public theorem boundary asserted by the release package. The co
 ### Source/checker revision
 
 ```text
-source commit: 105af516128fa0f7cc9978e6381bb6d8afdc7058
-source tag:    final-pnp-proof-report-hardened-105af51
+source commit: 8b45da4ed604a709d244c35acb886c5eee0889cd
+source tag:    final-pnp-proof-report-hardened-8b45da4
 ```
 
 ### Hardened artifact bundle
 
 ```text
 generated artifact commit before metadata seal:
-82e1a234a5a589c96c64dc12b2dd285e4b7d9b30
+c3d3915f7c37737924377076b9216efd2233037f
 
 sealed artifact tag:
-final-pnp-proof-report-artifacts-hardened-105af51-sealed
+final-pnp-proof-report-artifacts-hardened-8b45da4-sealed
 
 bundle path:
-proof-artifacts/final-pnp-proof-report-hardened-105af51/
+proof-artifacts/final-pnp-proof-report-hardened-8b45da4/
 ```
 
 ### Current canonical manuscript
@@ -39,11 +39,7 @@ canonical_proof_report.tex
 canonical_proof_report.pdf
 ```
 
-The manuscript commit is:
-
-```text
-bdcb7beb8cbcc0fd19932f1b9feef661c34dec3d
-```
+The manuscript revision is the current `main` commit that contains the 8b45da4 release-seal update to `canonical_proof_report.tex` and `canonical_proof_report.pdf`.
 
 ## Toolchain
 
@@ -66,32 +62,32 @@ git fetch --tags --force
 To inspect the source/checker revision:
 
 ```bash
-git checkout final-pnp-proof-report-hardened-105af51
+git checkout final-pnp-proof-report-hardened-8b45da4
 git rev-parse HEAD
 ```
 
 Expected source commit:
 
 ```text
-105af516128fa0f7cc9978e6381bb6d8afdc7058
+8b45da4ed604a709d244c35acb886c5eee0889cd
 ```
 
 To inspect the sealed artifact release:
 
 ```bash
-git checkout final-pnp-proof-report-artifacts-hardened-105af51-sealed
+git checkout final-pnp-proof-report-artifacts-hardened-8b45da4-sealed
 git rev-parse HEAD
 ```
 
 The sealed artifact tree must contain:
 
 ```text
-proof-artifacts/final-pnp-proof-report-hardened-105af51/README.md
-proof-artifacts/final-pnp-proof-report-hardened-105af51/release-seal.json
-proof-artifacts/final-pnp-proof-report-hardened-105af51/SHA256SUMS
-proof-artifacts/final-pnp-proof-report-hardened-105af51/SHA256SUMS.sha256
-proof-artifacts/final-pnp-proof-report-hardened-105af51/final-pnp-proof-report.summary.json
-proof-artifacts/final-pnp-proof-report-hardened-105af51/final-pnp-proof-report.full.json
+proof-artifacts/final-pnp-proof-report-hardened-8b45da4/README.md
+proof-artifacts/final-pnp-proof-report-hardened-8b45da4/release-seal.json
+proof-artifacts/final-pnp-proof-report-hardened-8b45da4/SHA256SUMS
+proof-artifacts/final-pnp-proof-report-hardened-8b45da4/SHA256SUMS.sha256
+proof-artifacts/final-pnp-proof-report-hardened-8b45da4/final-pnp-proof-report.summary.json
+proof-artifacts/final-pnp-proof-report-hardened-8b45da4/final-pnp-proof-report.full.json
 ```
 
 ## Artifact checksum verification
@@ -99,7 +95,7 @@ proof-artifacts/final-pnp-proof-report-hardened-105af51/final-pnp-proof-report.f
 From the sealed artifact tag:
 
 ```bash
-BUNDLE=proof-artifacts/final-pnp-proof-report-hardened-105af51
+BUNDLE=proof-artifacts/final-pnp-proof-report-hardened-8b45da4
 
 sha256sum -c "$BUNDLE/SHA256SUMS"
 sha256sum -c "$BUNDLE/SHA256SUMS.sha256"
@@ -125,8 +121,8 @@ npm run validate | tee validate-hardened.log
 Expected summary:
 
 ```text
-tests 984
-pass 984
+tests 1043
+pass 1043
 fail 0
 cancelled 0
 skipped 0
