@@ -1405,6 +1405,99 @@ Consequently,
 \]
 \end{theorem}
 
+\subsection{Output convention and threshold proof details}
+The locked NAND threshold uses the direct-wire multi-output convention of Section~2.1.  An output coordinate
+may be wired to a boundary coordinate, to a carrier constant, or to the output of a NAND gate.  Repeating an
+already available output coordinate does not add a NAND gate.  This convention concerns only the external
+output tuple.  It does not make checked data constants free inside the locked construction: constants that
+participate in trace constraints are still enforced by the macros \(M_0\) and \(M_1\) as required by \(G\)-Sep+.
+
+\begin{lemma}[DirectWireOutputLowerBound]
+Let \(F=(f_1,\ldots,f_B)\) be a direct-wire output tuple over a fixed carrier.  If the functions \(f_i\) are
+pairwise distinct and each \(f_i\) is nonconstant and nonprojection, then every NAND direct-wire realization of
+\(F\) has at least \(B\) NAND gates.
+\end{lemma}
+\begin{proof}
+An output coordinate that is a boundary coordinate is a projection, and an output coordinate wired to a carrier
+constant is constant.  Hence every nonconstant nonprojection output coordinate must be the output of some
+NAND gate.  One NAND gate output computes one Boolean function.  Since the \(f_i\) are pairwise distinct,
+no single gate output can serve two of them.  Thus the realization contains at least \(B\) distinct NAND gate
+outputs, hence at least \(B\) NAND gates.
+\end{proof}
+
+\begin{lemma}[MacroDistinct]
+Under \(G\)-Sep+, every exposed baseline output from an equality, constant, trace, or prefix macro is tagged by
+its macro instance and fresh lock or occurrence slot.  The exposed baseline functions are pairwise distinct,
+nonconstant, and nonprojection.  Therefore the baseline tuple forces exactly \(B^{NAND}_\varphi\) NAND gates.
+\end{lemma}
+\begin{proof}
+For the equality, constant, and NAND trace macros, Appendix~A lists the complete truth signatures and the
+positive projection signatures in the declared variable order.  The listed exposed signatures are pairwise
+distinct, nonconstant, and distinct from the projections.  \(G\)-Sep+ makes the lock and occurrence variables
+of different macro instances disjoint and also assigns fresh occurrence slots to duplicate NAND sources.  Thus
+truth signatures from different macro instances become distinct carrier-tagged functions.  Prefix-conjunction
+outputs are functions of their own check-lock sets and are separated from macro outputs by the same fresh-tag
+invariant.  Applying DirectWireOutputLowerBound gives the baseline lower bound; the displayed construction
+has exactly \(B^{NAND}_\varphi\) exposed baseline NAND outputs, so the baseline is exact.
+\end{proof}
+
+\begin{lemma}[TraceEquivalence]
+Let \(T_\varphi\) be the final prefix conjunction of all distinguished equality, constant, and NAND trace checks.
+For every assignment to the primary inputs \(X\), there exists an extension to the trace, occurrence, and lock
+slots with \(T_\varphi=1\) and \(y_{out}=1\) if and only if \(\varphi(X)=1\).  Consequently,
+\(T_\varphi\wedge y_{out}\) is satisfiable if and only if \(\varphi\) is satisfiable.
+\end{lemma}
+\begin{proof}
+If \(\varphi(X)=1\), assign each trace slot \(t_j\) the value of the corresponding NAND gate in topological
+order, assign each source occurrence slot the value of its source, and set every macro lock to its active value.
+The distinguished equality, constant, and trace outputs are then all one, so the prefix conjunction is one and
+the output trace slot is one.
+Conversely, if \(T_\varphi=1\), every distinguished check in the prefix is one.  For \(M_=\), the distinguished
+output being one forces the lock active and the two compared values equal.  For \(M_1\) and \(M_0\), it forces
+the locked occurrence value to be one or zero respectively.  For \(M_N\), it forces the trace value to equal the
+NAND of its two source values.  Topological induction over the circuit therefore shows that the trace slots are
+exactly the NAND evaluation of \(\varphi\) on \(X\).  If also \(y_{out}=1\), the evaluated circuit output is one,
+so \(\varphi(X)=1\).
+\end{proof}
+
+\begin{lemma}[ZeroOutputConvention]
+If \(\varphi\notin SAT\), then the final output \(F_\varphi=z\wedge T_\varphi\wedge y_{out}\) is the identically
+zero function.  Appending this zero output coordinate to the baseline tuple does not increase the minimum
+number of NAND gates.
+\end{lemma}
+\begin{proof}
+By TraceEquivalence, unsatisfiability of \(\varphi\) makes \(T_\varphi\wedge y_{out}\) identically zero, hence
+\(F_\varphi\) is identically zero.  In the direct-wire output convention, an output coordinate equal to a carrier
+constant may be wired to that carrier constant at zero NAND cost, and repeating an already available output
+function adds no NAND gate.  Therefore the full word in the unsatisfiable case has minimum size equal to the
+baseline minimum, namely \(B^{NAND}_\varphi\).
+\end{proof}
+
+\begin{lemma}[FinalLockSeparation]
+If \(\varphi\in SAT\), then the final output \(F_\varphi=z\wedge T_\varphi\wedge y_{out}\) is nonconstant,
+nonprojection, and distinct from every baseline output.  Hence every realization of the full word needs at least
+one NAND gate beyond the baseline.
+\end{lemma}
+\begin{proof}
+By TraceEquivalence, satisfiability gives an assignment with \(T_\varphi\wedge y_{out}=1\).  On such an
+assignment, changing the fresh final lock \(z\) changes \(F_\varphi\), so \(F_\varphi\) depends essentially on
+\(z\) and is nonconstant.  It is not a projection: setting any distinguished check inactive makes
+\(T_\varphi=0\), so with \(z=1\) the final output can still be zero.  By \(G\)-Sep+, the variable \(z\) appears
+only in the final four-gate construction and in no baseline output.  Therefore no baseline output equals
+\(F_\varphi\).  The full output tuple contains the exact baseline tuple plus this additional nonconstant
+nonprojection function, so DirectWireOutputLowerBound gives a lower bound of \(B^{NAND}_\varphi+1\).
+\end{proof}
+
+\begin{proof}[Proof of Theorem~17.2]
+MacroDistinct gives \(\mu(\text{baseline})=B^{NAND}_\varphi\).  If \(\varphi\notin SAT\), ZeroOutputConvention
+shows that the appended final coordinate is zero-cost, so \(\mu(W^{NAND}_\varphi)=B^{NAND}_\varphi\).  If
+\(\varphi\in SAT\), FinalLockSeparation gives the lower bound \(\mu(W^{NAND}_\varphi)\ge
+B^{NAND}_\varphi+1\), while the explicit construction realizes the baseline and the final ternary conjunction
+\(z\wedge T_\varphi\wedge y_{out}\) using four additional gates, giving \(\mu(W^{NAND}_\varphi)\le
+B^{NAND}_\varphi+4\).  Since \(|W^{NAND}_\varphi|=B^{NAND}_\varphi+4\), the residual slack is at most four,
+and the threshold equivalence follows.
+\end{proof}
+
 \section{Proof kernels, package manifest, and final theorem}
 
 \subsection{PCC-K and PCC-K Sigma}
