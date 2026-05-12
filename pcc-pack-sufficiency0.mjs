@@ -102,6 +102,7 @@ export const PCCPACK_REQUIRED_FIELDS0 = Object.freeze([
 
 export const PACK_SUFFICIENCY_THEOREM_IDS0 = Object.freeze([
   'PackageSufficiency',
+  'ResidualBandExactMinimization',
   'GeneratedPackageSufficiency',
   'FinalAcceptanceImpliesCheckPCCPack',
   'CheckPCCPackAcceptImpliesPEqualsNP',
@@ -319,6 +320,23 @@ export function makeSyntheticPackSufficiencyTheorem0(overrides = {}) {
       allLocalPackagesAccepted: true,
       allGlobalFirewallsAccepted: true,
       allFinalArtefactsAccepted: true,
+    },
+
+    residualBandMinimization: {
+      id: 'ResidualBandExactMinimization',
+      assumption: 'Lambda(C0)<=O(log|C0|)',
+      conclusion: 'PCCMin_exp(C0) returns an exact minimum equivalent circuit in polynomial time',
+      pccMinReturnsExactMinimum: true,
+      residualSlackBounded: true,
+      zeroSlackSound: true,
+      zeroSlackEarlierRoutesExcluded: true,
+      positiveResidualWitnessYieldsBCELReady: true,
+      bcelAnchorAlgebraBooleanOrRoutes: true,
+      selectorUniverseCompleteForPackets: true,
+      realizerBotOnlyHNBUDBlockedOrLowerRank: true,
+      hbBlockerGraphAcyclic: true,
+      zeroSlackContradictionFromPositiveSlack: true,
+      zeroSlackCertificatePolynomialSize: true,
     },
 
     generatedPackageSufficiency: {
@@ -548,6 +566,14 @@ export async function CheckPackSufficiency0(pack) {
     phaseDigests,
     theoremIds: PACK_SUFFICIENCY_THEOREM_IDS0,
     publicConclusion: pack.PackSufficiencyTheorem.publicConclusion,
+    residualBandMinimizationDigest:
+      digestCanonical0(pack.PackSufficiencyTheorem.residualBandMinimization),
+    residualBandExactMinimization:
+      pack.PackSufficiencyTheorem.residualBandMinimization?.pccMinReturnsExactMinimum === true,
+    zeroSlackSound:
+      pack.PackSufficiencyTheorem.residualBandMinimization?.zeroSlackSound === true,
+    zeroSlackContradictionFromPositiveSlack:
+      pack.PackSufficiencyTheorem.residualBandMinimization?.zeroSlackContradictionFromPositiveSlack === true,
     generatedPackageAssumption: pack.PackSufficiencyTheorem.generatedPackageSufficiency.assumption,
     coreDigest: digestCanonical0(pack.Core),
     manifestDigest: digestCanonical0(pack.Manifest),
@@ -782,6 +808,50 @@ function validatePackSufficiencyTheorem0(theorem) {
     if (packageSufficiency[field] !== true) {
       return validationReject0(['PackSufficiencyTheorem', 'packageSufficiency', field], `packageSufficiency must certify ${field}`, {
         actual: packageSufficiency[field],
+      });
+    }
+  }
+
+  const residualBand = theorem.residualBandMinimization;
+
+  if (!isPlainObject(residualBand)) {
+    return validationReject0(['PackSufficiencyTheorem', 'residualBandMinimization'], 'residualBandMinimization must be an object', null);
+  }
+
+  if (residualBand.id !== 'ResidualBandExactMinimization') {
+    return validationReject0(['PackSufficiencyTheorem', 'residualBandMinimization', 'id'], 'residualBandMinimization id mismatch', {
+      actual: residualBand.id,
+    });
+  }
+
+  if (residualBand.assumption !== 'Lambda(C0)<=O(log|C0|)') {
+    return validationReject0(['PackSufficiencyTheorem', 'residualBandMinimization', 'assumption'], 'residualBandMinimization assumption mismatch', {
+      actual: residualBand.assumption,
+    });
+  }
+
+  if (residualBand.conclusion !== 'PCCMin_exp(C0) returns an exact minimum equivalent circuit in polynomial time') {
+    return validationReject0(['PackSufficiencyTheorem', 'residualBandMinimization', 'conclusion'], 'residualBandMinimization conclusion mismatch', {
+      actual: residualBand.conclusion,
+    });
+  }
+
+  for (const field of [
+    'pccMinReturnsExactMinimum',
+    'residualSlackBounded',
+    'zeroSlackSound',
+    'zeroSlackEarlierRoutesExcluded',
+    'positiveResidualWitnessYieldsBCELReady',
+    'bcelAnchorAlgebraBooleanOrRoutes',
+    'selectorUniverseCompleteForPackets',
+    'realizerBotOnlyHNBUDBlockedOrLowerRank',
+    'hbBlockerGraphAcyclic',
+    'zeroSlackContradictionFromPositiveSlack',
+    'zeroSlackCertificatePolynomialSize',
+  ]) {
+    if (residualBand[field] !== true) {
+      return validationReject0(['PackSufficiencyTheorem', 'residualBandMinimization', field], `residualBandMinimization must certify ${field}`, {
+        actual: residualBand[field],
       });
     }
   }

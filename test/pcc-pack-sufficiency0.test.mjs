@@ -30,6 +30,9 @@ test('CheckPackSufficiency0 accepts the synthetic top-level package', async () =
   assert.deepEqual(out.NF.phaseOrder, PACK_SUFFICIENCY_PHASES0);
   assert.deepEqual(out.NF.theoremIds, PACK_SUFFICIENCY_THEOREM_IDS0);
   assert.equal(out.NF.publicConclusion.consequent, 'P = NP');
+  assert.equal(out.NF.residualBandExactMinimization, true);
+  assert.equal(out.NF.zeroSlackSound, true);
+  assert.equal(out.NF.zeroSlackContradictionFromPositiveSlack, true);
   assert.equal(out.Digest.alg, 'SHA256');
   assert.match(out.Digest.hex, /^[0-9a-f]{64}$/);
 });
@@ -224,4 +227,84 @@ test('CheckPackSufficiency0 rejects opaque proof blobs', async () => {
   assert.equal(out.Coord, 'CheckPackSufficiency0.opaqueProof');
   assert.deepEqual(out.Path, ['PCCPack0', 'PiPackSufficiency', 'proofBlob']);
   assert.equal(out.Witness.reason, 'opaque proof material is not allowed in PCCPack0');
+});
+
+test('CheckPackSufficiency0 rejects missing ZeroSlack residual-band obligations', async (t) => {
+  const cases = [
+    'pccMinReturnsExactMinimum',
+    'residualSlackBounded',
+    'zeroSlackSound',
+    'zeroSlackEarlierRoutesExcluded',
+    'positiveResidualWitnessYieldsBCELReady',
+    'bcelAnchorAlgebraBooleanOrRoutes',
+    'selectorUniverseCompleteForPackets',
+    'realizerBotOnlyHNBUDBlockedOrLowerRank',
+    'hbBlockerGraphAcyclic',
+    'zeroSlackContradictionFromPositiveSlack',
+    'zeroSlackCertificatePolynomialSize',
+  ];
+
+  for (const field of cases) {
+    await t.test(`${field}=false`, async () => {
+      const pack = makeSyntheticPCCPack0();
+
+      pack.PackSufficiencyTheorem = {
+        ...pack.PackSufficiencyTheorem,
+        residualBandMinimization: {
+          ...pack.PackSufficiencyTheorem.residualBandMinimization,
+          [field]: false,
+        },
+      };
+
+      const out = await CheckPackSufficiency0(pack);
+
+      assert.equal(out.tag, 'reject');
+      assert.equal(out.checker, 'CheckPackSufficiency0');
+      assert.equal(out.Coord, 'CheckPackSufficiency0.PackSufficiencyTheorem');
+      assert.deepEqual(out.Path, ['PackSufficiencyTheorem', 'residualBandMinimization', field]);
+      assert.equal(out.Witness.reason, `residualBandMinimization must certify ${field}`);
+    });
+  }
+});
+
+test('CheckPackSufficiency0 rejects malformed residual-band theorem boundary', async (t) => {
+  await t.test('bad assumption', async () => {
+    const pack = makeSyntheticPCCPack0();
+
+    pack.PackSufficiencyTheorem = {
+      ...pack.PackSufficiencyTheorem,
+      residualBandMinimization: {
+        ...pack.PackSufficiencyTheorem.residualBandMinimization,
+        assumption: 'Lambda(C0)<=unbounded',
+      },
+    };
+
+    const out = await CheckPackSufficiency0(pack);
+
+    assert.equal(out.tag, 'reject');
+    assert.equal(out.checker, 'CheckPackSufficiency0');
+    assert.equal(out.Coord, 'CheckPackSufficiency0.PackSufficiencyTheorem');
+    assert.deepEqual(out.Path, ['PackSufficiencyTheorem', 'residualBandMinimization', 'assumption']);
+    assert.equal(out.Witness.reason, 'residualBandMinimization assumption mismatch');
+  });
+
+  await t.test('bad conclusion', async () => {
+    const pack = makeSyntheticPCCPack0();
+
+    pack.PackSufficiencyTheorem = {
+      ...pack.PackSufficiencyTheorem,
+      residualBandMinimization: {
+        ...pack.PackSufficiencyTheorem.residualBandMinimization,
+        conclusion: 'ZeroSlack may be approximate',
+      },
+    };
+
+    const out = await CheckPackSufficiency0(pack);
+
+    assert.equal(out.tag, 'reject');
+    assert.equal(out.checker, 'CheckPackSufficiency0');
+    assert.equal(out.Coord, 'CheckPackSufficiency0.PackSufficiencyTheorem');
+    assert.deepEqual(out.Path, ['PackSufficiencyTheorem', 'residualBandMinimization', 'conclusion']);
+    assert.equal(out.Witness.reason, 'residualBandMinimization conclusion mismatch');
+  });
 });
