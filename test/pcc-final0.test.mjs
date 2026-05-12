@@ -250,3 +250,56 @@ test('CheckRowFamFinal0 rejects non-accept selected route', async () => {
   assert.deepEqual(out.Path, ['rows', index, 'selectedRoute']);
   assert.equal(out.Witness.reason, 'RowFamFinal0 rows must select Accept');
 });
+
+test('CheckFinal0 binds final theorem claims to final integration G proof chain', async (t) => {
+  await t.test('rejects PCCMinBridge without G threshold proof source', async () => {
+    const finalTheorem = makeSyntheticFinalTheorem0();
+
+    finalTheorem.PCCMinBridge = {
+      ...finalTheorem.PCCMinBridge,
+      sourceTheorems: finalTheorem.PCCMinBridge.sourceTheorems.filter((entry) => entry !== 'G.ThresholdCert.proof'),
+    };
+
+    const out = await CheckFinal0(finalTheorem);
+
+    assert.equal(out.tag, 'reject');
+    assert.equal(out.checker, 'CheckFinal0');
+    assert.equal(out.Coord, 'CheckFinal0.PCCMinBridge');
+    assert.deepEqual(out.Path, ['PCCMinBridge', 'sourceTheorems']);
+    assert.equal(out.Witness.reason, 'PCCMinBridge must cite required final source theorem');
+  });
+
+  await t.test('rejects SAT-in-P implication without global G proof assumption', async () => {
+    const finalTheorem = makeSyntheticFinalTheorem0();
+
+    finalTheorem.AcceptedPackageImpliesSATinP = {
+      ...finalTheorem.AcceptedPackageImpliesSATinP,
+      assumptions: finalTheorem.AcceptedPackageImpliesSATinP.assumptions.filter((entry) => entry !== 'G.ThresholdCert.proof'),
+    };
+
+    const out = await CheckFinal0(finalTheorem);
+
+    assert.equal(out.tag, 'reject');
+    assert.equal(out.checker, 'CheckFinal0');
+    assert.equal(out.Coord, 'CheckFinal0.SATinP');
+    assert.deepEqual(out.Path, ['AcceptedPackageImpliesSATinP', 'assumptions']);
+    assert.equal(out.Witness.reason, 'SAT in P implication must cite accepted final integration and global G locked NAND proof chain');
+  });
+
+  await t.test('rejects SAT-in-P implication without usesGlobalGThreshold flag', async () => {
+    const finalTheorem = makeSyntheticFinalTheorem0();
+
+    finalTheorem.AcceptedPackageImpliesSATinP = {
+      ...finalTheorem.AcceptedPackageImpliesSATinP,
+      usesGlobalGThreshold: false,
+    };
+
+    const out = await CheckFinal0(finalTheorem);
+
+    assert.equal(out.tag, 'reject');
+    assert.equal(out.checker, 'CheckFinal0');
+    assert.equal(out.Coord, 'CheckFinal0.SATinP');
+    assert.deepEqual(out.Path, ['AcceptedPackageImpliesSATinP', 'usesGlobalGThreshold']);
+    assert.equal(out.Witness.reason, 'SAT in P implication must certify usesGlobalGThreshold');
+  });
+});

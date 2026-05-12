@@ -105,6 +105,8 @@ export function makeSyntheticFinalTheorem0({
       sourceTheorems: [
         'ResidualBandExactMinimization',
         'LockedNANDThreshold',
+        'GlobalProofDAG.Package.G.LockedNANDThreshold',
+        'G.ThresholdCert.proof',
         'SATDecision',
       ],
     },
@@ -114,7 +116,11 @@ export function makeSyntheticFinalTheorem0({
       id: 'PackageAcceptanceImpliesSATinP',
       assumptions: [
         'CheckPCCPackexp(P)=accept',
+        'CheckGPack0(GPack)=accept',
+        'CheckGlobalProofDAG0(GlobalProofDAG)=accept',
         'CheckFinalIntegration0(FinalIntPack)=accept',
+        'Package.G.LockedNANDThreshold',
+        'G.ThresholdCert.proof',
         'Lambda(WNAND_phi)<=4',
       ],
       conclusion: 'SAT in P',
@@ -122,6 +128,11 @@ export function makeSyntheticFinalTheorem0({
       polynomial: true,
       usesPCCMinBridge: true,
       usesSATDecision: true,
+      usesAcceptedGPack: true,
+      usesAcceptedGlobalProofDAG: true,
+      usesGlobalGThreshold: true,
+      usesGThresholdProofRef: true,
+      usesFinalIntegrationGlobalGLinkage: true,
     },
 
     AcceptedPackageImpliesPEqualsNP: {
@@ -319,6 +330,7 @@ export async function CheckFinal0(finalTheorem) {
     ['satInP', `${checker}.SATinP`, () => validateSATinPImplication0(finalTheorem.AcceptedPackageImpliesSATinP)],
     ['pEqualsNP', `${checker}.PEqualsNP`, () => validatePEqualsNPImplication0(finalTheorem.AcceptedPackageImpliesPEqualsNP)],
     ['generatedSufficiency', `${checker}.GeneratedPackageSufficiency`, () => validateGeneratedSufficiency0(finalTheorem.GeneratedPackageSufficiency)],
+    ['finalGLinkage', `${checker}.FinalGLinkage`, () => validateFinalTheoremGLinkage0(finalTheorem, finalIntegrationRecord)],
     ['publicTheorem', `${checker}.FinalPublicTheorem`, () => validateFinalPublicTheorem0(finalTheorem.FinalPublicTheorem)],
     ['polynomialBound', `${checker}.PolynomialBound`, () => validateFinalPolynomialBound0(finalTheorem.PolynomialBound)],
     ['reflection', `${checker}.ReflectionCert`, () => validateFinalReflectionCert0(finalTheorem.ReflectionCert)],
@@ -497,6 +509,112 @@ export async function CheckRowFamFinal0(rowFam) {
   });
 }
 
+function validateFinalTheoremGLinkage0(finalTheorem, finalIntegrationRecord) {
+  if (!isPlainObject(finalIntegrationRecord) || finalIntegrationRecord.tag !== 'accept') {
+    return validationReject0(['FinalIntegration'], 'Final theorem requires accepted CheckFinalIntegration0 record', {
+      actual: finalIntegrationRecord?.tag,
+    });
+  }
+
+  const integrationNF = finalIntegrationRecord.NF ?? finalIntegrationRecord.nf;
+
+  if (!isPlainObject(integrationNF)) {
+    return validationReject0(['FinalIntegration', 'NF'], 'accepted final integration record must expose NF', {
+      actual: typeof integrationNF,
+    });
+  }
+
+  const expectedGPackDigest = digestCanonical0(finalTheorem.FinalIntegration.GPack);
+
+  if (
+    !isPlainObject(integrationNF.gpackDigest) ||
+    integrationNF.gpackDigest.hex !== expectedGPackDigest.hex ||
+    integrationNF.gpackDigest.alg !== expectedGPackDigest.alg
+  ) {
+    return validationReject0(['FinalIntegration', 'NF', 'gpackDigest'], 'Final theorem must bind to the accepted GPack digest', {
+      expected: expectedGPackDigest,
+      actual: integrationNF.gpackDigest,
+    });
+  }
+
+  if (!isPlainObject(integrationNF.globalProofDAGDigest)) {
+    return validationReject0(['FinalIntegration', 'NF', 'globalProofDAGDigest'], 'Final theorem requires accepted global proof DAG digest', {
+      actual: integrationNF.globalProofDAGDigest,
+    });
+  }
+
+  for (const source of [
+    'ResidualBandExactMinimization',
+    'LockedNANDThreshold',
+    'GlobalProofDAG.Package.G.LockedNANDThreshold',
+    'G.ThresholdCert.proof',
+    'SATDecision',
+  ]) {
+    if (!Array.isArray(finalTheorem.PCCMinBridge?.sourceTheorems) || !finalTheorem.PCCMinBridge.sourceTheorems.includes(source)) {
+      return validationReject0(['PCCMinBridge', 'sourceTheorems'], 'Final theorem PCCMinBridge must cite G locked NAND and SAT decision sources', {
+        missing: source,
+        actual: finalTheorem.PCCMinBridge?.sourceTheorems,
+      });
+    }
+  }
+
+  for (const assumption of [
+    'CheckPCCPackexp(P)=accept',
+    'CheckGPack0(GPack)=accept',
+    'CheckGlobalProofDAG0(GlobalProofDAG)=accept',
+    'CheckFinalIntegration0(FinalIntPack)=accept',
+    'Package.G.LockedNANDThreshold',
+    'G.ThresholdCert.proof',
+    'Lambda(WNAND_phi)<=4',
+  ]) {
+    if (!Array.isArray(finalTheorem.AcceptedPackageImpliesSATinP?.assumptions) || !finalTheorem.AcceptedPackageImpliesSATinP.assumptions.includes(assumption)) {
+      return validationReject0(['AcceptedPackageImpliesSATinP', 'assumptions'], 'Final theorem SAT-in-P implication must cite accepted final integration and G threshold proof chain', {
+        missing: assumption,
+        actual: finalTheorem.AcceptedPackageImpliesSATinP?.assumptions,
+      });
+    }
+  }
+
+  const nodeById = new Map();
+
+  for (const node of finalTheorem.FinalIntegration.GlobalProofDAG?.Nodes ?? []) {
+    if (isPlainObject(node) && typeof node.id === 'string') {
+      nodeById.set(node.id, node);
+    }
+  }
+
+  const thresholdNode = nodeById.get('G.ThresholdCert.proof');
+
+  if (!isPlainObject(thresholdNode) || thresholdNode.conclusion?.theorem !== 'LockedNANDThreshold') {
+    return validationReject0(['FinalIntegration', 'GlobalProofDAG', 'Nodes', 'G.ThresholdCert.proof'], 'Final theorem requires global G threshold proof node', {
+      actual: thresholdNode?.conclusion,
+    });
+  }
+
+  const packageNode = nodeById.get('Package.G.LockedNANDThreshold');
+
+  if (!isPlainObject(packageNode) || !Array.isArray(packageNode.premises) || !packageNode.premises.includes('G.ThresholdCert.proof')) {
+    return validationReject0(['FinalIntegration', 'GlobalProofDAG', 'Nodes', 'Package.G.LockedNANDThreshold', 'premises'], 'Final theorem requires Package.G.LockedNANDThreshold to depend on G.ThresholdCert.proof', {
+      actual: packageNode?.premises,
+    });
+  }
+
+  const finalNode = nodeById.get('Final.AcceptedPackageImpliesSATinP');
+
+  if (!isPlainObject(finalNode) || !Array.isArray(finalNode.premises) || !finalNode.premises.includes('Package.G.LockedNANDThreshold')) {
+    return validationReject0(['FinalIntegration', 'GlobalProofDAG', 'Nodes', 'Final.AcceptedPackageImpliesSATinP', 'premises'], 'Final theorem requires final SAT-in-P node to depend on Package.G.LockedNANDThreshold', {
+      actual: finalNode?.premises,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'FinalTheoremGLinkage0NF',
+    gpackDigest: expectedGPackDigest,
+    thresholdProofRef: 'G.ThresholdCert.proof',
+  });
+}
+
+
 function validateFinalShape0(finalTheorem) {
   if (!isPlainObject(finalTheorem)) {
     return validationReject0([], 'FinalTheorem0 must be an object', {
@@ -572,6 +690,21 @@ function validatePCCMinBridge0(bridge) {
     });
   }
 
+  for (const theorem of [
+    'ResidualBandExactMinimization',
+    'LockedNANDThreshold',
+    'GlobalProofDAG.Package.G.LockedNANDThreshold',
+    'G.ThresholdCert.proof',
+    'SATDecision',
+  ]) {
+    if (!Array.isArray(bridge.sourceTheorems) || !bridge.sourceTheorems.includes(theorem)) {
+      return validationReject0(['PCCMinBridge', 'sourceTheorems'], 'PCCMinBridge must cite required final source theorem', {
+        missing: theorem,
+        actual: bridge.sourceTheorems,
+      });
+    }
+  }
+
   return validationAccept0({
     kind: 'PCCMinBridge0NF',
     residualBandBound: bridge.residualBandBound,
@@ -603,11 +736,32 @@ function validateSATinPImplication0(theorem) {
     });
   }
 
+  for (const assumption of [
+    'CheckGPack0(GPack)=accept',
+    'CheckGlobalProofDAG0(GlobalProofDAG)=accept',
+    'CheckFinalIntegration0(FinalIntPack)=accept',
+    'Package.G.LockedNANDThreshold',
+    'G.ThresholdCert.proof',
+    'Lambda(WNAND_phi)<=4',
+  ]) {
+    if (!Array.isArray(theorem.assumptions) || !theorem.assumptions.includes(assumption)) {
+      return validationReject0(['AcceptedPackageImpliesSATinP', 'assumptions'], 'SAT in P implication must cite accepted final integration and global G locked NAND proof chain', {
+        missing: assumption,
+        actual: theorem.assumptions,
+      });
+    }
+  }
+
   for (const field of [
     'public',
     'polynomial',
     'usesPCCMinBridge',
     'usesSATDecision',
+    'usesAcceptedGPack',
+    'usesAcceptedGlobalProofDAG',
+    'usesGlobalGThreshold',
+    'usesGThresholdProofRef',
+    'usesFinalIntegrationGlobalGLinkage',
   ]) {
     if (theorem[field] !== true) {
       return validationReject0(['AcceptedPackageImpliesSATinP', field], `SAT in P implication must certify ${field}`, {
