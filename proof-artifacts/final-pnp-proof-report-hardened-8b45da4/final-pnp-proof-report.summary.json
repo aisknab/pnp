@@ -1,0 +1,87 @@
+{
+  "tag": "accept",
+  "checker": "CheckFinalPNPProofReport0",
+  "digest": {
+    "alg": "SHA256",
+    "bytes": "canonical-json-v0",
+    "hex": "f16b1dbf6ae17a2f379cfc594a71146e8055e93088c19f2cc9bedfab7b676ba9"
+  },
+  "finalPNPProofReportAccepted": true,
+  "status": "accepted",
+  "theorem": {
+    "statement": "P = NP",
+    "antecedent": "CheckPCCPackexp(GeneratePCCPack())=accept",
+    "consequent": "P = NP",
+    "conditional": true
+  },
+  "claimBoundary": "accepted-final-pnp-release-gate",
+  "finalPNPReleaseGateAccepted": true,
+  "finalPNPCertificateAccepted": true,
+  "releaseAuditAccepted": true,
+  "finalAcceptanceReplayClosed": true,
+  "verdict": "accept",
+  "generator": "GeneratePCCPack",
+  "checkerName": "CheckPCCPackexp0",
+  "generatorIsGeneratePCCPack": true,
+  "checkPCCPackexpAccepted": true,
+  "checkAcceptRunAccepted": true,
+  "replayAccepted": true,
+  "finalVerdictAccepted": true,
+  "publicConclusionAntecedent": "CheckPCCPackexp(GeneratePCCPack())=accept",
+  "publicConclusionConsequent": "P = NP",
+  "publicConclusionConditional": true,
+  "publicConclusionStatement": "CheckPCCPackexp(GeneratePCCPack())=accept => P = NP",
+  "finalPNPReleaseGateRecordDigest": {
+    "alg": "SHA256",
+    "bytes": "canonical-json-v0",
+    "hex": "03a264393e4711e8d2d744ff09ca953ade90b2ae6aab60f2b53905209dd925f2"
+  },
+  "releaseAuditDigest": {
+    "alg": "SHA256",
+    "bytes": "canonical-json-v0",
+    "hex": "35d7f57b60dd0fc57738cba65b16144f180bc00919272e14300774cc8e44bf25"
+  },
+  "certificateDigest": {
+    "alg": "SHA256",
+    "bytes": "canonical-json-v0",
+    "hex": "bdf4859cd9085dbdd3d987521af4e798ee0387201087663b944e862e5b51a0e2"
+  },
+  "acceptRunDigest": {
+    "alg": "SHA256",
+    "bytes": "canonical-json-v0",
+    "hex": "f7e065f260a34a9460c80a53389849aa7b144818f965ab02f934c4df1552237b"
+  },
+  "pccPackDigest": {
+    "alg": "SHA256",
+    "bytes": "canonical-json-v0",
+    "hex": "6fca5737f6a7e2207d8a1a2d5fe437dceb0c7d8e0fef6d2e9057cbbe239d682d"
+  },
+  "acceptanceTranscriptDigest": {
+    "alg": "SHA256",
+    "bytes": "canonical-json-v0",
+    "hex": "9e0cf6766ecc56f062f9a3252ca54ebb4e3704852a1b4b4dcfaeea41dd0513f7"
+  },
+  "finalVerdictRecordDigest": {
+    "alg": "SHA256",
+    "bytes": "canonical-json-v0",
+    "hex": "b80de723f2d989cd339834f7149f5a0c2df68ea9e265fdf0b30ef05f24ec0cf4"
+  },
+  "checkPCCPackexpRecordDigest": {
+    "alg": "SHA256",
+    "bytes": "canonical-json-v0",
+    "hex": "fb4231d4839d0d53125cc26ede843b6c34ffff2d3038a679ec14044a4fcd9c24"
+  },
+  "reportDigest": {
+    "alg": "SHA256",
+    "bytes": "canonical-json-v0",
+    "hex": "8290cc64b8afb5fbb172d9cee2f16430764d8e51ac5853ecb26ad6203e37e1a6"
+  },
+  "files": {
+    "envelopePath": "proof-artifacts/final-pnp-proof-report-hardened-8b45da4/compact/FinalPNPProofReport0.json",
+    "reportPath": "proof-artifacts/final-pnp-proof-report-hardened-8b45da4/compact/FinalPNPProofReportRecord0.json",
+    "releaseGatePath": "proof-artifacts/final-pnp-proof-report-hardened-8b45da4/compact/FinalPNPReleaseGate0.json",
+    "releaseGateCheckPath": "proof-artifacts/final-pnp-proof-report-hardened-8b45da4/compact/FinalPNPReleaseGate0.check.json",
+    "certificatePath": "proof-artifacts/final-pnp-proof-report-hardened-8b45da4/compact/FinalPNPCertificateRecord0.json",
+    "checkPath": "proof-artifacts/final-pnp-proof-report-hardened-8b45da4/compact/FinalPNPProofReport0.check.json"
+  }
+}
