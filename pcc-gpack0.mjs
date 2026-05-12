@@ -368,6 +368,7 @@ export function makeSyntheticGPack0(overrides = {}) {
       functionsCount: baseline,
       distinctNonconstantNonprojection: true,
       lowerBound: true,
+      derivation: makeBaselineDerivation0(preNAND, baseline),
     },
 
     TraceCert: {
@@ -380,6 +381,7 @@ export function makeSyntheticGPack0(overrides = {}) {
         preNAND.sourceOccurrences.equality +
         preNAND.sourceOccurrences.const0 +
         preNAND.sourceOccurrences.const1,
+      derivation: makeTraceDerivation0(preNAND),
     },
 
     ThresholdCert: {
@@ -391,6 +393,7 @@ export function makeSyntheticGPack0(overrides = {}) {
       residualSlackMax: 4,
       satIffMinAboveBaseline: true,
       unsatMinEqualsBaseline: true,
+      derivation: makeThresholdDerivation0(preNAND, baseline),
     },
 
     BoundsCert: {
@@ -493,9 +496,9 @@ export async function CheckGPack0(gpack) {
     ['coh', `${checker}.coh`, () => validateCohCert0(gpack.CohCert)],
     ['macroTables', `${checker}.macroTables`, () => validateMacroTables0(gpack.MacroTables)],
     ['prefix', `${checker}.prefix`, () => validatePrefixCert0(gpack)],
-    ['baseline', `${checker}.baseline`, () => validateBaselineCert0(gpack)],
-    ['trace', `${checker}.trace`, () => validateTraceCert0(gpack)],
-    ['threshold', `${checker}.threshold`, () => validateThresholdCert0(gpack)],
+    ['baseline', `${checker}.baseline`, () => validateBaselineCertHardened0(gpack)],
+    ['trace', `${checker}.trace`, () => validateTraceCertHardened0(gpack)],
+    ['threshold', `${checker}.threshold`, () => validateThresholdCertHardened0(gpack)],
     ['bounds', `${checker}.bounds`, () => validateBoundsCert0(gpack.BoundsCert)],
     ['noHiddenMinMetadata', `${checker}.noHiddenMinMetadata`, () => validateNoMinCert0(gpack.NoMinCert)],
     ['noHiddenMin', `${checker}.noHiddenMin`, () => validateNoHiddenExecutableMin0(gpack, ['GPack0'])],
@@ -1788,4 +1791,453 @@ function isPlainObject(value) {
 
   const proto = Object.getPrototypeOf(value);
   return proto === Object.prototype || proto === null;
+}
+
+// Hardened locked-NAND derivation checks.
+// These validators keep the existing structural checks, then require explicit
+// derivation records for the theorem-bearing BaselineCert, TraceCert, and
+// ThresholdCert fields. The intent is to prevent CheckGPack0 from accepting
+// bare theorem booleans without auditable derivation metadata.
+
+function makeBaselineDerivation0(preNAND, baseline) {
+  const counts = getSourceCounts0(preNAND);
+  const gateCount = preNAND.gates.length;
+
+  return {
+    kind: 'BaselineDerivation0',
+    version: CHECKER_VERSION,
+    rule: 'BaselineDistinctDirectWire0',
+    baseline,
+    gateCount,
+    equalityOccurrences: counts.equalityOccurrences,
+    constZeroOccurrences: counts.constZeroOccurrences,
+    constOneOccurrences: counts.constOneOccurrences,
+    formula: '18m + 10wEq + 3w0 + 2w1 + 2(3m - 1)',
+    components: {
+      traceOutputs: 18 * gateCount,
+      equalityOutputs: 10 * counts.equalityOccurrences,
+      constZeroOutputs: 3 * counts.constZeroOccurrences,
+      constOneOutputs: 2 * counts.constOneOccurrences,
+      prefixOutputs: 2 * (3 * gateCount - 1),
+    },
+    totalFunctions: baseline,
+    functionsCount: baseline,
+    directWireOutputConvention: true,
+    pairwiseDistinctNonconstantNonprojection: true,
+    privateLocksFresh: true,
+    macroSignaturesChecked: true,
+    crossMacroSharingForbiddenBySep: true,
+    lowerBoundRuleApplied: true,
+    gateOutputInjection: 'distinct-noninput-outputs-map-to-distinct-NAND-gates',
+    constructedBaselineExact: true,
+  };
+}
+
+function makeTraceDerivation0(preNAND) {
+  const counts = getSourceCounts0(preNAND);
+  const gateTraceCount = preNAND.gates.length;
+  const sourceOccurrenceCount =
+    counts.equalityOccurrences +
+    counts.constZeroOccurrences +
+    counts.constOneOccurrences;
+
+  return {
+    kind: 'TraceDerivation0',
+    version: CHECKER_VERSION,
+    rule: 'NANDTraceCoherence0',
+    gateTraceCount,
+    sourceOccurrenceCount,
+    equalityOccurrences: counts.equalityOccurrences,
+    constZeroOccurrences: counts.constZeroOccurrences,
+    constOneOccurrences: counts.constOneOccurrences,
+    traceMacroName: 'MN',
+    distinguishedOutput: 'q16',
+    traceEquivalence:
+      'all distinguished checks one iff trace slots encode a valid NAND evaluation',
+    topologicalInduction: true,
+    sourceOccurrencesFresh: true,
+    constantsThroughMacros: true,
+    noCarrierConstants: true,
+    traceCoherent: true,
+    allTraceMacrosAccepted: true,
+  };
+}
+
+function makeThresholdDerivation0(preNAND, baseline) {
+  return {
+    kind: 'ThresholdDerivation0',
+    version: CHECKER_VERSION,
+    rule: 'LockedNANDThreshold0',
+    baseline,
+    fullWordSize: baseline + 4,
+    residualSlackMax: 4,
+    lockedThreshold: true,
+    satIffMinAboveBaseline: true,
+    unsatMinEqualsBaseline: true,
+    satUpperBoundExtraGates: 4,
+    satLowerBoundExtraGates: 1,
+    finalOutputGates: 4,
+    finalOutput: 'Fphi = z && Tphi && yout',
+    finalLockOnlyFinal: true,
+    exposesOnlyFinal: true,
+    baselineDerivation: 'BaselineDerivation0',
+    traceDerivation: 'TraceDerivation0',
+    noHiddenMinimization: true,
+  };
+}
+
+function validateBaselineCertHardened0(gpack) {
+  const base = validateBaselineCert0(gpack);
+
+  if (!base.ok) {
+    return base;
+  }
+
+  const cert = gpack.BaselineCert;
+  const baseline = computeBaselineFromPreNAND0(gpack.PreNAND);
+
+  for (const field of [
+    'distinctNonconstantNonprojection',
+    'lowerBound',
+  ]) {
+    if (cert[field] !== true) {
+      return validationReject0(['BaselineCert', field], `BaselineCert must certify ${field}`, {
+        actual: cert[field],
+      });
+    }
+  }
+
+  if (cert.functionsCount !== baseline) {
+    return validationReject0(['BaselineCert', 'functionsCount'], 'BaselineCert functionsCount must match computed baseline', {
+      expected: baseline,
+      actual: cert.functionsCount,
+    });
+  }
+
+  const derivation = validateBaselineDerivation0(cert.derivation, gpack.PreNAND, baseline);
+
+  if (!derivation.ok) {
+    return derivation;
+  }
+
+  return validationAccept0({
+    kind: 'BaselineCertHardened0NF',
+    baseline,
+    derivation: derivation.nf,
+    prior: base.nf ?? null,
+  });
+}
+
+function validateTraceCertHardened0(gpack) {
+  const base = validateTraceCert0(gpack);
+
+  if (!base.ok) {
+    return base;
+  }
+
+  const cert = gpack.TraceCert;
+  const counts = getSourceCounts0(gpack.PreNAND);
+  const expectedSourceOccurrenceCount =
+    counts.equalityOccurrences +
+    counts.constZeroOccurrences +
+    counts.constOneOccurrences;
+
+  for (const field of [
+    'traceCoherent',
+    'allTraceMacrosAccepted',
+  ]) {
+    if (cert[field] !== true) {
+      return validationReject0(['TraceCert', field], `TraceCert must certify ${field}`, {
+        actual: cert[field],
+      });
+    }
+  }
+
+  if (cert.gateTraceCount !== gpack.PreNAND.gates.length) {
+    return validationReject0(['TraceCert', 'gateTraceCount'], 'TraceCert gateTraceCount mismatch', {
+      expected: gpack.PreNAND.gates.length,
+      actual: cert.gateTraceCount,
+    });
+  }
+
+  if (cert.sourceOccurrenceCount !== expectedSourceOccurrenceCount) {
+    return validationReject0(['TraceCert', 'sourceOccurrenceCount'], 'TraceCert sourceOccurrenceCount mismatch', {
+      expected: expectedSourceOccurrenceCount,
+      actual: cert.sourceOccurrenceCount,
+    });
+  }
+
+  const derivation = validateTraceDerivation0(cert.derivation, gpack.PreNAND);
+
+  if (!derivation.ok) {
+    return derivation;
+  }
+
+  return validationAccept0({
+    kind: 'TraceCertHardened0NF',
+    gateTraceCount: cert.gateTraceCount,
+    sourceOccurrenceCount: cert.sourceOccurrenceCount,
+    derivation: derivation.nf,
+    prior: base.nf ?? null,
+  });
+}
+
+function validateThresholdCertHardened0(gpack) {
+  const base = validateThresholdCert0(gpack);
+
+  if (!base.ok) {
+    return base;
+  }
+
+  const cert = gpack.ThresholdCert;
+  const baseline = computeBaselineFromPreNAND0(gpack.PreNAND);
+
+  for (const field of [
+    'lockedThreshold',
+    'satIffMinAboveBaseline',
+    'unsatMinEqualsBaseline',
+  ]) {
+    if (cert[field] !== true) {
+      return validationReject0(['ThresholdCert', field], `ThresholdCert must certify ${field}`, {
+        actual: cert[field],
+      });
+    }
+  }
+
+  if (cert.baseline !== baseline) {
+    return validationReject0(['ThresholdCert', 'baseline'], 'ThresholdCert baseline mismatch', {
+      expected: baseline,
+      actual: cert.baseline,
+    });
+  }
+
+  if (cert.fullWordSize !== baseline + 4) {
+    return validationReject0(['ThresholdCert', 'fullWordSize'], 'ThresholdCert fullWordSize must be baseline plus four', {
+      expected: baseline + 4,
+      actual: cert.fullWordSize,
+    });
+  }
+
+  if (cert.residualSlackMax !== 4) {
+    return validationReject0(['ThresholdCert', 'residualSlackMax'], 'ThresholdCert residual slack must be exactly four for the locked NAND release theorem', {
+      expected: 4,
+      actual: cert.residualSlackMax,
+    });
+  }
+
+  const derivation = validateThresholdDerivation0(cert.derivation, gpack.PreNAND, baseline);
+
+  if (!derivation.ok) {
+    return derivation;
+  }
+
+  return validationAccept0({
+    kind: 'ThresholdCertHardened0NF',
+    baseline,
+    fullWordSize: baseline + 4,
+    residualSlackMax: 4,
+    derivation: derivation.nf,
+    prior: base.nf ?? null,
+  });
+}
+
+function validateBaselineDerivation0(value, preNAND, baseline) {
+  if (!isPlainObject(value)) {
+    return validationReject0(['BaselineCert', 'derivation'], 'BaselineCert must include a structured derivation record', {
+      actual: typeof value,
+    });
+  }
+
+  const counts = getSourceCounts0(preNAND);
+  const expected = {
+    kind: 'BaselineDerivation0',
+    version: CHECKER_VERSION,
+    rule: 'BaselineDistinctDirectWire0',
+    baseline,
+    gateCount: preNAND.gates.length,
+    equalityOccurrences: counts.equalityOccurrences,
+    constZeroOccurrences: counts.constZeroOccurrences,
+    constOneOccurrences: counts.constOneOccurrences,
+    totalFunctions: baseline,
+    functionsCount: baseline,
+  };
+
+  for (const [field, expectedValue] of Object.entries(expected)) {
+    if (value[field] !== expectedValue) {
+      return validationReject0(['BaselineCert', 'derivation', field], 'Baseline derivation field mismatch', {
+        expected: expectedValue,
+        actual: value[field],
+      });
+    }
+  }
+
+  if (!isPlainObject(value.components)) {
+    return validationReject0(['BaselineCert', 'derivation', 'components'], 'Baseline derivation components must be an object', {
+      actual: typeof value.components,
+    });
+  }
+
+  const expectedComponents = {
+    traceOutputs: 18 * preNAND.gates.length,
+    equalityOutputs: 10 * counts.equalityOccurrences,
+    constZeroOutputs: 3 * counts.constZeroOccurrences,
+    constOneOutputs: 2 * counts.constOneOccurrences,
+    prefixOutputs: 2 * (3 * preNAND.gates.length - 1),
+  };
+
+  for (const [field, expectedValue] of Object.entries(expectedComponents)) {
+    if (value.components[field] !== expectedValue) {
+      return validationReject0(['BaselineCert', 'derivation', 'components', field], 'Baseline derivation component mismatch', {
+        expected: expectedValue,
+        actual: value.components[field],
+      });
+    }
+  }
+
+  for (const field of [
+    'directWireOutputConvention',
+    'pairwiseDistinctNonconstantNonprojection',
+    'privateLocksFresh',
+    'macroSignaturesChecked',
+    'crossMacroSharingForbiddenBySep',
+    'lowerBoundRuleApplied',
+    'constructedBaselineExact',
+  ]) {
+    if (value[field] !== true) {
+      return validationReject0(['BaselineCert', 'derivation', field], `Baseline derivation must certify ${field}`, {
+        actual: value[field],
+      });
+    }
+  }
+
+  if (value.gateOutputInjection !== 'distinct-noninput-outputs-map-to-distinct-NAND-gates') {
+    return validationReject0(['BaselineCert', 'derivation', 'gateOutputInjection'], 'Baseline derivation must state the direct-wire gate-output injection rule', {
+      actual: value.gateOutputInjection,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'BaselineDerivation0NF',
+    baseline,
+  });
+}
+
+function validateTraceDerivation0(value, preNAND) {
+  if (!isPlainObject(value)) {
+    return validationReject0(['TraceCert', 'derivation'], 'TraceCert must include a structured derivation record', {
+      actual: typeof value,
+    });
+  }
+
+  const counts = getSourceCounts0(preNAND);
+  const sourceOccurrenceCount =
+    counts.equalityOccurrences +
+    counts.constZeroOccurrences +
+    counts.constOneOccurrences;
+
+  const expected = {
+    kind: 'TraceDerivation0',
+    version: CHECKER_VERSION,
+    rule: 'NANDTraceCoherence0',
+    gateTraceCount: preNAND.gates.length,
+    sourceOccurrenceCount,
+    equalityOccurrences: counts.equalityOccurrences,
+    constZeroOccurrences: counts.constZeroOccurrences,
+    constOneOccurrences: counts.constOneOccurrences,
+    traceMacroName: 'MN',
+    distinguishedOutput: 'q16',
+  };
+
+  for (const [field, expectedValue] of Object.entries(expected)) {
+    if (value[field] !== expectedValue) {
+      return validationReject0(['TraceCert', 'derivation', field], 'Trace derivation field mismatch', {
+        expected: expectedValue,
+        actual: value[field],
+      });
+    }
+  }
+
+  for (const field of [
+    'topologicalInduction',
+    'sourceOccurrencesFresh',
+    'constantsThroughMacros',
+    'noCarrierConstants',
+    'traceCoherent',
+    'allTraceMacrosAccepted',
+  ]) {
+    if (value[field] !== true) {
+      return validationReject0(['TraceCert', 'derivation', field], `Trace derivation must certify ${field}`, {
+        actual: value[field],
+      });
+    }
+  }
+
+  if (
+    value.traceEquivalence !==
+    'all distinguished checks one iff trace slots encode a valid NAND evaluation'
+  ) {
+    return validationReject0(['TraceCert', 'derivation', 'traceEquivalence'], 'Trace derivation must state the trace equivalence invariant', {
+      actual: value.traceEquivalence,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'TraceDerivation0NF',
+    gateTraceCount: preNAND.gates.length,
+    sourceOccurrenceCount,
+  });
+}
+
+function validateThresholdDerivation0(value, preNAND, baseline) {
+  if (!isPlainObject(value)) {
+    return validationReject0(['ThresholdCert', 'derivation'], 'ThresholdCert must include a structured derivation record', {
+      actual: typeof value,
+    });
+  }
+
+  const expected = {
+    kind: 'ThresholdDerivation0',
+    version: CHECKER_VERSION,
+    rule: 'LockedNANDThreshold0',
+    baseline,
+    fullWordSize: baseline + 4,
+    residualSlackMax: 4,
+    satUpperBoundExtraGates: 4,
+    satLowerBoundExtraGates: 1,
+    finalOutputGates: 4,
+    finalOutput: 'Fphi = z && Tphi && yout',
+    baselineDerivation: 'BaselineDerivation0',
+    traceDerivation: 'TraceDerivation0',
+  };
+
+  for (const [field, expectedValue] of Object.entries(expected)) {
+    if (value[field] !== expectedValue) {
+      return validationReject0(['ThresholdCert', 'derivation', field], 'Threshold derivation field mismatch', {
+        expected: expectedValue,
+        actual: value[field],
+      });
+    }
+  }
+
+  for (const field of [
+    'lockedThreshold',
+    'satIffMinAboveBaseline',
+    'unsatMinEqualsBaseline',
+    'finalLockOnlyFinal',
+    'exposesOnlyFinal',
+    'noHiddenMinimization',
+  ]) {
+    if (value[field] !== true) {
+      return validationReject0(['ThresholdCert', 'derivation', field], `Threshold derivation must certify ${field}`, {
+        actual: value[field],
+      });
+    }
+  }
+
+  return validationAccept0({
+    kind: 'ThresholdDerivation0NF',
+    baseline,
+    fullWordSize: baseline + 4,
+    residualSlackMax: 4,
+  });
 }

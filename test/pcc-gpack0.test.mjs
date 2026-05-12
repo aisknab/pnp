@@ -242,3 +242,96 @@ test('CheckRowFamG0 wraps GPack rejection', async () => {
   assert.equal(out.Witness.reason, 'CheckGPack0 rejected');
   assert.equal(out.Witness.detail.inner.coord, 'CheckGPack0.threshold');
 });
+
+test('CheckGPack0 rejects theorem-bearing locked NAND certificate and derivation tampering', async (t) => {
+  const cases = [
+    {
+      name: 'BaselineCert.lowerBound=false',
+      coord: 'CheckGPack0.baseline',
+      root: 'BaselineCert',
+      mutate(gpack) {
+        gpack.BaselineCert.lowerBound = false;
+      },
+    },
+    {
+      name: 'BaselineCert.distinctNonconstantNonprojection=false',
+      coord: 'CheckGPack0.baseline',
+      root: 'BaselineCert',
+      mutate(gpack) {
+        gpack.BaselineCert.distinctNonconstantNonprojection = false;
+      },
+    },
+    {
+      name: 'BaselineCert.derivation.totalFunctions mismatch',
+      coord: 'CheckGPack0.baseline',
+      root: 'BaselineCert',
+      mutate(gpack) {
+        gpack.BaselineCert.derivation.totalFunctions += 1;
+      },
+    },
+    {
+      name: 'TraceCert.traceCoherent=false',
+      coord: 'CheckGPack0.trace',
+      root: 'TraceCert',
+      mutate(gpack) {
+        gpack.TraceCert.traceCoherent = false;
+      },
+    },
+    {
+      name: 'TraceCert.derivation.topologicalInduction=false',
+      coord: 'CheckGPack0.trace',
+      root: 'TraceCert',
+      mutate(gpack) {
+        gpack.TraceCert.derivation.topologicalInduction = false;
+      },
+    },
+    {
+      name: 'ThresholdCert.lockedThreshold=false',
+      coord: 'CheckGPack0.threshold',
+      root: 'ThresholdCert',
+      mutate(gpack) {
+        gpack.ThresholdCert.lockedThreshold = false;
+      },
+    },
+    {
+      name: 'ThresholdCert.satIffMinAboveBaseline=false',
+      coord: 'CheckGPack0.threshold',
+      root: 'ThresholdCert',
+      mutate(gpack) {
+        gpack.ThresholdCert.satIffMinAboveBaseline = false;
+      },
+    },
+    {
+      name: 'ThresholdCert.unsatMinEqualsBaseline=false',
+      coord: 'CheckGPack0.threshold',
+      root: 'ThresholdCert',
+      mutate(gpack) {
+        gpack.ThresholdCert.unsatMinEqualsBaseline = false;
+      },
+    },
+    {
+      name: 'ThresholdCert.derivation.satUpperBoundExtraGates mismatch',
+      coord: 'CheckGPack0.threshold',
+      root: 'ThresholdCert',
+      mutate(gpack) {
+        gpack.ThresholdCert.derivation.satUpperBoundExtraGates = 5;
+      },
+    },
+  ];
+
+  for (const testCase of cases) {
+    await t.test(testCase.name, async () => {
+      const gpack = makeSyntheticGPack0();
+
+      testCase.mutate(gpack);
+
+      const out = await CheckGPack0(gpack);
+
+      assert.equal(out.tag, 'reject');
+      assert.equal(out.checker, 'CheckGPack0');
+      assert.equal(out.Coord, testCase.coord);
+      assert.equal(out.Path[0], testCase.root);
+      assert.equal(typeof out.Witness.reason, 'string');
+    });
+  }
+});
