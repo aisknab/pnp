@@ -832,11 +832,55 @@ d(X_A)=D>0,
 \]
 \end{enumerate}
 
+\subsubsection{BCEL-ready positive nucleus proof obligations}
+The accepted residual-band theorem records the BCEL-ready positive nucleus step as checker-visible obligations:
+\begin{lstlisting}
+positiveResidualWitnessYieldsBCELReady
+positiveResidualWitnessExists
+finiteAnchorSetExtracted
+booleanAnchorAlgebraOrRoute
+minimalPositiveNucleus
+properCutConstantEquation
+anchorSizeAtLeastTwo
+bcelAnchorAlgebraBooleanOrRoutes
+\end{lstlisting}
+The first field is the public summary obligation: positive residual slack must yield a BCEL-ready hull unless an earlier route fires.  The next six fields decompose the construction.  A positive residual witness exists after terminalization and saturation, a finite anchor set is extracted from the touched primitive records, non-Boolean anchor algebra routes instead of remaining silent, a minimal positive nucleus is chosen by finite descent, every proper cut has the constant-cut equation, and the nucleus has at least two anchors.  The final field records the firewall: Boolean-anchor failures, saturation failures, and proper-cut failures are routes, not silent assumptions.
+
 \begin{theorem}[RW-BCELReady]
 If \(C\) is normalized, \(\Lambda(C)>0\), and no verified gain, exact route, named outcome, selector route, or strict residual descent is active, then there exists a BCEL-ready projection-positive hull.
 \end{theorem}
 
-The Boolean anchor algebra is not automatic. The checker must audit non-Boolean saturation triggers and route them to a named outcome, selector, exact route, gain, or strict descent. In no-outcome branches, no such trigger remains.
+\begin{proof}
+By Terminal MuBridge, \(\Lambda(C)>0\) gives a positive residual witness in the terminal full carrier.  If the witness is whole-span and cheaper, the whole-span policy emits strict residual descent, contrary to the no-outcome hypothesis.  Otherwise the witness is a proper or governed residual witness.  By SaturatePositive, deterministic saturation and completion either preserve full or projection positivity, or route the first positivity-loss coordinate to a named outcome, verified gain, exact route, selector, or strict descent.  Since those routes are absent, there is a saturated completed projection-positive hull \(H\) with
+\[
+ d(H)=D>0.
+\]
+This is the obligation \texttt{positiveResidualWitnessExists}.
+
+The primitive record universe touched by \(H\) is finite.  Partition it into canonical anchor blocks by frontier incidence, transport profile, origin/kernel/obligation footprint, activation code, and saturation-closure dependency.  The resulting finite anchor set \(A=A(H)\) defines
+\[
+ X_S=\Comp(\Sat_C(\bigcup_{a\in S}P_a))
+\]
+for every \(S\subseteq A\).  This is \texttt{finiteAnchorSetExtracted}.  If some intersection, union, transport, projection, or saturation square fails to satisfy the Boolean anchor law
+\[
+ X_S\wedge X_T=X_{S\cap T},\qquad X_S\vee X_T=X_{S\cup T},
+\]
+the first failed coordinate is a named route by the same saturation and mode-firewall rules.  Under the no-outcome hypothesis no such failure remains, so the anchor algebra is Boolean; this is \texttt{booleanAnchorAlgebraOrRoute} and \texttt{bcelAnchorAlgebraBooleanOrRoutes}.
+
+Among all nonempty anchor subsets with positive projection defect choose one minimal by inclusion and then by the residual rank tuple.  This finite choice is valid because \(A\) is finite.  Let the chosen subset again be called \(A\).  Then
+\[
+ d(X_A)=D>0,
+ \qquad
+ B\subsetneq A\Rightarrow d(X_B)=0,
+\]
+which is \texttt{minimalPositiveNucleus}.  A singleton positive nucleus would be a local positive atom with no proper cut; the finite local routers, exposure router, hereditary/budget routers, selector seed, exact route, or strict descent route would fire.  Since no such route is active, \(|A|\ge2\); this is \texttt{anchorSizeAtLeastTwo}.
+
+For every nonempty proper \(S\subsetneq A\), apply the transfer identity to the Boolean anchor square \((X_S,X_{A\setminus S})\).  Minimality makes both proper sides have zero projection defect, while the whole nucleus has defect \(D\).  Therefore the projection excess across the cut is constant:
+\[
+ \Omega(S,A\setminus S)=D.
+\]
+If the equality failed, the first failing square or transport coordinate would be routed as a named outcome, selector, exact route, gain, or strict descent.  Hence the constant-cut equation holds in the no-outcome branch; this is \texttt{properCutConstantEquation}.  The tuple \((C,H,A,\mathcal X,D)\) is therefore BCEL-ready and projection-positive.
+\end{proof}
 
 \section{BN2 through BN6 and Package C}
 
@@ -1335,6 +1379,12 @@ projectionPositivityNotLostSilently
 firstNontransparentStepRecorded
 zeroSlackEarlierRoutesExcluded
 positiveResidualWitnessYieldsBCELReady
+positiveResidualWitnessExists
+finiteAnchorSetExtracted
+booleanAnchorAlgebraOrRoute
+minimalPositiveNucleus
+properCutConstantEquation
+anchorSizeAtLeastTwo
 bcelAnchorAlgebraBooleanOrRoutes
 selectorUniverseCompleteForPackets
 realizerBotOnlyHNBUDBlockedOrLowerRank
@@ -1342,7 +1392,7 @@ hbBlockerGraphAcyclic
 zeroSlackContradictionFromPositiveSlack
 zeroSlackCertificatePolynomialSize
 \end{lstlisting}
-Mathematically, these fields assert that the gain loop is residual-band bounded, that a ZeroSlack output is exact, that terminal MuBridge translates between whole circuits and closed full words without semantic or size drift, that quotient equality is nonconstructive unless lifted, that whole-span cheaper words give strict residual descent, that transparent saturation preserves positivity, that nontransparent saturation and interface exposure route to named outcomes, that earlier gain/exact/named routes have been positively excluded, that positive residual slack yields a BCEL-ready positive nucleus unless an earlier route fires, that non-Boolean anchor-algebra failures route rather than remain silent, that the finite selector universe covers all positive packet prototypes, that realizer failure is only by typed HN/BUD or lower-rank blocking, that the blocker graph is acyclic, that positive slack contradicts the ZeroSlack ledger, and that the certificate has polynomial size.
+Mathematically, these fields assert that the gain loop is residual-band bounded, that a ZeroSlack output is exact, that terminal MuBridge translates between whole circuits and closed full words without semantic or size drift, that quotient equality is nonconstructive unless lifted, that whole-span cheaper words give strict residual descent, that transparent saturation preserves positivity, that nontransparent saturation and interface exposure route to named outcomes, that earlier gain/exact/named routes have been positively excluded, that positive residual slack yields a BCEL-ready positive nucleus unless an earlier route fires, that a finite anchor set is extracted, that Boolean anchor algebra failures route rather than remain silent, that a minimal positive nucleus with at least two anchors has a constant proper-cut equation, that the finite selector universe covers all positive packet prototypes, that realizer failure is only by typed HN/BUD or lower-rank blocking, that the blocker graph is acyclic, that positive slack contradicts the ZeroSlack ledger, and that the certificate has polynomial size.
 
 \begin{theorem}[Rank-parametric ZeroSlack]
 If
