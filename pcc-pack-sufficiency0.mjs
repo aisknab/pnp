@@ -348,6 +348,10 @@ export function makeSyntheticPackSufficiencyTheorem0(overrides = {}) {
       properCutConstantEquation: true,
       anchorSizeAtLeastTwo: true,
       bcelAnchorAlgebraBooleanOrRoutes: true,
+      sideTightOnlyNoOverclaim: true,
+      fourCornerOptimaCarrierCompatible: true,
+      sideTightCompletionExists: true,
+      tightBasisValueEqualsDelta: true,
       selectorUniverseCompleteForPackets: true,
       realizerBotOnlyHNBUDBlockedOrLowerRank: true,
       hbBlockerGraphAcyclic: true,
@@ -611,6 +615,11 @@ export async function CheckPackSufficiency0(pack) {
       pack.PackSufficiencyTheorem.residualBandMinimization?.properCutConstantEquation === true &&
       pack.PackSufficiencyTheorem.residualBandMinimization?.anchorSizeAtLeastTwo === true &&
       pack.PackSufficiencyTheorem.residualBandMinimization?.bcelAnchorAlgebraBooleanOrRoutes === true,
+    bn2SideTightCoherentOptimaComplete:
+      pack.PackSufficiencyTheorem.residualBandMinimization?.sideTightOnlyNoOverclaim === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.fourCornerOptimaCarrierCompatible === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.sideTightCompletionExists === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.tightBasisValueEqualsDelta === true,
     generatedPackageAssumption: pack.PackSufficiencyTheorem.generatedPackageSufficiency.assumption,
     coreDigest: digestCanonical0(pack.Core),
     manifestDigest: digestCanonical0(pack.Manifest),
@@ -896,6 +905,10 @@ function validatePackSufficiencyTheorem0(theorem) {
     'properCutConstantEquation',
     'anchorSizeAtLeastTwo',
     'bcelAnchorAlgebraBooleanOrRoutes',
+    'sideTightOnlyNoOverclaim',
+    'fourCornerOptimaCarrierCompatible',
+    'sideTightCompletionExists',
+    'tightBasisValueEqualsDelta',
     'selectorUniverseCompleteForPackets',
     'realizerBotOnlyHNBUDBlockedOrLowerRank',
     'hbBlockerGraphAcyclic',
