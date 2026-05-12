@@ -320,8 +320,9 @@ test('CheckFinalIntegration0 binds GPack to GlobalProofDAG locked NAND theorem',
 
     assert.equal(out.tag, 'reject');
     assert.equal(out.checker, 'CheckFinalIntegration0');
-    assert.equal(out.Coord, 'CheckFinalIntegration0.globalGLinkage');
-    assert.deepEqual(out.Path, ['GlobalProofDAG', 'Nodes', 'Final.AcceptedPackageImpliesSATinP', 'premises']);
-    assert.equal(out.Witness.reason, 'Final SAT-in-P theorem must depend on Package.G.LockedNANDThreshold');
+    assert.equal(out.Coord, 'CheckFinalIntegration0.GlobalProofDAG');
+    assert.deepEqual(out.Path, ['GlobalProofDAG']);
+    assert.equal(out.Witness.reason, 'CheckGlobalProofDAG0 rejected');
+    assert.equal(out.Witness.detail.inner.coord, 'CheckGlobalProofDAG0.gLockedNANDProofs');
   });
 });

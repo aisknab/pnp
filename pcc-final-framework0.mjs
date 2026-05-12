@@ -820,7 +820,7 @@ function validateFinalIntegrationGlobalGLinkage0(integration) {
     finalOutputGates: 4,
     baselineDerivation: 'G.BaselineCert.proof',
     traceDerivation: 'G.TraceCert.proof',
-    nonOpaque: true,
+    transparentProof: true,
   })) {
     if (thresholdNode.payload?.[field] !== expected) {
       return validationReject0(['GlobalProofDAG', 'Nodes', expectedGProofId, 'payload', field], 'GlobalProofDAG G threshold payload mismatch', {

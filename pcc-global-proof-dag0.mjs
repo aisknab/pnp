@@ -179,7 +179,7 @@ function makeGlobalGLockedNANDProofNodes0() {
         derivationKind: 'BaselineDerivation0',
         directWireOutputConvention: true,
         lowerBoundRuleApplied: true,
-        nonOpaque: true,
+        transparentProof: true,
       },
       bounds: {
         polynomial: true,
@@ -210,7 +210,7 @@ function makeGlobalGLockedNANDProofNodes0() {
         derivationKind: 'TraceDerivation0',
         topologicalInduction: true,
         traceCoherent: true,
-        nonOpaque: true,
+        transparentProof: true,
       },
       bounds: {
         polynomial: true,
@@ -246,7 +246,7 @@ function makeGlobalGLockedNANDProofNodes0() {
         satIffMinAboveBaseline: true,
         unsatMinEqualsBaseline: true,
         finalOutputGates: 4,
-        nonOpaque: true,
+        transparentProof: true,
       },
       bounds: {
         polynomial: true,
@@ -969,13 +969,13 @@ function validateGlobalGLockedNANDProofNode0(node, spec) {
   if (
     node.payload.package !== 'G' ||
     node.payload.rule !== spec.rule ||
-    node.payload.nonOpaque !== true
+    node.payload.transparentProof !== true
   ) {
     return validationReject0(['Nodes', 'gLockedNANDProofs', spec.id, 'payload'], 'G locked NAND proof node payload mismatch', {
       expected: {
         package: 'G',
         rule: spec.rule,
-        nonOpaque: true,
+        transparentProof: true,
       },
       actual: node.payload,
     });
