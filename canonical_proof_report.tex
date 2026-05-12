@@ -1448,16 +1448,46 @@ slots with \(T_\varphi=1\) and \(y_{out}=1\) if and only if \(\varphi(X)=1\).  C
 \(T_\varphi\wedge y_{out}\) is satisfiable if and only if \(\varphi\) is satisfiable.
 \end{lemma}
 \begin{proof}
-If \(\varphi(X)=1\), assign each trace slot \(t_j\) the value of the corresponding NAND gate in topological
-order, assign each source occurrence slot the value of its source, and set every macro lock to its active value.
-The distinguished equality, constant, and trace outputs are then all one, so the prefix conjunction is one and
-the output trace slot is one.
-Conversely, if \(T_\varphi=1\), every distinguished check in the prefix is one.  For \(M_=\), the distinguished
-output being one forces the lock active and the two compared values equal.  For \(M_1\) and \(M_0\), it forces
-the locked occurrence value to be one or zero respectively.  For \(M_N\), it forces the trace value to equal the
-NAND of its two source values.  Topological induction over the circuit therefore shows that the trace slots are
-exactly the NAND evaluation of \(\varphi\) on \(X\).  If also \(y_{out}=1\), the evaluated circuit output is one,
-so \(\varphi(X)=1\).
+The proof uses the following trace obligations, each of which is part of the accepted \(G\) certificate: active locks
+are forced by distinguished outputs; equality locks force equality of source and occurrence slots; constant locks
+force the occurrence value to be the stated constant; NAND trace locks force gate equations; the prefix covers
+all distinguished checks; the induction follows the topological order of the NAND circuit; the output slot
+\(y_{out}\) is the trace slot of the declared circuit output; and duplicate source occurrences are assigned fresh
+occurrence slots.
+
+For the forward direction, suppose \(\varphi(X)=1\).  Evaluate the NAND circuit in topological order.  Assign
+\(t_j\) to the value of gate \(j\), assign every source occurrence slot to the value of the source it names, and set
+every equality, constant, and trace lock to its active value.  For an input or earlier-gate source, the corresponding
+\(M_=\) distinguished output is then
+\[
+ r[(u\wedge s)\vee(\neg u\wedge\neg s)]=1,
+\]
+because the occurrence value \(u\) and source value \(s\) agree.  For a constant-one occurrence, the
+\(M_1\) distinguished output is \(r\wedge u=1\); for a constant-zero occurrence, the \(M_0\) distinguished
+output is \(r\wedge\neg u=1\).  For a NAND gate with source values \(u,v\) and trace value \(t\), the
+\(M_N\) distinguished output is
+\[
+ \ell[t=\NAND(u,v)]=1.
+\]
+The prefix-conjunction tree is exact and includes each distinguished check once, so \(T_\varphi=1\).  Since
+\(\varphi(X)=1\), the trace slot corresponding to the declared output gate has value \(1\), hence \(y_{out}=1\).
+
+For the reverse direction, suppose there is an extension with \(T_\varphi=1\) and \(y_{out}=1\).  Exactness and
+coverage of the prefix tree imply that every distinguished check is one.  For each equality check, the equation
+\[
+ r[(u\wedge s)\vee(\neg u\wedge\neg s)]=1
+\]
+forces \(r=1\) and \(u=s\).  For constant checks, \(r\wedge u=1\) forces \(u=1\), and
+\(r\wedge\neg u=1\) forces \(u=0\).  For each NAND trace check,
+\[
+ \ell[t=\NAND(u,v)]=1
+\]
+forces \(\ell=1\) and \(t=\NAND(u,v)\).  Fresh occurrence slots ensure that duplicate source occurrences are
+separately constrained and cannot be silently identified.  By induction over the topological order of the NAND
+DAG, every trace slot therefore equals the value obtained by evaluating the corresponding gate of \(\varphi\) on
+\(X\): the base cases are primary inputs and constant occurrences, and the induction step is the forced NAND
+trace equation for each gate.  The distinguished output slot \(y_{out}\) is, by construction, the trace slot of the
+declared circuit output.  Since \(y_{out}=1\), the evaluated circuit output is one, so \(\varphi(X)=1\).
 \end{proof}
 
 \begin{lemma}[ZeroOutputConvention]
