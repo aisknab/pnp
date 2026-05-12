@@ -13,6 +13,14 @@ import {
   makeMaterializedGateConfig0,
 } from './pcc-materialized0.mjs';
 
+import {
+  CheckPCCPackexp0,
+} from './pcc-check-pcc-pack-exp0.mjs';
+
+import {
+  makeConcreteMaterializedPCCPack0,
+} from './pcc-pack-concrete-materialized0.mjs';
+
 const CHECKER_VERSION = 0;
 
 export const RUNALL_PUBLIC_CONCLUSION0 = Object.freeze({
@@ -53,6 +61,7 @@ export const RUNALL_CHECKER_COVERAGE0 = Object.freeze([
   'CheckPackSufficiency0',
   'ReplayAcceptRun0',
   'CheckAcceptRun0',
+  'CheckPCCPackexp0',
   'EmitFinalVerdict0',
   'CheckIntegratedPipeline0',
   'RunAll0',
@@ -63,6 +72,7 @@ export function makeSyntheticRunAllInput0(overrides = {}) {
     kind: 'RunAllInput0',
     version: CHECKER_VERSION,
     Pipeline: makeSyntheticIntegratedPipeline0(),
+    ConcretePCCPack: null,
     RequiredPhaseOrder: INTEGRATED_PIPELINE_PHASES0,
     RequiredCheckers: RUNALL_CHECKER_COVERAGE0,
     RequiredPublicConclusion: RUNALL_PUBLIC_CONCLUSION0,
@@ -162,6 +172,45 @@ export async function CheckRunAll0(input = makeSyntheticRunAllInput0()) {
     });
   }
 
+  const concretePCCPack = normalized.ConcretePCCPack ?? await makeConcreteMaterializedPCCPack0();
+  const pccPackexpRecord = await CheckPCCPackexp0(concretePCCPack);
+  const pccPackexp = recordToValidation0(pccPackexpRecord, ['ConcretePCCPack']);
+
+  ledger.push({
+    phase: 'CheckPCCPackexp0',
+    status: pccPackexp.ok ? 'pass' : 'fail',
+    digest: pccPackexpRecord.Digest ?? pccPackexpRecord.digest ?? digestCanonical0(pccPackexpRecord),
+  });
+
+  if (!pccPackexp.ok) {
+    return makeRejectRecord({
+      checker,
+      coord: `${checker}.CheckPCCPackexp0`,
+      path: pccPackexp.path,
+      witness: pccPackexp.witness,
+      ledger,
+    });
+  }
+
+  const pccPackexpNF = pccPackexpRecord.NF ?? pccPackexpRecord.nf;
+  const pccPackexpStatus = validateCheckPCCPackexpStatus0(pccPackexpNF, normalized);
+
+  ledger.push({
+    phase: 'CheckPCCPackexp0.status',
+    status: pccPackexpStatus.ok ? 'pass' : 'fail',
+    digest: digestCanonical0(pccPackexpStatus.nf ?? pccPackexpStatus.witness ?? null),
+  });
+
+  if (!pccPackexpStatus.ok) {
+    return makeRejectRecord({
+      checker,
+      coord: `${checker}.CheckPCCPackexp0.status`,
+      path: pccPackexpStatus.path,
+      witness: pccPackexpStatus.witness,
+      ledger,
+    });
+  }
+
   const nf = {
     kind: 'RunAll0StatusNF',
     checker,
@@ -172,6 +221,13 @@ export async function CheckRunAll0(input = makeSyntheticRunAllInput0()) {
     phaseCount: INTEGRATED_PIPELINE_PHASES0.length,
     checkerCoverage: RUNALL_CHECKER_COVERAGE0,
     checkerCount: RUNALL_CHECKER_COVERAGE0.length,
+    checkPCCPackexpAccepted: pccPackexpRecord.tag === 'accept',
+    checkPCCPackexpDigest: pccPackexpRecord.Digest ?? pccPackexpRecord.digest,
+    checkPCCPackexpConcreteCoverageDigest: pccPackexpNF.concreteCoverageDigest,
+    checkPCCPackexpPublicConclusionOnlyAfterAcceptRun: pccPackexpNF.publicConclusionOnlyAfterAcceptRun,
+    checkPCCPackexpFinalTheoremGLinkageComplete: pccPackexpNF.finalTheoremGLinkageComplete,
+    checkPCCPackexpFinalIntegrationGlobalGLinkageComplete: pccPackexpNF.finalIntegrationGlobalGLinkageComplete,
+    checkPCCPackexpGlobalProofDAGHasGThresholdProofNode: pccPackexpNF.globalProofDAGHasGThresholdProofNode,
     finalVerdict: integratedNF.finalVerdict,
     publicConclusionEmitted: integratedNF.publicConclusionEmitted,
     publicConclusion: RUNALL_PUBLIC_CONCLUSION0,
@@ -196,6 +252,7 @@ function normalizeRunAllInput0(input) {
   if (isPlainObject(input) && input.kind === 'IntegratedPipeline0') {
     return makeSyntheticRunAllInput0({
       Pipeline: input,
+      ConcretePCCPack: null,
       RequireMaterialized: false,
     });
   }
@@ -205,6 +262,7 @@ function normalizeRunAllInput0(input) {
       kind: input.kind ?? 'RunAllInput0',
       version: input.version ?? CHECKER_VERSION,
       Pipeline: input.Pipeline,
+      ConcretePCCPack: input.ConcretePCCPack ?? input.concretePCCPack ?? null,
       RequiredPhaseOrder: input.RequiredPhaseOrder ?? INTEGRATED_PIPELINE_PHASES0,
       RequiredCheckers: input.RequiredCheckers ?? RUNALL_CHECKER_COVERAGE0,
       RequiredPublicConclusion: input.RequiredPublicConclusion ?? RUNALL_PUBLIC_CONCLUSION0,
@@ -218,6 +276,7 @@ function normalizeRunAllInput0(input) {
       kind: input.kind ?? 'RunAllInput0',
       version: input.version ?? CHECKER_VERSION,
       Pipeline: input.pipeline,
+      ConcretePCCPack: input.ConcretePCCPack ?? input.concretePCCPack ?? null,
       RequiredPhaseOrder: input.RequiredPhaseOrder ?? INTEGRATED_PIPELINE_PHASES0,
       RequiredCheckers: input.RequiredCheckers ?? RUNALL_CHECKER_COVERAGE0,
       RequiredPublicConclusion: input.RequiredPublicConclusion ?? RUNALL_PUBLIC_CONCLUSION0,
@@ -227,6 +286,66 @@ function normalizeRunAllInput0(input) {
   }
 
   return input;
+}
+
+function validateCheckPCCPackexpStatus0(nf, input) {
+  if (!isPlainObject(nf)) {
+    return validationReject0(['CheckPCCPackexp0', 'NF'], 'RunAll0 requires CheckPCCPackexp0 NF', {
+      actual: typeof nf,
+    });
+  }
+
+  for (const field of [
+    'checkPCCPackexp',
+    'materializedPath',
+    'concretePCCPack',
+    'publicConclusionOnlyAfterAcceptRun',
+    'globalProofDAGHasGThresholdProofNode',
+    'globalProofDAGPackageGDependsOnGThresholdProof',
+    'globalProofDAGFinalSATinPDependsOnPackageG',
+    'finalIntegrationGlobalGLinkageComplete',
+    'finalTheoremGLinkageComplete',
+    'finalTheoremUsesGlobalGThreshold',
+    'finalTheoremUsesGThresholdProofRef',
+    'finalTheoremUsesFinalIntegrationGlobalGLinkage',
+  ]) {
+    if (nf[field] !== true) {
+      return validationReject0(['CheckPCCPackexp0', 'NF', field], 'RunAll0 requires accepted CheckPCCPackexp0 final G proof-chain coverage', {
+        actual: nf[field],
+      });
+    }
+  }
+
+  if (!isPlainObject(nf.publicConclusion)) {
+    return validationReject0(['CheckPCCPackexp0', 'NF', 'publicConclusion'], 'CheckPCCPackexp0 NF must expose publicConclusion', {
+      actual: typeof nf.publicConclusion,
+    });
+  }
+
+  if (nf.publicConclusion.antecedent !== input.RequiredPublicConclusion.antecedent) {
+    return validationReject0(['CheckPCCPackexp0', 'NF', 'publicConclusion', 'antecedent'], 'CheckPCCPackexp0 public conclusion antecedent mismatch', {
+      expected: input.RequiredPublicConclusion.antecedent,
+      actual: nf.publicConclusion.antecedent,
+    });
+  }
+
+  if (nf.publicConclusion.consequent !== input.RequiredPublicConclusion.consequent) {
+    return validationReject0(['CheckPCCPackexp0', 'NF', 'publicConclusion', 'consequent'], 'CheckPCCPackexp0 public conclusion consequent mismatch', {
+      expected: input.RequiredPublicConclusion.consequent,
+      actual: nf.publicConclusion.consequent,
+    });
+  }
+
+  if (nf.publicConclusion.conditional !== true) {
+    return validationReject0(['CheckPCCPackexp0', 'NF', 'publicConclusion', 'conditional'], 'CheckPCCPackexp0 public conclusion must be conditional', {
+      actual: nf.publicConclusion.conditional,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'RunAllCheckPCCPackexpStatus0NF',
+    checkPCCPackexpDigest: digestCanonical0(nf),
+  });
 }
 
 function validateRunAllInput0(input) {
@@ -251,6 +370,16 @@ function validateRunAllInput0(input) {
   if (!isPlainObject(input.Pipeline)) {
     return validationReject0(['Pipeline'], 'RunAllInput0 Pipeline must be an object', {
       actual: typeof input.Pipeline,
+    });
+  }
+
+  if (
+    input.ConcretePCCPack !== null &&
+    input.ConcretePCCPack !== undefined &&
+    !isPlainObject(input.ConcretePCCPack)
+  ) {
+    return validationReject0(['ConcretePCCPack'], 'RunAllInput0 ConcretePCCPack must be an object when present', {
+      actual: typeof input.ConcretePCCPack,
     });
   }
 

@@ -14,6 +14,11 @@ import {
   makeSyntheticIntegratedPipeline0,
 } from '../pcc-integrated-pipeline0.mjs';
 
+import {
+  makeConcreteMaterializedPCCPack0,
+  summarizeConcretePCCPackCoverage0,
+} from '../pcc-pack-concrete-materialized0.mjs';
+
 test('RunAll0 accepts the synthetic full-stack public status artefact', async () => {
   const out = await RunAll0();
 
@@ -27,6 +32,12 @@ test('RunAll0 accepts the synthetic full-stack public status artefact', async ()
   assert.equal(out.NF.publicConclusionEmitted, true);
   assert.equal(out.NF.finalVerdict, 'accept');
   assert.equal(out.NF.checkerCount, RUNALL_CHECKER_COVERAGE0.length);
+  assert.equal(out.NF.checkPCCPackexpAccepted, true);
+  assert.equal(out.NF.checkPCCPackexpPublicConclusionOnlyAfterAcceptRun, true);
+  assert.equal(out.NF.checkPCCPackexpFinalTheoremGLinkageComplete, true);
+  assert.equal(out.NF.checkPCCPackexpFinalIntegrationGlobalGLinkageComplete, true);
+  assert.equal(out.NF.checkPCCPackexpGlobalProofDAGHasGThresholdProofNode, true);
+  assert.equal(RUNALL_CHECKER_COVERAGE0.includes('CheckPCCPackexp0'), true);
   assert.equal(out.Digest.alg, 'SHA256');
   assert.match(out.Digest.hex, /^[0-9a-f]{64}$/);
 });
@@ -133,4 +144,42 @@ test('RunAll0 rejects if required checker coverage is missing', async () => {
   assert.equal(out.Coord, 'RunAll0.input');
   assert.deepEqual(out.Path, ['RequiredCheckers']);
   assert.equal(out.Witness.reason, 'RunAllInput0 RequiredCheckers is missing required checker names');
+});
+
+test('RunAll0 rejects if CheckPCCPackexp0 final G proof-chain coverage is missing', async () => {
+  const concretePCCPack = await makeConcreteMaterializedPCCPack0();
+
+  concretePCCPack.MaterializedPCCPackEnvelope = {
+    ...concretePCCPack.MaterializedPCCPackEnvelope,
+    FinalIntegrationEnvelope: {
+      ...concretePCCPack.MaterializedPCCPackEnvelope.FinalIntegrationEnvelope,
+      ConcreteLinks: {
+        ...concretePCCPack.MaterializedPCCPackEnvelope.FinalIntegrationEnvelope.ConcreteLinks,
+        finalTheoremGLinkageComplete: false,
+      },
+    },
+  };
+
+  concretePCCPack.ConcreteCoverage = summarizeConcretePCCPackCoverage0(
+    concretePCCPack.MaterializedPCCPackEnvelope,
+  );
+
+  concretePCCPack.Linkage = {
+    ...concretePCCPack.Linkage,
+    materializedPCCPackDigest: undefined,
+    pccPackDigest: undefined,
+    concreteCoverageDigest: undefined,
+  };
+
+  const input = makeSyntheticRunAllInput0({
+    ConcretePCCPack: concretePCCPack,
+  });
+
+  const out = await RunAll0(input);
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.checker, 'RunAll0');
+  assert.equal(out.Coord, 'RunAll0.CheckPCCPackexp0');
+  assert.deepEqual(out.Path, ['ConcretePCCPack']);
+  assert.equal(out.Witness.reason, 'CheckPCCPackexp0 rejected');
 });
