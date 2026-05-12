@@ -1272,6 +1272,29 @@ PCCOracle_exp(C):
 
 The ZeroSlack certificate stores normalized-input record, NoHereditary sidecar, NoBudget sidecar, HB blocker graph, rank list, selector silence ledger for \(K_2,K_3,K_{sp}\), no-lower ledger, no-faithful rank induction, \(NH_{\le P}\wedge NB_{\le P}\) rank induction, and BCEL contradiction proof.
 
+\subsubsection{ZeroSlack proof obligations}
+The accepted package-sufficiency theorem records the residual-band exact-minimization block as a first-class theorem object, \(\mathsf{ResidualBandExactMinimization}\).  Its boundary is
+\[
+ \Lambda(C_0)\le O(\log |C_0|)
+ \quad\Longrightarrow\quad
+ \PCCMin(C_0)\text{ returns an exact minimum equivalent circuit in polynomial time}.
+\]
+The checker-visible ZeroSlack obligations are the following record fields:
+\begin{lstlisting}
+pccMinReturnsExactMinimum
+residualSlackBounded
+zeroSlackSound
+zeroSlackEarlierRoutesExcluded
+positiveResidualWitnessYieldsBCELReady
+bcelAnchorAlgebraBooleanOrRoutes
+selectorUniverseCompleteForPackets
+realizerBotOnlyHNBUDBlockedOrLowerRank
+hbBlockerGraphAcyclic
+zeroSlackContradictionFromPositiveSlack
+zeroSlackCertificatePolynomialSize
+\end{lstlisting}
+Mathematically, these fields assert that the gain loop is residual-band bounded, that a ZeroSlack output is exact, that earlier gain/exact/named routes have been positively excluded, that positive residual slack yields a BCEL-ready positive nucleus unless an earlier route fires, that non-Boolean anchor-algebra failures route rather than remain silent, that the finite selector universe covers all positive packet prototypes, that realizer failure is only by typed HN/BUD or lower-rank blocking, that the blocker graph is acyclic, that positive slack contradicts the ZeroSlack ledger, and that the certificate has polynomial size.
+
 \begin{theorem}[Rank-parametric ZeroSlack]
 If
 \[
@@ -1284,7 +1307,16 @@ then
 \end{theorem}
 
 \begin{proof}
-Assume \(\Lambda(C)>0\). The residual witness and BCEL stack yield an allowed earlier route or a faithful selector. The no-lower ledger excludes earlier routes. The HB rank induction excludes HN and budget active blockers and proves no faithful selector exists at any rank under selector silence. Contradiction.
+Assume for contradiction that \(\Lambda(C)>0\) and that the oracle nevertheless returns \(\ZeroSlack(C,\mathcal Z)\).  The certificate first rules out higher-priority exits: HResolve did not return a minimum or a gain, BudgetResolve did not return a minimum or a gain, and the no-lower ledger excludes named obstructions, exact routes, selector descents, and strict residual descents.  Hence any positive residual witness must survive into the residual-witness stack.
+
+The residual-witness obligations then give a saturated projection-positive BCEL-ready hull \(BCELReady(C,H,A,\mathcal X,D)\) with \(D>0\), unless one of the excluded routes has already fired.  The anchor-algebra obligation says that every failure of Boolean anchor algebra, saturation compatibility, or proper-cut constancy is routed to a named outcome, selector, exact route, gain, or strict descent.  Since the ZeroSlack branch asserts those routes are absent, the positive nucleus satisfies the BCEL hypotheses.
+
+BN2 through BN6 convert this constant-cut positive nucleus into a positive pair, balanced-triple, or full-span packet.  Selector completeness says every such packet has a representative in the finite selector universe \(K_2(C)\cup K_3(C)\cup K_{sp}(C)\), unless a named route or verified gain has already fired.  Therefore positive residual slack yields a faithful selector \((K,P)
+\) at some finite packet rank.
+
+Choose a faithful selector of least rank.  If its realizer emits a gain, the oracle would return that gain before ZeroSlack.  If the realizer emits \(\bot\), the realizer obligation permits only an HN blocker, a BUD blocker, or a lower-rank faithful-selector blocker.  The lower-rank case contradicts minimality and selector silence.  The HN/BUD cases contradict the simultaneous HB negative closure, because the blocker graph is acyclic by the recorded decreasing rank and tie-break measure.  Thus the faithful selector cannot be blocked.
+
+So positive residual slack forces either an earlier route, a realized gain, or an unblocked faithful selector.  All are incompatible with the emitted ZeroSlack ledger.  Therefore \(\Lambda(C)>0\) is impossible, and \(\Lambda(C)=0\).  The certificate-size obligation ensures the rank list, selector-silence records, sidecars, blocker graph, and BCEL contradiction proof are polynomially bounded under the accepted schedule.
 \end{proof}
 
 \subsection{PCCMin}
@@ -1315,6 +1347,17 @@ If the accepted package is valid and
 \]
 then \(\PCCMin(C_0)\) returns an exact minimum equivalent circuit in polynomial time.
 \end{theorem}
+
+\begin{proof}
+The proof is the checker-visible obligation \texttt{pccMinReturnsExactMinimum}.  Each nonterminal gain returned
+by NormalizeOrGain or by \(\PCCOracle\) is accepted by \(\VerifyDW\), so the global slack law decreases
+\(\Lambda\) by at least one.  The field \texttt{residualSlackBounded} records that the starting residual band is
+\(O(\log |C_0|)\), so only polynomially many gain iterations can occur.  When \(\PCCOracle\) returns
+\(\Minimum(C,M,M_c)\), the hereditary or budget exact route supplies an exact minimum witness.  When it
+returns \(\ZeroSlack(C,\mathcal Z)\), Theorem~16.1 and \texttt{zeroSlackSound} give \(\Lambda(C)=0\), hence
+\(|C|=\mu(C)\) and the current circuit is already exact minimum.  Therefore the algorithm terminates after
+polynomially many checked steps and returns an exact minimum equivalent circuit.
+\end{proof}
 
 \section{Locked NAND SAT embedding}
 
