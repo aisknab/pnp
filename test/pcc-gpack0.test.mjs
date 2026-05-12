@@ -454,3 +454,108 @@ test('CheckGPack0 resolves locked NAND derivation proof refs to typed non-opaque
     assert.equal(typeof out.Witness.reason, 'string');
   });
 });
+
+
+test('CheckGPack0 rejects explicit locked NAND theorem-obligation tampering', async (t) => {
+  const cases = [
+    {
+      name: 'BaselineCert.directWireOutputLowerBound=false',
+      coord: 'CheckGPack0.baseline',
+      path0: 'BaselineCert',
+      mutate(gpack) {
+        gpack.BaselineCert.directWireOutputLowerBound = false;
+      },
+    },
+    {
+      name: 'BaselineCert.derivation.directWireOutputLowerBound=false',
+      coord: 'CheckGPack0.baseline',
+      path0: 'BaselineCert',
+      mutate(gpack) {
+        gpack.BaselineCert.derivation.directWireOutputLowerBound = false;
+      },
+    },
+    {
+      name: 'TraceCert.traceEquivalence=false',
+      coord: 'CheckGPack0.trace',
+      path0: 'TraceCert',
+      mutate(gpack) {
+        gpack.TraceCert.traceEquivalence = false;
+      },
+    },
+    {
+      name: 'ThresholdCert.zeroOutputConvention=false',
+      coord: 'CheckGPack0.threshold',
+      path0: 'ThresholdCert',
+      mutate(gpack) {
+        gpack.ThresholdCert.zeroOutputConvention = false;
+      },
+    },
+    {
+      name: 'ThresholdCert.finalLockSeparation=false',
+      coord: 'CheckGPack0.threshold',
+      path0: 'ThresholdCert',
+      mutate(gpack) {
+        gpack.ThresholdCert.finalLockSeparation = false;
+      },
+    },
+    {
+      name: 'ThresholdCert.derivation.zeroOutputConvention=false',
+      coord: 'CheckGPack0.threshold',
+      path0: 'ThresholdCert',
+      mutate(gpack) {
+        gpack.ThresholdCert.derivation.zeroOutputConvention = false;
+      },
+    },
+    {
+      name: 'ThresholdCert.derivation.finalLockSeparation=false',
+      coord: 'CheckGPack0.threshold',
+      path0: 'ThresholdCert',
+      mutate(gpack) {
+        gpack.ThresholdCert.derivation.finalLockSeparation = false;
+      },
+    },
+    {
+      name: 'PiG Baseline proof payload directWireOutputLowerBound=false',
+      coord: 'CheckGPack0.derivationProofNodes',
+      path0: 'PiG',
+      mutate(gpack) {
+        const node = gpack.PiG.proofNodes.find((entry) => entry.id === 'G.BaselineCert.proof');
+        node.payload.directWireOutputLowerBound = false;
+      },
+    },
+    {
+      name: 'PiG Threshold proof payload zeroOutputConvention=false',
+      coord: 'CheckGPack0.derivationProofNodes',
+      path0: 'PiG',
+      mutate(gpack) {
+        const node = gpack.PiG.proofNodes.find((entry) => entry.id === 'G.ThresholdCert.proof');
+        node.payload.zeroOutputConvention = false;
+      },
+    },
+    {
+      name: 'PiG Threshold proof payload finalLockSeparation=false',
+      coord: 'CheckGPack0.derivationProofNodes',
+      path0: 'PiG',
+      mutate(gpack) {
+        const node = gpack.PiG.proofNodes.find((entry) => entry.id === 'G.ThresholdCert.proof');
+        node.payload.finalLockSeparation = false;
+      },
+    },
+  ];
+
+  for (const testCase of cases) {
+    await t.test(testCase.name, async () => {
+      const gpack = makeSyntheticGPack0();
+
+      testCase.mutate(gpack);
+
+      const out = await CheckGPack0(gpack);
+
+      assert.equal(out.tag, 'reject');
+      assert.equal(out.checker, 'CheckGPack0');
+      assert.equal(out.Coord, testCase.coord);
+      assert.equal(out.Path[0], testCase.path0);
+      assert.equal(typeof out.Witness.reason, 'string');
+    });
+  }
+});

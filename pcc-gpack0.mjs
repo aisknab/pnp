@@ -368,6 +368,7 @@ export function makeSyntheticGPack0(overrides = {}) {
       functionsCount: baseline,
       distinctNonconstantNonprojection: true,
       lowerBound: true,
+      directWireOutputLowerBound: true,
       derivation: makeBaselineDerivation0(preNAND, baseline),
     },
 
@@ -375,6 +376,7 @@ export function makeSyntheticGPack0(overrides = {}) {
       kind: 'TraceCert0',
       version: CHECKER_VERSION,
       traceCoherent: true,
+      traceEquivalence: true,
       gateTraceCount: preNAND.gates.length,
       allTraceMacrosAccepted: true,
       sourceOccurrenceCount:
@@ -393,6 +395,8 @@ export function makeSyntheticGPack0(overrides = {}) {
       residualSlackMax: 4,
       satIffMinAboveBaseline: true,
       unsatMinEqualsBaseline: true,
+      zeroOutputConvention: true,
+      finalLockSeparation: true,
       derivation: makeThresholdDerivation0(preNAND, baseline),
     },
 
@@ -1848,6 +1852,7 @@ function makeBaselineDerivation0(preNAND, baseline) {
     totalFunctions: baseline,
     functionsCount: baseline,
     directWireOutputConvention: true,
+    directWireOutputLowerBound: true,
     pairwiseDistinctNonconstantNonprojection: true,
     privateLocksFresh: true,
     macroSignaturesChecked: true,
@@ -1901,6 +1906,8 @@ function makeThresholdDerivation0(preNAND, baseline) {
     lockedThreshold: true,
     satIffMinAboveBaseline: true,
     unsatMinEqualsBaseline: true,
+    zeroOutputConvention: true,
+    finalLockSeparation: true,
     satUpperBoundExtraGates: 4,
     satLowerBoundExtraGates: 1,
     finalOutputGates: 4,
@@ -1947,6 +1954,7 @@ function makeGProofNodes0(preNAND, baseline) {
         baseline: baselineDerivation.baseline,
         totalFunctions: baselineDerivation.totalFunctions,
         directWireOutputConvention: baselineDerivation.directWireOutputConvention,
+        directWireOutputLowerBound: baselineDerivation.directWireOutputLowerBound,
         pairwiseDistinctNonconstantNonprojection:
           baselineDerivation.pairwiseDistinctNonconstantNonprojection,
         lowerBoundRuleApplied: baselineDerivation.lowerBoundRuleApplied,
@@ -2016,6 +2024,8 @@ function makeGProofNodes0(preNAND, baseline) {
         lockedThreshold: thresholdDerivation.lockedThreshold,
         satIffMinAboveBaseline: thresholdDerivation.satIffMinAboveBaseline,
         unsatMinEqualsBaseline: thresholdDerivation.unsatMinEqualsBaseline,
+        zeroOutputConvention: thresholdDerivation.zeroOutputConvention,
+        finalLockSeparation: thresholdDerivation.finalLockSeparation,
         finalOutputGates: thresholdDerivation.finalOutputGates,
         noHiddenMinimization: thresholdDerivation.noHiddenMinimization,
         proofRef: thresholdDerivation.proofRef,
@@ -2302,6 +2312,7 @@ function validateGProofNodePayload0(payload, path, rowKind, cert) {
       baseline: derivation.baseline,
       totalFunctions: derivation.totalFunctions,
       directWireOutputConvention: true,
+      directWireOutputLowerBound: true,
       pairwiseDistinctNonconstantNonprojection: true,
       lowerBoundRuleApplied: true,
       gateOutputInjection: 'distinct-noninput-outputs-map-to-distinct-NAND-gates',
@@ -2334,6 +2345,8 @@ function validateGProofNodePayload0(payload, path, rowKind, cert) {
       lockedThreshold: true,
       satIffMinAboveBaseline: true,
       unsatMinEqualsBaseline: true,
+      zeroOutputConvention: true,
+      finalLockSeparation: true,
       finalOutputGates: 4,
       noHiddenMinimization: true,
     };
@@ -2617,6 +2630,7 @@ function validateBaselineCertHardened0(gpack) {
   for (const field of [
     'distinctNonconstantNonprojection',
     'lowerBound',
+    'directWireOutputLowerBound',
   ]) {
     if (cert[field] !== true) {
       return validationReject0(['BaselineCert', field], `BaselineCert must certify ${field}`, {
@@ -2662,6 +2676,7 @@ function validateTraceCertHardened0(gpack) {
 
   for (const field of [
     'traceCoherent',
+    'traceEquivalence',
     'allTraceMacrosAccepted',
   ]) {
     if (cert[field] !== true) {
@@ -2714,6 +2729,8 @@ function validateThresholdCertHardened0(gpack) {
     'lockedThreshold',
     'satIffMinAboveBaseline',
     'unsatMinEqualsBaseline',
+    'zeroOutputConvention',
+    'finalLockSeparation',
   ]) {
     if (cert[field] !== true) {
       return validationReject0(['ThresholdCert', field], `ThresholdCert must certify ${field}`, {
@@ -2814,6 +2831,7 @@ function validateBaselineDerivation0(value, preNAND, baseline) {
 
   for (const field of [
     'directWireOutputConvention',
+    'directWireOutputLowerBound',
     'pairwiseDistinctNonconstantNonprojection',
     'privateLocksFresh',
     'macroSignaturesChecked',
@@ -2963,6 +2981,8 @@ function validateThresholdDerivation0(value, preNAND, baseline) {
     'lockedThreshold',
     'satIffMinAboveBaseline',
     'unsatMinEqualsBaseline',
+    'zeroOutputConvention',
+    'finalLockSeparation',
     'finalLockOnlyFinal',
     'exposesOnlyFinal',
     'noHiddenMinimization',
