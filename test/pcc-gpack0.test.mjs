@@ -559,3 +559,107 @@ test('CheckGPack0 rejects explicit locked NAND theorem-obligation tampering', as
     });
   }
 });
+
+
+test('CheckGPack0 rejects detailed TraceEquivalence obligation tampering', async (t) => {
+  const cases = [
+    {
+      name: 'TraceCert.lockActivationRequired=false',
+      coord: 'CheckGPack0.trace',
+      path0: 'TraceCert',
+      mutate(gpack) {
+        gpack.TraceCert.lockActivationRequired = false;
+      },
+    },
+    {
+      name: 'TraceCert.equalityLocksForceEquality=false',
+      coord: 'CheckGPack0.trace',
+      path0: 'TraceCert',
+      mutate(gpack) {
+        gpack.TraceCert.equalityLocksForceEquality = false;
+      },
+    },
+    {
+      name: 'TraceCert.constantLocksForceValues=false',
+      coord: 'CheckGPack0.trace',
+      path0: 'TraceCert',
+      mutate(gpack) {
+        gpack.TraceCert.constantLocksForceValues = false;
+      },
+    },
+    {
+      name: 'TraceCert.nandTraceLocksForceGateEquations=false',
+      coord: 'CheckGPack0.trace',
+      path0: 'TraceCert',
+      mutate(gpack) {
+        gpack.TraceCert.nandTraceLocksForceGateEquations = false;
+      },
+    },
+    {
+      name: 'TraceCert.prefixCoversAllDistinguishedChecks=false',
+      coord: 'CheckGPack0.trace',
+      path0: 'TraceCert',
+      mutate(gpack) {
+        gpack.TraceCert.prefixCoversAllDistinguishedChecks = false;
+      },
+    },
+    {
+      name: 'TraceCert.outputSlotIsCircuitOutput=false',
+      coord: 'CheckGPack0.trace',
+      path0: 'TraceCert',
+      mutate(gpack) {
+        gpack.TraceCert.outputSlotIsCircuitOutput = false;
+      },
+    },
+    {
+      name: 'TraceCert.derivation.topologicalTraceInduction=false',
+      coord: 'CheckGPack0.trace',
+      path0: 'TraceCert',
+      mutate(gpack) {
+        gpack.TraceCert.derivation.topologicalTraceInduction = false;
+      },
+    },
+    {
+      name: 'TraceCert.derivation.prefixCoversAllDistinguishedChecks=false',
+      coord: 'CheckGPack0.trace',
+      path0: 'TraceCert',
+      mutate(gpack) {
+        gpack.TraceCert.derivation.prefixCoversAllDistinguishedChecks = false;
+      },
+    },
+    {
+      name: 'PiG Trace proof payload outputSlotIsCircuitOutput=false',
+      coord: 'CheckGPack0.derivationProofNodes',
+      path0: 'PiG',
+      mutate(gpack) {
+        const node = gpack.PiG.proofNodes.find((entry) => entry.id === 'G.TraceCert.proof');
+        node.payload.outputSlotIsCircuitOutput = false;
+      },
+    },
+    {
+      name: 'PiG Trace proof payload nandTraceLocksForceGateEquations=false',
+      coord: 'CheckGPack0.derivationProofNodes',
+      path0: 'PiG',
+      mutate(gpack) {
+        const node = gpack.PiG.proofNodes.find((entry) => entry.id === 'G.TraceCert.proof');
+        node.payload.nandTraceLocksForceGateEquations = false;
+      },
+    },
+  ];
+
+  for (const testCase of cases) {
+    await t.test(testCase.name, async () => {
+      const gpack = makeSyntheticGPack0();
+
+      testCase.mutate(gpack);
+
+      const out = await CheckGPack0(gpack);
+
+      assert.equal(out.tag, 'reject');
+      assert.equal(out.checker, 'CheckGPack0');
+      assert.equal(out.Coord, testCase.coord);
+      assert.equal(out.Path[0], testCase.path0);
+      assert.equal(typeof out.Witness.reason, 'string');
+    });
+  }
+});

@@ -377,6 +377,14 @@ export function makeSyntheticGPack0(overrides = {}) {
       version: CHECKER_VERSION,
       traceCoherent: true,
       traceEquivalence: true,
+      lockActivationRequired: true,
+      equalityLocksForceEquality: true,
+      constantLocksForceValues: true,
+      nandTraceLocksForceGateEquations: true,
+      prefixCoversAllDistinguishedChecks: true,
+      topologicalTraceInduction: true,
+      outputSlotIsCircuitOutput: true,
+      duplicateSourceOccurrencesFresh: true,
       gateTraceCount: preNAND.gates.length,
       allTraceMacrosAccepted: true,
       sourceOccurrenceCount:
@@ -1886,6 +1894,14 @@ function makeTraceDerivation0(preNAND) {
     traceEquivalence:
       'all distinguished checks one iff trace slots encode a valid NAND evaluation',
     topologicalInduction: true,
+    topologicalTraceInduction: true,
+    lockActivationRequired: true,
+    equalityLocksForceEquality: true,
+    constantLocksForceValues: true,
+    nandTraceLocksForceGateEquations: true,
+    prefixCoversAllDistinguishedChecks: true,
+    outputSlotIsCircuitOutput: true,
+    duplicateSourceOccurrencesFresh: true,
     sourceOccurrencesFresh: true,
     constantsThroughMacros: true,
     noCarrierConstants: true,
@@ -1988,6 +2004,17 @@ function makeGProofNodes0(preNAND, baseline) {
         sourceOccurrenceCount: traceDerivation.sourceOccurrenceCount,
         traceEquivalence: traceDerivation.traceEquivalence,
         topologicalInduction: traceDerivation.topologicalInduction,
+        topologicalTraceInduction: traceDerivation.topologicalTraceInduction,
+        lockActivationRequired: traceDerivation.lockActivationRequired,
+        equalityLocksForceEquality: traceDerivation.equalityLocksForceEquality,
+        constantLocksForceValues: traceDerivation.constantLocksForceValues,
+        nandTraceLocksForceGateEquations:
+          traceDerivation.nandTraceLocksForceGateEquations,
+        prefixCoversAllDistinguishedChecks:
+          traceDerivation.prefixCoversAllDistinguishedChecks,
+        outputSlotIsCircuitOutput: traceDerivation.outputSlotIsCircuitOutput,
+        duplicateSourceOccurrencesFresh:
+          traceDerivation.duplicateSourceOccurrencesFresh,
         traceCoherent: traceDerivation.traceCoherent,
         allTraceMacrosAccepted: traceDerivation.allTraceMacrosAccepted,
         proofRef: traceDerivation.proofRef,
@@ -2329,6 +2356,14 @@ function validateGProofNodePayload0(payload, path, rowKind, cert) {
       traceEquivalence:
         'all distinguished checks one iff trace slots encode a valid NAND evaluation',
       topologicalInduction: true,
+      topologicalTraceInduction: true,
+      lockActivationRequired: true,
+      equalityLocksForceEquality: true,
+      constantLocksForceValues: true,
+      nandTraceLocksForceGateEquations: true,
+      prefixCoversAllDistinguishedChecks: true,
+      outputSlotIsCircuitOutput: true,
+      duplicateSourceOccurrencesFresh: true,
       traceCoherent: true,
       allTraceMacrosAccepted: true,
     };
@@ -2677,6 +2712,14 @@ function validateTraceCertHardened0(gpack) {
   for (const field of [
     'traceCoherent',
     'traceEquivalence',
+    'lockActivationRequired',
+    'equalityLocksForceEquality',
+    'constantLocksForceValues',
+    'nandTraceLocksForceGateEquations',
+    'prefixCoversAllDistinguishedChecks',
+    'topologicalTraceInduction',
+    'outputSlotIsCircuitOutput',
+    'duplicateSourceOccurrencesFresh',
     'allTraceMacrosAccepted',
   ]) {
     if (cert[field] !== true) {
@@ -2906,6 +2949,14 @@ function validateTraceDerivation0(value, preNAND) {
 
   for (const field of [
     'topologicalInduction',
+    'topologicalTraceInduction',
+    'lockActivationRequired',
+    'equalityLocksForceEquality',
+    'constantLocksForceValues',
+    'nandTraceLocksForceGateEquations',
+    'prefixCoversAllDistinguishedChecks',
+    'outputSlotIsCircuitOutput',
+    'duplicateSourceOccurrencesFresh',
     'sourceOccurrencesFresh',
     'constantsThroughMacros',
     'noCarrierConstants',
