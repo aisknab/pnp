@@ -1520,14 +1520,44 @@ declared circuit output.  Since \(y_{out}=1\), the evaluated circuit output is o
 \begin{lemma}[ZeroOutputConvention]
 If \(\varphi\notin SAT\), then the final output \(F_\varphi=z\wedge T_\varphi\wedge y_{out}\) is the identically
 zero function.  Appending this zero output coordinate to the baseline tuple does not increase the minimum
-number of NAND gates.
+number of NAND gates, so \(\mu(W^{NAND}_\varphi)=B^{NAND}_\varphi\) in the unsatisfiable case.
 \end{lemma}
 \begin{proof}
-By TraceEquivalence, unsatisfiability of \(\varphi\) makes \(T_\varphi\wedge y_{out}\) identically zero, hence
-\(F_\varphi\) is identically zero.  In the direct-wire output convention, an output coordinate equal to a carrier
-constant may be wired to that carrier constant at zero NAND cost, and repeating an already available output
-function adds no NAND gate.  Therefore the full word in the unsatisfiable case has minimum size equal to the
-baseline minimum, namely \(B^{NAND}_\varphi\).
+The accepted \(G\) certificate separates the zero-output step into explicit obligations: unsatisfiability makes the
+trace predicate \(T_\varphi\wedge y_{out}\) identically false; the final coordinate is therefore identically zero;
+a zero output coordinate may be wired to a carrier constant at no NAND cost; repeated output coordinates add
+no NAND gate; and the direct-wire multi-output size measure counts NAND gates only, not the number of
+external output coordinates.
+
+Assume \(\varphi\notin SAT\).  If some assignment to the full carrier made
+\(T_\varphi\wedge y_{out}=1\), then its restriction to the primary inputs together with the assigned trace,
+occurrence, and lock slots would be an extension witnessing \(T_\varphi=1\) and \(y_{out}=1\).  By
+TraceEquivalence this would imply \(\varphi(X)=1\) for that primary input assignment, contradicting
+unsatisfiability.  Hence \(T_\varphi\wedge y_{out}\) is the zero Boolean function on the whole carrier, not merely
+on coherent traces.  Therefore
+\[
+ F_\varphi=z\wedge T_\varphi\wedge y_{out}\equiv 0 .
+\]
+
+Let \(W_B\) be the displayed baseline realization with exactly \(B^{NAND}_\varphi\) NAND gates.  Form a
+realization of the full output tuple by using the same gates as \(W_B\) for every baseline coordinate and wiring
+the additional final output coordinate to the carrier constant \(0\).  This is legal in the direct-wire output
+convention of Section~2.1: output coordinates may be boundary coordinates, carrier constants, or earlier gate
+outputs; repeated coordinates and constant coordinates contribute no additional gate.  Thus
+\[
+ \mu(W^{NAND}_\varphi)\le B^{NAND}_\varphi .
+\]
+This convention does not make checked internal constants free.  Constant source occurrences inside the trace
+are still certified by the locked macros \(M_0\) and \(M_1\); only the external output coordinate that has become
+the constant-zero function is wired to the carrier zero at no NAND cost.
+
+The full word still contains the whole baseline tuple as output coordinates.  MacroDistinct and
+DirectWireOutputLowerBound therefore force at least \(B^{NAND}_\varphi\) NAND gates for any realization of the
+full tuple, because the baseline coordinates are pairwise distinct nonconstant nonprojections.  The appended
+zero coordinate is constant and contributes no new lower-bound obligation.  Hence
+\[
+ \mu(W^{NAND}_\varphi)=B^{NAND}_\varphi .
+\]
 \end{proof}
 
 \begin{lemma}[FinalLockSeparation]
