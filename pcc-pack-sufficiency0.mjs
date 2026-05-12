@@ -329,6 +329,16 @@ export function makeSyntheticPackSufficiencyTheorem0(overrides = {}) {
       pccMinReturnsExactMinimum: true,
       residualSlackBounded: true,
       zeroSlackSound: true,
+      terminalCarrierPreservesSemantics: true,
+      terminalizationSizePreserving: true,
+      closedFullWordRealizesCircuit: true,
+      quotientEqualityNotConstructive: true,
+      wholeSpanCheaperImpliesStrictDescent: true,
+      transparentSaturationCostBalanced: true,
+      interfaceExposureRoutesToE: true,
+      originKernelObligationClosureRouted: true,
+      projectionPositivityNotLostSilently: true,
+      firstNontransparentStepRecorded: true,
       zeroSlackEarlierRoutesExcluded: true,
       positiveResidualWitnessYieldsBCELReady: true,
       bcelAnchorAlgebraBooleanOrRoutes: true,
@@ -574,6 +584,18 @@ export async function CheckPackSufficiency0(pack) {
       pack.PackSufficiencyTheorem.residualBandMinimization?.zeroSlackSound === true,
     zeroSlackContradictionFromPositiveSlack:
       pack.PackSufficiencyTheorem.residualBandMinimization?.zeroSlackContradictionFromPositiveSlack === true,
+    terminalMuBridgeComplete:
+      pack.PackSufficiencyTheorem.residualBandMinimization?.terminalCarrierPreservesSemantics === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.terminalizationSizePreserving === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.closedFullWordRealizesCircuit === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.quotientEqualityNotConstructive === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.wholeSpanCheaperImpliesStrictDescent === true,
+    saturatePositiveComplete:
+      pack.PackSufficiencyTheorem.residualBandMinimization?.transparentSaturationCostBalanced === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.interfaceExposureRoutesToE === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.originKernelObligationClosureRouted === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.projectionPositivityNotLostSilently === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.firstNontransparentStepRecorded === true,
     generatedPackageAssumption: pack.PackSufficiencyTheorem.generatedPackageSufficiency.assumption,
     coreDigest: digestCanonical0(pack.Core),
     manifestDigest: digestCanonical0(pack.Manifest),
@@ -840,6 +862,16 @@ function validatePackSufficiencyTheorem0(theorem) {
     'pccMinReturnsExactMinimum',
     'residualSlackBounded',
     'zeroSlackSound',
+    'terminalCarrierPreservesSemantics',
+    'terminalizationSizePreserving',
+    'closedFullWordRealizesCircuit',
+    'quotientEqualityNotConstructive',
+    'wholeSpanCheaperImpliesStrictDescent',
+    'transparentSaturationCostBalanced',
+    'interfaceExposureRoutesToE',
+    'originKernelObligationClosureRouted',
+    'projectionPositivityNotLostSilently',
+    'firstNontransparentStepRecorded',
     'zeroSlackEarlierRoutesExcluded',
     'positiveResidualWitnessYieldsBCELReady',
     'bcelAnchorAlgebraBooleanOrRoutes',
