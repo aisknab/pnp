@@ -722,6 +722,17 @@ F_C:=F_C^{top,1}.
 \]
 This terminal carrier preserves global Boolean semantics and full-mode admissibility, but it does not force all internal origin, kernel, prefix, obligation, budget, charge, and proof records of \(C\) to be externally preserved semantic data.
 
+\subsubsection{Terminal MuBridge proof obligations}
+The accepted residual-band theorem records the terminal bridge as five checker-visible obligations:
+\begin{lstlisting}
+terminalCarrierPreservesSemantics
+terminalizationSizePreserving
+closedFullWordRealizesCircuit
+quotientEqualityNotConstructive
+wholeSpanCheaperImpliesStrictDescent
+\end{lstlisting}
+The first three fields state that the terminal carrier represents exactly the whole-circuit Boolean function in full mode and that the two translations between whole circuits and closed full words preserve size.  The fourth field is the mode firewall at this boundary: a quotient equality may be used as a comparison object but is never a constructive full-mode replacement.  The fifth field connects a cheaper whole-span closed full word to strict residual descent, rather than to an unverified local gain.
+
 \begin{theorem}[RW-MuBridge, terminal form]
 For every normalized whole circuit \(C\),
 \[
@@ -729,7 +740,13 @@ For every normalized whole circuit \(C\),
 \]
 \end{theorem}
 
-There are size-preserving maps: terminalization of a whole circuit into a closed full word and realization of a closed full word as a whole circuit. These maps prove the two inequalities.
+\begin{proof}
+The inequality \(\mu_1^*(F_C^{top,1})\le \mu(C)\) is witnessed by terminalizing any whole-circuit realization of \(C\).  Terminalization keeps the Boolean output function, orders the boundary and output tuple as the terminal full carrier, records only admissible full-mode profile data, and does not expose proof, origin, kernel, budget, charge, or obligation records as free semantic outputs.  The field \texttt{terminalizationSizePreserving} records that this map introduces no NAND gate and drops no computational gate, so the size is preserved.
+
+Conversely, let \(R\) be a closed full word realizing \(F_C^{top,1}\).  The field \texttt{closedFullWordRealizesCircuit} certifies that \(R\) can be interpreted as a whole circuit \(\Real_C(R)\) with the same Boolean input/output semantics and the same number of NAND gates.  Full-mode carrier records are either boundary constants, charged materializers, or discharged obligations; none are free proof data.  Hence \(\mu(C)\le \mu_1^*(F_C^{top,1})\).
+
+The two inequalities give equality.  The quotient firewall is used only to prevent an invalid converse: a quotient-mode word realizing \(\rho F_C^{top,1}\) is not a full-mode realization of \(F_C^{top,1}\) unless it carries a checked full lift and all lost-bit or finite-kernel obligations are discharged.  Therefore quotient equality cannot be used constructively in the terminal bridge.
+\end{proof}
 
 \subsection{Full-span policy}
 A full-span witness \(H=C\) is legal as a residual witness, but it cannot be emitted as a local \(\VerifyDW\) gain. A cheaper whole-span realization gives strict residual descent; an exact whole-span realization gives exact route.
@@ -752,11 +769,33 @@ Let
 \]
 Transparent saturation steps add the same forced full-mode cost to the support and to the minimum, and add no more quotient cost than full cost. Thus full positivity is preserved and projection positivity does not decrease.
 
+\subsubsection{SaturatePositive proof obligations}
+The accepted residual-band theorem records the positivity-preservation audit as five checker-visible obligations:
+\begin{lstlisting}
+transparentSaturationCostBalanced
+interfaceExposureRoutesToE
+originKernelObligationClosureRouted
+projectionPositivityNotLostSilently
+firstNontransparentStepRecorded
+\end{lstlisting}
+These fields say that every transparent saturation step adds the same forced full-mode cost to the support and to the full minimum, that exposure-only growth is routed to \(E\) unless it is a zero-cost retract, that origin, kernel, and obligation closure failures route instead of silently changing the witness, that projection positivity cannot disappear without a named route, and that the first nontransparent saturation step is recorded as the deterministic failure coordinate.
+
 \begin{theorem}[RW-SaturatePositive]
 Saturating a positive residual witness either preserves full or projection positivity, or routes the first positivity-loss coordinate to \(\CritC,Q,E,L,X\), gain, BC, UN, HN, BUD, selector, exact route, or strict descent.
 \end{theorem}
 
-The dangerous case is interface exposure: adding a required outgoing coordinate can increase semantic obligation without adding a physical gate. This must route to \(E\) unless the exposure is a zero-cost retract.
+\begin{proof}
+Run the deterministic saturation chain \(H^0\to\cdots\to H^T\).  At each step compare
+\[
+\Phi_t=|H^t|-\mu_1^*(F_{H^t}^1),\qquad
+D_t=\mu_1^*(F_{H^t}^1)-\mu_0^*(F_{H^t}^0).
+\]
+For a transparent closure step, the added record is a forced full-mode materializer or profile completion whose charge is uniquely owned.  The same charge is added to the support size and to every full-mode realization of the completed function.  Thus \(\Phi_t\) is preserved.  Projection cost cannot increase more than the full cost, so \(D_t\) does not decrease.  This is the obligation \texttt{transparentSaturationCostBalanced}.
+
+If a closure step is not transparent, the checker records the first failed coordinate.  Interface exposure is the delicate case: adding a required outgoing coordinate can impose a new semantic obligation without adding a physical support gate.  Such a step routes to \(E\) unless the exposed value is a certified zero-cost retract already present on the frontier.  Origin, kernel, and obligation closures are treated the same way: an undischargeable or mode-unsafe closure routes to \(\CritC,Q,E,L,X\), a package route, a selector, an exact route, a verified gain, or strict descent.  These are the obligations \texttt{interfaceExposureRoutesToE}, \texttt{originKernelObligationClosureRouted}, and \texttt{firstNontransparentStepRecorded}.
+
+Therefore, along any no-outcome branch, every saturation step is transparent for the active witness and preserves full positivity or projection positivity.  If either positivity measure is lost, the first step at which it is lost is nontransparent and is emitted as a named route.  This proves the theorem.  The finite residual rank tuple then orders any routed descent by witness type, span type, mode, frontier defect, projection defect, saturation defect, anchor count, charge size, profile size, and canonical code, so repeated routing is well-founded.
+\end{proof}
 
 Residual ranks are finite lexicographic tuples over witness type, span type, mode, frontier defect, projection defect, saturation defect, anchor count, charge size, profile size, and canonical code. Therefore the rank order is well-founded.
 
@@ -1284,6 +1323,16 @@ The checker-visible ZeroSlack obligations are the following record fields:
 pccMinReturnsExactMinimum
 residualSlackBounded
 zeroSlackSound
+terminalCarrierPreservesSemantics
+terminalizationSizePreserving
+closedFullWordRealizesCircuit
+quotientEqualityNotConstructive
+wholeSpanCheaperImpliesStrictDescent
+transparentSaturationCostBalanced
+interfaceExposureRoutesToE
+originKernelObligationClosureRouted
+projectionPositivityNotLostSilently
+firstNontransparentStepRecorded
 zeroSlackEarlierRoutesExcluded
 positiveResidualWitnessYieldsBCELReady
 bcelAnchorAlgebraBooleanOrRoutes
@@ -1293,7 +1342,7 @@ hbBlockerGraphAcyclic
 zeroSlackContradictionFromPositiveSlack
 zeroSlackCertificatePolynomialSize
 \end{lstlisting}
-Mathematically, these fields assert that the gain loop is residual-band bounded, that a ZeroSlack output is exact, that earlier gain/exact/named routes have been positively excluded, that positive residual slack yields a BCEL-ready positive nucleus unless an earlier route fires, that non-Boolean anchor-algebra failures route rather than remain silent, that the finite selector universe covers all positive packet prototypes, that realizer failure is only by typed HN/BUD or lower-rank blocking, that the blocker graph is acyclic, that positive slack contradicts the ZeroSlack ledger, and that the certificate has polynomial size.
+Mathematically, these fields assert that the gain loop is residual-band bounded, that a ZeroSlack output is exact, that terminal MuBridge translates between whole circuits and closed full words without semantic or size drift, that quotient equality is nonconstructive unless lifted, that whole-span cheaper words give strict residual descent, that transparent saturation preserves positivity, that nontransparent saturation and interface exposure route to named outcomes, that earlier gain/exact/named routes have been positively excluded, that positive residual slack yields a BCEL-ready positive nucleus unless an earlier route fires, that non-Boolean anchor-algebra failures route rather than remain silent, that the finite selector universe covers all positive packet prototypes, that realizer failure is only by typed HN/BUD or lower-rank blocking, that the blocker graph is acyclic, that positive slack contradicts the ZeroSlack ledger, and that the certificate has polynomial size.
 
 \begin{theorem}[Rank-parametric ZeroSlack]
 If
