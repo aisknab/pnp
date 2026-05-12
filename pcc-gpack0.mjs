@@ -624,6 +624,24 @@ export async function CheckRowFamG0(rowFam) {
     });
   }
 
+  const derivationProofRefs = validateRowFamGDerivationProofRefs0(rowFam);
+
+  ledger.push({
+    phase: 'derivationProofRefs',
+    status: derivationProofRefs.ok ? 'pass' : 'fail',
+    digest: digestCanonical0(derivationProofRefs.nf ?? derivationProofRefs.witness ?? null),
+  });
+
+  if (!derivationProofRefs.ok) {
+    return makeRejectRecord({
+      checker,
+      coord: `${checker}.derivationProofRefs`,
+      path: derivationProofRefs.path,
+      witness: derivationProofRefs.witness,
+      ledger,
+    });
+  }
+
   const noHiddenMin = validateNoHiddenExecutableMin0(rowFam, ['RowFamG0']);
 
   ledger.push({
@@ -1830,6 +1848,7 @@ function makeBaselineDerivation0(preNAND, baseline) {
     lowerBoundRuleApplied: true,
     gateOutputInjection: 'distinct-noninput-outputs-map-to-distinct-NAND-gates',
     constructedBaselineExact: true,
+    proofRef: makeGProofRef0('BaselineCert'),
   };
 }
 
@@ -1860,6 +1879,7 @@ function makeTraceDerivation0(preNAND) {
     noCarrierConstants: true,
     traceCoherent: true,
     allTraceMacrosAccepted: true,
+    proofRef: makeGProofRef0('TraceCert'),
   };
 }
 
@@ -1883,8 +1903,136 @@ function makeThresholdDerivation0(preNAND, baseline) {
     baselineDerivation: 'BaselineDerivation0',
     traceDerivation: 'TraceDerivation0',
     noHiddenMinimization: true,
+    proofRef: makeGProofRef0('ThresholdCert'),
   };
 }
+
+function makeGProofRef0(rowKind) {
+  return {
+    kind: 'ProofRef0',
+    refKind: 'KPrimitive',
+    id: `G.${rowKind}.proof`,
+  };
+}
+
+function validateGDerivationProofRef0(value, path, rowKind) {
+  if (!isPlainObject(value)) {
+    return validationReject0(path, 'G derivation proofRef must be an object', {
+      actual: typeof value,
+    });
+  }
+
+  const expected = makeGProofRef0(rowKind);
+
+  for (const field of ['kind', 'refKind', 'id']) {
+    if (value[field] !== expected[field]) {
+      return validationReject0([...path, field], 'G derivation proofRef mismatch', {
+        expected: expected[field],
+        actual: value[field],
+      });
+    }
+  }
+
+  return validationAccept0({
+    kind: 'GDerivationProofRef0NF',
+    rowKind,
+    proofRef: expected,
+  });
+}
+
+function validateRowProofRefExact0(value, path, rowKind) {
+  if (!isPlainObject(value)) {
+    return validationReject0(path, 'RowFamG row proofRef must be an object', {
+      actual: typeof value,
+    });
+  }
+
+  const expected = makeGProofRef0(rowKind);
+
+  for (const field of ['kind', 'refKind', 'id']) {
+    if (value[field] !== expected[field]) {
+      return validationReject0([...path, field], 'RowFamG row proofRef mismatch', {
+        expected: expected[field],
+        actual: value[field],
+      });
+    }
+  }
+
+  return validationAccept0({
+    kind: 'RowFamGProofRefExact0NF',
+    rowKind,
+    proofRef: expected,
+  });
+}
+
+function validateRowFamGDerivationProofRefs0(rowFam) {
+  if (!isPlainObject(rowFam) || !isPlainObject(rowFam.GPack)) {
+    return validationReject0(['GPack'], 'RowFamG derivation proof-ref binding requires GPack', {
+      actual: typeof rowFam?.GPack,
+    });
+  }
+
+  const rowsByKind = new Map();
+
+  for (const row of rowFam.rows ?? []) {
+    if (isPlainObject(row) && typeof row.rowKind === 'string') {
+      rowsByKind.set(row.rowKind, row);
+    }
+  }
+
+  const certRows = [
+    ['BaselineCert', rowFam.GPack.BaselineCert],
+    ['TraceCert', rowFam.GPack.TraceCert],
+    ['ThresholdCert', rowFam.GPack.ThresholdCert],
+  ];
+
+  for (const [rowKind, cert] of certRows) {
+    const row = rowsByKind.get(rowKind);
+
+    if (!isPlainObject(row)) {
+      return validationReject0(['rows', 'derivationProofRefs', rowKind], 'RowFamG is missing row required by derivation proofRef', {
+        rowKind,
+      });
+    }
+
+    const rowProofRef = validateRowProofRefExact0(
+      row.proofRef,
+      ['rows', rowKind, 'proofRef'],
+      rowKind,
+    );
+
+    if (!rowProofRef.ok) {
+      return rowProofRef;
+    }
+
+    const derivationProofRef = validateGDerivationProofRef0(
+      cert?.derivation?.proofRef,
+      ['GPack', rowKind, 'derivation', 'proofRef'],
+      rowKind,
+    );
+
+    if (!derivationProofRef.ok) {
+      return derivationProofRef;
+    }
+
+    if (
+      cert.derivation.proofRef.kind !== row.proofRef.kind ||
+      cert.derivation.proofRef.refKind !== row.proofRef.refKind ||
+      cert.derivation.proofRef.id !== row.proofRef.id
+    ) {
+      return validationReject0(['GPack', rowKind, 'derivation', 'proofRef'], 'GPack derivation proofRef must match RowFamG row proofRef', {
+        expected: row.proofRef,
+        actual: cert.derivation.proofRef,
+      });
+    }
+  }
+
+  return validationAccept0({
+    kind: 'RowFamGDerivationProofRefs0NF',
+    proofRefCount: certRows.length,
+  });
+}
+
 
 function validateBaselineCertHardened0(gpack) {
   const base = validateBaselineCert0(gpack);
@@ -2116,9 +2264,20 @@ function validateBaselineDerivation0(value, preNAND, baseline) {
     });
   }
 
+  const proofRef = validateGDerivationProofRef0(
+    value.proofRef,
+    ['BaselineCert', 'derivation', 'proofRef'],
+    'BaselineCert',
+  );
+
+  if (!proofRef.ok) {
+    return proofRef;
+  }
+
   return validationAccept0({
     kind: 'BaselineDerivation0NF',
     baseline,
+    proofRef: proofRef.nf,
   });
 }
 
@@ -2181,10 +2340,21 @@ function validateTraceDerivation0(value, preNAND) {
     });
   }
 
+  const proofRef = validateGDerivationProofRef0(
+    value.proofRef,
+    ['TraceCert', 'derivation', 'proofRef'],
+    'TraceCert',
+  );
+
+  if (!proofRef.ok) {
+    return proofRef;
+  }
+
   return validationAccept0({
     kind: 'TraceDerivation0NF',
     gateTraceCount: preNAND.gates.length,
     sourceOccurrenceCount,
+    proofRef: proofRef.nf,
   });
 }
 
@@ -2234,10 +2404,21 @@ function validateThresholdDerivation0(value, preNAND, baseline) {
     }
   }
 
+  const proofRef = validateGDerivationProofRef0(
+    value.proofRef,
+    ['ThresholdCert', 'derivation', 'proofRef'],
+    'ThresholdCert',
+  );
+
+  if (!proofRef.ok) {
+    return proofRef;
+  }
+
   return validationAccept0({
     kind: 'ThresholdDerivation0NF',
     baseline,
     fullWordSize: baseline + 4,
     residualSlackMax: 4,
+    proofRef: proofRef.nf,
   });
 }

@@ -335,3 +335,57 @@ test('CheckGPack0 rejects theorem-bearing locked NAND certificate and derivation
     });
   }
 });
+
+
+test('CheckGPack0 and CheckRowFamG0 bind locked NAND derivations to proof refs', async (t) => {
+  await t.test('CheckGPack0 rejects missing BaselineCert derivation proofRef', async () => {
+    const gpack = makeSyntheticGPack0();
+
+    delete gpack.BaselineCert.derivation.proofRef;
+
+    const out = await CheckGPack0(gpack);
+
+    assert.equal(out.tag, 'reject');
+    assert.equal(out.checker, 'CheckGPack0');
+    assert.equal(out.Coord, 'CheckGPack0.baseline');
+    assert.deepEqual(out.Path, ['BaselineCert', 'derivation', 'proofRef']);
+    assert.equal(out.Witness.reason, 'G derivation proofRef must be an object');
+  });
+
+  await t.test('CheckGPack0 rejects wrong ThresholdCert derivation proofRef id', async () => {
+    const gpack = makeSyntheticGPack0();
+
+    gpack.ThresholdCert.derivation.proofRef = {
+      ...gpack.ThresholdCert.derivation.proofRef,
+      id: 'G.Wrong.proof',
+    };
+
+    const out = await CheckGPack0(gpack);
+
+    assert.equal(out.tag, 'reject');
+    assert.equal(out.checker, 'CheckGPack0');
+    assert.equal(out.Coord, 'CheckGPack0.threshold');
+    assert.deepEqual(out.Path, ['ThresholdCert', 'derivation', 'proofRef', 'id']);
+    assert.equal(out.Witness.reason, 'G derivation proofRef mismatch');
+  });
+
+  await t.test('CheckRowFamG0 rejects row proofRef drift from GPack derivation proofRef', async () => {
+    const rowFam = makeSyntheticRowFamG0();
+    const thresholdRow = rowFam.rows.find((row) => row.rowKind === 'ThresholdCert');
+
+    thresholdRow.proofRef = {
+      ...thresholdRow.proofRef,
+      id: 'G.Wrong.proof',
+    };
+
+    const out = await CheckRowFamG0(rowFam);
+
+    assert.equal(out.tag, 'reject');
+    assert.equal(out.checker, 'CheckRowFamG0');
+    assert.ok(
+      out.Coord === 'CheckRowFamG0.derivationProofRefs' ||
+      out.Coord === 'CheckRowFamG0.rows',
+    );
+    assert.equal(typeof out.Witness.reason, 'string');
+  });
+});
