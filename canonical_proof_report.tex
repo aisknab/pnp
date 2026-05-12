@@ -1566,13 +1566,42 @@ nonprojection, and distinct from every baseline output.  Hence every realization
 one NAND gate beyond the baseline.
 \end{lemma}
 \begin{proof}
-By TraceEquivalence, satisfiability gives an assignment with \(T_\varphi\wedge y_{out}=1\).  On such an
-assignment, changing the fresh final lock \(z\) changes \(F_\varphi\), so \(F_\varphi\) depends essentially on
-\(z\) and is nonconstant.  It is not a projection: setting any distinguished check inactive makes
-\(T_\varphi=0\), so with \(z=1\) the final output can still be zero.  By \(G\)-Sep+, the variable \(z\) appears
-only in the final four-gate construction and in no baseline output.  Therefore no baseline output equals
-\(F_\varphi\).  The full output tuple contains the exact baseline tuple plus this additional nonconstant
-nonprojection function, so DirectWireOutputLowerBound gives a lower bound of \(B^{NAND}_\varphi+1\).
+The accepted \(G\) certificate separates this step into explicit obligations: a satisfying assignment makes both
+\(T_\varphi\) and \(y_{out}\) equal to one; the final lock \(z\) is fresh and appears only in the final output
+construction; the final output depends essentially on \(z\); no baseline output mentions \(z\); the final output is
+nonconstant and nonprojection; it is distinct from every baseline output; and this distinct final-lock output forces
+one extra NAND gate in the satisfiable case.
+
+Assume \(\varphi\in SAT\).  By TraceEquivalence, there is an assignment to the primary inputs and an extension
+to trace, occurrence, and lock slots with \(T_\varphi=1\) and \(y_{out}=1\).  Fix all carrier coordinates of this
+extension except the fresh final lock \(z\).  Then
+\[
+ F_\varphi(0,T_\varphi=1,y_{out}=1)=0,
+ \qquad
+ F_\varphi(1,T_\varphi=1,y_{out}=1)=1 .
+\]
+Thus \(F_\varphi\) depends essentially on \(z\) and is nonconstant.
+
+The same formula is not a projection.  It is not the positive projection \(z\), because with \(z=1\) and either
+\(T_\varphi=0\) or \(y_{out}=0\), the value of \(F_\varphi\) is still zero.  It is not the projection \(T_\varphi\)
+or \(y_{out}\), because setting \(z=0\) makes \(F_\varphi=0\) even when that coordinate is one.  It is not a
+projection onto any unrelated carrier coordinate because changing \(z\) as above changes \(F_\varphi\) while that
+coordinate is held fixed.  The direct-wire projection boundary is positive boundary coordinates; negations or
+other derived functions are not free projections.
+
+By \(G\)-Sep+, \(z\) is the unique final-lock slot and appears only in the final four-gate construction.  Every
+baseline output is built from equality, constant, trace, and prefix carrier coordinates and therefore is independent
+of \(z\).  Since \(F_\varphi\) changes when \(z\) changes with all other carrier coordinates fixed, while every
+baseline output is unchanged under that variation, no baseline output can equal \(F_\varphi\) as a Boolean
+function on the full carrier.
+
+The full word in the satisfiable case therefore contains the exact baseline tuple plus one additional Boolean
+function that is nonconstant, nonprojection, and distinct from all baseline coordinates.  DirectWireOutputLowerBound
+applied to this enlarged tuple gives
+\[
+ \mu(W^{NAND}_\varphi)\ge B^{NAND}_\varphi+1 .
+\]
+This is the required satisfiable-case lower bound.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~17.2]
