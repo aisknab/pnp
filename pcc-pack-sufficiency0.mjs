@@ -341,6 +341,12 @@ export function makeSyntheticPackSufficiencyTheorem0(overrides = {}) {
       firstNontransparentStepRecorded: true,
       zeroSlackEarlierRoutesExcluded: true,
       positiveResidualWitnessYieldsBCELReady: true,
+      positiveResidualWitnessExists: true,
+      finiteAnchorSetExtracted: true,
+      booleanAnchorAlgebraOrRoute: true,
+      minimalPositiveNucleus: true,
+      properCutConstantEquation: true,
+      anchorSizeAtLeastTwo: true,
       bcelAnchorAlgebraBooleanOrRoutes: true,
       selectorUniverseCompleteForPackets: true,
       realizerBotOnlyHNBUDBlockedOrLowerRank: true,
@@ -596,6 +602,15 @@ export async function CheckPackSufficiency0(pack) {
       pack.PackSufficiencyTheorem.residualBandMinimization?.originKernelObligationClosureRouted === true &&
       pack.PackSufficiencyTheorem.residualBandMinimization?.projectionPositivityNotLostSilently === true &&
       pack.PackSufficiencyTheorem.residualBandMinimization?.firstNontransparentStepRecorded === true,
+    bcelReadyPositiveNucleusComplete:
+      pack.PackSufficiencyTheorem.residualBandMinimization?.positiveResidualWitnessYieldsBCELReady === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.positiveResidualWitnessExists === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.finiteAnchorSetExtracted === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.booleanAnchorAlgebraOrRoute === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.minimalPositiveNucleus === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.properCutConstantEquation === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.anchorSizeAtLeastTwo === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.bcelAnchorAlgebraBooleanOrRoutes === true,
     generatedPackageAssumption: pack.PackSufficiencyTheorem.generatedPackageSufficiency.assumption,
     coreDigest: digestCanonical0(pack.Core),
     manifestDigest: digestCanonical0(pack.Manifest),
@@ -874,6 +889,12 @@ function validatePackSufficiencyTheorem0(theorem) {
     'firstNontransparentStepRecorded',
     'zeroSlackEarlierRoutesExcluded',
     'positiveResidualWitnessYieldsBCELReady',
+    'positiveResidualWitnessExists',
+    'finiteAnchorSetExtracted',
+    'booleanAnchorAlgebraOrRoute',
+    'minimalPositiveNucleus',
+    'properCutConstantEquation',
+    'anchorSizeAtLeastTwo',
     'bcelAnchorAlgebraBooleanOrRoutes',
     'selectorUniverseCompleteForPackets',
     'realizerBotOnlyHNBUDBlockedOrLowerRank',

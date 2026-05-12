@@ -35,6 +35,7 @@ test('CheckPackSufficiency0 accepts the synthetic top-level package', async () =
   assert.equal(out.NF.zeroSlackContradictionFromPositiveSlack, true);
   assert.equal(out.NF.terminalMuBridgeComplete, true);
   assert.equal(out.NF.saturatePositiveComplete, true);
+  assert.equal(out.NF.bcelReadyPositiveNucleusComplete, true);
   assert.equal(out.Digest.alg, 'SHA256');
   assert.match(out.Digest.hex, /^[0-9a-f]{64}$/);
 });
@@ -351,6 +352,40 @@ test('CheckPackSufficiency0 rejects missing SaturatePositive obligations', async
     'originKernelObligationClosureRouted',
     'projectionPositivityNotLostSilently',
     'firstNontransparentStepRecorded',
+  ];
+
+  for (const field of cases) {
+    await t.test(`${field}=false`, async () => {
+      const pack = makeSyntheticPCCPack0();
+
+      pack.PackSufficiencyTheorem = {
+        ...pack.PackSufficiencyTheorem,
+        residualBandMinimization: {
+          ...pack.PackSufficiencyTheorem.residualBandMinimization,
+          [field]: false,
+        },
+      };
+
+      const out = await CheckPackSufficiency0(pack);
+
+      assert.equal(out.tag, 'reject');
+      assert.equal(out.checker, 'CheckPackSufficiency0');
+      assert.equal(out.Coord, 'CheckPackSufficiency0.PackSufficiencyTheorem');
+      assert.deepEqual(out.Path, ['PackSufficiencyTheorem', 'residualBandMinimization', field]);
+      assert.equal(out.Witness.reason, `residualBandMinimization must certify ${field}`);
+    });
+  }
+});
+
+
+test('CheckPackSufficiency0 rejects missing BCEL-ready positive nucleus obligations', async (t) => {
+  const cases = [
+    'positiveResidualWitnessExists',
+    'finiteAnchorSetExtracted',
+    'booleanAnchorAlgebraOrRoute',
+    'minimalPositiveNucleus',
+    'properCutConstantEquation',
+    'anchorSizeAtLeastTwo',
   ];
 
   for (const field of cases) {
