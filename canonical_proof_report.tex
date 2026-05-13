@@ -1037,6 +1037,17 @@ Activation equality is certified by active-antichain equality:
 \]
 No package may certify activation equality by enumerating all cuts.
 
+\subsubsection{BN4 activation-exact cancellation proof obligations}
+The accepted residual-band theorem records the activation-cancellation step as five checker-visible obligations:
+\begin{lstlisting}
+activationByActiveAntichain
+activationEqualityWithoutCutEnumeration
+sameKeyCancellationExact
+noOppositeSignSameKeyResidual
+integerMassLedgerExact
+\end{lstlisting}
+The first field says that the activation function of a request is represented by its active minimal-consumer antichain.  The second forbids cut enumeration as the equality proof.  The third requires cancellation only between positive and negative cells with the same projected semantic signature, active-antichain code, and projected transport type.  The fourth records that no positive and negative residual cells with the same activation-exact key survive.  The fifth records that all multiplicities and cancellations are checked in the integer mass ledger.
+
 A BN4 key is
 \[
 \kappa(p)=(\bar\sigma(p),\ActCode(p),\tau(p)),
@@ -1052,6 +1063,34 @@ For every proper cut,
 \]
 After cancellation, no positive and negative residual cells share the same activation-exact key.
 \end{theorem}
+
+\begin{proof}
+For a request unit \(p\), the cut activity is
+\[
+\alpha_p(S)=r_p(S)r_p(A\setminus S).
+\]
+Since each request predicate is the upward closure of its exact minimal-consumer antichain, \(\alpha_p\) is determined by the disjoint active pairs of minimal consumers.  The active antichain
+\[
+\mathcal A_p^{(i)}=\{M\in\mathcal M_p^{(i)}:\exists N\in\mathcal M_p^{(i)},\ M\cap N=\varnothing\}
+\]
+therefore determines the same activation function on every proper cut.  If two requests have different active antichains, choose a minimal set appearing in one and not the other and extend it by a disjoint active partner; the corresponding cut separates the two activations.  Hence activation equality is exactly active-antichain equality.  This is \texttt{activationByActiveAntichain} and \texttt{activationEqualityWithoutCutEnumeration}.  The certificate compares canonical active-antichain codes, not the exponentially many cuts.
+
+Each request atom carries a projected semantic signature, an activation code, a projected transport type, an integer mass, and a ledger owner.  Cells are grouped by the BN4 key
+\[
+\kappa(p)=(\bar\sigma(p),\ActCode(p),\tau(p)).
+\]
+Only cells with the same key compute the same cut function and may cancel.  Cells with different semantic signatures, transport types, or active-antichain codes are kept separate even if they agree on a sampled cut set.  This is \texttt{sameKeyCancellationExact}.
+
+Within a fixed key, the integer mass ledger sums all positive and negative cells using the signed weights supplied by BN3.  The arithmetic-cell certificate checks that the signed total is exact, that no owner is counted twice, and that cancellation removes precisely the common positive and negative mass.  After cancellation, either a nonnegative residual key remains, a negative residual key is sent to BN5/PkgC localization, or the key is cut-silent.  The cancellation pass rejects any state with surviving positive and negative residual cells of the same key.  This is \texttt{noOppositeSignSameKeyResidual} and \texttt{integerMassLedgerExact}.
+
+Substituting the grouped signed masses into the BN3 incidence expansion gives, for every proper cut,
+\[
+\Omega(S,A\setminus S)=
+\sum_{c_\kappa>0}c_\kappa\alpha_\kappa(S)-
+\sum_{c_\kappa<0}(-c_\kappa)\alpha_\kappa(S).
+\]
+The formula is valid for all proper cuts because the key equality is activation-exact, not sampled.  This proves BN4.
+\end{proof}
 
 \subsection{BN5: full-shadow localization}
 For a negative full residual key \(\kappa\), refine masses into unit atoms and form a shadow graph
@@ -1459,13 +1498,18 @@ minimalConsumerAntichainsExact
 jointSideTightRealizability
 runtimeIntegersSeparatedFromFiniteState
 incidenceAtomsAccountedExactlyOnce
+activationByActiveAntichain
+activationEqualityWithoutCutEnumeration
+sameKeyCancellationExact
+noOppositeSignSameKeyResidual
+integerMassLedgerExact
 selectorUniverseCompleteForPackets
 realizerBotOnlyHNBUDBlockedOrLowerRank
 hbBlockerGraphAcyclic
 zeroSlackContradictionFromPositiveSlack
 zeroSlackCertificatePolynomialSize
 \end{lstlisting}
-Mathematically, these fields assert that the gain loop is residual-band bounded, that a ZeroSlack output is exact, that terminal MuBridge translates between whole circuits and closed full words without semantic or size drift, that quotient equality is nonconstructive unless lifted, that whole-span cheaper words give strict residual descent, that transparent saturation preserves positivity, that nontransparent saturation and interface exposure route to named outcomes, that earlier gain/exact/named routes have been positively excluded, that positive residual slack yields a BCEL-ready positive nucleus unless an earlier route fires, that a finite anchor set is extracted, that Boolean anchor algebra failures route rather than remain silent, that a minimal positive nucleus with at least two anchors has a constant proper-cut equation, that BN2 uses only carrier-compatible side-tight optima and never overclaims from non-tight coherent bases, that BN3 builds stable finite request predicates, exact minimal-consumer antichains, jointly realizable side-tight envelopes, arithmetic-separated runtime integers, and exact incidence ledgers, that the finite selector universe covers all positive packet prototypes, that realizer failure is only by typed HN/BUD or lower-rank blocking, that the blocker graph is acyclic, that positive slack contradicts the ZeroSlack ledger, and that the certificate has polynomial size.
+Mathematically, these fields assert that the gain loop is residual-band bounded, that a ZeroSlack output is exact, that terminal MuBridge translates between whole circuits and closed full words without semantic or size drift, that quotient equality is nonconstructive unless lifted, that whole-span cheaper words give strict residual descent, that transparent saturation preserves positivity, that nontransparent saturation and interface exposure route to named outcomes, that earlier gain/exact/named routes have been positively excluded, that positive residual slack yields a BCEL-ready positive nucleus unless an earlier route fires, that a finite anchor set is extracted, that Boolean anchor algebra failures route rather than remain silent, that a minimal positive nucleus with at least two anchors has a constant proper-cut equation, that BN2 uses only carrier-compatible side-tight optima and never overclaims from non-tight coherent bases, that BN3 builds stable finite request predicates, exact minimal-consumer antichains, jointly realizable side-tight envelopes, arithmetic-separated runtime integers, and exact incidence ledgers, that BN4 represents activation by active antichains, proves equality without cut enumeration, cancels same-key positive and negative masses exactly, leaves no opposite-sign same-key residual, and checks the integer mass ledger, that the finite selector universe covers all positive packet prototypes, that realizer failure is only by typed HN/BUD or lower-rank blocking, that the blocker graph is acyclic, that positive slack contradicts the ZeroSlack ledger, and that the certificate has polynomial size.
 
 \begin{theorem}[Rank-parametric ZeroSlack]
 If
