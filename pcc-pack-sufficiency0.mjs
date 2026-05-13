@@ -352,6 +352,11 @@ export function makeSyntheticPackSufficiencyTheorem0(overrides = {}) {
       fourCornerOptimaCarrierCompatible: true,
       sideTightCompletionExists: true,
       tightBasisValueEqualsDelta: true,
+      requestPredicatesStable: true,
+      minimalConsumerAntichainsExact: true,
+      jointSideTightRealizability: true,
+      runtimeIntegersSeparatedFromFiniteState: true,
+      incidenceAtomsAccountedExactlyOnce: true,
       selectorUniverseCompleteForPackets: true,
       realizerBotOnlyHNBUDBlockedOrLowerRank: true,
       hbBlockerGraphAcyclic: true,
@@ -620,6 +625,12 @@ export async function CheckPackSufficiency0(pack) {
       pack.PackSufficiencyTheorem.residualBandMinimization?.fourCornerOptimaCarrierCompatible === true &&
       pack.PackSufficiencyTheorem.residualBandMinimization?.sideTightCompletionExists === true &&
       pack.PackSufficiencyTheorem.residualBandMinimization?.tightBasisValueEqualsDelta === true,
+    bn3FiniteRequestEnvelopeComplete:
+      pack.PackSufficiencyTheorem.residualBandMinimization?.requestPredicatesStable === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.minimalConsumerAntichainsExact === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.jointSideTightRealizability === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.runtimeIntegersSeparatedFromFiniteState === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.incidenceAtomsAccountedExactlyOnce === true,
     generatedPackageAssumption: pack.PackSufficiencyTheorem.generatedPackageSufficiency.assumption,
     coreDigest: digestCanonical0(pack.Core),
     manifestDigest: digestCanonical0(pack.Manifest),
@@ -909,6 +920,11 @@ function validatePackSufficiencyTheorem0(theorem) {
     'fourCornerOptimaCarrierCompatible',
     'sideTightCompletionExists',
     'tightBasisValueEqualsDelta',
+    'requestPredicatesStable',
+    'minimalConsumerAntichainsExact',
+    'jointSideTightRealizability',
+    'runtimeIntegersSeparatedFromFiniteState',
+    'incidenceAtomsAccountedExactlyOnce',
     'selectorUniverseCompleteForPackets',
     'realizerBotOnlyHNBUDBlockedOrLowerRank',
     'hbBlockerGraphAcyclic',
