@@ -373,8 +373,13 @@ export function makeSyntheticPackSufficiencyTheorem0(overrides = {}) {
       packetAtomsHaveSelectorPayloads: true,
       selectorUniverseCompleteAndPolynomial: true,
       selectorUniverseCompleteForPackets: true,
+      realizerBotTyped: true,
       realizerBotOnlyHNBUDBlockedOrLowerRank: true,
+      chargeSurplusInjectionStrict: true,
+      blockerGraphAcyclicByRank: true,
       hbBlockerGraphAcyclic: true,
+      selectorSilenceRankComplete: true,
+      hbNoCircularNegativeClosure: true,
       zeroSlackContradictionFromPositiveSlack: true,
       zeroSlackCertificatePolynomialSize: true,
     },
@@ -665,6 +670,14 @@ export async function CheckPackSufficiency0(pack) {
       pack.PackSufficiencyTheorem.residualBandMinimization?.packetAtomsHaveSelectorPayloads === true &&
       pack.PackSufficiencyTheorem.residualBandMinimization?.selectorUniverseCompleteAndPolynomial === true &&
       pack.PackSufficiencyTheorem.residualBandMinimization?.selectorUniverseCompleteForPackets === true,
+    realizerHBClosureComplete:
+      pack.PackSufficiencyTheorem.residualBandMinimization?.realizerBotTyped === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.realizerBotOnlyHNBUDBlockedOrLowerRank === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.chargeSurplusInjectionStrict === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.blockerGraphAcyclicByRank === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.hbBlockerGraphAcyclic === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.selectorSilenceRankComplete === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.hbNoCircularNegativeClosure === true,
     generatedPackageAssumption: pack.PackSufficiencyTheorem.generatedPackageSufficiency.assumption,
     coreDigest: digestCanonical0(pack.Core),
     manifestDigest: digestCanonical0(pack.Manifest),
@@ -975,8 +988,13 @@ function validatePackSufficiencyTheorem0(theorem) {
     'packetAtomsHaveSelectorPayloads',
     'selectorUniverseCompleteAndPolynomial',
     'selectorUniverseCompleteForPackets',
+    'realizerBotTyped',
     'realizerBotOnlyHNBUDBlockedOrLowerRank',
+    'chargeSurplusInjectionStrict',
+    'blockerGraphAcyclicByRank',
     'hbBlockerGraphAcyclic',
+    'selectorSilenceRankComplete',
+    'hbNoCircularNegativeClosure',
     'zeroSlackContradictionFromPositiveSlack',
     'zeroSlackCertificatePolynomialSize',
   ]) {
