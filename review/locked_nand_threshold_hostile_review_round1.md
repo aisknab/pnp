@@ -10,19 +10,19 @@ Current hardened release identifiers:
 
 ```text
 source commit:
-105af516128fa0f7cc9978e6381bb6d8afdc7058
+7072f8d0bda6d44d240f9bb3fad624fd357e1278
 
 source tag:
-final-pnp-proof-report-hardened-105af51
+final-pnp-proof-report-hardened-7072f8d
 
 sealed artifact tag:
-final-pnp-proof-report-artifacts-hardened-105af51-sealed
+final-pnp-proof-report-artifacts-hardened-7072f8d-sealed
 
 artifact bundle:
-proof-artifacts/final-pnp-proof-report-hardened-105af51/
+proof-artifacts/final-pnp-proof-report-hardened-7072f8d/
 
 validation:
-984 tests, 984 pass, 0 fail
+1121 tests, 1121 pass, 0 fail
 ```
 
 Public theorem boundary:

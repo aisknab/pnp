@@ -1,23 +1,23 @@
 # Hostile Mathematical Review Round 2: Residual-Band Minimization and ZeroSlack
 
-Status: **open mathematical audit target**.
+Status: **residual-band hardening pass completed; still open for hostile mathematical audit**.
 
-The locked NAND theorem has been split into explicit manuscript and GPack obligations. The next major proof-risk surface is the residual-band minimization route, especially the claim that the rank-ordered oracle and `ZeroSlack` certificate force exact minimization in polynomial time for bounded residual slack.
+The locked NAND theorem has been split into explicit manuscript and GPack obligations. The residual-band minimization route has now also been split into checker-visible obligations through Terminal MuBridge, SaturatePositive, BCELReady, BN2-BN6, Realizer/HB closure, and ZeroSlack final closure. It remains a major hostile-review target.
 
 ## Release context
 
 ```text
 source commit:
-8b45da4ed604a709d244c35acb886c5eee0889cd
+7072f8d0bda6d44d240f9bb3fad624fd357e1278
 
 source tag:
-final-pnp-proof-report-hardened-8b45da4
+final-pnp-proof-report-hardened-7072f8d
 
 sealed artifact tag:
-final-pnp-proof-report-artifacts-hardened-8b45da4-sealed
+final-pnp-proof-report-artifacts-hardened-7072f8d-sealed
 
 validation:
-1043 tests, 1043 pass, 0 fail
+1121 tests, 1121 pass, 0 fail
 ```
 
 Public theorem boundary:
@@ -360,22 +360,6 @@ The highest-risk points are:
 5. HB negative closure without circular blocker reasoning.
 ```
 
-## Recommended next code patch
+## Current hardening status
 
-Create first-class checker fields for the ZeroSlack route, probably in the oracle / residual-witness / package-sufficiency surfaces, with negative tests.
-
-Suggested first batch:
-
-```text
-zeroSlackEarlierRoutesExcluded
-positiveResidualWitnessYieldsBCELReady
-bcelAnchorAlgebraBooleanOrRoutes
-selectorUniverseCompleteForPackets
-realizerBotOnlyHNBUDBlockedOrLowerRank
-hbBlockerGraphAcyclic
-zeroSlackContradictionFromPositiveSlack
-```
-
-## Recommended next manuscript patch
-
-Expand Section 16.1, `Rank-parametric ZeroSlack`, into a proof-obligation subsection mirroring the checker fields above.
+The 7072f8d release records first-class checker fields for Terminal MuBridge, SaturatePositive, BCEL-ready residual witnesses, BN2, BN3, BN4, BN5/PkgC, BN6, Realizer/HB closure, and ZeroSlack final closure. The next work is hostile external review: produce minimal counterexamples, missing lemmas, or tamper fixtures rather than adding more naming-only obligation fields.

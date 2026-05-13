@@ -98,7 +98,7 @@
 \[
 \CheckPack(\GenPack())=\mathsf{accept}\quad\Longrightarrow\quad P=NP.
 \]
-This paper records the completed finite-certificate route and its executable release seal.  The repository emits an accepted \texttt{FinalPNPProofReport0} whose theorem field is \(P=NP\), whose antecedent is \(\CheckPack(\GenPack())=\mathsf{accept}\), and whose final acceptance/replay, final certificate, release gate, release audit, and proof report records all accept.  The hardened validation log for the sealed repository state reports 1043 passing tests, no failures, no cancellations, and an accepted final proof-report summary and full check record.  Release custody separates the source/checker revision from the durable artefact-bearing release: source tag \texttt{final-pnp-proof-report-hardened-8b45da4}; sealed artefact tag \texttt{final-pnp-proof-report-artifacts-hardened-8b45da4-sealed}.  The materialized proof-report artefact bundle is committed under \url{proof-artifacts/final-pnp-proof-report-hardened-8b45da4/}; its manifest is \url{proof-artifacts/final-pnp-proof-report-hardened-8b45da4/release-seal.json}, and non-self file-level checksums are recorded in \url{proof-artifacts/final-pnp-proof-report-hardened-8b45da4/SHA256SUMS}. If repository access is restricted, request access from \href{mailto:pnp@keaton.com.au}{pnp@keaton.com.au}.
+This paper records the completed finite-certificate route and its executable release seal.  The repository emits an accepted \texttt{FinalPNPProofReport0} whose theorem field is \(P=NP\), whose antecedent is \(\CheckPack(\GenPack())=\mathsf{accept}\), and whose final acceptance/replay, final certificate, release gate, release audit, and proof report records all accept.  The hardened validation log for the sealed repository state reports 1121 passing tests, no failures, no cancellations, and an accepted final proof-report summary and full check record.  Release custody separates the source/checker revision from the durable artefact-bearing release: source tag \texttt{final-pnp-proof-report-hardened-7072f8d}; sealed artefact tag \texttt{final-pnp-proof-report-artifacts-hardened-7072f8d-sealed}.  The materialized proof-report artefact bundle is committed under \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/}; its manifest is \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/release-seal.json}, and non-self file-level checksums are recorded in \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS}.  This release includes the completed residual-band hardening pass through Terminal MuBridge, SaturatePositive, BCELReady, BN2--BN6, Realizer/HB closure, and ZeroSlack final closure. If repository access is restricted, request access from \href{mailto:pnp@keaton.com.au}{pnp@keaton.com.au}.
 \end{minipage}
 \vfill
 {\small This paper states the final theorem under the explicit checker trust model and reproducibility protocol recorded in Section~\ref{sec:final-proof-report}.}\par
@@ -135,23 +135,23 @@ and the final theorem recorded by the accepted proof report is
 \]
 The release custody for this proof report separates source/checker provenance from the durable artefact bundle.  The hardened source/checker revision is the annotated git tag
 \[
-\texttt{final-pnp-proof-report-hardened-8b45da4}
+\texttt{final-pnp-proof-report-hardened-7072f8d}
 \]
 at commit
 \[
-\texttt{8b45da4ed604a709d244c35acb886c5eee0889cd}.
+\texttt{7072f8d0bda6d44d240f9bb3fad624fd357e1278}.
 \]
 The generated artefact JSON commit before metadata sealing is
 \[
-\texttt{c3d3915f7c37737924377076b9216efd2233037f}.
+\texttt{9526d5de8bdfc3f6f9d3d462044db18ba306cf2f}.
 \]
 The durable sealed artefact release is the annotated git tag
 \[
-\texttt{final-pnp-proof-report-artifacts-hardened-8b45da4-sealed}.
+\texttt{final-pnp-proof-report-artifacts-hardened-7072f8d-sealed}.
 \]
 The materialized proof-report bundle is
 \[
-\texttt{proof-artifacts/final-pnp-proof-report-hardened-8b45da4/}.
+\texttt{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/}.
 \]
 
 \subsection{Claim boundary}
@@ -2710,9 +2710,9 @@ The repository implementation realizes the materialized package path, concrete p
 
 The sealed validation run reports:
 \[
-\texttt{tests}=1043,
+\texttt{tests}=1121,
 \qquad
-\texttt{pass}=1043,
+\texttt{pass}=1121,
 \qquad
 \texttt{fail}=0,
 \qquad
@@ -2752,27 +2752,27 @@ The accepted proof report contains accepted \texttt{CheckFinalPNPReleaseGate0}; 
 \subsection{Reproducibility and repository access}
 The proof code and the materialized proof-report artefacts are maintained together in the repository, with source/checker provenance separated from the durable artefact release.  The hardened source/checker revision is
 \begin{center}
-\texttt{final-pnp-proof-report-hardened-8b45da4} at \texttt{8b45da4ed604a709d244c35acb886c5eee0889cd},
+\texttt{final-pnp-proof-report-hardened-7072f8d} at \texttt{7072f8d0bda6d44d240f9bb3fad624fd357e1278},
 \end{center}
 and the generated artefact JSON commit before metadata sealing is
 \begin{center}
-\texttt{c3d3915f7c37737924377076b9216efd2233037f}.
+\texttt{9526d5de8bdfc3f6f9d3d462044db18ba306cf2f}.
 \end{center}
 The sealed artefact release is
 \begin{center}
-\texttt{final-pnp-proof-report-artifacts-hardened-8b45da4-sealed}.
+\texttt{final-pnp-proof-report-artifacts-hardened-7072f8d-sealed}.
 \end{center}
 The committed artefact bundle is
 \begin{center}
-\url{proof-artifacts/final-pnp-proof-report-hardened-8b45da4/}
+\url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/}
 \end{center}
-Its central manifest is \url{proof-artifacts/final-pnp-proof-report-hardened-8b45da4/release-seal.json}, and the file-level checksum ledger is \url{proof-artifacts/final-pnp-proof-report-hardened-8b45da4/SHA256SUMS}.  Ordinary checksum verification uses all non-self entries in \texttt{SHA256SUMS}; the checksum of \texttt{SHA256SUMS} itself is detached metadata in \texttt{SHA256SUMS.sha256}.  If repository access is restricted, reviewers should request source and artefact access from \href{mailto:pnp@keaton.com.au}{pnp@keaton.com.au}.
+Its central manifest is \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/release-seal.json}, and the file-level checksum ledger is \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS}.  Ordinary checksum verification uses all non-self entries in \texttt{SHA256SUMS}; the checksum of \texttt{SHA256SUMS} itself is detached metadata in \texttt{SHA256SUMS.sha256}.  If repository access is restricted, reviewers should request source and artefact access from \href{mailto:pnp@keaton.com.au}{pnp@keaton.com.au}.
 
 There are two verification modes.  Artefact verification checks out the sealed artefact release and verifies the committed JSON artefacts against \texttt{SHA256SUMS}, excluding any self-entry.  Regeneration verification checks that the source/checker revision emits an accepted \texttt{CheckFinalPNPProofReport0} record with theorem statement \(P=NP\), antecedent \(\CheckPack(\GenPack())=\mathsf{accept}\), accepted status, and accepted package/replay/certificate linkage.  Exact release-context digest equality is required only when regenerating in the same clean release context used to create the committed artefact bundle.
 
 The canonical regeneration commands are:
 \begin{lstlisting}
-B=proof-artifacts/final-pnp-proof-report-hardened-8b45da4
+B=proof-artifacts/final-pnp-proof-report-hardened-7072f8d
 npm run validate
 node ./bin/write-final-pnp-proof-report0.mjs "$B/compact"
 node ./bin/write-final-pnp-proof-report0.mjs "$B/full" --full
@@ -2844,40 +2844,40 @@ This section records the accepted proof-report artefacts that seal the proof.  T
 \subsection{Sealed revision and validation}
 The hardened source/checker revision recorded by the committed artefact bundle is
 \[
-\texttt{8b45da4ed604a709d244c35acb886c5eee0889cd}
+\texttt{7072f8d0bda6d44d240f9bb3fad624fd357e1278}
 \]
 with annotated source tag
 \[
-\texttt{final-pnp-proof-report-hardened-8b45da4}.
+\texttt{final-pnp-proof-report-hardened-7072f8d}.
 \]
 The generated artefact JSON commit before metadata sealing is
 \[
-\texttt{c3d3915f7c37737924377076b9216efd2233037f}.
+\texttt{9526d5de8bdfc3f6f9d3d462044db18ba306cf2f}.
 \]
 The durable sealed artefact release is the annotated tag
 \[
-\texttt{final-pnp-proof-report-artifacts-hardened-8b45da4-sealed}.
+\texttt{final-pnp-proof-report-artifacts-hardened-7072f8d-sealed}.
 \]
 It contains the materialized proof-report artefact bundle at
 \begin{center}
-\url{proof-artifacts/final-pnp-proof-report-hardened-8b45da4/}
+\url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/}
 \end{center}
-The bundle manifest is \url{proof-artifacts/final-pnp-proof-report-hardened-8b45da4/release-seal.json}; the file-level checksum ledger is \url{proof-artifacts/final-pnp-proof-report-hardened-8b45da4/SHA256SUMS}; and the detached checksum for the ledger itself is \url{proof-artifacts/final-pnp-proof-report-hardened-8b45da4/SHA256SUMS.sha256}.  Ordinary file-level verification excludes any \texttt{SHA256SUMS} self-entry.  The full validation run completed with
+The bundle manifest is \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/release-seal.json}; the file-level checksum ledger is \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS}; and the detached checksum for the ledger itself is \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS.sha256}.  Ordinary file-level verification excludes any \texttt{SHA256SUMS} self-entry.  The full validation run completed with
 \[
-1043\text{ tests},\qquad 1043\text{ passed},\qquad 0\text{ failed},\qquad 0\text{ cancelled}.
+1121\text{ tests},\qquad 1121\text{ passed},\qquad 0\text{ failed},\qquad 0\text{ cancelled}.\quad (\texttt{duration\_ms}=2033521.892701.)
 \]
 
 The committed compact proof-report summary has canonical digest
 \[
-\hashpair{ed5f12fd1fd5067c82e5bf91de72bf94}{6d9aff5111f8df650b80df7d17bdccd8},
+\hashpair{6b67a24b4139041f67c4228482d097bf}{e2552943d782991c75288bd5135478c0},
 \]
 and inner accepted check-record digest
 \[
-\hashpair{f16b1dbf6ae17a2f379cfc594a71146e}{8055e93088c19f2cc9bedfab7b676ba9}.
+\hashpair{bfa12a5f05175721c2c6054383cd4e19}{29de624b2aea6cce58273fb9c27d7c7a}.
 \]
 The committed full proof-report check record has digest
 \[
-\hashpair{51b5360ad24b3780230de3b9989eaecd}{57a2cf48c5eda3e185ce6fa85f177cef}.
+\hashpair{ef07f27dcb0bd5c0b115cc7ff2210952}{2f916859a2319265ab552ee6a6243a43}.
 \]
 
 \subsection{Accepted report fields}
@@ -2910,27 +2910,27 @@ The committed hardened release-seal manifest records the following central canon
 \toprule
 Object & SHA256 canonical-json-v0 digest\\
 \midrule
-Compact proof-report summary & \hashpair{ed5f12fd1fd5067c82e5bf91de72bf94}{6d9aff5111f8df650b80df7d17bdccd8}\\
-Summary inner proof-report check & \hashpair{f16b1dbf6ae17a2f379cfc594a71146e}{8055e93088c19f2cc9bedfab7b676ba9}\\
-Full proof-report check & \hashpair{51b5360ad24b3780230de3b9989eaecd}{57a2cf48c5eda3e185ce6fa85f177cef}\\
-Full proof-report canonical object & \hashpair{dd47108dbe472f24fae21fa0f68ccbc7}{30c1b3dc79c14b740f4b6d182deb812a}\\
-PCCPack & \hashpair{6fca5737f6a7e2207d8a1a2d5fe437dc}{eb0c7d8e0fef6d2e9057cbbe239d682d}\\
-CheckPCCPackexp0 record & \hashpair{fb4231d4839d0d53125cc26ede843b6c}{34ffff2d3038a679ec14044a4fcd9c24}\\
-Accept run & \hashpair{f7e065f260a34a9460c80a53389849aa}{7b144818f965ab02f934c4df1552237b}\\
-Final verdict record & \hashpair{b80de723f2d989cd339834f7149f5a0c}{2df68ea9e265fdf0b30ef05f24ec0cf4}\\
-Final PNP release gate record & \hashpair{03a264393e4711e8d2d744ff09ca953}{ade90b2ae6aab60f2b53905209dd925f2}\\
-Release audit & \hashpair{35d7f57b60dd0fc57738cba65b16144f}{180bc00919272e14300774cc8e44bf25}\\
-Final certificate & \hashpair{bdf4859cd9085dbdd3d987521af4e798}{ee0387201087663b944e862e5b51a0e2}\\
+Compact proof-report summary & \hashpair{6b67a24b4139041f67c4228482d097bf}{e2552943d782991c75288bd5135478c0}\\
+Summary inner proof-report check & \hashpair{bfa12a5f05175721c2c6054383cd4e19}{29de624b2aea6cce58273fb9c27d7c7a}\\
+Full proof-report check & \hashpair{ef07f27dcb0bd5c0b115cc7ff2210952}{2f916859a2319265ab552ee6a6243a43}\\
+Full proof-report canonical object & \hashpair{d7715aa3fb152a25a545f4895951c999}{0ff3564bd9be4c4b72f5cb99aa60491c}\\
+PCCPack & \hashpair{6209e612d350bd68fe98ce1bdb329a5d}{c435a1a5de920844e8c64610b4ff3605}\\
+CheckPCCPackexp0 record & \hashpair{62f688bc16c26d9400f7c3c309f266be}{eb8836519572dd72b3b57f5446a3f1e0}\\
+Accept run & \hashpair{5273dd73ea238a51f6e1c56a80bb5e08}{12e68982b939c1fceeaa100b9a7db42e}\\
+Final verdict record & \hashpair{e3648d0ef8af39a0fdaab722cb97cfc7}{5a0b33710ede4f515a93732ef63cfffa}\\
+Final PNP release gate record & \hashpair{7754e07d0b36b58deea655e515b45d66}{8226643eb3f6d8280b07ce79fde505dd}\\
+Release audit & \hashpair{8cd5e6dba1a9ddf3d3d98c99ee0723b3}{2b143c43b24c0f07e81e3542672bb8d4}\\
+Final certificate & \hashpair{c43aee3f06ed6a6e9493dc4464811ad6}{a0e44cad060a1b74c69aa38635a9dcfa}\\
 \bottomrule
 \end{longtable}
 
-The file-level SHA256 checksum ledger is committed as \url{proof-artifacts/final-pnp-proof-report-hardened-8b45da4/SHA256SUMS}.  The ledger is used for the durable bundle files other than \texttt{SHA256SUMS} itself.  In that ledger, \texttt{release-seal.json} has file checksum
+The file-level SHA256 checksum ledger is committed as \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS}.  The ledger is used for the durable bundle files other than \texttt{SHA256SUMS} itself.  In that ledger, \texttt{release-seal.json} has file checksum
 \[
-\hashpair{16a2a7ffe2f66a4ce0f1c5a9a9b59b30}{5ecab32abf5b9d237968448ad83a26cd}.
+\hashpair{03a95ff0baeb5b251577780ecbce51e9}{b305fb611daddee4db9b05f2621d6bc7}.
 \]
-The detached checksum of \texttt{SHA256SUMS} is committed as \url{proof-artifacts/final-pnp-proof-report-hardened-8b45da4/SHA256SUMS.sha256} and is
+The detached checksum of \texttt{SHA256SUMS} is committed as \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS.sha256} and is
 \[
-\hashpair{22763c5db0f25f41d3661000598c5aae}{52e77965b3b4deac74b40e5f2b2aa2ee}.
+\hashpair{d1da103bbf2867b656e8026b734f81b3}{3bc61deb79dbf3a2d48a16f83e8a2356}.
 \]
 
 \subsection{Final theorem extraction}
@@ -2948,11 +2948,11 @@ By Theorem 18.3, the accepted generated package suffices for \(P=NP\).  The fina
 \subsection{Independent verification protocol}
 A reviewer can verify the final seal in two complementary modes.  In artefact mode, the reviewer checks out the sealed artefact release
 \begin{center}
-\texttt{final-pnp-proof-report-artifacts-hardened-8b45da4-sealed}
+\texttt{final-pnp-proof-report-artifacts-hardened-7072f8d-sealed}
 \end{center}
 and inspects the committed bundle at
 \begin{center}
-\url{proof-artifacts/final-pnp-proof-report-hardened-8b45da4/}.
+\url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/}.
 \end{center}
 The required durable files are \texttt{release-seal.json}, \texttt{SHA256SUMS}, \texttt{SHA256SUMS.sha256}, the compact artefacts under \texttt{compact/}, and the full artefacts under \texttt{full/}.  File-level verification checks the committed bundle against \texttt{SHA256SUMS} while excluding any \texttt{SHA256SUMS} self-entry.
 

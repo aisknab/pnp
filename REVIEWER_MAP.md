@@ -14,25 +14,25 @@ The release does not ask a reviewer to accept a direct unqualified `P = NP` clai
 
 ```text
 source commit:
-8b45da4ed604a709d244c35acb886c5eee0889cd
+7072f8d0bda6d44d240f9bb3fad624fd357e1278
 
 source tag:
-final-pnp-proof-report-hardened-8b45da4
+final-pnp-proof-report-hardened-7072f8d
 
 sealed artifact tag:
-final-pnp-proof-report-artifacts-hardened-8b45da4-sealed
+final-pnp-proof-report-artifacts-hardened-7072f8d-sealed
 
 artifact bundle:
-proof-artifacts/final-pnp-proof-report-hardened-8b45da4/
+proof-artifacts/final-pnp-proof-report-hardened-7072f8d/
 
 validation:
-1043 tests, 1043 pass, 0 fail
+1121 tests, 1121 pass, 0 fail
 ```
 
 The hardened release seal is:
 
 ```text
-proof-artifacts/final-pnp-proof-report-hardened-8b45da4/release-seal.json
+proof-artifacts/final-pnp-proof-report-hardened-7072f8d/release-seal.json
 ```
 
 ## Main review chain
@@ -295,8 +295,8 @@ A hostile review should focus in this order:
 npm ci
 npm run validate
 
-sha256sum -c proof-artifacts/final-pnp-proof-report-hardened-8b45da4/SHA256SUMS
-sha256sum -c proof-artifacts/final-pnp-proof-report-hardened-8b45da4/SHA256SUMS.sha256
+sha256sum -c proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS
+sha256sum -c proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS.sha256
 
 node --test test/pcc-gpack0.test.mjs
 node --test test/pcc-global-proof-dag0.test.mjs
@@ -309,7 +309,7 @@ node --test test/pcc-runall0.test.mjs
 Expected validation summary:
 
 ```text
-tests 1043
-pass 1043
+tests 1121
+pass 1121
 fail 0
 ```
