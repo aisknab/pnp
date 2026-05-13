@@ -357,6 +357,11 @@ export function makeSyntheticPackSufficiencyTheorem0(overrides = {}) {
       jointSideTightRealizability: true,
       runtimeIntegersSeparatedFromFiniteState: true,
       incidenceAtomsAccountedExactlyOnce: true,
+      activationByActiveAntichain: true,
+      activationEqualityWithoutCutEnumeration: true,
+      sameKeyCancellationExact: true,
+      noOppositeSignSameKeyResidual: true,
+      integerMassLedgerExact: true,
       selectorUniverseCompleteForPackets: true,
       realizerBotOnlyHNBUDBlockedOrLowerRank: true,
       hbBlockerGraphAcyclic: true,
@@ -631,6 +636,12 @@ export async function CheckPackSufficiency0(pack) {
       pack.PackSufficiencyTheorem.residualBandMinimization?.jointSideTightRealizability === true &&
       pack.PackSufficiencyTheorem.residualBandMinimization?.runtimeIntegersSeparatedFromFiniteState === true &&
       pack.PackSufficiencyTheorem.residualBandMinimization?.incidenceAtomsAccountedExactlyOnce === true,
+    bn4ActivationExactCancellationComplete:
+      pack.PackSufficiencyTheorem.residualBandMinimization?.activationByActiveAntichain === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.activationEqualityWithoutCutEnumeration === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.sameKeyCancellationExact === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.noOppositeSignSameKeyResidual === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.integerMassLedgerExact === true,
     generatedPackageAssumption: pack.PackSufficiencyTheorem.generatedPackageSufficiency.assumption,
     coreDigest: digestCanonical0(pack.Core),
     manifestDigest: digestCanonical0(pack.Manifest),
@@ -925,6 +936,11 @@ function validatePackSufficiencyTheorem0(theorem) {
     'jointSideTightRealizability',
     'runtimeIntegersSeparatedFromFiniteState',
     'incidenceAtomsAccountedExactlyOnce',
+    'activationByActiveAntichain',
+    'activationEqualityWithoutCutEnumeration',
+    'sameKeyCancellationExact',
+    'noOppositeSignSameKeyResidual',
+    'integerMassLedgerExact',
     'selectorUniverseCompleteForPackets',
     'realizerBotOnlyHNBUDBlockedOrLowerRank',
     'hbBlockerGraphAcyclic',
