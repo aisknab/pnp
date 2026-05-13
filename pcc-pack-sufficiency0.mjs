@@ -380,6 +380,11 @@ export function makeSyntheticPackSufficiencyTheorem0(overrides = {}) {
       hbBlockerGraphAcyclic: true,
       selectorSilenceRankComplete: true,
       hbNoCircularNegativeClosure: true,
+      zeroSlackNoLowerRouteLedgerComplete: true,
+      zeroSlackFaithfulSelectorExcludedAllRanks: true,
+      zeroSlackHNBUDBlockersExcludedAllRanks: true,
+      zeroSlackPositiveSlackContradictionComplete: true,
+      zeroSlackCertificateEncodingPolynomial: true,
       zeroSlackContradictionFromPositiveSlack: true,
       zeroSlackCertificatePolynomialSize: true,
     },
@@ -678,6 +683,15 @@ export async function CheckPackSufficiency0(pack) {
       pack.PackSufficiencyTheorem.residualBandMinimization?.hbBlockerGraphAcyclic === true &&
       pack.PackSufficiencyTheorem.residualBandMinimization?.selectorSilenceRankComplete === true &&
       pack.PackSufficiencyTheorem.residualBandMinimization?.hbNoCircularNegativeClosure === true,
+    zeroSlackFinalClosureComplete:
+      pack.PackSufficiencyTheorem.residualBandMinimization?.zeroSlackEarlierRoutesExcluded === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.zeroSlackNoLowerRouteLedgerComplete === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.zeroSlackFaithfulSelectorExcludedAllRanks === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.zeroSlackHNBUDBlockersExcludedAllRanks === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.zeroSlackPositiveSlackContradictionComplete === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.zeroSlackContradictionFromPositiveSlack === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.zeroSlackCertificateEncodingPolynomial === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.zeroSlackCertificatePolynomialSize === true,
     generatedPackageAssumption: pack.PackSufficiencyTheorem.generatedPackageSufficiency.assumption,
     coreDigest: digestCanonical0(pack.Core),
     manifestDigest: digestCanonical0(pack.Manifest),
@@ -995,6 +1009,11 @@ function validatePackSufficiencyTheorem0(theorem) {
     'hbBlockerGraphAcyclic',
     'selectorSilenceRankComplete',
     'hbNoCircularNegativeClosure',
+    'zeroSlackNoLowerRouteLedgerComplete',
+    'zeroSlackFaithfulSelectorExcludedAllRanks',
+    'zeroSlackHNBUDBlockersExcludedAllRanks',
+    'zeroSlackPositiveSlackContradictionComplete',
+    'zeroSlackCertificateEncodingPolynomial',
     'zeroSlackContradictionFromPositiveSlack',
     'zeroSlackCertificatePolynomialSize',
   ]) {

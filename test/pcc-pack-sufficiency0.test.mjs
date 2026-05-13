@@ -42,6 +42,7 @@ test('CheckPackSufficiency0 accepts the synthetic top-level package', async () =
   assert.equal(out.NF.bn5PkgCLocalizationComplete, true);
   assert.equal(out.NF.bn6PacketCollapseSelectorComplete, true);
   assert.equal(out.NF.realizerHBClosureComplete, true);
+  assert.equal(out.NF.zeroSlackFinalClosureComplete, true);
   assert.equal(out.Digest.alg, 'SHA256');
   assert.match(out.Digest.hex, /^[0-9a-f]{64}$/);
 });
@@ -592,6 +593,39 @@ test('CheckPackSufficiency0 rejects missing Realizer and HB closure obligations'
     'hbBlockerGraphAcyclic',
     'selectorSilenceRankComplete',
     'hbNoCircularNegativeClosure',
+  ];
+
+  for (const field of cases) {
+    await t.test(`${field}=false`, async () => {
+      const pack = makeSyntheticPCCPack0();
+
+      pack.PackSufficiencyTheorem = {
+        ...pack.PackSufficiencyTheorem,
+        residualBandMinimization: {
+          ...pack.PackSufficiencyTheorem.residualBandMinimization,
+          [field]: false,
+        },
+      };
+
+      const out = await CheckPackSufficiency0(pack);
+
+      assert.equal(out.tag, 'reject');
+      assert.equal(out.checker, 'CheckPackSufficiency0');
+      assert.equal(out.Coord, 'CheckPackSufficiency0.PackSufficiencyTheorem');
+      assert.deepEqual(out.Path, ['PackSufficiencyTheorem', 'residualBandMinimization', field]);
+      assert.equal(out.Witness.reason, `residualBandMinimization must certify ${field}`);
+    });
+  }
+});
+
+
+test('CheckPackSufficiency0 rejects missing ZeroSlack final closure obligations', async (t) => {
+  const cases = [
+    'zeroSlackNoLowerRouteLedgerComplete',
+    'zeroSlackFaithfulSelectorExcludedAllRanks',
+    'zeroSlackHNBUDBlockersExcludedAllRanks',
+    'zeroSlackPositiveSlackContradictionComplete',
+    'zeroSlackCertificateEncodingPolynomial',
   ];
 
   for (const field of cases) {
