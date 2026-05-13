@@ -975,6 +975,17 @@ Then
 r_p^{(i)}(T)=1\Longleftrightarrow \exists M\in\mathcal M_p^{(i)}\ [M\subseteq T].
 \]
 
+\subsubsection{BN3 finite request-envelope proof obligations}
+The accepted residual-band theorem records the BN3 request-envelope step as five checker-visible obligations:
+\begin{lstlisting}
+requestPredicatesStable
+minimalConsumerAntichainsExact
+jointSideTightRealizability
+runtimeIntegersSeparatedFromFiniteState
+incidenceAtomsAccountedExactlyOnce
+\end{lstlisting}
+The first field states that each request predicate is stable under saturation, transport, frontier order, profile recoding, and mode projection.  The second says that the minimal-consumer antichain represents the predicate exactly.  The third is the simultaneous-realizability requirement: the envelope is not merely a collection of individually possible requests, but is realized in one side-tight BN2 basis.  The fourth prevents schedule-sized runtime integers from being smuggled into finite profile state.  The fifth records that every cut-incidence atom is counted once, with no missing atom and no duplicate charge.
+
 \begin{theorem}[BN3-SimultaneousEnvelope]
 For each mode \(i\), there exists a finite weighted request system such that for every proper cut \(S\),
 \[
@@ -984,7 +995,32 @@ For each mode \(i\), there exists a finite weighted request system such that for
 The request predicates are stable, monotone, vanish on the empty set, and jointly realizable in one side-tight BN2 basis.
 \end{theorem}
 
-Raw individual requestability is insufficient. BN3 requires stable requestability plus joint realizability.
+\begin{proof}
+Fix a mode \(i\) and a BCEL-ready positive nucleus with anchor set \(A\).  By BN2, every legal saturated projection-compatible square has carrier-compatible side-tight optima, and the value of a side-tight basis equals the corresponding merge defect.  For every primitive incidence atom that can contribute to a cut value, form a request unit \(p\) with weight \(\nu_i(p)\).  Its predicate \(r_p^{(i)}(T)\) says that the side indexed by \(T\subseteq A\) consumes the incidence atom in the transported side-tight basis.
+
+The request predicate depends only on finite row-key data: transported frontier signature, projected semantic signature, activation code, origin/kernel/obligation footprint, charge owner, budget cell, profile class, and rank tag.  Saturation and transport preserve these fields, and any unstable transport, profile recoding, frontier mismatch, mode-firewall failure, or charge-owner mismatch routes to a named outcome, verified gain, exact route, selector, or strict descent.  Hence in a no-outcome branch the predicate is stable and monotone, and it vanishes on \(\varnothing\).  This is \texttt{requestPredicatesStable}.
+
+For each request unit, define
+\[
+\mathcal M_p^{(i)}=\min_\subseteq\{T\subseteq A:T\ne\varnothing,\ r_p^{(i)}(T)=1\}.
+\]
+Since \(A\) is finite, this antichain is finite.  Monotonicity gives the upward closure identity
+\[
+r_p^{(i)}(T)=1\Longleftrightarrow \exists M\in\mathcal M_p^{(i)}\ [M\subseteq T].
+\]
+If a consumer set is omitted, nonminimal, or duplicated, the finite antichain checker exposes the first mismatch.  Thus the antichain is exact; this is \texttt{minimalConsumerAntichainsExact}.
+
+The envelope is then assembled simultaneously from one side-tight BN2 basis.  The request units are not certified one at a time with unrelated witnesses; instead, a joint side-tight tuple supplies all corner optima, all transported incidence atoms, and all request activations in one compatible square.  Therefore requests that are individually possible but mutually inconsistent cannot be used.  This is \texttt{jointSideTightRealizability}.
+
+The runtime integers that occur in budget values, charge multiplicities, envelope weights, table bounds, and Presburger certificates remain arithmetic fields.  They are not added to the finite profile alphabet and are compared only through the accepted arithmetic-cell certificates.  This keeps the request universe finite under the fixed schedule and is \texttt{runtimeIntegersSeparatedFromFiniteState}.
+
+Finally, each cut-incidence contribution has a unique atom key, owner, side-tight basis coordinate, and request unit.  The incidence ledger partitions the atom set: every atom contributing to \(\delta_i^{cut}(S,A\setminus S)\) appears exactly once in the sum, and no atom whose predicate is inactive on one side of the cut contributes.  This gives
+\[
+\delta_i^{cut}(S,A\setminus S)=
+\sum_{p\in P_i}\nu_i(p)r_p^{(i)}(S)r_p^{(i)}(A\setminus S)
+\]
+for every proper cut.  This is \texttt{incidenceAtomsAccountedExactlyOnce}.  Raw individual requestability is therefore insufficient; BN3 uses stable requestability plus joint realizability.
+\end{proof}
 
 \subsection{BN4: activation-exact cancellation}
 Define the active consumer antichain
@@ -1418,13 +1454,18 @@ sideTightOnlyNoOverclaim
 fourCornerOptimaCarrierCompatible
 sideTightCompletionExists
 tightBasisValueEqualsDelta
+requestPredicatesStable
+minimalConsumerAntichainsExact
+jointSideTightRealizability
+runtimeIntegersSeparatedFromFiniteState
+incidenceAtomsAccountedExactlyOnce
 selectorUniverseCompleteForPackets
 realizerBotOnlyHNBUDBlockedOrLowerRank
 hbBlockerGraphAcyclic
 zeroSlackContradictionFromPositiveSlack
 zeroSlackCertificatePolynomialSize
 \end{lstlisting}
-Mathematically, these fields assert that the gain loop is residual-band bounded, that a ZeroSlack output is exact, that terminal MuBridge translates between whole circuits and closed full words without semantic or size drift, that quotient equality is nonconstructive unless lifted, that whole-span cheaper words give strict residual descent, that transparent saturation preserves positivity, that nontransparent saturation and interface exposure route to named outcomes, that earlier gain/exact/named routes have been positively excluded, that positive residual slack yields a BCEL-ready positive nucleus unless an earlier route fires, that a finite anchor set is extracted, that Boolean anchor algebra failures route rather than remain silent, that a minimal positive nucleus with at least two anchors has a constant proper-cut equation, that BN2 uses only carrier-compatible side-tight optima and never overclaims from non-tight coherent bases, that the finite selector universe covers all positive packet prototypes, that realizer failure is only by typed HN/BUD or lower-rank blocking, that the blocker graph is acyclic, that positive slack contradicts the ZeroSlack ledger, and that the certificate has polynomial size.
+Mathematically, these fields assert that the gain loop is residual-band bounded, that a ZeroSlack output is exact, that terminal MuBridge translates between whole circuits and closed full words without semantic or size drift, that quotient equality is nonconstructive unless lifted, that whole-span cheaper words give strict residual descent, that transparent saturation preserves positivity, that nontransparent saturation and interface exposure route to named outcomes, that earlier gain/exact/named routes have been positively excluded, that positive residual slack yields a BCEL-ready positive nucleus unless an earlier route fires, that a finite anchor set is extracted, that Boolean anchor algebra failures route rather than remain silent, that a minimal positive nucleus with at least two anchors has a constant proper-cut equation, that BN2 uses only carrier-compatible side-tight optima and never overclaims from non-tight coherent bases, that BN3 builds stable finite request predicates, exact minimal-consumer antichains, jointly realizable side-tight envelopes, arithmetic-separated runtime integers, and exact incidence ledgers, that the finite selector universe covers all positive packet prototypes, that realizer failure is only by typed HN/BUD or lower-rank blocking, that the blocker graph is acyclic, that positive slack contradicts the ZeroSlack ledger, and that the certificate has polynomial size.
 
 \begin{theorem}[Rank-parametric ZeroSlack]
 If
