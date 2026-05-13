@@ -915,10 +915,20 @@ v_{\mathcal X}=\delta_i(A,B)+\epsilon_A+\epsilon_B-\epsilon_I-\epsilon_U.
 \]
 A coherent tuple is side-tight iff every \(\epsilon_S=0\).
 
+\subsubsection{BN2 side-tight coherent optima proof obligations}
+The accepted residual-band theorem records the BN2 coherent-optimum step as four checker-visible obligations:
+\begin{lstlisting}
+sideTightOnlyNoOverclaim
+fourCornerOptimaCarrierCompatible
+sideTightCompletionExists
+tightBasisValueEqualsDelta
+\end{lstlisting}
+The first field is the no-overclaim discipline: BN2 may read \(\delta_i(A,B)\) only from side-tight bases, not from arbitrary coherent tuples.  The second field states that the four corner optima are compared over the same transported square carrier.  The third field asserts that every legal saturated projection-compatible square in a no-outcome branch has a side-tight completion.  The fourth field records the value identity \(v_G=\delta_i(A,B)\) for a side-tight basis.
+
 \begin{theorem}[BN2-CoherentOptimum]
 In a no-outcome branch, every legal saturated projection-compatible square has a side-tight square-coherent tuple in each mode \(i\). For every side-tight basis,
 \[
-v_G=\delta_i(A,B).
+ v_G=\delta_i(A,B).
 \]
 Consequently,
 \[
@@ -926,7 +936,25 @@ Consequently,
 \]
 \end{theorem}
 
-BN2 does not allow no-overclaim for arbitrary coherent bases. It is valid only for side-tight bases.
+\begin{proof}
+Fix a legal saturated projection-compatible square in mode \(i\).  Legality means that the four supports \(I,A,B,U\) have already passed saturation, completion, frontier transport, origin/kernel/obligation transport, charge transport, and mode-firewall checks.  Therefore the four open functions \(F_I,F_A,F_B,F_U\) live in carrier-compatible corners of the same square, and the optima \(m_i(I),m_i(A),m_i(B),m_i(U)\) can be compared without mixing frontiers.  This is \texttt{fourCornerOptimaCarrierCompatible}.
+
+Choose minimum realizers \(X_I,X_A,X_B,X_U\) for the four corners, and transport them along the square interfaces.  If some transport, frontier order, profile field, charge owner, or obligation discharge cannot be made coherent, the first failing coordinate is a named route, verified gain, exact route, selector, or strict descent; in a no-outcome branch no such failure remains.  The side-tight completion field records that the surviving coherent tuple can be chosen with
+\[
+ |X_S|=m_i(S)\qquad(S\in\{I,A,B,U\}).
+\]
+Thus all slacks \(\epsilon_S=|X_S|-m_i(S)\) vanish.  This is \texttt{sideTightCompletionExists}.
+
+For any square-coherent tuple the bookkeeping identity is
+\[
+ v_{\mathcal X}=\delta_i(A,B)+\epsilon_A+\epsilon_B-\epsilon_I-\epsilon_U.
+\]
+Substituting \(\epsilon_I=\epsilon_A=\epsilon_B=\epsilon_U=0\) for a side-tight tuple gives
+\[
+ v_G=\delta_i(A,B).
+\]
+This is \texttt{tightBasisValueEqualsDelta}.  Conversely, if a coherent tuple is not side-tight, the extra slack terms need not vanish, and its incidence value is not licensed as \(\delta_i(A,B)\).  Therefore BN2 never infers the merge defect from arbitrary coherent bases; it uses only side-tight bases.  This is \texttt{sideTightOnlyNoOverclaim}.  Since a side-tight basis exists in every no-outcome legal square, maximizing over the finite side-tight basis family returns \(\delta_i(A,B)\).
+\end{proof}
 
 \subsection{BN3: simultaneous finite request envelopes}
 For each mode \(i\), BN3 constructs a finite weighted request system
@@ -1386,13 +1414,17 @@ minimalPositiveNucleus
 properCutConstantEquation
 anchorSizeAtLeastTwo
 bcelAnchorAlgebraBooleanOrRoutes
+sideTightOnlyNoOverclaim
+fourCornerOptimaCarrierCompatible
+sideTightCompletionExists
+tightBasisValueEqualsDelta
 selectorUniverseCompleteForPackets
 realizerBotOnlyHNBUDBlockedOrLowerRank
 hbBlockerGraphAcyclic
 zeroSlackContradictionFromPositiveSlack
 zeroSlackCertificatePolynomialSize
 \end{lstlisting}
-Mathematically, these fields assert that the gain loop is residual-band bounded, that a ZeroSlack output is exact, that terminal MuBridge translates between whole circuits and closed full words without semantic or size drift, that quotient equality is nonconstructive unless lifted, that whole-span cheaper words give strict residual descent, that transparent saturation preserves positivity, that nontransparent saturation and interface exposure route to named outcomes, that earlier gain/exact/named routes have been positively excluded, that positive residual slack yields a BCEL-ready positive nucleus unless an earlier route fires, that a finite anchor set is extracted, that Boolean anchor algebra failures route rather than remain silent, that a minimal positive nucleus with at least two anchors has a constant proper-cut equation, that the finite selector universe covers all positive packet prototypes, that realizer failure is only by typed HN/BUD or lower-rank blocking, that the blocker graph is acyclic, that positive slack contradicts the ZeroSlack ledger, and that the certificate has polynomial size.
+Mathematically, these fields assert that the gain loop is residual-band bounded, that a ZeroSlack output is exact, that terminal MuBridge translates between whole circuits and closed full words without semantic or size drift, that quotient equality is nonconstructive unless lifted, that whole-span cheaper words give strict residual descent, that transparent saturation preserves positivity, that nontransparent saturation and interface exposure route to named outcomes, that earlier gain/exact/named routes have been positively excluded, that positive residual slack yields a BCEL-ready positive nucleus unless an earlier route fires, that a finite anchor set is extracted, that Boolean anchor algebra failures route rather than remain silent, that a minimal positive nucleus with at least two anchors has a constant proper-cut equation, that BN2 uses only carrier-compatible side-tight optima and never overclaims from non-tight coherent bases, that the finite selector universe covers all positive packet prototypes, that realizer failure is only by typed HN/BUD or lower-rank blocking, that the blocker graph is acyclic, that positive slack contradicts the ZeroSlack ledger, and that the certificate has polynomial size.
 
 \begin{theorem}[Rank-parametric ZeroSlack]
 If
