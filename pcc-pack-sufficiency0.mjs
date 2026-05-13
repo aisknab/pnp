@@ -367,6 +367,11 @@ export function makeSyntheticPackSufficiencyTheorem0(overrides = {}) {
       quotientToFullMatchingKeyPreserving: true,
       separatingConsumersSingletonized: true,
       unmatchedShadowNotSilent: true,
+      constantCutHypergraphHypotheses: true,
+      pairTriFullSpanExhaustive: true,
+      mixedTripleCaseHandled: true,
+      packetAtomsHaveSelectorPayloads: true,
+      selectorUniverseCompleteAndPolynomial: true,
       selectorUniverseCompleteForPackets: true,
       realizerBotOnlyHNBUDBlockedOrLowerRank: true,
       hbBlockerGraphAcyclic: true,
@@ -653,6 +658,13 @@ export async function CheckPackSufficiency0(pack) {
       pack.PackSufficiencyTheorem.residualBandMinimization?.quotientToFullMatchingKeyPreserving === true &&
       pack.PackSufficiencyTheorem.residualBandMinimization?.separatingConsumersSingletonized === true &&
       pack.PackSufficiencyTheorem.residualBandMinimization?.unmatchedShadowNotSilent === true,
+    bn6PacketCollapseSelectorComplete:
+      pack.PackSufficiencyTheorem.residualBandMinimization?.constantCutHypergraphHypotheses === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.pairTriFullSpanExhaustive === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.mixedTripleCaseHandled === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.packetAtomsHaveSelectorPayloads === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.selectorUniverseCompleteAndPolynomial === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.selectorUniverseCompleteForPackets === true,
     generatedPackageAssumption: pack.PackSufficiencyTheorem.generatedPackageSufficiency.assumption,
     coreDigest: digestCanonical0(pack.Core),
     manifestDigest: digestCanonical0(pack.Manifest),
@@ -957,6 +969,11 @@ function validatePackSufficiencyTheorem0(theorem) {
     'quotientToFullMatchingKeyPreserving',
     'separatingConsumersSingletonized',
     'unmatchedShadowNotSilent',
+    'constantCutHypergraphHypotheses',
+    'pairTriFullSpanExhaustive',
+    'mixedTripleCaseHandled',
+    'packetAtomsHaveSelectorPayloads',
+    'selectorUniverseCompleteAndPolynomial',
     'selectorUniverseCompleteForPackets',
     'realizerBotOnlyHNBUDBlockedOrLowerRank',
     'hbBlockerGraphAcyclic',
