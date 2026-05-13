@@ -1183,6 +1183,16 @@ Together with the constant-cut equation
 \]
 V53 yields packet prototypes.
 
+\subsubsection{BN6 packet-collapse proof obligations}
+The accepted residual-band theorem records the BN6 hypergraph-packet step as checker-visible obligations:
+\begin{lstlisting}
+constantCutHypergraphHypotheses
+pairTriFullSpanExhaustive
+mixedTripleCaseHandled
+packetAtomsHaveSelectorPayloads
+\end{lstlisting}
+The first field says that the nonnegative hypergraph has exactly the hypotheses needed by V53: finite anchor set, nonnegative integer hyperedge weights, nonzero constant proper-cut value, and no surviving negative full residual.  The second says that V53 exhausts the possible positive packet prototypes: pair, balanced triple, or full span.  The third records the special three-anchor mixed case, where pair mass and full-span mass can coexist.  The fourth says that every positive packet atom carries enough concrete row-key payload to feed the selector universe.
+
 \begin{theorem}[BN6-HypergraphPacket]
 Every BCEL-ready positive nucleus in a minimum-rank no-outcome branch produces a positive packet prototype of type
 \[
@@ -1193,11 +1203,30 @@ Pair,
 Every positive packet mass carries atom witnesses.
 \end{theorem}
 
-For \(|A|=3\), the case can be mixed:
+\begin{proof}
+By BN5 and PkgC, every surviving residual key in a no-outcome branch is a nonnegative active quotient key, and every such key has singleton-singleton separating consumers.  Therefore each surviving key determines a footprint
 \[
-D=2p+w_A.
+E(\kappa)=\{a:\{a\}\in\mathcal M_\kappa\},
+\qquad |E(\kappa)|\ge2,
 \]
-Both a balanced-triple packet and a full-span packet may be present.
+and an activation function \(1_{E(\kappa)\cut S}\).  Grouping equal footprints gives integer weights
+\[
+w_E=\sum_{\kappa:E(\kappa)=E}\gamma(\kappa)\ge0.
+\]
+The BN4 mass ledger and BN5 localization guarantee nonnegativity; the BCEL-ready constant-cut equation gives, for every nonempty proper \(S\subsetneq A\),
+\[
+\sum_{E\cut S}w_E=D>0.
+\]
+Thus the hypotheses of V53 are exactly present.  This is \texttt{constantCutHypergraphHypotheses}.
+
+V53 now exhausts the shape of the nonnegative constant-cut hypergraph.  If \(|A|=2\), the only positive mass is the full two-anchor pair \(E=A\), giving a pair packet.  If \(|A|=3\), all pair weights are equal, say \(p\), and the full-span weight is \(w_A=D-2p\).  If \(p>0\), the three equal pair cells give a balanced-triple packet; if \(w_A>0\), the full span gives a full-span packet.  The case can therefore be mixed:
+\[
+D=2p+w_A,
+\]
+and both a balanced-triple packet and a full-span packet may be present.  If \(|A|\ge4\), every proper hyperedge weight vanishes and the positive mass is full-span.  This proves \texttt{pairTriFullSpanExhaustive} and \texttt{mixedTripleCaseHandled}.
+
+For every positive footprint cell, BN3 and BN4 preserve the primitive row-key payloads of the atoms contributing to that cell: projected semantic signature, transport type, frontier signature, charge owner, obligation state, origin/kernel footprint, direction, budget, activation code, and rank tag.  BN5 and PkgC do not erase these payloads; they only route impossible restorations or unmatched shadows.  Hence every positive pair, balanced-triple, or full-span packet contains at least one atom witness carrying the payload needed by the selector families in Section~13.  This is \texttt{packetAtomsHaveSelectorPayloads}.
+\end{proof}
 
 \section{Finite rigidity and consumer antichains}
 
@@ -1279,6 +1308,14 @@ The handle bound and payload bounds give
 |\mathcal K(C)|\le |C|^3(\log |C|)^{O(1)}.
 \]
 
+\subsubsection{Selector-completeness proof obligations}
+The accepted residual-band theorem records selector coverage by the checker-visible obligations:
+\begin{lstlisting}
+selectorUniverseCompleteAndPolynomial
+selectorUniverseCompleteForPackets
+\end{lstlisting}
+The first field says that \(K_2(C)\cup K_3(C)\cup K_{sp}(C)\) is polynomially bounded under the accepted handle and payload schedule.  The second says that every positive packet produced by BN6 has a representative selector in that universe unless an earlier named route, verified gain, exact route, selector descent, or strict residual descent fires.
+
 \subsection{Pair packet extraction}
 A pair packet
 \[
@@ -1342,6 +1379,31 @@ If \(C\) is normalized, \(\Lambda(C)>0\), and no verified gain, exact route, nam
 \quad \Faithful(C,K,P).
 \]
 \end{theorem}
+
+\begin{proof}
+BN6 supplies a positive packet prototype with concrete atom payloads.  If it is a pair packet, choose an atom witness \(u\in Cell(\{a,b\})\).  Its finite payload \(\theta_2(u)\) and the two endpoint handles define
+\[
+K_u=(pair,h(a),h(b),\theta_2(u))\in K_2(C).
+\]
+The pair-seed checker verifies frontier, colour, charge, obligation, activation, direction, budget, rank, and exact-route fields.  If any field fails, the first failure is a named route or descent; otherwise the selector is faithful.
+
+If the packet is balanced-triple, the positive equal pair cells contain a compatible triad unless a first endpoint, frontier, signature, charge, obligation, direction, budget, activation, or rank mismatch routes.  A single compatible triad is sufficient to build
+\[
+K=(tri,h(a),h(b),h(c),\theta_3)\in K_3(C),
+\]
+and the accepted triad audit gives a faithful selector.
+
+If the packet is full-span, the least full-span atom witness gives a dependency support and primitive incidence graph.  If the graph is not a clean full-span spine, the spine extractor routes to \(\CritC,Q,E,L,X\), verified gain, BC, UN, HN, BUD, selector descent, exact route, or strict residual descent.  In a no-outcome branch the graph is a clean spine, and its three handles plus finite payload define
+\[
+K=(sp,h_{in},h_{cut},h_{out},\theta_{sp})\in K_{sp}(C).
+\]
+
+The handle sets are subsets of the primitive schedule-bounded handle universe \(H(C)\), and the payload alphabets \(\Theta_2,\Theta_3,\Theta_{sp}\) are finite schedule tables with polylogarithmic arithmetic-cell parameters.  Hence
+\[
+|K_2(C)\cup K_3(C)\cup K_{sp}(C)|\le |C|^3(\log |C|)^{O(1)}.
+\]
+This is \texttt{selectorUniverseCompleteAndPolynomial}.  The three cases cover all BN6 packet prototypes and each accepted case emits a faithful selector; this is \texttt{selectorUniverseCompleteForPackets}.
+\end{proof}
 
 \section{Package R: selector realization and strict surplus}
 
@@ -1545,13 +1607,18 @@ hallDeficitRoutesNamedOutcome
 quotientToFullMatchingKeyPreserving
 separatingConsumersSingletonized
 unmatchedShadowNotSilent
+constantCutHypergraphHypotheses
+pairTriFullSpanExhaustive
+mixedTripleCaseHandled
+packetAtomsHaveSelectorPayloads
+selectorUniverseCompleteAndPolynomial
 selectorUniverseCompleteForPackets
 realizerBotOnlyHNBUDBlockedOrLowerRank
 hbBlockerGraphAcyclic
 zeroSlackContradictionFromPositiveSlack
 zeroSlackCertificatePolynomialSize
 \end{lstlisting}
-Mathematically, these fields assert that the gain loop is residual-band bounded, that a ZeroSlack output is exact, that terminal MuBridge translates between whole circuits and closed full words without semantic or size drift, that quotient equality is nonconstructive unless lifted, that whole-span cheaper words give strict residual descent, that transparent saturation preserves positivity, that nontransparent saturation and interface exposure route to named outcomes, that earlier gain/exact/named routes have been positively excluded, that positive residual slack yields a BCEL-ready positive nucleus unless an earlier route fires, that a finite anchor set is extracted, that Boolean anchor algebra failures route rather than remain silent, that a minimal positive nucleus with at least two anchors has a constant proper-cut equation, that BN2 uses only carrier-compatible side-tight optima and never overclaims from non-tight coherent bases, that BN3 builds stable finite request predicates, exact minimal-consumer antichains, jointly realizable side-tight envelopes, arithmetic-separated runtime integers, and exact incidence ledgers, that BN4 represents activation by active antichains, proves equality without cut enumeration, cancels same-key positive and negative masses exactly, leaves no opposite-sign same-key residual, and checks the integer mass ledger, that BN5 localizes negative full residuals, routes Hall deficits, and never leaves unmatched shadows silent, that PkgC preserves activation-exact keys in quotient-to-full matching and singletonizes separating consumers, that the finite selector universe covers all positive packet prototypes, that realizer failure is only by typed HN/BUD or lower-rank blocking, that the blocker graph is acyclic, that positive slack contradicts the ZeroSlack ledger, and that the certificate has polynomial size.
+Mathematically, these fields assert that the gain loop is residual-band bounded, that a ZeroSlack output is exact, that terminal MuBridge translates between whole circuits and closed full words without semantic or size drift, that quotient equality is nonconstructive unless lifted, that whole-span cheaper words give strict residual descent, that transparent saturation preserves positivity, that nontransparent saturation and interface exposure route to named outcomes, that earlier gain/exact/named routes have been positively excluded, that positive residual slack yields a BCEL-ready positive nucleus unless an earlier route fires, that a finite anchor set is extracted, that Boolean anchor algebra failures route rather than remain silent, that a minimal positive nucleus with at least two anchors has a constant proper-cut equation, that BN2 uses only carrier-compatible side-tight optima and never overclaims from non-tight coherent bases, that BN3 builds stable finite request predicates, exact minimal-consumer antichains, jointly realizable side-tight envelopes, arithmetic-separated runtime integers, and exact incidence ledgers, that BN4 represents activation by active antichains, proves equality without cut enumeration, cancels same-key positive and negative masses exactly, leaves no opposite-sign same-key residual, and checks the integer mass ledger, that BN5 localizes negative full residuals, routes Hall deficits, and never leaves unmatched shadows silent, that PkgC preserves activation-exact keys in quotient-to-full matching and singletonizes separating consumers, that BN6 satisfies the constant-cut hypergraph hypotheses, exhausts pair, balanced-triple, and full-span packet cases, handles mixed three-anchor cases, and preserves packet selector payloads, that the selector universe is complete and polynomial for all positive packet prototypes, that realizer failure is only by typed HN/BUD or lower-rank blocking, that the blocker graph is acyclic, that positive slack contradicts the ZeroSlack ledger, and that the certificate has polynomial size.
 
 \begin{theorem}[Rank-parametric ZeroSlack]
 If
