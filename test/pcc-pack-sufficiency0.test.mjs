@@ -39,6 +39,7 @@ test('CheckPackSufficiency0 accepts the synthetic top-level package', async () =
   assert.equal(out.NF.bn2SideTightCoherentOptimaComplete, true);
   assert.equal(out.NF.bn3FiniteRequestEnvelopeComplete, true);
   assert.equal(out.NF.bn4ActivationExactCancellationComplete, true);
+  assert.equal(out.NF.bn5PkgCLocalizationComplete, true);
   assert.equal(out.Digest.alg, 'SHA256');
   assert.match(out.Digest.hex, /^[0-9a-f]{64}$/);
 });
@@ -487,6 +488,39 @@ test('CheckPackSufficiency0 rejects missing BN4 activation-exact cancellation ob
     'sameKeyCancellationExact',
     'noOppositeSignSameKeyResidual',
     'integerMassLedgerExact',
+  ];
+
+  for (const field of cases) {
+    await t.test(`${field}=false`, async () => {
+      const pack = makeSyntheticPCCPack0();
+
+      pack.PackSufficiencyTheorem = {
+        ...pack.PackSufficiencyTheorem,
+        residualBandMinimization: {
+          ...pack.PackSufficiencyTheorem.residualBandMinimization,
+          [field]: false,
+        },
+      };
+
+      const out = await CheckPackSufficiency0(pack);
+
+      assert.equal(out.tag, 'reject');
+      assert.equal(out.checker, 'CheckPackSufficiency0');
+      assert.equal(out.Coord, 'CheckPackSufficiency0.PackSufficiencyTheorem');
+      assert.deepEqual(out.Path, ['PackSufficiencyTheorem', 'residualBandMinimization', field]);
+      assert.equal(out.Witness.reason, `residualBandMinimization must certify ${field}`);
+    });
+  }
+});
+
+
+test('CheckPackSufficiency0 rejects missing BN5 and PkgC localization obligations', async (t) => {
+  const cases = [
+    'negativeFullResidualLocalized',
+    'hallDeficitRoutesNamedOutcome',
+    'quotientToFullMatchingKeyPreserving',
+    'separatingConsumersSingletonized',
+    'unmatchedShadowNotSilent',
   ];
 
   for (const field of cases) {

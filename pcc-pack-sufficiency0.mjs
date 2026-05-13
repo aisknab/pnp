@@ -362,6 +362,11 @@ export function makeSyntheticPackSufficiencyTheorem0(overrides = {}) {
       sameKeyCancellationExact: true,
       noOppositeSignSameKeyResidual: true,
       integerMassLedgerExact: true,
+      negativeFullResidualLocalized: true,
+      hallDeficitRoutesNamedOutcome: true,
+      quotientToFullMatchingKeyPreserving: true,
+      separatingConsumersSingletonized: true,
+      unmatchedShadowNotSilent: true,
       selectorUniverseCompleteForPackets: true,
       realizerBotOnlyHNBUDBlockedOrLowerRank: true,
       hbBlockerGraphAcyclic: true,
@@ -642,6 +647,12 @@ export async function CheckPackSufficiency0(pack) {
       pack.PackSufficiencyTheorem.residualBandMinimization?.sameKeyCancellationExact === true &&
       pack.PackSufficiencyTheorem.residualBandMinimization?.noOppositeSignSameKeyResidual === true &&
       pack.PackSufficiencyTheorem.residualBandMinimization?.integerMassLedgerExact === true,
+    bn5PkgCLocalizationComplete:
+      pack.PackSufficiencyTheorem.residualBandMinimization?.negativeFullResidualLocalized === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.hallDeficitRoutesNamedOutcome === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.quotientToFullMatchingKeyPreserving === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.separatingConsumersSingletonized === true &&
+      pack.PackSufficiencyTheorem.residualBandMinimization?.unmatchedShadowNotSilent === true,
     generatedPackageAssumption: pack.PackSufficiencyTheorem.generatedPackageSufficiency.assumption,
     coreDigest: digestCanonical0(pack.Core),
     manifestDigest: digestCanonical0(pack.Manifest),
@@ -941,6 +952,11 @@ function validatePackSufficiencyTheorem0(theorem) {
     'sameKeyCancellationExact',
     'noOppositeSignSameKeyResidual',
     'integerMassLedgerExact',
+    'negativeFullResidualLocalized',
+    'hallDeficitRoutesNamedOutcome',
+    'quotientToFullMatchingKeyPreserving',
+    'separatingConsumersSingletonized',
+    'unmatchedShadowNotSilent',
     'selectorUniverseCompleteForPackets',
     'realizerBotOnlyHNBUDBlockedOrLowerRank',
     'hbBlockerGraphAcyclic',
