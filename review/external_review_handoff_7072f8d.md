@@ -31,10 +31,10 @@ sealed artifact commit:
 9d1de19f827e5cb6880741352eb2349cbbb45994
 
 canonical document commit:
-created by the document-update commit that installs this 7072f8d document set
+the commit pointed to by final-pnp-proof-report-docs-hardened-7072f8d-sealed
 
 canonical document tag:
-created by the post-update documentation consistency gate
+final-pnp-proof-report-docs-hardened-7072f8d-sealed
 
 validation:
 1121 tests, 1121 pass, 0 fail, 0 cancelled
