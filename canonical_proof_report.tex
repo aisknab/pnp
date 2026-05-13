@@ -1099,6 +1099,15 @@ For a negative full residual key \(\kappa\), refine masses into unit atoms and f
 \]
 where left vertices are full atoms and right vertices are quotient candidate shadows with the same activation-exact key. Hall deficits and first unmatched full atoms localize to \(\CritC\) rows or \(X\)-failures.
 
+\subsubsection{BN5 full-shadow localization proof obligations}
+The accepted residual-band theorem records BN5 localization as checker-visible obligations:
+\begin{lstlisting}
+negativeFullResidualLocalized
+hallDeficitRoutesNamedOutcome
+unmatchedShadowNotSilent
+\end{lstlisting}
+The first field says that every cut-active negative full residual key is represented by a full-shadow matching problem.  The second says that every Hall deficit is emitted as a named route, not hidden as a silent no-outcome branch.  The third says that an unmatched full atom is never ignored: it either localizes to a concrete row, routes to a higher package, or makes the key cut-silent.
+
 \begin{theorem}[BN5-FullShadowLocalization]
 Every cut-active negative full residual key routes to
 \[
@@ -1107,21 +1116,48 @@ Every cut-active negative full residual key routes to
 or to verified gain, BC, UN, HN, BUD, selector, exact route, or strict descent. Therefore, in a no-outcome branch, every negative full residual key is cut-silent.
 \end{theorem}
 
-Thus on proper cuts,
+\begin{proof}
+Fix a negative full residual key \(\kappa\) that is cut-active after BN4 cancellation.  The key contains a projected semantic signature, active-antichain code, projected transport type, and signed integer mass.  Refine the negative full mass into unit full atoms and build the shadow graph
+\[
+\mathcal B_\kappa=(L_\kappa,R_\kappa,E_\kappa).
+\]
+A left vertex is a full atom that remains negative under the BN4 key, and a right vertex is a quotient candidate shadow with the same activation-exact key.  An edge is admitted only when the quotient shadow preserves the projected semantic signature, active-antichain code, projected transport type, frontier order, charge owner, obligation state, origin/kernel footprint, and mode-projection record.  Thus any matching is key-preserving and cut-activation preserving.
+
+If the shadow graph has a complete matching for the negative full atoms, the matched quotient mass cancels the alleged negative full residual in the same activation-exact key, contradicting the BN4 residual ledger.  Therefore a genuinely negative cut-active key must expose either an unmatched full atom or a Hall-deficient subset.  This is the obligation \texttt{negativeFullResidualLocalized}.
+
+For a Hall-deficient subset \(T\subseteq L_\kappa\), the finite checker chooses the least deficient set in canonical row order and inspects the first missing shadow coordinate.  A semantic impossibility routes to \(X2\), a direction or transport impossibility routes to \(X3\), a resource or Hall impossibility routes to \(X4\) or \(X1\), and mode or frontier failures route to \(\CritC,Q,E,L\).  If the deficient region already contains a bounded replacement, hereditary object, budget object, packet seed, exact route, or strict descent, that higher-priority route is emitted.  Hence a Hall deficit cannot remain silent; this is \texttt{hallDeficitRoutesNamedOutcome}.
+
+If instead the first obstruction is an unmatched full atom, the atom's origin, kernel, obligation, frontier, and charge records determine a concrete localization row.  A missing localization row is an \(X\)-failure; a mode-unsafe restoration is a \(Q\) or \(\CritC\) route; an exposure-only mismatch is an \(E\) route; and an overlap-loss mismatch is an \(L\) route.  If none of these routes is active, the unmatched atom is not cut-active and the key is cut-silent.  This is \texttt{unmatchedShadowNotSilent}.
+
+Therefore, in a no-outcome branch, no cut-active negative full residual key survives.  All surviving residual keys are nonnegative quotient residual keys, and on every proper cut
 \[
 \Omega(S,A\setminus S)=\sum_{\kappa\in Q^{res}}\gamma(\kappa)\alpha_\kappa(S)\ge0.
 \]
+\end{proof}
 
 \subsection{Package C, renamed PkgC: separating consumers}
 The package formerly denoted Package C is named \(\PkgC\) to avoid ambiguity with the critical kind \(\CritC\).
 
 For a surviving quotient residual key \(\kappa\), if its active minimal-consumer antichain has a disjoint pair \((M,N)\) with at least one nonsingleton member, then \(\PkgC\) builds request traces, first multi-active joins, activation-exact full-restoration universes, and quotient-to-full matching graphs. Either the quotient residual mass is fully matched, contradicting BN4 residuality, or Hall failure yields a kind \(Q\) row, an \(X\)-failure, or an unbounded route.
 
+\subsubsection{PkgC separating-consumer proof obligations}
+The accepted residual-band theorem records the PkgC separating-consumer step as checker-visible obligations:
+\begin{lstlisting}
+quotientToFullMatchingKeyPreserving
+separatingConsumersSingletonized
+\end{lstlisting}
+The first field says that every quotient-to-full restoration graph preserves the BN4 activation-exact key.  The second says that, after all PkgC routes are absent, every disjoint active pair of minimal consumers for a surviving quotient residual key is singleton-singleton.
+
 \begin{theorem}[Separating-consumer theorem]
 In a minimum-rank no-outcome branch, every disjoint active pair of minimal consumers for a surviving quotient residual key consists of singleton sets.
 \end{theorem}
 
-Therefore V54 applies. For each surviving active quotient residual key, there exists
+\begin{proof}
+Let \(\kappa\) be a surviving active quotient residual key, and suppose that its active minimal-consumer antichain has a disjoint pair \((M,N)\) with at least one nonsingleton member.  PkgC traces each request in \(M\cup N\), records the first multi-active join, and constructs a full-restoration universe for the quotient atoms participating in the pair.  Restoration candidates are grouped by the same projected semantic signature, active-antichain code, projected transport type, frontier order, charge owner, obligation footprint, and origin/kernel footprint used by BN4.  Thus any quotient-to-full matching is key preserving; this is \texttt{quotientToFullMatchingKeyPreserving}.
+
+If the full-restoration graph fully matches the quotient residual mass, the matched full atoms produce a same-key cancellation or a full-shadow localization, contradicting that \(\kappa\) survived BN4 and BN5 as a positive active quotient residual key.  If the graph does not fully match, the least Hall-deficient restoration set gives a \(Q\) row, an \(X\)-failure, a verified gain, a selector seed, an exact route, or strict residual descent.  Therefore a nonsingleton disjoint active pair cannot persist in a no-outcome minimum-rank branch.
+
+Consequently all disjoint active pairs in the minimal-consumer antichain of a surviving quotient residual key are singleton-singleton.  This is \texttt{separatingConsumersSingletonized}.  V54 then applies.  For each surviving active quotient residual key, there exists
 \[
 E(\kappa)=\{a:\{a\}\in\mathcal M_\kappa\},\qquad |E(\kappa)|\ge2,
 \]
@@ -1129,6 +1165,7 @@ with
 \[
 \alpha_\kappa(S)=1_{E(\kappa)\cut S}.
 \]
+\end{proof}
 
 \subsection{BN6: hypergraph cellization and packet collapse}
 Group equal footprints:
@@ -1503,13 +1540,18 @@ activationEqualityWithoutCutEnumeration
 sameKeyCancellationExact
 noOppositeSignSameKeyResidual
 integerMassLedgerExact
+negativeFullResidualLocalized
+hallDeficitRoutesNamedOutcome
+quotientToFullMatchingKeyPreserving
+separatingConsumersSingletonized
+unmatchedShadowNotSilent
 selectorUniverseCompleteForPackets
 realizerBotOnlyHNBUDBlockedOrLowerRank
 hbBlockerGraphAcyclic
 zeroSlackContradictionFromPositiveSlack
 zeroSlackCertificatePolynomialSize
 \end{lstlisting}
-Mathematically, these fields assert that the gain loop is residual-band bounded, that a ZeroSlack output is exact, that terminal MuBridge translates between whole circuits and closed full words without semantic or size drift, that quotient equality is nonconstructive unless lifted, that whole-span cheaper words give strict residual descent, that transparent saturation preserves positivity, that nontransparent saturation and interface exposure route to named outcomes, that earlier gain/exact/named routes have been positively excluded, that positive residual slack yields a BCEL-ready positive nucleus unless an earlier route fires, that a finite anchor set is extracted, that Boolean anchor algebra failures route rather than remain silent, that a minimal positive nucleus with at least two anchors has a constant proper-cut equation, that BN2 uses only carrier-compatible side-tight optima and never overclaims from non-tight coherent bases, that BN3 builds stable finite request predicates, exact minimal-consumer antichains, jointly realizable side-tight envelopes, arithmetic-separated runtime integers, and exact incidence ledgers, that BN4 represents activation by active antichains, proves equality without cut enumeration, cancels same-key positive and negative masses exactly, leaves no opposite-sign same-key residual, and checks the integer mass ledger, that the finite selector universe covers all positive packet prototypes, that realizer failure is only by typed HN/BUD or lower-rank blocking, that the blocker graph is acyclic, that positive slack contradicts the ZeroSlack ledger, and that the certificate has polynomial size.
+Mathematically, these fields assert that the gain loop is residual-band bounded, that a ZeroSlack output is exact, that terminal MuBridge translates between whole circuits and closed full words without semantic or size drift, that quotient equality is nonconstructive unless lifted, that whole-span cheaper words give strict residual descent, that transparent saturation preserves positivity, that nontransparent saturation and interface exposure route to named outcomes, that earlier gain/exact/named routes have been positively excluded, that positive residual slack yields a BCEL-ready positive nucleus unless an earlier route fires, that a finite anchor set is extracted, that Boolean anchor algebra failures route rather than remain silent, that a minimal positive nucleus with at least two anchors has a constant proper-cut equation, that BN2 uses only carrier-compatible side-tight optima and never overclaims from non-tight coherent bases, that BN3 builds stable finite request predicates, exact minimal-consumer antichains, jointly realizable side-tight envelopes, arithmetic-separated runtime integers, and exact incidence ledgers, that BN4 represents activation by active antichains, proves equality without cut enumeration, cancels same-key positive and negative masses exactly, leaves no opposite-sign same-key residual, and checks the integer mass ledger, that BN5 localizes negative full residuals, routes Hall deficits, and never leaves unmatched shadows silent, that PkgC preserves activation-exact keys in quotient-to-full matching and singletonizes separating consumers, that the finite selector universe covers all positive packet prototypes, that realizer failure is only by typed HN/BUD or lower-rank blocking, that the blocker graph is acyclic, that positive slack contradicts the ZeroSlack ledger, and that the certificate has polynomial size.
 
 \begin{theorem}[Rank-parametric ZeroSlack]
 If
