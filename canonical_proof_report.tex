@@ -1429,6 +1429,14 @@ BotHN,
 \]
 The static reject case is impossible for faithful selectors.
 
+\subsubsection{Realizer typed-bot proof obligations}
+The accepted residual-band theorem records selector realization by the checker-visible obligations:
+\begin{lstlisting}
+realizerBotTyped
+realizerBotOnlyHNBUDBlockedOrLowerRank
+\end{lstlisting}
+The first field says that every \(\Bot\) returned by \(\Real(C,K)\) has a typed explanation in the public realizer contract; there is no unexplained failure state.  The second says that a faithful selector can fail to realize a gain only because a same-or-lower-rank HN blocker is active, a same-or-lower-rank budget blocker is active, or a lower-rank faithful selector remains to be processed.
+
 \begin{theorem}[Selector realization]
 For every selector \(K\),
 \[
@@ -1452,12 +1460,29 @@ BudgetActive_{\le P}(C)
 \]
 \end{theorem}
 
+\begin{proof}
+If \(\Real(C,K)\) returns \(Gain(U,R,\Pi)\), the realizer output is accepted only after the public direct-wire verifier checks
+\[
+\VerifyDW(C,U,R,\Pi)=accept.
+\]
+Thus every constructive output is a genuine same-frontier replacement with strict saving.
+
+Suppose instead that \(K\) is faithful of packet rank \(P\) and \(\Real(C,K)=\Bot\).  The realizer contract disallows an untyped failure.  The certificate must name one of three public bot types: \(BotHN\), \(BotBUD\), or \(BotSeed\).  A \(BotHN\) record contains an active hereditary certificate of rank at most \(P\); a \(BotBUD\) record contains an active budget certificate of rank at most \(P\); and a \(BotSeed\) record contains a faithful selector \((K',P')\) with \(P'\prec P\).  Any missing bot type, stale blocker reference, nonfaithful lower seed, or rank-increasing bot reference is a named row failure rather than a silent realizer failure.  This is \texttt{realizerBotTyped} and \texttt{realizerBotOnlyHNBUDBlockedOrLowerRank}.
+\end{proof}
+
 \subsection{Strict charge surplus}
 A selector blueprint has a charge-surplus injection if there is an injective map
 \[
 \psi_K:\Ch(R_K)\hookrightarrow\Ch(U_K)
 \]
 preserving weights, type, truth vectors, relation tables, frontier, origin, kernel, obligation, prefix, direction, saturation, budget, charge, source incidence, consumer incidence, and dependency edges, with at least one positive-weight unmatched support charge.
+
+\subsubsection{Strict charge-surplus proof obligations}
+The accepted residual-band theorem records the constructive-selector step by the checker-visible obligation:
+\begin{lstlisting}
+chargeSurplusInjectionStrict
+\end{lstlisting}
+This field says that every faithful selector not blocked by HN, BUD, or a lower-rank faithful selector has a size ledger with an injective charge-surplus map from replacement charges into support charges and at least one unmatched positive-weight support charge.  Therefore the saving is strict as an integer charge identity, not merely heuristic or asymptotic.
 
 \begin{theorem}[R-ChargeSurplus]
 If
@@ -1470,6 +1495,24 @@ then the decoded selector blueprint admits a charge-surplus injection. Consequen
 \]
 and a \(\VerifyDW\)-accepted gain is produced.
 \end{theorem}
+
+\begin{proof}
+Decode the selector blueprint into its governed support \(U_K\), replacement word \(R_K\), frontier transport, obligation ledger, and charge ledger.  Faithfulness supplies the packet atom payloads, endpoint or spine handles, activation code, rank tag, and same-frontier transport needed to compare the support and replacement charge objects.  Since \(NoHN_{\le P}\), \(NoBUD_{\le P}\), and \(NoFaithful_{<P}\) hold, every HN blocker, budget blocker, or lower-rank selector blocker that could justify \(\Bot\) is absent.  Thus the realizer must produce the blueprint rather than a typed bot.
+
+The charge ledger constructs an injection
+\[
+\psi_K:\Ch(R_K)\hookrightarrow\Ch(U_K)
+\]
+that preserves charge owner, kind, weight, truth-vector role, relation-table role, frontier position, origin/kernel/obligation footprint, prefix and direction data, saturation and budget records, source incidence, consumer incidence, and dependency edges.  Pair selectors identify two active traces while leaving one positive residual atom charge unmatched.  Balanced triples identify three compatible edge traces with two selector-core traces.  Full-span spines compress a clean path and omit at least one interior transition charge.  If any preservation condition fails, the first failed field is a named route, HN/BUD blocker, lower-rank selector, exact route, or strict descent.  In the no-blocker branch, at least one positive-weight charge in \(U_K\) is unmatched.
+
+Therefore the charge sum satisfies
+\[
+|R_K|=\sum_{x\in\Ch(R_K)}\wt(x)
+ \le \sum_{y\in\operatorname{im}\psi_K}\wt(y)
+ < \sum_{y\in\Ch(U_K)}\wt(y)=|U_K|,
+\]
+so \(|R_K|\le |U_K|-1\) because sizes are integer charge totals.  This is \texttt{chargeSurplusInjectionStrict}, and the generated direct-wire proof is passed to \(\VerifyDW\).
+\end{proof}
 
 Pair selectors fold two active traces into one, leaving one residual atom unmatched. Balanced triples fold three compatible edge traces into two selector-core traces. Spines compress a clean path and omit at least one interior transition charge unless HN-active, budget-active, or lower-rank packet structure is present.
 
@@ -1505,6 +1548,16 @@ and if ranks are equal,
 \]
 Thus the graph is acyclic.
 
+\subsection{HB closure proof obligations}
+The accepted residual-band theorem records the HN/BUD closure step by the checker-visible obligations:
+\begin{lstlisting}
+blockerGraphAcyclicByRank
+hbBlockerGraphAcyclic
+selectorSilenceRankComplete
+hbNoCircularNegativeClosure
+\end{lstlisting}
+The first two fields say that the combined HN/BUD blocker graph has an explicit decreasing rank measure and is therefore acyclic.  The third says that selector silence is recorded at every packet rank, not only globally.  The fourth says that HN and budget negatives cannot justify each other circularly; every blocker edge descends in the accepted rank/measure order.
+
 \begin{theorem}[HB negative closure]
 For every packet rank \(P\),
 \[
@@ -1515,7 +1568,15 @@ NH_{\le P}(C)\wedge NB_{\le P}(C).
 \end{theorem}
 
 \begin{proof}
-Assume an active HN or BUD vertex of rank at most \(P\), and choose one minimizing \((\rho,\beta)\). The local sidecar soundness rule forces a blocker edge to an active vertex of strictly smaller \((\rho,\beta)\), contradiction.
+The combined blocker graph has vertices for active hereditary certificates and active budget certificates.  H2 sidecar entries create edges from HN vertices to budget vertices, and B2 sidecar entries create edges from budget vertices to HN vertices.  Every edge carries the source rank, destination rank, source tie-break measure, destination tie-break measure, and a proof reference.  The checker accepts an edge only when
+\[
+\rho(dst)<\rho(src)
+\quad\text{or}\quad
+\rho(dst)=\rho(src)\text{ and }\beta(dst)<\beta(src).
+\]
+Thus every directed edge decreases the lexicographic measure \((\rho,\beta)\).  This proves \texttt{blockerGraphAcyclicByRank} and \texttt{hbBlockerGraphAcyclic}.
+
+Now assume an active HN or BUD vertex of rank at most \(P\), and choose one minimizing \((\rho,\beta)\).  The local sidecar soundness rule says that a surviving active vertex must either be solved by a gain/exact route or be blocked by the other sidecar.  Gains and exact routes are excluded in the no-outcome branch, so the sidecar emits a blocker edge to another active vertex.  That edge strictly decreases \((\rho,\beta)\), contradicting minimality.  Hence no active HN or BUD vertex of rank at most \(P\) remains.  This is \texttt{hbNoCircularNegativeClosure}.
 \end{proof}
 
 \begin{theorem}[Selector-silence induction]
@@ -1526,6 +1587,10 @@ NoFaithful_{\le P}(C),
 NH_{\le P}(C)\wedge NB_{\le P}(C).
 \]
 \end{theorem}
+
+\begin{proof}
+Proceed by induction over the finite packet-rank list.  At rank \(P\), selector silence records every selector in \(K_P(C)\), every realizer output for that selector, and every typed bot reason.  If a faithful selector of rank at most \(P\) existed, choose the least such rank.  It cannot be lower than the current rank by the induction hypothesis.  At the current rank, selector silence says every selector was run; a faithful selector either produces a verified gain or a typed bot.  Gains are absent in the ZeroSlack branch.  A typed bot can name only HN activity, budget activity, or a lower-rank faithful selector.  The lower-rank case contradicts the induction hypothesis, and the HN/BUD cases contradict the HB negative closure at rank \(P\).  Therefore no faithful selector of rank at most \(P\) exists, and the HB closure also gives \(NH_{\le P}(C)\wedge NB_{\le P}(C)\).  This is \texttt{selectorSilenceRankComplete} and \texttt{hbNoCircularNegativeClosure}.
+\end{proof}
 
 \section{Oracle, ZeroSlack, and residual-band minimization}
 
@@ -1613,12 +1678,17 @@ mixedTripleCaseHandled
 packetAtomsHaveSelectorPayloads
 selectorUniverseCompleteAndPolynomial
 selectorUniverseCompleteForPackets
+realizerBotTyped
 realizerBotOnlyHNBUDBlockedOrLowerRank
+chargeSurplusInjectionStrict
+blockerGraphAcyclicByRank
 hbBlockerGraphAcyclic
+selectorSilenceRankComplete
+hbNoCircularNegativeClosure
 zeroSlackContradictionFromPositiveSlack
 zeroSlackCertificatePolynomialSize
 \end{lstlisting}
-Mathematically, these fields assert that the gain loop is residual-band bounded, that a ZeroSlack output is exact, that terminal MuBridge translates between whole circuits and closed full words without semantic or size drift, that quotient equality is nonconstructive unless lifted, that whole-span cheaper words give strict residual descent, that transparent saturation preserves positivity, that nontransparent saturation and interface exposure route to named outcomes, that earlier gain/exact/named routes have been positively excluded, that positive residual slack yields a BCEL-ready positive nucleus unless an earlier route fires, that a finite anchor set is extracted, that Boolean anchor algebra failures route rather than remain silent, that a minimal positive nucleus with at least two anchors has a constant proper-cut equation, that BN2 uses only carrier-compatible side-tight optima and never overclaims from non-tight coherent bases, that BN3 builds stable finite request predicates, exact minimal-consumer antichains, jointly realizable side-tight envelopes, arithmetic-separated runtime integers, and exact incidence ledgers, that BN4 represents activation by active antichains, proves equality without cut enumeration, cancels same-key positive and negative masses exactly, leaves no opposite-sign same-key residual, and checks the integer mass ledger, that BN5 localizes negative full residuals, routes Hall deficits, and never leaves unmatched shadows silent, that PkgC preserves activation-exact keys in quotient-to-full matching and singletonizes separating consumers, that BN6 satisfies the constant-cut hypergraph hypotheses, exhausts pair, balanced-triple, and full-span packet cases, handles mixed three-anchor cases, and preserves packet selector payloads, that the selector universe is complete and polynomial for all positive packet prototypes, that realizer failure is only by typed HN/BUD or lower-rank blocking, that the blocker graph is acyclic, that positive slack contradicts the ZeroSlack ledger, and that the certificate has polynomial size.
+Mathematically, these fields assert that the gain loop is residual-band bounded, that a ZeroSlack output is exact, that terminal MuBridge translates between whole circuits and closed full words without semantic or size drift, that quotient equality is nonconstructive unless lifted, that whole-span cheaper words give strict residual descent, that transparent saturation preserves positivity, that nontransparent saturation and interface exposure route to named outcomes, that earlier gain/exact/named routes have been positively excluded, that positive residual slack yields a BCEL-ready positive nucleus unless an earlier route fires, that a finite anchor set is extracted, that Boolean anchor algebra failures route rather than remain silent, that a minimal positive nucleus with at least two anchors has a constant proper-cut equation, that BN2 uses only carrier-compatible side-tight optima and never overclaims from non-tight coherent bases, that BN3 builds stable finite request predicates, exact minimal-consumer antichains, jointly realizable side-tight envelopes, arithmetic-separated runtime integers, and exact incidence ledgers, that BN4 represents activation by active antichains, proves equality without cut enumeration, cancels same-key positive and negative masses exactly, leaves no opposite-sign same-key residual, and checks the integer mass ledger, that BN5 localizes negative full residuals, routes Hall deficits, and never leaves unmatched shadows silent, that PkgC preserves activation-exact keys in quotient-to-full matching and singletonizes separating consumers, that BN6 satisfies the constant-cut hypergraph hypotheses, exhausts pair, balanced-triple, and full-span packet cases, handles mixed three-anchor cases, and preserves packet selector payloads, that the selector universe is complete and polynomial for all positive packet prototypes, that every realizer bot is typed and only justified by HN, BUD, or lower-rank faithful-selector blocking, that faithful unblocked selectors have strict charge-surplus injections, that the HN/BUD blocker graph is acyclic by rank, that selector silence is rank-complete, that HB closure has no circular negative justification, that positive slack contradicts the ZeroSlack ledger, and that the certificate has polynomial size.
 
 \begin{theorem}[Rank-parametric ZeroSlack]
 If
