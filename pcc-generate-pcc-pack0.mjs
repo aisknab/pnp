@@ -1,0 +1,3756 @@
+
+import fs from 'node:fs/promises';
+import path from 'node:path';
+
+import {
+  digestCanonical0,
+  stableStringify0,
+} from './pcc-verifier-frag0.mjs';
+
+import {
+  makeConcreteMaterializedPCCPack0,
+} from './pcc-pack-concrete-materialized0.mjs';
+
+import {
+  CheckPCCPackexp0,
+} from './pcc-check-pcc-pack-exp0.mjs';
+
+import {
+  CheckMaterializedBoot0,
+} from './pcc-boot-materialized0.mjs';
+
+import {
+  CheckBootAudit0,
+  CheckBootBatch0,
+} from './pcc-boot0.mjs';
+
+import {
+  CheckConcreteMaterializedKBundle0,
+} from './pcc-k-concrete-materialized0.mjs';
+
+import {
+  CheckConcreteMaterializedHard0,
+} from './pcc-hard-concrete-materialized0.mjs';
+
+import {
+  CheckConcreteMaterializedRows0,
+} from './pcc-rows-concrete-materialized0.mjs';
+
+import {
+  CheckConcreteMaterializedGlobalProofDAG0,
+} from './pcc-global-proof-dag-concrete-materialized0.mjs';
+
+import {
+  CheckConcreteMaterializedFinalIntegration0,
+} from './pcc-final-integration-concrete-materialized0.mjs';
+
+const CHECKER_VERSION = 0;
+
+const GENERATED_PCCPACK_BOOT_B0_REQUIRED_FAMILIES0 = Object.freeze([
+  'BIface',
+  'BSched',
+  'BNF',
+  'BTruthEval',
+  'BRel',
+  'BCharge',
+  'BObl',
+  'BArith',
+  'BMode',
+  'BRoute',
+  'BHash',
+  'BImport',
+]);
+
+const GENERATED_PCCPACK_KERNEL_SEED_REQUIRED_RULES0 = Object.freeze([
+  'Eq',
+  'Subst',
+  'Record',
+  'DAGInd',
+  'LedgerInd',
+  'OblTopoInd',
+  'TraceInd',
+  'FiniteExhaust',
+  'DPInd',
+  'Hall',
+  'RankInd',
+  'MinCounterexample',
+  'IntArith',
+  'Transport',
+  'TruthVec',
+  'FiniteRel',
+]);
+
+const GENERATED_PCCPACK_KERNEL_SEED_REQUIRED_PROOF_NODE_KINDS0 = Object.freeze([
+  'PrimitiveRule',
+  'SigmaInstance',
+  'ReflectionInstance',
+  'RowProof',
+  'PackageTheorem',
+]);
+
+const GENERATED_PCCPACK_IFACE_REQUIRED_FORBIDDEN_SYMBOLS0 = Object.freeze([
+  'µ',
+  'µ*',
+  'µ#',
+  'Can',
+  'argmin',
+  'maxG',
+  'minimumEquivalent',
+  'optimalCircuit',
+  'exactMinSearch',
+  'canonicalMinimizer',
+  'maximizeGain',
+]);
+
+const GENERATED_PCCPACK_IFACE_PUBLIC_CONSTRUCTORS0 = Object.freeze([
+  'Gain',
+  'Minimum',
+  'ZeroSlack',
+  'NoBudget',
+  'NoHereditary',
+  'SelectorSilent',
+  'Faithful',
+  'Token',
+]);
+
+const GENERATED_PCCPACK_IFACE_CRITICAL_KINDS0 = Object.freeze([
+  'CritC',
+  'Q',
+  'E',
+  'L',
+  'X1',
+  'X2',
+  'X3',
+  'X4',
+]);
+
+const GENERATED_PCCPACK_IFACE_ROUTE_TOKENS0 = Object.freeze([
+  'UnaryWindow',
+  'BCLeak',
+  'HNShape',
+  'BudgetShape',
+  'SelectorSeed',
+  'ExactRoute',
+  'StrictDescent',
+]);
+
+const GENERATED_PCCPACK_SCHED_REQUIRED_CORE0 = Object.freeze({
+  B0: 64,
+  K0: 512,
+  R0: 64,
+  H0: 128,
+  O0: 64,
+  Rel0: 16,
+});
+
+const GENERATED_PCCPACK_SCHED_REQUIRED_SCALE_FACTORS0 = Object.freeze({
+  FT: 1,
+  X: 2,
+  Splice: 2,
+  BC: 4,
+  UN: 4,
+  HN: 8,
+  BUD: 8,
+  RW: 8,
+  BN: 8,
+  PkgC: 16,
+  Packet: 16,
+  R: 16,
+});
+
+const GENERATED_PCCPACK_BYTELANG_REQUIRED_TAGS0 = Object.freeze({
+  Boot0: 0x0001,
+  BootBatch0: 0x0002,
+  Row0: 0x0003,
+  Digest0: 0x0004,
+  IfaceDict0: 0x0005,
+  Sched0: 0x0006,
+  KernelSeed0: 0x0007,
+  BootAudit0: 0x0008,
+  PiBoot0: 0x0009,
+  ProofRef0: 0x000a,
+  BoundsRef0: 0x000b,
+  TransportProof0: 0x000c,
+});
+
+const GENERATED_PCCPACK_BYTELANG_REQUIRED_SORTS0 = Object.freeze([
+  'Unit',
+  'Name',
+  'Record',
+  'Row',
+  'Digest',
+  'Route',
+  'ProofRef',
+  'BoundsRef',
+]);
+
+const GENERATED_PCCPACK_BYTELANG_REQUIRED_CONSTRUCTORS0 = Object.freeze([
+  'accept',
+  'reject',
+  'row',
+  'digest',
+  'proofRef',
+  'boundsRef',
+  'transport',
+]);
+
+const GENERATED_PCCPACK_BYTELANG_REQUIRED_RECORD_ARITIES0 = Object.freeze({
+  Boot0: 9,
+  BootBatch0: 3,
+  Row0: 12,
+  Digest0: 4,
+  IfaceDict0: 4,
+  Sched0: 3,
+  KernelSeed0: 3,
+  BootAudit0: 3,
+  PiBoot0: 4,
+});
+
+const GENERATED_CORE_FORBIDDEN_KEYS0 = Object.freeze([
+  'AcceptRun',
+  'AcceptRunEnvelope',
+  'MaterializedAcceptRun',
+  'MaterializedAcceptRun0',
+  'GeneratedAcceptRunEnvelope',
+  'FinalCertificateEnvelope',
+  'FinalCertificatePublicStatus',
+  'FinalCertificatePublicStatusEnvelope',
+  'PublicStatus',
+  'ReleaseAuditRecord',
+]);
+
+export function makeGeneratePCCPackConfig0(overrides = {}) {
+  return {
+    kind: 'GeneratePCCPackConfig0',
+    version: CHECKER_VERSION,
+    checkDeterministicGenerator: true,
+    checkGeneratedPackageCoreBoundary: true,
+    checkMaterializedBoot0: true,
+    checkKernelSeed0: true,
+    checkCodecDigest0: true,
+    checkIfaceSched0: true,
+    checkByteLang0: true,
+    checkBootAuditPiBoot0: true,
+    checkConcreteKBundle0: true,
+    checkConcreteHard0: true,
+    checkConcreteRows0: true,
+    checkConcreteGlobalProofDAG0: true,
+    checkConcreteFinalIntegration0: true,
+    checkCheckPCCPackexpRecord: true,
+    checkPublicClaimBoundary: true,
+    checkJsonMaterialized: true,
+    checkLinkage: true,
+    checkPCCPackexpConfig: {},
+    ...overrides,
+  };
+}
+
+export async function GeneratePCCPack0({
+  packageOptions = {},
+  overrides = {},
+} = {}) {
+  const generated = await makeConcreteMaterializedPCCPack0(packageOptions);
+
+  if (isPlainObject(overrides) && Object.keys(overrides).length > 0) {
+    return {
+      ...generated,
+      ...overrides,
+    };
+  }
+
+  return generated;
+}
+
+export async function makeGeneratedPCCPackexp0({
+  GeneratedPCCPack = null,
+  CheckPCCPackexpRecord = null,
+  checkPCCPackexpConfig = {},
+  overrides = {},
+} = {}) {
+  const generatedPCCPack = GeneratedPCCPack ?? await GeneratePCCPack0();
+  const checkPCCPackexpRecord = CheckPCCPackexpRecord ?? await CheckPCCPackexp0(
+    generatedPCCPack,
+    checkPCCPackexpConfig ?? {},
+  );
+
+  const claimBoundary = makeClaimBoundary0();
+
+  const linkage = {
+    kind: 'GeneratedPCCPackexpLinkage0',
+    version: CHECKER_VERSION,
+    generatedPackageDigest: digestCanonical0(generatedPCCPack),
+    checkPCCPackexpRecordDigest: digestFromRecord0(checkPCCPackexpRecord),
+    checkPCCPackexpPccPackDigest: checkPCCPackexpRecord?.NF?.pccPackDigest ?? checkPCCPackexpRecord?.nf?.pccPackDigest ?? null,
+    checkPCCPackexpMaterializedPCCPackDigest:
+      checkPCCPackexpRecord?.NF?.materializedPCCPackDigest ??
+      checkPCCPackexpRecord?.nf?.materializedPCCPackDigest ??
+      null,
+    claimBoundaryDigest: digestCanonical0(claimBoundary),
+  };
+
+  return {
+    kind: 'GeneratedPCCPackexp0',
+    version: CHECKER_VERSION,
+    GenCall: {
+      kind: 'GeneratePCCPackCall0',
+      version: CHECKER_VERSION,
+      generator: 'GeneratePCCPack0',
+      deterministic: true,
+      materializedPath: true,
+      syntheticRunAll: false,
+      coreOnly: true,
+      excludesAcceptRun: true,
+    },
+    GeneratedPCCPack: generatedPCCPack,
+    CheckPCCPackexpRecord: checkPCCPackexpRecord,
+    Linkage: linkage,
+    PiGeneratedPCCPackexp: {
+      kind: 'PiGeneratedPCCPackexp0',
+      version: CHECKER_VERSION,
+      materialized: true,
+      externalJson: true,
+      refs: [
+        {
+          kind: 'MaterializedRef0',
+          target: 'GeneratedPCCPack',
+          digest: linkage.generatedPackageDigest,
+        },
+        {
+          kind: 'MaterializedRef0',
+          target: 'CheckPCCPackexpRecord',
+          digest: linkage.checkPCCPackexpRecordDigest,
+        },
+      ],
+    },
+    ...overrides,
+  };
+}
+
+export async function CheckGeneratedPCCPackexp0(
+  input,
+  config = makeGeneratePCCPackConfig0(),
+) {
+  const checker = 'CheckGeneratedPCCPackexp0';
+  const ledger = [];
+  const cfg = makeGeneratePCCPackConfig0(config);
+  const envelope = input;
+  let deterministicNF = null;
+  let coreBoundaryNF = null;
+  let boot0NF = null;
+  let kernelSeedNF = null;
+  let codecDigestNF = null;
+  let ifaceSchedNF = null;
+  let byteLangNF = null;
+  let bootAuditPiBootNF = null;
+  let concreteKBundleNF = null;
+  let concreteHardNF = null;
+  let concreteRowsNF = null;
+  let concreteGlobalProofDAGNF = null;
+  let concreteFinalIntegrationNF = null;
+  let freshCheckPCCPackexpRecord = null;
+  let recordAlignmentNF = null;
+
+  const cfgCheck = validateConfig0(cfg);
+
+  ledger.push({
+    phase: 'config',
+    status: cfgCheck.ok ? 'pass' : 'fail',
+    digest: digestCanonical0(cfgCheck.nf ?? cfgCheck.witness ?? null),
+  });
+
+  if (!cfgCheck.ok) {
+    return makeRejectRecord({
+      checker,
+      coord: `${checker}.config`,
+      path: cfgCheck.path,
+      witness: cfgCheck.witness,
+      ledger,
+    });
+  }
+
+  const shape = validateShape0(envelope);
+
+  ledger.push({
+    phase: 'shape',
+    status: shape.ok ? 'pass' : 'fail',
+    digest: digestCanonical0(shape.nf ?? shape.witness ?? null),
+  });
+
+  if (!shape.ok) {
+    return makeRejectRecord({
+      checker,
+      coord: `${checker}.input`,
+      path: shape.path,
+      witness: shape.witness,
+      ledger,
+    });
+  }
+
+  if (cfg.checkDeterministicGenerator === true) {
+    const deterministic = await validateDeterministicGenerator0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'deterministicGenerator',
+      status: deterministic.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(deterministic.nf ?? deterministic.witness ?? null),
+    });
+
+    if (!deterministic.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.deterministicGenerator`,
+        path: deterministic.path,
+        witness: deterministic.witness,
+        ledger,
+      });
+    }
+
+    deterministicNF = deterministic.nf;
+  }
+
+  if (cfg.checkGeneratedPackageCoreBoundary === true) {
+    const coreBoundary = validateGeneratedPackageCoreBoundary0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'generatedPackageCoreBoundary',
+      status: coreBoundary.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(coreBoundary.nf ?? coreBoundary.witness ?? null),
+    });
+
+    if (!coreBoundary.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.coreBoundary`,
+        path: coreBoundary.path,
+        witness: coreBoundary.witness,
+        ledger,
+      });
+    }
+
+    coreBoundaryNF = coreBoundary.nf;
+  }
+
+  if (cfg.checkMaterializedBoot0 === true) {
+    const boot0 = await validateGeneratedBoot0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'CheckMaterializedBoot0',
+      status: boot0.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(boot0.nf ?? boot0.witness ?? null),
+    });
+
+    if (!boot0.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.Boot0`,
+        path: boot0.path,
+        witness: boot0.witness,
+        ledger,
+      });
+    }
+
+    boot0NF = boot0.nf;
+  }
+
+  if (cfg.checkKernelSeed0 === true) {
+    const kernelSeed = validateGeneratedKernelSeed0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'KernelSeed0',
+      status: kernelSeed.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(kernelSeed.nf ?? kernelSeed.witness ?? null),
+    });
+
+    if (!kernelSeed.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.KernelSeed0`,
+        path: kernelSeed.path,
+        witness: kernelSeed.witness,
+        ledger,
+      });
+    }
+
+    kernelSeedNF = kernelSeed.nf;
+  }
+
+  if (cfg.checkCodecDigest0 === true) {
+    const codecDigest = validateGeneratedCodecDigest0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'CodecDigest0',
+      status: codecDigest.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(codecDigest.nf ?? codecDigest.witness ?? null),
+    });
+
+    if (!codecDigest.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.CodecDigest0`,
+        path: codecDigest.path,
+        witness: codecDigest.witness,
+        ledger,
+      });
+    }
+
+    codecDigestNF = codecDigest.nf;
+  }
+
+  if (cfg.checkIfaceSched0 === true) {
+    const ifaceSched = validateGeneratedIfaceSched0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'IfaceSched0',
+      status: ifaceSched.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(ifaceSched.nf ?? ifaceSched.witness ?? null),
+    });
+
+    if (!ifaceSched.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.IfaceSched0`,
+        path: ifaceSched.path,
+        witness: ifaceSched.witness,
+        ledger,
+      });
+    }
+
+    ifaceSchedNF = ifaceSched.nf;
+  }
+
+  if (cfg.checkByteLang0 === true) {
+    const byteLang = validateGeneratedByteLang0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'ByteLang0',
+      status: byteLang.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(byteLang.nf ?? byteLang.witness ?? null),
+    });
+
+    if (!byteLang.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.ByteLang0`,
+        path: byteLang.path,
+        witness: byteLang.witness,
+        ledger,
+      });
+    }
+
+    byteLangNF = byteLang.nf;
+  }
+
+  if (cfg.checkBootAuditPiBoot0 === true) {
+    const bootAuditPiBoot = await validateGeneratedBootAuditPiBoot0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'BootAuditPiBoot0',
+      status: bootAuditPiBoot.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(bootAuditPiBoot.nf ?? bootAuditPiBoot.witness ?? null),
+    });
+
+    if (!bootAuditPiBoot.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.BootAuditPiBoot0`,
+        path: bootAuditPiBoot.path,
+        witness: bootAuditPiBoot.witness,
+        ledger,
+      });
+    }
+
+    bootAuditPiBootNF = bootAuditPiBoot.nf;
+  }
+
+  if (cfg.checkConcreteKBundle0 === true) {
+    const concreteKBundle = await validateGeneratedConcreteKBundle0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'ConcreteKBundle0',
+      status: concreteKBundle.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(concreteKBundle.nf ?? concreteKBundle.witness ?? null),
+    });
+
+    if (!concreteKBundle.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.ConcreteKBundle0`,
+        path: concreteKBundle.path,
+        witness: concreteKBundle.witness,
+        ledger,
+      });
+    }
+
+    concreteKBundleNF = concreteKBundle.nf;
+  }
+
+  if (cfg.checkConcreteHard0 === true) {
+    const concreteHard = await validateGeneratedConcreteHard0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'ConcreteHard0',
+      status: concreteHard.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(concreteHard.nf ?? concreteHard.witness ?? null),
+    });
+
+    if (!concreteHard.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.ConcreteHard0`,
+        path: concreteHard.path,
+        witness: concreteHard.witness,
+        ledger,
+      });
+    }
+
+    concreteHardNF = concreteHard.nf;
+  }
+
+  if (cfg.checkConcreteRows0 === true) {
+    const concreteRows = await validateGeneratedConcreteRows0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'ConcreteRows0',
+      status: concreteRows.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(concreteRows.nf ?? concreteRows.witness ?? null),
+    });
+
+    if (!concreteRows.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.ConcreteRows0`,
+        path: concreteRows.path,
+        witness: concreteRows.witness,
+        ledger,
+      });
+    }
+
+    concreteRowsNF = concreteRows.nf;
+  }
+
+  if (cfg.checkConcreteGlobalProofDAG0 === true) {
+    const concreteGlobalProofDAG = await validateGeneratedConcreteGlobalProofDAG0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'ConcreteGlobalProofDAG0',
+      status: concreteGlobalProofDAG.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(concreteGlobalProofDAG.nf ?? concreteGlobalProofDAG.witness ?? null),
+    });
+
+    if (!concreteGlobalProofDAG.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.ConcreteGlobalProofDAG0`,
+        path: concreteGlobalProofDAG.path,
+        witness: concreteGlobalProofDAG.witness,
+        ledger,
+      });
+    }
+
+    concreteGlobalProofDAGNF = concreteGlobalProofDAG.nf;
+  }
+
+  if (cfg.checkConcreteFinalIntegration0 === true) {
+    const concreteFinalIntegration = await validateGeneratedConcreteFinalIntegration0(envelope.GeneratedPCCPack);
+
+    ledger.push({
+      phase: 'ConcreteFinalIntegration0',
+      status: concreteFinalIntegration.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(concreteFinalIntegration.nf ?? concreteFinalIntegration.witness ?? null),
+    });
+
+    if (!concreteFinalIntegration.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.ConcreteFinalIntegration0`,
+        path: concreteFinalIntegration.path,
+        witness: concreteFinalIntegration.witness,
+        ledger,
+      });
+    }
+
+    concreteFinalIntegrationNF = concreteFinalIntegration.nf;
+  }
+
+  if (cfg.checkCheckPCCPackexpRecord === true) {
+    freshCheckPCCPackexpRecord = await CheckPCCPackexp0(
+      envelope.GeneratedPCCPack,
+      cfg.checkPCCPackexpConfig ?? {},
+    );
+
+    const fresh = recordToValidation0(freshCheckPCCPackexpRecord, ['GeneratedPCCPack']);
+
+    ledger.push({
+      phase: 'CheckPCCPackexp0',
+      status: fresh.ok ? 'pass' : 'fail',
+      digest: digestFromRecord0(freshCheckPCCPackexpRecord) ?? digestCanonical0(freshCheckPCCPackexpRecord),
+    });
+
+    if (!fresh.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.CheckPCCPackexp`,
+        path: fresh.path,
+        witness: fresh.witness,
+        ledger,
+      });
+    }
+
+    const alignment = validateMaterializedCheckPCCPackexpRecord0(
+      envelope.CheckPCCPackexpRecord,
+      freshCheckPCCPackexpRecord,
+    );
+
+    ledger.push({
+      phase: 'CheckPCCPackexpRecord',
+      status: alignment.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(alignment.nf ?? alignment.witness ?? null),
+    });
+
+    if (!alignment.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.CheckPCCPackexpRecord`,
+        path: alignment.path,
+        witness: alignment.witness,
+        ledger,
+      });
+    }
+
+    recordAlignmentNF = alignment.nf;
+  }
+
+  if (cfg.checkPublicClaimBoundary === true) {
+    const claim = validatePublicClaimBoundary0(envelope.CheckPCCPackexpRecord);
+
+    ledger.push({
+      phase: 'publicClaimBoundary',
+      status: claim.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(claim.nf ?? claim.witness ?? null),
+    });
+
+    if (!claim.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.publicClaimBoundary`,
+        path: claim.path,
+        witness: claim.witness,
+        ledger,
+      });
+    }
+  }
+
+  if (cfg.checkJsonMaterialized === true) {
+    const json = validateJsonMaterialized0(envelope);
+
+    ledger.push({
+      phase: 'jsonMaterialized',
+      status: json.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(json.nf ?? json.witness ?? null),
+    });
+
+    if (!json.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.json`,
+        path: json.path,
+        witness: json.witness,
+        ledger,
+      });
+    }
+  }
+
+  if (cfg.checkLinkage === true) {
+    const linkage = validateLinkage0(envelope);
+
+    ledger.push({
+      phase: 'linkage',
+      status: linkage.ok ? 'pass' : 'fail',
+      digest: digestCanonical0(linkage.nf ?? linkage.witness ?? null),
+    });
+
+    if (!linkage.ok) {
+      return makeRejectRecord({
+        checker,
+        coord: `${checker}.linkage`,
+        path: linkage.path,
+        witness: linkage.witness,
+        ledger,
+      });
+    }
+  }
+
+  const checkNF = envelope.CheckPCCPackexpRecord.NF ?? envelope.CheckPCCPackexpRecord.nf;
+  const claimBoundary = makeClaimBoundary0();
+
+  const nf = {
+    kind: 'GeneratedPCCPackexp0NF',
+    checker,
+    version: CHECKER_VERSION,
+    materializedPath: true,
+    syntheticRunAll: false,
+
+    generator: 'GeneratePCCPack0',
+    genCallDigest: digestCanonical0(envelope.GenCall),
+    deterministicGenerator: deterministicNF?.deterministic ?? null,
+    generatedPackageMatchesGenerator: deterministicNF?.generatedPackageMatchesGenerator ?? null,
+    generatedPackageCoreOnly: coreBoundaryNF?.coreOnly ?? null,
+    generatorCoreExcludesAcceptRun: coreBoundaryNF?.excludesAcceptRun ?? null,
+
+    generatedPackageBoot0: boot0NF?.boot0 ?? null,
+    boot0Accepted: boot0NF?.boot0Accepted ?? null,
+    boot0Kind: boot0NF?.boot0Kind ?? null,
+    boot0Digest: boot0NF?.boot0Digest ?? null,
+    boot0CheckDigest: boot0NF?.boot0CheckDigest ?? null,
+    boot0CanonicalByteDigest: boot0NF?.boot0CanonicalByteDigest ?? null,
+    boot0RowCount: boot0NF?.rowCount ?? null,
+    boot0KernelRuleCount: boot0NF?.kernelRuleCount ?? null,
+    boot0JsonMaterialized: boot0NF?.jsonMaterialized ?? null,
+    boot0NoFixtureMarkers: boot0NF?.noFixtureMarkers ?? null,
+    boot0BootBatchDigest: boot0NF?.bootBatchDigest ?? null,
+    boot0BootAuditDigest: boot0NF?.bootAuditDigest ?? null,
+    boot0B0Accepted: boot0NF?.boot0B0Accepted ?? null,
+    boot0B0Digest: boot0NF?.boot0B0Digest ?? null,
+    boot0B0CoverageDigest: boot0NF?.boot0B0CoverageDigest ?? null,
+    boot0B0FamilyCount: boot0NF?.boot0B0FamilyCount ?? null,
+    boot0B0RequiredFamilyCount: boot0NF?.boot0B0RequiredFamilyCount ?? null,
+    boot0B0Families: boot0NF?.boot0B0Families ?? null,
+    boot0B0AllRequiredFamiliesPresent: boot0NF?.boot0B0AllRequiredFamiliesPresent ?? null,
+    boot0B0CoversIface: boot0NF?.boot0B0CoversIface ?? null,
+    boot0B0CoversSched: boot0NF?.boot0B0CoversSched ?? null,
+    boot0B0CoversNF: boot0NF?.boot0B0CoversNF ?? null,
+    boot0B0CoversTruthEval: boot0NF?.boot0B0CoversTruthEval ?? null,
+    boot0B0CoversRel: boot0NF?.boot0B0CoversRel ?? null,
+    boot0B0CoversCharge: boot0NF?.boot0B0CoversCharge ?? null,
+    boot0B0CoversObl: boot0NF?.boot0B0CoversObl ?? null,
+    boot0B0CoversArith: boot0NF?.boot0B0CoversArith ?? null,
+    boot0B0CoversMode: boot0NF?.boot0B0CoversMode ?? null,
+    boot0B0CoversRoute: boot0NF?.boot0B0CoversRoute ?? null,
+    boot0B0CoversHash: boot0NF?.boot0B0CoversHash ?? null,
+    boot0B0CoversImport: boot0NF?.boot0B0CoversImport ?? null,
+
+    boot0LinkedToPCCPack: boot0NF?.boot0LinkedToPCCPack ?? null,
+    boot0LinkedToCoreDigestMap: boot0NF?.boot0LinkedToCoreDigestMap ?? null,
+
+    generatedPackageKernelSeed0: kernelSeedNF?.kernelSeed0 ?? null,
+    kernelSeed0Accepted: kernelSeedNF?.kernelSeed0Accepted ?? null,
+    kernelSeed0Kind: kernelSeedNF?.kernelSeed0Kind ?? null,
+    kernelSeed0Digest: kernelSeedNF?.kernelSeed0Digest ?? null,
+    kernelSeed0RuleCount: kernelSeedNF?.kernelSeed0RuleCount ?? null,
+    kernelSeed0RequiredRuleCount: kernelSeedNF?.kernelSeed0RequiredRuleCount ?? null,
+    kernelSeed0Rules: kernelSeedNF?.kernelSeed0Rules ?? null,
+    kernelSeed0AllRequiredRulesPresent: kernelSeedNF?.kernelSeed0AllRequiredRulesPresent ?? null,
+    kernelSeed0HasEq: kernelSeedNF?.kernelSeed0HasEq ?? null,
+    kernelSeed0HasSubst: kernelSeedNF?.kernelSeed0HasSubst ?? null,
+    kernelSeed0HasRecord: kernelSeedNF?.kernelSeed0HasRecord ?? null,
+    kernelSeed0HasDAGInd: kernelSeedNF?.kernelSeed0HasDAGInd ?? null,
+    kernelSeed0HasLedgerInd: kernelSeedNF?.kernelSeed0HasLedgerInd ?? null,
+    kernelSeed0HasOblTopoInd: kernelSeedNF?.kernelSeed0HasOblTopoInd ?? null,
+    kernelSeed0HasTraceInd: kernelSeedNF?.kernelSeed0HasTraceInd ?? null,
+    kernelSeed0HasFiniteExhaust: kernelSeedNF?.kernelSeed0HasFiniteExhaust ?? null,
+    kernelSeed0HasDPInd: kernelSeedNF?.kernelSeed0HasDPInd ?? null,
+    kernelSeed0HasHall: kernelSeedNF?.kernelSeed0HasHall ?? null,
+    kernelSeed0HasRankInd: kernelSeedNF?.kernelSeed0HasRankInd ?? null,
+    kernelSeed0HasMinCounterexample: kernelSeedNF?.kernelSeed0HasMinCounterexample ?? null,
+    kernelSeed0HasIntArith: kernelSeedNF?.kernelSeed0HasIntArith ?? null,
+    kernelSeed0HasTransport: kernelSeedNF?.kernelSeed0HasTransport ?? null,
+    kernelSeed0HasTruthVec: kernelSeedNF?.kernelSeed0HasTruthVec ?? null,
+    kernelSeed0HasFiniteRel: kernelSeedNF?.kernelSeed0HasFiniteRel ?? null,
+    kernelSeed0ProofNodeKindCount: kernelSeedNF?.kernelSeed0ProofNodeKindCount ?? null,
+    kernelSeed0ProofNodeKinds: kernelSeedNF?.kernelSeed0ProofNodeKinds ?? null,
+    kernelSeed0AllRequiredProofNodeKindsPresent:
+      kernelSeedNF?.kernelSeed0AllRequiredProofNodeKindsPresent ?? null,
+    kernelSeed0ProofRefsRejectOpaque: kernelSeedNF?.kernelSeed0ProofRefsRejectOpaque ?? null,
+    kernelSeed0ProofRefsTypedAcyclic: kernelSeedNF?.kernelSeed0ProofRefsTypedAcyclic ?? null,
+    kernelSeed0ProofRefsHashIndependent: kernelSeedNF?.kernelSeed0ProofRefsHashIndependent ?? null,
+    kernelSeed0PiBootDigestMatches: kernelSeedNF?.kernelSeed0PiBootDigestMatches ?? null,
+
+    generatedPackageCodec0: codecDigestNF?.codec0 ?? null,
+    codec0Accepted: codecDigestNF?.codec0Accepted ?? null,
+    codec0Kind: codecDigestNF?.codec0Kind ?? null,
+    codec0Digest: codecDigestNF?.codec0Digest ?? null,
+    codec0Canonical: codecDigestNF?.codec0Canonical ?? null,
+    codec0NaturalEncoding: codecDigestNF?.codec0NaturalEncoding ?? null,
+    codec0IntegerEncoding: codecDigestNF?.codec0IntegerEncoding ?? null,
+    codec0StringEncoding: codecDigestNF?.codec0StringEncoding ?? null,
+    codec0TopLevelConsumesAllBytes: codecDigestNF?.codec0TopLevelConsumesAllBytes ?? null,
+    codec0NormalFormSerialization: codecDigestNF?.codec0NormalFormSerialization ?? null,
+    codec0PiBootDigestMatches: codecDigestNF?.codec0PiBootDigestMatches ?? null,
+
+    generatedPackageDigest0: codecDigestNF?.digest0 ?? null,
+    digest0Accepted: codecDigestNF?.digest0Accepted ?? null,
+    digest0Kind: codecDigestNF?.digest0Kind ?? null,
+    digest0Digest: codecDigestNF?.digest0Digest ?? null,
+    digest0Alg: codecDigestNF?.digest0Alg ?? null,
+    digest0Bytes: codecDigestNF?.digest0Bytes ?? null,
+    digest0EqualityNotObjectEquality: codecDigestNF?.digest0EqualityNotObjectEquality ?? null,
+    digest0FullKeyComparisonAfterHashLookup:
+      codecDigestNF?.digest0FullKeyComparisonAfterHashLookup ?? null,
+    digest0PiBootDigestMatches: codecDigestNF?.digest0PiBootDigestMatches ?? null,
+
+    generatedPackageIfaceDict0: ifaceSchedNF?.ifaceDict0 ?? null,
+    ifaceDict0Accepted: ifaceSchedNF?.ifaceDict0Accepted ?? null,
+    ifaceDict0Kind: ifaceSchedNF?.ifaceDict0Kind ?? null,
+    ifaceDict0Digest: ifaceSchedNF?.ifaceDict0Digest ?? null,
+    ifaceDict0ForbiddenSymbolCount: ifaceSchedNF?.ifaceDict0ForbiddenSymbolCount ?? null,
+    ifaceDict0RequiredForbiddenSymbolsPresent:
+      ifaceSchedNF?.ifaceDict0RequiredForbiddenSymbolsPresent ?? null,
+    ifaceDict0NoExecutableMinSymbols: ifaceSchedNF?.ifaceDict0NoExecutableMinSymbols ?? null,
+    ifaceDict0PublicConstructorsPresent: ifaceSchedNF?.ifaceDict0PublicConstructorsPresent ?? null,
+    ifaceDict0CriticalKindsPresent: ifaceSchedNF?.ifaceDict0CriticalKindsPresent ?? null,
+    ifaceDict0RouteTokensPresent: ifaceSchedNF?.ifaceDict0RouteTokensPresent ?? null,
+    ifaceDict0PiBootDigestMatches: ifaceSchedNF?.ifaceDict0PiBootDigestMatches ?? null,
+
+    generatedPackageSched0: ifaceSchedNF?.sched0 ?? null,
+    sched0Accepted: ifaceSchedNF?.sched0Accepted ?? null,
+    sched0Kind: ifaceSchedNF?.sched0Kind ?? null,
+    sched0Digest: ifaceSchedNF?.sched0Digest ?? null,
+    sched0CoreMatchesExpected: ifaceSchedNF?.sched0CoreMatchesExpected ?? null,
+    sched0CoreB0: ifaceSchedNF?.sched0CoreB0 ?? null,
+    sched0CoreK0: ifaceSchedNF?.sched0CoreK0 ?? null,
+    sched0CoreR0: ifaceSchedNF?.sched0CoreR0 ?? null,
+    sched0CoreH0: ifaceSchedNF?.sched0CoreH0 ?? null,
+    sched0CoreO0: ifaceSchedNF?.sched0CoreO0 ?? null,
+    sched0CoreRel0: ifaceSchedNF?.sched0CoreRel0 ?? null,
+    sched0ScaleFactorsPresent: ifaceSchedNF?.sched0ScaleFactorsPresent ?? null,
+    sched0SelectorBoundsPresent: ifaceSchedNF?.sched0SelectorBoundsPresent ?? null,
+    sched0SelectorBoundBH: ifaceSchedNF?.sched0SelectorBoundBH ?? null,
+    sched0SelectorBoundBTheta: ifaceSchedNF?.sched0SelectorBoundBTheta ?? null,
+    sched0PolynomialExponent: ifaceSchedNF?.sched0PolynomialExponent ?? null,
+    sched0PiBootDigestMatches: ifaceSchedNF?.sched0PiBootDigestMatches ?? null,
+
+    generatedPackageByteLang0: byteLangNF?.byteLang0 ?? null,
+    byteLang0Accepted: byteLangNF?.byteLang0Accepted ?? null,
+    byteLang0Kind: byteLangNF?.byteLang0Kind ?? null,
+    byteLang0Digest: byteLangNF?.byteLang0Digest ?? null,
+    byteLang0TagCount: byteLangNF?.byteLang0TagCount ?? null,
+    byteLang0TagsUnique: byteLangNF?.byteLang0TagsUnique ?? null,
+    byteLang0RequiredTagsPresent: byteLangNF?.byteLang0RequiredTagsPresent ?? null,
+    byteLang0SortCount: byteLangNF?.byteLang0SortCount ?? null,
+    byteLang0RequiredSortsPresent: byteLangNF?.byteLang0RequiredSortsPresent ?? null,
+    byteLang0ConstructorCount: byteLangNF?.byteLang0ConstructorCount ?? null,
+    byteLang0RequiredConstructorsPresent: byteLangNF?.byteLang0RequiredConstructorsPresent ?? null,
+    byteLang0RecordCount: byteLangNF?.byteLang0RecordCount ?? null,
+    byteLang0RequiredRecordAritiesPresent: byteLangNF?.byteLang0RequiredRecordAritiesPresent ?? null,
+    byteLang0PiBootDigestMatches: byteLangNF?.byteLang0PiBootDigestMatches ?? null,
+
+    generatedPackageBootAudit0: bootAuditPiBootNF?.bootAudit0 ?? null,
+    bootAudit0Accepted: bootAuditPiBootNF?.bootAudit0Accepted ?? null,
+    bootAudit0Checker: bootAuditPiBootNF?.bootAudit0Checker ?? null,
+    bootAudit0Digest: bootAuditPiBootNF?.bootAudit0Digest ?? null,
+    bootAudit0DigestMatchesNF: bootAuditPiBootNF?.bootAudit0DigestMatchesNF ?? null,
+    bootAudit0NFKind: bootAuditPiBootNF?.bootAudit0NFKind ?? null,
+    bootAudit0SuiteId: bootAuditPiBootNF?.bootAudit0SuiteId ?? null,
+    bootAudit0CaseCount: bootAuditPiBootNF?.bootAudit0CaseCount ?? null,
+    bootAudit0PositiveCount: bootAuditPiBootNF?.bootAudit0PositiveCount ?? null,
+    bootAudit0NegativeCount: bootAuditPiBootNF?.bootAudit0NegativeCount ?? null,
+    bootAudit0CoversB0Accept: bootAuditPiBootNF?.bootAudit0CoversB0Accept ?? null,
+    bootAudit0CoversB0MissingCoverageReject:
+      bootAuditPiBootNF?.bootAudit0CoversB0MissingCoverageReject ?? null,
+    bootAudit0CoversB0HashKeyTamperReject:
+      bootAuditPiBootNF?.bootAudit0CoversB0HashKeyTamperReject ?? null,
+
+    generatedPackagePiBoot0: bootAuditPiBootNF?.piBoot0 ?? null,
+    piBoot0Accepted: bootAuditPiBootNF?.piBoot0Accepted ?? null,
+    piBoot0Kind: bootAuditPiBootNF?.piBoot0Kind ?? null,
+    piBoot0Digest: bootAuditPiBootNF?.piBoot0Digest ?? null,
+    piBoot0Materialized: bootAuditPiBootNF?.piBoot0Materialized ?? null,
+    piBoot0ExternalJson: bootAuditPiBootNF?.piBoot0ExternalJson ?? null,
+    piBoot0RefCount: bootAuditPiBootNF?.piBoot0RefCount ?? null,
+    piBoot0AllBootRefsPresent: bootAuditPiBootNF?.piBoot0AllBootRefsPresent ?? null,
+    piBoot0RefsMatchBootObjects: bootAuditPiBootNF?.piBoot0RefsMatchBootObjects ?? null,
+    piBoot0RefsIncludeByteLang0: bootAuditPiBootNF?.piBoot0RefsIncludeByteLang0 ?? null,
+    piBoot0RefsIncludeCodec0: bootAuditPiBootNF?.piBoot0RefsIncludeCodec0 ?? null,
+    piBoot0RefsIncludeDigest0: bootAuditPiBootNF?.piBoot0RefsIncludeDigest0 ?? null,
+    piBoot0RefsIncludeIfaceDict0: bootAuditPiBootNF?.piBoot0RefsIncludeIfaceDict0 ?? null,
+    piBoot0RefsIncludeSched0: bootAuditPiBootNF?.piBoot0RefsIncludeSched0 ?? null,
+    piBoot0RefsIncludeKernelSeed0: bootAuditPiBootNF?.piBoot0RefsIncludeKernelSeed0 ?? null,
+    piBoot0RefsIncludeB0: bootAuditPiBootNF?.piBoot0RefsIncludeB0 ?? null,
+    piBoot0RefsIncludeBootAudit0: bootAuditPiBootNF?.piBoot0RefsIncludeBootAudit0 ?? null,
+
+    generatedPackageConcreteKBundle0: concreteKBundleNF?.concreteKBundle0 ?? null,
+    concreteKBundle0Accepted: concreteKBundleNF?.concreteKBundle0Accepted ?? null,
+    concreteKBundle0Checker: concreteKBundleNF?.concreteKBundle0Checker ?? null,
+    concreteKBundle0Digest: concreteKBundleNF?.concreteKBundle0Digest ?? null,
+    concreteKBundle0MaterializedKBundleDigest:
+      concreteKBundleNF?.concreteKBundle0MaterializedKBundleDigest ?? null,
+    concreteKBundle0BootDigest: concreteKBundleNF?.concreteKBundle0BootDigest ?? null,
+    concreteKBundle0KImplDigest: concreteKBundleNF?.concreteKBundle0KImplDigest ?? null,
+    concreteKBundle0K0Digest: concreteKBundleNF?.concreteKBundle0K0Digest ?? null,
+    concreteKBundle0SigmaDigest: concreteKBundleNF?.concreteKBundle0SigmaDigest ?? null,
+    concreteKBundle0ReflectionDigest: concreteKBundleNF?.concreteKBundle0ReflectionDigest ?? null,
+    concreteKBundle0ProofInventoryDigest:
+      concreteKBundleNF?.concreteKBundle0ProofInventoryDigest ?? null,
+    concreteKBundle0KernelRuleCount:
+      concreteKBundleNF?.concreteKBundle0KernelRuleCount ?? null,
+    concreteKBundle0ConformanceNodeCount:
+      concreteKBundleNF?.concreteKBundle0ConformanceNodeCount ?? null,
+    concreteKBundle0KernelRuleCoverageComplete:
+      concreteKBundleNF?.concreteKBundle0KernelRuleCoverageComplete ?? null,
+    concreteKBundle0SigmaTheoremCount:
+      concreteKBundleNF?.concreteKBundle0SigmaTheoremCount ?? null,
+    concreteKBundle0SigmaCoverageComplete:
+      concreteKBundleNF?.concreteKBundle0SigmaCoverageComplete ?? null,
+    concreteKBundle0SigmaProofRefsResolve:
+      concreteKBundleNF?.concreteKBundle0SigmaProofRefsResolve ?? null,
+    concreteKBundle0ReflectionCount:
+      concreteKBundleNF?.concreteKBundle0ReflectionCount ?? null,
+    concreteKBundle0ReflectionCoverageComplete:
+      concreteKBundleNF?.concreteKBundle0ReflectionCoverageComplete ?? null,
+    concreteKBundle0ReflectionProofRefsResolve:
+      concreteKBundleNF?.concreteKBundle0ReflectionProofRefsResolve ?? null,
+    concreteKBundle0NoOpaqueProofRefs:
+      concreteKBundleNF?.concreteKBundle0NoOpaqueProofRefs ?? null,
+    concreteKBundle0NoExecutableMinSymbols:
+      concreteKBundleNF?.concreteKBundle0NoExecutableMinSymbols ?? null,
+    concreteKBundle0LinkedToGeneratedBoot0:
+      concreteKBundleNF?.concreteKBundle0LinkedToGeneratedBoot0 ?? null,
+
+    generatedPackageConcreteHard0: concreteHardNF?.concreteHard0 ?? null,
+    concreteHard0Accepted: concreteHardNF?.concreteHard0Accepted ?? null,
+    concreteHard0Checker: concreteHardNF?.concreteHard0Checker ?? null,
+    concreteHard0Digest: concreteHardNF?.concreteHard0Digest ?? null,
+    concreteHard0MaterializedHardDigest:
+      concreteHardNF?.concreteHard0MaterializedHardDigest ?? null,
+    concreteHard0HardCheckDigest: concreteHardNF?.concreteHard0HardCheckDigest ?? null,
+    concreteHard0CoverageDigest: concreteHardNF?.concreteHard0CoverageDigest ?? null,
+    concreteHard0CheckerCount: concreteHardNF?.concreteHard0CheckerCount ?? null,
+    concreteHard0CheckerCoverageComplete:
+      concreteHardNF?.concreteHard0CheckerCoverageComplete ?? null,
+    concreteHard0RowKeyFieldCount:
+      concreteHardNF?.concreteHard0RowKeyFieldCount ?? null,
+    concreteHard0RowKeyCoverageComplete:
+      concreteHardNF?.concreteHard0RowKeyCoverageComplete ?? null,
+    concreteHard0RoutePriorityComplete:
+      concreteHardNF?.concreteHard0RoutePriorityComplete ?? null,
+    concreteHard0ProofRefPolicyComplete:
+      concreteHardNF?.concreteHard0ProofRefPolicyComplete ?? null,
+    concreteHard0HashDisciplineComplete:
+      concreteHardNF?.concreteHard0HashDisciplineComplete ?? null,
+    concreteHard0NoMinCoverageComplete:
+      concreteHardNF?.concreteHard0NoMinCoverageComplete ?? null,
+    concreteHard0ForbiddenSymbolCount:
+      concreteHardNF?.concreteHard0ForbiddenSymbolCount ?? null,
+    concreteHard0ImportPolicyComplete:
+      concreteHardNF?.concreteHard0ImportPolicyComplete ?? null,
+    concreteHard0ForbiddenImportEdgeCount:
+      concreteHardNF?.concreteHard0ForbiddenImportEdgeCount ?? null,
+    concreteHard0ReflectionPolicyComplete:
+      concreteHardNF?.concreteHard0ReflectionPolicyComplete ?? null,
+    concreteHard0BoundsPolicyComplete:
+      concreteHardNF?.concreteHard0BoundsPolicyComplete ?? null,
+    concreteHard0DiagnosticsPolicyComplete:
+      concreteHardNF?.concreteHard0DiagnosticsPolicyComplete ?? null,
+    concreteHard0LinkedToPCCPack:
+      concreteHardNF?.concreteHard0LinkedToPCCPack ?? null,
+
+    generatedPackageConcreteRows0: concreteRowsNF?.concreteRows0 ?? null,
+    concreteRows0Accepted: concreteRowsNF?.concreteRows0Accepted ?? null,
+    concreteRows0Checker: concreteRowsNF?.concreteRows0Checker ?? null,
+    concreteRows0Digest: concreteRowsNF?.concreteRows0Digest ?? null,
+    concreteRows0RowPackDigest: concreteRowsNF?.concreteRows0RowPackDigest ?? null,
+    concreteRows0RowPackObjectDigest:
+      concreteRowsNF?.concreteRows0RowPackObjectDigest ?? null,
+    concreteRows0BootDigest: concreteRowsNF?.concreteRows0BootDigest ?? null,
+    concreteRows0IfaceHash: concreteRowsNF?.concreteRows0IfaceHash ?? null,
+    concreteRows0SchedHash: concreteRowsNF?.concreteRows0SchedHash ?? null,
+    concreteRows0RowCount: concreteRowsNF?.concreteRows0RowCount ?? null,
+    concreteRows0BatchCount: concreteRowsNF?.concreteRows0BatchCount ?? null,
+    concreteRows0FamilyCount: concreteRowsNF?.concreteRows0FamilyCount ?? null,
+    concreteRows0ConcreteIfaceHash:
+      concreteRowsNF?.concreteRows0ConcreteIfaceHash ?? null,
+    concreteRows0SyntheticIfaceHashCount:
+      concreteRowsNF?.concreteRows0SyntheticIfaceHashCount ?? null,
+    concreteRows0ScaffoldMarkerCount:
+      concreteRowsNF?.concreteRows0ScaffoldMarkerCount ?? null,
+    concreteRows0LinkedToGeneratedBoot0:
+      concreteRowsNF?.concreteRows0LinkedToGeneratedBoot0 ?? null,
+    concreteRows0LinkedToPCCPack:
+      concreteRowsNF?.concreteRows0LinkedToPCCPack ?? null,
+
+    generatedPackageConcreteGlobalProofDAG0:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0 ?? null,
+    concreteGlobalProofDAG0Accepted:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0Accepted ?? null,
+    concreteGlobalProofDAG0Checker:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0Checker ?? null,
+    concreteGlobalProofDAG0Digest:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0Digest ?? null,
+    concreteGlobalProofDAG0GlobalProofDAGDigest:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0GlobalProofDAGDigest ?? null,
+    concreteGlobalProofDAG0GlobalProofDAGObjectDigest:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0GlobalProofDAGObjectDigest ?? null,
+    concreteGlobalProofDAG0MaterializedGlobalProofDAGDigest:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0MaterializedGlobalProofDAGDigest ?? null,
+    concreteGlobalProofDAG0KImplDigest:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0KImplDigest ?? null,
+    concreteGlobalProofDAG0RowPackDigest:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0RowPackDigest ?? null,
+    concreteGlobalProofDAG0LocalPackagesDigest:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0LocalPackagesDigest ?? null,
+    concreteGlobalProofDAG0GlobalFirewallsDigest:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0GlobalFirewallsDigest ?? null,
+    concreteGlobalProofDAG0KBundleProofInventoryDigest:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0KBundleProofInventoryDigest ?? null,
+    concreteGlobalProofDAG0KBundleKernelRuleCoverageComplete:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0KBundleKernelRuleCoverageComplete ?? null,
+    concreteGlobalProofDAG0KBundleSigmaProofRefsResolve:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0KBundleSigmaProofRefsResolve ?? null,
+    concreteGlobalProofDAG0KBundleReflectionProofRefsResolve:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0KBundleReflectionProofRefsResolve ?? null,
+    concreteGlobalProofDAG0NodeCount:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0NodeCount ?? null,
+    concreteGlobalProofDAG0NodeCountMinimum:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0NodeCountMinimum ?? null,
+    concreteGlobalProofDAG0FinalTheoremCount:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0FinalTheoremCount ?? null,
+    concreteGlobalProofDAG0FinalPackageSoundness:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0FinalPackageSoundness ?? null,
+    concreteGlobalProofDAG0FinalGeneratedPackageSufficiency:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0FinalGeneratedPackageSufficiency ?? null,
+    concreteGlobalProofDAG0FinalAcceptedPackageImpliesSATinP:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0FinalAcceptedPackageImpliesSATinP ?? null,
+    concreteGlobalProofDAG0FinalAcceptedPackageImpliesPEqualsNP:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0FinalAcceptedPackageImpliesPEqualsNP ?? null,
+    concreteGlobalProofDAG0IfaceHash:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0IfaceHash ?? null,
+    concreteGlobalProofDAG0SchedHash:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0SchedHash ?? null,
+    concreteGlobalProofDAG0IfaceMatchesRows:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0IfaceMatchesRows ?? null,
+    concreteGlobalProofDAG0SchedMatchesKImpl:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0SchedMatchesKImpl ?? null,
+    concreteGlobalProofDAG0SyntheticMarkerCount:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0SyntheticMarkerCount ?? null,
+    concreteGlobalProofDAG0ForbiddenMarkerCount:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0ForbiddenMarkerCount ?? null,
+    concreteGlobalProofDAG0NoForbiddenMarkers:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0NoForbiddenMarkers ?? null,
+    concreteGlobalProofDAG0LinkedToGeneratedBoot0:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0LinkedToGeneratedBoot0 ?? null,
+    concreteGlobalProofDAG0LinkedToKImpl:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0LinkedToKImpl ?? null,
+    concreteGlobalProofDAG0LinkedToConcreteRows:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0LinkedToConcreteRows ?? null,
+    concreteGlobalProofDAG0LinkedToLocalPackages:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0LinkedToLocalPackages ?? null,
+    concreteGlobalProofDAG0LinkedToGlobalFirewalls:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0LinkedToGlobalFirewalls ?? null,
+    concreteGlobalProofDAG0LinkedToPCCPack:
+      concreteGlobalProofDAGNF?.concreteGlobalProofDAG0LinkedToPCCPack ?? null,
+
+    generatedPackageConcreteFinalIntegration0:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0 ?? null,
+    concreteFinalIntegration0Accepted:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0Accepted ?? null,
+    concreteFinalIntegration0Checker:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0Checker ?? null,
+    concreteFinalIntegration0Digest:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0Digest ?? null,
+    concreteFinalIntegration0ConcreteGlobalProofDAGDigest:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0ConcreteGlobalProofDAGDigest ?? null,
+    concreteFinalIntegration0MaterializedFinalIntegrationDigest:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0MaterializedFinalIntegrationDigest ?? null,
+    concreteFinalIntegration0GPackDigest:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0GPackDigest ?? null,
+    concreteFinalIntegration0RowFamGDigest:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0RowFamGDigest ?? null,
+    concreteFinalIntegration0FinalIntegrationDigest:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0FinalIntegrationDigest ?? null,
+    concreteFinalIntegration0FinalTheoremDigest:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0FinalTheoremDigest ?? null,
+    concreteFinalIntegration0RowFamFinalDigest:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0RowFamFinalDigest ?? null,
+    concreteFinalIntegration0ConcreteLinksDigest:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0ConcreteLinksDigest ?? null,
+
+    concreteFinalIntegration0ConcreteGlobalProofDAG:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0ConcreteGlobalProofDAG ?? null,
+    concreteFinalIntegration0ConcreteKBundle:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0ConcreteKBundle ?? null,
+    concreteFinalIntegration0ConcreteRows:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0ConcreteRows ?? null,
+    concreteFinalIntegration0ConcreteLocalPackages:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0ConcreteLocalPackages ?? null,
+    concreteFinalIntegration0ConcreteGlobalFirewalls:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0ConcreteGlobalFirewalls ?? null,
+
+    concreteFinalIntegration0KBundleKernelRuleCoverageComplete:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0KBundleKernelRuleCoverageComplete ?? null,
+    concreteFinalIntegration0KBundleSigmaProofRefsResolve:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0KBundleSigmaProofRefsResolve ?? null,
+    concreteFinalIntegration0KBundleReflectionProofRefsResolve:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0KBundleReflectionProofRefsResolve ?? null,
+
+    concreteFinalIntegration0GPackFieldCoverageComplete:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0GPackFieldCoverageComplete ?? null,
+    concreteFinalIntegration0RowFamGCoverageComplete:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0RowFamGCoverageComplete ?? null,
+    concreteFinalIntegration0FinalIntegrationUsesGPack:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0FinalIntegrationUsesGPack ?? null,
+    concreteFinalIntegration0RowFamGUsesGPack:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0RowFamGUsesGPack ?? null,
+    concreteFinalIntegration0FinalTheoremUsesFinalIntegration:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0FinalTheoremUsesFinalIntegration ?? null,
+    concreteFinalIntegration0RowFamFinalUsesFinalTheorem:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0RowFamFinalUsesFinalTheorem ?? null,
+    concreteFinalIntegration0FinalMatchUsesGPack:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0FinalMatchUsesGPack ?? null,
+    concreteFinalIntegration0SATDecisionUsesGPack:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0SATDecisionUsesGPack ?? null,
+
+    concreteFinalIntegration0SyntheticMarkerCount:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0SyntheticMarkerCount ?? null,
+    concreteFinalIntegration0ForbiddenMarkerCount:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0ForbiddenMarkerCount ?? null,
+    concreteFinalIntegration0NoForbiddenMarkers:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0NoForbiddenMarkers ?? null,
+
+    concreteFinalIntegration0LinkedToGeneratedGlobalProofDAG:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0LinkedToGeneratedGlobalProofDAG ?? null,
+    concreteFinalIntegration0LinkedToGPack:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0LinkedToGPack ?? null,
+    concreteFinalIntegration0LinkedToRowFamG:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0LinkedToRowFamG ?? null,
+    concreteFinalIntegration0LinkedToFinalIntegration:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0LinkedToFinalIntegration ?? null,
+    concreteFinalIntegration0LinkedToFinalTheorem:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0LinkedToFinalTheorem ?? null,
+    concreteFinalIntegration0LinkedToRowFamFinal:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0LinkedToRowFamFinal ?? null,
+    concreteFinalIntegration0LinkedToPCCPack:
+      concreteFinalIntegrationNF?.concreteFinalIntegration0LinkedToPCCPack ?? null,
+
+    generatedPackageCheckPCCPackexp0:
+      checkNF?.checkPCCPackexp === true,
+    checkPCCPackexp0Accepted:
+      envelope.CheckPCCPackexpRecord?.tag === 'accept',
+    checkPCCPackexp0Checker:
+      envelope.CheckPCCPackexpRecord?.checker ?? null,
+    checkPCCPackexp0Digest:
+      digestFromRecord0(envelope.CheckPCCPackexpRecord),
+    checkPCCPackexp0MaterializedPath:
+      checkNF?.materializedPath === true,
+    checkPCCPackexp0SyntheticRunAll:
+      checkNF?.syntheticRunAll === false,
+    checkPCCPackexp0PackageKind:
+      checkNF?.packageKind ?? null,
+    checkPCCPackexp0MaterializedPCCPackKind:
+      checkNF?.materializedPCCPackKind ?? null,
+    checkPCCPackexp0PCCPackDigest:
+      checkNF?.pccPackDigest ?? null,
+    checkPCCPackexp0MaterializedPCCPackDigest:
+      checkNF?.materializedPCCPackDigest ?? null,
+    checkPCCPackexp0ConcretePCCPackRecordDigest:
+      checkNF?.concretePCCPackRecordDigest ?? null,
+    checkPCCPackexp0ConcreteCoverageDigest:
+      checkNF?.concreteCoverageDigest ?? null,
+
+    checkPCCPackexp0PublicConclusionOnlyAfterAcceptRun:
+      checkNF?.publicConclusionOnlyAfterAcceptRun === true,
+    checkPCCPackexp0PublicConclusionEmitted:
+      checkNF?.publicConclusionEmitted === false,
+    checkPCCPackexp0NoPrematurePublicConclusion:
+      checkNF?.publicConclusionOnlyAfterAcceptRun === true &&
+      checkNF?.publicConclusionEmitted === false,
+    checkPCCPackexp0ClaimBoundaryConditional:
+      checkNF?.claimBoundary?.conditional === true,
+    checkPCCPackexp0ClaimBoundaryAntecedent:
+      checkNF?.claimBoundary?.antecedent ?? null,
+    checkPCCPackexp0ClaimBoundaryConsequent:
+      checkNF?.claimBoundary?.consequent ?? null,
+    checkPCCPackexp0GeneratedPackageImplication:
+      checkNF?.claimBoundary?.antecedent === 'CheckPCCPackexp(GeneratePCCPack())=accept' &&
+      checkNF?.claimBoundary?.consequent === 'P = NP' &&
+      checkNF?.claimBoundary?.conditional === true,
+
+    checkPCCPackexp0ConcretePCCPack:
+      checkNF?.concretePCCPack === true,
+    checkPCCPackexp0ConcreteKBundle:
+      checkNF?.concreteKBundle === true,
+    checkPCCPackexp0ConcreteHardCheck:
+      checkNF?.concreteHardCheck === true,
+    checkPCCPackexp0ConcreteRows:
+      checkNF?.concreteRows === true,
+    checkPCCPackexp0ConcreteLocalPackages:
+      checkNF?.concreteLocalPackages === true,
+    checkPCCPackexp0ConcreteGlobalFirewalls:
+      checkNF?.concreteGlobalFirewalls === true,
+    checkPCCPackexp0ConcreteGlobalProofDAG:
+      checkNF?.concreteGlobalProofDAG === true,
+    checkPCCPackexp0ConcreteFinalIntegration:
+      checkNF?.concreteFinalIntegration === true,
+
+    checkPCCPackexp0KBundleCoverageComplete:
+      checkNF?.kBundleKernelRuleCoverageComplete === true &&
+      checkNF?.kBundleSigmaProofRefsResolve === true &&
+      checkNF?.kBundleReflectionProofRefsResolve === true &&
+      checkNF?.kBundleNoOpaqueProofRefs === true &&
+      checkNF?.kBundleNoExecutableMinSymbols === true,
+    checkPCCPackexp0HardCoverageComplete:
+      checkNF?.hardCheckerCoverageComplete === true &&
+      checkNF?.hardRowKeyCoverageComplete === true &&
+      checkNF?.hardRoutePriorityComplete === true &&
+      checkNF?.hardProofRefPolicyComplete === true &&
+      checkNF?.hardHashDisciplineComplete === true &&
+      checkNF?.hardNoMinCoverageComplete === true &&
+      checkNF?.hardImportPolicyComplete === true &&
+      checkNF?.hardReflectionPolicyComplete === true &&
+      checkNF?.hardBoundsPolicyComplete === true &&
+      checkNF?.hardDiagnosticsPolicyComplete === true,
+    checkPCCPackexp0FinalIntegrationCoverageComplete:
+      checkNF?.finalIntegrationConcreteGlobalProofDAG === true &&
+      checkNF?.finalIntegrationGPackFieldCoverageComplete === true &&
+      checkNF?.finalIntegrationRowFamGCoverageComplete === true &&
+      checkNF?.finalIntegrationUsesGPack === true &&
+      checkNF?.rowFamGUsesGPack === true &&
+      checkNF?.finalTheoremUsesFinalIntegration === true &&
+      checkNF?.rowFamFinalUsesFinalTheorem === true &&
+      checkNF?.finalMatchUsesGPack === true &&
+      checkNF?.satDecisionUsesGPack === true,
+
+    checkPCCPackexp0PCCPackLinkedToKBundle:
+      checkNF?.pccPackLinkedToKBundle === true,
+    checkPCCPackexp0PCCPackLinkedToHardCheck:
+      checkNF?.pccPackLinkedToHardCheck === true,
+    checkPCCPackexp0PCCPackLinkedToRows:
+      checkNF?.pccPackLinkedToRows === true,
+    checkPCCPackexp0PCCPackLinkedToLocalPackages:
+      checkNF?.pccPackLinkedToLocalPackages === true,
+    checkPCCPackexp0PCCPackLinkedToGlobalFirewalls:
+      checkNF?.pccPackLinkedToGlobalFirewalls === true,
+    checkPCCPackexp0PCCPackLinkedToGlobalProofDAG:
+      checkNF?.pccPackLinkedToGlobalProofDAG === true,
+    checkPCCPackexp0PCCPackLinkedToGPack:
+      checkNF?.pccPackLinkedToGPack === true,
+    checkPCCPackexp0PCCPackLinkedToFinalIntegration:
+      checkNF?.pccPackLinkedToFinalIntegration === true,
+    checkPCCPackexp0PCCPackLinkedToFinalTheorem:
+      checkNF?.pccPackLinkedToFinalTheorem === true,
+    checkPCCPackexp0PCCPackLinkageComplete:
+      checkNF?.pccPackLinkedToKBundle === true &&
+      checkNF?.pccPackLinkedToHardCheck === true &&
+      checkNF?.pccPackLinkedToRows === true &&
+      checkNF?.pccPackLinkedToLocalPackages === true &&
+      checkNF?.pccPackLinkedToGlobalFirewalls === true &&
+      checkNF?.pccPackLinkedToGlobalProofDAG === true &&
+      checkNF?.pccPackLinkedToGPack === true &&
+      checkNF?.pccPackLinkedToFinalIntegration === true &&
+      checkNF?.pccPackLinkedToFinalTheorem === true,
+    checkPCCPackexp0ConcreteCoverageComplete:
+      checkNF?.concretePCCPack === true &&
+      checkNF?.concreteKBundle === true &&
+      checkNF?.concreteHardCheck === true &&
+      checkNF?.concreteRows === true &&
+      checkNF?.concreteLocalPackages === true &&
+      checkNF?.concreteGlobalFirewalls === true &&
+      checkNF?.concreteGlobalProofDAG === true &&
+      checkNF?.concreteFinalIntegration === true &&
+      checkNF?.kBundleKernelRuleCoverageComplete === true &&
+      checkNF?.kBundleSigmaProofRefsResolve === true &&
+      checkNF?.kBundleReflectionProofRefsResolve === true &&
+      checkNF?.kBundleNoOpaqueProofRefs === true &&
+      checkNF?.kBundleNoExecutableMinSymbols === true &&
+      checkNF?.hardCheckerCoverageComplete === true &&
+      checkNF?.hardRowKeyCoverageComplete === true &&
+      checkNF?.hardRoutePriorityComplete === true &&
+      checkNF?.hardProofRefPolicyComplete === true &&
+      checkNF?.hardHashDisciplineComplete === true &&
+      checkNF?.hardNoMinCoverageComplete === true &&
+      checkNF?.hardImportPolicyComplete === true &&
+      checkNF?.hardReflectionPolicyComplete === true &&
+      checkNF?.hardBoundsPolicyComplete === true &&
+      checkNF?.hardDiagnosticsPolicyComplete === true &&
+      checkNF?.finalIntegrationConcreteGlobalProofDAG === true &&
+      checkNF?.finalIntegrationGPackFieldCoverageComplete === true &&
+      checkNF?.finalIntegrationRowFamGCoverageComplete === true &&
+      checkNF?.finalIntegrationUsesGPack === true &&
+      checkNF?.rowFamGUsesGPack === true &&
+      checkNF?.finalTheoremUsesFinalIntegration === true &&
+      checkNF?.rowFamFinalUsesFinalTheorem === true &&
+      checkNF?.finalMatchUsesGPack === true &&
+      checkNF?.satDecisionUsesGPack === true,
+
+    checkPCCPackexp0ConcretePCCPackRecordKind:
+      checkNF?.concretePCCPackRecordKind ?? null,
+    checkPCCPackexp0ConcretePCCPackRecordAccepted:
+      checkNF?.concretePCCPackRecordAccepted === true,
+
+    generatedPackageKind: envelope.GeneratedPCCPack.kind ?? null,
+    generatedPackageDigest: digestCanonical0(envelope.GeneratedPCCPack),
+
+    checkPCCPackexp: true,
+    checkPCCPackexpRecordAccepted: envelope.CheckPCCPackexpRecord.tag === 'accept',
+    checkPCCPackexpRecordChecker: envelope.CheckPCCPackexpRecord.checker,
+    checkPCCPackexpRecordDigest: digestFromRecord0(envelope.CheckPCCPackexpRecord),
+    checkPCCPackexpRecordDigestMatchesNF: recordAlignmentNF?.checkPCCPackexpRecordDigestMatchesNF ?? null,
+    checkPCCPackexpRecordMatchesFresh: recordAlignmentNF?.checkPCCPackexpRecordMatchesFresh ?? null,
+
+    pccPackDigest: checkNF.pccPackDigest,
+    materializedPCCPackDigest: checkNF.materializedPCCPackDigest,
+    concreteCoverageDigest: checkNF.concreteCoverageDigest,
+
+    publicConclusionOnlyAfterAcceptRun: checkNF.publicConclusionOnlyAfterAcceptRun === true,
+    publicConclusionEmitted: checkNF.publicConclusionEmitted === false ? false : checkNF.publicConclusionEmitted,
+    claimBoundary,
+    publicConclusion: claimBoundary,
+
+    concretePCCPack: checkNF.concretePCCPack === true,
+    concreteKBundle: checkNF.concreteKBundle === true,
+    concreteHardCheck: checkNF.concreteHardCheck === true,
+    concreteRows: checkNF.concreteRows === true,
+    concreteLocalPackages: checkNF.concreteLocalPackages === true,
+    concreteGlobalFirewalls: checkNF.concreteGlobalFirewalls === true,
+    concreteGlobalProofDAG: checkNF.concreteGlobalProofDAG === true,
+    concreteFinalIntegration: checkNF.concreteFinalIntegration === true,
+
+    linkageDigest: digestCanonical0(envelope.Linkage ?? null),
+  };
+
+  return makeAcceptRecord({
+    checker,
+    nf,
+    ledger,
+  });
+}
+
+export async function writeGeneratedPCCPackexpFiles0(outDir, options = {}) {
+  if (typeof outDir !== 'string' || outDir.length === 0) {
+    throw new TypeError('writeGeneratedPCCPackexpFiles0 requires a non-empty output directory');
+  }
+
+  const envelope = await makeGeneratedPCCPackexp0(options);
+  const checked = await CheckGeneratedPCCPackexp0(envelope, options.checkConfig ?? {});
+
+  await fs.mkdir(outDir, {
+    recursive: true,
+  });
+
+  const envelopePath = path.join(outDir, 'GeneratedPCCPackexp0.json');
+  const generatedPackagePath = path.join(outDir, 'GeneratedPCCPack0.json');
+  const checkPCCPackexpRecordPath = path.join(outDir, 'CheckPCCPackexp0.json');
+  const checkPath = path.join(outDir, 'GeneratedPCCPackexp0.check.json');
+
+  await writeJsonFile0(envelopePath, envelope);
+  await writeJsonFile0(generatedPackagePath, envelope.GeneratedPCCPack);
+  await writeJsonFile0(checkPCCPackexpRecordPath, envelope.CheckPCCPackexpRecord);
+  await writeJsonFile0(checkPath, checked);
+
+  return {
+    envelope,
+    checked,
+    files: {
+      envelopePath,
+      generatedPackagePath,
+      checkPCCPackexpRecordPath,
+      checkPath,
+    },
+  };
+}
+
+function validateConfig0(config) {
+  if (!isPlainObject(config)) {
+    return validationReject0([], 'GeneratePCCPackConfig0 must be an object', {
+      actual: typeof config,
+    });
+  }
+
+  if (config.kind !== undefined && config.kind !== 'GeneratePCCPackConfig0') {
+    return validationReject0(['kind'], 'GeneratePCCPackConfig0 kind mismatch', {
+      actual: config.kind,
+    });
+  }
+
+  if (config.version !== undefined && config.version !== CHECKER_VERSION) {
+    return validationReject0(['version'], `GeneratePCCPackConfig0 version must be ${CHECKER_VERSION} when present`, {
+      actual: config.version,
+    });
+  }
+
+  for (const field of [
+    'checkDeterministicGenerator',
+    'checkGeneratedPackageCoreBoundary',
+    'checkMaterializedBoot0',
+    'checkKernelSeed0',
+    'checkCodecDigest0',
+    'checkIfaceSched0',
+    'checkByteLang0',
+    'checkBootAuditPiBoot0',
+    'checkConcreteKBundle0',
+    'checkConcreteHard0',
+    'checkConcreteRows0',
+    'checkConcreteGlobalProofDAG0',
+    'checkConcreteFinalIntegration0',
+    'checkCheckPCCPackexpRecord',
+    'checkPublicClaimBoundary',
+    'checkJsonMaterialized',
+    'checkLinkage',
+  ]) {
+    if (typeof config[field] !== 'boolean') {
+      return validationReject0([field], `GeneratePCCPackConfig0 ${field} must be boolean`, {
+        actual: config[field],
+      });
+    }
+  }
+
+  if (!isPlainObject(config.checkPCCPackexpConfig)) {
+    return validationReject0(['checkPCCPackexpConfig'], 'checkPCCPackexpConfig must be an object', {
+      actual: typeof config.checkPCCPackexpConfig,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GeneratePCCPackConfig0NF',
+  });
+}
+
+function validateShape0(envelope) {
+  if (!isPlainObject(envelope)) {
+    return validationReject0([], 'GeneratedPCCPackexp0 must be an object', {
+      actual: typeof envelope,
+    });
+  }
+
+  if (envelope.kind !== undefined && envelope.kind !== 'GeneratedPCCPackexp0') {
+    return validationReject0(['kind'], 'GeneratedPCCPackexp0 kind mismatch', {
+      actual: envelope.kind,
+    });
+  }
+
+  if (envelope.version !== undefined && envelope.version !== CHECKER_VERSION) {
+    return validationReject0(['version'], `GeneratedPCCPackexp0 version must be ${CHECKER_VERSION} when present`, {
+      actual: envelope.version,
+    });
+  }
+
+  if (!isPlainObject(envelope.GenCall)) {
+    return validationReject0(['GenCall'], 'GeneratedPCCPackexp0 must include GenCall', {
+      actual: typeof envelope.GenCall,
+    });
+  }
+
+  if (!isPlainObject(envelope.GeneratedPCCPack)) {
+    return validationReject0(['GeneratedPCCPack'], 'GeneratedPCCPackexp0 must include GeneratedPCCPack', {
+      actual: typeof envelope.GeneratedPCCPack,
+    });
+  }
+
+  if (!isPlainObject(envelope.CheckPCCPackexpRecord)) {
+    return validationReject0(['CheckPCCPackexpRecord'], 'GeneratedPCCPackexp0 must include CheckPCCPackexpRecord', {
+      actual: typeof envelope.CheckPCCPackexpRecord,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackexpShape0NF',
+  });
+}
+
+async function validateDeterministicGenerator0(actualGeneratedPackage) {
+  const generatedA = await GeneratePCCPack0();
+  const generatedB = await GeneratePCCPack0();
+
+  if (stableStringify0(generatedA) !== stableStringify0(generatedB)) {
+    return validationReject0(['GeneratePCCPack0'], 'GeneratePCCPack0 must be deterministic across repeated generation', {
+      firstDigest: digestCanonical0(generatedA),
+      secondDigest: digestCanonical0(generatedB),
+    });
+  }
+
+  if (stableStringify0(actualGeneratedPackage) !== stableStringify0(generatedA)) {
+    return validationReject0(['GeneratedPCCPack'], 'GeneratedPCCPack must match GeneratePCCPack0 output by canonical bytes', {
+      expectedDigest: digestCanonical0(generatedA),
+      actualDigest: digestCanonical0(actualGeneratedPackage),
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GeneratePCCPackDeterminism0NF',
+    deterministic: true,
+    generatedPackageMatchesGenerator: true,
+    generatedPackageDigest: digestCanonical0(actualGeneratedPackage),
+  });
+}
+
+function validateGeneratedPackageCoreBoundary0(value) {
+  const hits = [];
+
+  scanForbiddenCoreKeys0(value, ['GeneratedPCCPack'], hits);
+
+  if (hits.length > 0) {
+    return validationReject0(hits[0].path, 'GeneratedPCCPack core must not embed accept-run, public-status, release-audit, or final-certificate payloads', {
+      hit: hits[0],
+      hitCount: hits.length,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackCoreBoundary0NF',
+    coreOnly: true,
+    excludesAcceptRun: true,
+    forbiddenKeyCount: 0,
+  });
+}
+
+function scanForbiddenCoreKeys0(value, pathNow, hits) {
+  if (value === null || value === undefined) {
+    return;
+  }
+
+  if (Array.isArray(value)) {
+    for (let index = 0; index < value.length; index += 1) {
+      scanForbiddenCoreKeys0(value[index], [...pathNow, index], hits);
+    }
+
+    return;
+  }
+
+  if (!isPlainObject(value)) {
+    return;
+  }
+
+  for (const [key, child] of Object.entries(value)) {
+    const childPath = [...pathNow, key];
+
+    if (GENERATED_CORE_FORBIDDEN_KEYS0.includes(key)) {
+      hits.push({
+        path: childPath,
+        key,
+      });
+    }
+
+    scanForbiddenCoreKeys0(child, childPath, hits);
+  }
+}
+
+async function validateGeneratedConcreteFinalIntegration0(generatedPackage) {
+  const materializedPCCPack =
+    generatedPackage?.MaterializedPCCPackEnvelope ??
+    generatedPackage?.MaterializedPCCPack ??
+    null;
+
+  const concreteFinalIntegration =
+    materializedPCCPack?.FinalIntegrationEnvelope ??
+    materializedPCCPack?.ConcreteFinalIntegrationEnvelope ??
+    null;
+
+  if (!isPlainObject(concreteFinalIntegration)) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'FinalIntegrationEnvelope'], 'GeneratedPCCPack must include concrete FinalIntegration envelope', {
+      actual: typeof concreteFinalIntegration,
+    });
+  }
+
+  const record = await CheckConcreteMaterializedFinalIntegration0(concreteFinalIntegration);
+  const result = recordToValidation0(record, ['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'FinalIntegrationEnvelope']);
+
+  if (!result.ok) {
+    return validationReject0(result.path, 'CheckConcreteMaterializedFinalIntegration0 rejected generated package FinalIntegrationEnvelope', {
+      inner: result.witness?.detail?.inner ?? result.witness,
+    });
+  }
+
+  const nf = record.NF ?? record.nf;
+
+  for (const field of [
+    'materializedPath',
+    'concreteGlobalProofDAG',
+    'concreteKBundle',
+    'concreteRows',
+    'concreteLocalPackages',
+    'concreteGlobalFirewalls',
+    'kBundleKernelRuleCoverageComplete',
+    'kBundleSigmaProofRefsResolve',
+    'kBundleReflectionProofRefsResolve',
+    'gpackFieldCoverageComplete',
+    'rowFamGCoverageComplete',
+    'finalIntegrationUsesGPack',
+    'rowFamGUsesGPack',
+    'finalTheoremUsesFinalIntegration',
+    'rowFamFinalUsesFinalTheorem',
+    'finalMatchUsesGPack',
+    'satDecisionUsesGPack',
+  ]) {
+    if (nf[field] !== true) {
+      return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'FinalIntegrationEnvelope', 'NF', field], `Concrete FinalIntegration NF must certify ${field}`, {
+        actual: nf[field],
+      });
+    }
+  }
+
+  if (nf.syntheticRunAll !== false) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'FinalIntegrationEnvelope', 'NF', 'syntheticRunAll'], 'Concrete FinalIntegration NF must remain separate from synthetic RunAll0', {
+      expected: false,
+      actual: nf.syntheticRunAll,
+    });
+  }
+
+  if ((nf.forbiddenMarkerCount ?? 0) !== 0) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'FinalIntegrationEnvelope', 'NF', 'forbiddenMarkerCount'], 'Concrete FinalIntegration must not contain forbidden scaffold markers', {
+      actual: nf.forbiddenMarkerCount,
+    });
+  }
+
+  const generatedPCCPack = materializedPCCPack?.PCCPack ?? null;
+
+  const linkedToGeneratedGlobalProofDAG = sameDigestHex0(
+    nf.concreteGlobalProofDAGDigest,
+    digestCanonical0(materializedPCCPack?.GlobalProofDAGEnvelope ?? null),
+  );
+
+  const linkedToGPack = sameDigestHex0(
+    nf.gpackDigest,
+    digestCanonical0(generatedPCCPack?.GPack ?? null),
+  );
+
+  const linkedToRowFamG = sameDigestHex0(
+    nf.rowFamGDigest,
+    digestCanonical0(generatedPCCPack?.RowFamG ?? null),
+  );
+
+  const linkedToFinalIntegration = sameDigestHex0(
+    nf.finalIntegrationDigest,
+    digestCanonical0(generatedPCCPack?.FinalIntegration ?? null),
+  );
+
+  const linkedToFinalTheorem = sameDigestHex0(
+    nf.finalTheoremDigest,
+    digestCanonical0(generatedPCCPack?.FinalTheorem ?? null),
+  );
+
+  const linkedToRowFamFinal = sameDigestHex0(
+    nf.rowFamFinalDigest,
+    digestCanonical0(generatedPCCPack?.RowFamFinal ?? null),
+  );
+
+  const linkedToPCCPack = [
+    linkedToGeneratedGlobalProofDAG,
+    linkedToGPack,
+    linkedToRowFamG,
+    linkedToFinalIntegration,
+    linkedToFinalTheorem,
+    linkedToRowFamFinal,
+  ].every((value) => value === true);
+
+  for (const [field, value] of Object.entries({
+    linkedToGeneratedGlobalProofDAG,
+    linkedToGPack,
+    linkedToRowFamG,
+    linkedToFinalIntegration,
+    linkedToFinalTheorem,
+    linkedToRowFamFinal,
+    linkedToPCCPack,
+  })) {
+    if (value !== true) {
+      return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'FinalIntegrationEnvelope', field], 'Concrete FinalIntegration linkage must match generated package component bytes', {
+        field,
+      });
+    }
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackConcreteFinalIntegration0NF',
+    concreteFinalIntegration0: true,
+    concreteFinalIntegration0Accepted: true,
+    concreteFinalIntegration0Checker: record.checker,
+    concreteFinalIntegration0Digest: record.Digest ?? record.digest,
+    concreteFinalIntegration0ConcreteGlobalProofDAGDigest: nf.concreteGlobalProofDAGDigest,
+    concreteFinalIntegration0MaterializedFinalIntegrationDigest: nf.materializedFinalIntegrationDigest,
+    concreteFinalIntegration0GPackDigest: nf.gpackDigest,
+    concreteFinalIntegration0RowFamGDigest: nf.rowFamGDigest,
+    concreteFinalIntegration0FinalIntegrationDigest: nf.finalIntegrationDigest,
+    concreteFinalIntegration0FinalTheoremDigest: nf.finalTheoremDigest,
+    concreteFinalIntegration0RowFamFinalDigest: nf.rowFamFinalDigest,
+    concreteFinalIntegration0ConcreteLinksDigest: nf.concreteLinksDigest,
+
+    concreteFinalIntegration0ConcreteGlobalProofDAG: nf.concreteGlobalProofDAG === true,
+    concreteFinalIntegration0ConcreteKBundle: nf.concreteKBundle === true,
+    concreteFinalIntegration0ConcreteRows: nf.concreteRows === true,
+    concreteFinalIntegration0ConcreteLocalPackages: nf.concreteLocalPackages === true,
+    concreteFinalIntegration0ConcreteGlobalFirewalls: nf.concreteGlobalFirewalls === true,
+
+    concreteFinalIntegration0KBundleKernelRuleCoverageComplete: nf.kBundleKernelRuleCoverageComplete === true,
+    concreteFinalIntegration0KBundleSigmaProofRefsResolve: nf.kBundleSigmaProofRefsResolve === true,
+    concreteFinalIntegration0KBundleReflectionProofRefsResolve: nf.kBundleReflectionProofRefsResolve === true,
+
+    concreteFinalIntegration0GPackFieldCoverageComplete: nf.gpackFieldCoverageComplete === true,
+    concreteFinalIntegration0RowFamGCoverageComplete: nf.rowFamGCoverageComplete === true,
+    concreteFinalIntegration0FinalIntegrationUsesGPack: nf.finalIntegrationUsesGPack === true,
+    concreteFinalIntegration0RowFamGUsesGPack: nf.rowFamGUsesGPack === true,
+    concreteFinalIntegration0FinalTheoremUsesFinalIntegration: nf.finalTheoremUsesFinalIntegration === true,
+    concreteFinalIntegration0RowFamFinalUsesFinalTheorem: nf.rowFamFinalUsesFinalTheorem === true,
+    concreteFinalIntegration0FinalMatchUsesGPack: nf.finalMatchUsesGPack === true,
+    concreteFinalIntegration0SATDecisionUsesGPack: nf.satDecisionUsesGPack === true,
+
+    concreteFinalIntegration0SyntheticMarkerCount: nf.syntheticMarkerCount,
+    concreteFinalIntegration0ForbiddenMarkerCount: nf.forbiddenMarkerCount,
+    concreteFinalIntegration0NoForbiddenMarkers: (nf.forbiddenMarkerCount ?? 0) === 0,
+
+    concreteFinalIntegration0LinkedToGeneratedGlobalProofDAG: linkedToGeneratedGlobalProofDAG,
+    concreteFinalIntegration0LinkedToGPack: linkedToGPack,
+    concreteFinalIntegration0LinkedToRowFamG: linkedToRowFamG,
+    concreteFinalIntegration0LinkedToFinalIntegration: linkedToFinalIntegration,
+    concreteFinalIntegration0LinkedToFinalTheorem: linkedToFinalTheorem,
+    concreteFinalIntegration0LinkedToRowFamFinal: linkedToRowFamFinal,
+    concreteFinalIntegration0LinkedToPCCPack: linkedToPCCPack,
+  });
+}
+
+async function validateGeneratedConcreteGlobalProofDAG0(generatedPackage) {
+  const materializedPCCPack =
+    generatedPackage?.MaterializedPCCPackEnvelope ??
+    generatedPackage?.MaterializedPCCPack ??
+    null;
+
+  const concreteGlobalProofDAG =
+    materializedPCCPack?.GlobalProofDAGEnvelope ??
+    materializedPCCPack?.ConcreteGlobalProofDAGEnvelope ??
+    null;
+
+  if (!isPlainObject(concreteGlobalProofDAG)) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'GlobalProofDAGEnvelope'], 'GeneratedPCCPack must include concrete GlobalProofDAG envelope', {
+      actual: typeof concreteGlobalProofDAG,
+    });
+  }
+
+  const record = await CheckConcreteMaterializedGlobalProofDAG0(concreteGlobalProofDAG);
+  const result = recordToValidation0(record, ['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'GlobalProofDAGEnvelope']);
+
+  if (!result.ok) {
+    return validationReject0(result.path, 'CheckConcreteMaterializedGlobalProofDAG0 rejected generated package GlobalProofDAGEnvelope', {
+      inner: result.witness?.detail?.inner ?? result.witness,
+    });
+  }
+
+  const nf = record.NF ?? record.nf;
+
+  for (const field of [
+    'materializedPath',
+    'concreteRows',
+    'concreteLocalPackages',
+    'concreteGlobalFirewalls',
+    'concreteKBundle',
+    'kBundleKernelRuleCoverageComplete',
+    'kBundleSigmaProofRefsResolve',
+    'kBundleReflectionProofRefsResolve',
+  ]) {
+    if (nf[field] !== true) {
+      return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'GlobalProofDAGEnvelope', 'NF', field], `Concrete GlobalProofDAG NF must certify ${field}`, {
+        actual: nf[field],
+      });
+    }
+  }
+
+  if (nf.syntheticRunAll !== false) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'GlobalProofDAGEnvelope', 'NF', 'syntheticRunAll'], 'Concrete GlobalProofDAG NF must remain separate from synthetic RunAll0', {
+      expected: false,
+      actual: nf.syntheticRunAll,
+    });
+  }
+
+  if (!(typeof nf.nodeCount === 'number' && nf.nodeCount >= 90)) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'GlobalProofDAGEnvelope', 'NF', 'nodeCount'], 'Concrete GlobalProofDAG NF must certify a complete global proof node inventory', {
+      minimum: 90,
+      actual: nf.nodeCount,
+    });
+  }
+
+  const finalTheorems = Array.isArray(nf.finalTheorems) ? nf.finalTheorems : [];
+  const requiredFinalTheorems = [
+    'Final.PackageSoundness',
+    'Final.GeneratedPackageSufficiency',
+    'Final.AcceptedPackageImpliesSATinP',
+    'Final.AcceptedPackageImpliesPEqualsNP',
+  ];
+
+  for (const theorem of requiredFinalTheorems) {
+    if (!finalTheorems.includes(theorem)) {
+      return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'GlobalProofDAGEnvelope', 'NF', 'finalTheorems'], 'Concrete GlobalProofDAG NF must certify all final theorem nodes', {
+        missing: theorem,
+        finalTheorems,
+      });
+    }
+  }
+
+  if ((nf.forbiddenMarkerCount ?? 0) !== 0) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'GlobalProofDAGEnvelope', 'NF', 'forbiddenMarkerCount'], 'Concrete GlobalProofDAG must not contain forbidden scaffold markers', {
+      actual: nf.forbiddenMarkerCount,
+    });
+  }
+
+  const generatedBoot0 =
+    materializedPCCPack?.MaterializedBoot0 ??
+    materializedPCCPack?.PCCPack?.Boot0 ??
+    null;
+
+  const generatedKBundleEnvelope = materializedPCCPack?.KBundleEnvelope ?? null;
+  const generatedRowsEnvelope = materializedPCCPack?.RowsEnvelope ?? null;
+  const generatedLocalPackagesEnvelope = materializedPCCPack?.LocalPackagesEnvelope ?? null;
+  const generatedGlobalFirewallsEnvelope = materializedPCCPack?.GlobalFirewallsEnvelope ?? null;
+
+  const generatedKImpl =
+    generatedKBundleEnvelope?.KImpl ??
+    generatedKBundleEnvelope?.kimpl ??
+    generatedKBundleEnvelope?.KBundle?.KImpl ??
+    generatedKBundleEnvelope?.MaterializedKBundleEnvelope?.KImpl ??
+    generatedKBundleEnvelope?.MaterializedKBundleEnvelope?.KBundle?.KImpl ??
+    null;
+
+  const generatedRowPack =
+    generatedRowsEnvelope?.RowPack ??
+    generatedRowsEnvelope?.rowPack ??
+    null;
+
+  const generatedLocalPackages =
+    generatedLocalPackagesEnvelope?.LocalPackages ??
+    generatedLocalPackagesEnvelope?.localPackages ??
+    generatedLocalPackagesEnvelope?.LocalPackagePack ??
+    generatedLocalPackagesEnvelope?.localPackagePack ??
+    null;
+
+  const generatedGlobalFirewalls =
+    generatedGlobalFirewallsEnvelope?.GlobalFirewalls ??
+    generatedGlobalFirewallsEnvelope?.globalFirewalls ??
+    generatedGlobalFirewallsEnvelope?.GlobalFirewallPack ??
+    generatedGlobalFirewallsEnvelope?.globalFirewallPack ??
+    null;
+
+  const globalProofDAG =
+    concreteGlobalProofDAG?.GlobalProofDAG ??
+    concreteGlobalProofDAG?.MaterializedGlobalProofDAGEnvelope?.GlobalProofDAG ??
+    null;
+
+  const linkedToGeneratedBoot0 = sameDigestHex0(
+    concreteGlobalProofDAG?.Linkage?.bootDigest,
+    digestCanonical0(generatedBoot0),
+  );
+
+  const linkedToKImpl = sameDigestHex0(
+    nf.kImplDigest,
+    digestCanonical0(generatedKImpl),
+  );
+
+  const linkedToConcreteRows = sameDigestHex0(
+    nf.rowPackDigest,
+    digestCanonical0(generatedRowPack),
+  );
+
+  const linkedToLocalPackages = sameDigestHex0(
+    nf.localPackagesDigest,
+    digestCanonical0(generatedLocalPackages),
+  );
+
+  const linkedToGlobalFirewalls = sameDigestHex0(
+    nf.globalFirewallsDigest,
+    digestCanonical0(generatedGlobalFirewalls),
+  );
+
+  const linkedToPCCPack = sameDigestHex0(
+    digestCanonical0(materializedPCCPack?.PCCPack?.GlobalProofDAG ?? null),
+    digestCanonical0(globalProofDAG),
+  );
+
+  const ifaceMatchesRows = sameDigestHex0(
+    nf.ifaceHash,
+    generatedRowPack?.IfaceHash,
+  );
+
+  const schedMatchesKImpl = sameDigestHex0(
+    nf.schedHash,
+    generatedKImpl?.SchedHash,
+  );
+
+  for (const [field, value] of Object.entries({
+    linkedToGeneratedBoot0,
+    linkedToKImpl,
+    linkedToConcreteRows,
+    linkedToLocalPackages,
+    linkedToGlobalFirewalls,
+    linkedToPCCPack,
+    ifaceMatchesRows,
+    schedMatchesKImpl,
+  })) {
+    if (value !== true) {
+      return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'GlobalProofDAGEnvelope', field], 'Concrete GlobalProofDAG linkage must match generated package component bytes', {
+        field,
+      });
+    }
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackConcreteGlobalProofDAG0NF',
+    concreteGlobalProofDAG0: true,
+    concreteGlobalProofDAG0Accepted: true,
+    concreteGlobalProofDAG0Checker: record.checker,
+    concreteGlobalProofDAG0Digest: record.Digest ?? record.digest,
+    concreteGlobalProofDAG0GlobalProofDAGDigest: nf.globalProofDAGDigest,
+    concreteGlobalProofDAG0GlobalProofDAGObjectDigest: nf.globalProofDAGObjectDigest,
+    concreteGlobalProofDAG0MaterializedGlobalProofDAGDigest: nf.materializedGlobalProofDAGDigest,
+    concreteGlobalProofDAG0KImplDigest: nf.kImplDigest,
+    concreteGlobalProofDAG0RowPackDigest: nf.rowPackDigest,
+    concreteGlobalProofDAG0LocalPackagesDigest: nf.localPackagesDigest,
+    concreteGlobalProofDAG0GlobalFirewallsDigest: nf.globalFirewallsDigest,
+    concreteGlobalProofDAG0KBundleProofInventoryDigest: nf.kBundleProofInventoryDigest,
+    concreteGlobalProofDAG0KBundleKernelRuleCoverageComplete: nf.kBundleKernelRuleCoverageComplete === true,
+    concreteGlobalProofDAG0KBundleSigmaProofRefsResolve: nf.kBundleSigmaProofRefsResolve === true,
+    concreteGlobalProofDAG0KBundleReflectionProofRefsResolve: nf.kBundleReflectionProofRefsResolve === true,
+    concreteGlobalProofDAG0NodeCount: nf.nodeCount,
+    concreteGlobalProofDAG0NodeCountMinimum: nf.nodeCount >= 90,
+    concreteGlobalProofDAG0FinalTheoremCount: finalTheorems.length,
+    concreteGlobalProofDAG0FinalPackageSoundness: finalTheorems.includes('Final.PackageSoundness'),
+    concreteGlobalProofDAG0FinalGeneratedPackageSufficiency: finalTheorems.includes('Final.GeneratedPackageSufficiency'),
+    concreteGlobalProofDAG0FinalAcceptedPackageImpliesSATinP: finalTheorems.includes('Final.AcceptedPackageImpliesSATinP'),
+    concreteGlobalProofDAG0FinalAcceptedPackageImpliesPEqualsNP: finalTheorems.includes('Final.AcceptedPackageImpliesPEqualsNP'),
+    concreteGlobalProofDAG0IfaceHash: nf.ifaceHash,
+    concreteGlobalProofDAG0SchedHash: nf.schedHash,
+    concreteGlobalProofDAG0IfaceMatchesRows: ifaceMatchesRows,
+    concreteGlobalProofDAG0SchedMatchesKImpl: schedMatchesKImpl,
+    concreteGlobalProofDAG0SyntheticMarkerCount: nf.syntheticMarkerCount,
+    concreteGlobalProofDAG0ForbiddenMarkerCount: nf.forbiddenMarkerCount,
+    concreteGlobalProofDAG0NoForbiddenMarkers: (nf.forbiddenMarkerCount ?? 0) === 0,
+    concreteGlobalProofDAG0LinkedToGeneratedBoot0: linkedToGeneratedBoot0,
+    concreteGlobalProofDAG0LinkedToKImpl: linkedToKImpl,
+    concreteGlobalProofDAG0LinkedToConcreteRows: linkedToConcreteRows,
+    concreteGlobalProofDAG0LinkedToLocalPackages: linkedToLocalPackages,
+    concreteGlobalProofDAG0LinkedToGlobalFirewalls: linkedToGlobalFirewalls,
+    concreteGlobalProofDAG0LinkedToPCCPack: linkedToPCCPack,
+  });
+}
+
+async function validateGeneratedConcreteRows0(generatedPackage) {
+  const materializedPCCPack =
+    generatedPackage?.MaterializedPCCPackEnvelope ??
+    generatedPackage?.MaterializedPCCPack ??
+    null;
+
+  const concreteRows =
+    materializedPCCPack?.RowsEnvelope ??
+    materializedPCCPack?.ConcreteRowsEnvelope ??
+    null;
+
+  if (!isPlainObject(concreteRows)) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope'], 'GeneratedPCCPack must include concrete Rows envelope', {
+      actual: typeof concreteRows,
+    });
+  }
+
+  const record = await CheckConcreteMaterializedRows0(concreteRows);
+  const result = recordToValidation0(record, ['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope']);
+
+  if (!result.ok) {
+    return validationReject0(result.path, 'CheckConcreteMaterializedRows0 rejected generated package RowsEnvelope', {
+      inner: result.witness?.detail?.inner ?? result.witness,
+    });
+  }
+
+  const nf = record.NF ?? record.nf;
+
+  for (const field of [
+    'materializedPath',
+    'concreteIfaceHash',
+  ]) {
+    if (nf[field] !== true) {
+      return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope', 'NF', field], `Concrete Rows NF must certify ${field}`, {
+        actual: nf[field],
+      });
+    }
+  }
+
+  if (nf.syntheticRunAll !== false) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope', 'NF', 'syntheticRunAll'], 'Concrete Rows NF must remain separate from synthetic RunAll0', {
+      expected: false,
+      actual: nf.syntheticRunAll,
+    });
+  }
+
+  if (nf.rowCount !== 39) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope', 'NF', 'rowCount'], 'Concrete Rows NF must certify complete row-family coverage', {
+      expected: 39,
+      actual: nf.rowCount,
+    });
+  }
+
+  if (nf.batchCount !== 13) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope', 'NF', 'batchCount'], 'Concrete Rows NF must certify B0 through B12 batch coverage', {
+      expected: 13,
+      actual: nf.batchCount,
+    });
+  }
+
+  if (nf.familyCount !== 39) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope', 'NF', 'familyCount'], 'Concrete Rows NF must certify required row-family count', {
+      expected: 39,
+      actual: nf.familyCount,
+    });
+  }
+
+  if (nf.syntheticIfaceHashCount !== 0) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope', 'NF', 'syntheticIfaceHashCount'], 'Concrete Rows must not use synthetic IfaceHash markers', {
+      actual: nf.syntheticIfaceHashCount,
+    });
+  }
+
+  if (nf.scaffoldMarkerCount !== 0) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope', 'NF', 'scaffoldMarkerCount'], 'Concrete Rows must not contain scaffold markers', {
+      actual: nf.scaffoldMarkerCount,
+    });
+  }
+
+  const generatedBoot0 =
+    materializedPCCPack?.MaterializedBoot0 ??
+    materializedPCCPack?.PCCPack?.Boot0 ??
+    null;
+
+  const linkedToGeneratedBoot0 = sameDigestHex0(
+    nf.bootDigest,
+    digestCanonical0(generatedBoot0),
+  );
+
+  if (linkedToGeneratedBoot0 !== true) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope', 'Boot0'], 'Concrete Rows Boot0 digest must match generated package Boot0', {
+      expected: digestCanonical0(generatedBoot0),
+      actual: nf.bootDigest,
+    });
+  }
+
+  const linkedToPCCPack = sameDigestHex0(
+    digestCanonical0(materializedPCCPack?.PCCPack?.RowPack ?? null),
+    digestCanonical0(concreteRows?.RowPack ?? null),
+  );
+
+  if (linkedToPCCPack !== true) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'RowsEnvelope', 'RowPack'], 'Concrete Rows RowPack must match generated PCCPack.RowPack', {
+      expected: digestCanonical0(materializedPCCPack?.PCCPack?.RowPack ?? null),
+      actual: digestCanonical0(concreteRows?.RowPack ?? null),
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackConcreteRows0NF',
+    concreteRows0: true,
+    concreteRows0Accepted: true,
+    concreteRows0Checker: record.checker,
+    concreteRows0Digest: record.Digest ?? record.digest,
+    concreteRows0RowPackDigest: nf.rowPackDigest,
+    concreteRows0RowPackObjectDigest: nf.rowPackObjectDigest,
+    concreteRows0BootDigest: nf.bootDigest,
+    concreteRows0IfaceHash: nf.ifaceHash,
+    concreteRows0SchedHash: nf.schedHash,
+    concreteRows0RowCount: nf.rowCount,
+    concreteRows0BatchCount: nf.batchCount,
+    concreteRows0FamilyCount: nf.familyCount,
+    concreteRows0ConcreteIfaceHash: nf.concreteIfaceHash === true,
+    concreteRows0SyntheticIfaceHashCount: nf.syntheticIfaceHashCount,
+    concreteRows0ScaffoldMarkerCount: nf.scaffoldMarkerCount,
+    concreteRows0LinkedToGeneratedBoot0: linkedToGeneratedBoot0,
+    concreteRows0LinkedToPCCPack: linkedToPCCPack,
+  });
+}
+
+async function validateGeneratedConcreteHard0(generatedPackage) {
+  const materializedPCCPack =
+    generatedPackage?.MaterializedPCCPackEnvelope ??
+    generatedPackage?.MaterializedPCCPack ??
+    null;
+
+  const concreteHard =
+    materializedPCCPack?.HardEnvelope ??
+    materializedPCCPack?.ConcreteHardEnvelope ??
+    null;
+
+  if (!isPlainObject(concreteHard)) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'HardEnvelope'], 'GeneratedPCCPack must include concrete HardCheck envelope', {
+      actual: typeof concreteHard,
+    });
+  }
+
+  const record = await CheckConcreteMaterializedHard0(concreteHard);
+  const result = recordToValidation0(record, ['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'HardEnvelope']);
+
+  if (!result.ok) {
+    return validationReject0(result.path, 'CheckConcreteMaterializedHard0 rejected generated package HardEnvelope', {
+      inner: result.witness?.detail?.inner ?? result.witness,
+    });
+  }
+
+  const nf = record.NF ?? record.nf;
+
+  for (const field of [
+    'checkerCoverageComplete',
+    'rowKeyCoverageComplete',
+    'routePriorityComplete',
+    'proofRefPolicyComplete',
+    'hashDisciplineComplete',
+    'noMinCoverageComplete',
+    'importPolicyComplete',
+    'reflectionPolicyComplete',
+    'boundsPolicyComplete',
+    'diagnosticsPolicyComplete',
+  ]) {
+    if (nf[field] !== true) {
+      return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'HardEnvelope', 'NF', field], `Concrete HardCheck NF must certify ${field}`, {
+        actual: nf[field],
+      });
+    }
+  }
+
+  if (nf.checkerCount !== 13) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'HardEnvelope', 'NF', 'checkerCount'], 'Concrete HardCheck NF must certify complete hardened checker descriptor inventory', {
+      expected: 13,
+      actual: nf.checkerCount,
+    });
+  }
+
+  if (nf.rowKeyFieldCount !== 17) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'HardEnvelope', 'NF', 'rowKeyFieldCount'], 'Concrete HardCheck NF must certify complete row-key field inventory', {
+      expected: 17,
+      actual: nf.rowKeyFieldCount,
+    });
+  }
+
+  if (nf.forbiddenSymbolCount !== 11) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'HardEnvelope', 'NF', 'forbiddenSymbolCount'], 'Concrete HardCheck NF must certify no-hidden-minimization forbidden symbol inventory', {
+      expected: 11,
+      actual: nf.forbiddenSymbolCount,
+    });
+  }
+
+  if (nf.forbiddenImportEdgeCount !== 6) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'HardEnvelope', 'NF', 'forbiddenImportEdgeCount'], 'Concrete HardCheck NF must certify forbidden import edge inventory', {
+      expected: 6,
+      actual: nf.forbiddenImportEdgeCount,
+    });
+  }
+
+  const pccPackHardCheck = materializedPCCPack?.PCCPack?.HardCheck ?? null;
+  const concreteHardCheck = concreteHard?.HardCheck ?? concreteHard?.MaterializedHardEnvelope?.HardCheck ?? null;
+  const linkedToPCCPack = sameDigestHex0(
+    digestCanonical0(pccPackHardCheck),
+    digestCanonical0(concreteHardCheck),
+  );
+
+  if (linkedToPCCPack !== true) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'HardEnvelope', 'HardCheck'], 'Concrete HardCheck must match generated package PCCPack.HardCheck', {
+      expected: digestCanonical0(pccPackHardCheck),
+      actual: digestCanonical0(concreteHardCheck),
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackConcreteHard0NF',
+    concreteHard0: true,
+    concreteHard0Accepted: true,
+    concreteHard0Checker: record.checker,
+    concreteHard0Digest: record.Digest ?? record.digest,
+    concreteHard0MaterializedHardDigest: nf.materializedHardDigest,
+    concreteHard0HardCheckDigest: nf.hardCheckDigest,
+    concreteHard0CoverageDigest: nf.coverageDigest,
+    concreteHard0CheckerCount: nf.checkerCount,
+    concreteHard0CheckerCoverageComplete: nf.checkerCoverageComplete === true,
+    concreteHard0RowKeyFieldCount: nf.rowKeyFieldCount,
+    concreteHard0RowKeyCoverageComplete: nf.rowKeyCoverageComplete === true,
+    concreteHard0RoutePriorityComplete: nf.routePriorityComplete === true,
+    concreteHard0ProofRefPolicyComplete: nf.proofRefPolicyComplete === true,
+    concreteHard0HashDisciplineComplete: nf.hashDisciplineComplete === true,
+    concreteHard0NoMinCoverageComplete: nf.noMinCoverageComplete === true,
+    concreteHard0ForbiddenSymbolCount: nf.forbiddenSymbolCount,
+    concreteHard0ImportPolicyComplete: nf.importPolicyComplete === true,
+    concreteHard0ForbiddenImportEdgeCount: nf.forbiddenImportEdgeCount,
+    concreteHard0ReflectionPolicyComplete: nf.reflectionPolicyComplete === true,
+    concreteHard0BoundsPolicyComplete: nf.boundsPolicyComplete === true,
+    concreteHard0DiagnosticsPolicyComplete: nf.diagnosticsPolicyComplete === true,
+    concreteHard0LinkedToPCCPack: linkedToPCCPack,
+  });
+}
+
+async function validateGeneratedConcreteKBundle0(generatedPackage) {
+  const materializedPCCPack =
+    generatedPackage?.MaterializedPCCPackEnvelope ??
+    generatedPackage?.MaterializedPCCPack ??
+    null;
+
+  const concreteKBundle =
+    materializedPCCPack?.KBundleEnvelope ??
+    materializedPCCPack?.ConcreteKBundleEnvelope ??
+    null;
+
+  if (!isPlainObject(concreteKBundle)) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'KBundleEnvelope'], 'GeneratedPCCPack must include concrete KBundle envelope', {
+      actual: typeof concreteKBundle,
+    });
+  }
+
+  const record = await CheckConcreteMaterializedKBundle0(concreteKBundle);
+  const result = recordToValidation0(record, ['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'KBundleEnvelope']);
+
+  if (!result.ok) {
+    return validationReject0(result.path, 'CheckConcreteMaterializedKBundle0 rejected generated package KBundleEnvelope', {
+      inner: result.witness?.detail?.inner ?? result.witness,
+    });
+  }
+
+  const nf = record.NF ?? record.nf;
+  const generatedBoot0 =
+    materializedPCCPack?.MaterializedBoot0 ??
+    materializedPCCPack?.PCCPack?.Boot0 ??
+    null;
+
+  const linkedToGeneratedBoot0 = sameDigestHex0(
+    nf.bootDigest,
+    digestCanonical0(generatedBoot0),
+  );
+
+  if (linkedToGeneratedBoot0 !== true) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'KBundleEnvelope', 'Boot0'], 'Concrete KBundle Boot0 digest must match generated package Boot0', {
+      expected: digestCanonical0(generatedBoot0),
+      actual: nf.bootDigest,
+    });
+  }
+
+  for (const field of [
+    'kernelRuleCoverageComplete',
+    'sigmaCoverageComplete',
+    'sigmaProofRefsResolve',
+    'reflectionCoverageComplete',
+    'reflectionProofRefsResolve',
+    'noOpaqueProofRefs',
+    'noExecutableMinSymbols',
+  ]) {
+    if (nf[field] !== true) {
+      return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'KBundleEnvelope', 'NF', field], `Concrete KBundle NF must certify ${field}`, {
+        actual: nf[field],
+      });
+    }
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackConcreteKBundle0NF',
+    concreteKBundle0: true,
+    concreteKBundle0Accepted: true,
+    concreteKBundle0Checker: record.checker,
+    concreteKBundle0Digest: record.Digest ?? record.digest,
+    concreteKBundle0MaterializedKBundleDigest: nf.materializedKBundleDigest,
+    concreteKBundle0BootDigest: nf.bootDigest,
+    concreteKBundle0KImplDigest: nf.kimplDigest,
+    concreteKBundle0K0Digest: nf.k0Digest,
+    concreteKBundle0SigmaDigest: nf.sigmaDigest,
+    concreteKBundle0ReflectionDigest: nf.reflectionDigest,
+    concreteKBundle0ProofInventoryDigest: nf.proofInventoryDigest,
+    concreteKBundle0KernelRuleCount: nf.kernelRuleCount,
+    concreteKBundle0ConformanceNodeCount: nf.conformanceNodeCount,
+    concreteKBundle0KernelRuleCoverageComplete: nf.kernelRuleCoverageComplete === true,
+    concreteKBundle0SigmaTheoremCount: nf.sigmaTheoremCount,
+    concreteKBundle0SigmaCoverageComplete: nf.sigmaCoverageComplete === true,
+    concreteKBundle0SigmaProofRefsResolve: nf.sigmaProofRefsResolve === true,
+    concreteKBundle0ReflectionCount: nf.reflectionCount,
+    concreteKBundle0ReflectionCoverageComplete: nf.reflectionCoverageComplete === true,
+    concreteKBundle0ReflectionProofRefsResolve: nf.reflectionProofRefsResolve === true,
+    concreteKBundle0NoOpaqueProofRefs: nf.noOpaqueProofRefs === true,
+    concreteKBundle0NoExecutableMinSymbols: nf.noExecutableMinSymbols === true,
+    concreteKBundle0LinkedToGeneratedBoot0: linkedToGeneratedBoot0,
+  });
+}
+
+async function validateGeneratedBootAuditPiBoot0(generatedPackage) {
+  const materializedPCCPack = generatedPackage?.MaterializedPCCPackEnvelope ?? generatedPackage?.MaterializedPCCPack ?? null;
+  const boot0 = materializedPCCPack?.MaterializedBoot0 ?? materializedPCCPack?.PCCPack?.Boot0 ?? null;
+  const bootAudit0 = boot0?.BootAudit0 ?? null;
+  const piBoot0 = boot0?.PiBoot ?? null;
+
+  if (!isPlainObject(bootAudit0)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'BootAudit0'], 'GeneratedPCCPack must include concrete BootAudit0', {
+      actual: typeof bootAudit0,
+    });
+  }
+
+  if (bootAudit0.tag !== 'accept') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'BootAudit0', 'tag'], 'BootAudit0 must be an accepted verifier audit record', {
+      actual: bootAudit0.tag,
+    });
+  }
+
+  if (bootAudit0.checker !== 'CheckVerifierFrag0') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'BootAudit0', 'checker'], 'BootAudit0 must be produced by CheckVerifierFrag0', {
+      actual: bootAudit0.checker,
+    });
+  }
+
+  const bootAuditNF = bootAudit0.NF ?? bootAudit0.nf;
+
+  if (!isPlainObject(bootAuditNF)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'BootAudit0', 'NF'], 'BootAudit0 must expose NF', {
+      actual: typeof bootAuditNF,
+    });
+  }
+
+  if (bootAuditNF.kind !== 'VerifierFrag0AuditNF') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'BootAudit0', 'NF', 'kind'], 'BootAudit0 NF kind mismatch', {
+      actual: bootAuditNF.kind,
+    });
+  }
+
+  const bootAuditDigest = digestFromRecord0(bootAudit0);
+  const bootAudit0Digest = bootAuditDigest;
+  const bootAuditNFDigest = digestCanonical0(bootAuditNF);
+
+  if (!sameDigestHex0(bootAuditDigest, bootAuditNFDigest)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'BootAudit0', 'Digest'], 'BootAudit0 digest must match its NF', {
+      expected: bootAuditNFDigest,
+      actual: bootAuditDigest,
+    });
+  }
+
+  if (bootAuditNF.suiteId !== 'boot0.materialized.audit') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'BootAudit0', 'NF', 'suiteId'], 'BootAudit0 suite ID mismatch', {
+      expected: 'boot0.materialized.audit',
+      actual: bootAuditNF.suiteId,
+    });
+  }
+
+  const cases = Array.isArray(bootAuditNF.cases) ? bootAuditNF.cases : [];
+
+  const coversB0Accept = cases.some((entry) => (
+    entry.id === 'boot0.materialized.b0.accepts' &&
+    entry.target === 'CheckBootBatch0' &&
+    entry.status === 'pass'
+  ));
+
+  const coversB0MissingCoverageReject = cases.some((entry) => (
+    entry.id === 'boot0.materialized.b0.rejects.missing.coverage' &&
+    entry.target === 'CheckBootBatch0' &&
+    entry.status === 'pass'
+  ));
+
+  const coversB0HashKeyTamperReject = cases.some((entry) => (
+    entry.id === 'boot0.materialized.b0.rejects.hashkey.tamper' &&
+    entry.target === 'CheckBootBatch0' &&
+    entry.status === 'pass'
+  ));
+
+  if (coversB0Accept !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'BootAudit0', 'NF', 'cases'], 'BootAudit0 must include the positive B0 acceptance audit', {
+      actual: cases.map((entry) => entry.id),
+    });
+  }
+
+  if (coversB0MissingCoverageReject !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'BootAudit0', 'NF', 'cases'], 'BootAudit0 must include the missing-coverage negative B0 audit', {
+      actual: cases.map((entry) => entry.id),
+    });
+  }
+
+  if (coversB0HashKeyTamperReject !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'BootAudit0', 'NF', 'cases'], 'BootAudit0 must include the hash-key-tamper negative B0 audit', {
+      actual: cases.map((entry) => entry.id),
+    });
+  }
+
+  const auditWrapper = await CheckBootAudit0(bootAudit0);
+  const auditWrapperResult = recordToValidation0(auditWrapper, ['GeneratedPCCPack', 'Boot0', 'BootAudit0']);
+
+  if (!auditWrapperResult.ok) {
+    return validationReject0(auditWrapperResult.path, 'CheckBootAudit0 rejected generated package BootAudit0', {
+      inner: auditWrapperResult.witness?.detail?.inner ?? auditWrapperResult.witness,
+    });
+  }
+
+  if (!isPlainObject(piBoot0)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot'], 'GeneratedPCCPack must include concrete PiBoot', {
+      actual: typeof piBoot0,
+    });
+  }
+
+  if (piBoot0.kind !== 'PiBoot0') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'kind'], 'PiBoot kind mismatch', {
+      actual: piBoot0.kind,
+    });
+  }
+
+  if (piBoot0.materialized !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'materialized'], 'PiBoot must be materialized', {
+      actual: piBoot0.materialized,
+    });
+  }
+
+  if (piBoot0.externalJson !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'externalJson'], 'PiBoot must be external JSON evidence', {
+      actual: piBoot0.externalJson,
+    });
+  }
+
+  const refs = Array.isArray(piBoot0.refs) ? piBoot0.refs : null;
+
+  if (!Array.isArray(refs)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs'], 'PiBoot refs must be an array', {
+      actual: typeof piBoot0.refs,
+    });
+  }
+
+  const expectedRefs = {
+    ByteLang0: digestCanonical0(boot0.ByteLang0),
+    Codec0: digestCanonical0(boot0.Codec0),
+    Digest0: digestCanonical0(boot0.Digest0),
+    IfaceDict0: digestCanonical0(boot0.IfaceDict0),
+    Sched0: digestCanonical0(boot0.Sched0),
+    KernelSeed0: digestCanonical0(boot0.KernelSeed0),
+    B0: digestCanonical0(boot0.B0),
+    BootAudit0: bootAuditDigest,
+  };
+
+  const present = {};
+  let refsMatchBootObjects = true;
+
+  for (const [label, expectedDigest] of Object.entries(expectedRefs)) {
+    const ref = refs.find((entry) => (
+      entry?.label === label ||
+      entry?.target === label
+    ));
+
+    present[label] = isPlainObject(ref);
+
+    if (!isPlainObject(ref)) {
+      return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs'], 'PiBoot is missing a required bootstrap reference', {
+        label,
+        refs,
+      });
+    }
+
+    if (!sameDigestHex0(ref.digest, expectedDigest)) {
+      refsMatchBootObjects = false;
+
+      return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs', label], 'PiBoot reference digest must match concrete boot object', {
+        expected: expectedDigest,
+        actual: ref.digest,
+      });
+    }
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackBootAuditPiBoot0NF',
+
+    bootAudit0: true,
+    bootAudit0Accepted: true,
+    bootAudit0Checker: bootAudit0.checker,
+    bootAudit0Digest: bootAuditDigest,
+    bootAudit0DigestMatchesNF: true,
+    bootAudit0NFKind: bootAuditNF.kind,
+    bootAudit0SuiteId: bootAuditNF.suiteId,
+    bootAudit0CaseCount: bootAuditNF.caseCount,
+    bootAudit0PositiveCount: bootAuditNF.positiveCount,
+    bootAudit0NegativeCount: bootAuditNF.negativeCount,
+    bootAudit0CoversB0Accept: coversB0Accept,
+    bootAudit0CoversB0MissingCoverageReject: coversB0MissingCoverageReject,
+    bootAudit0CoversB0HashKeyTamperReject: coversB0HashKeyTamperReject,
+
+    piBoot0: true,
+    piBoot0Accepted: true,
+    piBoot0Kind: piBoot0.kind,
+    piBoot0Digest: digestCanonical0(piBoot0),
+    piBoot0Materialized: piBoot0.materialized === true,
+    piBoot0ExternalJson: piBoot0.externalJson === true,
+    piBoot0RefCount: refs.length,
+    piBoot0AllBootRefsPresent: Object.values(present).every((value) => value === true),
+    piBoot0RefsMatchBootObjects: refsMatchBootObjects,
+    piBoot0RefsIncludeByteLang0: present.ByteLang0 === true,
+    piBoot0RefsIncludeCodec0: present.Codec0 === true,
+    piBoot0RefsIncludeDigest0: present.Digest0 === true,
+    piBoot0RefsIncludeIfaceDict0: present.IfaceDict0 === true,
+    piBoot0RefsIncludeSched0: present.Sched0 === true,
+    piBoot0RefsIncludeKernelSeed0: present.KernelSeed0 === true,
+    piBoot0RefsIncludeB0: present.B0 === true,
+    piBoot0RefsIncludeBootAudit0: present.BootAudit0 === true,
+  });
+}
+
+function validateGeneratedByteLang0(generatedPackage) {
+  const materializedPCCPack = generatedPackage?.MaterializedPCCPackEnvelope ?? generatedPackage?.MaterializedPCCPack ?? null;
+  const boot0 = materializedPCCPack?.MaterializedBoot0 ?? materializedPCCPack?.PCCPack?.Boot0 ?? null;
+  const byteLang0 = boot0?.ByteLang0 ?? null;
+
+  if (!isPlainObject(byteLang0)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0'], 'GeneratedPCCPack must include concrete ByteLang0', {
+      actual: typeof byteLang0,
+    });
+  }
+
+  if (byteLang0.kind !== undefined && byteLang0.kind !== 'ByteLang0') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'kind'], 'ByteLang0 kind mismatch', {
+      actual: byteLang0.kind,
+    });
+  }
+
+  if (!isPlainObject(byteLang0.tags)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'tags'], 'ByteLang0 tags must be an object', {
+      actual: typeof byteLang0.tags,
+    });
+  }
+
+  const duplicateTagValue = firstDuplicateObjectValue0(byteLang0.tags);
+
+  if (duplicateTagValue !== null) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'tags'], 'ByteLang0 tag values must be unique', {
+      duplicateTagValue,
+      tags: byteLang0.tags,
+    });
+  }
+
+  for (const [tagName, expected] of Object.entries(GENERATED_PCCPACK_BYTELANG_REQUIRED_TAGS0)) {
+    if (byteLang0.tags[tagName] !== expected) {
+      return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'tags', tagName], 'ByteLang0 required tag mismatch', {
+        expected,
+        actual: byteLang0.tags[tagName],
+      });
+    }
+  }
+
+  if (!isPlainObject(byteLang0.sorts)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'sorts'], 'ByteLang0 sorts must be an object', {
+      actual: typeof byteLang0.sorts,
+    });
+  }
+
+  for (const sortName of GENERATED_PCCPACK_BYTELANG_REQUIRED_SORTS0) {
+    if (byteLang0.sorts[sortName] !== sortName) {
+      return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'sorts', sortName], 'ByteLang0 required sort mismatch', {
+        expected: sortName,
+        actual: byteLang0.sorts[sortName],
+      });
+    }
+  }
+
+  if (!isPlainObject(byteLang0.constructors)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'constructors'], 'ByteLang0 constructors must be an object', {
+      actual: typeof byteLang0.constructors,
+    });
+  }
+
+  for (const constructorName of GENERATED_PCCPACK_BYTELANG_REQUIRED_CONSTRUCTORS0) {
+    if (byteLang0.constructors[constructorName] !== constructorName) {
+      return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'constructors', constructorName], 'ByteLang0 required constructor mismatch', {
+        expected: constructorName,
+        actual: byteLang0.constructors[constructorName],
+      });
+    }
+  }
+
+  if (!isPlainObject(byteLang0.records)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'records'], 'ByteLang0 records must be an object', {
+      actual: typeof byteLang0.records,
+    });
+  }
+
+  for (const [recordName, expected] of Object.entries(GENERATED_PCCPACK_BYTELANG_REQUIRED_RECORD_ARITIES0)) {
+    if (byteLang0.records[recordName] !== expected) {
+      return validationReject0(['GeneratedPCCPack', 'Boot0', 'ByteLang0', 'records', recordName], 'ByteLang0 required record arity mismatch', {
+        expected,
+        actual: byteLang0.records[recordName],
+      });
+    }
+  }
+
+  const byteLangDigest = digestCanonical0(byteLang0);
+  const piBootRefs = Array.isArray(boot0?.PiBoot?.refs) ? boot0.PiBoot.refs : [];
+
+  const byteLangRef = piBootRefs.find((ref) => (
+    ref?.label === 'ByteLang0' ||
+    ref?.target === 'ByteLang0'
+  ));
+
+  if (!isPlainObject(byteLangRef)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs'], 'PiBoot must reference ByteLang0', {
+      refs: piBootRefs,
+    });
+  }
+
+  if (!sameDigestHex0(byteLangRef.digest, byteLangDigest)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs', 'ByteLang0'], 'PiBoot ByteLang0 digest must match concrete ByteLang0', {
+      expected: byteLangDigest,
+      actual: byteLangRef.digest,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackByteLang0NF',
+    byteLang0: true,
+    byteLang0Accepted: true,
+    byteLang0Kind: byteLang0.kind ?? 'ByteLang0',
+    byteLang0Digest: byteLangDigest,
+    byteLang0TagCount: Object.keys(byteLang0.tags).length,
+    byteLang0TagsUnique: duplicateTagValue === null,
+    byteLang0RequiredTagsPresent: true,
+    byteLang0SortCount: Object.keys(byteLang0.sorts).length,
+    byteLang0RequiredSortsPresent: true,
+    byteLang0ConstructorCount: Object.keys(byteLang0.constructors).length,
+    byteLang0RequiredConstructorsPresent: true,
+    byteLang0RecordCount: Object.keys(byteLang0.records).length,
+    byteLang0RequiredRecordAritiesPresent: true,
+    byteLang0PiBootDigestMatches: true,
+  });
+}
+
+function firstDuplicateObjectValue0(value) {
+  const seen = new Set();
+
+  for (const item of Object.values(value)) {
+    const key = JSON.stringify(item);
+
+    if (seen.has(key)) {
+      return item;
+    }
+
+    seen.add(key);
+  }
+
+  return null;
+}
+
+function validateGeneratedIfaceSched0(generatedPackage) {
+  const materializedPCCPack = generatedPackage?.MaterializedPCCPackEnvelope ?? generatedPackage?.MaterializedPCCPack ?? null;
+  const boot0 = materializedPCCPack?.MaterializedBoot0 ?? materializedPCCPack?.PCCPack?.Boot0 ?? null;
+  const ifaceDict0 = boot0?.IfaceDict0 ?? null;
+  const sched0 = boot0?.Sched0 ?? null;
+
+  if (!isPlainObject(ifaceDict0)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'IfaceDict0'], 'GeneratedPCCPack must include concrete IfaceDict0', {
+      actual: typeof ifaceDict0,
+    });
+  }
+
+  if (ifaceDict0.kind !== undefined && ifaceDict0.kind !== 'IfaceDict0') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'IfaceDict0', 'kind'], 'IfaceDict0 kind mismatch', {
+      actual: ifaceDict0.kind,
+    });
+  }
+
+  if (!Array.isArray(ifaceDict0.forbiddenSymbols)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'IfaceDict0', 'forbiddenSymbols'], 'IfaceDict0 forbiddenSymbols must be an array', {
+      actual: typeof ifaceDict0.forbiddenSymbols,
+    });
+  }
+
+  const missingForbiddenSymbols = GENERATED_PCCPACK_IFACE_REQUIRED_FORBIDDEN_SYMBOLS0.filter((symbol) => (
+    !ifaceDict0.forbiddenSymbols.includes(symbol)
+  ));
+
+  if (missingForbiddenSymbols.length > 0) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'IfaceDict0', 'forbiddenSymbols'], 'IfaceDict0 is missing required forbidden executable symbols', {
+      missingForbiddenSymbols,
+      actual: ifaceDict0.forbiddenSymbols,
+    });
+  }
+
+  if (!Array.isArray(ifaceDict0.publicConstructors)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'IfaceDict0', 'publicConstructors'], 'IfaceDict0 publicConstructors must be an array', {
+      actual: typeof ifaceDict0.publicConstructors,
+    });
+  }
+
+  const missingPublicConstructors = GENERATED_PCCPACK_IFACE_PUBLIC_CONSTRUCTORS0.filter((constructorName) => (
+    !ifaceDict0.publicConstructors.includes(constructorName)
+  ));
+
+  if (missingPublicConstructors.length > 0) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'IfaceDict0', 'publicConstructors'], 'IfaceDict0 is missing required public constructors', {
+      missingPublicConstructors,
+      actual: ifaceDict0.publicConstructors,
+    });
+  }
+
+  if (!Array.isArray(ifaceDict0.criticalKinds)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'IfaceDict0', 'criticalKinds'], 'IfaceDict0 criticalKinds must be an array', {
+      actual: typeof ifaceDict0.criticalKinds,
+    });
+  }
+
+  const missingCriticalKinds = GENERATED_PCCPACK_IFACE_CRITICAL_KINDS0.filter((kind) => (
+    !ifaceDict0.criticalKinds.includes(kind)
+  ));
+
+  if (missingCriticalKinds.length > 0) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'IfaceDict0', 'criticalKinds'], 'IfaceDict0 is missing critical route kinds', {
+      missingCriticalKinds,
+      actual: ifaceDict0.criticalKinds,
+    });
+  }
+
+  if (!Array.isArray(ifaceDict0.routeTokens)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'IfaceDict0', 'routeTokens'], 'IfaceDict0 routeTokens must be an array', {
+      actual: typeof ifaceDict0.routeTokens,
+    });
+  }
+
+  const missingRouteTokens = GENERATED_PCCPACK_IFACE_ROUTE_TOKENS0.filter((token) => (
+    !ifaceDict0.routeTokens.includes(token)
+  ));
+
+  if (missingRouteTokens.length > 0) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'IfaceDict0', 'routeTokens'], 'IfaceDict0 is missing required route tokens', {
+      missingRouteTokens,
+      actual: ifaceDict0.routeTokens,
+    });
+  }
+
+  if (!isPlainObject(sched0)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Sched0'], 'GeneratedPCCPack must include concrete Sched0', {
+      actual: typeof sched0,
+    });
+  }
+
+  if (sched0.kind !== undefined && sched0.kind !== 'Sched0') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Sched0', 'kind'], 'Sched0 kind mismatch', {
+      actual: sched0.kind,
+    });
+  }
+
+  if (!isPlainObject(sched0.core)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Sched0', 'core'], 'Sched0 core must be an object', {
+      actual: typeof sched0.core,
+    });
+  }
+
+  for (const [field, expected] of Object.entries(GENERATED_PCCPACK_SCHED_REQUIRED_CORE0)) {
+    if (sched0.core[field] !== expected) {
+      return validationReject0(['GeneratedPCCPack', 'Boot0', 'Sched0', 'core', field], 'Sched0 core constant mismatch', {
+        expected,
+        actual: sched0.core[field],
+      });
+    }
+  }
+
+  if (!isPlainObject(sched0.packageScaleFactors)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Sched0', 'packageScaleFactors'], 'Sched0 packageScaleFactors must be an object', {
+      actual: typeof sched0.packageScaleFactors,
+    });
+  }
+
+  for (const [field, expected] of Object.entries(GENERATED_PCCPACK_SCHED_REQUIRED_SCALE_FACTORS0)) {
+    if (sched0.packageScaleFactors[field] !== expected) {
+      return validationReject0(['GeneratedPCCPack', 'Boot0', 'Sched0', 'packageScaleFactors', field], 'Sched0 package scale factor mismatch', {
+        expected,
+        actual: sched0.packageScaleFactors[field],
+      });
+    }
+  }
+
+  if (!isPlainObject(sched0.selectorBounds)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Sched0', 'selectorBounds'], 'Sched0 selectorBounds must be an object', {
+      actual: typeof sched0.selectorBounds,
+    });
+  }
+
+  if (sched0.selectorBounds.bH !== 8) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Sched0', 'selectorBounds', 'bH'], 'Sched0 selector bound bH mismatch', {
+      expected: 8,
+      actual: sched0.selectorBounds.bH,
+    });
+  }
+
+  if (sched0.selectorBounds.bTheta !== 12) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Sched0', 'selectorBounds', 'bTheta'], 'Sched0 selector bound bTheta mismatch', {
+      expected: 12,
+      actual: sched0.selectorBounds.bTheta,
+    });
+  }
+
+  if (sched0.selectorBounds.polynomialExponent !== 36) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Sched0', 'selectorBounds', 'polynomialExponent'], 'Sched0 selector polynomial exponent mismatch', {
+      expected: 36,
+      actual: sched0.selectorBounds.polynomialExponent,
+    });
+  }
+
+  const ifaceDigest = digestCanonical0(ifaceDict0);
+  const schedDigest = digestCanonical0(sched0);
+  const piBootRefs = Array.isArray(boot0?.PiBoot?.refs) ? boot0.PiBoot.refs : [];
+
+  const ifaceRef = piBootRefs.find((ref) => (
+    ref?.label === 'IfaceDict0' ||
+    ref?.target === 'IfaceDict0'
+  ));
+
+  if (!isPlainObject(ifaceRef)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs'], 'PiBoot must reference IfaceDict0', {
+      refs: piBootRefs,
+    });
+  }
+
+  if (!sameDigestHex0(ifaceRef.digest, ifaceDigest)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs', 'IfaceDict0'], 'PiBoot IfaceDict0 digest must match concrete IfaceDict0', {
+      expected: ifaceDigest,
+      actual: ifaceRef.digest,
+    });
+  }
+
+  const schedRef = piBootRefs.find((ref) => (
+    ref?.label === 'Sched0' ||
+    ref?.target === 'Sched0'
+  ));
+
+  if (!isPlainObject(schedRef)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs'], 'PiBoot must reference Sched0', {
+      refs: piBootRefs,
+    });
+  }
+
+  if (!sameDigestHex0(schedRef.digest, schedDigest)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs', 'Sched0'], 'PiBoot Sched0 digest must match concrete Sched0', {
+      expected: schedDigest,
+      actual: schedRef.digest,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackIfaceSched0NF',
+
+    ifaceDict0: true,
+    ifaceDict0Accepted: true,
+    ifaceDict0Kind: ifaceDict0.kind ?? 'IfaceDict0',
+    ifaceDict0Digest: ifaceDigest,
+    ifaceDict0ForbiddenSymbolCount: ifaceDict0.forbiddenSymbols.length,
+    ifaceDict0RequiredForbiddenSymbolsPresent: missingForbiddenSymbols.length === 0,
+    ifaceDict0NoExecutableMinSymbols: true,
+    ifaceDict0PublicConstructorsPresent: missingPublicConstructors.length === 0,
+    ifaceDict0CriticalKindsPresent: missingCriticalKinds.length === 0,
+    ifaceDict0RouteTokensPresent: missingRouteTokens.length === 0,
+    ifaceDict0PiBootDigestMatches: true,
+
+    sched0: true,
+    sched0Accepted: true,
+    sched0Kind: sched0.kind ?? 'Sched0',
+    sched0Digest: schedDigest,
+    sched0CoreMatchesExpected: true,
+    sched0CoreB0: sched0.core.B0,
+    sched0CoreK0: sched0.core.K0,
+    sched0CoreR0: sched0.core.R0,
+    sched0CoreH0: sched0.core.H0,
+    sched0CoreO0: sched0.core.O0,
+    sched0CoreRel0: sched0.core.Rel0,
+    sched0ScaleFactorsPresent: true,
+    sched0SelectorBoundsPresent: true,
+    sched0SelectorBoundBH: sched0.selectorBounds.bH,
+    sched0SelectorBoundBTheta: sched0.selectorBounds.bTheta,
+    sched0PolynomialExponent: sched0.selectorBounds.polynomialExponent,
+    sched0PiBootDigestMatches: true,
+  });
+}
+
+function validateGeneratedCodecDigest0(generatedPackage) {
+  const materializedPCCPack = generatedPackage?.MaterializedPCCPackEnvelope ?? generatedPackage?.MaterializedPCCPack ?? null;
+  const boot0 = materializedPCCPack?.MaterializedBoot0 ?? materializedPCCPack?.PCCPack?.Boot0 ?? null;
+  const codec0 = boot0?.Codec0 ?? null;
+  const digest0 = boot0?.Digest0 ?? null;
+
+  if (!isPlainObject(codec0)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Codec0'], 'GeneratedPCCPack must include concrete Codec0', {
+      actual: typeof codec0,
+    });
+  }
+
+  if (codec0.kind !== undefined && codec0.kind !== 'Codec0') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Codec0', 'kind'], 'Codec0 kind mismatch', {
+      actual: codec0.kind,
+    });
+  }
+
+  if (codec0.canonical !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Codec0', 'canonical'], 'Codec0 must require canonical encoding', {
+      actual: codec0.canonical,
+    });
+  }
+
+  if (codec0.naturalEncoding !== 'u32be-length-shortest-big-endian-magnitude') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Codec0', 'naturalEncoding'], 'Codec0 natural encoding must be shortest big-endian magnitude with u32be length', {
+      actual: codec0.naturalEncoding,
+    });
+  }
+
+  if (codec0.integerEncoding !== 'sign-byte-plus-canonical-natural-no-negative-zero') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Codec0', 'integerEncoding'], 'Codec0 integer encoding must reject negative zero', {
+      actual: codec0.integerEncoding,
+    });
+  }
+
+  if (codec0.stringEncoding !== 'utf8-nfc-length-prefixed') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Codec0', 'stringEncoding'], 'Codec0 string encoding must be UTF-8 NFC length-prefixed', {
+      actual: codec0.stringEncoding,
+    });
+  }
+
+  if (codec0.topLevelConsumesAllBytes !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Codec0', 'topLevelConsumesAllBytes'], 'Codec0 top-level parser must consume all bytes', {
+      actual: codec0.topLevelConsumesAllBytes,
+    });
+  }
+
+  if (codec0.normalFormSerialization !== 'canonical-json-v0') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Codec0', 'normalFormSerialization'], 'Codec0 normal-form serialization must be canonical-json-v0', {
+      actual: codec0.normalFormSerialization,
+    });
+  }
+
+  if (!isPlainObject(digest0)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Digest0'], 'GeneratedPCCPack must include concrete Digest0', {
+      actual: typeof digest0,
+    });
+  }
+
+  if (digest0.kind !== undefined && digest0.kind !== 'Digest0') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Digest0', 'kind'], 'Digest0 kind mismatch', {
+      actual: digest0.kind,
+    });
+  }
+
+  if (digest0.alg !== 'SHA256') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Digest0', 'alg'], 'Digest0 algorithm must be SHA256', {
+      actual: digest0.alg,
+    });
+  }
+
+  if (digest0.bytes !== 'canonical-json-v0') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Digest0', 'bytes'], 'Digest0 byte discipline must be canonical-json-v0', {
+      actual: digest0.bytes,
+    });
+  }
+
+  if (digest0.digestEqualityIsNotObjectEquality !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Digest0', 'digestEqualityIsNotObjectEquality'], 'Digest0 must record that digest equality is not object equality', {
+      actual: digest0.digestEqualityIsNotObjectEquality,
+    });
+  }
+
+  if (digest0.fullKeyComparisonAfterHashLookup !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'Digest0', 'fullKeyComparisonAfterHashLookup'], 'Digest0 hash lookups must be followed by full key comparison', {
+      actual: digest0.fullKeyComparisonAfterHashLookup,
+    });
+  }
+
+  const codecDigest = digestCanonical0(codec0);
+  const digestDigest = digestCanonical0(digest0);
+  const piBootRefs = Array.isArray(boot0?.PiBoot?.refs) ? boot0.PiBoot.refs : [];
+
+  const codecRef = piBootRefs.find((ref) => (
+    ref?.label === 'Codec0' ||
+    ref?.target === 'Codec0'
+  ));
+
+  if (!isPlainObject(codecRef)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs'], 'PiBoot must reference Codec0', {
+      refs: piBootRefs,
+    });
+  }
+
+  if (!sameDigestHex0(codecRef.digest, codecDigest)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs', 'Codec0'], 'PiBoot Codec0 digest must match concrete Codec0', {
+      expected: codecDigest,
+      actual: codecRef.digest,
+    });
+  }
+
+  const digestRef = piBootRefs.find((ref) => (
+    ref?.label === 'Digest0' ||
+    ref?.target === 'Digest0'
+  ));
+
+  if (!isPlainObject(digestRef)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs'], 'PiBoot must reference Digest0', {
+      refs: piBootRefs,
+    });
+  }
+
+  if (!sameDigestHex0(digestRef.digest, digestDigest)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs', 'Digest0'], 'PiBoot Digest0 digest must match concrete Digest0', {
+      expected: digestDigest,
+      actual: digestRef.digest,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackCodecDigest0NF',
+
+    codec0: true,
+    codec0Accepted: true,
+    codec0Kind: codec0.kind ?? 'Codec0',
+    codec0Digest: codecDigest,
+    codec0Canonical: codec0.canonical === true,
+    codec0NaturalEncoding: codec0.naturalEncoding,
+    codec0IntegerEncoding: codec0.integerEncoding,
+    codec0StringEncoding: codec0.stringEncoding,
+    codec0TopLevelConsumesAllBytes: codec0.topLevelConsumesAllBytes === true,
+    codec0NormalFormSerialization: codec0.normalFormSerialization,
+    codec0PiBootDigestMatches: true,
+
+    digest0: true,
+    digest0Accepted: true,
+    digest0Kind: digest0.kind ?? 'Digest0',
+    digest0Digest: digestDigest,
+    digest0Alg: digest0.alg,
+    digest0Bytes: digest0.bytes,
+    digest0EqualityNotObjectEquality: digest0.digestEqualityIsNotObjectEquality === true,
+    digest0FullKeyComparisonAfterHashLookup: digest0.fullKeyComparisonAfterHashLookup === true,
+    digest0PiBootDigestMatches: true,
+  });
+}
+
+function validateGeneratedKernelSeed0(generatedPackage) {
+  const materializedPCCPack = generatedPackage?.MaterializedPCCPackEnvelope ?? generatedPackage?.MaterializedPCCPack ?? null;
+  const boot0 = materializedPCCPack?.MaterializedBoot0 ?? materializedPCCPack?.PCCPack?.Boot0 ?? null;
+  const kernelSeed0 = boot0?.KernelSeed0 ?? null;
+
+  if (!isPlainObject(kernelSeed0)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'KernelSeed0'], 'GeneratedPCCPack must include concrete KernelSeed0', {
+      actual: typeof kernelSeed0,
+    });
+  }
+
+  if (kernelSeed0.kind !== undefined && kernelSeed0.kind !== 'KernelSeed0') {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'KernelSeed0', 'kind'], 'KernelSeed0 kind mismatch', {
+      actual: kernelSeed0.kind,
+    });
+  }
+
+  if (!Array.isArray(kernelSeed0.rules)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'KernelSeed0', 'rules'], 'KernelSeed0 rules must be an array', {
+      actual: typeof kernelSeed0.rules,
+    });
+  }
+
+  const duplicateRule = firstDuplicate0(kernelSeed0.rules);
+
+  if (duplicateRule !== null) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'KernelSeed0', 'rules'], 'KernelSeed0 rules must be unique', {
+      duplicateRule,
+    });
+  }
+
+  const missingRules = GENERATED_PCCPACK_KERNEL_SEED_REQUIRED_RULES0.filter((rule) => !kernelSeed0.rules.includes(rule));
+
+  if (missingRules.length > 0) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'KernelSeed0', 'rules'], 'KernelSeed0 is missing required primitive rules', {
+      missingRules,
+      actual: kernelSeed0.rules,
+    });
+  }
+
+  if (!Array.isArray(kernelSeed0.proofNodeKinds)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'KernelSeed0', 'proofNodeKinds'], 'KernelSeed0 proofNodeKinds must be an array', {
+      actual: typeof kernelSeed0.proofNodeKinds,
+    });
+  }
+
+  const missingProofNodeKinds = GENERATED_PCCPACK_KERNEL_SEED_REQUIRED_PROOF_NODE_KINDS0.filter((kind) => (
+    !kernelSeed0.proofNodeKinds.includes(kind)
+  ));
+
+  if (missingProofNodeKinds.length > 0) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'KernelSeed0', 'proofNodeKinds'], 'KernelSeed0 is missing required proof node kinds', {
+      missingProofNodeKinds,
+      actual: kernelSeed0.proofNodeKinds,
+    });
+  }
+
+  const proofReferencePolicy = kernelSeed0.proofReferencePolicy ?? {};
+
+  if (proofReferencePolicy.rejectsOpaqueProofBlobs !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'KernelSeed0', 'proofReferencePolicy', 'rejectsOpaqueProofBlobs'], 'KernelSeed0 must reject opaque proof blobs', {
+      actual: proofReferencePolicy.rejectsOpaqueProofBlobs,
+    });
+  }
+
+  if (proofReferencePolicy.requiresTypedAcyclicRefs !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'KernelSeed0', 'proofReferencePolicy', 'requiresTypedAcyclicRefs'], 'KernelSeed0 must require typed acyclic proof refs', {
+      actual: proofReferencePolicy.requiresTypedAcyclicRefs,
+    });
+  }
+
+  if (proofReferencePolicy.hashIndependent !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'KernelSeed0', 'proofReferencePolicy', 'hashIndependent'], 'KernelSeed0 proof references must be hash independent', {
+      actual: proofReferencePolicy.hashIndependent,
+    });
+  }
+
+  const kernelSeedDigest = digestCanonical0(kernelSeed0);
+  const piBootRefs = Array.isArray(boot0?.PiBoot?.refs) ? boot0.PiBoot.refs : [];
+  const piBootKernelSeedRef = piBootRefs.find((ref) => (
+    ref?.label === 'KernelSeed0' ||
+    ref?.target === 'KernelSeed0'
+  ));
+
+  if (!isPlainObject(piBootKernelSeedRef)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs'], 'PiBoot must reference KernelSeed0', {
+      refs: piBootRefs,
+    });
+  }
+
+  if (!sameDigestHex0(piBootKernelSeedRef.digest, kernelSeedDigest)) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'PiBoot', 'refs', 'KernelSeed0'], 'PiBoot KernelSeed0 digest must match concrete KernelSeed0', {
+      expected: kernelSeedDigest,
+      actual: piBootKernelSeedRef.digest,
+    });
+  }
+
+  const ruleFlags = Object.fromEntries(
+    GENERATED_PCCPACK_KERNEL_SEED_REQUIRED_RULES0.map((rule) => [
+      kernelSeedRuleFlagName0(rule),
+      kernelSeed0.rules.includes(rule),
+    ]),
+  );
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackKernelSeed0NF',
+    kernelSeed0: true,
+    kernelSeed0Accepted: true,
+    kernelSeed0Kind: kernelSeed0.kind ?? 'KernelSeed0',
+    kernelSeed0Digest: kernelSeedDigest,
+    kernelSeed0RuleCount: kernelSeed0.rules.length,
+    kernelSeed0RequiredRuleCount: GENERATED_PCCPACK_KERNEL_SEED_REQUIRED_RULES0.length,
+    kernelSeed0Rules: kernelSeed0.rules,
+    kernelSeed0AllRequiredRulesPresent: missingRules.length === 0,
+    ...ruleFlags,
+    kernelSeed0ProofNodeKindCount: kernelSeed0.proofNodeKinds.length,
+    kernelSeed0ProofNodeKinds: kernelSeed0.proofNodeKinds,
+    kernelSeed0AllRequiredProofNodeKindsPresent: missingProofNodeKinds.length === 0,
+    kernelSeed0ProofRefsRejectOpaque: proofReferencePolicy.rejectsOpaqueProofBlobs === true,
+    kernelSeed0ProofRefsTypedAcyclic: proofReferencePolicy.requiresTypedAcyclicRefs === true,
+    kernelSeed0ProofRefsHashIndependent: proofReferencePolicy.hashIndependent === true,
+    kernelSeed0PiBootDigestMatches: true,
+  });
+}
+
+function kernelSeedRuleFlagName0(rule) {
+  const map = {
+    Eq: 'kernelSeed0HasEq',
+    Subst: 'kernelSeed0HasSubst',
+    Record: 'kernelSeed0HasRecord',
+    DAGInd: 'kernelSeed0HasDAGInd',
+    LedgerInd: 'kernelSeed0HasLedgerInd',
+    OblTopoInd: 'kernelSeed0HasOblTopoInd',
+    TraceInd: 'kernelSeed0HasTraceInd',
+    FiniteExhaust: 'kernelSeed0HasFiniteExhaust',
+    DPInd: 'kernelSeed0HasDPInd',
+    Hall: 'kernelSeed0HasHall',
+    RankInd: 'kernelSeed0HasRankInd',
+    MinCounterexample: 'kernelSeed0HasMinCounterexample',
+    IntArith: 'kernelSeed0HasIntArith',
+    Transport: 'kernelSeed0HasTransport',
+    TruthVec: 'kernelSeed0HasTruthVec',
+    FiniteRel: 'kernelSeed0HasFiniteRel',
+  };
+
+  return map[rule] ?? `kernelSeed0Has${rule}`;
+}
+
+function firstDuplicate0(values) {
+  const seen = new Set();
+
+  for (const value of values) {
+    if (seen.has(value)) {
+      return value;
+    }
+
+    seen.add(value);
+  }
+
+  return null;
+}
+
+async function validateGeneratedBootBatch0(batch) {
+  const record = await CheckBootBatch0(batch);
+  const result = recordToValidation0(record, ['GeneratedPCCPack', 'Boot0', 'B0']);
+
+  if (!result.ok) {
+    return validationReject0(result.path, 'CheckBootBatch0 rejected generated package B0', {
+      inner: result.witness?.detail?.inner ?? result.witness,
+    });
+  }
+
+  const nf = record.NF ?? record.nf;
+  const coverage = nf?.coverage ?? null;
+  const families = Array.isArray(coverage?.families)
+    ? coverage.families.map((entry) => entry.family)
+    : [];
+
+  const missing = GENERATED_PCCPACK_BOOT_B0_REQUIRED_FAMILIES0.filter((family) => !families.includes(family));
+
+  if (missing.length > 0) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'B0', 'coverage'], 'Generated package B0 is missing required bootstrap row families', {
+      missing,
+      families,
+    });
+  }
+
+  const flags = Object.fromEntries(
+    GENERATED_PCCPACK_BOOT_B0_REQUIRED_FAMILIES0.map((family) => [
+      boot0FamilyFlagName0(family),
+      families.includes(family),
+    ]),
+  );
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackB0Coverage0NF',
+    boot0B0Accepted: true,
+    boot0B0Digest: record.Digest ?? record.digest,
+    boot0B0CoverageDigest: digestCanonical0(coverage),
+    boot0B0FamilyCount: families.length,
+    boot0B0RequiredFamilyCount: GENERATED_PCCPACK_BOOT_B0_REQUIRED_FAMILIES0.length,
+    boot0B0Families: families,
+    boot0B0AllRequiredFamiliesPresent: missing.length === 0,
+    ...flags,
+  });
+}
+
+function boot0FamilyFlagName0(family) {
+  const map = {
+    BIface: 'boot0B0CoversIface',
+    BSched: 'boot0B0CoversSched',
+    BNF: 'boot0B0CoversNF',
+    BTruthEval: 'boot0B0CoversTruthEval',
+    BRel: 'boot0B0CoversRel',
+    BCharge: 'boot0B0CoversCharge',
+    BObl: 'boot0B0CoversObl',
+    BArith: 'boot0B0CoversArith',
+    BMode: 'boot0B0CoversMode',
+    BRoute: 'boot0B0CoversRoute',
+    BHash: 'boot0B0CoversHash',
+    BImport: 'boot0B0CoversImport',
+  };
+
+  return map[family] ?? `boot0B0Covers${family}`;
+}
+
+async function validateGeneratedBoot0(generatedPackage) {
+  const materializedPCCPack = generatedPackage?.MaterializedPCCPackEnvelope ?? generatedPackage?.MaterializedPCCPack ?? null;
+  const pccPack = materializedPCCPack?.PCCPack ?? generatedPackage?.PCCPack ?? null;
+  const boot0 = materializedPCCPack?.MaterializedBoot0 ?? pccPack?.Boot0 ?? null;
+
+  if (!isPlainObject(boot0)) {
+    return validationReject0(['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'MaterializedBoot0'], 'GeneratedPCCPack must include materialized Boot0', {
+      actual: typeof boot0,
+    });
+  }
+
+  const bootBatch = await validateGeneratedBootBatch0(boot0.B0);
+
+  if (!bootBatch.ok) {
+    return bootBatch;
+  }
+
+  const bootRecord = await CheckMaterializedBoot0(boot0);
+  const bootResult = recordToValidation0(bootRecord, ['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'MaterializedBoot0']);
+
+  if (!bootResult.ok) {
+    return validationReject0(bootResult.path, 'CheckMaterializedBoot0 rejected generated package Boot0', {
+      inner: bootResult.witness?.detail?.inner ?? bootResult.witness,
+    });
+  }
+
+  const bootRecordNF = bootRecord.NF ?? bootRecord.nf;
+  const bootObjectDigest = digestCanonical0(boot0);
+  const pccPackBootDigest = digestCanonical0(pccPack?.Boot0 ?? null);
+  const coreBootDigest = pccPack?.Core?.artefactDigests?.Boot0 ?? null;
+
+  if (!sameDigestHex0(pccPackBootDigest, bootObjectDigest)) {
+    return validationReject0(['GeneratedPCCPack', 'PCCPack', 'Boot0'], 'PCCPack Boot0 must match materialized Boot0', {
+      expected: bootObjectDigest,
+      actual: pccPackBootDigest,
+    });
+  }
+
+  if (!sameDigestHex0(coreBootDigest, bootObjectDigest)) {
+    return validationReject0(['GeneratedPCCPack', 'PCCPack', 'Core', 'artefactDigests', 'Boot0'], 'PCCPack Core artefactDigests.Boot0 must match materialized Boot0', {
+      expected: bootObjectDigest,
+      actual: coreBootDigest,
+    });
+  }
+
+  if (bootRecordNF?.jsonMaterializable !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'jsonMaterializable'], 'materialized Boot0 must be JSON materializable', {
+      actual: bootRecordNF?.jsonMaterializable ?? null,
+    });
+  }
+
+  if (bootRecordNF?.noFixtureMarkers !== true) {
+    return validationReject0(['GeneratedPCCPack', 'Boot0', 'noFixtureMarkers'], 'materialized Boot0 must contain no fixture markers', {
+      actual: bootRecordNF?.noFixtureMarkers ?? null,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackBoot0Bridge0NF',
+    boot0: true,
+    boot0Accepted: true,
+    boot0Kind: boot0.kind ?? null,
+    boot0Digest: bootObjectDigest,
+    boot0CheckDigest: bootRecord.Digest ?? bootRecord.digest,
+    boot0CanonicalByteDigest: bootRecordNF.canonicalByteDigest ?? null,
+    rowCount: bootRecordNF.rowCount ?? null,
+    kernelRuleCount: bootRecordNF.kernelRuleCount ?? null,
+    jsonMaterialized: bootRecordNF.jsonMaterializable === true,
+    noFixtureMarkers: bootRecordNF.noFixtureMarkers === true,
+    bootBatchDigest: bootRecordNF.bootBatchDigest ?? null,
+    bootAuditDigest: bootRecordNF.bootAuditDigest ?? null,
+    ...bootBatch.nf,
+    boot0LinkedToPCCPack: true,
+    boot0LinkedToCoreDigestMap: true,
+  });
+}
+
+function validateMaterializedCheckPCCPackexpRecord0(actual, expected) {
+  if (!isPlainObject(actual)) {
+    return validationReject0(['CheckPCCPackexpRecord'], 'CheckPCCPackexpRecord must be an object', {
+      actual: typeof actual,
+    });
+  }
+
+  if (actual.tag !== 'accept') {
+    return validationReject0(['CheckPCCPackexpRecord', 'tag'], 'CheckPCCPackexpRecord must be accepted', {
+      actual: actual.tag,
+    });
+  }
+
+  if (actual.checker !== 'CheckPCCPackexp0') {
+    return validationReject0(['CheckPCCPackexpRecord', 'checker'], 'CheckPCCPackexpRecord checker mismatch', {
+      actual: actual.checker,
+    });
+  }
+
+  const actualNF = actual.NF ?? actual.nf;
+  const expectedNF = expected?.NF ?? expected?.nf;
+
+  if (!isPlainObject(actualNF)) {
+    return validationReject0(['CheckPCCPackexpRecord', 'NF'], 'CheckPCCPackexpRecord must expose NF', {
+      actual: typeof actualNF,
+    });
+  }
+
+  if (!isPlainObject(expectedNF)) {
+    return validationReject0(['CheckPCCPackexpRecord'], 'fresh CheckPCCPackexp0 record must expose NF', {
+      actual: typeof expectedNF,
+    });
+  }
+
+  const actualDigest = digestFromRecord0(actual);
+  const actualNFDigest = digestCanonical0(actualNF);
+
+  if (!sameDigestHex0(actualDigest, actualNFDigest)) {
+    return validationReject0(['CheckPCCPackexpRecord', 'Digest'], 'CheckPCCPackexpRecord Digest must match its NF', {
+      expected: actualNFDigest,
+      actual: actualDigest,
+    });
+  }
+
+  if (stableStringify0(actualNF) !== stableStringify0(expectedNF)) {
+    return validationReject0(['CheckPCCPackexpRecord', 'NF'], 'CheckPCCPackexpRecord must match fresh CheckPCCPackexp0 replay', {
+      expectedDigest: digestCanonical0(expectedNF),
+      actualDigest: digestCanonical0(actualNF),
+    });
+  }
+
+  if (!sameDigestHex0(actualDigest, digestFromRecord0(expected))) {
+    return validationReject0(['CheckPCCPackexpRecord', 'Digest'], 'CheckPCCPackexpRecord digest must match fresh CheckPCCPackexp0 replay digest', {
+      expected: digestFromRecord0(expected),
+      actual: actualDigest,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackCheckPCCPackexpRecord0NF',
+    checkPCCPackexpRecordDigest: actualDigest,
+    checkPCCPackexpRecordDigestMatchesNF: true,
+    checkPCCPackexpRecordMatchesFresh: true,
+  });
+}
+
+function validatePublicClaimBoundary0(record) {
+  const nf = record?.NF ?? record?.nf;
+
+  if (!isPlainObject(nf)) {
+    return validationReject0(['CheckPCCPackexpRecord', 'NF'], 'CheckPCCPackexpRecord must expose NF for public claim boundary', {
+      actual: typeof nf,
+    });
+  }
+
+  if (nf.publicConclusionOnlyAfterAcceptRun !== true) {
+    return validationReject0(['CheckPCCPackexpRecord', 'NF', 'publicConclusionOnlyAfterAcceptRun'], 'CheckPCCPackexp must gate public conclusion by accepted replay', {
+      actual: nf.publicConclusionOnlyAfterAcceptRun,
+    });
+  }
+
+  if (nf.publicConclusionEmitted !== false) {
+    return validationReject0(['CheckPCCPackexpRecord', 'NF', 'publicConclusionEmitted'], 'CheckPCCPackexp package check must not emit public theorem conclusion', {
+      actual: nf.publicConclusionEmitted,
+    });
+  }
+
+  if (!samePublicConclusion0(nf.publicConclusion, makeClaimBoundary0())) {
+    return validationReject0(['CheckPCCPackexpRecord', 'NF', 'publicConclusion'], 'CheckPCCPackexp public claim boundary mismatch', {
+      actual: nf.publicConclusion,
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackPublicClaimBoundary0NF',
+    claimBoundary: makeClaimBoundary0(),
+  });
+}
+
+function validateJsonMaterialized0(value) {
+  let bytes;
+  let parsed;
+
+  try {
+    bytes = stableStringify0(value);
+    parsed = JSON.parse(bytes);
+  } catch (error) {
+    return validationReject0(['GeneratedPCCPackexp0'], 'GeneratedPCCPackexp0 must serialize and parse as JSON', {
+      error: error.message,
+    });
+  }
+
+  const reparsedBytes = stableStringify0(parsed);
+
+  if (reparsedBytes !== bytes) {
+    return validationReject0(['GeneratedPCCPackexp0'], 'GeneratedPCCPackexp0 canonical JSON bytes must roundtrip', {
+      expectedDigest: digestCanonical0(value),
+      actualDigest: digestCanonical0(parsed),
+    });
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackexpJson0NF',
+    byteLength: bytes.length,
+    envelopeDigest: digestCanonical0(value),
+  });
+}
+
+function validateLinkage0(envelope) {
+  if (!isPlainObject(envelope.Linkage)) {
+    return validationReject0(['Linkage'], 'GeneratedPCCPackexp0 must include Linkage', {
+      actual: typeof envelope.Linkage,
+    });
+  }
+
+  const checkNF = envelope.CheckPCCPackexpRecord.NF ?? envelope.CheckPCCPackexpRecord.nf;
+
+  const expected = {
+    generatedPackageDigest: digestCanonical0(envelope.GeneratedPCCPack),
+    checkPCCPackexpRecordDigest: digestFromRecord0(envelope.CheckPCCPackexpRecord),
+    checkPCCPackexpPccPackDigest: checkNF?.pccPackDigest ?? null,
+    checkPCCPackexpMaterializedPCCPackDigest: checkNF?.materializedPCCPackDigest ?? null,
+    claimBoundaryDigest: digestCanonical0(makeClaimBoundary0()),
+  };
+
+  for (const [field, digest] of Object.entries(expected)) {
+    if (!sameDigestHex0(envelope.Linkage[field], digest)) {
+      return validationReject0(['Linkage', field], `Linkage ${field} mismatch`, {
+        expected: digest,
+        actual: envelope.Linkage[field],
+      });
+    }
+  }
+
+  return validationAccept0({
+    kind: 'GeneratedPCCPackexpLinkage0NF',
+    present: true,
+    ...expected,
+  });
+}
+
+async function writeJsonFile0(filePath, value) {
+  await fs.writeFile(filePath, `${stableStringify0(value)}\n`, 'utf8');
+}
+
+function makeClaimBoundary0() {
+  return {
+    antecedent: 'CheckPCCPackexp(GeneratePCCPack())=accept',
+    consequent: 'P = NP',
+    conditional: true,
+  };
+}
+
+function digestFromRecord0(record) {
+  if (!isPlainObject(record)) {
+    return null;
+  }
+
+  return record.Digest ?? record.digest ?? null;
+}
+
+function recordToValidation0(record, path) {
+  if (isRejectRecord0(record)) {
+    return validationReject0(path, `${record.checker} rejected`, {
+      inner: compactReject0(record),
+    });
+  }
+
+  return validationAccept0(record.NF ?? record.nf ?? record);
+}
+
+function makeAcceptRecord({
+  checker,
+  nf,
+  ledger,
+}) {
+  const digest = digestCanonical0(nf);
+
+  return {
+    tag: 'accept',
+    kind: 'accept',
+    checker,
+    version: CHECKER_VERSION,
+    NF: nf,
+    Digest: digest,
+    Ledger: ledger,
+    nf,
+    digest,
+    ledger,
+  };
+}
+
+function makeRejectRecord({
+  checker,
+  coord,
+  path,
+  witness,
+  ledger,
+}) {
+  const rejectNF = {
+    kind: `${checker}RejectNF`,
+    checker,
+    version: CHECKER_VERSION,
+    coord,
+    path,
+    witness,
+    ledger,
+  };
+
+  const digest = digestCanonical0(rejectNF);
+
+  return {
+    tag: 'reject',
+    kind: 'reject',
+    checker,
+    version: CHECKER_VERSION,
+    Coord: coord,
+    Path: path,
+    Witness: witness,
+    Digest: digest,
+    Ledger: ledger,
+    coord,
+    path,
+    witness,
+    digest,
+    ledger,
+  };
+}
+
+function validationAccept0(nf) {
+  return {
+    ok: true,
+    nf,
+  };
+}
+
+function validationReject0(path, reason, detail) {
+  return {
+    ok: false,
+    path,
+    witness: {
+      reason,
+      detail,
+    },
+  };
+}
+
+function isRejectRecord0(value) {
+  return classifyRecord0(value) === 'reject';
+}
+
+function classifyRecord0(value) {
+  if (!isPlainObject(value)) {
+    return 'unknown';
+  }
+
+  const raw =
+    value.tag ??
+    value.kind ??
+    value.verdict ??
+    value.status ??
+    value.result ??
+    value.outcome;
+
+  if (typeof raw !== 'string') {
+    return 'unknown';
+  }
+
+  const normalized = raw.trim().toLowerCase();
+
+  if (
+    normalized === 'accept' ||
+    normalized === 'accepted' ||
+    normalized === 'ok' ||
+    normalized === 'pass' ||
+    normalized === 'passed'
+  ) {
+    return 'accept';
+  }
+
+  if (
+    normalized === 'reject' ||
+    normalized === 'rejected' ||
+    normalized === 'err' ||
+    normalized === 'error' ||
+    normalized === 'fail' ||
+    normalized === 'failed'
+  ) {
+    return 'reject';
+  }
+
+  return 'unknown';
+}
+
+function compactReject0(value) {
+  if (!isPlainObject(value)) {
+    return value;
+  }
+
+  return {
+    checker: value.checker ?? null,
+    coord: value.Coord ?? value.coord ?? null,
+    path: value.Path ?? value.path ?? null,
+    witness: value.Witness ?? value.witness ?? null,
+    digest: value.Digest ?? value.digest ?? null,
+  };
+}
+
+function samePublicConclusion0(a, b) {
+  return (
+    isPlainObject(a) &&
+    isPlainObject(b) &&
+    a.antecedent === b.antecedent &&
+    a.consequent === b.consequent &&
+    a.conditional === b.conditional
+  );
+}
+
+function sameDigestHex0(actual, expected) {
+  return (
+    isPlainObject(actual) &&
+    isPlainObject(expected) &&
+    typeof actual.hex === 'string' &&
+    typeof expected.hex === 'string' &&
+    actual.hex === expected.hex &&
+    (
+      actual.alg === undefined ||
+      expected.alg === undefined ||
+      actual.alg === expected.alg
+    )
+  );
+}
+
+function isPlainObject(value) {
+  if (value === null || typeof value !== 'object') {
+    return false;
+  }
+
+  const proto = Object.getPrototypeOf(value);
+  return proto === Object.prototype || proto === null;
+}
