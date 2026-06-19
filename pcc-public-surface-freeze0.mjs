@@ -103,6 +103,7 @@ export const PUBLIC_PACKAGE_BIN0 = Object.freeze({
 
 export const PUBLIC_PACKAGE_SCRIPT_TARGETS0 = Object.freeze({
   check: 'node --check pcc-core.mjs',
+  'examples:minimal': 'node examples/minimal/run-all.mjs',
   'materialized:accept-run': 'node ./bin/check-materialized-accept-run0.mjs',
   'materialized:accept-run:full': 'node ./bin/check-materialized-accept-run0.mjs --full',
   'materialized:aggregate': 'node ./bin/check-materialized-aggregate0.mjs',
@@ -131,6 +132,7 @@ export const PUBLIC_PACKAGE_SCRIPT_TARGETS0 = Object.freeze({
   smoke: 'node ./bin/runall0.mjs',
   'smoke:full': 'node ./bin/runall0.mjs --full',
   test: 'node --test',
+  'test:negative': 'node --test test/reviewer-negative-invariants.test.mjs',
   validate: 'npm run check && npm test',
   'materialized:final-certificate': 'node ./bin/write-materialized-final-certificate0.mjs',
   'materialized:final-certificate:full': 'node ./bin/write-materialized-final-certificate0.mjs --full',

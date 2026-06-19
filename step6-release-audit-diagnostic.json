@@ -1,0 +1,63 @@
+{
+  "tag": "reject",
+  "checker": "CheckReleaseAudit0",
+  "Coord": "CheckReleaseAudit0.testInventory",
+  "Path": [
+    "test",
+    "reviewer-negative-invariants.test.mjs"
+  ],
+  "Witness": {
+    "reason": "test file appears orphaned because its expected module is missing",
+    "detail": {
+      "testFile": "reviewer-negative-invariants.test.mjs",
+      "expectedModule": "reviewer-negative-invariants.mjs"
+    }
+  },
+  "Ledger": [
+    {
+      "phase": "shape",
+      "status": "pass",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "17614341c8e63e20caf3bd23b2747167e612d6d695c561471f9bc655b50b95c8"
+      }
+    },
+    {
+      "phase": "requiredFiles",
+      "status": "pass",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "96077500b90785c9542a1fac588f4c0a8fce8965521330458ab92e9cc6168193"
+      }
+    },
+    {
+      "phase": "staleSrc",
+      "status": "pass",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "d33267539b47085d5106d49692798ef3a977ed94e0df463b9f82fa43f2095eb9"
+      }
+    },
+    {
+      "phase": "packageJson",
+      "status": "pass",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "d5ab2ce3849e7c3c7d5a999305e588f0e6e63460a06ef2fa5aae2770a67d68ee"
+      }
+    },
+    {
+      "phase": "testInventory",
+      "status": "fail",
+      "digest": {
+        "alg": "SHA256",
+        "bytes": "canonical-json-v0",
+        "hex": "fbe38bfdcee70595f0a8dd12b8968ad5986658e1979d27096ea597eb75f96e71"
+      }
+    }
+  ]
+}
