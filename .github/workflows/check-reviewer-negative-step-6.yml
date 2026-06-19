@@ -75,13 +75,17 @@ jobs:
             test/pcc-final-framework0.test.mjs \
             test/pcc-pack-sufficiency0.test.mjs
 
-      - name: Run public command-surface regression tests
-        run: |
-          node --test \
-            test/pcc-public-surface-freeze0.test.mjs \
-            test/pcc-release-audit-public-surface-freeze0.test.mjs \
-            test/pcc-release-audit-public-surface-summary-negative0.test.mjs \
-            test/pcc-public-api0.test.mjs
+      - name: Check exact frozen public package surface
+        run: node --test test/pcc-public-surface-freeze0.test.mjs
+
+      - name: Check release-audit public surface phase
+        run: node --test test/pcc-release-audit-public-surface-freeze0.test.mjs
+
+      - name: Check release-audit public surface negative summary
+        run: node --test test/pcc-release-audit-public-surface-summary-negative0.test.mjs
+
+      - name: Check public API surface
+        run: node --test test/pcc-public-api0.test.mjs
 
       - name: Commit intentional command-surface update
         if: github.event_name == 'push'
