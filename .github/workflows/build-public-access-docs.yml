@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - docs/public-access-report-7072f8d
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -105,7 +108,6 @@ jobs:
         shell: bash
         run: |
           git diff --check
-          git diff --name-only origin/main...HEAD > /tmp/preexisting.txt
           git status --short
           allowed='^(canonical_proof_report\.(pdf|tex)|README\.md|CURRENT_RELEASE\.md|REPRODUCE\.md|REVIEWER_MAP\.md|PUBLIC_ACCESS_REVISION\.md|docs-release/public-access-7072f8d/|tools/check-documentation-release\.mjs|release-tools/|\.github/workflows/build-public-access-docs\.yml)'
           git status --short | sed -E 's/^.. //' | while IFS= read -r file; do
