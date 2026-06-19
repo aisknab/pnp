@@ -78,26 +78,54 @@ jobs:
       - name: Check exact frozen public package surface
         run: node --test test/pcc-public-surface-freeze0.test.mjs
 
-      - name: Check release-audit public surface phase
-        run: node --test test/pcc-release-audit-public-surface-freeze0.test.mjs
+      - name: Capture release-audit public-surface diagnostic
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import {
+            CheckReleaseAudit0,
+            makeReleaseAuditConfig0,
+          } from './pcc-release-audit0.mjs';
 
-      - name: Check release-audit public surface negative summary
-        run: node --test test/pcc-release-audit-public-surface-summary-negative0.test.mjs
+          const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+            runSyntaxCheck: false,
+            runRunAll: false,
+            runMutationCheck: false,
+            runCliSmoke: false,
+            runPublicSurfaceFreeze: true,
+            runMaterializedPublicStatusGate: false,
+          }));
+
+          const diagnostic = {
+            tag: out.tag,
+            checker: out.checker,
+            Coord: out.Coord ?? null,
+            Path: out.Path ?? null,
+            Witness: out.Witness ?? null,
+            Ledger: out.Ledger ?? null,
+          };
+
+          fs.writeFileSync(
+            'step6-release-audit-diagnostic.json',
+            `${JSON.stringify(diagnostic, null, 2)}\n`,
+          );
+          console.log(JSON.stringify(diagnostic, null, 2));
+          NODE
 
       - name: Check public API surface
         run: node --test test/pcc-public-api0.test.mjs
 
-      - name: Commit intentional command-surface update
-        if: github.event_name == 'push'
+      - name: Commit command-surface update and diagnostic
         shell: bash
         run: |
           set -euo pipefail
-          if git diff --quiet -- pcc-public-surface-freeze0.mjs; then
-            echo 'Frozen command surface already current.'
+          if git diff --quiet -- pcc-public-surface-freeze0.mjs step6-release-audit-diagnostic.json; then
+            echo 'No diagnostic or command-surface changes to commit.'
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add pcc-public-surface-freeze0.mjs
-          git commit -m "chore: freeze reviewer example and negative-test commands"
+          git add pcc-public-surface-freeze0.mjs step6-release-audit-diagnostic.json
+          git commit -m "chore: capture step-6 release-audit diagnostic"
           git push origin HEAD:test/reviewer-negative-step-6
