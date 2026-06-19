@@ -26,3 +26,11 @@ jobs:
           done
       - name: Run minimal reviewer examples
         run: npm run examples:minimal
+      - name: Run directly related checker tests
+        run: |
+          node --test \
+            test/pcc-core.test.mjs \
+            test/pcc-core.negative.test.mjs \
+            test/pcc-gpack0.test.mjs \
+            test/pcc-final-framework0.test.mjs \
+            test/pcc-pack-sufficiency0.test.mjs
