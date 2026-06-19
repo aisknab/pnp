@@ -53,6 +53,7 @@ jobs:
         if: steps.state.outputs.finalized != 'true'
         run: |
           sudo apt-get install -y --no-install-recommends \
+            cm-super \
             latexmk \
             texlive-latex-base \
             texlive-latex-recommended \
