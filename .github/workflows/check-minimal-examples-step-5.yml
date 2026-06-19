@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - examples/minimal-step-5
+  pull_request:
+    branches:
+      - main
 
 jobs:
   examples:
