@@ -32,6 +32,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
 
       - name: Detect finalized release
         id: state
@@ -70,12 +71,21 @@ jobs:
         if: steps.state.outputs.finalized != 'true'
         shell: bash
         run: |
-          rm -f canonical_proof_report.pdf
-          latexmk -pdf -interaction=nonstopmode -halt-on-error canonical_proof_report.tex
-          cp canonical_proof_report.pdf /tmp/canonical-proof-first.pdf
-          latexmk -C canonical_proof_report.tex
-          latexmk -pdf -interaction=nonstopmode -halt-on-error canonical_proof_report.tex
-          cmp /tmp/canonical-proof-first.pdf canonical_proof_report.pdf
+          rm -rf /tmp/pnp-doc-build-1 /tmp/pnp-doc-build-2
+          mkdir -p /tmp/pnp-doc-build-1 /tmp/pnp-doc-build-2
+          cp canonical_proof_report.tex /tmp/pnp-doc-build-1/
+          cp canonical_proof_report.tex /tmp/pnp-doc-build-2/
+          (
+            cd /tmp/pnp-doc-build-1
+            latexmk -pdf -interaction=nonstopmode -halt-on-error canonical_proof_report.tex
+          )
+          (
+            cd /tmp/pnp-doc-build-2
+            latexmk -pdf -interaction=nonstopmode -halt-on-error canonical_proof_report.tex
+          )
+          sha256sum /tmp/pnp-doc-build-1/canonical_proof_report.pdf /tmp/pnp-doc-build-2/canonical_proof_report.pdf
+          cmp /tmp/pnp-doc-build-1/canonical_proof_report.pdf /tmp/pnp-doc-build-2/canonical_proof_report.pdf
+          cp /tmp/pnp-doc-build-1/canonical_proof_report.pdf canonical_proof_report.pdf
 
       - name: Finalize documentation release metadata
         if: steps.state.outputs.finalized != 'true'
