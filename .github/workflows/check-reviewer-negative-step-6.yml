@@ -1,24 +1,21 @@
-name: check-reviewer-negative-step-6
+name: finalize-reviewer-negative-step-6
 
 on:
   push:
     branches:
       - test/reviewer-negative-step-6
-  pull_request:
-    branches:
-      - main
 
 permissions:
   contents: write
 
 concurrency:
-  group: reviewer-negative-step-6
+  group: reviewer-negative-step-6-finalize
   cancel-in-progress: false
 
 jobs:
-  negative-tests:
+  finalize:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
         with:
@@ -29,60 +26,60 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Extend the intentional frozen command surface
+      - name: Normalize the final test layout and command surface
         shell: bash
         run: |
+          set -euo pipefail
+
+          if [[ -f test/reviewer-negative-invariants.test.mjs ]]; then
+            mv test/reviewer-negative-invariants.test.mjs test/pcc-core-negative.test.mjs
+          fi
+
           python3 - <<'PY'
           from pathlib import Path
 
-          path = Path('pcc-public-surface-freeze0.mjs')
-          text = path.read_text()
+          replacements = {
+              Path('package.json'): (
+                  'node --test test/reviewer-negative-invariants.test.mjs',
+                  'node --test test/pcc-core-negative.test.mjs',
+              ),
+              Path('pcc-public-surface-freeze0.mjs'): (
+                  'node --test test/reviewer-negative-invariants.test.mjs',
+                  'node --test test/pcc-core-negative.test.mjs',
+              ),
+          }
 
-          check_marker = "  check: 'node --check pcc-core.mjs',\n"
-          examples_entry = "  'examples:minimal': 'node examples/minimal/run-all.mjs',\n"
-          if examples_entry not in text:
-              if text.count(check_marker) != 1:
-                  raise SystemExit('expected one public check-script marker')
-              text = text.replace(check_marker, check_marker + examples_entry)
-
-          test_marker = "  test: 'node --test',\n"
-          negative_entry = "  'test:negative': 'node --test test/reviewer-negative-invariants.test.mjs',\n"
-          if negative_entry not in text:
-              if text.count(test_marker) != 1:
-                  raise SystemExit('expected one public test-script marker')
-              text = text.replace(test_marker, test_marker + negative_entry)
-
-          path.write_text(text)
+          for path, (old, new) in replacements.items():
+              text = path.read_text()
+              if old in text:
+                  text = text.replace(old, new)
+              if new not in text:
+                  raise SystemExit(f'{path}: expected command target is missing')
+              path.write_text(text)
           PY
+
+          rm -f step6-release-audit-diagnostic.json
+          git rm .github/workflows/check-reviewer-negative-step-6.yml
+          git diff --check
 
       - name: Check syntax
         run: |
-          node --check test/reviewer-negative-invariants.test.mjs
+          node --check test/pcc-core-negative.test.mjs
           node --check pcc-public-surface-freeze0.mjs
 
       - name: Run named reviewer negative suite
         run: npm run test:negative
 
-      - name: Run minimal examples
+      - name: Run minimal reviewer examples
         run: npm run examples:minimal
 
-      - name: Run directly related checker tests
-        run: |
-          node --test \
-            test/pcc-core.test.mjs \
-            test/pcc-core.negative.test.mjs \
-            test/pcc-gpack0.test.mjs \
-            test/pcc-final-framework0.test.mjs \
-            test/pcc-pack-sufficiency0.test.mjs
+      - name: Run full test suite
+        run: npm test
 
-      - name: Check exact frozen public package surface
-        run: node --test test/pcc-public-surface-freeze0.test.mjs
-
-      - name: Capture release-audit public-surface diagnostic
+      - name: Run current-tree release audit without heavyweight regeneration gates
         shell: bash
         run: |
           node --input-type=module <<'NODE'
-          import fs from 'node:fs';
           import {
             CheckReleaseAudit0,
             makeReleaseAuditConfig0,
@@ -97,35 +94,23 @@ jobs:
             runMaterializedPublicStatusGate: false,
           }));
 
-          const diagnostic = {
+          console.log(JSON.stringify({
             tag: out.tag,
             checker: out.checker,
             Coord: out.Coord ?? null,
             Path: out.Path ?? null,
             Witness: out.Witness ?? null,
-            Ledger: out.Ledger ?? null,
-          };
+          }, null, 2));
 
-          fs.writeFileSync(
-            'step6-release-audit-diagnostic.json',
-            `${JSON.stringify(diagnostic, null, 2)}\n`,
-          );
-          console.log(JSON.stringify(diagnostic, null, 2));
+          if (out.tag !== 'accept') process.exit(1);
           NODE
 
-      - name: Check public API surface
-        run: node --test test/pcc-public-api0.test.mjs
-
-      - name: Commit command-surface update and diagnostic
+      - name: Commit the validated final Step 6 change set
         shell: bash
         run: |
           set -euo pipefail
-          if git diff --quiet -- pcc-public-surface-freeze0.mjs step6-release-audit-diagnostic.json; then
-            echo 'No diagnostic or command-surface changes to commit.'
-            exit 0
-          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add pcc-public-surface-freeze0.mjs step6-release-audit-diagnostic.json
-          git commit -m "chore: capture step-6 release-audit diagnostic"
+          git add -A
+          git commit -m "test: finalize named negative invariant suite"
           git push origin HEAD:test/reviewer-negative-step-6
