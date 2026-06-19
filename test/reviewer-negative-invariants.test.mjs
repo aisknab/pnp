@@ -2,6 +2,10 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import {
+  REVIEWER_NEGATIVE_INVARIANTS0,
+} from '../reviewer-negative-invariants.mjs';
+
+import {
   CheckGPack0,
   makeSyntheticGPack0,
 } from '../pcc-gpack0.mjs';
@@ -30,6 +34,17 @@ import {
   parseTop0,
   record,
 } from '../pcc-core.mjs';
+
+assert.deepEqual(REVIEWER_NEGATIVE_INVARIANTS0, [
+  'invalid-locked-nand',
+  'residual-slack-mismatch',
+  'hidden-minimization-attempt',
+  'mode-firewall-violation',
+  'malformed-pccpack',
+  'invalid-zero-slack',
+  'hash-mismatch',
+  'certificate-parser-mismatch',
+]);
 
 function assertCheckerReject(out, {
   checker,
