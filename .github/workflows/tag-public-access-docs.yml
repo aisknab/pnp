@@ -1,0 +1,46 @@
+name: tag-public-access-documentation-release
+
+on:
+  push:
+    branches:
+      - docs/public-access-report-7072f8d
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  DOCS_TAG: final-pnp-proof-report-docs-hardened-7072f8d-public-access-sealed
+  DOCS_DIR: docs-release/public-access-7072f8d
+
+jobs:
+  tag:
+    if: ${{ contains(github.event.head_commit.message || '', 'seal public-access canonical report revision') || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: docs/public-access-report-7072f8d
+
+      - name: Verify sealed documentation release
+        run: |
+          test -f "$DOCS_DIR/release-seal.json"
+          node tools/check-documentation-release.mjs
+          git diff --exit-code
+          git status --porcelain | test ! -s /dev/stdin
+
+      - name: Create immutable annotated documentation tag
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin --tags --force
+          if git rev-parse -q --verify "refs/tags/$DOCS_TAG" >/dev/null; then
+            test "$(git rev-list -n 1 "$DOCS_TAG")" = "$(git rev-parse HEAD)"
+            echo "$DOCS_TAG already exists at the finalized documentation commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$DOCS_TAG" -m "Documentation-only public-access revision for the 7072f8d PNP proof report. Source/checker and sealed artefact releases are unchanged."
+          git push origin "refs/tags/$DOCS_TAG"
