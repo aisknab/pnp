@@ -1,0 +1,27 @@
+name: export-main-checkout
+
+on:
+  push:
+    branches:
+      - chore/export-main-for-docs-release
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check out current main
+        run: |
+          git fetch origin main
+          git checkout --detach origin/main
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pnp-main-checkout
+          path: .
+          include-hidden-files: true
+          retention-days: 1
