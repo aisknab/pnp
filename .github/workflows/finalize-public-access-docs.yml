@@ -1,0 +1,140 @@
+name: finalize-public-access-documentation-release
+
+on:
+  push:
+    branches:
+      - docs/public-access-report-7072f8d
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: finalize-public-access-docs-7072f8d
+  cancel-in-progress: false
+
+env:
+  DOCS_DIR: docs-release/public-access-7072f8d
+  SOURCE_DATE_EPOCH: "1781740800"
+  FORCE_SOURCE_DATE: "1"
+  TZ: UTC
+  LC_ALL: C.UTF-8
+
+jobs:
+  finalize:
+    if: ${{ !contains(github.event.head_commit.message || '', 'seal public-access canonical report revision') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: docs/public-access-report-7072f8d
+
+      - name: Exit when already finalized
+        id: state
+        shell: bash
+        run: |
+          if [[ -f "$DOCS_DIR/release-seal.json" ]]; then
+            echo "finalized=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "finalized=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install TeX and PDF tools
+        if: steps.state.outputs.finalized != 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            latexmk \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            poppler-utils \
+            qpdf
+
+      - name: Apply documentation-only manuscript patch
+        if: steps.state.outputs.finalized != 'true'
+        run: |
+          patch --batch --forward -p1 < release-tools/canonical_report_public_access.patch
+          git diff --check
+
+      - name: Build two semantically identical reports
+        if: steps.state.outputs.finalized != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/pnp-doc-a /tmp/pnp-doc-b
+          mkdir -p /tmp/pnp-doc-a /tmp/pnp-doc-b
+          cp canonical_proof_report.tex /tmp/pnp-doc-a/
+          cp canonical_proof_report.tex /tmp/pnp-doc-b/
+
+          for dir in /tmp/pnp-doc-a /tmp/pnp-doc-b; do
+            (
+              cd "$dir"
+              latexmk -pdf -interaction=nonstopmode -halt-on-error canonical_proof_report.tex
+              qpdf --check canonical_proof_report.pdf
+              pdftotext canonical_proof_report.pdf canonical_proof_report.txt
+            )
+          done
+
+          cmp /tmp/pnp-doc-a/canonical_proof_report.txt /tmp/pnp-doc-b/canonical_proof_report.txt
+          test "$(pdfinfo /tmp/pnp-doc-a/canonical_proof_report.pdf | awk '/^Pages:/ {print $2}')" = "56"
+          test "$(pdfinfo /tmp/pnp-doc-b/canonical_proof_report.pdf | awk '/^Pages:/ {print $2}')" = "56"
+
+          qpdf \
+            --deterministic-id \
+            --object-streams=generate \
+            --stream-data=compress \
+            /tmp/pnp-doc-a/canonical_proof_report.pdf \
+            canonical_proof_report.pdf
+          qpdf --check canonical_proof_report.pdf
+
+      - name: Finalize release metadata and file identities
+        if: steps.state.outputs.finalized != 'true'
+        run: python3 release-tools/finalize-public-access-docs.py
+
+      - name: Verify documentation boundary
+        if: steps.state.outputs.finalized != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          pdftotext canonical_proof_report.pdf /tmp/canonical-proof.txt
+          grep -F "Documentation-only public-access revision" /tmp/canonical-proof.txt
+          grep -F "https://github.com/aisknab/pnp" /tmp/canonical-proof.txt
+          grep -F "final-pnp-proof-report-docs-hardened-7072f8d-public-access-sealed" /tmp/canonical-proof.txt
+          ! grep -F "If repository access is restricted" /tmp/canonical-proof.txt
+          ! grep -F "source-access" /tmp/canonical-proof.txt
+          ! grep -F "artefact-access" /tmp/canonical-proof.txt
+          node tools/check-documentation-release.mjs
+          git diff --check
+
+      - name: Validate unchanged source/checker suite
+        if: steps.state.outputs.finalized != 'true'
+        run: |
+          npm ci
+          npm run validate
+
+      - name: Commit finalized documentation release
+        if: steps.state.outputs.finalized != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            canonical_proof_report.pdf \
+            canonical_proof_report.tex \
+            README.md \
+            CURRENT_RELEASE.md \
+            REPRODUCE.md \
+            REVIEWER_MAP.md \
+            PUBLIC_ACCESS_REVISION.md \
+            docs-release/public-access-7072f8d \
+            tools/check-documentation-release.mjs \
+            release-tools \
+            .github/workflows/build-public-access-docs.yml \
+            .github/workflows/finalize-public-access-docs.yml
+          git commit -m "docs: seal public-access canonical report revision"
+          git push origin HEAD:docs/public-access-report-7072f8d
