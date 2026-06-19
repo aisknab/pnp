@@ -1,0 +1,99 @@
+name: check-reviewer-negative-step-6
+
+on:
+  push:
+    branches:
+      - test/reviewer-negative-step-6
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: reviewer-negative-step-6
+  cancel-in-progress: false
+
+jobs:
+  negative-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: test/reviewer-negative-step-6
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Extend the intentional frozen command surface
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('pcc-public-surface-freeze0.mjs')
+          text = path.read_text()
+
+          check_marker = "  check: 'node --check pcc-core.mjs',\n"
+          examples_entry = "  'examples:minimal': 'node examples/minimal/run-all.mjs',\n"
+          if examples_entry not in text:
+              if text.count(check_marker) != 1:
+                  raise SystemExit('expected one public check-script marker')
+              text = text.replace(check_marker, check_marker + examples_entry)
+
+          test_marker = "  test: 'node --test',\n"
+          negative_entry = "  'test:negative': 'node --test test/reviewer-negative-invariants.test.mjs',\n"
+          if negative_entry not in text:
+              if text.count(test_marker) != 1:
+                  raise SystemExit('expected one public test-script marker')
+              text = text.replace(test_marker, test_marker + negative_entry)
+
+          path.write_text(text)
+          PY
+
+      - name: Check syntax
+        run: |
+          node --check test/reviewer-negative-invariants.test.mjs
+          node --check pcc-public-surface-freeze0.mjs
+
+      - name: Run named reviewer negative suite
+        run: npm run test:negative
+
+      - name: Run minimal examples
+        run: npm run examples:minimal
+
+      - name: Run directly related checker tests
+        run: |
+          node --test \
+            test/pcc-core.test.mjs \
+            test/pcc-core.negative.test.mjs \
+            test/pcc-gpack0.test.mjs \
+            test/pcc-final-framework0.test.mjs \
+            test/pcc-pack-sufficiency0.test.mjs
+
+      - name: Run public command-surface regression tests
+        run: |
+          node --test \
+            test/pcc-public-surface-freeze0.test.mjs \
+            test/pcc-release-audit-public-surface-freeze0.test.mjs \
+            test/pcc-release-audit-public-surface-summary-negative0.test.mjs \
+            test/pcc-public-api0.test.mjs
+
+      - name: Commit intentional command-surface update
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- pcc-public-surface-freeze0.mjs; then
+            echo 'Frozen command surface already current.'
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pcc-public-surface-freeze0.mjs
+          git commit -m "chore: freeze reviewer example and negative-test commands"
+          git push origin HEAD:test/reviewer-negative-step-6
