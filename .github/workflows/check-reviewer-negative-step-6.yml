@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - test/reviewer-negative-step-6
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: write
