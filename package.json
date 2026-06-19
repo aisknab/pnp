@@ -28,6 +28,7 @@
   "scripts": {
     "check": "node --check pcc-core.mjs",
     "test": "node --test",
+    "test:negative": "node --test test/reviewer-negative-invariants.test.mjs",
     "validate": "npm run check && npm test",
     "examples:minimal": "node examples/minimal/run-all.mjs",
     "runall": "node ./bin/runall0.mjs",
