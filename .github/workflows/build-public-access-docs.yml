@@ -68,6 +68,7 @@ jobs:
           git diff --check
 
       - name: Build canonical PDF twice and require deterministic bytes
+        id: build
         if: steps.state.outputs.finalized != 'true'
         shell: bash
         run: |
@@ -84,14 +85,30 @@ jobs:
             latexmk -pdf -interaction=nonstopmode -halt-on-error canonical_proof_report.tex
           )
           sha256sum /tmp/pnp-doc-build-1/canonical_proof_report.pdf /tmp/pnp-doc-build-2/canonical_proof_report.pdf
-          cmp /tmp/pnp-doc-build-1/canonical_proof_report.pdf /tmp/pnp-doc-build-2/canonical_proof_report.pdf
           cp /tmp/pnp-doc-build-1/canonical_proof_report.pdf canonical_proof_report.pdf
+          if ! cmp /tmp/pnp-doc-build-1/canonical_proof_report.pdf /tmp/pnp-doc-build-2/canonical_proof_report.pdf; then
+            mkdir -p deterministic-build-diagnostics
+            cp /tmp/pnp-doc-build-1/canonical_proof_report.pdf deterministic-build-diagnostics/build-1.pdf
+            cp /tmp/pnp-doc-build-2/canonical_proof_report.pdf deterministic-build-diagnostics/build-2.pdf
+            cmp -l /tmp/pnp-doc-build-1/canonical_proof_report.pdf /tmp/pnp-doc-build-2/canonical_proof_report.pdf | head -n 40 || true
+            exit 1
+          fi
+
+      - name: Upload deterministic-build diagnostics
+        if: failure() && steps.state.outputs.finalized != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: pnp-documentation-build-diagnostics
+          path: deterministic-build-diagnostics/
+          if-no-files-found: ignore
+          retention-days: 7
 
       - name: Finalize documentation release metadata
-        if: steps.state.outputs.finalized != 'true'
+        if: success() && steps.state.outputs.finalized != 'true'
         run: python3 release-tools/finalize-public-access-docs.py
 
       - name: Verify PDF structure and visible access wording
+        if: success() || steps.state.outputs.finalized == 'true'
         shell: bash
         run: |
           test "$(pdfinfo canonical_proof_report.pdf | awk '/^Pages:/ {print $2}')" = "56"
@@ -105,16 +122,17 @@ jobs:
           ! grep -F "artefact-access" /tmp/canonical-proof.txt
 
       - name: Verify documentation release seal and unchanged artefact identities
+        if: success() || steps.state.outputs.finalized == 'true'
         run: node tools/check-documentation-release.mjs
 
       - name: Validate source/checker suite
-        if: steps.state.outputs.finalized != 'true'
+        if: success() && steps.state.outputs.finalized != 'true'
         run: |
           npm ci
           npm run validate
 
       - name: Enforce documentation-only changed-path boundary
-        if: steps.state.outputs.finalized != 'true'
+        if: success() && steps.state.outputs.finalized != 'true'
         shell: bash
         run: |
           git diff --check
@@ -125,7 +143,7 @@ jobs:
           done
 
       - name: Commit sealed documentation release
-        if: steps.state.outputs.finalized != 'true'
+        if: success() && steps.state.outputs.finalized != 'true'
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
@@ -146,6 +164,7 @@ jobs:
           git push origin HEAD:docs/public-access-report-7072f8d
 
       - name: Upload sealed documentation bundle
+        if: success() || steps.state.outputs.finalized == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: pnp-public-access-documentation-release
