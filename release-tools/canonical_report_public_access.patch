@@ -1,0 +1,118 @@
+--- a/canonical_proof_report.tex	2026-06-19 06:37:54.000000000 +0000
++++ b/canonical_proof_report.tex	2026-06-19 06:46:36.142087746 +0000
+@@ -12,7 +12,12 @@
+ \usepackage{listings}
+ \usepackage[T1]{fontenc}
+ \usepackage[utf8]{inputenc}
+-\hypersetup{colorlinks=true,linkcolor=blue!55!black,urlcolor=blue!55!black,citecolor=blue!55!black}
++\ifdefined\pdfinfoomitdate\pdfinfoomitdate=1\fi
++\ifdefined\pdftrailerid\pdftrailerid{}\fi
++\ifdefined\pdfsuppressptexinfo\pdfsuppressptexinfo=15\fi
++\newcommand{\PublicRepo}{\url{https://github.com/aisknab/pnp}}
++\newcommand{\DocsReleaseTag}{\texttt{final-pnp-proof-report-docs-hardened-7072f8d-public-access-sealed}}
++\hypersetup{colorlinks=true,linkcolor=blue!55!black,urlcolor=blue!55!black,citecolor=blue!55!black,pdfauthor={Keaton Garnett},pdftitle={Residual-Slack Compatible Descendant Completeness for Locked NAND},pdfsubject={Documentation-only public-access revision of the machine-checkable certificate report for P=NP over the locked NAND residual-slack package},pdfkeywords={P versus NP, locked NAND, residual slack, proof-carrying certificate, documentation revision}}
+ \pagestyle{fancy}
+ \fancyhf{}
+ \lhead{Residual-Slack PCC for Locked NAND}
+@@ -88,7 +93,13 @@
+ {\Huge\bfseries Residual-Slack Compatible Descendant Completeness for Locked NAND\par}
+ \vspace{0.45cm}
+ {\Large A machine-checkable certificate report for \(P=NP\) over the locked NAND residual-slack package\par}
+-\vspace{0.75cm}
++\vspace{0.45cm}
++{\Large Keaton Garnett\par}
++\vspace{0.12cm}
++{\normalsize PNP Labs Pty Ltd\par}
++\vspace{0.12cm}
++{\normalsize \href{mailto:review@pnplabs.com.au}{review@pnplabs.com.au}\par}
++\vspace{0.55cm}
+ {\large Residual-band exact minimization, locked NAND SAT embedding, traceable normalization, saturated support calculus, projection-defect cellization, hereditary and budget closure, selector realization, and generated proof-package checking\par}
+ \vspace{0.85cm}
+ {\large Complete machine-checkable proof report.\par}
+@@ -98,7 +109,14 @@
+ \[
+ \CheckPack(\GenPack())=\mathsf{accept}\quad\Longrightarrow\quad P=NP.
+ \]
+-This paper records the completed finite-certificate route and its executable release seal.  The repository emits an accepted \texttt{FinalPNPProofReport0} whose theorem field is \(P=NP\), whose antecedent is \(\CheckPack(\GenPack())=\mathsf{accept}\), and whose final acceptance/replay, final certificate, release gate, release audit, and proof report records all accept.  The hardened validation log for the sealed repository state reports 1121 passing tests, no failures, no cancellations, and an accepted final proof-report summary and full check record.  Release custody separates the source/checker revision from the durable artefact-bearing release: source tag \texttt{final-pnp-proof-report-hardened-7072f8d}; sealed artefact tag \texttt{final-pnp-proof-report-artifacts-hardened-7072f8d-sealed}.  The materialized proof-report artefact bundle is committed under \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/}; its manifest is \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/release-seal.json}, and non-self file-level checksums are recorded in \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS}.  This release includes the completed residual-band hardening pass through Terminal MuBridge, SaturatePositive, BCELReady, BN2--BN6, Realizer/HB closure, and ZeroSlack final closure. Public orientation, verification materials, and review channels are maintained by PNP Labs at \url{https://pnplabs.com.au/}. Review, source-access, and artefact-access requests should be sent to \href{mailto:review@pnplabs.com.au}{review@pnplabs.com.au}; security or artefact-integrity disclosures should be sent to \href{mailto:security@pnplabs.com.au}{security@pnplabs.com.au}.
++This paper records the completed finite-certificate route and its executable release seal.  The repository emits an accepted \texttt{FinalPNPProofReport0} whose theorem field is \(P=NP\), whose antecedent is \(\CheckPack(\GenPack())=\mathsf{accept}\), and whose final acceptance/replay, final certificate, release gate, release audit, and proof report records all accept.  The hardened validation log for the sealed repository state reports 1121 passing tests, no failures, no cancellations, and an accepted final proof-report summary and full check record.  Release custody separates the source/checker revision from the durable artefact-bearing release: source tag \texttt{final-pnp-proof-report-hardened-7072f8d}; sealed artefact tag \texttt{final-pnp-proof-report-artifacts-hardened-7072f8d-sealed}.  The materialized proof-report artefact bundle is committed under \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/}; its manifest is \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/release-seal.json}, and non-self file-level checksums are recorded in \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS}.  This release includes the completed residual-band hardening pass through Terminal MuBridge, SaturatePositive, BCELReady, BN2--BN6, Realizer/HB closure, and ZeroSlack final closure. Public orientation and verification materials are maintained by PNP Labs at \url{https://pnplabs.com.au/}. The source/checker repository and pinned release tags are public at \PublicRepo; no access request is required. Technical findings and reproduction questions should be sent to \href{mailto:review@pnplabs.com.au}{review@pnplabs.com.au}; security or artefact-integrity disclosures should be sent to \href{mailto:security@pnplabs.com.au}{security@pnplabs.com.au}.
++\end{minipage}
++\vspace{0.42cm}
++\begin{minipage}{0.88\textwidth}
++\small\raggedright
++\textbf{Documentation-only public-access revision.}\par
++{\scriptsize Documentation tag: \DocsReleaseTag.}\par
++This revision changes repository-access and review-contact instructions only. The source/checker revision, sealed artefact release, theorem statements, mathematical argument, checker implementation, generated package, accepted records, and artefact digests are unchanged.
+ \end{minipage}
+ \vfill
+ {\small This paper states the final theorem under the explicit checker trust model and reproducibility protocol recorded in Section~\ref{sec:final-proof-report}.}\par
+@@ -2749,7 +2767,7 @@
+ The accepted proof report contains accepted \texttt{CheckFinalPNPReleaseGate0}; the release gate contains accepted \texttt{CheckFinalPNPCertificate0}; the final certificate contains accepted \texttt{CheckConcreteFinalAcceptanceReplay0}; and the final replay closure contains accepted \texttt{CheckAcceptRun0}, accepted \texttt{ReplayAcceptRun0}, accepted \texttt{EmitFinalVerdict0}, and accepted \texttt{CheckPCCPackexp0}.  The linkage records compare canonical bytes and digest records at every layer.  The report accepts only when the theorem field is the public statement \(P=NP\) with antecedent \(\CheckPack(\GenPack())=\mathsf{accept}\) and conditional flag true.
+ \end{proof}
+ 
+-\subsection{Reproducibility and repository access}
++\subsection{Reproducibility and public repository}
+ The proof code and the materialized proof-report artefacts are maintained together in the repository, with source/checker provenance separated from the durable artefact release.  The hardened source/checker revision is
+ \begin{center}
+ \texttt{final-pnp-proof-report-hardened-7072f8d} at \texttt{7072f8d0bda6d44d240f9bb3fad624fd357e1278},
+@@ -2766,16 +2784,35 @@
+ \begin{center}
+ \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/}
+ \end{center}
+-Its central manifest is \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/release-seal.json}, and the file-level checksum ledger is \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS}.  Ordinary checksum verification uses all non-self entries in \texttt{SHA256SUMS}; the checksum of \texttt{SHA256SUMS} itself is detached metadata in \texttt{SHA256SUMS.sha256}.  If repository access is restricted, reviewers should request source and artefact access through PNP Labs at \href{mailto:review@pnplabs.com.au}{review@pnplabs.com.au}. Security or artefact-integrity disclosures should be sent to \href{mailto:security@pnplabs.com.au}{security@pnplabs.com.au}.
++Its central manifest is \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/release-seal.json}, and the file-level checksum ledger is \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS}.  Ordinary checksum verification uses all non-self entries in \texttt{SHA256SUMS}; the checksum of \texttt{SHA256SUMS} itself is detached metadata in \texttt{SHA256SUMS.sha256}.
++
++The source/checker repository and all three pinned release refs are publicly retrievable from \PublicRepo. No access request is required. The documentation-only public-access revision is sealed by \DocsReleaseTag. It updates publication and contact instructions only and does not alter the source/checker commit, sealed artefact tag, generated artefacts, checker acceptance records, mathematical text, or theorem boundary. Technical findings and reproduction questions should be sent to \href{mailto:review@pnplabs.com.au}{review@pnplabs.com.au}. Security or artefact-integrity disclosures should be sent to \href{mailto:security@pnplabs.com.au}{security@pnplabs.com.au}.
+ 
+ There are two verification modes.  Artefact verification checks out the sealed artefact release and verifies the committed JSON artefacts against \texttt{SHA256SUMS}, excluding any self-entry.  Regeneration verification checks that the source/checker revision emits an accepted \texttt{CheckFinalPNPProofReport0} record with theorem statement \(P=NP\), antecedent \(\CheckPack(\GenPack())=\mathsf{accept}\), accepted status, and accepted package/replay/certificate linkage.  Exact release-context digest equality is required only when regenerating in the same clean release context used to create the committed artefact bundle.
+ 
+-The canonical regeneration commands are:
++The canonical public verification and regeneration commands are:
+ \begin{lstlisting}
++git clone https://github.com/aisknab/pnp.git pnp-review
++cd pnp-review
++git fetch --tags --force
++
++git checkout final-pnp-proof-report-docs-hardened-7072f8d-public-access-sealed
++D=docs-release/public-access-7072f8d
++sha256sum -c "$D/SHA256SUMS"
++
++git checkout final-pnp-proof-report-artifacts-hardened-7072f8d-sealed
+ B=proof-artifacts/final-pnp-proof-report-hardened-7072f8d
++sha256sum -c "$B/SHA256SUMS"
++sha256sum -c "$B/SHA256SUMS.sha256"
++
++git checkout final-pnp-proof-report-hardened-7072f8d
++npm ci
+ npm run validate
+-node ./bin/write-final-pnp-proof-report0.mjs "$B/compact"
+-node ./bin/write-final-pnp-proof-report0.mjs "$B/full" --full
++OUT=/tmp/pnp-proof-report-public-access-repro
++rm -rf "$OUT"
++mkdir -p "$OUT/compact" "$OUT/full"
++node ./bin/write-final-pnp-proof-report0.mjs "$OUT/compact"
++node ./bin/write-final-pnp-proof-report0.mjs "$OUT/full" --full
+ \end{lstlisting}
+ 
+ \section{Formula sheet}
+@@ -2858,6 +2895,12 @@
+ \[
+ \texttt{final-pnp-proof-report-artifacts-hardened-7072f8d-sealed}.
+ \]
++The documentation-only public-access revision is the annotated tag
++\[
++\DocsReleaseTag.
++\]
++That documentation tag changes only repository-access and review-contact instructions and the PDF/TeX file identities. It does not modify the source/checker revision, generated artefact release, accepted checker records, theorem statements, mathematical argument, or artefact digests.
++
+ It contains the materialized proof-report artefact bundle at
+ \begin{center}
+ \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/}
+@@ -2956,7 +2999,7 @@
+ \end{center}
+ The required durable files are \texttt{release-seal.json}, \texttt{SHA256SUMS}, \texttt{SHA256SUMS.sha256}, the compact artefacts under \texttt{compact/}, and the full artefacts under \texttt{full/}.  File-level verification checks the committed bundle against \texttt{SHA256SUMS} while excluding any \texttt{SHA256SUMS} self-entry.
+ 
+-In regeneration mode, the reviewer checks that the recorded source/checker revision emits an accepted \texttt{CheckFinalPNPProofReport0} record with the same theorem statement, accepted status, and package/replay/certificate linkage.  Exact equality to every committed \texttt{release-seal.json} digest is a property of the frozen artefact bundle and of reproductions run in the same clean release context; fresh regenerations in a different output context may produce different release-context digests while still preserving accepted theorem fields and stable core package, accept-run, acceptance-transcript, final-verdict, and \texttt{CheckPCCPackexp0} digests.  The regeneration commands are those shown in Section 20.22.  Review, source-access, and artefact-access requests should be sent to \href{mailto:review@pnplabs.com.au}{review@pnplabs.com.au}; security or artefact-integrity disclosures should be sent to \href{mailto:security@pnplabs.com.au}{security@pnplabs.com.au}.
++In regeneration mode, the reviewer checks that the recorded source/checker revision emits an accepted \texttt{CheckFinalPNPProofReport0} record with the same theorem statement, accepted status, and package/replay/certificate linkage.  Exact equality to every committed \texttt{release-seal.json} digest is a property of the frozen artefact bundle and of reproductions run in the same clean release context; fresh regenerations in a different output context may produce different release-context digests while still preserving accepted theorem fields and stable core package, accept-run, acceptance-transcript, final-verdict, and \texttt{CheckPCCPackexp0} digests.  The public clone, artefact-verification, and regeneration commands are those shown in Section 20.22. The source/checker repository and pinned release tags are public at \PublicRepo; no access request is required. Technical findings and reproduction questions should be sent to \href{mailto:review@pnplabs.com.au}{review@pnplabs.com.au}; security or artefact-integrity disclosures should be sent to \href{mailto:security@pnplabs.com.au}{security@pnplabs.com.au}.
+ 
+ \section{Appendix A: locked NAND macro truth signatures}
+ 
