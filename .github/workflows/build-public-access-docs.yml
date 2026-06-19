@@ -67,48 +67,77 @@ jobs:
           patch --batch --forward -p1 < release-tools/canonical_report_public_access.patch
           git diff --check
 
-      - name: Build canonical PDF twice and require deterministic bytes
+      - name: Build canonical PDF twice
         id: build
         if: steps.state.outputs.finalized != 'true'
+        continue-on-error: true
         shell: bash
         run: |
-          rm -rf /tmp/pnp-doc-build-1 /tmp/pnp-doc-build-2
-          mkdir -p /tmp/pnp-doc-build-1 /tmp/pnp-doc-build-2
+          set +e
+          rm -rf /tmp/pnp-doc-build-1 /tmp/pnp-doc-build-2 deterministic-build-diagnostics
+          mkdir -p /tmp/pnp-doc-build-1 /tmp/pnp-doc-build-2 deterministic-build-diagnostics
           cp canonical_proof_report.tex /tmp/pnp-doc-build-1/
           cp canonical_proof_report.tex /tmp/pnp-doc-build-2/
+
           (
             cd /tmp/pnp-doc-build-1
             latexmk -pdf -interaction=nonstopmode -halt-on-error canonical_proof_report.tex
-          )
+          ) > deterministic-build-diagnostics/build-1.log 2>&1
+          status1=$?
+
           (
             cd /tmp/pnp-doc-build-2
             latexmk -pdf -interaction=nonstopmode -halt-on-error canonical_proof_report.tex
-          )
-          sha256sum /tmp/pnp-doc-build-1/canonical_proof_report.pdf /tmp/pnp-doc-build-2/canonical_proof_report.pdf
-          cp /tmp/pnp-doc-build-1/canonical_proof_report.pdf canonical_proof_report.pdf
-          if ! cmp /tmp/pnp-doc-build-1/canonical_proof_report.pdf /tmp/pnp-doc-build-2/canonical_proof_report.pdf; then
-            mkdir -p deterministic-build-diagnostics
-            cp /tmp/pnp-doc-build-1/canonical_proof_report.pdf deterministic-build-diagnostics/build-1.pdf
-            cp /tmp/pnp-doc-build-2/canonical_proof_report.pdf deterministic-build-diagnostics/build-2.pdf
-            cmp -l /tmp/pnp-doc-build-1/canonical_proof_report.pdf /tmp/pnp-doc-build-2/canonical_proof_report.pdf | head -n 40 || true
-            exit 1
+          ) > deterministic-build-diagnostics/build-2.log 2>&1
+          status2=$?
+
+          status=0
+          if [[ $status1 -ne 0 || $status2 -ne 0 ]]; then
+            status=1
           fi
 
+          if [[ -f /tmp/pnp-doc-build-1/canonical_proof_report.pdf ]]; then
+            cp /tmp/pnp-doc-build-1/canonical_proof_report.pdf deterministic-build-diagnostics/build-1.pdf
+          fi
+          if [[ -f /tmp/pnp-doc-build-2/canonical_proof_report.pdf ]]; then
+            cp /tmp/pnp-doc-build-2/canonical_proof_report.pdf deterministic-build-diagnostics/build-2.pdf
+          fi
+
+          if [[ -f /tmp/pnp-doc-build-1/canonical_proof_report.pdf && -f /tmp/pnp-doc-build-2/canonical_proof_report.pdf ]]; then
+            sha256sum /tmp/pnp-doc-build-1/canonical_proof_report.pdf /tmp/pnp-doc-build-2/canonical_proof_report.pdf | tee deterministic-build-diagnostics/SHA256SUMS
+            if cmp /tmp/pnp-doc-build-1/canonical_proof_report.pdf /tmp/pnp-doc-build-2/canonical_proof_report.pdf; then
+              cp /tmp/pnp-doc-build-1/canonical_proof_report.pdf canonical_proof_report.pdf
+            else
+              cmp -l /tmp/pnp-doc-build-1/canonical_proof_report.pdf /tmp/pnp-doc-build-2/canonical_proof_report.pdf | head -n 80 > deterministic-build-diagnostics/cmp.txt || true
+              status=1
+            fi
+          else
+            status=1
+          fi
+
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          exit 0
+
       - name: Upload deterministic-build diagnostics
-        if: failure() && steps.state.outputs.finalized != 'true'
+        if: steps.state.outputs.finalized != 'true'
         uses: actions/upload-artifact@v4
         with:
           name: pnp-documentation-build-diagnostics
           path: deterministic-build-diagnostics/
-          if-no-files-found: ignore
+          if-no-files-found: error
           retention-days: 7
 
+      - name: Require successful deterministic PDF build
+        if: steps.state.outputs.finalized != 'true'
+        shell: bash
+        run: |
+          test "${{ steps.build.outputs.status }}" = "0"
+
       - name: Finalize documentation release metadata
-        if: success() && steps.state.outputs.finalized != 'true'
+        if: steps.state.outputs.finalized != 'true'
         run: python3 release-tools/finalize-public-access-docs.py
 
       - name: Verify PDF structure and visible access wording
-        if: success() || steps.state.outputs.finalized == 'true'
         shell: bash
         run: |
           test "$(pdfinfo canonical_proof_report.pdf | awk '/^Pages:/ {print $2}')" = "56"
@@ -122,17 +151,16 @@ jobs:
           ! grep -F "artefact-access" /tmp/canonical-proof.txt
 
       - name: Verify documentation release seal and unchanged artefact identities
-        if: success() || steps.state.outputs.finalized == 'true'
         run: node tools/check-documentation-release.mjs
 
       - name: Validate source/checker suite
-        if: success() && steps.state.outputs.finalized != 'true'
+        if: steps.state.outputs.finalized != 'true'
         run: |
           npm ci
           npm run validate
 
       - name: Enforce documentation-only changed-path boundary
-        if: success() && steps.state.outputs.finalized != 'true'
+        if: steps.state.outputs.finalized != 'true'
         shell: bash
         run: |
           git diff --check
@@ -143,7 +171,7 @@ jobs:
           done
 
       - name: Commit sealed documentation release
-        if: success() && steps.state.outputs.finalized != 'true'
+        if: steps.state.outputs.finalized != 'true'
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
@@ -164,7 +192,6 @@ jobs:
           git push origin HEAD:docs/public-access-report-7072f8d
 
       - name: Upload sealed documentation bundle
-        if: success() || steps.state.outputs.finalized == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: pnp-public-access-documentation-release
