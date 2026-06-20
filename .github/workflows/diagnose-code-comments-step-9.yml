@@ -1,0 +1,45 @@
+name: diagnose-code-comments-step-9
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  diagnose:
+    if: ${{ github.head_ref == 'docs/code-comments-step-9' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: docs/code-comments-step-9
+      - name: Run the inserter with anchor tracing
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('tools/apply-step9-comments.py')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace(
+              "    count = text.count(anchor)\n",
+              "    count = text.count(anchor)\n    print(f'ANCHOR {relative_path}: {anchor!r} count={count}', flush=True)\n",
+              1,
+          )
+          text = text.replace(
+              "    if count != 1:\n",
+              "    if count < 1:\n",
+              1,
+          )
+          path.write_text(text, encoding='utf-8')
+          PY
+          set +e
+          python3 tools/apply-step9-comments.py > step9-anchor-diagnostic.log 2>&1
+          status=$?
+          echo "exit_status=$status" >> step9-anchor-diagnostic.log
+          exit 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: step9-anchor-diagnostic
+          path: step9-anchor-diagnostic.log
+          if-no-files-found: error
+          retention-days: 2
