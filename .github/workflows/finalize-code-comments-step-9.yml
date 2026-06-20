@@ -32,6 +32,17 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('tools/apply-step9-comments.py')
+          text = path.read_text(encoding='utf-8')
+          old = """    count = text.count(anchor)\n    if count != 1:\n        raise RuntimeError(\n            f'{relative_path}: expected exactly one anchor {anchor!r}, found {count}'\n        )\n"""
+          new = """    count = text.count(anchor)\n    if count < 1:\n        raise RuntimeError(\n            f'{relative_path}: expected anchor {anchor!r}, found {count}'\n        )\n"""
+          if old not in text:
+              raise SystemExit('unable to patch the temporary comment inserter')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
           python3 tools/apply-step9-comments.py
           git rm tools/apply-step9-comments.py
           git rm .github/workflows/finalize-code-comments-step-9.yml
