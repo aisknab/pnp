@@ -1,0 +1,83 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  online-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check syntax
+        run: npm run check
+
+      - name: Run named negative suite
+        run: npm run test:negative
+
+      - name: Run minimal reviewer examples
+        run: npm run examples:minimal
+
+      - name: Run public surface smoke tests
+        run: |
+          node --test \
+            test/pcc-public-api0.test.mjs \
+            test/pcc-public-surface-freeze0.test.mjs \
+            test/pcc-release-audit-public-surface-freeze0.test.mjs \
+            test/pcc-release-audit-public-surface-summary-negative0.test.mjs
+
+      - name: Run lightweight release audit
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import {
+            CheckReleaseAudit0,
+            makeReleaseAuditConfig0,
+          } from './pcc-release-audit0.mjs';
+
+          const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+            runSyntaxCheck: false,
+            runRunAll: false,
+            runMutationCheck: false,
+            runCliSmoke: false,
+            runPublicSurfaceFreeze: true,
+            runMaterializedPublicStatusGate: false,
+          }));
+
+          console.log(JSON.stringify({
+            tag: out.tag,
+            checker: out.checker,
+            Coord: out.Coord ?? null,
+            Path: out.Path ?? null,
+            Witness: out.Witness ?? null,
+          }, null, 2));
+
+          if (out.tag !== 'accept') process.exit(1);
+          NODE
+
+      - name: Verify tracked files were not rewritten
+        run: |
+          git diff --check
+          git diff --exit-code

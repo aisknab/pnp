@@ -1,0 +1,47 @@
+name: full-verification
+
+on:
+  workflow_dispatch:
+    inputs:
+      include_release_audit:
+        description: Run the full release audit after npm test
+        required: true
+        default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: full-verification-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  full-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run full test suite
+        run: npm test
+
+      - name: Run full release audit
+        if: inputs.include_release_audit == 'true'
+        run: npm run release:audit
+
+      - name: Verify tracked files were not rewritten
+        run: |
+          git diff --check
+          git diff --exit-code
