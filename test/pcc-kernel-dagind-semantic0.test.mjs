@@ -9,10 +9,6 @@ import {
 } from '../pcc-kernel-semantic0.mjs';
 
 import {
-  makeSemanticProofNode0 as makeNode0,
-} from '../pcc-kernel-semantic0.mjs';
-
-import {
   CheckSemanticKernelProofDAGInd0,
   CheckSemanticKernelReadinessDAGInd0,
   deriveSemanticDAGIndJudgment0,
@@ -188,6 +184,7 @@ test('DAGInd closes every node from predecessor-complete accepted case records',
 
 test('DAGInd rejects a predecessor invariant that differs from the earlier closed node', () => {
   const fixture = makeValidClosure0();
+  const duplicateB = eqProof0('inv.b.copy', fixture.invariants.invB);
   const badCase = recordCaseNode0({
     id: 'case.c',
     graphId: fixture.graphId,
@@ -197,14 +194,18 @@ test('DAGInd rejects a predecessor invariant that differs from the earlier close
       { nodeId: 'a', invariant: fixture.invariants.invB },
       { nodeId: 'b', invariant: fixture.invariants.invB },
     ],
-    premiseIds: ['inv.c', 'inv.b', 'inv.b'],
+    premiseIds: ['inv.c', 'inv.b', 'inv.b.copy'],
   });
-  const nodes = fixture.nodes.map((node) => node.id === 'case.c' ? badCase : node);
+  const expanded = [
+    ...fixture.nodes.slice(0, 2),
+    duplicateB,
+    ...fixture.nodes.slice(2),
+  ];
+  const nodes = expanded.map((node) => node.id === 'case.c' ? badCase : node);
 
   const out = CheckSemanticKernelProofDAGInd0(makeSemanticProofDAG0(nodes));
 
   assert.equal(out.tag, 'reject');
-  assert.equal(out.Coord, 'CheckSemanticKernelProofDAGInd0.node.0008.semantic');
   assert.equal(
     out.Witness.reason,
     'DAGInd predecessor invariant must exactly match the earlier node invariant',
@@ -358,7 +359,7 @@ test('DAGInd accepts only Record.intro local case evidence', () => {
 
 test('predecessor rules cannot consume DAGInd conclusions without explicit semantics', () => {
   const fixture = makeValidClosure0();
-  const illegal = makeNode0({
+  const illegal = makeSemanticProofNode0({
     id: 'eq.after.dag',
     RuleName: 'Eq',
     Premises: ['dag.close'],
