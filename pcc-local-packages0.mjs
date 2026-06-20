@@ -1,3 +1,22 @@
+/**
+ * Reviewer orientation (non-normative).
+ *
+ * Purpose: validate the inventory and common contracts for the E-through-PACK
+ * local package families that encode the claimed residual-band proof pipeline.
+ * Inputs: individual LocalPackage records or a LocalPackagePack containing all
+ * required families, row references, imports, bounds, no-min, and reflection ledgers.
+ * Outputs: phase-ledgered accept/reject records and compact normal-form summaries.
+ * Invariants enforced: stable family identity, required theorem/contract names,
+ * row-reference alignment, route/proof metadata, forbidden imports, shared bounds,
+ * no executable minimization identifiers, and absence of opaque proof material.
+ * Assumptions not checked: mathematical truth or completeness of the named package
+ * theorems, validity of assertion-shaped contract fields, or adequacy of row coverage.
+ * Failure modes: missing families, identity drift, rejected contract metadata,
+ * import violations, bound failures, or child-package rejects propagate by name.
+ * Naming: E, N, RW, BN2–BN6, R, HB, O, G, Final, and PACK are stable release IDs;
+ * they are intentionally explained rather than renamed to avoid schema drift.
+ */
+
 import {
   digestCanonical0,
 } from './pcc-verifier-frag0.mjs';
@@ -72,6 +91,9 @@ const LOCAL_PACKAGE_REQUIRED_FIELDS0 = Object.freeze([
   'ReflectionLedger',
 ]);
 
+// Stable crosswalk from serialized package-family IDs to theorem identifiers.
+// These labels are kept unchanged for release compatibility; see
+// docs/terminology_crosswalk.md for conventional-language descriptions.
 const LOCAL_THEOREM_BY_FAMILY0 = Object.freeze({
   E: 'E.VerifyDWSoundness',
   N: 'N.TraceableNormalization',
@@ -339,6 +361,16 @@ export function makeSyntheticLocalPackages0(overrides = {}) {
   };
 }
 
+/**
+ * Validates one named package-family contract record.
+ * Input: LocalPackage0 for one stable family ID.
+ * Output: accepted family summary or the first identity/contract/row/route/proof/bound
+ * reject record.
+ * Enforces: expected family metadata, contracts, row refs, route/proof flags, bounds,
+ * no-hidden-min metadata/scan, and no opaque proof material.
+ * Does not check: mathematical truth or completeness of the family's named theorem.
+ * Failure modes: the first failed validation phase is returned with an exact path.
+ */
 export async function CheckLocalPackageFamily0(localPackage) {
   const checker = 'CheckLocalPackageFamily0';
   const ledger = [];
@@ -401,6 +433,15 @@ export async function CheckLocalPackageFamily0(localPackage) {
   });
 }
 
+/**
+ * Validates the complete local-package inventory and cross-family ledgers.
+ * Input: LocalPackagePack0 containing all required families and common ledgers.
+ * Output: accepted inventory summary or a wrapped first family/global-ledger reject.
+ * Enforces: exact family coverage, imports, row/theorem alignment, child acceptance,
+ * bounds/reflection/no-min ledgers, and no opaque proof material.
+ * Does not check: package-theorem mathematical soundness or row-universe completeness.
+ * Failure modes: shape/inventory/coverage/import/child/theorem/ledger rejection.
+ */
 export async function CheckLocalPackages0(pack) {
   const checker = 'CheckLocalPackages0';
   const ledger = [];

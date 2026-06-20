@@ -1,3 +1,23 @@
+/**
+ * Reviewer orientation (non-normative).
+ *
+ * Purpose: provide the common finite audit-case harness and canonical JSON digest
+ * helpers used by higher-level checkers.
+ * Inputs: JavaScript audit-case descriptors and ordinary JavaScript values.
+ * Outputs: deterministic accept/reject records, ledgers, canonical strings, and
+ * SHA-256 metadata records.
+ * Invariants enforced: unique case identifiers, declared expectation/polarity,
+ * first failing case reporting, sorted object keys, and explicit canonical forms
+ * for values such as BigInt, byte arrays, errors, and non-finite numbers.
+ * Assumptions not checked: the mathematical truth of a case description, the
+ * soundness of a callback supplied by a caller, or the cryptographic/runtime
+ * correctness of Node.js SHA-256 and JSON handling.
+ * Failure modes: malformed case definitions throw during construction; a suite
+ * mismatch returns a reject record with a coordinate, path, witness, and ledger.
+ * Naming: the suffix `0` denotes the version-zero record/checker schema; `Frag`
+ * means a finite verifier fragment, not a proof of the repository's theorem.
+ */
+
 import { createHash } from 'node:crypto';
 
 const CHECKER_ID = 'CheckVerifierFrag0';
@@ -74,6 +94,18 @@ export function makeRejectCase({
   });
 }
 
+/**
+ * Runs a finite suite of positive/negative audit cases.
+ * Input: a `VerifierFrag0`-shaped object whose callbacks return, reject, or throw.
+ * Output: an accept record if every observation matches its declared expectation;
+ * otherwise a reject record for the first mismatching case.
+ * Enforces: case-shape, unique IDs, declared polarity/expectation, deterministic
+ * coordinates, and a ledger digest for every executed case.
+ * Does not check: whether the callbacks cover a theorem or whether an accepted child
+ * checker is mathematically sound.
+ * Failure modes: malformed suite input or a callback result/throw inconsistent with
+ * the declared expectation.
+ */
 export async function CheckVerifierFrag0(fragment = {}) {
   const inputCheck = validateFragmentShape(fragment);
 
@@ -518,6 +550,15 @@ function isExplicitPassedRejectResult(value) {
   );
 }
 
+/**
+ * Computes SHA-256 over this module's canonical JSON representation.
+ * Input: any JavaScript value supported by `canonicalize`.
+ * Output: `{ alg, bytes, hex }` metadata; it is an identity/index record only.
+ * Enforces: sorted object keys and explicit encodings for non-JSON primitive cases.
+ * Does not check: semantic equality, theorem correctness, or collision impossibility.
+ * Failure modes: underlying runtime/hash failures; cycles are represented explicitly
+ * rather than recursively traversed forever.
+ */
 export function digestCanonical0(value) {
   const canonical = stableStringify0(value);
   const hex = createHash('sha256').update(canonical, 'utf8').digest('hex');
@@ -529,6 +570,15 @@ export function digestCanonical0(value) {
   };
 }
 
+/**
+ * Serializes a JavaScript value after deterministic canonicalization.
+ * Input: a supported JavaScript value.
+ * Output: a JSON string with stable key order and explicit special-value records.
+ * Enforces: deterministic representation within this version-zero JSON convention.
+ * Does not check: compatibility with the byte codec in `pcc-core.mjs` or semantic
+ * correctness of the represented object.
+ * Failure modes: JSON/runtime errors for values outside the handled convention.
+ */
 export function stableStringify0(value) {
   return JSON.stringify(canonicalize(value, new WeakSet()));
 }

@@ -1,3 +1,21 @@
+/**
+ * Reviewer orientation (non-normative).
+ *
+ * Purpose: validate and materialize the top-level proof-report record after the final
+ * certificate and release gate have accepted.
+ * Inputs: a FinalPNPProofReport envelope containing the release-gate envelope/check
+ * record, report fields, linkage digests, configuration, and optional JSON artefacts.
+ * Outputs: an accepted/rejected final proof-report record and writer-produced JSON files.
+ * Invariants enforced: release-gate acceptance, exact conditional theorem fields,
+ * report contract/status, materialized JSON agreement, canonical linkage, and the rule
+ * that publication output is emitted only after all configured checks accept.
+ * Assumptions not checked: truth of P=NP, soundness of upstream mathematics/checkers,
+ * external review status, or correctness merely because a report/hash is published.
+ * Failure modes: rejected/stale gate, report-shape or theorem drift, JSON mismatch,
+ * broken linkage, or emission-contract failure returns a named reject record.
+ * Naming: this is a release/report checker; its acceptance is not peer review.
+ */
+
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
@@ -173,6 +191,15 @@ export function makeFinalPNPProofReportRecord0({
   };
 }
 
+/**
+ * Validates the final publication/report envelope.
+ * Input: FinalPNPProofReport0 and optional check configuration.
+ * Output: accepted final-report normal form or deterministic reject record.
+ * Enforces: release-gate acceptance, report shape/contract, materialized JSON, exact
+ * linkage, and emission only after configured checks succeed.
+ * Does not check: P=NP, upstream checker soundness, or external peer-review status.
+ * Failure modes: configuration/input/gate/report/contract/JSON/linkage/emission reject.
+ */
 export async function CheckFinalPNPProofReport0(
   input,
   config = makeFinalPNPProofReportConfig0(),

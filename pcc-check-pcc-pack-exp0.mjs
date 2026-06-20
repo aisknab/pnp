@@ -1,4 +1,22 @@
 
+/**
+ * Reviewer orientation (non-normative).
+ *
+ * Purpose: check the concrete materialized PCCPack and its public coverage/linkage
+ * claims at the executable package-acceptance boundary.
+ * Inputs: a materialized package envelope or package input plus a configuration that
+ * selects concrete, coverage, claim-boundary, JSON, and record-alignment checks.
+ * Outputs: an accepted `CheckPCCPackexp0` normal form or a deterministic reject record.
+ * Invariants enforced: concrete package acceptance, required coverage fields,
+ * record/digest alignment, materialized JSON identity, G/final linkage, and the exact
+ * rule that a public conclusion is available only after an accepted run.
+ * Assumptions not checked: mathematical sufficiency of the covered predicates,
+ * independent checker soundness, or truth of theorem fields inside accepted records.
+ * Failure modes: bad configuration/input, concrete checker rejection, missing coverage,
+ * claim-boundary drift, JSON mismatch, or record-alignment failure rejects by phase.
+ * Naming: `exp` denotes the explicit/materialized package boundary used by the report.
+ */
+
 import {
   digestCanonical0,
   stableStringify0,
@@ -82,6 +100,16 @@ export function makeCheckPCCPackexpConfig0(overrides = {}) {
   };
 }
 
+/**
+ * Checks the concrete explicit PCCPack acceptance boundary used by the public report.
+ * Input: materialized package input and optional version-zero configuration.
+ * Output: accepted explicit-package normal form or a deterministic phase reject.
+ * Enforces: configured concrete checking, required coverage/linkage, exact public claim
+ * boundary, JSON materialization, and record alignment.
+ * Does not check: mathematical truth of accepted theorem predicates.
+ * Failure modes: configuration/input, concrete package, coverage, claim, JSON, or
+ * alignment rejection.
+ */
 export async function CheckPCCPackexp0(
   input,
   config = makeCheckPCCPackexpConfig0(),

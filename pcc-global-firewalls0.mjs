@@ -1,3 +1,21 @@
+/**
+ * Reviewer orientation (non-normative).
+ *
+ * Purpose: aggregate three cross-package controls: import-graph discipline,
+ * expanded no-hidden-minimization scanning, and finite/polynomial bound metadata.
+ * Inputs: an ImportGraph, NoHiddenMinScan, Bounds record, and their wrapper pack.
+ * Outputs: separate checker records and an aggregate GlobalFirewalls normal form.
+ * Invariants enforced: required families, acyclic imports, forbidden dependency
+ * edges, token-only BC/UN crossings, declared expansion stages, forbidden executable
+ * identifiers, shared public schedule bounds, and absence of opaque proof markers.
+ * Assumptions not checked: semantic equivalence of differently named algorithms,
+ * completeness of generated-code expansion, mathematical polynomiality of a stated
+ * bound, or soundness of package theorems protected by these firewalls.
+ * Failure modes: the first structural, import, occurrence, schedule, bound, or
+ * opaque-proof defect returns a reject record with the owning subchecker coordinate.
+ * Naming: “firewall” means a proof/information-flow boundary, not network security.
+ */
+
 import {
   digestCanonical0,
 } from './pcc-verifier-frag0.mjs';
@@ -245,6 +263,17 @@ export function makeSyntheticGlobalFirewalls0(overrides = {}) {
   };
 }
 
+/**
+ * Validates package dependencies and token-only crossings.
+ * Input: ImportGraph0 with families, edges, forbidden edges, and token-only records.
+ * Output: accepted graph summary or first structural/dependency reject.
+ * Enforces: required families, permitted edges, graph acyclicity, and the explicit
+ * BC/UN token-only boundary.
+ * Does not check: semantic soundness of imported theorems or hidden dependencies not
+ * represented in the supplied/import-scanned graph.
+ * Failure modes: malformed family/edge data, forbidden edge, cycle, token violation,
+ * or opaque proof marker.
+ */
 export async function CheckImportGraph0(importGraph) {
   const checker = 'CheckImportGraph0';
   const ledger = [];
@@ -297,6 +326,16 @@ export async function CheckImportGraph0(importGraph) {
   });
 }
 
+/**
+ * Validates the global expanded no-hidden-minimization scan record.
+ * Input: NoHiddenMinScan0 with stages, forbidden symbols, occurrences, and expansion.
+ * Output: accepted scan summary or a named occurrence/metadata reject.
+ * Enforces: required expansion stages/symbol list and rejection of forbidden executable
+ * occurrences in the supplied expanded artefact record.
+ * Does not check: that the supplied expansion contains every dynamic/generated call or
+ * that a differently implemented exhaustive search is polynomial.
+ * Failure modes: shape/stage/symbol/occurrence/expanded-exec/opaque-proof reject.
+ */
 export async function CheckNoHiddenMin0(scan) {
   const checker = 'CheckNoHiddenMin0';
   const ledger = [];
@@ -346,6 +385,16 @@ export async function CheckNoHiddenMin0(scan) {
   });
 }
 
+/**
+ * Validates the shared finite/polynomial bound record.
+ * Input: core, selector, per-family, and global schedule-bound metadata.
+ * Output: accepted bounds normal form or phase-specific reject record.
+ * Enforces: exact public constants/formulas, required family coverage, finite and
+ * polynomial flags, no private schedules, and displayed exponent limits.
+ * Does not check: asymptotic runtime from source control flow or certificate-size
+ * derivations; supplied bound theorems require independent proof.
+ * Failure modes: missing/mismatched core, selector, family, global, or opaque fields.
+ */
 export async function CheckBounds0(bounds) {
   const checker = 'CheckBounds0';
   const ledger = [];
@@ -396,6 +445,14 @@ export async function CheckBounds0(bounds) {
   });
 }
 
+/**
+ * Runs the aggregate import, no-hidden-minimization, and bound checks.
+ * Input: GlobalFirewalls0 wrapper pack and its ledgers/proof marker.
+ * Output: accepted aggregate normal form or a wrapped first child rejection.
+ * Enforces: phase order, child acceptance, digest summaries, and no opaque proof data.
+ * Does not check: theorem soundness or completeness of the represented call/import graph.
+ * Failure modes: wrapper shape, child checker, or opaque-proof rejection.
+ */
 export async function CheckGlobalFirewalls0(pack) {
   const checker = 'CheckGlobalFirewalls0';
   const ledger = [];

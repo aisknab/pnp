@@ -1,3 +1,21 @@
+/**
+ * Reviewer orientation (non-normative).
+ *
+ * Purpose: validate the theorem-level record that composes final integration,
+ * the PCCMin bridge, package-acceptance implications, polynomial bounds, reflection,
+ * and the exact conditional public theorem fields.
+ * Inputs: a FinalTheorem0 record and, for row-family checking, its materialized rows.
+ * Outputs: an accepted theorem normal form or a deterministic first-failure reject.
+ * Invariants enforced: accepted FinalIntegration, exact residual-band/PCCMin bridge,
+ * required implication/theorem identifiers, conditional claim boundary, bound and
+ * reflection metadata, no hidden executable minimization, and no opaque proof blobs.
+ * Assumptions not checked: mathematical validity of the implication from accepted
+ * package predicates to SAT in P or soundness of the reflection theorem itself.
+ * Failure modes: missing fields, rejected integration, theorem-string drift, bound
+ * mismatch, weak reflection, forbidden executable content, or row-coverage defects.
+ * Naming: `Final0` is the versioned theorem-record checker, not the publication seal.
+ */
+
 import {
   digestCanonical0,
 } from './pcc-verifier-frag0.mjs';
@@ -284,6 +302,16 @@ export function makeSyntheticRowFamFinal0(finalTheorem = makeSyntheticFinalTheor
   };
 }
 
+/**
+ * Validates the final theorem-composition record before release machinery.
+ * Input: FinalTheorem0 with accepted integration and theorem/bound/reflection records.
+ * Output: accepted Final0NF or first named reject.
+ * Enforces: integration acceptance, exact PCCMin bridge and conditional public theorem,
+ * required implication records, bounds/reflection/no-min fields, and no opaque proof.
+ * Does not check: mathematical soundness of the reflected implications.
+ * Failure modes: shape, integration, bridge, implication, theorem, bound, reflection,
+ * no-min, or opaque-proof rejection.
+ */
 export async function CheckFinal0(finalTheorem) {
   const checker = 'CheckFinal0';
   const ledger = [];

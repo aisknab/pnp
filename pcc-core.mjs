@@ -1,3 +1,26 @@
+/**
+ * Reviewer orientation (non-normative).
+ *
+ * Purpose: implement the byte codec, typed object model, canonical normal form,
+ * row identity, proof-reference lookup, route priority, mode-use firewall, and
+ * core no-hidden-minimization scan.
+ * Inputs: untrusted bytes, typed record objects, schema/bootstrap contexts, rows,
+ * proof indexes, route sets, mode labels, and expanded identifier occurrences.
+ * Outputs: `ok`/`err` values carrying deterministic coordinates, paths, witnesses,
+ * parser state, and optional ledgers.
+ * Invariants enforced: canonical integer/name encoding, complete top-level byte
+ * consumption, declared record arity/sorts, idempotent normal forms, route-independent
+ * row identity, full-key comparison after hash lookup, highest-priority routing,
+ * and comparison-only use of quotient equality.
+ * Assumptions not checked: mathematical theorem soundness, completeness of caller-
+ * supplied schemas, correctness of expansion/occurrence collection, or absence of
+ * equivalent brute-force search that is not classified as a forbidden occurrence.
+ * Failure modes: malformed bytes or records return the first named `COORD`; some
+ * programmer-facing encoders throw on invalid in-memory values.
+ * Naming: `NF` means canonical normal form, `Quot` means projected/quotient mode,
+ * and the suffix `0` is a schema version rather than a Boolean or arithmetic zero.
+ */
+
 import { createHash } from 'node:crypto';
 import { TextDecoder, TextEncoder } from 'node:util';
 
@@ -24,6 +47,10 @@ export const KIND = Object.freeze({
   MAP: 'Map',
 });
 
+// Stable proof/checker mode labels. `Full` carries constructive semantics;
+// `Quot` is projected comparison data; the remaining modes classify structural,
+// arithmetic, and transport-only evidence. These strings can occur in serialized
+// records, so changing them is not a comment-only refactor.
 export const MODE = Object.freeze({
   FULL: 'Full',
   QUOT: 'Quot',
@@ -587,6 +614,17 @@ export function parseObject0(ctx, state, expectedSort = SORT.Any) {
   return ok(obj, s);
 }
 
+/**
+ * Parses exactly one top-level typed object and rejects any trailing bytes.
+ * Input: bootstrap/schema context, untrusted bytes, and the expected output sort.
+ * Output: `ok(parsedObject, finalState)` or a named parse/type `err`.
+ * Enforces: declared tags/arities/sorts, canonical primitive encodings, and complete
+ * byte consumption.
+ * Does not check: mathematical meaning of the parsed certificate or completeness of
+ * the caller-provided declaration context.
+ * Failure modes: truncation, unknown/out-of-range tag, bad arity/sort, noncanonical
+ * primitive encoding, or `Parse.TrailingBytes`.
+ */
 export function parseTop0(ctx, inputBytes, expectedSort) {
   const state = new ParserState(inputBytes);
   const result = parseObject0(ctx, state, expectedSort);
@@ -775,6 +813,16 @@ export function digestObject0(ctx, obj) {
   ], ctx.sorts.Digest || SORT.Record);
 }
 
+/**
+ * Uses SHA-256 only to select a bucket, then compares full canonical key bytes.
+ * Input: context, digest-bucket index, lookup key, and candidate-key accessor.
+ * Output: all candidates whose full canonical keys equal the requested key plus an
+ * audit ledger of bucket size and comparisons.
+ * Enforces: hash-as-index rather than hash-as-semantic-equality discipline.
+ * Does not check: uniqueness of returned candidates or soundness of `keyOf`.
+ * Failure modes: caller/runtime serialization errors; ambiguity is handled by the
+ * consumer that knows the expected conclusion or row semantics.
+ */
 export function hashIndexLookup0(ctx, index, key, keyOf) {
   const keyBytes = nfSerialize0(ctx, key);
   const h = Buffer.from(sha256(keyBytes)).toString('hex');
@@ -794,6 +842,16 @@ export function hashIndexLookup0(ctx, index, key, keyOf) {
   return ok(candidates, null, [{ h, bucketSize: bucket.length, fullKeyComparisons }]);
 }
 
+/**
+ * Recomputes the 17-field canonical identity of a generated row.
+ * Input: schema context and a parsed row with package/schema IDs and raw object.
+ * Output: a typed `RowKey` record.
+ * Enforces: normalization plus interface, kind, arity, mode, frontier, semantics,
+ * incidence, dependency, profile, charge, obligation, budget, activation, rank, and
+ * payload identity; selected route is deliberately excluded.
+ * Does not check: correctness of schema key functions or the row's proof/theorem.
+ * Failure modes: unknown schema or exceptions from caller-supplied schema functions.
+ */
 export function computeRowKey0(ctx, row) {
   const schema = ctx.getSchema(row.PackageID, row.SchemaID);
   if (!schema) throw new Error(`Unknown schema ${row.PackageID}:${row.SchemaID}`);
@@ -873,6 +931,14 @@ export function primitiveNameOrNumber(obj) {
   return obj;
 }
 
+/**
+ * Checks both the displayed full row key and its displayed SHA-256 hash.
+ * Input: schema context and an untrusted serialized row record.
+ * Output: `ok(true)` or a specific row-shape/key/hash `err`.
+ * Enforces: equality with a recomputed canonical row key before accepting the hash.
+ * Does not check: route priority, proof-reference soundness, or theorem correctness.
+ * Failure modes: malformed row, `RowKey.Mismatch`, or `RowKey.HashMismatch`.
+ */
 export function checkRowKey0(ctx, rowRecord) {
   const parsed = parseRowRecord(ctx, rowRecord);
   if (isErr(parsed)) return parsed;
@@ -1043,6 +1109,16 @@ export function incompatibleRoutes(routes) {
   return encoded.size > 1;
 }
 
+/**
+ * Applies the central allowlist for equality-mode consumers.
+ * Input: equality mode and the named operation that wants to consume it.
+ * Output: `ok(true)` for allowed combinations or a named mode error.
+ * Enforces: constructive/exact consumers require `Full`; listed comparison consumers
+ * may use quotient information.
+ * Does not check: existence/correctness of a full lift, obligation discharge, or the
+ * truth of the equality itself; owning checkers must establish those records.
+ * Failure modes: `Mode.Promotion` or `Mode.UnknownConsumer`.
+ */
 export function checkModeUse0(eqMode, consumerKind) {
   const fullRequired = new Set([
     'ReplacementEquality',
@@ -1076,6 +1152,18 @@ export function checkModeUse0(eqMode, consumerKind) {
   return err(COORD.MODE_UNKNOWN_CONSUMER, [], { consumerKind });
 }
 
+/**
+ * Rejects classified executable occurrences of forbidden minimization identifiers.
+ * Input: a context supplying expansion, occurrence collection, alias resolution, and
+ * forbidden-symbol set, plus the object/AST to scan.
+ * Output: `ok(true)` or `HiddenMin.ExecCall` at the occurrence path.
+ * Enforces: scanning after the expansion supplied by the context and alias-aware name
+ * comparison for executable/branch-control occurrences.
+ * Does not check: completeness of expansion/classification or semantically equivalent
+ * exhaustive search that uses no forbidden identifier.
+ * Failure modes: first forbidden executable occurrence; malformed caller hooks may
+ * throw as programmer errors.
+ */
 export function checkNoHiddenMin0(ctx, ast) {
   const expanded = ctx.expandAll ? ctx.expandAll(ast) : ast;
   const occurrences = ctx.collectIdentifierOccurrences
