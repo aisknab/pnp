@@ -37,7 +37,6 @@ function makeDAGIndProof0({ invalid = false } = {}) {
   const b = makeSemanticVar0('b', 'Bool');
   const invA = makeSemanticEqJudgment0(a, a);
   const invB = makeSemanticEqJudgment0(b, b);
-  const badPred = makeSemanticEqJudgment0(a, b);
 
   const caseA = makeSemanticDAGIndCase0({
     graphId,
@@ -49,7 +48,7 @@ function makeDAGIndProof0({ invalid = false } = {}) {
     nodeId: 'b',
     current: invB,
     predecessorInvariants: [
-      { nodeId: 'a', invariant: invalid ? badPred : invA },
+      { nodeId: 'a', invariant: invalid ? invB : invA },
     ],
   });
 
@@ -82,9 +81,9 @@ function makeDAGIndProof0({ invalid = false } = {}) {
       Payload: { op: 'refl' },
     }),
     makeSemanticProofNode0({
-      id: 'inv.bad',
+      id: 'inv.b.copy',
       RuleName: 'Eq',
-      Conclusion: badPred,
+      Conclusion: invB,
       Payload: { op: 'refl' },
     }),
     makeSemanticProofNode0({
@@ -101,7 +100,7 @@ function makeDAGIndProof0({ invalid = false } = {}) {
     makeSemanticProofNode0({
       id: 'case.b',
       RuleName: 'Record',
-      Premises: invalid ? ['inv.b', 'inv.bad'] : ['inv.b', 'inv.a'],
+      Premises: invalid ? ['inv.b', 'inv.b.copy'] : ['inv.b', 'inv.a'],
       Conclusion: caseB,
       Payload: {
         op: 'intro',
