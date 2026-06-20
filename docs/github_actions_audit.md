@@ -26,6 +26,8 @@ The automatic workflow runs these independent gates in order:
 
 The targeted unit suite is deliberately not the complete repository test inventory. `npm test` and the full release audit remain manual because the frozen 7072f8d validation took about 34 minutes and ordinary pull-request CI should stay bounded.
 
+The consolidated gate was exercised on PR #9. Its targeted unit, negative, example, reproducibility, documentation-link, public-surface, release-audit, and dirty-tree steps all completed successfully.
+
 ## Retired workflow patterns
 
 - `check-minimal-examples-step-5.yml` was branch-scoped to `examples/minimal-step-5` and duplicated checks that now live in the main CI smoke path.
