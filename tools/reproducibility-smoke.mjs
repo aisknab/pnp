@@ -30,7 +30,10 @@ for (const line of ledgerLines) {
   const { expected, file } = parseLedgerLine(line, 'SHA256SUMS');
   const absolute = path.resolve(ROOT, file);
   const relative = path.relative(ROOT, absolute);
-  assert.ok(!relative.startsWith('..') && !path.isAbsolute(relative), `checksum path escapes repository root: ${file}`);
+  assert.ok(
+    !relative.startsWith('..') && !path.isAbsolute(relative),
+    `checksum path escapes repository root: ${file}`,
+  );
   assert.equal(sha256(absolute), expected, `SHA-256 mismatch: ${file}`);
 }
 
@@ -54,9 +57,12 @@ assert.equal(seal.validation.tests, 1121);
 assert.equal(seal.validation.pass, 1121);
 assert.equal(seal.validation.fail, 0);
 
-for (const [name, record] of [['summary', summary], ['full', full]]) {
-  assert.equal(record.tag, 'accept', `${name}: tag mismatch`);
-  assert.equal(record.checker, 'CheckFinalPNPProofReport0', `${name}: checker mismatch`);
+for (const [name, envelope, record] of [
+  ['summary', summary, summary],
+  ['full', full, full.NF],
+]) {
+  assert.equal(envelope.tag, 'accept', `${name}: tag mismatch`);
+  assert.equal(envelope.checker, 'CheckFinalPNPProofReport0', `${name}: checker mismatch`);
   assert.equal(record.finalPNPProofReportAccepted, true, `${name}: final report is not accepted`);
   assert.equal(record.checkPCCPackexpAccepted, true, `${name}: package checker is not accepted`);
   assert.equal(record.publicConclusionStatement, CLAIM, `${name}: public claim boundary mismatch`);
