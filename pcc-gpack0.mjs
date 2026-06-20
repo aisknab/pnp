@@ -1,3 +1,23 @@
+/**
+ * Reviewer orientation (non-normative).
+ *
+ * Purpose: validate the locked-NAND reduction package used to encode SAT as an
+ * exact multi-output NAND minimization threshold instance.
+ * Inputs: GPack records containing the source NAND circuit, slot allocation,
+ * separation/coherence certificates, macro tables, prefix, baseline, trace,
+ * threshold, bounds, no-min metadata, and derivation proof references.
+ * Outputs: an accepted GPack normal form or a first-failure reject record/ledger.
+ * Invariants enforced: source-circuit shape, global slot disjointness, G-Sep+/G-Coh
+ * metadata, fixed macro signatures, prefix coverage, baseline formula/obligations,
+ * trace/threshold fields, residual-slack bound at most four, bounds, and no hidden
+ * executable minimization or opaque proof material.
+ * Assumptions not checked: independent truth of baseline distinctness, trace
+ * equivalence, or the locked threshold beyond the predicates encoded by validators.
+ * Failure modes: the first malformed or inconsistent phase rejects with an exact
+ * `CheckGPack0.*` coordinate, path, witness, and accumulated ledger.
+ * Naming: `GPack` is the stable Package-G locked-NAND certificate namespace.
+ */
+
 import {
   digestCanonical0,
 } from './pcc-verifier-frag0.mjs';
@@ -204,6 +224,16 @@ export function makeLockedNANDMacroTables0(overrides = {}) {
   };
 }
 
+/**
+ * Computes the displayed locked-NAND baseline gate count.
+ * Input: positive source NAND gate count and non-negative equality/constant occurrence
+ * counts.
+ * Output: `18m + 10wEq + 3w0 + 2w1 + 2(3m-1)` as a JavaScript number.
+ * Enforces: integer/non-negative input-domain checks only.
+ * Does not check: that occurrence counts were derived correctly, that exposed functions
+ * are distinct, or that the formula is a valid mathematical lower bound.
+ * Failure modes: throws TypeError for invalid counts.
+ */
 export function computeLockedNANDBaseline0({
   gateCount,
   equalityOccurrences,
@@ -524,6 +554,16 @@ export function makeSyntheticRowFamG0(gpack = makeSyntheticGPack0(), overrides =
   };
 }
 
+/**
+ * Validates one locked-NAND reduction certificate package.
+ * Input: GPack0 object containing every required reduction artefact.
+ * Output: accepted GPack0NF with baseline/word/slack summaries or first named reject.
+ * Enforces: the phase list documented in this module, including hardened baseline,
+ * trace, threshold, derivation-node, bound, no-min, and opaque-proof checks.
+ * Does not check: independent mathematical validity of the locked-NAND lemmas beyond
+ * those implemented predicates.
+ * Failure modes: first rejecting phase at `CheckGPack0.<phase>` with path/witness/ledger.
+ */
 export async function CheckGPack0(gpack) {
   const checker = 'CheckGPack0';
   const ledger = [];

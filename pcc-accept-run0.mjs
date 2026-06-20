@@ -1,3 +1,21 @@
+/**
+ * Reviewer orientation (non-normative).
+ *
+ * Purpose: validate one ordered execution over a generated package, replay it using
+ * canonical package/core bytes, and emit a final verdict only after the run closes.
+ * Inputs: AcceptRun records containing generator call, materialized package, environment,
+ * phase order/transcript, audit/reject logs, verdict, and optional proof metadata.
+ * Outputs: accepted/rejected run records, replay records, and final-verdict records.
+ * Invariants enforced: exact phase order, package/core byte and digest linkage, accepted
+ * child package result, first-failure/reject-log consistency, deterministic replay,
+ * no hidden executable minimization, and no public conclusion on a rejected run.
+ * Assumptions not checked: mathematical soundness of the package checker, completeness
+ * of the recorded environment, or byte-for-byte reproducibility on every platform.
+ * Failure modes: malformed runs, stale bytes/digests, transcript drift, skipped phases,
+ * verdict inconsistency, replay mismatch, hidden-min, or opaque proof data reject.
+ * Naming: an `AcceptRun` is an implementation execution record, not external acceptance.
+ */
+
 import {
   digestCanonical0,
   stableStringify0,
@@ -220,6 +238,15 @@ export function makeSyntheticRejectAcceptRun0(overrides = {}) {
   });
 }
 
+/**
+ * Replays an AcceptRun against freshly checked package and canonical bytes.
+ * Input: the recorded AcceptRun0.
+ * Output: accepted replay normal form or mismatch reject.
+ * Enforces: regeneration/check replay, package/core canonical-byte equality, phase and
+ * verdict agreement, and stable linkage rather than digest-only substitution.
+ * Does not check: theorem soundness or platform-independent exact runtime metadata.
+ * Failure modes: underlying run reject, fresh-check reject, byte/transcript/verdict mismatch.
+ */
 export async function ReplayAcceptRun0(run) {
   const checker = 'ReplayAcceptRun0';
   const ledger = [];
@@ -297,6 +324,15 @@ export async function ReplayAcceptRun0(run) {
   });
 }
 
+/**
+ * Validates one materialized checker execution record.
+ * Input: AcceptRun0 with package, generator call, environment, transcript, logs, verdict.
+ * Output: accepted run normal form or first named reject.
+ * Enforces: exact package/core byte linkage, phase order/transcript, package-sufficiency
+ * result, verdict/reject-log consistency, no-min, and no opaque proof data.
+ * Does not check: checker mathematical soundness or completeness of environment capture.
+ * Failure modes: shape/generator/package/environment/transcript/log/verdict/linkage reject.
+ */
 export async function CheckAcceptRun0(run) {
   const checker = 'CheckAcceptRun0';
   const ledger = [];
@@ -414,6 +450,15 @@ export async function CheckAcceptRun0(run) {
   });
 }
 
+/**
+ * Emits the run-level final verdict only after validation and replay close.
+ * Input: AcceptRun0.
+ * Output: accepted/rejected final-verdict record; public conclusion is conditional on
+ * the accepted path and absent on rejection.
+ * Enforces: CheckAcceptRun and ReplayAcceptRun acceptance plus exact verdict linkage.
+ * Does not check: mathematical validity of the accepted package.
+ * Failure modes: rejected run/replay or inconsistent verdict/claim fields.
+ */
 export async function EmitFinalVerdict0(run) {
   const checker = 'EmitFinalVerdict0';
   const ledger = [];

@@ -1,3 +1,22 @@
+/**
+ * Reviewer orientation (non-normative).
+ *
+ * Purpose: validate the typed global dependency DAG that links kernel facts,
+ * Sigma/reflection facts, rows, package theorems, bounds, firewalls, locked-NAND
+ * obligations, and the final SAT/P=NP theorem nodes.
+ * Inputs: a GlobalProofDAG record with nodes, imports, mode/bounds/no-min ledgers,
+ * schedule/interface hashes, and a proof marker.
+ * Outputs: an accept summary of the checked graph or the first deterministic reject.
+ * Invariants enforced: required node/theorem coverage, unique IDs, topological
+ * premise order, permitted node kinds/rules, exact locked-NAND prerequisite edges,
+ * import/mode/bounds/no-min policies, node digests, and no opaque proof blobs.
+ * Assumptions not checked: soundness of primitive rules, Sigma schemas, reflection
+ * mappings, or the mathematical implication represented by a correctly linked node.
+ * Failure modes: missing/duplicate/cyclic/mistyped nodes, stale digests, bad imports,
+ * absent required edges, forbidden executable content, or bound failures reject.
+ * Naming: node labels are stable theorem coordinates and are not renamed casually.
+ */
+
 import {
   digestCanonical0,
   stableStringify0,
@@ -36,6 +55,9 @@ export const GLOBAL_DAG_REQUIRED_FINALS0 = Object.freeze([
   'Final.AcceptedPackageImpliesPEqualsNP',
 ]);
 
+// Required theorem-node labels for the global dependency graph. Presence and
+// linkage are structural obligations; this list does not independently establish
+// the mathematical truth of any listed theorem.
 export const GLOBAL_DAG_REQUIRED_PACKAGE_THEOREMS0 = Object.freeze([
   'E.VerifyDWSoundness',
   'N.TraceableNormalization',
@@ -524,6 +546,16 @@ export function makeSyntheticGlobalProofDAG0(overrides = {}) {
   };
 }
 
+/**
+ * Validates the global theorem-dependency graph in deterministic phase order.
+ * Input: GlobalProofDAG0 record.
+ * Output: accepted graph normal form or first phase reject with ledger.
+ * Enforces: graph shape/nodes, required theorem coverage, locked-NAND proof edges,
+ * import/mode/bounds/no-min policies, no opaque proofs, and canonical node digests.
+ * Does not check: semantic soundness of a correctly typed primitive, package theorem,
+ * Sigma theorem, or reflection edge.
+ * Failure modes: named shape/node/coverage/G/import/mode/bound/no-min/opaque/digest reject.
+ */
 export async function CheckGlobalProofDAG0(dag) {
   const checker = 'CheckGlobalProofDAG0';
   const ledger = [];

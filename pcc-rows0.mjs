@@ -1,3 +1,24 @@
+/**
+ * Reviewer orientation (non-normative).
+ *
+ * Purpose: validate the generated row inventory, batch dependencies, row-family
+ * coverage, canonical identities, selected routes, proof references, and bounds.
+ * Inputs: a materialized RowPack containing schedules, batches, rows, indexes,
+ * ledgers, and family declarations.
+ * Outputs: an accept normal form summarizing checked coverage or a first-failure
+ * reject record with a stable coordinate and path.
+ * Invariants enforced: required batch/family presence, canonical row keys, duplicate
+ * conflict rejection, deterministic route priority, typed proof-reference policy,
+ * dependency ordering, and public bound/import restrictions.
+ * Assumptions not checked: that the declared governed universe is mathematically
+ * complete, that referenced proof rules are sound, or that a stated polynomial
+ * bound follows from the underlying algorithm rather than the supplied records.
+ * Failure modes: missing, malformed, duplicate, misrouted, mistyped, or out-of-bound
+ * rows reject at the phase that first observes the defect.
+ * Naming: family labels such as E, RW, BN4, O, and G are stable serialized package
+ * identifiers; standard-language meanings are documented in the terminology crosswalk.
+ */
+
 import {
   digestCanonical0,
   stableStringify0,
@@ -65,6 +86,9 @@ export const ROW_ALLOWED_PROOF_REF_KINDS0 = Object.freeze([
   'ProofRef0',
 ]);
 
+// Reviewer map for stable package-family IDs. Each entry binds an opaque release
+// identifier to a schema, purpose, proof rule, and public bound. The IDs themselves
+// are intentionally preserved because they participate in manifests and row keys.
 export const ROW_FAMILY_SPECS0 = Object.freeze([
   Object.freeze({
     batchId: 'B1',
@@ -647,6 +671,17 @@ export function makeSyntheticRowPack0(overrides = {}) {
   };
 }
 
+/**
+ * Validates the aggregate generated row package.
+ * Input: RowPack0 with batch/schema inventory, rows, normal-form map, hash index,
+ * coverage/route/proof/bounds ledgers, and proof marker.
+ * Output: accepted row-package normal form or first-failure reject record.
+ * Enforces: batch/family coverage, canonical identities, duplicate rejection, route
+ * priority, proof-reference policy, bounds, dependencies, no-min, and no opaque proof.
+ * Does not check: mathematical completeness of the governed universe or soundness of
+ * the proof rules referenced by accepted rows.
+ * Failure modes: first child/ledger/coverage defect with `CheckRows0.*` coordinate.
+ */
 export async function CheckRows0(rowPack) {
   const checker = 'CheckRows0';
   const ledger = [];

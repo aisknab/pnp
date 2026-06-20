@@ -1,3 +1,24 @@
+/**
+ * Reviewer orientation (non-normative).
+ *
+ * Purpose: orchestrate the main finite package checks and validate the top-level
+ * package-sufficiency theorem record, including the residual-band/ZeroSlack fields.
+ * Inputs: a PCCPack0 core containing boot, kernel, hard checker, rows, global DAG,
+ * local packages, firewalls, GPack, final integration/theorem rows, manifest, and
+ * package-sufficiency theorem records.
+ * Outputs: an accept normal form containing phase digests and theorem summaries or
+ * a reject record that wraps the first failing child checker or cross-record phase.
+ * Invariants enforced: core/run separation, manifest phase order, acceptance of each
+ * child checker, cross-artefact linkage, required theorem/ZeroSlack fields, no hidden
+ * executable minimization, and absence of opaque proof blobs.
+ * Assumptions not checked: mathematical truth of assertion-shaped theorem fields,
+ * soundness/completeness of child checkers, or asymptotic validity of claimed bounds.
+ * Failure modes: malformed core/manifest, child rejection, inconsistent artefacts,
+ * missing theorem obligations, hidden-min, or opaque proof content reject by phase.
+ * Naming: PCCPack means the proof-carrying certificate bundle; acceptance scope must
+ * always be stated as `CheckPackSufficiency0` or the relevant top-level checker.
+ */
+
 import {
   digestCanonical0,
 } from './pcc-verifier-frag0.mjs';
@@ -508,6 +529,16 @@ export function makeSyntheticPCCPack0(overrides = {}) {
   return pack;
 }
 
+/**
+ * Runs the principal finite package-sufficiency pipeline.
+ * Input: PCCPack0 core with manifest, child artefacts, and theorem record.
+ * Output: accepted PackSufficiency0NF with phase/theorem digests or wrapped first reject.
+ * Enforces: package/run boundary, manifest, every listed child checker, cross-artefact
+ * consistency, all required residual-band/ZeroSlack fields, no-min, and no opaque proof.
+ * Does not check: independent derivations for the theorem booleans or checker soundness.
+ * Failure modes: initial shape/manifest/core reject, child reject, or final cross/theorem/
+ * no-min/opaque reject.
+ */
 export async function CheckPackSufficiency0(pack) {
   const checker = 'CheckPackSufficiency0';
   const ledger = [];

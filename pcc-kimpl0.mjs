@@ -1,3 +1,24 @@
+/**
+ * Reviewer orientation (non-normative).
+ *
+ * Purpose: validate the repository's small proof-kernel description, primitive
+ * rule table, conformance suite, Sigma theorem schemas, reflection mappings, and
+ * their aggregate KBundle.
+ * Inputs: untrusted kernel, proof-node, schema-registry, reflection-registry, and
+ * bundle records.
+ * Outputs: phase-ledgered accept/reject records and canonical normal-form summaries.
+ * Invariants enforced: required primitive-rule coverage, typed and acyclic proof
+ * nodes, bounded side conditions/imports, no opaque proof blobs, no executable
+ * minimization symbols, required Sigma entries, and required reflection entries.
+ * Assumptions not checked: local mathematical soundness of each primitive rule,
+ * adequacy of a Sigma theorem, or correctness of mapping a checker predicate to a
+ * mathematical theorem. Those are part of the independent trusted-base audit.
+ * Failure modes: malformed tables, missing rules, bad premises, cycles, bounds,
+ * forbidden executable content, or mismatched registry entries return named rejects.
+ * Naming: `KImpl` is the versioned PCC-K implementation record; `Sigma` denotes
+ * schema-level theorem instances, not a JavaScript sum operation.
+ */
+
 import {
   digestCanonical0,
   stableStringify0,
@@ -5,6 +26,9 @@ import {
 
 const CHECKER_VERSION = 0;
 
+// Primitive proof-rule identifiers accepted by the version-zero kernel schema.
+// This table is an implementation interface, not a proof that the rules are sound;
+// each rule still requires an independent local-soundness audit.
 export const KERNEL_RULES0 = Object.freeze([
   'Eq',
   'Subst',
@@ -301,6 +325,16 @@ export function makeSyntheticKImpl0(overrides = {}) {
   };
 }
 
+/**
+ * Validates the kernel implementation descriptor and optional primitive proof DAG.
+ * Input: KImpl0 record with grammars, rule table, checker descriptors, bounds, and PiK.
+ * Output: accepted KImpl normal form or phase-specific reject record.
+ * Enforces: required rule table, descriptor flags, bounded proof shape, no opaque proof,
+ * no hidden executable minimization, and typed/acyclic optional proof nodes.
+ * Does not check: mathematical soundness of the primitive rules or adequacy of the
+ * represented logic.
+ * Failure modes: shape/rule/descriptor/bound/no-min/opaque/DAG rejection.
+ */
 export async function CheckKImpl0(kimpl) {
   const checker = 'CheckKImpl0';
   const ledger = [];
@@ -715,6 +749,17 @@ export async function CheckSigmaRegistry0(registry) {
   });
 }
 
+/**
+ * Checks the shape, coverage, and internal references of reflection entries.
+ * Input: registry mapping checker identifiers to reflected theorem conclusions.
+ * Output: accepted registry summary or first malformed/missing/mismatched entry reject.
+ * Enforces: required checker coverage, unique IDs, typed proof references, and the
+ * repository's declared reflection metadata.
+ * Does not check: that the checker predicate is actually equivalent to the reflected
+ * mathematical theorem; that comparison is an independent review obligation.
+ * Failure modes: malformed registry/entry, duplicate or missing checker, bad proof ref,
+ * forbidden executable content, or opaque proof data.
+ */
 export async function CheckReflectionRegistry0(registry) {
   const checker = 'CheckReflectionRegistry0';
   const ledger = [];
@@ -880,6 +925,16 @@ export async function CheckReflectionRegistry0(registry) {
   });
 }
 
+/**
+ * Runs the aggregate kernel, conformance, Sigma, and reflection checks.
+ * Input: KBundle0 containing KImpl, conformance suite, Sigma registry, reflection
+ * registry, and bundle linkage/proof records.
+ * Output: an accepted bundle normal form with child digests or wrapped child rejection.
+ * Enforces: all four kernel surfaces accept and agree with the bundle linkage.
+ * Does not check: independent local soundness of rules/schemas/reflections.
+ * Failure modes: malformed bundle, any child checker reject, linkage mismatch,
+ * hidden-minimization occurrence, or opaque proof material.
+ */
 export async function CheckKBundle0(bundle) {
   const checker = 'CheckKBundle0';
   const ledger = [];

@@ -1,3 +1,23 @@
+/**
+ * Reviewer orientation (non-normative).
+ *
+ * Purpose: check that the residual-band minimizer (Package O) and locked-NAND
+ * reduction (Package G) use one circuit model, then validate the exact SAT decision,
+ * its displayed complexity bounds, and the aggregate final-integration linkage.
+ * Inputs: FinalFrameworkMatch, SATDecision, SATBounds, GPack, GlobalProofDAG, and
+ * FinalIntegration records.
+ * Outputs: phase-ledgered accept/reject records and normal forms exposing the matched
+ * baseline, word size, comparator, exponents, and linkage digests.
+ * Invariants enforced: identical syntax/charge/carrier/output/minimum/slack maps,
+ * O↔G import separation, exact `minSize>baseline` comparison, rejection of approximate
+ * minima, residual bound four, public schedule use, and required global G-proof edges.
+ * Assumptions not checked: correctness of the SAT reduction, exactness/polynomiality
+ * of PCCMin, or soundness of the source theorems supplying the mapped fields.
+ * Failure modes: framework drift, baseline mismatch, inexact decision data, bound
+ * mismatch, hidden minimization, opaque proof data, or broken global linkage reject.
+ * Naming: O and G are stable package IDs; comments provide conventional meanings.
+ */
+
 import {
   digestCanonical0,
 } from './pcc-verifier-frag0.mjs';
@@ -52,6 +72,9 @@ export const FINAL_INTEGRATION_PHASES0 = Object.freeze([
   'CheckSATBounds0',
 ]);
 
+// Package O (residual-band minimizer) and Package G (locked-NAND reduction)
+// must meet only through the explicit final framework map. Direct O<->G imports
+// would make the claimed reduction/minimizer separation circular.
 export const FINAL_FRAMEWORK_FORBIDDEN_IMPORT_EDGES0 = Object.freeze([
   Object.freeze(['O', 'G']),
   Object.freeze(['G', 'O']),
@@ -490,6 +513,16 @@ export function makeSyntheticFinalIntegration0({
   };
 }
 
+/**
+ * Checks that Packages O and G share one exact formal framework.
+ * Input: FinalFrameworkMatch0 maps for syntax, charge, carrier, output, minimum,
+ * normalization, slack, and import separation.
+ * Output: accepted match normal form or first named mismatch reject.
+ * Enforces: field-by-field model identity, O/G import firewall, no-min, and no opaque
+ * proof content.
+ * Does not check: correctness of either package's mathematical theorem.
+ * Failure modes: shape or first map/import/no-min/opaque mismatch.
+ */
 export async function CheckFinalFrameworkMatch0(match) {
   const checker = 'CheckFinalFrameworkMatch0';
   const ledger = [];
@@ -550,6 +583,15 @@ export async function CheckFinalFrameworkMatch0(match) {
   });
 }
 
+/**
+ * Validates the explicit SAT decision record built on the locked threshold.
+ * Input: NAND conversion, locked word, baseline, decision rule, and case records.
+ * Output: accepted decision summary or first named reject.
+ * Enforces: satisfiability-preserving conversion metadata, baseline/word agreement,
+ * exact `minSize>baseline` comparator, rejection of approximations, and case coherence.
+ * Does not check: the mathematical threshold theorem or actual exact minimum computation.
+ * Failure modes: shape, conversion, baseline, decision-rule, case, no-min, or opaque reject.
+ */
 export async function CheckSATDecision0(decision) {
   const checker = 'CheckSATDecision0';
   const ledger = [];
@@ -602,6 +644,15 @@ export async function CheckSATDecision0(decision) {
   });
 }
 
+/**
+ * Validates the displayed complexity-bound record for the final SAT procedure.
+ * Input: converter, locked builder, minimizer, decision procedure, and global bounds.
+ * Output: accepted exponent/slack summary or first named reject.
+ * Enforces: required deterministic/polynomial flags, residual bound four, public
+ * schedule use, exact comparator, finite global bound, and no opaque proof data.
+ * Does not check: source-level asymptotic analysis or bit-complexity derivation.
+ * Failure modes: shape or converter/builder/minimizer/decision/global/opaque mismatch.
+ */
 export async function CheckSATBounds0(bounds) {
   const checker = 'CheckSATBounds0';
   const ledger = [];
@@ -654,6 +705,15 @@ export async function CheckSATBounds0(bounds) {
   });
 }
 
+/**
+ * Composes GPack, global proof DAG, framework match, SAT decision, and SAT bounds.
+ * Input: FinalIntegration0 wrapper containing those five child artefacts and linkage.
+ * Output: accepted integration normal form or wrapped child/linkage rejection.
+ * Enforces: phase order, acceptance of all children, exact GPack identity across the
+ * match/decision, and required global locked-NAND proof dependencies.
+ * Does not check: mathematical soundness of accepted child predicates.
+ * Failure modes: wrapper shape, any child reject, or global-G linkage mismatch.
+ */
 export async function CheckFinalIntegration0(integration) {
   const checker = 'CheckFinalIntegration0';
   const ledger = [];
