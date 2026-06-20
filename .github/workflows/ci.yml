@@ -19,9 +19,11 @@ concurrency:
 jobs:
   online-verification:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v6
         with:
@@ -34,11 +36,33 @@ jobs:
       - name: Check syntax
         run: npm run check
 
+      - name: Run targeted unit suite
+        run: |
+          node --test \
+            test/pcc-core.test.mjs \
+            test/pcc-kimpl0.test.mjs \
+            test/pcc-gpack0.test.mjs \
+            test/pcc-final-framework0.test.mjs \
+            test/pcc-pack-sufficiency0.test.mjs
+
       - name: Run named negative suite
         run: npm run test:negative
 
       - name: Run minimal reviewer examples
         run: npm run examples:minimal
+
+      - name: Run sealed-release reproducibility smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse 'final-pnp-proof-report-hardened-7072f8d^{commit}')" = \
+            "7072f8d0bda6d44d240f9bb3fad624fd357e1278"
+          test "$(git rev-parse 'final-pnp-proof-report-artifacts-hardened-7072f8d-sealed^{commit}')" = \
+            "9d1de19f827e5cb6880741352eb2349cbbb45994"
+          node tools/reproducibility-smoke.mjs
+
+      - name: Check reviewer documentation links
+        run: node tools/check-doc-links.mjs
 
       - name: Run public surface smoke tests
         run: |
