@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - docs/readme-step-10
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: write
