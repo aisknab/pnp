@@ -28,7 +28,12 @@
   "scripts": {
     "check": "node --check pcc-core.mjs",
     "test": "node --test",
+    "test:unit": "node --test test/pcc-core.test.mjs test/pcc-kimpl0.test.mjs test/pcc-gpack0.test.mjs test/pcc-final-framework0.test.mjs test/pcc-pack-sufficiency0.test.mjs",
     "test:negative": "node --test test/reviewer-negative-invariants.test.mjs",
+    "test:public-surface": "node --test test/pcc-public-api0.test.mjs test/pcc-public-surface-freeze0.test.mjs test/pcc-release-audit-public-surface-freeze0.test.mjs test/pcc-release-audit-public-surface-summary-negative0.test.mjs",
+    "test:docs": "node tools/check-doc-links.mjs",
+    "repro:smoke": "node tools/reproducibility-smoke.mjs",
+    "ci:online": "npm run check && npm run test:unit && npm run test:negative && npm run examples:minimal && npm run repro:smoke && npm run test:docs && npm run test:public-surface",
     "validate": "npm run check && npm test",
     "examples:minimal": "node examples/minimal/run-all.mjs",
     "runall": "node ./bin/runall0.mjs",
