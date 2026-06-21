@@ -59,6 +59,12 @@ jobs:
       - name: Run FiniteExhaust successor tests
         run: node --test test/pcc-kimpl-finiteexhaust-successor0.test.mjs
 
+      - name: Run FiniteExhaust KBundle tests
+        run: node --test test/pcc-kbundle-finiteexhaust-successor0.test.mjs
+
+      - name: Run FiniteExhaust global gate tests
+        run: node --test test/pcc-global-proof-dag-finiteexhaust-successor0.test.mjs
+
   online-verification:
     runs-on: ubuntu-latest
     timeout-minutes: 45
@@ -87,6 +93,8 @@ jobs:
         run: |
           node --test test/pcc-kernel-finiteexhaust-semantic0.test.mjs
           node --test test/pcc-kimpl-finiteexhaust-successor0.test.mjs
+          node --test test/pcc-kbundle-finiteexhaust-successor0.test.mjs
+          node --test test/pcc-global-proof-dag-finiteexhaust-successor0.test.mjs
 
       - name: Run targeted unit suite
         run: |
@@ -111,11 +119,13 @@ jobs:
             test/pcc-kbundle-ledgerind-successor0.test.mjs \
             test/pcc-kbundle-obltopoind-successor0.test.mjs \
             test/pcc-kbundle-traceind-successor0.test.mjs \
+            test/pcc-kbundle-finiteexhaust-successor0.test.mjs \
             test/pcc-global-proof-dag0.test.mjs \
             test/pcc-global-proof-dag-semantic-successor0.test.mjs \
             test/pcc-global-proof-dag-ledgerind-successor0.test.mjs \
             test/pcc-global-proof-dag-obltopoind-successor0.test.mjs \
             test/pcc-global-proof-dag-traceind-successor0.test.mjs \
+            test/pcc-global-proof-dag-finiteexhaust-successor0.test.mjs \
             test/pcc-gpack0.test.mjs \
             test/pcc-final-framework0.test.mjs \
             test/pcc-pack-sufficiency0.test.mjs
