@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  test-file:
+  test-case:
     name: public-${{ matrix.case }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -18,22 +18,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - case: api
-            file: test/pcc-public-api0.test.mjs
-          - case: freeze
-            file: test/pcc-public-surface-freeze0.test.mjs
-          - case: audit-freeze
+          - case: freeze-executes
             file: test/pcc-release-audit-public-surface-freeze0.test.mjs
-          - case: summary-negative
-            file: test/pcc-release-audit-public-surface-summary-negative0.test.mjs
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          fetch-depth: 1
-          show-progress: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version: "20"
-          cache: npm
-      - run: npm ci
-      - run: node --test "${{ matrix.file }}"
+            pattern: executes the public surface freeze phase
+          - case: freeze-skip
+            file: test/pcc-release-audit-public-surface-freeze0.test.mjs
+            pattern: can skip public surface freeze
+          - case: freeze-reject
+            file: test/pcc-release-audit-public-surface-freeze0.test.mjs
+            pattern:
