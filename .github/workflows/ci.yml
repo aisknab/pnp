@@ -38,6 +38,27 @@ jobs:
       - name: Run TraceInd successor tests
         run: node --test test/pcc-kimpl-traceind-successor0.test.mjs
 
+  finiteexhaust-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          show-progress: false
+          persist-credentials: false
+          set-safe-directory: false
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+
+      - name: Run FiniteExhaust kernel tests
+        run: node --test test/pcc-kernel-finiteexhaust-semantic0.test.mjs
+
+      - name: Run FiniteExhaust successor tests
+        run: node --test test/pcc-kimpl-finiteexhaust-successor0.test.mjs
+
   online-verification:
     runs-on: ubuntu-latest
     timeout-minutes: 45
@@ -62,6 +83,11 @@ jobs:
           node --test test/pcc-kernel-traceind-semantic0.test.mjs
           node --test test/pcc-kimpl-traceind-successor0.test.mjs
 
+      - name: Run FiniteExhaust unit suite
+        run: |
+          node --test test/pcc-kernel-finiteexhaust-semantic0.test.mjs
+          node --test test/pcc-kimpl-finiteexhaust-successor0.test.mjs
+
       - name: Run targeted unit suite
         run: |
           node --test \
@@ -71,19 +97,25 @@ jobs:
             test/pcc-kernel-dagind-semantic0.test.mjs \
             test/pcc-kernel-ledgerind-semantic0.test.mjs \
             test/pcc-kernel-obltopoind-semantic0.test.mjs \
+            test/pcc-kernel-traceind-semantic0.test.mjs \
+            test/pcc-kernel-finiteexhaust-semantic0.test.mjs \
             test/pcc-kimpl0.test.mjs \
             test/pcc-kimpl-successor0.test.mjs \
             test/pcc-kimpl-record-successor0.test.mjs \
             test/pcc-kimpl-dagind-successor0.test.mjs \
             test/pcc-kimpl-ledgerind-successor0.test.mjs \
             test/pcc-kimpl-obltopoind-successor0.test.mjs \
+            test/pcc-kimpl-traceind-successor0.test.mjs \
+            test/pcc-kimpl-finiteexhaust-successor0.test.mjs \
             test/pcc-kbundle-semantic-successor0.test.mjs \
             test/pcc-kbundle-ledgerind-successor0.test.mjs \
             test/pcc-kbundle-obltopoind-successor0.test.mjs \
+            test/pcc-kbundle-traceind-successor0.test.mjs \
             test/pcc-global-proof-dag0.test.mjs \
             test/pcc-global-proof-dag-semantic-successor0.test.mjs \
             test/pcc-global-proof-dag-ledgerind-successor0.test.mjs \
             test/pcc-global-proof-dag-obltopoind-successor0.test.mjs \
+            test/pcc-global-proof-dag-traceind-successor0.test.mjs \
             test/pcc-gpack0.test.mjs \
             test/pcc-final-framework0.test.mjs \
             test/pcc-pack-sufficiency0.test.mjs
