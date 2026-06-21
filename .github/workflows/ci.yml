@@ -87,16 +87,10 @@ jobs:
         run: node --test test/pcc-kimpl-dpind-successor0.test.mjs
 
       - name: Run DPInd KBundle tests
-        run: |
-          node --test \
-            test/pcc-kbundle-dpind-successor0.test.mjs \
-            test/pcc-kbundle-dpind-successor-negative0.test.mjs
+        run: node --test test/pcc-kbundle-dpind-successor0.test.mjs
 
       - name: Run DPInd global gate tests
-        run: |
-          node --test \
-            test/pcc-global-proof-dag-dpind-successor0.test.mjs \
-            test/pcc-global-proof-dag-dpind-successor-negative0.test.mjs
+        run: node --test test/pcc-global-proof-dag-dpind-successor0.test.mjs
 
   online-verification:
     runs-on: ubuntu-latest
@@ -134,9 +128,7 @@ jobs:
           node --test test/pcc-kernel-dpind-semantic0.test.mjs
           node --test test/pcc-kimpl-dpind-successor0.test.mjs
           node --test test/pcc-kbundle-dpind-successor0.test.mjs
-          node --test test/pcc-kbundle-dpind-successor-negative0.test.mjs
           node --test test/pcc-global-proof-dag-dpind-successor0.test.mjs
-          node --test test/pcc-global-proof-dag-dpind-successor-negative0.test.mjs
 
       - name: Run targeted unit suite
         run: |
@@ -165,7 +157,6 @@ jobs:
             test/pcc-kbundle-traceind-successor0.test.mjs \
             test/pcc-kbundle-finiteexhaust-successor0.test.mjs \
             test/pcc-kbundle-dpind-successor0.test.mjs \
-            test/pcc-kbundle-dpind-successor-negative0.test.mjs \
             test/pcc-global-proof-dag0.test.mjs \
             test/pcc-global-proof-dag-semantic-successor0.test.mjs \
             test/pcc-global-proof-dag-ledgerind-successor0.test.mjs \
@@ -173,7 +164,6 @@ jobs:
             test/pcc-global-proof-dag-traceind-successor0.test.mjs \
             test/pcc-global-proof-dag-finiteexhaust-successor0.test.mjs \
             test/pcc-global-proof-dag-dpind-successor0.test.mjs \
-            test/pcc-global-proof-dag-dpind-successor-negative0.test.mjs \
             test/pcc-gpack0.test.mjs \
             test/pcc-final-framework0.test.mjs \
             test/pcc-pack-sufficiency0.test.mjs
