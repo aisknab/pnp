@@ -1,0 +1,44 @@
+name: finiteexhaust-diagnostic
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          show-progress: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+      - name: Capture FiniteExhaust test output
+        shell: bash
+        run: |
+          set +e
+          node --test test/pcc-kernel-finiteexhaust-semantic0.test.mjs > finiteexhaust-test.log 2>&1
+          status=$?
+          printf '%s\n' "$status" > finiteexhaust-test.status
+          exit 0
+      - name: Upload FiniteExhaust test output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: finiteexhaust-test-output
+          path: |
+            finiteexhaust-test.log
+            finiteexhaust-test.status
+          if-no-files-found: error
+          retention-days: 1
+      - name: Preserve test failure status
+        shell: bash
+        run: test "$(cat finiteexhaust-test.status)" = "0"
