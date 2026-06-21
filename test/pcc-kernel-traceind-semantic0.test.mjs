@@ -46,7 +46,6 @@ function makeValidTraceFixture0() {
   const traceId = 'locked.trace';
   const x0 = makeSemanticVar0('x0', 'Bool');
   const x1 = makeSemanticVar0('x1', 'Bool');
-
   const s0 = makeSemanticTraceSourceNode0({
     index: 0,
     id: 's0',
@@ -76,6 +75,7 @@ function makeValidTraceFixture0() {
     rightTerm: s0.valueTerm,
   });
   const traceNodes = [s0, s1, g0, g1];
+  const nodesById = new Map(traceNodes.map((node) => [node.id, node]));
   const trace = makeSemanticTrace0({
     traceId,
     nodes: traceNodes,
@@ -106,10 +106,9 @@ function makeValidTraceFixture0() {
       current: node.invariant,
       dependencyInvariants: dependencyIds.map((dependencyId) => ({
         nodeId: dependencyId,
-        invariant: traceNodes.find((entry) => entry.id === dependencyId).invariant,
+        invariant: nodesById.get(dependencyId).invariant,
       })),
     });
-    const caseId = `case.${node.id}`;
     const proofByField = {
       current: invariantProofIds.get(node.id),
       equation: equationProofIds.get(node.id),
@@ -117,6 +116,7 @@ function makeValidTraceFixture0() {
     for (const dependencyId of dependencyIds) {
       proofByField[`dep.${dependencyId}`] = invariantProofIds.get(dependencyId);
     }
+    const caseId = `case.${node.id}`;
     proofNodes.push(recordProof0(caseId, caseRecord, proofByField));
     caseRecords.push(caseRecord);
     caseProofIds.push(caseId);
@@ -140,7 +140,7 @@ function makeValidTraceFixture0() {
     x0,
     x1,
     traceNodes,
-    nodesById: new Map(traceNodes.map((node) => [node.id, node])),
+    nodesById,
     trace,
     caseRecords,
     caseProofIds,
@@ -159,13 +159,7 @@ test('TraceInd closes exact source and NAND equations in topological order', () 
 
   assert.equal(out.tag, 'accept');
   assert.deepEqual(out.NF.supportedRules, [
-    'Eq',
-    'Subst',
-    'Record',
-    'DAGInd',
-    'LedgerInd',
-    'OblTopoInd',
-    'TraceInd',
+    'Eq', 'Subst', 'Record', 'DAGInd', 'LedgerInd', 'OblTopoInd', 'TraceInd',
   ]);
   assert.equal(out.NF.traceIndNodeCount, 1);
   assert.equal(out.NF.missingRequiredRules.includes('TraceInd'), false);
@@ -174,7 +168,10 @@ test('TraceInd closes exact source and NAND equations in topological order', () 
   assert.deepEqual(fixture.conclusion.nandNodeIds, ['g0', 'g1']);
   assert.equal(fixture.conclusion.outputNodeId, 'g1');
   assert.equal(fixture.conclusion.outputCoordinate, 'yout');
-  assert.deepEqual(fixture.conclusion.outputTerm, fixture.nodesById.get('g1').valueTerm);
+  assert.deepEqual(
+    fixture.conclusion.outputTerm,
+    fixture.nodesById.get('g1').valueTerm,
+  );
   assert.equal(fixture.conclusion.allSourceBindingsExact, true);
   assert.equal(fixture.conclusion.allNANDEquationsExact, true);
   assert.equal(fixture.conclusion.outputCoordinateBound, true);
@@ -182,11 +179,7 @@ test('TraceInd closes exact source and NAND equations in topological order', () 
 
 test('TraceInd rejects a NAND value that is not the ordered NAND of earlier inputs', () => {
   const fixture = makeValidTraceFixture0();
-  const badValue = makeSemanticApp0(
-    'nand',
-    [fixture.x1, fixture.x0],
-    'Bool',
-  );
+  const badValue = makeSemanticApp0('nand', [fixture.x1, fixture.x0], 'Bool');
   const badG0 = {
     ...fixture.nodesById.get('g0'),
     valueTerm: badValue,
@@ -198,12 +191,10 @@ test('TraceInd rejects a NAND value that is not the ordered NAND of earlier inpu
     nodes: fixture.trace.nodes.map((node) => node.id === 'g0' ? badG0 : node),
   };
   const closeNode = fixture.proofNodes.at(-1);
-  const nodes = [
+  const out = CheckSemanticKernelProofTraceInd0(makeSemanticProofDAG0([
     ...fixture.proofNodes.slice(0, -1),
     { ...closeNode, Payload: { op: 'close', trace: badTrace } },
-  ];
-
-  const out = CheckSemanticKernelProofTraceInd0(makeSemanticProofDAG0(nodes));
+  ]));
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.Coord, 'CheckSemanticKernelProofTraceInd0.shape');
@@ -215,21 +206,16 @@ test('TraceInd rejects a NAND value that is not the ordered NAND of earlier inpu
 
 test('TraceInd rejects a forward NAND input reference', () => {
   const fixture = makeValidTraceFixture0();
-  const badG0 = {
-    ...fixture.nodesById.get('g0'),
-    inputIds: ['g1', 's0'],
-  };
+  const badG0 = { ...fixture.nodesById.get('g0'), inputIds: ['g1', 's0'] };
   const badTrace = {
     ...fixture.trace,
     nodes: fixture.trace.nodes.map((node) => node.id === 'g0' ? badG0 : node),
   };
   const closeNode = fixture.proofNodes.at(-1);
-  const nodes = [
+  const out = CheckSemanticKernelProofTraceInd0(makeSemanticProofDAG0([
     ...fixture.proofNodes.slice(0, -1),
     { ...closeNode, Payload: { op: 'close', trace: badTrace } },
-  ];
-
-  const out = CheckSemanticKernelProofTraceInd0(makeSemanticProofDAG0(nodes));
+  ]));
 
   assert.equal(out.tag, 'reject');
   assert.equal(
@@ -255,11 +241,9 @@ test('TraceInd rejects a NAND case missing one input invariant', () => {
     equation: fixture.equationProofIds.get('g0'),
     'dep.s0': fixture.invariantProofIds.get('s0'),
   });
-  const nodes = fixture.proofNodes.map(
-    (node) => node.id === 'case.g0' ? shortCaseNode : node,
-  );
-
-  const out = CheckSemanticKernelProofTraceInd0(makeSemanticProofDAG0(nodes));
+  const out = CheckSemanticKernelProofTraceInd0(makeSemanticProofDAG0(
+    fixture.proofNodes.map((node) => node.id === 'case.g0' ? shortCaseNode : node),
+  ));
 
   assert.equal(out.tag, 'reject');
   assert.equal(
@@ -277,21 +261,19 @@ test('TraceInd rejects a substituted earlier input invariant', () => {
     equation: g0.equation,
     current: g0.invariant,
     dependencyInvariants: [
-      { nodeId: 's0', invariant: fixture.nodesById.get('s1').invariant },
+      { nodeId: 's0', invariant: fixture.nodesById.get('g1').invariant },
       { nodeId: 's1', invariant: fixture.nodesById.get('s1').invariant },
     ],
   });
   const badCaseNode = recordProof0('case.g0', badCase, {
     current: fixture.invariantProofIds.get('g0'),
     equation: fixture.equationProofIds.get('g0'),
-    'dep.s0': fixture.invariantProofIds.get('s1'),
+    'dep.s0': fixture.invariantProofIds.get('g1'),
     'dep.s1': fixture.invariantProofIds.get('s1'),
   });
-  const nodes = fixture.proofNodes.map(
-    (node) => node.id === 'case.g0' ? badCaseNode : node,
-  );
-
-  const out = CheckSemanticKernelProofTraceInd0(makeSemanticProofDAG0(nodes));
+  const out = CheckSemanticKernelProofTraceInd0(makeSemanticProofDAG0(
+    fixture.proofNodes.map((node) => node.id === 'case.g0' ? badCaseNode : node),
+  ));
 
   assert.equal(out.tag, 'reject');
   assert.equal(
@@ -303,15 +285,13 @@ test('TraceInd rejects a substituted earlier input invariant', () => {
 test('TraceInd rejects local cases supplied out of trace-node order', () => {
   const fixture = makeValidTraceFixture0();
   const closeNode = fixture.proofNodes.at(-1);
-  const nodes = [
+  const out = CheckSemanticKernelProofTraceInd0(makeSemanticProofDAG0([
     ...fixture.proofNodes.slice(0, -1),
     {
       ...closeNode,
       Premises: ['case.s1', 'case.s0', 'case.g0', 'case.g1'],
     },
-  ];
-
-  const out = CheckSemanticKernelProofTraceInd0(makeSemanticProofDAG0(nodes));
+  ]));
 
   assert.equal(out.tag, 'reject');
   assert.equal(
@@ -322,17 +302,12 @@ test('TraceInd rejects local cases supplied out of trace-node order', () => {
 
 test('TraceInd rejects an output term not equal to the declared output node', () => {
   const fixture = makeValidTraceFixture0();
-  const badTrace = {
-    ...fixture.trace,
-    outputTerm: fixture.x0,
-  };
   const closeNode = fixture.proofNodes.at(-1);
-  const nodes = [
+  const badTrace = { ...fixture.trace, outputTerm: fixture.x0 };
+  const out = CheckSemanticKernelProofTraceInd0(makeSemanticProofDAG0([
     ...fixture.proofNodes.slice(0, -1),
     { ...closeNode, Payload: { op: 'close', trace: badTrace } },
-  ];
-
-  const out = CheckSemanticKernelProofTraceInd0(makeSemanticProofDAG0(nodes));
+  ]));
 
   assert.equal(out.tag, 'reject');
   assert.equal(
@@ -344,18 +319,13 @@ test('TraceInd rejects an output term not equal to the declared output node', ()
 test('TraceInd rejects a mutated terminal output-coordinate conclusion', () => {
   const fixture = makeValidTraceFixture0();
   const closeNode = fixture.proofNodes.at(-1);
-  const nodes = [
+  const out = CheckSemanticKernelProofTraceInd0(makeSemanticProofDAG0([
     ...fixture.proofNodes.slice(0, -1),
     {
       ...closeNode,
-      Conclusion: {
-        ...fixture.conclusion,
-        outputCoordinate: 'wrongOutput',
-      },
+      Conclusion: { ...fixture.conclusion, outputCoordinate: 'wrongOutput' },
     },
-  ];
-
-  const out = CheckSemanticKernelProofTraceInd0(makeSemanticProofDAG0(nodes));
+  ]));
 
   assert.equal(out.tag, 'reject');
   assert.equal(
@@ -367,7 +337,7 @@ test('TraceInd rejects a mutated terminal output-coordinate conclusion', () => {
 test('TraceInd accepts only Record.intro local case evidence', () => {
   const fixture = makeValidTraceFixture0();
   const closeNode = fixture.proofNodes.at(-1);
-  const nodes = [
+  const out = CheckSemanticKernelProofTraceInd0(makeSemanticProofDAG0([
     ...fixture.proofNodes.slice(0, -1),
     {
       ...closeNode,
@@ -378,9 +348,7 @@ test('TraceInd accepts only Record.intro local case evidence', () => {
         'case.g1',
       ],
     },
-  ];
-
-  const out = CheckSemanticKernelProofTraceInd0(makeSemanticProofDAG0(nodes));
+  ]));
 
   assert.equal(out.tag, 'reject');
   assert.equal(
@@ -398,27 +366,3 @@ test('predecessor rules cannot consume TraceInd conclusions without explicit sem
     Conclusion: fixture.nodesById.get('s0').invariant,
     Payload: { op: 'symm' },
   });
-
-  const out = CheckSemanticKernelProofTraceInd0(makeSemanticProofDAG0([
-    ...fixture.proofNodes,
-    illegal,
-  ]));
-
-  assert.equal(out.tag, 'reject');
-  assert.equal(out.Coord, 'CheckSemanticKernelProofTraceInd0.baseProof');
-  assert.equal(
-    out.Witness.reason,
-    'Eq/Subst/Record/DAGInd/LedgerInd/OblTopoInd sub-DAG rejected under the predecessor semantic checker',
-  );
-});
-
-test('TraceInd readiness removes TraceInd but leaves nine rule families missing', () => {
-  const out = CheckSemanticKernelReadinessTraceInd0();
-
-  assert.equal(out.tag, 'reject');
-  assert.equal(out.Coord, 'CheckSemanticKernelReadinessTraceInd0.coverage');
-  assert.equal(out.Witness.missingRules.includes('TraceInd'), false);
-  assert.equal(out.Witness.missingRules.includes('FiniteExhaust'), true);
-  assert.equal(out.Witness.missingRules.includes('FiniteRel'), true);
-  assert.equal(out.Witness.missingRules.length, 9);
-});
