@@ -28,6 +28,10 @@ jobs:
           persist-credentials: false
           set-safe-directory: false
 
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+
       - name: Run TraceInd kernel tests
         continue-on-error: true
         run: node --test test/pcc-kernel-traceind-semantic0.test.mjs
