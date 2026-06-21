@@ -24,6 +24,62 @@ jobs:
           - case: freeze-skip
             file: test/pcc-release-audit-public-surface-freeze0.test.mjs
             pattern: can skip public surface freeze
-          - case: freeze-reject
+          - case: freeze-checker-reject
             file: test/pcc-release-audit-public-surface-freeze0.test.mjs
-            pattern:
+            pattern: rejects when public surface freeze checker rejects
+          - case: freeze-wrong-kind
+            file: test/pcc-release-audit-public-surface-freeze0.test.mjs
+            pattern: wrong NF kind
+          - case: freeze-not-frozen
+            file: test/pcc-release-audit-public-surface-freeze0.test.mjs
+            pattern: without surfaceFrozen=true
+          - case: freeze-no-export-count
+            file: test/pcc-release-audit-public-surface-freeze0.test.mjs
+            pattern: without export count
+          - case: freeze-config-shape
+            file: test/pcc-release-audit-public-surface-freeze0.test.mjs
+            pattern: validates public surface freeze config shape
+          - case: freeze-readme
+            file: test/pcc-release-audit-public-surface-freeze0.test.mjs
+            pattern: README documents release audit public surface freeze phase
+          - case: summary-no-nf
+            file: test/pcc-release-audit-public-surface-summary-negative0.test.mjs
+            pattern: without an NF object
+          - case: summary-wrong-kind
+            file: test/pcc-release-audit-public-surface-summary-negative0.test.mjs
+            pattern: wrong NF kind
+          - case: summary-not-frozen
+            file: test/pcc-release-audit-public-surface-summary-negative0.test.mjs
+            pattern: surfaceFrozen=false
+          - case: summary-zero-entry
+            file: test/pcc-release-audit-public-surface-summary-negative0.test.mjs
+            pattern: zero public entry export count
+          - case: summary-zero-export
+            file: test/pcc-release-audit-public-surface-summary-negative0.test.mjs
+            pattern: zero package export count
+          - case: summary-zero-bin
+            file: test/pcc-release-audit-public-surface-summary-negative0.test.mjs
+            pattern: zero package bin count
+          - case: summary-zero-script
+            file: test/pcc-release-audit-public-surface-summary-negative0.test.mjs
+            pattern: zero package script count
+          - case: summary-runner-reject
+            file: test/pcc-release-audit-public-surface-summary-negative0.test.mjs
+            pattern: runner reject record at publicSurfaceFreeze phase
+          - case: summary-valid
+            file: test/pcc-release-audit-public-surface-summary-negative0.test.mjs
+            pattern: accepts valid synthetic public surface freeze proof
+          - case: summary-readme
+            file: test/pcc-release-audit-public-surface-summary-negative0.test.mjs
+            pattern: README documents public surface freeze negative coverage
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          show-progress: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: node --test --test-name-pattern "${{ matrix.pattern }}" "${{ matrix.file }}"
