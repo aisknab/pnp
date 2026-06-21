@@ -43,10 +43,12 @@ jobs:
             test/pcc-kernel-semantic0.test.mjs \
             test/pcc-kernel-record-semantic0.test.mjs \
             test/pcc-kernel-dagind-semantic0.test.mjs \
+            test/pcc-kernel-ledgerind-semantic0.test.mjs \
             test/pcc-kimpl0.test.mjs \
             test/pcc-kimpl-successor0.test.mjs \
             test/pcc-kimpl-record-successor0.test.mjs \
             test/pcc-kimpl-dagind-successor0.test.mjs \
+            test/pcc-kimpl-ledgerind-successor0.test.mjs \
             test/pcc-kbundle-semantic-successor0.test.mjs \
             test/pcc-global-proof-dag0.test.mjs \
             test/pcc-global-proof-dag-semantic-successor0.test.mjs \
