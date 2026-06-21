@@ -366,3 +366,27 @@ test('predecessor rules cannot consume TraceInd conclusions without explicit sem
     Conclusion: fixture.nodesById.get('s0').invariant,
     Payload: { op: 'symm' },
   });
+
+  const out = CheckSemanticKernelProofTraceInd0(makeSemanticProofDAG0([
+    ...fixture.proofNodes,
+    illegal,
+  ]));
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.Coord, 'CheckSemanticKernelProofTraceInd0.baseProof');
+  assert.equal(
+    out.Witness.reason,
+    'Eq/Subst/Record/DAGInd/LedgerInd/OblTopoInd sub-DAG rejected under the predecessor semantic checker',
+  );
+});
+
+test('TraceInd readiness removes TraceInd but leaves nine rule families missing', () => {
+  const out = CheckSemanticKernelReadinessTraceInd0();
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.Coord, 'CheckSemanticKernelReadinessTraceInd0.coverage');
+  assert.equal(out.Witness.missingRules.includes('TraceInd'), false);
+  assert.equal(out.Witness.missingRules.includes('FiniteExhaust'), true);
+  assert.equal(out.Witness.missingRules.includes('FiniteRel'), true);
+  assert.equal(out.Witness.missingRules.length, 9);
+});
