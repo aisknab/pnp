@@ -430,7 +430,7 @@ test('DPInd rejects a substituted predecessor value in a local recurrence case',
   const badCaseNode = recordProof0('case.s0', badCase, {
     equation: fixture.equationProofIds.get('s0'),
     value: fixture.valueProofIds.get('s0'),
-    'dep.b0': fixture.valueProofIds.get('b1'),
+    'dep.b0': fixture.equationProofIds.get('b1'),
     'dep.b1': fixture.valueProofIds.get('b1'),
   });
   const out = CheckSemanticKernelProofDPInd0(makeSemanticProofDAG0(
