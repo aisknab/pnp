@@ -234,10 +234,10 @@ Durable CI runs:
 ```bash
 node --test \
   test/pcc-kbundle-dpind-successor0.test.mjs \
-  test/pcc-kbundle-dpind-successor-negative0.test.mjs \
-  test/pcc-global-proof-dag-dpind-successor0.test.mjs \
-  test/pcc-global-proof-dag-dpind-successor-negative0.test.mjs
+  test/pcc-global-proof-dag-dpind-successor0.test.mjs
 ```
+
+Positive and rejection cases are kept in those canonical module test files. This preserves the release-audit test-to-module inventory: no standalone test filename is allowed to imply a nonexistent sibling implementation module.
 
 The tests cover predecessor preservation, exact expansion from eight to nine semantic kernel coordinates, removal of `DPInd` from the missing-rule list, final-purpose rejection, readiness-digest binding, caller readiness rejection, stale predecessor rejection, policy weakening, and final-node quarantine.
 
