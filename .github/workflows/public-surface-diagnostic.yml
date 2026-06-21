@@ -1,0 +1,39 @@
+name: public-surface-diagnostic
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-file:
+    name: public-${{ matrix.case }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - case: api
+            file: test/pcc-public-api0.test.mjs
+          - case: freeze
+            file: test/pcc-public-surface-freeze0.test.mjs
+          - case: audit-freeze
+            file: test/pcc-release-audit-public-surface-freeze0.test.mjs
+          - case: summary-negative
+            file: test/pcc-release-audit-public-surface-summary-negative0.test.mjs
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          show-progress: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: node --test "${{ matrix.file }}"
