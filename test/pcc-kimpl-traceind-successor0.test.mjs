@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
+import './pcc-kbundle-traceind-successor0.test.mjs';
+import './pcc-global-proof-dag-traceind-successor0.test.mjs';
+
 import {
   makeKernelRuleTable0,
   makeSyntheticKImpl0,
