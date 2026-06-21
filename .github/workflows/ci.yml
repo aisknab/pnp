@@ -45,12 +45,14 @@ jobs:
             test/pcc-kernel-dagind-semantic0.test.mjs \
             test/pcc-kernel-ledgerind-semantic0.test.mjs \
             test/pcc-kernel-obltopoind-semantic0.test.mjs \
+            test/pcc-kernel-traceind-semantic0.test.mjs \
             test/pcc-kimpl0.test.mjs \
             test/pcc-kimpl-successor0.test.mjs \
             test/pcc-kimpl-record-successor0.test.mjs \
             test/pcc-kimpl-dagind-successor0.test.mjs \
             test/pcc-kimpl-ledgerind-successor0.test.mjs \
             test/pcc-kimpl-obltopoind-successor0.test.mjs \
+            test/pcc-kimpl-traceind-successor0.test.mjs \
             test/pcc-kbundle-semantic-successor0.test.mjs \
             test/pcc-kbundle-ledgerind-successor0.test.mjs \
             test/pcc-kbundle-obltopoind-successor0.test.mjs \
