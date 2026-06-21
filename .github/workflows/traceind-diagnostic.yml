@@ -1,0 +1,51 @@
+name: traceind-diagnostic
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  kernel-case:
+    name: kernel-case-${{ matrix.case }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - case: accept
+            pattern: closes exact source
+          - case: nand-value
+            pattern: rejects a NAND value
+          - case: forward-input
+            pattern: rejects a forward NAND
+          - case: missing-input
+            pattern: missing one input invariant
+          - case: substituted-input
+            pattern: substituted earlier input invariant
+          - case: case-order
+            pattern: out of trace-node order
+          - case: output-term
+            pattern: output term not equal
+          - case: terminal-output
+            pattern: mutated terminal output-coordinate
+          - case: record-only
+            pattern: only Record.intro local case evidence
+          - case: predecessor-consume
+            pattern: predecessor rules cannot consume
+          - case: readiness
+            pattern: readiness removes TraceInd
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          show-progress: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+      - run: node --test --test-name-pattern "${{ matrix.pattern }}" test/pcc-kernel-traceind-semantic0.test.mjs
