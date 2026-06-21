@@ -262,6 +262,7 @@ test('FiniteExhaust rejects cases supplied out of canonical domain order', () =>
 
 test('FiniteExhaust rejects a case instantiated at the wrong element', () => {
   const fixture = makeValidFixture0();
+  const wrongInstanceId = 'instance.wrong.0';
   const wrongCase = makeSemanticFiniteExhaustCase0({
     domainId: fixture.domainId,
     index: 0,
@@ -270,11 +271,18 @@ test('FiniteExhaust rejects a case instantiated at the wrong element', () => {
   });
   const wrongCaseNode = recordProof0('case.0', wrongCase, {
     element: fixture.elementProofIds[0],
-    instance: fixture.instanceProofIds[1],
+    instance: wrongInstanceId,
   });
-  const out = CheckSemanticKernelProofFiniteExhaust0(makeSemanticProofDAG0(
-    fixture.proofNodes.map((node) => node.id === 'case.0' ? wrongCaseNode : node),
-  ));
+  const nodes = [];
+  for (const node of fixture.proofNodes) {
+    if (node.id === 'case.0') {
+      nodes.push(eqProof0(wrongInstanceId, fixture.instances[1]));
+      nodes.push(wrongCaseNode);
+    } else {
+      nodes.push(node);
+    }
+  }
+  const out = CheckSemanticKernelProofFiniteExhaust0(makeSemanticProofDAG0(nodes));
 
   assert.equal(out.tag, 'reject');
   assert.equal(
