@@ -10,43 +10,6 @@ permissions:
   contents: read
 
 jobs:
-  aggregate-log:
-    name: aggregate-log
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          fetch-depth: 1
-          show-progress: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version: "20"
-      - name: Capture TraceInd test output
-        shell: bash
-        run: |
-          set +e
-          node --test \
-            test/pcc-kernel-traceind-semantic0.test.mjs \
-            test/pcc-kimpl-traceind-successor0.test.mjs \
-            > traceind-test.log 2>&1
-          status=$?
-          printf '%s\n' "$status" > traceind-test.status
-          exit 0
-      - name: Upload TraceInd test output
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: traceind-test-output
-          path: |
-            traceind-test.log
-            traceind-test.status
-          if-no-files-found: error
-          retention-days: 1
-      - name: Preserve test failure status
-        shell: bash
-        run: test "$(cat traceind-test.status)" = "0"
-
   kernel-case:
     name: kernel-case-${{ matrix.case }}
     runs-on: ubuntu-latest
