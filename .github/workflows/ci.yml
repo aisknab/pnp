@@ -173,6 +173,27 @@ jobs:
       - name: Run MinCounterexample global gate tests
         run: node --test test/pcc-global-proof-dag-mincounterexample-successor0.test.mjs
 
+  intarith-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          show-progress: false
+          persist-credentials: false
+          set-safe-directory: false
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+
+      - name: Run IntArith kernel tests
+        run: node --test test/pcc-kernel-intarith-semantic0.test.mjs
+
+      - name: Run IntArith successor tests
+        run: node --test test/pcc-kimpl-intarith-successor0.test.mjs
+
   online-verification:
     runs-on: ubuntu-latest
     timeout-minutes: 45
@@ -232,6 +253,11 @@ jobs:
           node --test test/pcc-kbundle-mincounterexample-successor0.test.mjs
           node --test test/pcc-global-proof-dag-mincounterexample-successor0.test.mjs
 
+      - name: Run IntArith unit suite
+        run: |
+          node --test test/pcc-kernel-intarith-semantic0.test.mjs
+          node --test test/pcc-kimpl-intarith-successor0.test.mjs
+
       - name: Run targeted unit suite
         run: |
           node --test \
@@ -247,6 +273,7 @@ jobs:
             test/pcc-kernel-hall-semantic0.test.mjs \
             test/pcc-kernel-rankind-semantic0.test.mjs \
             test/pcc-kernel-mincounterexample-semantic0.test.mjs \
+            test/pcc-kernel-intarith-semantic0.test.mjs \
             test/pcc-kimpl0.test.mjs \
             test/pcc-kimpl-successor0.test.mjs \
             test/pcc-kimpl-record-successor0.test.mjs \
@@ -259,6 +286,7 @@ jobs:
             test/pcc-kimpl-hall-successor0.test.mjs \
             test/pcc-kimpl-rankind-successor0.test.mjs \
             test/pcc-kimpl-mincounterexample-successor0.test.mjs \
+            test/pcc-kimpl-intarith-successor0.test.mjs \
             test/pcc-kbundle-semantic-successor0.test.mjs \
             test/pcc-kbundle-ledgerind-successor0.test.mjs \
             test/pcc-kbundle-obltopoind-successor0.test.mjs \
