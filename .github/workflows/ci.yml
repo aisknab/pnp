@@ -140,6 +140,12 @@ jobs:
       - name: Run RankInd successor tests
         run: node --test test/pcc-kimpl-rankind-successor0.test.mjs
 
+      - name: Run RankInd KBundle tests
+        run: node --test test/pcc-kbundle-rankind-successor0.test.mjs
+
+      - name: Run RankInd global gate tests
+        run: node --test test/pcc-global-proof-dag-rankind-successor0.test.mjs
+
   online-verification:
     runs-on: ubuntu-latest
     timeout-minutes: 45
@@ -189,6 +195,8 @@ jobs:
         run: |
           node --test test/pcc-kernel-rankind-semantic0.test.mjs
           node --test test/pcc-kimpl-rankind-successor0.test.mjs
+          node --test test/pcc-kbundle-rankind-successor0.test.mjs
+          node --test test/pcc-global-proof-dag-rankind-successor0.test.mjs
 
       - name: Run targeted unit suite
         run: |
@@ -222,6 +230,7 @@ jobs:
             test/pcc-kbundle-finiteexhaust-successor0.test.mjs \
             test/pcc-kbundle-dpind-successor0.test.mjs \
             test/pcc-kbundle-hall-successor0.test.mjs \
+            test/pcc-kbundle-rankind-successor0.test.mjs \
             test/pcc-global-proof-dag0.test.mjs \
             test/pcc-global-proof-dag-semantic-successor0.test.mjs \
             test/pcc-global-proof-dag-ledgerind-successor0.test.mjs \
@@ -230,6 +239,7 @@ jobs:
             test/pcc-global-proof-dag-finiteexhaust-successor0.test.mjs \
             test/pcc-global-proof-dag-dpind-successor0.test.mjs \
             test/pcc-global-proof-dag-hall-successor0.test.mjs \
+            test/pcc-global-proof-dag-rankind-successor0.test.mjs \
             test/pcc-gpack0.test.mjs \
             test/pcc-final-framework0.test.mjs \
             test/pcc-pack-sufficiency0.test.mjs
