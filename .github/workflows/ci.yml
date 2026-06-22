@@ -194,6 +194,12 @@ jobs:
       - name: Run IntArith successor tests
         run: node --test test/pcc-kimpl-intarith-successor0.test.mjs
 
+      - name: Run IntArith KBundle tests
+        run: node --test test/pcc-kbundle-intarith-successor0.test.mjs
+
+      - name: Run IntArith global gate tests
+        run: node --test test/pcc-global-proof-dag-intarith-successor0.test.mjs
+
   online-verification:
     runs-on: ubuntu-latest
     timeout-minutes: 45
@@ -257,6 +263,8 @@ jobs:
         run: |
           node --test test/pcc-kernel-intarith-semantic0.test.mjs
           node --test test/pcc-kimpl-intarith-successor0.test.mjs
+          node --test test/pcc-kbundle-intarith-successor0.test.mjs
+          node --test test/pcc-global-proof-dag-intarith-successor0.test.mjs
 
       - name: Run targeted unit suite
         run: |
@@ -296,6 +304,7 @@ jobs:
             test/pcc-kbundle-hall-successor0.test.mjs \
             test/pcc-kbundle-rankind-successor0.test.mjs \
             test/pcc-kbundle-mincounterexample-successor0.test.mjs \
+            test/pcc-kbundle-intarith-successor0.test.mjs \
             test/pcc-global-proof-dag0.test.mjs \
             test/pcc-global-proof-dag-semantic-successor0.test.mjs \
             test/pcc-global-proof-dag-ledgerind-successor0.test.mjs \
@@ -306,6 +315,7 @@ jobs:
             test/pcc-global-proof-dag-hall-successor0.test.mjs \
             test/pcc-global-proof-dag-rankind-successor0.test.mjs \
             test/pcc-global-proof-dag-mincounterexample-successor0.test.mjs \
+            test/pcc-global-proof-dag-intarith-successor0.test.mjs \
             test/pcc-gpack0.test.mjs \
             test/pcc-final-framework0.test.mjs \
             test/pcc-pack-sufficiency0.test.mjs
