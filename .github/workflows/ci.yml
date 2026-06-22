@@ -92,6 +92,27 @@ jobs:
       - name: Run DPInd global gate tests
         run: node --test test/pcc-global-proof-dag-dpind-successor0.test.mjs
 
+  hall-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          show-progress: false
+          persist-credentials: false
+          set-safe-directory: false
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+
+      - name: Run Hall kernel tests
+        run: node --test test/pcc-kernel-hall-semantic0.test.mjs
+
+      - name: Run Hall successor tests
+        run: node --test test/pcc-kimpl-hall-successor0.test.mjs
+
   online-verification:
     runs-on: ubuntu-latest
     timeout-minutes: 45
@@ -130,6 +151,11 @@ jobs:
           node --test test/pcc-kbundle-dpind-successor0.test.mjs
           node --test test/pcc-global-proof-dag-dpind-successor0.test.mjs
 
+      - name: Run Hall unit suite
+        run: |
+          node --test test/pcc-kernel-hall-semantic0.test.mjs
+          node --test test/pcc-kimpl-hall-successor0.test.mjs
+
       - name: Run targeted unit suite
         run: |
           node --test \
@@ -142,6 +168,7 @@ jobs:
             test/pcc-kernel-traceind-semantic0.test.mjs \
             test/pcc-kernel-finiteexhaust-semantic0.test.mjs \
             test/pcc-kernel-dpind-semantic0.test.mjs \
+            test/pcc-kernel-hall-semantic0.test.mjs \
             test/pcc-kimpl0.test.mjs \
             test/pcc-kimpl-successor0.test.mjs \
             test/pcc-kimpl-record-successor0.test.mjs \
@@ -151,6 +178,7 @@ jobs:
             test/pcc-kimpl-traceind-successor0.test.mjs \
             test/pcc-kimpl-finiteexhaust-successor0.test.mjs \
             test/pcc-kimpl-dpind-successor0.test.mjs \
+            test/pcc-kimpl-hall-successor0.test.mjs \
             test/pcc-kbundle-semantic-successor0.test.mjs \
             test/pcc-kbundle-ledgerind-successor0.test.mjs \
             test/pcc-kbundle-obltopoind-successor0.test.mjs \
