@@ -255,7 +255,7 @@ test('semantic Sigma global gate rejects a weakened final-node quarantine policy
   );
 });
 
-test('semantic Sigma global gate propagates a malformed legacy Sigma node', async () => {
+test('semantic Sigma global gate rejects a malformed legacy Sigma node at the overlay boundary', async () => {
   const legacy = makeSyntheticGlobalProofDAG0();
   legacy.Nodes = legacy.Nodes.map((node) => (
     node.id === 'Sigma.V53'
@@ -281,10 +281,10 @@ test('semantic Sigma global gate propagates a malformed legacy Sigma node', asyn
   const out = await CheckGlobalProofDAGSigmaSuccessor0(input);
 
   assert.equal(out.tag, 'reject');
-  assert.equal(out.Coord, 'CheckGlobalProofDAGSigmaSuccessor0.predecessorGlobal');
+  assert.equal(out.Coord, 'CheckGlobalProofDAGSigmaSuccessor0.semanticOverlay');
   assert.equal(
     out.Witness.reason,
-    'semantic K0 conformance predecessor global gate rejected before Sigma upgrade',
+    'semantic Sigma node must retain the exact finite-relation and integer-arithmetic prerequisites',
   );
 });
 
