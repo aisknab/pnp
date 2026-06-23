@@ -1,0 +1,39 @@
+name: global-rows-verification
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: global-rows-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  global-rows-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          show-progress: false
+          persist-credentials: false
+          set-safe-directory: false
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+
+      - name: Run scoped global row semantic checker tests
+        run: node --test test/pcc-global-row-semantic0.test.mjs
+
+      - name: Run scoped global row successor tests
+        run: node --test test/pcc-global-proof-dag-row-successor0.test.mjs
