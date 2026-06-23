@@ -135,8 +135,10 @@ test('semantic K0 conformance accepts exact local soundness obligations for ever
 });
 
 test('semantic K0 conformance rejects caller-supplied readiness assertions', async () => {
-  const input = makeInput0();
-  input.semanticK0ConformanceReady = true;
+  const input = {
+    ...makeInput0(),
+    semanticK0ConformanceReady: true,
+  };
 
   const out = await CheckSemanticK0Conformance0(input);
 
@@ -150,12 +152,15 @@ test('semantic K0 conformance rejects caller-supplied readiness assertions', asy
 });
 
 test('semantic K0 conformance rejects caller soundness fields inside an obligation', async () => {
-  const input = makeInput0();
-  input.SemanticConformance = {
-    ...input.SemanticConformance,
-    obligations: input.SemanticConformance.obligations.map((entry, index) => (
-      index === 0 ? { ...entry, sound: true } : entry
-    )),
+  const base = makeInput0();
+  const input = {
+    ...base,
+    SemanticConformance: {
+      ...base.SemanticConformance,
+      obligations: base.SemanticConformance.obligations.map((entry, index) => (
+        index === 0 ? { ...entry, sound: true } : entry
+      )),
+    },
   };
 
   const out = await CheckSemanticK0Conformance0(input);
@@ -170,14 +175,17 @@ test('semantic K0 conformance rejects caller soundness fields inside an obligati
 });
 
 test('semantic K0 conformance rejects a stale executable checker binding', async () => {
-  const input = makeInput0();
-  input.SemanticConformance = {
-    ...input.SemanticConformance,
-    obligations: input.SemanticConformance.obligations.map((entry) => (
-      entry.ruleName === 'FiniteRel'
-        ? { ...entry, primitiveChecker: 'CheckSemanticKernelProofTruthVec0' }
-        : entry
-    )),
+  const base = makeInput0();
+  const input = {
+    ...base,
+    SemanticConformance: {
+      ...base.SemanticConformance,
+      obligations: base.SemanticConformance.obligations.map((entry) => (
+        entry.ruleName === 'FiniteRel'
+          ? { ...entry, primitiveChecker: 'CheckSemanticKernelProofTruthVec0' }
+          : entry
+      )),
+    },
   };
 
   const out = await CheckSemanticK0Conformance0(input);
