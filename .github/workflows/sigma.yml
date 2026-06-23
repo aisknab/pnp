@@ -1,0 +1,42 @@
+name: sigma-verification
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sigma-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sigma-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          show-progress: false
+          persist-credentials: false
+          set-safe-directory: false
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+
+      - name: Run semantic Sigma checker tests
+        run: node --test test/pcc-sigma-semantic0.test.mjs
+
+      - name: Run semantic Sigma KBundle tests
+        run: node --test test/pcc-kbundle-sigma-successor0.test.mjs
+
+      - name: Run semantic Sigma global gate tests
+        run: node --test test/pcc-global-proof-dag-sigma-successor0.test.mjs
