@@ -1,0 +1,39 @@
+name: global-packages-verification
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: global-packages-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  global-packages-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          show-progress: false
+          persist-credentials: false
+          set-safe-directory: false
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+
+      - name: Run bounded global package semantic checker tests
+        run: node --test test/pcc-global-package-semantic0.test.mjs
+
+      - name: Run bounded global package successor tests
+        run: node --test test/pcc-global-proof-dag-package-successor0.test.mjs
