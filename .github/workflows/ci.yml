@@ -275,6 +275,12 @@ jobs:
       - name: Run FiniteRel successor tests
         run: node --test test/pcc-kimpl-finiterel-successor0.test.mjs
 
+      - name: Run FiniteRel KBundle tests
+        run: node --test test/pcc-kbundle-finiterel-successor0.test.mjs
+
+      - name: Run FiniteRel global gate tests
+        run: node --test test/pcc-global-proof-dag-finiterel-successor0.test.mjs
+
   online-verification:
     runs-on: ubuntu-latest
     timeout-minutes: 45
@@ -359,6 +365,8 @@ jobs:
         run: |
           node --test test/pcc-kernel-finiterel-semantic0.test.mjs
           node --test test/pcc-kimpl-finiterel-successor0.test.mjs
+          node --test test/pcc-kbundle-finiterel-successor0.test.mjs
+          node --test test/pcc-global-proof-dag-finiterel-successor0.test.mjs
 
       - name: Run targeted unit suite
         run: |
@@ -407,6 +415,7 @@ jobs:
             test/pcc-kbundle-intarith-successor0.test.mjs \
             test/pcc-kbundle-transport-successor0.test.mjs \
             test/pcc-kbundle-truthvec-successor0.test.mjs \
+            test/pcc-kbundle-finiterel-successor0.test.mjs \
             test/pcc-global-proof-dag0.test.mjs \
             test/pcc-global-proof-dag-semantic-successor0.test.mjs \
             test/pcc-global-proof-dag-ledgerind-successor0.test.mjs \
@@ -420,6 +429,7 @@ jobs:
             test/pcc-global-proof-dag-intarith-successor0.test.mjs \
             test/pcc-global-proof-dag-transport-successor0.test.mjs \
             test/pcc-global-proof-dag-truthvec-successor0.test.mjs \
+            test/pcc-global-proof-dag-finiterel-successor0.test.mjs \
             test/pcc-gpack0.test.mjs \
             test/pcc-final-framework0.test.mjs \
             test/pcc-pack-sufficiency0.test.mjs
