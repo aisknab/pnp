@@ -11,6 +11,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: write
 
 concurrency:
   group: global-rows-${{ github.workflow }}-${{ github.ref }}
@@ -33,23 +34,58 @@ jobs:
           node-version: "20"
 
       - name: Run scoped global row semantic checker tests
+        id: semantic
         shell: bash
         run: |
           set +e
           node --test test/pcc-global-row-semantic0.test.mjs > /tmp/global-row-semantic.log 2>&1
           status=$?
-          if [ "$status" -ne 0 ]; then
-            cat /tmp/global-row-semantic.log
-          fi
-          exit "$status"
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          exit 0
 
       - name: Run scoped global row successor tests
+        id: successor
+        if: always()
         shell: bash
         run: |
           set +e
           node --test test/pcc-global-proof-dag-row-successor0.test.mjs > /tmp/global-row-successor.log 2>&1
           status=$?
-          if [ "$status" -ne 0 ]; then
-            cat /tmp/global-row-successor.log
-          fi
-          exit "$status"
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Report scoped global row test failures
+        if: >-
+          always() && github.event_name == 'pull_request' &&
+          (steps.semantic.outputs.status != '0' || steps.successor.outputs.status != '0')
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          SEMANTIC_STATUS: ${{ steps.semantic.outputs.status }}
+          SUCCESSOR_STATUS: ${{ steps.successor.outputs.status }}
+        shell: bash
+        run: |
+          {
+            echo 'Phase 35 diagnostic test output:'
+            if [ "$SEMANTIC_STATUS" != "0" ]; then
+              echo
+              echo '**Semantic checker suite**'
+              echo '```text'
+              tail -n 100 /tmp/global-row-semantic.log
+              echo '```'
+            fi
+            if [ "$SUCCESSOR_STATUS" != "0" ]; then
+              echo
+              echo '**Successor global-gate suite**'
+              echo '```text'
+              tail -n 100 /tmp/global-row-successor.log
+              echo '```'
+            fi
+          } > /tmp/global-row-diagnostic.md
+          gh pr comment "$PR_NUMBER" --body-file /tmp/global-row-diagnostic.md
+
+      - name: Fail when either scoped suite rejects
+        if: >-
+          always() &&
+          (steps.semantic.outputs.status != '0' || steps.successor.outputs.status != '0')
+        run: exit 1
