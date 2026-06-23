@@ -33,7 +33,23 @@ jobs:
           node-version: "20"
 
       - name: Run scoped global row semantic checker tests
-        run: node --test test/pcc-global-row-semantic0.test.mjs
+        shell: bash
+        run: |
+          set +e
+          node --test test/pcc-global-row-semantic0.test.mjs > /tmp/global-row-semantic.log 2>&1
+          status=$?
+          if [ "$status" -ne 0 ]; then
+            cat /tmp/global-row-semantic.log
+          fi
+          exit "$status"
 
       - name: Run scoped global row successor tests
-        run: node --test test/pcc-global-proof-dag-row-successor0.test.mjs
+        shell: bash
+        run: |
+          set +e
+          node --test test/pcc-global-proof-dag-row-successor0.test.mjs > /tmp/global-row-successor.log 2>&1
+          status=$?
+          if [ "$status" -ne 0 ]; then
+            cat /tmp/global-row-successor.log
+          fi
+          exit "$status"
