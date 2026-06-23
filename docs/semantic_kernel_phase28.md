@@ -1,0 +1,243 @@
+# Semantic kernel hardening — phase 28 (TruthVec KBundle and global-gate integration)
+
+## Purpose
+
+Phase 27 implemented exact bounded `TruthVec.evaluate` checking over canonical topological NAND programs and complete Boolean-cube domains, then added a TruthVec-expanded successor KImpl. Phase 28 carries that computed result through successor KBundle and successor global proof-DAG boundaries.
+
+The integration remains layered and fail-closed. It reruns the merged Transport boundaries as predecessor checks, does not activate any legacy final theorem node, and does not modify the sealed `7072f8d` source/checker or artefact release.
+
+## TruthVec successor KBundle
+
+The new record is:
+
+```text
+KBundleSemanticTruthVecSuccessor0
+```
+
+It contains a development-purpose `KImplSemanticTruthVecSuccessor0`, the legacy conformance suite, Sigma registry, reflection registry, fixed checker binding, and fail-closed policy.
+
+### Transport predecessor preservation
+
+`CheckKBundleTruthVecSuccessor0` filters the complete semantic proof DAG to the fourteen predecessor families:
+
+```text
+Eq
+Subst
+Record
+DAGInd
+LedgerInd
+OblTopoInd
+TraceInd
+FiniteExhaust
+DPInd
+Hall
+RankInd
+MinCounterexample
+IntArith
+Transport
+```
+
+It reconstructs and reruns `CheckKBundleTransportSuccessor0` over that sub-DAG. The predecessor KBundle must remain:
+
+```text
+status = development-only
+finalTheoremReady = false
+publicTheoremEmissionAllowed = false
+```
+
+and expose exactly the Transport-era semantic rule set. A predecessor acceptance record cannot be relabelled as TruthVec readiness.
+
+### TruthVec-expanded semantic KImpl
+
+The checker independently runs:
+
+```text
+CheckKImplTruthVecSuccessor0
+CheckKImplTruthVecFinalTheoremReadiness0
+```
+
+The development result must expose exactly:
+
+```text
+Eq
+Subst
+Record
+DAGInd
+LedgerInd
+OblTopoInd
+TraceInd
+FiniteExhaust
+DPInd
+Hall
+RankInd
+MinCounterexample
+IntArith
+Transport
+TruthVec
+```
+
+The final probe remains rejected because `FiniteRel` is still absent.
+
+### Computed KBundle readiness
+
+The TruthVec successor KBundle recomputes:
+
+```text
+KImpl.SemanticRuleCoverage
+K0.SemanticConformance
+Sigma.SemanticDerivations
+Reflection.SemanticSoundness
+```
+
+The KImpl blocker is bound to the digest returned by `CheckKImplTruthVecFinalTheoremReadiness0`. The other three surfaces remain blocked because the current conformance suite is structural-only, V53/V54 remain registry entries rather than semantic derivations, and reflection entries remain mappings rather than proof-producing refinements.
+
+Caller readiness fields, a final-purpose child KImpl, stale Transport-only KImpl state, weakened policy, predecessor drift, and legacy structural failures reject.
+
+## TruthVec successor global proof-DAG gate
+
+The new record is:
+
+```text
+GlobalProofDAGSemanticTruthVecSuccessor0
+```
+
+It contains the TruthVec successor KBundle, the legacy global proof DAG, fixed checker binding, and a fail-closed final-node quarantine policy.
+
+### Transport global-gate preservation
+
+The checker filters the nested semantic proof DAG to the fourteen Transport-era rules, reconstructs the Transport successor KBundle, and reruns:
+
+```text
+CheckGlobalProofDAGTransportSuccessor0
+```
+
+That predecessor global gate must remain development-only, expose no active final node, preserve all final-node quarantine fields, and recognize exactly:
+
+```text
+K.Eq
+K.Subst
+K.Record
+K.DAGInd
+K.LedgerInd
+K.OblTopoInd
+K.TraceInd
+K.FiniteExhaust
+K.DPInd
+K.Hall
+K.RankInd
+K.MinCounterexample
+K.IntArith
+K.Transport
+```
+
+### Expanded semantic overlay
+
+After the predecessor boundary accepts, the TruthVec KBundle is checked and the semantic overlay is rebuilt. The active semantic kernel coordinates become:
+
+```text
+K.Eq
+K.Subst
+K.Record
+K.DAGInd
+K.LedgerInd
+K.OblTopoInd
+K.TraceInd
+K.FiniteExhaust
+K.DPInd
+K.Hall
+K.RankInd
+K.MinCounterexample
+K.IntArith
+K.Transport
+K.TruthVec
+```
+
+Only one blocked primitive coordinate remains:
+
+```text
+K.FiniteRel
+```
+
+Sigma, reflection, row, package, and final nodes remain structural-only until represented by semantic derivations.
+
+The four legacy final nodes remain quarantined:
+
+```text
+Final.PackageSoundness
+Final.GeneratedPackageSufficiency
+Final.AcceptedPackageImpliesSATinP
+Final.AcceptedPackageImpliesPEqualsNP
+```
+
+### Computed global gate
+
+The derived gate contains:
+
+```text
+Gate.PredecessorGlobal.DevelopmentAcceptance
+Gate.KBundle.TruthVecDevelopmentAcceptance
+Gate.KBundle.TruthVecFinalReadiness
+Gate.GlobalDAG.StructuralAcceptance
+Gate.GlobalDAG.SemanticNodeDerivations
+Gate.FinalTheorem.Readiness
+```
+
+The final gate depends on both TruthVec KBundle final readiness and semantic global-node derivations. The KBundle branch is bound to the expanded KBundle readiness digest. The global semantic-node branch remains false.
+
+Development acceptance is therefore forced to record:
+
+```text
+status = development-only
+activeFinalNodeIds = []
+legacyFinalNodesQuarantined = true
+finalTheoremReady = false
+publicTheoremEmissionAllowed = false
+```
+
+## Current rule status
+
+Implemented semantic primitive families:
+
+```text
+Eq
+Subst
+Record
+DAGInd
+LedgerInd
+OblTopoInd
+TraceInd
+FiniteExhaust
+DPInd
+Hall
+RankInd
+MinCounterexample
+IntArith
+Transport
+TruthVec
+```
+
+Still missing:
+
+```text
+FiniteRel
+```
+
+The final gate also remains blocked on semantic conformance, Sigma derivations, reflection soundness, and semantic global-node derivations.
+
+## Verification targets
+
+Durable CI runs:
+
+```bash
+node --test \
+  test/pcc-kbundle-truthvec-successor0.test.mjs \
+  test/pcc-global-proof-dag-truthvec-successor0.test.mjs
+```
+
+The tests cover exact fourteen-to-fifteen rule expansion, preservation of Transport predecessor boundaries, removal of `TruthVec` from the missing-rule list, readiness-digest binding, final-purpose rejection, caller readiness rejection, stale predecessor rejection, policy weakening, propagation of Sigma and legacy global-DAG failures, semantic overlay expansion to `K.TruthVec`, and quarantine of all legacy final theorem nodes.
+
+## Next step
+
+The final primitive semantic rule is `FiniteRel`.
+
+Its checker should evaluate explicit finite relations and relational compositions over canonical finite domains, enforce exact tuple arity and order, independently compute identity, converse, composition, restriction, equality, inclusion, and closure claims used by the package, and reject caller-supplied equality, completeness, closure, solver, search, optimization, or oracle assertions.
