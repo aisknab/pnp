@@ -34,9 +34,7 @@ import {
 const CHECKER_VERSION = 0;
 
 const COMPLETE_KERNEL_NODE_IDS0 = Object.freeze(
-  SEMANTIC_KERNEL_SUPPORTED_RULES_FINITEREL0.map(
-    (rule) => `K.${rule}`,
-  ),
+  SEMANTIC_KERNEL_SUPPORTED_RULES_FINITEREL0.map((rule) => `K.${rule}`),
 );
 
 const SEMANTIC_SIGMA_NODE_IDS0 = Object.freeze([
@@ -83,7 +81,6 @@ export function makeGlobalProofDAGSigmaSuccessor0({
       `makeGlobalProofDAGSigmaSuccessor0 Purpose must be one of ${GLOBAL_DAG_SIGMA_SUCCESSOR_PURPOSES0.join(', ')}`,
     );
   }
-
   return {
     kind: 'GlobalProofDAGSemanticSigmaSuccessor0',
     version: CHECKER_VERSION,
@@ -109,12 +106,8 @@ export async function CheckGlobalProofDAGSigmaFinalTheoremReadiness0(input) {
   });
 }
 
-async function checkGlobalInternal0(input, {
-  checker,
-  requiredPurpose,
-}) {
+async function checkGlobalInternal0(input, { checker, requiredPurpose }) {
   const ledger = [];
-
   const shape = validateShape0(input);
   ledger.push(makeLedgerEntry0('shape', shape.ok, shape.nf ?? shape.witness));
   if (!shape.ok) {
@@ -143,9 +136,7 @@ async function checkGlobalInternal0(input, {
     purpose,
   }));
 
-  const fullNodes = extractNodes0(
-    input.KBundle.SemanticKImpl?.SemanticKernel?.ProofDAG,
-  );
+  const fullNodes = extractNodes0(input.KBundle.SemanticKImpl?.SemanticKernel?.ProofDAG);
   ledger.push(makeLedgerEntry0(
     'proofDAGShape',
     fullNodes.ok,
@@ -161,9 +152,7 @@ async function checkGlobalInternal0(input, {
   }
 
   const predecessorNodes = fullNodes.nodes.filter(
-    (node) => SEMANTIC_KERNEL_SUPPORTED_RULES_FINITEREL0.includes(
-      node?.RuleName,
-    ),
+    (node) => SEMANTIC_KERNEL_SUPPORTED_RULES_FINITEREL0.includes(node?.RuleName),
   );
   const predecessorBundle = makeKBundleK0ConformanceSuccessor0({
     KImpl: input.KBundle.SemanticKImpl.KImpl,
@@ -179,7 +168,6 @@ async function checkGlobalInternal0(input, {
     LegacyGlobalProofDAG: input.LegacyGlobalProofDAG,
     Purpose: 'development',
   });
-
   const predecessorCall = await callChecker0(
     'CheckGlobalProofDAGK0ConformanceSuccessor0',
     () => CheckGlobalProofDAGK0ConformanceSuccessor0(predecessorGlobalInput),
@@ -355,9 +343,7 @@ async function checkGlobalInternal0(input, {
     });
   }
 
-  const finalTheoremReady = purpose === 'final-theorem'
-    && gate.finalTheoremReady;
-
+  const finalTheoremReady = purpose === 'final-theorem' && gate.finalTheoremReady;
   return makeAcceptRecord0({
     checker,
     nf: {
@@ -369,8 +355,7 @@ async function checkGlobalInternal0(input, {
 
       predecessorGlobalAccepted: true,
       predecessorGlobalChecker: predecessorRecord.checker,
-      predecessorGlobalDigest:
-        predecessorRecord.Digest ?? predecessorRecord.digest,
+      predecessorGlobalDigest: predecessorRecord.Digest ?? predecessorRecord.digest,
       predecessorGlobalDevelopmentOnly: true,
       predecessorGlobalPublicTheoremEmissionAllowed: false,
       predecessorGlobalFinalNodesQuarantined: true,
@@ -417,9 +402,7 @@ async function checkGlobalInternal0(input, {
 
       legacyFinalNodesStructurallyAccepted: true,
       legacyFinalNodesQuarantined: !finalTheoremReady,
-      activeFinalNodeIds: finalTheoremReady
-        ? [...gate.requiredFinalNodeIds]
-        : [],
+      activeFinalNodeIds: finalTheoremReady ? [...gate.requiredFinalNodeIds] : [],
       quarantinedFinalNodeIds: finalTheoremReady
         ? []
         : [...gate.quarantinedFinalNodeIds],
@@ -455,10 +438,7 @@ function validateAndBuildSemanticOverlay0({ dag, bundleNF }) {
     return validationReject0(
       ['KBundle', 'NF', 'semanticKImplSupportedRules'],
       'semantic Sigma global overlay requires the exact complete primitive rule set',
-      {
-        expected: [...SEMANTIC_KERNEL_SUPPORTED_RULES_FINITEREL0],
-        actual: supportedRules,
-      },
+      { expected: [...SEMANTIC_KERNEL_SUPPORTED_RULES_FINITEREL0], actual: supportedRules },
     );
   }
   if (missingRules.length !== 0) {
@@ -515,11 +495,7 @@ function validateAndBuildSemanticOverlay0({ dag, bundleNF }) {
       return validationReject0(
         ['LegacyGlobalProofDAG', 'Nodes', 'sigma', theorem, 'premises'],
         'semantic Sigma node must retain the exact finite-relation and integer-arithmetic prerequisites',
-        {
-          theorem,
-          expected: ['K.FiniteRel', 'K.IntArith'],
-          actual: node.premises,
-        },
+        { theorem, expected: ['K.FiniteRel', 'K.IntArith'], actual: node.premises },
       );
     }
     if (node.conclusion?.tag !== 'SigmaTheoremAccepted0'
@@ -611,14 +587,8 @@ function makeComputedGlobalGate0({
   const bundleFinalDigest = finalBundleRecord.Digest
     ?? finalBundleRecord.digest
     ?? null;
-
   const nodes = [
-    makeGateNode0(
-      'Gate.PredecessorGlobal.DevelopmentAcceptance',
-      [],
-      true,
-      predecessorGlobalDigest,
-    ),
+    makeGateNode0('Gate.PredecessorGlobal.DevelopmentAcceptance', [], true, predecessorGlobalDigest),
     makeGateNode0(
       'Gate.KBundle.SigmaDevelopmentAcceptance',
       ['Gate.PredecessorGlobal.DevelopmentAcceptance'],
@@ -639,23 +609,16 @@ function makeComputedGlobalGate0({
     ),
     makeGateNode0(
       'Gate.GlobalDAG.SemanticNodeDerivations',
-      [
-        'Gate.KBundle.SigmaDevelopmentAcceptance',
-        'Gate.GlobalDAG.StructuralAcceptance',
-      ],
+      ['Gate.KBundle.SigmaDevelopmentAcceptance', 'Gate.GlobalDAG.StructuralAcceptance'],
       overlay.globalSemanticNodeDerivationsReady === true,
       digestCanonical0(overlay),
     ),
   ];
-
   const finalReady = kBundleFinalReady
     && overlay.globalSemanticNodeDerivationsReady === true;
   nodes.push(makeGateNode0(
     'Gate.FinalTheorem.Readiness',
-    [
-      'Gate.KBundle.SigmaFinalReadiness',
-      'Gate.GlobalDAG.SemanticNodeDerivations',
-    ],
+    ['Gate.KBundle.SigmaFinalReadiness', 'Gate.GlobalDAG.SemanticNodeDerivations'],
     finalReady,
     digestCanonical0({
       kBundleFinalReady,
@@ -663,7 +626,6 @@ function makeComputedGlobalGate0({
         overlay.globalSemanticNodeDerivationsReady === true,
     }),
   ));
-
   const blockers = [
     Object.freeze({
       coordinate: 'KBundle.SigmaFinalReadiness',
@@ -682,7 +644,6 @@ function makeComputedGlobalGate0({
       digest: digestCanonical0(overlay),
     }),
   ];
-
   return Object.freeze({
     kind: 'GlobalProofDAGComputedSemanticSigmaGate0',
     version: CHECKER_VERSION,
@@ -708,11 +669,9 @@ function makeComputedGlobalGate0({
 
 function validateShape0(input) {
   if (!isPlainObject0(input)) {
-    return validationReject0(
-      [],
-      'semantic Sigma global-DAG input must be an object',
-      { actual: typeof input },
-    );
+    return validationReject0([], 'semantic Sigma global-DAG input must be an object', {
+      actual: typeof input,
+    });
   }
   if (input.kind !== 'GlobalProofDAGSemanticSigmaSuccessor0') {
     return validationReject0(
@@ -732,10 +691,7 @@ function validateShape0(input) {
     return validationReject0(
       ['Purpose'],
       'semantic Sigma global-DAG Purpose is unsupported',
-      {
-        actual: input.Purpose,
-        supportedPurposes: [...GLOBAL_DAG_SIGMA_SUCCESSOR_PURPOSES0],
-      },
+      { actual: input.Purpose, supportedPurposes: [...GLOBAL_DAG_SIGMA_SUCCESSOR_PURPOSES0] },
     );
   }
   for (const field of ['KBundle', 'LegacyGlobalProofDAG', 'Binding', 'Policy']) {
@@ -747,20 +703,23 @@ function validateShape0(input) {
       );
     }
   }
-  for (const field of ['KBundle', 'LegacyGlobalProofDAG', 'Binding', 'Policy']) {
-    if (!isPlainObject0(input[field])) {
-      return validationReject0(
-        [field],
-        `semantic Sigma global-DAG ${field} must be an object`,
-        { actual: typeof input[field] },
-      );
-    }
+  if (!isPlainObject0(input.KBundle)) {
+    return validationReject0(['KBundle'], 'semantic Sigma global-DAG KBundle must be an object', {
+      actual: typeof input.KBundle,
+    });
   }
   if (input.KBundle.Purpose !== 'development') {
     return validationReject0(
       ['KBundle', 'Purpose'],
       'semantic Sigma global-DAG input KBundle must remain development-purpose; final readiness is recomputed internally',
       { actual: input.KBundle.Purpose },
+    );
+  }
+  if (!isPlainObject0(input.LegacyGlobalProofDAG)) {
+    return validationReject0(
+      ['LegacyGlobalProofDAG'],
+      'semantic Sigma global-DAG must include a legacy global DAG object',
+      { actual: typeof input.LegacyGlobalProofDAG },
     );
   }
   if (!sameCanonical0(input.Binding, GLOBAL_DAG_SIGMA_SUCCESSOR_BINDING0)) {
@@ -808,7 +767,6 @@ function validatePredecessorGlobalBoundary0(nf) {
     publicTheoremEmissionAllowed: false,
     semanticKBundleDevelopmentAccepted: true,
     semanticK0ConformanceReady: true,
-    semanticSigmaReady: false,
     legacyGlobalDAGAccepted: true,
     legacyFinalNodesQuarantined: true,
   };
@@ -821,25 +779,18 @@ function validatePredecessorGlobalBoundary0(nf) {
       );
     }
   }
-  if (!Array.isArray(nf.activeFinalNodeIds)
-      || nf.activeFinalNodeIds.length !== 0) {
+  if (!Array.isArray(nf.activeFinalNodeIds) || nf.activeFinalNodeIds.length !== 0) {
     return validationReject0(
       ['PredecessorGlobal', 'NF', 'activeFinalNodeIds'],
       'semantic K0 conformance predecessor global gate must expose no active final node',
       { actual: nf.activeFinalNodeIds },
     );
   }
-  if (!sameCanonical0(
-    nf.semanticOverlay?.semanticKernelNodeIds,
-    COMPLETE_KERNEL_NODE_IDS0,
-  )) {
+  if (!sameCanonical0(nf.semanticOverlay?.semanticKernelNodeIds, COMPLETE_KERNEL_NODE_IDS0)) {
     return validationReject0(
       ['PredecessorGlobal', 'NF', 'semanticOverlay', 'semanticKernelNodeIds'],
       'semantic K0 conformance predecessor global semantic-kernel node set mismatch',
-      {
-        expected: COMPLETE_KERNEL_NODE_IDS0,
-        actual: nf.semanticOverlay?.semanticKernelNodeIds,
-      },
+      { expected: COMPLETE_KERNEL_NODE_IDS0, actual: nf.semanticOverlay?.semanticKernelNodeIds },
     );
   }
   if (!sameCanonical0(nf.semanticOverlay?.blockedKernelNodeIds, [])) {
@@ -862,6 +813,7 @@ function validatePredecessorGlobalBoundary0(nf) {
     activeFinalNodeIds: [],
     semanticKernelNodeIds: [...COMPLETE_KERNEL_NODE_IDS0],
     blockedKernelNodeIds: [],
+    semanticSigmaReady: false,
   });
 }
 
@@ -887,17 +839,11 @@ function validateDevelopmentBundleBoundary0(nf) {
       );
     }
   }
-  if (!sameCanonical0(
-    nf.semanticKImplSupportedRules,
-    SEMANTIC_KERNEL_SUPPORTED_RULES_FINITEREL0,
-  )) {
+  if (!sameCanonical0(nf.semanticKImplSupportedRules, SEMANTIC_KERNEL_SUPPORTED_RULES_FINITEREL0)) {
     return validationReject0(
       ['KBundle', 'NF', 'semanticKImplSupportedRules'],
       'semantic Sigma KBundle supported-rule set mismatch',
-      {
-        expected: [...SEMANTIC_KERNEL_SUPPORTED_RULES_FINITEREL0],
-        actual: nf.semanticKImplSupportedRules,
-      },
+      { expected: [...SEMANTIC_KERNEL_SUPPORTED_RULES_FINITEREL0], actual: nf.semanticKImplSupportedRules },
     );
   }
   if (!sameCanonical0(nf.semanticKImplMissingRules, [])) {
@@ -907,17 +853,11 @@ function validateDevelopmentBundleBoundary0(nf) {
       { expected: [], actual: nf.semanticKImplMissingRules },
     );
   }
-  if (!sameCanonical0(
-    nf.computedReadiness?.blockerCoordinates,
-    ['Reflection.SemanticSoundness'],
-  )) {
+  if (!sameCanonical0(nf.computedReadiness?.blockerCoordinates, ['Reflection.SemanticSoundness'])) {
     return validationReject0(
       ['KBundle', 'NF', 'computedReadiness', 'blockerCoordinates'],
       'semantic Sigma KBundle blocker set mismatch',
-      {
-        expected: ['Reflection.SemanticSoundness'],
-        actual: nf.computedReadiness?.blockerCoordinates,
-      },
+      { expected: ['Reflection.SemanticSoundness'], actual: nf.computedReadiness?.blockerCoordinates },
     );
   }
   return validationAccept0({
@@ -930,14 +870,11 @@ function validateDevelopmentBundleBoundary0(nf) {
 
 function extractNodes0(input) {
   if (Array.isArray(input)) {
-    return validationAcceptWith0(
-      {
-        kind: 'GlobalProofDAGSigmaProofInput0NF',
-        form: 'array',
-        nodeCount: input.length,
-      },
-      { nodes: input },
-    );
+    return validationAcceptWith0({
+      kind: 'GlobalProofDAGSigmaProofInput0NF',
+      form: 'array',
+      nodeCount: input.length,
+    }, { nodes: input });
   }
   if (!isPlainObject0(input)) {
     return validationReject0(
@@ -954,14 +891,11 @@ function extractNodes0(input) {
       { actual: typeof nodes },
     );
   }
-  return validationAcceptWith0(
-    {
-      kind: 'GlobalProofDAGSigmaProofInput0NF',
-      form: 'object',
-      nodeCount: nodes.length,
-    },
-    { nodes },
-  );
+  return validationAcceptWith0({
+    kind: 'GlobalProofDAGSigmaProofInput0NF',
+    form: 'object',
+    nodeCount: nodes.length,
+  }, { nodes });
 }
 
 function isFinalReadyAccept0(record) {
@@ -1103,9 +1037,7 @@ function sameCanonical0(left, right) {
 }
 
 function isPlainObject0(value) {
-  if (value === null || typeof value !== 'object' || Array.isArray(value)) {
-    return false;
-  }
+  if (value === null || typeof value !== 'object' || Array.isArray(value)) return false;
   const prototype = Object.getPrototypeOf(value);
   return prototype === Object.prototype || prototype === null;
 }
