@@ -107,20 +107,14 @@ export function makeSemanticFiniteRelRestriction0({
   allowedElements = [],
 } = {}) {
   requireIndex0(index, 'makeSemanticFiniteRelRestriction0 index');
-  requireIdentifier0(
-    domainId,
-    'makeSemanticFiniteRelRestriction0 domainId',
-  );
+  requireIdentifier0(domainId, 'makeSemanticFiniteRelRestriction0 domainId');
   if (!Array.isArray(allowedElements)) {
     throw new TypeError(
       'makeSemanticFiniteRelRestriction0 allowedElements must be an array',
     );
   }
   for (const element of allowedElements) {
-    requireIdentifier0(
-      element,
-      'makeSemanticFiniteRelRestriction0 allowed element',
-    );
+    requireIdentifier0(element, 'makeSemanticFiniteRelRestriction0 element');
   }
   return Object.freeze({
     kind: 'SemanticFiniteRelRestriction0',
@@ -722,6 +716,13 @@ function validateDomain0(domain, path) {
         { element },
       );
     }
+    if (index > 0 && compareText0(domain.elements[index - 1], element) >= 0) {
+      return validationReject0(
+        [...path, 'elements', index],
+        'FiniteRel domain elements must be in canonical order',
+        { previous: domain.elements[index - 1], actual: element },
+      );
+    }
     elementIndex.set(element, index);
   }
   return validationAcceptWith0({
@@ -1093,8 +1094,7 @@ function validateRelationNode0(node, path, nodeById, domainById) {
     if (tupleError) return tupleError;
     const restrictionError = noRestrictions();
     if (restrictionError) return restrictionError;
-    if (node.domainIds.length !== 2
-        || node.domainIds[0] !== node.domainIds[1]) {
+    if (node.domainIds.length !== 2 || node.domainIds[0] !== node.domainIds[1]) {
       return validationReject0(
         [...path, 'domainIds'],
         'FiniteRel identity requires a binary endorelation signature',
@@ -1116,10 +1116,7 @@ function validateRelationNode0(node, path, nodeById, domainById) {
       return validationReject0(
         [...path, 'domainIds'],
         'FiniteRel converse requires the exact reversed binary signature',
-        {
-          inputSignature: inputNodes[0].domainIds,
-          actual: node.domainIds,
-        },
+        { inputSignature: inputNodes[0].domainIds, actual: node.domainIds },
       );
     }
   } else if (node.op === 'compose') {
@@ -1135,20 +1132,14 @@ function validateRelationNode0(node, path, nodeById, domainById) {
       return validationReject0(
         [...path, 'inputIds'],
         'FiniteRel composition requires two binary relations',
-        {
-          leftSignature: left.domainIds,
-          rightSignature: right.domainIds,
-        },
+        { leftSignature: left.domainIds, rightSignature: right.domainIds },
       );
     }
     if (left.domainIds[1] !== right.domainIds[0]) {
       return validationReject0(
         [...path, 'inputIds'],
         'FiniteRel composition middle domains must match exactly',
-        {
-          leftCodomain: left.domainIds[1],
-          rightDomain: right.domainIds[0],
-        },
+        { leftCodomain: left.domainIds[1], rightDomain: right.domainIds[0] },
       );
     }
     const expected = [left.domainIds[0], right.domainIds[1]];
@@ -1338,8 +1329,7 @@ function validateClaim0(claim, path, nodeById) {
         { actual: claim.rightId },
       );
     }
-    if (left.domainIds.length !== 2
-        || left.domainIds[0] !== left.domainIds[1]) {
+    if (left.domainIds.length !== 2 || left.domainIds[0] !== left.domainIds[1]) {
       return validationReject0(
         [...path, 'leftId'],
         'FiniteRel reflexive and transitive claims require a binary endorelation',
@@ -1753,4 +1743,525 @@ function checkFiniteRelRule0(node, premises, path) {
   }
   const specCheck = validateSpec0(
     node.Payload.spec,
-    [...path, 'Payload', '
+    [...path, 'Payload', 'spec'],
+  );
+  if (!specCheck.ok) return specCheck;
+  const derived = deriveFiniteRelations0(specCheck, path);
+  if (!derived.ok) return derived;
+  if (!sameCanonical0(node.Conclusion, derived.judgment)) {
+    return validationReject0(
+      [...path, 'Conclusion'],
+      'FiniteRel conclusion must exactly equal the computed relation and claim ledger',
+      { expected: derived.judgment, actual: node.Conclusion },
+    );
+  }
+  return validationAccept0({
+    kind: 'SemanticFiniteRelRule0NF',
+    ruleName: 'FiniteRel',
+    operation: 'verify',
+    evaluationId: specCheck.spec.evaluationId,
+    programId: specCheck.program.program.programId,
+    relationNodeCount: specCheck.program.nf.relationNodeCount,
+    claimCount: specCheck.program.nf.claimCount,
+    totalUniverseCells: specCheck.program.nf.totalUniverseCells,
+    everyRelationComputed: true,
+    allClaimsHold: true,
+  });
+}
+
+function deriveFiniteRelations0(specCheck, path) {
+  const program = specCheck.program.program;
+  const domainById = specCheck.program.domainById;
+  const computedById = new Map();
+  const relationResults = [];
+
+  for (let index = 0; index < program.nodes.length; index += 1) {
+    const node = program.nodes[index];
+    const inputRelations = node.inputIds.map((id) => computedById.get(id));
+    const evaluated = evaluateRelationNode0(
+      node,
+      inputRelations,
+      domainById,
+      [...path, 'program', 'nodes', index],
+    );
+    if (!evaluated.ok) return evaluated;
+    computedById.set(node.id, evaluated.relation);
+    relationResults.push(evaluated.relation.record);
+  }
+
+  const claimResults = [];
+  for (let index = 0; index < program.claims.length; index += 1) {
+    const claim = program.claims[index];
+    const checked = evaluateClaim0(
+      claim,
+      computedById,
+      [...path, 'program', 'claims', index],
+    );
+    if (!checked.ok) return checked;
+    claimResults.push(checked.result);
+  }
+
+  const judgment = Object.freeze({
+    kind: 'SemanticFiniteRelJudgment0',
+    version: CHECKER_VERSION,
+    evaluationId: specCheck.spec.evaluationId,
+    program,
+    relations: Object.freeze(relationResults),
+    claims: Object.freeze(claimResults),
+    domainCount: program.domains.length,
+    relationNodeCount: program.nodes.length,
+    claimCount: program.claims.length,
+    programDigest: digestCanonical0(program),
+    relationDigest: digestCanonical0(relationResults),
+    claimDigest: digestCanonical0(claimResults),
+    canonicalFiniteDomains: true,
+    exactTupleArity: true,
+    exactTupleOrder: true,
+    everyRelationComputed: true,
+    identityConverseCompositionRestrictionComputed: true,
+    equalityInclusionAndClosureComputed: true,
+    allClaimsHold: true,
+    boundedEvaluation: true,
+    noSolverSearchOptimizationOrOracleUsed: true,
+    terminalJudgmentComputed: true,
+  });
+  return validationAcceptWith0({
+    kind: 'SemanticFiniteRelEvaluation0NF',
+    evaluationId: specCheck.spec.evaluationId,
+    programId: program.programId,
+    relationNodeCount: relationResults.length,
+    claimCount: claimResults.length,
+  }, { judgment });
+}
+
+function evaluateRelationNode0(node, inputRelations, domainById, path) {
+  let tuples;
+  if (node.op === 'literal') {
+    tuples = node.tuples.map((tuple) => [...tuple.values]);
+  } else if (node.op === 'identity') {
+    const domain = domainById.get(node.domainIds[0]).domain;
+    tuples = domain.elements.map((element) => [element, element]);
+  } else if (node.op === 'converse') {
+    tuples = inputRelations[0].tuples.map((tuple) => [tuple[1], tuple[0]]);
+  } else if (node.op === 'compose') {
+    tuples = composeRelations0(inputRelations[0], inputRelations[1], path);
+    if (!Array.isArray(tuples)) return tuples;
+  } else if (node.op === 'restrict') {
+    tuples = restrictRelation0(node, inputRelations[0]);
+  } else if (node.op === 'union') {
+    tuples = setUnion0(inputRelations[0].tuples, inputRelations[1].tuples);
+  } else if (node.op === 'intersection') {
+    tuples = setIntersection0(inputRelations[0].tuples, inputRelations[1].tuples);
+  } else if (node.op === 'difference') {
+    tuples = setDifference0(inputRelations[0].tuples, inputRelations[1].tuples);
+  } else if (node.op === 'transitive-closure') {
+    tuples = transitiveClosure0(node, inputRelations[0], domainById, false);
+  } else if (node.op === 'reflexive-transitive-closure') {
+    tuples = transitiveClosure0(node, inputRelations[0], domainById, true);
+  } else {
+    return validationReject0(
+      [...path, 'op'],
+      'FiniteRel relation-node operation is unsupported',
+      { actual: node.op },
+    );
+  }
+  if (tuples.length > MAX_RELATION_TUPLES) {
+    return validationReject0(
+      path,
+      'FiniteRel computed relation exceeds maxRelationTuples',
+      { maxRelationTuples: MAX_RELATION_TUPLES, actual: tuples.length },
+    );
+  }
+  const relation = makeComputedRelation0(node, tuples, domainById);
+  return validationAcceptWith0({
+    kind: 'SemanticFiniteRelComputedRelation0NF',
+    nodeId: node.id,
+    op: node.op,
+    tupleCount: relation.record.tuples.length,
+  }, { relation });
+}
+
+function composeRelations0(left, right, path) {
+  const work = left.tuples.length * right.tuples.length;
+  if (work > MAX_COMPOSITION_WORK) {
+    return validationReject0(
+      [...path, 'inputIds'],
+      'FiniteRel composition work exceeds maxCompositionWork',
+      { maxCompositionWork: MAX_COMPOSITION_WORK, actual: work },
+    );
+  }
+  const tuples = [];
+  for (const l of left.tuples) {
+    for (const r of right.tuples) {
+      if (l[1] === r[0]) tuples.push([l[0], r[1]]);
+    }
+  }
+  return tuples;
+}
+
+function restrictRelation0(node, relation) {
+  const allowedByCoordinate = node.restrictions.map(
+    (restriction) => new Set(restriction.allowedElements),
+  );
+  return relation.tuples.filter((tuple) => tuple.every(
+    (value, index) => allowedByCoordinate[index].has(value),
+  ));
+}
+
+function transitiveClosure0(node, relation, domainById, reflexive) {
+  const domain = domainById.get(node.domainIds[0]).domain;
+  const indexByElement = new Map(
+    domain.elements.map((element, index) => [element, index]),
+  );
+  const reach = Array.from(
+    { length: domain.elements.length },
+    () => Array(domain.elements.length).fill(false),
+  );
+  if (reflexive) {
+    for (let index = 0; index < domain.elements.length; index += 1) {
+      reach[index][index] = true;
+    }
+  }
+  for (const [left, right] of relation.tuples) {
+    reach[indexByElement.get(left)][indexByElement.get(right)] = true;
+  }
+  for (let k = 0; k < domain.elements.length; k += 1) {
+    for (let i = 0; i < domain.elements.length; i += 1) {
+      if (!reach[i][k]) continue;
+      for (let j = 0; j < domain.elements.length; j += 1) {
+        if (reach[k][j]) reach[i][j] = true;
+      }
+    }
+  }
+  const tuples = [];
+  for (let i = 0; i < domain.elements.length; i += 1) {
+    for (let j = 0; j < domain.elements.length; j += 1) {
+      if (reach[i][j]) tuples.push([domain.elements[i], domain.elements[j]]);
+    }
+  }
+  return tuples;
+}
+
+function evaluateClaim0(claim, computedById, path) {
+  const left = computedById.get(claim.leftId);
+  const right = claim.rightId === null ? null : computedById.get(claim.rightId);
+  let holds;
+  if (claim.claimKind === 'equal') {
+    holds = sameSet0(left.tupleKeySet, right.tupleKeySet);
+  } else if (claim.claimKind === 'included') {
+    holds = subset0(left.tupleKeySet, right.tupleKeySet);
+  } else if (claim.claimKind === 'reflexive') {
+    holds = isReflexive0(left);
+  } else if (claim.claimKind === 'transitive') {
+    holds = isTransitive0(left);
+  } else if (claim.claimKind === 'reflexive-transitive-closed') {
+    holds = isReflexive0(left) && isTransitive0(left);
+  } else {
+    return validationReject0(
+      [...path, 'claimKind'],
+      'FiniteRel claim kind is unsupported',
+      { actual: claim.claimKind },
+    );
+  }
+  if (!holds) {
+    return validationReject0(
+      path,
+      'FiniteRel checked claim does not hold',
+      {
+        claimId: claim.id,
+        claimKind: claim.claimKind,
+        leftId: claim.leftId,
+        rightId: claim.rightId,
+      },
+    );
+  }
+  return validationAcceptWith0({
+    kind: 'SemanticFiniteRelClaimResult0NF',
+    claimId: claim.id,
+    claimKind: claim.claimKind,
+    holds: true,
+  }, {
+    result: Object.freeze({
+      kind: 'SemanticFiniteRelClaimResult0',
+      version: CHECKER_VERSION,
+      index: claim.index,
+      id: claim.id,
+      claimKind: claim.claimKind,
+      leftId: claim.leftId,
+      rightId: claim.rightId,
+      holds: true,
+      witness: null,
+    }),
+  });
+}
+
+function makeComputedRelation0(node, tuples, domainById) {
+  const sorted = canonicalTupleList0(tuples, node.domainIds, domainById);
+  const tupleObjects = sorted.map((values, index) => Object.freeze({
+    kind: 'SemanticFiniteRelTuple0',
+    version: CHECKER_VERSION,
+    index,
+    values: Object.freeze([...values]),
+  }));
+  const tupleKeySet = new Set(sorted.map((tuple) => tupleKey0(tuple)));
+  const record = Object.freeze({
+    kind: 'SemanticFiniteRelation0',
+    version: CHECKER_VERSION,
+    index: node.index,
+    nodeId: node.id,
+    domainIds: Object.freeze([...node.domainIds]),
+    tuples: Object.freeze(tupleObjects),
+  });
+  return Object.freeze({
+    nodeId: node.id,
+    op: node.op,
+    domainIds: Object.freeze([...node.domainIds]),
+    tuples: Object.freeze(sorted),
+    tupleKeySet,
+    record,
+  });
+}
+
+function canonicalTupleList0(tuples, domainIds, domainById) {
+  const byKey = new Map();
+  for (const tuple of tuples) byKey.set(tupleKey0(tuple), [...tuple]);
+  const unique = [...byKey.values()];
+  unique.sort((left, right) => compareTupleValues0(
+    left,
+    right,
+    domainIds,
+    domainById,
+  ));
+  return unique;
+}
+
+function setUnion0(left, right) {
+  const byKey = new Map();
+  for (const tuple of left) byKey.set(tupleKey0(tuple), [...tuple]);
+  for (const tuple of right) byKey.set(tupleKey0(tuple), [...tuple]);
+  return [...byKey.values()];
+}
+
+function setIntersection0(left, right) {
+  const rightSet = new Set(right.map((tuple) => tupleKey0(tuple)));
+  return left.filter((tuple) => rightSet.has(tupleKey0(tuple)));
+}
+
+function setDifference0(left, right) {
+  const rightSet = new Set(right.map((tuple) => tupleKey0(tuple)));
+  return left.filter((tuple) => !rightSet.has(tupleKey0(tuple)));
+}
+
+function sameSet0(left, right) {
+  if (left.size !== right.size) return false;
+  return subset0(left, right);
+}
+
+function subset0(left, right) {
+  for (const key of left) if (!right.has(key)) return false;
+  return true;
+}
+
+function isReflexive0(relation) {
+  const domainId = relation.domainIds[0];
+  if (relation.domainIds.length !== 2 || relation.domainIds[1] !== domainId) return false;
+  const values = new Set();
+  for (const tuple of relation.tuples) {
+    values.add(tuple[0]);
+    values.add(tuple[1]);
+  }
+  for (const value of values) {
+    if (!relation.tupleKeySet.has(tupleKey0([value, value]))) return false;
+  }
+  return true;
+}
+
+function isTransitive0(relation) {
+  if (relation.domainIds.length !== 2
+      || relation.domainIds[0] !== relation.domainIds[1]) return false;
+  for (const left of relation.tuples) {
+    for (const right of relation.tuples) {
+      if (left[1] === right[0]
+          && !relation.tupleKeySet.has(tupleKey0([left[0], right[1]]))) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+function relationUniverseSize0(domainIds, domainById) {
+  let size = 1;
+  for (const domainId of domainIds) {
+    size *= domainById.get(domainId).domain.elements.length;
+  }
+  return size;
+}
+
+function compareTupleValues0(left, right, domainIds, domainById) {
+  for (let index = 0; index < domainIds.length; index += 1) {
+    const domain = domainById.get(domainIds[index]);
+    const leftIndex = domain.elementIndex.get(left[index]);
+    const rightIndex = domain.elementIndex.get(right[index]);
+    if (leftIndex < rightIndex) return -1;
+    if (leftIndex > rightIndex) return 1;
+  }
+  return 0;
+}
+
+function tupleKey0(tuple) {
+  return stableStringify0(tuple);
+}
+
+function callBaseProofChecker0(nodes) {
+  try {
+    const record = CheckSemanticKernelProofTruthVec0(
+      makeSemanticProofDAG0(nodes),
+    );
+    if (!isPlainObject0(record) || !['accept', 'reject'].includes(record.tag)) {
+      return {
+        ok: false,
+        witness: {
+          reason: 'CheckSemanticKernelProofTruthVec0 did not return a total accept/reject record',
+          actual: record,
+        },
+      };
+    }
+    return { ok: true, record };
+  } catch (error) {
+    return {
+      ok: false,
+      witness: {
+        reason: 'CheckSemanticKernelProofTruthVec0 threw instead of returning a reject record',
+        errorName: error?.name ?? null,
+        errorMessage: error?.message ?? String(error),
+      },
+    };
+  }
+}
+
+function compactReject0(record) {
+  return {
+    checker: record?.checker ?? null,
+    coord: record?.Coord ?? record?.coord ?? null,
+    path: record?.Path ?? record?.path ?? null,
+    witness: record?.Witness ?? record?.witness ?? null,
+    digest: record?.Digest ?? record?.digest ?? null,
+  };
+}
+
+function makeLedgerEntry0(phase, ok, material) {
+  return {
+    phase,
+    status: ok ? 'pass' : 'fail',
+    digest: digestCanonical0(material ?? null),
+  };
+}
+
+function makeAcceptRecord0({ checker, nf, ledger }) {
+  const digest = digestCanonical0(nf);
+  return {
+    tag: 'accept',
+    kind: 'accept',
+    checker,
+    version: CHECKER_VERSION,
+    NF: nf,
+    Digest: digest,
+    Ledger: ledger,
+    nf,
+    digest,
+    ledger,
+  };
+}
+
+function makeRejectFromValidation0(checker, coord, result, ledger) {
+  return makeRejectRecord0({
+    checker,
+    coord,
+    path: result.path,
+    witness: result.witness,
+    ledger,
+  });
+}
+
+function makeRejectRecord0({ checker, coord, path, witness, ledger }) {
+  const nf = {
+    kind: `${checker}RejectNF`,
+    checker,
+    version: CHECKER_VERSION,
+    coord,
+    path,
+    witness,
+    ledger,
+  };
+  const digest = digestCanonical0(nf);
+  return {
+    tag: 'reject',
+    kind: 'reject',
+    checker,
+    version: CHECKER_VERSION,
+    Coord: coord,
+    Path: path,
+    Witness: witness,
+    Digest: digest,
+    Ledger: ledger,
+    coord,
+    path,
+    witness,
+    digest,
+    ledger,
+  };
+}
+
+function validationAccept0(nf) {
+  return { ok: true, nf };
+}
+
+function validationAcceptWith0(nf, extra) {
+  return { ok: true, nf, ...extra };
+}
+
+function validationReject0(path, reason, details = {}) {
+  return {
+    ok: false,
+    path,
+    witness: {
+      reason,
+      ...(details ?? {}),
+    },
+  };
+}
+
+function compareText0(left, right) {
+  if (left < right) return -1;
+  if (left > right) return 1;
+  return 0;
+}
+
+function sameCanonical0(left, right) {
+  return stableStringify0(left) === stableStringify0(right);
+}
+
+function isIdentifier0(value) {
+  return typeof value === 'string' && ID_PATTERN.test(value);
+}
+
+function requireIdentifier0(value, label) {
+  if (!isIdentifier0(value)) {
+    throw new TypeError(`${label} must be a canonical identifier`);
+  }
+}
+
+function requireIndex0(value, label) {
+  if (!Number.isSafeInteger(value) || value < 0) {
+    throw new TypeError(`${label} must be a nonnegative safe integer`);
+  }
+}
+
+function isPlainObject0(value) {
+  if (value === null || typeof value !== 'object' || Array.isArray(value)) {
+    return false;
+  }
+  const prototype = Object.getPrototypeOf(value);
+  return prototype === Object.prototype || prototype === null;
+}
