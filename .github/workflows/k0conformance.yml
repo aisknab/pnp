@@ -1,0 +1,42 @@
+name: k0conformance-verification
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: k0conformance-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  k0conformance-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          show-progress: false
+          persist-credentials: false
+          set-safe-directory: false
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+
+      - name: Run semantic K0 conformance checker tests
+        run: node --test test/pcc-k0-semantic-conformance0.test.mjs
+
+      - name: Run semantic K0 conformance KBundle tests
+        run: node --test test/pcc-kbundle-k0conformance-successor0.test.mjs
+
+      - name: Run semantic K0 conformance global gate tests
+        run: node --test test/pcc-global-proof-dag-k0conformance-successor0.test.mjs
