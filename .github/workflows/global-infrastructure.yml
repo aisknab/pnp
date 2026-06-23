@@ -1,0 +1,39 @@
+name: global-infrastructure-verification
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: global-infrastructure-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  global-infrastructure-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          show-progress: false
+          persist-credentials: false
+          set-safe-directory: false
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+
+      - name: Run semantic global infrastructure checker tests
+        run: node --test test/pcc-global-infrastructure-semantic0.test.mjs
+
+      - name: Run semantic global infrastructure successor tests
+        run: node --test test/pcc-global-proof-dag-infrastructure-successor0.test.mjs
