@@ -1,0 +1,55 @@
+name: global-final-prefix-verification
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: global-final-prefix-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  global-final-prefix-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          show-progress: false
+          persist-credentials: false
+          set-safe-directory: false
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+
+      - name: Check phase-37 module syntax
+        run: |
+          node --check pcc-global-final-prefix-contract0.mjs
+          node --check pcc-global-final-prefix-derive0.mjs
+          node --check pcc-global-final-prefix-semantic0.mjs
+          node --check pcc-global-final-prefix-overlay0.mjs
+          node --check pcc-global-proof-dag-final-prefix-successor0.mjs
+
+      - name: Run bounded final-prefix semantic tests
+        run: node --test test/pcc-global-final-prefix-semantic0.test.mjs
+
+      - name: Run bounded final-prefix successor tests
+        run: node --test test/pcc-global-proof-dag-final-prefix-successor0.test.mjs
+
+      - name: Preserve frozen public release surface
+        run: |
+          node --test \
+            test/pcc-public-api0.test.mjs \
+            test/pcc-public-surface-freeze0.test.mjs \
+            test/pcc-release-audit-public-surface-freeze0.test.mjs \
+            test/pcc-release-audit-public-surface-summary-negative0.test.mjs
