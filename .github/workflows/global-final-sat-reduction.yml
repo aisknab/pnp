@@ -38,7 +38,23 @@ jobs:
           node --check pcc-global-proof-dag-final-sat-reduction-successor0.mjs
 
       - name: Run bounded final SAT-reduction semantic tests
-        run: node --test test/pcc-global-final-sat-reduction-semantic0.test.mjs
+        shell: bash
+        run: |
+          set +e
+          node --test test/pcc-global-final-sat-reduction-semantic0.test.mjs > /tmp/final-sat-semantic.log 2>&1
+          status=$?
+          if [ "$status" -ne 0 ]; then
+            cat /tmp/final-sat-semantic.log
+          fi
+          exit "$status"
 
       - name: Run bounded final SAT-reduction successor tests
-        run: node --test test/pcc-global-proof-dag-final-sat-reduction-successor0.test.mjs
+        shell: bash
+        run: |
+          set +e
+          node --test test/pcc-global-proof-dag-final-sat-reduction-successor0.test.mjs > /tmp/final-sat-successor.log 2>&1
+          status=$?
+          if [ "$status" -ne 0 ]; then
+            cat /tmp/final-sat-successor.log
+          fi
+          exit "$status"
