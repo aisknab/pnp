@@ -1,0 +1,4 @@
+name: sat-reduction-audit-verification
+
+on:
+  pull_request:
