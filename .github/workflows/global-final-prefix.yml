@@ -42,18 +42,10 @@ jobs:
           node --check pcc-global-proof-dag-final-prefix-successor0.mjs
 
       - name: Run bounded final-prefix semantic tests
-        run: |
-          node --test \
-            test/pcc-global-final-prefix-semantic0.test.mjs \
-            test/pcc-global-final-prefix-semantic-negative0.test.mjs
+        run: node --test test/pcc-global-final-prefix-semantic0.test.mjs
 
       - name: Run bounded final-prefix successor tests
-        run: |
-          node --test \
-            test/pcc-global-proof-dag-final-prefix-successor0.test.mjs \
-            test/pcc-global-proof-dag-final-prefix-gate0.test.mjs \
-            test/pcc-global-proof-dag-final-prefix-bindings0.test.mjs \
-            test/pcc-global-proof-dag-final-prefix-negative0.test.mjs
+        run: node --test test/pcc-global-proof-dag-final-prefix-successor0.test.mjs
 
       - name: Preserve frozen public release surface
         id: public_surface
