@@ -11,6 +11,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: write
 
 concurrency:
   group: global-final-sat-reduction-${{ github.workflow }}-${{ github.ref }}
@@ -38,7 +39,58 @@ jobs:
           node --check pcc-global-proof-dag-final-sat-reduction-successor0.mjs
 
       - name: Run bounded final SAT-reduction semantic tests
-        run: node --test test/pcc-global-final-sat-reduction-semantic0.test.mjs
+        id: semantic
+        shell: bash
+        run: |
+          set +e
+          node --test test/pcc-global-final-sat-reduction-semantic0.test.mjs > /tmp/final-sat-semantic.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          exit 0
 
       - name: Run bounded final SAT-reduction successor tests
-        run: node --test test/pcc-global-proof-dag-final-sat-reduction-successor0.test.mjs
+        id: successor
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          node --test test/pcc-global-proof-dag-final-sat-reduction-successor0.test.mjs > /tmp/final-sat-successor.log 2>&1
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Report final SAT-reduction test failures
+        if: >-
+          always() && github.event_name == 'pull_request' &&
+          (steps.semantic.outputs.status != '0' || steps.successor.outputs.status != '0')
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          SEMANTIC_STATUS: ${{ steps.semantic.outputs.status }}
+          SUCCESSOR_STATUS: ${{ steps.successor.outputs.status }}
+        shell: bash
+        run: |
+          {
+            echo 'Phase 38 diagnostic test output:'
+            if [ "$SEMANTIC_STATUS" != "0" ]; then
+              echo
+              echo '**Semantic checker suite**'
+              echo '```text'
+              tail -n 120 /tmp/final-sat-semantic.log
+              echo '```'
+            fi
+            if [ "$SUCCESSOR_STATUS" != "0" ]; then
+              echo
+              echo '**Successor global-gate suite**'
+              echo '```text'
+              tail -n 120 /tmp/final-sat-successor.log
+              echo '```'
+            fi
+          } > /tmp/final-sat-diagnostic.md
+          gh pr comment "$PR_NUMBER" --body-file /tmp/final-sat-diagnostic.md
+
+      - name: Fail when either final SAT-reduction suite rejects
+        if: >-
+          always() &&
+          (steps.semantic.outputs.status != '0' || steps.successor.outputs.status != '0')
+        run: exit 1
