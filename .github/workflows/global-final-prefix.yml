@@ -53,3 +53,19 @@ jobs:
             test/pcc-global-proof-dag-final-prefix-gate0.test.mjs \
             test/pcc-global-proof-dag-final-prefix-bindings0.test.mjs \
             test/pcc-global-proof-dag-final-prefix-negative0.test.mjs
+
+      - name: Preserve frozen public release surface
+        shell: bash
+        run: |
+          set +e
+          node --test \
+            test/pcc-public-api0.test.mjs \
+            test/pcc-public-surface-freeze0.test.mjs \
+            test/pcc-release-audit-public-surface-freeze0.test.mjs \
+            test/pcc-release-audit-public-surface-summary-negative0.test.mjs \
+            > /tmp/public-surface.log 2>&1
+          status=$?
+          if [ "$status" -ne 0 ]; then
+            tail -n 120 /tmp/public-surface.log
+          fi
+          exit "$status"
