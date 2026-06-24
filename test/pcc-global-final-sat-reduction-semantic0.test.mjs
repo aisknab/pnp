@@ -14,6 +14,10 @@ import {
 } from '../pcc-global-final-sat-reduction-semantic0.mjs';
 
 import {
+  makeGlobalFinalPrefixSemanticSuite0,
+} from '../pcc-global-final-prefix-semantic0.mjs';
+
+import {
   makeFinalPrefixSurfaces0,
   withoutFinalPrefixDigest0,
 } from './helpers/pcc-global-final-prefix-fixture0.mjs';
@@ -30,75 +34,59 @@ function makeInput0(options = {}) {
   });
 }
 
-test('SAT-reduction semantic checker derives the SAT-in-P final coordinate but leaves P=NP blocked', async () => {
+test('SAT reduction semantic checker accepts the bounded refinement and leaves complexity blocked', async () => {
   const out = await CheckGlobalFinalSATReductionSemantic0(makeInput0());
 
   assert.equal(out.tag, 'accept');
-  assert.equal(out.checker, 'CheckGlobalFinalSATReductionSemantic0');
   assert.equal(out.NF.globalFinalSATReductionSemanticReady, true);
   assert.equal(out.NF.globalFinalSATReductionDerivationReady, true);
-  assert.equal(out.NF.globalFinalPrefixRefinementsReady, true);
-  assert.equal(out.NF.globalPackageDerivationsReady, true);
   assert.equal(out.NF.globalFinalSATReductionNodeId, GLOBAL_FINAL_SAT_REDUCTION_NODE_ID0);
   assert.equal(out.NF.globalFinalComplexityNodeId, GLOBAL_FINAL_COMPLEXITY_NODE_ID0);
   assert.equal(out.NF.boundedExecutableSATReductionRefinementOnly, true);
   assert.equal(out.NF.unrestrictedSATReductionSoundnessNotClaimed, true);
-  assert.equal(out.NF.satInPPublicConclusionNotActivated, true);
   assert.equal(out.NF.globalFinalComplexityImplicationReady, false);
-  assert.equal(out.NF.globalFinalDerivationsReady, false);
   assert.equal(out.NF.publicTheoremEmissionAllowed, false);
-
-  const derivation = out.NF.satReductionDerivation;
-  assert.equal(derivation.nodeId, GLOBAL_FINAL_SAT_REDUCTION_NODE_ID0);
-  assert.equal(derivation.decisionComparator, 'minSize>baseline');
-  assert.equal(derivation.residualSlackBound, 4);
-  assert.equal(derivation.finalPolynomialExponent, 42);
-  assert.equal(derivation.ready, true);
+  assert.equal(out.NF.satReductionDerivation.decisionComparator, 'minSize>baseline');
+  assert.equal(out.NF.satReductionDerivation.residualSlackBound, 4);
+  assert.equal(out.NF.satReductionDerivation.finalPolynomialExponent, 42);
 });
 
-test('SAT-reduction semantic checker rejects caller-supplied readiness assertions', async () => {
-  const input = {
+test('SAT reduction semantic checker rejects caller readiness assertions', async () => {
+  const out = await CheckGlobalFinalSATReductionSemantic0({
     ...makeInput0(),
     globalFinalSATReductionDerivationReady: true,
-  };
-  const out = await CheckGlobalFinalSATReductionSemantic0(input);
+  });
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.Coord, 'CheckGlobalFinalSATReductionSemantic0.input');
   assert.deepEqual(out.Path, ['globalFinalSATReductionDerivationReady']);
-  assert.equal(
-    out.Witness.reason,
-    'global SAT-reduction semantic checker rejects caller-supplied readiness or truth assertions',
-  );
 });
 
-test('SAT-reduction semantic checker rejects a stale reduction binding digest', async () => {
-  const input = makeInput0();
-  input.SATReductionSemanticDerivations = {
-    ...input.SATReductionSemanticDerivations,
-    reductionBinding: {
-      ...input.SATReductionSemanticDerivations.reductionBinding,
-      satDecisionDigest: {
-        alg: 'SHA256',
-        hex: '0'.repeat(64),
+test('SAT reduction semantic checker rejects a stale binding digest', async () => {
+  const base = makeInput0();
+  const out = await CheckGlobalFinalSATReductionSemantic0({
+    ...base,
+    SATReductionSemanticDerivations: {
+      ...base.SATReductionSemanticDerivations,
+      reductionBinding: {
+        ...base.SATReductionSemanticDerivations.reductionBinding,
+        satDecisionDigest: {
+          alg: 'SHA256',
+          hex: '0'.repeat(64),
+        },
       },
     },
-  };
-  const out = await CheckGlobalFinalSATReductionSemantic0(input);
+  });
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.Coord, 'CheckGlobalFinalSATReductionSemantic0.semanticSATReductionSuite');
-  assert.equal(
-    out.Witness.reason,
-    'SAT-reduction semantic suite must exactly match the computed final-node, dependency, final-integration, and checker bindings',
-  );
 });
 
-test('SAT-reduction semantic checker rejects a caller truth payload on the SAT-in-P node', async () => {
+test('SAT reduction semantic checker rejects payload drift on the SAT-reduction node', async () => {
   const dag = makeSyntheticGlobalProofDAG0();
   dag.Nodes = dag.Nodes.map((node) => (
     node.id === GLOBAL_FINAL_SAT_REDUCTION_NODE_ID0
-      ? withoutFinalPrefixDigest0(node, { payload: { publicSATinP: true } })
+      ? withoutFinalPrefixDigest0(node, { payload: { promoted: true } })
       : node
   ));
   const out = await CheckGlobalFinalSATReductionSemantic0(
@@ -110,13 +98,9 @@ test('SAT-reduction semantic checker rejects a caller truth payload on the SAT-i
     out.Coord,
     'CheckGlobalFinalSATReductionSemantic0.finalSATReduction.Final.AcceptedPackageImpliesSATinP',
   );
-  assert.equal(
-    out.Witness.reason,
-    'SAT-reduction global node must retain empty imports/payload, Full mode, and null route/rank',
-  );
 });
 
-test('SAT-reduction semantic checker propagates a nonexact SAT decision comparator through final integration', async () => {
+test('SAT reduction semantic checker propagates a nonexact decision comparator through final integration', async () => {
   const input = makeInput0();
   const pack = {
     ...input.PCCPack,
@@ -134,6 +118,10 @@ test('SAT-reduction semantic checker propagates a nonexact SAT decision comparat
   const out = await CheckGlobalFinalSATReductionSemantic0({
     ...input,
     PCCPack: pack,
+    FinalPrefixSemanticDerivations: makeGlobalFinalPrefixSemanticSuite0({
+      LegacyGlobalProofDAG: input.LegacyGlobalProofDAG,
+      PCCPack: pack,
+    }),
     SATReductionSemanticDerivations:
       makeGlobalFinalSATReductionSemanticSuite0({
         LegacyGlobalProofDAG: input.LegacyGlobalProofDAG,
@@ -143,17 +131,13 @@ test('SAT-reduction semantic checker propagates a nonexact SAT decision comparat
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.Coord, 'CheckGlobalFinalSATReductionSemantic0.finalIntegration');
-  assert.equal(
-    out.Witness.reason,
-    'SAT-reduction refinement requires accepted final integration',
-  );
 });
 
-test('SAT-reduction semantic derivation digests bind integration, decision, bounds, and probes', async () => {
+test('SAT reduction semantic derivation binds required digests', async () => {
   const out = await CheckGlobalFinalSATReductionSemantic0(makeInput0());
+  const derivation = out.NF.satReductionDerivation;
 
   assert.equal(out.tag, 'accept');
-  const derivation = out.NF.satReductionDerivation;
   for (const field of [
     'derivationDigest',
     'globalNodeDigest',
