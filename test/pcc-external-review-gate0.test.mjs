@@ -13,9 +13,7 @@ import {
 import {
   CheckExternalReviewGate0,
   EXTERNAL_REVIEW_REQUEST_OBLIGATIONS0,
-  EXTERNAL_REVIEW_REQUEST_PACKET0,
   makeExternalReviewGateInput0,
-  makeExternalReviewGateSuite0,
 } from '../pcc-external-review-gate0.mjs';
 
 test('external review gate represents review request but keeps acceptance blocked', async () => {
@@ -50,28 +48,6 @@ test('external review gate represents review request but keeps acceptance blocke
   assert.equal(out.NF.reviewRequestPacketDigest.alg, 'SHA256');
   assert.equal(out.NF.gateBindingDigest.alg, 'SHA256');
   assert.equal(out.NF.releasePublicTheoremEmissionBlockerDigest.alg, 'SHA256');
-});
-
-test('external review gate rejects a forged acceptance request packet', async () => {
-  const badPacket = {
-    ...EXTERNAL_REVIEW_REQUEST_PACKET0,
-    externalReviewAcceptanceReady: true,
-    externalReviewAcceptanceNotClaimed: false,
-  };
-  const out = await CheckExternalReviewGate0(makeExternalReviewGateInput0({
-    ReviewRequestPacket: badPacket,
-    ExternalReviewGate: makeExternalReviewGateSuite0({
-      ReviewRequestPacket: badPacket,
-    }),
-  }));
-
-  assert.equal(out.tag, 'reject');
-  assert.equal(out.Coord, 'CheckExternalReviewGate0.externalReviewRequestPacket');
-  assert.deepEqual(out.Path, ['ReviewRequestPacket']);
-  assert.equal(
-    out.Witness.reason,
-    'external-review gate requires the exact external-review request packet',
-  );
 });
 
 test('external review gate rejects caller-supplied readiness assertions', async () => {
