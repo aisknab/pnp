@@ -1,0 +1,20 @@
+{
+  "kind": "ExternalReviewSignedFindingFileManifest0",
+  "version": 0,
+  "coordinate": "ExternalReview.SignedFindingFiles",
+  "findingDirectory": "external-review/findings/",
+  "signedFindingFileCount": 0,
+  "acceptanceFindingFileCount": 0,
+  "rejectionFindingFileCount": 0,
+  "revisionRequestFindingFileCount": 0,
+  "signedFindingFiles": [],
+  "externalReviewSignedFindingFilesReady": false,
+  "externalReviewSignedFindingsReady": false,
+  "externalReviewAcceptanceReady": false,
+  "externalReviewAcceptanceReleased": false,
+  "externalReviewAcceptanceNotClaimed": true,
+  "unrestrictedFinalSoundnessReady": false,
+  "publicTheoremEmissionAllowed": false,
+  "finalTheoremReady": false,
+  "sealedReleaseNotOverwritten": true
+}
