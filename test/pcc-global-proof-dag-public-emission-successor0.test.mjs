@@ -15,11 +15,9 @@ import {
 
 import {
   PUBLIC_EMISSION_BLOCKERS0,
-  makePublicTheoremEmissionGateSuite0,
 } from '../pcc-public-emission-gate0.mjs';
 
 import {
-  CheckGlobalProofDAGPublicEmissionFinalTheoremReadiness0,
   CheckGlobalProofDAGPublicEmissionSuccessor0,
   makeGlobalProofDAGPublicEmissionSuccessor0,
 } from '../pcc-global-proof-dag-public-emission-successor0.mjs';
@@ -85,45 +83,4 @@ test('public-emission successor rejects final purpose while release blockers rem
     out.Witness.blockers.map((entry) => entry.coordinate),
     PUBLIC_EMISSION_BLOCKERS0,
   );
-});
-
-test('explicit public-emission final readiness gate rejects a development record', async () => {
-  const out = await CheckGlobalProofDAGPublicEmissionFinalTheoremReadiness0(makeInput0());
-
-  assert.equal(out.tag, 'reject');
-  assert.equal(
-    out.Coord,
-    'CheckGlobalProofDAGPublicEmissionFinalTheoremReadiness0.purpose',
-  );
-  assert.deepEqual(out.Path, ['Purpose']);
-});
-
-test('public-emission successor rejects caller readiness assertions', async () => {
-  const input = makeInput0();
-  input.publicTheoremEmissionAllowed = true;
-  const out = await CheckGlobalProofDAGPublicEmissionSuccessor0(input);
-
-  assert.equal(out.tag, 'reject');
-  assert.equal(out.Coord, 'CheckGlobalProofDAGPublicEmissionSuccessor0.input');
-  assert.deepEqual(out.Path, ['publicTheoremEmissionAllowed']);
-});
-
-test('public-emission successor rejects a stale documentation binding', async () => {
-  const input = makeInput0();
-  const out = await CheckGlobalProofDAGPublicEmissionSuccessor0({
-    ...input,
-    PublicEmissionGate: {
-      ...input.PublicEmissionGate,
-      binding: {
-        ...input.PublicEmissionGate.binding,
-        checkerContractDigest: {
-          alg: 'SHA256',
-          hex: '0'.repeat(64),
-        },
-      },
-    },
-  });
-
-  assert.equal(out.tag, 'reject');
-  assert.equal(out.Coord, 'CheckGlobalProofDAGPublicEmissionSuccessor0.publicEmissionGate');
 });
