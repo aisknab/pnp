@@ -1,0 +1,39 @@
+name: unrestricted-final-soundness-gate-verification
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: unrestricted-final-soundness-gate-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          show-progress: false
+          persist-credentials: false
+          set-safe-directory: false
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+
+      - name: Check unrestricted-final-soundness gate syntax
+        run: node --check pcc-unrestricted-final-soundness-gate0.mjs
+
+      - name: Run unrestricted-final-soundness gate tests
+        run: node --test test/pcc-unrestricted-final-soundness-gate0.test.mjs
