@@ -1,0 +1,40 @@
+name: public-review-documentation-verification
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-review-documentation-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          show-progress: false
+          persist-credentials: false
+          set-safe-directory: false
+
+      - name: Verify public-review documentation patch
+        run: |
+          REV=documentation-revisions/PNP-DOC-CPR-2026-06-26-01
+          (cd "$REV" && sha256sum -c PATCH_SHA256SUMS)
+          patch -o /tmp/canonical_proof_report.public-review.tex \
+            canonical_proof_report.tex \
+            "$REV/canonical_proof_report.tex.patch"
+          printf '%s  %s\n' \
+            9ad7ed91a48662b98432e2b6000beaf06b3ebd2212de3a6d820a7dcbd27e8d9a \
+            /tmp/canonical_proof_report.public-review.tex | sha256sum -c -
