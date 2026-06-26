@@ -31,7 +31,7 @@ jobs:
       - name: Verify public-review documentation patch
         run: |
           REV=documentation-revisions/PNP-DOC-CPR-2026-06-26-01
-          sha256sum -c "$REV/PATCH_SHA256SUMS"
+          (cd "$REV" && sha256sum -c PATCH_SHA256SUMS)
           patch -o /tmp/canonical_proof_report.public-review.tex \
             canonical_proof_report.tex \
             "$REV/canonical_proof_report.tex.patch"
