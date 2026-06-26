@@ -1,0 +1,44 @@
+name: global-final-decision-verification
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: global-final-decision-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  global-final-decision-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          show-progress: false
+          persist-credentials: false
+          set-safe-directory: false
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+
+      - name: Check phase-38 module syntax
+        run: |
+          node --check pcc-global-final-sat-semantic0.mjs
+          node --check pcc-global-proof-dag-final-sat-successor0.mjs
+
+      - name: Run bounded final decision semantic tests
+        run: node --test test/pcc-global-final-sat-semantic0.test.mjs
+
+      - name: Run bounded final decision successor tests
+        run: node --test test/pcc-global-proof-dag-final-sat-successor0.test.mjs
