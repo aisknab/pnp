@@ -1,0 +1,36 @@
+name: phase39-debug-artifact
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          show-progress: false
+          persist-credentials: false
+          set-safe-directory: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+      - name: Run debug test to file
+        run: |
+          node --test --test-reporter=spec test/pcc-final-complexity-debug0.test.mjs > phase39-debug.log 2>&1
+          cat phase39-debug.log
+      - name: Upload debug log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase39-debug-log
+          path: phase39-debug.log
+          if-no-files-found: warn
+          retention-days: 3
