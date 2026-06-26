@@ -56,6 +56,10 @@ import {
 } from './pcc-global-final-sat-semantic0.mjs';
 
 const CHECKER_VERSION = 0;
+const GLOBAL_FINAL_PREFIX_NODE_IDS0 = Object.freeze([
+  'Final.PackageSoundness',
+  'Final.GeneratedPackageSufficiency',
+]);
 
 export const GLOBAL_DAG_FINAL_SAT_SUCCESSOR_PURPOSES0 = Object.freeze([
   'development',
@@ -176,7 +180,10 @@ async function checkGlobalInternal0(input, { checker, requiredPurpose }) {
   }
 
   const purpose = requiredPurpose ?? input.Purpose;
-  ledger.push(makeLedgerEntry0('purpose', true, { kind: 'GlobalProofDAGFinalSATPurpose0NF', purpose }));
+  ledger.push(makeLedgerEntry0('purpose', true, {
+    kind: 'GlobalProofDAGFinalSATPurpose0NF',
+    purpose,
+  }));
 
   const predecessorCall = await callChecker0(
     'CheckGlobalProofDAGFinalPrefixSuccessor0',
@@ -196,26 +203,31 @@ async function checkGlobalInternal0(input, { checker, requiredPurpose }) {
       }),
     ),
   );
-  ledger.push(makeLedgerEntry0('CheckGlobalProofDAGFinalPrefixSuccessor0', predecessorCall.ok && predecessorCall.record.tag === 'accept', predecessorCall.ok ? predecessorCall.record : predecessorCall.witness));
+  ledger.push(makeLedgerEntry0(
+    'CheckGlobalProofDAGFinalPrefixSuccessor0',
+    predecessorCall.ok && predecessorCall.record.tag === 'accept',
+    predecessorCall.ok ? predecessorCall.record : predecessorCall.witness,
+  ));
   if (!predecessorCall.ok) {
     return makeRejectRecord0({ checker, coord: `${checker}.predecessorGlobal.exception`, path: ['PredecessorGlobal'], witness: predecessorCall.witness, ledger });
   }
-  const predecessorRecord = predecessorCall.record;
-  if (predecessorRecord.tag !== 'accept') {
+  if (predecessorCall.record.tag !== 'accept') {
     return makeRejectRecord0({
       checker,
       coord: `${checker}.predecessorGlobal`,
       path: ['PredecessorGlobal'],
-      witness: { reason: 'semantic final-prefix predecessor global gate rejected before final SAT upgrade', inner: compactRecord0(predecessorRecord) },
+      witness: {
+        reason: 'semantic final-prefix predecessor global gate rejected before final SAT upgrade',
+        inner: compactRecord0(predecessorCall.record),
+      },
       ledger,
     });
   }
+  const predecessorRecord = predecessorCall.record;
   const predecessorNF = predecessorRecord.NF ?? predecessorRecord.nf ?? {};
   const predecessorBoundary = validatePredecessorBoundary0(predecessorNF);
   ledger.push(makeLedgerEntry0('predecessorFinalPrefixBoundary', predecessorBoundary.ok, predecessorBoundary.nf ?? predecessorBoundary.witness));
-  if (!predecessorBoundary.ok) {
-    return makeRejectFromValidation0(checker, `${checker}.predecessorFinalPrefixBoundary`, predecessorBoundary, ledger);
-  }
+  if (!predecessorBoundary.ok) return makeRejectFromValidation0(checker, `${checker}.predecessorFinalPrefixBoundary`, predecessorBoundary, ledger);
 
   const satCall = await callChecker0(
     'CheckGlobalFinalSATSemantic0',
@@ -235,26 +247,29 @@ async function checkGlobalInternal0(input, { checker, requiredPurpose }) {
       }),
     ),
   );
-  ledger.push(makeLedgerEntry0('CheckGlobalFinalSATSemantic0', satCall.ok && satCall.record.tag === 'accept', satCall.ok ? satCall.record : satCall.witness));
-  if (!satCall.ok) {
-    return makeRejectRecord0({ checker, coord: `${checker}.semanticFinalSAT.exception`, path: ['FinalSATSemanticDerivations'], witness: satCall.witness, ledger });
-  }
-  const satRecord = satCall.record;
-  if (satRecord.tag !== 'accept') {
+  ledger.push(makeLedgerEntry0(
+    'CheckGlobalFinalSATSemantic0',
+    satCall.ok && satCall.record.tag === 'accept',
+    satCall.ok ? satCall.record : satCall.witness,
+  ));
+  if (!satCall.ok) return makeRejectRecord0({ checker, coord: `${checker}.semanticFinalSAT.exception`, path: ['FinalSATSemanticDerivations'], witness: satCall.witness, ledger });
+  if (satCall.record.tag !== 'accept') {
     return makeRejectRecord0({
       checker,
       coord: `${checker}.semanticFinalSAT`,
       path: ['FinalSATSemanticDerivations'],
-      witness: { reason: 'bounded semantic final SAT refinement checker rejected', inner: compactRecord0(satRecord) },
+      witness: {
+        reason: 'bounded semantic final SAT refinement checker rejected',
+        inner: compactRecord0(satCall.record),
+      },
       ledger,
     });
   }
+  const satRecord = satCall.record;
   const satNF = satRecord.NF ?? satRecord.nf ?? {};
   const satBoundary = validateSATBoundary0(satNF);
   ledger.push(makeLedgerEntry0('semanticFinalSATBoundary', satBoundary.ok, satBoundary.nf ?? satBoundary.witness));
-  if (!satBoundary.ok) {
-    return makeRejectFromValidation0(checker, `${checker}.semanticFinalSATBoundary`, satBoundary, ledger);
-  }
+  if (!satBoundary.ok) return makeRejectFromValidation0(checker, `${checker}.semanticFinalSATBoundary`, satBoundary, ledger);
 
   const overlay = buildFinalSATOverlay0({ dag: input.LegacyGlobalProofDAG, predecessorNF, satNF });
   ledger.push(makeLedgerEntry0('semanticFinalSATOverlay', overlay.ok, overlay.nf ?? overlay.witness));
@@ -288,7 +303,6 @@ async function checkGlobalInternal0(input, { checker, requiredPurpose }) {
       version: CHECKER_VERSION,
       purpose,
       status: 'development-only',
-
       predecessorGlobalAccepted: true,
       predecessorGlobalChecker: predecessorRecord.checker,
       predecessorGlobalDigest: predecessorRecord.Digest ?? predecessorRecord.digest,
@@ -296,7 +310,6 @@ async function checkGlobalInternal0(input, { checker, requiredPurpose }) {
       predecessorGlobalPublicTheoremEmissionAllowed: false,
       predecessorGlobalFinalPrefixReady: true,
       predecessorGlobalFinalSATReady: false,
-
       semanticKBundleFinalReady: predecessorNF.semanticKBundleFinalReady === true,
       semanticK0ConformanceReady: predecessorNF.semanticK0ConformanceReady === true,
       semanticSigmaReady: predecessorNF.semanticSigmaReady === true,
@@ -305,7 +318,6 @@ async function checkGlobalInternal0(input, { checker, requiredPurpose }) {
       globalRowDerivationsReady: predecessorNF.globalRowDerivationsReady === true,
       globalPackageDerivationsReady: predecessorNF.globalPackageDerivationsReady === true,
       globalFinalPrefixRefinementsReady: predecessorNF.globalFinalPrefixRefinementsReady === true,
-
       globalFinalSATSemanticChecker: satRecord.checker,
       globalFinalSATSemanticDigest: satRecord.Digest ?? satRecord.digest,
       globalFinalSATSemanticReady: true,
@@ -326,17 +338,14 @@ async function checkGlobalInternal0(input, { checker, requiredPurpose }) {
       boundedExecutableSATReductionRefinementOnly: true,
       unrestrictedSATReductionSoundnessNotClaimed: true,
       complexityClassImplicationNotClaimed: true,
-
       globalFinalComplexityImplicationReady: false,
       globalFinalDerivationsReady: false,
       globalSemanticNodeDerivationsReady: false,
       Scope: { ...GLOBAL_FINAL_SAT_SEMANTIC_SCOPE0 },
-
       semanticOverlay: overlay.nf,
       semanticOverlayDigest: digestCanonical0(overlay.nf),
       computedGlobalGate: gate,
       computedGlobalGateDigest: digestCanonical0(gate),
-
       semanticallyRefinedFinalNodeIds: gate.semanticallyRefinedFinalNodeIds,
       remainingBlockedFinalNodeIds: gate.remainingBlockedFinalNodeIds,
       legacyFinalNodesStructurallyAccepted: true,
@@ -357,17 +366,12 @@ async function checkGlobalInternal0(input, { checker, requiredPurpose }) {
 
 function buildFinalSATOverlay0({ dag, predecessorNF, satNF }) {
   const nodes = dag?.Nodes;
-  if (!Array.isArray(nodes)) {
-    return validationReject0(['LegacyGlobalProofDAG', 'Nodes'], 'legacy global DAG must expose Nodes for final SAT overlay', { actual: typeof nodes });
-  }
+  if (!Array.isArray(nodes)) return validationReject0(['LegacyGlobalProofDAG', 'Nodes'], 'legacy global DAG must expose Nodes for final SAT overlay', { actual: typeof nodes });
   const predecessorOverlay = predecessorNF.semanticOverlay;
-  if (!isPlainObject0(predecessorOverlay)
-      || predecessorOverlay.globalFinalPrefixRefinementsReady !== true
-      || predecessorOverlay.globalFinalSATReductionDerivationReady !== false) {
+  if (!isPlainObject0(predecessorOverlay) || predecessorOverlay.globalFinalPrefixRefinementsReady !== true || predecessorOverlay.globalFinalSATReductionDerivationReady !== false) {
     return validationReject0(['PredecessorGlobal', 'NF', 'semanticOverlay'], 'final SAT successor requires the semantic final-prefix predecessor overlay', { actual: predecessorOverlay });
   }
-  const nodeById = new Map(nodes.map((node) => [node.id, node]));
-  const node = nodeById.get(GLOBAL_FINAL_SAT_NODE_ID0);
+  const node = new Map(nodes.map((entry) => [entry.id, entry])).get(GLOBAL_FINAL_SAT_NODE_ID0);
   const nodeDigest = digestCanonical0(stripDigestFields0(node));
   if (!sameCanonical0(nodeDigest, satNF.globalNodeDigest)) {
     return validationReject0(['FinalSATSemanticDerivations', 'NF', 'globalNodeDigest'], 'final SAT semantic node digest mismatch', { expected: nodeDigest, actual: satNF.globalNodeDigest });
@@ -389,7 +393,6 @@ function buildFinalSATOverlay0({ dag, predecessorNF, satNF }) {
     publiclyActive: false,
   });
   const semanticFinalPrefixNodeIds = [...(predecessorOverlay.semanticFinalPrefixNodeIds ?? [])];
-  const semanticFinalNodeIds = [...semanticFinalPrefixNodeIds, GLOBAL_FINAL_SAT_NODE_ID0];
   const semanticNodeIds = [...(predecessorOverlay.semanticNodeIds ?? []), GLOBAL_FINAL_SAT_NODE_ID0];
   const structuralOnlyNodeIds = nodes.filter((entry) => !semanticNodeIds.includes(entry.id)).map((entry) => entry.id);
   return validationAccept0({
@@ -397,7 +400,7 @@ function buildFinalSATOverlay0({ dag, predecessorNF, satNF }) {
     ...copyPriorOverlay0(predecessorOverlay),
     semanticFinalPrefixNodeIds,
     semanticFinalSATNodeIds: [GLOBAL_FINAL_SAT_NODE_ID0],
-    semanticFinalNodeIds,
+    semanticFinalNodeIds: [...semanticFinalPrefixNodeIds, GLOBAL_FINAL_SAT_NODE_ID0],
     semanticFinalSATBindings: [semanticFinalSATBinding],
     blockedFinalNodeIds: [GLOBAL_FINAL_COMPLEXITY_NODE_ID0],
     blockedFinalImplicationNodeIds: [GLOBAL_FINAL_COMPLEXITY_NODE_ID0],
@@ -452,19 +455,6 @@ function copyPriorOverlay0(overlay) {
 }
 
 function makeComputedGate0({ predecessorRecord, predecessorNF, satRecord, overlay }) {
-  const nodes = [
-    gateNode0('Gate.PredecessorFinalPrefix.DevelopmentAcceptance', [], true, predecessorRecord.Digest ?? predecessorRecord.digest),
-    gateNode0('Gate.KBundle.ReflectionFinalReadiness', ['Gate.PredecessorFinalPrefix.DevelopmentAcceptance'], true, predecessorNF.semanticKBundleFinalProbeDigest ?? null),
-    gateNode0('Gate.GlobalDAG.InfrastructureDerivations', ['Gate.PredecessorFinalPrefix.DevelopmentAcceptance'], true, predecessorNF.globalInfrastructureSemanticDigest ?? null),
-    gateNode0('Gate.GlobalDAG.RowDerivations', ['Gate.GlobalDAG.InfrastructureDerivations'], true, predecessorNF.globalRowSemanticDigest ?? null),
-    gateNode0('Gate.GlobalDAG.PackageDerivations', ['Gate.GlobalDAG.RowDerivations'], true, predecessorNF.globalPackageSemanticDigest ?? null),
-    gateNode0('Gate.GlobalDAG.FinalPrefixRefinements', ['Gate.GlobalDAG.PackageDerivations'], true, predecessorNF.globalFinalPrefixSemanticDigest ?? null),
-    gateNode0('Gate.GlobalDAG.FinalSATReductionDerivation', ['Gate.GlobalDAG.FinalPrefixRefinements'], true, satRecord.Digest ?? satRecord.digest),
-    gateNode0('Gate.GlobalDAG.FinalComplexityImplication', ['Gate.GlobalDAG.FinalSATReductionDerivation'], false, digestCanonical0(GLOBAL_FINAL_COMPLEXITY_NODE_ID0)),
-    gateNode0('Gate.GlobalDAG.FinalDerivations', ['Gate.GlobalDAG.FinalSATReductionDerivation', 'Gate.GlobalDAG.FinalComplexityImplication'], false, digestCanonical0({ satReady: true, complexityReady: false })),
-    gateNode0('Gate.GlobalDAG.SemanticNodeDerivations', ['Gate.GlobalDAG.InfrastructureDerivations', 'Gate.GlobalDAG.RowDerivations', 'Gate.GlobalDAG.PackageDerivations', 'Gate.GlobalDAG.FinalDerivations'], false, digestCanonical0({ finalReady: false })),
-    gateNode0('Gate.FinalTheorem.Readiness', ['Gate.KBundle.ReflectionFinalReadiness', 'Gate.GlobalDAG.SemanticNodeDerivations'], false, digestCanonical0({ kBundleFinalReady: true, globalSemanticNodeDerivationsReady: false })),
-  ];
   const blockers = [
     readyBlocker0('KBundle.ReflectionFinalReadiness', predecessorNF.semanticKBundleFinalProbeDigest ?? null),
     readyBlocker0('GlobalDAG.InfrastructureDerivations', predecessorNF.globalInfrastructureSemanticDigest ?? null),
@@ -482,17 +472,15 @@ function makeComputedGate0({ predecessorRecord, predecessorNF, satRecord, overla
       digest: digestCanonical0(GLOBAL_FINAL_COMPLEXITY_NODE_ID0),
     }),
   ];
+  const nodes = [
+    gateNode0('Gate.PredecessorFinalPrefix.DevelopmentAcceptance', [], true, predecessorRecord.Digest ?? predecessorRecord.digest),
+    gateNode0('Gate.GlobalDAG.FinalSATReductionDerivation', ['Gate.GlobalDAG.FinalPrefixRefinements'], true, satRecord.Digest ?? satRecord.digest),
+    gateNode0('Gate.GlobalDAG.FinalComplexityImplication', ['Gate.GlobalDAG.FinalSATReductionDerivation'], false, digestCanonical0(GLOBAL_FINAL_COMPLEXITY_NODE_ID0)),
+    gateNode0('Gate.FinalTheorem.Readiness', ['Gate.GlobalDAG.FinalComplexityImplication'], false, digestCanonical0({ complexityReady: false })),
+  ];
   return Object.freeze({
     kind: 'GlobalProofDAGComputedSemanticFinalSATGate0',
     version: CHECKER_VERSION,
-    primitiveSemanticRuleCoverageComplete: true,
-    semanticK0ConformanceReady: true,
-    semanticSigmaReady: true,
-    semanticReflectionReady: true,
-    globalInfrastructureSemanticReady: true,
-    globalRowDerivationsReady: true,
-    globalPackageDerivationsReady: true,
-    globalFinalPrefixRefinementsReady: true,
     globalFinalSATReductionDerivationReady: true,
     globalFinalComplexityImplicationReady: false,
     globalFinalDerivationsReady: false,
