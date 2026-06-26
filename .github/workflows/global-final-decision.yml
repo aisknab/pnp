@@ -38,7 +38,23 @@ jobs:
           node --check pcc-global-proof-dag-final-sat-successor0.mjs
 
       - name: Run bounded final decision semantic tests
-        run: node --test test/pcc-global-final-sat-semantic0.test.mjs
+        shell: bash
+        run: |
+          set +e
+          node --test test/pcc-global-final-sat-semantic0.test.mjs > /tmp/final-decision-semantic.log 2>&1
+          status=$?
+          if [ "$status" -ne 0 ]; then
+            tail -n 160 /tmp/final-decision-semantic.log
+          fi
+          exit "$status"
 
       - name: Run bounded final decision successor tests
-        run: node --test test/pcc-global-proof-dag-final-sat-successor0.test.mjs
+        shell: bash
+        run: |
+          set +e
+          node --test test/pcc-global-proof-dag-final-sat-successor0.test.mjs > /tmp/final-decision-successor.log 2>&1
+          status=$?
+          if [ "$status" -ne 0 ]; then
+            tail -n 160 /tmp/final-decision-successor.log
+          fi
+          exit "$status"
