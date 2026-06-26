@@ -1,0 +1,20 @@
+name: phase39-debug
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+      - run: node --test --test-reporter=spec test/pcc-final-complexity-debug0.test.mjs
