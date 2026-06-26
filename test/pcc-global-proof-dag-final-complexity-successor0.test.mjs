@@ -6,6 +6,10 @@ import {
 } from '../pcc-global-proof-dag0.mjs';
 
 import {
+  makeGlobalFinalPrefixSemanticSuite0,
+} from '../pcc-global-final-prefix-semantic0.mjs';
+
+import {
   makeGlobalFinalSATReductionSemanticSuite0,
 } from '../pcc-global-final-sat-reduction-semantic0.mjs';
 
@@ -28,22 +32,56 @@ import {
   makeFinalPrefixSurfaces0,
 } from './helpers/pcc-global-final-prefix-fixture0.mjs';
 
-function makeInput0({ Purpose = 'development' } = {}) {
+function makeCheckFinalAcceptedSurfaces0() {
   const surfaces = makeFinalPrefixSurfaces0();
+  const finalTheorem = {
+    ...surfaces.PCCPack.FinalTheorem,
+    NoHiddenMinCert: {
+      ...surfaces.PCCPack.FinalTheorem.NoHiddenMinCert,
+      occurrences: surfaces.PCCPack.FinalTheorem.NoHiddenMinCert.occurrences
+        .map((entry) => (
+          entry.identifier === 'PCCMin'
+            ? { ...entry, occurrenceClass: 'AssumeOnly' }
+            : entry
+        )),
+    },
+  };
+  const PCCPack = {
+    ...surfaces.PCCPack,
+    FinalTheorem: finalTheorem,
+    RowFamFinal: {
+      ...surfaces.PCCPack.RowFamFinal,
+      FinalTheorem: finalTheorem,
+    },
+  };
+  const FinalPrefixSemanticDerivations = makeGlobalFinalPrefixSemanticSuite0({
+    LegacyGlobalProofDAG: surfaces.LegacyGlobalProofDAG,
+    PCCPack,
+  });
   const SATReductionSemanticDerivations =
     makeGlobalFinalSATReductionSemanticSuite0({
       LegacyGlobalProofDAG: surfaces.LegacyGlobalProofDAG,
-      PCCPack: surfaces.PCCPack,
+      PCCPack,
     });
+  return {
+    ...surfaces,
+    PCCPack,
+    FinalPrefixSemanticDerivations,
+    SATReductionSemanticDerivations,
+  };
+}
+
+function makeInput0({ Purpose = 'development' } = {}) {
+  const surfaces = makeCheckFinalAcceptedSurfaces0();
   return makeGlobalProofDAGFinalComplexitySuccessor0({
     ...surfaces,
-    SATReductionSemanticDerivations,
     ComplexityBasis: STANDARD_COMPLEXITY_BASIS0,
     ComplexitySemanticDerivations:
       makeGlobalFinalComplexitySemanticSuite0({
         LegacyGlobalProofDAG: surfaces.LegacyGlobalProofDAG,
         PCCPack: surfaces.PCCPack,
-        SATReductionSemanticDerivations,
+        SATReductionSemanticDerivations:
+          surfaces.SATReductionSemanticDerivations,
         ComplexityBasis: STANDARD_COMPLEXITY_BASIS0,
       }),
     Purpose,
