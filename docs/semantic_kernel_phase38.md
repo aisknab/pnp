@@ -1,4 +1,4 @@
-# Semantic kernel hardening — phase 38 (bounded final SAT-reduction refinement)
+# Semantic kernel hardening — phase 38 (bounded final decision refinement)
 
 ## Purpose
 
@@ -9,59 +9,72 @@ Final.PackageSoundness
 Final.GeneratedPackageSufficiency
 ```
 
-while keeping public theorem emission disabled. Phase 38 refines the next final coordinate:
+Phase 38 refines the next final coordinate:
 
 ```text
 Final.AcceptedPackageImpliesSATinP
 ```
 
-The phase deliberately keeps the complexity-class implication blocked:
+The layer replays the executable final-integration, framework-match, decision, and polynomial-bound checkers, and digest-binds the global final node to those accepted executable records.
+
+This phase deliberately does **not** activate the public final theorem and does **not** claim the downstream complexity-class implication. The remaining final coordinate stays blocked:
 
 ```text
 Final.AcceptedPackageImpliesPEqualsNP
 ```
-
-Accepted records state:
-
-```text
-boundedExecutableSATReductionRefinementOnly = true
-unrestrictedSATReductionSoundnessNotClaimed = true
-satInPPublicConclusionNotActivated = true
-publicTheoremEmissionAllowed = false
-```
-
-Thus this layer is a bounded executable refinement of the version-zero SAT-reduction surface. It does not yet activate a public `SAT in P` conclusion and does not establish `P = NP`.
 
 ## New checker
 
 The new checker is:
 
 ```text
-CheckGlobalFinalSATReductionSemantic0
+CheckGlobalFinalSATSemantic0
 ```
 
-It accepts only a `GlobalFinalSATReductionSemanticInput0` containing:
-
-- the phase-37 final-prefix predecessor surfaces;
-- the aligned `PCCPack`;
-- a generated `GlobalFinalSATReductionSemanticSuite0`;
-- the exact bounded fail-closed policy.
-
-The checker reruns:
+It requires the phase-37 predecessor:
 
 ```text
-CheckGlobalProofDAGFinalPrefixSuccessor0
+CheckGlobalProofDAGFinalPrefixSuccessor0 = accept
+```
+
+The predecessor must remain development-only, expose no active final node, and keep the SAT implication blocked before this phase.
+
+## Executable final-integration replay
+
+The checker replays:
+
+```text
 CheckFinalIntegration0
+CheckFinalFrameworkMatch0
+CheckSATDecision0
+CheckSATBounds0
 ```
 
-The predecessor must remain development-only, with final-prefix refinements ready and the SAT-reduction coordinate still blocked.
-
-## Exact final-node contract
-
-The global final node must retain:
+The accepted decision surface must retain:
 
 ```text
-id = Final.AcceptedPackageImpliesSATinP
+comparator = minSize>baseline
+usesExactMinimum = true
+rejectsApproximateMinimum = true
+preservesSatisfiability = true
+```
+
+The accepted bounds surface must retain:
+
+```text
+residualSlackBound = 4
+Bounds.finite = true
+Bounds.polynomial = true
+Bounds.exponent = 42
+```
+
+The pack surfaces must align exactly with the semantic predecessor inputs.
+
+## Global final-node contract
+
+`Final.AcceptedPackageImpliesSATinP` must retain:
+
+```text
 nodeKind = final
 label = Final.AcceptedPackageImpliesSATinP
 premises = [
@@ -69,159 +82,69 @@ premises = [
   Package.O.ZeroSlackOracle,
   Final.GeneratedPackageSufficiency
 ]
+imports = []
+mode = Full
+payload = {}
 conclusion = {
   tag: FinalTheoremAccepted0,
   theorem: Final.AcceptedPackageImpliesSATinP
 }
-imports = []
-payload = {}
-mode = Full
-route = null
-rank = null
 ```
 
-The node must carry a positive polynomial bound within the global bounds envelope.
+The checker verifies that the two package premises and the generated-package final-prefix premise are semantically active in the predecessor overlay.
 
-## Dependency binding
+## Digest-bound semantic suite
 
-The derivation requires accepted predecessor semantic bindings for:
+The generated suite is:
 
 ```text
-Package.G.LockedNANDThreshold
-Package.O.ZeroSlackOracle
-Final.GeneratedPackageSufficiency
+GlobalFinalSATSemanticSuite0
 ```
 
-Each dependency's global-node digest and semantic refinement digest is carried into the SAT-reduction derivation.
-
-## Final integration replay
-
-`CheckFinalIntegration0` is replayed over the aligned `PCCPack.FinalIntegration` surface. This in turn replays:
-
-```text
-CheckGPack0
-CheckGlobalProofDAG0
-CheckFinalFrameworkMatch0
-CheckSATDecision0
-CheckSATBounds0
-```
-
-The phase binds digests for:
-
-```text
-FinalIntegration
-FinalMatch
-SATDecision
-SATBounds
-GPack
-PCCMinBridge
-AcceptedPackageImpliesSATinP source implication
-```
-
-## Reduction-surface checks
-
-The checker validates that the final theorem source record exposes the exact version-zero bridge:
-
-```text
-exactMinimizer = PCCMin
-residualBandBound = 4
-residualBandPolynomial = true
-lockedNANDReduction = true
-satReduction = true
-usesExactMinimum = true
-rejectsApproximateMinimum = true
-decisionComparator = minSize>baseline
-```
-
-The source implication must retain:
-
-```text
-id = PackageAcceptanceImpliesSATinP
-conclusion = SAT in P
-polynomial = true
-usesPCCMinBridge = true
-usesSATDecision = true
-usesAcceptedGPack = true
-usesAcceptedGlobalProofDAG = true
-usesGlobalGThreshold = true
-usesGThresholdProofRef = true
-usesFinalIntegrationGlobalGLinkage = true
-```
-
-The SAT decision record must bind deterministic satisfiability-preserving NAND conversion, the exact baseline/full-word relation, the exact `minSize>baseline` comparator, and coherent SAT/UNSAT cases.
-
-The SAT bounds record must bind:
-
-```text
-Converter.polynomial = true
-LockedBuilder.polynomial = true
-LockedBuilder.residualSlackMax = 4
-Minimizer.exact = true
-Minimizer.residualSlackBound = 4
-DecisionProcedure.polynomial = true
-DecisionProcedure.comparator = minSize>baseline
-Bounds.polynomial = true
-Bounds.finite = true
-Bounds.exponent = 42
-```
+It binds the global node, dependency nodes, final integration, framework, decision, bounds, GPack, pack core, pack manifest, checker contract, and aggregate binding digest.
 
 ## Negative probes
 
-Two fail-closed probes are required:
-
-1. Mutating the decision comparator from `minSize>baseline` to `minSize>=baseline` must make `CheckFinalIntegration0` reject.
-2. Mutating `SATBounds.Minimizer.exact` from `true` to `false` must make `CheckFinalIntegration0` reject.
-
-The resulting reject-record digests are stored in the derivation.
-
-## Digest-bound suite
-
-The generated suite contains one `GlobalFinalSATReductionSemanticBinding0` for the SAT-reduction coordinate. It binds:
+The checker requires two mutation probes to reject:
 
 ```text
-global node digest
-dependency node digests
-final integration digest
-final framework match digest
-SAT decision digest
-SAT bounds digest
-GPack digest
-PCCMin bridge digest
-SAT implication source digest
-checker-contract digest
-binding digest
+SATDecision.DecisionRule.usesExactMinimum = false
+SATBounds.Bounds.polynomial = false
 ```
 
-Caller-supplied readiness or truth assertions are rejected.
+The rejection digests are included in the final semantic refinement record.
 
 ## Successor global gate
 
-The new successor is:
+The successor is:
 
 ```text
-GlobalProofDAGSemanticFinalSATReductionSuccessor0
+GlobalProofDAGSemanticFinalSATSuccessor0
 ```
 
-It preserves the phase-37 predecessor and activates exactly one additional semantic final-node refinement:
+It activates only the SAT implication node as a bounded semantic refinement:
 
 ```text
-Final.AcceptedPackageImpliesSATinP
+globalFinalSATReductionDerivationReady = true
 ```
 
-The node becomes semantically refined in the overlay but remains publicly quarantined:
+It leaves the complexity implication blocked:
 
 ```text
-satInPConclusionRemainsPubliclyQuarantined = true
+globalFinalComplexityImplicationReady = false
+globalFinalDerivationsReady = false
+globalSemanticNodeDerivationsReady = false
+```
+
+The active final set remains empty:
+
+```text
 activeFinalNodeIds = []
+finalTheoremReady = false
+publicTheoremEmissionAllowed = false
 ```
 
-The remaining blocked final node is:
-
-```text
-Final.AcceptedPackageImpliesPEqualsNP
-```
-
-## Readiness after phase 38
+## Current readiness after merge
 
 Ready scoped surfaces:
 
@@ -239,45 +162,22 @@ Remaining blocker:
 GlobalDAG.FinalComplexityImplication
 ```
 
-The global result remains:
-
-```text
-status = development-only
-activeFinalNodeIds = []
-legacyFinalNodesQuarantined = true
-finalTheoremReady = false
-publicTheoremEmissionAllowed = false
-```
-
 ## Verification targets
 
 Durable CI runs:
 
 ```bash
 node --test \
-  test/pcc-global-final-sat-reduction-semantic0.test.mjs \
-  test/pcc-global-proof-dag-final-sat-reduction-successor0.test.mjs
+  test/pcc-global-final-sat-semantic0.test.mjs \
+  test/pcc-global-proof-dag-final-sat-successor0.test.mjs
 ```
-
-The tests cover:
-
-- predecessor preservation;
-- exact final-node contract;
-- dependency semantic-binding requirements;
-- final integration replay;
-- baseline, comparator, residual-slack, and polynomial-bound binding;
-- decision-comparator and exact-minimizer negative probes;
-- stale binding rejection;
-- caller readiness rejection;
-- semantic overlay activation of the SAT-reduction node;
-- continued public quarantine and blocked `P = NP` implication.
 
 ## Next step
 
-After this phase, the only remaining final blocker is the complexity implication:
+After this phase, the final remaining layer is the complexity implication:
 
 ```text
 Final.AcceptedPackageImpliesPEqualsNP
 ```
 
-The next layer should independently represent the complexity-class bridge from `SAT in P` to `P = NP`, including the exact NP-completeness dependency, the language-class inclusions used, the conditional-public-claim boundary, and negative probes that reject an unconditional or premise-free public theorem. Only after that layer is complete should public theorem emission be considered.
+That phase should represent the NP-completeness bridge and the final complexity-class implication separately from the bounded decision refinement. Public theorem emission should remain disabled until that final coordinate is independently ready.
