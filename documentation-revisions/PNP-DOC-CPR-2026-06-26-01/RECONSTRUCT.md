@@ -1,6 +1,6 @@
 # Exact reconstruction
 
-The revised payload is derived from the unmodified canonical report at documentation base commit `f52e04b9963ea2f10cfccafbf705b9e316ed25a6`.
+The revised TeX payload is derived from the unmodified canonical report at documentation base commit `f52e04b9963ea2f10cfccafbf705b9e316ed25a6`.
 
 Required base-file hashes:
 
@@ -13,7 +13,8 @@ Reconstruction steps:
 
 1. Check out the base commit and verify the two base-file hashes above.
 2. Apply `canonical_proof_report.tex.patch` to `canonical_proof_report.tex` to obtain the revised TeX payload.
-3. Concatenate `canonical_proof_report.pdf.zstpatch.b64.part*`, decode the base64 stream, and use the resulting zstd patch with the base PDF as the patch source to obtain the revised PDF payload.
-4. In this revision directory, run `sha256sum -c SHA256SUMS` and `sha256sum -c PATCH_SHA256SUMS`.
+3. Verify the revised TeX hash using `SHA256SUMS`.
+4. Build or receive the revised PDF payload under a controlled publication build and verify it against the PDF hash recorded in `SHA256SUMS`.
+5. Verify the transport file using `PATCH_SHA256SUMS`.
 
-The PDF delta is an exact binary patch, not a source-level approximation. Successful verification produces the payload hashes recorded in `SHA256SUMS`.
+`SHA256SUMS` binds both revised payload hashes. `PATCH_SHA256SUMS` binds the TeX transport patch supplied in this directory. The PDF hash is a publication-coordinate identity hash; the sealed `7072f8d` PDF remains the base artefact and is not overwritten by this revision.
