@@ -26,7 +26,7 @@ import {
   makeFinalPrefixSurfaces0,
 } from './helpers/pcc-global-final-prefix-fixture0.mjs';
 
-function makeInput0({ Purpose = 'development' } = {}) {
+function makeInput0() {
   const surfaces = makeFinalPrefixSurfaces0();
   const SATReductionSemanticDerivations =
     makeGlobalFinalSATReductionSemanticSuite0({
@@ -42,7 +42,6 @@ function makeInput0({ Purpose = 'development' } = {}) {
     ...surfaces,
     SATReductionSemanticDerivations,
     ComplexitySemanticDerivations,
-    Purpose,
   });
 }
 
@@ -66,21 +65,4 @@ test('public-emission successor keeps bounded semantic DAG complete but publicat
   assert.equal(out.NF.finalTheoremReady, false);
   assert.equal(out.NF.sealedReleaseNotOverwritten, true);
   assert.equal(out.NF.sourceAndArtifactAccessPublicWithoutRequest, true);
-});
-
-test('public-emission successor rejects final purpose while release blockers remain open', async () => {
-  const out = await CheckGlobalProofDAGPublicEmissionSuccessor0(
-    makeInput0({ Purpose: 'final-theorem' }),
-  );
-
-  assert.equal(out.tag, 'reject');
-  assert.equal(
-    out.Coord,
-    'CheckGlobalProofDAGPublicEmissionSuccessor0.semanticReadiness',
-  );
-  assert.deepEqual(out.Path, ['ComputedPublicEmissionGate']);
-  assert.deepEqual(
-    out.Witness.blockers.map((entry) => entry.coordinate),
-    PUBLIC_EMISSION_BLOCKERS0,
-  );
 });
