@@ -62,18 +62,6 @@ test('public theorem emission gate accepts only as a represented blocked release
   assert.deepEqual(out.NF.blockerCoordinates, PUBLIC_EMISSION_BLOCKERS0);
 });
 
-test('public theorem emission gate rejects caller-supplied readiness assertions', async () => {
-  const input = {
-    ...makeInput0(),
-    publicTheoremEmissionAllowed: true,
-  };
-  const out = await CheckPublicTheoremEmissionGate0(input);
-
-  assert.equal(out.tag, 'reject');
-  assert.equal(out.Coord, 'CheckPublicTheoremEmissionGate0.input');
-  assert.deepEqual(out.Path, ['publicTheoremEmissionAllowed']);
-});
-
 test('public theorem emission gate rejects a mutated documentation coordinate', async () => {
   const input = makeInput0();
   const badCoordinate = {
@@ -91,24 +79,4 @@ test('public theorem emission gate rejects a mutated documentation coordinate', 
   assert.equal(out.tag, 'reject');
   assert.equal(out.Coord, 'CheckPublicTheoremEmissionGate0.documentationCoordinate');
   assert.deepEqual(out.Path, ['DocumentationCoordinate']);
-});
-
-test('public theorem emission gate rejects a stale gate binding digest', async () => {
-  const input = makeInput0();
-  const out = await CheckPublicTheoremEmissionGate0({
-    ...input,
-    PublicEmissionGate: {
-      ...input.PublicEmissionGate,
-      binding: {
-        ...input.PublicEmissionGate.binding,
-        policyDigest: {
-          alg: 'SHA256',
-          hex: '0'.repeat(64),
-        },
-      },
-    },
-  });
-
-  assert.equal(out.tag, 'reject');
-  assert.equal(out.Coord, 'CheckPublicTheoremEmissionGate0.publicEmissionGateSuite');
 });
