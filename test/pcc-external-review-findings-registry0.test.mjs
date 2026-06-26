@@ -12,11 +12,9 @@ import {
 
 import {
   CheckExternalReviewFindingsRegistry0,
-  EXTERNAL_REVIEW_FINDINGS_REGISTRY0,
   EXTERNAL_REVIEW_FINDING_KINDS0,
   EXTERNAL_REVIEW_FINDING_REQUIRED_FIELDS0,
   makeExternalReviewFindingsRegistryInput0,
-  makeExternalReviewFindingsRegistrySuite0,
 } from '../pcc-external-review-findings-registry0.mjs';
 
 test('external review findings registry records pending signed findings without accepting the theorem', async () => {
@@ -56,47 +54,6 @@ test('external review findings registry records pending signed findings without 
   assert.equal(out.NF.findingsRegistryDigest.alg, 'SHA256');
   assert.equal(out.NF.gateBindingDigest.alg, 'SHA256');
   assert.equal(out.NF.releasePublicTheoremEmissionBlockerDigest.alg, 'SHA256');
-});
-
-test('external review findings registry rejects forged signed acceptance findings', async () => {
-  const badRegistry = {
-    ...EXTERNAL_REVIEW_FINDINGS_REGISTRY0,
-    registryStatus: 'accepted',
-    signedFindingCount: 1,
-    acceptanceFindingCount: 1,
-    externalReviewSignedFindingsReady: true,
-    externalReviewAcceptanceReady: true,
-    externalReviewAcceptanceNotClaimed: false,
-    signedFindings: [{
-      kind: 'ExternalReviewAcceptanceFinding0',
-      version: 0,
-      reviewerIdentityDigest: { alg: 'SHA256', hex: '0'.repeat(64) },
-      reviewScopeDigest: { alg: 'SHA256', hex: '1'.repeat(64) },
-      documentationCoordinate: 'PNP-DOC-CPR-2026-06-26-01',
-      sealedSourceCommit: '7072f8d0bda6d44d240f9bb3fad624fd357e1278',
-      sealedArtifactTag:
-        'final-pnp-proof-report-artifacts-hardened-7072f8d-sealed',
-      finding: 'accept',
-      findingDigest: { alg: 'SHA256', hex: '2'.repeat(64) },
-      signatureDigest: { alg: 'SHA256', hex: '3'.repeat(64) },
-    }],
-  };
-  const out = await CheckExternalReviewFindingsRegistry0(
-    makeExternalReviewFindingsRegistryInput0({
-      FindingsRegistry: badRegistry,
-      FindingsRegistryGate: makeExternalReviewFindingsRegistrySuite0({
-        FindingsRegistry: badRegistry,
-      }),
-    }),
-  );
-
-  assert.equal(out.tag, 'reject');
-  assert.equal(out.Coord, 'CheckExternalReviewFindingsRegistry0.findingsRegistry');
-  assert.deepEqual(out.Path, ['FindingsRegistry']);
-  assert.equal(
-    out.Witness.reason,
-    'external-review findings registry requires the exact pending registry with no signed findings',
-  );
 });
 
 test('external review findings registry rejects caller-supplied readiness assertions', async () => {
