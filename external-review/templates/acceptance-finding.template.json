@@ -1,0 +1,24 @@
+{
+  "kind": "ExternalReviewAcceptanceFinding0",
+  "version": 0,
+  "reviewerIdentityDigest": {
+    "alg": "SHA256",
+    "hex": "<64 lowercase hex characters>"
+  },
+  "reviewScopeDigest": {
+    "alg": "SHA256",
+    "hex": "<64 lowercase hex characters>"
+  },
+  "documentationCoordinate": "PNP-DOC-CPR-2026-06-26-01",
+  "sealedSourceCommit": "7072f8d0bda6d44d240f9bb3fad624fd357e1278",
+  "sealedArtifactTag": "final-pnp-proof-report-artifacts-hardened-7072f8d-sealed",
+  "finding": "accept",
+  "findingDigest": {
+    "alg": "SHA256",
+    "hex": "<64 lowercase hex characters>"
+  },
+  "signatureDigest": {
+    "alg": "SHA256",
+    "hex": "<64 lowercase hex characters>"
+  }
+}
