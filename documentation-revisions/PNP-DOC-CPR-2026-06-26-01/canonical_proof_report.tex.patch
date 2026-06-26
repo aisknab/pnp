@@ -39,9 +39,10 @@
  P=NP
  \]
 -by reducing SAT to exact minimization of a specially locked multi-output NAND direct-wire word with constant residual slack, proving polynomial residual-band exact minimization by a finite proof-carrying package, and checking the generated package through a deterministic executable acceptance and replay stack.
-+through exact minimization of a specially locked multi-output NAND direct-wire word with constant residual slack, polynomial residual-band exact minimization by a finite proof-carrying package, and deterministic executable acceptance and replay of the generated package.  The route remains subject to independent mathematical and checker-soundness review, and public theorem emission is not activated by this documentation revision.
- 
+-
 -The proof route is organized around the implication
++through exact minimization of a specially locked multi-output NAND direct-wire word with constant residual slack, polynomial residual-band exact minimization by a finite proof-carrying package, and deterministic executable acceptance and replay of the generated package.  The route remains subject to independent mathematical and checker-soundness review, and public theorem emission is not activated by this documentation revision.
++
 +The claimed proof route is organized around the implication
  \[
  \begin{gathered}
@@ -60,9 +61,10 @@
  
  \subsection{Claim boundary}
 -The claim boundary is the accepted, replayable finite artefact stack culminating in \texttt{CheckFinalPNPProofReport0}.  The mathematical theorem is asserted under the explicit checker trust model: the finite package, acceptance run, replay, final certificate, release gate, and proof report are the objects being checked, and the public claim is made only because the final proof report accepts.
-+The sealed claim boundary is the accepted, replayable finite artefact stack culminating in \texttt{CheckFinalPNPProofReport0}.  This publication revision treats that boundary as a recorded conditional claim requiring independent review: the finite package, acceptance run, replay, final certificate, release gate, and proof report are the objects checked by the repository implementation, while mathematical soundness, checker sufficiency, and absence of missing obligations remain separate review tasks.
- 
+-
 -\begin{theorem}[Final accepted finite-certificate theorem]
++The sealed claim boundary is the accepted, replayable finite artefact stack culminating in \texttt{CheckFinalPNPProofReport0}.  This publication revision treats that boundary as a recorded conditional claim requiring independent review: the finite package, acceptance run, replay, final certificate, release gate, and proof report are the objects checked by the repository implementation, while mathematical soundness, checker sufficiency, and absence of missing obligations remain separate review tasks.
++
 +\begin{theorem}[Recorded finite-certificate theorem boundary]
  Let \(P_{gen}=\GenPack()\).  In the sealed revision, the executable artefact stack records
  \[
