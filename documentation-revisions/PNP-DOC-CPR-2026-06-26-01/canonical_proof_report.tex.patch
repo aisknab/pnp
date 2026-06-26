@@ -1,0 +1,105 @@
+--- canonical_proof_report.tex
++++ canonical_proof_report_public_review_20260626.tex
+@@ -87,21 +87,23 @@
+ \vspace*{1.0cm}
+ {\Huge\bfseries Residual-Slack Compatible Descendant Completeness for Locked NAND\par}
+ \vspace{0.45cm}
+-{\Large A machine-checkable certificate report for \(P=NP\) over the locked NAND residual-slack package\par}
++{\Large A machine-checkable certificate report for a claimed \(P=NP\) route over the locked NAND residual-slack package\par}
+ \vspace{0.75cm}
+ {\large Residual-band exact minimization, locked NAND SAT embedding, traceable normalization, saturated support calculus, projection-defect cellization, hereditary and budget closure, selector realization, and generated proof-package checking\par}
+ \vspace{0.85cm}
+-{\large Complete machine-checkable proof report.\par}
++{\large Public-review documentation revision of the sealed proof-report artefact.\par}
+ \vfill
+ \begin{minipage}{0.88\textwidth}
+-\textbf{Accepted proof-report boundary.}
++\textbf{Recorded proof-report boundary (sealed historical claim).}
+ \[
+ \CheckPack(\GenPack())=\mathsf{accept}\quad\Longrightarrow\quad P=NP.
+ \]
+-This paper records the completed finite-certificate route and its executable release seal.  The repository emits an accepted \texttt{FinalPNPProofReport0} whose theorem field is \(P=NP\), whose antecedent is \(\CheckPack(\GenPack())=\mathsf{accept}\), and whose final acceptance/replay, final certificate, release gate, release audit, and proof report records all accept.  The hardened validation log for the sealed repository state reports 1121 passing tests, no failures, no cancellations, and an accepted final proof-report summary and full check record.  Release custody separates the source/checker revision from the durable artefact-bearing release: source tag \texttt{final-pnp-proof-report-hardened-7072f8d}; sealed artefact tag \texttt{final-pnp-proof-report-artifacts-hardened-7072f8d-sealed}.  The materialized proof-report artefact bundle is committed under \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/}; its manifest is \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/release-seal.json}, and non-self file-level checksums are recorded in \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS}.  This release includes the completed residual-band hardening pass through Terminal MuBridge, SaturatePositive, BCELReady, BN2--BN6, Realizer/HB closure, and ZeroSlack final closure. Public orientation, verification materials, and review channels are maintained by PNP Labs at \url{https://pnplabs.com.au/}. Review, source-access, and artefact-access requests should be sent to \href{mailto:review@pnplabs.com.au}{review@pnplabs.com.au}; security or artefact-integrity disclosures should be sent to \href{mailto:security@pnplabs.com.au}{security@pnplabs.com.au}.
++This documentation revision records the sealed finite-certificate route and its executable release seal as a \emph{claimed proof-report boundary} for review.  The sealed repository state emitted an accepted \texttt{FinalPNPProofReport0} whose theorem field is \(P=NP\), whose antecedent is \(\CheckPack(\GenPack())=\mathsf{accept}\), and whose final acceptance/replay, final certificate, release gate, release audit, and proof report records all accepted.  Those acceptance records are implementation-level evidence about the finite artefact stack; they are not a substitute for independent mathematical and checker-soundness review.  Release custody separates the source/checker revision from the durable artefact-bearing release: source tag \texttt{final-pnp-proof-report-hardened-7072f8d}; sealed artefact tag \texttt{final-pnp-proof-report-artifacts-hardened-7072f8d-sealed}.  The materialized proof-report artefact bundle is committed under \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/}; its manifest is \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/release-seal.json}, and non-self file-level checksums are recorded in \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS}.  Public source, checker code, materialized artefacts, reviewer guidance, and reproduction instructions are available without an access request in the public repository at \url{https://github.com/aisknab/pnp}. Review correspondence may be sent to \href{mailto:review@pnplabs.com.au}{review@pnplabs.com.au}; sensitive security or artefact-integrity disclosures should be sent to \href{mailto:security@pnplabs.com.au}{security@pnplabs.com.au}.
++\medskip
++\textbf{Documentation revision \texttt{PNP-DOC-CPR-2026-06-26-01}.} This documentation-only successor corrects public source- and artefact-access instructions and changes the publication framing from direct theorem emission to explicit review status. It does not overwrite or modify the sealed \texttt{7072f8d} source/checker release or its sealed artefact release, and it does not by itself activate public theorem emission.
+ \end{minipage}
+ \vfill
+-{\small This paper states the final theorem under the explicit checker trust model and reproducibility protocol recorded in Section~\ref{sec:final-proof-report}.}\par
++{\small This revision states the sealed checker boundary and current public-review status under the reproducibility protocol recorded in Section~\ref{sec:final-proof-report}.}\par
+ \end{titlepage}
+ 
+ \tableofcontents
+@@ -110,13 +112,13 @@
+ \section{Executive status and claim boundary}
+ 
+ \subsection{Main message}
+-This paper proves
++This documentation revision records a claimed route to
+ \[
+ P=NP
+ \]
+-by reducing SAT to exact minimization of a specially locked multi-output NAND direct-wire word with constant residual slack, proving polynomial residual-band exact minimization by a finite proof-carrying package, and checking the generated package through a deterministic executable acceptance and replay stack.
++through exact minimization of a specially locked multi-output NAND direct-wire word with constant residual slack, polynomial residual-band exact minimization by a finite proof-carrying package, and deterministic executable acceptance and replay of the generated package.  The route remains subject to independent mathematical and checker-soundness review, and public theorem emission is not activated by this documentation revision.
+ 
+-The proof route is organized around the implication
++The claimed proof route is organized around the implication
+ \[
+ \begin{gathered}
+ \text{accepted PCCPack over locked NAND is valid and polynomial}\\
+@@ -129,7 +131,7 @@
+ \[
+ \CheckPack(\GenPack())=\mathsf{accept},
+ \]
+-and the final theorem recorded by the accepted proof report is
++and the sealed accepted proof report recorded the conditional theorem
+ \[
+ \CheckPack(\GenPack())=\mathsf{accept}\Longrightarrow P=NP.
+ \]
+@@ -155,24 +157,24 @@
+ \]
+ 
+ \subsection{Claim boundary}
+-The claim boundary is the accepted, replayable finite artefact stack culminating in \texttt{CheckFinalPNPProofReport0}.  The mathematical theorem is asserted under the explicit checker trust model: the finite package, acceptance run, replay, final certificate, release gate, and proof report are the objects being checked, and the public claim is made only because the final proof report accepts.
++The sealed claim boundary is the accepted, replayable finite artefact stack culminating in \texttt{CheckFinalPNPProofReport0}.  This publication revision treats that boundary as a recorded conditional claim requiring independent review: the finite package, acceptance run, replay, final certificate, release gate, and proof report are the objects checked by the repository implementation, while mathematical soundness, checker sufficiency, and absence of missing obligations remain separate review tasks.
+ 
+-\begin{theorem}[Final accepted finite-certificate theorem]
++\begin{theorem}[Recorded finite-certificate theorem boundary]
+ Let \(P_{gen}=\GenPack()\).  In the sealed revision, the executable artefact stack records
+ \[
+ \CheckPack(P_{gen})=\mathsf{accept},\qquad
+ \CheckAcceptRun(P_{gen})=\mathsf{accept},\qquad
+ \ReplayAcceptRun(P_{gen})=\mathsf{accept},
+ \]
+-and the final proof report accepts the public theorem statement
++and the final proof report records the conditional theorem statement
+ \[
+ \CheckPack(\GenPack())=\mathsf{accept}\Longrightarrow P=NP.
+ \]
+-Therefore SAT is decidable in polynomial time and \(P=NP\).
++This documentation revision preserves that sealed conditional statement as the object for review. It does not itself discharge independent mathematical review or activate public theorem emission.
+ \end{theorem}
+ 
+ \begin{proof}
+-Sections 2--19 prove the locked NAND residual-slack certificate route: an accepted explicit package yields polynomial exact residual-band minimization and hence SAT in polynomial time.  Sections 20 and~\ref{sec:final-proof-report} identify the generated package, deterministic acceptance run, replay, final certificate, release gate, and proof-report artefacts.  The final accepted report records accepted \texttt{CheckPCCPackexp0}, accepted \texttt{CheckAcceptRun0}, accepted replay, accepted final verdict, accepted final certificate, accepted release audit, accepted final release gate, and accepted proof report.  The report's theorem field has antecedent \(\CheckPack(\GenPack())=\mathsf{accept}\), consequent \(P=NP\), and conditional flag true.  Applying the package-sufficiency theorem to the accepted generated package gives \(SAT\in P\). Since \(SAT\) is NP-complete, \(P=NP\).
++Sections 2--19 state the locked NAND residual-slack certificate route: an accepted explicit package is intended to yield polynomial exact residual-band minimization and hence SAT in polynomial time.  Sections 20 and~\ref{sec:final-proof-report} identify the generated package, deterministic acceptance run, replay, final certificate, release gate, and proof-report artefacts.  The final accepted report records accepted \texttt{CheckPCCPackexp0}, accepted \texttt{CheckAcceptRun0}, accepted replay, accepted final verdict, accepted final certificate, accepted release audit, accepted final release gate, and accepted proof report.  The report's theorem field has antecedent \(\CheckPack(\GenPack())=\mathsf{accept}\), consequent \(P=NP\), and conditional flag true.  The validity of the package-sufficiency theorem, the SAT reduction, and the final complexity implication is the central review obligation rather than a conclusion newly emitted by this documentation revision.
+ \end{proof}
+ 
+ \subsection{Central scale correction}
+@@ -2766,7 +2768,7 @@
+ \begin{center}
+ \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/}
+ \end{center}
+-Its central manifest is \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/release-seal.json}, and the file-level checksum ledger is \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS}.  Ordinary checksum verification uses all non-self entries in \texttt{SHA256SUMS}; the checksum of \texttt{SHA256SUMS} itself is detached metadata in \texttt{SHA256SUMS.sha256}.  If repository access is restricted, reviewers should request source and artefact access through PNP Labs at \href{mailto:review@pnplabs.com.au}{review@pnplabs.com.au}. Security or artefact-integrity disclosures should be sent to \href{mailto:security@pnplabs.com.au}{security@pnplabs.com.au}.
++Its central manifest is \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/release-seal.json}, and the file-level checksum ledger is \url{proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS}.  Ordinary checksum verification uses all non-self entries in \texttt{SHA256SUMS}; the checksum of \texttt{SHA256SUMS} itself is detached metadata in \texttt{SHA256SUMS.sha256}.  Public source and artefact access is available without an access request at \url{https://github.com/aisknab/pnp}. Reviewers should clone that repository, fetch all tags, and use the pinned source and artefact coordinates above rather than the moving \texttt{main} branch when auditing the sealed release. The current reviewer guide and fresh-clone reproduction procedure are \url{docs/reviewer_guide.md} and \url{docs/reproducibility.md}. Review correspondence may be sent to \href{mailto:review@pnplabs.com.au}{review@pnplabs.com.au}; sensitive security or artefact-integrity disclosures should be sent to \href{mailto:security@pnplabs.com.au}{security@pnplabs.com.au}.
+ 
+ There are two verification modes.  Artefact verification checks out the sealed artefact release and verifies the committed JSON artefacts against \texttt{SHA256SUMS}, excluding any self-entry.  Regeneration verification checks that the source/checker revision emits an accepted \texttt{CheckFinalPNPProofReport0} record with theorem statement \(P=NP\), antecedent \(\CheckPack(\GenPack())=\mathsf{accept}\), accepted status, and accepted package/replay/certificate linkage.  Exact release-context digest equality is required only when regenerating in the same clean release context used to create the committed artefact bundle.
+ 
+@@ -2956,7 +2958,7 @@
+ \end{center}
+ The required durable files are \texttt{release-seal.json}, \texttt{SHA256SUMS}, \texttt{SHA256SUMS.sha256}, the compact artefacts under \texttt{compact/}, and the full artefacts under \texttt{full/}.  File-level verification checks the committed bundle against \texttt{SHA256SUMS} while excluding any \texttt{SHA256SUMS} self-entry.
+ 
+-In regeneration mode, the reviewer checks that the recorded source/checker revision emits an accepted \texttt{CheckFinalPNPProofReport0} record with the same theorem statement, accepted status, and package/replay/certificate linkage.  Exact equality to every committed \texttt{release-seal.json} digest is a property of the frozen artefact bundle and of reproductions run in the same clean release context; fresh regenerations in a different output context may produce different release-context digests while still preserving accepted theorem fields and stable core package, accept-run, acceptance-transcript, final-verdict, and \texttt{CheckPCCPackexp0} digests.  The regeneration commands are those shown in Section 20.22.  Review, source-access, and artefact-access requests should be sent to \href{mailto:review@pnplabs.com.au}{review@pnplabs.com.au}; security or artefact-integrity disclosures should be sent to \href{mailto:security@pnplabs.com.au}{security@pnplabs.com.au}.
++In regeneration mode, the reviewer checks that the recorded source/checker revision emits an accepted \texttt{CheckFinalPNPProofReport0} record with the same theorem statement, accepted status, and package/replay/certificate linkage.  Exact equality to every committed \texttt{release-seal.json} digest is a property of the frozen artefact bundle and of reproductions run in the same clean release context; fresh regenerations in a different output context may produce different release-context digests while still preserving accepted theorem fields and stable core package, accept-run, acceptance-transcript, final-verdict, and \texttt{CheckPCCPackexp0} digests.  The regeneration commands are those shown in Section 20.22.  Source and artefact access is public at \url{https://github.com/aisknab/pnp}; no access request is required. Reviewers should consult \url{docs/reviewer_guide.md} and \url{docs/reproducibility.md}. Review correspondence may be sent to \href{mailto:review@pnplabs.com.au}{review@pnplabs.com.au}; sensitive security or artefact-integrity disclosures should be sent to \href{mailto:security@pnplabs.com.au}{security@pnplabs.com.au}.
+ 
+ \section{Appendix A: locked NAND macro truth signatures}
+ 
