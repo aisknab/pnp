@@ -1,0 +1,51 @@
+{
+  "kind": "PNPStatus0",
+  "version": 0,
+  "project": "PNP",
+  "status": "public-review self-verification stack in progress",
+  "claimStatus": "internal-proof-certificate-stack-under-public-review-boundary",
+  "internalProofStackAccepted": true,
+  "publicTheoremEmissionAllowed": false,
+  "finalTheoremReady": false,
+  "activeFinalNodeIds": [],
+  "remainingBlockers": [
+    "Release.UnrestrictedFinalSoundness",
+    "ExternalReview.Acceptance"
+  ],
+  "pnpVerifyCommand": "npm run pnp:verify",
+  "pnpVerifyOutput": "artifacts/pnp-verify-all/latest-verdict.json",
+  "canonicalReportCoordinate": "historical-final-pnp-proof-report-hardened-7072f8d",
+  "successorReportCoordinate": "PNP-REPORT-SEAL-2026-06-27-01",
+  "theoremBindingLedgerCoordinate": "REPORT-THEOREM-BINDINGS-2026-06-27-01",
+  "minimalKernelCoordinate": "PNP-MINIMAL-KERNEL-2026-06-27-01",
+  "noSharedCodePolicyCoordinate": "PNP-INDEPENDENT-VERIFIERS-NO-SHARED-CODE-2026-06-27-01",
+  "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-PNP-VERIFY-ALL-01",
+  "lastVerifiedCommit": "current-checkout",
+  "verificationSurfaces": [
+    {
+      "id": "theorem-binding-ledger-audit",
+      "command": "node scripts/audit-report-theorem-bindings.mjs --json",
+      "outputKind": "accept|reject"
+    },
+    {
+      "id": "minimal-kernel-cross-verify",
+      "command": "npm run cross-verify:json",
+      "outputKind": "accept|reject"
+    },
+    {
+      "id": "independent-no-shared-code-audit",
+      "command": "npm run independent:no-shared-code",
+      "outputKind": "accept|reject"
+    },
+    {
+      "id": "one-command-verifier",
+      "command": "npm run pnp:verify",
+      "outputKind": "artifacts/pnp-verify-all/latest-verdict.json"
+    }
+  ],
+  "nonClaims": [
+    "This status file does not activate public theorem emission.",
+    "This status file does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "The historical canonical report may be superseded by successor public-review reports, but this status file records the current non-activation boundary."
+  ]
+}
