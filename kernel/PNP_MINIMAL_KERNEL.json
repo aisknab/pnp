@@ -1,0 +1,417 @@
+{
+  "kind": "PNPMinimalKernel0",
+  "version": 0,
+  "coordinate": "PNP-MINIMAL-KERNEL-2026-06-27-01",
+  "title": "Minimal proof-kernel coordinate",
+  "purpose": "Provide a small, explicit entrypoint that tells reviewers which kernel rules, checker surfaces, proof-spine stages, and release-boundary gates must be inspected before reading the rest of the repository.",
+  "status": "minimal-kernel-coordinate-ready",
+  "createdForPrTrack": "PR-80 kernel: add minimal proof kernel coordinate",
+  "claimBoundary": {
+    "project": "PNP",
+    "currentPublicStatus": "public-review successor-boundary; internal proof-certificate stack under checker trust model",
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "quarantinedFinalNodeIds": [
+      "Final.PackageSoundness",
+      "Final.GeneratedPackageSufficiency",
+      "Final.AcceptedPackageImpliesSATinP",
+      "Final.AcceptedPackageImpliesPEqualsNP"
+    ],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "entrypoints": {
+    "kernelJson": "kernel/PNP_MINIMAL_KERNEL.json",
+    "checker": "pcc-minimal-kernel0.mjs",
+    "tests": "test/pcc-minimal-kernel0.test.mjs",
+    "theoremBindingLedger": "report-bindings/REPORT_THEOREM_BINDINGS.json",
+    "successorReportSeal": "successor-report-seals/PNP-REPORT-SEAL-2026-06-27-01/SEAL.json"
+  },
+  "predecessors": [
+    {
+      "id": "REPORT-THEOREM-BINDINGS-2026-06-27-01",
+      "kind": "theorem-to-checker-binding-ledger",
+      "checkerId": "audit-report-theorem-bindings0",
+      "path": "report-bindings/REPORT_THEOREM_BINDINGS.json",
+      "ready": true,
+      "activatesPublicTheorem": false
+    },
+    {
+      "id": "PNP-REPORT-SEAL-2026-06-27-01",
+      "kind": "successor-public-review-boundary-seal",
+      "checkerId": "CheckSuccessorPublicReviewReportSeal0",
+      "path": "pcc-successor-report-seal0.mjs",
+      "ready": true,
+      "activatesPublicTheorem": false
+    },
+    {
+      "id": "GLOBAL-PROOF-DAG0",
+      "kind": "global-proof-dag-surface",
+      "checkerId": "CheckGlobalProofDAG0",
+      "path": "pcc-global-proof-dag0.mjs",
+      "ready": true,
+      "activatesPublicTheorem": false
+    }
+  ],
+  "proofKernel": {
+    "primitiveRuleSource": "pcc-kimpl0.mjs#KERNEL_RULES0",
+    "primitiveRules": [
+      "Eq",
+      "Subst",
+      "Record",
+      "DAGInd",
+      "LedgerInd",
+      "OblTopoInd",
+      "TraceInd",
+      "FiniteExhaust",
+      "DPInd",
+      "Hall",
+      "RankInd",
+      "MinCounterexample",
+      "IntArith",
+      "Transport",
+      "TruthVec",
+      "FiniteRel"
+    ],
+    "sigmaSource": "pcc-kimpl0.mjs#SIGMA_REQUIRED_THEOREMS0",
+    "sigmaTheorems": [
+      "V53",
+      "V54"
+    ],
+    "globalFinalSource": "pcc-global-proof-dag0.mjs#GLOBAL_DAG_REQUIRED_FINALS0",
+    "quarantinedFinalNodeIds": [
+      "Final.PackageSoundness",
+      "Final.GeneratedPackageSufficiency",
+      "Final.AcceptedPackageImpliesSATinP",
+      "Final.AcceptedPackageImpliesPEqualsNP"
+    ],
+    "requiredPackageTheoremSource": "pcc-global-proof-dag0.mjs#GLOBAL_DAG_REQUIRED_PACKAGE_THEOREMS0",
+    "requiredPackageTheoremIds": [
+      "E.VerifyDWSoundness",
+      "N.TraceableNormalization",
+      "Splice.BoundedAndComposed",
+      "FT.FiniteTableCoverage",
+      "X.CriticalWindowRouting",
+      "BC.BranchCycleRouting",
+      "UN.UnaryDecoderRouting",
+      "HN.LeafTightness",
+      "HResolve.GlobalHereditaryResolver",
+      "BUD.BudgetResolver",
+      "NORFF.FrontierFaithfulComparison",
+      "RW.BCELReady",
+      "BN2.SideTightCoherentOptimum",
+      "BN3.SimultaneousEnvelope",
+      "BN4.ActivationExact",
+      "BN5.FullShadowLocalization",
+      "PkgC.SeparatingConsumers",
+      "BN6.HypergraphPacket",
+      "Packet.SelectorSeeds",
+      "R.SelectorRealization",
+      "HB.NegativeClosure",
+      "O.ZeroSlackOracle",
+      "G.LockedNANDThreshold",
+      "Final.FrameworkMatch",
+      "PACK.PackageSufficiency"
+    ]
+  },
+  "checkerSurface": [
+    {
+      "id": "CheckVerifierFrag0",
+      "file": "pcc-verifier-frag0.mjs",
+      "role": "canonical JSON digesting and finite audit-case harness",
+      "minimumKernelRole": "canonicalization-digest-entrypoint"
+    },
+    {
+      "id": "CheckKImpl0",
+      "file": "pcc-kimpl0.mjs",
+      "role": "PCC-K primitive rule table, Sigma registry, reflection registry, and bounded proof-node checks",
+      "minimumKernelRole": "primitive-rule-and-schema-entrypoint"
+    },
+    {
+      "id": "CheckGlobalProofDAG0",
+      "file": "pcc-global-proof-dag0.mjs",
+      "role": "global dependency DAG, required package-theorem nodes, final nodes, imports, and no-min policy",
+      "minimumKernelRole": "proof-spine-dependency-entrypoint"
+    },
+    {
+      "id": "CheckGPack0",
+      "file": "pcc-gpack0.mjs",
+      "role": "locked NAND construction package and threshold certificate surface",
+      "minimumKernelRole": "sat-reduction-entrypoint"
+    },
+    {
+      "id": "CheckFinalFrameworkMatch0",
+      "file": "pcc-final-framework0.mjs",
+      "role": "framework compatibility between residual-band minimizer and locked NAND reduction",
+      "minimumKernelRole": "cross-framework-interface-entrypoint"
+    },
+    {
+      "id": "CheckSATDecision0",
+      "file": "pcc-global-final-sat-reduction-semantic0.mjs",
+      "role": "SAT decision and locked-threshold semantic surface",
+      "minimumKernelRole": "sat-threshold-decision-entrypoint"
+    },
+    {
+      "id": "CheckSATBounds0",
+      "file": "pcc-global-final-complexity-semantic0.mjs",
+      "role": "polynomial-bound and SAT-in-P to P=NP implication surface",
+      "minimumKernelRole": "complexity-implication-entrypoint"
+    },
+    {
+      "id": "CheckPCCPackexp0",
+      "file": "pcc-check-pcc-pack-exp0.mjs",
+      "role": "top-level generated package checker surface",
+      "minimumKernelRole": "accepted-package-entrypoint"
+    },
+    {
+      "id": "CheckFinalPNPProofReport0",
+      "file": "pcc-final-proof-report0.mjs",
+      "role": "historical final proof-report acceptance surface",
+      "minimumKernelRole": "historical-report-surface"
+    },
+    {
+      "id": "CheckSuccessorPublicReviewReportSeal0",
+      "file": "pcc-successor-report-seal0.mjs",
+      "role": "successor public-review boundary preserving blocker and non-emission policy",
+      "minimumKernelRole": "current-public-boundary-entrypoint"
+    },
+    {
+      "id": "audit-report-theorem-bindings0",
+      "file": "scripts/audit-report-theorem-bindings.mjs",
+      "role": "machine-readable theorem-to-checker binding ledger audit",
+      "minimumKernelRole": "report-theorem-binding-entrypoint"
+    }
+  ],
+  "proofSpine": [
+    {
+      "id": "spine.kernel-rules",
+      "summary": "Start with the PCC-K primitive rules, Sigma theorems, proof-DAG discipline, canonical bytes, and digest protocol.",
+      "ruleFamilies": [
+        "Eq",
+        "Subst",
+        "Record",
+        "DAGInd",
+        "FiniteExhaust",
+        "IntArith",
+        "TruthVec",
+        "FiniteRel"
+      ],
+      "checkerIds": [
+        "CheckVerifierFrag0",
+        "CheckKImpl0",
+        "CheckGlobalProofDAG0"
+      ],
+      "packageTheoremIds": [],
+      "reportBindingIds": [
+        "THM-19-2"
+      ]
+    },
+    {
+      "id": "spine.direct-wire-semantics",
+      "summary": "Direct-wire words, compatible replacement, VerifyDW soundness, mode firewall, charge ownership, and row/proof-reference discipline.",
+      "ruleFamilies": [
+        "Eq",
+        "Record",
+        "DAGInd",
+        "LedgerInd",
+        "TraceInd",
+        "Transport",
+        "TruthVec",
+        "FiniteRel"
+      ],
+      "checkerIds": [
+        "CheckVerifierFrag0",
+        "CheckPCCPackexp0",
+        "CheckGlobalProofDAG0"
+      ],
+      "packageTheoremIds": [
+        "E.VerifyDWSoundness",
+        "N.TraceableNormalization",
+        "NORFF.FrontierFaithfulComparison"
+      ],
+      "reportBindingIds": [
+        "THM-6-1",
+        "THM-10-1",
+        "THM-19-2"
+      ]
+    },
+    {
+      "id": "spine.residual-band-minimization",
+      "summary": "Residual slack descent, BCEL-ready positive nuclei, BN2-BN6 packet extraction, selector realization, HB closure, ZeroSlack, and residual-band exact minimization.",
+      "ruleFamilies": [
+        "DAGInd",
+        "LedgerInd",
+        "FiniteExhaust",
+        "DPInd",
+        "Hall",
+        "RankInd",
+        "MinCounterexample",
+        "IntArith"
+      ],
+      "checkerIds": [
+        "CheckPCCPackexp0",
+        "CheckGlobalProofDAG0"
+      ],
+      "packageTheoremIds": [
+        "RW.BCELReady",
+        "BN2.SideTightCoherentOptimum",
+        "BN3.SimultaneousEnvelope",
+        "BN4.ActivationExact",
+        "BN5.FullShadowLocalization",
+        "PkgC.SeparatingConsumers",
+        "BN6.HypergraphPacket",
+        "Packet.SelectorSeeds",
+        "R.SelectorRealization",
+        "HB.NegativeClosure",
+        "O.ZeroSlackOracle"
+      ],
+      "reportBindingIds": [
+        "THM-10-4",
+        "THM-11-1",
+        "THM-11-2",
+        "THM-11-3",
+        "THM-11-4",
+        "THM-11-6",
+        "THM-13-4",
+        "THM-14-1",
+        "THM-14-2",
+        "THM-15-1",
+        "THM-16-1",
+        "THM-16-2"
+      ]
+    },
+    {
+      "id": "spine.locked-nand-sat-threshold",
+      "summary": "Locked NAND SAT embedding, baseline distinctness, trace equivalence, final lock separation, threshold, and residual slack at most four.",
+      "ruleFamilies": [
+        "Eq",
+        "DAGInd",
+        "TraceInd",
+        "FiniteExhaust",
+        "IntArith",
+        "TruthVec"
+      ],
+      "checkerIds": [
+        "CheckGPack0",
+        "CheckFinalFrameworkMatch0",
+        "CheckSATDecision0",
+        "CheckGlobalProofDAG0"
+      ],
+      "packageTheoremIds": [
+        "G.LockedNANDThreshold",
+        "Final.FrameworkMatch"
+      ],
+      "reportBindingIds": [
+        "THM-17-2"
+      ]
+    },
+    {
+      "id": "spine.complexity-implication",
+      "summary": "Residual-band exact minimization plus locked NAND threshold yields SAT in P; the complexity ledger records the remaining implication surface without public theorem activation.",
+      "ruleFamilies": [
+        "Record",
+        "DAGInd",
+        "IntArith",
+        "Transport"
+      ],
+      "checkerIds": [
+        "CheckSATDecision0",
+        "CheckSATBounds0",
+        "CheckGlobalProofDAG0"
+      ],
+      "packageTheoremIds": [
+        "Final.AcceptedPackageImpliesSATinP",
+        "Final.AcceptedPackageImpliesPEqualsNP"
+      ],
+      "reportBindingIds": [
+        "THM-18-2"
+      ]
+    },
+    {
+      "id": "spine.package-acceptance",
+      "summary": "Generated-package acceptance, global proof DAG, no-hidden-minimization discipline, bounds, final integration, and CheckPCCPackexp0.",
+      "ruleFamilies": [
+        "Record",
+        "LedgerInd",
+        "FiniteExhaust",
+        "DPInd",
+        "IntArith"
+      ],
+      "checkerIds": [
+        "CheckPCCPackexp0",
+        "CheckGlobalProofDAG0",
+        "CheckFinalFrameworkMatch0",
+        "CheckSATBounds0"
+      ],
+      "packageTheoremIds": [
+        "PACK.PackageSufficiency",
+        "Final.PackageSoundness",
+        "Final.GeneratedPackageSufficiency"
+      ],
+      "reportBindingIds": [
+        "THM-18-1",
+        "THM-20-19"
+      ]
+    },
+    {
+      "id": "spine.report-and-release-boundary",
+      "summary": "Historical final proof-report surface is bound to the successor public-review seal; final theorem nodes remain quarantined and non-emitting.",
+      "ruleFamilies": [
+        "Record",
+        "LedgerInd",
+        "IntArith"
+      ],
+      "checkerIds": [
+        "CheckFinalPNPProofReport0",
+        "CheckSuccessorPublicReviewReportSeal0",
+        "audit-report-theorem-bindings0"
+      ],
+      "packageTheoremIds": [],
+      "reportBindingIds": [
+        "THM-1-1",
+        "THM-20-19"
+      ]
+    }
+  ],
+  "quarantinedConclusions": [
+    {
+      "id": "Final.PackageSoundness",
+      "status": "quarantined-by-successor-public-review-boundary",
+      "notActive": true,
+      "publicTheoremEmissionAllowed": false
+    },
+    {
+      "id": "Final.GeneratedPackageSufficiency",
+      "status": "quarantined-by-successor-public-review-boundary",
+      "notActive": true,
+      "publicTheoremEmissionAllowed": false
+    },
+    {
+      "id": "Final.AcceptedPackageImpliesSATinP",
+      "status": "quarantined-by-successor-public-review-boundary",
+      "notActive": true,
+      "publicTheoremEmissionAllowed": false
+    },
+    {
+      "id": "Final.AcceptedPackageImpliesPEqualsNP",
+      "status": "quarantined-by-successor-public-review-boundary",
+      "notActive": true,
+      "publicTheoremEmissionAllowed": false
+    }
+  ],
+  "explicitNonClaims": [
+    "This minimal kernel coordinate is an audit entrypoint, not a public theorem activation.",
+    "It does not discharge Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "It does not mutate the historical sealed report or rewrite its theorem-emission wording.",
+    "It does not assert that the trust base is empty; it makes the kernel surface easier to inspect."
+  ],
+  "auditRequirements": [
+    "Check primitive-rule and Sigma-rule soundness separately from this coordinate.",
+    "Check every proof-spine checker id against the theorem-to-checker binding ledger.",
+    "Check that locked NAND threshold and residual-band minimization use the same direct-wire semantics.",
+    "Check no final theorem node is made active before the successor release gates permit public theorem emission."
+  ]
+}
