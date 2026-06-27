@@ -1,41 +1,13 @@
 # Cross-verifier artifacts
 
-`scripts/cross-verify.mjs` writes the latest cross-runtime minimal-kernel agreement verdict here:
-
-```text
-artifacts/cross-verify/latest-verdict.json
-```
+`scripts/cross-verify.mjs` writes the latest cross-runtime minimal-kernel agreement verdict to `artifacts/cross-verify/latest-verdict.json`.
 
 The generated verdict is intentionally not committed as a stable source artifact. It is a replay product of the current checkout.
 
-## Command
+Run it with `npm run cross-verify:json`.
 
-```bash
-node scripts/cross-verify.mjs --json
-```
+The command runs the JavaScript minimal-kernel checker, the JavaScript theorem-binding ledger audit, and the independent Python minimal-kernel verifier. It accepts only when they agree on the minimal-kernel coordinate, byte SHA256 values for the kernel and binding ledgers, checker-surface count, proof-spine count, the disabled public-emission state, the disabled final-readiness state, empty active final nodes, and the blocker list.
 
-The command runs three agreement surfaces:
+The package script surface is intentionally rebaselined for the public-review self-verification track. `cross-verify` and `cross-verify:json` are now first-class package scripts, and `CheckPublicEntryReleaseSurface0` records the baseline coordinate for that change.
 
-1. JavaScript minimal-kernel checker: `CheckMinimalKernel0`.
-2. JavaScript theorem-binding ledger audit: `scripts/audit-report-theorem-bindings.mjs`.
-3. Independent Python minimal-kernel verifier: `independent-verifiers/python/verify_minimal_kernel.py`.
-
-The verdict accepts only if the verifiers agree on:
-
-- the minimal-kernel coordinate,
-- the byte SHA256 of `kernel/PNP_MINIMAL_KERNEL.json`,
-- the byte SHA256 of `report-bindings/REPORT_THEOREM_BINDINGS.json`,
-- checker-surface count,
-- proof-spine count,
-- disabled public theorem emission,
-- disabled final-theorem readiness,
-- empty active final nodes, and
-- exact remaining blockers.
-
-## Public surface discipline
-
-This runner is intentionally not exported through `package.json` scripts because the public release surface is frozen. Keeping the command as a direct script invocation preserves the package entry/script freeze while still making the cross-verifier reproducible.
-
-## Boundary
-
-The cross-verifier verdict is a redundancy and reproducibility check. It does not discharge `Release.UnrestrictedFinalSoundness`, does not discharge `ExternalReview.Acceptance`, and does not allow public theorem emission.
+The cross-verifier verdict is a redundancy and reproducibility check only. It does not clear the remaining blockers and does not activate public emission.
