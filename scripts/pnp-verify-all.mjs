@@ -36,6 +36,7 @@ export async function RunPNPVerifyAll0(options = {}) {
     'scripts/audit-report-theorem-bindings.mjs',
     'scripts/audit-independent-verifiers-no-shared-code.mjs',
     'scripts/audit-checker-totality.mjs',
+    'scripts/audit-negative-checker-mutations.mjs',
     'scripts/pnp-verify-all.mjs',
   ];
   for (const target of nodeSyntaxTargets) {
@@ -76,6 +77,8 @@ export async function RunPNPVerifyAll0(options = {}) {
     { id: 'trust-base-shrink-plan-tests', command: process.execPath, args: ['--test', 'audits/trust-base-shrink-plan0.test.mjs'], kind: 'process' },
     { id: 'checker-totality-audit', command: process.execPath, args: ['scripts/audit-checker-totality.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'checker-totality-tests', command: process.execPath, args: ['--test', 'audits/checker-totality0.test.mjs'], kind: 'process' },
+    { id: 'negative-checker-mutation-audit', command: process.execPath, args: ['scripts/audit-negative-checker-mutations.mjs', '--json'], kind: 'json', expectTag: 'accept' },
+    { id: 'negative-checker-mutation-tests', command: process.execPath, args: ['--test', 'audits/negative-checker-mutations0.test.mjs'], kind: 'process' },
     { id: 'minimal-kernel-cross-verify', command: process.execPath, args: ['scripts/cross-verify.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'independent-no-shared-code-audit', command: process.execPath, args: ['scripts/audit-independent-verifiers-no-shared-code.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'independent-no-shared-code-tests', command: process.execPath, args: ['--test', 'audits/independent-verifiers-no-shared-code.test.mjs'], kind: 'process' },
@@ -110,6 +113,7 @@ export async function RunPNPVerifyAll0(options = {}) {
     trustBaseCoordinate: 'PNP-TRUST-BASE-2026-06-27-01',
     trustBaseShrinkPlanCoordinate: 'PNP-TRUST-BASE-SHRINK-PLAN-2026-06-27-01',
     checkerTotalityAuditCoordinate: 'PNP-CHECKER-TOTALITY-AUDIT-2026-06-27-01',
+    negativeCheckerMutationCoordinate: 'PNP-NEGATIVE-CHECKER-MUTATIONS-2026-06-27-01',
     publicTheoremEmissionAllowed: false,
     finalTheoremReady: false,
     activeFinalNodeIds: [],
@@ -154,6 +158,7 @@ async function verifyStatusFile0(root) {
   requireEqual0(status.trustBaseCoordinate, 'PNP-TRUST-BASE-2026-06-27-01', failures, ['trustBaseCoordinate']);
   requireEqual0(status.trustBaseShrinkPlanCoordinate, 'PNP-TRUST-BASE-SHRINK-PLAN-2026-06-27-01', failures, ['trustBaseShrinkPlanCoordinate']);
   requireEqual0(status.checkerTotalityAuditCoordinate, 'PNP-CHECKER-TOTALITY-AUDIT-2026-06-27-01', failures, ['checkerTotalityAuditCoordinate']);
+  requireEqual0(status.negativeCheckerMutationCoordinate, 'PNP-NEGATIVE-CHECKER-MUTATIONS-2026-06-27-01', failures, ['negativeCheckerMutationCoordinate']);
   requireEqual0(status.noSharedCodePolicyCoordinate, 'PNP-INDEPENDENT-VERIFIERS-NO-SHARED-CODE-2026-06-27-01', failures, ['noSharedCodePolicyCoordinate']);
 
   if (failures.length !== 0) {
