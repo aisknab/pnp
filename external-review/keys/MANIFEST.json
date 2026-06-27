@@ -1,0 +1,22 @@
+{
+  "kind": "ExternalReviewVerificationKeyFileManifest0",
+  "version": 0,
+  "coordinate": "ExternalReview.VerificationKeyFiles",
+  "keyDirectory": "external-review/keys/",
+  "registryStatus": "pending-reviewer-key-files",
+  "verificationKeyFileCount": 0,
+  "trustedReviewerKeyFileCount": 0,
+  "revokedReviewerKeyFileCount": 0,
+  "reviewerKeyFiles": [],
+  "externalReviewVerificationKeyFileIntakeReady": true,
+  "externalReviewVerificationKeyFilesReady": false,
+  "externalReviewVerificationKeysReady": false,
+  "externalReviewVerifiedSignaturesReady": false,
+  "externalReviewAcceptanceReady": false,
+  "externalReviewAcceptanceReleased": false,
+  "externalReviewAcceptanceNotClaimed": true,
+  "unrestrictedFinalSoundnessReady": false,
+  "publicTheoremEmissionAllowed": false,
+  "finalTheoremReady": false,
+  "sealedReleaseNotOverwritten": true
+}
