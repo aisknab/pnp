@@ -1,0 +1,25 @@
+name: negative-checker-mutations
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  negative-checker-mutations:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run negative checker mutation audit
+        run: npm run checker:mutations
+      - name: Run negative checker mutation audit tests
+        run: node --test audits/negative-checker-mutations0.test.mjs
+      - name: Upload negative checker mutation verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: negative-checker-mutations-latest-verdict
+          path: artifacts/checker-mutations/latest-verdict.json
