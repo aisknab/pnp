@@ -28,11 +28,13 @@ The verifier currently checks:
 10. The checker-totality audit tests.
 11. The negative checker mutation seed audit.
 12. The negative checker mutation audit tests.
-13. Cross-runtime minimal-kernel agreement.
-14. Independent verifier no-shared-code policy.
-15. Independent verifier audit tests.
-16. Independent Python verifier tests.
-17. Release-audit surface preservation.
+13. The rule-family coverage ledger audit.
+14. The rule-family coverage audit tests.
+15. Cross-runtime minimal-kernel agreement.
+16. Independent verifier no-shared-code policy.
+17. Independent verifier audit tests.
+18. Independent Python verifier tests.
+19. Release-audit surface preservation.
 
 The accepted verdict keeps the public-review boundary explicit:
 
