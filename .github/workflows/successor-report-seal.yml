@@ -1,0 +1,35 @@
+name: successor-report-seal-verification
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          show-progress: false
+          persist-credentials: false
+          set-safe-directory: false
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+
+      - name: Verify successor report seal hashes
+        run: sha256sum -c successor-report-seals/PNP-REPORT-SEAL-2026-06-27-01/SHA256SUMS
+
+      - name: Check successor report seal syntax
+        run: node --check pcc-successor-report-seal0.mjs
+
+      - name: Run successor report seal tests
+        run: node --test test/pcc-successor-report-seal0.test.mjs
