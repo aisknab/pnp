@@ -15,9 +15,9 @@ const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
 export const PUBLIC_SURFACE_BASELINE0 = Object.freeze({
   kind: 'PublicSurfaceBaseline0',
   version: CHECKER_VERSION,
-  coordinate: 'PUBLIC-SURFACE-BASELINE-2026-06-27-NO-SHARED-CODE-01',
-  status: 'public-review-surface-rebased-for-independent-verifier-policy',
-  rationale: 'The public package script surface is intentionally extensible while the repository is being converted into a self-verifying audit stack; this baseline includes cross-runtime verification and independent-verifier no-shared-code auditing.',
+  coordinate: 'PUBLIC-SURFACE-BASELINE-2026-06-27-PNP-VERIFY-ALL-01',
+  status: 'public-review-surface-rebased-for-one-command-verifier',
+  rationale: 'The public package script surface is intentionally extensible while the repository is being converted into a self-verifying audit stack; this baseline includes cross-runtime verification, independent-verifier no-shared-code auditing, and the top-level pnp:verify entrypoint.',
 });
 
 export const PUBLIC_ENTRY_EXPORT_KEYS0 = Object.freeze([
@@ -114,6 +114,7 @@ export const PUBLIC_PACKAGE_SCRIPT_TARGETS0 = Object.freeze({
   'cross-verify': 'node scripts/cross-verify.mjs',
   'cross-verify:json': 'node scripts/cross-verify.mjs --json',
   'independent:no-shared-code': 'node scripts/audit-independent-verifiers-no-shared-code.mjs --json',
+  'pnp:verify': 'node scripts/pnp-verify-all.mjs --json',
   'examples:minimal': 'node examples/minimal/run-all.mjs',
   'materialized:accept-run': 'node ./bin/check-materialized-accept-run0.mjs',
   'materialized:accept-run:full': 'node ./bin/check-materialized-accept-run0.mjs --full',
