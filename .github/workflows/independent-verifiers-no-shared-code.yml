@@ -17,7 +17,7 @@ jobs:
       - name: Audit independent verifier no-shared-code policy
         run: npm run independent:no-shared-code
       - name: Run no-shared-code audit tests
-        run: node --test test/audit-independent-verifiers-no-shared-code.test.mjs
+        run: node --test audits/independent-verifiers-no-shared-code.test.mjs
       - name: Upload no-shared-code verdict
         uses: actions/upload-artifact@v4
         with:
