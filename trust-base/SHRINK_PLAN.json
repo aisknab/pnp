@@ -62,21 +62,24 @@
     },
     {
       "id": "TB-003",
-      "title": "Add independent SHA256 implementation comparison",
+      "title": "Add independent SHA256 implementation comparison and checkout manifest replay",
       "status": "planned",
       "priority": 3,
       "targetsAssumptions": [
         "Crypto.SHA256.CollisionResistance",
-        "Runtime.NodeJS.Semantics"
+        "Runtime.NodeJS.Semantics",
+        "Git.ObjectIntegrity"
       ],
       "deliverables": [
         "Python hashlib digest replay over canonical artifacts",
         "JS crypto digest replay over the same byte payloads",
-        "cross-digest agreement verdict"
+        "cross-digest agreement verdict",
+        "detached checkout manifest with file paths and byte digests"
       ],
       "acceptanceCriteria": [
         "At least the minimal kernel, theorem-binding ledger, trust-base ledger, and no-shared-code policy digest identically under JS and Python.",
         "Digest mismatch causes reject with artifact path and both digests.",
+        "The checkout manifest binds the verified file list to byte digests.",
         "The one-command verifier includes the digest-comparison audit."
       ],
       "blockedBy": [
