@@ -11,7 +11,7 @@ The generated verdict is intentionally not committed as a stable source artifact
 ## Command
 
 ```bash
-npm run cross-verify:json
+node scripts/cross-verify.mjs --json
 ```
 
 The command runs three agreement surfaces:
@@ -31,6 +31,10 @@ The verdict accepts only if the verifiers agree on:
 - disabled final-theorem readiness,
 - empty active final nodes, and
 - exact remaining blockers.
+
+## Public surface discipline
+
+This runner is intentionally not exported through `package.json` scripts because the public release surface is frozen. Keeping the command as a direct script invocation preserves the package entry/script freeze while still making the cross-verifier reproducible.
 
 ## Boundary
 
