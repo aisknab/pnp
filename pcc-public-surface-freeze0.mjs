@@ -12,6 +12,14 @@ import {
 const CHECKER_VERSION = 0;
 const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
 
+export const PUBLIC_SURFACE_BASELINE0 = Object.freeze({
+  kind: 'PublicSurfaceBaseline0',
+  version: CHECKER_VERSION,
+  coordinate: 'PUBLIC-SURFACE-BASELINE-2026-06-27-CROSS-VERIFY-01',
+  status: 'public-review-surface-rebased-for-cross-verifier-entrypoint',
+  rationale: 'The public package script surface is intentionally extensible while the repository is being converted into a self-verifying audit stack.',
+});
+
 export const PUBLIC_ENTRY_EXPORT_KEYS0 = Object.freeze([
   'ACCEPT_RUN_PHASES0',
   'CheckAcceptRun0',
@@ -103,6 +111,8 @@ export const PUBLIC_PACKAGE_BIN0 = Object.freeze({
 
 export const PUBLIC_PACKAGE_SCRIPT_TARGETS0 = Object.freeze({
   check: 'node --check pcc-core.mjs',
+  'cross-verify': 'node scripts/cross-verify.mjs',
+  'cross-verify:json': 'node scripts/cross-verify.mjs --json',
   'examples:minimal': 'node examples/minimal/run-all.mjs',
   'materialized:accept-run': 'node ./bin/check-materialized-accept-run0.mjs',
   'materialized:accept-run:full': 'node ./bin/check-materialized-accept-run0.mjs --full',
@@ -139,7 +149,7 @@ export const PUBLIC_PACKAGE_SCRIPT_TARGETS0 = Object.freeze({
   'materialized:final-certificate-public-status': 'node ./bin/write-final-certificate-public-status0.mjs',
   'materialized:final-certificate-public-status:full': 'node ./bin/write-final-certificate-public-status0.mjs --full',
   'release:audit:final-certificate-gate': 'node ./bin/write-release-audit-final-certificate-gate0.mjs',
-  'release:audit:final-certificate-gate:full': 'node ./bin/write-release-audit-final-certificate-gate0.mjs --full',  
+  'release:audit:final-certificate-gate:full': 'node ./bin/write-release-audit-final-certificate-gate0.mjs --full',
   'release:audit:concrete-final-certificate-gate': 'node ./bin/write-release-audit-concrete-final-certificate-gate0.mjs',
   'release:audit:concrete-final-certificate-gate:full': 'node ./bin/write-release-audit-concrete-final-certificate-gate0.mjs --full',
   'release:audit:concrete-release-appendix': 'node ./bin/write-concrete-release-appendix0.mjs',
@@ -173,148 +183,38 @@ export async function CheckPublicEntryReleaseSurface0(config = makePublicSurface
   const cfg = makePublicSurfaceFreezeConfig0(config);
 
   const configCheck = validateConfig0(cfg);
-
-  ledger.push({
-    phase: 'config',
-    status: configCheck.ok ? 'pass' : 'fail',
-    digest: digestCanonical0(configCheck.nf ?? configCheck.witness ?? null),
-  });
-
-  if (!configCheck.ok) {
-    return makeRejectRecord({
-      checker,
-      coord: `${checker}.config`,
-      path: configCheck.path,
-      witness: configCheck.witness,
-      ledger,
-    });
-  }
-
-  const entry = cfg.publicEntryOverride ?? publicEntry0;
+  ledger.push(makeLedgerEntry0('config', configCheck));
+  if (!configCheck.ok) return makeRejectRecord0({ checker, coord: `${checker}.config`, path: configCheck.path, witness: configCheck.witness, ledger });
 
   const entrySurface = validateExactKeys0(
-    entry,
+    cfg.publicEntryOverride ?? publicEntry0,
     PUBLIC_ENTRY_EXPORT_KEYS0,
     ['index.mjs', 'exports'],
   );
-
-  ledger.push({
-    phase: 'publicEntryExports',
-    status: entrySurface.ok ? 'pass' : 'fail',
-    digest: digestCanonical0(entrySurface.nf ?? entrySurface.witness ?? null),
-  });
-
-  if (!entrySurface.ok) {
-    return makeRejectRecord({
-      checker,
-      coord: `${checker}.publicEntryExports`,
-      path: entrySurface.path,
-      witness: entrySurface.witness,
-      ledger,
-    });
-  }
+  ledger.push(makeLedgerEntry0('publicEntryExports', entrySurface));
+  if (!entrySurface.ok) return makeRejectRecord0({ checker, coord: `${checker}.publicEntryExports`, path: entrySurface.path, witness: entrySurface.witness, ledger });
 
   const packageJson = cfg.packageJsonOverride ?? await readPackageJson0(cfg.rootDir);
-
   if (isRejectLike0(packageJson)) {
-    ledger.push({
-      phase: 'readPackageJson',
-      status: 'fail',
-      digest: digestCanonical0(packageJson.witness),
-    });
-
-    return makeRejectRecord({
-      checker,
-      coord: `${checker}.packageJson`,
-      path: packageJson.path,
-      witness: packageJson.witness,
-      ledger,
-    });
+    ledger.push({ phase: 'readPackageJson', status: 'fail', digest: digestCanonical0(packageJson.witness) });
+    return makeRejectRecord0({ checker, coord: `${checker}.packageJson`, path: packageJson.path, witness: packageJson.witness, ledger });
   }
 
   const main = validatePackageMain0(packageJson);
+  ledger.push(makeLedgerEntry0('packageMain', main));
+  if (!main.ok) return makeRejectRecord0({ checker, coord: `${checker}.packageMain`, path: main.path, witness: main.witness, ledger });
 
-  ledger.push({
-    phase: 'packageMain',
-    status: main.ok ? 'pass' : 'fail',
-    digest: digestCanonical0(main.nf ?? main.witness ?? null),
-  });
+  const exportsSurface = validateExactMapping0(packageJson.exports, PUBLIC_PACKAGE_EXPORTS0, ['package.json', 'exports']);
+  ledger.push(makeLedgerEntry0('packageExports', exportsSurface));
+  if (!exportsSurface.ok) return makeRejectRecord0({ checker, coord: `${checker}.packageExports`, path: exportsSurface.path, witness: exportsSurface.witness, ledger });
 
-  if (!main.ok) {
-    return makeRejectRecord({
-      checker,
-      coord: `${checker}.packageMain`,
-      path: main.path,
-      witness: main.witness,
-      ledger,
-    });
-  }
+  const binSurface = validateExactMapping0(packageJson.bin, PUBLIC_PACKAGE_BIN0, ['package.json', 'bin']);
+  ledger.push(makeLedgerEntry0('packageBin', binSurface));
+  if (!binSurface.ok) return makeRejectRecord0({ checker, coord: `${checker}.packageBin`, path: binSurface.path, witness: binSurface.witness, ledger });
 
-  const exportsSurface = validateExactMapping0(
-    packageJson.exports,
-    PUBLIC_PACKAGE_EXPORTS0,
-    ['package.json', 'exports'],
-  );
-
-  ledger.push({
-    phase: 'packageExports',
-    status: exportsSurface.ok ? 'pass' : 'fail',
-    digest: digestCanonical0(exportsSurface.nf ?? exportsSurface.witness ?? null),
-  });
-
-  if (!exportsSurface.ok) {
-    return makeRejectRecord({
-      checker,
-      coord: `${checker}.packageExports`,
-      path: exportsSurface.path,
-      witness: exportsSurface.witness,
-      ledger,
-    });
-  }
-
-  const binSurface = validateExactMapping0(
-    packageJson.bin,
-    PUBLIC_PACKAGE_BIN0,
-    ['package.json', 'bin'],
-  );
-
-  ledger.push({
-    phase: 'packageBin',
-    status: binSurface.ok ? 'pass' : 'fail',
-    digest: digestCanonical0(binSurface.nf ?? binSurface.witness ?? null),
-  });
-
-  if (!binSurface.ok) {
-    return makeRejectRecord({
-      checker,
-      coord: `${checker}.packageBin`,
-      path: binSurface.path,
-      witness: binSurface.witness,
-      ledger,
-    });
-  }
-
-  const scriptSurface = validateExactMapping0(
-    packageJson.scripts,
-    PUBLIC_PACKAGE_SCRIPT_TARGETS0,
-    ['package.json', 'scripts'],
-  );
-
-  ledger.push({
-    phase: 'packageScripts',
-    status: scriptSurface.ok ? 'pass' : 'fail',
-    digest: digestCanonical0(scriptSurface.nf ?? scriptSurface.witness ?? null),
-  });
-
-  if (!scriptSurface.ok) {
-    return makeRejectRecord({
-      checker,
-      coord: `${checker}.packageScripts`,
-      path: scriptSurface.path,
-      witness: scriptSurface.witness,
-      ledger,
-    });
-  }
+  const scriptSurface = validateExactMapping0(packageJson.scripts, PUBLIC_PACKAGE_SCRIPT_TARGETS0, ['package.json', 'scripts']);
+  ledger.push(makeLedgerEntry0('packageScripts', scriptSurface));
+  if (!scriptSurface.ok) return makeRejectRecord0({ checker, coord: `${checker}.packageScripts`, path: scriptSurface.path, witness: scriptSurface.witness, ledger });
 
   const nf = {
     kind: 'PublicEntryReleaseSurface0NF',
@@ -331,168 +231,86 @@ export async function CheckPublicEntryReleaseSurface0(config = makePublicSurface
     packageMain: './index.mjs',
     packageType: 'module',
     surfaceFrozen: true,
+    surfaceBaseline: PUBLIC_SURFACE_BASELINE0,
   };
 
-  return makeAcceptRecord({
-    checker,
-    nf,
-    ledger,
-  });
+  return makeAcceptRecord0({ checker, nf, ledger });
+}
+
+function makeLedgerEntry0(phase, result) {
+  return {
+    phase,
+    status: result.ok ? 'pass' : 'fail',
+    digest: digestCanonical0(result.nf ?? result.witness ?? null),
+  };
 }
 
 function validateConfig0(config) {
-  if (!isPlainObject(config)) {
-    return validationReject0([], 'PublicSurfaceFreezeConfig0 must be an object', {
-      actual: typeof config,
-    });
+  if (!isPlainObject0(config)) return validationReject0([], 'PublicSurfaceFreezeConfig0 must be an object', { actual: typeof config });
+  if (config.kind !== undefined && config.kind !== 'PublicSurfaceFreezeConfig0') return validationReject0(['kind'], 'PublicSurfaceFreezeConfig0 kind mismatch', { actual: config.kind });
+  if (config.version !== undefined && config.version !== CHECKER_VERSION) return validationReject0(['version'], `PublicSurfaceFreezeConfig0 version must be ${CHECKER_VERSION} when present`, { actual: config.version });
+  if (typeof config.rootDir !== 'string' || config.rootDir.length === 0) return validationReject0(['rootDir'], 'PublicSurfaceFreezeConfig0 rootDir must be a non-empty string', { actual: config.rootDir });
+  if (config.publicEntryOverride !== null && (typeof config.publicEntryOverride !== 'object' || config.publicEntryOverride === null)) {
+    return validationReject0(['publicEntryOverride'], 'PublicSurfaceFreezeConfig0 publicEntryOverride must be null or an object', { actual: typeof config.publicEntryOverride });
   }
-
-  if (config.kind !== undefined && config.kind !== 'PublicSurfaceFreezeConfig0') {
-    return validationReject0(['kind'], 'PublicSurfaceFreezeConfig0 kind mismatch', {
-      actual: config.kind,
-    });
+  if (config.packageJsonOverride !== null && !isPlainObject0(config.packageJsonOverride)) {
+    return validationReject0(['packageJsonOverride'], 'PublicSurfaceFreezeConfig0 packageJsonOverride must be null or a plain object', { actual: typeof config.packageJsonOverride });
   }
-
-  if (config.version !== undefined && config.version !== CHECKER_VERSION) {
-    return validationReject0(['version'], `PublicSurfaceFreezeConfig0 version must be ${CHECKER_VERSION} when present`, {
-      actual: config.version,
-    });
-  }
-
-  if (typeof config.rootDir !== 'string' || config.rootDir.length === 0) {
-    return validationReject0(['rootDir'], 'PublicSurfaceFreezeConfig0 rootDir must be a non-empty string', {
-      actual: config.rootDir,
-    });
-  }
-
-  if (
-    config.publicEntryOverride !== null &&
-    (typeof config.publicEntryOverride !== 'object' || config.publicEntryOverride === null)
-  ) {
-    return validationReject0(['publicEntryOverride'], 'PublicSurfaceFreezeConfig0 publicEntryOverride must be null or an object', {
-      actual: typeof config.publicEntryOverride,
-    });
-  }
-
-  if (
-    config.packageJsonOverride !== null &&
-    !isPlainObject(config.packageJsonOverride)
-  ) {
-    return validationReject0(['packageJsonOverride'], 'PublicSurfaceFreezeConfig0 packageJsonOverride must be null or a plain object', {
-      actual: typeof config.packageJsonOverride,
-    });
-  }
-
-  return validationAccept0({
-    kind: 'PublicSurfaceFreezeConfig0NF',
-  });
+  return validationAccept0({ kind: 'PublicSurfaceFreezeConfig0NF' });
 }
 
 function validatePackageMain0(packageJson) {
-  if (!isPlainObject(packageJson)) {
-    return validationReject0(['package.json'], 'package.json must be an object', {
-      actual: typeof packageJson,
-    });
-  }
-
-  if (packageJson.type !== 'module') {
-    return validationReject0(['package.json', 'type'], 'package.json type must remain module', {
-      expected: 'module',
-      actual: packageJson.type,
-    });
-  }
-
-  if (packageJson.main !== './index.mjs') {
-    return validationReject0(['package.json', 'main'], 'package.json main must remain ./index.mjs', {
-      expected: './index.mjs',
-      actual: packageJson.main,
-    });
-  }
-
-  return validationAccept0({
-    kind: 'PackageMainSurface0NF',
-  });
+  if (!isPlainObject0(packageJson)) return validationReject0(['package.json'], 'package.json must be an object', { actual: typeof packageJson });
+  if (packageJson.type !== 'module') return validationReject0(['package.json', 'type'], 'package.json type must remain module', { expected: 'module', actual: packageJson.type });
+  if (packageJson.main !== './index.mjs') return validationReject0(['package.json', 'main'], 'package.json main must remain ./index.mjs', { expected: './index.mjs', actual: packageJson.main });
+  return validationAccept0({ kind: 'PackageMainSurface0NF' });
 }
 
-function validateExactMapping0(actual, expected, path) {
-  const keyCheck = validateExactKeys0(actual, Object.keys(expected).sort(), path);
-
-  if (!keyCheck.ok) {
-    return keyCheck;
-  }
-
+function validateExactMapping0(actual, expected, pathArray) {
+  const keyCheck = validateExactKeys0(actual, Object.keys(expected).sort(), pathArray);
+  if (!keyCheck.ok) return keyCheck;
   for (const key of Object.keys(expected).sort()) {
-    if (actual[key] !== expected[key]) {
-      return validationReject0([...path, key], 'public release surface mapping value changed', {
-        key,
-        expected: expected[key],
-        actual: actual[key],
-      });
-    }
+    if (actual[key] !== expected[key]) return validationReject0([...pathArray, key], 'public release surface mapping value changed', { key, expected: expected[key], actual: actual[key] });
   }
-
-  return validationAccept0({
-    kind: 'PublicSurfaceExactMapping0NF',
-    keys: Object.keys(expected).sort(),
-  });
+  return validationAccept0({ kind: 'PublicSurfaceExactMapping0NF', keys: Object.keys(expected).sort() });
 }
 
-function validateExactKeys0(value, expectedKeys, path) {
-  if (value === null || typeof value !== 'object') {
-    return validationReject0(path, 'public release surface target must be an object', {
-      actual: typeof value,
-    });
-  }
-
+function validateExactKeys0(value, expectedKeys, pathArray) {
+  if (value === null || typeof value !== 'object') return validationReject0(pathArray, 'public release surface target must be an object', { actual: typeof value });
   const actualKeys = Object.keys(value).sort();
   const frozenExpected = [...expectedKeys].sort();
-
   if (stableStringify0(actualKeys) !== stableStringify0(frozenExpected)) {
-    return validationReject0(path, 'public release surface keys changed', {
+    return validationReject0(pathArray, 'public release surface keys changed', {
       expectedKeys: frozenExpected,
       actualKeys,
       missingKeys: frozenExpected.filter((key) => !actualKeys.includes(key)),
       extraKeys: actualKeys.filter((key) => !frozenExpected.includes(key)),
     });
   }
-
-  return validationAccept0({
-    kind: 'PublicSurfaceExactKeys0NF',
-    keys: actualKeys,
-  });
+  return validationAccept0({ kind: 'PublicSurfaceExactKeys0NF', keys: actualKeys });
 }
 
 async function readPackageJson0(rootDir) {
   try {
-    const text = await fs.readFile(path.join(rootDir, 'package.json'), 'utf8');
-
-    return JSON.parse(text);
+    return JSON.parse(await fs.readFile(path.join(rootDir, 'package.json'), 'utf8'));
   } catch (error) {
     return {
       tag: 'rejectLike',
       path: ['package.json'],
       witness: {
         reason: 'package.json must be readable JSON',
-        detail: {
-          rootDir,
-          error: error.message,
-        },
+        detail: { rootDir, error: error.message },
       },
     };
   }
 }
 
 function isRejectLike0(value) {
-  return isPlainObject(value) && value.tag === 'rejectLike';
+  return isPlainObject0(value) && value.tag === 'rejectLike';
 }
 
-function makeAcceptRecord({
-  checker,
-  nf,
-  ledger,
-}) {
+function makeAcceptRecord0({ checker, nf, ledger }) {
   const digest = digestCanonical0(nf);
-
   return {
     tag: 'accept',
     kind: 'accept',
@@ -507,37 +325,21 @@ function makeAcceptRecord({
   };
 }
 
-function makeRejectRecord({
-  checker,
-  coord,
-  path,
-  witness,
-  ledger,
-}) {
-  const rejectNF = {
-    kind: `${checker}RejectNF`,
-    checker,
-    version: CHECKER_VERSION,
-    coord,
-    path,
-    witness,
-    ledger,
-  };
-
+function makeRejectRecord0({ checker, coord, path: pathArray, witness, ledger }) {
+  const rejectNF = { kind: `${checker}RejectNF`, checker, version: CHECKER_VERSION, coord, path: pathArray, witness, ledger };
   const digest = digestCanonical0(rejectNF);
-
   return {
     tag: 'reject',
     kind: 'reject',
     checker,
     version: CHECKER_VERSION,
     Coord: coord,
-    Path: path,
+    Path: pathArray,
     Witness: witness,
     Digest: digest,
     Ledger: ledger,
     coord,
-    path,
+    path: pathArray,
     witness,
     digest,
     ledger,
@@ -545,28 +347,15 @@ function makeRejectRecord({
 }
 
 function validationAccept0(nf) {
-  return {
-    ok: true,
-    nf,
-  };
+  return { ok: true, nf };
 }
 
-function validationReject0(path, reason, detail) {
-  return {
-    ok: false,
-    path,
-    witness: {
-      reason,
-      detail,
-    },
-  };
+function validationReject0(pathArray, reason, detail) {
+  return { ok: false, path: pathArray, witness: { reason, detail } };
 }
 
-function isPlainObject(value) {
-  if (value === null || typeof value !== 'object') {
-    return false;
-  }
-
+function isPlainObject0(value) {
+  if (value === null || typeof value !== 'object') return false;
   const proto = Object.getPrototypeOf(value);
   return proto === Object.prototype || proto === null;
 }
