@@ -1,0 +1,29 @@
+name: checker-dependency-graph
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  checker-dependency-graph:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Generate checker dependency graph
+        run: npm run checker:graph
+      - name: Run checker dependency graph tests
+        run: node --test audits/checker-dependency-graph0.test.mjs
+      - name: Upload checker dependency graph artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: checker-dependency-graph
+          path: |
+            artifacts/checker-dependency-graph/checker-dependency-graph.json
+            artifacts/checker-dependency-graph/checker-dependency-graph.dot
+            artifacts/checker-dependency-graph/checker-dependency-graph.svg
+            artifacts/checker-dependency-graph/latest-verdict.json
