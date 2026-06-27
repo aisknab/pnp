@@ -32,6 +32,7 @@ export async function RunPNPVerifyAll0(options = {}) {
     'pcc-core.mjs',
     'pcc-trust-base0.mjs',
     'pcc-trust-base-shrink-plan0.mjs',
+    'pcc-rule-family-coverage0.mjs',
     'scripts/cross-verify.mjs',
     'scripts/audit-report-theorem-bindings.mjs',
     'scripts/audit-independent-verifiers-no-shared-code.mjs',
@@ -79,6 +80,8 @@ export async function RunPNPVerifyAll0(options = {}) {
     { id: 'checker-totality-tests', command: process.execPath, args: ['--test', 'audits/checker-totality0.test.mjs'], kind: 'process' },
     { id: 'negative-checker-mutation-audit', command: process.execPath, args: ['scripts/audit-negative-checker-mutations.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'negative-checker-mutation-tests', command: process.execPath, args: ['--test', 'audits/negative-checker-mutations0.test.mjs'], kind: 'process' },
+    { id: 'rule-family-coverage-audit', command: process.execPath, args: ['pcc-rule-family-coverage0.mjs', '--json'], kind: 'json', expectTag: 'accept' },
+    { id: 'rule-family-coverage-tests', command: process.execPath, args: ['--test', 'audits/rule-family-coverage0.test.mjs'], kind: 'process' },
     { id: 'minimal-kernel-cross-verify', command: process.execPath, args: ['scripts/cross-verify.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'independent-no-shared-code-audit', command: process.execPath, args: ['scripts/audit-independent-verifiers-no-shared-code.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'independent-no-shared-code-tests', command: process.execPath, args: ['--test', 'audits/independent-verifiers-no-shared-code.test.mjs'], kind: 'process' },
@@ -114,6 +117,7 @@ export async function RunPNPVerifyAll0(options = {}) {
     trustBaseShrinkPlanCoordinate: 'PNP-TRUST-BASE-SHRINK-PLAN-2026-06-27-01',
     checkerTotalityAuditCoordinate: 'PNP-CHECKER-TOTALITY-AUDIT-2026-06-27-01',
     negativeCheckerMutationCoordinate: 'PNP-NEGATIVE-CHECKER-MUTATIONS-2026-06-27-01',
+    ruleFamilyCoverageCoordinate: 'PNP-RULE-FAMILY-COVERAGE-2026-06-27-01',
     publicTheoremEmissionAllowed: false,
     finalTheoremReady: false,
     activeFinalNodeIds: [],
@@ -159,6 +163,7 @@ async function verifyStatusFile0(root) {
   requireEqual0(status.trustBaseShrinkPlanCoordinate, 'PNP-TRUST-BASE-SHRINK-PLAN-2026-06-27-01', failures, ['trustBaseShrinkPlanCoordinate']);
   requireEqual0(status.checkerTotalityAuditCoordinate, 'PNP-CHECKER-TOTALITY-AUDIT-2026-06-27-01', failures, ['checkerTotalityAuditCoordinate']);
   requireEqual0(status.negativeCheckerMutationCoordinate, 'PNP-NEGATIVE-CHECKER-MUTATIONS-2026-06-27-01', failures, ['negativeCheckerMutationCoordinate']);
+  requireEqual0(status.ruleFamilyCoverageCoordinate, 'PNP-RULE-FAMILY-COVERAGE-2026-06-27-01', failures, ['ruleFamilyCoverageCoordinate']);
   requireEqual0(status.noSharedCodePolicyCoordinate, 'PNP-INDEPENDENT-VERIFIERS-NO-SHARED-CODE-2026-06-27-01', failures, ['noSharedCodePolicyCoordinate']);
 
   if (failures.length !== 0) {
