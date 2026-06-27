@@ -1,0 +1,30 @@
+{
+  "kind": "SuccessorPublicReviewReportSeal0",
+  "version": 0,
+  "sealCoordinate": "PNP-REPORT-SEAL-2026-06-27-01",
+  "sealDate": "2026-06-27",
+  "predecessorDocumentationCoordinate": "PNP-DOC-CPR-2026-06-26-01",
+  "documentationRevisionPath": "documentation-revisions/PNP-DOC-CPR-2026-06-26-01/",
+  "reportTeXPayloadSha256": "9ad7ed91a48662b98432e2b6000beaf06b3ebd2212de3a6d820a7dcbd27e8d9a",
+  "reportPDFPayloadSha256": "f6848d37eb8982f59ca1436352e06559e35aad8ee56956705de2650de1cc45a7",
+  "publicRepository": "https://github.com/aisknab/pnp",
+  "historicalSourceTag": "final-pnp-proof-report-hardened-7072f8d",
+  "historicalSourceCommit": "7072f8d0bda6d44d240f9bb3fad624fd357e1278",
+  "historicalArtifactTag": "final-pnp-proof-report-artifacts-hardened-7072f8d-sealed",
+  "historicalReleaseNotOverwritten": true,
+  "successorSealPurpose": "public-review-report-framing-and-access-correction",
+  "publicationFraming": "public-review",
+  "sourceAndArtifactAccessPublicWithoutRequest": true,
+  "directTheoremEmissionReframedAsReviewStatus": true,
+  "successorReportSealReady": true,
+  "publicTheoremEmissionAllowed": false,
+  "finalTheoremReady": false,
+  "activeFinalNodeIds": [],
+  "currentReleaseLayerCoordinate": "ExternalReview.VerificationKeyFileHashes",
+  "unrestrictedFinalSoundnessReady": false,
+  "externalReviewAcceptanceReady": false,
+  "remainingBlockers": [
+    "Release.UnrestrictedFinalSoundness",
+    "ExternalReview.Acceptance"
+  ]
+}
