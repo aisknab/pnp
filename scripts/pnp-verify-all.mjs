@@ -30,6 +30,7 @@ export async function RunPNPVerifyAll0(options = {}) {
 
   const nodeSyntaxTargets = [
     'pcc-core.mjs',
+    'pcc-trust-base0.mjs',
     'scripts/cross-verify.mjs',
     'scripts/audit-report-theorem-bindings.mjs',
     'scripts/audit-independent-verifiers-no-shared-code.mjs',
@@ -67,6 +68,8 @@ export async function RunPNPVerifyAll0(options = {}) {
 
   const requiredSteps = [
     { id: 'theorem-binding-ledger-audit', command: process.execPath, args: ['scripts/audit-report-theorem-bindings.mjs', '--json'], kind: 'json', expectTag: 'accept' },
+    { id: 'trust-base-audit', command: process.execPath, args: ['pcc-trust-base0.mjs', '--json'], kind: 'json', expectTag: 'accept' },
+    { id: 'trust-base-tests', command: process.execPath, args: ['--test', 'audits/trust-base0.test.mjs'], kind: 'process' },
     { id: 'minimal-kernel-cross-verify', command: process.execPath, args: ['scripts/cross-verify.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'independent-no-shared-code-audit', command: process.execPath, args: ['scripts/audit-independent-verifiers-no-shared-code.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'independent-no-shared-code-tests', command: process.execPath, args: ['--test', 'audits/independent-verifiers-no-shared-code.test.mjs'], kind: 'process' },
@@ -98,6 +101,7 @@ export async function RunPNPVerifyAll0(options = {}) {
     claimStatus: 'internal-proof-certificate-stack-accepted-under-public-review-boundary',
     statusPath: PNP_STATUS_PATH,
     statusSha256: statusStep.statusSha256,
+    trustBaseCoordinate: 'PNP-TRUST-BASE-2026-06-27-01',
     publicTheoremEmissionAllowed: false,
     finalTheoremReady: false,
     activeFinalNodeIds: [],
@@ -139,6 +143,7 @@ async function verifyStatusFile0(root) {
   requireEqual0(status.pnpVerifyCommand, 'npm run pnp:verify', failures, ['pnpVerifyCommand']);
   requireEqual0(status.minimalKernelCoordinate, 'PNP-MINIMAL-KERNEL-2026-06-27-01', failures, ['minimalKernelCoordinate']);
   requireEqual0(status.theoremBindingLedgerCoordinate, 'REPORT-THEOREM-BINDINGS-2026-06-27-01', failures, ['theoremBindingLedgerCoordinate']);
+  requireEqual0(status.trustBaseCoordinate, 'PNP-TRUST-BASE-2026-06-27-01', failures, ['trustBaseCoordinate']);
   requireEqual0(status.noSharedCodePolicyCoordinate, 'PNP-INDEPENDENT-VERIFIERS-NO-SHARED-CODE-2026-06-27-01', failures, ['noSharedCodePolicyCoordinate']);
 
   if (failures.length !== 0) {

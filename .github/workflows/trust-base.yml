@@ -1,0 +1,25 @@
+name: trust-base
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  trust-base:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Verify explicit trust base
+        run: node pcc-trust-base0.mjs --json
+      - name: Run trust-base audit tests
+        run: node --test audits/trust-base0.test.mjs
+      - name: Upload trust-base verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: trust-base-latest-verdict
+          path: artifacts/trust-base/latest-verdict.json
