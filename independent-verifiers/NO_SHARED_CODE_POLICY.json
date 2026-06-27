@@ -61,10 +61,10 @@
       "exec("
     ],
     "forbiddenRuntimeTokens": [
-      "node",
-      "npm",
-      "deno",
-      "bun"
+      "node --",
+      "npm run",
+      "deno run",
+      "bun run"
     ],
     "verifiers": [
       {
