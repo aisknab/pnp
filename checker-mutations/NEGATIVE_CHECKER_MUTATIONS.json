@@ -1,0 +1,86 @@
+{
+  "kind": "PNPNegativeCheckerMutations0",
+  "version": 0,
+  "coordinate": "PNP-NEGATIVE-CHECKER-MUTATIONS-2026-06-27-01",
+  "title": "Negative checker mutation seed suite",
+  "purpose": "Exercise the public self-verification checker surface with valid baselines and targeted negative mutations that must reject rather than accept or throw.",
+  "status": "negative-checker-mutation-seed-ready",
+  "scope": "seed mutation suite for the public self-verification checker surface; future PRs should expand this until every checker family has generated mutation coverage",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "negativeMutationSeedReady": true,
+  "fullNegativeMutationCoverageProved": false,
+  "mutationFamilies": [
+    "valid input accepts",
+    "mutated kind rejects",
+    "mutated boundary rejects",
+    "missing required dependency rejects",
+    "caller supplied readiness rejects",
+    "mutated digest or checksum rejects",
+    "mutated conclusion or completion status rejects",
+    "public surface drift rejects"
+  ],
+  "targets": [
+    {
+      "id": "CheckMinimalKernel0",
+      "file": "pcc-minimal-kernel0.mjs",
+      "exportName": "CheckMinimalKernel0",
+      "validCase": "minimal.valid-default",
+      "mutations": [
+        { "id": "minimal.kind-mismatch", "family": "mutated kind rejects", "expectedTag": "reject" },
+        { "id": "minimal.boundary-activation", "family": "mutated boundary rejects", "expectedTag": "reject" },
+        { "id": "minimal.missing-primitive-rule", "family": "missing required dependency rejects", "expectedTag": "reject" },
+        { "id": "minimal.caller-readiness", "family": "caller supplied readiness rejects", "expectedTag": "reject" }
+      ]
+    },
+    {
+      "id": "CheckTrustBase0",
+      "file": "pcc-trust-base0.mjs",
+      "exportName": "CheckTrustBase0",
+      "validCase": "trustbase.valid-default",
+      "mutations": [
+        { "id": "trustbase.kind-mismatch", "family": "mutated kind rejects", "expectedTag": "reject" },
+        { "id": "trustbase.boundary-activation", "family": "mutated boundary rejects", "expectedTag": "reject" },
+        { "id": "trustbase.missing-assumption", "family": "missing required dependency rejects", "expectedTag": "reject" },
+        { "id": "trustbase.checksum-mismatch", "family": "mutated digest or checksum rejects", "expectedTag": "reject" },
+        { "id": "trustbase.empty-claim", "family": "mutated conclusion or completion status rejects", "expectedTag": "reject" }
+      ]
+    },
+    {
+      "id": "CheckTrustBaseShrinkPlan0",
+      "file": "pcc-trust-base-shrink-plan0.mjs",
+      "exportName": "CheckTrustBaseShrinkPlan0",
+      "validCase": "shrink.valid-default",
+      "mutations": [
+        { "id": "shrink.kind-mismatch", "family": "mutated kind rejects", "expectedTag": "reject" },
+        { "id": "shrink.boundary-activation", "family": "mutated boundary rejects", "expectedTag": "reject" },
+        { "id": "shrink.unknown-dependency", "family": "missing required dependency rejects", "expectedTag": "reject" },
+        { "id": "shrink.premature-complete", "family": "mutated conclusion or completion status rejects", "expectedTag": "reject" }
+      ]
+    },
+    {
+      "id": "CheckPublicEntryReleaseSurface0",
+      "file": "pcc-public-surface-freeze0.mjs",
+      "exportName": "CheckPublicEntryReleaseSurface0",
+      "validCase": "publicsurface.valid-default",
+      "mutations": [
+        { "id": "publicsurface.extra-script", "family": "public surface drift rejects", "expectedTag": "reject" },
+        { "id": "publicsurface.main-mismatch", "family": "mutated conclusion or completion status rejects", "expectedTag": "reject" },
+        { "id": "publicsurface.exports-missing", "family": "missing required dependency rejects", "expectedTag": "reject" }
+      ]
+    }
+  ],
+  "audit": {
+    "checker": "AuditNegativeCheckerMutations0",
+    "script": "scripts/audit-negative-checker-mutations.mjs",
+    "command": "npm run checker:mutations",
+    "expectedAcceptTag": "accept"
+  }
+}
