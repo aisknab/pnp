@@ -1,0 +1,459 @@
+{
+  "kind": "PNPReportTheoremBindings0",
+  "version": 0,
+  "coordinate": "REPORT-THEOREM-BINDINGS-2026-06-27-01",
+  "title": "Theorem-to-checker binding ledger",
+  "purpose": "Bind the release-critical theorem spine in the historical canonical report to concrete checker files, proof artifacts, and tests without activating public theorem emission.",
+  "status": "audit-ledger-ready",
+  "coverageScope": "phase-79 initial ledger for release-critical theorem spine; future ledgers may expand this to every numbered theorem environment",
+  "createdForPrTrack": "PR-79 audit: add theorem-to-checker binding ledger",
+  "claimBoundary": {
+    "project": "PNP",
+    "status": "machine-checkable internal proof-certificate stack under public-review boundary",
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "successorReportArtifactReleaseReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ],
+    "externalReviewObjective": "make external review redundant with reproducible machine evidence, not a substitute for repo-internal auditability"
+  },
+  "sources": [
+    {
+      "id": "historical-canonical-report-7072f8d",
+      "kind": "historical-sealed-report-source",
+      "textPath": "canonical_proof_report.tex",
+      "pdfPath": "canonical_proof_report.pdf",
+      "status": "historical-sealed-report-not-mutated"
+    },
+    {
+      "id": "historical-sealed-artifact-bundle",
+      "kind": "release-artifact-bundle",
+      "path": "proof-artifacts/final-pnp-proof-report-hardened-7072f8d/release-seal.json",
+      "checksumPath": "proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS",
+      "status": "sealed-historical-input"
+    },
+    {
+      "id": "successor-public-review-report-seal",
+      "kind": "successor-boundary-seal",
+      "path": "successor-report-seals/PNP-REPORT-SEAL-2026-06-27-01/SEAL.json",
+      "checksumPath": "successor-report-seals/PNP-REPORT-SEAL-2026-06-27-01/SHA256SUMS",
+      "checkerId": "CheckSuccessorPublicReviewReportSeal0",
+      "status": "successor-seal-ready-report-artifact-release-not-ready"
+    }
+  ],
+  "reportTextSource": "canonical_proof_report.tex",
+  "bindingRequirements": [
+    "Each theorem entry must have a stable id, report theorem name, report section, non-empty statement summary, and at least one report anchor.",
+    "Each theorem entry must resolve through one or more binding groups to checker ids, checker files, proof artifacts, and tests.",
+    "No theorem entry may discharge public theorem emission or alter the release blockers.",
+    "The audit script must reject missing files, missing report anchors, unresolved groups, duplicate ids, and checker ids absent from their declared checker files."
+  ],
+  "bindingGroups": {
+    "package-stack-boundary": {
+      "description": "Top-level PCCPack, materialized package, and global proof-DAG checker surface used for report-level theorem bindings.",
+      "checkerIds": [
+        "CheckPCCPackexp0",
+        "CheckConcreteMaterializedPCCPack0",
+        "CheckGlobalProofDAG0"
+      ],
+      "checkerFiles": [
+        "pcc-check-pcc-pack-exp0.mjs",
+        "pcc-pack-concrete-materialized0.mjs",
+        "pcc-global-proof-dag0.mjs",
+        "pcc-materialized-checkpack0.mjs"
+      ],
+      "proofArtifacts": [
+        "canonical_proof_report.tex",
+        "canonical_proof_report.pdf",
+        "docs/proof_pipeline.md",
+        "docs/trust_model.md",
+        "proof-artifacts/final-pnp-proof-report-hardened-7072f8d/release-seal.json"
+      ],
+      "tests": [
+        "test/pcc-check-pcc-pack-exp0.test.mjs",
+        "test/pcc-pack-concrete-materialized0.test.mjs",
+        "test/pcc-global-proof-dag0.test.mjs",
+        "test/pcc-materialized-checkpack0.test.mjs"
+      ],
+      "bindingStrength": "current checker-surface binding; not independent mathematical validation"
+    },
+    "kernel-proof-dag": {
+      "description": "Kernel, verifier-fragment, row/proof reference, and global proof-DAG surface.",
+      "checkerIds": [
+        "CheckVerifierFrag0",
+        "CheckGlobalProofDAG0",
+        "CheckPCCPackexp0"
+      ],
+      "checkerFiles": [
+        "pcc-verifier-frag0.mjs",
+        "pcc-global-proof-dag0.mjs",
+        "pcc-check-pcc-pack-exp0.mjs",
+        "pcc-k-materialized0.mjs",
+        "pcc-rows0.mjs"
+      ],
+      "proofArtifacts": [
+        "canonical_proof_report.tex",
+        "docs/proof_pipeline.md",
+        "docs/trust_model.md"
+      ],
+      "tests": [
+        "test/pcc-core.test.mjs",
+        "test/pcc-public-api0.test.mjs",
+        "test/pcc-global-proof-dag0.test.mjs",
+        "test/pcc-rows0.test.mjs",
+        "test/pcc-k-materialized0.test.mjs"
+      ],
+      "bindingStrength": "kernel/proof-DAG implementation-surface binding; not a clean-room proof"
+    },
+    "locked-nand-final-reduction": {
+      "description": "Locked-NAND SAT embedding, final framework match, SAT decision, and polynomial-bound checker surface.",
+      "checkerIds": [
+        "CheckGPack0",
+        "CheckFinalFrameworkMatch0",
+        "CheckSATDecision0",
+        "CheckSATBounds0"
+      ],
+      "checkerFiles": [
+        "pcc-gpack0.mjs",
+        "pcc-final-framework0.mjs",
+        "pcc-global-final-sat-reduction-semantic0.mjs",
+        "pcc-global-final-complexity-semantic0.mjs"
+      ],
+      "proofArtifacts": [
+        "canonical_proof_report.tex",
+        "canonical_proof_report.pdf",
+        "docs/proof_pipeline.md"
+      ],
+      "tests": [
+        "test/pcc-gpack0.test.mjs",
+        "test/pcc-final-framework0.test.mjs",
+        "test/pcc-final-integration-materialized0.test.mjs",
+        "test/pcc-global-final-complexity-semantic0.test.mjs"
+      ],
+      "bindingStrength": "locked-reduction implementation-surface binding; does not by itself prove reduction correctness"
+    },
+    "final-release-boundary": {
+      "description": "Final theorem, package sufficiency, final proof-report, and public-release boundary checker surface.",
+      "checkerIds": [
+        "CheckFinal0",
+        "CheckPCCPackexp0",
+        "CheckFinalPNPProofReport0",
+        "CheckSuccessorPublicReviewReportSeal0"
+      ],
+      "checkerFiles": [
+        "pcc-final0.mjs",
+        "pcc-pack-sufficiency0.mjs",
+        "pcc-check-pcc-pack-exp0.mjs",
+        "pcc-final-proof-report0.mjs",
+        "pcc-successor-report-seal0.mjs"
+      ],
+      "proofArtifacts": [
+        "canonical_proof_report.tex",
+        "canonical_proof_report.pdf",
+        "proof-artifacts/final-pnp-proof-report-hardened-7072f8d/release-seal.json",
+        "successor-report-seals/PNP-REPORT-SEAL-2026-06-27-01/SEAL.json"
+      ],
+      "tests": [
+        "test/pcc-final0.test.mjs",
+        "test/pcc-pack-sufficiency0.test.mjs",
+        "test/pcc-check-pcc-pack-exp0.test.mjs",
+        "test/pcc-final-proof-report0.test.mjs",
+        "test/pcc-successor-report-seal0.test.mjs"
+      ],
+      "bindingStrength": "final-release checker-surface binding; public theorem emission remains disabled by successor boundary"
+    },
+    "successor-report-boundary": {
+      "description": "Successor public-review seal and public theorem-emission boundary.",
+      "checkerIds": [
+        "CheckSuccessorPublicReviewReportSeal0"
+      ],
+      "checkerFiles": [
+        "pcc-successor-report-seal0.mjs"
+      ],
+      "proofArtifacts": [
+        "successor-report-seals/PNP-REPORT-SEAL-2026-06-27-01/SEAL.json",
+        "successor-report-seals/PNP-REPORT-SEAL-2026-06-27-01/SHA256SUMS",
+        "docs/semantic_kernel_phase55.md"
+      ],
+      "tests": [
+        "test/pcc-successor-report-seal0.test.mjs"
+      ],
+      "bindingStrength": "public-review framing and blocker preservation surface"
+    }
+  },
+  "theoremBindings": [
+    {
+      "id": "THM-1-1",
+      "theoremNumber": "1.1",
+      "reportSection": "1.2",
+      "reportTheoremName": "Final accepted finite-certificate theorem",
+      "reportAnchors": ["Final accepted finite-certificate theorem"],
+      "statementSummary": "Historical report theorem connecting accepted generated-package records to the stated final conclusion under the checker trust model.",
+      "bindingGroupIds": ["final-release-boundary", "successor-report-boundary"],
+      "bindingStatus": "bound-to-current-checker-surface",
+      "claimEffect": "audit-ledger-only",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "THM-6-1",
+      "theoremNumber": "6.1",
+      "reportSection": "6.1",
+      "reportTheoremName": "VerifyDW soundness",
+      "reportAnchors": ["VerifyDW soundness"],
+      "statementSummary": "Direct-wire replacement verification implies semantic preservation and strict residual-slack descent.",
+      "bindingGroupIds": ["package-stack-boundary", "kernel-proof-dag"],
+      "bindingStatus": "bound-to-current-checker-surface",
+      "claimEffect": "audit-ledger-only",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "THM-10-1",
+      "theoremNumber": "10.1",
+      "reportSection": "10.1",
+      "reportTheoremName": "RW-MuBridge, terminal form",
+      "reportAnchors": ["RW-MuBridge, terminal form"],
+      "statementSummary": "Terminal whole-carrier bridge equality between whole-circuit and closed full-carrier minima.",
+      "bindingGroupIds": ["package-stack-boundary", "kernel-proof-dag"],
+      "bindingStatus": "bound-to-current-checker-surface",
+      "claimEffect": "audit-ledger-only",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "THM-10-4",
+      "theoremNumber": "10.4",
+      "reportSection": "10.4",
+      "reportTheoremName": "RW-BCELReady",
+      "reportAnchors": ["RW-BCELReady"],
+      "statementSummary": "Positive residual slack yields a BCEL-ready projection-positive hull absent earlier routes.",
+      "bindingGroupIds": ["package-stack-boundary", "kernel-proof-dag"],
+      "bindingStatus": "bound-to-current-checker-surface",
+      "claimEffect": "audit-ledger-only",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "THM-11-1",
+      "theoremNumber": "11.1",
+      "reportSection": "11.1",
+      "reportTheoremName": "BN2-CoherentOptimum",
+      "reportAnchors": ["BN2-CoherentOptimum"],
+      "statementSummary": "BN2 side-tight coherent optima compute merge defects without overclaiming from non-tight bases.",
+      "bindingGroupIds": ["package-stack-boundary", "kernel-proof-dag"],
+      "bindingStatus": "bound-to-current-checker-surface",
+      "claimEffect": "audit-ledger-only",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "THM-11-2",
+      "theoremNumber": "11.2",
+      "reportSection": "11.2",
+      "reportTheoremName": "BN3-SimultaneousEnvelope",
+      "reportAnchors": ["BN3-SimultaneousEnvelope"],
+      "statementSummary": "BN3 finite request systems express cut defects through jointly realizable side-tight envelopes.",
+      "bindingGroupIds": ["package-stack-boundary", "kernel-proof-dag"],
+      "bindingStatus": "bound-to-current-checker-surface",
+      "claimEffect": "audit-ledger-only",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "THM-11-3",
+      "theoremNumber": "11.3",
+      "reportSection": "11.3",
+      "reportTheoremName": "BN4-ActivationExact",
+      "reportAnchors": ["BN4-ActivationExact"],
+      "statementSummary": "BN4 active-antichain codes support exact activation cancellation and mass ledger accounting.",
+      "bindingGroupIds": ["package-stack-boundary", "kernel-proof-dag"],
+      "bindingStatus": "bound-to-current-checker-surface",
+      "claimEffect": "audit-ledger-only",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "THM-11-4",
+      "theoremNumber": "11.4",
+      "reportSection": "11.4",
+      "reportTheoremName": "BN5-FullShadowLocalization",
+      "reportAnchors": ["BN5-FullShadowLocalization"],
+      "statementSummary": "BN5 localizes every active negative full residual key to named outcomes or silence.",
+      "bindingGroupIds": ["package-stack-boundary", "kernel-proof-dag"],
+      "bindingStatus": "bound-to-current-checker-surface",
+      "claimEffect": "audit-ledger-only",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "THM-11-6",
+      "theoremNumber": "11.6",
+      "reportSection": "11.6",
+      "reportTheoremName": "BN6-HypergraphPacket",
+      "reportAnchors": ["BN6-HypergraphPacket"],
+      "statementSummary": "BN6 collapses nonnegative constant-cut hypergraphs into positive packet prototypes.",
+      "bindingGroupIds": ["package-stack-boundary", "kernel-proof-dag"],
+      "bindingStatus": "bound-to-current-checker-surface",
+      "claimEffect": "audit-ledger-only",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "THM-13-4",
+      "theoremNumber": "13.4",
+      "reportSection": "13.4",
+      "reportTheoremName": "BCEL seed, patched",
+      "reportAnchors": ["BCEL seed, patched"],
+      "statementSummary": "BCEL positive packet prototypes produce a faithful selector in the polynomial selector universe.",
+      "bindingGroupIds": ["package-stack-boundary", "kernel-proof-dag"],
+      "bindingStatus": "bound-to-current-checker-surface",
+      "claimEffect": "audit-ledger-only",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "THM-14-1",
+      "theoremNumber": "14.1",
+      "reportSection": "14.1",
+      "reportTheoremName": "Selector realization",
+      "reportAnchors": ["Selector realization"],
+      "statementSummary": "Selector realizer returns only verified gains or typed bot explanations for faithful selectors.",
+      "bindingGroupIds": ["package-stack-boundary", "kernel-proof-dag"],
+      "bindingStatus": "bound-to-current-checker-surface",
+      "claimEffect": "audit-ledger-only",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "THM-14-2",
+      "theoremNumber": "14.2",
+      "reportSection": "14.2",
+      "reportTheoremName": "R-ChargeSurplus",
+      "reportAnchors": ["R-ChargeSurplus"],
+      "statementSummary": "Faithful unblocked selectors admit strict charge-surplus injections and verified gains.",
+      "bindingGroupIds": ["package-stack-boundary", "kernel-proof-dag"],
+      "bindingStatus": "bound-to-current-checker-surface",
+      "claimEffect": "audit-ledger-only",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "THM-15-1",
+      "theoremNumber": "15.1",
+      "reportSection": "15.1",
+      "reportTheoremName": "HB negative closure",
+      "reportAnchors": ["HB negative closure"],
+      "statementSummary": "HN/BUD blocker graph acyclicity and rank-negative closure.",
+      "bindingGroupIds": ["package-stack-boundary", "kernel-proof-dag"],
+      "bindingStatus": "bound-to-current-checker-surface",
+      "claimEffect": "audit-ledger-only",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "THM-16-1",
+      "theoremNumber": "16.1",
+      "reportSection": "16.1",
+      "reportTheoremName": "Rank-parametric ZeroSlack",
+      "reportAnchors": ["Rank-parametric ZeroSlack"],
+      "statementSummary": "ZeroSlack output implies residual slack zero under the recorded no-lower and selector-silence ledgers.",
+      "bindingGroupIds": ["package-stack-boundary", "kernel-proof-dag"],
+      "bindingStatus": "bound-to-current-checker-surface",
+      "claimEffect": "audit-ledger-only",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "THM-16-2",
+      "theoremNumber": "16.2",
+      "reportSection": "16.2",
+      "reportTheoremName": "Residual-band exact minimization",
+      "reportAnchors": ["Residual-band exact minimization"],
+      "statementSummary": "Residual-band PCCMin returns exact minimum circuits in polynomial time for bounded residual slack.",
+      "bindingGroupIds": ["package-stack-boundary", "kernel-proof-dag"],
+      "bindingStatus": "bound-to-current-checker-surface",
+      "claimEffect": "audit-ledger-only",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "THM-17-2",
+      "theoremNumber": "17.2",
+      "reportSection": "17.3",
+      "reportTheoremName": "Locked NAND threshold",
+      "reportAnchors": ["Locked NAND threshold"],
+      "statementSummary": "Locked-NAND construction separates satisfiable and unsatisfiable instances by exact minimum threshold.",
+      "bindingGroupIds": ["locked-nand-final-reduction", "kernel-proof-dag"],
+      "bindingStatus": "bound-to-current-checker-surface",
+      "claimEffect": "audit-ledger-only",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "THM-18-1",
+      "theoremNumber": "18.1",
+      "reportSection": "18.3",
+      "reportTheoremName": "Package sufficiency",
+      "reportAnchors": ["Package sufficiency"],
+      "statementSummary": "Accepted PCCPack implies valid explicit polynomial package and residual-band minimization.",
+      "bindingGroupIds": ["package-stack-boundary", "final-release-boundary"],
+      "bindingStatus": "bound-to-current-checker-surface",
+      "claimEffect": "audit-ledger-only",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "THM-18-2",
+      "theoremNumber": "18.2",
+      "reportSection": "18.4",
+      "reportTheoremName": "Accepted package implies \\(P=NP\\)",
+      "reportAnchors": ["Accepted package implies \\(P=NP\\)"],
+      "statementSummary": "Accepted package implies SAT in P and hence P equals NP under the historical report boundary.",
+      "bindingGroupIds": ["locked-nand-final-reduction", "final-release-boundary"],
+      "bindingStatus": "bound-to-current-checker-surface",
+      "claimEffect": "audit-ledger-only",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "THM-19-2",
+      "theoremNumber": "19.2",
+      "reportSection": "19.4",
+      "reportTheoremName": "NF protocol soundness",
+      "reportAnchors": ["NF protocol soundness"],
+      "statementSummary": "Interface dictionary, normal-form, row-key, route, proof-reference, and hash checks enforce row identity and routing discipline.",
+      "bindingGroupIds": ["kernel-proof-dag", "package-stack-boundary"],
+      "bindingStatus": "bound-to-current-checker-surface",
+      "claimEffect": "audit-ledger-only",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "THM-20-19",
+      "theoremNumber": "20.19",
+      "reportSection": "20.21",
+      "reportTheoremName": "Final proof-report acceptance",
+      "reportAnchors": ["Final proof-report acceptance"],
+      "statementSummary": "Final proof-report acceptance binds package acceptance, final replay, release gate, and theorem statement under the historical report boundary.",
+      "bindingGroupIds": ["final-release-boundary", "successor-report-boundary"],
+      "bindingStatus": "bound-to-current-checker-surface",
+      "claimEffect": "audit-ledger-only",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    }
+  ],
+  "audit": {
+    "script": "scripts/audit-report-theorem-bindings.mjs",
+    "defaultCommand": "node scripts/audit-report-theorem-bindings.mjs",
+    "expectedAcceptTag": "accept",
+    "expectedBindingCount": 20,
+    "requiredBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  }
+}
