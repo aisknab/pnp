@@ -1,0 +1,141 @@
+{
+  "kind": "PNPRuleFamilyCoverage0",
+  "version": 0,
+  "coordinate": "PNP-RULE-FAMILY-COVERAGE-2026-06-27-01",
+  "title": "Rule-family coverage ledger",
+  "purpose": "Record which public self-verification rule families have executable positive, negative, and mutation coverage, without claiming full semantic coverage of every historical theorem family yet.",
+  "status": "rule-family-coverage-ledger-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "coverageLedgerReady": true,
+  "fullRuleFamilyCoverageProved": false,
+  "coverageScope": "seed coverage ledger for the public self-verification stack; later PRs should expand each family until every corresponding checker and theorem binding is fully covered",
+  "ruleFamilies": [
+    {
+      "id": "DPInd",
+      "title": "Dynamic-programming induction and finite request/envelope reasoning",
+      "positiveTestCount": 2,
+      "negativeTestCount": 1,
+      "mutationTestCount": 0,
+      "coverageStatus": "represented-seed",
+      "evidenceFiles": [
+        "kernel/PNP_MINIMAL_KERNEL.json",
+        "trust-base/SHRINK_PLAN.json",
+        "pcc-trust-base-shrink-plan0.mjs",
+        "audits/trust-base-shrink-plan0.test.mjs"
+      ],
+      "notes": "The minimal kernel and shrink plan represent DPInd as a rule family and require future executable DP small-model coverage."
+    },
+    {
+      "id": "GlobalFinalPrefix",
+      "title": "Global final-prefix and active final-node quarantine",
+      "positiveTestCount": 3,
+      "negativeTestCount": 3,
+      "mutationTestCount": 2,
+      "coverageStatus": "covered-seed",
+      "evidenceFiles": [
+        "kernel/PNP_MINIMAL_KERNEL.json",
+        "pcc-minimal-kernel0.mjs",
+        "audits/checker-totality0.test.mjs",
+        "checker-mutations/NEGATIVE_CHECKER_MUTATIONS.json"
+      ],
+      "notes": "Current coverage checks that final theorem nodes remain quarantined and activeFinalNodeIds remains empty under seed fuzzing and mutation cases."
+    },
+    {
+      "id": "SATReduction",
+      "title": "Locked NAND SAT-reduction checker surface",
+      "positiveTestCount": 1,
+      "negativeTestCount": 1,
+      "mutationTestCount": 0,
+      "coverageStatus": "represented-seed",
+      "evidenceFiles": [
+        "kernel/PNP_MINIMAL_KERNEL.json",
+        "report-bindings/REPORT_THEOREM_BINDINGS.json",
+        "trust-base/TRUST_BASE.json",
+        "pcc-gpack0.mjs",
+        "pcc-global-final-sat-reduction-semantic0.mjs"
+      ],
+      "notes": "The reduction surface is bound into the minimal kernel and trust base; exhaustive small locked-NAND SAT truth-table tests remain planned in TB-007."
+    },
+    {
+      "id": "Complexity",
+      "title": "Complexity implication SAT in P implies P equals NP",
+      "positiveTestCount": 1,
+      "negativeTestCount": 1,
+      "mutationTestCount": 0,
+      "coverageStatus": "represented-seed",
+      "evidenceFiles": [
+        "kernel/PNP_MINIMAL_KERNEL.json",
+        "trust-base/TRUST_BASE.json",
+        "pcc-global-final-complexity-semantic0.mjs",
+        "report-bindings/REPORT_THEOREM_BINDINGS.json"
+      ],
+      "notes": "The implication is represented as an explicit trust-base item and minimal-kernel spine family; a machine-readable complexity ledger remains planned."
+    },
+    {
+      "id": "PublicEmission",
+      "title": "Public theorem-emission gate and non-activation boundary",
+      "positiveTestCount": 5,
+      "negativeTestCount": 8,
+      "mutationTestCount": 4,
+      "coverageStatus": "covered-seed",
+      "evidenceFiles": [
+        "PNP_STATUS.json",
+        "pcc-public-surface-freeze0.mjs",
+        "pcc-minimal-kernel0.mjs",
+        "pcc-trust-base0.mjs",
+        "pcc-trust-base-shrink-plan0.mjs",
+        "scripts/pnp-verify-all.mjs",
+        "checker-mutations/NEGATIVE_CHECKER_MUTATIONS.json"
+      ],
+      "notes": "The current seed stack repeatedly checks publicTheoremEmissionAllowed=false, finalTheoremReady=false, empty active final nodes, and exact remaining blockers."
+    },
+    {
+      "id": "SuccessorSeal",
+      "title": "Successor public-review report seal boundary",
+      "positiveTestCount": 1,
+      "negativeTestCount": 2,
+      "mutationTestCount": 0,
+      "coverageStatus": "represented-seed",
+      "evidenceFiles": [
+        "pcc-successor-report-seal0.mjs",
+        "successor-report-seals/PNP-REPORT-SEAL-2026-06-27-01/SEAL.json",
+        "successor-report-seals/PNP-REPORT-SEAL-2026-06-27-01/SHA256SUMS",
+        "audits/checker-totality0.test.mjs"
+      ],
+      "notes": "Successor seal behavior is covered by shallow totality fuzzing and remains bound to the successor public-review boundary."
+    },
+    {
+      "id": "TrustBase",
+      "title": "Explicit trust-base representation and shrink planning",
+      "positiveTestCount": 4,
+      "negativeTestCount": 10,
+      "mutationTestCount": 9,
+      "coverageStatus": "covered-seed",
+      "evidenceFiles": [
+        "TRUST_BASE.md",
+        "trust-base/TRUST_BASE.json",
+        "trust-base/SHRINK_PLAN.json",
+        "pcc-trust-base0.mjs",
+        "pcc-trust-base-shrink-plan0.mjs",
+        "audits/trust-base0.test.mjs",
+        "audits/trust-base-shrink-plan0.test.mjs",
+        "checker-mutations/NEGATIVE_CHECKER_MUTATIONS.json"
+      ],
+      "notes": "Trust-base explicitness, non-emptiness, checksum binding, represented-file checks, and shrink-plan non-activation are covered by seed audits and mutations."
+    }
+  ],
+  "audit": {
+    "checker": "CheckRuleFamilyCoverage0",
+    "script": "pcc-rule-family-coverage0.mjs",
+    "command": "npm run rule-family:coverage",
+    "expectedAcceptTag": "accept"
+  }
+}
