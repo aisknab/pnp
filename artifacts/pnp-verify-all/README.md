@@ -20,11 +20,13 @@ The verifier currently checks:
 2. Node syntax for the core verifier and public audit scripts.
 3. The repository Node test suite.
 4. The theorem-to-checker binding ledger audit.
-5. Cross-runtime minimal-kernel agreement.
-6. Independent verifier no-shared-code policy.
-7. Independent verifier audit tests.
-8. Independent Python verifier tests.
-9. Release-audit surface preservation.
+5. The explicit trust-base audit and checksum ledger.
+6. The trust-base audit tests.
+7. Cross-runtime minimal-kernel agreement.
+8. Independent verifier no-shared-code policy.
+9. Independent verifier audit tests.
+10. Independent Python verifier tests.
+11. Release-audit surface preservation.
 
 The accepted verdict keeps the public-review boundary explicit:
 
