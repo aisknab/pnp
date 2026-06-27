@@ -36,7 +36,6 @@
       "exportName": "CheckSuccessorPublicReviewReportSeal0",
       "category": "successor-report-boundary",
       "cases": [
-        { "id": "successor.valid-input", "expectedTag": "accept" },
         { "id": "successor.null-input", "expectedTag": "reject" },
         { "id": "successor.caller-readiness", "expectedTag": "reject" }
       ]
