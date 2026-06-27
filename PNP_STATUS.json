@@ -20,8 +20,9 @@
   "minimalKernelCoordinate": "PNP-MINIMAL-KERNEL-2026-06-27-01",
   "trustBaseCoordinate": "PNP-TRUST-BASE-2026-06-27-01",
   "trustBaseShrinkPlanCoordinate": "PNP-TRUST-BASE-SHRINK-PLAN-2026-06-27-01",
+  "checkerTotalityAuditCoordinate": "PNP-CHECKER-TOTALITY-AUDIT-2026-06-27-01",
   "noSharedCodePolicyCoordinate": "PNP-INDEPENDENT-VERIFIERS-NO-SHARED-CODE-2026-06-27-01",
-  "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-PNP-VERIFY-ALL-01",
+  "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-CHECKER-TOTALITY-01",
   "lastVerifiedCommit": "current-checkout",
   "verificationSurfaces": [
     {
@@ -45,6 +46,11 @@
       "outputKind": "accept|reject"
     },
     {
+      "id": "checker-totality-seed-audit",
+      "command": "npm run checker:totality",
+      "outputKind": "accept|reject"
+    },
+    {
       "id": "independent-no-shared-code-audit",
       "command": "npm run independent:no-shared-code",
       "outputKind": "accept|reject"
@@ -58,6 +64,7 @@
   "nonClaims": [
     "This status file does not activate public theorem emission.",
     "This status file does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "The checker-totality seed audit does not yet claim every historical checker has been fuzzed for totality.",
     "The historical canonical report may be superseded by successor public-review reports, but this status file records the current non-activation boundary."
   ]
 }
