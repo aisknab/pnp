@@ -1,0 +1,82 @@
+{
+  "kind": "PNPCheckerTotalityAudit0",
+  "version": 0,
+  "coordinate": "PNP-CHECKER-TOTALITY-AUDIT-2026-06-27-01",
+  "title": "Checker totality seed audit",
+  "purpose": "Inventory checker exports and fuzz the current public self-verification checker surface for total accept/reject behavior without claiming that every historical checker is total yet.",
+  "status": "checker-totality-seed-ready",
+  "scope": "full Check*0 export inventory plus seed totality fuzzing for the public self-verification checker surface",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "checkerTotalitySeedReady": true,
+  "fullCheckerTotalityProved": false,
+  "exportInventoryRequired": true,
+  "requiredAuditedCheckers": [
+    {
+      "id": "CheckMinimalKernel0",
+      "file": "pcc-minimal-kernel0.mjs",
+      "exportName": "CheckMinimalKernel0",
+      "category": "minimal-kernel",
+      "cases": [
+        { "id": "minimal.valid-default", "expectedTag": "accept" },
+        { "id": "minimal.null-input", "expectedTag": "reject" },
+        { "id": "minimal.caller-readiness", "expectedTag": "reject" }
+      ]
+    },
+    {
+      "id": "CheckSuccessorPublicReviewReportSeal0",
+      "file": "pcc-successor-report-seal0.mjs",
+      "exportName": "CheckSuccessorPublicReviewReportSeal0",
+      "category": "successor-report-boundary",
+      "cases": [
+        { "id": "successor.null-input", "expectedTag": "reject" },
+        { "id": "successor.caller-readiness", "expectedTag": "reject" }
+      ]
+    },
+    {
+      "id": "CheckTrustBase0",
+      "file": "pcc-trust-base0.mjs",
+      "exportName": "CheckTrustBase0",
+      "category": "trust-base",
+      "cases": [
+        { "id": "trustbase.valid-default", "expectedTag": "accept" },
+        { "id": "trustbase.bad-json-shape", "expectedTag": "reject" },
+        { "id": "trustbase.boundary-activation", "expectedTag": "reject" }
+      ]
+    },
+    {
+      "id": "CheckTrustBaseShrinkPlan0",
+      "file": "pcc-trust-base-shrink-plan0.mjs",
+      "exportName": "CheckTrustBaseShrinkPlan0",
+      "category": "trust-base-shrink-plan",
+      "cases": [
+        { "id": "shrink.valid-default", "expectedTag": "accept" },
+        { "id": "shrink.bad-plan-shape", "expectedTag": "reject" },
+        { "id": "shrink.premature-complete", "expectedTag": "reject" }
+      ]
+    },
+    {
+      "id": "CheckPublicEntryReleaseSurface0",
+      "file": "pcc-public-surface-freeze0.mjs",
+      "exportName": "CheckPublicEntryReleaseSurface0",
+      "category": "public-surface",
+      "cases": [
+        { "id": "publicsurface.valid-default", "expectedTag": "accept" },
+        { "id": "publicsurface.bad-package-json", "expectedTag": "reject" }
+      ]
+    }
+  ],
+  "audit": {
+    "checker": "AuditCheckerTotality0",
+    "script": "scripts/audit-checker-totality.mjs",
+    "command": "npm run checker:totality",
+    "expectedAcceptTag": "accept"
+  }
+}
