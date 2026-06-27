@@ -16,4 +16,10 @@ npm run independent:no-shared-code
 
 The audit validates `independent-verifiers/NO_SHARED_CODE_POLICY.json`, scans the independent verifier source tree, and rejects forbidden imports, dynamic execution patterns, unsupported file types, symlinks, and policy changes that would allow shared JavaScript checker code.
 
+The audit test suite is kept under `audits/` rather than the frozen release-test inventory:
+
+```bash
+node --test audits/independent-verifiers-no-shared-code.test.mjs
+```
+
 The audit is a redundancy-strengthening layer only. It does not clear the remaining blockers and does not activate public theorem emission.
