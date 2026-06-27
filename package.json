@@ -32,6 +32,7 @@
     "validate": "npm run check && npm test",
     "cross-verify": "node scripts/cross-verify.mjs",
     "cross-verify:json": "node scripts/cross-verify.mjs --json",
+    "independent:no-shared-code": "node scripts/audit-independent-verifiers-no-shared-code.mjs --json",
     "examples:minimal": "node examples/minimal/run-all.mjs",
     "runall": "node ./bin/runall0.mjs",
     "smoke": "node ./bin/runall0.mjs",
