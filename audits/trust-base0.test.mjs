@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 
@@ -14,6 +15,10 @@ async function loadTrustBase0() {
 
 function clone0(value) {
   return JSON.parse(JSON.stringify(value));
+}
+
+function shaForTrustBaseOverride0(value) {
+  return createHash('sha256').update(JSON.stringify(value, null, 2) + '\n').digest('hex');
 }
 
 test('trust-base checker accepts current trust base and checksum ledger', async () => {
@@ -41,7 +46,7 @@ test('trust-base checker rejects public theorem emission activation', async () =
 
   const out = await CheckTrustBase0({
     trustBaseOverride: trustBase,
-    sha256SumsOverride: '0'.repeat(64) + '  TRUST_BASE.json\n',
+    sha256SumsOverride: `${shaForTrustBaseOverride0(trustBase)}  TRUST_BASE.json\n`,
     writeOutput: false,
   });
 
@@ -56,7 +61,7 @@ test('trust-base checker rejects an empty trust base', async () => {
 
   const out = await CheckTrustBase0({
     trustBaseOverride: trustBase,
-    sha256SumsOverride: '0'.repeat(64) + '  TRUST_BASE.json\n',
+    sha256SumsOverride: `${shaForTrustBaseOverride0(trustBase)}  TRUST_BASE.json\n`,
     writeOutput: false,
   });
 
@@ -71,7 +76,7 @@ test('trust-base checker rejects missing required assumption id', async () => {
 
   const out = await CheckTrustBase0({
     trustBaseOverride: trustBase,
-    sha256SumsOverride: '0'.repeat(64) + '  TRUST_BASE.json\n',
+    sha256SumsOverride: `${shaForTrustBaseOverride0(trustBase)}  TRUST_BASE.json\n`,
     writeOutput: false,
   });
 
@@ -96,14 +101,14 @@ test('trust-base checker rejects checksum mismatch', async () => {
 test('trust-base checker rejects missing represented files', async () => {
   const trustBase = clone0(await loadTrustBase0());
   trustBase.assumptions[0].representedBy.push('missing/trust-base-witness.txt');
-  const hash = '0'.repeat(64);
 
   const out = await CheckTrustBase0({
     trustBaseOverride: trustBase,
-    sha256SumsOverride: `${hash}  TRUST_BASE.json\n`,
+    sha256SumsOverride: `${shaForTrustBaseOverride0(trustBase)}  TRUST_BASE.json\n`,
     writeOutput: false,
   });
 
   assert.equal(out.tag, 'reject');
-  assert.equal(out.coord, 'TrustBase.ChecksumMismatch');
+  assert.equal(out.coord, 'TrustBase.RepresentedPathMissing');
+  assert.deepEqual(out.path, ['missing/trust-base-witness.txt']);
 });
