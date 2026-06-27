@@ -19,6 +19,7 @@
   "theoremBindingLedgerCoordinate": "REPORT-THEOREM-BINDINGS-2026-06-27-01",
   "minimalKernelCoordinate": "PNP-MINIMAL-KERNEL-2026-06-27-01",
   "trustBaseCoordinate": "PNP-TRUST-BASE-2026-06-27-01",
+  "trustBaseShrinkPlanCoordinate": "PNP-TRUST-BASE-SHRINK-PLAN-2026-06-27-01",
   "noSharedCodePolicyCoordinate": "PNP-INDEPENDENT-VERIFIERS-NO-SHARED-CODE-2026-06-27-01",
   "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-PNP-VERIFY-ALL-01",
   "lastVerifiedCommit": "current-checkout",
@@ -36,6 +37,11 @@
     {
       "id": "trust-base-audit",
       "command": "node pcc-trust-base0.mjs --json",
+      "outputKind": "accept|reject"
+    },
+    {
+      "id": "trust-base-shrink-plan-audit",
+      "command": "node pcc-trust-base-shrink-plan0.mjs --json",
       "outputKind": "accept|reject"
     },
     {
