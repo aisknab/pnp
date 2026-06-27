@@ -1,0 +1,25 @@
+name: trust-base-shrink-plan
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  trust-base-shrink-plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Verify trust-base shrink plan
+        run: node pcc-trust-base-shrink-plan0.mjs --json
+      - name: Run trust-base shrink-plan tests
+        run: node --test audits/trust-base-shrink-plan0.test.mjs
+      - name: Upload trust-base shrink-plan verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: trust-base-shrink-plan-latest-verdict
+          path: artifacts/trust-base/shrink-plan/latest-verdict.json

@@ -1,0 +1,187 @@
+{
+  "kind": "PNPTrustBaseShrinkPlan0",
+  "version": 0,
+  "coordinate": "PNP-TRUST-BASE-SHRINK-PLAN-2026-06-27-01",
+  "title": "Trust-base shrink plan",
+  "purpose": "Turn the explicit trust base into a prioritized reduction program whose tasks are machine-readable, dependency-tracked, and non-activating.",
+  "status": "trust-base-shrink-plan-ready",
+  "trustBaseCoordinate": "PNP-TRUST-BASE-2026-06-27-01",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "shrinkPlanReady": true,
+  "shrinksTrustBaseNow": false,
+  "tasks": [
+    {
+      "id": "TB-001",
+      "title": "Replace implicit JavaScript integer assumptions with bounded integer validation",
+      "status": "planned",
+      "priority": 1,
+      "targetsAssumptions": [
+        "Runtime.NodeJS.Semantics",
+        "Kernel.PCCCheckerInferenceRules"
+      ],
+      "deliverables": [
+        "integer-boundary validation helpers",
+        "negative tests for unsafe integers, overflow-adjacent values, and non-integers",
+        "checker audit ledger for all externally supplied integer fields"
+      ],
+      "acceptanceCriteria": [
+        "Every checker-facing integer field has an explicit finite bound or safe-integer guard.",
+        "Mutating a bounded integer outside the permitted range causes reject, not throw.",
+        "The one-command verifier includes the integer-boundary audit."
+      ],
+      "blockedBy": []
+    },
+    {
+      "id": "TB-002",
+      "title": "Cross-check stableStringify canonicalization",
+      "status": "planned",
+      "priority": 2,
+      "targetsAssumptions": [
+        "Runtime.NodeJS.Semantics",
+        "Crypto.SHA256.CollisionResistance"
+      ],
+      "deliverables": [
+        "canonical JSON fixture corpus",
+        "independent Python stable-stringify implementation",
+        "JS/Python canonical-byte agreement tests"
+      ],
+      "acceptanceCriteria": [
+        "JS and Python canonicalizers agree on the fixture corpus byte-for-byte.",
+        "Ambiguous values such as NaN, Infinity, undefined, functions, sparse arrays, and non-plain objects reject or normalize by documented rule.",
+        "Digest equality in cross-verifier output binds to canonical bytes, not implementation-local objects."
+      ],
+      "blockedBy": []
+    },
+    {
+      "id": "TB-003",
+      "title": "Add independent SHA256 implementation comparison and checkout manifest replay",
+      "status": "planned",
+      "priority": 3,
+      "targetsAssumptions": [
+        "Crypto.SHA256.CollisionResistance",
+        "Runtime.NodeJS.Semantics",
+        "Git.ObjectIntegrity"
+      ],
+      "deliverables": [
+        "Python hashlib digest replay over canonical artifacts",
+        "JS crypto digest replay over the same byte payloads",
+        "cross-digest agreement verdict",
+        "detached checkout manifest with file paths and byte digests"
+      ],
+      "acceptanceCriteria": [
+        "At least the minimal kernel, theorem-binding ledger, trust-base ledger, and no-shared-code policy digest identically under JS and Python.",
+        "Digest mismatch causes reject with artifact path and both digests.",
+        "The checkout manifest binds the verified file list to byte digests.",
+        "The one-command verifier includes the digest-comparison audit."
+      ],
+      "blockedBy": [
+        "TB-002"
+      ]
+    },
+    {
+      "id": "TB-004",
+      "title": "Replay core proof checks in a second runtime",
+      "status": "planned",
+      "priority": 4,
+      "targetsAssumptions": [
+        "Runtime.NodeJS.Semantics",
+        "Kernel.PCCCheckerInferenceRules"
+      ],
+      "deliverables": [
+        "expanded Python verifier for trust-base, release-boundary, and theorem-binding ledgers",
+        "no shared code audit extension for additional verifier roots",
+        "cross-verifier agreement over accept/reject boundary cases"
+      ],
+      "acceptanceCriteria": [
+        "Python verifier rejects at least one negative fixture for each replayed checker family.",
+        "No independent verifier imports or executes JavaScript checker code.",
+        "Cross-verifier verdict lists all replayed families and shared artifact hashes."
+      ],
+      "blockedBy": [
+        "TB-002",
+        "TB-003"
+      ]
+    },
+    {
+      "id": "TB-005",
+      "title": "Generate Lean or Coq statement skeletons for core semantics",
+      "status": "planned",
+      "priority": 5,
+      "targetsAssumptions": [
+        "Semantics.NANDDirectWireWords",
+        "Reduction.SATToLockedNANDEncoding",
+        "Complexity.SATInPImpliesPEqualsNP"
+      ],
+      "deliverables": [
+        "formal statement skeleton for NAND direct-wire syntax and evaluation",
+        "formal statement skeleton for compatible replacement and slack law",
+        "formal statement skeleton for locked NAND threshold and SAT in P implies P equals NP"
+      ],
+      "acceptanceCriteria": [
+        "Skeleton files are generated from machine-readable source ledgers rather than hand-copied prose.",
+        "Each skeleton theorem has a source ledger id and report-binding id.",
+        "The skeleton generation audit rejects missing anchors or unbound theorem ids."
+      ],
+      "blockedBy": [
+        "TB-006",
+        "TB-007"
+      ]
+    },
+    {
+      "id": "TB-006",
+      "title": "Materialize executable NAND direct-wire semantics and small-model tests",
+      "status": "planned",
+      "priority": 6,
+      "targetsAssumptions": [
+        "Semantics.NANDDirectWireWords"
+      ],
+      "deliverables": [
+        "semantics/nand-direct-wire-spec.json",
+        "semantics/nand-direct-wire-reference.mjs",
+        "exhaustive small-model tests for bounded NAND DAGs"
+      ],
+      "acceptanceCriteria": [
+        "The executable spec defines syntax, boundary tuples, output tuples, evaluation, replacement, equivalence, and size.",
+        "Small-model tests compare replacement semantics and brute-force equivalence for all bounded instances in the configured range.",
+        "Report theorem bindings reference the executable semantics files."
+      ],
+      "blockedBy": []
+    },
+    {
+      "id": "TB-007",
+      "title": "Add SAT encoding truth-table verification for small locked-NAND instances",
+      "status": "planned",
+      "priority": 7,
+      "targetsAssumptions": [
+        "Reduction.SATToLockedNANDEncoding"
+      ],
+      "deliverables": [
+        "small CNF formula generator",
+        "locked NAND construction evaluator for bounded instances",
+        "truth-table equivalence tests for satisfiable/unsatisfiable threshold behavior"
+      ],
+      "acceptanceCriteria": [
+        "For every formula in the configured small universe, brute-force SAT agrees with the locked-NAND threshold predicate.",
+        "Satisfiable and unsatisfiable negative mutations are both present.",
+        "The audit records the small-universe bound and artifact digest."
+      ],
+      "blockedBy": [
+        "TB-006"
+      ]
+    }
+  ],
+  "audit": {
+    "checker": "CheckTrustBaseShrinkPlan0",
+    "script": "pcc-trust-base-shrink-plan0.mjs",
+    "command": "node pcc-trust-base-shrink-plan0.mjs --json",
+    "expectedAcceptTag": "accept"
+  }
+}

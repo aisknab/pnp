@@ -22,11 +22,13 @@ The verifier currently checks:
 4. The theorem-to-checker binding ledger audit.
 5. The explicit trust-base audit and checksum ledger.
 6. The trust-base audit tests.
-7. Cross-runtime minimal-kernel agreement.
-8. Independent verifier no-shared-code policy.
-9. Independent verifier audit tests.
-10. Independent Python verifier tests.
-11. Release-audit surface preservation.
+7. The trust-base shrink-plan audit.
+8. The trust-base shrink-plan audit tests.
+9. Cross-runtime minimal-kernel agreement.
+10. Independent verifier no-shared-code policy.
+11. Independent verifier audit tests.
+12. Independent Python verifier tests.
+13. Release-audit surface preservation.
 
 The accepted verdict keeps the public-review boundary explicit:
 
