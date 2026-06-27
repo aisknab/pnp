@@ -15,9 +15,9 @@ const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
 export const PUBLIC_SURFACE_BASELINE0 = Object.freeze({
   kind: 'PublicSurfaceBaseline0',
   version: CHECKER_VERSION,
-  coordinate: 'PUBLIC-SURFACE-BASELINE-2026-06-27-CHECKER-TOTALITY-01',
-  status: 'public-review-surface-rebased-for-checker-totality-audit',
-  rationale: 'The public package script surface is intentionally extensible while the repository is being converted into a self-verifying audit stack; this baseline includes cross-runtime verification, independent-verifier no-shared-code auditing, the top-level pnp:verify entrypoint, and the checker-totality seed audit.',
+  coordinate: 'PUBLIC-SURFACE-BASELINE-2026-06-27-NEGATIVE-MUTATIONS-01',
+  status: 'public-review-surface-rebased-for-negative-checker-mutations',
+  rationale: 'The public package script surface is intentionally extensible while the repository is being converted into a self-verifying audit stack; this baseline includes cross-runtime verification, independent-verifier no-shared-code auditing, the top-level pnp:verify entrypoint, checker-totality seed auditing, and negative checker mutation auditing.',
 });
 
 export const PUBLIC_ENTRY_EXPORT_KEYS0 = Object.freeze([
@@ -115,6 +115,7 @@ export const PUBLIC_PACKAGE_SCRIPT_TARGETS0 = Object.freeze({
   'cross-verify:json': 'node scripts/cross-verify.mjs --json',
   'independent:no-shared-code': 'node scripts/audit-independent-verifiers-no-shared-code.mjs --json',
   'checker:totality': 'node scripts/audit-checker-totality.mjs --json',
+  'checker:mutations': 'node scripts/audit-negative-checker-mutations.mjs --json',
   'pnp:verify': 'node scripts/pnp-verify-all.mjs --json',
   'examples:minimal': 'node examples/minimal/run-all.mjs',
   'materialized:accept-run': 'node ./bin/check-materialized-accept-run0.mjs',
