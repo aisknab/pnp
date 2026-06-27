@@ -18,7 +18,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Cross-verify minimal-kernel agreement
-        run: node scripts/cross-verify.mjs --json
+        run: npm run cross-verify:json
       - name: Upload cross-verifier verdict
         uses: actions/upload-artifact@v4
         with:
