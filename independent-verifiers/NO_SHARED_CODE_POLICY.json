@@ -1,0 +1,93 @@
+{
+  "kind": "PNPIndependentVerifierNoSharedCodePolicy0",
+  "version": 0,
+  "coordinate": "PNP-INDEPENDENT-VERIFIERS-NO-SHARED-CODE-2026-06-27-01",
+  "title": "Independent verifier no-shared-code policy",
+  "purpose": "Ensure independent verifiers consume repository JSON artifacts as data and do not import or execute the JavaScript checker implementation they are meant to redundantly check.",
+  "status": "policy-ready",
+  "createdForTrack": "L4 No shared code policy",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "policy": {
+    "independentVerifierRoot": "independent-verifiers",
+    "requiredDataInputs": [
+      "kernel/PNP_MINIMAL_KERNEL.json",
+      "report-bindings/REPORT_THEOREM_BINDINGS.json"
+    ],
+    "requiredNonImportBoundary": [
+      "No independent verifier may import pcc-*.mjs or index.mjs as executable code.",
+      "No independent verifier may spawn node, npm, deno, bun, or another JavaScript runtime to obtain its verdict.",
+      "No independent verifier may read JavaScript checker source as a proof oracle; checking that declared files exist is permitted.",
+      "Independent verifiers may share JSON artifacts and byte hashes as data inputs."
+    ],
+    "allowedFileExtensions": [
+      ".json",
+      ".md",
+      ".py"
+    ],
+    "allowedPythonImports": [
+      "__future__",
+      "argparse",
+      "copy",
+      "dataclasses",
+      "hashlib",
+      "json",
+      "pathlib",
+      "sys",
+      "typing",
+      "unittest",
+      "verify_minimal_kernel"
+    ],
+    "forbiddenPythonImports": [
+      "ctypes",
+      "importlib",
+      "os",
+      "subprocess"
+    ],
+    "forbiddenExecutablePatterns": [
+      "child_process",
+      "require(",
+      "subprocess.",
+      "os.system",
+      "importlib.",
+      "eval(",
+      "exec("
+    ],
+    "forbiddenRuntimeTokens": [
+      "node",
+      "npm",
+      "deno",
+      "bun"
+    ],
+    "verifiers": [
+      {
+        "id": "python:minimal-kernel0",
+        "root": "independent-verifiers/python",
+        "language": "python",
+        "entrypoint": "independent-verifiers/python/verify_minimal_kernel.py",
+        "tests": [
+          "independent-verifiers/python/verify_minimal_kernel_test.py"
+        ],
+        "allowedDataInputs": [
+          "kernel/PNP_MINIMAL_KERNEL.json",
+          "report-bindings/REPORT_THEOREM_BINDINGS.json"
+        ],
+        "importsJavaScriptCheckerCode": false,
+        "spawnsJavaScriptRuntime": false,
+        "usesSharedJsonArtifactsOnly": true
+      }
+    ]
+  },
+  "audit": {
+    "script": "scripts/audit-independent-verifiers-no-shared-code.mjs",
+    "command": "npm run independent:no-shared-code",
+    "expectedAcceptTag": "accept"
+  }
+}
