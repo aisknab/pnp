@@ -1,0 +1,162 @@
+{
+  "kind": "PNPTrustBase0",
+  "version": 0,
+  "coordinate": "PNP-TRUST-BASE-2026-06-27-01",
+  "title": "Explicit trust base for the PNP self-verification stack",
+  "purpose": "List the assumptions that remain outside the repository's own executable acceptance result and bind each assumption to the files that represent or reduce it.",
+  "status": "trust-base-explicit-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "trustBaseRepresentedReady": true,
+  "trustBaseExplicit": true,
+  "trustBaseEmpty": false,
+  "assumptions": [
+    {
+      "id": "Runtime.NodeJS.Semantics",
+      "title": "JavaScript runtime correctness for the checked fragment",
+      "status": "external-runtime-assumption",
+      "externalAssumption": true,
+      "description": "The Node.js runtime correctly executes the ES module fragment used by the repository checkers, including deterministic JSON parsing, file IO, process exit codes, array/object semantics, and integer-safe arithmetic as guarded by the checkers.",
+      "representedBy": [
+        "package.json",
+        "pcc-verifier-frag0.mjs",
+        "scripts/pnp-verify-all.mjs",
+        "scripts/cross-verify.mjs"
+      ],
+      "currentMitigations": [
+        "node --check syntax checks",
+        "independent Python minimal-kernel verifier",
+        "cross-runtime agreement verdict"
+      ],
+      "reductionPlan": "Add second-runtime replay for more checker families and bounded integer validation at checker boundaries."
+    },
+    {
+      "id": "Crypto.SHA256.CollisionResistance",
+      "title": "SHA256 collision resistance for artifact identity",
+      "status": "external-cryptographic-assumption",
+      "externalAssumption": true,
+      "description": "SHA256 digests used as artifact identities, cache keys, and checksum ledgers are assumed collision resistant. Digest equality is not treated as semantic equality unless followed by canonical-byte or full-key comparison where required.",
+      "representedBy": [
+        "pcc-verifier-frag0.mjs",
+        "proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS",
+        "trust-base/SHA256SUMS"
+      ],
+      "currentMitigations": [
+        "hash-as-index discipline in checker surface",
+        "file-level checksum ledgers",
+        "cross-verifier byte SHA256 comparison"
+      ],
+      "reductionPlan": "Add independent SHA256 implementation comparison and canonical-byte replay checks across runtimes."
+    },
+    {
+      "id": "Git.ObjectIntegrity",
+      "title": "Git object integrity and checkout fidelity",
+      "status": "external-repository-assumption",
+      "externalAssumption": true,
+      "description": "The checkout being verified is assumed to faithfully represent the intended Git object graph and file contents for the commit under review.",
+      "representedBy": [
+        "PNP_STATUS.json",
+        ".github/workflows/pnp-verify-all.yml",
+        "scripts/pnp-verify-all.mjs"
+      ],
+      "currentMitigations": [
+        "CI checkout replay",
+        "status-file coordinate ledger",
+        "workflow artifact verdicts"
+      ],
+      "reductionPlan": "Add fresh-clone verification and detached commit/hash manifest checks."
+    },
+    {
+      "id": "Semantics.NANDDirectWireWords",
+      "title": "Formal semantics of NAND direct-wire words",
+      "status": "formal-semantics-assumption",
+      "externalAssumption": true,
+      "description": "The mathematical interpretation of NAND direct-wire syntax, open carriers, boundary tuples, output tuples, evaluation, replacement, and size is assumed to match the checker-visible semantics used by the proof stack.",
+      "representedBy": [
+        "canonical_proof_report.tex",
+        "kernel/PNP_MINIMAL_KERNEL.json",
+        "report-bindings/REPORT_THEOREM_BINDINGS.json",
+        "pcc-verifier-frag0.mjs"
+      ],
+      "currentMitigations": [
+        "minimal-kernel coordinate",
+        "theorem-to-checker binding ledger",
+        "independent Python boundary replay"
+      ],
+      "reductionPlan": "Materialize an executable NAND direct-wire semantics spec and exhaustive small-model tests."
+    },
+    {
+      "id": "Reduction.SATToLockedNANDEncoding",
+      "title": "SAT-to-locked-NAND encoding theorem",
+      "status": "mathematical-reduction-assumption",
+      "externalAssumption": true,
+      "description": "The locked NAND construction is assumed to correctly encode SAT into the stated exact-minimum threshold condition over residual slack.",
+      "representedBy": [
+        "canonical_proof_report.tex",
+        "pcc-gpack0.mjs",
+        "pcc-final-framework0.mjs",
+        "pcc-global-final-sat-reduction-semantic0.mjs",
+        "kernel/PNP_MINIMAL_KERNEL.json"
+      ],
+      "currentMitigations": [
+        "locked NAND checker surface",
+        "minimal-kernel proof spine",
+        "cross-verifier boundary checks"
+      ],
+      "reductionPlan": "Add SAT encoding truth-table verification for small CNF/NAND instances and a dedicated locked-NAND semantics ledger."
+    },
+    {
+      "id": "Kernel.PCCCheckerInferenceRules",
+      "title": "PCC checker inference rules and proof-kernel soundness",
+      "status": "checker-kernel-assumption",
+      "externalAssumption": true,
+      "description": "The PCC-K primitive rules, Sigma registry, reflection registry, proof-DAG discipline, and checker implementations are assumed sound for the proof objects they accept.",
+      "representedBy": [
+        "pcc-kimpl0.mjs",
+        "pcc-global-proof-dag0.mjs",
+        "pcc-check-pcc-pack-exp0.mjs",
+        "kernel/PNP_MINIMAL_KERNEL.json",
+        "report-bindings/REPORT_THEOREM_BINDINGS.json"
+      ],
+      "currentMitigations": [
+        "global proof DAG checks",
+        "minimal proof-kernel coordinate",
+        "theorem-to-checker binding ledger",
+        "release-audit replay"
+      ],
+      "reductionPlan": "Add checker totality fuzzing, negative mutation generation, and independent replay of a core checker subset."
+    },
+    {
+      "id": "Complexity.SATInPImpliesPEqualsNP",
+      "title": "Complexity implication SAT in P implies P equals NP",
+      "status": "external-complexity-theory-assumption",
+      "externalAssumption": true,
+      "description": "The standard complexity-theory implication from a polynomial-time SAT decision procedure to P = NP is assumed, including the NP-completeness of SAT and the polynomial-time reductions defining NP-completeness.",
+      "representedBy": [
+        "canonical_proof_report.tex",
+        "pcc-global-final-complexity-semantic0.mjs",
+        "kernel/PNP_MINIMAL_KERNEL.json"
+      ],
+      "currentMitigations": [
+        "complexity semantic checker surface",
+        "minimal-kernel complexity-implication spine",
+        "status boundary preventing public theorem emission"
+      ],
+      "reductionPlan": "Create a machine-readable complexity ledger binding SAT is NP-complete, SAT in P, and P = NP as explicit proof objects."
+    }
+  ],
+  "audit": {
+    "checker": "CheckTrustBase0",
+    "script": "pcc-trust-base0.mjs",
+    "command": "node pcc-trust-base0.mjs --json",
+    "expectedAcceptTag": "accept",
+    "sha256Sums": "trust-base/SHA256SUMS"
+  }
+}
