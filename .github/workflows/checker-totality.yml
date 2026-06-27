@@ -1,0 +1,25 @@
+name: checker-totality
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  checker-totality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run checker totality seed audit
+        run: npm run checker:totality
+      - name: Run checker totality audit tests
+        run: node --test audits/checker-totality0.test.mjs
+      - name: Upload checker totality verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: checker-totality-latest-verdict
+          path: artifacts/checker-totality/latest-verdict.json
