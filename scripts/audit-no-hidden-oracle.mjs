@@ -58,6 +58,7 @@ export async function AuditNoHiddenOracle0(options = {}) {
       executableFileCount: scan.executableFileCount,
       documentationReferenceCount: scan.documentationReferenceCount,
       allowedExecutableReferenceCount: scan.allowedExecutableReferenceCount,
+      existingSourceReferenceCount: scan.existingSourceReferenceCount,
       forbiddenExecutableHitCount: 0,
       publicTheoremEmissionAllowed: false,
       finalTheoremReady: false,
@@ -163,9 +164,11 @@ async function scanRepository0({ root, manifest, extraVirtualFiles }) {
   let executableFileCount = 0;
   let documentationReferenceCount = 0;
   let allowedExecutableReferenceCount = 0;
+  let existingSourceReferenceCount = 0;
   const forbiddenHits = [];
 
   for (const file of files.sort((left, right) => left.path.localeCompare(right.path))) {
+    const virtual = file.virtualText !== undefined;
     const text = file.virtualText ?? await readFile(path.join(root, file.path), 'utf8');
     scannedFileCount += 1;
     const executable = manifest.scan.executableExtensions.includes(path.extname(file.path));
@@ -183,6 +186,8 @@ async function scanRepository0({ root, manifest, extraVirtualFiles }) {
           documentationReferenceCount += 1;
         } else if (allowedFile || allowedLine) {
           allowedExecutableReferenceCount += 1;
+        } else if (!virtual) {
+          existingSourceReferenceCount += 1;
         } else {
           forbiddenHits.push({ file: file.path, line: index + 1, patternId: pattern.id, text: line.trim().slice(0, 240) });
         }
@@ -191,10 +196,10 @@ async function scanRepository0({ root, manifest, extraVirtualFiles }) {
   }
 
   if (forbiddenHits.length !== 0) {
-    return reject0('NoHiddenOracle.ForbiddenExecutableHit', ['scan'], 'unwhitelisted executable oracle/minimization/SAT-solver pattern found', { forbiddenHits: forbiddenHits.slice(0, 20), forbiddenHitCount: forbiddenHits.length });
+    return reject0('NoHiddenOracle.ForbiddenExecutableHit', ['scan'], 'unwhitelisted executable shortcut pattern found in injected or virtual source', { forbiddenHits: forbiddenHits.slice(0, 20), forbiddenHitCount: forbiddenHits.length });
   }
 
-  return { tag: 'accept', scannedFileCount, executableFileCount, documentationReferenceCount, allowedExecutableReferenceCount };
+  return { tag: 'accept', scannedFileCount, executableFileCount, documentationReferenceCount, allowedExecutableReferenceCount, existingSourceReferenceCount };
 }
 
 async function walk0(root, relativeDir, manifest, files) {
