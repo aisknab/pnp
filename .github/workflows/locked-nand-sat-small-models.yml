@@ -1,0 +1,25 @@
+name: locked-nand-sat-small-models
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  locked-nand-sat-small-models:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run locked NAND SAT small-model checker
+        run: npm run semantics:locked-nand:sat-small-models
+      - name: Run locked NAND SAT small-model tests
+        run: node --test audits/locked-nand-sat-small-models0.test.mjs
+      - name: Upload locked NAND SAT small-model verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: locked-nand-sat-small-models-latest-verdict
+          path: artifacts/locked-nand-sat-small-models/latest-verdict.json
