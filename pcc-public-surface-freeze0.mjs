@@ -15,9 +15,9 @@ const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
 export const PUBLIC_SURFACE_BASELINE0 = Object.freeze({
   kind: 'PublicSurfaceBaseline0',
   version: CHECKER_VERSION,
-  coordinate: 'PUBLIC-SURFACE-BASELINE-2026-06-27-COMPLEXITY-LEDGER-01',
-  status: 'public-review-surface-rebased-for-complexity-ledger',
-  rationale: 'The public package script surface is intentionally extensible while the repository is being converted into a self-verifying audit stack; this baseline includes cross-runtime verification, independent-verifier no-shared-code auditing, the top-level pnp:verify entrypoint, checker-totality seed auditing, negative checker mutation auditing, rule-family coverage auditing, checker-dependency graph generation, checker no-circular-authority auditing, NAND direct-wire semantics auditing, NAND small-model auditing, locked NAND SAT small-model auditing, and complexity implication ledger auditing.',
+  coordinate: 'PUBLIC-SURFACE-BASELINE-2026-06-27-NO-HIDDEN-ORACLE-01',
+  status: 'public-review-surface-rebased-for-no-hidden-oracle-audit',
+  rationale: 'The public package script surface is intentionally extensible while the repository is being converted into a self-verifying audit stack; this baseline includes cross-runtime verification, independent-verifier no-shared-code auditing, the top-level pnp:verify entrypoint, checker-totality seed auditing, negative checker mutation auditing, rule-family coverage auditing, checker-dependency graph generation, checker no-circular-authority auditing, NAND direct-wire semantics auditing, NAND small-model auditing, locked NAND SAT small-model auditing, complexity implication ledger auditing, and no-hidden-oracle auditing.',
 });
 
 export const PUBLIC_ENTRY_EXPORT_KEYS0 = Object.freeze([
@@ -126,6 +126,7 @@ export const PUBLIC_PACKAGE_SCRIPT_TARGETS0 = Object.freeze({
   'semantics:nand:small-models': 'node pcc-nand-small-models0.mjs --json',
   'semantics:locked-nand:sat-small-models': 'node pcc-locked-nand-sat-small-models0.mjs --json',
   'complexity:ledger': 'node pcc-complexity-ledger0.mjs --json',
+  'audit:no-hidden-oracle': 'node scripts/audit-no-hidden-oracle.mjs --json',
   'pnp:verify': 'node scripts/pnp-verify-all.mjs --json',
   'examples:minimal': 'node examples/minimal/run-all.mjs',
   runall: 'node ./bin/runall0.mjs',
