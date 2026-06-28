@@ -1,0 +1,25 @@
+name: complexity-ledger
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  complexity-ledger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run complexity ledger checker
+        run: npm run complexity:ledger
+      - name: Run complexity ledger tests
+        run: node --test audits/complexity-ledger0.test.mjs
+      - name: Upload complexity ledger verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: complexity-ledger-latest-verdict
+          path: artifacts/complexity-ledger/latest-verdict.json
