@@ -58,7 +58,7 @@ test('determinism audit rejects public theorem activation in manifest', async ()
 
   const out = await AuditDeterminism0({
     manifestOverride: manifest,
-    command: 'node -e "console.log(JSON.stringify({tag:\"accept\"}))"',
+    command: `node -e 'console.log(JSON.stringify({tag:"accept"}))'`,
     generatedArtifactPaths: ['reproducibility/DETERMINISM_AUDIT.json'],
     writeOutput: false,
   });
@@ -73,7 +73,7 @@ test('determinism audit rejects full determinism overclaim in manifest', async (
 
   const out = await AuditDeterminism0({
     manifestOverride: manifest,
-    command: 'node -e "console.log(JSON.stringify({tag:\"accept\"}))"',
+    command: `node -e 'console.log(JSON.stringify({tag:"accept"}))'`,
     generatedArtifactPaths: ['reproducibility/DETERMINISM_AUDIT.json'],
     writeOutput: false,
   });
@@ -84,7 +84,7 @@ test('determinism audit rejects full determinism overclaim in manifest', async (
 
 test('determinism audit accepts deterministic JSON-producing smoke command', async () => {
   const out = await AuditDeterminism0({
-    command: 'node -e "console.log(JSON.stringify({tag:\"accept\",value:42}))"',
+    command: `node -e 'console.log(JSON.stringify({tag:"accept",value:42}))'`,
     generatedArtifactPaths: ['reproducibility/DETERMINISM_AUDIT.json'],
     writeOutput: false,
   });
@@ -99,7 +99,7 @@ test('determinism audit accepts deterministic JSON-producing smoke command', asy
 
 test('determinism audit rejects nondeterministic stdout', async () => {
   const out = await AuditDeterminism0({
-    command: 'node -e "console.log(Date.now())"',
+    command: `node -e 'const fs=require("fs"); fs.mkdirSync("artifacts",{recursive:true}); const p="artifacts/determinism-counter.tmp"; let n=0; try{n=Number(fs.readFileSync(p,"utf8"));}catch{} fs.writeFileSync(p,String(n+1)); console.log(n);'`,
     generatedArtifactPaths: ['reproducibility/DETERMINISM_AUDIT.json'],
     writeOutput: false,
   });
