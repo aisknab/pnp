@@ -1,0 +1,25 @@
+name: nand-small-models
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  nand-small-models:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run NAND small-model checker
+        run: npm run semantics:nand:small-models
+      - name: Run NAND small-model tests
+        run: node --test audits/nand-small-models0.test.mjs
+      - name: Upload NAND small-model verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: nand-small-models-latest-verdict
+          path: artifacts/nand-small-models/latest-verdict.json
