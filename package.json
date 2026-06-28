@@ -38,6 +38,7 @@
     "checker:graph": "node scripts/generate-checker-dependency-graph.mjs --json",
     "checker:cycles": "node scripts/audit-checker-cycles.mjs --json",
     "rule-family:coverage": "node pcc-rule-family-coverage0.mjs --json",
+    "semantics:nand": "node pcc-nand-direct-wire-semantics0.mjs --json",
     "pnp:verify": "node scripts/pnp-verify-all.mjs --json",
     "examples:minimal": "node examples/minimal/run-all.mjs",
     "runall": "node ./bin/runall0.mjs",
