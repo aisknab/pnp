@@ -18,34 +18,10 @@
   "fullNoHiddenOracleProved": false,
   "publicTheoremEmissionAllowedByAudit": false,
   "scan": {
-    "extensions": [
-      ".mjs",
-      ".js",
-      ".json",
-      ".md",
-      ".tex",
-      ".yml",
-      ".yaml"
-    ],
-    "skippedPathPrefixes": [
-      ".git/",
-      "node_modules/",
-      "artifacts/",
-      "proof-artifacts/",
-      "successor-report-artifacts/"
-    ],
-    "executableExtensions": [
-      ".mjs",
-      ".js"
-    ],
-    "documentationPathPrefixes": [
-      "docs/",
-      "review/",
-      "reports/",
-      "ai-review-tasks/",
-      "complexity/",
-      "semantic-kernel/"
-    ]
+    "extensions": [".mjs", ".js", ".json", ".md", ".tex", ".yml", ".yaml"],
+    "skippedPathPrefixes": [".git/", "node_modules/", "artifacts/", "proof-artifacts/", "successor-report-artifacts/"],
+    "executableExtensions": [".mjs", ".js"],
+    "documentationPathPrefixes": ["docs/", "review/", "reports/", "ai-review-tasks/", "complexity/", "semantic-kernel/"]
   },
   "forbiddenExecutablePatterns": [
     { "id": "ExternalSATSolverBinary", "regex": "\\b(minisat|cryptominisat|kissat|cadical|lingeling|picosat|glucose|z3)\\b" },
@@ -89,7 +65,8 @@
     "configured formula universe",
     "small-model",
     "exact small-model",
-    "minimum-equivalent-circuit"
+    "minimum-equivalent-circuit",
+    "^\\s*['\\\"](µ|µ\\*|µ#|Can|argmin|maxG|minimumEquivalent|optimalCircuit|exactMinSearch|canonicalMinimizer|maximizeGain|argminEquivalent)['\\\"],?\\s*$"
   ],
   "checks": [
     "manifest boundary remains non-activating",
