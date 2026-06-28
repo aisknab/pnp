@@ -88,6 +88,7 @@ export async function RunPNPVerifyAll0(options = {}) {
     { id: 'complexity-ledger-tests', command: process.execPath, args: ['--test', 'audits/complexity-ledger0.test.mjs'], kind: 'process' },
     { id: 'no-hidden-oracle-audit', command: process.execPath, args: ['scripts/audit-no-hidden-oracle.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'no-hidden-oracle-tests', command: process.execPath, args: ['--test', 'audits/no-hidden-oracle0.test.mjs'], kind: 'process' },
+    { id: 'fresh-clone-verifier-tests', command: process.execPath, args: ['--test', 'audits/fresh-clone-verify0.test.mjs'], kind: 'process' },
     { id: 'minimal-kernel-cross-verify', command: process.execPath, args: ['scripts/cross-verify.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'independent-no-shared-code-audit', command: process.execPath, args: ['scripts/audit-independent-verifiers-no-shared-code.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'independent-no-shared-code-tests', command: process.execPath, args: ['--test', 'audits/independent-verifiers-no-shared-code.test.mjs'], kind: 'process' },
@@ -127,6 +128,7 @@ export async function RunPNPVerifyAll0(options = {}) {
     lockedNANDSATSmallModelsCoordinate: 'PNP-LOCKED-NAND-SAT-SMALL-MODELS-2026-06-27-01',
     complexityLedgerCoordinate: 'PNP-COMPLEXITY-LEDGER-2026-06-27-01',
     noHiddenOracleAuditCoordinate: 'PNP-NO-HIDDEN-ORACLE-AUDIT-2026-06-27-01',
+    freshCloneVerifyCoordinate: 'PNP-FRESH-CLONE-VERIFY-2026-06-27-01',
     publicTheoremEmissionAllowed: false,
     finalTheoremReady: false,
     activeFinalNodeIds: [],
@@ -174,6 +176,7 @@ async function verifyStatusFile0(root) {
   requireEqual0(status.lockedNANDSATSmallModelsCoordinate, 'PNP-LOCKED-NAND-SAT-SMALL-MODELS-2026-06-27-01', failures, ['lockedNANDSATSmallModelsCoordinate']);
   requireEqual0(status.complexityLedgerCoordinate, 'PNP-COMPLEXITY-LEDGER-2026-06-27-01', failures, ['complexityLedgerCoordinate']);
   requireEqual0(status.noHiddenOracleAuditCoordinate, 'PNP-NO-HIDDEN-ORACLE-AUDIT-2026-06-27-01', failures, ['noHiddenOracleAuditCoordinate']);
+  requireEqual0(status.freshCloneVerifyCoordinate, 'PNP-FRESH-CLONE-VERIFY-2026-06-27-01', failures, ['freshCloneVerifyCoordinate']);
   requireEqual0(status.noSharedCodePolicyCoordinate, 'PNP-INDEPENDENT-VERIFIERS-NO-SHARED-CODE-2026-06-27-01', failures, ['noSharedCodePolicyCoordinate']);
 
   if (failures.length !== 0) return { tag: 'reject', id: 'status-file-consistency', coord: 'StatusFile.ValidationFailed', path: failures[0].path, witness: { failures } };
