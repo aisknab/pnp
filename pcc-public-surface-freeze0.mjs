@@ -15,9 +15,9 @@ const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
 export const PUBLIC_SURFACE_BASELINE0 = Object.freeze({
   kind: 'PublicSurfaceBaseline0',
   version: CHECKER_VERSION,
-  coordinate: 'PUBLIC-SURFACE-BASELINE-2026-06-27-RULE-FAMILY-COVERAGE-01',
-  status: 'public-review-surface-rebased-for-rule-family-coverage',
-  rationale: 'The public package script surface is intentionally extensible while the repository is being converted into a self-verifying audit stack; this baseline includes cross-runtime verification, independent-verifier no-shared-code auditing, the top-level pnp:verify entrypoint, checker-totality seed auditing, negative checker mutation auditing, and rule-family coverage auditing.',
+  coordinate: 'PUBLIC-SURFACE-BASELINE-2026-06-27-CHECKER-DEPENDENCY-GRAPH-01',
+  status: 'public-review-surface-rebased-for-checker-dependency-graph',
+  rationale: 'The public package script surface is intentionally extensible while the repository is being converted into a self-verifying audit stack; this baseline includes cross-runtime verification, independent-verifier no-shared-code auditing, the top-level pnp:verify entrypoint, checker-totality seed auditing, negative checker mutation auditing, rule-family coverage auditing, and checker-dependency graph generation.',
 });
 
 export const PUBLIC_ENTRY_EXPORT_KEYS0 = Object.freeze([
@@ -116,39 +116,37 @@ export const PUBLIC_PACKAGE_SCRIPT_TARGETS0 = Object.freeze({
   'independent:no-shared-code': 'node scripts/audit-independent-verifiers-no-shared-code.mjs --json',
   'checker:totality': 'node scripts/audit-checker-totality.mjs --json',
   'checker:mutations': 'node scripts/audit-negative-checker-mutations.mjs --json',
+  'checker:graph': 'node scripts/generate-checker-dependency-graph.mjs --json',
   'rule-family:coverage': 'node pcc-rule-family-coverage0.mjs --json',
   'pnp:verify': 'node scripts/pnp-verify-all.mjs --json',
   'examples:minimal': 'node examples/minimal/run-all.mjs',
-  'materialized:accept-run': 'node ./bin/check-materialized-accept-run0.mjs',
-  'materialized:accept-run:full': 'node ./bin/check-materialized-accept-run0.mjs --full',
+  runall: 'node ./bin/runall0.mjs',
+  smoke: 'node ./bin/runall0.mjs',
+  'smoke:full': 'node ./bin/runall0.mjs --full',
+  'release:audit': 'node ./bin/release-audit0.mjs',
+  'release:audit:full': 'node ./bin/release-audit0.mjs --full',
+  'materialized:shell': 'node ./bin/check-materialized-shell0.mjs',
+  'materialized:shell:full': 'node ./bin/check-materialized-shell0.mjs --full',
   'materialized:aggregate': 'node ./bin/check-materialized-aggregate0.mjs',
   'materialized:aggregate:full': 'node ./bin/check-materialized-aggregate0.mjs --full',
   'materialized:bridge': 'node ./bin/check-materialized-acceptance-bridge0.mjs',
   'materialized:bridge:full': 'node ./bin/check-materialized-acceptance-bridge0.mjs --full',
+  'materialized:write-fixtures': 'node ./bin/write-materialized-fixtures0.mjs',
+  'materialized:write-fixtures:full': 'node ./bin/write-materialized-fixtures0.mjs --full',
+  'materialized:resolve-digest': 'node ./bin/resolve-materialized-digest0.mjs',
+  'materialized:resolve-digest:full': 'node ./bin/resolve-materialized-digest0.mjs --full',
+  'materialized:accept-run': 'node ./bin/check-materialized-accept-run0.mjs',
+  'materialized:accept-run:full': 'node ./bin/check-materialized-accept-run0.mjs --full',
+  'materialized:write-accept-runs': 'node ./bin/write-materialized-accept-run-fixtures0.mjs',
+  'materialized:write-accept-runs:full': 'node ./bin/write-materialized-accept-run-fixtures0.mjs --full',
   'materialized:final-verdict': 'node ./bin/check-materialized-final-verdict0.mjs',
   'materialized:final-verdict:full': 'node ./bin/check-materialized-final-verdict0.mjs --full',
+  'materialized:write-final-runs': 'node ./bin/write-materialized-final-run-fixtures0.mjs',
+  'materialized:write-final-runs:full': 'node ./bin/write-materialized-final-run-fixtures0.mjs --full',
   'materialized:public-status': 'node ./bin/check-materialized-public-status0.mjs',
   'materialized:public-status:full': 'node ./bin/check-materialized-public-status0.mjs --full',
   'materialized:public-status-roundtrip': 'node ./bin/check-materialized-public-status-roundtrip0.mjs',
   'materialized:public-status-roundtrip:full': 'node ./bin/check-materialized-public-status-roundtrip0.mjs --full',
-  'materialized:resolve-digest': 'node ./bin/resolve-materialized-digest0.mjs',
-  'materialized:resolve-digest:full': 'node ./bin/resolve-materialized-digest0.mjs --full',
-  'materialized:shell': 'node ./bin/check-materialized-shell0.mjs',
-  'materialized:shell:full': 'node ./bin/check-materialized-shell0.mjs --full',
-  'materialized:write-accept-runs': 'node ./bin/write-materialized-accept-run-fixtures0.mjs',
-  'materialized:write-accept-runs:full': 'node ./bin/write-materialized-accept-run-fixtures0.mjs --full',
-  'materialized:write-fixtures': 'node ./bin/write-materialized-fixtures0.mjs',
-  'materialized:write-fixtures:full': 'node ./bin/write-materialized-fixtures0.mjs --full',
-  'materialized:write-final-runs': 'node ./bin/write-materialized-final-run-fixtures0.mjs',
-  'materialized:write-final-runs:full': 'node ./bin/write-materialized-final-run-fixtures0.mjs --full',
-  'release:audit': 'node ./bin/release-audit0.mjs',
-  'release:audit:full': 'node ./bin/release-audit0.mjs --full',
-  runall: 'node ./bin/runall0.mjs',
-  smoke: 'node ./bin/runall0.mjs',
-  'smoke:full': 'node ./bin/runall0.mjs --full',
-  test: 'node --test',
-  'test:negative': 'node --test test/reviewer-negative-invariants.test.mjs',
-  validate: 'npm run check && npm test',
   'materialized:final-certificate': 'node ./bin/write-materialized-final-certificate0.mjs',
   'materialized:final-certificate:full': 'node ./bin/write-materialized-final-certificate0.mjs --full',
   'materialized:final-certificate-public-status': 'node ./bin/write-final-certificate-public-status0.mjs',
@@ -167,6 +165,9 @@ export const PUBLIC_PACKAGE_SCRIPT_TARGETS0 = Object.freeze({
   'release:audit:final-pnp-release-gate:full': 'node ./bin/write-final-pnp-release-gate0.mjs --full',
   'release:audit:final-pnp-proof-report': 'node ./bin/write-final-pnp-proof-report0.mjs',
   'release:audit:final-pnp-proof-report:full': 'node ./bin/write-final-pnp-proof-report0.mjs --full',
+  test: 'node --test',
+  'test:negative': 'node --test test/reviewer-negative-invariants.test.mjs',
+  validate: 'npm run check && npm test',
 });
 
 export const PUBLIC_PACKAGE_SCRIPT_KEYS0 = Object.freeze(Object.keys(PUBLIC_PACKAGE_SCRIPT_TARGETS0).sort());
@@ -186,16 +187,11 @@ export async function CheckPublicEntryReleaseSurface0(config = makePublicSurface
   const checker = 'CheckPublicEntryReleaseSurface0';
   const ledger = [];
   const cfg = makePublicSurfaceFreezeConfig0(config);
-
   const configCheck = validateConfig0(cfg);
   ledger.push(makeLedgerEntry0('config', configCheck));
   if (!configCheck.ok) return makeRejectRecord0({ checker, coord: `${checker}.config`, path: configCheck.path, witness: configCheck.witness, ledger });
 
-  const entrySurface = validateExactKeys0(
-    cfg.publicEntryOverride ?? publicEntry0,
-    PUBLIC_ENTRY_EXPORT_KEYS0,
-    ['index.mjs', 'exports'],
-  );
+  const entrySurface = validateExactKeys0(cfg.publicEntryOverride ?? publicEntry0, PUBLIC_ENTRY_EXPORT_KEYS0, ['index.mjs', 'exports']);
   ledger.push(makeLedgerEntry0('publicEntryExports', entrySurface));
   if (!entrySurface.ok) return makeRejectRecord0({ checker, coord: `${checker}.publicEntryExports`, path: entrySurface.path, witness: entrySurface.witness, ledger });
 
@@ -238,16 +234,11 @@ export async function CheckPublicEntryReleaseSurface0(config = makePublicSurface
     surfaceFrozen: true,
     surfaceBaseline: PUBLIC_SURFACE_BASELINE0,
   };
-
   return makeAcceptRecord0({ checker, nf, ledger });
 }
 
 function makeLedgerEntry0(phase, result) {
-  return {
-    phase,
-    status: result.ok ? 'pass' : 'fail',
-    digest: digestCanonical0(result.nf ?? result.witness ?? null),
-  };
+  return { phase, status: result.ok ? 'pass' : 'fail', digest: digestCanonical0(result.nf ?? result.witness ?? null) };
 }
 
 function validateConfig0(config) {
@@ -255,12 +246,8 @@ function validateConfig0(config) {
   if (config.kind !== undefined && config.kind !== 'PublicSurfaceFreezeConfig0') return validationReject0(['kind'], 'PublicSurfaceFreezeConfig0 kind mismatch', { actual: config.kind });
   if (config.version !== undefined && config.version !== CHECKER_VERSION) return validationReject0(['version'], `PublicSurfaceFreezeConfig0 version must be ${CHECKER_VERSION} when present`, { actual: config.version });
   if (typeof config.rootDir !== 'string' || config.rootDir.length === 0) return validationReject0(['rootDir'], 'PublicSurfaceFreezeConfig0 rootDir must be a non-empty string', { actual: config.rootDir });
-  if (config.publicEntryOverride !== null && (typeof config.publicEntryOverride !== 'object' || config.publicEntryOverride === null)) {
-    return validationReject0(['publicEntryOverride'], 'PublicSurfaceFreezeConfig0 publicEntryOverride must be null or an object', { actual: typeof config.publicEntryOverride });
-  }
-  if (config.packageJsonOverride !== null && !isPlainObject0(config.packageJsonOverride)) {
-    return validationReject0(['packageJsonOverride'], 'PublicSurfaceFreezeConfig0 packageJsonOverride must be null or a plain object', { actual: typeof config.packageJsonOverride });
-  }
+  if (config.publicEntryOverride !== null && (typeof config.publicEntryOverride !== 'object' || config.publicEntryOverride === null)) return validationReject0(['publicEntryOverride'], 'PublicSurfaceFreezeConfig0 publicEntryOverride must be null or an object', { actual: typeof config.publicEntryOverride });
+  if (config.packageJsonOverride !== null && !isPlainObject0(config.packageJsonOverride)) return validationReject0(['packageJsonOverride'], 'PublicSurfaceFreezeConfig0 packageJsonOverride must be null or a plain object', { actual: typeof config.packageJsonOverride });
   return validationAccept0({ kind: 'PublicSurfaceFreezeConfig0NF' });
 }
 
@@ -284,83 +271,28 @@ function validateExactKeys0(value, expectedKeys, pathArray) {
   if (value === null || typeof value !== 'object') return validationReject0(pathArray, 'public release surface target must be an object', { actual: typeof value });
   const actualKeys = Object.keys(value).sort();
   const frozenExpected = [...expectedKeys].sort();
-  if (stableStringify0(actualKeys) !== stableStringify0(frozenExpected)) {
-    return validationReject0(pathArray, 'public release surface keys changed', {
-      expectedKeys: frozenExpected,
-      actualKeys,
-      missingKeys: frozenExpected.filter((key) => !actualKeys.includes(key)),
-      extraKeys: actualKeys.filter((key) => !frozenExpected.includes(key)),
-    });
-  }
+  if (stableStringify0(actualKeys) !== stableStringify0(frozenExpected)) return validationReject0(pathArray, 'public release surface keys changed', { expectedKeys: frozenExpected, actualKeys, missingKeys: frozenExpected.filter((key) => !actualKeys.includes(key)), extraKeys: actualKeys.filter((key) => !frozenExpected.includes(key)) });
   return validationAccept0({ kind: 'PublicSurfaceExactKeys0NF', keys: actualKeys });
 }
 
 async function readPackageJson0(rootDir) {
-  try {
-    return JSON.parse(await fs.readFile(path.join(rootDir, 'package.json'), 'utf8'));
-  } catch (error) {
-    return {
-      tag: 'rejectLike',
-      path: ['package.json'],
-      witness: {
-        reason: 'package.json must be readable JSON',
-        detail: { rootDir, error: error.message },
-      },
-    };
-  }
+  try { return JSON.parse(await fs.readFile(path.join(rootDir, 'package.json'), 'utf8')); }
+  catch (error) { return { tag: 'rejectLike', path: ['package.json'], witness: { reason: 'package.json must be readable JSON', detail: { rootDir, error: error.message } } }; }
 }
 
-function isRejectLike0(value) {
-  return isPlainObject0(value) && value.tag === 'rejectLike';
-}
+function isRejectLike0(value) { return isPlainObject0(value) && value.tag === 'rejectLike'; }
 
 function makeAcceptRecord0({ checker, nf, ledger }) {
   const digest = digestCanonical0(nf);
-  return {
-    tag: 'accept',
-    kind: 'accept',
-    checker,
-    version: CHECKER_VERSION,
-    NF: nf,
-    Digest: digest,
-    Ledger: ledger,
-    nf,
-    digest,
-    ledger,
-  };
+  return { tag: 'accept', kind: 'accept', checker, version: CHECKER_VERSION, NF: nf, Digest: digest, Ledger: ledger, nf, digest, ledger };
 }
 
 function makeRejectRecord0({ checker, coord, path: pathArray, witness, ledger }) {
   const rejectNF = { kind: `${checker}RejectNF`, checker, version: CHECKER_VERSION, coord, path: pathArray, witness, ledger };
   const digest = digestCanonical0(rejectNF);
-  return {
-    tag: 'reject',
-    kind: 'reject',
-    checker,
-    version: CHECKER_VERSION,
-    Coord: coord,
-    Path: pathArray,
-    Witness: witness,
-    Digest: digest,
-    Ledger: ledger,
-    coord,
-    path: pathArray,
-    witness,
-    digest,
-    ledger,
-  };
+  return { tag: 'reject', kind: 'reject', checker, version: CHECKER_VERSION, Coord: coord, Path: pathArray, Witness: witness, Digest: digest, Ledger: ledger, coord, path: pathArray, witness, digest, ledger };
 }
 
-function validationAccept0(nf) {
-  return { ok: true, nf };
-}
-
-function validationReject0(pathArray, reason, detail) {
-  return { ok: false, path: pathArray, witness: { reason, detail } };
-}
-
-function isPlainObject0(value) {
-  if (value === null || typeof value !== 'object') return false;
-  const proto = Object.getPrototypeOf(value);
-  return proto === Object.prototype || proto === null;
-}
+function validationAccept0(nf) { return { ok: true, nf }; }
+function validationReject0(pathArray, reason, detail) { return { ok: false, path: pathArray, witness: { reason, detail } }; }
+function isPlainObject0(value) { if (value === null || typeof value !== 'object') return false; const proto = Object.getPrototypeOf(value); return proto === Object.prototype || proto === null; }
