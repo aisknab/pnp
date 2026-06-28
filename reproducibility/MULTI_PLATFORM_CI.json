@@ -1,0 +1,60 @@
+{
+  "kind": "PNPMultiPlatformCI0",
+  "version": 0,
+  "coordinate": "PNP-MULTI-PLATFORM-CI-2026-06-27-01",
+  "title": "Multi-platform core CI",
+  "purpose": "Define a portable CI matrix that verifies the repository's cross-platform Node core on Ubuntu, macOS, and Windows without requiring Docker, bash-specific fresh-clone execution, or nested full verifier recursion on every platform.",
+  "status": "multi-platform-ci-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "multiPlatformCIReady": true,
+  "fullPlatformEquivalenceProved": false,
+  "publicTheoremEmissionAllowedByCI": false,
+  "platforms": [
+    "ubuntu-latest",
+    "macos-latest",
+    "windows-latest"
+  ],
+  "nodeVersion": "20",
+  "workflow": ".github/workflows/multi-platform-ci.yml",
+  "commands": [
+    "npm ci",
+    "node --check pcc-core.mjs",
+    "node --check scripts/pnp-verify-all.mjs",
+    "node --test audits/multi-platform-ci0.test.mjs",
+    "node --test test/reviewer-negative-invariants.test.mjs"
+  ],
+  "portableSubset": {
+    "includes": [
+      "lockfile installation with npm ci",
+      "core checker syntax",
+      "one-command verifier script syntax",
+      "multi-platform manifest validation",
+      "reviewer negative invariant tests"
+    ],
+    "excludes": [
+      "Docker build",
+      "bash fresh-clone verifier execution",
+      "full nested npm run pnp:verify on every OS"
+    ],
+    "rationale": "The full one-command verifier remains the default local and Linux CI entrypoint. This workflow proves the cross-platform Node core and manifest surface without assuming Docker, bash, Python fallback behavior, or long nested verification on every hosted OS."
+  },
+  "nonClaims": [
+    "This multi-platform CI surface does not activate public theorem emission.",
+    "This multi-platform CI surface does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "The workflow checks a portable core subset on all listed platforms and does not yet prove full bit-identical behavior across every operating system.",
+    "Full pnp:verify remains the repository-level verifier; this matrix is a reproducibility confidence layer for the portable Node core."
+  ],
+  "audit": {
+    "checker": "CheckMultiPlatformCI0",
+    "test": "audits/multi-platform-ci0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
