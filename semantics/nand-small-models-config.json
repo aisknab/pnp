@@ -1,0 +1,42 @@
+{
+  "kind": "PNPNANDSmallModelsConfig0",
+  "version": 0,
+  "coordinate": "PNP-NAND-SMALL-MODELS-2026-06-27-01",
+  "title": "Exhaustive NAND direct-wire small-model audit configuration",
+  "purpose": "Configure a bounded exhaustive small-model replay over NAND direct-wire words so the executable semantics is checked against truth tables, replacement equivalence, and brute-force minimum sizes inside the configured universe.",
+  "status": "nand-small-models-seed-ready",
+  "semanticsCoordinate": "PNP-NAND-DIRECT-WIRE-SEMANTICS-2026-06-27-01",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "smallModelsReady": true,
+  "fullSmallModelCoverageProved": false,
+  "exhaustiveWithinConfiguredBounds": true,
+  "boundarySizes": [0, 1, 2],
+  "maxGates": 2,
+  "outputArity": 1,
+  "includeConstants": true,
+  "gateInputSymmetry": "unordered-NAND-input-pairs",
+  "checks": [
+    "all generated words validate",
+    "truth tables are deterministic",
+    "size equals NAND gate count",
+    "truth-table classes have brute-force minimum size inside the configured universe",
+    "every generated word is no smaller than the class minimum",
+    "equivalent same-boundary words accept compatible replacement",
+    "non-equivalent same-boundary words reject compatible replacement",
+    "future-gate references reject"
+  ],
+  "audit": {
+    "checker": "CheckNANDSmallModels0",
+    "script": "pcc-nand-small-models0.mjs",
+    "command": "npm run semantics:nand:small-models",
+    "expectedAcceptTag": "accept"
+  }
+}
