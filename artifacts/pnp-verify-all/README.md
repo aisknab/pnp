@@ -32,11 +32,13 @@ The verifier currently checks:
 14. The rule-family coverage audit tests.
 15. The checker dependency graph generation.
 16. The checker dependency graph tests.
-17. Cross-runtime minimal-kernel agreement.
-18. Independent verifier no-shared-code policy.
-19. Independent verifier audit tests.
-20. Independent Python verifier tests.
-21. Release-audit surface preservation.
+17. The checker no-circular-authority audit.
+18. The checker no-circular-authority audit tests.
+19. Cross-runtime minimal-kernel agreement.
+20. Independent verifier no-shared-code policy.
+21. Independent verifier audit tests.
+22. Independent Python verifier tests.
+23. Release-audit surface preservation.
 
 The accepted verdict keeps the public-review boundary explicit:
 

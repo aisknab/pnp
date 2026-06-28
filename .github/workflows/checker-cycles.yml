@@ -1,0 +1,30 @@
+name: checker-cycles
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  checker-cycles:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run checker no-circular-authority audit
+        run: npm run checker:cycles
+      - name: Run checker cycle audit tests
+        run: node --test audits/checker-cycles0.test.mjs
+      - name: Upload checker cycle artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: checker-cycles-latest-verdict
+          path: |
+            artifacts/checker-cycles/latest-verdict.json
+            artifacts/checker-cycles/generated-dependency-graph/checker-dependency-graph.json
+            artifacts/checker-cycles/generated-dependency-graph/checker-dependency-graph.dot
+            artifacts/checker-cycles/generated-dependency-graph/checker-dependency-graph.svg
+            artifacts/checker-cycles/generated-dependency-graph/latest-verdict.json
