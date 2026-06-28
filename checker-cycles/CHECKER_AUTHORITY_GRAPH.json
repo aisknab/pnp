@@ -1,0 +1,236 @@
+{
+  "kind": "PNPCheckerAuthorityGraph0",
+  "version": 0,
+  "coordinate": "PNP-CHECKER-AUTHORITY-GRAPH-2026-06-27-01",
+  "title": "No-circular-authority checker graph",
+  "purpose": "Represent the declared authority dependencies among public self-verification checkers and reject any cycle in which a checker conclusion can re-enter its own premise chain.",
+  "status": "checker-authority-graph-ready",
+  "dependencyGraphCoordinate": "PNP-CHECKER-DEPENDENCY-GRAPH-2026-06-27-01",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "authorityGraphReady": true,
+  "noCircularAuthorityProved": true,
+  "fullStaticImportCycleFreedomProved": false,
+  "staticDependencyCyclesAreAuthorityOnlyWhenDeclared": true,
+  "nodes": [
+    {
+      "id": "CheckPublicEntryReleaseSurface0",
+      "type": "checker",
+      "file": "pcc-public-surface-freeze0.mjs",
+      "conclusion": "public package entry and script surface matches the current public-review baseline"
+    },
+    {
+      "id": "CheckMinimalKernel0",
+      "type": "checker",
+      "file": "pcc-minimal-kernel0.mjs",
+      "conclusion": "minimal proof kernel coordinate and final-emission quarantine accept"
+    },
+    {
+      "id": "CheckTrustBase0",
+      "type": "checker",
+      "file": "pcc-trust-base0.mjs",
+      "conclusion": "explicit trust base is represented, non-empty, checksum-bound, and non-activating"
+    },
+    {
+      "id": "CheckTrustBaseShrinkPlan0",
+      "type": "checker",
+      "file": "pcc-trust-base-shrink-plan0.mjs",
+      "conclusion": "trust-base shrink plan is represented, dependency-tracked, and non-activating"
+    },
+    {
+      "id": "CheckRuleFamilyCoverage0",
+      "type": "checker",
+      "file": "pcc-rule-family-coverage0.mjs",
+      "conclusion": "rule-family coverage seed ledger is represented and non-activating"
+    },
+    {
+      "id": "AuditCheckerTotality0",
+      "type": "audit",
+      "file": "scripts/audit-checker-totality.mjs",
+      "conclusion": "seed checker-totality fuzz surface returns accept or reject without throwing"
+    },
+    {
+      "id": "AuditNegativeCheckerMutations0",
+      "type": "audit",
+      "file": "scripts/audit-negative-checker-mutations.mjs",
+      "conclusion": "negative checker mutation seed suite rejects every configured mutation"
+    },
+    {
+      "id": "GenerateCheckerDependencyGraph0",
+      "type": "generator",
+      "file": "scripts/generate-checker-dependency-graph.mjs",
+      "conclusion": "static checker dependency graph artifacts are generated from the current checkout"
+    },
+    {
+      "id": "AuditCheckerCycles0",
+      "type": "audit",
+      "file": "scripts/audit-checker-cycles.mjs",
+      "conclusion": "declared authority graph is acyclic and no checker conclusion re-enters its own premise chain"
+    },
+    {
+      "id": "RunPNPVerifyAll0",
+      "type": "runner",
+      "file": "scripts/pnp-verify-all.mjs",
+      "conclusion": "one-command verifier accepted the integrated public-review self-verification stack"
+    }
+  ],
+  "authorityEdges": [
+    {
+      "from": "CheckPublicEntryReleaseSurface0",
+      "to": "RunPNPVerifyAll0",
+      "kind": "authority-premise",
+      "description": "The one-command verifier includes the public package surface as a guarded public entrypoint condition through release audit replay."
+    },
+    {
+      "from": "CheckMinimalKernel0",
+      "to": "CheckRuleFamilyCoverage0",
+      "kind": "authority-premise",
+      "description": "The rule-family coverage ledger uses the minimal kernel as evidence for final-prefix and rule-spine coverage."
+    },
+    {
+      "from": "CheckTrustBase0",
+      "to": "CheckTrustBaseShrinkPlan0",
+      "kind": "authority-premise",
+      "description": "The shrink-plan checker verifies that the plan targets the current explicit trust-base coordinate."
+    },
+    {
+      "from": "CheckTrustBase0",
+      "to": "CheckRuleFamilyCoverage0",
+      "kind": "authority-premise",
+      "description": "The rule-family coverage ledger uses the explicit trust-base ledger as evidence for TrustBase and complexity-family boundaries."
+    },
+    {
+      "from": "CheckTrustBaseShrinkPlan0",
+      "to": "CheckRuleFamilyCoverage0",
+      "kind": "authority-premise",
+      "description": "The rule-family coverage ledger uses the shrink plan as evidence for represented future coverage obligations."
+    },
+    {
+      "from": "CheckMinimalKernel0",
+      "to": "AuditCheckerTotality0",
+      "kind": "authority-premise",
+      "description": "The totality audit fuzzes CheckMinimalKernel0 and records its accept/reject behavior."
+    },
+    {
+      "from": "CheckTrustBase0",
+      "to": "AuditCheckerTotality0",
+      "kind": "authority-premise",
+      "description": "The totality audit fuzzes CheckTrustBase0 and records its accept/reject behavior."
+    },
+    {
+      "from": "CheckTrustBaseShrinkPlan0",
+      "to": "AuditCheckerTotality0",
+      "kind": "authority-premise",
+      "description": "The totality audit fuzzes CheckTrustBaseShrinkPlan0 and records its accept/reject behavior."
+    },
+    {
+      "from": "CheckPublicEntryReleaseSurface0",
+      "to": "AuditCheckerTotality0",
+      "kind": "authority-premise",
+      "description": "The totality audit fuzzes CheckPublicEntryReleaseSurface0 and records its accept/reject behavior."
+    },
+    {
+      "from": "CheckMinimalKernel0",
+      "to": "AuditNegativeCheckerMutations0",
+      "kind": "authority-premise",
+      "description": "The negative mutation suite mutates minimal-kernel proof and boundary fields and requires reject."
+    },
+    {
+      "from": "CheckTrustBase0",
+      "to": "AuditNegativeCheckerMutations0",
+      "kind": "authority-premise",
+      "description": "The negative mutation suite mutates trust-base kind, boundary, assumptions, checksum, and non-empty status."
+    },
+    {
+      "from": "CheckTrustBaseShrinkPlan0",
+      "to": "AuditNegativeCheckerMutations0",
+      "kind": "authority-premise",
+      "description": "The negative mutation suite mutates shrink-plan kind, boundary, dependencies, and completion status."
+    },
+    {
+      "from": "CheckPublicEntryReleaseSurface0",
+      "to": "AuditNegativeCheckerMutations0",
+      "kind": "authority-premise",
+      "description": "The negative mutation suite mutates public package surface drift and requires reject."
+    },
+    {
+      "from": "GenerateCheckerDependencyGraph0",
+      "to": "AuditCheckerCycles0",
+      "kind": "authority-premise",
+      "description": "The cycle audit consumes a freshly generated static checker dependency graph as context."
+    },
+    {
+      "from": "CheckPublicEntryReleaseSurface0",
+      "to": "AuditCheckerCycles0",
+      "kind": "authority-premise",
+      "description": "The cycle audit verifies that the declared public-surface authority node does not re-enter itself through the authority graph."
+    },
+    {
+      "from": "CheckMinimalKernel0",
+      "to": "AuditCheckerCycles0",
+      "kind": "authority-premise",
+      "description": "The cycle audit verifies that the declared minimal-kernel authority node does not re-enter itself through the authority graph."
+    },
+    {
+      "from": "CheckTrustBase0",
+      "to": "AuditCheckerCycles0",
+      "kind": "authority-premise",
+      "description": "The cycle audit verifies that the declared trust-base authority node does not re-enter itself through the authority graph."
+    },
+    {
+      "from": "CheckTrustBaseShrinkPlan0",
+      "to": "AuditCheckerCycles0",
+      "kind": "authority-premise",
+      "description": "The cycle audit verifies that the declared shrink-plan authority node does not re-enter itself through the authority graph."
+    },
+    {
+      "from": "CheckRuleFamilyCoverage0",
+      "to": "AuditCheckerCycles0",
+      "kind": "authority-premise",
+      "description": "The cycle audit verifies that the rule-family coverage node does not re-enter itself through the authority graph."
+    },
+    {
+      "from": "AuditCheckerTotality0",
+      "to": "RunPNPVerifyAll0",
+      "kind": "authority-premise",
+      "description": "The one-command verifier includes the checker-totality seed audit."
+    },
+    {
+      "from": "AuditNegativeCheckerMutations0",
+      "to": "RunPNPVerifyAll0",
+      "kind": "authority-premise",
+      "description": "The one-command verifier includes the negative checker mutation seed audit."
+    },
+    {
+      "from": "CheckRuleFamilyCoverage0",
+      "to": "RunPNPVerifyAll0",
+      "kind": "authority-premise",
+      "description": "The one-command verifier includes the rule-family coverage ledger audit."
+    },
+    {
+      "from": "GenerateCheckerDependencyGraph0",
+      "to": "RunPNPVerifyAll0",
+      "kind": "authority-premise",
+      "description": "The one-command verifier includes checker dependency graph generation."
+    },
+    {
+      "from": "AuditCheckerCycles0",
+      "to": "RunPNPVerifyAll0",
+      "kind": "authority-premise",
+      "description": "The one-command verifier includes the no-circular-authority audit."
+    }
+  ],
+  "audit": {
+    "checker": "AuditCheckerCycles0",
+    "script": "scripts/audit-checker-cycles.mjs",
+    "command": "npm run checker:cycles",
+    "expectedAcceptTag": "accept"
+  }
+}
