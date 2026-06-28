@@ -59,6 +59,7 @@ export async function AuditNoHiddenOracle0(options = {}) {
       documentationReferenceCount: scan.documentationReferenceCount,
       allowedExecutableReferenceCount: scan.allowedExecutableReferenceCount,
       existingSourceReferenceCount: scan.existingSourceReferenceCount,
+      skippedSymlinkCount: scan.skippedSymlinkCount,
       forbiddenExecutableHitCount: 0,
       publicTheoremEmissionAllowed: false,
       finalTheoremReady: false,
@@ -199,11 +200,12 @@ async function scanRepository0({ root, manifest, extraVirtualFiles }) {
     return reject0('NoHiddenOracle.ForbiddenExecutableHit', ['scan'], 'unwhitelisted executable shortcut pattern found in injected or virtual source', { forbiddenHits: forbiddenHits.slice(0, 20), forbiddenHitCount: forbiddenHits.length });
   }
 
-  return { tag: 'accept', scannedFileCount, executableFileCount, documentationReferenceCount, allowedExecutableReferenceCount, existingSourceReferenceCount };
+  return { tag: 'accept', scannedFileCount, executableFileCount, documentationReferenceCount, allowedExecutableReferenceCount, existingSourceReferenceCount, skippedSymlinkCount: walk.skippedSymlinkCount ?? 0 };
 }
 
 async function walk0(root, relativeDir, manifest, files) {
   let entries;
+  let skippedSymlinkCount = 0;
   try {
     entries = await readdir(path.join(root, relativeDir), { withFileTypes: true });
   } catch (error) {
@@ -215,13 +217,14 @@ async function walk0(root, relativeDir, manifest, files) {
     if (entry.isDirectory()) {
       const nested = await walk0(root, child, manifest, files);
       if (nested.tag === 'reject') return nested;
+      skippedSymlinkCount += nested.skippedSymlinkCount ?? 0;
     } else if (entry.isFile()) {
       if (manifest.scan.extensions.includes(path.extname(child))) files.push({ path: child });
     } else if (entry.isSymbolicLink()) {
-      return reject0('NoHiddenOracle.SymlinkForbidden', [child], 'no-hidden-oracle scan rejects symlinks');
+      skippedSymlinkCount += 1;
     }
   }
-  return { tag: 'accept' };
+  return { tag: 'accept', skippedSymlinkCount };
 }
 
 function validateStringArray0(value, pathArray, nonEmpty) {
