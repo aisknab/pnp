@@ -24,8 +24,9 @@
   "negativeCheckerMutationCoordinate": "PNP-NEGATIVE-CHECKER-MUTATIONS-2026-06-27-01",
   "ruleFamilyCoverageCoordinate": "PNP-RULE-FAMILY-COVERAGE-2026-06-27-01",
   "checkerDependencyGraphCoordinate": "PNP-CHECKER-DEPENDENCY-GRAPH-2026-06-27-01",
+  "checkerAuthorityGraphCoordinate": "PNP-CHECKER-AUTHORITY-GRAPH-2026-06-27-01",
   "noSharedCodePolicyCoordinate": "PNP-INDEPENDENT-VERIFIERS-NO-SHARED-CODE-2026-06-27-01",
-  "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-CHECKER-DEPENDENCY-GRAPH-01",
+  "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-CHECKER-CYCLES-01",
   "lastVerifiedCommit": "current-checkout",
   "verificationSurfaces": [
     {
@@ -69,6 +70,11 @@
       "outputKind": "artifacts/checker-dependency-graph/checker-dependency-graph.json"
     },
     {
+      "id": "checker-no-circular-authority-audit",
+      "command": "npm run checker:cycles",
+      "outputKind": "accept|reject"
+    },
+    {
       "id": "independent-no-shared-code-audit",
       "command": "npm run independent:no-shared-code",
       "outputKind": "accept|reject"
@@ -85,7 +91,8 @@
     "The checker-totality seed audit does not yet claim every historical checker has been fuzzed for totality.",
     "The negative checker mutation suite is a seed suite and does not yet claim full generated mutation coverage.",
     "The rule-family coverage ledger is a seed ledger and does not yet claim full historical rule-family coverage.",
-    "The checker dependency graph is a generated visualization and does not yet prove absence of circular authority.",
+    "The checker dependency graph is a generated visualization and by itself does not prove absence of circular authority.",
+    "The checker no-circular-authority audit proves acyclicity only for declared authority edges, not all static import edges.",
     "The historical canonical report may be superseded by successor public-review reports, but this status file records the current non-activation boundary."
   ]
 }
