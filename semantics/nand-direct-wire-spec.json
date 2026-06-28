@@ -1,0 +1,90 @@
+{
+  "kind": "PNPNANDDirectWireSemantics0",
+  "version": 0,
+  "coordinate": "PNP-NAND-DIRECT-WIRE-SEMANTICS-2026-06-27-01",
+  "title": "Executable NAND direct-wire semantics seed specification",
+  "purpose": "Define a small executable semantics for NAND direct-wire words, open carriers, boundary tuples, constants, gates, output tuples, truth-table evaluation, replacement equivalence, and size.",
+  "status": "nand-direct-wire-semantics-seed-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "semanticsReady": true,
+  "fullSemanticsCoverageProved": false,
+  "coveredConcepts": [
+    "NAND gate syntax",
+    "open carrier boundary tuple",
+    "constant sources",
+    "direct-wire topological gate order",
+    "multi-output tuple semantics",
+    "truth-table evaluation",
+    "word size as NAND gate count",
+    "truth-table equivalence",
+    "compatible replacement semantics for same boundary and output arity"
+  ],
+  "sourceKinds": [
+    "boundary",
+    "const",
+    "gate"
+  ],
+  "wordSchema": {
+    "kind": "NANDDirectWireWord0",
+    "requiredFields": [
+      "boundary",
+      "gates",
+      "outputs"
+    ],
+    "boundary": "ordered array of unique boundary variable names",
+    "gate": {
+      "id": "unique gate output name",
+      "op": "NAND",
+      "left": "source reference",
+      "right": "source reference"
+    },
+    "source": {
+      "boundary": { "kind": "boundary", "name": "boundary name" },
+      "const": { "kind": "const", "value": "0|1 boolean integer" },
+      "gate": { "kind": "gate", "id": "earlier gate id" }
+    },
+    "outputs": "ordered array of source references"
+  },
+  "semanticDefinitions": {
+    "NAND": "nand(a,b)=1 iff not(a and b)",
+    "evaluationOrder": "gates are evaluated in the listed order; a gate source may reference only a boundary, constant, or earlier gate",
+    "openFunction": "the truth table induced by all assignments to the ordered boundary tuple and the ordered output tuple",
+    "size": "the number of NAND gates in the direct-wire word",
+    "equivalence": "two words are equivalent when they have identical boundary tuples, identical output arity, and identical output bit-vectors for every boundary assignment",
+    "replacement": "a replacement is compatible when it has the same boundary tuple and output arity as the support word and is truth-table equivalent"
+  },
+  "seedExamples": [
+    {
+      "id": "nand2",
+      "description": "single NAND gate over two boundary bits",
+      "boundary": ["x", "y"],
+      "expectedTruthTable": [1, 1, 1, 0]
+    },
+    {
+      "id": "not1",
+      "description": "NOT x encoded as NAND(x,x)",
+      "boundary": ["x"],
+      "expectedTruthTable": [1, 0]
+    },
+    {
+      "id": "and2",
+      "description": "AND(x,y) encoded as double NAND",
+      "boundary": ["x", "y"],
+      "expectedTruthTable": [0, 0, 0, 1]
+    }
+  ],
+  "audit": {
+    "checker": "CheckNANDDirectWireSemantics0",
+    "script": "pcc-nand-direct-wire-semantics0.mjs",
+    "command": "npm run semantics:nand",
+    "expectedAcceptTag": "accept"
+  }
+}
