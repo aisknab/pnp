@@ -1,0 +1,7 @@
+services:
+  pnp-verify:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pnp-verify:local
+    command: ["npm", "run", "pnp:verify"]
