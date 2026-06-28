@@ -30,6 +30,7 @@
   "lockedNANDSATSmallModelsCoordinate": "PNP-LOCKED-NAND-SAT-SMALL-MODELS-2026-06-27-01",
   "complexityLedgerCoordinate": "PNP-COMPLEXITY-LEDGER-2026-06-27-01",
   "noHiddenOracleAuditCoordinate": "PNP-NO-HIDDEN-ORACLE-AUDIT-2026-06-27-01",
+  "freshCloneVerifyCoordinate": "PNP-FRESH-CLONE-VERIFY-2026-06-27-01",
   "noSharedCodePolicyCoordinate": "PNP-INDEPENDENT-VERIFIERS-NO-SHARED-CODE-2026-06-27-01",
   "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-NO-HIDDEN-ORACLE-01",
   "lastVerifiedCommit": "current-checkout",
@@ -105,6 +106,11 @@
       "outputKind": "accept|reject"
     },
     {
+      "id": "fresh-clone-verifier",
+      "command": "bash scripts/fresh-clone-verify.sh --repo https://github.com/aisknab/pnp.git --ref main",
+      "outputKind": "artifacts/fresh-clone-verify/latest-verdict.json"
+    },
+    {
       "id": "independent-no-shared-code-audit",
       "command": "npm run independent:no-shared-code",
       "outputKind": "accept|reject"
@@ -128,6 +134,7 @@
     "The locked NAND SAT small-model audit is bounded to unit and contradiction CNF seeds and does not yet claim the full historical locked-NAND threshold theorem.",
     "The complexity implication ledger is a seed ledger and does not yet discharge the full SAT-in-P to P=NP activation path.",
     "The no-hidden-oracle audit is a seed source-surface scan and does not yet claim full semantic absence of every possible oracle pattern.",
+    "The fresh-clone verifier provides a reproducibility entrypoint but does not by itself activate the final theorem gate.",
     "The historical canonical report may be superseded by successor public-review reports, but this status file records the current non-activation boundary."
   ]
 }

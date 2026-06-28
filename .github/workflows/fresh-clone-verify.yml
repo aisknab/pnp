@@ -1,0 +1,35 @@
+name: fresh-clone-verify
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  fresh-clone-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Check fresh clone verifier script syntax
+        run: bash -n scripts/fresh-clone-verify.sh
+      - name: Run fresh clone verifier tests
+        run: node --test audits/fresh-clone-verify0.test.mjs
+      - name: Run fresh clone smoke verifier
+        run: |
+          bash scripts/fresh-clone-verify.sh \
+            --repo "$PWD" \
+            --ref "$GITHUB_SHA" \
+            --workdir "$RUNNER_TEMP/pnp-fresh-clone" \
+            --verify-command "node --check pcc-core.mjs" \
+            --verdict "$PWD/artifacts/fresh-clone-verify/latest-verdict.json"
+      - name: Upload fresh clone verifier verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: fresh-clone-verify-latest-verdict
+          path: artifacts/fresh-clone-verify/latest-verdict.json

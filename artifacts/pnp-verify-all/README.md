@@ -44,11 +44,12 @@ The verifier currently checks:
 26. The complexity implication ledger tests.
 27. The no-hidden-oracle audit.
 28. The no-hidden-oracle audit tests.
-29. Cross-runtime minimal-kernel agreement.
-30. Independent verifier no-shared-code policy.
-31. Independent verifier audit tests.
-32. Independent Python verifier tests.
-33. Release-audit surface preservation.
+29. The fresh-clone verifier script tests.
+30. Cross-runtime minimal-kernel agreement.
+31. Independent verifier no-shared-code policy.
+32. Independent verifier audit tests.
+33. Independent Python verifier tests.
+34. Release-audit surface preservation.
 
 The accepted verdict keeps the public-review boundary explicit:
 
