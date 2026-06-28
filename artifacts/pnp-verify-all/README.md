@@ -38,11 +38,13 @@ The verifier currently checks:
 20. The NAND direct-wire semantics tests.
 21. The NAND direct-wire small-model audit.
 22. The NAND direct-wire small-model tests.
-23. Cross-runtime minimal-kernel agreement.
-24. Independent verifier no-shared-code policy.
-25. Independent verifier audit tests.
-26. Independent Python verifier tests.
-27. Release-audit surface preservation.
+23. The locked NAND SAT small-model audit.
+24. The locked NAND SAT small-model tests.
+25. Cross-runtime minimal-kernel agreement.
+26. Independent verifier no-shared-code policy.
+27. Independent verifier audit tests.
+28. Independent Python verifier tests.
+29. Release-audit surface preservation.
 
 The accepted verdict keeps the public-review boundary explicit:
 

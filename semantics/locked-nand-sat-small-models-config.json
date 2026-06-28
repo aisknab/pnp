@@ -1,0 +1,55 @@
+{
+  "kind": "PNPLockedNANDSATSmallModelsConfig0",
+  "version": 0,
+  "coordinate": "PNP-LOCKED-NAND-SAT-SMALL-MODELS-2026-06-27-01",
+  "title": "Locked NAND SAT threshold small-model audit configuration",
+  "purpose": "Configure a bounded truth-table replay that compares brute-force SAT with a locked NAND threshold seed over small CNF formulas, using the executable NAND direct-wire semantics and small-model exact-minimum search inside the configured universe.",
+  "status": "locked-nand-sat-small-models-seed-ready",
+  "semanticsCoordinate": "PNP-NAND-DIRECT-WIRE-SEMANTICS-2026-06-27-01",
+  "smallModelsCoordinate": "PNP-NAND-SMALL-MODELS-2026-06-27-01",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "satSmallModelsReady": true,
+  "fullLockedNANDThresholdCoverageProved": false,
+  "exhaustiveWithinConfiguredFormulaUniverse": true,
+  "formulaUniverse": {
+    "maxVariables": 2,
+    "clauseKinds": [
+      "single literal unit clause",
+      "single-variable contradiction pair"
+    ],
+    "includePositiveUnits": true,
+    "includeNegativeUnits": true,
+    "includeContradictions": true
+  },
+  "thresholdModel": {
+    "kind": "LockedFinalOutputNonconstantSeed0",
+    "baselineMinimum": 0,
+    "thresholdPredicate": "exactMinimum(finalLockedOutput) > baselineMinimum",
+    "finalLock": "z",
+    "maxExactSearchGates": 3
+  },
+  "checks": [
+    "brute-force CNF SAT over all assignments",
+    "locked NAND final-output construction validates as a NANDDirectWireWord0",
+    "constructed truth table is nonzero iff CNF is satisfiable",
+    "small-model exact minimum for final output is found inside configured gate bound",
+    "threshold predicate agrees with brute-force SAT",
+    "unsatisfiable contradiction pairs have zero final output and baseline minimum",
+    "satisfiable unit formulas have positive final-output minimum",
+    "public theorem emission remains disabled"
+  ],
+  "audit": {
+    "checker": "CheckLockedNANDSATSmallModels0",
+    "script": "pcc-locked-nand-sat-small-models0.mjs",
+    "command": "npm run semantics:locked-nand:sat-small-models",
+    "expectedAcceptTag": "accept"
+  }
+}

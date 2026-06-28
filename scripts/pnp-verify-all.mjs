@@ -31,8 +31,10 @@ export async function RunPNPVerifyAll0(options = {}) {
     'pcc-rule-family-coverage0.mjs',
     'pcc-nand-direct-wire-semantics0.mjs',
     'pcc-nand-small-models0.mjs',
+    'pcc-locked-nand-sat-small-models0.mjs',
     'semantics/nand-direct-wire-reference.mjs',
     'semantics/nand-small-models.mjs',
+    'semantics/locked-nand-sat-small-models.mjs',
     'scripts/cross-verify.mjs',
     'scripts/audit-report-theorem-bindings.mjs',
     'scripts/audit-independent-verifiers-no-shared-code.mjs',
@@ -78,6 +80,8 @@ export async function RunPNPVerifyAll0(options = {}) {
     { id: 'nand-direct-wire-semantics-tests', command: process.execPath, args: ['--test', 'audits/nand-direct-wire-semantics0.test.mjs'], kind: 'process' },
     { id: 'nand-small-model-audit', command: process.execPath, args: ['pcc-nand-small-models0.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'nand-small-model-tests', command: process.execPath, args: ['--test', 'audits/nand-small-models0.test.mjs'], kind: 'process' },
+    { id: 'locked-nand-sat-small-model-audit', command: process.execPath, args: ['pcc-locked-nand-sat-small-models0.mjs', '--json'], kind: 'json', expectTag: 'accept' },
+    { id: 'locked-nand-sat-small-model-tests', command: process.execPath, args: ['--test', 'audits/locked-nand-sat-small-models0.test.mjs'], kind: 'process' },
     { id: 'minimal-kernel-cross-verify', command: process.execPath, args: ['scripts/cross-verify.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'independent-no-shared-code-audit', command: process.execPath, args: ['scripts/audit-independent-verifiers-no-shared-code.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'independent-no-shared-code-tests', command: process.execPath, args: ['--test', 'audits/independent-verifiers-no-shared-code.test.mjs'], kind: 'process' },
@@ -114,6 +118,7 @@ export async function RunPNPVerifyAll0(options = {}) {
     checkerAuthorityGraphCoordinate: 'PNP-CHECKER-AUTHORITY-GRAPH-2026-06-27-01',
     nandDirectWireSemanticsCoordinate: 'PNP-NAND-DIRECT-WIRE-SEMANTICS-2026-06-27-01',
     nandSmallModelsCoordinate: 'PNP-NAND-SMALL-MODELS-2026-06-27-01',
+    lockedNANDSATSmallModelsCoordinate: 'PNP-LOCKED-NAND-SAT-SMALL-MODELS-2026-06-27-01',
     publicTheoremEmissionAllowed: false,
     finalTheoremReady: false,
     activeFinalNodeIds: [],
@@ -158,6 +163,7 @@ async function verifyStatusFile0(root) {
   requireEqual0(status.checkerAuthorityGraphCoordinate, 'PNP-CHECKER-AUTHORITY-GRAPH-2026-06-27-01', failures, ['checkerAuthorityGraphCoordinate']);
   requireEqual0(status.nandDirectWireSemanticsCoordinate, 'PNP-NAND-DIRECT-WIRE-SEMANTICS-2026-06-27-01', failures, ['nandDirectWireSemanticsCoordinate']);
   requireEqual0(status.nandSmallModelsCoordinate, 'PNP-NAND-SMALL-MODELS-2026-06-27-01', failures, ['nandSmallModelsCoordinate']);
+  requireEqual0(status.lockedNANDSATSmallModelsCoordinate, 'PNP-LOCKED-NAND-SAT-SMALL-MODELS-2026-06-27-01', failures, ['lockedNANDSATSmallModelsCoordinate']);
   requireEqual0(status.noSharedCodePolicyCoordinate, 'PNP-INDEPENDENT-VERIFIERS-NO-SHARED-CODE-2026-06-27-01', failures, ['noSharedCodePolicyCoordinate']);
 
   if (failures.length !== 0) return { tag: 'reject', id: 'status-file-consistency', coord: 'StatusFile.ValidationFailed', path: failures[0].path, witness: { failures } };
