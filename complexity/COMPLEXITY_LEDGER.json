@@ -111,7 +111,7 @@
       ],
       "evidenceFiles": [
         "PNP_STATUS.json",
-        "CLAIM_BOUNDARY.md",
+        "TRUST_BASE.md",
         "complexity/COMPLEXITY_LEDGER.json"
       ],
       "machineCheckStatus": "checked-by-pcc-complexity-ledger0"
