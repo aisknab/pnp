@@ -1,0 +1,51 @@
+{
+  "kind": "PNPFreshCloneVerify0",
+  "version": 0,
+  "coordinate": "PNP-FRESH-CLONE-VERIFY-2026-06-27-01",
+  "title": "Fresh clone verifier",
+  "purpose": "Define the reproducibility entrypoint that clones a repository/ref into a clean worktree, installs dependencies with npm ci, and runs the configured verification command, which defaults to npm run pnp:verify.",
+  "status": "fresh-clone-verifier-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "freshCloneVerifierReady": true,
+  "freshCloneDefaultVerifiesWholeStack": true,
+  "publicTheoremEmissionAllowedByVerifier": false,
+  "script": "scripts/fresh-clone-verify.sh",
+  "defaultCommands": [
+    "git clone <repo> <workdir>/repo",
+    "git checkout --detach <ref>",
+    "npm ci",
+    "npm run pnp:verify"
+  ],
+  "configurableCommands": {
+    "installCommand": "--install-command, default npm ci",
+    "verifyCommand": "--verify-command, default npm run pnp:verify"
+  },
+  "artifacts": {
+    "latestVerdict": "artifacts/fresh-clone-verify/latest-verdict.json"
+  },
+  "ciMode": {
+    "workflow": ".github/workflows/fresh-clone-verify.yml",
+    "defaultCIInvocation": "bash scripts/fresh-clone-verify.sh --repo $PWD --ref $GITHUB_SHA --verify-command 'node --check pcc-core.mjs'",
+    "rationale": "CI runs a fast clone/install/smoke command to verify the fresh-clone mechanism without recursively running the full pnp:verify workflow inside itself. The script default remains npm run pnp:verify for independent reviewers."
+  },
+  "nonClaims": [
+    "This verifier does not activate public theorem emission.",
+    "This verifier does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "The CI smoke invocation verifies fresh clone mechanics; independent reviewers can use the default full pnp:verify command."
+  ],
+  "audit": {
+    "checker": "FreshCloneVerifyScript0",
+    "script": "scripts/fresh-clone-verify.sh",
+    "test": "audits/fresh-clone-verify0.test.mjs",
+    "command": "bash scripts/fresh-clone-verify.sh --repo <repo> --ref <ref>",
+    "expectedAcceptTag": "accept"
+  }
+}
