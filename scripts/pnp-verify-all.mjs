@@ -10,10 +10,7 @@ const CHECKER = 'pnp-verify-all0';
 const VERSION = 0;
 const DEFAULT_OUTPUT_PATH = 'artifacts/pnp-verify-all/latest-verdict.json';
 const PNP_STATUS_PATH = 'PNP_STATUS.json';
-const EXPECTED_BLOCKERS = [
-  'Release.UnrestrictedFinalSoundness',
-  'ExternalReview.Acceptance',
-];
+const EXPECTED_BLOCKERS = ['Release.UnrestrictedFinalSoundness', 'ExternalReview.Acceptance'];
 
 export async function RunPNPVerifyAll0(options = {}) {
   const root = path.resolve(options.root ?? process.cwd());
@@ -38,6 +35,7 @@ export async function RunPNPVerifyAll0(options = {}) {
     'scripts/audit-checker-totality.mjs',
     'scripts/audit-negative-checker-mutations.mjs',
     'scripts/generate-checker-dependency-graph.mjs',
+    'scripts/audit-checker-cycles.mjs',
     'scripts/pnp-verify-all.mjs',
   ];
   for (const target of nodeSyntaxTargets) {
@@ -70,6 +68,8 @@ export async function RunPNPVerifyAll0(options = {}) {
     { id: 'rule-family-coverage-tests', command: process.execPath, args: ['--test', 'audits/rule-family-coverage0.test.mjs'], kind: 'process' },
     { id: 'checker-dependency-graph-generation', command: process.execPath, args: ['scripts/generate-checker-dependency-graph.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'checker-dependency-graph-tests', command: process.execPath, args: ['--test', 'audits/checker-dependency-graph0.test.mjs'], kind: 'process' },
+    { id: 'checker-cycle-audit', command: process.execPath, args: ['scripts/audit-checker-cycles.mjs', '--json'], kind: 'json', expectTag: 'accept' },
+    { id: 'checker-cycle-tests', command: process.execPath, args: ['--test', 'audits/checker-cycles0.test.mjs'], kind: 'process' },
     { id: 'minimal-kernel-cross-verify', command: process.execPath, args: ['scripts/cross-verify.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'independent-no-shared-code-audit', command: process.execPath, args: ['scripts/audit-independent-verifiers-no-shared-code.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'independent-no-shared-code-tests', command: process.execPath, args: ['--test', 'audits/independent-verifiers-no-shared-code.test.mjs'], kind: 'process' },
@@ -103,6 +103,7 @@ export async function RunPNPVerifyAll0(options = {}) {
     negativeCheckerMutationCoordinate: 'PNP-NEGATIVE-CHECKER-MUTATIONS-2026-06-27-01',
     ruleFamilyCoverageCoordinate: 'PNP-RULE-FAMILY-COVERAGE-2026-06-27-01',
     checkerDependencyGraphCoordinate: 'PNP-CHECKER-DEPENDENCY-GRAPH-2026-06-27-01',
+    checkerAuthorityGraphCoordinate: 'PNP-CHECKER-AUTHORITY-GRAPH-2026-06-27-01',
     publicTheoremEmissionAllowed: false,
     finalTheoremReady: false,
     activeFinalNodeIds: [],
@@ -144,6 +145,7 @@ async function verifyStatusFile0(root) {
   requireEqual0(status.negativeCheckerMutationCoordinate, 'PNP-NEGATIVE-CHECKER-MUTATIONS-2026-06-27-01', failures, ['negativeCheckerMutationCoordinate']);
   requireEqual0(status.ruleFamilyCoverageCoordinate, 'PNP-RULE-FAMILY-COVERAGE-2026-06-27-01', failures, ['ruleFamilyCoverageCoordinate']);
   requireEqual0(status.checkerDependencyGraphCoordinate, 'PNP-CHECKER-DEPENDENCY-GRAPH-2026-06-27-01', failures, ['checkerDependencyGraphCoordinate']);
+  requireEqual0(status.checkerAuthorityGraphCoordinate, 'PNP-CHECKER-AUTHORITY-GRAPH-2026-06-27-01', failures, ['checkerAuthorityGraphCoordinate']);
   requireEqual0(status.noSharedCodePolicyCoordinate, 'PNP-INDEPENDENT-VERIFIERS-NO-SHARED-CODE-2026-06-27-01', failures, ['noSharedCodePolicyCoordinate']);
 
   if (failures.length !== 0) return { tag: 'reject', id: 'status-file-consistency', coord: 'StatusFile.ValidationFailed', path: failures[0].path, witness: { failures } };
