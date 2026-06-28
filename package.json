@@ -41,6 +41,7 @@
     "semantics:nand": "node pcc-nand-direct-wire-semantics0.mjs --json",
     "semantics:nand:small-models": "node pcc-nand-small-models0.mjs --json",
     "semantics:locked-nand:sat-small-models": "node pcc-locked-nand-sat-small-models0.mjs --json",
+    "complexity:ledger": "node pcc-complexity-ledger0.mjs --json",
     "pnp:verify": "node scripts/pnp-verify-all.mjs --json",
     "examples:minimal": "node examples/minimal/run-all.mjs",
     "runall": "node ./bin/runall0.mjs",
