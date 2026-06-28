@@ -1,0 +1,144 @@
+{
+  "kind": "PNPComplexityLedger0",
+  "version": 0,
+  "coordinate": "PNP-COMPLEXITY-LEDGER-2026-06-27-01",
+  "title": "Complexity implication ledger",
+  "purpose": "Represent the conditional complexity implication chain from a checked SAT-to-locked-NAND threshold route and polynomial residual-band minimization to SAT in P and then P = NP, without activating public theorem emission.",
+  "status": "complexity-ledger-seed-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "complexityLedgerReady": true,
+  "fullComplexityImplicationDischarged": false,
+  "publicTheoremEmissionAllowedByLedger": false,
+  "linkedCoordinates": {
+    "trustBase": "PNP-TRUST-BASE-2026-06-27-01",
+    "minimalKernel": "PNP-MINIMAL-KERNEL-2026-06-27-01",
+    "nandSemantics": "PNP-NAND-DIRECT-WIRE-SEMANTICS-2026-06-27-01",
+    "nandSmallModels": "PNP-NAND-SMALL-MODELS-2026-06-27-01",
+    "lockedNANDSATSmallModels": "PNP-LOCKED-NAND-SAT-SMALL-MODELS-2026-06-27-01",
+    "ruleFamilyCoverage": "PNP-RULE-FAMILY-COVERAGE-2026-06-27-01"
+  },
+  "proofObjects": [
+    {
+      "id": "Complexity.BooleanCircuitSAT.NPComplete",
+      "statement": "Boolean-circuit SAT is NP-complete under polynomial-time many-one reductions in the standard Turing-machine model.",
+      "status": "external-standard-complexity-theorem",
+      "proofRule": "TrustBase.StandardComplexityTheorem",
+      "premiseIds": [],
+      "evidenceFiles": [
+        "TRUST_BASE.md",
+        "trust-base/TRUST_BASE.json"
+      ],
+      "machineCheckStatus": "represented-as-explicit-trust-base-item"
+    },
+    {
+      "id": "Complexity.LockedNAND.SATThresholdReductionSeed",
+      "statement": "The executable locked-NAND SAT small-model seed agrees with brute-force SAT inside its configured formula universe.",
+      "status": "machine-checked-seed",
+      "proofRule": "ExecutableSmallModelReplay",
+      "premiseIds": [
+        "Complexity.BooleanCircuitSAT.NPComplete"
+      ],
+      "evidenceFiles": [
+        "semantics/locked-nand-sat-small-models-config.json",
+        "semantics/locked-nand-sat-small-models.mjs",
+        "pcc-locked-nand-sat-small-models0.mjs",
+        "audits/locked-nand-sat-small-models0.test.mjs"
+      ],
+      "machineCheckStatus": "checked-by-pcc-locked-nand-sat-small-models0"
+    },
+    {
+      "id": "Complexity.ResidualBandMinimization.ConditionalPolynomial",
+      "statement": "If the accepted residual-band minimization package is valid and its residual-band hypotheses are discharged, the constructed residual-band minimizer runs in polynomial time.",
+      "status": "conditional-proof-object",
+      "proofRule": "PackageSufficiencyConditional",
+      "premiseIds": [
+        "Complexity.LockedNAND.SATThresholdReductionSeed"
+      ],
+      "evidenceFiles": [
+        "kernel/PNP_MINIMAL_KERNEL.json",
+        "semantic-kernel/RULE_FAMILY_COVERAGE.json",
+        "report-bindings/REPORT_THEOREM_BINDINGS.json",
+        "trust-base/TRUST_BASE.json"
+      ],
+      "machineCheckStatus": "represented-not-activated"
+    },
+    {
+      "id": "Complexity.ConstructedSATAlgorithm.ConditionalPolynomial",
+      "statement": "If the locked-NAND SAT reduction is fully discharged and residual-band minimization is polynomial on the constructed instances, SAT is decidable in polynomial time by constructing the locked instance, minimizing it, and applying the threshold decision rule.",
+      "status": "conditional-proof-object",
+      "proofRule": "ReductionPlusPolynomialMinimizerImpliesSATInP",
+      "premiseIds": [
+        "Complexity.BooleanCircuitSAT.NPComplete",
+        "Complexity.ResidualBandMinimization.ConditionalPolynomial"
+      ],
+      "evidenceFiles": [
+        "semantics/locked-nand-sat-small-models-config.json",
+        "complexity/COMPLEXITY_LEDGER.json"
+      ],
+      "machineCheckStatus": "represented-not-activated"
+    },
+    {
+      "id": "Complexity.SATInP.ImpliesPEqualsNP",
+      "statement": "If an NP-complete language SAT is in P, then P = NP.",
+      "status": "external-standard-complexity-theorem",
+      "proofRule": "NPCompleteLanguageInPImpliesPEqualsNP",
+      "premiseIds": [
+        "Complexity.BooleanCircuitSAT.NPComplete",
+        "Complexity.ConstructedSATAlgorithm.ConditionalPolynomial"
+      ],
+      "evidenceFiles": [
+        "TRUST_BASE.md",
+        "trust-base/TRUST_BASE.json",
+        "kernel/PNP_MINIMAL_KERNEL.json"
+      ],
+      "machineCheckStatus": "represented-as-explicit-trust-base-item"
+    },
+    {
+      "id": "Complexity.PublicEmissionBoundary.NonActivation",
+      "statement": "The complexity implication chain is recorded as a conditional ledger and does not activate public theorem emission while Release.UnrestrictedFinalSoundness and ExternalReview.Acceptance remain blocked.",
+      "status": "machine-checked-boundary",
+      "proofRule": "PublicEmissionGateNonActivation",
+      "premiseIds": [
+        "Complexity.SATInP.ImpliesPEqualsNP"
+      ],
+      "evidenceFiles": [
+        "PNP_STATUS.json",
+        "TRUST_BASE.md",
+        "complexity/COMPLEXITY_LEDGER.json"
+      ],
+      "machineCheckStatus": "checked-by-pcc-complexity-ledger0"
+    }
+  ],
+  "derivedConditionalConclusions": [
+    {
+      "id": "Complexity.Derived.SATInPConditional",
+      "statement": "Full discharge of the locked-NAND reduction and polynomial residual-band minimization would imply SAT in P.",
+      "dependsOn": [
+        "Complexity.ConstructedSATAlgorithm.ConditionalPolynomial"
+      ],
+      "currentlyActivated": false
+    },
+    {
+      "id": "Complexity.Derived.PEqualsNPConditional",
+      "statement": "Full discharge of SAT in P through the accepted stack would imply P = NP by the explicit NP-completeness implication.",
+      "dependsOn": [
+        "Complexity.SATInP.ImpliesPEqualsNP"
+      ],
+      "currentlyActivated": false
+    }
+  ],
+  "audit": {
+    "checker": "CheckComplexityLedger0",
+    "script": "pcc-complexity-ledger0.mjs",
+    "command": "npm run complexity:ledger",
+    "expectedAcceptTag": "accept"
+  }
+}
