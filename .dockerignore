@@ -1,0 +1,8 @@
+.git
+node_modules
+npm-debug.log
+.DS_Store
+artifacts/**/latest-verdict.json
+artifacts/**/checker-dependency-graph.json
+artifacts/**/checker-dependency-graph.dot
+artifacts/**/checker-dependency-graph.svg

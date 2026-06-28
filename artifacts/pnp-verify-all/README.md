@@ -45,11 +45,12 @@ The verifier currently checks:
 27. The no-hidden-oracle audit.
 28. The no-hidden-oracle audit tests.
 29. The fresh-clone verifier script tests.
-30. Cross-runtime minimal-kernel agreement.
-31. Independent verifier no-shared-code policy.
-32. Independent verifier audit tests.
-33. Independent Python verifier tests.
-34. Release-audit surface preservation.
+30. The container environment manifest and Dockerfile tests.
+31. Cross-runtime minimal-kernel agreement.
+32. Independent verifier no-shared-code policy.
+33. Independent verifier audit tests.
+34. Independent Python verifier tests.
+35. Release-audit surface preservation.
 
 The accepted verdict keeps the public-review boundary explicit:
 
