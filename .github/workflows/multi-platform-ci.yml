@@ -1,0 +1,35 @@
+name: multi-platform-ci
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  portable-node-core:
+    name: portable-node-core (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - name: Install dependencies from lockfile
+        run: npm ci
+      - name: Check core verifier syntax
+        run: node --check pcc-core.mjs
+      - name: Check one-command verifier syntax
+        run: node --check scripts/pnp-verify-all.mjs
+      - name: Run multi-platform manifest tests
+        run: node --test audits/multi-platform-ci0.test.mjs
+      - name: Run reviewer negative invariant tests
+        run: node --test test/reviewer-negative-invariants.test.mjs
