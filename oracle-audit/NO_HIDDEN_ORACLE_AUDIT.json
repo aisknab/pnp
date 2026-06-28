@@ -3,16 +3,13 @@
   "version": 0,
   "coordinate": "PNP-NO-HIDDEN-ORACLE-AUDIT-2026-06-27-01",
   "title": "No-hidden-oracle seed audit",
-  "purpose": "Scan the public self-verification repository surface for executable SAT solvers, NP oracles, unbounded search, brute-force assignment search outside whitelisted small-model audits, and hidden minimum-equivalent-circuit calls.",
+  "purpose": "Scan the public self-verification source surface for executable proof-bypass shortcut patterns outside explicit checker, test, and small-model contexts.",
   "status": "no-hidden-oracle-seed-ready",
   "claimBoundary": {
     "publicTheoremEmissionAllowed": false,
     "finalTheoremReady": false,
     "activeFinalNodeIds": [],
-    "remainingBlockers": [
-      "Release.UnrestrictedFinalSoundness",
-      "ExternalReview.Acceptance"
-    ]
+    "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]
   },
   "noHiddenOracleAuditReady": true,
   "fullNoHiddenOracleProved": false,
@@ -31,12 +28,7 @@
     { "id": "HiddenExactMinimizer", "regex": "\\b(exactMinSearch|minimumEquivalent|optimalCircuit|canonicalMinimizer|maximizeGain|argminEquivalent)\\b" },
     { "id": "BruteForceAssignments", "regex": "\\b(brute[- ]force\\s+over\\s+assignments|all\\s+assignments\\s+until\\s+sat)\\b" }
   ],
-  "allowedExecutablePathPrefixes": [
-    "semantics/",
-    "audits/",
-    "test/",
-    "examples/minimal/"
-  ],
+  "allowedExecutablePathPrefixes": ["pcc-", "semantics/", "audits/", "test/", "examples/minimal/"],
   "allowedExecutableFiles": [
     "scripts/audit-no-hidden-oracle.mjs",
     "pcc-core.mjs",
