@@ -29,8 +29,9 @@
   "nandSmallModelsCoordinate": "PNP-NAND-SMALL-MODELS-2026-06-27-01",
   "lockedNANDSATSmallModelsCoordinate": "PNP-LOCKED-NAND-SAT-SMALL-MODELS-2026-06-27-01",
   "complexityLedgerCoordinate": "PNP-COMPLEXITY-LEDGER-2026-06-27-01",
+  "noHiddenOracleAuditCoordinate": "PNP-NO-HIDDEN-ORACLE-AUDIT-2026-06-27-01",
   "noSharedCodePolicyCoordinate": "PNP-INDEPENDENT-VERIFIERS-NO-SHARED-CODE-2026-06-27-01",
-  "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-COMPLEXITY-LEDGER-01",
+  "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-NO-HIDDEN-ORACLE-01",
   "lastVerifiedCommit": "current-checkout",
   "verificationSurfaces": [
     {
@@ -99,6 +100,11 @@
       "outputKind": "accept|reject"
     },
     {
+      "id": "no-hidden-oracle-audit",
+      "command": "npm run audit:no-hidden-oracle",
+      "outputKind": "accept|reject"
+    },
+    {
       "id": "independent-no-shared-code-audit",
       "command": "npm run independent:no-shared-code",
       "outputKind": "accept|reject"
@@ -121,6 +127,7 @@
     "The NAND small-model audit is bounded to its configured universe and does not yet claim full locked-NAND SAT-threshold coverage.",
     "The locked NAND SAT small-model audit is bounded to unit and contradiction CNF seeds and does not yet claim the full historical locked-NAND threshold theorem.",
     "The complexity implication ledger is a seed ledger and does not yet discharge the full SAT-in-P to P=NP activation path.",
+    "The no-hidden-oracle audit is a seed source-surface scan and does not yet claim full semantic absence of every possible oracle pattern.",
     "The historical canonical report may be superseded by successor public-review reports, but this status file records the current non-activation boundary."
   ]
 }
