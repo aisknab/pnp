@@ -57,9 +57,7 @@
     "configured formula universe",
     "small-model",
     "exact small-model",
-    "minimum-equivalent-circuit",
-    "['\\\"](exactMinSearch|minimumEquivalent|optimalCircuit|canonicalMinimizer|maximizeGain|argminEquivalent)['\\\"]",
-    "^\\s*['\\\"](µ|µ\\*|µ#|Can|argmin|maxG|minimumEquivalent|optimalCircuit|exactMinSearch|canonicalMinimizer|maximizeGain|argminEquivalent)['\\\"],?\\s*$"
+    "minimum-equivalent-circuit"
   ],
   "checks": [
     "manifest boundary remains non-activating",
