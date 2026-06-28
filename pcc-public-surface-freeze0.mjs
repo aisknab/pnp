@@ -15,9 +15,9 @@ const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
 export const PUBLIC_SURFACE_BASELINE0 = Object.freeze({
   kind: 'PublicSurfaceBaseline0',
   version: CHECKER_VERSION,
-  coordinate: 'PUBLIC-SURFACE-BASELINE-2026-06-27-CHECKER-CYCLES-01',
-  status: 'public-review-surface-rebased-for-checker-cycle-audit',
-  rationale: 'The public package script surface is intentionally extensible while the repository is being converted into a self-verifying audit stack; this baseline includes cross-runtime verification, independent-verifier no-shared-code auditing, the top-level pnp:verify entrypoint, checker-totality seed auditing, negative checker mutation auditing, rule-family coverage auditing, checker-dependency graph generation, and checker no-circular-authority auditing.',
+  coordinate: 'PUBLIC-SURFACE-BASELINE-2026-06-27-NAND-SEMANTICS-01',
+  status: 'public-review-surface-rebased-for-nand-direct-wire-semantics',
+  rationale: 'The public package script surface is intentionally extensible while the repository is being converted into a self-verifying audit stack; this baseline includes cross-runtime verification, independent-verifier no-shared-code auditing, the top-level pnp:verify entrypoint, checker-totality seed auditing, negative checker mutation auditing, rule-family coverage auditing, checker-dependency graph generation, checker no-circular-authority auditing, and NAND direct-wire semantics auditing.',
 });
 
 export const PUBLIC_ENTRY_EXPORT_KEYS0 = Object.freeze([
@@ -122,6 +122,7 @@ export const PUBLIC_PACKAGE_SCRIPT_TARGETS0 = Object.freeze({
   'checker:graph': 'node scripts/generate-checker-dependency-graph.mjs --json',
   'checker:cycles': 'node scripts/audit-checker-cycles.mjs --json',
   'rule-family:coverage': 'node pcc-rule-family-coverage0.mjs --json',
+  'semantics:nand': 'node pcc-nand-direct-wire-semantics0.mjs --json',
   'pnp:verify': 'node scripts/pnp-verify-all.mjs --json',
   'examples:minimal': 'node examples/minimal/run-all.mjs',
   runall: 'node ./bin/runall0.mjs',

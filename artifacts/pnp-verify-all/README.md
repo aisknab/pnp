@@ -34,11 +34,13 @@ The verifier currently checks:
 16. The checker dependency graph tests.
 17. The checker no-circular-authority audit.
 18. The checker no-circular-authority audit tests.
-19. Cross-runtime minimal-kernel agreement.
-20. Independent verifier no-shared-code policy.
-21. Independent verifier audit tests.
-22. Independent Python verifier tests.
-23. Release-audit surface preservation.
+19. The NAND direct-wire semantics audit.
+20. The NAND direct-wire semantics tests.
+21. Cross-runtime minimal-kernel agreement.
+22. Independent verifier no-shared-code policy.
+23. Independent verifier audit tests.
+24. Independent Python verifier tests.
+25. Release-audit surface preservation.
 
 The accepted verdict keeps the public-review boundary explicit:
 
