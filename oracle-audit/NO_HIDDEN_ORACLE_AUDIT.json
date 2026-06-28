@@ -1,0 +1,110 @@
+{
+  "kind": "PNPNoHiddenOracleAudit0",
+  "version": 0,
+  "coordinate": "PNP-NO-HIDDEN-ORACLE-AUDIT-2026-06-27-01",
+  "title": "No-hidden-oracle seed audit",
+  "purpose": "Scan the public self-verification repository surface for executable SAT solvers, NP oracles, unbounded search, brute-force assignment search outside whitelisted small-model audits, and hidden minimum-equivalent-circuit calls.",
+  "status": "no-hidden-oracle-seed-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "noHiddenOracleAuditReady": true,
+  "fullNoHiddenOracleProved": false,
+  "publicTheoremEmissionAllowedByAudit": false,
+  "scan": {
+    "extensions": [
+      ".mjs",
+      ".js",
+      ".json",
+      ".md",
+      ".tex",
+      ".yml",
+      ".yaml"
+    ],
+    "skippedPathPrefixes": [
+      ".git/",
+      "node_modules/",
+      "artifacts/",
+      "proof-artifacts/",
+      "successor-report-artifacts/"
+    ],
+    "executableExtensions": [
+      ".mjs",
+      ".js"
+    ],
+    "documentationPathPrefixes": [
+      "docs/",
+      "review/",
+      "reports/",
+      "ai-review-tasks/",
+      "complexity/",
+      "semantic-kernel/"
+    ]
+  },
+  "forbiddenExecutablePatterns": [
+    { "id": "ExternalSATSolverBinary", "regex": "\\b(minisat|cryptominisat|kissat|cadical|lingeling|picosat|glucose|z3)\\b" },
+    { "id": "SATSolverAPI", "regex": "\\b(satSolver|solveSAT|runSATSolver|externalSAT|oracleSAT|SATOracle)\\b" },
+    { "id": "NPOracle", "regex": "\\b(NPOracle|npOracle|NP\\s+oracle|NP-oracle)\\b" },
+    { "id": "UnboundedSearch", "regex": "\\b(unboundedSearch|unbounded\\s+search|searchUntilFound|while\\s*\\(\\s*true\\s*\\))\\b" },
+    { "id": "HiddenExactMinimizer", "regex": "\\b(exactMinSearch|minimumEquivalent|optimalCircuit|canonicalMinimizer|maximizeGain|argminEquivalent)\\b" },
+    { "id": "BruteForceAssignments", "regex": "\\b(brute[- ]force\\s+over\\s+assignments|all\\s+assignments\\s+until\\s+sat)\\b" }
+  ],
+  "allowedExecutablePathPrefixes": [
+    "semantics/",
+    "audits/",
+    "test/",
+    "examples/minimal/"
+  ],
+  "allowedExecutableFiles": [
+    "scripts/audit-no-hidden-oracle.mjs",
+    "pcc-core.mjs",
+    "pcc-hard0.mjs",
+    "pcc-materialized-no-hidden-min0.mjs",
+    "pcc-local-packages0.mjs",
+    "pcc-rows0.mjs",
+    "pcc-final0.mjs",
+    "pcc-final-framework0.mjs",
+    "pcc-global-proof-dag0.mjs",
+    "pcc-kimpl0.mjs",
+    "pcc-boot0.mjs",
+    "pcc-k-concrete-materialized0.mjs",
+    "pcc-boot-materialized0.mjs"
+  ],
+  "allowedExecutableLineRegexes": [
+    "NoHiddenMin",
+    "no-hidden-min",
+    "FORBIDDEN",
+    "forbidden",
+    "PCCOracle",
+    "Oracleexp",
+    "oracle package",
+    "brute-force SAT",
+    "brute-force CNF SAT",
+    "configured formula universe",
+    "small-model",
+    "exact small-model",
+    "minimum-equivalent-circuit"
+  ],
+  "checks": [
+    "manifest boundary remains non-activating",
+    "forbidden executable patterns are exact and versioned",
+    "repository scan is deterministic over configured file extensions",
+    "executable forbidden hits must be explicitly whitelisted by path or line context",
+    "documentation/formal references are counted but do not authorize executable calls",
+    "generated and durable artifact directories are excluded from source-surface scanning",
+    "audit rejects injected executable SAT solver or NP-oracle calls",
+    "public theorem emission remains disabled"
+  ],
+  "audit": {
+    "checker": "AuditNoHiddenOracle0",
+    "script": "scripts/audit-no-hidden-oracle.mjs",
+    "command": "npm run audit:no-hidden-oracle",
+    "expectedAcceptTag": "accept"
+  }
+}
