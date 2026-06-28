@@ -35,6 +35,7 @@
     "independent:no-shared-code": "node scripts/audit-independent-verifiers-no-shared-code.mjs --json",
     "checker:totality": "node scripts/audit-checker-totality.mjs --json",
     "checker:mutations": "node scripts/audit-negative-checker-mutations.mjs --json",
+    "checker:graph": "node scripts/generate-checker-dependency-graph.mjs --json",
     "rule-family:coverage": "node pcc-rule-family-coverage0.mjs --json",
     "pnp:verify": "node scripts/pnp-verify-all.mjs --json",
     "examples:minimal": "node examples/minimal/run-all.mjs",
