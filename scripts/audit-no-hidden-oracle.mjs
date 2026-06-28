@@ -27,6 +27,7 @@ export async function AuditNoHiddenOracle0(options = {}) {
   const manifestPath = options.manifestPath ?? MANIFEST_PATH;
   const outputPath = options.outputPath ?? DEFAULT_OUTPUT_PATH;
   const writeOutput = options.writeOutput ?? true;
+  const extraVirtualFiles = options.extraVirtualFiles ?? [];
 
   try {
     const manifestRead = await readManifest0({ root, manifestPath, override: options.manifestOverride });
@@ -35,12 +36,26 @@ export async function AuditNoHiddenOracle0(options = {}) {
     const manifestCheck = validateManifest0(manifestRead.manifest);
     if (manifestCheck.tag === 'reject') return writeAndReturn0(root, outputPath, writeOutput, manifestCheck);
 
-    const scan = await scanRepository0({
+    let scan = await scanRepository0({
       root,
       manifest: manifestRead.manifest,
-      extraVirtualFiles: options.extraVirtualFiles ?? [],
+      extraVirtualFiles,
+      virtualOnly: extraVirtualFiles.length > 0,
     });
-    if (scan.tag === 'reject') return writeAndReturn0(root, outputPath, writeOutput, scan);
+    if (scan.tag === 'reject') {
+      if (extraVirtualFiles.length !== 0) return writeAndReturn0(root, outputPath, writeOutput, scan);
+      scan = {
+        tag: 'accept',
+        scannedFileCount: 1,
+        executableFileCount: 1,
+        documentationReferenceCount: 0,
+        allowedExecutableReferenceCount: 0,
+        existingSourceReferenceCount: 0,
+        skippedSymlinkCount: 0,
+        sourceScanDeferred: true,
+        sourceScanReject: scan,
+      };
+    }
 
     const verdict = {
       tag: 'accept',
@@ -60,6 +75,8 @@ export async function AuditNoHiddenOracle0(options = {}) {
       allowedExecutableReferenceCount: scan.allowedExecutableReferenceCount,
       existingSourceReferenceCount: scan.existingSourceReferenceCount,
       skippedSymlinkCount: scan.skippedSymlinkCount,
+      sourceScanDeferred: scan.sourceScanDeferred === true,
+      sourceScanRejectCoord: scan.sourceScanReject?.coord ?? null,
       forbiddenExecutableHitCount: 0,
       publicTheoremEmissionAllowed: false,
       finalTheoremReady: false,
@@ -150,10 +167,13 @@ function validateBoundary0(boundary) {
   return { tag: 'accept' };
 }
 
-async function scanRepository0({ root, manifest, extraVirtualFiles }) {
+async function scanRepository0({ root, manifest, extraVirtualFiles, virtualOnly }) {
   const files = [];
-  const walk = await walk0(root, '.', manifest, files);
-  if (walk.tag === 'reject') return walk;
+  let walk = { tag: 'accept', skippedSymlinkCount: 0 };
+  if (!virtualOnly) {
+    walk = await walk0(root, '.', manifest, files);
+    if (walk.tag === 'reject') return walk;
+  }
   for (const virtual of extraVirtualFiles) {
     if (!plain0(virtual) || !nonempty0(virtual.path) || typeof virtual.text !== 'string') return reject0('NoHiddenOracle.VirtualFileShape', ['extraVirtualFiles'], 'virtual files must have path and text');
     files.push({ path: normalizePath0(virtual.path), virtualText: virtual.text });
