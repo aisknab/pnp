@@ -25,8 +25,9 @@
   "ruleFamilyCoverageCoordinate": "PNP-RULE-FAMILY-COVERAGE-2026-06-27-01",
   "checkerDependencyGraphCoordinate": "PNP-CHECKER-DEPENDENCY-GRAPH-2026-06-27-01",
   "checkerAuthorityGraphCoordinate": "PNP-CHECKER-AUTHORITY-GRAPH-2026-06-27-01",
+  "nandDirectWireSemanticsCoordinate": "PNP-NAND-DIRECT-WIRE-SEMANTICS-2026-06-27-01",
   "noSharedCodePolicyCoordinate": "PNP-INDEPENDENT-VERIFIERS-NO-SHARED-CODE-2026-06-27-01",
-  "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-CHECKER-CYCLES-01",
+  "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-NAND-SEMANTICS-01",
   "lastVerifiedCommit": "current-checkout",
   "verificationSurfaces": [
     {
@@ -75,6 +76,11 @@
       "outputKind": "accept|reject"
     },
     {
+      "id": "nand-direct-wire-semantics-audit",
+      "command": "npm run semantics:nand",
+      "outputKind": "accept|reject"
+    },
+    {
       "id": "independent-no-shared-code-audit",
       "command": "npm run independent:no-shared-code",
       "outputKind": "accept|reject"
@@ -93,6 +99,7 @@
     "The rule-family coverage ledger is a seed ledger and does not yet claim full historical rule-family coverage.",
     "The checker dependency graph is a generated visualization and by itself does not prove absence of circular authority.",
     "The checker no-circular-authority audit proves acyclicity only for declared authority edges, not all static import edges.",
+    "The NAND direct-wire semantics artifact is a seed executable semantics and does not yet claim full locked-NAND SAT-threshold coverage.",
     "The historical canonical report may be superseded by successor public-review reports, but this status file records the current non-activation boundary."
   ]
 }
