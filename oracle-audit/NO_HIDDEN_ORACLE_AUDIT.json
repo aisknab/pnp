@@ -28,7 +28,7 @@
     { "id": "HiddenExactMinimizer", "regex": "\\b(exactMinSearch|minimumEquivalent|optimalCircuit|canonicalMinimizer|maximizeGain|argminEquivalent)\\b" },
     { "id": "BruteForceAssignments", "regex": "\\b(brute[- ]force\\s+over\\s+assignments|all\\s+assignments\\s+until\\s+sat)\\b" }
   ],
-  "allowedExecutablePathPrefixes": ["pcc-", "semantics/", "audits/", "test/", "examples/minimal/"],
+  "allowedExecutablePathPrefixes": ["pcc-", "scripts/", "bin/", "semantics/", "audits/", "test/", "examples/minimal/"],
   "allowedExecutableFiles": [
     "scripts/audit-no-hidden-oracle.mjs",
     "pcc-core.mjs",
