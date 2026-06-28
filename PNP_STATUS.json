@@ -32,6 +32,7 @@
   "noHiddenOracleAuditCoordinate": "PNP-NO-HIDDEN-ORACLE-AUDIT-2026-06-27-01",
   "freshCloneVerifyCoordinate": "PNP-FRESH-CLONE-VERIFY-2026-06-27-01",
   "containerEnvironmentCoordinate": "PNP-CONTAINER-ENVIRONMENT-2026-06-27-01",
+  "multiPlatformCICoordinate": "PNP-MULTI-PLATFORM-CI-2026-06-27-01",
   "noSharedCodePolicyCoordinate": "PNP-INDEPENDENT-VERIFIERS-NO-SHARED-CODE-2026-06-27-01",
   "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-NO-HIDDEN-ORACLE-01",
   "lastVerifiedCommit": "current-checkout",
@@ -117,6 +118,11 @@
       "outputKind": "containerized pnp:verify accept|reject"
     },
     {
+      "id": "multi-platform-ci",
+      "command": "GitHub Actions matrix: ubuntu-latest, macos-latest, windows-latest",
+      "outputKind": "portable Node core checks"
+    },
+    {
       "id": "independent-no-shared-code-audit",
       "command": "npm run independent:no-shared-code",
       "outputKind": "accept|reject"
@@ -142,6 +148,7 @@
     "The no-hidden-oracle audit is a seed source-surface scan and does not yet claim full semantic absence of every possible oracle pattern.",
     "The fresh-clone verifier provides a reproducibility entrypoint but does not by itself activate the final theorem gate.",
     "The container environment is a reproducibility entrypoint and is not yet a digest-pinned bit-for-bit environment proof.",
+    "The multi-platform CI matrix verifies a portable Node core subset and does not yet prove full bit-identical behavior across every operating system.",
     "The historical canonical report may be superseded by successor public-review reports, but this status file records the current non-activation boundary."
   ]
 }
