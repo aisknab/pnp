@@ -1,0 +1,57 @@
+{
+  "kind": "PNPContainerEnvironment0",
+  "version": 0,
+  "coordinate": "PNP-CONTAINER-ENVIRONMENT-2026-06-27-01",
+  "title": "Containerized verification environment",
+  "purpose": "Define a reproducible container and devcontainer surface for running the PNP verification stack with Node 20, npm ci, and npm run pnp:verify as the default container command.",
+  "status": "container-environment-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "containerEnvironmentReady": true,
+  "fullEnvironmentReproducibilityProved": false,
+  "publicTheoremEmissionAllowedByEnvironment": false,
+  "files": {
+    "dockerfile": "Dockerfile",
+    "dockerignore": ".dockerignore",
+    "compose": "docker-compose.yml",
+    "devcontainer": ".devcontainer/devcontainer.json",
+    "workflow": ".github/workflows/container-environment.yml"
+  },
+  "baseImage": {
+    "image": "node:20-bookworm-slim",
+    "nodeMajor": 20,
+    "lockStatus": "major-version-and-distribution-pinned-not-digest-pinned",
+    "reductionPlan": "pin base-image digest after first public review container release"
+  },
+  "defaultCommands": [
+    "docker build -t pnp-verify:local .",
+    "docker run pnp-verify:local npm run pnp:verify"
+  ],
+  "ciMode": {
+    "workflow": ".github/workflows/container-environment.yml",
+    "commands": [
+      "node --test audits/container-environment0.test.mjs",
+      "docker build -t pnp-container-environment-smoke .",
+      "docker run pnp-container-environment-smoke node --check pcc-core.mjs"
+    ],
+    "rationale": "CI builds the same Dockerfile and runs a fast smoke command so container mechanics are checked without recursively running the full verification stack inside every container workflow run."
+  },
+  "nonClaims": [
+    "This container environment does not activate public theorem emission.",
+    "This container environment does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "The base image is pinned to Node 20 on Debian bookworm slim, but the manifest does not yet claim digest-pinned bit-for-bit environment reproducibility.",
+    "The CI smoke command verifies container build and execution mechanics; independent reviewers can run the default full pnp:verify command inside the container."
+  ],
+  "audit": {
+    "checker": "CheckContainerEnvironment0",
+    "test": "audits/container-environment0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
