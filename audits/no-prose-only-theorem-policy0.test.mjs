@@ -125,7 +125,7 @@ test('no prose-only theorem policy rejects binding groups without tests', async 
 
 test('no prose-only theorem policy rejects missing finite-to-unbounded obligation', async () => {
   const obligations = clone0(await json0('proof-obligations/OBLIGATION_LEDGER.json'));
-  obligations.obligations = obligations.obligations.filter((entry) => entry.id !== 'OBL-015-FiniteToUnboundedFamilyAudit');
+  obligations.obligations.find((entry) => entry.id === 'OBL-015-FiniteToUnboundedFamilyAudit').id = 'OBL-015-MissingFiniteToUnboundedFamilyAudit';
 
   const out = await CheckNoProseOnlyTheoremPolicy0({
     policyOverride: await json0('report-bindings/NO_PROSE_ONLY_THEOREM_POLICY.json'),
