@@ -16,6 +16,8 @@
   },
   "policyReady": true,
   "releaseCriticalTheoremSpineCovered": true,
+  "historicalReportTheoremInventoryRepresented": true,
+  "reportTheoremInventoryCoordinate": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
   "allNumberedReportTheoremsCovered": false,
   "fullReportTheoremInventoryExhaustive": false,
   "proseOnlyTheoremActivationAllowed": false,
@@ -23,6 +25,7 @@
   "coverageScope": {
     "mode": "release-critical-spine",
     "theoremBindingLedgerCoordinate": "REPORT-THEOREM-BINDINGS-2026-06-27-01",
+    "reportTheoremInventoryCoordinate": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
     "expectedTheoremBindingCount": 20,
     "proofObligationLedgerCoordinate": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
     "minimumProofObligationCount": 15,
@@ -32,6 +35,8 @@
   },
   "requiredEvidenceFiles": [
     "report-bindings/REPORT_THEOREM_BINDINGS.json",
+    "report-bindings/REPORT_THEOREM_INVENTORY.json",
+    "pcc-report-theorem-inventory0.mjs",
     "proof-obligations/OBLIGATION_LEDGER.json",
     "proof-obligations/GAP_LEDGER.json",
     "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json",
@@ -56,20 +61,21 @@
     },
     {
       "id": "NPT-004-HistoricalTheoremLanguageFenced",
-      "description": "Historical theorem-emission prose remains fenced by the current release ladder, gap ledger, and status boundary rather than acting as an active theorem gate.",
+      "description": "Historical theorem-emission prose remains fenced by the current release ladder, gap ledger, status boundary, and report theorem inventory rather than acting as an active theorem gate.",
       "enforcedBy": "pcc-no-prose-only-theorem-policy0.mjs"
     },
     {
       "id": "NPT-005-ExhaustivenessNotOverclaimed",
-      "description": "This seed policy covers the release-critical spine and explicitly does not yet claim every numbered theorem environment in the historical report has a binding.",
+      "description": "This seed policy covers the release-critical spine and now records the historical Section 22 theorem-ledger inventory, while explicitly not yet claiming every numbered theorem environment in the historical report has a checker binding.",
       "enforcedBy": "pcc-no-prose-only-theorem-policy0.mjs"
     }
   ],
   "currentVerdict": {
     "noReleaseCriticalProseOnlyActivation": true,
+    "historicalReportTheoremInventoryRepresented": true,
     "exhaustiveHistoricalReportCoverage": false,
     "activationBlockersCleared": false,
-    "reason": "The release-critical theorem spine has machine-readable binding and obligation surfaces, but the historical report still contains many numbered theorem environments and direct theorem-emission language. This policy records and enforces the current release-critical scope without claiming exhaustive report coverage or activation."
+    "reason": "The release-critical theorem spine has machine-readable binding and obligation surfaces, and the historical Section 22 theorem-ledger rows are now inventoried. The policy still does not claim exhaustive coverage of every numbered theorem environment or public theorem activation."
   },
   "nonClaims": [
     "This policy does not activate public theorem emission.",
