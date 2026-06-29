@@ -20,7 +20,8 @@ test('proof obligation ledger accepts current source ledger', async () => {
   assert.equal(out.proofObligationLedgerReady, true);
   assert.equal(out.fullProofObligationDischargeProved, false);
   assert.equal(out.publicTheoremEmissionAllowedByLedger, false);
-  assert.equal(out.obligationCount, 14);
+  assert.equal(out.obligationCount, 15);
+  assert.ok(out.obligationIds.includes('OBL-015-FiniteToUnboundedFamilyAudit'));
   assert.ok(out.sourceFileCount > 0);
   assert.ok(out.testFileCount > 0);
   assert.equal(out.obligationDigestLedgerSha256.length, 64);

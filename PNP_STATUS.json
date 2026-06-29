@@ -19,6 +19,7 @@
   "theoremBindingLedgerCoordinate": "REPORT-THEOREM-BINDINGS-2026-06-27-01",
   "proofObligationLedgerCoordinate": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
   "gapLedgerCoordinate": "PNP-GAP-LEDGER-2026-06-27-01",
+  "finiteToUnboundedFamilyAuditCoordinate": "PNP-FINITE-TO-UNBOUNDED-FAMILY-AUDIT-2026-06-27-01",
   "minimalKernelCoordinate": "PNP-MINIMAL-KERNEL-2026-06-27-01",
   "trustBaseCoordinate": "PNP-TRUST-BASE-2026-06-27-01",
   "trustBaseShrinkPlanCoordinate": "PNP-TRUST-BASE-SHRINK-PLAN-2026-06-27-01",
@@ -56,6 +57,11 @@
       "id": "gap-ledger-audit",
       "command": "node pcc-gap-ledger0.mjs --json",
       "outputKind": "artifacts/gap-ledger/latest-verdict.json"
+    },
+    {
+      "id": "finite-to-unbounded-family-audit",
+      "command": "node pcc-finite-to-unbounded-family-audit0.mjs --json",
+      "outputKind": "artifacts/finite-to-unbounded-family-audit/latest-verdict.json"
     },
     {
       "id": "minimal-kernel-cross-verify",
@@ -168,6 +174,7 @@
     "This status file does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
     "The proof obligation ledger records current obligations, dependencies, source files, tests, and computed hashes, but does not by itself discharge blocked final soundness.",
     "The gap ledger records known unresolved, externally trusted, bounded-seed-only, and release-blocking gaps, but does not close them.",
+    "The finite-to-unbounded family audit represents the all-input-size uniformity question but does not prove all finite certificate schemas uniformly cover every SAT input size in polynomial time.",
     "The checker-totality seed audit does not yet claim every historical checker has been fuzzed for totality.",
     "The negative checker mutation suite is a seed suite and does not yet claim full generated mutation coverage.",
     "The rule-family coverage ledger is a seed ledger and does not yet claim full historical rule-family coverage.",

@@ -1,0 +1,25 @@
+name: finite-to-unbounded-family-audit
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  finite-to-unbounded-family-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run finite-to-unbounded family audit checker
+        run: node pcc-finite-to-unbounded-family-audit0.mjs --json
+      - name: Run finite-to-unbounded family audit tests
+        run: node --test audits/finite-to-unbounded-family-audit0.test.mjs
+      - name: Upload finite-to-unbounded family audit verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: finite-to-unbounded-family-audit-latest-verdict
+          path: artifacts/finite-to-unbounded-family-audit/latest-verdict.json

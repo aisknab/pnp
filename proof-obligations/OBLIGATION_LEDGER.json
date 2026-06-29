@@ -168,6 +168,16 @@
       "status": "blocked-release-obligation",
       "dependencies": ["OBL-013-ReleaseLadderNonActivation"],
       "hashMode": "checker-computed"
+    },
+    {
+      "id": "OBL-015-FiniteToUnboundedFamilyAudit",
+      "statement": "The finite-to-unbounded uniformity question is represented by a dedicated audit that keeps all-input-size coverage and polynomial uniform generation undisclosed rather than inferred from bounded seed evidence.",
+      "checker": "CheckFiniteToUnboundedFamilyAudit0",
+      "sourceFiles": ["proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json", "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.md", "pcc-finite-to-unbounded-family-audit0.mjs", "proof-obligations/GAP_LEDGER.json"],
+      "testFiles": ["audits/finite-to-unbounded-family-audit0.test.mjs"],
+      "status": "represented-not-activated",
+      "dependencies": ["OBL-010-ComplexityImplicationLedger", "OBL-014-UnrestrictedFinalSoundnessBlocked"],
+      "hashMode": "checker-computed"
     }
   ],
   "audit": {
