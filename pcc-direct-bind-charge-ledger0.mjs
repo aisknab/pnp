@@ -48,102 +48,39 @@ export async function CheckCHGDirectBindingSeed0(options = {}) {
     const statusRead = await readJson0(root, options.statusPath ?? STATUS_PATH, options.statusOverride, 'PNP status');
     if (statusRead.tag === 'reject') return writeAndReturn0(root, outputPath, writeOutput, statusRead);
 
-    for (const check of [
-      validateManifest0(manifestRead.value),
-      validateInventory0(inventoryRead.value),
-      validateMatrix0(matrixRead.value),
-      validateClosure0(closureRead.value),
-      validateObligations0(obligationsRead.value),
-      validateGaps0(gapsRead.value),
-      validateHardeningLedgers0(totalityRead.value, mutationsRead.value, ruleCoverageRead.value),
-      validateStatus0(statusRead.value),
-    ]) {
+    for (const check of [validateManifest0(manifestRead.value), validateInventory0(inventoryRead.value), validateMatrix0(matrixRead.value), validateClosure0(closureRead.value), validateObligations0(obligationsRead.value), validateGaps0(gapsRead.value), validateHardeningLedgers0(totalityRead.value, mutationsRead.value, ruleCoverageRead.value), validateStatus0(statusRead.value)]) {
       if (check.tag === 'reject') return writeAndReturn0(root, outputPath, writeOutput, check);
     }
 
     const evidence = await digestEvidence0(root, manifestRead.value.evidenceSurfaces);
     if (evidence.tag === 'reject') return writeAndReturn0(root, outputPath, writeOutput, evidence);
 
-    const verdict = {
-      tag: 'accept',
-      kind: 'accept',
-      checker: CHECKER,
-      version: VERSION,
-      coordinate: EXPECTED_COORDINATE,
+    return writeAndReturn0(root, outputPath, writeOutput, {
+      tag: 'accept', kind: 'accept', checker: CHECKER, version: VERSION, coordinate: EXPECTED_COORDINATE,
       claimStatus: 'chg-direct-binding-seed-accepted-under-public-review-boundary',
       manifestPath: options.manifestPath ?? MANIFEST_PATH,
-      manifestSha256: sha256Hex0(manifestRead.bytes),
-      inventorySha256: sha256Hex0(inventoryRead.bytes),
-      matrixSha256: sha256Hex0(matrixRead.bytes),
-      closurePlanSha256: sha256Hex0(closureRead.bytes),
-      proofObligationLedgerSha256: sha256Hex0(obligationsRead.bytes),
-      gapLedgerSha256: sha256Hex0(gapsRead.bytes),
-      checkerTotalityAuditSha256: sha256Hex0(totalityRead.bytes),
-      negativeCheckerMutationSha256: sha256Hex0(mutationsRead.bytes),
-      ruleFamilyCoverageSha256: sha256Hex0(ruleCoverageRead.bytes),
-      statusSha256: sha256Hex0(statusRead.bytes),
-      chgDirectBindingSeedReady: true,
-      boundInventoryEntryId: 'TL-002-CHG',
-      boundCoverageEntryId: 'COV-002-CHG',
-      boundClosureEntryId: 'DCC-002-CHG',
-      coveredCHGComponents: [...EXPECTED_COMPONENT_IDS],
-      directCheckerBindingComplete: false,
-      fullHistoricalCHGTheoremDischarged: false,
-      publicTheoremEmissionAllowedByBinding: false,
-      evidenceFileCount: evidence.files.length,
-      evidenceDigestSha256: sha256Text0(stableStringify0(evidence.files)),
-      evidenceFiles: evidence.files,
-      publicTheoremEmissionAllowed: false,
-      finalTheoremReady: false,
-      activeFinalNodeIds: [],
-      remainingBlockers: [...EXPECTED_BLOCKERS],
-      outputPath: writeOutput ? outputPath : null,
-    };
-    return writeAndReturn0(root, outputPath, writeOutput, verdict);
+      manifestSha256: sha256Hex0(manifestRead.bytes), inventorySha256: sha256Hex0(inventoryRead.bytes), matrixSha256: sha256Hex0(matrixRead.bytes), closurePlanSha256: sha256Hex0(closureRead.bytes), proofObligationLedgerSha256: sha256Hex0(obligationsRead.bytes), gapLedgerSha256: sha256Hex0(gapsRead.bytes), checkerTotalityAuditSha256: sha256Hex0(totalityRead.bytes), negativeCheckerMutationSha256: sha256Hex0(mutationsRead.bytes), ruleFamilyCoverageSha256: sha256Hex0(ruleCoverageRead.bytes), statusSha256: sha256Hex0(statusRead.bytes),
+      chgDirectBindingSeedReady: true, boundInventoryEntryId: 'TL-002-CHG', boundCoverageEntryId: 'COV-002-CHG', boundClosureEntryId: 'DCC-002-CHG', coveredCHGComponents: [...EXPECTED_COMPONENT_IDS], directCheckerBindingComplete: false, fullHistoricalCHGTheoremDischarged: false, publicTheoremEmissionAllowedByBinding: false,
+      evidenceFileCount: evidence.files.length, evidenceDigestSha256: sha256Text0(stableStringify0(evidence.files)), evidenceFiles: evidence.files,
+      publicTheoremEmissionAllowed: false, finalTheoremReady: false, activeFinalNodeIds: [], remainingBlockers: [...EXPECTED_BLOCKERS], outputPath: writeOutput ? outputPath : null,
+    });
   } catch (error) {
     return writeAndReturn0(root, outputPath, writeOutput, reject0('CHGDirectBindingSeed.UnhandledException', [], 'CHG direct-binding seed checker threw unexpectedly', normalizeError0(error)));
   }
 }
 
 async function readJson0(root, filePath, override, label) {
-  if (override !== undefined) {
-    const bytes = Buffer.from(`${JSON.stringify(override, null, 2)}\n`, 'utf8');
-    return { tag: 'accept', value: override, bytes };
-  }
-  try {
-    const bytes = await readFile(path.join(root, filePath));
-    return { tag: 'accept', value: JSON.parse(bytes.toString('utf8')), bytes };
-  } catch (error) {
-    return reject0('CHGDirectBindingSeed.ReadOrParseFailed', [filePath], `could not read or parse ${label}`, normalizeError0(error));
-  }
+  if (override !== undefined) return { tag: 'accept', value: override, bytes: Buffer.from(`${JSON.stringify(override, null, 2)}\n`, 'utf8') };
+  try { const bytes = await readFile(path.join(root, filePath)); return { tag: 'accept', value: JSON.parse(bytes.toString('utf8')), bytes }; }
+  catch (error) { return reject0('CHGDirectBindingSeed.ReadOrParseFailed', [filePath], `could not read or parse ${label}`, normalizeError0(error)); }
 }
 
 function validateManifest0(manifest) {
   if (!plain0(manifest)) return reject0('CHGDirectBindingSeed.ManifestShape', [], 'manifest must be an object');
-  const exact = {
-    kind: 'PNPCHGDirectBindingSeed0',
-    version: VERSION,
-    coordinate: EXPECTED_COORDINATE,
-    status: 'chg-direct-binding-seed-ready',
-    chgDirectBindingSeedReady: true,
-    releaseCriticalRow: false,
-    directCheckerBindingComplete: false,
-    fullHistoricalCHGTheoremDischarged: false,
-    publicTheoremEmissionAllowedByBinding: false,
-  };
+  const exact = { kind: 'PNPCHGDirectBindingSeed0', version: VERSION, coordinate: EXPECTED_COORDINATE, status: 'chg-direct-binding-seed-ready', chgDirectBindingSeedReady: true, releaseCriticalRow: false, directCheckerBindingComplete: false, fullHistoricalCHGTheoremDischarged: false, publicTheoremEmissionAllowedByBinding: false };
   for (const [field, expected] of Object.entries(exact)) if (manifest[field] !== expected) return reject0(`CHGDirectBindingSeed.Manifest.${field}`, [field], 'manifest field mismatch', { expected, actual: manifest[field] });
-  const boundary = validateBoundary0(manifest.claimBoundary, ['claimBoundary']);
-  if (boundary.tag === 'reject') return boundary;
-  const expectedLinks = {
-    reportTheoremInventory: 'PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01',
-    reportTheoremCoverageMatrix: 'PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01',
-    reportTheoremCoverageClosurePlan: 'PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01',
-    proofObligationLedger: 'PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01',
-    gapLedger: 'PNP-GAP-LEDGER-2026-06-27-01',
-    checkerTotalityAudit: 'PNP-CHECKER-TOTALITY-AUDIT-2026-06-27-01',
-    negativeCheckerMutationAudit: 'PNP-NEGATIVE-CHECKER-MUTATIONS-2026-06-27-01',
-    ruleFamilyCoverage: 'PNP-RULE-FAMILY-COVERAGE-2026-06-27-01',
-  };
+  const boundary = validateBoundary0(manifest.claimBoundary, ['claimBoundary']); if (boundary.tag === 'reject') return boundary;
+  const expectedLinks = { reportTheoremInventory: 'PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01', reportTheoremCoverageMatrix: 'PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01', reportTheoremCoverageClosurePlan: 'PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01', proofObligationLedger: 'PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01', gapLedger: 'PNP-GAP-LEDGER-2026-06-27-01', checkerTotalityAudit: 'PNP-CHECKER-TOTALITY-AUDIT-2026-06-27-01', negativeCheckerMutationAudit: 'PNP-NEGATIVE-CHECKER-MUTATIONS-2026-06-27-01', ruleFamilyCoverage: 'PNP-RULE-FAMILY-COVERAGE-2026-06-27-01' };
   if (!plain0(manifest.linkedCoordinates)) return reject0('CHGDirectBindingSeed.LinkedShape', ['linkedCoordinates'], 'linkedCoordinates must be an object');
   for (const [field, expected] of Object.entries(expectedLinks)) if (manifest.linkedCoordinates[field] !== expected) return reject0('CHGDirectBindingSeed.LinkedCoordinate', ['linkedCoordinates', field], 'linked coordinate mismatch', { expected, actual: manifest.linkedCoordinates[field] });
   const bound = manifest.boundInventoryEntry;
@@ -151,99 +88,24 @@ function validateManifest0(manifest) {
   const componentIds = Array.isArray(manifest.coveredCHGComponents) ? manifest.coveredCHGComponents.map((entry) => entry?.id) : [];
   if (!sameArray0(componentIds, EXPECTED_COMPONENT_IDS)) return reject0('CHGDirectBindingSeed.ComponentIds', ['coveredCHGComponents'], 'covered component ids must stay exact and ordered', { expected: EXPECTED_COMPONENT_IDS, actual: componentIds });
   for (const entry of manifest.coveredCHGComponents) if (!plain0(entry) || !nonempty0(entry.status) || !nonempty0(entry.evidence)) return reject0('CHGDirectBindingSeed.ComponentShape', ['coveredCHGComponents'], 'component entries must declare status and evidence');
-  for (const [field, nonEmpty] of [['evidenceSurfaces', true], ['nonClaims', true]]) {
-    const check = validateStringArray0(manifest[field], [field], nonEmpty);
-    if (check.tag === 'reject') return check;
-  }
+  for (const [field, nonEmpty] of [['evidenceSurfaces', true], ['nonClaims', true]]) { const check = validateStringArray0(manifest[field], [field], nonEmpty); if (check.tag === 'reject') return check; }
   const expectedAudit = { checker: CHECKER, script: 'pcc-direct-bind-charge-ledger0.mjs', test: 'audits/direct-bind-charge-ledger0.test.mjs', expectedAcceptTag: 'accept' };
   if (!plain0(manifest.audit)) return reject0('CHGDirectBindingSeed.AuditShape', ['audit'], 'audit must be an object');
   for (const [field, expected] of Object.entries(expectedAudit)) if (manifest.audit[field] !== expected) return reject0('CHGDirectBindingSeed.AuditField', ['audit', field], 'audit field mismatch', { expected, actual: manifest.audit[field] });
   return { tag: 'accept' };
 }
 
-function validateInventory0(inventory) {
-  if (!plain0(inventory) || inventory.kind !== 'PNPReportTheoremInventory0') return reject0('CHGDirectBindingSeed.InventoryKind', [INVENTORY_PATH], 'inventory kind mismatch');
-  const entry = Array.isArray(inventory.inventoryEntries) ? inventory.inventoryEntries.find((item) => item.id === 'TL-002-CHG') : null;
-  if (!plain0(entry)) return reject0('CHGDirectBindingSeed.InventoryCHGMissing', [INVENTORY_PATH, 'inventoryEntries'], 'TL-002-CHG entry missing');
-  if (entry.sourceLabel !== 'CHG' || !String(entry.content).includes('Global charge ledger') || !String(entry.content).includes('materializer ownership') || entry.publicEmissionEffect !== 'none' || entry.dischargesPublicTheorem !== false) return reject0('CHGDirectBindingSeed.InventoryCHGMismatch', [INVENTORY_PATH, 'TL-002-CHG'], 'CHG inventory row mismatch');
-  return { tag: 'accept' };
-}
+function validateInventory0(inventory) { const entry = Array.isArray(inventory?.inventoryEntries) ? inventory.inventoryEntries.find((item) => item.id === 'TL-002-CHG') : null; if (!plain0(inventory) || inventory.kind !== 'PNPReportTheoremInventory0') return reject0('CHGDirectBindingSeed.InventoryKind', [INVENTORY_PATH], 'inventory kind mismatch'); if (!plain0(entry)) return reject0('CHGDirectBindingSeed.InventoryCHGMissing', [INVENTORY_PATH, 'inventoryEntries'], 'TL-002-CHG entry missing'); if (entry.sourceLabel !== 'CHG' || !String(entry.content).includes('Global charge ledger') || !String(entry.content).includes('materializer ownership') || entry.publicEmissionEffect !== 'none' || entry.dischargesPublicTheorem !== false) return reject0('CHGDirectBindingSeed.InventoryCHGMismatch', [INVENTORY_PATH, 'TL-002-CHG'], 'CHG inventory row mismatch'); return { tag: 'accept' }; }
+function validateMatrix0(matrix) { const row = Array.isArray(matrix?.coverageEntries) ? matrix.coverageEntries.find((entry) => entry.id === 'COV-002-CHG') : null; if (!plain0(matrix) || matrix.kind !== 'PNPReportTheoremCoverageMatrix0') return reject0('CHGDirectBindingSeed.MatrixKind', [MATRIX_PATH], 'coverage matrix kind mismatch'); if (!plain0(row)) return reject0('CHGDirectBindingSeed.MatrixCHGMissing', [MATRIX_PATH, 'coverageEntries'], 'COV-002-CHG row missing'); if (row.inventoryEntryId !== 'TL-002-CHG' || row.sourceLabel !== 'CHG' || row.coverageClass !== 'obligation-ledger-surface' || row.representedByMachineLedger !== true || row.directCheckerBindingComplete !== false || row.publicEmissionEffect !== 'none' || row.dischargesPublicTheorem !== false) return reject0('CHGDirectBindingSeed.MatrixCHGMismatch', [MATRIX_PATH, 'COV-002-CHG'], 'CHG coverage row mismatch'); if (!Array.isArray(row.relatedObligations) || !row.relatedObligations.includes('OBL-006-CheckerSoundnessSeedAudits')) return reject0('CHGDirectBindingSeed.MatrixObligationMissing', [MATRIX_PATH, 'COV-002-CHG', 'relatedObligations'], 'CHG coverage row must cite checker soundness seed audits'); return { tag: 'accept' }; }
+function validateClosure0(closure) { const row = Array.isArray(closure?.closureEntries) ? closure.closureEntries.find((entry) => entry.id === 'DCC-002-CHG') : null; if (!plain0(closure) || closure.kind !== 'PNPReportTheoremCoverageClosurePlan0') return reject0('CHGDirectBindingSeed.ClosureKind', [CLOSURE_PATH], 'coverage closure plan kind mismatch'); if (!plain0(row)) return reject0('CHGDirectBindingSeed.ClosureCHGMissing', [CLOSURE_PATH, 'closureEntries'], 'DCC-002-CHG row missing'); if (row.coverageEntryId !== 'COV-002-CHG' || row.inventoryEntryId !== 'TL-002-CHG' || row.sourceLabel !== 'CHG' || row.currentCoverageClass !== 'obligation-ledger-surface' || row.closureStatus !== 'direct-binding-needed' || row.nextDirectBindingSurface !== 'pcc-direct-bind-charge-ledger0.mjs' || row.mayFlipDirectCheckerBindingComplete !== false || row.publicEmissionEffect !== 'none' || row.dischargesPublicTheorem !== false) return reject0('CHGDirectBindingSeed.ClosureCHGMismatch', [CLOSURE_PATH, 'DCC-002-CHG'], 'CHG closure row mismatch'); return { tag: 'accept' }; }
+function validateObligations0(ledger) { if (!plain0(ledger) || ledger.kind !== 'PNPProofObligationLedger0' || ledger.publicTheoremEmissionAllowedByLedger !== false || ledger.fullProofObligationDischargeProved !== false) return reject0('CHGDirectBindingSeed.ObligationLedgerMismatch', [OBLIGATIONS_PATH], 'proof obligation ledger mismatch'); const ids = new Set(Array.isArray(ledger.obligations) ? ledger.obligations.map((entry) => entry.id) : []); for (const required of ['OBL-006-CheckerSoundnessSeedAudits', 'OBL-017-CHGDirectBindingSeed']) if (!ids.has(required)) return reject0('CHGDirectBindingSeed.ObligationMissing', [OBLIGATIONS_PATH, 'obligations'], 'required obligation missing', { required }); return { tag: 'accept' }; }
+function validateGaps0(gaps) { if (!plain0(gaps) || gaps.kind !== 'PNPGapLedger0' || gaps.gapLedgerClaimsNoRemainingGaps !== false || gaps.fullGapClosureProved !== false || gaps.publicTheoremEmissionAllowedByLedger !== false) return reject0('CHGDirectBindingSeed.GapLedgerMismatch', [GAPS_PATH], 'gap ledger cannot overclaim closure'); return { tag: 'accept' }; }
+function validateHardeningLedgers0(totality, mutations, ruleCoverage) { if (!plain0(totality) || totality.kind !== 'PNPCheckerTotalityAudit0' || totality.coordinate !== 'PNP-CHECKER-TOTALITY-AUDIT-2026-06-27-01' || totality.checkerTotalitySeedReady !== true || totality.fullCheckerTotalityProved !== false) return reject0('CHGDirectBindingSeed.TotalityLedgerMismatch', [TOTALITY_PATH], 'checker totality ledger mismatch'); if (!plain0(mutations) || mutations.kind !== 'PNPNegativeCheckerMutations0' || mutations.coordinate !== 'PNP-NEGATIVE-CHECKER-MUTATIONS-2026-06-27-01' || mutations.negativeMutationSeedReady !== true || mutations.fullNegativeMutationCoverageProved !== false) return reject0('CHGDirectBindingSeed.MutationLedgerMismatch', [MUTATIONS_PATH], 'negative checker mutation ledger mismatch'); if (!plain0(ruleCoverage) || ruleCoverage.kind !== 'PNPRuleFamilyCoverage0' || ruleCoverage.coordinate !== 'PNP-RULE-FAMILY-COVERAGE-2026-06-27-01' || ruleCoverage.coverageLedgerReady !== true || ruleCoverage.fullRuleFamilyCoverageProved !== false) return reject0('CHGDirectBindingSeed.RuleCoverageMismatch', [RULE_COVERAGE_PATH], 'rule-family coverage ledger mismatch'); return { tag: 'accept' }; }
+function validateStatus0(status) { if (!plain0(status) || status.kind !== 'PNPStatus0') return reject0('CHGDirectBindingSeed.StatusKind', [STATUS_PATH], 'status kind mismatch'); if (status.chgDirectBindingSeedCoordinate !== EXPECTED_COORDINATE) return reject0('CHGDirectBindingSeed.StatusCoordinate', ['chgDirectBindingSeedCoordinate'], 'status must bind CHG direct-binding seed coordinate'); if (status.publicTheoremEmissionAllowed !== false || status.finalTheoremReady !== false || !sameArray0(status.activeFinalNodeIds, []) || !sameArray0(status.remainingBlockers, EXPECTED_BLOCKERS)) return reject0('CHGDirectBindingSeed.StatusBoundary', [STATUS_PATH], 'status boundary mismatch'); return { tag: 'accept' }; }
 
-function validateMatrix0(matrix) {
-  if (!plain0(matrix) || matrix.kind !== 'PNPReportTheoremCoverageMatrix0') return reject0('CHGDirectBindingSeed.MatrixKind', [MATRIX_PATH], 'coverage matrix kind mismatch');
-  const row = Array.isArray(matrix.coverageEntries) ? matrix.coverageEntries.find((entry) => entry.id === 'COV-002-CHG') : null;
-  if (!plain0(row)) return reject0('CHGDirectBindingSeed.MatrixCHGMissing', [MATRIX_PATH, 'coverageEntries'], 'COV-002-CHG row missing');
-  if (row.inventoryEntryId !== 'TL-002-CHG' || row.sourceLabel !== 'CHG' || row.coverageClass !== 'obligation-ledger-surface' || row.representedByMachineLedger !== true || row.directCheckerBindingComplete !== false || row.publicEmissionEffect !== 'none' || row.dischargesPublicTheorem !== false) return reject0('CHGDirectBindingSeed.MatrixCHGMismatch', [MATRIX_PATH, 'COV-002-CHG'], 'CHG coverage row mismatch');
-  if (!Array.isArray(row.relatedObligations) || !row.relatedObligations.includes('OBL-006-CheckerSoundnessSeedAudits')) return reject0('CHGDirectBindingSeed.MatrixObligationMissing', [MATRIX_PATH, 'COV-002-CHG', 'relatedObligations'], 'CHG coverage row must cite checker soundness seed audits');
-  return { tag: 'accept' };
-}
-
-function validateClosure0(closure) {
-  if (!plain0(closure) || closure.kind !== 'PNPReportTheoremCoverageClosurePlan0') return reject0('CHGDirectBindingSeed.ClosureKind', [CLOSURE_PATH], 'coverage closure plan kind mismatch');
-  const row = Array.isArray(closure.closureEntries) ? closure.closureEntries.find((entry) => entry.id === 'DCC-002-CHG') : null;
-  if (!plain0(row)) return reject0('CHGDirectBindingSeed.ClosureCHGMissing', [CLOSURE_PATH, 'closureEntries'], 'DCC-002-CHG row missing');
-  if (row.coverageEntryId !== 'COV-002-CHG' || row.inventoryEntryId !== 'TL-002-CHG' || row.sourceLabel !== 'CHG' || row.currentCoverageClass !== 'obligation-ledger-surface' || row.closureStatus !== 'direct-binding-needed' || row.nextDirectBindingSurface !== 'pcc-direct-bind-charge-ledger0.mjs' || row.mayFlipDirectCheckerBindingComplete !== false || row.publicEmissionEffect !== 'none' || row.dischargesPublicTheorem !== false) return reject0('CHGDirectBindingSeed.ClosureCHGMismatch', [CLOSURE_PATH, 'DCC-002-CHG'], 'CHG closure row mismatch');
-  return { tag: 'accept' };
-}
-
-function validateObligations0(ledger) {
-  if (!plain0(ledger) || ledger.kind !== 'PNPProofObligationLedger0' || ledger.publicTheoremEmissionAllowedByLedger !== false || ledger.fullProofObligationDischargeProved !== false) return reject0('CHGDirectBindingSeed.ObligationLedgerMismatch', [OBLIGATIONS_PATH], 'proof obligation ledger mismatch');
-  const ids = new Set(Array.isArray(ledger.obligations) ? ledger.obligations.map((entry) => entry.id) : []);
-  for (const required of ['OBL-006-CheckerSoundnessSeedAudits', 'OBL-017-CHGDirectBindingSeed']) if (!ids.has(required)) return reject0('CHGDirectBindingSeed.ObligationMissing', [OBLIGATIONS_PATH, 'obligations'], 'required obligation missing', { required });
-  return { tag: 'accept' };
-}
-
-function validateGaps0(gaps) {
-  if (!plain0(gaps) || gaps.kind !== 'PNPGapLedger0' || gaps.gapLedgerClaimsNoRemainingGaps !== false || gaps.fullGapClosureProved !== false || gaps.publicTheoremEmissionAllowedByLedger !== false) return reject0('CHGDirectBindingSeed.GapLedgerMismatch', [GAPS_PATH], 'gap ledger cannot overclaim closure');
-  return { tag: 'accept' };
-}
-
-function validateHardeningLedgers0(totality, mutations, ruleCoverage) {
-  if (!plain0(totality) || totality.kind !== 'PNPCheckerTotalityAudit0' || totality.coordinate !== 'PNP-CHECKER-TOTALITY-AUDIT-2026-06-27-01' || totality.checkerTotalitySeedReady !== true || totality.fullCheckerTotalityProved !== false) return reject0('CHGDirectBindingSeed.TotalityLedgerMismatch', [TOTALITY_PATH], 'checker totality ledger mismatch');
-  if (!plain0(mutations) || mutations.kind !== 'PNPNegativeCheckerMutations0' || mutations.coordinate !== 'PNP-NEGATIVE-CHECKER-MUTATIONS-2026-06-27-01' || mutations.negativeMutationSeedReady !== true || mutations.fullMutationCoverageProved !== false) return reject0('CHGDirectBindingSeed.MutationLedgerMismatch', [MUTATIONS_PATH], 'negative checker mutation ledger mismatch');
-  if (!plain0(ruleCoverage) || ruleCoverage.kind !== 'PNPRuleFamilyCoverage0' || ruleCoverage.coordinate !== 'PNP-RULE-FAMILY-COVERAGE-2026-06-27-01' || ruleCoverage.ruleFamilyCoverageReady !== true || ruleCoverage.fullHistoricalCoverageClaimed !== false) return reject0('CHGDirectBindingSeed.RuleCoverageMismatch', [RULE_COVERAGE_PATH], 'rule-family coverage ledger mismatch');
-  return { tag: 'accept' };
-}
-
-function validateStatus0(status) {
-  if (!plain0(status) || status.kind !== 'PNPStatus0') return reject0('CHGDirectBindingSeed.StatusKind', [STATUS_PATH], 'status kind mismatch');
-  if (status.chgDirectBindingSeedCoordinate !== EXPECTED_COORDINATE) return reject0('CHGDirectBindingSeed.StatusCoordinate', ['chgDirectBindingSeedCoordinate'], 'status must bind CHG direct-binding seed coordinate');
-  if (status.publicTheoremEmissionAllowed !== false || status.finalTheoremReady !== false || !sameArray0(status.activeFinalNodeIds, []) || !sameArray0(status.remainingBlockers, EXPECTED_BLOCKERS)) return reject0('CHGDirectBindingSeed.StatusBoundary', [STATUS_PATH], 'status boundary mismatch');
-  return { tag: 'accept' };
-}
-
-async function digestEvidence0(root, paths) {
-  const files = [];
-  for (const relativePath of paths) {
-    const file = await digestFile0(root, relativePath, ['evidenceSurfaces']);
-    if (file.tag === 'reject') return file;
-    files.push(file);
-  }
-  return { tag: 'accept', files };
-}
-
-async function digestFile0(root, relativePath, pathArray) {
-  const safePath = safeJoin0(root, relativePath);
-  if (safePath === null) return reject0('CHGDirectBindingSeed.UnsafePath', [...pathArray, relativePath], 'file path must stay inside repository root');
-  try {
-    const info = await stat(safePath);
-    if (!info.isFile()) return reject0('CHGDirectBindingSeed.PathNotFile', [...pathArray, relativePath], 'path must be a file');
-    const bytes = await readFile(safePath);
-    return { path: relativePath, sha256: sha256Hex0(bytes), size: bytes.length };
-  } catch (error) {
-    return reject0('CHGDirectBindingSeed.PathMissing', [...pathArray, relativePath], 'file path is missing', normalizeError0(error));
-  }
-}
-
-function validateBoundary0(boundary, pathArray) {
-  if (!plain0(boundary)) return reject0('CHGDirectBindingSeed.BoundaryShape', pathArray, 'boundary must be an object');
-  if (boundary.publicTheoremEmissionAllowed !== false) return reject0('CHGDirectBindingSeed.PublicEmission', [...pathArray, 'publicTheoremEmissionAllowed'], 'public theorem emission must remain disabled');
-  if (boundary.finalTheoremReady !== false) return reject0('CHGDirectBindingSeed.FinalReady', [...pathArray, 'finalTheoremReady'], 'final theorem readiness must remain disabled');
-  if (!sameArray0(boundary.activeFinalNodeIds, [])) return reject0('CHGDirectBindingSeed.ActiveFinalNodes', [...pathArray, 'activeFinalNodeIds'], 'active final nodes must remain empty');
-  if (!sameArray0(boundary.remainingBlockers, EXPECTED_BLOCKERS)) return reject0('CHGDirectBindingSeed.RemainingBlockers', [...pathArray, 'remainingBlockers'], 'remaining blockers must remain exact');
-  return { tag: 'accept' };
-}
-
+async function digestEvidence0(root, paths) { const files = []; for (const relativePath of paths) { const file = await digestFile0(root, relativePath, ['evidenceSurfaces']); if (file.tag === 'reject') return file; files.push(file); } return { tag: 'accept', files }; }
+async function digestFile0(root, relativePath, pathArray) { const safePath = safeJoin0(root, relativePath); if (safePath === null) return reject0('CHGDirectBindingSeed.UnsafePath', [...pathArray, relativePath], 'file path must stay inside repository root'); try { const info = await stat(safePath); if (!info.isFile()) return reject0('CHGDirectBindingSeed.PathNotFile', [...pathArray, relativePath], 'path must be a file'); const bytes = await readFile(safePath); return { path: relativePath, sha256: sha256Hex0(bytes), size: bytes.length }; } catch (error) { return reject0('CHGDirectBindingSeed.PathMissing', [...pathArray, relativePath], 'file path is missing', normalizeError0(error)); } }
+function validateBoundary0(boundary, pathArray) { if (!plain0(boundary)) return reject0('CHGDirectBindingSeed.BoundaryShape', pathArray, 'boundary must be an object'); if (boundary.publicTheoremEmissionAllowed !== false) return reject0('CHGDirectBindingSeed.PublicEmission', [...pathArray, 'publicTheoremEmissionAllowed'], 'public theorem emission must remain disabled'); if (boundary.finalTheoremReady !== false) return reject0('CHGDirectBindingSeed.FinalReady', [...pathArray, 'finalTheoremReady'], 'final theorem readiness must remain disabled'); if (!sameArray0(boundary.activeFinalNodeIds, [])) return reject0('CHGDirectBindingSeed.ActiveFinalNodes', [...pathArray, 'activeFinalNodeIds'], 'active final nodes must remain empty'); if (!sameArray0(boundary.remainingBlockers, EXPECTED_BLOCKERS)) return reject0('CHGDirectBindingSeed.RemainingBlockers', [...pathArray, 'remainingBlockers'], 'remaining blockers must remain exact'); return { tag: 'accept' }; }
 function validateStringArray0(value, pathArray, nonEmpty) { if (!Array.isArray(value)) return reject0('CHGDirectBindingSeed.StringArrayShape', pathArray, 'field must be an array of strings'); if (nonEmpty && value.length === 0) return reject0('CHGDirectBindingSeed.StringArrayEmpty', pathArray, 'field must not be empty'); for (let index = 0; index < value.length; index += 1) if (!nonempty0(value[index])) return reject0('CHGDirectBindingSeed.StringArrayEntry', [...pathArray, index], 'array entry must be a non-empty string'); return { tag: 'accept' }; }
 function safeJoin0(root, relativePath) { if (!nonempty0(relativePath) || path.isAbsolute(relativePath)) return null; const resolvedRoot = path.resolve(root); const resolved = path.resolve(resolvedRoot, relativePath); const relative = path.relative(resolvedRoot, resolved); if (relative.startsWith('..') || path.isAbsolute(relative)) return null; return resolved; }
 function reject0(coord, pathArray, reason, witness = {}) { return { tag: 'reject', kind: 'reject', checker: CHECKER, version: VERSION, coord, path: pathArray, witness: { reason, ...witness }, publicTheoremEmissionAllowed: false, finalTheoremReady: false, activeFinalNodeIds: [], remainingBlockers: [...EXPECTED_BLOCKERS] }; }
