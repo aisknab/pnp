@@ -16,6 +16,7 @@ const EXPECTED_RECORD_IDS = [
   'trust-base',
   'theorem-bindings',
   'report-theorem-inventory',
+  'report-theorem-coverage-matrix',
   'no-prose-only-theorem-policy',
   'proof-obligation-ledger',
   'gap-ledger',
@@ -43,13 +44,10 @@ export async function AuditRegenerationLedger0(options = {}) {
   try {
     const read = await readLedger0({ root, ledgerPath, override: options.ledgerOverride });
     if (read.tag === 'reject') return writeAndReturn0(root, outputPath, writeOutput, read);
-
     const validation = validateLedger0(read.ledger);
     if (validation.tag === 'reject') return writeAndReturn0(root, outputPath, writeOutput, validation);
-
     const sourceDigest = await digestRecords0(root, read.ledger.records);
     if (sourceDigest.tag === 'reject') return writeAndReturn0(root, outputPath, writeOutput, sourceDigest);
-
     const outputDigest = await digestOutputPolicy0(root, read.ledger.records);
     if (outputDigest.tag === 'reject') return writeAndReturn0(root, outputPath, writeOutput, outputDigest);
 
@@ -113,7 +111,6 @@ function validateLedger0(ledger) {
 
   const boundary = validateBoundary0(ledger.claimBoundary);
   if (boundary.tag === 'reject') return boundary;
-
   if (!plain0(ledger.runtimeOutputPolicy)) return reject0('RegenerationLedger.RuntimePolicyShape', ['runtimeOutputPolicy'], 'runtimeOutputPolicy must be an object');
   if (ledger.runtimeOutputPolicy.generatedVerdictsCommitted !== false) return reject0('RegenerationLedger.GeneratedVerdictsCommitted', ['runtimeOutputPolicy', 'generatedVerdictsCommitted'], 'generated verdicts must not be committed by default');
   if (!nonempty0(ledger.runtimeOutputPolicy.generatedVerdictsLocation) || !nonempty0(ledger.runtimeOutputPolicy.rationale)) return reject0('RegenerationLedger.RuntimePolicyFields', ['runtimeOutputPolicy'], 'runtime output policy fields must be non-empty strings');
@@ -121,7 +118,6 @@ function validateLedger0(ledger) {
   if (!Array.isArray(ledger.records)) return reject0('RegenerationLedger.RecordsShape', ['records'], 'records must be an array');
   const actualIds = ledger.records.map((record) => record?.id);
   if (!sameArray0(actualIds, EXPECTED_RECORD_IDS)) return reject0('RegenerationLedger.RecordIds', ['records'], 'regeneration record ids must stay exact and ordered', { expected: EXPECTED_RECORD_IDS, actual: actualIds });
-
   const ids = new Set();
   for (let index = 0; index < ledger.records.length; index += 1) {
     const record = ledger.records[index];
