@@ -1,0 +1,297 @@
+{
+  "kind": "PNPReportTheoremInventory0",
+  "version": 0,
+  "coordinate": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
+  "title": "Historical report theorem-ledger inventory",
+  "purpose": "Inventory the theorem-ledger rows from the historical canonical report and bind that inventory to the current non-activating theorem-binding, proof-obligation, gap, and no-prose-only policy surfaces.",
+  "status": "report-theorem-inventory-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "inventoryReady": true,
+  "historicalReportCoordinate": "historical-final-pnp-proof-report-hardened-7072f8d",
+  "sourceReportSection": "22 Theorem ledger",
+  "sourceReportPageIndexApprox": 49,
+  "inventoryScope": {
+    "mode": "historical-section-22-theorem-ledger-rows",
+    "expectedEntryCount": 27,
+    "releaseCriticalSpineCoveredByBindings": true,
+    "allNumberedReportTheoremsInventoried": false,
+    "fullHistoricalReportTheoremInventoryExhaustive": false,
+    "allInventoryEntriesBoundToCheckers": false,
+    "futureExpansionRequired": true
+  },
+  "linkedCoordinates": {
+    "theoremBindingLedger": "REPORT-THEOREM-BINDINGS-2026-06-27-01",
+    "noProseOnlyTheoremPolicy": "PNP-NO-PROSE-ONLY-THEOREM-POLICY-2026-06-27-01",
+    "proofObligationLedger": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
+    "gapLedger": "PNP-GAP-LEDGER-2026-06-27-01",
+    "releaseLadder": "PNP-RELEASE-LADDER-2026-06-27-01"
+  },
+  "publicTheoremEmissionAllowedByInventory": false,
+  "proseOnlyTheoremActivationAllowedByInventory": false,
+  "inventoryEntries": [
+    {
+      "id": "TL-001-Base",
+      "sourceLabel": "Base",
+      "sourceSection": "22",
+      "content": "Direct-wire NAND semantics, compatible support replacement, slack law.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-002-CHG",
+      "sourceLabel": "CHG",
+      "sourceSection": "22",
+      "content": "Global charge ledger, materializer ownership, exact size equations.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-003-Mode",
+      "sourceLabel": "Mode",
+      "sourceSection": "22",
+      "content": "Full-to-quotient projection, mode firewall, transfer identity.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-004-E",
+      "sourceLabel": "E",
+      "sourceSection": "22",
+      "content": "VerifyDW soundness, obligation flattening, no hidden minimization.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-005-N",
+      "sourceLabel": "N",
+      "sourceSection": "22",
+      "content": "Traceable normalization and witness transport.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-006-FT",
+      "sourceLabel": "FT",
+      "sourceSection": "22",
+      "content": "Finite-table coverage with explicit normalization transport.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-007-X",
+      "sourceLabel": "X",
+      "sourceSection": "22",
+      "content": "CritC, Q, E, L and X1, X2, X3, X4 routing with candidate towers.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-008-BC",
+      "sourceLabel": "BC",
+      "sourceSection": "22",
+      "content": "Branch-cycle finite transition category, cycle audits, branch audits.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-009-UN",
+      "sourceLabel": "UN",
+      "sourceSection": "22",
+      "content": "Unary decoder, full-lift criterion, blocked intervals, clean spines.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-010-HN",
+      "sourceLabel": "HN",
+      "sourceSection": "22",
+      "content": "Hereditary shape recognition, BWL, LN confluence, ParseOrExit, leaf-tightness.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-011-HResolve",
+      "sourceLabel": "HResolve",
+      "sourceSection": "22",
+      "content": "Global hereditary resolver with exact minimum, gain, or strong sidecar.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-012-BUD",
+      "sourceLabel": "BUD",
+      "sourceSection": "22",
+      "content": "Budget resolver with envelope DP, routing, and strong NoBudget sidecar.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-013-NOR-FF",
+      "sourceLabel": "NOR/FF",
+      "sourceSection": "22",
+      "content": "Strong neutral overlay, FF-LOSS, frontier-faithful comparison.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-014-RW",
+      "sourceLabel": "RW",
+      "sourceSection": "22",
+      "content": "MuBridge, SpanPolicy, SaturatePositive, RankWF, BCELReady.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-015-BN2",
+      "sourceLabel": "BN2",
+      "sourceSection": "22",
+      "content": "Side-tight coherent optima on saturated support squares.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-016-BN3",
+      "sourceLabel": "BN3",
+      "sourceSection": "22",
+      "content": "Stable request systems and simultaneous finite envelopes.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-017-BN4",
+      "sourceLabel": "BN4",
+      "sourceSection": "22",
+      "content": "Activation-exact cancellation by active minimal-consumer antichains.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-018-BN5",
+      "sourceLabel": "BN5",
+      "sourceSection": "22",
+      "content": "Full-shadow localization and cut-silence of active negative full residuals.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-019-PkgC",
+      "sourceLabel": "PkgC",
+      "sourceSection": "22",
+      "content": "Request traces, full-restoration universes, nonsingleton separating-consumer routing.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-020-BN6",
+      "sourceLabel": "BN6",
+      "sourceSection": "22",
+      "content": "Nonnegative hypergraph cellization and packet collapse.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-021-Packet",
+      "sourceLabel": "Packet",
+      "sourceSection": "22",
+      "content": "Pair, balanced-triple, and full-span packet extraction into faithful seeds.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-022-R",
+      "sourceLabel": "R",
+      "sourceSection": "22",
+      "content": "Selector realizers, typed bottom, strict charge surplus, gain-only public interface.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-023-HB",
+      "sourceLabel": "HB",
+      "sourceSection": "22",
+      "content": "Simultaneous HN-BUD rank-parametric negative closure and selector-silence induction.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-024-O",
+      "sourceLabel": "O",
+      "sourceSection": "22",
+      "content": "Rank-parametric oracle, ZeroSlack, residual-band minimization.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-025-G",
+      "sourceLabel": "G",
+      "sourceSection": "22",
+      "content": "Locked NAND SAT embedding, macro truth tables, threshold, residual slack at most four.",
+      "coverageStatus": "inventoried-not-exhaustively-bound",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-026-Final",
+      "sourceLabel": "Final",
+      "sourceSection": "22",
+      "content": "Framework match, SAT decision, accepted package implies P = NP.",
+      "coverageStatus": "release-critical-boundary-represented",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "TL-027-PACK",
+      "sourceLabel": "PACK",
+      "sourceSection": "22",
+      "content": "Interface dictionary, normal forms, row keys, reflection, bounds, and CheckPCCPack.",
+      "coverageStatus": "release-critical-boundary-represented",
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    }
+  ],
+  "nonClaims": [
+    "This inventory does not activate public theorem emission.",
+    "This inventory does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This inventory represents the historical report Section 22 theorem-ledger rows, not every numbered theorem environment in the historical report.",
+    "This inventory does not by itself bind every inventory row to a checker or proof object.",
+    "This inventory exists to make future exhaustive theorem binding mechanical rather than prose-only."
+  ],
+  "audit": {
+    "checker": "CheckReportTheoremInventory0",
+    "script": "pcc-report-theorem-inventory0.mjs",
+    "test": "audits/report-theorem-inventory0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}

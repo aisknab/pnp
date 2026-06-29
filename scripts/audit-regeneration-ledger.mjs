@@ -15,6 +15,7 @@ const EXPECTED_RECORD_IDS = [
   'status-dashboard',
   'trust-base',
   'theorem-bindings',
+  'report-theorem-inventory',
   'no-prose-only-theorem-policy',
   'proof-obligation-ledger',
   'gap-ledger',
@@ -213,25 +214,9 @@ function safeJoin0(root, relativePath) {
   return resolved;
 }
 
-function reject0(coord, pathArray, reason, witness = {}) {
-  return { tag: 'reject', kind: 'reject', checker: CHECKER, version: VERSION, coord, path: pathArray, witness: { reason, ...witness }, publicTheoremEmissionAllowed: false, finalTheoremReady: false, activeFinalNodeIds: [], remainingBlockers: [...EXPECTED_BLOCKERS] };
-}
-
-async function writeAndReturn0(root, outputPath, writeOutput, verdict) {
-  if (writeOutput) {
-    const absoluteOutputPath = path.join(root, outputPath);
-    await mkdir(path.dirname(absoluteOutputPath), { recursive: true });
-    await writeFile(absoluteOutputPath, `${JSON.stringify(verdict, null, 2)}\n`, 'utf8');
-  }
-  return { ...verdict, outputPath: writeOutput ? outputPath : null };
-}
-
-function stableStringify0(value) {
-  if (value === null || typeof value !== 'object') return JSON.stringify(value);
-  if (Array.isArray(value)) return `[${value.map((entry) => stableStringify0(entry)).join(',')}]`;
-  return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${stableStringify0(value[key])}`).join(',')}}`;
-}
-
+function reject0(coord, pathArray, reason, witness = {}) { return { tag: 'reject', kind: 'reject', checker: CHECKER, version: VERSION, coord, path: pathArray, witness: { reason, ...witness }, publicTheoremEmissionAllowed: false, finalTheoremReady: false, activeFinalNodeIds: [], remainingBlockers: [...EXPECTED_BLOCKERS] }; }
+async function writeAndReturn0(root, outputPath, writeOutput, verdict) { if (writeOutput) { const absoluteOutputPath = path.join(root, outputPath); await mkdir(path.dirname(absoluteOutputPath), { recursive: true }); await writeFile(absoluteOutputPath, `${JSON.stringify(verdict, null, 2)}\n`, 'utf8'); } return { ...verdict, outputPath: writeOutput ? outputPath : null }; }
+function stableStringify0(value) { if (value === null || typeof value !== 'object') return JSON.stringify(value); if (Array.isArray(value)) return `[${value.map((entry) => stableStringify0(entry)).join(',')}]`; return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${stableStringify0(value[key])}`).join(',')}}`; }
 function sameArray0(left, right) { return Array.isArray(left) && Array.isArray(right) && left.length === right.length && left.every((value, index) => value === right[index]); }
 function plain0(value) { return value !== null && typeof value === 'object' && !Array.isArray(value); }
 function nonempty0(value) { return typeof value === 'string' && value.length > 0; }
@@ -253,23 +238,8 @@ function parseArgs0(argv) {
   }
   return options;
 }
-
 function requireValue0(argv, index, flag) { if (index >= argv.length) throw new Error(`${flag} requires a value`); return argv[index]; }
 function printHelp0() { console.log(`Usage: node scripts/audit-regeneration-ledger.mjs [options]\n\nOptions:\n  --json             Emit verdict JSON.\n  --no-write         Do not write artifacts/regeneration/latest-verdict.json.\n  --root <path>      Repository root. Defaults to cwd.\n  --ledger <path>    Regeneration ledger path relative to root.\n  --output <path>    Verdict output path relative to root.\n`); }
-
-async function main0() {
-  let options;
-  try { options = parseArgs0(process.argv.slice(2)); }
-  catch (error) {
-    const verdict = reject0('Cli.BadArgument', [], 'bad regeneration ledger CLI argument', normalizeError0(error));
-    console.error(JSON.stringify(verdict, null, 2));
-    process.exit(2);
-  }
-  const verdict = await AuditRegenerationLedger0(options);
-  const rendered = JSON.stringify(verdict, null, 2);
-  if (options.json || verdict.tag === 'accept') console.log(rendered);
-  else console.error(rendered);
-  process.exit(verdict.tag === 'accept' ? 0 : 1);
-}
+async function main0() { let options; try { options = parseArgs0(process.argv.slice(2)); } catch (error) { const verdict = reject0('Cli.BadArgument', [], 'bad regeneration ledger CLI argument', normalizeError0(error)); console.error(JSON.stringify(verdict, null, 2)); process.exit(2); } const verdict = await AuditRegenerationLedger0(options); const rendered = JSON.stringify(verdict, null, 2); if (options.json || verdict.tag === 'accept') console.log(rendered); else console.error(rendered); process.exit(verdict.tag === 'accept' ? 0 : 1); }
 
 if (import.meta.url === `file://${process.argv[1]}`) main0();

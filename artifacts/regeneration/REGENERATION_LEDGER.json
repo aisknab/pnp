@@ -54,6 +54,16 @@
       "generatedAtRuntime": true
     },
     {
+      "id": "report-theorem-inventory",
+      "kind": "report-theorem-inventory",
+      "sourceFiles": ["report-bindings/REPORT_THEOREM_INVENTORY.json", "report-bindings/REPORT_THEOREM_INVENTORY.md", "pcc-report-theorem-inventory0.mjs", "audits/report-theorem-inventory0.test.mjs"],
+      "command": "node pcc-report-theorem-inventory0.mjs --json",
+      "outputPath": "artifacts/report-theorem-inventory/latest-verdict.json",
+      "deterministic": true,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    },
+    {
       "id": "no-prose-only-theorem-policy",
       "kind": "report-claim-boundary-policy",
       "sourceFiles": ["report-bindings/NO_PROSE_ONLY_THEOREM_POLICY.json", "report-bindings/NO_PROSE_ONLY_THEOREM_POLICY.md", "pcc-no-prose-only-theorem-policy0.mjs", "audits/no-prose-only-theorem-policy0.test.mjs"],

@@ -1,0 +1,25 @@
+name: report-theorem-inventory
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  report-theorem-inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run report theorem inventory checker
+        run: node pcc-report-theorem-inventory0.mjs --json
+      - name: Run report theorem inventory tests
+        run: node --test audits/report-theorem-inventory0.test.mjs
+      - name: Upload report theorem inventory verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-theorem-inventory-latest-verdict
+          path: artifacts/report-theorem-inventory/latest-verdict.json
