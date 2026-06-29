@@ -1,0 +1,25 @@
+name: no-prose-only-theorem-policy
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  no-prose-only-theorem-policy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run no-prose-only theorem policy checker
+        run: node pcc-no-prose-only-theorem-policy0.mjs --json
+      - name: Run no-prose-only theorem policy tests
+        run: node --test audits/no-prose-only-theorem-policy0.test.mjs
+      - name: Upload no-prose-only theorem policy verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: no-prose-only-theorem-policy-latest-verdict
+          path: artifacts/no-prose-only-theorem-policy/latest-verdict.json
