@@ -81,7 +81,7 @@ test('report theorem coverage closure plan rejects full historical coverage over
   });
 
   assert.equal(out.tag, 'reject');
-  assert.equal(out.coord, 'ReportTheoremCoverageClosurePlan.Flag');
+  assert.equal(out.coord, 'ReportTheoremCoverageClosurePlan.fullHistoricalReportTheoremCoverageProved');
 });
 
 test('report theorem coverage closure plan rejects changed closure row ordering', async () => {
