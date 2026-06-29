@@ -1,0 +1,25 @@
+name: direct-bind-base-semantics
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  direct-bind-base-semantics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run Base direct-binding seed checker
+        run: node pcc-direct-bind-base-semantics0.mjs --json
+      - name: Run Base direct-binding seed tests
+        run: node --test audits/direct-bind-base-semantics0.test.mjs
+      - name: Upload Base direct-binding seed verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: direct-bind-base-semantics-latest-verdict
+          path: artifacts/direct-bind-base-semantics/latest-verdict.json
