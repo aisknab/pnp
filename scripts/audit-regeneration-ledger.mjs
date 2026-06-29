@@ -15,6 +15,7 @@ const EXPECTED_RECORD_IDS = [
   'status-dashboard',
   'trust-base',
   'theorem-bindings',
+  'proof-obligation-ledger',
   'minimal-kernel-cross-verify',
   'nand-semantics',
   'nand-small-models',

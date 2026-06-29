@@ -54,6 +54,16 @@
       "generatedAtRuntime": true
     },
     {
+      "id": "proof-obligation-ledger",
+      "kind": "proof-obligation-ledger",
+      "sourceFiles": ["proof-obligations/OBLIGATION_LEDGER.json", "proof-obligations/README.md", "pcc-proof-obligation-ledger0.mjs", "audits/proof-obligation-ledger0.test.mjs"],
+      "command": "node pcc-proof-obligation-ledger0.mjs --json",
+      "outputPath": "artifacts/proof-obligations/latest-verdict.json",
+      "deterministic": true,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    },
+    {
       "id": "minimal-kernel-cross-verify",
       "kind": "stable-source-json",
       "sourceFiles": ["kernel/PNP_MINIMAL_KERNEL.json", "scripts/cross-verify.mjs", "independent-verifiers/python/verify_minimal_kernel.py"],

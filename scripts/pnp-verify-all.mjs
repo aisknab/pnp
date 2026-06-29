@@ -34,6 +34,7 @@ export async function RunPNPVerifyAll0(options = {}) {
     'pcc-locked-nand-sat-small-models0.mjs',
     'pcc-complexity-ledger0.mjs',
     'pcc-release-ladder0.mjs',
+    'pcc-proof-obligation-ledger0.mjs',
     'semantics/nand-direct-wire-reference.mjs',
     'semantics/nand-small-models.mjs',
     'semantics/locked-nand-sat-small-models.mjs',
@@ -67,6 +68,8 @@ export async function RunPNPVerifyAll0(options = {}) {
 
   const requiredSteps = [
     { id: 'theorem-binding-ledger-audit', command: process.execPath, args: ['scripts/audit-report-theorem-bindings.mjs', '--json'], kind: 'json', expectTag: 'accept' },
+    { id: 'proof-obligation-ledger-audit', command: process.execPath, args: ['pcc-proof-obligation-ledger0.mjs', '--json'], kind: 'json', expectTag: 'accept' },
+    { id: 'proof-obligation-ledger-tests', command: process.execPath, args: ['--test', 'audits/proof-obligation-ledger0.test.mjs'], kind: 'process' },
     { id: 'trust-base-audit', command: process.execPath, args: ['pcc-trust-base0.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'trust-base-tests', command: process.execPath, args: ['--test', 'audits/trust-base0.test.mjs'], kind: 'process' },
     { id: 'trust-base-shrink-plan-audit', command: process.execPath, args: ['pcc-trust-base-shrink-plan0.mjs', '--json'], kind: 'json', expectTag: 'accept' },
@@ -126,6 +129,7 @@ export async function RunPNPVerifyAll0(options = {}) {
     claimStatus: 'internal-proof-certificate-stack-accepted-under-public-review-boundary',
     statusPath: PNP_STATUS_PATH,
     statusSha256: statusStep.statusSha256,
+    proofObligationLedgerCoordinate: 'PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01',
     trustBaseCoordinate: 'PNP-TRUST-BASE-2026-06-27-01',
     trustBaseShrinkPlanCoordinate: 'PNP-TRUST-BASE-SHRINK-PLAN-2026-06-27-01',
     checkerTotalityAuditCoordinate: 'PNP-CHECKER-TOTALITY-AUDIT-2026-06-27-01',
@@ -179,6 +183,7 @@ async function verifyStatusFile0(root) {
   requireEqual0(status.pnpVerifyCommand, 'npm run pnp:verify', failures, ['pnpVerifyCommand']);
   requireEqual0(status.minimalKernelCoordinate, 'PNP-MINIMAL-KERNEL-2026-06-27-01', failures, ['minimalKernelCoordinate']);
   requireEqual0(status.theoremBindingLedgerCoordinate, 'REPORT-THEOREM-BINDINGS-2026-06-27-01', failures, ['theoremBindingLedgerCoordinate']);
+  requireEqual0(status.proofObligationLedgerCoordinate, 'PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01', failures, ['proofObligationLedgerCoordinate']);
   requireEqual0(status.trustBaseCoordinate, 'PNP-TRUST-BASE-2026-06-27-01', failures, ['trustBaseCoordinate']);
   requireEqual0(status.trustBaseShrinkPlanCoordinate, 'PNP-TRUST-BASE-SHRINK-PLAN-2026-06-27-01', failures, ['trustBaseShrinkPlanCoordinate']);
   requireEqual0(status.checkerTotalityAuditCoordinate, 'PNP-CHECKER-TOTALITY-AUDIT-2026-06-27-01', failures, ['checkerTotalityAuditCoordinate']);
