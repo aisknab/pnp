@@ -1,0 +1,87 @@
+{
+  "kind": "PNPNoProseOnlyTheoremPolicy0",
+  "version": 0,
+  "coordinate": "PNP-NO-PROSE-ONLY-THEOREM-POLICY-2026-06-27-01",
+  "title": "No prose-only theorem policy",
+  "purpose": "Prevent release-critical theorem claims from existing only as report prose by requiring machine-readable bindings to checker surfaces, proof obligations, gap records, and the active release boundary.",
+  "status": "no-prose-only-theorem-policy-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "policyReady": true,
+  "releaseCriticalTheoremSpineCovered": true,
+  "allNumberedReportTheoremsCovered": false,
+  "fullReportTheoremInventoryExhaustive": false,
+  "proseOnlyTheoremActivationAllowed": false,
+  "publicTheoremEmissionAllowedByPolicy": false,
+  "coverageScope": {
+    "mode": "release-critical-spine",
+    "theoremBindingLedgerCoordinate": "REPORT-THEOREM-BINDINGS-2026-06-27-01",
+    "expectedTheoremBindingCount": 20,
+    "proofObligationLedgerCoordinate": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
+    "minimumProofObligationCount": 15,
+    "gapLedgerCoordinate": "PNP-GAP-LEDGER-2026-06-27-01",
+    "minimumGapCount": 12,
+    "finiteToUnboundedFamilyAuditCoordinate": "PNP-FINITE-TO-UNBOUNDED-FAMILY-AUDIT-2026-06-27-01"
+  },
+  "requiredEvidenceFiles": [
+    "report-bindings/REPORT_THEOREM_BINDINGS.json",
+    "proof-obligations/OBLIGATION_LEDGER.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json",
+    "release/RELEASE_LADDER.json",
+    "PNP_STATUS.json"
+  ],
+  "policyRules": [
+    {
+      "id": "NPT-001-BoundTheoremEntries",
+      "description": "Every release-critical theorem binding entry must cite at least one binding group with checker files, proof artifacts, and tests.",
+      "enforcedBy": "pcc-no-prose-only-theorem-policy0.mjs"
+    },
+    {
+      "id": "NPT-002-NoPublicEmissionFromBindings",
+      "description": "No theorem-binding entry may discharge public theorem emission or have a public-emission effect under the current boundary.",
+      "enforcedBy": "pcc-no-prose-only-theorem-policy0.mjs"
+    },
+    {
+      "id": "NPT-003-ObligationsAndGapsRepresentReleaseCriticalSpine",
+      "description": "The proof-obligation and gap ledgers must represent the current theorem spine, including finite-to-unbounded uniformity and unrestricted final soundness as non-activated obligations.",
+      "enforcedBy": "pcc-no-prose-only-theorem-policy0.mjs"
+    },
+    {
+      "id": "NPT-004-HistoricalTheoremLanguageFenced",
+      "description": "Historical theorem-emission prose remains fenced by the current release ladder, gap ledger, and status boundary rather than acting as an active theorem gate.",
+      "enforcedBy": "pcc-no-prose-only-theorem-policy0.mjs"
+    },
+    {
+      "id": "NPT-005-ExhaustivenessNotOverclaimed",
+      "description": "This seed policy covers the release-critical spine and explicitly does not yet claim every numbered theorem environment in the historical report has a binding.",
+      "enforcedBy": "pcc-no-prose-only-theorem-policy0.mjs"
+    }
+  ],
+  "currentVerdict": {
+    "noReleaseCriticalProseOnlyActivation": true,
+    "exhaustiveHistoricalReportCoverage": false,
+    "activationBlockersCleared": false,
+    "reason": "The release-critical theorem spine has machine-readable binding and obligation surfaces, but the historical report still contains many numbered theorem environments and direct theorem-emission language. This policy records and enforces the current release-critical scope without claiming exhaustive report coverage or activation."
+  },
+  "nonClaims": [
+    "This policy does not activate public theorem emission.",
+    "This policy does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This policy does not yet prove that every numbered theorem environment in the historical canonical report is bound.",
+    "This policy does not treat report prose as a checker result.",
+    "This policy covers the current release-critical theorem spine and preserves the current gap and release-ladder boundaries."
+  ],
+  "audit": {
+    "checker": "CheckNoProseOnlyTheoremPolicy0",
+    "script": "pcc-no-prose-only-theorem-policy0.mjs",
+    "test": "audits/no-prose-only-theorem-policy0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
