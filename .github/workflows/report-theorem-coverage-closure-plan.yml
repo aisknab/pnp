@@ -1,0 +1,25 @@
+name: report-theorem-coverage-closure-plan
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  report-theorem-coverage-closure-plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run report theorem coverage closure plan checker
+        run: node pcc-report-theorem-coverage-closure-plan0.mjs --json
+      - name: Run report theorem coverage closure plan tests
+        run: node --test audits/report-theorem-coverage-closure-plan0.test.mjs
+      - name: Upload report theorem coverage closure plan verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-theorem-coverage-closure-plan-latest-verdict
+          path: artifacts/report-theorem-coverage-closure-plan/latest-verdict.json
