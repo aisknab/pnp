@@ -1,0 +1,63 @@
+{
+  "kind": "PNPDeterminismAudit0",
+  "version": 0,
+  "coordinate": "PNP-DETERMINISM-AUDIT-2026-06-27-01",
+  "title": "Determinism audit",
+  "purpose": "Run a configured verification command twice, compare exit status, stdout/stderr digests, parsed JSON canonical digests when present, stable source artifact hashes, and generated verdict artifact hashes.",
+  "status": "determinism-audit-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "determinismAuditReady": true,
+  "fullDeterminismProved": false,
+  "publicTheoremEmissionAllowedByAudit": false,
+  "defaultCommand": "node scripts/pnp-verify-all.mjs --json --skip-unit-tests --skip-release-audit",
+  "ciSmokeCommand": "node pcc-complexity-ledger0.mjs --json",
+  "stableArtifactPaths": [
+    "PNP_STATUS.json",
+    "kernel/PNP_MINIMAL_KERNEL.json",
+    "trust-base/TRUST_BASE.json",
+    "report-bindings/REPORT_THEOREM_BINDINGS.json",
+    "complexity/COMPLEXITY_LEDGER.json",
+    "reproducibility/MULTI_PLATFORM_CI.json",
+    "reproducibility/CONTAINER_ENVIRONMENT.json",
+    "reproducibility/FRESH_CLONE_VERIFY.json"
+  ],
+  "defaultGeneratedArtifactPaths": [
+    "artifacts/pnp-verify-all/latest-verdict.json"
+  ],
+  "ciGeneratedArtifactPaths": [
+    "artifacts/complexity-ledger/latest-verdict.json"
+  ],
+  "comparisonFields": [
+    "exitCode",
+    "stdoutSha256",
+    "stderrSha256",
+    "parsedJsonCanonicalSha256",
+    "stableArtifactDigestsBeforeAfter",
+    "generatedArtifactDigestsRun1Run2"
+  ],
+  "ciMode": {
+    "workflow": ".github/workflows/determinism-audit.yml",
+    "command": "node scripts/audit-determinism.mjs --json --command 'node pcc-complexity-ledger0.mjs --json' --generated-artifact artifacts/complexity-ledger/latest-verdict.json",
+    "rationale": "CI uses a fast deterministic JSON-producing checker to verify the determinism harness itself without recursively running the full verifier twice inside every determinism workflow run. Independent reviewers can omit --command to run the stronger default pnp-verify-all determinism probe."
+  },
+  "nonClaims": [
+    "This determinism audit does not activate public theorem emission.",
+    "This determinism audit does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "The CI smoke command proves the determinism harness on a fast checker and does not by itself prove full-repository bit-for-bit determinism.",
+    "The default command is a stronger verifier replay, but the manifest does not yet claim every possible platform and environment produces identical bytes."
+  ],
+  "audit": {
+    "checker": "AuditDeterminism0",
+    "script": "scripts/audit-determinism.mjs",
+    "test": "audits/determinism0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}

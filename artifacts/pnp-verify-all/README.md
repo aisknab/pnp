@@ -47,11 +47,12 @@ The verifier currently checks:
 29. The fresh-clone verifier script tests.
 30. The container environment manifest and Dockerfile tests.
 31. The multi-platform CI manifest and workflow tests.
-32. Cross-runtime minimal-kernel agreement.
-33. Independent verifier no-shared-code policy.
-34. Independent verifier audit tests.
-35. Independent Python verifier tests.
-36. Release-audit surface preservation.
+32. The determinism audit harness tests.
+33. Cross-runtime minimal-kernel agreement.
+34. Independent verifier no-shared-code policy.
+35. Independent verifier audit tests.
+36. Independent Python verifier tests.
+37. Release-audit surface preservation.
 
 The accepted verdict keeps the public-review boundary explicit:
 

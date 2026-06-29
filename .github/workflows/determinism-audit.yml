@@ -1,0 +1,31 @@
+name: determinism-audit
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  determinism-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies from lockfile
+        run: npm ci
+      - name: Run determinism audit tests
+        run: node --test audits/determinism0.test.mjs
+      - name: Run determinism smoke audit
+        run: >-
+          node scripts/audit-determinism.mjs
+          --json
+          --command "node pcc-complexity-ledger0.mjs --json"
+          --generated-artifact artifacts/complexity-ledger/latest-verdict.json
+      - name: Upload determinism audit verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: determinism-audit-latest-verdict
+          path: artifacts/determinism-audit/latest-verdict.json
