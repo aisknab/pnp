@@ -72,14 +72,14 @@
     },
     {
       "id": "GAP-004-FiniteToUnboundedUniformity",
-      "statement": "The finite-to-unbounded family audit is not yet represented as a dedicated checker: the repository has not yet proved every finite certificate schema uniformly covers all SAT input sizes in polynomial time.",
-      "status": "known-unresolved",
+      "statement": "The finite-to-unbounded family audit is now represented as a dedicated checker, but it does not yet prove that every finite certificate schema uniformly covers all SAT input sizes in polynomial time.",
+      "status": "represented-not-discharged",
       "severity": "activation-blocking",
       "blocker": "Release.UnrestrictedFinalSoundness",
-      "ownerSurface": "future-finite-to-unbounded-audit",
+      "ownerSurface": "finite-to-unbounded-family-audit",
       "relatedObligations": ["OBL-010-ComplexityImplicationLedger", "OBL-014-UnrestrictedFinalSoundnessBlocked"],
-      "evidenceFiles": ["proof-obligations/OBLIGATION_LEDGER.json", "complexity/COMPLEXITY_LEDGER.json", "release/RELEASE_LADDER.json"],
-      "closeCondition": "Add a finite-to-unbounded-family audit and checker proving that the certificate schema is uniform and polynomial for all SAT sizes, not just represented by finite or seed evidence.",
+      "evidenceFiles": ["proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json", "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.md", "pcc-finite-to-unbounded-family-audit0.mjs", "audits/finite-to-unbounded-family-audit0.test.mjs", "proof-obligations/OBLIGATION_LEDGER.json", "complexity/COMPLEXITY_LEDGER.json", "release/RELEASE_LADDER.json"],
+      "closeCondition": "Replace this represented-but-not-discharged audit with an accepted checker proving that the certificate schema is uniform and polynomial for all SAT sizes, not just represented by finite or seed evidence.",
       "publicTheoremEmissionAllowedByGap": false
     },
     {
