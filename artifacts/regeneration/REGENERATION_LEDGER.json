@@ -74,6 +74,16 @@
       "generatedAtRuntime": true
     },
     {
+      "id": "finite-to-unbounded-family-audit",
+      "kind": "proof-uniformity-audit",
+      "sourceFiles": ["proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json", "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.md", "pcc-finite-to-unbounded-family-audit0.mjs", "audits/finite-to-unbounded-family-audit0.test.mjs"],
+      "command": "node pcc-finite-to-unbounded-family-audit0.mjs --json",
+      "outputPath": "artifacts/finite-to-unbounded-family-audit/latest-verdict.json",
+      "deterministic": true,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    },
+    {
       "id": "minimal-kernel-cross-verify",
       "kind": "stable-source-json",
       "sourceFiles": ["kernel/PNP_MINIMAL_KERNEL.json", "scripts/cross-verify.mjs", "independent-verifiers/python/verify_minimal_kernel.py"],
