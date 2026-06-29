@@ -1,0 +1,90 @@
+{
+  "kind": "PNPBaseDirectBindingSeed0",
+  "version": 0,
+  "coordinate": "PNP-DIRECT-BIND-BASE-SEMANTICS-SEED-2026-06-27-01",
+  "title": "Base theorem direct-binding seed",
+  "purpose": "Bind the historical Section 22 Base theorem-ledger row to the current executable NAND direct-wire semantics, theorem inventory, coverage matrix, closure plan, and proof-obligation surfaces without claiming complete direct checker binding or theorem activation.",
+  "status": "base-direct-binding-seed-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "baseDirectBindingSeedReady": true,
+  "releaseCriticalRow": false,
+  "directCheckerBindingComplete": false,
+  "fullHistoricalBaseTheoremDischarged": false,
+  "publicTheoremEmissionAllowedByBinding": false,
+  "linkedCoordinates": {
+    "reportTheoremInventory": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
+    "reportTheoremCoverageMatrix": "PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01",
+    "reportTheoremCoverageClosurePlan": "PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01",
+    "nandDirectWireSemantics": "PNP-NAND-DIRECT-WIRE-SEMANTICS-2026-06-27-01",
+    "proofObligationLedger": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
+    "gapLedger": "PNP-GAP-LEDGER-2026-06-27-01"
+  },
+  "boundInventoryEntry": {
+    "inventoryEntryId": "TL-001-Base",
+    "coverageEntryId": "COV-001-Base",
+    "closureEntryId": "DCC-001-Base",
+    "sourceLabel": "Base",
+    "expectedCoverageClass": "semantics-seed-surface",
+    "expectedClosureStatus": "direct-binding-seed-upgrade-needed"
+  },
+  "coveredBaseComponents": [
+    {
+      "id": "Base.DirectWireNANDSyntax",
+      "status": "machine-checked-seed",
+      "evidence": "semantics/nand-direct-wire-spec.json"
+    },
+    {
+      "id": "Base.OpenFunctionEvaluation",
+      "status": "machine-checked-seed",
+      "evidence": "semantics/nand-direct-wire-reference.mjs"
+    },
+    {
+      "id": "Base.CompatibleReplacementSemantics",
+      "status": "machine-checked-seed",
+      "evidence": "semantics/nand-direct-wire-spec.json"
+    },
+    {
+      "id": "Base.SlackLawLedgerSurface",
+      "status": "represented-not-discharged",
+      "evidence": "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json"
+    }
+  ],
+  "evidenceSurfaces": [
+    "report-bindings/direct-bindings/BASE_DIRECT_BINDING_SEED.json",
+    "report-bindings/direct-bindings/BASE_DIRECT_BINDING_SEED.md",
+    "report-bindings/REPORT_THEOREM_INVENTORY.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json",
+    "semantics/nand-direct-wire-spec.json",
+    "semantics/nand-direct-wire-spec.md",
+    "semantics/nand-direct-wire-reference.mjs",
+    "pcc-nand-direct-wire-semantics0.mjs",
+    "pcc-direct-bind-base-semantics0.mjs",
+    "audits/nand-direct-wire-semantics0.test.mjs",
+    "audits/direct-bind-base-semantics0.test.mjs",
+    "proof-obligations/OBLIGATION_LEDGER.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "PNP_STATUS.json"
+  ],
+  "nonClaims": [
+    "This direct-binding seed does not activate public theorem emission.",
+    "This direct-binding seed does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This direct-binding seed does not claim the full historical Base theorem is completely discharged.",
+    "This direct-binding seed does not flip the Base coverage row to directCheckerBindingComplete.",
+    "This direct-binding seed binds the Base row to current executable semantics and keeps the remaining closure work explicit."
+  ],
+  "audit": {
+    "checker": "CheckBaseDirectBindingSeed0",
+    "script": "pcc-direct-bind-base-semantics0.mjs",
+    "test": "audits/direct-bind-base-semantics0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
