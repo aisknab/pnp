@@ -1,0 +1,25 @@
+name: regeneration-ledger
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  regeneration-ledger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run regeneration ledger audit
+        run: node scripts/audit-regeneration-ledger.mjs --json
+      - name: Run regeneration ledger tests
+        run: node --test audits/regeneration-ledger0.test.mjs
+      - name: Upload regeneration ledger verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: regeneration-ledger-latest-verdict
+          path: artifacts/regeneration/latest-verdict.json

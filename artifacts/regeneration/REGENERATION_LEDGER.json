@@ -1,0 +1,173 @@
+{
+  "kind": "PNPArtifactRegenerationLedger0",
+  "version": 0,
+  "coordinate": "PNP-REGENERATION-LEDGER-2026-06-27-01",
+  "title": "Artifact regeneration ledger",
+  "purpose": "Record source files, regeneration commands, output locations, deterministic status, and runtime-output policy for the repository's public-review verification artifacts.",
+  "status": "regeneration-ledger-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "regenerationLedgerReady": true,
+  "fullArtifactRegenerationProved": false,
+  "publicTheoremEmissionAllowedByLedger": false,
+  "runtimeOutputPolicy": {
+    "generatedVerdictsCommitted": false,
+    "generatedVerdictsLocation": "artifacts/**/latest-verdict.json",
+    "rationale": "Verifier verdicts are regenerated from the current checkout and are not committed as stable source artifacts. Source manifests, ledgers, checkers, tests, and workflow files are committed and hashable."
+  },
+  "records": [
+    {
+      "id": "status-dashboard",
+      "kind": "stable-source-json",
+      "sourceFiles": ["PNP_STATUS.json"],
+      "command": "node scripts/pnp-verify-all.mjs --json --skip-unit-tests --skip-release-audit",
+      "outputPath": "artifacts/pnp-verify-all/latest-verdict.json",
+      "deterministic": true,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    },
+    {
+      "id": "trust-base",
+      "kind": "stable-source-json",
+      "sourceFiles": ["trust-base/TRUST_BASE.json", "pcc-trust-base0.mjs", "audits/trust-base0.test.mjs"],
+      "command": "node pcc-trust-base0.mjs --json",
+      "outputPath": "artifacts/trust-base/latest-verdict.json",
+      "deterministic": true,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    },
+    {
+      "id": "theorem-bindings",
+      "kind": "stable-source-json",
+      "sourceFiles": ["report-bindings/REPORT_THEOREM_BINDINGS.json", "scripts/audit-report-theorem-bindings.mjs"],
+      "command": "node scripts/audit-report-theorem-bindings.mjs --json",
+      "outputPath": "artifacts/report-theorem-bindings/latest-verdict.json",
+      "deterministic": true,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    },
+    {
+      "id": "minimal-kernel-cross-verify",
+      "kind": "stable-source-json",
+      "sourceFiles": ["kernel/PNP_MINIMAL_KERNEL.json", "scripts/cross-verify.mjs", "independent-verifiers/python/verify_minimal_kernel.py"],
+      "command": "npm run cross-verify:json",
+      "outputPath": "artifacts/cross-verify/latest-verdict.json",
+      "deterministic": true,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    },
+    {
+      "id": "nand-semantics",
+      "kind": "executable-semantics",
+      "sourceFiles": ["semantics/nand-direct-wire-spec.json", "semantics/nand-direct-wire-reference.mjs", "pcc-nand-direct-wire-semantics0.mjs", "audits/nand-direct-wire-semantics0.test.mjs"],
+      "command": "npm run semantics:nand",
+      "outputPath": "artifacts/nand-direct-wire-semantics/latest-verdict.json",
+      "deterministic": true,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    },
+    {
+      "id": "nand-small-models",
+      "kind": "bounded-small-model-audit",
+      "sourceFiles": ["semantics/nand-small-models-config.json", "semantics/nand-small-models.mjs", "pcc-nand-small-models0.mjs", "audits/nand-small-models0.test.mjs"],
+      "command": "npm run semantics:nand:small-models",
+      "outputPath": "artifacts/nand-small-models/latest-verdict.json",
+      "deterministic": true,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    },
+    {
+      "id": "locked-nand-sat-small-models",
+      "kind": "bounded-sat-threshold-audit",
+      "sourceFiles": ["semantics/locked-nand-sat-small-models-config.json", "semantics/locked-nand-sat-small-models.mjs", "pcc-locked-nand-sat-small-models0.mjs", "audits/locked-nand-sat-small-models0.test.mjs"],
+      "command": "npm run semantics:locked-nand:sat-small-models",
+      "outputPath": "artifacts/locked-nand-sat-small-models/latest-verdict.json",
+      "deterministic": true,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    },
+    {
+      "id": "complexity-ledger",
+      "kind": "stable-source-json",
+      "sourceFiles": ["complexity/COMPLEXITY_LEDGER.json", "pcc-complexity-ledger0.mjs", "audits/complexity-ledger0.test.mjs"],
+      "command": "npm run complexity:ledger",
+      "outputPath": "artifacts/complexity-ledger/latest-verdict.json",
+      "deterministic": true,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    },
+    {
+      "id": "no-hidden-oracle",
+      "kind": "source-surface-audit",
+      "sourceFiles": ["oracle-audit/NO_HIDDEN_ORACLE_AUDIT.json", "scripts/audit-no-hidden-oracle.mjs", "audits/no-hidden-oracle0.test.mjs"],
+      "command": "npm run audit:no-hidden-oracle",
+      "outputPath": "artifacts/no-hidden-oracle/latest-verdict.json",
+      "deterministic": true,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    },
+    {
+      "id": "fresh-clone-verifier",
+      "kind": "reproducibility-entrypoint",
+      "sourceFiles": ["reproducibility/FRESH_CLONE_VERIFY.json", "scripts/fresh-clone-verify.sh", "audits/fresh-clone-verify0.test.mjs"],
+      "command": "bash scripts/fresh-clone-verify.sh --repo <repo> --ref <ref>",
+      "outputPath": "artifacts/fresh-clone-verify/latest-verdict.json",
+      "deterministic": false,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    },
+    {
+      "id": "container-environment",
+      "kind": "reproducibility-entrypoint",
+      "sourceFiles": ["reproducibility/CONTAINER_ENVIRONMENT.json", "Dockerfile", "docker-compose.yml", ".devcontainer/devcontainer.json", "audits/container-environment0.test.mjs"],
+      "command": "docker build -t pnp-verify:local . && docker run pnp-verify:local npm run pnp:verify",
+      "outputPath": "artifacts/container-environment/README.md",
+      "deterministic": false,
+      "outputCommitted": true,
+      "generatedAtRuntime": false
+    },
+    {
+      "id": "multi-platform-ci",
+      "kind": "ci-matrix",
+      "sourceFiles": ["reproducibility/MULTI_PLATFORM_CI.json", ".github/workflows/multi-platform-ci.yml", "audits/multi-platform-ci0.test.mjs"],
+      "command": "GitHub Actions matrix: ubuntu-latest, macos-latest, windows-latest",
+      "outputPath": "artifacts/multi-platform-ci/README.md",
+      "deterministic": false,
+      "outputCommitted": true,
+      "generatedAtRuntime": false
+    },
+    {
+      "id": "determinism-audit",
+      "kind": "reproducibility-audit",
+      "sourceFiles": ["reproducibility/DETERMINISM_AUDIT.json", "scripts/audit-determinism.mjs", "audits/determinism0.test.mjs"],
+      "command": "node scripts/audit-determinism.mjs --json",
+      "outputPath": "artifacts/determinism-audit/latest-verdict.json",
+      "deterministic": false,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    },
+    {
+      "id": "regeneration-ledger",
+      "kind": "regeneration-ledger",
+      "sourceFiles": ["artifacts/regeneration/REGENERATION_LEDGER.json", "scripts/audit-regeneration-ledger.mjs", "audits/regeneration-ledger0.test.mjs"],
+      "command": "node scripts/audit-regeneration-ledger.mjs --json",
+      "outputPath": "artifacts/regeneration/latest-verdict.json",
+      "deterministic": true,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    }
+  ],
+  "audit": {
+    "checker": "AuditRegenerationLedger0",
+    "script": "scripts/audit-regeneration-ledger.mjs",
+    "test": "audits/regeneration-ledger0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
