@@ -22,51 +22,53 @@ The verifier currently checks:
 4. The theorem-to-checker binding ledger audit.
 5. The report theorem inventory audit.
 6. The report theorem inventory tests.
-7. The no-prose-only theorem policy audit.
-8. The no-prose-only theorem policy tests.
-9. The proof obligation ledger audit.
-10. The proof obligation ledger tests.
-11. The gap ledger audit.
-12. The gap ledger tests.
-13. The finite-to-unbounded family audit.
-14. The finite-to-unbounded family audit tests.
-15. The explicit trust-base audit and checksum ledger.
-16. The trust-base audit tests.
-17. The trust-base shrink-plan audit.
-18. The trust-base shrink-plan audit tests.
-19. The checker-totality seed audit.
-20. The checker-totality audit tests.
-21. The negative checker mutation seed audit.
-22. The negative checker mutation audit tests.
-23. The rule-family coverage ledger audit.
-24. The rule-family coverage audit tests.
-25. The checker dependency graph generation.
-26. The checker dependency graph tests.
-27. The checker no-circular-authority audit.
-28. The checker no-circular-authority audit tests.
-29. The NAND direct-wire semantics audit.
-30. The NAND direct-wire semantics tests.
-31. The NAND direct-wire small-model audit.
-32. The NAND direct-wire small-model tests.
-33. The locked NAND SAT small-model audit.
-34. The locked NAND SAT small-model tests.
-35. The complexity implication ledger audit.
-36. The complexity implication ledger tests.
-37. The no-hidden-oracle audit.
-38. The no-hidden-oracle audit tests.
-39. The fresh-clone verifier script tests.
-40. The container environment manifest and Dockerfile tests.
-41. The multi-platform CI manifest and workflow tests.
-42. The determinism audit harness tests.
-43. The artifact regeneration ledger audit.
-44. The artifact regeneration ledger tests.
-45. The release ladder audit.
-46. The release ladder tests.
-47. Cross-runtime minimal-kernel agreement.
-48. Independent verifier no-shared-code policy.
-49. Independent verifier audit tests.
-50. Independent Python verifier tests.
-51. Release-audit surface preservation.
+7. The report theorem coverage matrix audit.
+8. The report theorem coverage matrix tests.
+9. The no-prose-only theorem policy audit.
+10. The no-prose-only theorem policy tests.
+11. The proof obligation ledger audit.
+12. The proof obligation ledger tests.
+13. The gap ledger audit.
+14. The gap ledger tests.
+15. The finite-to-unbounded family audit.
+16. The finite-to-unbounded family audit tests.
+17. The explicit trust-base audit and checksum ledger.
+18. The trust-base audit tests.
+19. The trust-base shrink-plan audit.
+20. The trust-base shrink-plan audit tests.
+21. The checker-totality seed audit.
+22. The checker-totality audit tests.
+23. The negative checker mutation seed audit.
+24. The negative checker mutation audit tests.
+25. The rule-family coverage ledger audit.
+26. The rule-family coverage audit tests.
+27. The checker dependency graph generation.
+28. The checker dependency graph tests.
+29. The checker no-circular-authority audit.
+30. The checker no-circular-authority audit tests.
+31. The NAND direct-wire semantics audit.
+32. The NAND direct-wire semantics tests.
+33. The NAND direct-wire small-model audit.
+34. The NAND direct-wire small-model tests.
+35. The locked NAND SAT small-model audit.
+36. The locked NAND SAT small-model tests.
+37. The complexity implication ledger audit.
+38. The complexity implication ledger tests.
+39. The no-hidden-oracle audit.
+40. The no-hidden-oracle audit tests.
+41. The fresh-clone verifier script tests.
+42. The container environment manifest and Dockerfile tests.
+43. The multi-platform CI manifest and workflow tests.
+44. The determinism audit harness tests.
+45. The artifact regeneration ledger audit.
+46. The artifact regeneration ledger tests.
+47. The release ladder audit.
+48. The release ladder tests.
+49. Cross-runtime minimal-kernel agreement.
+50. Independent verifier no-shared-code policy.
+51. Independent verifier audit tests.
+52. Independent Python verifier tests.
+53. Release-audit surface preservation.
 
 The accepted verdict keeps the public-review boundary explicit:
 
