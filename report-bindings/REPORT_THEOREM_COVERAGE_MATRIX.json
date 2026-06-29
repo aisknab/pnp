@@ -1,0 +1,631 @@
+{
+  "kind": "PNPReportTheoremCoverageMatrix0",
+  "version": 0,
+  "coordinate": "PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01",
+  "title": "Report theorem inventory coverage matrix",
+  "purpose": "Map every current Section 22 theorem-ledger inventory row to explicit machine-readable ledger, obligation, gap, or release-boundary surfaces without claiming full direct checker binding for every historical theorem.",
+  "status": "report-theorem-coverage-matrix-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "coverageMatrixReady": true,
+  "allInventoryEntriesHaveCoverageRows": true,
+  "releaseCriticalEntriesHaveBoundaryRows": true,
+  "allInventoryEntriesDirectCheckerBound": false,
+  "fullHistoricalReportTheoremCoverageProved": false,
+  "publicTheoremEmissionAllowedByCoverage": false,
+  "coverageScope": {
+    "mode": "historical-section-22-theorem-ledger-row-coverage-matrix",
+    "inventoryCoordinate": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
+    "expectedInventoryEntryCount": 27,
+    "expectedCoverageEntryCount": 27,
+    "coverageRowsAreActivationSafe": true,
+    "directCheckerBindingExpansionRequired": true
+  },
+  "linkedCoordinates": {
+    "reportTheoremInventory": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
+    "theoremBindingLedger": "REPORT-THEOREM-BINDINGS-2026-06-27-01",
+    "noProseOnlyTheoremPolicy": "PNP-NO-PROSE-ONLY-THEOREM-POLICY-2026-06-27-01",
+    "proofObligationLedger": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
+    "gapLedger": "PNP-GAP-LEDGER-2026-06-27-01",
+    "finiteToUnboundedFamilyAudit": "PNP-FINITE-TO-UNBOUNDED-FAMILY-AUDIT-2026-06-27-01",
+    "releaseLadder": "PNP-RELEASE-LADDER-2026-06-27-01"
+  },
+  "coverageClassLegend": {
+    "semantics-seed-surface": "The inventory row has an executable seed semantics surface, but not a full historical theorem discharge.",
+    "obligation-ledger-surface": "The inventory row is represented by proof-obligation or hardening ledgers.",
+    "inventory-ledger-surface": "The inventory row is represented by the report inventory and theorem-binding ledgers, with direct checker binding still future work.",
+    "uniformity-gap-surface": "The inventory row participates in the finite-to-unbounded or unrestricted-soundness gap surfaces.",
+    "complexity-and-gap-surface": "The inventory row is represented by the complexity ledger plus active gap/release blockers.",
+    "locked-nand-seed-surface": "The inventory row has bounded locked-NAND seed evidence and remains fenced by the uniformity gap.",
+    "release-critical-boundary-surface": "The inventory row is release-critical and fenced by status, theorem bindings, and release ladder."
+  },
+  "coverageEntries": [
+    {
+      "id": "COV-001-Base",
+      "inventoryEntryId": "TL-001-Base",
+      "sourceLabel": "Base",
+      "coverageClass": "semantics-seed-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-007-NANDDirectWireSemantics"
+      ],
+      "relatedGaps": [],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "semantics/nand-direct-wire-spec.json",
+        "pcc-nand-direct-wire-semantics0.mjs",
+        "audits/nand-direct-wire-semantics0.test.mjs"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-002-CHG",
+      "inventoryEntryId": "TL-002-CHG",
+      "sourceLabel": "CHG",
+      "coverageClass": "obligation-ledger-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-006-CheckerSoundnessSeedAudits"
+      ],
+      "relatedGaps": [],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "proof-obligations/OBLIGATION_LEDGER.json",
+        "proof-obligations/GAP_LEDGER.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-003-Mode",
+      "inventoryEntryId": "TL-003-Mode",
+      "sourceLabel": "Mode",
+      "coverageClass": "obligation-ledger-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-005-MinimalKernelCrossVerification"
+      ],
+      "relatedGaps": [],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "kernel/PNP_MINIMAL_KERNEL.json",
+        "scripts/cross-verify.mjs"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-004-E",
+      "inventoryEntryId": "TL-004-E",
+      "sourceLabel": "E",
+      "coverageClass": "obligation-ledger-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-006-CheckerSoundnessSeedAudits",
+        "OBL-011-NoHiddenOracleSourceSurface"
+      ],
+      "relatedGaps": [],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "scripts/audit-no-hidden-oracle.mjs",
+        "oracle-audit/NO_HIDDEN_ORACLE_AUDIT.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-005-N",
+      "inventoryEntryId": "TL-005-N",
+      "sourceLabel": "N",
+      "coverageClass": "inventory-ledger-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-004-TheoremToCheckerBindings"
+      ],
+      "relatedGaps": [],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "report-bindings/REPORT_THEOREM_BINDINGS.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-006-FT",
+      "inventoryEntryId": "TL-006-FT",
+      "sourceLabel": "FT",
+      "coverageClass": "inventory-ledger-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-004-TheoremToCheckerBindings"
+      ],
+      "relatedGaps": [],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "report-bindings/REPORT_THEOREM_BINDINGS.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-007-X",
+      "inventoryEntryId": "TL-007-X",
+      "sourceLabel": "X",
+      "coverageClass": "inventory-ledger-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-004-TheoremToCheckerBindings"
+      ],
+      "relatedGaps": [],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "report-bindings/REPORT_THEOREM_BINDINGS.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-008-BC",
+      "inventoryEntryId": "TL-008-BC",
+      "sourceLabel": "BC",
+      "coverageClass": "inventory-ledger-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-004-TheoremToCheckerBindings"
+      ],
+      "relatedGaps": [],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "report-bindings/REPORT_THEOREM_BINDINGS.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-009-UN",
+      "inventoryEntryId": "TL-009-UN",
+      "sourceLabel": "UN",
+      "coverageClass": "inventory-ledger-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-004-TheoremToCheckerBindings"
+      ],
+      "relatedGaps": [],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "report-bindings/REPORT_THEOREM_BINDINGS.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-010-HN",
+      "inventoryEntryId": "TL-010-HN",
+      "sourceLabel": "HN",
+      "coverageClass": "inventory-ledger-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-004-TheoremToCheckerBindings"
+      ],
+      "relatedGaps": [],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "report-bindings/REPORT_THEOREM_BINDINGS.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-011-HResolve",
+      "inventoryEntryId": "TL-011-HResolve",
+      "sourceLabel": "HResolve",
+      "coverageClass": "inventory-ledger-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-004-TheoremToCheckerBindings"
+      ],
+      "relatedGaps": [],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "report-bindings/REPORT_THEOREM_BINDINGS.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-012-BUD",
+      "inventoryEntryId": "TL-012-BUD",
+      "sourceLabel": "BUD",
+      "coverageClass": "inventory-ledger-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-004-TheoremToCheckerBindings"
+      ],
+      "relatedGaps": [],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "report-bindings/REPORT_THEOREM_BINDINGS.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-013-NOR-FF",
+      "inventoryEntryId": "TL-013-NOR-FF",
+      "sourceLabel": "NOR/FF",
+      "coverageClass": "inventory-ledger-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-004-TheoremToCheckerBindings"
+      ],
+      "relatedGaps": [],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "report-bindings/REPORT_THEOREM_BINDINGS.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-014-RW",
+      "inventoryEntryId": "TL-014-RW",
+      "sourceLabel": "RW",
+      "coverageClass": "uniformity-gap-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-014-UnrestrictedFinalSoundnessBlocked",
+        "OBL-015-FiniteToUnboundedFamilyAudit"
+      ],
+      "relatedGaps": [
+        "GAP-001-UnrestrictedFinalSoundness"
+      ],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "proof-obligations/GAP_LEDGER.json",
+        "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-015-BN2",
+      "inventoryEntryId": "TL-015-BN2",
+      "sourceLabel": "BN2",
+      "coverageClass": "uniformity-gap-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-015-FiniteToUnboundedFamilyAudit"
+      ],
+      "relatedGaps": [
+        "GAP-001-UnrestrictedFinalSoundness"
+      ],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "proof-obligations/GAP_LEDGER.json",
+        "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-016-BN3",
+      "inventoryEntryId": "TL-016-BN3",
+      "sourceLabel": "BN3",
+      "coverageClass": "uniformity-gap-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-015-FiniteToUnboundedFamilyAudit"
+      ],
+      "relatedGaps": [
+        "GAP-001-UnrestrictedFinalSoundness"
+      ],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "proof-obligations/GAP_LEDGER.json",
+        "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-017-BN4",
+      "inventoryEntryId": "TL-017-BN4",
+      "sourceLabel": "BN4",
+      "coverageClass": "uniformity-gap-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-015-FiniteToUnboundedFamilyAudit"
+      ],
+      "relatedGaps": [
+        "GAP-001-UnrestrictedFinalSoundness"
+      ],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "proof-obligations/GAP_LEDGER.json",
+        "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-018-BN5",
+      "inventoryEntryId": "TL-018-BN5",
+      "sourceLabel": "BN5",
+      "coverageClass": "uniformity-gap-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-015-FiniteToUnboundedFamilyAudit"
+      ],
+      "relatedGaps": [
+        "GAP-001-UnrestrictedFinalSoundness"
+      ],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "proof-obligations/GAP_LEDGER.json",
+        "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-019-PkgC",
+      "inventoryEntryId": "TL-019-PkgC",
+      "sourceLabel": "PkgC",
+      "coverageClass": "uniformity-gap-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-015-FiniteToUnboundedFamilyAudit"
+      ],
+      "relatedGaps": [
+        "GAP-001-UnrestrictedFinalSoundness"
+      ],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "proof-obligations/GAP_LEDGER.json",
+        "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-020-BN6",
+      "inventoryEntryId": "TL-020-BN6",
+      "sourceLabel": "BN6",
+      "coverageClass": "uniformity-gap-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-015-FiniteToUnboundedFamilyAudit"
+      ],
+      "relatedGaps": [
+        "GAP-001-UnrestrictedFinalSoundness"
+      ],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "proof-obligations/GAP_LEDGER.json",
+        "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-021-Packet",
+      "inventoryEntryId": "TL-021-Packet",
+      "sourceLabel": "Packet",
+      "coverageClass": "uniformity-gap-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-015-FiniteToUnboundedFamilyAudit"
+      ],
+      "relatedGaps": [
+        "GAP-001-UnrestrictedFinalSoundness"
+      ],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "proof-obligations/GAP_LEDGER.json",
+        "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-022-R",
+      "inventoryEntryId": "TL-022-R",
+      "sourceLabel": "R",
+      "coverageClass": "uniformity-gap-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-015-FiniteToUnboundedFamilyAudit"
+      ],
+      "relatedGaps": [
+        "GAP-001-UnrestrictedFinalSoundness"
+      ],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "proof-obligations/GAP_LEDGER.json",
+        "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-023-HB",
+      "inventoryEntryId": "TL-023-HB",
+      "sourceLabel": "HB",
+      "coverageClass": "uniformity-gap-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-015-FiniteToUnboundedFamilyAudit"
+      ],
+      "relatedGaps": [
+        "GAP-001-UnrestrictedFinalSoundness"
+      ],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "proof-obligations/GAP_LEDGER.json",
+        "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-024-O",
+      "inventoryEntryId": "TL-024-O",
+      "sourceLabel": "O",
+      "coverageClass": "complexity-and-gap-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-010-ComplexityImplicationLedger",
+        "OBL-014-UnrestrictedFinalSoundnessBlocked"
+      ],
+      "relatedGaps": [
+        "GAP-001-UnrestrictedFinalSoundness"
+      ],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "complexity/COMPLEXITY_LEDGER.json",
+        "proof-obligations/GAP_LEDGER.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-025-G",
+      "inventoryEntryId": "TL-025-G",
+      "sourceLabel": "G",
+      "coverageClass": "locked-nand-seed-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-009-LockedNANDSATSmallModels",
+        "OBL-010-ComplexityImplicationLedger"
+      ],
+      "relatedGaps": [
+        "GAP-001-UnrestrictedFinalSoundness"
+      ],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_INVENTORY.json",
+        "semantics/locked-nand-sat-small-models-config.json",
+        "pcc-locked-nand-sat-small-models0.mjs",
+        "complexity/COMPLEXITY_LEDGER.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-026-Final",
+      "inventoryEntryId": "TL-026-Final",
+      "sourceLabel": "Final",
+      "coverageClass": "release-critical-boundary-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-013-ReleaseLadderNonActivation",
+        "OBL-014-UnrestrictedFinalSoundnessBlocked"
+      ],
+      "relatedGaps": [
+        "GAP-001-UnrestrictedFinalSoundness"
+      ],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_BINDINGS.json",
+        "release/RELEASE_LADDER.json",
+        "PNP_STATUS.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    },
+    {
+      "id": "COV-027-PACK",
+      "inventoryEntryId": "TL-027-PACK",
+      "sourceLabel": "PACK",
+      "coverageClass": "release-critical-boundary-surface",
+      "coverageStatus": "represented-by-explicit-ledger-surface",
+      "relatedObligations": [
+        "OBL-004-TheoremToCheckerBindings",
+        "OBL-013-ReleaseLadderNonActivation"
+      ],
+      "relatedGaps": [
+        "GAP-001-UnrestrictedFinalSoundness"
+      ],
+      "evidenceFiles": [
+        "report-bindings/REPORT_THEOREM_BINDINGS.json",
+        "report-bindings/NO_PROSE_ONLY_THEOREM_POLICY.json",
+        "PNP_STATUS.json"
+      ],
+      "representedByMachineLedger": true,
+      "directCheckerBindingComplete": false,
+      "publicEmissionEffect": "none",
+      "dischargesPublicTheorem": false
+    }
+  ],
+  "nonClaims": [
+    "This coverage matrix does not activate public theorem emission.",
+    "This coverage matrix does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This coverage matrix does not claim every Section 22 theorem-ledger row has a complete direct checker binding.",
+    "This coverage matrix does not claim every numbered theorem environment in the historical report has been inventoried.",
+    "This coverage matrix exists to make unbound theorem rows explicit and mechanically auditable."
+  ],
+  "audit": {
+    "checker": "CheckReportTheoremCoverageMatrix0",
+    "script": "pcc-report-theorem-coverage-matrix0.mjs",
+    "test": "audits/report-theorem-coverage-matrix0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
