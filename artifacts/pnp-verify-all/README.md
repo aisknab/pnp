@@ -24,51 +24,53 @@ The verifier currently checks:
 6. The report theorem inventory tests.
 7. The report theorem coverage matrix audit.
 8. The report theorem coverage matrix tests.
-9. The no-prose-only theorem policy audit.
-10. The no-prose-only theorem policy tests.
-11. The proof obligation ledger audit.
-12. The proof obligation ledger tests.
-13. The gap ledger audit.
-14. The gap ledger tests.
-15. The finite-to-unbounded family audit.
-16. The finite-to-unbounded family audit tests.
-17. The explicit trust-base audit and checksum ledger.
-18. The trust-base audit tests.
-19. The trust-base shrink-plan audit.
-20. The trust-base shrink-plan audit tests.
-21. The checker-totality seed audit.
-22. The checker-totality audit tests.
-23. The negative checker mutation seed audit.
-24. The negative checker mutation audit tests.
-25. The rule-family coverage ledger audit.
-26. The rule-family coverage audit tests.
-27. The checker dependency graph generation.
-28. The checker dependency graph tests.
-29. The checker no-circular-authority audit.
-30. The checker no-circular-authority audit tests.
-31. The NAND direct-wire semantics audit.
-32. The NAND direct-wire semantics tests.
-33. The NAND direct-wire small-model audit.
-34. The NAND direct-wire small-model tests.
-35. The locked NAND SAT small-model audit.
-36. The locked NAND SAT small-model tests.
-37. The complexity implication ledger audit.
-38. The complexity implication ledger tests.
-39. The no-hidden-oracle audit.
-40. The no-hidden-oracle audit tests.
-41. The fresh-clone verifier script tests.
-42. The container environment manifest and Dockerfile tests.
-43. The multi-platform CI manifest and workflow tests.
-44. The determinism audit harness tests.
-45. The artifact regeneration ledger audit.
-46. The artifact regeneration ledger tests.
-47. The release ladder audit.
-48. The release ladder tests.
-49. Cross-runtime minimal-kernel agreement.
-50. Independent verifier no-shared-code policy.
-51. Independent verifier audit tests.
-52. Independent Python verifier tests.
-53. Release-audit surface preservation.
+9. The report theorem coverage closure plan audit.
+10. The report theorem coverage closure plan tests.
+11. The no-prose-only theorem policy audit.
+12. The no-prose-only theorem policy tests.
+13. The proof obligation ledger audit.
+14. The proof obligation ledger tests.
+15. The gap ledger audit.
+16. The gap ledger tests.
+17. The finite-to-unbounded family audit.
+18. The finite-to-unbounded family audit tests.
+19. The explicit trust-base audit and checksum ledger.
+20. The trust-base audit tests.
+21. The trust-base shrink-plan audit.
+22. The trust-base shrink-plan audit tests.
+23. The checker-totality seed audit.
+24. The checker-totality audit tests.
+25. The negative checker mutation seed audit.
+26. The negative checker mutation audit tests.
+27. The rule-family coverage ledger audit.
+28. The rule-family coverage audit tests.
+29. The checker dependency graph generation.
+30. The checker dependency graph tests.
+31. The checker no-circular-authority audit.
+32. The checker no-circular-authority audit tests.
+33. The NAND direct-wire semantics audit.
+34. The NAND direct-wire semantics tests.
+35. The NAND direct-wire small-model audit.
+36. The NAND direct-wire small-model tests.
+37. The locked NAND SAT small-model audit.
+38. The locked NAND SAT small-model tests.
+39. The complexity implication ledger audit.
+40. The complexity implication ledger tests.
+41. The no-hidden-oracle audit.
+42. The no-hidden-oracle audit tests.
+43. The fresh-clone verifier script tests.
+44. The container environment manifest and Dockerfile tests.
+45. The multi-platform CI manifest and workflow tests.
+46. The determinism audit harness tests.
+47. The artifact regeneration ledger audit.
+48. The artifact regeneration ledger tests.
+49. The release ladder audit.
+50. The release ladder tests.
+51. Cross-runtime minimal-kernel agreement.
+52. Independent verifier no-shared-code policy.
+53. Independent verifier audit tests.
+54. Independent Python verifier tests.
+55. Release-audit surface preservation.
 
 The accepted verdict keeps the public-review boundary explicit:
 
