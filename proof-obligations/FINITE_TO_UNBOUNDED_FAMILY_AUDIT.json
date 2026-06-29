@@ -1,0 +1,91 @@
+{
+  "kind": "PNPFiniteToUnboundedFamilyAudit0",
+  "version": 0,
+  "coordinate": "PNP-FINITE-TO-UNBOUNDED-FAMILY-AUDIT-2026-06-27-01",
+  "title": "Finite-to-unbounded family audit",
+  "purpose": "Represent the activation-critical question of whether finite certificate schemas uniformly cover all SAT input sizes in polynomial time, without treating bounded seed evidence as unrestricted final soundness.",
+  "status": "finite-to-unbounded-family-audit-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "finiteToUnboundedFamilyAuditReady": true,
+  "uniformAllInputSizesCoverageProved": false,
+  "polynomialUniformGeneratorProved": false,
+  "unrestrictedFinalSoundnessDischarged": false,
+  "publicTheoremEmissionAllowedByAudit": false,
+  "scopeQuestion": "Does every finite certificate schema uniformly cover all SAT input sizes in polynomial time?",
+  "boundedEvidencePolicy": {
+    "boundedSmallModelsMaySupportUniformity": true,
+    "boundedSmallModelsDischargeUniformity": false,
+    "finiteTablesMayRepresentSchemaFamilies": true,
+    "finiteTablesDischargeAllInputSizesWithoutUniformGenerator": false
+  },
+  "requiredUniformityCriteria": [
+    {
+      "id": "Uniform.InputFamily",
+      "description": "The schema must quantify over an unbounded SAT/NAND input family rather than a fixed finite fixture universe.",
+      "currentStatus": "represented-not-discharged"
+    },
+    {
+      "id": "Uniform.Generator",
+      "description": "There must be an explicit generator that maps every input size and input instance to certificate data.",
+      "currentStatus": "represented-not-discharged"
+    },
+    {
+      "id": "Uniform.PolynomialBound",
+      "description": "The generator, certificate size, checker replay, and downstream construction must have polynomial bounds in the input size.",
+      "currentStatus": "represented-not-discharged"
+    },
+    {
+      "id": "Uniform.SemanticPreservation",
+      "description": "The generated certificate family must preserve the NAND semantics, SAT threshold condition, and mode-firewall discipline for every input size.",
+      "currentStatus": "represented-not-discharged"
+    },
+    {
+      "id": "Uniform.NoFiniteExtrapolation",
+      "description": "No finite bounded-model pass may be silently generalized to all input sizes without a checked uniform schema.",
+      "currentStatus": "represented-not-discharged"
+    }
+  ],
+  "linkedGaps": [
+    "GAP-001-UnrestrictedFinalSoundness",
+    "GAP-003-BoundedSmallModelsNotUniformProof",
+    "GAP-004-FiniteToUnboundedUniformity"
+  ],
+  "linkedObligations": [
+    "OBL-010-ComplexityImplicationLedger",
+    "OBL-014-UnrestrictedFinalSoundnessBlocked"
+  ],
+  "evidenceSurfaces": [
+    "proof-obligations/GAP_LEDGER.json",
+    "proof-obligations/OBLIGATION_LEDGER.json",
+    "complexity/COMPLEXITY_LEDGER.json",
+    "semantics/nand-small-models-config.json",
+    "semantics/locked-nand-sat-small-models-config.json",
+    "release/RELEASE_LADDER.json"
+  ],
+  "currentVerdict": {
+    "uniformityRepresented": true,
+    "uniformityClosed": false,
+    "activationBlockerCleared": false,
+    "reason": "The audit makes the finite-to-unbounded question explicit and ties it to the active release blocker, but it does not yet provide the required uniform polynomial certificate-family proof."
+  },
+  "nonClaims": [
+    "This audit does not activate public theorem emission.",
+    "This audit does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This audit does not prove that bounded small-model evidence covers all SAT input sizes.",
+    "This audit records the uniformity criteria that a later unrestricted final-soundness checker must satisfy."
+  ],
+  "audit": {
+    "checker": "CheckFiniteToUnboundedFamilyAudit0",
+    "script": "pcc-finite-to-unbounded-family-audit0.mjs",
+    "test": "audits/finite-to-unbounded-family-audit0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
