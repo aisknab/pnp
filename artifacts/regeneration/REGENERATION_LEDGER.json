@@ -56,7 +56,7 @@
     {
       "id": "minimal-kernel-cross-verify",
       "kind": "stable-source-json",
-      "sourceFiles": ["kernel/PNP_MINIMAL_KERNEL.json", "scripts/cross-verify.mjs", "independent-verifiers/python/minimal_kernel_verify.py"],
+      "sourceFiles": ["kernel/PNP_MINIMAL_KERNEL.json", "scripts/cross-verify.mjs", "independent-verifiers/python/verify_minimal_kernel.py"],
       "command": "npm run cross-verify:json",
       "outputPath": "artifacts/cross-verify/latest-verdict.json",
       "deterministic": true,
