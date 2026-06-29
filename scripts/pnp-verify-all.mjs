@@ -40,6 +40,7 @@ export async function RunPNPVerifyAll0(options = {}) {
     'pcc-no-prose-only-theorem-policy0.mjs',
     'pcc-report-theorem-inventory0.mjs',
     'pcc-report-theorem-coverage-matrix0.mjs',
+    'pcc-report-theorem-coverage-closure-plan0.mjs',
     'semantics/nand-direct-wire-reference.mjs',
     'semantics/nand-small-models.mjs',
     'semantics/locked-nand-sat-small-models.mjs',
@@ -77,6 +78,8 @@ export async function RunPNPVerifyAll0(options = {}) {
     { id: 'report-theorem-inventory-tests', command: process.execPath, args: ['--test', 'audits/report-theorem-inventory0.test.mjs'], kind: 'process' },
     { id: 'report-theorem-coverage-matrix-audit', command: process.execPath, args: ['pcc-report-theorem-coverage-matrix0.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'report-theorem-coverage-matrix-tests', command: process.execPath, args: ['--test', 'audits/report-theorem-coverage-matrix0.test.mjs'], kind: 'process' },
+    { id: 'report-theorem-coverage-closure-plan-audit', command: process.execPath, args: ['pcc-report-theorem-coverage-closure-plan0.mjs', '--json'], kind: 'json', expectTag: 'accept' },
+    { id: 'report-theorem-coverage-closure-plan-tests', command: process.execPath, args: ['--test', 'audits/report-theorem-coverage-closure-plan0.test.mjs'], kind: 'process' },
     { id: 'no-prose-only-theorem-policy-audit', command: process.execPath, args: ['pcc-no-prose-only-theorem-policy0.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'no-prose-only-theorem-policy-tests', command: process.execPath, args: ['--test', 'audits/no-prose-only-theorem-policy0.test.mjs'], kind: 'process' },
     { id: 'proof-obligation-ledger-audit', command: process.execPath, args: ['pcc-proof-obligation-ledger0.mjs', '--json'], kind: 'json', expectTag: 'accept' },
@@ -146,6 +149,7 @@ export async function RunPNPVerifyAll0(options = {}) {
     statusSha256: statusStep.statusSha256,
     reportTheoremInventoryCoordinate: 'PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01',
     reportTheoremCoverageMatrixCoordinate: 'PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01',
+    reportTheoremCoverageClosurePlanCoordinate: 'PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01',
     noProseOnlyTheoremPolicyCoordinate: 'PNP-NO-PROSE-ONLY-THEOREM-POLICY-2026-06-27-01',
     proofObligationLedgerCoordinate: 'PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01',
     gapLedgerCoordinate: 'PNP-GAP-LEDGER-2026-06-27-01',
@@ -205,6 +209,7 @@ async function verifyStatusFile0(root) {
   requireEqual0(status.theoremBindingLedgerCoordinate, 'REPORT-THEOREM-BINDINGS-2026-06-27-01', failures, ['theoremBindingLedgerCoordinate']);
   requireEqual0(status.reportTheoremInventoryCoordinate, 'PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01', failures, ['reportTheoremInventoryCoordinate']);
   requireEqual0(status.reportTheoremCoverageMatrixCoordinate, 'PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01', failures, ['reportTheoremCoverageMatrixCoordinate']);
+  requireEqual0(status.reportTheoremCoverageClosurePlanCoordinate, 'PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01', failures, ['reportTheoremCoverageClosurePlanCoordinate']);
   requireEqual0(status.noProseOnlyTheoremPolicyCoordinate, 'PNP-NO-PROSE-ONLY-THEOREM-POLICY-2026-06-27-01', failures, ['noProseOnlyTheoremPolicyCoordinate']);
   requireEqual0(status.proofObligationLedgerCoordinate, 'PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01', failures, ['proofObligationLedgerCoordinate']);
   requireEqual0(status.gapLedgerCoordinate, 'PNP-GAP-LEDGER-2026-06-27-01', failures, ['gapLedgerCoordinate']);
