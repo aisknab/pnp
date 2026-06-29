@@ -74,6 +74,16 @@
       "generatedAtRuntime": true
     },
     {
+      "id": "report-theorem-coverage-closure-plan",
+      "kind": "report-theorem-coverage-closure-plan",
+      "sourceFiles": ["report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json", "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.md", "pcc-report-theorem-coverage-closure-plan0.mjs", "audits/report-theorem-coverage-closure-plan0.test.mjs"],
+      "command": "node pcc-report-theorem-coverage-closure-plan0.mjs --json",
+      "outputPath": "artifacts/report-theorem-coverage-closure-plan/latest-verdict.json",
+      "deterministic": true,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    },
+    {
       "id": "no-prose-only-theorem-policy",
       "kind": "report-claim-boundary-policy",
       "sourceFiles": ["report-bindings/NO_PROSE_ONLY_THEOREM_POLICY.json", "report-bindings/NO_PROSE_ONLY_THEOREM_POLICY.md", "pcc-no-prose-only-theorem-policy0.mjs", "audits/no-prose-only-theorem-policy0.test.mjs"],

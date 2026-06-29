@@ -17,6 +17,7 @@ const EXPECTED_RECORD_IDS = [
   'theorem-bindings',
   'report-theorem-inventory',
   'report-theorem-coverage-matrix',
+  'report-theorem-coverage-closure-plan',
   'no-prose-only-theorem-policy',
   'proof-obligation-ledger',
   'gap-ledger',
@@ -40,9 +41,8 @@ export async function AuditRegenerationLedger0(options = {}) {
   const ledgerPath = options.ledgerPath ?? LEDGER_PATH;
   const outputPath = options.outputPath ?? DEFAULT_OUTPUT_PATH;
   const writeOutput = options.writeOutput ?? true;
-
   try {
-    const read = await readLedger0({ root, ledgerPath, override: options.ledgerOverride });
+    const read = await readLedger0(root, ledgerPath, options.ledgerOverride);
     if (read.tag === 'reject') return writeAndReturn0(root, outputPath, writeOutput, read);
     const validation = validateLedger0(read.ledger);
     if (validation.tag === 'reject') return writeAndReturn0(root, outputPath, writeOutput, validation);
@@ -50,12 +50,7 @@ export async function AuditRegenerationLedger0(options = {}) {
     if (sourceDigest.tag === 'reject') return writeAndReturn0(root, outputPath, writeOutput, sourceDigest);
     const outputDigest = await digestOutputPolicy0(root, read.ledger.records);
     if (outputDigest.tag === 'reject') return writeAndReturn0(root, outputPath, writeOutput, outputDigest);
-
-    const deterministicRecordCount = read.ledger.records.filter((record) => record.deterministic === true).length;
-    const runtimeGeneratedRecordCount = read.ledger.records.filter((record) => record.generatedAtRuntime === true).length;
-    const committedOutputRecordCount = read.ledger.records.filter((record) => record.outputCommitted === true).length;
-
-    return writeAndReturn0(root, outputPath, writeOutput, {
+    const verdict = {
       tag: 'accept',
       kind: 'accept',
       checker: CHECKER,
@@ -68,9 +63,9 @@ export async function AuditRegenerationLedger0(options = {}) {
       fullArtifactRegenerationProved: false,
       publicTheoremEmissionAllowedByLedger: false,
       recordCount: read.ledger.records.length,
-      deterministicRecordCount,
-      runtimeGeneratedRecordCount,
-      committedOutputRecordCount,
+      deterministicRecordCount: read.ledger.records.filter((record) => record.deterministic === true).length,
+      runtimeGeneratedRecordCount: read.ledger.records.filter((record) => record.generatedAtRuntime === true).length,
+      committedOutputRecordCount: read.ledger.records.filter((record) => record.outputCommitted === true).length,
       sourceDigestLedgerSha256: sha256Text0(stableStringify0(sourceDigest.records)),
       outputPolicyDigestLedgerSha256: sha256Text0(stableStringify0(outputDigest.records)),
       records: sourceDigest.records,
@@ -80,13 +75,14 @@ export async function AuditRegenerationLedger0(options = {}) {
       activeFinalNodeIds: [],
       remainingBlockers: [...EXPECTED_BLOCKERS],
       outputPath: writeOutput ? outputPath : null,
-    });
+    };
+    return writeAndReturn0(root, outputPath, writeOutput, verdict);
   } catch (error) {
     return writeAndReturn0(root, outputPath, writeOutput, reject0('RegenerationLedger.UnhandledException', [], 'regeneration ledger audit threw unexpectedly', normalizeError0(error)));
   }
 }
 
-async function readLedger0({ root, ledgerPath, override }) {
+async function readLedger0(root, ledgerPath, override) {
   if (override !== undefined) {
     const bytes = Buffer.from(`${JSON.stringify(override, null, 2)}\n`, 'utf8');
     return { tag: 'accept', ledger: override, bytes };
@@ -108,39 +104,28 @@ function validateLedger0(ledger) {
   if (ledger.regenerationLedgerReady !== true) return reject0('RegenerationLedger.ReadyFlag', ['regenerationLedgerReady'], 'regenerationLedgerReady must be true');
   if (ledger.fullArtifactRegenerationProved !== false) return reject0('RegenerationLedger.FullProofFlag', ['fullArtifactRegenerationProved'], 'seed regeneration ledger cannot claim full regeneration proof');
   if (ledger.publicTheoremEmissionAllowedByLedger !== false) return reject0('RegenerationLedger.PublicEmissionByLedgerFlag', ['publicTheoremEmissionAllowedByLedger'], 'regeneration ledger cannot allow public theorem emission');
-
   const boundary = validateBoundary0(ledger.claimBoundary);
   if (boundary.tag === 'reject') return boundary;
-  if (!plain0(ledger.runtimeOutputPolicy)) return reject0('RegenerationLedger.RuntimePolicyShape', ['runtimeOutputPolicy'], 'runtimeOutputPolicy must be an object');
-  if (ledger.runtimeOutputPolicy.generatedVerdictsCommitted !== false) return reject0('RegenerationLedger.GeneratedVerdictsCommitted', ['runtimeOutputPolicy', 'generatedVerdictsCommitted'], 'generated verdicts must not be committed by default');
-  if (!nonempty0(ledger.runtimeOutputPolicy.generatedVerdictsLocation) || !nonempty0(ledger.runtimeOutputPolicy.rationale)) return reject0('RegenerationLedger.RuntimePolicyFields', ['runtimeOutputPolicy'], 'runtime output policy fields must be non-empty strings');
-
+  if (!plain0(ledger.runtimeOutputPolicy) || ledger.runtimeOutputPolicy.generatedVerdictsCommitted !== false || !nonempty0(ledger.runtimeOutputPolicy.generatedVerdictsLocation) || !nonempty0(ledger.runtimeOutputPolicy.rationale)) return reject0('RegenerationLedger.RuntimePolicyFields', ['runtimeOutputPolicy'], 'runtime output policy fields must be valid');
   if (!Array.isArray(ledger.records)) return reject0('RegenerationLedger.RecordsShape', ['records'], 'records must be an array');
   const actualIds = ledger.records.map((record) => record?.id);
   if (!sameArray0(actualIds, EXPECTED_RECORD_IDS)) return reject0('RegenerationLedger.RecordIds', ['records'], 'regeneration record ids must stay exact and ordered', { expected: EXPECTED_RECORD_IDS, actual: actualIds });
-  const ids = new Set();
+  const seen = new Set();
   for (let index = 0; index < ledger.records.length; index += 1) {
     const record = ledger.records[index];
     const recordPath = ['records', index];
     if (!plain0(record)) return reject0('RegenerationLedger.RecordShape', recordPath, 'record must be an object');
-    if (ids.has(record.id)) return reject0('RegenerationLedger.DuplicateRecordId', [...recordPath, 'id'], 'record id must be unique', { id: record.id });
-    ids.add(record.id);
-    for (const field of ['id', 'kind', 'command', 'outputPath']) {
-      if (!nonempty0(record[field])) return reject0('RegenerationLedger.RecordField', [...recordPath, field], 'record field must be a non-empty string');
-    }
+    if (seen.has(record.id)) return reject0('RegenerationLedger.DuplicateRecordId', [...recordPath, 'id'], 'record id must be unique', { id: record.id });
+    seen.add(record.id);
+    for (const field of ['id', 'kind', 'command', 'outputPath']) if (!nonempty0(record[field])) return reject0('RegenerationLedger.RecordField', [...recordPath, field], 'record field must be a non-empty string');
     const sourceCheck = validateStringArray0(record.sourceFiles, [...recordPath, 'sourceFiles'], true);
     if (sourceCheck.tag === 'reject') return sourceCheck;
-    for (const field of ['deterministic', 'outputCommitted', 'generatedAtRuntime']) {
-      if (typeof record[field] !== 'boolean') return reject0('RegenerationLedger.BooleanField', [...recordPath, field], `${field} must be boolean`);
-    }
+    for (const field of ['deterministic', 'outputCommitted', 'generatedAtRuntime']) if (typeof record[field] !== 'boolean') return reject0('RegenerationLedger.BooleanField', [...recordPath, field], `${field} must be boolean`);
     if (record.outputCommitted === true && record.generatedAtRuntime === true) return reject0('RegenerationLedger.OutputPolicyConflict', recordPath, 'output cannot be both committed and generated-at-runtime-only');
   }
-
-  if (!plain0(ledger.audit)) return reject0('RegenerationLedger.AuditShape', ['audit'], 'audit must be an object');
   const expectedAudit = { checker: CHECKER, script: 'scripts/audit-regeneration-ledger.mjs', test: 'audits/regeneration-ledger0.test.mjs', expectedAcceptTag: 'accept' };
-  for (const [key, expected] of Object.entries(expectedAudit)) {
-    if (ledger.audit[key] !== expected) return reject0('RegenerationLedger.AuditField', ['audit', key], 'audit field mismatch', { expected, actual: ledger.audit[key] });
-  }
+  if (!plain0(ledger.audit)) return reject0('RegenerationLedger.AuditShape', ['audit'], 'audit must be an object');
+  for (const [key, expected] of Object.entries(expectedAudit)) if (ledger.audit[key] !== expected) return reject0('RegenerationLedger.AuditField', ['audit', key], 'audit field mismatch', { expected, actual: ledger.audit[key] });
   return { tag: 'accept' };
 }
 
@@ -194,22 +179,8 @@ async function digestFile0(root, relativePath, pathArray) {
   }
 }
 
-function validateStringArray0(value, pathArray, nonEmpty) {
-  if (!Array.isArray(value)) return reject0('RegenerationLedger.StringArrayShape', pathArray, 'field must be an array of strings');
-  if (nonEmpty && value.length === 0) return reject0('RegenerationLedger.StringArrayEmpty', pathArray, 'field must not be empty');
-  for (let index = 0; index < value.length; index += 1) if (!nonempty0(value[index])) return reject0('RegenerationLedger.StringArrayEntry', [...pathArray, index], 'array entry must be a non-empty string');
-  return { tag: 'accept' };
-}
-
-function safeJoin0(root, relativePath) {
-  if (!nonempty0(relativePath) || path.isAbsolute(relativePath)) return null;
-  const resolvedRoot = path.resolve(root);
-  const resolved = path.resolve(resolvedRoot, relativePath);
-  const relative = path.relative(resolvedRoot, resolved);
-  if (relative.startsWith('..') || path.isAbsolute(relative)) return null;
-  return resolved;
-}
-
+function validateStringArray0(value, pathArray, nonEmpty) { if (!Array.isArray(value)) return reject0('RegenerationLedger.StringArrayShape', pathArray, 'field must be an array of strings'); if (nonEmpty && value.length === 0) return reject0('RegenerationLedger.StringArrayEmpty', pathArray, 'field must not be empty'); for (let index = 0; index < value.length; index += 1) if (!nonempty0(value[index])) return reject0('RegenerationLedger.StringArrayEntry', [...pathArray, index], 'array entry must be a non-empty string'); return { tag: 'accept' }; }
+function safeJoin0(root, relativePath) { if (!nonempty0(relativePath) || path.isAbsolute(relativePath)) return null; const resolvedRoot = path.resolve(root); const resolved = path.resolve(resolvedRoot, relativePath); const relative = path.relative(resolvedRoot, resolved); if (relative.startsWith('..') || path.isAbsolute(relative)) return null; return resolved; }
 function reject0(coord, pathArray, reason, witness = {}) { return { tag: 'reject', kind: 'reject', checker: CHECKER, version: VERSION, coord, path: pathArray, witness: { reason, ...witness }, publicTheoremEmissionAllowed: false, finalTheoremReady: false, activeFinalNodeIds: [], remainingBlockers: [...EXPECTED_BLOCKERS] }; }
 async function writeAndReturn0(root, outputPath, writeOutput, verdict) { if (writeOutput) { const absoluteOutputPath = path.join(root, outputPath); await mkdir(path.dirname(absoluteOutputPath), { recursive: true }); await writeFile(absoluteOutputPath, `${JSON.stringify(verdict, null, 2)}\n`, 'utf8'); } return { ...verdict, outputPath: writeOutput ? outputPath : null }; }
 function stableStringify0(value) { if (value === null || typeof value !== 'object') return JSON.stringify(value); if (Array.isArray(value)) return `[${value.map((entry) => stableStringify0(entry)).join(',')}]`; return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${stableStringify0(value[key])}`).join(',')}}`; }
@@ -219,21 +190,7 @@ function nonempty0(value) { return typeof value === 'string' && value.length > 0
 function sha256Hex0(bytes) { return createHash('sha256').update(bytes).digest('hex'); }
 function sha256Text0(text) { return sha256Hex0(Buffer.from(text, 'utf8')); }
 function normalizeError0(error) { return { name: error?.name ?? 'Error', message: error?.message ?? String(error), code: error?.code ?? null }; }
-
-function parseArgs0(argv) {
-  const options = { root: process.cwd(), ledgerPath: LEDGER_PATH, outputPath: DEFAULT_OUTPUT_PATH, writeOutput: true, json: false };
-  for (let index = 0; index < argv.length; index += 1) {
-    const arg = argv[index];
-    if (arg === '--json') options.json = true;
-    else if (arg === '--no-write') options.writeOutput = false;
-    else if (arg === '--root') options.root = requireValue0(argv, ++index, '--root');
-    else if (arg === '--ledger') options.ledgerPath = requireValue0(argv, ++index, '--ledger');
-    else if (arg === '--output') options.outputPath = requireValue0(argv, ++index, '--output');
-    else if (arg === '--help' || arg === '-h') { printHelp0(); process.exit(0); }
-    else throw new Error(`unknown argument: ${arg}`);
-  }
-  return options;
-}
+function parseArgs0(argv) { const options = { root: process.cwd(), ledgerPath: LEDGER_PATH, outputPath: DEFAULT_OUTPUT_PATH, writeOutput: true, json: false }; for (let index = 0; index < argv.length; index += 1) { const arg = argv[index]; if (arg === '--json') options.json = true; else if (arg === '--no-write') options.writeOutput = false; else if (arg === '--root') options.root = requireValue0(argv, ++index, '--root'); else if (arg === '--ledger') options.ledgerPath = requireValue0(argv, ++index, '--ledger'); else if (arg === '--output') options.outputPath = requireValue0(argv, ++index, '--output'); else if (arg === '--help' || arg === '-h') { printHelp0(); process.exit(0); } else throw new Error(`unknown argument: ${arg}`); } return options; }
 function requireValue0(argv, index, flag) { if (index >= argv.length) throw new Error(`${flag} requires a value`); return argv[index]; }
 function printHelp0() { console.log(`Usage: node scripts/audit-regeneration-ledger.mjs [options]\n\nOptions:\n  --json             Emit verdict JSON.\n  --no-write         Do not write artifacts/regeneration/latest-verdict.json.\n  --root <path>      Repository root. Defaults to cwd.\n  --ledger <path>    Regeneration ledger path relative to root.\n  --output <path>    Verdict output path relative to root.\n`); }
 async function main0() { let options; try { options = parseArgs0(process.argv.slice(2)); } catch (error) { const verdict = reject0('Cli.BadArgument', [], 'bad regeneration ledger CLI argument', normalizeError0(error)); console.error(JSON.stringify(verdict, null, 2)); process.exit(2); } const verdict = await AuditRegenerationLedger0(options); const rendered = JSON.stringify(verdict, null, 2); if (options.json || verdict.tag === 'accept') console.log(rendered); else console.error(rendered); process.exit(verdict.tag === 'accept' ? 0 : 1); }
