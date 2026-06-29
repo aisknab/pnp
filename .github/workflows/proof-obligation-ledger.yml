@@ -1,0 +1,25 @@
+name: proof-obligation-ledger
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  proof-obligation-ledger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run proof obligation ledger checker
+        run: node pcc-proof-obligation-ledger0.mjs --json
+      - name: Run proof obligation ledger tests
+        run: node --test audits/proof-obligation-ledger0.test.mjs
+      - name: Upload proof obligation ledger verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-obligation-ledger-latest-verdict
+          path: artifacts/proof-obligations/latest-verdict.json
