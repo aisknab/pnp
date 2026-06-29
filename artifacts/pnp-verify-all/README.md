@@ -20,43 +20,45 @@ The verifier currently checks:
 2. Node syntax for the core verifier and public audit scripts.
 3. The repository Node test suite.
 4. The theorem-to-checker binding ledger audit.
-5. The explicit trust-base audit and checksum ledger.
-6. The trust-base audit tests.
-7. The trust-base shrink-plan audit.
-8. The trust-base shrink-plan audit tests.
-9. The checker-totality seed audit.
-10. The checker-totality audit tests.
-11. The negative checker mutation seed audit.
-12. The negative checker mutation audit tests.
-13. The rule-family coverage ledger audit.
-14. The rule-family coverage audit tests.
-15. The checker dependency graph generation.
-16. The checker dependency graph tests.
-17. The checker no-circular-authority audit.
-18. The checker no-circular-authority audit tests.
-19. The NAND direct-wire semantics audit.
-20. The NAND direct-wire semantics tests.
-21. The NAND direct-wire small-model audit.
-22. The NAND direct-wire small-model tests.
-23. The locked NAND SAT small-model audit.
-24. The locked NAND SAT small-model tests.
-25. The complexity implication ledger audit.
-26. The complexity implication ledger tests.
-27. The no-hidden-oracle audit.
-28. The no-hidden-oracle audit tests.
-29. The fresh-clone verifier script tests.
-30. The container environment manifest and Dockerfile tests.
-31. The multi-platform CI manifest and workflow tests.
-32. The determinism audit harness tests.
-33. The artifact regeneration ledger audit.
-34. The artifact regeneration ledger tests.
-35. The release ladder audit.
-36. The release ladder tests.
-37. Cross-runtime minimal-kernel agreement.
-38. Independent verifier no-shared-code policy.
-39. Independent verifier audit tests.
-40. Independent Python verifier tests.
-41. Release-audit surface preservation.
+5. The proof obligation ledger audit.
+6. The proof obligation ledger tests.
+7. The explicit trust-base audit and checksum ledger.
+8. The trust-base audit tests.
+9. The trust-base shrink-plan audit.
+10. The trust-base shrink-plan audit tests.
+11. The checker-totality seed audit.
+12. The checker-totality audit tests.
+13. The negative checker mutation seed audit.
+14. The negative checker mutation audit tests.
+15. The rule-family coverage ledger audit.
+16. The rule-family coverage audit tests.
+17. The checker dependency graph generation.
+18. The checker dependency graph tests.
+19. The checker no-circular-authority audit.
+20. The checker no-circular-authority audit tests.
+21. The NAND direct-wire semantics audit.
+22. The NAND direct-wire semantics tests.
+23. The NAND direct-wire small-model audit.
+24. The NAND direct-wire small-model tests.
+25. The locked NAND SAT small-model audit.
+26. The locked NAND SAT small-model tests.
+27. The complexity implication ledger audit.
+28. The complexity implication ledger tests.
+29. The no-hidden-oracle audit.
+30. The no-hidden-oracle audit tests.
+31. The fresh-clone verifier script tests.
+32. The container environment manifest and Dockerfile tests.
+33. The multi-platform CI manifest and workflow tests.
+34. The determinism audit harness tests.
+35. The artifact regeneration ledger audit.
+36. The artifact regeneration ledger tests.
+37. The release ladder audit.
+38. The release ladder tests.
+39. Cross-runtime minimal-kernel agreement.
+40. Independent verifier no-shared-code policy.
+41. Independent verifier audit tests.
+42. Independent Python verifier tests.
+43. Release-audit surface preservation.
 
 The accepted verdict keeps the public-review boundary explicit:
 
