@@ -188,6 +188,16 @@
       "status": "machine-checked-seed",
       "dependencies": ["OBL-007-NANDDirectWireSemantics", "OBL-014-UnrestrictedFinalSoundnessBlocked"],
       "hashMode": "checker-computed"
+    },
+    {
+      "id": "OBL-017-CHGDirectBindingSeed",
+      "statement": "The historical Section 22 CHG theorem-ledger row is bound to current charge-ledger, materializer ownership, exact-size-equation, checker-hardening, theorem coverage, proof-obligation, and gap-ledger surfaces without claiming complete direct checker binding.",
+      "checker": "CheckCHGDirectBindingSeed0",
+      "sourceFiles": ["report-bindings/direct-bindings/CHG_DIRECT_BINDING_SEED.json", "report-bindings/direct-bindings/CHG_DIRECT_BINDING_SEED.md", "pcc-direct-bind-charge-ledger0.mjs", "report-bindings/REPORT_THEOREM_INVENTORY.json", "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json", "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json", "checker-totality/CHECKER_TOTALITY_AUDIT.json", "checker-mutations/NEGATIVE_CHECKER_MUTATIONS.json", "semantic-kernel/RULE_FAMILY_COVERAGE.json", "proof-obligations/GAP_LEDGER.json"],
+      "testFiles": ["audits/direct-bind-charge-ledger0.test.mjs"],
+      "status": "machine-checked-seed",
+      "dependencies": ["OBL-006-CheckerSoundnessSeedAudits", "OBL-014-UnrestrictedFinalSoundnessBlocked"],
+      "hashMode": "checker-computed"
     }
   ],
   "audit": {

@@ -1,0 +1,91 @@
+{
+  "kind": "PNPCHGDirectBindingSeed0",
+  "version": 0,
+  "coordinate": "PNP-DIRECT-BIND-CHG-CHARGE-LEDGER-SEED-2026-06-27-01",
+  "title": "CHG theorem direct-binding seed",
+  "purpose": "Bind the historical Section 22 CHG theorem-ledger row to current machine-readable charge, ownership, checker-hardening, theorem inventory, coverage matrix, closure plan, proof-obligation, and gap surfaces without claiming complete direct checker binding or theorem activation.",
+  "status": "chg-direct-binding-seed-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "chgDirectBindingSeedReady": true,
+  "releaseCriticalRow": false,
+  "directCheckerBindingComplete": false,
+  "fullHistoricalCHGTheoremDischarged": false,
+  "publicTheoremEmissionAllowedByBinding": false,
+  "linkedCoordinates": {
+    "reportTheoremInventory": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
+    "reportTheoremCoverageMatrix": "PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01",
+    "reportTheoremCoverageClosurePlan": "PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01",
+    "proofObligationLedger": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
+    "gapLedger": "PNP-GAP-LEDGER-2026-06-27-01",
+    "checkerTotalityAudit": "PNP-CHECKER-TOTALITY-AUDIT-2026-06-27-01",
+    "negativeCheckerMutationAudit": "PNP-NEGATIVE-CHECKER-MUTATIONS-2026-06-27-01",
+    "ruleFamilyCoverage": "PNP-RULE-FAMILY-COVERAGE-2026-06-27-01"
+  },
+  "boundInventoryEntry": {
+    "inventoryEntryId": "TL-002-CHG",
+    "coverageEntryId": "COV-002-CHG",
+    "closureEntryId": "DCC-002-CHG",
+    "sourceLabel": "CHG",
+    "expectedCoverageClass": "obligation-ledger-surface",
+    "expectedClosureStatus": "direct-binding-needed",
+    "expectedNextDirectBindingSurface": "pcc-direct-bind-charge-ledger0.mjs"
+  },
+  "coveredCHGComponents": [
+    {
+      "id": "CHG.GlobalChargeLedgerSurface",
+      "status": "represented-by-proof-obligation-ledger",
+      "evidence": "proof-obligations/OBLIGATION_LEDGER.json"
+    },
+    {
+      "id": "CHG.MaterializerOwnershipSurface",
+      "status": "represented-by-coverage-closure-plan",
+      "evidence": "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json"
+    },
+    {
+      "id": "CHG.ExactSizeEquationSurface",
+      "status": "represented-by-checker-hardening-ledgers",
+      "evidence": "checker-mutations/NEGATIVE_CHECKER_MUTATIONS.json"
+    },
+    {
+      "id": "CHG.ChargeSoundnessActivationBoundary",
+      "status": "represented-not-discharged",
+      "evidence": "proof-obligations/GAP_LEDGER.json"
+    }
+  ],
+  "evidenceSurfaces": [
+    "report-bindings/direct-bindings/CHG_DIRECT_BINDING_SEED.json",
+    "report-bindings/direct-bindings/CHG_DIRECT_BINDING_SEED.md",
+    "report-bindings/REPORT_THEOREM_INVENTORY.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json",
+    "proof-obligations/OBLIGATION_LEDGER.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "checker-totality/CHECKER_TOTALITY_AUDIT.json",
+    "checker-mutations/NEGATIVE_CHECKER_MUTATIONS.json",
+    "semantic-kernel/RULE_FAMILY_COVERAGE.json",
+    "pcc-direct-bind-charge-ledger0.mjs",
+    "audits/direct-bind-charge-ledger0.test.mjs",
+    "PNP_STATUS.json"
+  ],
+  "nonClaims": [
+    "This CHG direct-binding seed does not activate public theorem emission.",
+    "This CHG direct-binding seed does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This CHG direct-binding seed does not claim the full historical CHG theorem is completely discharged.",
+    "This CHG direct-binding seed does not flip the CHG coverage row to directCheckerBindingComplete.",
+    "This CHG direct-binding seed binds the CHG row to current explicit charge-ledger and checker-hardening surfaces and keeps the remaining closure work explicit."
+  ],
+  "audit": {
+    "checker": "CheckCHGDirectBindingSeed0",
+    "script": "pcc-direct-bind-charge-ledger0.mjs",
+    "test": "audits/direct-bind-charge-ledger0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}

@@ -1,0 +1,25 @@
+name: direct-bind-charge-ledger
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  direct-bind-charge-ledger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run CHG direct-binding seed checker
+        run: node pcc-direct-bind-charge-ledger0.mjs --json
+      - name: Run CHG direct-binding seed tests
+        run: node --test audits/direct-bind-charge-ledger0.test.mjs
+      - name: Upload CHG direct-binding seed verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: direct-bind-charge-ledger-latest-verdict
+          path: artifacts/direct-bind-charge-ledger/latest-verdict.json

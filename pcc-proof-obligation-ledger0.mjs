@@ -29,6 +29,7 @@ const EXPECTED_OBLIGATION_IDS = [
   'OBL-014-UnrestrictedFinalSoundnessBlocked',
   'OBL-015-FiniteToUnboundedFamilyAudit',
   'OBL-016-BaseDirectBindingSeed',
+  'OBL-017-CHGDirectBindingSeed',
 ];
 
 export async function CheckProofObligationLedger0(options = {}) {
@@ -43,48 +44,22 @@ export async function CheckProofObligationLedger0(options = {}) {
     if (validation.tag === 'reject') return writeAndReturn0(root, outputPath, writeOutput, validation);
     const digest = await digestObligations0(root, read.ledger.obligations);
     if (digest.tag === 'reject') return writeAndReturn0(root, outputPath, writeOutput, digest);
-    const verdict = {
-      tag: 'accept',
-      kind: 'accept',
-      checker: CHECKER,
-      version: VERSION,
-      coordinate: EXPECTED_COORDINATE,
-      claimStatus: 'proof-obligation-ledger-accepted-under-public-review-boundary',
-      ledgerPath,
-      ledgerSha256: sha256Hex0(read.bytes),
-      proofObligationLedgerReady: true,
-      fullProofObligationDischargeProved: false,
-      publicTheoremEmissionAllowedByLedger: false,
-      obligationCount: read.ledger.obligations.length,
-      obligationIds: [...EXPECTED_OBLIGATION_IDS],
-      statusCounts: countBy0(read.ledger.obligations.map((obligation) => obligation.status)),
-      sourceFileCount: digest.sourceFileCount,
-      testFileCount: digest.testFileCount,
-      obligationDigestLedgerSha256: sha256Text0(stableStringify0(digest.obligationDigests)),
-      obligationDigests: digest.obligationDigests,
-      publicTheoremEmissionAllowed: false,
-      finalTheoremReady: false,
-      activeFinalNodeIds: [],
-      remainingBlockers: [...EXPECTED_BLOCKERS],
-      outputPath: writeOutput ? outputPath : null,
-    };
-    return writeAndReturn0(root, outputPath, writeOutput, verdict);
+    return writeAndReturn0(root, outputPath, writeOutput, {
+      tag: 'accept', kind: 'accept', checker: CHECKER, version: VERSION, coordinate: EXPECTED_COORDINATE,
+      claimStatus: 'proof-obligation-ledger-accepted-under-public-review-boundary', ledgerPath, ledgerSha256: sha256Hex0(read.bytes),
+      proofObligationLedgerReady: true, fullProofObligationDischargeProved: false, publicTheoremEmissionAllowedByLedger: false,
+      obligationCount: read.ledger.obligations.length, obligationIds: [...EXPECTED_OBLIGATION_IDS], statusCounts: countBy0(read.ledger.obligations.map((obligation) => obligation.status)), sourceFileCount: digest.sourceFileCount, testFileCount: digest.testFileCount, obligationDigestLedgerSha256: sha256Text0(stableStringify0(digest.obligationDigests)), obligationDigests: digest.obligationDigests,
+      publicTheoremEmissionAllowed: false, finalTheoremReady: false, activeFinalNodeIds: [], remainingBlockers: [...EXPECTED_BLOCKERS], outputPath: writeOutput ? outputPath : null,
+    });
   } catch (error) {
     return writeAndReturn0(root, outputPath, writeOutput, reject0('ProofObligationLedger.UnhandledException', [], 'proof obligation ledger checker threw unexpectedly', normalizeError0(error)));
   }
 }
 
 async function readLedger0(root, ledgerPath, override) {
-  if (override !== undefined) {
-    const bytes = Buffer.from(`${JSON.stringify(override, null, 2)}\n`, 'utf8');
-    return { tag: 'accept', ledger: override, bytes };
-  }
-  try {
-    const bytes = await readFile(path.join(root, ledgerPath));
-    return { tag: 'accept', ledger: JSON.parse(bytes.toString('utf8')), bytes };
-  } catch (error) {
-    return reject0('ProofObligationLedger.ReadOrParseFailed', [ledgerPath], 'could not read or parse proof obligation ledger JSON', normalizeError0(error));
-  }
+  if (override !== undefined) return { tag: 'accept', ledger: override, bytes: Buffer.from(`${JSON.stringify(override, null, 2)}\n`, 'utf8') };
+  try { const bytes = await readFile(path.join(root, ledgerPath)); return { tag: 'accept', ledger: JSON.parse(bytes.toString('utf8')), bytes }; }
+  catch (error) { return reject0('ProofObligationLedger.ReadOrParseFailed', [ledgerPath], 'could not read or parse proof obligation ledger JSON', normalizeError0(error)); }
 }
 
 function validateLedger0(ledger) {
@@ -130,10 +105,7 @@ function validateObligation0(obligation, obligationPath, seen) {
   for (const field of ['id', 'statement', 'checker', 'status', 'hashMode']) if (!nonempty0(obligation[field])) return reject0('ProofObligationLedger.ObligationField', [...obligationPath, field], 'obligation field must be a non-empty string');
   if (!ALLOWED_STATUSES.includes(obligation.status)) return reject0('ProofObligationLedger.ObligationStatus', [...obligationPath, 'status'], 'obligation status is not allowed', { allowed: ALLOWED_STATUSES, actual: obligation.status });
   if (obligation.hashMode !== 'checker-computed') return reject0('ProofObligationLedger.HashMode', [...obligationPath, 'hashMode'], 'obligation hashMode must be checker-computed');
-  for (const [field, nonEmpty] of [['sourceFiles', true], ['testFiles', true], ['dependencies', false]]) {
-    const check = validateStringArray0(obligation[field], [...obligationPath, field], nonEmpty);
-    if (check.tag === 'reject') return check;
-  }
+  for (const [field, nonEmpty] of [['sourceFiles', true], ['testFiles', true], ['dependencies', false]]) { const check = validateStringArray0(obligation[field], [...obligationPath, field], nonEmpty); if (check.tag === 'reject') return check; }
   for (const dependency of obligation.dependencies) if (!seen.has(dependency)) return reject0('ProofObligationLedger.ForwardDependency', [...obligationPath, 'dependencies'], 'obligation dependencies must point to earlier obligations', { dependency });
   if (obligation.status === 'blocked-release-obligation' && !obligation.dependencies.some((id) => id.startsWith('OBL-013') || id.startsWith('OBL-010') || id.startsWith('OBL-011') || id.startsWith('OBL-012'))) return reject0('ProofObligationLedger.BlockedDependency', [...obligationPath, 'dependencies'], 'blocked release obligations must depend on represented activation or release-ladder obligations');
   return { tag: 'accept' };
@@ -145,37 +117,15 @@ async function digestObligations0(root, obligations) {
   let testFileCount = 0;
   for (const obligation of obligations) {
     const sourceFiles = [];
-    for (const relativePath of obligation.sourceFiles) {
-      const file = await digestFile0(root, relativePath, ['obligations', obligation.id, 'sourceFiles']);
-      if (file.tag === 'reject') return file;
-      sourceFiles.push(file);
-      sourceFileCount += 1;
-    }
+    for (const relativePath of obligation.sourceFiles) { const file = await digestFile0(root, relativePath, ['obligations', obligation.id, 'sourceFiles']); if (file.tag === 'reject') return file; sourceFiles.push(file); sourceFileCount += 1; }
     const testFiles = [];
-    for (const relativePath of obligation.testFiles) {
-      const file = await digestFile0(root, relativePath, ['obligations', obligation.id, 'testFiles']);
-      if (file.tag === 'reject') return file;
-      testFiles.push(file);
-      testFileCount += 1;
-    }
+    for (const relativePath of obligation.testFiles) { const file = await digestFile0(root, relativePath, ['obligations', obligation.id, 'testFiles']); if (file.tag === 'reject') return file; testFiles.push(file); testFileCount += 1; }
     obligationDigests.push({ id: obligation.id, status: obligation.status, checker: obligation.checker, sourceDigest: sha256Text0(stableStringify0(sourceFiles)), testDigest: sha256Text0(stableStringify0(testFiles)), sourceFiles, testFiles, dependencyDigest: sha256Text0(stableStringify0(obligation.dependencies)) });
   }
   return { tag: 'accept', obligationDigests, sourceFileCount, testFileCount };
 }
 
-async function digestFile0(root, relativePath, pathArray) {
-  const safePath = safeJoin0(root, relativePath);
-  if (safePath === null) return reject0('ProofObligationLedger.UnsafePath', [...pathArray, relativePath], 'file path must stay inside repository root');
-  try {
-    const info = await stat(safePath);
-    if (!info.isFile()) return reject0('ProofObligationLedger.PathNotFile', [...pathArray, relativePath], 'path must be a file');
-    const bytes = await readFile(safePath);
-    return { path: relativePath, sha256: sha256Hex0(bytes), size: bytes.length };
-  } catch (error) {
-    return reject0('ProofObligationLedger.PathMissing', [...pathArray, relativePath], 'file path is missing', normalizeError0(error));
-  }
-}
-
+async function digestFile0(root, relativePath, pathArray) { const safePath = safeJoin0(root, relativePath); if (safePath === null) return reject0('ProofObligationLedger.UnsafePath', [...pathArray, relativePath], 'file path must stay inside repository root'); try { const info = await stat(safePath); if (!info.isFile()) return reject0('ProofObligationLedger.PathNotFile', [...pathArray, relativePath], 'path must be a file'); const bytes = await readFile(safePath); return { path: relativePath, sha256: sha256Hex0(bytes), size: bytes.length }; } catch (error) { return reject0('ProofObligationLedger.PathMissing', [...pathArray, relativePath], 'file path is missing', normalizeError0(error)); } }
 function validateStringArray0(value, pathArray, nonEmpty) { if (!Array.isArray(value)) return reject0('ProofObligationLedger.StringArrayShape', pathArray, 'field must be an array of strings'); if (nonEmpty && value.length === 0) return reject0('ProofObligationLedger.StringArrayEmpty', pathArray, 'field must not be empty'); for (let index = 0; index < value.length; index += 1) if (!nonempty0(value[index])) return reject0('ProofObligationLedger.StringArrayEntry', [...pathArray, index], 'array entry must be a non-empty string'); return { tag: 'accept' }; }
 function safeJoin0(root, relativePath) { if (!nonempty0(relativePath) || path.isAbsolute(relativePath)) return null; const resolvedRoot = path.resolve(root); const resolved = path.resolve(resolvedRoot, relativePath); const relative = path.relative(resolvedRoot, resolved); if (relative.startsWith('..') || path.isAbsolute(relative)) return null; return resolved; }
 function reject0(coord, pathArray, reason, witness = {}) { return { tag: 'reject', kind: 'reject', checker: CHECKER, version: VERSION, coord, path: pathArray, witness: { reason, ...witness }, publicTheoremEmissionAllowed: false, finalTheoremReady: false, activeFinalNodeIds: [], remainingBlockers: [...EXPECTED_BLOCKERS] }; }
