@@ -17,6 +17,7 @@
   "canonicalReportCoordinate": "historical-final-pnp-proof-report-hardened-7072f8d",
   "successorReportCoordinate": "PNP-REPORT-SEAL-2026-06-27-01",
   "theoremBindingLedgerCoordinate": "REPORT-THEOREM-BINDINGS-2026-06-27-01",
+  "proofObligationLedgerCoordinate": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
   "minimalKernelCoordinate": "PNP-MINIMAL-KERNEL-2026-06-27-01",
   "trustBaseCoordinate": "PNP-TRUST-BASE-2026-06-27-01",
   "trustBaseShrinkPlanCoordinate": "PNP-TRUST-BASE-SHRINK-PLAN-2026-06-27-01",
@@ -44,6 +45,11 @@
       "id": "theorem-binding-ledger-audit",
       "command": "node scripts/audit-report-theorem-bindings.mjs --json",
       "outputKind": "accept|reject"
+    },
+    {
+      "id": "proof-obligation-ledger-audit",
+      "command": "node pcc-proof-obligation-ledger0.mjs --json",
+      "outputKind": "artifacts/proof-obligations/latest-verdict.json"
     },
     {
       "id": "minimal-kernel-cross-verify",
@@ -154,6 +160,7 @@
   "nonClaims": [
     "This status file does not activate public theorem emission.",
     "This status file does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "The proof obligation ledger records current obligations, dependencies, source files, tests, and computed hashes, but does not by itself discharge blocked final soundness.",
     "The checker-totality seed audit does not yet claim every historical checker has been fuzzed for totality.",
     "The negative checker mutation suite is a seed suite and does not yet claim full generated mutation coverage.",
     "The rule-family coverage ledger is a seed ledger and does not yet claim full historical rule-family coverage.",
