@@ -64,6 +64,16 @@
       "generatedAtRuntime": true
     },
     {
+      "id": "report-theorem-coverage-matrix",
+      "kind": "report-theorem-coverage-matrix",
+      "sourceFiles": ["report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json", "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.md", "pcc-report-theorem-coverage-matrix0.mjs", "audits/report-theorem-coverage-matrix0.test.mjs"],
+      "command": "node pcc-report-theorem-coverage-matrix0.mjs --json",
+      "outputPath": "artifacts/report-theorem-coverage-matrix/latest-verdict.json",
+      "deterministic": true,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    },
+    {
       "id": "no-prose-only-theorem-policy",
       "kind": "report-claim-boundary-policy",
       "sourceFiles": ["report-bindings/NO_PROSE_ONLY_THEOREM_POLICY.json", "report-bindings/NO_PROSE_ONLY_THEOREM_POLICY.md", "pcc-no-prose-only-theorem-policy0.mjs", "audits/no-prose-only-theorem-policy0.test.mjs"],
