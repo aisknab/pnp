@@ -30,6 +30,7 @@ const EXPECTED_OBLIGATION_IDS = [
   'OBL-015-FiniteToUnboundedFamilyAudit',
   'OBL-016-BaseDirectBindingSeed',
   'OBL-017-CHGDirectBindingSeed',
+  'OBL-018-ModeDirectBindingSeed',
 ];
 
 export async function CheckProofObligationLedger0(options = {}) {
