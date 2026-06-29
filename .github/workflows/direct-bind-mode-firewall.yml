@@ -1,0 +1,25 @@
+name: direct-bind-mode-firewall
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  direct-bind-mode-firewall:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run Mode direct-binding seed checker
+        run: node pcc-direct-bind-mode-firewall0.mjs --json
+      - name: Run Mode direct-binding seed tests
+        run: node --test audits/direct-bind-mode-firewall0.test.mjs
+      - name: Upload Mode direct-binding seed verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: direct-bind-mode-firewall-latest-verdict
+          path: artifacts/direct-bind-mode-firewall/latest-verdict.json
