@@ -1,0 +1,25 @@
+name: release-ladder
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  release-ladder:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run release ladder checker
+        run: node pcc-release-ladder0.mjs --json
+      - name: Run release ladder tests
+        run: node --test audits/release-ladder0.test.mjs
+      - name: Upload release ladder verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-ladder-latest-verdict
+          path: artifacts/release-ladder/latest-verdict.json

@@ -50,11 +50,13 @@ The verifier currently checks:
 32. The determinism audit harness tests.
 33. The artifact regeneration ledger audit.
 34. The artifact regeneration ledger tests.
-35. Cross-runtime minimal-kernel agreement.
-36. Independent verifier no-shared-code policy.
-37. Independent verifier audit tests.
-38. Independent Python verifier tests.
-39. Release-audit surface preservation.
+35. The release ladder audit.
+36. The release ladder tests.
+37. Cross-runtime minimal-kernel agreement.
+38. Independent verifier no-shared-code policy.
+39. Independent verifier audit tests.
+40. Independent Python verifier tests.
+41. Release-audit surface preservation.
 
 The accepted verdict keeps the public-review boundary explicit:
 

@@ -33,6 +33,7 @@ export async function RunPNPVerifyAll0(options = {}) {
     'pcc-nand-small-models0.mjs',
     'pcc-locked-nand-sat-small-models0.mjs',
     'pcc-complexity-ledger0.mjs',
+    'pcc-release-ladder0.mjs',
     'semantics/nand-direct-wire-reference.mjs',
     'semantics/nand-small-models.mjs',
     'semantics/locked-nand-sat-small-models.mjs',
@@ -96,6 +97,8 @@ export async function RunPNPVerifyAll0(options = {}) {
     { id: 'determinism-audit-tests', command: process.execPath, args: ['--test', 'audits/determinism0.test.mjs'], kind: 'process' },
     { id: 'regeneration-ledger-audit', command: process.execPath, args: ['scripts/audit-regeneration-ledger.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'regeneration-ledger-tests', command: process.execPath, args: ['--test', 'audits/regeneration-ledger0.test.mjs'], kind: 'process' },
+    { id: 'release-ladder-audit', command: process.execPath, args: ['pcc-release-ladder0.mjs', '--json'], kind: 'json', expectTag: 'accept' },
+    { id: 'release-ladder-tests', command: process.execPath, args: ['--test', 'audits/release-ladder0.test.mjs'], kind: 'process' },
     { id: 'minimal-kernel-cross-verify', command: process.execPath, args: ['scripts/cross-verify.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'independent-no-shared-code-audit', command: process.execPath, args: ['scripts/audit-independent-verifiers-no-shared-code.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'independent-no-shared-code-tests', command: process.execPath, args: ['--test', 'audits/independent-verifiers-no-shared-code.test.mjs'], kind: 'process' },
@@ -140,6 +143,7 @@ export async function RunPNPVerifyAll0(options = {}) {
     multiPlatformCICoordinate: 'PNP-MULTI-PLATFORM-CI-2026-06-27-01',
     determinismAuditCoordinate: 'PNP-DETERMINISM-AUDIT-2026-06-27-01',
     regenerationLedgerCoordinate: 'PNP-REGENERATION-LEDGER-2026-06-27-01',
+    releaseLadderCoordinate: 'PNP-RELEASE-LADDER-2026-06-27-01',
     publicTheoremEmissionAllowed: false,
     finalTheoremReady: false,
     activeFinalNodeIds: [],
@@ -192,6 +196,7 @@ async function verifyStatusFile0(root) {
   requireEqual0(status.multiPlatformCICoordinate, 'PNP-MULTI-PLATFORM-CI-2026-06-27-01', failures, ['multiPlatformCICoordinate']);
   requireEqual0(status.determinismAuditCoordinate, 'PNP-DETERMINISM-AUDIT-2026-06-27-01', failures, ['determinismAuditCoordinate']);
   requireEqual0(status.regenerationLedgerCoordinate, 'PNP-REGENERATION-LEDGER-2026-06-27-01', failures, ['regenerationLedgerCoordinate']);
+  requireEqual0(status.releaseLadderCoordinate, 'PNP-RELEASE-LADDER-2026-06-27-01', failures, ['releaseLadderCoordinate']);
   requireEqual0(status.noSharedCodePolicyCoordinate, 'PNP-INDEPENDENT-VERIFIERS-NO-SHARED-CODE-2026-06-27-01', failures, ['noSharedCodePolicyCoordinate']);
 
   if (failures.length !== 0) return { tag: 'reject', id: 'status-file-consistency', coord: 'StatusFile.ValidationFailed', path: failures[0].path, witness: { failures } };

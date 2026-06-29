@@ -35,6 +35,7 @@
   "multiPlatformCICoordinate": "PNP-MULTI-PLATFORM-CI-2026-06-27-01",
   "determinismAuditCoordinate": "PNP-DETERMINISM-AUDIT-2026-06-27-01",
   "regenerationLedgerCoordinate": "PNP-REGENERATION-LEDGER-2026-06-27-01",
+  "releaseLadderCoordinate": "PNP-RELEASE-LADDER-2026-06-27-01",
   "noSharedCodePolicyCoordinate": "PNP-INDEPENDENT-VERIFIERS-NO-SHARED-CODE-2026-06-27-01",
   "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-NO-HIDDEN-ORACLE-01",
   "lastVerifiedCommit": "current-checkout",
@@ -135,6 +136,11 @@
       "outputKind": "artifacts/regeneration/latest-verdict.json"
     },
     {
+      "id": "release-ladder-audit",
+      "command": "node pcc-release-ladder0.mjs --json",
+      "outputKind": "artifacts/release-ladder/latest-verdict.json"
+    },
+    {
       "id": "independent-no-shared-code-audit",
       "command": "npm run independent:no-shared-code",
       "outputKind": "accept|reject"
@@ -163,6 +169,7 @@
     "The multi-platform CI matrix verifies a portable Node core subset and does not yet prove full bit-identical behavior across every operating system.",
     "The determinism audit provides a replay harness and CI smoke comparison but does not yet prove full cross-platform byte-for-byte determinism.",
     "The regeneration ledger records source files, commands, and output policies but does not by itself prove every artifact has been regenerated in every environment.",
+    "The release ladder records explicit status transitions but does not clear the current activation blockers.",
     "The historical canonical report may be superseded by successor public-review reports, but this status file records the current non-activation boundary."
   ]
 }

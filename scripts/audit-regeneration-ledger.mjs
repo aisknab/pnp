@@ -25,6 +25,7 @@ const EXPECTED_RECORD_IDS = [
   'container-environment',
   'multi-platform-ci',
   'determinism-audit',
+  'release-ladder',
   'regeneration-ledger',
 ];
 

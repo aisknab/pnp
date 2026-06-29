@@ -1,0 +1,148 @@
+{
+  "kind": "PNPReleaseLadder0",
+  "version": 0,
+  "coordinate": "PNP-RELEASE-LADDER-2026-06-27-01",
+  "title": "Public theorem release activation ladder",
+  "purpose": "Represent the explicit release-status ladder separating public-review self-verification evidence from final public theorem emission.",
+  "status": "release-ladder-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "releaseLadderReady": true,
+  "publicTheoremEmissionAllowedByLadder": false,
+  "finalTheoremReadyByLadder": false,
+  "activeFinalNodeIdsByLadder": [],
+  "currentStatus": {
+    "historicalSealedProofReportExists": true,
+    "publicReviewDocumentationCoordinateExists": true,
+    "successorReportSealExists": true,
+    "publicTheoremEmissionDisabled": true,
+    "internalProofStackAcceptedUnderCheckerTrustModel": true
+  },
+  "linkedCoordinates": {
+    "status": "PNPStatus0",
+    "successorReportSeal": "PNP-REPORT-SEAL-2026-06-27-01",
+    "trustBase": "PNP-TRUST-BASE-2026-06-27-01",
+    "trustBaseShrinkPlan": "PNP-TRUST-BASE-SHRINK-PLAN-2026-06-27-01",
+    "minimalKernel": "PNP-MINIMAL-KERNEL-2026-06-27-01",
+    "nandSemantics": "PNP-NAND-DIRECT-WIRE-SEMANTICS-2026-06-27-01",
+    "lockedNANDSATSmallModels": "PNP-LOCKED-NAND-SAT-SMALL-MODELS-2026-06-27-01",
+    "complexityLedger": "PNP-COMPLEXITY-LEDGER-2026-06-27-01",
+    "determinismAudit": "PNP-DETERMINISM-AUDIT-2026-06-27-01",
+    "regenerationLedger": "PNP-REGENERATION-LEDGER-2026-06-27-01"
+  },
+  "ladder": [
+    {
+      "id": "HistoricalSealedReportExists",
+      "state": "complete",
+      "activationEffect": "documents historical sealed theorem-emission artifact without mutating it",
+      "dependencies": []
+    },
+    {
+      "id": "PublicReviewBoundaryDeclared",
+      "state": "complete",
+      "activationEffect": "declares current public-review boundary and disables theorem emission",
+      "dependencies": ["HistoricalSealedReportExists"]
+    },
+    {
+      "id": "SuccessorReportSealExists",
+      "state": "complete",
+      "activationEffect": "records successor report/seal coordinate under public-review language",
+      "dependencies": ["PublicReviewBoundaryDeclared"]
+    },
+    {
+      "id": "TrustBaseExplicitReady",
+      "state": "complete",
+      "activationEffect": "all current external assumptions are represented as explicit trust-base items",
+      "dependencies": ["PublicReviewBoundaryDeclared"]
+    },
+    {
+      "id": "TrustBaseShrinkPlanReady",
+      "state": "complete",
+      "activationEffect": "trust-base reduction plan is represented and auditable",
+      "dependencies": ["TrustBaseExplicitReady"]
+    },
+    {
+      "id": "OneCommandVerifierReady",
+      "state": "complete",
+      "activationEffect": "repository-level verifier entrypoint exists and emits a boundary-preserving verdict",
+      "dependencies": ["TrustBaseExplicitReady"]
+    },
+    {
+      "id": "MinimalKernelCoordinateReady",
+      "state": "complete",
+      "activationEffect": "minimal kernel coordinate exists and is cross-verifiable",
+      "dependencies": ["OneCommandVerifierReady"]
+    },
+    {
+      "id": "MathematicalSemanticsSeedReady",
+      "state": "complete",
+      "activationEffect": "NAND semantics, bounded small models, locked-NAND SAT seeds, and complexity ledger are represented",
+      "dependencies": ["MinimalKernelCoordinateReady"]
+    },
+    {
+      "id": "SourceSurfaceHardeningReady",
+      "state": "complete",
+      "activationEffect": "no-hidden-oracle, checker-totality, mutation, coverage, and no-circular-authority seed audits are represented",
+      "dependencies": ["OneCommandVerifierReady"]
+    },
+    {
+      "id": "ReproducibilitySeedReady",
+      "state": "complete",
+      "activationEffect": "fresh clone, container, multi-platform, determinism, and regeneration seed audits are represented",
+      "dependencies": ["OneCommandVerifierReady"]
+    },
+    {
+      "id": "ReleaseLadderReady",
+      "state": "complete",
+      "activationEffect": "status transitions are explicit and machine-checked by this ledger",
+      "dependencies": ["ReproducibilitySeedReady", "MathematicalSemanticsSeedReady", "SourceSurfaceHardeningReady"]
+    },
+    {
+      "id": "UnrestrictedFinalSoundnessRepresented",
+      "state": "blocked",
+      "activationEffect": "would represent unrestricted final soundness rather than bounded seed evidence",
+      "dependencies": ["ReleaseLadderReady"],
+      "blocker": "Release.UnrestrictedFinalSoundness"
+    },
+    {
+      "id": "InternalTheoremActivationCandidate",
+      "state": "blocked",
+      "activationEffect": "would permit internal activation candidate only after unrestricted final soundness is represented",
+      "dependencies": ["UnrestrictedFinalSoundnessRepresented"],
+      "blocker": "Release.UnrestrictedFinalSoundness"
+    },
+    {
+      "id": "PublicTheoremEmissionCandidate",
+      "state": "blocked",
+      "activationEffect": "would permit public theorem emission only after all blockers clear",
+      "dependencies": ["InternalTheoremActivationCandidate"],
+      "blocker": "ExternalReview.Acceptance"
+    }
+  ],
+  "transitionRules": [
+    "The project does not jump from accepted package evidence to public theorem emission.",
+    "Each activation status must be represented as an explicit ordered ladder entry.",
+    "No blocked status may be treated as complete while its blocker appears in remainingBlockers.",
+    "PublicTheoremEmissionCandidate may be complete only when publicTheoremEmissionAllowed is true, finalTheoremReady is true, and activeFinalNodeIds is non-empty.",
+    "The current ledger must keep publicTheoremEmissionAllowed false, finalTheoremReady false, and activeFinalNodeIds empty."
+  ],
+  "nonClaims": [
+    "This release ladder does not activate public theorem emission.",
+    "This release ladder does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This release ladder records ordered status transitions; it does not by itself discharge unrestricted final soundness.",
+    "This release ladder treats external review as a reproducibility and audit layer, not as a substitute for repository-internal evidence."
+  ],
+  "audit": {
+    "checker": "CheckReleaseLadder0",
+    "script": "pcc-release-ladder0.mjs",
+    "test": "audits/release-ladder0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}

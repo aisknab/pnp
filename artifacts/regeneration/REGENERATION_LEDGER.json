@@ -154,6 +154,16 @@
       "generatedAtRuntime": true
     },
     {
+      "id": "release-ladder",
+      "kind": "release-gate-ledger",
+      "sourceFiles": ["release/RELEASE_LADDER.json", "RELEASE_LADDER.md", "pcc-release-ladder0.mjs", "audits/release-ladder0.test.mjs"],
+      "command": "node pcc-release-ladder0.mjs --json",
+      "outputPath": "artifacts/release-ladder/latest-verdict.json",
+      "deterministic": true,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    },
+    {
       "id": "regeneration-ledger",
       "kind": "regeneration-ledger",
       "sourceFiles": ["artifacts/regeneration/REGENERATION_LEDGER.json", "scripts/audit-regeneration-ledger.mjs", "audits/regeneration-ledger0.test.mjs"],
