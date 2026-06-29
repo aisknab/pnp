@@ -37,6 +37,7 @@ export async function RunPNPVerifyAll0(options = {}) {
     'pcc-proof-obligation-ledger0.mjs',
     'pcc-gap-ledger0.mjs',
     'pcc-finite-to-unbounded-family-audit0.mjs',
+    'pcc-no-prose-only-theorem-policy0.mjs',
     'semantics/nand-direct-wire-reference.mjs',
     'semantics/nand-small-models.mjs',
     'semantics/locked-nand-sat-small-models.mjs',
@@ -70,6 +71,8 @@ export async function RunPNPVerifyAll0(options = {}) {
 
   const requiredSteps = [
     { id: 'theorem-binding-ledger-audit', command: process.execPath, args: ['scripts/audit-report-theorem-bindings.mjs', '--json'], kind: 'json', expectTag: 'accept' },
+    { id: 'no-prose-only-theorem-policy-audit', command: process.execPath, args: ['pcc-no-prose-only-theorem-policy0.mjs', '--json'], kind: 'json', expectTag: 'accept' },
+    { id: 'no-prose-only-theorem-policy-tests', command: process.execPath, args: ['--test', 'audits/no-prose-only-theorem-policy0.test.mjs'], kind: 'process' },
     { id: 'proof-obligation-ledger-audit', command: process.execPath, args: ['pcc-proof-obligation-ledger0.mjs', '--json'], kind: 'json', expectTag: 'accept' },
     { id: 'proof-obligation-ledger-tests', command: process.execPath, args: ['--test', 'audits/proof-obligation-ledger0.test.mjs'], kind: 'process' },
     { id: 'gap-ledger-audit', command: process.execPath, args: ['pcc-gap-ledger0.mjs', '--json'], kind: 'json', expectTag: 'accept' },
@@ -135,6 +138,7 @@ export async function RunPNPVerifyAll0(options = {}) {
     claimStatus: 'internal-proof-certificate-stack-accepted-under-public-review-boundary',
     statusPath: PNP_STATUS_PATH,
     statusSha256: statusStep.statusSha256,
+    noProseOnlyTheoremPolicyCoordinate: 'PNP-NO-PROSE-ONLY-THEOREM-POLICY-2026-06-27-01',
     proofObligationLedgerCoordinate: 'PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01',
     gapLedgerCoordinate: 'PNP-GAP-LEDGER-2026-06-27-01',
     finiteToUnboundedFamilyAuditCoordinate: 'PNP-FINITE-TO-UNBOUNDED-FAMILY-AUDIT-2026-06-27-01',
@@ -191,6 +195,7 @@ async function verifyStatusFile0(root) {
   requireEqual0(status.pnpVerifyCommand, 'npm run pnp:verify', failures, ['pnpVerifyCommand']);
   requireEqual0(status.minimalKernelCoordinate, 'PNP-MINIMAL-KERNEL-2026-06-27-01', failures, ['minimalKernelCoordinate']);
   requireEqual0(status.theoremBindingLedgerCoordinate, 'REPORT-THEOREM-BINDINGS-2026-06-27-01', failures, ['theoremBindingLedgerCoordinate']);
+  requireEqual0(status.noProseOnlyTheoremPolicyCoordinate, 'PNP-NO-PROSE-ONLY-THEOREM-POLICY-2026-06-27-01', failures, ['noProseOnlyTheoremPolicyCoordinate']);
   requireEqual0(status.proofObligationLedgerCoordinate, 'PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01', failures, ['proofObligationLedgerCoordinate']);
   requireEqual0(status.gapLedgerCoordinate, 'PNP-GAP-LEDGER-2026-06-27-01', failures, ['gapLedgerCoordinate']);
   requireEqual0(status.finiteToUnboundedFamilyAuditCoordinate, 'PNP-FINITE-TO-UNBOUNDED-FAMILY-AUDIT-2026-06-27-01', failures, ['finiteToUnboundedFamilyAuditCoordinate']);

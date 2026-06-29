@@ -54,6 +54,16 @@
       "generatedAtRuntime": true
     },
     {
+      "id": "no-prose-only-theorem-policy",
+      "kind": "report-claim-boundary-policy",
+      "sourceFiles": ["report-bindings/NO_PROSE_ONLY_THEOREM_POLICY.json", "report-bindings/NO_PROSE_ONLY_THEOREM_POLICY.md", "pcc-no-prose-only-theorem-policy0.mjs", "audits/no-prose-only-theorem-policy0.test.mjs"],
+      "command": "node pcc-no-prose-only-theorem-policy0.mjs --json",
+      "outputPath": "artifacts/no-prose-only-theorem-policy/latest-verdict.json",
+      "deterministic": true,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    },
+    {
       "id": "proof-obligation-ledger",
       "kind": "proof-obligation-ledger",
       "sourceFiles": ["proof-obligations/OBLIGATION_LEDGER.json", "proof-obligations/README.md", "pcc-proof-obligation-ledger0.mjs", "audits/proof-obligation-ledger0.test.mjs"],
