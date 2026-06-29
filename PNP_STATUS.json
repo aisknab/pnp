@@ -19,6 +19,7 @@
   "theoremBindingLedgerCoordinate": "REPORT-THEOREM-BINDINGS-2026-06-27-01",
   "reportTheoremInventoryCoordinate": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
   "reportTheoremCoverageMatrixCoordinate": "PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01",
+  "reportTheoremCoverageClosurePlanCoordinate": "PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01",
   "noProseOnlyTheoremPolicyCoordinate": "PNP-NO-PROSE-ONLY-THEOREM-POLICY-2026-06-27-01",
   "proofObligationLedgerCoordinate": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
   "gapLedgerCoordinate": "PNP-GAP-LEDGER-2026-06-27-01",
@@ -60,6 +61,11 @@
       "id": "report-theorem-coverage-matrix-audit",
       "command": "node pcc-report-theorem-coverage-matrix0.mjs --json",
       "outputKind": "artifacts/report-theorem-coverage-matrix/latest-verdict.json"
+    },
+    {
+      "id": "report-theorem-coverage-closure-plan-audit",
+      "command": "node pcc-report-theorem-coverage-closure-plan0.mjs --json",
+      "outputKind": "artifacts/report-theorem-coverage-closure-plan/latest-verdict.json"
     },
     {
       "id": "no-prose-only-theorem-policy",
@@ -193,6 +199,7 @@
     "The theorem-binding ledger is currently a release-critical spine ledger and does not yet claim every numbered theorem environment is bound.",
     "The report theorem inventory records the historical Section 22 theorem-ledger rows but does not yet claim every numbered theorem environment has been inventoried or checker-bound.",
     "The report theorem coverage matrix maps every current Section 22 inventory row to explicit evidence surfaces, but does not yet claim every row has a complete direct checker binding.",
+    "The report theorem coverage closure plan maps every current coverage row to a future direct-checker-binding task, but does not complete those bindings.",
     "The no-prose-only theorem policy forbids release-critical prose-only activation, but does not yet prove exhaustive historical theorem inventory coverage.",
     "The proof obligation ledger records current obligations, dependencies, source files, tests, and computed hashes, but does not by itself discharge blocked final soundness.",
     "The gap ledger records known unresolved, externally trusted, bounded-seed-only, and release-blocking gaps, but does not close them.",
