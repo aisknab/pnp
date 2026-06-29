@@ -11,12 +11,7 @@ const LEDGER_PATH = 'proof-obligations/OBLIGATION_LEDGER.json';
 const DEFAULT_OUTPUT_PATH = 'artifacts/proof-obligations/latest-verdict.json';
 const EXPECTED_COORDINATE = 'PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01';
 const EXPECTED_BLOCKERS = ['Release.UnrestrictedFinalSoundness', 'ExternalReview.Acceptance'];
-const ALLOWED_STATUSES = [
-  'machine-checked-seed',
-  'represented-not-activated',
-  'explicit-external-trust',
-  'blocked-release-obligation',
-];
+const ALLOWED_STATUSES = ['machine-checked-seed', 'represented-not-activated', 'explicit-external-trust', 'blocked-release-obligation'];
 const EXPECTED_OBLIGATION_IDS = [
   'OBL-001-ClaimBoundaryNonActivation',
   'OBL-002-TrustBaseExplicit',
@@ -32,6 +27,7 @@ const EXPECTED_OBLIGATION_IDS = [
   'OBL-012-ReproducibilityStack',
   'OBL-013-ReleaseLadderNonActivation',
   'OBL-014-UnrestrictedFinalSoundnessBlocked',
+  'OBL-015-FiniteToUnboundedFamilyAudit',
 ];
 
 export async function CheckProofObligationLedger0(options = {}) {
@@ -50,8 +46,6 @@ export async function CheckProofObligationLedger0(options = {}) {
     const digest = await digestObligations0({ root, obligations: read.ledger.obligations });
     if (digest.tag === 'reject') return writeAndReturn0(root, outputPath, writeOutput, digest);
 
-    const statusCounts = countBy0(read.ledger.obligations.map((obligation) => obligation.status));
-
     const verdict = {
       tag: 'accept',
       kind: 'accept',
@@ -65,8 +59,8 @@ export async function CheckProofObligationLedger0(options = {}) {
       fullProofObligationDischargeProved: false,
       publicTheoremEmissionAllowedByLedger: false,
       obligationCount: read.ledger.obligations.length,
-      obligationIds: EXPECTED_OBLIGATION_IDS,
-      statusCounts,
+      obligationIds: [...EXPECTED_OBLIGATION_IDS],
+      statusCounts: countBy0(read.ledger.obligations.map((obligation) => obligation.status)),
       sourceFileCount: digest.sourceFileCount,
       testFileCount: digest.testFileCount,
       obligationDigestLedgerSha256: sha256Text0(stableStringify0(digest.obligationDigests)),
@@ -127,8 +121,7 @@ function validateLedger0(ledger) {
   const seen = new Set();
   for (let index = 0; index < ledger.obligations.length; index += 1) {
     const obligation = ledger.obligations[index];
-    const obligationPath = ['obligations', index];
-    const check = validateObligation0(obligation, obligationPath, seen);
+    const check = validateObligation0(obligation, ['obligations', index], seen);
     if (check.tag === 'reject') return check;
     seen.add(obligation.id);
   }
@@ -143,7 +136,6 @@ function validateLedger0(ledger) {
   for (const [key, expected] of Object.entries(expectedAudit)) {
     if (ledger.audit[key] !== expected) return reject0('ProofObligationLedger.AuditField', ['audit', key], 'audit field mismatch', { expected, actual: ledger.audit[key] });
   }
-
   return { tag: 'accept' };
 }
 
