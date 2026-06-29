@@ -17,6 +17,7 @@ const EXPECTED_RECORD_IDS = [
   'theorem-bindings',
   'proof-obligation-ledger',
   'gap-ledger',
+  'finite-to-unbounded-family-audit',
   'minimal-kernel-cross-verify',
   'nand-semantics',
   'nand-small-models',
@@ -148,7 +149,6 @@ function validateLedger0(ledger) {
   for (const [key, expected] of Object.entries(expectedAudit)) {
     if (ledger.audit[key] !== expected) return reject0('RegenerationLedger.AuditField', ['audit', key], 'audit field mismatch', { expected, actual: ledger.audit[key] });
   }
-
   return { tag: 'accept' };
 }
 
