@@ -65,7 +65,6 @@
     "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json",
     "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json",
     "kernel/PNP_MINIMAL_KERNEL.json",
-    "kernel/README.md",
     "scripts/cross-verify.mjs",
     "proof-obligations/OBLIGATION_LEDGER.json",
     "proof-obligations/GAP_LEDGER.json",
