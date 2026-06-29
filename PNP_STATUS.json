@@ -17,6 +17,7 @@
   "canonicalReportCoordinate": "historical-final-pnp-proof-report-hardened-7072f8d",
   "successorReportCoordinate": "PNP-REPORT-SEAL-2026-06-27-01",
   "theoremBindingLedgerCoordinate": "REPORT-THEOREM-BINDINGS-2026-06-27-01",
+  "reportTheoremInventoryCoordinate": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
   "noProseOnlyTheoremPolicyCoordinate": "PNP-NO-PROSE-ONLY-THEOREM-POLICY-2026-06-27-01",
   "proofObligationLedgerCoordinate": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
   "gapLedgerCoordinate": "PNP-GAP-LEDGER-2026-06-27-01",
@@ -48,6 +49,11 @@
       "id": "theorem-binding-ledger-audit",
       "command": "node scripts/audit-report-theorem-bindings.mjs --json",
       "outputKind": "accept|reject"
+    },
+    {
+      "id": "report-theorem-inventory-audit",
+      "command": "node pcc-report-theorem-inventory0.mjs --json",
+      "outputKind": "artifacts/report-theorem-inventory/latest-verdict.json"
     },
     {
       "id": "no-prose-only-theorem-policy",
@@ -179,6 +185,7 @@
     "This status file does not activate public theorem emission.",
     "This status file does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
     "The theorem-binding ledger is currently a release-critical spine ledger and does not yet claim every numbered theorem environment is bound.",
+    "The report theorem inventory records the historical Section 22 theorem-ledger rows but does not yet claim every numbered theorem environment has been inventoried or checker-bound.",
     "The no-prose-only theorem policy forbids release-critical prose-only activation, but does not yet prove exhaustive historical theorem inventory coverage.",
     "The proof obligation ledger records current obligations, dependencies, source files, tests, and computed hashes, but does not by itself discharge blocked final soundness.",
     "The gap ledger records known unresolved, externally trusted, bounded-seed-only, and release-blocking gaps, but does not close them.",
