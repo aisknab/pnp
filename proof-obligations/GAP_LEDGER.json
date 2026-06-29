@@ -1,0 +1,188 @@
+{
+  "kind": "PNPGapLedger0",
+  "version": 0,
+  "coordinate": "PNP-GAP-LEDGER-2026-06-27-01",
+  "title": "Gap ledger",
+  "purpose": "Record current unresolved, externally trusted, bounded-seed-only, and release-blocking gaps as explicit machine-readable public-review obligations.",
+  "status": "gap-ledger-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "gapLedgerReady": true,
+  "allKnownGapsRepresented": true,
+  "gapLedgerClaimsNoRemainingGaps": false,
+  "fullGapClosureProved": false,
+  "publicTheoremEmissionAllowedByLedger": false,
+  "gapStatusLegend": {
+    "blocked-release-gap": "Activation-blocking gap tied to an active release blocker.",
+    "known-unresolved": "Known unresolved technical or mathematical issue requiring additional representation or discharge.",
+    "represented-not-discharged": "A surface exists, but the ledger does not yet claim the corresponding obligation is fully discharged.",
+    "explicit-external-trust": "A deliberately external assumption in the trust base.",
+    "bounded-seed-only": "Evidence is currently bounded or seed-level and does not yet establish the unrestricted statement.",
+    "reproducibility-hardening-gap": "Reproducibility mechanism exists, but stronger deterministic or digest-pinned evidence remains future work."
+  },
+  "severityLegend": {
+    "activation-blocking": "Must be resolved before public theorem emission can be enabled.",
+    "trust-base": "Part of the current explicit external trust base.",
+    "hardening": "Required for stronger audit confidence but not presented as clearing final theorem blockers.",
+    "documentation-boundary": "Clarifies public report/status language and historical/successor boundaries."
+  },
+  "gaps": [
+    {
+      "id": "GAP-001-UnrestrictedFinalSoundness",
+      "statement": "The repository still blocks unrestricted final soundness: bounded seed checks, release-ladder evidence, and current proof-obligation evidence do not yet discharge the unrestricted final soundness gate.",
+      "status": "blocked-release-gap",
+      "severity": "activation-blocking",
+      "blocker": "Release.UnrestrictedFinalSoundness",
+      "ownerSurface": "release-ladder",
+      "relatedObligations": ["OBL-014-UnrestrictedFinalSoundnessBlocked"],
+      "evidenceFiles": ["PNP_STATUS.json", "release/RELEASE_LADDER.json", "proof-obligations/OBLIGATION_LEDGER.json"],
+      "closeCondition": "Represent and check unrestricted final soundness as a non-seed, non-bounded release obligation; remove Release.UnrestrictedFinalSoundness only through an accepted release-ladder transition.",
+      "publicTheoremEmissionAllowedByGap": false
+    },
+    {
+      "id": "GAP-002-ExternalReviewAcceptance",
+      "statement": "External review acceptance remains an active release blocker and has not been represented as cleared by any current checker.",
+      "status": "blocked-release-gap",
+      "severity": "activation-blocking",
+      "blocker": "ExternalReview.Acceptance",
+      "ownerSurface": "release-ladder",
+      "relatedObligations": ["OBL-013-ReleaseLadderNonActivation"],
+      "evidenceFiles": ["PNP_STATUS.json", "release/RELEASE_LADDER.json"],
+      "closeCondition": "Record accepted external review evidence as an explicit release transition; remove ExternalReview.Acceptance only through the release ladder.",
+      "publicTheoremEmissionAllowedByGap": false
+    },
+    {
+      "id": "GAP-003-BoundedSmallModelsNotUniformProof",
+      "statement": "NAND and locked-NAND SAT small-model checks are bounded seed evidence and do not yet constitute the full uniform theorem for all SAT input sizes.",
+      "status": "bounded-seed-only",
+      "severity": "activation-blocking",
+      "blocker": "Release.UnrestrictedFinalSoundness",
+      "ownerSurface": "semantics-small-models",
+      "relatedObligations": ["OBL-008-NANDSmallModels", "OBL-009-LockedNANDSATSmallModels", "OBL-014-UnrestrictedFinalSoundnessBlocked"],
+      "evidenceFiles": ["semantics/nand-small-models-config.json", "semantics/locked-nand-sat-small-models-config.json", "audits/nand-small-models0.test.mjs", "audits/locked-nand-sat-small-models0.test.mjs"],
+      "closeCondition": "Replace or lift bounded seed checks with a uniform proof object covering every SAT input size under polynomial-time generation.",
+      "publicTheoremEmissionAllowedByGap": false
+    },
+    {
+      "id": "GAP-004-FiniteToUnboundedUniformity",
+      "statement": "The finite-to-unbounded family audit is not yet represented as a dedicated checker: the repository has not yet proved every finite certificate schema uniformly covers all SAT input sizes in polynomial time.",
+      "status": "known-unresolved",
+      "severity": "activation-blocking",
+      "blocker": "Release.UnrestrictedFinalSoundness",
+      "ownerSurface": "future-finite-to-unbounded-audit",
+      "relatedObligations": ["OBL-010-ComplexityImplicationLedger", "OBL-014-UnrestrictedFinalSoundnessBlocked"],
+      "evidenceFiles": ["proof-obligations/OBLIGATION_LEDGER.json", "complexity/COMPLEXITY_LEDGER.json", "release/RELEASE_LADDER.json"],
+      "closeCondition": "Add a finite-to-unbounded-family audit and checker proving that the certificate schema is uniform and polynomial for all SAT sizes, not just represented by finite or seed evidence.",
+      "publicTheoremEmissionAllowedByGap": false
+    },
+    {
+      "id": "GAP-005-NoHiddenOracleSemanticCompleteness",
+      "statement": "The no-hidden-oracle audit is a source-surface seed scanner and does not yet prove semantic absence of every possible oracle-shaped or exact-minimization shortcut.",
+      "status": "represented-not-discharged",
+      "severity": "hardening",
+      "blocker": null,
+      "ownerSurface": "no-hidden-oracle-audit",
+      "relatedObligations": ["OBL-011-NoHiddenOracleSourceSurface"],
+      "evidenceFiles": ["oracle-audit/NO_HIDDEN_ORACLE_AUDIT.json", "scripts/audit-no-hidden-oracle.mjs", "audits/no-hidden-oracle0.test.mjs"],
+      "closeCondition": "Expand the no-hidden-oracle audit from source pattern scanning to stronger semantic/AST/import/macro expansion coverage, or represent why the current restricted language is complete.",
+      "publicTheoremEmissionAllowedByGap": false
+    },
+    {
+      "id": "GAP-006-JavaScriptRuntimeTrust",
+      "statement": "The checker stack currently trusts the JavaScript runtime semantics for the checked fragment, even though independent verifier surfaces reduce but do not eliminate this trust-base item.",
+      "status": "explicit-external-trust",
+      "severity": "trust-base",
+      "blocker": null,
+      "ownerSurface": "trust-base",
+      "relatedObligations": ["OBL-002-TrustBaseExplicit", "OBL-005-MinimalKernelCrossVerification"],
+      "evidenceFiles": ["TRUST_BASE.md", "trust-base/TRUST_BASE.json", "independent-verifiers/python/verify_minimal_kernel.py", "scripts/cross-verify.mjs"],
+      "closeCondition": "Reduce runtime trust by expanding independent runtime/verifier replay, formalizing the checked fragment, or replacing implicit runtime assumptions with bounded validated semantics.",
+      "publicTheoremEmissionAllowedByGap": false
+    },
+    {
+      "id": "GAP-007-SHA256AndGitIntegrityTrust",
+      "statement": "Artifact identity still relies on SHA256 collision resistance and Git object integrity as explicit external assumptions.",
+      "status": "explicit-external-trust",
+      "severity": "trust-base",
+      "blocker": null,
+      "ownerSurface": "trust-base",
+      "relatedObligations": ["OBL-002-TrustBaseExplicit", "OBL-012-ReproducibilityStack"],
+      "evidenceFiles": ["TRUST_BASE.md", "trust-base/TRUST_BASE.json", "artifacts/regeneration/REGENERATION_LEDGER.json"],
+      "closeCondition": "Keep assumptions explicit, add independent digest implementations, and separate hash identity from semantic equality wherever possible.",
+      "publicTheoremEmissionAllowedByGap": false
+    },
+    {
+      "id": "GAP-008-FormalSemanticsExtraction",
+      "statement": "Core NAND semantics and complexity implications are executable and ledgered, but no generated Lean/Coq or equivalent formal proof skeleton is yet represented for the core semantics.",
+      "status": "represented-not-discharged",
+      "severity": "hardening",
+      "blocker": null,
+      "ownerSurface": "formal-semantics-future-track",
+      "relatedObligations": ["OBL-007-NANDDirectWireSemantics", "OBL-010-ComplexityImplicationLedger"],
+      "evidenceFiles": ["semantics/nand-direct-wire-spec.json", "semantics/nand-direct-wire-spec.md", "complexity/COMPLEXITY_LEDGER.json"],
+      "closeCondition": "Generate formal statement skeletons or proof exports for core semantics and complexity ledgers, then bind them to checker outputs.",
+      "publicTheoremEmissionAllowedByGap": false
+    },
+    {
+      "id": "GAP-009-IndependentVerifierCoverage",
+      "statement": "Independent verifier coverage is currently partial: it checks core artifacts and policy surfaces, but does not yet independently replay the full proof-certificate stack.",
+      "status": "represented-not-discharged",
+      "severity": "hardening",
+      "blocker": null,
+      "ownerSurface": "independent-verifiers",
+      "relatedObligations": ["OBL-005-MinimalKernelCrossVerification", "OBL-012-ReproducibilityStack"],
+      "evidenceFiles": ["independent-verifiers/python/verify_minimal_kernel.py", "scripts/cross-verify.mjs", "scripts/audit-independent-verifiers-no-shared-code.mjs"],
+      "closeCondition": "Expand independent verifiers to replay more checker semantics and artifact ledgers without importing JavaScript logic.",
+      "publicTheoremEmissionAllowedByGap": false
+    },
+    {
+      "id": "GAP-010-ContainerDigestPinning",
+      "statement": "The container environment pins Node major version and Debian distribution, but it is not yet pinned to an immutable base-image digest.",
+      "status": "reproducibility-hardening-gap",
+      "severity": "hardening",
+      "blocker": null,
+      "ownerSurface": "container-environment",
+      "relatedObligations": ["OBL-012-ReproducibilityStack"],
+      "evidenceFiles": ["Dockerfile", "reproducibility/CONTAINER_ENVIRONMENT.json", "audits/container-environment0.test.mjs"],
+      "closeCondition": "Pin the base image by digest and record the digest in the container environment manifest and regeneration ledger.",
+      "publicTheoremEmissionAllowedByGap": false
+    },
+    {
+      "id": "GAP-011-DeterminismScope",
+      "statement": "The determinism audit provides a replay harness and CI smoke comparison, but it does not yet prove full cross-platform byte-for-byte determinism for every generated artifact.",
+      "status": "reproducibility-hardening-gap",
+      "severity": "hardening",
+      "blocker": null,
+      "ownerSurface": "determinism-audit",
+      "relatedObligations": ["OBL-012-ReproducibilityStack"],
+      "evidenceFiles": ["reproducibility/DETERMINISM_AUDIT.json", "scripts/audit-determinism.mjs", "audits/determinism0.test.mjs"],
+      "closeCondition": "Run and record full verifier determinism across pinned container and multi-platform environments, including stable generated artifact normalization where byte identity is not expected.",
+      "publicTheoremEmissionAllowedByGap": false
+    },
+    {
+      "id": "GAP-012-HistoricalReportSupersession",
+      "statement": "Historical sealed report artifacts still contain direct theorem-emission wording; successor public-review materials currently fence that language but do not yet fully supersede every historical public surface.",
+      "status": "represented-not-discharged",
+      "severity": "documentation-boundary",
+      "blocker": null,
+      "ownerSurface": "successor-report-and-public-surface",
+      "relatedObligations": ["OBL-001-ClaimBoundaryNonActivation", "OBL-013-ReleaseLadderNonActivation"],
+      "evidenceFiles": ["PNP_STATUS.json", "RELEASE_LADDER.md", "release/RELEASE_LADDER.json"],
+      "closeCondition": "Publish successor canonical report and public surface payloads that consistently consume the current gate state and clearly separate historical theorem-emission artifacts from current public-review status.",
+      "publicTheoremEmissionAllowedByGap": false
+    }
+  ],
+  "audit": {
+    "checker": "CheckGapLedger0",
+    "script": "pcc-gap-ledger0.mjs",
+    "test": "audits/gap-ledger0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}

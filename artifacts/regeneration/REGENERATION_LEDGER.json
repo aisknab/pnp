@@ -64,6 +64,16 @@
       "generatedAtRuntime": true
     },
     {
+      "id": "gap-ledger",
+      "kind": "gap-ledger",
+      "sourceFiles": ["proof-obligations/GAP_LEDGER.json", "proof-obligations/GAP_LEDGER.md", "pcc-gap-ledger0.mjs", "audits/gap-ledger0.test.mjs"],
+      "command": "node pcc-gap-ledger0.mjs --json",
+      "outputPath": "artifacts/gap-ledger/latest-verdict.json",
+      "deterministic": true,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    },
+    {
       "id": "minimal-kernel-cross-verify",
       "kind": "stable-source-json",
       "sourceFiles": ["kernel/PNP_MINIMAL_KERNEL.json", "scripts/cross-verify.mjs", "independent-verifiers/python/verify_minimal_kernel.py"],

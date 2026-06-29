@@ -1,0 +1,25 @@
+name: gap-ledger
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  gap-ledger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run gap ledger checker
+        run: node pcc-gap-ledger0.mjs --json
+      - name: Run gap ledger tests
+        run: node --test audits/gap-ledger0.test.mjs
+      - name: Upload gap ledger verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: gap-ledger-latest-verdict
+          path: artifacts/gap-ledger/latest-verdict.json
