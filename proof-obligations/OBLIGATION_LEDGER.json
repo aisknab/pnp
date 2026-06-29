@@ -178,6 +178,16 @@
       "status": "represented-not-activated",
       "dependencies": ["OBL-010-ComplexityImplicationLedger", "OBL-014-UnrestrictedFinalSoundnessBlocked"],
       "hashMode": "checker-computed"
+    },
+    {
+      "id": "OBL-016-BaseDirectBindingSeed",
+      "statement": "The historical Section 22 Base theorem-ledger row is bound to the current executable NAND direct-wire semantics seed, report theorem inventory, coverage matrix, closure plan, and non-activation boundary without claiming complete direct checker binding.",
+      "checker": "CheckBaseDirectBindingSeed0",
+      "sourceFiles": ["report-bindings/direct-bindings/BASE_DIRECT_BINDING_SEED.json", "report-bindings/direct-bindings/BASE_DIRECT_BINDING_SEED.md", "pcc-direct-bind-base-semantics0.mjs", "report-bindings/REPORT_THEOREM_INVENTORY.json", "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json", "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json", "semantics/nand-direct-wire-spec.json", "proof-obligations/GAP_LEDGER.json"],
+      "testFiles": ["audits/direct-bind-base-semantics0.test.mjs"],
+      "status": "machine-checked-seed",
+      "dependencies": ["OBL-007-NANDDirectWireSemantics", "OBL-014-UnrestrictedFinalSoundnessBlocked"],
+      "hashMode": "checker-computed"
     }
   ],
   "audit": {

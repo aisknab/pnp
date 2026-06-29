@@ -18,6 +18,7 @@ const EXPECTED_RECORD_IDS = [
   'report-theorem-inventory',
   'report-theorem-coverage-matrix',
   'report-theorem-coverage-closure-plan',
+  'base-direct-binding-seed',
   'no-prose-only-theorem-policy',
   'proof-obligation-ledger',
   'gap-ledger',

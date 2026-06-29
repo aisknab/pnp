@@ -84,6 +84,16 @@
       "generatedAtRuntime": true
     },
     {
+      "id": "base-direct-binding-seed",
+      "kind": "report-theorem-direct-binding-seed",
+      "sourceFiles": ["report-bindings/direct-bindings/BASE_DIRECT_BINDING_SEED.json", "report-bindings/direct-bindings/BASE_DIRECT_BINDING_SEED.md", "pcc-direct-bind-base-semantics0.mjs", "audits/direct-bind-base-semantics0.test.mjs"],
+      "command": "node pcc-direct-bind-base-semantics0.mjs --json",
+      "outputPath": "artifacts/direct-bind-base-semantics/latest-verdict.json",
+      "deterministic": true,
+      "outputCommitted": false,
+      "generatedAtRuntime": true
+    },
+    {
       "id": "no-prose-only-theorem-policy",
       "kind": "report-claim-boundary-policy",
       "sourceFiles": ["report-bindings/NO_PROSE_ONLY_THEOREM_POLICY.json", "report-bindings/NO_PROSE_ONLY_THEOREM_POLICY.md", "pcc-no-prose-only-theorem-policy0.mjs", "audits/no-prose-only-theorem-policy0.test.mjs"],
