@@ -64,7 +64,7 @@
       "statement": "The release-critical theorem spine is bound to concrete checker files, proof artifacts, and tests without activating public theorem emission.",
       "checker": "AuditReportTheoremBindings0",
       "sourceFiles": ["report-bindings/REPORT_THEOREM_BINDINGS.json", "scripts/audit-report-theorem-bindings.mjs"],
-      "testFiles": ["audits/report-theorem-bindings0.test.mjs"],
+      "testFiles": ["test/pcc-final-proof-report0.test.mjs"],
       "status": "represented-not-activated",
       "dependencies": ["OBL-001-ClaimBoundaryNonActivation"],
       "hashMode": "checker-computed"
