@@ -1,0 +1,91 @@
+{
+  "kind": "PNPFTDirectBindingSeed0",
+  "version": 0,
+  "coordinate": "PNP-DIRECT-BIND-FT-FINITE-TABLE-SEED-2026-06-27-01",
+  "title": "FT theorem direct-binding seed",
+  "purpose": "Bind the historical Section 22 FT theorem-ledger row to current finite-table coverage, explicit normalization transport, checker-hardening, theorem inventory, coverage matrix, closure plan, proof-obligation, and gap surfaces without claiming complete direct checker binding or theorem activation.",
+  "status": "ft-direct-binding-seed-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "ftDirectBindingSeedReady": true,
+  "releaseCriticalRow": false,
+  "directCheckerBindingComplete": false,
+  "fullHistoricalFTTheoremDischarged": false,
+  "publicTheoremEmissionAllowedByBinding": false,
+  "linkedCoordinates": {
+    "reportTheoremInventory": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
+    "reportTheoremCoverageMatrix": "PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01",
+    "reportTheoremCoverageClosurePlan": "PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01",
+    "proofObligationLedger": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
+    "gapLedger": "PNP-GAP-LEDGER-2026-06-27-01",
+    "checkerTotalityAudit": "PNP-CHECKER-TOTALITY-AUDIT-2026-06-27-01",
+    "negativeCheckerMutationAudit": "PNP-NEGATIVE-CHECKER-MUTATIONS-2026-06-27-01",
+    "ruleFamilyCoverage": "PNP-RULE-FAMILY-COVERAGE-2026-06-27-01"
+  },
+  "boundInventoryEntry": {
+    "inventoryEntryId": "TL-006-FT",
+    "coverageEntryId": "COV-006-FT",
+    "closureEntryId": "DCC-006-FT",
+    "sourceLabel": "FT",
+    "expectedCoverageClass": "inventory-ledger-surface",
+    "expectedClosureStatus": "direct-binding-needed",
+    "expectedNextDirectBindingSurface": "pcc-direct-bind-finite-table0.mjs"
+  },
+  "coveredFTComponents": [
+    {
+      "id": "FT.FiniteTableCoverageSurface",
+      "status": "represented-by-inventory-and-closure-ledgers",
+      "evidence": "report-bindings/REPORT_THEOREM_INVENTORY.json"
+    },
+    {
+      "id": "FT.NormalizationTransportSurface",
+      "status": "represented-by-coverage-closure-plan",
+      "evidence": "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json"
+    },
+    {
+      "id": "FT.CheckerHardeningSurface",
+      "status": "represented-by-checker-hardening-ledgers",
+      "evidence": "checker-totality/CHECKER_TOTALITY_AUDIT.json"
+    },
+    {
+      "id": "FT.ActivationBoundary",
+      "status": "represented-not-discharged",
+      "evidence": "proof-obligations/GAP_LEDGER.json"
+    }
+  ],
+  "evidenceSurfaces": [
+    "report-bindings/direct-bindings/FT_DIRECT_BINDING_SEED.json",
+    "report-bindings/direct-bindings/FT_DIRECT_BINDING_SEED.md",
+    "report-bindings/REPORT_THEOREM_INVENTORY.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json",
+    "proof-obligations/OBLIGATION_LEDGER.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "checker-totality/CHECKER_TOTALITY_AUDIT.json",
+    "checker-mutations/NEGATIVE_CHECKER_MUTATIONS.json",
+    "semantic-kernel/RULE_FAMILY_COVERAGE.json",
+    "pcc-direct-bind-finite-table0.mjs",
+    "audits/direct-bind-finite-table0.test.mjs",
+    "PNP_STATUS.json"
+  ],
+  "nonClaims": [
+    "This FT direct-binding seed does not activate public theorem emission.",
+    "This FT direct-binding seed does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This FT direct-binding seed does not claim the full historical FT theorem is completely discharged.",
+    "This FT direct-binding seed does not flip the FT coverage row to directCheckerBindingComplete.",
+    "This FT direct-binding seed binds the FT row to current explicit finite-table, normalization-transport, checker-hardening, and ledger surfaces and keeps the remaining closure work explicit."
+  ],
+  "audit": {
+    "checker": "CheckFTDirectBindingSeed0",
+    "script": "pcc-direct-bind-finite-table0.mjs",
+    "test": "audits/direct-bind-finite-table0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
