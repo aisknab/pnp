@@ -13,7 +13,7 @@ const EXPECTED_COORDINATE = 'PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01';
 const EXPECTED_BLOCKERS = ['Release.UnrestrictedFinalSoundness', 'ExternalReview.Acceptance'];
 const ALLOWED_STATUSES = ['machine-checked-seed', 'represented-not-activated', 'explicit-external-trust', 'blocked-release-obligation'];
 const EXPECTED_OBLIGATION_IDS = [
-  'OBL-001-ClaimBoundaryNonActivation', 'OBL-002-TrustBaseExplicit', 'OBL-003-TrustBaseShrinkPlan', 'OBL-004-TheoremToCheckerBindings', 'OBL-005-MinimalKernelCrossVerification', 'OBL-006-CheckerSoundnessSeedAudits', 'OBL-007-NANDDirectWireSemantics', 'OBL-008-NANDSmallModels', 'OBL-009-LockedNANDSATSmallModels', 'OBL-010-ComplexityImplicationLedger', 'OBL-011-NoHiddenOracleSourceSurface', 'OBL-012-ReproducibilityStack', 'OBL-013-ReleaseLadderNonActivation', 'OBL-014-UnrestrictedFinalSoundnessBlocked', 'OBL-015-FiniteToUnboundedFamilyAudit', 'OBL-016-BaseDirectBindingSeed', 'OBL-017-CHGDirectBindingSeed', 'OBL-018-ModeDirectBindingSeed', 'OBL-019-EDirectBindingSeed', 'OBL-020-NDirectBindingSeed', 'OBL-021-FTDirectBindingSeed', 'OBL-022-XDirectBindingSeed', 'OBL-023-BCDirectBindingSeed', 'OBL-024-UNDirectBindingSeed', 'OBL-025-HNDirectBindingSeed', 'OBL-026-HResolveDirectBindingSeed',
+  'OBL-001-ClaimBoundaryNonActivation', 'OBL-002-TrustBaseExplicit', 'OBL-003-TrustBaseShrinkPlan', 'OBL-004-TheoremToCheckerBindings', 'OBL-005-MinimalKernelCrossVerification', 'OBL-006-CheckerSoundnessSeedAudits', 'OBL-007-NANDDirectWireSemantics', 'OBL-008-NANDSmallModels', 'OBL-009-LockedNANDSATSmallModels', 'OBL-010-ComplexityImplicationLedger', 'OBL-011-NoHiddenOracleSourceSurface', 'OBL-012-ReproducibilityStack', 'OBL-013-ReleaseLadderNonActivation', 'OBL-014-UnrestrictedFinalSoundnessBlocked', 'OBL-015-FiniteToUnboundedFamilyAudit', 'OBL-016-BaseDirectBindingSeed', 'OBL-017-CHGDirectBindingSeed', 'OBL-018-ModeDirectBindingSeed', 'OBL-019-EDirectBindingSeed', 'OBL-020-NDirectBindingSeed', 'OBL-021-FTDirectBindingSeed', 'OBL-022-XDirectBindingSeed', 'OBL-023-BCDirectBindingSeed', 'OBL-024-UNDirectBindingSeed', 'OBL-025-HNDirectBindingSeed', 'OBL-026-HResolveDirectBindingSeed', 'OBL-027-BUDDirectBindingSeed',
 ];
 
 export async function CheckProofObligationLedger0(options = {}) {
@@ -28,16 +28,8 @@ export async function CheckProofObligationLedger0(options = {}) {
     if (validation.tag === 'reject') return writeAndReturn0(root, outputPath, writeOutput, validation);
     const digest = await digestObligations0(root, read.ledger.obligations);
     if (digest.tag === 'reject') return writeAndReturn0(root, outputPath, writeOutput, digest);
-    return writeAndReturn0(root, outputPath, writeOutput, {
-      tag: 'accept', kind: 'accept', checker: CHECKER, version: VERSION, coordinate: EXPECTED_COORDINATE,
-      claimStatus: 'proof-obligation-ledger-accepted-under-public-review-boundary', ledgerPath, ledgerSha256: sha256Hex0(read.bytes),
-      proofObligationLedgerReady: true, fullProofObligationDischargeProved: false, publicTheoremEmissionAllowedByLedger: false,
-      obligationCount: read.ledger.obligations.length, obligationIds: [...EXPECTED_OBLIGATION_IDS], statusCounts: countBy0(read.ledger.obligations.map((obligation) => obligation.status)), sourceFileCount: digest.sourceFileCount, testFileCount: digest.testFileCount, obligationDigestLedgerSha256: sha256Text0(stableStringify0(digest.obligationDigests)), obligationDigests: digest.obligationDigests,
-      publicTheoremEmissionAllowed: false, finalTheoremReady: false, activeFinalNodeIds: [], remainingBlockers: [...EXPECTED_BLOCKERS], outputPath: writeOutput ? outputPath : null,
-    });
-  } catch (error) {
-    return writeAndReturn0(root, outputPath, writeOutput, reject0('ProofObligationLedger.UnhandledException', [], 'proof obligation ledger checker threw unexpectedly', normalizeError0(error)));
-  }
+    return writeAndReturn0(root, outputPath, writeOutput, { tag: 'accept', kind: 'accept', checker: CHECKER, version: VERSION, coordinate: EXPECTED_COORDINATE, claimStatus: 'proof-obligation-ledger-accepted-under-public-review-boundary', ledgerPath, ledgerSha256: sha256Hex0(read.bytes), proofObligationLedgerReady: true, fullProofObligationDischargeProved: false, publicTheoremEmissionAllowedByLedger: false, obligationCount: read.ledger.obligations.length, obligationIds: [...EXPECTED_OBLIGATION_IDS], statusCounts: countBy0(read.ledger.obligations.map((obligation) => obligation.status)), sourceFileCount: digest.sourceFileCount, testFileCount: digest.testFileCount, obligationDigestLedgerSha256: sha256Text0(stableStringify0(digest.obligationDigests)), obligationDigests: digest.obligationDigests, publicTheoremEmissionAllowed: false, finalTheoremReady: false, activeFinalNodeIds: [], remainingBlockers: [...EXPECTED_BLOCKERS], outputPath: writeOutput ? outputPath : null });
+  } catch (error) { return writeAndReturn0(root, outputPath, writeOutput, reject0('ProofObligationLedger.UnhandledException', [], 'proof obligation ledger checker threw unexpectedly', normalizeError0(error))); }
 }
 
 async function readLedger0(root, ledgerPath, override) { if (override !== undefined) return { tag: 'accept', ledger: override, bytes: Buffer.from(`${JSON.stringify(override, null, 2)}\n`, 'utf8') }; try { const bytes = await readFile(path.join(root, ledgerPath)); return { tag: 'accept', ledger: JSON.parse(bytes.toString('utf8')), bytes }; } catch (error) { return reject0('ProofObligationLedger.ReadOrParseFailed', [ledgerPath], 'could not read or parse proof obligation ledger JSON', normalizeError0(error)); } }
