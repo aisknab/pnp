@@ -1,0 +1,25 @@
+name: direct-bind-budget-resolver
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  direct-bind-budget-resolver:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run BUD direct-binding seed checker
+        run: node pcc-direct-bind-budget-resolver0.mjs --json
+      - name: Run BUD direct-binding seed tests
+        run: node --test audits/direct-bind-budget-resolver0.test.mjs
+      - name: Upload BUD direct-binding seed verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: direct-bind-budget-resolver-latest-verdict
+          path: artifacts/direct-bind-budget-resolver/latest-verdict.json
