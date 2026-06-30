@@ -1,0 +1,96 @@
+{
+  "kind": "PNPXDirectBindingSeed0",
+  "version": 0,
+  "coordinate": "PNP-DIRECT-BIND-X-CRITICAL-WINDOW-ROUTING-SEED-2026-06-27-01",
+  "title": "X theorem direct-binding seed",
+  "purpose": "Bind the historical Section 22 X theorem-ledger row to current CritC/Q/E/L routing, X1-X4 candidate towers, route-priority, checker-hardening, theorem inventory, coverage matrix, closure plan, proof-obligation, and gap surfaces without claiming complete direct checker binding or theorem activation.",
+  "status": "x-direct-binding-seed-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "xDirectBindingSeedReady": true,
+  "releaseCriticalRow": false,
+  "directCheckerBindingComplete": false,
+  "fullHistoricalXTheoremDischarged": false,
+  "publicTheoremEmissionAllowedByBinding": false,
+  "linkedCoordinates": {
+    "reportTheoremInventory": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
+    "reportTheoremCoverageMatrix": "PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01",
+    "reportTheoremCoverageClosurePlan": "PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01",
+    "proofObligationLedger": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
+    "gapLedger": "PNP-GAP-LEDGER-2026-06-27-01",
+    "checkerTotalityAudit": "PNP-CHECKER-TOTALITY-AUDIT-2026-06-27-01",
+    "negativeCheckerMutationAudit": "PNP-NEGATIVE-CHECKER-MUTATIONS-2026-06-27-01",
+    "ruleFamilyCoverage": "PNP-RULE-FAMILY-COVERAGE-2026-06-27-01"
+  },
+  "boundInventoryEntry": {
+    "inventoryEntryId": "TL-007-X",
+    "coverageEntryId": "COV-007-X",
+    "closureEntryId": "DCC-007-X",
+    "sourceLabel": "X",
+    "expectedCoverageClass": "inventory-ledger-surface",
+    "expectedClosureStatus": "direct-binding-needed",
+    "expectedNextDirectBindingSurface": "pcc-direct-bind-critical-window-routing0.mjs"
+  },
+  "coveredXComponents": [
+    {
+      "id": "X.CriticalKindRoutingSurface",
+      "status": "represented-by-inventory-and-closure-ledgers",
+      "evidence": "report-bindings/REPORT_THEOREM_INVENTORY.json"
+    },
+    {
+      "id": "X.CandidateTowerSurface",
+      "status": "represented-by-coverage-closure-plan",
+      "evidence": "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json"
+    },
+    {
+      "id": "X.X1ToX4FailureRoutingSurface",
+      "status": "represented-by-coverage-closure-plan",
+      "evidence": "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json"
+    },
+    {
+      "id": "X.RoutePriorityAndCheckerHardeningSurface",
+      "status": "represented-by-checker-hardening-ledgers",
+      "evidence": "checker-totality/CHECKER_TOTALITY_AUDIT.json"
+    },
+    {
+      "id": "X.ActivationBoundary",
+      "status": "represented-not-discharged",
+      "evidence": "proof-obligations/GAP_LEDGER.json"
+    }
+  ],
+  "evidenceSurfaces": [
+    "report-bindings/direct-bindings/X_DIRECT_BINDING_SEED.json",
+    "report-bindings/direct-bindings/X_DIRECT_BINDING_SEED.md",
+    "report-bindings/REPORT_THEOREM_INVENTORY.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json",
+    "proof-obligations/OBLIGATION_LEDGER.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "checker-totality/CHECKER_TOTALITY_AUDIT.json",
+    "checker-mutations/NEGATIVE_CHECKER_MUTATIONS.json",
+    "semantic-kernel/RULE_FAMILY_COVERAGE.json",
+    "pcc-direct-bind-critical-window-routing0.mjs",
+    "audits/direct-bind-critical-window-routing0.test.mjs",
+    "PNP_STATUS.json"
+  ],
+  "nonClaims": [
+    "This X direct-binding seed does not activate public theorem emission.",
+    "This X direct-binding seed does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This X direct-binding seed does not claim the full historical X theorem is completely discharged.",
+    "This X direct-binding seed does not flip the X coverage row to directCheckerBindingComplete.",
+    "This X direct-binding seed binds the X row to current explicit critical-kind routing, candidate-tower, X1-X4, route-priority, checker-hardening, and ledger surfaces and keeps the remaining closure work explicit."
+  ],
+  "audit": {
+    "checker": "CheckXDirectBindingSeed0",
+    "script": "pcc-direct-bind-critical-window-routing0.mjs",
+    "test": "audits/direct-bind-critical-window-routing0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}

@@ -1,0 +1,25 @@
+name: direct-bind-critical-window-routing
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  direct-bind-critical-window-routing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run X direct-binding seed checker
+        run: node pcc-direct-bind-critical-window-routing0.mjs --json
+      - name: Run X direct-binding seed tests
+        run: node --test audits/direct-bind-critical-window-routing0.test.mjs
+      - name: Upload X direct-binding seed verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: direct-bind-critical-window-routing-latest-verdict
+          path: artifacts/direct-bind-critical-window-routing/latest-verdict.json
