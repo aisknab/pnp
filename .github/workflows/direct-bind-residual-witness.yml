@@ -1,0 +1,25 @@
+name: direct-bind-residual-witness
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  direct-bind-residual-witness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run RW direct-binding gap seed checker
+        run: node pcc-direct-bind-residual-witness0.mjs --json
+      - name: Run RW direct-binding gap seed tests
+        run: node --test audits/direct-bind-residual-witness0.test.mjs
+      - name: Upload RW direct-binding gap seed verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: direct-bind-residual-witness-latest-verdict
+          path: artifacts/direct-bind-residual-witness/latest-verdict.json
