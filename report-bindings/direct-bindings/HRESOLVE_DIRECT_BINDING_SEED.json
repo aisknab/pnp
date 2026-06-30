@@ -1,0 +1,106 @@
+{
+  "kind": "PNPHResolveDirectBindingSeed0",
+  "version": 0,
+  "coordinate": "PNP-DIRECT-BIND-HRESOLVE-GLOBAL-HEREDITARY-RESOLVER-SEED-2026-06-27-01",
+  "title": "HResolve theorem direct-binding seed",
+  "purpose": "Bind the historical Section 22 HResolve theorem-ledger row to current global hereditary resolver exact-minimum, gain, strong NoHereditary sidecar, H-disjointness, checker-hardening, theorem inventory, coverage matrix, closure plan, proof-obligation, and gap surfaces without claiming complete direct checker binding or theorem activation.",
+  "status": "hresolve-direct-binding-seed-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "hresolveDirectBindingSeedReady": true,
+  "releaseCriticalRow": false,
+  "directCheckerBindingComplete": false,
+  "fullHistoricalHResolveTheoremDischarged": false,
+  "publicTheoremEmissionAllowedByBinding": false,
+  "linkedCoordinates": {
+    "reportTheoremInventory": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
+    "reportTheoremCoverageMatrix": "PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01",
+    "reportTheoremCoverageClosurePlan": "PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01",
+    "proofObligationLedger": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
+    "gapLedger": "PNP-GAP-LEDGER-2026-06-27-01",
+    "checkerTotalityAudit": "PNP-CHECKER-TOTALITY-AUDIT-2026-06-27-01",
+    "negativeCheckerMutationAudit": "PNP-NEGATIVE-CHECKER-MUTATIONS-2026-06-27-01",
+    "ruleFamilyCoverage": "PNP-RULE-FAMILY-COVERAGE-2026-06-27-01"
+  },
+  "boundInventoryEntry": {
+    "inventoryEntryId": "TL-011-HResolve",
+    "coverageEntryId": "COV-011-HResolve",
+    "closureEntryId": "DCC-011-HResolve",
+    "sourceLabel": "HResolve",
+    "expectedCoverageClass": "inventory-ledger-surface",
+    "expectedClosureStatus": "direct-binding-needed",
+    "expectedNextDirectBindingSurface": "pcc-direct-bind-hresolve0.mjs"
+  },
+  "coveredHResolveComponents": [
+    {
+      "id": "HResolve.GlobalResolverSurface",
+      "status": "represented-by-inventory-and-closure-ledgers",
+      "evidence": "report-bindings/REPORT_THEOREM_INVENTORY.json"
+    },
+    {
+      "id": "HResolve.ExactMinimumRouteSurface",
+      "status": "represented-by-coverage-closure-plan",
+      "evidence": "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json"
+    },
+    {
+      "id": "HResolve.GainRouteSurface",
+      "status": "represented-by-coverage-closure-plan",
+      "evidence": "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json"
+    },
+    {
+      "id": "HResolve.StrongNoHereditarySidecarSurface",
+      "status": "represented-by-coverage-closure-plan",
+      "evidence": "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json"
+    },
+    {
+      "id": "HResolve.HDisjointFamilySurface",
+      "status": "represented-by-coverage-closure-plan",
+      "evidence": "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json"
+    },
+    {
+      "id": "HResolve.CheckerHardeningSurface",
+      "status": "represented-by-checker-hardening-ledgers",
+      "evidence": "checker-totality/CHECKER_TOTALITY_AUDIT.json"
+    },
+    {
+      "id": "HResolve.ActivationBoundary",
+      "status": "represented-not-discharged",
+      "evidence": "proof-obligations/GAP_LEDGER.json"
+    }
+  ],
+  "evidenceSurfaces": [
+    "report-bindings/direct-bindings/HRESOLVE_DIRECT_BINDING_SEED.json",
+    "report-bindings/direct-bindings/HRESOLVE_DIRECT_BINDING_SEED.md",
+    "report-bindings/REPORT_THEOREM_INVENTORY.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json",
+    "proof-obligations/OBLIGATION_LEDGER.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "checker-totality/CHECKER_TOTALITY_AUDIT.json",
+    "checker-mutations/NEGATIVE_CHECKER_MUTATIONS.json",
+    "semantic-kernel/RULE_FAMILY_COVERAGE.json",
+    "pcc-direct-bind-hresolve0.mjs",
+    "audits/direct-bind-hresolve0.test.mjs",
+    "PNP_STATUS.json"
+  ],
+  "nonClaims": [
+    "This HResolve direct-binding seed does not activate public theorem emission.",
+    "This HResolve direct-binding seed does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This HResolve direct-binding seed does not claim the full historical HResolve theorem is completely discharged.",
+    "This HResolve direct-binding seed does not flip the HResolve coverage row to directCheckerBindingComplete.",
+    "This HResolve direct-binding seed binds the HResolve row to current explicit exact-minimum, gain, strong-sidecar, H-disjointness, checker-hardening, and ledger surfaces and keeps the remaining closure work explicit."
+  ],
+  "audit": {
+    "checker": "CheckHResolveDirectBindingSeed0",
+    "script": "pcc-direct-bind-hresolve0.mjs",
+    "test": "audits/direct-bind-hresolve0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
