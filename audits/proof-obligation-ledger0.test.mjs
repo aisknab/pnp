@@ -20,11 +20,12 @@ test('proof obligation ledger accepts current source ledger', async () => {
   assert.equal(out.proofObligationLedgerReady, true);
   assert.equal(out.fullProofObligationDischargeProved, false);
   assert.equal(out.publicTheoremEmissionAllowedByLedger, false);
-  assert.equal(out.obligationCount, 18);
+  assert.equal(out.obligationCount, 19);
   assert.ok(out.obligationIds.includes('OBL-015-FiniteToUnboundedFamilyAudit'));
   assert.ok(out.obligationIds.includes('OBL-016-BaseDirectBindingSeed'));
   assert.ok(out.obligationIds.includes('OBL-017-CHGDirectBindingSeed'));
   assert.ok(out.obligationIds.includes('OBL-018-ModeDirectBindingSeed'));
+  assert.ok(out.obligationIds.includes('OBL-019-EDirectBindingSeed'));
   assert.ok(out.sourceFileCount > 0);
   assert.ok(out.testFileCount > 0);
   assert.equal(out.obligationDigestLedgerSha256.length, 64);
@@ -41,10 +42,7 @@ test('proof obligation ledger rejects public theorem activation', async () => {
   const ledger = clone0(await loadLedger0());
   ledger.claimBoundary.publicTheoremEmissionAllowed = true;
 
-  const out = await CheckProofObligationLedger0({
-    ledgerOverride: ledger,
-    writeOutput: false,
-  });
+  const out = await CheckProofObligationLedger0({ ledgerOverride: ledger, writeOutput: false });
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'ProofObligationLedger.PublicEmission');
@@ -54,10 +52,7 @@ test('proof obligation ledger rejects full discharge overclaim', async () => {
   const ledger = clone0(await loadLedger0());
   ledger.fullProofObligationDischargeProved = true;
 
-  const out = await CheckProofObligationLedger0({
-    ledgerOverride: ledger,
-    writeOutput: false,
-  });
+  const out = await CheckProofObligationLedger0({ ledgerOverride: ledger, writeOutput: false });
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'ProofObligationLedger.FullDischargeFlag');
@@ -69,10 +64,7 @@ test('proof obligation ledger rejects changed obligation ordering', async () => 
   ledger.obligations[1] = ledger.obligations[2];
   ledger.obligations[2] = temp;
 
-  const out = await CheckProofObligationLedger0({
-    ledgerOverride: ledger,
-    writeOutput: false,
-  });
+  const out = await CheckProofObligationLedger0({ ledgerOverride: ledger, writeOutput: false });
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'ProofObligationLedger.ObligationIds');
@@ -82,10 +74,7 @@ test('proof obligation ledger rejects forward dependencies', async () => {
   const ledger = clone0(await loadLedger0());
   ledger.obligations[1].dependencies.push('OBL-014-UnrestrictedFinalSoundnessBlocked');
 
-  const out = await CheckProofObligationLedger0({
-    ledgerOverride: ledger,
-    writeOutput: false,
-  });
+  const out = await CheckProofObligationLedger0({ ledgerOverride: ledger, writeOutput: false });
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'ProofObligationLedger.ForwardDependency');
@@ -95,10 +84,7 @@ test('proof obligation ledger rejects missing source files', async () => {
   const ledger = clone0(await loadLedger0());
   ledger.obligations[0].sourceFiles.push('missing/proof-obligation-source.json');
 
-  const out = await CheckProofObligationLedger0({
-    ledgerOverride: ledger,
-    writeOutput: false,
-  });
+  const out = await CheckProofObligationLedger0({ ledgerOverride: ledger, writeOutput: false });
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'ProofObligationLedger.PathMissing');
@@ -108,10 +94,7 @@ test('proof obligation ledger rejects missing test files', async () => {
   const ledger = clone0(await loadLedger0());
   ledger.obligations[0].testFiles.push('missing/proof-obligation-test.mjs');
 
-  const out = await CheckProofObligationLedger0({
-    ledgerOverride: ledger,
-    writeOutput: false,
-  });
+  const out = await CheckProofObligationLedger0({ ledgerOverride: ledger, writeOutput: false });
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'ProofObligationLedger.PathMissing');
@@ -121,10 +104,7 @@ test('proof obligation ledger rejects activated hash mode or unknown status', as
   const ledger = clone0(await loadLedger0());
   ledger.obligations[0].status = 'activated-final-theorem';
 
-  const out = await CheckProofObligationLedger0({
-    ledgerOverride: ledger,
-    writeOutput: false,
-  });
+  const out = await CheckProofObligationLedger0({ ledgerOverride: ledger, writeOutput: false });
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'ProofObligationLedger.ObligationStatus');
