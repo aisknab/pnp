@@ -1,0 +1,25 @@
+name: direct-bind-hresolve
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  direct-bind-hresolve:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run HResolve direct-binding seed checker
+        run: node pcc-direct-bind-hresolve0.mjs --json
+      - name: Run HResolve direct-binding seed tests
+        run: node --test audits/direct-bind-hresolve0.test.mjs
+      - name: Upload HResolve direct-binding seed verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: direct-bind-hresolve-latest-verdict
+          path: artifacts/direct-bind-hresolve/latest-verdict.json
