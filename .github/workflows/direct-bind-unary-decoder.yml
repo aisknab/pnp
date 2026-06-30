@@ -1,0 +1,25 @@
+name: direct-bind-unary-decoder
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  direct-bind-unary-decoder:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run UN direct-binding seed checker
+        run: node pcc-direct-bind-unary-decoder0.mjs --json
+      - name: Run UN direct-binding seed tests
+        run: node --test audits/direct-bind-unary-decoder0.test.mjs
+      - name: Upload UN direct-binding seed verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: direct-bind-unary-decoder-latest-verdict
+          path: artifacts/direct-bind-unary-decoder/latest-verdict.json
