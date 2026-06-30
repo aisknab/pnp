@@ -26,6 +26,7 @@
   "xDirectBindingSeedCoordinate": "PNP-DIRECT-BIND-X-CRITICAL-WINDOW-ROUTING-SEED-2026-06-27-01",
   "bcDirectBindingSeedCoordinate": "PNP-DIRECT-BIND-BC-BRANCH-CYCLE-SEED-2026-06-27-01",
   "unDirectBindingSeedCoordinate": "PNP-DIRECT-BIND-UN-UNARY-DECODER-SEED-2026-06-27-01",
+  "hnDirectBindingSeedCoordinate": "PNP-DIRECT-BIND-HN-HEREDITARY-NORMAL-FORMS-SEED-2026-06-27-01",
   "noProseOnlyTheoremPolicyCoordinate": "PNP-NO-PROSE-ONLY-THEOREM-POLICY-2026-06-27-01",
   "proofObligationLedgerCoordinate": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
   "gapLedgerCoordinate": "PNP-GAP-LEDGER-2026-06-27-01",
@@ -59,12 +60,13 @@
     {"id":"x-direct-binding-seed-audit","command":"node pcc-direct-bind-critical-window-routing0.mjs --json","outputKind":"artifacts/direct-bind-critical-window-routing/latest-verdict.json"},
     {"id":"bc-direct-binding-seed-audit","command":"node pcc-direct-bind-branch-cycle0.mjs --json","outputKind":"artifacts/direct-bind-branch-cycle/latest-verdict.json"},
     {"id":"un-direct-binding-seed-audit","command":"node pcc-direct-bind-unary-decoder0.mjs --json","outputKind":"artifacts/direct-bind-unary-decoder/latest-verdict.json"},
+    {"id":"hn-direct-binding-seed-audit","command":"node pcc-direct-bind-hereditary-normal-forms0.mjs --json","outputKind":"artifacts/direct-bind-hereditary-normal-forms/latest-verdict.json"},
     {"id":"one-command-verifier","command":"npm run pnp:verify","outputKind":"artifacts/pnp-verify-all/latest-verdict.json"}
   ],
   "nonClaims": [
     "This status file does not activate public theorem emission.",
     "This status file does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
-    "The Base, CHG, Mode, E, N, FT, X, BC, and UN direct-binding seeds do not complete direct checker binding or full historical theorem discharge.",
+    "The Base, CHG, Mode, E, N, FT, X, BC, UN, and HN direct-binding seeds do not complete direct checker binding or full historical theorem discharge.",
     "The historical canonical report may be superseded by successor public-review reports, but this status file records the current non-activation boundary."
   ]
 }
