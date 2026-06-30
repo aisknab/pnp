@@ -24,6 +24,7 @@ CHG  -> pcc-direct-bind-charge-ledger0.mjs
 Mode -> pcc-direct-bind-mode-firewall0.mjs
 E    -> pcc-direct-bind-verifydw-soundness0.mjs
 N    -> pcc-direct-bind-normalization0.mjs
+FT   -> pcc-direct-bind-finite-table0.mjs
 ```
 
 The accepted verdict keeps the public-review boundary explicit:
