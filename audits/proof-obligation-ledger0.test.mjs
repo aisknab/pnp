@@ -20,7 +20,7 @@ test('proof obligation ledger accepts current source ledger', async () => {
   assert.equal(out.proofObligationLedgerReady, true);
   assert.equal(out.fullProofObligationDischargeProved, false);
   assert.equal(out.publicTheoremEmissionAllowedByLedger, false);
-  assert.equal(out.obligationCount, 25);
+  assert.equal(out.obligationCount, 26);
   assert.ok(out.obligationIds.includes('OBL-015-FiniteToUnboundedFamilyAudit'));
   assert.ok(out.obligationIds.includes('OBL-016-BaseDirectBindingSeed'));
   assert.ok(out.obligationIds.includes('OBL-017-CHGDirectBindingSeed'));
@@ -32,6 +32,7 @@ test('proof obligation ledger accepts current source ledger', async () => {
   assert.ok(out.obligationIds.includes('OBL-023-BCDirectBindingSeed'));
   assert.ok(out.obligationIds.includes('OBL-024-UNDirectBindingSeed'));
   assert.ok(out.obligationIds.includes('OBL-025-HNDirectBindingSeed'));
+  assert.ok(out.obligationIds.includes('OBL-026-HResolveDirectBindingSeed'));
   assert.ok(out.sourceFileCount > 0);
   assert.ok(out.testFileCount > 0);
   assert.equal(out.obligationDigestLedgerSha256.length, 64);
