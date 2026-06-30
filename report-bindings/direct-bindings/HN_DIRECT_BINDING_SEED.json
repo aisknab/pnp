@@ -1,0 +1,106 @@
+{
+  "kind": "PNPHNDirectBindingSeed0",
+  "version": 0,
+  "coordinate": "PNP-DIRECT-BIND-HN-HEREDITARY-NORMAL-FORMS-SEED-2026-06-27-01",
+  "title": "HN theorem direct-binding seed",
+  "purpose": "Bind the historical Section 22 HN theorem-ledger row to current hereditary-shape recognition, BWL exactness, LN confluence, ParseOrExit completeness, leaf-tightness, checker-hardening, theorem inventory, coverage matrix, closure plan, proof-obligation, and gap surfaces without claiming complete direct checker binding or theorem activation.",
+  "status": "hn-direct-binding-seed-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "hnDirectBindingSeedReady": true,
+  "releaseCriticalRow": false,
+  "directCheckerBindingComplete": false,
+  "fullHistoricalHNTheoremDischarged": false,
+  "publicTheoremEmissionAllowedByBinding": false,
+  "linkedCoordinates": {
+    "reportTheoremInventory": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
+    "reportTheoremCoverageMatrix": "PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01",
+    "reportTheoremCoverageClosurePlan": "PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01",
+    "proofObligationLedger": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
+    "gapLedger": "PNP-GAP-LEDGER-2026-06-27-01",
+    "checkerTotalityAudit": "PNP-CHECKER-TOTALITY-AUDIT-2026-06-27-01",
+    "negativeCheckerMutationAudit": "PNP-NEGATIVE-CHECKER-MUTATIONS-2026-06-27-01",
+    "ruleFamilyCoverage": "PNP-RULE-FAMILY-COVERAGE-2026-06-27-01"
+  },
+  "boundInventoryEntry": {
+    "inventoryEntryId": "TL-010-HN",
+    "coverageEntryId": "COV-010-HN",
+    "closureEntryId": "DCC-010-HN",
+    "sourceLabel": "HN",
+    "expectedCoverageClass": "inventory-ledger-surface",
+    "expectedClosureStatus": "direct-binding-needed",
+    "expectedNextDirectBindingSurface": "pcc-direct-bind-hereditary-normal-forms0.mjs"
+  },
+  "coveredHNComponents": [
+    {
+      "id": "HN.HereditaryShapeRecognitionSurface",
+      "status": "represented-by-inventory-and-closure-ledgers",
+      "evidence": "report-bindings/REPORT_THEOREM_INVENTORY.json"
+    },
+    {
+      "id": "HN.BWLExactnessSurface",
+      "status": "represented-by-coverage-closure-plan",
+      "evidence": "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json"
+    },
+    {
+      "id": "HN.LNConfluenceSurface",
+      "status": "represented-by-coverage-closure-plan",
+      "evidence": "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json"
+    },
+    {
+      "id": "HN.ParseOrExitSurface",
+      "status": "represented-by-coverage-closure-plan",
+      "evidence": "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json"
+    },
+    {
+      "id": "HN.LeafTightnessSurface",
+      "status": "represented-by-coverage-closure-plan",
+      "evidence": "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json"
+    },
+    {
+      "id": "HN.CheckerHardeningSurface",
+      "status": "represented-by-checker-hardening-ledgers",
+      "evidence": "checker-totality/CHECKER_TOTALITY_AUDIT.json"
+    },
+    {
+      "id": "HN.ActivationBoundary",
+      "status": "represented-not-discharged",
+      "evidence": "proof-obligations/GAP_LEDGER.json"
+    }
+  ],
+  "evidenceSurfaces": [
+    "report-bindings/direct-bindings/HN_DIRECT_BINDING_SEED.json",
+    "report-bindings/direct-bindings/HN_DIRECT_BINDING_SEED.md",
+    "report-bindings/REPORT_THEOREM_INVENTORY.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json",
+    "proof-obligations/OBLIGATION_LEDGER.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "checker-totality/CHECKER_TOTALITY_AUDIT.json",
+    "checker-mutations/NEGATIVE_CHECKER_MUTATIONS.json",
+    "semantic-kernel/RULE_FAMILY_COVERAGE.json",
+    "pcc-direct-bind-hereditary-normal-forms0.mjs",
+    "audits/direct-bind-hereditary-normal-forms0.test.mjs",
+    "PNP_STATUS.json"
+  ],
+  "nonClaims": [
+    "This HN direct-binding seed does not activate public theorem emission.",
+    "This HN direct-binding seed does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This HN direct-binding seed does not claim the full historical HN theorem is completely discharged.",
+    "This HN direct-binding seed does not flip the HN coverage row to directCheckerBindingComplete.",
+    "This HN direct-binding seed binds the HN row to current explicit hereditary-shape, BWL, LN confluence, ParseOrExit, leaf-tightness, checker-hardening, and ledger surfaces and keeps the remaining closure work explicit."
+  ],
+  "audit": {
+    "checker": "CheckHNDirectBindingSeed0",
+    "script": "pcc-direct-bind-hereditary-normal-forms0.mjs",
+    "test": "audits/direct-bind-hereditary-normal-forms0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}

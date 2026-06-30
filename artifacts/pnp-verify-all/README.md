@@ -28,6 +28,7 @@ FT   -> pcc-direct-bind-finite-table0.mjs
 X    -> pcc-direct-bind-critical-window-routing0.mjs
 BC   -> pcc-direct-bind-branch-cycle0.mjs
 UN   -> pcc-direct-bind-unary-decoder0.mjs
+HN   -> pcc-direct-bind-hereditary-normal-forms0.mjs
 ```
 
 The accepted verdict keeps the public-review boundary explicit:

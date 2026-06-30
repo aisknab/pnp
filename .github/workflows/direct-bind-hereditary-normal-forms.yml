@@ -1,0 +1,25 @@
+name: direct-bind-hereditary-normal-forms
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  direct-bind-hereditary-normal-forms:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run HN direct-binding seed checker
+        run: node pcc-direct-bind-hereditary-normal-forms0.mjs --json
+      - name: Run HN direct-binding seed tests
+        run: node --test audits/direct-bind-hereditary-normal-forms0.test.mjs
+      - name: Upload HN direct-binding seed verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: direct-bind-hereditary-normal-forms-latest-verdict
+          path: artifacts/direct-bind-hereditary-normal-forms/latest-verdict.json
