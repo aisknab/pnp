@@ -13,25 +13,7 @@ const EXPECTED_COORDINATE = 'PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01';
 const EXPECTED_BLOCKERS = ['Release.UnrestrictedFinalSoundness', 'ExternalReview.Acceptance'];
 const ALLOWED_STATUSES = ['machine-checked-seed', 'represented-not-activated', 'explicit-external-trust', 'blocked-release-obligation'];
 const EXPECTED_OBLIGATION_IDS = [
-  'OBL-001-ClaimBoundaryNonActivation',
-  'OBL-002-TrustBaseExplicit',
-  'OBL-003-TrustBaseShrinkPlan',
-  'OBL-004-TheoremToCheckerBindings',
-  'OBL-005-MinimalKernelCrossVerification',
-  'OBL-006-CheckerSoundnessSeedAudits',
-  'OBL-007-NANDDirectWireSemantics',
-  'OBL-008-NANDSmallModels',
-  'OBL-009-LockedNANDSATSmallModels',
-  'OBL-010-ComplexityImplicationLedger',
-  'OBL-011-NoHiddenOracleSourceSurface',
-  'OBL-012-ReproducibilityStack',
-  'OBL-013-ReleaseLadderNonActivation',
-  'OBL-014-UnrestrictedFinalSoundnessBlocked',
-  'OBL-015-FiniteToUnboundedFamilyAudit',
-  'OBL-016-BaseDirectBindingSeed',
-  'OBL-017-CHGDirectBindingSeed',
-  'OBL-018-ModeDirectBindingSeed',
-  'OBL-019-EDirectBindingSeed',
+  'OBL-001-ClaimBoundaryNonActivation', 'OBL-002-TrustBaseExplicit', 'OBL-003-TrustBaseShrinkPlan', 'OBL-004-TheoremToCheckerBindings', 'OBL-005-MinimalKernelCrossVerification', 'OBL-006-CheckerSoundnessSeedAudits', 'OBL-007-NANDDirectWireSemantics', 'OBL-008-NANDSmallModels', 'OBL-009-LockedNANDSATSmallModels', 'OBL-010-ComplexityImplicationLedger', 'OBL-011-NoHiddenOracleSourceSurface', 'OBL-012-ReproducibilityStack', 'OBL-013-ReleaseLadderNonActivation', 'OBL-014-UnrestrictedFinalSoundnessBlocked', 'OBL-015-FiniteToUnboundedFamilyAudit', 'OBL-016-BaseDirectBindingSeed', 'OBL-017-CHGDirectBindingSeed', 'OBL-018-ModeDirectBindingSeed', 'OBL-019-EDirectBindingSeed', 'OBL-020-NDirectBindingSeed',
 ];
 
 export async function CheckProofObligationLedger0(options = {}) {
@@ -113,20 +95,7 @@ function validateObligation0(obligation, obligationPath, seen) {
   return { tag: 'accept' };
 }
 
-async function digestObligations0(root, obligations) {
-  const obligationDigests = [];
-  let sourceFileCount = 0;
-  let testFileCount = 0;
-  for (const obligation of obligations) {
-    const sourceFiles = [];
-    for (const relativePath of obligation.sourceFiles) { const file = await digestFile0(root, relativePath, ['obligations', obligation.id, 'sourceFiles']); if (file.tag === 'reject') return file; sourceFiles.push(file); sourceFileCount += 1; }
-    const testFiles = [];
-    for (const relativePath of obligation.testFiles) { const file = await digestFile0(root, relativePath, ['obligations', obligation.id, 'testFiles']); if (file.tag === 'reject') return file; testFiles.push(file); testFileCount += 1; }
-    obligationDigests.push({ id: obligation.id, status: obligation.status, checker: obligation.checker, sourceDigest: sha256Text0(stableStringify0(sourceFiles)), testDigest: sha256Text0(stableStringify0(testFiles)), sourceFiles, testFiles, dependencyDigest: sha256Text0(stableStringify0(obligation.dependencies)) });
-  }
-  return { tag: 'accept', obligationDigests, sourceFileCount, testFileCount };
-}
-
+async function digestObligations0(root, obligations) { const obligationDigests = []; let sourceFileCount = 0; let testFileCount = 0; for (const obligation of obligations) { const sourceFiles = []; for (const relativePath of obligation.sourceFiles) { const file = await digestFile0(root, relativePath, ['obligations', obligation.id, 'sourceFiles']); if (file.tag === 'reject') return file; sourceFiles.push(file); sourceFileCount += 1; } const testFiles = []; for (const relativePath of obligation.testFiles) { const file = await digestFile0(root, relativePath, ['obligations', obligation.id, 'testFiles']); if (file.tag === 'reject') return file; testFiles.push(file); testFileCount += 1; } obligationDigests.push({ id: obligation.id, status: obligation.status, checker: obligation.checker, sourceDigest: sha256Text0(stableStringify0(sourceFiles)), testDigest: sha256Text0(stableStringify0(testFiles)), sourceFiles, testFiles, dependencyDigest: sha256Text0(stableStringify0(obligation.dependencies)) }); } return { tag: 'accept', obligationDigests, sourceFileCount, testFileCount }; }
 async function digestFile0(root, relativePath, pathArray) { const safePath = safeJoin0(root, relativePath); if (safePath === null) return reject0('ProofObligationLedger.UnsafePath', [...pathArray, relativePath], 'file path must stay inside repository root'); try { const info = await stat(safePath); if (!info.isFile()) return reject0('ProofObligationLedger.PathNotFile', [...pathArray, relativePath], 'path must be a file'); const bytes = await readFile(safePath); return { path: relativePath, sha256: sha256Hex0(bytes), size: bytes.length }; } catch (error) { return reject0('ProofObligationLedger.PathMissing', [...pathArray, relativePath], 'file path is missing', normalizeError0(error)); } }
 function validateStringArray0(value, pathArray, nonEmpty) { if (!Array.isArray(value)) return reject0('ProofObligationLedger.StringArrayShape', pathArray, 'field must be an array of strings'); if (nonEmpty && value.length === 0) return reject0('ProofObligationLedger.StringArrayEmpty', pathArray, 'field must not be empty'); for (let index = 0; index < value.length; index += 1) if (!nonempty0(value[index])) return reject0('ProofObligationLedger.StringArrayEntry', [...pathArray, index], 'array entry must be a non-empty string'); return { tag: 'accept' }; }
 function safeJoin0(root, relativePath) { if (!nonempty0(relativePath) || path.isAbsolute(relativePath)) return null; const resolvedRoot = path.resolve(root); const resolved = path.resolve(resolvedRoot, relativePath); const relative = path.relative(resolvedRoot, resolved); if (relative.startsWith('..') || path.isAbsolute(relative)) return null; return resolved; }
@@ -144,5 +113,4 @@ function parseArgs0(argv) { const options = { root: process.cwd(), ledgerPath: L
 function requireValue0(argv, index, flag) { if (index >= argv.length) throw new Error(`${flag} requires a value`); return argv[index]; }
 function printHelp0() { console.log(`Usage: node pcc-proof-obligation-ledger0.mjs [options]\n\nOptions:\n  --json             Emit verdict JSON.\n  --no-write         Do not write artifacts/proof-obligations/latest-verdict.json.\n  --root <path>      Repository root. Defaults to cwd.\n  --ledger <path>    Proof obligation ledger path relative to root.\n  --output <path>    Verdict output path relative to root.\n`); }
 async function main0() { let options; try { options = parseArgs0(process.argv.slice(2)); } catch (error) { const verdict = reject0('Cli.BadArgument', [], 'bad proof obligation ledger CLI argument', normalizeError0(error)); console.error(JSON.stringify(verdict, null, 2)); process.exit(2); } const verdict = await CheckProofObligationLedger0(options); const rendered = JSON.stringify(verdict, null, 2); if (options.json || verdict.tag === 'accept') console.log(rendered); else console.error(rendered); process.exit(verdict.tag === 'accept' ? 0 : 1); }
-
 if (import.meta.url === `file://${process.argv[1]}`) main0();
