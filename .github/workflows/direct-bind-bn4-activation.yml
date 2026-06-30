@@ -1,0 +1,25 @@
+name: direct-bind-bn4-activation
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  direct-bind-bn4-activation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run BN4 direct-binding gap seed checker
+        run: node pcc-direct-bind-bn4-activation0.mjs --json
+      - name: Run BN4 direct-binding gap seed tests
+        run: node --test audits/direct-bind-bn4-activation0.test.mjs
+      - name: Upload BN4 direct-binding gap seed verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: direct-bind-bn4-activation-latest-verdict
+          path: artifacts/direct-bind-bn4-activation/latest-verdict.json
