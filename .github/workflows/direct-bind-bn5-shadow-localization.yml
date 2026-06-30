@@ -1,0 +1,25 @@
+name: direct-bind-bn5-shadow-localization
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  direct-bind-bn5-shadow-localization:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run BN5 direct-binding gap seed checker
+        run: node pcc-direct-bind-bn5-shadow-localization0.mjs --json
+      - name: Run BN5 direct-binding gap seed tests
+        run: node --test audits/direct-bind-bn5-shadow-localization0.test.mjs
+      - name: Upload BN5 direct-binding gap seed verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: direct-bind-bn5-shadow-localization-latest-verdict
+          path: artifacts/direct-bind-bn5-shadow-localization/latest-verdict.json
