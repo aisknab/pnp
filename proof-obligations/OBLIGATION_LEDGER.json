@@ -9,10 +9,7 @@
     "publicTheoremEmissionAllowed": false,
     "finalTheoremReady": false,
     "activeFinalNodeIds": [],
-    "remainingBlockers": [
-      "Release.UnrestrictedFinalSoundness",
-      "ExternalReview.Acceptance"
-    ]
+    "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]
   },
   "proofObligationLedgerReady": true,
   "fullProofObligationDischargeProved": false,
@@ -29,176 +26,24 @@
     "blocked-release-obligation": "The obligation is intentionally blocked by the active release ladder."
   },
   "obligations": [
-    {
-      "id": "OBL-001-ClaimBoundaryNonActivation",
-      "statement": "The current repository status disables public theorem emission, does not mark the final theorem ready, keeps active final theorem node ids empty, and preserves the active blockers.",
-      "checker": "CheckReleaseLadder0",
-      "sourceFiles": ["PNP_STATUS.json", "release/RELEASE_LADDER.json", "pcc-release-ladder0.mjs"],
-      "testFiles": ["audits/release-ladder0.test.mjs"],
-      "status": "machine-checked-seed",
-      "dependencies": [],
-      "hashMode": "checker-computed"
-    },
-    {
-      "id": "OBL-002-TrustBaseExplicit",
-      "statement": "All current external assumptions are first-class trust-base entries and remain non-empty, explicit, and boundary-preserving.",
-      "checker": "CheckTrustBase0",
-      "sourceFiles": ["trust-base/TRUST_BASE.json", "TRUST_BASE.md", "pcc-trust-base0.mjs"],
-      "testFiles": ["audits/trust-base0.test.mjs"],
-      "status": "explicit-external-trust",
-      "dependencies": ["OBL-001-ClaimBoundaryNonActivation"],
-      "hashMode": "checker-computed"
-    },
-    {
-      "id": "OBL-003-TrustBaseShrinkPlan",
-      "statement": "The trust-base reduction plan is represented as explicit tasks rather than hidden assumptions.",
-      "checker": "CheckTrustBaseShrinkPlan0",
-      "sourceFiles": ["trust-base/SHRINK_PLAN.json", "trust-base/SHRINK_PLAN.md", "pcc-trust-base-shrink-plan0.mjs"],
-      "testFiles": ["audits/trust-base-shrink-plan0.test.mjs"],
-      "status": "represented-not-activated",
-      "dependencies": ["OBL-002-TrustBaseExplicit"],
-      "hashMode": "checker-computed"
-    },
-    {
-      "id": "OBL-004-TheoremToCheckerBindings",
-      "statement": "The release-critical theorem spine is bound to concrete checker files, proof artifacts, and tests without activating public theorem emission.",
-      "checker": "AuditReportTheoremBindings0",
-      "sourceFiles": ["report-bindings/REPORT_THEOREM_BINDINGS.json", "scripts/audit-report-theorem-bindings.mjs"],
-      "testFiles": ["test/pcc-final-proof-report0.test.mjs"],
-      "status": "represented-not-activated",
-      "dependencies": ["OBL-001-ClaimBoundaryNonActivation"],
-      "hashMode": "checker-computed"
-    },
-    {
-      "id": "OBL-005-MinimalKernelCrossVerification",
-      "statement": "The minimal proof-kernel coordinate is represented and cross-checked by independent verifier surfaces consuming JSON artifacts rather than importing the JavaScript checker logic.",
-      "checker": "CrossVerifyMinimalKernel0",
-      "sourceFiles": ["kernel/PNP_MINIMAL_KERNEL.json", "scripts/cross-verify.mjs", "independent-verifiers/python/verify_minimal_kernel.py"],
-      "testFiles": ["audits/independent-verifiers-no-shared-code.test.mjs"],
-      "status": "machine-checked-seed",
-      "dependencies": ["OBL-002-TrustBaseExplicit"],
-      "hashMode": "checker-computed"
-    },
-    {
-      "id": "OBL-006-CheckerSoundnessSeedAudits",
-      "statement": "Checker-totality, negative-mutation, rule-family coverage, dependency graph, and no-circular-authority seed audits are represented as executable hardening obligations.",
-      "checker": "CheckerHardeningSeedAudits0",
-      "sourceFiles": ["checker-totality/CHECKER_TOTALITY_AUDIT.json", "checker-mutations/NEGATIVE_CHECKER_MUTATIONS.json", "semantic-kernel/RULE_FAMILY_COVERAGE.json", "checker-cycles/CHECKER_AUTHORITY_GRAPH.json", "scripts/audit-checker-totality.mjs", "scripts/audit-negative-checker-mutations.mjs", "pcc-rule-family-coverage0.mjs", "scripts/generate-checker-dependency-graph.mjs", "scripts/audit-checker-cycles.mjs"],
-      "testFiles": ["audits/checker-totality0.test.mjs", "audits/negative-checker-mutations0.test.mjs", "audits/rule-family-coverage0.test.mjs", "audits/checker-dependency-graph0.test.mjs", "audits/checker-cycles0.test.mjs"],
-      "status": "machine-checked-seed",
-      "dependencies": ["OBL-001-ClaimBoundaryNonActivation"],
-      "hashMode": "checker-computed"
-    },
-    {
-      "id": "OBL-007-NANDDirectWireSemantics",
-      "statement": "The direct-wire NAND executable semantics, carrier/interface conventions, replacement semantics, and bounded semantic checks are represented by source, checker, and tests.",
-      "checker": "CheckNANDDirectWireSemantics0",
-      "sourceFiles": ["semantics/nand-direct-wire-spec.json", "semantics/nand-direct-wire-spec.md", "semantics/nand-direct-wire-reference.mjs", "pcc-nand-direct-wire-semantics0.mjs"],
-      "testFiles": ["audits/nand-direct-wire-semantics0.test.mjs"],
-      "status": "machine-checked-seed",
-      "dependencies": ["OBL-005-MinimalKernelCrossVerification"],
-      "hashMode": "checker-computed"
-    },
-    {
-      "id": "OBL-008-NANDSmallModels",
-      "statement": "The bounded NAND direct-wire small-model audit replays configured finite semantic universes and compares executable semantics within that scope.",
-      "checker": "CheckNANDSmallModels0",
-      "sourceFiles": ["semantics/nand-small-models-config.json", "semantics/nand-small-models.mjs", "pcc-nand-small-models0.mjs"],
-      "testFiles": ["audits/nand-small-models0.test.mjs"],
-      "status": "machine-checked-seed",
-      "dependencies": ["OBL-007-NANDDirectWireSemantics"],
-      "hashMode": "checker-computed"
-    },
-    {
-      "id": "OBL-009-LockedNANDSATSmallModels",
-      "statement": "The locked-NAND SAT small-model seed agrees with brute-force CNF SAT inside its configured bounded formula universe and keeps the full historical threshold theorem unactivated.",
-      "checker": "CheckLockedNANDSATSmallModels0",
-      "sourceFiles": ["semantics/locked-nand-sat-small-models-config.json", "semantics/locked-nand-sat-small-models.mjs", "pcc-locked-nand-sat-small-models0.mjs"],
-      "testFiles": ["audits/locked-nand-sat-small-models0.test.mjs"],
-      "status": "machine-checked-seed",
-      "dependencies": ["OBL-008-NANDSmallModels"],
-      "hashMode": "checker-computed"
-    },
-    {
-      "id": "OBL-010-ComplexityImplicationLedger",
-      "statement": "The SAT-in-P to P=NP implication route is represented as conditional proof objects and does not discharge the full activation path.",
-      "checker": "CheckComplexityLedger0",
-      "sourceFiles": ["complexity/COMPLEXITY_LEDGER.json", "complexity/COMPLEXITY_LEDGER.md", "pcc-complexity-ledger0.mjs"],
-      "testFiles": ["audits/complexity-ledger0.test.mjs"],
-      "status": "represented-not-activated",
-      "dependencies": ["OBL-009-LockedNANDSATSmallModels", "OBL-002-TrustBaseExplicit"],
-      "hashMode": "checker-computed"
-    },
-    {
-      "id": "OBL-011-NoHiddenOracleSourceSurface",
-      "statement": "The current source-surface no-hidden-oracle scan is represented and rejects injected proof-bypass shortcuts while remaining a seed audit rather than a full semantic proof.",
-      "checker": "AuditNoHiddenOracle0",
-      "sourceFiles": ["oracle-audit/NO_HIDDEN_ORACLE_AUDIT.json", "scripts/audit-no-hidden-oracle.mjs"],
-      "testFiles": ["audits/no-hidden-oracle0.test.mjs"],
-      "status": "machine-checked-seed",
-      "dependencies": ["OBL-006-CheckerSoundnessSeedAudits"],
-      "hashMode": "checker-computed"
-    },
-    {
-      "id": "OBL-012-ReproducibilityStack",
-      "statement": "Fresh-clone verification, container environment, multi-platform CI, determinism audit, and regeneration ledger provide explicit reproducibility surfaces without claiming digest-pinned full-environment identity.",
-      "checker": "ReproducibilitySeedStack0",
-      "sourceFiles": ["reproducibility/FRESH_CLONE_VERIFY.json", "reproducibility/CONTAINER_ENVIRONMENT.json", "reproducibility/MULTI_PLATFORM_CI.json", "reproducibility/DETERMINISM_AUDIT.json", "artifacts/regeneration/REGENERATION_LEDGER.json", "scripts/fresh-clone-verify.sh", "scripts/audit-determinism.mjs", "scripts/audit-regeneration-ledger.mjs"],
-      "testFiles": ["audits/fresh-clone-verify0.test.mjs", "audits/container-environment0.test.mjs", "audits/multi-platform-ci0.test.mjs", "audits/determinism0.test.mjs", "audits/regeneration-ledger0.test.mjs"],
-      "status": "machine-checked-seed",
-      "dependencies": ["OBL-001-ClaimBoundaryNonActivation"],
-      "hashMode": "checker-computed"
-    },
-    {
-      "id": "OBL-013-ReleaseLadderNonActivation",
-      "statement": "The activation ladder records completed public-review infrastructure and keeps unrestricted final soundness, internal theorem activation, and public theorem emission blocked.",
-      "checker": "CheckReleaseLadder0",
-      "sourceFiles": ["release/RELEASE_LADDER.json", "RELEASE_LADDER.md", "pcc-release-ladder0.mjs"],
-      "testFiles": ["audits/release-ladder0.test.mjs"],
-      "status": "blocked-release-obligation",
-      "dependencies": ["OBL-010-ComplexityImplicationLedger", "OBL-011-NoHiddenOracleSourceSurface", "OBL-012-ReproducibilityStack"],
-      "hashMode": "checker-computed"
-    },
-    {
-      "id": "OBL-014-UnrestrictedFinalSoundnessBlocked",
-      "statement": "The unrestricted final soundness obligation remains explicitly blocked and cannot be treated as discharged by bounded small-model, seed-audit, or release-ladder evidence.",
-      "checker": "CheckReleaseLadder0",
-      "sourceFiles": ["PNP_STATUS.json", "release/RELEASE_LADDER.json"],
-      "testFiles": ["audits/release-ladder0.test.mjs"],
-      "status": "blocked-release-obligation",
-      "dependencies": ["OBL-013-ReleaseLadderNonActivation"],
-      "hashMode": "checker-computed"
-    },
-    {
-      "id": "OBL-015-FiniteToUnboundedFamilyAudit",
-      "statement": "The finite-to-unbounded uniformity question is represented by a dedicated audit that keeps all-input-size coverage and polynomial uniform generation undisclosed rather than inferred from bounded seed evidence.",
-      "checker": "CheckFiniteToUnboundedFamilyAudit0",
-      "sourceFiles": ["proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json", "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.md", "pcc-finite-to-unbounded-family-audit0.mjs", "proof-obligations/GAP_LEDGER.json"],
-      "testFiles": ["audits/finite-to-unbounded-family-audit0.test.mjs"],
-      "status": "represented-not-activated",
-      "dependencies": ["OBL-010-ComplexityImplicationLedger", "OBL-014-UnrestrictedFinalSoundnessBlocked"],
-      "hashMode": "checker-computed"
-    },
-    {
-      "id": "OBL-016-BaseDirectBindingSeed",
-      "statement": "The historical Section 22 Base theorem-ledger row is bound to the current executable NAND direct-wire semantics seed, report theorem inventory, coverage matrix, closure plan, and non-activation boundary without claiming complete direct checker binding.",
-      "checker": "CheckBaseDirectBindingSeed0",
-      "sourceFiles": ["report-bindings/direct-bindings/BASE_DIRECT_BINDING_SEED.json", "report-bindings/direct-bindings/BASE_DIRECT_BINDING_SEED.md", "pcc-direct-bind-base-semantics0.mjs", "report-bindings/REPORT_THEOREM_INVENTORY.json", "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json", "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json", "semantics/nand-direct-wire-spec.json", "proof-obligations/GAP_LEDGER.json"],
-      "testFiles": ["audits/direct-bind-base-semantics0.test.mjs"],
-      "status": "machine-checked-seed",
-      "dependencies": ["OBL-007-NANDDirectWireSemantics", "OBL-014-UnrestrictedFinalSoundnessBlocked"],
-      "hashMode": "checker-computed"
-    },
-    {
-      "id": "OBL-017-CHGDirectBindingSeed",
-      "statement": "The historical Section 22 CHG theorem-ledger row is bound to current charge-ledger, materializer ownership, exact-size-equation, checker-hardening, theorem coverage, proof-obligation, and gap-ledger surfaces without claiming complete direct checker binding.",
-      "checker": "CheckCHGDirectBindingSeed0",
-      "sourceFiles": ["report-bindings/direct-bindings/CHG_DIRECT_BINDING_SEED.json", "report-bindings/direct-bindings/CHG_DIRECT_BINDING_SEED.md", "pcc-direct-bind-charge-ledger0.mjs", "report-bindings/REPORT_THEOREM_INVENTORY.json", "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json", "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json", "checker-totality/CHECKER_TOTALITY_AUDIT.json", "checker-mutations/NEGATIVE_CHECKER_MUTATIONS.json", "semantic-kernel/RULE_FAMILY_COVERAGE.json", "proof-obligations/GAP_LEDGER.json"],
-      "testFiles": ["audits/direct-bind-charge-ledger0.test.mjs"],
-      "status": "machine-checked-seed",
-      "dependencies": ["OBL-006-CheckerSoundnessSeedAudits", "OBL-014-UnrestrictedFinalSoundnessBlocked"],
-      "hashMode": "checker-computed"
-    }
+    {"id":"OBL-001-ClaimBoundaryNonActivation","statement":"The current repository status disables public theorem emission, final theorem readiness, and active final theorem nodes while preserving active blockers.","checker":"CheckReleaseLadder0","sourceFiles":["PNP_STATUS.json","release/RELEASE_LADDER.json","pcc-release-ladder0.mjs"],"testFiles":["audits/release-ladder0.test.mjs"],"status":"machine-checked-seed","dependencies":[],"hashMode":"checker-computed"},
+    {"id":"OBL-002-TrustBaseExplicit","statement":"All current external assumptions are first-class trust-base entries and remain non-empty, explicit, and boundary-preserving.","checker":"CheckTrustBase0","sourceFiles":["trust-base/TRUST_BASE.json","TRUST_BASE.md","pcc-trust-base0.mjs"],"testFiles":["audits/trust-base0.test.mjs"],"status":"explicit-external-trust","dependencies":["OBL-001-ClaimBoundaryNonActivation"],"hashMode":"checker-computed"},
+    {"id":"OBL-003-TrustBaseShrinkPlan","statement":"The trust-base reduction plan is represented as explicit tasks rather than hidden assumptions.","checker":"CheckTrustBaseShrinkPlan0","sourceFiles":["trust-base/SHRINK_PLAN.json","trust-base/SHRINK_PLAN.md","pcc-trust-base-shrink-plan0.mjs"],"testFiles":["audits/trust-base-shrink-plan0.test.mjs"],"status":"represented-not-activated","dependencies":["OBL-002-TrustBaseExplicit"],"hashMode":"checker-computed"},
+    {"id":"OBL-004-TheoremToCheckerBindings","statement":"The release-critical theorem spine is bound to concrete checker files, proof artifacts, and tests without activating public theorem emission.","checker":"AuditReportTheoremBindings0","sourceFiles":["report-bindings/REPORT_THEOREM_BINDINGS.json","scripts/audit-report-theorem-bindings.mjs"],"testFiles":["test/pcc-final-proof-report0.test.mjs"],"status":"represented-not-activated","dependencies":["OBL-001-ClaimBoundaryNonActivation"],"hashMode":"checker-computed"},
+    {"id":"OBL-005-MinimalKernelCrossVerification","statement":"The minimal proof-kernel coordinate is represented and cross-checked by independent verifier surfaces consuming JSON artifacts rather than importing the JavaScript checker logic.","checker":"CrossVerifyMinimalKernel0","sourceFiles":["kernel/PNP_MINIMAL_KERNEL.json","scripts/cross-verify.mjs","independent-verifiers/python/verify_minimal_kernel.py"],"testFiles":["audits/independent-verifiers-no-shared-code.test.mjs"],"status":"machine-checked-seed","dependencies":["OBL-002-TrustBaseExplicit"],"hashMode":"checker-computed"},
+    {"id":"OBL-006-CheckerSoundnessSeedAudits","statement":"Checker-totality, negative-mutation, rule-family coverage, dependency graph, and no-circular-authority seed audits are represented as executable hardening obligations.","checker":"CheckerHardeningSeedAudits0","sourceFiles":["checker-totality/CHECKER_TOTALITY_AUDIT.json","checker-mutations/NEGATIVE_CHECKER_MUTATIONS.json","semantic-kernel/RULE_FAMILY_COVERAGE.json","checker-cycles/CHECKER_AUTHORITY_GRAPH.json","scripts/audit-checker-totality.mjs","scripts/audit-negative-checker-mutations.mjs","pcc-rule-family-coverage0.mjs","scripts/generate-checker-dependency-graph.mjs","scripts/audit-checker-cycles.mjs"],"testFiles":["audits/checker-totality0.test.mjs","audits/negative-checker-mutations0.test.mjs","audits/rule-family-coverage0.test.mjs","audits/checker-dependency-graph0.test.mjs","audits/checker-cycles0.test.mjs"],"status":"machine-checked-seed","dependencies":["OBL-001-ClaimBoundaryNonActivation"],"hashMode":"checker-computed"},
+    {"id":"OBL-007-NANDDirectWireSemantics","statement":"The direct-wire NAND executable semantics, carrier/interface conventions, replacement semantics, and bounded semantic checks are represented by source, checker, and tests.","checker":"CheckNANDDirectWireSemantics0","sourceFiles":["semantics/nand-direct-wire-spec.json","semantics/nand-direct-wire-spec.md","semantics/nand-direct-wire-reference.mjs","pcc-nand-direct-wire-semantics0.mjs"],"testFiles":["audits/nand-direct-wire-semantics0.test.mjs"],"status":"machine-checked-seed","dependencies":["OBL-005-MinimalKernelCrossVerification"],"hashMode":"checker-computed"},
+    {"id":"OBL-008-NANDSmallModels","statement":"The bounded NAND direct-wire small-model audit replays configured finite semantic universes and compares executable semantics within that scope.","checker":"CheckNANDSmallModels0","sourceFiles":["semantics/nand-small-models-config.json","semantics/nand-small-models.mjs","pcc-nand-small-models0.mjs"],"testFiles":["audits/nand-small-models0.test.mjs"],"status":"machine-checked-seed","dependencies":["OBL-007-NANDDirectWireSemantics"],"hashMode":"checker-computed"},
+    {"id":"OBL-009-LockedNANDSATSmallModels","statement":"The locked-NAND SAT small-model seed agrees with brute-force CNF SAT inside its configured bounded formula universe and keeps the full historical threshold theorem unactivated.","checker":"CheckLockedNANDSATSmallModels0","sourceFiles":["semantics/locked-nand-sat-small-models-config.json","semantics/locked-nand-sat-small-models.mjs","pcc-locked-nand-sat-small-models0.mjs"],"testFiles":["audits/locked-nand-sat-small-models0.test.mjs"],"status":"machine-checked-seed","dependencies":["OBL-008-NANDSmallModels"],"hashMode":"checker-computed"},
+    {"id":"OBL-010-ComplexityImplicationLedger","statement":"The SAT-in-P to P=NP implication route is represented as conditional proof objects and does not discharge the full activation path.","checker":"CheckComplexityLedger0","sourceFiles":["complexity/COMPLEXITY_LEDGER.json","complexity/COMPLEXITY_LEDGER.md","pcc-complexity-ledger0.mjs"],"testFiles":["audits/complexity-ledger0.test.mjs"],"status":"represented-not-activated","dependencies":["OBL-009-LockedNANDSATSmallModels","OBL-002-TrustBaseExplicit"],"hashMode":"checker-computed"},
+    {"id":"OBL-011-NoHiddenOracleSourceSurface","statement":"The current source-surface no-hidden-oracle scan is represented and rejects injected proof-bypass shortcuts while remaining a seed audit rather than a full semantic proof.","checker":"AuditNoHiddenOracle0","sourceFiles":["oracle-audit/NO_HIDDEN_ORACLE_AUDIT.json","scripts/audit-no-hidden-oracle.mjs"],"testFiles":["audits/no-hidden-oracle0.test.mjs"],"status":"machine-checked-seed","dependencies":["OBL-006-CheckerSoundnessSeedAudits"],"hashMode":"checker-computed"},
+    {"id":"OBL-012-ReproducibilityStack","statement":"Fresh-clone verification, container environment, multi-platform CI, determinism audit, and regeneration ledger provide explicit reproducibility surfaces without claiming digest-pinned full-environment identity.","checker":"ReproducibilitySeedStack0","sourceFiles":["reproducibility/FRESH_CLONE_VERIFY.json","reproducibility/CONTAINER_ENVIRONMENT.json","reproducibility/MULTI_PLATFORM_CI.json","reproducibility/DETERMINISM_AUDIT.json","artifacts/regeneration/REGENERATION_LEDGER.json","scripts/fresh-clone-verify.sh","scripts/audit-determinism.mjs","scripts/audit-regeneration-ledger.mjs"],"testFiles":["audits/fresh-clone-verify0.test.mjs","audits/container-environment0.test.mjs","audits/multi-platform-ci0.test.mjs","audits/determinism0.test.mjs","audits/regeneration-ledger0.test.mjs"],"status":"machine-checked-seed","dependencies":["OBL-001-ClaimBoundaryNonActivation"],"hashMode":"checker-computed"},
+    {"id":"OBL-013-ReleaseLadderNonActivation","statement":"The activation ladder records completed public-review infrastructure and keeps unrestricted final soundness, internal theorem activation, and public theorem emission blocked.","checker":"CheckReleaseLadder0","sourceFiles":["release/RELEASE_LADDER.json","RELEASE_LADDER.md","pcc-release-ladder0.mjs"],"testFiles":["audits/release-ladder0.test.mjs"],"status":"blocked-release-obligation","dependencies":["OBL-010-ComplexityImplicationLedger","OBL-011-NoHiddenOracleSourceSurface","OBL-012-ReproducibilityStack"],"hashMode":"checker-computed"},
+    {"id":"OBL-014-UnrestrictedFinalSoundnessBlocked","statement":"The unrestricted final soundness obligation remains explicitly blocked and cannot be treated as discharged by bounded small-model, seed-audit, or release-ladder evidence.","checker":"CheckReleaseLadder0","sourceFiles":["PNP_STATUS.json","release/RELEASE_LADDER.json"],"testFiles":["audits/release-ladder0.test.mjs"],"status":"blocked-release-obligation","dependencies":["OBL-013-ReleaseLadderNonActivation"],"hashMode":"checker-computed"},
+    {"id":"OBL-015-FiniteToUnboundedFamilyAudit","statement":"The finite-to-unbounded uniformity question is represented by a dedicated audit that keeps all-input-size coverage and polynomial uniform generation undisclosed rather than inferred from bounded seed evidence.","checker":"CheckFiniteToUnboundedFamilyAudit0","sourceFiles":["proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json","proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.md","pcc-finite-to-unbounded-family-audit0.mjs","proof-obligations/GAP_LEDGER.json"],"testFiles":["audits/finite-to-unbounded-family-audit0.test.mjs"],"status":"represented-not-activated","dependencies":["OBL-010-ComplexityImplicationLedger","OBL-014-UnrestrictedFinalSoundnessBlocked"],"hashMode":"checker-computed"},
+    {"id":"OBL-016-BaseDirectBindingSeed","statement":"The historical Section 22 Base theorem-ledger row is bound to the current executable NAND direct-wire semantics seed, report theorem inventory, coverage matrix, closure plan, and non-activation boundary without claiming complete direct checker binding.","checker":"CheckBaseDirectBindingSeed0","sourceFiles":["report-bindings/direct-bindings/BASE_DIRECT_BINDING_SEED.json","report-bindings/direct-bindings/BASE_DIRECT_BINDING_SEED.md","pcc-direct-bind-base-semantics0.mjs","report-bindings/REPORT_THEOREM_INVENTORY.json","report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json","report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json","semantics/nand-direct-wire-spec.json","proof-obligations/GAP_LEDGER.json"],"testFiles":["audits/direct-bind-base-semantics0.test.mjs"],"status":"machine-checked-seed","dependencies":["OBL-007-NANDDirectWireSemantics","OBL-014-UnrestrictedFinalSoundnessBlocked"],"hashMode":"checker-computed"},
+    {"id":"OBL-017-CHGDirectBindingSeed","statement":"The historical Section 22 CHG theorem-ledger row is bound to current charge-ledger, materializer ownership, exact-size-equation, checker-hardening, theorem coverage, proof-obligation, and gap-ledger surfaces without claiming complete direct checker binding.","checker":"CheckCHGDirectBindingSeed0","sourceFiles":["report-bindings/direct-bindings/CHG_DIRECT_BINDING_SEED.json","report-bindings/direct-bindings/CHG_DIRECT_BINDING_SEED.md","pcc-direct-bind-charge-ledger0.mjs","report-bindings/REPORT_THEOREM_INVENTORY.json","report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json","report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json","checker-totality/CHECKER_TOTALITY_AUDIT.json","checker-mutations/NEGATIVE_CHECKER_MUTATIONS.json","semantic-kernel/RULE_FAMILY_COVERAGE.json","proof-obligations/GAP_LEDGER.json"],"testFiles":["audits/direct-bind-charge-ledger0.test.mjs"],"status":"machine-checked-seed","dependencies":["OBL-006-CheckerSoundnessSeedAudits","OBL-014-UnrestrictedFinalSoundnessBlocked"],"hashMode":"checker-computed"},
+    {"id":"OBL-018-ModeDirectBindingSeed","statement":"The historical Section 22 Mode theorem-ledger row is bound to current full-to-quotient projection, mode-firewall, transfer-identity, minimal-kernel, theorem coverage, proof-obligation, and gap-ledger surfaces without claiming complete direct checker binding.","checker":"CheckModeDirectBindingSeed0","sourceFiles":["report-bindings/direct-bindings/MODE_DIRECT_BINDING_SEED.json","report-bindings/direct-bindings/MODE_DIRECT_BINDING_SEED.md","pcc-direct-bind-mode-firewall0.mjs","report-bindings/REPORT_THEOREM_INVENTORY.json","report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json","report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json","kernel/PNP_MINIMAL_KERNEL.json","scripts/cross-verify.mjs","proof-obligations/GAP_LEDGER.json"],"testFiles":["audits/direct-bind-mode-firewall0.test.mjs"],"status":"machine-checked-seed","dependencies":["OBL-005-MinimalKernelCrossVerification","OBL-014-UnrestrictedFinalSoundnessBlocked"],"hashMode":"checker-computed"}
   ],
   "audit": {
     "checker": "CheckProofObligationLedger0",

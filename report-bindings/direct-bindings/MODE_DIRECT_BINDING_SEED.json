@@ -1,0 +1,88 @@
+{
+  "kind": "PNPModeDirectBindingSeed0",
+  "version": 0,
+  "coordinate": "PNP-DIRECT-BIND-MODE-FIREWALL-SEED-2026-06-27-01",
+  "title": "Mode theorem direct-binding seed",
+  "purpose": "Bind the historical Section 22 Mode theorem-ledger row to current full-to-quotient projection, mode-firewall, transfer-identity, minimal-kernel, theorem inventory, coverage matrix, closure plan, proof-obligation, and gap surfaces without claiming complete direct checker binding or theorem activation.",
+  "status": "mode-direct-binding-seed-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "modeDirectBindingSeedReady": true,
+  "releaseCriticalRow": false,
+  "directCheckerBindingComplete": false,
+  "fullHistoricalModeTheoremDischarged": false,
+  "publicTheoremEmissionAllowedByBinding": false,
+  "linkedCoordinates": {
+    "reportTheoremInventory": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
+    "reportTheoremCoverageMatrix": "PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01",
+    "reportTheoremCoverageClosurePlan": "PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01",
+    "minimalKernel": "PNP-MINIMAL-KERNEL-2026-06-27-01",
+    "proofObligationLedger": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
+    "gapLedger": "PNP-GAP-LEDGER-2026-06-27-01"
+  },
+  "boundInventoryEntry": {
+    "inventoryEntryId": "TL-003-Mode",
+    "coverageEntryId": "COV-003-Mode",
+    "closureEntryId": "DCC-003-Mode",
+    "sourceLabel": "Mode",
+    "expectedCoverageClass": "obligation-ledger-surface",
+    "expectedClosureStatus": "direct-binding-needed",
+    "expectedNextDirectBindingSurface": "pcc-direct-bind-mode-firewall0.mjs"
+  },
+  "coveredModeComponents": [
+    {
+      "id": "Mode.FullToQuotientProjectionSurface",
+      "status": "represented-by-minimal-kernel-and-inventory",
+      "evidence": "kernel/PNP_MINIMAL_KERNEL.json"
+    },
+    {
+      "id": "Mode.QuotientEqualityNonconstructiveFirewall",
+      "status": "represented-by-closure-boundary",
+      "evidence": "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json"
+    },
+    {
+      "id": "Mode.TransferIdentitySurface",
+      "status": "represented-by-proof-obligation-ledger",
+      "evidence": "proof-obligations/OBLIGATION_LEDGER.json"
+    },
+    {
+      "id": "Mode.ProjectionDefectNonnegativeSurface",
+      "status": "represented-not-discharged",
+      "evidence": "proof-obligations/GAP_LEDGER.json"
+    }
+  ],
+  "evidenceSurfaces": [
+    "report-bindings/direct-bindings/MODE_DIRECT_BINDING_SEED.json",
+    "report-bindings/direct-bindings/MODE_DIRECT_BINDING_SEED.md",
+    "report-bindings/REPORT_THEOREM_INVENTORY.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json",
+    "kernel/PNP_MINIMAL_KERNEL.json",
+    "scripts/cross-verify.mjs",
+    "proof-obligations/OBLIGATION_LEDGER.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "pcc-direct-bind-mode-firewall0.mjs",
+    "audits/direct-bind-mode-firewall0.test.mjs",
+    "PNP_STATUS.json"
+  ],
+  "nonClaims": [
+    "This Mode direct-binding seed does not activate public theorem emission.",
+    "This Mode direct-binding seed does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This Mode direct-binding seed does not claim the full historical Mode theorem is completely discharged.",
+    "This Mode direct-binding seed does not flip the Mode coverage row to directCheckerBindingComplete.",
+    "This Mode direct-binding seed binds the Mode row to current explicit projection, firewall, transfer-identity, and kernel surfaces and keeps the remaining closure work explicit."
+  ],
+  "audit": {
+    "checker": "CheckModeDirectBindingSeed0",
+    "script": "pcc-direct-bind-mode-firewall0.mjs",
+    "test": "audits/direct-bind-mode-firewall0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
