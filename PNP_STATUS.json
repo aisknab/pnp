@@ -29,6 +29,7 @@
   "hnDirectBindingSeedCoordinate": "PNP-DIRECT-BIND-HN-HEREDITARY-NORMAL-FORMS-SEED-2026-06-27-01",
   "hresolveDirectBindingSeedCoordinate": "PNP-DIRECT-BIND-HRESOLVE-GLOBAL-HEREDITARY-RESOLVER-SEED-2026-06-27-01",
   "budDirectBindingSeedCoordinate": "PNP-DIRECT-BIND-BUD-BUDGET-RESOLVER-SEED-2026-06-27-01",
+  "norFfDirectBindingSeedCoordinate": "PNP-DIRECT-BIND-NOR-FF-FRONTIER-FAITHFUL-SEED-2026-06-27-01",
   "noProseOnlyTheoremPolicyCoordinate": "PNP-NO-PROSE-ONLY-THEOREM-POLICY-2026-06-27-01",
   "proofObligationLedgerCoordinate": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
   "gapLedgerCoordinate": "PNP-GAP-LEDGER-2026-06-27-01",
@@ -65,12 +66,13 @@
     {"id":"hn-direct-binding-seed-audit","command":"node pcc-direct-bind-hereditary-normal-forms0.mjs --json","outputKind":"artifacts/direct-bind-hereditary-normal-forms/latest-verdict.json"},
     {"id":"hresolve-direct-binding-seed-audit","command":"node pcc-direct-bind-hresolve0.mjs --json","outputKind":"artifacts/direct-bind-hresolve/latest-verdict.json"},
     {"id":"bud-direct-binding-seed-audit","command":"node pcc-direct-bind-budget-resolver0.mjs --json","outputKind":"artifacts/direct-bind-budget-resolver/latest-verdict.json"},
+    {"id":"nor-ff-direct-binding-seed-audit","command":"node pcc-direct-bind-frontier-faithful0.mjs --json","outputKind":"artifacts/direct-bind-frontier-faithful/latest-verdict.json"},
     {"id":"one-command-verifier","command":"npm run pnp:verify","outputKind":"artifacts/pnp-verify-all/latest-verdict.json"}
   ],
   "nonClaims": [
     "This status file does not activate public theorem emission.",
     "This status file does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
-    "The Base, CHG, Mode, E, N, FT, X, BC, UN, HN, HResolve, and BUD direct-binding seeds do not complete direct checker binding or full historical theorem discharge.",
+    "The Base, CHG, Mode, E, N, FT, X, BC, UN, HN, HResolve, BUD, and NOR/FF direct-binding seeds do not complete direct checker binding or full historical theorem discharge.",
     "The historical canonical report may be superseded by successor public-review reports, but this status file records the current non-activation boundary."
   ]
 }
