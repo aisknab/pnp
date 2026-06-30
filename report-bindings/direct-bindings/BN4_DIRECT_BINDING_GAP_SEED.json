@@ -1,0 +1,69 @@
+{
+  "kind": "PNPBN4DirectBindingGapSeed0",
+  "version": 0,
+  "coordinate": "PNP-DIRECT-BIND-BN4-ACTIVATION-GAP-SEED-2026-06-27-01",
+  "title": "BN4 theorem direct-binding gap-transition seed",
+  "purpose": "Bind the historical Section 22 BN4 theorem-ledger row to current activation-exact cancellation, active minimal-consumer antichain equality, same-key cancellation, integer mass ledger, finite-to-unbounded audit, gap-ledger, coverage matrix, closure plan, and non-activation surfaces while preserving the active unrestricted-final-soundness blockers.",
+  "status": "bn4-direct-binding-gap-seed-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]
+  },
+  "bn4DirectBindingGapSeedReady": true,
+  "directCheckerBindingComplete": false,
+  "fullHistoricalBN4TheoremDischarged": false,
+  "publicTheoremEmissionAllowedByBinding": false,
+  "directBindingBlockedByGaps": true,
+  "linkedCoordinates": {
+    "reportTheoremInventory": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
+    "reportTheoremCoverageMatrix": "PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01",
+    "reportTheoremCoverageClosurePlan": "PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01",
+    "gapLedger": "PNP-GAP-LEDGER-2026-06-27-01",
+    "finiteToUnboundedFamilyAudit": "PNP-FINITE-TO-UNBOUNDED-FAMILY-AUDIT-2026-06-27-01"
+  },
+  "boundInventoryEntry": {
+    "inventoryEntryId": "TL-017-BN4",
+    "coverageEntryId": "COV-017-BN4",
+    "closureEntryId": "DCC-017-BN4",
+    "sourceLabel": "BN4",
+    "expectedCoverageClass": "uniformity-gap-surface",
+    "expectedClosureStatus": "blocked-by-unrestricted-final-soundness",
+    "expectedNextDirectBindingSurface": "pcc-direct-bind-bn4-activation0.mjs"
+  },
+  "blockingGaps": ["GAP-001-UnrestrictedFinalSoundness", "GAP-004-FiniteToUnboundedUniformity"],
+  "coveredBN4Components": [
+    "BN4.ActiveAntichainActivationSurface",
+    "BN4.ActivationEqualityNoCutEnumerationSurface",
+    "BN4.SameKeyCancellationSurface",
+    "BN4.NoOppositeSignResidualSurface",
+    "BN4.IntegerMassLedgerSurface",
+    "BN4.FiniteToUnboundedGapSurface",
+    "BN4.ActivationBoundary"
+  ],
+  "evidenceSurfaces": [
+    "report-bindings/direct-bindings/BN4_DIRECT_BINDING_GAP_SEED.json",
+    "report-bindings/direct-bindings/BN4_DIRECT_BINDING_GAP_SEED.md",
+    "report-bindings/REPORT_THEOREM_INVENTORY.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json",
+    "pcc-direct-bind-bn4-activation0.mjs",
+    "audits/direct-bind-bn4-activation0.test.mjs",
+    "PNP_STATUS.json"
+  ],
+  "nonClaims": [
+    "This BN4 seed does not activate public theorem emission.",
+    "This BN4 seed does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This BN4 seed records a blocked gap-transition surface rather than a completed direct checker binding.",
+    "This BN4 seed does not prove finite-to-unbounded uniformity."
+  ],
+  "audit": {
+    "checker": "CheckBN4DirectBindingGapSeed0",
+    "script": "pcc-direct-bind-bn4-activation0.mjs",
+    "test": "audits/direct-bind-bn4-activation0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
