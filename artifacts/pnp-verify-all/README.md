@@ -19,16 +19,17 @@ The verifier currently checks the repository status boundary, Node syntax, the r
 The current direct-binding seed audits included in the verifier are:
 
 ```text
-Base -> pcc-direct-bind-base-semantics0.mjs
-CHG  -> pcc-direct-bind-charge-ledger0.mjs
-Mode -> pcc-direct-bind-mode-firewall0.mjs
-E    -> pcc-direct-bind-verifydw-soundness0.mjs
-N    -> pcc-direct-bind-normalization0.mjs
-FT   -> pcc-direct-bind-finite-table0.mjs
-X    -> pcc-direct-bind-critical-window-routing0.mjs
-BC   -> pcc-direct-bind-branch-cycle0.mjs
-UN   -> pcc-direct-bind-unary-decoder0.mjs
-HN   -> pcc-direct-bind-hereditary-normal-forms0.mjs
+Base     -> pcc-direct-bind-base-semantics0.mjs
+CHG      -> pcc-direct-bind-charge-ledger0.mjs
+Mode     -> pcc-direct-bind-mode-firewall0.mjs
+E        -> pcc-direct-bind-verifydw-soundness0.mjs
+N        -> pcc-direct-bind-normalization0.mjs
+FT       -> pcc-direct-bind-finite-table0.mjs
+X        -> pcc-direct-bind-critical-window-routing0.mjs
+BC       -> pcc-direct-bind-branch-cycle0.mjs
+UN       -> pcc-direct-bind-unary-decoder0.mjs
+HN       -> pcc-direct-bind-hereditary-normal-forms0.mjs
+HResolve -> pcc-direct-bind-hresolve0.mjs
 ```
 
 The accepted verdict keeps the public-review boundary explicit:
