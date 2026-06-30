@@ -1,0 +1,56 @@
+{
+  "kind": "PNPBUDDirectBindingSeed0",
+  "version": 0,
+  "coordinate": "PNP-DIRECT-BIND-BUD-BUDGET-RESOLVER-SEED-2026-06-27-01",
+  "title": "BUD theorem direct-binding seed",
+  "purpose": "Bind the historical Section 22 BUD theorem-ledger row to current budget-envelope dynamic programming, active budget audit, routing, strong NoBudget sidecar, checker-hardening, theorem inventory, coverage matrix, closure plan, proof-obligation, and gap surfaces without claiming complete direct checker binding or theorem activation.",
+  "status": "bud-direct-binding-seed-ready",
+  "claimBoundary": {"publicTheoremEmissionAllowed": false,"finalTheoremReady": false,"activeFinalNodeIds": [],"remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]},
+  "budDirectBindingSeedReady": true,
+  "releaseCriticalRow": false,
+  "directCheckerBindingComplete": false,
+  "fullHistoricalBUDTheoremDischarged": false,
+  "publicTheoremEmissionAllowedByBinding": false,
+  "linkedCoordinates": {
+    "reportTheoremInventory": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
+    "reportTheoremCoverageMatrix": "PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01",
+    "reportTheoremCoverageClosurePlan": "PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01",
+    "proofObligationLedger": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
+    "gapLedger": "PNP-GAP-LEDGER-2026-06-27-01",
+    "checkerTotalityAudit": "PNP-CHECKER-TOTALITY-AUDIT-2026-06-27-01",
+    "negativeCheckerMutationAudit": "PNP-NEGATIVE-CHECKER-MUTATIONS-2026-06-27-01",
+    "ruleFamilyCoverage": "PNP-RULE-FAMILY-COVERAGE-2026-06-27-01"
+  },
+  "boundInventoryEntry": {"inventoryEntryId": "TL-012-BUD","coverageEntryId": "COV-012-BUD","closureEntryId": "DCC-012-BUD","sourceLabel": "BUD","expectedCoverageClass": "inventory-ledger-surface","expectedClosureStatus": "direct-binding-needed","expectedNextDirectBindingSurface": "pcc-direct-bind-budget-resolver0.mjs"},
+  "coveredBUDComponents": [
+    {"id": "BUD.BudgetEnvelopeDPSurface", "status": "represented-by-inventory-and-closure-ledgers", "evidence": "report-bindings/REPORT_THEOREM_INVENTORY.json"},
+    {"id": "BUD.ActiveBudgetAuditSurface", "status": "represented-by-coverage-closure-plan", "evidence": "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json"},
+    {"id": "BUD.RoutingSurface", "status": "represented-by-coverage-closure-plan", "evidence": "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json"},
+    {"id": "BUD.StrongNoBudgetSidecarSurface", "status": "represented-by-coverage-closure-plan", "evidence": "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json"},
+    {"id": "BUD.CheckerHardeningSurface", "status": "represented-by-checker-hardening-ledgers", "evidence": "checker-totality/CHECKER_TOTALITY_AUDIT.json"},
+    {"id": "BUD.ActivationBoundary", "status": "represented-not-discharged", "evidence": "proof-obligations/GAP_LEDGER.json"}
+  ],
+  "evidenceSurfaces": [
+    "report-bindings/direct-bindings/BUD_DIRECT_BINDING_SEED.json",
+    "report-bindings/direct-bindings/BUD_DIRECT_BINDING_SEED.md",
+    "report-bindings/REPORT_THEOREM_INVENTORY.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json",
+    "proof-obligations/OBLIGATION_LEDGER.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "checker-totality/CHECKER_TOTALITY_AUDIT.json",
+    "checker-mutations/NEGATIVE_CHECKER_MUTATIONS.json",
+    "semantic-kernel/RULE_FAMILY_COVERAGE.json",
+    "pcc-direct-bind-budget-resolver0.mjs",
+    "audits/direct-bind-budget-resolver0.test.mjs",
+    "PNP_STATUS.json"
+  ],
+  "nonClaims": [
+    "This BUD direct-binding seed does not activate public theorem emission.",
+    "This BUD direct-binding seed does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This BUD direct-binding seed does not claim the full historical BUD theorem is completely discharged.",
+    "This BUD direct-binding seed does not flip the BUD coverage row to directCheckerBindingComplete.",
+    "This BUD direct-binding seed binds the BUD row to current explicit budget-envelope, routing, strong NoBudget sidecar, checker-hardening, and ledger surfaces and keeps the remaining closure work explicit."
+  ],
+  "audit": {"checker": "CheckBUDDirectBindingSeed0", "script": "pcc-direct-bind-budget-resolver0.mjs", "test": "audits/direct-bind-budget-resolver0.test.mjs", "expectedAcceptTag": "accept"}
+}
