@@ -1,0 +1,96 @@
+{
+  "kind": "PNPBCDirectBindingSeed0",
+  "version": 0,
+  "coordinate": "PNP-DIRECT-BIND-BC-BRANCH-CYCLE-SEED-2026-06-27-01",
+  "title": "BC theorem direct-binding seed",
+  "purpose": "Bind the historical Section 22 BC theorem-ledger row to current branch-cycle finite transition category, cycle audit, branch audit, checker-hardening, theorem inventory, coverage matrix, closure plan, proof-obligation, and gap surfaces without claiming complete direct checker binding or theorem activation.",
+  "status": "bc-direct-binding-seed-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "bcDirectBindingSeedReady": true,
+  "releaseCriticalRow": false,
+  "directCheckerBindingComplete": false,
+  "fullHistoricalBCTheoremDischarged": false,
+  "publicTheoremEmissionAllowedByBinding": false,
+  "linkedCoordinates": {
+    "reportTheoremInventory": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
+    "reportTheoremCoverageMatrix": "PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01",
+    "reportTheoremCoverageClosurePlan": "PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01",
+    "proofObligationLedger": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
+    "gapLedger": "PNP-GAP-LEDGER-2026-06-27-01",
+    "checkerTotalityAudit": "PNP-CHECKER-TOTALITY-AUDIT-2026-06-27-01",
+    "negativeCheckerMutationAudit": "PNP-NEGATIVE-CHECKER-MUTATIONS-2026-06-27-01",
+    "ruleFamilyCoverage": "PNP-RULE-FAMILY-COVERAGE-2026-06-27-01"
+  },
+  "boundInventoryEntry": {
+    "inventoryEntryId": "TL-008-BC",
+    "coverageEntryId": "COV-008-BC",
+    "closureEntryId": "DCC-008-BC",
+    "sourceLabel": "BC",
+    "expectedCoverageClass": "inventory-ledger-surface",
+    "expectedClosureStatus": "direct-binding-needed",
+    "expectedNextDirectBindingSurface": "pcc-direct-bind-branch-cycle0.mjs"
+  },
+  "coveredBCComponents": [
+    {
+      "id": "BC.FiniteTransitionCategorySurface",
+      "status": "represented-by-inventory-and-closure-ledgers",
+      "evidence": "report-bindings/REPORT_THEOREM_INVENTORY.json"
+    },
+    {
+      "id": "BC.CycleAuditSurface",
+      "status": "represented-by-coverage-closure-plan",
+      "evidence": "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json"
+    },
+    {
+      "id": "BC.BranchAuditSurface",
+      "status": "represented-by-coverage-closure-plan",
+      "evidence": "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json"
+    },
+    {
+      "id": "BC.CheckerHardeningSurface",
+      "status": "represented-by-checker-hardening-ledgers",
+      "evidence": "checker-totality/CHECKER_TOTALITY_AUDIT.json"
+    },
+    {
+      "id": "BC.ActivationBoundary",
+      "status": "represented-not-discharged",
+      "evidence": "proof-obligations/GAP_LEDGER.json"
+    }
+  ],
+  "evidenceSurfaces": [
+    "report-bindings/direct-bindings/BC_DIRECT_BINDING_SEED.json",
+    "report-bindings/direct-bindings/BC_DIRECT_BINDING_SEED.md",
+    "report-bindings/REPORT_THEOREM_INVENTORY.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json",
+    "proof-obligations/OBLIGATION_LEDGER.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "checker-totality/CHECKER_TOTALITY_AUDIT.json",
+    "checker-mutations/NEGATIVE_CHECKER_MUTATIONS.json",
+    "semantic-kernel/RULE_FAMILY_COVERAGE.json",
+    "pcc-direct-bind-branch-cycle0.mjs",
+    "audits/direct-bind-branch-cycle0.test.mjs",
+    "PNP_STATUS.json"
+  ],
+  "nonClaims": [
+    "This BC direct-binding seed does not activate public theorem emission.",
+    "This BC direct-binding seed does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This BC direct-binding seed does not claim the full historical BC theorem is completely discharged.",
+    "This BC direct-binding seed does not flip the BC coverage row to directCheckerBindingComplete.",
+    "This BC direct-binding seed binds the BC row to current explicit finite-transition-category, cycle-audit, branch-audit, checker-hardening, and ledger surfaces and keeps the remaining closure work explicit."
+  ],
+  "audit": {
+    "checker": "CheckBCDirectBindingSeed0",
+    "script": "pcc-direct-bind-branch-cycle0.mjs",
+    "test": "audits/direct-bind-branch-cycle0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
