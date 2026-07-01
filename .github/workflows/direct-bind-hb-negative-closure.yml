@@ -1,0 +1,25 @@
+name: direct-bind-hb-negative-closure
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  direct-bind-hb-negative-closure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run HB direct-binding gap seed checker
+        run: node pcc-direct-bind-hb-negative-closure0.mjs --json
+      - name: Run HB direct-binding gap seed tests
+        run: node --test audits/direct-bind-hb-negative-closure0.test.mjs
+      - name: Upload HB direct-binding gap seed verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: direct-bind-hb-negative-closure-latest-verdict
+          path: artifacts/direct-bind-hb-negative-closure/latest-verdict.json
