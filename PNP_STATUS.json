@@ -17,6 +17,7 @@
   "reportTheoremInventoryCoordinate": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
   "reportTheoremCoverageMatrixCoordinate": "PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01",
   "reportTheoremCoverageClosurePlanCoordinate": "PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01",
+  "directBindingIndexCoordinate": "PNP-DIRECT-BINDING-INDEX-2026-06-27-01",
   "baseDirectBindingSeedCoordinate": "PNP-DIRECT-BIND-BASE-SEMANTICS-SEED-2026-06-27-01",
   "chgDirectBindingSeedCoordinate": "PNP-DIRECT-BIND-CHG-CHARGE-LEDGER-SEED-2026-06-27-01",
   "modeDirectBindingSeedCoordinate": "PNP-DIRECT-BIND-MODE-FIREWALL-SEED-2026-06-27-01",
@@ -57,6 +58,7 @@
   "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-NO-HIDDEN-ORACLE-01",
   "lastVerifiedCommit": "current-checkout",
   "verificationSurfaces": [
+    {"id":"direct-binding-index-audit","command":"node pcc-direct-binding-index0.mjs --json","outputKind":"artifacts/direct-binding-index/latest-verdict.json"},
     {"id":"e-direct-binding-seed-audit","command":"node pcc-direct-bind-verifydw-soundness0.mjs --json","outputKind":"artifacts/direct-bind-verifydw-soundness/latest-verdict.json"},
     {"id":"n-direct-binding-seed-audit","command":"node pcc-direct-bind-normalization0.mjs --json","outputKind":"artifacts/direct-bind-normalization/latest-verdict.json"},
     {"id":"ft-direct-binding-seed-audit","command":"node pcc-direct-bind-finite-table0.mjs --json","outputKind":"artifacts/direct-bind-finite-table/latest-verdict.json"},
@@ -72,7 +74,7 @@
   "nonClaims": [
     "This status file does not activate public theorem emission.",
     "This status file does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
-    "The Base, CHG, Mode, E, N, FT, X, BC, UN, HN, HResolve, BUD, and NOR/FF direct-binding seeds do not complete direct checker binding or full historical theorem discharge.",
+    "The Section 22 direct-binding index records executable surfaces for all 27 historical theorem-ledger rows, but it does not complete direct checker binding or full historical theorem discharge.",
     "The historical canonical report may be superseded by successor public-review reports, but this status file records the current non-activation boundary."
   ]
 }
