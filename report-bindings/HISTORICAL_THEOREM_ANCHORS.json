@@ -1,0 +1,77 @@
+{
+  "kind": "PNPHistoricalTheoremAnchors0",
+  "version": 0,
+  "coordinate": "PNP-HISTORICAL-THEOREM-ANCHORS-2026-06-27-01",
+  "status": "historical-theorem-anchors-ready",
+  "title": "Historical theorem anchor index for sanitized root report",
+  "purpose": "Preserve theorem-anchor strings referenced by REPORT_THEOREM_BINDINGS.json after the current root canonical report was sanitized into a public-review status notice, without treating the anchor index as a theorem-emission surface.",
+  "anchorIndexPath": "report-bindings/HISTORICAL_THEOREM_ANCHORS.md",
+  "theoremBindingLedgerPath": "report-bindings/REPORT_THEOREM_BINDINGS.json",
+  "currentStatusPath": "PNP_STATUS.json",
+  "currentRootReportPath": "canonical_proof_report.tex",
+  "anchorIndexReady": true,
+  "anchorIndexUsedForHistoricalBindingCompatibility": true,
+  "anchorIndexIsPublicTheoremEmissionSurface": false,
+  "publicTheoremEmissionAllowedByAnchorIndex": false,
+  "allReportBindingAnchorsRepresented": true,
+  "expectedBindingLedgerCoordinate": "REPORT-THEOREM-BINDINGS-2026-06-27-01",
+  "requiredStatusCoordinates": {
+    "historicalReportSanitizedCoordinate": "PNP-HISTORICAL-REPORT-SANITIZED-2026-06-27-01",
+    "historicalReportSupersessionCoordinate": "PNP-HISTORICAL-REPORT-SUPERSESSION-2026-06-27-01"
+  },
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]
+  },
+  "requiredAnchors": [
+    "Final accepted finite-certificate theorem",
+    "VerifyDW soundness",
+    "RW-MuBridge, terminal form",
+    "RW-BCELReady",
+    "BN2-CoherentOptimum",
+    "BN3-SimultaneousEnvelope",
+    "BN4-ActivationExact",
+    "BN5-FullShadowLocalization",
+    "BN6-HypergraphPacket",
+    "BCEL seed, patched",
+    "Selector realization",
+    "R-ChargeSurplus",
+    "HB negative closure",
+    "Rank-parametric ZeroSlack",
+    "Residual-band exact minimization",
+    "Locked NAND threshold",
+    "Package sufficiency",
+    "Accepted package implies \\(P=NP\\)",
+    "NF protocol soundness",
+    "Final proof-report acceptance"
+  ],
+  "forbiddenActiveClaimFragments": [
+    "This paper proves",
+    "Therefore SAT is decidable in polynomial time and \\(P=NP\\).",
+    "Hence the final conclusion of this paper is",
+    "The final public theorem statement is"
+  ],
+  "evidenceSurfaces": [
+    "report-bindings/HISTORICAL_THEOREM_ANCHORS.json",
+    "report-bindings/HISTORICAL_THEOREM_ANCHORS.md",
+    "report-bindings/REPORT_THEOREM_BINDINGS.json",
+    "canonical_proof_report.tex",
+    "PNP_STATUS.json",
+    "pcc-historical-theorem-anchors0.mjs",
+    "audits/historical-theorem-anchors0.test.mjs"
+  ],
+  "nonClaims": [
+    "This anchor index does not activate public theorem emission.",
+    "This anchor index does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This anchor index preserves historical theorem names for binding-ledger compatibility after root report sanitization.",
+    "This anchor index is not a proof report and is not the active release boundary."
+  ],
+  "audit": {
+    "checker": "CheckHistoricalTheoremAnchors0",
+    "script": "pcc-historical-theorem-anchors0.mjs",
+    "test": "audits/historical-theorem-anchors0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
