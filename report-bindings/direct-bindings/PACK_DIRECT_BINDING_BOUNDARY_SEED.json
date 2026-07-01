@@ -1,0 +1,18 @@
+{
+  "kind": "PNPPACKDirectBindingBoundarySeed0",
+  "version": 0,
+  "coordinate": "PNP-DIRECT-BIND-PACK-ACCEPTANCE-BOUNDARY-SEED-2026-06-27-01",
+  "status": "pack-acceptance-boundary-seed-ready",
+  "claimBoundary": {"publicTheoremEmissionAllowed": false, "finalTheoremReady": false, "activeFinalNodeIds": [], "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]},
+  "packAcceptanceBoundarySeedReady": true,
+  "directCheckerBindingComplete": false,
+  "fullHistoricalPACKTheoremDischarged": false,
+  "publicTheoremEmissionAllowedByBinding": false,
+  "releaseBoundaryBlocked": true,
+  "boundInventoryEntry": {"inventoryEntryId": "TL-027-PACK", "coverageEntryId": "COV-027-PACK", "closureEntryId": "DCC-027-PACK", "sourceLabel": "PACK", "expectedCoverageClass": "release-critical-boundary-surface", "expectedClosureStatus": "release-boundary-blocked", "expectedNextDirectBindingSurface": "pcc-direct-bind-pack-acceptance-boundary0.mjs"},
+  "blockingGaps": ["GAP-001-UnrestrictedFinalSoundness", "GAP-002-ExternalReviewAcceptance"],
+  "coveredPACKComponents": ["PACK.InterfaceDictionarySurface", "PACK.NormalFormAndRowKeySurface", "PACK.ReflectionAndBoundsSurface", "PACK.CheckPCCPackSurface", "PACK.NoProseOnlyTheoremPolicySurface", "PACK.ReleaseBoundarySurface"],
+  "evidenceSurfaces": ["report-bindings/direct-bindings/PACK_DIRECT_BINDING_BOUNDARY_SEED.json", "report-bindings/direct-bindings/PACK_DIRECT_BINDING_BOUNDARY_SEED.md", "report-bindings/REPORT_THEOREM_INVENTORY.json", "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json", "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json", "report-bindings/REPORT_THEOREM_BINDINGS.json", "report-bindings/NO_PROSE_ONLY_THEOREM_POLICY.json", "release/RELEASE_LADDER.json", "proof-obligations/GAP_LEDGER.json", "PNP_STATUS.json", "pcc-direct-bind-pack-acceptance-boundary0.mjs", "audits/direct-bind-pack-acceptance-boundary0.test.mjs"],
+  "nonClaims": ["This PACK seed does not activate public theorem emission.", "This PACK seed does not clear the remaining release blockers.", "This PACK seed records a blocked package-acceptance boundary surface."],
+  "audit": {"checker": "CheckPACKAcceptanceBoundarySeed0", "script": "pcc-direct-bind-pack-acceptance-boundary0.mjs", "test": "audits/direct-bind-pack-acceptance-boundary0.test.mjs", "expectedAcceptTag": "accept"}
+}
