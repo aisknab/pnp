@@ -1,0 +1,69 @@
+{
+  "kind": "PNPPkgCDirectBindingGapSeed0",
+  "version": 0,
+  "coordinate": "PNP-DIRECT-BIND-PKGC-SEPARATING-CONSUMERS-GAP-SEED-2026-06-27-01",
+  "title": "PkgC theorem direct-binding gap-transition seed",
+  "purpose": "Bind the historical Section 22 PkgC theorem-ledger row to current request traces, full-restoration universes, nonsingleton separating-consumer routing, quotient-to-full key preservation, finite-to-unbounded audit, gap-ledger, coverage matrix, closure plan, and non-activation surfaces while preserving the active unrestricted-final-soundness blockers.",
+  "status": "pkgc-direct-binding-gap-seed-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]
+  },
+  "pkgcDirectBindingGapSeedReady": true,
+  "directCheckerBindingComplete": false,
+  "fullHistoricalPkgCTheoremDischarged": false,
+  "publicTheoremEmissionAllowedByBinding": false,
+  "directBindingBlockedByGaps": true,
+  "linkedCoordinates": {
+    "reportTheoremInventory": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
+    "reportTheoremCoverageMatrix": "PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01",
+    "reportTheoremCoverageClosurePlan": "PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01",
+    "gapLedger": "PNP-GAP-LEDGER-2026-06-27-01",
+    "finiteToUnboundedFamilyAudit": "PNP-FINITE-TO-UNBOUNDED-FAMILY-AUDIT-2026-06-27-01"
+  },
+  "boundInventoryEntry": {
+    "inventoryEntryId": "TL-019-PkgC",
+    "coverageEntryId": "COV-019-PkgC",
+    "closureEntryId": "DCC-019-PkgC",
+    "sourceLabel": "PkgC",
+    "expectedCoverageClass": "uniformity-gap-surface",
+    "expectedClosureStatus": "blocked-by-unrestricted-final-soundness",
+    "expectedNextDirectBindingSurface": "pcc-direct-bind-pkgc-separating-consumers0.mjs"
+  },
+  "blockingGaps": ["GAP-001-UnrestrictedFinalSoundness", "GAP-004-FiniteToUnboundedUniformity"],
+  "coveredPkgCComponents": [
+    "PkgC.RequestTraceSurface",
+    "PkgC.FullRestorationUniverseSurface",
+    "PkgC.QuotientToFullMatchingKeyPreservationSurface",
+    "PkgC.NonsingletonSeparatingConsumerRoutingSurface",
+    "PkgC.SingletonizationSurface",
+    "PkgC.FiniteToUnboundedGapSurface",
+    "PkgC.ActivationBoundary"
+  ],
+  "evidenceSurfaces": [
+    "report-bindings/direct-bindings/PKGC_DIRECT_BINDING_GAP_SEED.json",
+    "report-bindings/direct-bindings/PKGC_DIRECT_BINDING_GAP_SEED.md",
+    "report-bindings/REPORT_THEOREM_INVENTORY.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json",
+    "pcc-direct-bind-pkgc-separating-consumers0.mjs",
+    "audits/direct-bind-pkgc-separating-consumers0.test.mjs",
+    "PNP_STATUS.json"
+  ],
+  "nonClaims": [
+    "This PkgC seed does not activate public theorem emission.",
+    "This PkgC seed does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This PkgC seed records a blocked gap-transition surface rather than a completed direct checker binding.",
+    "This PkgC seed does not prove finite-to-unbounded uniformity."
+  ],
+  "audit": {
+    "checker": "CheckPkgCDirectBindingGapSeed0",
+    "script": "pcc-direct-bind-pkgc-separating-consumers0.mjs",
+    "test": "audits/direct-bind-pkgc-separating-consumers0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
