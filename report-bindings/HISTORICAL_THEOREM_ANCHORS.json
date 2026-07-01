@@ -15,6 +15,7 @@
   "publicTheoremEmissionAllowedByAnchorIndex": false,
   "expectedAnchorCount": 20,
   "linkedCoordinates": {
+    "historicalTheoremAnchors": "PNP-HISTORICAL-THEOREM-ANCHORS-2026-06-27-01",
     "reportTheoremBindings": "REPORT-THEOREM-BINDINGS-2026-06-27-01",
     "historicalReportSupersession": "PNP-HISTORICAL-REPORT-SUPERSESSION-2026-06-27-01",
     "historicalReportSanitized": "PNP-HISTORICAL-REPORT-SANITIZED-2026-06-27-01"
@@ -51,7 +52,8 @@
     "This anchor index does not activate public theorem emission.",
     "This anchor index does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
     "This anchor index preserves historical theorem names for binding lookup after the root report was sanitized.",
-    "This anchor index is not a replacement for theorem proof objects or direct checker bindings."
+    "This anchor index is not a replacement for theorem proof objects or direct checker bindings.",
+    "This anchor index requires PNP_STATUS.json to expose the anchor coordinate as a status-bound non-activation surface."
   ],
   "audit": {
     "checker": "CheckHistoricalTheoremAnchors0",
