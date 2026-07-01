@@ -8,6 +8,7 @@ import process from 'node:process';
 const CHECKER = 'CheckHistoricalReportSupersession0';
 const VERSION = 0;
 const COORD = 'PNP-HISTORICAL-REPORT-SUPERSESSION-2026-06-27-01';
+const SANITIZED_COORD = 'PNP-HISTORICAL-REPORT-SANITIZED-2026-06-27-01';
 const OUT = 'artifacts/historical-report-supersession/latest-verdict.json';
 const MANIFEST = 'report-bindings/HISTORICAL_REPORT_SUPERSESSION.json';
 const BLOCKERS = ['Release.UnrestrictedFinalSoundness', 'ExternalReview.Acceptance'];
@@ -17,6 +18,15 @@ const REQUIRED_COORDINATES = {
   releaseLadderCoordinate: 'PNP-RELEASE-LADDER-2026-06-27-01',
   gapLedgerCoordinate: 'PNP-GAP-LEDGER-2026-06-27-01'
 };
+const PDF_REQUIRED_FRAGMENTS = [
+  SANITIZED_COORD,
+  'Public theorem emission is disabled',
+  'finalTheoremReady = false',
+  'activeFinalNodeIds = []',
+  'Release.UnrestrictedFinalSoundness',
+  'ExternalReview.Acceptance',
+  'npm run pnp:verify'
+];
 
 export async function CheckHistoricalReportSupersession0(options = {}) {
   const root = path.resolve(options.root ?? process.cwd());
@@ -36,8 +46,13 @@ export async function CheckHistoricalReportSupersession0(options = {}) {
 
     const texRead = await readText0(root, manifest.historicalReportPath);
     if (texRead.tag === 'reject') return write0(root, outputPath, writeOutput, texRead);
-    const directClaimCheck = validateHistoricalDirectClaims0(texRead.text, manifest.historicalDirectClaimFragments);
-    if (directClaimCheck.tag === 'reject') return write0(root, outputPath, writeOutput, directClaimCheck);
+    const texCheck = validateSanitizedTex0(texRead.text, manifest.requiredCurrentReportFragments, manifest.forbiddenHistoricalDirectClaimFragments);
+    if (texCheck.tag === 'reject') return write0(root, outputPath, writeOutput, texCheck);
+
+    const pdfRead = await readText0(root, manifest.historicalReportPdfPath);
+    if (pdfRead.tag === 'reject') return write0(root, outputPath, writeOutput, pdfRead);
+    const pdfCheck = validateSanitizedPdf0(pdfRead.text, manifest.forbiddenHistoricalDirectClaimFragments);
+    if (pdfCheck.tag === 'reject') return write0(root, outputPath, writeOutput, pdfCheck);
 
     const evidence = await digestEvidence0(root, manifest.evidenceSurfaces);
     if (evidence.tag === 'reject') return write0(root, outputPath, writeOutput, evidence);
@@ -48,13 +63,20 @@ export async function CheckHistoricalReportSupersession0(options = {}) {
       checker: CHECKER,
       version: VERSION,
       coordinate: COORD,
-      claimStatus: 'historical-report-supersession-accepted-under-public-review-boundary',
+      sanitizedReportCoordinate: SANITIZED_COORD,
+      claimStatus: 'historical-report-sanitized-under-public-review-boundary',
       historicalReportSupersessionReady: true,
+      historicalReportSanitizedReady: true,
       historicalReportPath: manifest.historicalReportPath,
       historicalReportPdfPath: manifest.historicalReportPdfPath,
       historicalTexSha256: shaBytes0(texRead.bytes),
-      historicalDirectTheoremEmissionRepresented: true,
-      historicalDirectClaimFragmentCount: manifest.historicalDirectClaimFragments.length,
+      historicalPdfSha256: shaBytes0(pdfRead.bytes),
+      historicalDirectTheoremEmissionRepresented: false,
+      historicalDirectTheoremEmissionSanitized: true,
+      currentRootReportSanitized: true,
+      currentPdfSanitized: true,
+      requiredCurrentReportFragmentCount: manifest.requiredCurrentReportFragments.length,
+      forbiddenHistoricalDirectClaimFragmentCount: manifest.forbiddenHistoricalDirectClaimFragments.length,
       currentBoundarySupersedesHistoricalEmission: true,
       historicalReportMayBeMutatedBySuccessorPRs: true,
       publicTheoremEmissionAllowedBySupersession: false,
@@ -74,8 +96,19 @@ export async function CheckHistoricalReportSupersession0(options = {}) {
 }
 
 function validateManifest0(m) {
-  if (!plain0(m) || m.kind !== 'PNPHistoricalReportSupersession0' || m.version !== VERSION || m.coordinate !== COORD || m.status !== 'historical-report-supersession-ready') return reject0('HistoricalReportSupersession.ManifestShape', [MANIFEST], 'manifest shape mismatch');
-  for (const [field, expected] of Object.entries({ historicalDirectTheoremEmissionRepresented: true, currentBoundarySupersedesHistoricalEmission: true, historicalReportMayBeMutatedBySuccessorPRs: true, publicTheoremEmissionAllowedBySupersession: false })) {
+  if (!plain0(m) || m.kind !== 'PNPHistoricalReportSupersession0' || m.version !== VERSION || m.coordinate !== COORD || m.sanitizedReportCoordinate !== SANITIZED_COORD || m.status !== 'historical-report-sanitized-ready') return reject0('HistoricalReportSupersession.ManifestShape', [MANIFEST], 'manifest shape mismatch');
+  const flags = {
+    historicalReportSupersessionReady: true,
+    historicalReportSanitizedReady: true,
+    historicalDirectTheoremEmissionRepresented: false,
+    historicalDirectTheoremEmissionSanitized: true,
+    currentRootReportSanitized: true,
+    currentPdfSanitized: true,
+    currentBoundarySupersedesHistoricalEmission: true,
+    historicalReportMayBeMutatedBySuccessorPRs: true,
+    publicTheoremEmissionAllowedBySupersession: false
+  };
+  for (const [field, expected] of Object.entries(flags)) {
     if (m[field] !== expected) return reject0('HistoricalReportSupersession.ManifestFlag', [MANIFEST, field], 'manifest flag mismatch', { expected, actual: m[field] });
   }
   const b = boundary0(m.claimBoundary, [MANIFEST, 'claimBoundary']);
@@ -87,7 +120,7 @@ function validateManifest0(m) {
   for (const field of ['historicalReportPath', 'historicalReportPdfPath', 'currentStatusPath']) {
     if (typeof m[field] !== 'string' || m[field].length === 0) return reject0('HistoricalReportSupersession.PathMissing', [MANIFEST, field], 'manifest path missing');
   }
-  for (const field of ['historicalDirectClaimFragments', 'evidenceSurfaces', 'nonClaims']) {
+  for (const field of ['requiredCurrentReportFragments', 'forbiddenHistoricalDirectClaimFragments', 'evidenceSurfaces', 'nonClaims']) {
     if (!Array.isArray(m[field]) || m[field].length === 0 || m[field].some((x) => typeof x !== 'string' || x.length === 0)) return reject0('HistoricalReportSupersession.ArrayMissing', [MANIFEST, field], 'manifest array missing or invalid');
   }
   return { tag: 'accept' };
@@ -101,9 +134,22 @@ function validateStatus0(s) {
   }
   return { tag: 'accept' };
 }
-function validateHistoricalDirectClaims0(tex, fragments) {
-  for (const fragment of fragments) {
-    if (!tex.includes(fragment)) return reject0('HistoricalReportSupersession.DirectClaimFragmentMissing', ['canonical_proof_report.tex', fragment], 'historical direct theorem-emission fragment missing');
+function validateSanitizedTex0(tex, required, forbidden) {
+  for (const fragment of required) {
+    if (!tex.includes(fragment)) return reject0('HistoricalReportSupersession.RequiredCurrentFragmentMissing', ['canonical_proof_report.tex', fragment], 'sanitized root report required fragment missing');
+  }
+  for (const fragment of forbidden) {
+    if (tex.includes(fragment)) return reject0('HistoricalReportSupersession.ForbiddenDirectClaimPresent', ['canonical_proof_report.tex', fragment], 'sanitized root report still contains a forbidden historical direct theorem-emission fragment');
+  }
+  return { tag: 'accept' };
+}
+function validateSanitizedPdf0(pdfText, forbidden) {
+  if (!pdfText.startsWith('%PDF-')) return reject0('HistoricalReportSupersession.PdfHeader', ['canonical_proof_report.pdf'], 'sanitized PDF must have a PDF header');
+  for (const fragment of PDF_REQUIRED_FRAGMENTS) {
+    if (!pdfText.includes(fragment)) return reject0('HistoricalReportSupersession.PdfRequiredFragmentMissing', ['canonical_proof_report.pdf', fragment], 'sanitized PDF required fragment missing');
+  }
+  for (const fragment of forbidden) {
+    if (pdfText.includes(fragment)) return reject0('HistoricalReportSupersession.PdfForbiddenDirectClaimPresent', ['canonical_proof_report.pdf', fragment], 'sanitized PDF still contains a forbidden historical direct theorem-emission fragment');
   }
   return { tag: 'accept' };
 }

@@ -2,12 +2,18 @@
   "kind": "PNPHistoricalReportSupersession0",
   "version": 0,
   "coordinate": "PNP-HISTORICAL-REPORT-SUPERSESSION-2026-06-27-01",
-  "status": "historical-report-supersession-ready",
+  "sanitizedReportCoordinate": "PNP-HISTORICAL-REPORT-SANITIZED-2026-06-27-01",
+  "status": "historical-report-sanitized-ready",
   "historicalReportPath": "canonical_proof_report.tex",
   "historicalReportPdfPath": "canonical_proof_report.pdf",
   "currentStatusPath": "PNP_STATUS.json",
   "successorBoundarySource": "PNP_STATUS.json",
-  "historicalDirectTheoremEmissionRepresented": true,
+  "historicalReportSupersessionReady": true,
+  "historicalReportSanitizedReady": true,
+  "historicalDirectTheoremEmissionRepresented": false,
+  "historicalDirectTheoremEmissionSanitized": true,
+  "currentRootReportSanitized": true,
+  "currentPdfSanitized": true,
   "currentBoundarySupersedesHistoricalEmission": true,
   "historicalReportMayBeMutatedBySuccessorPRs": true,
   "publicTheoremEmissionAllowedBySupersession": false,
@@ -23,7 +29,18 @@
     "releaseLadderCoordinate": "PNP-RELEASE-LADDER-2026-06-27-01",
     "gapLedgerCoordinate": "PNP-GAP-LEDGER-2026-06-27-01"
   },
-  "historicalDirectClaimFragments": [
+  "requiredCurrentReportFragments": [
+    "PNP-HISTORICAL-REPORT-SANITIZED-2026-06-27-01",
+    "machine-checkable proof-certificate stack for a claimed P = NP route",
+    "Public theorem emission is disabled",
+    "publicTheoremEmissionAllowed = false",
+    "finalTheoremReady = false",
+    "activeFinalNodeIds = []",
+    "Release.UnrestrictedFinalSoundness",
+    "ExternalReview.Acceptance",
+    "npm run pnp:verify"
+  ],
+  "forbiddenHistoricalDirectClaimFragments": [
     "\\textbf{Accepted proof-report boundary.}",
     "\\CheckPack(\\GenPack())=\\mathsf{accept}\\quad\\Longrightarrow\\quad P=NP.",
     "This paper proves",
@@ -31,7 +48,8 @@
     "Therefore SAT is decidable in polynomial time and \\(P=NP\\).",
     "\\begin{theorem}[Generated package sufficiency]",
     "\\begin{theorem}[Final proof-report acceptance]",
-    "The final public theorem statement is"
+    "The final public theorem statement is",
+    "Hence the final conclusion of this paper is"
   ],
   "evidenceSurfaces": [
     "report-bindings/HISTORICAL_REPORT_SUPERSESSION.json",
@@ -48,7 +66,8 @@
     "This supersession manifest does not activate public theorem emission.",
     "This supersession manifest does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
     "This supersession manifest does not treat historical theorem-emission prose as the current public release boundary.",
-    "This supersession manifest records that the current status file supersedes the historical canonical report until a later PR mutates or replaces that report."
+    "This supersession manifest records that the current root canonical report source and PDF are sanitized status notices.",
+    "This supersession manifest does not claim that earlier sealed report artifacts have been rewritten."
   ],
   "audit": {
     "checker": "CheckHistoricalReportSupersession0",
