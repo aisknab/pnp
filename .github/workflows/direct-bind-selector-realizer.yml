@@ -1,0 +1,25 @@
+name: direct-bind-selector-realizer
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  direct-bind-selector-realizer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run R direct-binding gap seed checker
+        run: node pcc-direct-bind-selector-realizer0.mjs --json
+      - name: Run R direct-binding gap seed tests
+        run: node --test audits/direct-bind-selector-realizer0.test.mjs
+      - name: Upload R direct-binding gap seed verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: direct-bind-selector-realizer-latest-verdict
+          path: artifacts/direct-bind-selector-realizer/latest-verdict.json
