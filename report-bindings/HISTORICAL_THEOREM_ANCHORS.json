@@ -1,0 +1,62 @@
+{
+  "kind": "PNPHistoricalTheoremAnchors0",
+  "version": 0,
+  "coordinate": "PNP-HISTORICAL-THEOREM-ANCHORS-2026-06-27-01",
+  "status": "historical-theorem-anchor-index-ready",
+  "purpose": "Preserve theorem-anchor strings used by REPORT_THEOREM_BINDINGS.json after the current root canonical report was sanitized into a public-review status notice, without treating the anchor index as a theorem-emission surface.",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]
+  },
+  "anchorIndexReady": true,
+  "anchorIndexIsTheoremEmissionSurface": false,
+  "publicTheoremEmissionAllowedByAnchorIndex": false,
+  "expectedAnchorCount": 20,
+  "linkedCoordinates": {
+    "reportTheoremBindings": "REPORT-THEOREM-BINDINGS-2026-06-27-01",
+    "historicalReportSupersession": "PNP-HISTORICAL-REPORT-SUPERSESSION-2026-06-27-01",
+    "historicalReportSanitized": "PNP-HISTORICAL-REPORT-SANITIZED-2026-06-27-01"
+  },
+  "sourceFiles": {
+    "anchorMarkdown": "report-bindings/HISTORICAL_THEOREM_ANCHORS.md",
+    "reportTheoremBindings": "report-bindings/REPORT_THEOREM_BINDINGS.json",
+    "historicalReportSupersession": "report-bindings/HISTORICAL_REPORT_SUPERSESSION.json",
+    "status": "PNP_STATUS.json"
+  },
+  "anchors": [
+    {"theoremBindingId": "THM-1-1", "anchor": "Final accepted finite-certificate theorem"},
+    {"theoremBindingId": "THM-6-1", "anchor": "VerifyDW soundness"},
+    {"theoremBindingId": "THM-10-1", "anchor": "RW-MuBridge, terminal form"},
+    {"theoremBindingId": "THM-10-4", "anchor": "RW-BCELReady"},
+    {"theoremBindingId": "THM-11-1", "anchor": "BN2-CoherentOptimum"},
+    {"theoremBindingId": "THM-11-2", "anchor": "BN3-SimultaneousEnvelope"},
+    {"theoremBindingId": "THM-11-3", "anchor": "BN4-ActivationExact"},
+    {"theoremBindingId": "THM-11-4", "anchor": "BN5-FullShadowLocalization"},
+    {"theoremBindingId": "THM-11-6", "anchor": "BN6-HypergraphPacket"},
+    {"theoremBindingId": "THM-13-4", "anchor": "BCEL seed, patched"},
+    {"theoremBindingId": "THM-14-1", "anchor": "Selector realization"},
+    {"theoremBindingId": "THM-14-2", "anchor": "R-ChargeSurplus"},
+    {"theoremBindingId": "THM-15-1", "anchor": "HB negative closure"},
+    {"theoremBindingId": "THM-16-1", "anchor": "Rank-parametric ZeroSlack"},
+    {"theoremBindingId": "THM-16-2", "anchor": "Residual-band exact minimization"},
+    {"theoremBindingId": "THM-17-2", "anchor": "Locked NAND threshold"},
+    {"theoremBindingId": "THM-18-1", "anchor": "Package sufficiency"},
+    {"theoremBindingId": "THM-18-2", "anchor": "Accepted package implies \\(P=NP\\)"},
+    {"theoremBindingId": "THM-19-2", "anchor": "NF protocol soundness"},
+    {"theoremBindingId": "THM-20-19", "anchor": "Final proof-report acceptance"}
+  ],
+  "nonClaims": [
+    "This anchor index does not activate public theorem emission.",
+    "This anchor index does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This anchor index preserves historical theorem names for binding lookup after the root report was sanitized.",
+    "This anchor index is not a replacement for theorem proof objects or direct checker bindings."
+  ],
+  "audit": {
+    "checker": "CheckHistoricalTheoremAnchors0",
+    "script": "pcc-historical-theorem-anchors0.mjs",
+    "test": "audits/historical-theorem-anchors0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
