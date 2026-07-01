@@ -1,0 +1,25 @@
+name: section22-direct-bindings
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  section22-direct-bindings:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run Section 22 direct-binding runner
+        run: node scripts/verify-section22-direct-bindings.mjs --json
+      - name: Run Section 22 direct-binding runner tests
+        run: node --test audits/section22-direct-bindings0.test.mjs
+      - name: Upload Section 22 direct-binding runner verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: section22-direct-bindings-latest-verdict
+          path: artifacts/section22-direct-bindings/latest-verdict.json
