@@ -6,6 +6,12 @@ Current coordinate:
 PNP-HISTORICAL-REPORT-SUPERSESSION-2026-06-27-01
 ```
 
+Sanitized root report coordinate:
+
+```text
+PNP-HISTORICAL-REPORT-SANITIZED-2026-06-27-01
+```
+
 Machine-readable manifest:
 
 ```text
@@ -18,20 +24,24 @@ Checker:
 node pcc-historical-report-supersession0.mjs --json
 ```
 
-The root historical report files remain present:
+The root canonical report files are now sanitized status notices:
 
 ```text
 canonical_proof_report.tex
 canonical_proof_report.pdf
 ```
 
-Those historical files contain direct theorem-emission wording from the old sealed report path. This audit makes that surface explicit and binds it to the current successor status boundary rather than letting report prose silently define the active public-release state.
+Earlier sealed-report artifacts and earlier revisions of these root report files contained direct theorem-emission wording. This audit now checks the current root TeX and PDF for required successor-boundary fragments and rejects if old direct theorem-emission fragments reappear.
 
 ## Current scope
 
 ```text
 historicalReportSupersessionReady = true
-historicalDirectTheoremEmissionRepresented = true
+historicalReportSanitizedReady = true
+historicalDirectTheoremEmissionRepresented = false
+historicalDirectTheoremEmissionSanitized = true
+currentRootReportSanitized = true
+currentPdfSanitized = true
 currentBoundarySupersedesHistoricalEmission = true
 publicTheoremEmissionAllowedBySupersession = false
 ```
@@ -50,4 +60,4 @@ remainingBlockers = [
 ]
 ```
 
-This audit does not freeze the historical report. A later PR may mutate or replace `canonical_proof_report.tex` and `canonical_proof_report.pdf`; if it does, this manifest and checker should be updated to the new historical-report mode.
+This audit does not rewrite earlier sealed tags or earlier durable artifact bundles. It only sanitizes the current root report surface and keeps earlier direct theorem-emission prose superseded by the current non-activation boundary.
