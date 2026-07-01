@@ -14,16 +14,16 @@ Run it with:
 node pcc-historical-report-supersession0.mjs --json
 ```
 
-The checker validates that the root historical report files are represented as historical theorem-emission surfaces:
+The checker validates that the current root canonical report files are sanitized status notices:
 
 ```text
 canonical_proof_report.tex
 canonical_proof_report.pdf
 ```
 
-and that the current successor status boundary supersedes that historical prose for active public-release state.
+and that old direct theorem-emission fragments are absent from the current root report surface.
 
-The audit is non-activating:
+The audit remains non-activating:
 
 ```text
 publicTheoremEmissionAllowed = false
