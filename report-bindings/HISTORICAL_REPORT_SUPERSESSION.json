@@ -24,6 +24,7 @@
     "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]
   },
   "requiredCurrentCoordinates": {
+    "historicalReportSanitizedCoordinate": "PNP-HISTORICAL-REPORT-SANITIZED-2026-06-27-01",
     "directBindingIndexCoordinate": "PNP-DIRECT-BINDING-INDEX-2026-06-27-01",
     "section22DirectBindingRunnerCoordinate": "PNP-SECTION22-DIRECT-BINDING-RUNNER-2026-06-27-01",
     "releaseLadderCoordinate": "PNP-RELEASE-LADDER-2026-06-27-01",
@@ -67,6 +68,7 @@
     "This supersession manifest does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
     "This supersession manifest does not treat historical theorem-emission prose as the current public release boundary.",
     "This supersession manifest records that the current root canonical report source and PDF are sanitized status notices.",
+    "This supersession manifest requires PNP_STATUS.json to carry the sanitized root report coordinate.",
     "This supersession manifest does not claim that earlier sealed report artifacts have been rewritten."
   ],
   "audit": {

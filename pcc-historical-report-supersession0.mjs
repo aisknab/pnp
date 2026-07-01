@@ -13,6 +13,7 @@ const OUT = 'artifacts/historical-report-supersession/latest-verdict.json';
 const MANIFEST = 'report-bindings/HISTORICAL_REPORT_SUPERSESSION.json';
 const BLOCKERS = ['Release.UnrestrictedFinalSoundness', 'ExternalReview.Acceptance'];
 const REQUIRED_COORDINATES = {
+  historicalReportSanitizedCoordinate: SANITIZED_COORD,
   directBindingIndexCoordinate: 'PNP-DIRECT-BINDING-INDEX-2026-06-27-01',
   section22DirectBindingRunnerCoordinate: 'PNP-SECTION22-DIRECT-BINDING-RUNNER-2026-06-27-01',
   releaseLadderCoordinate: 'PNP-RELEASE-LADDER-2026-06-27-01',
