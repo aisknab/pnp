@@ -27,10 +27,10 @@
     "\\textbf{Accepted proof-report boundary.}",
     "\\CheckPack(\\GenPack())=\\mathsf{accept}\\quad\\Longrightarrow\\quad P=NP.",
     "This paper proves",
-    "Theorem 1.1 (Final accepted finite-certificate theorem)",
-    "Therefore SAT is decidable in polynomial time and P = NP.",
-    "Theorem 18.3 (Generated package sufficiency)",
-    "Theorem 20.19 (Final proof-report acceptance)",
+    "\\begin{theorem}[Final accepted finite-certificate theorem]",
+    "Therefore SAT is decidable in polynomial time and \\(P=NP\\).",
+    "\\begin{theorem}[Generated package sufficiency]",
+    "\\begin{theorem}[Final proof-report acceptance]",
     "The final public theorem statement is"
   ],
   "evidenceSurfaces": [
