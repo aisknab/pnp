@@ -1,0 +1,25 @@
+name: historical-theorem-anchors
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  historical-theorem-anchors:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run historical theorem anchor checker
+        run: node pcc-historical-theorem-anchors0.mjs --json
+      - name: Run historical theorem anchor tests
+        run: node --test audits/historical-theorem-anchors0.test.mjs
+      - name: Upload historical theorem anchor verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: historical-theorem-anchors-latest-verdict
+          path: artifacts/historical-theorem-anchors/latest-verdict.json
