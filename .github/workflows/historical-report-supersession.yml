@@ -1,0 +1,25 @@
+name: historical-report-supersession
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  historical-report-supersession:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run historical report supersession checker
+        run: node pcc-historical-report-supersession0.mjs --json
+      - name: Run historical report supersession tests
+        run: node --test audits/historical-report-supersession0.test.mjs
+      - name: Upload historical report supersession verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: historical-report-supersession-latest-verdict
+          path: artifacts/historical-report-supersession/latest-verdict.json
