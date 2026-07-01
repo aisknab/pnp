@@ -1,0 +1,69 @@
+{
+  "kind": "PNPHBDirectBindingGapSeed0",
+  "version": 0,
+  "coordinate": "PNP-DIRECT-BIND-HB-NEGATIVE-CLOSURE-GAP-SEED-2026-06-27-01",
+  "title": "HB theorem direct-binding gap-transition seed",
+  "purpose": "Bind the historical Section 22 HB theorem-ledger row to current simultaneous HN-BUD rank-parametric negative closure, selector-silence induction, blocker graph acyclicity, no-circular negative closure, finite-to-unbounded audit, gap-ledger, coverage matrix, closure plan, and non-activation surfaces while preserving the active unrestricted-final-soundness blockers.",
+  "status": "hb-direct-binding-gap-seed-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]
+  },
+  "hbDirectBindingGapSeedReady": true,
+  "directCheckerBindingComplete": false,
+  "fullHistoricalHBTheoremDischarged": false,
+  "publicTheoremEmissionAllowedByBinding": false,
+  "directBindingBlockedByGaps": true,
+  "linkedCoordinates": {
+    "reportTheoremInventory": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
+    "reportTheoremCoverageMatrix": "PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01",
+    "reportTheoremCoverageClosurePlan": "PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01",
+    "gapLedger": "PNP-GAP-LEDGER-2026-06-27-01",
+    "finiteToUnboundedFamilyAudit": "PNP-FINITE-TO-UNBOUNDED-FAMILY-AUDIT-2026-06-27-01"
+  },
+  "boundInventoryEntry": {
+    "inventoryEntryId": "TL-023-HB",
+    "coverageEntryId": "COV-023-HB",
+    "closureEntryId": "DCC-023-HB",
+    "sourceLabel": "HB",
+    "expectedCoverageClass": "uniformity-gap-surface",
+    "expectedClosureStatus": "blocked-by-unrestricted-final-soundness",
+    "expectedNextDirectBindingSurface": "pcc-direct-bind-hb-negative-closure0.mjs"
+  },
+  "blockingGaps": ["GAP-001-UnrestrictedFinalSoundness", "GAP-004-FiniteToUnboundedUniformity"],
+  "coveredHBComponents": [
+    "HB.HNBUDRankParametricNegativeClosureSurface",
+    "HB.BlockerGraphAcyclicByRankSurface",
+    "HB.SelectorSilenceRankCompleteSurface",
+    "HB.NoCircularNegativeClosureSurface",
+    "HB.HNBUDActivityExclusionSurface",
+    "HB.FiniteToUnboundedGapSurface",
+    "HB.ActivationBoundary"
+  ],
+  "evidenceSurfaces": [
+    "report-bindings/direct-bindings/HB_DIRECT_BINDING_GAP_SEED.json",
+    "report-bindings/direct-bindings/HB_DIRECT_BINDING_GAP_SEED.md",
+    "report-bindings/REPORT_THEOREM_INVENTORY.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json",
+    "pcc-direct-bind-hb-negative-closure0.mjs",
+    "audits/direct-bind-hb-negative-closure0.test.mjs",
+    "PNP_STATUS.json"
+  ],
+  "nonClaims": [
+    "This HB seed does not activate public theorem emission.",
+    "This HB seed does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This HB seed records a blocked gap-transition surface rather than a completed direct checker binding.",
+    "This HB seed does not prove finite-to-unbounded uniformity."
+  ],
+  "audit": {
+    "checker": "CheckHBDirectBindingGapSeed0",
+    "script": "pcc-direct-bind-hb-negative-closure0.mjs",
+    "test": "audits/direct-bind-hb-negative-closure0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
