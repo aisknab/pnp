@@ -1,0 +1,76 @@
+{
+  "kind": "PNPPublicReviewBoundary0",
+  "version": 0,
+  "coordinate": "PNP-PUBLIC-REVIEW-BOUNDARY-2026-06-27-01",
+  "status": "public-review-boundary-ready",
+  "title": "Current public-review non-activation boundary",
+  "purpose": "Aggregate the current status file, release ladder, gap ledger, sanitized historical-report surfaces, historical theorem-anchor surface, public-surface baseline, Section 22 direct-binding index, and Section 22 runner into a single non-activating public-review boundary audit.",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]
+  },
+  "publicReviewBoundaryReady": true,
+  "publicTheoremEmissionAllowedByBoundary": false,
+  "finalTheoremReadyByBoundary": false,
+  "publicSurfaceBaselineFrozen": true,
+  "historicalReportSanitized": true,
+  "historicalTheoremAnchorsNonEmitting": true,
+  "releaseLadderBlocked": true,
+  "gapLedgerBlocksPublicEmission": true,
+  "section22ExecutableSurfaceIndexed": true,
+  "section22RunnerBound": true,
+  "requiredCoordinates": {
+    "statusKind": "PNPStatus0",
+    "releaseLadderCoordinate": "PNP-RELEASE-LADDER-2026-06-27-01",
+    "gapLedgerCoordinate": "PNP-GAP-LEDGER-2026-06-27-01",
+    "historicalReportSupersessionCoordinate": "PNP-HISTORICAL-REPORT-SUPERSESSION-2026-06-27-01",
+    "historicalReportSanitizedCoordinate": "PNP-HISTORICAL-REPORT-SANITIZED-2026-06-27-01",
+    "historicalTheoremAnchorsCoordinate": "PNP-HISTORICAL-THEOREM-ANCHORS-2026-06-27-01",
+    "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-NO-HIDDEN-ORACLE-01",
+    "directBindingIndexCoordinate": "PNP-DIRECT-BINDING-INDEX-2026-06-27-01",
+    "section22DirectBindingRunnerCoordinate": "PNP-SECTION22-DIRECT-BINDING-RUNNER-2026-06-27-01"
+  },
+  "requiredBlockedLadderNodes": [
+    {"id": "UnrestrictedFinalSoundnessRepresented", "blocker": "Release.UnrestrictedFinalSoundness"},
+    {"id": "InternalTheoremActivationCandidate", "blocker": "Release.UnrestrictedFinalSoundness"},
+    {"id": "PublicTheoremEmissionCandidate", "blocker": "ExternalReview.Acceptance"}
+  ],
+  "requiredReleaseGaps": [
+    "GAP-001-UnrestrictedFinalSoundness",
+    "GAP-002-ExternalReviewAcceptance"
+  ],
+  "requiredVerificationSurfaceIds": [
+    "historical-report-supersession-audit",
+    "historical-theorem-anchors-audit",
+    "public-surface-baseline-audit",
+    "direct-binding-index-audit",
+    "section22-direct-binding-runner-audit",
+    "one-command-verifier"
+  ],
+  "evidenceSurfaces": [
+    "release/PUBLIC_REVIEW_BOUNDARY.json",
+    "release/PUBLIC_REVIEW_BOUNDARY.md",
+    "PNP_STATUS.json",
+    "release/RELEASE_LADDER.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "report-bindings/HISTORICAL_REPORT_SUPERSESSION.json",
+    "report-bindings/HISTORICAL_THEOREM_ANCHORS.json",
+    "pcc-public-surface-baseline0.mjs",
+    "pcc-public-review-boundary0.mjs",
+    "audits/public-review-boundary0.test.mjs"
+  ],
+  "nonClaims": [
+    "This boundary manifest does not activate public theorem emission.",
+    "This boundary manifest does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This boundary manifest aggregates existing non-activation surfaces; it does not mark any Section 22 theorem-ledger row as fully discharged.",
+    "This boundary manifest keeps historical theorem-emission artifacts fenced by the current sanitized public-review status surface."
+  ],
+  "audit": {
+    "checker": "CheckPublicReviewBoundary0",
+    "script": "pcc-public-review-boundary0.mjs",
+    "test": "audits/public-review-boundary0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
