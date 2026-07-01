@@ -64,6 +64,7 @@
   "verificationSurfaces": [
     {"id":"historical-report-supersession-audit","command":"node pcc-historical-report-supersession0.mjs --json","outputKind":"artifacts/historical-report-supersession/latest-verdict.json"},
     {"id":"historical-theorem-anchors-audit","command":"node pcc-historical-theorem-anchors0.mjs --json","outputKind":"artifacts/historical-theorem-anchors/latest-verdict.json"},
+    {"id":"public-surface-baseline-audit","command":"node pcc-public-surface-baseline0.mjs --json","outputKind":"artifacts/public-surface-baseline/latest-verdict.json"},
     {"id":"direct-binding-index-audit","command":"node pcc-direct-binding-index0.mjs --json","outputKind":"artifacts/direct-binding-index/latest-verdict.json"},
     {"id":"section22-direct-binding-runner-audit","command":"node scripts/verify-section22-direct-bindings.mjs --json","outputKind":"artifacts/section22-direct-bindings/latest-verdict.json"},
     {"id":"e-direct-binding-seed-audit","command":"node pcc-direct-bind-verifydw-soundness0.mjs --json","outputKind":"artifacts/direct-bind-verifydw-soundness/latest-verdict.json"},
@@ -86,6 +87,7 @@
     "The historical report supersession audit records old direct theorem-emission prose as superseded by the current non-activation boundary.",
     "The current root canonical report source and PDF are sanitized status notices bound to PNP-HISTORICAL-REPORT-SANITIZED-2026-06-27-01.",
     "The historical theorem anchor index preserves theorem names for ledger lookup but is not a theorem-emission surface.",
+    "The public surface baseline checker freezes the current package entry/export/bin/script surface but does not activate public theorem emission.",
     "The historical canonical report may be superseded by successor public-review reports, but this status file records the current non-activation boundary."
   ]
 }
