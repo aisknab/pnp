@@ -1,0 +1,25 @@
+name: public-surface-baseline
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  public-surface-baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run public surface baseline checker
+        run: node pcc-public-surface-baseline0.mjs --json
+      - name: Run public surface baseline tests
+        run: node --test audits/public-surface-baseline0.test.mjs test/pcc-public-surface-freeze0.test.mjs
+      - name: Upload public surface baseline verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-surface-baseline-latest-verdict
+          path: artifacts/public-surface-baseline/latest-verdict.json
