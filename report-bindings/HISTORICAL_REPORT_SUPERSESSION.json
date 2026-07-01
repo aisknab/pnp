@@ -1,0 +1,59 @@
+{
+  "kind": "PNPHistoricalReportSupersession0",
+  "version": 0,
+  "coordinate": "PNP-HISTORICAL-REPORT-SUPERSESSION-2026-06-27-01",
+  "status": "historical-report-supersession-ready",
+  "historicalReportPath": "canonical_proof_report.tex",
+  "historicalReportPdfPath": "canonical_proof_report.pdf",
+  "currentStatusPath": "PNP_STATUS.json",
+  "successorBoundarySource": "PNP_STATUS.json",
+  "historicalDirectTheoremEmissionRepresented": true,
+  "currentBoundarySupersedesHistoricalEmission": true,
+  "historicalReportMayBeMutatedBySuccessorPRs": true,
+  "publicTheoremEmissionAllowedBySupersession": false,
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]
+  },
+  "requiredCurrentCoordinates": {
+    "directBindingIndexCoordinate": "PNP-DIRECT-BINDING-INDEX-2026-06-27-01",
+    "section22DirectBindingRunnerCoordinate": "PNP-SECTION22-DIRECT-BINDING-RUNNER-2026-06-27-01",
+    "releaseLadderCoordinate": "PNP-RELEASE-LADDER-2026-06-27-01",
+    "gapLedgerCoordinate": "PNP-GAP-LEDGER-2026-06-27-01"
+  },
+  "historicalDirectClaimFragments": [
+    "\\textbf{Accepted proof-report boundary.}",
+    "\\CheckPack(\\GenPack())=\\mathsf{accept}\\quad\\Longrightarrow\\quad P=NP.",
+    "This paper proves",
+    "Theorem 1.1 (Final accepted finite-certificate theorem)",
+    "Therefore SAT is decidable in polynomial time and P = NP.",
+    "Theorem 18.3 (Generated package sufficiency)",
+    "Theorem 20.19 (Final proof-report acceptance)",
+    "The final public theorem statement is"
+  ],
+  "evidenceSurfaces": [
+    "report-bindings/HISTORICAL_REPORT_SUPERSESSION.json",
+    "report-bindings/HISTORICAL_REPORT_SUPERSESSION.md",
+    "canonical_proof_report.tex",
+    "canonical_proof_report.pdf",
+    "PNP_STATUS.json",
+    "release/RELEASE_LADDER.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "pcc-historical-report-supersession0.mjs",
+    "audits/historical-report-supersession0.test.mjs"
+  ],
+  "nonClaims": [
+    "This supersession manifest does not activate public theorem emission.",
+    "This supersession manifest does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This supersession manifest does not treat historical theorem-emission prose as the current public release boundary.",
+    "This supersession manifest records that the current status file supersedes the historical canonical report until a later PR mutates or replaces that report."
+  ],
+  "audit": {
+    "checker": "CheckHistoricalReportSupersession0",
+    "script": "pcc-historical-report-supersession0.mjs",
+    "test": "audits/historical-report-supersession0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
