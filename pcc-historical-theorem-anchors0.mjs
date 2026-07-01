@@ -11,11 +11,13 @@ const COORD = 'PNP-HISTORICAL-THEOREM-ANCHORS-2026-06-27-01';
 const OUT = 'artifacts/historical-theorem-anchors/latest-verdict.json';
 const BLOCKERS = ['Release.UnrestrictedFinalSoundness', 'ExternalReview.Acceptance'];
 const EXPECTED_LINKED = {
+  historicalTheoremAnchors: COORD,
   reportTheoremBindings: 'REPORT-THEOREM-BINDINGS-2026-06-27-01',
   historicalReportSupersession: 'PNP-HISTORICAL-REPORT-SUPERSESSION-2026-06-27-01',
   historicalReportSanitized: 'PNP-HISTORICAL-REPORT-SANITIZED-2026-06-27-01'
 };
 const STATUS_COORDS = {
+  historicalTheoremAnchorsCoordinate: COORD,
   historicalReportSupersessionCoordinate: 'PNP-HISTORICAL-REPORT-SUPERSESSION-2026-06-27-01',
   historicalReportSanitizedCoordinate: 'PNP-HISTORICAL-REPORT-SANITIZED-2026-06-27-01',
   theoremBindingLedgerCoordinate: 'REPORT-THEOREM-BINDINGS-2026-06-27-01'
@@ -36,8 +38,8 @@ export async function CheckHistoricalTheoremAnchors0(options = {}) {
     const manifestRead = await readJson0(root, options.manifestPath ?? DEFAULT_FILES.manifest, options.manifestOverride);
     if (manifestRead.tag === 'reject') return write0(root, outputPath, writeOutput, manifestRead);
     const manifest = manifestRead.value;
-    const m = validateManifest0(manifest);
-    if (m.tag === 'reject') return write0(root, outputPath, writeOutput, m);
+    const manifestCheck = validateManifest0(manifest);
+    if (manifestCheck.tag === 'reject') return write0(root, outputPath, writeOutput, manifestCheck);
 
     const bindingsRead = await readJson0(root, manifest.sourceFiles.reportTheoremBindings, options.bindingsOverride);
     if (bindingsRead.tag === 'reject') return write0(root, outputPath, writeOutput, bindingsRead);
@@ -83,6 +85,7 @@ export async function CheckHistoricalTheoremAnchors0(options = {}) {
       anchorCount: manifest.anchors.length,
       boundTheoremBindingCount: bindingsCheck.boundTheoremBindingCount,
       linkedCoordinates: { ...EXPECTED_LINKED },
+      statusCoordinates: { ...STATUS_COORDS },
       evidenceFileCount: evidence.files.length,
       evidenceDigestSha256: shaText0(stable0(evidence.files)),
       evidenceFiles: evidence.files,
@@ -100,8 +103,8 @@ export async function CheckHistoricalTheoremAnchors0(options = {}) {
 function validateManifest0(m) {
   if (!plain0(m) || m.kind !== 'PNPHistoricalTheoremAnchors0' || m.version !== VERSION || m.coordinate !== COORD || m.status !== 'historical-theorem-anchor-index-ready') return reject0('HistoricalTheoremAnchors.ManifestShape', [DEFAULT_FILES.manifest], 'manifest shape mismatch');
   if (m.anchorIndexReady !== true || m.anchorIndexIsTheoremEmissionSurface !== false || m.publicTheoremEmissionAllowedByAnchorIndex !== false) return reject0('HistoricalTheoremAnchors.ManifestFlags', [DEFAULT_FILES.manifest], 'manifest flag mismatch');
-  const b = boundary0(m.claimBoundary, [DEFAULT_FILES.manifest, 'claimBoundary']);
-  if (b.tag === 'reject') return b;
+  const boundary = boundary0(m.claimBoundary, [DEFAULT_FILES.manifest, 'claimBoundary']);
+  if (boundary.tag === 'reject') return boundary;
   if (!plain0(m.linkedCoordinates)) return reject0('HistoricalTheoremAnchors.LinkedShape', [DEFAULT_FILES.manifest, 'linkedCoordinates'], 'linked coordinates missing');
   for (const [field, expected] of Object.entries(EXPECTED_LINKED)) {
     if (m.linkedCoordinates[field] !== expected) return reject0('HistoricalTheoremAnchors.LinkedCoordinateMismatch', [DEFAULT_FILES.manifest, 'linkedCoordinates', field], 'linked coordinate mismatch', { expected, actual: m.linkedCoordinates[field] });
@@ -126,8 +129,8 @@ function validateManifest0(m) {
 
 function validateBindings0(bindings, anchors) {
   if (!plain0(bindings) || bindings.kind !== 'PNPReportTheoremBindings0' || bindings.coordinate !== EXPECTED_LINKED.reportTheoremBindings) return reject0('HistoricalTheoremAnchors.BindingsShape', [DEFAULT_FILES.bindings], 'report theorem bindings shape mismatch');
-  const b = boundary0(bindings.claimBoundary, [DEFAULT_FILES.bindings, 'claimBoundary']);
-  if (b.tag === 'reject') return b;
+  const boundary = boundary0(bindings.claimBoundary, [DEFAULT_FILES.bindings, 'claimBoundary']);
+  if (boundary.tag === 'reject') return boundary;
   if (!Array.isArray(bindings.theoremBindings) || bindings.theoremBindings.length !== anchors.length) return reject0('HistoricalTheoremAnchors.BindingCount', [DEFAULT_FILES.bindings, 'theoremBindings'], 'theorem binding count mismatch', { expected: anchors.length, actual: bindings.theoremBindings?.length ?? null });
   const anchorById = new Map(anchors.map((row) => [row.theoremBindingId, row.anchor]));
   for (const binding of bindings.theoremBindings) {
@@ -142,8 +145,8 @@ function validateBindings0(bindings, anchors) {
 
 function validateStatus0(status) {
   if (!plain0(status) || status.kind !== 'PNPStatus0' || status.project !== 'PNP') return reject0('HistoricalTheoremAnchors.StatusShape', [DEFAULT_FILES.status], 'status shape mismatch');
-  const b = boundary0(status, [DEFAULT_FILES.status]);
-  if (b.tag === 'reject') return b;
+  const boundary = boundary0(status, [DEFAULT_FILES.status]);
+  if (boundary.tag === 'reject') return boundary;
   for (const [field, expected] of Object.entries(STATUS_COORDS)) {
     if (status[field] !== expected) return reject0('HistoricalTheoremAnchors.StatusCoordinateMismatch', [DEFAULT_FILES.status, field], 'status coordinate mismatch', { expected, actual: status[field] });
   }
