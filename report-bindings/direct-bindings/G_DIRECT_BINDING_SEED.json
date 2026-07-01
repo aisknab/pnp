@@ -1,0 +1,76 @@
+{
+  "kind": "PNPGDirectBindingSeed0",
+  "version": 0,
+  "coordinate": "PNP-DIRECT-BIND-G-LOCKED-NAND-THRESHOLD-SEED-2026-06-27-01",
+  "title": "G theorem direct-binding seed",
+  "purpose": "Bind the historical Section 22 G theorem-ledger row to current locked NAND SAT threshold small-model evidence, macro truth-table surface, baseline/threshold row, complexity implication ledger, finite-to-unbounded audit, gap-ledger, coverage matrix, closure plan, and non-activation surfaces while preserving bounded-seed and uniformity blockers.",
+  "status": "g-direct-binding-seed-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]
+  },
+  "gDirectBindingSeedReady": true,
+  "directCheckerBindingComplete": false,
+  "fullHistoricalGTheoremDischarged": false,
+  "publicTheoremEmissionAllowedByBinding": false,
+  "directBindingBlockedByGaps": true,
+  "linkedCoordinates": {
+    "reportTheoremInventory": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
+    "reportTheoremCoverageMatrix": "PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01",
+    "reportTheoremCoverageClosurePlan": "PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01",
+    "lockedNANDSATSmallModels": "PNP-LOCKED-NAND-SAT-SMALL-MODELS-2026-06-27-01",
+    "complexityLedger": "PNP-COMPLEXITY-LEDGER-2026-06-27-01",
+    "gapLedger": "PNP-GAP-LEDGER-2026-06-27-01",
+    "finiteToUnboundedFamilyAudit": "PNP-FINITE-TO-UNBOUNDED-FAMILY-AUDIT-2026-06-27-01"
+  },
+  "boundInventoryEntry": {
+    "inventoryEntryId": "TL-025-G",
+    "coverageEntryId": "COV-025-G",
+    "closureEntryId": "DCC-025-G",
+    "sourceLabel": "G",
+    "expectedCoverageClass": "locked-nand-seed-surface",
+    "expectedClosureStatus": "direct-binding-seed-upgrade-needed",
+    "expectedNextDirectBindingSurface": "pcc-direct-bind-locked-nand-threshold0.mjs"
+  },
+  "blockingGaps": ["GAP-003-BoundedSmallModelsNotUniformProof", "GAP-004-FiniteToUnboundedUniformity"],
+  "coveredGComponents": [
+    "G.LockedNANDSATEmbeddingSurface",
+    "G.MacroTruthTableSurface",
+    "G.BaselineThresholdSeedSurface",
+    "G.ResidualSlackAtMostFourSurface",
+    "G.SmallModelThresholdAgreementSurface",
+    "G.ComplexityConditionalSurface",
+    "G.FiniteToUnboundedGapSurface",
+    "G.ActivationBoundary"
+  ],
+  "evidenceSurfaces": [
+    "report-bindings/direct-bindings/G_DIRECT_BINDING_SEED.json",
+    "report-bindings/direct-bindings/G_DIRECT_BINDING_SEED.md",
+    "report-bindings/REPORT_THEOREM_INVENTORY.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json",
+    "semantics/locked-nand-sat-small-models-config.json",
+    "pcc-locked-nand-sat-small-models0.mjs",
+    "audits/locked-nand-sat-small-models0.test.mjs",
+    "complexity/COMPLEXITY_LEDGER.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json",
+    "pcc-direct-bind-locked-nand-threshold0.mjs",
+    "audits/direct-bind-locked-nand-threshold0.test.mjs",
+    "PNP_STATUS.json"
+  ],
+  "nonClaims": [
+    "This G seed does not activate public theorem emission.",
+    "This G seed does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This G seed records a locked-NAND threshold seed surface rather than a completed all-input-size direct checker binding.",
+    "This G seed does not prove that bounded small-model evidence is a uniform proof for every SAT input size."
+  ],
+  "audit": {
+    "checker": "CheckGDirectBindingSeed0",
+    "script": "pcc-direct-bind-locked-nand-threshold0.mjs",
+    "test": "audits/direct-bind-locked-nand-threshold0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
