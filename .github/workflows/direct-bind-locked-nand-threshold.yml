@@ -1,0 +1,25 @@
+name: direct-bind-locked-nand-threshold
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  direct-bind-locked-nand-threshold:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run G direct-binding seed checker
+        run: node pcc-direct-bind-locked-nand-threshold0.mjs --json
+      - name: Run G direct-binding seed tests
+        run: node --test audits/direct-bind-locked-nand-threshold0.test.mjs
+      - name: Upload G direct-binding seed verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: direct-bind-locked-nand-threshold-latest-verdict
+          path: artifacts/direct-bind-locked-nand-threshold/latest-verdict.json
