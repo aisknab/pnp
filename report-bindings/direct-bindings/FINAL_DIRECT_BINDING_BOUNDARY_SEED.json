@@ -1,0 +1,72 @@
+{
+  "kind": "PNPFinalDirectBindingBoundarySeed0",
+  "version": 0,
+  "coordinate": "PNP-DIRECT-BIND-FINAL-THEOREM-BOUNDARY-SEED-2026-06-27-01",
+  "title": "Final theorem release-boundary direct-binding seed",
+  "purpose": "Bind the historical Section 22 Final theorem-ledger row to the current release ladder, theorem-binding ledger, gap ledger, status boundary, coverage matrix, closure plan, and explicit non-activation surfaces without enabling public theorem emission.",
+  "status": "final-theorem-boundary-seed-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]
+  },
+  "finalTheoremBoundarySeedReady": true,
+  "directCheckerBindingComplete": false,
+  "fullHistoricalFinalTheoremDischarged": false,
+  "publicTheoremEmissionAllowedByBinding": false,
+  "releaseBoundaryBlocked": true,
+  "linkedCoordinates": {
+    "reportTheoremInventory": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
+    "reportTheoremCoverageMatrix": "PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01",
+    "reportTheoremCoverageClosurePlan": "PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01",
+    "theoremBindingLedger": "REPORT-THEOREM-BINDINGS-2026-06-27-01",
+    "releaseLadder": "PNP-RELEASE-LADDER-2026-06-27-01",
+    "gapLedger": "PNP-GAP-LEDGER-2026-06-27-01",
+    "status": "PNPStatus0"
+  },
+  "boundInventoryEntry": {
+    "inventoryEntryId": "TL-026-Final",
+    "coverageEntryId": "COV-026-Final",
+    "closureEntryId": "DCC-026-Final",
+    "sourceLabel": "Final",
+    "expectedCoverageClass": "release-critical-boundary-surface",
+    "expectedClosureStatus": "release-boundary-blocked",
+    "expectedNextDirectBindingSurface": "pcc-direct-bind-final-theorem-boundary0.mjs"
+  },
+  "blockingGaps": ["GAP-001-UnrestrictedFinalSoundness", "GAP-002-ExternalReviewAcceptance"],
+  "coveredFinalComponents": [
+    "Final.FrameworkMatchSurface",
+    "Final.SATDecisionBoundarySurface",
+    "Final.AcceptedPackageImpliesPNPHistoricalSurface",
+    "Final.ReleaseLadderNonActivationSurface",
+    "Final.PublicTheoremEmissionDisabledSurface",
+    "Final.ActiveFinalNodeEmptySurface",
+    "Final.ReleaseBlockersSurface"
+  ],
+  "evidenceSurfaces": [
+    "report-bindings/direct-bindings/FINAL_DIRECT_BINDING_BOUNDARY_SEED.json",
+    "report-bindings/direct-bindings/FINAL_DIRECT_BINDING_BOUNDARY_SEED.md",
+    "report-bindings/REPORT_THEOREM_INVENTORY.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json",
+    "report-bindings/REPORT_THEOREM_BINDINGS.json",
+    "release/RELEASE_LADDER.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "PNP_STATUS.json",
+    "pcc-direct-bind-final-theorem-boundary0.mjs",
+    "audits/direct-bind-final-theorem-boundary0.test.mjs"
+  ],
+  "nonClaims": [
+    "This Final seed does not activate public theorem emission.",
+    "This Final seed does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This Final seed records the release-critical boundary for the historical Final row rather than a completed theorem activation.",
+    "This Final seed does not set finalTheoremReady or activeFinalNodeIds."
+  ],
+  "audit": {
+    "checker": "CheckFinalTheoremBoundarySeed0",
+    "script": "pcc-direct-bind-final-theorem-boundary0.mjs",
+    "test": "audits/direct-bind-final-theorem-boundary0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
