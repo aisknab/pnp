@@ -1,0 +1,70 @@
+{
+  "kind": "PNPRDirectBindingGapSeed0",
+  "version": 0,
+  "coordinate": "PNP-DIRECT-BIND-R-SELECTOR-REALIZER-GAP-SEED-2026-06-27-01",
+  "title": "R theorem direct-binding gap-transition seed",
+  "purpose": "Bind the historical Section 22 R theorem-ledger row to current selector realizers, typed bottom outputs, strict charge surplus, gain-only public interface, finite-to-unbounded audit, gap-ledger, coverage matrix, closure plan, and non-activation surfaces while preserving the active unrestricted-final-soundness blockers.",
+  "status": "r-direct-binding-gap-seed-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]
+  },
+  "rDirectBindingGapSeedReady": true,
+  "directCheckerBindingComplete": false,
+  "fullHistoricalRTheoremDischarged": false,
+  "publicTheoremEmissionAllowedByBinding": false,
+  "directBindingBlockedByGaps": true,
+  "linkedCoordinates": {
+    "reportTheoremInventory": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
+    "reportTheoremCoverageMatrix": "PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01",
+    "reportTheoremCoverageClosurePlan": "PNP-REPORT-THEOREM-COVERAGE-CLOSURE-PLAN-2026-06-27-01",
+    "gapLedger": "PNP-GAP-LEDGER-2026-06-27-01",
+    "finiteToUnboundedFamilyAudit": "PNP-FINITE-TO-UNBOUNDED-FAMILY-AUDIT-2026-06-27-01"
+  },
+  "boundInventoryEntry": {
+    "inventoryEntryId": "TL-022-R",
+    "coverageEntryId": "COV-022-R",
+    "closureEntryId": "DCC-022-R",
+    "sourceLabel": "R",
+    "expectedCoverageClass": "uniformity-gap-surface",
+    "expectedClosureStatus": "blocked-by-unrestricted-final-soundness",
+    "expectedNextDirectBindingSurface": "pcc-direct-bind-selector-realizer0.mjs"
+  },
+  "blockingGaps": ["GAP-001-UnrestrictedFinalSoundness", "GAP-004-FiniteToUnboundedUniformity"],
+  "coveredRComponents": [
+    "R.SelectorRealizerSurface",
+    "R.TypedBottomSurface",
+    "R.HNBUDBlockerTypingSurface",
+    "R.LowerRankFaithfulSelectorSurface",
+    "R.StrictChargeSurplusSurface",
+    "R.GainOnlyPublicInterfaceSurface",
+    "R.FiniteToUnboundedGapSurface",
+    "R.ActivationBoundary"
+  ],
+  "evidenceSurfaces": [
+    "report-bindings/direct-bindings/R_DIRECT_BINDING_GAP_SEED.json",
+    "report-bindings/direct-bindings/R_DIRECT_BINDING_GAP_SEED.md",
+    "report-bindings/REPORT_THEOREM_INVENTORY.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_MATRIX.json",
+    "report-bindings/REPORT_THEOREM_COVERAGE_CLOSURE_PLAN.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json",
+    "pcc-direct-bind-selector-realizer0.mjs",
+    "audits/direct-bind-selector-realizer0.test.mjs",
+    "PNP_STATUS.json"
+  ],
+  "nonClaims": [
+    "This R seed does not activate public theorem emission.",
+    "This R seed does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This R seed records a blocked gap-transition surface rather than a completed direct checker binding.",
+    "This R seed does not prove finite-to-unbounded uniformity."
+  ],
+  "audit": {
+    "checker": "CheckRDirectBindingGapSeed0",
+    "script": "pcc-direct-bind-selector-realizer0.mjs",
+    "test": "audits/direct-bind-selector-realizer0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
