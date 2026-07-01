@@ -13,6 +13,7 @@
   "pnpVerifyOutput": "artifacts/pnp-verify-all/latest-verdict.json",
   "canonicalReportCoordinate": "historical-final-pnp-proof-report-hardened-7072f8d",
   "successorReportCoordinate": "PNP-REPORT-SEAL-2026-06-27-01",
+  "historicalReportSupersessionCoordinate": "PNP-HISTORICAL-REPORT-SUPERSESSION-2026-06-27-01",
   "theoremBindingLedgerCoordinate": "REPORT-THEOREM-BINDINGS-2026-06-27-01",
   "reportTheoremInventoryCoordinate": "PNP-REPORT-THEOREM-INVENTORY-2026-06-27-01",
   "reportTheoremCoverageMatrixCoordinate": "PNP-REPORT-THEOREM-COVERAGE-MATRIX-2026-06-27-01",
@@ -59,6 +60,7 @@
   "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-NO-HIDDEN-ORACLE-01",
   "lastVerifiedCommit": "current-checkout",
   "verificationSurfaces": [
+    {"id":"historical-report-supersession-audit","command":"node pcc-historical-report-supersession0.mjs --json","outputKind":"artifacts/historical-report-supersession/latest-verdict.json"},
     {"id":"direct-binding-index-audit","command":"node pcc-direct-binding-index0.mjs --json","outputKind":"artifacts/direct-binding-index/latest-verdict.json"},
     {"id":"section22-direct-binding-runner-audit","command":"node scripts/verify-section22-direct-bindings.mjs --json","outputKind":"artifacts/section22-direct-bindings/latest-verdict.json"},
     {"id":"e-direct-binding-seed-audit","command":"node pcc-direct-bind-verifydw-soundness0.mjs --json","outputKind":"artifacts/direct-bind-verifydw-soundness/latest-verdict.json"},
@@ -78,6 +80,7 @@
     "This status file does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
     "The Section 22 direct-binding index records executable surfaces for all 27 historical theorem-ledger rows, but it does not complete direct checker binding or full historical theorem discharge.",
     "The Section 22 direct-binding runner executes every indexed row checker/test surface, but it does not activate public theorem emission or clear release blockers.",
+    "The historical report supersession audit records old direct theorem-emission prose as superseded by the current non-activation boundary.",
     "The historical canonical report may be superseded by successor public-review reports, but this status file records the current non-activation boundary."
   ]
 }
