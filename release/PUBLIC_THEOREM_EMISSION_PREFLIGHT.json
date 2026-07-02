@@ -45,9 +45,6 @@
     "external-review-status-audit",
     "public-review-checklist-audit",
     "public-review-boundary-audit",
-    "proof-obligation-ledger-audit",
-    "gap-ledger-audit",
-    "release-ladder-audit",
     "one-command-verifier"
   ],
   "requiredDeniedReasons": [
