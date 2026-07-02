@@ -80,9 +80,6 @@
     "external-review-status-audit",
     "public-review-checklist-audit",
     "public-review-boundary-audit",
-    "release-ladder-audit",
-    "gap-ledger-audit",
-    "proof-obligation-ledger-audit",
     "one-command-verifier"
   ],
   "requiredDocFragments": [
