@@ -17,6 +17,7 @@
   "oneCommandVerifierVisible": true,
   "directTheoremEmissionAllowedByEntrypoint": false,
   "requiredCoordinates": {
+    "publicReviewEntrypointCoordinate": "PNP-PUBLIC-REVIEW-ENTRYPOINT-2026-06-27-01",
     "publicReviewHandoffCoordinate": "PNP-PUBLIC-REVIEW-HANDOFF-2026-06-27-01",
     "publicReviewBoundaryCoordinate": "PNP-PUBLIC-REVIEW-BOUNDARY-2026-06-27-01",
     "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-NO-HIDDEN-ORACLE-01",
@@ -36,6 +37,7 @@
     "PNP-PUBLIC-REVIEW-ENTRYPOINT-2026-06-27-01",
     "release/PUBLIC_REVIEW_HANDOFF.md",
     "npm run pnp:verify",
+    "node pcc-public-review-entrypoint0.mjs --json",
     "node pcc-public-review-handoff0.mjs --json",
     "node pcc-public-review-boundary0.mjs --json",
     "publicTheoremEmissionAllowed = false",
@@ -59,6 +61,7 @@
     "This entrypoint manifest does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
     "This entrypoint manifest is a root navigation surface, not a theorem-activation surface.",
     "This entrypoint manifest delegates reviewer procedure to the status-bound public-review handoff.",
+    "This entrypoint manifest requires PNP_STATUS.json to expose the entrypoint coordinate as a status-bound non-activation surface.",
     "This entrypoint manifest keeps historical theorem-emission artifacts fenced by the current sanitized public-review boundary."
   ],
   "audit": {
