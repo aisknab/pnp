@@ -1,0 +1,124 @@
+{
+  "kind": "PNPReleaseBlockerClearance0",
+  "version": 0,
+  "coordinate": "PNP-RELEASE-BLOCKER-CLEARANCE-2026-06-27-01",
+  "status": "release-blocker-clearance-protocol-ready",
+  "title": "Release blocker clearance protocol for the current public-review stack",
+  "purpose": "Represent the protocol for clearing Release.UnrestrictedFinalSoundness and ExternalReview.Acceptance while recording that both blockers remain active and no current checker permits public theorem emission.",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]
+  },
+  "clearanceProtocolReady": true,
+  "releaseBlockersStillActive": true,
+  "releaseBlockerClearanceAccepted": false,
+  "unrestrictedFinalSoundnessClearanceAccepted": false,
+  "externalReviewClearanceAccepted": false,
+  "publicTheoremEmissionAllowedByClearance": false,
+  "finalTheoremReadyByClearance": false,
+  "blockedTransitionOnly": true,
+  "clearanceTransitionRequiresFuturePR": true,
+  "sourceFiles": {
+    "status": "PNP_STATUS.json",
+    "releaseLadder": "release/RELEASE_LADDER.json",
+    "gapLedger": "proof-obligations/GAP_LEDGER.json",
+    "proofObligationLedger": "proof-obligations/OBLIGATION_LEDGER.json",
+    "externalReviewStatus": "review/EXTERNAL_REVIEW_STATUS.json",
+    "publicReviewChecklist": "review/PUBLIC_REVIEW_CHECKLIST.json",
+    "clearanceDoc": "release/RELEASE_BLOCKER_CLEARANCE.md"
+  },
+  "requiredCoordinates": {
+    "externalReviewStatusCoordinate": "PNP-EXTERNAL-REVIEW-STATUS-2026-06-27-01",
+    "publicReviewChecklistCoordinate": "PNP-PUBLIC-REVIEW-CHECKLIST-2026-06-27-01",
+    "publicReviewEntrypointCoordinate": "PNP-PUBLIC-REVIEW-ENTRYPOINT-2026-06-27-01",
+    "publicReviewHandoffCoordinate": "PNP-PUBLIC-REVIEW-HANDOFF-2026-06-27-01",
+    "publicReviewBoundaryCoordinate": "PNP-PUBLIC-REVIEW-BOUNDARY-2026-06-27-01",
+    "proofObligationLedgerCoordinate": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
+    "releaseLadderCoordinate": "PNP-RELEASE-LADDER-2026-06-27-01",
+    "gapLedgerCoordinate": "PNP-GAP-LEDGER-2026-06-27-01"
+  },
+  "requiredBlockers": [
+    "Release.UnrestrictedFinalSoundness",
+    "ExternalReview.Acceptance"
+  ],
+  "requiredBlockedLadderNodes": [
+    {"id": "UnrestrictedFinalSoundnessRepresented", "state": "blocked", "blocker": "Release.UnrestrictedFinalSoundness"},
+    {"id": "InternalTheoremActivationCandidate", "state": "blocked", "blocker": "Release.UnrestrictedFinalSoundness"},
+    {"id": "PublicTheoremEmissionCandidate", "state": "blocked", "blocker": "ExternalReview.Acceptance"}
+  ],
+  "requiredReleaseGaps": [
+    {"id": "GAP-001-UnrestrictedFinalSoundness", "status": "blocked-release-gap", "severity": "activation-blocking", "blocker": "Release.UnrestrictedFinalSoundness"},
+    {"id": "GAP-002-ExternalReviewAcceptance", "status": "blocked-release-gap", "severity": "activation-blocking", "blocker": "ExternalReview.Acceptance"},
+    {"id": "GAP-003-BoundedSmallModelsNotUniformProof", "status": "bounded-seed-only", "severity": "activation-blocking", "blocker": "Release.UnrestrictedFinalSoundness"},
+    {"id": "GAP-004-FiniteToUnboundedUniformity", "status": "represented-not-discharged", "severity": "activation-blocking", "blocker": "Release.UnrestrictedFinalSoundness"}
+  ],
+  "requiredProofObligations": [
+    {"id": "OBL-013-ReleaseLadderNonActivation", "status": "blocked-release-obligation"},
+    {"id": "OBL-014-UnrestrictedFinalSoundnessBlocked", "status": "blocked-release-obligation"}
+  ],
+  "clearanceRules": [
+    {
+      "blocker": "Release.UnrestrictedFinalSoundness",
+      "currentState": "not-cleared",
+      "mayClearNow": false,
+      "requiredFutureEvidence": "Accepted unrestricted final soundness checker covering the non-seed, non-bounded statement for all SAT input sizes under polynomial-time generation.",
+      "requiredTransitionSurface": "release ladder transition",
+      "mustRemoveFromRemainingBlockersOnlyAfterAcceptedTransition": true
+    },
+    {
+      "blocker": "ExternalReview.Acceptance",
+      "currentState": "not-cleared",
+      "mayClearNow": false,
+      "requiredFutureEvidence": "Accepted independent external-review evidence recorded as an explicit release transition.",
+      "requiredTransitionSurface": "release ladder transition",
+      "mustRemoveFromRemainingBlockersOnlyAfterAcceptedTransition": true
+    }
+  ],
+  "requiredStatusVerificationSurfaceIds": [
+    "external-review-status-audit",
+    "public-review-checklist-audit",
+    "public-review-boundary-audit",
+    "release-ladder-audit",
+    "gap-ledger-audit",
+    "proof-obligation-ledger-audit",
+    "one-command-verifier"
+  ],
+  "requiredDocFragments": [
+    "PNP-RELEASE-BLOCKER-CLEARANCE-2026-06-27-01",
+    "node pcc-release-blocker-clearance0.mjs --json",
+    "Release.UnrestrictedFinalSoundness",
+    "ExternalReview.Acceptance",
+    "releaseBlockerClearanceAccepted = false",
+    "unrestrictedFinalSoundnessClearanceAccepted = false",
+    "externalReviewClearanceAccepted = false",
+    "publicTheoremEmissionAllowed = false",
+    "not a theorem-activation surface"
+  ],
+  "evidenceSurfaces": [
+    "release/RELEASE_BLOCKER_CLEARANCE.json",
+    "release/RELEASE_BLOCKER_CLEARANCE.md",
+    "PNP_STATUS.json",
+    "release/RELEASE_LADDER.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "proof-obligations/OBLIGATION_LEDGER.json",
+    "review/EXTERNAL_REVIEW_STATUS.json",
+    "review/PUBLIC_REVIEW_CHECKLIST.json",
+    "pcc-release-blocker-clearance0.mjs",
+    "audits/release-blocker-clearance0.test.mjs"
+  ],
+  "nonClaims": [
+    "This release-blocker clearance protocol does not activate public theorem emission.",
+    "This release-blocker clearance protocol does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This release-blocker clearance protocol does not claim unrestricted final soundness.",
+    "This release-blocker clearance protocol does not claim independent external review acceptance.",
+    "This release-blocker clearance protocol does not mark any Section 22 theorem-ledger row as fully discharged."
+  ],
+  "audit": {
+    "checker": "CheckReleaseBlockerClearance0",
+    "script": "pcc-release-blocker-clearance0.mjs",
+    "test": "audits/release-blocker-clearance0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
