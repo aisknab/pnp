@@ -1,0 +1,25 @@
+name: release-blocker-clearance
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  release-blocker-clearance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run release blocker clearance checker
+        run: node pcc-release-blocker-clearance0.mjs --json
+      - name: Run release blocker clearance tests
+        run: node --test audits/release-blocker-clearance0.test.mjs
+      - name: Upload release blocker clearance verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-blocker-clearance-latest-verdict
+          path: artifacts/release-blocker-clearance/latest-verdict.json
