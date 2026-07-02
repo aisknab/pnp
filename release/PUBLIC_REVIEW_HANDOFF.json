@@ -20,6 +20,7 @@
   "section22DirectBindingSurfacesBound": true,
   "directTheoremEmissionAllowedByHandoff": false,
   "requiredCoordinates": {
+    "publicReviewHandoffCoordinate": "PNP-PUBLIC-REVIEW-HANDOFF-2026-06-27-01",
     "publicReviewBoundaryCoordinate": "PNP-PUBLIC-REVIEW-BOUNDARY-2026-06-27-01",
     "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-NO-HIDDEN-ORACLE-01",
     "historicalReportSupersessionCoordinate": "PNP-HISTORICAL-REPORT-SUPERSESSION-2026-06-27-01",
@@ -33,6 +34,7 @@
   "requiredCommands": [
     "npm ci",
     "npm run pnp:verify",
+    "node pcc-public-review-handoff0.mjs --json",
     "node pcc-public-review-boundary0.mjs --json",
     "node pcc-public-surface-baseline0.mjs --json",
     "node pcc-historical-report-supersession0.mjs --json",
@@ -45,6 +47,7 @@
     "historical-theorem-anchors-audit",
     "public-surface-baseline-audit",
     "public-review-boundary-audit",
+    "public-review-handoff-audit",
     "direct-binding-index-audit",
     "section22-direct-binding-runner-audit",
     "one-command-verifier"
@@ -52,6 +55,7 @@
   "requiredHandoffDocFragments": [
     "PNP-PUBLIC-REVIEW-HANDOFF-2026-06-27-01",
     "npm run pnp:verify",
+    "node pcc-public-review-handoff0.mjs --json",
     "node pcc-public-review-boundary0.mjs --json",
     "publicTheoremEmissionAllowed = false",
     "finalTheoremReady = false",
@@ -72,6 +76,7 @@
     "This handoff manifest does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
     "This handoff manifest is a reviewer entry surface, not a theorem-activation surface.",
     "This handoff manifest does not mark any Section 22 theorem-ledger row as fully discharged.",
+    "This handoff manifest requires PNP_STATUS.json to expose the handoff coordinate as a status-bound non-activation surface.",
     "This handoff manifest keeps historical theorem-emission artifacts fenced by the current sanitized public-review boundary."
   ],
   "audit": {
