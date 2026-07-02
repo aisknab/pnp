@@ -20,6 +20,7 @@
   "directTheoremEmissionAllowedByChecklist": false,
   "reviewAcceptanceClaimed": false,
   "requiredCoordinates": {
+    "publicReviewChecklistCoordinate": "PNP-PUBLIC-REVIEW-CHECKLIST-2026-06-27-01",
     "publicReviewEntrypointCoordinate": "PNP-PUBLIC-REVIEW-ENTRYPOINT-2026-06-27-01",
     "publicReviewHandoffCoordinate": "PNP-PUBLIC-REVIEW-HANDOFF-2026-06-27-01",
     "publicReviewBoundaryCoordinate": "PNP-PUBLIC-REVIEW-BOUNDARY-2026-06-27-01",
@@ -33,6 +34,7 @@
     "gapLedgerCoordinate": "PNP-GAP-LEDGER-2026-06-27-01"
   },
   "requiredVerificationSurfaceIds": [
+    "public-review-checklist-audit",
     "public-review-entrypoint-audit",
     "public-review-handoff-audit",
     "public-review-boundary-audit",
@@ -96,6 +98,7 @@
     "This checklist manifest does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
     "This checklist manifest is a reviewer orientation surface, not a theorem-activation surface.",
     "This checklist manifest does not claim independent external review acceptance.",
+    "This checklist manifest requires PNP_STATUS.json to expose the checklist coordinate as a status-bound non-activation surface.",
     "This checklist manifest does not mark any Section 22 theorem-ledger row as fully discharged."
   ],
   "audit": {
