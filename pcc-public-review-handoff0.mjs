@@ -11,6 +11,7 @@ const COORD = 'PNP-PUBLIC-REVIEW-HANDOFF-2026-06-27-01';
 const OUT = 'artifacts/public-review-handoff/latest-verdict.json';
 const BLOCKERS = ['Release.UnrestrictedFinalSoundness', 'ExternalReview.Acceptance'];
 const REQUIRED_COORDINATES = {
+  publicReviewHandoffCoordinate: COORD,
   publicReviewBoundaryCoordinate: 'PNP-PUBLIC-REVIEW-BOUNDARY-2026-06-27-01',
   publicSurfaceBaseline: 'PUBLIC-SURFACE-BASELINE-2026-06-27-NO-HIDDEN-ORACLE-01',
   historicalReportSupersessionCoordinate: 'PNP-HISTORICAL-REPORT-SUPERSESSION-2026-06-27-01',
