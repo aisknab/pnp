@@ -1,0 +1,70 @@
+{
+  "kind": "PNPPublicReviewEntrypoint0",
+  "version": 0,
+  "coordinate": "PNP-PUBLIC-REVIEW-ENTRYPOINT-2026-06-27-01",
+  "status": "public-review-entrypoint-ready",
+  "title": "Top-level public review entrypoint",
+  "purpose": "Expose the current public-review handoff and non-activation boundary from the repository root while preserving the status-bound public-review handoff as the authoritative reviewer surface.",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]
+  },
+  "publicReviewEntrypointReady": true,
+  "rootEntryDocumentReady": true,
+  "handoffSurfaceBound": true,
+  "oneCommandVerifierVisible": true,
+  "directTheoremEmissionAllowedByEntrypoint": false,
+  "requiredCoordinates": {
+    "publicReviewHandoffCoordinate": "PNP-PUBLIC-REVIEW-HANDOFF-2026-06-27-01",
+    "publicReviewBoundaryCoordinate": "PNP-PUBLIC-REVIEW-BOUNDARY-2026-06-27-01",
+    "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-NO-HIDDEN-ORACLE-01",
+    "historicalReportSanitizedCoordinate": "PNP-HISTORICAL-REPORT-SANITIZED-2026-06-27-01",
+    "historicalTheoremAnchorsCoordinate": "PNP-HISTORICAL-THEOREM-ANCHORS-2026-06-27-01",
+    "directBindingIndexCoordinate": "PNP-DIRECT-BINDING-INDEX-2026-06-27-01",
+    "section22DirectBindingRunnerCoordinate": "PNP-SECTION22-DIRECT-BINDING-RUNNER-2026-06-27-01"
+  },
+  "requiredCommands": [
+    "npm ci",
+    "npm run pnp:verify",
+    "node pcc-public-review-entrypoint0.mjs --json",
+    "node pcc-public-review-handoff0.mjs --json",
+    "node pcc-public-review-boundary0.mjs --json"
+  ],
+  "requiredRootDocFragments": [
+    "PNP-PUBLIC-REVIEW-ENTRYPOINT-2026-06-27-01",
+    "release/PUBLIC_REVIEW_HANDOFF.md",
+    "npm run pnp:verify",
+    "node pcc-public-review-handoff0.mjs --json",
+    "node pcc-public-review-boundary0.mjs --json",
+    "publicTheoremEmissionAllowed = false",
+    "finalTheoremReady = false",
+    "Release.UnrestrictedFinalSoundness",
+    "ExternalReview.Acceptance",
+    "not a theorem-activation surface"
+  ],
+  "evidenceSurfaces": [
+    "PUBLIC_REVIEW.json",
+    "PUBLIC_REVIEW.md",
+    "release/PUBLIC_REVIEW_HANDOFF.json",
+    "release/PUBLIC_REVIEW_HANDOFF.md",
+    "release/PUBLIC_REVIEW_BOUNDARY.json",
+    "PNP_STATUS.json",
+    "pcc-public-review-entrypoint0.mjs",
+    "audits/public-review-entrypoint0.test.mjs"
+  ],
+  "nonClaims": [
+    "This entrypoint manifest does not activate public theorem emission.",
+    "This entrypoint manifest does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This entrypoint manifest is a root navigation surface, not a theorem-activation surface.",
+    "This entrypoint manifest delegates reviewer procedure to the status-bound public-review handoff.",
+    "This entrypoint manifest keeps historical theorem-emission artifacts fenced by the current sanitized public-review boundary."
+  ],
+  "audit": {
+    "checker": "CheckPublicReviewEntrypoint0",
+    "script": "pcc-public-review-entrypoint0.mjs",
+    "test": "audits/public-review-entrypoint0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
