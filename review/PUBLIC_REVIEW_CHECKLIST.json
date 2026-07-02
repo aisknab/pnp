@@ -1,0 +1,107 @@
+{
+  "kind": "PNPPublicReviewChecklist0",
+  "version": 0,
+  "coordinate": "PNP-PUBLIC-REVIEW-CHECKLIST-2026-06-27-01",
+  "status": "public-review-checklist-ready",
+  "title": "Public review checklist for the current non-activation stack",
+  "purpose": "Provide a machine-checkable reviewer checklist that links the root public-review entrypoint, status-bound handoff, aggregate boundary, external-review status, public-surface baseline, sanitized historical-report controls, theorem-anchor compatibility layer, direct-binding index, and Section 22 runner without activating public theorem emission.",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]
+  },
+  "publicReviewChecklistReady": true,
+  "checklistDocReady": true,
+  "rootEntrypointBound": true,
+  "handoffBound": true,
+  "boundaryBound": true,
+  "externalReviewStatusBound": true,
+  "directTheoremEmissionAllowedByChecklist": false,
+  "reviewAcceptanceClaimed": false,
+  "requiredCoordinates": {
+    "publicReviewEntrypointCoordinate": "PNP-PUBLIC-REVIEW-ENTRYPOINT-2026-06-27-01",
+    "publicReviewHandoffCoordinate": "PNP-PUBLIC-REVIEW-HANDOFF-2026-06-27-01",
+    "publicReviewBoundaryCoordinate": "PNP-PUBLIC-REVIEW-BOUNDARY-2026-06-27-01",
+    "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-NO-HIDDEN-ORACLE-01",
+    "historicalReportSupersessionCoordinate": "PNP-HISTORICAL-REPORT-SUPERSESSION-2026-06-27-01",
+    "historicalReportSanitizedCoordinate": "PNP-HISTORICAL-REPORT-SANITIZED-2026-06-27-01",
+    "historicalTheoremAnchorsCoordinate": "PNP-HISTORICAL-THEOREM-ANCHORS-2026-06-27-01",
+    "directBindingIndexCoordinate": "PNP-DIRECT-BINDING-INDEX-2026-06-27-01",
+    "section22DirectBindingRunnerCoordinate": "PNP-SECTION22-DIRECT-BINDING-RUNNER-2026-06-27-01",
+    "releaseLadderCoordinate": "PNP-RELEASE-LADDER-2026-06-27-01",
+    "gapLedgerCoordinate": "PNP-GAP-LEDGER-2026-06-27-01"
+  },
+  "requiredVerificationSurfaceIds": [
+    "public-review-entrypoint-audit",
+    "public-review-handoff-audit",
+    "public-review-boundary-audit",
+    "public-surface-baseline-audit",
+    "historical-report-supersession-audit",
+    "historical-theorem-anchors-audit",
+    "direct-binding-index-audit",
+    "section22-direct-binding-runner-audit",
+    "one-command-verifier"
+  ],
+  "requiredReviewerCommands": [
+    "npm ci",
+    "npm run pnp:verify",
+    "node pcc-public-review-entrypoint0.mjs --json",
+    "node pcc-public-review-handoff0.mjs --json",
+    "node pcc-public-review-boundary0.mjs --json",
+    "node pcc-public-review-checklist0.mjs --json"
+  ],
+  "requiredChecklistDocFragments": [
+    "PNP-PUBLIC-REVIEW-CHECKLIST-2026-06-27-01",
+    "npm run pnp:verify",
+    "node pcc-public-review-checklist0.mjs --json",
+    "PUBLIC_REVIEW.md",
+    "release/PUBLIC_REVIEW_HANDOFF.md",
+    "EXTERNAL_REVIEW_STATUS.md",
+    "publicTheoremEmissionAllowed = false",
+    "finalTheoremReady = false",
+    "Release.UnrestrictedFinalSoundness",
+    "ExternalReview.Acceptance",
+    "No independent reviewer has confirmed",
+    "not a theorem-activation surface"
+  ],
+  "checklistItems": [
+    {"id": "CHK-001-root-entrypoint", "surface": "PUBLIC_REVIEW.md", "question": "Can a reviewer find the root public-review entrypoint?", "expectedCurrentState": "ready", "activationEffect": "none"},
+    {"id": "CHK-002-one-command-verifier", "surface": "npm run pnp:verify", "question": "Can the current one-command verifier be run from a fresh checkout?", "expectedCurrentState": "ready", "activationEffect": "none"},
+    {"id": "CHK-003-public-review-boundary", "surface": "release/PUBLIC_REVIEW_BOUNDARY.json", "question": "Is the aggregate public-review boundary non-activating?", "expectedCurrentState": "ready-non-activating", "activationEffect": "none"},
+    {"id": "CHK-004-public-review-handoff", "surface": "release/PUBLIC_REVIEW_HANDOFF.md", "question": "Does the reviewer handoff expose the current commands and coordinates?", "expectedCurrentState": "ready", "activationEffect": "none"},
+    {"id": "CHK-005-external-review-status", "surface": "EXTERNAL_REVIEW_STATUS.md", "question": "Does the repository state that no independent reviewer has confirmed the claim?", "expectedCurrentState": "not-independently-confirmed", "activationEffect": "none"},
+    {"id": "CHK-006-historical-report-sanitized", "surface": "report-bindings/HISTORICAL_REPORT_SUPERSESSION.json", "question": "Is the current root report sanitized and non-emitting?", "expectedCurrentState": "sanitized", "activationEffect": "none"},
+    {"id": "CHK-007-historical-theorem-anchors", "surface": "report-bindings/HISTORICAL_THEOREM_ANCHORS.json", "question": "Are historical theorem-anchor names retained only for ledger lookup?", "expectedCurrentState": "non-emitting-anchor-index", "activationEffect": "none"},
+    {"id": "CHK-008-public-surface-baseline", "surface": "pcc-public-surface-baseline0.mjs", "question": "Is the package entry/export/bin/script surface frozen?", "expectedCurrentState": "frozen", "activationEffect": "none"},
+    {"id": "CHK-009-direct-binding-index", "surface": "pcc-direct-binding-index0.mjs", "question": "Are Section 22 theorem-ledger rows indexed to executable surfaces?", "expectedCurrentState": "indexed", "activationEffect": "none"},
+    {"id": "CHK-010-section22-runner", "surface": "scripts/verify-section22-direct-bindings.mjs", "question": "Does the Section 22 runner execute indexed row surfaces?", "expectedCurrentState": "runner-bound", "activationEffect": "none"},
+    {"id": "CHK-011-release-ladder", "surface": "release/RELEASE_LADDER.json", "question": "Do release-ladder activation nodes remain blocked?", "expectedCurrentState": "blocked", "activationEffect": "none"},
+    {"id": "CHK-012-gap-ledger", "surface": "proof-obligations/GAP_LEDGER.json", "question": "Do public theorem release gaps remain activation-blocking?", "expectedCurrentState": "blocked", "activationEffect": "none"}
+  ],
+  "evidenceSurfaces": [
+    "review/PUBLIC_REVIEW_CHECKLIST.json",
+    "review/PUBLIC_REVIEW_CHECKLIST.md",
+    "PUBLIC_REVIEW.json",
+    "PUBLIC_REVIEW.md",
+    "release/PUBLIC_REVIEW_HANDOFF.json",
+    "release/PUBLIC_REVIEW_BOUNDARY.json",
+    "EXTERNAL_REVIEW_STATUS.md",
+    "PNP_STATUS.json",
+    "pcc-public-review-checklist0.mjs",
+    "audits/public-review-checklist0.test.mjs"
+  ],
+  "nonClaims": [
+    "This checklist manifest does not activate public theorem emission.",
+    "This checklist manifest does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This checklist manifest is a reviewer orientation surface, not a theorem-activation surface.",
+    "This checklist manifest does not claim independent external review acceptance.",
+    "This checklist manifest does not mark any Section 22 theorem-ledger row as fully discharged."
+  ],
+  "audit": {
+    "checker": "CheckPublicReviewChecklist0",
+    "script": "pcc-public-review-checklist0.mjs",
+    "test": "audits/public-review-checklist0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}

@@ -1,0 +1,25 @@
+name: public-review-checklist
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  public-review-checklist:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run public review checklist checker
+        run: node pcc-public-review-checklist0.mjs --json
+      - name: Run public review checklist tests
+        run: node --test audits/public-review-checklist0.test.mjs
+      - name: Upload public review checklist verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-review-checklist-latest-verdict
+          path: artifacts/public-review-checklist/latest-verdict.json
