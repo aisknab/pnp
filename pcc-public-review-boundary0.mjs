@@ -14,6 +14,7 @@ const OUT = 'artifacts/public-review-boundary/latest-verdict.json';
 const BLOCKERS = ['Release.UnrestrictedFinalSoundness', 'ExternalReview.Acceptance'];
 const REQUIRED_COORDINATES = {
   statusKind: 'PNPStatus0',
+  publicReviewBoundaryCoordinate: COORD,
   releaseLadderCoordinate: 'PNP-RELEASE-LADDER-2026-06-27-01',
   gapLedgerCoordinate: 'PNP-GAP-LEDGER-2026-06-27-01',
   historicalReportSupersessionCoordinate: 'PNP-HISTORICAL-REPORT-SUPERSESSION-2026-06-27-01',

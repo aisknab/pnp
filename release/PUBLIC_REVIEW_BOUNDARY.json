@@ -23,6 +23,7 @@
   "section22RunnerBound": true,
   "requiredCoordinates": {
     "statusKind": "PNPStatus0",
+    "publicReviewBoundaryCoordinate": "PNP-PUBLIC-REVIEW-BOUNDARY-2026-06-27-01",
     "releaseLadderCoordinate": "PNP-RELEASE-LADDER-2026-06-27-01",
     "gapLedgerCoordinate": "PNP-GAP-LEDGER-2026-06-27-01",
     "historicalReportSupersessionCoordinate": "PNP-HISTORICAL-REPORT-SUPERSESSION-2026-06-27-01",
@@ -45,6 +46,7 @@
     "historical-report-supersession-audit",
     "historical-theorem-anchors-audit",
     "public-surface-baseline-audit",
+    "public-review-boundary-audit",
     "direct-binding-index-audit",
     "section22-direct-binding-runner-audit",
     "one-command-verifier"
@@ -65,7 +67,8 @@
     "This boundary manifest does not activate public theorem emission.",
     "This boundary manifest does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
     "This boundary manifest aggregates existing non-activation surfaces; it does not mark any Section 22 theorem-ledger row as fully discharged.",
-    "This boundary manifest keeps historical theorem-emission artifacts fenced by the current sanitized public-review status surface."
+    "This boundary manifest keeps historical theorem-emission artifacts fenced by the current sanitized public-review status surface.",
+    "This boundary manifest requires PNP_STATUS.json to expose the public-review boundary coordinate as a status-bound non-activation surface."
   ],
   "audit": {
     "checker": "CheckPublicReviewBoundary0",
