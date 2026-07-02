@@ -1,0 +1,83 @@
+{
+  "kind": "PNPPublicReviewHandoff0",
+  "version": 0,
+  "coordinate": "PNP-PUBLIC-REVIEW-HANDOFF-2026-06-27-01",
+  "status": "public-review-handoff-ready",
+  "title": "Public review handoff for current non-activation boundary",
+  "purpose": "Provide one reviewer-facing handoff surface for the current public-review boundary, one-command verifier, public-surface baseline, sanitized historical-report controls, theorem-anchor compatibility layer, Section 22 direct-binding index, and Section 22 direct-binding runner.",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]
+  },
+  "publicReviewHandoffReady": true,
+  "handoffDocReady": true,
+  "publicReviewBoundaryBound": true,
+  "oneCommandVerifierBound": true,
+  "historicalReportSanitized": true,
+  "publicSurfaceBaselineBound": true,
+  "section22DirectBindingSurfacesBound": true,
+  "directTheoremEmissionAllowedByHandoff": false,
+  "requiredCoordinates": {
+    "publicReviewBoundaryCoordinate": "PNP-PUBLIC-REVIEW-BOUNDARY-2026-06-27-01",
+    "publicSurfaceBaseline": "PUBLIC-SURFACE-BASELINE-2026-06-27-NO-HIDDEN-ORACLE-01",
+    "historicalReportSupersessionCoordinate": "PNP-HISTORICAL-REPORT-SUPERSESSION-2026-06-27-01",
+    "historicalReportSanitizedCoordinate": "PNP-HISTORICAL-REPORT-SANITIZED-2026-06-27-01",
+    "historicalTheoremAnchorsCoordinate": "PNP-HISTORICAL-THEOREM-ANCHORS-2026-06-27-01",
+    "directBindingIndexCoordinate": "PNP-DIRECT-BINDING-INDEX-2026-06-27-01",
+    "section22DirectBindingRunnerCoordinate": "PNP-SECTION22-DIRECT-BINDING-RUNNER-2026-06-27-01",
+    "releaseLadderCoordinate": "PNP-RELEASE-LADDER-2026-06-27-01",
+    "gapLedgerCoordinate": "PNP-GAP-LEDGER-2026-06-27-01"
+  },
+  "requiredCommands": [
+    "npm ci",
+    "npm run pnp:verify",
+    "node pcc-public-review-boundary0.mjs --json",
+    "node pcc-public-surface-baseline0.mjs --json",
+    "node pcc-historical-report-supersession0.mjs --json",
+    "node pcc-historical-theorem-anchors0.mjs --json",
+    "node pcc-direct-binding-index0.mjs --json",
+    "node scripts/verify-section22-direct-bindings.mjs --json"
+  ],
+  "requiredVerificationSurfaceIds": [
+    "historical-report-supersession-audit",
+    "historical-theorem-anchors-audit",
+    "public-surface-baseline-audit",
+    "public-review-boundary-audit",
+    "direct-binding-index-audit",
+    "section22-direct-binding-runner-audit",
+    "one-command-verifier"
+  ],
+  "requiredHandoffDocFragments": [
+    "PNP-PUBLIC-REVIEW-HANDOFF-2026-06-27-01",
+    "npm run pnp:verify",
+    "node pcc-public-review-boundary0.mjs --json",
+    "publicTheoremEmissionAllowed = false",
+    "finalTheoremReady = false",
+    "Release.UnrestrictedFinalSoundness",
+    "ExternalReview.Acceptance",
+    "not a theorem-activation surface"
+  ],
+  "evidenceSurfaces": [
+    "release/PUBLIC_REVIEW_HANDOFF.json",
+    "release/PUBLIC_REVIEW_HANDOFF.md",
+    "release/PUBLIC_REVIEW_BOUNDARY.json",
+    "PNP_STATUS.json",
+    "pcc-public-review-handoff0.mjs",
+    "audits/public-review-handoff0.test.mjs"
+  ],
+  "nonClaims": [
+    "This handoff manifest does not activate public theorem emission.",
+    "This handoff manifest does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This handoff manifest is a reviewer entry surface, not a theorem-activation surface.",
+    "This handoff manifest does not mark any Section 22 theorem-ledger row as fully discharged.",
+    "This handoff manifest keeps historical theorem-emission artifacts fenced by the current sanitized public-review boundary."
+  ],
+  "audit": {
+    "checker": "CheckPublicReviewHandoff0",
+    "script": "pcc-public-review-handoff0.mjs",
+    "test": "audits/public-review-handoff0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
