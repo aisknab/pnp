@@ -21,6 +21,7 @@
   "publicTheoremEmissionAllowedByExternalReview": false,
   "sourceFiles": {
     "externalReviewStatus": "EXTERNAL_REVIEW_STATUS.md",
+    "externalReviewManifestDoc": "review/EXTERNAL_REVIEW_STATUS.md",
     "status": "PNP_STATUS.json",
     "checklist": "review/PUBLIC_REVIEW_CHECKLIST.json",
     "releaseLadder": "release/RELEASE_LADDER.json",
@@ -43,6 +44,14 @@
     "checker soundness",
     "generated-package completeness",
     "mathematical implication from the accepted checker boundary to `P = NP`"
+  ],
+  "requiredManifestDocFragments": [
+    "PNP-EXTERNAL-REVIEW-STATUS-2026-06-27-01",
+    "node pcc-external-review-status0.mjs --json",
+    "externalReviewAcceptanceClaimed = false",
+    "noIndependentReviewerConfirmed = true",
+    "ExternalReview.Acceptance",
+    "not a theorem-activation surface"
   ],
   "requiredChecklistItemIds": [
     "CHK-005-external-review-status"
@@ -67,6 +76,7 @@
   },
   "evidenceSurfaces": [
     "review/EXTERNAL_REVIEW_STATUS.json",
+    "review/EXTERNAL_REVIEW_STATUS.md",
     "EXTERNAL_REVIEW_STATUS.md",
     "PNP_STATUS.json",
     "review/PUBLIC_REVIEW_CHECKLIST.json",
