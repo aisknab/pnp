@@ -11,6 +11,7 @@ const COORD = 'PNP-RELEASE-BLOCKER-CLEARANCE-2026-06-27-01';
 const OUT = 'artifacts/release-blocker-clearance/latest-verdict.json';
 const BLOCKERS = ['Release.UnrestrictedFinalSoundness', 'ExternalReview.Acceptance'];
 const EXPECTED_COORDINATES = {
+  releaseBlockerClearanceCoordinate: COORD,
   externalReviewStatusCoordinate: 'PNP-EXTERNAL-REVIEW-STATUS-2026-06-27-01',
   publicReviewChecklistCoordinate: 'PNP-PUBLIC-REVIEW-CHECKLIST-2026-06-27-01',
   publicReviewEntrypointCoordinate: 'PNP-PUBLIC-REVIEW-ENTRYPOINT-2026-06-27-01',
