@@ -11,6 +11,7 @@ const COORD = 'PNP-EXTERNAL-REVIEW-STATUS-2026-06-27-01';
 const OUT = 'artifacts/external-review-status/latest-verdict.json';
 const BLOCKERS = ['Release.UnrestrictedFinalSoundness', 'ExternalReview.Acceptance'];
 const EXPECTED_COORDINATES = {
+  externalReviewStatusCoordinate: COORD,
   publicReviewChecklistCoordinate: 'PNP-PUBLIC-REVIEW-CHECKLIST-2026-06-27-01',
   publicReviewEntrypointCoordinate: 'PNP-PUBLIC-REVIEW-ENTRYPOINT-2026-06-27-01',
   publicReviewHandoffCoordinate: 'PNP-PUBLIC-REVIEW-HANDOFF-2026-06-27-01',

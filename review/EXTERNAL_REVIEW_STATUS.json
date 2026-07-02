@@ -28,6 +28,7 @@
     "gapLedger": "proof-obligations/GAP_LEDGER.json"
   },
   "requiredCoordinates": {
+    "externalReviewStatusCoordinate": "PNP-EXTERNAL-REVIEW-STATUS-2026-06-27-01",
     "publicReviewChecklistCoordinate": "PNP-PUBLIC-REVIEW-CHECKLIST-2026-06-27-01",
     "publicReviewEntrypointCoordinate": "PNP-PUBLIC-REVIEW-ENTRYPOINT-2026-06-27-01",
     "publicReviewHandoffCoordinate": "PNP-PUBLIC-REVIEW-HANDOFF-2026-06-27-01",
@@ -57,6 +58,7 @@
     "CHK-005-external-review-status"
   ],
   "requiredStatusVerificationSurfaceIds": [
+    "external-review-status-audit",
     "public-review-checklist-audit",
     "public-review-entrypoint-audit",
     "public-review-handoff-audit",
@@ -90,6 +92,7 @@
     "This external-review status manifest does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
     "This external-review status manifest does not claim independent external review acceptance.",
     "This external-review status manifest treats outreach and substantive feedback as review metadata, not proof evidence.",
+    "This external-review status manifest requires PNP_STATUS.json to expose the external-review status coordinate as a status-bound non-activation surface.",
     "This external-review status manifest does not mark any Section 22 theorem-ledger row as fully discharged."
   ],
   "audit": {
