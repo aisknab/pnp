@@ -11,6 +11,7 @@ const COORD = 'PNP-PUBLIC-REVIEW-ENTRYPOINT-2026-06-27-01';
 const OUT = 'artifacts/public-review-entrypoint/latest-verdict.json';
 const BLOCKERS = ['Release.UnrestrictedFinalSoundness', 'ExternalReview.Acceptance'];
 const REQUIRED_COORDINATES = {
+  publicReviewEntrypointCoordinate: COORD,
   publicReviewHandoffCoordinate: 'PNP-PUBLIC-REVIEW-HANDOFF-2026-06-27-01',
   publicReviewBoundaryCoordinate: 'PNP-PUBLIC-REVIEW-BOUNDARY-2026-06-27-01',
   publicSurfaceBaseline: 'PUBLIC-SURFACE-BASELINE-2026-06-27-NO-HIDDEN-ORACLE-01',
@@ -116,7 +117,7 @@ function validateStatus0(status) {
   if (status.pnpVerifyCommand !== 'npm run pnp:verify') return reject0('PublicReviewEntrypoint.StatusVerifyCommand', [FILES.status, 'pnpVerifyCommand'], 'status pnp verify command mismatch', { actual: status.pnpVerifyCommand });
   for (const [field, expected] of Object.entries(REQUIRED_COORDINATES)) if (status[field] !== expected) return reject0('PublicReviewEntrypoint.StatusCoordinateMismatch', [FILES.status, field], 'status coordinate mismatch', { expected, actual: status[field] });
   const surfaceIds = new Set((status.verificationSurfaces ?? []).map((x) => x.id));
-  for (const id of ['public-review-handoff-audit', 'public-review-boundary-audit', 'one-command-verifier']) if (!surfaceIds.has(id)) return reject0('PublicReviewEntrypoint.StatusSurfaceMissing', [FILES.status, 'verificationSurfaces'], 'required verification surface missing from status', { id });
+  for (const id of ['public-review-entrypoint-audit', 'public-review-handoff-audit', 'public-review-boundary-audit', 'one-command-verifier']) if (!surfaceIds.has(id)) return reject0('PublicReviewEntrypoint.StatusSurfaceMissing', [FILES.status, 'verificationSurfaces'], 'required verification surface missing from status', { id });
   return { tag: 'accept' };
 }
 
