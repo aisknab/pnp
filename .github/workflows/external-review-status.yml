@@ -1,0 +1,25 @@
+name: external-review-status
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  external-review-status:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run external review status checker
+        run: node pcc-external-review-status0.mjs --json
+      - name: Run external review status tests
+        run: node --test audits/external-review-status0.test.mjs
+      - name: Upload external review status verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: external-review-status-latest-verdict
+          path: artifacts/external-review-status/latest-verdict.json
