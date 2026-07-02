@@ -1,0 +1,116 @@
+{
+  "kind": "PNPPublicTheoremEmissionPreflight0",
+  "version": 0,
+  "coordinate": "PNP-PUBLIC-THEOREM-EMISSION-PREFLIGHT-2026-06-27-01",
+  "status": "public-theorem-emission-preflight-denied",
+  "title": "Public theorem emission preflight for the current non-activation stack",
+  "purpose": "Aggregate the current status boundary, public-review boundary, external-review status, release-blocker clearance protocol, release ladder, gap ledger, and proof-obligation ledger into one executable preflight that accepts only the current theorem-emission-denied state.",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]
+  },
+  "publicTheoremEmissionPreflightReady": true,
+  "publicTheoremEmissionPreflightPassed": false,
+  "publicTheoremEmissionDenied": true,
+  "finalTheoremReadyByPreflight": false,
+  "releaseBlockerClearanceAccepted": false,
+  "externalReviewAcceptanceClaimed": false,
+  "unrestrictedFinalSoundnessClearanceAccepted": false,
+  "publicReviewBoundaryNonActivating": true,
+  "blockedByRemainingBlockers": true,
+  "preflightTransitionRequiresFuturePR": true,
+  "sourceFiles": {
+    "status": "PNP_STATUS.json",
+    "publicReviewBoundary": "release/PUBLIC_REVIEW_BOUNDARY.json",
+    "releaseBlockerClearance": "release/RELEASE_BLOCKER_CLEARANCE.json",
+    "externalReviewStatus": "review/EXTERNAL_REVIEW_STATUS.json",
+    "releaseLadder": "release/RELEASE_LADDER.json",
+    "gapLedger": "proof-obligations/GAP_LEDGER.json",
+    "proofObligationLedger": "proof-obligations/OBLIGATION_LEDGER.json",
+    "preflightDoc": "release/PUBLIC_THEOREM_EMISSION_PREFLIGHT.md"
+  },
+  "requiredCoordinates": {
+    "releaseBlockerClearanceCoordinate": "PNP-RELEASE-BLOCKER-CLEARANCE-2026-06-27-01",
+    "externalReviewStatusCoordinate": "PNP-EXTERNAL-REVIEW-STATUS-2026-06-27-01",
+    "publicReviewChecklistCoordinate": "PNP-PUBLIC-REVIEW-CHECKLIST-2026-06-27-01",
+    "publicReviewBoundaryCoordinate": "PNP-PUBLIC-REVIEW-BOUNDARY-2026-06-27-01",
+    "proofObligationLedgerCoordinate": "PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01",
+    "releaseLadderCoordinate": "PNP-RELEASE-LADDER-2026-06-27-01",
+    "gapLedgerCoordinate": "PNP-GAP-LEDGER-2026-06-27-01"
+  },
+  "requiredStatusVerificationSurfaceIds": [
+    "release-blocker-clearance-audit",
+    "external-review-status-audit",
+    "public-review-checklist-audit",
+    "public-review-boundary-audit",
+    "proof-obligation-ledger-audit",
+    "gap-ledger-audit",
+    "release-ladder-audit",
+    "one-command-verifier"
+  ],
+  "requiredDeniedReasons": [
+    "Status.PublicTheoremEmissionAllowedFalse",
+    "Status.FinalTheoremReadyFalse",
+    "Status.RemainingBlockersActive",
+    "ReleaseBlockerClearance.NotAccepted",
+    "ExternalReview.AcceptanceNotClaimed",
+    "ReleaseLadder.PublicTheoremEmissionCandidateBlocked",
+    "GapLedger.ActivationBlockingGapsOpen",
+    "ProofObligationLedger.ReleaseObligationsBlocked"
+  ],
+  "requiredBlockedLadderNodes": [
+    {"id": "UnrestrictedFinalSoundnessRepresented", "state": "blocked", "blocker": "Release.UnrestrictedFinalSoundness"},
+    {"id": "InternalTheoremActivationCandidate", "state": "blocked", "blocker": "Release.UnrestrictedFinalSoundness"},
+    {"id": "PublicTheoremEmissionCandidate", "state": "blocked", "blocker": "ExternalReview.Acceptance"}
+  ],
+  "requiredReleaseGaps": [
+    {"id": "GAP-001-UnrestrictedFinalSoundness", "status": "blocked-release-gap", "severity": "activation-blocking", "blocker": "Release.UnrestrictedFinalSoundness"},
+    {"id": "GAP-002-ExternalReviewAcceptance", "status": "blocked-release-gap", "severity": "activation-blocking", "blocker": "ExternalReview.Acceptance"},
+    {"id": "GAP-003-BoundedSmallModelsNotUniformProof", "status": "bounded-seed-only", "severity": "activation-blocking", "blocker": "Release.UnrestrictedFinalSoundness"},
+    {"id": "GAP-004-FiniteToUnboundedUniformity", "status": "represented-not-discharged", "severity": "activation-blocking", "blocker": "Release.UnrestrictedFinalSoundness"}
+  ],
+  "requiredProofObligations": [
+    {"id": "OBL-013-ReleaseLadderNonActivation", "status": "blocked-release-obligation"},
+    {"id": "OBL-014-UnrestrictedFinalSoundnessBlocked", "status": "blocked-release-obligation"}
+  ],
+  "requiredDocFragments": [
+    "PNP-PUBLIC-THEOREM-EMISSION-PREFLIGHT-2026-06-27-01",
+    "node pcc-public-theorem-emission-preflight0.mjs --json",
+    "publicTheoremEmissionPreflightPassed = false",
+    "publicTheoremEmissionDenied = true",
+    "publicTheoremEmissionAllowed = false",
+    "finalTheoremReady = false",
+    "Release.UnrestrictedFinalSoundness",
+    "ExternalReview.Acceptance",
+    "not a theorem-activation surface"
+  ],
+  "evidenceSurfaces": [
+    "release/PUBLIC_THEOREM_EMISSION_PREFLIGHT.json",
+    "release/PUBLIC_THEOREM_EMISSION_PREFLIGHT.md",
+    "PNP_STATUS.json",
+    "release/PUBLIC_REVIEW_BOUNDARY.json",
+    "release/RELEASE_BLOCKER_CLEARANCE.json",
+    "review/EXTERNAL_REVIEW_STATUS.json",
+    "release/RELEASE_LADDER.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "proof-obligations/OBLIGATION_LEDGER.json",
+    "pcc-public-theorem-emission-preflight0.mjs",
+    "audits/public-theorem-emission-preflight0.test.mjs"
+  ],
+  "nonClaims": [
+    "This public theorem emission preflight does not activate public theorem emission.",
+    "This public theorem emission preflight does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This public theorem emission preflight intentionally does not pass in the current state.",
+    "This public theorem emission preflight does not claim unrestricted final soundness.",
+    "This public theorem emission preflight does not claim independent external review acceptance.",
+    "This public theorem emission preflight does not mark any Section 22 theorem-ledger row as fully discharged."
+  ],
+  "audit": {
+    "checker": "CheckPublicTheoremEmissionPreflight0",
+    "script": "pcc-public-theorem-emission-preflight0.mjs",
+    "test": "audits/public-theorem-emission-preflight0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
