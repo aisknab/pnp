@@ -65,6 +65,7 @@
   "publicReviewEntrypointCoordinate": "PNP-PUBLIC-REVIEW-ENTRYPOINT-2026-06-27-01",
   "publicReviewChecklistCoordinate": "PNP-PUBLIC-REVIEW-CHECKLIST-2026-06-27-01",
   "externalReviewStatusCoordinate": "PNP-EXTERNAL-REVIEW-STATUS-2026-06-27-01",
+  "releaseBlockerClearanceCoordinate": "PNP-RELEASE-BLOCKER-CLEARANCE-2026-06-27-01",
   "lastVerifiedCommit": "current-checkout",
   "verificationSurfaces": [
     {"id":"historical-report-supersession-audit","command":"node pcc-historical-report-supersession0.mjs --json","outputKind":"artifacts/historical-report-supersession/latest-verdict.json"},
@@ -75,6 +76,7 @@
     {"id":"public-review-entrypoint-audit","command":"node pcc-public-review-entrypoint0.mjs --json","outputKind":"artifacts/public-review-entrypoint/latest-verdict.json"},
     {"id":"public-review-checklist-audit","command":"node pcc-public-review-checklist0.mjs --json","outputKind":"artifacts/public-review-checklist/latest-verdict.json"},
     {"id":"external-review-status-audit","command":"node pcc-external-review-status0.mjs --json","outputKind":"artifacts/external-review-status/latest-verdict.json"},
+    {"id":"release-blocker-clearance-audit","command":"node pcc-release-blocker-clearance0.mjs --json","outputKind":"artifacts/release-blocker-clearance/latest-verdict.json"},
     {"id":"direct-binding-index-audit","command":"node pcc-direct-binding-index0.mjs --json","outputKind":"artifacts/direct-binding-index/latest-verdict.json"},
     {"id":"section22-direct-binding-runner-audit","command":"node scripts/verify-section22-direct-bindings.mjs --json","outputKind":"artifacts/section22-direct-bindings/latest-verdict.json"},
     {"id":"e-direct-binding-seed-audit","command":"node pcc-direct-bind-verifydw-soundness0.mjs --json","outputKind":"artifacts/direct-bind-verifydw-soundness/latest-verdict.json"},
@@ -103,6 +105,7 @@
     "The public review entrypoint checker exposes the root reviewer navigation surface but does not activate public theorem emission.",
     "The public review checklist checker orients reviewers across current non-activation surfaces but does not activate public theorem emission or claim external acceptance.",
     "The external review status checker records non-acceptance and active ExternalReview.Acceptance blocking but does not activate public theorem emission or claim external acceptance.",
+    "The release blocker clearance checker records future clearance criteria but does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
     "The historical canonical report may be superseded by successor public-review reports, but this status file records the current non-activation boundary."
   ]
 }
