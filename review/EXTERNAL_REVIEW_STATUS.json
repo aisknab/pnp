@@ -1,0 +1,91 @@
+{
+  "kind": "PNPExternalReviewStatus0",
+  "version": 0,
+  "coordinate": "PNP-EXTERNAL-REVIEW-STATUS-2026-06-27-01",
+  "status": "external-review-not-accepted",
+  "title": "External review status for the current public-review stack",
+  "purpose": "Represent the current external-review status as a machine-checkable non-activation surface: external review acceptance remains an active release blocker, substantive feedback is not acceptance, and no independent reviewer has confirmed the claimed result.",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]
+  },
+  "externalReviewStatusReady": true,
+  "externalReviewAcceptanceClaimed": false,
+  "independentReviewAcceptanceConfirmed": false,
+  "noIndependentReviewerConfirmed": true,
+  "externalReviewBlockerStillActive": true,
+  "substantiveFeedbackRecorded": true,
+  "substantiveFeedbackIsAcceptance": false,
+  "publicTheoremEmissionAllowedByExternalReview": false,
+  "sourceFiles": {
+    "externalReviewStatus": "EXTERNAL_REVIEW_STATUS.md",
+    "status": "PNP_STATUS.json",
+    "checklist": "review/PUBLIC_REVIEW_CHECKLIST.json",
+    "releaseLadder": "release/RELEASE_LADDER.json",
+    "gapLedger": "proof-obligations/GAP_LEDGER.json"
+  },
+  "requiredCoordinates": {
+    "publicReviewChecklistCoordinate": "PNP-PUBLIC-REVIEW-CHECKLIST-2026-06-27-01",
+    "publicReviewEntrypointCoordinate": "PNP-PUBLIC-REVIEW-ENTRYPOINT-2026-06-27-01",
+    "publicReviewHandoffCoordinate": "PNP-PUBLIC-REVIEW-HANDOFF-2026-06-27-01",
+    "publicReviewBoundaryCoordinate": "PNP-PUBLIC-REVIEW-BOUNDARY-2026-06-27-01",
+    "releaseLadderCoordinate": "PNP-RELEASE-LADDER-2026-06-27-01",
+    "gapLedgerCoordinate": "PNP-GAP-LEDGER-2026-06-27-01"
+  },
+  "requiredExternalReviewDocFragments": [
+    "No contacted reviewer has independently confirmed",
+    "Outreach records are not proof evidence",
+    "Silence should not be interpreted as acceptance, rejection, or an assessment of the claim.",
+    "did not validate or reject the claim",
+    "No independent reviewer has confirmed theorem correctness",
+    "checker soundness",
+    "generated-package completeness",
+    "mathematical implication from the accepted checker boundary to `P = NP`"
+  ],
+  "requiredChecklistItemIds": [
+    "CHK-005-external-review-status"
+  ],
+  "requiredStatusVerificationSurfaceIds": [
+    "public-review-checklist-audit",
+    "public-review-entrypoint-audit",
+    "public-review-handoff-audit",
+    "public-review-boundary-audit",
+    "one-command-verifier"
+  ],
+  "requiredReleaseLadderNode": {
+    "id": "PublicTheoremEmissionCandidate",
+    "state": "blocked",
+    "blocker": "ExternalReview.Acceptance"
+  },
+  "requiredGap": {
+    "id": "GAP-002-ExternalReviewAcceptance",
+    "status": "blocked-release-gap",
+    "severity": "activation-blocking",
+    "blocker": "ExternalReview.Acceptance"
+  },
+  "evidenceSurfaces": [
+    "review/EXTERNAL_REVIEW_STATUS.json",
+    "EXTERNAL_REVIEW_STATUS.md",
+    "PNP_STATUS.json",
+    "review/PUBLIC_REVIEW_CHECKLIST.json",
+    "release/RELEASE_LADDER.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "pcc-external-review-status0.mjs",
+    "audits/external-review-status0.test.mjs"
+  ],
+  "nonClaims": [
+    "This external-review status manifest does not activate public theorem emission.",
+    "This external-review status manifest does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This external-review status manifest does not claim independent external review acceptance.",
+    "This external-review status manifest treats outreach and substantive feedback as review metadata, not proof evidence.",
+    "This external-review status manifest does not mark any Section 22 theorem-ledger row as fully discharged."
+  ],
+  "audit": {
+    "checker": "CheckExternalReviewStatus0",
+    "script": "pcc-external-review-status0.mjs",
+    "test": "audits/external-review-status0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
