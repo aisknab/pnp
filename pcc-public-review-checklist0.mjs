@@ -10,6 +10,20 @@ const VERSION = 0;
 const COORD = 'PNP-PUBLIC-REVIEW-CHECKLIST-2026-06-27-01';
 const OUT = 'artifacts/public-review-checklist/latest-verdict.json';
 const BLOCKERS = ['Release.UnrestrictedFinalSoundness', 'ExternalReview.Acceptance'];
+const REQUIRED_COORDINATES = {
+  publicReviewChecklistCoordinate: COORD,
+  publicReviewEntrypointCoordinate: 'PNP-PUBLIC-REVIEW-ENTRYPOINT-2026-06-27-01',
+  publicReviewHandoffCoordinate: 'PNP-PUBLIC-REVIEW-HANDOFF-2026-06-27-01',
+  publicReviewBoundaryCoordinate: 'PNP-PUBLIC-REVIEW-BOUNDARY-2026-06-27-01',
+  publicSurfaceBaseline: 'PUBLIC-SURFACE-BASELINE-2026-06-27-NO-HIDDEN-ORACLE-01',
+  historicalReportSupersessionCoordinate: 'PNP-HISTORICAL-REPORT-SUPERSESSION-2026-06-27-01',
+  historicalReportSanitizedCoordinate: 'PNP-HISTORICAL-REPORT-SANITIZED-2026-06-27-01',
+  historicalTheoremAnchorsCoordinate: 'PNP-HISTORICAL-THEOREM-ANCHORS-2026-06-27-01',
+  directBindingIndexCoordinate: 'PNP-DIRECT-BINDING-INDEX-2026-06-27-01',
+  section22DirectBindingRunnerCoordinate: 'PNP-SECTION22-DIRECT-BINDING-RUNNER-2026-06-27-01',
+  releaseLadderCoordinate: 'PNP-RELEASE-LADDER-2026-06-27-01',
+  gapLedgerCoordinate: 'PNP-GAP-LEDGER-2026-06-27-01'
+};
 const FILES = {
   manifest: 'review/PUBLIC_REVIEW_CHECKLIST.json',
   checklistDoc: 'review/PUBLIC_REVIEW_CHECKLIST.md',
@@ -38,7 +52,7 @@ export async function CheckPublicReviewChecklist0(options = {}) {
 
     const entrypointRead = await readJson0(root, FILES.entrypoint, options.entrypointOverride);
     if (entrypointRead.tag === 'reject') return write0(root, outputPath, writeOutput, entrypointRead);
-    const entrypointCheck = validateEntrypoint0(entrypointRead.value, manifest);
+    const entrypointCheck = validateEntrypoint0(entrypointRead.value);
     if (entrypointCheck.tag === 'reject') return write0(root, outputPath, writeOutput, entrypointCheck);
 
     const handoffRead = await readJson0(root, FILES.handoff, options.handoffOverride);
@@ -48,7 +62,7 @@ export async function CheckPublicReviewChecklist0(options = {}) {
 
     const boundaryRead = await readJson0(root, FILES.boundary, options.boundaryOverride);
     if (boundaryRead.tag === 'reject') return write0(root, outputPath, writeOutput, boundaryRead);
-    const boundaryCheck = validateBoundaryManifest0(boundaryRead.value, manifest);
+    const boundaryCheck = validateBoundaryManifest0(boundaryRead.value);
     if (boundaryCheck.tag === 'reject') return write0(root, outputPath, writeOutput, boundaryCheck);
 
     const docRead = await readText0(root, FILES.checklistDoc);
@@ -82,7 +96,7 @@ export async function CheckPublicReviewChecklist0(options = {}) {
       checklistItemCount: manifest.checklistItems.length,
       requiredCommandCount: manifest.requiredReviewerCommands.length,
       requiredVerificationSurfaceCount: manifest.requiredVerificationSurfaceIds.length,
-      requiredCoordinates: { ...manifest.requiredCoordinates },
+      requiredCoordinates: { ...REQUIRED_COORDINATES },
       checklistDocSha256: shaBytes0(docRead.bytes),
       externalReviewStatusSha256: shaBytes0(externalRead.bytes),
       evidenceFileCount: evidence.files.length,
@@ -115,7 +129,7 @@ function validateManifest0(m) {
   const boundary = boundary0(m.claimBoundary, [FILES.manifest, 'claimBoundary']);
   if (boundary.tag === 'reject') return boundary;
   if (!plain0(m.requiredCoordinates)) return reject0('PublicReviewChecklist.RequiredCoordinateShape', [FILES.manifest, 'requiredCoordinates'], 'requiredCoordinates must be object');
-  for (const [field, expected] of Object.entries(m.requiredCoordinates)) if (typeof expected !== 'string' || expected.length === 0) return reject0('PublicReviewChecklist.RequiredCoordinateValue', [FILES.manifest, 'requiredCoordinates', field], 'required coordinate value must be non-empty string');
+  for (const [field, expected] of Object.entries(REQUIRED_COORDINATES)) if (m.requiredCoordinates[field] !== expected) return reject0('PublicReviewChecklist.RequiredCoordinateMismatch', [FILES.manifest, 'requiredCoordinates', field], 'required coordinate mismatch', { expected, actual: m.requiredCoordinates[field] });
   for (const field of ['requiredVerificationSurfaceIds', 'requiredReviewerCommands', 'requiredChecklistDocFragments', 'evidenceSurfaces', 'nonClaims']) if (!Array.isArray(m[field]) || m[field].length === 0 || m[field].some((x) => typeof x !== 'string' || x.length === 0)) return reject0('PublicReviewChecklist.ArrayMissing', [FILES.manifest, field], 'manifest string array missing or invalid');
   if (!Array.isArray(m.checklistItems) || m.checklistItems.length !== 12) return reject0('PublicReviewChecklist.ItemCount', [FILES.manifest, 'checklistItems'], 'checklist item count mismatch', { expected: 12, actual: m.checklistItems?.length ?? null });
   const seen = new Set();
@@ -133,30 +147,27 @@ function validateStatus0(status, manifest) {
   const boundary = boundary0(status, [FILES.status]);
   if (boundary.tag === 'reject') return boundary;
   if (status.pnpVerifyCommand !== 'npm run pnp:verify') return reject0('PublicReviewChecklist.StatusVerifyCommand', [FILES.status, 'pnpVerifyCommand'], 'status pnp verify command mismatch', { actual: status.pnpVerifyCommand });
-  for (const [field, expected] of Object.entries(manifest.requiredCoordinates)) if (status[field] !== expected) return reject0('PublicReviewChecklist.StatusCoordinateMismatch', [FILES.status, field], 'status coordinate mismatch', { expected, actual: status[field] });
+  for (const [field, expected] of Object.entries(REQUIRED_COORDINATES)) if (status[field] !== expected) return reject0('PublicReviewChecklist.StatusCoordinateMismatch', [FILES.status, field], 'status coordinate mismatch', { expected, actual: status[field] });
   const surfaceIds = new Set((status.verificationSurfaces ?? []).map((x) => x.id));
   for (const id of manifest.requiredVerificationSurfaceIds) if (!surfaceIds.has(id)) return reject0('PublicReviewChecklist.StatusSurfaceMissing', [FILES.status, 'verificationSurfaces'], 'required verification surface missing from status', { id });
   return { tag: 'accept' };
 }
 
-function validateEntrypoint0(entrypoint, manifest) {
-  const expected = manifest.requiredCoordinates.publicReviewEntrypointCoordinate;
-  if (!plain0(entrypoint) || entrypoint.kind !== 'PNPPublicReviewEntrypoint0' || entrypoint.coordinate !== expected || entrypoint.publicReviewEntrypointReady !== true || entrypoint.directTheoremEmissionAllowedByEntrypoint !== false) return reject0('PublicReviewChecklist.EntrypointShape', [FILES.entrypoint], 'public review entrypoint shape mismatch or overclaim');
+function validateEntrypoint0(entrypoint) {
+  if (!plain0(entrypoint) || entrypoint.kind !== 'PNPPublicReviewEntrypoint0' || entrypoint.coordinate !== REQUIRED_COORDINATES.publicReviewEntrypointCoordinate || entrypoint.publicReviewEntrypointReady !== true || entrypoint.directTheoremEmissionAllowedByEntrypoint !== false) return reject0('PublicReviewChecklist.EntrypointShape', [FILES.entrypoint], 'public review entrypoint shape mismatch or overclaim');
   return boundary0(entrypoint.claimBoundary, [FILES.entrypoint, 'claimBoundary']);
 }
 
 function validateHandoff0(handoff, manifest) {
-  const expected = manifest.requiredCoordinates.publicReviewHandoffCoordinate;
-  if (!plain0(handoff) || handoff.kind !== 'PNPPublicReviewHandoff0' || handoff.coordinate !== expected || handoff.publicReviewHandoffReady !== true || handoff.directTheoremEmissionAllowedByHandoff !== false) return reject0('PublicReviewChecklist.HandoffShape', [FILES.handoff], 'public review handoff shape mismatch or overclaim');
+  if (!plain0(handoff) || handoff.kind !== 'PNPPublicReviewHandoff0' || handoff.coordinate !== REQUIRED_COORDINATES.publicReviewHandoffCoordinate || handoff.publicReviewHandoffReady !== true || handoff.directTheoremEmissionAllowedByHandoff !== false) return reject0('PublicReviewChecklist.HandoffShape', [FILES.handoff], 'public review handoff shape mismatch or overclaim');
   const boundary = boundary0(handoff.claimBoundary, [FILES.handoff, 'claimBoundary']);
   if (boundary.tag === 'reject') return boundary;
   for (const command of manifest.requiredReviewerCommands.filter((cmd) => cmd !== 'node pcc-public-review-checklist0.mjs --json')) if (!handoff.requiredCommands?.includes?.(command) && !['node pcc-public-review-entrypoint0.mjs --json'].includes(command)) return reject0('PublicReviewChecklist.HandoffCommandMissing', [FILES.handoff, 'requiredCommands'], 'handoff command missing', { command });
   return { tag: 'accept' };
 }
 
-function validateBoundaryManifest0(boundary, manifest) {
-  const expected = manifest.requiredCoordinates.publicReviewBoundaryCoordinate;
-  if (!plain0(boundary) || boundary.kind !== 'PNPPublicReviewBoundary0' || boundary.coordinate !== expected || boundary.publicReviewBoundaryReady !== true || boundary.publicTheoremEmissionAllowedByBoundary !== false || boundary.finalTheoremReadyByBoundary !== false) return reject0('PublicReviewChecklist.BoundaryShape', [FILES.boundary], 'public review boundary shape mismatch or overclaim');
+function validateBoundaryManifest0(boundary) {
+  if (!plain0(boundary) || boundary.kind !== 'PNPPublicReviewBoundary0' || boundary.coordinate !== REQUIRED_COORDINATES.publicReviewBoundaryCoordinate || boundary.publicReviewBoundaryReady !== true || boundary.publicTheoremEmissionAllowedByBoundary !== false || boundary.finalTheoremReadyByBoundary !== false) return reject0('PublicReviewChecklist.BoundaryShape', [FILES.boundary], 'public review boundary shape mismatch or overclaim');
   return boundary0(boundary.claimBoundary, [FILES.boundary, 'claimBoundary']);
 }
 
@@ -166,7 +177,7 @@ function validateChecklistDoc0(text, manifest) {
   for (const item of manifest.checklistItems) {
     if (!text.includes(item.id) || !text.includes(item.surface) || !text.includes(item.expectedCurrentState)) return reject0('PublicReviewChecklist.DocItemMissing', [FILES.checklistDoc, item.id], 'checklist doc item missing');
   }
-  for (const expected of Object.values(manifest.requiredCoordinates)) if (!text.includes(expected)) return reject0('PublicReviewChecklist.DocCoordinateMissing', [FILES.checklistDoc, expected], 'checklist doc required coordinate missing');
+  for (const expected of Object.values(REQUIRED_COORDINATES)) if (!text.includes(expected)) return reject0('PublicReviewChecklist.DocCoordinateMissing', [FILES.checklistDoc, expected], 'checklist doc required coordinate missing');
   return { tag: 'accept' };
 }
 
