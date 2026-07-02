@@ -1,0 +1,25 @@
+name: public-theorem-emission-preflight
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  public-theorem-emission-preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run public theorem emission preflight checker
+        run: node pcc-public-theorem-emission-preflight0.mjs --json
+      - name: Run public theorem emission preflight tests
+        run: node --test audits/public-theorem-emission-preflight0.test.mjs
+      - name: Upload public theorem emission preflight verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-theorem-emission-preflight-latest-verdict
+          path: artifacts/public-theorem-emission-preflight/latest-verdict.json
