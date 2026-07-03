@@ -14,6 +14,7 @@ const COORD = 'PNP-PUBLIC-THEOREM-EMISSION-NEGATIVE-TRANSITIONS-2026-06-27-01';
 const OUT = 'artifacts/public-theorem-emission-negative-transitions/latest-verdict.json';
 const BLOCKERS = ['Release.UnrestrictedFinalSoundness', 'ExternalReview.Acceptance'];
 const EXPECTED_COORDINATES = {
+  publicTheoremEmissionNegativeTransitionsCoordinate: COORD,
   publicTheoremEmissionDenialCoordinate: 'PNP-PUBLIC-THEOREM-EMISSION-DENIAL-2026-06-27-01',
   publicTheoremEmissionPreflightCoordinate: 'PNP-PUBLIC-THEOREM-EMISSION-PREFLIGHT-2026-06-27-01',
   releaseBlockerClearanceCoordinate: 'PNP-RELEASE-BLOCKER-CLEARANCE-2026-06-27-01',
@@ -119,7 +120,7 @@ export async function CheckPublicTheoremEmissionNegativeTransitions0(options = {
       prematureActivationRejected: true,
       publicTheoremEmissionAllowedByNegativeTransitions: false,
       negativeTransitionAuditIsActivationSurface: false,
-      negativeTransitionBindingRequiresFuturePR: true,
+      negativeTransitionBindingRequiresFuturePR: false,
       negativeTransitionCaseCount: negative.cases.length,
       negativeTransitionCases: negative.cases,
       currentPreflightDigest: current.preflight.evidenceDigestSha256 ?? null,
@@ -183,7 +184,7 @@ function validateManifest0(m) {
     prematureActivationRejected: true,
     publicTheoremEmissionAllowedByNegativeTransitions: false,
     negativeTransitionAuditIsActivationSurface: false,
-    negativeTransitionBindingRequiresFuturePR: true
+    negativeTransitionBindingRequiresFuturePR: false
   };
   for (const [field, expected] of Object.entries(flags)) if (m[field] !== expected) return reject0('PublicTheoremEmissionNegativeTransitions.ManifestFlag', [FILES.manifest, field], 'manifest flag mismatch', { expected, actual: m[field] });
   const boundary = boundary0(m.claimBoundary, [FILES.manifest, 'claimBoundary']);
