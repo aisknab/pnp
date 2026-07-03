@@ -32,6 +32,7 @@
     "denialDoc": "release/PUBLIC_THEOREM_EMISSION_DENIAL.md"
   },
   "requiredCoordinates": {
+    "publicTheoremEmissionDenialCoordinate": "PNP-PUBLIC-THEOREM-EMISSION-DENIAL-2026-06-27-01",
     "publicTheoremEmissionPreflightCoordinate": "PNP-PUBLIC-THEOREM-EMISSION-PREFLIGHT-2026-06-27-01",
     "releaseBlockerClearanceCoordinate": "PNP-RELEASE-BLOCKER-CLEARANCE-2026-06-27-01",
     "externalReviewStatusCoordinate": "PNP-EXTERNAL-REVIEW-STATUS-2026-06-27-01",
@@ -41,6 +42,7 @@
     "gapLedgerCoordinate": "PNP-GAP-LEDGER-2026-06-27-01"
   },
   "requiredStatusVerificationSurfaceIds": [
+    "public-theorem-emission-denial-audit",
     "public-theorem-emission-preflight-audit",
     "release-blocker-clearance-audit",
     "external-review-status-audit",
@@ -87,6 +89,7 @@
     "This public theorem-emission denial certificate does not pass the public theorem-emission preflight.",
     "This public theorem-emission denial certificate does not claim unrestricted final soundness.",
     "This public theorem-emission denial certificate does not claim independent external review acceptance.",
+    "This public theorem-emission denial certificate requires PNP_STATUS.json to expose the denial coordinate as a status-bound non-activation surface.",
     "This public theorem-emission denial certificate does not mark any Section 22 theorem-ledger row as fully discharged."
   ],
   "audit": {
