@@ -18,7 +18,7 @@ Checker:
 node pcc-public-theorem-emission-gate0.mjs --json
 ```
 
-This gate aggregates the current public theorem-emission preflight, denial certificate, and negative-transition audit into one executable surface. It accepts only the current denied state.
+This gate aggregates the current public theorem-emission preflight, denial certificate, and negative-transition audit into one status-bound executable surface. It accepts only the current denied state.
 
 It is not a theorem-activation surface.
 
@@ -44,18 +44,20 @@ currentDeniedStateAccepted = true
 denialCertificateBound = true
 preflightBound = true
 negativeTransitionsBound = true
+statusBound = true
 allNegativeTransitionsRejected = true
 prematureActivationRejected = true
 releaseBlockersStillActive = true
 publicTheoremEmissionAllowedByGate = false
 finalTheoremReadyByGate = false
 gateIsActivationSurface = false
-gateBindingRequiresFuturePR = true
+gateBindingRequiresFuturePR = false
 ```
 
 ## Bound surfaces
 
 ```text
+publicTheoremEmissionGateCoordinate = PNP-PUBLIC-THEOREM-EMISSION-GATE-2026-06-27-01
 publicTheoremEmissionNegativeTransitionsCoordinate = PNP-PUBLIC-THEOREM-EMISSION-NEGATIVE-TRANSITIONS-2026-06-27-01
 publicTheoremEmissionDenialCoordinate = PNP-PUBLIC-THEOREM-EMISSION-DENIAL-2026-06-27-01
 publicTheoremEmissionPreflightCoordinate = PNP-PUBLIC-THEOREM-EMISSION-PREFLIGHT-2026-06-27-01
@@ -101,4 +103,4 @@ This gate does not clear `Release.UnrestrictedFinalSoundness` or `ExternalReview
 This gate does not pass the public theorem-emission preflight.
 This gate does not claim unrestricted final soundness.
 This gate does not claim independent external review acceptance.
-This gate is not yet a status-bound verification surface and requires a future binding PR.
+This gate is status-bound but remains a denial/non-activation surface.
