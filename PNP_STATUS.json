@@ -69,6 +69,7 @@
   "publicTheoremEmissionPreflightCoordinate": "PNP-PUBLIC-THEOREM-EMISSION-PREFLIGHT-2026-06-27-01",
   "publicTheoremEmissionDenialCoordinate": "PNP-PUBLIC-THEOREM-EMISSION-DENIAL-2026-06-27-01",
   "publicTheoremEmissionNegativeTransitionsCoordinate": "PNP-PUBLIC-THEOREM-EMISSION-NEGATIVE-TRANSITIONS-2026-06-27-01",
+  "publicTheoremEmissionGateCoordinate": "PNP-PUBLIC-THEOREM-EMISSION-GATE-2026-06-27-01",
   "lastVerifiedCommit": "current-checkout",
   "verificationSurfaces": [
     {"id":"historical-report-supersession-audit","command":"node pcc-historical-report-supersession0.mjs --json","outputKind":"artifacts/historical-report-supersession/latest-verdict.json"},
@@ -83,6 +84,7 @@
     {"id":"public-theorem-emission-preflight-audit","command":"node pcc-public-theorem-emission-preflight0.mjs --json","outputKind":"artifacts/public-theorem-emission-preflight/latest-verdict.json"},
     {"id":"public-theorem-emission-denial-audit","command":"node pcc-public-theorem-emission-denial0.mjs --json","outputKind":"artifacts/public-theorem-emission-denial/latest-verdict.json"},
     {"id":"public-theorem-emission-negative-transitions-audit","command":"node pcc-public-theorem-emission-negative-transitions0.mjs --json","outputKind":"artifacts/public-theorem-emission-negative-transitions/latest-verdict.json"},
+    {"id":"public-theorem-emission-gate-audit","command":"node pcc-public-theorem-emission-gate0.mjs --json","outputKind":"artifacts/public-theorem-emission-gate/latest-verdict.json"},
     {"id":"direct-binding-index-audit","command":"node pcc-direct-binding-index0.mjs --json","outputKind":"artifacts/direct-binding-index/latest-verdict.json"},
     {"id":"section22-direct-binding-runner-audit","command":"node scripts/verify-section22-direct-bindings.mjs --json","outputKind":"artifacts/section22-direct-bindings/latest-verdict.json"},
     {"id":"e-direct-binding-seed-audit","command":"node pcc-direct-bind-verifydw-soundness0.mjs --json","outputKind":"artifacts/direct-bind-verifydw-soundness/latest-verdict.json"},
@@ -115,6 +117,7 @@
     "The public theorem emission preflight checker records the current emission-denied state but does not activate public theorem emission or pass the preflight.",
     "The public theorem emission denial checker certifies the current denial state but does not activate public theorem emission or pass the preflight.",
     "The public theorem emission negative-transition checker proves premature activation mutations are rejected but does not activate public theorem emission.",
+    "The public theorem emission gate checker aggregates the denied preflight, denial certificate, and negative-transition audit but does not activate public theorem emission or pass the gate.",
     "The historical canonical report may be superseded by successor public-review reports, but this status file records the current non-activation boundary."
   ]
 }
