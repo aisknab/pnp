@@ -1,0 +1,25 @@
+name: public-theorem-emission-gate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  public-theorem-emission-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run public theorem-emission gate checker
+        run: node pcc-public-theorem-emission-gate0.mjs --json
+      - name: Run public theorem-emission gate tests
+        run: node --test audits/public-theorem-emission-gate0.test.mjs
+      - name: Upload public theorem-emission gate verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-theorem-emission-gate-latest-verdict
+          path: artifacts/public-theorem-emission-gate/latest-verdict.json
