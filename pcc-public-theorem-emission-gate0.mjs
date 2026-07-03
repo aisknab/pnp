@@ -15,6 +15,7 @@ const COORD = 'PNP-PUBLIC-THEOREM-EMISSION-GATE-2026-06-27-01';
 const OUT = 'artifacts/public-theorem-emission-gate/latest-verdict.json';
 const BLOCKERS = ['Release.UnrestrictedFinalSoundness', 'ExternalReview.Acceptance'];
 const EXPECTED_COORDINATES = {
+  publicTheoremEmissionGateCoordinate: COORD,
   publicTheoremEmissionNegativeTransitionsCoordinate: 'PNP-PUBLIC-THEOREM-EMISSION-NEGATIVE-TRANSITIONS-2026-06-27-01',
   publicTheoremEmissionDenialCoordinate: 'PNP-PUBLIC-THEOREM-EMISSION-DENIAL-2026-06-27-01',
   publicTheoremEmissionPreflightCoordinate: 'PNP-PUBLIC-THEOREM-EMISSION-PREFLIGHT-2026-06-27-01',
@@ -111,7 +112,7 @@ export async function CheckPublicTheoremEmissionGate0(options = {}) {
       checker: CHECKER,
       version: VERSION,
       coordinate: COORD,
-      claimStatus: 'public-theorem-emission-gate-accepted-denied-non-activating',
+      claimStatus: 'public-theorem-emission-gate-accepted-denied-status-bound-non-activating',
       publicTheoremEmissionGateReady: true,
       publicTheoremEmissionGatePassed: false,
       publicTheoremEmissionDenied: true,
@@ -119,13 +120,14 @@ export async function CheckPublicTheoremEmissionGate0(options = {}) {
       denialCertificateBound: true,
       preflightBound: true,
       negativeTransitionsBound: true,
+      statusBound: true,
       allNegativeTransitionsRejected: true,
       prematureActivationRejected: true,
       releaseBlockersStillActive: true,
       publicTheoremEmissionAllowedByGate: false,
       finalTheoremReadyByGate: false,
       gateIsActivationSurface: false,
-      gateBindingRequiresFuturePR: true,
+      gateBindingRequiresFuturePR: false,
       deniedReasonCount: manifest.requiredDeniedReasons.length,
       negativeTransitionCaseCount: manifest.requiredNegativeTransitionCaseIds.length,
       currentPreflightDigest: current.preflight.evidenceDigestSha256 ?? null,
@@ -156,13 +158,14 @@ function validateManifest0(m) {
     denialCertificateBound: true,
     preflightBound: true,
     negativeTransitionsBound: true,
+    statusBound: true,
     allNegativeTransitionsRejected: true,
     prematureActivationRejected: true,
     releaseBlockersStillActive: true,
     publicTheoremEmissionAllowedByGate: false,
     finalTheoremReadyByGate: false,
     gateIsActivationSurface: false,
-    gateBindingRequiresFuturePR: true
+    gateBindingRequiresFuturePR: false
   };
   for (const [field, expected] of Object.entries(flags)) if (m[field] !== expected) return reject0('PublicTheoremEmissionGate.ManifestFlag', [FILES.manifest, field], 'manifest flag mismatch', { expected, actual: m[field] });
   const boundary = boundary0(m.claimBoundary, [FILES.manifest, 'claimBoundary']);
