@@ -1,0 +1,98 @@
+{
+  "kind": "PNPPublicTheoremEmissionNegativeTransitions0",
+  "version": 0,
+  "coordinate": "PNP-PUBLIC-THEOREM-EMISSION-NEGATIVE-TRANSITIONS-2026-06-27-01",
+  "status": "public-theorem-emission-negative-transitions-ready",
+  "title": "Negative transition audit for public theorem emission",
+  "purpose": "Prove that the current public theorem-emission preflight and denial certificate reject premature activation transitions while the release blockers remain active.",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": ["Release.UnrestrictedFinalSoundness", "ExternalReview.Acceptance"]
+  },
+  "negativeTransitionAuditReady": true,
+  "currentDeniedStateAccepted": true,
+  "allNegativeTransitionsRejected": true,
+  "prematureActivationRejected": true,
+  "publicTheoremEmissionAllowedByNegativeTransitions": false,
+  "negativeTransitionAuditIsActivationSurface": false,
+  "negativeTransitionBindingRequiresFuturePR": true,
+  "sourceFiles": {
+    "status": "PNP_STATUS.json",
+    "preflight": "release/PUBLIC_THEOREM_EMISSION_PREFLIGHT.json",
+    "denial": "release/PUBLIC_THEOREM_EMISSION_DENIAL.json",
+    "releaseBlockerClearance": "release/RELEASE_BLOCKER_CLEARANCE.json",
+    "externalReviewStatus": "review/EXTERNAL_REVIEW_STATUS.json",
+    "publicReviewBoundary": "release/PUBLIC_REVIEW_BOUNDARY.json",
+    "negativeTransitionsDoc": "release/PUBLIC_THEOREM_EMISSION_NEGATIVE_TRANSITIONS.md"
+  },
+  "requiredCoordinates": {
+    "publicTheoremEmissionDenialCoordinate": "PNP-PUBLIC-THEOREM-EMISSION-DENIAL-2026-06-27-01",
+    "publicTheoremEmissionPreflightCoordinate": "PNP-PUBLIC-THEOREM-EMISSION-PREFLIGHT-2026-06-27-01",
+    "releaseBlockerClearanceCoordinate": "PNP-RELEASE-BLOCKER-CLEARANCE-2026-06-27-01",
+    "externalReviewStatusCoordinate": "PNP-EXTERNAL-REVIEW-STATUS-2026-06-27-01",
+    "publicReviewChecklistCoordinate": "PNP-PUBLIC-REVIEW-CHECKLIST-2026-06-27-01",
+    "publicReviewBoundaryCoordinate": "PNP-PUBLIC-REVIEW-BOUNDARY-2026-06-27-01",
+    "releaseLadderCoordinate": "PNP-RELEASE-LADDER-2026-06-27-01",
+    "gapLedgerCoordinate": "PNP-GAP-LEDGER-2026-06-27-01"
+  },
+  "requiredStatusVerificationSurfaceIds": [
+    "public-theorem-emission-denial-audit",
+    "public-theorem-emission-preflight-audit",
+    "release-blocker-clearance-audit",
+    "external-review-status-audit",
+    "public-review-boundary-audit",
+    "one-command-verifier"
+  ],
+  "negativeTransitionCases": [
+    {"id": "NEG-001-status-public-emission-true", "target": "PNP_STATUS.json", "mutation": "publicTheoremEmissionAllowed=true", "expectedOutcome": "reject"},
+    {"id": "NEG-002-status-final-theorem-ready", "target": "PNP_STATUS.json", "mutation": "finalTheoremReady=true", "expectedOutcome": "reject"},
+    {"id": "NEG-003-status-active-final-node", "target": "PNP_STATUS.json", "mutation": "activeFinalNodeIds=[FinalPNPProofReport0]", "expectedOutcome": "reject"},
+    {"id": "NEG-004-status-blockers-cleared", "target": "PNP_STATUS.json", "mutation": "remainingBlockers=[]", "expectedOutcome": "reject"},
+    {"id": "NEG-005-clearance-accepted", "target": "release/RELEASE_BLOCKER_CLEARANCE.json", "mutation": "releaseBlockerClearanceAccepted=true", "expectedOutcome": "reject"},
+    {"id": "NEG-006-external-review-accepted", "target": "review/EXTERNAL_REVIEW_STATUS.json", "mutation": "externalReviewAcceptanceClaimed=true", "expectedOutcome": "reject"},
+    {"id": "NEG-007-boundary-activating", "target": "release/PUBLIC_REVIEW_BOUNDARY.json", "mutation": "publicTheoremEmissionAllowedByBoundary=true", "expectedOutcome": "reject"},
+    {"id": "NEG-008-preflight-passed", "target": "release/PUBLIC_THEOREM_EMISSION_PREFLIGHT.json", "mutation": "publicTheoremEmissionPreflightPassed=true", "expectedOutcome": "reject"},
+    {"id": "NEG-009-denial-activation-surface", "target": "release/PUBLIC_THEOREM_EMISSION_DENIAL.json", "mutation": "denialCertificateIsActivationSurface=true", "expectedOutcome": "reject"}
+  ],
+  "requiredDocFragments": [
+    "PNP-PUBLIC-THEOREM-EMISSION-NEGATIVE-TRANSITIONS-2026-06-27-01",
+    "node pcc-public-theorem-emission-negative-transitions0.mjs --json",
+    "allNegativeTransitionsRejected = true",
+    "publicTheoremEmissionAllowedByNegativeTransitions = false",
+    "NEG-001-status-public-emission-true",
+    "NEG-009-denial-activation-surface",
+    "publicTheoremEmissionAllowed = false",
+    "finalTheoremReady = false",
+    "Release.UnrestrictedFinalSoundness",
+    "ExternalReview.Acceptance",
+    "not a theorem-activation surface"
+  ],
+  "evidenceSurfaces": [
+    "release/PUBLIC_THEOREM_EMISSION_NEGATIVE_TRANSITIONS.json",
+    "release/PUBLIC_THEOREM_EMISSION_NEGATIVE_TRANSITIONS.md",
+    "PNP_STATUS.json",
+    "release/PUBLIC_THEOREM_EMISSION_PREFLIGHT.json",
+    "release/PUBLIC_THEOREM_EMISSION_DENIAL.json",
+    "release/RELEASE_BLOCKER_CLEARANCE.json",
+    "review/EXTERNAL_REVIEW_STATUS.json",
+    "release/PUBLIC_REVIEW_BOUNDARY.json",
+    "pcc-public-theorem-emission-negative-transitions0.mjs",
+    "audits/public-theorem-emission-negative-transitions0.test.mjs"
+  ],
+  "nonClaims": [
+    "This negative transition audit does not activate public theorem emission.",
+    "This negative transition audit does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
+    "This negative transition audit does not pass the public theorem-emission preflight.",
+    "This negative transition audit does not claim unrestricted final soundness.",
+    "This negative transition audit does not claim independent external review acceptance.",
+    "This negative transition audit is not yet a status-bound surface; a follow-up PR may bind it into PNP_STATUS.json and npm run pnp:verify."
+  ],
+  "audit": {
+    "checker": "CheckPublicTheoremEmissionNegativeTransitions0",
+    "script": "pcc-public-theorem-emission-negative-transitions0.mjs",
+    "test": "audits/public-theorem-emission-negative-transitions0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
