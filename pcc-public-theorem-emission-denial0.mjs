@@ -13,6 +13,7 @@ const COORD = 'PNP-PUBLIC-THEOREM-EMISSION-DENIAL-2026-06-27-01';
 const OUT = 'artifacts/public-theorem-emission-denial/latest-verdict.json';
 const BLOCKERS = ['Release.UnrestrictedFinalSoundness', 'ExternalReview.Acceptance'];
 const EXPECTED_COORDINATES = {
+  publicTheoremEmissionDenialCoordinate: COORD,
   publicTheoremEmissionPreflightCoordinate: 'PNP-PUBLIC-THEOREM-EMISSION-PREFLIGHT-2026-06-27-01',
   releaseBlockerClearanceCoordinate: 'PNP-RELEASE-BLOCKER-CLEARANCE-2026-06-27-01',
   externalReviewStatusCoordinate: 'PNP-EXTERNAL-REVIEW-STATUS-2026-06-27-01',
