@@ -4,7 +4,7 @@
   "coordinate": "PNP-PUBLIC-THEOREM-EMISSION-GATE-2026-06-27-01",
   "status": "public-theorem-emission-gate-denied",
   "title": "Public theorem-emission gate for the current stack",
-  "purpose": "Aggregate the current public theorem-emission preflight, denial certificate, and negative-transition audit into one executable gate that accepts only the current denied, non-activating state.",
+  "purpose": "Aggregate the current public theorem-emission preflight, denial certificate, and negative-transition audit into one status-bound executable gate that accepts only the current denied, non-activating state.",
   "claimBoundary": {
     "publicTheoremEmissionAllowed": false,
     "finalTheoremReady": false,
@@ -18,13 +18,14 @@
   "denialCertificateBound": true,
   "preflightBound": true,
   "negativeTransitionsBound": true,
+  "statusBound": true,
   "allNegativeTransitionsRejected": true,
   "prematureActivationRejected": true,
   "releaseBlockersStillActive": true,
   "publicTheoremEmissionAllowedByGate": false,
   "finalTheoremReadyByGate": false,
   "gateIsActivationSurface": false,
-  "gateBindingRequiresFuturePR": true,
+  "gateBindingRequiresFuturePR": false,
   "sourceFiles": {
     "status": "PNP_STATUS.json",
     "preflight": "release/PUBLIC_THEOREM_EMISSION_PREFLIGHT.json",
@@ -36,6 +37,7 @@
     "gateDoc": "release/PUBLIC_THEOREM_EMISSION_GATE.md"
   },
   "requiredCoordinates": {
+    "publicTheoremEmissionGateCoordinate": "PNP-PUBLIC-THEOREM-EMISSION-GATE-2026-06-27-01",
     "publicTheoremEmissionNegativeTransitionsCoordinate": "PNP-PUBLIC-THEOREM-EMISSION-NEGATIVE-TRANSITIONS-2026-06-27-01",
     "publicTheoremEmissionDenialCoordinate": "PNP-PUBLIC-THEOREM-EMISSION-DENIAL-2026-06-27-01",
     "publicTheoremEmissionPreflightCoordinate": "PNP-PUBLIC-THEOREM-EMISSION-PREFLIGHT-2026-06-27-01",
@@ -47,6 +49,7 @@
     "gapLedgerCoordinate": "PNP-GAP-LEDGER-2026-06-27-01"
   },
   "requiredStatusVerificationSurfaceIds": [
+    "public-theorem-emission-gate-audit",
     "public-theorem-emission-negative-transitions-audit",
     "public-theorem-emission-denial-audit",
     "public-theorem-emission-preflight-audit",
@@ -81,9 +84,10 @@
     "node pcc-public-theorem-emission-gate0.mjs --json",
     "publicTheoremEmissionGatePassed = false",
     "publicTheoremEmissionDenied = true",
+    "statusBound = true",
     "allNegativeTransitionsRejected = true",
     "prematureActivationRejected = true",
-    "gateBindingRequiresFuturePR = true",
+    "gateBindingRequiresFuturePR = false",
     "publicTheoremEmissionAllowed = false",
     "finalTheoremReady = false",
     "Release.UnrestrictedFinalSoundness",
@@ -109,7 +113,7 @@
     "This public theorem-emission gate does not pass the public theorem-emission preflight.",
     "This public theorem-emission gate does not claim unrestricted final soundness.",
     "This public theorem-emission gate does not claim independent external review acceptance.",
-    "This public theorem-emission gate is not yet a status-bound verification surface and requires a future binding PR."
+    "This public theorem-emission gate is status-bound but remains a denial/non-activation surface."
   ],
   "audit": {
     "checker": "CheckPublicTheoremEmissionGate0",
