@@ -13,7 +13,7 @@ test('public theorem emission negative transition audit accepts rejected-transit
   assert.equal(out.prematureActivationRejected, true);
   assert.equal(out.publicTheoremEmissionAllowedByNegativeTransitions, false);
   assert.equal(out.negativeTransitionAuditIsActivationSurface, false);
-  assert.equal(out.negativeTransitionBindingRequiresFuturePR, true);
+  assert.equal(out.negativeTransitionBindingRequiresFuturePR, false);
   assert.equal(out.negativeTransitionCaseCount, 9);
   assert.equal(out.publicTheoremEmissionAllowed, false);
   assert.equal(out.finalTheoremReady, false);

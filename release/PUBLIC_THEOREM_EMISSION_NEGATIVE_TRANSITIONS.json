@@ -17,7 +17,7 @@
   "prematureActivationRejected": true,
   "publicTheoremEmissionAllowedByNegativeTransitions": false,
   "negativeTransitionAuditIsActivationSurface": false,
-  "negativeTransitionBindingRequiresFuturePR": true,
+  "negativeTransitionBindingRequiresFuturePR": false,
   "sourceFiles": {
     "status": "PNP_STATUS.json",
     "preflight": "release/PUBLIC_THEOREM_EMISSION_PREFLIGHT.json",
@@ -28,6 +28,7 @@
     "negativeTransitionsDoc": "release/PUBLIC_THEOREM_EMISSION_NEGATIVE_TRANSITIONS.md"
   },
   "requiredCoordinates": {
+    "publicTheoremEmissionNegativeTransitionsCoordinate": "PNP-PUBLIC-THEOREM-EMISSION-NEGATIVE-TRANSITIONS-2026-06-27-01",
     "publicTheoremEmissionDenialCoordinate": "PNP-PUBLIC-THEOREM-EMISSION-DENIAL-2026-06-27-01",
     "publicTheoremEmissionPreflightCoordinate": "PNP-PUBLIC-THEOREM-EMISSION-PREFLIGHT-2026-06-27-01",
     "releaseBlockerClearanceCoordinate": "PNP-RELEASE-BLOCKER-CLEARANCE-2026-06-27-01",
@@ -38,6 +39,7 @@
     "gapLedgerCoordinate": "PNP-GAP-LEDGER-2026-06-27-01"
   },
   "requiredStatusVerificationSurfaceIds": [
+    "public-theorem-emission-negative-transitions-audit",
     "public-theorem-emission-denial-audit",
     "public-theorem-emission-preflight-audit",
     "release-blocker-clearance-audit",
@@ -87,7 +89,7 @@
     "This negative transition audit does not pass the public theorem-emission preflight.",
     "This negative transition audit does not claim unrestricted final soundness.",
     "This negative transition audit does not claim independent external review acceptance.",
-    "This negative transition audit is not yet a status-bound surface; a follow-up PR may bind it into PNP_STATUS.json and npm run pnp:verify."
+    "This negative transition audit requires PNP_STATUS.json to expose the negative-transition coordinate as a status-bound non-activation surface."
   ],
   "audit": {
     "checker": "CheckPublicTheoremEmissionNegativeTransitions0",
