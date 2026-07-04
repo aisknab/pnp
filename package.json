@@ -46,6 +46,7 @@
     "pnp:verify": "node scripts/pnp-verify-all.mjs --json",
     "proof:uniform-final-soundness-target": "node pcc-uniform-final-soundness-target0.mjs --json",
     "proof:uniform-input-family": "node pcc-uniform-input-family0.mjs --json",
+    "proof:uniform-locked-nand-construction": "node pcc-uniform-locked-nand-construction0.mjs --json",
     "examples:minimal": "node examples/minimal/run-all.mjs",
     "runall": "node ./bin/runall0.mjs",
     "smoke": "node ./bin/runall0.mjs",

@@ -1,0 +1,197 @@
+{
+  "kind": "PNPUniformLockedNANDConstruction0",
+  "version": 0,
+  "coordinate": "PNP-UNIFORM-LOCKED-NAND-CONSTRUCTION-2026-07-04-01",
+  "status": "uniform-locked-nand-construction-accepted",
+  "title": "Uniform locked NAND construction",
+  "purpose": "Discharge UFS-002 by defining a deterministic polynomial-time construction from every NANDCircuit0 input-family member to a locked NAND threshold instance descriptor.",
+  "ufsTargetCoordinate": "PNP-UNIFORM-FINAL-SOUNDNESS-TARGET-2026-07-04-01",
+  "ufsObligationId": "UFS-002-LockedNANDConstructionUniformPolynomial",
+  "dependsOn": [
+    "PNP-UNIFORM-INPUT-FAMILY-2026-07-04-01"
+  ],
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "lockedNANDConstructionAccepted": true,
+  "ufs002LockedNANDConstructionDischarged": true,
+  "uniformFinalSoundnessProved": false,
+  "unrestrictedFinalSoundnessDischarged": false,
+  "publicTheoremEmissionAllowedByConstruction": false,
+  "construction": {
+    "id": "BuildLockedNANDInstance0",
+    "domain": "AllFiniteSingleOutputNANDCircuits0 accepted by UFS-001",
+    "codomain": "LockedNANDInstance0 descriptor with normalized NAND circuit, slot allocation, macro inventory, baseline threshold, full word size, and residual slack bound",
+    "totalOnInputFamily": true,
+    "deterministic": true,
+    "uniformAcrossSizes": true,
+    "finiteInstanceList": false,
+    "boundedEnumerationOnly": false,
+    "usesOracle": false,
+    "usesExactMinimization": false,
+    "membershipPrecondition": "CheckNANDCircuitInputFamilyMember0 accepts the input circuit.",
+    "normalizationRule": "If the input output is not a gate, append a uniform constant or double-NAND identity gadget so the locked construction has a gate output. This preserves satisfiability of the represented output predicate and is linear size.",
+    "slotFamilies": [
+      "primaryInputs X",
+      "trace slots T",
+      "source occurrence slots O",
+      "source locks R",
+      "trace locks L",
+      "final lock z"
+    ],
+    "macroFamilies": [
+      {
+        "id": "Equality",
+        "gates": 10,
+        "countField": "equalityMacroCount"
+      },
+      {
+        "id": "ConstantZero",
+        "gates": 3,
+        "countField": "constantZeroMacroCount"
+      },
+      {
+        "id": "ConstantOne",
+        "gates": 2,
+        "countField": "constantOneMacroCount"
+      },
+      {
+        "id": "NANDTrace",
+        "gates": 18,
+        "countField": "traceMacroCount"
+      },
+      {
+        "id": "PrefixConjunction",
+        "gatesPerNode": 2,
+        "countField": "prefixNodeCount"
+      },
+      {
+        "id": "FinalTernaryConjunction",
+        "gates": 4,
+        "countField": "finalGateCount"
+      }
+    ],
+    "baselineFormula": "18*m + 10*wEq + 3*w0 + 2*w1 + 2*max(0, 3*m - 1)",
+    "fullWordSizeFormula": "baseline + 4",
+    "residualSlackBound": 4,
+    "constructionTimeBound": "O(encoded bytes + normalizedGateCount)",
+    "constructionSizeBound": "O(inputCount + normalizedGateCount)"
+  },
+  "uniformityClaims": {
+    "singleBuilderForAllInputSizes": true,
+    "inputFamilyMembershipChecked": true,
+    "normalizationTotal": true,
+    "slotAllocationDeterministic": true,
+    "macroInventoryDeterministic": true,
+    "baselineFormulaChecked": true,
+    "fullWordSizeFormulaChecked": true,
+    "residualSlackBoundDeclared": true,
+    "polynomialTimeBoundDeclared": true,
+    "hashOrDigestNotUsedAsSemantics": true,
+    "externalReviewIsNotPremise": true
+  },
+  "positiveExamples": [
+    {
+      "id": "one-gate-two-input-nand",
+      "inputCircuit": {
+        "kind": "NANDCircuit0",
+        "version": 0,
+        "inputCount": 2,
+        "gates": [
+          {
+            "op": "NAND",
+            "left": { "kind": "input", "index": 0 },
+            "right": { "kind": "input", "index": 1 }
+          }
+        ],
+        "output": { "kind": "gate", "index": 0 }
+      },
+      "expected": {
+        "normalizedGateCount": 1,
+        "equalityMacroCount": 2,
+        "constantZeroMacroCount": 0,
+        "constantOneMacroCount": 0,
+        "traceMacroCount": 1,
+        "prefixNodeCount": 2,
+        "baseline": 42,
+        "fullWordSize": 46,
+        "residualSlackBound": 4
+      }
+    },
+    {
+      "id": "input-output-normalizes-by-double-nand",
+      "inputCircuit": {
+        "kind": "NANDCircuit0",
+        "version": 0,
+        "inputCount": 1,
+        "gates": [],
+        "output": { "kind": "input", "index": 0 }
+      },
+      "expected": {
+        "normalizedGateCount": 2,
+        "equalityMacroCount": 3,
+        "constantZeroMacroCount": 0,
+        "constantOneMacroCount": 1,
+        "traceMacroCount": 2,
+        "prefixNodeCount": 5,
+        "baseline": 78,
+        "fullWordSize": 82,
+        "residualSlackBound": 4
+      }
+    }
+  ],
+  "negativeExamples": [
+    {
+      "id": "reject-invalid-circuit",
+      "expectedRejectCoord": "UniformInputFamily.SourceInputOutOfRange",
+      "inputCircuit": {
+        "kind": "NANDCircuit0",
+        "version": 0,
+        "inputCount": 1,
+        "gates": [],
+        "output": { "kind": "input", "index": 4 }
+      }
+    },
+    {
+      "id": "reject-finite-list-only-builder",
+      "expectedRejectCoord": "UniformLockedNANDConstruction.ConstructionBoolean",
+      "manifestPatch": {
+        "construction": {
+          "finiteInstanceList": true,
+          "uniformAcrossSizes": false
+        }
+      }
+    }
+  ],
+  "linkedGaps": [
+    "GAP-001-UnrestrictedFinalSoundness",
+    "GAP-003-BoundedSmallModelsNotUniformProof",
+    "GAP-004-FiniteToUnboundedUniformity"
+  ],
+  "evidenceSurfaces": [
+    "proof-obligations/UNIFORM_LOCKED_NAND_CONSTRUCTION.json",
+    "proof-obligations/UNIFORM_LOCKED_NAND_CONSTRUCTION.md",
+    "pcc-uniform-locked-nand-construction0.mjs",
+    "audits/uniform-locked-nand-construction0.test.mjs",
+    "proof-obligations/UNIFORM_FINAL_SOUNDNESS_TARGET.json",
+    "proof-obligations/UNIFORM_INPUT_FAMILY.json"
+  ],
+  "nonClaims": [
+    "This checker discharges only UFS-002 LockedNANDConstructionUniformPolynomial.",
+    "This checker constructs and checks the locked NAND descriptor uniformly; it does not prove threshold equivalence for all inputs.",
+    "This checker does not prove residual-band minimization, SAT in P, or P = NP.",
+    "This checker does not clear Release.UnrestrictedFinalSoundness."
+  ],
+  "audit": {
+    "checker": "CheckUniformLockedNANDConstruction0",
+    "script": "pcc-uniform-locked-nand-construction0.mjs",
+    "test": "audits/uniform-locked-nand-construction0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}

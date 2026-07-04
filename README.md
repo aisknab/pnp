@@ -129,6 +129,7 @@ This keeps active proof work from being blocked by a stale script freeze while s
 ```bash
 npm run proof:uniform-final-soundness-target
 npm run proof:uniform-input-family
+npm run proof:uniform-locked-nand-construction
 ```
 
 ## Public RunAll0 entry point
@@ -196,3 +197,63 @@ package.json bin keys and values
 ```
 
 The script surface is intentionally extensible under the narrow `proof:*` namespace during proof development. Non-proof script additions and unsafe proof-script commands still reject.
+
+## Release audit public surface freeze phase
+
+The release audit executes the public entry release surface freeze checker as a ledger phase named `publicSurfaceFreeze`.
+
+The phase verifies:
+
+```text
+index.mjs public export names
+package.json exports map
+package.json bin map
+package.json script map
+```
+
+During active proof development, the script map check is exact for existing release scripts and permits only the constrained `proof:*` checker-script namespace.
+
+## Release audit public surface freeze summary
+
+The release audit exposes the public-surface check as a first-class summary, not only as a side effect.
+
+The summary includes:
+
+```text
+publicSurfaceFreezeDigest
+publicSurfaceFreezePublicEntryExportCount
+publicSurfaceFreezePackageExportCount
+publicSurfaceFreezePackageBinCount
+publicSurfaceFreezePackageScriptCount
+publicSurfaceFreezeSurfaceFrozen
+```
+
+When enabled, the release audit requires:
+
+```text
+surfaceFrozen = true
+```
+
+During active proof development, `surfaceFrozen = true` means exports and bin entries remain exact while package scripts may grow only through the constrained `proof:*` checker-script namespace.
+
+## Release audit public surface freeze negative coverage
+
+The release audit includes negative coverage for the public surface freeze phase.
+
+The negative checks prove that `CheckReleaseAudit0` rejects if the public surface freeze checker returns an accepted record with:
+
+```text
+wrong normal-form kind
+surfaceFrozen = false
+zero public entry export count
+zero package export count
+zero package bin count
+zero package script count
+missing normal form
+```
+
+All such failures surface at:
+
+```text
+CheckReleaseAudit0.publicSurfaceFreeze
+```
