@@ -16,8 +16,8 @@ export const PUBLIC_SURFACE_BASELINE0 = Object.freeze({
   kind: 'PublicSurfaceBaseline0',
   version: CHECKER_VERSION,
   coordinate: 'PUBLIC-SURFACE-BASELINE-2026-06-27-NO-HIDDEN-ORACLE-01',
-  status: 'public-review-surface-rebased-for-no-hidden-oracle-audit',
-  rationale: 'The public package script surface is intentionally extensible while the repository is being converted into a self-verifying audit stack; this baseline includes cross-runtime verification, independent-verifier no-shared-code auditing, the top-level pnp:verify entrypoint, checker-totality seed auditing, negative checker mutation auditing, rule-family coverage auditing, checker-dependency graph generation, checker no-circular-authority auditing, NAND direct-wire semantics auditing, NAND small-model auditing, locked NAND SAT small-model auditing, complexity implication ledger auditing, and no-hidden-oracle auditing.',
+  status: 'public-review-surface-with-extensible-proof-script-namespace',
+  rationale: 'The package exports and bin surface remain exact, while package.json scripts allow a narrow proof:* development namespace for direct checker entrypoints. This keeps proof work moving without treating every new proof checker as a public release-surface overclaim.',
 });
 
 export const PUBLIC_ENTRY_EXPORT_KEYS0 = Object.freeze([
@@ -177,6 +177,8 @@ export const PUBLIC_PACKAGE_SCRIPT_TARGETS0 = Object.freeze({
 });
 
 export const PUBLIC_PACKAGE_SCRIPT_KEYS0 = Object.freeze(Object.keys(PUBLIC_PACKAGE_SCRIPT_TARGETS0).sort());
+export const PUBLIC_PACKAGE_SCRIPT_EXTENSION_PREFIXES0 = Object.freeze(['proof:']);
+export const PUBLIC_PACKAGE_SCRIPT_EXTENSION_PATTERN0 = /^node pcc-[a-z0-9-]+0\.mjs --json$/u;
 
 export function makePublicSurfaceFreezeConfig0(overrides = {}) {
   return {
@@ -213,9 +215,10 @@ export async function CheckPublicEntryReleaseSurface0(config = makePublicSurface
   const binSurface = validateExactMapping0(packageJson.bin, PUBLIC_PACKAGE_BIN0, ['package.json', 'bin']);
   ledger.push(makeLedgerEntry0('packageBin', binSurface));
   if (!binSurface.ok) return makeRejectRecord0({ checker, coord: `${checker}.packageBin`, path: binSurface.path, witness: binSurface.witness, ledger });
-  const scriptSurface = validateExactMapping0(packageJson.scripts, PUBLIC_PACKAGE_SCRIPT_TARGETS0, ['package.json', 'scripts']);
+  const scriptSurface = validateScriptMapping0(packageJson.scripts, PUBLIC_PACKAGE_SCRIPT_TARGETS0, ['package.json', 'scripts']);
   ledger.push(makeLedgerEntry0('packageScripts', scriptSurface));
   if (!scriptSurface.ok) return makeRejectRecord0({ checker, coord: `${checker}.packageScripts`, path: scriptSurface.path, witness: scriptSurface.witness, ledger });
+  const scriptExtensionKeys = scriptSurface.nf.extensionKeys;
   const nf = {
     kind: 'PublicEntryReleaseSurface0NF',
     checker,
@@ -226,8 +229,12 @@ export async function CheckPublicEntryReleaseSurface0(config = makePublicSurface
     packageExportKeys: Object.keys(PUBLIC_PACKAGE_EXPORTS0).sort(),
     packageBinCount: Object.keys(PUBLIC_PACKAGE_BIN0).length,
     packageBinKeys: Object.keys(PUBLIC_PACKAGE_BIN0).sort(),
-    packageScriptCount: PUBLIC_PACKAGE_SCRIPT_KEYS0.length,
+    packageScriptCount: PUBLIC_PACKAGE_SCRIPT_KEYS0.length + scriptExtensionKeys.length,
     packageScriptKeys: PUBLIC_PACKAGE_SCRIPT_KEYS0,
+    packageScriptExtensionCount: scriptExtensionKeys.length,
+    packageScriptExtensionKeys: scriptExtensionKeys,
+    packageScriptExtensionPrefixes: PUBLIC_PACKAGE_SCRIPT_EXTENSION_PREFIXES0,
+    packageScriptSurfaceExtensible: true,
     packageMain: './index.mjs',
     packageType: 'module',
     surfaceFrozen: true,
@@ -251,6 +258,23 @@ function validatePackageMain0(packageJson) {
   if (packageJson.type !== 'module') return validationReject0(['package.json', 'type'], 'package.json type must remain module', { expected: 'module', actual: packageJson.type });
   if (packageJson.main !== './index.mjs') return validationReject0(['package.json', 'main'], 'package.json main must remain ./index.mjs', { expected: './index.mjs', actual: packageJson.main });
   return validationAccept0({ kind: 'PackageMainSurface0NF' });
+}
+function validateScriptMapping0(actual, expected, pathArray) {
+  if (actual === null || typeof actual !== 'object') return validationReject0(pathArray, 'public release surface target must be an object', { actual: typeof actual });
+  const actualKeys = Object.keys(actual).sort();
+  const expectedKeys = Object.keys(expected).sort();
+  const missingKeys = expectedKeys.filter((key) => !actualKeys.includes(key));
+  if (missingKeys.length !== 0) return validationReject0(pathArray, 'public release surface keys changed', { expectedKeys, actualKeys, missingKeys, extraKeys: [] });
+  for (const key of expectedKeys) if (actual[key] !== expected[key]) return validationReject0([...pathArray, key], 'public release surface mapping value changed', { key, expected: expected[key], actual: actual[key] });
+  const extraKeys = actualKeys.filter((key) => !expectedKeys.includes(key));
+  const extensionKeys = [];
+  for (const key of extraKeys) {
+    const value = actual[key];
+    if (!PUBLIC_PACKAGE_SCRIPT_EXTENSION_PREFIXES0.some((prefix) => key.startsWith(prefix))) return validationReject0(pathArray, 'public release surface keys changed', { expectedKeys, actualKeys, missingKeys: [], extraKeys });
+    if (typeof value !== 'string' || !PUBLIC_PACKAGE_SCRIPT_EXTENSION_PATTERN0.test(value)) return validationReject0([...pathArray, key], 'public proof script extension has invalid command', { key, actual: value, expectedPattern: String(PUBLIC_PACKAGE_SCRIPT_EXTENSION_PATTERN0) });
+    extensionKeys.push(key);
+  }
+  return validationAccept0({ kind: 'PublicSurfaceScriptMapping0NF', keys: expectedKeys, extensionKeys: extensionKeys.sort(), extensionPrefixes: PUBLIC_PACKAGE_SCRIPT_EXTENSION_PREFIXES0 });
 }
 function validateExactMapping0(actual, expected, pathArray) {
   const keyCheck = validateExactKeys0(actual, Object.keys(expected).sort(), pathArray);
