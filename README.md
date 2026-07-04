@@ -130,6 +130,7 @@ This keeps active proof work from being blocked by a stale script freeze while s
 npm run proof:uniform-final-soundness-target
 npm run proof:uniform-input-family
 npm run proof:uniform-locked-nand-construction
+npm run proof:uniform-locked-nand-threshold
 ```
 
 ## Public RunAll0 entry point
