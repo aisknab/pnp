@@ -1,0 +1,32 @@
+name: proof-development
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  proof-development:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Uniform final soundness target
+        run: |
+          npm run proof:uniform-final-soundness-target
+          node --test audits/uniform-final-soundness-target0.test.mjs
+      - name: Uniform input family
+        run: |
+          npm run proof:uniform-input-family
+          node --test audits/uniform-input-family0.test.mjs
+      - name: Upload proof-development verdicts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: proof-development-latest-verdicts
+          path: |
+            artifacts/uniform-final-soundness-target/latest-verdict.json
+            artifacts/uniform-input-family/latest-verdict.json
