@@ -13,6 +13,11 @@ import {
   PUBLIC_PACKAGE_SCRIPT_TARGETS0,
 } from '../pcc-public-surface-freeze0.mjs';
 
+const CURRENT_PROOF_SCRIPT_EXTENSIONS0 = [
+  'proof:uniform-final-soundness-target',
+  'proof:uniform-input-family',
+];
+
 test('CheckPublicEntryReleaseSurface0 accepts the current public release surface', async () => {
   const out = await CheckPublicEntryReleaseSurface0();
 
@@ -25,7 +30,7 @@ test('CheckPublicEntryReleaseSurface0 accepts the current public release surface
   assert.deepEqual(out.NF.packageExportKeys, Object.keys(PUBLIC_PACKAGE_EXPORTS0).sort());
   assert.deepEqual(out.NF.packageBinKeys, Object.keys(PUBLIC_PACKAGE_BIN0).sort());
   assert.deepEqual(out.NF.packageScriptKeys, PUBLIC_PACKAGE_SCRIPT_KEYS0);
-  assert.deepEqual(out.NF.packageScriptExtensionKeys, ['proof:uniform-final-soundness-target']);
+  assert.deepEqual(out.NF.packageScriptExtensionKeys, CURRENT_PROOF_SCRIPT_EXTENSIONS0);
   assert.match(out.Digest.hex, /^[0-9a-f]{64}$/);
 });
 
@@ -154,7 +159,7 @@ test('CheckPublicEntryReleaseSurface0 accepts proof namespace checker scripts', 
   });
 
   assert.equal(out.tag, 'accept');
-  assert.deepEqual(out.NF.packageScriptExtensionKeys, ['proof:example-target', 'proof:uniform-final-soundness-target']);
+  assert.deepEqual(out.NF.packageScriptExtensionKeys, ['proof:example-target', ...CURRENT_PROOF_SCRIPT_EXTENSIONS0].sort());
 });
 
 test('CheckPublicEntryReleaseSurface0 rejects non-proof extra scripts', async () => {
@@ -169,7 +174,7 @@ test('CheckPublicEntryReleaseSurface0 rejects non-proof extra scripts', async ()
   assert.equal(out.Coord, 'CheckPublicEntryReleaseSurface0.packageScripts');
   assert.deepEqual(out.Path, ['package.json', 'scripts']);
   assert.equal(out.Witness.reason, 'public release surface keys changed');
-  assert.deepEqual(out.Witness.detail.extraKeys, ['proof:uniform-final-soundness-target', 'site:build']);
+  assert.deepEqual(out.Witness.detail.extraKeys, [...CURRENT_PROOF_SCRIPT_EXTENSIONS0, 'site:build'].sort());
 });
 
 test('CheckPublicEntryReleaseSurface0 rejects unsafe proof script commands', async () => {
@@ -195,10 +200,10 @@ test('README documents public entry release surface freeze', async () => {
 
   assert.equal(readme.includes('Public entry release surface freeze'), true);
   assert.equal(readme.includes('CheckPublicEntryReleaseSurface0'), true);
-  assert.equal(readme.includes('index.mjs export names'), true);
+  assert.equal(readme.includes('index.mjs public export names'), true);
   assert.equal(readme.includes('package.json exports keys and values'), true);
   assert.equal(readme.includes('package.json bin keys and values'), true);
-  assert.equal(readme.includes('package.json script keys and values'), true);
+  assert.equal(readme.includes('proof:*'), true);
 });
 
 async function readPackageJson0() {

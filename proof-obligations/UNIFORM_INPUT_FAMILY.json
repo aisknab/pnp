@@ -1,0 +1,190 @@
+{
+  "kind": "PNPUniformInputFamily0",
+  "version": 0,
+  "coordinate": "PNP-UNIFORM-INPUT-FAMILY-2026-07-04-01",
+  "status": "uniform-input-family-accepted",
+  "title": "Uniform all-size NAND-SAT input family",
+  "purpose": "Discharge UFS-001 by defining the source theorem input family as a single decidable schema over every finite single-output NAND circuit, not as a finite or bounded list of instances.",
+  "ufsTargetCoordinate": "PNP-UNIFORM-FINAL-SOUNDNESS-TARGET-2026-07-04-01",
+  "ufsObligationId": "UFS-001-InputFamilyUniformity",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "inputFamilyUniformityAccepted": true,
+  "ufs001InputFamilyUniformityDischarged": true,
+  "uniformFinalSoundnessProved": false,
+  "unrestrictedFinalSoundnessDischarged": false,
+  "publicTheoremEmissionAllowedByInputFamily": false,
+  "inputFamily": {
+    "id": "AllFiniteSingleOutputNANDCircuits0",
+    "informalName": "NAND-SAT inputs",
+    "quantifier": "every finite single-output NAND circuit encoded as NANDCircuit0",
+    "allFiniteSizesCovered": true,
+    "schemaUniformAcrossSizes": true,
+    "finiteInstanceList": false,
+    "boundedEnumerationOnly": false,
+    "requiresFutureSizeBound": false,
+    "npCompleteFamilyForLaterBinding": "NAND-SAT; the later complexity checker must bind the standard SAT-to-NAND reduction and NP-completeness implication."
+  },
+  "schema": {
+    "kind": "NANDCircuit0",
+    "version": 0,
+    "fields": [
+      {
+        "name": "inputCount",
+        "type": "safe nonnegative integer"
+      },
+      {
+        "name": "gates",
+        "type": "array of topologically ordered NAND gates"
+      },
+      {
+        "name": "output",
+        "type": "source reference to an input, constant, or gate"
+      }
+    ],
+    "sourceKinds": [
+      "input",
+      "const",
+      "gate"
+    ],
+    "gateRule": "gate i has op NAND and left/right sources referencing only input coordinates, constants 0/1, or gates j < i",
+    "outputRule": "output references an input coordinate, constant 0/1, or any gate j < gateCount",
+    "sizeMetric": "inputCount + gateCount + sourceReferenceCount + outputReferenceCount",
+    "membershipAlgorithm": "single pass structural check over the encoded object",
+    "membershipTimeBound": "O(encoded bytes + gateCount)",
+    "membershipSpaceBound": "O(1) auxiliary apart from input traversal"
+  },
+  "uniformityClaims": {
+    "singlePredicateForAllSizes": true,
+    "allSizeQuantifierExplicit": true,
+    "topologicalGateDiscipline": true,
+    "constantHandlingExplicit": true,
+    "outputConventionExplicit": true,
+    "polynomialMembershipCheck": true,
+    "hashOrDigestNotUsedAsSemantics": true,
+    "externalReviewIsNotPremise": true
+  },
+  "positiveExamples": [
+    {
+      "id": "valid-single-nand",
+      "circuit": {
+        "kind": "NANDCircuit0",
+        "version": 0,
+        "inputCount": 2,
+        "gates": [
+          {
+            "op": "NAND",
+            "left": {
+              "kind": "input",
+              "index": 0
+            },
+            "right": {
+              "kind": "input",
+              "index": 1
+            }
+          }
+        ],
+        "output": {
+          "kind": "gate",
+          "index": 0
+        }
+      }
+    },
+    {
+      "id": "valid-constant-output",
+      "circuit": {
+        "kind": "NANDCircuit0",
+        "version": 0,
+        "inputCount": 0,
+        "gates": [],
+        "output": {
+          "kind": "const",
+          "value": 1
+        }
+      }
+    }
+  ],
+  "negativeExamples": [
+    {
+      "id": "reject-future-gate-reference",
+      "expectedRejectCoord": "UniformInputFamily.SourceFutureGate",
+      "circuit": {
+        "kind": "NANDCircuit0",
+        "version": 0,
+        "inputCount": 1,
+        "gates": [
+          {
+            "op": "NAND",
+            "left": {
+              "kind": "gate",
+              "index": 0
+            },
+            "right": {
+              "kind": "input",
+              "index": 0
+            }
+          }
+        ],
+        "output": {
+          "kind": "gate",
+          "index": 0
+        }
+      }
+    },
+    {
+      "id": "reject-bad-input-index",
+      "expectedRejectCoord": "UniformInputFamily.SourceInputOutOfRange",
+      "circuit": {
+        "kind": "NANDCircuit0",
+        "version": 0,
+        "inputCount": 1,
+        "gates": [],
+        "output": {
+          "kind": "input",
+          "index": 2
+        }
+      }
+    },
+    {
+      "id": "reject-finite-list-only-overclaim",
+      "expectedRejectCoord": "UniformInputFamily.ManifestFiniteList",
+      "manifestPatch": {
+        "inputFamily": {
+          "finiteInstanceList": true,
+          "allFiniteSizesCovered": false
+        }
+      }
+    }
+  ],
+  "linkedGaps": [
+    "GAP-001-UnrestrictedFinalSoundness",
+    "GAP-003-BoundedSmallModelsNotUniformProof",
+    "GAP-004-FiniteToUnboundedUniformity"
+  ],
+  "evidenceSurfaces": [
+    "proof-obligations/UNIFORM_INPUT_FAMILY.json",
+    "proof-obligations/UNIFORM_INPUT_FAMILY.md",
+    "pcc-uniform-input-family0.mjs",
+    "audits/uniform-input-family0.test.mjs",
+    "proof-obligations/UNIFORM_FINAL_SOUNDNESS_TARGET.json"
+  ],
+  "nonClaims": [
+    "This checker discharges only UFS-001 InputFamilyUniformity.",
+    "This checker does not prove locked NAND construction correctness, residual-band minimization, SAT in P, or P = NP.",
+    "This checker does not clear Release.UnrestrictedFinalSoundness.",
+    "This checker does not use external review as a mathematical premise."
+  ],
+  "audit": {
+    "checker": "CheckUniformInputFamily0",
+    "script": "pcc-uniform-input-family0.mjs",
+    "test": "audits/uniform-input-family0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
