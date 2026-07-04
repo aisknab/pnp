@@ -124,10 +124,11 @@ A proof script must be a direct checker invocation of this form:
 node pcc-<checker-name>0.mjs --json
 ```
 
-This keeps active proof work from being blocked by a stale script freeze while still rejecting unrelated package-script drift. Current proof target script:
+This keeps active proof work from being blocked by a stale script freeze while still rejecting unrelated package-script drift. Current proof target scripts:
 
 ```bash
 npm run proof:uniform-final-soundness-target
+npm run proof:uniform-input-family
 ```
 
 ## Public RunAll0 entry point
