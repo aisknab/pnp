@@ -154,16 +154,11 @@ The generator is untrusted. The checker validates the materialized package, comp
 
 The package entry point is:
 
-```js
-import { RunAll0 } from '@aisknab/pnp';
-
-const out = await RunAll0();
-console.log(out.tag, out.NF.publicConclusion);
+```text
+index.mjs
 ```
 
 ## Release audit
-
-Run the release audit after the public smoke test:
 
 ```bash
 npm run release:audit
@@ -179,21 +174,11 @@ The release audit checks the public package surface, package exports, README cla
 
 ## Internal materialized package path
 
-The materialized path is separate from synthetic `RunAll0` fixtures. It is for checking external JSON envelopes that represent future real generated proof artefacts.
-
-The current internal file-based flow is:
+Materialized package checks use explicit JSON fixtures rather than implicit source state:
 
 ```text
 MaterializedPCCPack0.json
-  -> CheckMaterializedPCCPackShell0
-  -> ExtractMaterializedCore0
-  -> CheckMaterializedPhaseManifest0
-  -> CheckMaterializedArtefactInventory0
-  -> CheckMaterializedArtefactDeps0
-  -> CheckMaterializedProofRefs0
-  -> CheckMaterializedBounds0
-  -> CheckMaterializedNoHiddenMin0
-  -> CheckMaterializedImports0
+  -> CheckMaterializedShell0
   -> CheckMaterializedAggregate0
 ```
 
@@ -201,13 +186,12 @@ MaterializedPCCPack0.json
 
 The public release surface is checked by `CheckPublicEntryReleaseSurface0`.
 
-The freeze covers:
+The exact portions are:
 
 ```text
-index.mjs export names
+index.mjs public export names
 package.json exports keys and values
 package.json bin keys and values
-package.json script keys and values
 ```
 
-The checker rejects missing exports, changed exports, changed bins, missing baseline scripts, changed baseline script values, unrelated extra scripts, and unsafe proof-development script commands. The `proof:*` script namespace remains open for direct checker entrypoints while the proof is actively being developed.
+The script surface is intentionally extensible under the narrow `proof:*` namespace during proof development. Non-proof script additions and unsafe proof-script commands still reject.
