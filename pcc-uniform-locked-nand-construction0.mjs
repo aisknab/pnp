@@ -98,7 +98,7 @@ export function NormalizeLockedNANDInput0(circuit) {
   const source = clone.output;
   if (source?.kind === 'input') {
     const g0 = clone.gates.length;
-    clone.gates.push({ op: 'NAND', left: source, right: source });
+    clone.gates.push({ op: 'NAND', left: source, right: { kind: 'const', value: 1 } });
     clone.gates.push({ op: 'NAND', left: { kind: 'gate', index: g0 }, right: { kind: 'gate', index: g0 } });
     clone.output = { kind: 'gate', index: g0 + 1 };
     return { tag: 'accept', normalizedCircuit: clone, addedGateCount: 2, normalizationKind: 'input-double-nand-identity' };
