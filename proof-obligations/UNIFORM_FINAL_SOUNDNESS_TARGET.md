@@ -15,6 +15,12 @@ proof-obligations/UNIFORM_FINAL_SOUNDNESS_TARGET.json
 Checker:
 
 ```bash
+npm run proof:uniform-final-soundness-target
+```
+
+Direct checker command:
+
+```bash
 node pcc-uniform-final-soundness-target0.mjs --json
 ```
 
@@ -64,6 +70,16 @@ UFS-008-ReleaseTransitionFromProofOnly
 ```
 
 Each obligation is required for a real unrestricted final-soundness discharge. The target checker rejects any attempt to flip this manifest into theorem activation.
+
+## Proof-development script namespace
+
+The repository is actively developing the proof checker stack. `package.json` may add narrowly scoped proof-development scripts under the `proof:*` namespace. Such scripts must directly invoke a checker as:
+
+```text
+node pcc-<checker-name>0.mjs --json
+```
+
+This keeps proof work accessible without opening arbitrary package-script drift.
 
 ## Release discipline
 
