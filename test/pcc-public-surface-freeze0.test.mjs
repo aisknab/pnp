@@ -20,10 +20,12 @@ test('CheckPublicEntryReleaseSurface0 accepts the current public release surface
   assert.equal(out.checker, 'CheckPublicEntryReleaseSurface0');
   assert.equal(out.NF.kind, 'PublicEntryReleaseSurface0NF');
   assert.equal(out.NF.surfaceFrozen, true);
+  assert.equal(out.NF.packageScriptSurfaceExtensible, true);
   assert.deepEqual(out.NF.publicEntryExportKeys, PUBLIC_ENTRY_EXPORT_KEYS0);
   assert.deepEqual(out.NF.packageExportKeys, Object.keys(PUBLIC_PACKAGE_EXPORTS0).sort());
   assert.deepEqual(out.NF.packageBinKeys, Object.keys(PUBLIC_PACKAGE_BIN0).sort());
   assert.deepEqual(out.NF.packageScriptKeys, PUBLIC_PACKAGE_SCRIPT_KEYS0);
+  assert.deepEqual(out.NF.packageScriptExtensionKeys, ['proof:uniform-final-soundness-target']);
   assert.match(out.Digest.hex, /^[0-9a-f]{64}$/);
 });
 
@@ -138,6 +140,50 @@ test('CheckPublicEntryReleaseSurface0 rejects a changed package script command',
   assert.equal(out.Coord, 'CheckPublicEntryReleaseSurface0.packageScripts');
   assert.deepEqual(out.Path, ['package.json', 'scripts', 'materialized:public-status-roundtrip']);
   assert.equal(out.Witness.reason, 'public release surface mapping value changed');
+});
+
+test('CheckPublicEntryReleaseSurface0 accepts proof namespace checker scripts', async () => {
+  const pkg = await readPackageJson0();
+  pkg.scripts = {
+    ...pkg.scripts,
+    'proof:example-target': 'node pcc-example-target0.mjs --json',
+  };
+
+  const out = await CheckPublicEntryReleaseSurface0({
+    packageJsonOverride: pkg,
+  });
+
+  assert.equal(out.tag, 'accept');
+  assert.deepEqual(out.NF.packageScriptExtensionKeys, ['proof:example-target', 'proof:uniform-final-soundness-target']);
+});
+
+test('CheckPublicEntryReleaseSurface0 rejects non-proof extra scripts', async () => {
+  const pkg = await readPackageJson0();
+  pkg.scripts['site:build'] = 'node scripts/build-site.mjs';
+
+  const out = await CheckPublicEntryReleaseSurface0({
+    packageJsonOverride: pkg,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.Coord, 'CheckPublicEntryReleaseSurface0.packageScripts');
+  assert.deepEqual(out.Path, ['package.json', 'scripts']);
+  assert.equal(out.Witness.reason, 'public release surface keys changed');
+  assert.deepEqual(out.Witness.detail.extraKeys, ['proof:uniform-final-soundness-target', 'site:build']);
+});
+
+test('CheckPublicEntryReleaseSurface0 rejects unsafe proof script commands', async () => {
+  const pkg = await readPackageJson0();
+  pkg.scripts['proof:bad'] = 'node scripts/bad.mjs && node pcc-example0.mjs --json';
+
+  const out = await CheckPublicEntryReleaseSurface0({
+    packageJsonOverride: pkg,
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.Coord, 'CheckPublicEntryReleaseSurface0.packageScripts');
+  assert.deepEqual(out.Path, ['package.json', 'scripts', 'proof:bad']);
+  assert.equal(out.Witness.reason, 'public proof script extension has invalid command');
 });
 
 test('frozen package script key list matches frozen package script target map', () => {
