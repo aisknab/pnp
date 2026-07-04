@@ -1,0 +1,25 @@
+name: uniform-input-family
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  uniform-input-family:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Check uniform input family
+        run: node pcc-uniform-input-family0.mjs --json
+      - name: Run uniform input family tests
+        run: node --test audits/uniform-input-family0.test.mjs
+      - name: Upload uniform input family verdict
+        uses: actions/upload-artifact@v4
+        with:
+          name: uniform-input-family-latest-verdict
+          path: artifacts/uniform-input-family/latest-verdict.json
