@@ -44,7 +44,6 @@
     "complexity:ledger": "node pcc-complexity-ledger0.mjs --json",
     "audit:no-hidden-oracle": "node scripts/audit-no-hidden-oracle.mjs --json",
     "pnp:verify": "node scripts/pnp-verify-all.mjs --json",
-    "proof:uniform-final-soundness-target": "node pcc-uniform-final-soundness-target0.mjs --json",
     "examples:minimal": "node examples/minimal/run-all.mjs",
     "runall": "node ./bin/runall0.mjs",
     "smoke": "node ./bin/runall0.mjs",
