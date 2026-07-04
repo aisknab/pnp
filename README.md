@@ -197,3 +197,26 @@ package.json bin keys and values
 ```
 
 The script surface is intentionally extensible under the narrow `proof:*` namespace during proof development. Non-proof script additions and unsafe proof-script commands still reject.
+
+## Release audit public surface freeze summary
+
+The release audit exposes the public-surface check as a first-class summary, not only as a side effect.
+
+The summary includes:
+
+```text
+publicSurfaceFreezeDigest
+publicSurfaceFreezePublicEntryExportCount
+publicSurfaceFreezePackageExportCount
+publicSurfaceFreezePackageBinCount
+publicSurfaceFreezePackageScriptCount
+publicSurfaceFreezeSurfaceFrozen
+```
+
+When enabled, the release audit requires:
+
+```text
+surfaceFrozen = true
+```
+
+During active proof development, `surfaceFrozen = true` means exports and bin entries remain exact while package scripts may grow only through the constrained `proof:*` checker-script namespace.
