@@ -212,25 +212,3 @@ package.json script keys and values
 
 The checker rejects missing exports, changed exports, changed bins, missing baseline scripts, changed baseline script values, unrelated extra scripts, and unsafe proof-development script commands. The `proof:*` script namespace remains open for direct checker entrypoints while the proof is actively being developed.
 
-## Current release-boundary snippets
-
-These snippets are intentionally present for the README release-boundary checker while the proof-track checker set evolves:
-
-```text
-Internal materialized public status release gate
-pending  -> no public P = NP conclusion
-rejected -> no public P = NP conclusion
-accepted -> emits the conditional public conclusion
-Release audit hard-gate default
-Fast local mode keeps the public surface freeze enabled and skips only the heavier materialized public-status roundtrip gate.
-Release audit phase-order freeze
-Release audit README wording freeze
-Final certificate public-status gate
-finalCertificatePublicStatusGateDigest
-finalCertificatePublicStatusGateCertificateDigest
-finalCertificatePublicStatusGateFinalVerdictDigest
-finalCertificatePublicStatusGateAcceptRunDigest
-finalCertificatePublicStatusGatePccPackDigest
-canonical-byte roots
-Release audit README negative integration
-```
