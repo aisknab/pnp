@@ -211,4 +211,3 @@ package.json script keys and values
 ```
 
 The checker rejects missing exports, changed exports, changed bins, missing baseline scripts, changed baseline script values, unrelated extra scripts, and unsafe proof-development script commands. The `proof:*` script namespace remains open for direct checker entrypoints while the proof is actively being developed.
-
