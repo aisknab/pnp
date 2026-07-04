@@ -15,11 +15,6 @@ jobs:
         with:
           node-version: '20'
       - name: Check uniform final soundness target
-        run: node pcc-uniform-final-soundness-target0.mjs --json
+        run: npm run proof:uniform-final-soundness-target
       - name: Run uniform final soundness target tests
         run: node --test audits/uniform-final-soundness-target0.test.mjs
-      - name: Upload uniform final soundness target verdict
-        uses: actions/upload-artifact@v4
-        with:
-          name: uniform-final-soundness-target-latest-verdict
-          path: artifacts/uniform-final-soundness-target/latest-verdict.json
