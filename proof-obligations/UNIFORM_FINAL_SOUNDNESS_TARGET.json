@@ -1,0 +1,151 @@
+{
+  "kind": "PNPUniformFinalSoundnessTarget0",
+  "version": 0,
+  "coordinate": "PNP-UNIFORM-FINAL-SOUNDNESS-TARGET-2026-07-04-01",
+  "title": "Uniform final soundness theorem target",
+  "purpose": "Make the exact all-input-size theorem that must be discharged by code explicit, machine-readable, and checker-visible.",
+  "status": "uniform-final-soundness-target-ready",
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "uniformFinalSoundnessTargetReady": true,
+  "uniformFinalSoundnessProved": false,
+  "unrestrictedFinalSoundnessDischarged": false,
+  "finiteToUnboundedUniformityDischarged": false,
+  "boundedSmallModelsLiftedToUniformProof": false,
+  "publicTheoremEmissionAllowedByTarget": false,
+  "theoremToDischarge": {
+    "id": "UFS-Theorem-AllSATInputs",
+    "statement": "For every Boolean/NAND SAT input family instance phi, the repository provides a uniform polynomial-time construction and checker-accepted proof path such that locked NAND thresholding plus residual-band minimization decides SAT in polynomial time; therefore SAT is in P and P equals NP.",
+    "inputQuantifier": "all finite SAT/NAND inputs, uniformly by input size",
+    "requiredConclusion": "SAT in P, hence P = NP",
+    "mustNotUse": [
+      "finite-size extrapolation without a uniform schema",
+      "bounded small-model evidence as a theorem discharge",
+      "oracle access to SAT or exact minimization",
+      "digest equality as semantic equality",
+      "external review as a mathematical premise"
+    ]
+  },
+  "requiredUniformObligations": [
+    {
+      "id": "UFS-001-InputFamilyUniformity",
+      "statement": "The accepted proof object quantifies over every finite SAT/NAND input size and has a single uniform schema, not a finite list of checked instances.",
+      "currentStatus": "target-defined",
+      "requiredForDischarge": true,
+      "futureChecker": "pcc-uniform-input-family0.mjs",
+      "acceptanceCriterion": "Rejects bounded-only evidence and accepts only a schema with explicit all-size quantification and polynomial-time instantiation."
+    },
+    {
+      "id": "UFS-002-LockedNANDConstructionUniformPolynomial",
+      "statement": "The locked NAND construction W_phi and threshold B_phi are generated uniformly in polynomial time for every input phi.",
+      "currentStatus": "target-defined",
+      "requiredForDischarge": true,
+      "futureChecker": "pcc-uniform-locked-nand-construction0.mjs",
+      "acceptanceCriterion": "Checks construction totality, size bound, runtime bound, and deterministic source-to-instance mapping for all inputs."
+    },
+    {
+      "id": "UFS-003-ThresholdEquivalenceAllInputs",
+      "statement": "For every input phi, phi is satisfiable iff the locked NAND minimum-size threshold condition holds.",
+      "currentStatus": "target-defined",
+      "requiredForDischarge": true,
+      "futureChecker": "pcc-uniform-locked-nand-threshold0.mjs",
+      "acceptanceCriterion": "Checks the SAT-to-locked-NAND semantic equivalence theorem uniformly, not only by small-model truth tables."
+    },
+    {
+      "id": "UFS-004-ResidualBandMinimizerUniformPolynomial",
+      "statement": "PCCMin solves every locked NAND residual-band instance produced by the construction in polynomial time and returns the exact minimum.",
+      "currentStatus": "target-defined",
+      "requiredForDischarge": true,
+      "futureChecker": "pcc-uniform-residual-band-minimizer0.mjs",
+      "acceptanceCriterion": "Checks exactness, termination, polynomial iteration count, certificate-size bounds, and uniform package coverage."
+    },
+    {
+      "id": "UFS-005-ZeroSlackContradictionUniform",
+      "statement": "The ZeroSlack contradiction, selector universe, HN/BUD closure, and packet extraction cover all ranks and all generated inputs uniformly.",
+      "currentStatus": "target-defined",
+      "requiredForDischarge": true,
+      "futureChecker": "pcc-uniform-zeroslack-closure0.mjs",
+      "acceptanceCriterion": "Checks rank-parametric closure with no finite-rank extrapolation and no missing selector family."
+    },
+    {
+      "id": "UFS-006-NoHiddenOracleSemanticCompleteness",
+      "statement": "The executable proof path contains no hidden SAT oracle, exact-minimization oracle, unbounded search, or semantic shortcut.",
+      "currentStatus": "target-defined",
+      "requiredForDischarge": true,
+      "futureChecker": "pcc-no-hidden-oracle-semantic0.mjs",
+      "acceptanceCriterion": "Extends source-surface scanning to semantic/import/template coverage for the restricted checker language."
+    },
+    {
+      "id": "UFS-007-ComplexityConclusionUniform",
+      "statement": "The accepted uniform SAT decision procedure is polynomial, and the standard implication SAT in P => P = NP is checker-bound.",
+      "currentStatus": "target-defined",
+      "requiredForDischarge": true,
+      "futureChecker": "pcc-uniform-complexity-conclusion0.mjs",
+      "acceptanceCriterion": "Binds SAT NP-completeness, polynomial construction, polynomial minimization, and final P = NP conclusion as proof objects."
+    },
+    {
+      "id": "UFS-008-ReleaseTransitionFromProofOnly",
+      "statement": "Release.UnrestrictedFinalSoundness may be cleared only by accepted uniform proof checkers, not by external review, prose, or historical report wording.",
+      "currentStatus": "target-defined",
+      "requiredForDischarge": true,
+      "futureChecker": "pcc-unrestricted-final-soundness-release0.mjs",
+      "acceptanceCriterion": "Clears the release blocker only when UFS-001 through UFS-007 are all accepted and hash-bound."
+    }
+  ],
+  "linkedGaps": [
+    "GAP-001-UnrestrictedFinalSoundness",
+    "GAP-003-BoundedSmallModelsNotUniformProof",
+    "GAP-004-FiniteToUnboundedUniformity",
+    "GAP-005-NoHiddenOracleSemanticCompleteness"
+  ],
+  "linkedCurrentSurfaces": [
+    "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json",
+    "proof-obligations/GAP_LEDGER.json",
+    "release/RELEASE_LADDER.json",
+    "semantics/nand-direct-wire-spec.json",
+    "semantics/locked-nand-sat-small-models-config.json",
+    "complexity/COMPLEXITY_LEDGER.json",
+    "oracle-audit/NO_HIDDEN_ORACLE_AUDIT.json"
+  ],
+  "activationDiscipline": {
+    "externalReviewIsPremise": false,
+    "historicalReportProseIsPremise": false,
+    "boundedEvidenceDischargesTheorem": false,
+    "uniformCodeProofRequired": true,
+    "releaseTransitionRequiresFuturePR": true
+  },
+  "nextProofPRs": [
+    "proof: add uniform input-family checker",
+    "proof: add uniform locked-NAND construction checker",
+    "proof: lift locked-NAND threshold from small models to all inputs",
+    "proof: add uniform residual-band minimizer checker",
+    "proof: discharge unrestricted final soundness release transition"
+  ],
+  "evidenceSurfaces": [
+    "proof-obligations/UNIFORM_FINAL_SOUNDNESS_TARGET.json",
+    "proof-obligations/UNIFORM_FINAL_SOUNDNESS_TARGET.md",
+    "pcc-uniform-final-soundness-target0.mjs",
+    "audits/uniform-final-soundness-target0.test.mjs",
+    "proof-obligations/GAP_LEDGER.json",
+    "proof-obligations/FINITE_TO_UNBOUNDED_FAMILY_AUDIT.json"
+  ],
+  "nonClaims": [
+    "This target manifest does not discharge unrestricted final soundness.",
+    "This target manifest does not claim finite-to-unbounded uniformity is proved.",
+    "This target manifest does not activate public theorem emission.",
+    "This target manifest removes external review as a mathematical premise: the proof must be discharged by code-bound uniform obligations."
+  ],
+  "audit": {
+    "checker": "CheckUniformFinalSoundnessTarget0",
+    "script": "pcc-uniform-final-soundness-target0.mjs",
+    "test": "audits/uniform-final-soundness-target0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
