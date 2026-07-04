@@ -6,7 +6,13 @@ The checker writes its generated verdict here:
 artifacts/uniform-final-soundness-target/latest-verdict.json
 ```
 
-Run it with:
+Run it with the proof-development script:
+
+```bash
+npm run proof:uniform-final-soundness-target
+```
+
+or directly with:
 
 ```bash
 node pcc-uniform-final-soundness-target0.mjs --json
