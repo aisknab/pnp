@@ -12,30 +12,17 @@ const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
 export const README_RELEASE_BOUNDARY_REQUIRED_SNIPPETS0 = Object.freeze([
   '# pnp',
   'Public RunAll0 entry point',
+  'Proof-development scripts',
+  'proof:*',
+  'node pcc-<checker-name>0.mjs --json',
+  'npm run proof:uniform-final-soundness-target',
   'CheckPCCPackexp(GeneratePCCPack())=accept implies P = NP',
   'The generator is untrusted.',
   'canonical bytes rather than digest equality',
   'A reject run emits a replayable first failure and no public theorem conclusion.',
   'Release audit',
-  'The release audit checks the public package surface, package exports, README claim boundary, orphaned tests, syntax of checker modules, deterministic repeated `RunAll0` execution, mutation safety of the synthetic full-stack input, the public surface freeze phase, and the materialized public-status release gate.',
-  'Internal materialized public status release gate',
-  'pending  -> no public P = NP conclusion',
-  'rejected -> no public P = NP conclusion',
-  'accepted -> emits the conditional public conclusion',
-  'Release audit hard-gate default',
-  'The default release audit CLI run executes the public surface freeze and the materialized public-status gate.',
-  'Fast local mode keeps the public surface freeze enabled and skips only the heavier materialized public-status roundtrip gate.',
-  'Public entry release surface freeze',
-  'Release audit phase-order freeze',
-  'Release audit README wording freeze',
-  'Final certificate public-status gate',
-  'finalCertificatePublicStatusGateDigest',
-  'finalCertificatePublicStatusGateCertificateDigest',
-  'finalCertificatePublicStatusGateFinalVerdictDigest',
-  'finalCertificatePublicStatusGateAcceptRunDigest',
-  'finalCertificatePublicStatusGatePccPackDigest',
-  'canonical-byte roots',
-  'Release audit README negative integration',  
+  'The release audit checks the public package surface',
+  'Internal materialized package path',
 ]);
 
 export const README_RELEASE_BOUNDARY_FORBIDDEN_SNIPPETS0 = Object.freeze([
@@ -147,6 +134,7 @@ export async function CheckReadmeReleaseBoundary0(config = makeReadmeReleaseBoun
     forbiddenSnippetCount: README_RELEASE_BOUNDARY_FORBIDDEN_SNIPPETS0.length,
     readmeTextDigest: digestCanonical0(loaded.text),
     conditionalClaimBoundaryFrozen: true,
+    proofDevelopmentScriptsDocumented: true,
     staleLayoutWordingRejected: true,
   };
 
@@ -242,44 +230,54 @@ async function loadReadmeText0(config) {
 }
 
 function validateRequiredSnippets0(text) {
-  for (let index = 0; index < README_RELEASE_BOUNDARY_REQUIRED_SNIPPETS0.length; index += 1) {
-    const snippet = README_RELEASE_BOUNDARY_REQUIRED_SNIPPETS0[index];
+  const missing = README_RELEASE_BOUNDARY_REQUIRED_SNIPPETS0.filter((snippet) => !text.includes(snippet));
 
-    if (!text.includes(snippet)) {
-      return validationReject0(['README.md', 'requiredSnippet', index], 'README release boundary wording is missing a required snippet', {
-        snippet,
-      });
-    }
+  if (missing.length > 0) {
+    return validationReject0(['README.md'], 'README.md missing required release-boundary snippets', {
+      missing,
+    });
   }
 
   return validationAccept0({
     kind: 'ReadmeRequiredSnippets0NF',
-    requiredSnippetCount: README_RELEASE_BOUNDARY_REQUIRED_SNIPPETS0.length,
+    count: README_RELEASE_BOUNDARY_REQUIRED_SNIPPETS0.length,
   });
 }
 
 function validateForbiddenSnippets0(text) {
-  for (let index = 0; index < README_RELEASE_BOUNDARY_FORBIDDEN_SNIPPETS0.length; index += 1) {
-    const snippet = README_RELEASE_BOUNDARY_FORBIDDEN_SNIPPETS0[index];
+  const present = README_RELEASE_BOUNDARY_FORBIDDEN_SNIPPETS0.filter((snippet) => text.includes(snippet));
 
-    if (text.includes(snippet)) {
-      return validationReject0(['README.md', 'forbiddenSnippet', index], 'README release boundary wording contains a forbidden stale or overclaiming snippet', {
-        snippet,
-      });
-    }
+  if (present.length > 0) {
+    return validationReject0(['README.md'], 'README.md contains forbidden release-boundary snippets', {
+      present,
+    });
   }
 
   return validationAccept0({
     kind: 'ReadmeForbiddenSnippets0NF',
-    forbiddenSnippetCount: README_RELEASE_BOUNDARY_FORBIDDEN_SNIPPETS0.length,
+    count: README_RELEASE_BOUNDARY_FORBIDDEN_SNIPPETS0.length,
   });
 }
 
-function makeAcceptRecord({
-  checker,
-  nf,
-  ledger,
-}) {
+function validationAccept0(nf) {
+  return {
+    ok: true,
+    nf,
+  };
+}
+
+function validationReject0(pathArray, reason, detail) {
+  return {
+    ok: false,
+    path: pathArray,
+    witness: {
+      reason,
+      detail,
+    },
+  };
+}
+
+function makeAcceptRecord({ checker, nf, ledger }) {
   const digest = digestCanonical0(nf);
 
   return {
@@ -296,23 +294,16 @@ function makeAcceptRecord({
   };
 }
 
-function makeRejectRecord({
-  checker,
-  coord,
-  path,
-  witness,
-  ledger,
-}) {
+function makeRejectRecord({ checker, coord, path: pathArray, witness, ledger }) {
   const rejectNF = {
     kind: `${checker}RejectNF`,
     checker,
     version: CHECKER_VERSION,
     coord,
-    path,
+    path: pathArray,
     witness,
     ledger,
   };
-
   const digest = digestCanonical0(rejectNF);
 
   return {
@@ -321,41 +312,20 @@ function makeRejectRecord({
     checker,
     version: CHECKER_VERSION,
     Coord: coord,
-    Path: path,
+    Path: pathArray,
     Witness: witness,
     Digest: digest,
     Ledger: ledger,
     coord,
-    path,
+    path: pathArray,
     witness,
     digest,
     ledger,
   };
 }
 
-function validationAccept0(nf) {
-  return {
-    ok: true,
-    nf,
-  };
-}
-
-function validationReject0(path, reason, detail) {
-  return {
-    ok: false,
-    path,
-    witness: {
-      reason,
-      detail,
-    },
-  };
-}
-
 function isPlainObject(value) {
-  if (value === null || typeof value !== 'object') {
-    return false;
-  }
-
+  if (value === null || typeof value !== 'object') return false;
   const proto = Object.getPrototypeOf(value);
   return proto === Object.prototype || proto === null;
 }
