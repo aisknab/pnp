@@ -22,6 +22,10 @@ jobs:
         run: |
           npm run proof:uniform-input-family
           node --test audits/uniform-input-family0.test.mjs
+      - name: Uniform locked NAND construction
+        run: |
+          npm run proof:uniform-locked-nand-construction
+          node --test audits/uniform-locked-nand-construction0.test.mjs
       - name: Upload proof-development verdicts
         uses: actions/upload-artifact@v4
         if: always()
@@ -30,3 +34,4 @@ jobs:
           path: |
             artifacts/uniform-final-soundness-target/latest-verdict.json
             artifacts/uniform-input-family/latest-verdict.json
+            artifacts/uniform-locked-nand-construction/latest-verdict.json
