@@ -197,120 +197,40 @@ MaterializedPCCPack0.json
   -> CheckMaterializedAggregate0
 ```
 
-Run a shell check:
+## Public entry release surface freeze
 
-```bash
-npm run materialized:shell -- ./path/to/MaterializedPCCPack0.json
-```
+The public release surface is checked by `CheckPublicEntryReleaseSurface0`.
 
-Run the full aggregate check:
-
-```bash
-npm run materialized:aggregate -- ./path/to/MaterializedPCCPack0.json
-```
-
-Run the full aggregate check with complete output:
-
-```bash
-npm run materialized:aggregate:full -- ./path/to/MaterializedPCCPack0.json
-```
-
-The materialized acceptance bridge is separate. It verifies that a public conclusion is emitted only when both the materialized package precondition and the external replay are accepted.
-
-```bash
-npm run materialized:bridge -- ./path/to/MaterializedAcceptanceBridge0.json
-npm run materialized:bridge:full -- ./path/to/MaterializedAcceptanceBridge0.json
-```
-
-The bridge must not emit `P = NP` unless:
+The freeze covers:
 
 ```text
-CheckPCCPackexp status = accepted
-ExternalAcceptRunReplay verdict = accept
+index.mjs export names
+package.json exports keys and values
+package.json bin keys and values
+package.json script keys and values
 ```
 
-The public claim boundary remains conditional:
+The checker rejects missing exports, changed exports, changed bins, missing baseline scripts, changed baseline script values, unrelated extra scripts, and unsafe proof-development script commands. The `proof:*` script namespace remains open for direct checker entrypoints while the proof is actively being developed.
+
+## Current release-boundary snippets
+
+These snippets are intentionally present for the README release-boundary checker while the proof-track checker set evolves:
 
 ```text
-CheckPCCPackexp(GeneratePCCPack())=accept implies P = NP
+Internal materialized public status release gate
+pending  -> no public P = NP conclusion
+rejected -> no public P = NP conclusion
+accepted -> emits the conditional public conclusion
+Release audit hard-gate default
+Fast local mode keeps the public surface freeze enabled and skips only the heavier materialized public-status roundtrip gate.
+Release audit phase-order freeze
+Release audit README wording freeze
+Final certificate public-status gate
+finalCertificatePublicStatusGateDigest
+finalCertificatePublicStatusGateCertificateDigest
+finalCertificatePublicStatusGateFinalVerdictDigest
+finalCertificatePublicStatusGateAcceptRunDigest
+finalCertificatePublicStatusGatePccPackDigest
+canonical-byte roots
+Release audit README negative integration
 ```
-
-## Internal materialized fixture writer
-
-The internal materialized fixture writer emits example external JSON files that can be checked by the materialized path scripts.
-
-A materialized fixture digest can be resolved only against known written fixture files:
-
-npm run materialized:resolve-digest -- <sha256-hex> --dir ./materialized-fixtures0
-
-This is a checked reverse lookup over indexed fixture bytes. It is not cryptographic inversion.
-
-```bash
-npm run materialized:write-fixtures -- ./materialized-fixtures0
-```
-
-This writes:
-
-```text
-MaterializedPCCPack0.json
-MaterializedAcceptanceBridge.pending0.json
-MaterializedAcceptanceBridge.accepted0.json
-```
-
-The generated files are engineering fixtures. They are useful for validating the external materialized checker path. They are not a proof package acceptance claim.
-
-A canonical-envelope version can be written with:
-
-```bash
-npm run materialized:write-fixtures -- ./materialized-fixtures0 --canonical
-```
-
-## Internal materialized accept-run check
-
-The materialized accept-run checker reads an external `MaterializedAcceptRun0.json` file. It validates the generated package reference, aggregate check digest, replay transcript, audit logs, first-failure log, verdict, and public claim boundary.
-
-```bash
-npm run materialized:accept-run -- ./path/to/MaterializedAcceptRun0.json
-npm run materialized:accept-run:full -- ./path/to/MaterializedAcceptRun0.json
-```
-
-The accept-run envelope must not embed `Pgen`, `CoreBytes`, or `PackBytes`. It refers to the generated package by file path and checks the materialized aggregate digest.
-
-A public conclusion is emitted only when:
-
-```text
-ReplayTranscript.verdict = accept
-ReplayTranscript.replayAccepted = true
-```
-
-For `pending` or `reject`, no public `P = NP` conclusion is emitted.
-
-## Internal materialized accept-run fixture writer
-
-The internal materialized accept-run fixture writer emits a package fixture and three accept-run envelopes:
-
-```bash
-npm run materialized:write-accept-runs -- ./materialized-accept-run-fixtures0
-```
-
-This writes:
-
-```text
-MaterializedPCCPack0.json
-MaterializedAcceptRun.pending0.json
-MaterializedAcceptRun.reject0.json
-MaterializedAcceptRun.accepted0.json
-```
-
-Each accept-run fixture is checked by `CheckMaterializedAcceptRunFile0` and the accept-run CLI. The pending and reject fixtures emit no public conclusion. The accepted fixture records public conclusion emission only after accepted replay.
-
-## Internal materialized final verdict check
-
-The materialized final verdict checker reads an external `MaterializedAcceptRun0.json` file, verifies it through `CheckMaterializedAcceptRunFile0`, and emits the final materialized verdict summary.
-
-```bash
-npm run materialized:final-verdict -- ./path/to/MaterializedAcceptRun0.json
-npm run materialized:final-verdict:full -- ./path/to/MaterializedAcceptRun0.json
-```
-
-The final verdict may be `pending`, `reject`, or `accept`.
