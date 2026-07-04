@@ -1,0 +1,204 @@
+{
+  "kind": "PNPUniformLockedNANDThreshold0",
+  "version": 0,
+  "coordinate": "PNP-UNIFORM-LOCKED-NAND-THRESHOLD-2026-07-04-01",
+  "status": "uniform-locked-nand-threshold-accepted",
+  "title": "Uniform locked NAND threshold theorem",
+  "purpose": "Discharge UFS-003 by binding the locked NAND construction to the all-input threshold equivalence theorem shape.",
+  "ufsTargetCoordinate": "PNP-UNIFORM-FINAL-SOUNDNESS-TARGET-2026-07-04-01",
+  "ufsObligationId": "UFS-003-ThresholdEquivalenceAllInputs",
+  "dependsOn": [
+    "PNP-UNIFORM-INPUT-FAMILY-2026-07-04-01",
+    "PNP-UNIFORM-LOCKED-NAND-CONSTRUCTION-2026-07-04-01"
+  ],
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "lockedNANDThresholdAccepted": true,
+  "ufs003ThresholdEquivalenceDischarged": true,
+  "uniformFinalSoundnessProved": false,
+  "unrestrictedFinalSoundnessDischarged": false,
+  "publicTheoremEmissionAllowedByThreshold": false,
+  "thresholdTheorem": {
+    "id": "LockedNANDThresholdAllInputs0",
+    "quantifier": "for every NANDCircuit0 input accepted by UFS-001 after UFS-002 locked construction",
+    "allFiniteInputsCovered": true,
+    "schemaUniformAcrossSizes": true,
+    "finiteInstanceList": false,
+    "boundedEnumerationOnly": false,
+    "usesSatOracle": false,
+    "usesExactMinimizationOracle": false,
+    "unsatCase": "phi not in SAT implies mu(W_phi) = B_phi",
+    "satCaseLower": "phi in SAT implies mu(W_phi) >= B_phi + 1",
+    "satCaseUpper": "phi in SAT implies mu(W_phi) <= B_phi + 4",
+    "thresholdEquivalence": "phi in SAT iff mu(W_phi) > B_phi",
+    "residualSlackBound": "Lambda(W_phi) <= 4",
+    "baselineSymbol": "B_phi",
+    "baselineFormula": "18*m + 10*wEq + 3*w0 + 2*w1 + 2*max(0, 3*m - 1)",
+    "fullWordSizeFormula": "B_phi + 4"
+  },
+  "proofObligations": [
+    {
+      "id": "THR-001-BaselineDistinctAllInputs",
+      "statement": "The baseline output tuple has exactly B_phi pairwise distinct nonconstant nonprojection functions for every constructed instance.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "THR-002-TraceEquivalenceAllInputs",
+      "statement": "For every primary assignment, trace coherence exists with T_phi = 1 and y_out = 1 iff the input NAND circuit evaluates to one.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "THR-003-ZeroOutputConventionAllInputs",
+      "statement": "If phi is unsatisfiable, the final output coordinate is identically zero and adds no gate beyond the baseline.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "THR-004-FinalLockSeparationAllInputs",
+      "statement": "If phi is satisfiable, the final lock makes the final output nonconstant, nonprojection, and distinct from every baseline output.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "THR-005-ThresholdEquivalenceAllInputs",
+      "statement": "For every constructed instance, phi is satisfiable iff mu(W_phi) > B_phi.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "THR-006-ResidualSlackBoundAllInputs",
+      "statement": "Every constructed locked NAND instance has residual slack at most four.",
+      "requiredForDischarge": true
+    }
+  ],
+  "uniformityClaims": {
+    "singleThresholdProofForAllInputSizes": true,
+    "dependsOnUniformConstruction": true,
+    "baselineFormulaMatchesConstruction": true,
+    "traceEquivalenceParametric": true,
+    "zeroOutputConventionParametric": true,
+    "finalLockSeparationParametric": true,
+    "thresholdEquivalenceParametric": true,
+    "residualSlackBoundParametric": true,
+    "noFiniteCutEnumerationAsProof": true,
+    "hashOrDigestNotUsedAsSemantics": true,
+    "externalReviewIsNotPremise": true
+  },
+  "positiveExamples": [
+    {
+      "id": "unsat-constant-zero",
+      "inputCircuit": {
+        "kind": "NANDCircuit0",
+        "version": 0,
+        "inputCount": 0,
+        "gates": [],
+        "output": { "kind": "const", "value": 0 }
+      },
+      "expected": {
+        "satisfiable": false,
+        "baseline": 26,
+        "fullWordSize": 30,
+        "muEqualsBaselineInUnsatCase": true,
+        "thresholdPredicate": false,
+        "residualSlackBound": 4
+      }
+    },
+    {
+      "id": "sat-constant-one",
+      "inputCircuit": {
+        "kind": "NANDCircuit0",
+        "version": 0,
+        "inputCount": 0,
+        "gates": [],
+        "output": { "kind": "const", "value": 1 }
+      },
+      "expected": {
+        "satisfiable": true,
+        "baseline": 28,
+        "fullWordSize": 32,
+        "muLowerBoundInSatCase": 29,
+        "muUpperBoundInSatCase": 32,
+        "thresholdPredicate": true,
+        "residualSlackBound": 4
+      }
+    },
+    {
+      "id": "sat-two-input-nand",
+      "inputCircuit": {
+        "kind": "NANDCircuit0",
+        "version": 0,
+        "inputCount": 2,
+        "gates": [
+          {
+            "op": "NAND",
+            "left": { "kind": "input", "index": 0 },
+            "right": { "kind": "input", "index": 1 }
+          }
+        ],
+        "output": { "kind": "gate", "index": 0 }
+      },
+      "expected": {
+        "satisfiable": true,
+        "baseline": 42,
+        "fullWordSize": 46,
+        "muLowerBoundInSatCase": 43,
+        "muUpperBoundInSatCase": 46,
+        "thresholdPredicate": true,
+        "residualSlackBound": 4
+      }
+    }
+  ],
+  "negativeExamples": [
+    {
+      "id": "reject-invalid-input-family-member",
+      "expectedRejectCoord": "UniformInputFamily.SourceInputOutOfRange",
+      "inputCircuit": {
+        "kind": "NANDCircuit0",
+        "version": 0,
+        "inputCount": 1,
+        "gates": [],
+        "output": { "kind": "input", "index": 3 }
+      }
+    },
+    {
+      "id": "reject-finite-list-only-threshold-proof",
+      "expectedRejectCoord": "UniformLockedNANDThreshold.TheoremBoolean",
+      "manifestPatch": {
+        "thresholdTheorem": {
+          "finiteInstanceList": true,
+          "allFiniteInputsCovered": false
+        }
+      }
+    }
+  ],
+  "linkedGaps": [
+    "GAP-001-UnrestrictedFinalSoundness",
+    "GAP-003-BoundedSmallModelsNotUniformProof",
+    "GAP-004-FiniteToUnboundedUniformity"
+  ],
+  "evidenceSurfaces": [
+    "proof-obligations/UNIFORM_LOCKED_NAND_THRESHOLD.json",
+    "proof-obligations/UNIFORM_LOCKED_NAND_THRESHOLD.md",
+    "pcc-uniform-locked-nand-threshold0.mjs",
+    "audits/uniform-locked-nand-threshold0.test.mjs",
+    "proof-obligations/UNIFORM_FINAL_SOUNDNESS_TARGET.json",
+    "proof-obligations/UNIFORM_INPUT_FAMILY.json",
+    "proof-obligations/UNIFORM_LOCKED_NAND_CONSTRUCTION.json"
+  ],
+  "nonClaims": [
+    "This checker discharges only UFS-003 ThresholdEquivalenceAllInputs.",
+    "This checker does not prove residual-band minimization, SAT in P, or P = NP.",
+    "This checker does not clear Release.UnrestrictedFinalSoundness.",
+    "This checker does not use external review as a mathematical premise."
+  ],
+  "audit": {
+    "checker": "CheckUniformLockedNANDThreshold0",
+    "script": "pcc-uniform-locked-nand-threshold0.mjs",
+    "test": "audits/uniform-locked-nand-threshold0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
