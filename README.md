@@ -135,6 +135,7 @@ npm run proof:uniform-residual-band-minimizer
 npm run proof:uniform-zeroslack-closure
 npm run proof:no-hidden-oracle-semantic
 npm run proof:uniform-complexity-conclusion
+npm run proof:unrestricted-final-soundness-release
 ```
 
 ## Public RunAll0 entry point
