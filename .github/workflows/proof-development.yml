@@ -38,6 +38,10 @@ jobs:
         run: |
           npm run proof:uniform-zeroslack-closure
           node --test audits/uniform-zeroslack-closure0.test.mjs
+      - name: Semantic no-hidden-oracle
+        run: |
+          npm run proof:no-hidden-oracle-semantic
+          node --test audits/no-hidden-oracle-semantic0.test.mjs
       - name: Upload proof-development verdicts
         uses: actions/upload-artifact@v4
         if: always()
@@ -50,3 +54,4 @@ jobs:
             artifacts/uniform-locked-nand-threshold/latest-verdict.json
             artifacts/uniform-residual-band-minimizer/latest-verdict.json
             artifacts/uniform-zeroslack-closure/latest-verdict.json
+            artifacts/no-hidden-oracle-semantic/latest-verdict.json
