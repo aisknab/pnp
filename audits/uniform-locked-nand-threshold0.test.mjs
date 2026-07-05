@@ -41,6 +41,7 @@ test('NAND evaluator and example threshold helper classify constant-zero as unsa
   assert.equal(out.fullWordSize, 30);
   assert.equal(out.muEqualsBaselineInUnsatCase, true);
   assert.equal(out.thresholdPredicate, false);
+  assert.equal(out.residualSlackBound, 4);
 });
 
 test('NAND evaluator and example threshold helper classify constant-one as sat', () => {
@@ -53,6 +54,7 @@ test('NAND evaluator and example threshold helper classify constant-one as sat',
   assert.equal(out.muLowerBoundInSatCase, 29);
   assert.equal(out.muUpperBoundInSatCase, 32);
   assert.equal(out.thresholdPredicate, true);
+  assert.equal(out.residualSlackBound, 4);
 });
 
 test('NAND evaluator and example threshold helper classify two-input NAND as sat', () => {
@@ -70,6 +72,7 @@ test('NAND evaluator and example threshold helper classify two-input NAND as sat
   assert.equal(out.satisfiable, true);
   assert.equal(out.baseline, 42);
   assert.equal(out.fullWordSize, 46);
+  assert.equal(out.residualSlackBound, 4);
 });
 
 test('uniform threshold checker rejects finite-list-only theorem overclaim', async () => {
