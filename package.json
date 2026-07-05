@@ -44,6 +44,7 @@
     "complexity:ledger": "node pcc-complexity-ledger0.mjs --json",
     "audit:no-hidden-oracle": "node scripts/audit-no-hidden-oracle.mjs --json",
     "pnp:verify": "node scripts/pnp-verify-all.mjs --json",
+    "proof:activated-pnp-status": "node pcc-activated-pnp-status0.mjs --json",
     "proof:uniform-final-soundness-target": "node pcc-uniform-final-soundness-target0.mjs --json",
     "proof:uniform-input-family": "node pcc-uniform-input-family0.mjs --json",
     "proof:uniform-locked-nand-construction": "node pcc-uniform-locked-nand-construction0.mjs --json",

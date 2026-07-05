@@ -54,6 +54,10 @@ jobs:
         run: |
           npm run proof:public-theorem-activation
           node --test audits/public-theorem-activation0.test.mjs
+      - name: Activated PNP status
+        run: |
+          npm run proof:activated-pnp-status
+          node --test audits/activated-pnp-status0.test.mjs
       - name: Upload proof-development verdicts
         uses: actions/upload-artifact@v4
         if: always()
@@ -70,3 +74,4 @@ jobs:
             artifacts/uniform-complexity-conclusion/latest-verdict.json
             artifacts/unrestricted-final-soundness-release/latest-verdict.json
             artifacts/public-theorem-activation/latest-verdict.json
+            artifacts/activated-pnp-status/latest-verdict.json
