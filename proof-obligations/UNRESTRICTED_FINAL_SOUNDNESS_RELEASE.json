@@ -1,0 +1,179 @@
+{
+  "kind": "PNPUnrestrictedFinalSoundnessRelease0",
+  "version": 0,
+  "coordinate": "PNP-UNRESTRICTED-FINAL-SOUNDNESS-RELEASE-2026-07-05-01",
+  "status": "unrestricted-final-soundness-release-accepted",
+  "title": "Unrestricted final soundness release transition",
+  "purpose": "Discharge UFS-008 by clearing Release.UnrestrictedFinalSoundness from proof-only accepted UFS dependencies, without using external review, historical report prose, or public-site wording as a mathematical premise.",
+  "ufsTargetCoordinate": "PNP-UNIFORM-FINAL-SOUNDNESS-TARGET-2026-07-04-01",
+  "ufsObligationId": "UFS-008-ReleaseTransitionFromProofOnly",
+  "dependsOn": [
+    "PNP-UNIFORM-FINAL-SOUNDNESS-TARGET-2026-07-04-01",
+    "PNP-UNIFORM-INPUT-FAMILY-2026-07-04-01",
+    "PNP-UNIFORM-LOCKED-NAND-CONSTRUCTION-2026-07-04-01",
+    "PNP-UNIFORM-LOCKED-NAND-THRESHOLD-2026-07-04-01",
+    "PNP-UNIFORM-RESIDUAL-BAND-MINIMIZER-2026-07-05-01",
+    "PNP-UNIFORM-ZEROSLACK-CLOSURE-2026-07-05-01",
+    "PNP-UNIFORM-NO-HIDDEN-ORACLE-SEMANTIC-2026-07-05-01",
+    "PNP-UNIFORM-COMPLEXITY-CONCLUSION-2026-07-05-01"
+  ],
+  "claimBoundaryBefore": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "claimBoundaryAfterProofTransition": {
+    "publicTheoremEmissionAllowed": false,
+    "internalFinalTheoremReady": true,
+    "activeFinalNodeIds": [
+      "UFS-001-InputFamilyUniformity",
+      "UFS-002-LockedNANDConstructionUniformPolynomial",
+      "UFS-003-ThresholdEquivalenceAllInputs",
+      "UFS-004-ResidualBandMinimizerUniformPolynomial",
+      "UFS-005-ZeroSlackContradictionUniform",
+      "UFS-006-NoHiddenOracleSemanticCompleteness",
+      "UFS-007-ComplexityConclusionUniform",
+      "UFS-008-ReleaseTransitionFromProofOnly"
+    ],
+    "clearedBlockers": [
+      "Release.UnrestrictedFinalSoundness"
+    ],
+    "remainingBlockers": [
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "releaseTransitionAccepted": true,
+  "ufs008ReleaseTransitionDischarged": true,
+  "releaseUnrestrictedFinalSoundnessCleared": true,
+  "unrestrictedFinalSoundnessDischarged": true,
+  "uniformFinalSoundnessProved": true,
+  "internalFinalTheoremReady": true,
+  "satInPConclusionAccepted": true,
+  "pEqualsNPConclusionAccepted": true,
+  "publicTheoremEmissionAllowedByRelease": false,
+  "externalReviewIsMathematicalPremise": false,
+  "historicalReportProseIsMathematicalPremise": false,
+  "releaseTransition": {
+    "id": "ProofOnlyUnrestrictedFinalSoundnessRelease0",
+    "allUFSDependenciesAccepted": true,
+    "allUFSDependencyCoordinatesHashBound": true,
+    "ufs001InputFamilyUniformityAccepted": true,
+    "ufs002LockedNANDConstructionAccepted": true,
+    "ufs003ThresholdEquivalenceAccepted": true,
+    "ufs004ResidualBandMinimizerAccepted": true,
+    "ufs005ZeroSlackClosureAccepted": true,
+    "ufs006NoHiddenOracleSemanticAccepted": true,
+    "ufs007ComplexityConclusionAccepted": true,
+    "clearsReleaseUnrestrictedFinalSoundness": true,
+    "clearsExternalReviewAcceptance": false,
+    "activatesPublicTheoremEmission": false,
+    "usesExternalReviewAsPremise": false,
+    "usesHistoricalReportProseAsPremise": false,
+    "usesPublicSiteWordingAsPremise": false,
+    "usesBoundedSmallModelsAsUnboundedProof": false,
+    "transitionRule": "Release.UnrestrictedFinalSoundness is cleared exactly when UFS-001 through UFS-007 accept, their checker outputs are hash-bound, and UFS-008 validates that the transition uses proof objects only. External review remains a non-mathematical publication/audit layer unless a later public-theorem activation gate removes it from release policy."
+  },
+  "proofObligations": [
+    {
+      "id": "REL-001-AllUFSDependenciesAccepted",
+      "statement": "UFS-001 through UFS-007 all accept from the current checkout.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "REL-002-DependencyVerdictsHashBound",
+      "statement": "Each accepted UFS dependency output is represented in the UFS-008 release digest ledger.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "REL-003-ComplexityConclusionBound",
+      "statement": "UFS-007 accepts SAT in P and the standard SAT NP-completeness implication to P = NP.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "REL-004-NoExternalReviewPremise",
+      "statement": "The transition does not use external review, historical report prose, public-site wording, or social acceptance as a mathematical premise.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "REL-005-ClearUnrestrictedFinalSoundnessOnly",
+      "statement": "The transition clears Release.UnrestrictedFinalSoundness and records the remaining publication/review blocker separately.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "REL-006-NoPrematurePublicTheoremEmission",
+      "statement": "This release transition does not itself activate public theorem emission; a later public activation gate must update that policy explicitly.",
+      "requiredForDischarge": true
+    }
+  ],
+  "uniformityClaims": {
+    "proofOnlyReleaseTransition": true,
+    "allAcceptedDependenciesHashBound": true,
+    "unrestrictedFinalSoundnessCleared": true,
+    "externalReviewNotMathematicalPremise": true,
+    "historicalReportProseNotMathematicalPremise": true,
+    "boundedEvidenceNotGeneralizedSilently": true,
+    "publicTheoremEmissionStillGated": true,
+    "releasePolicyTransitionExplicit": true
+  },
+  "positiveExamples": [
+    {
+      "id": "accepted-ufs-chain-clears-release-blocker",
+      "input": {
+        "allUFSDependenciesAccepted": true,
+        "allUFSDependencyCoordinatesHashBound": true,
+        "ufs007ComplexityConclusionAccepted": true,
+        "usesExternalReviewAsPremise": false,
+        "usesHistoricalReportProseAsPremise": false,
+        "activatesPublicTheoremEmission": false
+      },
+      "expected": {
+        "releaseUnrestrictedFinalSoundnessCleared": true,
+        "unrestrictedFinalSoundnessDischarged": true,
+        "internalFinalTheoremReady": true,
+        "publicTheoremEmissionAllowed": false
+      }
+    }
+  ],
+  "negativeExamples": [
+    {
+      "id": "reject-external-review-premise",
+      "expectedRejectCoord": "UnrestrictedFinalSoundnessRelease.TransitionBoolean",
+      "manifestPatch": {
+        "releaseTransition": {
+          "usesExternalReviewAsPremise": true
+        }
+      }
+    },
+    {
+      "id": "reject-premature-public-theorem-emission",
+      "expectedRejectCoord": "UnrestrictedFinalSoundnessRelease.BooleanField",
+      "manifestPatch": {
+        "publicTheoremEmissionAllowedByRelease": true
+      }
+    }
+  ],
+  "evidenceSurfaces": [
+    "proof-obligations/UNRESTRICTED_FINAL_SOUNDNESS_RELEASE.json",
+    "proof-obligations/UNRESTRICTED_FINAL_SOUNDNESS_RELEASE.md",
+    "pcc-unrestricted-final-soundness-release0.mjs",
+    "audits/unrestricted-final-soundness-release0.test.mjs",
+    "proof-obligations/UNIFORM_FINAL_SOUNDNESS_TARGET.json",
+    "proof-obligations/UNIFORM_COMPLEXITY_CONCLUSION.json"
+  ],
+  "nonClaims": [
+    "This checker clears Release.UnrestrictedFinalSoundness from proof objects only.",
+    "This checker does not use external review as a mathematical premise.",
+    "This checker does not mutate the historical sealed report.",
+    "This checker does not by itself activate public theorem emission; that remains an explicit later policy gate."
+  ],
+  "audit": {
+    "checker": "CheckUnrestrictedFinalSoundnessRelease0",
+    "script": "pcc-unrestricted-final-soundness-release0.mjs",
+    "test": "audits/unrestricted-final-soundness-release0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
