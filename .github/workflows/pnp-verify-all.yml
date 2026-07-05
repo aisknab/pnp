@@ -18,9 +18,19 @@ jobs:
         with:
           python-version: '3.12'
       - name: Run one-command PNP verifier
-        run: npm run pnp:verify
-      - name: Upload PNP verify-all verdict
+        run: |
+          set +e
+          npm run pnp:verify > pnp-verify-all.stdout.log 2> pnp-verify-all.stderr.log
+          status=$?
+          cat pnp-verify-all.stdout.log
+          cat pnp-verify-all.stderr.log >&2
+          exit "$status"
+      - name: Upload PNP verify-all diagnostics
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: pnp-verify-all-latest-verdict
-          path: artifacts/pnp-verify-all/latest-verdict.json
+          path: |
+            artifacts/pnp-verify-all/latest-verdict.json
+            pnp-verify-all.stdout.log
+            pnp-verify-all.stderr.log
