@@ -132,6 +132,9 @@ npm run proof:uniform-input-family
 npm run proof:uniform-locked-nand-construction
 npm run proof:uniform-locked-nand-threshold
 npm run proof:uniform-residual-band-minimizer
+npm run proof:uniform-zeroslack-closure
+npm run proof:no-hidden-oracle-semantic
+npm run proof:uniform-complexity-conclusion
 ```
 
 ## Public RunAll0 entry point
