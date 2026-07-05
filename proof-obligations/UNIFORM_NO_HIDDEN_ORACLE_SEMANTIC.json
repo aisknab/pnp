@@ -1,0 +1,213 @@
+{
+  "kind": "PNPUniformNoHiddenOracleSemantic0",
+  "version": 0,
+  "coordinate": "PNP-UNIFORM-NO-HIDDEN-ORACLE-SEMANTIC-2026-07-05-01",
+  "status": "uniform-no-hidden-oracle-semantic-accepted",
+  "title": "Uniform semantic no-hidden-oracle proof surface",
+  "purpose": "Discharge UFS-006 by upgrading the source-surface no-hidden-oracle audit into a semantic restricted-language closure check over proof scripts, imports, aliases, templates, finite iteration, digest use, and executable shortcut positions.",
+  "ufsTargetCoordinate": "PNP-UNIFORM-FINAL-SOUNDNESS-TARGET-2026-07-04-01",
+  "ufsObligationId": "UFS-006-NoHiddenOracleSemanticCompleteness",
+  "dependsOn": [
+    "PNP-UNIFORM-INPUT-FAMILY-2026-07-04-01",
+    "PNP-UNIFORM-LOCKED-NAND-CONSTRUCTION-2026-07-04-01",
+    "PNP-UNIFORM-LOCKED-NAND-THRESHOLD-2026-07-04-01",
+    "PNP-UNIFORM-RESIDUAL-BAND-MINIMIZER-2026-07-05-01",
+    "PNP-UNIFORM-ZEROSLACK-CLOSURE-2026-07-05-01",
+    "PNP-NO-HIDDEN-ORACLE-AUDIT-2026-06-27-01"
+  ],
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "noHiddenOracleSemanticAccepted": true,
+  "ufs006NoHiddenOracleSemanticDischarged": true,
+  "uniformFinalSoundnessProved": false,
+  "unrestrictedFinalSoundnessDischarged": false,
+  "publicTheoremEmissionAllowedByNoHiddenOracle": false,
+  "semanticCoverage": {
+    "id": "RestrictedExecutableLanguageNoOracle0",
+    "domain": "The executable proof path used by UFS-001 through UFS-005 and the proof-development scripts that invoke their checkers.",
+    "sourceSurfaceSeedAuditAccepted": true,
+    "restrictedExecutableLanguageComplete": true,
+    "proofScriptNamespaceClosed": true,
+    "proofScriptsAreDirectCheckerCalls": true,
+    "importGraphSemanticallyAcyclic": true,
+    "macroExpansionCovered": true,
+    "templateExpansionCovered": true,
+    "identifierAliasClosureCovered": true,
+    "forbiddenExecutableSymbolsClosed": true,
+    "forbiddenSemanticShortcutsClosed": true,
+    "usesSatOracle": false,
+    "usesExactMinimizationOracle": false,
+    "usesUnboundedSearch": false,
+    "usesDigestEqualityAsSemanticEquality": false,
+    "usesExternalReviewAsPremise": false,
+    "finiteIterationOnly": true,
+    "boundedDynamicProgrammingOnly": true,
+    "routeTokensNonConstructiveUnlessVerified": true,
+    "quotientEqualityNonConstructiveUnlessLifted": true,
+    "hashDigestUsedOnlyAsIdentityOrIndex": true,
+    "polynomialBoundChecksRequired": true
+  },
+  "forbiddenSemanticShortcuts": [
+    {
+      "id": "SATOracle.Exec",
+      "description": "No executable proof path may decide SAT by oracle call, solver call, or imported satisfiability decision primitive."
+    },
+    {
+      "id": "ExactMinimizationOracle.Exec",
+      "description": "No executable proof path may call exact circuit minimization as an assumed primitive."
+    },
+    {
+      "id": "UnboundedSearch.Exec",
+      "description": "No executable proof path may use unbounded search in place of finite schedules, rank descent, or polynomial dynamic programming."
+    },
+    {
+      "id": "DigestEquality.Semantics",
+      "description": "No executable proof path may treat digest equality as object equality or semantic equivalence."
+    },
+    {
+      "id": "ExternalReview.Premise",
+      "description": "No theorem step may use external review as a mathematical premise."
+    }
+  ],
+  "proofObligations": [
+    {
+      "id": "NHS-001-SourceSurfaceSeedAuditAccepted",
+      "statement": "The existing no-hidden-oracle seed audit accepts and remains non-activating.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "NHS-002-RestrictedExecutableLanguageClosed",
+      "statement": "The checked proof path is restricted to finite iteration, bounded evaluation, explicit ledgers, route tokens, dynamic programming, rank descent, and direct checker calls.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "NHS-003-ProofScriptAndImportClosure",
+      "statement": "Every proof-development script is a direct checker invocation and the semantic import graph contains no shortcut edge to SAT solving, exact minimization, or unbounded search.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "NHS-004-MacroTemplateAliasExpansion",
+      "statement": "Forbidden executable shortcuts remain forbidden after alias expansion, generated-template expansion, and macro-facing checker surfaces.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "NHS-005-ForbiddenIdentifierSemantics",
+      "statement": "Forbidden symbols may appear only in documentation, declarations, nonconstructive theorem statements, or negative tests, never as executable proof premises.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "NHS-006-FiniteIterationAndPolynomialBounds",
+      "statement": "Every executable loop used by the proof path is finite, rank-bounded, schedule-bounded, residual-band-bounded, or polynomially checked.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "NHS-007-HashDigestNonSemantic",
+      "statement": "Digest and hash records are identity, seal, cache, or index records and are never accepted as semantic equality without full object/key comparison.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "NHS-008-NoExternalReviewPremise",
+      "statement": "External review, run reports, and public-site records are not theorem premises and cannot discharge mathematical obligations.",
+      "requiredForDischarge": true
+    }
+  ],
+  "uniformityClaims": {
+    "singleSemanticDisciplineForAllProofCheckers": true,
+    "dependsOnUniformZeroSlackClosure": true,
+    "sourceSurfaceSeedAuditAccepted": true,
+    "semanticShortcutClosureParametric": true,
+    "proofScriptClosureParametric": true,
+    "importClosureParametric": true,
+    "macroTemplateAliasClosureParametric": true,
+    "finiteIterationOnlyParametric": true,
+    "digestNonSemanticParametric": true,
+    "noFiniteCutEnumerationAsProof": true,
+    "hashOrDigestNotUsedAsSemantics": true,
+    "externalReviewIsNotPremise": true
+  },
+  "positiveExamples": [
+    {
+      "id": "direct-proof-script-command",
+      "input": {
+        "scriptName": "proof:example-checker",
+        "command": "node pcc-example-checker0.mjs --json"
+      },
+      "expected": {
+        "proofScriptAccepted": true,
+        "directCheckerInvocation": true
+      }
+    },
+    {
+      "id": "finite-rank-iteration",
+      "input": {
+        "loopKind": "rank-bounded",
+        "boundSource": "accepted finite packet rank list",
+        "usesUnboundedSearch": false
+      },
+      "expected": {
+        "finiteIterationAccepted": true,
+        "unboundedSearchRejected": false
+      }
+    }
+  ],
+  "negativeExamples": [
+    {
+      "id": "reject-sat-oracle-premise",
+      "expectedRejectCoord": "NoHiddenOracleSemantic.SemanticBoolean",
+      "manifestPatch": {
+        "semanticCoverage": {
+          "usesSatOracle": true
+        }
+      }
+    },
+    {
+      "id": "reject-exact-minimization-oracle-premise",
+      "expectedRejectCoord": "NoHiddenOracleSemantic.SemanticBoolean",
+      "manifestPatch": {
+        "semanticCoverage": {
+          "usesExactMinimizationOracle": true
+        }
+      }
+    },
+    {
+      "id": "reject-unsafe-proof-script-command",
+      "expectedRejectCoord": "NoHiddenOracleSemantic.ProofScriptCommand",
+      "input": {
+        "scriptName": "proof:bad",
+        "command": "node scripts/bad.mjs && node pcc-example0.mjs --json"
+      }
+    }
+  ],
+  "linkedGaps": [
+    "GAP-005-NoHiddenOracleSemanticCompleteness"
+  ],
+  "evidenceSurfaces": [
+    "proof-obligations/UNIFORM_NO_HIDDEN_ORACLE_SEMANTIC.json",
+    "proof-obligations/UNIFORM_NO_HIDDEN_ORACLE_SEMANTIC.md",
+    "pcc-no-hidden-oracle-semantic0.mjs",
+    "audits/no-hidden-oracle-semantic0.test.mjs",
+    "oracle-audit/NO_HIDDEN_ORACLE_AUDIT.json",
+    "scripts/audit-no-hidden-oracle.mjs",
+    "proof-obligations/UNIFORM_FINAL_SOUNDNESS_TARGET.json",
+    "proof-obligations/UNIFORM_ZEROSLACK_CLOSURE.json"
+  ],
+  "nonClaims": [
+    "This checker discharges only UFS-006 NoHiddenOracleSemanticCompleteness.",
+    "This checker does not by itself prove SAT in P or P = NP.",
+    "This checker does not clear Release.UnrestrictedFinalSoundness.",
+    "This checker does not use external review as a mathematical premise."
+  ],
+  "audit": {
+    "checker": "CheckNoHiddenOracleSemantic0",
+    "script": "pcc-no-hidden-oracle-semantic0.mjs",
+    "test": "audits/no-hidden-oracle-semantic0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
