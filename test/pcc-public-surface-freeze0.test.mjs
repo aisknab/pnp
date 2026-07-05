@@ -18,6 +18,7 @@ const CURRENT_PROOF_SCRIPT_EXTENSIONS0 = [
   'proof:uniform-input-family',
   'proof:uniform-locked-nand-construction',
   'proof:uniform-locked-nand-threshold',
+  'proof:uniform-residual-band-minimizer',
 ];
 
 test('CheckPublicEntryReleaseSurface0 accepts the current public release surface', async () => {
