@@ -14,13 +14,13 @@ import {
 } from '../pcc-public-surface-freeze0.mjs';
 
 const CURRENT_PROOF_SCRIPT_EXTENSIONS0 = [
+  'proof:no-hidden-oracle-semantic',
   'proof:uniform-final-soundness-target',
   'proof:uniform-input-family',
   'proof:uniform-locked-nand-construction',
   'proof:uniform-locked-nand-threshold',
   'proof:uniform-residual-band-minimizer',
   'proof:uniform-zeroslack-closure',
-  'proof:no-hidden-oracle-semantic',
 ];
 
 test('CheckPublicEntryReleaseSurface0 accepts the current public release surface', async () => {
