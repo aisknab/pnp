@@ -51,6 +51,7 @@
     "proof:uniform-residual-band-minimizer": "node pcc-uniform-residual-band-minimizer0.mjs --json",
     "proof:uniform-zeroslack-closure": "node pcc-uniform-zeroslack-closure0.mjs --json",
     "proof:no-hidden-oracle-semantic": "node pcc-no-hidden-oracle-semantic0.mjs --json",
+    "proof:uniform-complexity-conclusion": "node pcc-uniform-complexity-conclusion0.mjs --json",
     "examples:minimal": "node examples/minimal/run-all.mjs",
     "runall": "node ./bin/runall0.mjs",
     "smoke": "node ./bin/runall0.mjs",
