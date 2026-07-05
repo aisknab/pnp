@@ -1,0 +1,176 @@
+{
+  "kind": "PNPUniformComplexityConclusion0",
+  "version": 0,
+  "coordinate": "PNP-UNIFORM-COMPLEXITY-CONCLUSION-2026-07-05-01",
+  "status": "uniform-complexity-conclusion-accepted",
+  "title": "Uniform SAT-in-P and P=NP complexity conclusion",
+  "purpose": "Discharge UFS-007 by binding the uniform locked NAND SAT decision procedure to the standard complexity implication SAT in P => P = NP.",
+  "ufsTargetCoordinate": "PNP-UNIFORM-FINAL-SOUNDNESS-TARGET-2026-07-04-01",
+  "ufsObligationId": "UFS-007-ComplexityConclusionUniform",
+  "dependsOn": [
+    "PNP-UNIFORM-INPUT-FAMILY-2026-07-04-01",
+    "PNP-UNIFORM-LOCKED-NAND-CONSTRUCTION-2026-07-04-01",
+    "PNP-UNIFORM-LOCKED-NAND-THRESHOLD-2026-07-04-01",
+    "PNP-UNIFORM-RESIDUAL-BAND-MINIMIZER-2026-07-05-01",
+    "PNP-UNIFORM-ZEROSLACK-CLOSURE-2026-07-05-01",
+    "PNP-UNIFORM-NO-HIDDEN-ORACLE-SEMANTIC-2026-07-05-01",
+    "PNP-COMPLEXITY-LEDGER-2026-06-27-01"
+  ],
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "complexityConclusionAccepted": true,
+  "ufs007ComplexityConclusionDischarged": true,
+  "satInPConclusionAccepted": true,
+  "pEqualsNPConclusionAccepted": true,
+  "uniformFinalSoundnessProved": false,
+  "unrestrictedFinalSoundnessDischarged": false,
+  "publicTheoremEmissionAllowedByComplexity": false,
+  "complexityConclusion": {
+    "id": "UniformSATDecisionImpliesPEqualsNP0",
+    "inputLanguage": "Boolean circuit/NAND-SAT family accepted by UFS-001",
+    "decisionProcedure": "Build W_phi and B_phi using UFS-002; compute exact minimum by UFS-004/005 under UFS-006 no-hidden-oracle discipline; accept iff |PCCMin(W_phi)| > B_phi by UFS-003 threshold equivalence.",
+    "satNPComplete": true,
+    "uniformInputFamilyAccepted": true,
+    "lockedReductionUniformPolynomial": true,
+    "thresholdEquivalenceAllInputs": true,
+    "residualBandMinimizerUniformPolynomial": true,
+    "zeroSlackClosureUniform": true,
+    "noHiddenOracleSemanticComplete": true,
+    "constructedSATAlgorithmPolynomial": true,
+    "satInP": true,
+    "satNPCompleteImpliesPEqualsNP": true,
+    "finiteInstanceList": false,
+    "boundedEnumerationOnly": false,
+    "usesExternalReviewAsPremise": false,
+    "usesHistoricalReportProseAsPremise": false,
+    "publicTheoremEmissionAllowedByThisChecker": false,
+    "polynomialBoundSummary": "pre-NAND conversion, UFS-002 construction, threshold comparison, UFS-004 minimizer, UFS-005 ZeroSlack certificates, and UFS-006 semantic scans are all uniform polynomial objects over encoded input size"
+  },
+  "proofObligations": [
+    {
+      "id": "CC-001-SATNPCompleteBound",
+      "statement": "Boolean circuit SAT/NAND-SAT is NP-complete and is the accepted source language for the uniform decision procedure.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "CC-002-UniformLockedReductionPolynomial",
+      "statement": "For every input, UFS-002 constructs W_phi and B_phi uniformly in polynomial time.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "CC-003-ThresholdEquivalenceAllInputs",
+      "statement": "For every input, UFS-003 proves phi in SAT iff mu(W_phi) > B_phi and Lambda(W_phi) <= 4.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "CC-004-ExactMinimizerPolynomial",
+      "statement": "For every constructed W_phi, UFS-004 and UFS-005 return an exact minimum in polynomial time under the bounded residual-band discipline.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "CC-005-NoHiddenOracleDiscipline",
+      "statement": "UFS-006 proves the executable route does not use SAT oracle, exact-minimization oracle, unbounded search, digest-semantic shortcut, or external review as a proof premise.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "CC-006-SATDecisionPolynomial",
+      "statement": "The composed decision rule |PCCMin(W_phi)| > B_phi decides SAT in polynomial time.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "CC-007-SATInPImpliesPEqualsNP",
+      "statement": "Since SAT is NP-complete and SAT is in P under the accepted uniform procedure, P = NP follows as a complexity-theoretic conclusion.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "CC-008-ReleaseGateStillSeparate",
+      "statement": "This complexity conclusion does not by itself flip public theorem emission; release transition remains governed by UFS-008.",
+      "requiredForDischarge": true
+    }
+  ],
+  "uniformityClaims": {
+    "singleDecisionProcedureForAllInputs": true,
+    "dependsOnUniformNoHiddenOracle": true,
+    "satNPCompletenessBound": true,
+    "lockedReductionPolynomial": true,
+    "exactMinimizerPolynomial": true,
+    "thresholdDecisionPolynomial": true,
+    "satInPConclusionBound": true,
+    "pEqualsNPConclusionBound": true,
+    "noFiniteCutEnumerationAsProof": true,
+    "hashOrDigestNotUsedAsSemantics": true,
+    "externalReviewIsNotPremise": true,
+    "releaseGateStillSeparate": true
+  },
+  "positiveExamples": [
+    {
+      "id": "sat-decision-composition-summary",
+      "input": {
+        "inputFamilyAccepted": true,
+        "lockedConstructionPolynomial": true,
+        "thresholdEquivalenceAccepted": true,
+        "exactMinimizerPolynomial": true,
+        "noHiddenOracleSemanticAccepted": true,
+        "satNPComplete": true
+      },
+      "expected": {
+        "satDecisionPolynomial": true,
+        "satInP": true,
+        "pEqualsNPConclusionAccepted": true,
+        "releaseGateStillSeparate": true
+      }
+    }
+  ],
+  "negativeExamples": [
+    {
+      "id": "reject-external-review-premise",
+      "expectedRejectCoord": "UniformComplexityConclusion.ComplexityBoolean",
+      "manifestPatch": {
+        "complexityConclusion": {
+          "usesExternalReviewAsPremise": true
+        }
+      }
+    },
+    {
+      "id": "reject-premature-public-theorem-emission",
+      "expectedRejectCoord": "UniformComplexityConclusion.BooleanField",
+      "manifestPatch": {
+        "publicTheoremEmissionAllowedByComplexity": true
+      }
+    }
+  ],
+  "linkedGaps": [
+    "GAP-001-UnrestrictedFinalSoundness",
+    "GAP-003-BoundedSmallModelsNotUniformProof",
+    "GAP-004-FiniteToUnboundedUniformity",
+    "GAP-005-NoHiddenOracleSemanticCompleteness"
+  ],
+  "evidenceSurfaces": [
+    "proof-obligations/UNIFORM_COMPLEXITY_CONCLUSION.json",
+    "proof-obligations/UNIFORM_COMPLEXITY_CONCLUSION.md",
+    "pcc-uniform-complexity-conclusion0.mjs",
+    "audits/uniform-complexity-conclusion0.test.mjs",
+    "proof-obligations/UNIFORM_FINAL_SOUNDNESS_TARGET.json",
+    "proof-obligations/UNIFORM_NO_HIDDEN_ORACLE_SEMANTIC.json",
+    "complexity/COMPLEXITY_LEDGER.json"
+  ],
+  "nonClaims": [
+    "This checker discharges only UFS-007 ComplexityConclusionUniform.",
+    "This checker does not clear Release.UnrestrictedFinalSoundness by itself.",
+    "This checker does not activate public theorem emission; UFS-008 governs the release transition.",
+    "This checker does not use external review or historical report prose as a mathematical premise."
+  ],
+  "audit": {
+    "checker": "CheckUniformComplexityConclusion0",
+    "script": "pcc-uniform-complexity-conclusion0.mjs",
+    "test": "audits/uniform-complexity-conclusion0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
