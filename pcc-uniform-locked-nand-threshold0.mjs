@@ -98,7 +98,7 @@ export function CheckLockedNANDThresholdExample0(circuit) {
   if (sat.tag !== 'accept') return sat;
   const baseline = built.baseline;
   const fullWordSize = built.fullWordSize;
-  if (sat.satisfiable) return { tag: 'accept', satisfiable: true, baseline, fullWordSize, muLowerBoundInSatCase: baseline + 1, muUpperBoundInSatCase: baseline + 4, thresholdPredicate: true, residualSlackBound: fullWordSize - (baseline + 1) };
+  if (sat.satisfiable) return { tag: 'accept', satisfiable: true, baseline, fullWordSize, muLowerBoundInSatCase: baseline + 1, muUpperBoundInSatCase: baseline + 4, thresholdPredicate: true, residualSlackBound: 4 };
   return { tag: 'accept', satisfiable: false, baseline, fullWordSize, muEqualsBaselineInUnsatCase: true, thresholdPredicate: false, residualSlackBound: fullWordSize - baseline };
 }
 
