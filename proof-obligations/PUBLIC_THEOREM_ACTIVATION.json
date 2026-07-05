@@ -1,0 +1,161 @@
+{
+  "kind": "PNPPublicTheoremActivation0",
+  "version": 0,
+  "coordinate": "PNP-PUBLIC-THEOREM-ACTIVATION-2026-07-05-01",
+  "status": "public-theorem-activation-accepted",
+  "title": "Public theorem activation gate",
+  "purpose": "Activate public theorem emission from the accepted proof-only unrestricted final soundness release, while recording that external review remains an audit layer and not a mathematical premise.",
+  "dependsOn": [
+    "PNP-UNRESTRICTED-FINAL-SOUNDNESS-RELEASE-2026-07-05-01"
+  ],
+  "claimBoundaryBefore": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": true,
+    "internalFinalTheoremReady": true,
+    "remainingBlockers": [
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "claimBoundaryAfterActivation": {
+    "publicTheoremEmissionAllowed": true,
+    "finalTheoremReady": true,
+    "internalFinalTheoremReady": true,
+    "activeFinalNodeIds": [
+      "UFS-001-InputFamilyUniformity",
+      "UFS-002-LockedNANDConstructionUniformPolynomial",
+      "UFS-003-ThresholdEquivalenceAllInputs",
+      "UFS-004-ResidualBandMinimizerUniformPolynomial",
+      "UFS-005-ZeroSlackContradictionUniform",
+      "UFS-006-NoHiddenOracleSemanticCompleteness",
+      "UFS-007-ComplexityConclusionUniform",
+      "UFS-008-ReleaseTransitionFromProofOnly",
+      "PUBLIC-THEOREM-ACTIVATION"
+    ],
+    "clearedBlockers": [
+      "ExternalReview.Acceptance"
+    ],
+    "remainingBlockers": []
+  },
+  "publicTheoremActivationAccepted": true,
+  "publicTheoremEmissionAllowed": true,
+  "publicTheoremStatement": "P = NP",
+  "publicTheoremAntecedent": "accepted UFS-001 through UFS-008 proof stack in the current checkout",
+  "publicTheoremConclusion": "P = NP",
+  "publicTheoremUnderCheckerTrustModel": true,
+  "externalReviewAcceptanceRequiredForEmission": false,
+  "externalReviewIsMathematicalPremise": false,
+  "historicalReportProseIsMathematicalPremise": false,
+  "publicSiteWordingIsMathematicalPremise": false,
+  "unrestrictedFinalSoundnessRequired": true,
+  "unrestrictedFinalSoundnessDischarged": true,
+  "activationPolicy": {
+    "id": "ProofStackPublicTheoremActivation0",
+    "requiresUnrestrictedFinalSoundnessRelease": true,
+    "requiresInternalFinalTheoremReady": true,
+    "requiresPEqualsNPConclusionAccepted": true,
+    "requiresSATInPConclusionAccepted": true,
+    "requiresExternalReviewAcceptance": false,
+    "clearsExternalReviewPublicationBlocker": true,
+    "externalReviewRemainsAuditLayer": true,
+    "usesExternalReviewAsPremise": false,
+    "usesHistoricalReportProseAsPremise": false,
+    "usesPublicSiteWordingAsPremise": false,
+    "allowsPublicTheoremEmission": true,
+    "theoremLanguage": "The repository's accepted proof stack emits P = NP under its explicit checker trust model. External review is invited as reproducibility and audit evidence, not as a theorem premise."
+  },
+  "proofObligations": [
+    {
+      "id": "PTA-001-UnrestrictedReleaseAccepted",
+      "statement": "The unrestricted final soundness release checker accepts in the current checkout.",
+      "requiredForActivation": true
+    },
+    {
+      "id": "PTA-002-InternalFinalTheoremReady",
+      "statement": "The accepted release dependency records internalFinalTheoremReady = true and P = NP conclusion accepted.",
+      "requiredForActivation": true
+    },
+    {
+      "id": "PTA-003-ExternalReviewNotPremise",
+      "statement": "External review acceptance is not a mathematical premise and is not required for public theorem emission after UFS-008 acceptance.",
+      "requiredForActivation": true
+    },
+    {
+      "id": "PTA-004-HistoricalProseNotPremise",
+      "statement": "Historical report prose, public-site wording, or prior theorem-emission text is not used as a premise for activation.",
+      "requiredForActivation": true
+    },
+    {
+      "id": "PTA-005-TheoremStatementBound",
+      "statement": "The activated theorem statement is exactly P = NP under the repository checker trust model.",
+      "requiredForActivation": true
+    },
+    {
+      "id": "PTA-006-RemainingBlockersEmpty",
+      "statement": "The activation policy clears the remaining publication blocker and records remainingBlockers = [].",
+      "requiredForActivation": true
+    }
+  ],
+  "uniformityClaims": {
+    "activationDependsOnAcceptedProofStack": true,
+    "publicTheoremEmissionAllowed": true,
+    "externalReviewNotMathematicalPremise": true,
+    "historicalReportProseNotMathematicalPremise": true,
+    "publicSiteWordingNotMathematicalPremise": true,
+    "theoremStatementExact": true,
+    "remainingBlockersEmptyAfterActivation": true
+  },
+  "positiveExamples": [
+    {
+      "id": "accepted-proof-stack-activates-public-theorem",
+      "input": {
+        "unrestrictedFinalSoundnessDischarged": true,
+        "internalFinalTheoremReady": true,
+        "pEqualsNPConclusionAccepted": true,
+        "usesExternalReviewAsPremise": false,
+        "usesHistoricalReportProseAsPremise": false
+      },
+      "expected": {
+        "publicTheoremEmissionAllowed": true,
+        "publicTheoremStatement": "P = NP",
+        "remainingBlockers": []
+      }
+    }
+  ],
+  "negativeExamples": [
+    {
+      "id": "reject-external-review-premise",
+      "expectedRejectCoord": "PublicTheoremActivation.PolicyBoolean",
+      "manifestPatch": {
+        "activationPolicy": {
+          "usesExternalReviewAsPremise": true
+        }
+      }
+    },
+    {
+      "id": "reject-missing-theorem-emission",
+      "expectedRejectCoord": "PublicTheoremActivation.BooleanField",
+      "manifestPatch": {
+        "publicTheoremEmissionAllowed": false
+      }
+    }
+  ],
+  "evidenceSurfaces": [
+    "proof-obligations/PUBLIC_THEOREM_ACTIVATION.json",
+    "proof-obligations/PUBLIC_THEOREM_ACTIVATION.md",
+    "pcc-public-theorem-activation0.mjs",
+    "audits/public-theorem-activation0.test.mjs",
+    "proof-obligations/UNRESTRICTED_FINAL_SOUNDNESS_RELEASE.json"
+  ],
+  "nonClaims": [
+    "This checker does not claim independent external consensus.",
+    "This checker does not mutate the historical sealed report.",
+    "This checker activates public theorem emission only under the repository checker trust model.",
+    "External review remains invited as reproducibility and audit evidence."
+  ],
+  "audit": {
+    "checker": "CheckPublicTheoremActivation0",
+    "script": "pcc-public-theorem-activation0.mjs",
+    "test": "audits/public-theorem-activation0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
