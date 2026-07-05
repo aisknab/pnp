@@ -131,6 +131,7 @@ npm run proof:uniform-final-soundness-target
 npm run proof:uniform-input-family
 npm run proof:uniform-locked-nand-construction
 npm run proof:uniform-locked-nand-threshold
+npm run proof:uniform-residual-band-minimizer
 ```
 
 ## Public RunAll0 entry point
