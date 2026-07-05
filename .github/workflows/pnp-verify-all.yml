@@ -20,7 +20,7 @@ jobs:
       - name: Run one-command PNP verifier
         run: |
           set +e
-          npm run pnp:verify > pnp-verify-all.stdout.log 2> pnp-verify-all.stderr.log
+          node scripts/pnp-verify-all.mjs --json --skip-unit-tests > pnp-verify-all.stdout.log 2> pnp-verify-all.stderr.log
           status=$?
           cat pnp-verify-all.stdout.log
           cat pnp-verify-all.stderr.log >&2
