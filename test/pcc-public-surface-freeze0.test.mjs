@@ -15,6 +15,7 @@ import {
 
 const CURRENT_PROOF_SCRIPT_EXTENSIONS0 = [
   'proof:no-hidden-oracle-semantic',
+  'proof:public-theorem-activation',
   'proof:uniform-complexity-conclusion',
   'proof:uniform-final-soundness-target',
   'proof:uniform-input-family',

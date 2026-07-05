@@ -136,6 +136,7 @@ npm run proof:uniform-zeroslack-closure
 npm run proof:no-hidden-oracle-semantic
 npm run proof:uniform-complexity-conclusion
 npm run proof:unrestricted-final-soundness-release
+npm run proof:public-theorem-activation
 ```
 
 ## Public RunAll0 entry point

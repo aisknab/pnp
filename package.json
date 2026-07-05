@@ -53,6 +53,7 @@
     "proof:no-hidden-oracle-semantic": "node pcc-no-hidden-oracle-semantic0.mjs --json",
     "proof:uniform-complexity-conclusion": "node pcc-uniform-complexity-conclusion0.mjs --json",
     "proof:unrestricted-final-soundness-release": "node pcc-unrestricted-final-soundness-release0.mjs --json",
+    "proof:public-theorem-activation": "node pcc-public-theorem-activation0.mjs --json",
     "examples:minimal": "node examples/minimal/run-all.mjs",
     "runall": "node ./bin/runall0.mjs",
     "smoke": "node ./bin/runall0.mjs",
