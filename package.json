@@ -49,6 +49,7 @@
     "proof:uniform-locked-nand-construction": "node pcc-uniform-locked-nand-construction0.mjs --json",
     "proof:uniform-locked-nand-threshold": "node pcc-uniform-locked-nand-threshold0.mjs --json",
     "proof:uniform-residual-band-minimizer": "node pcc-uniform-residual-band-minimizer0.mjs --json",
+    "proof:uniform-zeroslack-closure": "node pcc-uniform-zeroslack-closure0.mjs --json",
     "examples:minimal": "node examples/minimal/run-all.mjs",
     "runall": "node ./bin/runall0.mjs",
     "smoke": "node ./bin/runall0.mjs",

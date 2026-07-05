@@ -1,0 +1,192 @@
+{
+  "kind": "PNPUniformZeroSlackClosure0",
+  "version": 0,
+  "coordinate": "PNP-UNIFORM-ZEROSLACK-CLOSURE-2026-07-05-01",
+  "status": "uniform-zeroslack-closure-accepted",
+  "title": "Uniform ZeroSlack closure and contradiction",
+  "purpose": "Discharge UFS-005 by binding the ZeroSlack contradiction, selector universe, HN/BUD blocker closure, and no-lower ledger into one uniform all-rank proof surface.",
+  "ufsTargetCoordinate": "PNP-UNIFORM-FINAL-SOUNDNESS-TARGET-2026-07-04-01",
+  "ufsObligationId": "UFS-005-ZeroSlackContradictionUniform",
+  "dependsOn": [
+    "PNP-UNIFORM-INPUT-FAMILY-2026-07-04-01",
+    "PNP-UNIFORM-LOCKED-NAND-CONSTRUCTION-2026-07-04-01",
+    "PNP-UNIFORM-LOCKED-NAND-THRESHOLD-2026-07-04-01",
+    "PNP-UNIFORM-RESIDUAL-BAND-MINIMIZER-2026-07-05-01"
+  ],
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "zeroSlackClosureAccepted": true,
+  "ufs005ZeroSlackContradictionDischarged": true,
+  "uniformFinalSoundnessProved": false,
+  "unrestrictedFinalSoundnessDischarged": false,
+  "publicTheoremEmissionAllowedByZeroSlack": false,
+  "zeroSlackClosure": {
+    "id": "RankParametricZeroSlackClosure0",
+    "domain": "Every normalized locked NAND instance whose threshold surface and residual-band minimizer surface were accepted by UFS-003 and UFS-004.",
+    "conclusion": "If PCCOracle returns ZeroSlack(C,Z), then Lambda(C)=0; if Lambda(C)>0 then the no-lower ledger plus BCEL/packet/selector/realizer/HB closure yields a contradiction.",
+    "totalOnResidualBandInputs": true,
+    "deterministic": true,
+    "uniformAcrossRanks": true,
+    "uniformAcrossInputSizes": true,
+    "finiteInstanceList": false,
+    "boundedEnumerationOnly": false,
+    "usesSatOracle": false,
+    "usesExactMinimizationOracle": false,
+    "usesUnboundedSearch": false,
+    "zeroSlackSound": true,
+    "positiveSlackContradictionComplete": true,
+    "selectorUniversePolynomial": true,
+    "selectorSilenceRankComplete": true,
+    "hnBudBlockerGraphAcyclic": true,
+    "certificateEncodingPolynomial": true,
+    "certificateSizePolynomial": true,
+    "rankMeasure": "finite packet rank tuple ordered lexicographically by packet kind, span, mass class, colour class, frontier class, charge class, budget class, hereditary class, activation class, rank tag, and canonical code",
+    "polynomialSizeBound": "O(poly(encoded locked NAND instance)) under schedule-bounded handles, selector payloads, sidecars, blocker edges, and rank ledgers"
+  },
+  "proofObligations": [
+    {
+      "id": "ZSC-001-NoLowerLedgerComplete",
+      "statement": "The ZeroSlack branch positively excludes HResolve minimum/gain, BudgetResolve minimum/gain, normalization gain, named obstruction, exact route, selector descent, strict residual descent, saturation loss, packet route failure, and lower-priority replay route.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "ZSC-002-PositiveSlackYieldsBCELReady",
+      "statement": "If Lambda(C)>0 and no earlier route fires, terminal MuBridge, SaturatePositive, and BCELReady yield a saturated projection-positive BCEL nucleus.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "ZSC-003-PacketsYieldFaithfulSelectors",
+      "statement": "BN2 through BN6 and packet extraction convert every BCEL positive nucleus into a pair, balanced-triple, or full-span faithful selector in a polynomial selector universe.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "ZSC-004-RealizerBotsTypedAndBlockedOnly",
+      "statement": "Every realizer bot for a faithful selector is typed and can cite only an HN blocker, BUD blocker, or lower-rank faithful selector.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "ZSC-005-HNBUDBlockerGraphAcyclic",
+      "statement": "The combined HN/BUD blocker graph strictly descends in the accepted rank and tie-break measure, so no circular negative closure is possible.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "ZSC-006-FaithfulSelectorsExcludedAllRanks",
+      "statement": "Selector silence and HB closure exclude faithful selectors, HN blockers, and BUD blockers at every packet rank in the ZeroSlack branch.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "ZSC-007-PositiveSlackContradictionComplete",
+      "statement": "Assuming Lambda(C)>0 forces a BCEL nucleus, a positive packet, a faithful selector, and then either a verified gain or an impossible typed bot; therefore Lambda(C)=0.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "ZSC-008-CertificatePolynomialSize",
+      "statement": "The ZeroSlack record, sidecars, rank lists, selector logs, blocker edges, packet ledgers, and contradiction proof nodes have polynomial-size canonical encodings.",
+      "requiredForDischarge": true
+    }
+  ],
+  "uniformityClaims": {
+    "singleClosureForAllResidualBandInputs": true,
+    "dependsOnUniformMinimizer": true,
+    "rankParametricClosure": true,
+    "noLowerLedgerParametric": true,
+    "bcelContradictionParametric": true,
+    "selectorUniverseCompleteAndPolynomial": true,
+    "hnBudBlockerClosureParametric": true,
+    "positiveSlackContradictionParametric": true,
+    "polynomialCertificateEncoding": true,
+    "noFiniteCutEnumerationAsProof": true,
+    "hashOrDigestNotUsedAsSemantics": true,
+    "externalReviewIsNotPremise": true
+  },
+  "positiveExamples": [
+    {
+      "id": "zero-slack-branch-summary",
+      "input": {
+        "residualSlackAssumption": 0,
+        "earlierRoutesExcluded": true,
+        "selectorSilenceComplete": true,
+        "hnBudClosureComplete": true
+      },
+      "expected": {
+        "zeroSlackSound": true,
+        "lambdaEqualsZero": true,
+        "contradictionNeeded": false,
+        "certificatePolynomialSize": true
+      }
+    },
+    {
+      "id": "positive-slack-contradiction-summary",
+      "input": {
+        "residualSlackAssumption": 1,
+        "earlierRoutesExcluded": true,
+        "selectorSilenceComplete": true,
+        "hnBudClosureComplete": true
+      },
+      "expected": {
+        "zeroSlackSound": true,
+        "lambdaEqualsZero": true,
+        "contradictionNeeded": true,
+        "positiveSlackForcesBCELReady": true,
+        "positivePacketForcesFaithfulSelector": true,
+        "faithfulSelectorForcesGainOrTypedBot": true,
+        "typedBotImpossibleByHBClosure": true,
+        "certificatePolynomialSize": true
+      }
+    }
+  ],
+  "negativeExamples": [
+    {
+      "id": "reject-finite-list-only-closure-proof",
+      "expectedRejectCoord": "UniformZeroSlackClosure.ClosureBoolean",
+      "manifestPatch": {
+        "zeroSlackClosure": {
+          "finiteInstanceList": true,
+          "uniformAcrossRanks": false
+        }
+      }
+    },
+    {
+      "id": "reject-circular-hn-bud-closure",
+      "expectedRejectCoord": "UniformZeroSlackClosure.ClosureBoolean",
+      "manifestPatch": {
+        "zeroSlackClosure": {
+          "hnBudBlockerGraphAcyclic": false
+        }
+      }
+    }
+  ],
+  "linkedGaps": [
+    "GAP-001-UnrestrictedFinalSoundness",
+    "GAP-003-BoundedSmallModelsNotUniformProof",
+    "GAP-004-FiniteToUnboundedUniformity",
+    "GAP-005-NoHiddenOracleSemanticCompleteness"
+  ],
+  "evidenceSurfaces": [
+    "proof-obligations/UNIFORM_ZEROSLACK_CLOSURE.json",
+    "proof-obligations/UNIFORM_ZEROSLACK_CLOSURE.md",
+    "pcc-uniform-zeroslack-closure0.mjs",
+    "audits/uniform-zeroslack-closure0.test.mjs",
+    "proof-obligations/UNIFORM_FINAL_SOUNDNESS_TARGET.json",
+    "proof-obligations/UNIFORM_RESIDUAL_BAND_MINIMIZER.json"
+  ],
+  "nonClaims": [
+    "This checker discharges only UFS-005 ZeroSlackContradictionUniform.",
+    "This checker does not by itself prove SAT in P or P = NP.",
+    "This checker does not clear Release.UnrestrictedFinalSoundness.",
+    "This checker does not use external review as a mathematical premise."
+  ],
+  "audit": {
+    "checker": "CheckUniformZeroSlackClosure0",
+    "script": "pcc-uniform-zeroslack-closure0.mjs",
+    "test": "audits/uniform-zeroslack-closure0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}

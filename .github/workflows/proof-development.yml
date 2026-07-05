@@ -34,6 +34,10 @@ jobs:
         run: |
           npm run proof:uniform-residual-band-minimizer
           node --test audits/uniform-residual-band-minimizer0.test.mjs
+      - name: Uniform ZeroSlack closure
+        run: |
+          npm run proof:uniform-zeroslack-closure
+          node --test audits/uniform-zeroslack-closure0.test.mjs
       - name: Upload proof-development verdicts
         uses: actions/upload-artifact@v4
         if: always()
@@ -45,3 +49,4 @@ jobs:
             artifacts/uniform-locked-nand-construction/latest-verdict.json
             artifacts/uniform-locked-nand-threshold/latest-verdict.json
             artifacts/uniform-residual-band-minimizer/latest-verdict.json
+            artifacts/uniform-zeroslack-closure/latest-verdict.json
