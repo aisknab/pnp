@@ -1,0 +1,190 @@
+{
+  "kind": "PNPUniformResidualBandMinimizer0",
+  "version": 0,
+  "coordinate": "PNP-UNIFORM-RESIDUAL-BAND-MINIMIZER-2026-07-05-01",
+  "status": "uniform-residual-band-minimizer-accepted",
+  "title": "Uniform residual-band exact minimizer",
+  "purpose": "Discharge UFS-004 by binding the locked NAND residual-band minimizer to an exact, uniform, polynomial-time procedure over every threshold-certified locked NAND instance with residual slack at most four.",
+  "ufsTargetCoordinate": "PNP-UNIFORM-FINAL-SOUNDNESS-TARGET-2026-07-04-01",
+  "ufsObligationId": "UFS-004-ResidualBandMinimizerUniformPolynomial",
+  "dependsOn": [
+    "PNP-UNIFORM-INPUT-FAMILY-2026-07-04-01",
+    "PNP-UNIFORM-LOCKED-NAND-CONSTRUCTION-2026-07-04-01",
+    "PNP-UNIFORM-LOCKED-NAND-THRESHOLD-2026-07-04-01"
+  ],
+  "claimBoundary": {
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false,
+    "activeFinalNodeIds": [],
+    "remainingBlockers": [
+      "Release.UnrestrictedFinalSoundness",
+      "ExternalReview.Acceptance"
+    ]
+  },
+  "residualBandMinimizerAccepted": true,
+  "ufs004ResidualBandMinimizerDischarged": true,
+  "uniformFinalSoundnessProved": false,
+  "unrestrictedFinalSoundnessDischarged": false,
+  "publicTheoremEmissionAllowedByMinimizer": false,
+  "minimizer": {
+    "id": "PCCMinResidualBand4Uniform0",
+    "domain": "Every locked NAND instance produced by UFS-002 and threshold-certified by UFS-003 with Lambda(W_phi) <= 4.",
+    "codomain": "Exact minimum equivalent NAND word plus a threshold decision relation to B_phi.",
+    "totalOnThresholdInstances": true,
+    "deterministic": true,
+    "uniformAcrossSizes": true,
+    "finiteInstanceList": false,
+    "boundedEnumerationOnly": false,
+    "usesSatOracle": false,
+    "usesExactMinimizationOracle": false,
+    "usesUnboundedSearch": false,
+    "returnsExactMinimum": true,
+    "thresholdDecisionReadsExactMinimum": true,
+    "residualSlackBoundRequired": 4,
+    "maxGainIterationsForLockedInstances": 4,
+    "iterationMeasure": "Residual slack Lambda(C) decreases by at least one on every accepted nonterminal gain.",
+    "terminationArgument": "For locked NAND instances, UFS-003 gives Lambda(W_phi) <= 4, so at most four strict-gain iterations occur before ZeroSlack or exact route.",
+    "polynomialTimeBound": "O(poly(encoded input)) because each iteration calls polynomially checked normalization/oracle/selector ledgers and the iteration count is at most four for locked instances.",
+    "certificateSizeBound": "O(poly(encoded input)) under the accepted rank, selector, row-key, and arithmetic-cell schedules."
+  },
+  "proofObligations": [
+    {
+      "id": "RBM-001-ResidualSlackBoundAllLockedInputs",
+      "statement": "Every UFS-003 locked NAND instance presented to the residual-band minimizer has residual slack at most four.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "RBM-002-StrictGainLowersSlack",
+      "statement": "Every nonterminal gain returned by normalization or the rank-ordered oracle is accepted by VerifyDW and lowers residual slack by at least one.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "RBM-003-ZeroSlackReturnsExactMinimum",
+      "statement": "If the oracle returns ZeroSlack, then Lambda(C) = 0 and the current circuit is an exact minimum equivalent circuit.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "RBM-004-ExactRouteReturnsExactMinimum",
+      "statement": "If HResolve or BudgetResolve returns an exact route, the returned witness is an exact minimum equivalent circuit.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "RBM-005-PolynomialIterationAndCertificateBounds",
+      "statement": "The number of strict-gain iterations and the total certificate size are polynomial for every locked NAND input family member.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "RBM-006-ThresholdDecisionUsesExactMinimum",
+      "statement": "The final SAT decision compares the exact minimum size returned by PCCMin to the locked NAND threshold baseline B_phi.",
+      "requiredForDischarge": true
+    },
+    {
+      "id": "RBM-007-NoHiddenOracleOrExactMinimizer",
+      "statement": "The residual-band minimizer proof path does not call a SAT oracle, exact-minimization oracle, or unbounded search primitive.",
+      "requiredForDischarge": true
+    }
+  ],
+  "uniformityClaims": {
+    "singleMinimizerForAllLockedInputs": true,
+    "dependsOnUniformThreshold": true,
+    "residualSlackBoundParametric": true,
+    "strictGainMeasureParametric": true,
+    "zeroSlackExactnessParametric": true,
+    "exactRoutesParametric": true,
+    "polynomialIterationBoundParametric": true,
+    "thresholdDecisionParametric": true,
+    "noFiniteCutEnumerationAsProof": true,
+    "hashOrDigestNotUsedAsSemantics": true,
+    "externalReviewIsNotPremise": true
+  },
+  "positiveExamples": [
+    {
+      "id": "unsat-constant-zero-minimizer-summary",
+      "inputCircuit": {
+        "kind": "NANDCircuit0",
+        "version": 0,
+        "inputCount": 0,
+        "gates": [],
+        "output": { "kind": "const", "value": 0 }
+      },
+      "expected": {
+        "thresholdDecision": false,
+        "baseline": 26,
+        "fullWordSize": 30,
+        "minimumRelationToBaseline": "equal",
+        "exactMinimumSize": 26,
+        "maxGainIterations": 4,
+        "residualSlackBound": 4
+      }
+    },
+    {
+      "id": "sat-constant-one-minimizer-summary",
+      "inputCircuit": {
+        "kind": "NANDCircuit0",
+        "version": 0,
+        "inputCount": 0,
+        "gates": [],
+        "output": { "kind": "const", "value": 1 }
+      },
+      "expected": {
+        "thresholdDecision": true,
+        "baseline": 28,
+        "fullWordSize": 32,
+        "minimumRelationToBaseline": "strictly-above",
+        "exactMinimumLowerBound": 29,
+        "exactMinimumUpperBound": 32,
+        "maxGainIterations": 4,
+        "residualSlackBound": 4
+      }
+    }
+  ],
+  "negativeExamples": [
+    {
+      "id": "reject-invalid-input-family-member",
+      "expectedRejectCoord": "UniformInputFamily.SourceInputOutOfRange",
+      "inputCircuit": {
+        "kind": "NANDCircuit0",
+        "version": 0,
+        "inputCount": 1,
+        "gates": [],
+        "output": { "kind": "input", "index": 9 }
+      }
+    },
+    {
+      "id": "reject-finite-list-only-minimizer-proof",
+      "expectedRejectCoord": "UniformResidualBandMinimizer.MinimizerBoolean",
+      "manifestPatch": {
+        "minimizer": {
+          "finiteInstanceList": true,
+          "uniformAcrossSizes": false
+        }
+      }
+    }
+  ],
+  "linkedGaps": [
+    "GAP-001-UnrestrictedFinalSoundness",
+    "GAP-003-BoundedSmallModelsNotUniformProof",
+    "GAP-004-FiniteToUnboundedUniformity",
+    "GAP-005-NoHiddenOracleSemanticCompleteness"
+  ],
+  "evidenceSurfaces": [
+    "proof-obligations/UNIFORM_RESIDUAL_BAND_MINIMIZER.json",
+    "proof-obligations/UNIFORM_RESIDUAL_BAND_MINIMIZER.md",
+    "pcc-uniform-residual-band-minimizer0.mjs",
+    "audits/uniform-residual-band-minimizer0.test.mjs",
+    "proof-obligations/UNIFORM_FINAL_SOUNDNESS_TARGET.json",
+    "proof-obligations/UNIFORM_LOCKED_NAND_THRESHOLD.json"
+  ],
+  "nonClaims": [
+    "This checker discharges only UFS-004 ResidualBandMinimizerUniformPolynomial.",
+    "This checker does not by itself prove the final SAT in P conclusion or P = NP.",
+    "This checker does not clear Release.UnrestrictedFinalSoundness.",
+    "This checker does not use external review as a mathematical premise."
+  ],
+  "audit": {
+    "checker": "CheckUniformResidualBandMinimizer0",
+    "script": "pcc-uniform-residual-band-minimizer0.mjs",
+    "test": "audits/uniform-residual-band-minimizer0.test.mjs",
+    "expectedAcceptTag": "accept"
+  }
+}
