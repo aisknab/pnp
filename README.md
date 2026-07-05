@@ -137,6 +137,7 @@ npm run proof:no-hidden-oracle-semantic
 npm run proof:uniform-complexity-conclusion
 npm run proof:unrestricted-final-soundness-release
 npm run proof:public-theorem-activation
+npm run proof:activated-pnp-status
 ```
 
 ## Public RunAll0 entry point
