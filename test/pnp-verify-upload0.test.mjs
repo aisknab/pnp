@@ -12,7 +12,7 @@ import {
   Sha256Text0,
   Slug0,
   UploadPNPLabsIssue0,
-} from '../scripts/pnp-verify-and-upload.mjs';
+} from '../pnp-verify-upload0.mjs';
 
 const STATUS_PAYLOAD0 = {
   kind: 'PNPActivatedStatus0',
