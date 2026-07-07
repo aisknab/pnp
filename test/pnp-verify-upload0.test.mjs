@@ -40,6 +40,17 @@ const VERDICT0 = {
   remainingBlockers: [],
 };
 
+const LEGACY_VERIFY_ALL_VERDICT0 = {
+  tag: 'accept',
+  claimStatus: 'internal-proof-certificate-stack-accepted-under-public-review-boundary',
+  publicTheoremEmissionAllowed: false,
+  publicTheoremStatement: undefined,
+  publicTheoremConclusion: undefined,
+  finalTheoremReady: false,
+  unrestrictedFinalSoundnessDischarged: false,
+  remainingBlockers: ['Release.UnrestrictedFinalSoundness', 'ExternalReview.Acceptance'],
+};
+
 test('yes/no parser accepts only explicit affirmative answers', () => {
   assert.equal(IsYesAnswer0('y'), true);
   assert.equal(IsYesAnswer0(' yes '), true);
@@ -79,6 +90,26 @@ test('BuildPNPLabsRunRecord0 produces an importable activated verifier run recor
   assert.match(record.statusPayloadSha256, /^[0-9a-f]{64}$/);
   assert.equal(record.proofScriptOutputs['proof:activated-pnp-status'].includes('npm run pnp:verify'), true);
   assert.equal(record.nonClaims.some((line) => line.includes('not an external-consensus claim')), true);
+});
+
+test('activated status payload wins over legacy pnp:verify public-review fields for upload', () => {
+  const record = BuildPNPLabsRunRecord0({
+    verdict: LEGACY_VERIFY_ALL_VERDICT0,
+    statusPayload: STATUS_PAYLOAD0,
+    statusPayloadText: JSON.stringify(STATUS_PAYLOAD0),
+    pnpCommit: 'abcdef1234567890',
+    runnerNameOrHandle: 'Ada Example',
+    dateUtc: '2026-07-06',
+  });
+
+  assert.equal(record.verdict.tag, 'accept');
+  assert.equal(record.verdict.claimStatus, 'public-theorem-emission-activated-under-checker-trust-model');
+  assert.equal(record.verdict.publicTheoremEmissionAllowed, true);
+  assert.equal(record.verdict.publicTheoremStatement, 'P = NP');
+  assert.equal(record.verdict.publicTheoremConclusion, 'P = NP');
+  assert.equal(record.verdict.finalTheoremReady, true);
+  assert.equal(record.verdict.unrestrictedFinalSoundnessDischarged, true);
+  assert.deepEqual(record.verdict.remainingBlockers, []);
 });
 
 test('issue body contains the importable record and activated boundary fields', () => {
