@@ -70,6 +70,7 @@ export function BuildPNPLabsRunRecord0({
   const commit = pnpCommit || 'unknown';
   const recordId = BuildPNPLabsRecordId0({ runnerNameOrHandle: runner, dateUtc, pnpCommit: commit });
   const statusSha = Sha256Text0(statusPayloadText ?? JSON.stringify(status));
+  const activatedRemainingBlockers = Array.isArray(status.remainingBlockers) ? status.remainingBlockers : (Array.isArray(verdictObject.remainingBlockers) ? verdictObject.remainingBlockers : []);
   return {
     kind: 'PNPActivatedVerificationRunRecord0',
     recordId,
@@ -92,13 +93,13 @@ export function BuildPNPLabsRunRecord0({
     ],
     verdict: {
       tag: verdictObject.tag ?? 'accept',
-      claimStatus: verdictObject.claimStatus ?? status.claimStatus ?? 'public-theorem-emission-activated-under-checker-trust-model',
-      publicTheoremEmissionAllowed: verdictObject.publicTheoremEmissionAllowed ?? status.publicTheoremEmissionAllowed ?? true,
-      publicTheoremStatement: verdictObject.publicTheoremStatement ?? status.publicTheoremStatement ?? 'P = NP',
-      publicTheoremConclusion: verdictObject.publicTheoremConclusion ?? status.publicTheoremConclusion ?? 'P = NP',
-      finalTheoremReady: verdictObject.finalTheoremReady ?? status.finalTheoremReady ?? true,
-      unrestrictedFinalSoundnessDischarged: verdictObject.unrestrictedFinalSoundnessDischarged ?? status.unrestrictedFinalSoundnessDischarged ?? true,
-      remainingBlockers: Array.isArray(verdictObject.remainingBlockers) ? verdictObject.remainingBlockers : (Array.isArray(status.remainingBlockers) ? status.remainingBlockers : []),
+      claimStatus: status.claimStatus ?? verdictObject.claimStatus ?? 'public-theorem-emission-activated-under-checker-trust-model',
+      publicTheoremEmissionAllowed: status.publicTheoremEmissionAllowed ?? verdictObject.publicTheoremEmissionAllowed ?? true,
+      publicTheoremStatement: status.publicTheoremStatement ?? verdictObject.publicTheoremStatement ?? 'P = NP',
+      publicTheoremConclusion: status.publicTheoremConclusion ?? verdictObject.publicTheoremConclusion ?? 'P = NP',
+      finalTheoremReady: status.finalTheoremReady ?? verdictObject.finalTheoremReady ?? true,
+      unrestrictedFinalSoundnessDischarged: status.unrestrictedFinalSoundnessDischarged ?? verdictObject.unrestrictedFinalSoundnessDischarged ?? true,
+      remainingBlockers: activatedRemainingBlockers,
     },
     activatedStatus: {
       kind: status.kind ?? 'PNPActivatedStatus0',
