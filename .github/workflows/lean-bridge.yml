@@ -1,0 +1,36 @@
+name: lean-bridge
+
+on:
+  pull_request:
+    paths:
+      - 'lean-toolchain'
+      - 'lakefile.lean'
+      - 'lean/**'
+      - 'docs/lean_bridge.md'
+      - '.github/workflows/lean-bridge.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'lean-toolchain'
+      - 'lakefile.lean'
+      - 'lean/**'
+      - 'docs/lean_bridge.md'
+      - '.github/workflows/lean-bridge.yml'
+  workflow_dispatch:
+
+jobs:
+  lean-bridge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan and Lean
+        run: |
+          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --default-toolchain "$(cat lean-toolchain)"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Show Lean and Lake versions
+        run: |
+          lean --version
+          lake --version
+      - name: Build Lean bridge
+        run: lake build
