@@ -16,8 +16,8 @@ export const PUBLIC_SURFACE_BASELINE0 = Object.freeze({
   kind: 'PublicSurfaceBaseline0',
   version: CHECKER_VERSION,
   coordinate: 'PUBLIC-SURFACE-BASELINE-2026-06-27-NO-HIDDEN-ORACLE-01',
-  status: 'public-review-surface-with-extensible-proof-script-namespace',
-  rationale: 'The package exports and bin surface remain exact, while package.json scripts allow a narrow proof:* development namespace for direct checker entrypoints. This keeps proof work moving without treating every new proof checker as a public release-surface overclaim.',
+  status: 'public-review-surface-with-extensible-proof-script-namespace-and-verifier-upload-cli',
+  rationale: 'The package exports and bin surface remain exact, package.json scripts allow a narrow proof:* development namespace for direct checker entrypoints, and the verify upload CLI is explicitly listed as an approved reproducibility-submission surface.',
 });
 
 export const PUBLIC_ENTRY_EXPORT_KEYS0 = Object.freeze([
@@ -114,6 +114,7 @@ export const PUBLIC_PACKAGE_SCRIPT_TARGETS0 = Object.freeze({
   test: 'node --test',
   'test:negative': 'node --test test/reviewer-negative-invariants.test.mjs',
   validate: 'npm run check && npm test',
+  verify: 'node scripts/pnp-verify-and-upload.mjs',
   'cross-verify': 'node scripts/cross-verify.mjs',
   'cross-verify:json': 'node scripts/cross-verify.mjs --json',
   'independent:no-shared-code': 'node scripts/audit-independent-verifiers-no-shared-code.mjs --json',
@@ -128,6 +129,7 @@ export const PUBLIC_PACKAGE_SCRIPT_TARGETS0 = Object.freeze({
   'complexity:ledger': 'node pcc-complexity-ledger0.mjs --json',
   'audit:no-hidden-oracle': 'node scripts/audit-no-hidden-oracle.mjs --json',
   'pnp:verify': 'node scripts/pnp-verify-all.mjs --json',
+  'pnp:verify:upload': 'node scripts/pnp-verify-and-upload.mjs --upload',
   'examples:minimal': 'node examples/minimal/run-all.mjs',
   runall: 'node ./bin/runall0.mjs',
   smoke: 'node ./bin/runall0.mjs',
