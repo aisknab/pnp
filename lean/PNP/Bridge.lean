@@ -36,13 +36,14 @@ def AcceptedGeneratedPackage : Prop :=
 /-- The explicit trust model for this Lean bridge.
 
 This pass factors the checker-soundness route through a structured PCCMin loop
-certificate and rank-ordered ZeroSlack oracle certificate.  Remaining fields are
-now:
+certificate and rank-ordered ZeroSlack oracle certificate.  The local locked
+NAND macro truth laws are now discharged separately by
+`lockedNANDMacroCertificate`.  Remaining fields are:
 * `pccPackProducesPCCMinLoop`: accepted PCC package emits an accepted PCCMin
   loop certificate with structured ZeroSlack/oracle evidence;
 * `residualBandReduction`: locked NAND threshold reduces to residual-band exact
   minimization;
-* `lockedNANDReduction`: SAT reduces to locked NAND threshold;
+* `lockedNANDReduction`: the remaining global SAT builder/threshold theorem;
 * `satHard`: SAT is NP-hard for the witness-model reduction relation.
 -/
 structure CheckerTrustModel where
@@ -118,6 +119,8 @@ def leanBridgeSummary : LeanBridgeSummary :=
       "Witness-model theorem: polynomial reductions transport P membership by composing reduction and decider witnesses",
       "Lean theorem: NP-complete language in P implies P = NP",
       "Lean theorem: SAT-in-NP witness plus SAT-hardness gives SAT NP-completeness",
+      "Lean theorem: concrete equality, constant-one, constant-zero, NAND-trace, and final-conjunction macro semantics",
+      "Lean computation: exposed single-instance macro outputs are pairwise distinct, nonconstant, and nonprojection",
       "Lean theorem: structured PCCMin loop certificate constructs a residual-band exact-minimization decider witness",
       "Lean theorem: residual-band exact minimization in P plus locked-NAND-to-residual-band reduction gives locked NAND threshold ∈ P",
       "Lean theorem: locked NAND threshold in P plus SAT-to-locked-NAND reduction gives SAT ∈ P"
@@ -126,7 +129,7 @@ def leanBridgeSummary : LeanBridgeSummary :=
       "Checker/reflection soundness: accepted PCCPack emits an accepted structured PCCMin loop certificate",
       "Semantic adequacy of PCCMinLoopCertificate and ZeroSlackCertificate fields for the executable PCCMin algorithm",
       "Residual-band reduction: locked NAND threshold reduces to residual-band exact minimization",
-      "Locked NAND SAT reduction: SAT reduces to the locked NAND threshold language",
+      "Global locked NAND builder and threshold theorem beyond the now-checked local macro truth laws",
       "SAT NP-hardness for the witness-model reduction relation",
       "Semantic adequacy of the witness model relative to a concrete machine model"
     ] }

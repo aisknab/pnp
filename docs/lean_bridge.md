@@ -2,13 +2,21 @@
 
 This directory contains the Lean formalization track for the PNP proof-certificate stack.
 
-It does **not** claim to formalize the full custom JavaScript PCC checker, the full locked-NAND residual-slack development, or all row/package artefacts in Lean yet. Instead, it formalizes the final theorem bridge stated by the proof report:
+The current Lean development formalizes the theorem bridge stated by the report:
 
 ```text
 CheckPCCPackexp(GeneratePCCPack()) = accept => P = NP
 ```
 
-The report states this accepted proof-report boundary and records the final theorem field as `P = NP` under the checker trust model.
+It does **not** yet constitute a complete Lean reproof of the custom JavaScript checker, the full residual-slack package, the complete SAT reduction, or the concrete machine-complexity model. The explicit purpose of the Lean track is to replace each trust-base item with a checked theorem in visible stages.
+
+## Build
+
+```bash
+lake build
+```
+
+The GitHub workflow `.github/workflows/lean-bridge.yml` installs Lean through `elan` and runs the build.
 
 ## Files
 
@@ -18,81 +26,50 @@ lakefile.lean
 lean/PNP.lean
 lean/PNP/Complexity.lean
 lean/PNP/SAT.lean
+lean/PNP/LockedNANDMacros.lean
 lean/PNP/LockedNAND.lean
 lean/PNP/ResidualBand.lean
 lean/PNP/ZeroSlack.lean
 lean/PNP/PCCMin.lean
 lean/PNP/Bridge.lean
-.github/workflows/lean-bridge.yml
+docs/lean_locked_nand_macros.md
 ```
 
-## Build
+## Complexity bridge
 
-With Lean/Lake installed:
-
-```bash
-lake build
-```
-
-The GitHub workflow `lean-bridge` installs Lean through `elan` and runs `lake build`.
-
-## What Lean proves now
-
-`lean/PNP/Complexity.lean` defines a witness-level model:
+`lean/PNP/Complexity.lean` defines the witness-level objects:
 
 ```text
 Language
-ComplexityClass
 PolyTimeDecider
 NondetPolyVerifier
 PolyTimeManyOneReduction
 PClass
 NPClass
 ReducesToPoly
-SAT
 NPComplete
-StandardComplexityAxioms
 ```
 
-In this model:
-
-```text
-PClass L = L has a PolyTimeDecider witness
-NPClass L = L has a NondetPolyVerifier witness
-ReducesToPoly A B = there is a PolyTimeManyOneReduction witness from A to B
-```
-
-The machine semantics and polynomial-bound meaning of these witness objects are still abstract handles in this pass. The closure facts, however, are no longer opaque bridge assumptions.
-
-Lean proves:
+and proves:
 
 ```lean
-theorem p_subset_np_witness_model {A : Language} : PClass A → NPClass A
-```
+theorem p_subset_np_witness_model {A : Language} :
+    PClass A → NPClass A
 
-by embedding a deterministic decider as a nondeterministic verifier that ignores its certificate.
-
-Lean proves:
-
-```lean
 theorem reduction_transports_p_witness_model {A B : Language} :
     ReducesToPoly A B → PClass B → PClass A
-```
 
-by composing a reduction witness with a decider witness.
-
-Lean then proves:
-
-```lean
 theorem np_complete_in_p_implies_p_eq_np
     {L : Language}
     (hComplete : NPComplete L)
     (hInP : PClass L) : PEqualsNP
 ```
 
-The theorem uses witness-model closure theorems, not an external closure-field supplied by `CheckerTrustModel`.
+The witness objects still use abstract code handles. Concrete machine syntax, semantics, and polynomial bounds remain future work.
 
-`lean/PNP/SAT.lean` separates SAT-in-NP from SAT-hardness. It defines:
+## SAT layer
+
+`lean/PNP/SAT.lean` separates SAT membership in NP from SAT hardness:
 
 ```lean
 theorem sat_in_np_witness_model : NPClass SAT
@@ -103,37 +80,75 @@ def SATHard : Prop :=
 def sat_np_complete_from_hardness (hHard : SATHard) : NPComplete SAT
 ```
 
-The SAT-in-NP witness remains an abstract handle in this pass; a later pass should replace it with concrete formula syntax, assignment certificates, and a polynomial verifier.
+The SAT verifier is still an abstract witness handle in this pass.
 
-`lean/PNP/LockedNAND.lean` factors the route through the report's locked NAND threshold language:
+## Concrete locked-NAND macro layer
+
+`lean/PNP/LockedNANDMacros.lean` is a concrete Boolean formalization of the report's local macros.
+
+It defines every displayed gate for:
+
+```text
+M=  equality macro
+M1  constant-one macro
+M0  constant-zero macro
+MN  NAND trace-check macro
+four-gate final conjunction
+```
+
+Lean proves the distinguished-output identities by exhaustive Boolean case analysis:
+
+```lean
+(equalityMacro r u s).a8 = r && boolEq u s
+(constantOneMacro r u).b2 = r && u
+(constantZeroMacro r u).d3 = r && !u
+(traceMacro l t u v).q16 = l && boolEq t (boolNand u v)
+finalConjunction4 z t y = z && t && y
+```
+
+Lean also computes every exposed single-instance truth signature and checks that:
+
+```text
+10 equality outputs are pairwise distinct
+2 constant-one outputs are pairwise distinct
+3 constant-zero outputs are pairwise distinct
+18 trace outputs are pairwise distinct
+all exposed outputs are nonconstant
+all exposed outputs differ from every positive projection
+```
+
+These results are assembled into:
+
+```lean
+def lockedNANDMacroCertificate : LockedNANDMacroCertificate
+```
+
+See `docs/lean_locked_nand_macros.md` for the exact scope.
+
+## Global locked-NAND layer
+
+`lean/PNP/LockedNAND.lean` keeps the full SAT builder and threshold theorem abstract:
 
 ```lean
 constant LockedNANDThreshold : Language
 
 structure LockedNANDReductionTrust where
   satReducesToLockedNAND : ReducesToPoly SAT LockedNANDThreshold
-
-theorem sat_in_p_from_locked_nand_in_p
-    (R : LockedNANDReductionTrust)
-    (hLockedInP : PClass LockedNANDThreshold) : PClass SAT
 ```
 
-`lean/PNP/ResidualBand.lean` factors locked NAND threshold through the report's residual-band exact-minimization theorem:
+The local macro truth laws are no longer part of that trust object. Remaining global work includes carrier freshness, cross-instance separation, prefix coverage, baseline exactness, trace equivalence, final-lock lower bounds, the polynomial builder, the threshold equivalence, and the residual-slack-at-most-four theorem.
+
+## Residual-band, ZeroSlack, and PCCMin layers
+
+`lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 
 ```lean
-constant ResidualBandExactMinimization : Language
-
 structure ResidualBandReductionTrust where
   lockedNANDReducesToResidualBand :
     ReducesToPoly LockedNANDThreshold ResidualBandExactMinimization
-
-theorem locked_nand_in_p_from_residual_band_in_p
-    (R : ResidualBandReductionTrust)
-    (hResidualInP : PClass ResidualBandExactMinimization) :
-    PClass LockedNANDThreshold
 ```
 
-`lean/PNP/ZeroSlack.lean` now separates the rank-ordered oracle and ZeroSlack contradiction from the PCCMin loop certificate. It defines structured certificate boundaries for:
+`lean/PNP/ZeroSlack.lean` exposes structured certificate boundaries for:
 
 ```text
 HResolveSidecarCertificate
@@ -145,51 +160,13 @@ ZeroSlackCertificate
 PCCOracleCertificate
 ```
 
-The fields are still digest/ledger handles in this pass. Later Lean passes should replace them with concrete proofs about terminal MuBridge, SaturatePositive, BCELReady, BN2--BN6, selector realization, HB closure, and the ZeroSlack contradiction.
+`lean/PNP/PCCMin.lean` exposes the structured loop certificate and constructs the witness-model residual-band decider from it.
 
-`lean/PNP/PCCMin.lean` now separates the PCCMin loop certificate from the bare algorithm certificate:
+Most fields in these certificate objects are still digest/ledger handles. Replacing those handles by actual propositions and proofs is a major remaining task.
 
-```lean
-structure PCCMinLoopCertificate where
-  algorithmName : String
-  oracleCertificate : PCCOracleCertificate
-  pccMinReturnsExactMinimum : String
-  residualSlackBounded : String
-  zeroSlackSound : String
-  gainLoopDescends : String
-  certificateEncodingPolynomial : String
-  certificateSizePolynomial : String
+## Final bridge
 
-structure PCCMinAlgorithmCertificate where
-  loopCertificate : PCCMinLoopCertificate
-
-theorem residual_band_in_p_from_pccmin_loop_certificate
-    (loop : PCCMinLoopCertificate) :
-    PClass ResidualBandExactMinimization
-```
-
-This mirrors the report route:
-
-```text
-accepted package -> accepted structured PCCMin loop certificate
-structured PCCMin loop certificate -> residual-band exact minimization in P
-locked NAND threshold reduces to residual-band exact minimization
-therefore locked NAND threshold in P
-SAT reduces to locked NAND threshold
-therefore SAT in P
-```
-
-`lean/PNP/Bridge.lean` defines:
-
-```text
-PCCPack
-GeneratePCCPack
-CheckPCCPackexp
-AcceptedGeneratedPackage
-CheckerTrustModel
-```
-
-and proves:
+`lean/PNP/Bridge.lean` proves:
 
 ```lean
 theorem final_report_bridge
@@ -204,50 +181,51 @@ FinalReportAntecedent = CheckPCCPackexp GeneratePCCPack = Verdict.accept
 FinalReportConsequent = PClass = NPClass
 ```
 
-## What this pass discharged
-
-Earlier Lean passes left the following as trust-base fields:
+The current route is:
 
 ```text
-NP-complete language in P implies P = NP
-P ⊆ NP
-polynomial reductions transport P membership
-SAT-in-NP as part of an opaque SAT NP-completeness field
-accepted package directly implies SAT ∈ P
-accepted package directly implies locked NAND threshold ∈ P
-accepted package directly implies residual-band exact minimization ∈ P
-accepted package directly emits a flat PCCMinAlgorithmCertificate with string fields
+accepted PCC package
+-> structured PCCMin/ZeroSlack certificate
+-> residual-band exact minimization in P
+-> locked NAND threshold in P
+-> SAT in P
+-> P = NP
 ```
 
-The current pass keeps the first three discharged at the witness-model level, proves SAT-in-NP as a witness-model theorem, factors SAT-in-P through locked NAND threshold, factors locked-NAND-in-P through residual-band exact minimization, and factors residual-band-in-P through a structured PCCMin loop certificate with explicit ZeroSlack/oracle subcertificates.
-
-## Explicit Lean trust base after this pass
-
-The current Lean bridge keeps the following as fields or semantic assumptions:
+## Discharged by Lean so far
 
 ```text
-1. Checker/reflection soundness: accepted PCCPack emits an accepted structured PCCMin loop certificate.
-2. Semantic adequacy of PCCMinLoopCertificate and ZeroSlackCertificate fields for the executable PCCMin algorithm.
-3. Residual-band reduction: locked NAND threshold reduces to residual-band exact minimization.
-4. Locked NAND SAT reduction: SAT reduces to the locked NAND threshold language.
-5. SAT NP-hardness for the witness-model reduction relation.
+1. P is a subset of NP in the witness model.
+2. Polynomial reductions transport P membership in the witness model.
+3. An NP-complete language in P implies P = NP.
+4. SAT-in-NP plus SAT hardness gives SAT NP-completeness.
+5. The displayed local locked-NAND macro Boolean identities.
+6. Single-instance macro output distinctness and nonconstant/nonprojection checks.
+7. The abstract bridge composition from PCCMin through residual band, locked NAND, SAT, and P = NP.
+```
+
+## Explicit trust base after this pass
+
+```text
+1. Checker/reflection soundness: accepted PCCPack emits a semantically valid structured PCCMin loop certificate.
+2. Semantic adequacy of the PCCMin and ZeroSlack certificate fields.
+3. The locked-NAND-to-residual-band reduction theorem.
+4. The global SAT-to-locked-NAND builder and threshold theorem beyond the checked local macros.
+5. SAT NP-hardness for concrete complexity definitions.
 6. Semantic adequacy of the witness model relative to a concrete machine model.
 ```
 
-This is intentional. It makes the remaining Lean work visible instead of hiding it behind an opaque theorem.
-
 ## Next formalization targets
 
-The next Lean passes should discharge the remaining trust-base fields one by one:
+The highest-value next targets are:
 
 ```text
-1. Replace ZeroSlackCertificate string handles with concrete ZeroSlack proof objects.
-2. Replace PCCMinLoopCertificate string handles with concrete gain-loop and polynomial-bound proofs.
-3. Replace witness handles with concrete machine syntax and polynomial-bound semantics.
-4. Formalize SAT NP-hardness for those concrete definitions or import it from a trusted math library.
-5. Formalize the locked-NAND SAT threshold theorem.
-6. Formalize the residual-band exact minimization theorem boundary.
-7. Formalize or independently verify the PCC checker soundness theorem.
+1. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
+2. Formalize cross-instance locked-NAND freshness and baseline distinctness.
+3. Formalize trace equivalence and the locked threshold theorem.
+4. Replace witness handles with concrete machine syntax and polynomial-bound semantics.
+5. Formalize or import SAT NP-hardness for those definitions.
+6. Formalize checker/reflection soundness for the PCC package.
 ```
 
-A passing Lean bridge is therefore a real formal artifact, but it is a bridge artifact, not yet a complete Lean reproof of every theorem in the report.
+A passing Lean build is a real checked artifact. At this stage it is a narrowing formal bridge, not yet a complete independent Lean proof of every report theorem.
