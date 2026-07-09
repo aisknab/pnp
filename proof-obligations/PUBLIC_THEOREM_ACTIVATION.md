@@ -1,56 +1,24 @@
-# Public theorem activation gate
+# Public theorem activation withdrawal
 
-Coordinate:
+Coordinate: `PNP-PUBLIC-THEOREM-ACTIVATION-WITHDRAWAL-2026-07-09-01`
+
+The historical public-theorem activation is superseded. Current theorem emission is disabled:
 
 ```text
-PNP-PUBLIC-THEOREM-ACTIVATION-2026-07-05-01
+publicTheoremEmissionAllowed = false
+finalTheoremReady = false
+formalReleaseGatePassed = false
 ```
 
-Checker:
+The historical activation depended on assertion-bearing JavaScript records and an abstract Lean bridge. Those artefacts remain available for provenance, regression testing, and reconstruction, but they are not mathematical theorem evidence.
+
+A future activation can occur only after the formal release gate verifies a closed Lean root theorem with concrete machine and complexity semantics, no PNP-specific axioms or trust parameters, no placeholders, and formal correctness and polynomial-runtime proofs for the locked-NAND and residual-band route.
+
+Human review is not a premise and is not required by this gate.
+
+Run:
 
 ```bash
-npm run proof:public-theorem-activation
+npm run proof:public-theorem-withdrawal
+npm run proof:formal-reconstruction-status
 ```
-
-Direct checker command:
-
-```bash
-node pcc-public-theorem-activation0.mjs --json
-```
-
-## Purpose
-
-This gate activates public theorem emission after the proof-only unrestricted final soundness release accepts.
-
-It depends on:
-
-```text
-PNP-UNRESTRICTED-FINAL-SOUNDNESS-RELEASE-2026-07-05-01
-```
-
-## Activation rule
-
-The gate accepts only if the dependency records:
-
-```text
-unrestrictedFinalSoundnessDischarged = true
-uniformFinalSoundnessProved = true
-internalFinalTheoremReady = true
-pEqualsNPConclusionAccepted = true
-```
-
-and this gate records:
-
-```text
-publicTheoremEmissionAllowed = true
-publicTheoremStatement = "P = NP"
-remainingBlockers = []
-```
-
-## External review policy
-
-External review is not a mathematical premise. It remains useful as reproducibility evidence, bug-finding, and independent audit, but it is not required for public theorem emission once the proof stack accepts through UFS-008.
-
-## What this does not claim
-
-This gate does not claim external consensus. It activates the repository's own public theorem emission under its checker trust model.
