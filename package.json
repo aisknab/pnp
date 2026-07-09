@@ -47,6 +47,8 @@
     "pnp:verify": "node scripts/pnp-verify-all.mjs --json",
     "pnp:verify:upload": "node scripts/pnp-verify-and-upload.mjs --upload",
     "proof:activated-pnp-status": "node pcc-activated-pnp-status0.mjs --json",
+    "proof:formal-reconstruction-status": "node pcc-formal-reconstruction-status0.mjs --json",
+    "proof:public-theorem-withdrawal": "node pcc-public-theorem-activation0.mjs --json",
     "proof:uniform-final-soundness-target": "node pcc-uniform-final-soundness-target0.mjs --json",
     "proof:uniform-input-family": "node pcc-uniform-input-family0.mjs --json",
     "proof:uniform-locked-nand-construction": "node pcc-uniform-locked-nand-construction0.mjs --json",
