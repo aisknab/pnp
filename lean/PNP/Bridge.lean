@@ -8,7 +8,7 @@ checker.  The remaining trust base is represented by fields of
 are still external to this formalization pass.
 -/
 
-import PNP.ResidualBand
+import PNP.PCCMin
 import PNP.SAT
 
 namespace PNP
@@ -35,20 +35,27 @@ def AcceptedGeneratedPackage : Prop :=
 
 /-- The explicit trust model for this Lean bridge.
 
-This pass factors the checker-soundness route through residual-band exact
-minimization.  Remaining fields are now:
-* `pccPackSoundResidualBand`: accepted PCC package gives a polynomial decider
-  witness for residual-band exact minimization;
+This pass factors the checker-soundness route through the PCCMin residual-band
+algorithm certificate.  Remaining fields are now:
+* `pccPackProducesPCCMin`: accepted PCC package emits an accepted PCCMin
+  residual-band exact-minimization certificate;
 * `residualBandReduction`: locked NAND threshold reduces to residual-band exact
   minimization;
 * `lockedNANDReduction`: SAT reduces to locked NAND threshold;
 * `satHard`: SAT is NP-hard for the witness-model reduction relation.
 -/
 structure CheckerTrustModel where
-  pccPackSoundResidualBand : AcceptedGeneratedPackage → PClass ResidualBandExactMinimization
+  pccPackProducesPCCMin : AcceptedGeneratedPackage → PCCMinAlgorithmCertificate
   residualBandReduction : ResidualBandReductionTrust
   lockedNANDReduction : LockedNANDReductionTrust
   satHard : SATHard
+
+/-- The accepted package gives residual-band exact minimization in P through an
+accepted PCCMin certificate. -/
+theorem accepted_generated_package_implies_residual_band_in_p
+    (T : CheckerTrustModel)
+    (h : AcceptedGeneratedPackage) : PClass ResidualBandExactMinimization :=
+  residual_band_in_p_from_pccmin_certificate (T.pccPackProducesPCCMin h)
 
 /-- The accepted package gives locked NAND threshold in P through residual-band
 exact minimization. -/
@@ -57,7 +64,7 @@ theorem accepted_generated_package_implies_locked_nand_in_p
     (h : AcceptedGeneratedPackage) : PClass LockedNANDThreshold :=
   locked_nand_in_p_from_residual_band_in_p
     T.residualBandReduction
-    (T.pccPackSoundResidualBand h)
+    (accepted_generated_package_implies_residual_band_in_p T h)
 
 /-- The accepted package gives SAT in P through residual-band minimization and
 the locked NAND threshold route. -/
@@ -110,11 +117,13 @@ def leanBridgeSummary : LeanBridgeSummary :=
       "Witness-model theorem: polynomial reductions transport P membership by composing reduction and decider witnesses",
       "Lean theorem: NP-complete language in P implies P = NP",
       "Lean theorem: SAT-in-NP witness plus SAT-hardness gives SAT NP-completeness",
+      "Lean theorem: accepted PCCMin certificate constructs a residual-band exact-minimization decider witness",
       "Lean theorem: residual-band exact minimization in P plus locked-NAND-to-residual-band reduction gives locked NAND threshold ∈ P",
       "Lean theorem: locked NAND threshold in P plus SAT-to-locked-NAND reduction gives SAT ∈ P"
     ]
     externalTrustBase := [
-      "Checker soundness: accepted PCCPack implies residual-band exact minimization ∈ P",
+      "Checker/reflection soundness: accepted PCCPack emits an accepted PCCMin residual-band exact-minimization certificate",
+      "Semantic adequacy of PCCMinAlgorithmCertificate fields for the executable PCCMin algorithm",
       "Residual-band reduction: locked NAND threshold reduces to residual-band exact minimization",
       "Locked NAND SAT reduction: SAT reduces to the locked NAND threshold language",
       "SAT NP-hardness for the witness-model reduction relation",
