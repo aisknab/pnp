@@ -4,9 +4,10 @@ Copyright (c) 2026 PNP Labs.
 Locked-NAND reduction layer for the Lean bridge.
 
 This file factors the report bridge through the locked NAND threshold language.
-The equality, constant, trace-check, and final-conjunction macro semantics are
-now checked concretely in `PNP.LockedNANDMacros`.  The remaining external part
-of this layer is the global SAT-instance builder and locked-threshold proof:
+The equality, constant, trace-check, final-conjunction, and prefix-conjunction
+semantics are now checked concretely in `PNP.LockedNANDMacros` and
+`PNP.LockedNANDPrefix`.  The remaining external part of this layer is the
+global SAT-instance builder and locked-threshold proof:
 
   accepted package -> locked NAND threshold in P
   SAT reduces to locked NAND threshold
@@ -15,6 +16,7 @@ of this layer is the global SAT-instance builder and locked-threshold proof:
 
 import PNP.Complexity
 import PNP.LockedNANDMacros
+import PNP.LockedNANDPrefix
 
 namespace PNP
 
@@ -27,12 +29,17 @@ constant LockedNANDThreshold : Language
 theorem locked_nand_macro_layer_checked : LockedNANDMacroCertificate :=
   lockedNANDMacroCertificate
 
+/-- The concrete prefix-conjunction layer has a Lean-constructed proof
+certificate. -/
+theorem locked_nand_prefix_layer_checked : LockedNANDPrefixCertificate :=
+  lockedNANDPrefixCertificate
+
 /-- The locked-NAND SAT-reduction trust object.
 
-The local macro truth laws are no longer part of this trust object.  This field
-now represents the remaining global theorem: the report's full locked NAND
-builder is a polynomial-time many-one reduction from SAT to the locked NAND
-threshold language. -/
+The local macro truth laws and prefix-conjunction exactness are no longer part
+of this trust object.  This field now represents the remaining global theorem:
+the report's full locked NAND builder is a polynomial-time many-one reduction
+from SAT to the locked NAND threshold language. -/
 structure LockedNANDReductionTrust where
   satReducesToLockedNAND : ReducesToPoly SAT LockedNANDThreshold
 
