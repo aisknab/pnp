@@ -20,6 +20,7 @@ lean/PNP/Complexity.lean
 lean/PNP/SAT.lean
 lean/PNP/LockedNAND.lean
 lean/PNP/ResidualBand.lean
+lean/PNP/ZeroSlack.lean
 lean/PNP/PCCMin.lean
 lean/PNP/Bridge.lean
 .github/workflows/lean-bridge.yml
@@ -132,11 +133,26 @@ theorem locked_nand_in_p_from_residual_band_in_p
     PClass LockedNANDThreshold
 ```
 
-`lean/PNP/PCCMin.lean` now separates the PCCMin residual-band algorithm certificate from the bare statement `ResidualBandExactMinimization ∈ P`:
+`lean/PNP/ZeroSlack.lean` now separates the rank-ordered oracle and ZeroSlack contradiction from the PCCMin loop certificate. It defines structured certificate boundaries for:
+
+```text
+HResolveSidecarCertificate
+BudgetSidecarCertificate
+SelectorSilenceCertificate
+HBClosureCertificate
+BCELContradictionCertificate
+ZeroSlackCertificate
+PCCOracleCertificate
+```
+
+The fields are still digest/ledger handles in this pass. Later Lean passes should replace them with concrete proofs about terminal MuBridge, SaturatePositive, BCELReady, BN2--BN6, selector realization, HB closure, and the ZeroSlack contradiction.
+
+`lean/PNP/PCCMin.lean` now separates the PCCMin loop certificate from the bare algorithm certificate:
 
 ```lean
-structure PCCMinAlgorithmCertificate where
+structure PCCMinLoopCertificate where
   algorithmName : String
+  oracleCertificate : PCCOracleCertificate
   pccMinReturnsExactMinimum : String
   residualSlackBounded : String
   zeroSlackSound : String
@@ -144,18 +160,19 @@ structure PCCMinAlgorithmCertificate where
   certificateEncodingPolynomial : String
   certificateSizePolynomial : String
 
-theorem residual_band_in_p_from_pccmin_certificate
-    (cert : PCCMinAlgorithmCertificate) :
+structure PCCMinAlgorithmCertificate where
+  loopCertificate : PCCMinLoopCertificate
+
+theorem residual_band_in_p_from_pccmin_loop_certificate
+    (loop : PCCMinLoopCertificate) :
     PClass ResidualBandExactMinimization
 ```
-
-The certificate fields are digest/ledger handles in this pass. Later Lean passes should replace them by concrete proofs about the normalized gain loop, ZeroSlack, exactness, certificate size, and polynomial runtime.
 
 This mirrors the report route:
 
 ```text
-accepted package -> accepted PCCMin residual-band certificate
-accepted PCCMin certificate -> residual-band exact minimization in P
+accepted package -> accepted structured PCCMin loop certificate
+structured PCCMin loop certificate -> residual-band exact minimization in P
 locked NAND threshold reduces to residual-band exact minimization
 therefore locked NAND threshold in P
 SAT reduces to locked NAND threshold
@@ -199,17 +216,18 @@ SAT-in-NP as part of an opaque SAT NP-completeness field
 accepted package directly implies SAT ∈ P
 accepted package directly implies locked NAND threshold ∈ P
 accepted package directly implies residual-band exact minimization ∈ P
+accepted package directly emits a flat PCCMinAlgorithmCertificate with string fields
 ```
 
-The current pass keeps the first three discharged at the witness-model level, proves SAT-in-NP as a witness-model theorem, factors SAT-in-P through locked NAND threshold, factors locked-NAND-in-P through residual-band exact minimization, and factors residual-band-in-P through an explicit PCCMin algorithm certificate.
+The current pass keeps the first three discharged at the witness-model level, proves SAT-in-NP as a witness-model theorem, factors SAT-in-P through locked NAND threshold, factors locked-NAND-in-P through residual-band exact minimization, and factors residual-band-in-P through a structured PCCMin loop certificate with explicit ZeroSlack/oracle subcertificates.
 
 ## Explicit Lean trust base after this pass
 
 The current Lean bridge keeps the following as fields or semantic assumptions:
 
 ```text
-1. Checker/reflection soundness: accepted PCCPack emits an accepted PCCMin residual-band exact-minimization certificate.
-2. Semantic adequacy of PCCMinAlgorithmCertificate fields for the executable PCCMin algorithm.
+1. Checker/reflection soundness: accepted PCCPack emits an accepted structured PCCMin loop certificate.
+2. Semantic adequacy of PCCMinLoopCertificate and ZeroSlackCertificate fields for the executable PCCMin algorithm.
 3. Residual-band reduction: locked NAND threshold reduces to residual-band exact minimization.
 4. Locked NAND SAT reduction: SAT reduces to the locked NAND threshold language.
 5. SAT NP-hardness for the witness-model reduction relation.
@@ -223,12 +241,13 @@ This is intentional. It makes the remaining Lean work visible instead of hiding 
 The next Lean passes should discharge the remaining trust-base fields one by one:
 
 ```text
-1. Replace PCCMinAlgorithmCertificate string handles with concrete ZeroSlack and PCCMin proof objects.
-2. Replace witness handles with concrete machine syntax and polynomial-bound semantics.
-3. Formalize SAT NP-hardness for those concrete definitions or import it from a trusted math library.
-4. Formalize the locked-NAND SAT threshold theorem.
-5. Formalize the residual-band exact minimization theorem boundary.
-6. Formalize or independently verify the PCC checker soundness theorem.
+1. Replace ZeroSlackCertificate string handles with concrete ZeroSlack proof objects.
+2. Replace PCCMinLoopCertificate string handles with concrete gain-loop and polynomial-bound proofs.
+3. Replace witness handles with concrete machine syntax and polynomial-bound semantics.
+4. Formalize SAT NP-hardness for those concrete definitions or import it from a trusted math library.
+5. Formalize the locked-NAND SAT threshold theorem.
+6. Formalize the residual-band exact minimization theorem boundary.
+7. Formalize or independently verify the PCC checker soundness theorem.
 ```
 
 A passing Lean bridge is therefore a real formal artifact, but it is a bridge artifact, not yet a complete Lean reproof of every theorem in the report.
