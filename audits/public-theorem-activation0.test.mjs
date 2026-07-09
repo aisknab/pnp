@@ -7,80 +7,78 @@ import {
   EvaluatePublicTheoremActivationExample0,
 } from '../pcc-public-theorem-activation0.mjs';
 
-async function currentManifest() {
+async function currentManifest0() {
   return JSON.parse(await readFile(new URL('../proof-obligations/PUBLIC_THEOREM_ACTIVATION.json', import.meta.url), 'utf8'));
 }
 
-test('public theorem activation checker accepts current activation surface', async () => {
+test('public theorem activation checker accepts the withdrawal state', async () => {
   const out = await CheckPublicTheoremActivation0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-PUBLIC-THEOREM-ACTIVATION-2026-07-05-01');
-  assert.equal(out.publicTheoremActivationAccepted, true);
-  assert.equal(out.publicTheoremEmissionAllowed, true);
-  assert.equal(out.publicTheoremStatement, 'P = NP');
-  assert.equal(out.publicTheoremConclusion, 'P = NP');
-  assert.equal(out.publicTheoremUnderCheckerTrustModel, true);
-  assert.equal(out.finalTheoremReady, true);
-  assert.equal(out.internalFinalTheoremReady, true);
-  assert.equal(out.unrestrictedFinalSoundnessDischarged, true);
-  assert.equal(out.uniformFinalSoundnessProved, true);
-  assert.equal(out.externalReviewAcceptanceRequiredForEmission, false);
+  assert.equal(out.coordinate, 'PNP-PUBLIC-THEOREM-ACTIVATION-WITHDRAWAL-2026-07-09-01');
+  assert.equal(out.publicTheoremActivationAccepted, false);
+  assert.equal(out.publicTheoremActivationWithdrawn, true);
+  assert.equal(out.publicTheoremEmissionAllowed, false);
+  assert.equal(out.publicTheoremStatement, null);
+  assert.equal(out.publicTheoremConclusion, null);
+  assert.equal(out.publicTheoremUnderCheckerTrustModel, false);
+  assert.equal(out.finalTheoremReady, false);
+  assert.equal(out.formalReleaseGatePassed, false);
   assert.equal(out.externalReviewIsMathematicalPremise, false);
-  assert.equal(out.historicalReportProseIsMathematicalPremise, false);
-  assert.equal(out.publicSiteWordingIsMathematicalPremise, false);
-  assert.deepEqual(out.clearedBlockers, ['ExternalReview.Acceptance']);
-  assert.deepEqual(out.remainingBlockers, []);
+  assert.equal(out.humanReviewRequiredForMathematicalValidity, false);
+  assert.equal(out.supersedesCoordinate, 'PNP-PUBLIC-THEOREM-ACTIVATION-2026-07-05-01');
 });
 
-test('activation example permits public theorem emission from accepted proof stack', () => {
+test('activation example keeps theorem emission disabled while formal requirements are incomplete', () => {
   const out = EvaluatePublicTheoremActivationExample0({
-    unrestrictedFinalSoundnessDischarged: true,
-    internalFinalTheoremReady: true,
-    pEqualsNPConclusionAccepted: true,
-    usesExternalReviewAsPremise: false,
-    usesHistoricalReportProseAsPremise: false,
+    closedLeanRootTheorem: false,
+    concreteMachineSemantics: false,
+    noProjectSpecificAxioms: false,
+    noSorryOrAdmit: true,
+    formalPolynomialRuntimeProof: false,
+    paperTheoremInventoryMatch: false,
+    generatedSiteStatus: true,
+    usesJsonBooleanActivation: false,
+    usesJavaScriptCheckerAcceptanceAsTheoremEvidence: false,
+    requiresHumanReview: false,
   });
-  assert.deepEqual(out, {
-    tag: 'accept',
-    publicTheoremEmissionAllowed: true,
-    publicTheoremStatement: 'P = NP',
-    remainingBlockers: [],
-  });
+  assert.equal(out.tag, 'accept');
+  assert.equal(out.formalReleaseGatePassed, false);
+  assert.equal(out.publicTheoremEmissionAllowed, false);
+  assert.equal(out.publicTheoremStatement, null);
 });
 
-test('activation example rejects external review as premise', () => {
+test('activation example remains disabled even when declarations are complete', () => {
   const out = EvaluatePublicTheoremActivationExample0({
-    unrestrictedFinalSoundnessDischarged: true,
-    internalFinalTheoremReady: true,
-    pEqualsNPConclusionAccepted: true,
-    usesExternalReviewAsPremise: true,
-    usesHistoricalReportProseAsPremise: false,
+    closedLeanRootTheorem: true,
+    concreteMachineSemantics: true,
+    noProjectSpecificAxioms: true,
+    noSorryOrAdmit: true,
+    formalPolynomialRuntimeProof: true,
+    paperTheoremInventoryMatch: true,
+    generatedSiteStatus: true,
+    usesJsonBooleanActivation: false,
+    usesJavaScriptCheckerAcceptanceAsTheoremEvidence: false,
+    requiresHumanReview: false,
   });
+  assert.equal(out.requirementsDeclaredComplete, true);
+  assert.equal(out.formalReleaseGatePassed, false);
+  assert.equal(out.publicTheoremEmissionAllowed, false);
+  assert.equal(out.publicTheoremStatement, null);
+  assert.equal(out.requiresLeanArtifactVerification, true);
+});
+
+test('withdrawal checker rejects JSON reactivation', async () => {
+  const manifest = await currentManifest0();
+  manifest.publicTheoremEmissionAllowed = true;
+  const out = await CheckPublicTheoremActivation0({ writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
-  assert.equal(out.coord, 'PublicTheoremActivation.ExamplePremise');
+  assert.equal(out.coord, 'PublicTheoremActivation.StatusDependency');
 });
 
-test('public theorem activation rejects external review as policy premise', async () => {
-  const manifest = await currentManifest();
-  manifest.activationPolicy.usesExternalReviewAsPremise = true;
+test('withdrawal checker rejects JavaScript checker acceptance as theorem evidence', async () => {
+  const manifest = await currentManifest0();
+  manifest.withdrawalPolicy.allowsJavaScriptCheckerAcceptanceAsTheoremEvidence = true;
   const out = await CheckPublicTheoremActivation0({ writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'PublicTheoremActivation.PolicyBoolean');
-});
-
-test('public theorem activation rejects missing theorem emission flag', async () => {
-  const manifest = await currentManifest();
-  manifest.publicTheoremEmissionAllowed = false;
-  const out = await CheckPublicTheoremActivation0({ writeOutput: false, manifestOverride: manifest });
-  assert.equal(out.tag, 'reject');
-  assert.equal(out.coord, 'PublicTheoremActivation.BooleanField');
-  assert.deepEqual(out.path, ['publicTheoremEmissionAllowed']);
-});
-
-test('public theorem activation rejects nonempty remaining blockers after activation', async () => {
-  const manifest = await currentManifest();
-  manifest.claimBoundaryAfterActivation.remainingBlockers = ['ExternalReview.Acceptance'];
-  const out = await CheckPublicTheoremActivation0({ writeOutput: false, manifestOverride: manifest });
-  assert.equal(out.tag, 'reject');
-  assert.equal(out.coord, 'PublicTheoremActivation.AfterBoundary');
 });
