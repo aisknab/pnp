@@ -4,8 +4,9 @@ Copyright (c) 2026 PNP Labs.
 Locked-NAND reduction layer for the Lean bridge.
 
 This file factors the report bridge through the locked NAND threshold language.
-The concrete macro truth tables and threshold proof are still external to this
-pass, but the Lean theorem now mirrors the report route:
+The equality, constant, trace-check, and final-conjunction macro semantics are
+now checked concretely in `PNP.LockedNANDMacros`.  The remaining external part
+of this layer is the global SAT-instance builder and locked-threshold proof:
 
   accepted package -> locked NAND threshold in P
   SAT reduces to locked NAND threshold
@@ -13,6 +14,7 @@ pass, but the Lean theorem now mirrors the report route:
 -/
 
 import PNP.Complexity
+import PNP.LockedNANDMacros
 
 namespace PNP
 
@@ -21,11 +23,16 @@ section.  Later passes should replace this abstract language handle by a
 concrete encoding of locked NAND instances and thresholds. -/
 constant LockedNANDThreshold : Language
 
+/-- The concrete local macro layer has a Lean-constructed proof certificate. -/
+theorem locked_nand_macro_layer_checked : LockedNANDMacroCertificate :=
+  lockedNANDMacroCertificate
+
 /-- The locked-NAND SAT-reduction trust object.
 
-This packages the theorem that the report's locked NAND builder is a
-polynomial-time many-one reduction from SAT to the locked NAND threshold
-language. -/
+The local macro truth laws are no longer part of this trust object.  This field
+now represents the remaining global theorem: the report's full locked NAND
+builder is a polynomial-time many-one reduction from SAT to the locked NAND
+threshold language. -/
 structure LockedNANDReductionTrust where
   satReducesToLockedNAND : ReducesToPoly SAT LockedNANDThreshold
 
