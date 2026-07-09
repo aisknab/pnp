@@ -8,6 +8,7 @@ on:
       - 'lean/**'
       - 'docs/lean_bridge.md'
       - 'docs/lean_locked_nand_macros.md'
+      - 'docs/lean_locked_nand_prefix.md'
       - '.github/workflows/lean-bridge.yml'
   push:
     branches:
@@ -18,6 +19,7 @@ on:
       - 'lean/**'
       - 'docs/lean_bridge.md'
       - 'docs/lean_locked_nand_macros.md'
+      - 'docs/lean_locked_nand_prefix.md'
       - '.github/workflows/lean-bridge.yml'
   workflow_dispatch:
 
