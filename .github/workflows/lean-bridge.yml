@@ -7,6 +7,7 @@ on:
       - 'lakefile.lean'
       - 'lean/**'
       - 'docs/lean_bridge.md'
+      - 'docs/lean_locked_nand_macros.md'
       - '.github/workflows/lean-bridge.yml'
   push:
     branches:
@@ -16,6 +17,7 @@ on:
       - 'lakefile.lean'
       - 'lean/**'
       - 'docs/lean_bridge.md'
+      - 'docs/lean_locked_nand_macros.md'
       - '.github/workflows/lean-bridge.yml'
   workflow_dispatch:
 
