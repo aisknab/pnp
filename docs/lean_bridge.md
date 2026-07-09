@@ -19,6 +19,7 @@ lean/PNP.lean
 lean/PNP/Complexity.lean
 lean/PNP/SAT.lean
 lean/PNP/LockedNAND.lean
+lean/PNP/ResidualBand.lean
 lean/PNP/Bridge.lean
 .github/workflows/lean-bridge.yml
 ```
@@ -115,10 +116,27 @@ theorem sat_in_p_from_locked_nand_in_p
     (hLockedInP : PClass LockedNANDThreshold) : PClass SAT
 ```
 
+`lean/PNP/ResidualBand.lean` now factors checker soundness through the report's residual-band exact-minimization theorem:
+
+```lean
+constant ResidualBandExactMinimization : Language
+
+structure ResidualBandReductionTrust where
+  lockedNANDReducesToResidualBand :
+    ReducesToPoly LockedNANDThreshold ResidualBandExactMinimization
+
+theorem locked_nand_in_p_from_residual_band_in_p
+    (R : ResidualBandReductionTrust)
+    (hResidualInP : PClass ResidualBandExactMinimization) :
+    PClass LockedNANDThreshold
+```
+
 This mirrors the report route:
 
 ```text
-accepted package -> locked NAND threshold in P
+accepted package -> residual-band exact minimization in P
+locked NAND threshold reduces to residual-band exact minimization
+therefore locked NAND threshold in P
 SAT reduces to locked NAND threshold
 therefore SAT in P
 ```
@@ -158,19 +176,21 @@ P ⊆ NP
 polynomial reductions transport P membership
 SAT-in-NP as part of an opaque SAT NP-completeness field
 accepted package directly implies SAT ∈ P
+accepted package directly implies locked NAND threshold ∈ P
 ```
 
-The current pass keeps the first three discharged at the witness-model level, proves SAT-in-NP as a witness-model theorem, and factors accepted-package soundness through the locked NAND threshold route.
+The current pass keeps the first three discharged at the witness-model level, proves SAT-in-NP as a witness-model theorem, factors SAT-in-P through locked NAND threshold, and factors locked-NAND-in-P through residual-band exact minimization.
 
 ## Explicit Lean trust base after this pass
 
 The current Lean bridge keeps the following as fields or semantic assumptions:
 
 ```text
-1. Checker soundness: accepted PCCPack implies locked NAND threshold ∈ P.
-2. Locked NAND SAT reduction: SAT reduces to the locked NAND threshold language.
-3. SAT NP-hardness for the witness-model reduction relation.
-4. Semantic adequacy of the witness model relative to a concrete machine model.
+1. Checker soundness: accepted PCCPack implies residual-band exact minimization ∈ P.
+2. Residual-band reduction: locked NAND threshold reduces to residual-band exact minimization.
+3. Locked NAND SAT reduction: SAT reduces to the locked NAND threshold language.
+4. SAT NP-hardness for the witness-model reduction relation.
+5. Semantic adequacy of the witness model relative to a concrete machine model.
 ```
 
 This is intentional. It makes the remaining Lean work visible instead of hiding it behind an opaque theorem.

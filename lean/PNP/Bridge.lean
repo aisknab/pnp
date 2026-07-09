@@ -8,7 +8,7 @@ checker.  The remaining trust base is represented by fields of
 are still external to this formalization pass.
 -/
 
-import PNP.LockedNAND
+import PNP.ResidualBand
 import PNP.SAT
 
 namespace PNP
@@ -35,25 +35,38 @@ def AcceptedGeneratedPackage : Prop :=
 
 /-- The explicit trust model for this Lean bridge.
 
-This pass factors the bridge through the report's locked NAND route and separates
-SAT-in-NP from SAT-hardness.  Remaining fields are now:
-* `pccPackSoundLockedNAND`: accepted PCC package gives a polynomial decider
-  witness for the locked NAND threshold language;
-* `lockedNANDReduction`: SAT reduces to the locked NAND threshold language;
+This pass factors the checker-soundness route through residual-band exact
+minimization.  Remaining fields are now:
+* `pccPackSoundResidualBand`: accepted PCC package gives a polynomial decider
+  witness for residual-band exact minimization;
+* `residualBandReduction`: locked NAND threshold reduces to residual-band exact
+  minimization;
+* `lockedNANDReduction`: SAT reduces to locked NAND threshold;
 * `satHard`: SAT is NP-hard for the witness-model reduction relation.
 -/
 structure CheckerTrustModel where
-  pccPackSoundLockedNAND : AcceptedGeneratedPackage → PClass LockedNANDThreshold
+  pccPackSoundResidualBand : AcceptedGeneratedPackage → PClass ResidualBandExactMinimization
+  residualBandReduction : ResidualBandReductionTrust
   lockedNANDReduction : LockedNANDReductionTrust
   satHard : SATHard
 
-/-- The accepted package gives SAT in P through the locked NAND threshold route. -/
+/-- The accepted package gives locked NAND threshold in P through residual-band
+exact minimization. -/
+theorem accepted_generated_package_implies_locked_nand_in_p
+    (T : CheckerTrustModel)
+    (h : AcceptedGeneratedPackage) : PClass LockedNANDThreshold :=
+  locked_nand_in_p_from_residual_band_in_p
+    T.residualBandReduction
+    (T.pccPackSoundResidualBand h)
+
+/-- The accepted package gives SAT in P through residual-band minimization and
+the locked NAND threshold route. -/
 theorem accepted_generated_package_implies_sat_in_p
     (T : CheckerTrustModel)
     (h : AcceptedGeneratedPackage) : PClass SAT :=
   sat_in_p_from_locked_nand_in_p
     T.lockedNANDReduction
-    (T.pccPackSoundLockedNAND h)
+    (accepted_generated_package_implies_locked_nand_in_p T h)
 
 /-- Formal version of the report's bridge:
 `CheckPCCPackexp(GeneratePCCPack()) = accept` implies `P = NP`, relative to
@@ -97,10 +110,12 @@ def leanBridgeSummary : LeanBridgeSummary :=
       "Witness-model theorem: polynomial reductions transport P membership by composing reduction and decider witnesses",
       "Lean theorem: NP-complete language in P implies P = NP",
       "Lean theorem: SAT-in-NP witness plus SAT-hardness gives SAT NP-completeness",
+      "Lean theorem: residual-band exact minimization in P plus locked-NAND-to-residual-band reduction gives locked NAND threshold ∈ P",
       "Lean theorem: locked NAND threshold in P plus SAT-to-locked-NAND reduction gives SAT ∈ P"
     ]
     externalTrustBase := [
-      "Checker soundness: accepted PCCPack implies locked NAND threshold ∈ P",
+      "Checker soundness: accepted PCCPack implies residual-band exact minimization ∈ P",
+      "Residual-band reduction: locked NAND threshold reduces to residual-band exact minimization",
       "Locked NAND SAT reduction: SAT reduces to the locked NAND threshold language",
       "SAT NP-hardness for the witness-model reduction relation",
       "Semantic adequacy of the witness model relative to a concrete machine model"
