@@ -1,33 +1,60 @@
 # pnp
 
-**Public source and checker repository for a claimed proof that `P = NP`.**
+**Formal reconstruction repository for a proposed route to `P = NP`. The target theorem is not currently established.**
 
-This repository contains the JavaScript checker stack, package generator, materialized certificate and replay records, sealed release artefacts, canonical report, tests, and reviewer documentation for a proposed SAT-to-exact-NAND-minimization route. The claim is extraordinary and has not received independent mathematical validation.
+> **Current status:** public theorem emission is disabled. The historical assertion-checker activation has been superseded. Current status is recorded in [`status/FORMAL_RECONSTRUCTION_STATUS.json`](./status/FORMAL_RECONSTRUCTION_STATUS.json), and the reconstruction programme is described in [`FORMAL_RECONSTRUCTION.md`](./FORMAL_RECONSTRUCTION.md).
+
+This repository contains the historical JavaScript checker and certificate stack, materialized records, release artefacts, the candidate report, tests, and an active Lean formalization track for a SAT-to-locked-NAND exact-minimization programme.
 
 ## Read this first
 
 | Question | Current answer |
 | --- | --- |
-| **What is this repository?** | Source code, finite certificate records, checker and replay machinery, tests, release artefacts, and audit documentation for the author's claimed `P = NP` result. |
-| **What extraordinary claim is being made?** | The report claims a deterministic polynomial-time SAT algorithm by reducing SAT to exact minimization of specially locked multi-output NAND words with residual slack at most four, then applying a claimed polynomial exact minimizer for that residual band. |
-| **What is the current verification status?** | The frozen 7072f8d release records internal checker acceptance, replay closure, final certificate/release-gate/report acceptance, and 1,121 passing tests. No independent reviewer has confirmed theorem correctness, checker soundness, generated-package completeness, or the mathematical implication to `P = NP`. See [EXTERNAL_REVIEW_STATUS.md](./EXTERNAL_REVIEW_STATUS.md). |
-| **What can a hash check establish?** | That retrieved bytes match a published checksum ledger, subject to the hash implementation and collision assumptions. It does **not** establish theorem correctness, checker soundness, or correct generation. |
-| **What can the checker establish?** | That the supplied records satisfy the predicates implemented by the named checker and its linkage rules. Checker acceptance does **not** independently establish that those predicates are mathematically sufficient or correctly implemented. |
-| **What remains for external reviewers?** | The locked-NAND SAT bridge; residual-band completeness and `ZeroSlack`; the proof kernel, Sigma schemas, and reflection mappings; parser/canonicalization; no-hidden-minimization coverage; polynomial runtime and certificate-size bounds; and clean-room reproduction. |
-| **How do I run the smallest verification?** | Run `npm ci` and `npm run examples:minimal`. This executes eight scoped pass/fail onboarding fixtures; it is not a proof verification. |
-| **Where should reviewers start?** | Start with [docs/reviewer_guide.md](./docs/reviewer_guide.md), then [docs/proof_pipeline.md](./docs/proof_pipeline.md), [docs/terminology_crosswalk.md](./docs/terminology_crosswalk.md), and [docs/trust_model.md](./docs/trust_model.md). |
+| **Is `P = NP` formally proved here?** | No. The target theorem is not formally established by the current repository. |
+| **What did the historical checker establish?** | It established that supplied records satisfied implemented shape, linkage, replay, digest, and assertion-field predicates. That is not the same as proving the mathematical propositions named by those records. |
+| **What does the current Lean bridge establish?** | A conditional bridge in an abstract witness model. Concrete machine semantics, several reductions, checker soundness, ZeroSlack semantics, and polynomial bounds remain to be formalized. |
+| **Is human review required?** | No. Human review is not a mathematical premise and is not part of the formal release gate. The result must be self-contained and mechanically checkable. |
+| **What is authoritative now?** | [`status/FORMAL_RECONSTRUCTION_STATUS.json`](./status/FORMAL_RECONSTRUCTION_STATUS.json), mirrored to [`public/pnp-status.json`](./public/pnp-status.json). |
+| **Where is the work plan?** | [`FORMAL_RECONSTRUCTION.md`](./FORMAL_RECONSTRUCTION.md). |
 
-## Claim boundary
+## Current claim boundary
 
-The repository records the following conditional claim:
+The project is working toward the target theorem:
+
+```text
+P = NP
+```
+
+The current repository does **not** emit that theorem as established. In particular:
+
+```text
+publicTheoremEmissionAllowed = false
+finalTheoremReady = false
+formalReleaseGatePassed = false
+```
+
+The historical conditional record
 
 ```text
 CheckPCCPackexp(GeneratePCCPack())=accept implies P = NP
 ```
 
-The generator is untrusted. The evidential object is the materialized package as interpreted by the checker, followed by the recorded acceptance, replay, certificate, and release linkage. This boundary is an internal repository claim and must not be paraphrased as external acceptance or consensus.
+is retained for provenance. It is not the current theorem-status authority. The generator is untrusted. Historical checker acceptance, canonical bytes rather than digest equality, release linkage, or replay success do not by themselves establish the mathematical implication.
 
-## Quick start for reviewers
+## Formal release gate
+
+A theorem-established status requires all of the following:
+
+- a closed Lean root theorem with the intended concrete statement;
+- concrete languages, machines, reductions, correctness, and cost semantics;
+- no PNP-specific axioms or trust parameters in the root theorem;
+- no `sorry`, `admit`, or equivalent placeholders in its dependency closure;
+- proved locked-NAND, residual-band, ZeroSlack, exactness, and polynomial-bound theorems;
+- a paper theorem inventory and public status generated from the Lean environment.
+
+JSON booleans, JavaScript checker acceptance, hashes, release gates, and test counts cannot activate theorem status.
+
+## Quick start
 
 Requirements: Node.js 20 or newer and npm 10 or newer.
 
@@ -35,32 +62,41 @@ Requirements: Node.js 20 or newer and npm 10 or newer.
 git clone https://github.com/aisknab/pnp.git
 cd pnp
 npm ci
+npm run proof:formal-reconstruction-status
 npm run examples:minimal
 npm run test:negative
 ```
 
-The two reviewer suites should exit successfully only when their accepted fixtures and named rejection cases match the documented expectations. They demonstrate narrow implementation behavior; they do not validate the general mathematics.
+The reconstruction-status command verifies the current non-activation boundary. The examples and negative suites demonstrate scoped implementation behavior only.
 
-Run the current-tree validation suite with:
+Run the current test suite with:
 
 ```bash
 npm run validate
 ```
 
-For the frozen 7072f8d release, use the pinned tags and procedure in [docs/reproducibility.md](./docs/reproducibility.md). Current `main` contains later reviewer documentation, examples, negative tests, and source comments, so its test inventory should not be confused with the frozen 1,121-test release.
+Run the Lean track with:
 
-## What each verification layer means
+```bash
+lake build
+```
 
-| Layer | Command or artefact | What success establishes | What success does not establish |
-| --- | --- | --- | --- |
-| Minimal examples | `npm run examples:minimal` | Eight documented pass/fail fixtures behave as expected. | General theorem correctness or checker completeness. |
-| Named negative tests | `npm run test:negative` | Eight major malformed cases fail at their named checker coordinates. | Absence of other defects or fail-open paths. |
-| Current test suite | `npm test` | The finite current-tree test suite passes in the selected environment. | Exhaustive correctness or polynomial asymptotics. |
-| Public checker smoke | `npm run smoke` | The public `RunAll0` implementation path returns its recorded result for the supplied repository fixture. | Independent checker soundness or validation of every mathematical implication. |
-| Release checksums | `SHA256SUMS` and `SHA256SUMS.sha256` | Published artefact bytes match the sealed ledger. | Correctness of the artefact contents. |
-| Independent audit | Reviewer derivations, counterexamples, clean-room checkers, and reproduction logs | Evidence about mathematics, checker soundness, complexity, and provenance at the audited boundary. | Broader claims outside the audit's stated scope. |
+A successful current Lean build is a development milestone, not yet a closed proof of `P = NP`.
 
-## Frozen release coordinates
+## Verification layers
+
+| Layer | What success establishes | What it does not establish |
+| --- | --- | --- |
+| Reconstruction status | Current and public payloads agree; theorem emission is disabled; legacy activation is superseded. | The target theorem. |
+| Minimal examples | Documented small pass/fail fixtures behave as expected. | General mathematical correctness. |
+| Negative tests | Named malformed cases reject at expected coordinates. | Completeness or absence of other defects. |
+| Current JavaScript suite | Finite implementation tests pass in the selected environment. | Soundness of every mathematical inference or polynomial asymptotics. |
+| Historical replay and checksums | Historical bytes, records, and replay relations match their declared formats. | Truth of assertion-bearing theorem fields. |
+| Lean build | Current formal files typecheck. | A closed theorem unless the root theorem and axiom audit say so. |
+
+## Historical release
+
+The frozen historical release remains available for provenance:
 
 ```text
 source tag:      final-pnp-proof-report-hardened-7072f8d
@@ -70,20 +106,48 @@ artefact commit: 9d1de19f827e5cb6880741352eb2349cbbb45994
 artefact path:   proof-artifacts/final-pnp-proof-report-hardened-7072f8d/
 ```
 
-The canonical report is available as [PDF](./canonical_proof_report.pdf) and [TeX](./canonical_proof_report.tex). It states the author's mathematical claim; publication in this repository is not independent validation.
+The historical [PDF](./canonical_proof_report.pdf) and [TeX](./canonical_proof_report.tex) state the former candidate-proof claim. They are scheduled for explicit historical labeling and replacement by a formalization-status report. They are not current theorem-status documents.
 
-## Reviewer map
+## Reviewer and developer map
 
-- [Reviewer guide](./docs/reviewer_guide.md): neutral overview, audit paths, and fast falsification checklist.
-- [Proof pipeline](./docs/proof_pipeline.md): standard terminology, mathematical route, executable evidence route, and hidden-search risks.
-- [Terminology crosswalk](./docs/terminology_crosswalk.md): formal definitions and standard-language mappings for bespoke terms.
-- [Trust model](./docs/trust_model.md): mathematical, parser, checker, runtime, build, seal, report, and website trust boundaries.
-- [Audit questions](./docs/audit_questions.md): claim-by-claim worksheet with concrete refutation criteria.
-- [Reproducibility protocol](./docs/reproducibility.md): fresh-clone, checksum, pinned-test, regeneration, and comparison instructions.
-- [Minimal examples](./examples/minimal/README.md): eight small accepted/rejected demonstrations.
-- [External review status](./EXTERNAL_REVIEW_STATUS.md): public record of substantive feedback and what has not been independently verified.
+- [Formal reconstruction programme](./FORMAL_RECONSTRUCTION.md)
+- [Lean bridge status](./docs/lean_bridge.md)
+- [Proof pipeline](./docs/proof_pipeline.md)
+- [Terminology crosswalk](./docs/terminology_crosswalk.md)
+- [Trust model](./docs/trust_model.md)
+- [Audit questions](./docs/audit_questions.md)
+- [Reproducibility protocol](./docs/reproducibility.md)
+- [Minimal examples](./examples/minimal/README.md)
 
-## Install and library usage
+## Proof-development scripts
+
+`package.json` may expose narrowly scoped `proof:*` commands. A proof script remains a direct checker invocation of the form:
+
+```text
+node pcc-<checker-name>0.mjs --json
+```
+
+The current status commands are:
+
+```bash
+npm run proof:public-theorem-withdrawal
+npm run proof:formal-reconstruction-status
+```
+
+Historical proof-obligation commands remain available as regression and reconstruction inputs. Their acceptance does not activate theorem emission.
+
+## Public RunAll0 entry point
+
+The historical public entry point remains `RunAll0`:
+
+```bash
+npm run smoke
+npm run smoke:full
+```
+
+It may reproduce historical conditional checker records. A reject run emits a replayable first failure and no public theorem conclusion. An accept run is still not current theorem evidence; current theorem status is controlled exclusively by the formal reconstruction gate.
+
+## Library usage
 
 Use the lockfile-preserving installation command:
 
@@ -91,100 +155,20 @@ Use the lockfile-preserving installation command:
 npm ci
 ```
 
-The primary library module is [`pcc-core.mjs`](./pcc-core.mjs). It exports codec helpers, canonicalization utilities, digest functions, row-key validation helpers, route checks, and a minimal bootstrap context.
-
-```js
-import {
-  makeMinimalBootstrapContext,
-  name,
-  digestObject0,
-} from '@aisknab/pnp';
-
-const ctx = makeMinimalBootstrapContext();
-const digest = digestObject0(ctx, name('example'));
-```
-
-Useful top-level commands:
-
-```bash
-npm run check
-npm run examples:minimal
-npm run test:negative
-npm test
-npm run validate
-```
-
-## Proof-development scripts
-
-The public exports and bin entries are still checked exactly, but `package.json` scripts may add narrowly scoped proof-development entrypoints under the `proof:*` namespace.
-
-A proof script must be a direct checker invocation of this form:
-
-```text
-node pcc-<checker-name>0.mjs --json
-```
-
-This keeps active proof work from being blocked by a stale script freeze while still rejecting unrelated package-script drift. Current proof target scripts:
-
-```bash
-npm run proof:uniform-final-soundness-target
-npm run proof:uniform-input-family
-npm run proof:uniform-locked-nand-construction
-npm run proof:uniform-locked-nand-threshold
-npm run proof:uniform-residual-band-minimizer
-npm run proof:uniform-zeroslack-closure
-npm run proof:no-hidden-oracle-semantic
-npm run proof:uniform-complexity-conclusion
-npm run proof:unrestricted-final-soundness-release
-npm run proof:public-theorem-activation
-npm run proof:activated-pnp-status
-```
-
-## Public RunAll0 entry point
-
-The public entry point is `RunAll0`.
-
-```bash
-npm run smoke
-```
-
-For the full replay record:
-
-```bash
-npm run smoke:full
-```
-
-The emitted public conclusion is conditional:
-
-```text
-CheckPCCPackexp(GeneratePCCPack())=accept implies P = NP
-```
-
-The generator is untrusted. The checker validates the materialized package, compares canonical bytes rather than digest equality, and emits a public `P = NP` conclusion only after the final replay accepts. A reject run emits a replayable first failure and no public theorem conclusion.
-
-The package entry point is:
-
-```text
-index.mjs
-```
+The primary JavaScript utility module is [`pcc-core.mjs`](./pcc-core.mjs). It provides parsing, canonicalization, digest, row-key, and scoped checker utilities. These utilities are infrastructure, not a replacement for the Lean proof kernel.
 
 ## Release audit
 
 ```bash
 npm run release:audit
-```
-
-For the full release audit record:
-
-```bash
 npm run release:audit:full
 ```
 
-The release audit checks the public package surface, package exports, README claim boundary, orphaned tests, syntax of checker modules, deterministic repeated `RunAll0` execution, the public surface freeze phase, and the materialized public-status release gate.
+The release audit checks the public package surface, historical deterministic execution, linkage, and artefact invariants. It does not activate theorem emission and is not a mathematical proof.
 
 ## Internal materialized package path
 
-Materialized package checks use explicit JSON fixtures rather than implicit source state:
+Historical materialized package checks use explicit fixtures:
 
 ```text
 MaterializedPCCPack0.json
@@ -192,76 +176,12 @@ MaterializedPCCPack0.json
   -> CheckMaterializedAggregate0
 ```
 
-## Public entry release surface freeze
+They remain available for regression, provenance, and counterexample work while the formal reconstruction replaces assertion-bearing theorem boundaries with concrete Lean propositions and proofs.
 
-The public release surface is checked by `CheckPublicEntryReleaseSurface0`.
+## Release audit README wording freeze
 
-The exact portions are:
+`CheckReadmeReleaseBoundary0` preserves the historical conditional theorem boundary as provenance while requiring the current formal-reconstruction and non-activation language. Its stale-layout exclusions and overclaim checks reject obsolete layout wording and any statement that current theorem emission is active.
 
-```text
-index.mjs public export names
-package.json exports keys and values
-package.json bin keys and values
-```
+## Release audit README negative integration
 
-The script surface is intentionally extensible under the narrow `proof:*` namespace during proof development. Non-proof script additions and unsafe proof-script commands still reject.
-
-## Release audit public surface freeze phase
-
-The release audit executes the public entry release surface freeze checker as a ledger phase named `publicSurfaceFreeze`.
-
-The phase verifies:
-
-```text
-index.mjs public export names
-package.json exports map
-package.json bin map
-package.json script map
-```
-
-During active proof development, the script map check is exact for existing release scripts and permits only the constrained `proof:*` checker-script namespace.
-
-## Release audit public surface freeze summary
-
-The release audit exposes the public-surface check as a first-class summary, not only as a side effect.
-
-The summary includes:
-
-```text
-publicSurfaceFreezeDigest
-publicSurfaceFreezePublicEntryExportCount
-publicSurfaceFreezePackageExportCount
-publicSurfaceFreezePackageBinCount
-publicSurfaceFreezePackageScriptCount
-publicSurfaceFreezeSurfaceFrozen
-```
-
-When enabled, the release audit requires:
-
-```text
-surfaceFrozen = true
-```
-
-During active proof development, `surfaceFrozen = true` means exports and bin entries remain exact while package scripts may grow only through the constrained `proof:*` checker-script namespace.
-
-## Release audit public surface freeze negative coverage
-
-The release audit includes negative coverage for the public surface freeze phase.
-
-The negative checks prove that `CheckReleaseAudit0` rejects if the public surface freeze checker returns an accepted record with:
-
-```text
-wrong normal-form kind
-surfaceFrozen = false
-zero public entry export count
-zero package export count
-zero package bin count
-zero package script count
-missing normal form
-```
-
-All such failures surface at:
-
-```text
-CheckReleaseAudit0.publicSurfaceFreeze
-```
+`CheckReleaseAudit0.readme` wraps the README checker so stale layout wording, overclaiming theorem wording, missing reconstruction status, or an invalid checker normal form causes the release audit to reject.
