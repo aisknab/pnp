@@ -34,16 +34,15 @@ def AcceptedGeneratedPackage : Prop :=
 
 /-- The explicit trust model for this Lean bridge.
 
-This pass has discharged the generic complexity implication into the theorem
-`np_complete_in_p_implies_p_eq_np`.  The remaining fields are narrower:
+This pass has discharged the generic complexity implication and the two generic
+closure facts in the witness model.  The remaining fields are now:
 * `pccPackSound`: soundness of the executable PCC package checker;
-* `satNPComplete`: the SAT NP-completeness theorem for the chosen definitions;
-* `complexityAxioms`: standard closure facts for the abstract P/NP model.
+* `satNPComplete`: the SAT NP-completeness theorem for the chosen witness-model
+  definitions.
 -/
 structure CheckerTrustModel where
   pccPackSound : AcceptedGeneratedPackage → PClass SAT
   satNPComplete : NPComplete SAT
-  complexityAxioms : StandardComplexityAxioms
 
 /-- Formal version of the report's bridge:
 `CheckPCCPackexp(GeneratePCCPack()) = accept` implies `P = NP`, relative to
@@ -52,7 +51,6 @@ theorem accepted_generated_package_implies_p_eq_np
     (T : CheckerTrustModel)
     (h : AcceptedGeneratedPackage) : PEqualsNP :=
   sat_np_complete_and_sat_in_p_implies_p_eq_np
-    T.complexityAxioms
     T.satNPComplete
     (T.pccPackSound h)
 
@@ -84,13 +82,14 @@ def leanBridgeSummary : LeanBridgeSummary :=
     consequentName := "PClass = NPClass"
     bridgeTheoremName := "final_report_bridge"
     dischargedByLean := [
-      "Abstract theorem: NP-complete language in P implies P = NP, from standard closure facts"
+      "Witness-model theorem: P ⊆ NP by embedding a deterministic decider as a nondeterministic verifier",
+      "Witness-model theorem: polynomial reductions transport P membership by composing reduction and decider witnesses",
+      "Lean theorem: NP-complete language in P implies P = NP"
     ]
     externalTrustBase := [
       "Checker soundness: accepted PCCPack implies SAT ∈ P",
-      "SAT NP-completeness for the chosen concrete SAT/P/NP/reduction definitions",
-      "Standard complexity closure facts: P ⊆ NP and polynomial reductions transport P membership",
-      "Concrete machine-model definitions of P, NP, SAT, and polynomial reduction"
+      "SAT NP-completeness for the chosen witness-model SAT/P/NP/reduction definitions",
+      "Semantic adequacy of the witness model relative to a concrete machine model"
     ] }
 
 end PNP
