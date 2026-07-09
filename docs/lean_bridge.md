@@ -27,12 +27,14 @@ lean/PNP.lean
 lean/PNP/Complexity.lean
 lean/PNP/SAT.lean
 lean/PNP/LockedNANDMacros.lean
+lean/PNP/LockedNANDPrefix.lean
 lean/PNP/LockedNAND.lean
 lean/PNP/ResidualBand.lean
 lean/PNP/ZeroSlack.lean
 lean/PNP/PCCMin.lean
 lean/PNP/Bridge.lean
 docs/lean_locked_nand_macros.md
+docs/lean_locked_nand_prefix.md
 ```
 
 ## Complexity bridge
@@ -125,6 +127,37 @@ def lockedNANDMacroCertificate : LockedNANDMacroCertificate
 
 See `docs/lean_locked_nand_macros.md` for the exact scope.
 
+## Concrete locked-NAND prefix layer
+
+`lean/PNP/LockedNANDPrefix.lean` formalizes the report's two-gate prefix-conjunction node and the complete conjunction of a supplied check list.
+
+It proves:
+
+```lean
+theorem prefixAndMacro_neg_spec (a b : Bool) :
+    (prefixAndMacro a b).neg = !(a && b)
+
+theorem prefixAndMacro_out_spec (a b : Bool) :
+    (prefixAndMacro a b).out = (a && b)
+
+theorem prefixConjunction_spec (checks : List Bool) :
+    prefixConjunction checks = allChecks checks
+
+theorem prefixConjunction_eq_true_iff (checks : List Bool) :
+    prefixConjunction checks = true ↔
+      ∀ b ∈ checks, b = true
+```
+
+For a nonempty list with `n` checks, Lean also proves that the construction has `n - 1` prefix nodes and exactly `2(n - 1)` NAND gates. The two exposed outputs of a prefix node are checked to be distinct, nonconstant, and nonprojection.
+
+These results are assembled into:
+
+```lean
+def lockedNANDPrefixCertificate : LockedNANDPrefixCertificate
+```
+
+See `docs/lean_locked_nand_prefix.md` for the exact scope.
+
 ## Global locked-NAND layer
 
 `lean/PNP/LockedNAND.lean` keeps the full SAT builder and threshold theorem abstract:
@@ -136,7 +169,7 @@ structure LockedNANDReductionTrust where
   satReducesToLockedNAND : ReducesToPoly SAT LockedNANDThreshold
 ```
 
-The local macro truth laws are no longer part of that trust object. Remaining global work includes carrier freshness, cross-instance separation, prefix coverage, baseline exactness, trace equivalence, final-lock lower bounds, the polynomial builder, the threshold equivalence, and the residual-slack-at-most-four theorem.
+The local macro truth laws and supplied-list prefix exactness are no longer part of that trust object. Remaining global work includes constructing the exact global distinguished-check list, carrier freshness, cross-instance separation, global baseline exactness, trace equivalence, final-lock lower bounds, the polynomial builder, the threshold equivalence, and the residual-slack-at-most-four theorem.
 
 ## Residual-band, ZeroSlack, and PCCMin layers
 
@@ -201,7 +234,11 @@ accepted PCC package
 4. SAT-in-NP plus SAT hardness gives SAT NP-completeness.
 5. The displayed local locked-NAND macro Boolean identities.
 6. Single-instance macro output distinctness and nonconstant/nonprojection checks.
-7. The abstract bridge composition from PCCMin through residual band, locked NAND, SAT, and P = NP.
+7. The two-gate prefix conjunction semantics.
+8. Exact supplied-list prefix coverage and the true-iff-all-checks theorem.
+9. The exact 2(n-1) prefix gate count for nonempty check lists.
+10. Prefix-node exposed-output distinctness and nonconstant/nonprojection checks.
+11. The abstract bridge composition from PCCMin through residual band, locked NAND, SAT, and P = NP.
 ```
 
 ## Explicit trust base after this pass
@@ -210,7 +247,7 @@ accepted PCC package
 1. Checker/reflection soundness: accepted PCCPack emits a semantically valid structured PCCMin loop certificate.
 2. Semantic adequacy of the PCCMin and ZeroSlack certificate fields.
 3. The locked-NAND-to-residual-band reduction theorem.
-4. The global SAT-to-locked-NAND builder and threshold theorem beyond the checked local macros.
+4. The global SAT-to-locked-NAND builder and threshold theorem beyond the checked local macro and prefix semantics.
 5. SAT NP-hardness for concrete complexity definitions.
 6. Semantic adequacy of the witness model relative to a concrete machine model.
 ```
@@ -220,12 +257,14 @@ accepted PCC package
 The highest-value next targets are:
 
 ```text
-1. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
+1. Construct the exact global distinguished-check list and prove each required check appears exactly once.
 2. Formalize cross-instance locked-NAND freshness and baseline distinctness.
-3. Formalize trace equivalence and the locked threshold theorem.
-4. Replace witness handles with concrete machine syntax and polynomial-bound semantics.
-5. Formalize or import SAT NP-hardness for those definitions.
-6. Formalize checker/reflection soundness for the PCC package.
+3. Formalize the direct-wire output lower bound and baseline gate count.
+4. Formalize trace equivalence and the locked threshold theorem.
+5. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
+6. Replace witness handles with concrete machine syntax and polynomial-bound semantics.
+7. Formalize or import SAT NP-hardness for those definitions.
+8. Formalize checker/reflection soundness for the PCC package.
 ```
 
 A passing Lean build is a real checked artifact. At this stage it is a narrowing formal bridge, not yet a complete independent Lean proof of every report theorem.
