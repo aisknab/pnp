@@ -33,40 +33,67 @@ The GitHub workflow `lean-bridge` installs Lean through `elan` and runs `lake bu
 
 ## What Lean proves now
 
-`lean/PNP/Complexity.lean` defines abstract versions of:
+`lean/PNP/Complexity.lean` defines a witness-level model:
 
 ```text
 Language
 ComplexityClass
+PolyTimeDecider
+NondetPolyVerifier
+PolyTimeManyOneReduction
 PClass
 NPClass
-PEqualsNP
 ReducesToPoly
 SAT
 NPComplete
 StandardComplexityAxioms
 ```
 
-and proves the standard abstract implication:
+In this model:
+
+```text
+PClass L = L has a PolyTimeDecider witness
+NPClass L = L has a NondetPolyVerifier witness
+ReducesToPoly A B = there is a PolyTimeManyOneReduction witness from A to B
+```
+
+The machine semantics and polynomial-bound meaning of these witness objects are still abstract handles in this pass.  The closure facts, however, are no longer opaque bridge assumptions.
+
+Lean proves:
+
+```lean
+theorem p_subset_np_witness_model {A : Language} : PClass A → NPClass A
+```
+
+by embedding a deterministic decider as a nondeterministic verifier that ignores its certificate.
+
+Lean proves:
+
+```lean
+theorem reduction_transports_p_witness_model {A B : Language} :
+    ReducesToPoly A B → PClass B → PClass A
+```
+
+by composing a reduction witness with a decider witness.
+
+Lean then packages those into:
+
+```lean
+def standardComplexityAxioms : StandardComplexityAxioms
+```
+
+and proves:
 
 ```lean
 theorem np_complete_in_p_implies_p_eq_np
-    (H : StandardComplexityAxioms)
     {L : Language}
     (hComplete : NPComplete L)
     (hInP : PClass L) : PEqualsNP
 ```
 
-The theorem uses only:
+The theorem now uses witness-model closure theorems, not an external closure-field supplied by `CheckerTrustModel`.
 
-```text
-P ⊆ NP
-polynomial reductions transport P membership
-NP-completeness of L
-L ∈ P
-```
-
-`lean/PNP/Bridge.lean` then defines:
+`lean/PNP/Bridge.lean` defines:
 
 ```text
 PCCPack
@@ -93,23 +120,24 @@ FinalReportConsequent = PClass = NPClass
 
 ## What this pass discharged
 
-The first Lean bridge kept the whole step
+Earlier Lean passes left the following as trust-base fields:
 
 ```text
 NP-complete language in P implies P = NP
+P ⊆ NP
+polynomial reductions transport P membership
 ```
 
-as a field of `CheckerTrustModel`.  This pass discharges that generic implication as a Lean theorem in `PNP.Complexity`.
+The current pass discharges all three at the witness-model level.
 
 ## Explicit Lean trust base after this pass
 
-The current Lean bridge keeps the following as fields or axioms:
+The current Lean bridge keeps the following as fields or semantic assumptions:
 
 ```text
 1. Checker soundness: accepted PCCPack implies SAT ∈ P.
-2. SAT NP-completeness for the chosen concrete SAT/P/NP/reduction definitions.
-3. Standard complexity closure facts: P ⊆ NP and polynomial reductions transport P membership.
-4. Concrete machine-model definitions of P, NP, SAT, and polynomial reduction.
+2. SAT NP-completeness for the witness-model SAT/P/NP/reduction definitions.
+3. Semantic adequacy of the witness model relative to a concrete machine model.
 ```
 
 This is intentional. It makes the remaining Lean work visible instead of hiding it behind an opaque theorem.
@@ -119,7 +147,7 @@ This is intentional. It makes the remaining Lean work visible instead of hiding 
 The next Lean passes should discharge the remaining trust-base fields one by one:
 
 ```text
-1. Replace abstract PClass/NPClass/SAT/ReducesToPoly with concrete definitions.
+1. Replace witness handles with concrete machine syntax and polynomial-bound semantics.
 2. Formalize SAT NP-completeness for those concrete definitions or import it from a trusted math library.
 3. Formalize the locked-NAND SAT threshold theorem.
 4. Formalize the residual-band exact minimization theorem boundary.
