@@ -1,156 +1,123 @@
 {
-  "kind": "PNPPublicTheoremActivation0",
+  "kind": "PNPPublicTheoremActivationWithdrawal0",
   "version": 0,
-  "coordinate": "PNP-PUBLIC-THEOREM-ACTIVATION-2026-07-05-01",
-  "status": "public-theorem-activation-accepted",
-  "title": "Public theorem activation gate",
-  "purpose": "Activate public theorem emission from the accepted proof-only unrestricted final soundness release, while recording that external review remains an audit layer and not a mathematical premise.",
+  "coordinate": "PNP-PUBLIC-THEOREM-ACTIVATION-WITHDRAWAL-2026-07-09-01",
+  "status": "public-theorem-activation-withdrawn",
+  "title": "Public theorem activation withdrawal",
+  "purpose": "Supersede the historical assertion-checker activation and keep public theorem emission disabled until a closed, concrete, assumption-audited Lean theorem satisfies the formal release gate.",
+  "supersedesCoordinate": "PNP-PUBLIC-THEOREM-ACTIVATION-2026-07-05-01",
+  "supersededByStatusCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-09-01",
   "dependsOn": [
-    "PNP-UNRESTRICTED-FINAL-SOUNDNESS-RELEASE-2026-07-05-01"
+    "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-09-01"
   ],
-  "claimBoundaryBefore": {
-    "publicTheoremEmissionAllowed": false,
-    "finalTheoremReady": true,
-    "internalFinalTheoremReady": true,
-    "remainingBlockers": [
-      "ExternalReview.Acceptance"
-    ]
-  },
-  "claimBoundaryAfterActivation": {
-    "publicTheoremEmissionAllowed": true,
-    "finalTheoremReady": true,
-    "internalFinalTheoremReady": true,
-    "activeFinalNodeIds": [
-      "UFS-001-InputFamilyUniformity",
-      "UFS-002-LockedNANDConstructionUniformPolynomial",
-      "UFS-003-ThresholdEquivalenceAllInputs",
-      "UFS-004-ResidualBandMinimizerUniformPolynomial",
-      "UFS-005-ZeroSlackContradictionUniform",
-      "UFS-006-NoHiddenOracleSemanticCompleteness",
-      "UFS-007-ComplexityConclusionUniform",
-      "UFS-008-ReleaseTransitionFromProofOnly",
-      "PUBLIC-THEOREM-ACTIVATION"
-    ],
-    "clearedBlockers": [
-      "ExternalReview.Acceptance"
-    ],
-    "remainingBlockers": []
-  },
-  "publicTheoremActivationAccepted": true,
-  "publicTheoremEmissionAllowed": true,
-  "publicTheoremStatement": "P = NP",
-  "publicTheoremAntecedent": "accepted UFS-001 through UFS-008 proof stack in the current checkout",
-  "publicTheoremConclusion": "P = NP",
-  "publicTheoremUnderCheckerTrustModel": true,
+  "publicTheoremActivationAccepted": false,
+  "publicTheoremActivationWithdrawn": true,
+  "publicTheoremEmissionAllowed": false,
+  "publicTheoremStatement": null,
+  "publicTheoremConclusion": null,
+  "publicTheoremUnderCheckerTrustModel": false,
+  "finalTheoremReady": false,
+  "internalFinalTheoremReady": false,
+  "formalReleaseGatePassed": false,
   "externalReviewAcceptanceRequiredForEmission": false,
   "externalReviewIsMathematicalPremise": false,
-  "historicalReportProseIsMathematicalPremise": false,
-  "publicSiteWordingIsMathematicalPremise": false,
-  "unrestrictedFinalSoundnessRequired": true,
-  "unrestrictedFinalSoundnessDischarged": true,
-  "activationPolicy": {
-    "id": "ProofStackPublicTheoremActivation0",
-    "requiresUnrestrictedFinalSoundnessRelease": true,
-    "requiresInternalFinalTheoremReady": true,
-    "requiresPEqualsNPConclusionAccepted": true,
-    "requiresSATInPConclusionAccepted": true,
-    "requiresExternalReviewAcceptance": false,
-    "clearsExternalReviewPublicationBlocker": true,
-    "externalReviewRemainsAuditLayer": true,
+  "humanReviewRequiredForMathematicalValidity": false,
+  "withdrawalPolicy": {
+    "id": "FormalReconstructionPublicTheoremWithdrawal0",
+    "requiresClosedLeanRootTheoremForFutureActivation": true,
+    "requiresConcreteMachineSemantics": true,
+    "requiresNoProjectSpecificAxioms": true,
+    "requiresNoSorryOrAdmit": true,
+    "requiresFormalPolynomialRuntimeProof": true,
+    "allowsJsonBooleanActivation": false,
+    "allowsJavaScriptCheckerAcceptanceAsTheoremEvidence": false,
     "usesExternalReviewAsPremise": false,
     "usesHistoricalReportProseAsPremise": false,
     "usesPublicSiteWordingAsPremise": false,
-    "allowsPublicTheoremEmission": true,
-    "theoremLanguage": "The repository's accepted proof stack emits P = NP under its explicit checker trust model. External review is invited as reproducibility and audit evidence, not as a theorem premise."
+    "allowsPublicTheoremEmissionNow": false
   },
   "proofObligations": [
     {
-      "id": "PTA-001-UnrestrictedReleaseAccepted",
-      "statement": "The unrestricted final soundness release checker accepts in the current checkout.",
-      "requiredForActivation": true
+      "id": "PTW-001-CurrentEmissionDisabled",
+      "statement": "The current status and public mirror both set publicTheoremEmissionAllowed = false.",
+      "requiredForWithdrawal": true
     },
     {
-      "id": "PTA-002-InternalFinalTheoremReady",
-      "statement": "The accepted release dependency records internalFinalTheoremReady = true and P = NP conclusion accepted.",
-      "requiredForActivation": true
+      "id": "PTW-002-LegacyActivationSuperseded",
+      "statement": "The historical activated-status path is an explicit supersession tombstone and cannot authorize theorem emission.",
+      "requiredForWithdrawal": true
     },
     {
-      "id": "PTA-003-ExternalReviewNotPremise",
-      "statement": "External review acceptance is not a mathematical premise and is not required for public theorem emission after UFS-008 acceptance.",
-      "requiredForActivation": true
+      "id": "PTW-003-FormalGateRequired",
+      "statement": "Future activation requires a closed Lean root theorem with concrete semantics, no project-specific axioms, no placeholders, and formal polynomial bounds.",
+      "requiredForWithdrawal": true
     },
     {
-      "id": "PTA-004-HistoricalProseNotPremise",
-      "statement": "Historical report prose, public-site wording, or prior theorem-emission text is not used as a premise for activation.",
-      "requiredForActivation": true
+      "id": "PTW-004-AssertionRecordsNonAuthoritative",
+      "statement": "JavaScript checker acceptance, JSON booleans, hashes, replay records, and release gates are not mathematical theorem evidence.",
+      "requiredForWithdrawal": true
     },
     {
-      "id": "PTA-005-TheoremStatementBound",
-      "statement": "The activated theorem statement is exactly P = NP under the repository checker trust model.",
-      "requiredForActivation": true
-    },
-    {
-      "id": "PTA-006-RemainingBlockersEmpty",
-      "statement": "The activation policy clears the remaining publication blocker and records remainingBlockers = [].",
-      "requiredForActivation": true
+      "id": "PTW-005-NoHumanPremise",
+      "statement": "Human review is not a mathematical premise and is not required by the formal release gate.",
+      "requiredForWithdrawal": true
     }
   ],
-  "uniformityClaims": {
-    "activationDependsOnAcceptedProofStack": true,
-    "publicTheoremEmissionAllowed": true,
-    "externalReviewNotMathematicalPremise": true,
-    "historicalReportProseNotMathematicalPremise": true,
-    "publicSiteWordingNotMathematicalPremise": true,
-    "theoremStatementExact": true,
-    "remainingBlockersEmptyAfterActivation": true
-  },
   "positiveExamples": [
     {
-      "id": "accepted-proof-stack-activates-public-theorem",
+      "id": "incomplete-formal-gate-keeps-emission-disabled",
       "input": {
-        "unrestrictedFinalSoundnessDischarged": true,
-        "internalFinalTheoremReady": true,
-        "pEqualsNPConclusionAccepted": true,
-        "usesExternalReviewAsPremise": false,
-        "usesHistoricalReportProseAsPremise": false
+        "closedLeanRootTheorem": false,
+        "concreteMachineSemantics": false,
+        "noProjectSpecificAxioms": false,
+        "noSorryOrAdmit": true,
+        "formalPolynomialRuntimeProof": false,
+        "paperTheoremInventoryMatch": false,
+        "generatedSiteStatus": true,
+        "usesJsonBooleanActivation": false,
+        "usesJavaScriptCheckerAcceptanceAsTheoremEvidence": false,
+        "requiresHumanReview": false
       },
       "expected": {
-        "publicTheoremEmissionAllowed": true,
-        "publicTheoremStatement": "P = NP",
-        "remainingBlockers": []
+        "publicTheoremEmissionAllowed": false,
+        "formalReleaseGatePassed": false
       }
     }
   ],
   "negativeExamples": [
     {
-      "id": "reject-external-review-premise",
-      "expectedRejectCoord": "PublicTheoremActivation.PolicyBoolean",
+      "id": "reject-json-reactivation",
+      "expectedRejectCoord": "PublicTheoremActivation.WithdrawalBoolean",
       "manifestPatch": {
-        "activationPolicy": {
-          "usesExternalReviewAsPremise": true
-        }
+        "publicTheoremEmissionAllowed": true
       }
     },
     {
-      "id": "reject-missing-theorem-emission",
-      "expectedRejectCoord": "PublicTheoremActivation.BooleanField",
+      "id": "reject-checker-acceptance-as-theorem-evidence",
+      "expectedRejectCoord": "PublicTheoremActivation.PolicyBoolean",
       "manifestPatch": {
-        "publicTheoremEmissionAllowed": false
+        "withdrawalPolicy": {
+          "allowsJavaScriptCheckerAcceptanceAsTheoremEvidence": true
+        }
       }
     }
   ],
   "evidenceSurfaces": [
     "proof-obligations/PUBLIC_THEOREM_ACTIVATION.json",
     "proof-obligations/PUBLIC_THEOREM_ACTIVATION.md",
+    "status/FORMAL_RECONSTRUCTION_STATUS.json",
+    "status/ACTIVATED_PNP_STATUS.json",
+    "public/pnp-status.json",
     "pcc-public-theorem-activation0.mjs",
+    "pcc-formal-reconstruction-status0.mjs",
     "audits/public-theorem-activation0.test.mjs",
-    "proof-obligations/UNRESTRICTED_FINAL_SOUNDNESS_RELEASE.json"
+    "audits/formal-reconstruction-status0.test.mjs"
   ],
   "nonClaims": [
-    "This checker does not claim independent external consensus.",
-    "This checker does not mutate the historical sealed report.",
-    "This checker activates public theorem emission only under the repository checker trust model.",
-    "External review remains invited as reproducibility and audit evidence."
+    "This withdrawal manifest does not prove P = NP.",
+    "This withdrawal manifest does not treat external review as a premise.",
+    "This withdrawal manifest does not delete or rewrite historical release artefacts.",
+    "This withdrawal manifest cannot be changed to true to satisfy the future formal release gate."
   ],
   "audit": {
     "checker": "CheckPublicTheoremActivation0",
