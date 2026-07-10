@@ -250,26 +250,410 @@ def encodeWorkTape (tape : WorkTape) : Tape :=
     head := tape.head.first
     right := tape.head.second :: encodeWorkRight tape.right }
 
+theorem decide_true_iff_constructive (proposition : Prop)
+    (decision : Decidable proposition) :
+    @decide proposition decision = true ↔ proposition := by
+  cases decision with
+  | isFalse hFalse =>
+      exact
+        ⟨fun impossible => False.elim (by contradiction),
+         fun hTrue => False.elim (hFalse hTrue)⟩
+  | isTrue hTrue => exact ⟨fun _ => hTrue, fun _ => rfl⟩
+
+theorem nat_beq_true_iff (left right : Nat) :
+    (left == right) = true ↔ left = right := by
+  change decide (left = right) = true ↔ left = right
+  exact decide_true_iff_constructive (left = right)
+    (inferInstanceAs (Decidable (left = right)))
+
+theorem tapeSymbol_beq_true_iff (left right : TapeSymbol) :
+    (left == right) = true ↔ left = right := by
+  cases left <;> cases right <;>
+    first
+    | exact ⟨fun _ => rfl, fun _ => rfl⟩
+    | exact ⟨fun h => False.elim (by contradiction),
+        fun h => False.elim (by contradiction)⟩
+
+theorem rawRule_match_iff (rule : Rule) (state : Nat)
+    (symbol : TapeSymbol) :
+    ((rule.sourceState == state) && (rule.readSymbol == symbol)) = true ↔
+      rule.sourceState = state ∧ rule.readSymbol = symbol := by
+  constructor
+  · intro h
+    have hSource : (rule.sourceState == state) = true := by
+      cases hValue : (rule.sourceState == state) with
+      | false => rw [hValue] at h; contradiction
+      | true => rfl
+    have hSymbol : (rule.readSymbol == symbol) = true := by
+      rw [hSource] at h
+      exact h
+    exact ⟨nat_beq_true_iff _ _ |>.mp hSource,
+      tapeSymbol_beq_true_iff _ _ |>.mp hSymbol⟩
+  · intro h
+    rcases h with ⟨hSource, hSymbol⟩
+    cases hSource
+    cases hSymbol
+    have hSourceRefl := nat_beq_true_iff rule.sourceState rule.sourceState |>.mpr rfl
+    have hSymbolRefl := tapeSymbol_beq_true_iff rule.readSymbol rule.readSymbol |>.mpr rfl
+    rw [hSourceRefl, hSymbolRefl]
+    rfl
+
+theorem findRule_cons_of_matches (rule : Rule) (rest : List Rule)
+    (state : Nat) (symbol : TapeSymbol)
+    (h : rule.sourceState = state ∧ rule.readSymbol = symbol) :
+    findRule (rule :: rest) state symbol = some rule := by
+  change (if ((rule.sourceState == state) && (rule.readSymbol == symbol)) = true
+    then some rule else findRule rest state symbol) = some rule
+  exact if_pos (rawRule_match_iff rule state symbol |>.mpr h)
+
+theorem findRule_cons_of_not_matches (rule : Rule) (rest : List Rule)
+    (state : Nat) (symbol : TapeSymbol)
+    (h : ¬(rule.sourceState = state ∧ rule.readSymbol = symbol)) :
+    findRule (rule :: rest) state symbol = findRule rest state symbol := by
+  change (if ((rule.sourceState == state) && (rule.readSymbol == symbol)) = true
+    then some rule else findRule rest state symbol) = findRule rest state symbol
+  exact if_neg (fun hBool => h (rawRule_match_iff rule state symbol |>.mp hBool))
+
+theorem findRule_append_of_some (left right : List Rule) (state : Nat)
+    (symbol : TapeSymbol) (selected : Rule)
+    (h : findRule left state symbol = some selected) :
+    findRule (left ++ right) state symbol = some selected := by
+  induction left with
+  | nil => contradiction
+  | cons first rest ih =>
+      by_cases hFirst :
+          first.sourceState = state ∧ first.readSymbol = symbol
+      · have hCons := findRule_cons_of_matches first rest state symbol hFirst
+        have hSelected : first = selected :=
+          Option.some.inj (hCons.symm.trans h)
+        have hAppend := findRule_cons_of_matches first (rest ++ right)
+          state symbol hFirst
+        exact hAppend.trans (congrArg Option.some hSelected)
+      · have hCons := findRule_cons_of_not_matches first rest state symbol hFirst
+        have hTail : findRule rest state symbol = some selected :=
+          hCons.symm.trans h
+        have hAppend := findRule_cons_of_not_matches first (rest ++ right)
+          state symbol hFirst
+        exact hAppend.trans (ih hTail)
+
+theorem findRule_append_of_none (left right : List Rule) (state : Nat)
+    (symbol : TapeSymbol)
+    (h : findRule left state symbol = none) :
+    findRule (left ++ right) state symbol = findRule right state symbol := by
+  induction left with
+  | nil => rfl
+  | cons first rest ih =>
+      by_cases hFirst :
+          first.sourceState = state ∧ first.readSymbol = symbol
+      · have hCons := findRule_cons_of_matches first rest state symbol hFirst
+        have impossible : (some first : Option Rule) = none := hCons.symm.trans h
+        contradiction
+      · have hCons := findRule_cons_of_not_matches first rest state symbol hFirst
+        have hTail : findRule rest state symbol = none := hCons.symm.trans h
+        have hAppend := findRule_cons_of_not_matches first (rest ++ right)
+          state symbol hFirst
+        exact hAppend.trans (ih hTail)
+
 /-! ### Compiler state and finite rule syntax -/
 
-private def rawSymbolCode : TapeSymbol → Nat
-  | .blank => 0
-  | .zero => 1
-  | .one => 2
+private def tripleKey : Nat → TapeSymbol → Nat
+  | 0, .blank => 0
+  | 0, .zero => 1
+  | 0, .one => 2
+  | state + 1, symbol =>
+      Nat.succ (Nat.succ (Nat.succ (tripleKey state symbol)))
 
-private def boundaryState (state : Nat) : Nat := 8 * state
+private theorem tripleKey_zero_ne_succ3 (symbol : TapeSymbol) (n : Nat) :
+    tripleKey 0 symbol ≠ Nat.succ (Nat.succ (Nat.succ n)) := by
+  intro h
+  cases symbol with
+  | blank => contradiction
+  | zero =>
+      have hInner := Nat.succ.inj h
+      contradiction
+  | one =>
+      have hInner := Nat.succ.inj (Nat.succ.inj h)
+      contradiction
+
+private theorem tripleKey_injective {leftState rightState : Nat}
+    {leftSymbol rightSymbol : TapeSymbol}
+    (h : tripleKey leftState leftSymbol = tripleKey rightState rightSymbol) :
+    leftState = rightState ∧ leftSymbol = rightSymbol := by
+  induction leftState generalizing rightState with
+  | zero =>
+      cases rightState with
+      | zero =>
+          cases leftSymbol <;> cases rightSymbol <;>
+            first | exact ⟨rfl, rfl⟩ | contradiction
+      | succ rightState =>
+          exact False.elim
+            (tripleKey_zero_ne_succ3 leftSymbol
+              (tripleKey rightState rightSymbol) h)
+  | succ leftState ih =>
+      cases rightState with
+      | zero =>
+          exact False.elim
+            (tripleKey_zero_ne_succ3 rightSymbol
+              (tripleKey leftState leftSymbol) h.symm)
+      | succ rightState =>
+          have hInner := Nat.succ.inj (Nat.succ.inj (Nat.succ.inj h))
+          have hParts := ih hInner
+          exact ⟨congrArg Nat.succ hParts.1, hParts.2⟩
+
+private inductive CompilerTag where
+  | boundary
+  | dispatch
+  | selected
+  | written
+  | moved
+  | finished
+deriving DecidableEq
+
+private def taggedState : Nat → CompilerTag → Nat
+  | 0, .boundary => 0
+  | 0, .dispatch => 1
+  | 0, .selected => 2
+  | 0, .written => 3
+  | 0, .moved => 4
+  | 0, .finished => 5
+  | payload + 1, tag =>
+      Nat.succ (Nat.succ (Nat.succ (Nat.succ
+        (Nat.succ (Nat.succ (Nat.succ (Nat.succ (taggedState payload tag))))))))
+
+private theorem taggedState_zero_ne_succ8 (tag : CompilerTag) (n : Nat) :
+    taggedState 0 tag ≠
+      Nat.succ (Nat.succ (Nat.succ (Nat.succ
+        (Nat.succ (Nat.succ (Nat.succ (Nat.succ n))))))) := by
+  intro h
+  cases tag with
+  | boundary => contradiction
+  | dispatch =>
+      have hInner := Nat.succ.inj h
+      contradiction
+  | selected =>
+      have hInner := Nat.succ.inj (Nat.succ.inj h)
+      contradiction
+  | written =>
+      have hInner := Nat.succ.inj (Nat.succ.inj (Nat.succ.inj h))
+      contradiction
+  | moved =>
+      have hInner := Nat.succ.inj (Nat.succ.inj (Nat.succ.inj
+        (Nat.succ.inj h)))
+      contradiction
+  | finished =>
+      have hInner := Nat.succ.inj (Nat.succ.inj (Nat.succ.inj
+        (Nat.succ.inj (Nat.succ.inj h))))
+      contradiction
+
+private theorem taggedState_injective {leftPayload rightPayload : Nat}
+    {leftTag rightTag : CompilerTag}
+    (h : taggedState leftPayload leftTag = taggedState rightPayload rightTag) :
+    leftPayload = rightPayload ∧ leftTag = rightTag := by
+  induction leftPayload generalizing rightPayload with
+  | zero =>
+      cases rightPayload with
+      | zero =>
+          cases leftTag <;> cases rightTag <;>
+            first | exact ⟨rfl, rfl⟩ | contradiction
+      | succ rightPayload =>
+          exact False.elim
+            (taggedState_zero_ne_succ8 leftTag
+              (taggedState rightPayload rightTag) h)
+  | succ leftPayload ih =>
+      cases rightPayload with
+      | zero =>
+          exact False.elim
+            (taggedState_zero_ne_succ8 rightTag
+              (taggedState leftPayload leftTag) h.symm)
+      | succ rightPayload =>
+          have hInner := Nat.succ.inj (Nat.succ.inj (Nat.succ.inj
+            (Nat.succ.inj (Nat.succ.inj (Nat.succ.inj
+              (Nat.succ.inj (Nat.succ.inj h)))))))
+          have hParts := ih hInner
+          exact ⟨congrArg Nat.succ hParts.1, hParts.2⟩
+
+private def boundaryState (state : Nat) : Nat :=
+  taggedState state .boundary
 
 private def dispatchState (state : Nat) (first : TapeSymbol) : Nat :=
-  8 * (3 * state + rawSymbolCode first) + 1
+  taggedState (tripleKey state first) .dispatch
 
-private def workSymbolCode (symbol : WorkSymbol) : Nat :=
-  3 * rawSymbolCode symbol.first + rawSymbolCode symbol.second
+private def selectedPayload (state : Nat) (symbol : WorkSymbol) : Nat :=
+  tripleKey (tripleKey state symbol.first) symbol.second
 
-private def selectedState (state : Nat) (symbol : WorkSymbol)
-    (stage : Nat) : Nat :=
-  8 * (9 * state + workSymbolCode symbol) + stage
+private def selectedState (state : Nat) (symbol : WorkSymbol) : Nat → Nat
+  | 2 => taggedState (selectedPayload state symbol) .selected
+  | 3 => taggedState (selectedPayload state symbol) .written
+  | 4 => taggedState (selectedPayload state symbol) .moved
+  | 5 => taggedState (selectedPayload state symbol) .finished
+  | _ => taggedState (selectedPayload state symbol) .selected
+
+private theorem taggedState_ne_of_tag_ne {leftPayload rightPayload : Nat}
+    {leftTag rightTag : CompilerTag} (hTag : leftTag ≠ rightTag) :
+    taggedState leftPayload leftTag ≠ taggedState rightPayload rightTag := by
+  intro h
+  exact hTag (taggedState_injective h).2
+
+private theorem boundaryState_injective {left right : Nat}
+    (h : boundaryState left = boundaryState right) : left = right :=
+  (taggedState_injective h).1
+
+private theorem dispatchState_injective {leftState rightState : Nat}
+    {leftSymbol rightSymbol : TapeSymbol}
+    (h : dispatchState leftState leftSymbol =
+      dispatchState rightState rightSymbol) :
+    leftState = rightState ∧ leftSymbol = rightSymbol :=
+  tripleKey_injective (taggedState_injective h).1
+
+private theorem selectedPayload_injective {leftState rightState : Nat}
+    {leftSymbol rightSymbol : WorkSymbol}
+    (h : selectedPayload leftState leftSymbol =
+      selectedPayload rightState rightSymbol) :
+    leftState = rightState ∧ leftSymbol = rightSymbol := by
+  have hOuter := tripleKey_injective h
+  have hInner := tripleKey_injective hOuter.1
+  cases leftSymbol with
+  | mk leftFirst leftSecond =>
+      cases rightSymbol with
+      | mk rightFirst rightSecond =>
+          have hFirst : leftFirst = rightFirst := hInner.2
+          have hSecond : leftSecond = rightSecond := hOuter.2
+          cases hFirst
+          cases hSecond
+          exact ⟨hInner.1, rfl⟩
+
+private theorem selectedState_two_injective {leftState rightState : Nat}
+    {leftSymbol rightSymbol : WorkSymbol}
+    (h : selectedState leftState leftSymbol 2 =
+      selectedState rightState rightSymbol 2) :
+    leftState = rightState ∧ leftSymbol = rightSymbol :=
+  selectedPayload_injective (taggedState_injective h).1
+
+private theorem selectedState_three_injective {leftState rightState : Nat}
+    {leftSymbol rightSymbol : WorkSymbol}
+    (h : selectedState leftState leftSymbol 3 =
+      selectedState rightState rightSymbol 3) :
+    leftState = rightState ∧ leftSymbol = rightSymbol :=
+  selectedPayload_injective (taggedState_injective h).1
+
+private theorem selectedState_four_injective {leftState rightState : Nat}
+    {leftSymbol rightSymbol : WorkSymbol}
+    (h : selectedState leftState leftSymbol 4 =
+      selectedState rightState rightSymbol 4) :
+    leftState = rightState ∧ leftSymbol = rightSymbol :=
+  selectedPayload_injective (taggedState_injective h).1
+
+private theorem selectedState_five_injective {leftState rightState : Nat}
+    {leftSymbol rightSymbol : WorkSymbol}
+    (h : selectedState leftState leftSymbol 5 =
+      selectedState rightState rightSymbol 5) :
+    leftState = rightState ∧ leftSymbol = rightSymbol :=
+  selectedPayload_injective (taggedState_injective h).1
+
+private theorem boundary_ne_dispatch (state otherState : Nat)
+    (symbol : TapeSymbol) :
+    boundaryState state ≠ dispatchState otherState symbol :=
+  taggedState_ne_of_tag_ne (by intro impossible; contradiction)
+
+private theorem boundary_ne_selected_two (state otherState : Nat)
+    (symbol : WorkSymbol) :
+    boundaryState state ≠ selectedState otherState symbol 2 :=
+  taggedState_ne_of_tag_ne (by intro impossible; contradiction)
+
+private theorem boundary_ne_selected_three (state otherState : Nat)
+    (symbol : WorkSymbol) :
+    boundaryState state ≠ selectedState otherState symbol 3 :=
+  taggedState_ne_of_tag_ne (by intro impossible; contradiction)
+
+private theorem boundary_ne_selected_four (state otherState : Nat)
+    (symbol : WorkSymbol) :
+    boundaryState state ≠ selectedState otherState symbol 4 :=
+  taggedState_ne_of_tag_ne (by intro impossible; contradiction)
+
+private theorem boundary_ne_selected_five (state otherState : Nat)
+    (symbol : WorkSymbol) :
+    boundaryState state ≠ selectedState otherState symbol 5 :=
+  taggedState_ne_of_tag_ne (by intro impossible; contradiction)
+
+private theorem dispatch_ne_selected_two (state : Nat) (raw : TapeSymbol)
+    (otherState : Nat) (symbol : WorkSymbol) :
+    dispatchState state raw ≠ selectedState otherState symbol 2 :=
+  taggedState_ne_of_tag_ne (by intro impossible; contradiction)
+
+private theorem dispatch_ne_selected_three (state : Nat) (raw : TapeSymbol)
+    (otherState : Nat) (symbol : WorkSymbol) :
+    dispatchState state raw ≠ selectedState otherState symbol 3 :=
+  taggedState_ne_of_tag_ne (by intro impossible; contradiction)
+
+private theorem dispatch_ne_selected_four (state : Nat) (raw : TapeSymbol)
+    (otherState : Nat) (symbol : WorkSymbol) :
+    dispatchState state raw ≠ selectedState otherState symbol 4 :=
+  taggedState_ne_of_tag_ne (by intro impossible; contradiction)
+
+private theorem dispatch_ne_selected_five (state : Nat) (raw : TapeSymbol)
+    (otherState : Nat) (symbol : WorkSymbol) :
+    dispatchState state raw ≠ selectedState otherState symbol 5 :=
+  taggedState_ne_of_tag_ne (by intro impossible; contradiction)
+
+private theorem selected_two_ne_three (state : Nat) (symbol : WorkSymbol)
+    (otherState : Nat) (otherSymbol : WorkSymbol) :
+    selectedState state symbol 2 ≠ selectedState otherState otherSymbol 3 :=
+  taggedState_ne_of_tag_ne (by intro impossible; contradiction)
+
+private theorem selected_two_ne_four (state : Nat) (symbol : WorkSymbol)
+    (otherState : Nat) (otherSymbol : WorkSymbol) :
+    selectedState state symbol 2 ≠ selectedState otherState otherSymbol 4 :=
+  taggedState_ne_of_tag_ne (by intro impossible; contradiction)
+
+private theorem selected_two_ne_five (state : Nat) (symbol : WorkSymbol)
+    (otherState : Nat) (otherSymbol : WorkSymbol) :
+    selectedState state symbol 2 ≠ selectedState otherState otherSymbol 5 :=
+  taggedState_ne_of_tag_ne (by intro impossible; contradiction)
+
+private theorem selected_three_ne_four (state : Nat) (symbol : WorkSymbol)
+    (otherState : Nat) (otherSymbol : WorkSymbol) :
+    selectedState state symbol 3 ≠ selectedState otherState otherSymbol 4 :=
+  taggedState_ne_of_tag_ne (by intro impossible; contradiction)
+
+private theorem selected_three_ne_five (state : Nat) (symbol : WorkSymbol)
+    (otherState : Nat) (otherSymbol : WorkSymbol) :
+    selectedState state symbol 3 ≠ selectedState otherState otherSymbol 5 :=
+  taggedState_ne_of_tag_ne (by intro impossible; contradiction)
+
+private theorem selected_four_ne_five (state : Nat) (symbol : WorkSymbol)
+    (otherState : Nat) (otherSymbol : WorkSymbol) :
+    selectedState state symbol 4 ≠ selectedState otherState otherSymbol 5 :=
+  taggedState_ne_of_tag_ne (by intro impossible; contradiction)
 
 private def rawSymbols : List TapeSymbol := [.blank, .zero, .one]
+
+private def compiledDispatchRule (rule : WorkRule) : Rule :=
+  { sourceState := boundaryState rule.sourceState
+    readSymbol := rule.readSymbol.first
+    targetState := dispatchState rule.sourceState rule.readSymbol.first
+    writeSymbol := rule.readSymbol.first
+    move := .right }
+
+private def compiledSelectRule (rule : WorkRule) : Rule :=
+  { sourceState := dispatchState rule.sourceState rule.readSymbol.first
+    readSymbol := rule.readSymbol.second
+    targetState := selectedState rule.sourceState rule.readSymbol 2
+    writeSymbol := rule.writeSymbol.second
+    move := .left }
+
+private def compiledWriteRule (rule : WorkRule) : Rule :=
+  { sourceState := selectedState rule.sourceState rule.readSymbol 2
+    readSymbol := rule.readSymbol.first
+    targetState := selectedState rule.sourceState rule.readSymbol 3
+    writeSymbol := rule.writeSymbol.first
+    move := .stay }
+
+private def compiledMoveRule (rule : WorkRule) : Rule :=
+  { sourceState := selectedState rule.sourceState rule.readSymbol 3
+    readSymbol := rule.writeSymbol.first
+    targetState := selectedState rule.sourceState rule.readSymbol 4
+    writeSymbol := rule.writeSymbol.first
+    move := rule.move }
 
 private def preserveRules (source target : Nat) (movement : HeadMove) :
     List Rule :=
@@ -281,26 +665,10 @@ private def preserveRules (source target : Nat) (movement : HeadMove) :
       move := movement })
 
 private def compileWorkRule (_index : Nat) (rule : WorkRule) : List Rule :=
-  [ { sourceState := boundaryState rule.sourceState
-      readSymbol := rule.readSymbol.first
-      targetState := dispatchState rule.sourceState rule.readSymbol.first
-      writeSymbol := rule.readSymbol.first
-      move := .right }
-  , { sourceState := dispatchState rule.sourceState rule.readSymbol.first
-      readSymbol := rule.readSymbol.second
-      targetState := selectedState rule.sourceState rule.readSymbol 2
-      writeSymbol := rule.writeSymbol.second
-      move := .left }
-  , { sourceState := selectedState rule.sourceState rule.readSymbol 2
-      readSymbol := rule.readSymbol.first
-      targetState := selectedState rule.sourceState rule.readSymbol 3
-      writeSymbol := rule.writeSymbol.first
-      move := .stay }
-  , { sourceState := selectedState rule.sourceState rule.readSymbol 3
-      readSymbol := rule.writeSymbol.first
-      targetState := selectedState rule.sourceState rule.readSymbol 4
-      writeSymbol := rule.writeSymbol.first
-      move := rule.move }
+  [ compiledDispatchRule rule
+  , compiledSelectRule rule
+  , compiledWriteRule rule
+  , compiledMoveRule rule
   ] ++ preserveRules
       (selectedState rule.sourceState rule.readSymbol 4)
       (selectedState rule.sourceState rule.readSymbol 5) rule.move ++
