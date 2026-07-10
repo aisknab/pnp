@@ -24,6 +24,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/formal-publication0.test.mjs',
   'audits/lean-root-target0.test.mjs',
   'audits/lean-concrete-machine0.test.mjs',
+  'audits/lean-concrete-complexity0.test.mjs',
   'audits/lean-nand-semantics0.test.mjs',
   'audits/lean-nand-enumerator0.test.mjs',
   'audits/lean-nand-reference-minimum0.test.mjs',

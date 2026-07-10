@@ -133,7 +133,7 @@ test('formal status retains enumerator caveats after the reference-minimum layer
 
 test('workflow fails closed on any enumerator axiom or incomplete transcript', async () => {
   const workflow = await text0('.github/workflows/lean-bridge.yml');
-  assert.match(workflow, /node --test audits\/lean-root-target0\.test\.mjs audits\/lean-concrete-machine0\.test\.mjs audits\/lean-nand-semantics0\.test\.mjs audits\/lean-nand-enumerator0\.test\.mjs audits\/lean-nand-reference-minimum0\.test\.mjs/u);
+  assert.match(workflow, /run: node --test[^\n]*audits\/lean-nand-enumerator0\.test\.mjs/u);
   assert.match(workflow, /lean-audit\/PNPNANDEnumeratorAxiomAudit\.lean/u);
   assert.match(workflow, /Exact-width NAND enumerator unexpectedly depends on axioms/u);
   assert.match(workflow, /grep -Fc 'does not depend on any axioms'\)" -eq 41/u);

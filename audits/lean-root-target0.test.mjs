@@ -159,7 +159,7 @@ test('Lean toolchain, library root, and root status are explicit and non-theorem
   const main = await text0('lean/PNP/Main.lean');
   assert.doesNotMatch(main, /^\s*import\s+/mu);
   assert.match(main, /namespace PNP\.Main/u);
-  assert.match(main, /standardStatementFormalized\s*:=\s*false/u);
+  assert.match(main, /standardStatementFormalized\s*:=\s*true/u);
   assert.match(main, /unconditionalProofPresent\s*:=\s*false/u);
   assert.match(main, /externalAssumptionsRemain\s*:=\s*true/u);
   assert.match(main, /publicTheoremReleased\s*:=\s*false/u);
@@ -186,6 +186,8 @@ test('Lean axiom audit distinguishes assumption-free status data from the condit
     'PNP.Main.rootTheoremStatus',
     'PNP.Main.rootTheoremStatus_not_released',
     'PNP.Main.rootTheoremStatus_has_external_assumptions',
+    'PNP.Main.ConcretePEqualsNP',
+    'PNP.Main.concretePEqualsNP_iff',
     'PNP.accepted_generated_package_implies_p_eq_np',
     'PNP.final_report_bridge',
   ]) assert.match(audit, new RegExp(`#print axioms ${declaration.replaceAll('.', '\\.')}\\b`, 'u'));

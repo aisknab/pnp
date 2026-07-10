@@ -15,13 +15,13 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-11';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-12';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
 
 export const FORMAL_RECONSTRUCTION_BLOCKERS0 = Object.freeze([
-  'Formal.ConcreteComplexityModel',
+  'Formal.ConcreteComplexityMachineLink',
   'Formal.ConcreteSAT',
   'Formal.LockedNANDThreshold',
   'Formal.ResidualBandMinimizer',
@@ -65,6 +65,7 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'npm run pnp:verify -- --no-write',
   'node --test audits/lean-root-target0.test.mjs',
   'node --test audits/lean-concrete-machine0.test.mjs',
+  'node --test audits/lean-concrete-complexity0.test.mjs',
   'node --test audits/lean-nand-semantics0.test.mjs',
   'node --test audits/lean-nand-enumerator0.test.mjs',
   'node --test audits/lean-nand-reference-minimum0.test.mjs',
@@ -75,6 +76,8 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPBridgeAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteBitStringAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteMachineAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-audit/PNPConcreteComplexityAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-audit/PNPConcreteTargetAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPNANDSemanticsAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPNANDEnumeratorAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPNANDTruthTableAxiomAudit.lean',
@@ -98,7 +101,8 @@ const NON_CLAIMS = Object.freeze([
   'Legacy JavaScript checker acceptance verifies assertion-bearing records under implemented predicates; it is not a formal proof of the named mathematical propositions.',
   'The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.',
   'The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.',
-  'The concrete bitstring, natural-polynomial, and finite-rule machine kernel does not yet define P, NP, reductions, SAT, NP-completeness, or P = NP.',
+  'The concrete bitstring, natural-polynomial, and finite-rule machine kernel is now consumed by a finite charged-pipeline P/NP/reduction interface; the compiler/refinement from composite pipelines to one raw machine is not yet proved.',
+  'The concrete complexity interface proves P subset NP, reduction composition and transport, and the NP-complete-in-P implication relative to its exact pipeline semantics; it does not prove concrete SAT complete or in P.',
   'The formalized direct-wire NAND semantics layer does not by itself prove enumeration, minimum size, replacement/slack, the locked NAND builder, its threshold, SAT, or P = NP.',
   'The exact-width syntactic NAND enumeration remains intentionally noncanonical and may contain duplicates.',
   'The exhaustive direct-wire truth-table and reference-minimum computation has no polynomial-runtime claim and does not formalize the report\'s residual-band minimizer.',
@@ -119,7 +123,8 @@ const NON_CLAIMS = Object.freeze([
   'The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.',
   'The compiled Lean theorem inventory is declaration and axiom-dependency evidence; it does not widen any theorem beyond its exact type and stated scope.',
   'PNP.PEqualsNP uses abstract string-handle witnesses rather than a concrete standard complexity model and is categorically ineligible for public theorem activation.',
-  'The expected concrete target and reviewed kernel fingerprints are intentionally absent in this pass, so the concrete publication gate fails closed.',
+  'PNP.Main.ConcretePEqualsNP now names the inactive finite charged-pipeline target, while PNP.Main.p_eq_np remains absent.',
+  'All five reviewed activation fingerprints remain intentionally unset, so target presence alone cannot open the concrete publication gate.',
   'The current canonical TeX and PDF are generated non-claiming reconstruction reports; the historical 56-page direct-claim report remains historical audit material only.',
 ]);
 
@@ -338,7 +343,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-10-CONCRETE-MACHINE-KERNEL-11',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-10-CONCRETE-COMPLEXITY-12',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -595,7 +600,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-10-11',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-10-12',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

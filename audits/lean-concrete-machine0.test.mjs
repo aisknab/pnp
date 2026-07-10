@@ -120,7 +120,7 @@ test('formal publication records only the concrete kernel milestone', async () =
   assert.equal(milestone.status, 'formalized-foundation-only');
   assert.equal(milestone.earned, true);
   assert.equal(status.standardComplexityModelFormalized, false);
-  assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityModel'), true);
+  assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), true);
   assert.equal(status.projectSpecificAxiomInventory.length, 5);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);

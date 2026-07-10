@@ -48,7 +48,11 @@ machine declarations. Every printed declaration has an empty axiom closure.
 
 ## Boundary
 
-This milestone does not yet define concrete P, NP, nondeterministic verification, certificate-size
-bounds, polynomial transducers or reductions, SAT, NP-completeness, or `P = NP`. The legacy
-`PNP.PEqualsNP` string-handle proposition remains publication-ineligible. The concrete complexity
-blocker, all five project axioms, all seven formal blockers, and the false publication gate remain.
+This machine-kernel milestone by itself does not define P, NP, reductions, SAT, NP-completeness, or
+`P = NP`. The later axiom-free
+[finite charged-pipeline complexity interface](./lean_concrete_complexity.md) now defines bitstring
+P/NP witnesses, polynomial reductions, and the inactive `PNP.Main.ConcretePEqualsNP` target. Its
+finite syntax is grounded at `Machine` leaves, but no compiler/refinement from an arbitrary
+composite pipeline to one raw single-tape machine has been proved. Therefore
+`Formal.ConcreteComplexityMachineLink` remains the first of seven blockers. All five
+project-specific axioms remain, `PNP.Main.p_eq_np` is absent, and the publication gate is false.

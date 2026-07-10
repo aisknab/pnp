@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-11",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-12",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -109,7 +109,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-10-CONCRETE-MACHINE-KERNEL-11",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-10-CONCRETE-COMPLEXITY-12",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -214,7 +214,7 @@
     "archive/legacy-v0/"
   ],
   "remainingFormalObligations": [
-    "Formal.ConcreteComplexityModel",
+    "Formal.ConcreteComplexityMachineLink",
     "Formal.ConcreteSAT",
     "Formal.LockedNANDThreshold",
     "Formal.ResidualBandMinimizer",
@@ -223,7 +223,7 @@
     "Formal.RootTheoremAndAxiomAudit"
   ],
   "remainingBlockers": [
-    "Formal.ConcreteComplexityModel",
+    "Formal.ConcreteComplexityMachineLink",
     "Formal.ConcreteSAT",
     "Formal.LockedNANDThreshold",
     "Formal.ResidualBandMinimizer",
@@ -268,6 +268,7 @@
     "npm run pnp:verify -- --no-write",
     "node --test audits/lean-root-target0.test.mjs",
     "node --test audits/lean-concrete-machine0.test.mjs",
+    "node --test audits/lean-concrete-complexity0.test.mjs",
     "node --test audits/lean-nand-semantics0.test.mjs",
     "node --test audits/lean-nand-enumerator0.test.mjs",
     "node --test audits/lean-nand-reference-minimum0.test.mjs",
@@ -278,6 +279,8 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPBridgeAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteBitStringAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteMachineAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-audit/PNPConcreteComplexityAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-audit/PNPConcreteTargetAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPNANDSemanticsAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPNANDEnumeratorAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPNANDTruthTableAxiomAudit.lean",
@@ -300,7 +303,8 @@
     "Legacy JavaScript checker acceptance verifies assertion-bearing records under implemented predicates; it is not a formal proof of the named mathematical propositions.",
     "The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.",
     "The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.",
-    "The concrete bitstring, natural-polynomial, and finite-rule machine kernel does not yet define P, NP, reductions, SAT, NP-completeness, or P = NP.",
+    "The concrete bitstring, natural-polynomial, and finite-rule machine kernel is now consumed by a finite charged-pipeline P/NP/reduction interface; the compiler/refinement from composite pipelines to one raw machine is not yet proved.",
+    "The concrete complexity interface proves P subset NP, reduction composition and transport, and the NP-complete-in-P implication relative to its exact pipeline semantics; it does not prove concrete SAT complete or in P.",
     "The formalized direct-wire NAND semantics layer does not by itself prove enumeration, minimum size, replacement/slack, the locked NAND builder, its threshold, SAT, or P = NP.",
     "The exact-width syntactic NAND enumeration remains intentionally noncanonical and may contain duplicates.",
     "The exhaustive direct-wire truth-table and reference-minimum computation has no polynomial-runtime claim and does not formalize the report's residual-band minimizer.",
@@ -321,7 +325,8 @@
     "The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.",
     "The compiled Lean theorem inventory is declaration and axiom-dependency evidence; it does not widen any theorem beyond its exact type and stated scope.",
     "PNP.PEqualsNP uses abstract string-handle witnesses rather than a concrete standard complexity model and is categorically ineligible for public theorem activation.",
-    "The expected concrete target and reviewed kernel fingerprints are intentionally absent in this pass, so the concrete publication gate fails closed.",
+    "PNP.Main.ConcretePEqualsNP now names the inactive finite charged-pipeline target, while PNP.Main.p_eq_np remains absent.",
+    "All five reviewed activation fingerprints remain intentionally unset, so target presence alone cannot open the concrete publication gate.",
     "The current canonical TeX and PDF are generated non-claiming reconstruction reports; the historical 56-page direct-claim report remains historical audit material only."
   ],
   "mathematicalTheoremEstablished": false,
@@ -347,11 +352,11 @@
     "expectedRootKernelTypeSha256": null,
     "expectedAxiomClosureSha256": null,
     "expectedSourceClosureSha256": null,
-    "actualConcreteTargetKernelTypeSha256": null,
-    "actualConcreteTargetKernelValueSha256": null,
+    "actualConcreteTargetKernelTypeSha256": "b379ea53b6d32473c46c11da0f46fa34ead8d37dfb80c5f7b5d9a3f5f166369c",
+    "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "6daa2a068fedab6cf0bda8da63267a220e8f6ab6568a8881f9d00872bd251a54",
+    "actualSourceClosureSha256": "0b48d081b1b9ab050184c895c7e1b99ed118c56c9737c7a76a5580dc1bf001be",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -362,8 +367,8 @@
     "unsetFingerprintIsIntentionalFailClosedMigrationGate": true,
     "subchecks": {
       "standardComplexityModelEligible": false,
-      "concreteTargetPresent": false,
-      "concreteTargetIsDefinition": false,
+      "concreteTargetPresent": true,
+      "concreteTargetIsDefinition": true,
       "concreteTargetKernelTypeFingerprintConfigured": false,
       "concreteTargetKernelTypeFingerprintMatches": false,
       "concreteTargetKernelValueFingerprintConfigured": false,
@@ -381,22 +386,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-10-11",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-10-12",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "2636c9dc883d307304fafc7efcc4bfd02912cb3587ed762a13fd0758d603c966",
+  "leanTheoremInventorySha256": "91b4db358afb1156eb39f3d97f49a5bb85a97f0b65ff1a879a51a6552ae15663",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 2168,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 33,
-  "leanTheoremInventoryTheoremCount": 789,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 708,
-  "leanTheoremInventorySourceClosureModuleCount": 24,
-  "leanSourceClosureSha256": "6daa2a068fedab6cf0bda8da63267a220e8f6ab6568a8881f9d00872bd251a54",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-10-11",
+  "leanTheoremInventoryDeclarationCount": 2484,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 36,
+  "leanTheoremInventoryTheoremCount": 883,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 793,
+  "leanTheoremInventorySourceClosureModuleCount": 26,
+  "leanSourceClosureSha256": "0b48d081b1b9ab050184c895c7e1b99ed118c56c9737c7a76a5580dc1bf001be",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-10-12",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "8c7e82ee687fd06d05c629edf47ff89617c0ed8caa4cefba8faab2b46e133679",
+  "formalPublicationMapSha256": "3f99368d729fb278339da66abca283cdaae823c5a614ddfaa893becab1014b6a",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",
@@ -411,7 +416,7 @@
         "PNP.Concrete.run_succ",
         "PNP.Concrete.run_zero"
       ],
-      "nonClaim": "This foundation does not yet define concrete P, NP, reductions, SAT, NP-completeness, or P = NP.",
+      "nonClaim": "This foundation alone does not define concrete P, NP, reductions, SAT, NP-completeness, or P = NP.",
       "theoremRows": [
         {
           "name": "PNP.Concrete.BitString.decodePair_pair",
@@ -474,6 +479,83 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "id": "concrete-complexity-classes",
+      "title": "Concrete P, NP, and polynomial reductions",
+      "classification": "formalized-with-machine-link-pending",
+      "scope": "Bitstring languages, finite charged decision/verifier/function pipelines grounded in concrete machines, polynomial certificate/runtime/output bounds, many-one reductions, and the NP-complete-in-P implication.",
+      "requiredTheorems": [
+        "PNP.Concrete.np_complete_in_p_implies_p_eq_np",
+        "PNP.Concrete.p_subset_np",
+        "PNP.Concrete.reduction_comp",
+        "PNP.Concrete.reduction_refl",
+        "PNP.Concrete.reduction_transports_p",
+        "PNP.Main.concretePEqualsNP_iff"
+      ],
+      "nonClaim": "The charged pipeline is not yet proved to compile or refine to one raw machine; concrete SAT and the publication root theorem remain absent.",
+      "theoremRows": [
+        {
+          "name": "PNP.Concrete.np_complete_in_p_implies_p_eq_np",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "3026a17865cacc2dc65ad62f38e735451ad7009c062c3ff364169c3875c56f9e",
+          "expectedKernelTypeSha256": "3026a17865cacc2dc65ad62f38e735451ad7009c062c3ff364169c3875c56f9e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.p_subset_np",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "ff7fb433d85b53c61c1409ffbfa47b22a1d8184b11ae18f11895b972ad6f6bed",
+          "expectedKernelTypeSha256": "ff7fb433d85b53c61c1409ffbfa47b22a1d8184b11ae18f11895b972ad6f6bed",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.reduction_comp",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "ca5ad5f4ccae69b3efa95b875f6561a934b8b81dffd76583bd344f5938235d2c",
+          "expectedKernelTypeSha256": "ca5ad5f4ccae69b3efa95b875f6561a934b8b81dffd76583bd344f5938235d2c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.reduction_refl",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "3bcdd49c7ca5f508332dddce237b43280d0ea8fbfa64896596b81ce43a9b2d79",
+          "expectedKernelTypeSha256": "3bcdd49c7ca5f508332dddce237b43280d0ea8fbfa64896596b81ce43a9b2d79",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.reduction_transports_p",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "5c930ff45067a6e600af61554aea6a35c1661bee7b1560569a4ebbac9c02f3ac",
+          "expectedKernelTypeSha256": "5c930ff45067a6e600af61554aea6a35c1661bee7b1560569a4ebbac9c02f3ac",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Main.concretePEqualsNP_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "66d644a7be721e907db2bf854137ac76150c5ad3284aca8fccad8b7ee36ca364",
+          "expectedKernelTypeSha256": "66d644a7be721e907db2bf854137ac76150c5ad3284aca8fccad8b7ee36ca364",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-with-machine-link-pending"
     },
     {
       "id": "direct-wire-semantics",
@@ -865,11 +947,11 @@
       "id": "concrete-publication-root",
       "title": "Concrete standard P-versus-NP target and root theorem",
       "classification": "not-formalized",
-      "scope": "Concrete machine semantics, complexity classes, SAT, reductions, and the publication root theorem.",
+      "scope": "Raw-machine-linked complexity classes, concrete SAT completeness and a SAT decider, plus the publication root theorem.",
       "requiredTheorems": [
         "PNP.Main.p_eq_np"
       ],
-      "nonClaim": "The current string-handle PNP.PEqualsNP bridge is nonstandard and publication-ineligible.",
+      "nonClaim": "The concrete target definition is inactive: raw-machine linkage, concrete SAT completeness/deciding, and PNP.Main.p_eq_np remain absent; the legacy string-handle bridge is ineligible.",
       "theoremRows": [
         {
           "name": "PNP.Main.p_eq_np",
@@ -889,7 +971,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-10-11",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-10-12",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

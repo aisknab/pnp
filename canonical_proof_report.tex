@@ -44,7 +44,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-11}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-12}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -52,25 +52,25 @@
   \vspace{0.3cm}
   {\LARGE\bfseries\color{statusred} The repository does not currently establish $P=NP$.\par}
   \vspace{0.3cm}
-  Public theorem emission is disabled. The concrete publication gate is fail-closed because no
-  audited concrete complexity target or reviewed kernel fingerprints exist in this reconstruction.
-  The abstract string-handle bridge is not a standard P-versus-NP formalization and is never an
-  activation source.
+  Public theorem emission is disabled. An audited concrete complexity target now exists, but the
+  charged pipeline has not been linked to the raw machine kernel, its reviewed activation
+  fingerprints are unset, and no root theorem exists. The abstract string-handle bridge is not a
+  standard P-versus-NP formalization and is never an activation source.
   \vspace{0.3cm}
   \end{minipage}
 }
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 2168 \\
-Theorem-kind declarations & 789 \\
-Assumption-free theorem-kind declarations & 708 \\
+Compiled declarations & 2484 \\
+Theorem-kind declarations & 883 \\
+Assumption-free theorem-kind declarations & 793 \\
 Project-specific axioms & 5 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{2636c9dc883d307304fafc7efcc4bfd02912cb3587ed762a13fd0758d603c966}\par}
+{\small Inventory SHA-256: \code{91b4db358afb1156eb39f3d97f49a5bb85a97f0b65ff1a879a51a6552ae15663}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -85,7 +85,8 @@ compiled \code{PNP} environment under \code{leanprover/lean4:v4.31.0}. The expor
 for every exported project declaration. The committed inventory is
 \code{status/LEAN\_THEOREM\_INVENTORY.json}; the public mirror is byte-identical.
 
-The target remains $P=NP$, but target wording is not theorem evidence. JavaScript acceptance,
+The target remains $P=NP$, but target wording---including the new inactive definition
+\code{PNP.Main.ConcretePEqualsNP}---is not theorem evidence. JavaScript acceptance,
 Boolean fields, JSON strings, historical release records, report prose, and external review cannot
 activate a theorem. Only the separately derived concrete publication gate may control theorem
 emission, and that gate is currently false.
@@ -110,7 +111,9 @@ Machine field & Current value \\
 The compatibility entry is \code{PNP.Main.p\_eq\_np}; a matching name alone is insufficient.
 The separate publication target is \code{PNP.Main.ConcretePEqualsNP}. Eligibility also requires
 the exact theorem type, reviewed kernel fingerprints, and a tightly fixed Lean-standard axiom
-closure. No dummy concrete target is introduced by this report.
+closure. The target is present as an inactive definition backed by finite charged-pipeline
+semantics; its presence is not a proof, and the compiler/refinement link to the raw machine kernel
+remains an explicit blocker.
 
 The expected fingerprints are intentionally unset. This is a fail-closed migration gate, not a
 missing runtime input. A verifier must reject any attempt to set \code{passed=true} while a
@@ -122,8 +125,8 @@ Gate subcheck & Result \\
 \midrule
 \endhead
 standardComplexityModelEligible & \statusfalse \\
-concreteTargetPresent & \statusfalse \\
-concreteTargetIsDefinition & \statusfalse \\
+concreteTargetPresent & \statustrue \\
+concreteTargetIsDefinition & \statustrue \\
 concreteTargetKernelTypeFingerprintConfigured & \statusfalse \\
 concreteTargetKernelTypeFingerprintMatches & \statusfalse \\
 concreteTargetKernelValueFingerprintConfigured & \statusfalse \\
@@ -166,10 +169,16 @@ algorithm structures carry string names or code handles rather than concrete exe
 and proved polynomial bounds. Consequently, even a kernel-clean theorem of that abstract type
 would not establish the standard P-versus-NP statement. It is compatibility information only.
 
+The separate \code{PNP.Concrete.PEqualsNP} target uses proof-bearing P and NP witnesses,
+canonical input/certificate pairing, finite program syntax, and charged polynomial runtime and
+output bounds. This is a substantive formalization milestone, but it is not yet proved equivalent
+to execution in the raw machine kernel. SAT completeness, SAT in P, and the root theorem also
+remain absent.
+
 \section{Formal milestone ledger}
 
 Each earned row requires exact compiled names and theorem kinds, empty axiom closures, per-name
-domain-separated kernel-type SHA-256 matches for 28 detailed candidates, and the pinned whole-Lean
+domain-separated kernel-type SHA-256 matches for 34 detailed candidates, and the pinned whole-Lean
 source closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
 {\small
@@ -179,7 +188,8 @@ source closure. Human-readable scope remains conservative: type or source drift 
 Milestone & Status & Exact scope & Boundary \\
 \midrule
 \endhead
-Concrete machine and cost kernel & formalized-foundation-only & Executable bitstrings and codecs, finite rule-list machine semantics, fuel-bounded execution, and proof-bearing natural-polynomial runtime witnesses. & This foundation does not yet define concrete P, NP, reductions, SAT, NP-completeness, or P = NP. \\
+Concrete machine and cost kernel & formalized-foundation-only & Executable bitstrings and codecs, finite rule-list machine semantics, fuel-bounded execution, and proof-bearing natural-polynomial runtime witnesses. & This foundation alone does not define concrete P, NP, reductions, SAT, NP-completeness, or P = NP. \\
+Concrete P, NP, and polynomial reductions & formalized-with-machine-link-pending & Bitstring languages, finite charged decision/verifier/function pipelines grounded in concrete machines, polynomial certificate/runtime/output bounds, many-one reductions, and the NP-complete-in-P implication. & The charged pipeline is not yet proved to compile or refine to one raw machine; concrete SAT and the publication root theorem remain absent. \\
 Typed direct-wire NAND semantics & formalized & Typed topological Boolean NAND programs and ordered multi-output direct-wire semantics. & This does not establish circuit minimization, SAT, or P = NP. \\
 Finite enumeration, equivalence, and reference minimum & formalized & Exhaustive finite Boolean direct-wire search under the empty-profile reference model. & No polynomial-runtime result is obtained from this exhaustive reference search. \\
 Concrete framed replacement and slack & formalized & The concrete serial framed context with support outputs and explicit bypass wires. & This is not an arbitrary-support replacement theorem for the report's global family. \\
@@ -188,15 +198,15 @@ Conditional locked-NAND threshold boundary & formalized-with-premises & A proof-
 Fail-closed explicit-list residual routes & formalized-explicit-list-only & Executable strict-gain search over a caller-supplied finite implementation list. & Unresolved excludes no gain outside the supplied list and cannot imply ZeroSlack. \\
 Global locked-NAND construction and threshold & not-formalized & A uniform answer-independent SAT instance builder, global baseline, trace equivalence, and threshold. & The conditional boundary does not discharge this missing theorem. \\
 Global ZeroSlack, PCCMin, and polynomial runtime & not-formalized & Complete residual routing, global ZeroSlack contradiction, exact minimization, and polynomial bounds. & Proof-bearing result structures and explicit-list failure do not supply global completeness. \\
-Concrete standard P-versus-NP target and root theorem & not-formalized & Concrete machine semantics, complexity classes, SAT, reductions, and the publication root theorem. & The current string-handle PNP.PEqualsNP bridge is nonstandard and publication-ineligible. \\
+Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-machine-linked complexity classes, concrete SAT completeness and a SAT decider, plus the publication root theorem. & The concrete target definition is inactive: raw-machine linkage, concrete SAT completeness/deciding, and PNP.Main.p\_eq\_np remain absent; the legacy string-handle bridge is ineligible. \\
 \bottomrule
 \end{longtable}
 }
 
 \section{Compiled inventory summary}
 
-The inventory contains 2168 exported \code{PNP.*} kernel declarations from
-24 modules. It excludes 33 private compiler auxiliaries.
+The inventory contains 2484 exported \code{PNP.*} kernel declarations from
+26 modules. It excludes 36 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -209,7 +219,9 @@ Module & Declarations & Theorems \\
 PNP.Bridge & 93 & 22 \\
 PNP.Complexity & 93 & 20 \\
 PNP.Concrete.BitString & 123 & 60 \\
+PNP.Concrete.Complexity & 314 & 93 \\
 PNP.Concrete.Machine & 284 & 67 \\
+PNP.Concrete.Target & 2 & 1 \\
 PNP.DirectWireBaseline & 48 & 25 \\
 PNP.LockedNAND & 11 & 4 \\
 PNP.LockedNANDBaseline & 57 & 22 \\
@@ -243,7 +255,7 @@ Seven formal blockers remain active:
 \setlength{\parsep}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\topsep}{3pt}
-\item \code{Formal.ConcreteComplexityModel}
+\item \code{Formal.ConcreteComplexityMachineLink}
 \item \code{Formal.ConcreteSAT}
 \item \code{Formal.LockedNANDThreshold}
 \item \code{Formal.ResidualBandMinimizer}
@@ -276,6 +288,7 @@ Archive manifest & \code{archive/legacy-v0/ARCHIVE.json} \\
 \end{tabular}
 }
 
+\newpage
 \section{Verification}
 
 The current reconstruction can be checked with:
@@ -291,10 +304,10 @@ npm run report:check
 \end{verbatim}
 }
 
-The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-10-11}. Its exact byte digest is
-\code{2636c9dc883d307304fafc7efcc4bfd02912cb3587ed762a13fd0758d603c966}. The report is regenerated from that inventory and the reviewed
+The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-10-12}. Its exact byte digest is
+\code{91b4db358afb1156eb39f3d97f49a5bb85a97f0b65ff1a879a51a6552ae15663}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{6daa2a068fedab6cf0bda8da63267a220e8f6ab6568a8881f9d00872bd251a54}; the computed and pinned values match. Successful regeneration
+\code{0b48d081b1b9ab050184c895c7e1b99ed118c56c9737c7a76a5580dc1bf001be}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 

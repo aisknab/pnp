@@ -29,11 +29,12 @@ or trust objects rather than derivations of the named propositions. Acceptance o
 therefore does not establish the mathematical truth of the locked-NAND reduction, residual-band
 minimizer, ZeroSlack theorem, or final complexity conclusion.
 
-The current Lean development makes parts of the intended route explicit and proves several local
-Boolean identities. It does not yet provide the required concrete complexity model, executable SAT
-development, complete locked-NAND threshold theorem, residual-band exact minimizer, ZeroSlack
-proof, or polynomial runtime and certificate-size bounds. It also does not expose a root theorem
-`PNP.Main.p_eq_np` with an acceptable axiom audit.
+The current Lean development makes parts of the intended route explicit and now defines an
+axiom-free finite charged-pipeline interface for P, bounded-certificate NP, and polynomial
+many-one reductions. It does not yet prove that every such pipeline compiles or refines to the raw
+single-tape machine kernel. Nor does it provide executable SAT, the complete locked-NAND threshold
+theorem, the residual-band exact minimizer, ZeroSlack, the remaining end-to-end polynomial bounds,
+or a root theorem `PNP.Main.p_eq_np` with an acceptable axiom audit.
 
 The repository now pins `leanprover/lean4:v4.31.0` and builds the explicit `PNP` library root. That
 root imports every tracked Lean source module. `PNP.Main.rootTheoremStatus` is assumption-free data
@@ -44,8 +45,12 @@ bridge still depends on five disclosed project-specific axioms: `PNP.SAT`,
 
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
-execution, and proof-bearing deterministic runtime witnesses. This is a machine/cost kernel only;
-concrete P, NP, reductions, and SAT remain unformalized.
+execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and
+decision pipeline syntax carries polynomial runtime, output-size, certificate-size, and handoff
+bounds. Lean constructs P contained in NP, reduction identity/composition/transport, and the
+NP-complete-in-P implication. This is a charged interpreter interface, not yet a compiler or
+refinement theorem to one raw machine. See
+[`lean_concrete_complexity.md`](./lean_concrete_complexity.md).
 
 ## Compiled inventory and current publication boundary
 
@@ -57,16 +62,23 @@ and public copies must be byte-identical. See
 [`lean_theorem_inventory.md`](./lean_theorem_inventory.md) for the inventory contract and check
 commands.
 
-The seven earned intermediate milestone rows additionally require 28 detailed compiled theorem
+The eight earned intermediate milestone rows additionally require 34 detailed compiled theorem
 candidates: exact names and theorem kinds, empty axiom closures, per-name domain-separated
 kernel-type SHA-256 values, and a pinned closure over every `lean/**/*.lean` file plus the Lean/Lake
-pins and inventory probe across all 25 Lean source files. Type or source drift revokes milestone
+pins and inventory probe across all 26 Lean source modules. Type or source drift revokes milestone
 credit until reviewed pins change.
+
+The current compiled inventory contains 2,484 declarations, including 883 theorems and five
+project-specific axioms. Of those theorems, 793 have empty axiom closures. It records 36 excluded
+private declarations, 34 reviewed milestone candidates, and eight earned rows among eleven total
+milestones.
 
 Inventory generation is deliberately separate from theorem publication. The concrete gate expects
 the compatibility theorem `PNP.Main.p_eq_np` to have the exact concrete target
-`PNP.Main.ConcretePEqualsNP`. Both declarations are absent. The existing witness-handle proposition
-`PNP.PEqualsNP` is abstract and explicitly publication-ineligible.
+`PNP.Main.ConcretePEqualsNP`. The target now exists as an axiom-free **definition** aliasing mutual
+inclusion for the finite charged-pipeline classes; it is not a proof. The compatibility/root theorem
+`PNP.Main.p_eq_np` remains absent. The existing witness-handle proposition `PNP.PEqualsNP` is
+abstract and explicitly publication-ineligible.
 
 The expected kernel fingerprints for the concrete target type and value, compatibility-root type,
 axiom closure, and source closure are intentionally `null` in this migration step. Unset
@@ -75,7 +87,7 @@ check is also false. Therefore the gate does not pass and every theorem-emission
 from it remains false or `null`.
 
 The root `canonical_proof_report.tex` and `canonical_proof_report.pdf` now form the generated,
-concise six-page formal-reconstruction report. They replace the historical claim manuscript at the
+concise seven-page formal-reconstruction report. They replace the historical claim manuscript at the
 root and make the non-activation boundary explicit. The historical 56-page claim artifact is
 available only from the pinned legacy source coordinate recorded under
 [`archive/legacy-v0/`](../archive/legacy-v0/README.md).
@@ -83,9 +95,10 @@ available only from the pinned legacy source coordinate recorded under
 The first concrete foundation is now checked in `PNP.DirectWire`: intrinsically topological direct-wire
 NAND programs, total Boolean evaluation, gate-count size, ordered output wiring, and elementary
 projection/constant/repeated-output/NAND/NOT/AND laws. Its dedicated axiom audit is clean. This does
-not by itself discharge any of the seven machine-recorded activation blockers: the concrete
-complexity model, concrete SAT, locked-NAND threshold, residual-band minimizer, ZeroSlack,
-polynomial bounds, and the root theorem/axiom audit remain incomplete.
+not by itself discharge any of the seven machine-recorded activation blockers: the charged-pipeline
+compiler/refinement to raw machine semantics, concrete SAT, locked-NAND threshold, residual-band
+minimizer, ZeroSlack, remaining polynomial bounds, and the root theorem/axiom audit remain
+incomplete.
 
 The next constructive layer enumerates every well-typed direct-wire implementation at fixed input,
 gate, and output widths, including the unique empty output tuple and both orders of every NAND input
@@ -169,7 +182,8 @@ Public theorem emission may be reconsidered only when all of the following are m
 2. `PNP.Main.p_eq_np` exists and proves the concrete target theorem;
 3. the root theorem's dependency closure contains no `sorry` or `admit` placeholders;
 4. no PNP-specific axiom or trust parameter assumes any substantive part of the result;
-5. SAT, P, NP, reductions, machines, correctness, and cost are concrete;
+5. SAT, P, NP, reductions, machines, correctness, and cost are concrete, with the charged-pipeline
+   semantics proved adequate for the selected raw machine model;
 6. the SAT decider is executable and its polynomial bound is proved in the selected machine model;
 7. the locked-NAND, residual-band, and ZeroSlack obligations are proved rather than asserted; and
 8. public status and paper claims are generated from the checked Lean theorem inventory.

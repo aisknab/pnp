@@ -14,7 +14,8 @@ from current theorem status.
   audits the complete Lean source closure, builds the explicit `PNP` root, generates its public
   declaration inventory from `Lean.Environment.constants` plus `Lean.collectAxioms`, and prints
   the focused axiom transcripts for the 41-declaration concrete bitstring/polynomial kernel, the
-  38-declaration finite-rule machine kernel, and enforced zero-axiom direct-wire semantics, enumerator, finite truth-table,
+  38-declaration finite-rule machine kernel, the 50-declaration finite charged-pipeline complexity
+  interface, the two-declaration inactive concrete target, and enforced zero-axiom direct-wire semantics, enumerator, finite truth-table,
   exhaustive reference-minimum, concrete framed composition/slack, typed locked-NAND candidate,
   semantic output-lower-bound, source-accounting, finite local-baseline, and conditional
   threshold-boundary audits plus the explicit-list residual-route audit when Lean inputs change.
@@ -22,7 +23,7 @@ from current theorem status.
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual
   routes require 30. The workflow also checks the byte-identical inventory mirrors, derives the
   false concrete publication gate and status/report outputs, and verifies same-environment
-  double-build determinism plus exact committed bytes for the current concise six-page PDF. The
+  double-build determinism plus exact committed bytes for the current concise seven-page PDF. The
   hosted runner's apt-installed TeX and Poppler versions are not cryptographically pinned, so this
   is not a universal cross-toolchain reproducibility claim.
 - `.github/workflows/legacy-v0-replay.yml` is manual only. It replays the immutable historical
@@ -50,13 +51,18 @@ assumption-free non-theorem data, `PNP.Main.p_eq_np` is absent, and the conditio
 project-specific axioms remain visible in the workflow log. The locked-NAND threshold-boundary
 audit proves deductions only from six explicit premises; it does not instantiate the global
 builder, carrier layout, cross-instance baseline distinctness, trace/final laws, report threshold,
-unconditional residual-slack-at-most-four bound, or polynomiality.
+unconditional residual-slack-at-most-four bound, or polynomiality. The concrete-complexity audit
+checks finite machine-leaf syntax, certificate and runtime bounds, output handoff costs, reduction
+composition, and the inactive target; it does not supply the missing compiler/refinement to one raw
+machine.
 
 The compiled inventory is likewise not a theorem-release signal. Publication uses a separate
-fail-closed gate for `PNP.Main.p_eq_np : PNP.Main.ConcretePEqualsNP`. Both declarations are absent,
-the abstract `PNP.PEqualsNP` proposition is ineligible, and all five expected kernel/closure
-fingerprints are intentionally unset. CI checks that unset fingerprints fail rather than matching
-one another, and that every theorem-emission field remains derived from the false gate.
+fail-closed gate for `PNP.Main.p_eq_np : PNP.Main.ConcretePEqualsNP`. The concrete target now exists
+as an axiom-free definition, but the compatibility/root theorem is absent, the abstract
+`PNP.PEqualsNP` proposition is ineligible, raw-machine linkage remains blocked, and all five
+expected kernel/closure fingerprints are intentionally unset. CI checks that unset fingerprints
+fail rather than matching one another, and that every theorem-emission field remains derived from
+the false gate.
 
 The publication checks run the equivalent of:
 
@@ -66,7 +72,7 @@ node scripts/generate-formal-publication.mjs --check
 npm run report:check
 ```
 
-The current root PDF is the generated six-page formal-reconstruction report. The historical
+The current root PDF is the generated seven-page formal-reconstruction report. The historical
 56-page claim artifact is not a current workflow output and is available only at the pinned legacy
 coordinate recorded under `archive/legacy-v0/`.
 

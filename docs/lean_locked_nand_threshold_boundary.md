@@ -91,8 +91,12 @@ and reduction trust surface.
 The dedicated transcript covers all 32 explicit declarations and reports no axioms. Nevertheless,
 the global carrier layout, global baseline distinctness, trace equivalence, derived final-output
 laws, uniform builder, threshold theorem, unconditional residual-slack-at-most-four theorem, and
-polynomiality all remain false in the formal status. The same seven blockers, five project-specific
-axioms, and absent root theorem remain.
+polynomiality all remain false in the formal status. Seven blockers remain, now beginning with the
+charged-pipeline-to-raw-machine link `Formal.ConcreteComplexityMachineLink`; the other six include
+the still-missing global threshold work. The five project-specific axioms and absent
+`PNP.Main.p_eq_np` root theorem also remain. The axiom-free inactive
+`PNP.Main.ConcretePEqualsNP` definition does not change this threshold boundary or activate the
+publication gate.
 
 The ordered multi-output convention and quarantined legacy `m = 2` accounting remain as documented
 in [Lean locked-NAND direct candidates and local baselines](./lean_locked_nand_baseline.md).

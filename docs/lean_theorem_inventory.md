@@ -13,9 +13,11 @@ The generated inventory is mirrored byte-for-byte at:
 - [`public/pnp-theorem-inventory.json`](../public/pnp-theorem-inventory.json), the public mirror.
 
 The inventory records the pinned toolchain and root module, declaration kinds, each declaration's
-compiled axiom closure, the source-module closure, detailed compiled types for 28 reviewed
+compiled axiom closure, the source-module closure, detailed compiled types for 34 reviewed
 milestone theorems, excluded private compiler auxiliaries, and the five disclosed project-specific
-axioms. Deterministic ordering and canonical JSON encoding
+axioms. The current environment contains 2,484 public declarations: 883 are theorems and 793 of
+those have empty axiom closures. It spans 26 source modules and excludes 36 private declarations
+from the public inventory. Deterministic ordering and canonical JSON encoding
 make the two mirrors and their digest reproducible. This inventory is evidence about the compiled
 environment; it does **not** establish `P = NP` or make an abstract theorem publication-eligible.
 
@@ -31,9 +33,11 @@ The gate requires all of its concrete-model, declaration-kind, exact-type, compi
 fingerprint, axiom-closure, source-closure, and standard-axiom-allowlist checks to pass. In this
 migration step the expected target type, target value, compatibility-root type, axiom-closure, and
 source-closure fingerprints are intentionally `null`. An unset fingerprint fails its configured
-subcheck; two unset values never count as a match. Both required declarations are also absent.
-Consequently the gate is false, and every theorem-emission field derived from it remains false or
-`null`.
+subcheck; two unset values never count as a match. `PNP.Main.ConcretePEqualsNP` now exists as an
+axiom-free definition for mutual inclusion in the finite charged-pipeline model, but its activation
+fingerprints remain unset. The compatibility/root theorem `PNP.Main.p_eq_np` is absent, and the
+pipeline still lacks a proved compiler/refinement to the raw machine kernel. Consequently the gate
+is false, and every theorem-emission field derived from it remains false or `null`.
 
 The current five project-specific axioms remain visible as an independent inventory:
 
@@ -50,10 +54,10 @@ They are not on the publication gate's permitted Lean-standard axiom allowlist.
 ## Reviewed intermediate milestone bindings
 
 Intermediate milestone credit has a separate evidence boundary from theorem publication. Each of
-the 28 required theorems for the seven earned rows must have its reviewed per-name,
+the 34 required theorems for the eight earned rows must have its reviewed per-name,
 domain-separated compiled kernel-type SHA-256 in the publication map, retain an empty compiled
 axiom closure, and match by exact declaration name and theorem kind. The milestone source-closure
-hash must also match. That closure covers all 25 files under
+hash must also match. That closure covers all 26 modules under
 `lean/**/*.lean` plus `lean-toolchain`, `lakefile.lean`, `lake-manifest.json`, and the compiled
 inventory probe. A same-name theorem with a weakened type, or a change to any Lean source or pin,
 revokes milestone credit until the reviewed map is deliberately updated. These non-null milestone
@@ -63,7 +67,7 @@ pins are independent of the intentionally null concrete-gate activation fingerpr
 
 The formal status, public status mirror, TeX report, and PDF report are generated from the checked
 inventory and publication map. The root
-[`canonical_proof_report.pdf`](../canonical_proof_report.pdf) is the current concise six-page formal
+[`canonical_proof_report.pdf`](../canonical_proof_report.pdf) is the current concise seven-page formal
 reconstruction report. It is a non-activation report, not the historical claim manuscript. The
 historical 56-page claim artifact is available only through the pinned legacy source coordinate;
 its immutable coordinates are recorded under [`archive/legacy-v0/`](../archive/legacy-v0/README.md).
