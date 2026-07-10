@@ -21,7 +21,10 @@ function npmCommand0() {
 }
 
 function spawnNpmRun0(script, filePath) {
-  return spawnSync(npmCommand0(), ['run', script, '--', filePath], {
+  const replayArgs = ['materialized:aggregate', 'materialized:bridge'].includes(script)
+    ? ['--historical-replay']
+    : [];
+  return spawnSync(npmCommand0(), ['run', script, '--', ...replayArgs, filePath], {
     encoding: 'utf8',
     shell: process.platform === 'win32',
     windowsHide: true,
@@ -119,7 +122,7 @@ test('npm run materialized:bridge accepts pending bridge without public conclusi
   const filePath = await writeTempJsonFile0(
     t,
     'MaterializedAcceptanceBridge0.json',
-    makeMaterializedAcceptanceBridge0(),
+    makeMaterializedAcceptanceBridge0({ historicalReplay: true }),
   );
 
   const child = spawnNpmRun0('materialized:bridge', filePath);
@@ -138,7 +141,7 @@ test('npm run materialized:bridge accepts accepted bridge with public conclusion
   const filePath = await writeTempJsonFile0(
     t,
     'MaterializedAcceptanceBridge0.json',
-    makeAcceptedMaterializedAcceptanceBridge0(),
+    makeAcceptedMaterializedAcceptanceBridge0({ historicalReplay: true }),
   );
 
   const child = spawnNpmRun0('materialized:bridge', filePath);

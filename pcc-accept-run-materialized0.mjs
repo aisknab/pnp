@@ -18,6 +18,8 @@ import {
   makeMaterializedPCCPack0,
 } from './pcc-pack-materialized0.mjs';
 
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 const CHECKER_VERSION = 0;
 
 const MATERIALIZED_ACCEPT_RUN_FORBIDDEN_MARKERS0 = Object.freeze([
@@ -34,6 +36,7 @@ export function makeMaterializedGeneratedAcceptRunConfig0(overrides = {}) {
   return {
     kind: 'MaterializedGeneratedAcceptRunConfig0',
     version: CHECKER_VERSION,
+    historicalReplay: false,
     checkMaterializedPCCPack: true,
     checkAcceptRun: true,
     checkReplay: true,
@@ -77,7 +80,9 @@ export function makeMaterializedAcceptRun0({
   verdict = 'accept',
   rejectLog = [],
   overrides = {},
+  historicalReplay = false,
 } = {}) {
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeMaterializedAcceptRun0');
   const generated = generatedPackage ?? makeGeneratePCCPackOutput0(pccPack);
   const accepted = verdict === 'accept';
 
@@ -196,14 +201,17 @@ export async function makeMaterializedGeneratedAcceptRun0({
   GeneratedPackage = null,
   AcceptRun = null,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
-  const materializedPCCPack = MaterializedPCCPack ?? await makeMaterializedPCCPack0();
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeMaterializedGeneratedAcceptRun0');
+  const materializedPCCPack = MaterializedPCCPack ?? await makeMaterializedPCCPack0({ historicalReplay: true });
   const pccPack = resolvePCCPack0(materializedPCCPack);
 
   const generatedPackage = GeneratedPackage ?? makeGeneratePCCPackOutput0(pccPack);
   const acceptRun = AcceptRun ?? makeMaterializedAcceptRun0({
     pccPack,
     generatedPackage,
+    historicalReplay: true,
   });
 
   const linkage = {
@@ -259,6 +267,7 @@ export async function CheckMaterializedGeneratedAcceptRun0(
   const checker = 'CheckMaterializedGeneratedAcceptRun0';
   const ledger = [];
   const cfg = makeMaterializedGeneratedAcceptRunConfig0(config);
+  if (cfg.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const envelope = normalizeEnvelope0(input);
 
   const cfgCheck = validateConfig0(cfg);
@@ -300,7 +309,7 @@ export async function CheckMaterializedGeneratedAcceptRun0(
   if (cfg.checkMaterializedPCCPack === true) {
     const pccPackRecord = await CheckMaterializedPCCPack0(
       envelope.MaterializedPCCPack,
-      cfg.pccPackConfig ?? {},
+      { ...(cfg.pccPackConfig ?? {}), historicalReplay: true },
     );
     const pccPack = recordToValidation0(pccPackRecord, ['MaterializedPCCPack']);
 
@@ -322,7 +331,7 @@ export async function CheckMaterializedGeneratedAcceptRun0(
   }
 
   if (cfg.checkAcceptRun === true) {
-    const acceptRunRecord = await CheckAcceptRun0(envelope.AcceptRun);
+    const acceptRunRecord = await CheckAcceptRun0(envelope.AcceptRun, { historicalReplay: true });
     const acceptRun = recordToValidation0(acceptRunRecord, ['AcceptRun']);
 
     ledger.push({
@@ -343,7 +352,7 @@ export async function CheckMaterializedGeneratedAcceptRun0(
   }
 
   if (cfg.checkReplay === true) {
-    const replayRecord = await ReplayAcceptRun0(envelope.AcceptRun);
+    const replayRecord = await ReplayAcceptRun0(envelope.AcceptRun, { historicalReplay: true });
     const replay = recordToValidation0(replayRecord, ['AcceptRun']);
 
     ledger.push({
@@ -364,7 +373,7 @@ export async function CheckMaterializedGeneratedAcceptRun0(
   }
 
   if (cfg.checkFinalVerdict === true) {
-    const finalRecord = await EmitFinalVerdict0(envelope.AcceptRun);
+    const finalRecord = await EmitFinalVerdict0(envelope.AcceptRun, { historicalReplay: true });
     const finalVerdict = recordToValidation0(finalRecord, ['AcceptRun']);
 
     ledger.push({
@@ -452,9 +461,9 @@ export async function CheckMaterializedGeneratedAcceptRun0(
     }
   }
 
-  const acceptRunRecord = await CheckAcceptRun0(envelope.AcceptRun);
-  const replayRecord = await ReplayAcceptRun0(envelope.AcceptRun);
-  const finalRecord = await EmitFinalVerdict0(envelope.AcceptRun);
+  const acceptRunRecord = await CheckAcceptRun0(envelope.AcceptRun, { historicalReplay: true });
+  const replayRecord = await ReplayAcceptRun0(envelope.AcceptRun, { historicalReplay: true });
+  const finalRecord = await EmitFinalVerdict0(envelope.AcceptRun, { historicalReplay: true });
   const acceptNF = acceptRunRecord.NF ?? acceptRunRecord.nf ?? {};
   const finalNF = finalRecord.NF ?? finalRecord.nf ?? {};
   const pccPack = resolvePCCPack0(envelope.MaterializedPCCPack);
@@ -493,13 +502,17 @@ export async function CheckMaterializedGeneratedAcceptRun0(
 }
 
 export async function writeMaterializedGeneratedAcceptRunFiles0(outDir, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('writeMaterializedGeneratedAcceptRunFiles0');
   if (typeof outDir !== 'string' || outDir.length === 0) {
     throw new TypeError('writeMaterializedGeneratedAcceptRunFiles0 requires a non-empty output directory');
   }
 
   const envelope = await makeMaterializedGeneratedAcceptRun0(options);
-  const checked = await CheckMaterializedGeneratedAcceptRun0(envelope, options.checkConfig ?? {});
-  const finalVerdict = await EmitFinalVerdict0(envelope.AcceptRun);
+  const checked = await CheckMaterializedGeneratedAcceptRun0(envelope, {
+    ...(options.checkConfig ?? {}),
+    historicalReplay: true,
+  });
+  const finalVerdict = await EmitFinalVerdict0(envelope.AcceptRun, { historicalReplay: true });
 
   await fs.mkdir(outDir, {
     recursive: true,

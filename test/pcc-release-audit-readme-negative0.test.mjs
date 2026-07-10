@@ -51,7 +51,7 @@ function makeReadmeBoundaryAcceptRecord0(overrides = {}) {
 }
 
 async function runReleaseAuditWithReadmeRunner0(readmeReleaseBoundaryRunner, overrides = {}) {
-  return CheckReleaseAudit0(makeReleaseAuditConfig0({
+  return CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -62,6 +62,8 @@ async function runReleaseAuditWithReadmeRunner0(readmeReleaseBoundaryRunner, ove
     ...overrides,
   }));
 }
+
+const CheckHistoricalReleaseAudit0 = (config = {}) => CheckReleaseAudit0({ ...config, historicalReplay: true });
 
 test('CheckReleaseAudit0 rejects stale layout wording through README boundary runner', async () => {
   const readme = await currentReadme0();
@@ -76,7 +78,7 @@ test('CheckReleaseAudit0 rejects stale layout wording through README boundary ru
   assert.deepEqual(out.Path, ['README.md']);
   assert.equal(out.Witness.reason, 'README release boundary checker rejected');
   assert.equal(out.Witness.detail.inner.coord, 'CheckReadmeReleaseBoundary0.forbiddenSnippet');
-  assert.equal(out.Witness.detail.inner.witness.detail.snippet, 'stale duplicate ES modules under `src`');
+  assert.deepEqual(out.Witness.detail.inner.witness.detail.present, ['stale duplicate ES modules under `src`']);
 });
 
 test('CheckReleaseAudit0 rejects active legacy layout wording through README boundary runner', async () => {
@@ -91,7 +93,7 @@ test('CheckReleaseAudit0 rejects active legacy layout wording through README bou
   assert.equal(out.Coord, 'CheckReleaseAudit0.readme');
   assert.equal(out.Witness.reason, 'README release boundary checker rejected');
   assert.equal(out.Witness.detail.inner.coord, 'CheckReadmeReleaseBoundary0.forbiddenSnippet');
-  assert.equal(out.Witness.detail.inner.witness.detail.snippet, 'src folder');
+  assert.deepEqual(out.Witness.detail.inner.witness.detail.present, ['src folder']);
 });
 
 test('CheckReleaseAudit0 rejects overclaiming theorem wording through README boundary runner', async () => {
@@ -106,7 +108,7 @@ test('CheckReleaseAudit0 rejects overclaiming theorem wording through README bou
   assert.equal(out.Coord, 'CheckReleaseAudit0.readme');
   assert.equal(out.Witness.reason, 'README release boundary checker rejected');
   assert.equal(out.Witness.detail.inner.coord, 'CheckReadmeReleaseBoundary0.forbiddenSnippet');
-  assert.equal(out.Witness.detail.inner.witness.detail.snippet, 'P = NP is established');
+  assert.deepEqual(out.Witness.detail.inner.witness.detail.present, ['P = NP is established']);
 });
 
 test('CheckReleaseAudit0 rejects missing conditional claim through README boundary runner', async () => {
@@ -123,7 +125,7 @@ test('CheckReleaseAudit0 rejects missing conditional claim through README bounda
   assert.equal(out.Coord, 'CheckReleaseAudit0.readme');
   assert.equal(out.Witness.reason, 'README release boundary checker rejected');
   assert.equal(out.Witness.detail.inner.coord, 'CheckReadmeReleaseBoundary0.requiredSnippet');
-  assert.equal(out.Witness.detail.inner.witness.detail.snippet, centralClaim);
+  assert.deepEqual(out.Witness.detail.inner.witness.detail.missing, [centralClaim]);
 });
 
 test('CheckReleaseAudit0 rejects README boundary runner accept record without NF', async () => {
@@ -206,7 +208,7 @@ test('CheckReleaseAudit0 rejects README boundary runner accept record with zero 
 });
 
 test('CheckReleaseAudit0 validates README boundary runner config shape', async () => {
-  const out = await CheckReleaseAudit0({
+  const out = await CheckHistoricalReleaseAudit0({
     ...makeReleaseAuditConfig0(),
     readmeReleaseBoundaryRunner: 'not a function',
   });
@@ -218,12 +220,12 @@ test('CheckReleaseAudit0 validates README boundary runner config shape', async (
   assert.equal(out.Witness.reason, 'ReleaseAuditConfig0 readmeReleaseBoundaryRunner must be null or a function');
 });
 
-test('README documents release audit README negative integration', async () => {
+test('README classifies the legacy README wording checker as historical', async () => {
   const readme = await currentReadme0();
 
-  assert.equal(readme.includes('Release audit README negative integration'), true);
+  assert.equal(readme.includes('Historical Release audit README wording freeze'), true);
   assert.equal(readme.includes('CheckReadmeReleaseBoundary0'), true);
-  assert.equal(readme.includes('CheckReleaseAudit0.readme'), true);
-  assert.equal(readme.includes('stale layout wording'), true);
-  assert.equal(readme.includes('overclaiming theorem wording'), true);
+  assert.equal(readme.includes('legacy conditional theorem boundary'), true);
+  assert.equal(readme.includes('stale-layout exclusions'), true);
+  assert.equal(readme.includes('does not'), true);
 });

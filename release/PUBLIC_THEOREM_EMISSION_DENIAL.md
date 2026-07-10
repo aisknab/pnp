@@ -1,6 +1,12 @@
 # Public theorem-emission denial certificate
 
-Current coordinate:
+> **Superseded release-policy record:** This June 2026 certificate records a historical
+> assertion-checker denial state. It is not current theorem-status authority, and its release-policy
+> blockers are not the current formal blocker inventory. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical coordinate:
 
 ```text
 PNP-PUBLIC-THEOREM-EMISSION-DENIAL-2026-06-27-01
@@ -18,9 +24,10 @@ Checker:
 node pcc-public-theorem-emission-denial0.mjs --json
 ```
 
-This certificate records the current theorem-emission-denied state after the public theorem-emission preflight. It is not a theorem-activation surface.
+This certificate recorded the historical theorem-emission-denied state after its preflight. It is
+not a theorem-activation surface.
 
-## Current boundary
+## Historical boundary
 
 ```text
 publicTheoremEmissionAllowed = false
@@ -32,7 +39,7 @@ remainingBlockers = [
 ]
 ```
 
-## Current denial state
+## Historical denial state
 
 ```text
 denialCertificateReady = true

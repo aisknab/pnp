@@ -6,6 +6,8 @@ import {
   stableStringify0,
 } from './pcc-verifier-frag0.mjs';
 
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 import {
   CheckMaterializedAggregateFile0,
   makeMaterializedAggregateShell0,
@@ -29,6 +31,7 @@ export function makeMaterializedFixtureWriterConfig0(overrides = {}) {
   return {
     kind: 'MaterializedFixtureWriterConfig0',
     version: CHECKER_VERSION,
+    historicalReplay: false,
     outputDir: path.join(process.cwd(), 'materialized-fixtures0'),
     canonicalEnvelopeBytes: false,
     overwrite: true,
@@ -42,6 +45,7 @@ export function makeMaterializedFixtureWriterConfig0(overrides = {}) {
 
 export async function WriteMaterializedFixtureSet0(config = makeMaterializedFixtureWriterConfig0()) {
   const checker = 'WriteMaterializedFixtureSet0';
+  if (config.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const ledger = [];
   const cfg = makeMaterializedFixtureWriterConfig0(config);
 
@@ -183,9 +187,11 @@ function makeFixtureObjects0() {
   return {
     pack,
     pendingBridge: makeMaterializedAcceptanceBridge0({
+    historicalReplay: true,
       shell: pack,
     }),
     acceptedBridge: makeAcceptedMaterializedAcceptanceBridge0({
+    historicalReplay: true,
       shell: pack,
     }),
   };
@@ -275,7 +281,7 @@ async function verifyWrittenFixtures0(config, files) {
       entry.kind === 'MaterializedAcceptanceBridge0.pending' ||
       entry.kind === 'MaterializedAcceptanceBridge0.accepted'
     ) {
-      record = await CheckMaterializedAcceptanceBridgeFile0(entry.filePath);
+      record = await CheckMaterializedAcceptanceBridgeFile0(entry.filePath, { historicalReplay: true });
     } else {
       return validationReject0(['files', entry.filename], 'unknown fixture kind during verification', {
         entry,

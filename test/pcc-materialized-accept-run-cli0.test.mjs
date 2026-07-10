@@ -54,6 +54,7 @@ test('bin/check-materialized-accept-run0.mjs accepts pending replay with no publ
     t,
     'MaterializedAcceptRun0.pending.json',
     makeMaterializedAcceptRun0({
+    historicalReplay: true,
       packFilePath,
       aggregateDigest,
       verdict: 'pending',
@@ -61,7 +62,7 @@ test('bin/check-materialized-accept-run0.mjs accepts pending replay with no publ
   );
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-accept-run0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, acceptRunFile], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', acceptRunFile], {
     encoding: 'utf8',
   });
 
@@ -97,6 +98,7 @@ test('bin/check-materialized-accept-run0.mjs accepts reject replay with one firs
     t,
     'MaterializedAcceptRun0.reject.json',
     makeMaterializedAcceptRun0({
+    historicalReplay: true,
       packFilePath,
       aggregateDigest,
       verdict: 'reject',
@@ -105,7 +107,7 @@ test('bin/check-materialized-accept-run0.mjs accepts reject replay with one firs
   );
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-accept-run0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, acceptRunFile], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', acceptRunFile], {
     encoding: 'utf8',
   });
 
@@ -126,6 +128,7 @@ test('bin/check-materialized-accept-run0.mjs accepts accepted replay and records
     t,
     'MaterializedAcceptRun0.accept.json',
     makeMaterializedAcceptRun0({
+    historicalReplay: true,
       packFilePath,
       aggregateDigest,
       verdict: 'accept',
@@ -133,7 +136,7 @@ test('bin/check-materialized-accept-run0.mjs accepts accepted replay and records
   );
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-accept-run0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, acceptRunFile], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', acceptRunFile], {
     encoding: 'utf8',
   });
 
@@ -154,6 +157,7 @@ test('bin/check-materialized-accept-run0.mjs --full emits the complete accept-ru
     t,
     'MaterializedAcceptRun0.accept.json',
     makeMaterializedAcceptRun0({
+    historicalReplay: true,
       packFilePath,
       aggregateDigest,
       verdict: 'accept',
@@ -161,7 +165,7 @@ test('bin/check-materialized-accept-run0.mjs --full emits the complete accept-ru
   );
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-accept-run0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, acceptRunFile, '--full'], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', acceptRunFile, '--full'], {
     encoding: 'utf8',
   });
 
@@ -180,6 +184,7 @@ test('bin/check-materialized-accept-run0.mjs --full emits the complete accept-ru
 test('bin/check-materialized-accept-run0.mjs rejects public conclusion before accepted replay', async (t) => {
   const { packFilePath, aggregateDigest } = await writeAggregatePack0(t);
   const run = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath,
     aggregateDigest,
     verdict: 'pending',
@@ -196,7 +201,7 @@ test('bin/check-materialized-accept-run0.mjs rejects public conclusion before ac
   const acceptRunFile = await writeTempJsonFile0(t, 'MaterializedAcceptRun0.bad.json', run);
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-accept-run0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, acceptRunFile], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', acceptRunFile], {
     encoding: 'utf8',
   });
 
@@ -224,6 +229,7 @@ test('bin/check-materialized-accept-run0.mjs rejects aggregate path whose packag
   );
 
   const run = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath: badPackFile,
     aggregateDigest: {
       alg: 'SHA256',
@@ -236,7 +242,7 @@ test('bin/check-materialized-accept-run0.mjs rejects aggregate path whose packag
   const acceptRunFile = await writeTempJsonFile0(t, 'MaterializedAcceptRun0.bad-aggregate.json', run);
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-accept-run0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, acceptRunFile], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', acceptRunFile], {
     encoding: 'utf8',
   });
 
@@ -256,13 +262,14 @@ test('npm run materialized:accept-run checks an accepted materialized accept run
     t,
     'MaterializedAcceptRun0.accept.json',
     makeMaterializedAcceptRun0({
+    historicalReplay: true,
       packFilePath,
       aggregateDigest,
       verdict: 'accept',
     }),
   );
 
-  const child = spawnSync(npmCommand0(), ['run', 'materialized:accept-run', '--', acceptRunFile], {
+  const child = spawnSync(npmCommand0(), ['run', 'materialized:accept-run', '--', '--historical-replay', acceptRunFile], {
     encoding: 'utf8',
     shell: process.platform === 'win32',
     windowsHide: true,
@@ -282,7 +289,7 @@ test('bin/check-materialized-accept-run0.mjs rejects invalid JSON accept run fil
   const acceptRunFile = await writeTempTextFile0(t, 'MaterializedAcceptRun0.bad.json', '{ not json');
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-accept-run0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, acceptRunFile], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', acceptRunFile], {
     encoding: 'utf8',
   });
 
@@ -299,7 +306,7 @@ test('bin/check-materialized-accept-run0.mjs rejects invalid JSON accept run fil
 test('bin/check-materialized-accept-run0.mjs exits nonzero without a file path', () => {
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-accept-run0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay'], {
     encoding: 'utf8',
   });
 

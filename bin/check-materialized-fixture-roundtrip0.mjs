@@ -5,6 +5,9 @@ import path from 'node:path';
 import {
   CheckMaterializedFixtureRoundtrip0,
 } from '../pcc-materialized-fixture-roundtrip0.mjs';
+import { EnforceHistoricalReplayCli0 } from '../pcc-legacy-replay-gate0.mjs';
+
+EnforceHistoricalReplayCli0({ entrypoint: 'bin/check-materialized-fixture-roundtrip0.mjs' });
 
 const args = process.argv.slice(2);
 const full = args.includes('--full');
@@ -19,6 +22,7 @@ const outputBase = outIndex >= 0
 const base = outputBase ?? path.join(process.cwd(), 'materialized-roundtrip0');
 
 const out = await CheckMaterializedFixtureRoundtrip0({
+  historicalReplay: true,
   outputDirA: path.join(base, 'a'),
   outputDirB: path.join(base, 'b'),
   canonicalEnvelopeBytes: canonical,

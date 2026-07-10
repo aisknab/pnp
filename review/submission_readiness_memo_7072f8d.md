@@ -1,8 +1,13 @@
 # Submission Readiness Memo: 7072f8d Residual-Hardened PNP Release
 
-Status: **external-review-ready release candidate**.
+> **Historical assertion-checker record:** This file documents a superseded checker/release surface.
+> It is not current theorem-status authority and does not establish `P = NP`. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
 
-This memo separates what is frozen, what is ready to send to reviewers, what remains mathematically risky, and what must happen before this should be represented as a serious Clay-prize submission candidate.
+Historical status: **recorded as an external-review-ready release candidate**.
+
+This memo recorded what was frozen, what was then considered ready to send to reviewers, what remained mathematically risky, and what the historical release expected before any prize-oriented submission.
 
 ## Public theorem boundary
 
@@ -10,7 +15,7 @@ This memo separates what is frozen, what is ready to send to reviewers, what rem
 CheckPCCPackexp(GeneratePCCPack())=accept => P = NP
 ```
 
-The release is intentionally framed as a checker-gated theorem boundary. The public `P = NP` conclusion must not be represented as independent of the accepted generated-package, replay, final-certificate, release-gate, and proof-report chain.
+The historical release was framed as a checker-gated theorem boundary. Its public `P = NP` conclusion was not represented as independent of the accepted generated-package, replay, final-certificate, release-gate, and proof-report chain. That historical checker boundary does not establish the theorem.
 
 ## Frozen release identifiers
 
@@ -209,9 +214,8 @@ Any substantive patch invalidates the frozen review round and requires a new sou
 
 ## Clay-prize readiness position
 
-This release is **not yet something to call Clay-prize-ready** in public language. It is a serious external-review candidate. The next milestone is independent hostile mathematical review. Before any formal prize-oriented submission, check the current Clay Mathematics Institute rules and submission expectations directly, then prepare a public manuscript/repository package that reflects those requirements.
+The historical memo did **not** call the release Clay-prize-ready. It described the package as an external-review candidate and named independent hostile mathematical review as its next milestone. Those readiness statements are superseded by the formal-reconstruction status.
 
 ## One-sentence status
 
-The 7072f8d release is sealed, validated, documented, and ready to send to hostile external reviewers; the main remaining risk is mathematical correctness under independent attack.
-
+The 7072f8d release was recorded as sealed, validated, documented, and ready to send to hostile external reviewers; that was a historical release-engineering assessment, not theorem-status evidence.

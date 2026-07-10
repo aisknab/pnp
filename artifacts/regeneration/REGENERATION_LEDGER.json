@@ -216,8 +216,8 @@
     {
       "id": "multi-platform-ci",
       "kind": "ci-matrix",
-      "sourceFiles": ["reproducibility/MULTI_PLATFORM_CI.json", ".github/workflows/multi-platform-ci.yml", "audits/multi-platform-ci0.test.mjs"],
-      "command": "GitHub Actions matrix: ubuntu-latest, macos-latest, windows-latest",
+      "sourceFiles": ["reproducibility/MULTI_PLATFORM_CI.json", "audits/multi-platform-ci0.test.mjs"],
+      "command": "Historical record only: retired GitHub Actions matrix",
       "outputPath": "artifacts/multi-platform-ci/README.md",
       "deterministic": false,
       "outputCommitted": true,

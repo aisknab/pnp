@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 
+import { EnforceHistoricalReplayCli0 } from '../pcc-legacy-replay-gate0.mjs';
+
 import {
   CheckMaterializedAcceptRunFile0,
 } from '../pcc-materialized-accept-run0.mjs';
+
+EnforceHistoricalReplayCli0({ entrypoint: 'bin/check-materialized-accept-run0.mjs' });
 
 const args = process.argv.slice(2);
 const full = args.includes('--full');
@@ -21,7 +25,9 @@ if (!filePath) {
 
   process.exitCode = 1;
 } else {
-  const out = await CheckMaterializedAcceptRunFile0(filePath);
+  const out = await CheckMaterializedAcceptRunFile0(filePath, {
+    historicalReplay: true,
+  });
 
   console.log(JSON.stringify(full ? out : summarizeMaterializedAcceptRun0(out), null, 2));
 

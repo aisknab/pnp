@@ -35,6 +35,7 @@ import {
 import {
   makeSyntheticGlobalProofDAG0,
 } from './pcc-global-proof-dag0.mjs';
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
 
 const CHECKER_VERSION = 0;
 
@@ -271,11 +272,14 @@ export function makeMaterializedFinalIntegration0({
 export function makeMaterializedFinalTheorem0({
   FinalIntegration = null,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeMaterializedFinalTheorem0');
   const finalIntegration = FinalIntegration ?? makeMaterializedFinalIntegration0();
 
   return makeSyntheticFinalTheorem0({
     finalIntegration,
+    historicalReplay: true,
     overrides: {
       PiFinal: {
         kind: 'PiFinal0',
@@ -297,7 +301,9 @@ export function makeMaterializedFinalTheorem0({
   });
 }
 
-export function makeMaterializedRowFamFinal0(finalTheorem = makeMaterializedFinalTheorem0(), overrides = {}) {
+export function makeMaterializedRowFamFinal0(finalTheorem, overrides = {}, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('makeMaterializedRowFamFinal0');
+  finalTheorem ??= makeMaterializedFinalTheorem0({ historicalReplay: true });
   return makeSyntheticRowFamFinal0(finalTheorem, {
     PiRowFamFinal: {
       kind: 'PiRowFamFinal0',
@@ -315,7 +321,7 @@ export function makeMaterializedRowFamFinal0(finalTheorem = makeMaterializedFina
       ],
     },
     ...overrides,
-  });
+  }, { historicalReplay: true });
 }
 
 export function makeMaterializedFinalIntegrationEnvelope0({
@@ -325,7 +331,9 @@ export function makeMaterializedFinalIntegrationEnvelope0({
   FinalTheorem = null,
   RowFamFinal = null,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeMaterializedFinalIntegrationEnvelope0');
   const gpack = GPack ?? makeMaterializedGPack0();
   const rowFamG = RowFamG ?? makeMaterializedRowFamG0(gpack);
   const finalIntegration = FinalIntegration ?? makeMaterializedFinalIntegration0({
@@ -333,8 +341,9 @@ export function makeMaterializedFinalIntegrationEnvelope0({
   });
   const finalTheorem = FinalTheorem ?? makeMaterializedFinalTheorem0({
     FinalIntegration: finalIntegration,
+    historicalReplay: true,
   });
-  const rowFamFinal = RowFamFinal ?? makeMaterializedRowFamFinal0(finalTheorem);
+  const rowFamFinal = RowFamFinal ?? makeMaterializedRowFamFinal0(finalTheorem, {}, { historicalReplay: true });
 
   const linkage = {
     kind: 'MaterializedFinalIntegrationLinkage0',
@@ -390,6 +399,7 @@ export async function CheckMaterializedFinalIntegration0(
   input,
   config = makeMaterializedFinalIntegrationConfig0(),
 ) {
+  if (config?.historicalReplay !== true) return LegacyReplayRequiredReject0('CheckMaterializedFinalIntegration0');
   const checker = 'CheckMaterializedFinalIntegration0';
   const ledger = [];
   const cfg = makeMaterializedFinalIntegrationConfig0(config);
@@ -515,7 +525,7 @@ export async function CheckMaterializedFinalIntegration0(
   }
 
   if (cfg.checkFinalTheorem === true) {
-    const finalRecord = await CheckFinal0(envelope.FinalTheorem);
+    const finalRecord = await CheckFinal0(envelope.FinalTheorem, { historicalReplay: true });
     const finalTheorem = recordToValidation0(finalRecord, ['FinalTheorem']);
 
     ledger.push({
@@ -536,7 +546,7 @@ export async function CheckMaterializedFinalIntegration0(
   }
 
   if (cfg.checkRowFamFinal === true) {
-    const rowFamFinalRecord = await CheckRowFamFinal0(envelope.RowFamFinal);
+    const rowFamFinalRecord = await CheckRowFamFinal0(envelope.RowFamFinal, { historicalReplay: true });
     const rowFamFinal = recordToValidation0(rowFamFinalRecord, ['RowFamFinal']);
 
     ledger.push({
@@ -617,7 +627,7 @@ export async function CheckMaterializedFinalIntegration0(
   }
 
   const integrationRecord = await CheckFinalIntegration0(envelope.FinalIntegration);
-  const finalRecord = await CheckFinal0(envelope.FinalTheorem);
+  const finalRecord = await CheckFinal0(envelope.FinalTheorem, { historicalReplay: true });
   const integrationNF = integrationRecord.NF ?? integrationRecord.nf ?? {};
   const finalNF = finalRecord.NF ?? finalRecord.nf ?? {};
 
@@ -648,12 +658,16 @@ export async function CheckMaterializedFinalIntegration0(
 }
 
 export async function writeMaterializedFinalIntegrationFiles0(outDir, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('writeMaterializedFinalIntegrationFiles0');
   if (typeof outDir !== 'string' || outDir.length === 0) {
     throw new TypeError('writeMaterializedFinalIntegrationFiles0 requires a non-empty output directory');
   }
 
   const envelope = makeMaterializedFinalIntegrationEnvelope0(options);
-  const checked = await CheckMaterializedFinalIntegration0(envelope, options.checkConfig ?? {});
+  const checked = await CheckMaterializedFinalIntegration0(envelope, {
+    ...(options.checkConfig ?? {}),
+    historicalReplay: true,
+  });
 
   await fs.mkdir(outDir, {
     recursive: true,
@@ -704,12 +718,14 @@ function normalizeEnvelope0(input) {
     return makeMaterializedFinalIntegrationEnvelope0({
       FinalIntegration: input,
       GPack: input.GPack,
+      historicalReplay: true,
     });
   }
 
   if (isPlainObject(input) && input.kind === 'GPack0') {
     return makeMaterializedFinalIntegrationEnvelope0({
       GPack: input,
+      historicalReplay: true,
     });
   }
 

@@ -34,6 +34,7 @@ import {
 import {
   CheckPCCPackexp0,
 } from './pcc-check-pcc-pack-exp0.mjs';
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
 
 import {
   CheckMaterializedBoot0,
@@ -277,8 +278,10 @@ export function makeGeneratePCCPackConfig0(overrides = {}) {
 export async function GeneratePCCPack0({
   packageOptions = {},
   overrides = {},
+  historicalReplay = false,
 } = {}) {
-  const generated = await makeConcreteMaterializedPCCPack0(packageOptions);
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('GeneratePCCPack0');
+  const generated = await makeConcreteMaterializedPCCPack0({ ...packageOptions, historicalReplay: true });
 
   if (isPlainObject(overrides) && Object.keys(overrides).length > 0) {
     return {
@@ -295,11 +298,13 @@ export async function makeGeneratedPCCPackexp0({
   CheckPCCPackexpRecord = null,
   checkPCCPackexpConfig = {},
   overrides = {},
+  historicalReplay = false,
 } = {}) {
-  const generatedPCCPack = GeneratedPCCPack ?? await GeneratePCCPack0();
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeGeneratedPCCPackexp0');
+  const generatedPCCPack = GeneratedPCCPack ?? await GeneratePCCPack0({ historicalReplay: true });
   const checkPCCPackexpRecord = CheckPCCPackexpRecord ?? await CheckPCCPackexp0(
     generatedPCCPack,
-    checkPCCPackexpConfig ?? {},
+    { ...(checkPCCPackexpConfig ?? {}), historicalReplay: true },
   );
 
   const claimBoundary = makeClaimBoundary0();
@@ -370,6 +375,7 @@ export async function CheckGeneratedPCCPackexp0(
   input,
   config = makeGeneratePCCPackConfig0(),
 ) {
+  if (config?.historicalReplay !== true) return LegacyReplayRequiredReject0('CheckGeneratedPCCPackexp0');
   const checker = 'CheckGeneratedPCCPackexp0';
   const ledger = [];
   const cfg = makeGeneratePCCPackConfig0(config);
@@ -715,7 +721,7 @@ export async function CheckGeneratedPCCPackexp0(
   if (cfg.checkCheckPCCPackexpRecord === true) {
     freshCheckPCCPackexpRecord = await CheckPCCPackexp0(
       envelope.GeneratedPCCPack,
-      cfg.checkPCCPackexpConfig ?? {},
+      { ...(cfg.checkPCCPackexpConfig ?? {}), historicalReplay: true },
     );
 
     const fresh = recordToValidation0(freshCheckPCCPackexpRecord, ['GeneratedPCCPack']);
@@ -1455,12 +1461,16 @@ export async function CheckGeneratedPCCPackexp0(
 }
 
 export async function writeGeneratedPCCPackexpFiles0(outDir, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('writeGeneratedPCCPackexpFiles0');
   if (typeof outDir !== 'string' || outDir.length === 0) {
     throw new TypeError('writeGeneratedPCCPackexpFiles0 requires a non-empty output directory');
   }
 
   const envelope = await makeGeneratedPCCPackexp0(options);
-  const checked = await CheckGeneratedPCCPackexp0(envelope, options.checkConfig ?? {});
+  const checked = await CheckGeneratedPCCPackexp0(envelope, {
+    ...(options.checkConfig ?? {}),
+    historicalReplay: true,
+  });
 
   await fs.mkdir(outDir, {
     recursive: true,
@@ -1587,8 +1597,8 @@ function validateShape0(envelope) {
 }
 
 async function validateDeterministicGenerator0(actualGeneratedPackage) {
-  const generatedA = await GeneratePCCPack0();
-  const generatedB = await GeneratePCCPack0();
+  const generatedA = await GeneratePCCPack0({ historicalReplay: true });
+  const generatedB = await GeneratePCCPack0({ historicalReplay: true });
 
   if (stableStringify0(generatedA) !== stableStringify0(generatedB)) {
     return validationReject0(['GeneratePCCPack0'], 'GeneratePCCPack0 must be deterministic across repeated generation', {
@@ -1680,7 +1690,7 @@ async function validateGeneratedConcreteFinalIntegration0(generatedPackage) {
     });
   }
 
-  const record = await CheckConcreteMaterializedFinalIntegration0(concreteFinalIntegration);
+  const record = await CheckConcreteMaterializedFinalIntegration0(concreteFinalIntegration, { historicalReplay: true });
   const result = recordToValidation0(record, ['GeneratedPCCPack', 'MaterializedPCCPackEnvelope', 'FinalIntegrationEnvelope']);
 
   if (!result.ok) {

@@ -22,10 +22,6 @@ const EXPECTED_INDEX_EXPORTS0 = Object.freeze([
   'RunAll0',
   'RunIntegratedPCC0',
   'makeReleaseAuditConfig0',
-  'makeSyntheticAcceptRun0',
-  'makeSyntheticIntegratedPipeline0',
-  'makeSyntheticRejectAcceptRun0',
-  'makeSyntheticRunAllInput0',
   'CheckMaterializedFinalCertificate0',
   'makeMaterializedFinalCertificate0',
   'makeMaterializedFinalCertificateConfig0',
@@ -73,9 +69,9 @@ const EXPECTED_INDEX_EXPORTS0 = Object.freeze([
 
 const EXPECTED_PACKAGE_EXPORTS0 = Object.freeze({
   '.': './index.mjs',
-  './runall0': './pcc-runall0.mjs',
-  './integrated-pipeline0': './pcc-integrated-pipeline0.mjs',
-  './accept-run0': './pcc-accept-run0.mjs',
+  './runall0': './pcc-runall-public0.mjs',
+  './integrated-pipeline0': './pcc-integrated-pipeline-public0.mjs',
+  './accept-run0': './pcc-accept-run-public0.mjs',
   './release-audit0': './pcc-release-audit0.mjs',
   './final-certificate0': './pcc-final-certificate-materialized0.mjs',
   './final-certificate-public-status0': './pcc-final-certificate-public-status0.mjs',
@@ -181,8 +177,8 @@ test('index.mjs does not leak internal phase constructors or package builders', 
   assert.deepEqual(leaked, []);
 });
 
-test('public RunAll0 conclusion remains conditional', async () => {
-  const out = await publicApi.RunAll0();
+test('historical public RunAll0 conclusion remains conditional after explicit opt-in', async () => {
+  const out = await publicApi.RunAll0(undefined, { historicalReplay: true });
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.NF.status, 'complete');
@@ -271,4 +267,29 @@ test('package subpath exports expose final-certificate gates', async () => {
   assert.equal(typeof finalPNPProofReport.makeFinalPNPProofReport0, 'function');
   assert.equal(typeof finalPNPProofReport.makeFinalPNPProofReportConfig0, 'function');
   assert.equal(typeof finalPNPProofReport.writeFinalPNPProofReportFiles0, 'function');
+});
+
+test('public package subpaths omit accepted synthetic constructors and reject by default', async () => {
+  const runall = await import('@aisknab/pnp/runall0');
+  const integrated = await import('@aisknab/pnp/integrated-pipeline0');
+  const acceptRun = await import('@aisknab/pnp/accept-run0');
+
+  assert.equal('makeSyntheticRunAllInput0' in runall, false);
+  assert.equal('makeSyntheticIntegratedPipeline0' in integrated, false);
+  assert.equal('makeSyntheticAcceptRun0' in acceptRun, false);
+  assert.equal('makeSyntheticRejectAcceptRun0' in acceptRun, false);
+
+  for (const out of await Promise.all([
+    runall.RunAll0(),
+    runall.CheckRunAll0(),
+    integrated.RunIntegratedPCC0(),
+    integrated.CheckIntegratedPipeline0(),
+    acceptRun.ReplayAcceptRun0(),
+    acceptRun.CheckAcceptRun0(),
+    acceptRun.EmitFinalVerdict0(),
+  ])) {
+    assert.equal(out.tag, 'reject');
+    assert.match(out.coord, /\.HistoricalReplayRequired$/);
+    assert.equal(out.publicTheoremEmissionAllowed, false);
+  }
 });

@@ -1,6 +1,11 @@
 # Uniform complexity conclusion
 
-Coordinate:
+> **Historical assertion-checker record:** This UFS coordinate is superseded and does not establish
+> a uniform SAT algorithm, `SAT in P`, or `P = NP`. Current authority is
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json); see
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical coordinate:
 
 ```text
 PNP-UNIFORM-COMPLEXITY-CONCLUSION-2026-07-05-01
@@ -12,23 +17,25 @@ Uniform final soundness obligation:
 UFS-007-ComplexityConclusionUniform
 ```
 
-Checker:
+Historical replay command:
 
 ```bash
-npm run proof:uniform-complexity-conclusion
+npm run proof:uniform-complexity-conclusion -- --historical-replay
 ```
 
-Direct checker command:
+Direct historical replay command:
 
 ```bash
-node pcc-uniform-complexity-conclusion0.mjs --json
+node pcc-uniform-complexity-conclusion0.mjs --json --historical-replay
 ```
 
 ## Purpose
 
-This surface discharges the seventh uniform-final-soundness sub-obligation: the accepted uniform locked NAND procedure is a polynomial SAT decision procedure and the standard implication `SAT in P => P = NP` is checker-bound.
+This surface recorded the seventh historical UFS assertion. It checked fields claiming that the
+locked-NAND procedure was a polynomial SAT decision procedure and that the standard implication
+`SAT in P => P = NP` was bound. It did not derive those claims formally.
 
-The accepted theorem shape is:
+The recorded assertion shape was:
 
 ```text
 for every input phi:
@@ -52,9 +59,11 @@ CC-007-SATInPImpliesPEqualsNP
 CC-008-ReleaseGateStillSeparate
 ```
 
-## What this proves
+## What the historical checker accepted
 
-The checker binds UFS-001 through UFS-006 into a single uniform complexity conclusion: the construction, threshold relation, residual-band minimizer, ZeroSlack closure, and semantic no-hidden-oracle discipline compose into a polynomial SAT decision procedure.
+The checker accepted records stating that UFS-001 through UFS-006 composed into a polynomial SAT
+decision procedure. Acceptance verified implemented predicates over assertion-bearing records, not
+the mathematical truth of that composition.
 
 ## What this does not prove
 
@@ -64,7 +73,7 @@ This checker does not clear `Release.UnrestrictedFinalSoundness` and does not ac
 UFS-008-ReleaseTransitionFromProofOnly
 ```
 
-Current boundary remains:
+The historical record kept this intermediate boundary:
 
 ```text
 publicTheoremEmissionAllowed = false

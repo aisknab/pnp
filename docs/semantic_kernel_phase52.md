@@ -1,5 +1,10 @@
 # Semantic kernel hardening - phase 52
 
+> **Historical assertion-checker record:** This phase and its retired workflow describe a June 2026
+> release-policy experiment. It is not current theorem-status authority or a current release plan.
+> See [the formal reconstruction status](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [the reconstruction notice](FORMAL_RECONSTRUCTION.md).
+
 Phase 51 added a non-activating external-review signature policy.
 
 Phase 52 adds an empty reviewer verification-key registry coordinate:
@@ -61,6 +66,7 @@ sealedReleaseNotOverwritten = true
 node --check pcc-external-review-verification-key-registry0.mjs
 ```
 
-## Next step
+## Historical next step
 
-The next release-layer work should bind actual reviewer key material and signed review-finding files if supplied. Without signed findings and an unrestricted-final-soundness release artifact, public theorem emission remains disabled.
+The recorded next step was to bind reviewer key material and signed review-finding files if supplied.
+That step is not part of the current formal blocker inventory or release plan.

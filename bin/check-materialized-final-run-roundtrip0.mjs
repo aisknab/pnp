@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 
+import { EnforceHistoricalReplayCli0 } from '../pcc-legacy-replay-gate0.mjs';
+
 import {
   CheckMaterializedFinalRunRoundtrip0,
 } from '../pcc-materialized-final-run-roundtrip0.mjs';
+
+EnforceHistoricalReplayCli0({ entrypoint: 'bin/check-materialized-final-run-roundtrip0.mjs' });
 
 const args = process.argv.slice(2);
 const full = args.includes('--full');
@@ -15,6 +19,7 @@ const outputDir = outIndex >= 0
   : args.find((arg) => !arg.startsWith('--'));
 
 const out = await CheckMaterializedFinalRunRoundtrip0({
+    historicalReplay: true,
   ...(outputDir ? { outputDir } : {}),
   canonicalEnvelopeBytes: canonical,
   runCliChecks: !noCli,

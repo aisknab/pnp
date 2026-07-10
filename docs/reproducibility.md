@@ -128,6 +128,10 @@ No output and exit status zero means both comparisons passed.
 
 ## One-command verification smoke
 
+This is a historical assertion-checker replay at the pinned 7072f8d coordinates. It verifies identity
+and recorded checker behavior. It does not report current theorem status. For current status, use
+[`FORMAL_RECONSTRUCTION.md`](FORMAL_RECONSTRUCTION.md).
+
 The following single Bash invocation creates separate source and artefact worktrees, verifies the checksum ledgers, installs the pinned source tree, runs the targeted hardened chain, regenerates a compact final report, and compares the claim-critical semantic fields with the published summary.
 
 It refuses to overwrite an existing directory.
@@ -387,6 +391,7 @@ npm ci
 npm run check
 npm run examples:minimal
 npm run test:negative
+node pcc-formal-reconstruction-status0.mjs --json
 ```
 
 Expected reviewer-fixture results:
@@ -396,7 +401,9 @@ minimal examples: 8/8 pass
 named negative invariants: 8/8 pass
 ```
 
-These fixtures demonstrate specific accepted and rejected implementation cases. They do not add evidence to the frozen theorem release retroactively.
+These fixtures demonstrate specific accepted and rejected implementation cases. They do not add
+evidence to the frozen theorem release retroactively. The formal reconstruction command reports the
+current non-theorem status and outstanding formal blockers.
 
 ## Deterministic regeneration procedure
 

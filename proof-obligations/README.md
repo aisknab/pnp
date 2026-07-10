@@ -1,6 +1,11 @@
 # Proof obligation ledger
 
-Current coordinate:
+> **Superseded ledger:** This file describes the June 2026 assertion-checker obligation ledger. It is
+> not the current formal proof inventory and does not establish any named mathematical proposition.
+> See [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json)
+> and [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical coordinate:
 
 ```text
 PNP-PROOF-OBLIGATION-LEDGER-2026-06-27-01
@@ -18,7 +23,8 @@ Checker:
 node pcc-proof-obligation-ledger0.mjs --json
 ```
 
-The ledger records the current public-review theorem obligations as explicit machine-readable entries. Each obligation includes:
+The ledger records historical public-review obligations as machine-readable entries. Each entry
+describes what a checker expected, not a formal derivation.
 
 ```text
 id
@@ -33,7 +39,7 @@ hashMode
 
 The checker computes SHA256 digests of all declared source and test files at replay time. The ledger does not hard-code stale hashes as authority.
 
-## Current status classes
+## Historical status classes
 
 ```text
 machine-checked-seed
@@ -44,7 +50,7 @@ blocked-release-obligation
 
 The ledger is intentionally not a claim that every mathematical obligation has been fully discharged. It separates represented seed obligations, explicit trust-base obligations, and blocked release obligations.
 
-## Boundary
+## Historical boundary
 
 The proof obligation ledger is non-activating:
 
@@ -58,4 +64,5 @@ remainingBlockers = [
 ]
 ```
 
-The next hardening pass should expand this ledger into a gap ledger and then eliminate or downgrade each gap through executable proof objects, independent verifiers, or formal external-theorem references.
+The current reconstruction replaces this release-policy vocabulary with concrete Lean targets,
+assumption auditing, executable definitions, and formal obligations listed in the authoritative status.

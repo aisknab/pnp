@@ -1,14 +1,20 @@
 # Semantic kernel hardening - phase 55
 
+> **Historical assertion-checker record:** This phase and its retired workflow describe a June 2026
+> release-policy experiment. It is not current theorem-status authority or a current release plan.
+> See [the formal reconstruction status](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [the reconstruction notice](FORMAL_RECONSTRUCTION.md).
+
 Phase 54 bound the reviewer-key intake files to a SHA256 ledger.
 
-Phase 55 pivots from empty review-intake scaffolding to the successor-report-seal path:
+Phase 55 recorded a pivot from empty review-intake scaffolding to the successor-report-seal path:
 
 ```text
 PNP-REPORT-SEAL-2026-06-27-01
 ```
 
-This is a new successor seal for the public-review canonical report payload. It does not overwrite the historical `7072f8d` source/checker release or the sealed artifact release.
+This was a successor seal for the historical public-review report payload. It did not overwrite the
+`7072f8d` source/checker release or the sealed artifact release.
 
 ## New checker
 
@@ -86,6 +92,7 @@ node --check pcc-successor-report-seal0.mjs
 node --test test/pcc-successor-report-seal0.test.mjs
 ```
 
-## Next step
+## Historical next step
 
-The next release-layer work should materialize a successor report artifact bundle or bind reviewer evidence if supplied. Until unrestricted final-soundness and external-review acceptance are represented, public theorem emission remains disabled.
+The recorded next step was to materialize a successor report artifact bundle or bind reviewer
+evidence if supplied. That step is not part of the current formal blocker inventory or release plan.

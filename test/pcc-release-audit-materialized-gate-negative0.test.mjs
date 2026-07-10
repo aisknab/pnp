@@ -88,7 +88,7 @@ function makeGateAcceptRecord0(overrides = {}) {
 }
 
 async function runReleaseAuditWithGateRecord0(record, overrides = {}) {
-  return CheckReleaseAudit0(makeReleaseAuditConfig0({
+  return CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -99,6 +99,8 @@ async function runReleaseAuditWithGateRecord0(record, overrides = {}) {
     ...overrides,
   }));
 }
+
+const CheckHistoricalReleaseAudit0 = (config = {}) => CheckReleaseAudit0({ ...config, historicalReplay: true });
 
 test('CheckReleaseAudit0 rejects materialized gate accept record with wrong NF kind', async () => {
   const out = await runReleaseAuditWithGateRecord0(makeGateAcceptRecord0({

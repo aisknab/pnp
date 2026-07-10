@@ -2,9 +2,10 @@
   "kind": "PNPMultiPlatformCI0",
   "version": 0,
   "coordinate": "PNP-MULTI-PLATFORM-CI-2026-06-27-01",
-  "title": "Multi-platform core CI",
-  "purpose": "Define a portable CI matrix that verifies the repository's cross-platform Node core on Ubuntu, macOS, and Windows without requiring Docker, bash-specific fresh-clone execution, or nested full verifier recursion on every platform.",
-  "status": "multi-platform-ci-ready",
+  "title": "Historical multi-platform core CI record",
+  "purpose": "Preserve the retired portable CI matrix definition for historical audit without treating it as an active workflow or current theorem-status authority.",
+  "status": "historical-workflow-retired",
+  "currentStatusAuthority": false,
   "claimBoundary": {
     "publicTheoremEmissionAllowed": false,
     "finalTheoremReady": false,
@@ -14,7 +15,8 @@
       "ExternalReview.Acceptance"
     ]
   },
-  "multiPlatformCIReady": true,
+  "multiPlatformCIReady": false,
+  "workflowRetired": true,
   "fullPlatformEquivalenceProved": false,
   "publicTheoremEmissionAllowedByCI": false,
   "platforms": [
@@ -23,7 +25,8 @@
     "windows-latest"
   ],
   "nodeVersion": "20",
-  "workflow": ".github/workflows/multi-platform-ci.yml",
+  "workflow": null,
+  "historicalWorkflow": ".github/workflows/multi-platform-ci.yml",
   "commands": [
     "npm ci",
     "node --check pcc-core.mjs",
@@ -50,11 +53,11 @@
     "This multi-platform CI surface does not activate public theorem emission.",
     "This multi-platform CI surface does not clear Release.UnrestrictedFinalSoundness or ExternalReview.Acceptance.",
     "The workflow checks a portable core subset on all listed platforms and does not yet prove full bit-identical behavior across every operating system.",
-    "Full pnp:verify remains the repository-level verifier; this matrix is a reproducibility confidence layer for the portable Node core."
+    "This retired matrix record is not current theorem-status authority; npm run pnp:verify is the current conservative repository verifier."
   ],
   "audit": {
-    "checker": "CheckMultiPlatformCI0",
+    "checker": "historical-record-only",
     "test": "audits/multi-platform-ci0.test.mjs",
-    "expectedAcceptTag": "accept"
+    "expectedState": "workflow-absent"
   }
 }

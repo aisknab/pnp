@@ -1,14 +1,21 @@
 # Reproducing the Hardened Final PNP Proof-Report Release
 
-This file describes the reproducibility protocol for the hardened final proof-report release.
+> **Historical replay only:** This file describes the superseded 7072f8d assertion-checker release.
+> Reproduction verifies historical bytes and implemented predicate behavior. It does not establish
+> `P = NP` and does not change the current formal-reconstruction status. See
+> [`status/FORMAL_RECONSTRUCTION_STATUS.json`](./status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`docs/FORMAL_RECONSTRUCTION.md`](./docs/FORMAL_RECONSTRUCTION.md).
 
-## Public theorem boundary
+This file describes the reproducibility protocol for the historical hardened proof-report release.
+
+## Historical checker-claim boundary
 
 ```text
 CheckPCCPackexp(GeneratePCCPack())=accept => P = NP
 ```
 
-This is the only public theorem boundary asserted by the release package. The conclusion is conditional on the accepted generated package and the accepted proof-report chain.
+This was the claim boundary recorded by the historical release package. It is not a current theorem
+statement or an independently established implication.
 
 ## Canonical identifiers
 
@@ -32,14 +39,15 @@ bundle path:
 proof-artifacts/final-pnp-proof-report-hardened-7072f8d/
 ```
 
-### Current canonical manuscript
+### Historical manuscript carried on `main`
 
 ```text
 canonical_proof_report.tex
 canonical_proof_report.pdf
 ```
 
-The manuscript revision is the current `main` commit that contains the 7072f8d residual-hardened release-seal update to `canonical_proof_report.tex` and `canonical_proof_report.pdf`.
+The manuscript states the author's historical claim and is subordinate to the formal-reconstruction
+status. Its presence on `main` does not make its theorem wording current.
 
 ## Toolchain
 
@@ -109,9 +117,10 @@ all listed files pass
 
 `SHA256SUMS` intentionally has no self-entry. Its checksum is stored in the detached file `SHA256SUMS.sha256`.
 
-## Full validation
+## Historical full validation
 
-From `main` or from the source/checker tag:
+Run the recorded validation from the pinned source/checker tag. On current `main`, `npm run pnp:verify`
+is the conservative formal-reconstruction verifier and must not be interpreted as replay acceptance.
 
 ```bash
 npm ci
@@ -149,19 +158,19 @@ node --test test/pcc-runall0.test.mjs
 
 Expected result: all pass.
 
-## Proof-report regeneration
+## Historical proof-report regeneration
 
-From the source/checker tag or current `main`:
+On current `main`, regeneration is an explicit historical replay:
 
 ```bash
 TMP=/tmp/pnp-proof-report-hardened-repro
 rm -rf "$TMP"
 mkdir -p "$TMP/compact" "$TMP/full"
 
-node ./bin/write-final-pnp-proof-report0.mjs "$TMP/compact" \
+node ./bin/write-final-pnp-proof-report0.mjs --historical-replay "$TMP/compact" \
   > "$TMP/final-pnp-proof-report.summary.json"
 
-node ./bin/write-final-pnp-proof-report0.mjs "$TMP/full" --full \
+node ./bin/write-final-pnp-proof-report0.mjs --historical-replay "$TMP/full" --full \
   > "$TMP/final-pnp-proof-report.full.json"
 ```
 
@@ -178,15 +187,16 @@ checkPCCPackexpAccepted: true
 finalPNPProofReportAccepted: true
 ```
 
-Exact release-context digest equality is required only when regenerating in the same clean release context. Fresh context regeneration is accepted if it preserves the accepted theorem, accepted package/replay/certificate linkage, and public theorem boundary.
+Exact release-context digest equality is relevant only to historical byte reproduction. A fresh replay
+that reproduces acceptance records remains assertion-checker evidence, not theorem acceptance.
 
-## RunAll public-status smoke
+## Historical RunAll smoke
 
 ```bash
 node --input-type=module <<'NODE'
 import { RunAll0 } from './pcc-runall0.mjs';
 
-const out = await RunAll0();
+const out = await RunAll0(undefined, { historicalReplay: true });
 
 console.log(JSON.stringify({
   tag: out.tag,
@@ -224,4 +234,6 @@ checkPCCPackexpGlobalProofDAGHasGThresholdProofNode = true
 
 ## Reviewer caution
 
-The executable artifacts are a proof-carrying checker package and release-gate package. They do not replace mathematical review of the reduction and threshold proof. A reviewer should separately inspect the locked NAND threshold theorem, the residual-band minimization theorem, the absence of hidden minimization, and the final SAT-in-P implication.
+The executable artifacts are historical assertion-bearing records and checker outputs. They do not
+replace a concrete, assumption-audited formal derivation of the reduction, threshold, minimizer,
+ZeroSlack result, runtime bounds, and final complexity implication.

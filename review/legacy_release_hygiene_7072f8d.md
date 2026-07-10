@@ -1,8 +1,13 @@
-# Legacy Release Hygiene for the Current Review Package
+# Legacy Release Hygiene for the 7072f8d Review Package
 
-The current reviewer-facing tree is intentionally limited to the residual-hardened 7072f8d release.
+> **Historical assertion-checker record:** This file documents a superseded checker/release surface.
+> It is not current theorem-status authority and does not establish `P = NP`. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
 
-Reviewers should use:
+At the time of the frozen release, the reviewer-facing tree was intentionally limited to the residual-hardened 7072f8d package.
+
+That historical reviewer package named these entrypoints:
 
 ```text
 CURRENT_RELEASE.md
@@ -15,4 +20,4 @@ review/submission_readiness_memo_7072f8d.md
 proof-artifacts/final-pnp-proof-report-hardened-7072f8d/
 ```
 
-Historical release material remains recoverable through git history and historical tags. It is not part of the current reviewer-facing main-branch package.
+Other release material remained recoverable through git history and historical tags but was not part of that frozen reviewer package. The current main-branch authority is the formal-reconstruction status linked above.

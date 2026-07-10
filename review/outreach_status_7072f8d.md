@@ -1,5 +1,10 @@
 # External Review Outreach Status: 7072f8d
 
+> **Historical assertion-checker record:** This file documents a superseded checker/release surface.
+> It is not current theorem-status authority and does not establish `P = NP`. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
 Last updated: 18 June 2026
 
 This log records outbound contact attempts and substantive responses concerning the 7072f8d review release. Listing a person does not imply endorsement, validation, completed review, affiliation, or agreement with the claim. A status of “contact attempt sent” does not establish delivery, receipt, reading, or consideration. Silence should not be interpreted as acceptance, rejection, or an assessment of the claim.

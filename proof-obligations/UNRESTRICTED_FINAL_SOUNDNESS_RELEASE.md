@@ -1,6 +1,11 @@
 # Unrestricted final soundness release transition
 
-Coordinate:
+> **Withdrawn release transition:** This coordinate is superseded. Its assertion-checker acceptance
+> does not discharge unrestricted final soundness or make an internal theorem ready. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical coordinate:
 
 ```text
 PNP-UNRESTRICTED-FINAL-SOUNDNESS-RELEASE-2026-07-05-01
@@ -12,21 +17,22 @@ Uniform final soundness obligation:
 UFS-008-ReleaseTransitionFromProofOnly
 ```
 
-Checker:
+Historical replay command:
 
 ```bash
-npm run proof:unrestricted-final-soundness-release
+npm run proof:unrestricted-final-soundness-release -- --historical-replay
 ```
 
-Direct checker command:
+Direct historical replay command:
 
 ```bash
-node pcc-unrestricted-final-soundness-release0.mjs --json
+node pcc-unrestricted-final-soundness-release0.mjs --json --historical-replay
 ```
 
 ## Purpose
 
-This surface discharges the eighth uniform-final-soundness sub-obligation: clear `Release.UnrestrictedFinalSoundness` from accepted proof objects only.
+This surface recorded the eighth historical UFS transition. It cleared a JavaScript release-policy
+field after UFS assertion records accepted; it did not prove unrestricted final soundness.
 
 The release transition requires:
 
@@ -39,9 +45,9 @@ historical report prose is not used as a mathematical premise
 public-site wording is not used as a mathematical premise
 ```
 
-## What this clears
+## What the historical record asserted
 
-This checker clears:
+The historical checker cleared the field:
 
 ```text
 Release.UnrestrictedFinalSoundness
@@ -55,9 +61,9 @@ uniformFinalSoundnessProved = true
 internalFinalTheoremReady = true
 ```
 
-## What this does not clear
+## Current effect
 
-This checker does not itself activate public theorem emission. It leaves the public/review publication policy as an explicit later gate:
+The historical record left public emission to a later gate:
 
 ```text
 publicTheoremEmissionAllowed = false
@@ -66,7 +72,8 @@ remainingBlockers = [
 ]
 ```
 
-The point is to separate mathematical proof readiness from communication/release policy.
+Neither historical field transition has current effect. Current status keeps unrestricted final
+soundness, uniform final soundness, and internal theorem readiness false.
 
 ## Required proof obligations
 
@@ -79,6 +86,7 @@ REL-005-ClearUnrestrictedFinalSoundnessOnly
 REL-006-NoPrematurePublicTheoremEmission
 ```
 
-## Next step
+## Historical next step
 
-After this checker accepts, the remaining work is an explicit public theorem activation policy gate. That gate may decide whether external review remains a publication blocker, but it cannot be a mathematical premise for the proof.
+The old next step was the now-withdrawn public-theorem activation gate. Future activation instead
+requires the concrete, assumption-audited Lean conditions in the formal-reconstruction notice.

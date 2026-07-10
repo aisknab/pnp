@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+import { EnforceHistoricalReplayCli0, LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -25,8 +27,9 @@ export async function CheckUniformComplexityConclusion0(options = {}) {
   const root = path.resolve(options.root ?? process.cwd());
   const writeOutput = options.writeOutput ?? true;
   const outputPath = options.outputPath ?? OUT;
+  if (options.historicalReplay !== true) return write0(root, outputPath, writeOutput, LegacyReplayRequiredReject0(CHECKER, BLOCKERS));
   try {
-    const noHidden = await CheckNoHiddenOracleSemantic0({ root, writeOutput: false });
+    const noHidden = await CheckNoHiddenOracleSemantic0({ root, writeOutput: false, historicalReplay: true });
     if (noHidden.tag !== 'accept') return write0(root, outputPath, writeOutput, reject0('UniformComplexityConclusion.NoHiddenOracleDependency', ['dependsOn', NO_HIDDEN_COORD], 'UFS-006 no-hidden-oracle dependency must accept', { dependency: noHidden }));
     const complexityLedger = await CheckComplexityLedger0({ root, writeOutput: false });
     if (complexityLedger.tag !== 'accept') return write0(root, outputPath, writeOutput, reject0('UniformComplexityConclusion.ComplexityLedgerDependency', ['dependsOn', LEDGER_COORD], 'complexity ledger seed dependency must accept', { dependency: complexityLedger }));
@@ -73,7 +76,8 @@ export async function CheckUniformComplexityConclusion0(options = {}) {
   }
 }
 
-export function EvaluateComplexityConclusionExample0(input) {
+export function EvaluateComplexityConclusionExample0(input, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('EvaluateComplexityConclusionExample0', BLOCKERS);
   if (!plain0(input)) return reject0('UniformComplexityConclusion.ExampleShape', ['input'], 'example input must be an object');
   const requiredTrue = ['inputFamilyAccepted', 'lockedConstructionPolynomial', 'thresholdEquivalenceAccepted', 'exactMinimizerPolynomial', 'noHiddenOracleSemanticAccepted', 'satNPComplete'];
   for (const key of requiredTrue) if (input[key] !== true) return reject0('UniformComplexityConclusion.ExamplePremise', ['input', key], 'complexity example premise must be true', { actual: input[key] });
@@ -116,7 +120,7 @@ function validateTarget0(target) {
   return { tag: 'accept' };
 }
 
-function validateExamples0(manifest) { for (let i = 0; i < manifest.positiveExamples.length; i += 1) { const example = manifest.positiveExamples[i]; const out = EvaluateComplexityConclusionExample0(example.input); if (out.tag !== 'accept') return reject0('UniformComplexityConclusion.PositiveExampleRejected', ['positiveExamples', i], 'positive example rejected', { exampleId: example.id, reject: out }); for (const [key, expected] of Object.entries(example.expected)) if (out[key] !== expected) return reject0('UniformComplexityConclusion.PositiveExampleMismatch', ['positiveExamples', i, 'expected', key], 'positive example mismatch', { exampleId: example.id, expected, actual: out[key] }); } return { tag: 'accept' }; }
+function validateExamples0(manifest) { for (let i = 0; i < manifest.positiveExamples.length; i += 1) { const example = manifest.positiveExamples[i]; const out = EvaluateComplexityConclusionExample0(example.input, { historicalReplay: true }); if (out.tag !== 'accept') return reject0('UniformComplexityConclusion.PositiveExampleRejected', ['positiveExamples', i], 'positive example rejected', { exampleId: example.id, reject: out }); for (const [key, expected] of Object.entries(example.expected)) if (out[key] !== expected) return reject0('UniformComplexityConclusion.PositiveExampleMismatch', ['positiveExamples', i, 'expected', key], 'positive example mismatch', { exampleId: example.id, expected, actual: out[key] }); } return { tag: 'accept' }; }
 function validateBoundary0(boundary) { if (!plain0(boundary)) return reject0('UniformComplexityConclusion.BoundaryShape', ['claimBoundary'], 'boundary must be an object'); if (boundary.publicTheoremEmissionAllowed !== false) return reject0('UniformComplexityConclusion.BoundaryEmission', ['claimBoundary', 'publicTheoremEmissionAllowed'], 'public theorem emission must remain false'); if (boundary.finalTheoremReady !== false) return reject0('UniformComplexityConclusion.BoundaryFinalReady', ['claimBoundary', 'finalTheoremReady'], 'final theorem ready must remain false'); if (!sameArray0(boundary.activeFinalNodeIds, [])) return reject0('UniformComplexityConclusion.BoundaryFinalNodes', ['claimBoundary', 'activeFinalNodeIds'], 'active final nodes must remain empty'); if (!sameArray0(boundary.remainingBlockers, BLOCKERS)) return reject0('UniformComplexityConclusion.BoundaryBlockers', ['claimBoundary', 'remainingBlockers'], 'remaining blockers mismatch', { expected: BLOCKERS, actual: boundary.remainingBlockers }); return { tag: 'accept' }; }
 async function readJson0({ root, filePath, override, label }) { if (override !== undefined) { const bytes = Buffer.from(`${JSON.stringify(override, null, 2)}\n`, 'utf8'); return { tag: 'accept', value: override, bytes }; } try { const bytes = await readFile(path.join(root, filePath)); return { tag: 'accept', value: JSON.parse(bytes.toString('utf8')), bytes }; } catch (error) { return reject0('UniformComplexityConclusion.ReadOrParseFailed', [filePath], `could not read or parse ${label}`, normalizeError0(error)); } }
 async function digestEvidence0({ root, paths }) { const evidence = []; for (const rel of paths) { try { const abs = path.join(root, rel); const st = await stat(abs); if (!st.isFile()) return reject0('UniformComplexityConclusion.EvidenceNotFile', ['evidenceSurfaces', rel], 'evidence path is not a file'); const bytes = await readFile(abs); evidence.push({ path: rel, sha256: sha256Hex0(bytes), bytes: bytes.length }); } catch (error) { return reject0('UniformComplexityConclusion.EvidenceMissing', ['evidenceSurfaces', rel], 'evidence file missing', normalizeError0(error)); } } return { tag: 'accept', evidence }; }
@@ -130,5 +134,5 @@ function sha256Text0(text) { return sha256Hex0(Buffer.from(text, 'utf8')); }
 function stableStringify0(value) { if (Array.isArray(value)) return `[${value.map(stableStringify0).join(',')}]`; if (plain0(value)) return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${stableStringify0(value[key])}`).join(',')}}`; return JSON.stringify(value); }
 function normalizeError0(error) { return { name: error?.name ?? 'Error', message: error?.message ?? String(error), code: error?.code ?? null }; }
 function parseArgs0(argv) { const out = { json: false, writeOutput: true }; for (const arg of argv) { if (arg === '--json') out.json = true; else if (arg === '--no-write') out.writeOutput = false; else throw new Error(`unknown argument: ${arg}`); } return out; }
-async function main0() { let options; try { options = parseArgs0(process.argv.slice(2)); } catch (error) { const verdict = reject0('UniformComplexityConclusion.CliBadArgument', [], 'bad CLI argument', normalizeError0(error)); console.error(JSON.stringify(verdict, null, 2)); process.exit(2); } const verdict = await CheckUniformComplexityConclusion0(options); const rendered = JSON.stringify(verdict, null, 2); if (options.json || verdict.tag === 'accept') console.log(rendered); else console.error(rendered); process.exit(verdict.tag === 'accept' ? 0 : 1); }
+async function main0() { EnforceHistoricalReplayCli0({ entrypoint: 'pcc-uniform-complexity-conclusion0.mjs' }); let options; try { options = parseArgs0(process.argv.slice(2)); } catch (error) { const verdict = reject0('UniformComplexityConclusion.CliBadArgument', [], 'bad CLI argument', normalizeError0(error)); console.error(JSON.stringify(verdict, null, 2)); process.exit(2); } options.historicalReplay = true; const verdict = await CheckUniformComplexityConclusion0(options); const rendered = JSON.stringify(verdict, null, 2); if (options.json || verdict.tag === 'accept') console.log(rendered); else console.error(rendered); process.exit(verdict.tag === 'accept' ? 0 : 1); }
 if (import.meta.url === `file://${process.argv[1]}`) main0();

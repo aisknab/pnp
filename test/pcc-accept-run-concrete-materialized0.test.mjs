@@ -15,13 +15,23 @@ import {
   writeConcreteMaterializedGeneratedAcceptRunFiles0,
 } from '../pcc-accept-run-concrete-materialized0.mjs';
 
+const makeHistoricalConcreteAcceptRun0 = (options = {}) => makeConcreteMaterializedGeneratedAcceptRun0({
+  ...options,
+  historicalReplay: true,
+});
+
+const CheckHistoricalConcreteAcceptRun0 = (input, config = {}) => CheckConcreteMaterializedGeneratedAcceptRun0(input, {
+  ...config,
+  historicalReplay: true,
+});
+
 import {
   CheckMaterializedGeneratedAcceptRun0,
 } from '../pcc-accept-run-materialized0.mjs';
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 accepts an accept run over the concrete package chain', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope);
+  const envelope = await makeHistoricalConcreteAcceptRun0();
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckConcreteMaterializedGeneratedAcceptRun0');
@@ -495,15 +505,18 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 accepts an accept run over th
 });
 
 test('inner materialized generated accept-run accepts the concrete-chain run', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
-  const out = await CheckMaterializedGeneratedAcceptRun0(envelope.GeneratedAcceptRunEnvelope);
+  const envelope = await makeHistoricalConcreteAcceptRun0();
+  const out = await CheckMaterializedGeneratedAcceptRun0(
+    envelope.GeneratedAcceptRunEnvelope,
+    { historicalReplay: true },
+  );
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedGeneratedAcceptRun0');
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 invokes the concrete PCCPack checker before chain validation', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
   envelope.GeneratedAcceptRunEnvelope = {
     ...envelope.GeneratedAcceptRunEnvelope,
@@ -519,7 +532,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 invokes the concrete PCCPack 
     },
   };
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkLinkage: false,
     concretePCCPackConfig: {
@@ -537,7 +550,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 invokes the concrete PCCPack 
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a non-concrete global proof DAG envelope', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
   envelope.GeneratedAcceptRunEnvelope = {
     ...envelope.GeneratedAcceptRunEnvelope,
@@ -561,7 +574,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a non-concrete global
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkPCCPackexp: false,
@@ -576,7 +589,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a non-concrete global
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects stale ConcreteChain summary', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
   envelope.GeneratedAcceptRunEnvelope = {
     ...envelope.GeneratedAcceptRunEnvelope,
@@ -595,7 +608,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects stale ConcreteChain s
     materializedPCCPackDigest: undefined,
   };
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkPCCPackexp: false,
@@ -619,7 +632,9 @@ test('writeConcreteMaterializedGeneratedAcceptRunFiles0 writes replayable JSON a
     });
   });
 
-  const result = await writeConcreteMaterializedGeneratedAcceptRunFiles0(dir);
+  const result = await writeConcreteMaterializedGeneratedAcceptRunFiles0(dir, {
+    historicalReplay: true,
+  });
 
   assert.equal(result.checked.tag, 'accept');
 
@@ -642,7 +657,7 @@ test('writeConcreteMaterializedGeneratedAcceptRunFiles0 writes replayable JSON a
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects incomplete concrete HardCheck coverage', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
   envelope.GeneratedAcceptRunEnvelope = {
     ...envelope.GeneratedAcceptRunEnvelope,
@@ -669,7 +684,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects incomplete concrete H
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkPCCPackexp: false,
@@ -684,7 +699,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects incomplete concrete H
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects incomplete concrete final-integration coverage', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
   envelope.GeneratedAcceptRunEnvelope = {
     ...envelope.GeneratedAcceptRunEnvelope,
@@ -711,7 +726,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects incomplete concrete f
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkPCCPackexp: false,
@@ -726,7 +741,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects incomplete concrete f
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects through CheckPCCPackexp0 before chain validation', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
   envelope.GeneratedAcceptRunEnvelope = {
     ...envelope.GeneratedAcceptRunEnvelope,
@@ -742,7 +757,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects through CheckPCCPacke
     },
   };
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkLinkage: false,
@@ -761,7 +776,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects through CheckPCCPacke
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a missing materialized CheckPCCPackexp0 record', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
   delete envelope.CheckPCCPackexpRecord;
   envelope.Linkage = {
@@ -769,7 +784,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a missing materialize
     checkPCCPackexpRecordDigest: undefined,
   };
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkLinkage: false,
@@ -782,7 +797,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a missing materialize
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a stale materialized CheckPCCPackexp0 record', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
   envelope.CheckPCCPackexpRecord = {
     ...envelope.CheckPCCPackexpRecord,
@@ -796,7 +811,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a stale materialized 
     },
   };
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkLinkage: false,
@@ -809,7 +824,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a stale materialized 
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a missing GeneratedPCCPackexpEnvelope', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
   delete envelope.GeneratedPCCPackexpEnvelope;
   envelope.Linkage = {
@@ -818,7 +833,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a missing GeneratedPC
     generatedPCCPackDigest: undefined,
   };
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkPCCPackexp: false,
@@ -832,7 +847,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a missing GeneratedPC
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp package drift', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
   envelope.GeneratedPCCPackexpEnvelope = {
     ...envelope.GeneratedPCCPackexpEnvelope,
@@ -854,7 +869,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp p
     generatedPCCPackDigest: undefined,
   };
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkPCCPackexp: false,
@@ -874,9 +889,9 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp p
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp without Boot0 bridge evidence', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkPCCPackexp: false,
@@ -893,7 +908,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp w
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a missing CheckGeneratedPCCPackexp0 record', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
   delete envelope.CheckGeneratedPCCPackexpRecord;
   envelope.Linkage = {
@@ -901,7 +916,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a missing CheckGenera
     checkGeneratedPCCPackexpRecordDigest: undefined,
   };
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkPCCPackexp: false,
@@ -915,7 +930,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a missing CheckGenera
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a stale CheckGeneratedPCCPackexp0 record', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
   envelope.CheckGeneratedPCCPackexpRecord = {
     ...envelope.CheckGeneratedPCCPackexpRecord,
@@ -929,7 +944,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a stale CheckGenerate
     },
   };
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkPCCPackexp: false,
@@ -943,9 +958,9 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects a stale CheckGenerate
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp without KernelSeed0 bridge evidence', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkPCCPackexp: false,
@@ -962,9 +977,9 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp w
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp without Codec0/Digest0 evidence', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkPCCPackexp: false,
@@ -981,9 +996,9 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp w
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp without IfaceDict0/Sched0 evidence', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkPCCPackexp: false,
@@ -1000,9 +1015,9 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp w
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp without ByteLang0 evidence', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkPCCPackexp: false,
@@ -1019,9 +1034,9 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp w
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp without BootAudit0/PiBoot evidence', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkPCCPackexp: false,
@@ -1038,9 +1053,9 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp w
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp without ConcreteKBundle bridge evidence', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkPCCPackexp: false,
@@ -1057,9 +1072,9 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp w
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp without ConcreteHard bridge evidence', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkPCCPackexp: false,
@@ -1076,9 +1091,9 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp w
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp without ConcreteRows bridge evidence', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkPCCPackexp: false,
@@ -1095,9 +1110,9 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp w
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp without ConcreteGlobalProofDAG bridge evidence', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkPCCPackexp: false,
@@ -1114,9 +1129,9 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp w
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp without ConcreteFinalIntegration bridge evidence', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkPCCPackexp: false,
@@ -1133,7 +1148,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects GeneratedPCCPackexp w
 });
 
 test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects stale CheckPCCPackexp0 central contract evidence', async () => {
-  const envelope = await makeConcreteMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalConcreteAcceptRun0();
 
   const record = envelope.CheckGeneratedPCCPackexpRecord;
   const nf = {
@@ -1149,7 +1164,7 @@ test('CheckConcreteMaterializedGeneratedAcceptRun0 rejects stale CheckPCCPackexp
     digest: digestCanonical0(nf),
   };
 
-  const out = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalConcreteAcceptRun0(envelope, {
     checkGeneratedAcceptRun: false,
     checkConcretePCCPack: false,
     checkPCCPackexp: false,

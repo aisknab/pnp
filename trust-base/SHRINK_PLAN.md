@@ -1,8 +1,14 @@
 # Trust-base shrink plan
 
-The trust base is now explicit. The next phase is to shrink it by replacing broad assumptions with smaller executable ledgers, independent replays, and formal statement skeletons.
+> **Superseded trust-base plan:** This June 2026 roadmap belongs to the historical JavaScript
+> assertion-checker stack. It is not the current formal reconstruction plan or blocker inventory.
+> See [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json)
+> and [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
 
-Machine-readable coordinate:
+The historical plan proposed shrinking its trust base by replacing broad assumptions with smaller
+executable ledgers, independent replays, and formal statement skeletons.
+
+Historical machine-readable coordinate:
 
 ```text
 PNP-TRUST-BASE-SHRINK-PLAN-2026-06-27-01
@@ -20,9 +26,9 @@ Audit command:
 node pcc-trust-base-shrink-plan0.mjs --json
 ```
 
-## Boundary
+## Historical boundary
 
-The shrink plan is non-activating:
+The recorded shrink plan was non-activating:
 
 ```text
 publicTheoremEmissionAllowed = false
@@ -70,4 +76,5 @@ For bounded CNF instances, brute-force SAT and compare against the locked-NAND t
 
 A trust-base task moves from `planned` to `represented` when it has source files, tests, and a checker verdict. It moves to `complete` only when the corresponding assumption is narrowed in `trust-base/TRUST_BASE.json` and accepted by `pcc-trust-base0.mjs`.
 
-This plan does not say the trust base is empty. It makes the reduction queue explicit so each later PR can shrink a specific assumption instead of adding diffuse confidence claims.
+This plan did not say the trust base was empty. Its recorded reduction queue is historical. Current
+work is governed by the concrete obligations in the formal-reconstruction status.

@@ -11,6 +11,8 @@ import {
   makeMaterializedFinalCertificate0,
 } from './pcc-final-certificate-materialized0.mjs';
 
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 const CHECKER_VERSION = 0;
 
 export const FINAL_CERTIFICATE_PUBLIC_STATUS_PHASES0 = Object.freeze([
@@ -50,6 +52,7 @@ export function makeFinalCertificatePublicStatusConfig0(overrides = {}) {
   return {
     kind: 'FinalCertificatePublicStatusConfig0',
     version: CHECKER_VERSION,
+    historicalReplay: false,
     checkFinalCertificate: true,
     checkReleaseAuditRecord: false,
     checkPublicStatus: true,
@@ -67,13 +70,17 @@ export async function makeFinalCertificatePublicStatus0({
   ReleaseAuditRecord = null,
   PublicStatus = null,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
-  const finalCertificateEnvelope = FinalCertificateEnvelope ?? await makeMaterializedFinalCertificate0();
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeFinalCertificatePublicStatus0');
+  const finalCertificateEnvelope = FinalCertificateEnvelope ?? await makeMaterializedFinalCertificate0({
+    historicalReplay: true,
+  });
   const releaseAuditRecord = ReleaseAuditRecord ?? null;
   const publicStatus = PublicStatus ?? emitFinalCertificatePublicStatus0({
     finalCertificateEnvelope,
     releaseAuditRecord,
-  });
+  }, { historicalReplay: true });
 
   const linkage = {
     kind: 'FinalCertificatePublicStatusLinkage0',
@@ -127,7 +134,8 @@ export async function makeFinalCertificatePublicStatus0({
 export function emitFinalCertificatePublicStatus0({
   finalCertificateEnvelope,
   releaseAuditRecord = null,
-}) {
+} = {}, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('emitFinalCertificatePublicStatus0');
   const certificate = finalCertificateEnvelope.Certificate;
   const finalVerdict = finalCertificateEnvelope.FinalVerdict;
   const finalNF = finalVerdict.NF ?? finalVerdict.nf ?? {};
@@ -180,6 +188,7 @@ export async function CheckFinalCertificatePublicStatus0(
   const checker = 'CheckFinalCertificatePublicStatus0';
   const ledger = [];
   const cfg = makeFinalCertificatePublicStatusConfig0(config);
+  if (cfg.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const envelope = input;
 
   const cfgCheck = validateConfig0(cfg);
@@ -221,7 +230,10 @@ export async function CheckFinalCertificatePublicStatus0(
   if (cfg.checkFinalCertificate === true) {
     const certRecord = await CheckMaterializedFinalCertificate0(
       envelope.FinalCertificateEnvelope,
-      cfg.finalCertificateConfig ?? {},
+      {
+        ...(cfg.finalCertificateConfig ?? {}),
+        historicalReplay: true,
+      },
     );
     const cert = recordToValidation0(certRecord, ['FinalCertificateEnvelope']);
 
@@ -419,12 +431,16 @@ export async function CheckFinalCertificatePublicStatus0(
 }
 
 export async function writeFinalCertificatePublicStatusFiles0(outDir, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('writeFinalCertificatePublicStatusFiles0');
   if (typeof outDir !== 'string' || outDir.length === 0) {
     throw new TypeError('writeFinalCertificatePublicStatusFiles0 requires a non-empty output directory');
   }
 
   const envelope = await makeFinalCertificatePublicStatus0(options);
-  const checked = await CheckFinalCertificatePublicStatus0(envelope, options.checkConfig ?? {});
+  const checked = await CheckFinalCertificatePublicStatus0(envelope, {
+    ...(options.checkConfig ?? {}),
+    historicalReplay: true,
+  });
 
   await fs.mkdir(outDir, {
     recursive: true,

@@ -1,6 +1,11 @@
 # Edward Savage Feedback Round 1: Locked NAND Reduction Boundary
 
-Status: **actioned as a manuscript/reviewer-package clarification request**.
+> **Historical assertion-checker record:** This file documents a superseded checker/release surface.
+> It is not current theorem-status authority and does not establish `P = NP`. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical status: **actioned as a manuscript/reviewer-package clarification request**.
 
 ## Feedback summary
 
@@ -12,13 +17,13 @@ The proof should explain how the locked NAND construction applies to general NAN
 
 ## Triage
 
-This is the correct attack surface. The intended proof route is not:
+The historical review treated this as the correct attack surface. The intended route in that release was not:
 
 ```text
 solve arbitrary NAND minimization directly
 ```
 
-The intended route is:
+The historical intended route was:
 
 ```text
 Boolean formula/circuit
@@ -28,7 +33,7 @@ Boolean formula/circuit
 -> SAT decision
 ```
 
-Thus the needed bridge is a named locked-family SAT-hardness theorem:
+The historical review therefore called for a named locked-family SAT-hardness theorem:
 
 ```text
 phi in SAT iff mu(W^NAND_phi) > B^NAND_phi

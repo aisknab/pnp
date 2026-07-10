@@ -1,6 +1,13 @@
-# Current Review Release
+# Historical 7072f8d review release
 
-The current reviewable release on `main` is the residual-hardened 7072f8d release.
+> **Current authority:** Formal reconstruction is in progress. The repository does not currently
+> establish `P = NP`, and no theorem release is active. See
+> [`status/FORMAL_RECONSTRUCTION_STATUS.json`](./status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`docs/FORMAL_RECONSTRUCTION.md`](./docs/FORMAL_RECONSTRUCTION.md).
+
+The residual-hardened 7072f8d release is preserved as a historical assertion-checker release. Its
+acceptance records describe what the version-zero JavaScript predicates accepted. They are not a
+formal proof or current theorem-status authority.
 
 ```text
 source tag:   final-pnp-proof-report-hardened-7072f8d
@@ -11,5 +18,5 @@ validation:   1121 tests, 1121 pass, 0 fail, 0 cancelled
 boundary:     CheckPCCPackexp(GeneratePCCPack())=accept => P = NP
 ```
 
-Only the current release bundle and current review package should be used from `main`.
-Historical release material is preserved by git history and historical tags, not by the current reviewer-facing file tree.
+Use these coordinates only to reproduce or audit the historical release. Use the formal
+reconstruction status file for every statement about the current project.

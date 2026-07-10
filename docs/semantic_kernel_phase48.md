@@ -1,6 +1,11 @@
 # Semantic kernel hardening - phase 48
 
-Phase 48 binds the current external-review finding intake files to an explicit SHA256 ledger.
+> **Historical assertion-checker record:** This phase and its retired workflow describe a June 2026
+> release-policy experiment. It is not current theorem-status authority or a current release plan.
+> See [the formal reconstruction status](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [the reconstruction notice](FORMAL_RECONSTRUCTION.md).
+
+Phase 48 bound the then-current external-review finding intake files to an explicit SHA256 ledger.
 
 ## Coordinate
 
@@ -26,7 +31,7 @@ CheckExternalReviewFindingFiles0 = accept
 external-review/findings/SHA256SUMS
 ```
 
-Current entries:
+Historical entries:
 
 ```text
 2f8ecf1ca93e6f94db967b7808948e97a330850bda7ee4211defcc151d2e5869  external-review/findings/MANIFEST.json

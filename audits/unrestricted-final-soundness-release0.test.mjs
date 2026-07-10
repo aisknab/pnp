@@ -7,12 +7,26 @@ import {
   EvaluateUnrestrictedFinalSoundnessReleaseExample0,
 } from '../pcc-unrestricted-final-soundness-release0.mjs';
 
+const EvaluateHistoricalReleaseExample0 = (input) => EvaluateUnrestrictedFinalSoundnessReleaseExample0(
+  input,
+  { historicalReplay: true },
+);
+
 async function currentManifest() {
   return JSON.parse(await readFile(new URL('../proof-obligations/UNRESTRICTED_FINAL_SOUNDNESS_RELEASE.json', import.meta.url), 'utf8'));
 }
 
-test('unrestricted final soundness release checker accepts current UFS release surface', async () => {
+test('unrestricted final soundness release rejects without historical replay opt-in', async () => {
   const out = await CheckUnrestrictedFinalSoundnessRelease0({ writeOutput: false });
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.coord, 'CheckUnrestrictedFinalSoundnessRelease0.HistoricalReplayRequired');
+  assert.equal(out.mathematicalTheoremEstablished, false);
+  assert.equal(out.publicTheoremEmissionAllowed, false);
+  assert.equal(out.finalTheoremReady, false);
+});
+
+test('unrestricted final soundness release checker accepts current UFS release surface', async () => {
+  const out = await CheckUnrestrictedFinalSoundnessRelease0({ writeOutput: false, historicalReplay: true });
   assert.equal(out.tag, 'accept');
   assert.equal(out.coordinate, 'PNP-UNRESTRICTED-FINAL-SOUNDNESS-RELEASE-2026-07-05-01');
   assert.equal(out.ufsObligationId, 'UFS-008-ReleaseTransitionFromProofOnly');
@@ -34,7 +48,7 @@ test('unrestricted final soundness release checker accepts current UFS release s
 });
 
 test('release example clears unrestricted final soundness from accepted proof chain', () => {
-  const out = EvaluateUnrestrictedFinalSoundnessReleaseExample0({
+  const out = EvaluateHistoricalReleaseExample0({
     allUFSDependenciesAccepted: true,
     allUFSDependencyCoordinatesHashBound: true,
     ufs007ComplexityConclusionAccepted: true,
@@ -54,7 +68,7 @@ test('release example clears unrestricted final soundness from accepted proof ch
 test('unrestricted release rejects external review as release proof premise', async () => {
   const manifest = await currentManifest();
   manifest.releaseTransition.usesExternalReviewAsPremise = true;
-  const out = await CheckUnrestrictedFinalSoundnessRelease0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckUnrestrictedFinalSoundnessRelease0({ writeOutput: false, historicalReplay: true, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'UnrestrictedFinalSoundnessRelease.TransitionBoolean');
 });
@@ -62,7 +76,7 @@ test('unrestricted release rejects external review as release proof premise', as
 test('unrestricted release rejects historical report prose as release proof premise', async () => {
   const manifest = await currentManifest();
   manifest.releaseTransition.usesHistoricalReportProseAsPremise = true;
-  const out = await CheckUnrestrictedFinalSoundnessRelease0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckUnrestrictedFinalSoundnessRelease0({ writeOutput: false, historicalReplay: true, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'UnrestrictedFinalSoundnessRelease.TransitionBoolean');
 });
@@ -70,7 +84,7 @@ test('unrestricted release rejects historical report prose as release proof prem
 test('unrestricted release rejects premature public theorem emission activation', async () => {
   const manifest = await currentManifest();
   manifest.publicTheoremEmissionAllowedByRelease = true;
-  const out = await CheckUnrestrictedFinalSoundnessRelease0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckUnrestrictedFinalSoundnessRelease0({ writeOutput: false, historicalReplay: true, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'UnrestrictedFinalSoundnessRelease.BooleanField');
   assert.deepEqual(out.path, ['publicTheoremEmissionAllowedByRelease']);
@@ -79,7 +93,7 @@ test('unrestricted release rejects premature public theorem emission activation'
 test('unrestricted release rejects clearing external review in this proof-only transition', async () => {
   const manifest = await currentManifest();
   manifest.releaseTransition.clearsExternalReviewAcceptance = true;
-  const out = await CheckUnrestrictedFinalSoundnessRelease0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckUnrestrictedFinalSoundnessRelease0({ writeOutput: false, historicalReplay: true, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'UnrestrictedFinalSoundnessRelease.TransitionBoolean');
 });

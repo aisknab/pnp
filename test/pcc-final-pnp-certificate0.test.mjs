@@ -8,6 +8,7 @@ import {
   CheckFinalPNPCertificate0,
   FINAL_PNP_CERTIFICATE_PHASES0,
   makeFinalPNPCertificate0,
+  makeFinalPNPCertificateRecord0,
   writeFinalPNPCertificateFiles0,
 } from '../pcc-final-pnp-certificate0.mjs';
 
@@ -15,9 +16,30 @@ import {
   digestCanonical0,
 } from '../pcc-verifier-frag0.mjs';
 
+const makeHistoricalFinalPNPCertificate0 = (options = {}) => makeFinalPNPCertificate0({ ...options, historicalReplay: true });
+const CheckHistoricalFinalPNPCertificate0 = (input, config = {}) => CheckFinalPNPCertificate0(input, { ...config, historicalReplay: true });
+const writeHistoricalFinalPNPCertificateFiles0 = (outDir, options = {}) => writeFinalPNPCertificateFiles0(outDir, { ...options, historicalReplay: true });
+
+test('final PNP certificate programmatic routes reject without historical opt-in', async () => {
+  const generated = await makeFinalPNPCertificate0();
+  const record = makeFinalPNPCertificateRecord0({
+    concreteFinalAcceptanceReplayEnvelope: {},
+    concreteFinalAcceptanceReplayRecord: {},
+  });
+  const checked = await CheckFinalPNPCertificate0({});
+  assert.equal(generated.tag, 'reject');
+  assert.equal(record.tag, 'reject');
+  assert.equal(checked.tag, 'reject');
+  for (const out of [generated, record, checked]) {
+    assert.equal(out.publicTheoremEmissionAllowed, false);
+    assert.equal(out.publicTheoremStatement, null);
+    assert.equal(out.finalTheoremReady, false);
+  }
+});
+
 test('CheckFinalPNPCertificate0 accepts the final P=NP certificate appendix', async () => {
-  const envelope = await makeFinalPNPCertificate0();
-  const out = await CheckFinalPNPCertificate0(envelope);
+  const envelope = await makeHistoricalFinalPNPCertificate0();
+  const out = await CheckHistoricalFinalPNPCertificate0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckFinalPNPCertificate0');
@@ -61,7 +83,7 @@ test('CheckFinalPNPCertificate0 accepts the final P=NP certificate appendix', as
 });
 
 test('CheckFinalPNPCertificate0 rejects theorem drift', async () => {
-  const envelope = await makeFinalPNPCertificate0();
+  const envelope = await makeHistoricalFinalPNPCertificate0();
 
   envelope.Certificate = {
     ...envelope.Certificate,
@@ -77,7 +99,7 @@ test('CheckFinalPNPCertificate0 rejects theorem drift', async () => {
     certificateDigest: undefined,
   };
 
-  const out = await CheckFinalPNPCertificate0(envelope, {
+  const out = await CheckHistoricalFinalPNPCertificate0(envelope, {
     checkConcreteFinalAcceptanceReplay: false,
     checkLinkage: false,
   });
@@ -89,7 +111,7 @@ test('CheckFinalPNPCertificate0 rejects theorem drift', async () => {
 });
 
 test('CheckFinalPNPCertificate0 rejects stale final acceptance replay record evidence', async () => {
-  const envelope = await makeFinalPNPCertificate0();
+  const envelope = await makeHistoricalFinalPNPCertificate0();
 
   const nf = {
     ...envelope.CheckConcreteFinalAcceptanceReplayRecord.NF,
@@ -109,7 +131,7 @@ test('CheckFinalPNPCertificate0 rejects stale final acceptance replay record evi
     concreteFinalAcceptanceReplayRecordDigest: undefined,
   };
 
-  const out = await CheckFinalPNPCertificate0(envelope, {
+  const out = await CheckHistoricalFinalPNPCertificate0(envelope, {
     checkLinkage: false,
   });
 
@@ -120,7 +142,7 @@ test('CheckFinalPNPCertificate0 rejects stale final acceptance replay record evi
 });
 
 test('CheckFinalPNPCertificate0 rejects stale certificate linkage', async () => {
-  const envelope = await makeFinalPNPCertificate0();
+  const envelope = await makeHistoricalFinalPNPCertificate0();
 
   envelope.Linkage = {
     ...envelope.Linkage,
@@ -131,7 +153,7 @@ test('CheckFinalPNPCertificate0 rejects stale certificate linkage', async () => 
     },
   };
 
-  const out = await CheckFinalPNPCertificate0(envelope, {
+  const out = await CheckHistoricalFinalPNPCertificate0(envelope, {
     checkConcreteFinalAcceptanceReplay: false,
   });
 
@@ -151,7 +173,7 @@ test('writeFinalPNPCertificateFiles0 writes replayable JSON artefacts', async (t
     });
   });
 
-  const result = await writeFinalPNPCertificateFiles0(dir);
+  const result = await writeHistoricalFinalPNPCertificateFiles0(dir);
 
   assert.equal(result.checked.tag, 'accept');
 

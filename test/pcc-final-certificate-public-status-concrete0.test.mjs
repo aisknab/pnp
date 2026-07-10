@@ -15,13 +15,23 @@ import {
   writeConcreteFinalCertificatePublicStatusFiles0,
 } from '../pcc-final-certificate-public-status-concrete0.mjs';
 
+const makeHistoricalConcretePublicStatus0 = (options = {}) => makeConcreteFinalCertificatePublicStatus0({
+  ...options,
+  historicalReplay: true,
+});
+
+const CheckHistoricalConcretePublicStatus0 = (input, config = {}) => CheckConcreteFinalCertificatePublicStatus0(input, {
+  ...config,
+  historicalReplay: true,
+});
+
 import {
   CheckFinalCertificatePublicStatus0,
 } from '../pcc-final-certificate-public-status0.mjs';
 
 test('CheckConcreteFinalCertificatePublicStatus0 accepts public status over concrete final certificate', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope);
+  const envelope = await makeHistoricalConcretePublicStatus0();
+  const out = await CheckHistoricalConcretePublicStatus0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckConcreteFinalCertificatePublicStatus0');
@@ -486,8 +496,11 @@ test('CheckConcreteFinalCertificatePublicStatus0 accepts public status over conc
 });
 
 test('inner final-certificate public-status checker accepts the concrete status envelope', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
-  const out = await CheckFinalCertificatePublicStatus0(envelope.FinalCertificatePublicStatusEnvelope);
+  const envelope = await makeHistoricalConcretePublicStatus0();
+  const out = await CheckFinalCertificatePublicStatus0(
+    envelope.FinalCertificatePublicStatusEnvelope,
+    { historicalReplay: true },
+  );
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckFinalCertificatePublicStatus0');
@@ -495,7 +508,7 @@ test('inner final-certificate public-status checker accepts the concrete status 
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete public-status chain summary', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   envelope.ConcreteChain = {
     ...envelope.ConcreteChain,
@@ -507,7 +520,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete public-s
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkConcreteFinalCertificate: false,
     checkFinalCertificatePublicStatus: false,
     checkLinkage: false,
@@ -520,7 +533,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete public-s
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 rejects status envelope not tied to concrete final certificate', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   envelope.FinalCertificatePublicStatusEnvelope = {
     ...envelope.FinalCertificatePublicStatusEnvelope,
@@ -544,7 +557,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects status envelope not tie
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkFinalCertificatePublicStatus: false,
     checkLinkage: false,
   });
@@ -556,7 +569,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects status envelope not tie
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 rejects concrete PCCPack component drift', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   envelope.ConcreteFinalCertificateEnvelope
     .ConcreteGeneratedAcceptRunEnvelope
@@ -589,7 +602,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects concrete PCCPack compon
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkConcreteFinalCertificate: false,
     checkFinalCertificatePublicStatus: false,
     checkLinkage: false,
@@ -602,7 +615,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects concrete PCCPack compon
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 strictly rejects an injected synthetic scaffold marker', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   envelope.FinalCertificatePublicStatusEnvelope = {
     ...envelope.FinalCertificatePublicStatusEnvelope,
@@ -618,7 +631,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 strictly rejects an injected sy
     publicStatusDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkFinalCertificatePublicStatus: false,
     checkConcreteChain: false,
     checkLinkage: false,
@@ -641,7 +654,9 @@ test('writeConcreteFinalCertificatePublicStatusFiles0 writes replayable JSON art
     });
   });
 
-  const result = await writeConcreteFinalCertificatePublicStatusFiles0(dir);
+  const result = await writeConcreteFinalCertificatePublicStatusFiles0(dir, {
+    historicalReplay: true,
+  });
 
   assert.equal(result.checked.tag, 'accept');
 
@@ -661,7 +676,7 @@ test('writeConcreteFinalCertificatePublicStatusFiles0 writes replayable JSON art
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 rejects incomplete concrete HardCheck coverage', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   envelope.ConcreteFinalCertificateEnvelope
     .ConcreteGeneratedAcceptRunEnvelope
@@ -688,7 +703,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects incomplete concrete Har
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkConcreteFinalCertificate: false,
     checkFinalCertificatePublicStatus: false,
     checkLinkage: false,
@@ -701,7 +716,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects incomplete concrete Har
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 rejects incomplete concrete final-integration coverage', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   envelope.ConcreteFinalCertificateEnvelope
     .ConcreteGeneratedAcceptRunEnvelope
@@ -728,7 +743,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects incomplete concrete fin
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkConcreteFinalCertificate: false,
     checkFinalCertificatePublicStatus: false,
     checkLinkage: false,
@@ -741,7 +756,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects incomplete concrete fin
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 rejects missing materialized CheckPCCPackexp0 evidence', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   delete envelope.ConcreteFinalCertificateEnvelope
     .ConcreteGeneratedAcceptRunEnvelope
@@ -766,7 +781,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects missing materialized Ch
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkConcreteFinalCertificate: false,
     checkFinalCertificatePublicStatus: false,
     checkLinkage: false,
@@ -779,7 +794,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects missing materialized Ch
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 rejects missing GeneratedPCCPackexp0 evidence', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   delete envelope.ConcreteFinalCertificateEnvelope
     .ConcreteGeneratedAcceptRunEnvelope
@@ -805,7 +820,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects missing GeneratedPCCPac
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkConcreteFinalCertificate: false,
     checkFinalCertificatePublicStatus: false,
     checkLinkage: false,
@@ -818,7 +833,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects missing GeneratedPCCPac
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 rejects missing CheckGeneratedPCCPackexp0 evidence', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   delete envelope.ConcreteFinalCertificateEnvelope
     .ConcreteGeneratedAcceptRunEnvelope
@@ -843,7 +858,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects missing CheckGeneratedP
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkConcreteFinalCertificate: false,
     checkFinalCertificatePublicStatus: false,
     checkLinkage: false,
@@ -856,7 +871,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects missing CheckGeneratedP
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 rejects stale B0 row-family evidence', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   const record = envelope.ConcreteFinalCertificateEnvelope
     .ConcreteGeneratedAcceptRunEnvelope
@@ -887,7 +902,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale B0 row-family evi
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkConcreteFinalCertificate: false,
     checkFinalCertificatePublicStatus: false,
     checkLinkage: false,
@@ -900,7 +915,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale B0 row-family evi
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 rejects stale KernelSeed0 evidence', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   const record = envelope.ConcreteFinalCertificateEnvelope
     .ConcreteGeneratedAcceptRunEnvelope
@@ -931,7 +946,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale KernelSeed0 evide
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkConcreteFinalCertificate: false,
     checkFinalCertificatePublicStatus: false,
     checkLinkage: false,
@@ -944,7 +959,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale KernelSeed0 evide
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 rejects stale Codec0/Digest0 evidence', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   const record = envelope.ConcreteFinalCertificateEnvelope
     .ConcreteGeneratedAcceptRunEnvelope
@@ -975,7 +990,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale Codec0/Digest0 ev
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkConcreteFinalCertificate: false,
     checkFinalCertificatePublicStatus: false,
     checkLinkage: false,
@@ -988,7 +1003,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale Codec0/Digest0 ev
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 rejects stale IfaceDict0/Sched0 evidence', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   const record = envelope.ConcreteFinalCertificateEnvelope
     .ConcreteGeneratedAcceptRunEnvelope
@@ -1019,7 +1034,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale IfaceDict0/Sched0
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkConcreteFinalCertificate: false,
     checkFinalCertificatePublicStatus: false,
     checkLinkage: false,
@@ -1032,7 +1047,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale IfaceDict0/Sched0
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 rejects stale ByteLang0 evidence', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   const record = envelope.ConcreteFinalCertificateEnvelope
     .ConcreteGeneratedAcceptRunEnvelope
@@ -1063,7 +1078,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale ByteLang0 evidenc
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkConcreteFinalCertificate: false,
     checkFinalCertificatePublicStatus: false,
     checkLinkage: false,
@@ -1076,7 +1091,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale ByteLang0 evidenc
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 rejects stale PiBoot evidence', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   const record = envelope.ConcreteFinalCertificateEnvelope
     .ConcreteGeneratedAcceptRunEnvelope
@@ -1107,7 +1122,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale PiBoot evidence',
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkConcreteFinalCertificate: false,
     checkFinalCertificatePublicStatus: false,
     checkLinkage: false,
@@ -1120,7 +1135,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale PiBoot evidence',
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete KBundle evidence', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   const record = envelope.ConcreteFinalCertificateEnvelope
     .ConcreteGeneratedAcceptRunEnvelope
@@ -1151,7 +1166,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete KBundle 
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkConcreteFinalCertificate: false,
     checkFinalCertificatePublicStatus: false,
     checkLinkage: false,
@@ -1164,7 +1179,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete KBundle 
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete HardCheck evidence', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   const record = envelope.ConcreteFinalCertificateEnvelope
     .ConcreteGeneratedAcceptRunEnvelope
@@ -1195,7 +1210,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete HardChec
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkConcreteFinalCertificate: false,
     checkFinalCertificatePublicStatus: false,
     checkLinkage: false,
@@ -1208,7 +1223,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete HardChec
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete RowPack evidence', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   const record = envelope.ConcreteFinalCertificateEnvelope
     .ConcreteGeneratedAcceptRunEnvelope
@@ -1239,7 +1254,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete RowPack 
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkConcreteFinalCertificate: false,
     checkFinalCertificatePublicStatus: false,
     checkLinkage: false,
@@ -1252,7 +1267,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete RowPack 
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete GlobalProofDAG evidence', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   const record = envelope.ConcreteFinalCertificateEnvelope
     .ConcreteGeneratedAcceptRunEnvelope
@@ -1283,7 +1298,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete GlobalPr
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkConcreteFinalCertificate: false,
     checkFinalCertificatePublicStatus: false,
     checkLinkage: false,
@@ -1296,7 +1311,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete GlobalPr
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete FinalIntegration evidence', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   const record = envelope.ConcreteFinalCertificateEnvelope
     .ConcreteGeneratedAcceptRunEnvelope
@@ -1327,7 +1342,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete FinalInt
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkConcreteFinalCertificate: false,
     checkFinalCertificatePublicStatus: false,
     checkLinkage: false,
@@ -1340,7 +1355,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale concrete FinalInt
 });
 
 test('CheckConcreteFinalCertificatePublicStatus0 rejects stale CheckPCCPackexp0 contract evidence', async () => {
-  const envelope = await makeConcreteFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalConcretePublicStatus0();
 
   const record = envelope.ConcreteFinalCertificateEnvelope
     .ConcreteGeneratedAcceptRunEnvelope
@@ -1371,7 +1386,7 @@ test('CheckConcreteFinalCertificatePublicStatus0 rejects stale CheckPCCPackexp0 
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalConcretePublicStatus0(envelope, {
     checkConcreteFinalCertificate: false,
     checkFinalCertificatePublicStatus: false,
     checkLinkage: false,

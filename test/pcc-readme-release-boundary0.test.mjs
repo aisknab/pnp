@@ -17,6 +17,8 @@ async function currentReadme0() {
   return fs.readFile(new URL('../README.md', import.meta.url), 'utf8');
 }
 
+const CheckHistoricalReleaseAudit0 = (config = {}) => CheckReleaseAudit0({ ...config, historicalReplay: true });
+
 test('CheckReadmeReleaseBoundary0 accepts the current README release-boundary wording', async () => {
   const out = await CheckReadmeReleaseBoundary0();
 
@@ -45,8 +47,8 @@ test('CheckReadmeReleaseBoundary0 rejects a missing central conditional claim', 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckReadmeReleaseBoundary0');
   assert.equal(out.Coord, 'CheckReadmeReleaseBoundary0.requiredSnippet');
-  assert.equal(out.Witness.reason, 'README release boundary wording is missing a required snippet');
-  assert.equal(out.Witness.detail.snippet, centralClaim);
+  assert.equal(out.Witness.reason, 'README.md missing required release-boundary snippets');
+  assert.equal(out.Witness.detail.missing.includes(centralClaim), true);
 });
 
 test('CheckReadmeReleaseBoundary0 rejects stale layout wording about legacy src structure', async () => {
@@ -58,8 +60,8 @@ test('CheckReadmeReleaseBoundary0 rejects stale layout wording about legacy src 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckReadmeReleaseBoundary0');
   assert.equal(out.Coord, 'CheckReadmeReleaseBoundary0.forbiddenSnippet');
-  assert.equal(out.Witness.reason, 'README release boundary wording contains a forbidden stale or overclaiming snippet');
-  assert.equal(out.Witness.detail.snippet, 'stale duplicate ES modules under `src`');
+  assert.equal(out.Witness.reason, 'README.md contains forbidden release-boundary snippets');
+  assert.equal(out.Witness.detail.present.includes('stale duplicate ES modules under `src`'), true);
 });
 
 test('CheckReadmeReleaseBoundary0 rejects active src-folder wording', async () => {
@@ -71,7 +73,7 @@ test('CheckReadmeReleaseBoundary0 rejects active src-folder wording', async () =
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckReadmeReleaseBoundary0');
   assert.equal(out.Coord, 'CheckReadmeReleaseBoundary0.forbiddenSnippet');
-  assert.equal(out.Witness.detail.snippet, 'src folder');
+  assert.equal(out.Witness.detail.present.includes('src folder'), true);
 });
 
 test('CheckReadmeReleaseBoundary0 rejects unconditional P equals NP overclaims', async () => {
@@ -83,11 +85,11 @@ test('CheckReadmeReleaseBoundary0 rejects unconditional P equals NP overclaims',
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckReadmeReleaseBoundary0');
   assert.equal(out.Coord, 'CheckReadmeReleaseBoundary0.forbiddenSnippet');
-  assert.equal(out.Witness.detail.snippet, 'P = NP is established');
+  assert.equal(out.Witness.detail.present.includes('P = NP is established'), true);
 });
 
 test('CheckReleaseAudit0 readme phase uses the README release-boundary checker', async () => {
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,

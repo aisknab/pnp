@@ -1,8 +1,13 @@
 # Semantic kernel hardening - phase 49
 
-Phase 48 bound the current empty signed-finding intake directory with a SHA256 ledger.
+> **Historical assertion-checker record:** This phase and its retired workflow describe a June 2026
+> release-policy experiment. It is not current theorem-status authority or a current release plan.
+> See [the formal reconstruction status](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [the reconstruction notice](FORMAL_RECONSTRUCTION.md).
 
-Phase 49 adds digest-bound templates for future signed external-review findings:
+Phase 48 bound the then-current empty signed-finding intake directory with a SHA256 ledger.
+
+Phase 49 added digest-bound templates for possible later signed external-review findings:
 
 ```text
 ExternalReview.SignedFindingTemplates
@@ -39,7 +44,8 @@ f97527a3ab8660d961707ecdfe8f39a90a9d3ad2bb758a872903f62172ac706e  external-revie
 9d702f97d85502e271716c444eda47fcf662db57c09d210bd4788074747c0aa3  external-review/templates/revision-request-finding.template.json
 ```
 
-The templates are not findings. They are inert examples for future digest-bound review artifacts and cannot activate the release gate.
+The templates are not findings. They are inert examples for historical digest-bound review artifacts
+and cannot activate a current release gate.
 
 ## Release boundary
 
@@ -70,6 +76,7 @@ node --check pcc-external-review-finding-template-ledger0.mjs
 node --test test/pcc-external-review-finding-template-ledger0.test.mjs
 ```
 
-## Next step
+## Historical next step
 
-The next release-layer work should bind actual signed finding files if they are supplied. Without signed findings and an unrestricted-final-soundness release artifact, public theorem emission remains disabled.
+The recorded next step was to bind signed finding files if supplied. That step is not part of the
+current formal blocker inventory or release plan.

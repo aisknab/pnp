@@ -14,7 +14,7 @@ async function currentManifest() {
 }
 
 test('uniform locked NAND threshold checker accepts current threshold surface', async () => {
-  const out = await CheckUniformLockedNANDThreshold0({ writeOutput: false });
+  const out = await CheckUniformLockedNANDThreshold0({ historicalReplay: true, writeOutput: false });
   assert.equal(out.tag, 'accept');
   assert.equal(out.coordinate, 'PNP-UNIFORM-LOCKED-NAND-THRESHOLD-2026-07-04-01');
   assert.equal(out.ufsObligationId, 'UFS-003-ThresholdEquivalenceAllInputs');
@@ -79,7 +79,7 @@ test('uniform threshold checker rejects finite-list-only theorem overclaim', asy
   const manifest = await currentManifest();
   manifest.thresholdTheorem.finiteInstanceList = true;
   manifest.thresholdTheorem.allFiniteInputsCovered = false;
-  const out = await CheckUniformLockedNANDThreshold0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckUniformLockedNANDThreshold0({ historicalReplay: true, writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'UniformLockedNANDThreshold.TheoremBoolean');
 });
@@ -87,7 +87,7 @@ test('uniform threshold checker rejects finite-list-only theorem overclaim', asy
 test('uniform threshold checker rejects theorem activation by threshold proof alone', async () => {
   const manifest = await currentManifest();
   manifest.uniformFinalSoundnessProved = true;
-  const out = await CheckUniformLockedNANDThreshold0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckUniformLockedNANDThreshold0({ historicalReplay: true, writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'UniformLockedNANDThreshold.BooleanField');
   assert.deepEqual(out.path, ['uniformFinalSoundnessProved']);

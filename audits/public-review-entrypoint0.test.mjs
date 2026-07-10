@@ -3,17 +3,12 @@ import { test } from 'node:test';
 
 import { CheckPublicReviewEntrypoint0 } from '../pcc-public-review-entrypoint0.mjs';
 
-test('public review entrypoint accepts current root reviewer navigation surface', async () => {
+test('legacy public review entrypoint rejects after the root review reset', async () => {
   const out = await CheckPublicReviewEntrypoint0({ writeOutput: false });
-  assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-PUBLIC-REVIEW-ENTRYPOINT-2026-06-27-01');
-  assert.equal(out.publicReviewEntrypointReady, true);
-  assert.equal(out.rootEntryDocumentReady, true);
-  assert.equal(out.handoffSurfaceBound, true);
-  assert.equal(out.oneCommandVerifierVisible, true);
-  assert.equal(out.directTheoremEmissionAllowedByEntrypoint, false);
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.coord, 'PublicReviewEntrypoint.DocFragmentMissing');
+  assert.deepEqual(out.path, ['PUBLIC_REVIEW.md', 'not a theorem-activation surface']);
   assert.equal(out.publicTheoremEmissionAllowed, false);
   assert.equal(out.finalTheoremReady, false);
   assert.deepEqual(out.activeFinalNodeIds, []);
-  assert.deepEqual(out.remainingBlockers, ['Release.UnrestrictedFinalSoundness', 'ExternalReview.Acceptance']);
 });

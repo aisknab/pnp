@@ -11,8 +11,23 @@ async function currentManifest() {
   return JSON.parse(await readFile(new URL('../proof-obligations/PUBLIC_THEOREM_ACTIVATION.json', import.meta.url), 'utf8'));
 }
 
-test('public theorem activation checker accepts current activation surface', async () => {
+test('public theorem activation rejects without historical replay opt-in', async () => {
   const out = await CheckPublicTheoremActivation0({ writeOutput: false });
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.coord, 'CheckPublicTheoremActivation0.HistoricalReplayRequired');
+  assert.equal(out.mathematicalTheoremEstablished, false);
+  assert.equal(out.publicTheoremEmissionAllowed, false);
+  assert.equal(out.publicTheoremStatement, null);
+  assert.equal(out.finalTheoremReady, false);
+
+  const example = EvaluatePublicTheoremActivationExample0({});
+  assert.equal(example.tag, 'reject');
+  assert.equal(example.coord, 'EvaluatePublicTheoremActivationExample0.HistoricalReplayRequired');
+  assert.equal(example.publicTheoremEmissionAllowed, false);
+});
+
+test('public theorem activation checker accepts current activation surface', async () => {
+  const out = await CheckPublicTheoremActivation0({ writeOutput: false, historicalReplay: true });
   assert.equal(out.tag, 'accept');
   assert.equal(out.coordinate, 'PNP-PUBLIC-THEOREM-ACTIVATION-2026-07-05-01');
   assert.equal(out.publicTheoremActivationAccepted, true);
@@ -39,7 +54,7 @@ test('activation example permits public theorem emission from accepted proof sta
     pEqualsNPConclusionAccepted: true,
     usesExternalReviewAsPremise: false,
     usesHistoricalReportProseAsPremise: false,
-  });
+  }, { historicalReplay: true });
   assert.deepEqual(out, {
     tag: 'accept',
     publicTheoremEmissionAllowed: true,
@@ -55,7 +70,7 @@ test('activation example rejects external review as premise', () => {
     pEqualsNPConclusionAccepted: true,
     usesExternalReviewAsPremise: true,
     usesHistoricalReportProseAsPremise: false,
-  });
+  }, { historicalReplay: true });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'PublicTheoremActivation.ExamplePremise');
 });
@@ -63,7 +78,7 @@ test('activation example rejects external review as premise', () => {
 test('public theorem activation rejects external review as policy premise', async () => {
   const manifest = await currentManifest();
   manifest.activationPolicy.usesExternalReviewAsPremise = true;
-  const out = await CheckPublicTheoremActivation0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckPublicTheoremActivation0({ writeOutput: false, historicalReplay: true, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'PublicTheoremActivation.PolicyBoolean');
 });
@@ -71,7 +86,7 @@ test('public theorem activation rejects external review as policy premise', asyn
 test('public theorem activation rejects missing theorem emission flag', async () => {
   const manifest = await currentManifest();
   manifest.publicTheoremEmissionAllowed = false;
-  const out = await CheckPublicTheoremActivation0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckPublicTheoremActivation0({ writeOutput: false, historicalReplay: true, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'PublicTheoremActivation.BooleanField');
   assert.deepEqual(out.path, ['publicTheoremEmissionAllowed']);
@@ -80,7 +95,7 @@ test('public theorem activation rejects missing theorem emission flag', async ()
 test('public theorem activation rejects nonempty remaining blockers after activation', async () => {
   const manifest = await currentManifest();
   manifest.claimBoundaryAfterActivation.remainingBlockers = ['ExternalReview.Acceptance'];
-  const out = await CheckPublicTheoremActivation0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckPublicTheoremActivation0({ writeOutput: false, historicalReplay: true, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'PublicTheoremActivation.AfterBoundary');
 });

@@ -10,6 +10,16 @@ import {
   writeReleaseAuditFinalCertificateGateFiles0,
 } from '../pcc-release-audit-final-certificate-gate0.mjs';
 
+const makeHistoricalFinalCertificateGate0 = (options = {}) => makeReleaseAuditFinalCertificateGate0({
+  ...options,
+  historicalReplay: true,
+});
+
+const CheckHistoricalFinalCertificateGate0 = (input, config = {}) => CheckReleaseAuditFinalCertificateGate0(input, {
+  ...config,
+  historicalReplay: true,
+});
+
 import {
   digestCanonical0,
 } from '../pcc-verifier-frag0.mjs';
@@ -64,12 +74,12 @@ function makeAcceptedReleaseAuditRecord0(overrides = {}) {
 
 test('CheckReleaseAuditFinalCertificateGate0 accepts attached release audit plus final certificate public status', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditFinalCertificateGate0({
+  const envelope = await makeHistoricalFinalCertificateGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
 
-  const out = await CheckReleaseAuditFinalCertificateGate0(envelope);
+  const out = await CheckHistoricalFinalCertificateGate0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckReleaseAuditFinalCertificateGate0');
@@ -89,12 +99,12 @@ test('CheckReleaseAuditFinalCertificateGate0 rejects a non-accepted release audi
     tag: 'reject',
   };
 
-  const envelope = await makeReleaseAuditFinalCertificateGate0({
+  const envelope = await makeHistoricalFinalCertificateGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
 
-  const out = await CheckReleaseAuditFinalCertificateGate0(envelope);
+  const out = await CheckHistoricalFinalCertificateGate0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckReleaseAuditFinalCertificateGate0');
@@ -114,12 +124,12 @@ test('CheckReleaseAuditFinalCertificateGate0 rejects public conclusion drift bet
   releaseAuditRecord.Digest = digestCanonical0(releaseAuditRecord.NF);
   releaseAuditRecord.digest = releaseAuditRecord.Digest;
 
-  const envelope = await makeReleaseAuditFinalCertificateGate0({
+  const envelope = await makeHistoricalFinalCertificateGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
 
-  const out = await CheckReleaseAuditFinalCertificateGate0(envelope);
+  const out = await CheckHistoricalFinalCertificateGate0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckReleaseAuditFinalCertificateGate0');
@@ -129,7 +139,7 @@ test('CheckReleaseAuditFinalCertificateGate0 rejects public conclusion drift bet
 
 test('CheckReleaseAuditFinalCertificateGate0 rejects a stale public-status release audit digest', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditFinalCertificateGate0({
+  const envelope = await makeHistoricalFinalCertificateGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -152,7 +162,7 @@ test('CheckReleaseAuditFinalCertificateGate0 rejects a stale public-status relea
     publicStatusDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalFinalCertificateGate0(envelope, {
     checkFinalCertificatePublicStatus: false,
   });
 
@@ -164,7 +174,7 @@ test('CheckReleaseAuditFinalCertificateGate0 rejects a stale public-status relea
 
 test('CheckReleaseAuditFinalCertificateGate0 rejects forbidden fixture marker text', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditFinalCertificateGate0({
+  const envelope = await makeHistoricalFinalCertificateGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
     overrides: {
@@ -172,7 +182,7 @@ test('CheckReleaseAuditFinalCertificateGate0 rejects forbidden fixture marker te
     },
   });
 
-  const out = await CheckReleaseAuditFinalCertificateGate0(envelope);
+  const out = await CheckHistoricalFinalCertificateGate0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckReleaseAuditFinalCertificateGate0');
@@ -182,7 +192,7 @@ test('CheckReleaseAuditFinalCertificateGate0 rejects forbidden fixture marker te
 
 test('CheckReleaseAuditFinalCertificateGate0 strictly rejects an injected synthetic scaffold marker', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditFinalCertificateGate0({
+  const envelope = await makeHistoricalFinalCertificateGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
     overrides: {
@@ -190,7 +200,7 @@ test('CheckReleaseAuditFinalCertificateGate0 strictly rejects an injected synthe
     },
   });
 
-  const out = await CheckReleaseAuditFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalFinalCertificateGate0(envelope, {
     allowSyntheticScaffoldMarker: false,
   });
 
@@ -203,7 +213,7 @@ test('CheckReleaseAuditFinalCertificateGate0 strictly rejects an injected synthe
 
 test('CheckReleaseAuditFinalCertificateGate0 rejects stale linkage digest', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditFinalCertificateGate0({
+  const envelope = await makeHistoricalFinalCertificateGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -217,7 +227,7 @@ test('CheckReleaseAuditFinalCertificateGate0 rejects stale linkage digest', asyn
     },
   };
 
-  const out = await CheckReleaseAuditFinalCertificateGate0(envelope);
+  const out = await CheckHistoricalFinalCertificateGate0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckReleaseAuditFinalCertificateGate0');
@@ -239,6 +249,7 @@ test('writeReleaseAuditFinalCertificateGateFiles0 writes replayable JSON artefac
   const result = await writeReleaseAuditFinalCertificateGateFiles0(dir, {
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
+    historicalReplay: true,
   });
 
   assert.equal(result.checked.tag, 'accept');
@@ -255,5 +266,17 @@ test('writeReleaseAuditFinalCertificateGateFiles0 writes replayable JSON artefac
     const value = JSON.parse(text);
 
     assert.equal(typeof value, 'object');
+  }
+});
+
+test('release-audit final-certificate routes reject without historical replay opt-in', async () => {
+  for (const out of await Promise.all([
+    makeReleaseAuditFinalCertificateGate0(),
+    CheckReleaseAuditFinalCertificateGate0(),
+    writeReleaseAuditFinalCertificateGateFiles0(),
+  ])) {
+    assert.equal(out.tag, 'reject');
+    assert.match(out.coord, /\.HistoricalReplayRequired$/);
+    assert.equal(out.publicTheoremEmissionAllowed, false);
   }
 });

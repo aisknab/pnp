@@ -22,6 +22,16 @@ import {
   makeMaterializedFinalVerdictInput0,
 } from '../pcc-materialized-final-verdict0.mjs';
 
+const CheckHistoricalFinalVerdict0 = (input, config = {}) => CheckMaterializedFinalVerdict0(input, {
+  ...config,
+  historicalReplay: true,
+});
+
+const CheckHistoricalFinalVerdictFile0 = (filePath, config = {}) => CheckMaterializedFinalVerdictFile0(filePath, {
+  ...config,
+  historicalReplay: true,
+});
+
 import {
   MATERIALIZED_PACK_PUBLIC_BOUNDARY0,
   sha256Utf8DigestRecord0,
@@ -34,12 +44,13 @@ import {
 test('CheckMaterializedFinalVerdict0 accepts pending accept-run and emits no public conclusion', async (t) => {
   const { packFilePath, aggregateDigest } = await writeAggregatePack0(t);
   const acceptRun = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath,
     aggregateDigest,
     verdict: 'pending',
   });
 
-  const out = await CheckMaterializedFinalVerdict0(acceptRun);
+  const out = await CheckHistoricalFinalVerdict0(acceptRun);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedFinalVerdict0');
@@ -66,13 +77,14 @@ test('CheckMaterializedFinalVerdict0 accepts reject accept-run and emits no publ
     firstFailure,
   });
   const acceptRun = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath,
     aggregateDigest,
     verdict: 'reject',
     replayTranscript,
   });
 
-  const out = await CheckMaterializedFinalVerdict0(makeMaterializedFinalVerdictInput0({
+  const out = await CheckHistoricalFinalVerdict0(makeMaterializedFinalVerdictInput0({
     acceptRun,
   }));
 
@@ -87,12 +99,13 @@ test('CheckMaterializedFinalVerdict0 accepts reject accept-run and emits no publ
 test('CheckMaterializedFinalVerdict0 accepts accepted replay and emits the conditional public conclusion', async (t) => {
   const { packFilePath, aggregateDigest } = await writeAggregatePack0(t);
   const acceptRun = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath,
     aggregateDigest,
     verdict: 'accept',
   });
 
-  const out = await CheckMaterializedFinalVerdict0(acceptRun);
+  const out = await CheckHistoricalFinalVerdict0(acceptRun);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.NF.verdict, 'accept');
@@ -107,13 +120,14 @@ test('CheckMaterializedFinalVerdictFile0 accepts an accepted accept-run file', a
     t,
     'MaterializedAcceptRun0.accept.json',
     makeMaterializedAcceptRun0({
+    historicalReplay: true,
       packFilePath,
       aggregateDigest,
       verdict: 'accept',
     }),
   );
 
-  const out = await CheckMaterializedFinalVerdictFile0(acceptRunFile);
+  const out = await CheckHistoricalFinalVerdictFile0(acceptRunFile);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedFinalVerdictFile0');
@@ -126,12 +140,13 @@ test('CheckMaterializedFinalVerdictFile0 accepts an accepted accept-run file', a
 test('CheckMaterializedFinalVerdict0 rejects invalid final verdict policy', async (t) => {
   const { packFilePath, aggregateDigest } = await writeAggregatePack0(t);
   const acceptRun = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath,
     aggregateDigest,
     verdict: 'pending',
   });
 
-  const out = await CheckMaterializedFinalVerdict0(makeMaterializedFinalVerdictInput0({
+  const out = await CheckHistoricalFinalVerdict0(makeMaterializedFinalVerdictInput0({
     acceptRun,
     overrides: {
       VerdictPolicy: {
@@ -158,12 +173,13 @@ test('CheckMaterializedFinalVerdict0 rejects invalid final verdict policy', asyn
 test('CheckMaterializedFinalVerdict0 rejects public claim boundary mismatch', async (t) => {
   const { packFilePath, aggregateDigest } = await writeAggregatePack0(t);
   const acceptRun = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath,
     aggregateDigest,
     verdict: 'pending',
   });
 
-  const out = await CheckMaterializedFinalVerdict0(makeMaterializedFinalVerdictInput0({
+  const out = await CheckHistoricalFinalVerdict0(makeMaterializedFinalVerdictInput0({
     acceptRun,
     overrides: {
       PublicClaimBoundary: {
@@ -183,6 +199,7 @@ test('CheckMaterializedFinalVerdict0 rejects public claim boundary mismatch', as
 test('CheckMaterializedFinalVerdict0 rejects accept-run that tries to emit public conclusion before accepted replay', async (t) => {
   const { packFilePath, aggregateDigest } = await writeAggregatePack0(t);
   const acceptRun = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath,
     aggregateDigest,
     verdict: 'pending',
@@ -196,7 +213,7 @@ test('CheckMaterializedFinalVerdict0 rejects accept-run that tries to emit publi
     },
   };
 
-  const out = await CheckMaterializedFinalVerdict0(acceptRun);
+  const out = await CheckHistoricalFinalVerdict0(acceptRun);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedFinalVerdict0');
@@ -209,7 +226,7 @@ test('CheckMaterializedFinalVerdict0 rejects accept-run that tries to emit publi
 test('CheckMaterializedFinalVerdictFile0 rejects invalid accept-run file', async (t) => {
   const filePath = await writeTempTextFile0(t, 'MaterializedAcceptRun0.bad.json', '{ not json');
 
-  const out = await CheckMaterializedFinalVerdictFile0(filePath);
+  const out = await CheckHistoricalFinalVerdictFile0(filePath);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedFinalVerdictFile0');
@@ -233,6 +250,7 @@ test('CheckMaterializedFinalVerdict0 rejects accept-run whose aggregate package 
   );
 
   const acceptRun = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath: badPackFile,
     aggregateDigest: {
       alg: 'SHA256',
@@ -242,7 +260,7 @@ test('CheckMaterializedFinalVerdict0 rejects accept-run whose aggregate package 
     verdict: 'pending',
   });
 
-  const out = await CheckMaterializedFinalVerdict0(acceptRun);
+  const out = await CheckHistoricalFinalVerdict0(acceptRun);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedFinalVerdict0');

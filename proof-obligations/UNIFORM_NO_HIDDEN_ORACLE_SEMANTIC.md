@@ -1,6 +1,11 @@
 # Uniform semantic no-hidden-oracle proof surface
 
-Coordinate:
+> **Historical assertion-checker record:** This UFS coordinate is superseded. Source scanning and
+> accepted semantic flags do not prove the absence of every hidden oracle or super-polynomial
+> computation. See [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json)
+> and [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical coordinate:
 
 ```text
 PNP-UNIFORM-NO-HIDDEN-ORACLE-SEMANTIC-2026-07-05-01
@@ -12,21 +17,22 @@ Uniform final soundness obligation:
 UFS-006-NoHiddenOracleSemanticCompleteness
 ```
 
-Checker:
+Historical replay command:
 
 ```bash
-npm run proof:no-hidden-oracle-semantic
+npm run proof:no-hidden-oracle-semantic -- --historical-replay
 ```
 
-Direct checker command:
+Direct historical replay command:
 
 ```bash
-node pcc-no-hidden-oracle-semantic0.mjs --json
+node pcc-no-hidden-oracle-semantic0.mjs --json --historical-replay
 ```
 
 ## Purpose
 
-This surface discharges the sixth uniform-final-soundness sub-obligation: the executable proof path contains no hidden SAT oracle, exact-minimization oracle, unbounded search, digest-equality semantic shortcut, or external-review theorem premise.
+This surface recorded the sixth historical UFS assertion about the absence of hidden SAT or
+exact-minimization oracles, unbounded search, digest shortcuts, and external-review premises.
 
 It depends on the existing source-surface seed audit and upgrades it with a semantic restricted-language closure check over:
 
@@ -52,15 +58,16 @@ NHS-007-HashDigestNonSemantic
 NHS-008-NoExternalReviewPremise
 ```
 
-## What this proves
+## What the historical checker accepted
 
-The checker proves that the current uniform proof stack is not allowed to smuggle the hard work into an executable shortcut. Every proof-development script must be a direct checker invocation. Forbidden oracle-shaped capabilities are represented as rejected semantic states, not hidden premises.
+The checker enforced its implemented source and record predicates against listed oracle-shaped
+capabilities. That enforcement did not prove semantic completeness of the scan or polynomial runtime.
 
 ## What this does not prove
 
 This checker does not by itself prove SAT in P, activate final theorem emission, or clear unrestricted final soundness. Later checkers still need to bind the complexity implication and release transition.
 
-Current boundary remains:
+The historical record kept this boundary:
 
 ```text
 publicTheoremEmissionAllowed = false

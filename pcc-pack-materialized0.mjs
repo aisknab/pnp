@@ -87,6 +87,7 @@ import {
   CheckConcreteMaterializedFinalIntegration0,
   makeConcreteMaterializedFinalIntegration0,
 } from './pcc-final-integration-concrete-materialized0.mjs';
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
 
 const CHECKER_VERSION = 0;
 
@@ -125,7 +126,9 @@ export async function makeMaterializedPCCPack0({
   FinalIntegrationEnvelope = null,
   PCCPack = null,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeMaterializedPCCPack0');
   const boot0 = resolveBoot0(Boot0) ?? await makeMaterializedBoot0();
 
   const kBundleEnvelope = KBundleEnvelope ?? await makeConcreteMaterializedKBundle0({
@@ -162,6 +165,7 @@ export async function makeMaterializedPCCPack0({
 
   const finalIntegrationEnvelope = FinalIntegrationEnvelope ?? await makeConcreteMaterializedFinalIntegration0({
     ConcreteGlobalProofDAGEnvelope: globalProofDAGEnvelope,
+    historicalReplay: true,
   });
   const gpack = resolveGPack0(finalIntegrationEnvelope);
   const rowFamG = resolveRowFamG0(finalIntegrationEnvelope);
@@ -182,6 +186,7 @@ export async function makeMaterializedPCCPack0({
     FinalIntegration: finalIntegration,
     FinalTheorem: finalTheorem,
     RowFamFinal: rowFamFinal,
+    historicalReplay: true,
   });
 
   const linkage = {
@@ -253,7 +258,9 @@ export function makePCCPack0({
   FinalTheorem,
   RowFamFinal,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makePCCPack0');
   const artefacts = {
     Boot0,
     KBundle,
@@ -333,7 +340,7 @@ export function makePCCPack0({
         },
       ],
     },
-  });
+  }, { historicalReplay: true });
 
   return {
     kind: 'PCCPack0',
@@ -372,6 +379,7 @@ export function makePCCPack0({
 }
 
 export async function CheckMaterializedPCCPack0(input, config = makeMaterializedPCCPackConfig0()) {
+  if (config?.historicalReplay !== true) return LegacyReplayRequiredReject0('CheckMaterializedPCCPack0');
   const checker = 'CheckMaterializedPCCPack0';
   const ledger = [];
   const cfg = makeMaterializedPCCPackConfig0(config);
@@ -434,7 +442,7 @@ export async function CheckMaterializedPCCPack0(input, config = makeMaterialized
   }
 
   if (cfg.checkPackSufficiency === true) {
-    const packRecord = await CheckPackSufficiency0(envelope.PCCPack);
+    const packRecord = await CheckPackSufficiency0(envelope.PCCPack, { historicalReplay: true });
     const pack = recordToValidation0(packRecord, ['PCCPack']);
 
     ledger.push({
@@ -522,7 +530,7 @@ export async function CheckMaterializedPCCPack0(input, config = makeMaterialized
     }
   }
 
-  const packRecord = await CheckPackSufficiency0(envelope.PCCPack);
+  const packRecord = await CheckPackSufficiency0(envelope.PCCPack, { historicalReplay: true });
   const packNF = packRecord.NF ?? packRecord.nf ?? {};
 
   const nf = {
@@ -581,12 +589,16 @@ export async function CheckMaterializedPCCPack0(input, config = makeMaterialized
 }
 
 export async function writeMaterializedPCCPackFiles0(outDir, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('writeMaterializedPCCPackFiles0');
   if (typeof outDir !== 'string' || outDir.length === 0) {
     throw new TypeError('writeMaterializedPCCPackFiles0 requires a non-empty output directory');
   }
 
   const envelope = await makeMaterializedPCCPack0(options);
-  const checked = await CheckMaterializedPCCPack0(envelope, options.checkConfig ?? {});
+  const checked = await CheckMaterializedPCCPack0(envelope, {
+    ...(options.checkConfig ?? {}),
+    historicalReplay: true,
+  });
 
   await fs.mkdir(outDir, {
     recursive: true,
@@ -755,10 +767,10 @@ async function checkMaterializedHardEnvelope0(value) {
 
 async function checkMaterializedFinalIntegrationEnvelope0(value) {
   if (isPlainObject(value) && value.kind === 'ConcreteMaterializedFinalIntegration0') {
-    return CheckConcreteMaterializedFinalIntegration0(value);
+    return CheckConcreteMaterializedFinalIntegration0(value, { historicalReplay: true });
   }
 
-  return CheckMaterializedFinalIntegration0(value);
+  return CheckMaterializedFinalIntegration0(value, { historicalReplay: true });
 }
 
 async function checkMaterializedKBundleEnvelope0(value) {

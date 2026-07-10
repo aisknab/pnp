@@ -1,6 +1,12 @@
-# Current public-review non-activation boundary
+# Historical public-review non-activation boundary
 
-Current coordinate:
+> **Superseded checker boundary:** This June 2026 surface records historical assertion-checker
+> behavior. It is not current theorem-status authority. Formal reconstruction is in progress, and
+> the repository does not currently establish `P = NP`. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical coordinate:
 
 ```text
 PNP-PUBLIC-REVIEW-BOUNDARY-2026-06-27-01
@@ -18,11 +24,13 @@ Checker:
 node pcc-public-review-boundary0.mjs --json
 ```
 
-This boundary aggregates the current status file, release ladder, gap ledger, sanitized historical-report surfaces, historical theorem-anchor surface, public-surface baseline, Section 22 direct-binding index, and Section 22 runner into one public-review non-activation audit.
+This boundary historically aggregated the then-current status file, release ladder, gap ledger,
+sanitized report surfaces, theorem-anchor surface, public-surface baseline, Section 22 direct-binding
+index, and Section 22 runner into one non-activation audit.
 
 It is an aggregate boundary, not a theorem-activation surface.
 
-## Current scope
+## Historical scope
 
 ```text
 publicReviewBoundaryReady = true
@@ -39,7 +47,7 @@ section22RunnerBound = true
 
 ## Boundary
 
-The active release boundary remains:
+The historical release boundary recorded:
 
 ```text
 publicTheoremEmissionAllowed = false
@@ -59,4 +67,5 @@ InternalTheoremActivationCandidate -> Release.UnrestrictedFinalSoundness
 PublicTheoremEmissionCandidate -> ExternalReview.Acceptance
 ```
 
-The historical sealed report artifacts may still contain direct theorem-emission wording. The current root report and public-review boundary keep that wording fenced as historical evidence only.
+The historical sealed report artifacts may still contain direct theorem-emission wording. Current
+authority comes only from the formal-reconstruction status, which keeps those artifacts subordinate.

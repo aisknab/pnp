@@ -10,6 +10,7 @@ import {
   CheckFinalCertificatePublicStatus0,
   makeFinalCertificatePublicStatus0,
 } from './pcc-final-certificate-public-status0.mjs';
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
 
 const CHECKER_VERSION = 0;
 
@@ -63,8 +64,12 @@ export function makeMaterializedScaffoldBurndownConfig0(overrides = {}) {
 export async function makeMaterializedScaffoldBurndown0({
   FinalCertificatePublicStatusEnvelope = null,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
-  const target = FinalCertificatePublicStatusEnvelope ?? await makeFinalCertificatePublicStatus0();
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeMaterializedScaffoldBurndown0');
+  const target = FinalCertificatePublicStatusEnvelope ?? await makeFinalCertificatePublicStatus0({
+    historicalReplay: true,
+  });
   const inventory = makeMaterializedScaffoldInventory0(target);
 
   const linkage = {
@@ -143,6 +148,7 @@ export async function CheckMaterializedScaffoldBurndown0(
   input,
   config = makeMaterializedScaffoldBurndownConfig0(),
 ) {
+  if (config?.historicalReplay !== true) return LegacyReplayRequiredReject0('CheckMaterializedScaffoldBurndown0');
   const checker = 'CheckMaterializedScaffoldBurndown0';
   const ledger = [];
   const cfg = makeMaterializedScaffoldBurndownConfig0(config);
@@ -187,7 +193,10 @@ export async function CheckMaterializedScaffoldBurndown0(
   if (cfg.checkFinalCertificatePublicStatus === true) {
     const statusRecord = await CheckFinalCertificatePublicStatus0(
       envelope.FinalCertificatePublicStatusEnvelope,
-      cfg.finalCertificatePublicStatusConfig ?? {},
+      {
+        ...(cfg.finalCertificatePublicStatusConfig ?? {}),
+        historicalReplay: true,
+      },
     );
     const status = recordToValidation0(statusRecord, ['FinalCertificatePublicStatusEnvelope']);
 
@@ -347,12 +356,16 @@ export async function CheckMaterializedScaffoldBurndown0(
 }
 
 export async function writeMaterializedScaffoldBurndownFiles0(outDir, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('writeMaterializedScaffoldBurndownFiles0');
   if (typeof outDir !== 'string' || outDir.length === 0) {
     throw new TypeError('writeMaterializedScaffoldBurndownFiles0 requires a non-empty output directory');
   }
 
   const envelope = await makeMaterializedScaffoldBurndown0(options);
-  const checked = await CheckMaterializedScaffoldBurndown0(envelope, options.checkConfig ?? {});
+  const checked = await CheckMaterializedScaffoldBurndown0(envelope, {
+    ...(options.checkConfig ?? {}),
+    historicalReplay: true,
+  });
 
   await fs.mkdir(outDir, {
     recursive: true,

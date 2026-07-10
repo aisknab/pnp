@@ -10,6 +10,16 @@ import {
   writeReleaseAuditConcreteFinalCertificateGateFiles0,
 } from '../pcc-release-audit-final-certificate-concrete-gate0.mjs';
 
+const makeHistoricalConcreteGate0 = (options = {}) => makeReleaseAuditConcreteFinalCertificateGate0({
+  ...options,
+  historicalReplay: true,
+});
+
+const CheckHistoricalConcreteGate0 = (input, config = {}) => CheckReleaseAuditConcreteFinalCertificateGate0(input, {
+  ...config,
+  historicalReplay: true,
+});
+
 import {
   digestCanonical0,
 } from '../pcc-verifier-frag0.mjs';
@@ -70,12 +80,12 @@ function makeAcceptedReleaseAuditRecord0(overrides = {}) {
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 accepts attached release audit plus concrete public status', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope);
+  const out = await CheckHistoricalConcreteGate0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckReleaseAuditConcreteFinalCertificateGate0');
@@ -533,7 +543,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 accepts attached release au
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing concrete PCCPack evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -549,7 +559,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing concrete PC
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -566,12 +576,12 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects a non-accepted rele
     tag: 'reject',
   };
 
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope);
+  const out = await CheckHistoricalConcreteGate0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckReleaseAuditConcreteFinalCertificateGate0');
@@ -591,12 +601,12 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects public conclusion d
   releaseAuditRecord.Digest = digestCanonical0(releaseAuditRecord.NF);
   releaseAuditRecord.digest = releaseAuditRecord.Digest;
 
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
   });
 
@@ -608,7 +618,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects public conclusion d
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale public-status release audit digest', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -634,7 +644,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale public-status
     publicStatusDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
   });
 
@@ -646,7 +656,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale public-status
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects forbidden fixture marker text', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
     overrides: {
@@ -654,7 +664,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects forbidden fixture m
     },
   });
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope);
+  const out = await CheckHistoricalConcreteGate0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckReleaseAuditConcreteFinalCertificateGate0');
@@ -663,7 +673,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects forbidden fixture m
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 strictly rejects an injected synthetic scaffold marker', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
     overrides: {
@@ -671,7 +681,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 strictly rejects an injecte
     },
   });
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     allowSyntheticScaffoldMarker: false,
   });
 
@@ -683,7 +693,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 strictly rejects an injecte
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale linkage digest', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -697,7 +707,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale linkage diges
     },
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope);
+  const out = await CheckHistoricalConcreteGate0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckReleaseAuditConcreteFinalCertificateGate0');
@@ -719,6 +729,7 @@ test('writeReleaseAuditConcreteFinalCertificateGateFiles0 writes replayable JSON
   const result = await writeReleaseAuditConcreteFinalCertificateGateFiles0(dir, {
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
+    historicalReplay: true,
   });
 
   assert.equal(result.checked.tag, 'accept');
@@ -738,9 +749,21 @@ test('writeReleaseAuditConcreteFinalCertificateGateFiles0 writes replayable JSON
   }
 });
 
+test('concrete release-audit gate routes reject without historical replay opt-in', async () => {
+  for (const out of await Promise.all([
+    makeReleaseAuditConcreteFinalCertificateGate0(),
+    CheckReleaseAuditConcreteFinalCertificateGate0(),
+    writeReleaseAuditConcreteFinalCertificateGateFiles0(),
+  ])) {
+    assert.equal(out.tag, 'reject');
+    assert.match(out.coord, /\.HistoricalReplayRequired$/);
+    assert.equal(out.publicTheoremEmissionAllowed, false);
+  }
+});
+
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects incomplete concrete HardCheck coverage', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -756,7 +779,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects incomplete concrete
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -769,7 +792,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects incomplete concrete
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing CheckPCCPackexp0 evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -785,7 +808,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing CheckPCCPac
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -802,7 +825,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing CheckPCCPac
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing GeneratedPCCPackexp0 evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -818,7 +841,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing GeneratedPC
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -835,7 +858,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing GeneratedPC
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing CheckGeneratedPCCPackexp0 record evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -851,7 +874,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing CheckGenera
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -868,7 +891,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing CheckGenera
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing Boot0 bridge evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -884,7 +907,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing Boot0 bridg
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -901,7 +924,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing Boot0 bridg
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing B0 row-family coverage', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -917,7 +940,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing B0 row-fami
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -934,7 +957,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing B0 row-fami
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing KernelSeed0 primitive rule evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -950,7 +973,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing KernelSeed0
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -967,7 +990,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing KernelSeed0
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects unsafe KernelSeed0 proof-reference policy evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -983,7 +1006,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects unsafe KernelSeed0 
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -1000,7 +1023,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects unsafe KernelSeed0 
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects noncanonical Codec0 evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -1016,7 +1039,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects noncanonical Codec0
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -1033,7 +1056,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects noncanonical Codec0
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects Digest0 object-equality misuse evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -1049,7 +1072,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects Digest0 object-equa
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -1066,7 +1089,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects Digest0 object-equa
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing IfaceDict0 route-token evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -1082,7 +1105,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing IfaceDict0 
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -1099,7 +1122,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects missing IfaceDict0 
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale Sched0 selector-bound evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -1115,7 +1138,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale Sched0 select
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -1132,7 +1155,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale Sched0 select
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale ByteLang0 tag uniqueness evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -1148,7 +1171,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale ByteLang0 tag
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -1165,7 +1188,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale ByteLang0 tag
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale ByteLang0 record-arity evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -1181,7 +1204,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale ByteLang0 rec
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -1198,7 +1221,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale ByteLang0 rec
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale BootAudit0 audit evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -1214,7 +1237,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale BootAudit0 au
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -1231,7 +1254,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale BootAudit0 au
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale PiBoot reference evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -1247,7 +1270,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale PiBoot refere
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -1264,7 +1287,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale PiBoot refere
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete KBundle Sigma proof-ref evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -1280,7 +1303,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete KBun
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -1297,7 +1320,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete KBun
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete KBundle opaque-proof evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -1313,7 +1336,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete KBun
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -1330,7 +1353,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete KBun
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete HardCheck no-min evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -1346,7 +1369,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete Hard
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -1363,7 +1386,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete Hard
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete HardCheck proof-ref evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -1379,7 +1402,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete Hard
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -1396,7 +1419,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete Hard
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete RowPack synthetic-IfaceHash evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -1413,7 +1436,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete RowP
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -1430,7 +1453,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete RowP
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete RowPack linkage evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -1446,7 +1469,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete RowP
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -1463,7 +1486,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete RowP
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete GlobalProofDAG final theorem evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -1479,7 +1502,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete Glob
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -1496,7 +1519,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete Glob
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete GlobalProofDAG linkage evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -1512,7 +1535,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete Glob
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -1529,7 +1552,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete Glob
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete FinalIntegration SATDecision evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -1545,7 +1568,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete Fina
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -1562,7 +1585,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete Fina
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete FinalIntegration PCCPack linkage evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -1578,7 +1601,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete Fina
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -1595,7 +1618,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale concrete Fina
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale CheckPCCPackexp0 implication evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -1611,7 +1634,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale CheckPCCPacke
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });
@@ -1628,7 +1651,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale CheckPCCPacke
 
 test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale CheckPCCPackexp0 concrete coverage evidence', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeReleaseAuditConcreteFinalCertificateGate0({
+  const envelope = await makeHistoricalConcreteGate0({
     ReleaseAuditRecord: releaseAuditRecord,
     runReleaseAudit: false,
   });
@@ -1644,7 +1667,7 @@ test('CheckReleaseAuditConcreteFinalCertificateGate0 rejects stale CheckPCCPacke
     concreteChainDigest: undefined,
   };
 
-  const out = await CheckReleaseAuditConcreteFinalCertificateGate0(envelope, {
+  const out = await CheckHistoricalConcreteGate0(envelope, {
     checkConcretePublicStatus: false,
     checkLinkage: false,
   });

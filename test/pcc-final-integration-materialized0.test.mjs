@@ -10,6 +10,15 @@ import {
   writeMaterializedFinalIntegrationFiles0,
 } from '../pcc-final-integration-materialized0.mjs';
 
+const makeHistoricalFinalIntegrationEnvelope0 = (options = {}) => makeMaterializedFinalIntegrationEnvelope0({
+  ...options,
+  historicalReplay: true,
+});
+const CheckHistoricalFinalIntegration0 = (input, config = {}) => CheckMaterializedFinalIntegration0(input, {
+  ...config,
+  historicalReplay: true,
+});
+
 import {
   CheckGPack0,
   CheckRowFamG0,
@@ -28,9 +37,12 @@ import {
   CheckRowFamFinal0,
 } from '../pcc-final0.mjs';
 
+const CheckHistoricalFinal0 = (input) => CheckFinal0(input, { historicalReplay: true });
+const CheckHistoricalRowFamFinal0 = (input) => CheckRowFamFinal0(input, { historicalReplay: true });
+
 test('CheckMaterializedFinalIntegration0 accepts a materialized locked NAND and final integration envelope', async () => {
-  const envelope = makeMaterializedFinalIntegrationEnvelope0();
-  const out = await CheckMaterializedFinalIntegration0(envelope);
+  const envelope = makeHistoricalFinalIntegrationEnvelope0();
+  const out = await CheckHistoricalFinalIntegration0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedFinalIntegration0');
@@ -44,7 +56,7 @@ test('CheckMaterializedFinalIntegration0 accepts a materialized locked NAND and 
 });
 
 test('inner locked NAND and final checkers accept the materialized cores', async () => {
-  const envelope = makeMaterializedFinalIntegrationEnvelope0();
+  const envelope = makeHistoricalFinalIntegrationEnvelope0();
 
   const gpack = await CheckGPack0(envelope.GPack);
   const rowFamG = await CheckRowFamG0(envelope.RowFamG);
@@ -52,8 +64,8 @@ test('inner locked NAND and final checkers accept the materialized cores', async
   const satDecision = await CheckSATDecision0(envelope.FinalIntegration.SATDecision);
   const satBounds = await CheckSATBounds0(envelope.FinalIntegration.SATBounds);
   const finalIntegration = await CheckFinalIntegration0(envelope.FinalIntegration);
-  const finalTheorem = await CheckFinal0(envelope.FinalTheorem);
-  const rowFamFinal = await CheckRowFamFinal0(envelope.RowFamFinal);
+  const finalTheorem = await CheckHistoricalFinal0(envelope.FinalTheorem);
+  const rowFamFinal = await CheckHistoricalRowFamFinal0(envelope.RowFamFinal);
 
   assert.equal(gpack.tag, 'accept');
   assert.equal(rowFamG.tag, 'accept');
@@ -66,7 +78,7 @@ test('inner locked NAND and final checkers accept the materialized cores', async
 });
 
 test('CheckMaterializedFinalIntegration0 exposes locked NAND checker failures', async () => {
-  const envelope = makeMaterializedFinalIntegrationEnvelope0();
+  const envelope = makeHistoricalFinalIntegrationEnvelope0();
 
   envelope.GPack = {
     ...envelope.GPack,
@@ -76,7 +88,7 @@ test('CheckMaterializedFinalIntegration0 exposes locked NAND checker failures', 
     },
   };
 
-  const out = await CheckMaterializedFinalIntegration0(envelope);
+  const out = await CheckHistoricalFinalIntegration0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedFinalIntegration0');
@@ -85,7 +97,7 @@ test('CheckMaterializedFinalIntegration0 exposes locked NAND checker failures', 
 });
 
 test('CheckMaterializedFinalIntegration0 rejects RowFamG linkage mismatch', async () => {
-  const envelope = makeMaterializedFinalIntegrationEnvelope0();
+  const envelope = makeHistoricalFinalIntegrationEnvelope0();
 
   envelope.RowFamG = {
     ...envelope.RowFamG,
@@ -103,7 +115,7 @@ test('CheckMaterializedFinalIntegration0 rejects RowFamG linkage mismatch', asyn
     rowFamGDigest: undefined,
   };
 
-  const out = await CheckMaterializedFinalIntegration0(envelope);
+  const out = await CheckHistoricalFinalIntegration0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedFinalIntegration0');
@@ -112,7 +124,7 @@ test('CheckMaterializedFinalIntegration0 rejects RowFamG linkage mismatch', asyn
 });
 
 test('CheckMaterializedFinalIntegration0 rejects forbidden fixture marker text', async () => {
-  const envelope = makeMaterializedFinalIntegrationEnvelope0();
+  const envelope = makeHistoricalFinalIntegrationEnvelope0();
 
   envelope.FinalTheorem = {
     ...envelope.FinalTheorem,
@@ -127,7 +139,7 @@ test('CheckMaterializedFinalIntegration0 rejects forbidden fixture marker text',
     finalTheoremDigest: undefined,
   };
 
-  const out = await CheckMaterializedFinalIntegration0(envelope);
+  const out = await CheckHistoricalFinalIntegration0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedFinalIntegration0');
@@ -135,7 +147,7 @@ test('CheckMaterializedFinalIntegration0 rejects forbidden fixture marker text',
 });
 
 test('CheckMaterializedFinalIntegration0 rejects stale linkage digest', async () => {
-  const envelope = makeMaterializedFinalIntegrationEnvelope0();
+  const envelope = makeHistoricalFinalIntegrationEnvelope0();
 
   envelope.Linkage = {
     ...envelope.Linkage,
@@ -146,7 +158,7 @@ test('CheckMaterializedFinalIntegration0 rejects stale linkage digest', async ()
     },
   };
 
-  const out = await CheckMaterializedFinalIntegration0(envelope);
+  const out = await CheckHistoricalFinalIntegration0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedFinalIntegration0');
@@ -164,7 +176,7 @@ test('writeMaterializedFinalIntegrationFiles0 writes replayable JSON artefacts',
     });
   });
 
-  const result = await writeMaterializedFinalIntegrationFiles0(dir);
+  const result = await writeMaterializedFinalIntegrationFiles0(dir, { historicalReplay: true });
 
   assert.equal(result.checked.tag, 'accept');
 
@@ -184,5 +196,15 @@ test('writeMaterializedFinalIntegrationFiles0 writes replayable JSON artefacts',
     const value = JSON.parse(text);
 
     assert.equal(typeof value, 'object');
+  }
+});
+
+test('materialized final integration routes reject without historical replay opt-in', async () => {
+  const made = makeMaterializedFinalIntegrationEnvelope0();
+  const checked = await CheckMaterializedFinalIntegration0();
+  const written = await writeMaterializedFinalIntegrationFiles0('/tmp/not-written-without-opt-in');
+  for (const out of [made, checked, written]) {
+    assert.equal(out.tag, 'reject');
+    assert.match(out.coord, /\.HistoricalReplayRequired$/u);
   }
 });

@@ -1,5 +1,7 @@
 # Semantic kernel hardening - phase 42
 
+> Historical assertion-checker record. Its workflow is retired and it is not current theorem-status authority. See [the formal reconstruction status](../status/FORMAL_RECONSTRUCTION_STATUS.json).
+
 Phase 41 added the public-review documentation coordinate:
 
 ```text
@@ -85,7 +87,7 @@ activeFinalNodeIds = []
 The dedicated workflow is:
 
 ```text
-.github/workflows/publication-coordinate-gate.yml
+retired historical workflow `publication-coordinate-gate.yml`
 ```
 
 It runs:

@@ -13,7 +13,7 @@ async function currentManifest() {
 }
 
 test('uniform locked NAND construction checker accepts the current construction surface', async () => {
-  const out = await CheckUniformLockedNANDConstruction0({ writeOutput: false });
+  const out = await CheckUniformLockedNANDConstruction0({ historicalReplay: true, writeOutput: false });
   assert.equal(out.tag, 'accept');
   assert.equal(out.coordinate, 'PNP-UNIFORM-LOCKED-NAND-CONSTRUCTION-2026-07-04-01');
   assert.equal(out.ufsObligationId, 'UFS-002-LockedNANDConstructionUniformPolynomial');
@@ -90,7 +90,7 @@ test('uniform locked NAND checker rejects finite-list-only construction overclai
   const manifest = await currentManifest();
   manifest.construction.finiteInstanceList = true;
   manifest.construction.uniformAcrossSizes = false;
-  const out = await CheckUniformLockedNANDConstruction0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckUniformLockedNANDConstruction0({ historicalReplay: true, writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'UniformLockedNANDConstruction.ConstructionBoolean');
 });
@@ -98,7 +98,7 @@ test('uniform locked NAND checker rejects finite-list-only construction overclai
 test('uniform locked NAND checker rejects theorem activation by construction alone', async () => {
   const manifest = await currentManifest();
   manifest.uniformFinalSoundnessProved = true;
-  const out = await CheckUniformLockedNANDConstruction0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckUniformLockedNANDConstruction0({ historicalReplay: true, writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'UniformLockedNANDConstruction.BooleanField');
   assert.deepEqual(out.path, ['uniformFinalSoundnessProved']);

@@ -1,6 +1,12 @@
 # Release blocker clearance protocol
 
-Current coordinate:
+> **Superseded release-policy record:** This June 2026 protocol records historical
+> assertion-checker blockers. External review is not a current formal blocker or mathematical
+> premise. Current obligations are listed in
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json); see
+> also [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical coordinate:
 
 ```text
 PNP-RELEASE-BLOCKER-CLEARANCE-2026-06-27-01
@@ -18,9 +24,10 @@ Checker:
 node pcc-release-blocker-clearance0.mjs --json
 ```
 
-This document records the current protocol for clearing the release blockers. It is not a theorem-activation surface.
+This document recorded the historical protocol for clearing its release-policy blockers. It is not
+a theorem-activation surface.
 
-## Current boundary
+## Historical boundary
 
 ```text
 publicTheoremEmissionAllowed = false
@@ -32,7 +39,7 @@ remainingBlockers = [
 ]
 ```
 
-## Current clearance state
+## Historical clearance state
 
 ```text
 clearanceProtocolReady = true
@@ -50,35 +57,37 @@ clearanceTransitionRequiresFuturePR = true
 
 ### Release.UnrestrictedFinalSoundness
 
-Current state:
+Recorded state:
 
 ```text
 not-cleared
 ```
 
-Required future evidence:
+Evidence required by the historical protocol:
 
 ```text
 Accepted unrestricted final soundness checker covering the non-seed, non-bounded statement for all SAT input sizes under polynomial-time generation.
 ```
 
-This blocker may be removed from `remainingBlockers` only after an accepted release-ladder transition records that future evidence.
+The historical protocol allowed this blocker to be removed only after an accepted release-ladder
+transition recorded that evidence.
 
 ### ExternalReview.Acceptance
 
-Current state:
+Recorded state:
 
 ```text
 not-cleared
 ```
 
-Required future evidence:
+Evidence required by the historical protocol:
 
 ```text
 Accepted independent external-review evidence recorded as an explicit release transition.
 ```
 
-This blocker may be removed from `remainingBlockers` only after an accepted release-ladder transition records that future evidence.
+The historical protocol allowed this blocker to be removed only after an accepted release-ladder
+transition recorded that evidence.
 
 ## Required blocked ladder nodes
 

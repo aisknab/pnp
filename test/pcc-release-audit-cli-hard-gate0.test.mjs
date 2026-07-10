@@ -20,6 +20,7 @@ test('release audit CLI default hard gate executes public surface freeze and mat
 
   const child = spawnSync(process.execPath, [
     cliPath,
+    '--historical-replay',
     '--materialized-gate-out',
     outputDir,
     '--no-materialized-gate-cli',
@@ -55,6 +56,7 @@ test('release audit CLI --fast-local keeps public surface freeze and skips mater
 
   const child = spawnSync(process.execPath, [
     cliPath,
+    '--historical-replay',
     '--fast-local',
   ], {
     encoding: 'utf8',
@@ -82,6 +84,7 @@ test('release audit CLI --fast-local full mode exposes skipped materialized gate
 
   const child = spawnSync(process.execPath, [
     cliPath,
+    '--historical-replay',
     '--fast-local',
     '--full',
   ], {
@@ -107,6 +110,7 @@ test('release audit CLI rejects --fast-local with --materialized-gate', () => {
 
   const child = spawnSync(process.execPath, [
     cliPath,
+    '--historical-replay',
     '--fast-local',
     '--materialized-gate',
   ], {
@@ -130,6 +134,7 @@ test('release audit CLI rejects --fast-local with --materialized-gate-out', asyn
 
   const child = spawnSync(process.execPath, [
     cliPath,
+    '--historical-replay',
     '--fast-local',
     '--materialized-gate-out',
     outputDir,
@@ -153,6 +158,7 @@ test('release audit CLI rejects --fast-local with --materialized-gate-canonical'
 
   const child = spawnSync(process.execPath, [
     cliPath,
+    '--historical-replay',
     '--fast-local',
     '--materialized-gate-canonical',
   ], {

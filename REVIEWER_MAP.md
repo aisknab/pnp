@@ -1,14 +1,21 @@
 # Reviewer Map for the Hardened Final PNP Proof-Report Release
 
+> **Historical review map:** This document maps the superseded 7072f8d assertion-checker release.
+> It is useful for finding claims and possible defects, but it is not current theorem authority. The
+> repository does not currently establish `P = NP`. See
+> [`status/FORMAL_RECONSTRUCTION_STATUS.json`](./status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`docs/FORMAL_RECONSTRUCTION.md`](./docs/FORMAL_RECONSTRUCTION.md).
+
 This map is intended for hostile external review. It tells a reviewer where each major theorem claim is represented in the manuscript and in the executable proof-report stack.
 
-## Public claim
+## Historical checker claim
 
 ```text
 CheckPCCPackexp(GeneratePCCPack())=accept => P = NP
 ```
 
-The release does not ask a reviewer to accept a direct unqualified `P = NP` claim before package acceptance. The public theorem is conditional on the accepted generated package.
+The historical release recorded this conditional assertion. Checker acceptance did not establish
+the mathematical implication, and this assertion is not active on current `main`.
 
 ## Canonical release facts
 
@@ -339,12 +346,11 @@ review/submission_readiness_memo_7072f8d.md
 This memo separates the frozen release state from the remaining mathematical review-risk and gives the send order for hostile external reviewers.
 
 
-## Current release hygiene
+## Current formal-status hygiene
 
-The root file `CURRENT_RELEASE.md` identifies the only current reviewer-facing release on `main`.
-Legacy release material is intentionally absent from the current reviewer-facing tree and remains available only through git history and historical tags.
-
-Reviewers should not use historical release files when auditing the 7072f8d package.
+The root file `CURRENT_RELEASE.md` now identifies 7072f8d as historical. Current status comes only
+from `status/FORMAL_RECONSTRUCTION_STATUS.json`. Reviewers may inspect the frozen files to audit the
+old checker claim, but must not present them as an active release or proof.
 
 
 ## Reviewer outreach targets

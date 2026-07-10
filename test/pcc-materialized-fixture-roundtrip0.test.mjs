@@ -27,6 +27,7 @@ test('CheckMaterializedFixtureRoundtrip0 writes deterministic fixtures and verif
   const base = await makeTempDir0(t);
 
   const out = await CheckMaterializedFixtureRoundtrip0({
+    historicalReplay: true,
     outputDirA: path.join(base, 'a'),
     outputDirB: path.join(base, 'b'),
   });
@@ -46,6 +47,7 @@ test('CheckMaterializedFixtureRoundtrip0 accepts canonical envelope fixture roun
   const base = await makeTempDir0(t);
 
   const out = await CheckMaterializedFixtureRoundtrip0({
+    historicalReplay: true,
     outputDirA: path.join(base, 'a'),
     outputDirB: path.join(base, 'b'),
     canonicalEnvelopeBytes: true,
@@ -60,6 +62,7 @@ test('CheckMaterializedFixtureRoundtrip0 can skip CLI checks while retaining dir
   const base = await makeTempDir0(t);
 
   const out = await CheckMaterializedFixtureRoundtrip0({
+    historicalReplay: true,
     outputDirA: path.join(base, 'a'),
     outputDirB: path.join(base, 'b'),
     runCliChecks: false,
@@ -74,6 +77,7 @@ test('CheckMaterializedFixtureRoundtrip0 rejects non-deterministic second write 
   const base = await makeTempDir0(t);
 
   const out = await CheckMaterializedFixtureRoundtrip0({
+    historicalReplay: true,
     outputDirA: path.join(base, 'a'),
     outputDirB: path.join(base, 'b'),
     runCliChecks: false,
@@ -97,6 +101,7 @@ test('CheckMaterializedFixtureRoundtrip0 validates distinct output directories',
   const base = await makeTempDir0(t);
 
   const out = await CheckMaterializedFixtureRoundtrip0({
+    historicalReplay: true,
     outputDirA: base,
     outputDirB: base,
   });
@@ -128,7 +133,7 @@ test('bin/check-materialized-fixture-roundtrip0.mjs emits accepted summary', asy
   const base = await makeTempDir0(t);
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-fixture-roundtrip0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, '--out', base], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', '--out', base], {
     encoding: 'utf8',
   });
 
@@ -149,7 +154,7 @@ test('bin/check-materialized-fixture-roundtrip0.mjs --full emits full record', a
   const base = await makeTempDir0(t);
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-fixture-roundtrip0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, '--out', base, '--full'], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', '--out', base, '--full'], {
     encoding: 'utf8',
   });
 
@@ -161,6 +166,12 @@ test('bin/check-materialized-fixture-roundtrip0.mjs --full emits full record', a
   assert.equal(out.checker, 'CheckMaterializedFixtureRoundtrip0');
   assert.equal(out.NF.kind, 'MaterializedFixtureRoundtrip0NF');
   assert.equal(Array.isArray(out.Ledger), true);
+});
+
+test('materialized fixture roundtrip rejects without historical replay opt-in', async () => {
+  const out = await CheckMaterializedFixtureRoundtrip0();
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.coord, 'CheckMaterializedFixtureRoundtrip0.HistoricalReplayRequired');
 });
 
 async function makeTempDir0(t) {

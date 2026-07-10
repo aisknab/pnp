@@ -10,6 +10,11 @@ import {
   CheckMaterializedAcceptRunFile0,
 } from '../pcc-materialized-accept-run0.mjs';
 
+const CheckHistoricalMaterializedAcceptRunFile0 = (filePath, config = {}) => CheckMaterializedAcceptRunFile0(filePath, {
+  ...config,
+  historicalReplay: true,
+});
+
 import {
   MATERIALIZED_FIXTURE_FILENAMES0,
 } from '../pcc-materialized-fixture-writer0.mjs';
@@ -44,6 +49,7 @@ function parseJsonFromStdout0(stdout) {
 test('WriteMaterializedAcceptRunFixtureSet0 writes package plus pending, reject, and accepted accept-run fixtures', async (t) => {
   const outputDir = await makeTempDir0(t);
   const out = await WriteMaterializedAcceptRunFixtureSet0({
+    historicalReplay: true,
     outputDir,
   });
 
@@ -67,21 +73,22 @@ test('written accept-run fixtures verify with expected verdicts', async (t) => {
   const outputDir = await makeTempDir0(t);
 
   await WriteMaterializedAcceptRunFixtureSet0({
+    historicalReplay: true,
     outputDir,
   });
 
-  const pending = await CheckMaterializedAcceptRunFile0(path.join(outputDir, MATERIALIZED_ACCEPT_RUN_FIXTURE_FILENAMES0.pending));
+  const pending = await CheckHistoricalMaterializedAcceptRunFile0(path.join(outputDir, MATERIALIZED_ACCEPT_RUN_FIXTURE_FILENAMES0.pending));
   assert.equal(pending.tag, 'accept');
   assert.equal(pending.NF.verdict, 'pending');
   assert.equal(pending.NF.publicConclusionEmitted, false);
 
-  const reject = await CheckMaterializedAcceptRunFile0(path.join(outputDir, MATERIALIZED_ACCEPT_RUN_FIXTURE_FILENAMES0.reject));
+  const reject = await CheckHistoricalMaterializedAcceptRunFile0(path.join(outputDir, MATERIALIZED_ACCEPT_RUN_FIXTURE_FILENAMES0.reject));
   assert.equal(reject.tag, 'accept');
   assert.equal(reject.NF.verdict, 'reject');
   assert.equal(reject.NF.publicConclusionEmitted, false);
   assert.equal(reject.NF.rejectLogCount, 1);
 
-  const accepted = await CheckMaterializedAcceptRunFile0(path.join(outputDir, MATERIALIZED_ACCEPT_RUN_FIXTURE_FILENAMES0.accepted));
+  const accepted = await CheckHistoricalMaterializedAcceptRunFile0(path.join(outputDir, MATERIALIZED_ACCEPT_RUN_FIXTURE_FILENAMES0.accepted));
   assert.equal(accepted.tag, 'accept');
   assert.equal(accepted.NF.verdict, 'accept');
   assert.equal(accepted.NF.publicConclusionEmitted, true);
@@ -91,6 +98,7 @@ test('WriteMaterializedAcceptRunFixtureSet0 can write canonical envelope bytes',
   const outputDir = await makeTempDir0(t);
 
   const out = await WriteMaterializedAcceptRunFixtureSet0({
+    historicalReplay: true,
     outputDir,
     canonicalEnvelopeBytes: true,
   });
@@ -98,7 +106,7 @@ test('WriteMaterializedAcceptRunFixtureSet0 can write canonical envelope bytes',
   assert.equal(out.tag, 'accept');
   assert.equal(out.NF.canonicalEnvelopeBytes, true);
 
-  const accepted = await CheckMaterializedAcceptRunFile0(path.join(outputDir, MATERIALIZED_ACCEPT_RUN_FIXTURE_FILENAMES0.accepted));
+  const accepted = await CheckHistoricalMaterializedAcceptRunFile0(path.join(outputDir, MATERIALIZED_ACCEPT_RUN_FIXTURE_FILENAMES0.accepted));
 
   assert.equal(accepted.tag, 'accept');
   assert.equal(accepted.NF.verdict, 'accept');
@@ -108,12 +116,14 @@ test('WriteMaterializedAcceptRunFixtureSet0 rejects existing files when overwrit
   const outputDir = await makeTempDir0(t);
 
   const first = await WriteMaterializedAcceptRunFixtureSet0({
+    historicalReplay: true,
     outputDir,
   });
 
   assert.equal(first.tag, 'accept');
 
   const second = await WriteMaterializedAcceptRunFixtureSet0({
+    historicalReplay: true,
     outputDir,
     overwrite: false,
   });
@@ -125,6 +135,7 @@ test('WriteMaterializedAcceptRunFixtureSet0 rejects existing files when overwrit
 
 test('WriteMaterializedAcceptRunFixtureSet0 validates config shape', async () => {
   const out = await WriteMaterializedAcceptRunFixtureSet0({
+    historicalReplay: true,
     outputDir: '',
   });
 
@@ -139,7 +150,7 @@ test('bin/write-materialized-accept-run-fixtures0.mjs writes fixtures and emits 
   const outputDir = await makeTempDir0(t);
   const cliPath = fileURLToPath(new URL('../bin/write-materialized-accept-run-fixtures0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, '--out', outputDir], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', '--out', outputDir], {
     encoding: 'utf8',
   });
 
@@ -159,7 +170,7 @@ test('bin/write-materialized-accept-run-fixtures0.mjs --full emits full accept r
   const outputDir = await makeTempDir0(t);
   const cliPath = fileURLToPath(new URL('../bin/write-materialized-accept-run-fixtures0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, '--out', outputDir, '--full'], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', '--out', outputDir, '--full'], {
     encoding: 'utf8',
   });
 
@@ -176,7 +187,7 @@ test('bin/write-materialized-accept-run-fixtures0.mjs --full emits full accept r
 test('npm run materialized:write-accept-runs writes and verifies accept-run fixtures', async (t) => {
   const outputDir = await makeTempDir0(t);
 
-  const child = spawnSync(npmCommand0(), ['run', 'materialized:write-accept-runs', '--', outputDir], {
+  const child = spawnSync(npmCommand0(), ['run', 'materialized:write-accept-runs', '--', '--historical-replay', outputDir], {
     encoding: 'utf8',
     shell: process.platform === 'win32',
     windowsHide: true,

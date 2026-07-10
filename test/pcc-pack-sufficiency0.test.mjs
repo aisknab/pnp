@@ -8,6 +8,9 @@ import {
   makeSyntheticPCCPack0,
 } from '../pcc-pack-sufficiency0.mjs';
 
+const makeHistoricalPCCPack0 = (overrides = {}) => makeSyntheticPCCPack0(overrides, { historicalReplay: true });
+const CheckHistoricalPackSufficiency0 = (input) => CheckPackSufficiency0(input, { historicalReplay: true });
+
 import {
   makeSyntheticGPack0,
 } from '../pcc-gpack0.mjs';
@@ -21,8 +24,18 @@ import {
   makeSyntheticRowFamFinal0,
 } from '../pcc-final0.mjs';
 
+const makeHistoricalFinalTheorem0 = (options = {}) => makeSyntheticFinalTheorem0({
+  ...options,
+  historicalReplay: true,
+});
+const makeHistoricalRowFamFinal0 = (finalTheorem, overrides = {}) => makeSyntheticRowFamFinal0(
+  finalTheorem,
+  overrides,
+  { historicalReplay: true },
+);
+
 test('CheckPackSufficiency0 accepts the synthetic top-level package', async () => {
-  const out = await CheckPackSufficiency0(makeSyntheticPCCPack0());
+  const out = await CheckHistoricalPackSufficiency0(makeHistoricalPCCPack0());
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -48,14 +61,14 @@ test('CheckPackSufficiency0 accepts the synthetic top-level package', async () =
 });
 
 test('CheckPackSufficiency0 rejects a package that embeds AcceptRun', async () => {
-  const pack = makeSyntheticPCCPack0();
+  const pack = makeHistoricalPCCPack0();
 
   pack.AcceptRun = {
     kind: 'AcceptRun0',
     Verdict: 'accept',
   };
 
-  const out = await CheckPackSufficiency0(pack);
+  const out = await CheckHistoricalPackSufficiency0(pack);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -65,7 +78,7 @@ test('CheckPackSufficiency0 rejects a package that embeds AcceptRun', async () =
 });
 
 test('CheckPackSufficiency0 rejects bad manifest phase order', async () => {
-  const pack = makeSyntheticPCCPack0();
+  const pack = makeHistoricalPCCPack0();
 
   pack.Manifest = {
     ...pack.Manifest,
@@ -76,7 +89,7 @@ test('CheckPackSufficiency0 rejects bad manifest phase order', async () => {
 
   pack.Manifest.phaseOrder[0] = 'Φ99.BadPhase';
 
-  const out = await CheckPackSufficiency0(pack);
+  const out = await CheckHistoricalPackSufficiency0(pack);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -86,7 +99,7 @@ test('CheckPackSufficiency0 rejects bad manifest phase order', async () => {
 });
 
 test('CheckPackSufficiency0 wraps a GPack rejection', async () => {
-  const pack = makeSyntheticPCCPack0();
+  const pack = makeHistoricalPCCPack0();
 
   pack.GPack = {
     ...pack.GPack,
@@ -96,7 +109,7 @@ test('CheckPackSufficiency0 wraps a GPack rejection', async () => {
     },
   };
 
-  const out = await CheckPackSufficiency0(pack);
+  const out = await CheckHistoricalPackSufficiency0(pack);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -107,7 +120,7 @@ test('CheckPackSufficiency0 wraps a GPack rejection', async () => {
 });
 
 test('CheckPackSufficiency0 rejects cross artefact GPack mismatch', async () => {
-  const pack = makeSyntheticPCCPack0();
+  const pack = makeHistoricalPCCPack0();
 
   const alternateGPack = {
     ...makeSyntheticGPack0(),
@@ -118,17 +131,17 @@ test('CheckPackSufficiency0 rejects cross artefact GPack mismatch', async () => 
     gpack: alternateGPack,
   });
 
-  const alternateFinalTheorem = makeSyntheticFinalTheorem0({
+  const alternateFinalTheorem = makeHistoricalFinalTheorem0({
     finalIntegration: alternateFinalIntegration,
   });
 
-  const alternateRowFamFinal = makeSyntheticRowFamFinal0(alternateFinalTheorem);
+  const alternateRowFamFinal = makeHistoricalRowFamFinal0(alternateFinalTheorem);
 
   pack.FinalIntegration = alternateFinalIntegration;
   pack.FinalTheorem = alternateFinalTheorem;
   pack.RowFamFinal = alternateRowFamFinal;
 
-  const out = await CheckPackSufficiency0(pack);
+  const out = await CheckHistoricalPackSufficiency0(pack);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -138,7 +151,7 @@ test('CheckPackSufficiency0 rejects cross artefact GPack mismatch', async () => 
 });
 
 test('CheckPackSufficiency0 rejects generated-package sufficiency without canonical byte equality', async () => {
-  const pack = makeSyntheticPCCPack0();
+  const pack = makeHistoricalPCCPack0();
 
   pack.PackSufficiencyTheorem = {
     ...pack.PackSufficiencyTheorem,
@@ -148,7 +161,7 @@ test('CheckPackSufficiency0 rejects generated-package sufficiency without canoni
     },
   };
 
-  const out = await CheckPackSufficiency0(pack);
+  const out = await CheckHistoricalPackSufficiency0(pack);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -158,7 +171,7 @@ test('CheckPackSufficiency0 rejects generated-package sufficiency without canoni
 });
 
 test('CheckPackSufficiency0 rejects public theorem that claims P equals NP before acceptance', async () => {
-  const pack = makeSyntheticPCCPack0();
+  const pack = makeHistoricalPCCPack0();
 
   pack.PackSufficiencyTheorem = {
     ...pack.PackSufficiencyTheorem,
@@ -168,7 +181,7 @@ test('CheckPackSufficiency0 rejects public theorem that claims P equals NP befor
     },
   };
 
-  const out = await CheckPackSufficiency0(pack);
+  const out = await CheckHistoricalPackSufficiency0(pack);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -178,7 +191,7 @@ test('CheckPackSufficiency0 rejects public theorem that claims P equals NP befor
 });
 
 test('CheckPackSufficiency0 wraps a final theorem rejection', async () => {
-  const pack = makeSyntheticPCCPack0();
+  const pack = makeHistoricalPCCPack0();
 
   pack.FinalTheorem = {
     ...pack.FinalTheorem,
@@ -191,7 +204,7 @@ test('CheckPackSufficiency0 wraps a final theorem rejection', async () => {
     },
   };
 
-  const out = await CheckPackSufficiency0(pack);
+  const out = await CheckHistoricalPackSufficiency0(pack);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -202,7 +215,7 @@ test('CheckPackSufficiency0 wraps a final theorem rejection', async () => {
 });
 
 test('CheckPackSufficiency0 rejects executable hidden minimization in the pack theorem', async () => {
-  const pack = makeSyntheticPCCPack0();
+  const pack = makeHistoricalPCCPack0();
 
   pack.PackSufficiencyTheorem = {
     ...pack.PackSufficiencyTheorem,
@@ -211,7 +224,7 @@ test('CheckPackSufficiency0 rejects executable hidden minimization in the pack t
     ],
   };
 
-  const out = await CheckPackSufficiency0(pack);
+  const out = await CheckHistoricalPackSufficiency0(pack);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -221,7 +234,7 @@ test('CheckPackSufficiency0 rejects executable hidden minimization in the pack t
 });
 
 test('CheckPackSufficiency0 rejects opaque proof blobs', async () => {
-  const pack = makeSyntheticPCCPack0();
+  const pack = makeHistoricalPCCPack0();
 
   pack.PiPackSufficiency = {
     ...pack.PiPackSufficiency,
@@ -230,7 +243,7 @@ test('CheckPackSufficiency0 rejects opaque proof blobs', async () => {
     },
   };
 
-  const out = await CheckPackSufficiency0(pack);
+  const out = await CheckHistoricalPackSufficiency0(pack);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -256,7 +269,7 @@ test('CheckPackSufficiency0 rejects missing ZeroSlack residual-band obligations'
 
   for (const field of cases) {
     await t.test(`${field}=false`, async () => {
-      const pack = makeSyntheticPCCPack0();
+      const pack = makeHistoricalPCCPack0();
 
       pack.PackSufficiencyTheorem = {
         ...pack.PackSufficiencyTheorem,
@@ -266,7 +279,7 @@ test('CheckPackSufficiency0 rejects missing ZeroSlack residual-band obligations'
         },
       };
 
-      const out = await CheckPackSufficiency0(pack);
+      const out = await CheckHistoricalPackSufficiency0(pack);
 
       assert.equal(out.tag, 'reject');
       assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -279,7 +292,7 @@ test('CheckPackSufficiency0 rejects missing ZeroSlack residual-band obligations'
 
 test('CheckPackSufficiency0 rejects malformed residual-band theorem boundary', async (t) => {
   await t.test('bad assumption', async () => {
-    const pack = makeSyntheticPCCPack0();
+    const pack = makeHistoricalPCCPack0();
 
     pack.PackSufficiencyTheorem = {
       ...pack.PackSufficiencyTheorem,
@@ -289,7 +302,7 @@ test('CheckPackSufficiency0 rejects malformed residual-band theorem boundary', a
       },
     };
 
-    const out = await CheckPackSufficiency0(pack);
+    const out = await CheckHistoricalPackSufficiency0(pack);
 
     assert.equal(out.tag, 'reject');
     assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -299,7 +312,7 @@ test('CheckPackSufficiency0 rejects malformed residual-band theorem boundary', a
   });
 
   await t.test('bad conclusion', async () => {
-    const pack = makeSyntheticPCCPack0();
+    const pack = makeHistoricalPCCPack0();
 
     pack.PackSufficiencyTheorem = {
       ...pack.PackSufficiencyTheorem,
@@ -309,7 +322,7 @@ test('CheckPackSufficiency0 rejects malformed residual-band theorem boundary', a
       },
     };
 
-    const out = await CheckPackSufficiency0(pack);
+    const out = await CheckHistoricalPackSufficiency0(pack);
 
     assert.equal(out.tag, 'reject');
     assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -331,7 +344,7 @@ test('CheckPackSufficiency0 rejects missing Terminal MuBridge obligations', asyn
 
   for (const field of cases) {
     await t.test(`${field}=false`, async () => {
-      const pack = makeSyntheticPCCPack0();
+      const pack = makeHistoricalPCCPack0();
 
       pack.PackSufficiencyTheorem = {
         ...pack.PackSufficiencyTheorem,
@@ -341,7 +354,7 @@ test('CheckPackSufficiency0 rejects missing Terminal MuBridge obligations', asyn
         },
       };
 
-      const out = await CheckPackSufficiency0(pack);
+      const out = await CheckHistoricalPackSufficiency0(pack);
 
       assert.equal(out.tag, 'reject');
       assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -363,7 +376,7 @@ test('CheckPackSufficiency0 rejects missing SaturatePositive obligations', async
 
   for (const field of cases) {
     await t.test(`${field}=false`, async () => {
-      const pack = makeSyntheticPCCPack0();
+      const pack = makeHistoricalPCCPack0();
 
       pack.PackSufficiencyTheorem = {
         ...pack.PackSufficiencyTheorem,
@@ -373,7 +386,7 @@ test('CheckPackSufficiency0 rejects missing SaturatePositive obligations', async
         },
       };
 
-      const out = await CheckPackSufficiency0(pack);
+      const out = await CheckHistoricalPackSufficiency0(pack);
 
       assert.equal(out.tag, 'reject');
       assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -397,7 +410,7 @@ test('CheckPackSufficiency0 rejects missing BCEL-ready positive nucleus obligati
 
   for (const field of cases) {
     await t.test(`${field}=false`, async () => {
-      const pack = makeSyntheticPCCPack0();
+      const pack = makeHistoricalPCCPack0();
 
       pack.PackSufficiencyTheorem = {
         ...pack.PackSufficiencyTheorem,
@@ -407,7 +420,7 @@ test('CheckPackSufficiency0 rejects missing BCEL-ready positive nucleus obligati
         },
       };
 
-      const out = await CheckPackSufficiency0(pack);
+      const out = await CheckHistoricalPackSufficiency0(pack);
 
       assert.equal(out.tag, 'reject');
       assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -429,7 +442,7 @@ test('CheckPackSufficiency0 rejects missing BN2 side-tight coherent optima oblig
 
   for (const field of cases) {
     await t.test(`${field}=false`, async () => {
-      const pack = makeSyntheticPCCPack0();
+      const pack = makeHistoricalPCCPack0();
 
       pack.PackSufficiencyTheorem = {
         ...pack.PackSufficiencyTheorem,
@@ -439,7 +452,7 @@ test('CheckPackSufficiency0 rejects missing BN2 side-tight coherent optima oblig
         },
       };
 
-      const out = await CheckPackSufficiency0(pack);
+      const out = await CheckHistoricalPackSufficiency0(pack);
 
       assert.equal(out.tag, 'reject');
       assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -462,7 +475,7 @@ test('CheckPackSufficiency0 rejects missing BN3 finite request-envelope obligati
 
   for (const field of cases) {
     await t.test(`${field}=false`, async () => {
-      const pack = makeSyntheticPCCPack0();
+      const pack = makeHistoricalPCCPack0();
 
       pack.PackSufficiencyTheorem = {
         ...pack.PackSufficiencyTheorem,
@@ -472,7 +485,7 @@ test('CheckPackSufficiency0 rejects missing BN3 finite request-envelope obligati
         },
       };
 
-      const out = await CheckPackSufficiency0(pack);
+      const out = await CheckHistoricalPackSufficiency0(pack);
 
       assert.equal(out.tag, 'reject');
       assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -495,7 +508,7 @@ test('CheckPackSufficiency0 rejects missing BN4 activation-exact cancellation ob
 
   for (const field of cases) {
     await t.test(`${field}=false`, async () => {
-      const pack = makeSyntheticPCCPack0();
+      const pack = makeHistoricalPCCPack0();
 
       pack.PackSufficiencyTheorem = {
         ...pack.PackSufficiencyTheorem,
@@ -505,7 +518,7 @@ test('CheckPackSufficiency0 rejects missing BN4 activation-exact cancellation ob
         },
       };
 
-      const out = await CheckPackSufficiency0(pack);
+      const out = await CheckHistoricalPackSufficiency0(pack);
 
       assert.equal(out.tag, 'reject');
       assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -528,7 +541,7 @@ test('CheckPackSufficiency0 rejects missing BN5 and PkgC localization obligation
 
   for (const field of cases) {
     await t.test(`${field}=false`, async () => {
-      const pack = makeSyntheticPCCPack0();
+      const pack = makeHistoricalPCCPack0();
 
       pack.PackSufficiencyTheorem = {
         ...pack.PackSufficiencyTheorem,
@@ -538,7 +551,7 @@ test('CheckPackSufficiency0 rejects missing BN5 and PkgC localization obligation
         },
       };
 
-      const out = await CheckPackSufficiency0(pack);
+      const out = await CheckHistoricalPackSufficiency0(pack);
 
       assert.equal(out.tag, 'reject');
       assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -562,7 +575,7 @@ test('CheckPackSufficiency0 rejects missing BN6 packet-collapse and selector-com
 
   for (const field of cases) {
     await t.test(`${field}=false`, async () => {
-      const pack = makeSyntheticPCCPack0();
+      const pack = makeHistoricalPCCPack0();
 
       pack.PackSufficiencyTheorem = {
         ...pack.PackSufficiencyTheorem,
@@ -572,7 +585,7 @@ test('CheckPackSufficiency0 rejects missing BN6 packet-collapse and selector-com
         },
       };
 
-      const out = await CheckPackSufficiency0(pack);
+      const out = await CheckHistoricalPackSufficiency0(pack);
 
       assert.equal(out.tag, 'reject');
       assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -597,7 +610,7 @@ test('CheckPackSufficiency0 rejects missing Realizer and HB closure obligations'
 
   for (const field of cases) {
     await t.test(`${field}=false`, async () => {
-      const pack = makeSyntheticPCCPack0();
+      const pack = makeHistoricalPCCPack0();
 
       pack.PackSufficiencyTheorem = {
         ...pack.PackSufficiencyTheorem,
@@ -607,7 +620,7 @@ test('CheckPackSufficiency0 rejects missing Realizer and HB closure obligations'
         },
       };
 
-      const out = await CheckPackSufficiency0(pack);
+      const out = await CheckHistoricalPackSufficiency0(pack);
 
       assert.equal(out.tag, 'reject');
       assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -630,7 +643,7 @@ test('CheckPackSufficiency0 rejects missing ZeroSlack final closure obligations'
 
   for (const field of cases) {
     await t.test(`${field}=false`, async () => {
-      const pack = makeSyntheticPCCPack0();
+      const pack = makeHistoricalPCCPack0();
 
       pack.PackSufficiencyTheorem = {
         ...pack.PackSufficiencyTheorem,
@@ -640,7 +653,7 @@ test('CheckPackSufficiency0 rejects missing ZeroSlack final closure obligations'
         },
       };
 
-      const out = await CheckPackSufficiency0(pack);
+      const out = await CheckHistoricalPackSufficiency0(pack);
 
       assert.equal(out.tag, 'reject');
       assert.equal(out.checker, 'CheckPackSufficiency0');

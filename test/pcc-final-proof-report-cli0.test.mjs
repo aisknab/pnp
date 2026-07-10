@@ -25,7 +25,7 @@ test('final PNP proof report CLI emits compact accepted summary and replayable f
   });
 
   const cliPath = fileURLToPath(new URL('../bin/write-final-pnp-proof-report0.mjs', import.meta.url));
-  const child = spawnSync(process.execPath, [cliPath, dir], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', dir], {
     encoding: 'utf8',
   });
 
@@ -90,7 +90,7 @@ test('final PNP proof report CLI full mode emits accepted check record', async (
   });
 
   const cliPath = fileURLToPath(new URL('../bin/write-final-pnp-proof-report0.mjs', import.meta.url));
-  const child = spawnSync(process.execPath, [cliPath, dir, '--full'], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', dir, '--full'], {
     encoding: 'utf8',
   });
 

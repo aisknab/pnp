@@ -10,6 +10,7 @@ import {
   CheckMaterializedPCCPack0,
   makeMaterializedPCCPack0,
 } from './pcc-pack-materialized0.mjs';
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
 
 const CHECKER_VERSION = 0;
 
@@ -41,8 +42,10 @@ export function makeConcreteMaterializedPCCPackConfig0(overrides = {}) {
 export async function makeConcreteMaterializedPCCPack0({
   MaterializedPCCPackEnvelope = null,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
-  const materializedPCCPackEnvelope = MaterializedPCCPackEnvelope ?? await makeMaterializedPCCPack0();
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeConcreteMaterializedPCCPack0');
+  const materializedPCCPackEnvelope = MaterializedPCCPackEnvelope ?? await makeMaterializedPCCPack0({ historicalReplay: true });
   const coverage = summarizeConcretePCCPackCoverage0(materializedPCCPackEnvelope);
 
   const linkage = {
@@ -190,6 +193,7 @@ export async function CheckConcreteMaterializedPCCPack0(
   input,
   config = makeConcreteMaterializedPCCPackConfig0(),
 ) {
+  if (config?.historicalReplay !== true) return LegacyReplayRequiredReject0('CheckConcreteMaterializedPCCPack0');
   const checker = 'CheckConcreteMaterializedPCCPack0';
   const ledger = [];
   const cfg = makeConcreteMaterializedPCCPackConfig0(config);
@@ -234,7 +238,10 @@ export async function CheckConcreteMaterializedPCCPack0(
   if (cfg.checkMaterializedPCCPack === true) {
     const record = await CheckMaterializedPCCPack0(
       envelope.MaterializedPCCPackEnvelope,
-      cfg.materializedPCCPackConfig ?? {},
+      {
+        ...(cfg.materializedPCCPackConfig ?? {}),
+        historicalReplay: true,
+      },
     );
     const result = recordToValidation0(record, ['MaterializedPCCPackEnvelope']);
 
@@ -421,12 +428,16 @@ export async function CheckConcreteMaterializedPCCPack0(
 }
 
 export async function writeConcreteMaterializedPCCPackFiles0(outDir, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('writeConcreteMaterializedPCCPackFiles0');
   if (typeof outDir !== 'string' || outDir.length === 0) {
     throw new TypeError('writeConcreteMaterializedPCCPackFiles0 requires a non-empty output directory');
   }
 
   const envelope = await makeConcreteMaterializedPCCPack0(options);
-  const checked = await CheckConcreteMaterializedPCCPack0(envelope, options.checkConfig ?? {});
+  const checked = await CheckConcreteMaterializedPCCPack0(envelope, {
+    ...(options.checkConfig ?? {}),
+    historicalReplay: true,
+  });
 
   await fs.mkdir(outDir, {
     recursive: true,

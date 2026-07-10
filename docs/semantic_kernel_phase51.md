@@ -1,5 +1,10 @@
 # Semantic kernel hardening - phase 51
 
+> **Historical assertion-checker record:** This phase and its retired workflow describe a June 2026
+> release-policy experiment. It is not current theorem-status authority or a current release plan.
+> See [the formal reconstruction status](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [the reconstruction notice](FORMAL_RECONSTRUCTION.md).
+
 Phase 50 bound the semantic shape of the external-review finding templates.
 
 Phase 51 adds a non-activating reviewer-authentication policy coordinate:
@@ -24,7 +29,8 @@ CheckExternalReviewTemplateShape0 = accept
 
 ## Policy
 
-The policy records the future artifact classes and digest boundaries needed before an external-review finding can be treated as review evidence. It keeps all counts at zero:
+The policy recorded artifact classes and digest boundaries that would have been required before an
+external-review finding could be treated as historical review evidence. It kept all counts at zero:
 
 ```text
 signedFindingFileCount = 0
@@ -59,6 +65,7 @@ sealedReleaseNotOverwritten = true
 node --check pcc-external-review-signature-policy0.mjs
 ```
 
-## Next step
+## Historical next step
 
-The next release-layer work should bind actual signed finding files and review-authentication material if supplied. Without signed findings and an unrestricted-final-soundness release artifact, public theorem emission remains disabled.
+The recorded next step was to bind signed finding files and review-authentication material if
+supplied. That step is not part of the current formal blocker inventory or release plan.

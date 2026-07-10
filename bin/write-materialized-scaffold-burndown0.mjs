@@ -3,12 +3,15 @@
 import {
   writeMaterializedScaffoldBurndownFiles0,
 } from '../pcc-materialized-scaffold-burndown0.mjs';
+import { EnforceHistoricalReplayCli0 } from '../pcc-legacy-replay-gate0.mjs';
+
+EnforceHistoricalReplayCli0({ entrypoint: 'bin/write-materialized-scaffold-burndown0.mjs' });
 
 const args = process.argv.slice(2);
 const outDir = args.find((arg) => !arg.startsWith('--')) ?? './materialized-scaffold-burndown0';
 const full = args.includes('--full');
 
-const result = await writeMaterializedScaffoldBurndownFiles0(outDir);
+const result = await writeMaterializedScaffoldBurndownFiles0(outDir, { historicalReplay: true });
 
 if (full) {
   console.log(JSON.stringify(result.checked, null, 2));

@@ -17,6 +17,8 @@ import {
   summarizeConcreteGeneratedAcceptRunChain0,
 } from './pcc-accept-run-concrete-materialized0.mjs';
 
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 const CHECKER_VERSION = 0;
 
 const CONCRETE_CERT_FORBIDDEN_MARKERS0 = Object.freeze([
@@ -33,6 +35,7 @@ export function makeConcreteMaterializedFinalCertificateConfig0(overrides = {}) 
   return {
     kind: 'ConcreteMaterializedFinalCertificateConfig0',
     version: CHECKER_VERSION,
+    historicalReplay: false,
     checkConcreteGeneratedAcceptRun: true,
     checkFinalCertificate: true,
     checkConcreteChain: true,
@@ -50,11 +53,16 @@ export async function makeConcreteMaterializedFinalCertificate0({
   ConcreteGeneratedAcceptRunEnvelope = null,
   FinalCertificateEnvelope = null,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
-  const concreteGeneratedAcceptRunEnvelope = ConcreteGeneratedAcceptRunEnvelope ?? await makeConcreteMaterializedGeneratedAcceptRun0();
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeConcreteMaterializedFinalCertificate0');
+  const concreteGeneratedAcceptRunEnvelope = ConcreteGeneratedAcceptRunEnvelope ?? await makeConcreteMaterializedGeneratedAcceptRun0({
+    historicalReplay: true,
+  });
 
   const finalCertificateEnvelope = FinalCertificateEnvelope ?? await makeMaterializedFinalCertificate0({
     GeneratedAcceptRunEnvelope: concreteGeneratedAcceptRunEnvelope.GeneratedAcceptRunEnvelope,
+    historicalReplay: true,
   });
 
   const concreteChain = summarizeConcreteFinalCertificateChain0({
@@ -1051,6 +1059,7 @@ export async function CheckConcreteMaterializedFinalCertificate0(
   const checker = 'CheckConcreteMaterializedFinalCertificate0';
   const ledger = [];
   const cfg = makeConcreteMaterializedFinalCertificateConfig0(config);
+  if (cfg.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const envelope = normalizeInput0(input);
 
   const cfgCheck = validateConfig0(cfg);
@@ -1092,7 +1101,10 @@ export async function CheckConcreteMaterializedFinalCertificate0(
   if (cfg.checkConcreteGeneratedAcceptRun === true) {
     const record = await CheckConcreteMaterializedGeneratedAcceptRun0(
       envelope.ConcreteGeneratedAcceptRunEnvelope,
-      cfg.concreteGeneratedAcceptRunConfig ?? {},
+      {
+        ...(cfg.concreteGeneratedAcceptRunConfig ?? {}),
+        historicalReplay: true,
+      },
     );
     const result = recordToValidation0(record, ['ConcreteGeneratedAcceptRunEnvelope']);
 
@@ -1116,7 +1128,10 @@ export async function CheckConcreteMaterializedFinalCertificate0(
   if (cfg.checkFinalCertificate === true) {
     const record = await CheckMaterializedFinalCertificate0(
       envelope.FinalCertificateEnvelope,
-      cfg.finalCertificateConfig ?? {},
+      {
+        ...(cfg.finalCertificateConfig ?? {}),
+        historicalReplay: true,
+      },
     );
     const result = recordToValidation0(record, ['FinalCertificateEnvelope']);
 
@@ -2064,12 +2079,16 @@ export async function CheckConcreteMaterializedFinalCertificate0(
 }
 
 export async function writeConcreteMaterializedFinalCertificateFiles0(outDir, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('writeConcreteMaterializedFinalCertificateFiles0');
   if (typeof outDir !== 'string' || outDir.length === 0) {
     throw new TypeError('writeConcreteMaterializedFinalCertificateFiles0 requires a non-empty output directory');
   }
 
   const envelope = await makeConcreteMaterializedFinalCertificate0(options);
-  const checked = await CheckConcreteMaterializedFinalCertificate0(envelope, options.checkConfig ?? {});
+  const checked = await CheckConcreteMaterializedFinalCertificate0(envelope, {
+    ...(options.checkConfig ?? {}),
+    historicalReplay: true,
+  });
 
   await fs.mkdir(outDir, {
     recursive: true,

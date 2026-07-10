@@ -14,6 +14,8 @@ import {
   digestCanonical0,
 } from '../pcc-verifier-frag0.mjs';
 
+const CheckHistoricalReleaseAudit0 = (config = {}) => CheckReleaseAudit0({ ...config, historicalReplay: true });
+
 test('CheckReleaseAudit0 rejects stale duplicate ES modules under src', async (t) => {
   const rootDir = await makeMiniReleaseRepo0(t);
 
@@ -26,7 +28,7 @@ test('CheckReleaseAudit0 rejects stale duplicate ES modules under src', async (t
     'export const stale = true;\n',
   );
 
-  const out = await CheckReleaseAudit0({
+  const out = await CheckHistoricalReleaseAudit0({
     rootDir,
     runSyntaxCheck: false,
     runRunAll: false,
@@ -50,7 +52,7 @@ test('CheckReleaseAudit0 rejects missing package exports', async (t) => {
 
   await fs.writeFile(packageJsonPath, `${JSON.stringify(pkg, null, 2)}\n`);
 
-  const out = await CheckReleaseAudit0({
+  const out = await CheckHistoricalReleaseAudit0({
     rootDir,
     runSyntaxCheck: false,
     runRunAll: false,
@@ -73,7 +75,7 @@ test('CheckReleaseAudit0 rejects orphaned tests', async (t) => {
     'import test from "node:test"; test("orphan", () => {});\n',
   );
 
-  const out = await CheckReleaseAudit0({
+  const out = await CheckHistoricalReleaseAudit0({
     rootDir,
     runSyntaxCheck: false,
     runRunAll: false,
@@ -89,7 +91,7 @@ test('CheckReleaseAudit0 rejects orphaned tests', async (t) => {
 });
 
 test('CheckReleaseAudit0 rejects a RunAll0 checker that mutates its input', async () => {
-  const out = await CheckReleaseAudit0({
+  const out = await CheckHistoricalReleaseAudit0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: true,
@@ -205,9 +207,9 @@ function makeMiniPackageJson0() {
     main: './index.mjs',
     exports: {
       '.': './index.mjs',
-      './runall0': './pcc-runall0.mjs',
-      './integrated-pipeline0': './pcc-integrated-pipeline0.mjs',
-      './accept-run0': './pcc-accept-run0.mjs',
+      './runall0': './pcc-runall-public0.mjs',
+      './integrated-pipeline0': './pcc-integrated-pipeline-public0.mjs',
+      './accept-run0': './pcc-accept-run-public0.mjs',
       './release-audit0': './pcc-release-audit0.mjs',
       './final-certificate0': './pcc-final-certificate-materialized0.mjs',
       './final-certificate-public-status0': './pcc-final-certificate-public-status0.mjs',

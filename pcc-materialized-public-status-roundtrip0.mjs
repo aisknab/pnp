@@ -27,6 +27,8 @@ import {
   WriteMaterializedFinalRunFixtureSet0,
 } from './pcc-materialized-final-run-fixtures0.mjs';
 
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 const CHECKER_VERSION = 0;
 const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
 
@@ -75,6 +77,7 @@ export function makeMaterializedPublicStatusRoundtripConfig0(overrides = {}) {
   return {
     kind: 'MaterializedPublicStatusRoundtripConfig0',
     version: CHECKER_VERSION,
+    historicalReplay: false,
     outputDir: path.join(process.cwd(), 'materialized-public-status-roundtrip0'),
     canonicalEnvelopeBytes: false,
     overwrite: true,
@@ -87,6 +90,7 @@ export function makeMaterializedPublicStatusRoundtripConfig0(overrides = {}) {
 
 export async function CheckMaterializedPublicStatusRoundtrip0(config = makeMaterializedPublicStatusRoundtripConfig0()) {
   const checker = 'CheckMaterializedPublicStatusRoundtrip0';
+  if (config.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const ledger = [];
   const cfg = makeMaterializedPublicStatusRoundtripConfig0(config);
 
@@ -109,6 +113,7 @@ export async function CheckMaterializedPublicStatusRoundtrip0(config = makeMater
   }
 
   const firstWrite = await WriteMaterializedFinalRunFixtureSet0({
+    historicalReplay: true,
     outputDir: cfg.outputDir,
     canonicalEnvelopeBytes: cfg.canonicalEnvelopeBytes,
     overwrite: cfg.overwrite,
@@ -153,6 +158,7 @@ export async function CheckMaterializedPublicStatusRoundtrip0(config = makeMater
   }
 
   const secondWrite = await WriteMaterializedFinalRunFixtureSet0({
+    historicalReplay: true,
     outputDir: cfg.outputDir,
     canonicalEnvelopeBytes: cfg.canonicalEnvelopeBytes,
     overwrite: true,
@@ -406,7 +412,9 @@ async function verifyDirectPublicStatusRoundtrip0(config) {
     }
 
     const filePath = path.join(config.outputDir, file.filename);
-    const record = await CheckMaterializedPublicStatusFile0(filePath);
+    const record = await CheckMaterializedPublicStatusFile0(filePath, {
+      historicalReplay: true,
+    });
 
     if (isRejectRecord0(record)) {
       return validationReject0(['files', file.filename], 'materialized public status roundtrip status file rejected', {
@@ -440,6 +448,7 @@ async function verifyCliPublicStatusRoundtrip0(config) {
   const packFile = path.join(config.outputDir, MATERIALIZED_FIXTURE_FILENAMES0.pack);
   const aggregateArgs = [
     path.join(REPO_ROOT, 'bin', 'check-materialized-aggregate0.mjs'),
+    '--historical-replay',
     packFile,
   ];
 
@@ -463,6 +472,7 @@ async function verifyCliPublicStatusRoundtrip0(config) {
         filename: file.filename,
         args: [
           path.join(REPO_ROOT, 'bin', 'check-materialized-public-status0.mjs'),
+          '--historical-replay',
           path.join(config.outputDir, file.filename),
         ],
         expectedChecker: 'CheckMaterializedPublicStatus0',

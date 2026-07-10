@@ -1,16 +1,7 @@
 name: full-verification
 
 on:
-  workflow_dispatch:
-    inputs:
-      include_release_audit:
-        description: Run the full release audit after npm test
-        required: true
-        default: "true"
-        type: choice
-        options:
-          - "true"
-          - "false"
+  workflow_dispatch: {}
 
 permissions:
   contents: read
@@ -34,12 +25,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Verify formal reconstruction status
+        run: |
+          node pcc-formal-reconstruction-status0.mjs --json
+          node pcc-formal-public-surface0.mjs --json
+
       - name: Run full test suite
         run: npm test
-
-      - name: Run full release audit
-        if: inputs.include_release_audit == 'true'
-        run: npm run release:audit
 
       - name: Verify tracked files were not rewritten
         run: |

@@ -11,13 +11,23 @@ import {
   writeConcreteFinalAcceptanceReplayFiles0,
 } from '../pcc-final-acceptance-replay0.mjs';
 
+const makeHistoricalFinalReplay0 = (options = {}) => makeConcreteFinalAcceptanceReplay0({
+  ...options,
+  historicalReplay: true,
+});
+
+const CheckHistoricalFinalReplay0 = (input, config = {}) => CheckConcreteFinalAcceptanceReplay0(input, {
+  ...config,
+  historicalReplay: true,
+});
+
 import {
   digestCanonical0,
 } from '../pcc-verifier-frag0.mjs';
 
 test('CheckConcreteFinalAcceptanceReplay0 accepts the concrete final acceptance replay closure', async () => {
-  const envelope = await makeConcreteFinalAcceptanceReplay0();
-  const out = await CheckConcreteFinalAcceptanceReplay0(envelope);
+  const envelope = await makeHistoricalFinalReplay0();
+  const out = await CheckHistoricalFinalReplay0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckConcreteFinalAcceptanceReplay0');
@@ -57,7 +67,7 @@ test('CheckConcreteFinalAcceptanceReplay0 accepts the concrete final acceptance 
 });
 
 test('CheckConcreteFinalAcceptanceReplay0 rejects stale replay record evidence', async () => {
-  const envelope = await makeConcreteFinalAcceptanceReplay0();
+  const envelope = await makeHistoricalFinalReplay0();
 
   const nf = {
     ...envelope.ReplayAcceptRunRecord.NF,
@@ -77,7 +87,7 @@ test('CheckConcreteFinalAcceptanceReplay0 rejects stale replay record evidence',
     replayRecordDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalAcceptanceReplay0(envelope, {
+  const out = await CheckHistoricalFinalReplay0(envelope, {
     checkConcreteReleaseAppendix: false,
     checkLinkage: false,
   });
@@ -89,7 +99,7 @@ test('CheckConcreteFinalAcceptanceReplay0 rejects stale replay record evidence',
 });
 
 test('CheckConcreteFinalAcceptanceReplay0 rejects appendix without generated package implication evidence', async () => {
-  const envelope = await makeConcreteFinalAcceptanceReplay0();
+  const envelope = await makeHistoricalFinalReplay0();
 
   envelope.ConcreteReleaseAppendixEnvelope.Appendix = {
     ...envelope.ConcreteReleaseAppendixEnvelope.Appendix,
@@ -107,7 +117,7 @@ test('CheckConcreteFinalAcceptanceReplay0 rejects appendix without generated pac
     appendixDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalAcceptanceReplay0(envelope, {
+  const out = await CheckHistoricalFinalReplay0(envelope, {
     checkConcreteReleaseAppendix: false,
     checkLinkage: false,
   });
@@ -123,7 +133,7 @@ test('CheckConcreteFinalAcceptanceReplay0 rejects appendix without generated pac
 });
 
 test('CheckConcreteFinalAcceptanceReplay0 rejects digest-only generator drift', async () => {
-  const envelope = await makeConcreteFinalAcceptanceReplay0();
+  const envelope = await makeHistoricalFinalReplay0();
 
   const generatedAcceptRunEnvelope = envelope.ConcreteReleaseAppendixEnvelope
     .ReleaseAuditConcreteFinalCertificateGateEnvelope
@@ -142,7 +152,7 @@ test('CheckConcreteFinalAcceptanceReplay0 rejects digest-only generator drift', 
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckConcreteFinalAcceptanceReplay0(envelope, {
+  const out = await CheckHistoricalFinalReplay0(envelope, {
     checkConcreteReleaseAppendix: false,
     checkAcceptRun: false,
     checkReplay: false,
@@ -167,7 +177,9 @@ test('writeConcreteFinalAcceptanceReplayFiles0 writes replayable JSON artefacts'
     });
   });
 
-  const result = await writeConcreteFinalAcceptanceReplayFiles0(dir);
+  const result = await writeConcreteFinalAcceptanceReplayFiles0(dir, {
+    historicalReplay: true,
+  });
 
   assert.equal(result.checked.tag, 'accept');
 
@@ -185,5 +197,17 @@ test('writeConcreteFinalAcceptanceReplayFiles0 writes replayable JSON artefacts'
     const value = JSON.parse(text);
 
     assert.equal(typeof value, 'object');
+  }
+});
+
+test('concrete final acceptance replay routes reject without historical replay opt-in', async () => {
+  for (const out of await Promise.all([
+    makeConcreteFinalAcceptanceReplay0(),
+    CheckConcreteFinalAcceptanceReplay0(),
+    writeConcreteFinalAcceptanceReplayFiles0(),
+  ])) {
+    assert.equal(out.tag, 'reject');
+    assert.match(out.coord, /\.HistoricalReplayRequired$/);
+    assert.equal(out.publicTheoremEmissionAllowed, false);
   }
 });

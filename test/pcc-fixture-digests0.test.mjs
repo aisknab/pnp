@@ -12,6 +12,8 @@ import {
   RunAll0,
 } from '../pcc-runall0.mjs';
 
+const RunHistorical0 = (input) => RunAll0(input, { historicalReplay: true });
+
 test('fixtureDigestHex0 emits deterministic SHA256-shaped hex strings', () => {
   const first = fixtureDigestHex0('sched.synthetic');
   const second = fixtureDigestHex0('sched.synthetic');
@@ -37,7 +39,7 @@ test('implementation modules contain no static non-SHA digest hex literals', asy
 });
 
 test('RunAll0 still accepts synthetic engineering fixtures after fixture digest hardening', async () => {
-  const out = await RunAll0();
+  const out = await RunHistorical0();
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'RunAll0');

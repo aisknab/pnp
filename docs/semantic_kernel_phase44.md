@@ -1,5 +1,7 @@
 # Semantic kernel hardening - phase 44
 
+> Historical assertion-checker record. Its workflow is retired and it is not current theorem-status authority. See [the formal reconstruction status](../status/FORMAL_RECONSTRUCTION_STATUS.json).
+
 Phase 43 represented the unrestricted-final-soundness review packet, but deliberately left both release-layer blockers in place:
 
 ```text
@@ -94,7 +96,7 @@ activeFinalNodeIds = []
 The dedicated workflow is:
 
 ```text
-.github/workflows/external-review-gate.yml
+retired historical workflow `external-review-gate.yml`
 ```
 
 It runs:

@@ -554,8 +554,10 @@ function makeAcceptedConcreteFinalCertificatePublicStatusRecord0() {
   };
 }
 
+const CheckHistoricalReleaseAudit0 = (config = {}) => CheckReleaseAudit0({ ...config, historicalReplay: true });
+
 test('CheckReleaseAudit0 reports the concrete final-certificate public-status gate summary', async () => {
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -1460,7 +1462,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without concr
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -1489,7 +1491,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without concr
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -1518,7 +1520,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without Check
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -1551,7 +1553,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without Gener
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -1584,7 +1586,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without Check
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -1617,7 +1619,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without Boot0
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -1650,7 +1652,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without B0 ro
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -1683,7 +1685,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without Kerne
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -1716,7 +1718,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate with unsafe K
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -1749,7 +1751,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without canon
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -1782,7 +1784,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate with Digest0 
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -1815,7 +1817,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without Iface
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -1848,7 +1850,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate with stale Sc
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -1881,7 +1883,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without ByteL
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -1914,7 +1916,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without ByteL
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -1947,7 +1949,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without BootA
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -1980,7 +1982,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without PiBoo
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -2013,7 +2015,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without concr
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -2046,7 +2048,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without concr
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -2079,7 +2081,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without concr
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -2112,7 +2114,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without concr
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -2146,7 +2148,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without concr
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -2179,7 +2181,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without concr
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -2212,7 +2214,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without concr
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -2245,7 +2247,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without concr
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -2278,7 +2280,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without concr
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -2311,7 +2313,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without concr
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -2344,7 +2346,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without Check
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -2377,7 +2379,7 @@ test('CheckReleaseAudit0 rejects a concrete final-certificate gate without Check
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,

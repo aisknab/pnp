@@ -19,6 +19,7 @@ import {
 import {
   MATERIALIZED_FIXTURE_FILENAMES0,
 } from './pcc-materialized-fixture-writer0.mjs';
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
 
 const CHECKER_VERSION = 0;
 const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
@@ -42,6 +43,7 @@ export function makeMaterializedDigestResolverConfig0(overrides = {}) {
 }
 
 export async function IndexMaterializedFixtureDigests0(config = makeMaterializedDigestResolverConfig0()) {
+  if (config?.historicalReplay !== true) return LegacyReplayRequiredReject0('IndexMaterializedFixtureDigests0');
   const checker = 'IndexMaterializedFixtureDigests0';
   const ledger = [];
   const cfg = makeMaterializedDigestResolverConfig0(config);
@@ -162,6 +164,7 @@ export async function IndexMaterializedFixtureDigests0(config = makeMaterialized
 }
 
 export async function ResolveMaterializedDigest0(digestInput, config = makeMaterializedDigestResolverConfig0()) {
+  if (config?.historicalReplay !== true) return LegacyReplayRequiredReject0('ResolveMaterializedDigest0');
   const checker = 'ResolveMaterializedDigest0';
   const ledger = [];
   const cfg = makeMaterializedDigestResolverConfig0(config);
@@ -184,7 +187,7 @@ export async function ResolveMaterializedDigest0(digestInput, config = makeMater
     });
   }
 
-  const indexRecord = await IndexMaterializedFixtureDigests0(cfg);
+  const indexRecord = await IndexMaterializedFixtureDigests0({ ...cfg, historicalReplay: true });
   const indexResult = recordToValidation0(indexRecord, ['DigestIndex']);
 
   ledger.push({
@@ -402,7 +405,7 @@ async function verifyFixtureFile0(filePath, filename) {
     filename === MATERIALIZED_FIXTURE_FILENAMES0.pendingBridge ||
     filename === MATERIALIZED_FIXTURE_FILENAMES0.acceptedBridge
   ) {
-    record = await CheckMaterializedAcceptanceBridgeFile0(filePath);
+    record = await CheckMaterializedAcceptanceBridgeFile0(filePath, { historicalReplay: true });
   } else {
     return validationReject0(['files', filename], 'unknown materialized fixture filename cannot be verified', {
       filename,

@@ -1,6 +1,11 @@
 # Uniform final soundness theorem target
 
-Coordinate:
+> **Historical target, not a proof:** This UFS manifest and checker are retained as superseded
+> assertion-checker evidence. They do not discharge the current formal obligations. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical coordinate:
 
 ```text
 PNP-UNIFORM-FINAL-SOUNDNESS-TARGET-2026-07-04-01
@@ -12,21 +17,22 @@ Machine-readable manifest:
 proof-obligations/UNIFORM_FINAL_SOUNDNESS_TARGET.json
 ```
 
-Checker:
+Historical replay command:
 
 ```bash
-npm run proof:uniform-final-soundness-target
+npm run proof:uniform-final-soundness-target -- --historical-replay
 ```
 
-Direct checker command:
+Direct historical replay command:
 
 ```bash
-node pcc-uniform-final-soundness-target0.mjs --json
+node pcc-uniform-final-soundness-target0.mjs --json --historical-replay
 ```
 
 ## Purpose
 
-This is the first proof-work surface for replacing the current finite-to-unbounded audit with a code-bound all-input-size theorem.
+This was the first historical checker surface intended to replace a finite-to-unbounded audit with an
+all-input-size theorem target. It defined a target but did not prove it.
 
 The target theorem is:
 
@@ -54,7 +60,8 @@ GAP-004-FiniteToUnboundedUniformity
 GAP-005-NoHiddenOracleSemanticCompleteness
 ```
 
-The current code already represents these as known gaps. This target converts them into a concrete list of uniform proof obligations that future checkers can discharge.
+The historical code represented these as known gaps and then as UFS assertion records. Current
+reconstruction requires concrete formal derivations rather than accepted assertion fields.
 
 ## Required uniform obligations
 
@@ -73,10 +80,11 @@ Each obligation is required for a real unrestricted final-soundness discharge. T
 
 ## Proof-development script namespace
 
-The repository is actively developing the proof checker stack. `package.json` may add narrowly scoped proof-development scripts under the `proof:*` namespace. Such scripts must directly invoke a checker as:
+The historical package retained narrowly scoped `proof:*` replay scripts. On current `main`, each
+requires explicit historical replay:
 
 ```text
-node pcc-<checker-name>0.mjs --json
+node pcc-<checker-name>0.mjs --json --historical-replay
 ```
 
 This keeps proof work accessible without opening arbitrary package-script drift.
@@ -87,7 +95,7 @@ This target deliberately separates mathematical proof from external review.
 
 External review can report independent runs, bugs, or confirmations, but it is not a premise of the theorem. The theorem must be discharged by code-bound uniform obligations.
 
-Current boundary:
+Historical boundary recorded by this target:
 
 ```text
 publicTheoremEmissionAllowed = false
@@ -103,4 +111,6 @@ The proof-track aim is to clear `Release.UnrestrictedFinalSoundness` by code. Th
 
 ## What this file does not claim
 
-This file does not prove P = NP. It defines the machine-checkable theorem target that must be accepted before the verifier can honestly emit the final theorem.
+This file does not prove `P = NP`. Acceptance of its historical checker is not a future activation
+condition. The only acceptable future gate is the concrete Lean gate in the formal-reconstruction
+notice.

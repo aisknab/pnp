@@ -2,15 +2,14 @@ export {
   CheckRunAll0,
   RUNALL_CHECKER_COVERAGE0,
   RUNALL_PUBLIC_CONCLUSION0,
-  RunAll0,
-  makeSyntheticRunAllInput0,
 } from './pcc-runall0.mjs';
+
+import { RunAll0 as LegacyRunAll0 } from './pcc-runall0.mjs';
 
 export {
   CheckIntegratedPipeline0,
   INTEGRATED_PIPELINE_PHASES0,
   RunIntegratedPCC0,
-  makeSyntheticIntegratedPipeline0,
 } from './pcc-integrated-pipeline0.mjs';
 
 export {
@@ -18,18 +17,28 @@ export {
   CheckAcceptRun0,
   EmitFinalVerdict0,
   ReplayAcceptRun0,
-  makeSyntheticAcceptRun0,
-  makeSyntheticRejectAcceptRun0,
 } from './pcc-accept-run0.mjs';
 
 export {
-  CheckReleaseAudit0,
   RELEASE_AUDIT_REQUIRED_EXPORTS0,
   RELEASE_AUDIT_REQUIRED_MODULES0,
   RELEASE_AUDIT_REQUIRED_SCRIPTS0,
   RELEASE_AUDIT_REQUIRED_TESTS0,
   makeReleaseAuditConfig0,
 } from './pcc-release-audit0.mjs';
+
+import { CheckReleaseAudit0 as LegacyCheckReleaseAudit0 } from './pcc-release-audit0.mjs';
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
+export async function RunAll0(input, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('RunAll0');
+  return LegacyRunAll0(input, { historicalReplay: true });
+}
+
+export async function CheckReleaseAudit0(config, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('CheckReleaseAudit0');
+  return LegacyCheckReleaseAudit0({ ...config, historicalReplay: true });
+}
 
 export {
   CheckMaterializedFinalCertificate0,

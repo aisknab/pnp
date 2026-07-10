@@ -14,6 +14,8 @@ import {
   MATERIALIZED_PACK_PUBLIC_BOUNDARY0,
 } from './pcc-materialized-pack0.mjs';
 
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 const CHECKER_VERSION = 0;
 
 export const MATERIALIZED_ACCEPT_RUN_VERDICTS0 = Object.freeze([
@@ -103,7 +105,9 @@ export function makeMaterializedAcceptRunVerdict0({
   publicConclusionEmitted = false,
   publicConclusion = null,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeMaterializedAcceptRunVerdict0');
   return {
     kind: 'MaterializedAcceptRunVerdict0',
     version: CHECKER_VERSION,
@@ -122,7 +126,9 @@ export function makeMaterializedAcceptRun0({
   verdict = 'pending',
   replayTranscript = null,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeMaterializedAcceptRun0');
   const transcript = replayTranscript ?? makeMaterializedReplayTranscript0({
     verdict,
   });
@@ -184,6 +190,7 @@ export function makeMaterializedAcceptRun0({
 
     Verdict: makeMaterializedAcceptRunVerdict0({
       verdict,
+      historicalReplay: true,
       publicConclusionEmitted: accepted,
       publicConclusion: accepted
         ? {
@@ -202,6 +209,7 @@ export function makeMaterializedAcceptRun0({
 
 export async function CheckMaterializedAcceptRun0(run, config = {}) {
   const checker = 'CheckMaterializedAcceptRun0';
+  if (config.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const ledger = [];
 
   const shape = validateAcceptRunShape0(run);
@@ -413,6 +421,7 @@ export async function CheckMaterializedAcceptRun0(run, config = {}) {
 
 export async function CheckMaterializedAcceptRunFile0(filePath, config = {}) {
   const checker = 'CheckMaterializedAcceptRunFile0';
+  if (config.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const ledger = [];
 
   const loaded = await loadAcceptRunFile0(filePath, config.loaderConfig ?? {});
@@ -436,7 +445,10 @@ export async function CheckMaterializedAcceptRunFile0(filePath, config = {}) {
     });
   }
 
-  const checked = await CheckMaterializedAcceptRun0(loaded.value, config);
+  const checked = await CheckMaterializedAcceptRun0(loaded.value, {
+    ...config,
+    historicalReplay: true,
+  });
   const checkResult = recordToValidation0(checked, ['AcceptRun']);
 
   ledger.push({

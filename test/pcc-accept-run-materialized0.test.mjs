@@ -6,9 +6,20 @@ import { test } from 'node:test';
 
 import {
   CheckMaterializedGeneratedAcceptRun0,
+  makeMaterializedAcceptRun0,
   makeMaterializedGeneratedAcceptRun0,
   writeMaterializedGeneratedAcceptRunFiles0,
 } from '../pcc-accept-run-materialized0.mjs';
+
+const makeHistoricalMaterializedRun0 = (options = {}) => makeMaterializedGeneratedAcceptRun0({
+  ...options,
+  historicalReplay: true,
+});
+
+const CheckHistoricalMaterializedRun0 = (input, config = {}) => CheckMaterializedGeneratedAcceptRun0(input, {
+  ...config,
+  historicalReplay: true,
+});
 
 import {
   CheckAcceptRun0,
@@ -17,8 +28,8 @@ import {
 } from '../pcc-accept-run0.mjs';
 
 test('CheckMaterializedGeneratedAcceptRun0 accepts a generated package accept-run envelope', async () => {
-  const envelope = await makeMaterializedGeneratedAcceptRun0();
-  const out = await CheckMaterializedGeneratedAcceptRun0(envelope);
+  const envelope = await makeHistoricalMaterializedRun0();
+  const out = await CheckHistoricalMaterializedRun0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedGeneratedAcceptRun0');
@@ -34,11 +45,11 @@ test('CheckMaterializedGeneratedAcceptRun0 accepts a generated package accept-ru
 });
 
 test('inner accept-run, replay, and final verdict checkers accept the materialized run', async () => {
-  const envelope = await makeMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalMaterializedRun0();
 
-  const acceptRun = await CheckAcceptRun0(envelope.AcceptRun);
-  const replay = await ReplayAcceptRun0(envelope.AcceptRun);
-  const finalVerdict = await EmitFinalVerdict0(envelope.AcceptRun);
+  const acceptRun = await CheckAcceptRun0(envelope.AcceptRun, { historicalReplay: true });
+  const replay = await ReplayAcceptRun0(envelope.AcceptRun, { historicalReplay: true });
+  const finalVerdict = await EmitFinalVerdict0(envelope.AcceptRun, { historicalReplay: true });
 
   assert.equal(acceptRun.tag, 'accept');
   assert.equal(replay.tag, 'accept');
@@ -48,7 +59,7 @@ test('inner accept-run, replay, and final verdict checkers accept the materializ
 });
 
 test('CheckMaterializedGeneratedAcceptRun0 rejects generated package byte mismatch', async () => {
-  const envelope = await makeMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalMaterializedRun0();
 
   envelope.GeneratedPackage = {
     ...envelope.GeneratedPackage,
@@ -61,7 +72,7 @@ test('CheckMaterializedGeneratedAcceptRun0 rejects generated package byte mismat
     outputPackDigest: undefined,
   };
 
-  const out = await CheckMaterializedGeneratedAcceptRun0(envelope);
+  const out = await CheckHistoricalMaterializedRun0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedGeneratedAcceptRun0');
@@ -70,7 +81,7 @@ test('CheckMaterializedGeneratedAcceptRun0 rejects generated package byte mismat
 });
 
 test('CheckMaterializedGeneratedAcceptRun0 exposes AcceptRun canonical byte mismatch', async () => {
-  const envelope = await makeMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalMaterializedRun0();
 
   envelope.AcceptRun = {
     ...envelope.AcceptRun,
@@ -85,7 +96,7 @@ test('CheckMaterializedGeneratedAcceptRun0 exposes AcceptRun canonical byte mism
     acceptRunDigest: undefined,
   };
 
-  const out = await CheckMaterializedGeneratedAcceptRun0(envelope);
+  const out = await CheckHistoricalMaterializedRun0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedGeneratedAcceptRun0');
@@ -95,7 +106,7 @@ test('CheckMaterializedGeneratedAcceptRun0 exposes AcceptRun canonical byte mism
 });
 
 test('CheckMaterializedGeneratedAcceptRun0 rejects forbidden fixture marker text', async () => {
-  const envelope = await makeMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalMaterializedRun0();
 
   envelope.AcceptRun = {
     ...envelope.AcceptRun,
@@ -110,7 +121,7 @@ test('CheckMaterializedGeneratedAcceptRun0 rejects forbidden fixture marker text
     acceptRunDigest: undefined,
   };
 
-  const out = await CheckMaterializedGeneratedAcceptRun0(envelope);
+  const out = await CheckHistoricalMaterializedRun0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedGeneratedAcceptRun0');
@@ -119,7 +130,7 @@ test('CheckMaterializedGeneratedAcceptRun0 rejects forbidden fixture marker text
 
 
 test('CheckMaterializedGeneratedAcceptRun0 strictly rejects an injected synthetic scaffold marker', async () => {
-  const envelope = await makeMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalMaterializedRun0();
 
   envelope.AcceptRun = {
     ...envelope.AcceptRun,
@@ -134,7 +145,7 @@ test('CheckMaterializedGeneratedAcceptRun0 strictly rejects an injected syntheti
     acceptRunDigest: undefined,
   };
 
-  const out = await CheckMaterializedGeneratedAcceptRun0(envelope, {
+  const out = await CheckHistoricalMaterializedRun0(envelope, {
     allowSyntheticScaffoldMarker: false,
   });
 
@@ -146,7 +157,7 @@ test('CheckMaterializedGeneratedAcceptRun0 strictly rejects an injected syntheti
 
 
 test('CheckMaterializedGeneratedAcceptRun0 rejects stale linkage digest', async () => {
-  const envelope = await makeMaterializedGeneratedAcceptRun0();
+  const envelope = await makeHistoricalMaterializedRun0();
 
   envelope.Linkage = {
     ...envelope.Linkage,
@@ -157,7 +168,7 @@ test('CheckMaterializedGeneratedAcceptRun0 rejects stale linkage digest', async 
     },
   };
 
-  const out = await CheckMaterializedGeneratedAcceptRun0(envelope);
+  const out = await CheckHistoricalMaterializedRun0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedGeneratedAcceptRun0');
@@ -175,7 +186,9 @@ test('writeMaterializedGeneratedAcceptRunFiles0 writes replayable JSON artefacts
     });
   });
 
-  const result = await writeMaterializedGeneratedAcceptRunFiles0(dir);
+  const result = await writeMaterializedGeneratedAcceptRunFiles0(dir, {
+    historicalReplay: true,
+  });
 
   assert.equal(result.checked.tag, 'accept');
   assert.equal(result.finalVerdict.tag, 'accept');
@@ -192,5 +205,18 @@ test('writeMaterializedGeneratedAcceptRunFiles0 writes replayable JSON artefacts
     const value = JSON.parse(text);
 
     assert.equal(typeof value, 'object');
+  }
+});
+
+test('materialized generated accept-run routes reject without historical replay opt-in', async () => {
+  for (const out of await Promise.all([
+    makeMaterializedAcceptRun0(),
+    makeMaterializedGeneratedAcceptRun0(),
+    CheckMaterializedGeneratedAcceptRun0(),
+    writeMaterializedGeneratedAcceptRunFiles0(),
+  ])) {
+    assert.equal(out.tag, 'reject');
+    assert.match(out.coord, /\.HistoricalReplayRequired$/);
+    assert.equal(out.publicTheoremEmissionAllowed, false);
   }
 });

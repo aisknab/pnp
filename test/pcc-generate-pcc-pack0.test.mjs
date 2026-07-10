@@ -13,9 +13,26 @@ import {
   writeGeneratedPCCPackexpFiles0,
 } from '../pcc-generate-pcc-pack0.mjs';
 
+const GenerateHistoricalPCCPack0 = (options = {}) => GeneratePCCPack0({
+  ...options,
+  historicalReplay: true,
+});
+const makeHistoricalGeneratedPCCPackexp0 = (options = {}) => makeGeneratedPCCPackexp0({
+  ...options,
+  historicalReplay: true,
+});
+const CheckHistoricalGeneratedPCCPackexp0 = (input, config = {}) => CheckGeneratedPCCPackexp0(input, {
+  ...config,
+  historicalReplay: true,
+});
+const writeHistoricalGeneratedPCCPackexpFiles0 = (dir, options = {}) => writeGeneratedPCCPackexpFiles0(dir, {
+  ...options,
+  historicalReplay: true,
+});
+
 test('GeneratePCCPack0 emits deterministic concrete materialized package bytes', async () => {
-  const first = await GeneratePCCPack0();
-  const second = await GeneratePCCPack0();
+  const first = await GenerateHistoricalPCCPack0();
+  const second = await GenerateHistoricalPCCPack0();
 
   assert.equal(JSON.stringify(first), JSON.stringify(second));
   assert.equal(first.kind, 'ConcreteMaterializedPCCPack0');
@@ -24,8 +41,8 @@ test('GeneratePCCPack0 emits deterministic concrete materialized package bytes',
 });
 
 test('CheckGeneratedPCCPackexp0 accepts generated package with accepted CheckPCCPackexp0 record', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
-  const out = await CheckGeneratedPCCPackexp0(envelope);
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckGeneratedPCCPackexp0');
@@ -454,7 +471,7 @@ test('makeGeneratePCCPackConfig0 fills default validation switches', () => {
 });
 
 test('CheckGeneratedPCCPackexp0 rejects generated package core with embedded AcceptRun', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   envelope.GeneratedPCCPack = {
     ...envelope.GeneratedPCCPack,
@@ -468,7 +485,7 @@ test('CheckGeneratedPCCPackexp0 rejects generated package core with embedded Acc
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkCheckPCCPackexpRecord: false,
     checkLinkage: false,
@@ -481,7 +498,7 @@ test('CheckGeneratedPCCPackexp0 rejects generated package core with embedded Acc
 });
 
 test('CheckGeneratedPCCPackexp0 rejects stale materialized CheckPCCPackexp0 record', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   envelope.CheckPCCPackexpRecord = {
     ...envelope.CheckPCCPackexpRecord,
@@ -495,7 +512,7 @@ test('CheckGeneratedPCCPackexp0 rejects stale materialized CheckPCCPackexp0 reco
     },
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkLinkage: false,
   });
@@ -516,7 +533,7 @@ test('writeGeneratedPCCPackexpFiles0 writes replayable JSON artefacts', async (t
     });
   });
 
-  const result = await writeGeneratedPCCPackexpFiles0(dir);
+  const result = await writeHistoricalGeneratedPCCPackexpFiles0(dir);
 
   assert.equal(result.checked.tag, 'accept');
 
@@ -534,7 +551,7 @@ test('writeGeneratedPCCPackexpFiles0 writes replayable JSON artefacts', async (t
 });
 
 test('CheckGeneratedPCCPackexp0 rejects generated package whose Boot0 core digest is stale', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   envelope.GeneratedPCCPack = {
     ...envelope.GeneratedPCCPack,
@@ -562,7 +579,7 @@ test('CheckGeneratedPCCPackexp0 rejects generated package whose Boot0 core diges
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkCheckPCCPackexpRecord: false,
     checkPublicClaimBoundary: false,
@@ -576,7 +593,7 @@ test('CheckGeneratedPCCPackexp0 rejects generated package whose Boot0 core diges
 });
 
 test('CheckGeneratedPCCPackexp0 rejects generated package missing a B0 row family', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   envelope.GeneratedPCCPack = {
     ...envelope.GeneratedPCCPack,
@@ -599,7 +616,7 @@ test('CheckGeneratedPCCPackexp0 rejects generated package missing a B0 row famil
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkCheckPCCPackexpRecord: false,
     checkPublicClaimBoundary: false,
@@ -613,7 +630,7 @@ test('CheckGeneratedPCCPackexp0 rejects generated package missing a B0 row famil
 });
 
 test('CheckGeneratedPCCPackexp0 rejects generated package missing a KernelSeed0 primitive rule', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   envelope.GeneratedPCCPack = {
     ...envelope.GeneratedPCCPack,
@@ -636,7 +653,7 @@ test('CheckGeneratedPCCPackexp0 rejects generated package missing a KernelSeed0 
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkMaterializedBoot0: false,
     checkCheckPCCPackexpRecord: false,
@@ -651,7 +668,7 @@ test('CheckGeneratedPCCPackexp0 rejects generated package missing a KernelSeed0 
 });
 
 test('CheckGeneratedPCCPackexp0 rejects KernelSeed0 opaque proof references', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   envelope.GeneratedPCCPack = {
     ...envelope.GeneratedPCCPack,
@@ -675,7 +692,7 @@ test('CheckGeneratedPCCPackexp0 rejects KernelSeed0 opaque proof references', as
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkMaterializedBoot0: false,
     checkCheckPCCPackexpRecord: false,
@@ -696,7 +713,7 @@ test('CheckGeneratedPCCPackexp0 rejects KernelSeed0 opaque proof references', as
 });
 
 test('CheckGeneratedPCCPackexp0 rejects noncanonical Codec0 natural encoding', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   envelope.GeneratedPCCPack = {
     ...envelope.GeneratedPCCPack,
@@ -717,7 +734,7 @@ test('CheckGeneratedPCCPackexp0 rejects noncanonical Codec0 natural encoding', a
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkMaterializedBoot0: false,
     checkKernelSeed0: false,
@@ -733,7 +750,7 @@ test('CheckGeneratedPCCPackexp0 rejects noncanonical Codec0 natural encoding', a
 });
 
 test('CheckGeneratedPCCPackexp0 rejects Digest0 object-equality misuse', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   envelope.GeneratedPCCPack = {
     ...envelope.GeneratedPCCPack,
@@ -754,7 +771,7 @@ test('CheckGeneratedPCCPackexp0 rejects Digest0 object-equality misuse', async (
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkMaterializedBoot0: false,
     checkKernelSeed0: false,
@@ -775,7 +792,7 @@ test('CheckGeneratedPCCPackexp0 rejects Digest0 object-equality misuse', async (
 });
 
 test('CheckGeneratedPCCPackexp0 rejects IfaceDict0 missing hidden-minimization forbidden symbols', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   envelope.GeneratedPCCPack = {
     ...envelope.GeneratedPCCPack,
@@ -798,7 +815,7 @@ test('CheckGeneratedPCCPackexp0 rejects IfaceDict0 missing hidden-minimization f
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkMaterializedBoot0: false,
     checkKernelSeed0: false,
@@ -815,7 +832,7 @@ test('CheckGeneratedPCCPackexp0 rejects IfaceDict0 missing hidden-minimization f
 });
 
 test('CheckGeneratedPCCPackexp0 rejects Sched0 core drift', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   envelope.GeneratedPCCPack = {
     ...envelope.GeneratedPCCPack,
@@ -839,7 +856,7 @@ test('CheckGeneratedPCCPackexp0 rejects Sched0 core drift', async () => {
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkMaterializedBoot0: false,
     checkKernelSeed0: false,
@@ -856,7 +873,7 @@ test('CheckGeneratedPCCPackexp0 rejects Sched0 core drift', async () => {
 });
 
 test('CheckGeneratedPCCPackexp0 rejects duplicate ByteLang0 tag values', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   envelope.GeneratedPCCPack = {
     ...envelope.GeneratedPCCPack,
@@ -880,7 +897,7 @@ test('CheckGeneratedPCCPackexp0 rejects duplicate ByteLang0 tag values', async (
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkMaterializedBoot0: false,
     checkKernelSeed0: false,
@@ -898,7 +915,7 @@ test('CheckGeneratedPCCPackexp0 rejects duplicate ByteLang0 tag values', async (
 });
 
 test('CheckGeneratedPCCPackexp0 rejects stale ByteLang0 record arity', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   envelope.GeneratedPCCPack = {
     ...envelope.GeneratedPCCPack,
@@ -922,7 +939,7 @@ test('CheckGeneratedPCCPackexp0 rejects stale ByteLang0 record arity', async () 
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkMaterializedBoot0: false,
     checkKernelSeed0: false,
@@ -940,7 +957,7 @@ test('CheckGeneratedPCCPackexp0 rejects stale ByteLang0 record arity', async () 
 });
 
 test('CheckGeneratedPCCPackexp0 rejects stale BootAudit0 digest evidence', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
   const record = envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.MaterializedBoot0.BootAudit0;
 
   envelope.GeneratedPCCPack = {
@@ -969,7 +986,7 @@ test('CheckGeneratedPCCPackexp0 rejects stale BootAudit0 digest evidence', async
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkMaterializedBoot0: false,
     checkKernelSeed0: false,
@@ -988,7 +1005,7 @@ test('CheckGeneratedPCCPackexp0 rejects stale BootAudit0 digest evidence', async
 });
 
 test('CheckGeneratedPCCPackexp0 rejects stale PiBoot BootAudit0 reference', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   envelope.GeneratedPCCPack = {
     ...envelope.GeneratedPCCPack,
@@ -1020,7 +1037,7 @@ test('CheckGeneratedPCCPackexp0 rejects stale PiBoot BootAudit0 reference', asyn
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkMaterializedBoot0: false,
     checkKernelSeed0: false,
@@ -1039,7 +1056,7 @@ test('CheckGeneratedPCCPackexp0 rejects stale PiBoot BootAudit0 reference', asyn
 });
 
 test('CheckGeneratedPCCPackexp0 rejects missing concrete KBundle envelope', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   delete envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.KBundleEnvelope;
 
@@ -1048,7 +1065,7 @@ test('CheckGeneratedPCCPackexp0 rejects missing concrete KBundle envelope', asyn
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkMaterializedBoot0: false,
     checkKernelSeed0: false,
@@ -1072,7 +1089,7 @@ test('CheckGeneratedPCCPackexp0 rejects missing concrete KBundle envelope', asyn
 });
 
 test('CheckGeneratedPCCPackexp0 rejects stale concrete KBundle proof inventory', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.KBundleEnvelope = {
     ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.KBundleEnvelope,
@@ -1087,7 +1104,7 @@ test('CheckGeneratedPCCPackexp0 rejects stale concrete KBundle proof inventory',
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkMaterializedBoot0: false,
     checkKernelSeed0: false,
@@ -1111,7 +1128,7 @@ test('CheckGeneratedPCCPackexp0 rejects stale concrete KBundle proof inventory',
 });
 
 test('CheckGeneratedPCCPackexp0 rejects missing concrete HardCheck envelope', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   delete envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.HardEnvelope;
 
@@ -1120,7 +1137,7 @@ test('CheckGeneratedPCCPackexp0 rejects missing concrete HardCheck envelope', as
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkGeneratedPackageCoreBoundary: false,
     checkMaterializedBoot0: false,
@@ -1146,7 +1163,7 @@ test('CheckGeneratedPCCPackexp0 rejects missing concrete HardCheck envelope', as
 });
 
 test('CheckGeneratedPCCPackexp0 rejects stale concrete HardCheck coverage', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.HardEnvelope = {
     ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.HardEnvelope,
@@ -1161,7 +1178,7 @@ test('CheckGeneratedPCCPackexp0 rejects stale concrete HardCheck coverage', asyn
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkGeneratedPackageCoreBoundary: false,
     checkMaterializedBoot0: false,
@@ -1187,7 +1204,7 @@ test('CheckGeneratedPCCPackexp0 rejects stale concrete HardCheck coverage', asyn
 });
 
 test('CheckGeneratedPCCPackexp0 rejects missing concrete Rows envelope', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   delete envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.RowsEnvelope;
 
@@ -1196,7 +1213,7 @@ test('CheckGeneratedPCCPackexp0 rejects missing concrete Rows envelope', async (
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkGeneratedPackageCoreBoundary: false,
     checkMaterializedBoot0: false,
@@ -1223,7 +1240,7 @@ test('CheckGeneratedPCCPackexp0 rejects missing concrete Rows envelope', async (
 });
 
 test('CheckGeneratedPCCPackexp0 rejects stale concrete Rows interface hash', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.RowsEnvelope = {
     ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.RowsEnvelope,
@@ -1249,7 +1266,7 @@ test('CheckGeneratedPCCPackexp0 rejects stale concrete Rows interface hash', asy
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkGeneratedPackageCoreBoundary: false,
     checkMaterializedBoot0: false,
@@ -1276,7 +1293,7 @@ test('CheckGeneratedPCCPackexp0 rejects stale concrete Rows interface hash', asy
 });
 
 test('CheckGeneratedPCCPackexp0 rejects missing concrete GlobalProofDAG envelope', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   delete envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.GlobalProofDAGEnvelope;
 
@@ -1285,7 +1302,7 @@ test('CheckGeneratedPCCPackexp0 rejects missing concrete GlobalProofDAG envelope
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkGeneratedPackageCoreBoundary: false,
     checkMaterializedBoot0: false,
@@ -1313,7 +1330,7 @@ test('CheckGeneratedPCCPackexp0 rejects missing concrete GlobalProofDAG envelope
 });
 
 test('CheckGeneratedPCCPackexp0 rejects incomplete concrete GlobalProofDAG final theorem coverage', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.GlobalProofDAGEnvelope = {
     ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.GlobalProofDAGEnvelope,
@@ -1330,7 +1347,7 @@ test('CheckGeneratedPCCPackexp0 rejects incomplete concrete GlobalProofDAG final
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkGeneratedPackageCoreBoundary: false,
     checkMaterializedBoot0: false,
@@ -1358,7 +1375,7 @@ test('CheckGeneratedPCCPackexp0 rejects incomplete concrete GlobalProofDAG final
 });
 
 test('CheckGeneratedPCCPackexp0 rejects missing concrete FinalIntegration envelope', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   delete envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.FinalIntegrationEnvelope;
 
@@ -1367,7 +1384,7 @@ test('CheckGeneratedPCCPackexp0 rejects missing concrete FinalIntegration envelo
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkGeneratedPackageCoreBoundary: false,
     checkMaterializedBoot0: false,
@@ -1396,7 +1413,7 @@ test('CheckGeneratedPCCPackexp0 rejects missing concrete FinalIntegration envelo
 });
 
 test('CheckGeneratedPCCPackexp0 rejects stale concrete FinalIntegration linkage', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
 
   envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.FinalIntegrationEnvelope = {
     ...envelope.GeneratedPCCPack.MaterializedPCCPackEnvelope.FinalIntegrationEnvelope,
@@ -1411,7 +1428,7 @@ test('CheckGeneratedPCCPackexp0 rejects stale concrete FinalIntegration linkage'
     generatedPackageDigest: undefined,
   };
 
-  const out = await CheckGeneratedPCCPackexp0(envelope, {
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope, {
     checkDeterministicGenerator: false,
     checkGeneratedPackageCoreBoundary: false,
     checkMaterializedBoot0: false,
@@ -1440,8 +1457,8 @@ test('CheckGeneratedPCCPackexp0 rejects stale concrete FinalIntegration linkage'
 });
 
 test('CheckGeneratedPCCPackexp0 exposes the central conditional package-check boundary', async () => {
-  const envelope = await makeGeneratedPCCPackexp0();
-  const out = await CheckGeneratedPCCPackexp0(envelope);
+  const envelope = await makeHistoricalGeneratedPCCPackexp0();
+  const out = await CheckHistoricalGeneratedPCCPackexp0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.NF.generatedPackageCheckPCCPackexp0, true);

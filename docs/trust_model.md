@@ -1,10 +1,17 @@
 # Trust Model
 
+> **Current authority:** Formal reconstruction is in progress. The repository does not currently
+> establish `P = NP`; checker acceptance is not mathematical proof. This document audits the trust
+> assumptions behind the historical 7072f8d assertion-checker release. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`FORMAL_RECONSTRUCTION.md`](FORMAL_RECONSTRUCTION.md).
+
 ## Purpose and scope
 
-This document identifies the components that must be trusted, checked, reproduced, or independently replaced when evaluating the repository's claim.
+This document identifies the components that had to be trusted, checked, reproduced, or
+independently replaced when evaluating the historical checker claim.
 
-The public claim boundary is:
+The historical checker-claim boundary was:
 
 ```text
 CheckPCCPackexp(GeneratePCCPack())=accept => P = NP
@@ -23,9 +30,11 @@ This document is reviewer guidance added on `main`. It does not alter the pinned
 
 ## Trust vocabulary
 
-The **Trusted?** column below is scoped to the current repository's evidence chain.
+The **Trusted?** column below is scoped to the historical 7072f8d evidence chain.
 
-- **Yes** means the current claim relies on that component without another repository component proving the component itself correct. It is part of the current trusted computing or mathematical base and therefore requires direct audit or independent replacement.
+- **Yes** means the historical checker claim relied on that component without another repository
+  component proving the component itself correct. It therefore requires direct audit or independent
+  replacement before any mathematical conclusion could be credited.
 - **No** means the component is intended to be adversarial or untrusted; a downstream checker must validate it before relying on it.
 - **Partially** means only a narrow property is trusted, such as byte identity, deterministic execution, or toolchain semantics. It must not be credited with a stronger property.
 
@@ -92,16 +101,17 @@ A component may be trusted for execution while remaining untrusted for theorem c
 | Build/install environment | Git checkout, Node/npm, lockfile, environment variables, filesystem, and OS | Installed dependencies, generated outputs, and test run | **Partially** | Reproduction requires deterministic source selection and sufficiently stable platform behavior. | Fresh container/VM; record versions and environment; disable undeclared network access; compare regenerated semantic fields. | Mutable dependency, local file leakage, locale/time dependence, path-dependent digests, or unrecorded tool. | `npm ci`; `npm run validate`; release-audit and regeneration commands in `REPRODUCE.md`. |
 | `package.json` scripts | Working tree and runtime | Commands such as `test`, `validate`, `runall`, and release writers | **Partially** | Reviewers rely on the scripts to invoke the intended entry points, but scripts are convenience wrappers rather than proof rules. | Read the script definitions; invoke underlying Node files directly; record exact commands. | A script omits a test, points to a stale entry point, or mutates source/artefacts. | Script smoke tests where present; manual comparison with direct commands. |
 | Test suite | Source and fixtures | Pass/fail evidence for finite cases | **No**, as proof evidence; **partially** as implementation evidence | Tests improve confidence and detect regressions but are not exhaustive. | Add mutation testing, coverage, fuzzing, property tests, independent fixtures, and differential implementations. | All tests pass while an untested branch or false theorem remains. | `node --test`; currently run through `npm test` and `npm run validate`. |
-| CI service and workflow | Repository event, checkout configuration, runner image, secrets, and workflow definition | Public or private logs, statuses, and uploaded artefacts | **No**, as a theorem source | CI can provide reproducible execution evidence, but it is not part of the mathematical argument. At the time this document was written, no `.github/workflows/ci.yml` was present on `main`; local `npm run validate` is the explicit validation command. | Add a public workflow with pinned action SHAs and a clean clone; reproduce locally; preserve logs and environment metadata. | Shallow/wrong checkout, mutable action, cached state, secret-dependent path, skipped tests, or green status for a different commit. | Workflow self-tests after CI is added; local commands remain authoritative for reproduction. |
+| CI service and workflow | Repository event, checkout configuration, runner image, secrets, and workflow definition | Public or private logs, statuses, and uploaded artefacts | **No**, as a theorem source | Current `main` contains `.github/workflows/ci.yml` and formal-status workflows. They provide implementation and regression evidence only, not a mathematical premise or theorem result. | Audit workflow permissions, action pinning, checkout depth, caches, network use, and the exact commands; reproduce locally in a clean environment. | Shallow/wrong checkout, mutable action, cached state, secret-dependent path, skipped tests, or green status for a different commit. | Current workflow definitions and local formal-status, syntax, and test commands. |
 | Git repository and annotated tags | Commits, refs, tag objects, and remote hosting | Immutable-looking source and artefact coordinates | **Partially**, for provenance | Reviewers need stable coordinates for exact source and artefact bytes. Git naming alone does not prove correctness. | Verify tag object and peeled commit hashes; clone from independent mirrors; archive bundles; use signed tags if available. | Retagging, missing objects, wrong remote, default-branch drift, or reviewer audits `main` instead of the pinned release. | Cross-ref checks in `REPRODUCE.md`; manual `git rev-parse`; release manifest checks. |
 | Release seal and `SHA256SUMS` | Named files and expected hashes/byte counts | Identity-verification result | **Partially**, for artefact identity only | The seal identifies the exact published bundle. It is deliberately outside the mathematical proof of correctness. | Recompute with independent tools; compare manifest and ledger; obtain files from multiple sources. | Missing file, stale manifest, self-referential checksum error, hash mismatch, or seal wording overstated as theorem validation. | Shell `sha256sum -c`; release-audit/seal tests; bundle validation described in `REPRODUCE.md`. |
 | Published PDF/TeX report | Mathematical prose, theorem statements, release metadata, and source references | Human-readable claim and review map | **No**, as executable proof evidence | The report is the specification and explanation surface; it can be wrong, stale, or stronger than code. | Compare each theorem with source predicates and generated records; compile TeX independently; record errata. | Prose/code mismatch, stale access/release information, missing hypothesis, or accepted-record status overstated. | Documentation checks once added; current source and checker tests do not validate all prose claims. |
 | Website and browser verification flow | Hosted HTML/JS, downloaded report, published digest | User-facing file check and review navigation | **No**, as theorem or checker evidence | The website is a convenience layer outside the pinned source/checker release. | Clone and inspect `aisknab/pnplabs`; compute hashes locally; follow pinned Git refs rather than website state. | Website drift, stale JavaScript, wrong digest, compromised host, or wording that implies mathematical verification. | PNP Labs site tests and seal checks in its separate repository; not part of `pnp` checker acceptance. |
 | Human release operator | Source selection, tag creation, publication, and status wording | Published refs, bundles, and public descriptions | **Partially** | Someone chooses what to publish and can make provenance or wording mistakes even when checkers are correct. | Two-person release review; scripted release; signed provenance; compare expected and actual refs; publish machine-readable manifests. | Wrong tag, omitted file, stale report, accidental overclaim, or private/unreviewed material published. | Release checklist and automated coordinate checks; no test can eliminate all operator error. |
 
-## Minimal current trusted base
+## Minimal historical trusted base
 
-For a reviewer to accept the current executable implication without replacing components, the following remain inside the effective trusted base:
+For a reviewer to credit the historical executable implication without replacing components, the
+following remained inside its effective trusted base:
 
 1. the mathematical definitions and every claimed theorem implication;
 2. the exact mapping from theorem obligations to record fields and reflection targets;

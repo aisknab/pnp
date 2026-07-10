@@ -42,6 +42,7 @@ function parseJsonFromStdout0(stdout) {
 test('IndexMaterializedFixtureDigests0 indexes all materialized fixture digests', async (t) => {
   const fixtureDir = await writeFixtures0(t);
   const out = await IndexMaterializedFixtureDigests0({
+    historicalReplay: true,
     fixtureDir,
   });
 
@@ -58,11 +59,13 @@ test('IndexMaterializedFixtureDigests0 indexes all materialized fixture digests'
 test('ResolveMaterializedDigest0 resolves a file SHA256 digest to exact fixture bytes', async (t) => {
   const fixtureDir = await writeFixtures0(t);
   const index = await IndexMaterializedFixtureDigests0({
+    historicalReplay: true,
     fixtureDir,
   });
 
   const packEntry = index.IndexEntries.find((entry) => entry.filename === MATERIALIZED_FIXTURE_FILENAMES0.pack);
   const out = await ResolveMaterializedDigest0(packEntry.fileBytesSha256.hex, {
+    historicalReplay: true,
     fixtureDir,
   });
 
@@ -80,11 +83,13 @@ test('ResolveMaterializedDigest0 resolves a file SHA256 digest to exact fixture 
 test('ResolveMaterializedDigest0 resolves canonical object digest records', async (t) => {
   const fixtureDir = await writeFixtures0(t);
   const index = await IndexMaterializedFixtureDigests0({
+    historicalReplay: true,
     fixtureDir,
   });
 
   const acceptedBridge = index.IndexEntries.find((entry) => entry.filename === MATERIALIZED_FIXTURE_FILENAMES0.acceptedBridge);
   const out = await ResolveMaterializedDigest0(acceptedBridge.canonicalObjectDigest, {
+    historicalReplay: true,
     fixtureDir,
     includeBytes: false,
   });
@@ -99,6 +104,7 @@ test('ResolveMaterializedDigest0 resolves canonical object digest records', asyn
 test('ResolveMaterializedDigest0 rejects unknown digest without attempting cryptographic inversion', async (t) => {
   const fixtureDir = await writeFixtures0(t);
   const out = await ResolveMaterializedDigest0('0000000000000000000000000000000000000000000000000000000000000000', {
+    historicalReplay: true,
     fixtureDir,
   });
 
@@ -113,6 +119,7 @@ test('ResolveMaterializedDigest0 rejects unknown digest without attempting crypt
 test('ResolveMaterializedDigest0 rejects malformed digest input', async (t) => {
   const fixtureDir = await writeFixtures0(t);
   const out = await ResolveMaterializedDigest0('not-a-sha256-digest', {
+    historicalReplay: true,
     fixtureDir,
   });
 
@@ -130,6 +137,7 @@ test('IndexMaterializedFixtureDigests0 rejects tampered fixture files during ver
   await fs.writeFile(packFile, '{ "kind": "not valid" }', 'utf8');
 
   const out = await IndexMaterializedFixtureDigests0({
+    historicalReplay: true,
     fixtureDir,
   });
 
@@ -143,12 +151,13 @@ test('IndexMaterializedFixtureDigests0 rejects tampered fixture files during ver
 test('bin/resolve-materialized-digest0.mjs resolves a digest from fixture files', async (t) => {
   const fixtureDir = await writeFixtures0(t);
   const index = await IndexMaterializedFixtureDigests0({
+    historicalReplay: true,
     fixtureDir,
   });
   const packEntry = index.IndexEntries.find((entry) => entry.filename === MATERIALIZED_FIXTURE_FILENAMES0.pack);
   const cliPath = fileURLToPath(new URL('../bin/resolve-materialized-digest0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, packEntry.fileBytesSha256.hex, '--dir', fixtureDir], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', packEntry.fileBytesSha256.hex, '--dir', fixtureDir], {
     encoding: 'utf8',
   });
 
@@ -166,11 +175,12 @@ test('bin/resolve-materialized-digest0.mjs resolves a digest from fixture files'
 test('npm run materialized:resolve-digest resolves a digest from fixture files', async (t) => {
   const fixtureDir = await writeFixtures0(t);
   const index = await IndexMaterializedFixtureDigests0({
+    historicalReplay: true,
     fixtureDir,
   });
   const pendingBridge = index.IndexEntries.find((entry) => entry.filename === MATERIALIZED_FIXTURE_FILENAMES0.pendingBridge);
 
-  const child = spawnSync(npmCommand0(), ['run', 'materialized:resolve-digest', '--', pendingBridge.fileBytesSha256.hex, '--dir', fixtureDir], {
+  const child = spawnSync(npmCommand0(), ['run', 'materialized:resolve-digest', '--', '--historical-replay', pendingBridge.fileBytesSha256.hex, '--dir', fixtureDir], {
     encoding: 'utf8',
     shell: process.platform === 'win32',
     windowsHide: true,
@@ -189,7 +199,7 @@ test('npm run materialized:resolve-digest resolves a digest from fixture files',
 test('bin/resolve-materialized-digest0.mjs exits nonzero without digest input', () => {
   const cliPath = fileURLToPath(new URL('../bin/resolve-materialized-digest0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay'], {
     encoding: 'utf8',
   });
 
@@ -200,6 +210,15 @@ test('bin/resolve-materialized-digest0.mjs exits nonzero without digest input', 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'resolve-materialized-digest0');
   assert.equal(out.coord, 'resolve-materialized-digest0.args');
+});
+
+test('materialized digest resolver rejects without historical replay opt-in', async () => {
+  const indexed = await IndexMaterializedFixtureDigests0();
+  const resolved = await ResolveMaterializedDigest0('0'.repeat(64));
+  for (const out of [indexed, resolved]) {
+    assert.equal(out.tag, 'reject');
+    assert.match(out.coord, /\.HistoricalReplayRequired$/u);
+  }
 });
 
 async function writeFixtures0(t) {
@@ -213,6 +232,7 @@ async function writeFixtures0(t) {
   });
 
   const writer = await WriteMaterializedFixtureSet0({
+    historicalReplay: true,
     outputDir: fixtureDir,
   });
 

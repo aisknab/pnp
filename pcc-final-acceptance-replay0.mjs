@@ -21,6 +21,8 @@ import {
   makeConcreteReleaseAppendix0,
 } from './pcc-concrete-release-appendix0.mjs';
 
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 const CHECKER_VERSION = 0;
 
 export const CONCRETE_FINAL_ACCEPTANCE_REPLAY_PHASES0 = Object.freeze([
@@ -40,6 +42,7 @@ export function makeConcreteFinalAcceptanceReplayConfig0(overrides = {}) {
   return {
     kind: 'ConcreteFinalAcceptanceReplayConfig0',
     version: CHECKER_VERSION,
+    historicalReplay: false,
     checkConcreteReleaseAppendix: true,
     checkAcceptRun: true,
     checkReplay: true,
@@ -56,15 +59,17 @@ export function makeConcreteFinalAcceptanceReplayConfig0(overrides = {}) {
 export async function makeConcreteFinalAcceptanceReplay0({
   ConcreteReleaseAppendixEnvelope = null,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeConcreteFinalAcceptanceReplay0');
   const concreteReleaseAppendixEnvelope =
-    ConcreteReleaseAppendixEnvelope ?? await makeConcreteReleaseAppendix0();
+    ConcreteReleaseAppendixEnvelope ?? await makeConcreteReleaseAppendix0({ historicalReplay: true });
 
   const resolved = resolveFinalAcceptanceInputs0(concreteReleaseAppendixEnvelope);
-  const checkAcceptRunRecord = await CheckAcceptRun0(resolved.acceptRun);
-  const replayRecord = await ReplayAcceptRun0(resolved.acceptRun);
-  const finalVerdictRecord = await EmitFinalVerdict0(resolved.acceptRun);
-  const checkPCCPackexpRecord = await CheckPCCPackexp0(resolved.materializedPCCPack);
+  const checkAcceptRunRecord = await CheckAcceptRun0(resolved.acceptRun, { historicalReplay: true });
+  const replayRecord = await ReplayAcceptRun0(resolved.acceptRun, { historicalReplay: true });
+  const finalVerdictRecord = await EmitFinalVerdict0(resolved.acceptRun, { historicalReplay: true });
+  const checkPCCPackexpRecord = await CheckPCCPackexp0(resolved.materializedPCCPack, { historicalReplay: true });
 
   const linkage = makeLinkage0({
     concreteReleaseAppendixEnvelope,
@@ -127,6 +132,7 @@ export async function CheckConcreteFinalAcceptanceReplay0(
   const checker = 'CheckConcreteFinalAcceptanceReplay0';
   const ledger = [];
   const cfg = makeConcreteFinalAcceptanceReplayConfig0(config);
+  if (cfg.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const envelope = normalizeInput0(input);
 
   const cfgCheck = validateConfig0(cfg);
@@ -170,7 +176,10 @@ export async function CheckConcreteFinalAcceptanceReplay0(
   if (cfg.checkConcreteReleaseAppendix === true) {
     const appendixRecord = await CheckConcreteReleaseAppendix0(
       envelope.ConcreteReleaseAppendixEnvelope,
-      cfg.concreteReleaseAppendixConfig ?? {},
+      {
+        ...(cfg.concreteReleaseAppendixConfig ?? {}),
+        historicalReplay: true,
+      },
     );
     const appendix = recordToValidation0(appendixRecord, ['ConcreteReleaseAppendixEnvelope']);
 
@@ -197,7 +206,7 @@ export async function CheckConcreteFinalAcceptanceReplay0(
   let checkPCCPackexpRecord = envelope.CheckPCCPackexpRecord;
 
   if (cfg.checkAcceptRun === true) {
-    const fresh = await CheckAcceptRun0(resolved.acceptRun);
+    const fresh = await CheckAcceptRun0(resolved.acceptRun, { historicalReplay: true });
     const result = recordToValidation0(fresh, ['AcceptRun']);
 
     ledger.push({
@@ -243,7 +252,7 @@ export async function CheckConcreteFinalAcceptanceReplay0(
   }
 
   if (cfg.checkReplay === true) {
-    const fresh = await ReplayAcceptRun0(resolved.acceptRun);
+    const fresh = await ReplayAcceptRun0(resolved.acceptRun, { historicalReplay: true });
     const result = recordToValidation0(fresh, ['AcceptRun']);
 
     ledger.push({
@@ -289,7 +298,7 @@ export async function CheckConcreteFinalAcceptanceReplay0(
   }
 
   if (cfg.checkFinalVerdict === true) {
-    const fresh = await EmitFinalVerdict0(resolved.acceptRun);
+    const fresh = await EmitFinalVerdict0(resolved.acceptRun, { historicalReplay: true });
     const result = recordToValidation0(fresh, ['AcceptRun']);
 
     ledger.push({
@@ -335,7 +344,7 @@ export async function CheckConcreteFinalAcceptanceReplay0(
   }
 
   if (cfg.checkPCCPackexp === true) {
-    const fresh = await CheckPCCPackexp0(resolved.materializedPCCPack);
+    const fresh = await CheckPCCPackexp0(resolved.materializedPCCPack, { historicalReplay: true });
     const result = recordToValidation0(fresh, ['MaterializedPCCPack']);
 
     ledger.push({
@@ -516,12 +525,16 @@ export async function CheckConcreteFinalAcceptanceReplay0(
 }
 
 export async function writeConcreteFinalAcceptanceReplayFiles0(outDir, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('writeConcreteFinalAcceptanceReplayFiles0');
   if (typeof outDir !== 'string' || outDir.length === 0) {
     throw new TypeError('writeConcreteFinalAcceptanceReplayFiles0 requires a non-empty output directory');
   }
 
   const envelope = await makeConcreteFinalAcceptanceReplay0(options);
-  const checked = await CheckConcreteFinalAcceptanceReplay0(envelope, options.checkConfig ?? {});
+  const checked = await CheckConcreteFinalAcceptanceReplay0(envelope, {
+    ...(options.checkConfig ?? {}),
+    historicalReplay: true,
+  });
 
   await fs.mkdir(outDir, {
     recursive: true,

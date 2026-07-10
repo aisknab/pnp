@@ -11,6 +11,8 @@ import {
   makeSyntheticRunAllInput0,
 } from '../pcc-runall0.mjs';
 
+const RunHistorical0 = (input) => RunAll0(input, { historicalReplay: true });
+
 test('CheckMaterialized0 accepts a concrete non-synthetic object', async () => {
   const out = await CheckMaterialized0({
     kind: 'ConcreteObject0',
@@ -92,7 +94,7 @@ test('CheckMaterialized0 rejects opaque proof material', async () => {
 });
 
 test('RunAll0 still accepts synthetic engineering fixtures by default', async () => {
-  const out = await RunAll0();
+  const out = await RunHistorical0();
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'RunAll0');
@@ -100,9 +102,9 @@ test('RunAll0 still accepts synthetic engineering fixtures by default', async ()
 });
 
 test('RunAll0 materialized mode rejects the synthetic pipeline before integration replay', async () => {
-  const out = await RunAll0(makeSyntheticRunAllInput0({
+  const out = await RunHistorical0(makeSyntheticRunAllInput0({
     RequireMaterialized: true,
-  }));
+  }, { historicalReplay: true }));
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'RunAll0');
@@ -113,13 +115,13 @@ test('RunAll0 materialized mode rejects the synthetic pipeline before integratio
 });
 
 test('RunAll0 validates materialized config shape', async () => {
-  const out = await RunAll0(makeSyntheticRunAllInput0({
+  const out = await RunHistorical0(makeSyntheticRunAllInput0({
     RequireMaterialized: true,
     MaterializedConfig: {
       ...makeMaterializedGateConfig0(),
       rejectSyntheticText: 'yes',
     },
-  }));
+  }, { historicalReplay: true }));
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'RunAll0');

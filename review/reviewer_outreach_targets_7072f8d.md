@@ -1,16 +1,21 @@
 # Reviewer Outreach Targets: 7072f8d Residual-Hardened PNP Release
 
-Status: **target list for hostile external review outreach**.
+> **Historical assertion-checker record:** This file documents a superseded checker/release surface.
+> It is not current theorem-status authority and does not establish `P = NP`. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
 
-Use this as a targeting guide, not as an endorsement list. Contact people one at a time, using only their current official institutional profile, homepage, or contact form. Do not mass-email. Do not describe the release as Clay-prize-ready; describe it as a sealed, checker-gated, external-review-ready candidate.
+Historical status: **target list for hostile external review outreach**.
 
-## Email subject
+This was a targeting guide, not an endorsement list. It recorded a proposed one-at-a-time outreach process using official institutional profiles, homepages, or contact forms. Its external-review-ready wording is historical and does not describe the current project status.
+
+## Historical draft email subject
 
 ```text
 Hostile review request: checker-gated P=NP proof package, 7072f8d frozen release
 ```
 
-## One-paragraph opener
+## Historical draft opener
 
 ```text
 I am seeking hostile external review of a frozen, checker-gated P=NP proof package. The public theorem boundary is CheckPCCPackexp(GeneratePCCPack())=accept => P = NP. The 7072f8d release is sealed, validated, and reproducible, but I am not representing it as settled; I am asking independent experts to try to break it. The review packet includes a hostile checklist, reproduction guide, canonical PDF, and sealed artifact tags.

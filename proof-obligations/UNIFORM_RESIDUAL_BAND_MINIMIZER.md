@@ -1,6 +1,11 @@
 # Uniform residual-band exact minimizer
 
-Coordinate:
+> **Historical assertion-checker record:** This UFS coordinate is superseded. A concrete exact
+> residual-band minimizer and its polynomial bounds remain current formal obligations. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical coordinate:
 
 ```text
 PNP-UNIFORM-RESIDUAL-BAND-MINIMIZER-2026-07-05-01
@@ -12,23 +17,24 @@ Uniform final soundness obligation:
 UFS-004-ResidualBandMinimizerUniformPolynomial
 ```
 
-Checker:
+Historical replay command:
 
 ```bash
-npm run proof:uniform-residual-band-minimizer
+npm run proof:uniform-residual-band-minimizer -- --historical-replay
 ```
 
-Direct checker command:
+Direct historical replay command:
 
 ```bash
-node pcc-uniform-residual-band-minimizer0.mjs --json
+node pcc-uniform-residual-band-minimizer0.mjs --json --historical-replay
 ```
 
 ## Purpose
 
-This surface discharges the fourth uniform-final-soundness sub-obligation: every locked NAND instance produced and threshold-certified by UFS-001 through UFS-003 is handled by one uniform polynomial residual-band exact minimizer.
+This surface recorded the fourth historical UFS assertion: that one uniform polynomial residual-band
+exact minimizer handled every asserted locked-NAND instance.
 
-The accepted theorem shape is:
+The recorded assertion shape was:
 
 ```text
 Lambda(W_phi) <= 4
@@ -48,15 +54,16 @@ RBM-006-ThresholdDecisionUsesExactMinimum
 RBM-007-NoHiddenOracleOrExactMinimizer
 ```
 
-## What this proves
+## What the historical checker accepted
 
-The checker binds the UFS-003 threshold surface to the residual-band minimizer theorem: the minimizer is deterministic, uniform across input sizes, total on threshold-certified locked NAND instances, and polynomially bounded because the locked instances have residual slack at most four.
+The checker accepted records binding the UFS-003 threshold surface to deterministic, uniform,
+totality, and polynomial-bound assertions. It did not formally prove those assertions.
 
 ## What this does not prove
 
 This checker does not by itself prove the final SAT-in-P conclusion or activate theorem emission. Later checkers still need to bind the ZeroSlack closure into the full final soundness transition, the complexity implication, and the release transition.
 
-Current boundary remains:
+The historical record kept this boundary:
 
 ```text
 publicTheoremEmissionAllowed = false

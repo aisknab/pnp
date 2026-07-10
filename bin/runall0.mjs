@@ -1,11 +1,15 @@
 #!/usr/bin/env node
 
+import { EnforceHistoricalReplayCli0 } from '../pcc-legacy-replay-gate0.mjs';
+
 import {
   RunAll0,
 } from '../pcc-runall0.mjs';
 
+EnforceHistoricalReplayCli0({ entrypoint: 'bin/runall0.mjs' });
+
 const full = process.argv.includes('--full');
-const out = await RunAll0();
+const out = await RunAll0(undefined, { historicalReplay: true });
 
 const payload = full
   ? out

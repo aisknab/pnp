@@ -23,6 +23,16 @@ import {
   makeMaterializedPublicStatusInput0,
 } from '../pcc-materialized-public-status0.mjs';
 
+const CheckHistoricalPublicStatus0 = (input, config = {}) => CheckMaterializedPublicStatus0(input, {
+  ...config,
+  historicalReplay: true,
+});
+
+const CheckHistoricalPublicStatusFile0 = (filePath, config = {}) => CheckMaterializedPublicStatusFile0(filePath, {
+  ...config,
+  historicalReplay: true,
+});
+
 import {
   MATERIALIZED_PACK_PUBLIC_BOUNDARY0,
 } from '../pcc-materialized-pack0.mjs';
@@ -33,13 +43,14 @@ test('CheckMaterializedPublicStatusFile0 accepts pending final status with no pu
     t,
     'MaterializedAcceptRun0.pending.json',
     makeMaterializedAcceptRun0({
+    historicalReplay: true,
       packFilePath,
       aggregateDigest,
       verdict: 'pending',
     }),
   );
 
-  const out = await CheckMaterializedPublicStatusFile0(acceptRunFile);
+  const out = await CheckHistoricalPublicStatusFile0(acceptRunFile);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedPublicStatus0');
@@ -72,6 +83,7 @@ test('CheckMaterializedPublicStatusFile0 accepts rejected final status with no p
     t,
     'MaterializedAcceptRun0.reject.json',
     makeMaterializedAcceptRun0({
+    historicalReplay: true,
       packFilePath,
       aggregateDigest,
       verdict: 'reject',
@@ -79,7 +91,7 @@ test('CheckMaterializedPublicStatusFile0 accepts rejected final status with no p
     }),
   );
 
-  const out = await CheckMaterializedPublicStatusFile0(acceptRunFile);
+  const out = await CheckHistoricalPublicStatusFile0(acceptRunFile);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.NF.status, 'rejected');
@@ -96,13 +108,14 @@ test('CheckMaterializedPublicStatusFile0 accepts accepted final status and emits
     t,
     'MaterializedAcceptRun0.accept.json',
     makeMaterializedAcceptRun0({
+    historicalReplay: true,
       packFilePath,
       aggregateDigest,
       verdict: 'accept',
     }),
   );
 
-  const out = await CheckMaterializedPublicStatusFile0(acceptRunFile);
+  const out = await CheckHistoricalPublicStatusFile0(acceptRunFile);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.NF.status, 'accepted');
@@ -119,13 +132,14 @@ test('CheckMaterializedPublicStatus0 accepts explicit input object', async (t) =
     t,
     'MaterializedAcceptRun0.accept.json',
     makeMaterializedAcceptRun0({
+    historicalReplay: true,
       packFilePath,
       aggregateDigest,
       verdict: 'accept',
     }),
   );
 
-  const out = await CheckMaterializedPublicStatus0(makeMaterializedPublicStatusInput0({
+  const out = await CheckHistoricalPublicStatus0(makeMaterializedPublicStatusInput0({
     acceptRunFilePath: acceptRunFile,
   }));
 
@@ -139,13 +153,14 @@ test('CheckMaterializedPublicStatus0 rejects invalid status policy before final 
     t,
     'MaterializedAcceptRun0.pending.json',
     makeMaterializedAcceptRun0({
+    historicalReplay: true,
       packFilePath,
       aggregateDigest,
       verdict: 'pending',
     }),
   );
 
-  const out = await CheckMaterializedPublicStatus0(makeMaterializedPublicStatusInput0({
+  const out = await CheckHistoricalPublicStatus0(makeMaterializedPublicStatusInput0({
     acceptRunFilePath: acceptRunFile,
     overrides: {
       StatusPolicy: {
@@ -168,13 +183,14 @@ test('CheckMaterializedPublicStatus0 rejects public claim boundary mismatch', as
     t,
     'MaterializedAcceptRun0.pending.json',
     makeMaterializedAcceptRun0({
+    historicalReplay: true,
       packFilePath,
       aggregateDigest,
       verdict: 'pending',
     }),
   );
 
-  const out = await CheckMaterializedPublicStatus0(makeMaterializedPublicStatusInput0({
+  const out = await CheckHistoricalPublicStatus0(makeMaterializedPublicStatusInput0({
     acceptRunFilePath: acceptRunFile,
     overrides: {
       PublicClaimBoundary: {
@@ -194,7 +210,7 @@ test('CheckMaterializedPublicStatus0 rejects public claim boundary mismatch', as
 test('CheckMaterializedPublicStatusFile0 rejects invalid accept-run file through final verdict checker', async (t) => {
   const acceptRunFile = await writeTempTextFile0(t, 'MaterializedAcceptRun0.bad.json', '{ not json');
 
-  const out = await CheckMaterializedPublicStatusFile0(acceptRunFile);
+  const out = await CheckHistoricalPublicStatusFile0(acceptRunFile);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedPublicStatus0');
@@ -207,6 +223,7 @@ test('CheckMaterializedPublicStatusFile0 rejects invalid accept-run file through
 test('CheckMaterializedPublicStatusFile0 rejects accept-run that tries to emit public conclusion before accept', async (t) => {
   const { packFilePath, aggregateDigest } = await writeAggregatePack0(t);
   const run = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath,
     aggregateDigest,
     verdict: 'pending',
@@ -221,7 +238,7 @@ test('CheckMaterializedPublicStatusFile0 rejects accept-run that tries to emit p
   };
 
   const acceptRunFile = await writeTempJsonFile0(t, 'MaterializedAcceptRun0.bad.json', run);
-  const out = await CheckMaterializedPublicStatusFile0(acceptRunFile);
+  const out = await CheckHistoricalPublicStatusFile0(acceptRunFile);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedPublicStatus0');

@@ -15,9 +15,25 @@ import {
   digestCanonical0,
 } from '../pcc-verifier-frag0.mjs';
 
+const makeHistoricalFinalPNPReleaseGate0 = (options = {}) => makeFinalPNPReleaseGate0({ ...options, historicalReplay: true });
+const CheckHistoricalFinalPNPReleaseGate0 = (input, config = {}) => CheckFinalPNPReleaseGate0(input, { ...config, historicalReplay: true });
+const writeHistoricalFinalPNPReleaseGateFiles0 = (outDir, options = {}) => writeFinalPNPReleaseGateFiles0(outDir, { ...options, historicalReplay: true });
+
+test('final PNP release gate rejects without historical opt-in', async () => {
+  const generated = await makeFinalPNPReleaseGate0();
+  const checked = await CheckFinalPNPReleaseGate0({});
+  assert.equal(generated.tag, 'reject');
+  assert.equal(checked.tag, 'reject');
+  for (const out of [generated, checked]) {
+    assert.equal(out.publicTheoremEmissionAllowed, false);
+    assert.equal(out.publicTheoremStatement, null);
+    assert.equal(out.finalTheoremReady, false);
+  }
+});
+
 test('CheckFinalPNPReleaseGate0 accepts the final P=NP release gate', async () => {
-  const envelope = await makeFinalPNPReleaseGate0();
-  const out = await CheckFinalPNPReleaseGate0(envelope);
+  const envelope = await makeHistoricalFinalPNPReleaseGate0();
+  const out = await CheckHistoricalFinalPNPReleaseGate0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckFinalPNPReleaseGate0');
@@ -66,7 +82,7 @@ test('CheckFinalPNPReleaseGate0 accepts the final P=NP release gate', async () =
 });
 
 test('CheckFinalPNPReleaseGate0 rejects a stale final PNP certificate record', async () => {
-  const envelope = await makeFinalPNPReleaseGate0();
+  const envelope = await makeHistoricalFinalPNPReleaseGate0();
 
   const nf = {
     ...envelope.CheckFinalPNPCertificateRecord.NF,
@@ -86,7 +102,7 @@ test('CheckFinalPNPReleaseGate0 rejects a stale final PNP certificate record', a
     checkFinalPNPCertificateRecordDigest: undefined,
   };
 
-  const out = await CheckFinalPNPReleaseGate0(envelope, {
+  const out = await CheckHistoricalFinalPNPReleaseGate0(envelope, {
     checkLinkage: false,
   });
 
@@ -97,7 +113,7 @@ test('CheckFinalPNPReleaseGate0 rejects a stale final PNP certificate record', a
 });
 
 test('CheckFinalPNPReleaseGate0 rejects release-audit digest drift in certificate', async () => {
-  const envelope = await makeFinalPNPReleaseGate0();
+  const envelope = await makeHistoricalFinalPNPReleaseGate0();
 
   envelope.FinalPNPCertificateEnvelope.Certificate = {
     ...envelope.FinalPNPCertificateEnvelope.Certificate,
@@ -113,7 +129,7 @@ test('CheckFinalPNPReleaseGate0 rejects release-audit digest drift in certificat
     certificateDigest: undefined,
   };
 
-  const out = await CheckFinalPNPReleaseGate0(envelope, {
+  const out = await CheckHistoricalFinalPNPReleaseGate0(envelope, {
     checkFinalPNPCertificate: false,
     checkLinkage: false,
   });
@@ -129,7 +145,7 @@ test('CheckFinalPNPReleaseGate0 rejects release-audit digest drift in certificat
 });
 
 test('CheckFinalPNPReleaseGate0 rejects theorem drift', async () => {
-  const envelope = await makeFinalPNPReleaseGate0();
+  const envelope = await makeHistoricalFinalPNPReleaseGate0();
 
   envelope.FinalPNPCertificateEnvelope.Certificate = {
     ...envelope.FinalPNPCertificateEnvelope.Certificate,
@@ -139,7 +155,7 @@ test('CheckFinalPNPReleaseGate0 rejects theorem drift', async () => {
     },
   };
 
-  const out = await CheckFinalPNPReleaseGate0(envelope, {
+  const out = await CheckHistoricalFinalPNPReleaseGate0(envelope, {
     checkFinalPNPCertificate: false,
     checkLinkage: false,
   });
@@ -164,7 +180,7 @@ test('writeFinalPNPReleaseGateFiles0 writes replayable JSON artefacts', async (t
     });
   });
 
-  const result = await writeFinalPNPReleaseGateFiles0(dir);
+  const result = await writeHistoricalFinalPNPReleaseGateFiles0(dir);
 
   assert.equal(result.checked.tag, 'accept');
 

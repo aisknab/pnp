@@ -8,12 +8,21 @@ import {
   makeSyntheticIntegratedPipeline0,
 } from '../pcc-integrated-pipeline0.mjs';
 
+const CheckHistoricalIntegratedPipeline0 = (pipeline) => CheckIntegratedPipeline0(
+  pipeline,
+  { historicalReplay: true },
+);
+const RunHistoricalIntegratedPCC0 = (pipeline) => RunIntegratedPCC0(
+  pipeline,
+  { historicalReplay: true },
+);
+
 import {
   makeAuditCase,
 } from '../pcc-verifier-frag0.mjs';
 
 test('CheckIntegratedPipeline0 accepts the synthetic full-stack pipeline', async () => {
-  const out = await CheckIntegratedPipeline0(makeSyntheticIntegratedPipeline0());
+  const out = await CheckHistoricalIntegratedPipeline0(makeSyntheticIntegratedPipeline0({}, { historicalReplay: true }));
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckIntegratedPipeline0');
@@ -28,15 +37,15 @@ test('CheckIntegratedPipeline0 accepts the synthetic full-stack pipeline', async
 });
 
 test('RunIntegratedPCC0 is an alias for the integrated pipeline checker', async () => {
-  const out = await RunIntegratedPCC0(makeSyntheticIntegratedPipeline0());
+  const out = await RunHistoricalIntegratedPCC0(makeSyntheticIntegratedPipeline0({}, { historicalReplay: true }));
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckIntegratedPipeline0');
 });
 
 test('CheckIntegratedPipeline0 is deterministic on fresh synthetic pipelines', async () => {
-  const first = await CheckIntegratedPipeline0(makeSyntheticIntegratedPipeline0());
-  const second = await CheckIntegratedPipeline0(makeSyntheticIntegratedPipeline0());
+  const first = await CheckHistoricalIntegratedPipeline0(makeSyntheticIntegratedPipeline0({}, { historicalReplay: true }));
+  const second = await CheckHistoricalIntegratedPipeline0(makeSyntheticIntegratedPipeline0({}, { historicalReplay: true }));
 
   assert.equal(first.tag, 'accept');
   assert.equal(second.tag, 'accept');
@@ -44,7 +53,7 @@ test('CheckIntegratedPipeline0 is deterministic on fresh synthetic pipelines', a
 });
 
 test('CheckIntegratedPipeline0 rejects at CheckVerifierFrag0 first when the verifier audit fails', async () => {
-  const pipeline = makeSyntheticIntegratedPipeline0();
+  const pipeline = makeSyntheticIntegratedPipeline0({}, { historicalReplay: true });
 
   pipeline.VerifierFrag0 = {
     kind: 'VerifierFrag0',
@@ -62,7 +71,7 @@ test('CheckIntegratedPipeline0 rejects at CheckVerifierFrag0 first when the veri
     ],
   };
 
-  const out = await CheckIntegratedPipeline0(pipeline);
+  const out = await CheckHistoricalIntegratedPipeline0(pipeline);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckIntegratedPipeline0');
@@ -73,7 +82,7 @@ test('CheckIntegratedPipeline0 rejects at CheckVerifierFrag0 first when the veri
 });
 
 test('CheckIntegratedPipeline0 rejects at CheckGPack0 before package sufficiency when locked NAND is bad', async () => {
-  const pipeline = makeSyntheticIntegratedPipeline0();
+  const pipeline = makeSyntheticIntegratedPipeline0({}, { historicalReplay: true });
 
   pipeline.PCCPack.GPack = {
     ...pipeline.PCCPack.GPack,
@@ -83,7 +92,7 @@ test('CheckIntegratedPipeline0 rejects at CheckGPack0 before package sufficiency
     },
   };
 
-  const out = await CheckIntegratedPipeline0(pipeline);
+  const out = await CheckHistoricalIntegratedPipeline0(pipeline);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckIntegratedPipeline0');
@@ -94,7 +103,7 @@ test('CheckIntegratedPipeline0 rejects at CheckGPack0 before package sufficiency
 });
 
 test('CheckIntegratedPipeline0 rejects if AcceptRun Pgen is not the integrated PCCPack', async () => {
-  const pipeline = makeSyntheticIntegratedPipeline0();
+  const pipeline = makeSyntheticIntegratedPipeline0({}, { historicalReplay: true });
 
   pipeline.AcceptRun = {
     ...pipeline.AcceptRun,
@@ -107,7 +116,7 @@ test('CheckIntegratedPipeline0 rejects if AcceptRun Pgen is not the integrated P
     },
   };
 
-  const out = await CheckIntegratedPipeline0(pipeline);
+  const out = await CheckHistoricalIntegratedPipeline0(pipeline);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckIntegratedPipeline0');
@@ -117,7 +126,7 @@ test('CheckIntegratedPipeline0 rejects if AcceptRun Pgen is not the integrated P
 });
 
 test('CheckIntegratedPipeline0 rejects generator canonical byte mismatch during replay', async () => {
-  const pipeline = makeSyntheticIntegratedPipeline0();
+  const pipeline = makeSyntheticIntegratedPipeline0({}, { historicalReplay: true });
 
   pipeline.AcceptRun = {
     ...pipeline.AcceptRun,
@@ -127,7 +136,7 @@ test('CheckIntegratedPipeline0 rejects generator canonical byte mismatch during 
     },
   };
 
-  const out = await CheckIntegratedPipeline0(pipeline);
+  const out = await CheckHistoricalIntegratedPipeline0(pipeline);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckIntegratedPipeline0');
@@ -138,7 +147,7 @@ test('CheckIntegratedPipeline0 rejects generator canonical byte mismatch during 
 });
 
 test('CheckIntegratedPipeline0 rejects bad integrated phase order', async () => {
-  const pipeline = makeSyntheticIntegratedPipeline0();
+  const pipeline = makeSyntheticIntegratedPipeline0({}, { historicalReplay: true });
 
   pipeline.PhaseOrder = [
     ...pipeline.PhaseOrder,
@@ -146,11 +155,23 @@ test('CheckIntegratedPipeline0 rejects bad integrated phase order', async () => 
 
   pipeline.PhaseOrder[0] = 'BadPhase';
 
-  const out = await CheckIntegratedPipeline0(pipeline);
+  const out = await CheckHistoricalIntegratedPipeline0(pipeline);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckIntegratedPipeline0');
   assert.equal(out.Coord, 'CheckIntegratedPipeline0.input');
   assert.deepEqual(out.Path, ['PhaseOrder', 0]);
   assert.equal(out.Witness.reason, 'IntegratedPipeline0 PhaseOrder mismatch');
+});
+
+test('integrated pipeline public routes reject without historical replay opt-in', async () => {
+  for (const out of await Promise.all([
+    CheckIntegratedPipeline0(),
+    RunIntegratedPCC0(),
+  ])) {
+    assert.equal(out.tag, 'reject');
+    assert.match(out.coord, /\.HistoricalReplayRequired$/);
+    assert.equal(out.publicTheoremEmissionAllowed, false);
+    assert.equal(out.finalTheoremReady, false);
+  }
 });

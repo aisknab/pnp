@@ -1,6 +1,11 @@
 # External Review Handoff: Residual-Hardened 7072f8d PNP Proof-Report Release
 
-Status: **ready for hostile external review package handoff after the 7072f8d document-consistency gate.**
+> **Historical assertion-checker record:** This file documents a superseded checker/release surface.
+> It is not current theorem-status authority and does not establish `P = NP`. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical status: **recorded as ready for hostile external review package handoff after the 7072f8d document-consistency gate.**
 
 This note is a cover sheet for reviewers. It is not a substitute for mathematical review. Its purpose is to give reviewers a deterministic path through the repository, the proof-report artefacts, and the specific theorem blocks that should be attacked first.
 
@@ -10,9 +15,9 @@ This note is a cover sheet for reviewers. It is not a substitute for mathematica
 CheckPCCPackexp(GeneratePCCPack())=accept => P = NP
 ```
 
-The release asserts the final theorem under the explicit checker/package acceptance boundary. Reviewers should verify that no public `P = NP` conclusion is emitted before the accepted generated-package antecedent and accepted final proof-report path.
+The historical release asserted the final theorem under the explicit checker/package acceptance boundary. That assertion is preserved here for auditability; it is not current theorem authority. Reviewers of the historical record should verify that it emitted no public `P = NP` conclusion before the accepted generated-package antecedent and accepted final proof-report path.
 
-## Canonical release identifiers
+## Historical canonical release identifiers
 
 ```text
 source commit:
@@ -107,7 +112,7 @@ The main question is whether the locked NAND word really satisfies:
 
 ### 2. Residual-band minimization and ZeroSlack
 
-The residual-band hardening pass now exposes named obligations from Terminal MuBridge through ZeroSlack final closure. Reviewers should attack whether the proof of polynomial residual-band exact minimization is actually complete:
+The historical residual-band hardening pass exposed named obligations from Terminal MuBridge through ZeroSlack final closure. Reviewers of that record should attack whether the proof of polynomial residual-band exact minimization was actually complete:
 
 ```text
 Λ(C0) ≤ O(log |C0|)

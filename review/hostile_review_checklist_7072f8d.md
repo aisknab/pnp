@@ -1,14 +1,19 @@
 # Hostile Review Checklist: 7072f8d Residual-Hardened PNP Release
 
-Purpose: give reviewers a compact checklist for attacking the release. The checklist is adversarial: every item should be treated as a possible failure point.
+> **Historical assertion-checker record:** This file documents a superseded checker/release surface.
+> It is not current theorem-status authority and does not establish `P = NP`. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
 
-## Release boundary
+Historical purpose: give reviewers a compact checklist for attacking the frozen release. The checklist is adversarial: every item should be treated as a possible failure point in that record.
+
+## Historical release boundary
 
 ```text
 CheckPCCPackexp(GeneratePCCPack())=accept => P = NP
 ```
 
-Frozen release:
+Frozen historical release:
 
 ```text
 source tag: final-pnp-proof-report-hardened-7072f8d
@@ -284,7 +289,7 @@ Check:
 - `CheckFinalPNPCertificate0` accepts.
 - `CheckFinalPNPReleaseGate0` accepts.
 - `CheckFinalPNPProofReport0` accepts.
-- Public conclusion is never emitted before accepted package/replay/certificate linkage.
+- The historical public conclusion was never to be emitted before accepted package/replay/certificate linkage.
 
 Failure condition: any public `P = NP` emission before the accepted antecedent chain.
 

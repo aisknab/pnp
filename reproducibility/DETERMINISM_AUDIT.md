@@ -1,6 +1,11 @@
 # Determinism audit
 
-This directory records the current determinism-audit coordinate:
+> **Historical assertion-checker record:** This file documents a superseded checker/release surface.
+> It is not current theorem-status authority and does not establish `P = NP`. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+This directory records the historical determinism-audit coordinate:
 
 ```text
 PNP-DETERMINISM-AUDIT-2026-06-27-01
@@ -41,9 +46,9 @@ stableArtifactDigestsBeforeAfter
 generatedArtifactDigestsRun1Run2
 ```
 
-## CI smoke mode
+## Historical CI smoke mode
 
-The CI workflow uses the same harness with a faster deterministic checker:
+The retired CI workflow used the same harness with a faster deterministic checker:
 
 ```bash
 node scripts/audit-determinism.mjs \
@@ -52,7 +57,7 @@ node scripts/audit-determinism.mjs \
   --generated-artifact artifacts/complexity-ledger/latest-verdict.json
 ```
 
-That verifies the determinism harness without recursively running the full repository verifier twice in every determinism workflow run. Independent reviewers can use the default command when they want the stronger replay.
+That verified the determinism harness without recursively running the full repository verifier twice in every determinism workflow run. Independent reviewers can use the default command when they want the stronger historical replay.
 
 ## Boundary
 

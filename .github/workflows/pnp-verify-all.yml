@@ -6,31 +6,28 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
+concurrency:
+  group: pnp-verify-all-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   pnp-verify-all:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          show-progress: false
+          persist-credentials: false
+          set-safe-directory: false
+      - uses: actions/setup-node@v6
         with:
           node-version: '20'
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
       - name: Run one-command PNP verifier
-        run: |
-          set +e
-          node scripts/pnp-verify-all.mjs --json --skip-unit-tests > pnp-verify-all.stdout.log 2> pnp-verify-all.stderr.log
-          status=$?
-          cat pnp-verify-all.stdout.log
-          cat pnp-verify-all.stderr.log >&2
-          exit "$status"
-      - name: Upload PNP verify-all diagnostics
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: pnp-verify-all-latest-verdict
-          path: |
-            artifacts/pnp-verify-all/latest-verdict.json
-            pnp-verify-all.stdout.log
-            pnp-verify-all.stderr.log
+        run: node scripts/pnp-verify-all.mjs --json --skip-unit-tests

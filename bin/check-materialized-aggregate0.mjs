@@ -3,6 +3,9 @@
 import {
   CheckMaterializedAggregateFile0,
 } from '../pcc-materialized-aggregate0.mjs';
+import { EnforceHistoricalReplayCli0 } from '../pcc-legacy-replay-gate0.mjs';
+
+EnforceHistoricalReplayCli0({ entrypoint: 'bin/check-materialized-aggregate0.mjs' });
 
 const args = process.argv.slice(2);
 const full = args.includes('--full');

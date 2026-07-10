@@ -13,10 +13,12 @@ import {
   digestCanonical0,
 } from '../pcc-verifier-frag0.mjs';
 
+const CheckHistoricalReleaseAudit0 = (config = {}) => CheckReleaseAudit0({ ...config, historicalReplay: true });
+
 test('CheckReleaseAudit0 executes the materialized public status roundtrip gate', async (t) => {
   const outputDir = await makeTempDir0(t);
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -37,7 +39,7 @@ test('CheckReleaseAudit0 executes the materialized public status roundtrip gate'
 });
 
 test('CheckReleaseAudit0 rejects when the materialized public status roundtrip gate rejects', async () => {
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -70,7 +72,7 @@ test('CheckReleaseAudit0 rejects when the materialized public status roundtrip g
 });
 
 test('CheckReleaseAudit0 can explicitly skip the materialized public status roundtrip gate', async () => {
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -86,7 +88,7 @@ test('CheckReleaseAudit0 can explicitly skip the materialized public status roun
 });
 
 test('CheckReleaseAudit0 validates materialized public status gate config shape', async () => {
-  const out = await CheckReleaseAudit0({
+  const out = await CheckHistoricalReleaseAudit0({
     ...makeReleaseAuditConfig0(),
     runMaterializedPublicStatusGate: 'yes',
   });

@@ -44,6 +44,7 @@ function childFailureMessage0(child) {
 test('WriteMaterializedFixtureSet0 writes and verifies all materialized fixture files', async (t) => {
   const outputDir = await makeTempDir0(t);
   const out = await WriteMaterializedFixtureSet0({
+    historicalReplay: true,
     outputDir,
   });
 
@@ -63,6 +64,7 @@ test('generated MaterializedPCCPack0 fixture passes aggregate checking', async (
   const outputDir = await makeTempDir0(t);
 
   await WriteMaterializedFixtureSet0({
+    historicalReplay: true,
     outputDir,
   });
 
@@ -78,11 +80,13 @@ test('generated pending and accepted bridge fixtures pass bridge checking', asyn
   const outputDir = await makeTempDir0(t);
 
   await WriteMaterializedFixtureSet0({
+    historicalReplay: true,
     outputDir,
   });
 
   const pending = await CheckMaterializedAcceptanceBridgeFile0(
     path.join(outputDir, MATERIALIZED_FIXTURE_FILENAMES0.pendingBridge),
+    { historicalReplay: true },
   );
 
   assert.equal(pending.tag, 'accept');
@@ -91,6 +95,7 @@ test('generated pending and accepted bridge fixtures pass bridge checking', asyn
 
   const accepted = await CheckMaterializedAcceptanceBridgeFile0(
     path.join(outputDir, MATERIALIZED_FIXTURE_FILENAMES0.acceptedBridge),
+    { historicalReplay: true },
   );
 
   assert.equal(accepted.tag, 'accept');
@@ -102,6 +107,7 @@ test('WriteMaterializedFixtureSet0 writes canonical package envelope bytes when 
   const outputDir = await makeTempDir0(t);
 
   const out = await WriteMaterializedFixtureSet0({
+    historicalReplay: true,
     outputDir,
     canonicalEnvelopeBytes: true,
   });
@@ -123,12 +129,14 @@ test('WriteMaterializedFixtureSet0 rejects existing file when overwrite is false
   const outputDir = await makeTempDir0(t);
 
   const first = await WriteMaterializedFixtureSet0({
+    historicalReplay: true,
     outputDir,
   });
 
   assert.equal(first.tag, 'accept');
 
   const second = await WriteMaterializedFixtureSet0({
+    historicalReplay: true,
     outputDir,
     overwrite: false,
   });
@@ -141,6 +149,7 @@ test('WriteMaterializedFixtureSet0 rejects existing file when overwrite is false
 
 test('WriteMaterializedFixtureSet0 validates config shape', async () => {
   const out = await WriteMaterializedFixtureSet0({
+    historicalReplay: true,
     outputDir: '',
   });
 
@@ -155,7 +164,7 @@ test('bin/write-materialized-fixtures0.mjs writes fixtures and emits summary', a
   const outputDir = await makeTempDir0(t);
   const cliPath = fileURLToPath(new URL('../bin/write-materialized-fixtures0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, '--out', outputDir], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', '--out', outputDir], {
     encoding: 'utf8',
   });
 
@@ -174,7 +183,7 @@ test('bin/write-materialized-fixtures0.mjs --full emits full accept record', asy
   const outputDir = await makeTempDir0(t);
   const cliPath = fileURLToPath(new URL('../bin/write-materialized-fixtures0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, '--out', outputDir, '--full'], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', '--out', outputDir, '--full'], {
     encoding: 'utf8',
   });
 
@@ -191,7 +200,7 @@ test('bin/write-materialized-fixtures0.mjs --full emits full accept record', asy
 test('npm run materialized:write-fixtures writes fixtures', async (t) => {
   const outputDir = await makeTempDir0(t);
 
-  const child = spawnSync(npmCommand0(), ['run', 'materialized:write-fixtures', '--', outputDir], {
+  const child = spawnSync(npmCommand0(), ['run', 'materialized:write-fixtures', '--', '--historical-replay', outputDir], {
     encoding: 'utf8',
     shell: process.platform === 'win32',
     windowsHide: true,

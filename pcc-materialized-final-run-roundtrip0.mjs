@@ -27,6 +27,8 @@ import {
   WriteMaterializedFinalRunFixtureSet0,
 } from './pcc-materialized-final-run-fixtures0.mjs';
 
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 const CHECKER_VERSION = 0;
 const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
 
@@ -71,6 +73,7 @@ export function makeMaterializedFinalRunRoundtripConfig0(overrides = {}) {
   return {
     kind: 'MaterializedFinalRunRoundtripConfig0',
     version: CHECKER_VERSION,
+    historicalReplay: false,
     outputDir: path.join(process.cwd(), 'materialized-final-run-roundtrip0'),
     canonicalEnvelopeBytes: false,
     overwrite: true,
@@ -83,6 +86,7 @@ export function makeMaterializedFinalRunRoundtripConfig0(overrides = {}) {
 
 export async function CheckMaterializedFinalRunRoundtrip0(config = makeMaterializedFinalRunRoundtripConfig0()) {
   const checker = 'CheckMaterializedFinalRunRoundtrip0';
+  if (config.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const ledger = [];
   const cfg = makeMaterializedFinalRunRoundtripConfig0(config);
 
@@ -105,6 +109,7 @@ export async function CheckMaterializedFinalRunRoundtrip0(config = makeMateriali
   }
 
   const firstWrite = await WriteMaterializedFinalRunFixtureSet0({
+    historicalReplay: true,
     outputDir: cfg.outputDir,
     canonicalEnvelopeBytes: cfg.canonicalEnvelopeBytes,
     overwrite: cfg.overwrite,
@@ -149,6 +154,7 @@ export async function CheckMaterializedFinalRunRoundtrip0(config = makeMateriali
   }
 
   const secondWrite = await WriteMaterializedFinalRunFixtureSet0({
+    historicalReplay: true,
     outputDir: cfg.outputDir,
     canonicalEnvelopeBytes: cfg.canonicalEnvelopeBytes,
     overwrite: true,
@@ -398,7 +404,9 @@ async function verifyDirectFinalRunRoundtrip0(config) {
     }
 
     const filePath = path.join(config.outputDir, file.filename);
-    const record = await CheckMaterializedFinalVerdictFile0(filePath);
+    const record = await CheckMaterializedFinalVerdictFile0(filePath, {
+      historicalReplay: true,
+    });
 
     if (isRejectRecord0(record)) {
       return validationReject0(['files', file.filename], 'final-run roundtrip final verdict file rejected', {
@@ -431,6 +439,7 @@ async function verifyCliFinalRunRoundtrip0(config) {
   const packFile = path.join(config.outputDir, MATERIALIZED_FIXTURE_FILENAMES0.pack);
   const aggregateArgs = [
     path.join(REPO_ROOT, 'bin', 'check-materialized-aggregate0.mjs'),
+    '--historical-replay',
     packFile,
   ];
 
@@ -453,6 +462,7 @@ async function verifyCliFinalRunRoundtrip0(config) {
         filename: file.filename,
         args: [
           path.join(REPO_ROOT, 'bin', 'check-materialized-final-verdict0.mjs'),
+          '--historical-replay',
           path.join(config.outputDir, file.filename),
         ],
         expectedChecker: 'CheckMaterializedFinalVerdictFile0',

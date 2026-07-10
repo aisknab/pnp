@@ -1,12 +1,17 @@
 # Terminology Crosswalk
 
+> **Current authority:** This crosswalk explains terminology in the historical report and checker
+> stack. Definitions, theorem labels, and accepted records cited here are not current proof status.
+> See [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json)
+> and [`FORMAL_RECONSTRUCTION.md`](FORMAL_RECONSTRUCTION.md).
+
 ## Purpose and scope
 
 This document translates the claim-critical terminology used by the canonical report and the proof/checker source into conventional complexity-theory, proof-engineering, formal-methods, and software-assurance language.
 
 It is descriptive, not an endorsement. A definition recorded here states what the repository means by a term; it does not establish that the corresponding theorem or checker rule is correct.
 
-The release-specific source coordinate used for this crosswalk is:
+The historical release-specific source coordinate used for this crosswalk is:
 
 ```text
 source tag:    final-pnp-proof-report-hardened-7072f8d

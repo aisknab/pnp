@@ -27,16 +27,16 @@ function parseJsonFromStdout0(stdout) {
   return JSON.parse(stdout.slice(firstBrace));
 }
 
-test('README documents the materialized public status release gate', async () => {
+test('README classifies the materialized public status gate as historical replay', async () => {
   const readme = await fs.readFile(new URL('../README.md', import.meta.url), 'utf8');
 
-  assert.equal(readme.includes('Internal materialized public status release gate'), true);
-  assert.equal(readme.includes('npm run materialized:public-status-roundtrip'), true);
-  assert.equal(readme.includes('pending  -> no public P = NP conclusion'), true);
-  assert.equal(readme.includes('rejected -> no public P = NP conclusion'), true);
-  assert.equal(readme.includes('accepted -> emits the conditional public conclusion'), true);
+  assert.equal(readme.includes('Formal reconstruction is in progress'), true);
+  assert.equal(readme.includes('public theorem emission is disabled'), true);
+  assert.equal(readme.includes('materialized public-status release gate'), true);
+  assert.equal(readme.includes('Historical full-mode records retain these fields'), true);
+  assert.equal(readme.includes('These are preserved audit fields only'), true);
   assert.equal(readme.includes('separate from synthetic `RunAll0`'), true);
-  assert.equal(readme.includes('CheckPCCPackexp(GeneratePCCPack())=accept implies P = NP'), true);
+  assert.equal(readme.includes('CheckFormalPublicSurface0'), true);
 });
 
 test('package.json exposes materialized public status release gate scripts', async () => {
@@ -54,7 +54,7 @@ test('package.json exposes materialized public status release gate scripts', asy
 test('npm run materialized:public-status-roundtrip emits accepted release-gate summary', async (t) => {
   const outputDir = await makeTempDir0(t);
 
-  const child = spawnSync(npmCommand0(), ['run', 'materialized:public-status-roundtrip', '--', outputDir], {
+  const child = spawnSync(npmCommand0(), ['run', 'materialized:public-status-roundtrip', '--', '--historical-replay', outputDir], {
     encoding: 'utf8',
     shell: process.platform === 'win32',
     windowsHide: true,
@@ -79,7 +79,7 @@ test('npm run materialized:public-status-roundtrip emits accepted release-gate s
 test('npm run materialized:public-status-roundtrip:full emits full accepted release-gate record', async (t) => {
   const outputDir = await makeTempDir0(t);
 
-  const child = spawnSync(npmCommand0(), ['run', 'materialized:public-status-roundtrip:full', '--', outputDir], {
+  const child = spawnSync(npmCommand0(), ['run', 'materialized:public-status-roundtrip:full', '--', '--historical-replay', outputDir], {
     encoding: 'utf8',
     shell: process.platform === 'win32',
     windowsHide: true,

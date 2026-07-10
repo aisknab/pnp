@@ -7,8 +7,19 @@ import { test } from 'node:test';
 import {
   CheckConcreteReleaseAppendix0,
   makeConcreteReleaseAppendix0,
+  makeConcreteReleaseAppendixRecord0,
   writeConcreteReleaseAppendixFiles0,
 } from '../pcc-concrete-release-appendix0.mjs';
+
+const makeHistoricalAppendix0 = (options = {}) => makeConcreteReleaseAppendix0({
+  ...options,
+  historicalReplay: true,
+});
+
+const CheckHistoricalAppendix0 = (input, config = {}) => CheckConcreteReleaseAppendix0(input, {
+  ...config,
+  historicalReplay: true,
+});
 
 import {
   makeReleaseAuditConcreteFinalCertificateGate0,
@@ -61,16 +72,17 @@ async function makeGate0() {
   return makeReleaseAuditConcreteFinalCertificateGate0({
     ReleaseAuditRecord: makeAcceptedReleaseAuditRecord0(),
     runReleaseAudit: false,
+    historicalReplay: true,
   });
 }
 
 test('CheckConcreteReleaseAppendix0 accepts the concrete release appendix', async () => {
   const gate = await makeGate0();
-  const envelope = await makeConcreteReleaseAppendix0({
+  const envelope = await makeHistoricalAppendix0({
     ReleaseAuditConcreteFinalCertificateGateEnvelope: gate,
   });
 
-  const out = await CheckConcreteReleaseAppendix0(envelope);
+  const out = await CheckHistoricalAppendix0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckConcreteReleaseAppendix0');
@@ -149,7 +161,7 @@ test('CheckConcreteReleaseAppendix0 accepts the concrete release appendix', asyn
 
 test('CheckConcreteReleaseAppendix0 rejects public conclusion drift in the appendix', async () => {
   const gate = await makeGate0();
-  const envelope = await makeConcreteReleaseAppendix0({
+  const envelope = await makeHistoricalAppendix0({
     ReleaseAuditConcreteFinalCertificateGateEnvelope: gate,
   });
 
@@ -166,7 +178,7 @@ test('CheckConcreteReleaseAppendix0 rejects public conclusion drift in the appen
     appendixDigest: undefined,
   };
 
-  const out = await CheckConcreteReleaseAppendix0(envelope, {
+  const out = await CheckHistoricalAppendix0(envelope, {
     checkConcreteReleaseGate: false,
     checkLinkage: false,
   });
@@ -179,7 +191,7 @@ test('CheckConcreteReleaseAppendix0 rejects public conclusion drift in the appen
 
 test('CheckConcreteReleaseAppendix0 rejects stale appendix package digest', async () => {
   const gate = await makeGate0();
-  const envelope = await makeConcreteReleaseAppendix0({
+  const envelope = await makeHistoricalAppendix0({
     ReleaseAuditConcreteFinalCertificateGateEnvelope: gate,
   });
 
@@ -197,7 +209,7 @@ test('CheckConcreteReleaseAppendix0 rejects stale appendix package digest', asyn
     appendixDigest: undefined,
   };
 
-  const out = await CheckConcreteReleaseAppendix0(envelope, {
+  const out = await CheckHistoricalAppendix0(envelope, {
     checkConcreteReleaseGate: false,
     checkLinkage: false,
   });
@@ -210,14 +222,14 @@ test('CheckConcreteReleaseAppendix0 rejects stale appendix package digest', asyn
 
 test('CheckConcreteReleaseAppendix0 rejects forbidden fixture marker text', async () => {
   const gate = await makeGate0();
-  const envelope = await makeConcreteReleaseAppendix0({
+  const envelope = await makeHistoricalAppendix0({
     ReleaseAuditConcreteFinalCertificateGateEnvelope: gate,
     overrides: {
       AppendixNote: 'todo marker must reject',
     },
   });
 
-  const out = await CheckConcreteReleaseAppendix0(envelope, {
+  const out = await CheckHistoricalAppendix0(envelope, {
     checkConcreteReleaseGate: false,
   });
 
@@ -228,7 +240,7 @@ test('CheckConcreteReleaseAppendix0 rejects forbidden fixture marker text', asyn
 
 test('CheckConcreteReleaseAppendix0 rejects stale linkage digest', async () => {
   const gate = await makeGate0();
-  const envelope = await makeConcreteReleaseAppendix0({
+  const envelope = await makeHistoricalAppendix0({
     ReleaseAuditConcreteFinalCertificateGateEnvelope: gate,
   });
 
@@ -241,7 +253,7 @@ test('CheckConcreteReleaseAppendix0 rejects stale linkage digest', async () => {
     },
   };
 
-  const out = await CheckConcreteReleaseAppendix0(envelope, {
+  const out = await CheckHistoricalAppendix0(envelope, {
     checkConcreteReleaseGate: false,
   });
 
@@ -264,6 +276,7 @@ test('writeConcreteReleaseAppendixFiles0 writes replayable JSON artefacts', asyn
 
   const result = await writeConcreteReleaseAppendixFiles0(dir, {
     ReleaseAuditConcreteFinalCertificateGateEnvelope: gate,
+    historicalReplay: true,
   });
 
   assert.equal(result.checked.tag, 'accept');
@@ -286,13 +299,26 @@ test('writeConcreteReleaseAppendixFiles0 writes replayable JSON artefacts', asyn
   }
 });
 
+test('concrete release appendix routes reject without historical replay opt-in', async () => {
+  for (const out of await Promise.all([
+    makeConcreteReleaseAppendix0(),
+    makeConcreteReleaseAppendixRecord0(),
+    CheckConcreteReleaseAppendix0(),
+    writeConcreteReleaseAppendixFiles0(),
+  ])) {
+    assert.equal(out.tag, 'reject');
+    assert.match(out.coord, /\.HistoricalReplayRequired$/);
+    assert.equal(out.publicTheoremEmissionAllowed, false);
+  }
+});
+
 test('CheckConcreteReleaseAppendix0 reports concrete HardCheck coverage in the appendix', async () => {
   const gate = await makeGate0();
-  const envelope = await makeConcreteReleaseAppendix0({
+  const envelope = await makeHistoricalAppendix0({
     ReleaseAuditConcreteFinalCertificateGateEnvelope: gate,
   });
 
-  const out = await CheckConcreteReleaseAppendix0(envelope);
+  const out = await CheckHistoricalAppendix0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.NF.hardEnvelopeKind, 'ConcreteMaterializedHardCheck0');
@@ -331,11 +357,11 @@ test('CheckConcreteReleaseAppendix0 rejects appendix without concrete HardCheck 
       noMinCoverageComplete: false,
     };
 
-  const envelope = await makeConcreteReleaseAppendix0({
+  const envelope = await makeHistoricalAppendix0({
     ReleaseAuditConcreteFinalCertificateGateEnvelope: gate,
   });
 
-  const out = await CheckConcreteReleaseAppendix0(envelope, {
+  const out = await CheckHistoricalAppendix0(envelope, {
     checkConcreteReleaseGate: false,
     checkLinkage: false,
   });
@@ -366,11 +392,11 @@ test('CheckConcreteReleaseAppendix0 rejects appendix without concrete KBundle pr
       sigmaProofRefsResolve: false,
     };
 
-  const envelope = await makeConcreteReleaseAppendix0({
+  const envelope = await makeHistoricalAppendix0({
     ReleaseAuditConcreteFinalCertificateGateEnvelope: gate,
   });
 
-  const out = await CheckConcreteReleaseAppendix0(envelope, {
+  const out = await CheckHistoricalAppendix0(envelope, {
     checkConcreteReleaseGate: false,
     checkLinkage: false,
   });
@@ -401,11 +427,11 @@ test('CheckConcreteReleaseAppendix0 rejects appendix without concrete final-inte
       rowFamGCoverageComplete: false,
     };
 
-  const envelope = await makeConcreteReleaseAppendix0({
+  const envelope = await makeHistoricalAppendix0({
     ReleaseAuditConcreteFinalCertificateGateEnvelope: gate,
   });
 
-  const out = await CheckConcreteReleaseAppendix0(envelope, {
+  const out = await CheckHistoricalAppendix0(envelope, {
     checkConcreteReleaseGate: false,
     checkLinkage: false,
   });
@@ -424,11 +450,11 @@ test('CheckConcreteReleaseAppendix0 rejects appendix without CheckPCCPackexp0 im
     generatedPCCPackexpCheckPCCPackexp0GeneratedPackageImplication: false,
   };
 
-  const envelope = await makeConcreteReleaseAppendix0({
+  const envelope = await makeHistoricalAppendix0({
     ReleaseAuditConcreteFinalCertificateGateEnvelope: gate,
   });
 
-  const out = await CheckConcreteReleaseAppendix0(envelope, {
+  const out = await CheckHistoricalAppendix0(envelope, {
     checkConcreteReleaseGate: false,
     checkLinkage: false,
   });
@@ -447,11 +473,11 @@ test('CheckConcreteReleaseAppendix0 rejects appendix without CheckPCCPackexp0 co
     generatedPCCPackexpCheckPCCPackexp0ConcreteCoverageComplete: false,
   };
 
-  const envelope = await makeConcreteReleaseAppendix0({
+  const envelope = await makeHistoricalAppendix0({
     ReleaseAuditConcreteFinalCertificateGateEnvelope: gate,
   });
 
-  const out = await CheckConcreteReleaseAppendix0(envelope, {
+  const out = await CheckHistoricalAppendix0(envelope, {
     checkConcreteReleaseGate: false,
     checkLinkage: false,
   });

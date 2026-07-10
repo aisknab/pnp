@@ -1,14 +1,20 @@
 #!/usr/bin/env node
 
+import { EnforceHistoricalReplayCli0 } from '../pcc-legacy-replay-gate0.mjs';
+
 import {
   writeConcreteFinalAcceptanceReplayFiles0,
 } from '../pcc-final-acceptance-replay0.mjs';
+
+EnforceHistoricalReplayCli0({ entrypoint: 'bin/write-concrete-final-acceptance-replay0.mjs' });
 
 const args = process.argv.slice(2);
 const outDir = args.find((arg) => !arg.startsWith('--')) ?? './concrete-final-acceptance-replay0';
 const full = args.includes('--full');
 
-const result = await writeConcreteFinalAcceptanceReplayFiles0(outDir);
+const result = await writeConcreteFinalAcceptanceReplayFiles0(outDir, {
+  historicalReplay: true,
+});
 
 if (full) {
   console.log(JSON.stringify(result.checked, null, 2));

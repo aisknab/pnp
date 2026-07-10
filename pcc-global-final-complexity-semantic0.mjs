@@ -284,7 +284,7 @@ export async function CheckGlobalFinalComplexitySemantic0(input) {
 
   const finalCall = await callChecker0(
     'CheckFinal0',
-    () => CheckFinal0(input.PCCPack.FinalTheorem),
+    () => CheckFinal0(input.PCCPack.FinalTheorem, { historicalReplay: true }),
   );
   ledger.push(makeLedgerEntry0(
     'CheckFinal0',
@@ -742,7 +742,7 @@ function validateComplexitySourceRecords0(pack) {
 }
 
 async function runFinalNegativeProbe0({ finalTheorem, probeName, mutate }) {
-  const record = await CheckFinal0(mutate(finalTheorem));
+  const record = await CheckFinal0(mutate(finalTheorem), { historicalReplay: true });
   if (record.tag !== 'reject') {
     return validationReject0(
       ['PCCPack', 'FinalTheorem', 'negativeProbe', probeName],

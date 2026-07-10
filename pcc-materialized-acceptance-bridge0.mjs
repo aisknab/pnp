@@ -14,6 +14,8 @@ import {
   makeMaterializedAggregateShell0,
 } from './pcc-materialized-aggregate0.mjs';
 
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 const CHECKER_VERSION = 0;
 
 export const MATERIALIZED_ACCEPTANCE_BRIDGE_PHASES0 = Object.freeze([
@@ -125,7 +127,9 @@ export function makeMaterializedBridgeVerdict0({
   publicConclusionEmitted = false,
   publicConclusion = null,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeMaterializedBridgeVerdict0');
   return {
     kind: 'MaterializedBridgeVerdict0',
     version: CHECKER_VERSION,
@@ -143,7 +147,9 @@ export function makeMaterializedAcceptanceBridge0({
   checkStatus = 'pending-real-check',
   replayVerdict = 'pending',
   overrides = {},
+  historicalReplay = false,
 } = {}) {
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeMaterializedAcceptanceBridge0');
   return {
     kind: 'MaterializedAcceptanceBridge0',
     version: CHECKER_VERSION,
@@ -160,6 +166,7 @@ export function makeMaterializedAcceptanceBridge0({
         : 'pending',
       publicConclusionEmitted: false,
       publicConclusion: null,
+      historicalReplay: true,
     }),
     VerdictPolicy: {
       ...MATERIALIZED_ACCEPTANCE_VERDICT_POLICY0,
@@ -176,7 +183,9 @@ export function makeAcceptedMaterializedAcceptanceBridge0({
   aggregateDigest = null,
   replayDigest = null,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeAcceptedMaterializedAcceptanceBridge0');
   return makeMaterializedAcceptanceBridge0({
     shell,
     checkStatus: 'accepted',
@@ -196,14 +205,17 @@ export function makeAcceptedMaterializedAcceptanceBridge0({
         publicConclusion: {
           ...MATERIALIZED_PACK_PUBLIC_BOUNDARY0,
         },
+        historicalReplay: true,
       }),
       ...overrides,
     },
+    historicalReplay: true,
   });
 }
 
 export async function CheckMaterializedAcceptanceBridge0(bridge, config = {}) {
   const checker = 'CheckMaterializedAcceptanceBridge0';
+  if (config.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const ledger = [];
   const phaseDigests = [];
 
@@ -380,6 +392,7 @@ export async function CheckMaterializedAcceptanceBridge0(bridge, config = {}) {
 
 export async function CheckMaterializedAcceptanceBridgeFile0(filePath, config = {}) {
   const checker = 'CheckMaterializedAcceptanceBridgeFile0';
+  if (config.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const ledger = [];
 
   const loaded = await loadBridgeFile0(filePath, config.loaderConfig ?? {});
@@ -403,7 +416,10 @@ export async function CheckMaterializedAcceptanceBridgeFile0(filePath, config = 
     });
   }
 
-  const checked = await CheckMaterializedAcceptanceBridge0(loaded.value, config);
+  const checked = await CheckMaterializedAcceptanceBridge0(loaded.value, {
+    ...config,
+    historicalReplay: true,
+  });
   const checkResult = recordToValidation0(checked, ['Bridge']);
 
   ledger.push({

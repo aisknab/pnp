@@ -1,14 +1,18 @@
 #!/usr/bin/env node
 
+import { EnforceHistoricalReplayCli0 } from '../pcc-legacy-replay-gate0.mjs';
+
 import {
   writeFinalPNPProofReportFiles0,
 } from '../pcc-final-proof-report0.mjs';
+
+EnforceHistoricalReplayCli0({ entrypoint: 'bin/write-final-pnp-proof-report0.mjs' });
 
 const args = process.argv.slice(2);
 const outDir = args.find((arg) => !arg.startsWith('--')) ?? './final-pnp-proof-report0';
 const full = args.includes('--full');
 
-const result = await writeFinalPNPProofReportFiles0(outDir);
+const result = await writeFinalPNPProofReportFiles0(outDir, { historicalReplay: true });
 
 if (full) {
   console.log(JSON.stringify(result.checked, null, 2));

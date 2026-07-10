@@ -14,9 +14,19 @@ import {
   EmitFinalVerdict0,
 } from '../pcc-accept-run0.mjs';
 
+const makeHistoricalFinalCertificate0 = (options = {}) => makeMaterializedFinalCertificate0({
+  ...options,
+  historicalReplay: true,
+});
+
+const CheckHistoricalFinalCertificate0 = (input, config = {}) => CheckMaterializedFinalCertificate0(input, {
+  ...config,
+  historicalReplay: true,
+});
+
 test('CheckMaterializedFinalCertificate0 accepts a materialized final certificate appendix', async () => {
-  const envelope = await makeMaterializedFinalCertificate0();
-  const out = await CheckMaterializedFinalCertificate0(envelope);
+  const envelope = await makeHistoricalFinalCertificate0();
+  const out = await CheckHistoricalFinalCertificate0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedFinalCertificate0');
@@ -32,8 +42,11 @@ test('CheckMaterializedFinalCertificate0 accepts a materialized final certificat
 });
 
 test('fresh final verdict emission matches the certificate final verdict', async () => {
-  const envelope = await makeMaterializedFinalCertificate0();
-  const emitted = await EmitFinalVerdict0(envelope.GeneratedAcceptRunEnvelope.AcceptRun);
+  const envelope = await makeHistoricalFinalCertificate0();
+  const emitted = await EmitFinalVerdict0(
+    envelope.GeneratedAcceptRunEnvelope.AcceptRun,
+    { historicalReplay: true },
+  );
 
   assert.equal(emitted.tag, 'accept');
   assert.equal(envelope.FinalVerdict.tag, 'accept');
@@ -42,7 +55,7 @@ test('fresh final verdict emission matches the certificate final verdict', async
 });
 
 test('CheckMaterializedFinalCertificate0 rejects a tampered public theorem', async () => {
-  const envelope = await makeMaterializedFinalCertificate0();
+  const envelope = await makeHistoricalFinalCertificate0();
 
   envelope.Certificate = {
     ...envelope.Certificate,
@@ -57,7 +70,7 @@ test('CheckMaterializedFinalCertificate0 rejects a tampered public theorem', asy
     certificateDigest: undefined,
   };
 
-  const out = await CheckMaterializedFinalCertificate0(envelope);
+  const out = await CheckHistoricalFinalCertificate0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedFinalCertificate0');
@@ -66,7 +79,7 @@ test('CheckMaterializedFinalCertificate0 rejects a tampered public theorem', asy
 });
 
 test('CheckMaterializedFinalCertificate0 rejects a tampered final verdict record', async () => {
-  const envelope = await makeMaterializedFinalCertificate0();
+  const envelope = await makeHistoricalFinalCertificate0();
 
   envelope.FinalVerdict = {
     ...envelope.FinalVerdict,
@@ -85,7 +98,7 @@ test('CheckMaterializedFinalCertificate0 rejects a tampered final verdict record
     finalVerdictRecordDigest: undefined,
   };
 
-  const out = await CheckMaterializedFinalCertificate0(envelope);
+  const out = await CheckHistoricalFinalCertificate0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedFinalCertificate0');
@@ -94,7 +107,7 @@ test('CheckMaterializedFinalCertificate0 rejects a tampered final verdict record
 });
 
 test('CheckMaterializedFinalCertificate0 rejects forbidden fixture marker text', async () => {
-  const envelope = await makeMaterializedFinalCertificate0();
+  const envelope = await makeHistoricalFinalCertificate0();
 
   envelope.Certificate = {
     ...envelope.Certificate,
@@ -106,7 +119,7 @@ test('CheckMaterializedFinalCertificate0 rejects forbidden fixture marker text',
     certificateDigest: undefined,
   };
 
-  const out = await CheckMaterializedFinalCertificate0(envelope);
+  const out = await CheckHistoricalFinalCertificate0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedFinalCertificate0');
@@ -115,7 +128,7 @@ test('CheckMaterializedFinalCertificate0 rejects forbidden fixture marker text',
 
 
 test('CheckMaterializedFinalCertificate0 strictly rejects an injected synthetic scaffold marker', async () => {
-  const envelope = await makeMaterializedFinalCertificate0();
+  const envelope = await makeHistoricalFinalCertificate0();
 
   envelope.Certificate = {
     ...envelope.Certificate,
@@ -127,7 +140,7 @@ test('CheckMaterializedFinalCertificate0 strictly rejects an injected synthetic 
     certificateDigest: undefined,
   };
 
-  const out = await CheckMaterializedFinalCertificate0(envelope, {
+  const out = await CheckHistoricalFinalCertificate0(envelope, {
     allowSyntheticScaffoldMarker: false,
   });
 
@@ -139,7 +152,7 @@ test('CheckMaterializedFinalCertificate0 strictly rejects an injected synthetic 
 
 
 test('CheckMaterializedFinalCertificate0 rejects stale linkage digest', async () => {
-  const envelope = await makeMaterializedFinalCertificate0();
+  const envelope = await makeHistoricalFinalCertificate0();
 
   envelope.Linkage = {
     ...envelope.Linkage,
@@ -150,7 +163,7 @@ test('CheckMaterializedFinalCertificate0 rejects stale linkage digest', async ()
     },
   };
 
-  const out = await CheckMaterializedFinalCertificate0(envelope);
+  const out = await CheckHistoricalFinalCertificate0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedFinalCertificate0');
@@ -168,7 +181,9 @@ test('writeMaterializedFinalCertificateFiles0 writes replayable JSON artefacts',
     });
   });
 
-  const result = await writeMaterializedFinalCertificateFiles0(dir);
+  const result = await writeMaterializedFinalCertificateFiles0(dir, {
+    historicalReplay: true,
+  });
 
   assert.equal(result.checked.tag, 'accept');
 
@@ -185,5 +200,17 @@ test('writeMaterializedFinalCertificateFiles0 writes replayable JSON artefacts',
     const value = JSON.parse(text);
 
     assert.equal(typeof value, 'object');
+  }
+});
+
+test('materialized final certificate public routes reject without historical replay opt-in', async () => {
+  for (const out of await Promise.all([
+    makeMaterializedFinalCertificate0(),
+    CheckMaterializedFinalCertificate0(),
+    writeMaterializedFinalCertificateFiles0(),
+  ])) {
+    assert.equal(out.tag, 'reject');
+    assert.match(out.coord, /\.HistoricalReplayRequired$/);
+    assert.equal(out.publicTheoremEmissionAllowed, false);
   }
 });

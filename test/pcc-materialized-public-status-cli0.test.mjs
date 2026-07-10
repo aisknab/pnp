@@ -49,6 +49,7 @@ test('bin/check-materialized-public-status0.mjs emits pending status with no pub
     t,
     'MaterializedAcceptRun0.pending.json',
     makeMaterializedAcceptRun0({
+    historicalReplay: true,
       packFilePath,
       aggregateDigest,
       verdict: 'pending',
@@ -56,7 +57,7 @@ test('bin/check-materialized-public-status0.mjs emits pending status with no pub
   );
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-public-status0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, acceptRunFile], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', acceptRunFile], {
     encoding: 'utf8',
   });
 
@@ -94,6 +95,7 @@ test('bin/check-materialized-public-status0.mjs emits rejected status with no pu
     t,
     'MaterializedAcceptRun0.reject.json',
     makeMaterializedAcceptRun0({
+    historicalReplay: true,
       packFilePath,
       aggregateDigest,
       verdict: 'reject',
@@ -102,7 +104,7 @@ test('bin/check-materialized-public-status0.mjs emits rejected status with no pu
   );
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-public-status0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, acceptRunFile], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', acceptRunFile], {
     encoding: 'utf8',
   });
 
@@ -126,6 +128,7 @@ test('bin/check-materialized-public-status0.mjs emits accepted status and public
     t,
     'MaterializedAcceptRun0.accept.json',
     makeMaterializedAcceptRun0({
+    historicalReplay: true,
       packFilePath,
       aggregateDigest,
       verdict: 'accept',
@@ -133,7 +136,7 @@ test('bin/check-materialized-public-status0.mjs emits accepted status and public
   );
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-public-status0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, acceptRunFile], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', acceptRunFile], {
     encoding: 'utf8',
   });
 
@@ -157,6 +160,7 @@ test('bin/check-materialized-public-status0.mjs --full emits complete public sta
     t,
     'MaterializedAcceptRun0.accept.json',
     makeMaterializedAcceptRun0({
+    historicalReplay: true,
       packFilePath,
       aggregateDigest,
       verdict: 'accept',
@@ -164,7 +168,7 @@ test('bin/check-materialized-public-status0.mjs --full emits complete public sta
   );
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-public-status0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, acceptRunFile, '--full'], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', acceptRunFile, '--full'], {
     encoding: 'utf8',
   });
 
@@ -183,6 +187,7 @@ test('bin/check-materialized-public-status0.mjs --full emits complete public sta
 test('bin/check-materialized-public-status0.mjs rejects public conclusion before accepted replay', async (t) => {
   const { packFilePath, aggregateDigest } = await writeAggregatePack0(t);
   const run = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath,
     aggregateDigest,
     verdict: 'pending',
@@ -199,7 +204,7 @@ test('bin/check-materialized-public-status0.mjs rejects public conclusion before
   const acceptRunFile = await writeTempJsonFile0(t, 'MaterializedAcceptRun0.bad.json', run);
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-public-status0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, acceptRunFile], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', acceptRunFile], {
     encoding: 'utf8',
   });
 
@@ -219,13 +224,14 @@ test('npm run materialized:public-status checks an accepted materialized accept-
     t,
     'MaterializedAcceptRun0.accept.json',
     makeMaterializedAcceptRun0({
+    historicalReplay: true,
       packFilePath,
       aggregateDigest,
       verdict: 'accept',
     }),
   );
 
-  const child = spawnSync(npmCommand0(), ['run', 'materialized:public-status', '--', acceptRunFile], {
+  const child = spawnSync(npmCommand0(), ['run', 'materialized:public-status', '--', '--historical-replay', acceptRunFile], {
     encoding: 'utf8',
     shell: process.platform === 'win32',
     windowsHide: true,
@@ -245,7 +251,7 @@ test('bin/check-materialized-public-status0.mjs rejects invalid JSON accept-run 
   const acceptRunFile = await writeTempTextFile0(t, 'MaterializedAcceptRun0.bad.json', '{ not json');
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-public-status0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, acceptRunFile], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', acceptRunFile], {
     encoding: 'utf8',
   });
 
@@ -262,7 +268,7 @@ test('bin/check-materialized-public-status0.mjs rejects invalid JSON accept-run 
 test('bin/check-materialized-public-status0.mjs exits nonzero without a file path', () => {
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-public-status0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay'], {
     encoding: 'utf8',
   });
 

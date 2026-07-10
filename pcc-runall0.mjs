@@ -1,6 +1,7 @@
 import {
   digestCanonical0,
 } from './pcc-verifier-frag0.mjs';
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
 
 import {
   CheckIntegratedPipeline0,
@@ -67,11 +68,12 @@ export const RUNALL_CHECKER_COVERAGE0 = Object.freeze([
   'RunAll0',
 ]);
 
-export function makeSyntheticRunAllInput0(overrides = {}) {
+export function makeSyntheticRunAllInput0(overrides = {}, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('makeSyntheticRunAllInput0');
   return {
     kind: 'RunAllInput0',
     version: CHECKER_VERSION,
-    Pipeline: makeSyntheticIntegratedPipeline0(),
+    Pipeline: makeSyntheticIntegratedPipeline0({}, { historicalReplay: true }),
     ConcretePCCPack: null,
     RequiredPhaseOrder: INTEGRATED_PIPELINE_PHASES0,
     RequiredCheckers: RUNALL_CHECKER_COVERAGE0,
@@ -82,11 +84,15 @@ export function makeSyntheticRunAllInput0(overrides = {}) {
   };
 }
 
-export async function RunAll0(input = makeSyntheticRunAllInput0()) {
-  return CheckRunAll0(input);
+export async function RunAll0(input, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('RunAll0');
+  input ??= makeSyntheticRunAllInput0({}, { historicalReplay: true });
+  return CheckRunAll0(input, { historicalReplay: true });
 }
 
-export async function CheckRunAll0(input = makeSyntheticRunAllInput0()) {
+export async function CheckRunAll0(input, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('CheckRunAll0');
+  input ??= makeSyntheticRunAllInput0({}, { historicalReplay: true });
   const checker = 'RunAll0';
   const ledger = [];
   const normalized = normalizeRunAllInput0(input);
@@ -134,7 +140,7 @@ export async function CheckRunAll0(input = makeSyntheticRunAllInput0()) {
     }
   }
 
-  const integratedRecord = await CheckIntegratedPipeline0(normalized.Pipeline);
+  const integratedRecord = await CheckIntegratedPipeline0(normalized.Pipeline, { historicalReplay: true });
   const integrated = recordToValidation0(integratedRecord, ['Pipeline']);
 
   ledger.push({
@@ -172,8 +178,8 @@ export async function CheckRunAll0(input = makeSyntheticRunAllInput0()) {
     });
   }
 
-  const concretePCCPack = normalized.ConcretePCCPack ?? await makeConcreteMaterializedPCCPack0();
-  const pccPackexpRecord = await CheckPCCPackexp0(concretePCCPack);
+  const concretePCCPack = normalized.ConcretePCCPack ?? await makeConcreteMaterializedPCCPack0({ historicalReplay: true });
+  const pccPackexpRecord = await CheckPCCPackexp0(concretePCCPack, { historicalReplay: true });
   const pccPackexp = recordToValidation0(pccPackexpRecord, ['ConcretePCCPack']);
 
   ledger.push({
@@ -246,7 +252,7 @@ export async function CheckRunAll0(input = makeSyntheticRunAllInput0()) {
 
 function normalizeRunAllInput0(input) {
   if (input === undefined || input === null) {
-    return makeSyntheticRunAllInput0();
+    return makeSyntheticRunAllInput0({}, { historicalReplay: true });
   }
 
   if (isPlainObject(input) && input.kind === 'IntegratedPipeline0') {
@@ -254,7 +260,7 @@ function normalizeRunAllInput0(input) {
       Pipeline: input,
       ConcretePCCPack: null,
       RequireMaterialized: false,
-    });
+    }, { historicalReplay: true });
   }
 
   if (isPlainObject(input) && input.Pipeline !== undefined) {

@@ -4,6 +4,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import os from 'node:os';
 
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 import {
   digestCanonical0,
   stableStringify0,
@@ -52,8 +54,11 @@ export const RELEASE_AUDIT_REQUIRED_MODULES0 = Object.freeze([
   'pcc-final0.mjs',
   'pcc-pack-sufficiency0.mjs',
   'pcc-accept-run0.mjs',
+  'pcc-accept-run-public0.mjs',
   'pcc-integrated-pipeline0.mjs',
+  'pcc-integrated-pipeline-public0.mjs',
   'pcc-runall0.mjs',
+  'pcc-runall-public0.mjs',
   'pcc-release-audit0.mjs',
   'bin/runall0.mjs',
   'bin/release-audit0.mjs',
@@ -1798,6 +1803,7 @@ export const RELEASE_AUDIT_PHASE_ORDER0 = Object.freeze([
 
 export function makeReleaseAuditConfig0(overrides = {}) {
   return {
+    historicalReplay: false,
     kind: 'ReleaseAuditConfig0',
     version: CHECKER_VERSION,
     rootDir: REPO_ROOT,
@@ -1831,6 +1837,7 @@ export async function CheckReleaseAudit0(config = makeReleaseAuditConfig0()) {
   const checker = 'CheckReleaseAudit0';
   const ledger = [];
   const cfg = makeReleaseAuditConfig0(config);
+  if (cfg.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   let finalCertificatePublicStatusGateNF = null;
   let concreteFinalCertificatePublicStatusGateNF = null;  
   let publicSurfaceFreezeNF = null;
@@ -2596,9 +2603,9 @@ async function validatePackageJson0(cfg) {
 
   const expectedExports = {
     '.': './index.mjs',
-    './runall0': './pcc-runall0.mjs',
-    './integrated-pipeline0': './pcc-integrated-pipeline0.mjs',
-    './accept-run0': './pcc-accept-run0.mjs',
+    './runall0': './pcc-runall-public0.mjs',
+    './integrated-pipeline0': './pcc-integrated-pipeline-public0.mjs',
+    './accept-run0': './pcc-accept-run-public0.mjs',
     './release-audit0': './pcc-release-audit0.mjs',
     './final-certificate0': './pcc-final-certificate-materialized0.mjs',
     './final-certificate-public-status0': './pcc-final-certificate-public-status0.mjs',
@@ -2796,8 +2803,8 @@ async function validateRunAllDeterminism0(cfg) {
     });
   }
 
-  const first = await RunAll0();
-  const second = await RunAll0();
+  const first = await RunAll0(undefined, { historicalReplay: true });
+  const second = await RunAll0(undefined, { historicalReplay: true });
 
   if (first.tag !== 'accept') {
     return validationReject0(['RunAll0', 'first'], 'first RunAll0 execution did not accept', compactReject0(first));
@@ -2829,11 +2836,11 @@ async function validateRunAllMutation0(cfg) {
 
   const input = typeof cfg.mutationInputFactory === 'function'
     ? cfg.mutationInputFactory()
-    : makeSyntheticRunAllInput0();
+    : makeSyntheticRunAllInput0({}, { historicalReplay: true });
 
   const runner = typeof cfg.mutationRunner === 'function'
     ? cfg.mutationRunner
-    : CheckRunAll0;
+    : (value) => CheckRunAll0(value, { historicalReplay: true });
 
   const before = stableStringify0(input);
   const out = await runner(input);
@@ -2864,19 +2871,20 @@ async function validateCliSmoke0(cfg) {
   }
 
   const commands = [
-    ['bin/runall0.mjs'],
-    ['bin/runall0.mjs', '--full'],
-    ['bin/release-audit0.mjs'],
+    { entrypoint: 'bin/runall0.mjs', args: ['--historical-replay'] },
+    { entrypoint: 'bin/runall0.mjs', args: ['--historical-replay', '--full'] },
+    { entrypoint: 'bin/release-audit0.mjs', args: ['--historical-replay'] },
   ];
 
-  for (const args of commands) {
-    const child = spawnSync(process.execPath, args.map((entry) => path.join(cfg.rootDir, entry)), {
+  for (const command of commands) {
+    const args = [path.join(cfg.rootDir, command.entrypoint), ...command.args];
+    const child = spawnSync(process.execPath, args, {
       cwd: cfg.rootDir,
       encoding: 'utf8',
     });
 
     if (child.status !== 0) {
-      return validationReject0(['cli', args[0]], 'release CLI smoke command failed', {
+      return validationReject0(['cli', command.entrypoint], 'release CLI smoke command failed', {
         args,
         stdout: child.stdout,
         stderr: child.stderr,
@@ -2888,7 +2896,7 @@ async function validateCliSmoke0(cfg) {
     try {
       parsed = JSON.parse(child.stdout);
     } catch (error) {
-      return validationReject0(['cli', args[0]], 'release CLI did not emit JSON', {
+      return validationReject0(['cli', command.entrypoint], 'release CLI did not emit JSON', {
         args,
         stdout: child.stdout,
         error: error.message,
@@ -2896,7 +2904,7 @@ async function validateCliSmoke0(cfg) {
     }
 
     if (parsed.tag !== 'accept') {
-      return validationReject0(['cli', args[0]], 'release CLI emitted a non-accept record', {
+      return validationReject0(['cli', command.entrypoint], 'release CLI emitted a non-accept record', {
         args,
         parsed,
       });
@@ -3007,6 +3015,7 @@ async function validateMaterializedPublicStatusGate0(cfg) {
 
   try {
     const record = await runner({
+      historicalReplay: true,
       outputDir,
       canonicalEnvelopeBytes: cfg.materializedPublicStatusGateCanonicalEnvelopeBytes,
       runCliChecks: cfg.materializedPublicStatusGateRunCliChecks,
@@ -3132,15 +3141,17 @@ async function validateMaterializedPublicStatusGate0(cfg) {
         if (cfg.finalCertificatePublicStatusGateOutputDir !== null) {
           const written = await writeFinalCertificatePublicStatusFiles0(
             cfg.finalCertificatePublicStatusGateOutputDir,
+            { historicalReplay: true },
           );
 
           return written.checked;
         }
 
-        const envelope = await makeFinalCertificatePublicStatus0();
+        const envelope = await makeFinalCertificatePublicStatus0({ historicalReplay: true });
 
         return CheckFinalCertificatePublicStatus0(envelope, {
           checkReleaseAuditRecord: false,
+          historicalReplay: true,
         });
       };
 
@@ -3844,17 +3855,19 @@ async function validateConcreteFinalCertificatePublicStatusGate0(cfg) {
         if (cfg.concreteFinalCertificatePublicStatusGateOutputDir !== null) {
           const written = await writeConcreteFinalCertificatePublicStatusFiles0(
             cfg.concreteFinalCertificatePublicStatusGateOutputDir,
+            { historicalReplay: true },
           );
 
           return written.checked;
         }
 
-        const envelope = await makeConcreteFinalCertificatePublicStatus0();
+        const envelope = await makeConcreteFinalCertificatePublicStatus0({ historicalReplay: true });
 
         return CheckConcreteFinalCertificatePublicStatus0(envelope, {
           finalCertificatePublicStatusConfig: {
             checkReleaseAuditRecord: false,
           },
+          historicalReplay: true,
         });
       };
 
