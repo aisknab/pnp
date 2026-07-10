@@ -9,6 +9,8 @@ import PNP.ResidualRoutes
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine
+import PNP.Concrete.Complexity
+import PNP.Concrete.Target
 import PNP.Complexity
 import PNP.SAT
 import PNP.LockedNANDMacros

@@ -10,9 +10,9 @@ CheckPCCPackexp(GeneratePCCPack()) = accept => P = NP
 
 That bridge still depends on five project-specific axioms and does **not** constitute a Lean proof of
 `P = NP`. It is also not a complete Lean reproof of the custom JavaScript checker, the full
-residual-slack package, the complete SAT reduction, or the concrete machine-complexity model. The
-purpose of the Lean track is to replace each trust-base item with a checked theorem in visible
-stages.
+residual-slack package, the complete SAT reduction, or the compiler/refinement connecting the new
+finite charged-pipeline complexity interface to the raw machine kernel. The purpose of the Lean
+track is to replace each trust-base item with a checked theorem in visible stages.
 
 ## Build
 
@@ -44,6 +44,8 @@ lean/PNP/NANDSlack.lean
 lean/PNP/ResidualRoutes.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
+lean/PNP/Concrete/Complexity.lean
+lean/PNP/Concrete/Target.lean
 lean/PNP/Complexity.lean
 lean/PNP/SAT.lean
 lean/PNP/LockedNANDMacros.lean
@@ -62,6 +64,8 @@ lean-audit/PNPBridgeAxiomAudit.lean
 lean-audit/PNPTheoremInventory.lean
 lean-audit/PNPConcreteBitStringAxiomAudit.lean
 lean-audit/PNPConcreteMachineAxiomAudit.lean
+lean-audit/PNPConcreteComplexityAxiomAudit.lean
+lean-audit/PNPConcreteTargetAxiomAudit.lean
 lean-audit/PNPNANDSemanticsAxiomAudit.lean
 lean-audit/PNPNANDEnumeratorAxiomAudit.lean
 lean-audit/PNPNANDTruthTableAxiomAudit.lean
@@ -76,6 +80,7 @@ lean-audit/PNPLockedNANDLocalBaselineAxiomAudit.lean
 lean-audit/PNPLockedNANDThresholdBoundaryAxiomAudit.lean
 docs/lean_nand_semantics.md
 docs/lean_concrete_machine.md
+docs/lean_concrete_complexity.md
 docs/lean_nand_enumerator.md
 docs/lean_locked_nand_macros.md
 docs/lean_locked_nand_prefix.md
@@ -85,13 +90,35 @@ docs/lean_residual_routes.md
 docs/lean_theorem_inventory.md
 ```
 
-## Concrete machine foundation and legacy complexity bridge
+## Concrete machine foundation, charged complexity interface, and legacy bridge
 
 `lean/PNP/Concrete/BitString.lean` defines canonical executable bitstring codecs and natural
 polynomial syntax. `lean/PNP/Concrete/Machine.lean` defines finite rule-list machine programs,
 focused-tape configurations, fuel-bounded execution, three-way verdicts, and proof-bearing
 `PolynomialTimeMachine` witnesses. All 79 explicit declarations have empty axiom closures. See
 [`lean_concrete_machine.md`](./lean_concrete_machine.md) for the exact boundary.
+
+`lean/PNP/Concrete/Complexity.lean` adds a finite charged interpreter interface. Function and
+decision syntax trees have concrete `Machine` leaves and explicit `NatPolynomial` budgets.
+Proof-bearing wrappers bound runtime, intermediate-output handoff/copy cost, output size, and
+certificate size. Verifiers use either canonical `BitString.pair input certificate` input or the
+input-only mode needed for a deterministic decider that ignores the empty certificate. The module
+constructs:
+
+```text
+PNP.Concrete.p_subset_np
+PNP.Concrete.reduction_refl
+PNP.Concrete.reduction_comp
+PNP.Concrete.reduction_transports_p
+PNP.Concrete.np_complete_in_p_implies_p_eq_np
+```
+
+All 50 explicit complexity declarations have empty axiom closures. The two declarations in
+`lean/PNP/Concrete/Target.lean` are also axiom-free: `PNP.Main.ConcretePEqualsNP` is an inactive
+definition naming mutual inclusion, and `PNP.Main.concretePEqualsNP_iff` pins its expansion. This
+does not compile or refine a composite pipeline into one raw single-tape machine, so
+`Formal.ConcreteComplexityMachineLink` remains blocked. See
+[`lean_concrete_complexity.md`](./lean_concrete_complexity.md).
 
 `lean/PNP/Complexity.lean` defines the witness-level objects:
 
@@ -122,9 +149,9 @@ theorem np_complete_in_p_implies_p_eq_np
 ```
 
 These legacy witness objects still use abstract code handles and are not connected to the new
-machine kernel. Concrete P/NP classes, verifiers, certificate bounds, and reductions remain future
-work. In particular, the abstract proposition `PNP.PEqualsNP` is not eligible for the concrete
-publication gate.
+machine kernel or charged interface. They remain publication-ineligible historical bridge
+objects. The finite `PNP.Concrete.*` definitions above, rather than abstract `PNP.PEqualsNP`, are
+the current concrete target vocabulary.
 
 ## Root status
 
@@ -143,19 +170,23 @@ dependency evidence. The deterministic output is mirrored byte-for-byte at
 [`status/LEAN_THEOREM_INVENTORY.json`](../status/LEAN_THEOREM_INVENTORY.json) and
 [`public/pnp-theorem-inventory.json`](../public/pnp-theorem-inventory.json).
 
-For the seven earned intermediate rows, the inventory also carries 28 detailed theorem types. Credit
+For the eight earned intermediate rows, the inventory also carries 34 detailed theorem types. Credit
 requires exact names/kinds, empty axiom closures, per-name domain-separated kernel-type SHA-256
 matches, and the pinned closure of all Lean sources plus toolchain/Lake pins and the inventory
-probe. This milestone binding is separate from the concrete publication gate.
+probe. The current compiled environment contains 2,484 declarations, 883 theorems, 793
+assumption-free theorems, five axioms, 26 source modules, and 36 excluded private declarations.
+This milestone binding is separate from the concrete publication gate; eight of eleven rows are
+earned.
 
 Publication is controlled by a separate, fail-closed gate for compatibility declaration
-`PNP.Main.p_eq_np` and concrete target `PNP.Main.ConcretePEqualsNP`. Both are absent. The expected
-target type/value, root type, axiom-closure, and source-closure fingerprints are intentionally
-`null`; unset fingerprints do not match and cannot activate the gate. The abstract
-`PNP.PEqualsNP` bridge remains ineligible. See
+`PNP.Main.p_eq_np` and concrete target `PNP.Main.ConcretePEqualsNP`. The target is present as an
+axiom-free definition, but the compatibility/root theorem is absent. The expected target
+type/value, root type, axiom-closure, and source-closure fingerprints are intentionally `null`;
+unset fingerprints do not match and cannot activate the gate. Raw-machine linkage is still
+ineligible, and the abstract `PNP.PEqualsNP` bridge remains ineligible. See
 [`lean_theorem_inventory.md`](./lean_theorem_inventory.md) for the full contract and commands.
 
-The inventory and false gate generate the current root TeX/PDF: a concise six-page
+The inventory and false gate generate the current root TeX/PDF: a concise seven-page
 formal-reconstruction report with no theorem emission. It replaces the historical 56-page claim
 manuscript at the repository root; that historical artifact is available only through the pinned
 legacy coordinate recorded under [`archive/legacy-v0/`](../archive/legacy-v0/README.md).
@@ -448,19 +479,23 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 1. P is a subset of NP in the witness model.
 2. Polynomial reductions transport P membership in the witness model.
 3. An NP-complete language in P implies P = NP.
-4. SAT-in-NP plus SAT hardness gives SAT NP-completeness.
-5. The displayed local locked-NAND macro Boolean identities.
-6. Single-instance macro output distinctness and nonconstant/nonprojection checks.
-7. The two-gate prefix conjunction semantics.
-8. Exact supplied-list prefix coverage and the true-iff-all-checks theorem.
-9. The exact 2(n-1) prefix gate count for nonempty check lists.
-10. Prefix-node exposed-output distinctness and nonconstant/nonprojection checks.
-11. Conditional composition from PCCMin through residual band, locked NAND, SAT, and the witness-model equality proposition, assuming the disclosed project axioms.
-12. Typed direct-wire realizations of all six local locked-NAND gadgets, with honest output widths and constant-free internal syntax.
-13. The semantic direct-wire lower bound `outputs ≤ gates` and conditional exactness for square baseline candidates.
-14. Source-derived locked-baseline occurrence, check, prefix, and displayed-gate accounting.
-15. Finite baseline conditions and exact reference minima for the five square local macros, excluding the one-output final conjunction.
-16. The conditional locked-NAND unsat/sat minimum boundary and residual-slack-at-most-four deduction from six explicit typed semantic premises.
+4. The same three closure results for the finite charged-pipeline model, with concrete program
+   construction rather than closure fields.
+5. Identity and composition of polynomial reductions, including polynomial substitution and
+   intermediate-output handoff cost.
+6. SAT-in-NP plus SAT hardness gives SAT NP-completeness in the legacy witness layer.
+7. The displayed local locked-NAND macro Boolean identities.
+8. Single-instance macro output distinctness and nonconstant/nonprojection checks.
+9. The two-gate prefix conjunction semantics.
+10. Exact supplied-list prefix coverage and the true-iff-all-checks theorem.
+11. The exact 2(n-1) prefix gate count for nonempty check lists.
+12. Prefix-node exposed-output distinctness and nonconstant/nonprojection checks.
+13. Conditional composition from PCCMin through residual band, locked NAND, SAT, and the witness-model equality proposition, assuming the disclosed project axioms.
+14. Typed direct-wire realizations of all six local locked-NAND gadgets, with honest output widths and constant-free internal syntax.
+15. The semantic direct-wire lower bound `outputs ≤ gates` and conditional exactness for square baseline candidates.
+16. Source-derived locked-baseline occurrence, check, prefix, and displayed-gate accounting.
+17. Finite baseline conditions and exact reference minima for the five square local macros, excluding the one-output final conjunction.
+18. The conditional locked-NAND unsat/sat minimum boundary and residual-slack-at-most-four deduction from six explicit typed semantic premises.
 ```
 
 ## Explicit trust base after this pass
@@ -471,7 +506,8 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 3. The locked-NAND-to-residual-band reduction theorem.
 4. The global SAT-to-locked-NAND builder and threshold theorem beyond the checked local macro and prefix semantics.
 5. SAT NP-hardness for concrete complexity definitions.
-6. Semantic adequacy of the witness model relative to a concrete machine model.
+6. A compiler/refinement proving that every finite charged function, decision, and verifier
+   pipeline is implemented with the stated costs by the selected raw machine model.
 ```
 
 ## Next formalization targets
@@ -484,7 +520,8 @@ The highest-value next targets are:
 3. Prove first-output preservation, `TraceEquivalence`, and the two derived final-output laws.
 4. Instantiate the conditional boundary uniformly and prove the report threshold theorem.
 5. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
-6. Replace witness handles with concrete machine syntax and polynomial-bound semantics.
+6. Compile/refine the finite charged-pipeline interface to raw machine programs while preserving
+   semantics and polynomial runtime/output bounds.
 7. Formalize or import SAT NP-hardness for those definitions.
 8. Formalize checker/reflection soundness for the PCC package.
 ```

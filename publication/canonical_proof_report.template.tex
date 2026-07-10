@@ -52,10 +52,10 @@
   \vspace{0.3cm}
   {\LARGE\bfseries\color{statusred} The repository does not currently establish $P=NP$.\par}
   \vspace{0.3cm}
-  Public theorem emission is disabled. The concrete publication gate is fail-closed because no
-  audited concrete complexity target or reviewed kernel fingerprints exist in this reconstruction.
-  The abstract string-handle bridge is not a standard P-versus-NP formalization and is never an
-  activation source.
+  Public theorem emission is disabled. An audited concrete complexity target now exists, but the
+  charged pipeline has not been linked to the raw machine kernel, its reviewed activation
+  fingerprints are unset, and no root theorem exists. The abstract string-handle bridge is not a
+  standard P-versus-NP formalization and is never an activation source.
   \vspace{0.3cm}
   \end{minipage}
 }
@@ -85,7 +85,8 @@ compiled \code{PNP} environment under \code{leanprover/lean4:v4.31.0}. The expor
 for every exported project declaration. The committed inventory is
 \code{status/LEAN\_THEOREM\_INVENTORY.json}; the public mirror is byte-identical.
 
-The target remains $P=NP$, but target wording is not theorem evidence. JavaScript acceptance,
+The target remains $P=NP$, but target wording---including the new inactive definition
+\code{PNP.Main.ConcretePEqualsNP}---is not theorem evidence. JavaScript acceptance,
 Boolean fields, JSON strings, historical release records, report prose, and external review cannot
 activate a theorem. Only the separately derived concrete publication gate may control theorem
 emission, and that gate is currently false.
@@ -110,7 +111,9 @@ Machine field & Current value \\
 The compatibility entry is \code{PNP.Main.p\_eq\_np}; a matching name alone is insufficient.
 The separate publication target is \code{PNP.Main.ConcretePEqualsNP}. Eligibility also requires
 the exact theorem type, reviewed kernel fingerprints, and a tightly fixed Lean-standard axiom
-closure. No dummy concrete target is introduced by this report.
+closure. The target is present as an inactive definition backed by finite charged-pipeline
+semantics; its presence is not a proof, and the compiler/refinement link to the raw machine kernel
+remains an explicit blocker.
 
 The expected fingerprints are intentionally unset. This is a fail-closed migration gate, not a
 missing runtime input. A verifier must reject any attempt to set \code{passed=true} while a
@@ -145,6 +148,12 @@ The current \code{PNP.PEqualsNP} abbreviation compares witness classes whose lan
 algorithm structures carry string names or code handles rather than concrete execution semantics
 and proved polynomial bounds. Consequently, even a kernel-clean theorem of that abstract type
 would not establish the standard P-versus-NP statement. It is compatibility information only.
+
+The separate \code{PNP.Concrete.PEqualsNP} target uses proof-bearing P and NP witnesses,
+canonical input/certificate pairing, finite program syntax, and charged polynomial runtime and
+output bounds. This is a substantive formalization milestone, but it is not yet proved equivalent
+to execution in the raw machine kernel. SAT completeness, SAT in P, and the root theorem also
+remain absent.
 
 \section{Formal milestone ledger}
 
@@ -218,6 +227,7 @@ Archive manifest & \code{archive/legacy-v0/ARCHIVE.json} \\
 \end{tabular}
 }
 
+\newpage
 \section{Verification}
 
 The current reconstruction can be checked with:

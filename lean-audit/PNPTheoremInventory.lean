@@ -67,6 +67,11 @@ private def reviewedMilestoneTheoremNames : Array Name := #[
   `PNP.Concrete.NatPolynomial.eval_mono,
   `PNP.Concrete.PolynomialTimeMachine.verdict_accepts_iff,
   `PNP.Concrete.PolynomialTimeMachine.verdict_ne_timeout,
+  `PNP.Concrete.np_complete_in_p_implies_p_eq_np,
+  `PNP.Concrete.p_subset_np,
+  `PNP.Concrete.reduction_comp,
+  `PNP.Concrete.reduction_refl,
+  `PNP.Concrete.reduction_transports_p,
   `PNP.Concrete.run_succ,
   `PNP.Concrete.run_zero,
   `PNP.DirectWire.ConditionalThresholdBoundaryPremises.fullResidualSlack_le_four,
@@ -90,7 +95,8 @@ private def reviewedMilestoneTheoremNames : Array Name := #[
   `PNP.DirectWire.residualSlack_eq_zero_iff_minimum,
   `PNP.DirectWire.strictEquivalentGainBool_complete,
   `PNP.DirectWire.traceDirect_referenceMinimum,
-  `PNP.DirectWire.unresolved_positiveSlack_regression
+  `PNP.DirectWire.unresolved_positiveSlack_regression,
+  `PNP.Main.concretePEqualsNP_iff
 ]
 
 private def inventory : CommandElabM Json := do
@@ -149,7 +155,7 @@ private def inventory : CommandElabM Json := do
   return Json.mkObj [
     ("kind", toJson "PNPLeanTheoremInventory0"),
     ("version", toJson 0),
-    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-07-10-11"),
+    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-07-10-12"),
     ("leanToolchain", toJson "leanprover/lean4:v4.31.0"),
     ("rootModule", toJson "PNP"),
     ("environmentProbeComplete", toJson true),

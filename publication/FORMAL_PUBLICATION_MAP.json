@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-10-11",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-10-12",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,12 +17,17 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "6daa2a068fedab6cf0bda8da63267a220e8f6ab6568a8881f9d00872bd251a54",
+  "milestoneSourceClosureSha256": "0b48d081b1b9ab050184c895c7e1b99ed118c56c9737c7a76a5580dc1bf001be",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.NatPolynomial.eval_mono": "08eef194a6dad5f3443646446dd9aa44bb62f71881897bd2721f5e10b0ed31ca",
     "PNP.Concrete.PolynomialTimeMachine.verdict_accepts_iff": "d99481e6c7e062b5faf06d8bdb544efa434e2528ba40dfb6f87f9ccced49b56f",
     "PNP.Concrete.PolynomialTimeMachine.verdict_ne_timeout": "ba634559b6494abc43978e3b34abf1f94b9d2e4cc3aa0856db8d5de36cefd1c5",
+    "PNP.Concrete.np_complete_in_p_implies_p_eq_np": "3026a17865cacc2dc65ad62f38e735451ad7009c062c3ff364169c3875c56f9e",
+    "PNP.Concrete.p_subset_np": "ff7fb433d85b53c61c1409ffbfa47b22a1d8184b11ae18f11895b972ad6f6bed",
+    "PNP.Concrete.reduction_comp": "ca5ad5f4ccae69b3efa95b875f6561a934b8b81dffd76583bd344f5938235d2c",
+    "PNP.Concrete.reduction_refl": "3bcdd49c7ca5f508332dddce237b43280d0ea8fbfa64896596b81ce43a9b2d79",
+    "PNP.Concrete.reduction_transports_p": "5c930ff45067a6e600af61554aea6a35c1661bee7b1560569a4ebbac9c02f3ac",
     "PNP.Concrete.run_succ": "72236da903c3e3624c0af9e8b449eb01125cbcdab0af647740ce1fe0323bceba",
     "PNP.Concrete.run_zero": "ce3d03f0ec30dd3e26a6a0029ee52e09b12fe84fe77c4742a86447d24edf36ec",
     "PNP.DirectWire.ConditionalThresholdBoundaryPremises.fullResidualSlack_le_four": "824e81b304d52fb83d75e95ac136e06ced495ab460d6d621503e2444ee08c93e",
@@ -46,7 +51,8 @@
     "PNP.DirectWire.residualSlack_eq_zero_iff_minimum": "8ea9f50b981a61811209e0a3d8cbe820b6a1793fc42b9eb6121519bc98414b84",
     "PNP.DirectWire.strictEquivalentGainBool_complete": "849f9dfaa63acbd5f7bcdf28eac5552c2862aba5994727b2535cc0832bc796ec",
     "PNP.DirectWire.traceDirect_referenceMinimum": "cbef9349e46dd570d0e02c81170ea1257f3d1a76a49db39123074892e3196ea2",
-    "PNP.DirectWire.unresolved_positiveSlack_regression": "db564cb64914fa82c134c8e4e2dfbef40a143e1fe78b2ceb8f81dece3b895977"
+    "PNP.DirectWire.unresolved_positiveSlack_regression": "db564cb64914fa82c134c8e4e2dfbef40a143e1fe78b2ceb8f81dece3b895977",
+    "PNP.Main.concretePEqualsNP_iff": "66d644a7be721e907db2bf854137ac76150c5ad3284aca8fccad8b7ee36ca364"
   },
   "milestones": [
     {
@@ -62,7 +68,22 @@
         "PNP.Concrete.run_succ",
         "PNP.Concrete.run_zero"
       ],
-      "nonClaim": "This foundation does not yet define concrete P, NP, reductions, SAT, NP-completeness, or P = NP."
+      "nonClaim": "This foundation alone does not define concrete P, NP, reductions, SAT, NP-completeness, or P = NP."
+    },
+    {
+      "id": "concrete-complexity-classes",
+      "title": "Concrete P, NP, and polynomial reductions",
+      "classification": "formalized-with-machine-link-pending",
+      "scope": "Bitstring languages, finite charged decision/verifier/function pipelines grounded in concrete machines, polynomial certificate/runtime/output bounds, many-one reductions, and the NP-complete-in-P implication.",
+      "requiredTheorems": [
+        "PNP.Concrete.np_complete_in_p_implies_p_eq_np",
+        "PNP.Concrete.p_subset_np",
+        "PNP.Concrete.reduction_comp",
+        "PNP.Concrete.reduction_refl",
+        "PNP.Concrete.reduction_transports_p",
+        "PNP.Main.concretePEqualsNP_iff"
+      ],
+      "nonClaim": "The charged pipeline is not yet proved to compile or refine to one raw machine; concrete SAT and the publication root theorem remain absent."
     },
     {
       "id": "direct-wire-semantics",
@@ -165,11 +186,11 @@
       "id": "concrete-publication-root",
       "title": "Concrete standard P-versus-NP target and root theorem",
       "classification": "not-formalized",
-      "scope": "Concrete machine semantics, complexity classes, SAT, reductions, and the publication root theorem.",
+      "scope": "Raw-machine-linked complexity classes, concrete SAT completeness and a SAT decider, plus the publication root theorem.",
       "requiredTheorems": [
         "PNP.Main.p_eq_np"
       ],
-      "nonClaim": "The current string-handle PNP.PEqualsNP bridge is nonstandard and publication-ineligible."
+      "nonClaim": "The concrete target definition is inactive: raw-machine linkage, concrete SAT completeness/deciding, and PNP.Main.p_eq_np remain absent; the legacy string-handle bridge is ineligible."
     }
   ]
 }

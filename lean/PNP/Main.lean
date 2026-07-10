@@ -13,12 +13,12 @@ structure RootTheoremStatus where
 /-- The conservative root status for the active formal reconstruction. -/
 def rootTheoremStatus : RootTheoremStatus :=
   { phase := "formal-reconstruction-in-progress"
-    standardStatementFormalized := false
+    standardStatementFormalized := true
     unconditionalProofPresent := false
     externalAssumptionsRemain := true
     publicTheoremReleased := false
     blockers := [
-      "Concrete machine model and standard P/NP definitions",
+      "Complexity pipeline compilation/refinement to raw machine semantics",
       "Executable checker/reflection soundness",
       "PCCMin and ZeroSlack semantic soundness and polynomial bounds",
       "Residual-band reduction",
