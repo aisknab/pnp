@@ -4,6 +4,8 @@ coverage/
 dist/
 build/
 .cache/
+.lake/
+lake-manifest.json
 
 .env
 .env.*

@@ -1,3 +1,4 @@
+import PNP.Main
 import PNP.Complexity
 import PNP.SAT
 import PNP.LockedNANDMacros

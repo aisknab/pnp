@@ -22,7 +22,7 @@ namespace PNP
 A later pass should replace this abstract language handle by a concrete encoding
 of direct-wire words, residual-band promises, thresholds, and exact-minimization
 answers. -/
-constant ResidualBandExactMinimization : Language
+axiom ResidualBandExactMinimization : Language
 
 /-- Trust object for the reduction from locked NAND threshold instances to the
 residual-band exact minimization decision language.

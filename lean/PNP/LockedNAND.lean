@@ -23,7 +23,7 @@ namespace PNP
 /-- The locked NAND threshold decision language from the report's SAT embedding
 section.  Later passes should replace this abstract language handle by a
 concrete encoding of locked NAND instances and thresholds. -/
-constant LockedNANDThreshold : Language
+axiom LockedNANDThreshold : Language
 
 /-- The concrete local macro layer has a Lean-constructed proof certificate. -/
 theorem locked_nand_macro_layer_checked : LockedNANDMacroCertificate :=

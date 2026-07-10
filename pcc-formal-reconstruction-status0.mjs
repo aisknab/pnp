@@ -7,13 +7,12 @@ import process from 'node:process';
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-02';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-03';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
 
 export const FORMAL_RECONSTRUCTION_BLOCKERS0 = Object.freeze([
-  'Formal.PinnedLeanBuildAndRootTarget',
   'Formal.ConcreteComplexityModel',
   'Formal.ConcreteSAT',
   'Formal.LockedNANDThreshold',
@@ -23,18 +22,29 @@ export const FORMAL_RECONSTRUCTION_BLOCKERS0 = Object.freeze([
   'Formal.RootTheoremAndAxiomAudit',
 ]);
 
+const PROJECT_SPECIFIC_AXIOM_INVENTORY = Object.freeze([
+  'PNP.SAT',
+  'PNP.LockedNANDThreshold',
+  'PNP.ResidualBandExactMinimization',
+  'PNP.GeneratePCCPack',
+  'PNP.CheckPCCPackexp',
+]);
+
 const VERIFICATION_COMMANDS = Object.freeze([
   'node pcc-formal-reconstruction-status0.mjs --json',
   'node pcc-formal-public-surface0.mjs --json',
   'npm run legacy:v0:check',
   'npm run pnp:verify -- --no-write',
+  'node --test audits/lean-root-target0.test.mjs',
   'lake build PNP',
+  'lake env lean -DwarningAsError=true lean-audit/PNPBridgeAxiomAudit.lean',
 ]);
 
 const NON_CLAIMS = Object.freeze([
   'The repository does not currently establish P = NP.',
   'Legacy JavaScript checker acceptance verifies assertion-bearing records under implemented predicates; it is not a formal proof of the named mathematical propositions.',
   'The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.',
+  'The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
   'The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.',
@@ -165,6 +175,20 @@ const EXACT_FIELDS = Object.freeze({
   uniformFinalSoundnessProved: false,
   satInPConclusionAccepted: false,
   pEqualsNPConclusionAccepted: false,
+  leanToolchain: 'leanprover/lean4:v4.31.0',
+  leanCompilerVersion: '4.31.0',
+  leanCompilerCommit: '68218e876d2a38b1985b8590fff244a83c321783',
+  lakeVersion: '5.0.0-src+68218e8',
+  elanVersion: '4.2.3',
+  elanReleaseCommit: 'b6cec7e10fe4965a605aaf60d1cb4a5837f0462b',
+  elanArchiveSha256: 'df0b2b3a439961ffcbb3985214365ffe40f49bc871df04dff268c7d8e21ca8b2',
+  leanBuildTarget: 'PNP',
+  leanRootModule: 'PNP',
+  leanRootStatusDeclaration: 'PNP.Main.rootTheoremStatus',
+  leanBuildConfigurationPinned: true,
+  explicitLeanRootTargetPresent: true,
+  leanLibraryTargetBuilt: true,
+  leanSourcePlaceholderAuditPassed: true,
   rootLeanTheorem: 'PNP.Main.p_eq_np',
   rootLeanTheoremPresent: false,
   rootLeanTheoremBuilt: false,
@@ -178,7 +202,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-10-LEGACY-V0-ARCHIVED-02',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-10-PINNED-LEAN-ROOT-03',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -240,10 +264,25 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       uniformFinalSoundnessProved: false,
       satInPConclusionAccepted: false,
       pEqualsNPConclusionAccepted: false,
+      leanToolchain: 'leanprover/lean4:v4.31.0',
+      leanCompilerVersion: '4.31.0',
+      leanCompilerCommit: '68218e876d2a38b1985b8590fff244a83c321783',
+      lakeVersion: '5.0.0-src+68218e8',
+      elanVersion: '4.2.3',
+      elanReleaseCommit: 'b6cec7e10fe4965a605aaf60d1cb4a5837f0462b',
+      elanArchiveSha256: 'df0b2b3a439961ffcbb3985214365ffe40f49bc871df04dff268c7d8e21ca8b2',
+      leanBuildTarget: 'PNP',
+      leanRootModule: 'PNP',
+      leanRootStatusDeclaration: 'PNP.Main.rootTheoremStatus',
+      leanBuildConfigurationPinned: true,
+      explicitLeanRootTargetPresent: true,
+      leanLibraryTargetBuilt: true,
+      leanSourcePlaceholderAuditPassed: true,
       rootLeanTheoremPresent: false,
       rootLeanTheoremBuilt: false,
       rootLeanTheoremAxiomAuditPassed: false,
       projectSpecificAxiomsRemaining: true,
+      projectSpecificAxiomInventory: [...PROJECT_SPECIFIC_AXIOM_INVENTORY],
       externalReviewIsMathematicalPremise: false,
       legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
       legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
@@ -277,6 +316,7 @@ function validateStatus0(status, label) {
     'subordinateLegacySurfaceRoots',
     'remainingFormalObligations',
     'remainingBlockers',
+    'projectSpecificAxiomInventory',
     'verificationCommands',
     'nonClaims',
   ].sort();
@@ -317,6 +357,12 @@ function validateStatus0(status, label) {
   }
   if (!sameArray0(status.subordinateLegacySurfaceRoots, SUBORDINATE_LEGACY_SURFACE_ROOTS)) {
     return reject0('FormalReconstructionStatus.LegacySurfaceRoots', [label, 'subordinateLegacySurfaceRoots'], 'subordinate legacy surface root list mismatch');
+  }
+  if (!sameArray0(status.projectSpecificAxiomInventory, PROJECT_SPECIFIC_AXIOM_INVENTORY)) {
+    return reject0('FormalReconstructionStatus.ProjectSpecificAxiomInventory', [label, 'projectSpecificAxiomInventory'], 'project-specific axiom inventory mismatch', {
+      expected: PROJECT_SPECIFIC_AXIOM_INVENTORY,
+      actual: status.projectSpecificAxiomInventory,
+    });
   }
   if (!sameArray0(status.remainingFormalObligations, FORMAL_RECONSTRUCTION_BLOCKERS0)) {
     return reject0('FormalReconstructionStatus.FormalObligations', [label, 'remainingFormalObligations'], 'formal obligations mismatch');

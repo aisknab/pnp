@@ -20,6 +20,7 @@ const OUTPUT = 'artifacts/pnp-verify-all/latest-verdict.json';
 export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/formal-reconstruction-status0.test.mjs',
   'audits/formal-public-surface0.test.mjs',
+  'audits/lean-root-target0.test.mjs',
   'audits/legacy-v0-archive0.test.mjs',
   'test/current-package-surface0.test.mjs',
   'test/current-verifier0.test.mjs',

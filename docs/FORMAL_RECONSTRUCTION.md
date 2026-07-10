@@ -32,6 +32,13 @@ development, complete locked-NAND threshold theorem, residual-band exact minimiz
 proof, or polynomial runtime and certificate-size bounds. It also does not expose a root theorem
 `PNP.Main.p_eq_np` with an acceptable axiom audit.
 
+The repository now pins `leanprover/lean4:v4.31.0` and builds the explicit `PNP` library root. That
+root imports every tracked Lean source module. `PNP.Main.rootTheoremStatus` is assumption-free data
+recording that the theorem is not released; it is not the target theorem. The current conditional
+bridge still depends on five disclosed project-specific axioms: `PNP.SAT`,
+`PNP.LockedNANDThreshold`, `PNP.ResidualBandExactMinimization`, `PNP.GeneratePCCPack`, and
+`PNP.CheckPCCPackexp`.
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-02');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-03');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -25,14 +25,60 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.uniformFinalSoundnessProved, false);
   assert.equal(out.satInPConclusionAccepted, false);
   assert.equal(out.pEqualsNPConclusionAccepted, false);
+  assert.equal(out.leanToolchain, 'leanprover/lean4:v4.31.0');
+  assert.equal(out.leanCompilerVersion, '4.31.0');
+  assert.equal(out.leanCompilerCommit, '68218e876d2a38b1985b8590fff244a83c321783');
+  assert.equal(out.lakeVersion, '5.0.0-src+68218e8');
+  assert.equal(out.elanVersion, '4.2.3');
+  assert.equal(out.elanReleaseCommit, 'b6cec7e10fe4965a605aaf60d1cb4a5837f0462b');
+  assert.equal(out.elanArchiveSha256, 'df0b2b3a439961ffcbb3985214365ffe40f49bc871df04dff268c7d8e21ca8b2');
+  assert.equal(out.leanBuildTarget, 'PNP');
+  assert.equal(out.leanRootModule, 'PNP');
+  assert.equal(out.leanRootStatusDeclaration, 'PNP.Main.rootTheoremStatus');
+  assert.equal(out.leanBuildConfigurationPinned, true);
+  assert.equal(out.explicitLeanRootTargetPresent, true);
+  assert.equal(out.leanLibraryTargetBuilt, true);
+  assert.equal(out.leanSourcePlaceholderAuditPassed, true);
   assert.equal(out.rootLeanTheoremPresent, false);
   assert.equal(out.rootLeanTheoremBuilt, false);
   assert.equal(out.rootLeanTheoremAxiomAuditPassed, false);
   assert.equal(out.projectSpecificAxiomsRemaining, true);
+  assert.deepEqual(out.projectSpecificAxiomInventory, [
+    'PNP.SAT',
+    'PNP.LockedNANDThreshold',
+    'PNP.ResidualBandExactMinimization',
+    'PNP.GeneratePCCPack',
+    'PNP.CheckPCCPackexp',
+  ]);
   assert.equal(out.externalReviewIsMathematicalPremise, false);
   assert.deepEqual(out.remainingBlockers, FORMAL_RECONSTRUCTION_BLOCKERS0);
+  assert.equal(out.remainingBlockers.length, 7);
+  assert.equal(out.remainingBlockers.includes('Formal.PinnedLeanBuildAndRootTarget'), false);
   assert.match(out.statusSha256, /^[0-9a-f]{64}$/u);
   assert.match(out.siteStatusSha256, /^[0-9a-f]{64}$/u);
+});
+
+test('formal status records a pinned Lean library root without claiming a root theorem', async () => {
+  const status = await currentStatus0();
+
+  assert.equal(status.leanToolchain, 'leanprover/lean4:v4.31.0');
+  assert.equal(status.leanBuildTarget, 'PNP');
+  assert.equal(status.leanRootModule, 'PNP');
+  assert.equal(status.leanRootStatusDeclaration, 'PNP.Main.rootTheoremStatus');
+  assert.equal(status.leanBuildConfigurationPinned, true);
+  assert.equal(status.explicitLeanRootTargetPresent, true);
+  assert.equal(status.leanLibraryTargetBuilt, true);
+  assert.equal(status.leanSourcePlaceholderAuditPassed, true);
+  assert.equal(status.rootLeanTheorem, 'PNP.Main.p_eq_np');
+  assert.equal(status.rootLeanTheoremPresent, false);
+  assert.equal(status.rootLeanTheoremBuilt, false);
+  assert.equal(status.rootLeanTheoremAxiomAuditPassed, false);
+  assert.equal(status.projectSpecificAxiomsRemaining, true);
+  assert.equal(status.sorryOrAdmitInRootDependencyClosure, null);
+  assert.equal(status.nonClaims.some((entry) => entry.includes('root-status build is reconstruction data')), true);
+  assert.equal(status.verificationCommands.includes('node --test audits/lean-root-target0.test.mjs'), true);
+  assert.equal(status.verificationCommands.includes('lake build PNP'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPBridgeAxiomAudit.lean'), true);
 });
 
 test('formal status separates current-authority and historical replay workflows', async () => {
@@ -75,6 +121,33 @@ test('formal reconstruction status rejects an unearned root theorem', async () =
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'FormalReconstructionStatus.Field');
   assert.deepEqual(out.path, ['status/FORMAL_RECONSTRUCTION_STATUS.json', 'rootLeanTheoremPresent']);
+});
+
+test('formal reconstruction status rejects a drifting Lean toolchain pin', async () => {
+  const status = await currentStatus0();
+  status.leanToolchain = 'leanprover/lean4:stable';
+  const out = await CheckFormalReconstructionStatus0({ writeOutput: false, statusOverride: status, siteOverride: status });
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.coord, 'FormalReconstructionStatus.Field');
+  assert.deepEqual(out.path, ['status/FORMAL_RECONSTRUCTION_STATUS.json', 'leanToolchain']);
+});
+
+test('formal reconstruction status rejects a disabled Lean placeholder audit', async () => {
+  const status = await currentStatus0();
+  status.leanSourcePlaceholderAuditPassed = false;
+  const out = await CheckFormalReconstructionStatus0({ writeOutput: false, statusOverride: status, siteOverride: status });
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.coord, 'FormalReconstructionStatus.Field');
+  assert.deepEqual(out.path, ['status/FORMAL_RECONSTRUCTION_STATUS.json', 'leanSourcePlaceholderAuditPassed']);
+});
+
+test('formal reconstruction status rejects a hidden project-specific axiom', async () => {
+  const status = await currentStatus0();
+  status.projectSpecificAxiomInventory = status.projectSpecificAxiomInventory.slice(0, -1);
+  const out = await CheckFormalReconstructionStatus0({ writeOutput: false, statusOverride: status, siteOverride: status });
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.coord, 'FormalReconstructionStatus.ProjectSpecificAxiomInventory');
+  assert.deepEqual(out.path, ['status/FORMAL_RECONSTRUCTION_STATUS.json', 'projectSpecificAxiomInventory']);
 });
 
 test('formal reconstruction status rejects external review as a theorem premise', async () => {

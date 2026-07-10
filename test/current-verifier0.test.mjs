@@ -17,6 +17,7 @@ test('current verifier plan contains status, surface, archive integrity, and cur
   ]);
   assert.equal(plan.some(({ id }) => /replay|release-audit|materialized/u.test(id)), false);
   assert.equal(CURRENT_VERIFICATION_TESTS0.some((file) => /pcc-runall|release-audit|materialized/u.test(file)), false);
+  assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-root-target0.test.mjs'), true);
 });
 
 test('current verifier cannot be configured to execute the historical replay', () => {

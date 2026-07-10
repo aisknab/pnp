@@ -10,7 +10,9 @@ from current theorem status.
 - `.github/workflows/pnp-verify-all.yml` runs the conservative one-command verifier.
 - `.github/workflows/proof-development.yml` checks the formal status, closed public surface, and
   archive integrity.
-- `.github/workflows/lean-bridge.yml` builds the current partial Lean bridge when Lean inputs change.
+- `.github/workflows/lean-bridge.yml` verifies the pinned Elan archive and exact Lean/Lake versions,
+  audits the complete Lean source closure, builds the explicit `PNP` root, and prints its axiom
+  inventory when Lean inputs change.
 - `.github/workflows/legacy-v0-replay.yml` is manual only. It replays the immutable historical
   checker coordinates and uploads a non-authoritative transcript.
 
@@ -30,6 +32,10 @@ The `ci / current-authority` job performs:
 
 The automatic gate does not execute `RunAll0`, release audits, materialized theorem routes, or the
 historical 1,121-test suite. Those routes are not current package exports, scripts, or bins.
+
+The Lean workflow's successful build is not a theorem-release signal. Its root status is
+assumption-free non-theorem data, `PNP.Main.p_eq_np` is absent, and the conditional bridge's five
+project-specific axioms remain visible in the workflow log.
 
 ## Manual legacy-v0 replay
 
