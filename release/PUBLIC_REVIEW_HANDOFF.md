@@ -1,6 +1,11 @@
 # Public review handoff
 
-Current coordinate:
+> **Superseded reviewer handoff:** This June 2026 handoff describes a historical assertion-checker
+> review perimeter. It is not current theorem-status authority or a current release gate. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical coordinate:
 
 ```text
 PNP-PUBLIC-REVIEW-HANDOFF-2026-06-27-01
@@ -18,11 +23,12 @@ Checker:
 node pcc-public-review-handoff0.mjs --json
 ```
 
-This handoff gives reviewers one current entry surface for the non-activation public-review perimeter. It points at the ordinary verifier command and the major standalone audit surfaces.
+This handoff gave reviewers one entry surface for the historical non-activation perimeter. It records
+the verifier command and standalone audit surfaces used by that checker stack.
 
 It is not a theorem-activation surface.
 
-## Current boundary
+## Historical boundary
 
 ```text
 publicTheoremEmissionAllowed = false
@@ -34,20 +40,21 @@ remainingBlockers = [
 ]
 ```
 
-## Primary command
+## Historical audit command
 
 ```bash
 npm ci
 npm run pnp:verify
 ```
 
-`npm run pnp:verify` writes:
+On current `main`, `npm run pnp:verify` checks the formal-reconstruction boundary. Historical
+verdict fields produced by the command remain assertion-checker evidence only. The command writes:
 
 ```text
 artifacts/pnp-verify-all/latest-verdict.json
 ```
 
-## Standalone boundary commands
+## Standalone historical boundary commands
 
 ```bash
 node pcc-public-review-boundary0.mjs --json
@@ -90,4 +97,5 @@ directTheoremEmissionAllowedByHandoff = false
 This handoff does not activate public theorem emission.
 This handoff does not clear `Release.UnrestrictedFinalSoundness` or `ExternalReview.Acceptance`.
 This handoff does not mark any Section 22 theorem-ledger row as fully discharged.
-This handoff keeps historical theorem-emission artifacts fenced by the current sanitized public-review boundary.
+This handoff does not determine current status. The formal-reconstruction status keeps all historical
+theorem-emission artifacts subordinate.

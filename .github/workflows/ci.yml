@@ -437,19 +437,6 @@ jobs:
       - name: Run named negative suite
         run: npm run test:negative
 
-      - name: Run minimal reviewer examples
-        run: npm run examples:minimal
-
-      - name: Run sealed-release reproducibility smoke
-        shell: bash
-        run: |
-          set -euo pipefail
-          test "$(git rev-parse 'final-pnp-proof-report-hardened-7072f8d^{commit}')" = \
-            "7072f8d0bda6d44d240f9bb3fad624fd357e1278"
-          test "$(git rev-parse 'final-pnp-proof-report-artifacts-hardened-7072f8d-sealed^{commit}')" = \
-            "9d1de19f827e5cb6880741352eb2349cbbb45994"
-          node tools/reproducibility-smoke.mjs
-
       - name: Check reviewer documentation links
         run: node tools/check-doc-links.mjs
 
@@ -461,7 +448,7 @@ jobs:
             test/pcc-release-audit-public-surface-freeze0.test.mjs \
             test/pcc-release-audit-public-surface-summary-negative0.test.mjs
 
-      - name: Run lightweight release audit
+      - name: Run lightweight legacy checker surface audit
         shell: bash
         run: |
           node --input-type=module <<'NODE'
@@ -471,12 +458,15 @@ jobs:
           } from './pcc-release-audit0.mjs';
 
           const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+            historicalReplay: true,
             runSyntaxCheck: false,
             runRunAll: false,
             runMutationCheck: false,
             runCliSmoke: false,
             runPublicSurfaceFreeze: true,
             runMaterializedPublicStatusGate: false,
+            runFinalCertificatePublicStatusGate: false,
+            runConcreteFinalCertificatePublicStatusGate: false,
           }));
 
           console.log(JSON.stringify({

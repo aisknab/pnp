@@ -12,7 +12,7 @@ async function currentManifest() {
 }
 
 test('uniform ZeroSlack closure checker accepts current closure surface', async () => {
-  const out = await CheckUniformZeroSlackClosure0({ writeOutput: false });
+  const out = await CheckUniformZeroSlackClosure0({ historicalReplay: true, writeOutput: false });
   assert.equal(out.tag, 'accept');
   assert.equal(out.coordinate, 'PNP-UNIFORM-ZEROSLACK-CLOSURE-2026-07-05-01');
   assert.equal(out.ufsObligationId, 'UFS-005-ZeroSlackContradictionUniform');
@@ -67,7 +67,7 @@ test('uniform ZeroSlack closure rejects finite-list-only closure overclaim', asy
   const manifest = await currentManifest();
   manifest.zeroSlackClosure.finiteInstanceList = true;
   manifest.zeroSlackClosure.uniformAcrossRanks = false;
-  const out = await CheckUniformZeroSlackClosure0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckUniformZeroSlackClosure0({ historicalReplay: true, writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'UniformZeroSlackClosure.ClosureBoolean');
 });
@@ -75,7 +75,7 @@ test('uniform ZeroSlack closure rejects finite-list-only closure overclaim', asy
 test('uniform ZeroSlack closure rejects theorem activation by ZeroSlack proof alone', async () => {
   const manifest = await currentManifest();
   manifest.uniformFinalSoundnessProved = true;
-  const out = await CheckUniformZeroSlackClosure0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckUniformZeroSlackClosure0({ historicalReplay: true, writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'UniformZeroSlackClosure.BooleanField');
   assert.deepEqual(out.path, ['uniformFinalSoundnessProved']);
@@ -84,7 +84,7 @@ test('uniform ZeroSlack closure rejects theorem activation by ZeroSlack proof al
 test('uniform ZeroSlack closure rejects circular HN/BUD closure overclaim', async () => {
   const manifest = await currentManifest();
   manifest.zeroSlackClosure.hnBudBlockerGraphAcyclic = false;
-  const out = await CheckUniformZeroSlackClosure0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckUniformZeroSlackClosure0({ historicalReplay: true, writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'UniformZeroSlackClosure.ClosureBoolean');
 });

@@ -16,6 +16,8 @@ import {
   makeFinalCertificatePublicStatus0,
 } from './pcc-final-certificate-public-status0.mjs';
 
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 const CHECKER_VERSION = 0;
 
 export const RELEASE_AUDIT_FINAL_CERTIFICATE_GATE_PHASES0 = Object.freeze([
@@ -41,6 +43,7 @@ export function makeReleaseAuditFinalCertificateGateConfig0(overrides = {}) {
   return {
     kind: 'ReleaseAuditFinalCertificateGateConfig0',
     version: CHECKER_VERSION,
+    historicalReplay: false,
     checkReleaseAuditRecord: true,
     checkFinalCertificatePublicStatus: true,
     checkPublicConclusionAlignment: true,
@@ -63,7 +66,9 @@ export async function makeReleaseAuditFinalCertificateGate0({
   releaseAuditConfig = {},
   releaseAuditRunner = null,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeReleaseAuditFinalCertificateGate0');
   const effectiveReleaseAuditRecord = ReleaseAuditRecord ?? (
     runReleaseAudit === true
       ? await runReleaseAudit0(releaseAuditRunner, releaseAuditConfig)
@@ -73,6 +78,7 @@ export async function makeReleaseAuditFinalCertificateGate0({
   const finalCertificatePublicStatusEnvelope = FinalCertificatePublicStatusEnvelope ?? await makeFinalCertificatePublicStatus0({
     FinalCertificateEnvelope,
     ReleaseAuditRecord: effectiveReleaseAuditRecord,
+    historicalReplay: true,
   });
 
   const linkage = {
@@ -129,6 +135,7 @@ export async function CheckReleaseAuditFinalCertificateGate0(
   const checker = 'CheckReleaseAuditFinalCertificateGate0';
   const ledger = [];
   const cfg = makeReleaseAuditFinalCertificateGateConfig0(config);
+  if (cfg.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const envelope = input;
 
   const cfgCheck = validateConfig0(cfg);
@@ -190,7 +197,10 @@ export async function CheckReleaseAuditFinalCertificateGate0(
   if (cfg.checkFinalCertificatePublicStatus === true) {
     const statusRecord = await CheckFinalCertificatePublicStatus0(
       envelope.FinalCertificatePublicStatusEnvelope,
-      cfg.finalCertificatePublicStatusConfig ?? {},
+      {
+        ...(cfg.finalCertificatePublicStatusConfig ?? {}),
+        historicalReplay: true,
+      },
     );
     const status = recordToValidation0(statusRecord, ['FinalCertificatePublicStatusEnvelope']);
 
@@ -353,12 +363,16 @@ export async function CheckReleaseAuditFinalCertificateGate0(
 }
 
 export async function writeReleaseAuditFinalCertificateGateFiles0(outDir, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('writeReleaseAuditFinalCertificateGateFiles0');
   if (typeof outDir !== 'string' || outDir.length === 0) {
     throw new TypeError('writeReleaseAuditFinalCertificateGateFiles0 requires a non-empty output directory');
   }
 
   const envelope = await makeReleaseAuditFinalCertificateGate0(options);
-  const checked = await CheckReleaseAuditFinalCertificateGate0(envelope, options.checkConfig ?? {});
+  const checked = await CheckReleaseAuditFinalCertificateGate0(envelope, {
+    ...(options.checkConfig ?? {}),
+    historicalReplay: true,
+  });
 
   await fs.mkdir(outDir, {
     recursive: true,
@@ -397,7 +411,10 @@ async function runReleaseAudit0(releaseAuditRunner, releaseAuditConfig) {
     ? releaseAuditRunner
     : CheckReleaseAudit0;
 
-  return runner(makeReleaseAuditConfig0(releaseAuditConfig ?? {}));
+  return runner(makeReleaseAuditConfig0({
+    ...(releaseAuditConfig ?? {}),
+    historicalReplay: true,
+  }));
 }
 
 function validateConfig0(config) {

@@ -1,5 +1,11 @@
 # Reviewer Audit Questions
 
+> **Current authority:** This worksheet is for auditing the author's intended argument and the
+> historical 7072f8d assertion-checker release. It is not evidence that `P = NP` is established and
+> must not be used as current theorem status. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`FORMAL_RECONSTRUCTION.md`](FORMAL_RECONSTRUCTION.md).
+
 ## Purpose and scope
 
 This worksheet turns the repository's major mathematical, checker, complexity, and publication claims into explicit audit tasks.
@@ -14,7 +20,7 @@ For each claim it records:
 
 The worksheet is not evidence that any claim is correct. It is a map for producing independent evidence or a precise counterexample.
 
-## Pinned release coordinates
+## Pinned historical release coordinates
 
 Use these immutable coordinates when auditing the recorded 7072f8d release:
 

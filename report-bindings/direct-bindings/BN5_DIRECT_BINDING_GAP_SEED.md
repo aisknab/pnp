@@ -1,5 +1,7 @@
 # BN5 direct-binding gap-transition seed
 
+> **Historical assertion-checker record.** This record is subordinate to `status/FORMAL_RECONSTRUCTION_STATUS.json` and is not current theorem-status authority or proof.
+
 Current coordinate:
 
 ```text

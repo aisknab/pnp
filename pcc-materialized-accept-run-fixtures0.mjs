@@ -24,6 +24,8 @@ import {
   makeMaterializedReplayTranscript0,
 } from './pcc-materialized-accept-run0.mjs';
 
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 const CHECKER_VERSION = 0;
 const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
 
@@ -37,6 +39,7 @@ export function makeMaterializedAcceptRunFixtureWriterConfig0(overrides = {}) {
   return {
     kind: 'MaterializedAcceptRunFixtureWriterConfig0',
     version: CHECKER_VERSION,
+    historicalReplay: false,
     outputDir: path.join(process.cwd(), 'materialized-accept-run-fixtures0'),
     canonicalEnvelopeBytes: false,
     overwrite: true,
@@ -52,6 +55,7 @@ export function makeMaterializedAcceptRunFixtureWriterConfig0(overrides = {}) {
 
 export async function WriteMaterializedAcceptRunFixtureSet0(config = makeMaterializedAcceptRunFixtureWriterConfig0()) {
   const checker = 'WriteMaterializedAcceptRunFixtureSet0';
+  if (config.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const ledger = [];
   const cfg = makeMaterializedAcceptRunFixtureWriterConfig0(config);
 
@@ -93,6 +97,7 @@ export async function WriteMaterializedAcceptRunFixtureSet0(config = makeMateria
 
   if (cfg.includePackageFixture === true) {
     const packageWrite = await WriteMaterializedFixtureSet0({
+    historicalReplay: true,
       outputDir: cfg.outputDir,
       canonicalEnvelopeBytes: cfg.canonicalEnvelopeBytes,
       overwrite: cfg.overwrite,
@@ -294,6 +299,7 @@ function makeAcceptRunFixtureObjects0({
       verdict: 'pending',
       filename: MATERIALIZED_ACCEPT_RUN_FIXTURE_FILENAMES0.pending,
       value: makeMaterializedAcceptRun0({
+    historicalReplay: true,
         packFilePath,
         aggregateDigest,
         verdict: 'pending',
@@ -304,6 +310,7 @@ function makeAcceptRunFixtureObjects0({
       verdict: 'reject',
       filename: MATERIALIZED_ACCEPT_RUN_FIXTURE_FILENAMES0.reject,
       value: makeMaterializedAcceptRun0({
+    historicalReplay: true,
         packFilePath,
         aggregateDigest,
         verdict: 'reject',
@@ -315,6 +322,7 @@ function makeAcceptRunFixtureObjects0({
       verdict: 'accept',
       filename: MATERIALIZED_ACCEPT_RUN_FIXTURE_FILENAMES0.accepted,
       value: makeMaterializedAcceptRun0({
+    historicalReplay: true,
         packFilePath,
         aggregateDigest,
         verdict: 'accept',
@@ -389,7 +397,9 @@ async function verifyAcceptRunFixturesDirect0(files) {
   const records = [];
 
   for (const file of files) {
-    const record = await CheckMaterializedAcceptRunFile0(file.filePath);
+    const record = await CheckMaterializedAcceptRunFile0(file.filePath, {
+      historicalReplay: true,
+    });
 
     if (isRejectRecord0(record)) {
       return validationReject0(['files', file.filename], 'materialized accept-run fixture failed direct verification', {
@@ -427,7 +437,7 @@ async function verifyAcceptRunFixturesCli0(files) {
   const records = [];
 
   for (const file of files) {
-    const child = spawnSync(process.execPath, [cliPath, file.filePath], {
+    const child = spawnSync(process.execPath, [cliPath, '--historical-replay', file.filePath], {
       encoding: 'utf8',
       windowsHide: true,
     });

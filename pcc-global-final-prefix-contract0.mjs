@@ -161,7 +161,7 @@ export function makeGlobalFinalPrefixPCCPack0({
       GlobalProofDAG: LegacyGlobalProofDAG,
     },
   });
-  const finalTheorem = makeSyntheticFinalTheorem0({ finalIntegration });
+  const finalTheorem = makeSyntheticFinalTheorem0({ finalIntegration, historicalReplay: true });
   return makeSyntheticPCCPack0({
     RowPack,
     GlobalProofDAG: LegacyGlobalProofDAG,
@@ -170,9 +170,9 @@ export function makeGlobalFinalPrefixPCCPack0({
     RowFamG,
     FinalIntegration: finalIntegration,
     FinalTheorem: finalTheorem,
-    RowFamFinal: makeSyntheticRowFamFinal0(finalTheorem),
-    PackSufficiencyTheorem: makeSyntheticPackSufficiencyTheorem0(),
-  });
+    RowFamFinal: makeSyntheticRowFamFinal0(finalTheorem, {}, { historicalReplay: true }),
+    PackSufficiencyTheorem: makeSyntheticPackSufficiencyTheorem0({}, { historicalReplay: true }),
+  }, { historicalReplay: true });
 }
 
 export function makeGlobalFinalPrefixSemanticSuite0({

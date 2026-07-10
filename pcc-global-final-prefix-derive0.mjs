@@ -494,7 +494,7 @@ async function runPackNegativeProbe0({
   const negativeInput = mutate(pack);
   const call = await callChecker0(
     `CheckPackSufficiency0(${probeName}).negative`,
-    () => CheckPackSufficiency0(negativeInput),
+    () => CheckPackSufficiency0(negativeInput, { historicalReplay: true }),
   );
   if (!call.ok) {
     return validationReject0(

@@ -1,12 +1,17 @@
 # Hostile Mathematical Review Round 1: Locked NAND Threshold
 
-Status: **open mathematical audit target**.
+> **Historical assertion-checker record:** This file documents a superseded checker/release surface.
+> It is not current theorem-status authority and does not establish `P = NP`. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
 
-This note is not a release-engineering patch. The hardened release machinery now gives a coherent reproduction and acceptance story. This note identifies the first theorem block that a hostile complexity-theory reviewer should attack: the locked NAND threshold theorem.
+Historical status: **recorded as an open mathematical audit target**.
+
+This note was not a release-engineering patch. The historical hardened-release machinery recorded a reproduction and checker-acceptance story. This note identified the first theorem block that a hostile complexity-theory reviewer should attack: the locked NAND threshold theorem.
 
 ## Release context
 
-Current hardened release identifiers:
+Historical hardened release identifiers:
 
 ```text
 source commit:
@@ -63,7 +68,7 @@ The proof breaks into six obligations.
 
 Every exposed output of every equality, constant, NAND-trace, and prefix macro is a pairwise distinct nonconstant nonprojection function in the required local variable set, and depends essentially on its private lock where applicable.
 
-### Current positive evidence
+### Historical positive evidence
 
 The manuscript gives explicit truth signatures for equality, constant, and NAND trace macros. These can be checked mechanically. For example, the equality macro exposes ten signatures, and the NAND trace macro exposes eighteen signatures.
 
@@ -419,7 +424,7 @@ The code already has structured derivation records. The next hardening patch sho
 
 Edward Savage raised the concern that the locked topology and direct-wire restrictions might accidentally restrict the source family into a polynomial-time subclass before the minimizer is applied.
 
-This is now the first reduction-boundary attack target.
+This was recorded as the first reduction-boundary attack target.
 
 The intended answer is:
 

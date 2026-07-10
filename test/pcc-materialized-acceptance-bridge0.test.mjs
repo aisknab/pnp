@@ -12,6 +12,16 @@ import {
   makeMaterializedAcceptanceBridge0,
 } from '../pcc-materialized-acceptance-bridge0.mjs';
 
+const CheckHistoricalBridge0 = (bridge, config = {}) => CheckMaterializedAcceptanceBridge0(bridge, {
+  ...config,
+  historicalReplay: true,
+});
+
+const CheckHistoricalBridgeFile0 = (filePath, config = {}) => CheckMaterializedAcceptanceBridgeFile0(filePath, {
+  ...config,
+  historicalReplay: true,
+});
+
 import {
   MATERIALIZED_PACK_PUBLIC_BOUNDARY0,
   sha256Utf8DigestRecord0,
@@ -22,7 +32,7 @@ import {
 } from '../pcc-verifier-frag0.mjs';
 
 test('CheckMaterializedAcceptanceBridge0 accepts pending bridge without public conclusion', async () => {
-  const out = await CheckMaterializedAcceptanceBridge0(makeMaterializedAcceptanceBridge0());
+  const out = await CheckHistoricalBridge0(makeMaterializedAcceptanceBridge0({ historicalReplay: true }));
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedAcceptanceBridge0');
@@ -36,7 +46,7 @@ test('CheckMaterializedAcceptanceBridge0 accepts pending bridge without public c
 });
 
 test('CheckMaterializedAcceptanceBridge0 accepts accepted replay and emits conditional public conclusion', async () => {
-  const out = await CheckMaterializedAcceptanceBridge0(makeAcceptedMaterializedAcceptanceBridge0());
+  const out = await CheckHistoricalBridge0(makeAcceptedMaterializedAcceptanceBridge0({ historicalReplay: true }));
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedAcceptanceBridge0');
@@ -47,9 +57,9 @@ test('CheckMaterializedAcceptanceBridge0 accepts accepted replay and emits condi
 });
 
 test('CheckMaterializedAcceptanceBridgeFile0 accepts an accepted bridge file', async (t) => {
-  const filePath = await writeTempBridgeFile0(t, makeAcceptedMaterializedAcceptanceBridge0());
+  const filePath = await writeTempBridgeFile0(t, makeAcceptedMaterializedAcceptanceBridge0({ historicalReplay: true }));
 
-  const out = await CheckMaterializedAcceptanceBridgeFile0(filePath);
+  const out = await CheckHistoricalBridgeFile0(filePath);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedAcceptanceBridgeFile0');
@@ -59,7 +69,7 @@ test('CheckMaterializedAcceptanceBridgeFile0 accepts an accepted bridge file', a
 });
 
 test('CheckMaterializedAcceptanceBridge0 rejects public conclusion before accepted replay', async () => {
-  const bridge = makeMaterializedAcceptanceBridge0();
+  const bridge = makeMaterializedAcceptanceBridge0({ historicalReplay: true });
 
   bridge.BridgeVerdict = {
     ...bridge.BridgeVerdict,
@@ -70,7 +80,7 @@ test('CheckMaterializedAcceptanceBridge0 rejects public conclusion before accept
     },
   };
 
-  const out = await CheckMaterializedAcceptanceBridge0(bridge);
+  const out = await CheckHistoricalBridge0(bridge);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedAcceptanceBridge0');
@@ -81,6 +91,7 @@ test('CheckMaterializedAcceptanceBridge0 rejects public conclusion before accept
 
 test('CheckMaterializedAcceptanceBridge0 rejects accepted replay without accepted CheckPCCPackexp precondition', async () => {
   const bridge = makeMaterializedAcceptanceBridge0({
+    historicalReplay: true,
     replayVerdict: 'accept',
   });
 
@@ -90,7 +101,7 @@ test('CheckMaterializedAcceptanceBridge0 rejects accepted replay without accepte
     RejectLog: [],
   };
 
-  const out = await CheckMaterializedAcceptanceBridge0(bridge);
+  const out = await CheckHistoricalBridge0(bridge);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedAcceptanceBridge0');
@@ -100,14 +111,14 @@ test('CheckMaterializedAcceptanceBridge0 rejects accepted replay without accepte
 });
 
 test('CheckMaterializedAcceptanceBridge0 rejects CheckPCCPackexp using digest-only equality', async () => {
-  const bridge = makeMaterializedAcceptanceBridge0();
+  const bridge = makeMaterializedAcceptanceBridge0({ historicalReplay: true });
 
   bridge.CheckPCCPackexp = {
     ...bridge.CheckPCCPackexp,
     noDigestOnlyEquality: false,
   };
 
-  const out = await CheckMaterializedAcceptanceBridge0(bridge);
+  const out = await CheckHistoricalBridge0(bridge);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedAcceptanceBridge0');
@@ -117,7 +128,7 @@ test('CheckMaterializedAcceptanceBridge0 rejects CheckPCCPackexp using digest-on
 });
 
 test('CheckMaterializedAcceptanceBridge0 rejects if aggregate precondition fails', async () => {
-  const bridge = makeMaterializedAcceptanceBridge0();
+  const bridge = makeMaterializedAcceptanceBridge0({ historicalReplay: true });
   const pack = JSON.parse(bridge.Shell.PackBytes);
 
   pack.Manifest.packageImportEdges = [
@@ -130,7 +141,7 @@ test('CheckMaterializedAcceptanceBridge0 rejects if aggregate precondition fails
   bridge.Shell.PackBytes = stableStringify0(pack);
   bridge.Shell.PackDigest = sha256Utf8DigestRecord0(bridge.Shell.PackBytes);
 
-  const out = await CheckMaterializedAcceptanceBridge0(bridge);
+  const out = await CheckHistoricalBridge0(bridge);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedAcceptanceBridge0');
@@ -141,7 +152,7 @@ test('CheckMaterializedAcceptanceBridge0 rejects if aggregate precondition fails
 });
 
 test('CheckMaterializedAcceptanceBridge0 rejects direct public conclusion emission by replay record', async () => {
-  const bridge = makeAcceptedMaterializedAcceptanceBridge0();
+  const bridge = makeAcceptedMaterializedAcceptanceBridge0({ historicalReplay: true });
 
   bridge.ExternalAcceptRunReplay = {
     ...bridge.ExternalAcceptRunReplay,
@@ -151,7 +162,7 @@ test('CheckMaterializedAcceptanceBridge0 rejects direct public conclusion emissi
     },
   };
 
-  const out = await CheckMaterializedAcceptanceBridge0(bridge);
+  const out = await CheckHistoricalBridge0(bridge);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedAcceptanceBridge0');
@@ -162,11 +173,12 @@ test('CheckMaterializedAcceptanceBridge0 rejects direct public conclusion emissi
 
 test('CheckMaterializedAcceptanceBridge0 accepts rejected bridge but emits no public conclusion', async () => {
   const bridge = makeMaterializedAcceptanceBridge0({
+    historicalReplay: true,
     checkStatus: 'rejected',
     replayVerdict: 'reject',
   });
 
-  const out = await CheckMaterializedAcceptanceBridge0(bridge);
+  const out = await CheckHistoricalBridge0(bridge);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedAcceptanceBridge0');
@@ -179,13 +191,26 @@ test('CheckMaterializedAcceptanceBridge0 accepts rejected bridge but emits no pu
 test('CheckMaterializedAcceptanceBridgeFile0 rejects invalid JSON bridge file', async (t) => {
   const filePath = await writeTempTextFile0(t, '{ not json');
 
-  const out = await CheckMaterializedAcceptanceBridgeFile0(filePath);
+  const out = await CheckHistoricalBridgeFile0(filePath);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedAcceptanceBridgeFile0');
   assert.equal(out.Coord, 'CheckMaterializedAcceptanceBridgeFile0.load');
   assert.deepEqual(out.Path, ['file']);
   assert.equal(out.Witness.reason, 'materialized acceptance bridge file must parse as JSON');
+});
+
+test('materialized acceptance bridge routes reject without historical replay opt-in', async () => {
+  for (const out of await Promise.all([
+    makeMaterializedAcceptanceBridge0(),
+    makeAcceptedMaterializedAcceptanceBridge0(),
+    CheckMaterializedAcceptanceBridge0(),
+    CheckMaterializedAcceptanceBridgeFile0(),
+  ])) {
+    assert.equal(out.tag, 'reject');
+    assert.match(out.coord, /\.HistoricalReplayRequired$/);
+    assert.equal(out.publicTheoremEmissionAllowed, false);
+  }
 });
 
 async function writeTempBridgeFile0(t, bridge) {

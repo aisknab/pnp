@@ -1,6 +1,12 @@
 # Finite-to-unbounded family audit
 
-Current coordinate:
+> **Superseded audit:** This June 2026 audit is historical assertion-checker evidence. It did not
+> close the finite-to-unbounded gap, and later UFS acceptance did not formally prove that closure.
+> Current obligations are in
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical coordinate:
 
 ```text
 PNP-FINITE-TO-UNBOUNDED-FAMILY-AUDIT-2026-06-27-01
@@ -24,7 +30,8 @@ This audit represents the activation-critical question:
 Does every finite certificate schema uniformly cover all SAT input sizes in polynomial time?
 ```
 
-The current answer is not “closed.” The audit records the criteria that a future unrestricted final-soundness checker must satisfy and prevents bounded small-model evidence from being silently generalized to all input sizes.
+This historical audit recorded that the answer was not closed. Current reconstruction requires a
+concrete all-size formal theorem and complexity model rather than a later assertion-checker transition.
 
 ## Required uniformity criteria
 
@@ -36,7 +43,7 @@ Uniform.SemanticPreservation
 Uniform.NoFiniteExtrapolation
 ```
 
-Each criterion is currently represented but not discharged as unrestricted final soundness.
+Each criterion was represented but not formally discharged.
 
 ## Boundary
 
@@ -52,4 +59,5 @@ remainingBlockers = [
 ]
 ```
 
-A later PR can close this gap only by adding an accepted checker that represents a uniform polynomial certificate-family proof for all SAT input sizes and transitions the release ladder accordingly.
+This gap can be closed only by the concrete formal derivations required by the current status. An
+accepted JavaScript record or release-ladder transition is insufficient.

@@ -6,6 +6,7 @@ import path from 'node:path';
 import process from 'node:process';
 
 import { CheckUnrestrictedFinalSoundnessRelease0 } from './pcc-unrestricted-final-soundness-release0.mjs';
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
 
 const CHECKER = 'CheckPublicTheoremActivation0';
 const VERSION = 0;
@@ -27,8 +28,11 @@ export async function CheckPublicTheoremActivation0(options = {}) {
   const root = path.resolve(options.root ?? process.cwd());
   const writeOutput = options.writeOutput ?? true;
   const outputPath = options.outputPath ?? OUT;
+  if (options.historicalReplay !== true) {
+    return write0(root, outputPath, writeOutput, LegacyReplayRequiredReject0(CHECKER, BEFORE_BLOCKERS));
+  }
   try {
-    const release = await CheckUnrestrictedFinalSoundnessRelease0({ root, writeOutput: false });
+    const release = await CheckUnrestrictedFinalSoundnessRelease0({ root, writeOutput: false, historicalReplay: true });
     if (release.tag !== 'accept') return write0(root, outputPath, writeOutput, reject0('PublicTheoremActivation.ReleaseDependency', ['dependsOn', RELEASE_COORD], 'unrestricted final soundness release must accept', { dependency: release }));
     const releaseCheck = validateReleaseDependency0(release);
     if (releaseCheck.tag === 'reject') return write0(root, outputPath, writeOutput, releaseCheck);
@@ -80,7 +84,8 @@ export async function CheckPublicTheoremActivation0(options = {}) {
   }
 }
 
-export function EvaluatePublicTheoremActivationExample0(input) {
+export function EvaluatePublicTheoremActivationExample0(input, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('EvaluatePublicTheoremActivationExample0', BEFORE_BLOCKERS);
   if (!plain0(input)) return reject0('PublicTheoremActivation.ExampleShape', ['input'], 'example input must be an object');
   const trueFields = ['unrestrictedFinalSoundnessDischarged', 'internalFinalTheoremReady', 'pEqualsNPConclusionAccepted'];
   const falseFields = ['usesExternalReviewAsPremise', 'usesHistoricalReportProseAsPremise'];
@@ -156,7 +161,7 @@ function validateAfterBoundary0(boundary) {
 function validateExamples0(manifest) {
   for (let i = 0; i < manifest.positiveExamples.length; i += 1) {
     const example = manifest.positiveExamples[i];
-    const out = EvaluatePublicTheoremActivationExample0(example.input);
+    const out = EvaluatePublicTheoremActivationExample0(example.input, { historicalReplay: true });
     if (out.tag !== 'accept') return reject0('PublicTheoremActivation.PositiveExampleRejected', ['positiveExamples', i], 'positive example rejected', { exampleId: example.id, reject: out });
     for (const [key, expected] of Object.entries(example.expected)) {
       const actual = out[key];
@@ -177,6 +182,6 @@ function sha256Hex0(bytes) { return createHash('sha256').update(bytes).digest('h
 function sha256Text0(text) { return sha256Hex0(Buffer.from(text, 'utf8')); }
 function stableStringify0(value) { if (Array.isArray(value)) return `[${value.map(stableStringify0).join(',')}]`; if (plain0(value)) return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${stableStringify0(value[key])}`).join(',')}}`; return JSON.stringify(value); }
 function normalizeError0(error) { return { name: error?.name ?? 'Error', message: error?.message ?? String(error), code: error?.code ?? null }; }
-function parseArgs0(argv) { const out = { json: false, writeOutput: true }; for (const arg of argv) { if (arg === '--json') out.json = true; else if (arg === '--no-write') out.writeOutput = false; else throw new Error(`unknown argument: ${arg}`); } return out; }
+function parseArgs0(argv) { const out = { json: false, writeOutput: true, historicalReplay: false }; for (const arg of argv) { if (arg === '--json') out.json = true; else if (arg === '--no-write') out.writeOutput = false; else if (arg === '--historical-replay') out.historicalReplay = true; else throw new Error(`unknown argument: ${arg}`); } return out; }
 async function main0() { let options; try { options = parseArgs0(process.argv.slice(2)); } catch (error) { const verdict = reject0('PublicTheoremActivation.CliBadArgument', [], 'bad CLI argument', normalizeError0(error)); console.error(JSON.stringify(verdict, null, 2)); process.exit(2); } const verdict = await CheckPublicTheoremActivation0(options); const rendered = JSON.stringify(verdict, null, 2); if (options.json || verdict.tag === 'accept') console.log(rendered); else console.error(rendered); process.exit(verdict.tag === 'accept' ? 0 : 1); }
 if (import.meta.url === `file://${process.argv[1]}`) main0();

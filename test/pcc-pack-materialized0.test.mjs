@@ -10,14 +10,29 @@ import {
   writeMaterializedPCCPackFiles0,
 } from '../pcc-pack-materialized0.mjs';
 
+const makeHistoricalMaterializedPCCPack0 = (options = {}) => makeMaterializedPCCPack0({
+  ...options,
+  historicalReplay: true,
+});
+const CheckHistoricalMaterializedPCCPack0 = (input, config = {}) => CheckMaterializedPCCPack0(input, {
+  ...config,
+  historicalReplay: true,
+});
+const writeHistoricalMaterializedPCCPackFiles0 = (dir, options = {}) => writeMaterializedPCCPackFiles0(dir, {
+  ...options,
+  historicalReplay: true,
+});
+
 import {
   CheckPackSufficiency0,
   PACK_SUFFICIENCY_PHASES0,
 } from '../pcc-pack-sufficiency0.mjs';
 
+const CheckHistoricalPackSufficiency0 = (input) => CheckPackSufficiency0(input, { historicalReplay: true });
+
 test('CheckMaterializedPCCPack0 accepts a materialized PCCPack envelope', async () => {
-  const envelope = await makeMaterializedPCCPack0();
-  const out = await CheckMaterializedPCCPack0(envelope);
+  const envelope = await makeHistoricalMaterializedPCCPack0();
+  const out = await CheckHistoricalMaterializedPCCPack0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedPCCPack0');
@@ -31,8 +46,8 @@ test('CheckMaterializedPCCPack0 accepts a materialized PCCPack envelope', async 
 });
 
 test('inner CheckPackSufficiency0 accepts the materialized PCCPack core', async () => {
-  const envelope = await makeMaterializedPCCPack0();
-  const out = await CheckPackSufficiency0(envelope.PCCPack);
+  const envelope = await makeHistoricalMaterializedPCCPack0();
+  const out = await CheckHistoricalPackSufficiency0(envelope.PCCPack);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckPackSufficiency0');
@@ -42,7 +57,7 @@ test('inner CheckPackSufficiency0 accepts the materialized PCCPack core', async 
 });
 
 test('CheckMaterializedPCCPack0 exposes pack-sufficiency checker failures', async () => {
-  const envelope = await makeMaterializedPCCPack0();
+  const envelope = await makeHistoricalMaterializedPCCPack0();
 
   envelope.PCCPack = {
     ...envelope.PCCPack,
@@ -56,7 +71,7 @@ test('CheckMaterializedPCCPack0 exposes pack-sufficiency checker failures', asyn
     },
   };
 
-  const out = await CheckMaterializedPCCPack0(envelope);
+  const out = await CheckHistoricalMaterializedPCCPack0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedPCCPack0');
@@ -65,7 +80,7 @@ test('CheckMaterializedPCCPack0 exposes pack-sufficiency checker failures', asyn
 });
 
 test('CheckMaterializedPCCPack0 rejects component-envelope mismatch', async () => {
-  const envelope = await makeMaterializedPCCPack0();
+  const envelope = await makeHistoricalMaterializedPCCPack0();
 
   envelope.PCCPack = {
     ...envelope.PCCPack,
@@ -84,7 +99,7 @@ test('CheckMaterializedPCCPack0 rejects component-envelope mismatch', async () =
     rowPackDigest: undefined,
   };
 
-  const out = await CheckMaterializedPCCPack0(envelope, {
+  const out = await CheckHistoricalMaterializedPCCPack0(envelope, {
     checkPackSufficiency: false,
   });
 
@@ -95,7 +110,7 @@ test('CheckMaterializedPCCPack0 rejects component-envelope mismatch', async () =
 });
 
 test('CheckMaterializedPCCPack0 rejects forbidden fixture marker text', async () => {
-  const envelope = await makeMaterializedPCCPack0();
+  const envelope = await makeHistoricalMaterializedPCCPack0();
 
   envelope.PCCPack = {
     ...envelope.PCCPack,
@@ -113,7 +128,7 @@ test('CheckMaterializedPCCPack0 rejects forbidden fixture marker text', async ()
     pccPackDigest: undefined,
   };
 
-  const out = await CheckMaterializedPCCPack0(envelope);
+  const out = await CheckHistoricalMaterializedPCCPack0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedPCCPack0');
@@ -121,7 +136,7 @@ test('CheckMaterializedPCCPack0 rejects forbidden fixture marker text', async ()
 });
 
 test('CheckMaterializedPCCPack0 strictly rejects an injected synthetic scaffold marker', async () => {
-  const envelope = await makeMaterializedPCCPack0();
+  const envelope = await makeHistoricalMaterializedPCCPack0();
 
   envelope.PCCPack = {
     ...envelope.PCCPack,
@@ -139,7 +154,7 @@ test('CheckMaterializedPCCPack0 strictly rejects an injected synthetic scaffold 
     pccPackDigest: undefined,
   };
 
-  const out = await CheckMaterializedPCCPack0(envelope, {
+  const out = await CheckHistoricalMaterializedPCCPack0(envelope, {
     allowSyntheticScaffoldMarker: false,
   });
 
@@ -150,7 +165,7 @@ test('CheckMaterializedPCCPack0 strictly rejects an injected synthetic scaffold 
 });
 
 test('CheckMaterializedPCCPack0 rejects stale linkage digest', async () => {
-  const envelope = await makeMaterializedPCCPack0();
+  const envelope = await makeHistoricalMaterializedPCCPack0();
 
   envelope.Linkage = {
     ...envelope.Linkage,
@@ -161,7 +176,7 @@ test('CheckMaterializedPCCPack0 rejects stale linkage digest', async () => {
     },
   };
 
-  const out = await CheckMaterializedPCCPack0(envelope);
+  const out = await CheckHistoricalMaterializedPCCPack0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedPCCPack0');
@@ -179,7 +194,7 @@ test('writeMaterializedPCCPackFiles0 writes replayable JSON artefacts', async (t
     });
   });
 
-  const result = await writeMaterializedPCCPackFiles0(dir);
+  const result = await writeHistoricalMaterializedPCCPackFiles0(dir);
 
   assert.equal(result.checked.tag, 'accept');
 
@@ -199,7 +214,7 @@ test('writeMaterializedPCCPackFiles0 writes replayable JSON artefacts', async (t
 });
 
 test('makeMaterializedPCCPack0 uses concrete materialized rows by default', async () => {
-  const envelope = await makeMaterializedPCCPack0();
+  const envelope = await makeHistoricalMaterializedPCCPack0();
 
   assert.equal(envelope.RowsEnvelope.kind, 'ConcreteMaterializedRows0');
   assert.equal(envelope.RowsEnvelope.RowPack.kind, 'RowPack0');
@@ -207,7 +222,7 @@ test('makeMaterializedPCCPack0 uses concrete materialized rows by default', asyn
   assert.equal(envelope.PCCPack.RowPack.SchedHash.hex, envelope.RowsEnvelope.RowPack.SchedHash.hex);
   assert.equal(envelope.PCCPack.RowPack.Rows.some((row) => row.IfaceHash === 'IfaceDict0.synthetic'), false);
 
-  const out = await CheckMaterializedPCCPack0(envelope);
+  const out = await CheckHistoricalMaterializedPCCPack0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedPCCPack0');
@@ -216,13 +231,13 @@ test('makeMaterializedPCCPack0 uses concrete materialized rows by default', asyn
 });
 
 test('makeMaterializedPCCPack0 uses concrete materialized local packages by default', async () => {
-  const envelope = await makeMaterializedPCCPack0();
+  const envelope = await makeHistoricalMaterializedPCCPack0();
 
   assert.equal(envelope.LocalPackagesEnvelope.kind, 'ConcreteMaterializedLocalPackages0');
   assert.equal(envelope.LocalPackagesEnvelope.ConcreteRowsEnvelope.kind, 'ConcreteMaterializedRows0');
   assert.equal(envelope.PCCPack.LocalPackages.RowPackDigest.hex, envelope.PCCPack.RowPack ? envelope.LocalPackagesEnvelope.RowPack ? envelope.LocalPackagesEnvelope.RowPackDigest?.hex ?? envelope.LocalPackagesEnvelope.Linkage.rowPackDigest.hex : envelope.LocalPackagesEnvelope.Linkage.rowPackDigest.hex : envelope.LocalPackagesEnvelope.Linkage.rowPackDigest.hex);
 
-  const out = await CheckMaterializedPCCPack0(envelope);
+  const out = await CheckHistoricalMaterializedPCCPack0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedPCCPack0');
@@ -231,14 +246,14 @@ test('makeMaterializedPCCPack0 uses concrete materialized local packages by defa
 });
 
 test('makeMaterializedPCCPack0 uses concrete materialized global firewalls by default', async () => {
-  const envelope = await makeMaterializedPCCPack0();
+  const envelope = await makeHistoricalMaterializedPCCPack0();
 
   assert.equal(envelope.GlobalFirewallsEnvelope.kind, 'ConcreteMaterializedGlobalFirewalls0');
   assert.equal(envelope.GlobalFirewallsEnvelope.ConcreteLocalPackagesEnvelope.kind, 'ConcreteMaterializedLocalPackages0');
   assert.deepEqual(envelope.PCCPack.GlobalFirewalls.SchedHash, envelope.GlobalFirewallsEnvelope.GlobalFirewalls.SchedHash);
   assert.deepEqual(envelope.PCCPack.GlobalFirewalls.IfaceHash, envelope.GlobalFirewallsEnvelope.GlobalFirewalls.IfaceHash);
 
-  const out = await CheckMaterializedPCCPack0(envelope);
+  const out = await CheckHistoricalMaterializedPCCPack0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedPCCPack0');
@@ -247,7 +262,7 @@ test('makeMaterializedPCCPack0 uses concrete materialized global firewalls by de
 });
 
 test('makeMaterializedPCCPack0 uses concrete materialized global proof DAG by default', async () => {
-  const envelope = await makeMaterializedPCCPack0();
+  const envelope = await makeHistoricalMaterializedPCCPack0();
 
   assert.equal(envelope.GlobalProofDAGEnvelope.kind, 'ConcreteMaterializedGlobalProofDAG0');
   assert.equal(envelope.GlobalProofDAGEnvelope.ConcreteRowsEnvelope.kind, 'ConcreteMaterializedRows0');
@@ -256,7 +271,7 @@ test('makeMaterializedPCCPack0 uses concrete materialized global proof DAG by de
   assert.deepEqual(envelope.PCCPack.GlobalProofDAG.IfaceHash, envelope.GlobalProofDAGEnvelope.GlobalProofDAG.IfaceHash);
   assert.deepEqual(envelope.PCCPack.GlobalProofDAG.SchedHash, envelope.GlobalProofDAGEnvelope.GlobalProofDAG.SchedHash);
 
-  const out = await CheckMaterializedPCCPack0(envelope);
+  const out = await CheckHistoricalMaterializedPCCPack0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedPCCPack0');
@@ -265,7 +280,7 @@ test('makeMaterializedPCCPack0 uses concrete materialized global proof DAG by de
 });
 
 test('makeMaterializedPCCPack0 uses concrete materialized KBundle proof coverage by default', async () => {
-  const envelope = await makeMaterializedPCCPack0();
+  const envelope = await makeHistoricalMaterializedPCCPack0();
 
   assert.equal(envelope.KBundleEnvelope.kind, 'ConcreteMaterializedKBundle0');
   assert.equal(envelope.KBundleEnvelope.ProofInventory.kernelRuleCoverageComplete, true);
@@ -274,7 +289,7 @@ test('makeMaterializedPCCPack0 uses concrete materialized KBundle proof coverage
 
   assert.equal(envelope.GlobalProofDAGEnvelope.KBundleEnvelope.kind, 'ConcreteMaterializedKBundle0');
 
-  const out = await CheckMaterializedPCCPack0(envelope);
+  const out = await CheckHistoricalMaterializedPCCPack0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedPCCPack0');
@@ -286,7 +301,7 @@ test('makeMaterializedPCCPack0 uses concrete materialized KBundle proof coverage
 });
 
 test('makeMaterializedPCCPack0 uses concrete materialized final integration by default', async () => {
-  const envelope = await makeMaterializedPCCPack0();
+  const envelope = await makeHistoricalMaterializedPCCPack0();
 
   assert.equal(envelope.FinalIntegrationEnvelope.kind, 'ConcreteMaterializedFinalIntegration0');
   assert.equal(envelope.FinalIntegrationEnvelope.ConcreteGlobalProofDAGEnvelope.kind, 'ConcreteMaterializedGlobalProofDAG0');
@@ -295,7 +310,7 @@ test('makeMaterializedPCCPack0 uses concrete materialized final integration by d
   assert.equal(envelope.FinalIntegrationEnvelope.ConcreteLinks.gpackFieldCoverageComplete, true);
   assert.equal(envelope.FinalIntegrationEnvelope.ConcreteLinks.rowFamGCoverageComplete, true);
 
-  const out = await CheckMaterializedPCCPack0(envelope);
+  const out = await CheckHistoricalMaterializedPCCPack0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedPCCPack0');
@@ -307,7 +322,7 @@ test('makeMaterializedPCCPack0 uses concrete materialized final integration by d
 });
 
 test('makeMaterializedPCCPack0 uses concrete materialized HardCheck coverage by default', async () => {
-  const envelope = await makeMaterializedPCCPack0();
+  const envelope = await makeHistoricalMaterializedPCCPack0();
 
   assert.equal(envelope.HardEnvelope.kind, 'ConcreteMaterializedHardCheck0');
   assert.equal(envelope.HardEnvelope.Coverage.checkerCoverageComplete, true);
@@ -318,7 +333,7 @@ test('makeMaterializedPCCPack0 uses concrete materialized HardCheck coverage by 
   assert.equal(envelope.HardEnvelope.Coverage.noMinCoverageComplete, true);
   assert.equal(envelope.HardEnvelope.Coverage.importPolicyComplete, true);
 
-  const out = await CheckMaterializedPCCPack0(envelope);
+  const out = await CheckHistoricalMaterializedPCCPack0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedPCCPack0');

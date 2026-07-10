@@ -1,14 +1,20 @@
 #!/usr/bin/env node
 
+import { EnforceHistoricalReplayCli0 } from '../pcc-legacy-replay-gate0.mjs';
+
 import {
   writeConcreteReleaseAppendixFiles0,
 } from '../pcc-concrete-release-appendix0.mjs';
+
+EnforceHistoricalReplayCli0({ entrypoint: 'bin/write-concrete-release-appendix0.mjs' });
 
 const args = process.argv.slice(2);
 const outDir = args.find((arg) => !arg.startsWith('--')) ?? './concrete-release-appendix0';
 const full = args.includes('--full');
 
-const result = await writeConcreteReleaseAppendixFiles0(outDir);
+const result = await writeConcreteReleaseAppendixFiles0(outDir, {
+  historicalReplay: true,
+});
 
 if (full) {
   console.log(JSON.stringify(result.checked, null, 2));

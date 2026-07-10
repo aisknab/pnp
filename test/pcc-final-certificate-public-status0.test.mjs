@@ -14,6 +14,16 @@ import {
   digestCanonical0,
 } from '../pcc-verifier-frag0.mjs';
 
+const makeHistoricalPublicStatus0 = (options = {}) => makeFinalCertificatePublicStatus0({
+  ...options,
+  historicalReplay: true,
+});
+
+const CheckHistoricalPublicStatus0 = (input, config = {}) => CheckFinalCertificatePublicStatus0(input, {
+  ...config,
+  historicalReplay: true,
+});
+
 function makeAcceptedReleaseAuditRecord0() {
   const nf = {
     kind: 'ReleaseAudit0NF',
@@ -45,8 +55,8 @@ function makeAcceptedReleaseAuditRecord0() {
 }
 
 test('CheckFinalCertificatePublicStatus0 accepts a final-certificate public status gate', async () => {
-  const envelope = await makeFinalCertificatePublicStatus0();
-  const out = await CheckFinalCertificatePublicStatus0(envelope);
+  const envelope = await makeHistoricalPublicStatus0();
+  const out = await CheckHistoricalPublicStatus0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckFinalCertificatePublicStatus0');
@@ -63,11 +73,11 @@ test('CheckFinalCertificatePublicStatus0 accepts a final-certificate public stat
 
 test('CheckFinalCertificatePublicStatus0 accepts an attached release-audit record', async () => {
   const releaseAuditRecord = makeAcceptedReleaseAuditRecord0();
-  const envelope = await makeFinalCertificatePublicStatus0({
+  const envelope = await makeHistoricalPublicStatus0({
     ReleaseAuditRecord: releaseAuditRecord,
   });
 
-  const out = await CheckFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalPublicStatus0(envelope, {
     checkReleaseAuditRecord: true,
   });
 
@@ -78,7 +88,7 @@ test('CheckFinalCertificatePublicStatus0 accepts an attached release-audit recor
 });
 
 test('CheckFinalCertificatePublicStatus0 rejects a tampered public conclusion', async () => {
-  const envelope = await makeFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalPublicStatus0();
 
   envelope.PublicStatus = {
     ...envelope.PublicStatus,
@@ -93,7 +103,7 @@ test('CheckFinalCertificatePublicStatus0 rejects a tampered public conclusion', 
     publicStatusDigest: undefined,
   };
 
-  const out = await CheckFinalCertificatePublicStatus0(envelope);
+  const out = await CheckHistoricalPublicStatus0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckFinalCertificatePublicStatus0');
@@ -102,9 +112,9 @@ test('CheckFinalCertificatePublicStatus0 rejects a tampered public conclusion', 
 });
 
 test('CheckFinalCertificatePublicStatus0 rejects an unattached release-audit requirement', async () => {
-  const envelope = await makeFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalPublicStatus0();
 
-  const out = await CheckFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalPublicStatus0(envelope, {
     checkReleaseAuditRecord: true,
   });
 
@@ -115,7 +125,7 @@ test('CheckFinalCertificatePublicStatus0 rejects an unattached release-audit req
 });
 
 test('CheckFinalCertificatePublicStatus0 rejects forbidden fixture marker text', async () => {
-  const envelope = await makeFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalPublicStatus0();
 
   envelope.PublicStatus = {
     ...envelope.PublicStatus,
@@ -127,7 +137,7 @@ test('CheckFinalCertificatePublicStatus0 rejects forbidden fixture marker text',
     publicStatusDigest: undefined,
   };
 
-  const out = await CheckFinalCertificatePublicStatus0(envelope);
+  const out = await CheckHistoricalPublicStatus0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckFinalCertificatePublicStatus0');
@@ -136,7 +146,7 @@ test('CheckFinalCertificatePublicStatus0 rejects forbidden fixture marker text',
 
 
 test('CheckFinalCertificatePublicStatus0 strictly rejects an injected synthetic scaffold marker', async () => {
-  const envelope = await makeFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalPublicStatus0();
 
   envelope.PublicStatus = {
     ...envelope.PublicStatus,
@@ -148,7 +158,7 @@ test('CheckFinalCertificatePublicStatus0 strictly rejects an injected synthetic 
     publicStatusDigest: undefined,
   };
 
-  const out = await CheckFinalCertificatePublicStatus0(envelope, {
+  const out = await CheckHistoricalPublicStatus0(envelope, {
     allowSyntheticScaffoldMarker: false,
   });
 
@@ -160,7 +170,7 @@ test('CheckFinalCertificatePublicStatus0 strictly rejects an injected synthetic 
 
 
 test('CheckFinalCertificatePublicStatus0 rejects stale linkage digest', async () => {
-  const envelope = await makeFinalCertificatePublicStatus0();
+  const envelope = await makeHistoricalPublicStatus0();
 
   envelope.Linkage = {
     ...envelope.Linkage,
@@ -171,7 +181,7 @@ test('CheckFinalCertificatePublicStatus0 rejects stale linkage digest', async ()
     },
   };
 
-  const out = await CheckFinalCertificatePublicStatus0(envelope);
+  const out = await CheckHistoricalPublicStatus0(envelope);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckFinalCertificatePublicStatus0');
@@ -189,7 +199,9 @@ test('writeFinalCertificatePublicStatusFiles0 writes replayable JSON artefacts',
     });
   });
 
-  const result = await writeFinalCertificatePublicStatusFiles0(dir);
+  const result = await writeFinalCertificatePublicStatusFiles0(dir, {
+    historicalReplay: true,
+  });
 
   assert.equal(result.checked.tag, 'accept');
 
@@ -204,5 +216,17 @@ test('writeFinalCertificatePublicStatusFiles0 writes replayable JSON artefacts',
     const value = JSON.parse(text);
 
     assert.equal(typeof value, 'object');
+  }
+});
+
+test('final certificate public-status routes reject without historical replay opt-in', async () => {
+  for (const out of await Promise.all([
+    makeFinalCertificatePublicStatus0(),
+    CheckFinalCertificatePublicStatus0(),
+    writeFinalCertificatePublicStatusFiles0(),
+  ])) {
+    assert.equal(out.tag, 'reject');
+    assert.match(out.coord, /\.HistoricalReplayRequired$/);
+    assert.equal(out.publicTheoremEmissionAllowed, false);
   }
 });

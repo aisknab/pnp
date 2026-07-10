@@ -15,9 +15,18 @@ import {
   CheckMaterializedFinalIntegration0,
 } from '../pcc-final-integration-materialized0.mjs';
 
+const makeHistoricalConcreteFinalIntegration0 = (options = {}) => makeConcreteMaterializedFinalIntegration0({
+  ...options,
+  historicalReplay: true,
+});
+const CheckHistoricalConcreteFinalIntegration0 = (input, config = {}) => CheckConcreteMaterializedFinalIntegration0(input, {
+  ...config,
+  historicalReplay: true,
+});
+
 test('CheckConcreteMaterializedFinalIntegration0 accepts final integration over the concrete DAG chain', async () => {
-  const envelope = await makeConcreteMaterializedFinalIntegration0();
-  const out = await CheckConcreteMaterializedFinalIntegration0(envelope);
+  const envelope = await makeHistoricalConcreteFinalIntegration0();
+  const out = await CheckHistoricalConcreteFinalIntegration0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckConcreteMaterializedFinalIntegration0');
@@ -56,8 +65,8 @@ test('CheckConcreteMaterializedFinalIntegration0 accepts final integration over 
 });
 
 test('inner materialized final integration checker accepts the concrete final integration core', async () => {
-  const envelope = await makeConcreteMaterializedFinalIntegration0();
-  const out = await CheckMaterializedFinalIntegration0(envelope.FinalIntegrationEnvelope);
+  const envelope = await makeHistoricalConcreteFinalIntegration0();
+  const out = await CheckMaterializedFinalIntegration0(envelope.FinalIntegrationEnvelope, { historicalReplay: true });
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedFinalIntegration0');
@@ -65,7 +74,7 @@ test('inner materialized final integration checker accepts the concrete final in
 });
 
 test('CheckConcreteMaterializedFinalIntegration0 rejects stale concrete links', async () => {
-  const envelope = await makeConcreteMaterializedFinalIntegration0();
+  const envelope = await makeHistoricalConcreteFinalIntegration0();
 
   envelope.FinalIntegrationEnvelope = {
     ...envelope.FinalIntegrationEnvelope,
@@ -81,7 +90,7 @@ test('CheckConcreteMaterializedFinalIntegration0 rejects stale concrete links', 
     concreteLinksDigest: undefined,
   };
 
-  const out = await CheckConcreteMaterializedFinalIntegration0(envelope, {
+  const out = await CheckHistoricalConcreteFinalIntegration0(envelope, {
     checkConcreteGlobalProofDAG: false,
     checkMaterializedFinalIntegration: false,
     checkLinkage: false,
@@ -94,7 +103,7 @@ test('CheckConcreteMaterializedFinalIntegration0 rejects stale concrete links', 
 });
 
 test('CheckConcreteMaterializedFinalIntegration0 rejects non-concrete global proof DAG link', async () => {
-  const envelope = await makeConcreteMaterializedFinalIntegration0();
+  const envelope = await makeHistoricalConcreteFinalIntegration0();
 
   envelope.ConcreteGlobalProofDAGEnvelope = {
     ...envelope.ConcreteGlobalProofDAGEnvelope,
@@ -112,7 +121,7 @@ test('CheckConcreteMaterializedFinalIntegration0 rejects non-concrete global pro
     concreteLinksDigest: undefined,
   };
 
-  const out = await CheckConcreteMaterializedFinalIntegration0(envelope, {
+  const out = await CheckHistoricalConcreteFinalIntegration0(envelope, {
     checkConcreteGlobalProofDAG: false,
     checkMaterializedFinalIntegration: false,
     checkLinkage: false,
@@ -125,13 +134,13 @@ test('CheckConcreteMaterializedFinalIntegration0 rejects non-concrete global pro
 });
 
 test('CheckConcreteMaterializedFinalIntegration0 strictly rejects an injected synthetic scaffold marker', async () => {
-  const envelope = await makeConcreteMaterializedFinalIntegration0({
+  const envelope = await makeHistoricalConcreteFinalIntegration0({
     overrides: {
       GateNote: 'synthetic marker must reject in strict marker mode',
     },
   });
 
-  const out = await CheckConcreteMaterializedFinalIntegration0(envelope, {
+  const out = await CheckHistoricalConcreteFinalIntegration0(envelope, {
     allowSyntheticScaffoldMarker: false,
   });
 
@@ -151,7 +160,7 @@ test('writeConcreteMaterializedFinalIntegrationFiles0 writes replayable JSON art
     });
   });
 
-  const result = await writeConcreteMaterializedFinalIntegrationFiles0(dir);
+  const result = await writeConcreteMaterializedFinalIntegrationFiles0(dir, { historicalReplay: true });
 
   assert.equal(result.checked.tag, 'accept');
 
@@ -173,7 +182,7 @@ test('writeConcreteMaterializedFinalIntegrationFiles0 writes replayable JSON art
 
 
 test('CheckConcreteMaterializedFinalIntegration0 rejects missing final theorem G linkage', async () => {
-  const envelope = await makeConcreteMaterializedFinalIntegration0();
+  const envelope = await makeHistoricalConcreteFinalIntegration0();
 
   envelope.FinalIntegrationEnvelope = {
     ...envelope.FinalIntegrationEnvelope,
@@ -208,7 +217,7 @@ test('CheckConcreteMaterializedFinalIntegration0 rejects missing final theorem G
     concreteLinksDigest: undefined,
   };
 
-  const out = await CheckConcreteMaterializedFinalIntegration0(envelope, {
+  const out = await CheckHistoricalConcreteFinalIntegration0(envelope, {
     checkConcreteGlobalProofDAG: false,
     checkMaterializedFinalIntegration: false,
     checkLinkage: false,
@@ -218,4 +227,14 @@ test('CheckConcreteMaterializedFinalIntegration0 rejects missing final theorem G
   assert.equal(out.checker, 'CheckConcreteMaterializedFinalIntegration0');
   assert.equal(out.Coord, 'CheckConcreteMaterializedFinalIntegration0.concreteLinks');
   assert.deepEqual(out.Path, ['ConcreteLinks', 'finalTheoremGLinkageComplete']);
+});
+
+test('concrete final integration routes reject without historical replay opt-in', async () => {
+  const made = await makeConcreteMaterializedFinalIntegration0();
+  const checked = await CheckConcreteMaterializedFinalIntegration0();
+  const written = await writeConcreteMaterializedFinalIntegrationFiles0('/tmp/not-written-without-opt-in');
+  for (const out of [made, checked, written]) {
+    assert.equal(out.tag, 'reject');
+    assert.match(out.coord, /\.HistoricalReplayRequired$/u);
+  }
 });

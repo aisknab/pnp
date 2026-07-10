@@ -1,6 +1,11 @@
 # Uniform input family
 
-Coordinate:
+> **Historical assertion-checker record:** This UFS coordinate is superseded and does not prove an
+> all-size input-family theorem. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical coordinate:
 
 ```text
 PNP-UNIFORM-INPUT-FAMILY-2026-07-04-01
@@ -12,21 +17,22 @@ Uniform final soundness obligation:
 UFS-001-InputFamilyUniformity
 ```
 
-Checker:
+Historical replay command:
 
 ```bash
-npm run proof:uniform-input-family
+npm run proof:uniform-input-family -- --historical-replay
 ```
 
-Direct checker command:
+Direct historical replay command:
 
 ```bash
-node pcc-uniform-input-family0.mjs --json
+node pcc-uniform-input-family0.mjs --json --historical-replay
 ```
 
 ## Purpose
 
-This surface discharges the first uniform-final-soundness sub-obligation: the input family is not a bounded list of examples or row seeds. It is a single decidable schema covering every finite single-output NAND circuit.
+This surface recorded the first historical UFS assertion: that an input schema covered every finite
+single-output NAND circuit rather than a bounded example list.
 
 The accepted input object is:
 
@@ -50,9 +56,10 @@ gate(j)    where j is an earlier gate
 
 The output may reference an input, constant, or any existing gate.
 
-## What this proves
+## What the historical checker accepted
 
-The checker proves, by structural validation, that membership in the theorem input family is uniform and polynomial-time decidable for all finite sizes.
+The checker structurally validated records asserting uniform, polynomial-time decidable membership.
+It did not provide the current concrete complexity model or a formal all-size proof.
 
 It accepts only if:
 
@@ -68,7 +75,7 @@ membershipTimeBound is polynomial
 
 This does not prove the locked NAND construction, threshold equivalence, residual-band minimization, SAT in P, or P = NP. It discharges only the input-family quantifier needed before those later obligations can be checked.
 
-Current boundary remains:
+The historical record kept this boundary:
 
 ```text
 publicTheoremEmissionAllowed = false

@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
 
 import {
   digestCanonical0,
@@ -27,6 +28,7 @@ export function makeFinalPNPCertificateConfig0(overrides = {}) {
   return {
     kind: 'FinalPNPCertificateConfig0',
     version: CHECKER_VERSION,
+    historicalReplay: false,
     checkConcreteFinalAcceptanceReplay: true,
     checkCertificate: true,
     checkContract: true,
@@ -41,16 +43,18 @@ export async function makeFinalPNPCertificate0({
   ConcreteFinalAcceptanceReplayEnvelope = null,
   Certificate = null,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeFinalPNPCertificate0');
   const replayEnvelope =
-    ConcreteFinalAcceptanceReplayEnvelope ?? await makeConcreteFinalAcceptanceReplay0();
+    ConcreteFinalAcceptanceReplayEnvelope ?? await makeConcreteFinalAcceptanceReplay0({ historicalReplay: true });
 
-  const replayRecord = await CheckConcreteFinalAcceptanceReplay0(replayEnvelope);
+  const replayRecord = await CheckConcreteFinalAcceptanceReplay0(replayEnvelope, { historicalReplay: true });
 
   const certificate = Certificate ?? makeFinalPNPCertificateRecord0({
     concreteFinalAcceptanceReplayEnvelope: replayEnvelope,
     concreteFinalAcceptanceReplayRecord: replayRecord,
-  });
+  }, { historicalReplay: true });
 
   const linkage = makeLinkage0({
     concreteFinalAcceptanceReplayEnvelope: replayEnvelope,
@@ -95,7 +99,8 @@ export async function makeFinalPNPCertificate0({
 export function makeFinalPNPCertificateRecord0({
   concreteFinalAcceptanceReplayEnvelope,
   concreteFinalAcceptanceReplayRecord,
-}) {
+} = {}, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('makeFinalPNPCertificateRecord0');
   const resolved = resolveCertificateInputs0(concreteFinalAcceptanceReplayEnvelope);
   const replayNF = recordNF0(concreteFinalAcceptanceReplayRecord);
   const finalVerdictNF = recordNF0(concreteFinalAcceptanceReplayEnvelope?.FinalVerdictRecord);
@@ -220,6 +225,7 @@ export async function CheckFinalPNPCertificate0(
   const checker = 'CheckFinalPNPCertificate0';
   const ledger = [];
   const cfg = makeFinalPNPCertificateConfig0(config);
+  if (cfg.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const envelope = input;
 
   const cfgCheck = validateConfig0(cfg);
@@ -263,7 +269,10 @@ export async function CheckFinalPNPCertificate0(
   if (cfg.checkConcreteFinalAcceptanceReplay === true) {
     const fresh = await CheckConcreteFinalAcceptanceReplay0(
       envelope.ConcreteFinalAcceptanceReplayEnvelope,
-      cfg.concreteFinalAcceptanceReplayConfig ?? {},
+      {
+        ...(cfg.concreteFinalAcceptanceReplayConfig ?? {}),
+        historicalReplay: true,
+      },
     );
 
     const result = recordToValidation0(fresh, ['ConcreteFinalAcceptanceReplayEnvelope']);
@@ -314,7 +323,7 @@ export async function CheckFinalPNPCertificate0(
     const expected = makeFinalPNPCertificateRecord0({
       concreteFinalAcceptanceReplayEnvelope: envelope.ConcreteFinalAcceptanceReplayEnvelope,
       concreteFinalAcceptanceReplayRecord: replayRecord,
-    });
+    }, { historicalReplay: true });
 
     const certificate = validateCertificateRecord0(envelope.Certificate, expected);
 
@@ -465,12 +474,13 @@ export async function CheckFinalPNPCertificate0(
 }
 
 export async function writeFinalPNPCertificateFiles0(outDir, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('writeFinalPNPCertificateFiles0');
   if (typeof outDir !== 'string' || outDir.length === 0) {
     throw new TypeError('writeFinalPNPCertificateFiles0 requires a non-empty output directory');
   }
 
   const envelope = await makeFinalPNPCertificate0(options);
-  const checked = await CheckFinalPNPCertificate0(envelope, options.checkConfig ?? {});
+  const checked = await CheckFinalPNPCertificate0(envelope, { ...(options.checkConfig ?? {}), historicalReplay: true });
 
   await fs.mkdir(outDir, {
     recursive: true,

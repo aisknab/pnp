@@ -116,7 +116,7 @@ export async function CheckGlobalFinalPrefixSemantic0(input) {
 
   const packCall = await callChecker0(
     'CheckPackSufficiency0',
-    () => CheckPackSufficiency0(input.PCCPack),
+    () => CheckPackSufficiency0(input.PCCPack, { historicalReplay: true }),
   );
   ledger.push(makeLedgerEntry0(
     'CheckPackSufficiency0',

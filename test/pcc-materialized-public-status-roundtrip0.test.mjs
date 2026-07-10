@@ -27,6 +27,7 @@ test('CheckMaterializedPublicStatusRoundtrip0 writes deterministic fixtures and 
   const outputDir = await makeTempDir0(t);
 
   const out = await CheckMaterializedPublicStatusRoundtrip0({
+    historicalReplay: true,
     outputDir,
   });
 
@@ -48,6 +49,7 @@ test('CheckMaterializedPublicStatusRoundtrip0 accepts canonical envelope public 
   const outputDir = await makeTempDir0(t);
 
   const out = await CheckMaterializedPublicStatusRoundtrip0({
+    historicalReplay: true,
     outputDir,
     canonicalEnvelopeBytes: true,
   });
@@ -62,6 +64,7 @@ test('CheckMaterializedPublicStatusRoundtrip0 can skip CLI checks while retainin
   const outputDir = await makeTempDir0(t);
 
   const out = await CheckMaterializedPublicStatusRoundtrip0({
+    historicalReplay: true,
     outputDir,
     runCliChecks: false,
   });
@@ -75,6 +78,7 @@ test('CheckMaterializedPublicStatusRoundtrip0 rejects non-deterministic second w
   const outputDir = await makeTempDir0(t);
 
   const out = await CheckMaterializedPublicStatusRoundtrip0({
+    historicalReplay: true,
     outputDir,
     runCliChecks: false,
     mutateSecondWrite: async ({ outputDir: dir }) => {
@@ -95,6 +99,7 @@ test('CheckMaterializedPublicStatusRoundtrip0 rejects non-deterministic second w
 
 test('CheckMaterializedPublicStatusRoundtrip0 validates outputDir shape', async () => {
   const out = await CheckMaterializedPublicStatusRoundtrip0({
+    historicalReplay: true,
     outputDir: '',
   });
 
@@ -125,7 +130,7 @@ test('bin/check-materialized-public-status-roundtrip0.mjs emits accepted summary
   const outputDir = await makeTempDir0(t);
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-public-status-roundtrip0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, '--out', outputDir], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', '--out', outputDir], {
     encoding: 'utf8',
   });
 
@@ -149,7 +154,7 @@ test('bin/check-materialized-public-status-roundtrip0.mjs --full emits full reco
   const outputDir = await makeTempDir0(t);
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-public-status-roundtrip0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, '--out', outputDir, '--full'], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', '--out', outputDir, '--full'], {
     encoding: 'utf8',
   });
 

@@ -53,7 +53,7 @@ function makePublicSurfaceAcceptRecord0(overrides = {}) {
 }
 
 async function runReleaseAuditWithPublicSurfaceRecord0(record, overrides = {}) {
-  return CheckReleaseAudit0(makeReleaseAuditConfig0({
+  return CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -65,8 +65,10 @@ async function runReleaseAuditWithPublicSurfaceRecord0(record, overrides = {}) {
   }));
 }
 
+const CheckHistoricalReleaseAudit0 = (config = {}) => CheckReleaseAudit0({ ...config, historicalReplay: true });
+
 test('CheckReleaseAudit0 executes the public surface freeze phase', async () => {
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -85,7 +87,7 @@ test('CheckReleaseAudit0 executes the public surface freeze phase', async () => 
 });
 
 test('CheckReleaseAudit0 can skip public surface freeze by explicit internal config', async () => {
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -165,7 +167,7 @@ test('CheckReleaseAudit0 rejects public surface freeze accept record without exp
 });
 
 test('CheckReleaseAudit0 validates public surface freeze config shape', async () => {
-  const out = await CheckReleaseAudit0({
+  const out = await CheckHistoricalReleaseAudit0({
     ...makeReleaseAuditConfig0(),
     runPublicSurfaceFreeze: 'yes',
   });

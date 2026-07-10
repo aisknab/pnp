@@ -12,6 +12,8 @@ import {
   MATERIALIZED_PACK_PUBLIC_BOUNDARY0,
 } from './pcc-materialized-pack0.mjs';
 
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 const CHECKER_VERSION = 0;
 
 export const MATERIALIZED_FINAL_VERDICT_PHASES0 = Object.freeze([
@@ -58,6 +60,7 @@ export function makeMaterializedFinalVerdictInput0({
 
 export async function CheckMaterializedFinalVerdict0(input, config = {}) {
   const checker = 'CheckMaterializedFinalVerdict0';
+  if (config.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const ledger = [];
   const normalized = normalizeFinalVerdictInput0(input);
 
@@ -81,7 +84,10 @@ export async function CheckMaterializedFinalVerdict0(input, config = {}) {
 
   const acceptRunRecord = await CheckMaterializedAcceptRun0(
     normalized.AcceptRun,
-    config.acceptRunConfig ?? {},
+    {
+      ...(config.acceptRunConfig ?? {}),
+      historicalReplay: true,
+    },
   );
   const acceptRun = recordToValidation0(acceptRunRecord, ['AcceptRun']);
 
@@ -185,11 +191,15 @@ export async function CheckMaterializedFinalVerdict0(input, config = {}) {
 
 export async function CheckMaterializedFinalVerdictFile0(filePath, config = {}) {
   const checker = 'CheckMaterializedFinalVerdictFile0';
+  if (config.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const ledger = [];
 
   const acceptRunRecord = await CheckMaterializedAcceptRunFile0(
     filePath,
-    config.acceptRunConfig ?? {},
+    {
+      ...(config.acceptRunConfig ?? {}),
+      historicalReplay: true,
+    },
   );
   const acceptRun = recordToValidation0(acceptRunRecord, ['AcceptRunFile']);
 

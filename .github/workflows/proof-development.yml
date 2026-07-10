@@ -6,72 +6,31 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
+concurrency:
+  group: proof-development-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   proof-development:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+          show-progress: false
+          persist-credentials: false
+          set-safe-directory: false
+      - uses: actions/setup-node@v6
         with:
           node-version: '20'
-      - name: Uniform final soundness target
+      - name: Formal reconstruction status
         run: |
-          npm run proof:uniform-final-soundness-target
-          node --test audits/uniform-final-soundness-target0.test.mjs
-      - name: Uniform input family
+          node pcc-formal-reconstruction-status0.mjs --json
+          node --test audits/formal-reconstruction-status0.test.mjs
+      - name: Formal reconstruction public surface
         run: |
-          npm run proof:uniform-input-family
-          node --test audits/uniform-input-family0.test.mjs
-      - name: Uniform locked NAND construction
-        run: |
-          npm run proof:uniform-locked-nand-construction
-          node --test audits/uniform-locked-nand-construction0.test.mjs
-      - name: Uniform locked NAND threshold
-        run: |
-          npm run proof:uniform-locked-nand-threshold
-          node --test audits/uniform-locked-nand-threshold0.test.mjs
-      - name: Uniform residual-band minimizer
-        run: |
-          npm run proof:uniform-residual-band-minimizer
-          node --test audits/uniform-residual-band-minimizer0.test.mjs
-      - name: Uniform ZeroSlack closure
-        run: |
-          npm run proof:uniform-zeroslack-closure
-          node --test audits/uniform-zeroslack-closure0.test.mjs
-      - name: Semantic no-hidden-oracle
-        run: |
-          npm run proof:no-hidden-oracle-semantic
-          node --test audits/no-hidden-oracle-semantic0.test.mjs
-      - name: Uniform complexity conclusion
-        run: |
-          npm run proof:uniform-complexity-conclusion
-          node --test audits/uniform-complexity-conclusion0.test.mjs
-      - name: Unrestricted final soundness release
-        run: |
-          npm run proof:unrestricted-final-soundness-release
-          node --test audits/unrestricted-final-soundness-release0.test.mjs
-      - name: Public theorem activation
-        run: |
-          npm run proof:public-theorem-activation
-          node --test audits/public-theorem-activation0.test.mjs
-      - name: Activated PNP status
-        run: |
-          npm run proof:activated-pnp-status
-          node --test audits/activated-pnp-status0.test.mjs
-      - name: Upload proof-development verdicts
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: proof-development-latest-verdicts
-          path: |
-            artifacts/uniform-final-soundness-target/latest-verdict.json
-            artifacts/uniform-input-family/latest-verdict.json
-            artifacts/uniform-locked-nand-construction/latest-verdict.json
-            artifacts/uniform-locked-nand-threshold/latest-verdict.json
-            artifacts/uniform-residual-band-minimizer/latest-verdict.json
-            artifacts/uniform-zeroslack-closure/latest-verdict.json
-            artifacts/no-hidden-oracle-semantic/latest-verdict.json
-            artifacts/uniform-complexity-conclusion/latest-verdict.json
-            artifacts/unrestricted-final-soundness-release/latest-verdict.json
-            artifacts/public-theorem-activation/latest-verdict.json
-            artifacts/activated-pnp-status/latest-verdict.json
+          node pcc-formal-public-surface0.mjs --json
+          node --test audits/formal-public-surface0.test.mjs test/pcc-legacy-replay-gate0.test.mjs

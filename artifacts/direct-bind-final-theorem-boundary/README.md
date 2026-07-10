@@ -1,5 +1,7 @@
 # Final theorem boundary seed artifacts
 
+> **Historical assertion-checker record.** This record is subordinate to `status/FORMAL_RECONSTRUCTION_STATUS.json` and is not current theorem-status authority or proof.
+
 The Final theorem boundary seed checker writes its generated verdict here:
 
 ```text

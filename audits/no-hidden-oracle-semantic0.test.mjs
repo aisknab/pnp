@@ -7,6 +7,11 @@ import {
   EvaluateNoHiddenOracleSemanticExample0,
 } from '../pcc-no-hidden-oracle-semantic0.mjs';
 
+const EvaluateHistoricalNoHiddenExample0 = (input) => EvaluateNoHiddenOracleSemanticExample0(
+  input,
+  { historicalReplay: true },
+);
+
 async function currentManifest() {
   return JSON.parse(await readFile(new URL('../proof-obligations/UNIFORM_NO_HIDDEN_ORACLE_SEMANTIC.json', import.meta.url), 'utf8'));
 }
@@ -16,7 +21,7 @@ async function currentPackageJson() {
 }
 
 test('semantic no-hidden-oracle checker accepts current semantic closure surface', async () => {
-  const out = await CheckNoHiddenOracleSemantic0({ writeOutput: false });
+  const out = await CheckNoHiddenOracleSemantic0({ historicalReplay: true, writeOutput: false });
   assert.equal(out.tag, 'accept');
   assert.equal(out.coordinate, 'PNP-UNIFORM-NO-HIDDEN-ORACLE-SEMANTIC-2026-07-05-01');
   assert.equal(out.ufsObligationId, 'UFS-006-NoHiddenOracleSemanticCompleteness');
@@ -37,12 +42,12 @@ test('semantic no-hidden-oracle checker accepts current semantic closure surface
 });
 
 test('semantic no-hidden-oracle examples accept direct proof scripts and finite rank iteration', () => {
-  assert.deepEqual(EvaluateNoHiddenOracleSemanticExample0({
+  assert.deepEqual(EvaluateHistoricalNoHiddenExample0({
     scriptName: 'proof:example-checker',
     command: 'node pcc-example-checker0.mjs --json',
   }), { tag: 'accept', proofScriptAccepted: true, directCheckerInvocation: true });
 
-  assert.deepEqual(EvaluateNoHiddenOracleSemanticExample0({
+  assert.deepEqual(EvaluateHistoricalNoHiddenExample0({
     loopKind: 'rank-bounded',
     boundSource: 'accepted finite packet rank list',
     usesUnboundedSearch: false,
@@ -50,7 +55,7 @@ test('semantic no-hidden-oracle examples accept direct proof scripts and finite 
 });
 
 test('semantic no-hidden-oracle rejects unsafe proof-script command', () => {
-  const out = EvaluateNoHiddenOracleSemanticExample0({
+  const out = EvaluateHistoricalNoHiddenExample0({
     scriptName: 'proof:bad',
     command: 'node scripts/bad.mjs && node pcc-example0.mjs --json',
   });
@@ -61,7 +66,7 @@ test('semantic no-hidden-oracle rejects unsafe proof-script command', () => {
 test('semantic no-hidden-oracle rejects SAT oracle semantic premise', async () => {
   const manifest = await currentManifest();
   manifest.semanticCoverage.usesSatOracle = true;
-  const out = await CheckNoHiddenOracleSemantic0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckNoHiddenOracleSemantic0({ historicalReplay: true, writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'NoHiddenOracleSemantic.SemanticBoolean');
 });
@@ -69,7 +74,7 @@ test('semantic no-hidden-oracle rejects SAT oracle semantic premise', async () =
 test('semantic no-hidden-oracle rejects exact-minimization oracle semantic premise', async () => {
   const manifest = await currentManifest();
   manifest.semanticCoverage.usesExactMinimizationOracle = true;
-  const out = await CheckNoHiddenOracleSemantic0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckNoHiddenOracleSemantic0({ historicalReplay: true, writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'NoHiddenOracleSemantic.SemanticBoolean');
 });
@@ -77,7 +82,7 @@ test('semantic no-hidden-oracle rejects exact-minimization oracle semantic premi
 test('semantic no-hidden-oracle rejects theorem activation by semantic check alone', async () => {
   const manifest = await currentManifest();
   manifest.uniformFinalSoundnessProved = true;
-  const out = await CheckNoHiddenOracleSemantic0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckNoHiddenOracleSemantic0({ historicalReplay: true, writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'NoHiddenOracleSemantic.BooleanField');
   assert.deepEqual(out.path, ['uniformFinalSoundnessProved']);
@@ -86,7 +91,7 @@ test('semantic no-hidden-oracle rejects theorem activation by semantic check alo
 test('semantic no-hidden-oracle rejects unsafe package proof script', async () => {
   const pkg = await currentPackageJson();
   pkg.scripts['proof:bad'] = 'node scripts/bad.mjs && node pcc-example0.mjs --json';
-  const out = await CheckNoHiddenOracleSemantic0({ writeOutput: false, packageJsonOverride: pkg });
+  const out = await CheckNoHiddenOracleSemantic0({ historicalReplay: true, writeOutput: false, packageJsonOverride: pkg });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'NoHiddenOracleSemantic.ProofScriptCommand');
 });

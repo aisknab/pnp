@@ -1,6 +1,11 @@
 # Public theorem-emission negative transition audit
 
-Current coordinate:
+> **Superseded release-policy record:** This June 2026 audit records historical assertion-checker
+> negative cases. It is not a mathematical proof or current theorem-status authority. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical coordinate:
 
 ```text
 PNP-PUBLIC-THEOREM-EMISSION-NEGATIVE-TRANSITIONS-2026-06-27-01
@@ -18,9 +23,10 @@ Checker:
 node pcc-public-theorem-emission-negative-transitions0.mjs --json
 ```
 
-This audit proves that the current preflight and denial surfaces reject premature theorem-emission activation attempts. It is not a theorem-activation surface.
+This audit recorded that the implemented preflight and denial predicates rejected the listed
+premature activation attempts. It is not a theorem-activation surface.
 
-## Current boundary
+## Historical boundary
 
 ```text
 publicTheoremEmissionAllowed = false
@@ -32,7 +38,7 @@ remainingBlockers = [
 ]
 ```
 
-## Current negative-transition state
+## Historical negative-transition state
 
 ```text
 negativeTransitionAuditReady = true
@@ -58,7 +64,8 @@ NEG-008-preflight-passed
 NEG-009-denial-activation-surface
 ```
 
-Each case mutates one current source surface toward a premature activation state and must be rejected by the relevant checker.
+Each case mutated one source surface toward a premature activation state and was required to be
+rejected by the relevant historical checker.
 
 ## Non-claims
 
@@ -67,4 +74,5 @@ This audit does not clear `Release.UnrestrictedFinalSoundness` or `ExternalRevie
 This audit does not pass the public theorem-emission preflight.
 This audit does not claim unrestricted final soundness.
 This audit does not claim independent external review acceptance.
-This audit is not yet status-bound; a follow-up PR may bind it into `PNP_STATUS.json` and `npm run pnp:verify`.
+The historical audit was not yet status-bound at this coordinate. That recorded follow-up plan has
+no current release-policy effect.

@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+import { EnforceHistoricalReplayCli0, LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -25,8 +27,9 @@ export async function CheckUniformResidualBandMinimizer0(options = {}) {
   const root = path.resolve(options.root ?? process.cwd());
   const writeOutput = options.writeOutput ?? true;
   const outputPath = options.outputPath ?? OUT;
+  if (options.historicalReplay !== true) return write0(root, outputPath, writeOutput, LegacyReplayRequiredReject0(CHECKER, BLOCKERS));
   try {
-    const threshold = await CheckUniformLockedNANDThreshold0({ root, writeOutput: false });
+    const threshold = await CheckUniformLockedNANDThreshold0({ root, writeOutput: false, historicalReplay: true });
     if (threshold.tag !== 'accept') return write0(root, outputPath, writeOutput, reject0('UniformResidualBandMinimizer.ThresholdDependency', ['dependsOn', THRESHOLD_COORD], 'UFS-003 threshold dependency must accept', { dependency: threshold }));
 
     const manifestRead = await readJson0({ root, filePath: options.manifestPath ?? MANIFEST_PATH, override: options.manifestOverride, label: 'uniform residual-band minimizer manifest' });
@@ -143,5 +146,5 @@ function sha256Text0(text) { return sha256Hex0(Buffer.from(text, 'utf8')); }
 function stableStringify0(value) { if (Array.isArray(value)) return `[${value.map(stableStringify0).join(',')}]`; if (plain0(value)) return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${stableStringify0(value[key])}`).join(',')}}`; return JSON.stringify(value); }
 function normalizeError0(error) { return { name: error?.name ?? 'Error', message: error?.message ?? String(error), code: error?.code ?? null }; }
 function parseArgs0(argv) { const out = { json: false, writeOutput: true }; for (const arg of argv) { if (arg === '--json') out.json = true; else if (arg === '--no-write') out.writeOutput = false; else throw new Error(`unknown argument: ${arg}`); } return out; }
-async function main0() { let options; try { options = parseArgs0(process.argv.slice(2)); } catch (error) { const verdict = reject0('UniformResidualBandMinimizer.CliBadArgument', [], 'bad CLI argument', normalizeError0(error)); console.error(JSON.stringify(verdict, null, 2)); process.exit(2); } const verdict = await CheckUniformResidualBandMinimizer0(options); const rendered = JSON.stringify(verdict, null, 2); if (options.json || verdict.tag === 'accept') console.log(rendered); else console.error(rendered); process.exit(verdict.tag === 'accept' ? 0 : 1); }
+async function main0() { EnforceHistoricalReplayCli0({ entrypoint: 'pcc-uniform-residual-band-minimizer0.mjs' }); let options; try { options = parseArgs0(process.argv.slice(2)); } catch (error) { const verdict = reject0('UniformResidualBandMinimizer.CliBadArgument', [], 'bad CLI argument', normalizeError0(error)); console.error(JSON.stringify(verdict, null, 2)); process.exit(2); } options.historicalReplay = true; const verdict = await CheckUniformResidualBandMinimizer0(options); const rendered = JSON.stringify(verdict, null, 2); if (options.json || verdict.tag === 'accept') console.log(rendered); else console.error(rendered); process.exit(verdict.tag === 'accept' ? 0 : 1); }
 if (import.meta.url === `file://${process.argv[1]}`) main0();

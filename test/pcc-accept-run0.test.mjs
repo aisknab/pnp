@@ -10,8 +10,12 @@ import {
   makeSyntheticRejectAcceptRun0,
 } from '../pcc-accept-run0.mjs';
 
+const ReplayHistorical0 = (run) => ReplayAcceptRun0(run, { historicalReplay: true });
+const CheckHistoricalAcceptRun0 = (run) => CheckAcceptRun0(run, { historicalReplay: true });
+const EmitHistoricalFinalVerdict0 = (run) => EmitFinalVerdict0(run, { historicalReplay: true });
+
 test('ReplayAcceptRun0 accepts the synthetic generated package by canonical byte equality', async () => {
-  const out = await ReplayAcceptRun0(makeSyntheticAcceptRun0());
+  const out = await ReplayHistorical0(makeSyntheticAcceptRun0({ historicalReplay: true }));
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'ReplayAcceptRun0');
@@ -21,7 +25,7 @@ test('ReplayAcceptRun0 accepts the synthetic generated package by canonical byte
 });
 
 test('CheckAcceptRun0 accepts the synthetic final acceptance run', async () => {
-  const out = await CheckAcceptRun0(makeSyntheticAcceptRun0());
+  const out = await CheckHistoricalAcceptRun0(makeSyntheticAcceptRun0({ historicalReplay: true }));
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckAcceptRun0');
@@ -33,7 +37,7 @@ test('CheckAcceptRun0 accepts the synthetic final acceptance run', async () => {
 });
 
 test('EmitFinalVerdict0 emits the conditional public conclusion for an accepted run', async () => {
-  const out = await EmitFinalVerdict0(makeSyntheticAcceptRun0());
+  const out = await EmitHistoricalFinalVerdict0(makeSyntheticAcceptRun0({ historicalReplay: true }));
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'EmitFinalVerdict0');
@@ -45,7 +49,7 @@ test('EmitFinalVerdict0 emits the conditional public conclusion for an accepted 
 });
 
 test('CheckAcceptRun0 accepts a replayable reject run without emitting P equals NP', async () => {
-  const out = await CheckAcceptRun0(makeSyntheticRejectAcceptRun0());
+  const out = await CheckHistoricalAcceptRun0(makeSyntheticRejectAcceptRun0({}, { historicalReplay: true }));
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckAcceptRun0');
@@ -56,7 +60,7 @@ test('CheckAcceptRun0 accepts a replayable reject run without emitting P equals 
 });
 
 test('EmitFinalVerdict0 emits no public theorem for a reject run', async () => {
-  const out = await EmitFinalVerdict0(makeSyntheticRejectAcceptRun0());
+  const out = await EmitHistoricalFinalVerdict0(makeSyntheticRejectAcceptRun0({}, { historicalReplay: true }));
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'EmitFinalVerdict0');
@@ -67,14 +71,14 @@ test('EmitFinalVerdict0 emits no public theorem for a reject run', async () => {
 });
 
 test('ReplayAcceptRun0 rejects generator core canonical byte mismatch', async () => {
-  const run = makeSyntheticAcceptRun0();
+  const run = makeSyntheticAcceptRun0({ historicalReplay: true });
 
   run.GenCall = {
     ...run.GenCall,
     outputCoreBytes: '{"not":"the core"}',
   };
 
-  const out = await ReplayAcceptRun0(run);
+  const out = await ReplayHistorical0(run);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'ReplayAcceptRun0');
@@ -84,7 +88,7 @@ test('ReplayAcceptRun0 rejects generator core canonical byte mismatch', async ()
 });
 
 test('CheckAcceptRun0 rejects an accept verdict when replay rejects', async () => {
-  const run = makeSyntheticRejectAcceptRun0();
+  const run = makeSyntheticRejectAcceptRun0({}, { historicalReplay: true });
 
   run.Verdict = {
     ...run.Verdict,
@@ -98,7 +102,7 @@ test('CheckAcceptRun0 rejects an accept verdict when replay rejects', async () =
     },
   };
 
-  const out = await CheckAcceptRun0(run);
+  const out = await CheckHistoricalAcceptRun0(run);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckAcceptRun0');
@@ -108,7 +112,7 @@ test('CheckAcceptRun0 rejects an accept verdict when replay rejects', async () =
 });
 
 test('CheckAcceptRun0 rejects bad phase order', async () => {
-  const run = makeSyntheticAcceptRun0();
+  const run = makeSyntheticAcceptRun0({ historicalReplay: true });
 
   run.PhaseOrder = [
     ...run.PhaseOrder,
@@ -116,7 +120,7 @@ test('CheckAcceptRun0 rejects bad phase order', async () => {
 
   run.PhaseOrder[0] = 'Φ99.BadPhase';
 
-  const out = await CheckAcceptRun0(run);
+  const out = await CheckHistoricalAcceptRun0(run);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckAcceptRun0');
@@ -126,14 +130,14 @@ test('CheckAcceptRun0 rejects bad phase order', async () => {
 });
 
 test('CheckAcceptRun0 rejects digest-only package equality', async () => {
-  const run = makeSyntheticAcceptRun0();
+  const run = makeSyntheticAcceptRun0({ historicalReplay: true });
 
   run.AuditLogs = {
     ...run.AuditLogs,
     digestComparisonsOnly: true,
   };
 
-  const out = await CheckAcceptRun0(run);
+  const out = await CheckHistoricalAcceptRun0(run);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckAcceptRun0');
@@ -143,7 +147,7 @@ test('CheckAcceptRun0 rejects digest-only package equality', async () => {
 });
 
 test('CheckAcceptRun0 rejects executable hidden minimization in run metadata', async () => {
-  const run = makeSyntheticAcceptRun0();
+  const run = makeSyntheticAcceptRun0({ historicalReplay: true });
 
   run.Transcript = {
     ...run.Transcript,
@@ -152,7 +156,7 @@ test('CheckAcceptRun0 rejects executable hidden minimization in run metadata', a
     ],
   };
 
-  const out = await CheckAcceptRun0(run);
+  const out = await CheckHistoricalAcceptRun0(run);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckAcceptRun0');
@@ -162,7 +166,7 @@ test('CheckAcceptRun0 rejects executable hidden minimization in run metadata', a
 });
 
 test('CheckAcceptRun0 rejects opaque proof material', async () => {
-  const run = makeSyntheticAcceptRun0();
+  const run = makeSyntheticAcceptRun0({ historicalReplay: true });
 
   run.PiRun = {
     ...run.PiRun,
@@ -171,11 +175,26 @@ test('CheckAcceptRun0 rejects opaque proof material', async () => {
     },
   };
 
-  const out = await CheckAcceptRun0(run);
+  const out = await CheckHistoricalAcceptRun0(run);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckAcceptRun0');
   assert.equal(out.Coord, 'CheckAcceptRun0.opaqueProof');
   assert.deepEqual(out.Path, ['AcceptRun0', 'PiRun', 'proofBlob']);
   assert.equal(out.Witness.reason, 'opaque proof material is not allowed in AcceptRun0');
+});
+
+test('accept-run public routes reject without historical replay opt-in', async () => {
+  const run = makeSyntheticAcceptRun0({ historicalReplay: true });
+
+  for (const out of await Promise.all([
+    ReplayAcceptRun0(run),
+    CheckAcceptRun0(run),
+    EmitFinalVerdict0(run),
+  ])) {
+    assert.equal(out.tag, 'reject');
+    assert.match(out.coord, /\.HistoricalReplayRequired$/);
+    assert.equal(out.publicTheoremEmissionAllowed, false);
+    assert.equal(out.finalTheoremReady, false);
+  }
 });

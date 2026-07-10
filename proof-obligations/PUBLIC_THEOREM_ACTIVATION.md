@@ -1,26 +1,32 @@
 # Public theorem activation gate
 
-Coordinate:
+> **Withdrawn activation:** This coordinate is superseded and is not current theorem authority.
+> The repository does not currently establish `P = NP`, and public theorem emission is disabled.
+> See [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json)
+> and [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical coordinate:
 
 ```text
 PNP-PUBLIC-THEOREM-ACTIVATION-2026-07-05-01
 ```
 
-Checker:
+Historical replay command:
 
 ```bash
-npm run proof:public-theorem-activation
+npm run proof:public-theorem-activation -- --historical-replay
 ```
 
-Direct checker command:
+Direct historical replay command:
 
 ```bash
-node pcc-public-theorem-activation0.mjs --json
+node pcc-public-theorem-activation0.mjs --json --historical-replay
 ```
 
-## Purpose
+## Historical purpose
 
-This gate activates public theorem emission after the proof-only unrestricted final soundness release accepts.
+This gate recorded the old JavaScript assertion stack's activation decision after its unrestricted
+final-soundness record accepted. That transition did not establish the named mathematical claims.
 
 It depends on:
 
@@ -28,9 +34,9 @@ It depends on:
 PNP-UNRESTRICTED-FINAL-SOUNDNESS-RELEASE-2026-07-05-01
 ```
 
-## Activation rule
+## Historical activation rule
 
-The gate accepts only if the dependency records:
+The historical gate accepted only if the dependency recorded:
 
 ```text
 unrestrictedFinalSoundnessDischarged = true
@@ -39,7 +45,7 @@ internalFinalTheoremReady = true
 pEqualsNPConclusionAccepted = true
 ```
 
-and this gate records:
+and the activation record asserted:
 
 ```text
 publicTheoremEmissionAllowed = true
@@ -49,8 +55,11 @@ remainingBlockers = []
 
 ## External review policy
 
-External review is not a mathematical premise. It remains useful as reproducibility evidence, bug-finding, and independent audit, but it is not required for public theorem emission once the proof stack accepts through UFS-008.
+External review is not a mathematical premise. It remains useful for reproduction, bug finding, and
+independent audit. Current activation depends only on the concrete formal conditions in the
+formal-reconstruction notice, not on acceptance of UFS assertion records.
 
-## What this does not claim
+## Evidence boundary
 
-This gate does not claim external consensus. It activates the repository's own public theorem emission under its checker trust model.
+Replaying this gate shows what the historical checker accepted. It does not activate current public
+theorem emission, establish `P = NP`, or supply a formal derivation of any UFS proposition.

@@ -13,6 +13,8 @@ import {
   makeAuditCase,
 } from '../pcc-verifier-frag0.mjs';
 
+const RunHistorical0 = (input) => RunAll0(input, { historicalReplay: true });
+
 const TAMPER_CASES0 = Object.freeze([
   Object.freeze({
     name: 'VerifierFrag0 tamper rejects at CheckVerifierFrag0',
@@ -258,11 +260,11 @@ const TAMPER_CASES0 = Object.freeze([
 
 for (const entry of TAMPER_CASES0) {
   test(`RunAll0 first-failure tamper fixture: ${entry.name}`, async () => {
-    const pipeline = makeSyntheticIntegratedPipeline0();
+    const pipeline = makeSyntheticIntegratedPipeline0({}, { historicalReplay: true });
 
     entry.mutate(pipeline);
 
-    const out = await RunAll0(pipeline);
+    const out = await RunHistorical0(pipeline);
 
     assert.equal(out.tag, 'reject');
     assert.equal(out.checker, 'RunAll0');
@@ -277,11 +279,11 @@ for (const entry of TAMPER_CASES0) {
 
 test('RunAll0 emits no public conclusion for every tamper fixture', async () => {
   for (const entry of TAMPER_CASES0) {
-    const pipeline = makeSyntheticIntegratedPipeline0();
+    const pipeline = makeSyntheticIntegratedPipeline0({}, { historicalReplay: true });
 
     entry.mutate(pipeline);
 
-    const out = await RunAll0(pipeline);
+    const out = await RunHistorical0(pipeline);
 
     assert.equal(out.tag, 'reject', entry.name);
     assert.equal(out.NF, undefined, entry.name);

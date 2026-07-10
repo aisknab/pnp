@@ -1,6 +1,11 @@
 # Semantic kernel hardening - phase 50
 
-Phase 49 added digest-bound templates for future signed external-review findings.
+> **Historical assertion-checker record:** This phase and its retired workflow describe a June 2026
+> release-policy experiment. It is not current theorem-status authority or a current release plan.
+> See [the formal reconstruction status](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [the reconstruction notice](FORMAL_RECONSTRUCTION.md).
+
+Phase 49 added digest-bound templates for possible later signed external-review findings.
 
 Phase 50 binds the semantic shape of those templates:
 
@@ -86,6 +91,7 @@ node --check pcc-external-review-template-shape0.mjs
 node --test test/pcc-external-review-template-shape0.test.mjs
 ```
 
-## Next step
+## Historical next step
 
-The next release-layer work should bind actual signed finding files if they are supplied. Without signed findings and an unrestricted-final-soundness release artifact, public theorem emission remains disabled.
+The recorded next step was to bind signed finding files if supplied. That step is not part of the
+current formal blocker inventory or release plan.

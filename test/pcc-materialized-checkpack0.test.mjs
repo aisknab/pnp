@@ -64,6 +64,7 @@ test('CheckMaterializedCheckPCCPack0 accepts when an injected CheckPCCPackexp ru
 
   const out = await CheckMaterializedCheckPCCPack0(makeMaterializedCheckPCCPackShell0(), {
     packageCheckRunner: async () => packageRecord,
+    historicalReplay: true,
   });
 
   assert.equal(out.tag, 'accept');
@@ -94,12 +95,28 @@ test('CheckMaterializedCheckPCCPack0 rejects an accepted package record with wro
 
   const out = await CheckMaterializedCheckPCCPack0(makeMaterializedCheckPCCPackShell0(), {
     packageCheckRunner: async () => packageRecord,
+    historicalReplay: true,
   });
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedCheckPCCPack0');
   assert.equal(out.Coord, 'CheckMaterializedCheckPCCPack0.acceptedPackage');
   assert.deepEqual(out.Path, ['CheckPCCPackexp', 'NF', 'publicConclusion']);
+});
+
+test('CheckMaterializedCheckPCCPack0 rejects an injected accepting runner without historical opt-in', async () => {
+  const out = await CheckMaterializedCheckPCCPack0(makeMaterializedCheckPCCPackShell0(), {
+    packageCheckRunner: async () => ({
+      tag: 'accept',
+      NF: {
+        kind: 'PackSufficiency0NF',
+        publicConclusion: { ...MATERIALIZED_PACK_PUBLIC_BOUNDARY0 },
+      },
+    }),
+  });
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.coord, 'CheckMaterializedCheckPCCPack0.HistoricalReplayRequired');
 });
 
 test('CheckMaterializedCheckPCCPack0 rejects invalid bridge mode', async () => {

@@ -1,14 +1,20 @@
 #!/usr/bin/env node
 
+import { EnforceHistoricalReplayCli0 } from '../pcc-legacy-replay-gate0.mjs';
+
 import {
   writeFinalCertificatePublicStatusFiles0,
 } from '../pcc-final-certificate-public-status0.mjs';
+
+EnforceHistoricalReplayCli0({ entrypoint: 'bin/write-final-certificate-public-status0.mjs' });
 
 const args = process.argv.slice(2);
 const outDir = args.find((arg) => !arg.startsWith('--')) ?? './materialized-final-certificate-public-status0';
 const full = args.includes('--full');
 
-const result = await writeFinalCertificatePublicStatusFiles0(outDir);
+const result = await writeFinalCertificatePublicStatusFiles0(outDir, {
+  historicalReplay: true,
+});
 
 if (full) {
   console.log(JSON.stringify(result.checked, null, 2));

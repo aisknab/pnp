@@ -7,9 +7,9 @@
   "main": "./index.mjs",
   "exports": {
     ".": "./index.mjs",
-    "./runall0": "./pcc-runall0.mjs",
-    "./integrated-pipeline0": "./pcc-integrated-pipeline0.mjs",
-    "./accept-run0": "./pcc-accept-run0.mjs",
+    "./runall0": "./pcc-runall-public0.mjs",
+    "./integrated-pipeline0": "./pcc-integrated-pipeline-public0.mjs",
+    "./accept-run0": "./pcc-accept-run-public0.mjs",
     "./release-audit0": "./pcc-release-audit0.mjs",
     "./final-certificate0": "./pcc-final-certificate-materialized0.mjs",
     "./final-certificate-public-status0": "./pcc-final-certificate-public-status0.mjs",

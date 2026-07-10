@@ -7,12 +7,17 @@ import {
   EvaluateComplexityConclusionExample0,
 } from '../pcc-uniform-complexity-conclusion0.mjs';
 
+const EvaluateHistoricalComplexityExample0 = (input) => EvaluateComplexityConclusionExample0(
+  input,
+  { historicalReplay: true },
+);
+
 async function currentManifest() {
   return JSON.parse(await readFile(new URL('../proof-obligations/UNIFORM_COMPLEXITY_CONCLUSION.json', import.meta.url), 'utf8'));
 }
 
 test('uniform complexity conclusion checker accepts current conclusion surface', async () => {
-  const out = await CheckUniformComplexityConclusion0({ writeOutput: false });
+  const out = await CheckUniformComplexityConclusion0({ historicalReplay: true, writeOutput: false });
   assert.equal(out.tag, 'accept');
   assert.equal(out.coordinate, 'PNP-UNIFORM-COMPLEXITY-CONCLUSION-2026-07-05-01');
   assert.equal(out.ufsObligationId, 'UFS-007-ComplexityConclusionUniform');
@@ -32,7 +37,7 @@ test('uniform complexity conclusion checker accepts current conclusion surface',
 });
 
 test('complexity conclusion example composes accepted proof surfaces into SAT in P', () => {
-  const out = EvaluateComplexityConclusionExample0({
+  const out = EvaluateHistoricalComplexityExample0({
     inputFamilyAccepted: true,
     lockedConstructionPolynomial: true,
     thresholdEquivalenceAccepted: true,
@@ -50,7 +55,7 @@ test('complexity conclusion example composes accepted proof surfaces into SAT in
 });
 
 test('uniform complexity conclusion rejects missing no-hidden-oracle premise', () => {
-  const out = EvaluateComplexityConclusionExample0({
+  const out = EvaluateHistoricalComplexityExample0({
     inputFamilyAccepted: true,
     lockedConstructionPolynomial: true,
     thresholdEquivalenceAccepted: true,
@@ -65,7 +70,7 @@ test('uniform complexity conclusion rejects missing no-hidden-oracle premise', (
 test('uniform complexity conclusion rejects external review as a proof premise', async () => {
   const manifest = await currentManifest();
   manifest.complexityConclusion.usesExternalReviewAsPremise = true;
-  const out = await CheckUniformComplexityConclusion0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckUniformComplexityConclusion0({ historicalReplay: true, writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'UniformComplexityConclusion.ComplexityBoolean');
 });
@@ -73,7 +78,7 @@ test('uniform complexity conclusion rejects external review as a proof premise',
 test('uniform complexity conclusion rejects historical report prose as a proof premise', async () => {
   const manifest = await currentManifest();
   manifest.complexityConclusion.usesHistoricalReportProseAsPremise = true;
-  const out = await CheckUniformComplexityConclusion0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckUniformComplexityConclusion0({ historicalReplay: true, writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'UniformComplexityConclusion.ComplexityBoolean');
 });
@@ -81,7 +86,7 @@ test('uniform complexity conclusion rejects historical report prose as a proof p
 test('uniform complexity conclusion rejects theorem activation by complexity proof alone', async () => {
   const manifest = await currentManifest();
   manifest.publicTheoremEmissionAllowedByComplexity = true;
-  const out = await CheckUniformComplexityConclusion0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckUniformComplexityConclusion0({ historicalReplay: true, writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'UniformComplexityConclusion.BooleanField');
   assert.deepEqual(out.path, ['publicTheoremEmissionAllowedByComplexity']);

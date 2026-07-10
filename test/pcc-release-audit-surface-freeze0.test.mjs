@@ -23,8 +23,10 @@ function childFailureMessage0(child) {
   ].filter((entry) => entry.length > 0).join('\n');
 }
 
+const CheckHistoricalReleaseAudit0 = (config = {}) => CheckReleaseAudit0({ ...config, historicalReplay: true });
+
 test('CheckReleaseAudit0 freezes ReleaseAudit0NF key surface', async () => {
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -43,7 +45,7 @@ test('CheckReleaseAudit0 freezes ReleaseAudit0NF key surface', async () => {
 });
 
 test('summarizeReleaseAudit0 freezes release audit CLI summary key surface', async () => {
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -60,7 +62,7 @@ test('summarizeReleaseAudit0 freezes release audit CLI summary key surface', asy
 });
 
 test('validateReleaseAuditSurface0 rejects missing NF keys', async () => {
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -84,7 +86,7 @@ test('validateReleaseAuditSurface0 rejects missing NF keys', async () => {
 });
 
 test('validateReleaseAuditSurface0 rejects extra NF keys', async () => {
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -107,7 +109,7 @@ test('validateReleaseAuditSurface0 rejects extra NF keys', async () => {
 });
 
 test('validateReleaseAuditCliSummarySurface0 rejects extra summary keys', async () => {
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -132,7 +134,7 @@ test('validateReleaseAuditCliSummarySurface0 rejects extra summary keys', async 
 test('release audit CLI summary emits frozen summary key surface', () => {
   const cliPath = fileURLToPath(new URL('../bin/release-audit0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, '--no-materialized-gate', '--no-final-certificate-gate'], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', '--no-materialized-gate', '--no-final-certificate-gate'], {
     encoding: 'utf8',
   });
 
@@ -147,7 +149,7 @@ test('release audit CLI summary emits frozen summary key surface', () => {
 test('release audit CLI full mode emits frozen NF key surface', () => {
   const cliPath = fileURLToPath(new URL('../bin/release-audit0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, '--no-materialized-gate', '--no-final-certificate-gate', '--full'], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', '--no-materialized-gate', '--no-final-certificate-gate', '--full'], {
     encoding: 'utf8',
   });
 

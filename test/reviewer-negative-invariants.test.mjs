@@ -15,6 +15,9 @@ import {
   makeSyntheticPCCPack0,
 } from '../pcc-pack-sufficiency0.mjs';
 
+const makeHistoricalPCCPack0 = (overrides = {}) => makeSyntheticPCCPack0(overrides, { historicalReplay: true });
+const CheckHistoricalPackSufficiency0 = (input) => CheckPackSufficiency0(input, { historicalReplay: true });
+
 import {
   COORD,
   MODE,
@@ -173,10 +176,10 @@ test('reviewer negative: mode firewall rejects quotient equality used as a full 
 });
 
 test('reviewer negative: malformed PCCPack rejects a missing required GPack artefact', async () => {
-  const pack = makeSyntheticPCCPack0();
+  const pack = makeHistoricalPCCPack0();
   delete pack.GPack;
 
-  const out = await CheckPackSufficiency0(pack);
+  const out = await CheckHistoricalPackSufficiency0(pack);
 
   assertCheckerReject(out, {
     checker: 'CheckPackSufficiency0',
@@ -188,7 +191,7 @@ test('reviewer negative: malformed PCCPack rejects a missing required GPack arte
 });
 
 test('reviewer negative: invalid ZeroSlack condition rejects zeroSlackSound=false', async () => {
-  const pack = makeSyntheticPCCPack0();
+  const pack = makeHistoricalPCCPack0();
   pack.PackSufficiencyTheorem = {
     ...pack.PackSufficiencyTheorem,
     residualBandMinimization: {
@@ -197,7 +200,7 @@ test('reviewer negative: invalid ZeroSlack condition rejects zeroSlackSound=fals
     },
   };
 
-  const out = await CheckPackSufficiency0(pack);
+  const out = await CheckHistoricalPackSufficiency0(pack);
 
   assertCheckerReject(out, {
     checker: 'CheckPackSufficiency0',

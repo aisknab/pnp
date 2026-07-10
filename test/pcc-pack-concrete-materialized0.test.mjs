@@ -11,13 +11,31 @@ import {
   writeConcreteMaterializedPCCPackFiles0,
 } from '../pcc-pack-concrete-materialized0.mjs';
 
+const makeHistoricalConcreteMaterializedPCCPack0 = (options = {}) => makeConcreteMaterializedPCCPack0({
+  ...options,
+  historicalReplay: true,
+});
+const CheckHistoricalConcreteMaterializedPCCPack0 = (input, config = {}) => CheckConcreteMaterializedPCCPack0(input, {
+  ...config,
+  historicalReplay: true,
+});
+const writeHistoricalConcreteMaterializedPCCPackFiles0 = (dir, options = {}) => writeConcreteMaterializedPCCPackFiles0(dir, {
+  ...options,
+  historicalReplay: true,
+});
+
 import {
   CheckMaterializedPCCPack0,
 } from '../pcc-pack-materialized0.mjs';
 
+const CheckHistoricalMaterializedPCCPack0 = (input, config = {}) => CheckMaterializedPCCPack0(input, {
+  ...config,
+  historicalReplay: true,
+});
+
 test('CheckConcreteMaterializedPCCPack0 accepts the full concrete package chain', async () => {
-  const envelope = await makeConcreteMaterializedPCCPack0();
-  const out = await CheckConcreteMaterializedPCCPack0(envelope);
+  const envelope = await makeHistoricalConcreteMaterializedPCCPack0();
+  const out = await CheckHistoricalConcreteMaterializedPCCPack0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckConcreteMaterializedPCCPack0');
@@ -66,15 +84,15 @@ test('CheckConcreteMaterializedPCCPack0 accepts the full concrete package chain'
 });
 
 test('inner MaterializedPCCPack checker accepts the concrete package envelope', async () => {
-  const envelope = await makeConcreteMaterializedPCCPack0();
-  const out = await CheckMaterializedPCCPack0(envelope.MaterializedPCCPackEnvelope);
+  const envelope = await makeHistoricalConcreteMaterializedPCCPack0();
+  const out = await CheckHistoricalMaterializedPCCPack0(envelope.MaterializedPCCPackEnvelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedPCCPack0');
 });
 
 test('CheckConcreteMaterializedPCCPack0 rejects incomplete HardCheck coverage', async () => {
-  const envelope = await makeConcreteMaterializedPCCPack0();
+  const envelope = await makeHistoricalConcreteMaterializedPCCPack0();
 
   envelope.MaterializedPCCPackEnvelope = {
     ...envelope.MaterializedPCCPackEnvelope,
@@ -94,7 +112,7 @@ test('CheckConcreteMaterializedPCCPack0 rejects incomplete HardCheck coverage', 
     concreteCoverageDigest: undefined,
   };
 
-  const out = await CheckConcreteMaterializedPCCPack0(envelope, {
+  const out = await CheckHistoricalConcreteMaterializedPCCPack0(envelope, {
     checkMaterializedPCCPack: false,
     checkLinkage: false,
   });
@@ -106,7 +124,7 @@ test('CheckConcreteMaterializedPCCPack0 rejects incomplete HardCheck coverage', 
 });
 
 test('CheckConcreteMaterializedPCCPack0 rejects incomplete final-integration coverage', async () => {
-  const envelope = await makeConcreteMaterializedPCCPack0();
+  const envelope = await makeHistoricalConcreteMaterializedPCCPack0();
 
   envelope.MaterializedPCCPackEnvelope = {
     ...envelope.MaterializedPCCPackEnvelope,
@@ -126,7 +144,7 @@ test('CheckConcreteMaterializedPCCPack0 rejects incomplete final-integration cov
     concreteCoverageDigest: undefined,
   };
 
-  const out = await CheckConcreteMaterializedPCCPack0(envelope, {
+  const out = await CheckHistoricalConcreteMaterializedPCCPack0(envelope, {
     checkMaterializedPCCPack: false,
     checkLinkage: false,
   });
@@ -138,7 +156,7 @@ test('CheckConcreteMaterializedPCCPack0 rejects incomplete final-integration cov
 });
 
 test('CheckConcreteMaterializedPCCPack0 rejects PCCPack/component drift', async () => {
-  const envelope = await makeConcreteMaterializedPCCPack0();
+  const envelope = await makeHistoricalConcreteMaterializedPCCPack0();
 
   envelope.MaterializedPCCPackEnvelope = {
     ...envelope.MaterializedPCCPackEnvelope,
@@ -159,7 +177,7 @@ test('CheckConcreteMaterializedPCCPack0 rejects PCCPack/component drift', async 
     concreteCoverageDigest: undefined,
   };
 
-  const out = await CheckConcreteMaterializedPCCPack0(envelope, {
+  const out = await CheckHistoricalConcreteMaterializedPCCPack0(envelope, {
     checkMaterializedPCCPack: false,
     checkLinkage: false,
   });
@@ -171,13 +189,13 @@ test('CheckConcreteMaterializedPCCPack0 rejects PCCPack/component drift', async 
 });
 
 test('CheckConcreteMaterializedPCCPack0 strictly rejects an injected synthetic scaffold marker', async () => {
-  const envelope = await makeConcreteMaterializedPCCPack0({
+  const envelope = await makeHistoricalConcreteMaterializedPCCPack0({
     overrides: {
       GateNote: 'synthetic marker must reject in strict marker mode',
     },
   });
 
-  const out = await CheckConcreteMaterializedPCCPack0(envelope, {
+  const out = await CheckHistoricalConcreteMaterializedPCCPack0(envelope, {
     allowSyntheticScaffoldMarker: false,
   });
 
@@ -197,7 +215,7 @@ test('writeConcreteMaterializedPCCPackFiles0 writes replayable JSON artefacts', 
     });
   });
 
-  const result = await writeConcreteMaterializedPCCPackFiles0(dir);
+  const result = await writeHistoricalConcreteMaterializedPCCPackFiles0(dir);
 
   assert.equal(result.checked.tag, 'accept');
 
@@ -217,7 +235,7 @@ test('writeConcreteMaterializedPCCPackFiles0 writes replayable JSON artefacts', 
 
 
 test('CheckConcreteMaterializedPCCPack0 rejects incomplete final G proof-chain coverage', async () => {
-  const envelope = await makeConcreteMaterializedPCCPack0();
+  const envelope = await makeHistoricalConcreteMaterializedPCCPack0();
 
   envelope.MaterializedPCCPackEnvelope = {
     ...envelope.MaterializedPCCPackEnvelope,
@@ -237,7 +255,7 @@ test('CheckConcreteMaterializedPCCPack0 rejects incomplete final G proof-chain c
     concreteCoverageDigest: undefined,
   };
 
-  const out = await CheckConcreteMaterializedPCCPack0(envelope, {
+  const out = await CheckHistoricalConcreteMaterializedPCCPack0(envelope, {
     checkMaterializedPCCPack: false,
     checkLinkage: false,
   });

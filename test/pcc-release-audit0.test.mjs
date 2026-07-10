@@ -9,8 +9,19 @@ import {
   RELEASE_AUDIT_REQUIRED_TESTS0,
 } from '../pcc-release-audit0.mjs';
 
-test('CheckReleaseAudit0 accepts the current release surface', async () => {
+const CheckHistoricalReleaseAudit0 = (config = {}) => CheckReleaseAudit0({ ...config, historicalReplay: true });
+
+test('CheckReleaseAudit0 rejects without historical replay opt-in', async () => {
   const out = await CheckReleaseAudit0();
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.coord, 'CheckReleaseAudit0.HistoricalReplayRequired');
+  assert.equal(out.publicTheoremEmissionAllowed, false);
+  assert.equal(out.publicTheoremStatement, null);
+  assert.equal(out.finalTheoremReady, false);
+});
+
+test('CheckReleaseAudit0 accepts the current release surface', async () => {
+  const out = await CheckHistoricalReleaseAudit0();
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckReleaseAudit0');
@@ -24,7 +35,7 @@ test('CheckReleaseAudit0 accepts the current release surface', async () => {
 test('release audit CLI emits an accepted summary', () => {
   const cliPath = fileURLToPath(new URL('../bin/release-audit0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay'], {
     encoding: 'utf8',
   });
 
@@ -43,7 +54,7 @@ test('release audit CLI emits an accepted summary', () => {
 test('release audit CLI full mode emits the complete accept record', () => {
   const cliPath = fileURLToPath(new URL('../bin/release-audit0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, '--full'], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', '--full'], {
     encoding: 'utf8',
   });
 

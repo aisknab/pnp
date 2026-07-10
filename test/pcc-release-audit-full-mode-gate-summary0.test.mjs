@@ -19,10 +19,12 @@ function childFailureMessage0(child) {
   ].filter((entry) => entry.length > 0).join('\n');
 }
 
+const CheckHistoricalReleaseAudit0 = (config = {}) => CheckReleaseAudit0({ ...config, historicalReplay: true });
+
 test('CheckReleaseAudit0 NF exposes materialized public status gate proof summary', async (t) => {
   const outputDir = await makeTempDir0(t);
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -55,7 +57,7 @@ test('CheckReleaseAudit0 NF exposes materialized public status gate proof summar
 });
 
 test('CheckReleaseAudit0 NF exposes skipped materialized gate summary', async () => {
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -78,6 +80,7 @@ test('release audit CLI summary exposes materialized public status gate proof su
 
   const child = spawnSync(process.execPath, [
     cliPath,
+    '--historical-replay',
     '--materialized-gate',
     '--materialized-gate-out',
     outputDir,
@@ -107,6 +110,7 @@ test('release audit CLI full mode exposes materialized public status gate proof 
 
   const child = spawnSync(process.execPath, [
     cliPath,
+    '--historical-replay',
     '--full',
     '--materialized-gate',
     '--materialized-gate-out',

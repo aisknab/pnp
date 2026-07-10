@@ -21,10 +21,10 @@ import {
 } from '../pcc-verifier-frag0.mjs';
 
 test('bin/check-materialized-acceptance-bridge0.mjs accepts a pending bridge and emits no public conclusion', async (t) => {
-  const filePath = await writeTempBridgeFile0(t, makeMaterializedAcceptanceBridge0());
+  const filePath = await writeTempBridgeFile0(t, makeMaterializedAcceptanceBridge0({ historicalReplay: true }));
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-acceptance-bridge0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, filePath], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', filePath], {
     encoding: 'utf8',
   });
 
@@ -41,10 +41,10 @@ test('bin/check-materialized-acceptance-bridge0.mjs accepts a pending bridge and
 });
 
 test('bin/check-materialized-acceptance-bridge0.mjs accepts an accepted bridge and records public conclusion emission', async (t) => {
-  const filePath = await writeTempBridgeFile0(t, makeAcceptedMaterializedAcceptanceBridge0());
+  const filePath = await writeTempBridgeFile0(t, makeAcceptedMaterializedAcceptanceBridge0({ historicalReplay: true }));
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-acceptance-bridge0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, filePath], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', filePath], {
     encoding: 'utf8',
   });
 
@@ -60,10 +60,10 @@ test('bin/check-materialized-acceptance-bridge0.mjs accepts an accepted bridge a
 });
 
 test('bin/check-materialized-acceptance-bridge0.mjs --full emits the complete accepted bridge record', async (t) => {
-  const filePath = await writeTempBridgeFile0(t, makeAcceptedMaterializedAcceptanceBridge0());
+  const filePath = await writeTempBridgeFile0(t, makeAcceptedMaterializedAcceptanceBridge0({ historicalReplay: true }));
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-acceptance-bridge0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, filePath, '--full'], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', filePath, '--full'], {
     encoding: 'utf8',
   });
 
@@ -82,6 +82,7 @@ test('bin/check-materialized-acceptance-bridge0.mjs --full emits the complete ac
 
 test('bin/check-materialized-acceptance-bridge0.mjs accepts a rejected bridge but emits no public conclusion', async (t) => {
   const bridge = makeMaterializedAcceptanceBridge0({
+    historicalReplay: true,
     checkStatus: 'rejected',
     replayVerdict: 'reject',
   });
@@ -89,7 +90,7 @@ test('bin/check-materialized-acceptance-bridge0.mjs accepts a rejected bridge bu
   const filePath = await writeTempBridgeFile0(t, bridge);
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-acceptance-bridge0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, filePath], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', filePath], {
     encoding: 'utf8',
   });
 
@@ -104,7 +105,7 @@ test('bin/check-materialized-acceptance-bridge0.mjs accepts a rejected bridge bu
 });
 
 test('bin/check-materialized-acceptance-bridge0.mjs rejects public conclusion before accepted replay', async (t) => {
-  const bridge = makeMaterializedAcceptanceBridge0();
+  const bridge = makeMaterializedAcceptanceBridge0({ historicalReplay: true });
 
   bridge.BridgeVerdict = {
     ...bridge.BridgeVerdict,
@@ -118,7 +119,7 @@ test('bin/check-materialized-acceptance-bridge0.mjs rejects public conclusion be
   const filePath = await writeTempBridgeFile0(t, bridge);
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-acceptance-bridge0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, filePath], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', filePath], {
     encoding: 'utf8',
   });
 
@@ -133,7 +134,7 @@ test('bin/check-materialized-acceptance-bridge0.mjs rejects public conclusion be
 });
 
 test('bin/check-materialized-acceptance-bridge0.mjs rejects if aggregate precondition fails', async (t) => {
-  const bridge = makeMaterializedAcceptanceBridge0();
+  const bridge = makeMaterializedAcceptanceBridge0({ historicalReplay: true });
   const pack = JSON.parse(bridge.Shell.PackBytes);
 
   pack.Manifest.packageImportEdges = [
@@ -149,7 +150,7 @@ test('bin/check-materialized-acceptance-bridge0.mjs rejects if aggregate precond
   const filePath = await writeTempBridgeFile0(t, bridge);
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-acceptance-bridge0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, filePath], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', filePath], {
     encoding: 'utf8',
   });
 
@@ -167,7 +168,7 @@ test('bin/check-materialized-acceptance-bridge0.mjs rejects invalid JSON bridge 
   const filePath = await writeTempTextFile0(t, '{ not json');
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-acceptance-bridge0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, filePath], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', filePath], {
     encoding: 'utf8',
   });
 
@@ -184,7 +185,7 @@ test('bin/check-materialized-acceptance-bridge0.mjs rejects invalid JSON bridge 
 test('bin/check-materialized-acceptance-bridge0.mjs exits nonzero without a file path', () => {
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-acceptance-bridge0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay'], {
     encoding: 'utf8',
   });
 

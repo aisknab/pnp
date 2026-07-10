@@ -102,8 +102,10 @@ function makeAcceptedFinalCertificatePublicStatusRecord0() {
   };
 }
 
+const CheckHistoricalReleaseAudit0 = (config = {}) => CheckReleaseAudit0({ ...config, historicalReplay: true });
+
 test('CheckReleaseAudit0 reports the final-certificate public-status gate summary', async () => {
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -143,7 +145,7 @@ test('CheckReleaseAudit0 rejects a final-certificate public-status gate without 
   bad.Digest = digestCanonical0(bad.NF);
   bad.digest = bad.Digest;
 
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,

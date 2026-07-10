@@ -26,6 +26,7 @@ import {
   CheckConcreteMaterializedPCCPack0,
   summarizeConcretePCCPackCoverage0,
 } from './pcc-pack-concrete-materialized0.mjs';
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
 
 const CHECKER_VERSION = 0;
 
@@ -114,6 +115,7 @@ export async function CheckPCCPackexp0(
   input,
   config = makeCheckPCCPackexpConfig0(),
 ) {
+  if (config?.historicalReplay !== true) return LegacyReplayRequiredReject0('CheckPCCPackexp0');
   const checker = 'CheckPCCPackexp0';
   const ledger = [];
   const cfg = makeCheckPCCPackexpConfig0(config);
@@ -158,7 +160,7 @@ export async function CheckPCCPackexp0(
   if (cfg.checkConcreteMaterializedPCCPack === true) {
     concreteRecord = await CheckConcreteMaterializedPCCPack0(
       input,
-      cfg.concretePCCPackConfig ?? {},
+      { ...(cfg.concretePCCPackConfig ?? {}), historicalReplay: true },
     );
 
     const result = recordToValidation0(concreteRecord, ['PCCPack']);

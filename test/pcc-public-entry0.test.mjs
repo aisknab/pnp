@@ -9,8 +9,18 @@ import {
   RunAll0,
 } from '../index.mjs';
 
-test('public index exports RunAll0 and the public conditional conclusion', async () => {
+test('public index rejects RunAll0 without historical replay opt-in', async () => {
   const out = await RunAll0();
+
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.coord, 'RunAll0.HistoricalReplayRequired');
+  assert.equal(out.publicTheoremEmissionAllowed, false);
+  assert.equal(out.publicTheoremStatement, null);
+  assert.equal(out.finalTheoremReady, false);
+});
+
+test('public index replays RunAll0 only with explicit historical opt-in', async () => {
+  const out = await RunAll0(undefined, { historicalReplay: true });
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'RunAll0');
@@ -30,7 +40,7 @@ test('public checker coverage includes the final replay and verdict layers', () 
 test('bin/runall0.mjs emits an accepted public status summary', () => {
   const cliPath = fileURLToPath(new URL('../bin/runall0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay'], {
     encoding: 'utf8',
   });
 
@@ -52,7 +62,7 @@ test('bin/runall0.mjs emits an accepted public status summary', () => {
 test('bin/runall0.mjs --full emits the full accept record', () => {
   const cliPath = fileURLToPath(new URL('../bin/runall0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, '--full'], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', '--full'], {
     encoding: 'utf8',
   });
 

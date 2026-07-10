@@ -11,6 +11,19 @@ import {
   writeMaterializedScaffoldBurndownFiles0,
 } from '../pcc-materialized-scaffold-burndown0.mjs';
 
+const makeHistoricalScaffold0 = (options = {}) => makeMaterializedScaffoldBurndown0({
+  ...options,
+  historicalReplay: true,
+});
+const CheckHistoricalScaffold0 = (input, config = {}) => CheckMaterializedScaffoldBurndown0(input, {
+  ...config,
+  historicalReplay: true,
+});
+const writeHistoricalScaffold0 = (dir, options = {}) => writeMaterializedScaffoldBurndownFiles0(dir, {
+  ...options,
+  historicalReplay: true,
+});
+
 import {
   digestCanonical0,
 } from '../pcc-verifier-frag0.mjs';
@@ -33,8 +46,8 @@ function refreshEnvelope0(envelope) {
 }
 
 test('CheckMaterializedScaffoldBurndown0 accepts the current materialized chain in audit mode', async () => {
-  const envelope = await makeMaterializedScaffoldBurndown0();
-  const out = await CheckMaterializedScaffoldBurndown0(envelope);
+  const envelope = await makeHistoricalScaffold0();
+  const out = await CheckHistoricalScaffold0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedScaffoldBurndown0');
@@ -48,7 +61,7 @@ test('CheckMaterializedScaffoldBurndown0 accepts the current materialized chain 
 });
 
 test('CheckMaterializedScaffoldBurndown0 strict mode rejects a synthetic scaffold marker', async () => {
-  const envelope = await makeMaterializedScaffoldBurndown0();
+  const envelope = await makeHistoricalScaffold0();
 
   envelope.FinalCertificatePublicStatusEnvelope = {
     ...envelope.FinalCertificatePublicStatusEnvelope,
@@ -57,7 +70,7 @@ test('CheckMaterializedScaffoldBurndown0 strict mode rejects a synthetic scaffol
 
   refreshEnvelope0(envelope);
 
-  const out = await CheckMaterializedScaffoldBurndown0(envelope, {
+  const out = await CheckHistoricalScaffold0(envelope, {
     mode: 'strict',
     checkFinalCertificatePublicStatus: false,
   });
@@ -69,7 +82,7 @@ test('CheckMaterializedScaffoldBurndown0 strict mode rejects a synthetic scaffol
 });
 
 test('CheckMaterializedScaffoldBurndown0 audit mode rejects forbidden marker text', async () => {
-  const envelope = await makeMaterializedScaffoldBurndown0();
+  const envelope = await makeHistoricalScaffold0();
 
   envelope.FinalCertificatePublicStatusEnvelope = {
     ...envelope.FinalCertificatePublicStatusEnvelope,
@@ -78,7 +91,7 @@ test('CheckMaterializedScaffoldBurndown0 audit mode rejects forbidden marker tex
 
   refreshEnvelope0(envelope);
 
-  const out = await CheckMaterializedScaffoldBurndown0(envelope, {
+  const out = await CheckHistoricalScaffold0(envelope, {
     checkFinalCertificatePublicStatus: false,
   });
 
@@ -89,7 +102,7 @@ test('CheckMaterializedScaffoldBurndown0 audit mode rejects forbidden marker tex
 });
 
 test('CheckMaterializedScaffoldBurndown0 rejects stale marker inventory', async () => {
-  const envelope = await makeMaterializedScaffoldBurndown0();
+  const envelope = await makeHistoricalScaffold0();
 
   envelope.FinalCertificatePublicStatusEnvelope = {
     ...envelope.FinalCertificatePublicStatusEnvelope,
@@ -101,7 +114,7 @@ test('CheckMaterializedScaffoldBurndown0 rejects stale marker inventory', async 
     targetDigest: undefined,
   };
 
-  const out = await CheckMaterializedScaffoldBurndown0(envelope, {
+  const out = await CheckHistoricalScaffold0(envelope, {
     checkFinalCertificatePublicStatus: false,
   });
 
@@ -121,7 +134,7 @@ test('writeMaterializedScaffoldBurndownFiles0 writes replayable JSON artefacts',
     });
   });
 
-  const result = await writeMaterializedScaffoldBurndownFiles0(dir);
+  const result = await writeHistoricalScaffold0(dir);
 
   assert.equal(result.checked.tag, 'accept');
 
@@ -135,5 +148,15 @@ test('writeMaterializedScaffoldBurndownFiles0 writes replayable JSON artefacts',
     const value = JSON.parse(text);
 
     assert.equal(typeof value, 'object');
+  }
+});
+
+test('materialized scaffold burndown routes reject without historical replay opt-in', async () => {
+  const made = await makeMaterializedScaffoldBurndown0();
+  const checked = await CheckMaterializedScaffoldBurndown0();
+  const written = await writeMaterializedScaffoldBurndownFiles0('/tmp/not-written-without-opt-in');
+  for (const out of [made, checked, written]) {
+    assert.equal(out.tag, 'reject');
+    assert.match(out.coord, /\.HistoricalReplayRequired$/u);
   }
 });

@@ -1,5 +1,7 @@
 # Semantic kernel hardening - phase 43
 
+> Historical assertion-checker record. Its workflow is retired and it is not current theorem-status authority. See [the formal reconstruction status](../status/FORMAL_RECONSTRUCTION_STATUS.json).
+
 Phase 42 bound the public-review documentation coordinate and discharged only the documentation blocker.
 
 Phase 43 represents the next release-layer coordinate:
@@ -83,7 +85,7 @@ activeFinalNodeIds = []
 The dedicated workflow is:
 
 ```text
-.github/workflows/unrestricted-final-soundness-gate.yml
+retired historical workflow `unrestricted-final-soundness-gate.yml`
 ```
 
 It runs:

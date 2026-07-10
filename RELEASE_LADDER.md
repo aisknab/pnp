@@ -1,6 +1,12 @@
 # Release ladder
 
-Current coordinate:
+> **Superseded ledger:** This June 2026 ladder is preserved as historical assertion-checker evidence.
+> It is not the current activation policy. Formal reconstruction is in progress, no theorem release
+> is active, and the current blockers are listed in
+> [`status/FORMAL_RECONSTRUCTION_STATUS.json`](./status/FORMAL_RECONSTRUCTION_STATUS.json). See also
+> [`docs/FORMAL_RECONSTRUCTION.md`](./docs/FORMAL_RECONSTRUCTION.md).
+
+Historical coordinate:
 
 ```text
 PNP-RELEASE-LADDER-2026-06-27-01
@@ -18,9 +24,11 @@ Checker:
 node pcc-release-ladder0.mjs --json
 ```
 
-The project does not jump from accepted package evidence to public theorem emission. It passes through explicit, ordered release gates. The current ladder records completed public-review infrastructure and keeps final theorem activation blocked until unrestricted final soundness and external review acceptance are represented as cleared release states.
+The historical ladder recorded an ordered checker-release policy. Its external-review blocker model is
+superseded. External review remains useful audit evidence but is not a mathematical premise or a
+current formal blocker.
 
-## Current boundary
+## Historical boundary recorded by this ledger
 
 ```text
 publicTheoremEmissionAllowed = false
@@ -32,7 +40,7 @@ remainingBlockers = [
 ]
 ```
 
-## Current completed statuses
+## Historically recorded completed statuses
 
 ```text
 HistoricalSealedReportExists
@@ -48,7 +56,7 @@ ReproducibilitySeedReady
 ReleaseLadderReady
 ```
 
-## Current blocked statuses
+## Historically recorded blocked statuses
 
 ```text
 UnrestrictedFinalSoundnessRepresented
@@ -72,4 +80,5 @@ ExternalReview.Acceptance
 
 A status transition must be explicit, ordered, and machine-checkable. No blocked status may be treated as complete while its blocker is still listed in `remainingBlockers`. Public theorem emission may become available only when the ladder, status file, final theorem readiness, and active final node list all agree.
 
-This ladder is non-activating. It records the path from public-review evidence toward theorem-emission eligibility but does not clear the current blockers.
+This ladder is non-activating and subordinate to the formal-reconstruction status. It must not be
+used to infer current theorem readiness.

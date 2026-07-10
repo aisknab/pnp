@@ -1,6 +1,11 @@
 # Uniform locked NAND threshold theorem
 
-Coordinate:
+> **Historical assertion-checker record:** This UFS coordinate is superseded. The threshold theorem
+> remains a current formal obligation and is not proved by acceptance of this checker. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical coordinate:
 
 ```text
 PNP-UNIFORM-LOCKED-NAND-THRESHOLD-2026-07-04-01
@@ -12,21 +17,23 @@ Uniform final soundness obligation:
 UFS-003-ThresholdEquivalenceAllInputs
 ```
 
-Checker:
+Historical replay command:
 
 ```bash
-npm run proof:uniform-locked-nand-threshold
+npm run proof:uniform-locked-nand-threshold -- --historical-replay
 ```
 
-Direct checker command:
+Direct historical replay command:
 
 ```bash
-node pcc-uniform-locked-nand-threshold0.mjs --json
+node pcc-uniform-locked-nand-threshold0.mjs --json --historical-replay
 ```
 
 ## Purpose
 
-This surface discharges the third uniform-final-soundness sub-obligation: the locked NAND construction from UFS-002 satisfies the SAT threshold theorem for every input in the UFS-001 input family.
+This surface recorded the third historical UFS assertion: that the UFS-002 construction satisfied the
+SAT threshold relation for every record in the asserted UFS-001 family. It did not formally derive
+that all-input theorem.
 
 The target theorem shape is:
 
@@ -63,7 +70,7 @@ This checker does not prove residual-band minimization, SAT in P, or P = NP. The
 UFS-004-ResidualBandMinimizerUniformPolynomial
 ```
 
-Current boundary remains:
+The historical record kept this boundary:
 
 ```text
 publicTheoremEmissionAllowed = false

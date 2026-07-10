@@ -1,5 +1,7 @@
 # Semantic kernel hardening — phase 40
 
+> Historical assertion-checker record. Its workflow is retired and it is not current theorem-status authority. See [the formal reconstruction status](../status/FORMAL_RECONSTRUCTION_STATUS.json).
+
 Phase 39 completed bounded semantic coverage of every global final coordinate, but it deliberately left publication separate:
 
 ```text
@@ -107,7 +109,7 @@ publicTheoremEmissionAllowed = false
 The dedicated workflow is:
 
 ```text
-.github/workflows/public-emission-gate.yml
+retired historical workflow `public-emission-gate.yml`
 ```
 
 It runs:

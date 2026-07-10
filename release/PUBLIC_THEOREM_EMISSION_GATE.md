@@ -1,6 +1,12 @@
 # Public theorem-emission gate
 
-Current coordinate:
+> **Superseded release-policy record:** This June 2026 gate records a historical assertion-checker
+> denial boundary. It is not current theorem-status authority, and its release-policy blockers are
+> not the current formal blocker inventory. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical coordinate:
 
 ```text
 PNP-PUBLIC-THEOREM-EMISSION-GATE-2026-06-27-01
@@ -18,11 +24,13 @@ Checker:
 node pcc-public-theorem-emission-gate0.mjs --json
 ```
 
-This gate aggregates the current public theorem-emission preflight, denial certificate, and negative-transition audit into one status-bound executable surface. It accepts only the current denied state.
+This gate historically aggregated the public theorem-emission preflight, denial certificate, and
+negative-transition audit into one status-bound executable surface. It accepted only the recorded
+denied state.
 
 It is not a theorem-activation surface.
 
-## Current boundary
+## Historical boundary
 
 ```text
 publicTheoremEmissionAllowed = false
@@ -34,7 +42,7 @@ remainingBlockers = [
 ]
 ```
 
-## Current gate state
+## Historical gate state
 
 ```text
 publicTheoremEmissionGateReady = true

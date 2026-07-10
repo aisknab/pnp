@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
 
 import {
   digestCanonical0,
@@ -27,6 +28,7 @@ export function makeFinalPNPReleaseGateConfig0(overrides = {}) {
   return {
     kind: 'FinalPNPReleaseGateConfig0',
     version: CHECKER_VERSION,
+    historicalReplay: false,
     checkReleaseAuditRecord: true,
     checkFinalPNPCertificate: true,
     checkContract: true,
@@ -40,12 +42,14 @@ export function makeFinalPNPReleaseGateConfig0(overrides = {}) {
 export async function makeFinalPNPReleaseGate0({
   FinalPNPCertificateEnvelope = null,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeFinalPNPReleaseGate0');
   const finalPNPCertificateEnvelope =
-    FinalPNPCertificateEnvelope ?? await makeFinalPNPCertificate0();
+    FinalPNPCertificateEnvelope ?? await makeFinalPNPCertificate0({ historicalReplay: true });
 
   const checkFinalPNPCertificateRecord =
-    await CheckFinalPNPCertificate0(finalPNPCertificateEnvelope);
+    await CheckFinalPNPCertificate0(finalPNPCertificateEnvelope, { historicalReplay: true });
 
   const releaseAuditRecord = resolveReleaseAuditRecord0(finalPNPCertificateEnvelope);
 
@@ -96,6 +100,7 @@ export async function CheckFinalPNPReleaseGate0(
   const checker = 'CheckFinalPNPReleaseGate0';
   const ledger = [];
   const cfg = makeFinalPNPReleaseGateConfig0(config);
+  if (cfg.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const envelope = input;
 
   const cfgCheck = validateConfig0(cfg);
@@ -159,7 +164,7 @@ export async function CheckFinalPNPReleaseGate0(
   if (cfg.checkFinalPNPCertificate === true) {
     const fresh = await CheckFinalPNPCertificate0(
       envelope.FinalPNPCertificateEnvelope,
-      cfg.finalPNPCertificateConfig ?? {},
+      { ...(cfg.finalPNPCertificateConfig ?? {}), historicalReplay: true },
     );
 
     const result = recordToValidation0(fresh, ['FinalPNPCertificateEnvelope']);
@@ -333,12 +338,13 @@ export async function CheckFinalPNPReleaseGate0(
 }
 
 export async function writeFinalPNPReleaseGateFiles0(outDir, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('writeFinalPNPReleaseGateFiles0');
   if (typeof outDir !== 'string' || outDir.length === 0) {
     throw new TypeError('writeFinalPNPReleaseGateFiles0 requires a non-empty output directory');
   }
 
   const envelope = await makeFinalPNPReleaseGate0(options);
-  const checked = await CheckFinalPNPReleaseGate0(envelope, options.checkConfig ?? {});
+  const checked = await CheckFinalPNPReleaseGate0(envelope, { ...(options.checkConfig ?? {}), historicalReplay: true });
 
   await fs.mkdir(outDir, {
     recursive: true,

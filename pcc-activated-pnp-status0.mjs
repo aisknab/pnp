@@ -6,6 +6,7 @@ import path from 'node:path';
 import process from 'node:process';
 
 import { CheckPublicTheoremActivation0 } from './pcc-public-theorem-activation0.mjs';
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
 
 const CHECKER = 'CheckActivatedPNPStatus0';
 const VERSION = 0;
@@ -42,24 +43,28 @@ export async function CheckActivatedPNPStatus0(options = {}) {
   const root = path.resolve(options.root ?? process.cwd());
   const writeOutput = options.writeOutput ?? true;
   const outputPath = options.outputPath ?? OUT;
+  if (options.historicalReplay !== true) {
+    return write0(root, outputPath, writeOutput, LegacyReplayRequiredReject0(CHECKER, ['Formal.RootTheoremAndAxiomAudit']));
+  }
   try {
-    const activation = await CheckPublicTheoremActivation0({ root, writeOutput: false });
+    const sitePath = options.sitePath ?? (options.siteOverride === undefined ? STATUS_PATH : SITE_PATH);
+    const activation = await CheckPublicTheoremActivation0({ root, writeOutput: false, historicalReplay: true });
     if (activation.tag !== 'accept') return write0(root, outputPath, writeOutput, reject0('ActivatedPNPStatus.ActivationDependency', ['dependsOn', ACTIVATION_COORD], 'public theorem activation dependency must accept', { dependency: activation }));
     const activationCheck = validateActivation0(activation);
     if (activationCheck.tag === 'reject') return write0(root, outputPath, writeOutput, activationCheck);
 
     const statusRead = await readJson0({ root, filePath: options.statusPath ?? STATUS_PATH, override: options.statusOverride, label: 'activated status payload' });
     if (statusRead.tag === 'reject') return write0(root, outputPath, writeOutput, statusRead);
-    const siteRead = await readJson0({ root, filePath: options.sitePath ?? SITE_PATH, override: options.siteOverride, label: 'site status payload' });
+    const siteRead = await readJson0({ root, filePath: sitePath, override: options.siteOverride, label: 'historical mirror payload' });
     if (siteRead.tag === 'reject') return write0(root, outputPath, writeOutput, siteRead);
 
     const statusCheck = validateStatus0(statusRead.value, STATUS_PATH);
     if (statusCheck.tag === 'reject') return write0(root, outputPath, writeOutput, statusCheck);
-    const siteCheck = validateStatus0(siteRead.value, SITE_PATH);
+    const siteCheck = validateStatus0(siteRead.value, sitePath);
     if (siteCheck.tag === 'reject') return write0(root, outputPath, writeOutput, siteCheck);
     const mirrorCheck = validateMirror0(statusRead.value, siteRead.value);
     if (mirrorCheck.tag === 'reject') return write0(root, outputPath, writeOutput, mirrorCheck);
-    const evidence = await digestEvidence0({ root, paths: [STATUS_PATH, SITE_PATH, 'proof-obligations/PUBLIC_THEOREM_ACTIVATION.json', 'pcc-public-theorem-activation0.mjs'] });
+    const evidence = await digestEvidence0({ root, paths: [...new Set([STATUS_PATH, sitePath]), 'proof-obligations/PUBLIC_THEOREM_ACTIVATION.json', 'pcc-public-theorem-activation0.mjs'] });
     if (evidence.tag === 'reject') return write0(root, outputPath, writeOutput, evidence);
 
     return write0(root, outputPath, writeOutput, {
@@ -84,7 +89,7 @@ export async function CheckActivatedPNPStatus0(options = {}) {
       historicalReportProseIsMathematicalPremise: false,
       publicSiteWordingIsMathematicalPremise: false,
       statusPayload: STATUS_PATH,
-      siteStatusPayload: SITE_PATH,
+      siteStatusPayload: sitePath,
       activationCoordinate: ACTIVATION_COORD,
       activationDigestSha256: sha256Text0(stableStringify0(activation)),
       statusSha256: sha256Hex0(statusRead.bytes),
@@ -179,6 +184,6 @@ function sha256Hex0(bytes) { return createHash('sha256').update(bytes).digest('h
 function sha256Text0(text) { return sha256Hex0(Buffer.from(text, 'utf8')); }
 function stableStringify0(value) { if (Array.isArray(value)) return `[${value.map(stableStringify0).join(',')}]`; if (plain0(value)) return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${stableStringify0(value[key])}`).join(',')}}`; return JSON.stringify(value); }
 function normalizeError0(error) { return { name: error?.name ?? 'Error', message: error?.message ?? String(error), code: error?.code ?? null }; }
-function parseArgs0(argv) { const out = { json: false, writeOutput: true }; for (const arg of argv) { if (arg === '--json') out.json = true; else if (arg === '--no-write') out.writeOutput = false; else throw new Error(`unknown argument: ${arg}`); } return out; }
+function parseArgs0(argv) { const out = { json: false, writeOutput: true, historicalReplay: false }; for (const arg of argv) { if (arg === '--json') out.json = true; else if (arg === '--no-write') out.writeOutput = false; else if (arg === '--historical-replay') out.historicalReplay = true; else throw new Error(`unknown argument: ${arg}`); } return out; }
 async function main0() { let options; try { options = parseArgs0(process.argv.slice(2)); } catch (error) { const verdict = reject0('ActivatedPNPStatus.CliBadArgument', [], 'bad CLI argument', normalizeError0(error)); console.error(JSON.stringify(verdict, null, 2)); process.exit(2); } const verdict = await CheckActivatedPNPStatus0(options); const rendered = JSON.stringify(verdict, null, 2); if (options.json || verdict.tag === 'accept') console.log(rendered); else console.error(rendered); process.exit(verdict.tag === 'accept' ? 0 : 1); }
 if (import.meta.url === `file://${process.argv[1]}`) main0();

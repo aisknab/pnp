@@ -12,7 +12,7 @@ async function currentManifest() {
 }
 
 test('uniform residual-band minimizer checker accepts current minimizer surface', async () => {
-  const out = await CheckUniformResidualBandMinimizer0({ writeOutput: false });
+  const out = await CheckUniformResidualBandMinimizer0({ historicalReplay: true, writeOutput: false });
   assert.equal(out.tag, 'accept');
   assert.equal(out.coordinate, 'PNP-UNIFORM-RESIDUAL-BAND-MINIMIZER-2026-07-05-01');
   assert.equal(out.ufsObligationId, 'UFS-004-ResidualBandMinimizerUniformPolynomial');
@@ -61,7 +61,7 @@ test('uniform residual-band minimizer rejects finite-list-only minimizer overcla
   const manifest = await currentManifest();
   manifest.minimizer.finiteInstanceList = true;
   manifest.minimizer.uniformAcrossSizes = false;
-  const out = await CheckUniformResidualBandMinimizer0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckUniformResidualBandMinimizer0({ historicalReplay: true, writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'UniformResidualBandMinimizer.MinimizerBoolean');
 });
@@ -69,7 +69,7 @@ test('uniform residual-band minimizer rejects finite-list-only minimizer overcla
 test('uniform residual-band minimizer rejects theorem activation by minimizer proof alone', async () => {
   const manifest = await currentManifest();
   manifest.uniformFinalSoundnessProved = true;
-  const out = await CheckUniformResidualBandMinimizer0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckUniformResidualBandMinimizer0({ historicalReplay: true, writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'UniformResidualBandMinimizer.BooleanField');
   assert.deepEqual(out.path, ['uniformFinalSoundnessProved']);
@@ -78,7 +78,7 @@ test('uniform residual-band minimizer rejects theorem activation by minimizer pr
 test('uniform residual-band minimizer rejects oracle use in minimizer surface', async () => {
   const manifest = await currentManifest();
   manifest.minimizer.usesExactMinimizationOracle = true;
-  const out = await CheckUniformResidualBandMinimizer0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckUniformResidualBandMinimizer0({ historicalReplay: true, writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'UniformResidualBandMinimizer.MinimizerBoolean');
 });

@@ -10,8 +10,10 @@ import {
   validateReleaseAuditSurface0,
 } from '../pcc-release-audit0.mjs';
 
+const CheckHistoricalReleaseAudit0 = (config = {}) => CheckReleaseAudit0({ ...config, historicalReplay: true });
+
 test('CheckReleaseAudit0 emits the frozen release audit phase order', async () => {
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -90,7 +92,7 @@ test('validateReleaseAuditPhaseOrder0 rejects extra release audit phases', () =>
 });
 
 test('validateReleaseAuditSurface0 rejects wrong phase order when supplied', async () => {
-  const audit = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const audit = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -110,7 +112,7 @@ test('validateReleaseAuditSurface0 rejects wrong phase order when supplied', asy
 });
 
 test('release audit phase order keeps surfaceFreeze last', async () => {
-  const out = await CheckReleaseAudit0(makeReleaseAuditConfig0({
+  const out = await CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -126,12 +128,13 @@ test('release audit phase order keeps surfaceFreeze last', async () => {
   assert.equal(phaseOrder.includes('materializedPublicStatusGate'), true);
 });
 
-test('README documents release audit phase-order freeze', async () => {
+test('README classifies the legacy release-audit phases as historical', async () => {
   const readme = await fs.readFile(new URL('../README.md', import.meta.url), 'utf8');
 
-  assert.equal(readme.includes('Release audit phase-order freeze'), true);
+  assert.equal(readme.includes('Historical Release audit replay'), true);
+  assert.equal(readme.includes('not part of the current formal'), true);
   assert.equal(readme.includes('publicSurfaceFreeze'), true);
   assert.equal(readme.includes('materializedPublicStatusGate'), true);
   assert.equal(readme.includes('surfaceFreeze'), true);
-  assert.equal(readme.includes('Future phase insertions, deletions, or reorderings should fail loudly'), true);
+  assert.equal(readme.includes('preserved audit fields only'), true);
 });

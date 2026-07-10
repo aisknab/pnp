@@ -1,6 +1,12 @@
 # PNP explicit trust base
 
-The repository is being organized so that a verifier can run one command, inspect a small trust base, and decide exactly what the current public-review stack claims.
+> **Current authority:** The repository does not currently establish `P = NP`. The June 2026 trust
+> ledger below describes the historical JavaScript checker stack and remains useful as an audit
+> inventory. Current formal obligations and status are authoritative in
+> [`status/FORMAL_RECONSTRUCTION_STATUS.json`](./status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`docs/FORMAL_RECONSTRUCTION.md`](./docs/FORMAL_RECONSTRUCTION.md).
+
+The repository provides one conservative command for checking the formal-reconstruction boundary:
 
 The current command is:
 
@@ -8,9 +14,10 @@ The current command is:
 npm run pnp:verify
 ```
 
-The trust base is intentionally **not empty**. The current goal is to make each remaining assumption explicit, versioned, executable where possible, and reducible over time.
+The historical checker trust base is intentionally **not empty**. Its assertion-bearing theorem
+records are not derivations of the named mathematical propositions.
 
-Machine-readable coordinate:
+Historical machine-readable coordinate:
 
 ```text
 PNP-TRUST-BASE-2026-06-27-01
@@ -28,7 +35,7 @@ Audit command:
 node pcc-trust-base0.mjs --json
 ```
 
-## Current boundary
+## Historical checker boundary
 
 The trust-base ledger does not activate the public theorem gate:
 
@@ -150,4 +157,6 @@ Reduction plan: create a machine-readable complexity ledger binding SAT is NP-co
 
 ## What this file does not claim
 
-This file does not say the trust base is empty. It does not clear `Release.UnrestrictedFinalSoundness` or `ExternalReview.Acceptance`. It does not activate public theorem emission. It makes the current assumptions inspectable so the project can shrink them deliberately.
+This file does not say the trust base is empty and does not activate public theorem emission. The
+older release blockers shown here are historical. The current formal blockers are listed in the
+formal-reconstruction status.

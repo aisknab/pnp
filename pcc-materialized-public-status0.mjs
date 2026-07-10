@@ -10,6 +10,8 @@ import {
   MATERIALIZED_PACK_PUBLIC_BOUNDARY0,
 } from './pcc-materialized-pack0.mjs';
 
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 const CHECKER_VERSION = 0;
 
 export const MATERIALIZED_PUBLIC_STATUS_PHASES0 = Object.freeze([
@@ -61,6 +63,7 @@ export function makeMaterializedPublicStatusInput0({
 
 export async function CheckMaterializedPublicStatus0(input, config = {}) {
   const checker = 'CheckMaterializedPublicStatus0';
+  if (config.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const ledger = [];
   const normalized = normalizePublicStatusInput0(input);
 
@@ -120,7 +123,10 @@ export async function CheckMaterializedPublicStatus0(input, config = {}) {
 
   const finalVerdictRecord = await CheckMaterializedFinalVerdictFile0(
     normalized.AcceptRunFilePath,
-    config.finalVerdictConfig ?? {},
+    {
+      ...(config.finalVerdictConfig ?? {}),
+      historicalReplay: true,
+    },
   );
   const finalVerdict = recordToValidation0(finalVerdictRecord, ['AcceptRunFilePath']);
 
@@ -192,13 +198,14 @@ export async function CheckMaterializedPublicStatus0(input, config = {}) {
 }
 
 export async function CheckMaterializedPublicStatusFile0(acceptRunFilePath, config = {}) {
+  if (config.historicalReplay !== true) return LegacyReplayRequiredReject0('CheckMaterializedPublicStatusFile0');
   return CheckMaterializedPublicStatus0(makeMaterializedPublicStatusInput0({
     acceptRunFilePath,
     overrides: {
       StatusPolicy: config.StatusPolicy ?? MATERIALIZED_PUBLIC_STATUS_POLICY0,
       PublicClaimBoundary: config.PublicClaimBoundary ?? MATERIALIZED_PACK_PUBLIC_BOUNDARY0,
     },
-  }), config);
+  }), { ...config, historicalReplay: true });
 }
 
 function normalizePublicStatusInput0(input) {

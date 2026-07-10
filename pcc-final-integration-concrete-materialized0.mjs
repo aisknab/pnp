@@ -20,6 +20,7 @@ import {
   GPACK_REQUIRED_FIELDS0,
   GPACK_ROWFAMG_REQUIRED_ROWS0,
 } from './pcc-gpack0.mjs';
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
 
 const CHECKER_VERSION = 0;
 
@@ -54,12 +55,14 @@ export async function makeConcreteMaterializedFinalIntegration0({
   ConcreteGlobalProofDAGEnvelope = null,
   FinalIntegrationEnvelope = null,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeConcreteMaterializedFinalIntegration0');
   const concreteGlobalProofDAGEnvelope =
     ConcreteGlobalProofDAGEnvelope ?? await makeConcreteMaterializedGlobalProofDAG0();
 
   const finalIntegrationEnvelope =
-    FinalIntegrationEnvelope ?? makeMaterializedFinalIntegrationEnvelope0();
+    FinalIntegrationEnvelope ?? makeMaterializedFinalIntegrationEnvelope0({ historicalReplay: true });
 
   const concreteLinks = makeConcreteFinalIntegrationLinks0({
     concreteGlobalProofDAGEnvelope,
@@ -283,6 +286,7 @@ export async function CheckConcreteMaterializedFinalIntegration0(
   input,
   config = makeConcreteMaterializedFinalIntegrationConfig0(),
 ) {
+  if (config?.historicalReplay !== true) return LegacyReplayRequiredReject0('CheckConcreteMaterializedFinalIntegration0');
   const checker = 'CheckConcreteMaterializedFinalIntegration0';
   const ledger = [];
   const cfg = makeConcreteMaterializedFinalIntegrationConfig0(config);
@@ -351,7 +355,10 @@ export async function CheckConcreteMaterializedFinalIntegration0(
   if (cfg.checkMaterializedFinalIntegration === true) {
     const finalRecord = await CheckMaterializedFinalIntegration0(
       envelope.FinalIntegrationEnvelope,
-      cfg.materializedFinalIntegrationConfig ?? {},
+      {
+        ...(cfg.materializedFinalIntegrationConfig ?? {}),
+        historicalReplay: true,
+      },
     );
     const final = recordToValidation0(finalRecord, ['FinalIntegrationEnvelope']);
 
@@ -522,12 +529,16 @@ export async function CheckConcreteMaterializedFinalIntegration0(
 }
 
 export async function writeConcreteMaterializedFinalIntegrationFiles0(outDir, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('writeConcreteMaterializedFinalIntegrationFiles0');
   if (typeof outDir !== 'string' || outDir.length === 0) {
     throw new TypeError('writeConcreteMaterializedFinalIntegrationFiles0 requires a non-empty output directory');
   }
 
   const envelope = await makeConcreteMaterializedFinalIntegration0(options);
-  const checked = await CheckConcreteMaterializedFinalIntegration0(envelope, options.checkConfig ?? {});
+  const checked = await CheckConcreteMaterializedFinalIntegration0(envelope, {
+    ...(options.checkConfig ?? {}),
+    historicalReplay: true,
+  });
 
   await fs.mkdir(outDir, {
     recursive: true,

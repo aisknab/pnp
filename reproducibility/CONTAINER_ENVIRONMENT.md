@@ -1,5 +1,7 @@
 # Containerized verification environment
 
+> Historical assertion-checker record. Its workflow is retired and it is not current theorem-status authority. See [the formal reconstruction status](../status/FORMAL_RECONSTRUCTION_STATUS.json).
+
 This directory records the current container-environment coordinate:
 
 ```text
@@ -19,7 +21,7 @@ Dockerfile
 .dockerignore
 docker-compose.yml
 .devcontainer/devcontainer.json
-.github/workflows/container-environment.yml
+retired historical workflow `container-environment.yml`
 ```
 
 Build and run the default verifier path with:

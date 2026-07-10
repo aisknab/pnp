@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 
+import { EnforceHistoricalReplayCli0 } from '../pcc-legacy-replay-gate0.mjs';
+
 import {
   CheckMaterializedPublicStatusFile0,
 } from '../pcc-materialized-public-status0.mjs';
+
+EnforceHistoricalReplayCli0({ entrypoint: 'bin/check-materialized-public-status0.mjs' });
 
 const args = process.argv.slice(2);
 const full = args.includes('--full');
@@ -21,7 +25,9 @@ if (!filePath) {
 
   process.exitCode = 1;
 } else {
-  const out = await CheckMaterializedPublicStatusFile0(filePath);
+  const out = await CheckMaterializedPublicStatusFile0(filePath, {
+    historicalReplay: true,
+  });
 
   console.log(JSON.stringify(full ? out : summarizeMaterializedPublicStatus0(out), null, 2));
 

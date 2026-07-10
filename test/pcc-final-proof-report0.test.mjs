@@ -8,6 +8,7 @@ import {
   CheckFinalPNPProofReport0,
   FINAL_PNP_PROOF_REPORT_PHASES0,
   makeFinalPNPProofReport0,
+  makeFinalPNPProofReportRecord0,
   writeFinalPNPProofReportFiles0,
 } from '../pcc-final-proof-report0.mjs';
 
@@ -15,9 +16,30 @@ import {
   digestCanonical0,
 } from '../pcc-verifier-frag0.mjs';
 
+const makeHistoricalFinalPNPProofReport0 = (options = {}) => makeFinalPNPProofReport0({ ...options, historicalReplay: true });
+const CheckHistoricalFinalPNPProofReport0 = (input, config = {}) => CheckFinalPNPProofReport0(input, { ...config, historicalReplay: true });
+const writeHistoricalFinalPNPProofReportFiles0 = (outDir, options = {}) => writeFinalPNPProofReportFiles0(outDir, { ...options, historicalReplay: true });
+
+test('final PNP proof report routes reject without historical opt-in', async () => {
+  const generated = await makeFinalPNPProofReport0();
+  const record = makeFinalPNPProofReportRecord0({
+    finalPNPReleaseGateEnvelope: {},
+    finalPNPReleaseGateRecord: {},
+  });
+  const checked = await CheckFinalPNPProofReport0({});
+  assert.equal(generated.tag, 'reject');
+  assert.equal(record.tag, 'reject');
+  assert.equal(checked.tag, 'reject');
+  for (const out of [generated, record, checked]) {
+    assert.equal(out.publicTheoremEmissionAllowed, false);
+    assert.equal(out.publicTheoremStatement, null);
+    assert.equal(out.finalTheoremReady, false);
+  }
+});
+
 test('CheckFinalPNPProofReport0 accepts the final P=NP proof report', async () => {
-  const envelope = await makeFinalPNPProofReport0();
-  const out = await CheckFinalPNPProofReport0(envelope);
+  const envelope = await makeHistoricalFinalPNPProofReport0();
+  const out = await CheckHistoricalFinalPNPProofReport0(envelope);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckFinalPNPProofReport0');
@@ -68,7 +90,7 @@ test('CheckFinalPNPProofReport0 accepts the final P=NP proof report', async () =
 });
 
 test('CheckFinalPNPProofReport0 rejects stale final release-gate record evidence', async () => {
-  const envelope = await makeFinalPNPProofReport0();
+  const envelope = await makeHistoricalFinalPNPProofReport0();
 
   const nf = {
     ...envelope.CheckFinalPNPReleaseGateRecord.NF,
@@ -88,7 +110,7 @@ test('CheckFinalPNPProofReport0 rejects stale final release-gate record evidence
     finalPNPReleaseGateRecordDigest: undefined,
   };
 
-  const out = await CheckFinalPNPProofReport0(envelope, {
+  const out = await CheckHistoricalFinalPNPProofReport0(envelope, {
     checkLinkage: false,
   });
 
@@ -99,7 +121,7 @@ test('CheckFinalPNPProofReport0 rejects stale final release-gate record evidence
 });
 
 test('CheckFinalPNPProofReport0 rejects theorem drift', async () => {
-  const envelope = await makeFinalPNPProofReport0();
+  const envelope = await makeHistoricalFinalPNPProofReport0();
 
   envelope.Report = {
     ...envelope.Report,
@@ -116,7 +138,7 @@ test('CheckFinalPNPProofReport0 rejects theorem drift', async () => {
     reportDigest: undefined,
   };
 
-  const out = await CheckFinalPNPProofReport0(envelope, {
+  const out = await CheckHistoricalFinalPNPProofReport0(envelope, {
     checkFinalPNPReleaseGate: false,
     checkLinkage: false,
   });
@@ -128,7 +150,7 @@ test('CheckFinalPNPProofReport0 rejects theorem drift', async () => {
 });
 
 test('CheckFinalPNPProofReport0 rejects stale report linkage', async () => {
-  const envelope = await makeFinalPNPProofReport0();
+  const envelope = await makeHistoricalFinalPNPProofReport0();
 
   envelope.Linkage = {
     ...envelope.Linkage,
@@ -139,7 +161,7 @@ test('CheckFinalPNPProofReport0 rejects stale report linkage', async () => {
     },
   };
 
-  const out = await CheckFinalPNPProofReport0(envelope, {
+  const out = await CheckHistoricalFinalPNPProofReport0(envelope, {
     checkFinalPNPReleaseGate: false,
   });
 
@@ -159,7 +181,7 @@ test('writeFinalPNPProofReportFiles0 writes replayable JSON artefacts', async (t
     });
   });
 
-  const result = await writeFinalPNPProofReportFiles0(dir);
+  const result = await writeHistoricalFinalPNPProofReportFiles0(dir);
 
   assert.equal(result.checked.tag, 'accept');
 

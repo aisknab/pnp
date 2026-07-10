@@ -26,12 +26,15 @@ import {
   makeGeneratedPCCPackexp0,
 } from './pcc-generate-pcc-pack0.mjs';
 
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 const CHECKER_VERSION = 0;
 
 export function makeConcreteMaterializedGeneratedAcceptRunConfig0(overrides = {}) {
   return {
     kind: 'ConcreteMaterializedGeneratedAcceptRunConfig0',
     version: CHECKER_VERSION,
+    historicalReplay: false,
     checkGeneratedAcceptRun: true,
     checkConcretePCCPack: true,
     checkPCCPackexp: true,
@@ -51,18 +54,27 @@ export async function makeConcreteMaterializedGeneratedAcceptRun0({
   GeneratedAcceptRunEnvelope = null,
   GeneratedPCCPackexpEnvelope = null,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
-  const generatedAcceptRunEnvelope = GeneratedAcceptRunEnvelope ?? await makeMaterializedGeneratedAcceptRun0();
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeConcreteMaterializedGeneratedAcceptRun0');
+  const generatedAcceptRunEnvelope = GeneratedAcceptRunEnvelope ?? await makeMaterializedGeneratedAcceptRun0({
+    historicalReplay: true,
+  });
   const concreteChain = summarizeConcreteGeneratedAcceptRunChain0(generatedAcceptRunEnvelope);
-  const checkPCCPackexpRecord = await CheckPCCPackexp0(generatedAcceptRunEnvelope.MaterializedPCCPack);
+  const checkPCCPackexpRecord = await CheckPCCPackexp0(
+    generatedAcceptRunEnvelope.MaterializedPCCPack,
+    { historicalReplay: true },
+  );
   const generatedPCCPack = await makeConcreteMaterializedPCCPack0({
     MaterializedPCCPackEnvelope: generatedAcceptRunEnvelope.MaterializedPCCPack,
+    historicalReplay: true,
   });
   const generatedPCCPackexpEnvelope = GeneratedPCCPackexpEnvelope ?? await makeGeneratedPCCPackexp0({
     GeneratedPCCPack: generatedPCCPack,
     CheckPCCPackexpRecord: checkPCCPackexpRecord,
+    historicalReplay: true,
   });
-  const checkGeneratedPCCPackexpRecord = await CheckGeneratedPCCPackexp0(generatedPCCPackexpEnvelope);
+  const checkGeneratedPCCPackexpRecord = await CheckGeneratedPCCPackexp0(generatedPCCPackexpEnvelope, { historicalReplay: true });
 
   const linkage = {
     kind: 'ConcreteMaterializedGeneratedAcceptRunLinkage0',
@@ -267,6 +279,7 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
   const checker = 'CheckConcreteMaterializedGeneratedAcceptRun0';
   const ledger = [];
   const cfg = makeConcreteMaterializedGeneratedAcceptRunConfig0(config);
+  if (cfg.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const envelope = normalizeInput0(input);
   let checkPCCPackexpRecord = null;
   let materializedCheckPCCPackexpRecord = null;
@@ -313,7 +326,10 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
   if (cfg.checkGeneratedAcceptRun === true) {
     const record = await CheckMaterializedGeneratedAcceptRun0(
       envelope.GeneratedAcceptRunEnvelope,
-      cfg.generatedAcceptRunConfig ?? {},
+      {
+        ...(cfg.generatedAcceptRunConfig ?? {}),
+        historicalReplay: true,
+      },
     );
     const result = recordToValidation0(record, ['GeneratedAcceptRunEnvelope']);
 
@@ -337,7 +353,7 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
   if (cfg.checkConcretePCCPack === true) {
     const record = await CheckConcreteMaterializedPCCPack0(
       envelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack,
-      cfg.concretePCCPackConfig ?? {},
+      { ...(cfg.concretePCCPackConfig ?? {}), historicalReplay: true },
     );
     const result = recordToValidation0(record, ['GeneratedAcceptRunEnvelope', 'MaterializedPCCPack']);
 
@@ -361,7 +377,7 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
   if (cfg.checkPCCPackexp === true) {
     checkPCCPackexpRecord = await CheckPCCPackexp0(
       envelope.GeneratedAcceptRunEnvelope.MaterializedPCCPack,
-      cfg.checkPCCPackexpConfig ?? {},
+      { ...(cfg.checkPCCPackexpConfig ?? {}), historicalReplay: true },
     );
     const result = recordToValidation0(checkPCCPackexpRecord, ['GeneratedAcceptRunEnvelope', 'MaterializedPCCPack']);
 
@@ -408,7 +424,7 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
   if (cfg.checkGeneratedPCCPackexp === true) {
     generatedPCCPackexpRecord = await CheckGeneratedPCCPackexp0(
       envelope.GeneratedPCCPackexpEnvelope,
-      cfg.generatedPCCPackexpConfig ?? {},
+      { ...(cfg.generatedPCCPackexpConfig ?? {}), historicalReplay: true },
     );
     const result = recordToValidation0(generatedPCCPackexpRecord, ['GeneratedPCCPackexpEnvelope']);
 
@@ -2392,12 +2408,16 @@ export async function CheckConcreteMaterializedGeneratedAcceptRun0(
 }
 
 export async function writeConcreteMaterializedGeneratedAcceptRunFiles0(outDir, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('writeConcreteMaterializedGeneratedAcceptRunFiles0');
   if (typeof outDir !== 'string' || outDir.length === 0) {
     throw new TypeError('writeConcreteMaterializedGeneratedAcceptRunFiles0 requires a non-empty output directory');
   }
 
   const envelope = await makeConcreteMaterializedGeneratedAcceptRun0(options);
-  const checked = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, options.checkConfig ?? {});
+  const checked = await CheckConcreteMaterializedGeneratedAcceptRun0(envelope, {
+    ...(options.checkConfig ?? {}),
+    historicalReplay: true,
+  });
 
   await fs.mkdir(outDir, {
     recursive: true,

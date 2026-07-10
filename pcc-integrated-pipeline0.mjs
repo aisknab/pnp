@@ -60,6 +60,8 @@ import {
   makeSyntheticAcceptRun0,
 } from './pcc-accept-run0.mjs';
 
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 const CHECKER_VERSION = 0;
 
 export const INTEGRATED_PIPELINE_PHASES0 = Object.freeze([
@@ -106,10 +108,12 @@ export function makeSyntheticVerifierFragSuite0() {
   };
 }
 
-export function makeSyntheticIntegratedPipeline0(overrides = {}) {
-  const pack = makeSyntheticPCCPack0();
+export function makeSyntheticIntegratedPipeline0(overrides = {}, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('makeSyntheticIntegratedPipeline0');
+  const pack = makeSyntheticPCCPack0({}, { historicalReplay: true });
   const acceptRun = makeSyntheticAcceptRun0({
     pack,
+    historicalReplay: true,
   });
 
   const pipeline = {
@@ -132,11 +136,15 @@ export function makeSyntheticIntegratedPipeline0(overrides = {}) {
   };
 }
 
-export async function RunIntegratedPCC0(pipeline = makeSyntheticIntegratedPipeline0()) {
-  return CheckIntegratedPipeline0(pipeline);
+export async function RunIntegratedPCC0(pipeline, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('RunIntegratedPCC0');
+  pipeline ??= makeSyntheticIntegratedPipeline0({}, { historicalReplay: true });
+  return CheckIntegratedPipeline0(pipeline, { historicalReplay: true });
 }
 
-export async function CheckIntegratedPipeline0(pipeline = makeSyntheticIntegratedPipeline0()) {
+export async function CheckIntegratedPipeline0(pipeline, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('CheckIntegratedPipeline0');
+  pipeline ??= makeSyntheticIntegratedPipeline0({}, { historicalReplay: true });
   const checker = 'CheckIntegratedPipeline0';
   const ledger = [];
 
@@ -173,13 +181,13 @@ export async function CheckIntegratedPipeline0(pipeline = makeSyntheticIntegrate
     ['CheckGPack0', ['PCCPack', 'GPack'], () => CheckGPack0(pack.GPack)],
     ['CheckRowFamG0', ['PCCPack', 'RowFamG'], () => CheckRowFamG0(pack.RowFamG)],
     ['CheckFinalIntegration0', ['PCCPack', 'FinalIntegration'], () => CheckFinalIntegration0(pack.FinalIntegration)],
-    ['CheckFinal0', ['PCCPack', 'FinalTheorem'], () => CheckFinal0(pack.FinalTheorem)],
-    ['CheckRowFamFinal0', ['PCCPack', 'RowFamFinal'], () => CheckRowFamFinal0(pack.RowFamFinal)],
-    ['CheckPackSufficiency0', ['PCCPack'], () => CheckPackSufficiency0(pack)],
+    ['CheckFinal0', ['PCCPack', 'FinalTheorem'], () => CheckFinal0(pack.FinalTheorem, { historicalReplay: true })],
+    ['CheckRowFamFinal0', ['PCCPack', 'RowFamFinal'], () => CheckRowFamFinal0(pack.RowFamFinal, { historicalReplay: true })],
+    ['CheckPackSufficiency0', ['PCCPack'], () => CheckPackSufficiency0(pack, { historicalReplay: true })],
     ['BindAcceptRunPgen0', ['AcceptRun', 'Pgen'], () => validateAcceptRunPackBinding0(pipeline)],
-    ['ReplayAcceptRun0', ['AcceptRun'], () => ReplayAcceptRun0(acceptRun)],
-    ['CheckAcceptRun0', ['AcceptRun'], () => CheckAcceptRun0(acceptRun)],
-    ['EmitFinalVerdict0', ['AcceptRun'], () => EmitFinalVerdict0(acceptRun)],
+    ['ReplayAcceptRun0', ['AcceptRun'], () => ReplayAcceptRun0(acceptRun, { historicalReplay: true })],
+    ['CheckAcceptRun0', ['AcceptRun'], () => CheckAcceptRun0(acceptRun, { historicalReplay: true })],
+    ['EmitFinalVerdict0', ['AcceptRun'], () => EmitFinalVerdict0(acceptRun, { historicalReplay: true })],
   ];
 
   const phaseDigests = [];

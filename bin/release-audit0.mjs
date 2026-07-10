@@ -1,9 +1,13 @@
 #!/usr/bin/env node
 
+import { EnforceHistoricalReplayCli0 } from '../pcc-legacy-replay-gate0.mjs';
+
 import {
   CheckReleaseAudit0,
   summarizeReleaseAudit0,
 } from '../pcc-release-audit0.mjs';
+
+EnforceHistoricalReplayCli0({ entrypoint: 'bin/release-audit0.mjs' });
 
 const args = process.argv.slice(2);
 
@@ -57,6 +61,7 @@ if (!argCheck.ok) {
       );
 
   const out = await CheckReleaseAudit0({
+    historicalReplay: true,
     runCliSmoke: false,
 
     runMaterializedPublicStatusGate,

@@ -1,6 +1,11 @@
 # Public review entrypoint
 
-Current coordinate:
+> **Current authority:** Formal reconstruction is in progress and public theorem emission is
+> disabled. This document describes a June 2026 legacy review-navigation coordinate, not a theorem
+> gate. See [`status/FORMAL_RECONSTRUCTION_STATUS.json`](./status/FORMAL_RECONSTRUCTION_STATUS.json)
+> and [`docs/FORMAL_RECONSTRUCTION.md`](./docs/FORMAL_RECONSTRUCTION.md).
+
+Legacy coordinate:
 
 ```text
 PNP-PUBLIC-REVIEW-ENTRYPOINT-2026-06-27-01
@@ -18,15 +23,16 @@ Checker:
 node pcc-public-review-entrypoint0.mjs --json
 ```
 
-The authoritative reviewer handoff is:
+The historical reviewer handoff for this legacy coordinate is:
 
 ```text
 release/PUBLIC_REVIEW_HANDOFF.md
 ```
 
-This root document is a navigation surface for the current public-review stack. It is not a theorem-activation surface.
+This root document is a navigation surface for legacy review records. It is not current status or a
+theorem-activation surface.
 
-## Current boundary
+## Legacy boundary recorded by this coordinate
 
 ```text
 publicTheoremEmissionAllowed = false
@@ -38,20 +44,22 @@ remainingBlockers = [
 ]
 ```
 
-## Primary reviewer command
+## Current reviewer commands
 
 ```bash
 npm ci
+npm run check
+npm test
 npm run pnp:verify
 ```
 
-`npm run pnp:verify` writes:
+`npm run pnp:verify` verifies the current formal-reconstruction boundary and writes:
 
 ```text
 artifacts/pnp-verify-all/latest-verdict.json
 ```
 
-## Standalone public-review commands
+## Standalone legacy non-activation audits
 
 ```bash
 node pcc-public-review-entrypoint0.mjs --json

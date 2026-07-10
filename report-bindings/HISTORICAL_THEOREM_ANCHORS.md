@@ -1,5 +1,7 @@
 # Historical theorem anchor index
 
+> **Historical assertion-checker record.** This record is subordinate to `status/FORMAL_RECONSTRUCTION_STATUS.json` and is not current theorem-status authority or proof.
+
 Coordinate:
 
 ```text

@@ -19,11 +19,20 @@ import {
   stableStringify0,
 } from '../pcc-verifier-frag0.mjs';
 
+test('bin/check-materialized-aggregate0.mjs rejects without historical replay opt-in', () => {
+  const cliPath = fileURLToPath(new URL('../bin/check-materialized-aggregate0.mjs', import.meta.url));
+  const child = spawnSync(process.execPath, [cliPath], { encoding: 'utf8' });
+
+  assert.equal(child.status, 1);
+  const out = JSON.parse(child.stderr);
+  assert.equal(out.coord, 'LegacyReplayGate0.ExplicitOptInRequired');
+});
+
 test('bin/check-materialized-aggregate0.mjs emits an accepted aggregate summary', async (t) => {
   const filePath = await writeTempShellFile0(t, makeMaterializedAggregateShell0());
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-aggregate0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, filePath], {
+  const child = spawnSync(process.execPath, [cliPath, filePath, '--historical-replay'], {
     encoding: 'utf8',
   });
 
@@ -42,7 +51,7 @@ test('bin/check-materialized-aggregate0.mjs --full emits the complete aggregate 
   const filePath = await writeTempShellFile0(t, makeMaterializedAggregateShell0());
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-aggregate0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, filePath, '--full'], {
+  const child = spawnSync(process.execPath, [cliPath, filePath, '--full', '--historical-replay'], {
     encoding: 'utf8',
   });
 
@@ -62,7 +71,7 @@ test('bin/check-materialized-aggregate0.mjs accepts canonical envelope bytes whe
   const filePath = await writeTempTextFile0(t, stableStringify0(makeMaterializedAggregateShell0()));
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-aggregate0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, filePath, '--canonical-envelope-bytes'], {
+  const child = spawnSync(process.execPath, [cliPath, filePath, '--canonical-envelope-bytes', '--historical-replay'], {
     encoding: 'utf8',
   });
 
@@ -79,7 +88,7 @@ test('bin/check-materialized-aggregate0.mjs rejects non-canonical envelope bytes
   const filePath = await writeTempShellFile0(t, makeMaterializedAggregateShell0());
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-aggregate0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, filePath, '--canonical-envelope-bytes'], {
+  const child = spawnSync(process.execPath, [cliPath, filePath, '--canonical-envelope-bytes', '--historical-replay'], {
     encoding: 'utf8',
   });
 
@@ -110,7 +119,7 @@ test('bin/check-materialized-aggregate0.mjs rejects a tampered aggregate shell',
   const filePath = await writeTempShellFile0(t, shell);
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-aggregate0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, filePath], {
+  const child = spawnSync(process.execPath, [cliPath, filePath, '--historical-replay'], {
     encoding: 'utf8',
   });
 
@@ -127,7 +136,7 @@ test('bin/check-materialized-aggregate0.mjs rejects a tampered aggregate shell',
 test('bin/check-materialized-aggregate0.mjs exits nonzero without a file path', () => {
   const cliPath = fileURLToPath(new URL('../bin/check-materialized-aggregate0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay'], {
     encoding: 'utf8',
   });
 

@@ -24,6 +24,7 @@ import {
   CheckFinalIntegration0,
   makeSyntheticFinalIntegration0,
 } from './pcc-final-framework0.mjs';
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
 
 const CHECKER_VERSION = 0;
 
@@ -102,7 +103,9 @@ const EXECUTABLE_KEYS0 = new Set([
 export function makeSyntheticFinalTheorem0({
   finalIntegration = makeSyntheticFinalIntegration0(),
   overrides = {},
+  historicalReplay = false,
 } = {}) {
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeSyntheticFinalTheorem0');
   const finalTheorem = {
     kind: 'FinalTheorem0',
     version: CHECKER_VERSION,
@@ -257,7 +260,9 @@ export function makeSyntheticFinalTheorem0({
   };
 }
 
-export function makeSyntheticRowFamFinal0(finalTheorem = makeSyntheticFinalTheorem0(), overrides = {}) {
+export function makeSyntheticRowFamFinal0(finalTheorem, overrides = {}, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('makeSyntheticRowFamFinal0');
+  finalTheorem ??= makeSyntheticFinalTheorem0({ historicalReplay: true });
   return {
     kind: 'RowFamFinal0',
     version: CHECKER_VERSION,
@@ -312,7 +317,8 @@ export function makeSyntheticRowFamFinal0(finalTheorem = makeSyntheticFinalTheor
  * Failure modes: shape, integration, bridge, implication, theorem, bound, reflection,
  * no-min, or opaque-proof rejection.
  */
-export async function CheckFinal0(finalTheorem) {
+export async function CheckFinal0(finalTheorem, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('CheckFinal0');
   const checker = 'CheckFinal0';
   const ledger = [];
 
@@ -407,7 +413,8 @@ export async function CheckFinal0(finalTheorem) {
   });
 }
 
-export async function CheckRowFamFinal0(rowFam) {
+export async function CheckRowFamFinal0(rowFam, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('CheckRowFamFinal0');
   const checker = 'CheckRowFamFinal0';
   const ledger = [];
 
@@ -429,7 +436,7 @@ export async function CheckRowFamFinal0(rowFam) {
     });
   }
 
-  const finalRecord = await CheckFinal0(rowFam.FinalTheorem);
+  const finalRecord = await CheckFinal0(rowFam.FinalTheorem, { historicalReplay: true });
   const finalResult = recordToValidation0(finalRecord, ['FinalTheorem']);
 
   ledger.push({

@@ -3,12 +3,15 @@
 import {
   writeMaterializedPCCPackFiles0,
 } from '../pcc-pack-materialized0.mjs';
+import { EnforceHistoricalReplayCli0 } from '../pcc-legacy-replay-gate0.mjs';
+
+EnforceHistoricalReplayCli0({ entrypoint: 'bin/write-materialized-pcc-pack0.mjs' });
 
 const args = process.argv.slice(2);
 const outDir = args.find((arg) => !arg.startsWith('--')) ?? './materialized-pcc-pack0';
 const full = args.includes('--full');
 
-const result = await writeMaterializedPCCPackFiles0(outDir);
+const result = await writeMaterializedPCCPackFiles0(outDir, { historicalReplay: true });
 
 if (full) {
   console.log(JSON.stringify(result.checked, null, 2));

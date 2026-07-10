@@ -1,6 +1,11 @@
 # Final External Review Cover: Residual-Hardened 7072f8d PNP Release
 
-Status: **external hostile-review package locked**.
+> **Historical assertion-checker record:** This file documents a superseded checker/release surface.
+> It is not current theorem-status authority and does not establish `P = NP`. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical status: **external hostile-review package recorded as locked**.
 
 This cover note identifies the frozen release artefacts, the public theorem boundary, and the first mathematical surfaces that reviewers should attack. It is not a substitute for mathematical review.
 
@@ -10,7 +15,7 @@ This cover note identifies the frozen release artefacts, the public theorem boun
 CheckPCCPackexp(GeneratePCCPack())=accept => P = NP
 ```
 
-The release does not ask reviewers to accept an ungated `P = NP` claim before checking the generated-package acceptance path. The public conclusion is asserted only at the accepted proof-report boundary.
+The historical release did not ask reviewers to accept an ungated `P = NP` claim before checking the generated-package acceptance path. Its public conclusion was asserted only at the accepted proof-report boundary. Those recorded assertions do not establish the theorem.
 
 ## Frozen identifiers
 
@@ -146,6 +151,6 @@ actual acceptance behavior:
 suggested patch:
 ```
 
-## Current status
+## Historical package status
 
-This is an external-review-ready release candidate, not a substitute for independent mathematical verification. The remaining gate toward a serious Clay submission is hostile mathematical review by people who did not write the proof and who are specifically asked to find a counterexample or missing obligation.
+This package was recorded as an external-review-ready release candidate, not a substitute for independent mathematical verification. That historical readiness label is superseded by the formal-reconstruction status.

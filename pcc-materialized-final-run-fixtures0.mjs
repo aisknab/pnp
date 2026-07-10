@@ -15,6 +15,8 @@ import {
   WriteMaterializedAcceptRunFixtureSet0,
 } from './pcc-materialized-accept-run-fixtures0.mjs';
 
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 const CHECKER_VERSION = 0;
 const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
 
@@ -28,6 +30,7 @@ export function makeMaterializedFinalRunFixtureWriterConfig0(overrides = {}) {
   return {
     kind: 'MaterializedFinalRunFixtureWriterConfig0',
     version: CHECKER_VERSION,
+    historicalReplay: false,
     outputDir: path.join(process.cwd(), 'materialized-final-run-fixtures0'),
     canonicalEnvelopeBytes: false,
     overwrite: true,
@@ -44,6 +47,7 @@ export function makeMaterializedFinalRunFixtureWriterConfig0(overrides = {}) {
 
 export async function WriteMaterializedFinalRunFixtureSet0(config = makeMaterializedFinalRunFixtureWriterConfig0()) {
   const checker = 'WriteMaterializedFinalRunFixtureSet0';
+  if (config.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const ledger = [];
   const cfg = makeMaterializedFinalRunFixtureWriterConfig0(config);
 
@@ -66,6 +70,7 @@ export async function WriteMaterializedFinalRunFixtureSet0(config = makeMaterial
   }
 
   const acceptRunWriter = await WriteMaterializedAcceptRunFixtureSet0({
+    historicalReplay: true,
     outputDir: cfg.outputDir,
     canonicalEnvelopeBytes: cfg.canonicalEnvelopeBytes,
     overwrite: cfg.overwrite,
@@ -206,7 +211,9 @@ async function verifyFinalRunFixturesDirect0(files) {
   const records = [];
 
   for (const file of files) {
-    const record = await CheckMaterializedFinalVerdictFile0(file.filePath);
+    const record = await CheckMaterializedFinalVerdictFile0(file.filePath, {
+      historicalReplay: true,
+    });
 
     if (isRejectRecord0(record)) {
       return validationReject0(['files', file.filename], 'materialized final-run fixture failed direct final-verdict verification', {
@@ -241,7 +248,7 @@ async function verifyFinalRunFixturesCli0(files) {
   const records = [];
 
   for (const file of files) {
-    const child = spawnSync(process.execPath, [cliPath, file.filePath], {
+    const child = spawnSync(process.execPath, [cliPath, '--historical-replay', file.filePath], {
       encoding: 'utf8',
       windowsHide: true,
     });

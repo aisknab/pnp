@@ -1,5 +1,7 @@
 # Semantic kernel hardening - phase 41
 
+> Historical assertion-checker record. Its workflow is retired and it is not current theorem-status authority. See [the formal reconstruction status](../status/FORMAL_RECONSTRUCTION_STATUS.json).
+
 Phase 40 represented the release/publication boundary and left the publication gate blocked. Phase 41 adds a documentation coordinate for a public-review revision of the canonical report.
 
 ## Coordinate
@@ -34,7 +36,7 @@ documentation-revisions/PNP-DOC-CPR-2026-06-26-01/canonical_proof_report.tex.pat
 The dedicated workflow is:
 
 ```text
-.github/workflows/public-review-documentation.yml
+retired historical workflow `public-review-documentation.yml`
 ```
 
 It verifies the transport hash, applies the TeX patch to `canonical_proof_report.tex`, and checks the revised TeX hash.

@@ -59,7 +59,7 @@ function makePublicSurfaceAcceptRecord0(overrides = {}) {
 }
 
 async function runReleaseAuditWithPublicSurfaceRecord0(record, overrides = {}) {
-  return CheckReleaseAudit0(makeReleaseAuditConfig0({
+  return CheckHistoricalReleaseAudit0(makeReleaseAuditConfig0({
     runSyntaxCheck: false,
     runRunAll: false,
     runMutationCheck: false,
@@ -70,6 +70,8 @@ async function runReleaseAuditWithPublicSurfaceRecord0(record, overrides = {}) {
     ...overrides,
   }));
 }
+
+const CheckHistoricalReleaseAudit0 = (config = {}) => CheckReleaseAudit0({ ...config, historicalReplay: true });
 
 test('CheckReleaseAudit0 rejects public surface freeze accept record without an NF object', async () => {
   const out = await runReleaseAuditWithPublicSurfaceRecord0({

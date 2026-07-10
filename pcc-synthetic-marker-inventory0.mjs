@@ -185,7 +185,7 @@ async function collectSourceMarkerInventory0(config) {
 async function collectSyntheticInputMarkerInventory0(config) {
   const input = typeof config.syntheticInputFactory === 'function'
     ? config.syntheticInputFactory()
-    : makeSyntheticRunAllInput0();
+    : makeSyntheticRunAllInput0({}, { historicalReplay: true });
 
   const hits = findSyntheticMarkersInValue0(input, {
     rootPath: ['RunAllInput0'],
@@ -230,13 +230,13 @@ async function validateMaterializedGateRejectsSynthetic0(config) {
     : makeSyntheticRunAllInput0({
         RequireMaterialized: true,
         MaterializedConfig: makeMaterializedGateConfig0(),
-      });
+      }, { historicalReplay: true });
 
   const runner = typeof config.materializedRunner === 'function'
     ? config.materializedRunner
     : RunAll0;
 
-  const record = await runner(input);
+  const record = await runner(input, { historicalReplay: true });
 
   if (!isRejectRecord0(record)) {
     return validationReject0(['RunAll0'], 'materialized gate did not reject the synthetic RunAll input', {

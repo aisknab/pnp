@@ -1,12 +1,18 @@
 # Proof and Checker Pipeline
 
+> **Current authority:** This document maps the author's intended argument and the historical
+> JavaScript assertion-checker pipeline. It does not establish `P = NP` and is not an active release
+> gate. Current status and remaining formal obligations are in
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`FORMAL_RECONSTRUCTION.md`](FORMAL_RECONSTRUCTION.md).
+
 ## Purpose and review boundary
 
 This document explains the claimed proof and checker pipeline in conventional complexity-theory and software-assurance terms before introducing repository-specific package names.
 
 It describes what the repository claims and where the corresponding assertions are represented. It does not establish that any mathematical implication, checker predicate, complexity bound, or reflection rule is sound.
 
-The release-specific source coordinates are:
+The historical release-specific source coordinates are:
 
 ```text
 source tag:    final-pnp-proof-report-hardened-7072f8d
@@ -40,7 +46,9 @@ The logical route is:
 4. decide SAT by comparing the exact minimum with the threshold;
 5. prove that every step, including the exact minimisation, runs in polynomial time.
 
-The checker and release machinery are a second layer. They are intended to establish that a finite package encoding the mathematical route satisfies the predicates implemented by the repository. Checker acceptance is not a substitute for auditing the mathematical route or the checker predicates.
+The checker and release machinery are a second, historical evidence layer. They establish only that
+a finite package satisfied the implemented predicates. They do not establish the mathematical route
+or discharge the current formal obligations.
 
 ## 2. Claimed mathematical route
 

@@ -15,9 +15,9 @@ const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
 export const PUBLIC_SURFACE_BASELINE0 = Object.freeze({
   kind: 'PublicSurfaceBaseline0',
   version: CHECKER_VERSION,
-  coordinate: 'PUBLIC-SURFACE-BASELINE-2026-06-27-NO-HIDDEN-ORACLE-01',
-  status: 'public-review-surface-with-extensible-proof-script-namespace-and-verifier-upload-cli',
-  rationale: 'The package exports and bin surface remain exact, package.json scripts allow a narrow proof:* development namespace for direct checker entrypoints, and the verify upload CLI is explicitly listed as an approved reproducibility-submission surface.',
+  coordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-10-FORMAL-RECONSTRUCTION-01',
+  status: 'formal-reconstruction-surface-with-explicit-historical-replay-boundary',
+  rationale: 'Acceptance-bearing synthetic constructors are not public package exports, and every retained legacy theorem route requires explicit historical replay opt-in.',
 });
 
 export const PUBLIC_ENTRY_EXPORT_KEYS0 = Object.freeze([
@@ -38,10 +38,6 @@ export const PUBLIC_ENTRY_EXPORT_KEYS0 = Object.freeze([
   'RunAll0',
   'RunIntegratedPCC0',
   'makeReleaseAuditConfig0',
-  'makeSyntheticAcceptRun0',
-  'makeSyntheticIntegratedPipeline0',
-  'makeSyntheticRejectAcceptRun0',
-  'makeSyntheticRunAllInput0',
   'CheckMaterializedFinalCertificate0',
   'makeMaterializedFinalCertificate0',
   'makeMaterializedFinalCertificateConfig0',
@@ -89,13 +85,13 @@ export const PUBLIC_ENTRY_EXPORT_KEYS0 = Object.freeze([
 
 export const PUBLIC_PACKAGE_EXPORTS0 = Object.freeze({
   '.': './index.mjs',
-  './accept-run0': './pcc-accept-run0.mjs',
-  './integrated-pipeline0': './pcc-integrated-pipeline0.mjs',
+  './accept-run0': './pcc-accept-run-public0.mjs',
+  './integrated-pipeline0': './pcc-integrated-pipeline-public0.mjs',
   './release-audit0': './pcc-release-audit0.mjs',
   './final-certificate0': './pcc-final-certificate-materialized0.mjs',
   './final-certificate-public-status0': './pcc-final-certificate-public-status0.mjs',
   './release-audit-final-certificate-gate0': './pcc-release-audit-final-certificate-gate0.mjs',
-  './runall0': './pcc-runall0.mjs',
+  './runall0': './pcc-runall-public0.mjs',
   './release-audit-concrete-final-certificate-gate0': './pcc-release-audit-final-certificate-concrete-gate0.mjs',
   './concrete-release-appendix0': './pcc-concrete-release-appendix0.mjs',
   './concrete-final-acceptance-replay0': './pcc-final-acceptance-replay0.mjs',

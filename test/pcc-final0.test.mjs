@@ -10,8 +10,20 @@ import {
   makeSyntheticRowFamFinal0,
 } from '../pcc-final0.mjs';
 
+const makeHistoricalFinalTheorem0 = (options = {}) => makeSyntheticFinalTheorem0({
+  ...options,
+  historicalReplay: true,
+});
+const makeHistoricalRowFamFinal0 = (finalTheorem, overrides = {}) => makeSyntheticRowFamFinal0(
+  finalTheorem,
+  overrides,
+  { historicalReplay: true },
+);
+const CheckHistoricalFinal0 = (input) => CheckFinal0(input, { historicalReplay: true });
+const CheckHistoricalRowFamFinal0 = (input) => CheckRowFamFinal0(input, { historicalReplay: true });
+
 test('CheckFinal0 accepts the synthetic final theorem artefact', async () => {
-  const out = await CheckFinal0(makeSyntheticFinalTheorem0());
+  const out = await CheckHistoricalFinal0(makeHistoricalFinalTheorem0());
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckFinal0');
@@ -24,7 +36,7 @@ test('CheckFinal0 accepts the synthetic final theorem artefact', async () => {
 });
 
 test('CheckRowFamFinal0 accepts the synthetic final row family', async () => {
-  const out = await CheckRowFamFinal0(makeSyntheticRowFamFinal0());
+  const out = await CheckHistoricalRowFamFinal0(makeHistoricalRowFamFinal0());
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckRowFamFinal0');
@@ -33,7 +45,7 @@ test('CheckRowFamFinal0 accepts the synthetic final row family', async () => {
 });
 
 test('CheckFinal0 wraps final integration rejection', async () => {
-  const finalTheorem = makeSyntheticFinalTheorem0();
+  const finalTheorem = makeHistoricalFinalTheorem0();
 
   finalTheorem.FinalIntegration = {
     ...finalTheorem.FinalIntegration,
@@ -46,7 +58,7 @@ test('CheckFinal0 wraps final integration rejection', async () => {
     },
   };
 
-  const out = await CheckFinal0(finalTheorem);
+  const out = await CheckHistoricalFinal0(finalTheorem);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckFinal0');
@@ -57,14 +69,14 @@ test('CheckFinal0 wraps final integration rejection', async () => {
 });
 
 test('CheckFinal0 rejects residual band bounds above four', async () => {
-  const finalTheorem = makeSyntheticFinalTheorem0();
+  const finalTheorem = makeHistoricalFinalTheorem0();
 
   finalTheorem.PCCMinBridge = {
     ...finalTheorem.PCCMinBridge,
     residualBandBound: 5,
   };
 
-  const out = await CheckFinal0(finalTheorem);
+  const out = await CheckHistoricalFinal0(finalTheorem);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckFinal0');
@@ -74,7 +86,7 @@ test('CheckFinal0 rejects residual band bounds above four', async () => {
 });
 
 test('CheckFinal0 rejects SAT in P theorem without package acceptance assumption', async () => {
-  const finalTheorem = makeSyntheticFinalTheorem0();
+  const finalTheorem = makeHistoricalFinalTheorem0();
 
   finalTheorem.AcceptedPackageImpliesSATinP = {
     ...finalTheorem.AcceptedPackageImpliesSATinP,
@@ -83,7 +95,7 @@ test('CheckFinal0 rejects SAT in P theorem without package acceptance assumption
     ],
   };
 
-  const out = await CheckFinal0(finalTheorem);
+  const out = await CheckHistoricalFinal0(finalTheorem);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckFinal0');
@@ -93,14 +105,14 @@ test('CheckFinal0 rejects SAT in P theorem without package acceptance assumption
 });
 
 test('CheckFinal0 rejects generated sufficiency without canonical byte equality', async () => {
-  const finalTheorem = makeSyntheticFinalTheorem0();
+  const finalTheorem = makeHistoricalFinalTheorem0();
 
   finalTheorem.GeneratedPackageSufficiency = {
     ...finalTheorem.GeneratedPackageSufficiency,
     canonicalByteEquality: false,
   };
 
-  const out = await CheckFinal0(finalTheorem);
+  const out = await CheckHistoricalFinal0(finalTheorem);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckFinal0');
@@ -110,14 +122,14 @@ test('CheckFinal0 rejects generated sufficiency without canonical byte equality'
 });
 
 test('CheckFinal0 rejects public theorem that claims P equals NP before acceptance', async () => {
-  const finalTheorem = makeSyntheticFinalTheorem0();
+  const finalTheorem = makeHistoricalFinalTheorem0();
 
   finalTheorem.FinalPublicTheorem = {
     ...finalTheorem.FinalPublicTheorem,
     noClaimBeforeAccept: false,
   };
 
-  const out = await CheckFinal0(finalTheorem);
+  const out = await CheckHistoricalFinal0(finalTheorem);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckFinal0');
@@ -127,14 +139,14 @@ test('CheckFinal0 rejects public theorem that claims P equals NP before acceptan
 });
 
 test('CheckFinal0 rejects non-polynomial final bound', async () => {
-  const finalTheorem = makeSyntheticFinalTheorem0();
+  const finalTheorem = makeHistoricalFinalTheorem0();
 
   finalTheorem.PolynomialBound = {
     ...finalTheorem.PolynomialBound,
     residualBandPolynomial: false,
   };
 
-  const out = await CheckFinal0(finalTheorem);
+  const out = await CheckHistoricalFinal0(finalTheorem);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckFinal0');
@@ -144,14 +156,14 @@ test('CheckFinal0 rejects non-polynomial final bound', async () => {
 });
 
 test('CheckFinal0 rejects final reflection cert missing a theorem', async () => {
-  const finalTheorem = makeSyntheticFinalTheorem0();
+  const finalTheorem = makeHistoricalFinalTheorem0();
 
   finalTheorem.ReflectionCert = {
     ...finalTheorem.ReflectionCert,
     reflectedTheorems: finalTheorem.ReflectionCert.reflectedTheorems.filter((entry) => entry !== 'GeneratedPackageSufficiency'),
   };
 
-  const out = await CheckFinal0(finalTheorem);
+  const out = await CheckHistoricalFinal0(finalTheorem);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckFinal0');
@@ -161,7 +173,7 @@ test('CheckFinal0 rejects final reflection cert missing a theorem', async () => 
 });
 
 test('CheckFinal0 rejects executable hidden minimization in final theorem body', async () => {
-  const finalTheorem = makeSyntheticFinalTheorem0();
+  const finalTheorem = makeHistoricalFinalTheorem0();
 
   finalTheorem.FinalPublicTheorem = {
     ...finalTheorem.FinalPublicTheorem,
@@ -170,7 +182,7 @@ test('CheckFinal0 rejects executable hidden minimization in final theorem body',
     ],
   };
 
-  const out = await CheckFinal0(finalTheorem);
+  const out = await CheckHistoricalFinal0(finalTheorem);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckFinal0');
@@ -180,7 +192,7 @@ test('CheckFinal0 rejects executable hidden minimization in final theorem body',
 });
 
 test('CheckFinal0 rejects opaque proof blobs', async () => {
-  const finalTheorem = makeSyntheticFinalTheorem0();
+  const finalTheorem = makeHistoricalFinalTheorem0();
 
   finalTheorem.PiFinal = {
     ...finalTheorem.PiFinal,
@@ -189,7 +201,7 @@ test('CheckFinal0 rejects opaque proof blobs', async () => {
     },
   };
 
-  const out = await CheckFinal0(finalTheorem);
+  const out = await CheckHistoricalFinal0(finalTheorem);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckFinal0');
@@ -199,11 +211,11 @@ test('CheckFinal0 rejects opaque proof blobs', async () => {
 });
 
 test('CheckRowFamFinal0 rejects missing final row coverage', async () => {
-  const rowFam = makeSyntheticRowFamFinal0();
+  const rowFam = makeHistoricalRowFamFinal0();
 
   rowFam.rows = rowFam.rows.filter((row) => row.rowKind !== 'GeneratedPackageSufficiency');
 
-  const out = await CheckRowFamFinal0(rowFam);
+  const out = await CheckHistoricalRowFamFinal0(rowFam);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckRowFamFinal0');
@@ -213,14 +225,14 @@ test('CheckRowFamFinal0 rejects missing final row coverage', async () => {
 });
 
 test('CheckRowFamFinal0 wraps final theorem rejection', async () => {
-  const rowFam = makeSyntheticRowFamFinal0();
+  const rowFam = makeHistoricalRowFamFinal0();
 
   rowFam.FinalTheorem.PCCMinBridge = {
     ...rowFam.FinalTheorem.PCCMinBridge,
     decisionComparator: 'bad-comparator',
   };
 
-  const out = await CheckRowFamFinal0(rowFam);
+  const out = await CheckHistoricalRowFamFinal0(rowFam);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckRowFamFinal0');
@@ -231,7 +243,7 @@ test('CheckRowFamFinal0 wraps final theorem rejection', async () => {
 });
 
 test('CheckRowFamFinal0 rejects non-accept selected route', async () => {
-  const rowFam = makeSyntheticRowFamFinal0();
+  const rowFam = makeHistoricalRowFamFinal0();
   const index = rowFam.rows.findIndex((row) => row.rowKind === 'FinalPublicTheorem');
 
   rowFam.rows[index] = {
@@ -242,7 +254,7 @@ test('CheckRowFamFinal0 rejects non-accept selected route', async () => {
     ],
   };
 
-  const out = await CheckRowFamFinal0(rowFam);
+  const out = await CheckHistoricalRowFamFinal0(rowFam);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckRowFamFinal0');
@@ -253,14 +265,14 @@ test('CheckRowFamFinal0 rejects non-accept selected route', async () => {
 
 test('CheckFinal0 binds final theorem claims to final integration G proof chain', async (t) => {
   await t.test('rejects PCCMinBridge without G threshold proof source', async () => {
-    const finalTheorem = makeSyntheticFinalTheorem0();
+    const finalTheorem = makeHistoricalFinalTheorem0();
 
     finalTheorem.PCCMinBridge = {
       ...finalTheorem.PCCMinBridge,
       sourceTheorems: finalTheorem.PCCMinBridge.sourceTheorems.filter((entry) => entry !== 'G.ThresholdCert.proof'),
     };
 
-    const out = await CheckFinal0(finalTheorem);
+    const out = await CheckHistoricalFinal0(finalTheorem);
 
     assert.equal(out.tag, 'reject');
     assert.equal(out.checker, 'CheckFinal0');
@@ -270,14 +282,14 @@ test('CheckFinal0 binds final theorem claims to final integration G proof chain'
   });
 
   await t.test('rejects SAT-in-P implication without global G proof assumption', async () => {
-    const finalTheorem = makeSyntheticFinalTheorem0();
+    const finalTheorem = makeHistoricalFinalTheorem0();
 
     finalTheorem.AcceptedPackageImpliesSATinP = {
       ...finalTheorem.AcceptedPackageImpliesSATinP,
       assumptions: finalTheorem.AcceptedPackageImpliesSATinP.assumptions.filter((entry) => entry !== 'G.ThresholdCert.proof'),
     };
 
-    const out = await CheckFinal0(finalTheorem);
+    const out = await CheckHistoricalFinal0(finalTheorem);
 
     assert.equal(out.tag, 'reject');
     assert.equal(out.checker, 'CheckFinal0');
@@ -287,14 +299,14 @@ test('CheckFinal0 binds final theorem claims to final integration G proof chain'
   });
 
   await t.test('rejects SAT-in-P implication without usesGlobalGThreshold flag', async () => {
-    const finalTheorem = makeSyntheticFinalTheorem0();
+    const finalTheorem = makeHistoricalFinalTheorem0();
 
     finalTheorem.AcceptedPackageImpliesSATinP = {
       ...finalTheorem.AcceptedPackageImpliesSATinP,
       usesGlobalGThreshold: false,
     };
 
-    const out = await CheckFinal0(finalTheorem);
+    const out = await CheckHistoricalFinal0(finalTheorem);
 
     assert.equal(out.tag, 'reject');
     assert.equal(out.checker, 'CheckFinal0');

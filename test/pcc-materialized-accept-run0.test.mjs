@@ -18,6 +18,16 @@ import {
   makeMaterializedReplayTranscript0,
 } from '../pcc-materialized-accept-run0.mjs';
 
+const CheckHistoricalMaterializedAcceptRun0 = (run, config = {}) => CheckMaterializedAcceptRun0(run, {
+  ...config,
+  historicalReplay: true,
+});
+
+const CheckHistoricalMaterializedAcceptRunFile0 = (filePath, config = {}) => CheckMaterializedAcceptRunFile0(filePath, {
+  ...config,
+  historicalReplay: true,
+});
+
 import {
   MATERIALIZED_PACK_PUBLIC_BOUNDARY0,
   sha256Utf8DigestRecord0,
@@ -30,12 +40,13 @@ import {
 test('CheckMaterializedAcceptRun0 accepts pending replay with no public conclusion', async (t) => {
   const { packFilePath, aggregateDigest } = await writeAggregatePack0(t);
   const run = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath,
     aggregateDigest,
     verdict: 'pending',
   });
 
-  const out = await CheckMaterializedAcceptRun0(run);
+  const out = await CheckHistoricalMaterializedAcceptRun0(run);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedAcceptRun0');
@@ -65,13 +76,14 @@ test('CheckMaterializedAcceptRun0 accepts reject replay with one replayable firs
     firstFailure,
   });
   const run = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath,
     aggregateDigest,
     verdict: 'reject',
     replayTranscript: transcript,
   });
 
-  const out = await CheckMaterializedAcceptRun0(run);
+  const out = await CheckHistoricalMaterializedAcceptRun0(run);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.NF.verdict, 'reject');
@@ -84,12 +96,13 @@ test('CheckMaterializedAcceptRun0 accepts reject replay with one replayable firs
 test('CheckMaterializedAcceptRun0 accepts accepted replay and emits conditional public conclusion', async (t) => {
   const { packFilePath, aggregateDigest } = await writeAggregatePack0(t);
   const run = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath,
     aggregateDigest,
     verdict: 'accept',
   });
 
-  const out = await CheckMaterializedAcceptRun0(run);
+  const out = await CheckHistoricalMaterializedAcceptRun0(run);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.NF.verdict, 'accept');
@@ -101,13 +114,14 @@ test('CheckMaterializedAcceptRun0 accepts accepted replay and emits conditional 
 test('CheckMaterializedAcceptRunFile0 accepts an accepted materialized accept-run file', async (t) => {
   const { packFilePath, aggregateDigest } = await writeAggregatePack0(t);
   const run = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath,
     aggregateDigest,
     verdict: 'accept',
   });
   const acceptRunFile = await writeTempJsonFile0(t, 'MaterializedAcceptRun0.json', run);
 
-  const out = await CheckMaterializedAcceptRunFile0(acceptRunFile);
+  const out = await CheckHistoricalMaterializedAcceptRunFile0(acceptRunFile);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'CheckMaterializedAcceptRunFile0');
@@ -125,6 +139,7 @@ test('Materialized replay phase order is stable', () => {
 test('CheckMaterializedAcceptRun0 rejects aggregate digest mismatch', async (t) => {
   const { packFilePath } = await writeAggregatePack0(t);
   const run = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath,
     aggregateDigest: {
       alg: 'SHA256',
@@ -134,7 +149,7 @@ test('CheckMaterializedAcceptRun0 rejects aggregate digest mismatch', async (t) 
     verdict: 'pending',
   });
 
-  const out = await CheckMaterializedAcceptRun0(run);
+  const out = await CheckHistoricalMaterializedAcceptRun0(run);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedAcceptRun0');
@@ -146,6 +161,7 @@ test('CheckMaterializedAcceptRun0 rejects aggregate digest mismatch', async (t) 
 test('CheckMaterializedAcceptRun0 rejects public conclusion before accepted replay', async (t) => {
   const { packFilePath, aggregateDigest } = await writeAggregatePack0(t);
   const run = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath,
     aggregateDigest,
     verdict: 'pending',
@@ -159,7 +175,7 @@ test('CheckMaterializedAcceptRun0 rejects public conclusion before accepted repl
     },
   };
 
-  const out = await CheckMaterializedAcceptRun0(run);
+  const out = await CheckHistoricalMaterializedAcceptRun0(run);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedAcceptRun0');
@@ -171,6 +187,7 @@ test('CheckMaterializedAcceptRun0 rejects public conclusion before accepted repl
 test('CheckMaterializedAcceptRun0 rejects transcript digest mismatch', async (t) => {
   const { packFilePath, aggregateDigest } = await writeAggregatePack0(t);
   const run = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath,
     aggregateDigest,
     verdict: 'pending',
@@ -185,7 +202,7 @@ test('CheckMaterializedAcceptRun0 rejects transcript digest mismatch', async (t)
     },
   };
 
-  const out = await CheckMaterializedAcceptRun0(run);
+  const out = await CheckHistoricalMaterializedAcceptRun0(run);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedAcceptRun0');
@@ -197,6 +214,7 @@ test('CheckMaterializedAcceptRun0 rejects transcript digest mismatch', async (t)
 test('CheckMaterializedAcceptRun0 rejects reject transcript without reject log entry', async (t) => {
   const { packFilePath, aggregateDigest } = await writeAggregatePack0(t);
   const run = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath,
     aggregateDigest,
     verdict: 'reject',
@@ -204,7 +222,7 @@ test('CheckMaterializedAcceptRun0 rejects reject transcript without reject log e
 
   run.RejectLog = [];
 
-  const out = await CheckMaterializedAcceptRun0(run);
+  const out = await CheckHistoricalMaterializedAcceptRun0(run);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedAcceptRun0');
@@ -216,6 +234,7 @@ test('CheckMaterializedAcceptRun0 rejects reject transcript without reject log e
 test('CheckMaterializedAcceptRun0 rejects embedded generated package bytes', async (t) => {
   const { packFilePath, aggregateDigest } = await writeAggregatePack0(t);
   const run = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath,
     aggregateDigest,
     verdict: 'pending',
@@ -226,7 +245,7 @@ test('CheckMaterializedAcceptRun0 rejects embedded generated package bytes', asy
     CoreBytes: '{"not":"allowed"}',
   };
 
-  const out = await CheckMaterializedAcceptRun0(run);
+  const out = await CheckHistoricalMaterializedAcceptRun0(run);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedAcceptRun0');
@@ -249,6 +268,7 @@ test('CheckMaterializedAcceptRun0 rejects generated package path whose aggregate
   );
 
   const run = makeMaterializedAcceptRun0({
+    historicalReplay: true,
     packFilePath: badPackFile,
     aggregateDigest: {
       alg: 'SHA256',
@@ -258,13 +278,25 @@ test('CheckMaterializedAcceptRun0 rejects generated package path whose aggregate
     verdict: 'pending',
   });
 
-  const out = await CheckMaterializedAcceptRun0(run);
+  const out = await CheckHistoricalMaterializedAcceptRun0(run);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckMaterializedAcceptRun0');
   assert.equal(out.Coord, 'CheckMaterializedAcceptRun0.aggregate');
   assert.deepEqual(out.Path, ['GeneratedPackage', 'path']);
   assert.equal(out.Witness.reason, 'CheckMaterializedAggregateFile0 rejected');
+});
+
+test('materialized accept-run routes reject without historical replay opt-in', async () => {
+  for (const out of await Promise.all([
+    makeMaterializedAcceptRun0(),
+    CheckMaterializedAcceptRun0(),
+    CheckMaterializedAcceptRunFile0(),
+  ])) {
+    assert.equal(out.tag, 'reject');
+    assert.match(out.coord, /\.HistoricalReplayRequired$/);
+    assert.equal(out.publicTheoremEmissionAllowed, false);
+  }
 });
 
 async function writeAggregatePack0(t) {

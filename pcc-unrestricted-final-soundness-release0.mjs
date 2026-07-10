@@ -13,6 +13,7 @@ import { CheckUniformResidualBandMinimizer0 } from './pcc-uniform-residual-band-
 import { CheckUniformZeroSlackClosure0 } from './pcc-uniform-zeroslack-closure0.mjs';
 import { CheckNoHiddenOracleSemantic0 } from './pcc-no-hidden-oracle-semantic0.mjs';
 import { CheckUniformComplexityConclusion0 } from './pcc-uniform-complexity-conclusion0.mjs';
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
 
 const CHECKER = 'CheckUnrestrictedFinalSoundnessRelease0';
 const VERSION = 0;
@@ -46,10 +47,13 @@ export async function CheckUnrestrictedFinalSoundnessRelease0(options = {}) {
   const root = path.resolve(options.root ?? process.cwd());
   const writeOutput = options.writeOutput ?? true;
   const outputPath = options.outputPath ?? OUT;
+  if (options.historicalReplay !== true) {
+    return write0(root, outputPath, writeOutput, LegacyReplayRequiredReject0(CHECKER, BEFORE_BLOCKERS));
+  }
   try {
     const dependencies = [];
     for (const [id, coordinate, checker] of REQUIRED_DEPENDENCIES) {
-      const out = await checker({ root, writeOutput: false });
+      const out = await checker({ root, writeOutput: false, historicalReplay: true });
       if (out.tag !== 'accept') return write0(root, outputPath, writeOutput, reject0('UnrestrictedFinalSoundnessRelease.DependencyReject', ['dependsOn', id], 'required UFS dependency rejected', { id, coordinate, dependency: out }));
       const actualCoordinate = out.coordinate ?? out.ufsTargetCoordinate ?? out.coord;
       if (coordinate !== TARGET_COORD && actualCoordinate !== coordinate) return write0(root, outputPath, writeOutput, reject0('UnrestrictedFinalSoundnessRelease.DependencyCoordinate', ['dependsOn', id], 'dependency coordinate mismatch', { id, expected: coordinate, actual: actualCoordinate }));
@@ -101,7 +105,8 @@ export async function CheckUnrestrictedFinalSoundnessRelease0(options = {}) {
   }
 }
 
-export function EvaluateUnrestrictedFinalSoundnessReleaseExample0(input) {
+export function EvaluateUnrestrictedFinalSoundnessReleaseExample0(input, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('EvaluateUnrestrictedFinalSoundnessReleaseExample0', BEFORE_BLOCKERS);
   if (!plain0(input)) return reject0('UnrestrictedFinalSoundnessRelease.ExampleShape', ['input'], 'example input must be an object');
   const trueFields = ['allUFSDependenciesAccepted', 'allUFSDependencyCoordinatesHashBound', 'ufs007ComplexityConclusionAccepted'];
   const falseFields = ['usesExternalReviewAsPremise', 'usesHistoricalReportProseAsPremise', 'activatesPublicTheoremEmission'];
@@ -147,7 +152,7 @@ function validateTarget0(target) {
 
 function validateBeforeBoundary0(boundary) { if (!plain0(boundary)) return reject0('UnrestrictedFinalSoundnessRelease.BeforeBoundaryShape', ['claimBoundaryBefore'], 'before boundary must be an object'); if (boundary.publicTheoremEmissionAllowed !== false || boundary.finalTheoremReady !== false || !sameArray0(boundary.activeFinalNodeIds, []) || !sameArray0(boundary.remainingBlockers, BEFORE_BLOCKERS)) return reject0('UnrestrictedFinalSoundnessRelease.BeforeBoundary', ['claimBoundaryBefore'], 'before boundary mismatch', { actual: boundary }); return { tag: 'accept' }; }
 function validateAfterBoundary0(boundary) { if (!plain0(boundary)) return reject0('UnrestrictedFinalSoundnessRelease.AfterBoundaryShape', ['claimBoundaryAfterProofTransition'], 'after boundary must be an object'); if (boundary.publicTheoremEmissionAllowed !== false || boundary.internalFinalTheoremReady !== true || !sameArray0(boundary.clearedBlockers, ['Release.UnrestrictedFinalSoundness']) || !sameArray0(boundary.remainingBlockers, AFTER_BLOCKERS)) return reject0('UnrestrictedFinalSoundnessRelease.AfterBoundary', ['claimBoundaryAfterProofTransition'], 'after boundary mismatch', { actual: boundary }); if (!Array.isArray(boundary.activeFinalNodeIds) || boundary.activeFinalNodeIds.length !== 8) return reject0('UnrestrictedFinalSoundnessRelease.AfterBoundaryNodes', ['claimBoundaryAfterProofTransition', 'activeFinalNodeIds'], 'after boundary must bind eight UFS nodes'); return { tag: 'accept' }; }
-function validateExamples0(manifest) { for (let i = 0; i < manifest.positiveExamples.length; i += 1) { const example = manifest.positiveExamples[i]; const out = EvaluateUnrestrictedFinalSoundnessReleaseExample0(example.input); if (out.tag !== 'accept') return reject0('UnrestrictedFinalSoundnessRelease.PositiveExampleRejected', ['positiveExamples', i], 'positive example rejected', { exampleId: example.id, reject: out }); for (const [key, expected] of Object.entries(example.expected)) if (out[key] !== expected) return reject0('UnrestrictedFinalSoundnessRelease.PositiveExampleMismatch', ['positiveExamples', i, 'expected', key], 'positive example mismatch', { exampleId: example.id, expected, actual: out[key] }); } return { tag: 'accept' }; }
+function validateExamples0(manifest) { for (let i = 0; i < manifest.positiveExamples.length; i += 1) { const example = manifest.positiveExamples[i]; const out = EvaluateUnrestrictedFinalSoundnessReleaseExample0(example.input, { historicalReplay: true }); if (out.tag !== 'accept') return reject0('UnrestrictedFinalSoundnessRelease.PositiveExampleRejected', ['positiveExamples', i], 'positive example rejected', { exampleId: example.id, reject: out }); for (const [key, expected] of Object.entries(example.expected)) if (out[key] !== expected) return reject0('UnrestrictedFinalSoundnessRelease.PositiveExampleMismatch', ['positiveExamples', i, 'expected', key], 'positive example mismatch', { exampleId: example.id, expected, actual: out[key] }); } return { tag: 'accept' }; }
 async function readJson0({ root, filePath, override, label }) { if (override !== undefined) { const bytes = Buffer.from(`${JSON.stringify(override, null, 2)}\n`, 'utf8'); return { tag: 'accept', value: override, bytes }; } try { const bytes = await readFile(path.join(root, filePath)); return { tag: 'accept', value: JSON.parse(bytes.toString('utf8')), bytes }; } catch (error) { return reject0('UnrestrictedFinalSoundnessRelease.ReadOrParseFailed', [filePath], `could not read or parse ${label}`, normalizeError0(error)); } }
 async function digestEvidence0({ root, paths }) { const evidence = []; for (const rel of paths) { try { const abs = path.join(root, rel); const st = await stat(abs); if (!st.isFile()) return reject0('UnrestrictedFinalSoundnessRelease.EvidenceNotFile', ['evidenceSurfaces', rel], 'evidence path is not a file'); const bytes = await readFile(abs); evidence.push({ path: rel, sha256: sha256Hex0(bytes), bytes: bytes.length }); } catch (error) { return reject0('UnrestrictedFinalSoundnessRelease.EvidenceMissing', ['evidenceSurfaces', rel], 'evidence file missing', normalizeError0(error)); } } return { tag: 'accept', evidence }; }
 function validateStringArray0(value, pathArray, nonempty) { if (!Array.isArray(value)) return reject0('UnrestrictedFinalSoundnessRelease.ArrayShape', pathArray, 'expected array'); if (nonempty && value.length === 0) return reject0('UnrestrictedFinalSoundnessRelease.ArrayEmpty', pathArray, 'array must be non-empty'); for (let i = 0; i < value.length; i += 1) if (typeof value[i] !== 'string' || value[i].length === 0) return reject0('UnrestrictedFinalSoundnessRelease.ArrayEntry', [...pathArray, i], 'array entry must be a non-empty string'); return { tag: 'accept' }; }
@@ -159,6 +164,6 @@ function sha256Hex0(bytes) { return createHash('sha256').update(bytes).digest('h
 function sha256Text0(text) { return sha256Hex0(Buffer.from(text, 'utf8')); }
 function stableStringify0(value) { if (Array.isArray(value)) return `[${value.map(stableStringify0).join(',')}]`; if (plain0(value)) return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${stableStringify0(value[key])}`).join(',')}}`; return JSON.stringify(value); }
 function normalizeError0(error) { return { name: error?.name ?? 'Error', message: error?.message ?? String(error), code: error?.code ?? null }; }
-function parseArgs0(argv) { const out = { json: false, writeOutput: true }; for (const arg of argv) { if (arg === '--json') out.json = true; else if (arg === '--no-write') out.writeOutput = false; else throw new Error(`unknown argument: ${arg}`); } return out; }
+function parseArgs0(argv) { const out = { json: false, writeOutput: true, historicalReplay: false }; for (const arg of argv) { if (arg === '--json') out.json = true; else if (arg === '--no-write') out.writeOutput = false; else if (arg === '--historical-replay') out.historicalReplay = true; else throw new Error(`unknown argument: ${arg}`); } return out; }
 async function main0() { let options; try { options = parseArgs0(process.argv.slice(2)); } catch (error) { const verdict = reject0('UnrestrictedFinalSoundnessRelease.CliBadArgument', [], 'bad CLI argument', normalizeError0(error)); console.error(JSON.stringify(verdict, null, 2)); process.exit(2); } const verdict = await CheckUnrestrictedFinalSoundnessRelease0(options); const rendered = JSON.stringify(verdict, null, 2); if (options.json || verdict.tag === 'accept') console.log(rendered); else console.error(rendered); process.exit(verdict.tag === 'accept' ? 0 : 1); }
 if (import.meta.url === `file://${process.argv[1]}`) main0();

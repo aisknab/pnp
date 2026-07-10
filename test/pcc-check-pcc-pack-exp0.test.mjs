@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import {
-  CheckPCCPackexp0,
+  CheckPCCPackexp0 as CheckPCCPackexpRaw0,
   makeCheckPCCPackexpConfig0,
 } from '../pcc-check-pcc-pack-exp0.mjs';
 
@@ -12,8 +12,24 @@ import {
   summarizeConcretePCCPackCoverage0,
 } from '../pcc-pack-concrete-materialized0.mjs';
 
+const makeHistoricalConcreteMaterializedPCCPack0 = (options = {}) => makeConcreteMaterializedPCCPack0({
+  ...options,
+  historicalReplay: true,
+});
+
+const CheckPCCPackexp0 = (input, config = {}) => CheckPCCPackexpRaw0(input, {
+  ...config,
+  historicalReplay: true,
+});
+
+test('CheckPCCPackexp0 rejects without historical replay opt-in', async () => {
+  const out = await CheckPCCPackexpRaw0({});
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.coord, 'CheckPCCPackexp0.HistoricalReplayRequired');
+});
+
 test('CheckPCCPackexp0 accepts a concrete materialized PCCPack candidate', async () => {
-  const envelope = await makeConcreteMaterializedPCCPack0();
+  const envelope = await makeHistoricalConcreteMaterializedPCCPack0();
   const out = await CheckPCCPackexp0(envelope);
 
   assert.equal(out.tag, 'accept');
@@ -89,7 +105,7 @@ test('CheckPCCPackexp0 accepts a concrete materialized PCCPack candidate', async
 });
 
 test('CheckPCCPackexp0 accepts a raw MaterializedPCCPack0 through concrete normalization', async () => {
-  const envelope = await makeConcreteMaterializedPCCPack0();
+  const envelope = await makeHistoricalConcreteMaterializedPCCPack0();
   const out = await CheckPCCPackexp0(envelope.MaterializedPCCPackEnvelope);
 
   assert.equal(out.tag, 'accept');
@@ -111,7 +127,7 @@ test('makeCheckPCCPackexpConfig0 fills default booleans and nested config', () =
 });
 
 test('CheckPCCPackexp0 rejects package candidates whose public conclusion is not accept-run gated', async () => {
-  const envelope = await makeConcreteMaterializedPCCPack0();
+  const envelope = await makeHistoricalConcreteMaterializedPCCPack0();
 
   envelope.MaterializedPCCPackEnvelope = {
     ...envelope.MaterializedPCCPackEnvelope,
@@ -146,7 +162,7 @@ test('CheckPCCPackexp0 rejects package candidates whose public conclusion is not
 });
 
 test('CheckPCCPackexp0 surfaces inner concrete PCCPack rejection diagnostics', async () => {
-  const envelope = await makeConcreteMaterializedPCCPack0();
+  const envelope = await makeHistoricalConcreteMaterializedPCCPack0();
 
   envelope.MaterializedPCCPackEnvelope = {
     ...envelope.MaterializedPCCPackEnvelope,
@@ -185,7 +201,7 @@ test('CheckPCCPackexp0 surfaces inner concrete PCCPack rejection diagnostics', a
 
 
 test('CheckPCCPackexp0 rejects package candidates without final G proof-chain coverage', async () => {
-  const envelope = await makeConcreteMaterializedPCCPack0();
+  const envelope = await makeHistoricalConcreteMaterializedPCCPack0();
 
   envelope.MaterializedPCCPackEnvelope = {
     ...envelope.MaterializedPCCPackEnvelope,

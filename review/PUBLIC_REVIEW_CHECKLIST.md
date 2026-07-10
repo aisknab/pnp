@@ -1,6 +1,11 @@
 # Public review checklist
 
-Current coordinate:
+> **Superseded review checklist:** This June 2026 checklist maps a historical assertion-checker
+> review perimeter. Its blocker vocabulary and recorded readiness fields are not current formal
+> status. See [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json)
+> and [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical coordinate:
 
 ```text
 PNP-PUBLIC-REVIEW-CHECKLIST-2026-06-27-01
@@ -18,9 +23,10 @@ Checker:
 node pcc-public-review-checklist0.mjs --json
 ```
 
-This checklist gives reviewers a compact map of the current non-activation stack. It is not a theorem-activation surface.
+This checklist gave reviewers a compact map of the historical non-activation stack. It is not a
+theorem-activation surface.
 
-## Current boundary
+## Historical boundary
 
 ```text
 publicTheoremEmissionAllowed = false
@@ -42,7 +48,10 @@ EXTERNAL_REVIEW_STATUS.md
 
 The external-review status surface records: No independent reviewer has confirmed theorem correctness, checker soundness, generated-package completeness, or the mathematical implication from the accepted checker boundary to `P = NP`.
 
-## Primary commands
+## Historical audit commands
+
+On current `main`, `npm run pnp:verify` checks the formal-reconstruction boundary. The standalone
+checker commands below inspect legacy non-activation records only.
 
 ```bash
 npm ci
@@ -55,14 +64,14 @@ node pcc-public-review-boundary0.mjs --json
 
 ## Checklist
 
-| ID | Surface | Review question | Current state |
+| ID | Surface | Historical review question | Recorded state |
 | --- | --- | --- | --- |
 | CHK-001-root-entrypoint | `PUBLIC_REVIEW.md` | Can a reviewer find the root public-review entrypoint? | ready |
-| CHK-002-one-command-verifier | `npm run pnp:verify` | Can the current one-command verifier be run from a fresh checkout? | ready |
+| CHK-002-one-command-verifier | `npm run pnp:verify` | Could the one-command verifier be run from a fresh checkout? | ready |
 | CHK-003-public-review-boundary | `release/PUBLIC_REVIEW_BOUNDARY.json` | Is the aggregate public-review boundary non-activating? | ready-non-activating |
-| CHK-004-public-review-handoff | `release/PUBLIC_REVIEW_HANDOFF.md` | Does the reviewer handoff expose the current commands and coordinates? | ready |
+| CHK-004-public-review-handoff | `release/PUBLIC_REVIEW_HANDOFF.md` | Did the reviewer handoff expose the recorded commands and coordinates? | ready |
 | CHK-005-external-review-status | `EXTERNAL_REVIEW_STATUS.md` | Does the repository state that no independent reviewer has confirmed the claim? | not-independently-confirmed |
-| CHK-006-historical-report-sanitized | `report-bindings/HISTORICAL_REPORT_SUPERSESSION.json` | Is the current root report sanitized and non-emitting? | sanitized |
+| CHK-006-historical-report-sanitized | `report-bindings/HISTORICAL_REPORT_SUPERSESSION.json` | Did the recorded root report remain sanitized and non-emitting? | sanitized |
 | CHK-007-historical-theorem-anchors | `report-bindings/HISTORICAL_THEOREM_ANCHORS.json` | Are historical theorem-anchor names retained only for ledger lookup? | non-emitting-anchor-index |
 | CHK-008-public-surface-baseline | `pcc-public-surface-baseline0.mjs` | Is the package entry/export/bin/script surface frozen? | frozen |
 | CHK-009-direct-binding-index | `pcc-direct-binding-index0.mjs` | Are Section 22 theorem-ledger rows indexed to executable surfaces? | indexed |

@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 
+import { EnforceHistoricalReplayCli0 } from '../pcc-legacy-replay-gate0.mjs';
+
 import {
   CheckMaterializedPublicStatusRoundtrip0,
 } from '../pcc-materialized-public-status-roundtrip0.mjs';
+
+EnforceHistoricalReplayCli0({ entrypoint: 'bin/check-materialized-public-status-roundtrip0.mjs' });
 
 const args = process.argv.slice(2);
 const full = args.includes('--full');
@@ -15,6 +19,7 @@ const outputDir = outIndex >= 0
   : args.find((arg) => !arg.startsWith('--'));
 
 const out = await CheckMaterializedPublicStatusRoundtrip0({
+    historicalReplay: true,
   ...(outputDir ? { outputDir } : {}),
   canonicalEnvelopeBytes: canonical,
   runCliChecks: !noCli,

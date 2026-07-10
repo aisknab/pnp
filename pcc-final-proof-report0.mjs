@@ -18,6 +18,7 @@
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
 
 import {
   digestCanonical0,
@@ -45,6 +46,7 @@ export function makeFinalPNPProofReportConfig0(overrides = {}) {
   return {
     kind: 'FinalPNPProofReportConfig0',
     version: CHECKER_VERSION,
+    historicalReplay: false,
     checkFinalPNPReleaseGate: true,
     checkReport: true,
     checkContract: true,
@@ -59,17 +61,19 @@ export async function makeFinalPNPProofReport0({
   FinalPNPReleaseGateEnvelope = null,
   Report = null,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeFinalPNPProofReport0');
   const finalPNPReleaseGateEnvelope =
-    FinalPNPReleaseGateEnvelope ?? await makeFinalPNPReleaseGate0();
+    FinalPNPReleaseGateEnvelope ?? await makeFinalPNPReleaseGate0({ historicalReplay: true });
 
   const releaseGateRecord =
-    await CheckFinalPNPReleaseGate0(finalPNPReleaseGateEnvelope);
+    await CheckFinalPNPReleaseGate0(finalPNPReleaseGateEnvelope, { historicalReplay: true });
 
   const report = Report ?? makeFinalPNPProofReportRecord0({
     finalPNPReleaseGateEnvelope,
     finalPNPReleaseGateRecord: releaseGateRecord,
-  });
+  }, { historicalReplay: true });
 
   const linkage = makeLinkage0({
     finalPNPReleaseGateEnvelope,
@@ -114,7 +118,8 @@ export async function makeFinalPNPProofReport0({
 export function makeFinalPNPProofReportRecord0({
   finalPNPReleaseGateEnvelope,
   finalPNPReleaseGateRecord,
-}) {
+} = {}, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('makeFinalPNPProofReportRecord0');
   const gateNF = recordNF0(finalPNPReleaseGateRecord);
   const certificate =
     finalPNPReleaseGateEnvelope?.FinalPNPCertificateEnvelope?.Certificate ?? null;
@@ -207,6 +212,7 @@ export async function CheckFinalPNPProofReport0(
   const checker = 'CheckFinalPNPProofReport0';
   const ledger = [];
   const cfg = makeFinalPNPProofReportConfig0(config);
+  if (cfg.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const envelope = input;
 
   const cfgCheck = validateConfig0(cfg);
@@ -250,7 +256,7 @@ export async function CheckFinalPNPProofReport0(
   if (cfg.checkFinalPNPReleaseGate === true) {
     const fresh = await CheckFinalPNPReleaseGate0(
       envelope.FinalPNPReleaseGateEnvelope,
-      cfg.finalPNPReleaseGateConfig ?? {},
+      { ...(cfg.finalPNPReleaseGateConfig ?? {}), historicalReplay: true },
     );
 
     const result = recordToValidation0(fresh, ['FinalPNPReleaseGateEnvelope']);
@@ -301,7 +307,7 @@ export async function CheckFinalPNPProofReport0(
     const expected = makeFinalPNPProofReportRecord0({
       finalPNPReleaseGateEnvelope: envelope.FinalPNPReleaseGateEnvelope,
       finalPNPReleaseGateRecord: releaseGateRecord,
-    });
+    }, { historicalReplay: true });
 
     const report = validateReportRecord0(envelope.Report, expected);
 
@@ -450,12 +456,13 @@ export async function CheckFinalPNPProofReport0(
 }
 
 export async function writeFinalPNPProofReportFiles0(outDir, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('writeFinalPNPProofReportFiles0');
   if (typeof outDir !== 'string' || outDir.length === 0) {
     throw new TypeError('writeFinalPNPProofReportFiles0 requires a non-empty output directory');
   }
 
   const envelope = await makeFinalPNPProofReport0(options);
-  const checked = await CheckFinalPNPProofReport0(envelope, options.checkConfig ?? {});
+  const checked = await CheckFinalPNPProofReport0(envelope, { ...(options.checkConfig ?? {}), historicalReplay: true });
 
   await fs.mkdir(outDir, {
     recursive: true,

@@ -1,6 +1,11 @@
 # Gap ledger
 
-Current coordinate:
+> **Superseded ledger:** This June 2026 gap ledger is preserved as historical assertion-checker
+> evidence. Its release-policy blockers are not the current formal blocker inventory. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical coordinate:
 
 ```text
 PNP-GAP-LEDGER-2026-06-27-01
@@ -18,7 +23,8 @@ Checker:
 node pcc-gap-ledger0.mjs --json
 ```
 
-The gap ledger records current unresolved, externally trusted, bounded-seed-only, and release-blocking items as explicit public-review obligations. It is deliberately blunt: every listed gap remains open until a later checker, release transition, or external-trust reduction pass closes it.
+The gap ledger recorded unresolved, externally trusted, bounded-seed-only, and release-policy items
+for the historical checker stack. Later checker transitions did not formally prove their mathematics.
 
 ## Status classes
 
@@ -31,9 +37,9 @@ bounded-seed-only
 reproducibility-hardening-gap
 ```
 
-## Current activation blockers
+## Historical activation blockers
 
-The current activation-blocking gaps preserve the existing release blockers:
+The historical ledger recorded these release blockers:
 
 ```text
 Release.UnrestrictedFinalSoundness
@@ -56,4 +62,5 @@ remainingBlockers = [
 
 The gap ledger is not a theorem activation event. It is a map of what remains explicit, what is externally trusted, what is represented but not discharged, and what must be eliminated or downgraded before public theorem emission can be enabled.
 
-The next hardening step should start converting the highest-priority activation-blocking gaps into dedicated checkers, beginning with finite-to-unbounded uniformity and unrestricted final soundness.
+The current reconstruction replaces this checker-release plan with concrete formal definitions,
+theorems, runtime bounds, and an assumption-audited Lean root target.

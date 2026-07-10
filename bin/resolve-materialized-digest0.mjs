@@ -3,6 +3,9 @@
 import {
   ResolveMaterializedDigest0,
 } from '../pcc-materialized-digest-resolver0.mjs';
+import { EnforceHistoricalReplayCli0 } from '../pcc-legacy-replay-gate0.mjs';
+
+EnforceHistoricalReplayCli0({ entrypoint: 'bin/resolve-materialized-digest0.mjs' });
 
 const args = process.argv.slice(2);
 const full = args.includes('--full');
@@ -32,6 +35,7 @@ if (!digest) {
   process.exitCode = 1;
 } else {
   const out = await ResolveMaterializedDigest0(digest, {
+    historicalReplay: true,
     ...(fixtureDir ? { fixtureDir } : {}),
     includeBytes: full || bytes,
   });

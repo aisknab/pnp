@@ -1,10 +1,15 @@
 # Hostile Mathematical Review Round 2: Residual-Band Minimization and ZeroSlack
 
-Status: **residual-band hardening pass completed; still open for hostile mathematical audit**.
+> **Historical assertion-checker record:** This file documents a superseded checker/release surface.
+> It is not current theorem-status authority and does not establish `P = NP`. See
+> [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
+> [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
 
-The locked NAND theorem has been split into explicit manuscript and GPack obligations. The residual-band minimization route has now also been split into checker-visible obligations through Terminal MuBridge, SaturatePositive, BCELReady, BN2-BN6, Realizer/HB closure, and ZeroSlack final closure. It remains a major hostile-review target.
+Historical status: **residual-band hardening pass recorded as completed; still open for hostile mathematical audit**.
 
-## Release context
+The historical release split the locked NAND theorem into explicit manuscript and GPack obligations. It also split the residual-band minimization route into checker-visible obligations through Terminal MuBridge, SaturatePositive, BCELReady, BN2-BN6, Realizer/HB closure, and ZeroSlack final closure. These recorded fields did not discharge the mathematical obligations.
+
+## Historical release context
 
 ```text
 source commit:
@@ -20,7 +25,7 @@ validation:
 1121 tests, 1121 pass, 0 fail
 ```
 
-Public theorem boundary:
+Historical public theorem boundary:
 
 ```text
 CheckPCCPackexp(GeneratePCCPack())=accept => P = NP
@@ -348,7 +353,7 @@ zeroSlackCertificatePolynomialSize
 
 ## Round 2 verdict
 
-The residual-band route is the next major mathematical risk. The current proof architecture is detailed, but a serious reviewer will ask for the ZeroSlack route to be decomposed into named proof obligations, the same way the locked NAND theorem was decomposed.
+The residual-band route was recorded as the next major mathematical risk. The historical proof architecture was detailed, but the review called for the ZeroSlack route to be decomposed into named proof obligations, the same way the locked NAND theorem was decomposed.
 
 The highest-risk points are:
 
@@ -360,6 +365,6 @@ The highest-risk points are:
 5. HB negative closure without circular blocker reasoning.
 ```
 
-## Current hardening status
+## Historical hardening status
 
-The 7072f8d release records first-class checker fields for Terminal MuBridge, SaturatePositive, BCEL-ready residual witnesses, BN2, BN3, BN4, BN5/PkgC, BN6, Realizer/HB closure, and ZeroSlack final closure. The next work is hostile external review: produce minimal counterexamples, missing lemmas, or tamper fixtures rather than adding more naming-only obligation fields.
+The 7072f8d release recorded first-class checker fields for Terminal MuBridge, SaturatePositive, BCEL-ready residual witnesses, BN2, BN3, BN4, BN5/PkgC, BN6, Realizer/HB closure, and ZeroSlack final closure. The note proposed hostile external review as the next work: producing minimal counterexamples, missing lemmas, or tamper fixtures rather than adding more naming-only obligation fields.

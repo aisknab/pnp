@@ -1,6 +1,11 @@
 # Uniform ZeroSlack closure
 
-Coordinate:
+> **Historical assertion-checker record:** This UFS coordinate is superseded. The ZeroSlack
+> contradiction remains a current formal obligation and is not proved by assertion-checker
+> acceptance. See [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json)
+> and [`../docs/FORMAL_RECONSTRUCTION.md`](../docs/FORMAL_RECONSTRUCTION.md).
+
+Historical coordinate:
 
 ```text
 PNP-UNIFORM-ZEROSLACK-CLOSURE-2026-07-05-01
@@ -12,23 +17,24 @@ Uniform final soundness obligation:
 UFS-005-ZeroSlackContradictionUniform
 ```
 
-Checker:
+Historical replay command:
 
 ```bash
-npm run proof:uniform-zeroslack-closure
+npm run proof:uniform-zeroslack-closure -- --historical-replay
 ```
 
-Direct checker command:
+Direct historical replay command:
 
 ```bash
-node pcc-uniform-zeroslack-closure0.mjs --json
+node pcc-uniform-zeroslack-closure0.mjs --json --historical-replay
 ```
 
 ## Purpose
 
-This surface discharges the fifth uniform-final-soundness sub-obligation: the ZeroSlack branch is closed uniformly across every residual-band locked NAND input, every packet rank, and every selector/HN/BUD sidecar state.
+This surface recorded the fifth historical UFS assertion: that the ZeroSlack branch closed uniformly
+across the listed residual-band, packet, selector, HN, and BUD record states.
 
-The accepted theorem shape is:
+The recorded assertion shape was:
 
 ```text
 PCCOracle(C) returns ZeroSlack(C,Z) => Lambda(C)=0
@@ -48,15 +54,16 @@ ZSC-007-PositiveSlackContradictionComplete
 ZSC-008-CertificatePolynomialSize
 ```
 
-## What this proves
+## What the historical checker accepted
 
-The checker binds the residual-band minimizer to the ZeroSlack contradiction: if a positive residual witness remains, the no-lower ledger forces it through BCEL, packet extraction, selector realization, and HB closure, producing either a verified gain or a contradiction. Therefore a returned ZeroSlack certificate implies zero residual slack.
+The checker accepted records asserting that the no-lower, BCEL, packet, selector, and HB chain closed
+every positive residual case. It did not derive the all-case contradiction in the current formal system.
 
 ## What this does not prove
 
 This checker does not by itself prove SAT in P, activate final theorem emission, or clear unrestricted final soundness. Later checkers still need to bind the no-hidden-oracle semantic completeness surface, complexity implication, and release transition.
 
-Current boundary remains:
+The historical record kept this boundary:
 
 ```text
 publicTheoremEmissionAllowed = false

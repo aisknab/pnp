@@ -12,7 +12,7 @@ async function currentManifest() {
 }
 
 test('uniform input family checker accepts the current all-size NAND input schema', async () => {
-  const out = await CheckUniformInputFamily0({ writeOutput: false });
+  const out = await CheckUniformInputFamily0({ historicalReplay: true, writeOutput: false });
   assert.equal(out.tag, 'accept');
   assert.equal(out.coordinate, 'PNP-UNIFORM-INPUT-FAMILY-2026-07-04-01');
   assert.equal(out.ufsObligationId, 'UFS-001-InputFamilyUniformity');
@@ -65,7 +65,7 @@ test('uniform input family checker rejects finite-list-only overclaim', async ()
   const manifest = await currentManifest();
   manifest.inputFamily.finiteInstanceList = true;
   manifest.inputFamily.allFiniteSizesCovered = false;
-  const out = await CheckUniformInputFamily0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckUniformInputFamily0({ historicalReplay: true, writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'UniformInputFamily.FamilyBoolean');
 });
@@ -73,7 +73,7 @@ test('uniform input family checker rejects finite-list-only overclaim', async ()
 test('uniform input family checker rejects theorem activation by input-family proof alone', async () => {
   const manifest = await currentManifest();
   manifest.uniformFinalSoundnessProved = true;
-  const out = await CheckUniformInputFamily0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckUniformInputFamily0({ historicalReplay: true, writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'UniformInputFamily.BooleanField');
   assert.deepEqual(out.path, ['uniformFinalSoundnessProved']);
@@ -82,7 +82,7 @@ test('uniform input family checker rejects theorem activation by input-family pr
 test('uniform input family checker rejects bounded enumeration only', async () => {
   const manifest = await currentManifest();
   manifest.inputFamily.boundedEnumerationOnly = true;
-  const out = await CheckUniformInputFamily0({ writeOutput: false, manifestOverride: manifest });
+  const out = await CheckUniformInputFamily0({ historicalReplay: true, writeOutput: false, manifestOverride: manifest });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'UniformInputFamily.FamilyBoolean');
 });

@@ -1,5 +1,7 @@
 # Semantic kernel hardening - phase 45
 
+> Historical assertion-checker record. Its workflow is retired and it is not current theorem-status authority. See [the formal reconstruction status](../status/FORMAL_RECONSTRUCTION_STATUS.json).
+
 Phase 44 represented the external-review request gate. It did not claim acceptance and kept the release-layer blockers in place:
 
 ```text
@@ -101,7 +103,7 @@ activeFinalNodeIds = []
 The dedicated workflow is:
 
 ```text
-.github/workflows/external-review-findings-registry.yml
+retired historical workflow `external-review-findings-registry.yml`
 ```
 
 It runs:

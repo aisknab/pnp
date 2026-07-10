@@ -1,4 +1,8 @@
-# Reviewer Auditability Programme — Completion Summary
+# Historical Reviewer Auditability Programme: Completion Summary
+
+This document records an earlier reviewer-documentation programme. References below to accepted
+release-audit records describe historical assertion-checker behavior and do not determine current
+theorem status. See [FORMAL_RECONSTRUCTION.md](FORMAL_RECONSTRUCTION.md) for the current authority.
 
 ## Scope
 
@@ -155,7 +159,7 @@ Additional step-specific runs covered public-surface, README, release-audit, pro
 ### Reproducibility and release identity
 
 ```bash
-node tools/reproducibility-smoke.mjs
+node tools/reproducibility-smoke.mjs --historical-replay
 node tools/check-doc-links.mjs
 sha256sum -c proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS
 sha256sum -c proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS.sha256
@@ -234,7 +238,9 @@ This is a recorded frozen-release result whose metadata and artefact identity we
 
 - The complete current-`main` `npm test` suite was **not rerun as part of Step 12**. Step 12 is documentation-only and the normal durable CI intentionally uses targeted gates to keep ordinary PRs tractable.
 - A complete current-tree `npm test` run was attempted during Step 6 but exceeded the available execution window. No failure was observed before the timeout; the targeted suites covering changed paths passed.
-- The manual `full-verification` workflow and full release audit were not triggered for this documentation-only final summary. They remain the intended expensive verification path for broad or release-oriented changes.
+- The manual `full-verification` workflow and full release audit were not triggered for this
+  documentation-only historical summary. The current manual workflow runs the complete test suite and
+  formal reconstruction status check. The legacy full release audit is not a current theorem gate.
 - The frozen 1,121-test suite was not independently rerun by Step 12; its sealed result and checksum-bound artefacts were verified.
 - No clean-room checker in another language was run.
 - No independent proof-assistant formalization was run.

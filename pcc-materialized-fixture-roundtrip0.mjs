@@ -23,6 +23,7 @@ import {
   MATERIALIZED_FIXTURE_FILENAMES0,
   WriteMaterializedFixtureSet0,
 } from './pcc-materialized-fixture-writer0.mjs';
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
 
 const CHECKER_VERSION = 0;
 const REPO_ROOT = path.dirname(fileURLToPath(import.meta.url));
@@ -57,6 +58,7 @@ export function makeMaterializedFixtureRoundtripConfig0(overrides = {}) {
 }
 
 export async function CheckMaterializedFixtureRoundtrip0(config = makeMaterializedFixtureRoundtripConfig0()) {
+  if (config?.historicalReplay !== true) return LegacyReplayRequiredReject0('CheckMaterializedFixtureRoundtrip0');
   const checker = 'CheckMaterializedFixtureRoundtrip0';
   const ledger = [];
   const cfg = makeMaterializedFixtureRoundtripConfig0(config);
@@ -80,6 +82,7 @@ export async function CheckMaterializedFixtureRoundtrip0(config = makeMaterializ
   }
 
   const firstWrite = await WriteMaterializedFixtureSet0({
+    historicalReplay: true,
     outputDir: cfg.outputDirA,
     canonicalEnvelopeBytes: cfg.canonicalEnvelopeBytes,
     overwrite: cfg.overwrite,
@@ -104,6 +107,7 @@ export async function CheckMaterializedFixtureRoundtrip0(config = makeMaterializ
   }
 
   const secondWrite = await WriteMaterializedFixtureSet0({
+    historicalReplay: true,
     outputDir: cfg.outputDirB,
     canonicalEnvelopeBytes: cfg.canonicalEnvelopeBytes,
     overwrite: cfg.overwrite,
@@ -218,9 +222,11 @@ export async function CheckMaterializedFixtureRoundtrip0(config = makeMaterializ
 }
 
 export async function CheckMaterializedFixtureRoundtripDirs0(outputDirA, outputDirB, overrides = {}) {
+  if (overrides?.historicalReplay !== true) return LegacyReplayRequiredReject0('CheckMaterializedFixtureRoundtripDirs0');
   return CheckMaterializedFixtureRoundtrip0({
     outputDirA,
     outputDirB,
+    historicalReplay: true,
     ...overrides,
   });
 }
@@ -366,13 +372,13 @@ async function verifyDirectRoundtrip0(config) {
     {
       label: 'CheckMaterializedAcceptanceBridgeFile0.pending',
       path: ['files', MATERIALIZED_FIXTURE_FILENAMES0.pendingBridge],
-      run: () => CheckMaterializedAcceptanceBridgeFile0(pendingBridgeFile),
+      run: () => CheckMaterializedAcceptanceBridgeFile0(pendingBridgeFile, { historicalReplay: true }),
       expect: (record) => record.NF.replayVerdict === 'pending' && record.NF.publicConclusionEmitted === false,
     },
     {
       label: 'CheckMaterializedAcceptanceBridgeFile0.accepted',
       path: ['files', MATERIALIZED_FIXTURE_FILENAMES0.acceptedBridge],
-      run: () => CheckMaterializedAcceptanceBridgeFile0(acceptedBridgeFile),
+      run: () => CheckMaterializedAcceptanceBridgeFile0(acceptedBridgeFile, { historicalReplay: true }),
       expect: (record) => record.NF.replayVerdict === 'accept' && record.NF.publicConclusionEmitted === true,
     },
   ];
@@ -424,6 +430,7 @@ async function verifyCliRoundtrip0(config) {
 
   const aggregateArgs = [
     path.join(REPO_ROOT, 'bin', 'check-materialized-aggregate0.mjs'),
+    '--historical-replay',
     packFile,
   ];
 
@@ -446,6 +453,7 @@ async function verifyCliRoundtrip0(config) {
       label: 'CLI.check-materialized-acceptance-bridge0.pending',
       args: [
         path.join(REPO_ROOT, 'bin', 'check-materialized-acceptance-bridge0.mjs'),
+        '--historical-replay',
         pendingBridgeFile,
       ],
       expectedChecker: 'CheckMaterializedAcceptanceBridgeFile0',
@@ -455,6 +463,7 @@ async function verifyCliRoundtrip0(config) {
       label: 'CLI.check-materialized-acceptance-bridge0.accepted',
       args: [
         path.join(REPO_ROOT, 'bin', 'check-materialized-acceptance-bridge0.mjs'),
+        '--historical-replay',
         acceptedBridgeFile,
       ],
       expectedChecker: 'CheckMaterializedAcceptanceBridgeFile0',

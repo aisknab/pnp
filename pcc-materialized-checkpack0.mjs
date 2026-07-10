@@ -18,6 +18,7 @@ import {
 import {
   MATERIALIZED_PACK_PUBLIC_BOUNDARY0,
 } from './pcc-materialized-pack0.mjs';
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
 
 const CHECKER_VERSION = 0;
 
@@ -75,6 +76,10 @@ export async function CheckMaterializedCheckPCCPack0(shell, config = makeMateria
       witness: configCheck.witness,
       ledger,
     });
+  }
+
+  if (typeof cfg.packageCheckRunner === 'function' && cfg.historicalReplay !== true) {
+    return LegacyReplayRequiredReject0('CheckMaterializedCheckPCCPack0');
   }
 
   const importsRecord = await CheckMaterializedImports0(shell, cfg.importsConfig ?? {});

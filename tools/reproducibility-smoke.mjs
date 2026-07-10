@@ -5,6 +5,9 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { EnforceHistoricalReplayCli0 } from '../pcc-legacy-replay-gate0.mjs';
+
+EnforceHistoricalReplayCli0({ entrypoint: 'tools/reproducibility-smoke.mjs' });
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const BUNDLE = 'proof-artifacts/final-pnp-proof-report-hardened-7072f8d';
@@ -70,12 +73,16 @@ for (const [name, envelope, record] of [
 }
 
 console.log(JSON.stringify({
-  status: 'ok',
+  status: 'historical-replay-ok',
+  historicalReplay: true,
+  currentTheoremStatusAuthority: false,
+  mathematicalTheoremEstablished: false,
+  publicTheoremEmissionAllowed: false,
   bundle: BUNDLE,
   checksumEntriesVerified: ledgerLines.length,
   detachedLedgerHashVerified: true,
   summaryAccepted: true,
   fullAccepted: true,
-  claimBoundary: CLAIM,
+  historicalClaimBoundary: CLAIM,
   evidenceBoundary: 'artefact identity and recorded implementation fields only; not theorem correctness',
 }, null, 2));

@@ -1,14 +1,20 @@
 #!/usr/bin/env node
 
+import { EnforceHistoricalReplayCli0 } from '../pcc-legacy-replay-gate0.mjs';
+
 import {
   writeReleaseAuditConcreteFinalCertificateGateFiles0,
 } from '../pcc-release-audit-final-certificate-concrete-gate0.mjs';
+
+EnforceHistoricalReplayCli0({ entrypoint: 'bin/write-release-audit-concrete-final-certificate-gate0.mjs' });
 
 const args = process.argv.slice(2);
 const outDir = args.find((arg) => !arg.startsWith('--')) ?? './release-audit-concrete-final-certificate-gate0';
 const full = args.includes('--full');
 
-const result = await writeReleaseAuditConcreteFinalCertificateGateFiles0(outDir);
+const result = await writeReleaseAuditConcreteFinalCertificateGateFiles0(outDir, {
+  historicalReplay: true,
+});
 
 if (full) {
   console.log(JSON.stringify(result.checked, null, 2));

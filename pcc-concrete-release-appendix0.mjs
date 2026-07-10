@@ -11,6 +11,8 @@ import {
   makeReleaseAuditConcreteFinalCertificateGate0,
 } from './pcc-release-audit-final-certificate-concrete-gate0.mjs';
 
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 const CHECKER_VERSION = 0;
 
 const CONCRETE_RELEASE_APPENDIX_FORBIDDEN_MARKERS0 = Object.freeze([
@@ -27,6 +29,7 @@ export function makeConcreteReleaseAppendixConfig0(overrides = {}) {
   return {
     kind: 'ConcreteReleaseAppendixConfig0',
     version: CHECKER_VERSION,
+    historicalReplay: false,
     checkConcreteReleaseGate: true,
     checkAppendix: true,
     checkJsonMaterialized: true,
@@ -42,11 +45,13 @@ export async function makeConcreteReleaseAppendix0({
   ReleaseAuditConcreteFinalCertificateGateEnvelope = null,
   Appendix = null,
   overrides = {},
+  historicalReplay = false,
 } = {}) {
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeConcreteReleaseAppendix0');
   const gateEnvelope = ReleaseAuditConcreteFinalCertificateGateEnvelope ??
-    await makeReleaseAuditConcreteFinalCertificateGate0();
+    await makeReleaseAuditConcreteFinalCertificateGate0({ historicalReplay: true });
 
-  const appendix = Appendix ?? makeConcreteReleaseAppendixRecord0(gateEnvelope);
+  const appendix = Appendix ?? makeConcreteReleaseAppendixRecord0(gateEnvelope, { historicalReplay: true });
 
   const linkage = {
     kind: 'ConcreteReleaseAppendixLinkage0',
@@ -99,7 +104,8 @@ export async function makeConcreteReleaseAppendix0({
   };
 }
 
-export function makeConcreteReleaseAppendixRecord0(gateEnvelope) {
+export function makeConcreteReleaseAppendixRecord0(gateEnvelope, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('makeConcreteReleaseAppendixRecord0');
   const releaseAuditRecord = gateEnvelope.ReleaseAuditRecord;
   const concreteStatusEnvelope = gateEnvelope.ConcreteFinalCertificatePublicStatusEnvelope;
   const publicStatus = concreteStatusEnvelope.FinalCertificatePublicStatusEnvelope.PublicStatus;
@@ -239,6 +245,7 @@ export async function CheckConcreteReleaseAppendix0(
   const checker = 'CheckConcreteReleaseAppendix0';
   const ledger = [];
   const cfg = makeConcreteReleaseAppendixConfig0(config);
+  if (cfg.historicalReplay !== true) return LegacyReplayRequiredReject0(checker);
   const envelope = input;
 
   const cfgCheck = validateConfig0(cfg);
@@ -280,7 +287,10 @@ export async function CheckConcreteReleaseAppendix0(
   if (cfg.checkConcreteReleaseGate === true) {
     const gateRecord = await CheckReleaseAuditConcreteFinalCertificateGate0(
       envelope.ReleaseAuditConcreteFinalCertificateGateEnvelope,
-      cfg.concreteReleaseGateConfig ?? {},
+      {
+        ...(cfg.concreteReleaseGateConfig ?? {}),
+        historicalReplay: true,
+      },
     );
     const gate = recordToValidation0(gateRecord, ['ReleaseAuditConcreteFinalCertificateGateEnvelope']);
 
@@ -304,6 +314,7 @@ export async function CheckConcreteReleaseAppendix0(
   if (cfg.checkAppendix === true) {
     const expectedAppendix = makeConcreteReleaseAppendixRecord0(
       envelope.ReleaseAuditConcreteFinalCertificateGateEnvelope,
+      { historicalReplay: true },
     );
     const appendix = validateAppendixRecord0(envelope.Appendix, expectedAppendix);
 
@@ -520,15 +531,22 @@ export async function CheckConcreteReleaseAppendix0(
 }
 
 export async function writeConcreteReleaseAppendixFiles0(outDir, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('writeConcreteReleaseAppendixFiles0');
   if (typeof outDir !== 'string' || outDir.length === 0) {
     throw new TypeError('writeConcreteReleaseAppendixFiles0 requires a non-empty output directory');
   }
 
   const envelope = await makeConcreteReleaseAppendix0(options);
-  const checked = await CheckConcreteReleaseAppendix0(envelope, options.checkConfig ?? {});
+  const checked = await CheckConcreteReleaseAppendix0(envelope, {
+    ...(options.checkConfig ?? {}),
+    historicalReplay: true,
+  });
   const gateCheck = await CheckReleaseAuditConcreteFinalCertificateGate0(
     envelope.ReleaseAuditConcreteFinalCertificateGateEnvelope,
-    options.gateCheckConfig ?? {},
+    {
+      ...(options.gateCheckConfig ?? {}),
+      historicalReplay: true,
+    },
   );
 
   await fs.mkdir(outDir, {

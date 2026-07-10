@@ -27,6 +27,8 @@ import {
   makeSyntheticPCCPack0,
 } from './pcc-pack-sufficiency0.mjs';
 
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
+
 const CHECKER_VERSION = 0;
 
 export const ACCEPT_RUN_PHASES0 = Object.freeze([
@@ -103,11 +105,14 @@ const EXECUTABLE_KEYS0 = new Set([
 ]);
 
 export function makeSyntheticAcceptRun0({
-  pack = makeSyntheticPCCPack0(),
+  pack = null,
   verdict = 'accept',
   rejectLog = [],
   overrides = {},
+  historicalReplay = false,
 } = {}) {
+  if (historicalReplay !== true) return LegacyReplayRequiredReject0('makeSyntheticAcceptRun0');
+  pack ??= makeSyntheticPCCPack0({}, { historicalReplay: true });
   const outputCoreBytes = stableStringify0(pack.Core);
   const outputPackBytes = stableStringify0(pack);
 
@@ -211,8 +216,9 @@ export function makeSyntheticAcceptRun0({
   return run;
 }
 
-export function makeSyntheticRejectAcceptRun0(overrides = {}) {
-  const pack = makeSyntheticPCCPack0();
+export function makeSyntheticRejectAcceptRun0(overrides = {}, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('makeSyntheticRejectAcceptRun0');
+  const pack = makeSyntheticPCCPack0({}, { historicalReplay: true });
 
   pack.GPack = {
     ...pack.GPack,
@@ -235,6 +241,7 @@ export function makeSyntheticRejectAcceptRun0(overrides = {}) {
       },
     ],
     overrides,
+    historicalReplay: true,
   });
 }
 
@@ -247,7 +254,8 @@ export function makeSyntheticRejectAcceptRun0(overrides = {}) {
  * Does not check: theorem soundness or platform-independent exact runtime metadata.
  * Failure modes: underlying run reject, fresh-check reject, byte/transcript/verdict mismatch.
  */
-export async function ReplayAcceptRun0(run) {
+export async function ReplayAcceptRun0(run, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('ReplayAcceptRun0');
   const checker = 'ReplayAcceptRun0';
   const ledger = [];
 
@@ -287,7 +295,7 @@ export async function ReplayAcceptRun0(run) {
     });
   }
 
-  const packRecord = await CheckPackSufficiency0(run.Pgen);
+  const packRecord = await CheckPackSufficiency0(run.Pgen, { historicalReplay: true });
   const packValidation = recordToValidation0(packRecord, ['Pgen']);
 
   ledger.push({
@@ -333,7 +341,8 @@ export async function ReplayAcceptRun0(run) {
  * Does not check: checker mathematical soundness or completeness of environment capture.
  * Failure modes: shape/generator/package/environment/transcript/log/verdict/linkage reject.
  */
-export async function CheckAcceptRun0(run) {
+export async function CheckAcceptRun0(run, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('CheckAcceptRun0');
   const checker = 'CheckAcceptRun0';
   const ledger = [];
 
@@ -365,7 +374,7 @@ export async function CheckAcceptRun0(run) {
     }
   }
 
-  const replayRecord = await ReplayAcceptRun0(run);
+  const replayRecord = await ReplayAcceptRun0(run, { historicalReplay: true });
 
   ledger.push({
     phase: 'ReplayAcceptRun0',
@@ -459,11 +468,12 @@ export async function CheckAcceptRun0(run) {
  * Does not check: mathematical validity of the accepted package.
  * Failure modes: rejected run/replay or inconsistent verdict/claim fields.
  */
-export async function EmitFinalVerdict0(run) {
+export async function EmitFinalVerdict0(run, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('EmitFinalVerdict0');
   const checker = 'EmitFinalVerdict0';
   const ledger = [];
 
-  const acceptRunRecord = await CheckAcceptRun0(run);
+  const acceptRunRecord = await CheckAcceptRun0(run, { historicalReplay: true });
 
   ledger.push({
     phase: 'CheckAcceptRun0',

@@ -84,6 +84,7 @@ import {
   makeSyntheticFinalTheorem0,
   makeSyntheticRowFamFinal0,
 } from './pcc-final0.mjs';
+import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
 
 const CHECKER_VERSION = 0;
 
@@ -324,7 +325,8 @@ export function makeSyntheticKBundle0(overrides = {}) {
   };
 }
 
-export function makeSyntheticPackSufficiencyTheorem0(overrides = {}) {
+export function makeSyntheticPackSufficiencyTheorem0(overrides = {}, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('makeSyntheticPackSufficiencyTheorem0');
   return {
     kind: 'PackSufficiencyTheorem0',
     version: CHECKER_VERSION,
@@ -460,13 +462,15 @@ export function makeSyntheticPackSufficiencyTheorem0(overrides = {}) {
   };
 }
 
-export function makeSyntheticPCCPack0(overrides = {}) {
+export function makeSyntheticPCCPack0(overrides = {}, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('makeSyntheticPCCPack0');
   const gpack = makeSyntheticGPack0();
   const finalIntegration = makeSyntheticFinalIntegration0({
     gpack,
   });
   const finalTheorem = makeSyntheticFinalTheorem0({
     finalIntegration,
+    historicalReplay: true,
   });
 
   const pack = {
@@ -513,9 +517,9 @@ export function makeSyntheticPCCPack0(overrides = {}) {
     RowFamG: makeSyntheticRowFamG0(gpack),
     FinalIntegration: finalIntegration,
     FinalTheorem: finalTheorem,
-    RowFamFinal: makeSyntheticRowFamFinal0(finalTheorem),
+    RowFamFinal: makeSyntheticRowFamFinal0(finalTheorem, {}, { historicalReplay: true }),
 
-    PackSufficiencyTheorem: makeSyntheticPackSufficiencyTheorem0(),
+    PackSufficiencyTheorem: makeSyntheticPackSufficiencyTheorem0({}, { historicalReplay: true }),
 
     PiPackSufficiency: {
       kind: 'PiPackSufficiencyRun0',
@@ -539,7 +543,8 @@ export function makeSyntheticPCCPack0(overrides = {}) {
  * Failure modes: initial shape/manifest/core reject, child reject, or final cross/theorem/
  * no-min/opaque reject.
  */
-export async function CheckPackSufficiency0(pack) {
+export async function CheckPackSufficiency0(pack, options = {}) {
+  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('CheckPackSufficiency0');
   const checker = 'CheckPackSufficiency0';
   const ledger = [];
 
@@ -580,8 +585,8 @@ export async function CheckPackSufficiency0(pack) {
     ['CheckGPack0', `${checker}.GPack`, ['GPack'], await CheckGPack0(pack.GPack)],
     ['CheckRowFamG0', `${checker}.RowFamG`, ['RowFamG'], await CheckRowFamG0(pack.RowFamG)],
     ['CheckFinalIntegration0', `${checker}.FinalIntegration`, ['FinalIntegration'], await CheckFinalIntegration0(pack.FinalIntegration)],
-    ['CheckFinal0', `${checker}.FinalTheorem`, ['FinalTheorem'], await CheckFinal0(pack.FinalTheorem)],
-    ['CheckRowFamFinal0', `${checker}.RowFamFinal`, ['RowFamFinal'], await CheckRowFamFinal0(pack.RowFamFinal)],
+    ['CheckFinal0', `${checker}.FinalTheorem`, ['FinalTheorem'], await CheckFinal0(pack.FinalTheorem, { historicalReplay: true })],
+    ['CheckRowFamFinal0', `${checker}.RowFamFinal`, ['RowFamFinal'], await CheckRowFamFinal0(pack.RowFamFinal, { historicalReplay: true })],
   ];
 
   const phaseDigests = [];

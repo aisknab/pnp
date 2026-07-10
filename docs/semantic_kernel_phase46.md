@@ -1,5 +1,7 @@
 # Semantic kernel hardening - phase 46
 
+> Historical assertion-checker record. Its workflow is retired and it is not current theorem-status authority. See [the formal reconstruction status](../status/FORMAL_RECONSTRUCTION_STATUS.json).
+
 Phase 45 represented an empty pending findings registry for external-review artifacts.
 
 Phase 46 adds a signed-findings validation gate for the next coordinate:
@@ -104,7 +106,7 @@ activeFinalNodeIds = []
 The dedicated workflow is:
 
 ```text
-.github/workflows/external-review-signed-findings.yml
+retired historical workflow `external-review-signed-findings.yml`
 ```
 
 It runs:

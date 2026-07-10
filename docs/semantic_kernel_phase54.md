@@ -1,5 +1,7 @@
 # Semantic kernel hardening - phase 54
 
+> Historical assertion-checker record. Its workflow is retired and it is not current theorem-status authority. See [the formal reconstruction status](../status/FORMAL_RECONSTRUCTION_STATUS.json).
+
 Phase 53 added the external-review reviewer-key file intake directory:
 
 ```text
@@ -93,7 +95,7 @@ sealedReleaseNotOverwritten = true
 The dedicated workflow is:
 
 ```text
-.github/workflows/external-review-key-file-hashes.yml
+retired historical workflow `external-review-key-file-hashes.yml`
 ```
 
 It runs:

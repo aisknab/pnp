@@ -1,9 +1,13 @@
 #!/usr/bin/env node
 
+import { EnforceHistoricalReplayCli0 } from '../pcc-legacy-replay-gate0.mjs';
+
 import {
   WriteMaterializedFixtureSet0,
   summarizeMaterializedFixtureWriter0,
 } from '../pcc-materialized-fixture-writer0.mjs';
+
+EnforceHistoricalReplayCli0({ entrypoint: 'bin/write-materialized-fixtures0.mjs' });
 
 const args = process.argv.slice(2);
 const full = args.includes('--full');
@@ -18,6 +22,7 @@ const overwrite = !args.includes('--no-overwrite');
 const verify = !args.includes('--no-verify');
 
 const record = await WriteMaterializedFixtureSet0({
+    historicalReplay: true,
   ...(outputDir ? { outputDir } : {}),
   canonicalEnvelopeBytes,
   overwrite,

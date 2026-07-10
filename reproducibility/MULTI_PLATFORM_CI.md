@@ -1,6 +1,8 @@
 # Multi-platform core CI
 
-This directory records the current multi-platform CI coordinate:
+> Historical assertion-checker record. Its workflow is retired and it is not current theorem-status authority. See [the formal reconstruction status](../status/FORMAL_RECONSTRUCTION_STATUS.json).
+
+This directory preserves the retired multi-platform CI coordinate:
 
 ```text
 PNP-MULTI-PLATFORM-CI-2026-06-27-01
@@ -12,13 +14,13 @@ The machine-readable manifest is:
 reproducibility/MULTI_PLATFORM_CI.json
 ```
 
-The workflow is:
+The historical workflow path was:
 
 ```text
-.github/workflows/multi-platform-ci.yml
+retired historical workflow `multi-platform-ci.yml`
 ```
 
-It runs on:
+The retired matrix ran on:
 
 ```text
 ubuntu-latest
@@ -38,7 +40,7 @@ node --test test/reviewer-negative-invariants.test.mjs
 
 ## Scope
 
-This workflow is a cross-platform reproducibility confidence layer for the Node core. It deliberately does not run Docker, execute the bash fresh-clone verifier, or recursively run the full `npm run pnp:verify` command on every hosted operating system.
+This retired workflow was a cross-platform reproducibility confidence layer for the Node core. It deliberately did not run Docker, execute the bash fresh-clone verifier, or recursively run the full `npm run pnp:verify` command on every hosted operating system.
 
 The full verifier remains:
 
@@ -46,7 +48,7 @@ The full verifier remains:
 npm run pnp:verify
 ```
 
-The multi-platform workflow proves that the lockfile install, core syntax, one-command verifier script syntax, manifest checks, and reviewer negative invariants run on Ubuntu, macOS, and Windows.
+The record preserves what the retired workflow checked. It makes no claim about the current checkout or current hosted runners.
 
 ## Boundary
 

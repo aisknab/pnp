@@ -1,5 +1,11 @@
 # Reviewer Guide
 
+> **Current authority:** Formal reconstruction is in progress. The repository does not currently
+> establish `P = NP`, public theorem emission is disabled, and the required Lean root theorem is
+> absent. Start with [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json)
+> and [`FORMAL_RECONSTRUCTION.md`](FORMAL_RECONSTRUCTION.md). Release material discussed below is
+> historical assertion-checker evidence only.
+
 ## Executive summary
 
 This repository contains the source, checkers, tests, generated proof-report artefacts, and release metadata for a claimed proof that `P = NP`.
@@ -10,7 +16,9 @@ The public claim is recorded at the conditional boundary:
 CheckPCCPackexp(GeneratePCCPack())=accept => P = NP
 ```
 
-The repository records an accepted generated package and an accepted replay/certificate/release chain. Those acceptance records are evidence about what the implementation accepted. They are not, by themselves, independent evidence that the mathematical argument is correct or that every checker rule is sound.
+The historical JavaScript stack records an accepted generated package and an accepted
+replay/certificate/release chain. Those records are evidence about implemented predicates only.
+They are not current theorem authority or a formal derivation.
 
 A complete review therefore has three separate tasks:
 
@@ -20,9 +28,9 @@ A complete review therefore has three separate tasks:
 
 These tasks must not be conflated. A passing hash check establishes file identity only. A passing test suite establishes the tested implementation behaviour only. Neither substitutes for a mathematical or checker-soundness audit.
 
-## Pinned review release
+## Pinned historical review release
 
-The release-specific audit should begin from these immutable coordinates:
+An audit of the recorded 7072f8d checker result should begin from these immutable coordinates:
 
 ```text
 source tag:    final-pnp-proof-report-hardened-7072f8d

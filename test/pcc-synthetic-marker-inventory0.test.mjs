@@ -32,7 +32,7 @@ test('CheckSyntheticMarkerInventory0 accepts the current classified synthetic ma
 });
 
 test('findSyntheticMarkersInValue0 finds synthetic and note markers in synthetic RunAll input', () => {
-  const hits = findSyntheticMarkersInValue0(makeSyntheticRunAllInput0(), {
+  const hits = findSyntheticMarkersInValue0(makeSyntheticRunAllInput0({}, { historicalReplay: true }), {
     rootPath: ['RunAllInput0'],
   });
 

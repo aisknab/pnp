@@ -17,7 +17,7 @@ function childFailureMessage0(child) {
 test('release audit CLI --no-materialized-gate explicitly skips the materialized public status gate', () => {
   const cliPath = fileURLToPath(new URL('../bin/release-audit0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, '--no-materialized-gate'], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', '--no-materialized-gate'], {
     encoding: 'utf8',
   });
 
@@ -37,6 +37,7 @@ test('release audit CLI --materialized-gate executes the materialized public sta
 
   const child = spawnSync(process.execPath, [
     cliPath,
+    '--historical-replay',
     '--materialized-gate',
     '--materialized-gate-out',
     outputDir,
@@ -61,7 +62,7 @@ test('release audit CLI --materialized-gate executes the materialized public sta
 test('release audit CLI --full exposes the materialized gate ledger phase', () => {
   const cliPath = fileURLToPath(new URL('../bin/release-audit0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, '--no-materialized-gate', '--full'], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', '--no-materialized-gate', '--full'], {
     encoding: 'utf8',
   });
 
@@ -80,6 +81,7 @@ test('release audit CLI rejects contradictory materialized gate flags', () => {
 
   const child = spawnSync(process.execPath, [
     cliPath,
+    '--historical-replay',
     '--materialized-gate',
     '--no-materialized-gate',
   ], {
@@ -101,6 +103,7 @@ test('release audit CLI rejects contradictory materialized gate CLI flags', () =
 
   const child = spawnSync(process.execPath, [
     cliPath,
+    '--historical-replay',
     '--materialized-gate-cli',
     '--no-materialized-gate-cli',
   ], {
@@ -120,7 +123,7 @@ test('release audit CLI rejects contradictory materialized gate CLI flags', () =
 test('release audit CLI rejects missing materialized gate output directory argument', () => {
   const cliPath = fileURLToPath(new URL('../bin/release-audit0.mjs', import.meta.url));
 
-  const child = spawnSync(process.execPath, [cliPath, '--materialized-gate-out'], {
+  const child = spawnSync(process.execPath, [cliPath, '--historical-replay', '--materialized-gate-out'], {
     encoding: 'utf8',
   });
 

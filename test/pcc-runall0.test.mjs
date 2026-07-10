@@ -19,8 +19,20 @@ import {
   summarizeConcretePCCPackCoverage0,
 } from '../pcc-pack-concrete-materialized0.mjs';
 
-test('RunAll0 accepts the synthetic full-stack public status artefact', async () => {
+const RunHistorical0 = (input) => RunAll0(input, { historicalReplay: true });
+const CheckRunHistorical0 = (input) => CheckRunAll0(input, { historicalReplay: true });
+
+test('RunAll0 rejects without historical replay opt-in', async () => {
   const out = await RunAll0();
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.coord, 'RunAll0.HistoricalReplayRequired');
+  assert.equal(out.publicTheoremEmissionAllowed, false);
+  assert.equal(out.publicTheoremStatement, null);
+  assert.equal(out.finalTheoremReady, false);
+});
+
+test('RunAll0 accepts the synthetic full-stack public status artefact', async () => {
+  const out = await RunHistorical0();
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'RunAll0');
@@ -43,7 +55,7 @@ test('RunAll0 accepts the synthetic full-stack public status artefact', async ()
 });
 
 test('CheckRunAll0 accepts an explicit synthetic RunAll input', async () => {
-  const out = await CheckRunAll0(makeSyntheticRunAllInput0());
+  const out = await CheckRunHistorical0(makeSyntheticRunAllInput0({}, { historicalReplay: true }));
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'RunAll0');
@@ -51,8 +63,8 @@ test('CheckRunAll0 accepts an explicit synthetic RunAll input', async () => {
 });
 
 test('RunAll0 accepts a direct IntegratedPipeline0 object', async () => {
-  const pipeline = makeSyntheticIntegratedPipeline0();
-  const out = await RunAll0(pipeline);
+  const pipeline = makeSyntheticIntegratedPipeline0({}, { historicalReplay: true });
+  const out = await RunHistorical0(pipeline);
 
   assert.equal(out.tag, 'accept');
   assert.equal(out.checker, 'RunAll0');
@@ -60,8 +72,8 @@ test('RunAll0 accepts a direct IntegratedPipeline0 object', async () => {
 });
 
 test('RunAll0 is deterministic on fresh synthetic inputs', async () => {
-  const first = await RunAll0();
-  const second = await RunAll0();
+  const first = await RunHistorical0();
+  const second = await RunHistorical0();
 
   assert.equal(first.tag, 'accept');
   assert.equal(second.tag, 'accept');
@@ -69,7 +81,7 @@ test('RunAll0 is deterministic on fresh synthetic inputs', async () => {
 });
 
 test('RunAll0 rejects an integrated pipeline phase-order mismatch', async () => {
-  const pipeline = makeSyntheticIntegratedPipeline0();
+  const pipeline = makeSyntheticIntegratedPipeline0({}, { historicalReplay: true });
 
   pipeline.PhaseOrder = [
     ...pipeline.PhaseOrder,
@@ -77,7 +89,7 @@ test('RunAll0 rejects an integrated pipeline phase-order mismatch', async () => 
 
   pipeline.PhaseOrder[0] = 'BadPhase';
 
-  const out = await RunAll0(pipeline);
+  const out = await RunHistorical0(pipeline);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'RunAll0');
@@ -88,7 +100,7 @@ test('RunAll0 rejects an integrated pipeline phase-order mismatch', async () => 
 });
 
 test('RunAll0 rejects if AcceptRun Pgen does not match integrated PCCPack', async () => {
-  const pipeline = makeSyntheticIntegratedPipeline0();
+  const pipeline = makeSyntheticIntegratedPipeline0({}, { historicalReplay: true });
 
   pipeline.AcceptRun = {
     ...pipeline.AcceptRun,
@@ -101,7 +113,7 @@ test('RunAll0 rejects if AcceptRun Pgen does not match integrated PCCPack', asyn
     },
   };
 
-  const out = await RunAll0(pipeline);
+  const out = await RunHistorical0(pipeline);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'RunAll0');
@@ -112,7 +124,7 @@ test('RunAll0 rejects if AcceptRun Pgen does not match integrated PCCPack', asyn
 });
 
 test('RunAll0 rejects if generator output bytes do not match the generated package', async () => {
-  const pipeline = makeSyntheticIntegratedPipeline0();
+  const pipeline = makeSyntheticIntegratedPipeline0({}, { historicalReplay: true });
 
   pipeline.AcceptRun = {
     ...pipeline.AcceptRun,
@@ -122,7 +134,7 @@ test('RunAll0 rejects if generator output bytes do not match the generated packa
     },
   };
 
-  const out = await RunAll0(pipeline);
+  const out = await RunHistorical0(pipeline);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'RunAll0');
@@ -135,9 +147,9 @@ test('RunAll0 rejects if generator output bytes do not match the generated packa
 test('RunAll0 rejects if required checker coverage is missing', async () => {
   const input = makeSyntheticRunAllInput0({
     RequiredCheckers: RUNALL_CHECKER_COVERAGE0.filter((checker) => checker !== 'CheckGPack0'),
-  });
+  }, { historicalReplay: true });
 
-  const out = await RunAll0(input);
+  const out = await RunHistorical0(input);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'RunAll0');
@@ -147,7 +159,7 @@ test('RunAll0 rejects if required checker coverage is missing', async () => {
 });
 
 test('RunAll0 rejects if CheckPCCPackexp0 final G proof-chain coverage is missing', async () => {
-  const concretePCCPack = await makeConcreteMaterializedPCCPack0();
+  const concretePCCPack = await makeConcreteMaterializedPCCPack0({ historicalReplay: true });
 
   concretePCCPack.MaterializedPCCPackEnvelope = {
     ...concretePCCPack.MaterializedPCCPackEnvelope,
@@ -173,9 +185,9 @@ test('RunAll0 rejects if CheckPCCPackexp0 final G proof-chain coverage is missin
 
   const input = makeSyntheticRunAllInput0({
     ConcretePCCPack: concretePCCPack,
-  });
+  }, { historicalReplay: true });
 
-  const out = await RunAll0(input);
+  const out = await RunHistorical0(input);
 
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'RunAll0');
