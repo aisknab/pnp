@@ -124,7 +124,7 @@ test('formal status preserves the semantics milestone and broad downstream bound
 
 test('Lean workflow executes both static and kernel-level semantics audits', async () => {
   const workflow = await text0('.github/workflows/lean-bridge.yml');
-  assert.match(workflow, /node --test audits\/lean-root-target0\.test\.mjs audits\/lean-nand-semantics0\.test\.mjs/u);
+  assert.match(workflow, /node --test audits\/lean-root-target0\.test\.mjs audits\/lean-concrete-machine0\.test\.mjs audits\/lean-nand-semantics0\.test\.mjs/u);
   assert.match(workflow, /lake build PNP/u);
   assert.match(workflow, /lake env lean -DwarningAsError=true lean-audit\/PNPNANDSemanticsAxiomAudit\.lean/u);
   assert.match(workflow, /grep -F 'depends on axioms:'/u);

@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-10-10",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-10-11",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,8 +17,14 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "0c96305d4f2235aae359c865e91e0f58cafa4d20d9b040a16e992846360cfa3f",
+  "milestoneSourceClosureSha256": "6daa2a068fedab6cf0bda8da63267a220e8f6ab6568a8881f9d00872bd251a54",
   "earnedMilestoneTheoremKernelTypeSha256": {
+    "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
+    "PNP.Concrete.NatPolynomial.eval_mono": "08eef194a6dad5f3443646446dd9aa44bb62f71881897bd2721f5e10b0ed31ca",
+    "PNP.Concrete.PolynomialTimeMachine.verdict_accepts_iff": "d99481e6c7e062b5faf06d8bdb544efa434e2528ba40dfb6f87f9ccced49b56f",
+    "PNP.Concrete.PolynomialTimeMachine.verdict_ne_timeout": "ba634559b6494abc43978e3b34abf1f94b9d2e4cc3aa0856db8d5de36cefd1c5",
+    "PNP.Concrete.run_succ": "72236da903c3e3624c0af9e8b449eb01125cbcdab0af647740ce1fe0323bceba",
+    "PNP.Concrete.run_zero": "ce3d03f0ec30dd3e26a6a0029ee52e09b12fe84fe77c4742a86447d24edf36ec",
     "PNP.DirectWire.ConditionalThresholdBoundaryPremises.fullResidualSlack_le_four": "824e81b304d52fb83d75e95ac136e06ced495ab460d6d621503e2444ee08c93e",
     "PNP.DirectWire.ConditionalThresholdBoundaryPremises.satisfiable_iff_minimum_ge_succ": "d282ec937186b2c041cf999bbee8ff016d4c9f5b71e65c504a8c4a7e7b8ec971",
     "PNP.DirectWire.Equivalent.trans": "7a931de781c961c3ed9386ca2c615fc8531604efc94b823839e5e0a0bf164709",
@@ -43,6 +49,21 @@
     "PNP.DirectWire.unresolved_positiveSlack_regression": "db564cb64914fa82c134c8e4e2dfbef40a143e1fe78b2ceb8f81dece3b895977"
   },
   "milestones": [
+    {
+      "id": "concrete-machine-cost-kernel",
+      "title": "Concrete machine and cost kernel",
+      "classification": "formalized-foundation-only",
+      "scope": "Executable bitstrings and codecs, finite rule-list machine semantics, fuel-bounded execution, and proof-bearing natural-polynomial runtime witnesses.",
+      "requiredTheorems": [
+        "PNP.Concrete.BitString.decodePair_pair",
+        "PNP.Concrete.NatPolynomial.eval_mono",
+        "PNP.Concrete.PolynomialTimeMachine.verdict_accepts_iff",
+        "PNP.Concrete.PolynomialTimeMachine.verdict_ne_timeout",
+        "PNP.Concrete.run_succ",
+        "PNP.Concrete.run_zero"
+      ],
+      "nonClaim": "This foundation does not yet define concrete P, NP, reductions, SAT, NP-completeness, or P = NP."
+    },
     {
       "id": "direct-wire-semantics",
       "title": "Typed direct-wire NAND semantics",

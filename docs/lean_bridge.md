@@ -42,6 +42,8 @@ lean/PNP/NANDMinimum.lean
 lean/PNP/NANDComposition.lean
 lean/PNP/NANDSlack.lean
 lean/PNP/ResidualRoutes.lean
+lean/PNP/Concrete/BitString.lean
+lean/PNP/Concrete/Machine.lean
 lean/PNP/Complexity.lean
 lean/PNP/SAT.lean
 lean/PNP/LockedNANDMacros.lean
@@ -58,6 +60,8 @@ lean/PNP/PCCMin.lean
 lean/PNP/Bridge.lean
 lean-audit/PNPBridgeAxiomAudit.lean
 lean-audit/PNPTheoremInventory.lean
+lean-audit/PNPConcreteBitStringAxiomAudit.lean
+lean-audit/PNPConcreteMachineAxiomAudit.lean
 lean-audit/PNPNANDSemanticsAxiomAudit.lean
 lean-audit/PNPNANDEnumeratorAxiomAudit.lean
 lean-audit/PNPNANDTruthTableAxiomAudit.lean
@@ -71,6 +75,7 @@ lean-audit/PNPLockedNANDBaselineAxiomAudit.lean
 lean-audit/PNPLockedNANDLocalBaselineAxiomAudit.lean
 lean-audit/PNPLockedNANDThresholdBoundaryAxiomAudit.lean
 docs/lean_nand_semantics.md
+docs/lean_concrete_machine.md
 docs/lean_nand_enumerator.md
 docs/lean_locked_nand_macros.md
 docs/lean_locked_nand_prefix.md
@@ -80,7 +85,13 @@ docs/lean_residual_routes.md
 docs/lean_theorem_inventory.md
 ```
 
-## Complexity bridge
+## Concrete machine foundation and legacy complexity bridge
+
+`lean/PNP/Concrete/BitString.lean` defines canonical executable bitstring codecs and natural
+polynomial syntax. `lean/PNP/Concrete/Machine.lean` defines finite rule-list machine programs,
+focused-tape configurations, fuel-bounded execution, three-way verdicts, and proof-bearing
+`PolynomialTimeMachine` witnesses. All 79 explicit declarations have empty axiom closures. See
+[`lean_concrete_machine.md`](./lean_concrete_machine.md) for the exact boundary.
 
 `lean/PNP/Complexity.lean` defines the witness-level objects:
 
@@ -110,9 +121,10 @@ theorem np_complete_in_p_implies_p_eq_np
     (hInP : PClass L) : PEqualsNP
 ```
 
-The witness objects still use abstract code handles. Concrete machine syntax, semantics, and
-polynomial bounds remain future work. In particular, the abstract proposition `PNP.PEqualsNP` is
-not eligible for the concrete publication gate.
+These legacy witness objects still use abstract code handles and are not connected to the new
+machine kernel. Concrete P/NP classes, verifiers, certificate bounds, and reductions remain future
+work. In particular, the abstract proposition `PNP.PEqualsNP` is not eligible for the concrete
+publication gate.
 
 ## Root status
 
@@ -131,7 +143,7 @@ dependency evidence. The deterministic output is mirrored byte-for-byte at
 [`status/LEAN_THEOREM_INVENTORY.json`](../status/LEAN_THEOREM_INVENTORY.json) and
 [`public/pnp-theorem-inventory.json`](../public/pnp-theorem-inventory.json).
 
-For the six earned intermediate rows, the inventory also carries 22 detailed theorem types. Credit
+For the seven earned intermediate rows, the inventory also carries 28 detailed theorem types. Credit
 requires exact names/kinds, empty axiom closures, per-name domain-separated kernel-type SHA-256
 matches, and the pinned closure of all Lean sources plus toolchain/Lake pins and the inventory
 probe. This milestone binding is separate from the concrete publication gate.

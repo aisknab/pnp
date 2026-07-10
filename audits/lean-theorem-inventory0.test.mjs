@@ -57,21 +57,21 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
   assert.equal(`${stableStringify0(inventory)}\n`, inventoryBytes.toString('utf8'));
   ValidateLeanTheoremInventory0(inventory);
   assert.equal(inventory.environmentProbeComplete, true);
-  assert.equal(inventory.declarationCount, 1761);
+  assert.equal(inventory.declarationCount, 2168);
   assert.equal(inventory.excludedPrivateDeclarationCount, 33);
-  assert.equal(inventory.theoremCount, 662);
-  assert.equal(inventory.assumptionFreeTheoremCount, 589);
+  assert.equal(inventory.theoremCount, 789);
+  assert.equal(inventory.assumptionFreeTheoremCount, 708);
   assert.equal(inventory.axiomCount, 5);
-  assert.equal(inventory.sourceClosureModuleCount, 22);
+  assert.equal(inventory.sourceClosureModuleCount, 24);
   assert.deepEqual(inventory.declarationKindCounts, {
     axiom: 5,
-    constructor: 68,
-    definition: 914,
-    inductive: 56,
+    constructor: 86,
+    definition: 1158,
+    inductive: 65,
     opaque: 0,
     quotient: 0,
-    recursor: 56,
-    theorem: 662,
+    recursor: 65,
+    theorem: 789,
   });
   assert.deepEqual(inventory.projectAxioms, [
     'PNP.CheckPCCPackexp',
@@ -82,7 +82,7 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
   ]);
   assert.equal(inventory.compatibilityRootCandidate, null);
   assert.equal(inventory.concreteTargetCandidate, null);
-  assert.equal(inventory.milestoneCandidates.length, 22);
+  assert.equal(inventory.milestoneCandidates.length, 28);
   assert.deepEqual(inventory.milestoneCandidates.map((entry) => entry.name), REQUIRED_MILESTONE_THEOREMS0);
   assert.equal(inventory.milestoneCandidates.every((entry) => entry.kind === 'theorem'
     && entry.kernelValue === null && typeof entry.kernelType === 'string'), true);
@@ -90,11 +90,13 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
 
 test('source closure scans every Lean source and rejects a symlinked source root', async () => {
   const files = await CollectLeanSourceFiles0(ROOT);
-  assert.equal(files.length, 23);
+  assert.equal(files.length, 25);
   assert.equal(files.every((file) => file.startsWith('lean/') && file.endsWith('.lean')), true);
   assert.deepEqual(files, [...files].sort());
   assert.equal(files.includes('lean/PNP.lean'), true);
   assert.equal(files.includes('lean/PNP/ResidualRoutes.lean'), true);
+  assert.equal(files.includes('lean/PNP/Concrete/BitString.lean'), true);
+  assert.equal(files.includes('lean/PNP/Concrete/Machine.lean'), true);
 
   const temporary = await mkdtemp(path.join(os.tmpdir(), 'pnp-lean-source-symlink-'));
   try {
@@ -119,7 +121,7 @@ test('positive Lean probe parser rejects empty, malformed, noisy, failed, or non
   const valid = ParseLeanInventoryProbe0({
     stdout: inventoryBytes.toString('utf8'), stderr: '', exitCode: 0, timedOut: false,
   });
-  assert.equal(valid.inventory.declarationCount, 1761);
+  assert.equal(valid.inventory.declarationCount, 2168);
   for (const input of [
     { stdout: '', stderr: '', exitCode: 0, timedOut: false },
     { stdout: '{}\n', stderr: '', exitCode: 0, timedOut: false },
@@ -236,7 +238,7 @@ test('same-name theorem type weakening and source-closure drift revoke milestone
     inventoryBytes,
     map.milestoneSourceClosureSha256,
   );
-  assert.equal(current.milestones.filter((entry) => entry.earned).length, 6);
+  assert.equal(current.milestones.filter((entry) => entry.earned).length, 7);
 
   const weakened = structuredClone(inventory);
   const candidate = weakened.milestoneCandidates.find(
@@ -288,7 +290,7 @@ test('project, unknown, and sorry axioms cannot pass the fixed standard-axiom cl
   }
 });
 
-test('publication map cannot set fingerprints or expand the axiom allowlist in PR10', async () => {
+test('publication map cannot set fingerprints or expand the axiom allowlist in PR11', async () => {
   const { inventoryBytes, inventory, map } = await fixture0();
   const fingerprinted = structuredClone(map);
   fingerprinted.gate.expectedRootKernelTypeSha256 = 'a'.repeat(64);

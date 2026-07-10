@@ -150,7 +150,7 @@ test('workflow enforces all four complete zero-axiom transcripts', async () => {
       'u',
     ));
   }
-  assert.match(workflow, /node --test audits\/lean-root-target0\.test\.mjs audits\/lean-nand-semantics0\.test\.mjs audits\/lean-nand-enumerator0\.test\.mjs audits\/lean-nand-reference-minimum0\.test\.mjs/u);
+  assert.match(workflow, /node --test audits\/lean-root-target0\.test\.mjs audits\/lean-concrete-machine0\.test\.mjs audits\/lean-nand-semantics0\.test\.mjs audits\/lean-nand-enumerator0\.test\.mjs audits\/lean-nand-reference-minimum0\.test\.mjs/u);
 });
 
 test('audit rejects hidden assumptions, shortcuts, missing scope, and transcript drift', async () => {

@@ -7,6 +7,8 @@ import PNP.NANDComposition
 import PNP.NANDSlack
 import PNP.ResidualRoutes
 import PNP.DirectWireBaseline
+import PNP.Concrete.BitString
+import PNP.Concrete.Machine
 import PNP.Complexity
 import PNP.SAT
 import PNP.LockedNANDMacros
