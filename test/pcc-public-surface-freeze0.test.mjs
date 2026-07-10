@@ -15,8 +15,10 @@ import {
 
 const CURRENT_PROOF_SCRIPT_EXTENSIONS0 = [
   'proof:activated-pnp-status',
+  'proof:formal-reconstruction-status',
   'proof:no-hidden-oracle-semantic',
   'proof:public-theorem-activation',
+  'proof:public-theorem-withdrawal',
   'proof:uniform-complexity-conclusion',
   'proof:uniform-final-soundness-target',
   'proof:uniform-input-family',
@@ -49,13 +51,8 @@ test('public entry export keys match the frozen key list', () => {
 
 test('CheckPublicEntryReleaseSurface0 rejects a missing public entry export', async () => {
   const entryOverride = Object.fromEntries(Object.entries(publicEntry0));
-
   delete entryOverride.RunAll0;
-
-  const out = await CheckPublicEntryReleaseSurface0({
-    publicEntryOverride: entryOverride,
-  });
-
+  const out = await CheckPublicEntryReleaseSurface0({ publicEntryOverride: entryOverride });
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckPublicEntryReleaseSurface0');
   assert.equal(out.Coord, 'CheckPublicEntryReleaseSurface0.publicEntryExports');
@@ -65,15 +62,8 @@ test('CheckPublicEntryReleaseSurface0 rejects a missing public entry export', as
 });
 
 test('CheckPublicEntryReleaseSurface0 rejects an extra public entry export', async () => {
-  const entryOverride = {
-    ...Object.fromEntries(Object.entries(publicEntry0)),
-    UnexpectedPublicExport0: true,
-  };
-
-  const out = await CheckPublicEntryReleaseSurface0({
-    publicEntryOverride: entryOverride,
-  });
-
+  const entryOverride = { ...Object.fromEntries(Object.entries(publicEntry0)), UnexpectedPublicExport0: true };
+  const out = await CheckPublicEntryReleaseSurface0({ publicEntryOverride: entryOverride });
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckPublicEntryReleaseSurface0');
   assert.equal(out.Coord, 'CheckPublicEntryReleaseSurface0.publicEntryExports');
@@ -84,16 +74,8 @@ test('CheckPublicEntryReleaseSurface0 rejects an extra public entry export', asy
 
 test('CheckPublicEntryReleaseSurface0 rejects a changed package export target', async () => {
   const pkg = await readPackageJson0();
-
-  pkg.exports = {
-    ...pkg.exports,
-    './runall0': './wrong-runall0.mjs',
-  };
-
-  const out = await CheckPublicEntryReleaseSurface0({
-    packageJsonOverride: pkg,
-  });
-
+  pkg.exports = { ...pkg.exports, './runall0': './wrong-runall0.mjs' };
+  const out = await CheckPublicEntryReleaseSurface0({ packageJsonOverride: pkg });
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckPublicEntryReleaseSurface0');
   assert.equal(out.Coord, 'CheckPublicEntryReleaseSurface0.packageExports');
@@ -103,16 +85,8 @@ test('CheckPublicEntryReleaseSurface0 rejects a changed package export target', 
 
 test('CheckPublicEntryReleaseSurface0 rejects a changed package bin target', async () => {
   const pkg = await readPackageJson0();
-
-  pkg.bin = {
-    ...pkg.bin,
-    'pnp-runall0': './bin/not-runall0.mjs',
-  };
-
-  const out = await CheckPublicEntryReleaseSurface0({
-    packageJsonOverride: pkg,
-  });
-
+  pkg.bin = { ...pkg.bin, 'pnp-runall0': './bin/not-runall0.mjs' };
+  const out = await CheckPublicEntryReleaseSurface0({ packageJsonOverride: pkg });
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckPublicEntryReleaseSurface0');
   assert.equal(out.Coord, 'CheckPublicEntryReleaseSurface0.packageBin');
@@ -122,13 +96,8 @@ test('CheckPublicEntryReleaseSurface0 rejects a changed package bin target', asy
 
 test('CheckPublicEntryReleaseSurface0 rejects a missing package script', async () => {
   const pkg = await readPackageJson0();
-
   delete pkg.scripts['materialized:public-status-roundtrip'];
-
-  const out = await CheckPublicEntryReleaseSurface0({
-    packageJsonOverride: pkg,
-  });
-
+  const out = await CheckPublicEntryReleaseSurface0({ packageJsonOverride: pkg });
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckPublicEntryReleaseSurface0');
   assert.equal(out.Coord, 'CheckPublicEntryReleaseSurface0.packageScripts');
@@ -139,16 +108,8 @@ test('CheckPublicEntryReleaseSurface0 rejects a missing package script', async (
 
 test('CheckPublicEntryReleaseSurface0 rejects a changed package script command', async () => {
   const pkg = await readPackageJson0();
-
-  pkg.scripts = {
-    ...pkg.scripts,
-    'materialized:public-status-roundtrip': 'node ./bin/wrong.mjs',
-  };
-
-  const out = await CheckPublicEntryReleaseSurface0({
-    packageJsonOverride: pkg,
-  });
-
+  pkg.scripts = { ...pkg.scripts, 'materialized:public-status-roundtrip': 'node ./bin/wrong.mjs' };
+  const out = await CheckPublicEntryReleaseSurface0({ packageJsonOverride: pkg });
   assert.equal(out.tag, 'reject');
   assert.equal(out.checker, 'CheckPublicEntryReleaseSurface0');
   assert.equal(out.Coord, 'CheckPublicEntryReleaseSurface0.packageScripts');
@@ -158,15 +119,8 @@ test('CheckPublicEntryReleaseSurface0 rejects a changed package script command',
 
 test('CheckPublicEntryReleaseSurface0 accepts proof namespace checker scripts', async () => {
   const pkg = await readPackageJson0();
-  pkg.scripts = {
-    ...pkg.scripts,
-    'proof:example-target': 'node pcc-example-target0.mjs --json',
-  };
-
-  const out = await CheckPublicEntryReleaseSurface0({
-    packageJsonOverride: pkg,
-  });
-
+  pkg.scripts = { ...pkg.scripts, 'proof:example-target': 'node pcc-example-target0.mjs --json' };
+  const out = await CheckPublicEntryReleaseSurface0({ packageJsonOverride: pkg });
   assert.equal(out.tag, 'accept');
   assert.deepEqual(out.NF.packageScriptExtensionKeys, ['proof:example-target', ...CURRENT_PROOF_SCRIPT_EXTENSIONS0].sort());
 });
@@ -174,11 +128,7 @@ test('CheckPublicEntryReleaseSurface0 accepts proof namespace checker scripts', 
 test('CheckPublicEntryReleaseSurface0 rejects non-proof extra scripts', async () => {
   const pkg = await readPackageJson0();
   pkg.scripts['site:build'] = 'node scripts/build-site.mjs';
-
-  const out = await CheckPublicEntryReleaseSurface0({
-    packageJsonOverride: pkg,
-  });
-
+  const out = await CheckPublicEntryReleaseSurface0({ packageJsonOverride: pkg });
   assert.equal(out.tag, 'reject');
   assert.equal(out.Coord, 'CheckPublicEntryReleaseSurface0.packageScripts');
   assert.deepEqual(out.Path, ['package.json', 'scripts']);
@@ -189,11 +139,7 @@ test('CheckPublicEntryReleaseSurface0 rejects non-proof extra scripts', async ()
 test('CheckPublicEntryReleaseSurface0 rejects unsafe proof script commands', async () => {
   const pkg = await readPackageJson0();
   pkg.scripts['proof:bad'] = 'node scripts/bad.mjs && node pcc-example0.mjs --json';
-
-  const out = await CheckPublicEntryReleaseSurface0({
-    packageJsonOverride: pkg,
-  });
-
+  const out = await CheckPublicEntryReleaseSurface0({ packageJsonOverride: pkg });
   assert.equal(out.tag, 'reject');
   assert.equal(out.Coord, 'CheckPublicEntryReleaseSurface0.packageScripts');
   assert.deepEqual(out.Path, ['package.json', 'scripts', 'proof:bad']);
@@ -206,7 +152,6 @@ test('frozen package script key list matches frozen package script target map', 
 
 test('README documents public entry release surface freeze', async () => {
   const readme = await fs.readFile(new URL('../README.md', import.meta.url), 'utf8');
-
   assert.equal(readme.includes('Public entry release surface freeze'), true);
   assert.equal(readme.includes('CheckPublicEntryReleaseSurface0'), true);
   assert.equal(readme.includes('index.mjs public export names'), true);
