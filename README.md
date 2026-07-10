@@ -131,6 +131,19 @@ npm run proof:formal-reconstruction-status
 
 Historical proof-obligation commands remain available as regression and reconstruction inputs. Their acceptance does not activate theorem emission.
 
+## Public entry release surface freeze
+
+`CheckPublicEntryReleaseSurface0` keeps the established package entry points frozen while permitting only constrained direct-checker additions in the `proof:*` namespace. The checked portions are:
+
+```text
+index.mjs public export names
+package.json exports keys and values
+package.json bin keys and values
+package.json script keys and values
+```
+
+The reconstruction status commands are valid proof-development namespace extensions; they do not add public library exports or activate theorem status.
+
 ## Public RunAll0 entry point
 
 The historical public entry point remains `RunAll0`:
