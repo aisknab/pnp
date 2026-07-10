@@ -2,21 +2,28 @@
 
 This directory contains the Lean formalization track for the PNP proof-certificate stack.
 
-The current Lean development formalizes the theorem bridge stated by the report:
+The current Lean development contains a conditional theorem bridge corresponding to the report:
 
 ```text
 CheckPCCPackexp(GeneratePCCPack()) = accept => P = NP
 ```
 
-It does **not** yet constitute a complete Lean reproof of the custom JavaScript checker, the full residual-slack package, the complete SAT reduction, or the concrete machine-complexity model. The explicit purpose of the Lean track is to replace each trust-base item with a checked theorem in visible stages.
+That bridge still depends on five project-specific axioms and does **not** constitute a Lean proof of
+`P = NP`. It is also not a complete Lean reproof of the custom JavaScript checker, the full
+residual-slack package, the complete SAT reduction, or the concrete machine-complexity model. The
+purpose of the Lean track is to replace each trust-base item with a checked theorem in visible
+stages.
 
 ## Build
 
 ```bash
-lake build
+lake build PNP
+lake env lean -DwarningAsError=true lean-audit/PNPBridgeAxiomAudit.lean
 ```
 
-The GitHub workflow `.github/workflows/lean-bridge.yml` installs Lean through `elan` and runs the build.
+The GitHub workflow `.github/workflows/lean-bridge.yml` verifies a checksum-pinned Elan 4.2.3
+archive, installs the exact `leanprover/lean4:v4.31.0` toolchain, builds the explicit `PNP` root, and
+prints the axiom dependencies of both the root-status declarations and conditional bridge.
 
 ## Files
 
@@ -24,6 +31,7 @@ The GitHub workflow `.github/workflows/lean-bridge.yml` installs Lean through `e
 lean-toolchain
 lakefile.lean
 lean/PNP.lean
+lean/PNP/Main.lean
 lean/PNP/Complexity.lean
 lean/PNP/SAT.lean
 lean/PNP/LockedNANDMacros.lean
@@ -33,6 +41,7 @@ lean/PNP/ResidualBand.lean
 lean/PNP/ZeroSlack.lean
 lean/PNP/PCCMin.lean
 lean/PNP/Bridge.lean
+lean-audit/PNPBridgeAxiomAudit.lean
 docs/lean_locked_nand_macros.md
 docs/lean_locked_nand_prefix.md
 ```
@@ -68,6 +77,14 @@ theorem np_complete_in_p_implies_p_eq_np
 ```
 
 The witness objects still use abstract code handles. Concrete machine syntax, semantics, and polynomial bounds remain future work.
+
+## Root status
+
+`lean/PNP/Main.lean` exposes `PNP.Main.rootTheoremStatus`, an assumption-free structure recording
+that formal reconstruction is in progress, external assumptions remain, and no public theorem has
+been released. There is deliberately no declaration named `PNP.Main.p_eq_np` in the current root.
+Building this status is evidence that the complete import root compiles; the status is not a theorem
+of `P = NP`.
 
 ## SAT layer
 
@@ -163,7 +180,7 @@ See `docs/lean_locked_nand_prefix.md` for the exact scope.
 `lean/PNP/LockedNAND.lean` keeps the full SAT builder and threshold theorem abstract:
 
 ```lean
-constant LockedNANDThreshold : Language
+axiom LockedNANDThreshold : Language
 
 structure LockedNANDReductionTrust where
   satReducesToLockedNAND : ReducesToPoly SAT LockedNANDThreshold
@@ -225,6 +242,21 @@ accepted PCC package
 -> P = NP
 ```
 
+The source audit permits exactly these five project-specific axioms in the current root closure:
+
+```text
+PNP.SAT
+PNP.LockedNANDThreshold
+PNP.ResidualBandExactMinimization
+PNP.GeneratePCCPack
+PNP.CheckPCCPackexp
+```
+
+`lean-audit/PNPBridgeAxiomAudit.lean` confirms that the root-status declarations depend on no axioms
+and prints those project assumptions (along with Lean's logical infrastructure dependencies) for
+the conditional bridge. The audit fails closed if another `axiom`, a `constant`/`opaque`
+declaration, or a `sorry`/`admit` placeholder appears in the tracked root closure.
+
 ## Discharged by Lean so far
 
 ```text
@@ -238,7 +270,7 @@ accepted PCC package
 8. Exact supplied-list prefix coverage and the true-iff-all-checks theorem.
 9. The exact 2(n-1) prefix gate count for nonempty check lists.
 10. Prefix-node exposed-output distinctness and nonconstant/nonprojection checks.
-11. The abstract bridge composition from PCCMin through residual band, locked NAND, SAT, and P = NP.
+11. Conditional composition from PCCMin through residual band, locked NAND, SAT, and the witness-model equality proposition, assuming the disclosed project axioms.
 ```
 
 ## Explicit trust base after this pass
@@ -267,4 +299,6 @@ The highest-value next targets are:
 8. Formalize checker/reflection soundness for the PCC package.
 ```
 
-A passing Lean build is a real checked artifact. At this stage it is a narrowing formal bridge, not yet a complete independent Lean proof of every report theorem.
+A passing Lean build is a real checked artifact. At this stage it checks an assumption-free status
+declaration, local results, and an explicitly assumption-bearing conditional bridge. It is not a
+root theorem or an independent Lean proof of the report's conclusion.

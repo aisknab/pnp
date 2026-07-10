@@ -48,7 +48,7 @@ def ReducesToPoly (A B : Language) : Prop := Nonempty (PolyTimeManyOneReduction 
 def PEqualsNP : Prop := PClass = NPClass
 
 /-- The SAT language used by the locked-NAND reduction. -/
-constant SAT : Language
+axiom SAT : Language
 
 /-- NP-completeness over the reduction relation. -/
 structure NPComplete (L : Language) : Prop where

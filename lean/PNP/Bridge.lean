@@ -24,10 +24,10 @@ structure PCCPack where
   id : String
 
 /-- The deterministic package generator named in the report. -/
-constant GeneratePCCPack : PCCPack
+axiom GeneratePCCPack : PCCPack
 
 /-- The package checker named in the report. -/
-constant CheckPCCPackexp : PCCPack → Verdict
+axiom CheckPCCPackexp : PCCPack → Verdict
 
 /-- The antecedent stated by the accepted report. -/
 def AcceptedGeneratedPackage : Prop :=
