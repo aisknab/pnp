@@ -125,14 +125,16 @@ def CNFFormula.Satisfied (formula : CNFFormula) (assignment : BitString) : Prop 
 not depend on simplifier-oriented equality lemmas. -/
 def boolEqual : Bool → Bool → Bool
   | false, false => true
+  | false, true => false
+  | true, false => false
   | true, true => true
-  | _, _ => false
 
 /-- Constructive natural equality used by the formula checker. -/
 def natEqual : Nat → Nat → Bool
   | 0, 0 => true
+  | 0, _ + 1 => false
+  | _ + 1, 0 => false
   | left + 1, right + 1 => natEqual left right
-  | _, _ => false
 
 /-- Executable literal checker. -/
 def checkLiteral (literal : CNFLiteral) (assignment : BitString) : Bool :=
@@ -387,44 +389,63 @@ def encodeAssignmentCertificate (assignment : BitString) : BitString :=
 recursive states consume at least one token on every call. -/
 mutual
   def decodeFormulaClauses : List CNFToken → Option (List (List CNFLiteral))
-    | [.finish] => some []
-    | .sep :: rest =>
-        match decodeFormulaClause rest with
-        | none => none
-        | some (clause, clauses) => some (clause :: clauses)
-    | _ => none
+    | [] => none
+    | token :: rest =>
+        match token with
+        | .f => none
+        | .t => none
+        | .sep =>
+            match decodeFormulaClause rest with
+            | none => none
+            | some (clause, clauses) => some (clause :: clauses)
+        | .finish =>
+            match rest with
+            | [] => some []
+            | _ :: _ => none
 
   def decodeFormulaClause :
       List CNFToken → Option (List CNFLiteral × List (List CNFLiteral))
-    | .finish :: rest =>
-        match decodeFormulaClauses rest with
-        | none => none
-        | some clauses => some ([], clauses)
-    | .f :: rest => decodeFormulaLiteral false 0 rest
-    | .t :: rest => decodeFormulaLiteral true 0 rest
-    | _ => none
+    | [] => none
+    | token :: rest =>
+        match token with
+        | .f => decodeFormulaLiteral false 0 rest
+        | .t => decodeFormulaLiteral true 0 rest
+        | .sep => none
+        | .finish =>
+            match decodeFormulaClauses rest with
+            | none => none
+            | some clauses => some ([], clauses)
 
   def decodeFormulaLiteral (positive : Bool) (variableIndex : Nat) :
       List CNFToken → Option (List CNFLiteral × List (List CNFLiteral))
-    | .t :: rest => decodeFormulaLiteral positive (variableIndex + 1) rest
-    | .f :: rest =>
-        match decodeFormulaClause rest with
-        | none => none
-        | some (clause, clauses) =>
-            some ({ positive := positive, variableIndex := variableIndex } :: clause,
-              clauses)
-    | _ => none
+    | [] => none
+    | token :: rest =>
+        match token with
+        | .f =>
+            match decodeFormulaClause rest with
+            | none => none
+            | some (clause, clauses) =>
+                some
+                  ({ positive := positive, variableIndex := variableIndex } :: clause,
+                    clauses)
+        | .t => decodeFormulaLiteral positive (variableIndex + 1) rest
+        | .sep => none
+        | .finish => none
 end
 
 /-- Decode the initial unary variable count and then the strict clause
 grammar. -/
 def decodeFormulaHeader : Nat → List CNFToken → Option CNFFormula
-  | count, .t :: rest => decodeFormulaHeader (count + 1) rest
-  | count, .f :: rest =>
-      match decodeFormulaClauses rest with
-      | none => none
-      | some clauses => some { variableCount := count, clauses := clauses }
-  | _, _ => none
+  | _, [] => none
+  | count, token :: rest =>
+      match token with
+      | .f =>
+          match decodeFormulaClauses rest with
+          | none => none
+          | some clauses => some { variableCount := count, clauses := clauses }
+      | .t => decodeFormulaHeader (count + 1) rest
+      | .sep => none
+      | .finish => none
 
 /-- Decode a complete canonical formula token stream. -/
 def decodeCNFTokens (tokens : List CNFToken) : Option CNFFormula :=
@@ -432,12 +453,17 @@ def decodeCNFTokens (tokens : List CNFToken) : Option CNFFormula :=
 
 /-- Decode pairs ending in exactly one zero formula pad. -/
 def decodeFormulaTokenPairs : BitString → Option (List CNFToken)
-  | [false] => some []
-  | first :: second :: rest =>
-      match decodeFormulaTokenPairs rest with
-      | none => none
-      | some tokens => some (CNFToken.ofBits first second :: tokens)
-  | _ => none
+  | [] => none
+  | first :: tail =>
+      match tail with
+      | [] =>
+          match first with
+          | false => some []
+          | true => none
+      | second :: rest =>
+          match decodeFormulaTokenPairs rest with
+          | none => none
+          | some tokens => some (CNFToken.ofBits first second :: tokens)
 
 /-- Strict whole-string formula decoder. -/
 def decodeEncodedCNF (bits : BitString) : Option CNFFormula :=
@@ -450,16 +476,22 @@ def decodeFormula (bits : BitString) : Option CNFFormula := decodeEncodedCNF bit
 
 /-- Strict assignment-token decoder. -/
 def decodeAssignmentTokens : List CNFToken → Option BitString
-  | [.finish] => some []
-  | .f :: rest =>
-      match decodeAssignmentTokens rest with
-      | none => none
-      | some assignment => some (false :: assignment)
-  | .t :: rest =>
-      match decodeAssignmentTokens rest with
-      | none => none
-      | some assignment => some (true :: assignment)
-  | _ => none
+  | [] => none
+  | token :: rest =>
+      match token with
+      | .f =>
+          match decodeAssignmentTokens rest with
+          | none => none
+          | some assignment => some (false :: assignment)
+      | .t =>
+          match decodeAssignmentTokens rest with
+          | none => none
+          | some assignment => some (true :: assignment)
+      | .sep => none
+      | .finish =>
+          match rest with
+          | [] => some []
+          | _ :: _ => none
 
 /-- Strict whole-string assignment-certificate decoder. -/
 def decodeAssignmentCertificate (certificate : BitString) : Option BitString :=
@@ -493,11 +525,81 @@ theorem decodeAssignmentTokens_canonical (assignment : BitString) :
   induction assignment with
   | nil => rfl
   | cons value rest ih =>
-      cases value <;> change
-        (match decodeAssignmentTokens (encodeAssignmentTokens rest) with
-         | none => none
-         | some decoded => some (_ :: decoded)) = some (_ :: rest) <;>
-        rw [ih]
+      cases value with
+      | false =>
+          change (match decodeAssignmentTokens (encodeAssignmentTokens rest) with
+            | none => none
+            | some decodedAssignment => some (false :: decodedAssignment)) =
+              some (false :: rest)
+          rw [ih]
+      | true =>
+          change (match decodeAssignmentTokens (encodeAssignmentTokens rest) with
+            | none => none
+            | some decodedAssignment => some (true :: decodedAssignment)) =
+              some (true :: rest)
+          rw [ih]
+
+/-- Every accepted assignment token stream is already the unique canonical
+encoding of the assignment it decodes to. -/
+theorem encodeAssignmentTokens_of_decode (tokens : List CNFToken)
+    (assignment : BitString)
+    (decoded : decodeAssignmentTokens tokens = some assignment) :
+    encodeAssignmentTokens assignment = tokens := by
+  induction tokens generalizing assignment with
+  | nil =>
+      change none = some assignment at decoded
+      cases decoded
+  | cons token rest ih =>
+      cases token with
+      | f =>
+          change (match decodeAssignmentTokens rest with
+            | none => none
+            | some decodedAssignment => some (false :: decodedAssignment)) =
+              some assignment at decoded
+          cases restCase : decodeAssignmentTokens rest with
+          | none =>
+              rw [restCase] at decoded
+              cases decoded
+          | some decodedAssignment =>
+              rw [restCase] at decoded
+              have assignmentEqual : false :: decodedAssignment = assignment :=
+                Option.some.inj decoded
+              cases assignmentEqual
+              change CNFToken.f :: encodeAssignmentTokens decodedAssignment =
+                CNFToken.f :: rest
+              exact congrArg (List.cons CNFToken.f)
+                (ih decodedAssignment restCase)
+      | t =>
+          change (match decodeAssignmentTokens rest with
+            | none => none
+            | some decodedAssignment => some (true :: decodedAssignment)) =
+              some assignment at decoded
+          cases restCase : decodeAssignmentTokens rest with
+          | none =>
+              rw [restCase] at decoded
+              cases decoded
+          | some decodedAssignment =>
+              rw [restCase] at decoded
+              have assignmentEqual : true :: decodedAssignment = assignment :=
+                Option.some.inj decoded
+              cases assignmentEqual
+              change CNFToken.t :: encodeAssignmentTokens decodedAssignment =
+                CNFToken.t :: rest
+              exact congrArg (List.cons CNFToken.t)
+                (ih decodedAssignment restCase)
+      | sep =>
+          change none = some assignment at decoded
+          cases decoded
+      | finish =>
+          cases rest with
+          | nil =>
+              change some [] = some assignment at decoded
+              have assignmentEmpty : [] = assignment := Option.some.inj decoded
+              cases assignmentEmpty
+              rfl
+          | cons next suffix =>
+              change none = some assignment at decoded
+              cases decoded
 
 /-- Canonical assignment certificates round-trip exactly. -/
 theorem decodeAssignmentCertificate_canonical (assignment : BitString) :
@@ -751,9 +853,11 @@ theorem checkEncodedCertificate_canonical_eq_true_iff
     checkEncodedCertificate (encodeCNF formula)
         (encodeAssignmentCertificate assignment) = true ↔
       formula.Satisfied assignment := by
-  rw [checkEncodedCertificate_eq_true_iff]
   constructor
-  · intro existsDecoded
+  · intro checked
+    have existsDecoded :=
+      (checkEncodedCertificate_eq_true_iff (encodeCNF formula)
+        (encodeAssignmentCertificate assignment)).mp checked
     rcases existsDecoded with ⟨decodedFormula, decodedAssignment, formulaEqual,
       assignmentEqual, satisfied⟩
     have formulasEqual : decodedFormula = formula :=
@@ -766,8 +870,10 @@ theorem checkEncodedCertificate_canonical_eq_true_iff
     cases assignmentsEqual
     exact satisfied
   · intro satisfied
-    exact ⟨formula, assignment, decodeEncodedCNF_canonical formula,
-      decodeAssignmentCertificate_canonical assignment, satisfied⟩
+    exact (checkEncodedCertificate_eq_true_iff (encodeCNF formula)
+      (encodeAssignmentCertificate assignment)).mpr
+        ⟨formula, assignment, decodeEncodedCNF_canonical formula,
+          decodeAssignmentCertificate_canonical assignment, satisfied⟩
 
 theorem cnfSAT_iff_encoded_certificate (encodedFormula : BitString) :
     CNFSAT encodedFormula ↔
@@ -776,9 +882,10 @@ theorem cnfSAT_iff_encoded_certificate (encodedFormula : BitString) :
   · intro satisfiable
     rcases satisfiable with ⟨formula, decoded, assignment, satisfied⟩
     refine ⟨encodeAssignmentCertificate assignment, ?_⟩
-    rw [checkEncodedCertificate_eq_true_iff]
-    exact ⟨formula, assignment, decoded,
-      decodeAssignmentCertificate_canonical assignment, satisfied⟩
+    exact (checkEncodedCertificate_eq_true_iff encodedFormula
+      (encodeAssignmentCertificate assignment)).mpr
+        ⟨formula, assignment, decoded,
+          decodeAssignmentCertificate_canonical assignment, satisfied⟩
   · intro acceptedCertificate
     rcases acceptedCertificate with ⟨certificate, accepted⟩
     have reflected :=
@@ -880,5 +987,144 @@ theorem decodeCNFTokens_variable_succ_le (tokens : List CNFToken)
   have bound := decodeFormulaHeader_variable_succ_le 0 tokens formula decoded
   rw [Nat.zero_add] at bound
   exact bound
+
+theorem decodeFormulaTokenPairs_length (bits : BitString)
+    (tokens : List CNFToken)
+    (decoded : decodeFormulaTokenPairs bits = some tokens) :
+    bits.length = 2 * tokens.length + 1 := by
+  induction tokens generalizing bits with
+  | nil =>
+      cases bits with
+      | nil =>
+          change none = some [] at decoded
+          cases decoded
+      | cons first tail =>
+          cases tail with
+          | nil =>
+              cases first with
+              | false => rfl
+              | true =>
+                  change none = some [] at decoded
+                  cases decoded
+          | cons second rest =>
+              simp only [decodeFormulaTokenPairs] at decoded
+              cases restCase : decodeFormulaTokenPairs rest with
+              | none =>
+                  rw [restCase] at decoded
+                  cases decoded
+              | some decodedTokens =>
+                  rw [restCase] at decoded
+                  have impossible :
+                      CNFToken.ofBits first second :: decodedTokens = [] :=
+                    Option.some.inj decoded
+                  cases impossible
+  | cons token tokens ih =>
+      cases bits with
+      | nil =>
+          change none = some (token :: tokens) at decoded
+          cases decoded
+      | cons first tail =>
+          cases tail with
+          | nil =>
+              cases first with
+              | false =>
+                  change some [] = some (token :: tokens) at decoded
+                  have impossible : [] = token :: tokens := Option.some.inj decoded
+                  cases impossible
+              | true =>
+                  change none = some (token :: tokens) at decoded
+                  cases decoded
+          | cons second rest =>
+              simp only [decodeFormulaTokenPairs] at decoded
+              cases restCase : decodeFormulaTokenPairs rest with
+              | none =>
+                  rw [restCase] at decoded
+                  cases decoded
+              | some decodedTokens =>
+                  rw [restCase] at decoded
+                  have tokensEqual :
+                      CNFToken.ofBits first second :: decodedTokens = token :: tokens :=
+                    Option.some.inj decoded
+                  have tailsEqual : decodedTokens = tokens :=
+                    congrArg List.tail tokensEqual
+                  cases tailsEqual
+                  have restLength := ih rest restCase
+                  change Nat.succ (Nat.succ rest.length) =
+                    2 * Nat.succ tokens.length + 1
+                  rw [restLength]
+                  change Nat.succ (Nat.succ (2 * tokens.length + 1)) =
+                    2 * tokens.length + 2 + 1
+                  rfl
+
+/-- The canonical assignment induced by any satisfying decoded formula is no
+longer than that raw formula input itself. -/
+theorem encodedCNF_assignment_certificate_size_le
+    (encodedFormula : BitString) (formula : CNFFormula)
+    (assignment : BitString)
+    (decoded : decodeEncodedCNF encodedFormula = some formula)
+    (satisfied : formula.Satisfied assignment) :
+    BitString.size (encodeAssignmentCertificate assignment) ≤
+      BitString.size encodedFormula := by
+  unfold decodeEncodedCNF at decoded
+  cases tokenCase : decodeFormulaTokenPairs encodedFormula with
+  | none =>
+      rw [tokenCase] at decoded
+      cases decoded
+  | some tokens =>
+      rw [tokenCase] at decoded
+      have headerBound := decodeCNFTokens_variable_succ_le tokens formula decoded
+      have inputLength :=
+        decodeFormulaTokenPairs_length encodedFormula tokens tokenCase
+      rw [encodeAssignmentCertificate_size]
+      rw [satisfied.left]
+      unfold BitString.size
+      rw [inputLength]
+      exact Nat.le_trans (Nat.mul_le_mul_left 2 headerBound)
+        (Nat.le_add_right (2 * tokens.length) 1)
+
+/-- The explicit certificate polynomial used by the concrete CNF verifier. -/
+def cnfCertificateBound : NatPolynomial := NatPolynomial.linear 2 2
+
+theorem encodedCNF_assignment_certificate_size_le_bound
+    (encodedFormula : BitString) (formula : CNFFormula)
+    (assignment : BitString)
+    (decoded : decodeEncodedCNF encodedFormula = some formula)
+    (satisfied : formula.Satisfied assignment) :
+    BitString.size (encodeAssignmentCertificate assignment) ≤
+      cnfCertificateBound.eval (BitString.size encodedFormula) := by
+  have certificateLeInput := encodedCNF_assignment_certificate_size_le
+    encodedFormula formula assignment decoded satisfied
+  change BitString.size (encodeAssignmentCertificate assignment) ≤
+    2 * BitString.size encodedFormula + 2
+  exact Nat.le_trans certificateLeInput
+    (Nat.le_trans
+      (Nat.le_mul_of_pos_left (BitString.size encodedFormula)
+        (Nat.zero_lt_succ 1))
+      (Nat.le_add_right (2 * BitString.size encodedFormula) 2))
+
+/-- Exact bounded-certificate characterization of the concrete CNF language. -/
+theorem cnfSAT_iff_bounded_encoded_certificate (encodedFormula : BitString) :
+    CNFSAT encodedFormula ↔
+      ∃ certificate,
+        BitString.size certificate ≤
+            cnfCertificateBound.eval (BitString.size encodedFormula) ∧
+          checkEncodedCertificate encodedFormula certificate = true := by
+  constructor
+  · intro satisfiable
+    rcases satisfiable with ⟨formula, decoded, assignment, satisfied⟩
+    refine ⟨encodeAssignmentCertificate assignment, ?_, ?_⟩
+    · exact encodedCNF_assignment_certificate_size_le_bound
+        encodedFormula formula assignment decoded satisfied
+    · exact (checkEncodedCertificate_eq_true_iff encodedFormula
+        (encodeAssignmentCertificate assignment)).mpr
+          ⟨formula, assignment, decoded,
+            decodeAssignmentCertificate_canonical assignment, satisfied⟩
+  · intro acceptedCertificate
+    rcases acceptedCertificate with ⟨certificate, certificateSize, accepted⟩
+    have reflected :=
+      (checkEncodedCertificate_eq_true_iff encodedFormula certificate).mp accepted
+    rcases reflected with ⟨formula, assignment, decodedFormula, decodedAssignment,
+      satisfied⟩
+    exact ⟨formula, decodedFormula, assignment, satisfied⟩
 
 end PNP.Concrete
