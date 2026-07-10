@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-05');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-06');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -47,8 +47,22 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanNANDEnumeratorUsesOrderedGatePairs, true);
   assert.equal(out.leanNANDEnumeratorIncludesUniqueEmptyOutputTuple, true);
   assert.equal(out.leanNANDEnumeratorDeduplicated, false);
-  assert.equal(out.leanNANDSemanticEquivalenceDecidable, false);
-  assert.equal(out.leanNANDMinimumAndSlackFormalized, false);
+  assert.equal(out.leanNANDTruthTableFormalized, true);
+  assert.equal(out.leanNANDTruthTableAxiomAuditPassed, true);
+  assert.equal(out.leanNANDSemanticEquivalenceDecidable, true);
+  assert.equal(out.leanNANDMinimumAndSlackFormalized, true);
+  assert.equal(out.leanNANDReferenceMinimumFormalized, true);
+  assert.equal(out.leanNANDReferenceMinimumAxiomAuditPassed, true);
+  assert.equal(out.leanNANDReferenceMinimumExhaustive, true);
+  assert.equal(out.leanNANDReferenceMinimumScope, 'finite-boolean-direct-wire-empty-profile');
+  assert.equal(out.leanNANDReferenceMinimumPolynomialRuntimeProved, false);
+  assert.equal(out.leanNANDResidualSlackZeroIffMinimumFormalized, true);
+  assert.equal(out.leanNANDCompositionFormalized, true);
+  assert.equal(out.leanNANDCompositionAxiomAuditPassed, true);
+  assert.equal(out.leanNANDFramedReplacementFormalized, true);
+  assert.equal(out.leanNANDFramedGlobalSlackLawFormalized, true);
+  assert.equal(out.leanNANDFramedSlackAxiomAuditPassed, true);
+  assert.equal(out.leanNANDReplacementScope, 'concrete-serial-framed-context');
   assert.equal(out.leanCompatibleReplacementFormalized, false);
   assert.equal(out.leanGlobalSlackLawFormalized, false);
   assert.equal(out.leanLockedNANDBuilderFormalized, false);
@@ -72,10 +86,10 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.match(out.siteStatusSha256, /^[0-9a-f]{64}$/u);
 });
 
-test('formal status records the exact-width syntactic NAND enumerator milestone conservatively', async () => {
+test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-10-NAND-ENUMERATOR-05');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-10-NAND-REFERENCE-MINIMUM-06');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
@@ -84,18 +98,38 @@ test('formal status records the exact-width syntactic NAND enumerator milestone 
   assert.equal(status.leanNANDEnumeratorUsesOrderedGatePairs, true);
   assert.equal(status.leanNANDEnumeratorIncludesUniqueEmptyOutputTuple, true);
   assert.equal(status.leanNANDEnumeratorDeduplicated, false);
-  assert.equal(status.leanNANDSemanticEquivalenceDecidable, false);
-  assert.equal(status.leanNANDMinimumAndSlackFormalized, false);
+  assert.equal(status.leanNANDTruthTableFormalized, true);
+  assert.equal(status.leanNANDTruthTableAxiomAuditPassed, true);
+  assert.equal(status.leanNANDSemanticEquivalenceDecidable, true);
+  assert.equal(status.leanNANDMinimumAndSlackFormalized, true);
+  assert.equal(status.leanNANDReferenceMinimumFormalized, true);
+  assert.equal(status.leanNANDReferenceMinimumAxiomAuditPassed, true);
+  assert.equal(status.leanNANDReferenceMinimumExhaustive, true);
+  assert.equal(status.leanNANDReferenceMinimumScope, 'finite-boolean-direct-wire-empty-profile');
+  assert.equal(status.leanNANDReferenceMinimumPolynomialRuntimeProved, false);
+  assert.equal(status.leanNANDResidualSlackZeroIffMinimumFormalized, true);
+  assert.equal(status.leanNANDCompositionFormalized, true);
+  assert.equal(status.leanNANDCompositionAxiomAuditPassed, true);
+  assert.equal(status.leanNANDFramedReplacementFormalized, true);
+  assert.equal(status.leanNANDFramedGlobalSlackLawFormalized, true);
+  assert.equal(status.leanNANDFramedSlackAxiomAuditPassed, true);
+  assert.equal(status.leanNANDReplacementScope, 'concrete-serial-framed-context');
   assert.equal(status.leanCompatibleReplacementFormalized, false);
   assert.equal(status.leanGlobalSlackLawFormalized, false);
   assert.equal(status.leanLockedNANDBuilderFormalized, false);
   assert.equal(status.leanLockedNANDThresholdFormalized, false);
   assert.equal(status.nonClaims.some((entry) => entry.includes('direct-wire NAND semantics layer does not by itself prove enumeration')), true);
-  assert.equal(status.nonClaims.some((entry) => entry.includes('exact-width syntactic NAND enumeration does not prove canonical/deduplicated enumeration')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes('reference-minimum computation has no polynomial-runtime claim')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes('concrete serial framed-context construction')), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-nand-semantics0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-nand-enumerator0.test.mjs'), true);
+  assert.equal(status.verificationCommands.includes('node --test audits/lean-nand-reference-minimum0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPNANDSemanticsAxiomAudit.lean'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPNANDEnumeratorAxiomAudit.lean'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPNANDTruthTableAxiomAudit.lean'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPNANDMinimumAxiomAudit.lean'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPNANDCompositionAxiomAudit.lean'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPNANDSlackAxiomAudit.lean'), true);
   assert.equal(status.remainingBlockers.includes('Formal.LockedNANDThreshold'), true);
 });
 
@@ -198,6 +232,19 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanNANDExactWidthEnumerationComplete',
     'leanNANDEnumeratorUsesOrderedGatePairs',
     'leanNANDEnumeratorIncludesUniqueEmptyOutputTuple',
+    'leanNANDTruthTableFormalized',
+    'leanNANDTruthTableAxiomAuditPassed',
+    'leanNANDSemanticEquivalenceDecidable',
+    'leanNANDMinimumAndSlackFormalized',
+    'leanNANDReferenceMinimumFormalized',
+    'leanNANDReferenceMinimumAxiomAuditPassed',
+    'leanNANDReferenceMinimumExhaustive',
+    'leanNANDResidualSlackZeroIffMinimumFormalized',
+    'leanNANDCompositionFormalized',
+    'leanNANDCompositionAxiomAuditPassed',
+    'leanNANDFramedReplacementFormalized',
+    'leanNANDFramedGlobalSlackLawFormalized',
+    'leanNANDFramedSlackAxiomAuditPassed',
   ];
 
   for (const field of fields) {
@@ -210,11 +257,10 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
   }
 });
 
-test('formal reconstruction status rejects unearned downstream NAND claims', async () => {
+test('formal reconstruction status rejects unearned broad downstream NAND claims', async () => {
   const fields = [
     'leanNANDEnumeratorDeduplicated',
-    'leanNANDSemanticEquivalenceDecidable',
-    'leanNANDMinimumAndSlackFormalized',
+    'leanNANDReferenceMinimumPolynomialRuntimeProved',
     'leanCompatibleReplacementFormalized',
     'leanGlobalSlackLawFormalized',
     'leanLockedNANDBuilderFormalized',

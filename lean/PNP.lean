@@ -1,6 +1,10 @@
 import PNP.Main
 import PNP.NANDSemantics
 import PNP.NANDEnumerator
+import PNP.NANDTruthTable
+import PNP.NANDMinimum
+import PNP.NANDComposition
+import PNP.NANDSlack
 import PNP.Complexity
 import PNP.SAT
 import PNP.LockedNANDMacros

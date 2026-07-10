@@ -106,12 +106,12 @@ test('dedicated Lean audit covers every explicit semantics declaration exactly o
   assert.doesNotMatch(audit, /LockedNANDThreshold|final_report_bridge|p_eq_np/u);
 });
 
-test('formal status preserves the semantics milestone without an unproved downstream theorem', async () => {
+test('formal status preserves the semantics milestone and broad downstream boundaries', async () => {
   const status = JSON.parse(await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'));
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   for (const field of [
-    'leanNANDMinimumAndSlackFormalized',
+    'leanNANDReferenceMinimumPolynomialRuntimeProved',
     'leanCompatibleReplacementFormalized',
     'leanGlobalSlackLawFormalized',
     'leanLockedNANDBuilderFormalized',

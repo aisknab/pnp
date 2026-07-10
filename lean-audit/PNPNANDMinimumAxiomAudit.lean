@@ -1,0 +1,29 @@
+import PNP
+
+#print axioms PNP.DirectWire.Implementation
+#print axioms PNP.DirectWire.firstEquivalentCandidate
+#print axioms PNP.DirectWire.firstEquivalentCandidate_sound
+#print axioms PNP.DirectWire.firstEquivalentCandidate_exists_of_mem
+#print axioms PNP.DirectWire.firstEquivalentAt
+#print axioms PNP.DirectWire.firstEquivalentAt_sound
+#print axioms PNP.DirectWire.firstEquivalentAt_exists
+#print axioms PNP.DirectWire.scanEquivalentSizes
+#print axioms PNP.DirectWire.scanEquivalentSizes_sound
+#print axioms PNP.DirectWire.scanEquivalentSizes_exists_of_candidate
+#print axioms PNP.DirectWire.scanEquivalentSizes_minimal
+#print axioms PNP.DirectWire.scanEquivalentSizes_target_exists
+#print axioms PNP.DirectWire.referenceMinimumImplementation
+#print axioms PNP.DirectWire.referenceMinimum
+#print axioms PNP.DirectWire.referenceMinimumWitness
+#print axioms PNP.DirectWire.scanEquivalentSizes_referenceMinimum
+#print axioms PNP.DirectWire.referenceMinimumWitness_equivalent
+#print axioms PNP.DirectWire.referenceMinimumWitness_size
+#print axioms PNP.DirectWire.referenceMinimum_le_target
+#print axioms PNP.DirectWire.referenceMinimum_le_of_equivalentBool
+#print axioms PNP.DirectWire.referenceMinimum_le_of_equivalent
+#print axioms PNP.DirectWire.referenceMinimum_invariant
+#print axioms PNP.DirectWire.residualSlack
+#print axioms PNP.DirectWire.natSub_eq_zero_of_le
+#print axioms PNP.DirectWire.le_of_natSub_eq_zero
+#print axioms PNP.DirectWire.IsSemanticallyMinimum
+#print axioms PNP.DirectWire.residualSlack_eq_zero_iff_minimum

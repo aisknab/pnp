@@ -34,6 +34,10 @@ lean/PNP.lean
 lean/PNP/Main.lean
 lean/PNP/NANDSemantics.lean
 lean/PNP/NANDEnumerator.lean
+lean/PNP/NANDTruthTable.lean
+lean/PNP/NANDMinimum.lean
+lean/PNP/NANDComposition.lean
+lean/PNP/NANDSlack.lean
 lean/PNP/Complexity.lean
 lean/PNP/SAT.lean
 lean/PNP/LockedNANDMacros.lean
@@ -46,6 +50,10 @@ lean/PNP/Bridge.lean
 lean-audit/PNPBridgeAxiomAudit.lean
 lean-audit/PNPNANDSemanticsAxiomAudit.lean
 lean-audit/PNPNANDEnumeratorAxiomAudit.lean
+lean-audit/PNPNANDTruthTableAxiomAudit.lean
+lean-audit/PNPNANDMinimumAxiomAudit.lean
+lean-audit/PNPNANDCompositionAxiomAudit.lean
+lean-audit/PNPNANDSlackAxiomAudit.lean
 docs/lean_nand_semantics.md
 docs/lean_nand_enumerator.md
 docs/lean_locked_nand_macros.md
@@ -114,8 +122,27 @@ the function-backed `DirectWireWord` pointwise. Output width zero has one empty 
 inputs are not quotiented by commutativity.
 
 The enumerator certificate and every explicit declaration are assumption-free under the dedicated axiom audit. It does not claim a
-canonical or duplicate-free list, decide semantic equivalence, search across sizes, or compute a
-minimum. See `docs/lean_nand_enumerator.md` for the exact handoff to the next layer.
+canonical or duplicate-free list. See `docs/lean_nand_enumerator.md` for its precise scope.
+
+## Exhaustive direct-wire reference minimum
+
+`lean/PNP/NANDTruthTable.lean` recursively enumerates every finite Boolean input tuple and checks
+every ordered output coordinate. `equivalentBool_eq_true_iff` proves that the resulting Boolean is
+true exactly when the two candidates satisfy pointwise `DirectWire.Equivalent`.
+
+`lean/PNP/NANDMinimum.lean` scans exact candidate sizes in increasing order, bounded by the target
+itself. `referenceMinimumWitness_equivalent` supplies a witness at the selected size,
+`referenceMinimum_le_of_equivalent` proves the global lower bound against an equivalent candidate
+of any size, and `referenceMinimum_invariant` makes the selected size semantic rather than
+syntactic. `residualSlack_eq_zero_iff_minimum` characterizes zero slack. This exhaustive definition
+has no polynomial-runtime claim and is not the historical residual-band minimizer axiom.
+
+`lean/PNP/NANDComposition.lean` constructs physical serial composition and a
+`FramedContext` with environment, support, bypass, and continuation blocks.
+`compatibleReplacement_framed` transports direct-wire equivalence through that concrete frame.
+`lean/PNP/NANDSlack.lean` derives the corresponding framed additive slack identity. These modules
+do not formalize arbitrary support profiles or the locked-NAND global replacement claim. See
+`docs/lean_nand_reference_minimum.md` for the audited boundary.
 
 ## SAT layer
 

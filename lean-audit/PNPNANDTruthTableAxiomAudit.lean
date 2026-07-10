@@ -1,0 +1,31 @@
+import PNP
+
+#print axioms PNP.DirectWire.BoolTuple
+#print axioms PNP.DirectWire.BoolTuple.get
+#print axioms PNP.DirectWire.BoolTuple.toValuation
+#print axioms PNP.DirectWire.BoolTuple.get_cons_zero
+#print axioms PNP.DirectWire.BoolTuple.get_cons_succ
+#print axioms PNP.DirectWire.BoolTuple.ofFn
+#print axioms PNP.DirectWire.BoolTuple.ofFn_congr
+#print axioms PNP.DirectWire.BoolTuple.toValuation_ofFn
+#print axioms PNP.DirectWire.BoolTuple.ofFn_toValuation
+#print axioms PNP.DirectWire.allBoolTuples
+#print axioms PNP.DirectWire.mem_allBoolTuples
+#print axioms PNP.DirectWire.boolEqual
+#print axioms PNP.DirectWire.boolEqual_eq_true_iff
+#print axioms PNP.DirectWire.allTrue
+#print axioms PNP.DirectWire.allTrue_sound
+#print axioms PNP.DirectWire.allTrue_complete
+#print axioms PNP.DirectWire.Source.eval_congr
+#print axioms PNP.DirectWire.Gate.eval_congr
+#print axioms PNP.DirectWire.Program.eval_input_congr
+#print axioms PNP.DirectWire.Candidate.semantics_input_congr
+#print axioms PNP.DirectWire.equivalentBool
+#print axioms PNP.DirectWire.equivalentBool_sound
+#print axioms PNP.DirectWire.equivalentBool_complete
+#print axioms PNP.DirectWire.equivalentBool_eq_true_iff
+#print axioms PNP.DirectWire.equivalentBool_refl
+#print axioms PNP.DirectWire.equivalentBool_symm
+#print axioms PNP.DirectWire.equivalentBool_eq_true_symm
+#print axioms PNP.DirectWire.equivalentBool_comm
+#print axioms PNP.DirectWire.equivalentBool_zero_outputs
