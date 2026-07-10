@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-01');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-02');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -35,20 +35,27 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.match(out.siteStatusSha256, /^[0-9a-f]{64}$/u);
 });
 
-test('formal status inventories every active core workflow', async () => {
+test('formal status separates current-authority and historical replay workflows', async () => {
   const status = await currentStatus0();
   const names = (await readdir(new URL('../.github/workflows/', import.meta.url)))
     .filter((name) => name.endsWith('.yml'))
     .sort()
     .map((name) => `.github/workflows/${name}`);
 
-  assert.deepEqual([...status.activeCoreWorkflows].sort(), names);
+  assert.deepEqual([
+    ...status.activeCoreWorkflows,
+    ...status.historicalReplayWorkflows,
+  ].sort(), names);
+  assert.deepEqual(status.historicalReplayWorkflows, ['.github/workflows/legacy-v0-replay.yml']);
+  assert.equal(status.activeCoreWorkflows.includes('.github/workflows/legacy-v0-replay.yml'), false);
 });
 
-test('formal status does not advertise an unpinned current-tree legacy replay', async () => {
+test('formal status designates only the pinned legacy-v0 archive replay', async () => {
   const status = await currentStatus0();
-  assert.equal(status.legacyCheckerReplayCommand, null);
-  assert.equal(status.nonClaims.some((entry) => entry.includes('No current-tree command')), true);
+  assert.equal(status.legacyCheckerArchiveManifest, 'archive/legacy-v0/ARCHIVE.json');
+  assert.equal(status.legacyCheckerArchiveCheckCommand, 'npm run legacy:v0:check');
+  assert.equal(status.legacyCheckerReplayCommand, 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d');
+  assert.equal(status.nonClaims.some((entry) => entry.includes('neither current theorem authority nor a mathematical proof')), true);
 });
 
 test('formal reconstruction status rejects theorem emission activation', async () => {

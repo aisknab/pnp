@@ -1,0 +1,115 @@
+{
+  "kind": "PNPLegacyV0Archive0",
+  "version": 0,
+  "coordinate": "PNP-LEGACY-V0-ARCHIVE-2026-07-10-01",
+  "status": "historical-checker-archive",
+  "archiveId": "legacy-v0-7072f8d",
+  "source": {
+    "packageVersion": "0.1.0",
+    "tag": {
+      "name": "final-pnp-proof-report-hardened-7072f8d",
+      "object": "9b69c4f8d8d6d62eb359af759288e5794d1c81c2",
+      "commit": "7072f8d0bda6d44d240f9bb3fad624fd357e1278",
+      "tree": "2b673c397c8438a0631952c2d0325456e96c5341",
+      "annotated": true,
+      "signed": false
+    },
+    "files": [
+      {
+        "path": "package.json",
+        "sha256": "e3da897862cb99de2deedb29cb5d7362b8db15760de6bef235a1a6485a6201d3"
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "d33eae7a5ae1b2589db9ab7658b8bc21c4134b63db63206cfbf6a7ca55ef9599"
+      }
+    ]
+  },
+  "artifacts": {
+    "tag": {
+      "name": "final-pnp-proof-report-artifacts-hardened-7072f8d-sealed",
+      "object": "e7ea459c907ed9e334af8c0bd5f3bb117348992d",
+      "commit": "9d1de19f827e5cb6880741352eb2349cbbb45994",
+      "tree": "fa34921ab6279b2258436b325326d32bfb40fd36",
+      "annotated": true,
+      "signed": false
+    },
+    "bundlePath": "proof-artifacts/final-pnp-proof-report-hardened-7072f8d",
+    "files": [
+      {
+        "path": "proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS",
+        "sha256": "d1da103bbf2867b656e8026b734f81b33bc61deb79dbf3a2d48a16f83e8a2356"
+      },
+      {
+        "path": "proof-artifacts/final-pnp-proof-report-hardened-7072f8d/SHA256SUMS.sha256",
+        "sha256": "61228d99a2ce57dde4e9fa605626277ad3cb591ff424f73c8c240e28e8a876fa"
+      },
+      {
+        "path": "proof-artifacts/final-pnp-proof-report-hardened-7072f8d/final-pnp-proof-report.summary.json",
+        "sha256": "70f7baf244f759e309ae848584286e5ca6e9a3704df630dacc17529e5fdb3491"
+      },
+      {
+        "path": "proof-artifacts/final-pnp-proof-report-hardened-7072f8d/final-pnp-proof-report.full.json",
+        "sha256": "90989c03e5da774822b400896b880bc293b5b300f0f4b08e5de352773451263e"
+      },
+      {
+        "path": "proof-artifacts/final-pnp-proof-report-hardened-7072f8d/release-seal.json",
+        "sha256": "03a95ff0baeb5b251577780ecbce51e9b305fb611daddee4db9b05f2621d6bc7"
+      },
+      {
+        "path": "proof-artifacts/final-pnp-proof-report-hardened-7072f8d/validation-summary.json",
+        "sha256": "cebcc69ec0ed846f2cea42558d1e458f649e4cd473e1cab8d42c54516722518d"
+      }
+    ]
+  },
+  "documents": {
+    "tag": {
+      "name": "final-pnp-proof-report-docs-hardened-7072f8d-sealed",
+      "object": "9eeb4b85af1c04c43e6f086debcd3ac37d5d27d1",
+      "commit": "3ba356c79b545d2c734283bf10d85d0710de2b60",
+      "tree": "4f0c3b5d93da1783be1c24560dac3bf4023370f8",
+      "annotated": true,
+      "signed": false
+    },
+    "files": [
+      {
+        "path": "canonical_proof_report.pdf",
+        "sha256": "a46c501e305e0889a95fc66c99229fd016698ca4474edcac43c389709e885ca4"
+      },
+      {
+        "path": "canonical_proof_report.tex",
+        "sha256": "85a7ef5230ba74ad7d52a0789da4e43a70c15f32b3bd6d9f9ee140c0a2e31474"
+      }
+    ]
+  },
+  "historicalValidation": {
+    "command": "npm run validate",
+    "tests": 1121,
+    "pass": 1121,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "recordedIn": "proof-artifacts/final-pnp-proof-report-hardened-7072f8d/release-seal.json",
+    "recordedNotReexecutedByArchiveCheck": true
+  },
+  "replay": {
+    "command": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
+    "fullCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d --full",
+    "outputMustBeOutsideCheckout": true,
+    "refuseExistingOutput": true
+  },
+  "claimBoundary": {
+    "historicalReplay": true,
+    "currentStatusAuthority": false,
+    "mathematicalTheoremEstablished": false,
+    "checkerReplayIsMathematicalProof": false,
+    "publicTheoremEmissionAllowed": false,
+    "finalTheoremReady": false
+  },
+  "provenanceLimitations": [
+    "The three annotated Git tags are unsigned; these pins establish Git object identity, not signed provenance.",
+    "The archive does not add missing pins for Node.js/npm patch levels, operating system, CPU, or filesystem semantics.",
+    "Historical checker acceptance is not a mathematical proof and carries no current theorem authority."
+  ]
+}

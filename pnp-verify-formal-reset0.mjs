@@ -1,5 +1,6 @@
+// Compatibility import for the current, non-replaying verifier.
 export {
-  MakePNPVerifyStepPlan0,
-  ValidateLegacyStatus0,
-  VerifyLegacyStatusFile0,
+  CURRENT_VERIFICATION_TESTS0,
+  MakeCurrentVerificationPlan0,
+  RunPNPVerifyAll0,
 } from './scripts/pnp-verify-all.mjs';

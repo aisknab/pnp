@@ -1,0 +1,41 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+
+import {
+  CURRENT_VERIFICATION_TESTS0,
+  MakeCurrentVerificationPlan0,
+  RunPNPVerifyAll0,
+} from '../scripts/pnp-verify-all.mjs';
+
+test('current verifier plan contains status, surface, archive integrity, and current tests only', () => {
+  const plan = MakeCurrentVerificationPlan0();
+  assert.deepEqual(plan.map(({ id }) => id), [
+    'formal-reconstruction-status',
+    'formal-public-surface',
+    'legacy-v0-archive-integrity',
+    'current-authority-unit-tests',
+  ]);
+  assert.equal(plan.some(({ id }) => /replay|release-audit|materialized/u.test(id)), false);
+  assert.equal(CURRENT_VERIFICATION_TESTS0.some((file) => /pcc-runall|release-audit|materialized/u.test(file)), false);
+});
+
+test('current verifier cannot be configured to execute the historical replay', () => {
+  const defaultPlan = MakeCurrentVerificationPlan0();
+  const ignoredLegacyOptionPlan = MakeCurrentVerificationPlan0({
+    includeHistoricalAuditPipeline: true,
+    includeLegacyReleaseAudit: true,
+    historicalReplay: true,
+  });
+  assert.deepEqual(ignoredLegacyOptionPlan, defaultPlan);
+});
+
+test('current verifier accepts without executing a historical replay', async () => {
+  const out = await RunPNPVerifyAll0({ writeOutput: false, includeUnitTests: false });
+  assert.equal(out.tag, 'accept');
+  assert.equal(out.currentStatusAuthority, true);
+  assert.equal(out.mathematicalTheoremEstablished, false);
+  assert.equal(out.historicalReplayExecuted, false);
+  assert.equal(out.legacyCheckerReplayAccepted, false);
+  assert.equal(out.legacyCheckerReplayIsMathematicalProof, false);
+  assert.equal(out.archiveIdentityVerified, true);
+});

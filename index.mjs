@@ -1,111 +1,16 @@
 export {
-  CheckRunAll0,
-  RUNALL_CHECKER_COVERAGE0,
-  RUNALL_PUBLIC_CONCLUSION0,
-} from './pcc-runall0.mjs';
-
-import { RunAll0 as LegacyRunAll0 } from './pcc-runall0.mjs';
+  CheckFormalReconstructionStatus0,
+  FORMAL_RECONSTRUCTION_BLOCKERS0,
+} from './pcc-formal-reconstruction-status0.mjs';
 
 export {
-  CheckIntegratedPipeline0,
-  INTEGRATED_PIPELINE_PHASES0,
-  RunIntegratedPCC0,
-} from './pcc-integrated-pipeline0.mjs';
+  CheckFormalPublicSurface0,
+  CURRENT_PUBLIC_EXPORTS0,
+  CURRENT_PACKAGE_EXPORTS0,
+  CURRENT_PACKAGE_SCRIPTS0,
+} from './pcc-formal-public-surface0.mjs';
 
 export {
-  ACCEPT_RUN_PHASES0,
-  CheckAcceptRun0,
-  EmitFinalVerdict0,
-  ReplayAcceptRun0,
-} from './pcc-accept-run0.mjs';
-
-export {
-  RELEASE_AUDIT_REQUIRED_EXPORTS0,
-  RELEASE_AUDIT_REQUIRED_MODULES0,
-  RELEASE_AUDIT_REQUIRED_SCRIPTS0,
-  RELEASE_AUDIT_REQUIRED_TESTS0,
-  makeReleaseAuditConfig0,
-} from './pcc-release-audit0.mjs';
-
-import { CheckReleaseAudit0 as LegacyCheckReleaseAudit0 } from './pcc-release-audit0.mjs';
-import { LegacyReplayRequiredReject0 } from './pcc-legacy-replay-gate0.mjs';
-
-export async function RunAll0(input, options = {}) {
-  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('RunAll0');
-  return LegacyRunAll0(input, { historicalReplay: true });
-}
-
-export async function CheckReleaseAudit0(config, options = {}) {
-  if (options.historicalReplay !== true) return LegacyReplayRequiredReject0('CheckReleaseAudit0');
-  return LegacyCheckReleaseAudit0({ ...config, historicalReplay: true });
-}
-
-export {
-  CheckMaterializedFinalCertificate0,
-  makeMaterializedFinalCertificate0,
-  makeMaterializedFinalCertificateConfig0,
-  writeMaterializedFinalCertificateFiles0,
-} from './pcc-final-certificate-materialized0.mjs';
-
-export {
-  CheckFinalCertificatePublicStatus0,
-  FINAL_CERTIFICATE_PUBLIC_STATUS_PHASES0,
-  makeFinalCertificatePublicStatus0,
-  makeFinalCertificatePublicStatusConfig0,
-  writeFinalCertificatePublicStatusFiles0,
-} from './pcc-final-certificate-public-status0.mjs';
-
-export {
-  CheckReleaseAuditFinalCertificateGate0,
-  RELEASE_AUDIT_FINAL_CERTIFICATE_GATE_PHASES0,
-  makeReleaseAuditFinalCertificateGate0,
-  makeReleaseAuditFinalCertificateGateConfig0,
-  writeReleaseAuditFinalCertificateGateFiles0,
-} from './pcc-release-audit-final-certificate-gate0.mjs';
-
-export {
-  CheckReleaseAuditConcreteFinalCertificateGate0,
-  RELEASE_AUDIT_CONCRETE_FINAL_CERTIFICATE_GATE_PHASES0,
-  makeReleaseAuditConcreteFinalCertificateGate0,
-  makeReleaseAuditConcreteFinalCertificateGateConfig0,
-  writeReleaseAuditConcreteFinalCertificateGateFiles0,
-} from './pcc-release-audit-final-certificate-concrete-gate0.mjs';
-
-export {
-  CheckConcreteReleaseAppendix0,
-  makeConcreteReleaseAppendix0,
-  makeConcreteReleaseAppendixConfig0,
-  writeConcreteReleaseAppendixFiles0,
-} from './pcc-concrete-release-appendix0.mjs';
-
-export {
-  CheckConcreteFinalAcceptanceReplay0,
-  CONCRETE_FINAL_ACCEPTANCE_REPLAY_PHASES0,
-  makeConcreteFinalAcceptanceReplay0,
-  makeConcreteFinalAcceptanceReplayConfig0,
-  writeConcreteFinalAcceptanceReplayFiles0,
-} from './pcc-final-acceptance-replay0.mjs';
-
-export {
-  CheckFinalPNPCertificate0,
-  FINAL_PNP_CERTIFICATE_PHASES0,
-  makeFinalPNPCertificate0,
-  makeFinalPNPCertificateConfig0,
-  writeFinalPNPCertificateFiles0,
-} from './pcc-final-pnp-certificate0.mjs';
-
-export {
-  CheckFinalPNPReleaseGate0,
-  FINAL_PNP_RELEASE_GATE_PHASES0,
-  makeFinalPNPReleaseGate0,
-  makeFinalPNPReleaseGateConfig0,
-  writeFinalPNPReleaseGateFiles0,
-} from './pcc-final-pnp-release-gate0.mjs';
-
-export {
-  CheckFinalPNPProofReport0,
-  FINAL_PNP_PROOF_REPORT_PHASES0,
-  makeFinalPNPProofReport0,
-  makeFinalPNPProofReportConfig0,
-  writeFinalPNPProofReportFiles0,
-} from './pcc-final-proof-report0.mjs';
+  CheckLegacyV0Archive0,
+  LEGACY_V0_ARCHIVE_PINS0,
+} from './pcc-legacy-v0-archive0.mjs';

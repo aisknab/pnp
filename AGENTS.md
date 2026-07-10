@@ -18,7 +18,7 @@ Specifically, do not add workflows that:
 This repository already has the durable online workflow shape:
 
 - `.github/workflows/ci.yml` is the automatic read-only PR/push verification.
-- `.github/workflows/full-verification.yml` is the manual expensive verification path.
+- `.github/workflows/legacy-v0-replay.yml` is the manual, non-authoritative pinned replay path.
 
 Prefer those workflows. If more CI coverage is needed, extend the durable workflow in
 a small read-only way instead of adding branch-specific finalizer workflows.
@@ -53,14 +53,14 @@ When editing workflows:
 For ordinary PRs, the online CI should stay lightweight. Prefer:
 
 - `npm run check`
-- `npm run test:negative`
-- `npm run examples:minimal`
-- public-surface smoke tests used by `.github/workflows/ci.yml`
-- the lightweight release-audit gate used by `.github/workflows/ci.yml`
+- `npm test`
+- `npm run pnp:verify -- --no-write`
+- `npm run legacy:v0:check`
+- the current public-surface tests used by `.github/workflows/ci.yml`
 
-Full `npm test` and the full release audit are expensive. Use them locally or through
-the manual `full-verification` workflow when the change is broad, risky, or release
-oriented.
+Current `npm test` is deliberately small. The expensive historical 1,121-test validation is available
+only through the manual `legacy-v0-replay` workflow with its `full` input. That replay is historical
+predicate evidence, not current theorem authority.
 
 ## Comment-Only Or Documentation-Like Source Changes
 
@@ -82,6 +82,6 @@ If a branch already contains temporary workflows or tooling from another agent:
 - do not try to repair the self-mutating workflow unless the user explicitly asks;
 - apply the intended final source changes directly;
 - remove the temporary workflow/tooling files from the branch;
-- push the cleaned branch and rely on the durable `ci / online-verification` check;
+- push the cleaned branch and rely on the durable `ci / current-authority` check;
 - if the workflow was registered in GitHub Actions, disable it after it is no longer
   needed.

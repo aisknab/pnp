@@ -2,7 +2,7 @@
 
 import { createHash } from 'node:crypto';
 import { spawn } from 'node:child_process';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 
@@ -11,241 +11,223 @@ import {
   FORMAL_RECONSTRUCTION_BLOCKERS0,
 } from '../pcc-formal-reconstruction-status0.mjs';
 import { CheckFormalPublicSurface0 } from '../pcc-formal-public-surface0.mjs';
+import { CheckLegacyV0Archive0 } from '../pcc-legacy-v0-archive0.mjs';
 
 const CHECKER = 'pnp-verify-all0';
 const VERSION = 0;
 const OUTPUT = 'artifacts/pnp-verify-all/latest-verdict.json';
-const STATUS = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
-const LEGACY_STATUS = 'PNP_STATUS.json';
-const BLOCKERS = [...FORMAL_RECONSTRUCTION_BLOCKERS0];
-const LEGACY_BLOCKERS = ['Release.UnrestrictedFinalSoundness', 'ExternalReview.Acceptance'];
-const SYNTAX = `pcc-core.mjs pcc-formal-reconstruction-status0.mjs pcc-formal-public-surface0.mjs pcc-legacy-replay-gate0.mjs pcc-trust-base0.mjs pcc-trust-base-shrink-plan0.mjs pcc-rule-family-coverage0.mjs pcc-nand-direct-wire-semantics0.mjs pcc-nand-small-models0.mjs pcc-locked-nand-sat-small-models0.mjs pcc-complexity-ledger0.mjs pcc-release-ladder0.mjs pcc-proof-obligation-ledger0.mjs pcc-gap-ledger0.mjs pcc-finite-to-unbounded-family-audit0.mjs pcc-no-prose-only-theorem-policy0.mjs pcc-public-surface-freeze0.mjs pcc-public-surface-baseline0.mjs pcc-public-review-boundary0.mjs pcc-public-review-handoff0.mjs pcc-public-review-entrypoint0.mjs pcc-public-review-checklist0.mjs pcc-external-review-status0.mjs pcc-release-blocker-clearance0.mjs pcc-public-theorem-emission-preflight0.mjs pcc-public-theorem-emission-denial0.mjs pcc-public-theorem-emission-negative-transitions0.mjs pcc-public-theorem-emission-gate0.mjs pcc-historical-report-supersession0.mjs pcc-historical-theorem-anchors0.mjs pcc-report-theorem-inventory0.mjs pcc-report-theorem-coverage-matrix0.mjs pcc-report-theorem-coverage-closure-plan0.mjs pcc-direct-binding-index0.mjs pcc-direct-bind-base-semantics0.mjs pcc-direct-bind-charge-ledger0.mjs pcc-direct-bind-mode-firewall0.mjs pcc-direct-bind-verifydw-soundness0.mjs pcc-direct-bind-normalization0.mjs pcc-direct-bind-finite-table0.mjs pcc-direct-bind-critical-window-routing0.mjs pcc-direct-bind-branch-cycle0.mjs pcc-direct-bind-unary-decoder0.mjs pcc-direct-bind-hereditary-normal-forms0.mjs pcc-direct-bind-hresolve0.mjs pcc-direct-bind-budget-resolver0.mjs pcc-direct-bind-frontier-faithful0.mjs pcc-direct-bind-residual-witness0.mjs pcc-direct-bind-bn2-side-tight0.mjs pcc-direct-bind-bn3-request-envelope0.mjs pcc-direct-bind-bn4-activation0.mjs pcc-direct-bind-bn5-shadow-localization0.mjs pcc-direct-bind-pkgc-separating-consumers0.mjs pcc-direct-bind-bn6-hypergraph-packet0.mjs pcc-direct-bind-packet-selector-seeds0.mjs pcc-direct-bind-selector-realizer0.mjs pcc-direct-bind-hb-negative-closure0.mjs pcc-direct-bind-oracle-zeroslack0.mjs pcc-direct-bind-locked-nand-threshold0.mjs pcc-direct-bind-final-theorem-boundary0.mjs pcc-direct-bind-pack-acceptance-boundary0.mjs semantics/nand-direct-wire-reference.mjs semantics/nand-small-models.mjs semantics/locked-nand-sat-small-models.mjs scripts/cross-verify.mjs scripts/audit-report-theorem-bindings.mjs scripts/audit-independent-verifiers-no-shared-code.mjs scripts/audit-checker-totality.mjs scripts/audit-negative-checker-mutations.mjs scripts/generate-checker-dependency-graph.mjs scripts/audit-checker-cycles.mjs scripts/audit-no-hidden-oracle.mjs scripts/audit-determinism.mjs scripts/audit-regeneration-ledger.mjs scripts/verify-section22-direct-bindings.mjs scripts/pnp-verify-all.mjs`.trim().split(/\s+/);
-const HISTORICAL_AUDIT_STEPS = `
-theorem-binding-ledger-audit|scripts/audit-report-theorem-bindings.mjs --json|json
-historical-report-supersession-audit|pcc-historical-report-supersession0.mjs --json|json
-historical-report-supersession-tests|--test audits/historical-report-supersession0.test.mjs|process
-historical-theorem-anchors-audit|pcc-historical-theorem-anchors0.mjs --json|json
-historical-theorem-anchors-tests|--test audits/historical-theorem-anchors0.test.mjs|process
-public-surface-baseline-audit|pcc-public-surface-baseline0.mjs --json|json
-public-surface-baseline-tests|--test audits/public-surface-baseline0.test.mjs test/pcc-public-surface-freeze0.test.mjs|process
-public-review-boundary-audit|pcc-public-review-boundary0.mjs --json|json
-public-review-boundary-tests|--test audits/public-review-boundary0.test.mjs|process
-public-review-handoff-audit|pcc-public-review-handoff0.mjs --json|json
-public-review-handoff-tests|--test audits/public-review-handoff0.test.mjs|process
-public-review-entrypoint-audit|pcc-public-review-entrypoint0.mjs --json|json
-public-review-entrypoint-tests|--test audits/public-review-entrypoint0.test.mjs|process
-public-review-checklist-audit|pcc-public-review-checklist0.mjs --json|json
-public-review-checklist-tests|--test audits/public-review-checklist0.test.mjs|process
-external-review-status-audit|pcc-external-review-status0.mjs --json|json
-external-review-status-tests|--test audits/external-review-status0.test.mjs|process
-release-blocker-clearance-audit|pcc-release-blocker-clearance0.mjs --json|json
-release-blocker-clearance-tests|--test audits/release-blocker-clearance0.test.mjs|process
-public-theorem-emission-preflight-audit|pcc-public-theorem-emission-preflight0.mjs --json|json
-public-theorem-emission-preflight-tests|--test audits/public-theorem-emission-preflight0.test.mjs|process
-public-theorem-emission-denial-audit|pcc-public-theorem-emission-denial0.mjs --json|json
-public-theorem-emission-denial-tests|--test audits/public-theorem-emission-denial0.test.mjs|process
-public-theorem-emission-negative-transitions-audit|pcc-public-theorem-emission-negative-transitions0.mjs --json|json
-public-theorem-emission-negative-transitions-tests|--test audits/public-theorem-emission-negative-transitions0.test.mjs|process
-public-theorem-emission-gate-audit|pcc-public-theorem-emission-gate0.mjs --json|json
-public-theorem-emission-gate-tests|--test audits/public-theorem-emission-gate0.test.mjs|process
-report-theorem-inventory-audit|pcc-report-theorem-inventory0.mjs --json|json
-report-theorem-inventory-tests|--test audits/report-theorem-inventory0.test.mjs|process
-report-theorem-coverage-matrix-audit|pcc-report-theorem-coverage-matrix0.mjs --json|json
-report-theorem-coverage-matrix-tests|--test audits/report-theorem-coverage-matrix0.test.mjs|process
-report-theorem-coverage-closure-plan-audit|pcc-report-theorem-coverage-closure-plan0.mjs --json|json
-report-theorem-coverage-closure-plan-tests|--test audits/report-theorem-coverage-closure-plan0.test.mjs|process
-direct-binding-index-audit|pcc-direct-binding-index0.mjs --json|json
-direct-binding-index-tests|--test audits/direct-binding-index0.test.mjs|process
-section22-direct-binding-runner-audit|scripts/verify-section22-direct-bindings.mjs --json|json
-section22-direct-binding-runner-tests|--test audits/section22-direct-bindings0.test.mjs|process
-base-direct-binding-seed-audit|pcc-direct-bind-base-semantics0.mjs --json|json
-base-direct-binding-seed-tests|--test audits/direct-bind-base-semantics0.test.mjs|process
-chg-direct-binding-seed-audit|pcc-direct-bind-charge-ledger0.mjs --json|json
-chg-direct-binding-seed-tests|--test audits/direct-bind-charge-ledger0.test.mjs|process
-mode-direct-binding-seed-audit|pcc-direct-bind-mode-firewall0.mjs --json|json
-mode-direct-binding-seed-tests|--test audits/direct-bind-mode-firewall0.test.mjs|process
-e-direct-binding-seed-audit|pcc-direct-bind-verifydw-soundness0.mjs --json|json
-e-direct-binding-seed-tests|--test audits/direct-bind-verifydw-soundness0.test.mjs|process
-n-direct-binding-seed-audit|pcc-direct-bind-normalization0.mjs --json|json
-n-direct-binding-seed-tests|--test audits/direct-bind-normalization0.test.mjs|process
-ft-direct-binding-seed-audit|pcc-direct-bind-finite-table0.mjs --json|json
-ft-direct-binding-seed-tests|--test audits/direct-bind-finite-table0.test.mjs|process
-x-direct-binding-seed-audit|pcc-direct-bind-critical-window-routing0.mjs --json|json
-x-direct-binding-seed-tests|--test audits/direct-bind-critical-window-routing0.test.mjs|process
-bc-direct-binding-seed-audit|pcc-direct-bind-branch-cycle0.mjs --json|json
-bc-direct-binding-seed-tests|--test audits/direct-bind-branch-cycle0.test.mjs|process
-un-direct-binding-seed-audit|pcc-direct-bind-unary-decoder0.mjs --json|json
-un-direct-binding-seed-tests|--test audits/direct-bind-unary-decoder0.test.mjs|process
-hn-direct-binding-seed-audit|pcc-direct-bind-hereditary-normal-forms0.mjs --json|json
-hn-direct-binding-seed-tests|--test audits/direct-bind-hereditary-normal-forms0.test.mjs|process
-hresolve-direct-binding-seed-audit|pcc-direct-bind-hresolve0.mjs --json|json
-hresolve-direct-binding-seed-tests|--test audits/direct-bind-hresolve0.test.mjs|process
-bud-direct-binding-seed-audit|pcc-direct-bind-budget-resolver0.mjs --json|json
-bud-direct-binding-seed-tests|--test audits/direct-bind-budget-resolver0.test.mjs|process
-nor-ff-direct-binding-seed-audit|pcc-direct-bind-frontier-faithful0.mjs --json|json
-nor-ff-direct-binding-seed-tests|--test audits/direct-bind-frontier-faithful0.test.mjs|process
-rw-direct-binding-gap-seed-audit|pcc-direct-bind-residual-witness0.mjs --json|json
-rw-direct-binding-gap-seed-tests|--test audits/direct-bind-residual-witness0.test.mjs|process
-bn2-direct-binding-gap-seed-audit|pcc-direct-bind-bn2-side-tight0.mjs --json|json
-bn2-direct-binding-gap-seed-tests|--test audits/direct-bind-bn2-side-tight0.test.mjs|process
-no-prose-only-theorem-policy-audit|pcc-no-prose-only-theorem-policy0.mjs --json|json
-no-prose-only-theorem-policy-tests|--test audits/no-prose-only-theorem-policy0.test.mjs|process
-proof-obligation-ledger-audit|pcc-proof-obligation-ledger0.mjs --json|json
-proof-obligation-ledger-tests|--test audits/proof-obligation-ledger0.test.mjs|process
-gap-ledger-audit|pcc-gap-ledger0.mjs --json|json
-gap-ledger-tests|--test audits/gap-ledger0.test.mjs|process
-finite-to-unbounded-family-audit|pcc-finite-to-unbounded-family-audit0.mjs --json|json
-finite-to-unbounded-family-audit-tests|--test audits/finite-to-unbounded-family-audit0.test.mjs|process
-trust-base-audit|pcc-trust-base0.mjs --json|json
-trust-base-tests|--test audits/trust-base0.test.mjs|process
-trust-base-shrink-plan-audit|pcc-trust-base-shrink-plan0.mjs --json|json
-trust-base-shrink-plan-tests|--test audits/trust-base-shrink-plan0.test.mjs|process
-checker-totality-audit|scripts/audit-checker-totality.mjs --json|json
-checker-totality-tests|--test audits/checker-totality0.test.mjs|process
-negative-checker-mutation-audit|scripts/audit-negative-checker-mutations.mjs --json|json
-negative-checker-mutation-tests|--test audits/negative-checker-mutations0.test.mjs|process
-rule-family-coverage-audit|pcc-rule-family-coverage0.mjs --json|json
-rule-family-coverage-tests|--test audits/rule-family-coverage0.test.mjs|process
-checker-dependency-graph-generation|scripts/generate-checker-dependency-graph.mjs --json|json
-checker-dependency-graph-tests|--test audits/checker-dependency-graph0.test.mjs|process
-checker-cycle-audit|scripts/audit-checker-cycles.mjs --json|json
-checker-cycle-tests|--test audits/checker-cycles0.test.mjs|process
-nand-direct-wire-semantics-audit|pcc-nand-direct-wire-semantics0.mjs --json|json
-nand-direct-wire-semantics-tests|--test audits/nand-direct-wire-semantics0.test.mjs|process
-nand-small-model-audit|pcc-nand-small-models0.mjs --json|json
-nand-small-model-tests|--test audits/nand-small-models0.test.mjs|process
-locked-nand-sat-small-model-audit|pcc-locked-nand-sat-small-models0.mjs --json|json
-locked-nand-sat-small-model-tests|--test audits/locked-nand-sat-small-models0.test.mjs|process
-complexity-ledger-audit|pcc-complexity-ledger0.mjs --json|json
-complexity-ledger-tests|--test audits/complexity-ledger0.test.mjs|process
-no-hidden-oracle-audit|scripts/audit-no-hidden-oracle.mjs --json|json
-no-hidden-oracle-tests|--test audits/no-hidden-oracle0.test.mjs|process
-fresh-clone-verifier-tests|--test audits/fresh-clone-verify0.test.mjs|process
-container-environment-tests|--test audits/container-environment0.test.mjs|process
-multi-platform-ci-tests|--test audits/multi-platform-ci0.test.mjs|process
-determinism-audit-tests|--test audits/determinism0.test.mjs|process
-regeneration-ledger-audit|scripts/audit-regeneration-ledger.mjs --json|json
-regeneration-ledger-tests|--test audits/regeneration-ledger0.test.mjs|process
-release-ladder-audit|pcc-release-ladder0.mjs --json|json
-release-ladder-tests|--test audits/release-ladder0.test.mjs|process
-minimal-kernel-cross-verify|scripts/cross-verify.mjs --json|json
-independent-no-shared-code-audit|scripts/audit-independent-verifiers-no-shared-code.mjs --json|json
-independent-no-shared-code-tests|--test audits/independent-verifiers-no-shared-code.test.mjs|process`.trim().split('\n').map((line) => { const [id, args, kind] = line.split('|'); return { id, args: args.split(/\s+/), kind }; });
+
+export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
+  'audits/formal-reconstruction-status0.test.mjs',
+  'audits/formal-public-surface0.test.mjs',
+  'audits/legacy-v0-archive0.test.mjs',
+  'test/current-package-surface0.test.mjs',
+  'test/current-verifier0.test.mjs',
+  'test/replay-legacy-v0.test.mjs',
+]);
+
+export function MakeCurrentVerificationPlan0(options = {}) {
+  return Object.freeze([
+    Object.freeze({ id: 'formal-reconstruction-status', kind: 'checker' }),
+    Object.freeze({ id: 'formal-public-surface', kind: 'checker' }),
+    Object.freeze({ id: 'legacy-v0-archive-integrity', kind: 'checker' }),
+    ...(options.includeUnitTests === false
+      ? []
+      : [Object.freeze({ id: 'current-authority-unit-tests', kind: 'process', files: [...CURRENT_VERIFICATION_TESTS0] })]),
+  ]);
+}
 
 export async function RunPNPVerifyAll0(options = {}) {
   const root = path.resolve(options.root ?? process.cwd());
   const outputPath = options.outputPath ?? OUTPUT;
   const writeOutput = options.writeOutput ?? true;
+  const plan = MakeCurrentVerificationPlan0(options);
   const steps = [];
-  const statusStep = await CheckFormalReconstructionStatus0({ root, writeOutput: false });
-  statusStep.id = 'formal-reconstruction-status';
-  steps.push(statusStep);
-  if (statusStep.tag !== 'accept') return writeAndReturn0(root, outputPath, writeOutput, reject0('StatusFile.Reject', [STATUS], 'formal reconstruction status failed consistency checks', { statusStep, steps }));
-  const publicSurfaceStep = await CheckFormalPublicSurface0({ root, writeOutput: false });
-  publicSurfaceStep.id = 'formal-public-surface';
-  steps.push(publicSurfaceStep);
-  if (publicSurfaceStep.tag !== 'accept') return writeAndReturn0(root, outputPath, writeOutput, reject0('FormalPublicSurface.Reject', ['pcc-formal-public-surface0.mjs'], 'formal reconstruction public surface failed consistency checks', { publicSurfaceStep, steps }));
-  const legacyStatusStep = await VerifyLegacyStatusFile0(root);
-  steps.push(legacyStatusStep);
-  if (legacyStatusStep.tag !== 'accept') return writeAndReturn0(root, outputPath, writeOutput, reject0('LegacyStatusFile.Reject', [LEGACY_STATUS], 'legacy checker status failed consistency checks', { legacyStatusStep, steps }));
-  for (const file of SYNTAX) { const step = await runStep0({ id: `node-syntax:${file}`, args: ['--check', file], root, kind: 'process' }); steps.push(step); if (step.tag !== 'accept') return writeAndReturn0(root, outputPath, writeOutput, fail0(step, steps)); }
-  if (options.includeUnitTests ?? true) { const step = await runStep0({ id: 'node-unit-tests', args: ['--test'], root, kind: 'process' }); steps.push(step); if (step.tag !== 'accept') return writeAndReturn0(root, outputPath, writeOutput, fail0(step, steps)); }
-  const allSteps = MakePNPVerifyStepPlan0(options);
-  for (const spec of allSteps) { const step = await runStep0({ ...spec, root }); steps.push(step); if (step.tag !== 'accept') return writeAndReturn0(root, outputPath, writeOutput, fail0(step, steps)); if (spec.kind === 'json' && step.json?.tag !== 'accept') return writeAndReturn0(root, outputPath, writeOutput, reject0('JsonStep.UnexpectedTag', [spec.id], 'JSON verifier returned an unexpected tag', { expectedTag: 'accept', actualTag: step.json?.tag ?? null, step, steps })); }
-  const pythonStep = await runPythonUnitTests0(root, options.python ?? process.env.PYTHON ?? null);
-  steps.push(pythonStep);
-  if (pythonStep.tag !== 'accept') return writeAndReturn0(root, outputPath, writeOutput, fail0(pythonStep, steps));
-  return writeAndReturn0(root, outputPath, writeOutput, {
+
+  const checkers = [
+    ['formal-reconstruction-status', () => CheckFormalReconstructionStatus0({ root, writeOutput: false })],
+    ['formal-public-surface', () => CheckFormalPublicSurface0({ root, writeOutput: false })],
+    ['legacy-v0-archive-integrity', () => CheckLegacyV0Archive0({ root, writeOutput: false })],
+  ];
+
+  for (const [id, check] of checkers) {
+    const verdict = await check();
+    const step = { ...verdict, id };
+    steps.push(step);
+    if (verdict.tag !== 'accept') {
+      return finish0(root, outputPath, writeOutput, reject0(
+        'CurrentVerification.CheckerRejected',
+        [id],
+        'a current-authority checker rejected',
+        { failedStep: step, steps },
+      ));
+    }
+  }
+
+  if (options.includeUnitTests !== false) {
+    const step = await runNodeTests0(root, CURRENT_VERIFICATION_TESTS0);
+    steps.push(step);
+    if (step.tag !== 'accept') {
+      return finish0(root, outputPath, writeOutput, reject0(
+        'CurrentVerification.TestsRejected',
+        ['current-authority-unit-tests'],
+        'the current-authority unit suite failed',
+        { failedStep: step, steps },
+      ));
+    }
+  }
+
+  const statusStep = steps.find((step) => step.id === 'formal-reconstruction-status');
+  const surfaceStep = steps.find((step) => step.id === 'formal-public-surface');
+  const archiveStep = steps.find((step) => step.id === 'legacy-v0-archive-integrity');
+  return finish0(root, outputPath, writeOutput, {
     tag: 'accept',
     kind: 'accept',
     checker: CHECKER,
     version: VERSION,
     claimStatus: 'formal-reconstruction-in-progress',
+    currentStatusAuthority: true,
     targetTheorem: 'P = NP',
     mathematicalTheoremEstablished: false,
-    statusPath: STATUS,
-    statusSha256: statusStep.statusSha256,
-    publicSurfaceBaselineCoordinate: publicSurfaceStep.coordinate,
-    legacyStatusPath: LEGACY_STATUS,
-    legacyStatusSha256: legacyStatusStep.statusSha256,
-    legacyCheckerRegressionTestsPassed: options.includeUnitTests ?? true,
-    legacyCheckerReplayAccepted: options.includeHistoricalAuditPipeline === true,
-    historicalAuditPipelineExecuted: options.includeHistoricalAuditPipeline === true,
-    legacyCheckerReplayIsMathematicalProof: false,
+    checkerAcceptanceIsMathematicalProof: false,
     publicTheoremEmissionAllowed: false,
     publicTheoremStatement: null,
     publicTheoremConclusion: null,
     finalTheoremReady: false,
     activeFinalNodeIds: [],
-    remainingFormalObligations: [...BLOCKERS],
-    remainingBlockers: [...BLOCKERS],
-    oneCommand: 'npm run pnp:verify',
+    remainingFormalObligations: [...FORMAL_RECONSTRUCTION_BLOCKERS0],
+    remainingBlockers: [...FORMAL_RECONSTRUCTION_BLOCKERS0],
+    historicalReplayExecuted: false,
+    legacyCheckerReplayAccepted: false,
+    legacyCheckerReplayIsMathematicalProof: false,
+    archiveIdentityVerified: archiveStep?.tagObjectIdentityVerified === true
+      && archiveStep?.archivedFileDigestsVerified === true,
+    statusSha256: statusStep?.statusSha256 ?? null,
+    publicSurfaceBaselineCoordinate: surfaceStep?.coordinate ?? null,
+    oneCommand: 'npm run pnp:verify -- --no-write',
+    plan,
     stepCount: steps.length,
     acceptedStepCount: steps.filter((step) => step.tag === 'accept').length,
     steps,
-    outputPath: writeOutput ? outputPath : null,
   });
 }
 
-export function MakePNPVerifyStepPlan0(options = {}) {
-  return [
-    ...(options.includeHistoricalAuditPipeline === true ? HISTORICAL_AUDIT_STEPS : []),
-    ...(options.includeLegacyReleaseAudit === true
-      ? [{ id: 'legacy-release-audit', args: ['./bin/release-audit0.mjs', '--historical-replay'], kind: 'process' }]
-      : []),
-  ];
+function runNodeTests0(root, files) {
+  return new Promise((resolve) => {
+    const args = ['--test', ...files];
+    const child = spawn(process.execPath, args, { cwd: root, stdio: ['ignore', 'pipe', 'pipe'] });
+    let stdout = '';
+    let stderr = '';
+    let settled = false;
+    child.stdout.on('data', (chunk) => { stdout += chunk.toString('utf8'); });
+    child.stderr.on('data', (chunk) => { stderr += chunk.toString('utf8'); });
+    child.on('error', (error) => {
+      if (settled) return;
+      settled = true;
+      resolve({
+        tag: 'reject',
+        id: 'current-authority-unit-tests',
+        coord: 'Process.SpawnFailed',
+        path: ['current-authority-unit-tests'],
+        witness: normalizeError0(error),
+      });
+    });
+    child.on('close', (code) => {
+      if (settled) return;
+      settled = true;
+      const base = {
+        id: 'current-authority-unit-tests',
+        kind: 'process',
+        command: [process.execPath, ...args].join(' '),
+        exitCode: code,
+        stdoutSha256: sha2560(stdout),
+        stderrSha256: sha2560(stderr),
+        stdoutPreview: preview0(stdout),
+        stderrPreview: preview0(stderr),
+      };
+      resolve(code === 0
+        ? { tag: 'accept', ...base }
+        : { tag: 'reject', ...base, coord: 'Process.NonZeroExit', path: ['current-authority-unit-tests'] });
+    });
+  });
 }
 
-export async function VerifyLegacyStatusFile0(root) {
-  try {
-    const bytes = await readFile(path.join(root, LEGACY_STATUS));
-    const status = JSON.parse(bytes.toString('utf8'));
-    return ValidateLegacyStatus0(status, bytes);
-  } catch (error) {
-    return { tag: 'reject', id: 'legacy-status-file-consistency', coord: 'LegacyStatusFile.ReadOrParseFailed', path: [LEGACY_STATUS], witness: normalizeError0(error) };
-  }
-}
-
-export function ValidateLegacyStatus0(status, bytes = Buffer.from(JSON.stringify(status), 'utf8')) {
-  const failures = [];
-  const expected = {
-    kind: 'PNPStatus0',
-    project: 'PNP',
-    authorityStatus: 'legacy-checker-replay-only',
-    supersededBy: STATUS,
-    mathematicalTheoremEstablished: false,
-    externalReviewIsMathematicalPremise: false,
-    publicSurfaceBaseline: 'PUBLIC-SURFACE-BASELINE-2026-06-27-NO-HIDDEN-ORACLE-01',
-    internalProofStackAccepted: true,
-    publicTheoremEmissionAllowed: false,
-    finalTheoremReady: false,
-    pnpVerifyCommand: 'npm run pnp:verify',
-  };
-  for (const [field, value] of Object.entries(expected)) if (status[field] !== value) failures.push({ path: [field], expected: value, actual: status[field] });
-  if (!sameArray0(status.activeFinalNodeIds, [])) failures.push({ path: ['activeFinalNodeIds'], expected: [], actual: status.activeFinalNodeIds });
-  if (!sameArray0(status.remainingBlockers, LEGACY_BLOCKERS)) failures.push({ path: ['remainingBlockers'], expected: LEGACY_BLOCKERS, actual: status.remainingBlockers });
-  if (failures.length !== 0) return { tag: 'reject', id: 'legacy-status-file-consistency', coord: 'LegacyStatusFile.ValidationFailed', path: failures[0].path, witness: { failures } };
+function reject0(coord, pathArray, reason, witness = {}) {
   return {
-    tag: 'accept',
-    id: 'legacy-status-file-consistency',
-    kind: 'legacy-json-status',
-    statusSha256: sha256Hex0(bytes),
-    legacyCheckerReplayOnly: true,
+    tag: 'reject',
+    kind: 'reject',
+    checker: CHECKER,
+    version: VERSION,
+    coord,
+    path: pathArray,
+    witness: { reason, ...witness },
     mathematicalTheoremEstablished: false,
     publicTheoremEmissionAllowed: false,
     finalTheoremReady: false,
+    historicalReplayExecuted: false,
+    remainingBlockers: [...FORMAL_RECONSTRUCTION_BLOCKERS0],
   };
 }
-async function runPythonUnitTests0(root, python) { const candidates = python ? [python] : ['python3', 'python']; const spawnErrors = []; for (const executable of candidates) { const step = await runStep0({ id: 'independent-python-unit-tests', command: executable, args: ['-m', 'unittest', 'discover', 'independent-verifiers/python', '-p', '*_test.py'], root, kind: 'process' }); if (step.tag === 'accept') return { ...step, executable }; if (step.coord !== 'Process.SpawnFailed' || step.witness?.code !== 'ENOENT') return step; spawnErrors.push(step.witness); } return { tag: 'reject', id: 'independent-python-unit-tests', coord: 'Python.NotFound', path: ['independent-verifiers/python'], witness: { reason: 'no Python executable found', spawnErrors } }; }
-function runStep0({ id, command = process.execPath, args, root, kind }) { return new Promise((resolve) => { const child = spawn(command, args, { cwd: root, stdio: ['ignore', 'pipe', 'pipe'] }); let stdout = ''; let stderr = ''; let settled = false; child.stdout.on('data', (chunk) => { stdout += chunk.toString('utf8'); }); child.stderr.on('data', (chunk) => { stderr += chunk.toString('utf8'); }); child.on('error', (error) => { if (settled) return; settled = true; resolve({ tag: 'reject', id, kind, coord: 'Process.SpawnFailed', path: [id], command: [command, ...args].join(' '), witness: normalizeError0(error) }); }); child.on('close', (code) => { if (settled) return; settled = true; const base = { id, kind, command: [command, ...args].join(' '), exitCode: code, stdoutSha256: sha256Hex0(Buffer.from(stdout, 'utf8')), stderrSha256: sha256Hex0(Buffer.from(stderr, 'utf8')), stdoutPreview: preview0(stdout), stderrPreview: preview0(stderr) }; if (code !== 0) return resolve({ tag: 'reject', ...base, coord: 'Process.NonZeroExit', path: [id], witness: { reason: 'process exited non-zero', code } }); if (kind === 'json') { try { return resolve({ tag: 'accept', ...base, json: JSON.parse(stdout) }); } catch (error) { return resolve({ tag: 'reject', ...base, coord: 'Process.BadJson', path: [id], witness: normalizeError0(error) }); } } resolve({ tag: 'accept', ...base }); }); }); }
-function fail0(step, steps) { return reject0(step.coord ?? 'Step.Reject', [step.id ?? 'unknown-step'], 'pnp verify step failed', { failedStep: step, steps }); }
-function reject0(coord, pathArray, reason, witness = {}) { return { tag: 'reject', kind: 'reject', checker: CHECKER, version: VERSION, coord, path: pathArray, witness: { reason, ...witness }, publicTheoremEmissionAllowed: false, finalTheoremReady: false, activeFinalNodeIds: [], remainingBlockers: [...BLOCKERS] }; }
-async function writeAndReturn0(root, outputPath, writeOutput, verdict) { if (writeOutput) { const p = path.join(root, outputPath); await mkdir(path.dirname(p), { recursive: true }); await writeFile(p, `${JSON.stringify(verdict, null, 2)}\n`, 'utf8'); } return { ...verdict, outputPath: writeOutput ? outputPath : null }; }
-function sameArray0(a, b) { return Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((x, i) => x === b[i]); }
-function preview0(text) { return text ? (text.length > 4000 ? `${text.slice(0, 4000)}\n...[truncated ${text.length - 4000} bytes]` : text) : ''; }
-function sha256Hex0(bytes) { return createHash('sha256').update(bytes).digest('hex'); }
-function normalizeError0(error) { return { name: error?.name ?? 'Error', message: error?.message ?? String(error), code: error?.code ?? null }; }
-function parseArgs0(argv) { const options = { root: process.cwd(), outputPath: OUTPUT, writeOutput: true, json: false, includeUnitTests: true, includeHistoricalAuditPipeline: false, includeLegacyReleaseAudit: false, python: null }; for (let i = 0; i < argv.length; i += 1) { const arg = argv[i]; if (arg === '--json') options.json = true; else if (arg === '--no-write') options.writeOutput = false; else if (arg === '--skip-unit-tests') options.includeUnitTests = false; else if (arg === '--include-historical-audit-pipeline') options.includeHistoricalAuditPipeline = true; else if (arg === '--skip-release-audit') options.includeLegacyReleaseAudit = false; else if (arg === '--include-legacy-release-audit') options.includeLegacyReleaseAudit = true; else if (arg === '--root') options.root = argv[++i]; else if (arg === '--output') options.outputPath = argv[++i]; else if (arg === '--python') options.python = argv[++i]; else if (arg === '--help' || arg === '-h') { printHelp0(); process.exit(0); } else throw new Error(`unknown argument: ${arg}`); if (argv[i] === undefined) throw new Error(`${arg} requires a value`); } return options; }
-function printHelp0() { console.log('Usage: node scripts/pnp-verify-all.mjs [--json] [--no-write] [--skip-unit-tests] [--include-historical-audit-pipeline] [--include-legacy-release-audit] [--root <path>] [--output <path>] [--python <path>]'); }
-async function main0() { let options; try { options = parseArgs0(process.argv.slice(2)); } catch (error) { const verdict = reject0('Cli.BadArgument', [], 'bad pnp verify CLI argument', normalizeError0(error)); console.error(JSON.stringify(verdict, null, 2)); process.exit(2); } const verdict = await RunPNPVerifyAll0(options); const rendered = JSON.stringify(verdict, null, 2); if (options.json || verdict.tag === 'accept') console.log(rendered); else console.error(rendered); process.exit(verdict.tag === 'accept' ? 0 : 1); }
-if (import.meta.url === `file://${process.argv[1]}`) main0();
+
+async function finish0(root, outputPath, enabled, verdict) {
+  const rendered = { ...verdict, outputPath: enabled ? outputPath : null };
+  if (enabled) {
+    const absolute = path.join(root, outputPath);
+    await mkdir(path.dirname(absolute), { recursive: true });
+    await writeFile(absolute, `${JSON.stringify(rendered, null, 2)}\n`, 'utf8');
+  }
+  return rendered;
+}
+
+function sha2560(text) {
+  return createHash('sha256').update(text, 'utf8').digest('hex');
+}
+
+function preview0(text) {
+  return text.length > 4000 ? `${text.slice(0, 4000)}\n...[truncated]` : text;
+}
+
+function normalizeError0(error) {
+  return { name: error?.name ?? 'Error', message: error?.message ?? String(error), code: error?.code ?? null };
+}
+
+function parseArgs0(argv) {
+  const options = { json: false, writeOutput: true, includeUnitTests: true };
+  for (let i = 0; i < argv.length; i += 1) {
+    const arg = argv[i];
+    if (arg === '--json') options.json = true;
+    else if (arg === '--no-write') options.writeOutput = false;
+    else if (arg === '--skip-unit-tests') options.includeUnitTests = false;
+    else if (arg === '--root') {
+      const value = argv[++i];
+      if (value === undefined) throw new Error('--root requires a value');
+      options.root = value;
+    } else if (arg === '--output') {
+      const value = argv[++i];
+      if (value === undefined) throw new Error('--output requires a value');
+      options.outputPath = value;
+    } else if (arg === '--help' || arg === '-h') options.help = true;
+    else throw new Error(`unknown argument: ${arg}`);
+  }
+  return options;
+}
+
+async function main0() {
+  let options;
+  try {
+    options = parseArgs0(process.argv.slice(2));
+    if (options.help) {
+      console.log('Usage: node scripts/pnp-verify-all.mjs [--json] [--no-write] [--skip-unit-tests] [--root <path>] [--output <path>]');
+      return;
+    }
+  } catch (error) {
+    console.error(JSON.stringify(reject0('CurrentVerification.CliArgument', [], 'invalid command-line argument', normalizeError0(error)), null, 2));
+    process.exitCode = 2;
+    return;
+  }
+  const verdict = await RunPNPVerifyAll0(options);
+  console.log(JSON.stringify(verdict, null, 2));
+  process.exitCode = verdict.tag === 'accept' ? 0 : 1;
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) await main0();

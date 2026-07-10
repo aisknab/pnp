@@ -11,12 +11,12 @@ assumption-audited Lean theorem. The active machine-readable status is
 [`status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json).
 
 Use `node pcc-formal-reconstruction-status0.mjs --json` to verify the active status boundary. The
-current `npm run pnp:verify` command checks that boundary, the fail-closed public surface, syntax,
-and regression suites. The old audit pipeline is excluded from its default step plan; acceptance by
-any retained legacy checker test does not change the formal reconstruction status.
+current `npm run pnp:verify` command checks that boundary, the closed active package surface, the
+pinned legacy-v0 archive identity, and the small current-authority suite. It cannot be configured to
+execute the historical replay; replay acceptance does not change formal-reconstruction status.
 
-Use `node pcc-formal-public-surface0.mjs --json` to verify that superseded activation and final
-release CLIs reject unless the caller explicitly supplies `--historical-replay`.
+Use `node pcc-formal-public-surface0.mjs --json` to verify that superseded activation, release,
+materialized, and theorem-checker routes are absent from the active package exports, scripts, and bins.
 
 ## Why the earlier activation was withdrawn
 
@@ -62,5 +62,7 @@ PNP-PUBLIC-THEOREM-ACTIVATION-2026-07-05-01
 PNP-UNRESTRICTED-FINAL-SOUNDNESS-RELEASE-2026-07-05-01
 ```
 
-Their files and Git history may still be inspected as legacy assertion-checker evidence until the
-archive milestone relocates them. They must not be used to infer current theorem status.
+Their files and Git history remain inspectable as subordinate legacy assertion-checker evidence.
+The byte-exact source, artifact, and document coordinates are recorded under
+[`archive/legacy-v0/`](../archive/legacy-v0/README.md). They must not be used to infer current theorem
+status.
