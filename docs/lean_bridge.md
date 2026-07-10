@@ -33,6 +33,7 @@ lakefile.lean
 lean/PNP.lean
 lean/PNP/Main.lean
 lean/PNP/NANDSemantics.lean
+lean/PNP/NANDEnumerator.lean
 lean/PNP/Complexity.lean
 lean/PNP/SAT.lean
 lean/PNP/LockedNANDMacros.lean
@@ -44,7 +45,9 @@ lean/PNP/PCCMin.lean
 lean/PNP/Bridge.lean
 lean-audit/PNPBridgeAxiomAudit.lean
 lean-audit/PNPNANDSemanticsAxiomAudit.lean
+lean-audit/PNPNANDEnumeratorAxiomAudit.lean
 docs/lean_nand_semantics.md
+docs/lean_nand_enumerator.md
 docs/lean_locked_nand_macros.md
 docs/lean_locked_nand_prefix.md
 ```
@@ -97,10 +100,22 @@ separate from the program, so projections, constants, and repeated coordinates a
 The module gives total Boolean semantics, gate-count size, extensional equivalence laws, append
 semantics, and checked zero-, one-, and two-gate examples.
 
-`DirectWireSemanticsCertificate` and its representative theorems are assumption-free under
+`DirectWireSemanticsCertificate` and every explicit declaration in the module are assumption-free under
 `#print axioms`. This milestone does not provide an enumerator, minimum-size definition, compatible
 replacement, the slack law, a locked builder, or the locked threshold. See
 `docs/lean_nand_semantics.md` for the precise boundary.
+
+## Exact-width NAND enumeration
+
+`lean/PNP/NANDEnumerator.lean` constructively lists every finite index, available source, ordered
+NAND gate, topological program, output tuple, and implementation pair at fixed input/gate/output
+widths. Membership theorems prove literal syntactic completeness, and the output tuple bridge covers
+the function-backed `DirectWireWord` pointwise. Output width zero has one empty tuple; ordered NAND
+inputs are not quotiented by commutativity.
+
+The enumerator certificate and every explicit declaration are assumption-free under the dedicated axiom audit. It does not claim a
+canonical or duplicate-free list, decide semantic equivalence, search across sizes, or compute a
+minimum. See `docs/lean_nand_enumerator.md` for the exact handoff to the next layer.
 
 ## SAT layer
 
