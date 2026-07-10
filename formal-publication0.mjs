@@ -5,9 +5,15 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '3d73056087721247b8291287c795e8d02e5de479cf3f6d1f197dabd3fab4a1aa';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '1b6f85daa9177cc685f0aeaadf9741c32ee6db107384a0501a42e1e5be14059c';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
+  'PNP.Concrete.BitString.decodePair_pair',
+  'PNP.Concrete.NatPolynomial.eval_mono',
+  'PNP.Concrete.PolynomialTimeMachine.verdict_accepts_iff',
+  'PNP.Concrete.PolynomialTimeMachine.verdict_ne_timeout',
+  'PNP.Concrete.run_succ',
+  'PNP.Concrete.run_zero',
   'PNP.DirectWire.ConditionalThresholdBoundaryPremises.fullResidualSlack_le_four',
   'PNP.DirectWire.ConditionalThresholdBoundaryPremises.satisfiable_iff_minimum_ge_succ',
   'PNP.DirectWire.Equivalent.trans',
@@ -64,7 +70,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-10-10') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-10-11') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -338,7 +344,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-10-10') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-10-11') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
@@ -356,7 +362,7 @@ function validatePublicationMap0(map) {
     'expectedRootKernelTypeSha256',
     'expectedAxiomClosureSha256',
     'expectedSourceClosureSha256',
-  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in PR10`);
+  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in PR11`);
   if (!isSha2560(map.milestoneSourceClosureSha256)
       || !isObject0(map.earnedMilestoneTheoremKernelTypeSha256)) {
     throw new Error('reviewed milestone theorem/source fingerprints are missing');
@@ -375,7 +381,7 @@ function validatePublicationMap0(map) {
     throw new Error('reviewed milestone theorem kernel-type fingerprint inventory mismatch');
   }
   if (sha256Text0(stableStringify0(map)) !== REQUIRED_PUBLICATION_MAP_SHA2560) {
-    throw new Error('formal publication milestone map drifted from the reviewed PR10 specification');
+    throw new Error('formal publication milestone map drifted from the reviewed PR11 specification');
   }
 }
 

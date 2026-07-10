@@ -99,6 +99,7 @@ test('status retains seven blockers, five project axioms, and an absent compatib
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
+  assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   for (const id of [
     'direct-wire-semantics',
     'finite-enumeration-minimum',

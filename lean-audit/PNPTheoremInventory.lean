@@ -63,6 +63,12 @@ private def isProjectDeclaration (env : Environment) (name : Name) : Bool :=
     isProjectModuleDeclaration env name
 
 private def reviewedMilestoneTheoremNames : Array Name := #[
+  `PNP.Concrete.BitString.decodePair_pair,
+  `PNP.Concrete.NatPolynomial.eval_mono,
+  `PNP.Concrete.PolynomialTimeMachine.verdict_accepts_iff,
+  `PNP.Concrete.PolynomialTimeMachine.verdict_ne_timeout,
+  `PNP.Concrete.run_succ,
+  `PNP.Concrete.run_zero,
   `PNP.DirectWire.ConditionalThresholdBoundaryPremises.fullResidualSlack_le_four,
   `PNP.DirectWire.ConditionalThresholdBoundaryPremises.satisfiable_iff_minimum_ge_succ,
   `PNP.DirectWire.Equivalent.trans,
@@ -143,7 +149,7 @@ private def inventory : CommandElabM Json := do
   return Json.mkObj [
     ("kind", toJson "PNPLeanTheoremInventory0"),
     ("version", toJson 0),
-    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-07-10-10"),
+    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-07-10-11"),
     ("leanToolchain", toJson "leanprover/lean4:v4.31.0"),
     ("rootModule", toJson "PNP"),
     ("environmentProbeComplete", toJson true),

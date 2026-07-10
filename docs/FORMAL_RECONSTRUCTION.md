@@ -42,6 +42,11 @@ bridge still depends on five disclosed project-specific axioms: `PNP.SAT`,
 `PNP.LockedNANDThreshold`, `PNP.ResidualBandExactMinimization`, `PNP.GeneratePCCPack`, and
 `PNP.CheckPCCPackexp`.
 
+The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
+decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
+execution, and proof-bearing deterministic runtime witnesses. This is a machine/cost kernel only;
+concrete P, NP, reductions, and SAT remain unformalized.
+
 ## Compiled inventory and current publication boundary
 
 `lean-audit/PNPTheoremInventory.lean` traverses `Lean.Environment.constants` after the explicit
@@ -52,10 +57,11 @@ and public copies must be byte-identical. See
 [`lean_theorem_inventory.md`](./lean_theorem_inventory.md) for the inventory contract and check
 commands.
 
-The six earned intermediate milestone rows additionally require 22 detailed compiled theorem
+The seven earned intermediate milestone rows additionally require 28 detailed compiled theorem
 candidates: exact names and theorem kinds, empty axiom closures, per-name domain-separated
 kernel-type SHA-256 values, and a pinned closure over every `lean/**/*.lean` file plus the Lean/Lake
-pins and inventory probe. Type or source drift revokes milestone credit until reviewed pins change.
+pins and inventory probe across all 25 Lean source files. Type or source drift revokes milestone
+credit until reviewed pins change.
 
 Inventory generation is deliberately separate from theorem publication. The concrete gate expects
 the compatibility theorem `PNP.Main.p_eq_np` to have the exact concrete target

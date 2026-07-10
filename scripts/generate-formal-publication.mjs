@@ -18,9 +18,9 @@ const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const TEMPLATE_PATH = 'publication/canonical_proof_report.template.tex';
 const REPORT_TEX_PATH = 'canonical_proof_report.tex';
-const STATUS_COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-10';
-const PUBLIC_SURFACE_COORDINATE = 'PUBLIC-SURFACE-BASELINE-2026-07-10-FORMAL-PUBLICATION-INVENTORY-10';
-const REPORT_COORDINATE = 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-10-10';
+const STATUS_COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-11';
+const PUBLIC_SURFACE_COORDINATE = 'PUBLIC-SURFACE-BASELINE-2026-07-10-CONCRETE-MACHINE-KERNEL-11';
+const REPORT_COORDINATE = 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-10-11';
 
 const NEW_NON_CLAIMS = Object.freeze([
   'The compiled Lean theorem inventory is declaration and axiom-dependency evidence; it does not widen any theorem beyond its exact type and stated scope.',
@@ -54,7 +54,7 @@ export async function BuildFormalPublication0(root) {
     inventoryBytes,
     sourceClosureSha256,
   );
-  if (publication.gate.passed !== false) throw new Error('PR10 publication gate must remain intentionally fail-closed');
+  if (publication.gate.passed !== false) throw new Error('PR11 publication gate must remain intentionally fail-closed');
   const mapSha256 = sha256Bytes0(mapBytes);
   const rootCandidate = inventory.compatibilityRootCandidate;
   const status = {
@@ -133,6 +133,7 @@ function renderReport0(template, status, inventory, publication) {
     ['@@INVENTORY_COORDINATE@@', texEscape0(inventory.coordinate)],
     ['@@MILESTONE_SOURCE_SHA@@', texEscape0(status.leanSourceClosureSha256)],
     ['@@MODULE_COUNT@@', String(inventory.sourceClosureModuleCount)],
+    ['@@DETAILED_MILESTONE_COUNT@@', String(inventory.milestoneCandidates.length)],
     ['@@EXCLUDED_PRIVATE_COUNT@@', String(inventory.excludedPrivateDeclarationCount)],
     ['@@GATE_ROWS@@', Object.entries(publication.gate.subchecks)
       .map(([name, value]) => `${texEscape0(name)} & ${value ? '\\statustrue' : '\\statusfalse'} \\\\`)

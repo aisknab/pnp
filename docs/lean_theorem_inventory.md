@@ -13,7 +13,7 @@ The generated inventory is mirrored byte-for-byte at:
 - [`public/pnp-theorem-inventory.json`](../public/pnp-theorem-inventory.json), the public mirror.
 
 The inventory records the pinned toolchain and root module, declaration kinds, each declaration's
-compiled axiom closure, the source-module closure, detailed compiled types for 22 reviewed
+compiled axiom closure, the source-module closure, detailed compiled types for 28 reviewed
 milestone theorems, excluded private compiler auxiliaries, and the five disclosed project-specific
 axioms. Deterministic ordering and canonical JSON encoding
 make the two mirrors and their digest reproducible. This inventory is evidence about the compiled
@@ -50,10 +50,10 @@ They are not on the publication gate's permitted Lean-standard axiom allowlist.
 ## Reviewed intermediate milestone bindings
 
 Intermediate milestone credit has a separate evidence boundary from theorem publication. Each of
-the 22 required theorems for the six earned rows must have its reviewed per-name,
+the 28 required theorems for the seven earned rows must have its reviewed per-name,
 domain-separated compiled kernel-type SHA-256 in the publication map, retain an empty compiled
 axiom closure, and match by exact declaration name and theorem kind. The milestone source-closure
-hash must also match. That closure covers all 23 files under
+hash must also match. That closure covers all 25 files under
 `lean/**/*.lean` plus `lean-toolchain`, `lakefile.lean`, `lake-manifest.json`, and the compiled
 inventory probe. A same-name theorem with a weakened type, or a change to any Lean source or pin,
 revokes milestone credit until the reviewed map is deliberately updated. These non-null milestone

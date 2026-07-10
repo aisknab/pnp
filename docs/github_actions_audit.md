@@ -13,7 +13,8 @@ from current theorem status.
 - `.github/workflows/lean-bridge.yml` verifies the pinned Elan archive and exact Lean/Lake versions,
   audits the complete Lean source closure, builds the explicit `PNP` root, generates its public
   declaration inventory from `Lean.Environment.constants` plus `Lean.collectAxioms`, and prints
-  the focused axiom transcripts for enforced zero-axiom direct-wire semantics, enumerator, finite truth-table,
+  the focused axiom transcripts for the 41-declaration concrete bitstring/polynomial kernel, the
+  38-declaration finite-rule machine kernel, and enforced zero-axiom direct-wire semantics, enumerator, finite truth-table,
   exhaustive reference-minimum, concrete framed composition/slack, typed locked-NAND candidate,
   semantic output-lower-bound, source-accounting, finite local-baseline, and conditional
   threshold-boundary audits plus the explicit-list residual-route audit when Lean inputs change.
