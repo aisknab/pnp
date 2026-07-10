@@ -15,9 +15,10 @@ from current theorem status.
   inventory plus enforced zero-axiom direct-wire semantics, enumerator, finite truth-table,
   exhaustive reference-minimum, concrete framed composition/slack, typed locked-NAND candidate,
   semantic output-lower-bound, source-accounting, finite local-baseline, and conditional
-  threshold-boundary audits when Lean inputs change. Each transcript has an exact declaration
-  count, so a truncated audit fails closed. The five locked-NAND transcripts require exactly 48,
-  25, 23, 30, and 32 clean declarations.
+  threshold-boundary audits plus the explicit-list residual-route audit when Lean inputs change.
+  Each transcript has an exact declaration count, so a truncated audit fails closed. The five
+  locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual
+  routes require 30.
 - `.github/workflows/legacy-v0-replay.yml` is manual only. It replays the immutable historical
   checker coordinates and uploads a non-authoritative transcript.
 
