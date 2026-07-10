@@ -5,9 +5,17 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 
+import {
+  ComputeLeanSourceClosureSha2560,
+  DeriveFormalPublication0,
+  FORMAL_PUBLICATION_MAP_PATH0,
+  LEAN_INVENTORY_PATH0,
+  LEAN_INVENTORY_PUBLIC_PATH0,
+} from './formal-publication0.mjs';
+
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-09';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-10';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -23,11 +31,11 @@ export const FORMAL_RECONSTRUCTION_BLOCKERS0 = Object.freeze([
 ]);
 
 const PROJECT_SPECIFIC_AXIOM_INVENTORY = Object.freeze([
-  'PNP.SAT',
+  'PNP.CheckPCCPackexp',
+  'PNP.GeneratePCCPack',
   'PNP.LockedNANDThreshold',
   'PNP.ResidualBandExactMinimization',
-  'PNP.GeneratePCCPack',
-  'PNP.CheckPCCPackexp',
+  'PNP.SAT',
 ]);
 
 const LOCKED_NAND_THRESHOLD_HOSTILE_REVIEW_LEMMA_INVENTORY = Object.freeze([
@@ -76,6 +84,10 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDLocalBaselineAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDThresholdBoundaryAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualRoutesAxiomAudit.lean',
+  'node scripts/export-lean-theorem-inventory.mjs --check',
+  'node scripts/generate-formal-publication.mjs --check',
+  'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
+  'npm run report:check',
 ]);
 
 const NON_CLAIMS = Object.freeze([
@@ -101,6 +113,10 @@ const NON_CLAIMS = Object.freeze([
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
   'The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.',
+  'The compiled Lean theorem inventory is declaration and axiom-dependency evidence; it does not widen any theorem beyond its exact type and stated scope.',
+  'PNP.PEqualsNP uses abstract string-handle witnesses rather than a concrete standard complexity model and is categorically ineligible for public theorem activation.',
+  'The expected concrete target and reviewed kernel fingerprints are intentionally absent in this pass, so the concrete publication gate fails closed.',
+  'The current canonical TeX and PDF are generated non-claiming reconstruction reports; the historical 56-page direct-claim report remains historical audit material only.',
 ]);
 
 const SUPERSEDED_COORDINATES = Object.freeze([
@@ -159,8 +175,6 @@ const SUBORDINATE_LEGACY_SURFACES = Object.freeze([
   'release/RELEASE_BLOCKER_CLEARANCE.json',
   'release/RELEASE_BLOCKER_CLEARANCE.md',
   'review/EXTERNAL_REVIEW_STATUS.md',
-  'canonical_proof_report.tex',
-  'canonical_proof_report.pdf',
   'REVIEWER_MAP.md',
   'TRUST_BASE.md',
   'PUBLIC_REVIEW.json',
@@ -218,16 +232,6 @@ const EXACT_FIELDS = Object.freeze({
   claimStatus: 'formal-reconstruction-in-progress',
   currentStatusAuthority: true,
   targetTheorem: 'P = NP',
-  mathematicalTheoremEstablished: false,
-  publicTheoremEmissionAllowed: false,
-  publicTheoremStatement: null,
-  publicTheoremConclusion: null,
-  finalTheoremReady: false,
-  internalFinalTheoremReady: false,
-  unrestrictedFinalSoundnessDischarged: false,
-  uniformFinalSoundnessProved: false,
-  satInPConclusionAccepted: false,
-  pEqualsNPConclusionAccepted: false,
   leanToolchain: 'leanprover/lean4:v4.31.0',
   leanCompilerVersion: '4.31.0',
   leanCompilerCommit: '68218e876d2a38b1985b8590fff244a83c321783',
@@ -330,18 +334,69 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-10-EXPLICIT-RESIDUAL-ROUTES-09',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-10-FORMAL-PUBLICATION-INVENTORY-10',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
   reconstructionNotice: 'docs/FORMAL_RECONSTRUCTION.md',
 });
 
+export function BuildFormalReconstructionBaseStatus0() {
+  return {
+    ...EXACT_FIELDS,
+    activeFinalNodeIds: [],
+    activeCoreWorkflows: [...ACTIVE_CORE_WORKFLOWS],
+    historicalReplayWorkflows: [...HISTORICAL_REPLAY_WORKFLOWS],
+    activeCompanionWorkflows: [...ACTIVE_COMPANION_WORKFLOWS],
+    supersededCoordinates: [...SUPERSEDED_COORDINATES],
+    subordinateLegacySurfaces: [...SUBORDINATE_LEGACY_SURFACES],
+    subordinateLegacySurfaceRoots: [...SUBORDINATE_LEGACY_SURFACE_ROOTS],
+    remainingFormalObligations: [...FORMAL_RECONSTRUCTION_BLOCKERS0],
+    remainingBlockers: [...FORMAL_RECONSTRUCTION_BLOCKERS0],
+    projectSpecificAxiomInventory: [...PROJECT_SPECIFIC_AXIOM_INVENTORY],
+    lockedNANDThresholdHostileReviewLemmaInventory: [
+      ...LOCKED_NAND_THRESHOLD_HOSTILE_REVIEW_LEMMA_INVENTORY,
+    ],
+    leanLockedNANDThresholdPremiseInventory: [...LOCKED_NAND_THRESHOLD_PREMISE_INVENTORY],
+    leanLockedNANDThresholdMissingInstantiationInventory: [
+      ...LOCKED_NAND_THRESHOLD_MISSING_INSTANTIATION_INVENTORY,
+    ],
+    verificationCommands: [...VERIFICATION_COMMANDS],
+    nonClaims: [...NON_CLAIMS],
+  };
+}
+
 export async function CheckFormalReconstructionStatus0(options = {}) {
   const root = path.resolve(options.root ?? process.cwd());
   const outputPath = options.outputPath ?? OUTPUT_PATH;
   const writeOutput = options.writeOutput ?? true;
   try {
+    const inventoryBytes = await readFile(path.join(root, LEAN_INVENTORY_PATH0));
+    const publicInventoryBytes = await readFile(path.join(root, LEAN_INVENTORY_PUBLIC_PATH0));
+    if (!inventoryBytes.equals(publicInventoryBytes)) {
+      return write0(root, outputPath, writeOutput, reject0(
+        'FormalReconstructionStatus.InventoryMirrorMismatch',
+        [LEAN_INVENTORY_PUBLIC_PATH0],
+        'public Lean theorem inventory must byte-for-byte mirror the status inventory',
+      ));
+    }
+    const publicationMapBytes = await readFile(path.join(root, FORMAL_PUBLICATION_MAP_PATH0));
+    const inventory = JSON.parse(inventoryBytes.toString('utf8'));
+    const publicationMap = JSON.parse(publicationMapBytes.toString('utf8'));
+    const sourceClosureSha256 = await ComputeLeanSourceClosureSha2560(root, inventory);
+    const publication = DeriveFormalPublication0(
+      inventory,
+      publicationMap,
+      inventoryBytes,
+      sourceClosureSha256,
+    );
+    const publicationExpected = publicationExpected0(
+      publication,
+      inventory,
+      publicationMap,
+      sha2560(publicationMapBytes),
+      sourceClosureSha256,
+    );
     const statusRead = await readJson0({
       root,
       filePath: options.statusPath ?? STATUS_PATH,
@@ -360,9 +415,9 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
     });
     if (siteRead.tag === 'reject') return write0(root, outputPath, writeOutput, siteRead);
 
-    const statusCheck = validateStatus0(statusRead.value, STATUS_PATH);
+    const statusCheck = validateStatus0(statusRead.value, STATUS_PATH, publicationExpected);
     if (statusCheck.tag === 'reject') return write0(root, outputPath, writeOutput, statusCheck);
-    const siteCheck = validateStatus0(siteRead.value, SITE_PATH);
+    const siteCheck = validateStatus0(siteRead.value, SITE_PATH, publicationExpected);
     if (siteCheck.tag === 'reject') return write0(root, outputPath, writeOutput, siteCheck);
 
     if (!statusRead.bytes.equals(siteRead.bytes)) {
@@ -382,16 +437,7 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       claimStatus: 'formal-reconstruction-status-accepted',
       formalReconstructionStatusAccepted: true,
       targetTheorem: 'P = NP',
-      mathematicalTheoremEstablished: false,
-      publicTheoremEmissionAllowed: false,
-      publicTheoremStatement: null,
-      publicTheoremConclusion: null,
-      finalTheoremReady: false,
-      internalFinalTheoremReady: false,
-      unrestrictedFinalSoundnessDischarged: false,
-      uniformFinalSoundnessProved: false,
-      satInPConclusionAccepted: false,
-      pEqualsNPConclusionAccepted: false,
+      ...publication.emissionFields,
       leanToolchain: 'leanprover/lean4:v4.31.0',
       leanCompilerVersion: '4.31.0',
       leanCompilerCommit: '68218e876d2a38b1985b8590fff244a83c321783',
@@ -481,9 +527,9 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       legacySyntheticLockedNANDM2HonestDisplayedGateCount: 90,
       legacySyntheticLockedNANDM2MetadataConsistentDisplayedGateCount: 99,
       legacySyntheticLockedNANDM2StoredDisplayedGateCount: 95,
-      rootLeanTheoremPresent: false,
-      rootLeanTheoremBuilt: false,
-      rootLeanTheoremAxiomAuditPassed: false,
+      rootLeanTheoremPresent: publicationExpected.rootLeanTheoremPresent,
+      rootLeanTheoremBuilt: publicationExpected.rootLeanTheoremBuilt,
+      rootLeanTheoremAxiomAuditPassed: publicationExpected.rootLeanTheoremAxiomAuditPassed,
       projectSpecificAxiomsRemaining: true,
       projectSpecificAxiomInventory: [...PROJECT_SPECIFIC_AXIOM_INVENTORY],
       lockedNANDThresholdHostileReviewLemmaInventory: [...LOCKED_NAND_THRESHOLD_HOSTILE_REVIEW_LEMMA_INVENTORY],
@@ -498,6 +544,8 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       siteStatusPayload: SITE_PATH,
       statusSha256: sha2560(statusRead.bytes),
       siteStatusSha256: sha2560(siteRead.bytes),
+      leanTheoremInventorySha256: publication.inventorySha256,
+      concretePublicationGatePassed: publication.gate.passed,
     });
   } catch (error) {
     return write0(root, outputPath, writeOutput, reject0(
@@ -509,10 +557,56 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
   }
 }
 
-function validateStatus0(status, label) {
+function publicationExpected0(publication, inventory, publicationMap, publicationMapSha256, sourceClosureSha256) {
+  const rootCandidate = inventory.compatibilityRootCandidate;
+  return {
+    ...publication.emissionFields,
+    rootLeanTheoremPresent: rootCandidate !== null,
+    rootLeanTheoremBuilt: rootCandidate !== null
+      && publication.gate.subchecks.compatibilityRootIsTheorem
+      && publication.gate.subchecks.compatibilityRootHasExactConcreteType,
+    rootLeanTheoremAxiomAuditPassed: rootCandidate !== null
+      && publication.gate.subchecks.compatibilityRootIsTheorem
+      && publication.gate.subchecks.compatibilityRootHasExactConcreteType
+      && rootCandidate.axioms.every((name) => publication.gate.allowedLeanStandardAxioms.includes(name)),
+    sorryOrAdmitInRootDependencyClosure: rootCandidate === null
+      ? null
+      : rootCandidate.axioms.some((name) => name === 'sorryAx'),
+    standardComplexityModelFormalized: publication.gate.subchecks.standardComplexityModelEligible,
+    abstractPEqualsNPPublicationEligible: false,
+    publicationStatusDerivedOnlyFromConcreteGate: true,
+    leanTheoremInventoryCoordinate: inventory.coordinate,
+    leanTheoremInventoryPath: LEAN_INVENTORY_PATH0,
+    leanTheoremInventoryPublicPath: LEAN_INVENTORY_PUBLIC_PATH0,
+    leanTheoremInventorySha256: publication.inventorySha256,
+    leanTheoremInventoryGeneratedFromCompiledEnvironment: true,
+    leanTheoremInventoryUsesEnvironmentConstants: true,
+    leanTheoremInventoryUsesCollectAxioms: true,
+    leanTheoremInventoryDeclarationCount: inventory.declarationCount,
+    leanTheoremInventoryExcludedPrivateDeclarationCount: inventory.excludedPrivateDeclarationCount,
+    leanTheoremInventoryTheoremCount: inventory.theoremCount,
+    leanTheoremInventoryAssumptionFreeTheoremCount: inventory.assumptionFreeTheoremCount,
+    leanTheoremInventorySourceClosureModuleCount: inventory.sourceClosureModuleCount,
+    leanSourceClosureSha256: sourceClosureSha256,
+    formalPublicationMapCoordinate: publicationMap.coordinate,
+    formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
+    formalPublicationMapSha256: publicationMapSha256,
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-10-10',
+    canonicalReportSource: 'canonical_proof_report.tex',
+    canonicalReportPdf: 'canonical_proof_report.pdf',
+    canonicalReportDerivedFromLeanInventory: true,
+    concretePublicationGate: publication.gate,
+    formalPublicationMilestones: publication.milestones,
+  };
+}
+
+function validateStatus0(status, label, publicationExpected) {
   if (!plainObject0(status)) return reject0('FormalReconstructionStatus.Shape', [label], 'status payload must be an object');
+  const expectedPrimitiveFields = { ...EXACT_FIELDS, ...publicationExpected };
+  delete expectedPrimitiveFields.concretePublicationGate;
+  delete expectedPrimitiveFields.formalPublicationMilestones;
   const expectedKeys = [
-    ...Object.keys(EXACT_FIELDS),
+    ...Object.keys(expectedPrimitiveFields),
     'activeFinalNodeIds',
     'activeCoreWorkflows',
     'historicalReplayWorkflows',
@@ -528,6 +622,8 @@ function validateStatus0(status, label) {
     'leanLockedNANDThresholdMissingInstantiationInventory',
     'verificationCommands',
     'nonClaims',
+    'concretePublicationGate',
+    'formalPublicationMilestones',
   ].sort();
   const actualKeys = Object.keys(status).sort();
   if (!sameArray0(actualKeys, expectedKeys)) {
@@ -538,13 +634,25 @@ function validateStatus0(status, label) {
       extraKeys: actualKeys.filter((key) => !expectedKeys.includes(key)),
     });
   }
-  for (const [field, expected] of Object.entries(EXACT_FIELDS)) {
+  for (const [field, expected] of Object.entries(expectedPrimitiveFields)) {
     if (status[field] !== expected) {
       return reject0('FormalReconstructionStatus.Field', [label, field], 'status field mismatch', {
         expected,
         actual: status[field],
       });
     }
+  }
+  if (stableStringify0(status.concretePublicationGate)
+      !== stableStringify0(publicationExpected.concretePublicationGate)) {
+    return reject0('FormalReconstructionStatus.ConcretePublicationGate',
+      [label, 'concretePublicationGate'],
+      'concrete publication gate must be derived from the compiled Lean inventory');
+  }
+  if (stableStringify0(status.formalPublicationMilestones)
+      !== stableStringify0(publicationExpected.formalPublicationMilestones)) {
+    return reject0('FormalReconstructionStatus.PublicationMilestones',
+      [label, 'formalPublicationMilestones'],
+      'formal publication milestones must be derived from exact Lean declarations');
   }
   if (!sameArray0(status.activeFinalNodeIds, [])) {
     return reject0('FormalReconstructionStatus.ActiveFinalNodes', [label, 'activeFinalNodeIds'], 'active final nodes must be empty');

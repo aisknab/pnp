@@ -19,11 +19,14 @@ stages.
 ```bash
 lake build PNP
 lake env lean -DwarningAsError=true lean-audit/PNPBridgeAxiomAudit.lean
+node scripts/export-lean-theorem-inventory.mjs --check
 ```
 
 The GitHub workflow `.github/workflows/lean-bridge.yml` verifies a checksum-pinned Elan 4.2.3
 archive, installs the exact `leanprover/lean4:v4.31.0` toolchain, builds the explicit `PNP` root, and
-prints the axiom dependencies of both the root-status declarations and conditional bridge.
+prints the axiom dependencies of both the root-status declarations and conditional bridge. It also
+checks the canonical inventory generated from the compiled environment and the fail-closed formal
+publication/report outputs.
 
 ## Files
 
@@ -54,6 +57,7 @@ lean/PNP/ZeroSlack.lean
 lean/PNP/PCCMin.lean
 lean/PNP/Bridge.lean
 lean-audit/PNPBridgeAxiomAudit.lean
+lean-audit/PNPTheoremInventory.lean
 lean-audit/PNPNANDSemanticsAxiomAudit.lean
 lean-audit/PNPNANDEnumeratorAxiomAudit.lean
 lean-audit/PNPNANDTruthTableAxiomAudit.lean
@@ -73,6 +77,7 @@ docs/lean_locked_nand_prefix.md
 docs/lean_locked_nand_baseline.md
 docs/lean_locked_nand_threshold_boundary.md
 docs/lean_residual_routes.md
+docs/lean_theorem_inventory.md
 ```
 
 ## Complexity bridge
@@ -105,7 +110,9 @@ theorem np_complete_in_p_implies_p_eq_np
     (hInP : PClass L) : PEqualsNP
 ```
 
-The witness objects still use abstract code handles. Concrete machine syntax, semantics, and polynomial bounds remain future work.
+The witness objects still use abstract code handles. Concrete machine syntax, semantics, and
+polynomial bounds remain future work. In particular, the abstract proposition `PNP.PEqualsNP` is
+not eligible for the concrete publication gate.
 
 ## Root status
 
@@ -114,6 +121,32 @@ that formal reconstruction is in progress, external assumptions remain, and no p
 been released. There is deliberately no declaration named `PNP.Main.p_eq_np` in the current root.
 Building this status is evidence that the complete import root compiles; the status is not a theorem
 of `P = NP`.
+
+## Compiled theorem inventory and publication gate
+
+After the root builds, `lean-audit/PNPTheoremInventory.lean` traverses
+`Lean.Environment.constants` and applies `Lean.collectAxioms` to each public declaration in the
+compiled `PNP` module closure. This avoids treating source-text parsing as kernel declaration or
+dependency evidence. The deterministic output is mirrored byte-for-byte at
+[`status/LEAN_THEOREM_INVENTORY.json`](../status/LEAN_THEOREM_INVENTORY.json) and
+[`public/pnp-theorem-inventory.json`](../public/pnp-theorem-inventory.json).
+
+For the six earned intermediate rows, the inventory also carries 22 detailed theorem types. Credit
+requires exact names/kinds, empty axiom closures, per-name domain-separated kernel-type SHA-256
+matches, and the pinned closure of all Lean sources plus toolchain/Lake pins and the inventory
+probe. This milestone binding is separate from the concrete publication gate.
+
+Publication is controlled by a separate, fail-closed gate for compatibility declaration
+`PNP.Main.p_eq_np` and concrete target `PNP.Main.ConcretePEqualsNP`. Both are absent. The expected
+target type/value, root type, axiom-closure, and source-closure fingerprints are intentionally
+`null`; unset fingerprints do not match and cannot activate the gate. The abstract
+`PNP.PEqualsNP` bridge remains ineligible. See
+[`lean_theorem_inventory.md`](./lean_theorem_inventory.md) for the full contract and commands.
+
+The inventory and false gate generate the current root TeX/PDF: a concise six-page
+formal-reconstruction report with no theorem emission. It replaces the historical 56-page claim
+manuscript at the repository root; that historical artifact is available only through the pinned
+legacy coordinate recorded under [`archive/legacy-v0/`](../archive/legacy-v0/README.md).
 
 ## Direct-wire NAND semantics
 

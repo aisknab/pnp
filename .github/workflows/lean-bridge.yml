@@ -5,8 +5,26 @@ on:
     paths:
       - 'lean-toolchain'
       - 'lakefile.lean'
+      - 'lake-manifest.json'
       - 'lean/**'
       - 'lean-audit/**'
+      - 'formal-publication0.mjs'
+      - 'pcc-formal-reconstruction-status0.mjs'
+      - 'pcc-formal-public-surface0.mjs'
+      - 'package.json'
+      - 'scripts/export-lean-theorem-inventory.mjs'
+      - 'scripts/generate-formal-publication.mjs'
+      - 'scripts/build-canonical-report.mjs'
+      - 'scripts/pnp-verify-all.mjs'
+      - 'publication/**'
+      - 'status/LEAN_THEOREM_INVENTORY.json'
+      - 'status/FORMAL_RECONSTRUCTION_STATUS.json'
+      - 'public/pnp-theorem-inventory.json'
+      - 'public/pnp-status.json'
+      - 'canonical_proof_report.tex'
+      - 'canonical_proof_report.pdf'
+      - 'audits/lean-theorem-inventory0.test.mjs'
+      - 'audits/formal-publication0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
@@ -23,6 +41,10 @@ on:
       - 'docs/lean_locked_nand_baseline.md'
       - 'docs/lean_locked_nand_threshold_boundary.md'
       - 'docs/lean_residual_routes.md'
+      - 'docs/lean_theorem_inventory.md'
+      - 'docs/FORMAL_RECONSTRUCTION.md'
+      - 'docs/github_actions_audit.md'
+      - 'README.md'
       - '.github/workflows/lean-bridge.yml'
   push:
     branches:
@@ -30,8 +52,26 @@ on:
     paths:
       - 'lean-toolchain'
       - 'lakefile.lean'
+      - 'lake-manifest.json'
       - 'lean/**'
       - 'lean-audit/**'
+      - 'formal-publication0.mjs'
+      - 'pcc-formal-reconstruction-status0.mjs'
+      - 'pcc-formal-public-surface0.mjs'
+      - 'package.json'
+      - 'scripts/export-lean-theorem-inventory.mjs'
+      - 'scripts/generate-formal-publication.mjs'
+      - 'scripts/build-canonical-report.mjs'
+      - 'scripts/pnp-verify-all.mjs'
+      - 'publication/**'
+      - 'status/LEAN_THEOREM_INVENTORY.json'
+      - 'status/FORMAL_RECONSTRUCTION_STATUS.json'
+      - 'public/pnp-theorem-inventory.json'
+      - 'public/pnp-status.json'
+      - 'canonical_proof_report.tex'
+      - 'canonical_proof_report.pdf'
+      - 'audits/lean-theorem-inventory0.test.mjs'
+      - 'audits/formal-publication0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
@@ -48,6 +88,10 @@ on:
       - 'docs/lean_locked_nand_baseline.md'
       - 'docs/lean_locked_nand_threshold_boundary.md'
       - 'docs/lean_residual_routes.md'
+      - 'docs/lean_theorem_inventory.md'
+      - 'docs/FORMAL_RECONSTRUCTION.md'
+      - 'docs/github_actions_audit.md'
+      - 'README.md'
       - '.github/workflows/lean-bridge.yml'
   workflow_dispatch:
 
@@ -69,6 +113,16 @@ jobs:
           show-progress: false
           persist-credentials: false
           set-safe-directory: false
+
+      - name: Install hosted-runner report dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            latexmk \
+            lmodern \
+            poppler-utils \
+            texlive-latex-base \
+            texlive-latex-recommended
 
       - name: Install pinned Elan and Lean
         env:
@@ -94,10 +148,19 @@ jobs:
           grep -F 'Lake version 5.0.0-src+68218e8 (Lean version 4.31.0)' /tmp/lake-version.txt
 
       - name: Audit explicit root and assumption inventory
-        run: node --test audits/lean-root-target0.test.mjs audits/lean-nand-semantics0.test.mjs audits/lean-nand-enumerator0.test.mjs audits/lean-nand-reference-minimum0.test.mjs audits/lean-locked-nand-baseline0.test.mjs audits/lean-locked-nand-threshold-boundary0.test.mjs audits/lean-residual-routes0.test.mjs
+        run: node --test audits/lean-root-target0.test.mjs audits/lean-nand-semantics0.test.mjs audits/lean-nand-enumerator0.test.mjs audits/lean-nand-reference-minimum0.test.mjs audits/lean-locked-nand-baseline0.test.mjs audits/lean-locked-nand-threshold-boundary0.test.mjs audits/lean-residual-routes0.test.mjs audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs
 
       - name: Build explicit PNP root
         run: lake build PNP
+
+      - name: Re-export compiled theorem inventory
+        run: npm run formal:inventory:check
+
+      - name: Verify generated publication status and report source
+        run: npm run formal:publication:check
+
+      - name: Rebuild and verify canonical report PDF
+        run: npm run report:check
 
       - name: Print root and conditional-bridge axioms
         run: lake env lean -DwarningAsError=true lean-audit/PNPBridgeAxiomAudit.lean

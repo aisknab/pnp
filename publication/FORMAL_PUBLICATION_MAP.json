@@ -1,0 +1,154 @@
+{
+  "kind": "PNPFormalPublicationMap0",
+  "version": 0,
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-10-10",
+  "gate": {
+    "compatibilityRootName": "PNP.Main.p_eq_np",
+    "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
+    "standardComplexityModelEligible": false,
+    "expectedConcreteTargetKernelTypeSha256": null,
+    "expectedConcreteTargetKernelValueSha256": null,
+    "expectedRootKernelTypeSha256": null,
+    "expectedAxiomClosureSha256": null,
+    "expectedSourceClosureSha256": null,
+    "allowedLeanStandardAxioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "milestoneSourceClosureSha256": "0c96305d4f2235aae359c865e91e0f58cafa4d20d9b040a16e992846360cfa3f",
+  "earnedMilestoneTheoremKernelTypeSha256": {
+    "PNP.DirectWire.ConditionalThresholdBoundaryPremises.fullResidualSlack_le_four": "824e81b304d52fb83d75e95ac136e06ced495ab460d6d621503e2444ee08c93e",
+    "PNP.DirectWire.ConditionalThresholdBoundaryPremises.satisfiable_iff_minimum_ge_succ": "d282ec937186b2c041cf999bbee8ff016d4c9f5b71e65c504a8c4a7e7b8ec971",
+    "PNP.DirectWire.Equivalent.trans": "7a931de781c961c3ed9386ca2c615fc8531604efc94b823839e5e0a0bf164709",
+    "PNP.DirectWire.StrictEquivalentGain.strictResidualDescent": "f936c792a4f8f45d27da4512b16ba28222dc64b81f50016c9d30433fbfadae6e",
+    "PNP.DirectWire.andCircuit_spec": "43c4801753810dec20c372ae4eac3f248e03f62e084c80089aacbe38dbeaac50",
+    "PNP.DirectWire.compatibleReplacement_framed": "450f861075f4eb11bb719e7248543c09ab9239de1ad5c1ab5c721c640da3dd2b",
+    "PNP.DirectWire.constantOneDirect_referenceMinimum": "f1f6cb0d57db26a915ee2baabd95118c614ec6b89b5625f930a443f139973323",
+    "PNP.DirectWire.constantZeroDirect_referenceMinimum": "f76206ba0e7b20eb0c278ec735c73098404447def9af32234a3a4e4bad31e35a",
+    "PNP.DirectWire.equalityDirect_referenceMinimum": "df8212be9d5cb824c6eee4d6f59954c350977c7d5b10ed161ef5e68815c8a812",
+    "PNP.DirectWire.equivalentBool_eq_true_iff": "b2cf29ad1f85461765ba334a1b5adcb48605afa4406db880679f71d366c87061",
+    "PNP.DirectWire.exactWidthEnumeration_complete": "e5e7cbd1b18fcdb7943ea30da130e08a0ccb710bc3cc2ed1a441b3e9dbcc7274",
+    "PNP.DirectWire.firstListedGain_none_no_listed_gain": "9bdff89efdfa86052af93f9238871157b28f37c4b50fba1b629790b270c2834d",
+    "PNP.DirectWire.firstListedGain_sound": "0dcaf9dc994ea4aa1ff2bfc0f335b5fbdc43cb4db860a80dfe75a7a96df1a759",
+    "PNP.DirectWire.framedGlobalSlackLaw": "ca4a7a923afa7264fa8394165018bf99e79370fd676c76a63f6ebf0daa77151a",
+    "PNP.DirectWire.lockedBaselineCount_report_formula": "39a494358dd5d78afa1b12e83fb2f455d9ff6c2495287b6e35858836767b79b1",
+    "PNP.DirectWire.nandCircuit_spec": "1bf0b598c94cb351ae92c47ef2d686a086d3b55c84c56283aefa937f5a30241b",
+    "PNP.DirectWire.prefixAndDirect_referenceMinimum": "831dea53cb4c0420136d9dab078b9b8ab0ef89760b179ecb2ca39ab215ec8b4a",
+    "PNP.DirectWire.referenceMinimum_invariant": "f6b8c8f2483a8397ffe369ee7fd0873af9f883e2d74bf1ebbede2a915a0464e2",
+    "PNP.DirectWire.residualSlack_eq_zero_iff_minimum": "8ea9f50b981a61811209e0a3d8cbe820b6a1793fc42b9eb6121519bc98414b84",
+    "PNP.DirectWire.strictEquivalentGainBool_complete": "849f9dfaa63acbd5f7bcdf28eac5552c2862aba5994727b2535cc0832bc796ec",
+    "PNP.DirectWire.traceDirect_referenceMinimum": "cbef9349e46dd570d0e02c81170ea1257f3d1a76a49db39123074892e3196ea2",
+    "PNP.DirectWire.unresolved_positiveSlack_regression": "db564cb64914fa82c134c8e4e2dfbef40a143e1fe78b2ceb8f81dece3b895977"
+  },
+  "milestones": [
+    {
+      "id": "direct-wire-semantics",
+      "title": "Typed direct-wire NAND semantics",
+      "classification": "formalized",
+      "scope": "Typed topological Boolean NAND programs and ordered multi-output direct-wire semantics.",
+      "requiredTheorems": [
+        "PNP.DirectWire.Equivalent.trans",
+        "PNP.DirectWire.andCircuit_spec",
+        "PNP.DirectWire.nandCircuit_spec"
+      ],
+      "nonClaim": "This does not establish circuit minimization, SAT, or P = NP."
+    },
+    {
+      "id": "finite-enumeration-minimum",
+      "title": "Finite enumeration, equivalence, and reference minimum",
+      "classification": "formalized",
+      "scope": "Exhaustive finite Boolean direct-wire search under the empty-profile reference model.",
+      "requiredTheorems": [
+        "PNP.DirectWire.equivalentBool_eq_true_iff",
+        "PNP.DirectWire.exactWidthEnumeration_complete",
+        "PNP.DirectWire.referenceMinimum_invariant",
+        "PNP.DirectWire.residualSlack_eq_zero_iff_minimum"
+      ],
+      "nonClaim": "No polynomial-runtime result is obtained from this exhaustive reference search."
+    },
+    {
+      "id": "framed-replacement-slack",
+      "title": "Concrete framed replacement and slack",
+      "classification": "formalized",
+      "scope": "The concrete serial framed context with support outputs and explicit bypass wires.",
+      "requiredTheorems": [
+        "PNP.DirectWire.compatibleReplacement_framed",
+        "PNP.DirectWire.framedGlobalSlackLaw"
+      ],
+      "nonClaim": "This is not an arbitrary-support replacement theorem for the report's global family."
+    },
+    {
+      "id": "locked-nand-local-baseline",
+      "title": "Locked-NAND local candidates and baseline accounting",
+      "classification": "formalized",
+      "scope": "Typed local macro candidates, source-derived counts, and five finite local square baselines.",
+      "requiredTheorems": [
+        "PNP.DirectWire.equalityDirect_referenceMinimum",
+        "PNP.DirectWire.lockedBaselineCount_report_formula",
+        "PNP.DirectWire.constantOneDirect_referenceMinimum",
+        "PNP.DirectWire.constantZeroDirect_referenceMinimum",
+        "PNP.DirectWire.prefixAndDirect_referenceMinimum",
+        "PNP.DirectWire.traceDirect_referenceMinimum"
+      ],
+      "nonClaim": "Local minima are not a global BaselineDistinct or locked-NAND threshold theorem."
+    },
+    {
+      "id": "locked-nand-conditional-threshold",
+      "title": "Conditional locked-NAND threshold boundary",
+      "classification": "formalized-with-premises",
+      "scope": "A proof-bearing six-premise candidate boundary for an arbitrary satisfiable proposition.",
+      "requiredTheorems": [
+        "PNP.DirectWire.ConditionalThresholdBoundaryPremises.fullResidualSlack_le_four",
+        "PNP.DirectWire.ConditionalThresholdBoundaryPremises.satisfiable_iff_minimum_ge_succ"
+      ],
+      "nonClaim": "The premises are not instantiated by a uniform SAT-to-locked-NAND builder."
+    },
+    {
+      "id": "explicit-residual-routes",
+      "title": "Fail-closed explicit-list residual routes",
+      "classification": "formalized-explicit-list-only",
+      "scope": "Executable strict-gain search over a caller-supplied finite implementation list.",
+      "requiredTheorems": [
+        "PNP.DirectWire.StrictEquivalentGain.strictResidualDescent",
+        "PNP.DirectWire.strictEquivalentGainBool_complete",
+        "PNP.DirectWire.firstListedGain_sound",
+        "PNP.DirectWire.firstListedGain_none_no_listed_gain",
+        "PNP.DirectWire.unresolved_positiveSlack_regression"
+      ],
+      "nonClaim": "Unresolved excludes no gain outside the supplied list and cannot imply ZeroSlack."
+    },
+    {
+      "id": "global-locked-nand-threshold",
+      "title": "Global locked-NAND construction and threshold",
+      "classification": "not-formalized",
+      "scope": "A uniform answer-independent SAT instance builder, global baseline, trace equivalence, and threshold.",
+      "requiredTheorems": [
+        "PNP.Main.locked_nand_threshold"
+      ],
+      "nonClaim": "The conditional boundary does not discharge this missing theorem."
+    },
+    {
+      "id": "global-zeroslack-pccmin",
+      "title": "Global ZeroSlack, PCCMin, and polynomial runtime",
+      "classification": "not-formalized",
+      "scope": "Complete residual routing, global ZeroSlack contradiction, exact minimization, and polynomial bounds.",
+      "requiredTheorems": [
+        "PNP.Main.pccmin_polynomial_exact",
+        "PNP.Main.zero_slack_complete"
+      ],
+      "nonClaim": "Proof-bearing result structures and explicit-list failure do not supply global completeness."
+    },
+    {
+      "id": "concrete-publication-root",
+      "title": "Concrete standard P-versus-NP target and root theorem",
+      "classification": "not-formalized",
+      "scope": "Concrete machine semantics, complexity classes, SAT, reductions, and the publication root theorem.",
+      "requiredTheorems": [
+        "PNP.Main.p_eq_np"
+      ],
+      "nonClaim": "The current string-handle PNP.PEqualsNP bridge is nonstandard and publication-ineligible."
+    }
+  ]
+}

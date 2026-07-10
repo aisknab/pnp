@@ -1,0 +1,89 @@
+# Compiled Lean theorem inventory and publication gate
+
+The current formal-publication inputs are generated from the compiled Lean environment, not by
+parsing Lean source text. After `lake build PNP`, `lean-audit/PNPTheoremInventory.lean` traverses
+`Lean.Environment.constants` for the public `PNP.*` declarations in the explicit `PNP` import
+closure. It calls `Lean.collectAxioms` for each included declaration and emits a canonical,
+lexically ordered JSON inventory.
+
+The generated inventory is mirrored byte-for-byte at:
+
+- [`status/LEAN_THEOREM_INVENTORY.json`](../status/LEAN_THEOREM_INVENTORY.json), the status-side
+  mirror; and
+- [`public/pnp-theorem-inventory.json`](../public/pnp-theorem-inventory.json), the public mirror.
+
+The inventory records the pinned toolchain and root module, declaration kinds, each declaration's
+compiled axiom closure, the source-module closure, detailed compiled types for 22 reviewed
+milestone theorems, excluded private compiler auxiliaries, and the five disclosed project-specific
+axioms. Deterministic ordering and canonical JSON encoding
+make the two mirrors and their digest reproducible. This inventory is evidence about the compiled
+environment; it does **not** establish `P = NP` or make an abstract theorem publication-eligible.
+
+## Separate concrete publication gate
+
+[`publication/FORMAL_PUBLICATION_MAP.json`](../publication/FORMAL_PUBLICATION_MAP.json) defines a
+separate, fail-closed publication gate. Its compatibility declaration is
+`PNP.Main.p_eq_np`, and its required concrete target is `PNP.Main.ConcretePEqualsNP`. The existing
+abstract proposition `PNP.PEqualsNP` uses witness-level code handles and is explicitly ineligible
+for publication.
+
+The gate requires all of its concrete-model, declaration-kind, exact-type, compiled-kernel
+fingerprint, axiom-closure, source-closure, and standard-axiom-allowlist checks to pass. In this
+migration step the expected target type, target value, compatibility-root type, axiom-closure, and
+source-closure fingerprints are intentionally `null`. An unset fingerprint fails its configured
+subcheck; two unset values never count as a match. Both required declarations are also absent.
+Consequently the gate is false, and every theorem-emission field derived from it remains false or
+`null`.
+
+The current five project-specific axioms remain visible as an independent inventory:
+
+```text
+PNP.CheckPCCPackexp
+PNP.GeneratePCCPack
+PNP.LockedNANDThreshold
+PNP.ResidualBandExactMinimization
+PNP.SAT
+```
+
+They are not on the publication gate's permitted Lean-standard axiom allowlist.
+
+## Reviewed intermediate milestone bindings
+
+Intermediate milestone credit has a separate evidence boundary from theorem publication. Each of
+the 22 required theorems for the six earned rows must have its reviewed per-name,
+domain-separated compiled kernel-type SHA-256 in the publication map, retain an empty compiled
+axiom closure, and match by exact declaration name and theorem kind. The milestone source-closure
+hash must also match. That closure covers all 23 files under
+`lean/**/*.lean` plus `lean-toolchain`, `lakefile.lean`, `lake-manifest.json`, and the compiled
+inventory probe. A same-name theorem with a weakened type, or a change to any Lean source or pin,
+revokes milestone credit until the reviewed map is deliberately updated. These non-null milestone
+pins are independent of the intentionally null concrete-gate activation fingerprints.
+
+## Deterministic publication outputs
+
+The formal status, public status mirror, TeX report, and PDF report are generated from the checked
+inventory and publication map. The root
+[`canonical_proof_report.pdf`](../canonical_proof_report.pdf) is the current concise six-page formal
+reconstruction report. It is a non-activation report, not the historical claim manuscript. The
+historical 56-page claim artifact is available only through the pinned legacy source coordinate;
+its immutable coordinates are recorded under [`archive/legacy-v0/`](../archive/legacy-v0/README.md).
+
+The PDF check performs two builds in the same installed environment and requires identical bytes,
+then compares those bytes with the committed PDF and renders every page through Poppler. The hosted
+runner's TeX and Poppler package versions are not cryptographically pinned, so this is a
+same-environment determinism and fail-closed exact-byte check, not a universal cross-toolchain
+reproducibility claim.
+
+Check the committed outputs without rewriting them:
+
+```bash
+lake build PNP
+node scripts/export-lean-theorem-inventory.mjs --check
+node scripts/generate-formal-publication.mjs --check
+node pcc-formal-reconstruction-status0.mjs --json --no-write
+npm run report:check
+```
+
+Regeneration uses the corresponding commands without `--check`, followed by
+`npm run report:build`. A successful inventory, status, or PDF check is not proof verification and
+cannot activate theorem emission while the concrete gate remains false.

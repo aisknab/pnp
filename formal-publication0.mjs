@@ -1,0 +1,396 @@
+import { createHash } from 'node:crypto';
+import { lstat, readFile, readdir } from 'node:fs/promises';
+import path from 'node:path';
+
+export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
+export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
+export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '3d73056087721247b8291287c795e8d02e5de479cf3f6d1f197dabd3fab4a1aa';
+
+export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
+  'PNP.DirectWire.ConditionalThresholdBoundaryPremises.fullResidualSlack_le_four',
+  'PNP.DirectWire.ConditionalThresholdBoundaryPremises.satisfiable_iff_minimum_ge_succ',
+  'PNP.DirectWire.Equivalent.trans',
+  'PNP.DirectWire.StrictEquivalentGain.strictResidualDescent',
+  'PNP.DirectWire.andCircuit_spec',
+  'PNP.DirectWire.compatibleReplacement_framed',
+  'PNP.DirectWire.constantOneDirect_referenceMinimum',
+  'PNP.DirectWire.constantZeroDirect_referenceMinimum',
+  'PNP.DirectWire.equalityDirect_referenceMinimum',
+  'PNP.DirectWire.equivalentBool_eq_true_iff',
+  'PNP.DirectWire.exactWidthEnumeration_complete',
+  'PNP.DirectWire.firstListedGain_none_no_listed_gain',
+  'PNP.DirectWire.firstListedGain_sound',
+  'PNP.DirectWire.framedGlobalSlackLaw',
+  'PNP.DirectWire.lockedBaselineCount_report_formula',
+  'PNP.DirectWire.nandCircuit_spec',
+  'PNP.DirectWire.prefixAndDirect_referenceMinimum',
+  'PNP.DirectWire.referenceMinimum_invariant',
+  'PNP.DirectWire.residualSlack_eq_zero_iff_minimum',
+  'PNP.DirectWire.strictEquivalentGainBool_complete',
+  'PNP.DirectWire.traceDirect_referenceMinimum',
+  'PNP.DirectWire.unresolved_positiveSlack_regression',
+]);
+
+export const REQUIRED_PROJECT_AXIOMS0 = Object.freeze([
+  'PNP.CheckPCCPackexp',
+  'PNP.GeneratePCCPack',
+  'PNP.LockedNANDThreshold',
+  'PNP.ResidualBandExactMinimization',
+  'PNP.SAT',
+]);
+
+export function sha256Text0(value) {
+  return createHash('sha256').update(value, 'utf8').digest('hex');
+}
+
+export function MilestoneTheoremKernelTypeSha2560(name, kernelType) {
+  if (typeof name !== 'string' || typeof kernelType !== 'string') {
+    throw new Error('milestone theorem kernel fingerprint requires a name and compiled type');
+  }
+  return kernelFingerprint0(`milestone-theorem-type:${name}`, kernelType);
+}
+
+export function stableStringify0(value) {
+  if (Array.isArray(value)) return `[${value.map(stableStringify0).join(',')}]`;
+  if (isObject0(value)) {
+    return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${stableStringify0(value[key])}`).join(',')}}`;
+  }
+  return JSON.stringify(value);
+}
+
+export function ValidateLeanTheoremInventory0(inventory) {
+  if (!isObject0(inventory)) throw new Error('Lean theorem inventory must be an object');
+  if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
+    throw new Error('Lean theorem inventory kind/version mismatch');
+  }
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-10-10') {
+    throw new Error('Lean theorem inventory coordinate mismatch');
+  }
+  if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
+    throw new Error('Lean theorem inventory toolchain/root mismatch');
+  }
+  if (inventory.environmentProbeComplete !== true) throw new Error('Lean environment probe is incomplete');
+  if (!Array.isArray(inventory.declarations)) throw new Error('Lean theorem declarations must be an array');
+  const names = inventory.declarations.map((entry) => entry?.name);
+  if (names.some((name) => typeof name !== 'string') || !strictlySorted0(names)) {
+    throw new Error('Lean theorem declarations must have unique lexically sorted names');
+  }
+  for (const entry of inventory.declarations) {
+    if (!isObject0(entry) || typeof entry.module !== 'string' || !entry.module.startsWith('PNP')) {
+      throw new Error(`invalid module for declaration ${entry?.name ?? '<unknown>'}`);
+    }
+    if (!['axiom', 'definition', 'theorem', 'opaque', 'quotient', 'inductive', 'constructor', 'recursor'].includes(entry.kind)) {
+      throw new Error(`invalid declaration kind for ${entry.name}`);
+    }
+    if (!Array.isArray(entry.axioms) || !strictlySorted0(entry.axioms)) {
+      throw new Error(`axioms must be unique and sorted for ${entry.name}`);
+    }
+  }
+  const theoremRows = inventory.declarations.filter((entry) => entry.kind === 'theorem');
+  const axiomRows = inventory.declarations.filter((entry) => entry.kind === 'axiom');
+  if (inventory.declarationCount !== inventory.declarations.length
+      || inventory.theoremCount !== theoremRows.length
+      || inventory.axiomCount !== axiomRows.length
+      || inventory.assumptionFreeTheoremCount !== theoremRows.filter((entry) => entry.axioms.length === 0).length) {
+    throw new Error('Lean theorem inventory counts do not match declaration rows');
+  }
+  const actualKindCounts = Object.fromEntries(
+    ['axiom', 'constructor', 'definition', 'inductive', 'opaque', 'quotient', 'recursor', 'theorem']
+      .map((kind) => [kind, inventory.declarations.filter((entry) => entry.kind === kind).length]),
+  );
+  if (stableStringify0(inventory.declarationKindCounts) !== stableStringify0(actualKindCounts)) {
+    throw new Error('Lean declaration-kind counts do not match declaration rows');
+  }
+  const actualModules = [...new Set(inventory.declarations.map((entry) => entry.module))].sort();
+  if (inventory.sourceClosureModuleCount !== actualModules.length
+      || stableStringify0(inventory.sourceClosureModules) !== stableStringify0(actualModules)) {
+    throw new Error('Lean source-closure module inventory mismatch');
+  }
+  if (!Number.isInteger(inventory.excludedPrivateDeclarationCount)
+      || inventory.excludedPrivateDeclarationCount < 0) {
+    throw new Error('Lean excluded-private declaration count is invalid');
+  }
+  if (stableStringify0(inventory.projectAxioms) !== stableStringify0(REQUIRED_PROJECT_AXIOMS0)) {
+    throw new Error('Lean project axiom inventory must remain the disclosed five-axiom set');
+  }
+  if (stableStringify0(inventory.projectAxioms) !== stableStringify0(axiomRows.map((entry) => entry.name))) {
+    throw new Error('Lean project axiom side inventory drifted from compiled axiom declaration rows');
+  }
+  if (inventory.compatibilityRootName !== 'PNP.Main.p_eq_np'
+      || inventory.concreteTargetName !== 'PNP.Main.ConcretePEqualsNP') {
+    throw new Error('Lean publication declaration names mismatch');
+  }
+  validateDetailedCandidate0(inventory.compatibilityRootCandidate, inventory.compatibilityRootName, inventory.declarations);
+  validateDetailedCandidate0(inventory.concreteTargetCandidate, inventory.concreteTargetName, inventory.declarations);
+  if (!Array.isArray(inventory.milestoneCandidates)) {
+    throw new Error('reviewed milestone theorem candidates must be an array');
+  }
+  const milestoneNames = inventory.milestoneCandidates.map((candidate) => candidate?.name);
+  if (stableStringify0(milestoneNames) !== stableStringify0(REQUIRED_MILESTONE_THEOREMS0)) {
+    throw new Error('reviewed milestone theorem candidate inventory mismatch');
+  }
+  for (const candidate of inventory.milestoneCandidates) {
+    validateDetailedCandidate0(candidate, candidate.name, inventory.declarations);
+    if (candidate.kind !== 'theorem' || candidate.kernelValue !== null) {
+      throw new Error(`reviewed milestone candidate is not a theorem: ${candidate.name}`);
+    }
+  }
+  return inventory;
+}
+
+export async function CollectLeanSourceFiles0(root) {
+  const repositoryRoot = path.resolve(root);
+  const leanRoot = path.join(repositoryRoot, 'lean');
+  const leanRootInfo = await lstat(leanRoot);
+  if (leanRootInfo.isSymbolicLink() || !leanRootInfo.isDirectory()) {
+    throw new Error('Lean source root must be a real directory');
+  }
+  const files = [];
+  async function walk0(directory) {
+    const entries = await readdir(directory, { withFileTypes: true });
+    entries.sort((left, right) => left.name < right.name ? -1 : left.name > right.name ? 1 : 0);
+    for (const entry of entries) {
+      const absolute = path.join(directory, entry.name);
+      const relative = path.relative(repositoryRoot, absolute);
+      if (relative === '' || relative === '..' || relative.startsWith(`..${path.sep}`)
+          || path.isAbsolute(relative)) {
+        throw new Error(`Lean source path escaped repository root: ${absolute}`);
+      }
+      if (entry.isSymbolicLink()) throw new Error(`Lean source path must not be a symlink: ${relative}`);
+      if (entry.isDirectory()) await walk0(absolute);
+      else if (entry.isFile() && entry.name.endsWith('.lean')) files.push(relative.split(path.sep).join('/'));
+    }
+  }
+  await walk0(leanRoot);
+  return files.sort((left, right) => left < right ? -1 : left > right ? 1 : 0);
+}
+
+export async function ComputeLeanSourceClosureSha2560(root, inventoryInput) {
+  ValidateLeanTheoremInventory0(inventoryInput);
+  const leanSourceFiles = await CollectLeanSourceFiles0(root);
+  const files = [...new Set([
+    'lean-toolchain',
+    'lakefile.lean',
+    'lake-manifest.json',
+    'lean-audit/PNPTheoremInventory.lean',
+    ...leanSourceFiles,
+  ])].sort();
+  const hash = createHash('sha256');
+  hash.update('PNP-LEAN-SOURCE-CLOSURE-v0\n', 'utf8');
+  for (const relative of files) {
+    const bytes = await readFile(path.join(root, relative));
+    hash.update(`${relative}\n${bytes.length}\n`, 'utf8');
+    hash.update(bytes);
+    hash.update('\n', 'utf8');
+  }
+  return hash.digest('hex');
+}
+
+export function DeriveFormalPublication0(inventoryInput, publicationMap, inventoryBytes, sourceClosureSha256 = null) {
+  const inventory = ValidateLeanTheoremInventory0(inventoryInput);
+  validatePublicationMap0(publicationMap);
+  if (!(Buffer.isBuffer(inventoryBytes) || inventoryBytes instanceof Uint8Array)) {
+    throw new Error('Lean theorem inventory digest input must be bytes');
+  }
+  const canonicalInventoryBytes = Buffer.from(`${stableStringify0(inventory)}\n`, 'utf8');
+  if (!canonicalInventoryBytes.equals(Buffer.from(inventoryBytes))) {
+    throw new Error('Lean theorem inventory bytes do not match the validated canonical inventory');
+  }
+  const inventorySha256 = createHash('sha256').update(canonicalInventoryBytes).digest('hex');
+  const declarations = new Map(inventory.declarations.map((entry) => [entry.name, entry]));
+  const milestoneCandidates = new Map(
+    inventory.milestoneCandidates.map((candidate) => [candidate.name, candidate]),
+  );
+  const profile = publicationMap.gate;
+  const root = inventory.compatibilityRootCandidate;
+  const target = inventory.concreteTargetCandidate;
+  const targetTypeSha256 = target ? kernelFingerprint0('concrete-target-type', target.kernelType) : null;
+  const targetValueSha256 = target?.kernelValue ? kernelFingerprint0('concrete-target-value', target.kernelValue) : null;
+  const rootTypeSha256 = root ? kernelFingerprint0('publication-root-type', root.kernelType) : null;
+  const axiomClosure = [...new Set([...(target?.axioms ?? []), ...(root?.axioms ?? [])])].sort();
+  const axiomClosureSha256 = kernelFingerprint0('publication-axiom-closure', stableStringify0(axiomClosure));
+  const expectedExactRootType = `Lean.Expr.const \`${profile.concreteTargetName} []`;
+  const allowedAxioms = new Set(profile.allowedLeanStandardAxioms);
+  const subchecks = Object.freeze({
+    standardComplexityModelEligible: profile.standardComplexityModelEligible === true,
+    concreteTargetPresent: target !== null,
+    concreteTargetIsDefinition: target?.kind === 'definition',
+    concreteTargetKernelTypeFingerprintConfigured: isSha2560(profile.expectedConcreteTargetKernelTypeSha256),
+    concreteTargetKernelTypeFingerprintMatches: isSha2560(profile.expectedConcreteTargetKernelTypeSha256)
+      && targetTypeSha256 === profile.expectedConcreteTargetKernelTypeSha256,
+    concreteTargetKernelValueFingerprintConfigured: isSha2560(profile.expectedConcreteTargetKernelValueSha256),
+    concreteTargetKernelValueFingerprintMatches: isSha2560(profile.expectedConcreteTargetKernelValueSha256)
+      && targetValueSha256 === profile.expectedConcreteTargetKernelValueSha256,
+    compatibilityRootPresent: root !== null,
+    compatibilityRootIsTheorem: root?.kind === 'theorem',
+    compatibilityRootHasExactConcreteType: root?.kernelType === expectedExactRootType,
+    compatibilityRootKernelTypeFingerprintConfigured: isSha2560(profile.expectedRootKernelTypeSha256),
+    compatibilityRootKernelTypeFingerprintMatches: isSha2560(profile.expectedRootKernelTypeSha256)
+      && rootTypeSha256 === profile.expectedRootKernelTypeSha256,
+    axiomClosureFingerprintConfigured: isSha2560(profile.expectedAxiomClosureSha256),
+    axiomClosureFingerprintMatches: isSha2560(profile.expectedAxiomClosureSha256)
+      && axiomClosureSha256 === profile.expectedAxiomClosureSha256,
+    sourceClosureFingerprintConfigured: isSha2560(profile.expectedSourceClosureSha256),
+    sourceClosureFingerprintMatches: isSha2560(profile.expectedSourceClosureSha256)
+      && sourceClosureSha256 === profile.expectedSourceClosureSha256,
+    axiomClosureUsesOnlyLeanStandardAllowlist: target !== null && root !== null
+      && axiomClosure.every((name) => allowedAxioms.has(name)),
+  });
+  const passed = Object.values(subchecks).every((value) => value === true);
+  const gate = Object.freeze({
+    kind: 'PNPConcretePublicationGate0',
+    version: 0,
+    compatibilityRootName: profile.compatibilityRootName,
+    concreteTargetName: profile.concreteTargetName,
+    expectedConcreteTargetKernelTypeSha256: profile.expectedConcreteTargetKernelTypeSha256,
+    expectedConcreteTargetKernelValueSha256: profile.expectedConcreteTargetKernelValueSha256,
+    expectedRootKernelTypeSha256: profile.expectedRootKernelTypeSha256,
+    expectedAxiomClosureSha256: profile.expectedAxiomClosureSha256,
+    expectedSourceClosureSha256: profile.expectedSourceClosureSha256,
+    actualConcreteTargetKernelTypeSha256: targetTypeSha256,
+    actualConcreteTargetKernelValueSha256: targetValueSha256,
+    actualRootKernelTypeSha256: rootTypeSha256,
+    actualAxiomClosureSha256: axiomClosureSha256,
+    actualSourceClosureSha256: sourceClosureSha256,
+    axiomClosure,
+    allowedLeanStandardAxioms: [...profile.allowedLeanStandardAxioms],
+    abstractPEqualsNPIsPublicationIneligible: true,
+    unsetFingerprintIsIntentionalFailClosedMigrationGate: true,
+    subchecks,
+    passed,
+  });
+  const milestones = publicationMap.milestones.map((spec) => {
+    const theoremRows = spec.requiredTheorems.map((name) => declarations.get(name) ?? null);
+    const detailedRows = spec.requiredTheorems.map((name) => milestoneCandidates.get(name) ?? null);
+    const expectedTypeHashes = spec.requiredTheorems.map(
+      (name) => publicationMap.earnedMilestoneTheoremKernelTypeSha256[name] ?? null,
+    );
+    const actualTypeHashes = detailedRows.map((entry) => entry === null
+      ? null
+      : MilestoneTheoremKernelTypeSha2560(entry.name, entry.kernelType));
+    const allPresent = theoremRows.every((entry) => entry?.kind === 'theorem');
+    const allAssumptionFree = allPresent && theoremRows.every((entry) => entry.axioms.length === 0);
+    const allKernelTypesMatch = detailedRows.every((entry, index) => entry !== null
+      && isSha2560(expectedTypeHashes[index])
+      && actualTypeHashes[index] === expectedTypeHashes[index]);
+    const sourceClosureFingerprintMatches = isSha2560(publicationMap.milestoneSourceClosureSha256)
+      && sourceClosureSha256 === publicationMap.milestoneSourceClosureSha256;
+    const earned = spec.classification.startsWith('formalized')
+      && allAssumptionFree
+      && allKernelTypesMatch
+      && sourceClosureFingerprintMatches;
+    return Object.freeze({
+      ...spec,
+      theoremRows: theoremRows.map((entry, index) => ({
+        name: spec.requiredTheorems[index],
+        present: entry !== null,
+        kind: entry?.kind ?? null,
+        axioms: entry?.axioms ?? null,
+        actualKernelTypeSha256: actualTypeHashes[index],
+        expectedKernelTypeSha256: expectedTypeHashes[index],
+        kernelTypeFingerprintMatches: actualTypeHashes[index] !== null
+          && actualTypeHashes[index] === expectedTypeHashes[index],
+      })),
+      allPresent,
+      allAssumptionFree,
+      allKernelTypesMatch,
+      sourceClosureFingerprintMatches,
+      earned,
+      status: earned ? spec.classification : 'not-formalized',
+    });
+  });
+  const emitted = passed;
+  const emissionFields = Object.freeze({
+    mathematicalTheoremEstablished: emitted,
+    publicTheoremEmissionAllowed: emitted,
+    publicTheoremStatement: emitted ? 'P = NP' : null,
+    publicTheoremConclusion: emitted ? 'P = NP' : null,
+    finalTheoremReady: emitted,
+    internalFinalTheoremReady: emitted,
+    unrestrictedFinalSoundnessDischarged: emitted,
+    uniformFinalSoundnessProved: emitted,
+    satInPConclusionAccepted: emitted,
+    pEqualsNPConclusionAccepted: emitted,
+  });
+  return Object.freeze({ inventorySha256, gate, milestones, emissionFields });
+}
+
+function validateDetailedCandidate0(candidate, name, declarations) {
+  const row = declarations.find((entry) => entry.name === name) ?? null;
+  if (candidate === null) {
+    if (row !== null) throw new Error(`missing detailed candidate for ${name}`);
+    return;
+  }
+  if (!isObject0(candidate) || candidate.name !== name || row === null) {
+    throw new Error(`invalid detailed candidate for ${name}`);
+  }
+  if (candidate.module !== row.module || candidate.kind !== row.kind
+      || stableStringify0(candidate.axioms) !== stableStringify0(row.axioms)
+      || typeof candidate.kernelType !== 'string'
+      || !(candidate.kernelValue === null || typeof candidate.kernelValue === 'string')) {
+    throw new Error(`detailed candidate drift for ${name}`);
+  }
+}
+
+function validatePublicationMap0(map) {
+  if (!isObject0(map) || map.kind !== 'PNPFormalPublicationMap0' || map.version !== 0
+      || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
+    throw new Error('formal publication map shape mismatch');
+  }
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-10-10') {
+    throw new Error('formal publication map coordinate mismatch');
+  }
+  if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
+      || map.gate.concreteTargetName !== 'PNP.Main.ConcretePEqualsNP'
+      || map.gate.standardComplexityModelEligible !== false) {
+    throw new Error('formal publication map must retain the fail-closed concrete gate');
+  }
+  if (stableStringify0(map.gate.allowedLeanStandardAxioms)
+      !== stableStringify0(['Classical.choice', 'Quot.sound', 'propext'])) {
+    throw new Error('Lean standard axiom allowlist is immutable and may not be caller-expanded');
+  }
+  for (const field of [
+    'expectedConcreteTargetKernelTypeSha256',
+    'expectedConcreteTargetKernelValueSha256',
+    'expectedRootKernelTypeSha256',
+    'expectedAxiomClosureSha256',
+    'expectedSourceClosureSha256',
+  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in PR10`);
+  if (!isSha2560(map.milestoneSourceClosureSha256)
+      || !isObject0(map.earnedMilestoneTheoremKernelTypeSha256)) {
+    throw new Error('reviewed milestone theorem/source fingerprints are missing');
+  }
+  const formalizedTheoremNames = [...new Set(map.milestones
+    .filter((milestone) => milestone?.classification?.startsWith('formalized'))
+    .flatMap((milestone) => milestone.requiredTheorems ?? []))]
+    .sort((left, right) => left < right ? -1 : left > right ? 1 : 0);
+  if (stableStringify0(formalizedTheoremNames) !== stableStringify0(REQUIRED_MILESTONE_THEOREMS0)) {
+    throw new Error('reviewed milestone theorem names drifted from the compiled candidate contract');
+  }
+  const pinnedTheoremNames = Object.keys(map.earnedMilestoneTheoremKernelTypeSha256)
+    .sort((left, right) => left < right ? -1 : left > right ? 1 : 0);
+  if (stableStringify0(pinnedTheoremNames) !== stableStringify0(REQUIRED_MILESTONE_THEOREMS0)
+      || pinnedTheoremNames.some((name) => !isSha2560(map.earnedMilestoneTheoremKernelTypeSha256[name]))) {
+    throw new Error('reviewed milestone theorem kernel-type fingerprint inventory mismatch');
+  }
+  if (sha256Text0(stableStringify0(map)) !== REQUIRED_PUBLICATION_MAP_SHA2560) {
+    throw new Error('formal publication milestone map drifted from the reviewed PR10 specification');
+  }
+}
+
+function strictlySorted0(values) {
+  return Array.isArray(values) && values.every((value, index) => index === 0 || values[index - 1] < value);
+}
+
+function isSha2560(value) {
+  return typeof value === 'string' && /^[0-9a-f]{64}$/u.test(value);
+}
+
+function kernelFingerprint0(domain, value) {
+  return sha256Text0(`PNP-FORMAL-PUBLICATION-FINGERPRINT-v0\nleanprover/lean4:v4.31.0\n${domain}\n${value}`);
+}
+
+function isObject0(value) {
+  return value !== null && typeof value === 'object' && !Array.isArray(value);
+}

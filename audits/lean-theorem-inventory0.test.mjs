@@ -1,0 +1,305 @@
+import assert from 'node:assert/strict';
+import { mkdtemp, readFile, rm, symlink } from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+import { test } from 'node:test';
+import { fileURLToPath } from 'node:url';
+
+import {
+  CollectLeanSourceFiles0,
+  ComputeLeanSourceClosureSha2560,
+  DeriveFormalPublication0,
+  ValidateLeanTheoremInventory0,
+  stableStringify0,
+  REQUIRED_MILESTONE_THEOREMS0,
+} from '../formal-publication0.mjs';
+import { ParseLeanInventoryProbe0 } from '../scripts/export-lean-theorem-inventory.mjs';
+
+const ROOT = fileURLToPath(new URL('../', import.meta.url));
+
+function compareNames0(left, right) {
+  return left.name < right.name ? -1 : left.name > right.name ? 1 : 0;
+}
+
+function addCandidate0(inventory, which, { kind, kernelType, kernelValue, axioms = [] }) {
+  const isRoot = which === 'compatibilityRootCandidate';
+  const name = isRoot ? inventory.compatibilityRootName : inventory.concreteTargetName;
+  const row = { name, module: 'PNP.Main', kind, axioms: [...axioms].sort() };
+  inventory.declarations.push(row);
+  inventory.declarations.sort(compareNames0);
+  inventory.declarationCount += 1;
+  inventory.declarationKindCounts[kind] += 1;
+  if (kind === 'theorem') {
+    inventory.theoremCount += 1;
+    if (row.axioms.length === 0) inventory.assumptionFreeTheoremCount += 1;
+  }
+  inventory[which] = { ...row, kernelType, kernelValue };
+  return row;
+}
+
+async function fixture0() {
+  const [inventoryBytes, publicBytes, mapText] = await Promise.all([
+    readFile(new URL('../status/LEAN_THEOREM_INVENTORY.json', import.meta.url)),
+    readFile(new URL('../public/pnp-theorem-inventory.json', import.meta.url)),
+    readFile(new URL('../publication/FORMAL_PUBLICATION_MAP.json', import.meta.url), 'utf8'),
+  ]);
+  return {
+    inventoryBytes,
+    publicBytes,
+    inventory: JSON.parse(inventoryBytes.toString('utf8')),
+    map: JSON.parse(mapText),
+  };
+}
+
+test('compiled Lean inventory is canonical, complete, deterministic, and byte-mirrored', async () => {
+  const { inventoryBytes, publicBytes, inventory } = await fixture0();
+  assert.equal(inventoryBytes.equals(publicBytes), true);
+  assert.equal(`${stableStringify0(inventory)}\n`, inventoryBytes.toString('utf8'));
+  ValidateLeanTheoremInventory0(inventory);
+  assert.equal(inventory.environmentProbeComplete, true);
+  assert.equal(inventory.declarationCount, 1761);
+  assert.equal(inventory.excludedPrivateDeclarationCount, 33);
+  assert.equal(inventory.theoremCount, 662);
+  assert.equal(inventory.assumptionFreeTheoremCount, 589);
+  assert.equal(inventory.axiomCount, 5);
+  assert.equal(inventory.sourceClosureModuleCount, 22);
+  assert.deepEqual(inventory.declarationKindCounts, {
+    axiom: 5,
+    constructor: 68,
+    definition: 914,
+    inductive: 56,
+    opaque: 0,
+    quotient: 0,
+    recursor: 56,
+    theorem: 662,
+  });
+  assert.deepEqual(inventory.projectAxioms, [
+    'PNP.CheckPCCPackexp',
+    'PNP.GeneratePCCPack',
+    'PNP.LockedNANDThreshold',
+    'PNP.ResidualBandExactMinimization',
+    'PNP.SAT',
+  ]);
+  assert.equal(inventory.compatibilityRootCandidate, null);
+  assert.equal(inventory.concreteTargetCandidate, null);
+  assert.equal(inventory.milestoneCandidates.length, 22);
+  assert.deepEqual(inventory.milestoneCandidates.map((entry) => entry.name), REQUIRED_MILESTONE_THEOREMS0);
+  assert.equal(inventory.milestoneCandidates.every((entry) => entry.kind === 'theorem'
+    && entry.kernelValue === null && typeof entry.kernelType === 'string'), true);
+});
+
+test('source closure scans every Lean source and rejects a symlinked source root', async () => {
+  const files = await CollectLeanSourceFiles0(ROOT);
+  assert.equal(files.length, 23);
+  assert.equal(files.every((file) => file.startsWith('lean/') && file.endsWith('.lean')), true);
+  assert.deepEqual(files, [...files].sort());
+  assert.equal(files.includes('lean/PNP.lean'), true);
+  assert.equal(files.includes('lean/PNP/ResidualRoutes.lean'), true);
+
+  const temporary = await mkdtemp(path.join(os.tmpdir(), 'pnp-lean-source-symlink-'));
+  try {
+    await symlink(path.join(ROOT, 'lean'), path.join(temporary, 'lean'), 'dir');
+    await assert.rejects(CollectLeanSourceFiles0(temporary), /real directory/u);
+  } finally {
+    await rm(temporary, { recursive: true, force: true });
+  }
+});
+
+test('inventory source uses the compiled environment and collectAxioms rather than source parsing', async () => {
+  const source = await readFile(new URL('../lean-audit/PNPTheoremInventory.lean', import.meta.url), 'utf8');
+  assert.match(source, /env\.constants\.fold/u);
+  assert.match(source, /collectAxioms name/u);
+  assert.match(source, /env\.getModuleIdxFor\? name/u);
+  assert.doesNotMatch(source, /readFile|readDir|IO\.FS|Regex/u);
+  assert.doesNotMatch(source, /foldStage2/u);
+});
+
+test('positive Lean probe parser rejects empty, malformed, noisy, failed, or noncanonical output', async () => {
+  const { inventoryBytes } = await fixture0();
+  const valid = ParseLeanInventoryProbe0({
+    stdout: inventoryBytes.toString('utf8'), stderr: '', exitCode: 0, timedOut: false,
+  });
+  assert.equal(valid.inventory.declarationCount, 1761);
+  for (const input of [
+    { stdout: '', stderr: '', exitCode: 0, timedOut: false },
+    { stdout: '{}\n', stderr: '', exitCode: 0, timedOut: false },
+    { stdout: inventoryBytes.toString('utf8'), stderr: 'warning', exitCode: 0, timedOut: false },
+    { stdout: inventoryBytes.toString('utf8'), stderr: ' ', exitCode: 0, timedOut: false },
+    { stdout: inventoryBytes.toString('utf8'), stderr: '', exitCode: 1, timedOut: false },
+    { stdout: inventoryBytes.toString('utf8'), stderr: '', exitCode: 0, timedOut: true },
+    { stdout: `${JSON.stringify(JSON.parse(inventoryBytes), null, 2)}\n`, stderr: '', exitCode: 0, timedOut: false },
+    { stdout: ` ${inventoryBytes.toString('utf8')}`, stderr: '', exitCode: 0, timedOut: false },
+    { stdout: `${inventoryBytes.toString('utf8')}{}\n`, stderr: '', exitCode: 0, timedOut: false },
+  ]) assert.throws(() => ParseLeanInventoryProbe0(input));
+});
+
+test('inventory validation rejects forged axioms, vacuous rows, stale coordinates, and unsorted declarations', async () => {
+  const { inventory } = await fixture0();
+  const mutations = [];
+  const forged = structuredClone(inventory);
+  forged.projectAxioms = [];
+  mutations.push(forged);
+  const vacuous = structuredClone(inventory);
+  vacuous.declarations = [];
+  vacuous.declarationCount = 0;
+  vacuous.theoremCount = 0;
+  vacuous.assumptionFreeTheoremCount = 0;
+  vacuous.axiomCount = 0;
+  mutations.push(vacuous);
+  const stale = structuredClone(inventory);
+  stale.coordinate = 'PNP-LEAN-THEOREM-INVENTORY-STALE';
+  mutations.push(stale);
+  const unsorted = structuredClone(inventory);
+  [unsorted.declarations[0], unsorted.declarations[1]] = [unsorted.declarations[1], unsorted.declarations[0]];
+  mutations.push(unsorted);
+  for (const mutation of mutations) assert.throws(() => ValidateLeanTheoremInventory0(mutation));
+});
+
+test('publication derivation binds the validated inventory to its exact canonical bytes', async () => {
+  const { inventoryBytes, inventory, map } = await fixture0();
+  assert.throws(() => DeriveFormalPublication0(inventory, map, Buffer.from('{}\n'), '0'.repeat(64)));
+  assert.doesNotThrow(() => DeriveFormalPublication0(inventory, map, inventoryBytes, '0'.repeat(64)));
+});
+
+test('publication derivation remains false with null fingerprints and an ineligible concrete model', async () => {
+  const { inventoryBytes, inventory, map } = await fixture0();
+  const sourceClosure = await ComputeLeanSourceClosureSha2560(ROOT, inventory);
+  assert.match(sourceClosure, /^[0-9a-f]{64}$/u);
+  const publication = DeriveFormalPublication0(inventory, map, inventoryBytes, sourceClosure);
+  assert.equal(publication.gate.passed, false);
+  assert.equal(publication.gate.abstractPEqualsNPIsPublicationIneligible, true);
+  assert.equal(publication.gate.unsetFingerprintIsIntentionalFailClosedMigrationGate, true);
+  assert.equal(publication.gate.subchecks.standardComplexityModelEligible, false);
+  assert.equal(publication.gate.subchecks.concreteTargetPresent, false);
+  assert.equal(publication.gate.subchecks.compatibilityRootPresent, false);
+  assert.equal(publication.gate.subchecks.axiomClosureUsesOnlyLeanStandardAllowlist, false);
+  assert.equal(publication.gate.subchecks.sourceClosureFingerprintConfigured, false);
+  assert.equal(publication.emissionFields.publicTheoremEmissionAllowed, false);
+  assert.equal(publication.emissionFields.publicTheoremStatement, null);
+});
+
+test('abstract PEqualsNP candidate cannot satisfy the concrete publication type check', async () => {
+  const { inventory, map } = await fixture0();
+  const mutated = structuredClone(inventory);
+  addCandidate0(mutated, 'compatibilityRootCandidate', {
+    kind: 'theorem',
+    kernelType: 'Lean.Expr.const `PNP.PEqualsNP []',
+    kernelValue: null,
+  });
+  const bytes = Buffer.from(`${stableStringify0(mutated)}\n`);
+  const publication = DeriveFormalPublication0(mutated, map, bytes, '0'.repeat(64));
+  assert.equal(publication.gate.subchecks.compatibilityRootPresent, true);
+  assert.equal(publication.gate.subchecks.compatibilityRootIsTheorem, true);
+  assert.equal(publication.gate.subchecks.compatibilityRootHasExactConcreteType, false);
+  assert.equal(publication.gate.passed, false);
+});
+
+test('wrong concrete target/root kinds or root types cannot satisfy the gate', async () => {
+  const { inventory, map } = await fixture0();
+  const exactRootType = 'Lean.Expr.const `PNP.Main.ConcretePEqualsNP []';
+  const cases = [
+    {
+      label: 'target theorem',
+      target: { kind: 'theorem', kernelType: 'Lean.Expr.sort (Lean.Level.zero)', kernelValue: 'Lean.Expr.lit 0' },
+      root: { kind: 'theorem', kernelType: exactRootType, kernelValue: null },
+      failed: 'concreteTargetIsDefinition',
+    },
+    {
+      label: 'root definition',
+      target: { kind: 'definition', kernelType: 'Lean.Expr.sort (Lean.Level.zero)', kernelValue: 'Lean.Expr.lit 0' },
+      root: { kind: 'definition', kernelType: exactRootType, kernelValue: 'Lean.Expr.lit 0' },
+      failed: 'compatibilityRootIsTheorem',
+    },
+    {
+      label: 'abstract root type',
+      target: { kind: 'definition', kernelType: 'Lean.Expr.sort (Lean.Level.zero)', kernelValue: 'Lean.Expr.lit 0' },
+      root: { kind: 'theorem', kernelType: 'Lean.Expr.const `PNP.PEqualsNP []', kernelValue: null },
+      failed: 'compatibilityRootHasExactConcreteType',
+    },
+  ];
+  for (const fixture of cases) {
+    const mutated = structuredClone(inventory);
+    addCandidate0(mutated, 'concreteTargetCandidate', fixture.target);
+    addCandidate0(mutated, 'compatibilityRootCandidate', fixture.root);
+    const bytes = Buffer.from(`${stableStringify0(mutated)}\n`);
+    const publication = DeriveFormalPublication0(mutated, map, bytes, '0'.repeat(64));
+    assert.equal(publication.gate.subchecks[fixture.failed], false, fixture.label);
+    assert.equal(publication.gate.passed, false, fixture.label);
+  }
+});
+
+test('same-name theorem type weakening and source-closure drift revoke milestone earning', async () => {
+  const { inventoryBytes, inventory, map } = await fixture0();
+  const current = DeriveFormalPublication0(
+    inventory,
+    map,
+    inventoryBytes,
+    map.milestoneSourceClosureSha256,
+  );
+  assert.equal(current.milestones.filter((entry) => entry.earned).length, 6);
+
+  const weakened = structuredClone(inventory);
+  const candidate = weakened.milestoneCandidates.find(
+    (entry) => entry.name === 'PNP.DirectWire.andCircuit_spec',
+  );
+  candidate.kernelType = 'Lean.Expr.const `True []';
+  const weakenedBytes = Buffer.from(`${stableStringify0(weakened)}\n`);
+  const weakenedPublication = DeriveFormalPublication0(
+    weakened,
+    map,
+    weakenedBytes,
+    map.milestoneSourceClosureSha256,
+  );
+  const semantics = weakenedPublication.milestones.find((entry) => entry.id === 'direct-wire-semantics');
+  assert.equal(semantics.allPresent, true);
+  assert.equal(semantics.allAssumptionFree, true);
+  assert.equal(semantics.allKernelTypesMatch, false);
+  assert.equal(semantics.earned, false);
+  assert.equal(semantics.status, 'not-formalized');
+
+  const sourceDrift = DeriveFormalPublication0(inventory, map, inventoryBytes, 'f'.repeat(64));
+  assert.equal(sourceDrift.milestones.every((entry) => entry.earned === false), true);
+  assert.equal(sourceDrift.milestones.every(
+    (entry) => entry.sourceClosureFingerprintMatches === false,
+  ), true);
+});
+
+test('project, unknown, and sorry axioms cannot pass the fixed standard-axiom closure', async () => {
+  const { inventory, map } = await fixture0();
+  for (const axiom of ['PNP.SAT', 'Unknown.UnreviewedAxiom', 'sorryAx']) {
+    const mutated = structuredClone(inventory);
+    addCandidate0(mutated, 'concreteTargetCandidate', {
+      kind: 'definition',
+      kernelType: 'Lean.Expr.sort (Lean.Level.zero)',
+      kernelValue: 'Lean.Expr.lit 0',
+      axioms: [axiom],
+    });
+    addCandidate0(mutated, 'compatibilityRootCandidate', {
+      kind: 'theorem',
+      kernelType: 'Lean.Expr.const `PNP.Main.ConcretePEqualsNP []',
+      kernelValue: null,
+      axioms: [],
+    });
+    const bytes = Buffer.from(`${stableStringify0(mutated)}\n`);
+    const publication = DeriveFormalPublication0(mutated, map, bytes, '0'.repeat(64));
+    assert.deepEqual(publication.gate.axiomClosure, [axiom]);
+    assert.equal(publication.gate.subchecks.axiomClosureUsesOnlyLeanStandardAllowlist, false, axiom);
+    assert.equal(publication.gate.passed, false, axiom);
+  }
+});
+
+test('publication map cannot set fingerprints or expand the axiom allowlist in PR10', async () => {
+  const { inventoryBytes, inventory, map } = await fixture0();
+  const fingerprinted = structuredClone(map);
+  fingerprinted.gate.expectedRootKernelTypeSha256 = 'a'.repeat(64);
+  assert.throws(() => DeriveFormalPublication0(inventory, fingerprinted, inventoryBytes, 'b'.repeat(64)));
+  const expanded = structuredClone(map);
+  expanded.gate.allowedLeanStandardAxioms.push('PNP.SAT');
+  assert.throws(() => DeriveFormalPublication0(inventory, expanded, inventoryBytes, 'b'.repeat(64)));
+  const vacuousMilestone = structuredClone(map);
+  vacuousMilestone.milestones[0].requiredTheorems = [];
+  assert.throws(() => DeriveFormalPublication0(inventory, vacuousMilestone, inventoryBytes, 'b'.repeat(64)));
+  const promotedMilestone = structuredClone(map);
+  promotedMilestone.milestones.at(-1).classification = 'formalized';
+  assert.throws(() => DeriveFormalPublication0(inventory, promotedMilestone, inventoryBytes, 'b'.repeat(64)));
+});

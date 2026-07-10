@@ -9,6 +9,9 @@ The target theorem is `P = NP`. It is **not currently established by this reposi
 Public theorem emission is disabled while the project is reconstructed around a concrete,
 assumption-audited Lean theorem. The active machine-readable status is
 [`status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json).
+It and the current canonical report are derived from the deterministic compiled-environment
+inventory mirrored at [`status/LEAN_THEOREM_INVENTORY.json`](../status/LEAN_THEOREM_INVENTORY.json)
+and [`public/pnp-theorem-inventory.json`](../public/pnp-theorem-inventory.json).
 
 Use `node pcc-formal-reconstruction-status0.mjs --json` to verify the active status boundary. The
 current `npm run pnp:verify` command checks that boundary, the closed active package surface, the
@@ -38,6 +41,38 @@ recording that the theorem is not released; it is not the target theorem. The cu
 bridge still depends on five disclosed project-specific axioms: `PNP.SAT`,
 `PNP.LockedNANDThreshold`, `PNP.ResidualBandExactMinimization`, `PNP.GeneratePCCPack`, and
 `PNP.CheckPCCPackexp`.
+
+## Compiled inventory and current publication boundary
+
+`lean-audit/PNPTheoremInventory.lean` traverses `Lean.Environment.constants` after the explicit
+`PNP` root has compiled and calls `Lean.collectAxioms` for every included public `PNP.*`
+declaration. It does not infer declarations or dependencies by parsing Lean source. The canonical,
+lexically ordered JSON output records declaration kinds and compiled axiom closures, and its status
+and public copies must be byte-identical. See
+[`lean_theorem_inventory.md`](./lean_theorem_inventory.md) for the inventory contract and check
+commands.
+
+The six earned intermediate milestone rows additionally require 22 detailed compiled theorem
+candidates: exact names and theorem kinds, empty axiom closures, per-name domain-separated
+kernel-type SHA-256 values, and a pinned closure over every `lean/**/*.lean` file plus the Lean/Lake
+pins and inventory probe. Type or source drift revokes milestone credit until reviewed pins change.
+
+Inventory generation is deliberately separate from theorem publication. The concrete gate expects
+the compatibility theorem `PNP.Main.p_eq_np` to have the exact concrete target
+`PNP.Main.ConcretePEqualsNP`. Both declarations are absent. The existing witness-handle proposition
+`PNP.PEqualsNP` is abstract and explicitly publication-ineligible.
+
+The expected kernel fingerprints for the concrete target type and value, compatibility-root type,
+axiom closure, and source closure are intentionally `null` in this migration step. Unset
+fingerprints fail closed; `null` never matches `null`. The standard-complexity-model eligibility
+check is also false. Therefore the gate does not pass and every theorem-emission field derived
+from it remains false or `null`.
+
+The root `canonical_proof_report.tex` and `canonical_proof_report.pdf` now form the generated,
+concise six-page formal-reconstruction report. They replace the historical claim manuscript at the
+root and make the non-activation boundary explicit. The historical 56-page claim artifact is
+available only from the pinned legacy source coordinate recorded under
+[`archive/legacy-v0/`](../archive/legacy-v0/README.md).
 
 The first concrete foundation is now checked in `PNP.DirectWire`: intrinsically topological direct-wire
 NAND programs, total Boolean evaluation, gate-count size, ordered output wiring, and elementary
@@ -133,14 +168,27 @@ Public theorem emission may be reconsidered only when all of the following are m
 7. the locked-NAND, residual-band, and ZeroSlack obligations are proved rather than asserted; and
 8. public status and paper claims are generated from the checked Lean theorem inventory.
 
+The separate concrete gate enforces this boundary. Merely adding a declaration with the right name,
+relying on abstract `PNP.PEqualsNP`, or leaving an expected fingerprint unset cannot activate it.
+
+Check the current non-activation outputs with:
+
+```bash
+lake build PNP
+node scripts/export-lean-theorem-inventory.mjs --check
+node scripts/generate-formal-publication.mjs --check
+node pcc-formal-reconstruction-status0.mjs --json --no-write
+npm run report:check
+```
+
 External review can provide useful independent audit evidence, but it is not a mathematical premise
 and is not part of this gate.
 
 ## Historical material
 
-The previous assertion-checker stack, sealed report, and activated coordinates remain available
-for auditability. They are historical evidence about what the implemented checkers accepted. They
-are not current theorem-status authority.
+The previous assertion-checker stack, 56-page claim report, and activated coordinates remain
+available at the pinned legacy coordinates for auditability. They are historical evidence about
+what the implemented checkers accepted. They are not current theorem-status or report authority.
 
 This notice supersedes the following coordinates as proof or publication authority:
 
