@@ -1,0 +1,32 @@
+import PNP
+
+#print axioms PNP.DirectWire.StrictEquivalentGain
+#print axioms PNP.DirectWire.strictEquivalentGainBool
+#print axioms PNP.DirectWire.strictEquivalentGainBool_sound
+#print axioms PNP.DirectWire.strictEquivalentGainBool_complete
+#print axioms PNP.DirectWire.strictEquivalentGainBool_eq_true_iff
+#print axioms PNP.DirectWire.firstListedGain
+#print axioms PNP.DirectWire.firstListedGain_sound
+#print axioms PNP.DirectWire.firstListedGain_none_no_listed_gain
+#print axioms PNP.DirectWire.ListedGainResult
+#print axioms PNP.DirectWire.listedGainResultOfScan
+#print axioms PNP.DirectWire.natSub_lt_natSub_of_le_of_lt
+#print axioms PNP.DirectWire.StrictEquivalentGain.referenceMinimum_eq
+#print axioms PNP.DirectWire.StrictEquivalentGain.strictResidualDescent
+#print axioms PNP.DirectWire.ListedGainResult.strictResidualDescent
+#print axioms PNP.DirectWire.ExactMinimumResult
+#print axioms PNP.DirectWire.ExactMinimumResult.gateCount_eq_referenceMinimum
+#print axioms PNP.DirectWire.ExactMinimumResult.result_zeroSlack
+#print axioms PNP.DirectWire.ZeroSlackResult
+#print axioms PNP.DirectWire.ZeroSlackResult.sound
+#print axioms PNP.DirectWire.UnresolvedResult
+#print axioms PNP.DirectWire.UnresolvedResult.noListedGain
+#print axioms PNP.DirectWire.GainScanOutcome
+#print axioms PNP.DirectWire.scanListedGains
+#print axioms PNP.DirectWire.ResidualRouteResult
+#print axioms PNP.DirectWire.redundantIdentityCandidate
+#print axioms PNP.DirectWire.redundantIdentityImplementation
+#print axioms PNP.DirectWire.identityCandidate_equivalent_redundantIdentity
+#print axioms PNP.DirectWire.redundantIdentity_referenceMinimum
+#print axioms PNP.DirectWire.redundantIdentity_positiveSlack
+#print axioms PNP.DirectWire.unresolved_positiveSlack_regression

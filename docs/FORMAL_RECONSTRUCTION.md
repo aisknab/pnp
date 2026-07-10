@@ -108,6 +108,18 @@ now formalized. Global `MacroDistinct`, `TraceEquivalence`, and `FinalLockSepara
 missing, as do all six concrete premise instantiations above. See
 [`lean_locked_nand_threshold_boundary.md`](./lean_locked_nand_threshold_boundary.md).
 
+The residual-route layer now performs one honest executable operation: it scans an explicit finite
+list of typed implementations for the first strictly smaller semantically equivalent candidate.
+Every returned gain is proved equivalent, smaller, and strictly descending in reference residual
+slack. Exact-minimum and ZeroSlack result constructors require Lean proofs of semantic minimality;
+the executable scanner itself can return only `gain` or `unresolved`.
+
+This scan is deliberately fail-closed. `unresolved` excludes gains only in the caller-supplied
+list. Lean contains an empty-list regression whose current implementation has residual slack one,
+so unresolved cannot establish global minimality or zero slack. Candidate-list completeness, the
+BCEL/HN/BUD/selector contradiction, a complete PCCMin loop, and every polynomial runtime claim
+remain absent. The residual-band, ZeroSlack, and polynomial blockers therefore remain unchanged.
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

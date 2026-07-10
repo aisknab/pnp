@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-08');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-09');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -91,6 +91,25 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanGlobalSlackLawFormalized, false);
   assert.equal(out.leanLockedNANDBuilderFormalized, false);
   assert.equal(out.leanLockedNANDThresholdFormalized, false);
+  for (const field of [
+    'leanResidualRoutesListedGainScanFormalized',
+    'leanResidualRoutesAxiomAuditPassed',
+    'leanResidualRoutesGainSoundnessFormalized',
+    'leanResidualRoutesStrictResidualDescentFormalized',
+    'leanResidualRoutesExactResultProofBearing',
+    'leanResidualRoutesZeroSlackResultProofBearing',
+    'leanResidualRoutesUnresolvedFailClosed',
+  ]) assert.equal(out[field], true, field);
+  assert.equal(out.leanResidualRoutesScope, 'explicit-caller-supplied-finite-candidate-list');
+  for (const field of [
+    'leanResidualRoutesCandidateListCompletenessFormalized',
+    'leanResidualRoutesGlobalGainCompletenessFormalized',
+    'leanZeroSlackPositiveSlackContradictionFormalized',
+    'leanZeroSlackCompletenessFormalized',
+    'leanPCCMinLoopExactnessFormalized',
+    'leanPCCMinPolynomialRuntimeFormalized',
+    'leanResidualBandMinimizerFormalized',
+  ]) assert.equal(out[field], false, field);
   assert.equal(out.rootLeanTheoremPresent, false);
   assert.equal(out.rootLeanTheoremBuilt, false);
   assert.equal(out.rootLeanTheoremAxiomAuditPassed, false);
@@ -113,7 +132,7 @@ test('formal reconstruction status accepts the current source and public mirrors
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-10-LOCKED-NAND-CONDITIONAL-THRESHOLD-BOUNDARY-08');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-10-EXPLICIT-RESIDUAL-ROUTES-09');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
@@ -165,6 +184,21 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(status.leanGlobalSlackLawFormalized, false);
   assert.equal(status.leanLockedNANDBuilderFormalized, false);
   assert.equal(status.leanLockedNANDThresholdFormalized, false);
+  assert.equal(status.leanResidualRoutesListedGainScanFormalized, true);
+  assert.equal(status.leanResidualRoutesAxiomAuditPassed, true);
+  assert.equal(status.leanResidualRoutesGainSoundnessFormalized, true);
+  assert.equal(status.leanResidualRoutesStrictResidualDescentFormalized, true);
+  assert.equal(status.leanResidualRoutesExactResultProofBearing, true);
+  assert.equal(status.leanResidualRoutesZeroSlackResultProofBearing, true);
+  assert.equal(status.leanResidualRoutesUnresolvedFailClosed, true);
+  assert.equal(status.leanResidualRoutesScope, 'explicit-caller-supplied-finite-candidate-list');
+  assert.equal(status.leanResidualRoutesCandidateListCompletenessFormalized, false);
+  assert.equal(status.leanResidualRoutesGlobalGainCompletenessFormalized, false);
+  assert.equal(status.leanZeroSlackPositiveSlackContradictionFormalized, false);
+  assert.equal(status.leanZeroSlackCompletenessFormalized, false);
+  assert.equal(status.leanPCCMinLoopExactnessFormalized, false);
+  assert.equal(status.leanPCCMinPolynomialRuntimeFormalized, false);
+  assert.equal(status.leanResidualBandMinimizerFormalized, false);
   assert.equal(status.nonClaims.some((entry) => entry.includes('direct-wire NAND semantics layer does not by itself prove enumeration')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes('reference-minimum computation has no polynomial-runtime claim')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes('concrete serial framed-context construction')), true);
@@ -174,11 +208,15 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(status.nonClaims.some((entry) => entry.includes('is not the report threshold theorem')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes('conditional on that six-field premise package')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes('arbitrary satisfiable proposition and baseline natural number')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes('complete only for the explicit finite implementation list')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes('empty-list scan is formally shown')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes('never manufactured by the executable gain scanner')), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-nand-semantics0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-nand-enumerator0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-nand-reference-minimum0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-locked-nand-baseline0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-locked-nand-threshold-boundary0.test.mjs'), true);
+  assert.equal(status.verificationCommands.includes('node --test audits/lean-residual-routes0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPNANDSemanticsAxiomAudit.lean'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPNANDEnumeratorAxiomAudit.lean'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPNANDTruthTableAxiomAudit.lean'), true);
@@ -190,6 +228,7 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDBaselineAxiomAudit.lean'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDLocalBaselineAxiomAudit.lean'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDThresholdBoundaryAxiomAudit.lean'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPResidualRoutesAxiomAudit.lean'), true);
   assert.deepEqual(status.lockedNANDThresholdHostileReviewLemmaInventory, [
     'DirectWireOutputLowerBound',
     'MacroDistinct',
@@ -337,6 +376,13 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanLockedNANDConditionalThresholdBoundaryFormalized',
     'leanLockedNANDConditionalResidualSlackAtMostFourFormalized',
     'leanLockedNANDThresholdBoundaryAxiomAuditPassed',
+    'leanResidualRoutesListedGainScanFormalized',
+    'leanResidualRoutesAxiomAuditPassed',
+    'leanResidualRoutesGainSoundnessFormalized',
+    'leanResidualRoutesStrictResidualDescentFormalized',
+    'leanResidualRoutesExactResultProofBearing',
+    'leanResidualRoutesZeroSlackResultProofBearing',
+    'leanResidualRoutesUnresolvedFailClosed',
   ];
 
   for (const field of fields) {
@@ -364,6 +410,13 @@ test('formal reconstruction status rejects unearned broad downstream NAND claims
     'leanGlobalSlackLawFormalized',
     'leanLockedNANDBuilderFormalized',
     'leanLockedNANDThresholdFormalized',
+    'leanResidualRoutesCandidateListCompletenessFormalized',
+    'leanResidualRoutesGlobalGainCompletenessFormalized',
+    'leanZeroSlackPositiveSlackContradictionFormalized',
+    'leanZeroSlackCompletenessFormalized',
+    'leanPCCMinLoopExactnessFormalized',
+    'leanPCCMinPolynomialRuntimeFormalized',
+    'leanResidualBandMinimizerFormalized',
   ];
 
   for (const field of fields) {

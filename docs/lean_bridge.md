@@ -38,6 +38,7 @@ lean/PNP/NANDTruthTable.lean
 lean/PNP/NANDMinimum.lean
 lean/PNP/NANDComposition.lean
 lean/PNP/NANDSlack.lean
+lean/PNP/ResidualRoutes.lean
 lean/PNP/Complexity.lean
 lean/PNP/SAT.lean
 lean/PNP/LockedNANDMacros.lean
@@ -59,6 +60,7 @@ lean-audit/PNPNANDTruthTableAxiomAudit.lean
 lean-audit/PNPNANDMinimumAxiomAudit.lean
 lean-audit/PNPNANDCompositionAxiomAudit.lean
 lean-audit/PNPNANDSlackAxiomAudit.lean
+lean-audit/PNPResidualRoutesAxiomAudit.lean
 lean-audit/PNPLockedNANDDirectAxiomAudit.lean
 lean-audit/PNPDirectWireBaselineAxiomAudit.lean
 lean-audit/PNPLockedNANDBaselineAxiomAudit.lean
@@ -70,6 +72,7 @@ docs/lean_locked_nand_macros.md
 docs/lean_locked_nand_prefix.md
 docs/lean_locked_nand_baseline.md
 docs/lean_locked_nand_threshold_boundary.md
+docs/lean_residual_routes.md
 ```
 
 ## Complexity bridge
@@ -315,6 +318,17 @@ candidates, carrier freshness, cross-instance separation, trace equivalence, der
 laws, the uniform polynomial builder, and the report threshold/unconditional slack theorem.
 
 ## Residual-band, ZeroSlack, and PCCMin layers
+
+`lean/PNP/ResidualRoutes.lean` is the current executable foothold. It checks a caller-supplied
+finite list for a strictly smaller truth-table-equivalent implementation. Scanner success carries
+list membership, semantic equivalence, strict gate-count reduction, and strict residual-slack
+descent. The scanner result type has only `gain` and `unresolved` constructors. Separate `exact`
+and `zeroSlack` route constructors require proofs of `IsSemanticallyMinimum`.
+
+Search failure is not ZeroSlack. `firstListedGain_none_no_listed_gain` excludes only members of the
+supplied list, and `unresolved_positiveSlack_regression` constructs an unresolved empty-list case
+with residual slack one. No list-generation completeness, global route completeness, or polynomial
+runtime is proved. See `docs/lean_residual_routes.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 
