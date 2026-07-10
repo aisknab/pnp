@@ -11,12 +11,14 @@ on:
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
       - 'audits/lean-nand-reference-minimum0.test.mjs'
+      - 'audits/lean-locked-nand-baseline0.test.mjs'
       - 'docs/lean_bridge.md'
       - 'docs/lean_nand_semantics.md'
       - 'docs/lean_nand_enumerator.md'
       - 'docs/lean_nand_reference_minimum.md'
       - 'docs/lean_locked_nand_macros.md'
       - 'docs/lean_locked_nand_prefix.md'
+      - 'docs/lean_locked_nand_baseline.md'
       - '.github/workflows/lean-bridge.yml'
   push:
     branches:
@@ -30,12 +32,14 @@ on:
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
       - 'audits/lean-nand-reference-minimum0.test.mjs'
+      - 'audits/lean-locked-nand-baseline0.test.mjs'
       - 'docs/lean_bridge.md'
       - 'docs/lean_nand_semantics.md'
       - 'docs/lean_nand_enumerator.md'
       - 'docs/lean_nand_reference_minimum.md'
       - 'docs/lean_locked_nand_macros.md'
       - 'docs/lean_locked_nand_prefix.md'
+      - 'docs/lean_locked_nand_baseline.md'
       - '.github/workflows/lean-bridge.yml'
   workflow_dispatch:
 
@@ -82,7 +86,7 @@ jobs:
           grep -F 'Lake version 5.0.0-src+68218e8 (Lean version 4.31.0)' /tmp/lake-version.txt
 
       - name: Audit explicit root and assumption inventory
-        run: node --test audits/lean-root-target0.test.mjs audits/lean-nand-semantics0.test.mjs audits/lean-nand-enumerator0.test.mjs audits/lean-nand-reference-minimum0.test.mjs
+        run: node --test audits/lean-root-target0.test.mjs audits/lean-nand-semantics0.test.mjs audits/lean-nand-enumerator0.test.mjs audits/lean-nand-reference-minimum0.test.mjs audits/lean-locked-nand-baseline0.test.mjs
 
       - name: Build explicit PNP root
         run: lake build PNP
@@ -149,3 +153,43 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 15
+
+      - name: Print typed local locked-NAND candidate axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDDirectAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          if printf '%s\n' "$audit_output" | grep -F 'depends on axioms:'; then
+            echo 'Typed local locked-NAND candidates unexpectedly depend on axioms.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 48
+
+      - name: Print direct-wire output-lower-bound axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPDirectWireBaselineAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          if printf '%s\n' "$audit_output" | grep -F 'depends on axioms:'; then
+            echo 'Direct-wire output lower bound unexpectedly depends on axioms.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 25
+
+      - name: Print source-derived locked-NAND accounting axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDBaselineAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          if printf '%s\n' "$audit_output" | grep -F 'depends on axioms:'; then
+            echo 'Source-derived locked-NAND accounting unexpectedly depends on axioms.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 23
+
+      - name: Print finite local locked-NAND baseline axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDLocalBaselineAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          if printf '%s\n' "$audit_output" | grep -F 'depends on axioms:'; then
+            echo 'Finite local locked-NAND baselines unexpectedly depend on axioms.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 30
