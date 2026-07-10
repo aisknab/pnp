@@ -5,10 +5,14 @@ import PNP.NANDTruthTable
 import PNP.NANDMinimum
 import PNP.NANDComposition
 import PNP.NANDSlack
+import PNP.DirectWireBaseline
 import PNP.Complexity
 import PNP.SAT
 import PNP.LockedNANDMacros
 import PNP.LockedNANDPrefix
+import PNP.LockedNANDDirect
+import PNP.LockedNANDLocalBaseline
+import PNP.LockedNANDBaseline
 import PNP.LockedNAND
 import PNP.ResidualBand
 import PNP.ZeroSlack

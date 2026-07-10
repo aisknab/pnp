@@ -88,15 +88,33 @@ def lockedNANDMacroCertificate : LockedNANDMacroCertificate
 
 No external macro truth-table assumption is needed for that certificate.
 
+## Typed direct-wire and local minimum bridge
+
+`lean/PNP/LockedNANDDirect.lean` now realizes the displayed gadgets as typed direct-wire
+candidates with gate/output widths `10/10`, `2/2`, `3/3`, `18/18`, `2/2`, and `4/1` for equality,
+constant one, constant zero, trace, prefix, and final conjunction respectively. Lean proves their
+semantics agree with this module and that none of the six internal programs uses carrier constants.
+
+The general direct-wire baseline theorem maps semantically nonconstant, nonprojection, pairwise
+distinct outputs injectively to gates. Finite truth-signature proofs discharge those conditions for
+the five square local candidates, giving exact empty-context reference minima of 10, 2, 3, 18, and
+2 gates. The four-gate, one-output final conjunction is not claimed to have an exact four-gate
+minimum from this argument.
+
+For the global report word, the convention remains multi-output: the baseline coordinates plus one
+final coordinate are exposed. See [Lean locked-NAND direct candidates and local
+baselines](./lean_locked_nand_baseline.md) for the source-derived count formula, exact proof boundary,
+and quarantined legacy `m = 2` fixture.
+
 ## What remains outside this module
 
-This module does not yet prove the full locked-NAND threshold theorem. The remaining global work includes:
+These local modules do not prove the full locked-NAND threshold theorem. The remaining global work includes:
 
 ```text
 carrier-slot allocation and G-Sep+
 cross-instance freshness and tagging
 prefix-tree coverage and exactness
-baseline count and global distinctness
+global candidate construction and cross-instance baseline distinctness
 trace-equivalence over a complete NAND circuit
 unsatisfiable zero-output convention
 satisfiable final-lock lower bound
@@ -104,4 +122,7 @@ the polynomial SAT-to-locked-NAND builder
 the final threshold equivalence and residual-slack bound
 ```
 
-The Lean bridge therefore narrows the locked-NAND trust boundary from “all macro semantics and the global reduction” to “the global builder/threshold proof beyond the now-checked local macro layer.”
+The Lean bridge therefore narrows the locked-NAND trust boundary to the global builder/threshold
+proof beyond the checked local macro, source-accounting, and square-baseline layers. In particular,
+it does not prove the global locked builder, threshold, residual-slack-at-most-four bound, or
+polynomiality.

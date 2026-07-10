@@ -66,6 +66,27 @@ slack identity is proved. This does not cover arbitrary support subsets, support
 locked-NAND family. Accordingly the broad replacement/slack status fields remain false, and the
 same seven substantive activation blockers remain.
 
+The locked-NAND local bridge now contains six intrinsically typed direct-wire candidates with
+honest gate/output widths: equality `10/10`, constant one `2/2`, constant zero `3/3`, trace
+`18/18`, prefix conjunction `2/2`, and final conjunction `4/1`. Their internal programs are proved
+constant-free. A general semantic theorem sends nonconstant, nonprojection, pairwise-distinct
+outputs injectively to gates. Finite truth-signature proofs discharge those conditions for the five
+square local candidates and establish exact empty-context reference minima of 10, 2, 3, 18, and 2.
+The one-output final conjunction is excluded from that exactness claim.
+
+Locked-baseline arithmetic is also derived from the actual typed program: an `m`-gate program has
+`2m` source occurrences, `3m` trace-plus-source checks, and baseline
+`18m + 10w_= + 3w_0 + 2w_1 + 2(3m-1)`, followed by four displayed final gates. The report word is
+multi-output: its baseline coordinates plus one final coordinate remain exposed. Global candidate
+construction and cross-instance `BaselineDistinct` are still absent, so the locked builder,
+threshold, residual-slack-at-most-four bound, and polynomiality fields remain false.
+
+The legacy synthetic `m = 2` fixture is quarantined because its real four program sources conflict
+with metadata claiming six occurrences. Honest program-derived baseline/displayed counts are
+`86/90`; counts made consistent with that metadata are `95/99`; and the stored hybrid values are
+`91/95`. The typed Lean accounting, not this inconsistent seed, is current authority. See
+[`lean_locked_nand_baseline.md`](./lean_locked_nand_baseline.md) for the full local proof boundary.
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

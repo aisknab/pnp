@@ -1,0 +1,32 @@
+import PNP.LockedNANDLocalBaseline
+
+#print axioms PNP.DirectWire.bool2RowValuation
+#print axioms PNP.DirectWire.bool3RowValuation
+#print axioms PNP.DirectWire.bool4RowValuation
+#print axioms PNP.DirectWire.candidateOutputSignature
+#print axioms PNP.DirectWire.constantRowSignature
+#print axioms PNP.DirectWire.positiveProjectionRowSignature
+#print axioms PNP.DirectWire.FiniteBaselineSignatures
+#print axioms PNP.DirectWire.boolAndTrue_left
+#print axioms PNP.DirectWire.boolAndTrue_right
+#print axioms PNP.DirectWire.finiteBaselineSignatureCheck
+#print axioms PNP.DirectWire.finiteBaselineSignatureCheck_sound
+#print axioms PNP.DirectWire.exists_row_of_map_ne
+#print axioms PNP.DirectWire.bool_eq_true_of_ne_false
+#print axioms PNP.DirectWire.bool_eq_false_of_ne_true
+#print axioms PNP.DirectWire.baselineOutputConditions_of_finiteSignatures
+#print axioms PNP.DirectWire.equalityDirect_finiteBaseline
+#print axioms PNP.DirectWire.constantOneDirect_finiteBaseline
+#print axioms PNP.DirectWire.constantZeroDirect_finiteBaseline
+#print axioms PNP.DirectWire.traceDirect_finiteBaseline
+#print axioms PNP.DirectWire.prefixAndDirect_finiteBaseline
+#print axioms PNP.DirectWire.equalityDirect_baselineOutputConditions
+#print axioms PNP.DirectWire.constantOneDirect_baselineOutputConditions
+#print axioms PNP.DirectWire.constantZeroDirect_baselineOutputConditions
+#print axioms PNP.DirectWire.traceDirect_baselineOutputConditions
+#print axioms PNP.DirectWire.prefixAndDirect_baselineOutputConditions
+#print axioms PNP.DirectWire.equalityDirect_referenceMinimum
+#print axioms PNP.DirectWire.constantOneDirect_referenceMinimum
+#print axioms PNP.DirectWire.constantZeroDirect_referenceMinimum
+#print axioms PNP.DirectWire.traceDirect_referenceMinimum
+#print axioms PNP.DirectWire.prefixAndDirect_referenceMinimum

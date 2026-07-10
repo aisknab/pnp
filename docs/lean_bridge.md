@@ -42,6 +42,10 @@ lean/PNP/Complexity.lean
 lean/PNP/SAT.lean
 lean/PNP/LockedNANDMacros.lean
 lean/PNP/LockedNANDPrefix.lean
+lean/PNP/LockedNANDDirect.lean
+lean/PNP/DirectWireBaseline.lean
+lean/PNP/LockedNANDBaseline.lean
+lean/PNP/LockedNANDLocalBaseline.lean
 lean/PNP/LockedNAND.lean
 lean/PNP/ResidualBand.lean
 lean/PNP/ZeroSlack.lean
@@ -54,10 +58,15 @@ lean-audit/PNPNANDTruthTableAxiomAudit.lean
 lean-audit/PNPNANDMinimumAxiomAudit.lean
 lean-audit/PNPNANDCompositionAxiomAudit.lean
 lean-audit/PNPNANDSlackAxiomAudit.lean
+lean-audit/PNPLockedNANDDirectAxiomAudit.lean
+lean-audit/PNPDirectWireBaselineAxiomAudit.lean
+lean-audit/PNPLockedNANDBaselineAxiomAudit.lean
+lean-audit/PNPLockedNANDLocalBaselineAxiomAudit.lean
 docs/lean_nand_semantics.md
 docs/lean_nand_enumerator.md
 docs/lean_locked_nand_macros.md
 docs/lean_locked_nand_prefix.md
+docs/lean_locked_nand_baseline.md
 ```
 
 ## Complexity bridge
@@ -233,6 +242,35 @@ def lockedNANDPrefixCertificate : LockedNANDPrefixCertificate
 
 See `docs/lean_locked_nand_prefix.md` for the exact scope.
 
+## Typed locked-NAND candidates and local baselines
+
+`lean/PNP/LockedNANDDirect.lean` embeds all six displayed gadgets into the intrinsically typed
+direct-wire model. Their gate/output widths are `10/10`, `2/2`, `3/3`, `18/18`, `2/2`, and `4/1`.
+The embeddings agree with the Boolean macro semantics, and all six internal programs are proved to
+contain no carrier constants.
+
+`lean/PNP/DirectWireBaseline.lean` proves a general semantic output lower bound. If candidate
+outputs are nonconstant, are not positive input projections, and are pairwise semantically
+distinct, they inject into the program gates. Thus `outputs ≤ gates`; a square candidate satisfying
+those conditions has exact empty-context `referenceMinimum` equal to its gate count.
+
+`lean/PNP/LockedNANDLocalBaseline.lean` checks finite truth signatures and discharges those
+conditions for the five square local candidates. Their exact minima are 10, 2, 3, 18, and 2. The
+four-gate final conjunction has one output and is intentionally excluded from that exact-minimum
+claim.
+
+`lean/PNP/LockedNANDBaseline.lean` derives occurrence counts from actual typed sources. It proves
+that an `m`-gate program has `2m` sources, `3m` distinguished checks, and report baseline
+`18m + 10w_= + 3w_0 + 2w_1 + 2(3m-1)`, with four further displayed final gates. Its global
+exactness theorem is conditional on constructing a real square baseline candidate and proving its
+semantic output conditions.
+
+The report convention is multi-output: the baseline coordinates plus one final coordinate remain
+exposed. A legacy synthetic `m = 2` seed is quarantined because honest program-derived counts give
+`86/90`, metadata-consistent counts give `95/99`, and its stored hybrid gives `91/95` for
+baseline/displayed gates. See `docs/lean_locked_nand_baseline.md` for the derivation and proof
+boundary.
+
 ## Global locked-NAND layer
 
 `lean/PNP/LockedNAND.lean` keeps the full SAT builder and threshold theorem abstract:
@@ -244,7 +282,12 @@ structure LockedNANDReductionTrust where
   satReducesToLockedNAND : ReducesToPoly SAT LockedNANDThreshold
 ```
 
-The local macro truth laws and supplied-list prefix exactness are no longer part of that trust object. Remaining global work includes constructing the exact global distinguished-check list, carrier freshness, cross-instance separation, global baseline exactness, trace equivalence, final-lock lower bounds, the polynomial builder, the threshold equivalence, and the residual-slack-at-most-four theorem.
+The local macro truth laws, supplied-list prefix exactness, typed local candidates, source-derived
+accounting, semantic output lower bound, and five local square minima are no longer part of that
+trust object. Remaining global work includes constructing the exact global distinguished-check
+list and candidate, carrier freshness, cross-instance separation, global baseline exactness, trace
+equivalence, final-lock lower bounds, the polynomial builder, the threshold equivalence, and the
+residual-slack-at-most-four theorem.
 
 ## Residual-band, ZeroSlack, and PCCMin layers
 
@@ -329,6 +372,10 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 9. The exact 2(n-1) prefix gate count for nonempty check lists.
 10. Prefix-node exposed-output distinctness and nonconstant/nonprojection checks.
 11. Conditional composition from PCCMin through residual band, locked NAND, SAT, and the witness-model equality proposition, assuming the disclosed project axioms.
+12. Typed direct-wire realizations of all six local locked-NAND gadgets, with honest output widths and constant-free internal syntax.
+13. The semantic direct-wire lower bound `outputs ≤ gates` and conditional exactness for square baseline candidates.
+14. Source-derived locked-baseline occurrence, check, prefix, and displayed-gate accounting.
+15. Finite baseline conditions and exact reference minima for the five square local macros, excluding the one-output final conjunction.
 ```
 
 ## Explicit trust base after this pass
@@ -347,9 +394,9 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 The highest-value next targets are:
 
 ```text
-1. Construct the exact global distinguished-check list and prove each required check appears exactly once.
+1. Construct the exact global distinguished-check list and square baseline candidate.
 2. Formalize cross-instance locked-NAND freshness and baseline distinctness.
-3. Formalize the direct-wire output lower bound and baseline gate count.
+3. Lift the local conditions and source-derived count to global baseline exactness.
 4. Formalize trace equivalence and the locked threshold theorem.
 5. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
 6. Replace witness handles with concrete machine syntax and polynomial-bound semantics.
