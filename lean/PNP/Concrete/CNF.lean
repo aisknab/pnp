@@ -507,4 +507,378 @@ theorem decodeAssignmentCertificate_canonical (assignment : BitString) :
   rw [decodeTokenPairs_canonical]
   exact decodeAssignmentTokens_canonical assignment
 
+/-! ### Canonical formula round trip -/
+
+theorem token_append_assoc_constructive (left middle right : List CNFToken) :
+    (left ++ middle) ++ right = left ++ (middle ++ right) := by
+  induction left with
+  | nil => rfl
+  | cons token rest ih => exact congrArg (List.cons token) ih
+
+theorem token_append_nil_constructive (tokens : List CNFToken) :
+    tokens ++ [] = tokens := by
+  induction tokens with
+  | nil => rfl
+  | cons token rest ih => exact congrArg (List.cons token) ih
+
+theorem nat_add_succ_shift (left right : Nat) :
+    (left + 1) + right = left + (right + 1) := by
+  induction right with
+  | zero =>
+      rw [Nat.add_zero]
+  | succ right ih =>
+      change Nat.succ ((left + 1) + right) =
+        Nat.succ (left + (right + 1))
+      exact congrArg Nat.succ ih
+
+theorem decodeFormulaLiteral_unary (positive : Bool) (start count : Nat)
+    (suffix : List CNFToken) :
+    decodeFormulaLiteral positive start (encodeUnaryTokens count ++ suffix) =
+      match decodeFormulaClause suffix with
+      | none => none
+      | some (clause, clauses) =>
+          some ({ positive := positive, variableIndex := start + count } :: clause,
+            clauses) := by
+  induction count generalizing start with
+  | zero =>
+      change (match decodeFormulaClause suffix with
+        | none => none
+        | some (clause, clauses) =>
+            some (({ positive := positive, variableIndex := start } : CNFLiteral) :: clause,
+              clauses)) =
+        match decodeFormulaClause suffix with
+        | none => none
+        | some (clause, clauses) =>
+            some (({ positive := positive, variableIndex := start + 0 } : CNFLiteral) :: clause,
+              clauses)
+      rw [Nat.add_zero]
+  | succ count ih =>
+      change decodeFormulaLiteral positive (start + 1)
+          (encodeUnaryTokens count ++ suffix) =
+        match decodeFormulaClause suffix with
+        | none => none
+        | some (clause, clauses) =>
+            some ({ positive := positive, variableIndex := start + (count + 1) } ::
+              clause, clauses)
+      rw [ih]
+      rw [nat_add_succ_shift]
+
+theorem decodeFormulaClauses_canonical (clauses : List (List CNFLiteral)) :
+    decodeFormulaClauses (encodeClauseListTokens clauses ++ [.finish]) =
+      some clauses := by
+  induction clauses with
+  | nil => rfl
+  | cons clause rest restIH =>
+      have clauseDecoded :
+          decodeFormulaClause
+              (encodeLiteralListTokens clause ++
+                (.finish :: (encodeClauseListTokens rest ++ [.finish]))) =
+            some (clause, rest) := by
+        induction clause with
+        | nil =>
+            change (match decodeFormulaClauses
+                (encodeClauseListTokens rest ++ [.finish]) with
+              | none => none
+              | some decodedClauses => some ([], decodedClauses)) =
+                some ([], rest)
+            rw [restIH]
+        | cons literal tail tailIH =>
+            change decodeFormulaClause
+                ((encodeLiteralTokens literal ++ encodeLiteralListTokens tail) ++
+                  (.finish :: (encodeClauseListTokens rest ++ [.finish]))) =
+              some (literal :: tail, rest)
+            rw [token_append_assoc_constructive]
+            unfold encodeLiteralTokens
+            cases literal with
+            | mk positive variableIndex =>
+              cases positive with
+              | false =>
+                change decodeFormulaLiteral false 0
+                    (encodeUnaryTokens variableIndex ++
+                      (encodeLiteralListTokens tail ++
+                        (.finish :: (encodeClauseListTokens rest ++ [.finish])))) =
+                  some ({ positive := false, variableIndex := variableIndex } :: tail,
+                    rest)
+                rw [decodeFormulaLiteral_unary]
+                rw [tailIH]
+                change some
+                    ({ positive := false, variableIndex := 0 + variableIndex } :: tail,
+                      rest) =
+                  some ({ positive := false, variableIndex := variableIndex } :: tail,
+                    rest)
+                rw [Nat.zero_add]
+              | true =>
+                change decodeFormulaLiteral true 0
+                    (encodeUnaryTokens variableIndex ++
+                      (encodeLiteralListTokens tail ++
+                        (.finish :: (encodeClauseListTokens rest ++ [.finish])))) =
+                  some ({ positive := true, variableIndex := variableIndex } :: tail,
+                    rest)
+                rw [decodeFormulaLiteral_unary]
+                rw [tailIH]
+                change some
+                    ({ positive := true, variableIndex := 0 + variableIndex } :: tail,
+                      rest) =
+                  some ({ positive := true, variableIndex := variableIndex } :: tail,
+                    rest)
+                rw [Nat.zero_add]
+      change decodeFormulaClauses
+          ((encodeClauseTokens clause ++ encodeClauseListTokens rest) ++ [.finish]) =
+        some (clause :: rest)
+      rw [token_append_assoc_constructive]
+      change (match decodeFormulaClause
+          ((encodeLiteralListTokens clause ++ [.finish]) ++
+            (encodeClauseListTokens rest ++ [.finish])) with
+        | none => none
+        | some (decodedClause, decodedClauses) =>
+            some (decodedClause :: decodedClauses)) = some (clause :: rest)
+      rw [token_append_assoc_constructive]
+      exact congrArg (fun result =>
+        match result with
+        | none => none
+        | some (decodedClause, decodedClauses) =>
+            some (decodedClause :: decodedClauses)) clauseDecoded
+
+theorem decodeFormulaHeader_unary (start count : Nat)
+    (clauses : List (List CNFLiteral)) :
+    decodeFormulaHeader start
+        (encodeUnaryTokens count ++ encodeClauseListTokens clauses ++ [.finish]) =
+      some { variableCount := start + count, clauses := clauses } := by
+  induction count generalizing start with
+  | zero =>
+      change (match decodeFormulaClauses
+          (encodeClauseListTokens clauses ++ [.finish]) with
+        | none => none
+        | some decodedClauses =>
+            some ({ variableCount := start, clauses := decodedClauses } : CNFFormula)) =
+          some ({ variableCount := start + 0, clauses := clauses } : CNFFormula)
+      rw [decodeFormulaClauses_canonical]
+      rw [Nat.add_zero]
+  | succ count ih =>
+      change decodeFormulaHeader (start + 1)
+          (encodeUnaryTokens count ++ encodeClauseListTokens clauses ++ [.finish]) =
+        some { variableCount := start + (count + 1), clauses := clauses }
+      rw [ih]
+      rw [nat_add_succ_shift]
+
+/-- Canonical formula token streams round-trip exactly. -/
+theorem decodeCNFTokens_canonical (formula : CNFFormula) :
+    decodeCNFTokens (encodeCNFTokens formula) = some formula := by
+  unfold decodeCNFTokens encodeCNFTokens
+  rw [decodeFormulaHeader_unary]
+  cases formula with
+  | mk variableCount clauses =>
+      change some
+          ({ variableCount := 0 + variableCount, clauses := clauses } : CNFFormula) =
+        some ({ variableCount := variableCount, clauses := clauses } : CNFFormula)
+      rw [Nat.zero_add]
+
+/-- Canonical raw formula strings round-trip exactly. -/
+theorem decodeEncodedCNF_canonical (formula : CNFFormula) :
+    decodeEncodedCNF (encodeCNF formula) = some formula := by
+  unfold decodeEncodedCNF encodeCNF
+  rw [decodeFormulaTokenPairs_canonical]
+  exact decodeCNFTokens_canonical formula
+
+/-! ### Encoded checker and SAT language -/
+
+/-- Parse a raw formula and a raw assignment certificate and check them.  Any
+malformed component fails closed. -/
+def checkEncodedCertificate (encodedFormula certificate : BitString) : Bool :=
+  match decodeEncodedCNF encodedFormula with
+  | none => false
+  | some formula =>
+      match decodeAssignmentCertificate certificate with
+      | none => false
+      | some assignment => checkCNF formula assignment
+
+/-- Existential semantics of one already-decoded formula. -/
+def CNFFormula.Satisfiable (formula : CNFFormula) : Prop :=
+  ∃ assignment, formula.Satisfied assignment
+
+/-- The concrete language of strictly encoded satisfiable CNF formulae. -/
+def CNFSAT : Language := fun encodedFormula =>
+  ∃ formula,
+    decodeEncodedCNF encodedFormula = some formula ∧ formula.Satisfiable
+
+/-- The raw checker reflects the independently stated propositional
+semantics, including both strict decoders. -/
+theorem checkEncodedCertificate_eq_true_iff
+    (encodedFormula certificate : BitString) :
+    checkEncodedCertificate encodedFormula certificate = true ↔
+      ∃ formula assignment,
+        decodeEncodedCNF encodedFormula = some formula ∧
+          decodeAssignmentCertificate certificate = some assignment ∧
+          formula.Satisfied assignment := by
+  unfold checkEncodedCertificate
+  cases formulaCase : decodeEncodedCNF encodedFormula with
+  | none =>
+      constructor
+      · intro impossible
+        exact Bool.noConfusion impossible
+      · intro existsDecoded
+        rcases existsDecoded with ⟨formula, assignment, decodedFormula,
+          decodedAssignment, satisfied⟩
+        cases decodedFormula
+  | some formula =>
+      cases assignmentCase : decodeAssignmentCertificate certificate with
+      | none =>
+          constructor
+          · intro impossible
+            exact Bool.noConfusion impossible
+          · intro existsDecoded
+            rcases existsDecoded with ⟨decodedFormula, assignment, formulaEqual,
+              assignmentEqual, satisfied⟩
+            cases assignmentEqual
+      | some assignment =>
+          constructor
+          · intro checked
+            exact ⟨formula, assignment, rfl, rfl,
+              (checkCNF_eq_true_iff formula assignment).mp checked⟩
+          · intro existsDecoded
+            rcases existsDecoded with ⟨decodedFormula, decodedAssignment,
+              formulaEqual, assignmentEqual, satisfied⟩
+            have formulasEqual : formula = decodedFormula :=
+              Option.some.inj formulaEqual
+            have assignmentsEqual : assignment = decodedAssignment :=
+              Option.some.inj assignmentEqual
+            cases formulasEqual
+            cases assignmentsEqual
+            exact (checkCNF_eq_true_iff formula assignment).mpr satisfied
+
+theorem checkEncodedCertificate_canonical_eq_true_iff
+    (formula : CNFFormula) (assignment : BitString) :
+    checkEncodedCertificate (encodeCNF formula)
+        (encodeAssignmentCertificate assignment) = true ↔
+      formula.Satisfied assignment := by
+  rw [checkEncodedCertificate_eq_true_iff]
+  constructor
+  · intro existsDecoded
+    rcases existsDecoded with ⟨decodedFormula, decodedAssignment, formulaEqual,
+      assignmentEqual, satisfied⟩
+    have formulasEqual : decodedFormula = formula :=
+      Option.some.inj (formulaEqual.symm.trans (decodeEncodedCNF_canonical formula))
+    have assignmentsEqual : decodedAssignment = assignment :=
+      Option.some.inj
+        (assignmentEqual.symm.trans
+          (decodeAssignmentCertificate_canonical assignment))
+    cases formulasEqual
+    cases assignmentsEqual
+    exact satisfied
+  · intro satisfied
+    exact ⟨formula, assignment, decodeEncodedCNF_canonical formula,
+      decodeAssignmentCertificate_canonical assignment, satisfied⟩
+
+theorem cnfSAT_iff_encoded_certificate (encodedFormula : BitString) :
+    CNFSAT encodedFormula ↔
+      ∃ certificate, checkEncodedCertificate encodedFormula certificate = true := by
+  constructor
+  · intro satisfiable
+    rcases satisfiable with ⟨formula, decoded, assignment, satisfied⟩
+    refine ⟨encodeAssignmentCertificate assignment, ?_⟩
+    rw [checkEncodedCertificate_eq_true_iff]
+    exact ⟨formula, assignment, decoded,
+      decodeAssignmentCertificate_canonical assignment, satisfied⟩
+  · intro acceptedCertificate
+    rcases acceptedCertificate with ⟨certificate, accepted⟩
+    have reflected :=
+      (checkEncodedCertificate_eq_true_iff encodedFormula certificate).mp accepted
+    rcases reflected with ⟨formula, assignment, decodedFormula, decodedAssignment,
+      satisfied⟩
+    exact ⟨formula, decodedFormula, assignment, satisfied⟩
+
+/-! ### Certificate-size accounting -/
+
+theorem token_bits_length (token : CNFToken) : token.bits.length = 2 := by
+  cases token <;> rfl
+
+theorem token_length_append_constructive (left right : List CNFToken) :
+    (left ++ right).length = left.length + right.length := by
+  induction left with
+  | nil => exact (Nat.zero_add right.length).symm
+  | cons token rest ih =>
+      change Nat.succ (rest ++ right).length = Nat.succ rest.length + right.length
+      rw [Nat.succ_add]
+      exact congrArg Nat.succ ih
+
+theorem encodeTokenPairs_length (tokens : List CNFToken) :
+    (encodeTokenPairs tokens).length = 2 * tokens.length := by
+  induction tokens with
+  | nil => rfl
+  | cons token rest ih =>
+      change (token.bits ++ encodeTokenPairs rest).length =
+        2 * Nat.succ rest.length
+      rw [BitString.length_append_constructive]
+      rw [token_bits_length]
+      rw [ih]
+      change 2 + 2 * rest.length = 2 * rest.length + 2
+      exact (Nat.add_comm (2 * rest.length) 2).symm
+
+theorem encodeAssignmentTokens_length (assignment : BitString) :
+    (encodeAssignmentTokens assignment).length = assignment.length + 1 := by
+  induction assignment with
+  | nil => rfl
+  | cons value rest ih =>
+      change Nat.succ (encodeAssignmentTokens rest).length =
+        Nat.succ rest.length + 1
+      rw [ih]
+
+theorem encodeAssignmentCertificate_size (assignment : BitString) :
+    BitString.size (encodeAssignmentCertificate assignment) =
+      2 * (assignment.length + 1) := by
+  unfold BitString.size encodeAssignmentCertificate
+  rw [encodeTokenPairs_length]
+  rw [encodeAssignmentTokens_length]
+
+theorem decodeFormulaHeader_variable_succ_le (start : Nat)
+    (tokens : List CNFToken) (formula : CNFFormula)
+    (decoded : decodeFormulaHeader start tokens = some formula) :
+    formula.variableCount + 1 ≤ start + tokens.length := by
+  induction tokens generalizing start formula with
+  | nil =>
+      change none = some formula at decoded
+      cases decoded
+  | cons token rest ih =>
+      cases token with
+      | f =>
+          change (match decodeFormulaClauses rest with
+            | none => none
+            | some clauses =>
+                some ({ variableCount := start, clauses := clauses } : CNFFormula)) =
+              some formula at decoded
+          cases clausesCase : decodeFormulaClauses rest with
+          | none =>
+              rw [clausesCase] at decoded
+              cases decoded
+          | some clauses =>
+              rw [clausesCase] at decoded
+              have formulaEqual :
+                  ({ variableCount := start, clauses := clauses } : CNFFormula) =
+                    formula := Option.some.inj decoded
+              cases formulaEqual
+              change start + 1 ≤ start + Nat.succ rest.length
+              exact Nat.add_le_add_left
+                (Nat.succ_le_succ (Nat.zero_le rest.length)) start
+      | t =>
+          change decodeFormulaHeader (start + 1) rest = some formula at decoded
+          have bound := ih (start + 1) formula decoded
+          change formula.variableCount + 1 ≤ start + Nat.succ rest.length
+          have rightEqual : (start + 1) + rest.length =
+              start + Nat.succ rest.length := nat_add_succ_shift start rest.length
+          exact rightEqual ▸ bound
+      | sep =>
+          change none = some formula at decoded
+          cases decoded
+      | finish =>
+          change none = some formula at decoded
+          cases decoded
+
+theorem decodeCNFTokens_variable_succ_le (tokens : List CNFToken)
+    (formula : CNFFormula) (decoded : decodeCNFTokens tokens = some formula) :
+    formula.variableCount + 1 ≤ tokens.length := by
+  unfold decodeCNFTokens at decoded
+  have bound := decodeFormulaHeader_variable_succ_le 0 tokens formula decoded
+  rw [Nat.zero_add] at bound
+  exact bound
+
 end PNP.Concrete
