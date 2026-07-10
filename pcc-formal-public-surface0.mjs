@@ -4,9 +4,11 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 
+import { CheckFormalReconstructionStatus0 } from './pcc-formal-reconstruction-status0.mjs';
+
 const CHECKER = 'CheckFormalPublicSurface0';
 const VERSION = 0;
-const COORDINATE = 'PUBLIC-SURFACE-BASELINE-2026-07-10-EXPLICIT-RESIDUAL-ROUTES-09';
+const COORDINATE = 'PUBLIC-SURFACE-BASELINE-2026-07-10-FORMAL-PUBLICATION-INVENTORY-10';
 const OUTPUT_PATH = 'artifacts/formal-public-surface/latest-verdict.json';
 
 export const CURRENT_PACKAGE_EXPORTS0 = Object.freeze({
@@ -17,11 +19,17 @@ export const CURRENT_PACKAGE_EXPORTS0 = Object.freeze({
 });
 
 export const CURRENT_PACKAGE_SCRIPTS0 = Object.freeze({
-  check: 'node --check index.mjs && node --check pcc-formal-reconstruction-status0.mjs && node --check pcc-formal-public-surface0.mjs && node --check pcc-legacy-v0-archive0.mjs && node --check scripts/pnp-verify-all.mjs && node --check scripts/replay-legacy-v0.mjs',
-  test: 'node --test audits/formal-reconstruction-status0.test.mjs audits/formal-public-surface0.test.mjs audits/lean-root-target0.test.mjs audits/lean-nand-semantics0.test.mjs audits/lean-nand-enumerator0.test.mjs audits/lean-nand-reference-minimum0.test.mjs audits/lean-locked-nand-baseline0.test.mjs audits/lean-locked-nand-threshold-boundary0.test.mjs audits/lean-residual-routes0.test.mjs audits/legacy-v0-archive0.test.mjs test/current-package-surface0.test.mjs test/current-verifier0.test.mjs test/replay-legacy-v0.test.mjs',
+  check: 'node --check index.mjs && node --check formal-publication0.mjs && node --check pcc-formal-reconstruction-status0.mjs && node --check pcc-formal-public-surface0.mjs && node --check pcc-legacy-v0-archive0.mjs && node --check scripts/export-lean-theorem-inventory.mjs && node --check scripts/generate-formal-publication.mjs && node --check scripts/build-canonical-report.mjs && node --check scripts/pnp-verify-all.mjs && node --check scripts/replay-legacy-v0.mjs',
+  test: 'node --test audits/formal-reconstruction-status0.test.mjs audits/formal-public-surface0.test.mjs audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs audits/lean-root-target0.test.mjs audits/lean-nand-semantics0.test.mjs audits/lean-nand-enumerator0.test.mjs audits/lean-nand-reference-minimum0.test.mjs audits/lean-locked-nand-baseline0.test.mjs audits/lean-locked-nand-threshold-boundary0.test.mjs audits/lean-residual-routes0.test.mjs audits/legacy-v0-archive0.test.mjs test/current-package-surface0.test.mjs test/current-verifier0.test.mjs test/replay-legacy-v0.test.mjs',
   validate: 'npm run check && npm test && npm run pnp:verify -- --no-write',
   'formal:status': 'node pcc-formal-reconstruction-status0.mjs --json',
   'formal:surface': 'node pcc-formal-public-surface0.mjs --json',
+  'formal:inventory': 'node scripts/export-lean-theorem-inventory.mjs',
+  'formal:inventory:check': 'node scripts/export-lean-theorem-inventory.mjs --check',
+  'formal:publication': 'node scripts/generate-formal-publication.mjs',
+  'formal:publication:check': 'node scripts/generate-formal-publication.mjs --check',
+  'report:build': 'node scripts/build-canonical-report.mjs',
+  'report:check': 'node scripts/build-canonical-report.mjs --check',
   'pnp:verify': 'node scripts/pnp-verify-all.mjs --json',
   'legacy:v0:check': 'node pcc-legacy-v0-archive0.mjs --json',
   'legacy:v0:replay': 'node scripts/replay-legacy-v0.mjs',
@@ -95,6 +103,16 @@ export async function CheckFormalPublicSurface0(options = {}) {
       ));
     }
 
+    const status = await CheckFormalReconstructionStatus0({ root, writeOutput: false });
+    if (status.tag !== 'accept') {
+      return finish0(root, outputPath, writeOutput, reject0(
+        'FormalPublicSurface.StatusRejected',
+        ['status/FORMAL_RECONSTRUCTION_STATUS.json'],
+        'the public surface cannot be validated without the concrete-gate-derived status',
+        { status },
+      ));
+    }
+
     const indexText = String(indexSource);
     const leaked = FORBIDDEN_ACTIVE_SURFACE_TOKENS.filter((token) => indexText.includes(token));
     if (leaked.length !== 0) {
@@ -132,12 +150,12 @@ export async function CheckFormalPublicSurface0(options = {}) {
       coordinate: COORDINATE,
       claimStatus: 'formal-reconstruction-in-progress',
       currentStatusAuthority: true,
-      mathematicalTheoremEstablished: false,
+      mathematicalTheoremEstablished: status.mathematicalTheoremEstablished,
       checkerAcceptanceIsMathematicalProof: false,
-      publicTheoremEmissionAllowed: false,
-      publicTheoremStatement: null,
-      publicTheoremConclusion: null,
-      finalTheoremReady: false,
+      publicTheoremEmissionAllowed: status.publicTheoremEmissionAllowed,
+      publicTheoremStatement: status.publicTheoremStatement,
+      publicTheoremConclusion: status.publicTheoremConclusion,
+      finalTheoremReady: status.finalTheoremReady,
       legacyV0CheckerExportedAsCurrentAuthority: false,
       legacyV0ReplayRequiresDesignatedCommand: true,
       packageExports: { ...CURRENT_PACKAGE_EXPORTS0 },

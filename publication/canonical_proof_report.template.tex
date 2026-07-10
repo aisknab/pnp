@@ -44,7 +44,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-10}\par}
+{\large Coordinate \code{@@STATUS_COORDINATE@@}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -62,15 +62,15 @@
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 1761 \\
-Theorem-kind declarations & 662 \\
-Assumption-free theorem-kind declarations & 589 \\
-Project-specific axioms & 5 \\
+Compiled declarations & @@DECLARATION_COUNT@@ \\
+Theorem-kind declarations & @@THEOREM_COUNT@@ \\
+Assumption-free theorem-kind declarations & @@ASSUMPTION_FREE_COUNT@@ \\
+Project-specific axioms & @@AXIOM_COUNT@@ \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{4e4ab307d1651bb4440ab983595375a82cc172e418b8901901125d4b756f0b28}\par}
+{\small Inventory SHA-256: \code{@@INVENTORY_SHA@@}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -121,23 +121,7 @@ fingerprint is null, while the concrete model is ineligible, or while any other 
 Gate subcheck & Result \\
 \midrule
 \endhead
-standardComplexityModelEligible & \statusfalse \\
-concreteTargetPresent & \statusfalse \\
-concreteTargetIsDefinition & \statusfalse \\
-concreteTargetKernelTypeFingerprintConfigured & \statusfalse \\
-concreteTargetKernelTypeFingerprintMatches & \statusfalse \\
-concreteTargetKernelValueFingerprintConfigured & \statusfalse \\
-concreteTargetKernelValueFingerprintMatches & \statusfalse \\
-compatibilityRootPresent & \statusfalse \\
-compatibilityRootIsTheorem & \statusfalse \\
-compatibilityRootHasExactConcreteType & \statusfalse \\
-compatibilityRootKernelTypeFingerprintConfigured & \statusfalse \\
-compatibilityRootKernelTypeFingerprintMatches & \statusfalse \\
-axiomClosureFingerprintConfigured & \statusfalse \\
-axiomClosureFingerprintMatches & \statusfalse \\
-sourceClosureFingerprintConfigured & \statusfalse \\
-sourceClosureFingerprintMatches & \statusfalse \\
-axiomClosureUsesOnlyLeanStandardAllowlist & \statusfalse \\
+@@GATE_ROWS@@
 \bottomrule
 \end{longtable}
 
@@ -151,11 +135,7 @@ currently disclosed project axioms are:
 \setlength{\parsep}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\topsep}{3pt}
-\item \code{PNP.CheckPCCPackexp}
-\item \code{PNP.GeneratePCCPack}
-\item \code{PNP.LockedNANDThreshold}
-\item \code{PNP.ResidualBandExactMinimization}
-\item \code{PNP.SAT}
+@@AXIOM_ITEMS@@
 \end{itemize}
 \end{samepage}
 
@@ -179,23 +159,15 @@ source closure. Human-readable scope remains conservative: type or source drift 
 Milestone & Status & Exact scope & Boundary \\
 \midrule
 \endhead
-Typed direct-wire NAND semantics & formalized & Typed topological Boolean NAND programs and ordered multi-output direct-wire semantics. & This does not establish circuit minimization, SAT, or P = NP. \\
-Finite enumeration, equivalence, and reference minimum & formalized & Exhaustive finite Boolean direct-wire search under the empty-profile reference model. & No polynomial-runtime result is obtained from this exhaustive reference search. \\
-Concrete framed replacement and slack & formalized & The concrete serial framed context with support outputs and explicit bypass wires. & This is not an arbitrary-support replacement theorem for the report's global family. \\
-Locked-NAND local candidates and baseline accounting & formalized & Typed local macro candidates, source-derived counts, and five finite local square baselines. & Local minima are not a global BaselineDistinct or locked-NAND threshold theorem. \\
-Conditional locked-NAND threshold boundary & formalized-with-premises & A proof-bearing six-premise candidate boundary for an arbitrary satisfiable proposition. & The premises are not instantiated by a uniform SAT-to-locked-NAND builder. \\
-Fail-closed explicit-list residual routes & formalized-explicit-list-only & Executable strict-gain search over a caller-supplied finite implementation list. & Unresolved excludes no gain outside the supplied list and cannot imply ZeroSlack. \\
-Global locked-NAND construction and threshold & not-formalized & A uniform answer-independent SAT instance builder, global baseline, trace equivalence, and threshold. & The conditional boundary does not discharge this missing theorem. \\
-Global ZeroSlack, PCCMin, and polynomial runtime & not-formalized & Complete residual routing, global ZeroSlack contradiction, exact minimization, and polynomial bounds. & Proof-bearing result structures and explicit-list failure do not supply global completeness. \\
-Concrete standard P-versus-NP target and root theorem & not-formalized & Concrete machine semantics, complexity classes, SAT, reductions, and the publication root theorem. & The current string-handle PNP.PEqualsNP bridge is nonstandard and publication-ineligible. \\
+@@MILESTONE_ROWS@@
 \bottomrule
 \end{longtable}
 }
 
 \section{Compiled inventory summary}
 
-The inventory contains 1761 exported \code{PNP.*} kernel declarations from
-22 modules. It excludes 33 private compiler auxiliaries.
+The inventory contains @@DECLARATION_COUNT@@ exported \code{PNP.*} kernel declarations from
+@@MODULE_COUNT@@ modules. It excludes @@EXCLUDED_PRIVATE_COUNT@@ private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -205,28 +177,7 @@ Counts describe the compiled environment; they do not measure mathematical compl
 Module & Declarations & Theorems \\
 \midrule
 \endhead
-PNP.Bridge & 93 & 22 \\
-PNP.Complexity & 93 & 20 \\
-PNP.DirectWireBaseline & 48 & 25 \\
-PNP.LockedNAND & 11 & 4 \\
-PNP.LockedNANDBaseline & 57 & 22 \\
-PNP.LockedNANDDirect & 84 & 57 \\
-PNP.LockedNANDLocalBaseline & 30 & 22 \\
-PNP.LockedNANDMacros & 288 & 98 \\
-PNP.LockedNANDPrefix & 84 & 40 \\
-PNP.LockedNANDThresholdBoundary & 60 & 35 \\
-PNP.Main & 36 & 12 \\
-PNP.NANDComposition & 77 & 38 \\
-PNP.NANDEnumerator & 120 & 46 \\
-PNP.NANDMinimum & 56 & 23 \\
-PNP.NANDSemantics & 198 & 80 \\
-PNP.NANDSlack & 15 & 12 \\
-PNP.NANDTruthTable & 72 & 28 \\
-PNP.PCCMin & 44 & 8 \\
-PNP.ResidualBand & 9 & 2 \\
-PNP.ResidualRoutes & 141 & 46 \\
-PNP.SAT & 4 & 1 \\
-PNP.ZeroSlack & 141 & 21 \\
+@@MODULE_ROWS@@
 \bottomrule
 \end{longtable}
 }
@@ -240,13 +191,7 @@ Seven formal blockers remain active:
 \setlength{\parsep}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\topsep}{3pt}
-\item \code{Formal.ConcreteComplexityModel}
-\item \code{Formal.ConcreteSAT}
-\item \code{Formal.LockedNANDThreshold}
-\item \code{Formal.ResidualBandMinimizer}
-\item \code{Formal.ZeroSlack}
-\item \code{Formal.PolynomialRuntimeAndCertificateBounds}
-\item \code{Formal.RootTheoremAndAxiomAudit}
+@@BLOCKER_ITEMS@@
 \end{enumerate}
 
 \begin{samepage}
@@ -288,10 +233,10 @@ npm run report:check
 \end{verbatim}
 }
 
-The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-10-10}. Its exact byte digest is
-\code{4e4ab307d1651bb4440ab983595375a82cc172e418b8901901125d4b756f0b28}. The report is regenerated from that inventory and the reviewed
+The inventory coordinate is \code{@@INVENTORY_COORDINATE@@}. Its exact byte digest is
+\code{@@INVENTORY_SHA@@}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{0c96305d4f2235aae359c865e91e0f58cafa4d20d9b040a16e992846360cfa3f}; the computed and pinned values match. Successful regeneration
+\code{@@MILESTONE_SOURCE_SHA@@}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 

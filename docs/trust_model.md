@@ -6,6 +6,13 @@
 > [`../status/FORMAL_RECONSTRUCTION_STATUS.json`](../status/FORMAL_RECONSTRUCTION_STATUS.json) and
 > [`FORMAL_RECONSTRUCTION.md`](FORMAL_RECONSTRUCTION.md).
 
+> **Historical report-citation boundary:** Every numbered `Report §...`, appendix, or
+> `canonical_proof_report.tex` citation below refers exclusively to the historical 56-page
+> manuscript at source tag `final-pnp-proof-report-hardened-7072f8d` (commit
+> `7072f8d0bda6d44d240f9bb3fad624fd357e1278`). It never refers to the generated six-page report
+> now at the repository root. For current authority, start with
+> [`lean_theorem_inventory.md`](lean_theorem_inventory.md).
+
 ## Purpose and scope
 
 This document identifies the components that had to be trusted, checked, reproduced, or

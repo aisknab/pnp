@@ -49,15 +49,22 @@ bundle path:
 proof-artifacts/final-pnp-proof-report-hardened-7072f8d/
 ```
 
-### Historical manuscript carried on `main`
+### Historical 56-page claim manuscript
 
 ```text
 canonical_proof_report.tex
 canonical_proof_report.pdf
 ```
 
-The manuscript states the author's historical claim and is subordinate to the formal-reconstruction
-status. Its presence on `main` does not make its theorem wording current.
+These filenames identify the 56-page claim manuscript in the pinned legacy source tree. The
+historical manuscript is no longer carried at the current repository root: retrieve it only from
+the pinned source tag above. Its immutable coordinate is recorded by this archive, but its theorem
+wording is not current authority.
+
+The files with those names on current `main` are instead the generated, concise six-page
+formal-reconstruction report. That report is derived from the compiled Lean inventory and the
+false concrete publication gate; it does not establish `P = NP` or reproduce the historical claim
+artifact.
 
 ## Toolchain
 

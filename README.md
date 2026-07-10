@@ -10,20 +10,25 @@
 > [formal reconstruction notice](./docs/FORMAL_RECONSTRUCTION.md) and the active
 > [machine-readable status](./status/FORMAL_RECONSTRUCTION_STATUS.json).
 
-This repository contains the JavaScript checker stack, package generator, materialized certificate and replay records, sealed release artefacts, canonical report, tests, and reviewer documentation for a proposed SAT-to-exact-NAND-minimization route. The claim is extraordinary and has not received independent mathematical validation.
+This repository contains the current Lean reconstruction, compiled theorem inventory,
+fail-closed publication gate, generated nonclaiming canonical report, historical JavaScript checker
+and replay records, tests, and reviewer documentation for a proposed
+SAT-to-exact-NAND-minimization route. The claim is extraordinary and has not received independent
+mathematical validation.
 
 ## Read this first
 
 | Question | Current answer |
 | --- | --- |
 | **What is this repository?** | Source code, finite certificate records, checker and replay machinery, tests, release artefacts, and audit documentation for the author's claimed `P = NP` result. |
-| **What extraordinary claim is being made?** | The report claims a deterministic polynomial-time SAT algorithm by reducing SAT to exact minimization of specially locked multi-output NAND words with residual slack at most four, then applying a claimed polynomial exact minimizer for that residual band. |
-| **What is the current verification status?** | Formal reconstruction is in progress. Public theorem emission is disabled, the required root Lean theorem is absent, and substantive formal obligations remain. The frozen 7072f8d release records historical checker acceptance, but that acceptance is assertion-checker evidence and not a proof of the named mathematical propositions. |
+| **What extraordinary claim was proposed?** | The historical report claimed a deterministic polynomial-time SAT algorithm by reducing SAT to exact minimization of specially locked multi-output NAND words with residual slack at most four, then applying a claimed polynomial exact minimizer for that residual band. |
+| **What is the current verification status?** | Formal reconstruction is in progress. A deterministic inventory is generated from compiled Lean declarations and their axiom closures, but the separate concrete publication gate fails closed: both required declarations are absent and its activation fingerprints are intentionally unset. Earned intermediate milestones are separately bound to reviewed theorem-type and whole-source-closure hashes. Public theorem emission remains disabled. The frozen 7072f8d release records historical checker acceptance, not a proof of the named propositions. |
 | **What can a hash check establish?** | That retrieved bytes match a published checksum ledger, subject to the hash implementation and collision assumptions. It does **not** establish theorem correctness, checker soundness, or correct generation. |
 | **What can the checker establish?** | That the supplied records satisfy the predicates implemented by the named checker and its linkage rules. Checker acceptance does **not** independently establish that those predicates are mathematically sufficient or correctly implemented. |
-| **What remains formally?** | The Lean toolchain/root, direct-wire layers, local locked-NAND baselines, the conditional six-field threshold deduction, and a fail-closed explicit-list gain scanner are formalized and axiom-audited. Global route completeness, carrier layout, cross-instance baseline distinctness, trace equivalence, derived final-output laws, the uniform builder and report threshold, unconditional slack at most four, concrete complexity/SAT, residual-band/`ZeroSlack`, polynomial bounds, and the root-theorem audit remain. `PNP.Main.p_eq_np` is absent. |
+| **What remains formally?** | The Lean toolchain/root, direct-wire layers, local locked-NAND baselines, the conditional six-field threshold deduction, and a fail-closed explicit-list gain scanner are formalized and axiom-audited. Global route completeness, carrier layout, cross-instance baseline distinctness, trace equivalence, derived final-output laws, the uniform builder and report threshold, unconditional slack at most four, concrete complexity/SAT, residual-band/`ZeroSlack`, polynomial bounds, and the root-theorem audit remain. `PNP.Main.p_eq_np` and `PNP.Main.ConcretePEqualsNP` are absent; abstract `PNP.PEqualsNP` is not publication-eligible. |
+| **What is the current canonical report?** | The root TeX/PDF is a generated, concise six-page formal-reconstruction report with theorem emission disabled. The historical 56-page claim manuscript is available only at the pinned legacy coordinate recorded under `archive/legacy-v0/`. |
 | **How do I run the current verification?** | Run `npm ci --ignore-scripts` and `npm run pnp:verify -- --no-write`. This checks the non-claiming formal status, current package surface, pinned archive identity, and the small current-authority test suite; it is not a proof verification. |
-| **Where should reviewers start?** | Start with [docs/reviewer_guide.md](./docs/reviewer_guide.md), then [docs/proof_pipeline.md](./docs/proof_pipeline.md), [docs/terminology_crosswalk.md](./docs/terminology_crosswalk.md), and [docs/trust_model.md](./docs/trust_model.md). |
+| **Where should reviewers start?** | Start with the current-authority [compiled Lean theorem inventory](./docs/lean_theorem_inventory.md) and [formal reconstruction notice](./docs/FORMAL_RECONSTRUCTION.md). The reviewer guide, proof pipeline, terminology crosswalk, trust model, and audit questions are historical checker-route review aids whose numbered report citations target the pinned 56-page manuscript. |
 
 ## Current claim boundary
 
@@ -68,6 +73,8 @@ suite; it must not be confused with the frozen 1,121-test source release.
 | --- | --- | --- | --- |
 | Current test suite | `npm test` | The formal status, package boundary, archive pins, and replay guards pass in the selected environment. | Legacy checker validation, exhaustive correctness, or polynomial asymptotics. |
 | Pinned Lean root | `lake build PNP` and `lake env lean -DwarningAsError=true lean-audit/PNPBridgeAxiomAudit.lean` | Lean 4.31.0 compiles the explicit `PNP` root; the non-theorem root-status data is assumption-free; the conditional bridge's dependencies are printed. | A root theorem or a proof of `P = NP`; five disclosed project-specific axioms remain. |
+| Compiled theorem inventory | `node scripts/export-lean-theorem-inventory.mjs --check` | `Lean.Environment.constants` and `Lean.collectAxioms` reproduce the canonical, byte-identical status and public inventory mirrors from the compiled `PNP` environment. | Source-level proof review, a concrete complexity model, or a publication-eligible theorem. |
+| Concrete publication gate and report | `node scripts/generate-formal-publication.mjs --check` and `npm run report:check` | Status and the concise six-page canonical report match the compiled inventory and the false, fail-closed gate. | `P = NP`, permission to emit a theorem, or validation of the historical claim report. |
 | Direct-wire NAND semantics | `lake env lean -DwarningAsError=true lean-audit/PNPNANDSemanticsAxiomAudit.lean` | The typed topological NAND syntax, Boolean evaluation, output-wiring laws, and small semantic examples are assumption-free. | Enumeration, minimum size, replacement/slack, the locked builder or threshold, SAT, or `P = NP`. |
 | Exact-width NAND enumerator | `lake env lean -DwarningAsError=true lean-audit/PNPNANDEnumeratorAxiomAudit.lean` | Every typed source, ordered gate, topological program, and output tuple appears; every existing program/word pair has an enumerated reification with the same program and pointwise output sources. | Canonical or duplicate-free enumeration, semantic equivalence, minimum size, replacement/slack, threshold, SAT, or `P = NP`. |
 | Exhaustive direct-wire reference minimum | `lake env lean -DwarningAsError=true lean-audit/PNPNANDMinimumAxiomAudit.lean` | Finite truth tables decide semantic equivalence; exact candidate sizes are scanned from zero through the target size; the selected size has an equivalent witness and is a global lower bound; residual slack is zero exactly at semantic minimum. | Any practical or polynomial runtime, the report's residual-band minimizer, locked-NAND threshold, SAT, or `P = NP`. |
@@ -91,15 +98,21 @@ artefact path:   proof-artifacts/final-pnp-proof-report-hardened-7072f8d/
 archive manifest: archive/legacy-v0/ARCHIVE.json
 ```
 
-The canonical report is available as [PDF](./canonical_proof_report.pdf) and [TeX](./canonical_proof_report.tex). It states the author's mathematical claim; publication in this repository is not independent validation.
+The current canonical [PDF](./canonical_proof_report.pdf) and
+[TeX](./canonical_proof_report.tex) form a generated, concise six-page reconstruction report. It
+records the false concrete publication gate and does not state an established `P = NP` theorem.
+The historical 56-page claim manuscript is retained only at the pinned legacy source coordinate
+recorded by [`archive/legacy-v0/`](./archive/legacy-v0/README.md).
 
 ## Reviewer map
 
-- [Reviewer guide](./docs/reviewer_guide.md): neutral overview, audit paths, and fast falsification checklist.
-- [Proof pipeline](./docs/proof_pipeline.md): standard terminology, mathematical route, executable evidence route, and hidden-search risks.
-- [Terminology crosswalk](./docs/terminology_crosswalk.md): formal definitions and standard-language mappings for bespoke terms.
-- [Trust model](./docs/trust_model.md): mathematical, parser, checker, runtime, build, seal, report, and website trust boundaries.
-- [Audit questions](./docs/audit_questions.md): claim-by-claim worksheet with concrete refutation criteria.
+- [Compiled Lean theorem inventory](./docs/lean_theorem_inventory.md): current deterministic environment inventory, concrete publication gate, milestone bindings, and generated-report boundary.
+- [Formal reconstruction notice](./docs/FORMAL_RECONSTRUCTION.md): current authority, earned scope, blockers, and nonclaims.
+- [Reviewer guide](./docs/reviewer_guide.md): historical checker-route overview, audit paths, and fast falsification checklist.
+- [Proof pipeline](./docs/proof_pipeline.md): historical proposed mathematical route, executable evidence route, and hidden-search risks.
+- [Terminology crosswalk](./docs/terminology_crosswalk.md): historical-report definitions and standard-language mappings for bespoke terms.
+- [Trust model](./docs/trust_model.md): historical mathematical, parser, checker, runtime, build, seal, report, and website trust boundaries.
+- [Audit questions](./docs/audit_questions.md): historical claim-by-claim worksheet with concrete refutation criteria.
 - [Reproducibility protocol](./docs/reproducibility.md): fresh-clone, checksum, pinned-test, regeneration, and comparison instructions.
 - [Minimal examples](./examples/minimal/README.md): eight small accepted/rejected demonstrations.
 - [External review status](./EXTERNAL_REVIEW_STATUS.md): public record of substantive feedback and what has not been independently verified.
@@ -139,6 +152,9 @@ npm run check
 npm test
 npm run validate
 npm run formal:status
+node scripts/export-lean-theorem-inventory.mjs --check
+node scripts/generate-formal-publication.mjs --check
+npm run report:check
 npm run legacy:v0:check
 npm run pnp:verify -- --no-write
 ```
