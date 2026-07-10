@@ -7,7 +7,7 @@ import process from 'node:process';
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-01';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-02';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -26,7 +26,8 @@ export const FORMAL_RECONSTRUCTION_BLOCKERS0 = Object.freeze([
 const VERIFICATION_COMMANDS = Object.freeze([
   'node pcc-formal-reconstruction-status0.mjs --json',
   'node pcc-formal-public-surface0.mjs --json',
-  'npm run pnp:verify',
+  'npm run legacy:v0:check',
+  'npm run pnp:verify -- --no-write',
   'lake build PNP',
 ]);
 
@@ -36,7 +37,7 @@ const NON_CLAIMS = Object.freeze([
   'The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
-  'No current-tree command is designated as a complete replay of the archived checker release; the pinned archive procedure is tracked separately.',
+  'The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.',
 ]);
 
 const SUPERSEDED_COORDINATES = Object.freeze([
@@ -97,8 +98,6 @@ const SUBORDINATE_LEGACY_SURFACES = Object.freeze([
   'review/EXTERNAL_REVIEW_STATUS.md',
   'canonical_proof_report.tex',
   'canonical_proof_report.pdf',
-  'CURRENT_RELEASE.md',
-  'REPRODUCE.md',
   'REVIEWER_MAP.md',
   'TRUST_BASE.md',
   'PUBLIC_REVIEW.json',
@@ -124,14 +123,18 @@ const SUBORDINATE_LEGACY_SURFACE_ROOTS = Object.freeze([
   'trust-base/',
   'artifacts/multi-platform-ci/',
   'artifacts/regeneration/',
+  'archive/legacy-v0/',
 ]);
 
 const ACTIVE_CORE_WORKFLOWS = Object.freeze([
   '.github/workflows/ci.yml',
-  '.github/workflows/full-verification.yml',
   '.github/workflows/lean-bridge.yml',
   '.github/workflows/pnp-verify-all.yml',
   '.github/workflows/proof-development.yml',
+]);
+
+const HISTORICAL_REPLAY_WORKFLOWS = Object.freeze([
+  '.github/workflows/legacy-v0-replay.yml',
 ]);
 
 const ACTIVE_COMPANION_WORKFLOWS = Object.freeze([
@@ -172,8 +175,10 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerStackStatus: 'historical-assertion-checker-evidence-only',
   externalReviewIsMathematicalPremise: false,
   statusVerificationCommand: 'node pcc-formal-reconstruction-status0.mjs --json',
-  legacyCheckerReplayCommand: null,
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-10-FORMAL-RECONSTRUCTION-01',
+  legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
+  legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
+  legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-10-LEGACY-V0-ARCHIVED-02',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -240,6 +245,8 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       rootLeanTheoremAxiomAuditPassed: false,
       projectSpecificAxiomsRemaining: true,
       externalReviewIsMathematicalPremise: false,
+      legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
+      legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
       remainingFormalObligations: [...FORMAL_RECONSTRUCTION_BLOCKERS0],
       remainingBlockers: [...FORMAL_RECONSTRUCTION_BLOCKERS0],
       statusPayload: STATUS_PATH,
@@ -263,6 +270,7 @@ function validateStatus0(status, label) {
     ...Object.keys(EXACT_FIELDS),
     'activeFinalNodeIds',
     'activeCoreWorkflows',
+    'historicalReplayWorkflows',
     'activeCompanionWorkflows',
     'supersededCoordinates',
     'subordinateLegacySurfaces',
@@ -294,6 +302,9 @@ function validateStatus0(status, label) {
   }
   if (!sameArray0(status.activeCoreWorkflows, ACTIVE_CORE_WORKFLOWS)) {
     return reject0('FormalReconstructionStatus.CoreWorkflows', [label, 'activeCoreWorkflows'], 'active core workflow inventory mismatch');
+  }
+  if (!sameArray0(status.historicalReplayWorkflows, HISTORICAL_REPLAY_WORKFLOWS)) {
+    return reject0('FormalReconstructionStatus.HistoricalReplayWorkflows', [label, 'historicalReplayWorkflows'], 'historical replay workflow inventory mismatch');
   }
   if (!sameArray0(status.activeCompanionWorkflows, ACTIVE_COMPANION_WORKFLOWS)) {
     return reject0('FormalReconstructionStatus.CompanionWorkflows', [label, 'activeCompanionWorkflows'], 'active companion workflow inventory mismatch');

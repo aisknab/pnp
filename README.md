@@ -22,7 +22,7 @@ This repository contains the JavaScript checker stack, package generator, materi
 | **What can a hash check establish?** | That retrieved bytes match a published checksum ledger, subject to the hash implementation and collision assumptions. It does **not** establish theorem correctness, checker soundness, or correct generation. |
 | **What can the checker establish?** | That the supplied records satisfy the predicates implemented by the named checker and its linkage rules. Checker acceptance does **not** independently establish that those predicates are mathematically sufficient or correctly implemented. |
 | **What remains formally?** | A pinned Lean build and explicit root target; concrete complexity and SAT definitions; the locked-NAND threshold theorem; residual-band minimizer and `ZeroSlack`; polynomial runtime and certificate-size bounds; and a clean root-theorem axiom audit. External review is useful audit evidence, not a mathematical premise. |
-| **How do I run the smallest verification?** | Run `npm ci` and `npm run examples:minimal`. This executes eight scoped pass/fail onboarding fixtures; it is not a proof verification. |
+| **How do I run the current verification?** | Run `npm ci --ignore-scripts` and `npm run pnp:verify -- --no-write`. This checks the non-claiming formal status, current package surface, pinned archive identity, and the small current-authority test suite; it is not a proof verification. |
 | **Where should reviewers start?** | Start with [docs/reviewer_guide.md](./docs/reviewer_guide.md), then [docs/proof_pipeline.md](./docs/proof_pipeline.md), [docs/terminology_crosswalk.md](./docs/terminology_crosswalk.md), and [docs/trust_model.md](./docs/trust_model.md). |
 
 ## Current claim boundary
@@ -45,12 +45,12 @@ Requirements: Node.js 20 or newer and npm 10 or newer.
 ```bash
 git clone https://github.com/aisknab/pnp.git
 cd pnp
-npm ci
-npm run examples:minimal
-npm run test:negative
+npm ci --ignore-scripts
+npm run pnp:verify -- --no-write
 ```
 
-The two reviewer suites should exit successfully only when their accepted fixtures and named rejection cases match the documented expectations. They demonstrate narrow implementation behavior; they do not validate the general mathematics.
+The verifier must keep every theorem-status flag false while checking the current status/surface and
+the byte-exact archive coordinates. Success does not validate the general mathematics.
 
 Run the current-tree validation suite with:
 
@@ -58,16 +58,17 @@ Run the current-tree validation suite with:
 npm run validate
 ```
 
-For the frozen 7072f8d release, use the pinned tags and procedure in [docs/reproducibility.md](./docs/reproducibility.md). Current `main` contains later reviewer documentation, examples, negative tests, and source comments, so its test inventory should not be confused with the frozen 1,121-test release.
+For the frozen 7072f8d release, use the designated command in
+[`REPRODUCE.md`](./REPRODUCE.md). Current `main` intentionally runs a small authority-and-archive
+suite; it must not be confused with the frozen 1,121-test source release.
 
 ## What each verification layer means
 
 | Layer | Command or artefact | What success establishes | What success does not establish |
 | --- | --- | --- | --- |
-| Minimal examples | `npm run examples:minimal` | Eight documented pass/fail fixtures behave as expected. | General theorem correctness or checker completeness. |
-| Named negative tests | `npm run test:negative` | Eight major malformed cases fail at their named checker coordinates. | Absence of other defects or fail-open paths. |
-| Current test suite | `npm test` | The finite current-tree test suite passes in the selected environment. | Exhaustive correctness or polynomial asymptotics. |
-| Historical checker replay | Frozen-tag procedure in [docs/reproducibility.md](./docs/reproducibility.md) | The legacy `RunAll0` implementation path returns its recorded result for the supplied repository fixture. | Current theorem status, independent checker soundness, or validation of every mathematical implication. |
+| Current test suite | `npm test` | The formal status, package boundary, archive pins, and replay guards pass in the selected environment. | Legacy checker validation, exhaustive correctness, or polynomial asymptotics. |
+| Archive integrity | `npm run legacy:v0:check` | Three annotated-tag identities and the pinned release digests match the archive manifest. | Signed provenance, theorem correctness, or checker soundness. |
+| Historical checker replay | `npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d` | The pinned legacy implementation and selected tests reproduce their recorded behavior outside the active checkout. | Current theorem status, independent checker soundness, or validation of every mathematical implication. |
 | Release checksums | `SHA256SUMS` and `SHA256SUMS.sha256` | Published artefact bytes match the sealed ledger. | Correctness of the artefact contents. |
 | Independent audit | Reviewer derivations, counterexamples, clean-room checkers, and reproduction logs | Evidence about mathematics, checker soundness, complexity, and provenance at the audited boundary. | Broader claims outside the audit's stated scope. |
 
@@ -79,6 +80,7 @@ source commit:   7072f8d0bda6d44d240f9bb3fad624fd357e1278
 artefact tag:    final-pnp-proof-report-artifacts-hardened-7072f8d-sealed
 artefact commit: 9d1de19f827e5cb6880741352eb2349cbbb45994
 artefact path:   proof-artifacts/final-pnp-proof-report-hardened-7072f8d/
+archive manifest: archive/legacy-v0/ARCHIVE.json
 ```
 
 The canonical report is available as [PDF](./canonical_proof_report.pdf) and [TeX](./canonical_proof_report.tex). It states the author's mathematical claim; publication in this repository is not independent validation.
@@ -94,42 +96,44 @@ The canonical report is available as [PDF](./canonical_proof_report.pdf) and [Te
 - [Minimal examples](./examples/minimal/README.md): eight small accepted/rejected demonstrations.
 - [External review status](./EXTERNAL_REVIEW_STATUS.md): public record of substantive feedback and what has not been independently verified.
 
-## Install and library usage
+## Install and current package surface
 
 Use the lockfile-preserving installation command:
 
 ```bash
-npm ci
+npm ci --ignore-scripts
 ```
 
-The primary library module is [`pcc-core.mjs`](./pcc-core.mjs). It exports codec helpers, canonicalization utilities, digest functions, row-key validation helpers, route checks, and a minimal bootstrap context.
+The root package deliberately exports only current formal-status and archive-verification APIs. The
+legacy checker modules remain in repository history and at the pinned source tag, but are not active
+package exports.
 
 ```js
 import {
-  makeMinimalBootstrapContext,
-  name,
-  digestObject0,
+  CheckFormalReconstructionStatus0,
+  CheckLegacyV0Archive0,
 } from '@aisknab/pnp';
 
-const ctx = makeMinimalBootstrapContext();
-const digest = digestObject0(ctx, name('example'));
+const status = await CheckFormalReconstructionStatus0({ writeOutput: false });
+const archive = await CheckLegacyV0Archive0();
 ```
 
 Useful top-level commands:
 
 ```bash
 npm run check
-npm run examples:minimal
-npm run test:negative
 npm test
 npm run validate
+npm run formal:status
+npm run legacy:v0:check
+npm run pnp:verify -- --no-write
 ```
 
 ## Historical Proof-development scripts
 
 The assertion-checker release used narrowly scoped proof-development entrypoints under the `proof:*`
-namespace. These commands are retained only as historical replay interfaces. They do not determine
-current theorem status. The current authority is
+namespace. They are not scripts on current `main`; they exist only in the pinned legacy-v0 source
+tree reached by the designated replay. They do not determine current theorem status. The current authority is
 [`status/FORMAL_RECONSTRUCTION_STATUS.json`](./status/FORMAL_RECONSTRUCTION_STATUS.json), checked with:
 
 ```bash
@@ -142,7 +146,8 @@ In that legacy interface, a proof script was a direct checker invocation of this
 node pcc-<checker-name>0.mjs --json
 ```
 
-The following commands describe the legacy assertion-checker targets and are not formal proof gates:
+The following commands are historical examples from the pinned source tag and are not commands on
+the active package or formal proof gates:
 
 ```bash
 npm run proof:uniform-final-soundness-target -- --historical-replay
@@ -161,15 +166,15 @@ theorem status or establish any proposition named by those records.
 
 ## Historical Public RunAll0 entry point
 
-`RunAll0` was the public entry point for the frozen assertion-checker release. It is retained for
-historical replay and is not an active theorem-verification entry point. Reproduce it only at the pinned
-coordinates in [docs/reproducibility.md](./docs/reproducibility.md). The current status check is:
+`RunAll0` was the public entry point for the frozen assertion-checker release. It is not exported on
+current `main`. Reproduce it only through the pinned legacy-v0 runner described in
+[`REPRODUCE.md`](./REPRODUCE.md). The current status check is:
 
 ```bash
 node pcc-formal-reconstruction-status0.mjs --json
 ```
 
-The legacy commands were:
+At the pinned source tag, the legacy commands were:
 
 ```bash
 npm run smoke -- --historical-replay
@@ -194,9 +199,10 @@ index.mjs
 
 ## Historical Release audit replay
 
-The release audit belongs to the frozen assertion-checker release. It is not part of the current formal
-verification gate and must not be used to infer current theorem status. Use the pinned-tag instructions
-in [docs/reproducibility.md](./docs/reproducibility.md) when auditing that historical release.
+The release audit belongs to the frozen assertion-checker release. It is not a current package script
+or part of the current formal verification gate. Use the pinned runner in
+[`REPRODUCE.md`](./REPRODUCE.md); any historical commands below apply only inside its detached source
+worktree and must not be used to infer current theorem status.
 
 ```bash
 npm run release:audit -- --historical-replay
@@ -215,8 +221,9 @@ not a mathematical proof.
 
 ### Release audit hard-gate default
 
-The unflagged legacy form `npm run release:audit -- --fast-local` now rejects at the current
-reconstruction boundary. Historical replay must be explicit:
+Inside the pinned source worktree, the unflagged legacy form
+`npm run release:audit -- --fast-local` rejects at the reconstruction boundary. Historical replay
+must be explicit:
 
 ```bash
 npm run release:audit -- --historical-replay --fast-local
@@ -252,7 +259,8 @@ These are preserved audit fields only. They do not describe current theorem stat
 
 The historical `surfaceFreeze` record includes `materializedPublicStatusGateDigest` and
 `materializedPublicStatusGateAcceptedPublicConclusionOnly`. The reconstruction-era replacement is
-`CheckFormalPublicSurface0`, which verifies fail-closed current defaults.
+`CheckFormalPublicSurface0`, which verifies that legacy routes are absent from the closed current
+package surface.
 
 ## Historical Internal materialized package path
 

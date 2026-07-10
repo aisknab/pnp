@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-01",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-02",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -29,10 +29,12 @@
   "activeFinalNodeIds": [],
   "activeCoreWorkflows": [
     ".github/workflows/ci.yml",
-    ".github/workflows/full-verification.yml",
     ".github/workflows/lean-bridge.yml",
     ".github/workflows/pnp-verify-all.yml",
     ".github/workflows/proof-development.yml"
+  ],
+  "historicalReplayWorkflows": [
+    ".github/workflows/legacy-v0-replay.yml"
   ],
   "activeCompanionWorkflows": [
     ".github/workflows/ci.yml",
@@ -99,8 +101,6 @@
     "review/EXTERNAL_REVIEW_STATUS.md",
     "canonical_proof_report.tex",
     "canonical_proof_report.pdf",
-    "CURRENT_RELEASE.md",
-    "REPRODUCE.md",
     "REVIEWER_MAP.md",
     "TRUST_BASE.md",
     "PUBLIC_REVIEW.json",
@@ -124,7 +124,8 @@
     "review/",
     "trust-base/",
     "artifacts/multi-platform-ci/",
-    "artifacts/regeneration/"
+    "artifacts/regeneration/",
+    "archive/legacy-v0/"
   ],
   "remainingFormalObligations": [
     "Formal.PinnedLeanBuildAndRootTarget",
@@ -149,12 +150,15 @@
   "verificationCommands": [
     "node pcc-formal-reconstruction-status0.mjs --json",
     "node pcc-formal-public-surface0.mjs --json",
-    "npm run pnp:verify",
+    "npm run legacy:v0:check",
+    "npm run pnp:verify -- --no-write",
     "lake build PNP"
   ],
   "statusVerificationCommand": "node pcc-formal-reconstruction-status0.mjs --json",
-  "legacyCheckerReplayCommand": null,
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-10-FORMAL-RECONSTRUCTION-01",
+  "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
+  "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
+  "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-10-LEGACY-V0-ARCHIVED-02",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -165,6 +169,6 @@
     "The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.",
     "External review is optional audit evidence and is not a mathematical premise or release blocker.",
     "Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.",
-    "No current-tree command is designated as a complete replay of the archived checker release; the pinned archive procedure is tracked separately."
+    "The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof."
   ]
 }
