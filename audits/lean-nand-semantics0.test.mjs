@@ -3,6 +3,12 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
+import {
+  explicitLeanDeclarationHeads0,
+  hasLeanAssumptionDeclaration0,
+  hasPrivateLeanDeclaration0,
+  hasUnauditedLeanDeclarationForm0,
+} from './lean-source-declarations0.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const SEMANTICS_PATH = 'lean/PNP/NANDSemantics.lean';
@@ -10,6 +16,20 @@ const MACROS_PATH = 'lean/PNP/LockedNANDMacros.lean';
 
 async function text0(relativePath) {
   return readFile(path.join(ROOT, relativePath), 'utf8');
+}
+
+function explicitDeclarations0(source) {
+  const directWireStart = source.indexOf('namespace DirectWire');
+  assert.notEqual(directWireStart, -1);
+  const heads = explicitLeanDeclarationHeads0(source);
+  return heads.map((match) => {
+    const prefix = match.index < directWireStart ? 'PNP.' : 'PNP.DirectWire.';
+    return `${prefix}${match.name}`;
+  });
+}
+
+function printedAxiomDeclarations0(audit) {
+  return [...audit.matchAll(/^#print axioms (.+?)[ \t]*$/gmu)].map((match) => match[1]);
 }
 
 function validateFoundation0(semantics, macros) {
@@ -50,7 +70,9 @@ function validateFoundation0(semantics, macros) {
   require0(/andCircuit_spec/u.test(semantics), 'and-example');
   require0(/structure DirectWireSemanticsCertificate : Prop/u.test(semantics), 'certificate-type');
   require0(/def directWireSemanticsCertificate : DirectWireSemanticsCertificate/u.test(semantics), 'certificate-value');
-  require0(!/^\s*(?:@\[[^\]\n]*\]\s*)*(?:(?:private|protected|noncomputable|unsafe)\s+)*(?:axiom|constant|opaque)\s+[A-Za-z_]/mu.test(semantics), 'hidden-declaration');
+  require0(!hasLeanAssumptionDeclaration0(semantics), 'hidden-declaration');
+  require0(!hasPrivateLeanDeclaration0(semantics), 'private-declaration');
+  require0(!hasUnauditedLeanDeclarationForm0(semantics), 'unaudited-declaration-form');
   require0(!/\b(?:sorry|admit|unsafe|native_decide)\b/u.test(semantics), 'placeholder');
 
   require0(/^import PNP\.NANDSemantics$/mu.test(macros), 'macro-import');
@@ -74,34 +96,21 @@ test('root and macro layers use the single foundational NAND definition', async 
   assert.equal(macros.includes('boolNand'), true);
 });
 
-test('dedicated Lean audit covers the certificate and representative semantic laws', async () => {
+test('dedicated Lean audit covers every explicit semantics declaration exactly once', async () => {
+  const semantics = await text0(SEMANTICS_PATH);
   const audit = await text0('lean-audit/PNPNANDSemanticsAxiomAudit.lean');
-  for (const declaration of [
-    'PNP.DirectWire.directWireSemanticsCertificate',
-    'PNP.DirectWire.Program.size_eq_gateCount',
-    'PNP.DirectWire.DirectWireWord.size_eq_gateCount',
-    'PNP.DirectWire.Program.eval_snoc_castSucc',
-    'PNP.DirectWire.Program.eval_snoc_last',
-    'PNP.DirectWire.Equivalent.refl',
-    'PNP.DirectWire.Equivalent.symm',
-    'PNP.DirectWire.Equivalent.trans',
-    'PNP.DirectWire.projectionWord_spec',
-    'PNP.DirectWire.constantWord_spec',
-    'PNP.DirectWire.repeatedSourceWord_spec',
-    'PNP.DirectWire.repeatedSourceWord_no_added_cost',
-    'PNP.DirectWire.nandCircuit_spec',
-    'PNP.DirectWire.notCircuit_spec',
-    'PNP.DirectWire.andCircuit_spec',
-  ]) assert.match(audit, new RegExp(`#print axioms ${declaration.replaceAll('.', '\\.')}`));
+  const expected = explicitDeclarations0(semantics);
+  const printed = printedAxiomDeclarations0(audit);
+  assert.deepEqual(printed, expected);
+  assert.equal(new Set(printed).size, printed.length);
   assert.doesNotMatch(audit, /LockedNANDThreshold|final_report_bridge|p_eq_np/u);
 });
 
-test('formal status exposes the semantics milestone but no downstream theorem', async () => {
+test('formal status preserves the semantics milestone without an unproved downstream theorem', async () => {
   const status = JSON.parse(await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'));
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   for (const field of [
-    'leanNANDEnumeratorFormalized',
     'leanNANDMinimumAndSlackFormalized',
     'leanCompatibleReplacementFormalized',
     'leanGlobalSlackLawFormalized',
@@ -119,7 +128,7 @@ test('Lean workflow executes both static and kernel-level semantics audits', asy
   assert.match(workflow, /lake build PNP/u);
   assert.match(workflow, /lake env lean -DwarningAsError=true lean-audit\/PNPNANDSemanticsAxiomAudit\.lean/u);
   assert.match(workflow, /grep -F 'depends on axioms:'/u);
-  assert.match(workflow, /grep -Fc 'does not depend on any axioms'\)" -eq 29/u);
+  assert.match(workflow, /grep -Fc 'does not depend on any axioms'\)" -eq 57/u);
 });
 
 test('foundation audit fails closed on untyped references, new dependencies, and duplicate NAND semantics', async () => {
@@ -134,6 +143,21 @@ test('foundation audit fails closed on untyped references, new dependencies, and
 
   const privateAxiom = `${semantics}\nprivate axiom hidden : True\n`;
   assert.equal(validateFoundation0(privateAxiom, macros).includes('hidden-declaration'), true);
+
+  const quotedAxiom = `${semantics}\naxiom «hidden-name» : True\n`;
+  assert.equal(validateFoundation0(quotedAxiom, macros).includes('hidden-declaration'), true);
+
+  const unicodeAxiom = `${semantics}\naxiom 隠し : True\n`;
+  assert.equal(validateFoundation0(unicodeAxiom, macros).includes('hidden-declaration'), true);
+
+  const privateTheorem = `${semantics}\nprivate theorem hidden_private : True := True.intro\n`;
+  assert.equal(validateFoundation0(privateTheorem, macros).includes('private-declaration'), true);
+
+  const unnamedExample = `${semantics}\nexample : True := True.intro\n`;
+  assert.equal(validateFoundation0(unnamedExample, macros).includes('unaudited-declaration-form'), true);
+
+  const unlistedTheorem = `${semantics}\ntheorem hidden_propext (a b : Prop) : (a = b) → (a ↔ b) := fun h => h ▸ Iff.rfl\n`;
+  assert.notDeepEqual(explicitDeclarations0(unlistedTheorem), printedAxiomDeclarations0(await text0('lean-audit/PNPNANDSemanticsAxiomAudit.lean')));
 
   const duplicate = `${macros}\n\ndef boolNand (a b : Bool) : Bool := !(a && b)\n`;
   assert.equal(validateFoundation0(semantics, duplicate).includes('duplicate-bool-nand'), true);

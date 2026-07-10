@@ -1,5 +1,6 @@
 import PNP.Main
 import PNP.NANDSemantics
+import PNP.NANDEnumerator
 import PNP.Complexity
 import PNP.SAT
 import PNP.LockedNANDMacros

@@ -41,7 +41,7 @@ function declarationInventory0(sources) {
   for (const [file, original] of Object.entries(sources)) {
     const source = stripLeanCommentsAndStrings0(original);
     const namespace = /^\s*namespace\s+([A-Za-z_][\w.]*)/mu.exec(source)?.[1] ?? '';
-    for (const match of source.matchAll(/^\s*(?:@\[[^\]\n]*\]\s*)*(?:(?:private|protected|noncomputable|unsafe)\s+)*(axiom|constant|opaque)\s+([A-Za-z_][\w']*)/gmu)) {
+    for (const match of source.matchAll(/^\s*(?:@\[[^\]\n]*\]\s*)*(?:(?:private|protected|noncomputable|unsafe)\s+)*(axiom|constant|opaque)\s+(«[^»\n]+»|[^\s(:]+)/gmu)) {
       declarations.push({
         file,
         kind: match[1],
@@ -217,6 +217,14 @@ test('Lean declaration inventory fails closed on an extra axiom or placeholder',
   const privateAxiom = structuredClone(sources);
   privateAxiom['lean/PNP/Main.lean'] += '\nprivate axiom hidden_private : True\n';
   assert.equal(declarationInventory0(privateAxiom).declarations.some(({ name }) => name === 'PNP.Main.hidden_private'), true);
+
+  const quotedAxiom = structuredClone(sources);
+  quotedAxiom['lean/PNP/Main.lean'] += '\naxiom «hidden-name» : True\n';
+  assert.equal(declarationInventory0(quotedAxiom).declarations.some(({ name }) => name === 'PNP.Main.«hidden-name»'), true);
+
+  const unicodeAxiom = structuredClone(sources);
+  unicodeAxiom['lean/PNP/Main.lean'] += '\naxiom 隠し : True\n';
+  assert.equal(declarationInventory0(unicodeAxiom).declarations.some(({ name }) => name === 'PNP.Main.隠し'), true);
 
   const placeholder = structuredClone(sources);
   placeholder['lean/PNP/Main.lean'] += '\ntheorem hidden : True := by sorry\n';

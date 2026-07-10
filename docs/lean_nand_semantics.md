@@ -52,7 +52,7 @@ lake build PNP
 lake env lean -DwarningAsError=true lean-audit/PNPNANDSemanticsAxiomAudit.lean
 ```
 
-The dedicated audit prints no axioms for the certificate and representative semantic theorems. The
+The dedicated audit prints no axioms for every explicit declaration in the module. The
 repository-wide audit still reports the existing five project-specific axioms in the conditional
 bridge, including `PNP.LockedNANDThreshold`.
 

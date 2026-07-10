@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-04');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-05');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -41,7 +41,13 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanSourcePlaceholderAuditPassed, true);
   assert.equal(out.leanNANDDirectWireCoreFormalized, true);
   assert.equal(out.leanNANDDirectWireCoreAxiomAuditPassed, true);
-  assert.equal(out.leanNANDEnumeratorFormalized, false);
+  assert.equal(out.leanNANDEnumeratorFormalized, true);
+  assert.equal(out.leanNANDEnumeratorAxiomAuditPassed, true);
+  assert.equal(out.leanNANDExactWidthEnumerationComplete, true);
+  assert.equal(out.leanNANDEnumeratorUsesOrderedGatePairs, true);
+  assert.equal(out.leanNANDEnumeratorIncludesUniqueEmptyOutputTuple, true);
+  assert.equal(out.leanNANDEnumeratorDeduplicated, false);
+  assert.equal(out.leanNANDSemanticEquivalenceDecidable, false);
   assert.equal(out.leanNANDMinimumAndSlackFormalized, false);
   assert.equal(out.leanCompatibleReplacementFormalized, false);
   assert.equal(out.leanGlobalSlackLawFormalized, false);
@@ -66,21 +72,30 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.match(out.siteStatusSha256, /^[0-9a-f]{64}$/u);
 });
 
-test('formal status records only the direct-wire NAND semantics milestone', async () => {
+test('formal status records the exact-width syntactic NAND enumerator milestone conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-10-NAND-SEMANTICS-04');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-10-NAND-ENUMERATOR-05');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
-  assert.equal(status.leanNANDEnumeratorFormalized, false);
+  assert.equal(status.leanNANDEnumeratorFormalized, true);
+  assert.equal(status.leanNANDEnumeratorAxiomAuditPassed, true);
+  assert.equal(status.leanNANDExactWidthEnumerationComplete, true);
+  assert.equal(status.leanNANDEnumeratorUsesOrderedGatePairs, true);
+  assert.equal(status.leanNANDEnumeratorIncludesUniqueEmptyOutputTuple, true);
+  assert.equal(status.leanNANDEnumeratorDeduplicated, false);
+  assert.equal(status.leanNANDSemanticEquivalenceDecidable, false);
   assert.equal(status.leanNANDMinimumAndSlackFormalized, false);
   assert.equal(status.leanCompatibleReplacementFormalized, false);
   assert.equal(status.leanGlobalSlackLawFormalized, false);
   assert.equal(status.leanLockedNANDBuilderFormalized, false);
   assert.equal(status.leanLockedNANDThresholdFormalized, false);
-  assert.equal(status.nonClaims.some((entry) => entry.includes('direct-wire NAND semantics does not prove enumeration')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes('direct-wire NAND semantics layer does not by itself prove enumeration')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes('exact-width syntactic NAND enumeration does not prove canonical/deduplicated enumeration')), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-nand-semantics0.test.mjs'), true);
+  assert.equal(status.verificationCommands.includes('node --test audits/lean-nand-enumerator0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPNANDSemanticsAxiomAudit.lean'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPNANDEnumeratorAxiomAudit.lean'), true);
   assert.equal(status.remainingBlockers.includes('Formal.LockedNANDThreshold'), true);
 });
 
@@ -176,9 +191,29 @@ test('formal reconstruction status rejects disabling the audited direct-wire NAN
   assert.deepEqual(out.path, ['status/FORMAL_RECONSTRUCTION_STATUS.json', 'leanNANDDirectWireCoreAxiomAuditPassed']);
 });
 
-test('formal reconstruction status rejects unearned downstream NAND claims', async () => {
+test('formal reconstruction status rejects disabling an earned NAND enumerator property', async () => {
   const fields = [
     'leanNANDEnumeratorFormalized',
+    'leanNANDEnumeratorAxiomAuditPassed',
+    'leanNANDExactWidthEnumerationComplete',
+    'leanNANDEnumeratorUsesOrderedGatePairs',
+    'leanNANDEnumeratorIncludesUniqueEmptyOutputTuple',
+  ];
+
+  for (const field of fields) {
+    const status = await currentStatus0();
+    status[field] = false;
+    const out = await CheckFormalReconstructionStatus0({ writeOutput: false, statusOverride: status, siteOverride: status });
+    assert.equal(out.tag, 'reject', field);
+    assert.equal(out.coord, 'FormalReconstructionStatus.Field', field);
+    assert.deepEqual(out.path, ['status/FORMAL_RECONSTRUCTION_STATUS.json', field], field);
+  }
+});
+
+test('formal reconstruction status rejects unearned downstream NAND claims', async () => {
+  const fields = [
+    'leanNANDEnumeratorDeduplicated',
+    'leanNANDSemanticEquivalenceDecidable',
     'leanNANDMinimumAndSlackFormalized',
     'leanCompatibleReplacementFormalized',
     'leanGlobalSlackLawFormalized',

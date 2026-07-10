@@ -42,9 +42,16 @@ bridge still depends on five disclosed project-specific axioms: `PNP.SAT`,
 The first concrete foundation is now checked in `PNP.DirectWire`: intrinsically topological direct-wire
 NAND programs, total Boolean evaluation, gate-count size, ordered output wiring, and elementary
 projection/constant/repeated-output/NAND/NOT/AND laws. Its dedicated axiom audit is clean. This does
-not discharge any of the seven remaining activation blockers: enumeration, minimum size,
-replacement/slack, the locked builder and threshold, concrete SAT and complexity, and the other
-listed obligations remain incomplete.
+not by itself discharge any of the seven machine-recorded activation blockers: the concrete
+complexity model, concrete SAT, locked-NAND threshold, residual-band minimizer, ZeroSlack,
+polynomial bounds, and the root theorem/axiom audit remain incomplete.
+
+The next constructive layer enumerates every well-typed direct-wire implementation at fixed input,
+gate, and output widths, including the unique empty output tuple and both orders of every NAND input
+pair. Its completeness theorems and certificate are axiom-free. The enumerator is intentionally not
+canonical or claimed duplicate-free, and it does not decide semantic equivalence or minimum size;
+enumeration was a tracked reconstruction milestone rather than a separate blocker ID, so the same
+seven substantive activation blockers remain.
 
 ## The only acceptable future activation gate
 
