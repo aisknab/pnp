@@ -121,14 +121,29 @@ structure WorkMachine where
 deriving BEq, DecidableEq, Repr
 
 /-- First matching work rule, paired with its zero-based list index. -/
+private inductive WorkRuleMatch (rule : WorkRule) (state : Nat)
+    (symbol : WorkSymbol) where
+  | no
+  | yes (source_eq : rule.sourceState = state)
+      (symbol_eq : rule.readSymbol = symbol)
+
+private def inspectWorkRule (rule : WorkRule) (state : Nat)
+    (symbol : WorkSymbol) : WorkRuleMatch rule state symbol :=
+  if hSource : rule.sourceState = state then
+    if hSymbol : rule.readSymbol = symbol then
+      .yes hSource hSymbol
+    else
+      .no
+  else
+    .no
+
 def findIndexedWorkRuleFrom :
     List WorkRule → Nat → WorkSymbol → Nat → Option (Nat × WorkRule)
   | [], _, _, _ => none
   | rule :: rest, state, symbol, index =>
-      if rule.sourceState == state && rule.readSymbol == symbol then
-        some (index, rule)
-      else
-        findIndexedWorkRuleFrom rest state symbol (index + 1)
+      match inspectWorkRule rule state symbol with
+      | .yes _ _ => some (index, rule)
+      | .no => findIndexedWorkRuleFrom rest state symbol (index + 1)
 
 def findIndexedWorkRule (rules : List WorkRule) (state : Nat)
     (symbol : WorkSymbol) : Option (Nat × WorkRule) :=
@@ -150,23 +165,18 @@ theorem findIndexedWorkRuleFrom_some_matches
   | nil => contradiction
   | cons first rest ih =>
       unfold findIndexedWorkRuleFrom at h
-      split at h
-      next hMatch =>
-        have hPair : (index, first) = (foundIndex, rule) := Option.some.inj h
-        have hRule : first = rule := congrArg Prod.snd hPair
-        subst rule
-        have hBoth :
-            ((first.sourceState == state) && (first.readSymbol == symbol)) = true :=
-          hMatch
-        have hSourceBool : (first.sourceState == state) = true := by
-          cases hSource : (first.sourceState == state) with
-          | false => rw [hSource] at hBoth; contradiction
-          | true => rfl
-        have hSymbolBool : (first.readSymbol == symbol) = true := by
-          rw [hSourceBool] at hBoth
-          exact hBoth
-        exact ⟨beq_iff_eq.mp hSourceBool, beq_iff_eq.mp hSymbolBool⟩
-      next _ => exact ih h
+      cases hMatch : inspectWorkRule first state symbol with
+      | no =>
+          rw [hMatch] at h
+          exact ih h
+      | yes hFirstSource hFirstSymbol =>
+          rw [hMatch] at h
+          have hPair : (index, first) = (foundIndex, rule) :=
+            Option.some.inj h
+          have hRule : first = rule := congrArg Prod.snd hPair
+          exact
+            ⟨(congrArg WorkRule.sourceState hRule).symm.trans hFirstSource,
+             (congrArg WorkRule.readSymbol hRule).symm.trans hFirstSymbol⟩
 
 def WorkMachine.isHalted (machine : WorkMachine)
     (config : WorkConfiguration) : Bool :=
