@@ -39,6 +39,13 @@ bridge still depends on five disclosed project-specific axioms: `PNP.SAT`,
 `PNP.LockedNANDThreshold`, `PNP.ResidualBandExactMinimization`, `PNP.GeneratePCCPack`, and
 `PNP.CheckPCCPackexp`.
 
+The first concrete foundation is now checked in `PNP.DirectWire`: intrinsically topological direct-wire
+NAND programs, total Boolean evaluation, gate-count size, ordered output wiring, and elementary
+projection/constant/repeated-output/NAND/NOT/AND laws. Its dedicated axiom audit is clean. This does
+not discharge any of the seven remaining activation blockers: enumeration, minimum size,
+replacement/slack, the locked builder and threshold, concrete SAT and complexity, and the other
+listed obligations remain incomplete.
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

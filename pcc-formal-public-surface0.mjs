@@ -6,7 +6,7 @@ import process from 'node:process';
 
 const CHECKER = 'CheckFormalPublicSurface0';
 const VERSION = 0;
-const COORDINATE = 'PUBLIC-SURFACE-BASELINE-2026-07-10-PINNED-LEAN-ROOT-03';
+const COORDINATE = 'PUBLIC-SURFACE-BASELINE-2026-07-10-NAND-SEMANTICS-04';
 const OUTPUT_PATH = 'artifacts/formal-public-surface/latest-verdict.json';
 
 export const CURRENT_PACKAGE_EXPORTS0 = Object.freeze({
@@ -18,7 +18,7 @@ export const CURRENT_PACKAGE_EXPORTS0 = Object.freeze({
 
 export const CURRENT_PACKAGE_SCRIPTS0 = Object.freeze({
   check: 'node --check index.mjs && node --check pcc-formal-reconstruction-status0.mjs && node --check pcc-formal-public-surface0.mjs && node --check pcc-legacy-v0-archive0.mjs && node --check scripts/pnp-verify-all.mjs && node --check scripts/replay-legacy-v0.mjs',
-  test: 'node --test audits/formal-reconstruction-status0.test.mjs audits/formal-public-surface0.test.mjs audits/lean-root-target0.test.mjs audits/legacy-v0-archive0.test.mjs test/current-package-surface0.test.mjs test/current-verifier0.test.mjs test/replay-legacy-v0.test.mjs',
+  test: 'node --test audits/formal-reconstruction-status0.test.mjs audits/formal-public-surface0.test.mjs audits/lean-root-target0.test.mjs audits/lean-nand-semantics0.test.mjs audits/legacy-v0-archive0.test.mjs test/current-package-surface0.test.mjs test/current-verifier0.test.mjs test/replay-legacy-v0.test.mjs',
   validate: 'npm run check && npm test && npm run pnp:verify -- --no-write',
   'formal:status': 'node pcc-formal-reconstruction-status0.mjs --json',
   'formal:surface': 'node pcc-formal-public-surface0.mjs --json',

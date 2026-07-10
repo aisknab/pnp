@@ -7,7 +7,7 @@ import process from 'node:process';
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-03';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-04';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -36,8 +36,10 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'npm run legacy:v0:check',
   'npm run pnp:verify -- --no-write',
   'node --test audits/lean-root-target0.test.mjs',
+  'node --test audits/lean-nand-semantics0.test.mjs',
   'lake build PNP',
   'lake env lean -DwarningAsError=true lean-audit/PNPBridgeAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-audit/PNPNANDSemanticsAxiomAudit.lean',
 ]);
 
 const NON_CLAIMS = Object.freeze([
@@ -45,6 +47,7 @@ const NON_CLAIMS = Object.freeze([
   'Legacy JavaScript checker acceptance verifies assertion-bearing records under implemented predicates; it is not a formal proof of the named mathematical propositions.',
   'The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.',
   'The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.',
+  'The formalized direct-wire NAND semantics does not prove enumeration, minimum size, replacement/slack, the locked NAND builder, its threshold, SAT, or P = NP.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
   'The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.',
@@ -189,6 +192,14 @@ const EXACT_FIELDS = Object.freeze({
   explicitLeanRootTargetPresent: true,
   leanLibraryTargetBuilt: true,
   leanSourcePlaceholderAuditPassed: true,
+  leanNANDDirectWireCoreFormalized: true,
+  leanNANDDirectWireCoreAxiomAuditPassed: true,
+  leanNANDEnumeratorFormalized: false,
+  leanNANDMinimumAndSlackFormalized: false,
+  leanCompatibleReplacementFormalized: false,
+  leanGlobalSlackLawFormalized: false,
+  leanLockedNANDBuilderFormalized: false,
+  leanLockedNANDThresholdFormalized: false,
   rootLeanTheorem: 'PNP.Main.p_eq_np',
   rootLeanTheoremPresent: false,
   rootLeanTheoremBuilt: false,
@@ -202,7 +213,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-10-PINNED-LEAN-ROOT-03',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-10-NAND-SEMANTICS-04',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -278,6 +289,14 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       explicitLeanRootTargetPresent: true,
       leanLibraryTargetBuilt: true,
       leanSourcePlaceholderAuditPassed: true,
+      leanNANDDirectWireCoreFormalized: true,
+      leanNANDDirectWireCoreAxiomAuditPassed: true,
+      leanNANDEnumeratorFormalized: false,
+      leanNANDMinimumAndSlackFormalized: false,
+      leanCompatibleReplacementFormalized: false,
+      leanGlobalSlackLawFormalized: false,
+      leanLockedNANDBuilderFormalized: false,
+      leanLockedNANDThresholdFormalized: false,
       rootLeanTheoremPresent: false,
       rootLeanTheoremBuilt: false,
       rootLeanTheoremAxiomAuditPassed: false,

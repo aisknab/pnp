@@ -32,6 +32,7 @@ lean-toolchain
 lakefile.lean
 lean/PNP.lean
 lean/PNP/Main.lean
+lean/PNP/NANDSemantics.lean
 lean/PNP/Complexity.lean
 lean/PNP/SAT.lean
 lean/PNP/LockedNANDMacros.lean
@@ -42,6 +43,8 @@ lean/PNP/ZeroSlack.lean
 lean/PNP/PCCMin.lean
 lean/PNP/Bridge.lean
 lean-audit/PNPBridgeAxiomAudit.lean
+lean-audit/PNPNANDSemanticsAxiomAudit.lean
+docs/lean_nand_semantics.md
 docs/lean_locked_nand_macros.md
 docs/lean_locked_nand_prefix.md
 ```
@@ -85,6 +88,19 @@ that formal reconstruction is in progress, external assumptions remain, and no p
 been released. There is deliberately no declaration named `PNP.Main.p_eq_np` in the current root.
 Building this status is evidence that the complete import root compiles; the status is not a theorem
 of `P = NP`.
+
+## Direct-wire NAND semantics
+
+`lean/PNP/NANDSemantics.lean` defines an intrinsically topological NAND program: every gate source
+is a boundary coordinate, a Boolean carrier constant, or an earlier gate. Ordered output wiring is
+separate from the program, so projections, constants, and repeated coordinates add no gate cost.
+The module gives total Boolean semantics, gate-count size, extensional equivalence laws, append
+semantics, and checked zero-, one-, and two-gate examples.
+
+`DirectWireSemanticsCertificate` and its representative theorems are assumption-free under
+`#print axioms`. This milestone does not provide an enumerator, minimum-size definition, compatible
+replacement, the slack law, a locked builder, or the locked threshold. See
+`docs/lean_nand_semantics.md` for the precise boundary.
 
 ## SAT layer
 

@@ -1,0 +1,31 @@
+import PNP
+
+#print axioms PNP.DirectWire.directWireSemanticsCertificate
+#print axioms PNP.DirectWire.Valuation.snoc
+#print axioms PNP.DirectWire.Valuation.snoc_last
+#print axioms PNP.DirectWire.Valuation.snoc_castSucc
+#print axioms PNP.DirectWire.Program.eval
+#print axioms PNP.DirectWire.Source.eval
+#print axioms PNP.DirectWire.identityProgram
+#print axioms PNP.DirectWire.identityWord
+#print axioms PNP.DirectWire.nandProgram
+#print axioms PNP.DirectWire.nandWord
+#print axioms PNP.DirectWire.notProgram
+#print axioms PNP.DirectWire.notWord
+#print axioms PNP.DirectWire.andProgram
+#print axioms PNP.DirectWire.andWord
+#print axioms PNP.DirectWire.Program.size_eq_gateCount
+#print axioms PNP.DirectWire.DirectWireWord.size_eq_gateCount
+#print axioms PNP.DirectWire.Program.eval_snoc_castSucc
+#print axioms PNP.DirectWire.Program.eval_snoc_last
+#print axioms PNP.DirectWire.Equivalent.refl
+#print axioms PNP.DirectWire.Equivalent.symm
+#print axioms PNP.DirectWire.Equivalent.trans
+#print axioms PNP.DirectWire.projectionWord_spec
+#print axioms PNP.DirectWire.constantWord_spec
+#print axioms PNP.DirectWire.repeatedSourceWord_spec
+#print axioms PNP.DirectWire.repeatedSourceWord_no_added_cost
+#print axioms PNP.DirectWire.identityCircuit_spec
+#print axioms PNP.DirectWire.nandCircuit_spec
+#print axioms PNP.DirectWire.notCircuit_spec
+#print axioms PNP.DirectWire.andCircuit_spec

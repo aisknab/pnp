@@ -12,11 +12,9 @@ instance have pairwise-distinct truth signatures and are neither constant nor
 positive projections.
 -/
 
-namespace PNP
+import PNP.NANDSemantics
 
-/-- Boolean NAND. -/
-def boolNand (a b : Bool) : Bool :=
-  !(a && b)
+namespace PNP
 
 /-- Boolean equality as a Boolean-valued function. -/
 def boolEq (a b : Bool) : Bool :=
