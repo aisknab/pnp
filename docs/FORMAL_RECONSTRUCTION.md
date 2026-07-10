@@ -87,6 +87,27 @@ with metadata claiming six occurrences. Honest program-derived baseline/displaye
 `91/95`. The typed Lean accounting, not this inconsistent seed, is current authority. See
 [`lean_locked_nand_baseline.md`](./lean_locked_nand_baseline.md) for the full local proof boundary.
 
+A further axiom-free module now proves the conditional semantic threshold deduction from an
+explicit six-field package: `baselineCandidate`, `fullCandidate`, `baselineConditions`,
+`initialOutputsPreserved`, `unsatisfiableFinalZero`, and `satisfiableFinalConditions`. From those
+proof-bearing premises it derives the baseline lower bound, conditional residual slack at most
+four, unsatisfiable minimum exactly at the baseline, satisfiable minimum between baseline plus one
+and baseline plus four, and the corresponding conditional iff.
+
+This is not the report locked-NAND threshold theorem. The six fields are not instantiated for a
+source circuit. In particular, the arbitrary proposition and natural-number parameters are not
+identified with circuit SAT and `lockedBaselineCount`; no global carrier layout, cross-instance
+`BaselineDistinct`, `TraceEquivalence`, derived whole-carrier final-output laws, answer-independent
+uniform builder, or polynomial bound is supplied. The module is not connected to the abstract
+`PNP.LockedNANDThreshold` language.
+
+The historical hostile review named `DirectWireOutputLowerBound`, `MacroDistinct`,
+`TraceEquivalence`, `ZeroOutputConvention`, and `FinalLockSeparation`. The general output lower
+bound was discharged in the preceding layer, and the model-level free-zero append convention is
+now formalized. Global `MacroDistinct`, `TraceEquivalence`, and `FinalLockSeparation` remain
+missing, as do all six concrete premise instantiations above. See
+[`lean_locked_nand_threshold_boundary.md`](./lean_locked_nand_threshold_boundary.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

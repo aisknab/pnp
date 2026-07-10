@@ -116,13 +116,13 @@ cross-instance freshness and tagging
 prefix-tree coverage and exactness
 global candidate construction and cross-instance baseline distinctness
 trace-equivalence over a complete NAND circuit
-unsatisfiable zero-output convention
-satisfiable final-lock lower bound
+circuit-specific unsatisfiable final-zero law
+satisfiable final-output laws from final-lock separation
 the polynomial SAT-to-locked-NAND builder
-the final threshold equivalence and residual-slack bound
+uniform instantiation of the conditional threshold and residual-slack boundary
 ```
 
 The Lean bridge therefore narrows the locked-NAND trust boundary to the global builder/threshold
-proof beyond the checked local macro, source-accounting, and square-baseline layers. In particular,
-it does not prove the global locked builder, threshold, residual-slack-at-most-four bound, or
-polynomiality.
+proof beyond the checked local macro, source-accounting, square-baseline, and conditional-boundary
+layers. In particular, the proof-bearing conditional deductions do not prove the global locked
+builder, report threshold, unconditional residual-slack-at-most-four bound, or polynomiality.

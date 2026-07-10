@@ -46,6 +46,7 @@ lean/PNP/LockedNANDDirect.lean
 lean/PNP/DirectWireBaseline.lean
 lean/PNP/LockedNANDBaseline.lean
 lean/PNP/LockedNANDLocalBaseline.lean
+lean/PNP/LockedNANDThresholdBoundary.lean
 lean/PNP/LockedNAND.lean
 lean/PNP/ResidualBand.lean
 lean/PNP/ZeroSlack.lean
@@ -62,11 +63,13 @@ lean-audit/PNPLockedNANDDirectAxiomAudit.lean
 lean-audit/PNPDirectWireBaselineAxiomAudit.lean
 lean-audit/PNPLockedNANDBaselineAxiomAudit.lean
 lean-audit/PNPLockedNANDLocalBaselineAxiomAudit.lean
+lean-audit/PNPLockedNANDThresholdBoundaryAxiomAudit.lean
 docs/lean_nand_semantics.md
 docs/lean_nand_enumerator.md
 docs/lean_locked_nand_macros.md
 docs/lean_locked_nand_prefix.md
 docs/lean_locked_nand_baseline.md
+docs/lean_locked_nand_threshold_boundary.md
 ```
 
 ## Complexity bridge
@@ -271,6 +274,28 @@ exposed. A legacy synthetic `m = 2` seed is quarantined because honest program-d
 baseline/displayed gates. See `docs/lean_locked_nand_baseline.md` for the derivation and proof
 boundary.
 
+## Conditional locked-NAND threshold boundary
+
+`lean/PNP/LockedNANDThresholdBoundary.lean` packages the semantic boundary into six explicit
+proof-bearing fields: `baselineCandidate`, `fullCandidate`, `baselineConditions`,
+`initialOutputsPreserved`, `unsatisfiableFinalZero`, and `satisfiableFinalConditions`. Given those
+fields, Lean proves that the full minimum is at least the baseline and its residual slack is at
+most four. It also proves minimum exactly equal to the baseline in the unsatisfiable branch,
+minimum in `[baseline + 1, baseline + 4]` in the satisfiable branch, and the conditional threshold
+iff when the proposition is decidable.
+
+The module also proves the model-level zero-output convention: one constant-zero output can be
+appended by wiring without changing the program or gate count. This closes one direct-wire concern
+from the hostile review, not the source-circuit trace theorem.
+
+The package is not constructed here. Its `satisfiable` parameter is an arbitrary proposition and
+its `baseline` parameter an arbitrary natural number; neither is identified with circuit SAT or
+`lockedBaselineCount`. Global carrier layout, cross-instance `BaselineDistinct`/`MacroDistinct`,
+`TraceEquivalence`, derived unsatisfiable and satisfiable final-output laws,
+`FinalLockSeparation`, an answer-independent uniform polynomial builder, and connection to
+`PNP.LockedNANDThreshold` remain absent. See `docs/lean_locked_nand_threshold_boundary.md` for the
+exact premise and hostile-review inventories.
+
 ## Global locked-NAND layer
 
 `lean/PNP/LockedNAND.lean` keeps the full SAT builder and threshold theorem abstract:
@@ -283,11 +308,11 @@ structure LockedNANDReductionTrust where
 ```
 
 The local macro truth laws, supplied-list prefix exactness, typed local candidates, source-derived
-accounting, semantic output lower bound, and five local square minima are no longer part of that
-trust object. Remaining global work includes constructing the exact global distinguished-check
-list and candidate, carrier freshness, cross-instance separation, global baseline exactness, trace
-equivalence, final-lock lower bounds, the polynomial builder, the threshold equivalence, and the
-residual-slack-at-most-four theorem.
+accounting, semantic output lower bound, five local square minima, and deductions from the
+six-field conditional boundary package are no longer part of that trust object. Remaining global
+work includes instantiating that package with the exact global distinguished-check list and
+candidates, carrier freshness, cross-instance separation, trace equivalence, derived final-output
+laws, the uniform polynomial builder, and the report threshold/unconditional slack theorem.
 
 ## Residual-band, ZeroSlack, and PCCMin layers
 
@@ -376,6 +401,7 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 13. The semantic direct-wire lower bound `outputs ≤ gates` and conditional exactness for square baseline candidates.
 14. Source-derived locked-baseline occurrence, check, prefix, and displayed-gate accounting.
 15. Finite baseline conditions and exact reference minima for the five square local macros, excluding the one-output final conjunction.
+16. The conditional locked-NAND unsat/sat minimum boundary and residual-slack-at-most-four deduction from six explicit typed semantic premises.
 ```
 
 ## Explicit trust base after this pass
@@ -394,10 +420,10 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 The highest-value next targets are:
 
 ```text
-1. Construct the exact global distinguished-check list and square baseline candidate.
-2. Formalize cross-instance locked-NAND freshness and baseline distinctness.
-3. Lift the local conditions and source-derived count to global baseline exactness.
-4. Formalize trace equivalence and the locked threshold theorem.
+1. Construct the exact global distinguished-check list, baseline candidate, and full candidate.
+2. Formalize carrier layout, cross-instance locked-NAND freshness, and baseline distinctness.
+3. Prove first-output preservation, `TraceEquivalence`, and the two derived final-output laws.
+4. Instantiate the conditional boundary uniformly and prove the report threshold theorem.
 5. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
 6. Replace witness handles with concrete machine syntax and polynomial-bound semantics.
 7. Formalize or import SAT NP-hardness for those definitions.
