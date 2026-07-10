@@ -27,8 +27,8 @@ test('CheckReadmeReleaseBoundary0 rejects a missing non-activation statement', a
   const out = await CheckReadmeReleaseBoundary0({ readmeText: readme.split(required).join('status omitted') });
   assert.equal(out.tag, 'reject');
   assert.equal(out.Coord, 'CheckReadmeReleaseBoundary0.requiredSnippet');
-  assert.equal(out.Witness.reason, 'README release boundary wording is missing a required snippet');
-  assert.equal(out.Witness.detail.snippet, required);
+  assert.equal(out.Witness.reason, 'README.md missing required release-boundary snippets');
+  assert.equal(out.Witness.detail.missing.includes(required), true);
 });
 
 test('CheckReadmeReleaseBoundary0 rejects a missing historical conditional record', async () => {
@@ -37,31 +37,34 @@ test('CheckReadmeReleaseBoundary0 rejects a missing historical conditional recor
   const out = await CheckReadmeReleaseBoundary0({ readmeText: readme.split(historical).join('historical record omitted') });
   assert.equal(out.tag, 'reject');
   assert.equal(out.Coord, 'CheckReadmeReleaseBoundary0.requiredSnippet');
-  assert.equal(out.Witness.detail.snippet, historical);
+  assert.equal(out.Witness.detail.missing.includes(historical), true);
 });
 
 test('CheckReadmeReleaseBoundary0 rejects stale layout wording', async () => {
   const readme = await currentReadme0();
-  const out = await CheckReadmeReleaseBoundary0({ readmeText: `${readme}\nThe release audit checks stale duplicate ES modules under \`src\`.\n` });
+  const stale = 'stale duplicate ES modules under `src`';
+  const out = await CheckReadmeReleaseBoundary0({ readmeText: `${readme}\nThe release audit checks ${stale}.\n` });
   assert.equal(out.tag, 'reject');
   assert.equal(out.Coord, 'CheckReadmeReleaseBoundary0.forbiddenSnippet');
-  assert.equal(out.Witness.detail.snippet, 'stale duplicate ES modules under `src`');
+  assert.equal(out.Witness.detail.present.includes(stale), true);
 });
 
 test('CheckReadmeReleaseBoundary0 rejects theorem activation wording', async () => {
   const readme = await currentReadme0();
-  const out = await CheckReadmeReleaseBoundary0({ readmeText: `${readme}\npublicTheoremEmissionAllowed = true\n` });
+  const active = 'publicTheoremEmissionAllowed = true';
+  const out = await CheckReadmeReleaseBoundary0({ readmeText: `${readme}\n${active}\n` });
   assert.equal(out.tag, 'reject');
   assert.equal(out.Coord, 'CheckReadmeReleaseBoundary0.forbiddenSnippet');
-  assert.equal(out.Witness.detail.snippet, 'publicTheoremEmissionAllowed = true');
+  assert.equal(out.Witness.detail.present.includes(active), true);
 });
 
 test('CheckReadmeReleaseBoundary0 rejects unconditional P equals NP overclaims', async () => {
   const readme = await currentReadme0();
-  const out = await CheckReadmeReleaseBoundary0({ readmeText: `${readme}\nP = NP is established.\n` });
+  const overclaim = 'P = NP is established';
+  const out = await CheckReadmeReleaseBoundary0({ readmeText: `${readme}\n${overclaim}.\n` });
   assert.equal(out.tag, 'reject');
   assert.equal(out.Coord, 'CheckReadmeReleaseBoundary0.forbiddenSnippet');
-  assert.equal(out.Witness.detail.snippet, 'P = NP is established');
+  assert.equal(out.Witness.detail.present.includes(overclaim), true);
 });
 
 test('CheckReleaseAudit0 readme phase uses the reconstruction boundary checker', async () => {
