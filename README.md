@@ -21,7 +21,7 @@ This repository contains the JavaScript checker stack, package generator, materi
 | **What is the current verification status?** | Formal reconstruction is in progress. Public theorem emission is disabled, the required root Lean theorem is absent, and substantive formal obligations remain. The frozen 7072f8d release records historical checker acceptance, but that acceptance is assertion-checker evidence and not a proof of the named mathematical propositions. |
 | **What can a hash check establish?** | That retrieved bytes match a published checksum ledger, subject to the hash implementation and collision assumptions. It does **not** establish theorem correctness, checker soundness, or correct generation. |
 | **What can the checker establish?** | That the supplied records satisfy the predicates implemented by the named checker and its linkage rules. Checker acceptance does **not** independently establish that those predicates are mathematically sufficient or correctly implemented. |
-| **What remains formally?** | The Lean toolchain and explicit `PNP` library root are now pinned and built, but `PNP.Main.p_eq_np` is absent. Concrete complexity and SAT definitions; the locked-NAND threshold theorem; residual-band minimizer and `ZeroSlack`; polynomial runtime and certificate-size bounds; and a clean root-theorem axiom audit still remain. External review is useful audit evidence, not a mathematical premise. |
+| **What remains formally?** | The Lean toolchain and explicit `PNP` library root are pinned, and the axiom-free direct-wire NAND semantics core is formalized. Enumeration, minimum size, compatible replacement and slack, concrete complexity and SAT definitions, the locked-NAND threshold theorem, residual-band minimizer and `ZeroSlack`, polynomial bounds, and the root-theorem axiom audit still remain. `PNP.Main.p_eq_np` is absent. |
 | **How do I run the current verification?** | Run `npm ci --ignore-scripts` and `npm run pnp:verify -- --no-write`. This checks the non-claiming formal status, current package surface, pinned archive identity, and the small current-authority test suite; it is not a proof verification. |
 | **Where should reviewers start?** | Start with [docs/reviewer_guide.md](./docs/reviewer_guide.md), then [docs/proof_pipeline.md](./docs/proof_pipeline.md), [docs/terminology_crosswalk.md](./docs/terminology_crosswalk.md), and [docs/trust_model.md](./docs/trust_model.md). |
 
@@ -68,6 +68,7 @@ suite; it must not be confused with the frozen 1,121-test source release.
 | --- | --- | --- | --- |
 | Current test suite | `npm test` | The formal status, package boundary, archive pins, and replay guards pass in the selected environment. | Legacy checker validation, exhaustive correctness, or polynomial asymptotics. |
 | Pinned Lean root | `lake build PNP` and `lake env lean -DwarningAsError=true lean-audit/PNPBridgeAxiomAudit.lean` | Lean 4.31.0 compiles the explicit `PNP` root; the non-theorem root-status data is assumption-free; the conditional bridge's dependencies are printed. | A root theorem or a proof of `P = NP`; five disclosed project-specific axioms remain. |
+| Direct-wire NAND semantics | `lake env lean -DwarningAsError=true lean-audit/PNPNANDSemanticsAxiomAudit.lean` | The typed topological NAND syntax, Boolean evaluation, output-wiring laws, and small semantic examples are assumption-free. | Enumeration, minimum size, replacement/slack, the locked builder or threshold, SAT, or `P = NP`. |
 | Archive integrity | `npm run legacy:v0:check` | Three annotated-tag identities and the pinned release digests match the archive manifest. | Signed provenance, theorem correctness, or checker soundness. |
 | Historical checker replay | `npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d` | The pinned legacy implementation and selected tests reproduce their recorded behavior outside the active checkout. | Current theorem status, independent checker soundness, or validation of every mathematical implication. |
 | Release checksums | `SHA256SUMS` and `SHA256SUMS.sha256` | Published artefact bytes match the sealed ledger. | Correctness of the artefact contents. |
@@ -96,6 +97,7 @@ The canonical report is available as [PDF](./canonical_proof_report.pdf) and [Te
 - [Reproducibility protocol](./docs/reproducibility.md): fresh-clone, checksum, pinned-test, regeneration, and comparison instructions.
 - [Minimal examples](./examples/minimal/README.md): eight small accepted/rejected demonstrations.
 - [External review status](./EXTERNAL_REVIEW_STATUS.md): public record of substantive feedback and what has not been independently verified.
+- [Lean direct-wire NAND semantics](./docs/lean_nand_semantics.md): exact scope of the axiom-free Boolean semantics milestone.
 
 ## Install and current package surface
 

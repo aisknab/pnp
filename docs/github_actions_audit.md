@@ -12,7 +12,7 @@ from current theorem status.
   archive integrity.
 - `.github/workflows/lean-bridge.yml` verifies the pinned Elan archive and exact Lean/Lake versions,
   audits the complete Lean source closure, builds the explicit `PNP` root, and prints its axiom
-  inventory when Lean inputs change.
+  inventory plus the direct-wire NAND semantics audit when Lean inputs change.
 - `.github/workflows/legacy-v0-replay.yml` is manual only. It replays the immutable historical
   checker coordinates and uploads a non-authoritative transcript.
 

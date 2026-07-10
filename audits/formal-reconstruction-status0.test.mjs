@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-03');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-04');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -39,6 +39,14 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.explicitLeanRootTargetPresent, true);
   assert.equal(out.leanLibraryTargetBuilt, true);
   assert.equal(out.leanSourcePlaceholderAuditPassed, true);
+  assert.equal(out.leanNANDDirectWireCoreFormalized, true);
+  assert.equal(out.leanNANDDirectWireCoreAxiomAuditPassed, true);
+  assert.equal(out.leanNANDEnumeratorFormalized, false);
+  assert.equal(out.leanNANDMinimumAndSlackFormalized, false);
+  assert.equal(out.leanCompatibleReplacementFormalized, false);
+  assert.equal(out.leanGlobalSlackLawFormalized, false);
+  assert.equal(out.leanLockedNANDBuilderFormalized, false);
+  assert.equal(out.leanLockedNANDThresholdFormalized, false);
   assert.equal(out.rootLeanTheoremPresent, false);
   assert.equal(out.rootLeanTheoremBuilt, false);
   assert.equal(out.rootLeanTheoremAxiomAuditPassed, false);
@@ -56,6 +64,24 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.remainingBlockers.includes('Formal.PinnedLeanBuildAndRootTarget'), false);
   assert.match(out.statusSha256, /^[0-9a-f]{64}$/u);
   assert.match(out.siteStatusSha256, /^[0-9a-f]{64}$/u);
+});
+
+test('formal status records only the direct-wire NAND semantics milestone', async () => {
+  const status = await currentStatus0();
+
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-10-NAND-SEMANTICS-04');
+  assert.equal(status.leanNANDDirectWireCoreFormalized, true);
+  assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
+  assert.equal(status.leanNANDEnumeratorFormalized, false);
+  assert.equal(status.leanNANDMinimumAndSlackFormalized, false);
+  assert.equal(status.leanCompatibleReplacementFormalized, false);
+  assert.equal(status.leanGlobalSlackLawFormalized, false);
+  assert.equal(status.leanLockedNANDBuilderFormalized, false);
+  assert.equal(status.leanLockedNANDThresholdFormalized, false);
+  assert.equal(status.nonClaims.some((entry) => entry.includes('direct-wire NAND semantics does not prove enumeration')), true);
+  assert.equal(status.verificationCommands.includes('node --test audits/lean-nand-semantics0.test.mjs'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPNANDSemanticsAxiomAudit.lean'), true);
+  assert.equal(status.remainingBlockers.includes('Formal.LockedNANDThreshold'), true);
 });
 
 test('formal status records a pinned Lean library root without claiming a root theorem', async () => {
@@ -139,6 +165,44 @@ test('formal reconstruction status rejects a disabled Lean placeholder audit', a
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'FormalReconstructionStatus.Field');
   assert.deepEqual(out.path, ['status/FORMAL_RECONSTRUCTION_STATUS.json', 'leanSourcePlaceholderAuditPassed']);
+});
+
+test('formal reconstruction status rejects disabling the audited direct-wire NAND core', async () => {
+  const status = await currentStatus0();
+  status.leanNANDDirectWireCoreAxiomAuditPassed = false;
+  const out = await CheckFormalReconstructionStatus0({ writeOutput: false, statusOverride: status, siteOverride: status });
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.coord, 'FormalReconstructionStatus.Field');
+  assert.deepEqual(out.path, ['status/FORMAL_RECONSTRUCTION_STATUS.json', 'leanNANDDirectWireCoreAxiomAuditPassed']);
+});
+
+test('formal reconstruction status rejects unearned downstream NAND claims', async () => {
+  const fields = [
+    'leanNANDEnumeratorFormalized',
+    'leanNANDMinimumAndSlackFormalized',
+    'leanCompatibleReplacementFormalized',
+    'leanGlobalSlackLawFormalized',
+    'leanLockedNANDBuilderFormalized',
+    'leanLockedNANDThresholdFormalized',
+  ];
+
+  for (const field of fields) {
+    const status = await currentStatus0();
+    status[field] = true;
+    const out = await CheckFormalReconstructionStatus0({ writeOutput: false, statusOverride: status, siteOverride: status });
+    assert.equal(out.tag, 'reject', field);
+    assert.equal(out.coord, 'FormalReconstructionStatus.Field', field);
+    assert.deepEqual(out.path, ['status/FORMAL_RECONSTRUCTION_STATUS.json', field], field);
+  }
+});
+
+test('formal reconstruction status rejects removing the locked NAND threshold blocker', async () => {
+  const status = await currentStatus0();
+  status.remainingBlockers = status.remainingBlockers.filter((entry) => entry !== 'Formal.LockedNANDThreshold');
+  const out = await CheckFormalReconstructionStatus0({ writeOutput: false, statusOverride: status, siteOverride: status });
+  assert.equal(out.tag, 'reject');
+  assert.equal(out.coord, 'FormalReconstructionStatus.Blockers');
+  assert.deepEqual(out.path, ['status/FORMAL_RECONSTRUCTION_STATUS.json', 'remainingBlockers']);
 });
 
 test('formal reconstruction status rejects a hidden project-specific axiom', async () => {

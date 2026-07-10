@@ -8,7 +8,9 @@ on:
       - 'lean/**'
       - 'lean-audit/**'
       - 'audits/lean-root-target0.test.mjs'
+      - 'audits/lean-nand-semantics0.test.mjs'
       - 'docs/lean_bridge.md'
+      - 'docs/lean_nand_semantics.md'
       - 'docs/lean_locked_nand_macros.md'
       - 'docs/lean_locked_nand_prefix.md'
       - '.github/workflows/lean-bridge.yml'
@@ -21,7 +23,9 @@ on:
       - 'lean/**'
       - 'lean-audit/**'
       - 'audits/lean-root-target0.test.mjs'
+      - 'audits/lean-nand-semantics0.test.mjs'
       - 'docs/lean_bridge.md'
+      - 'docs/lean_nand_semantics.md'
       - 'docs/lean_locked_nand_macros.md'
       - 'docs/lean_locked_nand_prefix.md'
       - '.github/workflows/lean-bridge.yml'
@@ -70,10 +74,20 @@ jobs:
           grep -F 'Lake version 5.0.0-src+68218e8 (Lean version 4.31.0)' /tmp/lake-version.txt
 
       - name: Audit explicit root and assumption inventory
-        run: node --test audits/lean-root-target0.test.mjs
+        run: node --test audits/lean-root-target0.test.mjs audits/lean-nand-semantics0.test.mjs
 
       - name: Build explicit PNP root
         run: lake build PNP
 
       - name: Print root and conditional-bridge axioms
         run: lake env lean -DwarningAsError=true lean-audit/PNPBridgeAxiomAudit.lean
+
+      - name: Print direct-wire NAND semantics axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPNANDSemanticsAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          if printf '%s\n' "$audit_output" | grep -F 'depends on axioms:'; then
+            echo 'Direct-wire NAND semantics unexpectedly depends on axioms.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 29
