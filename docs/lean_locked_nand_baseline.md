@@ -95,7 +95,12 @@ They establish typed local candidates, constant-free internal syntax, the genera
 lower bound, source-derived arithmetic, conditional square-baseline exactness, and five exact local
 macro minima.
 
+A separate 32-declaration module now derives the conditional unsat/sat minimum boundary and
+residual slack at most four from six explicit typed semantic premises. It does not instantiate
+those premises; see [Lean conditional locked-NAND threshold
+boundary](./lean_locked_nand_threshold_boundary.md).
+
 They do not establish a global locked-NAND builder, cross-instance `BaselineDistinct`, carrier
-freshness, the locked-NAND threshold equivalence, residual slack at most four, polynomial
+freshness, the report locked-NAND threshold equivalence, unconditional residual slack at most four, polynomial
 construction/runtime, SAT correctness, or `P = NP`. All seven recorded reconstruction blockers and
 all five disclosed project-specific axioms remain.

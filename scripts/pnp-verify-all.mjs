@@ -25,6 +25,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-nand-enumerator0.test.mjs',
   'audits/lean-nand-reference-minimum0.test.mjs',
   'audits/lean-locked-nand-baseline0.test.mjs',
+  'audits/lean-locked-nand-threshold-boundary0.test.mjs',
   'audits/legacy-v0-archive0.test.mjs',
   'test/current-package-surface0.test.mjs',
   'test/current-verifier0.test.mjs',

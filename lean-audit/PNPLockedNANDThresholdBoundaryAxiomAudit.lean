@@ -1,0 +1,34 @@
+import PNP.LockedNANDThresholdBoundary
+
+#print axioms PNP.DirectWire.baselineOutputEmbedding
+#print axioms PNP.DirectWire.conditionalFinalOutput
+#print axioms PNP.DirectWire.fin1_eq_fin1Zero
+#print axioms PNP.DirectWire.conditionalFinalOutput_eq_last
+#print axioms PNP.DirectWire.projectBaselineOutputs
+#print axioms PNP.DirectWire.projectBaselineOutputs_program
+#print axioms PNP.DirectWire.projectBaselineOutputs_size
+#print axioms PNP.DirectWire.projectBaselineOutputs_source
+#print axioms PNP.DirectWire.projectBaselineOutputs_semantics
+#print axioms PNP.DirectWire.appendZeroFinalOutput
+#print axioms PNP.DirectWire.appendZeroFinalOutput_program
+#print axioms PNP.DirectWire.appendZeroFinalOutput_size
+#print axioms PNP.DirectWire.appendZeroFinalOutput_initial_source
+#print axioms PNP.DirectWire.appendZeroFinalOutput_final_source
+#print axioms PNP.DirectWire.appendZeroFinalOutput_initial_semantics
+#print axioms PNP.DirectWire.appendZeroFinalOutput_final_semantics
+#print axioms PNP.DirectWire.ConditionalFinalOutputSatConditions
+#print axioms PNP.DirectWire.ConditionalThresholdBoundaryPremises
+#print axioms PNP.DirectWire.ConditionalThresholdBoundaryPremises.fullImplementation
+#print axioms PNP.DirectWire.ConditionalThresholdBoundaryPremises.projectedEquivalentBaseline
+#print axioms PNP.DirectWire.ConditionalThresholdBoundaryPremises.projectedBaselineConditions
+#print axioms PNP.DirectWire.baselineConditions_with_final
+#print axioms PNP.DirectWire.ConditionalThresholdBoundaryPremises.fullConditions_of_satisfiable
+#print axioms PNP.DirectWire.outputCount_le_referenceMinimum
+#print axioms PNP.DirectWire.projectedOutputCount_le_referenceMinimum
+#print axioms PNP.DirectWire.ConditionalThresholdBoundaryPremises.fullMinimum_ge_baseline
+#print axioms PNP.DirectWire.natAdd_sub_le_right_of_left_le
+#print axioms PNP.DirectWire.ConditionalThresholdBoundaryPremises.fullResidualSlack_le_four
+#print axioms PNP.DirectWire.ConditionalThresholdBoundaryPremises.appendZeroEquivalentFull_of_unsatisfiable
+#print axioms PNP.DirectWire.ConditionalThresholdBoundaryPremises.fullMinimum_eq_baseline_of_unsatisfiable
+#print axioms PNP.DirectWire.ConditionalThresholdBoundaryPremises.fullMinimum_bounds_of_satisfiable
+#print axioms PNP.DirectWire.ConditionalThresholdBoundaryPremises.satisfiable_iff_minimum_ge_succ

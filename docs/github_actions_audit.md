@@ -14,9 +14,10 @@ from current theorem status.
   audits the complete Lean source closure, builds the explicit `PNP` root, and prints its axiom
   inventory plus enforced zero-axiom direct-wire semantics, enumerator, finite truth-table,
   exhaustive reference-minimum, concrete framed composition/slack, typed locked-NAND candidate,
-  semantic output-lower-bound, source-accounting, and finite local-baseline audits when Lean inputs
-  change. Each transcript has an exact declaration count, so a truncated audit fails closed. The
-  four new locked-baseline transcripts require exactly 48, 25, 23, and 30 clean declarations.
+  semantic output-lower-bound, source-accounting, finite local-baseline, and conditional
+  threshold-boundary audits when Lean inputs change. Each transcript has an exact declaration
+  count, so a truncated audit fails closed. The five locked-NAND transcripts require exactly 48,
+  25, 23, 30, and 32 clean declarations.
 - `.github/workflows/legacy-v0-replay.yml` is manual only. It replays the immutable historical
   checker coordinates and uploads a non-authoritative transcript.
 
@@ -39,9 +40,10 @@ historical 1,121-test suite. Those routes are not current package exports, scrip
 
 The Lean workflow's successful build is not a theorem-release signal. Its root status is
 assumption-free non-theorem data, `PNP.Main.p_eq_np` is absent, and the conditional bridge's five
-project-specific axioms remain visible in the workflow log. The local locked-NAND audits do not
-claim the global builder, cross-instance baseline distinctness, threshold, residual-slack-at-most-four
-bound, or polynomiality.
+project-specific axioms remain visible in the workflow log. The locked-NAND threshold-boundary
+audit proves deductions only from six explicit premises; it does not instantiate the global
+builder, carrier layout, cross-instance baseline distinctness, trace/final laws, report threshold,
+unconditional residual-slack-at-most-four bound, or polynomiality.
 
 ## Manual legacy-v0 replay
 
