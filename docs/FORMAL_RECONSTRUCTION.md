@@ -49,9 +49,22 @@ polynomial bounds, and the root theorem/axiom audit remain incomplete.
 The next constructive layer enumerates every well-typed direct-wire implementation at fixed input,
 gate, and output widths, including the unique empty output tuple and both orders of every NAND input
 pair. Its completeness theorems and certificate are axiom-free. The enumerator is intentionally not
-canonical or claimed duplicate-free, and it does not decide semantic equivalence or minimum size;
-enumeration was a tracked reconstruction milestone rather than a separate blocker ID, so the same
-seven substantive activation blockers remain.
+canonical or claimed duplicate-free.
+
+Finite Boolean tuples now give an executable decision procedure exactly equivalent to pointwise
+`DirectWire.Equivalent`. A deterministic exhaustive scan from zero gates through a supplied target
+selects an equivalent witness, proves its selected size is no greater than the target, and proves a
+lower bound against every equivalent direct-wire candidate at every gate count. The resulting
+empty-context reference minimum is invariant under semantic equivalence, and its residual slack is
+zero exactly for a semantically minimum implementation. This is a finite reference computation: no
+polynomial or practical-runtime bound is claimed, and it is not the asserted residual-band
+minimizer used by the historical route.
+
+Serial composition also provides one concrete environment/support/continuation frame. Within that
+frame, equivalent support implementations can be replaced, and the corresponding additive global
+slack identity is proved. This does not cover arbitrary support subsets, support profiles, or the
+locked-NAND family. Accordingly the broad replacement/slack status fields remain false, and the
+same seven substantive activation blockers remain.
 
 ## The only acceptable future activation gate
 

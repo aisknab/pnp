@@ -110,7 +110,7 @@ test('enumerator axiom audit covers every explicit declaration exactly once', as
   assert.doesNotMatch(audit, /LockedNANDThreshold|minimum|slack|p_eq_np/iu);
 });
 
-test('formal status earns enumeration only and retains every downstream boundary', async () => {
+test('formal status retains enumerator caveats after the reference-minimum layer', async () => {
   const status = JSON.parse(await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'));
   assert.equal(status.leanNANDEnumeratorFormalized, true);
   assert.equal(status.leanNANDEnumeratorAxiomAuditPassed, true);
@@ -118,9 +118,10 @@ test('formal status earns enumeration only and retains every downstream boundary
   assert.equal(status.leanNANDEnumeratorUsesOrderedGatePairs, true);
   assert.equal(status.leanNANDEnumeratorIncludesUniqueEmptyOutputTuple, true);
   assert.equal(status.leanNANDEnumeratorDeduplicated, false);
-  assert.equal(status.leanNANDSemanticEquivalenceDecidable, false);
+  assert.equal(status.leanNANDSemanticEquivalenceDecidable, true);
+  assert.equal(status.leanNANDMinimumAndSlackFormalized, true);
   for (const field of [
-    'leanNANDMinimumAndSlackFormalized',
+    'leanNANDReferenceMinimumPolynomialRuntimeProved',
     'leanCompatibleReplacementFormalized',
     'leanGlobalSlackLawFormalized',
     'leanLockedNANDBuilderFormalized',
@@ -132,7 +133,7 @@ test('formal status earns enumeration only and retains every downstream boundary
 
 test('workflow fails closed on any enumerator axiom or incomplete transcript', async () => {
   const workflow = await text0('.github/workflows/lean-bridge.yml');
-  assert.match(workflow, /node --test audits\/lean-root-target0\.test\.mjs audits\/lean-nand-semantics0\.test\.mjs audits\/lean-nand-enumerator0\.test\.mjs/u);
+  assert.match(workflow, /node --test audits\/lean-root-target0\.test\.mjs audits\/lean-nand-semantics0\.test\.mjs audits\/lean-nand-enumerator0\.test\.mjs audits\/lean-nand-reference-minimum0\.test\.mjs/u);
   assert.match(workflow, /lean-audit\/PNPNANDEnumeratorAxiomAudit\.lean/u);
   assert.match(workflow, /Exact-width NAND enumerator unexpectedly depends on axioms/u);
   assert.match(workflow, /grep -Fc 'does not depend on any axioms'\)" -eq 41/u);
