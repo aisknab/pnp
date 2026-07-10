@@ -50,16 +50,6 @@ theorem cnfTokenWorkSymbols_length (tokens : List CNFToken) :
   | nil => rfl
   | cons token rest ih => exact congrArg Nat.succ ih
 
-theorem encodeTokenPairs_length (tokens : List CNFToken) :
-    (encodeTokenPairs tokens).length = 2 * tokens.length := by
-  induction tokens with
-  | nil => rfl
-  | cons token rest ih =>
-      cases token <;>
-        change Nat.succ (Nat.succ (encodeTokenPairs rest).length) =
-          Nat.succ (Nat.succ (2 * rest.length)) <;>
-        exact congrArg Nat.succ (congrArg Nat.succ ih)
-
 theorem encodeTokenPairs_append (left right : List CNFToken) :
     encodeTokenPairs (left ++ right) =
       encodeTokenPairs left ++ encodeTokenPairs right := by
@@ -84,12 +74,58 @@ private theorem tapeSymbol_append_assoc
   | nil => rfl
   | cons symbol rest ih => exact congrArg (List.cons symbol) ih
 
+private theorem tapeSymbol_cons_append (symbol : TapeSymbol)
+    (left right : List TapeSymbol) :
+    (symbol :: left) ++ right = symbol :: (left ++ right) := rfl
+
+private theorem tapeSymbol_nil_append (right : List TapeSymbol) :
+    ([] : List TapeSymbol) ++ right = right := rfl
+
 private theorem map_ofBool_append (left right : BitString) :
     (left ++ right).map TapeSymbol.ofBool =
       left.map TapeSymbol.ofBool ++ right.map TapeSymbol.ofBool := by
   induction left with
   | nil => rfl
   | cons bit rest ih => exact congrArg (List.cons (TapeSymbol.ofBool bit)) ih
+
+private theorem map_ofBool_false_cons (bits : BitString) :
+    (false :: bits).map TapeSymbol.ofBool =
+      TapeSymbol.zero :: bits.map TapeSymbol.ofBool := rfl
+
+private theorem map_ofBool_false_singleton :
+    [false].map TapeSymbol.ofBool = [TapeSymbol.zero] := rfl
+
+private theorem map_ofBool_finish_bits :
+    CNFToken.finish.bits.map TapeSymbol.ofBool =
+      [TapeSymbol.one, TapeSymbol.zero] := rfl
+
+private theorem append_cons_as_singleton (front suffix : List TapeSymbol)
+    (symbol : TapeSymbol) :
+    front ++ symbol :: suffix = (front ++ [symbol]) ++ suffix := by
+  induction front with
+  | nil => rfl
+  | cons first rest ih => exact congrArg (List.cons first) ih
+
+private theorem pairedRawShape
+    (outer formula counter assignment : List TapeSymbol) :
+    outer ++ TapeSymbol.one :: TapeSymbol.zero ::
+        (formula ++ TapeSymbol.zero :: TapeSymbol.one ::
+          (counter ++ TapeSymbol.one :: TapeSymbol.zero ::
+            (assignment ++ [TapeSymbol.one, TapeSymbol.zero]))) =
+      (outer ++ [TapeSymbol.one]) ++
+        (TapeSymbol.zero :: (formula ++ [TapeSymbol.zero])) ++
+          ((TapeSymbol.one :: (counter ++ [TapeSymbol.one])) ++
+            (TapeSymbol.zero ::
+              (assignment ++ [TapeSymbol.one, TapeSymbol.zero]))) := by
+  rw [append_cons_as_singleton outer _ TapeSymbol.one]
+  rw [append_cons_as_singleton formula _ TapeSymbol.zero]
+  rw [append_cons_as_singleton counter _ TapeSymbol.one]
+  repeat' rw [tapeSymbol_append_assoc]
+  repeat' rw [tapeSymbol_cons_append]
+  repeat' rw [tapeSymbol_nil_append]
+  repeat' rw [tapeSymbol_append_assoc]
+  repeat' rw [tapeSymbol_cons_append]
+  repeat' rw [tapeSymbol_nil_append]
 
 private theorem map_ofBool_replicate_true (n : Nat) :
     (List.replicate n true).map TapeSymbol.ofBool =
@@ -110,10 +146,11 @@ private theorem replicate_one_succ_tail (n : Nat) :
 
 private theorem replicate_one_add_two (n : Nat) :
     List.replicate (n + 2) TapeSymbol.one =
-      List.replicate n TapeSymbol.one ++ [TapeSymbol.one, TapeSymbol.one] := by
-  rw [show n + 2 = (n + 1) + 1 by rw [Nat.add_assoc]]
-  rw [replicate_one_succ_tail, replicate_one_succ_tail]
-  exact tapeSymbol_append_assoc
+      TapeSymbol.one ::
+        (List.replicate n TapeSymbol.one ++ [TapeSymbol.one]) := by
+  change TapeSymbol.one :: List.replicate (n + 1) TapeSymbol.one =
+    TapeSymbol.one :: (List.replicate n TapeSymbol.one ++ [TapeSymbol.one])
+  exact congrArg (List.cons TapeSymbol.one) (replicate_one_succ_tail n)
 
 private theorem encodeWorkRight_replicate_true (n : Nat) :
     encodeWorkRight (List.replicate n WorkSymbol.oneOne) =
@@ -162,6 +199,8 @@ theorem paddedFormulaTokenBits_length (tokens : List CNFToken) :
     (paddedFormulaTokenBits tokens).length = 2 * tokens.length + 1 := by
   unfold paddedFormulaTokenBits
   rw [BitString.length_append_constructive, encodeTokenPairs_length]
+  change 2 * tokens.length + 1 = 2 * tokens.length + 1
+  rfl
 
 theorem assignmentCertificateTokenBits_length (tokens : List CNFToken) :
     (assignmentCertificateTokenBits tokens).length =
@@ -255,11 +294,14 @@ theorem encodeWorkRight_pairedTokenLayout
   rw [map_ofBool_append, map_ofBool_append]
   rw [map_ofBool_replicate_true, map_ofBool_replicate_true]
   rw [paddedFormulaTokenBits_length, assignmentCertificateTokenBits_length]
-  rw [replicate_one_succ_tail, replicate_one_add_two]
+  rw [replicate_one_add_two, replicate_one_succ_tail]
   unfold paddedFormulaTokenBits assignmentCertificateTokenBits
-  rw [map_ofBool_append, map_ofBool_append]
-  repeat' rw [tapeSymbol_append_assoc]
-  rfl
+  rw [map_ofBool_false_cons, map_ofBool_false_cons]
+  rw [map_ofBool_append (encodeTokenPairs formulaTokens) [false]]
+  rw [map_ofBool_append (encodeTokenPairs assignmentTokens)
+    CNFToken.finish.bits]
+  rw [map_ofBool_false_singleton, map_ofBool_finish_bits]
+  exact pairedRawShape _ _ _ _
 
 /-- Packing the exact raw pair recovers the explicit token layout. -/
 theorem packWorkSymbols_paired_flat_tokens
@@ -273,7 +315,7 @@ theorem packWorkSymbols_paired_flat_tokens
     encodeWorkRight_pairedTokenLayout formulaTokens assignmentTokens
   have hPacked := congrArg packWorkSymbols hEncoded
   rw [packWorkSymbols_encodeWorkRight] at hPacked
-  exact hPacked
+  exact hPacked.symm
 
 /-- Specialisation to the canonical formula and assignment encoders. -/
 theorem packWorkSymbols_encoded_cnf_assignment
@@ -298,6 +340,10 @@ theorem pairedWorkTape_encoded_cnf_assignment
         (pairedTokenLayout (encodeFormulaTokens formula)
           (assignmentValueTokens assignment)) := by
   unfold pairedWorkTape
+  change WorkTape.ofSymbols
+      (packWorkSymbols
+        ((BitString.pair (encodeFormula formula)
+          (encodeAssignmentCertificate assignment)).map TapeSymbol.ofBool)) = _
   rw [packWorkSymbols_encoded_cnf_assignment]
 
 end PNP.Concrete
