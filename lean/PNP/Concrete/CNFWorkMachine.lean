@@ -452,7 +452,10 @@ private def literalModeRules (alreadySatisfied positive : Bool) :
   cnfCompleteRules markAssignment
     (keepMany markAssignment markAssignment .right [cnfMarkFalse, cnfMarkTrue] ++
       [ cnfWorkRule markAssignment cnfF returnAssignment cnfMarkFalse .left
-      , cnfWorkRule markAssignment cnfT returnAssignment cnfMarkTrue .left ]) ++
+      , cnfWorkRule markAssignment cnfT returnAssignment cnfMarkTrue .left
+      , cnfKeepRule markAssignment cnfRootGuard
+          (CNFWorkState.literalRestoreAssignment alreadySatisfied positive)
+          .left ]) ++
   cnfCompleteRules returnAssignment
     (keepMany returnAssignment returnAssignment .left [cnfMarkFalse, cnfMarkTrue] ++
       [cnfKeepRule returnAssignment cnfFinish returnCounter .left]) ++
@@ -482,7 +485,10 @@ private def literalModeRules (alreadySatisfied positive : Bool) :
             (alreadySatisfied || !positive) positive) .left
       , cnfKeepRule lookupAssignment cnfT
           (CNFWorkState.literalRestoreAssignment
-            (alreadySatisfied || positive) positive) .left ])
+            (alreadySatisfied || positive) positive) .left
+      , cnfKeepRule lookupAssignment cnfRootGuard
+          (CNFWorkState.literalRestoreAssignment alreadySatisfied positive)
+          .left ])
 
 private def literalRestoreRules (result positive : Bool) : List WorkRule :=
   let restoreAssignment :=
