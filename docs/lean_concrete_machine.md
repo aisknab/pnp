@@ -55,9 +55,13 @@ P/NP witnesses, polynomial reductions, and the inactive `PNP.Main.ConcretePEqual
 finite syntax is grounded at `Machine` leaves, but no compiler/refinement from an arbitrary
 composite pipeline to one raw single-tape machine has been proved. The local framed simulator now
 lifts every supplied exact `n`-step successful raw execution from an already represented frame to
-exactly `3 * n` successful work steps; ordinary compiled `run` with fuel `18 * n` reaches the
-encoded endpoint. These factors are not an input-size bound, and the layer supplies no initial
-framing, `boundedDecide` or output theorem, output handoff, or composite refinement. Therefore
+exactly `3 * n` successful work steps and extracts a `k ≤ F` exact prefix from each ordinary
+`F`-fuel raw run. Conditional on its endpoint being designated halting, `workRun` with fuel
+`3 * F` and compiled `run` with fuel `18 * F` reach the representation and encoding. This proves
+no termination result; the full fuels are at-most budgets rather than successful-step counts or
+input-size bounds, and a stuck nonhalting stop is not a verdict. The layer supplies no initial
+framing, `boundedDecide`, verdict/output preservation, output handoff,
+composition/precomposition `RawRefinement`, or composite refinement. Therefore
 `Formal.ConcreteComplexityMachineLink` remains the first of seven blockers. All five
 reviewed activation fingerprints remain unset, the four project-specific axioms remain,
 `PNP.Main.p_eq_np` is absent, and the publication gate is false.

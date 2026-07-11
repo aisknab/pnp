@@ -110,6 +110,10 @@ const EXPECTED_HEADS = Object.freeze([
   ['theorem', 'workRunExact?_compose', 'PNP.Concrete.PipelineMachineSimulation.workRunExact?_compose'],
   ['theorem', 'workRunExact_three_mul_of_rawRunExact', 'PNP.Concrete.PipelineMachineSimulation.workRunExact_three_mul_of_rawRunExact'],
   ['theorem', 'run_compileWorkMachine_eighteen_mul_of_rawRunExact', 'PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_mul_of_rawRunExact'],
+  ['theorem', 'liftMachine_isHalted_eq_of_representsConfiguration', 'PNP.Concrete.PipelineMachineSimulation.liftMachine_isHalted_eq_of_representsConfiguration'],
+  ['theorem', 'rawRunExact?_exists_le_run', 'PNP.Concrete.PipelineMachineSimulation.rawRunExact?_exists_le_run'],
+  ['theorem', 'workRun_three_mul_of_run_halted', 'PNP.Concrete.PipelineMachineSimulation.workRun_three_mul_of_run_halted'],
+  ['theorem', 'run_compileWorkMachine_eighteen_mul_of_run_halted', 'PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_mul_of_run_halted'],
 ]);
 
 const EXPECTED_IMPORTS = Object.freeze([
@@ -165,10 +169,18 @@ function validate0(source) {
   'declaration-surface');
 
   require0(prose.includes(
-    'This module does not construct a frame from raw input, prove arbitrary ' +
-    'at-most-run or bounded-verdict preservation, decode or hand off output, ' +
-    'provide a pipeline refinement or end-to-end input-size polynomial bound, ' +
-    'establish a complexity-class equality, or prove P = NP.'),
+    'This module does not construct a frame from raw input, prove termination, ' +
+    'pad nonhalting stuck endpoints, preserve timeout/verdict semantics, ' +
+    'decode or hand off output, provide a pipeline refinement or end-to-end ' +
+    'input-size polynomial bound, establish a complexity-class equality, or ' +
+    'prove P = NP.') &&
+    prose.includes(
+      'These are at-most fuel budgets, not successful-transition counts.') &&
+    prose.includes(
+      'A stuck nonhalting endpoint is intentionally not promoted to a verdict.') &&
+    prose.includes(
+      'This layer proves neither termination nor a boundedDecide ' +
+      'correspondence, and its fuel parameter is not an input-size bound.'),
   'explicit-nonclaims');
   require0(!/\b(?:RawRefinement|outputBits|handoffTarget|boundedDecide|NatPolynomial|PolynomialTimeMachine|PolynomialTimeDecider|FunctionProgram|DecisionProgram)\b/u
     .test(stripped), 'no-broader-pipeline-claim');
@@ -293,6 +305,47 @@ function validate0(source) {
   'successful-exact-run-and-frame-premises');
   require0(!/rawRunExact\? machine steps config = none →/u.test(compact),
     'no-failed-run-promotion');
+  require0(compact.includes(
+    'theorem liftMachine_isHalted_eq_of_representsConfiguration ' +
+    '(machine : Machine) (raw : Configuration) (work : WorkConfiguration) ' +
+    '(hRepresents : RepresentsConfiguration machine raw work) : ' +
+    '(liftMachine machine).isHalted work = machine.isHalted raw := by'),
+  'represented-halt-equality-type');
+  require0(compact.includes(
+    'theorem rawRunExact?_exists_le_run (machine : Machine) ' +
+    '(fuel : Nat) (config : Configuration) : ∃ steps, steps ≤ fuel ∧ ' +
+    'rawRunExact? machine steps config = some (run machine fuel config) := by'),
+  'at-most-run-exact-prefix-type');
+  require0(compact.includes(
+    'theorem workRun_three_mul_of_run_halted (machine : Machine) ' +
+    '(fuel : Nat) (config : Configuration) (workTape : WorkTape) ' +
+    '(hHalted : machine.isHalted (run machine fuel config) = true) ' +
+    '(hRepresents : Represents config.tape workTape) : ∃ workFinal, ' +
+    'workRun (liftMachine machine) (3 * fuel) ' +
+    '(liftConfiguration machine config workTape) = workFinal ∧ ' +
+    'RepresentsConfiguration machine (run machine fuel config) workFinal ∧ ' +
+    '(liftMachine machine).isHalted workFinal = true := by'),
+  'halting-work-at-most-run-type');
+  require0(compact.includes(
+    'theorem run_compileWorkMachine_eighteen_mul_of_run_halted ' +
+    '(machine : Machine) (fuel : Nat) (config : Configuration) ' +
+    '(workTape : WorkTape) ' +
+    '(hHalted : machine.isHalted (run machine fuel config) = true) ' +
+    '(hRepresents : Represents config.tape workTape) : ∃ workFinal, ' +
+    'run (compileWorkMachine (liftMachine machine)) (18 * fuel) ' +
+    '(encodeWorkConfiguration (liftConfiguration machine config workTape)) = ' +
+    'encodeWorkConfiguration workFinal ∧ RepresentsConfiguration machine ' +
+    '(run machine fuel config) workFinal ∧ ' +
+    '(liftMachine machine).isHalted workFinal = true := by'),
+  'halting-compiled-at-most-run-type');
+  require0(compact.includes(
+    'workRun_of_workRunExact_halted_le (liftMachine machine) ' +
+    '(3 * steps) (3 * fuel)') && compact.includes(
+      'run_compileWorkMachine_of_workRunExact_halted_le ' +
+      '(liftMachine machine) (3 * steps) (18 * fuel)'),
+  'halted-padding-only');
+  require0(!/boundedDecide\s/u.test(stripped),
+    'no-bounded-verdict-theorem');
 
   for (const branch of [
     'find_continuation_stayOne',
@@ -318,7 +371,7 @@ test('pipeline machine simulator is finite, exact, first-match, and shortcut-fre
       assert.deepEqual(validate0(await text0(SOURCE_PATH)), []);
     });
 
-test('root, transcript, and workflow require all ninety-two axiom-free declarations',
+test('root, transcript, and workflow require all ninety-six axiom-free declarations',
     async () => {
       const [source, audit, root, workflow] = await Promise.all([
         text0(SOURCE_PATH),
@@ -326,7 +379,7 @@ test('root, transcript, and workflow require all ninety-two axiom-free declarati
         text0('lean/PNP.lean'),
         text0('.github/workflows/lean-bridge.yml'),
       ]);
-      assert.equal(EXPECTED_HEADS.length, 92);
+      assert.equal(EXPECTED_HEADS.length, 96);
       assert.deepEqual(headPairs0(source),
         EXPECTED_HEADS.map(([kind, name]) => [kind, name]));
       assert.deepEqual(imports0(audit), ['PNP']);
@@ -342,7 +395,7 @@ test('root, transcript, and workflow require all ninety-two axiom-free declarati
       assert.equal(rootImports[importIndex - 1],
         'PNP.Concrete.PipelineTapeGeometry');
       assert.match(workflow,
-        /PNPConcretePipelineMachineSimulationAxiomAudit\.lean[\s\S]{0,900}grep -F 'depends on axioms:'[\s\S]{0,400}exit 1[\s\S]{0,400}grep -Fc 'does not depend on any axioms'\)" -eq 92/u);
+        /PNPConcretePipelineMachineSimulationAxiomAudit\.lean[\s\S]{0,900}grep -F 'depends on axioms:'[\s\S]{0,400}exit 1[\s\S]{0,400}grep -Fc 'does not depend on any axioms'\)" -eq 96/u);
     });
 
 test('hostile rule-order, terminal, alphabet, cost, namespace, and proof mutations fail',
@@ -402,7 +455,37 @@ test('hostile rule-order, terminal, alphabet, cost, namespace, and proof mutatio
           '  induction steps',
           'RepresentsConfiguration machine config workFinal := by\n' +
           '  induction steps'),
-        source.replace('at-most-run or bounded-verdict preservation, ', ''),
+        source.replace(
+          '(liftMachine machine).isHalted work = machine.isHalted raw := by',
+          '(liftMachine machine).isHalted work = true := by'),
+        source.replace('steps ≤ fuel ∧', 'steps = fuel ∧'),
+        source.replace(
+          '(hHalted : machine.isHalted (run machine fuel config) = true)\n' +
+          '    (hRepresents : Represents config.tape workTape)',
+          '(_hHalted : True)\n' +
+          '    (hRepresents : Represents config.tape workTape)'),
+        source.replace(
+          'workRun (liftMachine machine) (3 * fuel)',
+          'workRun (liftMachine machine) (3 * steps)'),
+        source.replace(
+          'RepresentsConfiguration machine (run machine fuel config) ' +
+          'workFinal ∧',
+          'RepresentsConfiguration machine config workFinal ∧'),
+        source.replace(
+          'run (compileWorkMachine (liftMachine machine)) (18 * fuel)',
+          'run (compileWorkMachine (liftMachine machine)) (18 * steps)'),
+        source.replace(
+          '(liftMachine machine).isHalted workFinal = true := by',
+          'True := by'),
+        source.replace(
+          'pad nonhalting stuck endpoints, preserve timeout/verdict semantics',
+          'promote nonhalting stuck endpoints to verdicts'),
+        source.replace(
+          'These are at-most fuel budgets, not successful-transition counts.',
+          'These are exact successful-transition counts.'),
+        source.replace(
+          'A stuck nonhalting endpoint is intentionally not promoted to a verdict.',
+          'A stuck nonhalting endpoint is promoted to a verdict.'),
         source.replace(':= rfl', ':= by sorry'),
         source.replace(':= rfl', ':= by native_decide'),
         source + '\naxiom hiddenPipelineSimulation : True\n',

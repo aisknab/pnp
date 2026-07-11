@@ -34,10 +34,14 @@ axiom-free finite charged-pipeline interface for P, bounded-certificate NP, and 
 many-one reductions. It does not yet prove that every such pipeline compiles or refines to the raw
 single-tape machine kernel. A new local layer preserves the raw interpreter's first matching rule
 and lifts every supplied exact chain of `n` successful raw transitions from an already represented
-boundary frame to exactly `3 * n` successful work transitions. Ordinary compiled-machine `run`
-with fuel `18 * n` reaches the encoded endpoint; this is not a claim of `18 * n` successful
-transitions. The layer does not create that frame, prove bounded-decision or output semantics,
-decode or hand off terminal output, or construct a composite refinement. The development
+boundary frame to exactly `3 * n` successful work transitions. From an ordinary raw `run` with
+fuel `F`, it extracts an exact prefix of length `k ≤ F` reaching the same endpoint. If that endpoint
+is designated halting, `workRun` with fuel `3 * F` and compiled-machine `run` with fuel `18 * F`
+reach its representation and encoding. This is conditional padding, not a termination result: the
+full budgets are not successful-transition counts or input-size bounds, and a stuck nonhalting stop
+is not classified as a verdict. The layer does not create the frame, prove `boundedDecide` or
+output preservation, decode or hand off terminal output, or construct composition/precomposition
+refinement. The development
 also provides one direct raw-machine instance: a universally
 correct polynomial-time verifier for canonically encoded finite CNF formulae and bounded assignment
 certificates, proving `PNP.Concrete.CNFSAT ∈ NP`. It does not provide a deterministic polynomial-time
@@ -58,8 +62,9 @@ decoding, natural-polynomial bound syntax, a finite rule-list single-tape machin
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and
 decision pipeline syntax carries polynomial runtime, output-size, certificate-size, and handoff
 bounds. Lean constructs P contained in NP, reduction identity/composition/transport, and the
-NP-complete-in-P implication. Boundary geometry and the local simulator now discharge one
-configuration-to-configuration step, including marker growth across arbitrary exterior garbage.
+NP-complete-in-P implication. Boundary geometry and the local simulator now discharge exact finite
+configuration runs, including marker growth across arbitrary exterior garbage, exact-prefix
+extraction, and the conditional designated-halting padding described above.
 This is still a charged interpreter interface without a complete compiler or refinement theorem to
 one raw machine. See
 [`lean_concrete_complexity.md`](./lean_concrete_complexity.md).

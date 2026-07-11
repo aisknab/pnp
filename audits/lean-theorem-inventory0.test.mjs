@@ -85,10 +85,10 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
   assert.equal(`${stableStringify0(inventory)}\n`, inventoryBytes.toString('utf8'));
   ValidateLeanTheoremInventory0(inventory);
   assert.equal(inventory.environmentProbeComplete, true);
-  assert.equal(inventory.declarationCount, 4672);
+  assert.equal(inventory.declarationCount, 4676);
   assert.equal(inventory.excludedPrivateDeclarationCount, 560);
-  assert.equal(inventory.theoremCount, 1938);
-  assert.equal(inventory.assumptionFreeTheoremCount, 1837);
+  assert.equal(inventory.theoremCount, 1942);
+  assert.equal(inventory.assumptionFreeTheoremCount, 1841);
   assert.equal(inventory.axiomCount, 4);
   assert.equal(inventory.sourceClosureModuleCount, 40);
   assert.deepEqual(inventory.declarationKindCounts, {
@@ -99,7 +99,7 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
     opaque: 0,
     quotient: 0,
     recursor: 116,
-    theorem: 1938,
+    theorem: 1942,
   });
   assert.deepEqual(inventory.projectAxioms, [
     'PNP.CheckPCCPackexp',
@@ -116,7 +116,7 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
     module: 'PNP.Concrete.Target',
     name: 'PNP.Main.ConcretePEqualsNP',
   });
-  assert.equal(inventory.milestoneCandidates.length, 60);
+  assert.equal(inventory.milestoneCandidates.length, 64);
   assert.deepEqual(inventory.milestoneCandidates.map((entry) => entry.name), REQUIRED_MILESTONE_THEOREMS0);
   assert.equal(inventory.milestoneCandidates.every((entry) => entry.kind === 'theorem'
     && entry.kernelValue === null && typeof entry.kernelType === 'string'), true);
@@ -162,7 +162,7 @@ test('positive Lean probe parser rejects empty, malformed, noisy, failed, or non
   const valid = ParseLeanInventoryProbe0({
     stdout: inventoryBytes.toString('utf8'), stderr: '', exitCode: 0, timedOut: false,
   });
-  assert.equal(valid.inventory.declarationCount, 4672);
+  assert.equal(valid.inventory.declarationCount, 4676);
   for (const input of [
     { stdout: '', stderr: '', exitCode: 0, timedOut: false },
     { stdout: '{}\n', stderr: '', exitCode: 0, timedOut: false },
@@ -347,7 +347,7 @@ test('project, unknown, and sorry axioms cannot pass the fixed standard-axiom cl
   }
 });
 
-test('publication map cannot set fingerprints or expand the axiom allowlist in release 17', async () => {
+test('publication map cannot set fingerprints or expand the axiom allowlist in release 18', async () => {
   const { inventoryBytes, inventory, map } = await fixture0();
   const fingerprinted = structuredClone(map);
   fingerprinted.gate.expectedRootKernelTypeSha256 = 'a'.repeat(64);

@@ -92,3 +92,7 @@ import PNP
 #print axioms PNP.Concrete.PipelineMachineSimulation.workRunExact?_compose
 #print axioms PNP.Concrete.PipelineMachineSimulation.workRunExact_three_mul_of_rawRunExact
 #print axioms PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_mul_of_rawRunExact
+#print axioms PNP.Concrete.PipelineMachineSimulation.liftMachine_isHalted_eq_of_representsConfiguration
+#print axioms PNP.Concrete.PipelineMachineSimulation.rawRunExact?_exists_le_run
+#print axioms PNP.Concrete.PipelineMachineSimulation.workRun_three_mul_of_run_halted
+#print axioms PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_mul_of_run_halted
