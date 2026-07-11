@@ -119,7 +119,6 @@ test('formal reconstruction status accepts the current source and public mirrors
     'PNP.GeneratePCCPack',
     'PNP.LockedNANDThreshold',
     'PNP.ResidualBandExactMinimization',
-    'PNP.SAT',
   ]);
   assert.equal(out.externalReviewIsMathematicalPremise, false);
   assert.deepEqual(out.remainingBlockers, FORMAL_RECONSTRUCTION_BLOCKERS0);

@@ -89,10 +89,10 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
   assert.equal(inventory.excludedPrivateDeclarationCount, 36);
   assert.equal(inventory.theoremCount, 883);
   assert.equal(inventory.assumptionFreeTheoremCount, 793);
-  assert.equal(inventory.axiomCount, 5);
+  assert.equal(inventory.axiomCount, 4);
   assert.equal(inventory.sourceClosureModuleCount, 26);
   assert.deepEqual(inventory.declarationKindCounts, {
-    axiom: 5,
+    axiom: 4,
     constructor: 98,
     definition: 1350,
     inductive: 74,
@@ -106,7 +106,6 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
     'PNP.GeneratePCCPack',
     'PNP.LockedNANDThreshold',
     'PNP.ResidualBandExactMinimization',
-    'PNP.SAT',
   ]);
   assert.equal(inventory.compatibilityRootCandidate, null);
   assert.deepEqual(inventory.concreteTargetCandidate, {

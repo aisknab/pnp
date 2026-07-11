@@ -83,11 +83,11 @@ test('historical activation and checker acceptance cannot override the concrete 
   }
 });
 
-test('status retains seven blockers, five project axioms, and an absent compatibility root', async () => {
+test('status retains seven blockers, four project axioms, and an absent compatibility root', async () => {
   const status = await status0();
   assert.equal(status.remainingBlockers.length, 7);
   assert.deepEqual(status.remainingBlockers, status.remainingFormalObligations);
-  assert.equal(status.projectSpecificAxiomInventory.length, 5);
+  assert.equal(status.projectSpecificAxiomInventory.length, 4);
   assert.equal(status.projectSpecificAxiomsRemaining, true);
   assert.equal(status.rootLeanTheorem, 'PNP.Main.p_eq_np');
   assert.equal(status.rootLeanTheoremPresent, false);

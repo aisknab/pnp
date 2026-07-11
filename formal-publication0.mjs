@@ -49,7 +49,6 @@ export const REQUIRED_PROJECT_AXIOMS0 = Object.freeze([
   'PNP.GeneratePCCPack',
   'PNP.LockedNANDThreshold',
   'PNP.ResidualBandExactMinimization',
-  'PNP.SAT',
 ]);
 
 export function sha256Text0(value) {
@@ -124,7 +123,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
     throw new Error('Lean excluded-private declaration count is invalid');
   }
   if (stableStringify0(inventory.projectAxioms) !== stableStringify0(REQUIRED_PROJECT_AXIOMS0)) {
-    throw new Error('Lean project axiom inventory must remain the disclosed five-axiom set');
+    throw new Error('Lean project axiom inventory must remain the disclosed four-axiom set');
   }
   if (stableStringify0(inventory.projectAxioms) !== stableStringify0(axiomRows.map((entry) => entry.name))) {
     throw new Error('Lean project axiom side inventory drifted from compiled axiom declaration rows');

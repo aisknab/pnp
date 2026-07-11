@@ -47,8 +47,12 @@ def ReducesToPoly (A B : Language) : Prop := Nonempty (PolyTimeManyOneReduction 
 /-- The final theorem statement. -/
 def PEqualsNP : Prop := PClass = NPClass
 
-/-- The SAT language used by the locked-NAND reduction. -/
-axiom SAT : Language
+/-- The legacy SAT label used by the string-handle locked-NAND bridge.
+
+This is deliberately only a named value in the non-authoritative witness
+model.  It is not identified with `PNP.Concrete.CNFSAT`, and making the label
+concrete does not supply SAT semantics, NP-hardness, or a decision procedure. -/
+def SAT : Language := { name := "SAT" }
 
 /-- NP-completeness over the reduction relation. -/
 structure NPComplete (L : Language) : Prop where

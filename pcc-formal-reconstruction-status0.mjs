@@ -35,7 +35,6 @@ const PROJECT_SPECIFIC_AXIOM_INVENTORY = Object.freeze([
   'PNP.GeneratePCCPack',
   'PNP.LockedNANDThreshold',
   'PNP.ResidualBandExactMinimization',
-  'PNP.SAT',
 ]);
 
 const LOCKED_NAND_THRESHOLD_HOSTILE_REVIEW_LEMMA_INVENTORY = Object.freeze([
@@ -66,6 +65,7 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'node --test audits/lean-root-target0.test.mjs',
   'node --test audits/lean-concrete-machine0.test.mjs',
   'node --test audits/lean-concrete-complexity0.test.mjs',
+  'node --test audits/lean-concrete-cnf0.test.mjs',
   'node --test audits/lean-nand-semantics0.test.mjs',
   'node --test audits/lean-nand-enumerator0.test.mjs',
   'node --test audits/lean-nand-reference-minimum0.test.mjs',
@@ -78,6 +78,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteMachineAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteComplexityAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteTargetAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFWorkInputAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFVerifierAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPNANDSemanticsAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPNANDEnumeratorAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPNANDTruthTableAxiomAudit.lean',
