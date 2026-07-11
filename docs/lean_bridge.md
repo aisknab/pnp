@@ -44,6 +44,7 @@ lean/PNP/NANDSlack.lean
 lean/PNP/ResidualRoutes.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
+lean/PNP/Concrete/TapeHandoff.lean
 lean/PNP/Concrete/Complexity.lean
 lean/PNP/Concrete/PipelineRefinement.lean
 lean/PNP/Concrete/Target.lean
@@ -75,6 +76,7 @@ lean-audit/PNPBridgeAxiomAudit.lean
 lean-audit/PNPTheoremInventory.lean
 lean-audit/PNPConcreteBitStringAxiomAudit.lean
 lean-audit/PNPConcreteMachineAxiomAudit.lean
+lean-audit/PNPConcreteTapeHandoffAxiomAudit.lean
 lean-audit/PNPConcreteComplexityAxiomAudit.lean
 lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean
 lean-audit/PNPConcreteTargetAxiomAudit.lean
@@ -96,6 +98,7 @@ lean-audit/PNPLockedNANDLocalBaselineAxiomAudit.lean
 lean-audit/PNPLockedNANDThresholdBoundaryAxiomAudit.lean
 docs/lean_nand_semantics.md
 docs/lean_concrete_machine.md
+docs/lean_tape_handoff.md
 docs/lean_concrete_complexity.md
 docs/lean_nand_enumerator.md
 docs/lean_locked_nand_macros.md
@@ -129,7 +132,10 @@ PNP.Concrete.reduction_transports_p
 PNP.Concrete.np_complete_in_p_implies_p_eq_np
 ```
 
-All 50 explicit complexity declarations have empty axiom closures. The two declarations in
+All 48 explicit complexity declarations have empty axiom closures. The fourteen declarations in
+`lean/PNP/Concrete/TapeHandoff.lean` are also axiom-free: they define first-blank output semantics
+and the pure canonical handoff target, prove representation-stable decoding, and make no executable
+handoff claim. The two declarations in
 `lean/PNP/Concrete/Target.lean` are also axiom-free: `PNP.Main.ConcretePEqualsNP` is an inactive
 definition naming mutual inclusion, and `PNP.Main.concretePEqualsNP_iff` pins its expansion. This
 does not prove the target. The six explicit declarations in

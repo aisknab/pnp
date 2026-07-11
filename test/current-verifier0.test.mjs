@@ -19,6 +19,7 @@ test('current verifier plan contains status, surface, archive integrity, and cur
   assert.equal(CURRENT_VERIFICATION_TESTS0.some((file) => /pcc-runall|release-audit|materialized/u.test(file)), false);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-root-target0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-concrete-machine0.test.mjs'), true);
+  assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-concrete-tape-handoff0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-concrete-complexity0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-concrete-pipeline-refinement0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-concrete-cnf0.test.mjs'), true);

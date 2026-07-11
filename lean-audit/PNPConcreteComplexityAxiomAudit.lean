@@ -2,9 +2,7 @@ import PNP
 
 #print axioms PNP.Concrete.TapeSymbol.toBool
 #print axioms PNP.Concrete.TapeSymbol.toBool_ofBool
-#print axioms PNP.Concrete.Tape.outputBits
 #print axioms PNP.Concrete.Tape.map_toBool_ofBool
-#print axioms PNP.Concrete.Tape.outputBits_ofInput
 #print axioms PNP.Concrete.machineOutput
 #print axioms PNP.Concrete.machineOutput_immediateAccept_zero
 #print axioms PNP.Concrete.NatPolynomial.substitute

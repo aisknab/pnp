@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-11-13",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-11-14",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "5c1f2eadd2750912dfcbc416becb53e0a79230af2caae68c51005a96cb3358c6",
+  "milestoneSourceClosureSha256": "26ea00a0211c2192268bf8c28102a4fa24afa1322ff1e1b9800d50779853ea20",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.FinalUniversalDesign.cnfCompiled_accept_iff_check": "4a8661d567079e1f47c288b8a36805a20ac7040338d84325723079f3fada4efa",
@@ -32,6 +32,10 @@
     "PNP.Concrete.NatPolynomial.eval_mono": "08eef194a6dad5f3443646446dd9aa44bb62f71881897bd2721f5e10b0ed31ca",
     "PNP.Concrete.PolynomialTimeMachine.verdict_accepts_iff": "d99481e6c7e062b5faf06d8bdb544efa434e2528ba40dfb6f87f9ccced49b56f",
     "PNP.Concrete.PolynomialTimeMachine.verdict_ne_timeout": "ba634559b6494abc43978e3b34abf1f94b9d2e4cc3aa0856db8d5de36cefd1c5",
+    "PNP.Concrete.Tape.outputBits_handoffTarget": "77d6df0d712abeb6da67906fb1b41e770d4e846cbfe4b024368b3f398ece1543",
+    "PNP.Concrete.Tape.outputBits_moveRight_moveLeft": "f39ae4d724e13c4e8afb0d310f27ccf4bca551162b7899af6db173f82996fab7",
+    "PNP.Concrete.Tape.outputBits_ofInput": "4d4d7f8b96c6d1f5978ea6020a381170f18a9e40794d15cce5117ed8c94edc14",
+    "PNP.Concrete.Tape.outputBits_right_append_blank": "8792acc8efd57d92f756f4a6536f91f33eae11f76b74a5b75c87f8f6229f0aed",
     "PNP.Concrete.np_complete_in_p_implies_p_eq_np": "3026a17865cacc2dc65ad62f38e735451ad7009c062c3ff364169c3875c56f9e",
     "PNP.Concrete.p_subset_np": "ff7fb433d85b53c61c1409ffbfa47b22a1d8184b11ae18f11895b972ad6f6bed",
     "PNP.Concrete.reduction_comp": "ca5ad5f4ccae69b3efa95b875f6561a934b8b81dffd76583bd344f5938235d2c",
@@ -68,16 +72,20 @@
       "id": "concrete-machine-cost-kernel",
       "title": "Concrete machine and cost kernel",
       "classification": "formalized-foundation-only",
-      "scope": "Executable bitstrings and codecs, finite rule-list machine semantics, fuel-bounded execution, and proof-bearing natural-polynomial runtime witnesses.",
+      "scope": "Executable bitstrings and codecs, finite rule-list machine semantics, fuel-bounded execution, blank-delimited representation-stable output, a pure canonical handoff target, and proof-bearing natural-polynomial runtime witnesses.",
       "requiredTheorems": [
         "PNP.Concrete.BitString.decodePair_pair",
         "PNP.Concrete.NatPolynomial.eval_mono",
         "PNP.Concrete.PolynomialTimeMachine.verdict_accepts_iff",
         "PNP.Concrete.PolynomialTimeMachine.verdict_ne_timeout",
+        "PNP.Concrete.Tape.outputBits_handoffTarget",
+        "PNP.Concrete.Tape.outputBits_moveRight_moveLeft",
+        "PNP.Concrete.Tape.outputBits_ofInput",
+        "PNP.Concrete.Tape.outputBits_right_append_blank",
         "PNP.Concrete.run_succ",
         "PNP.Concrete.run_zero"
       ],
-      "nonClaim": "This foundation alone does not define concrete P, NP, reductions, SAT, NP-completeness, or P = NP."
+      "nonClaim": "The pure handoff target is not an executable normalization/handoff machine and supplies no boundary frame, state reset, composition compiler, or runtime theorem. This foundation alone does not prove SAT, NP-completeness, or P = NP."
     },
     {
       "id": "concrete-complexity-classes",

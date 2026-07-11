@@ -14,8 +14,9 @@ from current theorem status.
   audits the complete Lean source closure, builds the explicit `PNP` root, generates its public
   declaration inventory from `Lean.Environment.constants` plus `Lean.collectAxioms`, and prints
   the focused axiom transcripts for the 41-declaration concrete bitstring/polynomial kernel, the
-  38-declaration finite-rule machine kernel, the 50-declaration finite charged-pipeline complexity
-  interface, the six-declaration raw-pipeline refinement boundary, the two-declaration inactive
+  38-declaration finite-rule machine kernel, the 14-declaration blank-delimited output/handoff
+  boundary, the 48-declaration finite charged-pipeline complexity interface, the six-declaration
+  raw-pipeline refinement boundary, the two-declaration inactive
   concrete target, the concrete CNF semantics/codec,
   paired work-input bridge, direct verifier bridge, and complete work-machine correctness closure,
   and enforced zero-axiom direct-wire semantics, enumerator, finite truth-table,
@@ -60,6 +61,11 @@ composition, and the inactive target. The refinement audit adds exact proof-bear
 machine-leaf witnesses, output-bound transport, and a decider bridge from a supplied refinement; it
 does not construct composition/precomposition refinements or supply the missing general compiler
 to one raw machine.
+
+The tape-handoff audit corrects the earlier list-boundary-sensitive output convention: explicit and
+implicit blanks now terminate output identically. Its `handoffTarget` is a pure canonical data target,
+not a machine, rule list, or paid copy algorithm. Boundary framing, stale-cell isolation, state
+namespacing, and polynomial handoff execution remain unproved.
 
 The concrete-CNF checks do establish a narrower raw-machine result. They require complete axiom
 transcripts for the canonical CNF codec and semantics, paired work-input layout, generic direct

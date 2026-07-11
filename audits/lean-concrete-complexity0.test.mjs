@@ -38,9 +38,7 @@ const EXPECTED_BLOCKERS = Object.freeze([
 const EXPECTED_COMPLEXITY_HEADS = Object.freeze([
   ['def', 'toBool', 'PNP.Concrete.TapeSymbol.toBool'],
   ['theorem', 'toBool_ofBool', 'PNP.Concrete.TapeSymbol.toBool_ofBool'],
-  ['def', 'outputBits', 'PNP.Concrete.Tape.outputBits'],
   ['theorem', 'map_toBool_ofBool', 'PNP.Concrete.Tape.map_toBool_ofBool'],
-  ['theorem', 'outputBits_ofInput', 'PNP.Concrete.Tape.outputBits_ofInput'],
   ['def', 'machineOutput', 'PNP.Concrete.machineOutput'],
   ['theorem', 'machineOutput_immediateAccept_zero', 'PNP.Concrete.machineOutput_immediateAccept_zero'],
   ['def', 'substitute', 'PNP.Concrete.NatPolynomial.substitute'],
@@ -146,7 +144,7 @@ function validateComplexity0(source) {
   const compact = compactLean0(source);
   const fields = structureFields0(source);
 
-  require0(JSON.stringify(imports0(source)) === JSON.stringify(['PNP.Concrete.Machine']), 'closed-import');
+  require0(JSON.stringify(imports0(source)) === JSON.stringify(['PNP.Concrete.TapeHandoff']), 'closed-import');
   require0(/^namespace PNP\.Concrete$/mu.test(stripped) && /end PNP\.Concrete\s*$/u.test(stripped), 'namespace');
   require0(!hasLeanAssumptionDeclaration0(source), 'assumption-declaration');
   require0(!hasPrivateLeanDeclaration0(source), 'private-declaration');
@@ -238,14 +236,14 @@ test('concrete complexity source is closed, finite, proof-bearing, and shortcut-
   assert.deepEqual(validateTarget0(await text0(TARGET_PATH)), []);
 });
 
-test('complexity and target transcripts cover exactly 50 and 2 explicit heads once', async () => {
+test('complexity and target transcripts cover exactly 48 and 2 explicit heads once', async () => {
   const [complexity, target, complexityAudit, targetAudit] = await Promise.all([
     text0(COMPLEXITY_PATH),
     text0(TARGET_PATH),
     text0(COMPLEXITY_AUDIT_PATH),
     text0(TARGET_AUDIT_PATH),
   ]);
-  assert.equal(EXPECTED_COMPLEXITY_HEADS.length, 50);
+  assert.equal(EXPECTED_COMPLEXITY_HEADS.length, 48);
   assert.equal(EXPECTED_TARGET_HEADS.length, 2);
   assert.deepEqual(headPairs0(complexity), EXPECTED_COMPLEXITY_HEADS.map(([kind, name]) => [kind, name]));
   assert.deepEqual(headPairs0(target), EXPECTED_TARGET_HEADS.map(([kind, name]) => [kind, name]));
@@ -253,7 +251,7 @@ test('complexity and target transcripts cover exactly 50 and 2 explicit heads on
   assert.deepEqual(imports0(targetAudit), ['PNP']);
   assert.deepEqual(printed0(complexityAudit), EXPECTED_COMPLEXITY_HEADS.map(([, , full]) => full));
   assert.deepEqual(printed0(targetAudit), EXPECTED_TARGET_HEADS.map(([, , full]) => full));
-  assert.equal(new Set(printed0(complexityAudit)).size, 50);
+  assert.equal(new Set(printed0(complexityAudit)).size, 48);
   assert.equal(new Set(printed0(targetAudit)).size, 2);
 });
 
@@ -334,7 +332,7 @@ test('target remains an inactive definition, the raw-machine link remains blocke
 test('workflow executes both exact zero-axiom transcripts', async () => {
   const workflow = await text0('.github/workflows/lean-bridge.yml');
   assert.match(workflow, /audits\/lean-concrete-complexity0\.test\.mjs/u);
-  assert.match(workflow, /PNPConcreteComplexityAxiomAudit\.lean[\s\S]{0,900}grep -Fc 'does not depend on any axioms'\)" -eq 50/u);
+  assert.match(workflow, /PNPConcreteComplexityAxiomAudit\.lean[\s\S]{0,900}grep -Fc 'does not depend on any axioms'\)" -eq 48/u);
   assert.match(workflow, /PNPConcreteTargetAxiomAudit\.lean[\s\S]{0,900}grep -Fc 'does not depend on any axioms'\)" -eq 2/u);
 });
 
