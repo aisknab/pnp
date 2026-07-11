@@ -2,9 +2,10 @@
 
 `lean/PNP/Concrete/Complexity.lean` defines concrete bitstring languages, proof-bearing P and NP
 witnesses, and polynomial many-one reductions without storing executable Lean functions or string
-code handles. `lean/PNP/Concrete/Target.lean` names the corresponding inactive target proposition.
-All 50 explicit complexity declarations and both target declarations have empty compiled axiom
-closures.
+code handles. `lean/PNP/Concrete/PipelineRefinement.lean` pins exact raw-machine refinement
+contracts and proves the two machine-leaf cases. `lean/PNP/Concrete/Target.lean` names the
+corresponding inactive target proposition. The explicit declarations in all three layers have empty
+compiled axiom closures.
 
 This is a finite charged-pipeline interface. Its leaves are concrete `Machine` values, but the
 current formalization does not compile or refine an arbitrary composite pipeline into one raw
@@ -12,11 +13,19 @@ single-tape `Machine`. That missing link is recorded as
 `Formal.ConcreteComplexityMachineLink`; consequently the publication map keeps
 `standardComplexityModelEligible` false.
 
+The refinement boundary is intentionally proof-bearing. A `FunctionProgram.RawRefinement` or
+`DecisionProgram.RawRefinement` supplies one raw machine, one natural-polynomial budget, a
+no-timeout theorem for every source input covered by `Halts`, and exact output or verdict equality.
+The module constructs these witnesses for raw machine leaves, transports the output bound of a
+`PolynomialTimeFunction`, and converts a `PolynomialTimeDecider` to a raw
+`PolynomialTimeMachine` only when a refinement of its complete program is supplied. It does not
+construct that refinement for composition or precomposition.
+
 Clearing that blocker requires more than compiling the pipeline syntax. The refinement must prove
 output preservation with polynomial overhead, realize both verifier input modes (including an
 input-only-to-canonical-pair adapter), preserve the fixed tape-output convention, and establish
 equivalence of the resulting raw-machine P/NP classes. Until all of those facts are proved, the
-charged interpreter remains an explicitly narrower model.
+charged interpreter remains a distinct, not-yet-linked model.
 
 ## Finite programs and costs
 
@@ -118,14 +127,17 @@ axioms. Seven blockers remain, beginning with `Formal.ConcreteComplexityMachineL
 ```bash
 lake build PNP
 lake env lean -DwarningAsError=true lean-audit/PNPConcreteComplexityAxiomAudit.lean
+lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcreteTargetAxiomAudit.lean
 node --test audits/lean-concrete-complexity0.test.mjs
+node --test audits/lean-concrete-pipeline-refinement0.test.mjs
 ```
 
 The source audit rejects hidden executable function fields, string code handles, assumptions,
 shortcuts, noncanonical pair order, missing certificate bounds, timeout-as-rejection behavior,
-reversed reduction composition, omitted handoff costs, omitted polynomial substitution, supplied
-transport fields, target forgery, transcript truncation, and compatibility-root injection.
+reversed reduction composition, omitted handoff costs, omitted polynomial substitution, weakened
+refinement contracts, compiler overclaims, supplied transport fields, target forgery, transcript
+truncation, and compatibility-root injection.
 
 ## Exact nonclaim
 

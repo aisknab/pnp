@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-10-12",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-11-13",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "d28f000e838fa81710beceb0da7f0a5ad4cb1f665e07e2545274251489015fad",
+  "milestoneSourceClosureSha256": "5c1f2eadd2750912dfcbc416becb53e0a79230af2caae68c51005a96cb3358c6",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.FinalUniversalDesign.cnfCompiled_accept_iff_check": "4a8661d567079e1f47c288b8a36805a20ac7040338d84325723079f3fada4efa",
@@ -28,6 +28,7 @@
     "PNP.Concrete.FinalUniversalDesign.cnfSATInNP": "c9d66c135361cf8a8b25330d2558dfac209fde120e296140c7e7cb86bf1e1937",
     "PNP.Concrete.FinalUniversalDesign.cnfUniversalWorkOutcome": "c92d82b73cb97669f11c973ca5af510c9d26126e4c042ce09089134552208928",
     "PNP.Concrete.FinalUniversalDesign.formulaGrammarOutcome": "b17bca26b10ff836c6ebadaa593a6236e7633d80b75b34e0357f371223692ec0",
+    "PNP.Concrete.FunctionProgram.RawRefinement.output_size_le": "f9d23e2b448974c617d83666b18c5950ce025067a959a74e98d3b20f54229c8f",
     "PNP.Concrete.NatPolynomial.eval_mono": "08eef194a6dad5f3443646446dd9aa44bb62f71881897bd2721f5e10b0ed31ca",
     "PNP.Concrete.PolynomialTimeMachine.verdict_accepts_iff": "d99481e6c7e062b5faf06d8bdb544efa434e2528ba40dfb6f87f9ccced49b56f",
     "PNP.Concrete.PolynomialTimeMachine.verdict_ne_timeout": "ba634559b6494abc43978e3b34abf1f94b9d2e4cc3aa0856db8d5de36cefd1c5",
@@ -82,8 +83,9 @@
       "id": "concrete-complexity-classes",
       "title": "Concrete P, NP, and polynomial reductions",
       "classification": "formalized-with-machine-link-pending",
-      "scope": "Bitstring languages, finite charged decision/verifier/function pipelines grounded in concrete machines, polynomial certificate/runtime/output bounds, many-one reductions, and the NP-complete-in-P implication.",
+      "scope": "Bitstring languages, finite charged decision/verifier/function pipelines grounded in concrete machines, polynomial certificate/runtime/output bounds, exact raw-machine refinement contracts and machine-leaf witnesses, many-one reductions, and the NP-complete-in-P implication.",
       "requiredTheorems": [
+        "PNP.Concrete.FunctionProgram.RawRefinement.output_size_le",
         "PNP.Concrete.np_complete_in_p_implies_p_eq_np",
         "PNP.Concrete.p_subset_np",
         "PNP.Concrete.reduction_comp",
@@ -91,7 +93,7 @@
         "PNP.Concrete.reduction_transports_p",
         "PNP.Main.concretePEqualsNP_iff"
       ],
-      "nonClaim": "This general complexity-class layer alone does not prove CNF-SAT is in P, CNF-SAT is NP-complete, or the publication root theorem."
+      "nonClaim": "The refinement contracts and leaf cases do not compile function composition or decision precomposition, construct raw paired verifiers, prove charged/raw class equivalence, discharge the general machine-link blocker, prove CNF-SAT is in P or NP-complete, or establish the publication root theorem."
     },
     {
       "id": "concrete-cnf-universal-verifier",

@@ -15,7 +15,8 @@ from current theorem status.
   declaration inventory from `Lean.Environment.constants` plus `Lean.collectAxioms`, and prints
   the focused axiom transcripts for the 41-declaration concrete bitstring/polynomial kernel, the
   38-declaration finite-rule machine kernel, the 50-declaration finite charged-pipeline complexity
-  interface, the two-declaration inactive concrete target, the concrete CNF semantics/codec,
+  interface, the six-declaration raw-pipeline refinement boundary, the two-declaration inactive
+  concrete target, the concrete CNF semantics/codec,
   paired work-input bridge, direct verifier bridge, and complete work-machine correctness closure,
   and enforced zero-axiom direct-wire semantics, enumerator, finite truth-table,
   exhaustive reference-minimum, concrete framed composition/slack, typed locked-NAND candidate,
@@ -55,8 +56,10 @@ audit proves deductions only from six explicit premises; it does not instantiate
 builder, carrier layout, cross-instance baseline distinctness, trace/final laws, report threshold,
 unconditional residual-slack-at-most-four bound, or polynomiality. The concrete-complexity audit
 checks finite machine-leaf syntax, certificate and runtime bounds, output handoff costs, reduction
-composition, and the inactive target; it does not supply the missing compiler/refinement to one raw
-machine.
+composition, and the inactive target. The refinement audit adds exact proof-bearing contracts, raw
+machine-leaf witnesses, output-bound transport, and a decider bridge from a supplied refinement; it
+does not construct composition/precomposition refinements or supply the missing general compiler
+to one raw machine.
 
 The concrete-CNF checks do establish a narrower raw-machine result. They require complete axiom
 transcripts for the canonical CNF codec and semantics, paired work-input layout, generic direct

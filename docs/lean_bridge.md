@@ -45,6 +45,7 @@ lean/PNP/ResidualRoutes.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
 lean/PNP/Concrete/Complexity.lean
+lean/PNP/Concrete/PipelineRefinement.lean
 lean/PNP/Concrete/Target.lean
 lean/PNP/Concrete/WorkInput.lean
 lean/PNP/Concrete/WorkMachine.lean
@@ -75,6 +76,7 @@ lean-audit/PNPTheoremInventory.lean
 lean-audit/PNPConcreteBitStringAxiomAudit.lean
 lean-audit/PNPConcreteMachineAxiomAudit.lean
 lean-audit/PNPConcreteComplexityAxiomAudit.lean
+lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean
 lean-audit/PNPConcreteTargetAxiomAudit.lean
 lean-audit/PNPConcreteCNFAxiomAudit.lean
 lean-audit/PNPConcreteCNFVerifierAxiomAudit.lean
@@ -130,8 +132,13 @@ PNP.Concrete.np_complete_in_p_implies_p_eq_np
 All 50 explicit complexity declarations have empty axiom closures. The two declarations in
 `lean/PNP/Concrete/Target.lean` are also axiom-free: `PNP.Main.ConcretePEqualsNP` is an inactive
 definition naming mutual inclusion, and `PNP.Main.concretePEqualsNP_iff` pins its expansion. This
-does not compile or refine a composite pipeline into one raw single-tape machine, so
-`Formal.ConcreteComplexityMachineLink` remains blocked. See
+does not prove the target. The six explicit declarations in
+`lean/PNP/Concrete/PipelineRefinement.lean` are axiom-free. They
+pin exact raw-machine refinement obligations, prove the raw function/decision leaf cases, transport
+a function output-size bound, and convert a decider to a raw-machine witness only from a supplied
+complete-program refinement. They do not build that refinement for composition or precomposition.
+Consequently this still does not compile or refine a composite pipeline into one raw single-tape
+machine, so `Formal.ConcreteComplexityMachineLink` remains blocked. See
 [`lean_concrete_complexity.md`](./lean_concrete_complexity.md).
 
 ### Direct concrete CNF verifier

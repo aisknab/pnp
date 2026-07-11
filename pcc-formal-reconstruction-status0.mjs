@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-12';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-11-13';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -65,6 +65,7 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'node --test audits/lean-root-target0.test.mjs',
   'node --test audits/lean-concrete-machine0.test.mjs',
   'node --test audits/lean-concrete-complexity0.test.mjs',
+  'node --test audits/lean-concrete-pipeline-refinement0.test.mjs',
   'node --test audits/lean-concrete-cnf0.test.mjs',
   'node --test audits/lean-nand-semantics0.test.mjs',
   'node --test audits/lean-nand-enumerator0.test.mjs',
@@ -77,6 +78,7 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteBitStringAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteMachineAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteComplexityAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteTargetAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFWorkInputAxiomAudit.lean',
@@ -363,7 +365,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-10-CONCRETE-COMPLEXITY-12',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-11-PIPELINE-REFINEMENT-13',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -630,7 +632,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-10-12',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-11-13',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,
