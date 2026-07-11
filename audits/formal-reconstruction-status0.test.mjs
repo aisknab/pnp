@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-11-15');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-11-16');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -140,15 +140,24 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.match(out.siteStatusSha256, /^[0-9a-f]{64}$/u);
 });
 
-test('formal reconstruction status pins the pipeline-tape-geometry inventory and source closure', async () => {
+test('formal reconstruction status pins the pipeline-machine-simulation inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 4501);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 1863);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 1762);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 551);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 39);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 4659);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 1932);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 1831);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 560);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 40);
   assert.equal(status.leanSourceClosureSha256,
-    'cdfd10fdf8461c246fe0cf89247a0051d69beb3b55b7e14963943fb0ff702943');
+    'a7212ca4cef1a004b8f3201ae72d207a3227f61e06bcaa3d7264b47c8ad4ab74');
+  const machine = status.formalPublicationMilestones.find(
+    (entry) => entry.id === 'concrete-machine-cost-kernel',
+  );
+  assert.equal(machine.status, 'formalized-foundation-only');
+  assert.equal(machine.earned, true);
+  assert.equal(machine.requiredTheorems.includes(
+    'PNP.Concrete.PipelineMachineSimulation.workRunExact_three_of_step'), true);
+  assert.equal(machine.requiredTheorems.includes(
+    'PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_of_step'), true);
   const cnf = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-cnf-universal-verifier',
   );
@@ -157,9 +166,11 @@ test('formal reconstruction status pins the pipeline-tape-geometry inventory and
   assert.equal(cnf.requiredTheorems.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP'), true);
   for (const command of [
+    'node --test audits/lean-concrete-pipeline-machine-simulation0.test.mjs',
     'node --test audits/lean-concrete-pipeline-tape-geometry0.test.mjs',
     'node --test audits/lean-concrete-tape-handoff0.test.mjs',
     'node --test audits/lean-concrete-pipeline-refinement0.test.mjs',
+    'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineMachineSimulationAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineTapeGeometryAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcreteTapeHandoffAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean',
@@ -176,7 +187,7 @@ test('formal reconstruction status pins the pipeline-tape-geometry inventory and
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-11-PIPELINE-TAPE-GEOMETRY-15');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-11-PIPELINE-MACHINE-SIMULATION-16');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);

@@ -44,9 +44,11 @@ ordinary Lean data function used as a specification; it is not stored in a `Mach
 provide transition rules, and has no runtime theorem.
 
 `lean/PNP/Concrete/PipelineTapeGeometry.lean` now supplies the next pure layer: a finite two-track
-boundary frame that tolerates exterior garbage and handles empty and odd logical lengths. A future
-compiler still needs transition rules that create and transform those frames, reset control state
-without collisions, preserve first-match rule semantics, and pay a polynomial copy/simulation cost.
+boundary frame that tolerates exterior garbage and handles empty and odd logical lengths.
+`PipelineMachineSimulation.lean` supplies ordered finite rules for one successful raw transition
+inside an already existing frame, with an exact three-work/eighteen-compiled-raw cost. A future
+compiler still needs an executable initial framer, terminal output de-tagging and handoff, bounded
+run lifting, second-stage launch, and the full polynomial copy/simulation bound.
 
 ## Audit
 
@@ -64,6 +66,7 @@ publication gate.
 
 ## Exact nonclaim
 
-This semantic migration does not construct a normalization or handoff machine, a boundary frame,
-state namespaces, composition or precomposition refinement, verifier adapters, charged/raw class
-equivalence, `CNFSAT ∈ P`, NP-completeness, a root theorem, or `P = NP`.
+This semantic migration does not construct a normalization or handoff machine, composition or
+precomposition refinement, verifier adapters, charged/raw class equivalence, `CNFSAT ∈ P`,
+NP-completeness, a root theorem, or `P = NP`. The separate frame and local simulator do not change
+that handoff boundary.
