@@ -20,3 +20,28 @@ one-literal formula is fifteen bits). A green guard therefore means only that
 no mismatch or timeout was found in that finite universe; it does not replace
 the systematic canonical-clause regression or the universal operational-
 correctness proof.
+
+Run the targeted canonical CNF regression with:
+
+```sh
+lake env lean -DwarningAsError=true \
+  lean-regression/PNPConcreteCNFWorkCanonical.lean
+```
+
+It checks 620 small canonical formulae against all 15 assignments of length at
+most three, for 9,300 pairs. The family reaches clauses, literals, both signs,
+in-range and out-of-range indices, empty clauses, and one- and two-clause
+formulae. Any timeout is an explicit failure. This remains finite evidence,
+not a universal proof.
+
+Run the work-compiler boundary regression with:
+
+```sh
+lake env lean -DwarningAsError=true \
+  lean-regression/PNPConcreteWorkCompilerEdges.lean
+```
+
+Its ten cases exercise exact six-step compilation for all three head moves,
+including implicit blank work symbols at the left and right tape boundaries.
+It is a focused executable regression, not the universal compiler-simulation
+theorem.

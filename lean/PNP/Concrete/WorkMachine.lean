@@ -2318,4 +2318,161 @@ theorem run_compileWorkMachine_six_of_selected (machine : WorkMachine)
   change compilePhaseSix rule config = _
   exact compilePhaseSix_eq_encode_apply rule config
 
+/-- A successful work step exposes the selected rule and its two lookup
+conditions. -/
+theorem workStep?_some_exists (machine : WorkMachine)
+    (config next : WorkConfiguration)
+    (hStep : workStep? machine config = some next) :
+    ∃ rule, machine.isHalted config = false ∧
+      findWorkRule machine.rules config.state config.tape.head = some rule ∧
+      next = applyWorkRule rule config := by
+  cases hHalted : machine.isHalted config with
+  | true =>
+      unfold workStep? at hStep
+      rw [hHalted] at hStep
+      contradiction
+  | false =>
+      cases hFind : findWorkRule machine.rules config.state config.tape.head with
+      | none =>
+          unfold workStep? at hStep
+          rw [hHalted, hFind] at hStep
+          contradiction
+      | some rule =>
+          refine ⟨rule, rfl, rfl, ?_⟩
+          have hApply := workStep?_eq_apply_of_find
+            machine config rule hHalted hFind
+          exact (Option.some.inj (hApply.symm.trans hStep)).symm
+
+/-- Every successful work transition is simulated by exactly six raw
+transitions. -/
+theorem run_compileWorkMachine_six_of_workStep (machine : WorkMachine)
+    (config next : WorkConfiguration)
+    (hStep : workStep? machine config = some next) :
+    run (compileWorkMachine machine) 6 (encodeWorkConfiguration config) =
+      encodeWorkConfiguration next := by
+  rcases workStep?_some_exists machine config next hStep with
+    ⟨rule, hHalted, hFind, hNext⟩
+  rw [hNext]
+  exact run_compileWorkMachine_six_of_selected
+    machine config rule hHalted hFind
+
+/-- A raw configuration with no successor is stable under every fuel budget. -/
+theorem run_eq_self_of_step?_eq_none (machine : Machine)
+    (config : Configuration) (fuel : Nat)
+    (hStep : step? machine config = none) :
+    run machine fuel config = config := by
+  induction fuel with
+  | zero => rfl
+  | succ fuel ih =>
+      change
+        (match step? machine config with
+         | none => config
+         | some next => run machine fuel next) = config
+      rw [hStep]
+
+/-- Splitting a raw fuel budget runs the first part before the second. -/
+theorem run_add (machine : Machine) (first second : Nat)
+    (config : Configuration) :
+    run machine (first + second) config =
+      run machine second (run machine first config) := by
+  induction first generalizing config with
+  | zero =>
+      rw [Nat.zero_add]
+      rfl
+  | succ first ih =>
+      rw [Nat.succ_add]
+      change
+        (match step? machine config with
+         | none => config
+         | some next => run machine (first + second) next) =
+        run machine second
+          (match step? machine config with
+           | none => config
+           | some next => run machine first next)
+      cases hStep : step? machine config with
+      | none =>
+          exact (run_eq_self_of_step?_eq_none machine config second hStep).symm
+      | some next => exact ih next
+
+/-- A selected work transition may be followed by any additional raw fuel. -/
+theorem run_compileWorkMachine_add_six_of_selected (machine : WorkMachine)
+    (config : WorkConfiguration) (rule : WorkRule) (fuel : Nat)
+    (hHalted : machine.isHalted config = false)
+    (hFind : findWorkRule machine.rules config.state config.tape.head = some rule) :
+    run (compileWorkMachine machine) (fuel + 6)
+        (encodeWorkConfiguration config) =
+      run (compileWorkMachine machine) fuel
+        (encodeWorkConfiguration (applyWorkRule rule config)) := by
+  rw [Nat.add_comm fuel 6]
+  rw [run_add]
+  rw [run_compileWorkMachine_six_of_selected machine config rule hHalted hFind]
+
+/-- A successful work transition may be followed by any additional raw fuel. -/
+theorem run_compileWorkMachine_add_six_of_workStep (machine : WorkMachine)
+    (config next : WorkConfiguration) (fuel : Nat)
+    (hStep : workStep? machine config = some next) :
+    run (compileWorkMachine machine) (fuel + 6)
+        (encodeWorkConfiguration config) =
+      run (compileWorkMachine machine) fuel (encodeWorkConfiguration next) := by
+  rw [Nat.add_comm fuel 6]
+  rw [run_add]
+  rw [run_compileWorkMachine_six_of_workStep machine config next hStep]
+
+private theorem six_mul_succ_add (steps fuel : Nat) :
+    6 * (steps + 1) + fuel = (6 * steps + fuel) + 6 := by
+  rw [Nat.mul_add, Nat.mul_one]
+  rw [Nat.add_assoc]
+  rw [Nat.add_comm 6 fuel]
+  rw [← Nat.add_assoc]
+
+/-- An exact work execution is simulated at six raw transitions per work
+transition, with an arbitrary raw suffix budget. -/
+theorem run_compileWorkMachine_add_mul_of_workRunExact
+    (machine : WorkMachine) (steps fuel : Nat)
+    (config final : WorkConfiguration)
+    (hRun : workRunExact? machine steps config = some final) :
+    run (compileWorkMachine machine) (6 * steps + fuel)
+        (encodeWorkConfiguration config) =
+      run (compileWorkMachine machine) fuel
+        (encodeWorkConfiguration final) := by
+  induction steps generalizing config with
+  | zero =>
+      change some config = some final at hRun
+      have hConfig : config = final := Option.some.inj hRun
+      cases hConfig
+      rw [Nat.zero_add]
+  | succ steps ih =>
+      cases hStep : workStep? machine config with
+      | none =>
+          change
+            (match workStep? machine config with
+             | none => none
+             | some next => workRunExact? machine steps next) = some final at hRun
+          rw [hStep] at hRun
+          contradiction
+      | some next =>
+          have hTail : workRunExact? machine steps next = some final := by
+            change
+              (match workStep? machine config with
+               | none => none
+               | some next => workRunExact? machine steps next) = some final at hRun
+            rw [hStep] at hRun
+            exact hRun
+          rw [six_mul_succ_add]
+          exact (run_compileWorkMachine_add_six_of_workStep
+            machine config next (6 * steps + fuel) hStep).trans
+              (ih next hTail)
+
+/-- An exact `steps`-transition work execution is simulated by exactly
+`6 * steps` raw transitions. -/
+theorem run_compileWorkMachine_mul_of_workRunExact
+    (machine : WorkMachine) (steps : Nat)
+    (config final : WorkConfiguration)
+    (hRun : workRunExact? machine steps config = some final) :
+    run (compileWorkMachine machine) (6 * steps)
+        (encodeWorkConfiguration config) =
+      encodeWorkConfiguration final := by
+  exact run_compileWorkMachine_add_mul_of_workRunExact
+    machine steps 0 config final hRun
+
 end PNP.Concrete

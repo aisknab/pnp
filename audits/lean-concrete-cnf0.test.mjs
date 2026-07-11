@@ -199,19 +199,35 @@ test('package and workflow enforce the fast CNF audit and all three exact transc
   }
 });
 
-test('bounded work-machine differential regression is reviewable and explicitly opt-in', async () => {
-  const [regression, readme, packageText, workflow] = await Promise.all([
+test('bounded work-machine regressions are reviewable, strict, and explicitly opt-in', async () => {
+  const [regression, canonical, compiler, readme, packageText, workflow] = await Promise.all([
     text0('lean-regression/PNPConcreteCNFWorkExhaustive.lean'),
+    text0('lean-regression/PNPConcreteCNFWorkCanonical.lean'),
+    text0('lean-regression/PNPConcreteWorkCompilerEdges.lean'),
     text0('lean-regression/README.md'),
     text0('package.json'),
     text0('.github/workflows/lean-bridge.yml'),
   ]);
   assert.match(regression, /def samples : List BitString := bitsThrough 8/u);
+  assert.match(regression, /\| \.timeout => true/u);
   assert.match(regression, /#guard samples\.length == 511/u);
   assert.match(regression, /#guard findMismatch samples samples == none/u);
+  assert.match(canonical, /#guard formulas\.length \* assignments\.length == 9300/u);
+  assert.match(canonical, /\| _, _ => true/u);
+  assert.match(canonical, /#guard findMismatch formulas == none/u);
+  assert.match(compiler, /#guard cases\.length == 10/u);
+  assert.match(compiler, /#guard cases\.all Prod\.snd/u);
   assert.match(readme, /261,121/u);
-  assert.doesNotMatch(packageText, /PNPConcreteCNFWorkExhaustive/u);
-  assert.doesNotMatch(workflow, /PNPConcreteCNFWorkExhaustive/u);
+  assert.match(readme, /9,300/u);
+  assert.match(readme, /contains no\s+encoded clause/u);
+  for (const name of [
+    'PNPConcreteCNFWorkExhaustive',
+    'PNPConcreteCNFWorkCanonical',
+    'PNPConcreteWorkCompilerEdges',
+  ]) {
+    assert.doesNotMatch(packageText, new RegExp(name, 'u'));
+    assert.doesNotMatch(workflow, new RegExp(name, 'u'));
+  }
 });
 
 test('legacy SAT is a non-authoritative label, not an axiom or concrete-CNF alias', async () => {

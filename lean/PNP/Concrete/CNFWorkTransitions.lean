@@ -115,208 +115,6 @@ theorem findWorkRule_cnfCompleteRules (source : Nat)
 
 /-! ### Concrete boot and frame contracts -/
 
-/- The first reconstruction used functions returning an expected rule for an
-arbitrary work symbol.  Lean's generated two-discriminant matcher for those
-functions carries `propext`, so the proof surface deliberately uses
-existential totality plus fixed-symbol `rfl` contracts instead.
-
-namespace CNFExpectedRule
-
-def boot (symbol : WorkSymbol) : WorkRule :=
-  match symbol.first, symbol.second with
-  | .one, .one => cnfKeepRule CNFWorkState.boot cnfT
-      CNFWorkState.bootLeft .left
-  | _, _ => cnfRejectRule CNFWorkState.boot symbol
-
-def bootLeft (symbol : WorkSymbol) : WorkRule :=
-  match symbol.first, symbol.second with
-  | .blank, .blank => cnfWorkRule CNFWorkState.bootLeft cnfBlank
-      CNFWorkState.frameOneFindCounter cnfRootGuard .right
-  | _, _ => cnfRejectRule CNFWorkState.bootLeft symbol
-
-def frameOneFindCounter (symbol : WorkSymbol) : WorkRule :=
-  match symbol.first, symbol.second with
-  | .blank, .zero => cnfKeepRule CNFWorkState.frameOneFindCounter
-      cnfMarkFalse CNFWorkState.frameOneFindCounter .right
-  | .one, .one => cnfWorkRule CNFWorkState.frameOneFindCounter cnfT
-      CNFWorkState.frameOneToHeader cnfMarkFalse .right
-  | .one, .zero => cnfKeepRule CNFWorkState.frameOneFindCounter
-      cnfFinish CNFWorkState.frameOneCheckPayload .right
-  | _, _ => cnfRejectRule CNFWorkState.frameOneFindCounter symbol
-
-def frameOneToHeader (symbol : WorkSymbol) : WorkRule :=
-  match symbol.first, symbol.second with
-  | .one, .one => cnfKeepRule CNFWorkState.frameOneToHeader cnfT
-      CNFWorkState.frameOneToHeader .right
-  | .blank, .zero => cnfKeepRule CNFWorkState.frameOneToHeader
-      cnfMarkFalse CNFWorkState.frameOneToHeader .right
-  | .one, .zero => cnfKeepRule CNFWorkState.frameOneToHeader
-      cnfFinish CNFWorkState.frameOneFindPayload .right
-  | _, _ => cnfRejectRule CNFWorkState.frameOneToHeader symbol
-
-def frameOneFindPayload (symbol : WorkSymbol) : WorkRule :=
-  match symbol.first, symbol.second with
-  | .blank, .zero => cnfKeepRule CNFWorkState.frameOneFindPayload
-      cnfMarkFalse CNFWorkState.frameOneFindPayload .right
-  | .blank, .one => cnfKeepRule CNFWorkState.frameOneFindPayload
-      cnfMarkTrue CNFWorkState.frameOneFindPayload .right
-  | .zero, .blank => cnfKeepRule CNFWorkState.frameOneFindPayload
-      cnfRootGuard CNFWorkState.frameOneFindPayload .right
-  | .one, .blank => cnfKeepRule CNFWorkState.frameOneFindPayload
-      cnfBoundaryGuard CNFWorkState.frameOneFindPayload .right
-  | .zero, .zero => cnfWorkRule CNFWorkState.frameOneFindPayload
-      cnfF CNFWorkState.frameOneBackPayload cnfMarkFalse .left
-  | .one, .one => cnfWorkRule CNFWorkState.frameOneFindPayload
-      cnfT CNFWorkState.frameOneBackPayload cnfMarkTrue .left
-  | .zero, .one => cnfWorkRule CNFWorkState.frameOneFindPayload
-      cnfSep CNFWorkState.frameOneBackPayload cnfRootGuard .left
-  | .one, .zero => cnfWorkRule CNFWorkState.frameOneFindPayload
-      cnfFinish CNFWorkState.frameOneBackPayload cnfBoundaryGuard .left
-  | _, _ => cnfRejectRule CNFWorkState.frameOneFindPayload symbol
-
-def frameOneBackPayload (symbol : WorkSymbol) : WorkRule :=
-  match symbol.first, symbol.second with
-  | .blank, .zero => cnfKeepRule CNFWorkState.frameOneBackPayload
-      cnfMarkFalse CNFWorkState.frameOneBackPayload .left
-  | .blank, .one => cnfKeepRule CNFWorkState.frameOneBackPayload
-      cnfMarkTrue CNFWorkState.frameOneBackPayload .left
-  | .zero, .blank => cnfKeepRule CNFWorkState.frameOneBackPayload
-      cnfRootGuard CNFWorkState.frameOneBackPayload .left
-  | .one, .blank => cnfKeepRule CNFWorkState.frameOneBackPayload
-      cnfBoundaryGuard CNFWorkState.frameOneBackPayload .left
-  | .one, .zero => cnfKeepRule CNFWorkState.frameOneBackPayload
-      cnfFinish CNFWorkState.frameOneBackHeader .left
-  | _, _ => cnfRejectRule CNFWorkState.frameOneBackPayload symbol
-
-def frameOneBackHeader (symbol : WorkSymbol) : WorkRule :=
-  match symbol.first, symbol.second with
-  | .one, .one => cnfKeepRule CNFWorkState.frameOneBackHeader cnfT
-      CNFWorkState.frameOneBackHeader .left
-  | .blank, .zero => cnfKeepRule CNFWorkState.frameOneBackHeader
-      cnfMarkFalse CNFWorkState.frameOneBackHeader .left
-  | .zero, .blank => cnfKeepRule CNFWorkState.frameOneBackHeader
-      cnfRootGuard CNFWorkState.frameOneFindCounter .right
-  | _, _ => cnfRejectRule CNFWorkState.frameOneBackHeader symbol
-
-def frameOneCheckPayload (symbol : WorkSymbol) : WorkRule :=
-  match symbol.first, symbol.second with
-  | .blank, .zero => cnfKeepRule CNFWorkState.frameOneCheckPayload
-      cnfMarkFalse CNFWorkState.frameOneCheckPayload .right
-  | .blank, .one => cnfKeepRule CNFWorkState.frameOneCheckPayload
-      cnfMarkTrue CNFWorkState.frameOneCheckPayload .right
-  | .zero, .blank => cnfKeepRule CNFWorkState.frameOneCheckPayload
-      cnfRootGuard CNFWorkState.frameOneCheckPayload .right
-  | .one, .blank => cnfKeepRule CNFWorkState.frameOneCheckPayload
-      cnfBoundaryGuard CNFWorkState.frameOneCheckPayload .right
-  | .zero, .one => cnfWorkRule CNFWorkState.frameOneCheckPayload
-      cnfSep CNFWorkState.frameOneRestorePayload cnfBoundaryGuard .left
-  | _, _ => cnfRejectRule CNFWorkState.frameOneCheckPayload symbol
-
-def frameOneRestorePayload (symbol : WorkSymbol) : WorkRule :=
-  match symbol.first, symbol.second with
-  | .blank, .zero => cnfWorkRule CNFWorkState.frameOneRestorePayload
-      cnfMarkFalse CNFWorkState.frameOneRestorePayload cnfF .left
-  | .blank, .one => cnfWorkRule CNFWorkState.frameOneRestorePayload
-      cnfMarkTrue CNFWorkState.frameOneRestorePayload cnfT .left
-  | .zero, .blank => cnfWorkRule CNFWorkState.frameOneRestorePayload
-      cnfRootGuard CNFWorkState.frameOneRestorePayload cnfSep .left
-  | .one, .blank => cnfWorkRule CNFWorkState.frameOneRestorePayload
-      cnfBoundaryGuard CNFWorkState.frameOneRestorePayload cnfFinish .left
-  | .one, .zero => cnfKeepRule CNFWorkState.frameOneRestorePayload
-      cnfFinish CNFWorkState.frameOneGoBoundary .right
-  | _, _ => cnfRejectRule CNFWorkState.frameOneRestorePayload symbol
-
-def frameOneGoBoundary (symbol : WorkSymbol) : WorkRule :=
-  match symbol.first, symbol.second with
-  | .zero, .zero => cnfKeepRule CNFWorkState.frameOneGoBoundary cnfF
-      CNFWorkState.frameOneGoBoundary .right
-  | .one, .one => cnfKeepRule CNFWorkState.frameOneGoBoundary cnfT
-      CNFWorkState.frameOneGoBoundary .right
-  | .zero, .one => cnfKeepRule CNFWorkState.frameOneGoBoundary cnfSep
-      CNFWorkState.frameOneGoBoundary .right
-  | .one, .zero => cnfKeepRule CNFWorkState.frameOneGoBoundary
-      cnfFinish CNFWorkState.frameOneGoBoundary .right
-  | .one, .blank => cnfKeepRule CNFWorkState.frameOneGoBoundary
-      cnfBoundaryGuard CNFWorkState.frameTwoFindCounter .right
-  | _, _ => cnfRejectRule CNFWorkState.frameOneGoBoundary symbol
-
-end CNFExpectedRule
-
-set_option maxRecDepth 100000 in
-theorem cnfFind_boot (symbol : WorkSymbol) :
-    findWorkRule cnfWorkRules CNFWorkState.boot symbol =
-      some (CNFExpectedRule.boot symbol) := by
-  cases symbol with
-  | mk first second => cases first <;> cases second <;> rfl
-
-set_option maxRecDepth 100000 in
-theorem cnfFind_bootLeft (symbol : WorkSymbol) :
-    findWorkRule cnfWorkRules CNFWorkState.bootLeft symbol =
-      some (CNFExpectedRule.bootLeft symbol) := by
-  cases symbol with
-  | mk first second => cases first <;> cases second <;> rfl
-
-set_option maxRecDepth 100000 in
-theorem cnfFind_frameOneFindCounter (symbol : WorkSymbol) :
-    findWorkRule cnfWorkRules CNFWorkState.frameOneFindCounter symbol =
-      some (CNFExpectedRule.frameOneFindCounter symbol) := by
-  cases symbol with
-  | mk first second => cases first <;> cases second <;> rfl
-
-set_option maxRecDepth 100000 in
-theorem cnfFind_frameOneToHeader (symbol : WorkSymbol) :
-    findWorkRule cnfWorkRules CNFWorkState.frameOneToHeader symbol =
-      some (CNFExpectedRule.frameOneToHeader symbol) := by
-  cases symbol with
-  | mk first second => cases first <;> cases second <;> rfl
-
-set_option maxRecDepth 100000 in
-theorem cnfFind_frameOneFindPayload (symbol : WorkSymbol) :
-    findWorkRule cnfWorkRules CNFWorkState.frameOneFindPayload symbol =
-      some (CNFExpectedRule.frameOneFindPayload symbol) := by
-  cases symbol with
-  | mk first second => cases first <;> cases second <;> rfl
-
-set_option maxRecDepth 100000 in
-theorem cnfFind_frameOneBackPayload (symbol : WorkSymbol) :
-    findWorkRule cnfWorkRules CNFWorkState.frameOneBackPayload symbol =
-      some (CNFExpectedRule.frameOneBackPayload symbol) := by
-  cases symbol with
-  | mk first second => cases first <;> cases second <;> rfl
-
-set_option maxRecDepth 100000 in
-theorem cnfFind_frameOneBackHeader (symbol : WorkSymbol) :
-    findWorkRule cnfWorkRules CNFWorkState.frameOneBackHeader symbol =
-      some (CNFExpectedRule.frameOneBackHeader symbol) := by
-  cases symbol with
-  | mk first second => cases first <;> cases second <;> rfl
-
-set_option maxRecDepth 100000 in
-theorem cnfFind_frameOneCheckPayload (symbol : WorkSymbol) :
-    findWorkRule cnfWorkRules CNFWorkState.frameOneCheckPayload symbol =
-      some (CNFExpectedRule.frameOneCheckPayload symbol) := by
-  cases symbol with
-  | mk first second => cases first <;> cases second <;> rfl
-
-set_option maxRecDepth 100000 in
-theorem cnfFind_frameOneRestorePayload (symbol : WorkSymbol) :
-    findWorkRule cnfWorkRules CNFWorkState.frameOneRestorePayload symbol =
-      some (CNFExpectedRule.frameOneRestorePayload symbol) := by
-  cases symbol with
-  | mk first second => cases first <;> cases second <;> rfl
-
-set_option maxRecDepth 100000 in
-theorem cnfFind_frameOneGoBoundary (symbol : WorkSymbol) :
-    findWorkRule cnfWorkRules CNFWorkState.frameOneGoBoundary symbol =
-      some (CNFExpectedRule.frameOneGoBoundary symbol) := by
-  cases symbol with
-  | mk first second => cases first <;> cases second <;> rfl
-
--/
-
-private theorem cnfFind_total_at (state : Nat) (symbol : WorkSymbol)
-    (h : ∃ rule, findWorkRule cnfWorkRules state symbol = some rule) :
-    ∃ rule, findWorkRule cnfWorkRules state symbol = some rule := h
 
 set_option maxRecDepth 100000 in
 theorem cnfFind_boot_total (symbol : WorkSymbol) :
@@ -399,5 +197,386 @@ theorem cnfFind_bootLeft_blank :
       some (cnfWorkRule CNFWorkState.bootLeft cnfBlank
         CNFWorkState.frameOneFindCounter cnfRootGuard .right) := by
   rfl
+
+/-! ### Totality contracts for every remaining nonhalting phase state -/
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_frameTwoFindCounter_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.frameTwoFindCounter
+      symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_frameTwoToHeader_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.frameTwoToHeader
+      symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_frameTwoFindPayload_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.frameTwoFindPayload
+      symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_frameTwoBackPayload_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.frameTwoBackPayload
+      symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_frameTwoBackHeader_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.frameTwoBackHeader
+      symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_frameTwoCheckPayload_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.frameTwoCheckPayload
+      symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_frameTwoEnsureBlank_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.frameTwoEnsureBlank
+      symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_frameTwoAtRightGuard_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.frameTwoAtRightGuard
+      symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_frameTwoRestorePayload_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.frameTwoRestorePayload
+      symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_seekLeftRoot_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.seekLeftRoot symbol =
+      some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_seekFormulaStart_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.seekFormulaStart symbol =
+      some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_widthFindFormula_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.widthFindFormula symbol =
+      some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_widthToBoundary_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.widthToBoundary symbol =
+      some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_widthPastCertificateCounter_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      CNFWorkState.widthPastCertificateCounter symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_widthFindAssignment_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.widthFindAssignment
+      symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_widthBackAssignment_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.widthBackAssignment
+      symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_widthBackCertificateCounter_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      CNFWorkState.widthBackCertificateCounter symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_widthBackFormula_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.widthBackFormula symbol =
+      some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_widthDoneToBoundary_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.widthDoneToBoundary
+      symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_widthDonePastCertificateCounter_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      CNFWorkState.widthDonePastCertificateCounter symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_widthDoneCheckAssignment_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      CNFWorkState.widthDoneCheckAssignment symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_widthRestoreAssignment_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.widthRestoreAssignment
+      symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_widthRestoreCertificateCounter_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      CNFWorkState.widthRestoreCertificateCounter symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_widthRestoreBackFormula_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      CNFWorkState.widthRestoreBackFormula symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_widthRestoreSeekFormula_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      CNFWorkState.widthRestoreSeekFormula symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_widthRestoreFormula_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.widthRestoreFormula
+      symbol = some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_clauseStart_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.clauseStart symbol =
+      some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_clauseNeedLiteral_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.clauseNeedLiteral symbol =
+      some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_clauseContinue_total (alreadySatisfied : Bool)
+    (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      (CNFWorkState.clauseContinue alreadySatisfied) symbol = some rule := by
+  cases alreadySatisfied <;> cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_finalCheck_total (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules CNFWorkState.finalCheck symbol =
+      some rule := by
+  cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_literalIndex_total (alreadySatisfied positive : Bool)
+    (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      (CNFWorkState.literalIndex alreadySatisfied positive) symbol = some rule := by
+  cases alreadySatisfied <;> cases positive <;> cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_literalIndexToBoundary_total
+    (alreadySatisfied positive : Bool) (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      (CNFWorkState.literalIndexToBoundary alreadySatisfied positive) symbol =
+        some rule := by
+  cases alreadySatisfied <;> cases positive <;> cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_literalIndexPastCertificateCounter_total
+    (alreadySatisfied positive : Bool) (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      (CNFWorkState.literalIndexPastCertificateCounter alreadySatisfied positive)
+        symbol = some rule := by
+  cases alreadySatisfied <;> cases positive <;> cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_literalMarkAssignment_total
+    (alreadySatisfied positive : Bool) (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      (CNFWorkState.literalMarkAssignment alreadySatisfied positive) symbol =
+        some rule := by
+  cases alreadySatisfied <;> cases positive <;> cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_literalReturnAssignment_total
+    (alreadySatisfied positive : Bool) (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      (CNFWorkState.literalReturnAssignment alreadySatisfied positive) symbol =
+        some rule := by
+  cases alreadySatisfied <;> cases positive <;> cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_literalReturnCertificateCounter_total
+    (alreadySatisfied positive : Bool) (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      (CNFWorkState.literalReturnCertificateCounter alreadySatisfied positive)
+        symbol = some rule := by
+  cases alreadySatisfied <;> cases positive <;> cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_literalReturnSeekSign_total
+    (alreadySatisfied positive : Bool) (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      (CNFWorkState.literalReturnSeekSign alreadySatisfied positive) symbol =
+        some rule := by
+  cases alreadySatisfied <;> cases positive <;> cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_literalReturnSeekIndex_total
+    (alreadySatisfied positive : Bool) (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      (CNFWorkState.literalReturnSeekIndex alreadySatisfied positive) symbol =
+        some rule := by
+  cases alreadySatisfied <;> cases positive <;> cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_literalLookupToBoundary_total
+    (alreadySatisfied positive : Bool) (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      (CNFWorkState.literalLookupToBoundary alreadySatisfied positive) symbol =
+        some rule := by
+  cases alreadySatisfied <;> cases positive <;> cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_literalLookupPastCertificateCounter_total
+    (alreadySatisfied positive : Bool) (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      (CNFWorkState.literalLookupPastCertificateCounter alreadySatisfied positive)
+        symbol = some rule := by
+  cases alreadySatisfied <;> cases positive <;> cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_literalLookupAssignment_total
+    (alreadySatisfied positive : Bool) (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      (CNFWorkState.literalLookupAssignment alreadySatisfied positive) symbol =
+        some rule := by
+  cases alreadySatisfied <;> cases positive <;> cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_literalRestoreAssignment_total (result positive : Bool)
+    (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      (CNFWorkState.literalRestoreAssignment result positive) symbol =
+        some rule := by
+  cases result <;> cases positive <;> cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_literalRestoreCertificateCounter_total (result positive : Bool)
+    (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      (CNFWorkState.literalRestoreCertificateCounter result positive) symbol =
+        some rule := by
+  cases result <;> cases positive <;> cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_literalRestoreSeekSign_total (result positive : Bool)
+    (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      (CNFWorkState.literalRestoreSeekSign result positive) symbol = some rule := by
+  cases result <;> cases positive <;> cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_literalRestoreIndex_total (result positive : Bool)
+    (symbol : WorkSymbol) :
+    ∃ rule, findWorkRule cnfWorkRules
+      (CNFWorkState.literalRestoreIndex result positive) symbol = some rule := by
+  cases result <;> cases positive <;> cases symbol with
+  | mk first second => cases first <;> cases second <;> exact ⟨_, rfl⟩
+
+/-! The out-of-range route is intentionally explicit: reaching the right
+guard preserves the prior clause result, restores all marks, scans any
+remaining unary `T` tail, and only then resumes at the index terminator. -/
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_literalMarkAssignment_oob
+    (alreadySatisfied positive : Bool) :
+    findWorkRule cnfWorkRules
+      (CNFWorkState.literalMarkAssignment alreadySatisfied positive)
+      cnfRootGuard =
+    some (cnfKeepRule
+      (CNFWorkState.literalMarkAssignment alreadySatisfied positive)
+      cnfRootGuard
+      (CNFWorkState.literalRestoreAssignment alreadySatisfied positive) .left) := by
+  cases alreadySatisfied <;> cases positive <;> rfl
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_literalLookupAssignment_oob
+    (alreadySatisfied positive : Bool) :
+    findWorkRule cnfWorkRules
+      (CNFWorkState.literalLookupAssignment alreadySatisfied positive)
+      cnfRootGuard =
+    some (cnfKeepRule
+      (CNFWorkState.literalLookupAssignment alreadySatisfied positive)
+      cnfRootGuard
+      (CNFWorkState.literalRestoreAssignment alreadySatisfied positive) .left) := by
+  cases alreadySatisfied <;> cases positive <;> rfl
+
+set_option maxRecDepth 100000 in
+theorem cnfFind_literalRestoreIndex_rawTail (result positive : Bool) :
+    findWorkRule cnfWorkRules
+      (CNFWorkState.literalRestoreIndex result positive) cnfT =
+    some (cnfKeepRule (CNFWorkState.literalRestoreIndex result positive)
+      cnfT (CNFWorkState.literalRestoreIndex result positive) .right) := by
+  cases result <;> cases positive <;> rfl
 
 end PNP.Concrete
