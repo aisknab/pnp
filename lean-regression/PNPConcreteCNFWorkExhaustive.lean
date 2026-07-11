@@ -25,8 +25,10 @@ def bitsThrough : Nat → List BitString
 
 def mismatch (input certificate : BitString) : Bool :=
   let expected := checkEncodedCertificate input certificate
-  let actual := cnfWorkDecide input certificate == WorkVerdict.accept
-  expected != actual
+  match cnfWorkDecide input certificate with
+  | .accept => expected != true
+  | .reject => expected != false
+  | .timeout => true
 
 def findCertificateMismatch (input : BitString) :
     List BitString → Option (BitString × BitString)
