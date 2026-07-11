@@ -511,6 +511,7 @@ private def literalRestoreRules (result positive : Bool) : List WorkRule :=
         (if positive then cnfT else cnfF) .right]) ++
   cnfCompleteRules restoreIndex
     [ cnfWorkRule restoreIndex cnfMarkTrue restoreIndex cnfT .right
+    , cnfKeepRule restoreIndex cnfT restoreIndex .right
     , cnfKeepRule restoreIndex cnfF
         (CNFWorkState.clauseContinue result) .right ]
 
