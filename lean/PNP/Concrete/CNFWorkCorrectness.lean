@@ -2188,4 +2188,1425 @@ theorem cnfWorkExact_phaseLedger
     (((fixedSteps + frameSteps) + widthSteps) + grammarSteps)
     (cnfWorkStepPolynomial.eval n) start final completeRun halted completeBound
 
+namespace FrameTraceDesign
+
+set_option maxRecDepth 100000
+
+theorem boot_nonempty_formula_exact
+    (first : CNFToken) (formulaRest assignmentTokens : List CNFToken) :
+    workRunExact? cnfWorkMachine 2
+        (workStartConfiguration cnfWorkMachine
+          (WorkTape.ofSymbols
+            (pairedTokenLayout (first :: formulaRest) assignmentTokens))) =
+      some
+        { state := CNFWorkState.frameOneFindCounter
+          tape := WorkTape.focus [cnfRootGuard] cnfT
+            (List.replicate formulaRest.length cnfT ++
+              cnfFinish ::
+                (first.workSymbol ::
+                  (cnfTokenWorkSymbols formulaRest ++
+                    cnfSep ::
+                      (List.replicate assignmentTokens.length cnfT ++
+                        cnfFinish ::
+                          (cnfTokenWorkSymbols assignmentTokens ++
+                            [cnfFinish]))))) } := by
+  rfl
+
+def frameOneMarkedToken : CNFToken → WorkSymbol
+  | .f => cnfMarkFalse
+  | .t => cnfMarkTrue
+  | .sep => cnfRootGuard
+  | .finish => cnfBoundaryGuard
+
+def frameOneMarkedTokens : List CNFToken → List WorkSymbol
+  | [] => []
+  | token :: rest => frameOneMarkedToken token :: frameOneMarkedTokens rest
+
+def frameOneRestoreSymbol : WorkSymbol → WorkSymbol
+  | ⟨.blank, .blank⟩ => cnfBlank
+  | ⟨.blank, .zero⟩ => cnfF
+  | ⟨.blank, .one⟩ => cnfT
+  | ⟨.zero, .blank⟩ => cnfSep
+  | ⟨.zero, .zero⟩ => cnfF
+  | ⟨.zero, .one⟩ => cnfSep
+  | ⟨.one, .blank⟩ => cnfFinish
+  | ⟨.one, .zero⟩ => cnfFinish
+  | ⟨.one, .one⟩ => cnfT
+
+inductive FrameOneMarkedSymbol : WorkSymbol → Prop where
+  | markFalse : FrameOneMarkedSymbol cnfMarkFalse
+  | markTrue : FrameOneMarkedSymbol cnfMarkTrue
+  | rootGuard : FrameOneMarkedSymbol cnfRootGuard
+  | boundaryGuard : FrameOneMarkedSymbol cnfBoundaryGuard
+
+inductive RawCNFTokenSymbol : WorkSymbol → Prop where
+  | f : RawCNFTokenSymbol cnfF
+  | t : RawCNFTokenSymbol cnfT
+  | sep : RawCNFTokenSymbol cnfSep
+  | finish : RawCNFTokenSymbol cnfFinish
+
+inductive FrameOneBackCounterSymbol : WorkSymbol → Prop where
+  | t : FrameOneBackCounterSymbol cnfT
+  | markFalse : FrameOneBackCounterSymbol cnfMarkFalse
+
+theorem mem_replicate_workSymbol_eq (count : Nat)
+    (expected found : WorkSymbol)
+    (member : List.Mem found (List.replicate count expected)) :
+    found = expected := by
+  induction count with
+  | zero => contradiction
+  | succ count ih =>
+      cases member with
+      | head => rfl
+      | tail _ tailMember => exact ih tailMember
+
+theorem length_replicate_workSymbol (count : Nat) (symbol : WorkSymbol) :
+    (List.replicate count symbol).length = count := by
+  induction count with
+  | zero => rfl
+  | succ count ih => exact congrArg Nat.succ ih
+
+
+
+theorem pushWorkLeft_append (first second farSide : List WorkSymbol) :
+    pushWorkLeft (first ++ second) farSide =
+      pushWorkLeft second (pushWorkLeft first farSide) := by
+  induction first generalizing farSide with
+  | nil => rfl
+  | cons symbol rest ih => exact ih (symbol :: farSide)
+
+
+
+
+
+theorem pushWorkLeft_append_far (word left right : List WorkSymbol) :
+    pushWorkLeft word (left ++ right) = pushWorkLeft word left ++ right := by
+  rw [pushWorkLeft_eq_pushScannedWorkSymbols]
+  rw [pushWorkLeft_eq_pushScannedWorkSymbols]
+  exact pushScannedWorkSymbols_append_far word left right
+
+theorem pushWorkLeft_split_far (word farSide : List WorkSymbol) :
+    pushWorkLeft word farSide = pushWorkLeft word [] ++ farSide := by
+  change pushWorkLeft word ([] ++ farSide) = _
+  exact pushWorkLeft_append_far word [] farSide
+
+theorem map_pushWorkLeft (transform : WorkSymbol → WorkSymbol)
+    (word farSide : List WorkSymbol) :
+    List.map transform (pushWorkLeft word farSide) =
+      pushWorkLeft (List.map transform word) (List.map transform farSide) := by
+  induction word generalizing farSide with
+  | nil => rfl
+  | cons symbol rest ih => exact ih (symbol :: farSide)
+
+theorem frameOneRestore_markedToken (token : CNFToken) :
+    frameOneRestoreSymbol (frameOneMarkedToken token) = token.workSymbol := by
+  cases token <;> rfl
+
+theorem frameOneRestore_markedTokens (tokens : List CNFToken) :
+    List.map frameOneRestoreSymbol (frameOneMarkedTokens tokens) =
+      cnfTokenWorkSymbols tokens := by
+  induction tokens with
+  | nil => rfl
+  | cons token rest ih =>
+      change frameOneRestoreSymbol (frameOneMarkedToken token) ::
+          List.map frameOneRestoreSymbol (frameOneMarkedTokens rest) =
+        token.workSymbol :: cnfTokenWorkSymbols rest
+      rw [frameOneRestore_markedToken, ih]
+
+theorem frameOneMarkedTokens_allowed (tokens : List CNFToken)
+    (found : WorkSymbol)
+    (member : List.Mem found (frameOneMarkedTokens tokens)) :
+    FrameOneMarkedSymbol found := by
+  induction tokens with
+  | nil => contradiction
+  | cons token rest ih =>
+      cases member with
+      | head =>
+          cases token with
+          | f => exact .markFalse
+          | t => exact .markTrue
+          | sep => exact .rootGuard
+          | finish => exact .boundaryGuard
+      | tail _ tailMember => exact ih tailMember
+
+theorem cnfTokenWorkSymbols_raw (tokens : List CNFToken)
+    (found : WorkSymbol)
+    (member : List.Mem found (cnfTokenWorkSymbols tokens)) :
+    RawCNFTokenSymbol found := by
+  induction tokens with
+  | nil => contradiction
+  | cons token rest ih =>
+      cases member with
+      | head =>
+          cases token with
+          | f => exact .f
+          | t => exact .t
+          | sep => exact .sep
+          | finish => exact .finish
+      | tail _ tailMember => exact ih tailMember
+
+/-- Generic exact left scan whose selected rules rewrite each crossed cell. -/
+theorem workRunExact?_scanLeft_write (machine : WorkMachine) (state : Nat)
+    (transform : WorkSymbol → WorkSymbol) (Allowed : WorkSymbol → Prop)
+    (hStep : ∀ head leftTail rightSide,
+      Allowed head →
+      workStep? machine
+          (workConfigAtLeftWord state (head :: leftTail) rightSide) =
+        some (workConfigAtLeftWord state leftTail
+          (transform head :: rightSide)))
+    (word leftSuffix rightSide : List WorkSymbol)
+    (hAllowed : ∀ symbol, List.Mem symbol word → Allowed symbol) :
+    workRunExact? machine word.length
+        (workConfigAtLeftWord state (word ++ leftSuffix) rightSide) =
+      some (workConfigAtLeftWord state leftSuffix
+        (pushWorkLeft (List.map transform word) rightSide)) := by
+  induction word generalizing rightSide with
+  | nil => rfl
+  | cons head rest ih =>
+      have hHead : Allowed head := hAllowed head (List.Mem.head rest)
+      have hRest : ∀ symbol, List.Mem symbol rest → Allowed symbol := by
+        intro symbol found
+        exact hAllowed symbol (List.Mem.tail head found)
+      change
+        (match workStep? machine
+          (workConfigAtLeftWord state (head :: (rest ++ leftSuffix))
+            rightSide) with
+         | none => none
+         | some next => workRunExact? machine rest.length next) = _
+      rw [hStep head (rest ++ leftSuffix) rightSide hHead]
+      exact ih (transform head :: rightSide) hRest
+
+theorem pushWorkLeft_members_allowed (Allowed : WorkSymbol → Prop)
+    (word farSide : List WorkSymbol)
+    (wordAllowed : ∀ symbol, List.Mem symbol word → Allowed symbol)
+    (farAllowed : ∀ symbol, List.Mem symbol farSide → Allowed symbol)
+    (found : WorkSymbol) (member : List.Mem found
+      (pushWorkLeft word farSide)) : Allowed found := by
+  induction word generalizing farSide with
+  | nil => exact farAllowed found member
+  | cons head rest ih =>
+      apply ih (head :: farSide)
+      · intro symbol restMember
+        exact wordAllowed symbol (List.Mem.tail head restMember)
+      · intro symbol accumulatorMember
+        cases accumulatorMember with
+        | head => exact wordAllowed head (List.Mem.head rest)
+        | tail _ tailMember => exact farAllowed symbol tailMember
+      · exact member
+
+theorem pushWorkLeft_length (word farSide : List WorkSymbol) :
+    (pushWorkLeft word farSide).length = word.length + farSide.length := by
+  induction word generalizing farSide with
+  | nil => exact (Nat.zero_add farSide.length).symm
+  | cons head rest ih =>
+      change (pushWorkLeft rest (head :: farSide)).length =
+        Nat.succ rest.length + farSide.length
+      rw [ih]
+      exact (Nat.add_succ rest.length farSide.length).trans
+        (Nat.succ_add rest.length farSide.length).symm
+
+theorem frameOneMarkedTokens_length (tokens : List CNFToken) :
+    (frameOneMarkedTokens tokens).length = tokens.length := by
+  induction tokens with
+  | nil => rfl
+  | cons token rest ih => exact congrArg Nat.succ ih
+
+theorem frameOne_restore_stack_allowed (tokens : List CNFToken)
+    (found : WorkSymbol)
+    (member : List.Mem found
+      (pushWorkLeft (frameOneMarkedTokens tokens) [])) :
+    FrameOneMarkedSymbol found := by
+  apply pushWorkLeft_members_allowed FrameOneMarkedSymbol
+    (frameOneMarkedTokens tokens) []
+      (frameOneMarkedTokens_allowed tokens)
+  · intro symbol impossible
+    contradiction
+  · exact member
+
+theorem frameOne_findCounter_markFalse_step
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameOneFindCounter left
+          (cnfMarkFalse :: suffix)) =
+      some (workConfigAtWord CNFWorkState.frameOneFindCounter
+        (cnfMarkFalse :: left) suffix) := by
+  rfl
+
+theorem frameOne_findCounter_markFalse_scan
+    (count : Nat) (left suffix : List WorkSymbol) :
+    workRunExact? cnfWorkMachine count
+        (workConfigAtWord CNFWorkState.frameOneFindCounter left
+          (List.replicate count cnfMarkFalse ++ suffix)) =
+      some (workConfigAtWord CNFWorkState.frameOneFindCounter
+        (pushWorkLeft (List.replicate count cnfMarkFalse) left) suffix) := by
+  have scanned := workRunExact?_scanRight cnfWorkMachine
+    CNFWorkState.frameOneFindCounter
+    (fun symbol => symbol = cnfMarkFalse)
+    (fun stepLeft head stepSuffix equal => by
+      cases equal
+      exact frameOne_findCounter_markFalse_step stepLeft stepSuffix)
+    (List.replicate count cnfMarkFalse) suffix left
+    (mem_replicate_workSymbol_eq count cnfMarkFalse)
+  rw [length_replicate_workSymbol count cnfMarkFalse] at scanned
+  exact scanned
+
+theorem frameOne_findCounter_finish_step
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameOneFindCounter left
+          (cnfFinish :: suffix)) =
+      some (workConfigAtWord CNFWorkState.frameOneCheckPayload
+        (cnfFinish :: left) suffix) := by
+  rfl
+
+theorem frameOne_checkPayload_marked_step
+    (head : WorkSymbol) (left suffix : List WorkSymbol)
+    (allowed : FrameOneMarkedSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameOneCheckPayload left
+          (head :: suffix)) =
+      some (workConfigAtWord CNFWorkState.frameOneCheckPayload
+        (head :: left) suffix) := by
+  cases allowed <;> rfl
+
+theorem frameOne_checkPayload_marked_scan
+    (tokens : List CNFToken) (left suffix : List WorkSymbol) :
+    workRunExact? cnfWorkMachine tokens.length
+        (workConfigAtWord CNFWorkState.frameOneCheckPayload left
+          (frameOneMarkedTokens tokens ++ suffix)) =
+      some (workConfigAtWord CNFWorkState.frameOneCheckPayload
+        (pushWorkLeft (frameOneMarkedTokens tokens) left) suffix) := by
+  have scanned := workRunExact?_scanRight cnfWorkMachine
+    CNFWorkState.frameOneCheckPayload FrameOneMarkedSymbol
+    (fun leftSide head suffix allowed =>
+      frameOne_checkPayload_marked_step head leftSide suffix allowed)
+    (frameOneMarkedTokens tokens) suffix left
+    (frameOneMarkedTokens_allowed tokens)
+  rw [frameOneMarkedTokens_length tokens] at scanned
+  exact scanned
+
+theorem frameOne_checkPayload_sep_step
+    (leftWord suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameOneCheckPayload leftWord
+          (cnfSep :: suffix)) =
+      some (workConfigAtLeftWord CNFWorkState.frameOneRestorePayload
+        leftWord (cnfBoundaryGuard :: suffix)) := by
+  cases leftWord <;> rfl
+
+theorem frameOne_restorePayload_marked_step
+    (head : WorkSymbol) (leftTail right : List WorkSymbol)
+    (allowed : FrameOneMarkedSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.frameOneRestorePayload
+          (head :: leftTail) right) =
+      some (workConfigAtLeftWord CNFWorkState.frameOneRestorePayload
+        leftTail (frameOneRestoreSymbol head :: right)) := by
+  cases allowed <;> rfl
+
+theorem frameOne_restorePayload_tokens_scan
+    (tokens : List CNFToken) (leftSuffix right : List WorkSymbol) :
+    workRunExact? cnfWorkMachine tokens.length
+        (workConfigAtLeftWord CNFWorkState.frameOneRestorePayload
+          (pushWorkLeft (frameOneMarkedTokens tokens) leftSuffix) right) =
+      some (workConfigAtLeftWord CNFWorkState.frameOneRestorePayload
+        leftSuffix (cnfTokenWorkSymbols tokens ++ right)) := by
+  have scanned := workRunExact?_scanLeft_write cnfWorkMachine
+    CNFWorkState.frameOneRestorePayload frameOneRestoreSymbol
+    FrameOneMarkedSymbol frameOne_restorePayload_marked_step
+    (pushWorkLeft (frameOneMarkedTokens tokens) []) leftSuffix right
+    (frameOne_restore_stack_allowed tokens)
+  rw [pushWorkLeft_length] at scanned
+  rw [frameOneMarkedTokens_length tokens] at scanned
+  rw [pushWorkLeft_split_far]
+  rw [map_pushWorkLeft] at scanned
+  rw [frameOneRestore_markedTokens] at scanned
+  change workRunExact? cnfWorkMachine tokens.length
+      (workConfigAtLeftWord CNFWorkState.frameOneRestorePayload
+        (pushWorkLeft (frameOneMarkedTokens tokens) [] ++ leftSuffix) right) =
+    some (workConfigAtLeftWord CNFWorkState.frameOneRestorePayload
+      leftSuffix
+      (pushWorkLeft (pushWorkLeft (cnfTokenWorkSymbols tokens) []) right))
+    at scanned
+  rw [pushWorkLeft_cancel] at scanned
+  exact scanned
+
+theorem frameOne_restorePayload_finish_step
+    (left right : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.frameOneRestorePayload
+          (cnfFinish :: left) right) =
+      some (workConfigAtWord CNFWorkState.frameOneGoBoundary
+        (cnfFinish :: left) right) := by
+  rfl
+
+theorem frameOne_goBoundary_token_step
+    (head : WorkSymbol) (left suffix : List WorkSymbol)
+    (allowed : RawCNFTokenSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameOneGoBoundary left
+          (head :: suffix)) =
+      some (workConfigAtWord CNFWorkState.frameOneGoBoundary
+        (head :: left) suffix) := by
+  cases allowed <;> rfl
+
+theorem frameOne_goBoundary_tokens_scan
+    (tokens : List CNFToken) (left suffix : List WorkSymbol) :
+    workRunExact? cnfWorkMachine tokens.length
+        (workConfigAtWord CNFWorkState.frameOneGoBoundary left
+          (cnfTokenWorkSymbols tokens ++ suffix)) =
+      some (workConfigAtWord CNFWorkState.frameOneGoBoundary
+        (pushWorkLeft (cnfTokenWorkSymbols tokens) left) suffix) := by
+  have scanned := workRunExact?_scanRight cnfWorkMachine
+    CNFWorkState.frameOneGoBoundary RawCNFTokenSymbol
+    (fun leftSide head stepSuffix allowed =>
+      frameOne_goBoundary_token_step head leftSide stepSuffix allowed)
+    (cnfTokenWorkSymbols tokens) suffix left
+    (cnfTokenWorkSymbols_raw tokens)
+  rw [cnfTokenWorkSymbols_length tokens] at scanned
+  exact scanned
+
+theorem frameOne_goBoundary_guard_step
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameOneGoBoundary left
+          (cnfBoundaryGuard :: suffix)) =
+      some (workConfigAtWord CNFWorkState.frameTwoFindCounter
+        (cnfBoundaryGuard :: left) suffix) := by
+  rfl
+
+/-- Once every frame-one counter and payload cell is marked, validation,
+restoration, and transfer to frame two take exactly `4 * tokens.length + 4`
+primitive transitions (spelled additively here for direct composition). -/
+theorem frameOne_terminal_exact
+    (tokens : List CNFToken) (suffix : List WorkSymbol) :
+    workRunExact? cnfWorkMachine
+        (((((((tokens.length + 1) + tokens.length) + 1) +
+          tokens.length) + 1) + tokens.length) + 1)
+        (workConfigAtWord CNFWorkState.frameOneFindCounter [cnfRootGuard]
+          (List.replicate tokens.length cnfMarkFalse ++
+            cnfFinish ::
+              (frameOneMarkedTokens tokens ++ cnfSep :: suffix))) =
+      some
+        (workConfigAtWord CNFWorkState.frameTwoFindCounter
+          (cnfBoundaryGuard ::
+            pushWorkLeft (cnfTokenWorkSymbols tokens)
+              (cnfFinish ::
+                pushWorkLeft
+                  (List.replicate tokens.length cnfMarkFalse)
+                  [cnfRootGuard]))
+          suffix) := by
+  have hCounter := frameOne_findCounter_markFalse_scan tokens.length
+    [cnfRootGuard]
+    (cnfFinish :: frameOneMarkedTokens tokens ++ cnfSep :: suffix)
+  have hCounterFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameOne_findCounter_finish_step
+      (pushWorkLeft (List.replicate tokens.length cnfMarkFalse)
+        [cnfRootGuard])
+      (frameOneMarkedTokens tokens ++ cnfSep :: suffix))
+  have hPayload := frameOne_checkPayload_marked_scan tokens
+    (cnfFinish ::
+      pushWorkLeft (List.replicate tokens.length cnfMarkFalse)
+        [cnfRootGuard])
+    (cnfSep :: suffix)
+  have hSeparator := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameOne_checkPayload_sep_step
+      (pushWorkLeft (frameOneMarkedTokens tokens)
+        (cnfFinish ::
+          pushWorkLeft (List.replicate tokens.length cnfMarkFalse)
+            [cnfRootGuard])) suffix)
+  have hRestore := frameOne_restorePayload_tokens_scan tokens
+    (cnfFinish ::
+      pushWorkLeft (List.replicate tokens.length cnfMarkFalse)
+        [cnfRootGuard])
+    (cnfBoundaryGuard :: suffix)
+  have hRestoreFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameOne_restorePayload_finish_step
+      (pushWorkLeft (List.replicate tokens.length cnfMarkFalse)
+        [cnfRootGuard])
+      (cnfTokenWorkSymbols tokens ++ cnfBoundaryGuard :: suffix))
+  have hGoBoundary := frameOne_goBoundary_tokens_scan tokens
+    (cnfFinish ::
+      pushWorkLeft (List.replicate tokens.length cnfMarkFalse)
+        [cnfRootGuard])
+    (cnfBoundaryGuard :: suffix)
+  have hBoundary := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameOne_goBoundary_guard_step
+      (pushWorkLeft (cnfTokenWorkSymbols tokens)
+        (cnfFinish ::
+          pushWorkLeft (List.replicate tokens.length cnfMarkFalse)
+            [cnfRootGuard])) suffix)
+  have hThroughCounter := workRunExact?_compose cnfWorkMachine
+    tokens.length 1 _ _ _ hCounter hCounterFinish
+  have hThroughPayload := workRunExact?_compose cnfWorkMachine
+    (tokens.length + 1) tokens.length _ _ _ hThroughCounter hPayload
+  have hThroughSeparator := workRunExact?_compose cnfWorkMachine
+    ((tokens.length + 1) + tokens.length) 1 _ _ _
+      hThroughPayload hSeparator
+  have hThroughRestore := workRunExact?_compose cnfWorkMachine
+    (((tokens.length + 1) + tokens.length) + 1) tokens.length _ _ _
+      hThroughSeparator hRestore
+  have hThroughRestoreFinish := workRunExact?_compose cnfWorkMachine
+    ((((tokens.length + 1) + tokens.length) + 1) + tokens.length) 1 _ _ _
+      hThroughRestore hRestoreFinish
+  have hThroughGoBoundary := workRunExact?_compose cnfWorkMachine
+    (((((tokens.length + 1) + tokens.length) + 1) + tokens.length) + 1)
+    tokens.length _ _ _ hThroughRestoreFinish hGoBoundary
+  exact workRunExact?_compose cnfWorkMachine
+    ((((((tokens.length + 1) + tokens.length) + 1) + tokens.length) + 1) +
+      tokens.length) 1 _ _ _ hThroughGoBoundary hBoundary
+
+def assignmentValueWorkSymbol : Bool → WorkSymbol
+  | false => cnfF
+  | true => cnfT
+
+def markedAssignmentValueWorkSymbol : Bool → WorkSymbol
+  | false => cnfMarkFalse
+  | true => cnfMarkTrue
+
+def frameTwoRestoreSymbol : WorkSymbol → WorkSymbol
+  | ⟨.blank, .blank⟩ => cnfBlank
+  | ⟨.blank, .zero⟩ => cnfF
+  | ⟨.blank, .one⟩ => cnfT
+  | ⟨.zero, .blank⟩ => cnfRootGuard
+  | ⟨.zero, .zero⟩ => cnfF
+  | ⟨.zero, .one⟩ => cnfSep
+  | ⟨.one, .blank⟩ => cnfBoundaryGuard
+  | ⟨.one, .zero⟩ => cnfFinish
+  | ⟨.one, .one⟩ => cnfT
+
+theorem assignmentWorkSymbols_cons (value : Bool) (rest : BitString) :
+    assignmentWorkSymbols (value :: rest) =
+      assignmentValueWorkSymbol value :: assignmentWorkSymbols rest := by
+  cases value <;> rfl
+
+theorem markedAssignmentWorkSymbols_cons (value : Bool)
+    (rest : BitString) :
+    markedAssignmentWorkSymbols (value :: rest) =
+      markedAssignmentValueWorkSymbol value ::
+        markedAssignmentWorkSymbols rest := by
+  cases value <;> rfl
+
+theorem frameTwoRestore_markedValue (value : Bool) :
+    frameTwoRestoreSymbol (markedAssignmentValueWorkSymbol value) =
+      assignmentValueWorkSymbol value := by
+  cases value <;> rfl
+
+theorem frameTwoRestore_markedAssignment (assignment : BitString) :
+    List.map frameTwoRestoreSymbol
+        (markedAssignmentWorkSymbols assignment) =
+      assignmentWorkSymbols assignment := by
+  induction assignment with
+  | nil => rfl
+  | cons value rest ih =>
+      rw [markedAssignmentWorkSymbols_cons]
+      rw [assignmentWorkSymbols_cons]
+      change frameTwoRestoreSymbol (markedAssignmentValueWorkSymbol value) ::
+          List.map frameTwoRestoreSymbol
+            (markedAssignmentWorkSymbols rest) =
+        assignmentValueWorkSymbol value :: assignmentWorkSymbols rest
+      rw [frameTwoRestore_markedValue, ih]
+
+theorem frameTwo_findCounter_t_step
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameTwoFindCounter left
+          (cnfT :: suffix)) =
+      some (workConfigAtWord CNFWorkState.frameTwoToHeader
+        (cnfMarkFalse :: left) suffix) := by
+  rfl
+
+theorem frameTwo_toHeader_t_step
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameTwoToHeader left
+          (cnfT :: suffix)) =
+      some (workConfigAtWord CNFWorkState.frameTwoToHeader
+        (cnfT :: left) suffix) := by
+  rfl
+
+theorem frameTwo_toHeader_finish_step
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameTwoToHeader left
+          (cnfFinish :: suffix)) =
+      some (workConfigAtWord CNFWorkState.frameTwoFindPayload
+        (cnfFinish :: left) suffix) := by
+  rfl
+
+theorem frameTwo_findPayload_value_step
+    (value : Bool) (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameTwoFindPayload left
+          (assignmentValueWorkSymbol value :: suffix)) =
+      some (workConfigAtLeftWord CNFWorkState.frameTwoBackPayload left
+        (markedAssignmentValueWorkSymbol value :: suffix)) := by
+  cases value <;> rfl
+
+theorem frameTwo_backPayload_finish_step
+    (leftTail right : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.frameTwoBackPayload
+          (cnfFinish :: leftTail) right) =
+      some (workConfigAtLeftWord CNFWorkState.frameTwoBackHeader
+        leftTail (cnfFinish :: right)) := by
+  rfl
+
+theorem frameTwo_backHeader_counter_step
+    (head : WorkSymbol) (leftTail right : List WorkSymbol)
+    (allowed : FrameOneBackCounterSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.frameTwoBackHeader
+          (head :: leftTail) right) =
+      some (workConfigAtLeftWord CNFWorkState.frameTwoBackHeader
+        leftTail (head :: right)) := by
+  cases allowed <;> rfl
+
+theorem frameTwo_backHeader_boundary_step
+    (leftBase right : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.frameTwoBackHeader
+          (cnfBoundaryGuard :: leftBase) right) =
+      some (workConfigAtWord CNFWorkState.frameTwoFindCounter
+        (cnfBoundaryGuard :: leftBase) right) := by
+  rfl
+
+
+
+
+theorem frameTwo_findCounter_markFalse_step
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameTwoFindCounter left
+          (cnfMarkFalse :: suffix)) =
+      some (workConfigAtWord CNFWorkState.frameTwoFindCounter
+        (cnfMarkFalse :: left) suffix) := by
+  rfl
+
+theorem frameTwo_findCounter_markFalse_scan
+    (count : Nat) (left suffix : List WorkSymbol) :
+    workRunExact? cnfWorkMachine count
+        (workConfigAtWord CNFWorkState.frameTwoFindCounter left
+          (List.replicate count cnfMarkFalse ++ suffix)) =
+      some (workConfigAtWord CNFWorkState.frameTwoFindCounter
+        (pushWorkLeft (List.replicate count cnfMarkFalse) left) suffix) := by
+  have scanned := workRunExact?_scanRight cnfWorkMachine
+    CNFWorkState.frameTwoFindCounter
+    (fun symbol => symbol = cnfMarkFalse)
+    (fun stepLeft head stepSuffix equal => by
+      cases equal
+      exact frameTwo_findCounter_markFalse_step stepLeft stepSuffix)
+    (List.replicate count cnfMarkFalse) suffix left
+    (mem_replicate_workSymbol_eq count cnfMarkFalse)
+  rw [length_replicate_workSymbol count cnfMarkFalse] at scanned
+  exact scanned
+
+theorem frameTwo_findCounter_finish_step
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameTwoFindCounter left
+          (cnfFinish :: suffix)) =
+      some (workConfigAtWord CNFWorkState.frameTwoCheckPayload
+        (cnfFinish :: left) suffix) := by
+  rfl
+
+theorem frameTwo_checkPayload_marked_step
+    (head : WorkSymbol) (left suffix : List WorkSymbol)
+    (allowed : AssignmentMarkSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameTwoCheckPayload left
+          (head :: suffix)) =
+      some (workConfigAtWord CNFWorkState.frameTwoCheckPayload
+        (head :: left) suffix) := by
+  cases allowed <;> rfl
+
+theorem frameTwo_checkPayload_marked_scan
+    (assignment : BitString) (left suffix : List WorkSymbol) :
+    workRunExact? cnfWorkMachine assignment.length
+        (workConfigAtWord CNFWorkState.frameTwoCheckPayload left
+          (markedAssignmentWorkSymbols assignment ++ suffix)) =
+      some (workConfigAtWord CNFWorkState.frameTwoCheckPayload
+        (pushWorkLeft (markedAssignmentWorkSymbols assignment) left)
+        suffix) := by
+  have scanned := workRunExact?_scanRight cnfWorkMachine
+    CNFWorkState.frameTwoCheckPayload AssignmentMarkSymbol
+    (fun leftSide head stepSuffix allowed =>
+      frameTwo_checkPayload_marked_step head leftSide stepSuffix allowed)
+    (markedAssignmentWorkSymbols assignment) suffix left
+    (markedAssignmentWorkSymbols_allowed assignment)
+  rw [markedAssignmentWorkSymbols_length assignment] at scanned
+  exact scanned
+
+theorem frameTwo_checkPayload_finish_step
+    (left : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameTwoCheckPayload left
+          [cnfFinish]) =
+      some (workConfigAtWord CNFWorkState.frameTwoEnsureBlank
+        (cnfRootGuard :: left) []) := by
+  rfl
+
+theorem frameTwo_ensureBlank_step
+    (guardedLeft : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameTwoEnsureBlank guardedLeft []) =
+      some (workConfigAtLeftWord CNFWorkState.frameTwoAtRightGuard
+        guardedLeft [cnfBlank]) := by
+  cases guardedLeft <;> rfl
+
+theorem frameTwo_atRightGuard_step
+    (left right : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.frameTwoAtRightGuard
+          (cnfRootGuard :: left) right) =
+      some (workConfigAtLeftWord CNFWorkState.frameTwoRestorePayload
+        left (cnfRootGuard :: right)) := by
+  rfl
+
+theorem frameTwo_restorePayload_marked_step
+    (head : WorkSymbol) (leftTail right : List WorkSymbol)
+    (allowed : AssignmentMarkSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.frameTwoRestorePayload
+          (head :: leftTail) right) =
+      some (workConfigAtLeftWord CNFWorkState.frameTwoRestorePayload
+        leftTail (frameTwoRestoreSymbol head :: right)) := by
+  cases allowed <;> rfl
+
+theorem frameTwo_restore_stack_allowed (assignment : BitString)
+    (found : WorkSymbol)
+    (member : List.Mem found
+      (pushWorkLeft (markedAssignmentWorkSymbols assignment) [])) :
+    AssignmentMarkSymbol found := by
+  apply pushWorkLeft_members_allowed AssignmentMarkSymbol
+    (markedAssignmentWorkSymbols assignment) []
+      (markedAssignmentWorkSymbols_allowed assignment)
+  · intro symbol impossible
+    contradiction
+  · exact member
+
+theorem frameTwo_restorePayload_assignment_scan
+    (assignment : BitString) (leftSuffix right : List WorkSymbol) :
+    workRunExact? cnfWorkMachine assignment.length
+        (workConfigAtLeftWord CNFWorkState.frameTwoRestorePayload
+          (pushWorkLeft (markedAssignmentWorkSymbols assignment) leftSuffix)
+          right) =
+      some (workConfigAtLeftWord CNFWorkState.frameTwoRestorePayload
+        leftSuffix (assignmentWorkSymbols assignment ++ right)) := by
+  have scanned := workRunExact?_scanLeft_write cnfWorkMachine
+    CNFWorkState.frameTwoRestorePayload frameTwoRestoreSymbol
+    AssignmentMarkSymbol frameTwo_restorePayload_marked_step
+    (pushWorkLeft (markedAssignmentWorkSymbols assignment) [])
+    leftSuffix right (frameTwo_restore_stack_allowed assignment)
+  rw [pushWorkLeft_length] at scanned
+  rw [markedAssignmentWorkSymbols_length assignment] at scanned
+  rw [pushWorkLeft_split_far]
+  rw [map_pushWorkLeft] at scanned
+  rw [frameTwoRestore_markedAssignment] at scanned
+  change workRunExact? cnfWorkMachine assignment.length
+      (workConfigAtLeftWord CNFWorkState.frameTwoRestorePayload
+        (pushWorkLeft (markedAssignmentWorkSymbols assignment) [] ++
+          leftSuffix) right) =
+    some (workConfigAtLeftWord CNFWorkState.frameTwoRestorePayload
+      leftSuffix
+      (pushWorkLeft (pushWorkLeft (assignmentWorkSymbols assignment) [])
+        right)) at scanned
+  rw [pushWorkLeft_cancel] at scanned
+  exact scanned
+
+theorem frameTwo_restorePayload_finish_step
+    (left right : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.frameTwoRestorePayload
+          (cnfFinish :: left) right) =
+      some (workConfigAtLeftWord CNFWorkState.seekLeftRoot left
+        (cnfFinish :: right)) := by
+  cases left <;> rfl
+
+/-- The all-marked second frame verifies its terminal blank, installs the
+right root guard, restores the assignment, and enters the left-root seek. -/
+theorem frameTwo_terminal_exact
+    (assignment : BitString) (leftBase : List WorkSymbol) :
+    workRunExact? cnfWorkMachine
+        (((((((assignment.length + 1) + assignment.length) + 1) + 1) + 1) +
+          assignment.length) + 1)
+        (workConfigAtWord CNFWorkState.frameTwoFindCounter
+          (cnfBoundaryGuard :: leftBase)
+          (List.replicate assignment.length cnfMarkFalse ++
+            cnfFinish ::
+              (markedAssignmentWorkSymbols assignment ++ [cnfFinish]))) =
+      some
+        (workConfigAtLeftWord CNFWorkState.seekLeftRoot
+          (pushWorkLeft
+            (List.replicate assignment.length cnfMarkFalse)
+            (cnfBoundaryGuard :: leftBase))
+          (cnfFinish ::
+            (assignmentWorkSymbols assignment ++
+              [cnfRootGuard, cnfBlank]))) := by
+  have hCounter := frameTwo_findCounter_markFalse_scan assignment.length
+    (cnfBoundaryGuard :: leftBase)
+    (cnfFinish :: markedAssignmentWorkSymbols assignment ++ [cnfFinish])
+  have hCounterFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameTwo_findCounter_finish_step
+      (pushWorkLeft (List.replicate assignment.length cnfMarkFalse)
+        (cnfBoundaryGuard :: leftBase))
+      (markedAssignmentWorkSymbols assignment ++ [cnfFinish]))
+  have hPayload := frameTwo_checkPayload_marked_scan assignment
+    (cnfFinish ::
+      pushWorkLeft (List.replicate assignment.length cnfMarkFalse)
+        (cnfBoundaryGuard :: leftBase)) [cnfFinish]
+  have hFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameTwo_checkPayload_finish_step
+      (pushWorkLeft (markedAssignmentWorkSymbols assignment)
+        (cnfFinish ::
+          pushWorkLeft (List.replicate assignment.length cnfMarkFalse)
+            (cnfBoundaryGuard :: leftBase))))
+  have hBlank := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameTwo_ensureBlank_step
+      (cnfRootGuard ::
+        pushWorkLeft (markedAssignmentWorkSymbols assignment)
+          (cnfFinish ::
+            pushWorkLeft (List.replicate assignment.length cnfMarkFalse)
+              (cnfBoundaryGuard :: leftBase))))
+  have hGuard := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameTwo_atRightGuard_step
+      (pushWorkLeft (markedAssignmentWorkSymbols assignment)
+        (cnfFinish ::
+          pushWorkLeft (List.replicate assignment.length cnfMarkFalse)
+            (cnfBoundaryGuard :: leftBase))) [cnfBlank])
+  have hRestore := frameTwo_restorePayload_assignment_scan assignment
+    (cnfFinish ::
+      pushWorkLeft (List.replicate assignment.length cnfMarkFalse)
+        (cnfBoundaryGuard :: leftBase)) [cnfRootGuard, cnfBlank]
+  have hRestoreFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameTwo_restorePayload_finish_step
+      (pushWorkLeft (List.replicate assignment.length cnfMarkFalse)
+        (cnfBoundaryGuard :: leftBase))
+      (assignmentWorkSymbols assignment ++ [cnfRootGuard, cnfBlank]))
+  have hThroughCounter := workRunExact?_compose cnfWorkMachine
+    assignment.length 1 _ _ _ hCounter hCounterFinish
+  have hThroughPayload := workRunExact?_compose cnfWorkMachine
+    (assignment.length + 1) assignment.length _ _ _
+      hThroughCounter hPayload
+  have hThroughFinish := workRunExact?_compose cnfWorkMachine
+    ((assignment.length + 1) + assignment.length) 1 _ _ _
+      hThroughPayload hFinish
+  have hThroughBlank := workRunExact?_compose cnfWorkMachine
+    (((assignment.length + 1) + assignment.length) + 1) 1 _ _ _
+      hThroughFinish hBlank
+  have hThroughGuard := workRunExact?_compose cnfWorkMachine
+    ((((assignment.length + 1) + assignment.length) + 1) + 1) 1 _ _ _
+      hThroughBlank hGuard
+  have hThroughRestore := workRunExact?_compose cnfWorkMachine
+    (((((assignment.length + 1) + assignment.length) + 1) + 1) + 1)
+      assignment.length _ _ _ hThroughGuard hRestore
+  exact workRunExact?_compose cnfWorkMachine
+    ((((((assignment.length + 1) + assignment.length) + 1) + 1) + 1) +
+      assignment.length) 1 _ _ _ hThroughRestore hRestoreFinish
+
+theorem frameOne_findCounter_t_step
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameOneFindCounter left
+          (cnfT :: suffix)) =
+      some (workConfigAtWord CNFWorkState.frameOneToHeader
+        (cnfMarkFalse :: left) suffix) := by
+  rfl
+
+theorem frameOne_toHeader_t_step
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameOneToHeader left
+          (cnfT :: suffix)) =
+      some (workConfigAtWord CNFWorkState.frameOneToHeader
+        (cnfT :: left) suffix) := by
+  rfl
+
+theorem frameOne_toHeader_finish_step
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameOneToHeader left
+          (cnfFinish :: suffix)) =
+      some (workConfigAtWord CNFWorkState.frameOneFindPayload
+        (cnfFinish :: left) suffix) := by
+  rfl
+
+theorem frameOne_findPayload_token_step
+    (token : CNFToken) (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameOneFindPayload left
+          (token.workSymbol :: suffix)) =
+      some (workConfigAtLeftWord CNFWorkState.frameOneBackPayload left
+        (frameOneMarkedToken token :: suffix)) := by
+  cases token <;> rfl
+
+theorem frameOne_backPayload_finish_step
+    (leftTail right : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.frameOneBackPayload
+          (cnfFinish :: leftTail) right) =
+      some (workConfigAtLeftWord CNFWorkState.frameOneBackHeader
+        leftTail (cnfFinish :: right)) := by
+  rfl
+
+theorem frameOne_backHeader_counter_step
+    (head : WorkSymbol) (leftTail right : List WorkSymbol)
+    (allowed : FrameOneBackCounterSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.frameOneBackHeader
+          (head :: leftTail) right) =
+      some (workConfigAtLeftWord CNFWorkState.frameOneBackHeader
+        leftTail (head :: right)) := by
+  cases allowed <;> rfl
+
+theorem frameOne_backHeader_root_step
+    (right : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.frameOneBackHeader
+          [cnfRootGuard] right) =
+      some (workConfigAtWord CNFWorkState.frameOneFindCounter
+        [cnfRootGuard] right) := by
+  rfl
+
+
+
+theorem workRunExact?_scanLeft_cancel
+    (machine : WorkMachine) (state : Nat)
+    (Allowed : WorkSymbol → Prop)
+    (hStep : ∀ head leftTail rightSide,
+      Allowed head →
+      workStep? machine
+          (workConfigAtLeftWord state (head :: leftTail) rightSide) =
+        some (workConfigAtLeftWord state leftTail (head :: rightSide)))
+    (word leftSuffix rightSide : List WorkSymbol)
+    (hAllowed : ∀ symbol, List.Mem symbol word → Allowed symbol) :
+    workRunExact? machine word.length
+        (workConfigAtLeftWord state (pushWorkLeft word leftSuffix) rightSide) =
+      some (workConfigAtLeftWord state leftSuffix (word ++ rightSide)) := by
+  have reversedAllowed : ∀ symbol,
+      List.Mem symbol (pushWorkLeft word []) → Allowed symbol := by
+    intro symbol member
+    apply pushWorkLeft_members_allowed Allowed word [] hAllowed
+    · intro found impossible
+      contradiction
+    · exact member
+  have scanned := workRunExact?_scanLeft machine state Allowed hStep
+    (pushWorkLeft word []) leftSuffix rightSide reversedAllowed
+  rw [pushWorkLeft_length] at scanned
+  rw [pushWorkLeft_split_far]
+  change workRunExact? machine word.length
+      (workConfigAtLeftWord state
+        (pushWorkLeft word [] ++ leftSuffix) rightSide) =
+    some (workConfigAtLeftWord state leftSuffix
+      (pushWorkLeft (pushWorkLeft word []) rightSide)) at scanned
+  rw [pushWorkLeft_cancel] at scanned
+  exact scanned
+
+theorem frameOne_findPayload_marked_step
+    (head : WorkSymbol) (left suffix : List WorkSymbol)
+    (allowed : FrameOneMarkedSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameOneFindPayload left
+          (head :: suffix)) =
+      some (workConfigAtWord CNFWorkState.frameOneFindPayload
+        (head :: left) suffix) := by
+  cases allowed <;> rfl
+
+theorem frameOne_backPayload_marked_step
+    (head : WorkSymbol) (leftTail right : List WorkSymbol)
+    (allowed : FrameOneMarkedSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.frameOneBackPayload
+          (head :: leftTail) right) =
+      some (workConfigAtLeftWord CNFWorkState.frameOneBackPayload
+        leftTail (head :: right)) := by
+  cases allowed <;> rfl
+
+theorem frameOne_findCounter_markFalse_word_scan
+    (word left suffix : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word → symbol = cnfMarkFalse) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtWord CNFWorkState.frameOneFindCounter left
+          (word ++ suffix)) =
+      some (workConfigAtWord CNFWorkState.frameOneFindCounter
+        (pushWorkLeft word left) suffix) := by
+  apply workRunExact?_scanRight cnfWorkMachine
+    CNFWorkState.frameOneFindCounter (fun symbol => symbol = cnfMarkFalse)
+    _ word suffix left allowed
+  intro stepLeft head stepSuffix equal
+  cases equal
+  exact frameOne_findCounter_markFalse_step stepLeft stepSuffix
+
+theorem frameOne_toHeader_t_word_scan
+    (word left suffix : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word → symbol = cnfT) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtWord CNFWorkState.frameOneToHeader left
+          (word ++ suffix)) =
+      some (workConfigAtWord CNFWorkState.frameOneToHeader
+        (pushWorkLeft word left) suffix) := by
+  apply workRunExact?_scanRight cnfWorkMachine
+    CNFWorkState.frameOneToHeader (fun symbol => symbol = cnfT)
+    _ word suffix left allowed
+  intro stepLeft head stepSuffix equal
+  cases equal
+  exact frameOne_toHeader_t_step stepLeft stepSuffix
+
+theorem frameOne_findPayload_marked_scan
+    (word left suffix : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word →
+      FrameOneMarkedSymbol symbol) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtWord CNFWorkState.frameOneFindPayload left
+          (word ++ suffix)) =
+      some (workConfigAtWord CNFWorkState.frameOneFindPayload
+        (pushWorkLeft word left) suffix) :=
+  workRunExact?_scanRight cnfWorkMachine
+    CNFWorkState.frameOneFindPayload FrameOneMarkedSymbol
+    (fun leftSide head stepSuffix headAllowed =>
+      frameOne_findPayload_marked_step head leftSide stepSuffix headAllowed)
+    word suffix left allowed
+
+theorem frameOne_backPayload_marked_cancel
+    (word leftSuffix right : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word →
+      FrameOneMarkedSymbol symbol) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtLeftWord CNFWorkState.frameOneBackPayload
+          (pushWorkLeft word leftSuffix) right) =
+      some (workConfigAtLeftWord CNFWorkState.frameOneBackPayload
+        leftSuffix (word ++ right)) :=
+  workRunExact?_scanLeft_cancel cnfWorkMachine
+    CNFWorkState.frameOneBackPayload FrameOneMarkedSymbol
+    frameOne_backPayload_marked_step word leftSuffix right allowed
+
+theorem frameCounter_symbols_allowed
+    (done rest : List WorkSymbol)
+    (doneAllowed : ∀ symbol, List.Mem symbol done →
+      symbol = cnfMarkFalse)
+    (restAllowed : ∀ symbol, List.Mem symbol rest → symbol = cnfT)
+    (found : WorkSymbol)
+    (member : List.Mem found (done ++ cnfMarkFalse :: rest)) :
+    FrameOneBackCounterSymbol found := by
+  induction done with
+  | nil =>
+      cases member with
+      | head => exact .markFalse
+      | tail _ tailMember =>
+          have equal := restAllowed found tailMember
+          cases equal
+          exact .t
+  | cons first tail ih =>
+      cases member with
+      | head =>
+          have equal := doneAllowed found (List.Mem.head tail)
+          cases equal
+          exact .markFalse
+      | tail _ tailMember =>
+          apply ih
+          · intro symbol foundTail
+            exact doneAllowed symbol (List.Mem.tail _ foundTail)
+          · exact tailMember
+
+theorem frameOne_backHeader_fullCounter_cancel
+    (counter right : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol counter →
+      FrameOneBackCounterSymbol symbol) :
+    workRunExact? cnfWorkMachine counter.length
+        (workConfigAtLeftWord CNFWorkState.frameOneBackHeader
+          (pushWorkLeft counter [cnfRootGuard]) right) =
+      some (workConfigAtLeftWord CNFWorkState.frameOneBackHeader
+        [cnfRootGuard] (counter ++ right)) :=
+  workRunExact?_scanLeft_cancel cnfWorkMachine
+    CNFWorkState.frameOneBackHeader FrameOneBackCounterSymbol
+    frameOne_backHeader_counter_step counter [cnfRootGuard] right allowed
+
+def frameOneIterationSteps
+    (doneCounter restCounter donePayload : List WorkSymbol) : Nat :=
+  (((((((((doneCounter.length + 1) + restCounter.length) + 1) +
+    donePayload.length) + 1) + donePayload.length) + 1) +
+    (doneCounter ++ cnfMarkFalse :: restCounter).length) + 1)
+
+/-- General frame-one induction step.  It scans the already marked counter
+and payload prefixes, marks exactly one new payload token, and returns to the
+left guard with both prefixes extended by one cell. -/
+theorem frameOne_iteration_exact
+    (doneCounter restCounter donePayload : List WorkSymbol)
+    (token : CNFToken) (payloadTail : List WorkSymbol)
+    (doneCounterAllowed : ∀ symbol, List.Mem symbol doneCounter →
+      symbol = cnfMarkFalse)
+    (restCounterAllowed : ∀ symbol, List.Mem symbol restCounter →
+      symbol = cnfT)
+    (donePayloadAllowed : ∀ symbol, List.Mem symbol donePayload →
+      FrameOneMarkedSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (frameOneIterationSteps doneCounter restCounter donePayload)
+        (workConfigAtWord CNFWorkState.frameOneFindCounter [cnfRootGuard]
+          (doneCounter ++ cnfT ::
+            (restCounter ++ cnfFinish ::
+              (donePayload ++ token.workSymbol :: payloadTail)))) =
+      some
+        (workConfigAtWord CNFWorkState.frameOneFindCounter [cnfRootGuard]
+          (doneCounter ++ cnfMarkFalse :: restCounter ++
+            (cnfFinish :: donePayload ++
+              frameOneMarkedToken token :: payloadTail))) := by
+  unfold frameOneIterationSteps
+  have hDoneCounter := frameOne_findCounter_markFalse_word_scan
+    doneCounter [cnfRootGuard]
+    (cnfT :: restCounter ++ cnfFinish ::
+      (donePayload ++ token.workSymbol :: payloadTail)) doneCounterAllowed
+  have hMarkCounter := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameOne_findCounter_t_step (pushWorkLeft doneCounter [cnfRootGuard])
+      (restCounter ++ cnfFinish ::
+        (donePayload ++ token.workSymbol :: payloadTail)))
+  have hRestCounter := frameOne_toHeader_t_word_scan restCounter
+    (cnfMarkFalse :: pushWorkLeft doneCounter [cnfRootGuard])
+    (cnfFinish :: donePayload ++ token.workSymbol :: payloadTail)
+    restCounterAllowed
+  have hHeader := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameOne_toHeader_finish_step
+      (pushWorkLeft restCounter
+        (cnfMarkFalse :: pushWorkLeft doneCounter [cnfRootGuard]))
+      (donePayload ++ token.workSymbol :: payloadTail))
+  have hDonePayload := frameOne_findPayload_marked_scan donePayload
+    (cnfFinish ::
+      pushWorkLeft restCounter
+        (cnfMarkFalse :: pushWorkLeft doneCounter [cnfRootGuard]))
+    (token.workSymbol :: payloadTail) donePayloadAllowed
+  have hMarkPayload := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameOne_findPayload_token_step token
+      (pushWorkLeft donePayload
+        (cnfFinish ::
+          pushWorkLeft restCounter
+            (cnfMarkFalse :: pushWorkLeft doneCounter [cnfRootGuard])))
+      payloadTail)
+  have hBackPayload := frameOne_backPayload_marked_cancel donePayload
+    (cnfFinish ::
+      pushWorkLeft restCounter
+        (cnfMarkFalse :: pushWorkLeft doneCounter [cnfRootGuard]))
+    (frameOneMarkedToken token :: payloadTail) donePayloadAllowed
+  have hBackFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameOne_backPayload_finish_step
+      (pushWorkLeft restCounter
+        (cnfMarkFalse :: pushWorkLeft doneCounter [cnfRootGuard]))
+      (donePayload ++ frameOneMarkedToken token :: payloadTail))
+  let fullCounter := doneCounter ++ cnfMarkFalse :: restCounter
+  have hFullAllowed : ∀ symbol, List.Mem symbol fullCounter →
+      FrameOneBackCounterSymbol symbol := by
+    intro symbol member
+    exact frameCounter_symbols_allowed doneCounter restCounter
+      doneCounterAllowed restCounterAllowed symbol member
+  have hBackCounter := frameOne_backHeader_fullCounter_cancel fullCounter
+    (cnfFinish :: donePayload ++ frameOneMarkedToken token :: payloadTail)
+    hFullAllowed
+  unfold fullCounter at hBackCounter
+  rw [pushWorkLeft_append] at hBackCounter
+  have hRoot := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameOne_backHeader_root_step
+      (doneCounter ++ cnfMarkFalse :: restCounter ++
+        (cnfFinish :: donePayload ++
+          frameOneMarkedToken token :: payloadTail)))
+  have hThroughMarkCounter := workRunExact?_compose cnfWorkMachine
+    doneCounter.length 1 _ _ _ hDoneCounter hMarkCounter
+  have hThroughRestCounter := workRunExact?_compose cnfWorkMachine
+    (doneCounter.length + 1) restCounter.length _ _ _
+      hThroughMarkCounter hRestCounter
+  have hThroughHeader := workRunExact?_compose cnfWorkMachine
+    ((doneCounter.length + 1) + restCounter.length) 1 _ _ _
+      hThroughRestCounter hHeader
+  have hThroughDonePayload := workRunExact?_compose cnfWorkMachine
+    (((doneCounter.length + 1) + restCounter.length) + 1)
+    donePayload.length _ _ _ hThroughHeader hDonePayload
+  have hThroughMarkPayload := workRunExact?_compose cnfWorkMachine
+    ((((doneCounter.length + 1) + restCounter.length) + 1) +
+      donePayload.length) 1 _ _ _ hThroughDonePayload hMarkPayload
+  have hThroughBackPayload := workRunExact?_compose cnfWorkMachine
+    (((((doneCounter.length + 1) + restCounter.length) + 1) +
+      donePayload.length) + 1) donePayload.length _ _ _
+      hThroughMarkPayload hBackPayload
+  have hThroughBackFinish := workRunExact?_compose cnfWorkMachine
+    ((((((doneCounter.length + 1) + restCounter.length) + 1) +
+      donePayload.length) + 1) + donePayload.length) 1 _ _ _
+      hThroughBackPayload hBackFinish
+  have hThroughBackCounter := workRunExact?_compose cnfWorkMachine
+    (((((((doneCounter.length + 1) + restCounter.length) + 1) +
+      donePayload.length) + 1) + donePayload.length) + 1)
+    (doneCounter ++ cnfMarkFalse :: restCounter).length _ _ _
+      hThroughBackFinish hBackCounter
+  exact workRunExact?_compose cnfWorkMachine
+    ((((((((doneCounter.length + 1) + restCounter.length) + 1) +
+      donePayload.length) + 1) + donePayload.length) + 1) +
+      (doneCounter ++ cnfMarkFalse :: restCounter).length) 1 _ _ _
+      hThroughBackCounter hRoot
+
+/-! ### Induction-ready frame-two iteration -/
+
+theorem frameTwo_findCounter_markFalse_word_scan
+    (word left suffix : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word → symbol = cnfMarkFalse) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtWord CNFWorkState.frameTwoFindCounter left
+          (word ++ suffix)) =
+      some (workConfigAtWord CNFWorkState.frameTwoFindCounter
+        (pushWorkLeft word left) suffix) := by
+  apply workRunExact?_scanRight cnfWorkMachine
+    CNFWorkState.frameTwoFindCounter (fun symbol => symbol = cnfMarkFalse)
+    _ word suffix left allowed
+  intro stepLeft head stepSuffix equal
+  cases equal
+  exact frameTwo_findCounter_markFalse_step stepLeft stepSuffix
+
+theorem frameTwo_toHeader_t_word_scan
+    (word left suffix : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word → symbol = cnfT) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtWord CNFWorkState.frameTwoToHeader left
+          (word ++ suffix)) =
+      some (workConfigAtWord CNFWorkState.frameTwoToHeader
+        (pushWorkLeft word left) suffix) := by
+  apply workRunExact?_scanRight cnfWorkMachine
+    CNFWorkState.frameTwoToHeader (fun symbol => symbol = cnfT)
+    _ word suffix left allowed
+  intro stepLeft head stepSuffix equal
+  cases equal
+  exact frameTwo_toHeader_t_step stepLeft stepSuffix
+
+theorem frameTwo_findPayload_marked_step
+    (head : WorkSymbol) (left suffix : List WorkSymbol)
+    (allowed : AssignmentMarkSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.frameTwoFindPayload left
+          (head :: suffix)) =
+      some (workConfigAtWord CNFWorkState.frameTwoFindPayload
+        (head :: left) suffix) := by
+  cases allowed <;> rfl
+
+theorem frameTwo_findPayload_marked_scan
+    (word left suffix : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word →
+      AssignmentMarkSymbol symbol) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtWord CNFWorkState.frameTwoFindPayload left
+          (word ++ suffix)) =
+      some (workConfigAtWord CNFWorkState.frameTwoFindPayload
+        (pushWorkLeft word left) suffix) :=
+  workRunExact?_scanRight cnfWorkMachine
+    CNFWorkState.frameTwoFindPayload AssignmentMarkSymbol
+    (fun leftSide head stepSuffix headAllowed =>
+      frameTwo_findPayload_marked_step head leftSide stepSuffix headAllowed)
+    word suffix left allowed
+
+theorem frameTwo_backPayload_marked_step
+    (head : WorkSymbol) (leftTail right : List WorkSymbol)
+    (allowed : AssignmentMarkSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.frameTwoBackPayload
+          (head :: leftTail) right) =
+      some (workConfigAtLeftWord CNFWorkState.frameTwoBackPayload
+        leftTail (head :: right)) := by
+  cases allowed <;> rfl
+
+theorem frameTwo_backPayload_marked_cancel
+    (word leftSuffix right : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word →
+      AssignmentMarkSymbol symbol) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtLeftWord CNFWorkState.frameTwoBackPayload
+          (pushWorkLeft word leftSuffix) right) =
+      some (workConfigAtLeftWord CNFWorkState.frameTwoBackPayload
+        leftSuffix (word ++ right)) :=
+  workRunExact?_scanLeft_cancel cnfWorkMachine
+    CNFWorkState.frameTwoBackPayload AssignmentMarkSymbol
+    frameTwo_backPayload_marked_step word leftSuffix right allowed
+
+theorem frameTwo_backHeader_fullCounter_cancel
+    (counter leftBase right : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol counter →
+      FrameOneBackCounterSymbol symbol) :
+    workRunExact? cnfWorkMachine counter.length
+        (workConfigAtLeftWord CNFWorkState.frameTwoBackHeader
+          (pushWorkLeft counter (cnfBoundaryGuard :: leftBase)) right) =
+      some (workConfigAtLeftWord CNFWorkState.frameTwoBackHeader
+        (cnfBoundaryGuard :: leftBase) (counter ++ right)) :=
+  workRunExact?_scanLeft_cancel cnfWorkMachine
+    CNFWorkState.frameTwoBackHeader FrameOneBackCounterSymbol
+    frameTwo_backHeader_counter_step counter
+      (cnfBoundaryGuard :: leftBase) right allowed
+
+theorem frameTwo_iteration_exact
+    (doneCounter restCounter donePayload leftBase : List WorkSymbol)
+    (value : Bool) (payloadTail : List WorkSymbol)
+    (doneCounterAllowed : ∀ symbol, List.Mem symbol doneCounter →
+      symbol = cnfMarkFalse)
+    (restCounterAllowed : ∀ symbol, List.Mem symbol restCounter →
+      symbol = cnfT)
+    (donePayloadAllowed : ∀ symbol, List.Mem symbol donePayload →
+      AssignmentMarkSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (frameOneIterationSteps doneCounter restCounter donePayload)
+        (workConfigAtWord CNFWorkState.frameTwoFindCounter
+          (cnfBoundaryGuard :: leftBase)
+          (doneCounter ++ cnfT ::
+            (restCounter ++ cnfFinish ::
+              (donePayload ++ assignmentValueWorkSymbol value ::
+                payloadTail)))) =
+      some
+        (workConfigAtWord CNFWorkState.frameTwoFindCounter
+          (cnfBoundaryGuard :: leftBase)
+          (doneCounter ++ cnfMarkFalse :: restCounter ++
+            (cnfFinish :: donePayload ++
+              markedAssignmentValueWorkSymbol value :: payloadTail))) := by
+  unfold frameOneIterationSteps
+  have hDoneCounter := frameTwo_findCounter_markFalse_word_scan
+    doneCounter (cnfBoundaryGuard :: leftBase)
+    (cnfT :: restCounter ++ cnfFinish ::
+      (donePayload ++ assignmentValueWorkSymbol value :: payloadTail))
+    doneCounterAllowed
+  have hMarkCounter := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameTwo_findCounter_t_step
+      (pushWorkLeft doneCounter (cnfBoundaryGuard :: leftBase))
+      (restCounter ++ cnfFinish ::
+        (donePayload ++ assignmentValueWorkSymbol value :: payloadTail)))
+  have hRestCounter := frameTwo_toHeader_t_word_scan restCounter
+    (cnfMarkFalse ::
+      pushWorkLeft doneCounter (cnfBoundaryGuard :: leftBase))
+    (cnfFinish :: donePayload ++
+      assignmentValueWorkSymbol value :: payloadTail) restCounterAllowed
+  have hHeader := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameTwo_toHeader_finish_step
+      (pushWorkLeft restCounter
+        (cnfMarkFalse ::
+          pushWorkLeft doneCounter (cnfBoundaryGuard :: leftBase)))
+      (donePayload ++ assignmentValueWorkSymbol value :: payloadTail))
+  have hDonePayload := frameTwo_findPayload_marked_scan donePayload
+    (cnfFinish ::
+      pushWorkLeft restCounter
+        (cnfMarkFalse ::
+          pushWorkLeft doneCounter (cnfBoundaryGuard :: leftBase)))
+    (assignmentValueWorkSymbol value :: payloadTail) donePayloadAllowed
+  have hMarkPayload := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameTwo_findPayload_value_step value
+      (pushWorkLeft donePayload
+        (cnfFinish ::
+          pushWorkLeft restCounter
+            (cnfMarkFalse ::
+              pushWorkLeft doneCounter (cnfBoundaryGuard :: leftBase))))
+      payloadTail)
+  have hBackPayload := frameTwo_backPayload_marked_cancel donePayload
+    (cnfFinish ::
+      pushWorkLeft restCounter
+        (cnfMarkFalse ::
+          pushWorkLeft doneCounter (cnfBoundaryGuard :: leftBase)))
+    (markedAssignmentValueWorkSymbol value :: payloadTail)
+    donePayloadAllowed
+  have hBackFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameTwo_backPayload_finish_step
+      (pushWorkLeft restCounter
+        (cnfMarkFalse ::
+          pushWorkLeft doneCounter (cnfBoundaryGuard :: leftBase)))
+      (donePayload ++ markedAssignmentValueWorkSymbol value :: payloadTail))
+  let fullCounter := doneCounter ++ cnfMarkFalse :: restCounter
+  have hFullAllowed : ∀ symbol, List.Mem symbol fullCounter →
+      FrameOneBackCounterSymbol symbol := by
+    intro symbol member
+    exact frameCounter_symbols_allowed doneCounter restCounter
+      doneCounterAllowed restCounterAllowed symbol member
+  have hBackCounter := frameTwo_backHeader_fullCounter_cancel fullCounter
+    leftBase
+    (cnfFinish :: donePayload ++
+      markedAssignmentValueWorkSymbol value :: payloadTail) hFullAllowed
+  unfold fullCounter at hBackCounter
+  rw [pushWorkLeft_append] at hBackCounter
+  have hBoundary := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameTwo_backHeader_boundary_step leftBase
+      (doneCounter ++ cnfMarkFalse :: restCounter ++
+        (cnfFinish :: donePayload ++
+          markedAssignmentValueWorkSymbol value :: payloadTail)))
+  have hThroughMarkCounter := workRunExact?_compose cnfWorkMachine
+    doneCounter.length 1 _ _ _ hDoneCounter hMarkCounter
+  have hThroughRestCounter := workRunExact?_compose cnfWorkMachine
+    (doneCounter.length + 1) restCounter.length _ _ _
+      hThroughMarkCounter hRestCounter
+  have hThroughHeader := workRunExact?_compose cnfWorkMachine
+    ((doneCounter.length + 1) + restCounter.length) 1 _ _ _
+      hThroughRestCounter hHeader
+  have hThroughDonePayload := workRunExact?_compose cnfWorkMachine
+    (((doneCounter.length + 1) + restCounter.length) + 1)
+    donePayload.length _ _ _ hThroughHeader hDonePayload
+  have hThroughMarkPayload := workRunExact?_compose cnfWorkMachine
+    ((((doneCounter.length + 1) + restCounter.length) + 1) +
+      donePayload.length) 1 _ _ _ hThroughDonePayload hMarkPayload
+  have hThroughBackPayload := workRunExact?_compose cnfWorkMachine
+    (((((doneCounter.length + 1) + restCounter.length) + 1) +
+      donePayload.length) + 1) donePayload.length _ _ _
+      hThroughMarkPayload hBackPayload
+  have hThroughBackFinish := workRunExact?_compose cnfWorkMachine
+    ((((((doneCounter.length + 1) + restCounter.length) + 1) +
+      donePayload.length) + 1) + donePayload.length) 1 _ _ _
+      hThroughBackPayload hBackFinish
+  have hThroughBackCounter := workRunExact?_compose cnfWorkMachine
+    (((((((doneCounter.length + 1) + restCounter.length) + 1) +
+      donePayload.length) + 1) + donePayload.length) + 1)
+    (doneCounter ++ cnfMarkFalse :: restCounter).length _ _ _
+      hThroughBackFinish hBackCounter
+  exact workRunExact?_compose cnfWorkMachine
+    ((((((((doneCounter.length + 1) + restCounter.length) + 1) +
+      donePayload.length) + 1) + donePayload.length) + 1) +
+      (doneCounter ++ cnfMarkFalse :: restCounter).length) 1 _ _ _
+      hThroughBackCounter hBoundary
+
+/-! ### Raw decoder split and canonical tape bridge -/
+
+theorem rawCNFDecoder_split (input certificate : BitString) :
+    (decodeEncodedCNF input = none) ∨
+      (∃ formula,
+        decodeEncodedCNF input = some formula ∧
+          decodeAssignmentCertificate certificate = none) ∨
+      (∃ formula assignment,
+        decodeEncodedCNF input = some formula ∧
+          decodeAssignmentCertificate certificate = some assignment) := by
+  cases hFormula : decodeEncodedCNF input with
+  | none => exact Or.inl rfl
+  | some formula =>
+      cases hAssignment : decodeAssignmentCertificate certificate with
+      | none => exact Or.inr (Or.inl ⟨formula, rfl, rfl⟩)
+      | some assignment =>
+          exact Or.inr (Or.inr
+            ⟨formula, assignment, rfl, rfl⟩)
+
+theorem checkEncodedCertificate_false_of_decoder_failure
+    (input certificate : BitString)
+    (failure : decodeEncodedCNF input = none ∨
+      decodeAssignmentCertificate certificate = none) :
+    checkEncodedCertificate input certificate = false := by
+  cases failure with
+  | inl formulaFailure =>
+      unfold checkEncodedCertificate
+      rw [formulaFailure]
+  | inr assignmentFailure =>
+      unfold checkEncodedCertificate
+      cases hFormula : decodeEncodedCNF input with
+      | none => rfl
+      | some formula => rw [assignmentFailure]
+
+/-- Successful strict decoders identify the raw paired tape with the exact
+canonical token layout used by the positive frame traces. -/
+theorem pairedWorkTape_of_decoders_some
+    (input certificate : BitString) (formula : CNFFormula)
+    (assignment : BitString)
+    (formulaDecoded : decodeEncodedCNF input = some formula)
+    (assignmentDecoded :
+      decodeAssignmentCertificate certificate = some assignment) :
+    pairedWorkTape input certificate =
+      WorkTape.ofSymbols
+        (pairedTokenLayout (encodeFormulaTokens formula)
+          (assignmentValueTokens assignment)) := by
+  have formulaShape := encodeFormula_of_decode input formula formulaDecoded
+  have assignmentShape := encodeAssignmentCertificate_of_decode
+    certificate assignment assignmentDecoded
+  rw [← formulaShape, ← assignmentShape]
+  exact pairedWorkTape_encoded_cnf_assignment formula assignment
+
+end FrameTraceDesign
+
 end PNP.Concrete
