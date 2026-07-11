@@ -43,10 +43,10 @@ later raw stage would need. Its output is preserved and the operation is idempot
 ordinary Lean data function used as a specification; it is not stored in a `Machine`, does not
 provide transition rules, and has no runtime theorem.
 
-A future compiler still needs a finite boundary-marked simulation that ignores left garbage,
-isolates stale suffix cells, resets control state without collisions, preserves first-match rule
-semantics, and pays a polynomial copy/simulation cost. Empty and odd output lengths also require an
-explicit work-tape layout rather than assuming the existing positive-even paired-input bridge.
+`lean/PNP/Concrete/PipelineTapeGeometry.lean` now supplies the next pure layer: a finite two-track
+boundary frame that tolerates exterior garbage and handles empty and odd logical lengths. A future
+compiler still needs transition rules that create and transform those frames, reset control state
+without collisions, preserve first-match rule semantics, and pay a polynomial copy/simulation cost.
 
 ## Audit
 
