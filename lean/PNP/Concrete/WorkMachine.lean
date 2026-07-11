@@ -2475,4 +2475,100 @@ theorem run_compileWorkMachine_mul_of_workRunExact
   exact run_compileWorkMachine_add_mul_of_workRunExact
     machine steps 0 config final hRun
 
+/-- A halting raw configuration has no successor. -/
+theorem step?_eq_none_of_isHalted (machine : Machine)
+    (config : Configuration) (hHalted : machine.isHalted config = true) :
+    step? machine config = none := by
+  unfold step?
+  exact if_pos hHalted
+
+/-- A halting work configuration has no successor. -/
+theorem workStep?_eq_none_of_isHalted (machine : WorkMachine)
+    (config : WorkConfiguration)
+    (hHalted : machine.isHalted config = true) :
+    workStep? machine config = none := by
+  unfold workStep?
+  exact if_pos hHalted
+
+/-- A halting raw configuration is stable under every fuel budget. -/
+theorem run_eq_self_of_isHalted (machine : Machine)
+    (config : Configuration) (fuel : Nat)
+    (hHalted : machine.isHalted config = true) :
+    run machine fuel config = config :=
+  run_eq_self_of_step?_eq_none machine config fuel
+    (step?_eq_none_of_isHalted machine config hHalted)
+
+/-- An encoded halting work configuration is stable under any further raw
+fuel. -/
+theorem run_compileWorkMachine_encode_eq_of_halted (machine : WorkMachine)
+    (config : WorkConfiguration) (fuel : Nat)
+    (hHalted : machine.isHalted config = true) :
+    run (compileWorkMachine machine) fuel (encodeWorkConfiguration config) =
+      encodeWorkConfiguration config := by
+  apply run_eq_self_of_isHalted
+  exact (compileWorkMachine_isHalted_encode machine config).trans hHalted
+
+private theorem exists_eq_add_of_le_constructive {small large : Nat}
+    (hLe : small ≤ large) : ∃ rest, large = small + rest := by
+  induction hLe with
+  | refl => exact ⟨0, rfl⟩
+  | @step next hLe ih =>
+      rcases ih with ⟨rest, hRest⟩
+      refine ⟨rest + 1, ?_⟩
+      rw [hRest]
+      rfl
+
+/-- Once an exact work trace reaches a halting configuration, every raw fuel
+budget at least six times the trace length reaches the corresponding encoded
+configuration and remains there. -/
+theorem run_compileWorkMachine_of_workRunExact_halted_le
+    (machine : WorkMachine) (steps rawFuel : Nat)
+    (config final : WorkConfiguration)
+    (hRun : workRunExact? machine steps config = some final)
+    (hHalted : machine.isHalted final = true)
+    (hLe : 6 * steps ≤ rawFuel) :
+    run (compileWorkMachine machine) rawFuel
+        (encodeWorkConfiguration config) =
+      encodeWorkConfiguration final := by
+  rcases exists_eq_add_of_le_constructive hLe with ⟨remaining, hFuel⟩
+  rw [hFuel]
+  exact (run_compileWorkMachine_add_mul_of_workRunExact
+    machine steps remaining config final hRun).trans
+      (run_compileWorkMachine_encode_eq_of_halted
+        machine final remaining hHalted)
+
+/-- A sufficiently padded exact work trace ending in acceptance leaves the
+compiled raw machine in its designated accept state. -/
+theorem run_compileWorkMachine_halted_le_acceptState
+    (machine : WorkMachine) (steps rawFuel : Nat)
+    (config final : WorkConfiguration)
+    (hRun : workRunExact? machine steps config = some final)
+    (hHalted : machine.isHalted final = true)
+    (hAccept : final.state = machine.acceptState)
+    (hLe : 6 * steps ≤ rawFuel) :
+    (run (compileWorkMachine machine) rawFuel
+      (encodeWorkConfiguration config)).state =
+        (compileWorkMachine machine).acceptState := by
+  rw [run_compileWorkMachine_of_workRunExact_halted_le
+    machine steps rawFuel config final hRun hHalted hLe]
+  unfold encodeWorkConfiguration compileWorkMachine
+  exact congrArg boundaryState hAccept
+
+/-- A sufficiently padded exact work trace ending in rejection leaves the
+compiled raw machine in its designated reject state. -/
+theorem run_compileWorkMachine_halted_le_rejectState
+    (machine : WorkMachine) (steps rawFuel : Nat)
+    (config final : WorkConfiguration)
+    (hRun : workRunExact? machine steps config = some final)
+    (hHalted : machine.isHalted final = true)
+    (hReject : final.state = machine.rejectState)
+    (hLe : 6 * steps ≤ rawFuel) :
+    (run (compileWorkMachine machine) rawFuel
+      (encodeWorkConfiguration config)).state =
+        (compileWorkMachine machine).rejectState := by
+  rw [run_compileWorkMachine_of_workRunExact_halted_le
+    machine steps rawFuel config final hRun hHalted hLe]
+  unfold encodeWorkConfiguration compileWorkMachine
+  exact congrArg boundaryState hReject
+
 end PNP.Concrete
