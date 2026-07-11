@@ -46,7 +46,12 @@ frames literal canonical `BitString.pair` input at an exact quadratic input-leng
 only representation-permitted exterior garbage. That theorem is paired-input-only, ends in the
 framer's accepting state, and is not composed with the lifted simulator. Its local `boundedDecide`
 theorem records only framer acceptance; no simulated-target verdict/output preservation, output
-handoff, composition/precomposition `RawRefinement`, or end-to-end input-size polynomial bound follows.
+composition/precomposition `RawRefinement`, or end-to-end input-size polynomial bound follows. A
+third literal finite machine now reaches a represented `Tape.handoffTarget` from an already
+represented internal tape in exactly `2 * n + 4` work steps and `12 * n + 24` compiled steps for
+logical output length `n`. Its compiled trace starts from `encodeWorkConfiguration`; it is not
+connected to the simulator, supplies no ordinary raw `machineOutput` theorem or terminal de-tagging,
+and does not bound `n` by external input size.
 Consequently the gate
 is false, and every theorem-emission field derived from it remains false or `null`.
 
@@ -86,7 +91,7 @@ concrete-gate activation fingerprints.
 
 The formal status, public status mirror, TeX report, and PDF report are generated from the checked
 inventory and publication map. The root
-[`canonical_proof_report.pdf`](../canonical_proof_report.pdf) is the current concise eight-page formal
+[`canonical_proof_report.pdf`](../canonical_proof_report.pdf) is the current concise nine-page formal
 reconstruction report. It is a non-activation report, not the historical claim manuscript. The
 historical 56-page claim artifact is available only through the pinned legacy source coordinate;
 its immutable coordinates are recorded under [`archive/legacy-v0/`](../archive/legacy-v0/README.md).

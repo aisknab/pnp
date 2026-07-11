@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-11-19",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-11-20",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "f8266c7841ca7c8b9e224b54f64b28e98a7a5e79dc310d1ef3f2da4e6904efa2",
+  "milestoneSourceClosureSha256": "f76bfda75e187238ce62f188a964fe7dffa3f8c472ceb4b491390236bb832909",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.FinalUniversalDesign.cnfCompiled_accept_iff_check": "4a8661d567079e1f47c288b8a36805a20ac7040338d84325723079f3fada4efa",
@@ -46,6 +46,10 @@
     "PNP.Concrete.PipelineMachineSimulation.workRunExact_three_mul_of_rawRunExact": "cd560f72874d825ebcb1258939549506627582bc21b8dad67f140c4971fe17d3",
     "PNP.Concrete.PipelineMachineSimulation.workRunExact_three_of_step": "27ac4425bf506e7172f9811d87d7f5a733e7d16012cf92d619e1087e46fdf020",
     "PNP.Concrete.PipelineMachineSimulation.workRun_three_mul_of_run_halted": "6a2ed62971df116f23fc2b8624bbb55b280d82bfb0e76314902df6cc473091ac",
+    "PNP.Concrete.PipelineOutputHandoff.framedOutputHandoffFinal_isHalted": "164b9bf86cc421a1930e211b8fc1086cd78312471a3f5f6723784e98ea7bcf33",
+    "PNP.Concrete.PipelineOutputHandoff.framedOutputHandoffRawTimeBound_exact": "665bac0dbfa88babe693a5b199c34e3cadfd99e7968adca8aead6c0360fb63ec",
+    "PNP.Concrete.PipelineOutputHandoff.framedOutputHandoff_workRunExact_of_represents": "7da95fe64e33576f1d98ccb08bba2ace442f8c719705d77ad6290d2992d3a5f2",
+    "PNP.Concrete.PipelineOutputHandoff.run_compileFramedOutputHandoff_of_represents": "e34aa606d363894f41b20c4911a72ff796dc6e8bdc800b545638c8d83e0495df",
     "PNP.Concrete.PipelineTape.frameWithGarbage_represents": "b37f88af38904ec0c539e3a92c6aaa1767989d090536180c0db3aa10b18c709e",
     "PNP.Concrete.PipelineTape.handoffTarget_withGarbage_represents": "ed6384cc3cb42bf5e5900b65f1e578de794a1ff1f4fbd2de85a112151ff40032",
     "PNP.Concrete.PipelineTape.represents_expandLeft_of_nil": "005090ae90a511441dfb32d916fcdb82fd684049a2290d542a02c3851f74467e",
@@ -95,7 +99,7 @@
       "id": "concrete-machine-cost-kernel",
       "title": "Concrete machine and cost kernel",
       "classification": "formalized-foundation-only",
-      "scope": "Literal canonical paired input reaches an accepting representation under an exact quadratic raw-input-length polynomial. Separately, each n-step raw run lifts to exactly 3 * n successful work steps; each F-fuel run has an exact prefix of length k at most F; if it is designated halting, work fuel 3 * F and compiled fuel 18 * F reach its representation.",
+      "scope": "Literal canonical paired input reaches an accepting representation under an exact quadratic raw-input-length polynomial. Separately, each n-step raw run lifts to exactly 3 * n successful work steps; each F-fuel run has an exact prefix of length k at most F; if it is designated halting, work fuel 3 * F and compiled fuel 18 * F reach its representation. An internal represented output handoff separately reaches Tape.handoffTarget in exactly 2 * n + 4 successful work steps and 12 * n + 24 compiled steps for logical output length n.",
       "requiredTheorems": [
         "PNP.Concrete.BitString.decodePair_pair",
         "PNP.Concrete.NatPolynomial.eval_mono",
@@ -115,6 +119,10 @@
         "PNP.Concrete.PipelineMachineSimulation.workRunExact_three_mul_of_rawRunExact",
         "PNP.Concrete.PipelineMachineSimulation.workRunExact_three_of_step",
         "PNP.Concrete.PipelineMachineSimulation.workRun_three_mul_of_run_halted",
+        "PNP.Concrete.PipelineOutputHandoff.framedOutputHandoffFinal_isHalted",
+        "PNP.Concrete.PipelineOutputHandoff.framedOutputHandoffRawTimeBound_exact",
+        "PNP.Concrete.PipelineOutputHandoff.framedOutputHandoff_workRunExact_of_represents",
+        "PNP.Concrete.PipelineOutputHandoff.run_compileFramedOutputHandoff_of_represents",
         "PNP.Concrete.PipelineTape.frameWithGarbage_represents",
         "PNP.Concrete.PipelineTape.handoffTarget_withGarbage_represents",
         "PNP.Concrete.PipelineTape.represents_expandLeft_of_nil",
@@ -131,7 +139,7 @@
         "PNP.Concrete.run_succ",
         "PNP.Concrete.run_zero"
       ],
-      "nonClaim": "The framer is paired-input-only and not composed with the lifted simulator. Bounded padding assumes a represented start and designated-halting source endpoint; it proves no termination or stuck/timeout/verdict correspondence. n is a source-transition count and F a source-transition fuel bound, not input length: only 3 * n is an exact successful work count. No target-stage boundedDecide or machineOutput preservation, pipeline RawRefinement/composition, CNF-SAT in P, NP-completeness, or P = NP."
+      "nonClaim": "The framer is paired-input-only and not composed with the lifted simulator. The internal handoff is also not composed with the lifted simulator and its compiled theorem starts from an encoded internal configuration, not ordinary startConfig; it supplies no raw-visible machineOutput or terminal de-tagging and no external input-size polynomial. Bounded padding assumes a represented start and designated-halting source endpoint; it proves no termination or stuck/timeout/verdict correspondence. n is a source-transition count and F a source-transition fuel bound, not input length: only 3 * n is an exact successful work count. No target-stage boundedDecide or machineOutput preservation, pipeline RawRefinement/composition, CNF-SAT in P, NP-completeness, or P = NP."
     },
     {
       "id": "concrete-complexity-classes",

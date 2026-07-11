@@ -46,6 +46,8 @@ lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
 lean/PNP/Concrete/TapeHandoff.lean
 lean/PNP/Concrete/PipelineTapeGeometry.lean
+lean/PNP/Concrete/PipelineInputFramer.lean
+lean/PNP/Concrete/PipelineOutputHandoff.lean
 lean/PNP/Concrete/PipelineMachineSimulation.lean
 lean/PNP/Concrete/Complexity.lean
 lean/PNP/Concrete/PipelineRefinement.lean
@@ -80,6 +82,8 @@ lean-audit/PNPConcreteBitStringAxiomAudit.lean
 lean-audit/PNPConcreteMachineAxiomAudit.lean
 lean-audit/PNPConcreteTapeHandoffAxiomAudit.lean
 lean-audit/PNPConcretePipelineTapeGeometryAxiomAudit.lean
+lean-audit/PNPConcretePipelineInputFramerAxiomAudit.lean
+lean-audit/PNPConcretePipelineOutputHandoffAxiomAudit.lean
 lean-audit/PNPConcretePipelineMachineSimulationAxiomAudit.lean
 lean-audit/PNPConcreteComplexityAxiomAudit.lean
 lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean
@@ -104,6 +108,8 @@ docs/lean_nand_semantics.md
 docs/lean_concrete_machine.md
 docs/lean_tape_handoff.md
 docs/lean_pipeline_tape_geometry.md
+docs/lean_pipeline_input_framer.md
+docs/lean_pipeline_output_handoff.md
 docs/lean_pipeline_machine_simulation.md
 docs/lean_concrete_complexity.md
 docs/lean_nand_enumerator.md
@@ -144,7 +150,15 @@ and the pure canonical handoff target, prove representation-stable decoding, and
 handoff claim. The twenty declarations in `lean/PNP/Concrete/PipelineTapeGeometry.lean` are also
 axiom-free: they define distinct two-track data and boundary tags, an arbitrary-exterior-garbage
 frame, and pure write/move/boundary-expansion geometry. They define no rules, machine, simulation,
-or runtime bound. `lean/PNP/Concrete/PipelineMachineSimulation.lean` supplies the separate finite
+or runtime bound. `lean/PNP/Concrete/PipelineInputFramer.lean` supplies a separate literal finite
+machine from canonical paired input to an accepting represented frame under exact work and compiled
+raw budgets. It is paired-input-only and is not composed with the simulator.
+`lean/PNP/Concrete/PipelineOutputHandoff.lean` supplies another literal finite machine from an
+already represented logical tape to an accepting representation of its blank-delimited handoff
+target. Its exact costs are `2 * n + 4` work steps and `12 * n + 24` compiled steps for logical
+output length `n`. Its compiled trace starts from an encoded internal configuration, not ordinary
+`startConfig`, and its represented two-track encoding is not a terminal raw `machineOutput` layout.
+`lean/PNP/Concrete/PipelineMachineSimulation.lean` supplies the separate finite
 rule lift: it preserves ordered first-match selection and lifts every supplied exact `n`-step chain
 of successful raw transitions from an already represented configuration to exactly `3 * n`
 successful work steps. An ordinary `F`-fuel raw run also yields an exact prefix of length `k ≤ F`
@@ -152,8 +166,8 @@ to its endpoint. Conditional on that endpoint being designated halting, `workRun
 `3 * F` and compiled `run` at fuel `18 * F` reach its representation and encoding. This proves no
 termination result: those full fuels are at-most budgets rather than successful-step counts or
 input-size bounds, and a stuck nonhalting stop is not a verdict. The layer does not create the
-frame, prove `boundedDecide` or output preservation, decode output, perform terminal handoff, or
-construct composition/precomposition pipeline refinement. The two declarations in
+frame, prove `boundedDecide` or output preservation, connect to the separate internal handoff,
+perform terminal de-tagging, or construct composition/precomposition pipeline refinement. The two declarations in
 `lean/PNP/Concrete/Target.lean` are also axiom-free: `PNP.Main.ConcretePEqualsNP` is an inactive
 definition naming mutual inclusion, and `PNP.Main.concretePEqualsNP_iff` pins its expansion. This
 does not prove the target. The six explicit declarations in
@@ -284,7 +298,7 @@ ineligible for the general charged-pipeline target, even though the direct CNF v
 to one raw machine. The abstract `PNP.PEqualsNP` bridge remains ineligible. See
 [`lean_theorem_inventory.md`](./lean_theorem_inventory.md) for the full contract and commands.
 
-The inventory and false gate generate the current root TeX/PDF: a concise eight-page
+The inventory and false gate generate the current root TeX/PDF: a concise nine-page
 formal-reconstruction report with no theorem emission. It replaces the historical 56-page claim
 manuscript at the repository root; that historical artifact is available only through the pinned
 legacy coordinate recorded under [`archive/legacy-v0/`](../archive/legacy-v0/README.md).
@@ -624,10 +638,10 @@ The highest-value next targets are:
 3. Prove first-output preservation, `TraceEquivalence`, and the two derived final-output laws.
 4. Instantiate the conditional boundary uniformly and prove the report threshold theorem.
 5. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
-6. Compose the paired-input framer with the exact-successful-run simulator using disjoint control
-   states and a proved accepting-to-start handoff; then add `boundedDecide` halt/timeout/verdict
-   semantics, terminal output de-tagging/handoff, and the full pipeline refinement with input-size
-   polynomial runtime/output bounds.
+6. Compose the paired-input framer, exact-successful-run simulator, and internal output handoff
+   using disjoint control states and proved stage launches; then add `boundedDecide`
+   halt/timeout/verdict semantics, terminal output de-tagging, and the full pipeline refinement with
+   input-size polynomial runtime/output bounds.
 7. Formalize or import concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.
 8. Formalize checker/reflection soundness for the PCC package.

@@ -29,7 +29,7 @@ from current theorem status.
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual
   routes require 30. The workflow also checks the byte-identical inventory mirrors, derives the
   false concrete publication gate and status/report outputs, and verifies same-environment
-  double-build determinism plus exact committed bytes for the current concise eight-page PDF. The
+  double-build determinism plus exact committed bytes for the current concise nine-page PDF. The
   hosted runner's apt-installed TeX and Poppler versions are not cryptographically pinned, so this
   is not a universal cross-toolchain reproducibility claim.
 - `.github/workflows/legacy-v0-replay.yml` is manual only. It replays the immutable historical
@@ -66,8 +66,9 @@ to one raw machine.
 
 The tape-handoff audit corrects the earlier list-boundary-sensitive output convention: explicit and
 implicit blanks now terminate output identically. Its `handoffTarget` is a pure canonical data target,
-not a machine, rule list, or paid copy algorithm. Boundary framing, stale-cell isolation, state
-normalization, output de-tagging, and polynomial handoff execution remain unproved.
+not a machine, rule list, or paid copy algorithm. The separate pipeline-output-handoff module now
+implements one exact internal represented handoff to that target; state-safe composition and
+terminal raw output de-tagging remain unproved.
 
 The pipeline-tape geometry audit proves a two-track representation with distinct data/left/right
 tags, arbitrary stale cells outside the first markers, and exact preservation under data writes,
@@ -83,7 +84,8 @@ prefix of length `k ≤ F` reaching the same endpoint. If that endpoint is desig
 and its encoding. CI keeps the premise and accounting explicit: this does not prove termination, the full
 budgets are not successful-step counts or input-size bounds, and a stuck nonhalting stop is not a
 verdict. The theorems start from an already represented configuration and provide no `startConfig`
-framing, `boundedDecide` or `machineOutput` equality, terminal handoff,
+framing, `boundedDecide` or `machineOutput` equality, connection to the separate internal handoff,
+terminal raw output de-tagging,
 composition/precomposition refinement, or input-size polynomial end-to-end theorem.
 
 The pipeline-input-framer audit covers a different literal finite machine. Its compiled theorem
@@ -92,8 +94,18 @@ permitted exterior garbage, and pins exact work and quadratic compiled raw budge
 attempt to widen that theorem to arbitrary empty, odd, malformed, or unpaired input. It also keeps
 the missing boundary explicit: the framer's rules and accepting state are not composed with the
 lifted simulator, so it provides no simulated-stage termination, `boundedDecide` or output
-preservation beyond the framer's own local accept result, terminal handoff, pipeline refinement,
+preservation beyond the framer's own local accept result, connection to the separate internal
+handoff, terminal raw output de-tagging, pipeline refinement,
 class equality, or `P = NP`.
+
+The pipeline-output-handoff audit covers a third literal finite machine. From an already represented
+logical tape `raw`, it reaches an accepting representation of `raw.handoffTarget` after exactly
+`2 * raw.outputBits.length + 4` work steps and `12 * raw.outputBits.length + 24` compiled steps.
+CI requires the compiled theorem to start at an encoded internal work configuration and rejects an
+ordinary-`startConfig` or raw-visible-`machineOutput` claim. The handoff is not connected to the
+simulator, has no state-renaming or composition theorem, gives no verdict/timeout bridge or external
+input-size polynomial, and does not supply terminal de-tagging, pipeline refinement, class equality,
+or `P = NP`.
 
 The concrete-CNF checks do establish a narrower raw-machine result. They require complete axiom
 transcripts for the canonical CNF codec and semantics, paired work-input layout, generic direct
@@ -119,7 +131,7 @@ node scripts/generate-formal-publication.mjs --check
 npm run report:check
 ```
 
-The current root PDF is the generated eight-page formal-reconstruction report. The historical
+The current root PDF is the generated nine-page formal-reconstruction report. The historical
 56-page claim artifact is not a current workflow output and is available only at the pinned legacy
 coordinate recorded under `archive/legacy-v0/`.
 

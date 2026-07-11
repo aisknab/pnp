@@ -72,5 +72,6 @@ framer's accepting state as a simulated machine's start state, launch the simula
 `FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement`, or derive an end-to-end input
 size bound. Its local `boundedDecide` theorem says only that the framer accepts at its proved
 budget. It does not prove target-machine termination, simulated-stage `boundedDecide`
-correspondence, target accept/reject/timeout preservation, output decoding, terminal handoff,
+correspondence, target accept/reject/timeout preservation, output decoding, connection to the
+separate internal represented-output handoff, terminal raw output de-tagging,
 `CNFSAT ∈ P`, NP-completeness, or `P = NP`.

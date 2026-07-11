@@ -1,6 +1,6 @@
 # Formal reconstruction notice
 
-**Effective: 10 July 2026**
+**Effective: 11 July 2026**
 
 ## Current status
 
@@ -45,10 +45,17 @@ exact quadratic raw-input-length budget. Its public theorem is restricted to pai
 permits blanked source cells as exterior garbage. The framer and simulator are not composed: no
 combined rule list, disjoint state allocation, accepting-to-start retagging, or simulated-stage
 launch theorem exists. The development does not prove simulated-stage `boundedDecide` or target
-output preservation, decode or hand off terminal output, or construct composition/precomposition refinement. The local
+output preservation, connect terminal simulator states to another machine, de-tag terminal raw
+output, or construct composition/precomposition refinement. The local
 framer `boundedDecide` theorem records only acceptance of the framer's own endpoint; there is no
 simulated-stage `boundedDecide` or target verdict/output correspondence. It
-also provides one direct raw-machine instance: a universally
+also includes a separate executable internal handoff machine: from an already represented logical
+tape `raw`, it reaches an accepting representation of `raw.handoffTarget` in exactly
+`2 * raw.outputBits.length + 4` work steps and `12 * raw.outputBits.length + 24` compiled steps.
+The compiled trace begins at an encoded internal work configuration, not ordinary `startConfig`.
+It is not connected to the simulator and its two-track encoded endpoint is not an ordinary
+raw-visible `machineOutput` layout; a separate terminal packer or de-tagger remains necessary.
+The development also provides one direct raw-machine instance: a universally
 correct polynomial-time verifier for canonically encoded finite CNF formulae and bounded assignment
 certificates, proving `PNP.Concrete.CNFSAT ∈ NP`. It does not provide a deterministic polynomial-time
 decider proving `CNFSAT ∈ P`, concrete NP-hardness or NP-completeness, the complete locked-NAND
@@ -73,6 +80,8 @@ configuration runs, including marker growth across arbitrary exterior garbage, e
 extraction, and the conditional designated-halting padding described above.
 The separate paired-input framer supplies an executable canonical-input-to-frame trace with exact
 work and compiled raw budgets, but is not yet connected to the simulator as one machine.
+The separate internal output handoff supplies an exact represented-output-to-represented-target
+trace, but is not connected to the simulator and does not provide terminal raw output de-tagging.
 This is still a charged interpreter interface without a complete compiler or refinement theorem to
 one raw machine. See
 [`lean_concrete_complexity.md`](./lean_concrete_complexity.md).
@@ -120,7 +129,7 @@ check is also false. Therefore the gate does not pass and every theorem-emission
 from it remains false or `null`.
 
 The root `canonical_proof_report.tex` and `canonical_proof_report.pdf` now form the generated,
-concise eight-page formal-reconstruction report. They replace the historical claim manuscript at the
+concise nine-page formal-reconstruction report. They replace the historical claim manuscript at the
 root and make the non-activation boundary explicit. The historical 56-page claim artifact is
 available only from the pinned legacy source coordinate recorded under
 [`archive/legacy-v0/`](../archive/legacy-v0/README.md).
@@ -128,7 +137,8 @@ available only from the pinned legacy source coordinate recorded under
 The direct CNF verifier closes one formerly abstract obligation—concrete NP membership for
 `PNP.Concrete.CNFSAT`—but it does not discharge the remaining publication blockers. In particular,
 a state-safe executable composition from the paired-input framer into the lifted simulator, a
-simulated-target `boundedDecide` halt/timeout/verdict bridge, output handoff, composition refinement with an
+simulated-target `boundedDecide` halt/timeout/verdict bridge, state-safe launch of the internal
+handoff, terminal output de-tagging, composition refinement with an
 input-size polynomial bound, a
 deterministic polynomial-time CNF-SAT decider,
 concrete NP-hardness/NP-completeness, locked-NAND threshold, residual-band minimizer, ZeroSlack,

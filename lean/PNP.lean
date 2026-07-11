@@ -13,6 +13,7 @@ import PNP.Concrete.TapeHandoff
 import PNP.Concrete.PipelineTapeGeometry
 import PNP.Concrete.PipelineMachineSimulation
 import PNP.Concrete.PipelineInputFramer
+import PNP.Concrete.PipelineOutputHandoff
 import PNP.Concrete.Complexity
 import PNP.Concrete.PipelineRefinement
 import PNP.Concrete.Target
