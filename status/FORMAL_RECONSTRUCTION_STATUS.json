@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-10-12",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-11-13",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -119,7 +119,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-10-CONCRETE-COMPLEXITY-12",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-11-PIPELINE-REFINEMENT-13",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -278,6 +278,7 @@
     "node --test audits/lean-root-target0.test.mjs",
     "node --test audits/lean-concrete-machine0.test.mjs",
     "node --test audits/lean-concrete-complexity0.test.mjs",
+    "node --test audits/lean-concrete-pipeline-refinement0.test.mjs",
     "node --test audits/lean-concrete-cnf0.test.mjs",
     "node --test audits/lean-nand-semantics0.test.mjs",
     "node --test audits/lean-nand-enumerator0.test.mjs",
@@ -290,6 +291,7 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteBitStringAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteMachineAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteComplexityAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteTargetAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFWorkInputAxiomAudit.lean",
@@ -376,7 +378,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "d28f000e838fa81710beceb0da7f0a5ad4cb1f665e07e2545274251489015fad",
+    "actualSourceClosureSha256": "5c1f2eadd2750912dfcbc416becb53e0a79230af2caae68c51005a96cb3358c6",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -406,22 +408,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-10-12",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-11-13",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "a38aac54fc7a117f46d42d2d45414d9bf3bbd301dd74a34cbbd0b61539229b4d",
+  "leanTheoremInventorySha256": "89d94909ba50f4dddbe357d67df5f297a5f87256b73e00a456fddc6d9a084e8e",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 4419,
+  "leanTheoremInventoryDeclarationCount": 4465,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 551,
-  "leanTheoremInventoryTheoremCount": 1826,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 1727,
-  "leanTheoremInventorySourceClosureModuleCount": 36,
-  "leanSourceClosureSha256": "d28f000e838fa81710beceb0da7f0a5ad4cb1f665e07e2545274251489015fad",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-10-12",
+  "leanTheoremInventoryTheoremCount": 1841,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 1740,
+  "leanTheoremInventorySourceClosureModuleCount": 37,
+  "leanSourceClosureSha256": "5c1f2eadd2750912dfcbc416becb53e0a79230af2caae68c51005a96cb3358c6",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-11-13",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "33b5e2f6464b8a2751806817bb155bd4592d6f126eeb42a81e461c3a04b5e491",
+  "formalPublicationMapSha256": "7d79974f2a7ee3d8a46a99799bc16705353d81461355290fb3db186a0e1d12a6",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",
@@ -504,8 +506,9 @@
       "id": "concrete-complexity-classes",
       "title": "Concrete P, NP, and polynomial reductions",
       "classification": "formalized-with-machine-link-pending",
-      "scope": "Bitstring languages, finite charged decision/verifier/function pipelines grounded in concrete machines, polynomial certificate/runtime/output bounds, many-one reductions, and the NP-complete-in-P implication.",
+      "scope": "Bitstring languages, finite charged decision/verifier/function pipelines grounded in concrete machines, polynomial certificate/runtime/output bounds, exact raw-machine refinement contracts and machine-leaf witnesses, many-one reductions, and the NP-complete-in-P implication.",
       "requiredTheorems": [
+        "PNP.Concrete.FunctionProgram.RawRefinement.output_size_le",
         "PNP.Concrete.np_complete_in_p_implies_p_eq_np",
         "PNP.Concrete.p_subset_np",
         "PNP.Concrete.reduction_comp",
@@ -513,8 +516,17 @@
         "PNP.Concrete.reduction_transports_p",
         "PNP.Main.concretePEqualsNP_iff"
       ],
-      "nonClaim": "This general complexity-class layer alone does not prove CNF-SAT is in P, CNF-SAT is NP-complete, or the publication root theorem.",
+      "nonClaim": "The refinement contracts and leaf cases do not compile function composition or decision precomposition, construct raw paired verifiers, prove charged/raw class equivalence, discharge the general machine-link blocker, prove CNF-SAT is in P or NP-complete, or establish the publication root theorem.",
       "theoremRows": [
+        {
+          "name": "PNP.Concrete.FunctionProgram.RawRefinement.output_size_le",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "f9d23e2b448974c617d83666b18c5950ce025067a959a74e98d3b20f54229c8f",
+          "expectedKernelTypeSha256": "f9d23e2b448974c617d83666b18c5950ce025067a959a74e98d3b20f54229c8f",
+          "kernelTypeFingerprintMatches": true
+        },
         {
           "name": "PNP.Concrete.np_complete_in_p_implies_p_eq_np",
           "present": true,
@@ -1088,7 +1100,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-10-12",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-11-13",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

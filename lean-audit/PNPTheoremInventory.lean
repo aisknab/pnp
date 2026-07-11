@@ -72,6 +72,7 @@ private def reviewedMilestoneTheoremNames : Array Name := #[
   `PNP.Concrete.FinalUniversalDesign.cnfSATInNP,
   `PNP.Concrete.FinalUniversalDesign.cnfUniversalWorkOutcome,
   `PNP.Concrete.FinalUniversalDesign.formulaGrammarOutcome,
+  `PNP.Concrete.FunctionProgram.RawRefinement.output_size_le,
   `PNP.Concrete.NatPolynomial.eval_mono,
   `PNP.Concrete.PolynomialTimeMachine.verdict_accepts_iff,
   `PNP.Concrete.PolynomialTimeMachine.verdict_ne_timeout,
@@ -163,7 +164,7 @@ private def inventory : CommandElabM Json := do
   return Json.mkObj [
     ("kind", toJson "PNPLeanTheoremInventory0"),
     ("version", toJson 0),
-    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-07-10-12"),
+    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-07-11-13"),
     ("leanToolchain", toJson "leanprover/lean4:v4.31.0"),
     ("rootModule", toJson "PNP"),
     ("environmentProbeComplete", toJson true),
