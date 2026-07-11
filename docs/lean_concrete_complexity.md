@@ -2,9 +2,10 @@
 
 `lean/PNP/Concrete/Complexity.lean` defines concrete bitstring languages, proof-bearing P and NP
 witnesses, and polynomial many-one reductions without storing executable Lean functions or string
-code handles. `lean/PNP/Concrete/PipelineRefinement.lean` pins exact raw-machine refinement
+code handles. `lean/PNP/Concrete/TapeHandoff.lean` supplies the observable first-blank output
+decoder and a pure canonical handoff target. `lean/PNP/Concrete/PipelineRefinement.lean` pins exact raw-machine refinement
 contracts and proves the two machine-leaf cases. `lean/PNP/Concrete/Target.lean` names the
-corresponding inactive target proposition. The explicit declarations in all three layers have empty
+corresponding inactive target proposition. The explicit declarations in all four layers have empty
 compiled axiom closures.
 
 This is a finite charged-pipeline interface. Its leaves are concrete `Machine` values, but the
@@ -34,7 +35,8 @@ charged interpreter remains a distinct, not-yet-linked model.
 - a concrete `Machine` run at a `NatPolynomial` transition budget; and
 - sequential composition of two finite function programs.
 
-Machine output is read using one fixed tape decoder. `FunctionProgram.eval` interprets the syntax,
+Machine output is read from the focused cell through the first blank delimiter; it no longer depends
+on the unobservable end of the represented `Tape.right` list. `FunctionProgram.eval` interprets the syntax,
 and `FunctionProgram.chargedSteps` charges the first run, the size of the intermediate output for
 handoff/copying, and the second run. `FunctionProgram.Halts` requires every leaf to reach a
 designated accept or reject state rather than time out.
@@ -126,10 +128,12 @@ axioms. Seven blockers remain, beginning with `Formal.ConcreteComplexityMachineL
 
 ```bash
 lake build PNP
+lake env lean -DwarningAsError=true lean-audit/PNPConcreteTapeHandoffAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcreteComplexityAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcreteTargetAxiomAudit.lean
 node --test audits/lean-concrete-complexity0.test.mjs
+node --test audits/lean-concrete-tape-handoff0.test.mjs
 node --test audits/lean-concrete-pipeline-refinement0.test.mjs
 ```
 

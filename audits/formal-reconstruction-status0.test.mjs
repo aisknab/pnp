@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-11-13');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-11-14');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -140,15 +140,15 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.match(out.siteStatusSha256, /^[0-9a-f]{64}$/u);
 });
 
-test('formal reconstruction status pins the pipeline-refinement inventory and reviewed source closure', async () => {
+test('formal reconstruction status pins the tape-handoff inventory and reviewed source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 4465);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 1841);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 1740);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 4481);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 1851);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 1750);
   assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 551);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 37);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 38);
   assert.equal(status.leanSourceClosureSha256,
-    '5c1f2eadd2750912dfcbc416becb53e0a79230af2caae68c51005a96cb3358c6');
+    '26ea00a0211c2192268bf8c28102a4fa24afa1322ff1e1b9800d50779853ea20');
   const cnf = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-cnf-universal-verifier',
   );
@@ -157,7 +157,9 @@ test('formal reconstruction status pins the pipeline-refinement inventory and re
   assert.equal(cnf.requiredTheorems.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP'), true);
   for (const command of [
+    'node --test audits/lean-concrete-tape-handoff0.test.mjs',
     'node --test audits/lean-concrete-pipeline-refinement0.test.mjs',
+    'lake env lean -DwarningAsError=true lean-audit/PNPConcreteTapeHandoffAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFWorkAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFWorkCanonical.lean',
@@ -172,7 +174,7 @@ test('formal reconstruction status pins the pipeline-refinement inventory and re
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-11-PIPELINE-REFINEMENT-13');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-11-TAPE-HANDOFF-14');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);

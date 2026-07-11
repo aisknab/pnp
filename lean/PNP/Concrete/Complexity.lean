@@ -12,14 +12,15 @@ this file; no compiler from a composite pipeline to one raw `Machine` is
 claimed here.
 -/
 
-import PNP.Concrete.Machine
+import PNP.Concrete.TapeHandoff
 
 namespace PNP.Concrete
 
 namespace TapeSymbol
 
-/-- Decode a represented bit.  The blank case is fixed to `false`; the output
-decoder below stops when the focused cell is blank. -/
+/-- Totalize one represented cell to a bit for compatibility lemmas.  The
+observable output decoder does not use this function on blanks; it stops at
+the first blank delimiter. -/
 def toBool : TapeSymbol → Bool
   | .blank => false
   | .zero => false
@@ -32,15 +33,6 @@ end TapeSymbol
 
 namespace Tape
 
-/-- Read the represented output from the focused cell to the right.  A blank
-focused cell denotes the empty output.  This is the one fixed output
-convention used by all function-program leaves. -/
-def outputBits (tape : Tape) : BitString :=
-  match tape.head with
-  | .blank => []
-  | .zero => false :: tape.right.map TapeSymbol.toBool
-  | .one => true :: tape.right.map TapeSymbol.toBool
-
 theorem map_toBool_ofBool (bits : BitString) :
     (bits.map TapeSymbol.ofBool).map TapeSymbol.toBool = bits := by
   induction bits with
@@ -49,15 +41,6 @@ theorem map_toBool_ofBool (bits : BitString) :
       cases bit with
       | false => exact congrArg (List.cons false) ih
       | true => exact congrArg (List.cons true) ih
-
-theorem outputBits_ofInput (input : BitString) :
-    outputBits (ofInput input) = input := by
-  cases input with
-  | nil => rfl
-  | cons bit rest =>
-      cases bit with
-      | false => exact congrArg (List.cons false) (map_toBool_ofBool rest)
-      | true => exact congrArg (List.cons true) (map_toBool_ofBool rest)
 
 end Tape
 
