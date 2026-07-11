@@ -75,11 +75,12 @@ functions. They do not supply rules, machine states, a simulation run, or a tran
 
 The pipeline-machine simulation audit covers the separate executable local layer. It checks that
 ordered raw rules preserve first-match behavior, terminal-source entries are omitted, boundary
-growth tolerates every exterior work symbol, and one successful raw transition takes exactly three
-work transitions and eighteen transitions after literal compilation. The theorem starts from an
-already encoded represented configuration. It does not provide `startConfig` framing,
-`machineOutput` equality, a terminal handoff, a bounded-run lift, composition/precomposition
-refinement, or a polynomial end-to-end theorem.
+growth tolerates every exterior work symbol, and every supplied exact `n`-step successful raw run
+becomes exactly `3 * n` successful work steps. The compiled corollary says ordinary `run` with fuel
+`18 * n` reaches the encoded endpoint; it does not claim `18 * n` successful transitions. The
+theorems start from an already represented configuration. They do not provide `startConfig`
+framing, `boundedDecide` or `machineOutput` equality, a terminal handoff,
+composition/precomposition refinement, or an input-size polynomial end-to-end theorem.
 
 The concrete-CNF checks do establish a narrower raw-machine result. They require complete axiom
 transcripts for the canonical CNF codec and semantics, paired work-input layout, generic direct

@@ -36,8 +36,11 @@ subcheck; two unset values never count as a match. `PNP.Main.ConcretePEqualsNP` 
 axiom-free definition for mutual inclusion in the finite charged-pipeline model, but its activation
 fingerprints remain unset. The compatibility/root theorem `PNP.Main.p_eq_np` is absent, and the
 pipeline still lacks a proved end-to-end compiler/refinement to the raw machine kernel. The local
-framed simulator proves one exact successful step from an already encoded configuration, not input
-framing, output handoff, bounded-run lifting, or `RawRefinement`. Consequently the gate
+framed simulator lifts a supplied exact `n`-step successful raw execution from an already
+represented configuration to exactly `3 * n` successful work steps and a compiled run with fuel
+`18 * n`; it does not prove that many compiled transitions succeed. It supplies no input framing,
+`boundedDecide` or output theorem, output handoff, input-size polynomial bound, or `RawRefinement`.
+Consequently the gate
 is false, and every theorem-emission field derived from it remains false or `null`.
 
 The direct CNF development does not change that fail-closed result. It defines one finite raw

@@ -54,9 +54,10 @@ This machine-kernel milestone by itself does not define P, NP, reductions, SAT, 
 P/NP witnesses, polynomial reductions, and the inactive `PNP.Main.ConcretePEqualsNP` target. Its
 finite syntax is grounded at `Machine` leaves, but no compiler/refinement from an arbitrary
 composite pipeline to one raw single-tape machine has been proved. The local framed simulator now
-reproduces one successful raw step from an already encoded frame in exactly three work/eighteen
-compiled raw transitions, but supplies no initial framing, output handoff, bounded-run lift, or
-composite refinement. Therefore
+lifts every supplied exact `n`-step successful raw execution from an already represented frame to
+exactly `3 * n` successful work steps; ordinary compiled `run` with fuel `18 * n` reaches the
+encoded endpoint. These factors are not an input-size bound, and the layer supplies no initial
+framing, `boundedDecide` or output theorem, output handoff, or composite refinement. Therefore
 `Formal.ConcreteComplexityMachineLink` remains the first of seven blockers. All five
 reviewed activation fingerprints remain unset, the four project-specific axioms remain,
 `PNP.Main.p_eq_np` is absent, and the publication gate is false.

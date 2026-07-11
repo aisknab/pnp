@@ -6,15 +6,16 @@ tapes.  Public control-state tags are collision-free; designated halts use
 fresh accept/reject sentinels; terminal-source entry rules are omitted; and
 entry selection preserves the raw interpreter's first-match rule order.
 
-The main result simulates one successful raw `step?` by exactly three work
+The local result simulates one successful raw `step?` by exactly three work
 transitions from any `PipelineTape.Represents` frame, including arbitrary
-exterior garbage.  Composing with the existing literal work-machine compiler
-gives an exact eighteen-transition concrete raw execution.
+exterior garbage.  The finite-run result iterates this over every exact chain
+of `n` successful raw transitions, using exactly `3 * n` work transitions and
+a compiled raw fuel budget of `18 * n` to reach the encoded endpoint.
 
-This module does not prove a multi-step refinement, output or handoff
-correctness, verdict preservation, a polynomial runtime bound, a
-`FunctionProgram` composition theorem, a complexity-class equality, or
-`P = NP`.
+This module does not construct a frame from raw input, prove arbitrary
+at-most-run or bounded-verdict preservation, decode or hand off output,
+provide a pipeline refinement or end-to-end input-size polynomial bound,
+establish a complexity-class equality, or prove `P = NP`.
 -/
 
 import PNP.Concrete.PipelineTapeGeometry
@@ -1515,8 +1516,8 @@ theorem workRunExact_three_of_step (machine : Machine)
   subst next
   exact ⟨final, hRun, hRep⟩
 
-/-- The existing literal work-to-raw compiler turns the exact three work
-steps into exactly eighteen concrete raw transitions. -/
+/-- The existing literal work-to-raw compiler reaches the encoded endpoint
+with a concrete raw fuel budget of eighteen. -/
 theorem run_compileWorkMachine_eighteen_of_step (machine : Machine)
     (config next : Configuration) (workTape : WorkTape)
     (hStep : step? machine config = some next)
@@ -1537,6 +1538,253 @@ theorem run_compileWorkMachine_eighteen_of_step (machine : Machine)
         (liftConfiguration machine config workTape)) =
       encodeWorkConfiguration final at hCompiled
   exact ⟨final, hCompiled, hRep⟩
+
+/-! ### Exact finite-run lifting
+
+The following layer iterates the local theorem above over an arbitrary finite
+chain of successful raw transitions.  Its cost parameter is the number of
+source transitions in that supplied chain, not the source input length.  It
+does not cover a `run` that stops early, create an initial frame, decode or
+hand off output, or establish an end-to-end polynomial-time refinement.
+-/
+
+/-- Execute exactly `steps` raw transitions, failing when execution stops
+early.  This is the raw-machine analogue of `workRunExact?`. -/
+def rawRunExact? (machine : Machine) :
+    Nat → Configuration → Option Configuration
+  | 0, config => some config
+  | steps + 1, config =>
+      match step? machine config with
+      | none => none
+      | some next => rawRunExact? machine steps next
+
+theorem rawRunExact?_one_of_step (machine : Machine)
+    (config next : Configuration)
+    (hStep : step? machine config = some next) :
+    rawRunExact? machine 1 config = some next := by
+  change
+    (match step? machine config with
+     | none => none
+     | some result => some result) = some next
+  rw [hStep]
+
+/-- Exact raw executions compose without adding any stuttering transitions. -/
+theorem rawRunExact?_compose (machine : Machine)
+    (first second : Nat) (start middle final : Configuration)
+    (hFirst : rawRunExact? machine first start = some middle)
+    (hSecond : rawRunExact? machine second middle = some final) :
+    rawRunExact? machine (first + second) start = some final := by
+  induction first generalizing start with
+  | zero =>
+      change some start = some middle at hFirst
+      have hStart : start = middle := Option.some.inj hFirst
+      rw [Nat.zero_add, hStart]
+      exact hSecond
+  | succ first ih =>
+      cases hStep : step? machine start with
+      | none =>
+          change
+            (match step? machine start with
+             | none => none
+             | some next => rawRunExact? machine first next) =
+              some middle at hFirst
+          rw [hStep] at hFirst
+          contradiction
+      | some next =>
+          have hTail : rawRunExact? machine first next = some middle := by
+            change
+              (match step? machine start with
+               | none => none
+               | some next => rawRunExact? machine first next) =
+                some middle at hFirst
+            rw [hStep] at hFirst
+            exact hFirst
+          rw [Nat.succ_add]
+          change
+            (match step? machine start with
+             | none => none
+             | some next =>
+                 rawRunExact? machine (first + second) next) = some final
+          rw [hStep]
+          exact ih next hTail
+
+/-- An exact raw execution agrees with the ordinary at-most interpreter at
+the same transition budget. -/
+theorem run_eq_of_rawRunExact (machine : Machine) (steps : Nat)
+    (start final : Configuration)
+    (hExact : rawRunExact? machine steps start = some final) :
+    run machine steps start = final := by
+  induction steps generalizing start with
+  | zero =>
+      change some start = some final at hExact
+      exact Option.some.inj hExact
+  | succ steps ih =>
+      cases hStep : step? machine start with
+      | none =>
+          change
+            (match step? machine start with
+             | none => none
+             | some next => rawRunExact? machine steps next) =
+              some final at hExact
+          rw [hStep] at hExact
+          contradiction
+      | some next =>
+          have hTail : rawRunExact? machine steps next = some final := by
+            change
+              (match step? machine start with
+               | none => none
+               | some next => rawRunExact? machine steps next) =
+                some final at hExact
+            rw [hStep] at hExact
+            exact hExact
+          change
+            (match step? machine start with
+             | none => start
+             | some next => run machine steps next) = final
+          rw [hStep]
+          exact ih next hTail
+
+/-- Exact work executions compose without adding any stuttering transitions. -/
+theorem workRunExact?_compose (machine : WorkMachine)
+    (first second : Nat) (start middle final : WorkConfiguration)
+    (hFirst : workRunExact? machine first start = some middle)
+    (hSecond : workRunExact? machine second middle = some final) :
+    workRunExact? machine (first + second) start = some final := by
+  induction first generalizing start with
+  | zero =>
+      change some start = some middle at hFirst
+      have hStart : start = middle := Option.some.inj hFirst
+      rw [Nat.zero_add, hStart]
+      exact hSecond
+  | succ first ih =>
+      cases hStep : workStep? machine start with
+      | none =>
+          change
+            (match workStep? machine start with
+             | none => none
+             | some next => workRunExact? machine first next) =
+              some middle at hFirst
+          rw [hStep] at hFirst
+          contradiction
+      | some next =>
+          have hTail : workRunExact? machine first next = some middle := by
+            change
+              (match workStep? machine start with
+               | none => none
+               | some next => workRunExact? machine first next) =
+                some middle at hFirst
+            rw [hStep] at hFirst
+            exact hFirst
+          rw [Nat.succ_add]
+          change
+            (match workStep? machine start with
+             | none => none
+             | some next =>
+                 workRunExact? machine (first + second) next) = some final
+          rw [hStep]
+          exact ih next hTail
+
+/-- Every exact `steps`-transition raw execution is simulated from any
+representing boundary frame in exactly `3 * steps` work transitions. -/
+theorem workRunExact_three_mul_of_rawRunExact (machine : Machine)
+    (steps : Nat) (config final : Configuration) (workTape : WorkTape)
+    (hRaw : rawRunExact? machine steps config = some final)
+    (hRepresents : Represents config.tape workTape) :
+    ∃ workFinal,
+      workRunExact? (liftMachine machine) (3 * steps)
+          (liftConfiguration machine config workTape) = some workFinal ∧
+      RepresentsConfiguration machine final workFinal := by
+  induction steps generalizing config workTape with
+  | zero =>
+      change some config = some final at hRaw
+      have hFinal : config = final := Option.some.inj hRaw
+      subst final
+      refine ⟨liftConfiguration machine config workTape, rfl, ?_⟩
+      exact ⟨rfl, hRepresents⟩
+  | succ steps ih =>
+      cases hStep : step? machine config with
+      | none =>
+          change
+            (match step? machine config with
+             | none => none
+             | some next => rawRunExact? machine steps next) =
+              some final at hRaw
+          rw [hStep] at hRaw
+          contradiction
+      | some next =>
+          have hTail : rawRunExact? machine steps next = some final := by
+            change
+              (match step? machine config with
+               | none => none
+               | some next => rawRunExact? machine steps next) =
+                some final at hRaw
+            rw [hStep] at hRaw
+            exact hRaw
+          rcases workRunExact_three_of_step machine config next workTape
+            hStep hRepresents with ⟨middle, hThree, hMiddleRep⟩
+          rcases ih next middle.tape hTail hMiddleRep.2 with
+            ⟨workFinal, hRest, hFinalRep⟩
+          have hMiddle :
+              liftConfiguration machine next middle.tape = middle := by
+            cases middle with
+            | mk state tape =>
+                have hState : state = controlState machine next.state :=
+                  hMiddleRep.1
+                change
+                  (⟨controlState machine next.state, tape⟩ :
+                    WorkConfiguration) = ⟨state, tape⟩
+                rw [hState]
+          rw [hMiddle] at hRest
+          have hComposed := workRunExact?_compose
+            (liftMachine machine) 3 (3 * steps)
+            (liftConfiguration machine config workTape) middle workFinal
+            hThree hRest
+          refine ⟨workFinal, ?_, hFinalRep⟩
+          have hCost : 3 * (steps + 1) = 3 + 3 * steps := by
+            rw [Nat.mul_succ]
+            exact Nat.add_comm _ _
+          rw [hCost]
+          exact hComposed
+
+/-- Literal compilation reaches the encoded work endpoint with raw fuel
+`18 * steps` for every exact `steps`-transition source execution. -/
+theorem run_compileWorkMachine_eighteen_mul_of_rawRunExact
+    (machine : Machine) (steps : Nat)
+    (config final : Configuration) (workTape : WorkTape)
+    (hRaw : rawRunExact? machine steps config = some final)
+    (hRepresents : Represents config.tape workTape) :
+    ∃ workFinal,
+      run (compileWorkMachine (liftMachine machine)) (18 * steps)
+          (encodeWorkConfiguration
+            (liftConfiguration machine config workTape)) =
+        encodeWorkConfiguration workFinal ∧
+      RepresentsConfiguration machine final workFinal := by
+  rcases workRunExact_three_mul_of_rawRunExact machine steps config final
+    workTape hRaw hRepresents with ⟨workFinal, hWork, hFinalRep⟩
+  have hCompiled := run_compileWorkMachine_mul_of_workRunExact
+    (liftMachine machine) (3 * steps)
+    (liftConfiguration machine config workTape) workFinal hWork
+  have hFuelAll : ∀ count : Nat, 18 * count = 6 * (3 * count) := by
+    intro count
+    induction count with
+    | zero => rfl
+    | succ count ih =>
+        calc
+          18 * (count + 1) = 18 * count + 18 := Nat.mul_succ 18 count
+          _ = 6 * (3 * count) + 18 :=
+            congrArg (fun value => value + 18) ih
+          _ = 6 * (3 * count) + 6 * 3 := rfl
+          _ = 6 * (3 * count + 3) :=
+            (Nat.mul_add 6 (3 * count) 3).symm
+          _ = 6 * (3 * (count + 1)) :=
+            congrArg (fun value => 6 * value) (Nat.mul_succ 3 count).symm
+  have hFuel := hFuelAll steps
+  have hRunCost := congrArg
+    (fun fuel =>
+      run (compileWorkMachine (liftMachine machine)) fuel
+        (encodeWorkConfiguration
+          (liftConfiguration machine config workTape))) hFuel
+  exact ⟨workFinal, hRunCost.trans hCompiled, hFinalRep⟩
 
 end PipelineMachineSimulation
 

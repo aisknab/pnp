@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-11-16",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-11-17",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -119,7 +119,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-11-PIPELINE-MACHINE-SIMULATION-16",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-11-PIPELINE-MULTISTEP-SIMULATION-17",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -331,7 +331,7 @@
     "The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.",
     "Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget is a pure canonical specification, not an executable normalization or handoff machine.",
     "PipelineTape frames raw cells between distinct two-track markers and tolerates arbitrary exterior garbage; its boundary expansions are pure tape identities, not transition rules, a handoff machine, a compiler, or a runtime proof.",
-    "PipelineMachineSimulation executes one successful raw transition from an already encoded boundary frame in exactly three work transitions and eighteen transitions of the compiled raw machine; it does not create an initial frame, decode or normalize output, execute a terminal handoff, simulate a bounded run, compile composition or precomposition, provide a RawRefinement, or prove an end-to-end polynomial bound.",
+    "PipelineMachineSimulation simulates any supplied chain of n successful raw step? transitions from an already represented boundary frame in exactly 3 * n successful work transitions, with the endpoint again representing the raw endpoint; ordinary compiled-machine run with fuel 18 * n reaches the encoded work endpoint. These factors are measured in source-transition count, not input length, and the compiled theorem does not assert 18 * n successful transitions. The theorem does not construct a frame from Tape.ofInput, prove boundedDecide, accept/reject, or machineOutput preservation, normalize or hand off terminal output, launch a second stage, provide a FunctionProgram.RawRefinement or DecisionProgram.RawRefinement, compile composition or precomposition, or prove an end-to-end input-size polynomial bound.",
     "The concrete bitstring, natural-polynomial, and finite-rule machine kernel is now consumed by a finite charged-pipeline P/NP/reduction interface; the compiler/refinement from composite pipelines to one raw machine is not yet proved.",
     "The concrete complexity interface proves P subset NP, reduction composition and transport, and the NP-complete-in-P implication relative to its exact pipeline semantics; it does not prove concrete SAT complete or in P.",
     "The integrated direct CNF-SAT finite-machine verifier proves exact accept/reject correctness, bounded no-timeout behavior, and PNP.Concrete.FinalUniversalDesign.cnfSATInNP; it proves CNF-SAT membership in NP only, not CNF-SAT in P, NP-completeness, or P = NP.",
@@ -387,7 +387,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "a7212ca4cef1a004b8f3201ae72d207a3227f61e06bcaa3d7264b47c8ad4ab74",
+    "actualSourceClosureSha256": "82d8ff2a4af58385f8420baf5061ae0528bbd8eda516b209e9055ef3298f9e66",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -417,34 +417,36 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-11-16",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-11-17",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "170a4b2d3ad60e2aec0a5dab161eab697e6919e65785de11dce3c8a640697a88",
+  "leanTheoremInventorySha256": "719dc49aa564b696e9b232c8958ebdf9e917d0968eb71ecbb74900d2ac7d07dc",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 4659,
+  "leanTheoremInventoryDeclarationCount": 4672,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 560,
-  "leanTheoremInventoryTheoremCount": 1932,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 1831,
+  "leanTheoremInventoryTheoremCount": 1938,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 1837,
   "leanTheoremInventorySourceClosureModuleCount": 40,
-  "leanSourceClosureSha256": "a7212ca4cef1a004b8f3201ae72d207a3227f61e06bcaa3d7264b47c8ad4ab74",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-11-16",
+  "leanSourceClosureSha256": "82d8ff2a4af58385f8420baf5061ae0528bbd8eda516b209e9055ef3298f9e66",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-11-17",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "94c9280cb3c857a67987446a603e50e6e40e91b6e2743dc8474edd18ee5c18b3",
+  "formalPublicationMapSha256": "d8c30f29dcba13f827214ce7733ad14258af3d2b0754c952c08a62df02062dee",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",
       "title": "Concrete machine and cost kernel",
       "classification": "formalized-foundation-only",
-      "scope": "Executable bitstrings and codecs, finite rule-list machine semantics, fuel-bounded execution, blank-delimited representation-stable output, boundary-framed two-track geometry, ordered one-step raw-to-work simulation at exactly three work transitions, its exact eighteen-transition literal-compiler image, and proof-bearing natural-polynomial runtime witnesses.",
+      "scope": "Executable bitstring codecs, finite machine semantics and fuel, representation-stable output, boundary-framed geometry, and ordered lifting of every supplied exact n-step successful raw execution to exactly 3 * n successful work transitions with a represented endpoint; ordinary compiled-machine run with fuel 18 * n reaches its encoding.",
       "requiredTheorems": [
         "PNP.Concrete.BitString.decodePair_pair",
         "PNP.Concrete.NatPolynomial.eval_mono",
         "PNP.Concrete.PipelineMachineSimulation.findIndexedRawRuleFrom_map_snd",
         "PNP.Concrete.PipelineMachineSimulation.find_liftMachine_entry",
+        "PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_mul_of_rawRunExact",
         "PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_of_step",
+        "PNP.Concrete.PipelineMachineSimulation.workRunExact_three_mul_of_rawRunExact",
         "PNP.Concrete.PipelineMachineSimulation.workRunExact_three_of_step",
         "PNP.Concrete.PipelineTape.frameWithGarbage_represents",
         "PNP.Concrete.PipelineTape.handoffTarget_withGarbage_represents",
@@ -462,7 +464,7 @@
         "PNP.Concrete.run_succ",
         "PNP.Concrete.run_zero"
       ],
-      "nonClaim": "The simulator theorem covers one already-framed successful raw step, configuration to configuration. It does not construct an initial frame, de-tag output, implement terminal handoff, lift an arbitrary bounded run, compile function composition or decision precomposition, prove RawRefinement or an end-to-end polynomial bound, put CNF-SAT in P, prove NP-completeness, or establish P = NP.",
+      "nonClaim": "The simulator starts from an already represented frame. Its 3 * n exact work-step count and 18 * n compiled-run fuel use source-transition count, not input length; the compiled theorem does not assert 18 * n successful transitions. It supplies no initial framer, boundedDecide, verdict or machineOutput preservation, output handoff, composition/precomposition RawRefinement, input-size polynomial bound, CNF-SAT in P, NP-completeness, or P = NP.",
       "theoremRows": [
         {
           "name": "PNP.Concrete.BitString.decodePair_pair",
@@ -501,12 +503,30 @@
           "kernelTypeFingerprintMatches": true
         },
         {
+          "name": "PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_mul_of_rawRunExact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "f4001370b4498adad7fe465c789acf3607e7ff34237c04d8e4f119793536d776",
+          "expectedKernelTypeSha256": "f4001370b4498adad7fe465c789acf3607e7ff34237c04d8e4f119793536d776",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
           "name": "PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_of_step",
           "present": true,
           "kind": "theorem",
           "axioms": [],
           "actualKernelTypeSha256": "a0465c371b7c21ec042fe86b9393f961ef1aa18a31d032e354b8dd3282115a5f",
           "expectedKernelTypeSha256": "a0465c371b7c21ec042fe86b9393f961ef1aa18a31d032e354b8dd3282115a5f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.PipelineMachineSimulation.workRunExact_three_mul_of_rawRunExact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "cd560f72874d825ebcb1258939549506627582bc21b8dad67f140c4971fe17d3",
+          "expectedKernelTypeSha256": "cd560f72874d825ebcb1258939549506627582bc21b8dad67f140c4971fe17d3",
           "kernelTypeFingerprintMatches": true
         },
         {
@@ -1259,7 +1279,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-11-16",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-11-17",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

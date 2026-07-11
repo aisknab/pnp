@@ -103,6 +103,13 @@ const EXPECTED_HEADS = Object.freeze([
   ['theorem', 'step?_some_exists', 'PNP.Concrete.PipelineMachineSimulation.step?_some_exists'],
   ['theorem', 'workRunExact_three_of_step', 'PNP.Concrete.PipelineMachineSimulation.workRunExact_three_of_step'],
   ['theorem', 'run_compileWorkMachine_eighteen_of_step', 'PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_of_step'],
+  ['def', 'rawRunExact?', 'PNP.Concrete.PipelineMachineSimulation.rawRunExact?'],
+  ['theorem', 'rawRunExact?_one_of_step', 'PNP.Concrete.PipelineMachineSimulation.rawRunExact?_one_of_step'],
+  ['theorem', 'rawRunExact?_compose', 'PNP.Concrete.PipelineMachineSimulation.rawRunExact?_compose'],
+  ['theorem', 'run_eq_of_rawRunExact', 'PNP.Concrete.PipelineMachineSimulation.run_eq_of_rawRunExact'],
+  ['theorem', 'workRunExact?_compose', 'PNP.Concrete.PipelineMachineSimulation.workRunExact?_compose'],
+  ['theorem', 'workRunExact_three_mul_of_rawRunExact', 'PNP.Concrete.PipelineMachineSimulation.workRunExact_three_mul_of_rawRunExact'],
+  ['theorem', 'run_compileWorkMachine_eighteen_mul_of_rawRunExact', 'PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_mul_of_rawRunExact'],
 ]);
 
 const EXPECTED_IMPORTS = Object.freeze([
@@ -158,10 +165,10 @@ function validate0(source) {
   'declaration-surface');
 
   require0(prose.includes(
-    'This module does not prove a multi-step refinement, output or handoff ' +
-    'correctness, verdict preservation, a polynomial runtime bound, a ' +
-    'FunctionProgram composition theorem, a complexity-class equality, or ' +
-    'P = NP.'),
+    'This module does not construct a frame from raw input, prove arbitrary ' +
+    'at-most-run or bounded-verdict preservation, decode or hand off output, ' +
+    'provide a pipeline refinement or end-to-end input-size polynomial bound, ' +
+    'establish a complexity-class equality, or prove P = NP.'),
   'explicit-nonclaims');
   require0(!/\b(?:RawRefinement|outputBits|handoffTarget|boundedDecide|NatPolynomial|PolynomialTimeMachine|PolynomialTimeDecider|FunctionProgram|DecisionProgram)\b/u
     .test(stripped), 'no-broader-pipeline-claim');
@@ -221,7 +228,7 @@ function validate0(source) {
     'run (compileWorkMachine (liftMachine machine)) 18 ' +
     '(encodeWorkConfiguration (liftConfiguration machine config workTape)) = ' +
     'encodeWorkConfiguration final ∧ RepresentsConfiguration machine next final'),
-  'exact-eighteen-compiled-step');
+  'eighteen-fuel-compiled-step');
   require0(compact.includes(
     'run_compileWorkMachine_mul_of_workRunExact (liftMachine machine) 3'),
   'literal-compiler-composition');
@@ -230,6 +237,62 @@ function validate0(source) {
     compact.includes(
       '(hRepresents : Represents config.tape workTape)'),
   'successful-step-and-frame-premises');
+  require0(compact.includes(
+    'def rawRunExact? (machine : Machine) : Nat → Configuration → ' +
+    'Option Configuration | 0, config => some config | steps + 1, config => ' +
+    'match step? machine config with | none => none | some next => ' +
+    'rawRunExact? machine steps next'),
+  'exact-raw-run-stops-on-failure');
+  require0(compact.includes(
+    'theorem rawRunExact?_one_of_step (machine : Machine) ' +
+    '(config next : Configuration) (hStep : step? machine config = ' +
+    'some next) : rawRunExact? machine 1 config = some next := by'),
+  'exact-raw-run-one-type');
+  require0(compact.includes(
+    'theorem rawRunExact?_compose (machine : Machine) ' +
+    '(first second : Nat) (start middle final : Configuration) ' +
+    '(hFirst : rawRunExact? machine first start = some middle) ' +
+    '(hSecond : rawRunExact? machine second middle = some final) : ' +
+    'rawRunExact? machine (first + second) start = some final := by'),
+  'exact-raw-run-compose-type');
+  require0(compact.includes(
+    'theorem run_eq_of_rawRunExact (machine : Machine) (steps : Nat) ' +
+    '(start final : Configuration) (hExact : rawRunExact? machine steps ' +
+    'start = some final) : run machine steps start = final := by'),
+  'exact-run-agreement-type');
+  require0(compact.includes(
+    'theorem workRunExact?_compose (machine : WorkMachine) ' +
+    '(first second : Nat) (start middle final : WorkConfiguration) ' +
+    '(hFirst : workRunExact? machine first start = some middle) ' +
+    '(hSecond : workRunExact? machine second middle = some final) : ' +
+    'workRunExact? machine (first + second) start = some final := by'),
+  'exact-work-run-compose-type');
+  require0(compact.includes(
+    'workRunExact? (liftMachine machine) (3 * steps) ' +
+    '(liftConfiguration machine config workTape) = some workFinal ∧ ' +
+    'RepresentsConfiguration machine final workFinal'),
+  'exact-three-mul-successful-run');
+  require0(compact.includes(
+    'run (compileWorkMachine (liftMachine machine)) (18 * steps) ' +
+    '(encodeWorkConfiguration (liftConfiguration machine config workTape)) = ' +
+    'encodeWorkConfiguration workFinal ∧ RepresentsConfiguration machine ' +
+    'final workFinal'),
+  'eighteen-mul-fuel-compiled-run');
+  require0(compact.includes(
+    'theorem workRunExact_three_mul_of_rawRunExact (machine : Machine) ' +
+    '(steps : Nat) (config final : Configuration) (workTape : WorkTape) ' +
+    '(hRaw : rawRunExact? machine steps config = some final) ' +
+    '(hRepresents : Represents config.tape workTape) : ∃ workFinal,') &&
+    compact.includes(
+      'theorem run_compileWorkMachine_eighteen_mul_of_rawRunExact ' +
+      '(machine : Machine) (steps : Nat) (config final : Configuration) ' +
+      '(workTape : WorkTape) (hRaw : rawRunExact? machine steps config = ' +
+      'some final) (hRepresents : Represents config.tape workTape) : ' +
+      '∃ workFinal,') && compact.includes(
+        'run_eq_of_rawRunExact (machine : Machine) (steps : Nat)'),
+  'successful-exact-run-and-frame-premises');
+  require0(!/rawRunExact\? machine steps config = none →/u.test(compact),
+    'no-failed-run-promotion');
 
   for (const branch of [
     'find_continuation_stayOne',
@@ -255,7 +318,7 @@ test('pipeline machine simulator is finite, exact, first-match, and shortcut-fre
       assert.deepEqual(validate0(await text0(SOURCE_PATH)), []);
     });
 
-test('root, transcript, and workflow require all eighty-five axiom-free declarations',
+test('root, transcript, and workflow require all ninety-two axiom-free declarations',
     async () => {
       const [source, audit, root, workflow] = await Promise.all([
         text0(SOURCE_PATH),
@@ -263,7 +326,7 @@ test('root, transcript, and workflow require all eighty-five axiom-free declarat
         text0('lean/PNP.lean'),
         text0('.github/workflows/lean-bridge.yml'),
       ]);
-      assert.equal(EXPECTED_HEADS.length, 85);
+      assert.equal(EXPECTED_HEADS.length, 92);
       assert.deepEqual(headPairs0(source),
         EXPECTED_HEADS.map(([kind, name]) => [kind, name]));
       assert.deepEqual(imports0(audit), ['PNP']);
@@ -279,7 +342,7 @@ test('root, transcript, and workflow require all eighty-five axiom-free declarat
       assert.equal(rootImports[importIndex - 1],
         'PNP.Concrete.PipelineTapeGeometry');
       assert.match(workflow,
-        /PNPConcretePipelineMachineSimulationAxiomAudit\.lean[\s\S]{0,900}grep -F 'depends on axioms:'[\s\S]{0,400}exit 1[\s\S]{0,400}grep -Fc 'does not depend on any axioms'\)" -eq 85/u);
+        /PNPConcretePipelineMachineSimulationAxiomAudit\.lean[\s\S]{0,900}grep -F 'depends on axioms:'[\s\S]{0,400}exit 1[\s\S]{0,400}grep -Fc 'does not depend on any axioms'\)" -eq 92/u);
     });
 
 test('hostile rule-order, terminal, alphabet, cost, namespace, and proof mutations fail',
@@ -308,7 +371,38 @@ test('hostile rule-order, terminal, alphabet, cost, namespace, and proof mutatio
         source.replace(
           'run (compileWorkMachine (liftMachine machine)) 18',
           'run (compileWorkMachine (liftMachine machine)) 17'),
-        source.replace('verdict preservation, ', ''),
+        source.replace(
+          'workRunExact? (liftMachine machine) (3 * steps)',
+          'workRunExact? (liftMachine machine) (2 * steps)'),
+        source.replace(
+          'run (compileWorkMachine (liftMachine machine)) (18 * steps)',
+          'run (compileWorkMachine (liftMachine machine)) (17 * steps)'),
+        source.replace(
+          '| none => none\n      | some next => rawRunExact? machine steps next',
+          '| none => some config\n      | some next => rawRunExact? machine steps next'),
+        source.replace(
+          'rawRunExact? machine 1 config = some next := by',
+          'True := by'),
+        source.replace(
+          'rawRunExact? machine (first + second) start = some final := by',
+          'True := by'),
+        source.replace(
+          'run machine steps start = final := by',
+          'True := by'),
+        source.replace(
+          'workRunExact? machine (first + second) start = some final := by',
+          'True := by'),
+        source.replace(
+          '(hRaw : rawRunExact? machine steps config = some final)\n' +
+          '    (hRepresents : Represents config.tape workTape)',
+          '(hRaw : run machine steps config = final)\n' +
+          '    (_ : True)'),
+        source.replace(
+          'RepresentsConfiguration machine final workFinal := by\n' +
+          '  induction steps',
+          'RepresentsConfiguration machine config workFinal := by\n' +
+          '  induction steps'),
+        source.replace('at-most-run or bounded-verdict preservation, ', ''),
         source.replace(':= rfl', ':= by sorry'),
         source.replace(':= rfl', ':= by native_decide'),
         source + '\naxiom hiddenPipelineSimulation : True\n',

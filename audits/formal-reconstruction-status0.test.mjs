@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-11-16');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-11-17');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -140,15 +140,15 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.match(out.siteStatusSha256, /^[0-9a-f]{64}$/u);
 });
 
-test('formal reconstruction status pins the pipeline-machine-simulation inventory and source closure', async () => {
+test('formal reconstruction status pins the pipeline multistep simulation inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 4659);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 1932);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 1831);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 4672);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 1938);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 1837);
   assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 560);
   assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 40);
   assert.equal(status.leanSourceClosureSha256,
-    'a7212ca4cef1a004b8f3201ae72d207a3227f61e06bcaa3d7264b47c8ad4ab74');
+    '82d8ff2a4af58385f8420baf5061ae0528bbd8eda516b209e9055ef3298f9e66');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -158,6 +158,15 @@ test('formal reconstruction status pins the pipeline-machine-simulation inventor
     'PNP.Concrete.PipelineMachineSimulation.workRunExact_three_of_step'), true);
   assert.equal(machine.requiredTheorems.includes(
     'PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_of_step'), true);
+  assert.equal(machine.requiredTheorems.includes(
+    'PNP.Concrete.PipelineMachineSimulation.workRunExact_three_mul_of_rawRunExact'), true);
+  assert.equal(machine.requiredTheorems.includes(
+    'PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_mul_of_rawRunExact'), true);
+  assert.match(machine.scope, /exactly 3 \* n successful work transitions/u);
+  assert.match(machine.scope, /run with fuel 18 \* n reaches its encoding/u);
+  assert.doesNotMatch(machine.scope, /exactly 18 \* n/u);
+  assert.match(machine.nonClaim, /does not assert 18 \* n successful transitions/u);
+  assert.match(machine.nonClaim, /not input length/u);
   const cnf = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-cnf-universal-verifier',
   );
@@ -182,12 +191,14 @@ test('formal reconstruction status pins the pipeline-machine-simulation inventor
   ]) assert.equal(status.verificationCommands.includes(command), true, command);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes(
+    'compiled theorem does not assert 18 * n successful transitions')), true);
 });
 
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-11-PIPELINE-MACHINE-SIMULATION-16');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-11-PIPELINE-MULTISTEP-SIMULATION-17');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);

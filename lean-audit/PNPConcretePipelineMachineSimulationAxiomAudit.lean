@@ -85,3 +85,10 @@ import PNP
 #print axioms PNP.Concrete.PipelineMachineSimulation.step?_some_exists
 #print axioms PNP.Concrete.PipelineMachineSimulation.workRunExact_three_of_step
 #print axioms PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_of_step
+#print axioms PNP.Concrete.PipelineMachineSimulation.rawRunExact?
+#print axioms PNP.Concrete.PipelineMachineSimulation.rawRunExact?_one_of_step
+#print axioms PNP.Concrete.PipelineMachineSimulation.rawRunExact?_compose
+#print axioms PNP.Concrete.PipelineMachineSimulation.run_eq_of_rawRunExact
+#print axioms PNP.Concrete.PipelineMachineSimulation.workRunExact?_compose
+#print axioms PNP.Concrete.PipelineMachineSimulation.workRunExact_three_mul_of_rawRunExact
+#print axioms PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_mul_of_rawRunExact

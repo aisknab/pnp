@@ -33,9 +33,11 @@ The current Lean development makes parts of the intended route explicit and now 
 axiom-free finite charged-pipeline interface for P, bounded-certificate NP, and polynomial
 many-one reductions. It does not yet prove that every such pipeline compiles or refines to the raw
 single-tape machine kernel. A new local layer preserves the raw interpreter's first matching rule
-and simulates one successful transition from an already encoded boundary frame in exactly three
-work transitions and eighteen compiled raw transitions. It does not create that frame, decode or
-hand off terminal output, lift a bounded run, or construct a composite refinement. The development
+and lifts every supplied exact chain of `n` successful raw transitions from an already represented
+boundary frame to exactly `3 * n` successful work transitions. Ordinary compiled-machine `run`
+with fuel `18 * n` reaches the encoded endpoint; this is not a claim of `18 * n` successful
+transitions. The layer does not create that frame, prove bounded-decision or output semantics,
+decode or hand off terminal output, or construct a composite refinement. The development
 also provides one direct raw-machine instance: a universally
 correct polynomial-time verifier for canonically encoded finite CNF formulae and bounded assignment
 certificates, proving `PNP.Concrete.CNFSAT ∈ NP`. It does not provide a deterministic polynomial-time
@@ -112,7 +114,8 @@ available only from the pinned legacy source coordinate recorded under
 
 The direct CNF verifier closes one formerly abstract obligation—concrete NP membership for
 `PNP.Concrete.CNFSAT`—but it does not discharge the remaining publication blockers. In particular,
-the executable initial framer, output handoff, bounded-run and composition refinement, a
+the executable initial framer, a `boundedDecide` halt/timeout/verdict bridge, output handoff,
+composition refinement with an input-size polynomial bound, a
 deterministic polynomial-time CNF-SAT decider,
 concrete NP-hardness/NP-completeness, locked-NAND threshold, residual-band minimizer, ZeroSlack,
 the remaining end-to-end polynomial bounds, and the root theorem/axiom audit remain incomplete.

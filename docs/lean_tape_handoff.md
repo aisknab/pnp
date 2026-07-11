@@ -45,10 +45,12 @@ provide transition rules, and has no runtime theorem.
 
 `lean/PNP/Concrete/PipelineTapeGeometry.lean` now supplies the next pure layer: a finite two-track
 boundary frame that tolerates exterior garbage and handles empty and odd logical lengths.
-`PipelineMachineSimulation.lean` supplies ordered finite rules for one successful raw transition
-inside an already existing frame, with an exact three-work/eighteen-compiled-raw cost. A future
-compiler still needs an executable initial framer, terminal output de-tagging and handoff, bounded
-run lifting, second-stage launch, and the full polynomial copy/simulation bound.
+`PipelineMachineSimulation.lean` supplies ordered finite rules for every supplied exact `n`-step
+successful raw execution inside an already represented frame, with exactly `3 * n` successful work
+steps; ordinary compiled `run` with fuel `18 * n` reaches the encoded endpoint. A future compiler
+still needs an executable initial framer, a `boundedDecide` halt/timeout/verdict bridge, terminal
+output de-tagging and handoff, second-stage launch, and the full input-size polynomial
+copy/simulation bound.
 
 ## Audit
 
