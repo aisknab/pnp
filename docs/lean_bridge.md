@@ -145,9 +145,11 @@ handoff claim. The twenty declarations in `lean/PNP/Concrete/PipelineTapeGeometr
 axiom-free: they define distinct two-track data and boundary tags, an arbitrary-exterior-garbage
 frame, and pure write/move/boundary-expansion geometry. They define no rules, machine, simulation,
 or runtime bound. `lean/PNP/Concrete/PipelineMachineSimulation.lean` supplies the separate finite
-rule lift: it preserves ordered first-match selection and simulates one successful transition from
-an already represented configuration in exactly three work/eighteen compiled raw steps. It does
-not create the frame, decode output, perform terminal handoff, lift a bounded run, or construct a
+rule lift: it preserves ordered first-match selection and lifts every supplied exact `n`-step chain
+of successful raw transitions from an already represented configuration to exactly `3 * n`
+successful work steps. Ordinary compiled-machine `run` with fuel `18 * n` reaches the encoded
+endpoint; it does not claim that many successful transitions. The layer does not create the frame,
+prove bounded-decision or output semantics, decode output, perform terminal handoff, or construct a
 pipeline refinement. The two declarations in
 `lean/PNP/Concrete/Target.lean` are also axiom-free: `PNP.Main.ConcretePEqualsNP` is an inactive
 definition naming mutual inclusion, and `PNP.Main.concretePEqualsNP_iff` pins its expansion. This
@@ -605,8 +607,8 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 5. A deterministic polynomial-time decider proving `CNFSAT ∈ P`, together with concrete SAT
    NP-hardness/NP-completeness; the current direct verifier proves only `CNFSAT ∈ NP`.
 6. A compiler/refinement proving that every finite charged function, decision, and verifier
-   pipeline is implemented with the stated costs by the selected raw machine model. The local
-   one-step framed simulator does not yet provide this end-to-end result.
+   pipeline is implemented with the stated input-size costs by the selected raw machine model. The
+   local exact-successful-run simulator does not yet provide this end-to-end result.
 ```
 
 ## Next formalization targets
@@ -619,9 +621,9 @@ The highest-value next targets are:
 3. Prove first-output preservation, `TraceEquivalence`, and the two derived final-output laws.
 4. Instantiate the conditional boundary uniformly and prove the report threshold theorem.
 5. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
-6. Extend the local framed step simulator with executable input framing, bounded-run lifting,
-   terminal output de-tagging/handoff, and second-stage launch; then construct the full pipeline
-   refinement with polynomial runtime/output bounds.
+6. Connect the exact-successful-run simulator to executable input framing, `boundedDecide`
+   halt/timeout/verdict semantics, terminal output de-tagging/handoff, and second-stage launch; then
+   construct the full pipeline refinement with input-size polynomial runtime/output bounds.
 7. Formalize or import concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.
 8. Formalize checker/reflection soundness for the PCC package.

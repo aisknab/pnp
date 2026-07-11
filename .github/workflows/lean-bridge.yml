@@ -249,7 +249,7 @@ jobs:
             echo 'Framed raw-machine simulation unexpectedly depends on axioms.' >&2
             exit 1
           fi
-          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 85
+          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 92
 
       - name: Print raw-pipeline refinement contract axioms
         run: |

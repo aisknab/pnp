@@ -5,8 +5,9 @@ witnesses, and polynomial many-one reductions without storing executable Lean fu
 code handles. `lean/PNP/Concrete/TapeHandoff.lean` supplies the observable first-blank output
 decoder and a pure canonical handoff target. `lean/PNP/Concrete/PipelineTapeGeometry.lean` supplies
 a two-track boundary frame with arbitrary exterior garbage and proved local move/expansion geometry.
-`lean/PNP/Concrete/PipelineMachineSimulation.lean` supplies ordered finite rules and exact local
-three-work/eighteen-raw simulation for one successful source step from an already encoded frame.
+`lean/PNP/Concrete/PipelineMachineSimulation.lean` supplies ordered finite rules and lifts every
+supplied exact `n`-step successful raw execution from an already represented frame to exactly
+`3 * n` successful work steps; ordinary compiled `run` with fuel `18 * n` reaches the encoding.
 `lean/PNP/Concrete/PipelineRefinement.lean` pins exact raw-machine refinement
 contracts and proves the two machine-leaf cases. `lean/PNP/Concrete/Target.lean` names the
 corresponding inactive target proposition. The explicit declarations in all six layers have empty
@@ -20,7 +21,8 @@ single-tape `Machine`. That missing link is recorded as
 
 The local simulator narrows that gap without closing it. It preserves the source interpreter's
 first matching rule, handles boundary growth across arbitrary exterior garbage, and exposes an
-exact compiled transition count. Its theorem starts from `encodeWorkConfiguration`, not the
+exact work-step count plus a compiled-run fuel bound. Its theorem starts from
+`encodeWorkConfiguration`, not the
 canonical `Tape.ofInput` used by `machineOutput`; blank tag cells also require an executable
 de-tagging and handoff pass before another raw stage can consume the result.
 
@@ -159,9 +161,12 @@ truncation, and compatibility-root injection.
 
 ## Exact nonclaim
 
-The local one-step theorem does not provide a compiler/refinement theorem from the charged pipeline
-interpreter to the raw `Machine` kernel. It supplies no initial frame, output handoff, bounded-run
-lift, composition/precomposition constructor, or polynomial end-to-end bound. This milestone also
+The local exact-successful-run theorem does not provide a compiler/refinement theorem from the
+charged pipeline interpreter to the raw `Machine` kernel. The `3 * n` exact work count and
+`18 * n` compiled fuel are measured in source transitions, not input length; the compiled theorem
+does not assert `18 * n` successful transitions. It supplies no initial frame, `boundedDecide` or
+output theorem, output handoff, composition/precomposition constructor, or input-size polynomial
+end-to-end bound. This milestone also
 does not formalize concrete SAT or SAT NP-hardness, instantiate
 the global locked-NAND threshold package, prove the residual-band or ZeroSlack obligations, prove
 the remaining end-to-end polynomial bounds, or establish `P = NP`.

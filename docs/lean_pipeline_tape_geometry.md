@@ -72,8 +72,10 @@ attempt to remove the compiler blocker or open the publication gate.
 ## Exact nonclaim
 
 The expansion functions are pure tape identities, not transition-rule lists or a `WorkMachine`.
-The separate `PipelineMachineSimulation` layer now supplies an ordered finite rule lift and an exact
-one-step simulation theorem over this relation. Neither module constructs an initial frame,
-normalizes or decodes output, executes a terminal handoff, lifts a bounded run, compiles composition
-or precomposition, proves a polynomial end-to-end bound or charged/raw class equivalence,
-establishes `CNFSAT ∈ P` or NP-completeness, activates a root theorem, or proves `P = NP`.
+The separate `PipelineMachineSimulation` layer now supplies an ordered finite rule lift for every
+supplied exact `n`-step successful raw execution over this relation, with exactly `3 * n` successful
+work steps and compiled-run fuel `18 * n`. Neither module constructs an initial frame, proves
+`boundedDecide` or output semantics, normalizes or decodes output, executes a terminal handoff,
+compiles composition or precomposition, proves an input-size polynomial end-to-end bound or
+charged/raw class equivalence, establishes `CNFSAT ∈ P` or NP-completeness, activates a root
+theorem, or proves `P = NP`.

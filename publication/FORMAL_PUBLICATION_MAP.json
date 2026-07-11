@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-11-16",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-11-17",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "a7212ca4cef1a004b8f3201ae72d207a3227f61e06bcaa3d7264b47c8ad4ab74",
+  "milestoneSourceClosureSha256": "82d8ff2a4af58385f8420baf5061ae0528bbd8eda516b209e9055ef3298f9e66",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.FinalUniversalDesign.cnfCompiled_accept_iff_check": "4a8661d567079e1f47c288b8a36805a20ac7040338d84325723079f3fada4efa",
@@ -32,7 +32,9 @@
     "PNP.Concrete.NatPolynomial.eval_mono": "08eef194a6dad5f3443646446dd9aa44bb62f71881897bd2721f5e10b0ed31ca",
     "PNP.Concrete.PipelineMachineSimulation.findIndexedRawRuleFrom_map_snd": "07fc0ddc64f43e2c787b292eede94e2e92d69b608ca5d618941104799139e5e1",
     "PNP.Concrete.PipelineMachineSimulation.find_liftMachine_entry": "e479fdab90f65bfeb52121a418b02df2680781d6a39cc7a56816423c9f2af3c7",
+    "PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_mul_of_rawRunExact": "f4001370b4498adad7fe465c789acf3607e7ff34237c04d8e4f119793536d776",
     "PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_of_step": "a0465c371b7c21ec042fe86b9393f961ef1aa18a31d032e354b8dd3282115a5f",
+    "PNP.Concrete.PipelineMachineSimulation.workRunExact_three_mul_of_rawRunExact": "cd560f72874d825ebcb1258939549506627582bc21b8dad67f140c4971fe17d3",
     "PNP.Concrete.PipelineMachineSimulation.workRunExact_three_of_step": "27ac4425bf506e7172f9811d87d7f5a733e7d16012cf92d619e1087e46fdf020",
     "PNP.Concrete.PipelineTape.frameWithGarbage_represents": "b37f88af38904ec0c539e3a92c6aaa1767989d090536180c0db3aa10b18c709e",
     "PNP.Concrete.PipelineTape.handoffTarget_withGarbage_represents": "ed6384cc3cb42bf5e5900b65f1e578de794a1ff1f4fbd2de85a112151ff40032",
@@ -83,13 +85,15 @@
       "id": "concrete-machine-cost-kernel",
       "title": "Concrete machine and cost kernel",
       "classification": "formalized-foundation-only",
-      "scope": "Executable bitstrings and codecs, finite rule-list machine semantics, fuel-bounded execution, blank-delimited representation-stable output, boundary-framed two-track geometry, ordered one-step raw-to-work simulation at exactly three work transitions, its exact eighteen-transition literal-compiler image, and proof-bearing natural-polynomial runtime witnesses.",
+      "scope": "Executable bitstring codecs, finite machine semantics and fuel, representation-stable output, boundary-framed geometry, and ordered lifting of every supplied exact n-step successful raw execution to exactly 3 * n successful work transitions with a represented endpoint; ordinary compiled-machine run with fuel 18 * n reaches its encoding.",
       "requiredTheorems": [
         "PNP.Concrete.BitString.decodePair_pair",
         "PNP.Concrete.NatPolynomial.eval_mono",
         "PNP.Concrete.PipelineMachineSimulation.findIndexedRawRuleFrom_map_snd",
         "PNP.Concrete.PipelineMachineSimulation.find_liftMachine_entry",
+        "PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_mul_of_rawRunExact",
         "PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_of_step",
+        "PNP.Concrete.PipelineMachineSimulation.workRunExact_three_mul_of_rawRunExact",
         "PNP.Concrete.PipelineMachineSimulation.workRunExact_three_of_step",
         "PNP.Concrete.PipelineTape.frameWithGarbage_represents",
         "PNP.Concrete.PipelineTape.handoffTarget_withGarbage_represents",
@@ -107,7 +111,7 @@
         "PNP.Concrete.run_succ",
         "PNP.Concrete.run_zero"
       ],
-      "nonClaim": "The simulator theorem covers one already-framed successful raw step, configuration to configuration. It does not construct an initial frame, de-tag output, implement terminal handoff, lift an arbitrary bounded run, compile function composition or decision precomposition, prove RawRefinement or an end-to-end polynomial bound, put CNF-SAT in P, prove NP-completeness, or establish P = NP."
+      "nonClaim": "The simulator starts from an already represented frame. Its 3 * n exact work-step count and 18 * n compiled-run fuel use source-transition count, not input length; the compiled theorem does not assert 18 * n successful transitions. It supplies no initial framer, boundedDecide, verdict or machineOutput preservation, output handoff, composition/precomposition RawRefinement, input-size polynomial bound, CNF-SAT in P, NP-completeness, or P = NP."
     },
     {
       "id": "concrete-complexity-classes",

@@ -76,7 +76,9 @@ private def reviewedMilestoneTheoremNames : Array Name := #[
   `PNP.Concrete.NatPolynomial.eval_mono,
   `PNP.Concrete.PipelineMachineSimulation.findIndexedRawRuleFrom_map_snd,
   `PNP.Concrete.PipelineMachineSimulation.find_liftMachine_entry,
+  `PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_mul_of_rawRunExact,
   `PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_of_step,
+  `PNP.Concrete.PipelineMachineSimulation.workRunExact_three_mul_of_rawRunExact,
   `PNP.Concrete.PipelineMachineSimulation.workRunExact_three_of_step,
   `PNP.Concrete.PipelineTape.frameWithGarbage_represents,
   `PNP.Concrete.PipelineTape.handoffTarget_withGarbage_represents,
@@ -179,7 +181,7 @@ private def inventory : CommandElabM Json := do
   return Json.mkObj [
     ("kind", toJson "PNPLeanTheoremInventory0"),
     ("version", toJson 0),
-    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-07-11-16"),
+    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-07-11-17"),
     ("leanToolchain", toJson "leanprover/lean4:v4.31.0"),
     ("rootModule", toJson "PNP"),
     ("environmentProbeComplete", toJson true),
