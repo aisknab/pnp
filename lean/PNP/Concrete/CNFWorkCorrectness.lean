@@ -4070,6 +4070,493 @@ theorem decoded_frames_success_exact
   rw [shape]
   exact frames_success_exact first rest assignment
 
+theorem frame_length_append (left right : List WorkSymbol) :
+    (left ++ right).length = left.length + right.length := by
+  induction left with
+  | nil => exact (Nat.zero_add right.length).symm
+  | cons symbol rest ih =>
+      change Nat.succ (rest ++ right).length =
+        Nat.succ rest.length + right.length
+      rw [Nat.succ_add]
+      exact congrArg Nat.succ ih
+
+theorem frameIterationSteps_le_twelveSpan (n : Nat)
+    (doneCounter restCounter donePayload : List WorkSymbol)
+    (doneBound : doneCounter.length ≤ n)
+    (restBound : restCounter.length ≤ n)
+    (payloadBound : donePayload.length ≤ n) :
+    frameOneIterationSteps doneCounter restCounter donePayload ≤
+      cnfShiftedWorkSpan n * 12 := by
+  let span := cnfShiftedWorkSpan n
+  have nSpan : n ≤ span := by
+    unfold span cnfShiftedWorkSpan
+    exact Nat.le_add_right n 2
+  have oneSpan : 1 ≤ span := by
+    unfold span cnfShiftedWorkSpan
+    exact Nat.succ_le_succ (Nat.zero_le (n + 1))
+  have doneSpan : doneCounter.length ≤ span :=
+    Nat.le_trans doneBound nSpan
+  have restSpan : restCounter.length ≤ span :=
+    Nat.le_trans restBound nSpan
+  have payloadSpan : donePayload.length ≤ span :=
+    Nat.le_trans payloadBound nSpan
+  have restOne : restCounter.length + 1 ≤ span + span :=
+    Nat.add_le_add restSpan oneSpan
+  have fullRaw : doneCounter.length + (restCounter.length + 1) ≤
+      span + (span + span) := Nat.add_le_add doneSpan restOne
+  have fullBound : (doneCounter ++ cnfMarkFalse :: restCounter).length ≤
+      (span + span) + span := by
+    rw [frame_length_append]
+    exact Nat.le_trans fullRaw
+      (Nat.le_of_eq (Nat.add_assoc span span span).symm)
+  have h0 := Nat.add_le_add doneSpan oneSpan
+  have h1 := Nat.add_le_add h0 restSpan
+  have h2 := Nat.add_le_add h1 oneSpan
+  have h3 := Nat.add_le_add h2 payloadSpan
+  have h4 := Nat.add_le_add h3 oneSpan
+  have h5 := Nat.add_le_add h4 payloadSpan
+  have h6 := Nat.add_le_add h5 oneSpan
+  have h7 := Nat.add_le_add h6 fullBound
+  have h8 := Nat.add_le_add h7 oneSpan
+  unfold frameOneIterationSteps
+  unfold span at h8
+  repeat' rw [← Nat.add_assoc] at h8
+  have twelve :
+      cnfShiftedWorkSpan n + cnfShiftedWorkSpan n +
+                    cnfShiftedWorkSpan n + cnfShiftedWorkSpan n +
+                  cnfShiftedWorkSpan n + cnfShiftedWorkSpan n +
+                cnfShiftedWorkSpan n + cnfShiftedWorkSpan n +
+              cnfShiftedWorkSpan n + cnfShiftedWorkSpan n +
+            cnfShiftedWorkSpan n + cnfShiftedWorkSpan n =
+        cnfShiftedWorkSpan n * 12 := by
+    repeat' rw [Nat.mul_succ]
+    rw [Nat.mul_zero, Nat.zero_add]
+  exact Nat.le_trans h8 (Nat.le_of_eq twelve)
+
+theorem frameOneFoldSteps_le (n : Nat)
+    (doneCounter donePayload : List WorkSymbol)
+    (tokens : List CNFToken)
+    (counterPartition : doneCounter.length + tokens.length ≤ n)
+    (payloadPartition : donePayload.length + tokens.length ≤ n) :
+    frameOneFoldSteps doneCounter donePayload tokens ≤
+      tokens.length * (cnfShiftedWorkSpan n * 12) := by
+  induction tokens generalizing doneCounter donePayload with
+  | nil => exact Nat.zero_le _
+  | cons token rest ih =>
+      have doneBound : doneCounter.length ≤ n :=
+        Nat.le_trans (Nat.le_add_right doneCounter.length (token :: rest).length)
+          counterPartition
+      have payloadBound : donePayload.length ≤ n :=
+        Nat.le_trans (Nat.le_add_right donePayload.length (token :: rest).length)
+          payloadPartition
+      have restBound : rest.length ≤ n := by
+        have restToTokens : rest.length ≤ (token :: rest).length :=
+          Nat.le_succ rest.length
+        have tokensToCounter : (token :: rest).length ≤
+            doneCounter.length + (token :: rest).length :=
+          Nat.le_add_left (token :: rest).length doneCounter.length
+        exact Nat.le_trans (Nat.le_trans restToTokens tokensToCounter)
+          counterPartition
+      have iterationBound := frameIterationSteps_le_twelveSpan n
+        doneCounter (List.replicate rest.length cnfT) donePayload
+        doneBound (by
+          rw [length_replicate_workSymbol]
+          exact restBound) payloadBound
+      have nextCounterPartition :
+          (doneCounter ++ [cnfMarkFalse]).length + rest.length ≤ n := by
+        rw [frame_length_append]
+        exact Nat.le_trans
+          (Nat.le_of_eq (nat_add_succ_shift doneCounter.length rest.length))
+          counterPartition
+      have nextPayloadPartition :
+          (donePayload ++ [frameOneMarkedToken token]).length +
+              rest.length ≤ n := by
+        rw [frame_length_append]
+        exact Nat.le_trans
+          (Nat.le_of_eq (nat_add_succ_shift donePayload.length rest.length))
+          payloadPartition
+      have restFold := ih (doneCounter ++ [cnfMarkFalse])
+        (donePayload ++ [frameOneMarkedToken token])
+        nextCounterPartition nextPayloadPartition
+      have combined := Nat.add_le_add iterationBound restFold
+      have normalized :
+          cnfShiftedWorkSpan n * 12 +
+              rest.length * (cnfShiftedWorkSpan n * 12) =
+            (token :: rest).length * (cnfShiftedWorkSpan n * 12) := by
+        rw [Nat.add_comm]
+        exact (Nat.succ_mul rest.length
+          (cnfShiftedWorkSpan n * 12)).symm
+      exact Nat.le_trans combined (Nat.le_of_eq normalized)
+
+theorem frameTwoFoldSteps_le (n : Nat)
+    (doneCounter donePayload : List WorkSymbol)
+    (assignment : BitString)
+    (counterPartition : doneCounter.length + assignment.length ≤ n)
+    (payloadPartition : donePayload.length + assignment.length ≤ n) :
+    frameTwoFoldSteps doneCounter donePayload assignment ≤
+      assignment.length * (cnfShiftedWorkSpan n * 12) := by
+  induction assignment generalizing doneCounter donePayload with
+  | nil => exact Nat.zero_le _
+  | cons value rest ih =>
+      have doneBound : doneCounter.length ≤ n :=
+        Nat.le_trans
+          (Nat.le_add_right doneCounter.length (value :: rest).length)
+          counterPartition
+      have payloadBound : donePayload.length ≤ n :=
+        Nat.le_trans
+          (Nat.le_add_right donePayload.length (value :: rest).length)
+          payloadPartition
+      have restBound : rest.length ≤ n := by
+        have restToAssignment : rest.length ≤ (value :: rest).length :=
+          Nat.le_succ rest.length
+        have assignmentToCounter : (value :: rest).length ≤
+            doneCounter.length + (value :: rest).length :=
+          Nat.le_add_left (value :: rest).length doneCounter.length
+        exact Nat.le_trans (Nat.le_trans restToAssignment assignmentToCounter)
+          counterPartition
+      have iterationBound := frameIterationSteps_le_twelveSpan n
+        doneCounter (List.replicate rest.length cnfT) donePayload
+        doneBound (by
+          rw [length_replicate_workSymbol]
+          exact restBound) payloadBound
+      have nextCounterPartition :
+          (doneCounter ++ [cnfMarkFalse]).length + rest.length ≤ n := by
+        rw [frame_length_append]
+        exact Nat.le_trans
+          (Nat.le_of_eq (nat_add_succ_shift doneCounter.length rest.length))
+          counterPartition
+      have nextPayloadPartition :
+          (donePayload ++ [markedAssignmentValueWorkSymbol value]).length +
+              rest.length ≤ n := by
+        rw [frame_length_append]
+        exact Nat.le_trans
+          (Nat.le_of_eq (nat_add_succ_shift donePayload.length rest.length))
+          payloadPartition
+      have restFold := ih (doneCounter ++ [cnfMarkFalse])
+        (donePayload ++ [markedAssignmentValueWorkSymbol value])
+        nextCounterPartition nextPayloadPartition
+      have combined := Nat.add_le_add iterationBound restFold
+      have normalized :
+          cnfShiftedWorkSpan n * 12 +
+              rest.length * (cnfShiftedWorkSpan n * 12) =
+            (value :: rest).length * (cnfShiftedWorkSpan n * 12) := by
+        rw [Nat.add_comm]
+        exact (Nat.succ_mul rest.length
+          (cnfShiftedWorkSpan n * 12)).symm
+      exact Nat.le_trans combined (Nat.le_of_eq normalized)
+
+theorem eight_span_normalize (span : Nat) :
+    span + span + span + span + span + span + span + span =
+      span * 8 := by
+  repeat' rw [Nat.mul_succ]
+  rw [Nat.mul_zero, Nat.zero_add]
+
+theorem frameOneTerminalSteps_le (n : Nat) (tokens : List CNFToken)
+    (tokenBound : tokens.length ≤ n) :
+    frameOneTerminalSteps tokens ≤ cnfShiftedWorkSpan n * 8 := by
+  have nSpan : n ≤ cnfShiftedWorkSpan n := by
+    unfold cnfShiftedWorkSpan
+    exact Nat.le_add_right n 2
+  have tokenSpan : tokens.length ≤ cnfShiftedWorkSpan n :=
+    Nat.le_trans tokenBound nSpan
+  have oneSpan : 1 ≤ cnfShiftedWorkSpan n := by
+    unfold cnfShiftedWorkSpan
+    exact Nat.succ_le_succ (Nat.zero_le (n + 1))
+  have h0 := Nat.add_le_add tokenSpan oneSpan
+  have h1 := Nat.add_le_add h0 tokenSpan
+  have h2 := Nat.add_le_add h1 oneSpan
+  have h3 := Nat.add_le_add h2 tokenSpan
+  have h4 := Nat.add_le_add h3 oneSpan
+  have h5 := Nat.add_le_add h4 tokenSpan
+  have h6 := Nat.add_le_add h5 oneSpan
+  unfold frameOneTerminalSteps
+  repeat' rw [← Nat.add_assoc] at h6
+  exact Nat.le_trans h6
+    (Nat.le_of_eq (eight_span_normalize (cnfShiftedWorkSpan n)))
+
+theorem frameTwoTerminalSteps_le (n : Nat) (assignment : BitString)
+    (assignmentBound : assignment.length ≤ n) :
+    frameTwoTerminalSteps assignment ≤ cnfShiftedWorkSpan n * 8 := by
+  have nSpan : n ≤ cnfShiftedWorkSpan n := by
+    unfold cnfShiftedWorkSpan
+    exact Nat.le_add_right n 2
+  have assignmentSpan : assignment.length ≤ cnfShiftedWorkSpan n :=
+    Nat.le_trans assignmentBound nSpan
+  have oneSpan : 1 ≤ cnfShiftedWorkSpan n := by
+    unfold cnfShiftedWorkSpan
+    exact Nat.succ_le_succ (Nat.zero_le (n + 1))
+  have h0 := Nat.add_le_add assignmentSpan oneSpan
+  have h1 := Nat.add_le_add h0 assignmentSpan
+  have h2 := Nat.add_le_add h1 oneSpan
+  have h3 := Nat.add_le_add h2 oneSpan
+  have h4 := Nat.add_le_add h3 oneSpan
+  have h5 := Nat.add_le_add h4 assignmentSpan
+  have h6 := Nat.add_le_add h5 oneSpan
+  unfold frameTwoTerminalSteps
+  repeat' rw [← Nat.add_assoc] at h6
+  exact Nat.le_trans h6
+    (Nat.le_of_eq (eight_span_normalize (cnfShiftedWorkSpan n)))
+
+theorem frame_add_four_reorder (a b c d : Nat) :
+    (a + b) + (c + d) = (a + c) + (b + d) := by
+  rw [Nat.add_assoc a b (c + d)]
+  rw [← Nat.add_assoc b c d]
+  rw [Nat.add_comm b c]
+  rw [Nat.add_assoc c b d]
+  rw [← Nat.add_assoc a c (b + d)]
+
+theorem frame_cost_regroup (boot a b c d : Nat) :
+    (boot + (a + b)) + (c + d) =
+      (a + c) + ((b + d) + boot) := by
+  calc
+    (boot + (a + b)) + (c + d) =
+        boot + ((a + b) + (c + d)) :=
+      Nat.add_assoc boot (a + b) (c + d)
+    _ = boot + ((a + c) + (b + d)) :=
+      congrArg (Nat.add boot) (frame_add_four_reorder a b c d)
+    _ = ((a + c) + (b + d)) + boot :=
+      Nat.add_comm boot ((a + c) + (b + d))
+    _ = (a + c) + ((b + d) + boot) :=
+      Nat.add_assoc (a + c) (b + d) boot
+
+theorem natMulAssocClean (a b c : Nat) :
+    (a * b) * c = a * (b * c) := by
+  induction c with
+  | zero => rfl
+  | succ c ih =>
+      change (a * b) * c + a * b = a * (b * c + b)
+      rw [ih, Nat.mul_add]
+
+theorem frameFolds_le_cubeTwelve (n : Nat)
+    (tokens : List CNFToken) (assignment : BitString)
+    (combinedBound : tokens.length + assignment.length ≤ n) :
+    frameOneFoldSteps [] [] tokens + frameTwoFoldSteps [] [] assignment ≤
+      cnfWorkPhaseCube n * 12 := by
+  have tokenBound : tokens.length ≤ n :=
+    Nat.le_trans (Nat.le_add_right tokens.length assignment.length)
+      combinedBound
+  have assignmentBound : assignment.length ≤ n :=
+    Nat.le_trans (Nat.le_add_left assignment.length tokens.length)
+      combinedBound
+  have foldOne := frameOneFoldSteps_le n [] [] tokens
+    (Nat.le_trans (Nat.le_of_eq (Nat.zero_add tokens.length)) tokenBound)
+    (Nat.le_trans (Nat.le_of_eq (Nat.zero_add tokens.length)) tokenBound)
+  have foldTwo := frameTwoFoldSteps_le n [] [] assignment
+    (Nat.le_trans (Nat.le_of_eq (Nat.zero_add assignment.length))
+      assignmentBound)
+    (Nat.le_trans (Nat.le_of_eq (Nat.zero_add assignment.length))
+      assignmentBound)
+  have foldOneCommute : frameOneFoldSteps [] [] tokens ≤
+      (cnfShiftedWorkSpan n * 12) * tokens.length :=
+    Nat.le_trans foldOne
+      (Nat.le_of_eq (Nat.mul_comm tokens.length
+        (cnfShiftedWorkSpan n * 12)))
+  have foldTwoCommute : frameTwoFoldSteps [] [] assignment ≤
+      (cnfShiftedWorkSpan n * 12) * assignment.length :=
+    Nat.le_trans foldTwo
+      (Nat.le_of_eq (Nat.mul_comm assignment.length
+        (cnfShiftedWorkSpan n * 12)))
+  have foldsAdded := Nat.add_le_add foldOneCommute foldTwoCommute
+  have foldsCombined :
+      frameOneFoldSteps [] [] tokens + frameTwoFoldSteps [] [] assignment ≤
+        (cnfShiftedWorkSpan n * 12) *
+          (tokens.length + assignment.length) :=
+    Nat.le_trans foldsAdded
+      (Nat.le_of_eq (Nat.mul_add (cnfShiftedWorkSpan n * 12)
+        tokens.length assignment.length).symm)
+  have foldsToN := Nat.mul_le_mul_left
+    (cnfShiftedWorkSpan n * 12) combinedBound
+  have nSpan : n ≤ cnfShiftedWorkSpan n := by
+    unfold cnfShiftedWorkSpan
+    exact Nat.le_add_right n 2
+  have foldsToSpan := Nat.mul_le_mul_left
+    (cnfShiftedWorkSpan n * 12) nSpan
+  have foldNormalize :
+      (cnfShiftedWorkSpan n * 12) * cnfShiftedWorkSpan n =
+        (cnfShiftedWorkSpan n * cnfShiftedWorkSpan n) * 12 := by
+    calc
+      (cnfShiftedWorkSpan n * 12) * cnfShiftedWorkSpan n =
+          cnfShiftedWorkSpan n * (12 * cnfShiftedWorkSpan n) :=
+        natMulAssocClean (cnfShiftedWorkSpan n) 12
+          (cnfShiftedWorkSpan n)
+      _ = cnfShiftedWorkSpan n * (cnfShiftedWorkSpan n * 12) :=
+        congrArg (Nat.mul (cnfShiftedWorkSpan n))
+          (Nat.mul_comm 12 (cnfShiftedWorkSpan n))
+      _ = (cnfShiftedWorkSpan n * cnfShiftedWorkSpan n) * 12 :=
+        (natMulAssocClean (cnfShiftedWorkSpan n)
+          (cnfShiftedWorkSpan n) 12).symm
+  exact Nat.le_trans foldsCombined
+    (Nat.le_trans foldsToN
+      (Nat.le_trans foldsToSpan
+        (Nat.le_trans (Nat.le_of_eq foldNormalize)
+          (Nat.mul_le_mul_right 12 (cnfShiftedSquare_le_phaseCube n)))))
+
+theorem frameTerminalsBoot_le_cubeFour (n : Nat)
+    (tokens : List CNFToken) (assignment : BitString)
+    (tokenBound : tokens.length ≤ n)
+    (assignmentBound : assignment.length ≤ n)
+    (fiveSpan : 5 ≤ cnfShiftedWorkSpan n) :
+    (frameOneTerminalSteps tokens + frameTwoTerminalSteps assignment) + 2 ≤
+      cnfWorkPhaseCube n * 4 := by
+  have terminalOne := frameOneTerminalSteps_le n tokens tokenBound
+  have terminalTwo := frameTwoTerminalSteps_le n assignment
+    assignmentBound
+  have terminalsAdded := Nat.add_le_add terminalOne terminalTwo
+  have terminalNormalize :
+      cnfShiftedWorkSpan n * 8 + cnfShiftedWorkSpan n * 8 =
+        cnfShiftedWorkSpan n * 16 :=
+    (Nat.mul_add (cnfShiftedWorkSpan n) 8 8).symm
+  have terminalsSixteen := Nat.le_trans terminalsAdded
+    (Nat.le_of_eq terminalNormalize)
+  have oneSpan : 1 ≤ cnfShiftedWorkSpan n :=
+    Nat.le_trans (by
+      change 1 ≤ 1 + 4
+      exact Nat.le_add_right 1 4) fiveSpan
+  have fourPlusOne : cnfShiftedWorkSpan n * 4 + 1 ≤
+      cnfShiftedWorkSpan n * 4 + cnfShiftedWorkSpan n :=
+    Nat.add_le_add_left oneSpan (cnfShiftedWorkSpan n * 4)
+  have fourPlusSpan : cnfShiftedWorkSpan n * 4 + cnfShiftedWorkSpan n =
+      cnfShiftedWorkSpan n * 5 :=
+    (Nat.mul_succ (cnfShiftedWorkSpan n) 4).symm
+  have fiveToSquare := Nat.mul_le_mul_left (cnfShiftedWorkSpan n) fiveSpan
+  have augmentedToSquare : cnfShiftedWorkSpan n * 4 + 1 ≤
+      cnfShiftedWorkSpan n * cnfShiftedWorkSpan n :=
+    Nat.le_trans fourPlusOne
+      (Nat.le_trans (Nat.le_of_eq fourPlusSpan) fiveToSquare)
+  have augmentedScaled := Nat.mul_le_mul_right 4 augmentedToSquare
+  have twoFour : 2 ≤ 4 := by
+    change 2 ≤ 2 + 2
+    exact Nat.le_add_right 2 2
+  have raised := Nat.add_le_add_left twoFour
+    ((cnfShiftedWorkSpan n * 4) * 4)
+  have leftNormalize : (cnfShiftedWorkSpan n * 4) * 4 =
+      cnfShiftedWorkSpan n * 16 := by
+    rw [natMulAssocClean]
+  have rightNormalize : (cnfShiftedWorkSpan n * 4 + 1) * 4 =
+      (cnfShiftedWorkSpan n * 4) * 4 + 4 :=
+    Nat.succ_mul (cnfShiftedWorkSpan n * 4) 4
+  have terminalBootRaw : cnfShiftedWorkSpan n * 16 + 2 ≤
+      (cnfShiftedWorkSpan n * 4 + 1) * 4 :=
+    Nat.le_trans
+      (Nat.le_of_eq (congrArg (fun value => value + 2) leftNormalize.symm))
+      (Nat.le_trans raised (Nat.le_of_eq rightNormalize.symm))
+  have toLinear := Nat.add_le_add_right terminalsSixteen 2
+  exact Nat.le_trans toLinear
+    (Nat.le_trans terminalBootRaw
+      (Nat.le_trans augmentedScaled
+        (Nat.mul_le_mul_right 4 (cnfShiftedSquare_le_phaseCube n))))
+
+theorem frameSuccessSteps_le_singlePhase (n : Nat)
+    (tokens : List CNFToken) (assignment : BitString)
+    (combinedBound : tokens.length + assignment.length ≤ n)
+    (fiveSpan : 5 ≤ cnfShiftedWorkSpan n) :
+    frameSuccessSteps tokens assignment ≤ cnfSinglePhaseBudget n := by
+  have tokenBound : tokens.length ≤ n :=
+    Nat.le_trans (Nat.le_add_right tokens.length assignment.length)
+      combinedBound
+  have assignmentBound : assignment.length ≤ n :=
+    Nat.le_trans (Nat.le_add_left assignment.length tokens.length)
+      combinedBound
+  have folds := frameFolds_le_cubeTwelve n tokens assignment
+    combinedBound
+  have terminals := frameTerminalsBoot_le_cubeFour n tokens assignment
+    tokenBound assignmentBound fiveSpan
+  have componentBounds := Nat.add_le_add folds terminals
+  have totalNormalize :
+      cnfWorkPhaseCube n * 12 + cnfWorkPhaseCube n * 4 =
+        cnfWorkPhaseCube n * 16 :=
+    (Nat.mul_add (cnfWorkPhaseCube n) 12 4).symm
+  unfold frameSuccessSteps cnfSinglePhaseBudget
+  rw [frame_cost_regroup]
+  exact Nat.le_trans componentBounds (Nat.le_of_eq totalNormalize)
+
+theorem decoded_frame_payload_length_le_pair_size
+    (input certificate : BitString) (formula : CNFFormula)
+    (assignment : BitString)
+    (formulaDecoded : decodeEncodedCNF input = some formula)
+    (assignmentDecoded :
+      decodeAssignmentCertificate certificate = some assignment) :
+    (encodeFormulaTokens formula).length + assignment.length ≤
+      BitString.size (BitString.pair input certificate) := by
+  have formulaShape := encodeFormula_of_decode input formula formulaDecoded
+  have assignmentShape := encodeAssignmentCertificate_of_decode
+    certificate assignment assignmentDecoded
+  rw [← formulaShape, ← assignmentShape]
+  rw [BitString.size_pair_normalized]
+  unfold BitString.size
+  rw [encodeFormula_eq_padded_tokens, paddedFormulaTokenBits_length]
+  rw [encodeAssignmentCertificate_eq_token_bits]
+  rw [assignmentCertificateTokenBits_length]
+  rw [assignmentValueTokens_length]
+  let tokenLength := (encodeFormulaTokens formula).length
+  let assignmentLength := assignment.length
+  have oneTwo : 0 < 2 := by
+    change 1 ≤ 1 + 1
+    exact Nat.le_add_right 1 1
+  have tokenToDouble : tokenLength ≤ 2 * tokenLength :=
+    Nat.le_mul_of_pos_left tokenLength oneTwo
+  have tokenToEncoded : tokenLength ≤ 2 * tokenLength + 1 :=
+    Nat.le_trans tokenToDouble (Nat.le_add_right (2 * tokenLength) 1)
+  have assignmentToDouble : assignmentLength ≤ 2 * assignmentLength :=
+    Nat.le_mul_of_pos_left assignmentLength oneTwo
+  have assignmentToEncoded : assignmentLength ≤
+      2 * assignmentLength + 2 :=
+    Nat.le_trans assignmentToDouble
+      (Nat.le_add_right (2 * assignmentLength) 2)
+  have payloadToRaw := Nat.add_le_add tokenToEncoded assignmentToEncoded
+  have formulaRawToDouble : 2 * tokenLength + 1 ≤
+      2 * (2 * tokenLength + 1) :=
+    Nat.le_mul_of_pos_left (2 * tokenLength + 1) oneTwo
+  have assignmentRawToDouble : 2 * assignmentLength + 2 ≤
+      2 * (2 * assignmentLength + 2) :=
+    Nat.le_mul_of_pos_left (2 * assignmentLength + 2) oneTwo
+  have rawToDouble := Nat.add_le_add formulaRawToDouble
+    assignmentRawToDouble
+  have rawToPair := Nat.le_trans rawToDouble
+    (Nat.le_add_right
+      (2 * (2 * tokenLength + 1) +
+        2 * (2 * assignmentLength + 2)) 2)
+  exact Nat.le_trans payloadToRaw rawToPair
+
+theorem decoded_frameSuccessSteps_le_pair_singlePhase
+    (input certificate : BitString) (formula : CNFFormula)
+    (assignment : BitString)
+    (formulaDecoded : decodeEncodedCNF input = some formula)
+    (assignmentDecoded :
+      decodeAssignmentCertificate certificate = some assignment) :
+    frameSuccessSteps (encodeFormulaTokens formula) assignment ≤
+      cnfSinglePhaseBudget
+        (BitString.size (BitString.pair input certificate)) := by
+  let pairSize := BitString.size (BitString.pair input certificate)
+  have combinedBound := decoded_frame_payload_length_le_pair_size
+    input certificate formula assignment formulaDecoded assignmentDecoded
+  have fiveSpan : 5 ≤ cnfShiftedWorkSpan pairSize := by
+    unfold pairSize cnfShiftedWorkSpan
+    rw [BitString.size_pair_normalized]
+    change 5 ≤ 2 * BitString.size input +
+      2 * BitString.size certificate + 2 + 2
+    have oneInput : 1 ≤ BitString.size input := by
+      rw [← encodeFormula_of_decode input formula formulaDecoded]
+      unfold BitString.size
+      rw [encodeFormula_eq_padded_tokens, paddedFormulaTokenBits_length]
+      exact Nat.le_add_left 1 (2 * (encodeFormulaTokens formula).length)
+    have twoInput : 2 ≤ 2 * BitString.size input :=
+      Nat.mul_le_mul_left 2 oneInput
+    have base : 2 + 0 + 2 + 1 ≤
+        2 * BitString.size input +
+          2 * BitString.size certificate + 2 + 2 := by
+      have certificateNonnegative : 0 ≤
+          2 * BitString.size certificate := Nat.zero_le _
+      have first := Nat.add_le_add twoInput certificateNonnegative
+      have second := Nat.add_le_add_right first 2
+      have oneTwo : 1 ≤ 2 := by
+        change 1 ≤ 1 + 1
+        exact Nat.le_add_right 1 1
+      exact Nat.add_le_add second oneTwo
+    exact base
+  exact frameSuccessSteps_le_singlePhase pairSize
+    (encodeFormulaTokens formula) assignment combinedBound fiveSpan
+
 end FrameTraceDesign
 
 end PNP.Concrete
