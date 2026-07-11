@@ -10486,6 +10486,615 @@ theorem decodedClauseSemanticStepCount_le_pairSinglePhase
     (List.replicate assignment.length cnfMarkFalse) formulaRest literals
     assignmentBound counterBound segmentBound
 
+/-! ### Formula-wide canonical semantics and runtime composition -/
+
+set_option maxRecDepth 100000
+
+/-- Canonical clause-list work symbols, including the final formula finish. -/
+def formulaClauseWorkSymbols :
+    List (List CNFLiteral) → List WorkSymbol
+  | [] => [cnfFinish]
+  | clause :: rest =>
+      cnfSep ::
+        (literalListWorkSymbols clause ++
+          cnfFinish :: formulaClauseWorkSymbols rest)
+
+theorem formulaClauseWorkSymbols_cons_append
+    (clause : List CNFLiteral) (rest : List (List CNFLiteral))
+    (tail : List WorkSymbol) :
+    formulaClauseWorkSymbols (clause :: rest) ++ tail =
+      cnfSep ::
+        (literalListWorkSymbols clause ++
+          cnfFinish :: (formulaClauseWorkSymbols rest ++ tail)) := by
+  calc
+    formulaClauseWorkSymbols (clause :: rest) ++ tail =
+        (cnfSep ::
+          (literalListWorkSymbols clause ++
+            cnfFinish :: formulaClauseWorkSymbols rest)) ++ tail := rfl
+    _ = cnfSep ::
+        ((literalListWorkSymbols clause ++
+          cnfFinish :: formulaClauseWorkSymbols rest) ++ tail) := rfl
+    _ = cnfSep ::
+        (literalListWorkSymbols clause ++
+          ((cnfFinish :: formulaClauseWorkSymbols rest) ++ tail)) :=
+      congrArg (List.cons cnfSep)
+        (FrameTraceDesign.frameWork_append_assoc
+          (literalListWorkSymbols clause)
+          (cnfFinish :: formulaClauseWorkSymbols rest) tail)
+    _ = cnfSep ::
+        (literalListWorkSymbols clause ++
+          cnfFinish :: (formulaClauseWorkSymbols rest ++ tail)) := rfl
+
+theorem formulaClauseWorkSymbols_allowed
+    (clauses : List (List CNFLiteral))
+    (symbol : WorkSymbol)
+    (member : List.Mem symbol (formulaClauseWorkSymbols clauses)) :
+    FormulaScanSymbol symbol := by
+  induction clauses with
+  | nil =>
+      cases member with
+      | head => exact .finish
+      | tail _ impossible => contradiction
+  | cons clause rest ih =>
+      unfold formulaClauseWorkSymbols at member
+      cases member with
+      | head => exact .sep
+      | tail _ tailMember =>
+          have split := workSymbol_mem_append_cases
+            (literalListWorkSymbols clause)
+            (cnfFinish :: formulaClauseWorkSymbols rest)
+            symbol tailMember
+          cases split with
+          | inl literalMember =>
+              exact literalListWorkSymbols_allowed clause symbol literalMember
+          | inr suffixMember =>
+              cases suffixMember with
+              | head => exact .finish
+              | tail _ restMember => exact ih restMember
+
+theorem cnfTokenWorkSymbols_encodeLiteralTokens
+    (literal : CNFLiteral) :
+    cnfTokenWorkSymbols (encodeLiteralTokens literal) =
+      literalWorkSymbols literal := by
+  unfold encodeLiteralTokens literalWorkSymbols
+  cases literal.positive
+  · change cnfF ::
+        cnfTokenWorkSymbols (encodeUnaryTokens literal.variableIndex) = _
+    rw [cnfTokenWorkSymbols_encodeUnaryTokens]
+    unfold FrameTraceDesign.assignmentValueWorkSymbol
+    rfl
+  · change cnfT ::
+        cnfTokenWorkSymbols (encodeUnaryTokens literal.variableIndex) = _
+    rw [cnfTokenWorkSymbols_encodeUnaryTokens]
+    unfold FrameTraceDesign.assignmentValueWorkSymbol
+    rfl
+
+theorem cnfTokenWorkSymbols_encodeLiteralListTokens
+    (literals : List CNFLiteral) :
+    cnfTokenWorkSymbols (encodeLiteralListTokens literals) =
+      literalListWorkSymbols literals := by
+  induction literals with
+  | nil => rfl
+  | cons literal rest ih =>
+      unfold encodeLiteralListTokens literalListWorkSymbols
+      rw [cnfTokenWorkSymbols_append]
+      rw [cnfTokenWorkSymbols_encodeLiteralTokens]
+      rw [ih]
+
+theorem cnfTokenWorkSymbols_encodeClauseTokens
+    (clause : List CNFLiteral) :
+    cnfTokenWorkSymbols (encodeClauseTokens clause) =
+      cnfSep :: (literalListWorkSymbols clause ++ [cnfFinish]) := by
+  unfold encodeClauseTokens
+  change cnfSep ::
+      cnfTokenWorkSymbols (encodeLiteralListTokens clause ++ [.finish]) = _
+  rw [cnfTokenWorkSymbols_append]
+  rw [cnfTokenWorkSymbols_encodeLiteralListTokens]
+  rfl
+
+theorem cnfTokenWorkSymbols_encodeFormulaClauses
+    (clauses : List (List CNFLiteral)) :
+    cnfTokenWorkSymbols (encodeClauseListTokens clauses ++ [.finish]) =
+      formulaClauseWorkSymbols clauses := by
+  induction clauses with
+  | nil => rfl
+  | cons clause rest ih =>
+      unfold encodeClauseListTokens
+      rw [token_append_assoc_constructive]
+      rw [cnfTokenWorkSymbols_append]
+      rw [cnfTokenWorkSymbols_encodeClauseTokens]
+      rw [ih]
+      calc
+        (cnfSep ::
+            (literalListWorkSymbols clause ++ [cnfFinish])) ++
+            formulaClauseWorkSymbols rest =
+          cnfSep ::
+            ((literalListWorkSymbols clause ++ [cnfFinish]) ++
+              formulaClauseWorkSymbols rest) := rfl
+        _ = cnfSep ::
+            (literalListWorkSymbols clause ++
+              ([cnfFinish] ++ formulaClauseWorkSymbols rest)) :=
+          congrArg (List.cons cnfSep)
+            (FrameTraceDesign.frameWork_append_assoc
+              (literalListWorkSymbols clause) [cnfFinish]
+              (formulaClauseWorkSymbols rest))
+        _ = cnfSep ::
+            (literalListWorkSymbols clause ++
+              cnfFinish :: formulaClauseWorkSymbols rest) := rfl
+        _ = formulaClauseWorkSymbols (clause :: rest) := rfl
+
+theorem checkCNF_eq_checkClauses_of_width
+    (formula : CNFFormula) (assignment : BitString)
+    (width : assignment.length = formula.variableCount) :
+    checkCNF formula assignment =
+      checkClauses formula.clauses assignment := by
+  have widthCheck :=
+    (natEqual_eq_true_iff assignment.length formula.variableCount).mpr width
+  unfold checkCNF
+  rw [widthCheck]
+  rfl
+
+theorem clauseStart_separator_step (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.clauseStart left
+          (cnfSep :: suffix)) =
+      some (workConfigAtWord CNFWorkState.clauseNeedLiteral
+        (cnfSep :: left) suffix) := by
+  rfl
+
+theorem clauseStart_formulaFinish_step
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.clauseStart left
+          (cnfFinish :: suffix)) =
+      some (workConfigAtWord CNFWorkState.finalCheck
+        (cnfFinish :: left) suffix) := by
+  rfl
+
+theorem finalCheck_boundary_step
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.finalCheck left
+          (cnfBoundaryGuard :: suffix)) =
+      some (workConfigAtWord CNFWorkState.accept left
+        (cnfBoundaryGuard :: suffix)) := by
+  rfl
+
+/-- The exact number of transitions taken by canonical formula evaluation.
+Evaluation stops at the first false clause, as the machine does. -/
+def formulaSemanticStepCount (assignment : BitString)
+    (counter : List WorkSymbol) : List (List CNFLiteral) → Nat
+  | [] => 2
+  | clause :: rest =>
+      let clauseSteps := clauseSemanticStepCount assignment counter
+        (formulaClauseWorkSymbols rest) clause
+      if checkClause clause assignment then
+        (1 + clauseSteps) +
+          formulaSemanticStepCount assignment counter rest
+      else
+        1 + clauseSteps
+
+theorem formula_semantic_count_exact
+    (clauses : List (List CNFLiteral)) (assignment : BitString)
+    (counter left right : List WorkSymbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse) :
+    ∃ final,
+      workRunExact? cnfWorkMachine
+          (formulaSemanticStepCount assignment counter clauses)
+          (workConfigAtWord CNFWorkState.clauseStart left
+            (formulaClauseWorkSymbols clauses ++
+              (cnfBoundaryGuard ::
+                (counter ++
+                  (cnfFinish ::
+                    (assignmentWorkSymbols assignment ++
+                      (cnfRootGuard :: right))))))) =
+        some final ∧
+      final.state =
+        if checkClauses clauses assignment then
+          CNFWorkState.accept
+        else
+          CNFWorkState.reject := by
+  induction clauses generalizing left with
+  | nil =>
+      let suffix := counter ++
+        (cnfFinish ::
+          (assignmentWorkSymbols assignment ++ (cnfRootGuard :: right)))
+      have hFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+        (clauseStart_formulaFinish_step left
+          (cnfBoundaryGuard :: suffix))
+      have hBoundary := workRunExact?_one_of_step cnfWorkMachine _ _
+        (finalCheck_boundary_step (cnfFinish :: left) suffix)
+      have complete := workRunExact?_compose cnfWorkMachine 1 1
+        _ _ _ hFinish hBoundary
+      refine ⟨workConfigAtWord CNFWorkState.accept (cnfFinish :: left)
+          (cnfBoundaryGuard :: suffix), ?_, ?_⟩
+      · unfold formulaSemanticStepCount formulaClauseWorkSymbols
+        unfold suffix at complete
+        exact complete
+      · rfl
+  | cons clause rest ih =>
+      let certificateTail := cnfBoundaryGuard ::
+        (counter ++
+          (cnfFinish ::
+            (assignmentWorkSymbols assignment ++ (cnfRootGuard :: right))))
+      have separatorRun := workRunExact?_one_of_step cnfWorkMachine _ _
+        (clauseStart_separator_step left
+          (literalListWorkSymbols clause ++
+            cnfFinish ::
+              (formulaClauseWorkSymbols rest ++ certificateTail)))
+      have clauseRun := clause_semantic_count_exact clause assignment counter
+        (formulaClauseWorkSymbols rest) (cnfSep :: left) right
+        counterAllowed (formulaClauseWorkSymbols_allowed rest)
+      have throughClause := workRunExact?_compose cnfWorkMachine 1
+        (clauseSemanticStepCount assignment counter
+          (formulaClauseWorkSymbols rest) clause)
+        _ _ _ separatorRun clauseRun
+      cases clauseCheck : checkClause clause assignment with
+      | false =>
+          refine ⟨clauseSemanticFinal false
+              (pushWorkLeft (literalListWorkSymbols clause)
+                (cnfSep :: left))
+              (formulaClauseWorkSymbols rest ++ certificateTail), ?_, ?_⟩
+          · unfold formulaSemanticStepCount
+            rw [clauseCheck]
+            rw [clauseCheck] at throughClause
+            unfold certificateTail
+            rw [formulaClauseWorkSymbols_cons_append]
+            exact throughClause
+          · unfold clauseSemanticFinal
+            unfold checkClauses
+            rw [clauseCheck]
+            rfl
+      | true =>
+          let extendedLeft := cnfFinish ::
+            pushWorkLeft (literalListWorkSymbols clause) (cnfSep :: left)
+          rcases ih extendedLeft with ⟨final, remainingRun, finalState⟩
+          rw [clauseCheck] at throughClause
+          unfold clauseSemanticFinal at throughClause
+          have complete := workRunExact?_compose cnfWorkMachine
+            (1 + clauseSemanticStepCount assignment counter
+              (formulaClauseWorkSymbols rest) clause)
+            (formulaSemanticStepCount assignment counter rest)
+            _ _ _ throughClause remainingRun
+          refine ⟨final, ?_, ?_⟩
+          · unfold formulaSemanticStepCount
+            rw [clauseCheck]
+            unfold extendedLeft at complete
+            unfold certificateTail at complete
+            rw [formulaClauseWorkSymbols_cons_append]
+            exact complete
+          · unfold checkClauses
+            rw [clauseCheck]
+            exact finalState
+
+theorem canonical_formula_semantic_count_exact
+    (formula : CNFFormula) (assignment : BitString)
+    (counter left right : List WorkSymbol)
+    (width : assignment.length = formula.variableCount)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse) :
+    ∃ final,
+      workRunExact? cnfWorkMachine
+          (formulaSemanticStepCount assignment counter formula.clauses)
+          (workConfigAtWord CNFWorkState.clauseStart left
+            (cnfTokenWorkSymbols
+                (encodeClauseListTokens formula.clauses ++ [.finish]) ++
+              (cnfBoundaryGuard ::
+                (counter ++
+                  (cnfFinish ::
+                    (assignmentWorkSymbols assignment ++
+                      (cnfRootGuard :: right))))))) =
+        some final ∧
+      final.state =
+        if checkCNF formula assignment then
+          CNFWorkState.accept
+        else
+          CNFWorkState.reject := by
+  rw [cnfTokenWorkSymbols_encodeFormulaClauses]
+  rcases formula_semantic_count_exact formula.clauses assignment counter
+    left right counterAllowed with ⟨final, exactRun, finalState⟩
+  refine ⟨final, exactRun, ?_⟩
+  rw [checkCNF_eq_checkClauses_of_width formula assignment width]
+  exact finalState
+
+theorem formulaClauseWorkSymbols_length_cons
+    (clause : List CNFLiteral) (rest : List (List CNFLiteral)) :
+    (formulaClauseWorkSymbols (clause :: rest)).length =
+      ((literalListWorkSymbols clause).length + 2) +
+        (formulaClauseWorkSymbols rest).length := by
+  calc
+    (formulaClauseWorkSymbols (clause :: rest)).length =
+        Nat.succ
+          (literalListWorkSymbols clause ++
+            cnfFinish :: formulaClauseWorkSymbols rest).length := rfl
+    _ = Nat.succ
+        ((literalListWorkSymbols clause).length +
+          (cnfFinish :: formulaClauseWorkSymbols rest).length) :=
+      congrArg Nat.succ
+        (workSymbol_length_append (literalListWorkSymbols clause)
+          (cnfFinish :: formulaClauseWorkSymbols rest))
+    _ = Nat.succ
+        ((literalListWorkSymbols clause).length +
+          Nat.succ (formulaClauseWorkSymbols rest).length) := rfl
+    _ = ((literalListWorkSymbols clause).length + 2) +
+        (formulaClauseWorkSymbols rest).length := by
+      rw [Nat.add_succ]
+      rw [Nat.succ_add, Nat.succ_add]
+
+private theorem formulaNatAddMulClean (a b c : Nat) :
+    (a + b) * c = a * c + b * c := by
+  induction c with
+  | zero => rfl
+  | succ c ih =>
+      change (a + b) * c + (a + b) =
+        (a * c + a) + (b * c + b)
+      rw [ih]
+      exact FrameTraceDesign.frame_add_four_reorder
+        (a * c) (b * c) a b
+
+private theorem one_le_formulaUnitCharge (n : Nat) :
+    1 ≤ cnfShiftedWorkSpan n * 12 := by
+  have oneSpan : 1 ≤ cnfShiftedWorkSpan n := by
+    unfold cnfShiftedWorkSpan
+    change Nat.succ 0 ≤ Nat.succ (Nat.succ n)
+    exact Nat.succ_le_succ (Nat.zero_le (Nat.succ n))
+  have twelvePositive : 0 < 12 := Nat.zero_lt_succ 11
+  exact Nat.le_trans oneSpan
+    (Nat.le_mul_of_pos_right (cnfShiftedWorkSpan n) twelvePositive)
+
+private theorem formulaCharge_plus_successor_mul
+    (index charge : Nat) :
+    charge + (index + 1) * charge =
+      (Nat.succ index + 1) * charge := by
+  change charge + Nat.succ index * charge =
+    Nat.succ (Nat.succ index) * charge
+  calc
+    charge + Nat.succ index * charge =
+        charge + (index * charge + charge) :=
+      congrArg (Nat.add charge) (Nat.succ_mul index charge)
+    _ = (index * charge + charge) + charge := by
+      rw [← Nat.add_assoc]
+      rw [Nat.add_comm charge (index * charge)]
+    _ = Nat.succ index * charge + charge :=
+      congrArg (fun value => value + charge)
+        (Nat.succ_mul index charge).symm
+    _ = Nat.succ (Nat.succ index) * charge :=
+      (Nat.succ_mul (Nat.succ index) charge).symm
+
+private theorem formulaTwo_le_twoCharges (charge : Nat)
+    (oneCharge : 1 ≤ charge) :
+    2 ≤ 2 * charge := by
+  have pair := Nat.add_le_add oneCharge oneCharge
+  have normalize : charge + charge = 2 * charge := by
+    calc
+      charge + charge = 1 * charge + charge :=
+        congrArg (fun value => value + charge) (Nat.one_mul charge).symm
+      _ = 2 * charge := (Nat.succ_mul 1 charge).symm
+  exact Nat.le_trans pair (Nat.le_of_eq normalize)
+
+theorem formulaSemanticStepCount_le_encodedCharge
+    (n : Nat) (assignment : BitString) (counter : List WorkSymbol)
+    (clauses : List (List CNFLiteral))
+    (assignmentBound : assignment.length ≤ n)
+    (counterBound : counter.length ≤ n)
+    (formulaBound : (formulaClauseWorkSymbols clauses).length ≤ n) :
+    formulaSemanticStepCount assignment counter clauses ≤
+      ((formulaClauseWorkSymbols clauses).length + 1) *
+        (cnfShiftedWorkSpan n * 12) := by
+  induction clauses with
+  | nil =>
+      unfold formulaSemanticStepCount formulaClauseWorkSymbols
+      exact formulaTwo_le_twoCharges (cnfShiftedWorkSpan n * 12)
+        (one_le_formulaUnitCharge n)
+  | cons clause rest ih =>
+      have normalizedFormulaBound :
+          ((literalListWorkSymbols clause).length + 2) +
+              (formulaClauseWorkSymbols rest).length ≤ n := by
+        rw [formulaClauseWorkSymbols_length_cons] at formulaBound
+        exact formulaBound
+      have clauseSegmentBound :
+          (literalListWorkSymbols clause).length + 1 +
+              (formulaClauseWorkSymbols rest).length ≤ n := by
+        have oneTwo : 1 ≤ 2 := Nat.le_succ 1
+        have literalToEncoded := Nat.add_le_add_left oneTwo
+          (literalListWorkSymbols clause).length
+        have withRest := Nat.add_le_add_right literalToEncoded
+          (formulaClauseWorkSymbols rest).length
+        exact Nat.le_trans withRest normalizedFormulaBound
+      have restFormulaBound :
+          (formulaClauseWorkSymbols rest).length ≤ n :=
+        Nat.le_trans
+          (Nat.le_add_left (formulaClauseWorkSymbols rest).length
+            ((literalListWorkSymbols clause).length + 2))
+          normalizedFormulaBound
+      have clauseBound := clauseSemanticStepCount_le_encodedCharge n
+        assignment counter (formulaClauseWorkSymbols rest) clause
+        assignmentBound counterBound clauseSegmentBound
+      have prefixBound :
+          1 + clauseSemanticStepCount assignment counter
+              (formulaClauseWorkSymbols rest) clause ≤
+            ((literalListWorkSymbols clause).length + 2) *
+              (cnfShiftedWorkSpan n * 12) := by
+        have combined := Nat.add_le_add (one_le_formulaUnitCharge n)
+          clauseBound
+        exact Nat.le_trans combined
+          (Nat.le_of_eq
+            (formulaCharge_plus_successor_mul
+              (literalListWorkSymbols clause).length
+              (cnfShiftedWorkSpan n * 12)))
+      have restBound := ih restFormulaBound
+      have distributed := formulaNatAddMulClean
+        ((literalListWorkSymbols clause).length + 2)
+        ((formulaClauseWorkSymbols rest).length + 1)
+        (cnfShiftedWorkSpan n * 12)
+      have coefficient :
+          ((literalListWorkSymbols clause).length + 2) +
+              ((formulaClauseWorkSymbols rest).length + 1) =
+            (((literalListWorkSymbols clause).length + 2) +
+              (formulaClauseWorkSymbols rest).length) + 1 :=
+        (Nat.add_assoc ((literalListWorkSymbols clause).length + 2)
+          (formulaClauseWorkSymbols rest).length 1).symm
+      have normalize :
+          ((literalListWorkSymbols clause).length + 2) *
+                (cnfShiftedWorkSpan n * 12) +
+              ((formulaClauseWorkSymbols rest).length + 1) *
+                (cnfShiftedWorkSpan n * 12) =
+            ((((literalListWorkSymbols clause).length + 2) +
+              (formulaClauseWorkSymbols rest).length) + 1) *
+                (cnfShiftedWorkSpan n * 12) :=
+        distributed.symm.trans
+          (congrArg (fun count =>
+            count * (cnfShiftedWorkSpan n * 12)) coefficient)
+      cases clauseCheck : checkClause clause assignment with
+      | false =>
+          unfold formulaSemanticStepCount
+          rw [clauseCheck]
+          rw [formulaClauseWorkSymbols_length_cons]
+          exact Nat.le_trans prefixBound
+            (Nat.le_trans
+              (Nat.le_add_right
+                (((literalListWorkSymbols clause).length + 2) *
+                  (cnfShiftedWorkSpan n * 12))
+                (((formulaClauseWorkSymbols rest).length + 1) *
+                  (cnfShiftedWorkSpan n * 12)))
+              (Nat.le_of_eq normalize))
+      | true =>
+          unfold formulaSemanticStepCount
+          rw [clauseCheck]
+          rw [formulaClauseWorkSymbols_length_cons]
+          exact Nat.le_trans (Nat.add_le_add prefixBound restBound)
+            (Nat.le_of_eq normalize)
+
+theorem formulaSemanticStepCount_le_singlePhase
+    (n : Nat) (assignment : BitString) (counter : List WorkSymbol)
+    (clauses : List (List CNFLiteral))
+    (assignmentBound : assignment.length ≤ n)
+    (counterBound : counter.length ≤ n)
+    (formulaBound : (formulaClauseWorkSymbols clauses).length ≤ n) :
+    formulaSemanticStepCount assignment counter clauses ≤
+      cnfSinglePhaseBudget n := by
+  have accumulated := formulaSemanticStepCount_le_encodedCharge n
+    assignment counter clauses assignmentBound counterBound formulaBound
+  have outerToSuccessor := Nat.add_le_add_right formulaBound 1
+  have successorToSpan : n + 1 ≤ cnfShiftedWorkSpan n := by
+    unfold cnfShiftedWorkSpan
+    exact Nat.add_le_add_left (Nat.le_succ 1) n
+  have outerBound : (formulaClauseWorkSymbols clauses).length + 1 ≤
+      cnfShiftedWorkSpan n :=
+    Nat.le_trans outerToSuccessor successorToSpan
+  exact ClauseLiteralDesign.clauseLiteral_accumulated_le_singlePhaseBudget
+    n ((formulaClauseWorkSymbols clauses).length + 1)
+    (cnfShiftedWorkSpan n * 12)
+    (formulaSemanticStepCount assignment counter clauses)
+    outerBound (Nat.le_refl (cnfShiftedWorkSpan n * 12)) accumulated
+
+theorem formulaClauseWorkSymbols_length_le_encodeFormulaTokens
+    (formula : CNFFormula) :
+    (formulaClauseWorkSymbols formula.clauses).length ≤
+      (encodeFormulaTokens formula).length := by
+  rw [← cnfTokenWorkSymbols_encodeFormulaClauses]
+  rw [cnfTokenWorkSymbols_length]
+  have formulaShape : encodeFormulaTokens formula =
+      encodeUnaryTokens formula.variableCount ++
+        (encodeClauseListTokens formula.clauses ++ [CNFToken.finish]) := by
+    unfold encodeFormulaTokens encodeCNFTokens
+    exact token_append_assoc_constructive
+      (encodeUnaryTokens formula.variableCount)
+      (encodeClauseListTokens formula.clauses) [CNFToken.finish]
+  rw [formulaShape]
+  exact Nat.le_trans
+    (Nat.le_add_left
+      (encodeClauseListTokens formula.clauses ++ [CNFToken.finish]).length
+      (encodeUnaryTokens formula.variableCount).length)
+    (Nat.le_of_eq
+      (token_length_append_constructive
+        (encodeUnaryTokens formula.variableCount)
+        (encodeClauseListTokens formula.clauses ++
+          [CNFToken.finish])).symm)
+
+theorem decodedFormulaSemanticStepCount_le_pairSinglePhase
+    (input certificate : BitString) (formula : CNFFormula)
+    (assignment : BitString)
+    (formulaDecoded : decodeEncodedCNF input = some formula)
+    (assignmentDecoded :
+      decodeAssignmentCertificate certificate = some assignment) :
+    formulaSemanticStepCount assignment
+        (List.replicate assignment.length cnfMarkFalse) formula.clauses ≤
+      cnfSinglePhaseBudget
+        (BitString.size (BitString.pair input certificate)) := by
+  have combinedBound :=
+    FrameTraceDesign.decoded_frame_payload_length_le_pair_size
+      input certificate formula assignment formulaDecoded assignmentDecoded
+  have formulaTokenBound : (encodeFormulaTokens formula).length ≤
+      BitString.size (BitString.pair input certificate) :=
+    Nat.le_trans
+      (Nat.le_add_right (encodeFormulaTokens formula).length
+        assignment.length)
+      combinedBound
+  have assignmentBound : assignment.length ≤
+      BitString.size (BitString.pair input certificate) :=
+    Nat.le_trans
+      (Nat.le_add_left assignment.length
+        (encodeFormulaTokens formula).length)
+      combinedBound
+  have formulaBound : (formulaClauseWorkSymbols formula.clauses).length ≤
+      BitString.size (BitString.pair input certificate) :=
+    Nat.le_trans
+      (formulaClauseWorkSymbols_length_le_encodeFormulaTokens formula)
+      formulaTokenBound
+  have counterBound :
+      (List.replicate assignment.length cnfMarkFalse).length ≤
+        BitString.size (BitString.pair input certificate) := by
+    rw [workSymbol_replicate_length]
+    exact assignmentBound
+  exact formulaSemanticStepCount_le_singlePhase
+    (BitString.size (BitString.pair input certificate)) assignment
+    (List.replicate assignment.length cnfMarkFalse) formula.clauses
+    assignmentBound counterBound formulaBound
+
+theorem canonical_formula_semantic_withinPairSinglePhase
+    (input certificate : BitString) (formula : CNFFormula)
+    (assignment : BitString) (left right : List WorkSymbol)
+    (formulaDecoded : decodeEncodedCNF input = some formula)
+    (assignmentDecoded :
+      decodeAssignmentCertificate certificate = some assignment)
+    (width : assignment.length = formula.variableCount) :
+    ∃ final,
+      formulaSemanticStepCount assignment
+          (List.replicate assignment.length cnfMarkFalse) formula.clauses ≤
+        cnfSinglePhaseBudget
+          (BitString.size (BitString.pair input certificate)) ∧
+      workRunExact? cnfWorkMachine
+          (formulaSemanticStepCount assignment
+            (List.replicate assignment.length cnfMarkFalse) formula.clauses)
+          (workConfigAtWord CNFWorkState.clauseStart left
+            (cnfTokenWorkSymbols
+                (encodeClauseListTokens formula.clauses ++ [.finish]) ++
+              (cnfBoundaryGuard ::
+                (List.replicate assignment.length cnfMarkFalse ++
+                  (cnfFinish ::
+                    (assignmentWorkSymbols assignment ++
+                      (cnfRootGuard :: right))))))) =
+        some final ∧
+      final.state =
+        if checkCNF formula assignment then
+          CNFWorkState.accept
+        else
+          CNFWorkState.reject := by
+  have phaseBound := decodedFormulaSemanticStepCount_le_pairSinglePhase
+    input certificate formula assignment formulaDecoded assignmentDecoded
+  have counterAllowed : ∀ symbol,
+      List.Mem symbol (List.replicate assignment.length cnfMarkFalse) →
+        symbol = cnfMarkFalse := by
+    intro symbol member
+    exact FrameTraceDesign.mem_replicate_workSymbol_eq
+      assignment.length cnfMarkFalse symbol member
+  rcases canonical_formula_semantic_count_exact formula assignment
+    (List.replicate assignment.length cnfMarkFalse) left right width
+    counterAllowed with ⟨final, exactRun, finalState⟩
+  exact ⟨final, phaseBound, exactRun, finalState⟩
+
 end ClauseLiteralCostDesign
 
 end PNP.Concrete
