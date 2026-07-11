@@ -8,7 +8,7 @@ The current Lean development contains a conditional theorem bridge corresponding
 CheckPCCPackexp(GeneratePCCPack()) = accept => P = NP
 ```
 
-That bridge still depends on five project-specific axioms and does **not** constitute a Lean proof of
+That bridge still depends on four project-specific axioms and does **not** constitute a Lean proof of
 `P = NP`. It is also not a complete Lean reproof of the custom JavaScript checker, the full
 residual-slack package, the complete SAT reduction, or the compiler/refinement connecting the new
 finite charged-pipeline complexity interface to the raw machine kernel. The purpose of the Lean
@@ -46,6 +46,16 @@ lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
 lean/PNP/Concrete/Complexity.lean
 lean/PNP/Concrete/Target.lean
+lean/PNP/Concrete/WorkInput.lean
+lean/PNP/Concrete/WorkMachine.lean
+lean/PNP/Concrete/CNF.lean
+lean/PNP/Concrete/CNFVerifier.lean
+lean/PNP/Concrete/CNFWorkInput.lean
+lean/PNP/Concrete/CNFWorkMachine.lean
+lean/PNP/Concrete/CNFWorkTransitions.lean
+lean/PNP/Concrete/CNFWorkFrameCorrectness.lean
+lean/PNP/Concrete/CNFWorkCorrectness.lean
+lean/PNP/Concrete/CNFWorkUniversalCorrectness.lean
 lean/PNP/Complexity.lean
 lean/PNP/SAT.lean
 lean/PNP/LockedNANDMacros.lean
@@ -66,6 +76,10 @@ lean-audit/PNPConcreteBitStringAxiomAudit.lean
 lean-audit/PNPConcreteMachineAxiomAudit.lean
 lean-audit/PNPConcreteComplexityAxiomAudit.lean
 lean-audit/PNPConcreteTargetAxiomAudit.lean
+lean-audit/PNPConcreteCNFAxiomAudit.lean
+lean-audit/PNPConcreteCNFVerifierAxiomAudit.lean
+lean-audit/PNPConcreteCNFWorkInputAxiomAudit.lean
+lean-audit/PNPConcreteCNFWorkAxiomAudit.lean
 lean-audit/PNPNANDSemanticsAxiomAudit.lean
 lean-audit/PNPNANDEnumeratorAxiomAudit.lean
 lean-audit/PNPNANDTruthTableAxiomAudit.lean
@@ -120,6 +134,59 @@ does not compile or refine a composite pipeline into one raw single-tape machine
 `Formal.ConcreteComplexityMachineLink` remains blocked. See
 [`lean_concrete_complexity.md`](./lean_concrete_complexity.md).
 
+### Direct concrete CNF verifier
+
+The concrete CNF path is a closed raw-machine instance rather than an invocation of the still-
+missing general pipeline compiler. `lean/PNP/Concrete/CNF.lean` defines canonical encodings for
+finite CNF formulae and assignments, propositional satisfaction, the executable
+`checkEncodedCertificate`, a linear certificate-size bound, and the language
+`PNP.Concrete.CNFSAT`. `CNFWorkInput.lean` proves that canonical pairing and the work-tape layout
+agree exactly. `CNFWorkMachine.lean` gives a finite work machine, compiles it to the raw machine
+`cnfCompiledMachine`, and defines the explicit raw-input polynomial
+
+```text
+cnfCompiledStepPolynomial(n) = 6 * (8 + 64 * (n + 2)^3).
+```
+
+`CNFWorkCorrectness.lean` and `CNFWorkUniversalCorrectness.lean` prove the framing, width,
+formula-grammar, assignment-grammar, clause, literal, restoration, semantic, and cost cases. Their
+final universal surface is:
+
+```lean
+theorem cnfCompiled_accept_iff_check (input certificate : BitString) :
+    boundedDecide cnfCompiledMachine
+        (cnfCompiledStepPolynomial.eval
+          (BitString.size (BitString.pair input certificate)))
+        (BitString.pair input certificate) = .accept ↔
+      checkEncodedCertificate input certificate = true
+
+theorem cnfCompiled_reject_iff_check_false (input certificate : BitString) :
+    boundedDecide cnfCompiledMachine
+        (cnfCompiledStepPolynomial.eval
+          (BitString.size (BitString.pair input certificate)))
+        (BitString.pair input certificate) = .reject ↔
+      checkEncodedCertificate input certificate = false
+
+theorem cnfCompiled_ne_timeout (input certificate : BitString) :
+    boundedDecide cnfCompiledMachine
+        (cnfCompiledStepPolynomial.eval
+          (BitString.size (BitString.pair input certificate)))
+        (BitString.pair input certificate) ≠ .timeout
+
+def cnfConcreteVerifier : PolynomialTimeVerifier CNFSAT
+theorem cnfSATInNP : InNP CNFSAT
+```
+
+The verifier program has `.paired` input mode and its decision is literally
+`.machine cnfCompiledMachine cnfCompiledStepPolynomial`. The verifier-level input-size bound
+substitutes `6n+6` for the paired raw length, while certificates are bounded by `2n+2`. The four
+dedicated CNF axiom transcripts cover the codec/semantics, work-input bridge, generic verifier
+bridge, and every public universal-correctness declaration; their closures are empty.
+
+This proves `CNFSAT ∈ NP`. It does **not** prove `CNFSAT ∈ P`, supply a deterministic
+polynomial-time SAT algorithm, establish NP-hardness or NP-completeness, connect the legacy
+string-handle `PNP.SAT` label to `PNP.Concrete.CNFSAT`, or prove `P = NP`.
+
 `lean/PNP/Complexity.lean` defines the witness-level objects:
 
 ```text
@@ -170,23 +237,23 @@ dependency evidence. The deterministic output is mirrored byte-for-byte at
 [`status/LEAN_THEOREM_INVENTORY.json`](../status/LEAN_THEOREM_INVENTORY.json) and
 [`public/pnp-theorem-inventory.json`](../public/pnp-theorem-inventory.json).
 
-For the eight earned intermediate rows, the inventory also carries 34 detailed theorem types. Credit
+For configured intermediate rows, the inventory also carries detailed theorem types. Credit
 requires exact names/kinds, empty axiom closures, per-name domain-separated kernel-type SHA-256
 matches, and the pinned closure of all Lean sources plus toolchain/Lake pins and the inventory
-probe. The current compiled environment contains 2,484 declarations, 883 theorems, 793
-assumption-free theorems, five axioms, 26 source modules, and 36 excluded private declarations.
-This milestone binding is separate from the concrete publication gate; eight of eleven rows are
-earned.
+probe. Exact declaration, theorem, assumption-free-theorem, axiom, module, excluded-private, and
+milestone counts are generated from the compiled environment rather than duplicated here. This
+milestone binding is separate from the concrete publication gate.
 
 Publication is controlled by a separate, fail-closed gate for compatibility declaration
 `PNP.Main.p_eq_np` and concrete target `PNP.Main.ConcretePEqualsNP`. The target is present as an
 axiom-free definition, but the compatibility/root theorem is absent. The expected target
 type/value, root type, axiom-closure, and source-closure fingerprints are intentionally `null`;
 unset fingerprints do not match and cannot activate the gate. Raw-machine linkage is still
-ineligible, and the abstract `PNP.PEqualsNP` bridge remains ineligible. See
+ineligible for the general charged-pipeline target, even though the direct CNF verifier is linked
+to one raw machine. The abstract `PNP.PEqualsNP` bridge remains ineligible. See
 [`lean_theorem_inventory.md`](./lean_theorem_inventory.md) for the full contract and commands.
 
-The inventory and false gate generate the current root TeX/PDF: a concise seven-page
+The inventory and false gate generate the current root TeX/PDF: a concise eight-page
 formal-reconstruction report with no theorem emission. It replaces the historical 56-page claim
 manuscript at the repository root; that historical artifact is available only through the pinned
 legacy coordinate recorded under [`archive/legacy-v0/`](../archive/legacy-v0/README.md).
@@ -235,7 +302,7 @@ has no polynomial-runtime claim and is not the historical residual-band minimize
 do not formalize arbitrary support profiles or the locked-NAND global replacement claim. See
 `docs/lean_nand_reference_minimum.md` for the audited boundary.
 
-## SAT layer
+## Legacy witness-model SAT layer
 
 `lean/PNP/SAT.lean` separates SAT membership in NP from SAT hardness:
 
@@ -248,7 +315,9 @@ def SATHard : Prop :=
 def sat_np_complete_from_hardness (hHard : SATHard) : NPComplete SAT
 ```
 
-The SAT verifier is still an abstract witness handle in this pass.
+This `PNP.SAT` object is an ordinary string-labelled value, not an axiom. Its verifier is still an
+abstract witness handle, and it is deliberately not identified with `PNP.Concrete.CNFSAT`. The
+direct raw-machine theorem above establishes NP membership only for the concrete language.
 
 ## Concrete locked-NAND macro layer
 
@@ -458,10 +527,9 @@ accepted PCC package
 -> P = NP
 ```
 
-The source audit permits exactly these five project-specific axioms in the current root closure:
+The source audit permits exactly these four project-specific axioms in the current root closure:
 
 ```text
-PNP.SAT
 PNP.LockedNANDThreshold
 PNP.ResidualBandExactMinimization
 PNP.GeneratePCCPack
@@ -496,6 +564,9 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 16. Source-derived locked-baseline occurrence, check, prefix, and displayed-gate accounting.
 17. Finite baseline conditions and exact reference minima for the five square local macros, excluding the one-output final conjunction.
 18. The conditional locked-NAND unsat/sat minimum boundary and residual-slack-at-most-four deduction from six explicit typed semantic premises.
+19. Canonical concrete CNF and bounded-assignment semantics, including Boolean-checker correctness.
+20. Universal accept/reject/no-timeout correctness and an explicit polynomial bound for a finite
+    raw machine on every paired CNF input/certificate, yielding `CNFSAT ∈ NP`.
 ```
 
 ## Explicit trust base after this pass
@@ -505,7 +576,8 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 2. Semantic adequacy of the PCCMin and ZeroSlack certificate fields.
 3. The locked-NAND-to-residual-band reduction theorem.
 4. The global SAT-to-locked-NAND builder and threshold theorem beyond the checked local macro and prefix semantics.
-5. SAT NP-hardness for concrete complexity definitions.
+5. A deterministic polynomial-time decider proving `CNFSAT ∈ P`, together with concrete SAT
+   NP-hardness/NP-completeness; the current direct verifier proves only `CNFSAT ∈ NP`.
 6. A compiler/refinement proving that every finite charged function, decision, and verifier
    pipeline is implemented with the stated costs by the selected raw machine model.
 ```
@@ -522,10 +594,12 @@ The highest-value next targets are:
 5. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
 6. Compile/refine the finite charged-pipeline interface to raw machine programs while preserving
    semantics and polynomial runtime/output bounds.
-7. Formalize or import SAT NP-hardness for those definitions.
+7. Formalize or import concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
+   a deterministic decider.
 8. Formalize checker/reflection soundness for the PCC package.
 ```
 
 A passing Lean build is a real checked artifact. At this stage it checks an assumption-free status
-declaration, local results, and an explicitly assumption-bearing conditional bridge. It is not a
-root theorem or an independent Lean proof of the report's conclusion.
+declaration, the direct theorem `CNFSAT ∈ NP`, other local results, and an explicitly
+assumption-bearing conditional bridge. It is not a root theorem or an independent Lean proof of the
+report's conclusion.

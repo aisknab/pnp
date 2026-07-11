@@ -18,6 +18,10 @@ const VERIFIER_PATH = 'lean/PNP/Concrete/CNFVerifier.lean';
 const CNF_AUDIT_PATH = 'lean-audit/PNPConcreteCNFAxiomAudit.lean';
 const WORK_INPUT_AUDIT_PATH = 'lean-audit/PNPConcreteCNFWorkInputAxiomAudit.lean';
 const VERIFIER_AUDIT_PATH = 'lean-audit/PNPConcreteCNFVerifierAxiomAudit.lean';
+const WORK_CORRECTNESS_PATH = 'lean/PNP/Concrete/CNFWorkCorrectness.lean';
+const WORK_UNIVERSAL_CORRECTNESS_PATH =
+  'lean/PNP/Concrete/CNFWorkUniversalCorrectness.lean';
+const WORK_CORRECTNESS_AUDIT_PATH = 'lean-audit/PNPConcreteCNFWorkAxiomAudit.lean';
 
 const CNF_TOKEN_HEADS = new Set(['bits', 'ofBits', 'ofBits_bits']);
 const WORK_INPUT_TOKEN_HEADS = new Set(['workSymbol', 'workSymbol_first_second']);
@@ -32,6 +36,29 @@ function imports0(source) {
 
 function printed0(audit) {
   return [...audit.matchAll(/^#print axioms (.+?)[ \t]*$/gmu)].map((match) => match[1]);
+}
+
+function namespacedPublicHeads0(source) {
+  const namespaces = [];
+  const names = [];
+  for (const line of stripLeanCommentsAndStrings0(source).split('\n')) {
+    const namespace = line.match(/^\s*namespace\s+([^\s]+)\s*$/u);
+    if (namespace !== null) {
+      namespaces.push(namespace[1]);
+      continue;
+    }
+    if (/^\s*end(?:\s+[^\s]+)?\s*$/u.test(line)) {
+      assert.notEqual(namespaces.length, 0, 'unbalanced namespace end');
+      namespaces.pop();
+      continue;
+    }
+    const declaration = line.match(
+      /^\s*(?:@\[[^\]\n]*\]\s*)*(?:(?:protected|noncomputable)\s+)*(?:def|theorem|inductive|structure)\s+(«[^»\n]+»|[^\s({:]+)/u,
+    );
+    if (declaration !== null) names.push([...namespaces, declaration[1]].join('.'));
+  }
+  assert.deepEqual(namespaces, [], 'unclosed namespace');
+  return names;
 }
 
 function compact0(source) {
@@ -171,6 +198,23 @@ test('axiom transcripts cover every public CNF-layer head exactly once', async (
   }
 });
 
+test('complete CNF work axiom transcript covers every public correctness head exactly once', async () => {
+  const [correctness, universalCorrectness, audit] = await Promise.all([
+    text0(WORK_CORRECTNESS_PATH),
+    text0(WORK_UNIVERSAL_CORRECTNESS_PATH),
+    text0(WORK_CORRECTNESS_AUDIT_PATH),
+  ]);
+  const correctnessNames = namespacedPublicHeads0(correctness);
+  const universalCorrectnessNames = namespacedPublicHeads0(universalCorrectness);
+  assert.equal(correctnessNames.length, 611);
+  assert.equal(universalCorrectnessNames.length, 155);
+  const names = [...correctnessNames, ...universalCorrectnessNames];
+  assert.equal(names.length, 766);
+  assert.equal(new Set(names).size, 766);
+  assert.deepEqual(printed0(audit), names);
+  assert.deepEqual(imports0(audit), ['PNP.Concrete.CNFWorkUniversalCorrectness']);
+});
+
 test('PNP root reaches each completed CNF layer without activating a root claim', async () => {
   const [root, main] = await Promise.all([text0('lean/PNP.lean'), text0('lean/PNP/Main.lean')]);
   for (const moduleName of [
@@ -181,7 +225,7 @@ test('PNP root reaches each completed CNF layer without activating a root claim'
   assert.doesNotMatch(main, /\b(?:theorem|axiom|def)\s+p_eq_np\b/u);
 });
 
-test('package and workflow enforce the fast CNF audit and all three exact transcripts', async () => {
+test('package and workflow enforce the fast CNF audit and all exact transcripts', async () => {
   const [packageText, workflow] = await Promise.all([
     text0('package.json'), text0('.github/workflows/lean-bridge.yml'),
   ]);
@@ -191,6 +235,7 @@ test('package and workflow enforce the fast CNF audit and all three exact transc
     ['PNPConcreteCNFAxiomAudit.lean', 80],
     ['PNPConcreteCNFWorkInputAxiomAudit.lean', 20],
     ['PNPConcreteCNFVerifierAxiomAudit.lean', 8],
+    ['PNPConcreteCNFWorkAxiomAudit.lean', 766],
   ]) {
     const start = workflow.indexOf(audit);
     assert.notEqual(start, -1, audit);
@@ -225,15 +270,23 @@ test('bounded work-machine regressions are reviewable, strict, and explicitly op
   assert.match(readme, /9,300/u);
   assert.match(readme, /40,020/u);
   assert.match(readme, /contains no\s+encoded clause/u);
+  const scripts = JSON.parse(packageText).scripts;
+  assert.equal(scripts['lean:cnf-work:audit'],
+    'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFWorkAxiomAudit.lean');
+  assert.equal(scripts['lean:cnf-work:regression:canonical'],
+    'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFWorkCanonical.lean');
+  assert.equal(scripts['lean:cnf-work:regression:compiler'],
+    'lake env lean -DwarningAsError=true lean-regression/PNPConcreteWorkCompilerEdges.lean');
+  assert.equal(scripts['lean:cnf-work:regression:extended'],
+    'lake env lean -DwarningAsError=true --run lean-regression/PNPConcreteCNFWorkCanonicalExtended.lean');
+  assert.equal(scripts['lean:cnf-work:regression:exhaustive'],
+    'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFWorkExhaustive.lean');
   for (const name of [
     'PNPConcreteCNFWorkExhaustive',
     'PNPConcreteCNFWorkCanonical',
     'PNPConcreteCNFWorkCanonicalExtended',
     'PNPConcreteWorkCompilerEdges',
-  ]) {
-    assert.doesNotMatch(packageText, new RegExp(name, 'u'));
-    assert.doesNotMatch(workflow, new RegExp(name, 'u'));
-  }
+  ]) assert.doesNotMatch(workflow, new RegExp(name, 'u'));
 });
 
 test('legacy SAT is a non-authoritative label, not an axiom or concrete-CNF alias', async () => {

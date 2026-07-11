@@ -103,4 +103,4 @@ boundary](./lean_locked_nand_threshold_boundary.md).
 They do not establish a global locked-NAND builder, cross-instance `BaselineDistinct`, carrier
 freshness, the report locked-NAND threshold equivalence, unconditional residual slack at most four, polynomial
 construction/runtime, SAT correctness, or `P = NP`. All seven recorded reconstruction blockers and
-all five disclosed project-specific axioms remain.
+all four disclosed project-specific axioms remain.

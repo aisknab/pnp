@@ -93,7 +93,7 @@ the global carrier layout, global baseline distinctness, trace equivalence, deri
 laws, uniform builder, threshold theorem, unconditional residual-slack-at-most-four theorem, and
 polynomiality all remain false in the formal status. Seven blockers remain, now beginning with the
 charged-pipeline-to-raw-machine link `Formal.ConcreteComplexityMachineLink`; the other six include
-the still-missing global threshold work. The five project-specific axioms and absent
+the still-missing global threshold work. The four project-specific axioms and absent
 `PNP.Main.p_eq_np` root theorem also remain. The axiom-free inactive
 `PNP.Main.ConcretePEqualsNP` definition does not change this threshold boundary or activate the
 publication gate.

@@ -4,6 +4,7 @@ import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 
 import { CheckFormalReconstructionStatus0 } from '../pcc-formal-reconstruction-status0.mjs';
+import { sha256Text0, stableStringify0 } from '../formal-publication0.mjs';
 import { BuildFormalPublication0 } from '../scripts/generate-formal-publication.mjs';
 
 async function status0() {
@@ -100,6 +101,12 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
+  assert.equal(byId.get('concrete-cnf-universal-verifier').status,
+    'formalized-np-membership-only');
+  assert.equal(byId.get('concrete-cnf-universal-verifier').requiredTheorems.includes(
+    'PNP.Concrete.FinalUniversalDesign.cnfSATInNP'), true);
+  assert.match(byId.get('concrete-cnf-universal-verifier').nonClaim,
+    /does not prove CNF-SAT is in P, NP-completeness, or P = NP/u);
   for (const id of [
     'direct-wire-semantics',
     'finite-enumeration-minimum',
@@ -113,6 +120,33 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     'global-zeroslack-pccmin',
     'concrete-publication-root',
   ]) assert.equal(byId.get(id).status, 'not-formalized');
+});
+
+test('publication consumes the reviewed integrated-CNF semantic map and inventory counts', async () => {
+  const [status, mapText] = await Promise.all([
+    status0(),
+    readFile(new URL('../publication/FORMAL_PUBLICATION_MAP.json', import.meta.url), 'utf8'),
+  ]);
+  const map = JSON.parse(mapText);
+  assert.equal(sha256Text0(stableStringify0(map)),
+    '352e5dbe4c4a4833ee9f340a00d64678d774728a97f82acc857999f8abdd764e');
+  assert.equal(map.milestoneSourceClosureSha256,
+    'd28f000e838fa81710beceb0da7f0a5ad4cb1f665e07e2545274251489015fad');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 42);
+  assert.deepEqual([
+    map.gate.expectedConcreteTargetKernelTypeSha256,
+    map.gate.expectedConcreteTargetKernelValueSha256,
+    map.gate.expectedRootKernelTypeSha256,
+    map.gate.expectedAxiomClosureSha256,
+    map.gate.expectedSourceClosureSha256,
+  ], [null, null, null, null, null]);
+  assert.deepEqual([
+    status.leanTheoremInventoryDeclarationCount,
+    status.leanTheoremInventoryTheoremCount,
+    status.leanTheoremInventoryAssumptionFreeTheoremCount,
+    status.leanTheoremInventoryExcludedPrivateDeclarationCount,
+    status.leanTheoremInventorySourceClosureModuleCount,
+  ], [4419, 1826, 1727, 551, 36]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

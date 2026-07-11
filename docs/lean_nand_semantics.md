@@ -53,7 +53,7 @@ lake env lean -DwarningAsError=true lean-audit/PNPNANDSemanticsAxiomAudit.lean
 ```
 
 The dedicated audit prints no axioms for every explicit declaration in the module. The
-repository-wide audit still reports the existing five project-specific axioms in the conditional
+repository-wide audit still reports the existing four project-specific axioms in the conditional
 bridge, including `PNP.LockedNANDThreshold`.
 
 ## Not established here

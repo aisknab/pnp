@@ -81,6 +81,11 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFWorkInputAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFVerifierAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFWorkAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFWorkCanonical.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPConcreteWorkCompilerEdges.lean',
+  'lake env lean -DwarningAsError=true --run lean-regression/PNPConcreteCNFWorkCanonicalExtended.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFWorkExhaustive.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPNANDSemanticsAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPNANDEnumeratorAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPNANDTruthTableAxiomAudit.lean',
@@ -106,6 +111,8 @@ const NON_CLAIMS = Object.freeze([
   'The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.',
   'The concrete bitstring, natural-polynomial, and finite-rule machine kernel is now consumed by a finite charged-pipeline P/NP/reduction interface; the compiler/refinement from composite pipelines to one raw machine is not yet proved.',
   'The concrete complexity interface proves P subset NP, reduction composition and transport, and the NP-complete-in-P implication relative to its exact pipeline semantics; it does not prove concrete SAT complete or in P.',
+  'The integrated direct CNF-SAT finite-machine verifier proves exact accept/reject correctness, bounded no-timeout behavior, and PNP.Concrete.FinalUniversalDesign.cnfSATInNP; it proves CNF-SAT membership in NP only, not CNF-SAT in P, NP-completeness, or P = NP.',
+  'The 9,300-pair canonical sweep, 40,020-pair extended sweep, 261,121-pair bounded differential sweep, and ten compiler-edge cases are finite regression evidence; the universal result comes from the audited Lean theorems, not from testing.',
   'The formalized direct-wire NAND semantics layer does not by itself prove enumeration, minimum size, replacement/slack, the locked NAND builder, its threshold, SAT, or P = NP.',
   'The exact-width syntactic NAND enumeration remains intentionally noncanonical and may contain duplicates.',
   'The exhaustive direct-wire truth-table and reference-minimum computation has no polynomial-runtime claim and does not formalize the report\'s residual-band minimizer.',
@@ -258,6 +265,16 @@ const EXACT_FIELDS = Object.freeze({
   explicitLeanRootTargetPresent: true,
   leanLibraryTargetBuilt: true,
   leanSourcePlaceholderAuditPassed: true,
+  leanConcreteCNFVerifierCorrectnessFormalized: true,
+  leanConcreteCNFVerifierNoTimeoutFormalized: true,
+  leanConcreteCNFVerifierAxiomAuditPassed: true,
+  leanConcreteCNFWorkAxiomAuditPassed: true,
+  leanConcreteCNFWorkAuditedDeclarationCount: 766,
+  leanConcreteCNFSATMembershipFormalized: true,
+  leanConcreteCNFSATMembershipTheorem: 'PNP.Concrete.FinalUniversalDesign.cnfSATInNP',
+  leanConcreteCNFProofScope: 'direct-finite-machine-verifier-correctness-and-np-membership-only',
+  leanConcreteCNFSATInPFormalized: false,
+  leanConcreteCNFNPCompletenessFormalized: false,
   leanNANDDirectWireCoreFormalized: true,
   leanNANDDirectWireCoreAxiomAuditPassed: true,
   leanNANDEnumeratorFormalized: true,
@@ -464,6 +481,16 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       explicitLeanRootTargetPresent: true,
       leanLibraryTargetBuilt: true,
       leanSourcePlaceholderAuditPassed: true,
+      leanConcreteCNFVerifierCorrectnessFormalized: true,
+      leanConcreteCNFVerifierNoTimeoutFormalized: true,
+      leanConcreteCNFVerifierAxiomAuditPassed: true,
+      leanConcreteCNFWorkAxiomAuditPassed: true,
+      leanConcreteCNFWorkAuditedDeclarationCount: 766,
+      leanConcreteCNFSATMembershipFormalized: true,
+      leanConcreteCNFSATMembershipTheorem: 'PNP.Concrete.FinalUniversalDesign.cnfSATInNP',
+      leanConcreteCNFProofScope: 'direct-finite-machine-verifier-correctness-and-np-membership-only',
+      leanConcreteCNFSATInPFormalized: false,
+      leanConcreteCNFNPCompletenessFormalized: false,
       leanNANDDirectWireCoreFormalized: true,
       leanNANDDirectWireCoreAxiomAuditPassed: true,
       leanNANDEnumeratorFormalized: true,
@@ -665,6 +692,18 @@ function validateStatus0(status, label, publicationExpected) {
     return reject0('FormalReconstructionStatus.PublicationMilestones',
       [label, 'formalPublicationMilestones'],
       'formal publication milestones must be derived from exact Lean declarations');
+  }
+  const cnfMilestone = publicationExpected.formalPublicationMilestones.find(
+    (entry) => entry.id === 'concrete-cnf-universal-verifier',
+  );
+  if (cnfMilestone?.earned !== true
+      || cnfMilestone.status !== 'formalized-np-membership-only'
+      || !cnfMilestone.requiredTheorems.includes(
+        'PNP.Concrete.FinalUniversalDesign.cnfSATInNP',
+      )) {
+    return reject0('FormalReconstructionStatus.ConcreteCNFMilestone',
+      [label, 'formalPublicationMilestones', 'concrete-cnf-universal-verifier'],
+      'direct CNF verifier status requires the exact earned NP-membership milestone');
   }
   if (!sameArray0(status.activeFinalNodeIds, [])) {
     return reject0('FormalReconstructionStatus.ActiveFinalNodes', [label, 'activeFinalNodeIds'], 'active final nodes must be empty');

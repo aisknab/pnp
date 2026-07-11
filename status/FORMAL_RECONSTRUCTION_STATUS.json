@@ -21,6 +21,16 @@
   "explicitLeanRootTargetPresent": true,
   "leanLibraryTargetBuilt": true,
   "leanSourcePlaceholderAuditPassed": true,
+  "leanConcreteCNFVerifierCorrectnessFormalized": true,
+  "leanConcreteCNFVerifierNoTimeoutFormalized": true,
+  "leanConcreteCNFVerifierAxiomAuditPassed": true,
+  "leanConcreteCNFWorkAxiomAuditPassed": true,
+  "leanConcreteCNFWorkAuditedDeclarationCount": 766,
+  "leanConcreteCNFSATMembershipFormalized": true,
+  "leanConcreteCNFSATMembershipTheorem": "PNP.Concrete.FinalUniversalDesign.cnfSATInNP",
+  "leanConcreteCNFProofScope": "direct-finite-machine-verifier-correctness-and-np-membership-only",
+  "leanConcreteCNFSATInPFormalized": false,
+  "leanConcreteCNFNPCompletenessFormalized": false,
   "leanNANDDirectWireCoreFormalized": true,
   "leanNANDDirectWireCoreAxiomAuditPassed": true,
   "leanNANDEnumeratorFormalized": true,
@@ -235,8 +245,7 @@
     "PNP.CheckPCCPackexp",
     "PNP.GeneratePCCPack",
     "PNP.LockedNANDThreshold",
-    "PNP.ResidualBandExactMinimization",
-    "PNP.SAT"
+    "PNP.ResidualBandExactMinimization"
   ],
   "lockedNANDThresholdHostileReviewLemmaInventory": [
     "DirectWireOutputLowerBound",
@@ -269,6 +278,7 @@
     "node --test audits/lean-root-target0.test.mjs",
     "node --test audits/lean-concrete-machine0.test.mjs",
     "node --test audits/lean-concrete-complexity0.test.mjs",
+    "node --test audits/lean-concrete-cnf0.test.mjs",
     "node --test audits/lean-nand-semantics0.test.mjs",
     "node --test audits/lean-nand-enumerator0.test.mjs",
     "node --test audits/lean-nand-reference-minimum0.test.mjs",
@@ -281,6 +291,14 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteMachineAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteComplexityAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteTargetAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFWorkInputAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFVerifierAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFWorkAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFWorkCanonical.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPConcreteWorkCompilerEdges.lean",
+    "lake env lean -DwarningAsError=true --run lean-regression/PNPConcreteCNFWorkCanonicalExtended.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFWorkExhaustive.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPNANDSemanticsAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPNANDEnumeratorAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPNANDTruthTableAxiomAudit.lean",
@@ -305,6 +323,8 @@
     "The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.",
     "The concrete bitstring, natural-polynomial, and finite-rule machine kernel is now consumed by a finite charged-pipeline P/NP/reduction interface; the compiler/refinement from composite pipelines to one raw machine is not yet proved.",
     "The concrete complexity interface proves P subset NP, reduction composition and transport, and the NP-complete-in-P implication relative to its exact pipeline semantics; it does not prove concrete SAT complete or in P.",
+    "The integrated direct CNF-SAT finite-machine verifier proves exact accept/reject correctness, bounded no-timeout behavior, and PNP.Concrete.FinalUniversalDesign.cnfSATInNP; it proves CNF-SAT membership in NP only, not CNF-SAT in P, NP-completeness, or P = NP.",
+    "The 9,300-pair canonical sweep, 40,020-pair extended sweep, 261,121-pair bounded differential sweep, and ten compiler-edge cases are finite regression evidence; the universal result comes from the audited Lean theorems, not from testing.",
     "The formalized direct-wire NAND semantics layer does not by itself prove enumeration, minimum size, replacement/slack, the locked NAND builder, its threshold, SAT, or P = NP.",
     "The exact-width syntactic NAND enumeration remains intentionally noncanonical and may contain duplicates.",
     "The exhaustive direct-wire truth-table and reference-minimum computation has no polynomial-runtime claim and does not formalize the report's residual-band minimizer.",
@@ -356,7 +376,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "0b48d081b1b9ab050184c895c7e1b99ed118c56c9737c7a76a5580dc1bf001be",
+    "actualSourceClosureSha256": "d28f000e838fa81710beceb0da7f0a5ad4cb1f665e07e2545274251489015fad",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -389,19 +409,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-10-12",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "91b4db358afb1156eb39f3d97f49a5bb85a97f0b65ff1a879a51a6552ae15663",
+  "leanTheoremInventorySha256": "a38aac54fc7a117f46d42d2d45414d9bf3bbd301dd74a34cbbd0b61539229b4d",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 2484,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 36,
-  "leanTheoremInventoryTheoremCount": 883,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 793,
-  "leanTheoremInventorySourceClosureModuleCount": 26,
-  "leanSourceClosureSha256": "0b48d081b1b9ab050184c895c7e1b99ed118c56c9737c7a76a5580dc1bf001be",
+  "leanTheoremInventoryDeclarationCount": 4419,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 551,
+  "leanTheoremInventoryTheoremCount": 1826,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 1727,
+  "leanTheoremInventorySourceClosureModuleCount": 36,
+  "leanSourceClosureSha256": "d28f000e838fa81710beceb0da7f0a5ad4cb1f665e07e2545274251489015fad",
   "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-10-12",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "3f99368d729fb278339da66abca283cdaae823c5a614ddfaa893becab1014b6a",
+  "formalPublicationMapSha256": "33b5e2f6464b8a2751806817bb155bd4592d6f126eeb42a81e461c3a04b5e491",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",
@@ -493,7 +513,7 @@
         "PNP.Concrete.reduction_transports_p",
         "PNP.Main.concretePEqualsNP_iff"
       ],
-      "nonClaim": "The charged pipeline is not yet proved to compile or refine to one raw machine; concrete SAT and the publication root theorem remain absent.",
+      "nonClaim": "This general complexity-class layer alone does not prove CNF-SAT is in P, CNF-SAT is NP-complete, or the publication root theorem.",
       "theoremRows": [
         {
           "name": "PNP.Concrete.np_complete_in_p_implies_p_eq_np",
@@ -556,6 +576,103 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-with-machine-link-pending"
+    },
+    {
+      "id": "concrete-cnf-universal-verifier",
+      "title": "Concrete universal CNF-SAT verifier",
+      "classification": "formalized-np-membership-only",
+      "scope": "An unconditional formula-grammar outcome, universal bounded work outcome, exact accept/reject semantics, no-timeout theorem, literal finite-machine paired verifier, and CNF-SAT membership in NP.",
+      "requiredTheorems": [
+        "PNP.Concrete.FinalUniversalDesign.cnfCompiled_accept_iff_check",
+        "PNP.Concrete.FinalUniversalDesign.cnfCompiled_ne_timeout",
+        "PNP.Concrete.FinalUniversalDesign.cnfCompiled_reject_iff_check_false",
+        "PNP.Concrete.FinalUniversalDesign.cnfConcreteVerifier_decision",
+        "PNP.Concrete.FinalUniversalDesign.cnfConcreteVerifier_inputMode",
+        "PNP.Concrete.FinalUniversalDesign.cnfSATInNP",
+        "PNP.Concrete.FinalUniversalDesign.cnfUniversalWorkOutcome",
+        "PNP.Concrete.FinalUniversalDesign.formulaGrammarOutcome"
+      ],
+      "nonClaim": "This proves CNF-SAT membership in NP only; it does not prove CNF-SAT is in P, NP-completeness, or P = NP.",
+      "theoremRows": [
+        {
+          "name": "PNP.Concrete.FinalUniversalDesign.cnfCompiled_accept_iff_check",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "4a8661d567079e1f47c288b8a36805a20ac7040338d84325723079f3fada4efa",
+          "expectedKernelTypeSha256": "4a8661d567079e1f47c288b8a36805a20ac7040338d84325723079f3fada4efa",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.FinalUniversalDesign.cnfCompiled_ne_timeout",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "ee8cf33b3002e1059f8296a69cf94ca530ea2418ef13a75e6ef2d7830b15afa8",
+          "expectedKernelTypeSha256": "ee8cf33b3002e1059f8296a69cf94ca530ea2418ef13a75e6ef2d7830b15afa8",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.FinalUniversalDesign.cnfCompiled_reject_iff_check_false",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "f32728d9def4ea90fd7abbf0df0371f77f1d481c2610e179db3126ec1a2e7235",
+          "expectedKernelTypeSha256": "f32728d9def4ea90fd7abbf0df0371f77f1d481c2610e179db3126ec1a2e7235",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.FinalUniversalDesign.cnfConcreteVerifier_decision",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "93c3a87724bc9f05d80eb26ade9c8b10d6d223d2bea99392c82223f01fb113f4",
+          "expectedKernelTypeSha256": "93c3a87724bc9f05d80eb26ade9c8b10d6d223d2bea99392c82223f01fb113f4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.FinalUniversalDesign.cnfConcreteVerifier_inputMode",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "9bdb3a486be5492e8c610e411b9ce3b222164679ddcb35c542407fa885881495",
+          "expectedKernelTypeSha256": "9bdb3a486be5492e8c610e411b9ce3b222164679ddcb35c542407fa885881495",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.FinalUniversalDesign.cnfSATInNP",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "c9d66c135361cf8a8b25330d2558dfac209fde120e296140c7e7cb86bf1e1937",
+          "expectedKernelTypeSha256": "c9d66c135361cf8a8b25330d2558dfac209fde120e296140c7e7cb86bf1e1937",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.FinalUniversalDesign.cnfUniversalWorkOutcome",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "c92d82b73cb97669f11c973ca5af510c9d26126e4c042ce09089134552208928",
+          "expectedKernelTypeSha256": "c92d82b73cb97669f11c973ca5af510c9d26126e4c042ce09089134552208928",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.FinalUniversalDesign.formulaGrammarOutcome",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "b17bca26b10ff836c6ebadaa593a6236e7633d80b75b34e0357f371223692ec0",
+          "expectedKernelTypeSha256": "b17bca26b10ff836c6ebadaa593a6236e7633d80b75b34e0357f371223692ec0",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-np-membership-only"
     },
     {
       "id": "direct-wire-semantics",
@@ -951,7 +1068,7 @@
       "requiredTheorems": [
         "PNP.Main.p_eq_np"
       ],
-      "nonClaim": "The concrete target definition is inactive: raw-machine linkage, concrete SAT completeness/deciding, and PNP.Main.p_eq_np remain absent; the legacy string-handle bridge is ineligible.",
+      "nonClaim": "The concrete target definition remains inactive: CNF-SAT now has a raw-machine verifier and NP-membership proof, but a deterministic polynomial-time CNF-SAT decider, NP-completeness transport, and PNP.Main.p_eq_np remain absent; the legacy string-handle bridge is ineligible.",
       "theoremRows": [
         {
           "name": "PNP.Main.p_eq_np",

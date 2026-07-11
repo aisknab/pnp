@@ -20,6 +20,7 @@ test('current verifier plan contains status, surface, archive integrity, and cur
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-root-target0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-concrete-machine0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-concrete-complexity0.test.mjs'), true);
+  assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-concrete-cnf0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-theorem-inventory0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/formal-publication0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-nand-semantics0.test.mjs'), true);
@@ -45,6 +46,13 @@ test('current verifier accepts without executing a historical replay', async () 
   assert.equal(out.tag, 'accept');
   assert.equal(out.currentStatusAuthority, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
+  assert.equal(out.leanConcreteCNFVerifierCorrectnessFormalized, true);
+  assert.equal(out.leanConcreteCNFVerifierNoTimeoutFormalized, true);
+  assert.equal(out.leanConcreteCNFSATMembershipFormalized, true);
+  assert.equal(out.leanConcreteCNFSATMembershipTheorem,
+    'PNP.Concrete.FinalUniversalDesign.cnfSATInNP');
+  assert.equal(out.leanConcreteCNFSATInPFormalized, false);
+  assert.equal(out.leanConcreteCNFNPCompletenessFormalized, false);
   assert.equal(out.historicalReplayExecuted, false);
   assert.equal(out.legacyCheckerReplayAccepted, false);
   assert.equal(out.legacyCheckerReplayIsMathematicalProof, false);

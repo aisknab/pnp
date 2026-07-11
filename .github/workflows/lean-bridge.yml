@@ -8,6 +8,7 @@ on:
       - 'lake-manifest.json'
       - 'lean/**'
       - 'lean-audit/**'
+      - 'lean-regression/**'
       - 'formal-publication0.mjs'
       - 'pcc-formal-reconstruction-status0.mjs'
       - 'pcc-formal-public-surface0.mjs'
@@ -60,6 +61,7 @@ on:
       - 'lake-manifest.json'
       - 'lean/**'
       - 'lean-audit/**'
+      - 'lean-regression/**'
       - 'formal-publication0.mjs'
       - 'pcc-formal-reconstruction-status0.mjs'
       - 'pcc-formal-public-surface0.mjs'
@@ -244,6 +246,16 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 8
+
+      - name: Print complete concrete CNF work-correctness axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFWorkAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          if printf '%s\n' "$audit_output" | grep -F 'depends on axioms:'; then
+            echo 'Concrete CNF work correctness unexpectedly depends on axioms.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 766
 
       - name: Print direct-wire NAND semantics axioms
         run: |

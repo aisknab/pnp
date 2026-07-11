@@ -108,10 +108,10 @@ activation fingerprints remain unset. The concrete target is visible to the comp
 but the compatibility root is absent and the fail-closed publication gate remains false. The older
 string-handle proposition `PNP.PEqualsNP` remains publication-ineligible.
 
-The current compiled inventory records 2,484 declarations, 883 theorems, 793 assumption-free
-theorems, five project-specific axioms, 26 source modules, 36 excluded private declarations, and 34
-reviewed milestone candidates. Eight of eleven milestone rows are earned. Seven blockers remain,
-beginning with `Formal.ConcreteComplexityMachineLink`.
+The compiled-inventory generator supplies the exact declaration, theorem, module, private-
+auxiliary, and reviewed-candidate counts after each source-closure regeneration; this prose does
+not duplicate those moving totals. The current Lean source closure contains four project-specific
+axioms. Seven blockers remain, beginning with `Formal.ConcreteComplexityMachineLink`.
 
 ## Audit
 

@@ -40,7 +40,7 @@ function declarationInventory0(sources) {
   for (const [file, original] of Object.entries(sources)) {
     const source = stripLeanCommentsAndStrings0(original);
     const namespace = /^\s*namespace\s+([A-Za-z_][\w.]*)/mu.exec(source)?.[1] ?? '';
-    for (const match of source.matchAll(/^\s*(?:@\[[^\]\n]*\]\s*)*(?:(?:private|protected|noncomputable|unsafe)\s+)*(axiom|constant|opaque)\s+(«[^»\n]+»|[^\s(:]+)/gmu)) {
+    for (const match of source.matchAll(/^\s*(?:@\[[^\]\n]*\]\s*)*(?:(?:private|protected|noncomputable|unsafe)\s+)*(axiom|constant|opaque)\s+(«[^»\n]+»|[^\s(:]+)(?=\s*[:({\[])/gmu)) {
       declarations.push({
         file,
         kind: match[1],
