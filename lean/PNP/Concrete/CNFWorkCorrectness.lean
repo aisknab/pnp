@@ -127,6 +127,187 @@ theorem workRunExact?_scanLeft (machine : WorkMachine) (state : Nat)
       rw [hStep head (rest ++ leftSuffix) rightSide hHead]
       exact ih (head :: rightSide) hRest
 
+/-! ### Constructive scan-accumulator algebra -/
+
+theorem pushScannedWorkSymbols_append_far (word left right : List WorkSymbol) :
+    pushScannedWorkSymbols word (left ++ right) =
+      pushScannedWorkSymbols word left ++ right := by
+  induction word generalizing left with
+  | nil => rfl
+  | cons symbol rest ih => exact ih (symbol :: left)
+
+theorem pushScannedWorkSymbols_append_word
+    (first second farSide : List WorkSymbol) :
+    pushScannedWorkSymbols (first ++ second) farSide =
+      pushScannedWorkSymbols second
+        (pushScannedWorkSymbols first farSide) := by
+  induction first generalizing farSide with
+  | nil => rfl
+  | cons symbol rest ih => exact ih (symbol :: farSide)
+
+theorem pushScannedWorkSymbols_cons_far (word : List WorkSymbol)
+    (symbol : WorkSymbol) :
+    pushScannedWorkSymbols word [symbol] =
+      pushScannedWorkSymbols word [] ++ [symbol] := by
+  change pushScannedWorkSymbols word ([] ++ [symbol]) = _
+  exact pushScannedWorkSymbols_append_far word [] [symbol]
+
+/-- Scanning a word right and then scanning the accumulated nearest-first
+word left restores the original left-to-right order exactly. -/
+theorem pushScannedWorkSymbols_cancel (word farSide : List WorkSymbol) :
+    pushScannedWorkSymbols (pushScannedWorkSymbols word []) farSide =
+      word ++ farSide := by
+  induction word with
+  | nil => rfl
+  | cons symbol rest ih =>
+      change pushScannedWorkSymbols
+          (pushScannedWorkSymbols rest [symbol]) farSide =
+        symbol :: (rest ++ farSide)
+      rw [pushScannedWorkSymbols_cons_far]
+      rw [pushScannedWorkSymbols_append_word]
+      change symbol ::
+          pushScannedWorkSymbols (pushScannedWorkSymbols rest []) farSide = _
+      exact congrArg (List.cons symbol) ih
+
+theorem pushScannedWorkSymbols_cancel_with_left
+    (word left farSide : List WorkSymbol) :
+    pushScannedWorkSymbols
+        (pushScannedWorkSymbols word left) farSide =
+      pushScannedWorkSymbols left (word ++ farSide) := by
+  have hInner := pushScannedWorkSymbols_append_far word [] left
+  change pushScannedWorkSymbols word left =
+      pushScannedWorkSymbols word [] ++ left at hInner
+  rw [hInner]
+  rw [pushScannedWorkSymbols_append_word]
+  rw [pushScannedWorkSymbols_cancel]
+
+theorem pushWorkLeft_eq_pushScannedWorkSymbols
+    (word farSide : List WorkSymbol) :
+    pushWorkLeft word farSide = pushScannedWorkSymbols word farSide := by
+  induction word generalizing farSide with
+  | nil => rfl
+  | cons symbol rest ih => exact ih (symbol :: farSide)
+
+theorem pushWorkLeft_cancel (word farSide : List WorkSymbol) :
+    pushWorkLeft (pushWorkLeft word []) farSide = word ++ farSide := by
+  rw [pushWorkLeft_eq_pushScannedWorkSymbols]
+  rw [pushWorkLeft_eq_pushScannedWorkSymbols]
+  rw [pushScannedWorkSymbols_cancel]
+
+/-- Crossing a word to the right boundary and moving left produces exactly
+the nearest-first tape shape consumed by a left scan. -/
+theorem beforeRightScan_moveLeft_to_beforeLeftScan
+    (word leftSuffix : List WorkSymbol)
+    (leftDelimiter rightDelimiter : WorkSymbol)
+    (suffix : List WorkSymbol) :
+    (WorkTape.beforeRightScan
+        (pushScannedWorkSymbols word (leftDelimiter :: leftSuffix)) []
+        rightDelimiter suffix).moveLeft =
+      WorkTape.beforeLeftScan leftSuffix
+        (pushScannedWorkSymbols word []) leftDelimiter
+        (rightDelimiter :: suffix) := by
+  have hSplit :
+      pushScannedWorkSymbols word (leftDelimiter :: leftSuffix) =
+        pushScannedWorkSymbols word [] ++ leftDelimiter :: leftSuffix :=
+    pushScannedWorkSymbols_append_far word []
+      (leftDelimiter :: leftSuffix)
+  rw [hSplit]
+  cases pushScannedWorkSymbols word [] <;> rfl
+
+/-- The left half of a completed round trip cancels the right-scan
+accumulator and restores the original left-to-right word. -/
+theorem beforeLeftScan_roundTrip
+    (word leftSuffix : List WorkSymbol)
+    (leftDelimiter rightDelimiter : WorkSymbol)
+    (suffix : List WorkSymbol) :
+    WorkTape.beforeLeftScan leftSuffix [] leftDelimiter
+        (pushScannedWorkSymbols (pushScannedWorkSymbols word [])
+          (rightDelimiter :: suffix)) =
+      WorkTape.beforeLeftScan leftSuffix [] leftDelimiter
+        (word ++ rightDelimiter :: suffix) := by
+  rw [pushScannedWorkSymbols_cancel]
+
+/-- A right scan, one delimiter-triggered move left, and the matching left
+scan restore the crossed word exactly.  The theorem records the literal
+transition count and never appeals to list extensionality. -/
+theorem workRunExact?_scanRoundTrip_keep
+    (machine : WorkMachine) (rightState leftState : Nat)
+    (word leftSuffix : List WorkSymbol)
+    (leftDelimiter rightDelimiter : WorkSymbol)
+    (suffix : List WorkSymbol)
+    (hRightHalted : ∀ tape : WorkTape,
+      machine.isHalted
+        ({ state := rightState, tape := tape } : WorkConfiguration) = false)
+    (hRightFind : ∀ symbol, List.Mem symbol word →
+      findWorkRule machine.rules rightState symbol =
+        some (cnfKeepRule rightState symbol rightState .right))
+    (hBoundaryFind : findWorkRule machine.rules rightState rightDelimiter =
+      some (cnfKeepRule rightState rightDelimiter leftState .left))
+    (hLeftHalted : ∀ tape : WorkTape,
+      machine.isHalted
+        ({ state := leftState, tape := tape } : WorkConfiguration) = false)
+    (hLeftFind : ∀ symbol,
+      List.Mem symbol (pushScannedWorkSymbols word []) →
+      findWorkRule machine.rules leftState symbol =
+        some (cnfKeepRule leftState symbol leftState .left)) :
+    workRunExact? machine
+        ((word.length + 1) +
+          (pushScannedWorkSymbols word []).length)
+        { state := rightState
+          tape := WorkTape.beforeRightScan
+            (leftDelimiter :: leftSuffix) word rightDelimiter suffix } =
+      some
+        { state := leftState
+          tape := WorkTape.beforeLeftScan leftSuffix [] leftDelimiter
+            (word ++ rightDelimiter :: suffix) } := by
+  have hRight := workRunExact?_scanRight_keep machine rightState
+    (leftDelimiter :: leftSuffix) word rightDelimiter suffix
+    hRightHalted hRightFind
+  have hBoundaryRaw := workRunExact?_one_of_find machine
+    { state := rightState
+      tape := WorkTape.beforeRightScan
+        (pushScannedWorkSymbols word (leftDelimiter :: leftSuffix)) []
+        rightDelimiter suffix }
+    (cnfKeepRule rightState rightDelimiter leftState .left)
+    (hRightHalted _) hBoundaryFind
+  have hBoundary :
+      workRunExact? machine 1
+          { state := rightState
+            tape := WorkTape.beforeRightScan
+              (pushScannedWorkSymbols word (leftDelimiter :: leftSuffix)) []
+              rightDelimiter suffix } =
+        some
+          { state := leftState
+            tape := WorkTape.beforeLeftScan leftSuffix
+              (pushScannedWorkSymbols word []) leftDelimiter
+              (rightDelimiter :: suffix) } := by
+    change workRunExact? machine 1 _ = some
+      { state := leftState
+        tape := (WorkTape.beforeRightScan
+          (pushScannedWorkSymbols word (leftDelimiter :: leftSuffix)) []
+          rightDelimiter suffix).moveLeft } at hBoundaryRaw
+    rw [beforeRightScan_moveLeft_to_beforeLeftScan] at hBoundaryRaw
+    exact hBoundaryRaw
+  have hLeftRaw := workRunExact?_scanLeft_keep machine leftState
+    leftSuffix (pushScannedWorkSymbols word []) leftDelimiter
+    (rightDelimiter :: suffix) hLeftHalted hLeftFind
+  have hLeft :
+      workRunExact? machine (pushScannedWorkSymbols word []).length
+          { state := leftState
+            tape := WorkTape.beforeLeftScan leftSuffix
+              (pushScannedWorkSymbols word []) leftDelimiter
+              (rightDelimiter :: suffix) } =
+        some
+          { state := leftState
+            tape := WorkTape.beforeLeftScan leftSuffix [] leftDelimiter
+              (word ++ rightDelimiter :: suffix) } := by
+    rw [beforeLeftScan_roundTrip] at hLeftRaw
+    exact hLeftRaw
+  have hRightBoundary := workRunExact?_add_of_exact machine word.length 1
+    _ _ _ hRight hBoundary
+  exact workRunExact?_add_of_exact machine (word.length + 1)
+    (pushScannedWorkSymbols word []).length _ _ _ hRightBoundary hLeft
+
 theorem workRunExact?_compose (machine : WorkMachine)
     (first second : Nat) (start middle final : WorkConfiguration)
     (hFirst : workRunExact? machine first start = some middle)
@@ -563,5 +744,293 @@ theorem widthRestoreBackFormula_step (head : WorkSymbol)
       some (workConfigAtLeftWord CNFWorkState.widthRestoreBackFormula
         leftTail (head :: rightSide)) := by
   cases allowed <;> rfl
+
+/-! ### Exact width scans and their first composed outward pass -/
+
+theorem widthToBoundary_scan (word suffix leftSide : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word → FormulaScanSymbol symbol) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtWord CNFWorkState.widthToBoundary leftSide
+          (word ++ suffix)) =
+      some (workConfigAtWord CNFWorkState.widthToBoundary
+        (pushWorkLeft word leftSide) suffix) :=
+  workRunExact?_scanRight cnfWorkMachine CNFWorkState.widthToBoundary
+    FormulaScanSymbol widthToBoundary_step word suffix leftSide allowed
+
+theorem widthPastCounter_scan (word suffix leftSide : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word → symbol = cnfMarkFalse) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtWord CNFWorkState.widthPastCertificateCounter leftSide
+          (word ++ suffix)) =
+      some (workConfigAtWord CNFWorkState.widthPastCertificateCounter
+        (pushWorkLeft word leftSide) suffix) := by
+  apply workRunExact?_scanRight cnfWorkMachine
+    CNFWorkState.widthPastCertificateCounter
+    (fun symbol => symbol = cnfMarkFalse) _ word suffix leftSide allowed
+  intro foundLeft found suffix foundEq
+  cases foundEq
+  exact widthPastCounter_step foundLeft suffix
+
+theorem widthFindAssignment_scan (word suffix leftSide : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word → AssignmentMarkSymbol symbol) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtWord CNFWorkState.widthFindAssignment leftSide
+          (word ++ suffix)) =
+      some (workConfigAtWord CNFWorkState.widthFindAssignment
+        (pushWorkLeft word leftSide) suffix) :=
+  workRunExact?_scanRight cnfWorkMachine CNFWorkState.widthFindAssignment
+    AssignmentMarkSymbol widthFindAssignment_mark_step word suffix leftSide
+      allowed
+
+theorem widthToBoundary_guard_step (leftSide suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.widthToBoundary leftSide
+          (cnfBoundaryGuard :: suffix)) =
+      some (workConfigAtWord CNFWorkState.widthPastCertificateCounter
+        (cnfBoundaryGuard :: leftSide) suffix) := by
+  rfl
+
+theorem widthPastCounter_finish_step (leftSide suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.widthPastCertificateCounter leftSide
+          (cnfFinish :: suffix)) =
+      some (workConfigAtWord CNFWorkState.widthFindAssignment
+        (cnfFinish :: leftSide) suffix) := by
+  rfl
+
+/-- The first outward width pass crosses the formula tail, the certificate
+counter, and the already marked assignment prefix with an exact additive
+step count.  The focused `next` cell is deliberately left abstract: its
+transition determines whether the next width unit exists. -/
+theorem widthToAssignmentPrefix_run
+    (formulaTail counter markedAssignment leftSide suffix : List WorkSymbol)
+    (next : WorkSymbol)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaTail →
+      FormulaScanSymbol symbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (assignmentAllowed : ∀ symbol, List.Mem symbol markedAssignment →
+      AssignmentMarkSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (((formulaTail.length + 1) + counter.length + 1) +
+          markedAssignment.length)
+        (workConfigAtWord CNFWorkState.widthToBoundary leftSide
+          (formulaTail ++ (cnfBoundaryGuard :: (counter ++
+            (cnfFinish :: (markedAssignment ++ next :: suffix)))))) =
+      some (workConfigAtWord CNFWorkState.widthFindAssignment
+        (pushWorkLeft markedAssignment
+          (cnfFinish :: pushWorkLeft counter
+            (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide)))
+        (next :: suffix)) := by
+  have hFormula := widthToBoundary_scan formulaTail
+    (cnfBoundaryGuard :: (counter ++
+      (cnfFinish :: (markedAssignment ++ next :: suffix))))
+    leftSide formulaAllowed
+  have hGuard := workRunExact?_one_of_step cnfWorkMachine _ _
+    (widthToBoundary_guard_step (pushWorkLeft formulaTail leftSide)
+      (counter ++ (cnfFinish :: (markedAssignment ++ next :: suffix))))
+  have hCounter := widthPastCounter_scan counter
+    (cnfFinish :: markedAssignment ++ next :: suffix)
+    (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide) counterAllowed
+  have hFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (widthPastCounter_finish_step
+      (pushWorkLeft counter
+        (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide))
+      (markedAssignment ++ next :: suffix))
+  have hAssignment := widthFindAssignment_scan markedAssignment
+    (next :: suffix)
+    (cnfFinish :: pushWorkLeft counter
+      (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide))
+    assignmentAllowed
+  have hFormulaGuard := workRunExact?_compose cnfWorkMachine
+    formulaTail.length 1 _ _ _ hFormula hGuard
+  have hThroughCounter := workRunExact?_compose cnfWorkMachine
+    (formulaTail.length + 1) counter.length _ _ _ hFormulaGuard hCounter
+  have hThroughFinish := workRunExact?_compose cnfWorkMachine
+    ((formulaTail.length + 1) + counter.length) 1 _ _ _
+      hThroughCounter hFinish
+  exact workRunExact?_compose cnfWorkMachine
+    (((formulaTail.length + 1) + counter.length) + 1)
+    markedAssignment.length _ _ _ hThroughFinish hAssignment
+
+/-! ### Exact literal outward scans -/
+
+set_option maxRecDepth 4096 in
+theorem literalIndexToBoundary_step (alreadySatisfied positive : Bool)
+    (leftSide : List WorkSymbol) (head : WorkSymbol)
+    (suffix : List WorkSymbol) (allowed : FormulaScanSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalIndexToBoundary alreadySatisfied positive)
+          leftSide (head :: suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalIndexToBoundary alreadySatisfied positive)
+        (head :: leftSide) suffix) := by
+  cases alreadySatisfied <;> cases positive <;> cases allowed <;> rfl
+
+set_option maxRecDepth 4096 in
+theorem literalIndexToBoundary_guard_step
+    (alreadySatisfied positive : Bool) (leftSide suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalIndexToBoundary alreadySatisfied positive)
+          leftSide (cnfBoundaryGuard :: suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalIndexPastCertificateCounter
+          alreadySatisfied positive)
+        (cnfBoundaryGuard :: leftSide) suffix) := by
+  cases alreadySatisfied <;> cases positive <;> rfl
+
+set_option maxRecDepth 4096 in
+theorem literalIndexPastCounter_step
+    (alreadySatisfied positive : Bool) (leftSide suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalIndexPastCertificateCounter
+            alreadySatisfied positive)
+          leftSide (cnfMarkFalse :: suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalIndexPastCertificateCounter
+          alreadySatisfied positive)
+        (cnfMarkFalse :: leftSide) suffix) := by
+  cases alreadySatisfied <;> cases positive <;> rfl
+
+set_option maxRecDepth 4096 in
+theorem literalIndexPastCounter_finish_step
+    (alreadySatisfied positive : Bool) (leftSide suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalIndexPastCertificateCounter
+            alreadySatisfied positive)
+          leftSide (cnfFinish :: suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalMarkAssignment alreadySatisfied positive)
+        (cnfFinish :: leftSide) suffix) := by
+  cases alreadySatisfied <;> cases positive <;> rfl
+
+set_option maxRecDepth 4096 in
+theorem literalMarkAssignment_step (alreadySatisfied positive : Bool)
+    (leftSide : List WorkSymbol) (head : WorkSymbol)
+    (suffix : List WorkSymbol) (allowed : AssignmentMarkSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalMarkAssignment alreadySatisfied positive)
+          leftSide (head :: suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalMarkAssignment alreadySatisfied positive)
+        (head :: leftSide) suffix) := by
+  cases alreadySatisfied <;> cases positive <;> cases allowed <;> rfl
+
+theorem literalIndexToBoundary_scan (alreadySatisfied positive : Bool)
+    (word suffix leftSide : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word → FormulaScanSymbol symbol) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtWord
+          (CNFWorkState.literalIndexToBoundary alreadySatisfied positive)
+          leftSide (word ++ suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalIndexToBoundary alreadySatisfied positive)
+        (pushWorkLeft word leftSide) suffix) :=
+  workRunExact?_scanRight cnfWorkMachine
+    (CNFWorkState.literalIndexToBoundary alreadySatisfied positive)
+    FormulaScanSymbol (literalIndexToBoundary_step alreadySatisfied positive)
+    word suffix leftSide allowed
+
+theorem literalIndexPastCounter_scan (alreadySatisfied positive : Bool)
+    (word suffix leftSide : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word → symbol = cnfMarkFalse) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtWord
+          (CNFWorkState.literalIndexPastCertificateCounter
+            alreadySatisfied positive)
+          leftSide (word ++ suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalIndexPastCertificateCounter
+          alreadySatisfied positive)
+        (pushWorkLeft word leftSide) suffix) := by
+  apply workRunExact?_scanRight cnfWorkMachine
+    (CNFWorkState.literalIndexPastCertificateCounter
+      alreadySatisfied positive)
+    (fun symbol => symbol = cnfMarkFalse) _ word suffix leftSide allowed
+  intro foundLeft found foundSuffix foundEq
+  cases foundEq
+  exact literalIndexPastCounter_step alreadySatisfied positive
+    foundLeft foundSuffix
+
+theorem literalMarkAssignment_scan (alreadySatisfied positive : Bool)
+    (word suffix leftSide : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word → AssignmentMarkSymbol symbol) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtWord
+          (CNFWorkState.literalMarkAssignment alreadySatisfied positive)
+          leftSide (word ++ suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalMarkAssignment alreadySatisfied positive)
+        (pushWorkLeft word leftSide) suffix) :=
+  workRunExact?_scanRight cnfWorkMachine
+    (CNFWorkState.literalMarkAssignment alreadySatisfied positive)
+    AssignmentMarkSymbol
+    (literalMarkAssignment_step alreadySatisfied positive)
+    word suffix leftSide allowed
+
+/-- A marked literal index performs the same finite outward traversal as the
+width phase: formula tail, certificate counter, then the marked assignment
+prefix.  The exact endpoint is the first unmarked value or the right guard. -/
+theorem literalIndexToAssignmentPrefix_run
+    (alreadySatisfied positive : Bool)
+    (formulaTail counter markedAssignment leftSide suffix : List WorkSymbol)
+    (next : WorkSymbol)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaTail →
+      FormulaScanSymbol symbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (assignmentAllowed : ∀ symbol, List.Mem symbol markedAssignment →
+      AssignmentMarkSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (((formulaTail.length + 1) + counter.length + 1) +
+          markedAssignment.length)
+        (workConfigAtWord
+          (CNFWorkState.literalIndexToBoundary alreadySatisfied positive)
+          leftSide
+          (formulaTail ++ (cnfBoundaryGuard :: (counter ++
+            (cnfFinish :: (markedAssignment ++ next :: suffix)))))) =
+      some (workConfigAtWord
+        (CNFWorkState.literalMarkAssignment alreadySatisfied positive)
+        (pushWorkLeft markedAssignment
+          (cnfFinish :: pushWorkLeft counter
+            (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide)))
+        (next :: suffix)) := by
+  have hFormula := literalIndexToBoundary_scan alreadySatisfied positive
+    formulaTail
+    (cnfBoundaryGuard :: (counter ++
+      (cnfFinish :: (markedAssignment ++ next :: suffix))))
+    leftSide formulaAllowed
+  have hGuard := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalIndexToBoundary_guard_step alreadySatisfied positive
+      (pushWorkLeft formulaTail leftSide)
+      (counter ++ (cnfFinish :: (markedAssignment ++ next :: suffix))))
+  have hCounter := literalIndexPastCounter_scan alreadySatisfied positive
+    counter (cnfFinish :: markedAssignment ++ next :: suffix)
+    (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide) counterAllowed
+  have hFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalIndexPastCounter_finish_step alreadySatisfied positive
+      (pushWorkLeft counter
+        (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide))
+      (markedAssignment ++ next :: suffix))
+  have hAssignment := literalMarkAssignment_scan alreadySatisfied positive
+    markedAssignment (next :: suffix)
+    (cnfFinish :: pushWorkLeft counter
+      (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide))
+    assignmentAllowed
+  have hFormulaGuard := workRunExact?_compose cnfWorkMachine
+    formulaTail.length 1 _ _ _ hFormula hGuard
+  have hThroughCounter := workRunExact?_compose cnfWorkMachine
+    (formulaTail.length + 1) counter.length _ _ _ hFormulaGuard hCounter
+  have hThroughFinish := workRunExact?_compose cnfWorkMachine
+    ((formulaTail.length + 1) + counter.length) 1 _ _ _
+      hThroughCounter hFinish
+  exact workRunExact?_compose cnfWorkMachine
+    (((formulaTail.length + 1) + counter.length) + 1)
+    markedAssignment.length _ _ _ hThroughFinish hAssignment
 
 end PNP.Concrete
