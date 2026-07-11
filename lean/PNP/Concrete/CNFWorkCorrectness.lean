@@ -2188,6 +2188,1723 @@ theorem cnfWorkExact_phaseLedger
     (((fixedSteps + frameSteps) + widthSteps) + grammarSteps)
     (cnfWorkStepPolynomial.eval n) start final completeRun halted completeBound
 
+/-! ### Exact width-phase execution and phase ledger -/
+
+theorem workSymbol_append_assoc
+    (left middle right : List WorkSymbol) :
+    (left ++ middle) ++ right = left ++ (middle ++ right) := by
+  induction left with
+  | nil => rfl
+  | cons symbol rest ih => exact congrArg (List.cons symbol) ih
+
+theorem workSymbol_length_append
+    (left right : List WorkSymbol) :
+    (left ++ right).length = left.length + right.length := by
+  induction left with
+  | nil => exact (Nat.zero_add right.length).symm
+  | cons symbol rest ih =>
+      change Nat.succ (rest ++ right).length =
+        Nat.succ rest.length + right.length
+      rw [Nat.succ_add]
+      exact congrArg Nat.succ ih
+
+theorem cnfTokenWorkSymbols_append
+    (left right : List CNFToken) :
+    cnfTokenWorkSymbols (left ++ right) =
+      cnfTokenWorkSymbols left ++ cnfTokenWorkSymbols right := by
+  induction left with
+  | nil => rfl
+  | cons token rest ih =>
+      change token.workSymbol :: cnfTokenWorkSymbols (rest ++ right) =
+        token.workSymbol ::
+          (cnfTokenWorkSymbols rest ++ cnfTokenWorkSymbols right)
+      exact congrArg (List.cons token.workSymbol) ih
+
+theorem cnfTokenWorkSymbols_encodeUnaryTokens (count : Nat) :
+    cnfTokenWorkSymbols (encodeUnaryTokens count) =
+      List.replicate count cnfT ++ [cnfF] := by
+  induction count with
+  | zero => rfl
+  | succ count ih =>
+      change cnfT :: cnfTokenWorkSymbols (encodeUnaryTokens count) =
+        cnfT :: (List.replicate count cnfT ++ [cnfF])
+      exact congrArg (List.cons cnfT) ih
+
+theorem cnfTokenWorkSymbols_formula_header (formula : CNFFormula) :
+    cnfTokenWorkSymbols (encodeFormulaTokens formula) =
+      List.replicate formula.variableCount cnfT ++
+        cnfF :: cnfTokenWorkSymbols
+          (encodeClauseListTokens formula.clauses ++ [.finish]) := by
+  unfold encodeFormulaTokens encodeCNFTokens
+  rw [token_append_assoc_constructive]
+  rw [cnfTokenWorkSymbols_append]
+  rw [cnfTokenWorkSymbols_encodeUnaryTokens]
+  change (List.replicate formula.variableCount cnfT ++ [cnfF]) ++ _ = _
+  rw [workSymbol_append_assoc]
+  rfl
+
+def unmarkAssignmentWorkSymbol : WorkSymbol → WorkSymbol
+  | ⟨.blank, .blank⟩ => ⟨.blank, .blank⟩
+  | ⟨.blank, .zero⟩ => cnfF
+  | ⟨.blank, .one⟩ => cnfT
+  | ⟨.zero, .blank⟩ => ⟨.zero, .blank⟩
+  | ⟨.zero, .zero⟩ => ⟨.zero, .zero⟩
+  | ⟨.zero, .one⟩ => ⟨.zero, .one⟩
+  | ⟨.one, .blank⟩ => ⟨.one, .blank⟩
+  | ⟨.one, .zero⟩ => ⟨.one, .zero⟩
+  | ⟨.one, .one⟩ => ⟨.one, .one⟩
+
+theorem unmarkAssignmentWorkSymbol_false :
+    unmarkAssignmentWorkSymbol cnfMarkFalse = cnfF := rfl
+
+theorem unmarkAssignmentWorkSymbol_true :
+    unmarkAssignmentWorkSymbol cnfMarkTrue = cnfT := rfl
+
+theorem map_unmark_markedAssignment (assignment : BitString) :
+    (markedAssignmentWorkSymbols assignment).map
+        unmarkAssignmentWorkSymbol =
+      assignmentWorkSymbols assignment := by
+  induction assignment with
+  | nil => rfl
+  | cons value rest ih =>
+      cases value <;> exact congrArg (List.cons _) ih
+
+theorem map_unmark_pushWorkLeft_marked
+    (assignment : BitString) (left : List WorkSymbol) :
+    (pushWorkLeft (markedAssignmentWorkSymbols assignment) left).map
+        unmarkAssignmentWorkSymbol =
+      pushWorkLeft (assignmentWorkSymbols assignment)
+        (left.map unmarkAssignmentWorkSymbol) := by
+  induction assignment generalizing left with
+  | nil => rfl
+  | cons value rest ih =>
+      cases value <;> exact ih (_ :: left)
+
+theorem push_unmark_pushed_marked
+    (assignment : BitString) (right : List WorkSymbol) :
+    pushWorkLeft
+        ((pushWorkLeft (markedAssignmentWorkSymbols assignment) []).map
+          unmarkAssignmentWorkSymbol)
+        right =
+      assignmentWorkSymbols assignment ++ right := by
+  rw [map_unmark_pushWorkLeft_marked]
+  change pushWorkLeft (pushWorkLeft (assignmentWorkSymbols assignment) [])
+      right = _
+  exact pushWorkLeft_cancel (assignmentWorkSymbols assignment) right
+
+theorem widthFindFormula_mark_step
+    (leftSide formulaTail : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.widthFindFormula leftSide
+          (cnfT :: formulaTail)) =
+      some (workConfigAtWord CNFWorkState.widthToBoundary
+        (cnfMarkTrue :: leftSide) formulaTail) := by
+  rfl
+
+theorem widthFindFormula_done_step
+    (leftSide formulaTail : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.widthFindFormula leftSide
+          (cnfF :: formulaTail)) =
+      some (workConfigAtWord CNFWorkState.widthDoneToBoundary
+        (cnfF :: leftSide) formulaTail) := by
+  rfl
+
+theorem widthFindAssignment_value_step
+    (leftSide suffix : List WorkSymbol) (value : Bool) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.widthFindAssignment leftSide
+          ((if value then cnfT else cnfF) :: suffix)) =
+      some
+        { state := CNFWorkState.widthBackAssignment
+          tape := (WorkTape.focus leftSide
+            (if value then cnfMarkTrue else cnfMarkFalse) suffix).moveLeft } := by
+  cases value <;> rfl
+
+set_option maxRecDepth 100000 in
+theorem widthFindAssignment_short_step
+    (leftSide suffix : List WorkSymbol) :
+    workRunExact? cnfWorkMachine 1
+        (workConfigAtWord CNFWorkState.widthFindAssignment leftSide
+          (cnfRootGuard :: suffix)) =
+      some (workConfigAtWord CNFWorkState.reject leftSide
+        (cnfRootGuard :: suffix)) := by
+  exact cnfReject_run_one CNFWorkState.widthFindAssignment _ (by rfl) (by rfl)
+
+theorem widthDonePastCounter_step
+    (leftSide suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.widthDonePastCertificateCounter
+          leftSide (cnfMarkFalse :: suffix)) =
+      some (workConfigAtWord
+        CNFWorkState.widthDonePastCertificateCounter
+        (cnfMarkFalse :: leftSide) suffix) := by
+  rfl
+
+theorem widthDonePastCounter_finish_step
+    (leftSide suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.widthDonePastCertificateCounter
+          leftSide (cnfFinish :: suffix)) =
+      some (workConfigAtWord CNFWorkState.widthDoneCheckAssignment
+        (cnfFinish :: leftSide) suffix) := by
+  rfl
+
+theorem widthDoneToBoundary_guard_step
+    (leftSide suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.widthDoneToBoundary leftSide
+          (cnfBoundaryGuard :: suffix)) =
+      some (workConfigAtWord
+        CNFWorkState.widthDonePastCertificateCounter
+        (cnfBoundaryGuard :: leftSide) suffix) := by
+  rfl
+
+theorem widthRestoreAssignment_step
+    (head : WorkSymbol) (leftTail rightSide : List WorkSymbol)
+    (allowed : AssignmentMarkSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.widthRestoreAssignment
+          (head :: leftTail) rightSide) =
+      some (workConfigAtLeftWord CNFWorkState.widthRestoreAssignment
+        leftTail (unmarkAssignmentWorkSymbol head :: rightSide)) := by
+  cases allowed <;> rfl
+
+theorem widthRestoreFormula_mark_step
+    (leftSide suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.widthRestoreFormula leftSide
+          (cnfMarkTrue :: suffix)) =
+      some (workConfigAtWord CNFWorkState.widthRestoreFormula
+        (cnfT :: leftSide) suffix) := by
+  rfl
+
+theorem widthRestoreFormula_done_step
+    (leftSide suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.widthRestoreFormula leftSide
+          (cnfF :: suffix)) =
+      some (workConfigAtWord CNFWorkState.clauseStart
+        (cnfF :: leftSide) suffix) := by
+  rfl
+
+theorem pushWorkLeft_length (word left : List WorkSymbol) :
+    (pushWorkLeft word left).length = word.length + left.length := by
+  induction word generalizing left with
+  | nil => exact (Nat.zero_add left.length).symm
+  | cons symbol rest ih =>
+      rw [pushWorkLeft_cons]
+      rw [ih]
+      change rest.length + Nat.succ left.length =
+        Nat.succ rest.length + left.length
+      rw [Nat.add_succ, Nat.succ_add]
+
+theorem pushWorkLeft_allowed (Allowed : WorkSymbol → Prop)
+    (word left : List WorkSymbol)
+    (wordAllowed : ∀ symbol, List.Mem symbol word → Allowed symbol)
+    (leftAllowed : ∀ symbol, List.Mem symbol left → Allowed symbol)
+    (symbol : WorkSymbol)
+    (found : List.Mem symbol (pushWorkLeft word left)) : Allowed symbol := by
+  induction word generalizing left with
+  | nil => exact leftAllowed symbol found
+  | cons head rest ih =>
+      rw [pushWorkLeft_cons] at found
+      apply ih (head :: left)
+      · intro candidate inRest
+        exact wordAllowed candidate (List.Mem.tail head inRest)
+      · intro candidate inExtended
+        cases inExtended with
+        | head => exact wordAllowed head (List.Mem.head rest)
+        | tail _ inLeft => exact leftAllowed candidate inLeft
+      · exact found
+
+/-- Constructive mapped left scan.  Unlike `workRunExact?_scanLeft`, each
+crossed cell may be rewritten, so it directly models assignment restore. -/
+theorem workRunExact?_scanLeftWrite (machine : WorkMachine)
+    (state : Nat) (Allowed : WorkSymbol → Prop)
+    (write : WorkSymbol → WorkSymbol)
+    (hStep : ∀ head leftTail rightSide,
+      Allowed head →
+      workStep? machine
+          (workConfigAtLeftWord state (head :: leftTail) rightSide) =
+        some (workConfigAtLeftWord state leftTail
+          (write head :: rightSide)))
+    (word leftSuffix rightSide : List WorkSymbol)
+    (hAllowed : ∀ symbol, List.Mem symbol word → Allowed symbol) :
+    workRunExact? machine word.length
+        (workConfigAtLeftWord state (word ++ leftSuffix) rightSide) =
+      some (workConfigAtLeftWord state leftSuffix
+        (pushWorkLeft (word.map write) rightSide)) := by
+  induction word generalizing rightSide with
+  | nil => rfl
+  | cons head rest ih =>
+      have hHead : Allowed head := hAllowed head (List.Mem.head rest)
+      have hRest : ∀ symbol, List.Mem symbol rest → Allowed symbol := by
+        intro symbol found
+        exact hAllowed symbol (List.Mem.tail head found)
+      change
+        (match workStep? machine
+          (workConfigAtLeftWord state (head :: (rest ++ leftSuffix))
+            rightSide) with
+         | none => none
+         | some next => workRunExact? machine rest.length next) = _
+      rw [hStep head (rest ++ leftSuffix) rightSide hHead]
+      exact ih (write head :: rightSide) hRest
+
+theorem pushedMarkedAssignment_allowed (assignment : BitString)
+    (symbol : WorkSymbol)
+    (found : List.Mem symbol
+      (pushWorkLeft (markedAssignmentWorkSymbols assignment) [])) :
+    AssignmentMarkSymbol symbol := by
+  exact pushWorkLeft_allowed AssignmentMarkSymbol
+    (markedAssignmentWorkSymbols assignment) []
+    (markedAssignmentWorkSymbols_allowed assignment)
+    (by intro candidate impossible; contradiction)
+    symbol found
+
+/-- The write-and-move-left assignment restoration is an exact inverse of
+the outward marking pass, including value order. -/
+theorem widthRestoreAssignment_scan (assignment : BitString)
+    (leftSuffix rightSide : List WorkSymbol) :
+    workRunExact? cnfWorkMachine assignment.length
+        (workConfigAtLeftWord CNFWorkState.widthRestoreAssignment
+          (pushWorkLeft (markedAssignmentWorkSymbols assignment) [] ++
+            leftSuffix)
+          rightSide) =
+      some (workConfigAtLeftWord CNFWorkState.widthRestoreAssignment
+        leftSuffix (assignmentWorkSymbols assignment ++ rightSide)) := by
+  have hScan := workRunExact?_scanLeftWrite cnfWorkMachine
+    CNFWorkState.widthRestoreAssignment AssignmentMarkSymbol
+    unmarkAssignmentWorkSymbol widthRestoreAssignment_step
+    (pushWorkLeft (markedAssignmentWorkSymbols assignment) [])
+    leftSuffix rightSide (pushedMarkedAssignment_allowed assignment)
+  have hLength :
+      (pushWorkLeft (markedAssignmentWorkSymbols assignment) []).length =
+        assignment.length := by
+    rw [pushWorkLeft_length]
+    rw [markedAssignmentWorkSymbols_length]
+    exact Nat.add_zero assignment.length
+  rw [hLength] at hScan
+  rw [push_unmark_pushed_marked] at hScan
+  exact hScan
+
+theorem replicate_markTrue_allowed (count : Nat)
+    (symbol : WorkSymbol)
+    (found : List.Mem symbol (List.replicate count cnfMarkTrue)) :
+    symbol = cnfMarkTrue := by
+  induction count with
+  | zero => contradiction
+  | succ count ih =>
+      cases found with
+      | head => rfl
+      | tail _ tailFound => exact ih tailFound
+
+/-- Constructive mapped right scan. -/
+theorem workRunExact?_scanRightWrite (machine : WorkMachine)
+    (state : Nat) (Allowed : WorkSymbol → Prop)
+    (write : WorkSymbol → WorkSymbol)
+    (hStep : ∀ leftSide head suffix,
+      Allowed head →
+      workStep? machine
+          (workConfigAtWord state leftSide (head :: suffix)) =
+        some (workConfigAtWord state (write head :: leftSide) suffix))
+    (word suffix leftSide : List WorkSymbol)
+    (hAllowed : ∀ symbol, List.Mem symbol word → Allowed symbol) :
+    workRunExact? machine word.length
+        (workConfigAtWord state leftSide (word ++ suffix)) =
+      some (workConfigAtWord state
+        (pushWorkLeft (word.map write) leftSide) suffix) := by
+  induction word generalizing leftSide with
+  | nil => rfl
+  | cons head rest ih =>
+      have hHead : Allowed head := hAllowed head (List.Mem.head rest)
+      have hRest : ∀ symbol, List.Mem symbol rest → Allowed symbol := by
+        intro symbol found
+        exact hAllowed symbol (List.Mem.tail head found)
+      change
+        (match workStep? machine
+          (workConfigAtWord state leftSide (head :: (rest ++ suffix))) with
+         | none => none
+         | some next => workRunExact? machine rest.length next) = _
+      rw [hStep leftSide head (rest ++ suffix) hHead]
+      exact ih (write head :: leftSide) hRest
+
+theorem map_replicate_markTrue_to_true (count : Nat) :
+    (List.replicate count cnfMarkTrue).map
+        (fun _ => cnfT) =
+      List.replicate count cnfT := by
+  induction count with
+  | zero => rfl
+  | succ count ih => exact congrArg (List.cons cnfT) ih
+
+theorem workSymbol_replicate_length (count : Nat)
+    (symbol : WorkSymbol) :
+    (List.replicate count symbol).length = count := by
+  induction count with
+  | zero => rfl
+  | succ count ih => exact congrArg Nat.succ ih
+
+/-- Restoring the marked unary header writes exactly `T^count`, then crosses
+the terminating `F` into clause evaluation. -/
+theorem widthRestoreFormula_header (count : Nat)
+    (leftSide formulaTail : List WorkSymbol) :
+    workRunExact? cnfWorkMachine (count + 1)
+        (workConfigAtWord CNFWorkState.widthRestoreFormula leftSide
+          (List.replicate count cnfMarkTrue ++ cnfF :: formulaTail)) =
+      some (workConfigAtWord CNFWorkState.clauseStart
+        (cnfF :: pushWorkLeft (List.replicate count cnfT) leftSide)
+        formulaTail) := by
+  have hMarks := workRunExact?_scanRightWrite cnfWorkMachine
+    CNFWorkState.widthRestoreFormula
+    (fun symbol => symbol = cnfMarkTrue)
+    (fun _ => cnfT)
+    (by
+      intro foundLeft head suffix allowed
+      cases allowed
+      exact widthRestoreFormula_mark_step foundLeft suffix)
+    (List.replicate count cnfMarkTrue) (cnfF :: formulaTail) leftSide
+    (replicate_markTrue_allowed count)
+  rw [map_replicate_markTrue_to_true] at hMarks
+  rw [workSymbol_replicate_length] at hMarks
+  have hFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (widthRestoreFormula_done_step
+      (pushWorkLeft (List.replicate count cnfT) leftSide) formulaTail)
+  exact workRunExact?_compose cnfWorkMachine count 1 _ _ _
+    hMarks hFinish
+
+/- Exact short/long comparison branches. -/
+
+theorem widthDoneToBoundary_scan
+    (word suffix leftSide : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word → FormulaScanSymbol symbol) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtWord CNFWorkState.widthDoneToBoundary leftSide
+          (word ++ suffix)) =
+      some (workConfigAtWord CNFWorkState.widthDoneToBoundary
+        (pushWorkLeft word leftSide) suffix) :=
+  workRunExact?_scanRight cnfWorkMachine
+    CNFWorkState.widthDoneToBoundary FormulaScanSymbol
+    widthDoneToBoundary_step word suffix leftSide allowed
+
+theorem widthDonePastCounter_scan
+    (word suffix leftSide : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word → symbol = cnfMarkFalse) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtWord
+          CNFWorkState.widthDonePastCertificateCounter leftSide
+          (word ++ suffix)) =
+      some (workConfigAtWord
+        CNFWorkState.widthDonePastCertificateCounter
+        (pushWorkLeft word leftSide) suffix) := by
+  apply workRunExact?_scanRight cnfWorkMachine
+    CNFWorkState.widthDonePastCertificateCounter
+    (fun symbol => symbol = cnfMarkFalse) _ word suffix leftSide allowed
+  intro foundLeft head foundSuffix equal
+  cases equal
+  exact widthDonePastCounter_step foundLeft foundSuffix
+
+theorem widthDoneCheckAssignment_scan
+    (word suffix leftSide : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word → AssignmentMarkSymbol symbol) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtWord CNFWorkState.widthDoneCheckAssignment leftSide
+          (word ++ suffix)) =
+      some (workConfigAtWord CNFWorkState.widthDoneCheckAssignment
+        (pushWorkLeft word leftSide) suffix) :=
+  workRunExact?_scanRight cnfWorkMachine
+    CNFWorkState.widthDoneCheckAssignment AssignmentMarkSymbol
+    widthDoneCheckAssignment_step word suffix leftSide allowed
+
+theorem widthDoneToAssignmentEnd_run
+    (formulaTail counter markedAssignment leftSide suffix :
+      List WorkSymbol)
+    (next : WorkSymbol)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaTail →
+      FormulaScanSymbol symbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (assignmentAllowed : ∀ symbol, List.Mem symbol markedAssignment →
+      AssignmentMarkSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (((formulaTail.length + 1) + counter.length + 1) +
+          markedAssignment.length)
+        (workConfigAtWord CNFWorkState.widthDoneToBoundary leftSide
+          (formulaTail ++ (cnfBoundaryGuard :: (counter ++
+            (cnfFinish :: (markedAssignment ++ next :: suffix)))))) =
+      some (workConfigAtWord CNFWorkState.widthDoneCheckAssignment
+        (pushWorkLeft markedAssignment
+          (cnfFinish :: pushWorkLeft counter
+            (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide)))
+        (next :: suffix)) := by
+  have hFormula := widthDoneToBoundary_scan formulaTail
+    (cnfBoundaryGuard :: (counter ++
+      (cnfFinish :: (markedAssignment ++ next :: suffix))))
+    leftSide formulaAllowed
+  have hGuard := workRunExact?_one_of_step cnfWorkMachine _ _
+    (widthDoneToBoundary_guard_step
+      (pushWorkLeft formulaTail leftSide)
+      (counter ++ (cnfFinish :: (markedAssignment ++ next :: suffix))))
+  have hCounter := widthDonePastCounter_scan counter
+    (cnfFinish :: markedAssignment ++ next :: suffix)
+    (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide) counterAllowed
+  have hFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (widthDonePastCounter_finish_step
+      (pushWorkLeft counter
+        (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide))
+      (markedAssignment ++ next :: suffix))
+  have hAssignment := widthDoneCheckAssignment_scan markedAssignment
+    (next :: suffix)
+    (cnfFinish :: pushWorkLeft counter
+      (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide))
+    assignmentAllowed
+  have hFormulaGuard := workRunExact?_compose cnfWorkMachine
+    formulaTail.length 1 _ _ _ hFormula hGuard
+  have hThroughCounter := workRunExact?_compose cnfWorkMachine
+    (formulaTail.length + 1) counter.length _ _ _ hFormulaGuard hCounter
+  have hThroughFinish := workRunExact?_compose cnfWorkMachine
+    ((formulaTail.length + 1) + counter.length) 1 _ _ _
+    hThroughCounter hFinish
+  exact workRunExact?_compose cnfWorkMachine
+    (((formulaTail.length + 1) + counter.length) + 1)
+    markedAssignment.length _ _ _ hThroughFinish hAssignment
+
+set_option maxRecDepth 100000 in
+theorem width_short_assignment_reject
+    (formulaTail counter markedAssignment leftSide suffix :
+      List WorkSymbol)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaTail →
+      FormulaScanSymbol symbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (assignmentAllowed : ∀ symbol, List.Mem symbol markedAssignment →
+      AssignmentMarkSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        ((((formulaTail.length + 1) + counter.length + 1) +
+          markedAssignment.length) + 1)
+        (workConfigAtWord CNFWorkState.widthToBoundary leftSide
+          (formulaTail ++ (cnfBoundaryGuard :: (counter ++
+            (cnfFinish ::
+              (markedAssignment ++ cnfRootGuard :: suffix)))))) =
+      some (workConfigAtWord CNFWorkState.reject
+        (pushWorkLeft markedAssignment
+          (cnfFinish :: pushWorkLeft counter
+            (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide)))
+        (cnfRootGuard :: suffix)) := by
+  have hOut := widthToAssignmentPrefix_run formulaTail counter
+    markedAssignment leftSide suffix cnfRootGuard formulaAllowed
+    counterAllowed assignmentAllowed
+  have hReject := widthFindAssignment_short_step
+    (pushWorkLeft markedAssignment
+      (cnfFinish :: pushWorkLeft counter
+        (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide))) suffix
+  exact workRunExact?_compose cnfWorkMachine
+    (((formulaTail.length + 1) + counter.length + 1) +
+      markedAssignment.length)
+    1 _ _ _ hOut hReject
+
+set_option maxRecDepth 100000 in
+theorem width_long_assignment_reject
+    (formulaTail counter markedAssignment leftSide suffix :
+      List WorkSymbol)
+    (extra : Bool)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaTail →
+      FormulaScanSymbol symbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (assignmentAllowed : ∀ symbol, List.Mem symbol markedAssignment →
+      AssignmentMarkSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        ((((formulaTail.length + 1) + counter.length + 1) +
+          markedAssignment.length) + 1)
+        (workConfigAtWord CNFWorkState.widthDoneToBoundary leftSide
+          (formulaTail ++ (cnfBoundaryGuard :: (counter ++
+            (cnfFinish :: (markedAssignment ++
+              (if extra then cnfT else cnfF) :: suffix)))))) =
+      some (workConfigAtWord CNFWorkState.reject
+        (pushWorkLeft markedAssignment
+          (cnfFinish :: pushWorkLeft counter
+            (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide)))
+        ((if extra then cnfT else cnfF) :: suffix)) := by
+  have hOut := widthDoneToAssignmentEnd_run formulaTail counter
+    markedAssignment leftSide suffix (if extra then cnfT else cnfF)
+    formulaAllowed counterAllowed assignmentAllowed
+  have hReject :
+      workRunExact? cnfWorkMachine 1
+          (workConfigAtWord CNFWorkState.widthDoneCheckAssignment
+            (pushWorkLeft markedAssignment
+              (cnfFinish :: pushWorkLeft counter
+                (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide)))
+            ((if extra then cnfT else cnfF) :: suffix)) =
+        some (workConfigAtWord CNFWorkState.reject
+          (pushWorkLeft markedAssignment
+            (cnfFinish :: pushWorkLeft counter
+              (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide)))
+          ((if extra then cnfT else cnfF) :: suffix)) := by
+    cases extra
+    · exact width_extraFalseAssignment_reject_run _ _
+    · exact width_extraTrueAssignment_reject_run _ _
+  exact workRunExact?_compose cnfWorkMachine
+    (((formulaTail.length + 1) + counter.length + 1) +
+      markedAssignment.length)
+    1 _ _ _ hOut hReject
+
+theorem pushWorkLeft_append_far (word farSide : List WorkSymbol) :
+    pushWorkLeft word farSide = pushWorkLeft word [] ++ farSide := by
+  rw [pushWorkLeft_eq_pushScannedWorkSymbols]
+  rw [pushWorkLeft_eq_pushScannedWorkSymbols]
+  exact pushScannedWorkSymbols_append_far word [] farSide
+
+theorem focus_pushed_moveLeft (word leftSuffix rightSide :
+    List WorkSymbol) (delimiter head : WorkSymbol) :
+    (WorkTape.focus (pushWorkLeft word (delimiter :: leftSuffix)) head
+      rightSide).moveLeft =
+      WorkTape.atLeftWord (head :: rightSide)
+        (pushWorkLeft word [] ++ delimiter :: leftSuffix) := by
+  rw [pushWorkLeft_append_far]
+  cases pushed : pushWorkLeft word [] <;> rfl
+
+theorem widthDoneCheckAssignment_root_step
+    (markedAssignment counter formulaTail leftSide suffix :
+      List WorkSymbol) :
+    workRunExact? cnfWorkMachine 1
+        (workConfigAtWord CNFWorkState.widthDoneCheckAssignment
+          (pushWorkLeft markedAssignment
+            (cnfFinish :: pushWorkLeft counter
+              (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide)))
+          (cnfRootGuard :: suffix)) =
+      some (workConfigAtLeftWord CNFWorkState.widthRestoreAssignment
+        (pushWorkLeft markedAssignment [] ++
+          cnfFinish :: pushWorkLeft counter
+            (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide))
+        (cnfRootGuard :: suffix)) := by
+  have hStep :
+      workStep? cnfWorkMachine
+          (workConfigAtWord CNFWorkState.widthDoneCheckAssignment
+            (pushWorkLeft markedAssignment
+              (cnfFinish :: pushWorkLeft counter
+                (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide)))
+            (cnfRootGuard :: suffix)) =
+        some
+          { state := CNFWorkState.widthRestoreAssignment
+            tape := (WorkTape.focus
+              (pushWorkLeft markedAssignment
+                (cnfFinish :: pushWorkLeft counter
+                  (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide)))
+              cnfRootGuard suffix).moveLeft } := by
+    rfl
+  have hOne := workRunExact?_one_of_step cnfWorkMachine _ _ hStep
+  rw [focus_pushed_moveLeft] at hOne
+  exact hOne
+
+/-- Equal-width endpoint plus exact assignment restoration. -/
+theorem width_equal_assignment_restored
+    (formulaTail counter leftSide suffix : List WorkSymbol)
+    (assignment : BitString)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaTail →
+      FormulaScanSymbol symbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse) :
+    workRunExact? cnfWorkMachine
+        (((((formulaTail.length + 1) + counter.length + 1) +
+          assignment.length) + 1) + assignment.length)
+        (workConfigAtWord CNFWorkState.widthDoneToBoundary leftSide
+          (formulaTail ++ (cnfBoundaryGuard :: (counter ++
+            (cnfFinish :: (markedAssignmentWorkSymbols assignment ++
+              cnfRootGuard :: suffix)))))) =
+      some (workConfigAtLeftWord CNFWorkState.widthRestoreAssignment
+        (cnfFinish :: pushWorkLeft counter
+          (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide))
+        (assignmentWorkSymbols assignment ++ cnfRootGuard :: suffix)) := by
+  have hOut := widthDoneToAssignmentEnd_run formulaTail counter
+    (markedAssignmentWorkSymbols assignment) leftSide suffix cnfRootGuard
+    formulaAllowed counterAllowed
+    (markedAssignmentWorkSymbols_allowed assignment)
+  rw [markedAssignmentWorkSymbols_length] at hOut
+  have hRoot := widthDoneCheckAssignment_root_step
+    (markedAssignmentWorkSymbols assignment) counter formulaTail leftSide suffix
+  have hRestore := widthRestoreAssignment_scan assignment
+    (cnfFinish :: pushWorkLeft counter
+      (cnfBoundaryGuard :: pushWorkLeft formulaTail leftSide))
+    (cnfRootGuard :: suffix)
+  have hOutRoot := workRunExact?_compose cnfWorkMachine
+    (((formulaTail.length + 1) + counter.length + 1) + assignment.length)
+    1 _ _ _ hOut hRoot
+  exact workRunExact?_compose cnfWorkMachine
+    ((((formulaTail.length + 1) + counter.length + 1) +
+      assignment.length) + 1)
+    assignment.length _ _ _ hOutRoot hRestore
+
+/- Return leg of one successful width unit.  These are deliberately small
+exact traces so the semantic induction can compose them without unfolding
+the finite rule table. -/
+
+theorem widthBackAssignment_scan
+    (word leftSuffix rightSide : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word → AssignmentMarkSymbol symbol) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtLeftWord CNFWorkState.widthBackAssignment
+          (word ++ leftSuffix) rightSide) =
+      some (workConfigAtLeftWord CNFWorkState.widthBackAssignment
+        leftSuffix (pushWorkLeft word rightSide)) :=
+  workRunExact?_scanLeft cnfWorkMachine CNFWorkState.widthBackAssignment
+    AssignmentMarkSymbol widthBackAssignment_step word leftSuffix rightSide
+    allowed
+
+theorem widthBackAssignment_finish_step
+    (leftTail rightSide : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.widthBackAssignment
+          (cnfFinish :: leftTail) rightSide) =
+      some (workConfigAtLeftWord
+        CNFWorkState.widthBackCertificateCounter leftTail
+        (cnfFinish :: rightSide)) := by
+  rfl
+
+theorem widthBackCounter_scan
+    (word leftSuffix rightSide : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word → symbol = cnfMarkFalse) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtLeftWord CNFWorkState.widthBackCertificateCounter
+          (word ++ leftSuffix) rightSide) =
+      some (workConfigAtLeftWord CNFWorkState.widthBackCertificateCounter
+        leftSuffix (pushWorkLeft word rightSide)) := by
+  apply workRunExact?_scanLeft cnfWorkMachine
+    CNFWorkState.widthBackCertificateCounter
+    (fun symbol => symbol = cnfMarkFalse) _ word leftSuffix rightSide allowed
+  intro head leftTail foundRight equal
+  cases equal
+  exact widthBackCounter_step leftTail foundRight
+
+theorem widthBackCounter_boundary_step
+    (leftTail rightSide : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.widthBackCertificateCounter
+          (cnfBoundaryGuard :: leftTail) rightSide) =
+      some (workConfigAtLeftWord CNFWorkState.widthBackFormula leftTail
+        (cnfBoundaryGuard :: rightSide)) := by
+  rfl
+
+
+theorem widthBackFormula_scan
+    (word leftSuffix rightSide : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word →
+      FormulaOrCounterSymbol symbol) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtLeftWord CNFWorkState.widthBackFormula
+          (word ++ leftSuffix) rightSide) =
+      some (workConfigAtLeftWord CNFWorkState.widthBackFormula
+        leftSuffix (pushWorkLeft word rightSide)) :=
+  workRunExact?_scanLeft cnfWorkMachine CNFWorkState.widthBackFormula
+    FormulaOrCounterSymbol widthBackFormula_step word leftSuffix rightSide
+    allowed
+
+theorem widthBackFormula_root_step
+    (leftTail rightSide : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.widthBackFormula
+          (cnfRootGuard :: leftTail) rightSide) =
+      some (workConfigAtWord CNFWorkState.seekFormulaStart
+        (cnfRootGuard :: leftTail) rightSide) := by
+  cases rightSide <;> rfl
+
+theorem seekFormulaStart_counter_step
+    (leftSide suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.seekFormulaStart leftSide
+          (cnfMarkFalse :: suffix)) =
+      some (workConfigAtWord CNFWorkState.seekFormulaStart
+        (cnfMarkFalse :: leftSide) suffix) := by
+  rfl
+
+theorem seekFormulaStart_counter_scan
+    (word suffix leftSide : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word → symbol = cnfMarkFalse) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtWord CNFWorkState.seekFormulaStart leftSide
+          (word ++ suffix)) =
+      some (workConfigAtWord CNFWorkState.seekFormulaStart
+        (pushWorkLeft word leftSide) suffix) := by
+  apply workRunExact?_scanRight cnfWorkMachine CNFWorkState.seekFormulaStart
+    (fun symbol => symbol = cnfMarkFalse) _ word suffix leftSide allowed
+  intro foundLeft head foundSuffix equal
+  cases equal
+  exact seekFormulaStart_counter_step foundLeft foundSuffix
+
+theorem seekFormulaStart_finish_step
+    (leftSide suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.seekFormulaStart leftSide
+          (cnfFinish :: suffix)) =
+      some (workConfigAtWord CNFWorkState.widthFindFormula
+        (cnfFinish :: leftSide) suffix) := by
+  rfl
+
+theorem widthFindFormula_marked_step
+    (leftSide suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.widthFindFormula leftSide
+          (cnfMarkTrue :: suffix)) =
+      some (workConfigAtWord CNFWorkState.widthFindFormula
+        (cnfMarkTrue :: leftSide) suffix) := by
+  rfl
+
+theorem widthFindFormula_marked_scan
+    (word suffix leftSide : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word → symbol = cnfMarkTrue) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtWord CNFWorkState.widthFindFormula leftSide
+          (word ++ suffix)) =
+      some (workConfigAtWord CNFWorkState.widthFindFormula
+        (pushWorkLeft word leftSide) suffix) := by
+  apply workRunExact?_scanRight cnfWorkMachine CNFWorkState.widthFindFormula
+    (fun symbol => symbol = cnfMarkTrue) _ word suffix leftSide allowed
+  intro foundLeft head foundSuffix equal
+  cases equal
+  exact widthFindFormula_marked_step foundLeft foundSuffix
+
+def widthMarkedFormulaPhysical
+    (outerCounter headerPrefix formulaTail : List WorkSymbol) :
+    List WorkSymbol :=
+  outerCounter ++ cnfFinish ::
+    (headerPrefix ++ cnfMarkTrue :: formulaTail)
+
+def widthReturnSteps
+    (outerCounter headerPrefix formulaTail counter markedAssignment :
+      List WorkSymbol) : Nat :=
+  ((((((((markedAssignment.length + 1) + counter.length) + 1) +
+    (widthMarkedFormulaPhysical outerCounter headerPrefix
+      formulaTail).length) + 1) + outerCounter.length) + 1) +
+      (headerPrefix.length + 1))
+
+theorem formulaScan_to_formulaOrCounter (symbol : WorkSymbol)
+    (allowed : FormulaScanSymbol symbol) : FormulaOrCounterSymbol symbol := by
+  cases allowed with
+  | markTrue => exact .markTrue
+  | f => exact .f
+  | t => exact .t
+  | sep => exact .sep
+  | finish => exact .finish
+
+theorem allowed_append (Allowed : WorkSymbol → Prop)
+    (left right : List WorkSymbol)
+    (leftAllowed : ∀ symbol, List.Mem symbol left → Allowed symbol)
+    (rightAllowed : ∀ symbol, List.Mem symbol right → Allowed symbol)
+    (symbol : WorkSymbol) (found : List.Mem symbol (left ++ right)) :
+    Allowed symbol := by
+  induction left generalizing symbol with
+  | nil => exact rightAllowed symbol found
+  | cons first rest ih =>
+      cases found with
+      | head => exact leftAllowed first (List.Mem.head rest)
+      | tail _ inAppend =>
+          exact ih
+            (fun candidate inRest =>
+              leftAllowed candidate (List.Mem.tail first inRest))
+            symbol inAppend
+
+theorem widthMarkedFormulaPhysical_allowed
+    (outerCounter headerPrefix formulaTail : List WorkSymbol)
+    (outerAllowed : ∀ symbol, List.Mem symbol outerCounter →
+      symbol = cnfMarkFalse)
+    (headerAllowed : ∀ symbol, List.Mem symbol headerPrefix →
+      symbol = cnfMarkTrue)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaTail →
+      FormulaScanSymbol symbol)
+    (symbol : WorkSymbol)
+    (found : List.Mem symbol
+      (widthMarkedFormulaPhysical outerCounter headerPrefix
+        formulaTail)) : FormulaOrCounterSymbol symbol := by
+  unfold widthMarkedFormulaPhysical at found
+  apply allowed_append FormulaOrCounterSymbol outerCounter
+    (cnfFinish :: (headerPrefix ++ cnfMarkTrue :: formulaTail))
+  · intro candidate inOuter
+    have equal := outerAllowed candidate inOuter
+    cases equal
+    exact .markFalse
+  · intro candidate inRest
+    cases inRest with
+    | head => exact .finish
+    | tail _ inHeaderAndTail =>
+        apply allowed_append FormulaOrCounterSymbol headerPrefix
+          (cnfMarkTrue :: formulaTail)
+        · intro headerSymbol inHeader
+          have equal := headerAllowed headerSymbol inHeader
+          cases equal
+          exact .markTrue
+        · intro tailSymbol inMarkedAndFormula
+          cases inMarkedAndFormula with
+          | head => exact .markTrue
+          | tail _ inFormula =>
+              exact formulaScan_to_formulaOrCounter tailSymbol
+                (formulaAllowed tailSymbol inFormula)
+        · exact inHeaderAndTail
+  · exact found
+
+theorem append_markTrue_allowed (headerPrefix : List WorkSymbol)
+    (headerAllowed : ∀ symbol, List.Mem symbol headerPrefix →
+      symbol = cnfMarkTrue)
+    (symbol : WorkSymbol)
+    (found : List.Mem symbol (headerPrefix ++ [cnfMarkTrue])) :
+    symbol = cnfMarkTrue := by
+  exact allowed_append (fun candidate => candidate = cnfMarkTrue)
+    headerPrefix [cnfMarkTrue] headerAllowed
+    (by
+      intro candidate inSingleton
+      cases inSingleton with
+      | head => rfl
+      | tail _ impossible => contradiction)
+    symbol found
+
+/-- Exact return leg after one header `T` has consumed one assignment value.
+The input is the normalized nearest-first stack produced by the outward pass;
+the output is precisely the next width-loop invariant. -/
+theorem widthOneUnit_return
+    (outerCounter headerPrefix formulaTail counter markedAssignment
+      assignmentSuffix : List WorkSymbol)
+    (markedValue : WorkSymbol)
+    (outerAllowed : ∀ symbol, List.Mem symbol outerCounter →
+      symbol = cnfMarkFalse)
+    (headerAllowed : ∀ symbol, List.Mem symbol headerPrefix →
+      symbol = cnfMarkTrue)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaTail →
+      FormulaScanSymbol symbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (assignmentAllowed : ∀ symbol, List.Mem symbol markedAssignment →
+      AssignmentMarkSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (widthReturnSteps outerCounter headerPrefix formulaTail
+          counter markedAssignment)
+        (workConfigAtLeftWord CNFWorkState.widthBackAssignment
+          (pushWorkLeft markedAssignment [] ++
+            cnfFinish ::
+              (pushWorkLeft counter [] ++
+                cnfBoundaryGuard ::
+                  (pushWorkLeft
+                    (widthMarkedFormulaPhysical outerCounter
+                      headerPrefix formulaTail) [] ++ [cnfRootGuard])))
+          (markedValue :: assignmentSuffix)) =
+      some (workConfigAtWord CNFWorkState.widthFindFormula
+        (pushWorkLeft (headerPrefix ++ [cnfMarkTrue])
+          (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard]))
+        (formulaTail ++
+          (cnfBoundaryGuard :: (counter ++
+            (cnfFinish ::
+              (markedAssignment ++ markedValue :: assignmentSuffix)))))) := by
+  let physical := widthMarkedFormulaPhysical outerCounter
+    headerPrefix formulaTail
+  let afterMarked := cnfFinish ::
+    (pushWorkLeft counter [] ++
+      cnfBoundaryGuard :: (pushWorkLeft physical [] ++ [cnfRootGuard]))
+  have reversedMarkedAllowed : ∀ symbol,
+      List.Mem symbol (pushWorkLeft markedAssignment []) →
+        AssignmentMarkSymbol symbol := by
+    intro symbol found
+    exact pushWorkLeft_allowed AssignmentMarkSymbol
+      markedAssignment [] assignmentAllowed
+      (by intro candidate impossible; contradiction) symbol found
+  have hMarked := widthBackAssignment_scan
+    (pushWorkLeft markedAssignment []) afterMarked
+    (markedValue :: assignmentSuffix) reversedMarkedAllowed
+  have markedLength : (pushWorkLeft markedAssignment []).length =
+      markedAssignment.length := by
+    rw [pushWorkLeft_length]
+    exact Nat.add_zero markedAssignment.length
+  rw [markedLength] at hMarked
+  rw [pushWorkLeft_cancel] at hMarked
+  have hFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (widthBackAssignment_finish_step
+      (pushWorkLeft counter [] ++
+        cnfBoundaryGuard :: (pushWorkLeft physical [] ++ [cnfRootGuard]))
+      (markedAssignment ++ markedValue :: assignmentSuffix))
+  have reversedCounterAllowed : ∀ symbol,
+      List.Mem symbol (pushWorkLeft counter []) → symbol = cnfMarkFalse := by
+    intro symbol found
+    exact pushWorkLeft_allowed
+      (fun candidate => candidate = cnfMarkFalse)
+      counter [] counterAllowed
+      (by intro candidate impossible; contradiction) symbol found
+  have hCounter := widthBackCounter_scan
+    (pushWorkLeft counter [])
+    (cnfBoundaryGuard :: (pushWorkLeft physical [] ++ [cnfRootGuard]))
+    (cnfFinish :: markedAssignment ++ markedValue :: assignmentSuffix)
+    reversedCounterAllowed
+  have counterLength : (pushWorkLeft counter []).length = counter.length := by
+    rw [pushWorkLeft_length]
+    exact Nat.add_zero counter.length
+  rw [counterLength] at hCounter
+  rw [pushWorkLeft_cancel] at hCounter
+  have hBoundary := workRunExact?_one_of_step cnfWorkMachine _ _
+    (widthBackCounter_boundary_step
+      (pushWorkLeft physical [] ++ [cnfRootGuard])
+      (counter ++ cnfFinish ::
+        (markedAssignment ++ markedValue :: assignmentSuffix)))
+  have physicalAllowed : ∀ symbol, List.Mem symbol physical →
+      FormulaOrCounterSymbol symbol := by
+    exact widthMarkedFormulaPhysical_allowed outerCounter
+      headerPrefix formulaTail outerAllowed headerAllowed formulaAllowed
+  have reversedPhysicalAllowed : ∀ symbol,
+      List.Mem symbol (pushWorkLeft physical []) →
+        FormulaOrCounterSymbol symbol := by
+    intro symbol found
+    exact pushWorkLeft_allowed FormulaOrCounterSymbol physical []
+      physicalAllowed (by intro candidate impossible; contradiction)
+      symbol found
+  have hPhysical := widthBackFormula_scan
+    (pushWorkLeft physical []) [cnfRootGuard]
+    (cnfBoundaryGuard :: counter ++ cnfFinish ::
+      (markedAssignment ++ markedValue :: assignmentSuffix))
+    reversedPhysicalAllowed
+  have physicalLength : (pushWorkLeft physical []).length = physical.length := by
+    rw [pushWorkLeft_length]
+    exact Nat.add_zero physical.length
+  rw [physicalLength] at hPhysical
+  rw [pushWorkLeft_cancel] at hPhysical
+  let returnTail := cnfBoundaryGuard :: (counter ++
+    (cnfFinish :: (markedAssignment ++ markedValue :: assignmentSuffix)))
+  have hRoot := workRunExact?_one_of_step cnfWorkMachine _ _
+    (widthBackFormula_root_step []
+      (physical ++ returnTail))
+  have physicalSplit :
+      physical ++ returnTail =
+        outerCounter ++
+          ((cnfFinish ::
+            (headerPrefix ++ cnfMarkTrue :: formulaTail)) ++ returnTail) := by
+    unfold physical widthMarkedFormulaPhysical
+    exact workSymbol_append_assoc outerCounter
+      (cnfFinish :: (headerPrefix ++ cnfMarkTrue :: formulaTail))
+      returnTail
+  have hOuter := seekFormulaStart_counter_scan outerCounter
+    ((cnfFinish ::
+      (headerPrefix ++ cnfMarkTrue :: formulaTail)) ++ returnTail)
+    [cnfRootGuard] outerAllowed
+  have hOuterFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (seekFormulaStart_finish_step
+      (pushWorkLeft outerCounter [cnfRootGuard])
+      ((headerPrefix ++ cnfMarkTrue :: formulaTail) ++ returnTail))
+  have formulaSplit :
+      (headerPrefix ++ cnfMarkTrue :: formulaTail) ++ returnTail =
+        (headerPrefix ++ [cnfMarkTrue]) ++
+          (formulaTail ++ returnTail) := by
+    calc
+      (headerPrefix ++ cnfMarkTrue :: formulaTail) ++ returnTail =
+          headerPrefix ++
+            ((cnfMarkTrue :: formulaTail) ++ returnTail) :=
+        workSymbol_append_assoc headerPrefix
+          (cnfMarkTrue :: formulaTail)
+          returnTail
+      _ = headerPrefix ++
+          (cnfMarkTrue :: (formulaTail ++ returnTail)) := rfl
+      _ = headerPrefix ++
+          ([cnfMarkTrue] ++ (formulaTail ++ returnTail)) := rfl
+      _ = (headerPrefix ++ [cnfMarkTrue]) ++
+          (formulaTail ++ returnTail) :=
+        (workSymbol_append_assoc headerPrefix [cnfMarkTrue]
+          (formulaTail ++ returnTail)).symm
+  have hHeader := widthFindFormula_marked_scan
+    (headerPrefix ++ [cnfMarkTrue])
+    (formulaTail ++ returnTail)
+    (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard])
+    (append_markTrue_allowed headerPrefix headerAllowed)
+  have headerLength : (headerPrefix ++ [cnfMarkTrue]).length =
+      headerPrefix.length + 1 := by
+    rw [workSymbol_length_append]
+    rfl
+  rw [headerLength] at hHeader
+  have h1 := workRunExact?_compose cnfWorkMachine
+    markedAssignment.length 1 _ _ _ hMarked hFinish
+  have h2 := workRunExact?_compose cnfWorkMachine
+    (markedAssignment.length + 1) counter.length _ _ _ h1 hCounter
+  have h3 := workRunExact?_compose cnfWorkMachine
+    ((markedAssignment.length + 1) + counter.length) 1 _ _ _ h2 hBoundary
+  have h4 := workRunExact?_compose cnfWorkMachine
+    (((markedAssignment.length + 1) + counter.length) + 1)
+    physical.length _ _ _ h3 hPhysical
+  have h5 := workRunExact?_compose cnfWorkMachine
+    ((((markedAssignment.length + 1) + counter.length) + 1) +
+      physical.length) 1 _ _ _ h4 hRoot
+  rw [physicalSplit] at h5
+  have h6 := workRunExact?_compose cnfWorkMachine
+    (((((markedAssignment.length + 1) + counter.length) + 1) +
+      physical.length) + 1) outerCounter.length _ _ _ h5 hOuter
+  have h7 := workRunExact?_compose cnfWorkMachine
+    ((((((markedAssignment.length + 1) + counter.length) + 1) +
+      physical.length) + 1) + outerCounter.length) 1 _ _ _ h6 hOuterFinish
+  rw [formulaSplit] at h7
+  have h8 := workRunExact?_compose cnfWorkMachine
+    (((((((markedAssignment.length + 1) + counter.length) + 1) +
+      physical.length) + 1) + outerCounter.length) + 1)
+    (headerPrefix.length + 1) _ _ _ h7 hHeader
+  unfold widthReturnSteps
+  unfold returnTail at h8
+  exact h8
+
+theorem pushWorkLeft_append_word
+    (first second farSide : List WorkSymbol) :
+    pushWorkLeft (first ++ second) farSide =
+      pushWorkLeft second (pushWorkLeft first farSide) := by
+  induction first generalizing farSide with
+  | nil => rfl
+  | cons symbol rest ih => exact ih (symbol :: farSide)
+
+theorem widthMarkedFormulaPhysical_push
+    (outerCounter headerPrefix formulaTail : List WorkSymbol) :
+    pushWorkLeft formulaTail
+        (cnfMarkTrue :: pushWorkLeft headerPrefix
+          (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard])) =
+      pushWorkLeft
+          (widthMarkedFormulaPhysical outerCounter headerPrefix
+            formulaTail) [] ++ [cnfRootGuard] := by
+  calc
+    pushWorkLeft formulaTail
+        (cnfMarkTrue :: pushWorkLeft headerPrefix
+          (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard])) =
+      pushWorkLeft (cnfMarkTrue :: formulaTail)
+        (pushWorkLeft headerPrefix
+          (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard])) := rfl
+    _ = pushWorkLeft (headerPrefix ++ cnfMarkTrue :: formulaTail)
+        (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard]) :=
+      (pushWorkLeft_append_word headerPrefix
+        (cnfMarkTrue :: formulaTail)
+        (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard])).symm
+    _ = pushWorkLeft
+        (cnfFinish :: (headerPrefix ++ cnfMarkTrue :: formulaTail))
+        (pushWorkLeft outerCounter [cnfRootGuard]) := rfl
+    _ = pushWorkLeft
+        (outerCounter ++
+          cnfFinish :: (headerPrefix ++ cnfMarkTrue :: formulaTail))
+        [cnfRootGuard] :=
+      (pushWorkLeft_append_word outerCounter
+        (cnfFinish :: (headerPrefix ++ cnfMarkTrue :: formulaTail))
+        [cnfRootGuard]).symm
+    _ = pushWorkLeft
+          (widthMarkedFormulaPhysical outerCounter headerPrefix
+            formulaTail) [cnfRootGuard] := rfl
+    _ = pushWorkLeft
+          (widthMarkedFormulaPhysical outerCounter headerPrefix
+            formulaTail) [] ++ [cnfRootGuard] :=
+      pushWorkLeft_append_far
+        (widthMarkedFormulaPhysical outerCounter headerPrefix
+          formulaTail) [cnfRootGuard]
+
+def widthOutwardSteps
+    (formulaTail counter markedAssignment : List WorkSymbol) : Nat :=
+  ((formulaTail.length + 1) + counter.length + 1) +
+    markedAssignment.length
+
+def widthOneUnitSteps
+    (outerCounter headerPrefix formulaTail counter markedAssignment :
+      List WorkSymbol) : Nat :=
+  ((1 + widthOutwardSteps formulaTail counter markedAssignment) + 1) +
+    widthReturnSteps outerCounter headerPrefix formulaTail counter
+      markedAssignment
+
+theorem widthFindAssignment_value_normalized
+    (outerCounter headerPrefix formulaTail counter markedAssignment
+      assignmentSuffix : List WorkSymbol)
+    (value : Bool) :
+    workRunExact? cnfWorkMachine 1
+        (workConfigAtWord CNFWorkState.widthFindAssignment
+          (pushWorkLeft markedAssignment
+            (cnfFinish :: pushWorkLeft counter
+              (cnfBoundaryGuard ::
+                pushWorkLeft formulaTail
+                  (cnfMarkTrue :: pushWorkLeft headerPrefix
+                    (cnfFinish ::
+                      pushWorkLeft outerCounter [cnfRootGuard])))))
+          ((if value then cnfT else cnfF) :: assignmentSuffix)) =
+      some (workConfigAtLeftWord CNFWorkState.widthBackAssignment
+        (pushWorkLeft markedAssignment [] ++
+          cnfFinish ::
+            (pushWorkLeft counter [] ++
+              cnfBoundaryGuard ::
+                (pushWorkLeft
+                  (widthMarkedFormulaPhysical outerCounter
+                    headerPrefix formulaTail) [] ++ [cnfRootGuard])))
+        ((if value then cnfMarkTrue else cnfMarkFalse) ::
+          assignmentSuffix)) := by
+  have hStep := widthFindAssignment_value_step
+    (pushWorkLeft markedAssignment
+      (cnfFinish :: pushWorkLeft counter
+        (cnfBoundaryGuard ::
+          pushWorkLeft formulaTail
+            (cnfMarkTrue :: pushWorkLeft headerPrefix
+              (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard])))))
+    assignmentSuffix value
+  have hOne := workRunExact?_one_of_step cnfWorkMachine _ _ hStep
+  have hTape :
+      (WorkTape.focus
+        (pushWorkLeft markedAssignment
+          (cnfFinish :: pushWorkLeft counter
+            (cnfBoundaryGuard ::
+              pushWorkLeft formulaTail
+                (cnfMarkTrue :: pushWorkLeft headerPrefix
+                  (cnfFinish ::
+                    pushWorkLeft outerCounter [cnfRootGuard])))))
+        (if value then cnfMarkTrue else cnfMarkFalse)
+        assignmentSuffix).moveLeft =
+        WorkTape.atLeftWord
+          ((if value then cnfMarkTrue else cnfMarkFalse) :: assignmentSuffix)
+          (pushWorkLeft markedAssignment [] ++
+            cnfFinish ::
+              (pushWorkLeft counter [] ++
+                cnfBoundaryGuard ::
+                  (pushWorkLeft
+                    (widthMarkedFormulaPhysical outerCounter
+                      headerPrefix formulaTail) [] ++ [cnfRootGuard]))) := by
+    calc
+      (WorkTape.focus
+        (pushWorkLeft markedAssignment
+          (cnfFinish :: pushWorkLeft counter
+            (cnfBoundaryGuard ::
+              pushWorkLeft formulaTail
+                (cnfMarkTrue :: pushWorkLeft headerPrefix
+                  (cnfFinish ::
+                    pushWorkLeft outerCounter [cnfRootGuard])))))
+        (if value then cnfMarkTrue else cnfMarkFalse)
+        assignmentSuffix).moveLeft =
+          WorkTape.atLeftWord
+            ((if value then cnfMarkTrue else cnfMarkFalse) :: assignmentSuffix)
+            (pushWorkLeft markedAssignment [] ++
+              cnfFinish :: pushWorkLeft counter
+                (cnfBoundaryGuard ::
+                  pushWorkLeft formulaTail
+                    (cnfMarkTrue :: pushWorkLeft headerPrefix
+                      (cnfFinish ::
+                        pushWorkLeft outerCounter [cnfRootGuard])))) :=
+        focus_pushed_moveLeft markedAssignment
+          (pushWorkLeft counter
+            (cnfBoundaryGuard ::
+              pushWorkLeft formulaTail
+                (cnfMarkTrue :: pushWorkLeft headerPrefix
+                  (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard]))))
+          assignmentSuffix cnfFinish
+          (if value then cnfMarkTrue else cnfMarkFalse)
+      _ = WorkTape.atLeftWord
+          ((if value then cnfMarkTrue else cnfMarkFalse) :: assignmentSuffix)
+          (pushWorkLeft markedAssignment [] ++
+            cnfFinish ::
+              (pushWorkLeft counter [] ++
+                cnfBoundaryGuard ::
+                  (pushWorkLeft
+                    (widthMarkedFormulaPhysical outerCounter
+                      headerPrefix formulaTail) [] ++ [cnfRootGuard]))) := by
+        rw [pushWorkLeft_append_far counter]
+        rw [widthMarkedFormulaPhysical_push]
+  rw [hTape] at hOne
+  exact hOne
+
+/-- One exact successful width iteration: mark one header `T`, consume one
+assignment value, return to the next formula-header cell, and preserve every
+other cell.  This is the induction step for the `Nat`/assignment case split. -/
+theorem widthOneUnit_run
+    (outerCounter headerPrefix formulaTail counter markedAssignment
+      assignmentSuffix : List WorkSymbol)
+    (value : Bool)
+    (outerAllowed : ∀ symbol, List.Mem symbol outerCounter →
+      symbol = cnfMarkFalse)
+    (headerAllowed : ∀ symbol, List.Mem symbol headerPrefix →
+      symbol = cnfMarkTrue)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaTail →
+      FormulaScanSymbol symbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (assignmentAllowed : ∀ symbol, List.Mem symbol markedAssignment →
+      AssignmentMarkSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (widthOneUnitSteps outerCounter headerPrefix formulaTail
+          counter markedAssignment)
+        (workConfigAtWord CNFWorkState.widthFindFormula
+          (pushWorkLeft headerPrefix
+            (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard]))
+          (cnfT :: (formulaTail ++
+            (cnfBoundaryGuard :: (counter ++
+              (cnfFinish :: (markedAssignment ++
+                (if value then cnfT else cnfF) :: assignmentSuffix))))))) =
+      some (workConfigAtWord CNFWorkState.widthFindFormula
+        (pushWorkLeft (headerPrefix ++ [cnfMarkTrue])
+          (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard]))
+      (formulaTail ++
+          (cnfBoundaryGuard :: (counter ++
+            (cnfFinish ::
+              (markedAssignment ++
+                (if value then cnfMarkTrue else cnfMarkFalse) ::
+                  assignmentSuffix)))))) := by
+  let outwardSuffix := cnfBoundaryGuard :: (counter ++
+    (cnfFinish :: (markedAssignment ++
+      (if value then cnfT else cnfF) :: assignmentSuffix)))
+  have hMark := workRunExact?_one_of_step cnfWorkMachine _ _
+    (widthFindFormula_mark_step
+      (pushWorkLeft headerPrefix
+        (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard]))
+      (formulaTail ++ outwardSuffix))
+  have hOut := widthToAssignmentPrefix_run formulaTail counter
+    markedAssignment
+    (cnfMarkTrue :: pushWorkLeft headerPrefix
+      (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard]))
+    assignmentSuffix (if value then cnfT else cnfF)
+    formulaAllowed counterAllowed assignmentAllowed
+  have hValue := widthFindAssignment_value_normalized outerCounter
+    headerPrefix formulaTail counter markedAssignment assignmentSuffix value
+  have hReturn := widthOneUnit_return outerCounter headerPrefix
+    formulaTail counter markedAssignment assignmentSuffix
+    (if value then cnfMarkTrue else cnfMarkFalse)
+    outerAllowed headerAllowed formulaAllowed counterAllowed assignmentAllowed
+  have hMarkOut := workRunExact?_compose cnfWorkMachine 1
+    (widthOutwardSteps formulaTail counter markedAssignment)
+    _ _ _ hMark (by
+      unfold widthOutwardSteps
+      exact hOut)
+  have hThroughValue := workRunExact?_compose cnfWorkMachine
+    (1 + widthOutwardSteps formulaTail counter markedAssignment) 1
+    _ _ _ hMarkOut hValue
+  have hComplete := workRunExact?_compose cnfWorkMachine
+    ((1 + widthOutwardSteps formulaTail counter markedAssignment) + 1)
+    (widthReturnSteps outerCounter headerPrefix formulaTail counter
+      markedAssignment)
+    _ _ _ hThroughValue hReturn
+  unfold widthOneUnitSteps
+  unfold outwardSuffix at hComplete
+  exact hComplete
+
+/- Phase-cost wrappers. -/
+
+def widthInductionLedger (n rounds : Nat) : Nat :=
+  (rounds * cnfShiftedWorkSpan n) * 8 + cnfShiftedWorkSpan n * 8
+
+theorem widthInductionLedger_le_singlePhase (n rounds : Nat)
+    (roundsBound : rounds ≤ n) :
+    widthInductionLedger n rounds ≤ cnfSinglePhaseBudget n := by
+  have nToSpan : n ≤ cnfShiftedWorkSpan n := by
+    unfold cnfShiftedWorkSpan
+    exact Nat.le_add_right n 2
+  have roundsToSpan : rounds ≤ cnfShiftedWorkSpan n :=
+    Nat.le_trans roundsBound nToSpan
+  have roundsProduct :
+      rounds * cnfShiftedWorkSpan n ≤
+        cnfShiftedWorkSpan n * cnfShiftedWorkSpan n :=
+    Nat.mul_le_mul_right (cnfShiftedWorkSpan n) roundsToSpan
+  have roundsScaled :
+      (rounds * cnfShiftedWorkSpan n) * 8 ≤
+        (cnfShiftedWorkSpan n * cnfShiftedWorkSpan n) * 8 :=
+    Nat.mul_le_mul_right 8 roundsProduct
+  have finalToSquare : cnfShiftedWorkSpan n ≤
+      cnfShiftedWorkSpan n * cnfShiftedWorkSpan n :=
+    by
+      have positive : 1 ≤ n + 2 :=
+        Nat.succ_le_succ (Nat.zero_le (n + 1))
+      unfold cnfShiftedWorkSpan
+      exact Nat.le_mul_of_pos_right (n + 2) positive
+  have finalScaled : cnfShiftedWorkSpan n * 8 ≤
+      (cnfShiftedWorkSpan n * cnfShiftedWorkSpan n) * 8 :=
+    Nat.mul_le_mul_right 8 finalToSquare
+  have combined := Nat.add_le_add roundsScaled finalScaled
+  have normalized :
+      (cnfShiftedWorkSpan n * cnfShiftedWorkSpan n) * 8 +
+          (cnfShiftedWorkSpan n * cnfShiftedWorkSpan n) * 8 =
+        (cnfShiftedWorkSpan n * cnfShiftedWorkSpan n) * 16 := by
+    rw [← Nat.mul_add]
+  rw [normalized] at combined
+  unfold widthInductionLedger
+  have squareToCube := cnfShiftedSquare_le_phaseCube n
+  have scaledToCube :
+      (cnfShiftedWorkSpan n * cnfShiftedWorkSpan n) * 16 ≤
+        cnfWorkPhaseCube n * 16 :=
+    Nat.mul_le_mul_right 16 squareToCube
+  unfold cnfSinglePhaseBudget
+  exact Nat.le_trans combined scaledToCube
+
+/-- Attach the cubic phase certificate to any exact width trace whose
+semantic induction has discharged the eight-plus-eight ledger. -/
+theorem widthExact_run_within_singlePhase
+    (n rounds steps : Nat) (start final : WorkConfiguration)
+    (exactRun : workRunExact? cnfWorkMachine steps start = some final)
+    (roundsBound : rounds ≤ n)
+    (stepsBound : steps ≤ widthInductionLedger n rounds) :
+    steps ≤ cnfSinglePhaseBudget n ∧
+      workRunExact? cnfWorkMachine steps start = some final := by
+  exact ⟨Nat.le_trans stepsBound
+    (widthInductionLedger_le_singlePhase n rounds roundsBound), exactRun⟩
+
+private inductive WidthCostAtom where
+  | unit
+  | formula
+  | counter
+  | marked
+  | outer
+  | header
+
+private def widthCostAtomRank : WidthCostAtom → Nat
+  | .marked => 0
+  | .counter => 1
+  | .header => 2
+  | .formula => 3
+  | .outer => 4
+  | .unit => 5
+
+private def widthCostAtomValue
+    (unit formula counter marked outer header : Nat) :
+    WidthCostAtom → Nat
+  | .unit => unit
+  | .formula => formula
+  | .counter => counter
+  | .marked => marked
+  | .outer => outer
+  | .header => header
+
+private def widthCostAtomSum
+    (unit formula counter marked outer header : Nat) :
+    List WidthCostAtom → Nat
+  | [] => 0
+  | atom :: rest =>
+      widthCostAtomValue unit formula counter marked outer header atom +
+        widthCostAtomSum unit formula counter marked outer header rest
+
+private def widthCostAtomInsert
+    (atom : WidthCostAtom) : List WidthCostAtom → List WidthCostAtom
+  | [] => [atom]
+  | head :: rest =>
+      if widthCostAtomRank atom ≤ widthCostAtomRank head then
+        atom :: head :: rest
+      else
+        head :: widthCostAtomInsert atom rest
+
+private def widthCostAtomSort :
+    List WidthCostAtom → List WidthCostAtom
+  | [] => []
+  | atom :: rest => widthCostAtomInsert atom (widthCostAtomSort rest)
+
+private theorem widthCostAtomSum_insert
+    (unit formula counter marked outer header : Nat)
+    (atom : WidthCostAtom) (items : List WidthCostAtom) :
+    widthCostAtomSum unit formula counter marked outer header
+        (widthCostAtomInsert atom items) =
+      widthCostAtomValue unit formula counter marked outer header atom +
+        widthCostAtomSum unit formula counter marked outer header items := by
+  induction items with
+  | nil => rfl
+  | cons head rest ih =>
+      cases atom <;> cases head <;> try rfl
+      all_goals
+        change _ + widthCostAtomSum unit formula counter marked outer header
+            (widthCostAtomInsert _ rest) = _
+        rw [ih]
+        exact Nat.add_left_comm _ _ _
+
+private theorem widthCostAtomSum_sort
+    (unit formula counter marked outer header : Nat)
+    (items : List WidthCostAtom) :
+    widthCostAtomSum unit formula counter marked outer header
+        (widthCostAtomSort items) =
+      widthCostAtomSum unit formula counter marked outer header items := by
+  induction items with
+  | nil => rfl
+  | cons atom rest ih =>
+      change widthCostAtomSum unit formula counter marked outer header
+          (widthCostAtomInsert atom (widthCostAtomSort rest)) = _
+      rw [widthCostAtomSum_insert]
+      rw [ih]
+      rfl
+
+private inductive WidthCostExpr where
+  | atom : WidthCostAtom → WidthCostExpr
+  | add : WidthCostExpr → WidthCostExpr → WidthCostExpr
+
+private def widthCostExprValue
+    (unit formula counter marked outer header : Nat) :
+    WidthCostExpr → Nat
+  | .atom atom =>
+      widthCostAtomValue unit formula counter marked outer header atom
+  | .add left right =>
+      widthCostExprValue unit formula counter marked outer header left +
+        widthCostExprValue unit formula counter marked outer header right
+
+private def widthCostExprAtoms : WidthCostExpr → List WidthCostAtom
+  | .atom atom => [atom]
+  | .add left right => widthCostExprAtoms left ++ widthCostExprAtoms right
+
+private theorem widthCostAtomSum_append
+    (unit formula counter marked outer header : Nat)
+    (left right : List WidthCostAtom) :
+    widthCostAtomSum unit formula counter marked outer header
+        (left ++ right) =
+      widthCostAtomSum unit formula counter marked outer header left +
+        widthCostAtomSum unit formula counter marked outer header right := by
+  induction left with
+  | nil => exact (Nat.zero_add _).symm
+  | cons atom rest ih =>
+      change _ + widthCostAtomSum unit formula counter marked outer header
+          (rest ++ right) =
+        (_ + widthCostAtomSum unit formula counter marked outer header rest) +
+          widthCostAtomSum unit formula counter marked outer header right
+      rw [ih]
+      exact (Nat.add_assoc _ _ _).symm
+
+private theorem widthCostExprValue_atoms
+    (unit formula counter marked outer header : Nat)
+    (expression : WidthCostExpr) :
+    widthCostExprValue unit formula counter marked outer header expression =
+      widthCostAtomSum unit formula counter marked outer header
+        (widthCostExprAtoms expression) := by
+  induction expression with
+  | atom atom => exact (Nat.add_zero _).symm
+  | add left right leftIH rightIH =>
+      rw [widthCostExprAtoms, widthCostAtomSum_append]
+      change widthCostExprValue unit formula counter marked outer header left +
+          widthCostExprValue unit formula counter marked outer header right = _
+      rw [leftIH, rightIH]
+
+private def widthRawCostExpr : WidthCostExpr :=
+  let u := WidthCostExpr.atom .unit
+  let f := WidthCostExpr.atom .formula
+  let c := WidthCostExpr.atom .counter
+  let m := WidthCostExpr.atom .marked
+  let o := WidthCostExpr.atom .outer
+  let h := WidthCostExpr.atom .header
+  let first := .add (.add (.add (.add f u) c) u) m
+  let nested := .add o (.add (.add h (.add f u)) u)
+  let second := .add
+    (.add
+      (.add
+        (.add
+          (.add
+            (.add
+              (.add
+                (.add m u) c) u) nested) u) o) u)
+    (.add h u)
+  .add (.add (.add u first) u) second
+
+private def widthTargetUnitsExpr : WidthCostExpr :=
+  let u := WidthCostExpr.atom .unit
+  .add
+    (.add
+      (.add
+        (.add
+          (.add
+            (.add
+              (.add
+                (.add
+                  (.add
+                    (.add u u) u) u) u) u) u) u) u) u)
+    u
+
+private def widthTargetCostExpr : WidthCostExpr :=
+  let f := WidthCostExpr.atom .formula
+  let c := WidthCostExpr.atom .counter
+  let m := WidthCostExpr.atom .marked
+  let o := WidthCostExpr.atom .outer
+  let h := WidthCostExpr.atom .header
+  .add
+    (.add
+      (.add (.add m c) (.add m c))
+      (.add (.add (.add h f) (.add h f)) (.add o o)))
+    widthTargetUnitsExpr
+
+private theorem width_cost_regroup_clean
+    (unit formula counter marked outer header : Nat) :
+    unit + (formula + unit + counter + unit + marked) + unit +
+        (marked + unit + counter + unit +
+              (outer + (header + (formula + unit) + unit)) +
+            unit + outer + unit + (header + unit)) =
+      (((marked + counter) + (marked + counter)) +
+          (((header + formula) + (header + formula)) + (outer + outer))) +
+        ((((((((((unit + unit) + unit) + unit) + unit) + unit) + unit) +
+          unit) + unit) + unit) + unit) := by
+  have rawValue :
+      widthCostExprValue unit formula counter marked outer header
+          widthRawCostExpr =
+        unit + (formula + unit + counter + unit + marked) + unit +
+          (marked + unit + counter + unit +
+                (outer + (header + (formula + unit) + unit)) +
+              unit + outer + unit + (header + unit)) := rfl
+  have targetValue :
+      widthCostExprValue unit formula counter marked outer header
+          widthTargetCostExpr =
+        (((marked + counter) + (marked + counter)) +
+            (((header + formula) + (header + formula)) + (outer + outer))) +
+          ((((((((((unit + unit) + unit) + unit) + unit) + unit) + unit) +
+            unit) + unit) + unit) + unit) := rfl
+  have sortedAtoms :
+      widthCostAtomSort (widthCostExprAtoms widthRawCostExpr) =
+        widthCostAtomSort (widthCostExprAtoms widthTargetCostExpr) := rfl
+  calc
+    unit + (formula + unit + counter + unit + marked) + unit +
+        (marked + unit + counter + unit +
+              (outer + (header + (formula + unit) + unit)) +
+            unit + outer + unit + (header + unit)) =
+      widthCostExprValue unit formula counter marked outer header
+        widthRawCostExpr := rawValue.symm
+    _ = widthCostAtomSum unit formula counter marked outer header
+          (widthCostExprAtoms widthRawCostExpr) :=
+      widthCostExprValue_atoms unit formula counter marked outer header
+        widthRawCostExpr
+    _ = widthCostAtomSum unit formula counter marked outer header
+          (widthCostAtomSort (widthCostExprAtoms widthRawCostExpr)) :=
+      (widthCostAtomSum_sort unit formula counter marked outer header
+        (widthCostExprAtoms widthRawCostExpr)).symm
+    _ = widthCostAtomSum unit formula counter marked outer header
+          (widthCostAtomSort (widthCostExprAtoms widthTargetCostExpr)) :=
+      congrArg
+        (widthCostAtomSum unit formula counter marked outer header)
+        sortedAtoms
+    _ = widthCostAtomSum unit formula counter marked outer header
+          (widthCostExprAtoms widthTargetCostExpr) :=
+      widthCostAtomSum_sort unit formula counter marked outer header
+        (widthCostExprAtoms widthTargetCostExpr)
+    _ = widthCostExprValue unit formula counter marked outer header
+          widthTargetCostExpr :=
+      (widthCostExprValue_atoms unit formula counter marked outer header
+        widthTargetCostExpr).symm
+    _ = (((marked + counter) + (marked + counter)) +
+          (((header + formula) + (header + formula)) + (outer + outer))) +
+        ((((((((((unit + unit) + unit) + unit) + unit) + unit) + unit) +
+          unit) + unit) + unit) + unit) := targetValue
+
+private theorem eleven_le_sixteen_clean : 11 ≤ 16 := by
+  change 11 ≤ 11 + 5
+  exact Nat.le_add_right 11 5
+
+private theorem widthNatMulAssocClean (a b c : Nat) :
+    (a * b) * c = a * (b * c) := by
+  induction c with
+  | zero => rfl
+  | succ c ih =>
+      change (a * b) * c + a * b = a * (b * c + b)
+      rw [ih, Nat.mul_add]
+
+private theorem widthNatAddFourReorder (a b c d : Nat) :
+    (a + b) + (c + d) = (a + c) + (b + d) := by
+  rw [Nat.add_assoc a b (c + d)]
+  rw [← Nat.add_assoc b c d]
+  rw [Nat.add_comm b c]
+  rw [Nat.add_assoc c b d]
+  rw [← Nat.add_assoc a c (b + d)]
+
+private theorem eight_doubles_normalize (n : Nat) :
+    ((n + n) + (n + n)) + ((n + n) + (n + n)) = n * 8 := by
+  calc
+    ((n + n) + (n + n)) + ((n + n) + (n + n)) =
+        2 * ((n + n) + (n + n)) := (Nat.two_mul _).symm
+    _ = 2 * (2 * (n + n)) :=
+      congrArg (Nat.mul 2) (Nat.two_mul (n + n)).symm
+    _ = 2 * (2 * (2 * n)) :=
+      congrArg (Nat.mul 2)
+        (congrArg (Nat.mul 2) (Nat.two_mul n).symm)
+    _ = (2 * 2) * (2 * n) :=
+      (widthNatMulAssocClean 2 2 (2 * n)).symm
+    _ = ((2 * 2) * 2) * n :=
+      (widthNatMulAssocClean (2 * 2) 2 n).symm
+    _ = n * 8 := Nat.mul_comm 8 n
+
+private theorem natAddMulClean (a b c : Nat) :
+    (a + b) * c = a * c + b * c := by
+  induction c with
+  | zero => rfl
+  | succ c ih =>
+      change (a + b) * c + (a + b) =
+        (a * c + a) + (b * c + b)
+      rw [ih]
+      exact widthNatAddFourReorder (a * c) (b * c) a b
+
+private theorem target_normalization_clean (n : Nat) :
+    (((n + n) + (n + n)) + ((n + n) + (n + n))) + 16 =
+      (n + 2) * 8 := by
+  rw [eight_doubles_normalize]
+  change n * 8 + 2 * 8 = (n + 2) * 8
+  exact (natAddMulClean n 2 8).symm
+
+private theorem width_marked_physical_length_clean
+    (outer header tail : List WorkSymbol) :
+    (widthMarkedFormulaPhysical outer header tail).length =
+      outer.length + (header.length + (tail.length + 1) + 1) := by
+  unfold widthMarkedFormulaPhysical
+  rw [workSymbol_length_append]
+  change outer.length + Nat.succ (header ++ cnfMarkTrue :: tail).length = _
+  rw [workSymbol_length_append]
+  rfl
+
+theorem widthOneUnitSteps_le_eightSpan (n : Nat)
+    (outerCounter headerPrefix formulaTail counter markedAssignment :
+      List WorkSymbol)
+    (formulaPartition :
+      headerPrefix.length + 1 + formulaTail.length ≤ outerCounter.length)
+    (assignmentPrefix : markedAssignment.length ≤ counter.length)
+    (outerBound : outerCounter.length ≤ n)
+    (counterBound : counter.length ≤ n) :
+    widthOneUnitSteps outerCounter headerPrefix formulaTail counter
+        markedAssignment ≤
+      cnfShiftedWorkSpan n * 8 := by
+  have headerFormulaBound :
+      headerPrefix.length + formulaTail.length ≤ outerCounter.length := by
+    exact Nat.le_trans
+      (Nat.add_le_add_right
+        (Nat.le_add_right headerPrefix.length 1) formulaTail.length)
+      formulaPartition
+  have assignmentCounterBound :
+      markedAssignment.length + counter.length ≤ n + n := by
+    exact Nat.add_le_add
+      (Nat.le_trans assignmentPrefix counterBound) counterBound
+  have assignmentCounterTwice :
+      (markedAssignment.length + counter.length) +
+          (markedAssignment.length + counter.length) ≤
+        (n + n) + (n + n) := by
+    exact Nat.add_le_add assignmentCounterBound assignmentCounterBound
+  have headerFormulaToN :
+      headerPrefix.length + formulaTail.length ≤ n :=
+    Nat.le_trans headerFormulaBound outerBound
+  have headerFormulaTwice :
+      (headerPrefix.length + formulaTail.length) +
+          (headerPrefix.length + formulaTail.length) ≤
+        n + n := by
+    exact Nat.add_le_add headerFormulaToN headerFormulaToN
+  have outerTwice : outerCounter.length + outerCounter.length ≤ n + n := by
+    exact Nat.add_le_add outerBound outerBound
+  have formulaAndOuterTwice :
+      ((headerPrefix.length + formulaTail.length) +
+          (headerPrefix.length + formulaTail.length)) +
+          (outerCounter.length + outerCounter.length) ≤
+        (n + n) + (n + n) := by
+    exact Nat.add_le_add headerFormulaTwice outerTwice
+  have allVariableOccurrences :
+      ((markedAssignment.length + counter.length) +
+          (markedAssignment.length + counter.length)) +
+          (((headerPrefix.length + formulaTail.length) +
+            (headerPrefix.length + formulaTail.length)) +
+            (outerCounter.length + outerCounter.length)) ≤
+        ((n + n) + (n + n)) + ((n + n) + (n + n)) := by
+    exact Nat.add_le_add assignmentCounterTwice formulaAndOuterTwice
+  have variablesAndConstant :
+      (((markedAssignment.length + counter.length) +
+          (markedAssignment.length + counter.length)) +
+          (((headerPrefix.length + formulaTail.length) +
+            (headerPrefix.length + formulaTail.length)) +
+            (outerCounter.length + outerCounter.length))) + 11 ≤
+        (((n + n) + (n + n)) + ((n + n) + (n + n))) + 16 := by
+    exact Nat.add_le_add allVariableOccurrences eleven_le_sixteen_clean
+  have targetNormalization :
+      (((n + n) + (n + n)) + ((n + n) + (n + n))) + 16 =
+        (n + 2) * 8 := by
+    exact target_normalization_clean n
+  unfold widthOneUnitSteps widthOutwardSteps
+    widthReturnSteps cnfShiftedWorkSpan
+  rw [width_marked_physical_length_clean]
+  rw [width_cost_regroup_clean]
+  exact Nat.le_trans variablesAndConstant (Nat.le_of_eq targetNormalization)
+
+theorem formulaVariableCount_le_encodedTokens (formula : CNFFormula) :
+    formula.variableCount ≤ (encodeFormulaTokens formula).length := by
+  have shape := cnfTokenWorkSymbols_formula_header formula
+  have lengths := congrArg List.length shape
+  rw [cnfTokenWorkSymbols_length] at lengths
+  rw [workSymbol_length_append] at lengths
+  rw [workSymbol_replicate_length] at lengths
+  exact Nat.le_trans
+    (Nat.le_add_right formula.variableCount
+      (cnfF :: cnfTokenWorkSymbols
+        (encodeClauseListTokens formula.clauses ++ [.finish])).length)
+    (Nat.le_of_eq lengths.symm)
+
+
 namespace FrameTraceDesign
 
 set_option maxRecDepth 100000
@@ -5352,5 +7069,45 @@ theorem assignmentRawDecoder_none_rejects
   exact hComplete
 
 end FrameTraceDesign
+
+theorem decoded_formulaVariableCount_le_pair_size
+    (input certificate : BitString) (formula : CNFFormula)
+    (assignment : BitString)
+    (formulaDecoded : decodeEncodedCNF input = some formula)
+    (assignmentDecoded :
+      decodeAssignmentCertificate certificate = some assignment) :
+    formula.variableCount ≤
+      BitString.size (BitString.pair input certificate) := by
+  have variableToTokens := formulaVariableCount_le_encodedTokens formula
+  have tokensToCombined : (encodeFormulaTokens formula).length ≤
+      (encodeFormulaTokens formula).length + assignment.length :=
+    Nat.le_add_right (encodeFormulaTokens formula).length assignment.length
+  have combinedToPair :=
+    FrameTraceDesign.decoded_frame_payload_length_le_pair_size
+      input certificate formula assignment formulaDecoded assignmentDecoded
+  exact Nat.le_trans variableToTokens
+    (Nat.le_trans tokensToCombined combinedToPair)
+
+theorem widthExact_run_withinPairSinglePhase
+    (input certificate : BitString) (formula : CNFFormula)
+    (assignment : BitString) (rounds steps : Nat)
+    (start final : WorkConfiguration)
+    (formulaDecoded : decodeEncodedCNF input = some formula)
+    (assignmentDecoded :
+      decodeAssignmentCertificate certificate = some assignment)
+    (exactRun : workRunExact? cnfWorkMachine steps start = some final)
+    (roundsBound : rounds ≤ formula.variableCount)
+    (stepsBound : steps ≤
+      widthInductionLedger
+        (BitString.size (BitString.pair input certificate)) rounds) :
+    steps ≤ cnfSinglePhaseBudget
+        (BitString.size (BitString.pair input certificate)) ∧
+      workRunExact? cnfWorkMachine steps start = some final := by
+  have roundsToPair := Nat.le_trans roundsBound
+    (decoded_formulaVariableCount_le_pair_size input certificate formula
+      assignment formulaDecoded assignmentDecoded)
+  exact widthExact_run_within_singlePhase
+    (BitString.size (BitString.pair input certificate)) rounds steps
+    start final exactRun roundsToPair stepsBound
 
 end PNP.Concrete
