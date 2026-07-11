@@ -2571,4 +2571,62 @@ theorem run_compileWorkMachine_halted_le_rejectState
   unfold encodeWorkConfiguration compileWorkMachine
   exact congrArg boundaryState hReject
 
+/-- At an exact simulated budget, raw acceptance is exactly acceptance of the
+work trace's final configuration. -/
+theorem run_compileWorkMachine_mul_accept_iff
+    (machine : WorkMachine) (steps : Nat)
+    (config final : WorkConfiguration)
+    (hRun : workRunExact? machine steps config = some final) :
+    (run (compileWorkMachine machine) (6 * steps)
+      (encodeWorkConfiguration config)).state =
+        (compileWorkMachine machine).acceptState ↔
+      final.state = machine.acceptState := by
+  have hSimulation := run_compileWorkMachine_mul_of_workRunExact
+    machine steps config final hRun
+  constructor
+  · intro hAccept
+    rw [hSimulation] at hAccept
+    unfold encodeWorkConfiguration compileWorkMachine at hAccept
+    exact boundaryState_injective hAccept
+  · intro hAccept
+    rw [hSimulation]
+    unfold encodeWorkConfiguration compileWorkMachine
+    exact congrArg boundaryState hAccept
+
+/-- At an exact simulated budget, raw rejection is exactly rejection of the
+work trace's final configuration. -/
+theorem run_compileWorkMachine_mul_reject_iff
+    (machine : WorkMachine) (steps : Nat)
+    (config final : WorkConfiguration)
+    (hRun : workRunExact? machine steps config = some final) :
+    (run (compileWorkMachine machine) (6 * steps)
+      (encodeWorkConfiguration config)).state =
+        (compileWorkMachine machine).rejectState ↔
+      final.state = machine.rejectState := by
+  have hSimulation := run_compileWorkMachine_mul_of_workRunExact
+    machine steps config final hRun
+  constructor
+  · intro hReject
+    rw [hSimulation] at hReject
+    unfold encodeWorkConfiguration compileWorkMachine at hReject
+    exact boundaryState_injective hReject
+  · intro hReject
+    rw [hSimulation]
+    unfold encodeWorkConfiguration compileWorkMachine
+    exact congrArg boundaryState hReject
+
+/-- At an exact simulated budget, the compiled and work machines agree on
+whether their final configurations are halting. -/
+theorem run_compileWorkMachine_mul_isHalted
+    (machine : WorkMachine) (steps : Nat)
+    (config final : WorkConfiguration)
+    (hRun : workRunExact? machine steps config = some final) :
+    (compileWorkMachine machine).isHalted
+        (run (compileWorkMachine machine) (6 * steps)
+          (encodeWorkConfiguration config)) =
+      machine.isHalted final := by
+  rw [run_compileWorkMachine_mul_of_workRunExact
+    machine steps config final hRun]
+  exact compileWorkMachine_isHalted_encode machine final
+
 end PNP.Concrete
