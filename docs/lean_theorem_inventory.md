@@ -41,9 +41,12 @@ represented configuration to exactly `3 * n` successful work steps. It also extr
 exact prefix from an ordinary `F`-fuel raw run; conditional on a designated-halting endpoint, work
 fuel `3 * F` and compiled fuel `18 * F` reach the representation and encoding. The full fuels are
 at-most budgets, not successful-step counts or input-size bounds. This proves no termination result
-and does not classify a stuck nonhalting stop as a verdict. It supplies no input framing,
-`boundedDecide`, verdict/output preservation, output handoff, composition/precomposition
-`RawRefinement`, or input-size polynomial bound.
+and does not classify a stuck nonhalting stop as a verdict. A separate executable machine now
+frames literal canonical `BitString.pair` input at an exact quadratic input-length budget, leaving
+only representation-permitted exterior garbage. That theorem is paired-input-only, ends in the
+framer's accepting state, and is not composed with the lifted simulator. Its local `boundedDecide`
+theorem records only framer acceptance; no simulated-target verdict/output preservation, output
+handoff, composition/precomposition `RawRefinement`, or end-to-end input-size polynomial bound follows.
 Consequently the gate
 is false, and every theorem-emission field derived from it remains false or `null`.
 

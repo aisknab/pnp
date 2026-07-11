@@ -209,7 +209,11 @@ test('the executable compiler blocker and publication gate remain fail-closed', 
   assert.match(foundation.nonClaim,
     /only 3 \* n is an exact successful work count/u);
   assert.match(foundation.nonClaim,
-    /No executable framer, boundedDecide or machineOutput preservation/u);
+    /paired-input-only/u);
+  assert.match(foundation.nonClaim,
+    /not composed with the lifted simulator/u);
+  assert.match(foundation.nonClaim,
+    /boundedDecide or machineOutput preservation/u);
   assert.equal(map.gate.standardComplexityModelEligible, false);
   assert.equal(map.gate.expectedSourceClosureSha256, null);
 });

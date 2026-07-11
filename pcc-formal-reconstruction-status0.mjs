@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-11-18';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-11-19';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -66,6 +66,7 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'node --test audits/lean-concrete-machine0.test.mjs',
   'node --test audits/lean-concrete-tape-handoff0.test.mjs',
   'node --test audits/lean-concrete-pipeline-tape-geometry0.test.mjs',
+  'node --test audits/lean-concrete-pipeline-input-framer0.test.mjs',
   'node --test audits/lean-concrete-pipeline-machine-simulation0.test.mjs',
   'node --test audits/lean-concrete-complexity0.test.mjs',
   'node --test audits/lean-concrete-pipeline-refinement0.test.mjs',
@@ -82,6 +83,7 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteMachineAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteTapeHandoffAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineTapeGeometryAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineInputFramerAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineMachineSimulationAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteComplexityAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean',
@@ -119,6 +121,7 @@ const NON_CLAIMS = Object.freeze([
   'The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.',
   'Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget is a pure canonical specification, not an executable normalization or handoff machine.',
   'PipelineTape frames raw cells between distinct two-track markers and tolerates arbitrary exterior garbage; its boundary expansions are pure tape identities, not transition rules, a handoff machine, a compiler, or a runtime proof.',
+  'PipelineInputFramer is one literal finite machine for canonical BitString.pair inputs. It reaches an accepting represented frame with permitted exterior garbage at an exact quadratic raw-input-length budget, and its local boundedDecide theorem records only framer acceptance. It does not frame arbitrary empty, odd, malformed, or unpaired raw words; merge its rules or states with PipelineMachineSimulation; launch a simulated target; prove target termination, simulated-stage boundedDecide or target verdict/output preservation; provide terminal handoff or a pipeline RawRefinement; establish CNF-SAT in P, NP-completeness, or P = NP.',
   'PipelineMachineSimulation extracts from every at-most raw run with fuel F an exact successful prefix of length k at most F reaching the same endpoint. When that endpoint is a designated halt, exactly 3 * k successful work transitions reach a represented halting endpoint; at-most workRun with fuel 3 * F and compiled raw run with fuel 18 * F reach that endpoint and its encoding. The full budgets are not successful-transition counts, and F is a source-transition budget rather than an input-size bound. The theorem does not construct a frame from Tape.ofInput, prove termination, classify a stuck nonhalting stop as a verdict, prove boundedDecide, accept/reject/timeout or machineOutput preservation, normalize or hand off terminal output, launch a second stage, provide a FunctionProgram.RawRefinement or DecisionProgram.RawRefinement, compile composition or precomposition, or prove an end-to-end input-size polynomial bound.',
   'The concrete bitstring, natural-polynomial, and finite-rule machine kernel is now consumed by a finite charged-pipeline P/NP/reduction interface; the compiler/refinement from composite pipelines to one raw machine is not yet proved.',
   'The concrete complexity interface proves P subset NP, reduction composition and transport, and the NP-complete-in-P implication relative to its exact pipeline semantics; it does not prove concrete SAT complete or in P.',
@@ -374,7 +377,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-11-PIPELINE-BOUNDED-HALTING-18',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-11-PIPELINE-PAIRED-INPUT-FRAMER-19',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -641,7 +644,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-11-18',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-11-19',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

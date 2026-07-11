@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-11-18');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-11-19');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -140,15 +140,15 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.match(out.siteStatusSha256, /^[0-9a-f]{64}$/u);
 });
 
-test('formal reconstruction status pins the bounded-halting simulation inventory and source closure', async () => {
+test('formal reconstruction status pins the paired-input framer inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 4676);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 1942);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 1841);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 560);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 40);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 4735);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 1948);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 1847);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 671);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 41);
   assert.equal(status.leanSourceClosureSha256,
-    'e254c2f581d20d20d083f4c446c9a1b3af80ea2143be4f6df7488af3ebd6725e');
+    'f8266c7841ca7c8b9e224b54f64b28e98a7a5e79dc310d1ef3f2da4e6904efa2');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -191,10 +191,12 @@ test('formal reconstruction status pins the bounded-halting simulation inventory
   assert.equal(cnf.requiredTheorems.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP'), true);
   for (const command of [
+    'node --test audits/lean-concrete-pipeline-input-framer0.test.mjs',
     'node --test audits/lean-concrete-pipeline-machine-simulation0.test.mjs',
     'node --test audits/lean-concrete-pipeline-tape-geometry0.test.mjs',
     'node --test audits/lean-concrete-tape-handoff0.test.mjs',
     'node --test audits/lean-concrete-pipeline-refinement0.test.mjs',
+    'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineInputFramerAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineMachineSimulationAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineTapeGeometryAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcreteTapeHandoffAxiomAudit.lean',
@@ -210,13 +212,15 @@ test('formal reconstruction status pins the bounded-halting simulation inventory
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'exact successful prefix of length k at most F')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
+    'PipelineInputFramer is one literal finite machine for canonical BitString.pair inputs')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes(
     'does not construct a frame from Tape.ofInput, prove termination, classify a stuck nonhalting stop as a verdict')), true);
 });
 
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-11-PIPELINE-BOUNDED-HALTING-18');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-11-PIPELINE-PAIRED-INPUT-FRAMER-19');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
