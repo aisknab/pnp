@@ -45,3 +45,15 @@ Its ten cases exercise exact six-step compilation for all three head moves,
 including implicit blank work symbols at the left and right tape boundaries.
 It is a focused executable regression, not the universal compiler-simulation
 theorem.
+
+Run the extended canonical sweep with:
+
+```sh
+lake env lean -DwarningAsError=true --run \
+  lean-regression/PNPConcreteCNFWorkCanonicalExtended.lean
+```
+
+This opt-in executable checks 2,668 formulae against 15 assignments, or 40,020
+pairs. It adds every one-clause word of length at most three to the systematic
+family and exits with an error on either a semantic mismatch or a timeout. It
+is still finite regression evidence, not a universal proof.

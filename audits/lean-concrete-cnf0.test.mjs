@@ -200,9 +200,10 @@ test('package and workflow enforce the fast CNF audit and all three exact transc
 });
 
 test('bounded work-machine regressions are reviewable, strict, and explicitly opt-in', async () => {
-  const [regression, canonical, compiler, readme, packageText, workflow] = await Promise.all([
+  const [regression, canonical, extended, compiler, readme, packageText, workflow] = await Promise.all([
     text0('lean-regression/PNPConcreteCNFWorkExhaustive.lean'),
     text0('lean-regression/PNPConcreteCNFWorkCanonical.lean'),
+    text0('lean-regression/PNPConcreteCNFWorkCanonicalExtended.lean'),
     text0('lean-regression/PNPConcreteWorkCompilerEdges.lean'),
     text0('lean-regression/README.md'),
     text0('package.json'),
@@ -215,14 +216,19 @@ test('bounded work-machine regressions are reviewable, strict, and explicitly op
   assert.match(canonical, /#guard formulas\.length \* assignments\.length == 9300/u);
   assert.match(canonical, /\| _, _ => true/u);
   assert.match(canonical, /#guard findMismatch formulas == none/u);
+  assert.match(extended, /#guard formulas\.length \* assignments\.length == 40020/u);
+  assert.match(extended, /\| _, _ => true/u);
+  assert.match(extended, /def main : IO Unit/u);
   assert.match(compiler, /#guard cases\.length == 10/u);
   assert.match(compiler, /#guard cases\.all Prod\.snd/u);
   assert.match(readme, /261,121/u);
   assert.match(readme, /9,300/u);
+  assert.match(readme, /40,020/u);
   assert.match(readme, /contains no\s+encoded clause/u);
   for (const name of [
     'PNPConcreteCNFWorkExhaustive',
     'PNPConcreteCNFWorkCanonical',
+    'PNPConcreteCNFWorkCanonicalExtended',
     'PNPConcreteWorkCompilerEdges',
   ]) {
     assert.doesNotMatch(packageText, new RegExp(name, 'u'));
