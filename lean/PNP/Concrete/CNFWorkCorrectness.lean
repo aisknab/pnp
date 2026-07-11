@@ -9280,4 +9280,1212 @@ theorem clauseLiteral_accumulated_le_singlePhaseBudget
   exact Nat.le_trans accumulated (Nat.le_trans productBound phaseBound)
 end ClauseLiteralDesign
 
+namespace ClauseLiteralCostDesign
+
+open ClauseLiteralDesign
+
+/-! ### Deterministic clause/literal execution counts -/
+
+set_option maxRecDepth 100000
+
+/-- The exact interpreter count selected by the recursive literal proof. -/
+def literalSemanticStepCount (counter formulaSuffix : List WorkSymbol) :
+    BitString → BitString → Nat → Nat
+  | assignmentPrefix, _, 0 =>
+      literalLookupSteps assignmentPrefix.length counter.length
+        formulaSuffix.length
+  | assignmentPrefix, [], Nat.succ index =>
+      literalMarkOOBSteps assignmentPrefix.length counter.length
+        formulaSuffix.length index
+  | assignmentPrefix, value :: rest, Nat.succ index =>
+      literalMarkIterationSteps assignmentPrefix.length counter.length
+          (List.replicate index cnfT ++ cnfF :: formulaSuffix).length +
+        literalSemanticStepCount counter formulaSuffix
+          (assignmentPrefix ++ [value]) rest index
+
+theorem literalMark_unary_iteration_count_exact
+    (alreadySatisfied positive value : Bool) (assignmentPrefix : BitString)
+    (index : Nat) (remainingAssignment : BitString)
+    (counter formulaSuffix leftBase right : List WorkSymbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaSuffix →
+      FormulaScanSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (literalMarkIterationSteps assignmentPrefix.length counter.length
+          (List.replicate index cnfT ++ cnfF :: formulaSuffix).length)
+        (literalSemanticStart alreadySatisfied positive assignmentPrefix
+          (Nat.succ index) (value :: remainingAssignment)
+          counter formulaSuffix leftBase (cnfRootGuard :: right)) =
+      some
+        (literalSemanticStart alreadySatisfied positive
+          (assignmentPrefix ++ [value]) index remainingAssignment
+          counter formulaSuffix leftBase (cnfRootGuard :: right)) := by
+  cases index with
+  | zero =>
+      have h := literalMark_inRange_iteration_exact
+        alreadySatisfied positive value false assignmentPrefix counter
+        formulaSuffix leftBase
+        (assignmentWorkSymbols remainingAssignment ++ cnfRootGuard :: right)
+        counterAllowed formulaAllowed
+      rw [← length_append_value assignmentPrefix value] at h
+      rw [← markedAssignment_append_value_tail assignmentPrefix value
+        (assignmentWorkSymbols remainingAssignment ++ cnfRootGuard :: right)]
+        at h
+      unfold literalSemanticStart
+      rw [FrameTraceDesign.assignmentWorkSymbols_cons]
+      rw [List.replicate_succ]
+      cases value <;> exact h
+  | succ index =>
+      let formulaRest :=
+        List.replicate index cnfT ++ cnfF :: formulaSuffix
+      have formulaRestAllowed : ∀ symbol, List.Mem symbol formulaRest →
+          FormulaScanSymbol symbol := by
+        intro symbol member
+        exact oobFormulaTail_allowed index formulaSuffix formulaAllowed
+          symbol member
+      have h := literalMark_inRange_iteration_exact
+        alreadySatisfied positive value true assignmentPrefix counter
+        formulaRest leftBase
+        (assignmentWorkSymbols remainingAssignment ++ cnfRootGuard :: right)
+        counterAllowed formulaRestAllowed
+      rw [← length_append_value assignmentPrefix value] at h
+      rw [← markedAssignment_append_value_tail assignmentPrefix value
+        (assignmentWorkSymbols remainingAssignment ++ cnfRootGuard :: right)]
+        at h
+      unfold literalSemanticStart
+      rw [FrameTraceDesign.assignmentWorkSymbols_cons]
+      rw [List.replicate_succ]
+      unfold formulaRest at h
+      rw [List.replicate_succ]
+      repeat' rw [FrameTraceDesign.frameWork_append_assoc] at h
+      repeat' rw [FrameTraceDesign.frameWork_append_assoc]
+      cases value <;> exact h
+
+theorem literalIndex_semantic_count_exact
+    (alreadySatisfied positive : Bool)
+    (assignmentPrefix remainingAssignment fullAssignment : BitString)
+    (index fullIndex : Nat)
+    (counter formulaSuffix leftBase right : List WorkSymbol)
+    (fullIndexShape : fullIndex = assignmentPrefix.length + index)
+    (fullAssignmentShape :
+      fullAssignment = assignmentPrefix ++ remainingAssignment)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaSuffix →
+      FormulaScanSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (literalSemanticStepCount counter formulaSuffix assignmentPrefix
+          remainingAssignment index)
+        (literalSemanticStart alreadySatisfied positive assignmentPrefix
+          index remainingAssignment counter formulaSuffix leftBase
+          (cnfRootGuard :: right)) =
+      some
+        (literalSemanticFinal
+          (alreadySatisfied ||
+            checkLiteral
+              ({ positive := positive, variableIndex := index } : CNFLiteral)
+              remainingAssignment)
+          positive fullIndex fullAssignment counter formulaSuffix leftBase
+          (cnfRootGuard :: right)) := by
+  induction index generalizing assignmentPrefix remainingAssignment with
+  | zero =>
+      cases remainingAssignment with
+      | nil =>
+          have h := literalLookup_oob_exact alreadySatisfied positive
+            assignmentPrefix counter formulaSuffix leftBase right
+            counterAllowed formulaAllowed
+          unfold literalSemanticStepCount
+          unfold literalSemanticStart literalSemanticFinal
+          rw [fullIndexShape]
+          rw [fullAssignmentShape]
+          rw [Nat.add_zero]
+          rw [BitString.append_nil_constructive]
+          rw [checkLiteral_empty]
+          rw [Bool.or_false]
+          exact h
+      | cons value rest =>
+          have h := literalLookup_inRange_exact alreadySatisfied positive
+            value assignmentPrefix rest counter formulaSuffix leftBase
+            (cnfRootGuard :: right) counterAllowed formulaAllowed
+          unfold literalSemanticStepCount
+          unfold literalSemanticStart literalSemanticFinal
+          rw [fullIndexShape]
+          rw [fullAssignmentShape]
+          rw [Nat.add_zero]
+          rw [checkLiteral_zero_cons]
+          rw [assignmentWorkSymbols_append]
+          rw [FrameTraceDesign.assignmentWorkSymbols_cons]
+          repeat' rw [FrameTraceDesign.frameWork_append_assoc]
+          cases value <;> exact h
+  | succ index ih =>
+      cases remainingAssignment with
+      | nil =>
+          have h := literalMark_oob_rawTail_exact alreadySatisfied positive
+            assignmentPrefix counter formulaSuffix leftBase right index
+            counterAllowed formulaAllowed
+          rw [pushWorkLeft_replicate_t_add] at h
+          rw [succ_add_exchange] at h
+          unfold literalSemanticStepCount
+          unfold literalSemanticStart literalSemanticFinal
+          rw [fullIndexShape]
+          rw [fullAssignmentShape]
+          rw [BitString.append_nil_constructive]
+          rw [List.replicate_succ]
+          rw [checkLiteral_empty]
+          rw [Bool.or_false]
+          exact h
+      | cons value rest =>
+          have iterationRun := literalMark_unary_iteration_count_exact
+            alreadySatisfied positive value assignmentPrefix index rest
+            counter formulaSuffix leftBase right counterAllowed formulaAllowed
+          let extendedPrefix := assignmentPrefix ++ [value]
+          have extendedIndexShape :
+              fullIndex = extendedPrefix.length + index := by
+            unfold extendedPrefix
+            rw [length_append_value]
+            rw [succ_add_exchange]
+            exact fullIndexShape
+          have extendedAssignmentShape :
+              fullAssignment = extendedPrefix ++ rest := by
+            unfold extendedPrefix
+            exact fullAssignmentShape.trans
+              (assignment_append_value_tail assignmentPrefix value rest)
+          have remainingRun := ih extendedPrefix rest extendedIndexShape
+            extendedAssignmentShape
+          have complete := workRunExact?_compose cnfWorkMachine
+            (literalMarkIterationSteps assignmentPrefix.length counter.length
+              (List.replicate index cnfT ++ cnfF :: formulaSuffix).length)
+            (literalSemanticStepCount counter formulaSuffix extendedPrefix
+              rest index)
+            _ _ _ iterationRun remainingRun
+          unfold literalSemanticStepCount
+          rw [checkLiteral_succ_cons]
+          exact complete
+
+theorem literalIndex_full_count_exact
+    (alreadySatisfied positive : Bool) (index : Nat)
+    (assignment : BitString)
+    (counter formulaSuffix leftBase right : List WorkSymbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaSuffix →
+      FormulaScanSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (literalSemanticStepCount counter formulaSuffix [] assignment index)
+        (literalSemanticStart alreadySatisfied positive [] index assignment
+          counter formulaSuffix leftBase (cnfRootGuard :: right)) =
+      some
+        (literalSemanticFinal
+          (alreadySatisfied ||
+            checkLiteral
+              ({ positive := positive, variableIndex := index } : CNFLiteral)
+              assignment)
+          positive index assignment counter formulaSuffix leftBase
+          (cnfRootGuard :: right)) := by
+  exact literalIndex_semantic_count_exact alreadySatisfied positive []
+    assignment assignment index index counter formulaSuffix leftBase right
+    (Nat.zero_add index).symm rfl counterAllowed formulaAllowed
+
+/-- Exact clause-control count: one sign transition, the literal count, and
+the recursively remaining clause, with one final finish transition. -/
+def clauseSemanticStepCount (assignment : BitString)
+    (counter formulaRest : List WorkSymbol) : List CNFLiteral → Nat
+  | [] => 1
+  | literal :: rest =>
+      (1 + literalSemanticStepCount counter
+        (literalListWorkSymbols rest ++ cnfFinish :: formulaRest)
+        [] assignment literal.variableIndex) +
+      clauseSemanticStepCount assignment counter formulaRest rest
+
+theorem clauseContinue_semantic_count_exact (alreadySatisfied : Bool)
+    (literals : List CNFLiteral) (assignment : BitString)
+    (counter formulaRest left right : List WorkSymbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaRest →
+      FormulaScanSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (clauseSemanticStepCount assignment counter formulaRest literals)
+        (workConfigAtWord (CNFWorkState.clauseContinue alreadySatisfied)
+          left
+          (literalListWorkSymbols literals ++
+            (cnfFinish ::
+              (formulaRest ++
+                (cnfBoundaryGuard ::
+                  (counter ++
+                    (cnfFinish ::
+                      (assignmentWorkSymbols assignment ++
+                        (cnfRootGuard :: right))))))))) =
+      some
+        (clauseSemanticFinal
+          (alreadySatisfied || checkClause literals assignment)
+          (pushWorkLeft (literalListWorkSymbols literals) left)
+          (formulaRest ++
+            (cnfBoundaryGuard ::
+              (counter ++
+                (cnfFinish ::
+                  (assignmentWorkSymbols assignment ++
+                    (cnfRootGuard :: right))))))) := by
+  induction literals generalizing alreadySatisfied left with
+  | nil =>
+      cases alreadySatisfied with
+      | false =>
+          let clauseTail := formulaRest ++
+            (cnfBoundaryGuard ::
+              (counter ++
+                (cnfFinish ::
+                  (assignmentWorkSymbols assignment ++
+                    (cnfRootGuard :: right)))))
+          have h := unsatisfiedClauseFinish_reject_run left clauseTail
+          unfold clauseSemanticStepCount literalListWorkSymbols
+            clauseSemanticFinal checkClause
+          change workRunExact? cnfWorkMachine 1
+              (workConfigAtWord (CNFWorkState.clauseContinue false) left
+                (cnfFinish :: clauseTail)) =
+            some (workConfigAtWord CNFWorkState.reject left
+              (cnfFinish :: clauseTail))
+          exact h
+      | true =>
+          let clauseTail := formulaRest ++
+            (cnfBoundaryGuard ::
+              (counter ++
+                (cnfFinish ::
+                  (assignmentWorkSymbols assignment ++
+                    (cnfRootGuard :: right)))))
+          have h := workRunExact?_one_of_step cnfWorkMachine _ _
+            (clauseContinue_true_finish_step left clauseTail)
+          unfold clauseSemanticStepCount literalListWorkSymbols
+            clauseSemanticFinal checkClause
+          change workRunExact? cnfWorkMachine 1
+              (workConfigAtWord (CNFWorkState.clauseContinue true) left
+                (cnfFinish :: clauseTail)) =
+            some (workConfigAtWord CNFWorkState.clauseStart
+              (cnfFinish :: left) clauseTail)
+          exact h
+  | cons literal rest ih =>
+      let literalSuffix :=
+        literalListWorkSymbols rest ++ cnfFinish :: formulaRest
+      let certificateTail := cnfBoundaryGuard ::
+        (counter ++
+          (cnfFinish ::
+            (assignmentWorkSymbols assignment ++ (cnfRootGuard :: right))))
+      have suffixAllowed : ∀ symbol, List.Mem symbol literalSuffix →
+          FormulaScanSymbol symbol := by
+        intro symbol member
+        exact clauseFormulaSuffix_allowed rest formulaRest formulaAllowed
+          symbol member
+      have hSign := workRunExact?_one_of_step cnfWorkMachine _ _
+        (clauseContinue_literal_step alreadySatisfied literal.positive left
+          (List.replicate literal.variableIndex cnfT ++
+            (cnfF :: (literalSuffix ++ certificateTail))))
+      have literalRun := literalIndex_full_count_exact alreadySatisfied
+        literal.positive literal.variableIndex assignment counter literalSuffix
+        left right counterAllowed suffixAllowed
+      unfold literalSemanticStart literalSemanticFinal at literalRun
+      have signLiteralRun := workRunExact?_compose cnfWorkMachine 1
+        (literalSemanticStepCount counter literalSuffix [] assignment
+          literal.variableIndex) _ _ _ hSign literalRun
+      rw [← assignmentValueWorkSymbol_eq_if literal.positive]
+        at signLiteralRun
+      rw [← literalWorkSymbols_push literal left] at signLiteralRun
+      rw [FrameTraceDesign.frameWork_append_assoc] at signLiteralRun
+      have restRun := ih
+        (alreadySatisfied || checkLiteral literal assignment)
+        (pushWorkLeft (literalWorkSymbols literal) left)
+      have complete := workRunExact?_compose cnfWorkMachine
+        (1 + literalSemanticStepCount counter literalSuffix [] assignment
+          literal.variableIndex)
+        (clauseSemanticStepCount assignment counter formulaRest rest)
+        _ _ _ signLiteralRun restRun
+      rw [Bool.or_assoc] at complete
+      repeat' rw [FrameTraceDesign.frameWork_append_assoc] at complete
+      unfold literalSuffix at complete
+      unfold clauseSemanticStepCount
+      rw [literalListWorkSymbols_cons]
+      unfold checkClause
+      rw [FrameTraceDesign.pushWorkLeft_append]
+      repeat' rw [FrameTraceDesign.frameWork_append_assoc]
+      rw [literalWorkSymbols_append]
+      exact complete
+
+theorem clause_semantic_count_exact (clause : List CNFLiteral)
+    (assignment : BitString)
+    (counter formulaRest left right : List WorkSymbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaRest →
+      FormulaScanSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (clauseSemanticStepCount assignment counter formulaRest clause)
+        (workConfigAtWord CNFWorkState.clauseNeedLiteral left
+          (literalListWorkSymbols clause ++
+            (cnfFinish ::
+              (formulaRest ++
+                (cnfBoundaryGuard ::
+                  (counter ++
+                    (cnfFinish ::
+                      (assignmentWorkSymbols assignment ++
+                        (cnfRootGuard :: right))))))))) =
+      some
+        (clauseSemanticFinal (checkClause clause assignment)
+          (pushWorkLeft (literalListWorkSymbols clause) left)
+          (formulaRest ++
+            (cnfBoundaryGuard ::
+              (counter ++
+                (cnfFinish ::
+                  (assignmentWorkSymbols assignment ++
+                    (cnfRootGuard :: right))))))) := by
+  cases clause with
+  | nil =>
+      let clauseTail := formulaRest ++
+        (cnfBoundaryGuard ::
+          (counter ++
+            (cnfFinish ::
+              (assignmentWorkSymbols assignment ++
+                (cnfRootGuard :: right)))))
+      have h := emptyClause_reject_run left clauseTail
+      unfold clauseSemanticStepCount literalListWorkSymbols
+        clauseSemanticFinal checkClause
+      change workRunExact? cnfWorkMachine 1
+          (workConfigAtWord CNFWorkState.clauseNeedLiteral left
+            (cnfFinish :: clauseTail)) =
+        some (workConfigAtWord CNFWorkState.reject left
+          (cnfFinish :: clauseTail))
+      exact h
+  | cons literal rest =>
+      let literalSuffix :=
+        literalListWorkSymbols rest ++ cnfFinish :: formulaRest
+      let certificateTail := cnfBoundaryGuard ::
+        (counter ++
+          (cnfFinish ::
+            (assignmentWorkSymbols assignment ++ (cnfRootGuard :: right))))
+      have suffixAllowed : ∀ symbol, List.Mem symbol literalSuffix →
+          FormulaScanSymbol symbol := by
+        intro symbol member
+        exact clauseFormulaSuffix_allowed rest formulaRest formulaAllowed
+          symbol member
+      have hSign := workRunExact?_one_of_step cnfWorkMachine _ _
+        (clauseNeedLiteral_step literal.positive left
+          (List.replicate literal.variableIndex cnfT ++
+            (cnfF :: (literalSuffix ++ certificateTail))))
+      have literalRun := literalIndex_full_count_exact false literal.positive
+        literal.variableIndex assignment counter literalSuffix left right
+        counterAllowed suffixAllowed
+      unfold literalSemanticStart literalSemanticFinal at literalRun
+      have signLiteralRun := workRunExact?_compose cnfWorkMachine 1
+        (literalSemanticStepCount counter literalSuffix [] assignment
+          literal.variableIndex) _ _ _ hSign literalRun
+      rw [← assignmentValueWorkSymbol_eq_if literal.positive]
+        at signLiteralRun
+      rw [← literalWorkSymbols_push literal left] at signLiteralRun
+      rw [FrameTraceDesign.frameWork_append_assoc] at signLiteralRun
+      rw [Bool.false_or] at signLiteralRun
+      have restRun := clauseContinue_semantic_count_exact
+        (checkLiteral literal assignment) rest assignment counter formulaRest
+        (pushWorkLeft (literalWorkSymbols literal) left) right
+        counterAllowed formulaAllowed
+      have complete := workRunExact?_compose cnfWorkMachine
+        (1 + literalSemanticStepCount counter literalSuffix [] assignment
+          literal.variableIndex)
+        (clauseSemanticStepCount assignment counter formulaRest rest)
+        _ _ _ signLiteralRun restRun
+      repeat' rw [FrameTraceDesign.frameWork_append_assoc] at complete
+      unfold literalSuffix at complete
+      unfold clauseSemanticStepCount
+      rw [literalListWorkSymbols_cons]
+      unfold checkClause
+      rw [FrameTraceDesign.pushWorkLeft_append]
+      repeat' rw [FrameTraceDesign.frameWork_append_assoc]
+      rw [literalWorkSymbols_append]
+      exact complete
+
+/-! ### Constructive primitive charge normalization and bounds -/
+
+private inductive ChargeCostAtom where
+  | unit
+  | formula
+  | counter
+  | marked
+  | outer
+  | header
+
+private def chargeCostAtomRank : ChargeCostAtom → Nat
+  | .marked => 0
+  | .counter => 1
+  | .header => 2
+  | .formula => 3
+  | .outer => 4
+  | .unit => 5
+
+private def chargeCostAtomValue
+    (unit formula counter marked outer header : Nat) :
+    ChargeCostAtom → Nat
+  | .unit => unit
+  | .formula => formula
+  | .counter => counter
+  | .marked => marked
+  | .outer => outer
+  | .header => header
+
+private def chargeCostAtomSum
+    (unit formula counter marked outer header : Nat) :
+    List ChargeCostAtom → Nat
+  | [] => 0
+  | atom :: rest =>
+      chargeCostAtomValue unit formula counter marked outer header atom +
+        chargeCostAtomSum unit formula counter marked outer header rest
+
+private def chargeCostAtomInsert
+    (atom : ChargeCostAtom) : List ChargeCostAtom → List ChargeCostAtom
+  | [] => [atom]
+  | head :: rest =>
+      if chargeCostAtomRank atom ≤ chargeCostAtomRank head then
+        atom :: head :: rest
+      else
+        head :: chargeCostAtomInsert atom rest
+
+private def chargeCostAtomSort :
+    List ChargeCostAtom → List ChargeCostAtom
+  | [] => []
+  | atom :: rest => chargeCostAtomInsert atom (chargeCostAtomSort rest)
+
+private theorem chargeCostAtomSum_insert
+    (unit formula counter marked outer header : Nat)
+    (atom : ChargeCostAtom) (items : List ChargeCostAtom) :
+    chargeCostAtomSum unit formula counter marked outer header
+        (chargeCostAtomInsert atom items) =
+      chargeCostAtomValue unit formula counter marked outer header atom +
+        chargeCostAtomSum unit formula counter marked outer header items := by
+  induction items with
+  | nil => rfl
+  | cons head rest ih =>
+      cases atom <;> cases head <;> try rfl
+      all_goals
+        change _ + chargeCostAtomSum unit formula counter marked outer header
+            (chargeCostAtomInsert _ rest) = _
+        rw [ih]
+        exact Nat.add_left_comm _ _ _
+
+private theorem chargeCostAtomSum_sort
+    (unit formula counter marked outer header : Nat)
+    (items : List ChargeCostAtom) :
+    chargeCostAtomSum unit formula counter marked outer header
+        (chargeCostAtomSort items) =
+      chargeCostAtomSum unit formula counter marked outer header items := by
+  induction items with
+  | nil => rfl
+  | cons atom rest ih =>
+      change chargeCostAtomSum unit formula counter marked outer header
+          (chargeCostAtomInsert atom (chargeCostAtomSort rest)) = _
+      rw [chargeCostAtomSum_insert]
+      rw [ih]
+      rfl
+
+private inductive ChargeCostExpr where
+  | atom : ChargeCostAtom → ChargeCostExpr
+  | add : ChargeCostExpr → ChargeCostExpr → ChargeCostExpr
+
+private def chargeCostExprValue
+    (unit formula counter marked outer header : Nat) :
+    ChargeCostExpr → Nat
+  | .atom atom =>
+      chargeCostAtomValue unit formula counter marked outer header atom
+  | .add left right =>
+      chargeCostExprValue unit formula counter marked outer header left +
+        chargeCostExprValue unit formula counter marked outer header right
+
+private def chargeCostExprAtoms : ChargeCostExpr → List ChargeCostAtom
+  | .atom atom => [atom]
+  | .add left right => chargeCostExprAtoms left ++ chargeCostExprAtoms right
+
+private theorem chargeCostAtomSum_append
+    (unit formula counter marked outer header : Nat)
+    (left right : List ChargeCostAtom) :
+    chargeCostAtomSum unit formula counter marked outer header
+        (left ++ right) =
+      chargeCostAtomSum unit formula counter marked outer header left +
+        chargeCostAtomSum unit formula counter marked outer header right := by
+  induction left with
+  | nil => exact (Nat.zero_add _).symm
+  | cons atom rest ih =>
+      change _ + chargeCostAtomSum unit formula counter marked outer header
+          (rest ++ right) =
+        (_ + chargeCostAtomSum unit formula counter marked outer header rest) +
+          chargeCostAtomSum unit formula counter marked outer header right
+      rw [ih]
+      exact (Nat.add_assoc _ _ _).symm
+
+private theorem chargeCostExprValue_atoms
+    (unit formula counter marked outer header : Nat)
+    (expression : ChargeCostExpr) :
+    chargeCostExprValue unit formula counter marked outer header expression =
+      chargeCostAtomSum unit formula counter marked outer header
+        (chargeCostExprAtoms expression) := by
+  induction expression with
+  | atom atom => exact (Nat.add_zero _).symm
+  | add left right leftIH rightIH =>
+      rw [chargeCostExprAtoms, chargeCostAtomSum_append]
+      change chargeCostExprValue unit formula counter marked outer header left +
+          chargeCostExprValue unit formula counter marked outer header right = _
+      rw [leftIH, rightIH]
+
+private theorem chargeCostExpr_equal_of_sorted
+    (unit formula counter marked outer header : Nat)
+    (left right : ChargeCostExpr)
+    (sorted : chargeCostAtomSort (chargeCostExprAtoms left) =
+      chargeCostAtomSort (chargeCostExprAtoms right)) :
+    chargeCostExprValue unit formula counter marked outer header left =
+      chargeCostExprValue unit formula counter marked outer header right := by
+  calc
+    chargeCostExprValue unit formula counter marked outer header left =
+        chargeCostAtomSum unit formula counter marked outer header
+          (chargeCostExprAtoms left) :=
+      chargeCostExprValue_atoms unit formula counter marked outer header left
+    _ = chargeCostAtomSum unit formula counter marked outer header
+          (chargeCostAtomSort (chargeCostExprAtoms left)) :=
+      (chargeCostAtomSum_sort unit formula counter marked outer header
+        (chargeCostExprAtoms left)).symm
+    _ = chargeCostAtomSum unit formula counter marked outer header
+          (chargeCostAtomSort (chargeCostExprAtoms right)) :=
+      congrArg (chargeCostAtomSum unit formula counter marked outer header)
+        sorted
+    _ = chargeCostAtomSum unit formula counter marked outer header
+          (chargeCostExprAtoms right) :=
+      chargeCostAtomSum_sort unit formula counter marked outer header
+        (chargeCostExprAtoms right)
+    _ = chargeCostExprValue unit formula counter marked outer header right :=
+      (chargeCostExprValue_atoms unit formula counter marked outer header
+        right).symm
+
+private def chargeExprAddTail :
+    ChargeCostExpr → List ChargeCostExpr → ChargeCostExpr
+  | expression, [] => expression
+  | expression, next :: rest =>
+      chargeExprAddTail (.add expression next) rest
+
+private def chargeAtomExpr (atom : ChargeCostAtom) : ChargeCostExpr :=
+  .atom atom
+
+private def chargeExprFromAtoms
+    (first : ChargeCostAtom) (rest : List ChargeCostAtom) : ChargeCostExpr :=
+  chargeExprAddTail (.atom first) (rest.map ChargeCostExpr.atom)
+
+private def literalRestoreRawExpr : ChargeCostExpr :=
+  let u := chargeAtomExpr .unit
+  let f := chargeAtomExpr .formula
+  let c := chargeAtomExpr .counter
+  let m := chargeAtomExpr .marked
+  let a := chargeAtomExpr .outer
+  let r := chargeAtomExpr .header
+  chargeExprAddTail a [u, c, u, f, u, r, m, u, m, r, u]
+
+private def literalRestoreTargetExpr : ChargeCostExpr :=
+  chargeExprFromAtoms .outer
+    [.counter, .formula, .header, .header, .marked, .marked,
+      .unit, .unit, .unit, .unit, .unit]
+
+private def literalLookupRawExpr : ChargeCostExpr :=
+  let u := chargeAtomExpr .unit
+  let f := chargeAtomExpr .formula
+  let c := chargeAtomExpr .counter
+  let a := chargeAtomExpr .outer
+  let outer := chargeExprAddTail u [f, u, c, u, a, u]
+  let restore := chargeExprAddTail a [u, c, u, f, u, a, u, a, u]
+  .add outer restore
+
+private def literalLookupTargetExpr : ChargeCostExpr :=
+  chargeExprFromAtoms .outer
+    [.outer, .outer, .outer, .counter, .counter,
+      .formula, .formula,
+      .unit, .unit, .unit, .unit, .unit, .unit, .unit, .unit, .unit]
+
+private def literalMarkIterationRawExpr : ChargeCostExpr :=
+  let u := chargeAtomExpr .unit
+  let f := chargeAtomExpr .formula
+  let c := chargeAtomExpr .counter
+  let a := chargeAtomExpr .outer
+  let outward := chargeExprAddTail f [u, c, u, a]
+  let successor := .add a u
+  chargeExprAddTail (.add u outward)
+    [u, a, u, c, u, f, successor, u, successor, u]
+
+private def literalMarkIterationTargetExpr : ChargeCostExpr :=
+  chargeExprFromAtoms .outer
+    [.outer, .outer, .outer, .counter, .counter,
+      .formula, .formula,
+      .unit, .unit, .unit, .unit, .unit,
+      .unit, .unit, .unit, .unit, .unit]
+
+private def literalMarkOOBRawExpr : ChargeCostExpr :=
+  let u := chargeAtomExpr .unit
+  let f := chargeAtomExpr .formula
+  let c := chargeAtomExpr .counter
+  let a := chargeAtomExpr .outer
+  let r := chargeAtomExpr .header
+  let successor := .add a u
+  let formulaTail := chargeExprAddTail r [u, f]
+  let outward := chargeExprAddTail formulaTail [u, c, u, a]
+  let restore :=
+    chargeExprAddTail a [u, c, u, f, u, r, successor, u,
+      successor, r, u]
+  .add (.add (.add u outward) u) restore
+
+private def literalMarkOOBTargetExpr : ChargeCostExpr :=
+  chargeExprFromAtoms .outer
+    [.outer, .outer, .outer, .counter, .counter,
+      .formula, .formula, .header, .header, .header,
+      .unit, .unit, .unit, .unit, .unit, .unit,
+      .unit, .unit, .unit, .unit, .unit, .unit]
+
+theorem literalRestoreSteps_closed
+    (assignmentLength counterLength formulaSuffixLength
+      markedIndexLength rawIndexTailLength : Nat) :
+    literalRestoreSteps assignmentLength counterLength formulaSuffixLength
+        markedIndexLength rawIndexTailLength =
+      assignmentLength + counterLength + formulaSuffixLength +
+        rawIndexTailLength + rawIndexTailLength + markedIndexLength +
+        markedIndexLength + 5 := by
+  unfold literalRestoreSteps
+  change chargeCostExprValue 1 formulaSuffixLength counterLength
+      markedIndexLength assignmentLength rawIndexTailLength
+      literalRestoreRawExpr =
+    chargeCostExprValue 1 formulaSuffixLength counterLength
+      markedIndexLength assignmentLength rawIndexTailLength
+      literalRestoreTargetExpr
+  apply chargeCostExpr_equal_of_sorted
+  rfl
+
+theorem literalLookupSteps_closed
+    (assignmentPrefixLength counterLength formulaSuffixLength : Nat) :
+    literalLookupSteps assignmentPrefixLength counterLength
+        formulaSuffixLength =
+      assignmentPrefixLength + assignmentPrefixLength +
+        assignmentPrefixLength + assignmentPrefixLength +
+        counterLength + counterLength +
+        formulaSuffixLength + formulaSuffixLength + 9 := by
+  unfold literalLookupSteps literalRestoreSteps
+  change chargeCostExprValue 1 formulaSuffixLength counterLength
+      0 assignmentPrefixLength 0 literalLookupRawExpr =
+    chargeCostExprValue 1 formulaSuffixLength counterLength
+      0 assignmentPrefixLength 0 literalLookupTargetExpr
+  apply chargeCostExpr_equal_of_sorted
+  rfl
+
+theorem literalMarkIterationSteps_closed
+    (assignmentPrefixLength counterLength formulaTailLength : Nat) :
+    literalMarkIterationSteps assignmentPrefixLength counterLength
+        formulaTailLength =
+      assignmentPrefixLength + assignmentPrefixLength +
+        assignmentPrefixLength + assignmentPrefixLength +
+        counterLength + counterLength +
+        formulaTailLength + formulaTailLength + 10 := by
+  unfold literalMarkIterationSteps
+  change chargeCostExprValue 1 formulaTailLength counterLength
+      0 assignmentPrefixLength 0 literalMarkIterationRawExpr =
+    chargeCostExprValue 1 formulaTailLength counterLength
+      0 assignmentPrefixLength 0 literalMarkIterationTargetExpr
+  apply chargeCostExpr_equal_of_sorted
+  rfl
+
+theorem literalMarkOOBSteps_closed
+    (assignmentLength counterLength formulaSuffixLength
+      rawIndexTailLength : Nat) :
+    literalMarkOOBSteps assignmentLength counterLength formulaSuffixLength
+        rawIndexTailLength =
+      assignmentLength + assignmentLength + assignmentLength +
+        assignmentLength + counterLength + counterLength +
+        formulaSuffixLength + formulaSuffixLength +
+        rawIndexTailLength + rawIndexTailLength + rawIndexTailLength + 12 := by
+  unfold literalMarkOOBSteps literalRestoreSteps
+  change chargeCostExprValue 1 formulaSuffixLength counterLength
+      0 assignmentLength rawIndexTailLength literalMarkOOBRawExpr =
+    chargeCostExprValue 1 formulaSuffixLength counterLength
+      0 assignmentLength rawIndexTailLength literalMarkOOBTargetExpr
+  apply chargeCostExpr_equal_of_sorted
+  rfl
+
+private theorem chargeNatAddMulClean (a b c : Nat) :
+    (a + b) * c = a * c + b * c := by
+  induction c with
+  | zero => rfl
+  | succ c ih =>
+      change (a + b) * c + (a + b) =
+        (a * c + a) + (b * c + b)
+      rw [ih]
+      exact FrameTraceDesign.frame_add_four_reorder
+        (a * c) (b * c) a b
+
+private theorem eightCopies_normalize (n : Nat) :
+    (((((((n + n) + n) + n) + n) + n) + n) + n) = n * 8 := by
+  repeat' rw [Nat.mul_succ]
+  rw [Nat.mul_zero, Nat.zero_add]
+
+private theorem elevenCopies_normalize (n : Nat) :
+    ((((((((((n + n) + n) + n) + n) + n) + n) + n) + n) + n) + n) =
+      n * 11 := by
+  repeat' rw [Nat.mul_succ]
+  rw [Nat.mul_zero, Nat.zero_add]
+
+private theorem eightTerms_plus_constant_le_twelveSpan
+    (n constant a b c d e f g h : Nat)
+    (aBound : a ≤ n) (bBound : b ≤ n)
+    (cBound : c ≤ n) (dBound : d ≤ n)
+    (eBound : e ≤ n) (fBound : f ≤ n)
+    (gBound : g ≤ n) (hBound : h ≤ n)
+    (constantBound : constant ≤ 24) :
+    (((((((a + b) + c) + d) + e) + f) + g) + h) + constant ≤
+      cnfShiftedWorkSpan n * 12 := by
+  have h0 := Nat.add_le_add aBound bBound
+  have h1 := Nat.add_le_add h0 cBound
+  have h2 := Nat.add_le_add h1 dBound
+  have h3 := Nat.add_le_add h2 eBound
+  have h4 := Nat.add_le_add h3 fBound
+  have h5 := Nat.add_le_add h4 gBound
+  have h6 := Nat.add_le_add h5 hBound
+  have eightTwelve : 8 ≤ 12 := by
+    change 8 ≤ 8 + 4
+    exact Nat.le_add_right 8 4
+  have scaled := Nat.mul_le_mul_left n eightTwelve
+  have variables :
+      (((((((a + b) + c) + d) + e) + f) + g) + h) ≤ n * 12 := by
+    exact Nat.le_trans h6
+      (Nat.le_trans (Nat.le_of_eq (eightCopies_normalize n)) scaled)
+  have combined := Nat.add_le_add variables constantBound
+  have normalize : n * 12 + 24 = (n + 2) * 12 := by
+    exact (chargeNatAddMulClean n 2 12).symm
+  unfold cnfShiftedWorkSpan
+  exact Nat.le_trans combined (Nat.le_of_eq normalize)
+
+private theorem elevenTerms_plus_constant_le_twelveSpan
+    (n constant a b c d e f g h i j k : Nat)
+    (aBound : a ≤ n) (bBound : b ≤ n)
+    (cBound : c ≤ n) (dBound : d ≤ n)
+    (eBound : e ≤ n) (fBound : f ≤ n)
+    (gBound : g ≤ n) (hBound : h ≤ n)
+    (iBound : i ≤ n) (jBound : j ≤ n)
+    (kBound : k ≤ n)
+    (constantBound : constant ≤ 24) :
+    ((((((((((a + b) + c) + d) + e) + f) + g) + h) + i) + j) + k) +
+        constant ≤ cnfShiftedWorkSpan n * 12 := by
+  have h0 := Nat.add_le_add aBound bBound
+  have h1 := Nat.add_le_add h0 cBound
+  have h2 := Nat.add_le_add h1 dBound
+  have h3 := Nat.add_le_add h2 eBound
+  have h4 := Nat.add_le_add h3 fBound
+  have h5 := Nat.add_le_add h4 gBound
+  have h6 := Nat.add_le_add h5 hBound
+  have h7 := Nat.add_le_add h6 iBound
+  have h8 := Nat.add_le_add h7 jBound
+  have h9 := Nat.add_le_add h8 kBound
+  have elevenTwelve : 11 ≤ 12 := by
+    change 11 ≤ 11 + 1
+    exact Nat.le_add_right 11 1
+  have scaled := Nat.mul_le_mul_left n elevenTwelve
+  have variables :
+      ((((((((((a + b) + c) + d) + e) + f) + g) + h) + i) + j) + k) ≤
+        n * 12 := by
+    exact Nat.le_trans h9
+      (Nat.le_trans (Nat.le_of_eq (elevenCopies_normalize n)) scaled)
+  have combined := Nat.add_le_add variables constantBound
+  have normalize : n * 12 + 24 = (n + 2) * 12 := by
+    exact (chargeNatAddMulClean n 2 12).symm
+  unfold cnfShiftedWorkSpan
+  exact Nat.le_trans combined (Nat.le_of_eq normalize)
+
+theorem literalLookupSteps_le_unitCharge (n assignmentPrefixLength
+    counterLength formulaSuffixLength : Nat)
+    (assignmentBound : assignmentPrefixLength ≤ n)
+    (counterBound : counterLength ≤ n)
+    (formulaBound : formulaSuffixLength ≤ n) :
+    literalLookupSteps assignmentPrefixLength counterLength
+        formulaSuffixLength ≤ cnfShiftedWorkSpan n * 12 := by
+  rw [literalLookupSteps_closed]
+  apply eightTerms_plus_constant_le_twelveSpan n 9
+  · exact assignmentBound
+  · exact assignmentBound
+  · exact assignmentBound
+  · exact assignmentBound
+  · exact counterBound
+  · exact counterBound
+  · exact formulaBound
+  · exact formulaBound
+  · change 9 ≤ 9 + 15
+    exact Nat.le_add_right 9 15
+
+theorem literalMarkIterationSteps_le_unitCharge (n assignmentPrefixLength
+    counterLength formulaTailLength : Nat)
+    (assignmentBound : assignmentPrefixLength ≤ n)
+    (counterBound : counterLength ≤ n)
+    (formulaBound : formulaTailLength ≤ n) :
+    literalMarkIterationSteps assignmentPrefixLength counterLength
+        formulaTailLength ≤ cnfShiftedWorkSpan n * 12 := by
+  rw [literalMarkIterationSteps_closed]
+  apply eightTerms_plus_constant_le_twelveSpan n 10
+  · exact assignmentBound
+  · exact assignmentBound
+  · exact assignmentBound
+  · exact assignmentBound
+  · exact counterBound
+  · exact counterBound
+  · exact formulaBound
+  · exact formulaBound
+  · change 10 ≤ 10 + 14
+    exact Nat.le_add_right 10 14
+
+theorem literalMarkOOBSteps_le_unitCharge (n assignmentLength counterLength
+    formulaSuffixLength rawIndexTailLength : Nat)
+    (assignmentBound : assignmentLength ≤ n)
+    (counterBound : counterLength ≤ n)
+    (formulaBound : formulaSuffixLength ≤ n)
+    (rawIndexBound : rawIndexTailLength ≤ n) :
+    literalMarkOOBSteps assignmentLength counterLength formulaSuffixLength
+        rawIndexTailLength ≤ cnfShiftedWorkSpan n * 12 := by
+  rw [literalMarkOOBSteps_closed]
+  apply elevenTerms_plus_constant_le_twelveSpan n 12
+  · exact assignmentBound
+  · exact assignmentBound
+  · exact assignmentBound
+  · exact assignmentBound
+  · exact counterBound
+  · exact counterBound
+  · exact formulaBound
+  · exact formulaBound
+  · exact rawIndexBound
+  · exact rawIndexBound
+  · exact rawIndexBound
+  · change 12 ≤ 12 + 12
+    exact Nat.le_add_right 12 12
+
+/-! ### Literal and clause recursive runtime bounds -/
+
+private theorem charge_plus_successor_mul (index charge : Nat) :
+    charge + (index + 1) * charge = (Nat.succ index + 1) * charge := by
+  change charge + Nat.succ index * charge =
+    Nat.succ (Nat.succ index) * charge
+  calc
+    charge + Nat.succ index * charge =
+        charge + (index * charge + charge) :=
+      congrArg (Nat.add charge) (Nat.succ_mul index charge)
+    _ = (index * charge + charge) + charge := by
+      rw [← Nat.add_assoc]
+      rw [Nat.add_comm charge (index * charge)]
+    _ = Nat.succ index * charge + charge :=
+      congrArg (fun x => x + charge) (Nat.succ_mul index charge).symm
+    _ = Nat.succ (Nat.succ index) * charge :=
+      (Nat.succ_mul (Nat.succ index) charge).symm
+
+theorem literalSemanticStepCount_le_indexCharge
+    (n : Nat) (counter formulaSuffix : List WorkSymbol)
+    (assignmentPrefix remainingAssignment : BitString) (index : Nat)
+    (assignmentBound :
+      assignmentPrefix.length + remainingAssignment.length ≤ n)
+    (counterBound : counter.length ≤ n)
+    (formulaBound : index + formulaSuffix.length ≤ n) :
+    literalSemanticStepCount counter formulaSuffix assignmentPrefix
+        remainingAssignment index ≤
+      (index + 1) * (cnfShiftedWorkSpan n * 12) := by
+  induction index generalizing assignmentPrefix remainingAssignment with
+  | zero =>
+      unfold literalSemanticStepCount
+      have lookupBound := literalLookupSteps_le_unitCharge n
+        assignmentPrefix.length counter.length formulaSuffix.length
+        (Nat.le_trans
+          (Nat.le_add_right assignmentPrefix.length
+            remainingAssignment.length)
+          assignmentBound)
+        counterBound
+        (Nat.le_trans
+          (Nat.le_add_left formulaSuffix.length 0)
+          formulaBound)
+      exact Nat.le_trans lookupBound
+        (Nat.le_of_eq (Nat.one_mul (cnfShiftedWorkSpan n * 12)).symm)
+  | succ index ih =>
+      cases remainingAssignment with
+      | nil =>
+          unfold literalSemanticStepCount
+          apply Nat.le_trans
+            (literalMarkOOBSteps_le_unitCharge n assignmentPrefix.length
+              counter.length formulaSuffix.length index
+              (Nat.le_trans
+                (Nat.le_add_right assignmentPrefix.length 0)
+                assignmentBound)
+              counterBound
+              (Nat.le_trans
+                (Nat.le_add_left formulaSuffix.length (Nat.succ index))
+                formulaBound)
+              (Nat.le_trans (Nat.le_succ index)
+                (Nat.le_of_add_right_le formulaBound)))
+          exact Nat.le_mul_of_pos_left (cnfShiftedWorkSpan n * 12)
+            (Nat.zero_lt_succ (Nat.succ index))
+      | cons value rest =>
+          have extendedAssignmentBound :
+              (assignmentPrefix ++ [value]).length + rest.length ≤ n := by
+            change assignmentPrefix.length + Nat.succ rest.length ≤ n at assignmentBound
+            rw [Nat.add_succ] at assignmentBound
+            rw [length_append_value, Nat.succ_add]
+            exact assignmentBound
+          have recursiveFormulaBound :
+              index + formulaSuffix.length ≤ n :=
+            Nat.le_trans
+              (Nat.add_le_add_right (Nat.le_succ index)
+                formulaSuffix.length)
+              formulaBound
+          have formulaTailBound :
+              (List.replicate index cnfT ++ cnfF :: formulaSuffix).length ≤
+                n := by
+            rw [workSymbol_length_append, workSymbol_replicate_length,
+              List.length_cons]
+            rw [Nat.add_succ]
+            rw [Nat.succ_add] at formulaBound
+            exact formulaBound
+          have iterationBound :=
+            literalMarkIterationSteps_le_unitCharge n
+              assignmentPrefix.length counter.length
+              (List.replicate index cnfT ++ cnfF :: formulaSuffix).length
+              (Nat.le_trans
+                (Nat.le_add_right assignmentPrefix.length
+                  (value :: rest).length)
+                assignmentBound)
+              counterBound formulaTailBound
+          have recursiveBound := ih
+            (assignmentPrefix ++ [value]) rest extendedAssignmentBound
+            recursiveFormulaBound
+          unfold literalSemanticStepCount
+          exact Nat.le_trans (Nat.add_le_add iterationBound recursiveBound)
+            (Nat.le_of_eq
+              (charge_plus_successor_mul index
+                (cnfShiftedWorkSpan n * 12)))
+
+private theorem clauseNatAddMulClean (a b c : Nat) :
+    (a + b) * c = a * c + b * c := by
+  induction c with
+  | zero => rfl
+  | succ c ih =>
+      change (a + b) * c + (a + b) =
+        (a * c + a) + (b * c + b)
+      rw [ih]
+      exact FrameTraceDesign.frame_add_four_reorder
+        (a * c) (b * c) a b
+
+private theorem one_le_clauseUnitCharge (n : Nat) :
+    1 ≤ cnfShiftedWorkSpan n * 12 := by
+  have oneSpan : 1 ≤ cnfShiftedWorkSpan n := by
+    unfold cnfShiftedWorkSpan
+    change Nat.succ 0 ≤ Nat.succ (Nat.succ n)
+    exact Nat.succ_le_succ (Nat.zero_le (Nat.succ n))
+  have twelvePositive : 0 < 12 := Nat.zero_lt_succ 11
+  exact Nat.le_trans oneSpan
+    (Nat.le_mul_of_pos_right (cnfShiftedWorkSpan n) twelvePositive)
+
+private theorem clauseCharge_plus_successor_mul (index charge : Nat) :
+    charge + (index + 1) * charge = (Nat.succ index + 1) * charge := by
+  change charge + Nat.succ index * charge =
+    Nat.succ (Nat.succ index) * charge
+  calc
+    charge + Nat.succ index * charge =
+        charge + (index * charge + charge) :=
+      congrArg (Nat.add charge) (Nat.succ_mul index charge)
+    _ = (index * charge + charge) + charge := by
+      rw [← Nat.add_assoc]
+      rw [Nat.add_comm charge (index * charge)]
+    _ = Nat.succ index * charge + charge :=
+      congrArg (fun x => x + charge) (Nat.succ_mul index charge).symm
+    _ = Nat.succ (Nat.succ index) * charge :=
+      (Nat.succ_mul (Nat.succ index) charge).symm
+
+theorem literalWorkSymbols_length (literal : CNFLiteral) :
+    (literalWorkSymbols literal).length = literal.variableIndex + 2 := by
+  unfold literalWorkSymbols
+  change Nat.succ
+      (List.replicate literal.variableIndex cnfT ++ [cnfF]).length =
+    literal.variableIndex + 2
+  rw [workSymbol_length_append, workSymbol_replicate_length]
+  change Nat.succ (literal.variableIndex + 1) =
+    literal.variableIndex + 2
+  rfl
+
+private theorem literalIndex_suffix_le_segment
+    (index restLength formulaLength n : Nat)
+    (segmentBound :
+      ((index + 2) + restLength) + 1 + formulaLength ≤ n) :
+    index + (restLength + Nat.succ formulaLength) ≤ n := by
+  have indexToEncoded : index ≤ index + 2 :=
+    Nat.le_add_right index 2
+  have enlarged := Nat.add_le_add_right indexToEncoded
+    (restLength + Nat.succ formulaLength)
+  have normalize :
+      (index + 2) + (restLength + Nat.succ formulaLength) =
+        ((index + 2) + restLength) + 1 + formulaLength := by
+    change (index + 2) + (restLength + (formulaLength + 1)) =
+      ((index + 2) + restLength) + 1 + formulaLength
+    calc
+      (index + 2) + (restLength + (formulaLength + 1)) =
+          ((index + 2) + restLength) + (formulaLength + 1) :=
+        (Nat.add_assoc (index + 2) restLength
+          (formulaLength + 1)).symm
+      _ = ((index + 2) + restLength) + (1 + formulaLength) :=
+        congrArg (Nat.add ((index + 2) + restLength))
+          (Nat.add_comm formulaLength 1)
+      _ = ((index + 2) + restLength) + 1 + formulaLength :=
+        (Nat.add_assoc ((index + 2) + restLength) 1 formulaLength).symm
+  exact Nat.le_trans enlarged
+    (Nat.le_trans (Nat.le_of_eq normalize) segmentBound)
+
+theorem clauseSemanticStepCount_le_encodedCharge
+    (n : Nat) (assignment : BitString)
+    (counter formulaRest : List WorkSymbol) (literals : List CNFLiteral)
+    (assignmentBound : assignment.length ≤ n)
+    (counterBound : counter.length ≤ n)
+    (formulaSegmentBound :
+      (literalListWorkSymbols literals).length + 1 +
+        formulaRest.length ≤ n) :
+    clauseSemanticStepCount assignment counter formulaRest literals ≤
+      ((literalListWorkSymbols literals).length + 1) *
+        (cnfShiftedWorkSpan n * 12) := by
+  induction literals with
+  | nil =>
+      unfold clauseSemanticStepCount literalListWorkSymbols
+      exact Nat.le_trans (one_le_clauseUnitCharge n)
+        (Nat.le_of_eq
+          (Nat.one_mul (cnfShiftedWorkSpan n * 12)).symm)
+  | cons literal rest ih =>
+      have normalizedSegmentBound :
+          ((literal.variableIndex + 2) +
+              (literalListWorkSymbols rest).length) + 1 +
+            formulaRest.length ≤ n := by
+        rw [literalListWorkSymbols_cons, workSymbol_length_append,
+          literalWorkSymbols_length] at formulaSegmentBound
+        exact formulaSegmentBound
+      have restSegmentBound :
+          (literalListWorkSymbols rest).length + 1 +
+            formulaRest.length ≤ n := by
+        have restToWhole := Nat.le_add_left
+          (literalListWorkSymbols rest).length
+          (literal.variableIndex + 2)
+        have withFinish := Nat.add_le_add_right restToWhole 1
+        have withFormula := Nat.add_le_add_right withFinish formulaRest.length
+        exact Nat.le_trans withFormula normalizedSegmentBound
+      have suffixLength :
+          (literalListWorkSymbols rest ++ cnfFinish :: formulaRest).length =
+            (literalListWorkSymbols rest).length +
+              Nat.succ formulaRest.length := by
+        rw [workSymbol_length_append]
+        rfl
+      have literalFormulaBound :
+          literal.variableIndex +
+              (literalListWorkSymbols rest ++
+                cnfFinish :: formulaRest).length ≤ n := by
+        rw [suffixLength]
+        exact literalIndex_suffix_le_segment literal.variableIndex
+          (literalListWorkSymbols rest).length formulaRest.length n
+          normalizedSegmentBound
+      have literalBound := literalSemanticStepCount_le_indexCharge n counter
+        (literalListWorkSymbols rest ++ cnfFinish :: formulaRest)
+        [] assignment literal.variableIndex
+        (by
+          change 0 + assignment.length ≤ n
+          rw [Nat.zero_add]
+          exact assignmentBound)
+        counterBound literalFormulaBound
+      have signLiteralBound :
+          1 + literalSemanticStepCount counter
+              (literalListWorkSymbols rest ++ cnfFinish :: formulaRest)
+              [] assignment literal.variableIndex ≤
+            (literal.variableIndex + 2) *
+              (cnfShiftedWorkSpan n * 12) := by
+        have combined := Nat.add_le_add (one_le_clauseUnitCharge n)
+          literalBound
+        exact Nat.le_trans combined
+          (Nat.le_of_eq
+            (clauseCharge_plus_successor_mul literal.variableIndex
+              (cnfShiftedWorkSpan n * 12)))
+      have restBound := ih restSegmentBound
+      unfold clauseSemanticStepCount
+      rw [literalListWorkSymbols_cons, workSymbol_length_append,
+        literalWorkSymbols_length]
+      have combined := Nat.add_le_add signLiteralBound restBound
+      apply Nat.le_trans combined
+      have distributed := clauseNatAddMulClean
+        (literal.variableIndex + 2)
+        ((literalListWorkSymbols rest).length + 1)
+        (cnfShiftedWorkSpan n * 12)
+      have coefficient :
+          (literal.variableIndex + 2) +
+              ((literalListWorkSymbols rest).length + 1) =
+            (literal.variableIndex + 2 +
+              (literalListWorkSymbols rest).length) + 1 :=
+        (Nat.add_assoc (literal.variableIndex + 2)
+          (literalListWorkSymbols rest).length 1).symm
+      exact Nat.le_of_eq
+        (distributed.symm.trans
+          (congrArg (fun count =>
+            count * (cnfShiftedWorkSpan n * 12)) coefficient))
+
+theorem clauseSemanticStepCount_le_singlePhase
+    (n : Nat) (assignment : BitString)
+    (counter formulaRest : List WorkSymbol) (literals : List CNFLiteral)
+    (assignmentBound : assignment.length ≤ n)
+    (counterBound : counter.length ≤ n)
+    (formulaSegmentBound :
+      (literalListWorkSymbols literals).length + 1 +
+        formulaRest.length ≤ n) :
+    clauseSemanticStepCount assignment counter formulaRest literals ≤
+      cnfSinglePhaseBudget n := by
+  have accumulated := clauseSemanticStepCount_le_encodedCharge n assignment
+    counter formulaRest literals assignmentBound counterBound
+    formulaSegmentBound
+  have outerToN : (literalListWorkSymbols literals).length + 1 ≤ n :=
+    Nat.le_of_add_right_le formulaSegmentBound
+  have nToSpan : n ≤ cnfShiftedWorkSpan n := by
+    unfold cnfShiftedWorkSpan
+    exact Nat.le_add_right n 2
+  have outerBound : (literalListWorkSymbols literals).length + 1 ≤
+      cnfShiftedWorkSpan n := Nat.le_trans outerToN nToSpan
+  exact ClauseLiteralDesign.clauseLiteral_accumulated_le_singlePhaseBudget
+    n ((literalListWorkSymbols literals).length + 1)
+    (cnfShiftedWorkSpan n * 12)
+    (clauseSemanticStepCount assignment counter formulaRest literals)
+    outerBound (Nat.le_refl (cnfShiftedWorkSpan n * 12)) accumulated
+
+theorem decodedClauseSemanticStepCount_le_pairSinglePhase
+    (input certificate : BitString) (formula : CNFFormula)
+    (assignment : BitString) (literals : List CNFLiteral)
+    (formulaRest : List WorkSymbol)
+    (formulaDecoded : decodeEncodedCNF input = some formula)
+    (assignmentDecoded :
+      decodeAssignmentCertificate certificate = some assignment)
+    (segmentWithinFormula :
+      (literalListWorkSymbols literals).length + 1 +
+          formulaRest.length ≤
+        (encodeFormulaTokens formula).length) :
+    clauseSemanticStepCount assignment
+        (List.replicate assignment.length cnfMarkFalse)
+        formulaRest literals ≤
+      cnfSinglePhaseBudget
+        (BitString.size (BitString.pair input certificate)) := by
+  have combinedBound :=
+    FrameTraceDesign.decoded_frame_payload_length_le_pair_size
+      input certificate formula assignment formulaDecoded assignmentDecoded
+  have formulaToCombined : (encodeFormulaTokens formula).length ≤
+      (encodeFormulaTokens formula).length + assignment.length :=
+    Nat.le_add_right (encodeFormulaTokens formula).length assignment.length
+  have assignmentToCombined : assignment.length ≤
+      (encodeFormulaTokens formula).length + assignment.length :=
+    Nat.le_add_left assignment.length (encodeFormulaTokens formula).length
+  have formulaBound := Nat.le_trans formulaToCombined combinedBound
+  have assignmentBound := Nat.le_trans assignmentToCombined combinedBound
+  have counterBound :
+      (List.replicate assignment.length cnfMarkFalse).length ≤
+        BitString.size (BitString.pair input certificate) := by
+    rw [workSymbol_replicate_length]
+    exact assignmentBound
+  have segmentBound := Nat.le_trans segmentWithinFormula formulaBound
+  exact clauseSemanticStepCount_le_singlePhase
+    (BitString.size (BitString.pair input certificate)) assignment
+    (List.replicate assignment.length cnfMarkFalse) formulaRest literals
+    assignmentBound counterBound segmentBound
+
+end ClauseLiteralCostDesign
+
 end PNP.Concrete
