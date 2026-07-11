@@ -1287,6 +1287,384 @@ theorem encodeAssignmentCertificate_of_decode (certificate : BitString)
       rw [encodeAssignmentTokens_of_decode tokens assignment decoded]
       exact encodeTokenPairs_of_decode certificate tokens hTokens
 
+theorem list_nil_or_snoc_constructive {alpha : Type} (items : List alpha) :
+    items = [] ∨ ∃ front last, items = front ++ [last] := by
+  induction items with
+  | nil => exact Or.inl rfl
+  | cons head tail ih =>
+      cases ih with
+      | inl empty =>
+          cases empty
+          exact Or.inr ⟨[], head, rfl⟩
+      | inr snoc =>
+          rcases snoc with ⟨front, last, shape⟩
+          cases shape
+          exact Or.inr ⟨head :: front, last, rfl⟩
+
+private theorem listTwoStepInduction {alpha : Type}
+    (Property : List alpha → Prop)
+    (empty : Property [])
+    (singleton : ∀ first, Property [first])
+    (pair : ∀ first second rest,
+      Property rest → Property (first :: second :: rest))
+    (items : List alpha) : Property items := by
+  have both : Property items ∧ ∀ first, Property (first :: items) := by
+    induction items with
+    | nil => exact ⟨empty, singleton⟩
+    | cons head tail ih =>
+        refine ⟨ih.2 head, ?_⟩
+        intro first
+        exact pair first head tail ih.1
+  exact both.1
+
+/-- A failed ordinary pair decoder has exactly one unpaired final bit. -/
+theorem decodeTokenPairs_none_shape (bits : BitString)
+    (decoded : decodeTokenPairs bits = none) :
+    ∃ tokens last, bits = encodeTokenPairs tokens ++ [last] := by
+  revert decoded
+  apply listTwoStepInduction (Property := fun current =>
+    decodeTokenPairs current = none →
+      ∃ tokens last, current = encodeTokenPairs tokens ++ [last])
+  · intro decoded
+    contradiction
+  · intro first decoded
+    exact ⟨[], first, rfl⟩
+  · intro first second rest ih decoded
+    change (match decodeTokenPairs rest with
+      | none => none
+      | some suffix => some (CNFToken.ofBits first second :: suffix)) = none
+      at decoded
+    cases hRest : decodeTokenPairs rest with
+    | some suffix =>
+        rw [hRest] at decoded
+        contradiction
+    | none =>
+        rcases ih hRest with ⟨tokens, last, shape⟩
+        refine ⟨CNFToken.ofBits first second :: tokens, last, ?_⟩
+        rw [shape]
+        cases first <;> cases second <;> rfl
+
+/-- A failed formula-pair decoder is either an even token stream with no pad
+or a token stream followed by the wrong final pad bit. -/
+theorem decodeFormulaTokenPairs_none_shape (bits : BitString)
+    (decoded : decodeFormulaTokenPairs bits = none) :
+    ∃ tokens,
+      bits = encodeTokenPairs tokens ∨
+      bits = encodeTokenPairs tokens ++ [true] := by
+  revert decoded
+  apply listTwoStepInduction (Property := fun current =>
+    decodeFormulaTokenPairs current = none →
+      ∃ tokens,
+        current = encodeTokenPairs tokens ∨
+        current = encodeTokenPairs tokens ++ [true])
+  · intro decoded
+    exact ⟨[], Or.inl rfl⟩
+  · intro first decoded
+    cases first with
+    | false => contradiction
+    | true => exact ⟨[], Or.inr rfl⟩
+  · intro first second rest ih decoded
+    change (match decodeFormulaTokenPairs rest with
+      | none => none
+      | some suffix => some (CNFToken.ofBits first second :: suffix)) = none
+      at decoded
+    cases hRest : decodeFormulaTokenPairs rest with
+    | some suffix =>
+        rw [hRest] at decoded
+        contradiction
+    | none =>
+        rcases ih hRest with ⟨tokens, shape⟩
+        refine ⟨CNFToken.ofBits first second :: tokens, ?_⟩
+        cases shape with
+        | inl evenShape =>
+            left
+            rw [evenShape]
+            cases first <;> cases second <;> rfl
+        | inr badPadShape =>
+            right
+            rw [badPadShape]
+            cases first <;> cases second <;> rfl
+
+/-- A failed whole-formula parse separates raw framing failure from strict
+token-grammar failure. -/
+theorem decodeEncodedCNF_none_cases (bits : BitString)
+    (decoded : decodeEncodedCNF bits = none) :
+    (∃ tokens,
+      bits = encodeTokenPairs tokens ∨
+      bits = encodeTokenPairs tokens ++ [true]) ∨
+    ∃ tokens,
+      decodeFormulaTokenPairs bits = some tokens ∧
+      decodeCNFTokens tokens = none := by
+  unfold decodeEncodedCNF at decoded
+  cases hTokens : decodeFormulaTokenPairs bits with
+  | none =>
+      exact Or.inl (decodeFormulaTokenPairs_none_shape bits hTokens)
+  | some tokens =>
+      rw [hTokens] at decoded
+      exact Or.inr ⟨tokens, rfl, decoded⟩
+
+/-- A failed whole-certificate parse separates the dangling raw bit case
+from failure of the strict assignment-token grammar. -/
+theorem decodeAssignmentCertificate_none_cases (certificate : BitString)
+    (decoded : decodeAssignmentCertificate certificate = none) :
+    (∃ tokens last,
+      certificate = encodeTokenPairs tokens ++ [last]) ∨
+    ∃ tokens,
+      decodeTokenPairs certificate = some tokens ∧
+      decodeAssignmentTokens tokens = none := by
+  unfold decodeAssignmentCertificate at decoded
+  cases hTokens : decodeTokenPairs certificate with
+  | none =>
+      exact Or.inl (decodeTokenPairs_none_shape certificate hTokens)
+  | some tokens =>
+      rw [hTokens] at decoded
+      exact Or.inr ⟨tokens, rfl, decoded⟩
+
+/- The strict formula grammar is injective on every successful parse.  A
+single structural induction carries the four parser states together because
+each recursive call consumes the focused token. -/
+private theorem decodeFormulaGrammar_inverse (tokens : List CNFToken) :
+    (∀ start formula,
+      decodeFormulaHeader start tokens = some formula →
+      ∃ count,
+        formula.variableCount = start + count ∧
+        tokens = encodeUnaryTokens count ++
+          (encodeClauseListTokens formula.clauses ++ [.finish])) ∧
+    (∀ clauses,
+      decodeFormulaClauses tokens = some clauses →
+      tokens = encodeClauseListTokens clauses ++ [.finish]) ∧
+    (∀ clause clauses,
+      decodeFormulaClause tokens = some (clause, clauses) →
+      tokens = encodeLiteralListTokens clause ++
+        (.finish :: (encodeClauseListTokens clauses ++ [.finish]))) ∧
+    (∀ positive start clause clauses,
+      decodeFormulaLiteral positive start tokens = some (clause, clauses) →
+      ∃ count tail,
+        clause =
+          ({ positive := positive, variableIndex := start + count } :
+            CNFLiteral) :: tail ∧
+        tokens = encodeUnaryTokens count ++
+          (encodeLiteralListTokens tail ++
+            (.finish :: (encodeClauseListTokens clauses ++ [.finish])))) := by
+  induction tokens with
+  | nil =>
+      refine ⟨?_, ?_, ?_, ?_⟩
+      · intro start formula decoded
+        contradiction
+      · intro clauses decoded
+        contradiction
+      · intro clause clauses decoded
+        contradiction
+      · intro positive start clause clauses decoded
+        contradiction
+  | cons token rest ih =>
+      rcases ih with ⟨headerIH, clausesIH, clauseIH, literalIH⟩
+      refine ⟨?_, ?_, ?_, ?_⟩
+      · intro start formula decoded
+        cases token with
+        | f =>
+            change (match decodeFormulaClauses rest with
+              | none => none
+              | some clauses => some
+                  ({ variableCount := start, clauses := clauses } : CNFFormula)) =
+                some formula at decoded
+            cases hRest : decodeFormulaClauses rest with
+            | none =>
+                rw [hRest] at decoded
+                contradiction
+            | some clauses =>
+                rw [hRest] at decoded
+                have hFormula :
+                    ({ variableCount := start, clauses := clauses } : CNFFormula) =
+                      formula := Option.some.inj decoded
+                cases hFormula
+                have hShape := clausesIH clauses hRest
+                refine ⟨0, rfl, ?_⟩
+                exact congrArg (List.cons CNFToken.f) hShape
+        | t =>
+            change decodeFormulaHeader (start + 1) rest = some formula at decoded
+            rcases headerIH (start + 1) formula decoded with
+              ⟨count, width, hShape⟩
+            refine ⟨count + 1, ?_, ?_⟩
+            · exact width.trans (nat_add_succ_shift start count)
+            · exact congrArg (List.cons CNFToken.t) hShape
+        | sep => contradiction
+        | finish => contradiction
+      · intro clauses decoded
+        cases token with
+        | f => contradiction
+        | t => contradiction
+        | sep =>
+            change (match decodeFormulaClause rest with
+              | none => none
+              | some (clause, suffix) => some (clause :: suffix)) =
+                some clauses at decoded
+            cases hRest : decodeFormulaClause rest with
+            | none =>
+                rw [hRest] at decoded
+                contradiction
+            | some found =>
+                rcases found with ⟨clause, suffix⟩
+                rw [hRest] at decoded
+                have hClauses : clause :: suffix = clauses :=
+                  Option.some.inj decoded
+                cases hClauses
+                have hShape := clauseIH clause suffix hRest
+                change CNFToken.sep :: rest =
+                  (CNFToken.sep ::
+                    (encodeLiteralListTokens clause ++ [.finish])) ++
+                    encodeClauseListTokens suffix ++ [.finish]
+                rw [hShape]
+                exact congrArg (List.cons CNFToken.sep)
+                  (calc
+                    encodeLiteralListTokens clause ++
+                        (CNFToken.finish ::
+                          (encodeClauseListTokens suffix ++ [.finish])) =
+                        (encodeLiteralListTokens clause ++ [.finish]) ++
+                          (encodeClauseListTokens suffix ++ [.finish]) :=
+                      (token_append_assoc_constructive
+                        (encodeLiteralListTokens clause) [.finish]
+                        (encodeClauseListTokens suffix ++ [.finish])).symm
+                    _ = ((encodeLiteralListTokens clause ++ [.finish]) ++
+                          encodeClauseListTokens suffix) ++ [.finish] :=
+                      (token_append_assoc_constructive
+                        (encodeLiteralListTokens clause ++ [.finish])
+                        (encodeClauseListTokens suffix) [.finish]).symm)
+        | finish =>
+            cases rest with
+            | nil =>
+                change some [] = some clauses at decoded
+                have hClauses : [] = clauses := Option.some.inj decoded
+                cases hClauses
+                rfl
+            | cons next suffix => contradiction
+      · intro clause clauses decoded
+        cases token with
+        | f =>
+            change decodeFormulaLiteral false 0 rest =
+              some (clause, clauses) at decoded
+            rcases literalIH false 0 clause clauses decoded with
+              ⟨count, tail, hClause, hShape⟩
+            rw [Nat.zero_add] at hClause
+            cases hClause
+            change CNFToken.f :: rest =
+              ((CNFToken.f :: encodeUnaryTokens count) ++
+                encodeLiteralListTokens tail) ++
+                (.finish :: (encodeClauseListTokens clauses ++ [.finish]))
+            rw [hShape]
+            rw [token_append_assoc_constructive]
+            rfl
+        | t =>
+            change decodeFormulaLiteral true 0 rest =
+              some (clause, clauses) at decoded
+            rcases literalIH true 0 clause clauses decoded with
+              ⟨count, tail, hClause, hShape⟩
+            rw [Nat.zero_add] at hClause
+            cases hClause
+            change CNFToken.t :: rest =
+              ((CNFToken.t :: encodeUnaryTokens count) ++
+                encodeLiteralListTokens tail) ++
+                (.finish :: (encodeClauseListTokens clauses ++ [.finish]))
+            rw [hShape]
+            rw [token_append_assoc_constructive]
+            rfl
+        | sep => contradiction
+        | finish =>
+            change (match decodeFormulaClauses rest with
+              | none => none
+              | some suffix => some ([], suffix)) =
+                some (clause, clauses) at decoded
+            cases hRest : decodeFormulaClauses rest with
+            | none =>
+                rw [hRest] at decoded
+                contradiction
+            | some suffix =>
+                rw [hRest] at decoded
+                have hPair : ([], suffix) = (clause, clauses) :=
+                  Option.some.inj decoded
+                have hClause : [] = clause := congrArg Prod.fst hPair
+                have hClauses : suffix = clauses := congrArg Prod.snd hPair
+                cases hClause
+                cases hClauses
+                have hShape := clausesIH clauses hRest
+                exact congrArg (List.cons CNFToken.finish) hShape
+      · intro positive start clause clauses decoded
+        cases token with
+        | f =>
+            change (match decodeFormulaClause rest with
+              | none => none
+              | some (tail, suffix) => some
+                  (({ positive := positive, variableIndex := start } :
+                    CNFLiteral) :: tail, suffix)) =
+                some (clause, clauses) at decoded
+            cases hRest : decodeFormulaClause rest with
+            | none =>
+                rw [hRest] at decoded
+                contradiction
+            | some found =>
+                rcases found with ⟨tail, suffix⟩
+                rw [hRest] at decoded
+                have hPair :
+                    (({ positive := positive, variableIndex := start } :
+                      CNFLiteral) :: tail, suffix) = (clause, clauses) :=
+                  Option.some.inj decoded
+                have hClause := congrArg Prod.fst hPair
+                have hClauses := congrArg Prod.snd hPair
+                cases hClause
+                cases hClauses
+                have hShape := clauseIH tail clauses hRest
+                refine ⟨0, tail, ?_, ?_⟩
+                · rfl
+                · exact congrArg (List.cons CNFToken.f) hShape
+        | t =>
+            change decodeFormulaLiteral positive (start + 1) rest =
+              some (clause, clauses) at decoded
+            rcases literalIH positive (start + 1) clause clauses decoded with
+              ⟨count, tail, hClause, hShape⟩
+            refine ⟨count + 1, tail, ?_, ?_⟩
+            · rw [hClause]
+              exact congrArg
+                (fun index =>
+                  ({ positive := positive, variableIndex := index } :
+                    CNFLiteral) :: tail)
+                (nat_add_succ_shift start count)
+            · exact congrArg (List.cons CNFToken.t) hShape
+        | sep => contradiction
+        | finish => contradiction
+
+/-- Every accepted formula token stream is exactly the canonical encoding of
+the formula returned by the strict decoder. -/
+theorem encodeCNFTokens_of_decode (tokens : List CNFToken)
+    (formula : CNFFormula) (decoded : decodeCNFTokens tokens = some formula) :
+    encodeCNFTokens formula = tokens := by
+  have inverse := decodeFormulaGrammar_inverse tokens
+  rcases inverse.1 0 formula decoded with ⟨count, width, hShape⟩
+  have countEq : formula.variableCount = count := by
+    exact width.trans (Nat.zero_add count)
+  rw [← countEq] at hShape
+  unfold encodeCNFTokens
+  exact (token_append_assoc_constructive
+    (encodeUnaryTokens formula.variableCount)
+    (encodeClauseListTokens formula.clauses) [.finish]).trans hShape.symm
+
+/-- Every successfully decoded raw formula is byte-for-byte its canonical
+formula encoding, including the unique final pad bit. -/
+theorem encodeFormula_of_decode (bits : BitString) (formula : CNFFormula)
+    (decoded : decodeEncodedCNF bits = some formula) :
+    encodeFormula formula = bits := by
+  unfold decodeEncodedCNF at decoded
+  cases hTokens : decodeFormulaTokenPairs bits with
+  | none =>
+      rw [hTokens] at decoded
+      contradiction
+  | some tokens =>
+      rw [hTokens] at decoded
+      have hTokenShape := encodeCNFTokens_of_decode tokens formula decoded
+      have hBitShape := encodeFormulaTokenPairs_of_decode bits tokens hTokens
+      unfold encodeFormula encodeCNF
+      exact (congrArg (fun stream => encodeTokenPairs stream ++ [false])
+        hTokenShape).trans hBitShape
+
 /-! ### Width-phase literal interpreter steps -/
 
 theorem widthToBoundary_step (leftSide : List WorkSymbol)
@@ -1688,6 +2066,39 @@ theorem cnfShiftedSquare_le_phaseCube (n : Nat) :
     Nat.succ_le_succ (Nat.zero_le (n + 1))
   unfold cnfShiftedWorkSpan cnfWorkPhaseCube
   exact Nat.le_mul_of_pos_right ((n + 2) * (n + 2)) positive
+
+theorem cnfShiftedSpan_le_square (n : Nat) :
+    cnfShiftedWorkSpan n ≤
+      cnfShiftedWorkSpan n * cnfShiftedWorkSpan n := by
+  have positive : 1 ≤ n + 2 :=
+    Nat.succ_le_succ (Nat.zero_le (n + 1))
+  unfold cnfShiftedWorkSpan
+  exact Nat.le_mul_of_pos_right (n + 2) positive
+
+theorem cnfScaledQuadratic_le_singlePhaseBudget (n coefficient : Nat)
+    (coefficientBound : coefficient ≤ 16) :
+    (cnfShiftedWorkSpan n * cnfShiftedWorkSpan n) * coefficient ≤
+      cnfSinglePhaseBudget n := by
+  have scaledCoefficient :
+      (cnfShiftedWorkSpan n * cnfShiftedWorkSpan n) * coefficient ≤
+        (cnfShiftedWorkSpan n * cnfShiftedWorkSpan n) * 16 :=
+    Nat.mul_le_mul_left
+      (cnfShiftedWorkSpan n * cnfShiftedWorkSpan n) coefficientBound
+  have scaledCube :
+      (cnfShiftedWorkSpan n * cnfShiftedWorkSpan n) * 16 ≤
+        cnfWorkPhaseCube n * 16 :=
+    Nat.mul_le_mul_right 16 (cnfShiftedSquare_le_phaseCube n)
+  exact Nat.le_trans scaledCoefficient scaledCube
+
+theorem cnfScaledLinear_le_singlePhaseBudget (n coefficient : Nat)
+    (coefficientBound : coefficient ≤ 16) :
+    cnfShiftedWorkSpan n * coefficient ≤
+      cnfSinglePhaseBudget n := by
+  have scaledSquare : cnfShiftedWorkSpan n * coefficient ≤
+      (cnfShiftedWorkSpan n * cnfShiftedWorkSpan n) * coefficient :=
+    Nat.mul_le_mul_right coefficient (cnfShiftedSpan_le_square n)
+  exact Nat.le_trans scaledSquare
+    (cnfScaledQuadratic_le_singlePhaseBudget n coefficient coefficientBound)
 
 theorem cnfConservativePhaseBudget_normalized (n : Nat) :
     cnfConservativePhaseBudget n = 8 + cnfWorkPhaseCube n * 48 := by
