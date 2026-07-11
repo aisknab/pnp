@@ -51,9 +51,11 @@ steps. It extracts an exact prefix `k ≤ F` from an ordinary `F`-fuel run and, 
 designated halting, pads to work fuel `3 * F` and compiled fuel `18 * F`. Those are at-most fuel
 budgets, not successful-step counts or input-size bounds. This proves no termination result and
 does not treat a stuck nonhalting stop as a verdict. A future compiler still needs an executable
-initial framer, a `boundedDecide` halt/timeout/verdict bridge, terminal output de-tagging and
-handoff, second-stage launch, composition/precomposition `RawRefinement`, and the full input-size
-polynomial copy/simulation bound.
+stage composition, a `boundedDecide` halt/timeout/verdict bridge, terminal output de-tagging,
+second-stage launch, composition/precomposition `RawRefinement`, and the full input-size polynomial
+copy/simulation bound. `PipelineInputFramer.lean` now supplies the paired-input initial-framing step,
+and `PipelineOutputHandoff.lean` supplies an exact internal represented handoff to this pure target,
+but neither is connected to the simulator and the latter is not terminal raw output normalization.
 
 ## Audit
 
@@ -71,7 +73,7 @@ publication gate.
 
 ## Exact nonclaim
 
-This semantic migration does not construct a normalization or handoff machine, composition or
-precomposition refinement, verifier adapters, charged/raw class equivalence, `CNFSAT ∈ P`,
-NP-completeness, a root theorem, or `P = NP`. The separate frame and local simulator do not change
-that handoff boundary.
+This semantic module itself does not construct a machine. The separate pipeline-output module now
+constructs one internal represented handoff machine, but does not provide terminal raw output
+de-tagging, composition or precomposition refinement, verifier adapters, charged/raw class
+equivalence, `CNFSAT ∈ P`, NP-completeness, a root theorem, or `P = NP`.

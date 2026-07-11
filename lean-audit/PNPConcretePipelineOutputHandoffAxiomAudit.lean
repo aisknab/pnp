@@ -1,0 +1,25 @@
+import PNP
+
+#print axioms PNP.Concrete.PipelineOutputHandoff.allWorkSymbols
+#print axioms PNP.Concrete.PipelineOutputHandoff.startState
+#print axioms PNP.Concrete.PipelineOutputHandoff.installLeftBitState
+#print axioms PNP.Concrete.PipelineOutputHandoff.installLeftEmptyState
+#print axioms PNP.Concrete.PipelineOutputHandoff.scanRightState
+#print axioms PNP.Concrete.PipelineOutputHandoff.returnLeftState
+#print axioms PNP.Concrete.PipelineOutputHandoff.emptyMoveRightState
+#print axioms PNP.Concrete.PipelineOutputHandoff.emptyInstallRightState
+#print axioms PNP.Concrete.PipelineOutputHandoff.acceptState
+#print axioms PNP.Concrete.PipelineOutputHandoff.rejectState
+#print axioms PNP.Concrete.PipelineOutputHandoff.keepRule
+#print axioms PNP.Concrete.PipelineOutputHandoff.writeRule
+#print axioms PNP.Concrete.PipelineOutputHandoff.installLeftRules
+#print axioms PNP.Concrete.PipelineOutputHandoff.installRightRules
+#print axioms PNP.Concrete.PipelineOutputHandoff.handoffRules
+#print axioms PNP.Concrete.PipelineOutputHandoff.framedOutputHandoff
+#print axioms PNP.Concrete.PipelineOutputHandoff.framedOutputHandoffWorkSteps
+#print axioms PNP.Concrete.PipelineOutputHandoff.framedOutputHandoffRawTimeBound
+#print axioms PNP.Concrete.PipelineOutputHandoff.framedOutputHandoffFinalConfiguration
+#print axioms PNP.Concrete.PipelineOutputHandoff.framedOutputHandoff_workRunExact_of_represents
+#print axioms PNP.Concrete.PipelineOutputHandoff.framedOutputHandoffFinal_isHalted
+#print axioms PNP.Concrete.PipelineOutputHandoff.framedOutputHandoffRawTimeBound_exact
+#print axioms PNP.Concrete.PipelineOutputHandoff.run_compileFramedOutputHandoff_of_represents

@@ -172,9 +172,10 @@ to its represented endpoint. The full-budget padding theorems additionally requi
 to be designated halting; work fuel `3 * F` and compiled fuel `18 * F` are at-most budgets, not
 successful-step counts. This proves no
 termination result, does not classify a stuck nonhalting stop as a verdict, and gives no input-size
-bound. It supplies no initial frame, `boundedDecide`, verdict or output-preservation theorem,
-output handoff, composition/precomposition `RawRefinement`, or input-size polynomial end-to-end
-bound. This milestone also
+bound. Separate literal machines now supply paired-input framing and an exact internal represented
+handoff, but are not connected to the simulator. This milestone supplies no `boundedDecide`, verdict
+or output-preservation theorem, terminal raw output de-tagging, composition/precomposition
+`RawRefinement`, or input-size polynomial end-to-end bound. This milestone also
 does not formalize concrete SAT or SAT NP-hardness, instantiate
 the global locked-NAND threshold package, prove the residual-band or ZeroSlack obligations, prove
 the remaining end-to-end polynomial bounds, or establish `P = NP`.

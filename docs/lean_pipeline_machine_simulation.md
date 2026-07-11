@@ -97,8 +97,8 @@ padding conclusions assume that the supplied `F`-fuel endpoint is designated hal
 prove termination or classify a stuck nonhalting stop as a verdict. This module does not construct a
 frame from `Tape.ofInput`; the separate paired-input framer is not composed with it. It does not
 prove `boundedDecide`, accept/reject/timeout or `machineOutput`
-preservation, decode the interleaved work encoding, normalize or hand off a terminal tape, reset and
-launch a second stage, construct a `FunctionProgram.RawRefinement` or
+preservation, decode the interleaved work encoding, connect to the separate internal handoff,
+de-tag terminal raw output, reset and launch a second stage, construct a `FunctionProgram.RawRefinement` or
 `DecisionProgram.RawRefinement`, compile composition or precomposition, prove an end-to-end
 input-size polynomial bound, establish `CNFSAT ∈ P` or NP-completeness, activate the publication
 gate, or prove `P = NP`.

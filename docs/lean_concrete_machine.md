@@ -59,8 +59,10 @@ exactly `3 * n` successful work steps and extracts a `k ≤ F` exact prefix from
 `F`-fuel raw run. Conditional on its endpoint being designated halting, `workRun` with fuel
 `3 * F` and compiled `run` with fuel `18 * F` reach the representation and encoding. This proves
 no termination result; the full fuels are at-most budgets rather than successful-step counts or
-input-size bounds, and a stuck nonhalting stop is not a verdict. The layer supplies no initial
-framing, `boundedDecide`, verdict/output preservation, output handoff,
+input-size bounds, and a stuck nonhalting stop is not a verdict. Separate literal machines now
+provide paired-input framing and an internal represented-output handoff, but neither is connected
+to the simulator. The simulator layer supplies no `boundedDecide`, verdict/output preservation,
+terminal raw output de-tagging,
 composition/precomposition `RawRefinement`, or composite refinement. Therefore
 `Formal.ConcreteComplexityMachineLink` remains the first of seven blockers. All five
 reviewed activation fingerprints remain unset, the four project-specific axioms remain,
