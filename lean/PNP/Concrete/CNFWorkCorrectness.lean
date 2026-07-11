@@ -10489,3 +10489,483 @@ theorem decodedClauseSemanticStepCount_le_pairSinglePhase
 end ClauseLiteralCostDesign
 
 end PNP.Concrete
+
+namespace PNP.Concrete
+
+namespace MalformedFuelDesign
+
+open FrameTraceDesign
+
+set_option maxRecDepth 100000
+
+theorem bitStringSize_le_pairSize_left
+    (input certificate : BitString) :
+    BitString.size input ≤
+      BitString.size (BitString.pair input certificate) := by
+  rw [BitString.size_pair_normalized]
+  have oneTwo : 1 ≤ 2 := by
+    change 1 ≤ 1 + 1
+    exact Nat.le_add_right 1 1
+  have toDouble : BitString.size input ≤ 2 * BitString.size input :=
+    Nat.le_mul_of_pos_left (BitString.size input) oneTwo
+  have toCertificate : 2 * BitString.size input ≤
+      2 * BitString.size input + 2 * BitString.size certificate :=
+    Nat.le_add_right _ _
+  have toBoundary :
+      2 * BitString.size input + 2 * BitString.size certificate ≤
+        2 * BitString.size input + 2 * BitString.size certificate + 2 :=
+    Nat.le_add_right _ 2
+  exact Nat.le_trans toDouble (Nat.le_trans toCertificate toBoundary)
+
+theorem bitStringSize_le_pairSize_right
+    (input certificate : BitString) :
+    BitString.size certificate ≤
+      BitString.size (BitString.pair input certificate) := by
+  rw [BitString.size_pair_normalized]
+  have oneTwo : 1 ≤ 2 := by
+    change 1 ≤ 1 + 1
+    exact Nat.le_add_right 1 1
+  have toDouble : BitString.size certificate ≤
+      2 * BitString.size certificate :=
+    Nat.le_mul_of_pos_left (BitString.size certificate) oneTwo
+  have toFormula : 2 * BitString.size certificate ≤
+      2 * BitString.size input + 2 * BitString.size certificate :=
+    Nat.le_add_left _ _
+  have toBoundary :
+      2 * BitString.size input + 2 * BitString.size certificate ≤
+        2 * BitString.size input + 2 * BitString.size certificate + 2 :=
+    Nat.le_add_right _ 2
+  exact Nat.le_trans toDouble (Nat.le_trans toFormula toBoundary)
+
+theorem componentSizes_le_pairSize (input certificate : BitString) :
+    BitString.size input + BitString.size certificate ≤
+      BitString.size (BitString.pair input certificate) := by
+  rw [BitString.size_pair_normalized]
+  have oneTwo : 1 ≤ 2 := by
+    change 1 ≤ 1 + 1
+    exact Nat.le_add_right 1 1
+  have inputDouble : BitString.size input ≤ 2 * BitString.size input :=
+    Nat.le_mul_of_pos_left (BitString.size input) oneTwo
+  have certificateDouble : BitString.size certificate ≤
+      2 * BitString.size certificate :=
+    Nat.le_mul_of_pos_left (BitString.size certificate) oneTwo
+  have doubled := Nat.add_le_add inputDouble certificateDouble
+  exact Nat.le_trans doubled (Nat.le_add_right _ 2)
+
+theorem tokenLength_le_encodedPairsSize (tokens : List CNFToken) :
+    tokens.length ≤ BitString.size (encodeTokenPairs tokens) := by
+  unfold BitString.size
+  rw [encodeTokenPairs_length]
+  have oneTwo : 1 ≤ 2 := by
+    change 1 ≤ 1 + 1
+    exact Nat.le_add_right 1 1
+  exact Nat.le_mul_of_pos_left tokens.length oneTwo
+
+theorem tokenLength_le_encodedPairsBitSize
+    (tokens : List CNFToken) (last : Bool) :
+    tokens.length ≤
+      BitString.size (encodeTokenPairs tokens ++ [last]) := by
+  unfold BitString.size
+  rw [BitString.length_append_constructive]
+  rw [encodeTokenPairs_length]
+  rw [List.length_singleton]
+  have oneTwo : 1 ≤ 2 := by
+    change 1 ≤ 1 + 1
+    exact Nat.le_add_right 1 1
+  exact Nat.le_trans (Nat.le_mul_of_pos_left tokens.length oneTwo)
+    (Nat.le_add_right _ 1)
+
+theorem frameOneBadBoundarySteps_le_terminal
+    (tokens : List CNFToken) :
+    frameOneBadBoundarySteps tokens ≤ frameOneTerminalSteps tokens := by
+  unfold frameOneBadBoundarySteps frameOneTerminalSteps
+  have h0 : tokens.length + 1 ≤
+      (tokens.length + 1) + tokens.length :=
+    Nat.le_add_right _ _
+  have h1 : tokens.length + 1 ≤
+      ((tokens.length + 1) + tokens.length) + 1 :=
+    Nat.le_trans h0 (Nat.le_add_right _ 1)
+  have h2 : ((tokens.length + 1) + tokens.length) + 1 ≤
+      (((tokens.length + 1) + tokens.length) + 1) + tokens.length :=
+    Nat.le_add_right _ _
+  have h3 : ((tokens.length + 1) + tokens.length) + 1 ≤
+      ((((tokens.length + 1) + tokens.length) + 1) + tokens.length) + 1 :=
+    Nat.le_trans h2 (Nat.le_add_right _ 1)
+  have h4 :
+      ((((tokens.length + 1) + tokens.length) + 1) + tokens.length) + 1 ≤
+        (((((tokens.length + 1) + tokens.length) + 1) + tokens.length) + 1) +
+          tokens.length :=
+    Nat.le_add_right _ _
+  have h5 : ((tokens.length + 1) + tokens.length) + 1 ≤
+      ((((((tokens.length + 1) + tokens.length) + 1) + tokens.length) + 1) +
+        tokens.length) + 1 :=
+    Nat.le_trans h3 (Nat.le_trans h4 (Nat.le_add_right _ 1))
+  exact h5
+
+theorem frameTwoMalformedCounterSteps_le_terminal
+    (assignment : BitString) :
+    assignment.length + 1 ≤ frameTwoTerminalSteps assignment := by
+  unfold frameTwoTerminalSteps
+  have h0 : assignment.length + 1 ≤
+      (assignment.length + 1) + assignment.length :=
+    Nat.le_add_right _ _
+  have h1 : assignment.length + 1 ≤
+      ((assignment.length + 1) + assignment.length) + 1 :=
+    Nat.le_trans h0 (Nat.le_add_right _ 1)
+  have h2 : assignment.length + 1 ≤
+      (((assignment.length + 1) + assignment.length) + 1) + 1 :=
+    Nat.le_trans h1 (Nat.le_add_right _ 1)
+  have h3 : assignment.length + 1 ≤
+      ((((assignment.length + 1) + assignment.length) + 1) + 1) + 1 :=
+    Nat.le_trans h2 (Nat.le_add_right _ 1)
+  have h4 : assignment.length + 1 ≤
+      (((((assignment.length + 1) + assignment.length) + 1) + 1) + 1) +
+        assignment.length :=
+    Nat.le_trans h3 (Nat.le_add_right _ _)
+  exact Nat.le_trans h4 (Nat.le_add_right _ 1)
+
+theorem formulaBadPadLayout_reject_with_successCost
+    (tokens : List CNFToken) (certificateNonempty : Bool)
+    (suffix : List WorkSymbol) :
+    ∃ steps tape,
+      steps ≤ frameSuccessSteps tokens [] ∧
+      workRunExact? cnfWorkMachine steps
+          (workStartConfiguration cnfWorkMachine
+            (WorkTape.ofSymbols
+              (List.replicate tokens.length cnfT ++ cnfFinish ::
+                (cnfTokenWorkSymbols tokens ++
+                  badFormulaBoundary certificateNonempty :: suffix)))) =
+        some
+          ({ state := CNFWorkState.reject, tape := tape } :
+            WorkConfiguration) := by
+  cases tokens with
+  | nil =>
+      refine ⟨1, (WorkTape.ofSymbols
+        (cnfFinish :: badFormulaBoundary certificateNonempty :: suffix)),
+        ?_, ?_⟩
+      · unfold frameSuccessSteps frameOneFoldSteps frameOneTerminalSteps
+          frameTwoFoldSteps frameTwoTerminalSteps
+        change 1 ≤ 2 + 4 + 5
+        exact Nat.le_add_right 1 10
+      · cases certificateNonempty <;> rfl
+  | cons token rest =>
+      let allTokens := token :: rest
+      have hBoot := boot_t_exact
+        (List.replicate rest.length cnfT ++ cnfFinish ::
+          (token.workSymbol ::
+            (cnfTokenWorkSymbols rest ++
+              badFormulaBoundary certificateNonempty :: suffix)))
+      have hBad := frameOne_badBoundary_exact allTokens
+        certificateNonempty suffix
+      rw [frameOneBoundaryFoldStart_cons] at hBad
+      have hComplete := workRunExact?_compose cnfWorkMachine 2
+        (frameOneFoldSteps [] [] allTokens +
+          frameOneBadBoundarySteps allTokens)
+        _ _ _ hBoot hBad
+      let steps := 2 +
+        (frameOneFoldSteps [] [] allTokens +
+          frameOneBadBoundarySteps allTokens)
+      let final := workConfigAtWord CNFWorkState.reject
+        (pushWorkLeft (frameOneMarkedTokens allTokens)
+          (cnfFinish ::
+            pushWorkLeft
+              (List.replicate allTokens.length cnfMarkFalse)
+              [cnfRootGuard]))
+        (badFormulaBoundary certificateNonempty :: suffix)
+      refine ⟨steps, final.tape, ?_, ?_⟩
+      · have terminalBound := frameOneBadBoundarySteps_le_terminal allTokens
+        have firstBound : steps ≤
+            2 + (frameOneFoldSteps [] [] allTokens +
+              frameOneTerminalSteps allTokens) :=
+          Nat.add_le_add_left
+            (Nat.add_le_add_left terminalBound
+              (frameOneFoldSteps [] [] allTokens)) 2
+        have secondBound :
+            2 + (frameOneFoldSteps [] [] allTokens +
+                frameOneTerminalSteps allTokens) ≤
+              (2 + (frameOneFoldSteps [] [] allTokens +
+                frameOneTerminalSteps allTokens)) +
+                  (frameTwoFoldSteps [] [] [] + frameTwoTerminalSteps []) :=
+          Nat.le_add_right _ _
+        unfold frameSuccessSteps
+        exact Nat.le_trans firstBound secondBound
+      · have startShape :
+            List.replicate allTokens.length cnfT ++ cnfFinish ::
+                (cnfTokenWorkSymbols allTokens ++
+                  badFormulaBoundary certificateNonempty :: suffix) =
+              cnfT ::
+                (List.replicate rest.length cnfT ++ cnfFinish ::
+                  token.workSymbol ::
+                    (cnfTokenWorkSymbols rest ++
+                      badFormulaBoundary certificateNonempty :: suffix)) :=
+          rfl
+        unfold steps final allTokens
+        rw [startShape]
+        exact hComplete
+
+theorem formulaEvenHeaderSteps_le_singlePhase
+    (n count steps : Nat) (countBound : count ≤ n)
+    (stepsBound : steps ≤ count + 4) :
+    steps ≤ cnfSinglePhaseBudget n := by
+  have countFour : count + 4 ≤ n + 4 :=
+    Nat.add_le_add_right countBound 4
+  have nToSpan : n ≤ cnfShiftedWorkSpan n := by
+    unfold cnfShiftedWorkSpan
+    exact Nat.le_add_right n 2
+  have twoToSpan : 2 ≤ cnfShiftedWorkSpan n := by
+    unfold cnfShiftedWorkSpan
+    exact Nat.le_add_left 2 n
+  have fourToTwiceSpan : 4 ≤
+      cnfShiftedWorkSpan n + cnfShiftedWorkSpan n := by
+    change 2 + 2 ≤ cnfShiftedWorkSpan n + cnfShiftedWorkSpan n
+    exact Nat.add_le_add twoToSpan twoToSpan
+  have raw : n + 4 ≤
+      cnfShiftedWorkSpan n +
+        (cnfShiftedWorkSpan n + cnfShiftedWorkSpan n) :=
+    Nat.add_le_add nToSpan fourToTwiceSpan
+  have normalized :
+      cnfShiftedWorkSpan n +
+          (cnfShiftedWorkSpan n + cnfShiftedWorkSpan n) =
+        cnfShiftedWorkSpan n * 3 := by
+    calc
+      cnfShiftedWorkSpan n +
+          (cnfShiftedWorkSpan n + cnfShiftedWorkSpan n) =
+          (cnfShiftedWorkSpan n + cnfShiftedWorkSpan n) +
+            cnfShiftedWorkSpan n :=
+        (Nat.add_assoc (cnfShiftedWorkSpan n)
+          (cnfShiftedWorkSpan n) (cnfShiftedWorkSpan n)).symm
+      _ = cnfShiftedWorkSpan n * 3 := by
+        rw [Nat.mul_succ, Nat.mul_succ, Nat.mul_one]
+  have coefficientBound : 3 ≤ 16 := by
+    change 3 ≤ 3 + 13
+    exact Nat.le_add_right 3 13
+  exact Nat.le_trans stepsBound
+    (Nat.le_trans countFour
+      (Nat.le_trans raw
+        (Nat.le_trans (Nat.le_of_eq normalized)
+          (cnfScaledLinear_le_singlePhaseBudget n 3 coefficientBound))))
+
+theorem one_le_encodedPairsBitSize
+    (tokens : List CNFToken) (last : Bool) :
+    1 ≤ BitString.size (encodeTokenPairs tokens ++ [last]) := by
+  unfold BitString.size
+  rw [BitString.length_append_constructive]
+  rw [List.length_singleton]
+  exact Nat.le_add_left 1 (encodeTokenPairs tokens).length
+
+theorem five_le_shiftedPairSpan_of_inputPos
+    (input certificate : BitString)
+    (inputPos : 1 ≤ BitString.size input) :
+    5 ≤ cnfShiftedWorkSpan
+      (BitString.size (BitString.pair input certificate)) := by
+  unfold cnfShiftedWorkSpan
+  rw [BitString.size_pair_normalized]
+  have twiceInput : 2 ≤ 2 * BitString.size input :=
+    Nat.mul_le_mul_left 2 inputPos
+  have certificateNonnegative : 0 ≤ 2 * BitString.size certificate :=
+    Nat.zero_le _
+  have first := Nat.add_le_add twiceInput certificateNonnegative
+  have second := Nat.add_le_add_right first 2
+  have threeFour : 3 ≤ 4 := by
+    change 3 ≤ 3 + 1
+    exact Nat.le_add_right 3 1
+  have pairAtLeastThree : 3 ≤
+      2 * BitString.size input + 2 * BitString.size certificate + 2 :=
+    Nat.le_trans threeFour second
+  have shifted := Nat.add_le_add_right pairAtLeastThree 2
+  exact shifted
+
+theorem formulaRawDecoder_none_rejects_withinPairSinglePhase
+    (input certificate : BitString)
+    (decoded : decodeFormulaTokenPairs input = none) :
+    ∃ steps tape,
+      steps ≤ cnfSinglePhaseBudget
+        (BitString.size (BitString.pair input certificate)) ∧
+      workRunExact? cnfWorkMachine steps
+          (workStartConfiguration cnfWorkMachine
+            (pairedWorkTape input certificate)) =
+        some
+          ({ state := CNFWorkState.reject, tape := tape } :
+            WorkConfiguration) := by
+  rcases decodeFormulaTokenPairs_none_shape input decoded with
+    ⟨tokens, shape⟩
+  cases shape with
+  | inl evenShape =>
+      rcases pairedWorkTape_formulaEven_shape tokens certificate with
+        ⟨bit, suffix, tapeShape⟩
+      rcases formulaEvenHeader_reject tokens.length bit suffix with
+        ⟨steps, left, stepBound, run⟩
+      have tokenToInput : tokens.length ≤ BitString.size input := by
+        rw [evenShape]
+        exact tokenLength_le_encodedPairsSize tokens
+      have tokenToPair : tokens.length ≤
+          BitString.size (BitString.pair input certificate) :=
+        Nat.le_trans tokenToInput
+          (bitStringSize_le_pairSize_left input certificate)
+      have phaseBound := formulaEvenHeaderSteps_le_singlePhase
+        (BitString.size (BitString.pair input certificate))
+        tokens.length steps tokenToPair stepBound
+      refine ⟨steps,
+        (workConfigAtWord CNFWorkState.reject left
+          (leadingZeroWorkSymbol bit :: suffix)).tape,
+        phaseBound, ?_⟩
+      rw [evenShape, tapeShape]
+      exact run
+  | inr badPadShape =>
+      rcases pairedWorkTape_formulaBadPad_shape tokens certificate with
+        ⟨certificateNonempty, suffix, tapeShape⟩
+      rcases formulaBadPadLayout_reject_with_successCost tokens
+        certificateNonempty suffix with ⟨steps, tape, costBound, run⟩
+      have tokenToInput : tokens.length ≤ BitString.size input := by
+        rw [badPadShape]
+        exact tokenLength_le_encodedPairsBitSize tokens true
+      have tokenToPair : tokens.length ≤
+          BitString.size (BitString.pair input certificate) :=
+        Nat.le_trans tokenToInput
+          (bitStringSize_le_pairSize_left input certificate)
+      have combinedBound : tokens.length + ([] : BitString).length ≤
+          BitString.size (BitString.pair input certificate) := by
+        exact tokenToPair
+      have inputPos : 1 ≤ BitString.size input := by
+        rw [badPadShape]
+        exact one_le_encodedPairsBitSize tokens true
+      have fiveSpan := five_le_shiftedPairSpan_of_inputPos input certificate
+        inputPos
+      have successBound := frameSuccessSteps_le_singlePhase
+        (BitString.size (BitString.pair input certificate)) tokens []
+        combinedBound fiveSpan
+      refine ⟨steps, tape, Nat.le_trans costBound successBound, ?_⟩
+      rw [badPadShape, tapeShape]
+      exact run
+
+theorem assignmentRawDecoder_none_rejects_withinPairSinglePhase
+    (input certificate : BitString) (formula : CNFFormula)
+    (formulaDecoded : decodeEncodedCNF input = some formula)
+    (decoded : decodeTokenPairs certificate = none) :
+    ∃ steps tape,
+      steps ≤ cnfSinglePhaseBudget
+        (BitString.size (BitString.pair input certificate)) ∧
+      workRunExact? cnfWorkMachine steps
+          (workStartConfiguration cnfWorkMachine
+            (pairedWorkTape input certificate)) =
+        some
+          ({ state := CNFWorkState.reject, tape := tape } :
+            WorkConfiguration) := by
+  have inputShape := encodeFormula_of_decode input formula formulaDecoded
+  rcases decodeTokenPairs_none_shape certificate decoded with
+    ⟨certificateTokens, last, certificateShape⟩
+  rcases pairedWorkTape_assignmentOdd_shape
+      (encodeFormulaTokens formula) certificateTokens last with
+    ⟨bit, suffix, tapeShape⟩
+  rcases encodeFormulaTokens_cons formula with
+    ⟨first, rest, tokenShape⟩
+  have hBoot := boot_t_exact
+    (List.replicate rest.length cnfT ++ cnfFinish ::
+      (first.workSymbol ::
+        (cnfTokenWorkSymbols rest ++ cnfSep ::
+          (List.replicate certificateTokens.length cnfT ++
+            leadingZeroWorkSymbol bit :: suffix))))
+  have hFrameOne := frameOne_complete_exact (first :: rest)
+    (List.replicate certificateTokens.length cnfT ++
+      leadingZeroWorkSymbol bit :: suffix)
+  rw [frameOneFoldStart_empty_cons] at hFrameOne
+  let leftBase :=
+    pushWorkLeft (cnfTokenWorkSymbols (first :: rest))
+      (cnfFinish ::
+        pushWorkLeft
+          (List.replicate (first :: rest).length cnfMarkFalse)
+          [cnfRootGuard])
+  rcases frameTwoMalformedHeader_reject certificateTokens.length bit
+      (cnfBoundaryGuard :: leftBase) suffix with ⟨finalLeft, hReject⟩
+  have hBootFrameOne := workRunExact?_compose cnfWorkMachine 2
+    (frameOneFoldSteps [] [] (first :: rest) +
+      frameOneTerminalSteps (first :: rest))
+    _ _ _ hBoot hFrameOne
+  have hComplete := workRunExact?_compose cnfWorkMachine
+    (2 + (frameOneFoldSteps [] [] (first :: rest) +
+      frameOneTerminalSteps (first :: rest)))
+    (certificateTokens.length + 1) _ _ _ hBootFrameOne hReject
+  let steps :=
+    (2 + (frameOneFoldSteps [] [] (first :: rest) +
+      frameOneTerminalSteps (first :: rest))) +
+      (certificateTokens.length + 1)
+  let dummyAssignment : BitString :=
+    List.replicate certificateTokens.length false
+  have dummyLength : dummyAssignment.length = certificateTokens.length := by
+    unfold dummyAssignment
+    exact BitString.length_replicate_constructive
+      certificateTokens.length false
+  have malformedCounterToTerminal : certificateTokens.length + 1 ≤
+      frameTwoTerminalSteps dummyAssignment := by
+    have bound := frameTwoMalformedCounterSteps_le_terminal dummyAssignment
+    rw [dummyLength] at bound
+    exact bound
+  have malformedCounterToFrameTwo : certificateTokens.length + 1 ≤
+      frameTwoFoldSteps [] [] dummyAssignment +
+        frameTwoTerminalSteps dummyAssignment :=
+    Nat.le_trans malformedCounterToTerminal
+      (Nat.le_add_left (frameTwoTerminalSteps dummyAssignment)
+        (frameTwoFoldSteps [] [] dummyAssignment))
+  have costToSuccess : steps ≤
+      frameSuccessSteps (first :: rest) dummyAssignment := by
+    unfold steps frameSuccessSteps
+    exact Nat.add_le_add_left malformedCounterToFrameTwo
+      (2 + (frameOneFoldSteps [] [] (first :: rest) +
+        frameOneTerminalSteps (first :: rest)))
+  have formulaTokenToInput : (encodeFormulaTokens formula).length ≤
+      BitString.size input := by
+    rw [← inputShape]
+    unfold encodeFormula encodeCNF
+    exact tokenLength_le_encodedPairsBitSize
+      (encodeCNFTokens formula) false
+  have certificateTokenToCertificate : certificateTokens.length ≤
+      BitString.size certificate := by
+    rw [certificateShape]
+    exact tokenLength_le_encodedPairsBitSize certificateTokens last
+  have dummyToCertificate : dummyAssignment.length ≤
+      BitString.size certificate := by
+    rw [dummyLength]
+    exact certificateTokenToCertificate
+  have combinedToComponents :
+      (encodeFormulaTokens formula).length + dummyAssignment.length ≤
+        BitString.size input + BitString.size certificate :=
+    Nat.add_le_add formulaTokenToInput dummyToCertificate
+  have combinedBound :
+      (encodeFormulaTokens formula).length + dummyAssignment.length ≤
+        BitString.size (BitString.pair input certificate) :=
+    Nat.le_trans combinedToComponents
+      (componentSizes_le_pairSize input certificate)
+  have inputPos : 1 ≤ BitString.size input := by
+    rw [← inputShape]
+    unfold encodeFormula encodeCNF
+    exact one_le_encodedPairsBitSize (encodeCNFTokens formula) false
+  have fiveSpan := five_le_shiftedPairSpan_of_inputPos input certificate
+    inputPos
+  have successBound := frameSuccessSteps_le_singlePhase
+    (BitString.size (BitString.pair input certificate))
+    (encodeFormulaTokens formula) dummyAssignment combinedBound fiveSpan
+  have tokenCostShape :
+      frameSuccessSteps (first :: rest) dummyAssignment =
+        frameSuccessSteps (encodeFormulaTokens formula) dummyAssignment :=
+    congrArg (fun tokens => frameSuccessSteps tokens dummyAssignment)
+      tokenShape.symm
+  have phaseBound : steps ≤ cnfSinglePhaseBudget
+      (BitString.size (BitString.pair input certificate)) := by
+    rw [tokenCostShape] at costToSuccess
+    exact Nat.le_trans costToSuccess successBound
+  refine ⟨steps,
+    (workConfigAtWord CNFWorkState.reject finalLeft
+      (leadingZeroWorkSymbol bit :: suffix)).tape,
+    phaseBound, ?_⟩
+  rw [← inputShape]
+  rw [encodeFormula_eq_padded_tokens]
+  unfold paddedFormulaTokenBits
+  rw [certificateShape]
+  rw [tapeShape]
+  rw [tokenShape]
+  unfold steps
+  exact hComplete
+
+end MalformedFuelDesign
+
+end PNP.Concrete
