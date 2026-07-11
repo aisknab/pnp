@@ -4557,6 +4557,800 @@ theorem decoded_frameSuccessSteps_le_pair_singlePhase
   exact frameSuccessSteps_le_singlePhase pairSize
     (encodeFormulaTokens formula) assignment combinedBound fiveSpan
 
+def leadingZeroWorkSymbol (bit : Bool) : WorkSymbol :=
+  ⟨TapeSymbol.zero, TapeSymbol.ofBool bit⟩
+
+def badFormulaBoundary (certificateNonempty : Bool) : WorkSymbol :=
+  if certificateNonempty then cnfT else cnfFinish
+
+theorem boot_t_exact (suffix : List WorkSymbol) :
+    workRunExact? cnfWorkMachine 2
+        (workStartConfiguration cnfWorkMachine
+          (WorkTape.ofSymbols (cnfT :: suffix))) =
+      some (workConfigAtWord CNFWorkState.frameOneFindCounter
+        [cnfRootGuard] (cnfT :: suffix)) := by
+  rfl
+
+theorem frameOne_toHeader_leadingZero_reject
+    (bit : Bool) (left suffix : List WorkSymbol) :
+    workRunExact? cnfWorkMachine 1
+        (workConfigAtWord CNFWorkState.frameOneToHeader left
+          (leadingZeroWorkSymbol bit :: suffix)) =
+      some (workConfigAtWord CNFWorkState.reject left
+        (leadingZeroWorkSymbol bit :: suffix)) := by
+  cases bit <;> rfl
+
+theorem frameTwo_findCounter_leadingZero_reject
+    (bit : Bool) (left suffix : List WorkSymbol) :
+    workRunExact? cnfWorkMachine 1
+        (workConfigAtWord CNFWorkState.frameTwoFindCounter left
+          (leadingZeroWorkSymbol bit :: suffix)) =
+      some (workConfigAtWord CNFWorkState.reject left
+        (leadingZeroWorkSymbol bit :: suffix)) := by
+  cases bit <;> rfl
+
+theorem frameTwo_toHeader_leadingZero_reject
+    (bit : Bool) (left suffix : List WorkSymbol) :
+    workRunExact? cnfWorkMachine 1
+        (workConfigAtWord CNFWorkState.frameTwoToHeader left
+          (leadingZeroWorkSymbol bit :: suffix)) =
+      some (workConfigAtWord CNFWorkState.reject left
+        (leadingZeroWorkSymbol bit :: suffix)) := by
+  cases bit <;> rfl
+
+theorem frameOne_checkPayload_badBoundary_reject
+    (certificateNonempty : Bool) (left suffix : List WorkSymbol) :
+    workRunExact? cnfWorkMachine 1
+        (workConfigAtWord CNFWorkState.frameOneCheckPayload left
+          (badFormulaBoundary certificateNonempty :: suffix)) =
+      some (workConfigAtWord CNFWorkState.reject left
+        (badFormulaBoundary certificateNonempty :: suffix)) := by
+  cases certificateNonempty <;> rfl
+
+theorem formulaEvenHeader_reject
+    (count : Nat) (bit : Bool) (suffix : List WorkSymbol) :
+    ∃ steps left,
+      steps ≤ count + 4 ∧
+      workRunExact? cnfWorkMachine steps
+          (workStartConfiguration cnfWorkMachine
+            (WorkTape.ofSymbols
+              (List.replicate count cnfT ++
+                leadingZeroWorkSymbol bit :: suffix))) =
+        some (workConfigAtWord CNFWorkState.reject left
+          (leadingZeroWorkSymbol bit :: suffix)) := by
+  cases count with
+  | zero =>
+      refine ⟨1, [], ?_, ?_⟩
+      · change 1 ≤ 1 + 3
+        exact Nat.le_add_right 1 3
+      · cases bit <;> rfl
+  | succ count =>
+      have hBoot := boot_t_exact
+        (List.replicate count cnfT ++
+          leadingZeroWorkSymbol bit :: suffix)
+      have hMark := workRunExact?_one_of_step cnfWorkMachine _ _
+        (frameOne_findCounter_t_step [cnfRootGuard]
+          (List.replicate count cnfT ++
+            leadingZeroWorkSymbol bit :: suffix))
+      have hScan := frameOne_toHeader_t_word_scan
+        (List.replicate count cnfT)
+        [cnfMarkFalse, cnfRootGuard]
+        (leadingZeroWorkSymbol bit :: suffix)
+        (mem_replicate_workSymbol_eq count cnfT)
+      rw [length_replicate_workSymbol] at hScan
+      have hReject := frameOne_toHeader_leadingZero_reject bit
+        (pushWorkLeft (List.replicate count cnfT)
+          [cnfMarkFalse, cnfRootGuard]) suffix
+      have hBootMark := workRunExact?_compose cnfWorkMachine 2 1
+        _ _ _ hBoot hMark
+      have hThroughScan := workRunExact?_compose cnfWorkMachine
+        (2 + 1) count _ _ _ hBootMark hScan
+      have hComplete := workRunExact?_compose cnfWorkMachine
+        ((2 + 1) + count) 1 _ _ _ hThroughScan hReject
+      refine ⟨((2 + 1) + count) + 1,
+        pushWorkLeft (List.replicate count cnfT)
+          [cnfMarkFalse, cnfRootGuard], ?_, hComplete⟩
+      calc
+        ((2 + 1) + count) + 1 = count + 4 := by
+          rw [Nat.add_comm (2 + 1) count]
+        _ ≤ count + (1 + 4) :=
+          Nat.add_le_add_left (Nat.le_add_left 4 1) count
+        _ = (count + 1) + 4 := (Nat.add_assoc count 1 4).symm
+
+theorem frameTwoMalformedHeader_reject
+    (count : Nat) (bit : Bool) (leftBase suffix : List WorkSymbol) :
+    ∃ left,
+      workRunExact? cnfWorkMachine (count + 1)
+          (workConfigAtWord CNFWorkState.frameTwoFindCounter leftBase
+            (List.replicate count cnfT ++
+              leadingZeroWorkSymbol bit :: suffix)) =
+        some (workConfigAtWord CNFWorkState.reject left
+          (leadingZeroWorkSymbol bit :: suffix)) := by
+  cases count with
+  | zero =>
+      exact ⟨leftBase,
+        frameTwo_findCounter_leadingZero_reject bit leftBase suffix⟩
+  | succ count =>
+      have hMark := workRunExact?_one_of_step cnfWorkMachine _ _
+        (frameTwo_findCounter_t_step leftBase
+          (List.replicate count cnfT ++
+            leadingZeroWorkSymbol bit :: suffix))
+      have hScan := frameTwo_toHeader_t_word_scan
+        (List.replicate count cnfT) (cnfMarkFalse :: leftBase)
+        (leadingZeroWorkSymbol bit :: suffix)
+        (mem_replicate_workSymbol_eq count cnfT)
+      rw [length_replicate_workSymbol] at hScan
+      have hReject := frameTwo_toHeader_leadingZero_reject bit
+        (pushWorkLeft (List.replicate count cnfT)
+          (cnfMarkFalse :: leftBase)) suffix
+      have hThroughScan := workRunExact?_compose cnfWorkMachine 1 count
+        _ _ _ hMark hScan
+      have hComplete := workRunExact?_compose cnfWorkMachine
+        (1 + count) 1 _ _ _ hThroughScan hReject
+      refine ⟨pushWorkLeft (List.replicate count cnfT)
+        (cnfMarkFalse :: leftBase), ?_⟩
+      rw [List.replicate_succ]
+      rw [← Nat.add_comm 1 count]
+      exact hComplete
+
+def frameOneBoundaryFoldStart
+    (doneCounter donePayload : List WorkSymbol)
+    (tokens : List CNFToken) (boundary : WorkSymbol)
+    (suffix : List WorkSymbol) : WorkConfiguration :=
+  workConfigAtWord CNFWorkState.frameOneFindCounter [cnfRootGuard]
+    ((doneCounter ++ List.replicate tokens.length cnfT) ++
+      cnfFinish ::
+        ((donePayload ++ cnfTokenWorkSymbols tokens) ++ boundary :: suffix))
+
+def frameOneBoundaryFoldFinal
+    (doneCounter donePayload : List WorkSymbol)
+    (tokens : List CNFToken) (boundary : WorkSymbol)
+    (suffix : List WorkSymbol) : WorkConfiguration :=
+  workConfigAtWord CNFWorkState.frameOneFindCounter [cnfRootGuard]
+    ((doneCounter ++ List.replicate tokens.length cnfMarkFalse) ++
+      cnfFinish ::
+        ((donePayload ++ frameOneMarkedTokens tokens) ++ boundary :: suffix))
+
+theorem frameOneBoundaryFoldStart_cons
+    (doneCounter donePayload : List WorkSymbol)
+    (token : CNFToken) (rest : List CNFToken)
+    (boundary : WorkSymbol) (suffix : List WorkSymbol) :
+    frameOneBoundaryFoldStart doneCounter donePayload
+        (token :: rest) boundary suffix =
+      workConfigAtWord CNFWorkState.frameOneFindCounter [cnfRootGuard]
+        (doneCounter ++ cnfT ::
+          (List.replicate rest.length cnfT ++ cnfFinish ::
+            (donePayload ++ token.workSymbol ::
+              (cnfTokenWorkSymbols rest ++ boundary :: suffix)))) := by
+  unfold frameOneBoundaryFoldStart
+  change workConfigAtWord _ _
+      ((doneCounter ++ cnfT :: List.replicate rest.length cnfT) ++
+        cnfFinish ::
+          ((donePayload ++ token.workSymbol :: cnfTokenWorkSymbols rest) ++
+            boundary :: suffix)) = _
+  repeat' rw [frameWork_append_assoc]
+  rfl
+
+theorem frameOneBoundaryFold_after_iteration
+    (doneCounter donePayload : List WorkSymbol)
+    (token : CNFToken) (rest : List CNFToken)
+    (boundary : WorkSymbol) (suffix : List WorkSymbol) :
+    workConfigAtWord CNFWorkState.frameOneFindCounter [cnfRootGuard]
+        ((doneCounter ++ cnfMarkFalse ::
+          List.replicate rest.length cnfT) ++
+            (cnfFinish :: donePayload ++ frameOneMarkedToken token ::
+              (cnfTokenWorkSymbols rest ++ boundary :: suffix))) =
+      frameOneBoundaryFoldStart
+        (doneCounter ++ [cnfMarkFalse])
+        (donePayload ++ [frameOneMarkedToken token]) rest boundary suffix := by
+  unfold frameOneBoundaryFoldStart
+  repeat' rw [frameWork_append_assoc]
+  rfl
+
+theorem frameOneBoundaryFoldFinal_cons
+    (doneCounter donePayload : List WorkSymbol)
+    (token : CNFToken) (rest : List CNFToken)
+    (boundary : WorkSymbol) (suffix : List WorkSymbol) :
+    frameOneBoundaryFoldFinal
+        (doneCounter ++ [cnfMarkFalse])
+        (donePayload ++ [frameOneMarkedToken token]) rest boundary suffix =
+      frameOneBoundaryFoldFinal doneCounter donePayload
+        (token :: rest) boundary suffix := by
+  unfold frameOneBoundaryFoldFinal
+  change workConfigAtWord _ _
+      (((doneCounter ++ [cnfMarkFalse]) ++
+          List.replicate rest.length cnfMarkFalse) ++
+        cnfFinish ::
+          (((donePayload ++ [frameOneMarkedToken token]) ++
+              frameOneMarkedTokens rest) ++ boundary :: suffix)) =
+    workConfigAtWord _ _
+      ((doneCounter ++ cnfMarkFalse ::
+          List.replicate rest.length cnfMarkFalse) ++
+        cnfFinish ::
+          ((donePayload ++ frameOneMarkedToken token ::
+              frameOneMarkedTokens rest) ++ boundary :: suffix))
+  repeat' rw [frameWork_append_assoc]
+  rfl
+
+theorem frameOne_boundary_fold_exact
+    (doneCounter donePayload : List WorkSymbol)
+    (tokens : List CNFToken) (boundary : WorkSymbol)
+    (suffix : List WorkSymbol)
+    (doneCounterAllowed : ∀ symbol, List.Mem symbol doneCounter →
+      symbol = cnfMarkFalse)
+    (donePayloadAllowed : ∀ symbol, List.Mem symbol donePayload →
+      FrameOneMarkedSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (frameOneFoldSteps doneCounter donePayload tokens)
+        (frameOneBoundaryFoldStart doneCounter donePayload
+          tokens boundary suffix) =
+      some (frameOneBoundaryFoldFinal doneCounter donePayload
+        tokens boundary suffix) := by
+  induction tokens generalizing doneCounter donePayload with
+  | nil => rfl
+  | cons token rest ih =>
+      have restCounterAllowed : ∀ symbol,
+          List.Mem symbol (List.replicate rest.length cnfT) →
+            symbol = cnfT := by
+        intro symbol member
+        exact mem_replicate_workSymbol_eq rest.length cnfT symbol member
+      have hIteration := frameOne_iteration_exact doneCounter
+        (List.replicate rest.length cnfT) donePayload token
+        (cnfTokenWorkSymbols rest ++ boundary :: suffix)
+        doneCounterAllowed restCounterAllowed donePayloadAllowed
+      rw [← frameOneBoundaryFoldStart_cons] at hIteration
+      have nextCounterAllowed : ∀ symbol,
+          List.Mem symbol (doneCounter ++ [cnfMarkFalse]) →
+            symbol = cnfMarkFalse := by
+        exact frameAllowed_append_one
+          (fun candidate => candidate = cnfMarkFalse)
+          doneCounter cnfMarkFalse doneCounterAllowed rfl
+      have nextPayloadAllowed : ∀ symbol,
+          List.Mem symbol (donePayload ++ [frameOneMarkedToken token]) →
+            FrameOneMarkedSymbol symbol := by
+        exact frameAllowed_append_one FrameOneMarkedSymbol donePayload
+          (frameOneMarkedToken token) donePayloadAllowed (by
+            cases token <;> constructor)
+      have hRest := ih (doneCounter ++ [cnfMarkFalse])
+        (donePayload ++ [frameOneMarkedToken token])
+        nextCounterAllowed nextPayloadAllowed
+      rw [← frameOneBoundaryFold_after_iteration] at hRest
+      rw [frameOneBoundaryFoldFinal_cons] at hRest
+      exact workRunExact?_compose cnfWorkMachine
+        (frameOneIterationSteps doneCounter
+          (List.replicate rest.length cnfT) donePayload)
+        (frameOneFoldSteps (doneCounter ++ [cnfMarkFalse])
+          (donePayload ++ [frameOneMarkedToken token]) rest)
+        _ _ _ hIteration hRest
+
+def frameOneBadBoundarySteps (tokens : List CNFToken) : Nat :=
+  ((tokens.length + 1) + tokens.length) + 1
+
+theorem frameOne_badBoundary_terminal_exact
+    (tokens : List CNFToken) (certificateNonempty : Bool)
+    (suffix : List WorkSymbol) :
+    workRunExact? cnfWorkMachine (frameOneBadBoundarySteps tokens)
+        (frameOneBoundaryFoldFinal [] [] tokens
+          (badFormulaBoundary certificateNonempty) suffix) =
+      some
+        (workConfigAtWord CNFWorkState.reject
+          (pushWorkLeft (frameOneMarkedTokens tokens)
+            (cnfFinish ::
+              pushWorkLeft
+                (List.replicate tokens.length cnfMarkFalse)
+                [cnfRootGuard]))
+          (badFormulaBoundary certificateNonempty :: suffix)) := by
+  have hCounter := frameOne_findCounter_markFalse_scan tokens.length
+    [cnfRootGuard]
+    (cnfFinish :: frameOneMarkedTokens tokens ++
+      badFormulaBoundary certificateNonempty :: suffix)
+  have hFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameOne_findCounter_finish_step
+      (pushWorkLeft (List.replicate tokens.length cnfMarkFalse)
+        [cnfRootGuard])
+      (frameOneMarkedTokens tokens ++
+        badFormulaBoundary certificateNonempty :: suffix))
+  have hPayload := frameOne_checkPayload_marked_scan tokens
+    (cnfFinish ::
+      pushWorkLeft (List.replicate tokens.length cnfMarkFalse)
+        [cnfRootGuard])
+    (badFormulaBoundary certificateNonempty :: suffix)
+  have hReject := frameOne_checkPayload_badBoundary_reject
+    certificateNonempty
+    (pushWorkLeft (frameOneMarkedTokens tokens)
+      (cnfFinish ::
+        pushWorkLeft (List.replicate tokens.length cnfMarkFalse)
+          [cnfRootGuard])) suffix
+  have hThroughFinish := workRunExact?_compose cnfWorkMachine
+    tokens.length 1 _ _ _ hCounter hFinish
+  have hThroughPayload := workRunExact?_compose cnfWorkMachine
+    (tokens.length + 1) tokens.length _ _ _ hThroughFinish hPayload
+  unfold frameOneBoundaryFoldFinal frameOneBadBoundarySteps
+  exact workRunExact?_compose cnfWorkMachine
+    ((tokens.length + 1) + tokens.length) 1 _ _ _
+    hThroughPayload hReject
+
+theorem frameOne_badBoundary_exact
+    (tokens : List CNFToken) (certificateNonempty : Bool)
+    (suffix : List WorkSymbol) :
+    workRunExact? cnfWorkMachine
+        (frameOneFoldSteps [] [] tokens +
+          frameOneBadBoundarySteps tokens)
+        (frameOneBoundaryFoldStart [] [] tokens
+          (badFormulaBoundary certificateNonempty) suffix) =
+      some
+        (workConfigAtWord CNFWorkState.reject
+          (pushWorkLeft (frameOneMarkedTokens tokens)
+            (cnfFinish ::
+              pushWorkLeft
+                (List.replicate tokens.length cnfMarkFalse)
+                [cnfRootGuard]))
+          (badFormulaBoundary certificateNonempty :: suffix)) := by
+  have hFold := frameOne_boundary_fold_exact [] [] tokens
+    (badFormulaBoundary certificateNonempty) suffix
+    (by intro symbol member; contradiction)
+    (by intro symbol member; contradiction)
+  have hTerminal := frameOne_badBoundary_terminal_exact tokens
+    certificateNonempty suffix
+  exact workRunExact?_compose cnfWorkMachine
+    (frameOneFoldSteps [] [] tokens)
+    (frameOneBadBoundarySteps tokens) _ _ _ hFold hTerminal
+
+theorem formulaBadPadLayout_reject
+    (tokens : List CNFToken) (certificateNonempty : Bool)
+    (suffix : List WorkSymbol) :
+    ∃ steps tape,
+      workRunExact? cnfWorkMachine steps
+          (workStartConfiguration cnfWorkMachine
+            (WorkTape.ofSymbols
+              (List.replicate tokens.length cnfT ++ cnfFinish ::
+                (cnfTokenWorkSymbols tokens ++
+                  badFormulaBoundary certificateNonempty :: suffix)))) =
+        some
+          ({ state := CNFWorkState.reject, tape := tape } :
+            WorkConfiguration) := by
+  cases tokens with
+  | nil =>
+      refine ⟨1, (WorkTape.ofSymbols
+        (cnfFinish :: badFormulaBoundary certificateNonempty :: suffix)), ?_⟩
+      cases certificateNonempty <;> rfl
+  | cons token rest =>
+      have hBoot := boot_t_exact
+        (List.replicate rest.length cnfT ++ cnfFinish ::
+          (token.workSymbol ::
+            (cnfTokenWorkSymbols rest ++
+              badFormulaBoundary certificateNonempty :: suffix)))
+      have hBad := frameOne_badBoundary_exact (token :: rest)
+        certificateNonempty suffix
+      rw [frameOneBoundaryFoldStart_cons] at hBad
+      have hComplete := workRunExact?_compose cnfWorkMachine 2
+        (frameOneFoldSteps [] [] (token :: rest) +
+          frameOneBadBoundarySteps (token :: rest))
+        _ _ _ hBoot hBad
+      refine ⟨2 +
+        (frameOneFoldSteps [] [] (token :: rest) +
+          frameOneBadBoundarySteps (token :: rest)),
+        (workConfigAtWord CNFWorkState.reject
+          (pushWorkLeft (frameOneMarkedTokens (token :: rest))
+            (cnfFinish ::
+              pushWorkLeft
+                (List.replicate (token :: rest).length cnfMarkFalse)
+                [cnfRootGuard]))
+          (badFormulaBoundary certificateNonempty :: suffix)).tape, ?_⟩
+      have startShape :
+          List.replicate (token :: rest).length cnfT ++ cnfFinish ::
+              (cnfTokenWorkSymbols (token :: rest) ++
+                badFormulaBoundary certificateNonempty :: suffix) =
+            cnfT ::
+              (List.replicate rest.length cnfT ++ cnfFinish ::
+                token.workSymbol ::
+                  (cnfTokenWorkSymbols rest ++
+                    badFormulaBoundary certificateNonempty :: suffix)) :=
+        rfl
+      rw [startShape]
+      exact hComplete
+
+theorem mapTapeOfBool_append (left right : BitString) :
+    (left ++ right).map TapeSymbol.ofBool =
+      left.map TapeSymbol.ofBool ++ right.map TapeSymbol.ofBool := by
+  induction left with
+  | nil => rfl
+  | cons bit rest ih => exact congrArg (List.cons (TapeSymbol.ofBool bit)) ih
+
+theorem listAppendAssoc {alpha : Type}
+    (left middle right : List alpha) :
+    (left ++ middle) ++ right = left ++ (middle ++ right) := by
+  induction left with
+  | nil => rfl
+  | cons item rest ih => exact congrArg (List.cons item) ih
+
+theorem mapTapeOfBool_replicate_true (count : Nat) :
+    (List.replicate count true).map TapeSymbol.ofBool =
+      List.replicate count TapeSymbol.one := by
+  induction count with
+  | zero => rfl
+  | succ count ih => exact congrArg (List.cons TapeSymbol.one) ih
+
+theorem replicate_succ_tail {alpha : Type}
+    (count : Nat) (item : alpha) :
+    List.replicate (count + 1) item =
+      List.replicate count item ++ [item] := by
+  induction count with
+  | zero => rfl
+  | succ count ih =>
+      change item :: List.replicate (count + 1) item =
+        item :: (List.replicate count item ++ [item])
+      exact congrArg (List.cons item) ih
+
+theorem packWorkSymbols_even_ones (count : Nat)
+    (suffix : List TapeSymbol) :
+    packWorkSymbols
+        (List.replicate (2 * count) TapeSymbol.one ++ suffix) =
+      List.replicate count cnfT ++ packWorkSymbols suffix := by
+  induction count with
+  | zero => rfl
+  | succ count ih =>
+      change cnfT ::
+          packWorkSymbols
+            (List.replicate (2 * count) TapeSymbol.one ++ suffix) =
+        cnfT ::
+          (List.replicate count cnfT ++ packWorkSymbols suffix)
+      exact congrArg (List.cons cnfT) ih
+
+theorem packWorkSymbols_encodeWorkRight_prefix
+    (word : List WorkSymbol) (suffix : List TapeSymbol) :
+    packWorkSymbols (encodeWorkRight word ++ suffix) =
+      word ++ packWorkSymbols suffix := by
+  induction word with
+  | nil => rfl
+  | cons symbol rest ih =>
+      cases symbol with
+      | mk first second =>
+          change { first := first, second := second } ::
+              packWorkSymbols (encodeWorkRight rest ++ suffix) =
+            { first := first, second := second } ::
+              (rest ++ packWorkSymbols suffix)
+          exact congrArg (List.cons { first := first, second := second }) ih
+
+theorem pairedWorkTape_formulaEven_shape
+    (tokens : List CNFToken) (certificate : BitString) :
+    ∃ bit suffix,
+      pairedWorkTape (encodeTokenPairs tokens) certificate =
+        WorkTape.ofSymbols
+          (List.replicate tokens.length cnfT ++
+            leadingZeroWorkSymbol bit :: suffix) := by
+  unfold pairedWorkTape
+  change ∃ bit suffix,
+    WorkTape.ofSymbols
+        (packWorkSymbols
+          ((BitString.pair (encodeTokenPairs tokens) certificate).map
+            TapeSymbol.ofBool)) =
+      WorkTape.ofSymbols
+        (List.replicate tokens.length cnfT ++
+          leadingZeroWorkSymbol bit :: suffix)
+  unfold BitString.pair BitString.frame
+  rw [mapTapeOfBool_append]
+  rw [mapTapeOfBool_append]
+  rw [mapTapeOfBool_replicate_true]
+  rw [encodeTokenPairs_length]
+  rw [listAppendAssoc]
+  rw [packWorkSymbols_even_ones]
+  cases tokens with
+  | nil =>
+      cases certificate with
+      | nil => exact ⟨false, [], rfl⟩
+      | cons first rest =>
+          refine ⟨true,
+            packWorkSymbols
+              ((List.replicate rest.length true ++
+                false :: first :: rest).map TapeSymbol.ofBool), ?_⟩
+          rfl
+  | cons token rest =>
+      cases token with
+      | f =>
+          refine ⟨false,
+            packWorkSymbols
+              (TapeSymbol.zero ::
+                ((encodeTokenPairs rest).map TapeSymbol.ofBool ++
+                  (List.replicate certificate.length true ++
+                    false :: certificate).map TapeSymbol.ofBool)), ?_⟩
+          rfl
+      | t =>
+          refine ⟨true,
+            packWorkSymbols
+              (TapeSymbol.one ::
+                ((encodeTokenPairs rest).map TapeSymbol.ofBool ++
+                  (List.replicate certificate.length true ++
+                    false :: certificate).map TapeSymbol.ofBool)), ?_⟩
+          rfl
+      | sep =>
+          refine ⟨false,
+            packWorkSymbols
+              (TapeSymbol.one ::
+                ((encodeTokenPairs rest).map TapeSymbol.ofBool ++
+                  (List.replicate certificate.length true ++
+                    false :: certificate).map TapeSymbol.ofBool)), ?_⟩
+          rfl
+      | finish =>
+          refine ⟨true,
+            packWorkSymbols
+              (TapeSymbol.zero ::
+                ((encodeTokenPairs rest).map TapeSymbol.ofBool ++
+                  (List.replicate certificate.length true ++
+                    false :: certificate).map TapeSymbol.ofBool)), ?_⟩
+          rfl
+
+theorem pairedWorkTape_formulaBadPad_shape
+    (tokens : List CNFToken) (certificate : BitString) :
+    ∃ certificateNonempty suffix,
+      pairedWorkTape (encodeTokenPairs tokens ++ [true]) certificate =
+        WorkTape.ofSymbols
+          (List.replicate tokens.length cnfT ++ cnfFinish ::
+            (cnfTokenWorkSymbols tokens ++
+              badFormulaBoundary certificateNonempty :: suffix)) := by
+  unfold pairedWorkTape
+  change ∃ certificateNonempty suffix,
+    WorkTape.ofSymbols
+        (packWorkSymbols
+          ((BitString.pair (encodeTokenPairs tokens ++ [true]) certificate).map
+            TapeSymbol.ofBool)) =
+      WorkTape.ofSymbols
+        (List.replicate tokens.length cnfT ++ cnfFinish ::
+          (cnfTokenWorkSymbols tokens ++
+            badFormulaBoundary certificateNonempty :: suffix))
+  unfold BitString.pair BitString.frame
+  rw [mapTapeOfBool_append]
+  rw [mapTapeOfBool_append]
+  rw [mapTapeOfBool_replicate_true]
+  rw [BitString.length_append_constructive, encodeTokenPairs_length]
+  rw [List.length_singleton]
+  rw [listAppendAssoc]
+  change ∃ certificateNonempty suffix,
+    WorkTape.ofSymbols
+        (packWorkSymbols
+          (List.replicate (2 * tokens.length + 1) TapeSymbol.one ++
+            TapeSymbol.zero ::
+              ((encodeTokenPairs tokens ++ [true]).map TapeSymbol.ofBool ++
+                ((List.replicate certificate.length true ++
+                  false :: certificate).map TapeSymbol.ofBool)))) =
+      WorkTape.ofSymbols
+        (List.replicate tokens.length cnfT ++ cnfFinish ::
+          (cnfTokenWorkSymbols tokens ++
+            badFormulaBoundary certificateNonempty :: suffix))
+  rw [replicate_succ_tail]
+  rw [listAppendAssoc]
+  rw [packWorkSymbols_even_ones]
+  change ∃ certificateNonempty suffix,
+    WorkTape.ofSymbols
+      (List.replicate tokens.length cnfT ++ cnfFinish ::
+        packWorkSymbols
+          ((encodeTokenPairs tokens ++ [true]).map TapeSymbol.ofBool ++
+            ((List.replicate certificate.length true ++
+              false :: certificate).map TapeSymbol.ofBool))) =
+      WorkTape.ofSymbols
+        (List.replicate tokens.length cnfT ++ cnfFinish ::
+          (cnfTokenWorkSymbols tokens ++
+            badFormulaBoundary certificateNonempty :: suffix))
+  rw [mapTapeOfBool_append]
+  rw [← encodeWorkRight_cnfTokenWorkSymbols]
+  rw [listAppendAssoc]
+  rw [packWorkSymbols_encodeWorkRight_prefix]
+  cases certificate with
+  | nil => exact ⟨false, [], rfl⟩
+  | cons first rest =>
+      refine ⟨true,
+        packWorkSymbols
+          ((List.replicate rest.length true ++
+            false :: first :: rest).map TapeSymbol.ofBool), ?_⟩
+      rfl
+
+theorem pairedWorkTape_assignmentOdd_shape
+    (formulaTokens certificateTokens : List CNFToken) (last : Bool) :
+    ∃ bit suffix,
+      pairedWorkTape
+          (encodeTokenPairs formulaTokens ++ [false])
+          (encodeTokenPairs certificateTokens ++ [last]) =
+        WorkTape.ofSymbols
+          (List.replicate formulaTokens.length cnfT ++ cnfFinish ::
+            (cnfTokenWorkSymbols formulaTokens ++ cnfSep ::
+              (List.replicate certificateTokens.length cnfT ++
+                leadingZeroWorkSymbol bit :: suffix))) := by
+  unfold pairedWorkTape
+  change ∃ bit suffix,
+    WorkTape.ofSymbols
+        (packWorkSymbols
+          ((BitString.pair (encodeTokenPairs formulaTokens ++ [false])
+            (encodeTokenPairs certificateTokens ++ [last])).map
+              TapeSymbol.ofBool)) =
+      WorkTape.ofSymbols
+        (List.replicate formulaTokens.length cnfT ++ cnfFinish ::
+          (cnfTokenWorkSymbols formulaTokens ++ cnfSep ::
+            (List.replicate certificateTokens.length cnfT ++
+              leadingZeroWorkSymbol bit :: suffix)))
+  unfold BitString.pair BitString.frame
+  rw [mapTapeOfBool_append]
+  rw [mapTapeOfBool_append]
+  rw [mapTapeOfBool_replicate_true]
+  rw [BitString.length_append_constructive, encodeTokenPairs_length]
+  rw [List.length_singleton]
+  rw [listAppendAssoc]
+  change ∃ bit suffix,
+    WorkTape.ofSymbols
+        (packWorkSymbols
+          (List.replicate (2 * formulaTokens.length + 1) TapeSymbol.one ++
+            TapeSymbol.zero ::
+              ((encodeTokenPairs formulaTokens ++ [false]).map
+                  TapeSymbol.ofBool ++
+                ((List.replicate
+                  (encodeTokenPairs certificateTokens ++ [last]).length true ++
+                    false :: (encodeTokenPairs certificateTokens ++ [last])).map
+                  TapeSymbol.ofBool)))) =
+      WorkTape.ofSymbols
+        (List.replicate formulaTokens.length cnfT ++ cnfFinish ::
+          (cnfTokenWorkSymbols formulaTokens ++ cnfSep ::
+            (List.replicate certificateTokens.length cnfT ++
+              leadingZeroWorkSymbol bit :: suffix)))
+  rw [replicate_succ_tail]
+  rw [listAppendAssoc]
+  rw [packWorkSymbols_even_ones]
+  rw [mapTapeOfBool_append]
+  rw [← encodeWorkRight_cnfTokenWorkSymbols]
+  change ∃ bit suffix,
+    WorkTape.ofSymbols
+      (List.replicate formulaTokens.length cnfT ++ cnfFinish ::
+        packWorkSymbols
+          (encodeWorkRight (cnfTokenWorkSymbols formulaTokens) ++
+            [TapeSymbol.zero] ++
+              ((List.replicate
+                (encodeTokenPairs certificateTokens ++ [last]).length true ++
+                  false :: (encodeTokenPairs certificateTokens ++ [last])).map
+                TapeSymbol.ofBool))) =
+      WorkTape.ofSymbols
+        (List.replicate formulaTokens.length cnfT ++ cnfFinish ::
+          (cnfTokenWorkSymbols formulaTokens ++ cnfSep ::
+            (List.replicate certificateTokens.length cnfT ++
+              leadingZeroWorkSymbol bit :: suffix)))
+  rw [listAppendAssoc]
+  rw [packWorkSymbols_encodeWorkRight_prefix]
+  rw [BitString.length_append_constructive, encodeTokenPairs_length]
+  rw [List.length_singleton]
+  rw [mapTapeOfBool_append]
+  rw [mapTapeOfBool_replicate_true]
+  rw [List.replicate_succ]
+  change ∃ bit suffix,
+    WorkTape.ofSymbols
+      (List.replicate formulaTokens.length cnfT ++ cnfFinish ::
+        (cnfTokenWorkSymbols formulaTokens ++ cnfSep ::
+          packWorkSymbols
+            (List.replicate (2 * certificateTokens.length) TapeSymbol.one ++
+              TapeSymbol.zero ::
+                ((encodeTokenPairs certificateTokens ++ [last]).map
+                  TapeSymbol.ofBool)))) =
+      WorkTape.ofSymbols
+        (List.replicate formulaTokens.length cnfT ++ cnfFinish ::
+          (cnfTokenWorkSymbols formulaTokens ++ cnfSep ::
+            (List.replicate certificateTokens.length cnfT ++
+              leadingZeroWorkSymbol bit :: suffix)))
+  rw [packWorkSymbols_even_ones]
+  cases certificateTokens with
+  | nil => exact ⟨last, [], by cases last <;> rfl⟩
+  | cons token rest =>
+      cases token with
+      | f =>
+          exact ⟨false,
+            packWorkSymbols
+              (TapeSymbol.zero ::
+                ((encodeTokenPairs rest ++ [last]).map TapeSymbol.ofBool)),
+            rfl⟩
+      | t =>
+          exact ⟨true,
+            packWorkSymbols
+              (TapeSymbol.one ::
+                ((encodeTokenPairs rest ++ [last]).map TapeSymbol.ofBool)),
+            rfl⟩
+      | sep =>
+          exact ⟨false,
+            packWorkSymbols
+              (TapeSymbol.one ::
+                ((encodeTokenPairs rest ++ [last]).map TapeSymbol.ofBool)),
+            rfl⟩
+      | finish =>
+          exact ⟨true,
+            packWorkSymbols
+              (TapeSymbol.zero ::
+                ((encodeTokenPairs rest ++ [last]).map TapeSymbol.ofBool)),
+            rfl⟩
+
+theorem formulaRawDecoder_none_rejects
+    (input certificate : BitString)
+    (decoded : decodeFormulaTokenPairs input = none) :
+    ∃ steps tape,
+      workRunExact? cnfWorkMachine steps
+          (workStartConfiguration cnfWorkMachine
+            (pairedWorkTape input certificate)) =
+        some
+          ({ state := CNFWorkState.reject, tape := tape } :
+            WorkConfiguration) := by
+  rcases decodeFormulaTokenPairs_none_shape input decoded with
+    ⟨tokens, shape⟩
+  cases shape with
+  | inl evenShape =>
+      cases evenShape
+      rcases pairedWorkTape_formulaEven_shape tokens certificate with
+        ⟨bit, suffix, tapeShape⟩
+      rcases formulaEvenHeader_reject tokens.length bit suffix with
+        ⟨steps, left, stepBound, run⟩
+      refine ⟨steps,
+        (workConfigAtWord CNFWorkState.reject left
+          (leadingZeroWorkSymbol bit :: suffix)).tape, ?_⟩
+      rw [tapeShape]
+      exact run
+  | inr badPadShape =>
+      cases badPadShape
+      rcases pairedWorkTape_formulaBadPad_shape tokens certificate with
+        ⟨certificateNonempty, suffix, tapeShape⟩
+      rcases formulaBadPadLayout_reject tokens certificateNonempty suffix
+        with ⟨steps, tape, run⟩
+      exact ⟨steps, tape, by rw [tapeShape]; exact run⟩
+
+theorem assignmentRawDecoder_none_rejects
+    (input certificate : BitString) (formula : CNFFormula)
+    (formulaDecoded : decodeEncodedCNF input = some formula)
+    (decoded : decodeTokenPairs certificate = none) :
+    ∃ steps tape,
+      workRunExact? cnfWorkMachine steps
+          (workStartConfiguration cnfWorkMachine
+            (pairedWorkTape input certificate)) =
+        some
+          ({ state := CNFWorkState.reject, tape := tape } :
+            WorkConfiguration) := by
+  have inputShape := encodeFormula_of_decode input formula formulaDecoded
+  rcases decodeTokenPairs_none_shape certificate decoded with
+    ⟨certificateTokens, last, certificateShape⟩
+  rw [← inputShape]
+  rw [encodeFormula_eq_padded_tokens]
+  unfold paddedFormulaTokenBits
+  rw [certificateShape]
+  rcases pairedWorkTape_assignmentOdd_shape
+      (encodeFormulaTokens formula) certificateTokens last with
+    ⟨bit, suffix, tapeShape⟩
+  rcases encodeFormulaTokens_cons formula with
+    ⟨first, rest, tokenShape⟩
+  have hBoot := boot_t_exact
+    (List.replicate rest.length cnfT ++ cnfFinish ::
+      (first.workSymbol ::
+        (cnfTokenWorkSymbols rest ++ cnfSep ::
+          (List.replicate certificateTokens.length cnfT ++
+            leadingZeroWorkSymbol bit :: suffix))))
+  have hFrameOne := frameOne_complete_exact (first :: rest)
+    (List.replicate certificateTokens.length cnfT ++
+      leadingZeroWorkSymbol bit :: suffix)
+  rw [frameOneFoldStart_empty_cons] at hFrameOne
+  let leftBase :=
+    pushWorkLeft (cnfTokenWorkSymbols (first :: rest))
+      (cnfFinish ::
+        pushWorkLeft
+          (List.replicate (first :: rest).length cnfMarkFalse)
+          [cnfRootGuard])
+  rcases frameTwoMalformedHeader_reject certificateTokens.length bit
+      (cnfBoundaryGuard :: leftBase) suffix with ⟨finalLeft, hReject⟩
+  have hBootFrameOne := workRunExact?_compose cnfWorkMachine 2
+    (frameOneFoldSteps [] [] (first :: rest) +
+      frameOneTerminalSteps (first :: rest))
+    _ _ _ hBoot hFrameOne
+  have hComplete := workRunExact?_compose cnfWorkMachine
+    (2 + (frameOneFoldSteps [] [] (first :: rest) +
+      frameOneTerminalSteps (first :: rest)))
+    (certificateTokens.length + 1) _ _ _ hBootFrameOne hReject
+  refine ⟨(2 + (frameOneFoldSteps [] [] (first :: rest) +
+      frameOneTerminalSteps (first :: rest))) +
+      (certificateTokens.length + 1),
+    (workConfigAtWord CNFWorkState.reject finalLeft
+      (leadingZeroWorkSymbol bit :: suffix)).tape, ?_⟩
+  rw [tapeShape]
+  rw [tokenShape]
+  exact hComplete
+
 end FrameTraceDesign
 
 end PNP.Concrete
