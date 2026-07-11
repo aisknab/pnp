@@ -11578,3 +11578,3559 @@ theorem assignmentRawDecoder_none_rejects_withinPairSinglePhase
 end MalformedFuelDesign
 
 end PNP.Concrete
+
+
+namespace PNP.Concrete
+namespace WidthSuccessDesign
+
+open FrameTraceDesign
+open ClauseLiteralCostDesign
+open ClauseLiteralDesign
+
+set_option maxRecDepth 100000
+
+theorem widthRestoreAssignment_finish_step
+    (leftTail rightSide : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.widthRestoreAssignment
+          (cnfFinish :: leftTail) rightSide) =
+      some (workConfigAtLeftWord
+        CNFWorkState.widthRestoreCertificateCounter leftTail
+        (cnfFinish :: rightSide)) := by
+  rfl
+
+theorem widthRestoreCounter_markFalse_step
+    (leftTail rightSide : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.widthRestoreCertificateCounter
+          (cnfMarkFalse :: leftTail) rightSide) =
+      some (workConfigAtLeftWord
+        CNFWorkState.widthRestoreCertificateCounter leftTail
+        (cnfMarkFalse :: rightSide)) := by
+  rfl
+
+theorem widthRestoreCounter_scan
+    (word leftSuffix rightSide : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word →
+      symbol = cnfMarkFalse) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtLeftWord CNFWorkState.widthRestoreCertificateCounter
+          (word ++ leftSuffix) rightSide) =
+      some (workConfigAtLeftWord
+        CNFWorkState.widthRestoreCertificateCounter leftSuffix
+        (pushWorkLeft word rightSide)) := by
+  apply workRunExact?_scanLeft cnfWorkMachine
+    CNFWorkState.widthRestoreCertificateCounter
+    (fun symbol => symbol = cnfMarkFalse)
+  · intro head leftTail foundRight equal
+    cases equal
+    exact widthRestoreCounter_markFalse_step leftTail foundRight
+  · exact allowed
+
+theorem widthRestoreCounter_boundary_step
+    (leftTail rightSide : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.widthRestoreCertificateCounter
+          (cnfBoundaryGuard :: leftTail) rightSide) =
+      some (workConfigAtLeftWord CNFWorkState.widthRestoreBackFormula
+        leftTail (cnfBoundaryGuard :: rightSide)) := by
+  rfl
+
+theorem widthRestoreCounter_run
+    (counter leftBase rightSide : List WorkSymbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse) :
+    workRunExact? cnfWorkMachine ((1 + counter.length) + 1)
+        (workConfigAtLeftWord CNFWorkState.widthRestoreAssignment
+          (cnfFinish :: pushWorkLeft counter
+            (cnfBoundaryGuard :: leftBase)) rightSide) =
+      some (workConfigAtLeftWord CNFWorkState.widthRestoreBackFormula
+        leftBase
+        (cnfBoundaryGuard :: (counter ++ cnfFinish :: rightSide))) := by
+  have hFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (widthRestoreAssignment_finish_step
+      (pushWorkLeft counter (cnfBoundaryGuard :: leftBase)) rightSide)
+  have reversedAllowed : ∀ symbol,
+      List.Mem symbol (pushWorkLeft counter []) →
+        symbol = cnfMarkFalse := by
+    intro symbol member
+    exact pushWorkLeft_allowed (fun candidate => candidate = cnfMarkFalse)
+      counter [] counterAllowed
+      (by intro candidate impossible; contradiction) symbol member
+  have hCounter := widthRestoreCounter_scan
+    (pushWorkLeft counter []) (cnfBoundaryGuard :: leftBase)
+    (cnfFinish :: rightSide) reversedAllowed
+  have counterLength : (pushWorkLeft counter []).length = counter.length := by
+    rw [pushWorkLeft_length]
+    exact Nat.add_zero counter.length
+  rw [counterLength] at hCounter
+  rw [pushWorkLeft_append_far] at hFinish
+  have throughCounter := workRunExact?_compose cnfWorkMachine 1
+    counter.length _ _ _ hFinish hCounter
+  rw [pushWorkLeft_cancel] at throughCounter
+  have hBoundary := workRunExact?_one_of_step cnfWorkMachine _ _
+    (widthRestoreCounter_boundary_step leftBase
+      (counter ++ cnfFinish :: rightSide))
+  have complete := workRunExact?_compose cnfWorkMachine
+    (1 + counter.length) 1 _ _ _ throughCounter hBoundary
+  rw [← pushWorkLeft_append_far counter
+    (cnfBoundaryGuard :: leftBase)] at complete
+  exact complete
+
+theorem widthRestoreBackFormula_scan
+    (word leftSuffix rightSide : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word →
+      FormulaOrCounterSymbol symbol) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtLeftWord CNFWorkState.widthRestoreBackFormula
+          (word ++ leftSuffix) rightSide) =
+      some (workConfigAtLeftWord CNFWorkState.widthRestoreBackFormula
+        leftSuffix (pushWorkLeft word rightSide)) := by
+  exact workRunExact?_scanLeft cnfWorkMachine
+    CNFWorkState.widthRestoreBackFormula FormulaOrCounterSymbol
+    widthRestoreBackFormula_step word leftSuffix rightSide allowed
+
+theorem widthRestoreBackFormula_root_step
+    (leftTail rightSide : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.widthRestoreBackFormula
+          (cnfRootGuard :: leftTail) rightSide) =
+      some (workConfigAtWord CNFWorkState.widthRestoreSeekFormula
+        (cnfRootGuard :: leftTail) rightSide) := by
+  cases rightSide <;> rfl
+
+theorem widthRestorePhysical_run
+    (physical rightSide : List WorkSymbol)
+    (physicalAllowed : ∀ symbol, List.Mem symbol physical →
+      FormulaOrCounterSymbol symbol) :
+    workRunExact? cnfWorkMachine (physical.length + 1)
+        (workConfigAtLeftWord CNFWorkState.widthRestoreBackFormula
+          (pushWorkLeft physical [] ++ [cnfRootGuard]) rightSide) =
+      some (workConfigAtWord CNFWorkState.widthRestoreSeekFormula
+        [cnfRootGuard] (physical ++ rightSide)) := by
+  have reversedAllowed : ∀ symbol,
+      List.Mem symbol (pushWorkLeft physical []) →
+        FormulaOrCounterSymbol symbol := by
+    intro symbol member
+    exact pushWorkLeft_allowed FormulaOrCounterSymbol physical []
+      physicalAllowed (by intro candidate impossible; contradiction)
+      symbol member
+  have hPhysical := widthRestoreBackFormula_scan
+    (pushWorkLeft physical []) [cnfRootGuard] rightSide reversedAllowed
+  have physicalLength :
+      (pushWorkLeft physical []).length = physical.length := by
+    rw [pushWorkLeft_length]
+    exact Nat.add_zero physical.length
+  rw [physicalLength] at hPhysical
+  rw [pushWorkLeft_cancel] at hPhysical
+  have hRoot := workRunExact?_one_of_step cnfWorkMachine _ _
+    (widthRestoreBackFormula_root_step [] (physical ++ rightSide))
+  exact workRunExact?_compose cnfWorkMachine physical.length 1
+    _ _ _ hPhysical hRoot
+
+theorem widthRestoreSeekFormula_counter_step
+    (leftSide suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.widthRestoreSeekFormula leftSide
+          (cnfMarkFalse :: suffix)) =
+      some (workConfigAtWord CNFWorkState.widthRestoreSeekFormula
+        (cnfMarkFalse :: leftSide) suffix) := by
+  rfl
+
+theorem widthRestoreSeekFormula_counter_scan
+    (word suffix leftSide : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word →
+      symbol = cnfMarkFalse) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtWord CNFWorkState.widthRestoreSeekFormula leftSide
+          (word ++ suffix)) =
+      some (workConfigAtWord CNFWorkState.widthRestoreSeekFormula
+        (pushWorkLeft word leftSide) suffix) := by
+  exact workRunExact?_scanRight cnfWorkMachine
+    CNFWorkState.widthRestoreSeekFormula
+    (fun symbol => symbol = cnfMarkFalse)
+    (by
+      intro foundLeft head foundSuffix equal
+      cases equal
+      exact widthRestoreSeekFormula_counter_step foundLeft foundSuffix)
+    word suffix leftSide allowed
+
+theorem widthRestoreSeekFormula_finish_step
+    (leftSide suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.widthRestoreSeekFormula leftSide
+          (cnfFinish :: suffix)) =
+      some (workConfigAtWord CNFWorkState.widthRestoreFormula
+        (cnfFinish :: leftSide) suffix) := by
+  rfl
+
+theorem widthRestoreSeekCounter_run
+    (outerCounter headerTail : List WorkSymbol)
+    (outerAllowed : ∀ symbol, List.Mem symbol outerCounter →
+      symbol = cnfMarkFalse) :
+    workRunExact? cnfWorkMachine (outerCounter.length + 1)
+        (workConfigAtWord CNFWorkState.widthRestoreSeekFormula
+          [cnfRootGuard]
+          (outerCounter ++ cnfFinish :: headerTail)) =
+      some (workConfigAtWord CNFWorkState.widthRestoreFormula
+        (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard])
+        headerTail) := by
+  have hCounter := widthRestoreSeekFormula_counter_scan outerCounter
+    (cnfFinish :: headerTail) [cnfRootGuard] outerAllowed
+  have hFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (widthRestoreSeekFormula_finish_step
+      (pushWorkLeft outerCounter [cnfRootGuard]) headerTail)
+  exact workRunExact?_compose cnfWorkMachine outerCounter.length 1
+    _ _ _ hCounter hFinish
+
+def widthTerminalPhysical (outerCounter : List WorkSymbol)
+    (count : Nat) (formulaTail : List WorkSymbol) : List WorkSymbol :=
+  outerCounter ++
+    cnfFinish ::
+      (List.replicate count cnfMarkTrue ++ cnfF :: formulaTail)
+
+theorem widthTerminalPhysical_push (outerCounter : List WorkSymbol)
+    (count : Nat) (formulaTail : List WorkSymbol) :
+    pushWorkLeft formulaTail
+        (cnfF ::
+          pushWorkLeft (List.replicate count cnfMarkTrue)
+            (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard])) =
+      pushWorkLeft (widthTerminalPhysical outerCounter count formulaTail) [] ++
+        [cnfRootGuard] := by
+  calc
+    pushWorkLeft formulaTail
+        (cnfF ::
+          pushWorkLeft (List.replicate count cnfMarkTrue)
+            (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard])) =
+      pushWorkLeft (cnfF :: formulaTail)
+        (pushWorkLeft (List.replicate count cnfMarkTrue)
+          (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard])) := rfl
+    _ = pushWorkLeft
+        (List.replicate count cnfMarkTrue ++ cnfF :: formulaTail)
+        (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard]) :=
+      (pushWorkLeft_append_word (List.replicate count cnfMarkTrue)
+        (cnfF :: formulaTail)
+        (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard])).symm
+    _ = pushWorkLeft
+        (cnfFinish ::
+          (List.replicate count cnfMarkTrue ++ cnfF :: formulaTail))
+        (pushWorkLeft outerCounter [cnfRootGuard]) := rfl
+    _ = pushWorkLeft
+        (outerCounter ++
+          cnfFinish ::
+            (List.replicate count cnfMarkTrue ++ cnfF :: formulaTail))
+        [cnfRootGuard] :=
+      (pushWorkLeft_append_word outerCounter
+        (cnfFinish ::
+          (List.replicate count cnfMarkTrue ++ cnfF :: formulaTail))
+        [cnfRootGuard]).symm
+    _ = pushWorkLeft
+        (widthTerminalPhysical outerCounter count formulaTail) [] ++
+          [cnfRootGuard] := by
+      unfold widthTerminalPhysical
+      rw [pushWorkLeft_append_far]
+
+theorem widthTerminalPhysical_allowed
+    (outerCounter : List WorkSymbol) (count : Nat)
+    (formulaTail : List WorkSymbol)
+    (outerAllowed : ∀ symbol, List.Mem symbol outerCounter →
+      symbol = cnfMarkFalse)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaTail →
+      FormulaScanSymbol symbol)
+    (symbol : WorkSymbol)
+    (member : List.Mem symbol
+      (widthTerminalPhysical outerCounter count formulaTail)) :
+    FormulaOrCounterSymbol symbol := by
+  unfold widthTerminalPhysical at member
+  apply allowed_append FormulaOrCounterSymbol outerCounter
+    (cnfFinish ::
+      (List.replicate count cnfMarkTrue ++ cnfF :: formulaTail))
+  · intro candidate inOuter
+    have equal := outerAllowed candidate inOuter
+    cases equal
+    exact .markFalse
+  · intro candidate inTail
+    cases inTail with
+    | head => exact .finish
+    | tail _ inHeaderFormula =>
+        apply allowed_append FormulaOrCounterSymbol
+          (List.replicate count cnfMarkTrue) (cnfF :: formulaTail)
+        · intro headerSymbol headerMember
+          have equal := FrameTraceDesign.mem_replicate_workSymbol_eq
+            count cnfMarkTrue headerSymbol headerMember
+          cases equal
+          exact .markTrue
+        · intro tailSymbol tailMember
+          cases tailMember with
+          | head => exact .f
+          | tail _ inFormula =>
+              exact formulaScan_to_formulaOrCounter tailSymbol
+                (formulaAllowed tailSymbol inFormula)
+        · exact inHeaderFormula
+  · exact member
+
+def widthTerminalSteps (outerCounter counter : List WorkSymbol)
+    (count : Nat) (formulaTail : List WorkSymbol)
+    (assignment : BitString) : Nat :=
+  let doneSteps :=
+    (((((formulaTail.length + 1) + counter.length + 1) +
+      assignment.length) + 1) + assignment.length)
+  let restoreCounterSteps := (1 + counter.length) + 1
+  let physicalSteps :=
+    (widthTerminalPhysical outerCounter count formulaTail).length + 1
+  let seekSteps := outerCounter.length + 1
+  ((((1 + doneSteps) + restoreCounterSteps) + physicalSteps) + seekSteps) +
+    (count + 1)
+
+theorem widthTerminal_success_exact
+    (outerCounter counter formulaTail : List WorkSymbol)
+    (count : Nat) (assignment : BitString) (suffix : List WorkSymbol)
+    (outerAllowed : ∀ symbol, List.Mem symbol outerCounter →
+      symbol = cnfMarkFalse)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaTail →
+      FormulaScanSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (widthTerminalSteps outerCounter counter count formulaTail assignment)
+        (workConfigAtWord CNFWorkState.widthFindFormula
+          (pushWorkLeft (List.replicate count cnfMarkTrue)
+            (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard]))
+          (cnfF ::
+            (formulaTail ++
+              (cnfBoundaryGuard ::
+                (counter ++
+                  (cnfFinish ::
+                    (markedAssignmentWorkSymbols assignment ++
+                      cnfRootGuard :: suffix))))))) =
+      some (workConfigAtWord CNFWorkState.clauseStart
+        (cnfF ::
+          pushWorkLeft (List.replicate count cnfT)
+            (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard]))
+        (formulaTail ++
+          (cnfBoundaryGuard ::
+            (counter ++
+              (cnfFinish ::
+                (assignmentWorkSymbols assignment ++
+                  cnfRootGuard :: suffix)))))) := by
+  let returnTail := cnfBoundaryGuard ::
+    (counter ++
+      (cnfFinish ::
+        (assignmentWorkSymbols assignment ++ cnfRootGuard :: suffix)))
+  let leftBase :=
+    pushWorkLeft (List.replicate count cnfMarkTrue)
+      (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard])
+  have hDone := workRunExact?_one_of_step cnfWorkMachine _ _
+    (widthFindFormula_done_step leftBase
+      (formulaTail ++
+        (cnfBoundaryGuard ::
+          (counter ++
+            (cnfFinish ::
+              (markedAssignmentWorkSymbols assignment ++
+                cnfRootGuard :: suffix))))))
+  have hEqual := width_equal_assignment_restored formulaTail counter
+    (cnfF :: leftBase) suffix assignment formulaAllowed counterAllowed
+  have throughEqual := workRunExact?_compose cnfWorkMachine 1
+    (((((formulaTail.length + 1) + counter.length + 1) +
+      assignment.length) + 1) + assignment.length)
+    _ _ _ hDone hEqual
+  have hCounter := widthRestoreCounter_run counter
+    (pushWorkLeft formulaTail (cnfF :: leftBase))
+    (assignmentWorkSymbols assignment ++ cnfRootGuard :: suffix)
+    counterAllowed
+  have throughCounter := workRunExact?_compose cnfWorkMachine
+    (1 + (((((formulaTail.length + 1) + counter.length + 1) +
+      assignment.length) + 1) + assignment.length))
+    ((1 + counter.length) + 1) _ _ _ throughEqual hCounter
+  rw [widthTerminalPhysical_push] at throughCounter
+  have physicalAllowed := widthTerminalPhysical_allowed outerCounter count
+    formulaTail outerAllowed formulaAllowed
+  have hPhysical := widthRestorePhysical_run
+    (widthTerminalPhysical outerCounter count formulaTail) returnTail
+    physicalAllowed
+  have throughPhysical := workRunExact?_compose cnfWorkMachine
+    ((1 + (((((formulaTail.length + 1) + counter.length + 1) +
+      assignment.length) + 1) + assignment.length)) +
+      ((1 + counter.length) + 1))
+    ((widthTerminalPhysical outerCounter count formulaTail).length + 1)
+    _ _ _ throughCounter hPhysical
+  have physicalSplit :
+      widthTerminalPhysical outerCounter count formulaTail ++ returnTail =
+        outerCounter ++
+          (cnfFinish ::
+            ((List.replicate count cnfMarkTrue ++ cnfF :: formulaTail) ++
+              returnTail)) := by
+    unfold widthTerminalPhysical
+    exact workSymbol_append_assoc outerCounter
+      (cnfFinish ::
+        (List.replicate count cnfMarkTrue ++ cnfF :: formulaTail))
+      returnTail
+  rw [physicalSplit] at throughPhysical
+  have hSeek := widthRestoreSeekCounter_run outerCounter
+    ((List.replicate count cnfMarkTrue ++ cnfF :: formulaTail) ++ returnTail)
+    outerAllowed
+  have throughSeek := workRunExact?_compose cnfWorkMachine
+    (((1 + (((((formulaTail.length + 1) + counter.length + 1) +
+      assignment.length) + 1) + assignment.length)) +
+      ((1 + counter.length) + 1)) +
+      ((widthTerminalPhysical outerCounter count formulaTail).length + 1))
+    (outerCounter.length + 1) _ _ _ throughPhysical hSeek
+  have headerSplit :
+      (List.replicate count cnfMarkTrue ++ cnfF :: formulaTail) ++
+          returnTail =
+        List.replicate count cnfMarkTrue ++
+          cnfF :: (formulaTail ++ returnTail) := by
+    exact workSymbol_append_assoc (List.replicate count cnfMarkTrue)
+      (cnfF :: formulaTail) returnTail
+  rw [headerSplit] at throughSeek
+  have hHeader := widthRestoreFormula_header count
+    (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard])
+    (formulaTail ++ returnTail)
+  have complete := workRunExact?_compose cnfWorkMachine
+    ((((1 + (((((formulaTail.length + 1) + counter.length + 1) +
+      assignment.length) + 1) + assignment.length)) +
+      ((1 + counter.length) + 1)) +
+      ((widthTerminalPhysical outerCounter count formulaTail).length + 1)) +
+      (outerCounter.length + 1))
+    (count + 1) _ _ _ throughSeek hHeader
+  unfold widthTerminalSteps
+  unfold leftBase at complete
+  unfold returnTail at complete
+  exact complete
+
+def widthLoopStepCount (outerCounter counter formulaTail : List WorkSymbol) :
+    BitString → BitString → Nat
+  | processed, [] =>
+      widthTerminalSteps outerCounter counter processed.length formulaTail
+        processed
+  | processed, _value :: rest =>
+      widthOneUnitSteps outerCounter
+          (List.replicate processed.length cnfMarkTrue)
+          (List.replicate rest.length cnfT ++ cnfF :: formulaTail)
+          counter (markedAssignmentWorkSymbols processed) +
+        widthLoopStepCount outerCounter counter formulaTail
+          (processed ++ [_value]) rest
+
+theorem widthLoop_success_exact
+    (outerCounter counter formulaTail : List WorkSymbol)
+    (processed remaining : BitString) (suffix : List WorkSymbol)
+    (outerAllowed : ∀ symbol, List.Mem symbol outerCounter →
+      symbol = cnfMarkFalse)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaTail →
+      FormulaScanSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (widthLoopStepCount outerCounter counter formulaTail
+          processed remaining)
+        (workConfigAtWord CNFWorkState.widthFindFormula
+          (pushWorkLeft (List.replicate processed.length cnfMarkTrue)
+            (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard]))
+          ((List.replicate remaining.length cnfT ++
+              cnfF :: formulaTail) ++
+            (cnfBoundaryGuard ::
+              (counter ++
+                (cnfFinish ::
+                  (markedAssignmentWorkSymbols processed ++
+                    (assignmentWorkSymbols remaining ++
+                      cnfRootGuard :: suffix))))))) =
+      some (workConfigAtWord CNFWorkState.clauseStart
+        (cnfF ::
+          pushWorkLeft
+            (List.replicate (processed.length + remaining.length) cnfT)
+            (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard]))
+        (formulaTail ++
+          (cnfBoundaryGuard ::
+            (counter ++
+              (cnfFinish ::
+                (assignmentWorkSymbols (processed ++ remaining) ++
+                  cnfRootGuard :: suffix)))))) := by
+  induction remaining generalizing processed with
+  | nil =>
+      unfold widthLoopStepCount
+      rw [BitString.append_nil_constructive]
+      change workRunExact? cnfWorkMachine
+          (widthTerminalSteps outerCounter counter processed.length
+            formulaTail processed)
+          (workConfigAtWord CNFWorkState.widthFindFormula
+            (pushWorkLeft (List.replicate processed.length cnfMarkTrue)
+              (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard]))
+            (cnfF ::
+              (formulaTail ++
+                (cnfBoundaryGuard ::
+                  (counter ++
+                    (cnfFinish ::
+                      (markedAssignmentWorkSymbols processed ++
+                        cnfRootGuard :: suffix))))))) = _
+      exact widthTerminal_success_exact outerCounter counter formulaTail
+        processed.length processed suffix outerAllowed counterAllowed
+        formulaAllowed
+  | cons value rest ih =>
+      let nextFormulaTail :=
+        List.replicate rest.length cnfT ++ cnfF :: formulaTail
+      have nextFormulaAllowed : ∀ symbol,
+          List.Mem symbol nextFormulaTail → FormulaScanSymbol symbol := by
+        intro symbol member
+        exact oobFormulaTail_allowed rest.length formulaTail formulaAllowed
+          symbol member
+      have headerAllowed : ∀ symbol,
+          List.Mem symbol (List.replicate processed.length cnfMarkTrue) →
+            symbol = cnfMarkTrue := by
+        intro symbol member
+        exact FrameTraceDesign.mem_replicate_workSymbol_eq
+          processed.length cnfMarkTrue symbol member
+      have hUnit := widthOneUnit_run outerCounter
+        (List.replicate processed.length cnfMarkTrue) nextFormulaTail
+        counter (markedAssignmentWorkSymbols processed)
+        (assignmentWorkSymbols rest ++ cnfRootGuard :: suffix) value
+        outerAllowed headerAllowed
+        nextFormulaAllowed counterAllowed
+        (markedAssignmentWorkSymbols_allowed processed)
+      have hRest := ih (processed ++ [value])
+      rw [length_append_value] at hRest
+      rw [FrameTraceDesign.replicate_succ_tail] at hRest
+      rw [markedAssignment_append_value_tail processed value
+        (assignmentWorkSymbols rest ++ cnfRootGuard :: suffix)] at hRest
+      have markedValueShape :
+          FrameTraceDesign.markedAssignmentValueWorkSymbol value =
+            if value then cnfMarkTrue else cnfMarkFalse := by
+        cases value <;> rfl
+      rw [markedValueShape] at hRest
+      have complete := workRunExact?_compose cnfWorkMachine
+        (widthOneUnitSteps outerCounter
+          (List.replicate processed.length cnfMarkTrue) nextFormulaTail
+          counter (markedAssignmentWorkSymbols processed))
+        (widthLoopStepCount outerCounter counter formulaTail
+          (processed ++ [value]) rest)
+        _ _ _ hUnit hRest
+      unfold widthLoopStepCount
+      unfold nextFormulaTail at complete
+      rw [FrameTraceDesign.replicate_bit_cons_length]
+      rw [FrameTraceDesign.assignmentWorkSymbols_cons]
+      rw [assignmentValueWorkSymbol_eq_if]
+      rw [assignment_append_value_tail processed value rest]
+      rw [List.length_cons]
+      rw [Nat.add_succ]
+      rw [Nat.succ_add] at complete
+      exact complete
+
+theorem seekLeftRoot_formulaOrCounter_step
+    (head : WorkSymbol) (leftTail rightSide : List WorkSymbol)
+    (allowed : FormulaOrCounterSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.seekLeftRoot
+          (head :: leftTail) rightSide) =
+      some (workConfigAtLeftWord CNFWorkState.seekLeftRoot
+        leftTail (head :: rightSide)) := by
+  cases allowed <;> rfl
+
+theorem seekLeftRoot_scan
+    (word leftSuffix rightSide : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word →
+      FormulaOrCounterSymbol symbol) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtLeftWord CNFWorkState.seekLeftRoot
+          (word ++ leftSuffix) rightSide) =
+      some (workConfigAtLeftWord CNFWorkState.seekLeftRoot
+        leftSuffix (pushWorkLeft word rightSide)) := by
+  exact workRunExact?_scanLeft cnfWorkMachine CNFWorkState.seekLeftRoot
+    FormulaOrCounterSymbol seekLeftRoot_formulaOrCounter_step
+    word leftSuffix rightSide allowed
+
+theorem seekLeftRoot_boundary_step
+    (leftTail rightSide : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.seekLeftRoot
+          (cnfBoundaryGuard :: leftTail) rightSide) =
+      some (workConfigAtLeftWord CNFWorkState.seekLeftRoot
+        leftTail (cnfBoundaryGuard :: rightSide)) := by
+  rfl
+
+theorem seekLeftRoot_root_step
+    (leftTail rightSide : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord CNFWorkState.seekLeftRoot
+          (cnfRootGuard :: leftTail) rightSide) =
+      some (workConfigAtWord CNFWorkState.seekFormulaStart
+        (cnfRootGuard :: leftTail) rightSide) := by
+  cases rightSide <;> rfl
+
+def widthSeekPreludeSteps (outerCounter formulaWord counter :
+    List WorkSymbol) : Nat :=
+  ((((((counter.length + 1) + formulaWord.length) + 1) +
+    outerCounter.length) + 1) + outerCounter.length) + 1
+
+theorem widthSeekPrelude_exact
+    (outerCounter formulaWord counter rightSide : List WorkSymbol)
+    (outerAllowed : ∀ symbol, List.Mem symbol outerCounter →
+      symbol = cnfMarkFalse)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaWord →
+      FormulaScanSymbol symbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse) :
+    workRunExact? cnfWorkMachine
+        (widthSeekPreludeSteps outerCounter formulaWord counter)
+        (workConfigAtLeftWord CNFWorkState.seekLeftRoot
+          (pushWorkLeft counter
+            (cnfBoundaryGuard ::
+              pushWorkLeft formulaWord
+                (cnfFinish ::
+                  pushWorkLeft outerCounter [cnfRootGuard])))
+          rightSide) =
+      some (workConfigAtWord CNFWorkState.widthFindFormula
+        (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard])
+        (formulaWord ++
+          (cnfBoundaryGuard :: (counter ++ rightSide)))) := by
+  have reversedCounterAllowed : ∀ symbol,
+      List.Mem symbol (pushWorkLeft counter []) →
+        FormulaOrCounterSymbol symbol := by
+    intro symbol member
+    have equal := pushWorkLeft_allowed
+      (fun candidate => candidate = cnfMarkFalse) counter []
+      counterAllowed (by intro candidate impossible; contradiction)
+      symbol member
+    cases equal
+    exact .markFalse
+  have hCounter := seekLeftRoot_scan (pushWorkLeft counter [])
+    (cnfBoundaryGuard ::
+      pushWorkLeft formulaWord
+        (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard]))
+    rightSide reversedCounterAllowed
+  have counterLength : (pushWorkLeft counter []).length = counter.length := by
+    rw [pushWorkLeft_length]
+    exact Nat.add_zero counter.length
+  rw [counterLength] at hCounter
+  rw [pushWorkLeft_cancel] at hCounter
+  have hBoundary := workRunExact?_one_of_step cnfWorkMachine _ _
+    (seekLeftRoot_boundary_step
+      (pushWorkLeft formulaWord
+        (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard]))
+      (counter ++ rightSide))
+  have throughBoundary := workRunExact?_compose cnfWorkMachine
+    counter.length 1 _ _ _ hCounter hBoundary
+  have reversedFormulaAllowed : ∀ symbol,
+      List.Mem symbol (pushWorkLeft formulaWord []) →
+        FormulaOrCounterSymbol symbol := by
+    intro symbol member
+    have allowed := pushWorkLeft_allowed FormulaScanSymbol formulaWord []
+      formulaAllowed (by intro candidate impossible; contradiction)
+      symbol member
+    exact formulaScan_to_formulaOrCounter symbol allowed
+  have hFormula := seekLeftRoot_scan (pushWorkLeft formulaWord [])
+    (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard])
+    (cnfBoundaryGuard :: counter ++ rightSide) reversedFormulaAllowed
+  have formulaLength :
+      (pushWorkLeft formulaWord []).length = formulaWord.length := by
+    rw [pushWorkLeft_length]
+    exact Nat.add_zero formulaWord.length
+  rw [formulaLength] at hFormula
+  rw [pushWorkLeft_append_far formulaWord
+    (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard])]
+    at throughBoundary
+  have throughFormula := workRunExact?_compose cnfWorkMachine
+    (counter.length + 1) formulaWord.length _ _ _
+    throughBoundary hFormula
+  rw [pushWorkLeft_cancel] at throughFormula
+  have hFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (seekLeftRoot_formulaOrCounter_step cnfFinish
+      (pushWorkLeft outerCounter [cnfRootGuard])
+      (formulaWord ++ (cnfBoundaryGuard :: (counter ++ rightSide)))
+      .finish)
+  have throughFinish := workRunExact?_compose cnfWorkMachine
+    ((counter.length + 1) + formulaWord.length) 1
+    _ _ _ throughFormula hFinish
+  have reversedOuterAllowed : ∀ symbol,
+      List.Mem symbol (pushWorkLeft outerCounter []) →
+        FormulaOrCounterSymbol symbol := by
+    intro symbol member
+    have equal := pushWorkLeft_allowed
+      (fun candidate => candidate = cnfMarkFalse) outerCounter []
+      outerAllowed (by intro candidate impossible; contradiction)
+      symbol member
+    cases equal
+    exact .markFalse
+  have hOuterLeft := seekLeftRoot_scan (pushWorkLeft outerCounter [])
+    [cnfRootGuard]
+    (cnfFinish ::
+      (formulaWord ++ (cnfBoundaryGuard :: (counter ++ rightSide))))
+    reversedOuterAllowed
+  have outerLength :
+      (pushWorkLeft outerCounter []).length = outerCounter.length := by
+    rw [pushWorkLeft_length]
+    exact Nat.add_zero outerCounter.length
+  rw [outerLength] at hOuterLeft
+  rw [pushWorkLeft_append_far outerCounter [cnfRootGuard]] at throughFinish
+  have throughOuterLeft := workRunExact?_compose cnfWorkMachine
+    (((counter.length + 1) + formulaWord.length) + 1)
+    outerCounter.length _ _ _ throughFinish hOuterLeft
+  rw [pushWorkLeft_cancel] at throughOuterLeft
+  have hRoot := workRunExact?_one_of_step cnfWorkMachine _ _
+    (seekLeftRoot_root_step []
+      (outerCounter ++
+        (cnfFinish ::
+          (formulaWord ++
+            (cnfBoundaryGuard :: (counter ++ rightSide))))))
+  have throughRoot := workRunExact?_compose cnfWorkMachine
+    ((((counter.length + 1) + formulaWord.length) + 1) +
+      outerCounter.length) 1 _ _ _ throughOuterLeft hRoot
+  have hOuterRight := seekFormulaStart_counter_scan outerCounter
+    (cnfFinish ::
+      (formulaWord ++ (cnfBoundaryGuard :: (counter ++ rightSide))))
+    [cnfRootGuard] outerAllowed
+  have throughOuterRight := workRunExact?_compose cnfWorkMachine
+    (((((counter.length + 1) + formulaWord.length) + 1) +
+      outerCounter.length) + 1) outerCounter.length
+    _ _ _ throughRoot hOuterRight
+  have hStart := workRunExact?_one_of_step cnfWorkMachine _ _
+    (seekFormulaStart_finish_step
+      (pushWorkLeft outerCounter [cnfRootGuard])
+      (formulaWord ++ (cnfBoundaryGuard :: (counter ++ rightSide))))
+  have complete := workRunExact?_compose cnfWorkMachine
+    ((((((counter.length + 1) + formulaWord.length) + 1) +
+      outerCounter.length) + 1) + outerCounter.length) 1
+    _ _ _ throughOuterRight hStart
+  unfold widthSeekPreludeSteps
+  rw [← pushWorkLeft_append_far outerCounter [cnfRootGuard]] at complete
+  rw [← pushWorkLeft_append_far formulaWord
+    (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard])] at complete
+  rw [← pushWorkLeft_append_far counter
+    (cnfBoundaryGuard ::
+      pushWorkLeft formulaWord
+        (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard]))] at complete
+  exact complete
+
+theorem widthCost_add_scaled (span left right leftUnits rightUnits : Nat)
+    (leftBound : left ≤ span * leftUnits)
+    (rightBound : right ≤ span * rightUnits) :
+    left + right ≤ span * (leftUnits + rightUnits) := by
+  have combined := Nat.add_le_add leftBound rightBound
+  exact Nat.le_trans combined
+    (Nat.le_of_eq (Nat.mul_add span leftUnits rightUnits).symm)
+
+theorem widthCost_promote_scaled (span value small large : Nat)
+    (valueBound : value ≤ span * small) (coefficientBound : small ≤ large) :
+    value ≤ span * large := by
+  exact Nat.le_trans valueBound
+    (Nat.mul_le_mul_left span coefficientBound)
+
+theorem widthOne_le_shiftedSpan (n : Nat) :
+    1 ≤ cnfShiftedWorkSpan n := by
+  unfold cnfShiftedWorkSpan
+  change Nat.succ 0 ≤ Nat.succ (Nat.succ n)
+  exact Nat.succ_le_succ (Nat.zero_le (Nat.succ n))
+
+theorem widthLength_le_shiftedSpan (n length : Nat)
+    (lengthBound : length ≤ n) :
+    length ≤ cnfShiftedWorkSpan n := by
+  exact Nat.le_trans lengthBound (by
+    unfold cnfShiftedWorkSpan
+    exact Nat.le_add_right n 2)
+
+theorem widthLengthSucc_le_shiftedSpan (n length : Nat)
+    (lengthBound : length ≤ n) :
+    length + 1 ≤ cnfShiftedWorkSpan n := by
+  unfold cnfShiftedWorkSpan
+  exact Nat.add_le_add lengthBound (Nat.le_succ 1)
+
+theorem widthDoneEndpointSteps_le_fourSpan (n formulaLength counterLength
+    assignmentLength : Nat)
+    (formulaBound : formulaLength ≤ n)
+    (counterBound : counterLength ≤ n)
+    (assignmentBound : assignmentLength ≤ n) :
+    (((((formulaLength + 1) + counterLength + 1) +
+      assignmentLength) + 1) + assignmentLength) ≤
+      cnfShiftedWorkSpan n * 4 := by
+  have formulaPiece := widthLengthSucc_le_shiftedSpan n formulaLength
+    formulaBound
+  have counterPiece := widthLengthSucc_le_shiftedSpan n counterLength
+    counterBound
+  have assignmentPiece := widthLengthSucc_le_shiftedSpan n assignmentLength
+    assignmentBound
+  have assignmentPlain := widthLength_le_shiftedSpan n assignmentLength
+    assignmentBound
+  have firstPair := widthCost_add_scaled (cnfShiftedWorkSpan n)
+    (formulaLength + 1) (counterLength + 1) 1 1
+    (by rw [Nat.mul_one]; exact formulaPiece)
+    (by rw [Nat.mul_one]; exact counterPiece)
+  have firstThree := widthCost_add_scaled (cnfShiftedWorkSpan n)
+    ((formulaLength + 1) + (counterLength + 1))
+    (assignmentLength + 1) (1 + 1) 1 firstPair
+    (by rw [Nat.mul_one]; exact assignmentPiece)
+  have allFour := widthCost_add_scaled (cnfShiftedWorkSpan n)
+    (((formulaLength + 1) + (counterLength + 1)) +
+      (assignmentLength + 1)) assignmentLength
+    ((1 + 1) + 1) 1 firstThree
+    (by rw [Nat.mul_one]; exact assignmentPlain)
+  rw [Nat.add_assoc (formulaLength + 1) counterLength 1]
+  rw [Nat.add_assoc
+    ((formulaLength + 1) + (counterLength + 1)) assignmentLength 1]
+  exact allFour
+
+theorem widthRestoreCounterSteps_le_span (n counterLength : Nat)
+    (counterBound : counterLength ≤ n) :
+    (1 + counterLength) + 1 ≤ cnfShiftedWorkSpan n := by
+  have first := Nat.add_le_add (Nat.le_refl 1) counterBound
+  have complete := Nat.add_le_add first (Nat.le_refl 1)
+  unfold cnfShiftedWorkSpan
+  rw [Nat.add_comm 1 n] at complete
+  exact complete
+
+theorem width_add_three_succ_reorder (a b c : Nat) :
+    a + ((b + (c + 1)) + 1) + 1 =
+      ((a + 1) + (b + 1)) + (c + 1) := by
+  calc
+    a + ((b + (c + 1)) + 1) + 1 =
+        (a + b) + ((c + 1) + (1 + 1)) := by
+      rw [Nat.add_assoc b (c + 1) 1]
+      rw [← Nat.add_assoc a b ((c + 1) + 1)]
+      rw [Nat.add_assoc (a + b) ((c + 1) + 1) 1]
+    _ = ((a + 1) + (b + 1)) + (c + 1) := by
+      rw [FrameTraceDesign.frame_add_four_reorder a 1 b 1]
+      rw [Nat.add_assoc (a + b) (1 + 1) (c + 1)]
+      rw [Nat.add_comm (1 + 1) (c + 1)]
+
+theorem widthTerminalPhysicalSteps_le_threeSpan (n count : Nat)
+    (outerCounter formulaTail : List WorkSymbol)
+    (outerBound : outerCounter.length ≤ n)
+    (countBound : count ≤ n)
+    (formulaBound : formulaTail.length ≤ n) :
+    (widthTerminalPhysical outerCounter count formulaTail).length + 1 ≤
+      cnfShiftedWorkSpan n * 3 := by
+  have outerPiece := widthLengthSucc_le_shiftedSpan n outerCounter.length
+    outerBound
+  have countPiece := widthLengthSucc_le_shiftedSpan n count countBound
+  have formulaPiece := widthLengthSucc_le_shiftedSpan n formulaTail.length
+    formulaBound
+  have firstPair := widthCost_add_scaled (cnfShiftedWorkSpan n)
+    (outerCounter.length + 1) (count + 1) 1 1
+    (by rw [Nat.mul_one]; exact outerPiece)
+    (by rw [Nat.mul_one]; exact countPiece)
+  have allThree := widthCost_add_scaled (cnfShiftedWorkSpan n)
+    ((outerCounter.length + 1) + (count + 1))
+    (formulaTail.length + 1) (1 + 1) 1 firstPair
+    (by rw [Nat.mul_one]; exact formulaPiece)
+  unfold widthTerminalPhysical
+  rw [workSymbol_length_append]
+  change outerCounter.length +
+      ((List.replicate count cnfMarkTrue ++
+        cnfF :: formulaTail).length + 1) + 1 ≤ _
+  rw [workSymbol_length_append]
+  rw [workSymbol_replicate_length]
+  change outerCounter.length +
+      ((count + (formulaTail.length + 1)) + 1) + 1 ≤ _
+  rw [width_add_three_succ_reorder]
+  exact allThree
+
+theorem widthSeekPreludeSteps_le_fourSpan (n : Nat)
+    (outerCounter formulaWord counter : List WorkSymbol)
+    (outerBound : outerCounter.length ≤ n)
+    (formulaBound : formulaWord.length ≤ n)
+    (counterBound : counter.length ≤ n) :
+    widthSeekPreludeSteps outerCounter formulaWord counter ≤
+      cnfShiftedWorkSpan n * 4 := by
+  have counterPiece := widthLengthSucc_le_shiftedSpan n counter.length
+    counterBound
+  have formulaPiece := widthLengthSucc_le_shiftedSpan n formulaWord.length
+    formulaBound
+  have outerPiece := widthLengthSucc_le_shiftedSpan n outerCounter.length
+    outerBound
+  have firstPair := widthCost_add_scaled (cnfShiftedWorkSpan n)
+    (counter.length + 1) (formulaWord.length + 1) 1 1
+    (by rw [Nat.mul_one]; exact counterPiece)
+    (by rw [Nat.mul_one]; exact formulaPiece)
+  have firstThree := widthCost_add_scaled (cnfShiftedWorkSpan n)
+    ((counter.length + 1) + (formulaWord.length + 1))
+    (outerCounter.length + 1) (1 + 1) 1 firstPair
+    (by rw [Nat.mul_one]; exact outerPiece)
+  have allFour := widthCost_add_scaled (cnfShiftedWorkSpan n)
+    (((counter.length + 1) + (formulaWord.length + 1)) +
+      (outerCounter.length + 1))
+    (outerCounter.length + 1) ((1 + 1) + 1) 1 firstThree
+    (by rw [Nat.mul_one]; exact outerPiece)
+  unfold widthSeekPreludeSteps
+  rw [Nat.add_assoc (counter.length + 1) formulaWord.length 1]
+  rw [Nat.add_assoc
+    ((counter.length + 1) + (formulaWord.length + 1))
+    outerCounter.length 1]
+  rw [Nat.add_assoc
+    (((counter.length + 1) + (formulaWord.length + 1)) +
+      (outerCounter.length + 1)) outerCounter.length 1]
+  exact allFour
+
+theorem widthTerminalSteps_le_twelveSpan (n count : Nat)
+    (outerCounter counter formulaTail : List WorkSymbol)
+    (assignment : BitString)
+    (outerBound : outerCounter.length ≤ n)
+    (counterBound : counter.length ≤ n)
+    (countBound : count ≤ n)
+    (formulaBound : formulaTail.length ≤ n)
+    (assignmentBound : assignment.length ≤ n) :
+    widthTerminalSteps outerCounter counter count formulaTail assignment ≤
+      cnfShiftedWorkSpan n * 12 := by
+  let span := cnfShiftedWorkSpan n
+  have onePiece : 1 ≤ span * 1 := by
+    rw [Nat.mul_one]
+    exact widthOne_le_shiftedSpan n
+  have donePiece :
+      (((((formulaTail.length + 1) + counter.length + 1) +
+        assignment.length) + 1) + assignment.length) ≤ span * 4 :=
+    widthDoneEndpointSteps_le_fourSpan n formulaTail.length counter.length
+      assignment.length formulaBound counterBound assignmentBound
+  have restoreRaw := widthRestoreCounterSteps_le_span n counter.length
+    counterBound
+  have restorePiece : (1 + counter.length) + 1 ≤ span * 1 := by
+    rw [Nat.mul_one]
+    exact restoreRaw
+  have physicalPiece := widthTerminalPhysicalSteps_le_threeSpan n count
+    outerCounter formulaTail outerBound countBound formulaBound
+  have seekRaw := widthLengthSucc_le_shiftedSpan n outerCounter.length
+    outerBound
+  have seekPiece : outerCounter.length + 1 ≤ span * 1 := by
+    rw [Nat.mul_one]
+    exact seekRaw
+  have countRaw := widthLengthSucc_le_shiftedSpan n count countBound
+  have countPiece : count + 1 ≤ span * 1 := by
+    rw [Nat.mul_one]
+    exact countRaw
+  have throughDone := widthCost_add_scaled span 1
+    (((((formulaTail.length + 1) + counter.length + 1) +
+      assignment.length) + 1) + assignment.length)
+    1 4 onePiece donePiece
+  have throughRestore := widthCost_add_scaled span
+    (1 + (((((formulaTail.length + 1) + counter.length + 1) +
+      assignment.length) + 1) + assignment.length))
+    ((1 + counter.length) + 1) (1 + 4) 1 throughDone restorePiece
+  have throughPhysical := widthCost_add_scaled span
+    ((1 + (((((formulaTail.length + 1) + counter.length + 1) +
+      assignment.length) + 1) + assignment.length)) +
+      ((1 + counter.length) + 1))
+    ((widthTerminalPhysical outerCounter count formulaTail).length + 1)
+    ((1 + 4) + 1) 3 throughRestore physicalPiece
+  have throughSeek := widthCost_add_scaled span
+    (((1 + (((((formulaTail.length + 1) + counter.length + 1) +
+      assignment.length) + 1) + assignment.length)) +
+      ((1 + counter.length) + 1)) +
+      ((widthTerminalPhysical outerCounter count formulaTail).length + 1))
+    (outerCounter.length + 1) (((1 + 4) + 1) + 3) 1
+    throughPhysical seekPiece
+  have complete := widthCost_add_scaled span
+    ((((1 + (((((formulaTail.length + 1) + counter.length + 1) +
+      assignment.length) + 1) + assignment.length)) +
+      ((1 + counter.length) + 1)) +
+      ((widthTerminalPhysical outerCounter count formulaTail).length + 1)) +
+      (outerCounter.length + 1))
+    (count + 1) ((((1 + 4) + 1) + 3) + 1) 1
+    throughSeek countPiece
+  apply widthCost_promote_scaled span
+    (widthTerminalSteps outerCounter counter count formulaTail assignment)
+    (((((1 + 4) + 1) + 3) + 1) + 1) 12
+  · unfold widthTerminalSteps
+    exact complete
+  · change 11 ≤ 11 + 1
+    exact Nat.le_add_right 11 1
+
+theorem widthOneUnitSteps_le_twelveSpan (n : Nat)
+    (outerCounter headerPrefix formulaTail counter markedAssignment :
+      List WorkSymbol)
+    (formulaPartition :
+      headerPrefix.length + 1 + formulaTail.length ≤ outerCounter.length)
+    (assignmentPrefix : markedAssignment.length ≤ counter.length)
+    (outerBound : outerCounter.length ≤ n)
+    (counterBound : counter.length ≤ n) :
+    widthOneUnitSteps outerCounter headerPrefix formulaTail counter
+        markedAssignment ≤ cnfShiftedWorkSpan n * 12 := by
+  have eightBound := widthOneUnitSteps_le_eightSpan n outerCounter
+    headerPrefix formulaTail counter markedAssignment formulaPartition
+    assignmentPrefix outerBound counterBound
+  apply widthCost_promote_scaled (cnfShiftedWorkSpan n)
+    (widthOneUnitSteps outerCounter headerPrefix formulaTail counter
+      markedAssignment) 8 12 eightBound
+  change 8 ≤ 8 + 4
+  exact Nat.le_add_right 8 4
+
+theorem width_add_succ_swap (left right : Nat) :
+    left + (right + 1) = (left + 1) + right := by
+  calc
+    left + (right + 1) = left + (1 + right) :=
+      congrArg (Nat.add left) (Nat.add_comm right 1)
+    _ = (left + 1) + right := (Nat.add_assoc left 1 right).symm
+
+theorem width_formula_cons_reorder (processed rest tail : Nat) :
+    (processed + (rest + 1) + 1) + tail =
+      (processed + 1) + (rest + (tail + 1)) := by
+  rw [width_add_succ_swap processed rest]
+  rw [Nat.add_assoc (processed + 1) rest 1]
+  rw [Nat.add_assoc (processed + 1) (rest + 1) tail]
+  rw [Nat.add_assoc rest 1 tail]
+  rw [Nat.add_comm 1 tail]
+
+theorem widthCharge_plus_successor_mul (index charge : Nat) :
+    charge + (index + 1) * charge =
+      (Nat.succ index + 1) * charge := by
+  change charge + Nat.succ index * charge =
+    Nat.succ (Nat.succ index) * charge
+  calc
+    charge + Nat.succ index * charge =
+        charge + (index * charge + charge) :=
+      congrArg (Nat.add charge) (Nat.succ_mul index charge)
+    _ = (index * charge + charge) + charge := by
+      rw [← Nat.add_assoc]
+      rw [Nat.add_comm charge (index * charge)]
+    _ = Nat.succ index * charge + charge :=
+      congrArg (fun value => value + charge)
+        (Nat.succ_mul index charge).symm
+    _ = Nat.succ (Nat.succ index) * charge :=
+      (Nat.succ_mul (Nat.succ index) charge).symm
+
+theorem widthLoopStepCount_le_charges (n : Nat)
+    (outerCounter counter formulaTail : List WorkSymbol)
+    (processed remaining : BitString)
+    (formulaPartition :
+      (processed.length + remaining.length + 1) + formulaTail.length ≤
+        outerCounter.length)
+    (assignmentPartition :
+      processed.length + remaining.length ≤ counter.length)
+    (outerBound : outerCounter.length ≤ n)
+    (counterBound : counter.length ≤ n) :
+    widthLoopStepCount outerCounter counter formulaTail processed remaining ≤
+      (remaining.length + 1) * (cnfShiftedWorkSpan n * 12) := by
+  induction remaining generalizing processed with
+  | nil =>
+      have processedToCounter : processed.length ≤ counter.length := by
+        change processed.length + 0 ≤ counter.length at assignmentPartition
+        exact assignmentPartition
+      have processedBound := Nat.le_trans processedToCounter counterBound
+      have formulaToOuter : formulaTail.length ≤ outerCounter.length :=
+        Nat.le_trans
+          (Nat.le_add_left formulaTail.length
+            (processed.length + [].length + 1))
+          formulaPartition
+      have formulaBound := Nat.le_trans formulaToOuter outerBound
+      have terminalBound := widthTerminalSteps_le_twelveSpan n
+        processed.length outerCounter counter formulaTail processed outerBound
+        counterBound processedBound formulaBound processedBound
+      unfold widthLoopStepCount
+      exact Nat.le_trans terminalBound
+        (Nat.le_of_eq (Nat.one_mul (cnfShiftedWorkSpan n * 12)).symm)
+  | cons value rest ih =>
+      let nextFormulaTail :=
+        List.replicate rest.length cnfT ++ cnfF :: formulaTail
+      have unitFormulaPartition :
+          (List.replicate processed.length cnfMarkTrue).length + 1 +
+              nextFormulaTail.length ≤ outerCounter.length := by
+        unfold nextFormulaTail
+        rw [workSymbol_replicate_length]
+        rw [workSymbol_length_append]
+        rw [workSymbol_replicate_length]
+        change (processed.length + 1) +
+            (rest.length + (formulaTail.length + 1)) ≤ outerCounter.length
+        rw [← width_formula_cons_reorder]
+        exact formulaPartition
+      have processedToCounter : processed.length ≤ counter.length :=
+        Nat.le_trans
+          (Nat.le_add_right processed.length (value :: rest).length)
+          assignmentPartition
+      have markedToCounter :
+          (markedAssignmentWorkSymbols processed).length ≤ counter.length := by
+        rw [markedAssignmentWorkSymbols_length]
+        exact processedToCounter
+      have unitBound := widthOneUnitSteps_le_twelveSpan n outerCounter
+        (List.replicate processed.length cnfMarkTrue) nextFormulaTail
+        counter (markedAssignmentWorkSymbols processed)
+        unitFormulaPartition markedToCounter outerBound counterBound
+      have nextFormulaPartition :
+          ((processed ++ [value]).length + rest.length + 1) +
+              formulaTail.length ≤ outerCounter.length := by
+        rw [length_append_value]
+        change (((processed.length + 1) + rest.length) + 1) +
+            formulaTail.length ≤ outerCounter.length
+        rw [← width_add_succ_swap processed.length rest.length]
+        exact formulaPartition
+      have nextAssignmentPartition :
+          (processed ++ [value]).length + rest.length ≤ counter.length := by
+        rw [length_append_value]
+        change (processed.length + 1) + rest.length ≤ counter.length
+        rw [← width_add_succ_swap processed.length rest.length]
+        exact assignmentPartition
+      have restBound := ih (processed ++ [value]) nextFormulaPartition
+        nextAssignmentPartition
+      have combined := Nat.add_le_add unitBound restBound
+      unfold widthLoopStepCount
+      unfold nextFormulaTail at combined
+      exact Nat.le_trans combined
+        (Nat.le_of_eq
+          (widthCharge_plus_successor_mul rest.length
+            (cnfShiftedWorkSpan n * 12)))
+
+def widthTerminalRejectSteps
+    (formulaTail counter markedAssignment : List WorkSymbol) : Nat :=
+  (((formulaTail.length + 1) + counter.length + 1) +
+    markedAssignment.length) + 1
+
+def widthMismatchStepCount
+    (outerCounter counter formulaTail : List WorkSymbol)
+    (processed : BitString) : Nat → BitString → Nat
+  | 0, [] => 0
+  | 0, _extra :: _rest =>
+      1 + widthTerminalRejectSteps formulaTail counter
+        (markedAssignmentWorkSymbols processed)
+  | Nat.succ count, [] =>
+      1 + widthTerminalRejectSteps
+        (List.replicate count cnfT ++ cnfF :: formulaTail) counter
+        (markedAssignmentWorkSymbols processed)
+  | Nat.succ count, value :: rest =>
+      widthOneUnitSteps outerCounter
+          (List.replicate processed.length cnfMarkTrue)
+          (List.replicate count cnfT ++ cnfF :: formulaTail)
+          counter (markedAssignmentWorkSymbols processed) +
+        widthMismatchStepCount outerCounter counter formulaTail
+          (processed ++ [value]) count rest
+
+theorem widthTerminalRejectSteps_le_fourSpan (n : Nat)
+    (formulaTail counter markedAssignment : List WorkSymbol)
+    (formulaBound : formulaTail.length ≤ n)
+    (counterBound : counter.length ≤ n)
+    (assignmentBound : markedAssignment.length ≤ n) :
+    1 + widthTerminalRejectSteps formulaTail counter markedAssignment ≤
+      cnfShiftedWorkSpan n * 4 := by
+  have formulaRaw := widthLengthSucc_le_shiftedSpan n formulaTail.length
+    formulaBound
+  have formulaPiece : formulaTail.length + 1 ≤
+      cnfShiftedWorkSpan n * 1 := by
+    rw [Nat.mul_one]
+    exact formulaRaw
+  have counterRaw := widthLengthSucc_le_shiftedSpan n counter.length
+    counterBound
+  have counterPiece : counter.length + 1 ≤
+      cnfShiftedWorkSpan n * 1 := by
+    rw [Nat.mul_one]
+    exact counterRaw
+  have assignmentRaw := widthLengthSucc_le_shiftedSpan n
+    markedAssignment.length assignmentBound
+  have assignmentPiece : markedAssignment.length + 1 ≤
+      cnfShiftedWorkSpan n * 1 := by
+    rw [Nat.mul_one]
+    exact assignmentRaw
+  have onePiece : 1 ≤ cnfShiftedWorkSpan n * 1 := by
+    rw [Nat.mul_one]
+    exact widthOne_le_shiftedSpan n
+  have firstPair := widthCost_add_scaled (cnfShiftedWorkSpan n)
+    (formulaTail.length + 1) (counter.length + 1) 1 1
+    formulaPiece counterPiece
+  have firstThree := widthCost_add_scaled (cnfShiftedWorkSpan n)
+    ((formulaTail.length + 1) + (counter.length + 1))
+    (markedAssignment.length + 1) (1 + 1) 1 firstPair assignmentPiece
+  have allFour := widthCost_add_scaled (cnfShiftedWorkSpan n)
+    (((formulaTail.length + 1) + (counter.length + 1)) +
+      (markedAssignment.length + 1)) 1 ((1 + 1) + 1) 1
+    firstThree onePiece
+  unfold widthTerminalRejectSteps
+  rw [Nat.add_comm 1
+    (((((formulaTail.length + 1) + counter.length + 1) +
+      markedAssignment.length) + 1))]
+  rw [Nat.add_assoc (formulaTail.length + 1) counter.length 1]
+  rw [Nat.add_assoc
+    ((formulaTail.length + 1) + (counter.length + 1))
+    markedAssignment.length 1]
+  exact allFour
+
+theorem widthMismatchStepCount_le_charges (n : Nat)
+    (outerCounter counter formulaTail : List WorkSymbol)
+    (processed remaining : BitString) (headerCount : Nat)
+    (formulaPartition :
+      (processed.length + headerCount + 1) + formulaTail.length ≤
+        outerCounter.length)
+    (assignmentPartition :
+      processed.length + remaining.length ≤ counter.length)
+    (outerBound : outerCounter.length ≤ n)
+    (counterBound : counter.length ≤ n) :
+    widthMismatchStepCount outerCounter counter formulaTail processed
+        headerCount remaining ≤
+      (headerCount + 1) * (cnfShiftedWorkSpan n * 12) := by
+  induction headerCount generalizing processed remaining with
+  | zero =>
+      cases remaining with
+      | nil =>
+          unfold widthMismatchStepCount
+          exact Nat.zero_le (1 * (cnfShiftedWorkSpan n * 12))
+      | cons extra rest =>
+          have formulaToOuter : formulaTail.length ≤ outerCounter.length :=
+            Nat.le_trans
+              (Nat.le_add_left formulaTail.length
+                (processed.length + 0 + 1))
+              formulaPartition
+          have formulaBound := Nat.le_trans formulaToOuter outerBound
+          have processedToCounter : processed.length ≤ counter.length :=
+            Nat.le_trans
+              (Nat.le_add_right processed.length (extra :: rest).length)
+              assignmentPartition
+          have markedBound :
+              (markedAssignmentWorkSymbols processed).length ≤ n := by
+            rw [markedAssignmentWorkSymbols_length]
+            exact Nat.le_trans processedToCounter counterBound
+          have rejectBound := widthTerminalRejectSteps_le_fourSpan n
+            formulaTail counter (markedAssignmentWorkSymbols processed)
+            formulaBound counterBound markedBound
+          have rejectCharge := widthCost_promote_scaled
+            (cnfShiftedWorkSpan n)
+            (1 + widthTerminalRejectSteps formulaTail counter
+              (markedAssignmentWorkSymbols processed))
+            4 12 rejectBound (by
+              change 4 ≤ 4 + 8
+              exact Nat.le_add_right 4 8)
+          unfold widthMismatchStepCount
+          exact Nat.le_trans rejectCharge
+            (Nat.le_of_eq (Nat.one_mul
+              (cnfShiftedWorkSpan n * 12)).symm)
+  | succ count ih =>
+      cases remaining with
+      | nil =>
+          let shortFormulaTail :=
+            List.replicate count cnfT ++ cnfF :: formulaTail
+          have shortToOuter : shortFormulaTail.length ≤
+              outerCounter.length := by
+            have withPrefix :
+                (processed.length + 1) + shortFormulaTail.length ≤
+                  outerCounter.length := by
+              unfold shortFormulaTail
+              rw [workSymbol_length_append]
+              rw [workSymbol_replicate_length]
+              change (processed.length + 1) +
+                  (count + (formulaTail.length + 1)) ≤
+                outerCounter.length
+              rw [← width_formula_cons_reorder]
+              exact formulaPartition
+            exact Nat.le_trans
+              (Nat.le_add_left shortFormulaTail.length
+                (processed.length + 1)) withPrefix
+          have shortBound := Nat.le_trans shortToOuter outerBound
+          have processedToCounter : processed.length ≤ counter.length := by
+            change processed.length + 0 ≤ counter.length at assignmentPartition
+            exact assignmentPartition
+          have markedBound :
+              (markedAssignmentWorkSymbols processed).length ≤ n := by
+            rw [markedAssignmentWorkSymbols_length]
+            exact Nat.le_trans processedToCounter counterBound
+          have rejectBound := widthTerminalRejectSteps_le_fourSpan n
+            shortFormulaTail counter (markedAssignmentWorkSymbols processed)
+            shortBound counterBound markedBound
+          have rejectCharge := widthCost_promote_scaled
+            (cnfShiftedWorkSpan n)
+            (1 + widthTerminalRejectSteps shortFormulaTail counter
+              (markedAssignmentWorkSymbols processed))
+            4 12 rejectBound (by
+              change 4 ≤ 4 + 8
+              exact Nat.le_add_right 4 8)
+          unfold widthMismatchStepCount
+          unfold shortFormulaTail at rejectCharge
+          exact Nat.le_trans rejectCharge
+            (Nat.le_mul_of_pos_left (cnfShiftedWorkSpan n * 12)
+              (Nat.zero_lt_succ (Nat.succ count)))
+      | cons value rest =>
+          let nextFormulaTail :=
+            List.replicate count cnfT ++ cnfF :: formulaTail
+          have unitFormulaPartition :
+              (List.replicate processed.length cnfMarkTrue).length + 1 +
+                  nextFormulaTail.length ≤ outerCounter.length := by
+            unfold nextFormulaTail
+            rw [workSymbol_replicate_length]
+            rw [workSymbol_length_append]
+            rw [workSymbol_replicate_length]
+            change (processed.length + 1) +
+                (count + (formulaTail.length + 1)) ≤ outerCounter.length
+            rw [← width_formula_cons_reorder]
+            exact formulaPartition
+          have processedToCounter : processed.length ≤ counter.length :=
+            Nat.le_trans
+              (Nat.le_add_right processed.length (value :: rest).length)
+              assignmentPartition
+          have markedToCounter :
+              (markedAssignmentWorkSymbols processed).length ≤
+                counter.length := by
+            rw [markedAssignmentWorkSymbols_length]
+            exact processedToCounter
+          have unitBound := widthOneUnitSteps_le_twelveSpan n outerCounter
+            (List.replicate processed.length cnfMarkTrue) nextFormulaTail
+            counter (markedAssignmentWorkSymbols processed)
+            unitFormulaPartition markedToCounter outerBound counterBound
+          have nextFormulaPartition :
+              ((processed ++ [value]).length + count + 1) +
+                  formulaTail.length ≤ outerCounter.length := by
+            rw [length_append_value]
+            change (((processed.length + 1) + count) + 1) +
+                formulaTail.length ≤ outerCounter.length
+            rw [← width_add_succ_swap processed.length count]
+            exact formulaPartition
+          have nextAssignmentPartition :
+              (processed ++ [value]).length + rest.length ≤
+                counter.length := by
+            rw [length_append_value]
+            change (processed.length + 1) + rest.length ≤ counter.length
+            rw [← width_add_succ_swap processed.length rest.length]
+            exact assignmentPartition
+          have restBound := ih (processed ++ [value]) rest
+            nextFormulaPartition nextAssignmentPartition
+          have combined := Nat.add_le_add unitBound restBound
+          unfold widthMismatchStepCount
+          unfold nextFormulaTail at combined
+          exact Nat.le_trans combined
+            (Nat.le_of_eq
+              (widthCharge_plus_successor_mul count
+                (cnfShiftedWorkSpan n * 12)))
+
+theorem widthMismatch_exact
+    (outerCounter counter formulaTail : List WorkSymbol)
+    (processed remaining : BitString) (headerCount : Nat)
+    (suffix : List WorkSymbol)
+    (outerAllowed : ∀ symbol, List.Mem symbol outerCounter →
+      symbol = cnfMarkFalse)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaTail →
+      FormulaScanSymbol symbol)
+    (different : headerCount ≠ remaining.length) :
+    ∃ final,
+      workRunExact? cnfWorkMachine
+          (widthMismatchStepCount outerCounter counter formulaTail
+            processed headerCount remaining)
+          (workConfigAtWord CNFWorkState.widthFindFormula
+            (pushWorkLeft (List.replicate processed.length cnfMarkTrue)
+              (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard]))
+            ((List.replicate headerCount cnfT ++ cnfF :: formulaTail) ++
+              (cnfBoundaryGuard ::
+                (counter ++
+                  (cnfFinish ::
+                    (markedAssignmentWorkSymbols processed ++
+                      (assignmentWorkSymbols remaining ++
+                        cnfRootGuard :: suffix))))))) =
+        some final ∧
+      final.state = CNFWorkState.reject := by
+  induction headerCount generalizing processed remaining with
+  | zero =>
+      cases remaining with
+      | nil =>
+          exact False.elim (different rfl)
+      | cons extra rest =>
+          let leftBase :=
+            pushWorkLeft (List.replicate processed.length cnfMarkTrue)
+              (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard])
+          have hDone := workRunExact?_one_of_step cnfWorkMachine _ _
+            (widthFindFormula_done_step leftBase
+              (formulaTail ++
+                (cnfBoundaryGuard ::
+                  (counter ++
+                    (cnfFinish ::
+                      (markedAssignmentWorkSymbols processed ++
+                        (assignmentWorkSymbols (extra :: rest) ++
+                          cnfRootGuard :: suffix)))))))
+          have hLong := width_long_assignment_reject formulaTail counter
+            (markedAssignmentWorkSymbols processed) (cnfF :: leftBase)
+            (assignmentWorkSymbols rest ++ cnfRootGuard :: suffix) extra
+            formulaAllowed counterAllowed
+            (markedAssignmentWorkSymbols_allowed processed)
+          rw [FrameTraceDesign.assignmentWorkSymbols_cons,
+            assignmentValueWorkSymbol_eq_if] at hDone
+          have complete := workRunExact?_compose cnfWorkMachine 1
+            (widthTerminalRejectSteps formulaTail counter
+              (markedAssignmentWorkSymbols processed))
+            _ _ _ hDone hLong
+          refine ⟨workConfigAtWord CNFWorkState.reject
+            (pushWorkLeft (markedAssignmentWorkSymbols processed)
+              (cnfFinish :: pushWorkLeft counter
+                (cnfBoundaryGuard ::
+                  pushWorkLeft formulaTail (cnfF :: leftBase))))
+            ((if extra then cnfT else cnfF) ::
+              (assignmentWorkSymbols rest ++ cnfRootGuard :: suffix)), ?_, rfl⟩
+          unfold widthMismatchStepCount
+          unfold widthTerminalRejectSteps at complete ⊢
+          unfold leftBase at complete ⊢
+          rw [FrameTraceDesign.assignmentWorkSymbols_cons,
+            assignmentValueWorkSymbol_eq_if]
+          exact complete
+  | succ count ih =>
+      cases remaining with
+      | nil =>
+          let leftBase :=
+            pushWorkLeft (List.replicate processed.length cnfMarkTrue)
+              (cnfFinish :: pushWorkLeft outerCounter [cnfRootGuard])
+          let shortFormulaTail :=
+            List.replicate count cnfT ++ cnfF :: formulaTail
+          have shortFormulaAllowed : ∀ symbol,
+              List.Mem symbol shortFormulaTail → FormulaScanSymbol symbol := by
+            intro symbol member
+            exact oobFormulaTail_allowed count formulaTail formulaAllowed
+              symbol member
+          have hMark := workRunExact?_one_of_step cnfWorkMachine _ _
+            (widthFindFormula_mark_step leftBase
+              (shortFormulaTail ++
+                (cnfBoundaryGuard ::
+                  (counter ++
+                    (cnfFinish ::
+                      (markedAssignmentWorkSymbols processed ++
+                        cnfRootGuard :: suffix))))))
+          have hShort := width_short_assignment_reject shortFormulaTail
+            counter (markedAssignmentWorkSymbols processed)
+            (cnfMarkTrue :: leftBase) suffix shortFormulaAllowed
+            counterAllowed (markedAssignmentWorkSymbols_allowed processed)
+          have complete := workRunExact?_compose cnfWorkMachine 1
+            (widthTerminalRejectSteps shortFormulaTail counter
+              (markedAssignmentWorkSymbols processed))
+            _ _ _ hMark hShort
+          refine ⟨workConfigAtWord CNFWorkState.reject
+            (pushWorkLeft (markedAssignmentWorkSymbols processed)
+              (cnfFinish :: pushWorkLeft counter
+                (cnfBoundaryGuard ::
+                  pushWorkLeft shortFormulaTail
+                    (cnfMarkTrue :: leftBase))))
+            (cnfRootGuard :: suffix), ?_, rfl⟩
+          unfold widthMismatchStepCount
+          unfold widthTerminalRejectSteps at complete ⊢
+          unfold shortFormulaTail leftBase at complete ⊢
+          exact complete
+      | cons value rest =>
+          have restDifferent : count ≠ rest.length := by
+            intro equal
+            apply different
+            rw [List.length_cons, equal]
+          let nextFormulaTail :=
+            List.replicate count cnfT ++ cnfF :: formulaTail
+          have nextFormulaAllowed : ∀ symbol,
+              List.Mem symbol nextFormulaTail → FormulaScanSymbol symbol := by
+            intro symbol member
+            exact oobFormulaTail_allowed count formulaTail formulaAllowed
+              symbol member
+          have headerAllowed : ∀ symbol,
+              List.Mem symbol (List.replicate processed.length cnfMarkTrue) →
+                symbol = cnfMarkTrue := by
+            intro symbol member
+            exact FrameTraceDesign.mem_replicate_workSymbol_eq
+              processed.length cnfMarkTrue symbol member
+          have hUnit := widthOneUnit_run outerCounter
+            (List.replicate processed.length cnfMarkTrue) nextFormulaTail
+            counter (markedAssignmentWorkSymbols processed)
+            (assignmentWorkSymbols rest ++ cnfRootGuard :: suffix) value
+            outerAllowed headerAllowed nextFormulaAllowed counterAllowed
+            (markedAssignmentWorkSymbols_allowed processed)
+          obtain ⟨final, hRest, finalReject⟩ :=
+            ih (processed ++ [value]) rest restDifferent
+          rw [length_append_value] at hRest
+          rw [FrameTraceDesign.replicate_succ_tail] at hRest
+          rw [markedAssignment_append_value_tail processed value
+            (assignmentWorkSymbols rest ++ cnfRootGuard :: suffix)] at hRest
+          have markedValueShape :
+              FrameTraceDesign.markedAssignmentValueWorkSymbol value =
+                if value then cnfMarkTrue else cnfMarkFalse := by
+            cases value <;> rfl
+          rw [markedValueShape] at hRest
+          have complete := workRunExact?_compose cnfWorkMachine
+            (widthOneUnitSteps outerCounter
+              (List.replicate processed.length cnfMarkTrue) nextFormulaTail
+              counter (markedAssignmentWorkSymbols processed))
+            (widthMismatchStepCount outerCounter counter formulaTail
+              (processed ++ [value]) count rest)
+            _ _ _ hUnit hRest
+          refine ⟨final, ?_, finalReject⟩
+          unfold widthMismatchStepCount
+          unfold nextFormulaTail at complete
+          rw [FrameTraceDesign.assignmentWorkSymbols_cons]
+          rw [assignmentValueWorkSymbol_eq_if]
+          exact complete
+
+def decodedWidthMismatchSteps (formula : CNFFormula)
+    (assignment : BitString) : Nat :=
+  let tokens := encodeFormulaTokens formula
+  let outerCounter := List.replicate tokens.length cnfMarkFalse
+  let counter := List.replicate assignment.length cnfMarkFalse
+  widthSeekPreludeSteps outerCounter (cnfTokenWorkSymbols tokens) counter +
+    widthMismatchStepCount outerCounter counter
+      (cnfTokenWorkSymbols
+        (encodeClauseListTokens formula.clauses ++ [.finish]))
+      [] formula.variableCount assignment
+
+theorem decodedWidth_unequal_exact
+    (formula : CNFFormula) (assignment : BitString)
+    (width : formula.variableCount ≠ assignment.length) :
+    ∃ final,
+      workRunExact? cnfWorkMachine
+          (decodedWidthMismatchSteps formula assignment)
+          (workConfigAtLeftWord CNFWorkState.seekLeftRoot
+            (pushWorkLeft
+              (List.replicate assignment.length cnfMarkFalse)
+              (cnfBoundaryGuard ::
+                frameFormulaLeftBase (encodeFormulaTokens formula)))
+            (cnfFinish ::
+              (assignmentWorkSymbols assignment ++
+                [cnfRootGuard, cnfBlank]))) =
+        some final ∧
+      final.state = CNFWorkState.reject := by
+  let tokens := encodeFormulaTokens formula
+  let outerCounter := List.replicate tokens.length cnfMarkFalse
+  let counter := List.replicate assignment.length cnfMarkFalse
+  have outerAllowed : ∀ symbol, List.Mem symbol outerCounter →
+      symbol = cnfMarkFalse := by
+    intro symbol member
+    exact FrameTraceDesign.mem_replicate_workSymbol_eq tokens.length
+      cnfMarkFalse symbol member
+  have counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse := by
+    intro symbol member
+    exact FrameTraceDesign.mem_replicate_workSymbol_eq assignment.length
+      cnfMarkFalse symbol member
+  have formulaAllowed : ∀ symbol,
+      List.Mem symbol (cnfTokenWorkSymbols tokens) →
+        FormulaScanSymbol symbol := by
+    intro symbol member
+    exact cnfTokenWorkSymbols_formulaScan tokens symbol member
+  have hPrelude := widthSeekPrelude_exact outerCounter
+    (cnfTokenWorkSymbols tokens) counter
+    (cnfFinish ::
+      (assignmentWorkSymbols assignment ++ [cnfRootGuard, cnfBlank]))
+    outerAllowed formulaAllowed counterAllowed
+  have clauseTailAllowed : ∀ symbol,
+      List.Mem symbol
+          (cnfTokenWorkSymbols
+            (encodeClauseListTokens formula.clauses ++ [.finish])) →
+        FormulaScanSymbol symbol := by
+    intro symbol member
+    exact cnfTokenWorkSymbols_formulaScan
+      (encodeClauseListTokens formula.clauses ++ [.finish]) symbol member
+  obtain ⟨final, hMismatch, finalReject⟩ :=
+    widthMismatch_exact outerCounter counter
+      (cnfTokenWorkSymbols
+        (encodeClauseListTokens formula.clauses ++ [.finish]))
+      [] assignment formula.variableCount [cnfBlank] outerAllowed
+      counterAllowed clauseTailAllowed width
+  rw [← cnfTokenWorkSymbols_formula_header] at hMismatch
+  have emptyLength : ([] : BitString).length = 0 := rfl
+  rw [emptyLength] at hMismatch
+  have complete := workRunExact?_compose cnfWorkMachine
+    (widthSeekPreludeSteps outerCounter (cnfTokenWorkSymbols tokens) counter)
+    (widthMismatchStepCount outerCounter counter
+      (cnfTokenWorkSymbols
+        (encodeClauseListTokens formula.clauses ++ [.finish]))
+      [] formula.variableCount assignment)
+    _ _ _ hPrelude hMismatch
+  refine ⟨final, ?_, finalReject⟩
+  unfold decodedWidthMismatchSteps
+  unfold tokens outerCounter counter at complete
+  unfold tokens at complete
+  unfold frameFormulaLeftBase
+  exact complete
+
+def decodedWidthSuccessSteps (formula : CNFFormula)
+    (assignment : BitString) : Nat :=
+  let tokens := encodeFormulaTokens formula
+  let outerCounter := List.replicate tokens.length cnfMarkFalse
+  let counter := List.replicate assignment.length cnfMarkFalse
+  widthSeekPreludeSteps outerCounter (cnfTokenWorkSymbols tokens) counter +
+    widthLoopStepCount outerCounter counter
+      (cnfTokenWorkSymbols
+        (encodeClauseListTokens formula.clauses ++ [.finish])) [] assignment
+
+theorem decodedWidth_equal_exact
+    (formula : CNFFormula) (assignment : BitString)
+    (width : assignment.length = formula.variableCount) :
+    workRunExact? cnfWorkMachine
+        (decodedWidthSuccessSteps formula assignment)
+        (workConfigAtLeftWord CNFWorkState.seekLeftRoot
+          (pushWorkLeft
+            (List.replicate assignment.length cnfMarkFalse)
+            (cnfBoundaryGuard ::
+              frameFormulaLeftBase (encodeFormulaTokens formula)))
+          (cnfFinish ::
+            (assignmentWorkSymbols assignment ++
+              [cnfRootGuard, cnfBlank]))) =
+      some (workConfigAtWord CNFWorkState.clauseStart
+        (cnfF ::
+          pushWorkLeft
+            (List.replicate assignment.length cnfT)
+            (cnfFinish ::
+              pushWorkLeft
+                (List.replicate (encodeFormulaTokens formula).length
+                  cnfMarkFalse)
+                [cnfRootGuard]))
+        (cnfTokenWorkSymbols
+            (encodeClauseListTokens formula.clauses ++ [.finish]) ++
+          (cnfBoundaryGuard ::
+            (List.replicate assignment.length cnfMarkFalse ++
+              (cnfFinish ::
+                (assignmentWorkSymbols assignment ++
+                  [cnfRootGuard, cnfBlank])))))) := by
+  let tokens := encodeFormulaTokens formula
+  let outerCounter := List.replicate tokens.length cnfMarkFalse
+  let counter := List.replicate assignment.length cnfMarkFalse
+  have outerAllowed : ∀ symbol, List.Mem symbol outerCounter →
+      symbol = cnfMarkFalse := by
+    intro symbol member
+    exact FrameTraceDesign.mem_replicate_workSymbol_eq tokens.length
+      cnfMarkFalse symbol member
+  have counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse := by
+    intro symbol member
+    exact FrameTraceDesign.mem_replicate_workSymbol_eq assignment.length
+      cnfMarkFalse symbol member
+  have formulaAllowed : ∀ symbol,
+      List.Mem symbol (cnfTokenWorkSymbols tokens) →
+        FormulaScanSymbol symbol := by
+    intro symbol member
+    exact cnfTokenWorkSymbols_formulaScan tokens symbol member
+  have hPrelude := widthSeekPrelude_exact outerCounter
+    (cnfTokenWorkSymbols tokens) counter
+    (cnfFinish ::
+      (assignmentWorkSymbols assignment ++ [cnfRootGuard, cnfBlank]))
+    outerAllowed formulaAllowed counterAllowed
+  have clauseTailAllowed : ∀ symbol,
+      List.Mem symbol
+          (cnfTokenWorkSymbols
+            (encodeClauseListTokens formula.clauses ++ [.finish])) →
+        FormulaScanSymbol symbol := by
+    intro symbol member
+    exact cnfTokenWorkSymbols_formulaScan
+      (encodeClauseListTokens formula.clauses ++ [.finish]) symbol member
+  have hLoop := widthLoop_success_exact outerCounter counter
+    (cnfTokenWorkSymbols
+      (encodeClauseListTokens formula.clauses ++ [.finish]))
+    [] assignment [cnfBlank] outerAllowed counterAllowed clauseTailAllowed
+  rw [width] at hLoop
+  rw [← cnfTokenWorkSymbols_formula_header] at hLoop
+  rw [← width] at hLoop
+  have emptyLength : ([] : BitString).length = 0 := rfl
+  rw [emptyLength] at hLoop
+  rw [Nat.zero_add] at hLoop
+  have complete := workRunExact?_compose cnfWorkMachine
+    (widthSeekPreludeSteps outerCounter (cnfTokenWorkSymbols tokens) counter)
+    (widthLoopStepCount outerCounter counter
+      (cnfTokenWorkSymbols
+        (encodeClauseListTokens formula.clauses ++ [.finish])) [] assignment)
+    _ _ _ hPrelude hLoop
+  unfold decodedWidthSuccessSteps
+  unfold tokens outerCounter counter at complete
+  unfold tokens at complete
+  unfold frameFormulaLeftBase
+  exact complete
+
+theorem encodedFormulaHeader_length (formula : CNFFormula) :
+    (encodeFormulaTokens formula).length =
+      (formula.variableCount + 1) +
+        (cnfTokenWorkSymbols
+          (encodeClauseListTokens formula.clauses ++ [.finish])).length := by
+  have shape := cnfTokenWorkSymbols_formula_header formula
+  have lengths := congrArg List.length shape
+  rw [cnfTokenWorkSymbols_length] at lengths
+  rw [workSymbol_length_append] at lengths
+  rw [workSymbol_replicate_length] at lengths
+  exact Eq.trans lengths
+    (width_add_succ_swap formula.variableCount
+      (cnfTokenWorkSymbols
+        (encodeClauseListTokens formula.clauses ++ [.finish])).length)
+
+def widthExpandedLedger (n rounds : Nat) : Nat :=
+  (rounds + 2) * (cnfShiftedWorkSpan n * 12)
+
+theorem widthExpandedLedger_le_singlePhase (n rounds : Nat)
+    (roundsBound : rounds ≤ n) :
+    widthExpandedLedger n rounds ≤ cnfSinglePhaseBudget n := by
+  have chunksToSpan : rounds + 2 ≤ cnfShiftedWorkSpan n := by
+    unfold cnfShiftedWorkSpan
+    exact Nat.add_le_add roundsBound (Nat.le_refl 2)
+  have scaled := Nat.mul_le_mul_right
+    (cnfShiftedWorkSpan n * 12) chunksToSpan
+  have normalized :
+      cnfShiftedWorkSpan n * (cnfShiftedWorkSpan n * 12) =
+        (cnfShiftedWorkSpan n * cnfShiftedWorkSpan n) * 12 :=
+    (FrameTraceDesign.natMulAssocClean
+      (cnfShiftedWorkSpan n) (cnfShiftedWorkSpan n) 12).symm
+  rw [normalized] at scaled
+  unfold widthExpandedLedger
+  exact Nat.le_trans scaled
+    (cnfScaledQuadratic_le_singlePhaseBudget n 12 (by
+      change 12 ≤ 12 + 4
+      exact Nat.le_add_right 12 4))
+
+theorem decodedWidthSuccessSteps_le_pairSinglePhase
+    (input certificate : BitString) (formula : CNFFormula)
+    (assignment : BitString)
+    (formulaDecoded : decodeEncodedCNF input = some formula)
+    (assignmentDecoded :
+      decodeAssignmentCertificate certificate = some assignment)
+    (width : assignment.length = formula.variableCount) :
+    decodedWidthSuccessSteps formula assignment ≤
+      cnfSinglePhaseBudget
+        (BitString.size (BitString.pair input certificate)) := by
+  let pairSize := BitString.size (BitString.pair input certificate)
+  let tokens := encodeFormulaTokens formula
+  let outerCounter := List.replicate tokens.length cnfMarkFalse
+  let counter := List.replicate assignment.length cnfMarkFalse
+  let formulaTail := cnfTokenWorkSymbols
+    (encodeClauseListTokens formula.clauses ++ [.finish])
+  have combinedBound : tokens.length + assignment.length ≤ pairSize := by
+    unfold tokens pairSize
+    exact FrameTraceDesign.decoded_frame_payload_length_le_pair_size
+      input certificate formula assignment formulaDecoded assignmentDecoded
+  have tokenBound : tokens.length ≤ pairSize :=
+    Nat.le_trans (Nat.le_add_right tokens.length assignment.length)
+      combinedBound
+  have assignmentBound : assignment.length ≤ pairSize :=
+    Nat.le_trans (Nat.le_add_left assignment.length tokens.length)
+      combinedBound
+  have outerBound : outerCounter.length ≤ pairSize := by
+    unfold outerCounter
+    rw [workSymbol_replicate_length]
+    exact tokenBound
+  have counterBound : counter.length ≤ pairSize := by
+    unfold counter
+    rw [workSymbol_replicate_length]
+    exact assignmentBound
+  have headerLength := encodedFormulaHeader_length formula
+  have formulaPartition :
+      (([] : BitString).length + assignment.length + 1) +
+          formulaTail.length ≤ outerCounter.length := by
+    unfold outerCounter formulaTail tokens
+    rw [workSymbol_replicate_length]
+    have emptyLength : ([] : BitString).length = 0 := rfl
+    rw [emptyLength, Nat.zero_add]
+    change (assignment.length + 1) +
+        (cnfTokenWorkSymbols
+          (encodeClauseListTokens formula.clauses ++ [.finish])).length ≤
+      (encodeFormulaTokens formula).length
+    rw [width]
+    exact Nat.le_of_eq headerLength.symm
+  have assignmentPartition :
+      ([] : BitString).length + assignment.length ≤ counter.length := by
+    unfold counter
+    rw [workSymbol_replicate_length]
+    have emptyLength : ([] : BitString).length = 0 := rfl
+    rw [emptyLength, Nat.zero_add]
+    exact Nat.le_refl assignment.length
+  have loopBound := widthLoopStepCount_le_charges pairSize outerCounter
+    counter formulaTail [] assignment formulaPartition assignmentPartition
+    outerBound counterBound
+  have formulaWordBound : (cnfTokenWorkSymbols tokens).length ≤ pairSize := by
+    rw [cnfTokenWorkSymbols_length]
+    exact tokenBound
+  have preludeFour := widthSeekPreludeSteps_le_fourSpan pairSize
+    outerCounter (cnfTokenWorkSymbols tokens) counter outerBound
+    formulaWordBound counterBound
+  have preludeBound := widthCost_promote_scaled
+    (cnfShiftedWorkSpan pairSize)
+    (widthSeekPreludeSteps outerCounter (cnfTokenWorkSymbols tokens) counter)
+    4 12 preludeFour (by
+      change 4 ≤ 4 + 8
+      exact Nat.le_add_right 4 8)
+  have combined := Nat.add_le_add preludeBound loopBound
+  have ledgerBound :
+      widthSeekPreludeSteps outerCounter (cnfTokenWorkSymbols tokens) counter +
+          widthLoopStepCount outerCounter counter formulaTail [] assignment ≤
+        widthExpandedLedger pairSize assignment.length := by
+    unfold widthExpandedLedger
+    exact Nat.le_trans combined
+      (Nat.le_of_eq
+        (widthCharge_plus_successor_mul assignment.length
+          (cnfShiftedWorkSpan pairSize * 12)))
+  apply Nat.le_trans (by
+    unfold decodedWidthSuccessSteps
+    unfold tokens outerCounter counter formulaTail at ledgerBound
+    exact ledgerBound)
+  exact widthExpandedLedger_le_singlePhase pairSize assignment.length
+    assignmentBound
+
+theorem decodedWidthMismatchSteps_le_pairSinglePhase
+    (input certificate : BitString) (formula : CNFFormula)
+    (assignment : BitString)
+    (formulaDecoded : decodeEncodedCNF input = some formula)
+    (assignmentDecoded :
+      decodeAssignmentCertificate certificate = some assignment) :
+    decodedWidthMismatchSteps formula assignment ≤
+      cnfSinglePhaseBudget
+        (BitString.size (BitString.pair input certificate)) := by
+  let pairSize := BitString.size (BitString.pair input certificate)
+  let tokens := encodeFormulaTokens formula
+  let outerCounter := List.replicate tokens.length cnfMarkFalse
+  let counter := List.replicate assignment.length cnfMarkFalse
+  let formulaTail := cnfTokenWorkSymbols
+    (encodeClauseListTokens formula.clauses ++ [.finish])
+  have combinedBound : tokens.length + assignment.length ≤ pairSize := by
+    unfold tokens pairSize
+    exact FrameTraceDesign.decoded_frame_payload_length_le_pair_size
+      input certificate formula assignment formulaDecoded assignmentDecoded
+  have tokenBound : tokens.length ≤ pairSize :=
+    Nat.le_trans (Nat.le_add_right tokens.length assignment.length)
+      combinedBound
+  have assignmentBound : assignment.length ≤ pairSize :=
+    Nat.le_trans (Nat.le_add_left assignment.length tokens.length)
+      combinedBound
+  have outerBound : outerCounter.length ≤ pairSize := by
+    unfold outerCounter
+    rw [workSymbol_replicate_length]
+    exact tokenBound
+  have counterBound : counter.length ≤ pairSize := by
+    unfold counter
+    rw [workSymbol_replicate_length]
+    exact assignmentBound
+  have headerLength := encodedFormulaHeader_length formula
+  have formulaPartition :
+      (([] : BitString).length + formula.variableCount + 1) +
+          formulaTail.length ≤ outerCounter.length := by
+    unfold outerCounter formulaTail tokens
+    rw [workSymbol_replicate_length]
+    have emptyLength : ([] : BitString).length = 0 := rfl
+    rw [emptyLength, Nat.zero_add]
+    change (formula.variableCount + 1) +
+        (cnfTokenWorkSymbols
+          (encodeClauseListTokens formula.clauses ++ [.finish])).length ≤
+      (encodeFormulaTokens formula).length
+    exact Nat.le_of_eq headerLength.symm
+  have assignmentPartition :
+      ([] : BitString).length + assignment.length ≤ counter.length := by
+    unfold counter
+    rw [workSymbol_replicate_length]
+    have emptyLength : ([] : BitString).length = 0 := rfl
+    rw [emptyLength, Nat.zero_add]
+    exact Nat.le_refl assignment.length
+  have mismatchBound := widthMismatchStepCount_le_charges pairSize
+    outerCounter counter formulaTail [] assignment formula.variableCount
+    formulaPartition assignmentPartition outerBound counterBound
+  have formulaWordBound : (cnfTokenWorkSymbols tokens).length ≤ pairSize := by
+    rw [cnfTokenWorkSymbols_length]
+    exact tokenBound
+  have preludeFour := widthSeekPreludeSteps_le_fourSpan pairSize
+    outerCounter (cnfTokenWorkSymbols tokens) counter outerBound
+    formulaWordBound counterBound
+  have preludeBound := widthCost_promote_scaled
+    (cnfShiftedWorkSpan pairSize)
+    (widthSeekPreludeSteps outerCounter (cnfTokenWorkSymbols tokens) counter)
+    4 12 preludeFour (by
+      change 4 ≤ 4 + 8
+      exact Nat.le_add_right 4 8)
+  have combined := Nat.add_le_add preludeBound mismatchBound
+  have ledgerBound :
+      widthSeekPreludeSteps outerCounter (cnfTokenWorkSymbols tokens) counter +
+          widthMismatchStepCount outerCounter counter formulaTail []
+            formula.variableCount assignment ≤
+        widthExpandedLedger pairSize formula.variableCount := by
+    unfold widthExpandedLedger
+    exact Nat.le_trans combined
+      (Nat.le_of_eq
+        (widthCharge_plus_successor_mul formula.variableCount
+          (cnfShiftedWorkSpan pairSize * 12)))
+  have variableBound := decoded_formulaVariableCount_le_pair_size
+    input certificate formula assignment formulaDecoded assignmentDecoded
+  apply Nat.le_trans (by
+    unfold decodedWidthMismatchSteps
+    unfold tokens outerCounter counter formulaTail at ledgerBound
+    exact ledgerBound)
+  exact widthExpandedLedger_le_singlePhase pairSize formula.variableCount
+    variableBound
+
+end WidthSuccessDesign
+end PNP.Concrete
+
+
+namespace PNP.Concrete
+namespace AssignmentGrammarFailureDesign
+
+open FrameTraceDesign
+
+set_option maxRecDepth 100000
+
+/-- A paired token layout whose final assignment token is explicit rather
+than fixed to `Finish`. -/
+def pairedTokenLayoutTerminal (formulaTokens assignmentPrefix :
+    List CNFToken) (terminal : CNFToken) : List WorkSymbol :=
+  List.replicate formulaTokens.length cnfT ++
+    cnfFinish ::
+      (cnfTokenWorkSymbols formulaTokens ++
+        cnfSep ::
+          (List.replicate assignmentPrefix.length cnfT ++
+            cnfFinish ::
+              (cnfTokenWorkSymbols assignmentPrefix ++
+                [terminal.workSymbol])))
+
+private theorem assignmentTape_append_assoc {α : Type}
+    (left middle right : List α) :
+    (left ++ middle) ++ right = left ++ (middle ++ right) := by
+  induction left with
+  | nil => rfl
+  | cons item rest ih => exact congrArg (List.cons item) ih
+
+private theorem assignmentTape_cons_append {α : Type}
+    (item : α) (left right : List α) :
+    (item :: left) ++ right = item :: (left ++ right) := rfl
+
+private theorem assignmentTape_nil_append {α : Type}
+    (right : List α) : ([] : List α) ++ right = right := rfl
+
+private theorem assignmentAppendConsAsSingleton {α : Type}
+    (front suffix : List α) (item : α) :
+    front ++ item :: suffix = (front ++ [item]) ++ suffix := by
+  induction front with
+  | nil => rfl
+  | cons head rest ih => exact congrArg (List.cons head) ih
+
+private theorem assignmentPrefixLayout {α : Type}
+    (done scan rest payload assignment tail : List α)
+    (mark finish marked : α) :
+    (done ++ mark :: (scan ++ rest)) ++
+        ((finish :: payload) ++ marked :: (assignment ++ tail)) =
+      ((done ++ [mark]) ++ (scan ++ rest)) ++
+        finish :: (((payload ++ [marked]) ++ assignment) ++ tail) := by
+  induction done with
+  | nil =>
+      change mark ::
+          ((scan ++ rest) ++
+            finish :: (payload ++ marked :: (assignment ++ tail))) =
+        mark ::
+          ((scan ++ rest) ++
+            finish :: (((payload ++ [marked]) ++ assignment) ++ tail))
+      rw [assignmentAppendConsAsSingleton payload (assignment ++ tail) marked]
+      rw [assignmentTape_append_assoc (payload ++ [marked]) assignment tail]
+  | cons head suffix ih => exact congrArg (List.cons head) ih
+
+private theorem assignmentMapOfBool_append (left right : BitString) :
+    (left ++ right).map TapeSymbol.ofBool =
+      left.map TapeSymbol.ofBool ++ right.map TapeSymbol.ofBool := by
+  induction left with
+  | nil => rfl
+  | cons bit rest ih =>
+      exact congrArg (List.cons (TapeSymbol.ofBool bit)) ih
+
+private theorem assignmentMapOfBool_false_cons (bits : BitString) :
+    (false :: bits).map TapeSymbol.ofBool =
+      TapeSymbol.zero :: bits.map TapeSymbol.ofBool := rfl
+
+private theorem assignmentMapOfBool_false_singleton :
+    [false].map TapeSymbol.ofBool = [TapeSymbol.zero] := rfl
+
+private theorem assignmentEncodeTokenPairs_singleton (token : CNFToken) :
+    encodeTokenPairs [token] = token.bits := by
+  cases token <;> rfl
+
+private theorem assignmentMapOfBool_replicate_true (n : Nat) :
+    (List.replicate n true).map TapeSymbol.ofBool =
+      List.replicate n TapeSymbol.one := by
+  induction n with
+  | zero => rfl
+  | succ n ih => exact congrArg (List.cons TapeSymbol.one) ih
+
+private theorem assignmentReplicate_one_succ_tail (n : Nat) :
+    List.replicate (n + 1) TapeSymbol.one =
+      List.replicate n TapeSymbol.one ++ [TapeSymbol.one] := by
+  induction n with
+  | zero => rfl
+  | succ n ih =>
+      change TapeSymbol.one :: List.replicate (n + 1) TapeSymbol.one =
+        TapeSymbol.one ::
+          (List.replicate n TapeSymbol.one ++ [TapeSymbol.one])
+      exact congrArg (List.cons TapeSymbol.one) ih
+
+private theorem assignmentReplicate_one_add_two (n : Nat) :
+    List.replicate (n + 2) TapeSymbol.one =
+      TapeSymbol.one ::
+        (List.replicate n TapeSymbol.one ++ [TapeSymbol.one]) := by
+  change TapeSymbol.one :: List.replicate (n + 1) TapeSymbol.one =
+    TapeSymbol.one ::
+      (List.replicate n TapeSymbol.one ++ [TapeSymbol.one])
+  exact congrArg (List.cons TapeSymbol.one)
+    (assignmentReplicate_one_succ_tail n)
+
+private theorem assignmentEncodeWorkRight_replicate_true (n : Nat) :
+    encodeWorkRight (List.replicate n cnfT) =
+      List.replicate (2 * n) TapeSymbol.one := by
+  induction n with
+  | zero => rfl
+  | succ n ih =>
+      rw [List.replicate_succ]
+      change TapeSymbol.one :: TapeSymbol.one ::
+          encodeWorkRight (List.replicate n cnfT) =
+        List.replicate (2 * (n + 1)) TapeSymbol.one
+      rw [ih, Nat.mul_add]
+      rfl
+
+private theorem assignmentPairedRawShape
+    (outer formula counter assignment terminal : List TapeSymbol) :
+    outer ++ TapeSymbol.one :: TapeSymbol.zero ::
+        (formula ++ TapeSymbol.zero :: TapeSymbol.one ::
+          (counter ++ TapeSymbol.one :: TapeSymbol.zero ::
+            (assignment ++ terminal))) =
+      (outer ++ [TapeSymbol.one]) ++
+        (TapeSymbol.zero :: (formula ++ [TapeSymbol.zero])) ++
+          ((TapeSymbol.one :: (counter ++ [TapeSymbol.one])) ++
+            (TapeSymbol.zero :: (assignment ++ terminal))) := by
+  rw [assignmentAppendConsAsSingleton outer _ TapeSymbol.one]
+  rw [assignmentAppendConsAsSingleton formula _ TapeSymbol.zero]
+  rw [assignmentAppendConsAsSingleton counter _ TapeSymbol.one]
+  repeat' rw [assignmentTape_append_assoc]
+  repeat' rw [assignmentTape_cons_append]
+  repeat' rw [assignmentTape_nil_append]
+  repeat' rw [assignmentTape_append_assoc]
+  repeat' rw [assignmentTape_cons_append]
+  repeat' rw [assignmentTape_nil_append]
+
+theorem encodeWorkRight_pairedTokenLayoutTerminal
+    (formulaTokens assignmentPrefix : List CNFToken)
+    (terminal : CNFToken) :
+    encodeWorkRight
+        (pairedTokenLayoutTerminal formulaTokens assignmentPrefix terminal) =
+      (BitString.pair
+        (paddedFormulaTokenBits formulaTokens)
+        (encodeTokenPairs assignmentPrefix ++ terminal.bits)).map
+          TapeSymbol.ofBool := by
+  unfold pairedTokenLayoutTerminal
+  rw [encodeWorkRight_append]
+  rw [assignmentEncodeWorkRight_replicate_true]
+  change List.replicate (2 * formulaTokens.length) TapeSymbol.one ++
+      TapeSymbol.one :: TapeSymbol.zero ::
+        encodeWorkRight
+          (cnfTokenWorkSymbols formulaTokens ++
+            cnfSep ::
+              (List.replicate assignmentPrefix.length cnfT ++
+                cnfFinish ::
+                  (cnfTokenWorkSymbols assignmentPrefix ++
+                    [terminal.workSymbol]))) = _
+  rw [encodeWorkRight_append]
+  rw [encodeWorkRight_cnfTokenWorkSymbols]
+  change List.replicate (2 * formulaTokens.length) TapeSymbol.one ++
+      TapeSymbol.one :: TapeSymbol.zero ::
+        ((encodeTokenPairs formulaTokens).map TapeSymbol.ofBool ++
+          TapeSymbol.zero :: TapeSymbol.one ::
+            encodeWorkRight
+              (List.replicate assignmentPrefix.length cnfT ++
+                cnfFinish ::
+                  (cnfTokenWorkSymbols assignmentPrefix ++
+                    [terminal.workSymbol]))) = _
+  rw [encodeWorkRight_append]
+  rw [assignmentEncodeWorkRight_replicate_true]
+  change List.replicate (2 * formulaTokens.length) TapeSymbol.one ++
+      TapeSymbol.one :: TapeSymbol.zero ::
+        ((encodeTokenPairs formulaTokens).map TapeSymbol.ofBool ++
+          TapeSymbol.zero :: TapeSymbol.one ::
+            (List.replicate (2 * assignmentPrefix.length) TapeSymbol.one ++
+              TapeSymbol.one :: TapeSymbol.zero ::
+                encodeWorkRight
+                  (cnfTokenWorkSymbols assignmentPrefix ++
+                    [terminal.workSymbol]))) = _
+  rw [encodeWorkRight_append]
+  rw [encodeWorkRight_cnfTokenWorkSymbols]
+  change List.replicate (2 * formulaTokens.length) TapeSymbol.one ++
+      TapeSymbol.one :: TapeSymbol.zero ::
+        ((encodeTokenPairs formulaTokens).map TapeSymbol.ofBool ++
+          TapeSymbol.zero :: TapeSymbol.one ::
+            (List.replicate (2 * assignmentPrefix.length) TapeSymbol.one ++
+              TapeSymbol.one :: TapeSymbol.zero ::
+                ((encodeTokenPairs assignmentPrefix).map TapeSymbol.ofBool ++
+                  encodeWorkRight [terminal.workSymbol]))) = _
+  have terminalEncoded :
+      encodeWorkRight [terminal.workSymbol] =
+        terminal.bits.map TapeSymbol.ofBool := by
+    exact CNFToken.workSymbol_first_second terminal
+  rw [terminalEncoded]
+  unfold BitString.pair BitString.frame
+  rw [assignmentMapOfBool_append]
+  rw [assignmentMapOfBool_append, assignmentMapOfBool_append]
+  rw [assignmentMapOfBool_replicate_true,
+    assignmentMapOfBool_replicate_true]
+  rw [paddedFormulaTokenBits_length]
+  rw [BitString.length_append_constructive]
+  rw [encodeTokenPairs_length]
+  rw [token_bits_length]
+  unfold paddedFormulaTokenBits
+  rw [assignmentMapOfBool_false_cons,
+    assignmentMapOfBool_false_cons]
+  rw [assignmentMapOfBool_append (encodeTokenPairs formulaTokens) [false]]
+  rw [assignmentMapOfBool_append (encodeTokenPairs assignmentPrefix)
+    terminal.bits]
+  rw [assignmentMapOfBool_false_singleton]
+  rw [assignmentReplicate_one_succ_tail]
+  rw [assignmentReplicate_one_add_two]
+  exact assignmentPairedRawShape _ _ _ _ _
+
+theorem packWorkSymbols_pairedTokenLayoutTerminal
+    (formulaTokens assignmentPrefix : List CNFToken)
+    (terminal : CNFToken) :
+    packWorkSymbols
+        ((BitString.pair
+          (paddedFormulaTokenBits formulaTokens)
+          (encodeTokenPairs assignmentPrefix ++ terminal.bits)).map
+            TapeSymbol.ofBool) =
+      pairedTokenLayoutTerminal formulaTokens assignmentPrefix terminal := by
+  have encoded := encodeWorkRight_pairedTokenLayoutTerminal
+    formulaTokens assignmentPrefix terminal
+  have packed := congrArg packWorkSymbols encoded
+  rw [packWorkSymbols_encodeWorkRight] at packed
+  exact packed.symm
+
+theorem pairedWorkTape_terminal_shape
+    (input certificate : BitString) (formula : CNFFormula)
+    (assignmentPrefix : List CNFToken) (terminal : CNFToken)
+    (formulaDecoded : decodeEncodedCNF input = some formula)
+    (certificateShape : certificate =
+      encodeTokenPairs assignmentPrefix ++ terminal.bits) :
+    pairedWorkTape input certificate =
+      WorkTape.ofSymbols
+        (pairedTokenLayoutTerminal (encodeFormulaTokens formula)
+          assignmentPrefix terminal) := by
+  have formulaShape := encodeFormula_of_decode input formula formulaDecoded
+  rw [← formulaShape, certificateShape]
+  rw [encodeFormula_eq_padded_tokens]
+  unfold pairedWorkTape
+  change WorkTape.ofSymbols
+      (packWorkSymbols
+        ((BitString.pair
+          (paddedFormulaTokenBits (encodeFormulaTokens formula))
+          (encodeTokenPairs assignmentPrefix ++ terminal.bits)).map
+            TapeSymbol.ofBool)) = _
+  rw [packWorkSymbols_pairedTokenLayoutTerminal]
+
+inductive AssignmentGrammarFailure : List CNFToken → Prop where
+  | empty : AssignmentGrammarFailure []
+  | valueFalse {rest : List CNFToken}
+      (tail : AssignmentGrammarFailure rest) :
+      AssignmentGrammarFailure (.f :: rest)
+  | valueTrue {rest : List CNFToken}
+      (tail : AssignmentGrammarFailure rest) :
+      AssignmentGrammarFailure (.t :: rest)
+  | separator (rest : List CNFToken) :
+      AssignmentGrammarFailure (.sep :: rest)
+  | finishTrailing (next : CNFToken) (rest : List CNFToken) :
+      AssignmentGrammarFailure (.finish :: next :: rest)
+
+theorem assignmentGrammarFailure_of_decode_none
+    (tokens : List CNFToken)
+    (decoded : decodeAssignmentTokens tokens = none) :
+    AssignmentGrammarFailure tokens := by
+  induction tokens with
+  | nil => exact .empty
+  | cons token rest ih =>
+      cases token with
+      | f =>
+          change (match decodeAssignmentTokens rest with
+            | none => none
+            | some assignment => some (false :: assignment)) = none at decoded
+          cases tailCase : decodeAssignmentTokens rest with
+          | none =>
+              exact .valueFalse (ih tailCase)
+          | some assignment =>
+              rw [tailCase] at decoded
+              contradiction
+      | t =>
+          change (match decodeAssignmentTokens rest with
+            | none => none
+            | some assignment => some (true :: assignment)) = none at decoded
+          cases tailCase : decodeAssignmentTokens rest with
+          | none =>
+              exact .valueTrue (ih tailCase)
+          | some assignment =>
+              rw [tailCase] at decoded
+              contradiction
+      | sep => exact .separator rest
+      | finish =>
+          cases rest with
+          | nil => contradiction
+          | cons next suffix => exact .finishTrailing next suffix
+
+inductive AssignmentFailureNormal : List CNFToken → Prop where
+  | empty : AssignmentFailureNormal []
+  | terminalF (values : BitString) :
+      AssignmentFailureNormal (assignmentValueTokens values ++ [.f])
+  | terminalT (values : BitString) :
+      AssignmentFailureNormal (assignmentValueTokens values ++ [.t])
+  | terminalSep (values : BitString) :
+      AssignmentFailureNormal (assignmentValueTokens values ++ [.sep])
+  | interiorSep (values : BitString) (next : CNFToken)
+      (rest : List CNFToken) :
+      AssignmentFailureNormal
+        (assignmentValueTokens values ++ .sep :: next :: rest)
+  | interiorFinish (values : BitString) (next : CNFToken)
+      (rest : List CNFToken) :
+      AssignmentFailureNormal
+        (assignmentValueTokens values ++ .finish :: next :: rest)
+
+theorem assignmentGrammarFailure_normal
+    {tokens : List CNFToken} (failure : AssignmentGrammarFailure tokens) :
+    AssignmentFailureNormal tokens := by
+  induction failure with
+  | empty => exact .empty
+  | valueFalse tail ih =>
+      cases ih with
+      | empty => exact .terminalF []
+      | terminalF values => exact .terminalF (false :: values)
+      | terminalT values => exact .terminalT (false :: values)
+      | terminalSep values => exact .terminalSep (false :: values)
+      | interiorSep values next rest =>
+          exact .interiorSep (false :: values) next rest
+      | interiorFinish values next rest =>
+          exact .interiorFinish (false :: values) next rest
+  | valueTrue tail ih =>
+      cases ih with
+      | empty => exact .terminalT []
+      | terminalF values => exact .terminalF (true :: values)
+      | terminalT values => exact .terminalT (true :: values)
+      | terminalSep values => exact .terminalSep (true :: values)
+      | interiorSep values next rest =>
+          exact .interiorSep (true :: values) next rest
+      | interiorFinish values next rest =>
+          exact .interiorFinish (true :: values) next rest
+  | separator rest =>
+      cases rest with
+      | nil => exact .terminalSep []
+      | cons next suffix => exact .interiorSep [] next suffix
+  | finishTrailing next rest => exact .interiorFinish [] next rest
+
+def frameTwoPrefixStart (doneCounter donePayload restCounter :
+    List WorkSymbol) (assignment : BitString)
+    (payloadTail leftBase : List WorkSymbol) : WorkConfiguration :=
+  workConfigAtWord CNFWorkState.frameTwoFindCounter
+    (cnfBoundaryGuard :: leftBase)
+    ((doneCounter ++
+        (List.replicate assignment.length cnfT ++ restCounter)) ++
+      cnfFinish ::
+        ((donePayload ++ assignmentWorkSymbols assignment) ++ payloadTail))
+
+def frameTwoPrefixFinal (doneCounter donePayload restCounter :
+    List WorkSymbol) (assignment : BitString)
+    (payloadTail leftBase : List WorkSymbol) : WorkConfiguration :=
+  workConfigAtWord CNFWorkState.frameTwoFindCounter
+    (cnfBoundaryGuard :: leftBase)
+    ((doneCounter ++
+        (List.replicate assignment.length cnfMarkFalse ++ restCounter)) ++
+      cnfFinish ::
+        ((donePayload ++ markedAssignmentWorkSymbols assignment) ++
+          payloadTail))
+
+def frameTwoPrefixSteps (restCounter : List WorkSymbol) :
+    List WorkSymbol → List WorkSymbol → BitString → Nat
+  | _, _, [] => 0
+  | doneCounter, donePayload, value :: rest =>
+      frameOneIterationSteps doneCounter
+          (List.replicate rest.length cnfT ++ restCounter) donePayload +
+        frameTwoPrefixSteps restCounter
+          (doneCounter ++ [cnfMarkFalse])
+          (donePayload ++ [markedAssignmentValueWorkSymbol value]) rest
+
+private theorem frameTwoPrefixStart_cons
+    (doneCounter donePayload restCounter : List WorkSymbol)
+    (value : Bool) (rest : BitString)
+    (payloadTail leftBase : List WorkSymbol) :
+    frameTwoPrefixStart doneCounter donePayload restCounter
+        (value :: rest) payloadTail leftBase =
+      workConfigAtWord CNFWorkState.frameTwoFindCounter
+        (cnfBoundaryGuard :: leftBase)
+        (doneCounter ++ cnfT ::
+          ((List.replicate rest.length cnfT ++ restCounter) ++
+            cnfFinish ::
+              (donePayload ++ assignmentValueWorkSymbol value ::
+                (assignmentWorkSymbols rest ++ payloadTail)))) := by
+  unfold frameTwoPrefixStart
+  rw [replicate_bit_cons_length]
+  rw [assignmentWorkSymbols_cons]
+  repeat' rw [FrameTraceDesign.frameWork_append_assoc]
+  rfl
+
+private theorem frameTwoPrefix_after_iteration
+    (doneCounter donePayload restCounter : List WorkSymbol)
+    (value : Bool) (rest : BitString)
+    (payloadTail leftBase : List WorkSymbol) :
+    workConfigAtWord CNFWorkState.frameTwoFindCounter
+        (cnfBoundaryGuard :: leftBase)
+        ((doneCounter ++ cnfMarkFalse ::
+          (List.replicate rest.length cnfT ++ restCounter)) ++
+            (cnfFinish :: donePayload ++
+              markedAssignmentValueWorkSymbol value ::
+                (assignmentWorkSymbols rest ++ payloadTail))) =
+      frameTwoPrefixStart (doneCounter ++ [cnfMarkFalse])
+        (donePayload ++ [markedAssignmentValueWorkSymbol value])
+        restCounter rest payloadTail leftBase := by
+  unfold frameTwoPrefixStart
+  exact congrArg
+    (fun word => workConfigAtWord CNFWorkState.frameTwoFindCounter
+      (cnfBoundaryGuard :: leftBase) word)
+    (assignmentPrefixLayout doneCounter
+      (List.replicate rest.length cnfT) restCounter donePayload
+      (assignmentWorkSymbols rest) payloadTail cnfMarkFalse cnfFinish
+      (markedAssignmentValueWorkSymbol value))
+
+private theorem frameTwoPrefixFinal_cons
+    (doneCounter donePayload restCounter : List WorkSymbol)
+    (value : Bool) (rest : BitString)
+    (payloadTail leftBase : List WorkSymbol) :
+    frameTwoPrefixFinal (doneCounter ++ [cnfMarkFalse])
+        (donePayload ++ [markedAssignmentValueWorkSymbol value])
+        restCounter rest payloadTail leftBase =
+      frameTwoPrefixFinal doneCounter donePayload restCounter
+        (value :: rest) payloadTail leftBase := by
+  unfold frameTwoPrefixFinal
+  rw [replicate_bit_cons_length]
+  rw [markedAssignmentWorkSymbols_cons]
+  repeat' rw [FrameTraceDesign.frameWork_append_assoc]
+  rfl
+
+private theorem frameTwoPrefixSteps_value
+    (restCounter doneCounter donePayload : List WorkSymbol)
+    (value : Bool) (rest : BitString) :
+    frameTwoPrefixSteps restCounter doneCounter donePayload (value :: rest) =
+      frameOneIterationSteps doneCounter
+          (List.replicate rest.length cnfT ++ restCounter) donePayload +
+        frameTwoPrefixSteps restCounter
+          (doneCounter ++ [cnfMarkFalse])
+          (donePayload ++ [markedAssignmentValueWorkSymbol value]) rest := by
+  rfl
+
+theorem frameTwo_prefix_exact
+    (doneCounter donePayload restCounter : List WorkSymbol)
+    (assignment : BitString) (payloadTail leftBase : List WorkSymbol)
+    (doneCounterAllowed : ∀ symbol, List.Mem symbol doneCounter →
+      symbol = cnfMarkFalse)
+    (donePayloadAllowed : ∀ symbol, List.Mem symbol donePayload →
+      AssignmentMarkSymbol symbol)
+    (restCounterAllowed : ∀ symbol, List.Mem symbol restCounter →
+      symbol = cnfT) :
+    workRunExact? cnfWorkMachine
+        (frameTwoPrefixSteps restCounter doneCounter donePayload assignment)
+        (frameTwoPrefixStart doneCounter donePayload restCounter assignment
+          payloadTail leftBase) =
+      some (frameTwoPrefixFinal doneCounter donePayload restCounter assignment
+        payloadTail leftBase) := by
+  induction assignment generalizing doneCounter donePayload with
+  | nil => rfl
+  | cons value rest ih =>
+      have scanCounterAllowed : ∀ symbol,
+          List.Mem symbol
+            (List.replicate rest.length cnfT ++ restCounter) →
+            symbol = cnfT := by
+        intro symbol member
+        have split := ClauseLiteralDesign.workSymbol_mem_append_cases
+          (List.replicate rest.length cnfT) restCounter symbol member
+        cases split with
+        | inl inReplicate =>
+            exact mem_replicate_workSymbol_eq rest.length cnfT symbol
+              inReplicate
+        | inr inRest => exact restCounterAllowed symbol inRest
+      have iteration := frameTwo_iteration_exact doneCounter
+        (List.replicate rest.length cnfT ++ restCounter) donePayload
+        leftBase value (assignmentWorkSymbols rest ++ payloadTail)
+        doneCounterAllowed scanCounterAllowed donePayloadAllowed
+      rw [← frameTwoPrefixStart_cons] at iteration
+      have nextCounterAllowed : ∀ symbol,
+          List.Mem symbol (doneCounter ++ [cnfMarkFalse]) →
+            symbol = cnfMarkFalse :=
+        frameAllowed_append_one
+          (fun candidate => candidate = cnfMarkFalse)
+          doneCounter cnfMarkFalse doneCounterAllowed rfl
+      have nextPayloadAllowed : ∀ symbol,
+          List.Mem symbol
+            (donePayload ++ [markedAssignmentValueWorkSymbol value]) →
+              AssignmentMarkSymbol symbol :=
+        frameAllowed_append_one AssignmentMarkSymbol donePayload
+          (markedAssignmentValueWorkSymbol value) donePayloadAllowed (by
+            cases value <;> constructor)
+      have remaining := ih (doneCounter ++ [cnfMarkFalse])
+        (donePayload ++ [markedAssignmentValueWorkSymbol value])
+        nextCounterAllowed nextPayloadAllowed
+      rw [← frameTwoPrefix_after_iteration] at remaining
+      rw [frameTwoPrefixFinal_cons] at remaining
+      rw [frameTwoPrefixSteps_value]
+      exact workRunExact?_compose cnfWorkMachine
+        (frameOneIterationSteps doneCounter
+          (List.replicate rest.length cnfT ++ restCounter) donePayload)
+        (frameTwoPrefixSteps restCounter
+          (doneCounter ++ [cnfMarkFalse])
+          (donePayload ++ [markedAssignmentValueWorkSymbol value]) rest)
+        _ _ _ iteration remaining
+
+def frameTwoTerminalBadSteps (assignment : BitString) : Nat :=
+  (((frameTwoPrefixSteps [] [] [] assignment + assignment.length) + 1) +
+    assignment.length) + 1
+
+theorem frameTwo_terminal_bad_exact
+    (assignment : BitString) (leftBase : List WorkSymbol)
+    (bad : WorkSymbol) (invalid : ¬ FrameTwoCheckSymbol bad) :
+    ∃ tape,
+      workRunExact? cnfWorkMachine
+          (frameTwoTerminalBadSteps assignment)
+          (frameTwoPrefixStart [] [] [] assignment [bad] leftBase) =
+        some
+          ({ state := CNFWorkState.reject, tape := tape } :
+            WorkConfiguration) := by
+  have prefixRun := frameTwo_prefix_exact [] [] [] assignment [bad]
+    leftBase (by intro symbol member; contradiction)
+    (by intro symbol member; contradiction)
+    (by intro symbol member; contradiction)
+  unfold frameTwoPrefixFinal at prefixRun
+  repeat' rw [FrameTraceDesign.frameWork_append_assoc] at prefixRun
+  have counterRun := frameTwo_findCounter_markFalse_scan assignment.length
+    (cnfBoundaryGuard :: leftBase)
+    (cnfFinish :: markedAssignmentWorkSymbols assignment ++ [bad])
+  have finishRun := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameTwo_findCounter_finish_step
+      (pushWorkLeft (List.replicate assignment.length cnfMarkFalse)
+        (cnfBoundaryGuard :: leftBase))
+      (markedAssignmentWorkSymbols assignment ++ [bad]))
+  have payloadRun := frameTwo_checkPayload_marked_scan assignment
+    (cnfFinish ::
+      pushWorkLeft (List.replicate assignment.length cnfMarkFalse)
+        (cnfBoundaryGuard :: leftBase)) [bad]
+  have rejectRun := frameTwoCheckPayload_reject_run
+    (pushWorkLeft (markedAssignmentWorkSymbols assignment)
+      (cnfFinish ::
+        pushWorkLeft (List.replicate assignment.length cnfMarkFalse)
+          (cnfBoundaryGuard :: leftBase))) [] bad invalid
+  have throughCounter := workRunExact?_compose cnfWorkMachine
+    (frameTwoPrefixSteps [] [] [] assignment) assignment.length
+    _ _ _ prefixRun counterRun
+  have throughFinish := workRunExact?_compose cnfWorkMachine
+    (frameTwoPrefixSteps [] [] [] assignment + assignment.length) 1
+    _ _ _ throughCounter finishRun
+  have throughPayload := workRunExact?_compose cnfWorkMachine
+    ((frameTwoPrefixSteps [] [] [] assignment + assignment.length) + 1)
+    assignment.length _ _ _ throughFinish payloadRun
+  have complete := workRunExact?_compose cnfWorkMachine
+    (((frameTwoPrefixSteps [] [] [] assignment + assignment.length) + 1) +
+      assignment.length) 1 _ _ _ throughPayload rejectRun
+  refine ⟨(workConfigAtWord CNFWorkState.reject
+    (pushWorkLeft (markedAssignmentWorkSymbols assignment)
+      (cnfFinish ::
+        pushWorkLeft (List.replicate assignment.length cnfMarkFalse)
+          (cnfBoundaryGuard :: leftBase))) [bad]).tape, ?_⟩
+  unfold frameTwoTerminalBadSteps
+  exact complete
+
+theorem frameTwoFindPayload_reject_run
+    (left right : List WorkSymbol) (bad : WorkSymbol)
+    (badCase : bad = cnfSep ∨ bad = cnfFinish) :
+    workRunExact? cnfWorkMachine 1
+        (workConfigAtWord CNFWorkState.frameTwoFindPayload left
+          (bad :: right)) =
+      some (workConfigAtWord CNFWorkState.reject left (bad :: right)) := by
+  cases badCase with
+  | inl equal =>
+      cases equal
+      apply cnfReject_run_one CNFWorkState.frameTwoFindPayload _ (by rfl)
+      rfl
+  | inr equal =>
+      cases equal
+      apply cnfReject_run_one CNFWorkState.frameTwoFindPayload _ (by rfl)
+      rfl
+
+def frameTwoInteriorBadSteps
+    (assignment : BitString) (suffixPrefixLength : Nat) : Nat :=
+  (((((frameTwoPrefixSteps
+    (List.replicate (Nat.succ suffixPrefixLength) cnfT)
+    [] [] assignment + assignment.length) + 1) + suffixPrefixLength) + 1) +
+    assignment.length) + 1
+
+theorem frameTwo_interior_bad_exact
+    (assignment : BitString) (suffixPrefix : List CNFToken)
+    (terminal : CNFToken) (leftBase : List WorkSymbol)
+    (bad : WorkSymbol) (badCase : bad = cnfSep ∨ bad = cnfFinish) :
+    ∃ tape,
+      workRunExact? cnfWorkMachine
+          (frameTwoInteriorBadSteps assignment suffixPrefix.length)
+          (frameTwoPrefixStart [] []
+            (List.replicate (Nat.succ suffixPrefix.length) cnfT)
+            assignment
+            (bad :: (cnfTokenWorkSymbols suffixPrefix ++
+              [terminal.workSymbol])) leftBase) =
+        some
+          ({ state := CNFWorkState.reject, tape := tape } :
+            WorkConfiguration) := by
+  let restCounter :=
+    List.replicate (Nat.succ suffixPrefix.length) cnfT
+  let payloadTail := bad ::
+    (cnfTokenWorkSymbols suffixPrefix ++ [terminal.workSymbol])
+  have prefixRun := frameTwo_prefix_exact [] [] restCounter assignment
+    payloadTail leftBase (by intro symbol member; contradiction)
+    (by intro symbol member; contradiction) (by
+      intro symbol member
+      exact mem_replicate_workSymbol_eq (Nat.succ suffixPrefix.length)
+        cnfT symbol member)
+  unfold frameTwoPrefixFinal at prefixRun
+  repeat' rw [FrameTraceDesign.frameWork_append_assoc] at prefixRun
+  have doneCounterRun := frameTwo_findCounter_markFalse_scan
+    assignment.length (cnfBoundaryGuard :: leftBase)
+    (restCounter ++ cnfFinish ::
+      (markedAssignmentWorkSymbols assignment ++ payloadTail))
+  have markCounterRun := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameTwo_findCounter_t_step
+      (pushWorkLeft (List.replicate assignment.length cnfMarkFalse)
+        (cnfBoundaryGuard :: leftBase))
+      (List.replicate suffixPrefix.length cnfT ++
+        cnfFinish ::
+          (markedAssignmentWorkSymbols assignment ++ payloadTail)))
+  have restCounterRun := frameTwo_toHeader_t_word_scan
+    (List.replicate suffixPrefix.length cnfT)
+    (cnfMarkFalse ::
+      pushWorkLeft (List.replicate assignment.length cnfMarkFalse)
+        (cnfBoundaryGuard :: leftBase))
+    (cnfFinish ::
+      (markedAssignmentWorkSymbols assignment ++ payloadTail)) (by
+        intro symbol member
+        exact mem_replicate_workSymbol_eq suffixPrefix.length cnfT symbol
+          member)
+  rw [length_replicate_workSymbol] at restCounterRun
+  have headerRun := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameTwo_toHeader_finish_step
+      (pushWorkLeft (List.replicate suffixPrefix.length cnfT)
+        (cnfMarkFalse ::
+          pushWorkLeft (List.replicate assignment.length cnfMarkFalse)
+            (cnfBoundaryGuard :: leftBase)))
+      (markedAssignmentWorkSymbols assignment ++ payloadTail))
+  have payloadRun := frameTwo_findPayload_marked_scan
+    (markedAssignmentWorkSymbols assignment)
+    (cnfFinish ::
+      pushWorkLeft (List.replicate suffixPrefix.length cnfT)
+        (cnfMarkFalse ::
+          pushWorkLeft (List.replicate assignment.length cnfMarkFalse)
+            (cnfBoundaryGuard :: leftBase)))
+    payloadTail (markedAssignmentWorkSymbols_allowed assignment)
+  rw [markedAssignmentWorkSymbols_length] at payloadRun
+  have rejectRun := frameTwoFindPayload_reject_run
+    (pushWorkLeft (markedAssignmentWorkSymbols assignment)
+      (cnfFinish ::
+        pushWorkLeft (List.replicate suffixPrefix.length cnfT)
+          (cnfMarkFalse ::
+            pushWorkLeft (List.replicate assignment.length cnfMarkFalse)
+              (cnfBoundaryGuard :: leftBase))))
+    (cnfTokenWorkSymbols suffixPrefix ++ [terminal.workSymbol]) bad badCase
+  have h1 := workRunExact?_compose cnfWorkMachine
+    (frameTwoPrefixSteps restCounter [] [] assignment) assignment.length
+    _ _ _ prefixRun doneCounterRun
+  have h2 := workRunExact?_compose cnfWorkMachine
+    (frameTwoPrefixSteps restCounter [] [] assignment + assignment.length)
+    1 _ _ _ h1 markCounterRun
+  have h3 := workRunExact?_compose cnfWorkMachine
+    ((frameTwoPrefixSteps restCounter [] [] assignment + assignment.length) +
+      1) suffixPrefix.length _ _ _ h2 restCounterRun
+  have h4 := workRunExact?_compose cnfWorkMachine
+    (((frameTwoPrefixSteps restCounter [] [] assignment +
+      assignment.length) + 1) + suffixPrefix.length) 1
+    _ _ _ h3 headerRun
+  have h5 := workRunExact?_compose cnfWorkMachine
+    ((((frameTwoPrefixSteps restCounter [] [] assignment +
+      assignment.length) + 1) + suffixPrefix.length) + 1)
+    assignment.length _ _ _ h4 payloadRun
+  have complete := workRunExact?_compose cnfWorkMachine
+    (((((frameTwoPrefixSteps restCounter [] [] assignment +
+      assignment.length) + 1) + suffixPrefix.length) + 1) +
+        assignment.length) 1 _ _ _ h5 rejectRun
+  refine ⟨(workConfigAtWord CNFWorkState.reject
+    (pushWorkLeft (markedAssignmentWorkSymbols assignment)
+      (cnfFinish ::
+        pushWorkLeft (List.replicate suffixPrefix.length cnfT)
+          (cnfMarkFalse ::
+            pushWorkLeft (List.replicate assignment.length cnfMarkFalse)
+              (cnfBoundaryGuard :: leftBase))))
+    (bad :: (cnfTokenWorkSymbols suffixPrefix ++
+      [terminal.workSymbol]))).tape, ?_⟩
+  unfold frameTwoInteriorBadSteps
+  exact complete
+
+def assignmentTerminalRejectSteps (formulaTokens : List CNFToken)
+    (assignment : BitString) : Nat :=
+  (2 + (frameOneFoldSteps [] [] formulaTokens +
+    frameOneTerminalSteps formulaTokens)) +
+      frameTwoTerminalBadSteps assignment
+
+theorem assignment_terminal_full_exact
+    (input certificate : BitString) (formula : CNFFormula)
+    (assignment : BitString) (bad : CNFToken)
+    (formulaDecoded : decodeEncodedCNF input = some formula)
+    (certificateShape : certificate =
+      encodeTokenPairs (assignmentValueTokens assignment) ++ bad.bits)
+    (badCase : bad = .f ∨ bad = .t ∨ bad = .sep) :
+    ∃ tape,
+      workRunExact? cnfWorkMachine
+          (assignmentTerminalRejectSteps
+            (encodeFormulaTokens formula) assignment)
+          (workStartConfiguration cnfWorkMachine
+            (pairedWorkTape input certificate)) =
+        some
+          ({ state := CNFWorkState.reject, tape := tape } :
+            WorkConfiguration) := by
+  have tapeShape := pairedWorkTape_terminal_shape input certificate formula
+    (assignmentValueTokens assignment) bad formulaDecoded certificateShape
+  rcases encodeFormulaTokens_cons formula with ⟨first, rest, tokenShape⟩
+  let assignmentSuffix :=
+    List.replicate assignment.length cnfT ++
+      cnfFinish :: (assignmentWorkSymbols assignment ++ [bad.workSymbol])
+  have bootRun := boot_t_exact
+    (List.replicate rest.length cnfT ++
+      cnfFinish ::
+        (first.workSymbol ::
+          (cnfTokenWorkSymbols rest ++ cnfSep :: assignmentSuffix)))
+  have frameOneRun := frameOne_complete_exact (first :: rest)
+    assignmentSuffix
+  rw [frameOneFoldStart_empty_cons] at frameOneRun
+  let leftBase := frameFormulaLeftBase (first :: rest)
+  have invalid : ¬ FrameTwoCheckSymbol bad.workSymbol := by
+    intro allowed
+    cases badCase with
+    | inl equal =>
+        cases equal
+        cases allowed
+    | inr remaining =>
+        cases remaining with
+        | inl equal =>
+            cases equal
+            cases allowed
+        | inr equal =>
+            cases equal
+            cases allowed
+  rcases frameTwo_terminal_bad_exact assignment leftBase bad.workSymbol
+      invalid with ⟨tape, badRun⟩
+  unfold frameTwoPrefixStart at badRun
+  repeat' rw [FrameTraceDesign.frameWork_append_assoc] at badRun
+  have throughFrame := workRunExact?_compose cnfWorkMachine 2
+    (frameOneFoldSteps [] [] (first :: rest) +
+      frameOneTerminalSteps (first :: rest))
+    _ _ _ bootRun frameOneRun
+  have complete := workRunExact?_compose cnfWorkMachine
+    (2 + (frameOneFoldSteps [] [] (first :: rest) +
+      frameOneTerminalSteps (first :: rest)))
+    (frameTwoTerminalBadSteps assignment)
+    _ _ _ throughFrame badRun
+  refine ⟨tape, ?_⟩
+  rw [tapeShape, tokenShape]
+  unfold pairedTokenLayoutTerminal
+  rw [assignmentValueTokens_length]
+  rw [assignmentValueTokens_workSymbols]
+  unfold assignmentTerminalRejectSteps
+  exact complete
+
+private theorem assignmentReplicate_add {α : Type}
+    (first second : Nat) (item : α) :
+    List.replicate (first + second) item =
+      List.replicate first item ++ List.replicate second item := by
+  induction first with
+  | zero =>
+      rw [Nat.zero_add]
+      rfl
+  | succ first ih =>
+      rw [Nat.succ_add]
+      change item :: List.replicate (first + second) item =
+        item ::
+          (List.replicate first item ++ List.replicate second item)
+      exact congrArg (List.cons item) ih
+
+private theorem assignmentReplicate_cons_length {α β : Type}
+    (head : α) (tail : List α) (item : β) :
+    List.replicate (head :: tail).length item =
+      item :: List.replicate tail.length item := rfl
+
+private theorem assignmentTokenWorkSymbols_cons
+    (head : CNFToken) (tail : List CNFToken) :
+    cnfTokenWorkSymbols (head :: tail) =
+      head.workSymbol :: cnfTokenWorkSymbols tail := rfl
+
+def assignmentInteriorRejectSteps (formulaTokens : List CNFToken)
+    (assignment : BitString) (suffixPrefixLength : Nat) : Nat :=
+  (2 + (frameOneFoldSteps [] [] formulaTokens +
+    frameOneTerminalSteps formulaTokens)) +
+      frameTwoInteriorBadSteps assignment suffixPrefixLength
+
+theorem assignment_interior_full_exact
+    (input certificate : BitString) (formula : CNFFormula)
+    (assignment : BitString) (bad : CNFToken)
+    (suffixPrefix : List CNFToken) (terminal : CNFToken)
+    (formulaDecoded : decodeEncodedCNF input = some formula)
+    (certificateShape : certificate =
+      encodeTokenPairs
+          (assignmentValueTokens assignment ++ bad :: suffixPrefix) ++
+        terminal.bits)
+    (badCase : bad = .sep ∨ bad = .finish) :
+    ∃ tape,
+      workRunExact? cnfWorkMachine
+          (assignmentInteriorRejectSteps
+            (encodeFormulaTokens formula) assignment suffixPrefix.length)
+          (workStartConfiguration cnfWorkMachine
+            (pairedWorkTape input certificate)) =
+        some
+          ({ state := CNFWorkState.reject, tape := tape } :
+            WorkConfiguration) := by
+  let assignmentPrefix :=
+    assignmentValueTokens assignment ++ bad :: suffixPrefix
+  have tapeShape := pairedWorkTape_terminal_shape input certificate formula
+    assignmentPrefix terminal formulaDecoded certificateShape
+  rcases encodeFormulaTokens_cons formula with ⟨first, rest, tokenShape⟩
+  let restCounter :=
+    List.replicate (Nat.succ suffixPrefix.length) cnfT
+  let payloadTail := bad.workSymbol ::
+    (cnfTokenWorkSymbols suffixPrefix ++ [terminal.workSymbol])
+  let assignmentSuffix :=
+    (List.replicate assignment.length cnfT ++ restCounter) ++
+      cnfFinish ::
+        ((assignmentWorkSymbols assignment ++ payloadTail))
+  have bootRun := boot_t_exact
+    (List.replicate rest.length cnfT ++
+      cnfFinish ::
+        (first.workSymbol ::
+          (cnfTokenWorkSymbols rest ++ cnfSep :: assignmentSuffix)))
+  have frameOneRun := frameOne_complete_exact (first :: rest)
+    assignmentSuffix
+  rw [frameOneFoldStart_empty_cons] at frameOneRun
+  let leftBase := frameFormulaLeftBase (first :: rest)
+  have badWorkCase : bad.workSymbol = cnfSep ∨
+      bad.workSymbol = cnfFinish := by
+    cases badCase with
+    | inl equal =>
+        cases equal
+        exact Or.inl rfl
+    | inr equal =>
+        cases equal
+        exact Or.inr rfl
+  rcases frameTwo_interior_bad_exact assignment suffixPrefix terminal
+      leftBase bad.workSymbol badWorkCase with ⟨tape, badRun⟩
+  unfold frameTwoPrefixStart at badRun
+  repeat' rw [FrameTraceDesign.frameWork_append_assoc] at badRun
+  have throughFrame := workRunExact?_compose cnfWorkMachine 2
+    (frameOneFoldSteps [] [] (first :: rest) +
+      frameOneTerminalSteps (first :: rest))
+    _ _ _ bootRun frameOneRun
+  unfold leftBase frameFormulaLeftBase at badRun
+  unfold assignmentSuffix restCounter payloadTail at throughFrame
+  repeat' rw [FrameTraceDesign.frameWork_append_assoc] at badRun throughFrame
+  have badStartShape :
+      ([] ++
+        (List.replicate assignment.length cnfT ++
+          (List.replicate (Nat.succ suffixPrefix.length) cnfT ++
+            cnfFinish ::
+              ([] ++
+                (assignmentWorkSymbols assignment ++
+                  bad.workSymbol ::
+                    (cnfTokenWorkSymbols suffixPrefix ++
+                      [terminal.workSymbol])))))) =
+        (List.replicate assignment.length cnfT ++
+          List.replicate (Nat.succ suffixPrefix.length) cnfT) ++
+            cnfFinish ::
+              (assignmentWorkSymbols assignment ++
+                bad.workSymbol ::
+                  (cnfTokenWorkSymbols suffixPrefix ++
+                    [terminal.workSymbol])) := by
+    exact (FrameTraceDesign.frameWork_append_assoc
+      (List.replicate assignment.length cnfT)
+      (List.replicate (Nat.succ suffixPrefix.length) cnfT)
+      (cnfFinish ::
+        (assignmentWorkSymbols assignment ++
+          bad.workSymbol ::
+            (cnfTokenWorkSymbols suffixPrefix ++
+              [terminal.workSymbol])))).symm
+  rw [badStartShape] at badRun
+  have complete := workRunExact?_compose cnfWorkMachine
+    (2 + (frameOneFoldSteps [] [] (first :: rest) +
+      frameOneTerminalSteps (first :: rest)))
+    (frameTwoInteriorBadSteps assignment suffixPrefix.length)
+    _ _ _ throughFrame badRun
+  refine ⟨tape, ?_⟩
+  rw [tapeShape, tokenShape]
+  unfold pairedTokenLayoutTerminal
+  rw [token_length_append_constructive]
+  rw [assignmentValueTokens_length]
+  rw [assignmentReplicate_add]
+  rw [cnfTokenWorkSymbols_append]
+  rw [assignmentValueTokens_workSymbols]
+  unfold assignmentInteriorRejectSteps
+  rw [assignmentReplicate_cons_length first rest cnfT]
+  rw [assignmentTokenWorkSymbols_cons first rest]
+  rw [assignmentTokenWorkSymbols_cons bad suffixPrefix]
+  repeat' rw [FrameTraceDesign.frameWork_append_assoc]
+  repeat' rw [assignmentTape_cons_append]
+  repeat' rw [FrameTraceDesign.frameWork_append_assoc]
+  have badLength : (bad :: suffixPrefix).length =
+      Nat.succ suffixPrefix.length := rfl
+  rw [badLength]
+  rw [FrameTraceDesign.frameWork_append_assoc
+    (List.replicate assignment.length cnfT)
+    (List.replicate (Nat.succ suffixPrefix.length) cnfT)
+    (cnfFinish ::
+      (assignmentWorkSymbols assignment ++
+        bad.workSymbol ::
+          (cnfTokenWorkSymbols suffixPrefix ++ [terminal.workSymbol])))]
+    at complete
+  exact complete
+
+theorem tokenList_snoc (first : CNFToken) (rest : List CNFToken) :
+    ∃ front terminal, first :: rest = front ++ [terminal] := by
+  induction rest generalizing first with
+  | nil => exact ⟨[], first, rfl⟩
+  | cons next suffix ih =>
+      rcases ih next with ⟨front, terminal, shape⟩
+      exact ⟨first :: front, terminal, congrArg (List.cons first) shape⟩
+
+private theorem assignmentList_length_append {α : Type}
+    (left right : List α) :
+    (left ++ right).length = left.length + right.length := by
+  induction left with
+  | nil => exact (Nat.zero_add right.length).symm
+  | cons item rest ih =>
+      change Nat.succ (rest ++ right).length =
+        Nat.succ rest.length + right.length
+      rw [Nat.succ_add]
+      exact congrArg Nat.succ ih
+
+private theorem assignmentList_append_nil {α : Type}
+    (items : List α) : items ++ [] = items := by
+  induction items with
+  | nil => rfl
+  | cons item rest ih => exact congrArg (List.cons item) ih
+
+private theorem frameOneIterationSteps_congr_lengths
+    (doneCounter₁ restCounter₁ donePayload₁ : List WorkSymbol)
+    (doneCounter₂ restCounter₂ donePayload₂ : List WorkSymbol)
+    (doneCounterLength : doneCounter₁.length = doneCounter₂.length)
+    (restCounterLength : restCounter₁.length = restCounter₂.length)
+    (donePayloadLength : donePayload₁.length = donePayload₂.length) :
+    frameOneIterationSteps doneCounter₁ restCounter₁ donePayload₁ =
+      frameOneIterationSteps doneCounter₂ restCounter₂ donePayload₂ := by
+  unfold frameOneIterationSteps
+  rw [assignmentList_length_append, assignmentList_length_append]
+  rw [doneCounterLength, restCounterLength, donePayloadLength]
+  rw [show (cnfMarkFalse :: restCounter₁).length =
+      (cnfMarkFalse :: restCounter₂).length from
+    congrArg Nat.succ restCounterLength]
+
+/-- The malformed-frame prefix is literally no more expensive than the
+corresponding prefix of a successful frame whose assignment is extended by
+an arbitrary tail of the same length as the still-unprocessed counter. -/
+theorem frameTwoPrefixSteps_le_fold_append
+    (restCounter : List WorkSymbol) (tail : BitString)
+    (sameLength : restCounter.length = tail.length)
+    (doneCounter donePayload : List WorkSymbol)
+    (assignment : BitString) :
+    frameTwoPrefixSteps restCounter doneCounter donePayload assignment ≤
+      frameTwoFoldSteps doneCounter donePayload (assignment ++ tail) := by
+  induction assignment generalizing doneCounter donePayload with
+  | nil =>
+      change 0 ≤ frameTwoFoldSteps doneCounter donePayload tail
+      exact Nat.zero_le _
+  | cons value rest ih =>
+      have restLength :
+          (List.replicate rest.length cnfT ++ restCounter).length =
+            (List.replicate (rest ++ tail).length cnfT).length := by
+        rw [assignmentList_length_append]
+        rw [length_replicate_workSymbol, length_replicate_workSymbol]
+        rw [assignmentList_length_append, sameLength]
+      have iterationShape := frameOneIterationSteps_congr_lengths
+        doneCounter
+        (List.replicate rest.length cnfT ++ restCounter)
+        donePayload doneCounter
+        (List.replicate (rest ++ tail).length cnfT)
+        donePayload rfl restLength rfl
+      change
+        frameOneIterationSteps doneCounter
+            (List.replicate rest.length cnfT ++ restCounter) donePayload +
+          frameTwoPrefixSteps restCounter
+            (doneCounter ++ [cnfMarkFalse])
+            (donePayload ++ [markedAssignmentValueWorkSymbol value]) rest ≤
+        frameOneIterationSteps doneCounter
+            (List.replicate (rest ++ tail).length cnfT) donePayload +
+          frameTwoFoldSteps (doneCounter ++ [cnfMarkFalse])
+            (donePayload ++ [markedAssignmentValueWorkSymbol value])
+            (rest ++ tail)
+      rw [iterationShape]
+      exact Nat.add_le_add_left
+        (ih (doneCounter ++ [cnfMarkFalse])
+          (donePayload ++ [markedAssignmentValueWorkSymbol value])) _
+
+theorem frameTwoTerminalBadSteps_le_success
+    (assignment : BitString) :
+    frameTwoTerminalBadSteps assignment ≤
+      frameTwoFoldSteps [] [] assignment +
+        frameTwoTerminalSteps assignment := by
+  have prefixBound := frameTwoPrefixSteps_le_fold_append
+    ([] : List WorkSymbol) ([] : BitString) rfl [] [] assignment
+  have terminalCore :
+      (((assignment.length + 1) + assignment.length) + 1) ≤
+        frameTwoTerminalSteps assignment := by
+    unfold frameTwoTerminalSteps
+    have first := Nat.le_add_right
+      (((assignment.length + 1) + assignment.length) + 1) 1
+    have second := Nat.le_trans first
+      (Nat.le_add_right
+        ((((assignment.length + 1) + assignment.length) + 1) + 1) 1)
+    have third := Nat.le_trans second
+      (Nat.le_add_right
+        (((((assignment.length + 1) + assignment.length) + 1) + 1) + 1)
+        assignment.length)
+    exact Nat.le_trans third
+      (Nat.le_add_right
+        ((((((assignment.length + 1) + assignment.length) + 1) + 1) + 1) +
+          assignment.length) 1)
+  have combined := Nat.add_le_add prefixBound terminalCore
+  unfold frameTwoTerminalBadSteps at combined
+  rw [assignmentList_append_nil] at combined
+  repeat' rw [Nat.add_assoc] at combined
+  unfold frameTwoTerminalBadSteps
+  repeat' rw [Nat.add_assoc]
+  exact combined
+
+def assignmentInteriorDummy
+    (assignment : BitString) (suffixPrefixLength : Nat) : BitString :=
+  assignment ++ List.replicate (Nat.succ suffixPrefixLength) false
+
+theorem assignmentInteriorDummy_length
+    (assignment : BitString) (suffixPrefixLength : Nat) :
+    (assignmentInteriorDummy assignment suffixPrefixLength).length =
+      assignment.length + Nat.succ suffixPrefixLength := by
+  unfold assignmentInteriorDummy
+  rw [assignmentList_length_append]
+  rw [BitString.length_replicate_constructive]
+
+theorem frameTwoInteriorBadSteps_le_success
+    (assignment : BitString) (suffixPrefixLength : Nat) :
+    frameTwoInteriorBadSteps assignment suffixPrefixLength ≤
+      frameTwoFoldSteps [] []
+          (assignmentInteriorDummy assignment suffixPrefixLength) +
+        frameTwoTerminalSteps
+          (assignmentInteriorDummy assignment suffixPrefixLength) := by
+  let restCounter :=
+    List.replicate (Nat.succ suffixPrefixLength) cnfT
+  let tail : BitString :=
+    List.replicate (Nat.succ suffixPrefixLength) false
+  have restCounterLength : restCounter.length = tail.length := by
+    unfold restCounter tail
+    rw [length_replicate_workSymbol]
+    rw [BitString.length_replicate_constructive]
+  have prefixBound := frameTwoPrefixSteps_le_fold_append restCounter tail
+    restCounterLength [] [] assignment
+  have dummyShape : assignmentInteriorDummy assignment suffixPrefixLength =
+      assignment ++ tail := by rfl
+  rw [← dummyShape] at prefixBound
+  let d := assignment.length + Nat.succ suffixPrefixLength
+  have assignmentToD : assignment.length ≤ d := by
+    unfold d
+    exact Nat.le_add_right assignment.length
+      (Nat.succ suffixPrefixLength)
+  have assignmentOneToDOne : assignment.length + 1 ≤ d + 1 :=
+    Nat.add_le_add_right assignmentToD 1
+  have doubledBound :
+      (assignment.length + 1) + (d + 1) ≤
+        (d + 1) + (d + 1) :=
+    Nat.add_le_add_right assignmentOneToDOne (d + 1)
+  have remainderShape :
+      (((((assignment.length + 1) + suffixPrefixLength) + 1) +
+          assignment.length) + 1) =
+        (assignment.length + 1) + (d + 1) := by
+    unfold d
+    rw [Nat.add_assoc (assignment.length + 1) suffixPrefixLength 1]
+    rw [Nat.add_assoc (assignment.length + 1)
+      (suffixPrefixLength + 1) assignment.length]
+    rw [Nat.add_assoc (assignment.length + 1)
+      ((suffixPrefixLength + 1) + assignment.length) 1]
+    rw [Nat.add_comm (suffixPrefixLength + 1) assignment.length]
+  have terminalCoreShape :
+      (((d + 1) + d) + 1) = (d + 1) + (d + 1) := by
+    exact Nat.add_assoc (d + 1) d 1
+  have remainderToCore :
+      (((((assignment.length + 1) + suffixPrefixLength) + 1) +
+          assignment.length) + 1) ≤
+        (((d + 1) + d) + 1) := by
+    rw [remainderShape, terminalCoreShape]
+    exact doubledBound
+  have first := Nat.le_trans remainderToCore
+    (Nat.le_add_right (((d + 1) + d) + 1) 1)
+  have second := Nat.le_trans first
+    (Nat.le_add_right ((((d + 1) + d) + 1) + 1) 1)
+  have third := Nat.le_trans second
+    (Nat.le_add_right (((((d + 1) + d) + 1) + 1) + 1) d)
+  have fullD := Nat.le_trans third
+    (Nat.le_add_right ((((((d + 1) + d) + 1) + 1) + 1) + d) 1)
+  have dummyLength :
+      (assignmentInteriorDummy assignment suffixPrefixLength).length = d := by
+    unfold d
+    exact assignmentInteriorDummy_length assignment suffixPrefixLength
+  have remainderBound :
+      (((((assignment.length + 1) + suffixPrefixLength) + 1) +
+          assignment.length) + 1) ≤
+        frameTwoTerminalSteps
+          (assignmentInteriorDummy assignment suffixPrefixLength) := by
+    unfold frameTwoTerminalSteps
+    rw [dummyLength]
+    exact fullD
+  have combined := Nat.add_le_add prefixBound remainderBound
+  unfold restCounter at combined
+  repeat' rw [Nat.add_assoc] at combined
+  unfold frameTwoInteriorBadSteps
+  repeat' rw [Nat.add_assoc]
+  exact combined
+
+theorem assignmentTerminalRejectSteps_le_success
+    (formulaTokens : List CNFToken) (assignment : BitString) :
+    assignmentTerminalRejectSteps formulaTokens assignment ≤
+      frameSuccessSteps formulaTokens assignment := by
+  unfold assignmentTerminalRejectSteps frameSuccessSteps
+  exact Nat.add_le_add_left
+    (frameTwoTerminalBadSteps_le_success assignment)
+    (2 + (frameOneFoldSteps [] [] formulaTokens +
+      frameOneTerminalSteps formulaTokens))
+
+theorem assignmentInteriorRejectSteps_le_success
+    (formulaTokens : List CNFToken) (assignment : BitString)
+    (suffixPrefixLength : Nat) :
+    assignmentInteriorRejectSteps formulaTokens assignment
+        suffixPrefixLength ≤
+      frameSuccessSteps formulaTokens
+        (assignmentInteriorDummy assignment suffixPrefixLength) := by
+  unfold assignmentInteriorRejectSteps frameSuccessSteps
+  exact Nat.add_le_add_left
+    (frameTwoInteriorBadSteps_le_success assignment suffixPrefixLength)
+    (2 + (frameOneFoldSteps [] [] formulaTokens +
+      frameOneTerminalSteps formulaTokens))
+
+theorem frameSuccessSteps_withinPair_of_decoded_components
+    (input certificate : BitString) (formula : CNFFormula)
+    (tokens : List CNFToken) (dummyAssignment : BitString)
+    (formulaDecoded : decodeEncodedCNF input = some formula)
+    (tokensDecoded : decodeTokenPairs certificate = some tokens)
+    (dummyToTokens : dummyAssignment.length ≤ tokens.length) :
+    frameSuccessSteps (encodeFormulaTokens formula) dummyAssignment ≤
+      cnfSinglePhaseBudget
+        (BitString.size (BitString.pair input certificate)) := by
+  have inputShape := encodeFormula_of_decode input formula formulaDecoded
+  have certificateShape := encodeTokenPairs_of_decode certificate tokens
+    tokensDecoded
+  have formulaTokenToInput : (encodeFormulaTokens formula).length ≤
+      BitString.size input := by
+    rw [← inputShape]
+    unfold encodeFormula encodeCNF
+    exact MalformedFuelDesign.tokenLength_le_encodedPairsBitSize
+      (encodeCNFTokens formula) false
+  have certificateTokenToCertificate : tokens.length ≤
+      BitString.size certificate := by
+    rw [← certificateShape]
+    exact MalformedFuelDesign.tokenLength_le_encodedPairsSize tokens
+  have dummyToCertificate : dummyAssignment.length ≤
+      BitString.size certificate :=
+    Nat.le_trans dummyToTokens certificateTokenToCertificate
+  have combinedToComponents :
+      (encodeFormulaTokens formula).length + dummyAssignment.length ≤
+        BitString.size input + BitString.size certificate :=
+    Nat.add_le_add formulaTokenToInput dummyToCertificate
+  have combinedBound :
+      (encodeFormulaTokens formula).length + dummyAssignment.length ≤
+        BitString.size (BitString.pair input certificate) :=
+    Nat.le_trans combinedToComponents
+      (MalformedFuelDesign.componentSizes_le_pairSize input certificate)
+  have inputPos : 1 ≤ BitString.size input := by
+    rw [← inputShape]
+    unfold encodeFormula encodeCNF
+    exact MalformedFuelDesign.one_le_encodedPairsBitSize
+      (encodeCNFTokens formula) false
+  have fiveSpan :=
+    MalformedFuelDesign.five_le_shiftedPairSpan_of_inputPos
+      input certificate inputPos
+  exact frameSuccessSteps_le_singlePhase
+    (BitString.size (BitString.pair input certificate))
+    (encodeFormulaTokens formula) dummyAssignment combinedBound fiveSpan
+
+def pairedEmptyCertificateLayout
+    (formulaTokens : List CNFToken) : List WorkSymbol :=
+  List.replicate formulaTokens.length cnfT ++
+    cnfFinish :: (cnfTokenWorkSymbols formulaTokens ++ [cnfF])
+
+theorem encodeWorkRight_pairedEmptyCertificateLayout
+    (formulaTokens : List CNFToken) :
+    encodeWorkRight (pairedEmptyCertificateLayout formulaTokens) =
+      (BitString.pair (paddedFormulaTokenBits formulaTokens) []).map
+        TapeSymbol.ofBool := by
+  unfold pairedEmptyCertificateLayout
+  rw [encodeWorkRight_append]
+  rw [assignmentEncodeWorkRight_replicate_true]
+  change List.replicate (2 * formulaTokens.length) TapeSymbol.one ++
+      TapeSymbol.one :: TapeSymbol.zero ::
+        encodeWorkRight (cnfTokenWorkSymbols formulaTokens ++ [cnfF]) = _
+  rw [encodeWorkRight_append]
+  rw [encodeWorkRight_cnfTokenWorkSymbols]
+  unfold BitString.pair BitString.frame paddedFormulaTokenBits
+  rw [assignmentMapOfBool_append]
+  rw [assignmentMapOfBool_append]
+  rw [assignmentMapOfBool_replicate_true]
+  rw [BitString.length_append_constructive]
+  rw [encodeTokenPairs_length]
+  rw [List.length_singleton]
+  rw [assignmentReplicate_one_succ_tail]
+  rw [assignmentMapOfBool_false_cons]
+  rw [assignmentMapOfBool_append (encodeTokenPairs formulaTokens) [false]]
+  rw [assignmentMapOfBool_false_singleton]
+  have cnfFEncoded : encodeWorkRight [cnfF] =
+      [TapeSymbol.zero, TapeSymbol.zero] := rfl
+  rw [cnfFEncoded]
+  have emptyFrameMapped :
+      (List.replicate ([] : BitString).length true ++ [false]).map
+          TapeSymbol.ofBool =
+        [TapeSymbol.zero] := rfl
+  rw [emptyFrameMapped]
+  repeat' rw [assignmentTape_cons_append]
+  repeat' rw [assignmentTape_append_assoc]
+  have tailShape :
+      List.map TapeSymbol.ofBool (encodeTokenPairs formulaTokens) ++
+          [TapeSymbol.zero, TapeSymbol.zero] =
+        (List.map TapeSymbol.ofBool (encodeTokenPairs formulaTokens) ++
+          [TapeSymbol.zero]) ++ [TapeSymbol.zero] := by
+    exact (assignmentTape_append_assoc
+      (List.map TapeSymbol.ofBool (encodeTokenPairs formulaTokens))
+      [TapeSymbol.zero] [TapeSymbol.zero]).symm
+  exact congrArg
+    (fun tail =>
+      List.replicate (2 * formulaTokens.length) TapeSymbol.one ++
+        TapeSymbol.one :: TapeSymbol.zero :: tail)
+    tailShape
+
+theorem packWorkSymbols_pairedEmptyCertificateLayout
+    (formulaTokens : List CNFToken) :
+    packWorkSymbols
+        ((BitString.pair (paddedFormulaTokenBits formulaTokens) []).map
+          TapeSymbol.ofBool) =
+      pairedEmptyCertificateLayout formulaTokens := by
+  have encoded := encodeWorkRight_pairedEmptyCertificateLayout formulaTokens
+  have packed := congrArg packWorkSymbols encoded
+  rw [packWorkSymbols_encodeWorkRight] at packed
+  exact packed.symm
+
+theorem pairedWorkTape_empty_certificate_shape
+    (input : BitString) (formula : CNFFormula)
+    (formulaDecoded : decodeEncodedCNF input = some formula) :
+    pairedWorkTape input [] =
+      WorkTape.ofSymbols
+        (pairedEmptyCertificateLayout (encodeFormulaTokens formula)) := by
+  have formulaShape := encodeFormula_of_decode input formula formulaDecoded
+  rw [← formulaShape]
+  rw [encodeFormula_eq_padded_tokens]
+  unfold pairedWorkTape
+  change WorkTape.ofSymbols
+      (packWorkSymbols
+        ((BitString.pair
+          (paddedFormulaTokenBits (encodeFormulaTokens formula)) []).map
+            TapeSymbol.ofBool)) = _
+  rw [packWorkSymbols_pairedEmptyCertificateLayout]
+
+theorem frameOne_fBoundary_terminal_exact
+    (tokens : List CNFToken) (suffix : List WorkSymbol) :
+    workRunExact? cnfWorkMachine (frameOneBadBoundarySteps tokens)
+        (frameOneBoundaryFoldFinal [] [] tokens cnfF suffix) =
+      some
+        (workConfigAtWord CNFWorkState.reject
+          (pushWorkLeft (frameOneMarkedTokens tokens)
+            (cnfFinish ::
+              pushWorkLeft
+                (List.replicate tokens.length cnfMarkFalse)
+                [cnfRootGuard]))
+          (cnfF :: suffix)) := by
+  have counterRun := frameOne_findCounter_markFalse_scan tokens.length
+    [cnfRootGuard]
+    (cnfFinish :: frameOneMarkedTokens tokens ++ cnfF :: suffix)
+  have finishRun := workRunExact?_one_of_step cnfWorkMachine _ _
+    (frameOne_findCounter_finish_step
+      (pushWorkLeft (List.replicate tokens.length cnfMarkFalse)
+        [cnfRootGuard])
+      (frameOneMarkedTokens tokens ++ cnfF :: suffix))
+  have payloadRun := frameOne_checkPayload_marked_scan tokens
+    (cnfFinish ::
+      pushWorkLeft (List.replicate tokens.length cnfMarkFalse)
+        [cnfRootGuard]) (cnfF :: suffix)
+  have rejectRun := frameOneCheckPayload_reject_run
+    (pushWorkLeft (frameOneMarkedTokens tokens)
+      (cnfFinish ::
+        pushWorkLeft (List.replicate tokens.length cnfMarkFalse)
+          [cnfRootGuard])) suffix cnfF (by
+            intro allowed
+            cases allowed)
+  have throughFinish := workRunExact?_compose cnfWorkMachine
+    tokens.length 1 _ _ _ counterRun finishRun
+  have throughPayload := workRunExact?_compose cnfWorkMachine
+    (tokens.length + 1) tokens.length _ _ _ throughFinish payloadRun
+  unfold frameOneBoundaryFoldFinal frameOneBadBoundarySteps
+  exact workRunExact?_compose cnfWorkMachine
+    ((tokens.length + 1) + tokens.length) 1 _ _ _
+    throughPayload rejectRun
+
+theorem frameOne_fBoundary_exact
+    (tokens : List CNFToken) (suffix : List WorkSymbol) :
+    workRunExact? cnfWorkMachine
+        (frameOneFoldSteps [] [] tokens + frameOneBadBoundarySteps tokens)
+        (frameOneBoundaryFoldStart [] [] tokens cnfF suffix) =
+      some
+        (workConfigAtWord CNFWorkState.reject
+          (pushWorkLeft (frameOneMarkedTokens tokens)
+            (cnfFinish ::
+              pushWorkLeft
+                (List.replicate tokens.length cnfMarkFalse)
+                [cnfRootGuard]))
+          (cnfF :: suffix)) := by
+  have foldRun := frameOne_boundary_fold_exact [] [] tokens cnfF suffix
+    (by intro symbol member; contradiction)
+    (by intro symbol member; contradiction)
+  have terminalRun := frameOne_fBoundary_terminal_exact tokens suffix
+  exact workRunExact?_compose cnfWorkMachine
+    (frameOneFoldSteps [] [] tokens) (frameOneBadBoundarySteps tokens)
+    _ _ _ foldRun terminalRun
+
+theorem assignment_empty_full_exact
+    (input : BitString) (formula : CNFFormula)
+    (formulaDecoded : decodeEncodedCNF input = some formula) :
+    ∃ steps tape,
+      steps ≤ frameSuccessSteps (encodeFormulaTokens formula) [] ∧
+      workRunExact? cnfWorkMachine steps
+          (workStartConfiguration cnfWorkMachine
+            (pairedWorkTape input [])) =
+        some
+          ({ state := CNFWorkState.reject, tape := tape } :
+            WorkConfiguration) := by
+  have tapeShape := pairedWorkTape_empty_certificate_shape input formula
+    formulaDecoded
+  rcases encodeFormulaTokens_cons formula with ⟨first, rest, tokenShape⟩
+  let tokens := first :: rest
+  have bootRun := boot_t_exact
+    (List.replicate rest.length cnfT ++
+      cnfFinish ::
+        (first.workSymbol ::
+          (cnfTokenWorkSymbols rest ++ [cnfF])))
+  have rejectRun := frameOne_fBoundary_exact tokens []
+  rw [frameOneBoundaryFoldStart_cons] at rejectRun
+  have complete := workRunExact?_compose cnfWorkMachine 2
+    (frameOneFoldSteps [] [] tokens + frameOneBadBoundarySteps tokens)
+    _ _ _ bootRun rejectRun
+  let steps := 2 +
+    (frameOneFoldSteps [] [] tokens + frameOneBadBoundarySteps tokens)
+  have terminalBound :=
+    MalformedFuelDesign.frameOneBadBoundarySteps_le_terminal tokens
+  have firstBound : steps ≤
+      2 + (frameOneFoldSteps [] [] tokens +
+        frameOneTerminalSteps tokens) :=
+    Nat.add_le_add_left
+      (Nat.add_le_add_left terminalBound
+        (frameOneFoldSteps [] [] tokens)) 2
+  have secondBound :
+      2 + (frameOneFoldSteps [] [] tokens + frameOneTerminalSteps tokens) ≤
+        frameSuccessSteps tokens [] := by
+    unfold frameSuccessSteps
+    exact Nat.le_add_right _
+      (frameTwoFoldSteps [] [] [] + frameTwoTerminalSteps [])
+  have secondBoundFormula :
+      2 + (frameOneFoldSteps [] [] tokens + frameOneTerminalSteps tokens) ≤
+        frameSuccessSteps (encodeFormulaTokens formula) [] := by
+    rw [tokenShape]
+    exact secondBound
+  refine ⟨steps,
+    (workConfigAtWord CNFWorkState.reject
+      (pushWorkLeft (frameOneMarkedTokens tokens)
+        (cnfFinish ::
+          pushWorkLeft (List.replicate tokens.length cnfMarkFalse)
+            [cnfRootGuard])) [cnfF]).tape,
+    Nat.le_trans firstBound secondBoundFormula, ?_⟩
+  rw [tapeShape]
+  rw [tokenShape]
+  unfold pairedEmptyCertificateLayout tokens steps
+  exact complete
+
+/-- Every successfully pair-decoded but assignment-grammar-invalid
+certificate has an exact rejecting run.  The three normal forms correspond
+to an empty certificate, a bad terminal token, or an interior separator or
+finish token. -/
+theorem assignmentGrammarFailure_full_exact
+    (input certificate : BitString) (formula : CNFFormula)
+    (tokens : List CNFToken)
+    (formulaDecoded : decodeEncodedCNF input = some formula)
+    (tokensDecoded : decodeTokenPairs certificate = some tokens)
+    (grammarFailed : decodeAssignmentTokens tokens = none) :
+    ∃ steps tape,
+      workRunExact? cnfWorkMachine steps
+          (workStartConfiguration cnfWorkMachine
+            (pairedWorkTape input certificate)) =
+        some
+          ({ state := CNFWorkState.reject, tape := tape } :
+            WorkConfiguration) := by
+  have bitsShape := encodeTokenPairs_of_decode certificate tokens
+    tokensDecoded
+  have failure := assignmentGrammarFailure_of_decode_none tokens
+    grammarFailed
+  have normal := assignmentGrammarFailure_normal failure
+  cases normal with
+  | empty =>
+      have certificateEmpty : certificate = [] := bitsShape.symm
+      rw [certificateEmpty]
+      rcases assignment_empty_full_exact input formula formulaDecoded with
+        ⟨steps, tape, stepBound, exactRun⟩
+      exact ⟨steps, tape, exactRun⟩
+  | terminalF values =>
+      have certificateShape : certificate =
+          encodeTokenPairs (assignmentValueTokens values) ++
+            CNFToken.f.bits := by
+        rw [encodeTokenPairs_append] at bitsShape
+        exact bitsShape.symm
+      rcases assignment_terminal_full_exact input certificate formula values
+          .f formulaDecoded certificateShape (Or.inl rfl) with
+        ⟨tape, exactRun⟩
+      exact ⟨assignmentTerminalRejectSteps
+        (encodeFormulaTokens formula) values, tape, exactRun⟩
+  | terminalT values =>
+      have certificateShape : certificate =
+          encodeTokenPairs (assignmentValueTokens values) ++
+            CNFToken.t.bits := by
+        rw [encodeTokenPairs_append] at bitsShape
+        exact bitsShape.symm
+      rcases assignment_terminal_full_exact input certificate formula values
+          .t formulaDecoded certificateShape (Or.inr (Or.inl rfl)) with
+        ⟨tape, exactRun⟩
+      exact ⟨assignmentTerminalRejectSteps
+        (encodeFormulaTokens formula) values, tape, exactRun⟩
+  | terminalSep values =>
+      have certificateShape : certificate =
+          encodeTokenPairs (assignmentValueTokens values) ++
+            CNFToken.sep.bits := by
+        rw [encodeTokenPairs_append] at bitsShape
+        exact bitsShape.symm
+      rcases assignment_terminal_full_exact input certificate formula values
+          .sep formulaDecoded certificateShape (Or.inr (Or.inr rfl)) with
+        ⟨tape, exactRun⟩
+      exact ⟨assignmentTerminalRejectSteps
+        (encodeFormulaTokens formula) values, tape, exactRun⟩
+  | interiorSep values next rest =>
+      rcases tokenList_snoc next rest with
+        ⟨suffixPrefix, terminal, tailShape⟩
+      have tokenShape :
+          assignmentValueTokens values ++ .sep :: next :: rest =
+            (assignmentValueTokens values ++ .sep :: suffixPrefix) ++
+              [terminal] := by
+        rw [tailShape]
+        exact (assignmentTape_append_assoc
+          (assignmentValueTokens values) (.sep :: suffixPrefix)
+          [terminal]).symm
+      have encodedShape := bitsShape
+      rw [tokenShape, encodeTokenPairs_append] at encodedShape
+      rw [assignmentEncodeTokenPairs_singleton] at encodedShape
+      have certificateShape : certificate =
+          encodeTokenPairs
+              (assignmentValueTokens values ++ .sep :: suffixPrefix) ++
+            terminal.bits := encodedShape.symm
+      rcases assignment_interior_full_exact input certificate formula values
+          .sep suffixPrefix terminal formulaDecoded certificateShape
+          (Or.inl rfl) with
+        ⟨tape, exactRun⟩
+      exact ⟨assignmentInteriorRejectSteps
+        (encodeFormulaTokens formula) values suffixPrefix.length,
+        tape, exactRun⟩
+  | interiorFinish values next rest =>
+      rcases tokenList_snoc next rest with
+        ⟨suffixPrefix, terminal, tailShape⟩
+      have tokenShape :
+          assignmentValueTokens values ++ .finish :: next :: rest =
+            (assignmentValueTokens values ++ .finish :: suffixPrefix) ++
+              [terminal] := by
+        rw [tailShape]
+        exact (assignmentTape_append_assoc
+          (assignmentValueTokens values) (.finish :: suffixPrefix)
+          [terminal]).symm
+      have encodedShape := bitsShape
+      rw [tokenShape, encodeTokenPairs_append] at encodedShape
+      rw [assignmentEncodeTokenPairs_singleton] at encodedShape
+      have certificateShape : certificate =
+          encodeTokenPairs
+              (assignmentValueTokens values ++ .finish :: suffixPrefix) ++
+            terminal.bits := encodedShape.symm
+      rcases assignment_interior_full_exact input certificate formula values
+          .finish suffixPrefix terminal formulaDecoded certificateShape
+          (Or.inr rfl) with
+        ⟨tape, exactRun⟩
+      exact ⟨assignmentInteriorRejectSteps
+        (encodeFormulaTokens formula) values suffixPrefix.length,
+        tape, exactRun⟩
+
+/-- The complete assignment-grammar failure contract used by universal
+composition: exact rejection within one pair-sized phase. -/
+theorem assignmentGrammarFailure_rejects_withinPairSinglePhase
+    (input certificate : BitString) (formula : CNFFormula)
+    (tokens : List CNFToken)
+    (formulaDecoded : decodeEncodedCNF input = some formula)
+    (tokensDecoded : decodeTokenPairs certificate = some tokens)
+    (grammarFailed : decodeAssignmentTokens tokens = none) :
+    ∃ steps tape,
+      steps ≤ cnfSinglePhaseBudget
+        (BitString.size (BitString.pair input certificate)) ∧
+      workRunExact? cnfWorkMachine steps
+          (workStartConfiguration cnfWorkMachine
+            (pairedWorkTape input certificate)) =
+        some
+          ({ state := CNFWorkState.reject, tape := tape } :
+            WorkConfiguration) := by
+  have bitsShape := encodeTokenPairs_of_decode certificate tokens
+    tokensDecoded
+  have failure := assignmentGrammarFailure_of_decode_none tokens
+    grammarFailed
+  have normal := assignmentGrammarFailure_normal failure
+  cases normal with
+  | empty =>
+      have certificateEmpty : certificate = [] := bitsShape.symm
+      have emptyTokensDecoded : decodeTokenPairs [] =
+          some ([] : List CNFToken) := by
+        rw [← certificateEmpty]
+        exact tokensDecoded
+      rw [certificateEmpty]
+      rcases assignment_empty_full_exact input formula formulaDecoded with
+        ⟨steps, tape, successCost, exactRun⟩
+      have successBound :=
+        frameSuccessSteps_withinPair_of_decoded_components
+          input [] formula [] [] formulaDecoded emptyTokensDecoded
+          (Nat.zero_le _)
+      exact ⟨steps, tape, Nat.le_trans successCost successBound, exactRun⟩
+  | terminalF values =>
+      have certificateShape : certificate =
+          encodeTokenPairs (assignmentValueTokens values) ++
+            CNFToken.f.bits := by
+        rw [encodeTokenPairs_append] at bitsShape
+        exact bitsShape.symm
+      rcases assignment_terminal_full_exact input certificate formula values
+          .f formulaDecoded certificateShape (Or.inl rfl) with
+        ⟨tape, exactRun⟩
+      have dummyToTokens : values.length ≤
+          (assignmentValueTokens values ++ [CNFToken.f]).length := by
+        rw [assignmentList_length_append]
+        rw [assignmentValueTokens_length]
+        change values.length ≤ values.length + 1
+        exact Nat.le_add_right values.length 1
+      have successBound :=
+        frameSuccessSteps_withinPair_of_decoded_components input certificate
+          formula (assignmentValueTokens values ++ [CNFToken.f]) values
+          formulaDecoded tokensDecoded dummyToTokens
+      have stepBound := Nat.le_trans
+        (assignmentTerminalRejectSteps_le_success
+          (encodeFormulaTokens formula) values) successBound
+      exact ⟨assignmentTerminalRejectSteps
+        (encodeFormulaTokens formula) values, tape, stepBound, exactRun⟩
+  | terminalT values =>
+      have certificateShape : certificate =
+          encodeTokenPairs (assignmentValueTokens values) ++
+            CNFToken.t.bits := by
+        rw [encodeTokenPairs_append] at bitsShape
+        exact bitsShape.symm
+      rcases assignment_terminal_full_exact input certificate formula values
+          .t formulaDecoded certificateShape (Or.inr (Or.inl rfl)) with
+        ⟨tape, exactRun⟩
+      have dummyToTokens : values.length ≤
+          (assignmentValueTokens values ++ [CNFToken.t]).length := by
+        rw [assignmentList_length_append]
+        rw [assignmentValueTokens_length]
+        change values.length ≤ values.length + 1
+        exact Nat.le_add_right values.length 1
+      have successBound :=
+        frameSuccessSteps_withinPair_of_decoded_components input certificate
+          formula (assignmentValueTokens values ++ [CNFToken.t]) values
+          formulaDecoded tokensDecoded dummyToTokens
+      have stepBound := Nat.le_trans
+        (assignmentTerminalRejectSteps_le_success
+          (encodeFormulaTokens formula) values) successBound
+      exact ⟨assignmentTerminalRejectSteps
+        (encodeFormulaTokens formula) values, tape, stepBound, exactRun⟩
+  | terminalSep values =>
+      have certificateShape : certificate =
+          encodeTokenPairs (assignmentValueTokens values) ++
+            CNFToken.sep.bits := by
+        rw [encodeTokenPairs_append] at bitsShape
+        exact bitsShape.symm
+      rcases assignment_terminal_full_exact input certificate formula values
+          .sep formulaDecoded certificateShape (Or.inr (Or.inr rfl)) with
+        ⟨tape, exactRun⟩
+      have dummyToTokens : values.length ≤
+          (assignmentValueTokens values ++ [CNFToken.sep]).length := by
+        rw [assignmentList_length_append]
+        rw [assignmentValueTokens_length]
+        change values.length ≤ values.length + 1
+        exact Nat.le_add_right values.length 1
+      have successBound :=
+        frameSuccessSteps_withinPair_of_decoded_components input certificate
+          formula (assignmentValueTokens values ++ [CNFToken.sep]) values
+          formulaDecoded tokensDecoded dummyToTokens
+      have stepBound := Nat.le_trans
+        (assignmentTerminalRejectSteps_le_success
+          (encodeFormulaTokens formula) values) successBound
+      exact ⟨assignmentTerminalRejectSteps
+        (encodeFormulaTokens formula) values, tape, stepBound, exactRun⟩
+  | interiorSep values next rest =>
+      rcases tokenList_snoc next rest with
+        ⟨suffixPrefix, terminal, tailShape⟩
+      have tokenShape :
+          assignmentValueTokens values ++ .sep :: next :: rest =
+            (assignmentValueTokens values ++ .sep :: suffixPrefix) ++
+              [terminal] := by
+        rw [tailShape]
+        exact (assignmentTape_append_assoc
+          (assignmentValueTokens values) (.sep :: suffixPrefix)
+          [terminal]).symm
+      have encodedShape := bitsShape
+      rw [tokenShape, encodeTokenPairs_append] at encodedShape
+      rw [assignmentEncodeTokenPairs_singleton] at encodedShape
+      have certificateShape : certificate =
+          encodeTokenPairs
+              (assignmentValueTokens values ++ .sep :: suffixPrefix) ++
+            terminal.bits := encodedShape.symm
+      rcases assignment_interior_full_exact input certificate formula values
+          .sep suffixPrefix terminal formulaDecoded certificateShape
+          (Or.inl rfl) with
+        ⟨tape, exactRun⟩
+      have dummyToTokens :
+          (assignmentInteriorDummy values suffixPrefix.length).length ≤
+            (assignmentValueTokens values ++ .sep :: next :: rest).length := by
+        rw [tokenShape]
+        rw [assignmentInteriorDummy_length]
+        rw [assignmentList_length_append, assignmentList_length_append]
+        rw [assignmentValueTokens_length]
+        change values.length + Nat.succ suffixPrefix.length ≤
+          (values.length + Nat.succ suffixPrefix.length) + 1
+        exact Nat.le_add_right _ 1
+      have successBound :=
+        frameSuccessSteps_withinPair_of_decoded_components input certificate
+          formula (assignmentValueTokens values ++ .sep :: next :: rest)
+          (assignmentInteriorDummy values suffixPrefix.length)
+          formulaDecoded tokensDecoded dummyToTokens
+      have stepBound := Nat.le_trans
+        (assignmentInteriorRejectSteps_le_success
+          (encodeFormulaTokens formula) values suffixPrefix.length)
+        successBound
+      exact ⟨assignmentInteriorRejectSteps
+        (encodeFormulaTokens formula) values suffixPrefix.length,
+        tape, stepBound, exactRun⟩
+  | interiorFinish values next rest =>
+      rcases tokenList_snoc next rest with
+        ⟨suffixPrefix, terminal, tailShape⟩
+      have tokenShape :
+          assignmentValueTokens values ++ .finish :: next :: rest =
+            (assignmentValueTokens values ++ .finish :: suffixPrefix) ++
+              [terminal] := by
+        rw [tailShape]
+        exact (assignmentTape_append_assoc
+          (assignmentValueTokens values) (.finish :: suffixPrefix)
+          [terminal]).symm
+      have encodedShape := bitsShape
+      rw [tokenShape, encodeTokenPairs_append] at encodedShape
+      rw [assignmentEncodeTokenPairs_singleton] at encodedShape
+      have certificateShape : certificate =
+          encodeTokenPairs
+              (assignmentValueTokens values ++ .finish :: suffixPrefix) ++
+            terminal.bits := encodedShape.symm
+      rcases assignment_interior_full_exact input certificate formula values
+          .finish suffixPrefix terminal formulaDecoded certificateShape
+          (Or.inr rfl) with
+        ⟨tape, exactRun⟩
+      have dummyToTokens :
+          (assignmentInteriorDummy values suffixPrefix.length).length ≤
+            (assignmentValueTokens values ++ .finish :: next :: rest).length := by
+        rw [tokenShape]
+        rw [assignmentInteriorDummy_length]
+        rw [assignmentList_length_append, assignmentList_length_append]
+        rw [assignmentValueTokens_length]
+        change values.length + Nat.succ suffixPrefix.length ≤
+          (values.length + Nat.succ suffixPrefix.length) + 1
+        exact Nat.le_add_right _ 1
+      have successBound :=
+        frameSuccessSteps_withinPair_of_decoded_components input certificate
+          formula (assignmentValueTokens values ++ .finish :: next :: rest)
+          (assignmentInteriorDummy values suffixPrefix.length)
+          formulaDecoded tokensDecoded dummyToTokens
+      have stepBound := Nat.le_trans
+        (assignmentInteriorRejectSteps_le_success
+          (encodeFormulaTokens formula) values suffixPrefix.length)
+        successBound
+      exact ⟨assignmentInteriorRejectSteps
+        (encodeFormulaTokens formula) values suffixPrefix.length,
+        tape, stepBound, exactRun⟩
+
+end AssignmentGrammarFailureDesign
+end PNP.Concrete
