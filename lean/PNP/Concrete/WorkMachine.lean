@@ -149,11 +149,12 @@ def findIndexedWorkRule (rules : List WorkRule) (state : Nat)
     (symbol : WorkSymbol) : Option (Nat × WorkRule) :=
   findIndexedWorkRuleFrom rules state symbol 0
 
-def findWorkRule (rules : List WorkRule) (state : Nat)
-    (symbol : WorkSymbol) : Option WorkRule :=
-  match findIndexedWorkRule rules state symbol with
-  | none => none
-  | some (_, rule) => some rule
+def findWorkRule : List WorkRule → Nat → WorkSymbol → Option WorkRule
+  | [], _, _ => none
+  | rule :: rest, state, symbol =>
+      match inspectWorkRule rule state symbol with
+      | .yes _ _ => some rule
+      | .no => findWorkRule rest state symbol
 
 theorem findIndexedWorkRuleFrom_some_matches
     {rules : List WorkRule} {state : Nat} {symbol : WorkSymbol}
@@ -178,6 +179,76 @@ theorem findIndexedWorkRuleFrom_some_matches
             ⟨(congrArg WorkRule.sourceState hRule).symm.trans hFirstSource,
              (congrArg WorkRule.readSymbol hRule).symm.trans hFirstSymbol⟩
 
+theorem findWorkRule_cons_of_matches (rule : WorkRule)
+    (rest : List WorkRule) (state : Nat) (symbol : WorkSymbol)
+    (h : rule.sourceState = state ∧ rule.readSymbol = symbol) :
+    findWorkRule (rule :: rest) state symbol = some rule := by
+  change (match inspectWorkRule rule state symbol with
+    | .yes _ _ => some rule
+    | .no => findWorkRule rest state symbol) = some rule
+  have hInspect : inspectWorkRule rule state symbol = .yes h.1 h.2 := by
+    unfold inspectWorkRule
+    rw [dif_pos h.1, dif_pos h.2]
+  rw [hInspect]
+
+theorem findWorkRule_cons_of_not_matches (rule : WorkRule)
+    (rest : List WorkRule) (state : Nat) (symbol : WorkSymbol)
+    (h : ¬(rule.sourceState = state ∧ rule.readSymbol = symbol)) :
+    findWorkRule (rule :: rest) state symbol =
+      findWorkRule rest state symbol := by
+  change (match inspectWorkRule rule state symbol with
+    | .yes _ _ => some rule
+    | .no => findWorkRule rest state symbol) = findWorkRule rest state symbol
+  by_cases hSource : rule.sourceState = state
+  · have hSymbol : rule.readSymbol ≠ symbol := by
+      intro hRead
+      exact h ⟨hSource, hRead⟩
+    have hInspect : inspectWorkRule rule state symbol = .no := by
+      unfold inspectWorkRule
+      rw [dif_pos hSource, dif_neg hSymbol]
+    rw [hInspect]
+  · have hInspect : inspectWorkRule rule state symbol = .no := by
+      unfold inspectWorkRule
+      rw [dif_neg hSource]
+    rw [hInspect]
+
+theorem findWorkRule_append_of_some (left right : List WorkRule)
+    (state : Nat) (symbol : WorkSymbol) (selected : WorkRule)
+    (h : findWorkRule left state symbol = some selected) :
+    findWorkRule (left ++ right) state symbol = some selected := by
+  induction left with
+  | nil => contradiction
+  | cons first rest ih =>
+      by_cases hFirst : first.sourceState = state ∧ first.readSymbol = symbol
+      · have hCons := findWorkRule_cons_of_matches first rest state symbol hFirst
+        have hSelected : first = selected := Option.some.inj (hCons.symm.trans h)
+        have hAppend := findWorkRule_cons_of_matches first (rest ++ right)
+          state symbol hFirst
+        exact hAppend.trans (congrArg Option.some hSelected)
+      · have hCons := findWorkRule_cons_of_not_matches first rest state symbol hFirst
+        have hTail : findWorkRule rest state symbol = some selected :=
+          hCons.symm.trans h
+        have hAppend := findWorkRule_cons_of_not_matches first (rest ++ right)
+          state symbol hFirst
+        exact hAppend.trans (ih hTail)
+
+theorem findWorkRule_append_of_none (left right : List WorkRule)
+    (state : Nat) (symbol : WorkSymbol)
+    (h : findWorkRule left state symbol = none) :
+    findWorkRule (left ++ right) state symbol = findWorkRule right state symbol := by
+  induction left with
+  | nil => rfl
+  | cons first rest ih =>
+      by_cases hFirst : first.sourceState = state ∧ first.readSymbol = symbol
+      · have hCons := findWorkRule_cons_of_matches first rest state symbol hFirst
+        have impossible : (some first : Option WorkRule) = none := hCons.symm.trans h
+        contradiction
+      · have hCons := findWorkRule_cons_of_not_matches first rest state symbol hFirst
+        have hTail : findWorkRule rest state symbol = none := hCons.symm.trans h
+        have hAppend := findWorkRule_cons_of_not_matches first (rest ++ right)
+          state symbol hFirst
+        exact hAppend.trans (ih hTail)
+
 def WorkMachine.isHalted (machine : WorkMachine)
     (config : WorkConfiguration) : Bool :=
   config.state == machine.acceptState || config.state == machine.rejectState
@@ -199,6 +270,32 @@ def workStep? (machine : WorkMachine) (config : WorkConfiguration) :
     match findWorkRule machine.rules config.state config.tape.head with
     | none => none
     | some rule => some (applyWorkRule rule config)
+
+theorem workStep?_eq_apply_of_find (machine : WorkMachine)
+    (config : WorkConfiguration) (rule : WorkRule)
+    (hHalted : machine.isHalted config = false)
+    (hFind : findWorkRule machine.rules config.state config.tape.head = some rule) :
+    workStep? machine config = some (applyWorkRule rule config) := by
+  have hNotHalted : ¬(machine.isHalted config = true) := by
+    intro hTrue
+    have impossible : false = true := hHalted.symm.trans hTrue
+    contradiction
+  have hOuter : workStep? machine config =
+      match findWorkRule machine.rules config.state config.tape.head with
+      | none => none
+      | some selected => some (applyWorkRule selected config) := by
+    unfold workStep?
+    exact if_neg hNotHalted
+  have hInner :
+      (match findWorkRule machine.rules config.state config.tape.head with
+       | none => none
+       | some selected => some (applyWorkRule selected config)) =
+      some (applyWorkRule rule config) := by
+    exact congrArg
+      (fun found => match found with
+        | none => none
+        | some selected => some (applyWorkRule selected config)) hFind
+  exact hOuter.trans hInner
 
 def workRun (machine : WorkMachine) : Nat → WorkConfiguration → WorkConfiguration
   | 0, config => config
@@ -1005,6 +1102,385 @@ private theorem findRule_compileWorkRule_finished (index : Nat)
     (boundaryState rule.targetState) .stay symbol
   exact hSkipDispatch.trans (hSkipSelect.trans
     (hSkipWrite.trans (hSkipMove.trans (hPreserve.trans hFinal))))
+
+private theorem workSymbol_eq_of_fields {left right : WorkSymbol}
+    (hFirst : left.first = right.first)
+    (hSecond : left.second = right.second) : left = right := by
+  cases left with
+  | mk leftFirst leftSecond =>
+      cases right with
+      | mk rightFirst rightSecond =>
+          cases hFirst
+          cases hSecond
+          rfl
+
+private theorem findRule_compileWorkRule_boundary_none (index : Nat)
+    (rule : WorkRule) (state : Nat) (symbol : WorkSymbol)
+    (hLhs : ¬(rule.sourceState = state ∧
+      rule.readSymbol.first = symbol.first)) :
+    findRule (compileWorkRule index rule)
+      (boundaryState state) symbol.first = none := by
+  change findRule
+    (compiledDispatchRule rule :: compiledSelectRule rule ::
+      compiledWriteRule rule :: compiledMoveRule rule :: compiledTail rule)
+    (boundaryState state) symbol.first = none
+  have hDispatch := findRule_cons_of_not_matches
+    (compiledDispatchRule rule)
+    (compiledSelectRule rule :: compiledWriteRule rule ::
+      compiledMoveRule rule :: compiledTail rule) _ _
+    (by
+      intro h
+      have hSource : rule.sourceState = state :=
+        boundaryState_injective h.1
+      exact hLhs ⟨hSource, h.2⟩)
+  have hSelect := findRule_cons_of_not_matches
+    (rule := compiledSelectRule rule)
+    (rest := compiledWriteRule rule :: compiledMoveRule rule :: compiledTail rule)
+    (state := boundaryState state) (symbol := symbol.first)
+    (by
+      intro h
+      have hSource := h.1
+      change dispatchState rule.sourceState rule.readSymbol.first =
+        boundaryState state at hSource
+      exact boundary_ne_dispatch _ _ _ hSource.symm)
+  have hWrite := findRule_cons_of_not_matches
+    (rule := compiledWriteRule rule)
+    (rest := compiledMoveRule rule :: compiledTail rule)
+    (state := boundaryState state) (symbol := symbol.first)
+    (by
+      intro h
+      have hSource := h.1
+      change selectedState rule.sourceState rule.readSymbol 2 =
+        boundaryState state at hSource
+      exact boundary_ne_selected_two _ _ _ hSource.symm)
+  have hMove := findRule_cons_of_not_matches
+    (rule := compiledMoveRule rule) (rest := compiledTail rule)
+    (state := boundaryState state) (symbol := symbol.first)
+    (by
+      intro h
+      have hSource := h.1
+      change selectedState rule.sourceState rule.readSymbol 3 =
+        boundaryState state at hSource
+      exact boundary_ne_selected_three _ _ _ hSource.symm)
+  have hPreserveFour := findRule_preserveRules_none_of_source_ne
+    (selectedState rule.sourceState rule.readSymbol 4)
+    (selectedState rule.sourceState rule.readSymbol 5)
+    (boundaryState state) rule.move symbol.first
+    (by intro h; exact boundary_ne_selected_four _ _ _ h.symm)
+  have hPreserveFive := findRule_preserveRules_none_of_source_ne
+    (selectedState rule.sourceState rule.readSymbol 5)
+    (boundaryState rule.targetState) (boundaryState state)
+    .stay symbol.first
+    (by intro h; exact boundary_ne_selected_five _ _ _ h.symm)
+  have hTail := findRule_append_of_none
+    (left := preserveRules
+      (selectedState rule.sourceState rule.readSymbol 4)
+      (selectedState rule.sourceState rule.readSymbol 5) rule.move)
+    (right := preserveRules
+      (selectedState rule.sourceState rule.readSymbol 5)
+      (boundaryState rule.targetState) .stay)
+    (state := boundaryState state) (symbol := symbol.first) hPreserveFour
+  exact hDispatch.trans (hSelect.trans (hWrite.trans
+    (hMove.trans (hTail.trans hPreserveFive))))
+
+private theorem findRule_compileWorkRule_dispatch_none (index : Nat)
+    (rule : WorkRule) (state : Nat) (symbol : WorkSymbol)
+    (hLhs : ¬(rule.sourceState = state ∧ rule.readSymbol = symbol)) :
+    findRule (compileWorkRule index rule)
+      (dispatchState state symbol.first) symbol.second = none := by
+  change findRule
+    (compiledDispatchRule rule :: compiledSelectRule rule ::
+      compiledWriteRule rule :: compiledMoveRule rule :: compiledTail rule)
+    (dispatchState state symbol.first) symbol.second = none
+  have hDispatch := findRule_cons_of_not_matches
+    (rule := compiledDispatchRule rule)
+    (rest := compiledSelectRule rule :: compiledWriteRule rule ::
+      compiledMoveRule rule :: compiledTail rule)
+    (state := dispatchState state symbol.first) (symbol := symbol.second)
+    (by
+      intro h
+      have hSource := h.1
+      change boundaryState rule.sourceState =
+        dispatchState state symbol.first at hSource
+      exact boundary_ne_dispatch _ _ _ hSource)
+  have hSelect := findRule_cons_of_not_matches
+    (rule := compiledSelectRule rule)
+    (rest := compiledWriteRule rule :: compiledMoveRule rule :: compiledTail rule)
+    (state := dispatchState state symbol.first) (symbol := symbol.second)
+    (by
+      intro h
+      have hParts := dispatchState_injective h.1
+      have hSymbol := workSymbol_eq_of_fields hParts.2 h.2
+      exact hLhs ⟨hParts.1, hSymbol⟩)
+  have hWrite := findRule_cons_of_not_matches
+    (rule := compiledWriteRule rule)
+    (rest := compiledMoveRule rule :: compiledTail rule)
+    (state := dispatchState state symbol.first) (symbol := symbol.second)
+    (by
+      intro h
+      have hSource := h.1
+      change selectedState rule.sourceState rule.readSymbol 2 =
+        dispatchState state symbol.first at hSource
+      exact dispatch_ne_selected_two _ _ _ _ hSource.symm)
+  have hMove := findRule_cons_of_not_matches
+    (rule := compiledMoveRule rule) (rest := compiledTail rule)
+    (state := dispatchState state symbol.first) (symbol := symbol.second)
+    (by
+      intro h
+      have hSource := h.1
+      change selectedState rule.sourceState rule.readSymbol 3 =
+        dispatchState state symbol.first at hSource
+      exact dispatch_ne_selected_three _ _ _ _ hSource.symm)
+  have hPreserveFour := findRule_preserveRules_none_of_source_ne
+    (selectedState rule.sourceState rule.readSymbol 4)
+    (selectedState rule.sourceState rule.readSymbol 5)
+    (dispatchState state symbol.first) rule.move symbol.second
+    (by intro h; exact dispatch_ne_selected_four _ _ _ _ h.symm)
+  have hPreserveFive := findRule_preserveRules_none_of_source_ne
+    (selectedState rule.sourceState rule.readSymbol 5)
+    (boundaryState rule.targetState) (dispatchState state symbol.first)
+    .stay symbol.second
+    (by intro h; exact dispatch_ne_selected_five _ _ _ _ h.symm)
+  have hTail := findRule_append_of_none
+    (left := preserveRules
+      (selectedState rule.sourceState rule.readSymbol 4)
+      (selectedState rule.sourceState rule.readSymbol 5) rule.move)
+    (right := preserveRules
+      (selectedState rule.sourceState rule.readSymbol 5)
+      (boundaryState rule.targetState) .stay)
+    (state := dispatchState state symbol.first) (symbol := symbol.second)
+    hPreserveFour
+  exact hDispatch.trans (hSelect.trans (hWrite.trans
+    (hMove.trans (hTail.trans hPreserveFive))))
+
+private theorem findRule_compileWorkRule_selected_none (index : Nat)
+    (rule : WorkRule) (state : Nat) (symbol : WorkSymbol)
+    (hLhs : ¬(rule.sourceState = state ∧ rule.readSymbol = symbol)) :
+    findRule (compileWorkRule index rule)
+      (selectedState state symbol 2) symbol.first = none := by
+  change findRule
+    (compiledDispatchRule rule :: compiledSelectRule rule ::
+      compiledWriteRule rule :: compiledMoveRule rule :: compiledTail rule)
+    (selectedState state symbol 2) symbol.first = none
+  have hDispatch := findRule_cons_of_not_matches
+    (rule := compiledDispatchRule rule)
+    (rest := compiledSelectRule rule :: compiledWriteRule rule ::
+      compiledMoveRule rule :: compiledTail rule)
+    (state := selectedState state symbol 2) (symbol := symbol.first)
+    (by
+      intro h
+      have hSource := h.1
+      change boundaryState rule.sourceState = selectedState state symbol 2 at hSource
+      exact boundary_ne_selected_two _ _ _ hSource)
+  have hSelect := findRule_cons_of_not_matches
+    (rule := compiledSelectRule rule)
+    (rest := compiledWriteRule rule :: compiledMoveRule rule :: compiledTail rule)
+    (state := selectedState state symbol 2) (symbol := symbol.first)
+    (by
+      intro h
+      have hSource := h.1
+      change dispatchState rule.sourceState rule.readSymbol.first =
+        selectedState state symbol 2 at hSource
+      exact dispatch_ne_selected_two _ _ _ _ hSource)
+  have hWrite := findRule_cons_of_not_matches
+    (rule := compiledWriteRule rule)
+    (rest := compiledMoveRule rule :: compiledTail rule)
+    (state := selectedState state symbol 2) (symbol := symbol.first)
+    (by
+      intro h
+      have hParts := selectedState_two_injective h.1
+      exact hLhs hParts)
+  have hMove := findRule_cons_of_not_matches
+    (rule := compiledMoveRule rule) (rest := compiledTail rule)
+    (state := selectedState state symbol 2) (symbol := symbol.first)
+    (by
+      intro h
+      have hSource := h.1
+      change selectedState rule.sourceState rule.readSymbol 3 =
+        selectedState state symbol 2 at hSource
+      exact selected_two_ne_three _ _ _ _ hSource.symm)
+  have hFour := findRule_preserveRules_none_of_source_ne
+    (selectedState rule.sourceState rule.readSymbol 4)
+    (selectedState rule.sourceState rule.readSymbol 5)
+    (selectedState state symbol 2) rule.move symbol.first
+    (by intro h; exact selected_two_ne_four _ _ _ _ h.symm)
+  have hFive := findRule_preserveRules_none_of_source_ne
+    (selectedState rule.sourceState rule.readSymbol 5)
+    (boundaryState rule.targetState) (selectedState state symbol 2)
+    .stay symbol.first
+    (by intro h; exact selected_two_ne_five _ _ _ _ h.symm)
+  have hTail := findRule_append_of_none
+    (left := preserveRules
+      (selectedState rule.sourceState rule.readSymbol 4)
+      (selectedState rule.sourceState rule.readSymbol 5) rule.move)
+    (right := preserveRules
+      (selectedState rule.sourceState rule.readSymbol 5)
+      (boundaryState rule.targetState) .stay)
+    (state := selectedState state symbol 2) (symbol := symbol.first) hFour
+  exact hDispatch.trans (hSelect.trans (hWrite.trans
+    (hMove.trans (hTail.trans hFive))))
+
+private theorem findRule_compileWorkRule_written_none (index : Nat)
+    (rule : WorkRule) (state : Nat) (symbol : WorkSymbol)
+    (query : TapeSymbol)
+    (hLhs : ¬(rule.sourceState = state ∧ rule.readSymbol = symbol)) :
+    findRule (compileWorkRule index rule)
+      (selectedState state symbol 3) query = none := by
+  change findRule
+    (compiledDispatchRule rule :: compiledSelectRule rule ::
+      compiledWriteRule rule :: compiledMoveRule rule :: compiledTail rule)
+    (selectedState state symbol 3) query = none
+  have hDispatch := findRule_cons_of_not_matches
+    (rule := compiledDispatchRule rule)
+    (rest := compiledSelectRule rule :: compiledWriteRule rule ::
+      compiledMoveRule rule :: compiledTail rule)
+    (state := selectedState state symbol 3) (symbol := query)
+    (by intro h; exact boundary_ne_selected_three _ _ _ h.1)
+  have hSelect := findRule_cons_of_not_matches
+    (rule := compiledSelectRule rule)
+    (rest := compiledWriteRule rule :: compiledMoveRule rule :: compiledTail rule)
+    (state := selectedState state symbol 3) (symbol := query)
+    (by intro h; exact dispatch_ne_selected_three _ _ _ _ h.1)
+  have hWrite := findRule_cons_of_not_matches
+    (rule := compiledWriteRule rule)
+    (rest := compiledMoveRule rule :: compiledTail rule)
+    (state := selectedState state symbol 3) (symbol := query)
+    (by intro h; exact selected_two_ne_three _ _ _ _ h.1)
+  have hMove := findRule_cons_of_not_matches
+    (rule := compiledMoveRule rule) (rest := compiledTail rule)
+    (state := selectedState state symbol 3) (symbol := query)
+    (by
+      intro h
+      have hParts := selectedState_three_injective h.1
+      exact hLhs hParts)
+  have hFour := findRule_preserveRules_none_of_source_ne
+    (selectedState rule.sourceState rule.readSymbol 4)
+    (selectedState rule.sourceState rule.readSymbol 5)
+    (selectedState state symbol 3) rule.move query
+    (by intro h; exact selected_three_ne_four _ _ _ _ h.symm)
+  have hFive := findRule_preserveRules_none_of_source_ne
+    (selectedState rule.sourceState rule.readSymbol 5)
+    (boundaryState rule.targetState) (selectedState state symbol 3)
+    .stay query
+    (by intro h; exact selected_three_ne_five _ _ _ _ h.symm)
+  have hTail := findRule_append_of_none
+    (left := preserveRules
+      (selectedState rule.sourceState rule.readSymbol 4)
+      (selectedState rule.sourceState rule.readSymbol 5) rule.move)
+    (right := preserveRules
+      (selectedState rule.sourceState rule.readSymbol 5)
+      (boundaryState rule.targetState) .stay)
+    (state := selectedState state symbol 3) (symbol := query) hFour
+  exact hDispatch.trans (hSelect.trans (hWrite.trans
+    (hMove.trans (hTail.trans hFive))))
+
+private theorem findRule_compileWorkRule_moved_none (index : Nat)
+    (rule : WorkRule) (state : Nat) (symbol : WorkSymbol)
+    (query : TapeSymbol)
+    (hLhs : ¬(rule.sourceState = state ∧ rule.readSymbol = symbol)) :
+    findRule (compileWorkRule index rule)
+      (selectedState state symbol 4) query = none := by
+  change findRule
+    (compiledDispatchRule rule :: compiledSelectRule rule ::
+      compiledWriteRule rule :: compiledMoveRule rule :: compiledTail rule)
+    (selectedState state symbol 4) query = none
+  have hDispatch := findRule_cons_of_not_matches
+    (rule := compiledDispatchRule rule)
+    (rest := compiledSelectRule rule :: compiledWriteRule rule ::
+      compiledMoveRule rule :: compiledTail rule)
+    (state := selectedState state symbol 4) (symbol := query)
+    (by intro h; exact boundary_ne_selected_four _ _ _ h.1)
+  have hSelect := findRule_cons_of_not_matches
+    (rule := compiledSelectRule rule)
+    (rest := compiledWriteRule rule :: compiledMoveRule rule :: compiledTail rule)
+    (state := selectedState state symbol 4) (symbol := query)
+    (by intro h; exact dispatch_ne_selected_four _ _ _ _ h.1)
+  have hWrite := findRule_cons_of_not_matches
+    (rule := compiledWriteRule rule)
+    (rest := compiledMoveRule rule :: compiledTail rule)
+    (state := selectedState state symbol 4) (symbol := query)
+    (by intro h; exact selected_two_ne_four _ _ _ _ h.1)
+  have hMove := findRule_cons_of_not_matches
+    (rule := compiledMoveRule rule) (rest := compiledTail rule)
+    (state := selectedState state symbol 4) (symbol := query)
+    (by intro h; exact selected_three_ne_four _ _ _ _ h.1)
+  have hFourSource : selectedState rule.sourceState rule.readSymbol 4 ≠
+      selectedState state symbol 4 := by
+    intro h
+    exact hLhs (selectedState_four_injective h)
+  have hFour := findRule_preserveRules_none_of_source_ne
+    (selectedState rule.sourceState rule.readSymbol 4)
+    (selectedState rule.sourceState rule.readSymbol 5)
+    (selectedState state symbol 4) rule.move query hFourSource
+  have hFive := findRule_preserveRules_none_of_source_ne
+    (selectedState rule.sourceState rule.readSymbol 5)
+    (boundaryState rule.targetState) (selectedState state symbol 4)
+    .stay query
+    (by intro h; exact selected_four_ne_five _ _ _ _ h.symm)
+  have hTail := findRule_append_of_none
+    (left := preserveRules
+      (selectedState rule.sourceState rule.readSymbol 4)
+      (selectedState rule.sourceState rule.readSymbol 5) rule.move)
+    (right := preserveRules
+      (selectedState rule.sourceState rule.readSymbol 5)
+      (boundaryState rule.targetState) .stay)
+    (state := selectedState state symbol 4) (symbol := query) hFour
+  exact hDispatch.trans (hSelect.trans (hWrite.trans
+    (hMove.trans (hTail.trans hFive))))
+
+private theorem findRule_compileWorkRule_finished_none (index : Nat)
+    (rule : WorkRule) (state : Nat) (symbol : WorkSymbol)
+    (query : TapeSymbol)
+    (hLhs : ¬(rule.sourceState = state ∧ rule.readSymbol = symbol)) :
+    findRule (compileWorkRule index rule)
+      (selectedState state symbol 5) query = none := by
+  change findRule
+    (compiledDispatchRule rule :: compiledSelectRule rule ::
+      compiledWriteRule rule :: compiledMoveRule rule :: compiledTail rule)
+    (selectedState state symbol 5) query = none
+  have hDispatch := findRule_cons_of_not_matches
+    (rule := compiledDispatchRule rule)
+    (rest := compiledSelectRule rule :: compiledWriteRule rule ::
+      compiledMoveRule rule :: compiledTail rule)
+    (state := selectedState state symbol 5) (symbol := query)
+    (by intro h; exact boundary_ne_selected_five _ _ _ h.1)
+  have hSelect := findRule_cons_of_not_matches
+    (rule := compiledSelectRule rule)
+    (rest := compiledWriteRule rule :: compiledMoveRule rule :: compiledTail rule)
+    (state := selectedState state symbol 5) (symbol := query)
+    (by intro h; exact dispatch_ne_selected_five _ _ _ _ h.1)
+  have hWrite := findRule_cons_of_not_matches
+    (rule := compiledWriteRule rule)
+    (rest := compiledMoveRule rule :: compiledTail rule)
+    (state := selectedState state symbol 5) (symbol := query)
+    (by intro h; exact selected_two_ne_five _ _ _ _ h.1)
+  have hMove := findRule_cons_of_not_matches
+    (rule := compiledMoveRule rule) (rest := compiledTail rule)
+    (state := selectedState state symbol 5) (symbol := query)
+    (by intro h; exact selected_three_ne_five _ _ _ _ h.1)
+  have hFour := findRule_preserveRules_none_of_source_ne
+    (selectedState rule.sourceState rule.readSymbol 4)
+    (selectedState rule.sourceState rule.readSymbol 5)
+    (selectedState state symbol 5) rule.move query
+    (by intro h; exact selected_four_ne_five _ _ _ _ h)
+  have hFiveSource : selectedState rule.sourceState rule.readSymbol 5 ≠
+      selectedState state symbol 5 := by
+    intro h
+    exact hLhs (selectedState_five_injective h)
+  have hFive := findRule_preserveRules_none_of_source_ne
+    (selectedState rule.sourceState rule.readSymbol 5)
+    (boundaryState rule.targetState) (selectedState state symbol 5)
+    .stay query hFiveSource
+  have hTail := findRule_append_of_none
+    (left := preserveRules
+      (selectedState rule.sourceState rule.readSymbol 4)
+      (selectedState rule.sourceState rule.readSymbol 5) rule.move)
+    (right := preserveRules
+      (selectedState rule.sourceState rule.readSymbol 5)
+      (boundaryState rule.targetState) .stay)
+    (state := selectedState state symbol 5) (symbol := query) hFour
+  exact hDispatch.trans (hSelect.trans (hWrite.trans
+    (hMove.trans (hTail.trans hFive))))
 
 private def compileWorkRulesFrom : Nat → List WorkRule → List Rule
   | _, [] => []
