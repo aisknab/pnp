@@ -2629,4 +2629,181 @@ theorem run_compileWorkMachine_mul_isHalted
     machine steps config final hRun]
   exact compileWorkMachine_isHalted_encode machine final
 
+/-- A work configuration with no successor is stable under every fuel
+budget. -/
+theorem workRun_eq_self_of_workStep?_eq_none (machine : WorkMachine)
+    (config : WorkConfiguration) (fuel : Nat)
+    (hStep : workStep? machine config = none) :
+    workRun machine fuel config = config := by
+  induction fuel with
+  | zero => rfl
+  | succ fuel ih =>
+      change
+        (match workStep? machine config with
+         | none => config
+         | some next => workRun machine fuel next) = config
+      rw [hStep]
+
+/-- A halting work configuration is stable under every work fuel budget. -/
+theorem workRun_eq_self_of_isHalted (machine : WorkMachine)
+    (config : WorkConfiguration) (fuel : Nat)
+    (hHalted : machine.isHalted config = true) :
+    workRun machine fuel config = config :=
+  workRun_eq_self_of_workStep?_eq_none machine config fuel
+    (workStep?_eq_none_of_isHalted machine config hHalted)
+
+/-- Splitting a work fuel budget runs the first part before the second. -/
+theorem workRun_add (machine : WorkMachine) (first second : Nat)
+    (config : WorkConfiguration) :
+    workRun machine (first + second) config =
+      workRun machine second (workRun machine first config) := by
+  induction first generalizing config with
+  | zero =>
+      rw [Nat.zero_add]
+      rfl
+  | succ first ih =>
+      rw [Nat.succ_add]
+      change
+        (match workStep? machine config with
+         | none => config
+         | some next => workRun machine (first + second) next) =
+        workRun machine second
+          (match workStep? machine config with
+           | none => config
+           | some next => workRun machine first next)
+      cases hStep : workStep? machine config with
+      | none =>
+          exact (workRun_eq_self_of_workStep?_eq_none
+            machine config second hStep).symm
+      | some next => exact ih next
+
+/-- Forgetting the early-stop witness from an exact work run yields the same
+ordinary bounded run at that exact transition count. -/
+theorem workRun_eq_of_workRunExact (machine : WorkMachine) (steps : Nat)
+    (config final : WorkConfiguration)
+    (hRun : workRunExact? machine steps config = some final) :
+    workRun machine steps config = final := by
+  induction steps generalizing config with
+  | zero =>
+      change some config = some final at hRun
+      exact Option.some.inj hRun
+  | succ steps ih =>
+      cases hStep : workStep? machine config with
+      | none =>
+          change
+            (match workStep? machine config with
+             | none => none
+             | some next => workRunExact? machine steps next) = some final at hRun
+          rw [hStep] at hRun
+          contradiction
+      | some next =>
+          have hTail : workRunExact? machine steps next = some final := by
+            change
+              (match workStep? machine config with
+               | none => none
+               | some next => workRunExact? machine steps next) = some final at hRun
+            rw [hStep] at hRun
+            exact hRun
+          change
+            (match workStep? machine config with
+             | none => config
+             | some next => workRun machine steps next) = final
+          rw [hStep]
+          exact ih next hTail
+
+/-- Once an exact work trace reaches a halting configuration, every larger
+work fuel budget has the same final configuration. -/
+theorem workRun_of_workRunExact_halted_le
+    (machine : WorkMachine) (steps fuel : Nat)
+    (config final : WorkConfiguration)
+    (hRun : workRunExact? machine steps config = some final)
+    (hHalted : machine.isHalted final = true)
+    (hLe : steps ≤ fuel) :
+    workRun machine fuel config = final := by
+  rcases exists_eq_add_of_le_constructive hLe with ⟨remaining, hFuel⟩
+  rw [hFuel, workRun_add]
+  rw [workRun_eq_of_workRunExact machine steps config final hRun]
+  exact workRun_eq_self_of_isHalted machine final remaining hHalted
+
+/-- Work bounded acceptance is exactly acceptance of its final bounded-run
+configuration. -/
+theorem workBoundedDecide_accept_iff_final (machine : WorkMachine)
+    (fuel : Nat) (initialTape : WorkTape) :
+    workBoundedDecide machine fuel initialTape = .accept ↔
+      (workRun machine fuel
+        (workStartConfiguration machine initialTape)).state =
+          machine.acceptState := by
+  let final := workRun machine fuel
+    (workStartConfiguration machine initialTape)
+  change
+    (if final.state == machine.acceptState then
+       WorkVerdict.accept
+     else if final.state == machine.rejectState then
+       WorkVerdict.reject
+     else WorkVerdict.timeout) = WorkVerdict.accept ↔
+      final.state = machine.acceptState
+  cases hAccept : (final.state == machine.acceptState) with
+  | true =>
+      constructor
+      · intro _
+        exact (nat_beq_true_iff final.state machine.acceptState).mp hAccept
+      · intro _
+        rw [if_pos rfl]
+  | false =>
+      constructor
+      · intro hVerdict
+        rw [if_neg Bool.false_ne_true] at hVerdict
+        by_cases hReject : (final.state == machine.rejectState) = true
+        · rw [if_pos hReject] at hVerdict
+          contradiction
+        · rw [if_neg hReject] at hVerdict
+          contradiction
+      · intro hState
+        have hTrue :=
+          (nat_beq_true_iff final.state machine.acceptState).mpr hState
+        rw [hAccept] at hTrue
+        contradiction
+
+/-- Under an exact halting trace and sufficient work/raw budgets, work
+acceptance is equivalent to the compiled raw run ending in its accept state. -/
+theorem workBoundedDecide_accept_iff_compiled_run
+    (machine : WorkMachine) (steps workFuel rawFuel : Nat)
+    (initialTape : WorkTape) (final : WorkConfiguration)
+    (hRun : workRunExact? machine steps
+      (workStartConfiguration machine initialTape) = some final)
+    (hHalted : machine.isHalted final = true)
+    (hWorkLe : steps ≤ workFuel)
+    (hRawLe : 6 * steps ≤ rawFuel) :
+    workBoundedDecide machine workFuel initialTape = .accept ↔
+      (run (compileWorkMachine machine) rawFuel
+        (encodeWorkConfiguration
+          (workStartConfiguration machine initialTape))).state =
+        (compileWorkMachine machine).acceptState := by
+  have hWorkFinal := workRun_of_workRunExact_halted_le
+    machine steps workFuel
+    (workStartConfiguration machine initialTape) final
+    hRun hHalted hWorkLe
+  have hRawFinal := run_compileWorkMachine_of_workRunExact_halted_le
+    machine steps rawFuel
+    (workStartConfiguration machine initialTape) final
+    hRun hHalted hRawLe
+  constructor
+  · intro hVerdict
+    have hAccept :=
+      (workBoundedDecide_accept_iff_final
+        machine workFuel initialTape).mp hVerdict
+    rw [hWorkFinal] at hAccept
+    rw [hRawFinal]
+    unfold encodeWorkConfiguration compileWorkMachine
+    exact congrArg boundaryState hAccept
+  · intro hRawAccept
+    rw [hRawFinal] at hRawAccept
+    have hAccept : final.state = machine.acceptState := by
+      unfold encodeWorkConfiguration compileWorkMachine at hRawAccept
+      exact boundaryState_injective hRawAccept
+    apply (workBoundedDecide_accept_iff_final
+      machine workFuel initialTape).mpr
+    rw [hWorkFinal]
+    exact hAccept
+
 end PNP.Concrete
