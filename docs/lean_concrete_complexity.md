@@ -3,9 +3,11 @@
 `lean/PNP/Concrete/Complexity.lean` defines concrete bitstring languages, proof-bearing P and NP
 witnesses, and polynomial many-one reductions without storing executable Lean functions or string
 code handles. `lean/PNP/Concrete/TapeHandoff.lean` supplies the observable first-blank output
-decoder and a pure canonical handoff target. `lean/PNP/Concrete/PipelineRefinement.lean` pins exact raw-machine refinement
+decoder and a pure canonical handoff target. `lean/PNP/Concrete/PipelineTapeGeometry.lean` supplies
+a two-track boundary frame with arbitrary exterior garbage and proved local move/expansion geometry.
+`lean/PNP/Concrete/PipelineRefinement.lean` pins exact raw-machine refinement
 contracts and proves the two machine-leaf cases. `lean/PNP/Concrete/Target.lean` names the
-corresponding inactive target proposition. The explicit declarations in all four layers have empty
+corresponding inactive target proposition. The explicit declarations in all five layers have empty
 compiled axiom closures.
 
 This is a finite charged-pipeline interface. Its leaves are concrete `Machine` values, but the
@@ -129,11 +131,13 @@ axioms. Seven blockers remain, beginning with `Formal.ConcreteComplexityMachineL
 ```bash
 lake build PNP
 lake env lean -DwarningAsError=true lean-audit/PNPConcreteTapeHandoffAxiomAudit.lean
+lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineTapeGeometryAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcreteComplexityAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcreteTargetAxiomAudit.lean
 node --test audits/lean-concrete-complexity0.test.mjs
 node --test audits/lean-concrete-tape-handoff0.test.mjs
+node --test audits/lean-concrete-pipeline-tape-geometry0.test.mjs
 node --test audits/lean-concrete-pipeline-refinement0.test.mjs
 ```
 
