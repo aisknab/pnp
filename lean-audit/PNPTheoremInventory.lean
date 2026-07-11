@@ -64,6 +64,14 @@ private def isProjectDeclaration (env : Environment) (name : Name) : Bool :=
 
 private def reviewedMilestoneTheoremNames : Array Name := #[
   `PNP.Concrete.BitString.decodePair_pair,
+  `PNP.Concrete.FinalUniversalDesign.cnfCompiled_accept_iff_check,
+  `PNP.Concrete.FinalUniversalDesign.cnfCompiled_ne_timeout,
+  `PNP.Concrete.FinalUniversalDesign.cnfCompiled_reject_iff_check_false,
+  `PNP.Concrete.FinalUniversalDesign.cnfConcreteVerifier_decision,
+  `PNP.Concrete.FinalUniversalDesign.cnfConcreteVerifier_inputMode,
+  `PNP.Concrete.FinalUniversalDesign.cnfSATInNP,
+  `PNP.Concrete.FinalUniversalDesign.cnfUniversalWorkOutcome,
+  `PNP.Concrete.FinalUniversalDesign.formulaGrammarOutcome,
   `PNP.Concrete.NatPolynomial.eval_mono,
   `PNP.Concrete.PolynomialTimeMachine.verdict_accepts_iff,
   `PNP.Concrete.PolynomialTimeMachine.verdict_ne_timeout,

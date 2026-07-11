@@ -25,6 +25,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-root-target0.test.mjs',
   'audits/lean-concrete-machine0.test.mjs',
   'audits/lean-concrete-complexity0.test.mjs',
+  'audits/lean-concrete-cnf0.test.mjs',
   'audits/lean-nand-semantics0.test.mjs',
   'audits/lean-nand-enumerator0.test.mjs',
   'audits/lean-nand-reference-minimum0.test.mjs',
@@ -102,6 +103,17 @@ export async function RunPNPVerifyAll0(options = {}) {
     mathematicalTheoremEstablished: statusStep?.mathematicalTheoremEstablished ?? false,
     checkerAcceptanceIsMathematicalProof: false,
     publicTheoremEmissionAllowed: statusStep?.publicTheoremEmissionAllowed ?? false,
+    leanConcreteCNFVerifierCorrectnessFormalized:
+      statusStep?.leanConcreteCNFVerifierCorrectnessFormalized ?? false,
+    leanConcreteCNFVerifierNoTimeoutFormalized:
+      statusStep?.leanConcreteCNFVerifierNoTimeoutFormalized ?? false,
+    leanConcreteCNFSATMembershipFormalized:
+      statusStep?.leanConcreteCNFSATMembershipFormalized ?? false,
+    leanConcreteCNFSATMembershipTheorem:
+      statusStep?.leanConcreteCNFSATMembershipTheorem ?? null,
+    leanConcreteCNFProofScope: statusStep?.leanConcreteCNFProofScope ?? null,
+    leanConcreteCNFSATInPFormalized: false,
+    leanConcreteCNFNPCompletenessFormalized: false,
     publicTheoremStatement: statusStep?.publicTheoremStatement ?? null,
     publicTheoremConclusion: statusStep?.publicTheoremConclusion ?? null,
     finalTheoremReady: statusStep?.finalTheoremReady ?? false,
@@ -174,6 +186,9 @@ function reject0(coord, pathArray, reason, witness = {}) {
     witness: { reason, ...witness },
     mathematicalTheoremEstablished: false,
     publicTheoremEmissionAllowed: false,
+    leanConcreteCNFVerifierCorrectnessFormalized: false,
+    leanConcreteCNFVerifierNoTimeoutFormalized: false,
+    leanConcreteCNFSATMembershipFormalized: false,
     finalTheoremReady: false,
     historicalReplayExecuted: false,
     remainingBlockers: [...FORMAL_RECONSTRUCTION_BLOCKERS0],

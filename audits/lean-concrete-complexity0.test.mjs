@@ -23,7 +23,6 @@ const EXPECTED_AXIOMS = Object.freeze([
   'PNP.GeneratePCCPack',
   'PNP.LockedNANDThreshold',
   'PNP.ResidualBandExactMinimization',
-  'PNP.SAT',
 ]);
 
 const EXPECTED_BLOCKERS = Object.freeze([

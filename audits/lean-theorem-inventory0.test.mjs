@@ -85,28 +85,27 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
   assert.equal(`${stableStringify0(inventory)}\n`, inventoryBytes.toString('utf8'));
   ValidateLeanTheoremInventory0(inventory);
   assert.equal(inventory.environmentProbeComplete, true);
-  assert.equal(inventory.declarationCount, 2484);
-  assert.equal(inventory.excludedPrivateDeclarationCount, 36);
-  assert.equal(inventory.theoremCount, 883);
-  assert.equal(inventory.assumptionFreeTheoremCount, 793);
-  assert.equal(inventory.axiomCount, 5);
-  assert.equal(inventory.sourceClosureModuleCount, 26);
+  assert.equal(inventory.declarationCount, 4419);
+  assert.equal(inventory.excludedPrivateDeclarationCount, 551);
+  assert.equal(inventory.theoremCount, 1826);
+  assert.equal(inventory.assumptionFreeTheoremCount, 1727);
+  assert.equal(inventory.axiomCount, 4);
+  assert.equal(inventory.sourceClosureModuleCount, 36);
   assert.deepEqual(inventory.declarationKindCounts, {
-    axiom: 5,
-    constructor: 98,
-    definition: 1350,
-    inductive: 74,
+    axiom: 4,
+    constructor: 249,
+    definition: 2114,
+    inductive: 113,
     opaque: 0,
     quotient: 0,
-    recursor: 74,
-    theorem: 883,
+    recursor: 113,
+    theorem: 1826,
   });
   assert.deepEqual(inventory.projectAxioms, [
     'PNP.CheckPCCPackexp',
     'PNP.GeneratePCCPack',
     'PNP.LockedNANDThreshold',
     'PNP.ResidualBandExactMinimization',
-    'PNP.SAT',
   ]);
   assert.equal(inventory.compatibilityRootCandidate, null);
   assert.deepEqual(inventory.concreteTargetCandidate, {
@@ -117,7 +116,7 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
     module: 'PNP.Concrete.Target',
     name: 'PNP.Main.ConcretePEqualsNP',
   });
-  assert.equal(inventory.milestoneCandidates.length, 34);
+  assert.equal(inventory.milestoneCandidates.length, 42);
   assert.deepEqual(inventory.milestoneCandidates.map((entry) => entry.name), REQUIRED_MILESTONE_THEOREMS0);
   assert.equal(inventory.milestoneCandidates.every((entry) => entry.kind === 'theorem'
     && entry.kernelValue === null && typeof entry.kernelType === 'string'), true);
@@ -125,7 +124,7 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
 
 test('source closure scans every Lean source and rejects a symlinked source root', async () => {
   const files = await CollectLeanSourceFiles0(ROOT);
-  assert.equal(files.length, 27);
+  assert.equal(files.length, 37);
   assert.equal(files.every((file) => file.startsWith('lean/') && file.endsWith('.lean')), true);
   assert.deepEqual(files, [...files].sort());
   assert.equal(files.includes('lean/PNP.lean'), true);
@@ -134,6 +133,7 @@ test('source closure scans every Lean source and rejects a symlinked source root
   assert.equal(files.includes('lean/PNP/Concrete/Machine.lean'), true);
   assert.equal(files.includes('lean/PNP/Concrete/Complexity.lean'), true);
   assert.equal(files.includes('lean/PNP/Concrete/Target.lean'), true);
+  assert.equal(files.includes('lean/PNP/Concrete/CNFWorkUniversalCorrectness.lean'), true);
 
   const temporary = await mkdtemp(path.join(os.tmpdir(), 'pnp-lean-source-symlink-'));
   try {
@@ -158,7 +158,7 @@ test('positive Lean probe parser rejects empty, malformed, noisy, failed, or non
   const valid = ParseLeanInventoryProbe0({
     stdout: inventoryBytes.toString('utf8'), stderr: '', exitCode: 0, timedOut: false,
   });
-  assert.equal(valid.inventory.declarationCount, 2484);
+  assert.equal(valid.inventory.declarationCount, 4419);
   for (const input of [
     { stdout: '', stderr: '', exitCode: 0, timedOut: false },
     { stdout: '{}\n', stderr: '', exitCode: 0, timedOut: false },
@@ -291,7 +291,7 @@ test('same-name theorem type weakening and source-closure drift revoke milestone
     inventoryBytes,
     map.milestoneSourceClosureSha256,
   );
-  assert.equal(current.milestones.filter((entry) => entry.earned).length, 8);
+  assert.equal(current.milestones.filter((entry) => entry.earned).length, 9);
 
   const weakened = structuredClone(inventory);
   const candidate = weakened.milestoneCandidates.find(

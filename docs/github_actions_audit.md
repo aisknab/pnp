@@ -15,7 +15,9 @@ from current theorem status.
   declaration inventory from `Lean.Environment.constants` plus `Lean.collectAxioms`, and prints
   the focused axiom transcripts for the 41-declaration concrete bitstring/polynomial kernel, the
   38-declaration finite-rule machine kernel, the 50-declaration finite charged-pipeline complexity
-  interface, the two-declaration inactive concrete target, and enforced zero-axiom direct-wire semantics, enumerator, finite truth-table,
+  interface, the two-declaration inactive concrete target, the concrete CNF semantics/codec,
+  paired work-input bridge, direct verifier bridge, and complete work-machine correctness closure,
+  and enforced zero-axiom direct-wire semantics, enumerator, finite truth-table,
   exhaustive reference-minimum, concrete framed composition/slack, typed locked-NAND candidate,
   semantic output-lower-bound, source-accounting, finite local-baseline, and conditional
   threshold-boundary audits plus the explicit-list residual-route audit when Lean inputs change.
@@ -23,7 +25,7 @@ from current theorem status.
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual
   routes require 30. The workflow also checks the byte-identical inventory mirrors, derives the
   false concrete publication gate and status/report outputs, and verifies same-environment
-  double-build determinism plus exact committed bytes for the current concise seven-page PDF. The
+  double-build determinism plus exact committed bytes for the current concise eight-page PDF. The
   hosted runner's apt-installed TeX and Poppler versions are not cryptographically pinned, so this
   is not a universal cross-toolchain reproducibility claim.
 - `.github/workflows/legacy-v0-replay.yml` is manual only. It replays the immutable historical
@@ -47,7 +49,7 @@ The automatic gate does not execute `RunAll0`, release audits, materialized theo
 historical 1,121-test suite. Those routes are not current package exports, scripts, or bins.
 
 The Lean workflow's successful build is not a theorem-release signal. Its root status is
-assumption-free non-theorem data, `PNP.Main.p_eq_np` is absent, and the conditional bridge's five
+assumption-free non-theorem data, `PNP.Main.p_eq_np` is absent, and the conditional bridge's four
 project-specific axioms remain visible in the workflow log. The locked-NAND threshold-boundary
 audit proves deductions only from six explicit premises; it does not instantiate the global
 builder, carrier layout, cross-instance baseline distinctness, trace/final laws, report threshold,
@@ -56,11 +58,19 @@ checks finite machine-leaf syntax, certificate and runtime bounds, output handof
 composition, and the inactive target; it does not supply the missing compiler/refinement to one raw
 machine.
 
+The concrete-CNF checks do establish a narrower raw-machine result. They require complete axiom
+transcripts for the canonical CNF codec and semantics, paired work-input layout, generic direct
+verifier bridge, and universal work-machine correctness. The final theorems prove that the finite
+compiled machine accepts exactly the true encoded certificate checks, rejects the false checks,
+cannot time out at the explicit polynomial fuel bound, and yields
+`PNP.Concrete.FinalUniversalDesign.cnfSATInNP : InNP CNFSAT`. CI must keep this boundary explicit:
+it proves `CNFSAT ∈ NP`, not `CNFSAT ∈ P`, NP-hardness, NP-completeness, or `P = NP`.
+
 The compiled inventory is likewise not a theorem-release signal. Publication uses a separate
 fail-closed gate for `PNP.Main.p_eq_np : PNP.Main.ConcretePEqualsNP`. The concrete target now exists
 as an axiom-free definition, but the compatibility/root theorem is absent, the abstract
-`PNP.PEqualsNP` proposition is ineligible, raw-machine linkage remains blocked, and all five
-expected kernel/closure fingerprints are intentionally unset. CI checks that unset fingerprints
+`PNP.PEqualsNP` proposition is ineligible, the general charged-pipeline-to-raw-machine linkage
+remains blocked, and the activation kernel/closure fingerprints are intentionally unset. CI checks that unset fingerprints
 fail rather than matching one another, and that every theorem-emission field remains derived from
 the false gate.
 
@@ -72,7 +82,7 @@ node scripts/generate-formal-publication.mjs --check
 npm run report:check
 ```
 
-The current root PDF is the generated seven-page formal-reconstruction report. The historical
+The current root PDF is the generated eight-page formal-reconstruction report. The historical
 56-page claim artifact is not a current workflow output and is available only at the pinned legacy
 coordinate recorded under `archive/legacy-v0/`.
 

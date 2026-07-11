@@ -52,10 +52,11 @@
   \vspace{0.3cm}
   {\LARGE\bfseries\color{statusred} The repository does not currently establish $P=NP$.\par}
   \vspace{0.3cm}
-  Public theorem emission is disabled. An audited concrete complexity target now exists, but the
-  charged pipeline has not been linked to the raw machine kernel, its reviewed activation
-  fingerprints are unset, and no root theorem exists. The abstract string-handle bridge is not a
-  standard P-versus-NP formalization and is never an activation source.
+  Public theorem emission is disabled. A direct finite raw-machine verifier now proves concrete
+  CNF-SAT membership in NP with an explicit polynomial bound. It does not prove CNF-SAT in P,
+  NP-hardness, NP-completeness, or $P=NP$. The general charged pipeline has not been linked to the
+  raw machine kernel, its reviewed activation fingerprints are unset, and no root theorem exists.
+  The abstract string-handle bridge is never an activation source.
   \vspace{0.3cm}
   \end{minipage}
 }
@@ -91,6 +92,12 @@ Boolean fields, JSON strings, historical release records, report prose, and exte
 activate a theorem. Only the separately derived concrete publication gate may control theorem
 emission, and that gate is currently false.
 
+The completed direct CNF verifier consumes the literal canonical pair of an encoded formula and
+assignment certificate. Lean proves universal acceptance equivalence, rejection equivalence, and
+absence of timeout at its explicit polynomial fuel bound, and constructs a proof-bearing
+\code{PolynomialTimeVerifier CNFSAT}. Thus \code{PNP.Concrete.CNFSAT} is in the concrete NP class.
+This is a verifier theorem, not a deterministic polynomial-time SAT algorithm.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule
@@ -113,7 +120,8 @@ The separate publication target is \code{PNP.Main.ConcretePEqualsNP}. Eligibilit
 the exact theorem type, reviewed kernel fingerprints, and a tightly fixed Lean-standard axiom
 closure. The target is present as an inactive definition backed by finite charged-pipeline
 semantics; its presence is not a proof, and the compiler/refinement link to the raw machine kernel
-remains an explicit blocker.
+remains an explicit blocker for the general charged-pipeline target. The direct CNF verifier is one
+closed raw-machine instance; it does not supply that general link.
 
 The expected fingerprints are intentionally unset. This is a fail-closed migration gate, not a
 missing runtime input. A verifier must reject any attempt to set \code{passed=true} while a
@@ -130,7 +138,7 @@ Gate subcheck & Result \\
 
 \begin{samepage}
 Allowed foundation axioms are fixed to \code{Classical.choice}, \code{Quot.sound}, and
-\code{propext}. Project axioms, \code{sorryAx}, or any unknown axiom make the gate fail. The five
+\code{propext}. Project axioms, \code{sorryAx}, or any unknown axiom make the gate fail. The four
 currently disclosed project axioms are:
 
 \begin{itemize}

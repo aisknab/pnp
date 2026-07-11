@@ -8,6 +8,7 @@ on:
       - 'lake-manifest.json'
       - 'lean/**'
       - 'lean-audit/**'
+      - 'lean-regression/**'
       - 'formal-publication0.mjs'
       - 'pcc-formal-reconstruction-status0.mjs'
       - 'pcc-formal-public-surface0.mjs'
@@ -28,6 +29,7 @@ on:
       - 'audits/lean-root-target0.test.mjs'
       - 'audits/lean-concrete-machine0.test.mjs'
       - 'audits/lean-concrete-complexity0.test.mjs'
+      - 'audits/lean-concrete-cnf0.test.mjs'
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
       - 'audits/lean-nand-reference-minimum0.test.mjs'
@@ -59,6 +61,7 @@ on:
       - 'lake-manifest.json'
       - 'lean/**'
       - 'lean-audit/**'
+      - 'lean-regression/**'
       - 'formal-publication0.mjs'
       - 'pcc-formal-reconstruction-status0.mjs'
       - 'pcc-formal-public-surface0.mjs'
@@ -79,6 +82,7 @@ on:
       - 'audits/lean-root-target0.test.mjs'
       - 'audits/lean-concrete-machine0.test.mjs'
       - 'audits/lean-concrete-complexity0.test.mjs'
+      - 'audits/lean-concrete-cnf0.test.mjs'
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
       - 'audits/lean-nand-reference-minimum0.test.mjs'
@@ -156,7 +160,7 @@ jobs:
           grep -F 'Lake version 5.0.0-src+68218e8 (Lean version 4.31.0)' /tmp/lake-version.txt
 
       - name: Audit explicit root and assumption inventory
-        run: node --test audits/lean-root-target0.test.mjs audits/lean-concrete-machine0.test.mjs audits/lean-concrete-complexity0.test.mjs audits/lean-nand-semantics0.test.mjs audits/lean-nand-enumerator0.test.mjs audits/lean-nand-reference-minimum0.test.mjs audits/lean-locked-nand-baseline0.test.mjs audits/lean-locked-nand-threshold-boundary0.test.mjs audits/lean-residual-routes0.test.mjs audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs
+        run: node --test audits/lean-root-target0.test.mjs audits/lean-concrete-machine0.test.mjs audits/lean-concrete-complexity0.test.mjs audits/lean-concrete-cnf0.test.mjs audits/lean-nand-semantics0.test.mjs audits/lean-nand-enumerator0.test.mjs audits/lean-nand-reference-minimum0.test.mjs audits/lean-locked-nand-baseline0.test.mjs audits/lean-locked-nand-threshold-boundary0.test.mjs audits/lean-residual-routes0.test.mjs audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs
 
       - name: Build explicit PNP root
         run: lake build PNP
@@ -212,6 +216,46 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 2
+
+      - name: Print concrete CNF semantics and codec axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          if printf '%s\n' "$audit_output" | grep -F 'depends on axioms:'; then
+            echo 'Concrete CNF semantics or codec unexpectedly depends on axioms.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 80
+
+      - name: Print concrete CNF work-input bridge axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFWorkInputAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          if printf '%s\n' "$audit_output" | grep -F 'depends on axioms:'; then
+            echo 'Concrete CNF work-input bridge unexpectedly depends on axioms.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 20
+
+      - name: Print direct concrete CNF verifier bridge axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFVerifierAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          if printf '%s\n' "$audit_output" | grep -F 'depends on axioms:'; then
+            echo 'Direct concrete CNF verifier bridge unexpectedly depends on axioms.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 8
+
+      - name: Print complete concrete CNF work-correctness axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFWorkAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          if printf '%s\n' "$audit_output" | grep -F 'depends on axioms:'; then
+            echo 'Concrete CNF work correctness unexpectedly depends on axioms.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 766
 
       - name: Print direct-wire NAND semantics axioms
         run: |

@@ -32,16 +32,20 @@ minimizer, ZeroSlack theorem, or final complexity conclusion.
 The current Lean development makes parts of the intended route explicit and now defines an
 axiom-free finite charged-pipeline interface for P, bounded-certificate NP, and polynomial
 many-one reductions. It does not yet prove that every such pipeline compiles or refines to the raw
-single-tape machine kernel. Nor does it provide executable SAT, the complete locked-NAND threshold
-theorem, the residual-band exact minimizer, ZeroSlack, the remaining end-to-end polynomial bounds,
-or a root theorem `PNP.Main.p_eq_np` with an acceptable axiom audit.
+single-tape machine kernel. It now does provide one direct raw-machine instance: a universally
+correct polynomial-time verifier for canonically encoded finite CNF formulae and bounded assignment
+certificates, proving `PNP.Concrete.CNFSAT ∈ NP`. It does not provide a deterministic polynomial-time
+decider proving `CNFSAT ∈ P`, concrete NP-hardness or NP-completeness, the complete locked-NAND
+threshold theorem, the residual-band exact minimizer, ZeroSlack, the remaining end-to-end
+polynomial bounds, or a root theorem `PNP.Main.p_eq_np` with an acceptable axiom audit.
 
 The repository now pins `leanprover/lean4:v4.31.0` and builds the explicit `PNP` library root. That
 root imports every tracked Lean source module. `PNP.Main.rootTheoremStatus` is assumption-free data
 recording that the theorem is not released; it is not the target theorem. The current conditional
-bridge still depends on five disclosed project-specific axioms: `PNP.SAT`,
-`PNP.LockedNANDThreshold`, `PNP.ResidualBandExactMinimization`, `PNP.GeneratePCCPack`, and
-`PNP.CheckPCCPackexp`.
+bridge still depends on four disclosed project-specific axioms: `PNP.LockedNANDThreshold`,
+`PNP.ResidualBandExactMinimization`, `PNP.GeneratePCCPack`, and `PNP.CheckPCCPackexp`. The legacy
+`PNP.SAT` value is now an ordinary non-authoritative label, not an axiom and not an alias for
+`PNP.Concrete.CNFSAT`.
 
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
@@ -51,6 +55,14 @@ bounds. Lean constructs P contained in NP, reduction identity/composition/transp
 NP-complete-in-P implication. This is a charged interpreter interface, not yet a compiler or
 refinement theorem to one raw machine. See
 [`lean_concrete_complexity.md`](./lean_concrete_complexity.md).
+
+The concrete CNF layer separately defines canonical formula and assignment codecs, propositional
+CNF semantics, a Boolean certificate checker, a finite work machine, and its compiled raw machine.
+Lean proves for every raw formula/certificate pair that the compiled machine accepts exactly when
+the checker returns true, rejects exactly when it returns false, and cannot time out at the explicit
+polynomial fuel bound. The resulting `.paired` `PolynomialTimeVerifier` proves
+`PNP.Concrete.FinalUniversalDesign.cnfSATInNP : InNP CNFSAT`. This is a bounded-certificate NP
+membership theorem, not a deterministic decision procedure and not a hardness result.
 
 ## Compiled inventory and current publication boundary
 
@@ -62,16 +74,16 @@ and public copies must be byte-identical. See
 [`lean_theorem_inventory.md`](./lean_theorem_inventory.md) for the inventory contract and check
 commands.
 
-The eight earned intermediate milestone rows additionally require 34 detailed compiled theorem
-candidates: exact names and theorem kinds, empty axiom closures, per-name domain-separated
-kernel-type SHA-256 values, and a pinned closure over every `lean/**/*.lean` file plus the Lean/Lake
-pins and inventory probe across all 26 Lean source modules. Type or source drift revokes milestone
-credit until reviewed pins change.
+Every earned intermediate milestone row requires its configured detailed theorem candidates to
+match by exact name and theorem kind, have empty axiom closures, preserve their per-name
+domain-separated kernel-type SHA-256 values, and match the pinned closure over every
+`lean/**/*.lean` file plus the Lean/Lake pins and inventory probe. Type or source drift revokes
+milestone credit until reviewed pins change.
 
-The current compiled inventory contains 2,484 declarations, including 883 theorems and five
-project-specific axioms. Of those theorems, 793 have empty axiom closures. It records 36 excluded
-private declarations, 34 reviewed milestone candidates, and eight earned rows among eleven total
-milestones.
+Declaration, theorem, module, excluded-private, and reviewed-candidate counts are emitted by the
+compiled inventory and are intentionally not duplicated here. The current Lean source closure has
+exactly four project-specific axioms; the generated inventory and publication outputs must be
+regenerated and byte-checked after source-closure changes before they may describe the revision.
 
 Inventory generation is deliberately separate from theorem publication. The concrete gate expects
 the compatibility theorem `PNP.Main.p_eq_np` to have the exact concrete target
@@ -87,18 +99,21 @@ check is also false. Therefore the gate does not pass and every theorem-emission
 from it remains false or `null`.
 
 The root `canonical_proof_report.tex` and `canonical_proof_report.pdf` now form the generated,
-concise seven-page formal-reconstruction report. They replace the historical claim manuscript at the
+concise eight-page formal-reconstruction report. They replace the historical claim manuscript at the
 root and make the non-activation boundary explicit. The historical 56-page claim artifact is
 available only from the pinned legacy source coordinate recorded under
 [`archive/legacy-v0/`](../archive/legacy-v0/README.md).
 
+The direct CNF verifier closes one formerly abstract obligation—concrete NP membership for
+`PNP.Concrete.CNFSAT`—but it does not discharge the remaining publication blockers. In particular,
+the general charged-pipeline compiler/refinement, a deterministic polynomial-time CNF-SAT decider,
+concrete NP-hardness/NP-completeness, locked-NAND threshold, residual-band minimizer, ZeroSlack,
+the remaining end-to-end polynomial bounds, and the root theorem/axiom audit remain incomplete.
+
 The first concrete foundation is now checked in `PNP.DirectWire`: intrinsically topological direct-wire
 NAND programs, total Boolean evaluation, gate-count size, ordered output wiring, and elementary
 projection/constant/repeated-output/NAND/NOT/AND laws. Its dedicated axiom audit is clean. This does
-not by itself discharge any of the seven machine-recorded activation blockers: the charged-pipeline
-compiler/refinement to raw machine semantics, concrete SAT, locked-NAND threshold, residual-band
-minimizer, ZeroSlack, remaining polynomial bounds, and the root theorem/axiom audit remain
-incomplete.
+not by itself discharge any of those publication blockers.
 
 The next constructive layer enumerates every well-typed direct-wire implementation at fixed input,
 gate, and output widths, including the unique empty output tuple and both orders of every NAND input
@@ -118,7 +133,7 @@ Serial composition also provides one concrete environment/support/continuation f
 frame, equivalent support implementations can be replaced, and the corresponding additive global
 slack identity is proved. This does not cover arbitrary support subsets, support profiles, or the
 locked-NAND family. Accordingly the broad replacement/slack status fields remain false, and the
-same seven substantive activation blockers remain.
+same substantive activation blockers remain.
 
 The locked-NAND local bridge now contains six intrinsically typed direct-wire candidates with
 honest gate/output widths: equality `10/10`, constant one `2/2`, constant zero `3/3`, trace
@@ -184,7 +199,8 @@ Public theorem emission may be reconsidered only when all of the following are m
 4. no PNP-specific axiom or trust parameter assumes any substantive part of the result;
 5. SAT, P, NP, reductions, machines, correctness, and cost are concrete, with the charged-pipeline
    semantics proved adequate for the selected raw machine model;
-6. the SAT decider is executable and its polynomial bound is proved in the selected machine model;
+6. a deterministic SAT decider is executable and its polynomial bound is proved in the selected
+   machine model (the current `CNFSAT ∈ NP` verifier is insufficient);
 7. the locked-NAND, residual-band, and ZeroSlack obligations are proved rather than asserted; and
 8. public status and paper claims are generated from the checked Lean theorem inventory.
 

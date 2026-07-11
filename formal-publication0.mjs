@@ -5,10 +5,18 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '7698d34e63f38f34dbc89a8a7ee9a9203fbeb898809d3e05562af11a18f4853a';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '352e5dbe4c4a4833ee9f340a00d64678d774728a97f82acc857999f8abdd764e';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
+  'PNP.Concrete.FinalUniversalDesign.cnfCompiled_accept_iff_check',
+  'PNP.Concrete.FinalUniversalDesign.cnfCompiled_ne_timeout',
+  'PNP.Concrete.FinalUniversalDesign.cnfCompiled_reject_iff_check_false',
+  'PNP.Concrete.FinalUniversalDesign.cnfConcreteVerifier_decision',
+  'PNP.Concrete.FinalUniversalDesign.cnfConcreteVerifier_inputMode',
+  'PNP.Concrete.FinalUniversalDesign.cnfSATInNP',
+  'PNP.Concrete.FinalUniversalDesign.cnfUniversalWorkOutcome',
+  'PNP.Concrete.FinalUniversalDesign.formulaGrammarOutcome',
   'PNP.Concrete.NatPolynomial.eval_mono',
   'PNP.Concrete.PolynomialTimeMachine.verdict_accepts_iff',
   'PNP.Concrete.PolynomialTimeMachine.verdict_ne_timeout',
@@ -49,7 +57,6 @@ export const REQUIRED_PROJECT_AXIOMS0 = Object.freeze([
   'PNP.GeneratePCCPack',
   'PNP.LockedNANDThreshold',
   'PNP.ResidualBandExactMinimization',
-  'PNP.SAT',
 ]);
 
 export function sha256Text0(value) {
@@ -124,7 +131,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
     throw new Error('Lean excluded-private declaration count is invalid');
   }
   if (stableStringify0(inventory.projectAxioms) !== stableStringify0(REQUIRED_PROJECT_AXIOMS0)) {
-    throw new Error('Lean project axiom inventory must remain the disclosed five-axiom set');
+    throw new Error('Lean project axiom inventory must remain the disclosed four-axiom set');
   }
   if (stableStringify0(inventory.projectAxioms) !== stableStringify0(axiomRows.map((entry) => entry.name))) {
     throw new Error('Lean project axiom side inventory drifted from compiled axiom declaration rows');

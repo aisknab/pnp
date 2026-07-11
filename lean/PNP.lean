@@ -11,6 +11,10 @@ import PNP.Concrete.BitString
 import PNP.Concrete.Machine
 import PNP.Concrete.Complexity
 import PNP.Concrete.Target
+import PNP.Concrete.CNF
+import PNP.Concrete.CNFVerifier
+import PNP.Concrete.CNFWorkInput
+import PNP.Concrete.CNFWorkUniversalCorrectness
 import PNP.Complexity
 import PNP.SAT
 import PNP.LockedNANDMacros

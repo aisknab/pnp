@@ -39,6 +39,18 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.explicitLeanRootTargetPresent, true);
   assert.equal(out.leanLibraryTargetBuilt, true);
   assert.equal(out.leanSourcePlaceholderAuditPassed, true);
+  assert.equal(out.leanConcreteCNFVerifierCorrectnessFormalized, true);
+  assert.equal(out.leanConcreteCNFVerifierNoTimeoutFormalized, true);
+  assert.equal(out.leanConcreteCNFVerifierAxiomAuditPassed, true);
+  assert.equal(out.leanConcreteCNFWorkAxiomAuditPassed, true);
+  assert.equal(out.leanConcreteCNFWorkAuditedDeclarationCount, 766);
+  assert.equal(out.leanConcreteCNFSATMembershipFormalized, true);
+  assert.equal(out.leanConcreteCNFSATMembershipTheorem,
+    'PNP.Concrete.FinalUniversalDesign.cnfSATInNP');
+  assert.equal(out.leanConcreteCNFProofScope,
+    'direct-finite-machine-verifier-correctness-and-np-membership-only');
+  assert.equal(out.leanConcreteCNFSATInPFormalized, false);
+  assert.equal(out.leanConcreteCNFNPCompletenessFormalized, false);
   assert.equal(out.leanNANDDirectWireCoreFormalized, true);
   assert.equal(out.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(out.leanNANDEnumeratorFormalized, true);
@@ -119,7 +131,6 @@ test('formal reconstruction status accepts the current source and public mirrors
     'PNP.GeneratePCCPack',
     'PNP.LockedNANDThreshold',
     'PNP.ResidualBandExactMinimization',
-    'PNP.SAT',
   ]);
   assert.equal(out.externalReviewIsMathematicalPremise, false);
   assert.deepEqual(out.remainingBlockers, FORMAL_RECONSTRUCTION_BLOCKERS0);
@@ -127,6 +138,33 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.remainingBlockers.includes('Formal.PinnedLeanBuildAndRootTarget'), false);
   assert.match(out.statusSha256, /^[0-9a-f]{64}$/u);
   assert.match(out.siteStatusSha256, /^[0-9a-f]{64}$/u);
+});
+
+test('formal reconstruction status pins the integrated CNF inventory and reviewed source closure', async () => {
+  const status = await currentStatus0();
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 4419);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 1826);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 1727);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 551);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 36);
+  assert.equal(status.leanSourceClosureSha256,
+    'd28f000e838fa81710beceb0da7f0a5ad4cb1f665e07e2545274251489015fad');
+  const cnf = status.formalPublicationMilestones.find(
+    (entry) => entry.id === 'concrete-cnf-universal-verifier',
+  );
+  assert.equal(cnf.status, 'formalized-np-membership-only');
+  assert.equal(cnf.earned, true);
+  assert.equal(cnf.requiredTheorems.includes(
+    'PNP.Concrete.FinalUniversalDesign.cnfSATInNP'), true);
+  for (const command of [
+    'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFWorkAxiomAudit.lean',
+    'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFWorkCanonical.lean',
+    'lake env lean -DwarningAsError=true lean-regression/PNPConcreteWorkCompilerEdges.lean',
+    'lake env lean -DwarningAsError=true --run lean-regression/PNPConcreteCNFWorkCanonicalExtended.lean',
+    'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFWorkExhaustive.lean',
+  ]) assert.equal(status.verificationCommands.includes(command), true, command);
+  assert.equal(status.nonClaims.some((entry) => entry.includes(
+    'PNP.Concrete.FinalUniversalDesign.cnfSATInNP')), true);
 });
 
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
@@ -312,6 +350,29 @@ test('formal reconstruction status rejects an unearned root theorem', async () =
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'FormalReconstructionStatus.Field');
   assert.deepEqual(out.path, ['status/FORMAL_RECONSTRUCTION_STATUS.json', 'rootLeanTheoremPresent']);
+});
+
+test('formal reconstruction status rejects weakened or broadened direct CNF status', async () => {
+  for (const [field, value] of [
+    ['leanConcreteCNFVerifierCorrectnessFormalized', false],
+    ['leanConcreteCNFVerifierNoTimeoutFormalized', false],
+    ['leanConcreteCNFVerifierAxiomAuditPassed', false],
+    ['leanConcreteCNFWorkAxiomAuditPassed', false],
+    ['leanConcreteCNFSATMembershipFormalized', false],
+    ['leanConcreteCNFSATInPFormalized', true],
+    ['leanConcreteCNFNPCompletenessFormalized', true],
+    ['leanConcreteCNFSATMembershipTheorem', 'PNP.Main.p_eq_np'],
+  ]) {
+    const status = await currentStatus0();
+    status[field] = value;
+    const out = await CheckFormalReconstructionStatus0({
+      writeOutput: false,
+      statusOverride: status,
+      siteOverride: status,
+    });
+    assert.equal(out.tag, 'reject', field);
+    assert.deepEqual(out.path, ['status/FORMAL_RECONSTRUCTION_STATUS.json', field], field);
+  }
 });
 
 test('formal reconstruction status rejects a drifting Lean toolchain pin', async () => {
