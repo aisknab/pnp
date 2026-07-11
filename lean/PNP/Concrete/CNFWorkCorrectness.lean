@@ -7110,4 +7110,2174 @@ theorem widthExact_run_withinPairSinglePhase
     (BitString.size (BitString.pair input certificate)) rounds steps
     start final exactRun roundsToPair stepsBound
 
+namespace ClauseLiteralDesign
+
+set_option maxRecDepth 100000
+
+def restoreAssignmentSymbol : WorkSymbol → WorkSymbol
+  | ⟨.blank, .blank⟩ => cnfBlank
+  | ⟨.blank, .zero⟩ => cnfF
+  | ⟨.blank, .one⟩ => cnfT
+  | ⟨.zero, .blank⟩ => cnfRootGuard
+  | ⟨.zero, .zero⟩ => cnfF
+  | ⟨.zero, .one⟩ => cnfSep
+  | ⟨.one, .blank⟩ => cnfBoundaryGuard
+  | ⟨.one, .zero⟩ => cnfFinish
+  | ⟨.one, .one⟩ => cnfT
+
+theorem restoreAssignmentSymbol_markedValue (value : Bool) :
+    restoreAssignmentSymbol
+        (FrameTraceDesign.markedAssignmentValueWorkSymbol value) =
+      FrameTraceDesign.assignmentValueWorkSymbol value := by
+  cases value <;> rfl
+
+theorem restoreAssignmentSymbol_markedAssignment (assignment : BitString) :
+    List.map restoreAssignmentSymbol
+        (markedAssignmentWorkSymbols assignment) =
+      assignmentWorkSymbols assignment := by
+  induction assignment with
+  | nil => rfl
+  | cons value rest ih =>
+      rw [FrameTraceDesign.markedAssignmentWorkSymbols_cons]
+      rw [FrameTraceDesign.assignmentWorkSymbols_cons]
+      change restoreAssignmentSymbol
+          (FrameTraceDesign.markedAssignmentValueWorkSymbol value) ::
+            List.map restoreAssignmentSymbol
+              (markedAssignmentWorkSymbols rest) =
+        FrameTraceDesign.assignmentValueWorkSymbol value ::
+          assignmentWorkSymbols rest
+      rw [restoreAssignmentSymbol_markedValue, ih]
+
+theorem literalRestoreAssignment_marked_step (result positive : Bool)
+    (head : WorkSymbol) (leftTail right : List WorkSymbol)
+    (allowed : AssignmentMarkSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord
+          (CNFWorkState.literalRestoreAssignment result positive)
+          (head :: leftTail) right) =
+      some (workConfigAtLeftWord
+        (CNFWorkState.literalRestoreAssignment result positive)
+        leftTail (restoreAssignmentSymbol head :: right)) := by
+  cases result <;> cases positive <;> cases allowed <;> rfl
+
+theorem literalRestoreAssignment_stack_allowed (assignment : BitString)
+    (found : WorkSymbol)
+    (member : List.Mem found
+      (pushWorkLeft (markedAssignmentWorkSymbols assignment) [])) :
+    AssignmentMarkSymbol found := by
+  apply FrameTraceDesign.pushWorkLeft_members_allowed AssignmentMarkSymbol
+    (markedAssignmentWorkSymbols assignment) []
+      (markedAssignmentWorkSymbols_allowed assignment)
+  · intro symbol impossible
+    contradiction
+  · exact member
+
+theorem literalRestoreAssignment_scan (result positive : Bool)
+    (assignment : BitString) (leftSuffix right : List WorkSymbol) :
+    workRunExact? cnfWorkMachine assignment.length
+        (workConfigAtLeftWord
+          (CNFWorkState.literalRestoreAssignment result positive)
+          (pushWorkLeft (markedAssignmentWorkSymbols assignment) leftSuffix)
+          right) =
+      some (workConfigAtLeftWord
+        (CNFWorkState.literalRestoreAssignment result positive)
+        leftSuffix (assignmentWorkSymbols assignment ++ right)) := by
+  have scanned := FrameTraceDesign.workRunExact?_scanLeft_write
+    cnfWorkMachine
+    (CNFWorkState.literalRestoreAssignment result positive)
+    restoreAssignmentSymbol AssignmentMarkSymbol
+    (literalRestoreAssignment_marked_step result positive)
+    (pushWorkLeft (markedAssignmentWorkSymbols assignment) [])
+    leftSuffix right (literalRestoreAssignment_stack_allowed assignment)
+  rw [FrameTraceDesign.pushWorkLeft_length] at scanned
+  rw [markedAssignmentWorkSymbols_length assignment] at scanned
+  rw [FrameTraceDesign.pushWorkLeft_split_far]
+  rw [FrameTraceDesign.map_pushWorkLeft] at scanned
+  rw [restoreAssignmentSymbol_markedAssignment] at scanned
+  change workRunExact? cnfWorkMachine assignment.length
+      (workConfigAtLeftWord
+        (CNFWorkState.literalRestoreAssignment result positive)
+        (pushWorkLeft (markedAssignmentWorkSymbols assignment) [] ++
+          leftSuffix) right) =
+    some (workConfigAtLeftWord
+      (CNFWorkState.literalRestoreAssignment result positive)
+      leftSuffix
+      (pushWorkLeft (pushWorkLeft (assignmentWorkSymbols assignment) [])
+        right)) at scanned
+  rw [pushWorkLeft_cancel] at scanned
+  exact scanned
+
+theorem literalRestoreAssignment_finish_step (result positive : Bool)
+    (leftTail right : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord
+          (CNFWorkState.literalRestoreAssignment result positive)
+          (cnfFinish :: leftTail) right) =
+      some (workConfigAtLeftWord
+        (CNFWorkState.literalRestoreCertificateCounter result positive)
+        leftTail (cnfFinish :: right)) := by
+  cases result <;> cases positive <;> rfl
+
+theorem literalRestoreCounter_markFalse_step (result positive : Bool)
+    (leftTail right : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord
+          (CNFWorkState.literalRestoreCertificateCounter result positive)
+          (cnfMarkFalse :: leftTail) right) =
+      some (workConfigAtLeftWord
+        (CNFWorkState.literalRestoreCertificateCounter result positive)
+        leftTail (cnfMarkFalse :: right)) := by
+  cases result <;> cases positive <;> rfl
+
+theorem literalRestoreCounter_scan (result positive : Bool)
+    (counter leftSuffix right : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse) :
+    workRunExact? cnfWorkMachine counter.length
+        (workConfigAtLeftWord
+          (CNFWorkState.literalRestoreCertificateCounter result positive)
+          (pushWorkLeft counter leftSuffix) right) =
+      some (workConfigAtLeftWord
+        (CNFWorkState.literalRestoreCertificateCounter result positive)
+        leftSuffix (counter ++ right)) := by
+  apply FrameTraceDesign.workRunExact?_scanLeft_cancel cnfWorkMachine
+    (CNFWorkState.literalRestoreCertificateCounter result positive)
+    (fun symbol => symbol = cnfMarkFalse) _ counter leftSuffix right allowed
+  intro head leftTail stepRight equal
+  cases equal
+  exact literalRestoreCounter_markFalse_step result positive leftTail stepRight
+
+theorem literalRestoreCounter_boundary_step (result positive : Bool)
+    (leftTail right : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord
+          (CNFWorkState.literalRestoreCertificateCounter result positive)
+          (cnfBoundaryGuard :: leftTail) right) =
+      some (workConfigAtLeftWord
+        (CNFWorkState.literalRestoreSeekSign result positive)
+        leftTail (cnfBoundaryGuard :: right)) := by
+  cases result <;> cases positive <;> rfl
+
+inductive RestoreSignScanSymbol : WorkSymbol → Prop where
+  | markTrue : RestoreSignScanSymbol cnfMarkTrue
+  | f : RestoreSignScanSymbol cnfF
+  | t : RestoreSignScanSymbol cnfT
+  | sep : RestoreSignScanSymbol cnfSep
+  | finish : RestoreSignScanSymbol cnfFinish
+
+theorem literalRestoreSign_keep_step (result positive : Bool)
+    (head : WorkSymbol) (leftTail right : List WorkSymbol)
+    (allowed : RestoreSignScanSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord
+          (CNFWorkState.literalRestoreSeekSign result positive)
+          (head :: leftTail) right) =
+      some (workConfigAtLeftWord
+        (CNFWorkState.literalRestoreSeekSign result positive)
+        leftTail (head :: right)) := by
+  cases result <;> cases positive <;> cases allowed <;> rfl
+
+theorem literalRestoreSign_scan (result positive : Bool)
+    (word leftSuffix right : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word →
+      RestoreSignScanSymbol symbol) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtLeftWord
+          (CNFWorkState.literalRestoreSeekSign result positive)
+          (pushWorkLeft word leftSuffix) right) =
+      some (workConfigAtLeftWord
+        (CNFWorkState.literalRestoreSeekSign result positive)
+        leftSuffix (word ++ right)) :=
+  FrameTraceDesign.workRunExact?_scanLeft_cancel cnfWorkMachine
+    (CNFWorkState.literalRestoreSeekSign result positive)
+    RestoreSignScanSymbol (literalRestoreSign_keep_step result positive)
+    word leftSuffix right allowed
+
+theorem literalRestoreSign_boundary_step (result positive : Bool)
+    (leftTail right : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord
+          (CNFWorkState.literalRestoreSeekSign result positive)
+          (cnfBoundaryGuard :: leftTail) right) =
+      some (workConfigAtWord
+        (CNFWorkState.literalRestoreIndex result positive)
+        ((if positive then cnfT else cnfF) :: leftTail) right) := by
+  cases result <;> cases positive <;> rfl
+
+def restoreIndexSymbol : WorkSymbol → WorkSymbol
+  | ⟨.blank, .blank⟩ => cnfBlank
+  | ⟨.blank, .zero⟩ => cnfMarkFalse
+  | ⟨.blank, .one⟩ => cnfT
+  | ⟨.zero, .blank⟩ => cnfRootGuard
+  | ⟨.zero, .zero⟩ => cnfF
+  | ⟨.zero, .one⟩ => cnfSep
+  | ⟨.one, .blank⟩ => cnfBoundaryGuard
+  | ⟨.one, .zero⟩ => cnfFinish
+  | ⟨.one, .one⟩ => cnfT
+
+theorem map_restoreIndex_replicate (count : Nat) :
+    List.map restoreIndexSymbol (List.replicate count cnfMarkTrue) =
+      List.replicate count cnfT := by
+  induction count with
+  | zero => rfl
+  | succ count ih => exact congrArg (List.cons cnfT) ih
+
+theorem workRunExact?_scanRight_write (machine : WorkMachine) (state : Nat)
+    (transform : WorkSymbol → WorkSymbol) (Allowed : WorkSymbol → Prop)
+    (hStep : ∀ leftSide head suffix,
+      Allowed head →
+      workStep? machine
+          (workConfigAtWord state leftSide (head :: suffix)) =
+        some (workConfigAtWord state
+          (transform head :: leftSide) suffix))
+    (word suffix leftSide : List WorkSymbol)
+    (hAllowed : ∀ symbol, List.Mem symbol word → Allowed symbol) :
+    workRunExact? machine word.length
+        (workConfigAtWord state leftSide (word ++ suffix)) =
+      some (workConfigAtWord state
+        (pushWorkLeft (List.map transform word) leftSide) suffix) := by
+  induction word generalizing leftSide with
+  | nil => rfl
+  | cons head rest ih =>
+      have hHead : Allowed head := hAllowed head (List.Mem.head rest)
+      have hRest : ∀ symbol, List.Mem symbol rest → Allowed symbol := by
+        intro symbol found
+        exact hAllowed symbol (List.Mem.tail head found)
+      change
+        (match workStep? machine
+          (workConfigAtWord state leftSide (head :: (rest ++ suffix))) with
+         | none => none
+         | some next => workRunExact? machine rest.length next) = _
+      rw [hStep leftSide head (rest ++ suffix) hHead]
+      exact ih (transform head :: leftSide) hRest
+
+theorem literalRestoreIndex_marked_step (result positive : Bool)
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalRestoreIndex result positive)
+          left (cnfMarkTrue :: suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalRestoreIndex result positive)
+        (cnfT :: left) suffix) := by
+  cases result <;> cases positive <;> rfl
+
+theorem literalRestoreIndex_t_step (result positive : Bool)
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalRestoreIndex result positive)
+          left (cnfT :: suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalRestoreIndex result positive)
+        (cnfT :: left) suffix) := by
+  cases result <;> cases positive <;> rfl
+
+theorem literalRestoreIndex_f_step (result positive : Bool)
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalRestoreIndex result positive)
+          left (cnfF :: suffix)) =
+      some (workConfigAtWord (CNFWorkState.clauseContinue result)
+        (cnfF :: left) suffix) := by
+  cases result <;> cases positive <;> rfl
+
+theorem literalRestoreIndex_marked_scan (result positive : Bool)
+    (count : Nat) (left suffix : List WorkSymbol) :
+    workRunExact? cnfWorkMachine count
+        (workConfigAtWord
+          (CNFWorkState.literalRestoreIndex result positive)
+          left (List.replicate count cnfMarkTrue ++ suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalRestoreIndex result positive)
+        (pushWorkLeft (List.replicate count cnfT) left) suffix) := by
+  have scanned := workRunExact?_scanRight_write cnfWorkMachine
+    (CNFWorkState.literalRestoreIndex result positive)
+    restoreIndexSymbol (fun symbol => symbol = cnfMarkTrue)
+    (fun stepLeft head stepSuffix equal => by
+      cases equal
+      exact literalRestoreIndex_marked_step result positive
+        stepLeft stepSuffix)
+    (List.replicate count cnfMarkTrue) suffix left
+    (FrameTraceDesign.mem_replicate_workSymbol_eq count cnfMarkTrue)
+  rw [FrameTraceDesign.length_replicate_workSymbol] at scanned
+  rw [map_restoreIndex_replicate] at scanned
+  exact scanned
+
+theorem literalRestoreIndex_t_scan (result positive : Bool)
+    (count : Nat) (left suffix : List WorkSymbol) :
+    workRunExact? cnfWorkMachine count
+        (workConfigAtWord
+          (CNFWorkState.literalRestoreIndex result positive)
+          left (List.replicate count cnfT ++ suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalRestoreIndex result positive)
+        (pushWorkLeft (List.replicate count cnfT) left) suffix) := by
+  have scanned := workRunExact?_scanRight cnfWorkMachine
+    (CNFWorkState.literalRestoreIndex result positive)
+    (fun symbol => symbol = cnfT)
+    (fun stepLeft head stepSuffix equal => by
+      cases equal
+      exact literalRestoreIndex_t_step result positive stepLeft stepSuffix)
+    (List.replicate count cnfT) suffix left
+    (FrameTraceDesign.mem_replicate_workSymbol_eq count cnfT)
+  rw [FrameTraceDesign.length_replicate_workSymbol] at scanned
+  exact scanned
+
+def literalRestoreSteps (assignmentLength counterLength formulaSuffixLength
+    markedIndexLength rawIndexTailLength : Nat) : Nat :=
+  (((((((((((assignmentLength + 1) + counterLength) + 1) +
+    formulaSuffixLength) + 1) + rawIndexTailLength) +
+    markedIndexLength) + 1) + markedIndexLength) +
+    rawIndexTailLength) + 1)
+
+theorem formulaScan_restoreSign (symbol : WorkSymbol)
+    (allowed : FormulaScanSymbol symbol) : RestoreSignScanSymbol symbol := by
+  cases allowed with
+  | markTrue => exact .markTrue
+  | f => exact .f
+  | t => exact .t
+  | sep => exact .sep
+  | finish => exact .finish
+
+def literalRestoreLeft (assignment : BitString)
+    (counter formulaSuffix leftBase : List WorkSymbol)
+    (markedIndexLength rawIndexTailLength : Nat) : List WorkSymbol :=
+  let markedLeft := pushWorkLeft
+    (List.replicate markedIndexLength cnfMarkTrue)
+    (cnfBoundaryGuard :: leftBase)
+  let rawLeft := pushWorkLeft
+    (List.replicate rawIndexTailLength cnfT) markedLeft
+  let suffixLeft := pushWorkLeft formulaSuffix (cnfF :: rawLeft)
+  let counterLeft := pushWorkLeft counter
+    (cnfBoundaryGuard :: suffixLeft)
+  pushWorkLeft (markedAssignmentWorkSymbols assignment)
+    (cnfFinish :: counterLeft)
+
+theorem literalRestore_exact (result positive : Bool)
+    (assignment : BitString) (counter formulaSuffix leftBase right :
+      List WorkSymbol)
+    (markedIndexLength rawIndexTailLength : Nat)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaSuffix →
+      FormulaScanSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (literalRestoreSteps assignment.length counter.length
+          formulaSuffix.length markedIndexLength rawIndexTailLength)
+        (workConfigAtLeftWord
+          (CNFWorkState.literalRestoreAssignment result positive)
+          (literalRestoreLeft assignment counter formulaSuffix leftBase
+            markedIndexLength rawIndexTailLength)
+          right) =
+      some (workConfigAtWord (CNFWorkState.clauseContinue result)
+        (cnfF ::
+          pushWorkLeft (List.replicate rawIndexTailLength cnfT)
+            (pushWorkLeft (List.replicate markedIndexLength cnfT)
+              ((if positive then cnfT else cnfF) :: leftBase)))
+        (formulaSuffix ++
+          (cnfBoundaryGuard ::
+            (counter ++
+              (cnfFinish ::
+                (assignmentWorkSymbols assignment ++ right)))))) := by
+  unfold literalRestoreSteps literalRestoreLeft
+  let formulaLeft :=
+    pushWorkLeft formulaSuffix
+      (cnfF ::
+        pushWorkLeft (List.replicate rawIndexTailLength cnfT)
+          (pushWorkLeft (List.replicate markedIndexLength cnfMarkTrue)
+            (cnfBoundaryGuard :: leftBase)))
+  let assignmentTail := assignmentWorkSymbols assignment ++ right
+  let counterTail := cnfFinish :: assignmentTail
+  let formulaTail := cnfBoundaryGuard :: (counter ++ counterTail)
+  let restoredFormulaTail := formulaSuffix ++ formulaTail
+  let indexFinishTail := cnfF :: restoredFormulaTail
+  let rawIndexTail :=
+    List.replicate rawIndexTailLength cnfT ++ indexFinishTail
+  let markedIndexTail :=
+    List.replicate markedIndexLength cnfMarkTrue ++ rawIndexTail
+  have hAssignment := literalRestoreAssignment_scan result positive
+    assignment (cnfFinish :: pushWorkLeft counter
+      (cnfBoundaryGuard :: formulaLeft)) right
+  have hAssignmentFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalRestoreAssignment_finish_step result positive
+      (pushWorkLeft counter (cnfBoundaryGuard :: formulaLeft))
+      assignmentTail)
+  have hCounter := literalRestoreCounter_scan result positive counter
+    (cnfBoundaryGuard :: formulaLeft)
+    counterTail counterAllowed
+  have hCounterBoundary := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalRestoreCounter_boundary_step result positive formulaLeft
+      (counter ++ counterTail))
+  have suffixAllowed : ∀ symbol, List.Mem symbol formulaSuffix →
+      RestoreSignScanSymbol symbol := by
+    intro symbol member
+    exact formulaScan_restoreSign symbol (formulaAllowed symbol member)
+  have hFormulaSuffix := literalRestoreSign_scan result positive
+    formulaSuffix
+    (cnfF ::
+      pushWorkLeft (List.replicate rawIndexTailLength cnfT)
+        (pushWorkLeft (List.replicate markedIndexLength cnfMarkTrue)
+          (cnfBoundaryGuard :: leftBase)))
+    formulaTail
+    suffixAllowed
+  have hFormulaFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalRestoreSign_keep_step result positive cnfF
+      (pushWorkLeft (List.replicate rawIndexTailLength cnfT)
+        (pushWorkLeft (List.replicate markedIndexLength cnfMarkTrue)
+          (cnfBoundaryGuard :: leftBase)))
+      restoredFormulaTail
+      RestoreSignScanSymbol.f)
+  have rawAllowed : ∀ symbol,
+      List.Mem symbol (List.replicate rawIndexTailLength cnfT) →
+        RestoreSignScanSymbol symbol := by
+    intro symbol member
+    have equal := FrameTraceDesign.mem_replicate_workSymbol_eq
+      rawIndexTailLength cnfT symbol member
+    cases equal
+    exact .t
+  have hRawTail := literalRestoreSign_scan result positive
+    (List.replicate rawIndexTailLength cnfT)
+    (pushWorkLeft (List.replicate markedIndexLength cnfMarkTrue)
+      (cnfBoundaryGuard :: leftBase))
+    indexFinishTail
+    rawAllowed
+  rw [FrameTraceDesign.length_replicate_workSymbol] at hRawTail
+  have markedAllowed : ∀ symbol,
+      List.Mem symbol (List.replicate markedIndexLength cnfMarkTrue) →
+        RestoreSignScanSymbol symbol := by
+    intro symbol member
+    have equal := FrameTraceDesign.mem_replicate_workSymbol_eq
+      markedIndexLength cnfMarkTrue symbol member
+    cases equal
+    exact .markTrue
+  have hMarked := literalRestoreSign_scan result positive
+    (List.replicate markedIndexLength cnfMarkTrue)
+    (cnfBoundaryGuard :: leftBase)
+    rawIndexTail
+    markedAllowed
+  rw [FrameTraceDesign.length_replicate_workSymbol] at hMarked
+  have hSign := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalRestoreSign_boundary_step result positive leftBase
+      markedIndexTail)
+  have hRestoreMarked := literalRestoreIndex_marked_scan result positive
+    markedIndexLength
+    ((if positive then cnfT else cnfF) :: leftBase)
+    rawIndexTail
+  have hKeepRaw := literalRestoreIndex_t_scan result positive
+    rawIndexTailLength
+    (pushWorkLeft (List.replicate markedIndexLength cnfT)
+      ((if positive then cnfT else cnfF) :: leftBase))
+    indexFinishTail
+  have hIndexFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalRestoreIndex_f_step result positive
+      (pushWorkLeft (List.replicate rawIndexTailLength cnfT)
+        (pushWorkLeft (List.replicate markedIndexLength cnfT)
+          ((if positive then cnfT else cnfF) :: leftBase)))
+      restoredFormulaTail)
+  have h1 := workRunExact?_compose cnfWorkMachine assignment.length 1
+    _ _ _ hAssignment hAssignmentFinish
+  have h2 := workRunExact?_compose cnfWorkMachine
+    (assignment.length + 1) counter.length _ _ _ h1 hCounter
+  have h3 := workRunExact?_compose cnfWorkMachine
+    ((assignment.length + 1) + counter.length) 1 _ _ _ h2 hCounterBoundary
+  have h4 := workRunExact?_compose cnfWorkMachine
+    (((assignment.length + 1) + counter.length) + 1)
+    formulaSuffix.length _ _ _ h3 hFormulaSuffix
+  have h5 := workRunExact?_compose cnfWorkMachine
+    ((((assignment.length + 1) + counter.length) + 1) +
+      formulaSuffix.length) 1 _ _ _ h4 hFormulaFinish
+  have h6 := workRunExact?_compose cnfWorkMachine
+    (((((assignment.length + 1) + counter.length) + 1) +
+      formulaSuffix.length) + 1) rawIndexTailLength _ _ _ h5 hRawTail
+  have h7 := workRunExact?_compose cnfWorkMachine
+    ((((((assignment.length + 1) + counter.length) + 1) +
+      formulaSuffix.length) + 1) + rawIndexTailLength)
+    markedIndexLength _ _ _ h6 hMarked
+  have h8 := workRunExact?_compose cnfWorkMachine
+    (((((((assignment.length + 1) + counter.length) + 1) +
+      formulaSuffix.length) + 1) + rawIndexTailLength) +
+      markedIndexLength) 1 _ _ _ h7 hSign
+  have h9 := workRunExact?_compose cnfWorkMachine
+    ((((((((assignment.length + 1) + counter.length) + 1) +
+      formulaSuffix.length) + 1) + rawIndexTailLength) +
+      markedIndexLength) + 1) markedIndexLength _ _ _ h8 hRestoreMarked
+  have h10 := workRunExact?_compose cnfWorkMachine
+    (((((((((assignment.length + 1) + counter.length) + 1) +
+      formulaSuffix.length) + 1) + rawIndexTailLength) +
+      markedIndexLength) + 1) + markedIndexLength)
+    rawIndexTailLength _ _ _ h9 hKeepRaw
+  exact workRunExact?_compose cnfWorkMachine
+    ((((((((((assignment.length + 1) + counter.length) + 1) +
+      formulaSuffix.length) + 1) + rawIndexTailLength) +
+      markedIndexLength) + 1) + markedIndexLength) +
+      rawIndexTailLength) 1 _ _ _ h10 hIndexFinish
+
+theorem literalIndex_f_lookup_step (alreadySatisfied positive : Bool)
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalIndex alreadySatisfied positive)
+          left (cnfF :: suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalLookupToBoundary alreadySatisfied positive)
+        (cnfF :: left) suffix) := by
+  cases alreadySatisfied <;> cases positive <;> rfl
+
+theorem literalLookupBoundary_keep_step (alreadySatisfied positive : Bool)
+    (left : List WorkSymbol) (head : WorkSymbol)
+    (suffix : List WorkSymbol) (allowed : FormulaScanSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalLookupToBoundary alreadySatisfied positive)
+          left (head :: suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalLookupToBoundary alreadySatisfied positive)
+        (head :: left) suffix) := by
+  cases alreadySatisfied <;> cases positive <;> cases allowed <;> rfl
+
+theorem literalLookupBoundary_scan (alreadySatisfied positive : Bool)
+    (word suffix left : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word → FormulaScanSymbol symbol) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtWord
+          (CNFWorkState.literalLookupToBoundary alreadySatisfied positive)
+          left (word ++ suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalLookupToBoundary alreadySatisfied positive)
+        (pushWorkLeft word left) suffix) :=
+  workRunExact?_scanRight cnfWorkMachine
+    (CNFWorkState.literalLookupToBoundary alreadySatisfied positive)
+    FormulaScanSymbol
+    (literalLookupBoundary_keep_step alreadySatisfied positive)
+    word suffix left allowed
+
+theorem literalLookupBoundary_guard_step (alreadySatisfied positive : Bool)
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalLookupToBoundary alreadySatisfied positive)
+          left (cnfBoundaryGuard :: suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalLookupPastCertificateCounter
+          alreadySatisfied positive)
+        (cnfBoundaryGuard :: left) suffix) := by
+  cases alreadySatisfied <;> cases positive <;> rfl
+
+theorem literalLookupCounter_markFalse_step
+    (alreadySatisfied positive : Bool) (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalLookupPastCertificateCounter
+            alreadySatisfied positive)
+          left (cnfMarkFalse :: suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalLookupPastCertificateCounter
+          alreadySatisfied positive)
+        (cnfMarkFalse :: left) suffix) := by
+  cases alreadySatisfied <;> cases positive <;> rfl
+
+theorem literalLookupCounter_scan (alreadySatisfied positive : Bool)
+    (counter suffix left : List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse) :
+    workRunExact? cnfWorkMachine counter.length
+        (workConfigAtWord
+          (CNFWorkState.literalLookupPastCertificateCounter
+            alreadySatisfied positive)
+          left (counter ++ suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalLookupPastCertificateCounter
+          alreadySatisfied positive)
+        (pushWorkLeft counter left) suffix) := by
+  apply workRunExact?_scanRight cnfWorkMachine
+    (CNFWorkState.literalLookupPastCertificateCounter
+      alreadySatisfied positive)
+    (fun symbol => symbol = cnfMarkFalse) _ counter suffix left allowed
+  intro stepLeft head stepSuffix equal
+  cases equal
+  exact literalLookupCounter_markFalse_step alreadySatisfied positive
+    stepLeft stepSuffix
+
+theorem literalLookupCounter_finish_step
+    (alreadySatisfied positive : Bool) (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalLookupPastCertificateCounter
+            alreadySatisfied positive)
+          left (cnfFinish :: suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalLookupAssignment alreadySatisfied positive)
+        (cnfFinish :: left) suffix) := by
+  cases alreadySatisfied <;> cases positive <;> rfl
+
+theorem literalLookupAssignment_marked_step
+    (alreadySatisfied positive : Bool) (left : List WorkSymbol)
+    (head : WorkSymbol) (suffix : List WorkSymbol)
+    (allowed : AssignmentMarkSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalLookupAssignment alreadySatisfied positive)
+          left (head :: suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalLookupAssignment alreadySatisfied positive)
+        (head :: left) suffix) := by
+  cases alreadySatisfied <;> cases positive <;> cases allowed <;> rfl
+
+theorem literalLookupAssignment_marked_scan
+    (alreadySatisfied positive : Bool) (assignment : BitString)
+    (suffix left : List WorkSymbol) :
+    workRunExact? cnfWorkMachine assignment.length
+        (workConfigAtWord
+          (CNFWorkState.literalLookupAssignment alreadySatisfied positive)
+          left (markedAssignmentWorkSymbols assignment ++ suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalLookupAssignment alreadySatisfied positive)
+        (pushWorkLeft (markedAssignmentWorkSymbols assignment) left)
+        suffix) := by
+  have scanned := workRunExact?_scanRight cnfWorkMachine
+    (CNFWorkState.literalLookupAssignment alreadySatisfied positive)
+    AssignmentMarkSymbol
+    (literalLookupAssignment_marked_step alreadySatisfied positive)
+    (markedAssignmentWorkSymbols assignment) suffix left
+    (markedAssignmentWorkSymbols_allowed assignment)
+  rw [markedAssignmentWorkSymbols_length assignment] at scanned
+  exact scanned
+
+theorem literalLookupAssignment_value_step
+    (alreadySatisfied positive value : Bool)
+    (left right : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalLookupAssignment alreadySatisfied positive)
+          left
+          (FrameTraceDesign.assignmentValueWorkSymbol value :: right)) =
+      some (workConfigAtLeftWord
+        (CNFWorkState.literalRestoreAssignment
+          (alreadySatisfied || boolEqual value positive) positive)
+        left
+        (FrameTraceDesign.assignmentValueWorkSymbol value :: right)) := by
+  cases alreadySatisfied <;> cases positive <;> cases value <;> rfl
+
+def literalLookupSteps (assignmentPrefixLength counterLength
+    formulaSuffixLength : Nat) : Nat :=
+  ((((((1 + formulaSuffixLength) + 1) + counterLength) + 1) +
+    assignmentPrefixLength) + 1) +
+      literalRestoreSteps assignmentPrefixLength counterLength
+        formulaSuffixLength assignmentPrefixLength 0
+
+theorem literalLookup_inRange_exact
+    (alreadySatisfied positive value : Bool)
+    (assignmentPrefix assignmentSuffix : BitString)
+    (counter formulaSuffix leftBase right : List WorkSymbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaSuffix →
+      FormulaScanSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (literalLookupSteps assignmentPrefix.length counter.length
+          formulaSuffix.length)
+        (workConfigAtWord
+          (CNFWorkState.literalIndex alreadySatisfied positive)
+          (pushWorkLeft
+            (List.replicate assignmentPrefix.length cnfMarkTrue)
+            (cnfBoundaryGuard :: leftBase))
+          (cnfF ::
+            formulaSuffix ++
+              (cnfBoundaryGuard ::
+                (counter ++
+                  (cnfFinish ::
+                    (markedAssignmentWorkSymbols assignmentPrefix ++
+                      (FrameTraceDesign.assignmentValueWorkSymbol value ::
+                        (assignmentWorkSymbols assignmentSuffix ++ right)))))))) =
+      some (workConfigAtWord
+        (CNFWorkState.clauseContinue
+          (alreadySatisfied || boolEqual value positive))
+        (cnfF ::
+          pushWorkLeft (List.replicate assignmentPrefix.length cnfT)
+            ((if positive then cnfT else cnfF) :: leftBase))
+        (formulaSuffix ++
+          (cnfBoundaryGuard ::
+            (counter ++
+              (cnfFinish ::
+                (assignmentWorkSymbols assignmentPrefix ++
+                  (FrameTraceDesign.assignmentValueWorkSymbol value ::
+                    (assignmentWorkSymbols assignmentSuffix ++ right)))))))) := by
+  unfold literalLookupSteps
+  let signLeft :=
+    pushWorkLeft (List.replicate assignmentPrefix.length cnfMarkTrue)
+      (cnfBoundaryGuard :: leftBase)
+  let assignmentRight :=
+    FrameTraceDesign.assignmentValueWorkSymbol value ::
+      (assignmentWorkSymbols assignmentSuffix ++ right)
+  let markedAssignmentTail :=
+    markedAssignmentWorkSymbols assignmentPrefix ++ assignmentRight
+  let certificateTail :=
+    cnfBoundaryGuard ::
+      (counter ++ (cnfFinish :: markedAssignmentTail))
+  have hIndexFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalIndex_f_lookup_step alreadySatisfied positive signLeft
+      (formulaSuffix ++ certificateTail))
+  have hFormula := literalLookupBoundary_scan alreadySatisfied positive
+    formulaSuffix certificateTail (cnfF :: signLeft) formulaAllowed
+  have hBoundary := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalLookupBoundary_guard_step alreadySatisfied positive
+      (pushWorkLeft formulaSuffix (cnfF :: signLeft))
+      (counter ++ cnfFinish :: markedAssignmentTail))
+  have hCounter := literalLookupCounter_scan alreadySatisfied positive
+    counter (cnfFinish :: markedAssignmentTail)
+    (cnfBoundaryGuard :: pushWorkLeft formulaSuffix (cnfF :: signLeft))
+    counterAllowed
+  have hFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalLookupCounter_finish_step alreadySatisfied positive
+      (pushWorkLeft counter
+        (cnfBoundaryGuard ::
+          pushWorkLeft formulaSuffix (cnfF :: signLeft)))
+      markedAssignmentTail)
+  have hMarked := literalLookupAssignment_marked_scan
+    alreadySatisfied positive assignmentPrefix assignmentRight
+    (cnfFinish ::
+      pushWorkLeft counter
+        (cnfBoundaryGuard ::
+          pushWorkLeft formulaSuffix (cnfF :: signLeft)))
+  have hValue := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalLookupAssignment_value_step alreadySatisfied positive value
+      (pushWorkLeft (markedAssignmentWorkSymbols assignmentPrefix)
+        (cnfFinish ::
+          pushWorkLeft counter
+            (cnfBoundaryGuard ::
+              pushWorkLeft formulaSuffix (cnfF :: signLeft))))
+      (assignmentWorkSymbols assignmentSuffix ++ right))
+  have hRestore := literalRestore_exact
+    (alreadySatisfied || boolEqual value positive) positive assignmentPrefix
+    counter formulaSuffix leftBase assignmentRight
+    assignmentPrefix.length 0 counterAllowed formulaAllowed
+  have h1 := workRunExact?_compose cnfWorkMachine 1 formulaSuffix.length
+    _ _ _ hIndexFinish hFormula
+  have h2 := workRunExact?_compose cnfWorkMachine
+    (1 + formulaSuffix.length) 1 _ _ _ h1 hBoundary
+
+  have h3 := workRunExact?_compose cnfWorkMachine
+    ((1 + formulaSuffix.length) + 1) counter.length _ _ _ h2 hCounter
+  have h4 := workRunExact?_compose cnfWorkMachine
+    (((1 + formulaSuffix.length) + 1) + counter.length) 1
+    _ _ _ h3 hFinish
+  have h5 := workRunExact?_compose cnfWorkMachine
+    ((((1 + formulaSuffix.length) + 1) + counter.length) + 1)
+    assignmentPrefix.length _ _ _ h4 hMarked
+  have h6 := workRunExact?_compose cnfWorkMachine
+    (((((1 + formulaSuffix.length) + 1) + counter.length) + 1) +
+      assignmentPrefix.length) 1 _ _ _ h5 hValue
+  exact workRunExact?_compose cnfWorkMachine
+    ((((((1 + formulaSuffix.length) + 1) + counter.length) + 1) +
+      assignmentPrefix.length) + 1)
+    (literalRestoreSteps assignmentPrefix.length counter.length
+      formulaSuffix.length assignmentPrefix.length 0)
+    _ _ _ h6 hRestore
+
+theorem literalLookupAssignment_root_step
+    (alreadySatisfied positive : Bool) (left right : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalLookupAssignment alreadySatisfied positive)
+          left (cnfRootGuard :: right)) =
+      some (workConfigAtLeftWord
+        (CNFWorkState.literalRestoreAssignment alreadySatisfied positive)
+        left (cnfRootGuard :: right)) := by
+  cases alreadySatisfied <;> cases positive <;> rfl
+
+theorem literalLookup_oob_exact
+    (alreadySatisfied positive : Bool) (assignment : BitString)
+    (counter formulaSuffix leftBase right : List WorkSymbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaSuffix →
+      FormulaScanSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (literalLookupSteps assignment.length counter.length
+          formulaSuffix.length)
+        (workConfigAtWord
+          (CNFWorkState.literalIndex alreadySatisfied positive)
+          (pushWorkLeft (List.replicate assignment.length cnfMarkTrue)
+            (cnfBoundaryGuard :: leftBase))
+          (cnfF ::
+            formulaSuffix ++
+              (cnfBoundaryGuard ::
+                (counter ++
+                  (cnfFinish ::
+                    (markedAssignmentWorkSymbols assignment ++
+                      (cnfRootGuard :: right))))))) =
+      some (workConfigAtWord
+        (CNFWorkState.clauseContinue alreadySatisfied)
+        (cnfF ::
+          pushWorkLeft (List.replicate assignment.length cnfT)
+            ((if positive then cnfT else cnfF) :: leftBase))
+        (formulaSuffix ++
+          (cnfBoundaryGuard ::
+            (counter ++
+              (cnfFinish ::
+                (assignmentWorkSymbols assignment ++
+                  (cnfRootGuard :: right))))))) := by
+  unfold literalLookupSteps
+  let signLeft := pushWorkLeft
+    (List.replicate assignment.length cnfMarkTrue)
+    (cnfBoundaryGuard :: leftBase)
+  let assignmentRight := cnfRootGuard :: right
+  let markedAssignmentTail :=
+    markedAssignmentWorkSymbols assignment ++ assignmentRight
+  let certificateTail := cnfBoundaryGuard ::
+    (counter ++ (cnfFinish :: markedAssignmentTail))
+  have hIndexFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalIndex_f_lookup_step alreadySatisfied positive signLeft
+      (formulaSuffix ++ certificateTail))
+  have hFormula := literalLookupBoundary_scan alreadySatisfied positive
+    formulaSuffix certificateTail (cnfF :: signLeft) formulaAllowed
+  have hBoundary := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalLookupBoundary_guard_step alreadySatisfied positive
+      (pushWorkLeft formulaSuffix (cnfF :: signLeft))
+      (counter ++ cnfFinish :: markedAssignmentTail))
+  have hCounter := literalLookupCounter_scan alreadySatisfied positive
+    counter (cnfFinish :: markedAssignmentTail)
+    (cnfBoundaryGuard :: pushWorkLeft formulaSuffix (cnfF :: signLeft))
+    counterAllowed
+  have hFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalLookupCounter_finish_step alreadySatisfied positive
+      (pushWorkLeft counter
+        (cnfBoundaryGuard ::
+          pushWorkLeft formulaSuffix (cnfF :: signLeft)))
+      markedAssignmentTail)
+  have hMarked := literalLookupAssignment_marked_scan
+    alreadySatisfied positive assignment assignmentRight
+    (cnfFinish ::
+      pushWorkLeft counter
+        (cnfBoundaryGuard ::
+          pushWorkLeft formulaSuffix (cnfF :: signLeft)))
+  have hRoot := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalLookupAssignment_root_step alreadySatisfied positive
+      (pushWorkLeft (markedAssignmentWorkSymbols assignment)
+        (cnfFinish ::
+          pushWorkLeft counter
+            (cnfBoundaryGuard ::
+              pushWorkLeft formulaSuffix (cnfF :: signLeft)))) right)
+  have hRestore := literalRestore_exact alreadySatisfied positive assignment
+    counter formulaSuffix leftBase assignmentRight assignment.length 0
+    counterAllowed formulaAllowed
+  have h1 := workRunExact?_compose cnfWorkMachine 1 formulaSuffix.length
+    _ _ _ hIndexFinish hFormula
+  have h2 := workRunExact?_compose cnfWorkMachine
+    (1 + formulaSuffix.length) 1 _ _ _ h1 hBoundary
+  have h3 := workRunExact?_compose cnfWorkMachine
+    ((1 + formulaSuffix.length) + 1) counter.length _ _ _ h2 hCounter
+  have h4 := workRunExact?_compose cnfWorkMachine
+    (((1 + formulaSuffix.length) + 1) + counter.length) 1
+    _ _ _ h3 hFinish
+  have h5 := workRunExact?_compose cnfWorkMachine
+    ((((1 + formulaSuffix.length) + 1) + counter.length) + 1)
+    assignment.length _ _ _ h4 hMarked
+  have h6 := workRunExact?_compose cnfWorkMachine
+    (((((1 + formulaSuffix.length) + 1) + counter.length) + 1) +
+      assignment.length) 1 _ _ _ h5 hRoot
+  exact workRunExact?_compose cnfWorkMachine
+    ((((((1 + formulaSuffix.length) + 1) + counter.length) + 1) +
+      assignment.length) + 1)
+    (literalRestoreSteps assignment.length counter.length
+      formulaSuffix.length assignment.length 0)
+    _ _ _ h6 hRestore
+
+theorem literalIndex_t_mark_step (alreadySatisfied positive : Bool)
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalIndex alreadySatisfied positive)
+          left (cnfT :: suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalIndexToBoundary alreadySatisfied positive)
+        (cnfMarkTrue :: left) suffix) := by
+  cases alreadySatisfied <;> cases positive <;> rfl
+
+theorem literalMarkAssignment_root_step
+    (alreadySatisfied positive : Bool) (left right : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalMarkAssignment alreadySatisfied positive)
+          left (cnfRootGuard :: right)) =
+      some (workConfigAtLeftWord
+        (CNFWorkState.literalRestoreAssignment alreadySatisfied positive)
+        left (cnfRootGuard :: right)) := by
+  cases alreadySatisfied <;> cases positive <;> rfl
+
+theorem pushWorkLeft_replicate_cons (count : Nat) (symbol : WorkSymbol)
+    (farSide : List WorkSymbol) :
+    pushWorkLeft (List.replicate count symbol) (symbol :: farSide) =
+      symbol :: pushWorkLeft (List.replicate count symbol) farSide := by
+  induction count generalizing farSide with
+  | zero => rfl
+  | succ count ih => exact ih (symbol :: farSide)
+
+theorem natAddRightUnitExchange (first second : Nat) :
+    first + (second + 1) = (first + 1) + second := by
+  induction second with
+  | zero => rfl
+  | succ second ih => exact congrArg Nat.succ ih
+
+theorem pushWorkLeft_replicate_markTrue_succ (count : Nat)
+    (farSide : List WorkSymbol) :
+    pushWorkLeft (List.replicate (Nat.succ count) cnfMarkTrue) farSide =
+      cnfMarkTrue ::
+        pushWorkLeft (List.replicate count cnfMarkTrue) farSide := by
+  change pushWorkLeft (List.replicate count cnfMarkTrue)
+      (cnfMarkTrue :: farSide) =
+    cnfMarkTrue :: pushWorkLeft (List.replicate count cnfMarkTrue) farSide
+  exact pushWorkLeft_replicate_cons count cnfMarkTrue farSide
+
+theorem oobFormulaTail_allowed (rawIndexTailLength : Nat)
+    (formulaSuffix : List WorkSymbol)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaSuffix →
+      FormulaScanSymbol symbol)
+    (symbol : WorkSymbol)
+    (member : List.Mem symbol
+      (List.replicate rawIndexTailLength cnfT ++ cnfF :: formulaSuffix)) :
+    FormulaScanSymbol symbol := by
+  induction rawIndexTailLength with
+  | zero =>
+      cases member with
+      | head => exact .f
+      | tail _ tailMember => exact formulaAllowed symbol tailMember
+  | succ count ih =>
+      cases member with
+      | head => exact .t
+      | tail _ tailMember => exact ih tailMember
+
+def literalMarkOOBSteps (assignmentLength counterLength
+    formulaSuffixLength rawIndexTailLength : Nat) : Nat :=
+  let formulaTailLength := rawIndexTailLength + 1 + formulaSuffixLength
+  ((1 + ((((formulaTailLength + 1) + counterLength) + 1) +
+    assignmentLength)) + 1) +
+      literalRestoreSteps assignmentLength counterLength
+        formulaSuffixLength (Nat.succ assignmentLength) rawIndexTailLength
+
+theorem literalMark_oob_rawTail_exact
+    (alreadySatisfied positive : Bool) (assignment : BitString)
+    (counter formulaSuffix leftBase right : List WorkSymbol)
+    (rawIndexTailLength : Nat)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaSuffix →
+      FormulaScanSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (literalMarkOOBSteps assignment.length counter.length
+          formulaSuffix.length rawIndexTailLength)
+        (workConfigAtWord
+          (CNFWorkState.literalIndex alreadySatisfied positive)
+          (pushWorkLeft (List.replicate assignment.length cnfMarkTrue)
+            (cnfBoundaryGuard :: leftBase))
+          (cnfT ::
+            (List.replicate rawIndexTailLength cnfT ++
+              (cnfF ::
+                (formulaSuffix ++
+                  (cnfBoundaryGuard ::
+                    (counter ++
+                      (cnfFinish ::
+                        (markedAssignmentWorkSymbols assignment ++
+                          (cnfRootGuard :: right)))))))))) =
+      some (workConfigAtWord
+        (CNFWorkState.clauseContinue alreadySatisfied)
+        (cnfF ::
+          pushWorkLeft (List.replicate rawIndexTailLength cnfT)
+            (pushWorkLeft
+              (List.replicate (Nat.succ assignment.length) cnfT)
+              ((if positive then cnfT else cnfF) :: leftBase)))
+        (formulaSuffix ++
+          (cnfBoundaryGuard ::
+            (counter ++
+              (cnfFinish ::
+                (assignmentWorkSymbols assignment ++
+                  (cnfRootGuard :: right))))))) := by
+  unfold literalMarkOOBSteps
+  let signLeft := pushWorkLeft
+    (List.replicate assignment.length cnfMarkTrue)
+    (cnfBoundaryGuard :: leftBase)
+  let formulaTail :=
+    List.replicate rawIndexTailLength cnfT ++ cnfF :: formulaSuffix
+  let assignmentRight := cnfRootGuard :: right
+  let markedAssignmentTail :=
+    markedAssignmentWorkSymbols assignment ++ assignmentRight
+  let certificateTail := cnfBoundaryGuard ::
+    (counter ++ (cnfFinish :: markedAssignmentTail))
+  have tailAllowed : ∀ symbol, List.Mem symbol formulaTail →
+      FormulaScanSymbol symbol := by
+    intro symbol member
+    exact oobFormulaTail_allowed rawIndexTailLength formulaSuffix
+      formulaAllowed symbol member
+  have hMarkIndex := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalIndex_t_mark_step alreadySatisfied positive signLeft
+      (formulaTail ++ certificateTail))
+  have hOut := literalIndexToAssignmentPrefix_run alreadySatisfied positive
+    formulaTail counter (markedAssignmentWorkSymbols assignment)
+    (cnfMarkTrue :: signLeft) right cnfRootGuard tailAllowed counterAllowed
+    (markedAssignmentWorkSymbols_allowed assignment)
+  have hRoot := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalMarkAssignment_root_step alreadySatisfied positive
+      (pushWorkLeft (markedAssignmentWorkSymbols assignment)
+        (cnfFinish ::
+          pushWorkLeft counter
+            (cnfBoundaryGuard ::
+              pushWorkLeft formulaTail (cnfMarkTrue :: signLeft)))) right)
+  have hMarkedShape :
+      pushWorkLeft
+          (List.replicate (Nat.succ assignment.length) cnfMarkTrue)
+          (cnfBoundaryGuard :: leftBase) =
+        cnfMarkTrue :: signLeft := by
+    exact pushWorkLeft_replicate_markTrue_succ assignment.length
+      (cnfBoundaryGuard :: leftBase)
+  have hFormulaShape :
+      pushWorkLeft formulaTail (cnfMarkTrue :: signLeft) =
+        pushWorkLeft formulaSuffix
+          (cnfF ::
+            pushWorkLeft (List.replicate rawIndexTailLength cnfT)
+              (pushWorkLeft
+                (List.replicate (Nat.succ assignment.length) cnfMarkTrue)
+                (cnfBoundaryGuard :: leftBase))) := by
+    unfold formulaTail
+    rw [FrameTraceDesign.pushWorkLeft_append]
+    rw [hMarkedShape]
+    rfl
+  rw [hFormulaShape] at hRoot
+  have hRestore := literalRestore_exact alreadySatisfied positive assignment
+    counter formulaSuffix leftBase assignmentRight
+    (Nat.succ assignment.length) rawIndexTailLength
+    counterAllowed formulaAllowed
+  unfold literalRestoreLeft at hRestore
+  have formulaTailLength : formulaTail.length =
+      rawIndexTailLength + 1 + formulaSuffix.length := by
+    unfold formulaTail
+    rw [FrameTraceDesign.frame_length_append]
+    rw [FrameTraceDesign.length_replicate_workSymbol]
+    rw [List.length_cons]
+    exact natAddRightUnitExchange rawIndexTailLength formulaSuffix.length
+  rw [formulaTailLength] at hOut
+  rw [markedAssignmentWorkSymbols_length assignment] at hOut
+  have h1 := workRunExact?_compose cnfWorkMachine 1
+    ((((rawIndexTailLength + 1 + formulaSuffix.length) + 1) +
+      counter.length + 1) + assignment.length)
+    _ _ _ hMarkIndex hOut
+  rw [hFormulaShape] at h1
+  have h2 := workRunExact?_compose cnfWorkMachine
+    (1 + ((((rawIndexTailLength + 1 + formulaSuffix.length) + 1) +
+      counter.length + 1) + assignment.length)) 1 _ _ _ h1 hRoot
+  unfold signLeft formulaTail certificateTail markedAssignmentTail at h2
+  unfold assignmentRight at h2
+  repeat' rw [FrameTraceDesign.frameWork_append_assoc] at h2
+  unfold assignmentRight at hRestore
+  exact workRunExact?_compose cnfWorkMachine
+    ((1 + ((((rawIndexTailLength + 1 + formulaSuffix.length) + 1) +
+      counter.length + 1) + assignment.length)) + 1)
+    (literalRestoreSteps assignment.length counter.length
+      formulaSuffix.length (Nat.succ assignment.length) rawIndexTailLength)
+    _ _ _ h2 hRestore
+
+theorem assignmentWorkSymbols_append (first second : BitString) :
+    assignmentWorkSymbols (first ++ second) =
+      assignmentWorkSymbols first ++ assignmentWorkSymbols second := by
+  induction first with
+  | nil => rfl
+  | cons value rest ih =>
+      cases value <;> exact congrArg (List.cons _) ih
+
+theorem markedAssignmentWorkSymbols_append (first second : BitString) :
+    markedAssignmentWorkSymbols (first ++ second) =
+      markedAssignmentWorkSymbols first ++
+        markedAssignmentWorkSymbols second := by
+  induction first with
+  | nil => rfl
+  | cons value rest ih =>
+      cases value <;> exact congrArg (List.cons _) ih
+
+theorem literalMarkAssignment_value_step
+    (alreadySatisfied positive value : Bool)
+    (left right : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalMarkAssignment alreadySatisfied positive)
+          left
+          (FrameTraceDesign.assignmentValueWorkSymbol value :: right)) =
+      some (workConfigAtLeftWord
+        (CNFWorkState.literalReturnAssignment alreadySatisfied positive)
+        left
+        (FrameTraceDesign.markedAssignmentValueWorkSymbol value :: right)) := by
+  cases alreadySatisfied <;> cases positive <;> cases value <;> rfl
+
+theorem literalReturnAssignment_marked_step
+    (alreadySatisfied positive : Bool) (head : WorkSymbol)
+    (leftTail right : List WorkSymbol)
+    (allowed : AssignmentMarkSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord
+          (CNFWorkState.literalReturnAssignment alreadySatisfied positive)
+          (head :: leftTail) right) =
+      some (workConfigAtLeftWord
+        (CNFWorkState.literalReturnAssignment alreadySatisfied positive)
+        leftTail (head :: right)) := by
+  cases alreadySatisfied <;> cases positive <;> cases allowed <;> rfl
+
+theorem literalReturnAssignment_scan
+    (alreadySatisfied positive : Bool) (assignment : BitString)
+    (leftSuffix right : List WorkSymbol) :
+    workRunExact? cnfWorkMachine assignment.length
+        (workConfigAtLeftWord
+          (CNFWorkState.literalReturnAssignment alreadySatisfied positive)
+          (pushWorkLeft (markedAssignmentWorkSymbols assignment) leftSuffix)
+          right) =
+      some (workConfigAtLeftWord
+        (CNFWorkState.literalReturnAssignment alreadySatisfied positive)
+        leftSuffix (markedAssignmentWorkSymbols assignment ++ right)) := by
+  have scanned := FrameTraceDesign.workRunExact?_scanLeft_cancel
+    cnfWorkMachine
+    (CNFWorkState.literalReturnAssignment alreadySatisfied positive)
+    AssignmentMarkSymbol
+    (literalReturnAssignment_marked_step alreadySatisfied positive)
+    (markedAssignmentWorkSymbols assignment) leftSuffix right
+    (markedAssignmentWorkSymbols_allowed assignment)
+  rw [markedAssignmentWorkSymbols_length assignment] at scanned
+  exact scanned
+
+theorem literalReturnAssignment_finish_step
+    (alreadySatisfied positive : Bool) (leftTail right : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord
+          (CNFWorkState.literalReturnAssignment alreadySatisfied positive)
+          (cnfFinish :: leftTail) right) =
+      some (workConfigAtLeftWord
+        (CNFWorkState.literalReturnCertificateCounter
+          alreadySatisfied positive)
+        leftTail (cnfFinish :: right)) := by
+  cases alreadySatisfied <;> cases positive <;> rfl
+
+theorem literalReturnCounter_markFalse_step
+    (alreadySatisfied positive : Bool) (leftTail right : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord
+          (CNFWorkState.literalReturnCertificateCounter
+            alreadySatisfied positive)
+          (cnfMarkFalse :: leftTail) right) =
+      some (workConfigAtLeftWord
+        (CNFWorkState.literalReturnCertificateCounter
+          alreadySatisfied positive)
+        leftTail (cnfMarkFalse :: right)) := by
+  cases alreadySatisfied <;> cases positive <;> rfl
+
+theorem literalReturnCounter_scan
+    (alreadySatisfied positive : Bool) (counter leftSuffix right :
+      List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse) :
+    workRunExact? cnfWorkMachine counter.length
+        (workConfigAtLeftWord
+          (CNFWorkState.literalReturnCertificateCounter
+            alreadySatisfied positive)
+          (pushWorkLeft counter leftSuffix) right) =
+      some (workConfigAtLeftWord
+        (CNFWorkState.literalReturnCertificateCounter
+          alreadySatisfied positive)
+        leftSuffix (counter ++ right)) := by
+  apply FrameTraceDesign.workRunExact?_scanLeft_cancel cnfWorkMachine
+    (CNFWorkState.literalReturnCertificateCounter
+      alreadySatisfied positive)
+    (fun symbol => symbol = cnfMarkFalse) _ counter leftSuffix right allowed
+  intro head leftTail stepRight equal
+  cases equal
+  exact literalReturnCounter_markFalse_step alreadySatisfied positive
+    leftTail stepRight
+
+theorem literalReturnCounter_boundary_step
+    (alreadySatisfied positive : Bool) (leftTail right : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord
+          (CNFWorkState.literalReturnCertificateCounter
+            alreadySatisfied positive)
+          (cnfBoundaryGuard :: leftTail) right) =
+      some (workConfigAtLeftWord
+        (CNFWorkState.literalReturnSeekSign alreadySatisfied positive)
+        leftTail (cnfBoundaryGuard :: right)) := by
+  cases alreadySatisfied <;> cases positive <;> rfl
+
+theorem literalReturnSign_keep_step
+    (alreadySatisfied positive : Bool) (head : WorkSymbol)
+    (leftTail right : List WorkSymbol)
+    (allowed : RestoreSignScanSymbol head) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord
+          (CNFWorkState.literalReturnSeekSign alreadySatisfied positive)
+          (head :: leftTail) right) =
+      some (workConfigAtLeftWord
+        (CNFWorkState.literalReturnSeekSign alreadySatisfied positive)
+        leftTail (head :: right)) := by
+  cases alreadySatisfied <;> cases positive <;> cases allowed <;> rfl
+
+theorem literalReturnSign_scan
+    (alreadySatisfied positive : Bool) (word leftSuffix right :
+      List WorkSymbol)
+    (allowed : ∀ symbol, List.Mem symbol word →
+      RestoreSignScanSymbol symbol) :
+    workRunExact? cnfWorkMachine word.length
+        (workConfigAtLeftWord
+          (CNFWorkState.literalReturnSeekSign alreadySatisfied positive)
+          (pushWorkLeft word leftSuffix) right) =
+      some (workConfigAtLeftWord
+        (CNFWorkState.literalReturnSeekSign alreadySatisfied positive)
+        leftSuffix (word ++ right)) :=
+  FrameTraceDesign.workRunExact?_scanLeft_cancel cnfWorkMachine
+    (CNFWorkState.literalReturnSeekSign alreadySatisfied positive)
+    RestoreSignScanSymbol (literalReturnSign_keep_step alreadySatisfied positive)
+    word leftSuffix right allowed
+
+theorem literalReturnSign_boundary_step
+    (alreadySatisfied positive : Bool) (leftTail right : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtLeftWord
+          (CNFWorkState.literalReturnSeekSign alreadySatisfied positive)
+          (cnfBoundaryGuard :: leftTail) right) =
+      some (workConfigAtWord
+        (CNFWorkState.literalReturnSeekIndex alreadySatisfied positive)
+        (cnfBoundaryGuard :: leftTail) right) := by
+  cases alreadySatisfied <;> cases positive <;> rfl
+
+theorem literalReturnIndex_marked_step
+    (alreadySatisfied positive : Bool) (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalReturnSeekIndex alreadySatisfied positive)
+          left (cnfMarkTrue :: suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalReturnSeekIndex alreadySatisfied positive)
+        (cnfMarkTrue :: left) suffix) := by
+  cases alreadySatisfied <;> cases positive <;> rfl
+
+theorem literalReturnIndex_marked_scan
+    (alreadySatisfied positive : Bool) (count : Nat)
+    (left suffix : List WorkSymbol) :
+    workRunExact? cnfWorkMachine count
+        (workConfigAtWord
+          (CNFWorkState.literalReturnSeekIndex alreadySatisfied positive)
+          left (List.replicate count cnfMarkTrue ++ suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalReturnSeekIndex alreadySatisfied positive)
+        (pushWorkLeft (List.replicate count cnfMarkTrue) left) suffix) := by
+  have scanned := workRunExact?_scanRight cnfWorkMachine
+    (CNFWorkState.literalReturnSeekIndex alreadySatisfied positive)
+    (fun symbol => symbol = cnfMarkTrue)
+    (fun stepLeft head stepSuffix equal => by
+      cases equal
+      exact literalReturnIndex_marked_step alreadySatisfied positive
+        stepLeft stepSuffix)
+    (List.replicate count cnfMarkTrue) suffix left
+    (FrameTraceDesign.mem_replicate_workSymbol_eq count cnfMarkTrue)
+  rw [FrameTraceDesign.length_replicate_workSymbol] at scanned
+  exact scanned
+
+theorem literalReturnIndex_next_step
+    (alreadySatisfied positive next : Bool) (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord
+          (CNFWorkState.literalReturnSeekIndex alreadySatisfied positive)
+          left
+          (FrameTraceDesign.assignmentValueWorkSymbol next :: suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalIndex alreadySatisfied positive)
+        left
+        (FrameTraceDesign.assignmentValueWorkSymbol next :: suffix)) := by
+  cases alreadySatisfied <;> cases positive <;> cases next <;> rfl
+
+def literalMarkIterationSteps (assignmentPrefixLength counterLength
+    formulaTailLength : Nat) : Nat :=
+  let outward := (((formulaTailLength + 1) + counterLength) + 1) +
+    assignmentPrefixLength
+  (((((((((((1 + outward) + 1) + assignmentPrefixLength) + 1) +
+    counterLength) + 1) + formulaTailLength) +
+    Nat.succ assignmentPrefixLength) + 1) +
+    Nat.succ assignmentPrefixLength) + 1)
+
+theorem literalMark_inRange_iteration_exact
+    (alreadySatisfied positive value next : Bool)
+    (assignmentPrefix : BitString)
+    (counter formulaRest leftBase assignmentRight : List WorkSymbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaRest →
+      FormulaScanSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (literalMarkIterationSteps assignmentPrefix.length counter.length
+          (Nat.succ formulaRest.length))
+        (workConfigAtWord
+          (CNFWorkState.literalIndex alreadySatisfied positive)
+          (pushWorkLeft
+            (List.replicate assignmentPrefix.length cnfMarkTrue)
+            (cnfBoundaryGuard :: leftBase))
+          (cnfT ::
+            (FrameTraceDesign.assignmentValueWorkSymbol next ::
+              (formulaRest ++
+                (cnfBoundaryGuard ::
+                  (counter ++
+                    (cnfFinish ::
+                      (markedAssignmentWorkSymbols assignmentPrefix ++
+                        (FrameTraceDesign.assignmentValueWorkSymbol value ::
+                          assignmentRight))))))))) =
+      some (workConfigAtWord
+        (CNFWorkState.literalIndex alreadySatisfied positive)
+        (pushWorkLeft
+          (List.replicate (Nat.succ assignmentPrefix.length) cnfMarkTrue)
+          (cnfBoundaryGuard :: leftBase))
+        (FrameTraceDesign.assignmentValueWorkSymbol next ::
+          (formulaRest ++
+            (cnfBoundaryGuard ::
+              (counter ++
+                (cnfFinish ::
+                  (markedAssignmentWorkSymbols assignmentPrefix ++
+                    (FrameTraceDesign.markedAssignmentValueWorkSymbol value ::
+                      assignmentRight)))))))) := by
+  unfold literalMarkIterationSteps
+  let signLeft := pushWorkLeft
+    (List.replicate assignmentPrefix.length cnfMarkTrue)
+    (cnfBoundaryGuard :: leftBase)
+  let formulaTail :=
+    FrameTraceDesign.assignmentValueWorkSymbol next :: formulaRest
+  let initialAssignmentTail :=
+    markedAssignmentWorkSymbols assignmentPrefix ++
+      (FrameTraceDesign.assignmentValueWorkSymbol value :: assignmentRight)
+  let markedAssignmentTail :=
+    markedAssignmentWorkSymbols assignmentPrefix ++
+      (FrameTraceDesign.markedAssignmentValueWorkSymbol value ::
+        assignmentRight)
+  let initialCertificateTail := cnfBoundaryGuard ::
+    (counter ++ (cnfFinish :: initialAssignmentTail))
+  let markedCertificateTail := cnfBoundaryGuard ::
+    (counter ++ (cnfFinish :: markedAssignmentTail))
+  have tailAllowed : ∀ symbol, List.Mem symbol formulaTail →
+      FormulaScanSymbol symbol := by
+    intro symbol member
+    unfold formulaTail at member
+    cases next with
+    | false =>
+        cases member with
+        | head => exact .f
+        | tail _ tailMember => exact formulaAllowed symbol tailMember
+    | true =>
+        cases member with
+        | head => exact .t
+        | tail _ tailMember => exact formulaAllowed symbol tailMember
+  have returnTailAllowed : ∀ symbol, List.Mem symbol formulaTail →
+      RestoreSignScanSymbol symbol := by
+    intro symbol member
+    exact formulaScan_restoreSign symbol (tailAllowed symbol member)
+  have hMarkIndex := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalIndex_t_mark_step alreadySatisfied positive signLeft
+      (formulaTail ++ initialCertificateTail))
+  have hOut := literalIndexToAssignmentPrefix_run alreadySatisfied positive
+    formulaTail counter (markedAssignmentWorkSymbols assignmentPrefix)
+    (cnfMarkTrue :: signLeft) assignmentRight
+    (FrameTraceDesign.assignmentValueWorkSymbol value)
+    tailAllowed counterAllowed
+    (markedAssignmentWorkSymbols_allowed assignmentPrefix)
+  have hValue := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalMarkAssignment_value_step alreadySatisfied positive value
+      (pushWorkLeft (markedAssignmentWorkSymbols assignmentPrefix)
+        (cnfFinish ::
+          pushWorkLeft counter
+            (cnfBoundaryGuard ::
+              pushWorkLeft formulaTail (cnfMarkTrue :: signLeft))))
+      assignmentRight)
+  have hBackAssignment := literalReturnAssignment_scan
+    alreadySatisfied positive assignmentPrefix
+    (cnfFinish ::
+      pushWorkLeft counter
+        (cnfBoundaryGuard ::
+          pushWorkLeft formulaTail (cnfMarkTrue :: signLeft)))
+    (FrameTraceDesign.markedAssignmentValueWorkSymbol value ::
+      assignmentRight)
+  have hAssignmentFinish := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalReturnAssignment_finish_step alreadySatisfied positive
+      (pushWorkLeft counter
+        (cnfBoundaryGuard ::
+          pushWorkLeft formulaTail (cnfMarkTrue :: signLeft)))
+      markedAssignmentTail)
+  have hBackCounter := literalReturnCounter_scan alreadySatisfied positive
+    counter
+    (cnfBoundaryGuard ::
+      pushWorkLeft formulaTail (cnfMarkTrue :: signLeft))
+    (cnfFinish :: markedAssignmentTail) counterAllowed
+  have hCounterBoundary := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalReturnCounter_boundary_step alreadySatisfied positive
+      (pushWorkLeft formulaTail (cnfMarkTrue :: signLeft))
+      (counter ++ cnfFinish :: markedAssignmentTail))
+  have hMarkedShape :
+      pushWorkLeft
+          (List.replicate (Nat.succ assignmentPrefix.length) cnfMarkTrue)
+          (cnfBoundaryGuard :: leftBase) =
+        cnfMarkTrue :: signLeft :=
+    pushWorkLeft_replicate_markTrue_succ assignmentPrefix.length
+      (cnfBoundaryGuard :: leftBase)
+  rw [← hMarkedShape] at hCounterBoundary
+  have hBackFormula := literalReturnSign_scan alreadySatisfied positive
+    formulaTail
+    (pushWorkLeft
+      (List.replicate (Nat.succ assignmentPrefix.length) cnfMarkTrue)
+      (cnfBoundaryGuard :: leftBase))
+    markedCertificateTail returnTailAllowed
+  have markedAllowed : ∀ symbol,
+      List.Mem symbol
+        (List.replicate (Nat.succ assignmentPrefix.length) cnfMarkTrue) →
+      RestoreSignScanSymbol symbol := by
+    intro symbol member
+    have equal := FrameTraceDesign.mem_replicate_workSymbol_eq
+      (Nat.succ assignmentPrefix.length) cnfMarkTrue symbol member
+    cases equal
+    exact .markTrue
+  have hBackMarked := literalReturnSign_scan alreadySatisfied positive
+    (List.replicate (Nat.succ assignmentPrefix.length) cnfMarkTrue)
+    (cnfBoundaryGuard :: leftBase)
+    (formulaTail ++ markedCertificateTail) markedAllowed
+  rw [FrameTraceDesign.length_replicate_workSymbol] at hBackMarked
+  have hSign := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalReturnSign_boundary_step alreadySatisfied positive leftBase
+      (List.replicate (Nat.succ assignmentPrefix.length) cnfMarkTrue ++
+        formulaTail ++ markedCertificateTail))
+  have hForwardMarked := literalReturnIndex_marked_scan
+    alreadySatisfied positive (Nat.succ assignmentPrefix.length)
+    (cnfBoundaryGuard :: leftBase)
+    (formulaTail ++ markedCertificateTail)
+  have hNext := workRunExact?_one_of_step cnfWorkMachine _ _
+    (literalReturnIndex_next_step alreadySatisfied positive next
+      (pushWorkLeft
+        (List.replicate (Nat.succ assignmentPrefix.length) cnfMarkTrue)
+        (cnfBoundaryGuard :: leftBase))
+      (formulaRest ++ markedCertificateTail))
+  have formulaTailLength : formulaTail.length = Nat.succ formulaRest.length :=
+    rfl
+  rw [formulaTailLength] at hOut
+  rw [formulaTailLength] at hBackFormula
+  rw [markedAssignmentWorkSymbols_length assignmentPrefix] at hOut
+  have h1 := workRunExact?_compose cnfWorkMachine 1
+    ((((Nat.succ formulaRest.length + 1) + counter.length) + 1) +
+      assignmentPrefix.length) _ _ _ hMarkIndex hOut
+  have h2 := workRunExact?_compose cnfWorkMachine
+    (1 + ((((Nat.succ formulaRest.length + 1) + counter.length) + 1) +
+      assignmentPrefix.length)) 1 _ _ _ h1 hValue
+  have h3 := workRunExact?_compose cnfWorkMachine
+    ((1 + ((((Nat.succ formulaRest.length + 1) + counter.length) + 1) +
+      assignmentPrefix.length)) + 1) assignmentPrefix.length
+    _ _ _ h2 hBackAssignment
+  have h4 := workRunExact?_compose cnfWorkMachine
+    (((1 + ((((Nat.succ formulaRest.length + 1) + counter.length) + 1) +
+      assignmentPrefix.length)) + 1) + assignmentPrefix.length) 1
+    _ _ _ h3 hAssignmentFinish
+  have h5 := workRunExact?_compose cnfWorkMachine
+    ((((1 + ((((Nat.succ formulaRest.length + 1) + counter.length) + 1) +
+      assignmentPrefix.length)) + 1) + assignmentPrefix.length) + 1)
+    counter.length _ _ _ h4 hBackCounter
+  rw [← hMarkedShape] at h5
+  have h6 := workRunExact?_compose cnfWorkMachine
+    (((((1 + ((((Nat.succ formulaRest.length + 1) + counter.length) + 1) +
+      assignmentPrefix.length)) + 1) + assignmentPrefix.length) + 1) +
+      counter.length) 1 _ _ _ h5 hCounterBoundary
+  have h7 := workRunExact?_compose cnfWorkMachine
+    ((((((1 + ((((Nat.succ formulaRest.length + 1) + counter.length) + 1) +
+      assignmentPrefix.length)) + 1) + assignmentPrefix.length) + 1) +
+      counter.length) + 1) (Nat.succ formulaRest.length)
+    _ _ _ h6 hBackFormula
+  have h8 := workRunExact?_compose cnfWorkMachine
+    (((((((1 + ((((Nat.succ formulaRest.length + 1) + counter.length) + 1) +
+      assignmentPrefix.length)) + 1) + assignmentPrefix.length) + 1) +
+      counter.length) + 1) + Nat.succ formulaRest.length)
+    (Nat.succ assignmentPrefix.length) _ _ _ h7 hBackMarked
+  rw [FrameTraceDesign.frameWork_append_assoc] at hSign
+  have h9 := workRunExact?_compose cnfWorkMachine
+    ((((((((1 + ((((Nat.succ formulaRest.length + 1) + counter.length) + 1) +
+      assignmentPrefix.length)) + 1) + assignmentPrefix.length) + 1) +
+      counter.length) + 1) + Nat.succ formulaRest.length) +
+      Nat.succ assignmentPrefix.length) 1 _ _ _ h8 hSign
+  have h10 := workRunExact?_compose cnfWorkMachine
+    (((((((((1 + ((((Nat.succ formulaRest.length + 1) + counter.length) + 1) +
+      assignmentPrefix.length)) + 1) + assignmentPrefix.length) + 1) +
+      counter.length) + 1) + Nat.succ formulaRest.length) +
+      Nat.succ assignmentPrefix.length) + 1)
+    (Nat.succ assignmentPrefix.length) _ _ _ h9 hForwardMarked
+  exact workRunExact?_compose cnfWorkMachine
+    ((((((((((1 + ((((Nat.succ formulaRest.length + 1) + counter.length) + 1) +
+      assignmentPrefix.length)) + 1) + assignmentPrefix.length) + 1) +
+      counter.length) + 1) + Nat.succ formulaRest.length) +
+      Nat.succ assignmentPrefix.length) + 1) +
+      Nat.succ assignmentPrefix.length) 1 _ _ _ h10 hNext
+
+
+theorem markedAssignment_append_value_tail (front : BitString)
+    (value : Bool) (tail : List WorkSymbol) :
+    markedAssignmentWorkSymbols (front ++ [value]) ++ tail =
+      markedAssignmentWorkSymbols front ++
+        (FrameTraceDesign.markedAssignmentValueWorkSymbol value :: tail) := by
+  induction front with
+  | nil => cases value <;> rfl
+  | cons first rest ih =>
+      cases first <;> exact congrArg (List.cons _) ih
+
+theorem assignment_append_value_tail (front : BitString)
+    (value : Bool) (rest : BitString) :
+    front ++ value :: rest = (front ++ [value]) ++ rest := by
+  induction front with
+  | nil => rfl
+  | cons first tail ih => exact congrArg (List.cons first) ih
+
+theorem length_append_value (front : BitString) (value : Bool) :
+    (front ++ [value]).length = Nat.succ front.length := by
+  induction front with
+  | nil => rfl
+  | cons first rest ih => exact congrArg Nat.succ ih
+
+theorem pushWorkLeft_replicate_t_succ (count : Nat)
+    (farSide : List WorkSymbol) :
+    pushWorkLeft (List.replicate (Nat.succ count) cnfT) farSide =
+      cnfT :: pushWorkLeft (List.replicate count cnfT) farSide := by
+  change pushWorkLeft (List.replicate count cnfT) (cnfT :: farSide) =
+    cnfT :: pushWorkLeft (List.replicate count cnfT) farSide
+  exact pushWorkLeft_replicate_cons count cnfT farSide
+
+theorem pushWorkLeft_replicate_t_add (first second : Nat)
+    (farSide : List WorkSymbol) :
+    pushWorkLeft (List.replicate second cnfT)
+        (pushWorkLeft (List.replicate first cnfT) farSide) =
+      pushWorkLeft (List.replicate (first + second) cnfT) farSide := by
+  induction second with
+  | zero =>
+      rw [Nat.add_zero]
+      rfl
+  | succ second ih =>
+      rw [pushWorkLeft_replicate_t_succ]
+      rw [ih]
+      rw [Nat.add_succ]
+      rw [pushWorkLeft_replicate_t_succ]
+
+theorem checkLiteral_zero_cons (positive value : Bool) (rest : BitString) :
+    checkLiteral
+        ({ positive := positive, variableIndex := 0 } : CNFLiteral)
+        (value :: rest) =
+      boolEqual value positive := rfl
+
+theorem checkLiteral_succ_cons (positive value : Bool) (index : Nat)
+    (rest : BitString) :
+    checkLiteral
+        ({ positive := positive, variableIndex := Nat.succ index } :
+          CNFLiteral)
+        (value :: rest) =
+      checkLiteral
+        ({ positive := positive, variableIndex := index } : CNFLiteral)
+        rest := rfl
+
+theorem checkLiteral_empty (positive : Bool) (index : Nat) :
+    checkLiteral
+        ({ positive := positive, variableIndex := index } : CNFLiteral)
+        [] = false := by
+  cases index <;> rfl
+
+def literalSemanticStart (alreadySatisfied positive : Bool)
+    (assignmentPrefix : BitString) (index : Nat)
+    (remainingAssignment : BitString)
+    (counter formulaSuffix leftBase endTail : List WorkSymbol) :
+    WorkConfiguration :=
+  workConfigAtWord (CNFWorkState.literalIndex alreadySatisfied positive)
+    (pushWorkLeft
+      (List.replicate assignmentPrefix.length cnfMarkTrue)
+      (cnfBoundaryGuard :: leftBase))
+    (List.replicate index cnfT ++
+      (cnfF ::
+        (formulaSuffix ++
+          (cnfBoundaryGuard ::
+            (counter ++
+              (cnfFinish ::
+                (markedAssignmentWorkSymbols assignmentPrefix ++
+                  (assignmentWorkSymbols remainingAssignment ++
+                    endTail))))))))
+
+def literalSemanticFinal (result positive : Bool) (fullIndex : Nat)
+    (fullAssignment : BitString)
+    (counter formulaSuffix leftBase endTail : List WorkSymbol) :
+    WorkConfiguration :=
+  workConfigAtWord (CNFWorkState.clauseContinue result)
+    (cnfF ::
+      pushWorkLeft (List.replicate fullIndex cnfT)
+        ((if positive then cnfT else cnfF) :: leftBase))
+    (formulaSuffix ++
+      (cnfBoundaryGuard ::
+        (counter ++
+          (cnfFinish ::
+            (assignmentWorkSymbols fullAssignment ++ endTail)))))
+
+theorem literalMark_unary_iteration_exists
+    (alreadySatisfied positive value : Bool) (assignmentPrefix : BitString)
+    (index : Nat) (remainingAssignment : BitString)
+    (counter formulaSuffix leftBase right : List WorkSymbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaSuffix →
+      FormulaScanSymbol symbol) :
+    ∃ steps,
+      workRunExact? cnfWorkMachine steps
+          (literalSemanticStart alreadySatisfied positive assignmentPrefix
+            (Nat.succ index) (value :: remainingAssignment)
+            counter formulaSuffix leftBase (cnfRootGuard :: right)) =
+        some
+          (literalSemanticStart alreadySatisfied positive
+            (assignmentPrefix ++ [value]) index remainingAssignment
+            counter formulaSuffix leftBase (cnfRootGuard :: right)) := by
+  cases index with
+  | zero =>
+      have h := literalMark_inRange_iteration_exact
+        alreadySatisfied positive value false assignmentPrefix counter
+        formulaSuffix leftBase
+        (assignmentWorkSymbols remainingAssignment ++ cnfRootGuard :: right)
+        counterAllowed formulaAllowed
+      rw [← length_append_value assignmentPrefix value] at h
+      rw [← markedAssignment_append_value_tail assignmentPrefix value
+        (assignmentWorkSymbols remainingAssignment ++ cnfRootGuard :: right)]
+        at h
+      refine ⟨literalMarkIterationSteps assignmentPrefix.length counter.length
+        (Nat.succ formulaSuffix.length), ?_⟩
+      unfold literalSemanticStart
+      rw [FrameTraceDesign.assignmentWorkSymbols_cons]
+      rw [List.replicate_succ]
+      cases value <;> exact h
+  | succ index =>
+      let formulaRest :=
+        List.replicate index cnfT ++ cnfF :: formulaSuffix
+      have formulaRestAllowed : ∀ symbol, List.Mem symbol formulaRest →
+          FormulaScanSymbol symbol := by
+        intro symbol member
+        exact oobFormulaTail_allowed index formulaSuffix formulaAllowed
+          symbol member
+      have h := literalMark_inRange_iteration_exact
+        alreadySatisfied positive value true assignmentPrefix counter
+        formulaRest leftBase
+        (assignmentWorkSymbols remainingAssignment ++ cnfRootGuard :: right)
+        counterAllowed formulaRestAllowed
+      rw [← length_append_value assignmentPrefix value] at h
+      rw [← markedAssignment_append_value_tail assignmentPrefix value
+        (assignmentWorkSymbols remainingAssignment ++ cnfRootGuard :: right)]
+        at h
+      refine ⟨literalMarkIterationSteps assignmentPrefix.length counter.length
+        (Nat.succ formulaRest.length), ?_⟩
+      unfold literalSemanticStart
+      unfold formulaRest
+      rw [FrameTraceDesign.assignmentWorkSymbols_cons]
+      rw [List.replicate_succ]
+      unfold formulaRest at h
+      rw [List.replicate_succ]
+      repeat' rw [FrameTraceDesign.frameWork_append_assoc] at h
+      repeat' rw [FrameTraceDesign.frameWork_append_assoc]
+      cases value <;> exact h
+
+theorem succ_add_exchange (first second : Nat) :
+    Nat.succ first + second = first + Nat.succ second := by
+  exact (Nat.succ_add first second).trans (Nat.add_succ first second).symm
+
+theorem literalIndex_semantic_exact
+    (alreadySatisfied positive : Bool)
+    (assignmentPrefix remainingAssignment fullAssignment : BitString)
+    (index fullIndex : Nat)
+    (counter formulaSuffix leftBase right : List WorkSymbol)
+    (fullIndexShape : fullIndex = assignmentPrefix.length + index)
+    (fullAssignmentShape :
+      fullAssignment = assignmentPrefix ++ remainingAssignment)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaSuffix →
+      FormulaScanSymbol symbol) :
+    ∃ steps,
+      workRunExact? cnfWorkMachine steps
+          (literalSemanticStart alreadySatisfied positive assignmentPrefix
+            index remainingAssignment counter formulaSuffix leftBase
+            (cnfRootGuard :: right)) =
+        some
+          (literalSemanticFinal
+            (alreadySatisfied ||
+              checkLiteral
+                ({ positive := positive, variableIndex := index } :
+                  CNFLiteral)
+                remainingAssignment)
+            positive fullIndex fullAssignment counter formulaSuffix
+            leftBase (cnfRootGuard :: right)) := by
+  induction index generalizing assignmentPrefix remainingAssignment with
+  | zero =>
+      cases remainingAssignment with
+      | nil =>
+          have h := literalLookup_oob_exact alreadySatisfied positive
+            assignmentPrefix counter formulaSuffix leftBase right
+            counterAllowed formulaAllowed
+          refine ⟨literalLookupSteps assignmentPrefix.length counter.length
+            formulaSuffix.length, ?_⟩
+          unfold literalSemanticStart literalSemanticFinal
+          rw [fullIndexShape]
+          rw [fullAssignmentShape]
+          rw [Nat.add_zero]
+          rw [BitString.append_nil_constructive]
+          rw [checkLiteral_empty]
+          rw [Bool.or_false]
+          exact h
+      | cons value rest =>
+          have h := literalLookup_inRange_exact alreadySatisfied positive
+            value assignmentPrefix rest counter formulaSuffix leftBase
+            (cnfRootGuard :: right) counterAllowed formulaAllowed
+          refine ⟨literalLookupSteps assignmentPrefix.length counter.length
+            formulaSuffix.length, ?_⟩
+          unfold literalSemanticStart literalSemanticFinal
+          rw [fullIndexShape]
+          rw [fullAssignmentShape]
+          rw [Nat.add_zero]
+          rw [checkLiteral_zero_cons]
+          rw [assignmentWorkSymbols_append]
+          rw [FrameTraceDesign.assignmentWorkSymbols_cons]
+          repeat' rw [FrameTraceDesign.frameWork_append_assoc]
+          cases value <;> exact h
+  | succ index ih =>
+      cases remainingAssignment with
+      | nil =>
+          have h := literalMark_oob_rawTail_exact alreadySatisfied positive
+            assignmentPrefix counter formulaSuffix leftBase right index
+            counterAllowed formulaAllowed
+          rw [pushWorkLeft_replicate_t_add] at h
+          rw [succ_add_exchange] at h
+          refine ⟨literalMarkOOBSteps assignmentPrefix.length counter.length
+            formulaSuffix.length index, ?_⟩
+          unfold literalSemanticStart literalSemanticFinal
+          rw [fullIndexShape]
+          rw [fullAssignmentShape]
+          rw [BitString.append_nil_constructive]
+          rw [List.replicate_succ]
+          rw [checkLiteral_empty]
+          rw [Bool.or_false]
+          exact h
+      | cons value rest =>
+          rcases literalMark_unary_iteration_exists alreadySatisfied positive
+            value assignmentPrefix index rest counter formulaSuffix leftBase
+            right counterAllowed formulaAllowed with
+            ⟨iterationSteps, iterationRun⟩
+          let extendedPrefix := assignmentPrefix ++ [value]
+          have extendedIndexShape :
+              fullIndex = extendedPrefix.length + index := by
+            unfold extendedPrefix
+            rw [length_append_value]
+            rw [succ_add_exchange]
+            exact fullIndexShape
+          have extendedAssignmentShape :
+              fullAssignment = extendedPrefix ++ rest := by
+            unfold extendedPrefix
+            exact fullAssignmentShape.trans
+              (assignment_append_value_tail assignmentPrefix value rest)
+          rcases ih extendedPrefix rest extendedIndexShape
+            extendedAssignmentShape with ⟨remainingSteps, remainingRun⟩
+          have composed := workRunExact?_compose cnfWorkMachine
+            iterationSteps remainingSteps _ _ _ iterationRun remainingRun
+          refine ⟨iterationSteps + remainingSteps, ?_⟩
+          rw [checkLiteral_succ_cons]
+          exact composed
+
+theorem literalIndex_full_exact
+    (alreadySatisfied positive : Bool) (index : Nat)
+    (assignment : BitString)
+    (counter formulaSuffix leftBase right : List WorkSymbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaSuffix →
+      FormulaScanSymbol symbol) :
+    ∃ steps,
+      workRunExact? cnfWorkMachine steps
+          (literalSemanticStart alreadySatisfied positive [] index assignment
+            counter formulaSuffix leftBase (cnfRootGuard :: right)) =
+        some
+          (literalSemanticFinal
+            (alreadySatisfied ||
+              checkLiteral
+                ({ positive := positive, variableIndex := index } :
+                  CNFLiteral)
+                assignment)
+            positive index assignment counter formulaSuffix leftBase
+            (cnfRootGuard :: right)) := by
+  exact literalIndex_semantic_exact alreadySatisfied positive [] assignment
+    assignment index index counter formulaSuffix leftBase right
+    (Nat.zero_add index).symm rfl
+    counterAllowed formulaAllowed
+
+def literalWorkSymbols (literal : CNFLiteral) : List WorkSymbol :=
+  FrameTraceDesign.assignmentValueWorkSymbol literal.positive ::
+    (List.replicate literal.variableIndex cnfT ++ [cnfF])
+
+def literalListWorkSymbols : List CNFLiteral → List WorkSymbol
+  | [] => []
+  | literal :: rest => literalWorkSymbols literal ++
+      literalListWorkSymbols rest
+
+theorem assignmentValueWorkSymbol_eq_if (value : Bool) :
+    FrameTraceDesign.assignmentValueWorkSymbol value =
+      if value then cnfT else cnfF := by
+  cases value <;> rfl
+
+theorem literalWorkSymbols_push (literal : CNFLiteral)
+    (left : List WorkSymbol) :
+    pushWorkLeft (literalWorkSymbols literal) left =
+      cnfF ::
+        pushWorkLeft (List.replicate literal.variableIndex cnfT)
+          (FrameTraceDesign.assignmentValueWorkSymbol literal.positive ::
+            left) := by
+  unfold literalWorkSymbols
+  change pushWorkLeft
+      (List.replicate literal.variableIndex cnfT ++ [cnfF])
+      (FrameTraceDesign.assignmentValueWorkSymbol literal.positive :: left) = _
+  rw [FrameTraceDesign.pushWorkLeft_append]
+  rfl
+
+theorem literalWorkSymbols_append (literal : CNFLiteral)
+    (tail : List WorkSymbol) :
+    literalWorkSymbols literal ++ tail =
+      FrameTraceDesign.assignmentValueWorkSymbol literal.positive ::
+        (List.replicate literal.variableIndex cnfT ++ (cnfF :: tail)) := by
+  unfold literalWorkSymbols
+  change FrameTraceDesign.assignmentValueWorkSymbol literal.positive ::
+      ((List.replicate literal.variableIndex cnfT ++ [cnfF]) ++ tail) = _
+  rw [FrameTraceDesign.frameWork_append_assoc]
+  rfl
+
+theorem unaryLiteralWorkSymbols_allowed (index : Nat)
+    (symbol : WorkSymbol)
+    (member : List.Mem symbol
+      (List.replicate index cnfT ++ [cnfF])) :
+    FormulaScanSymbol symbol := by
+  induction index with
+  | zero =>
+      cases member with
+      | head => exact .f
+      | tail _ impossible => contradiction
+  | succ index ih =>
+      cases member with
+      | head => exact .t
+      | tail _ tailMember => exact ih tailMember
+
+theorem literalWorkSymbols_allowed (literal : CNFLiteral)
+    (symbol : WorkSymbol) (member : List.Mem symbol
+      (literalWorkSymbols literal)) : FormulaScanSymbol symbol := by
+  unfold literalWorkSymbols at member
+  cases member with
+  | head =>
+      cases literal.positive
+      · exact .f
+      · exact .t
+  | tail _ tailMember =>
+      exact unaryLiteralWorkSymbols_allowed literal.variableIndex
+        symbol tailMember
+
+theorem workSymbol_mem_append_cases (first second : List WorkSymbol)
+    (symbol : WorkSymbol) (member : List.Mem symbol (first ++ second)) :
+    List.Mem symbol first ∨ List.Mem symbol second := by
+  induction first with
+  | nil => exact Or.inr member
+  | cons head rest ih =>
+      cases member with
+      | head => exact Or.inl (List.Mem.head rest)
+      | tail _ tailMember =>
+          cases ih tailMember with
+          | inl restMember =>
+              exact Or.inl (List.Mem.tail head restMember)
+          | inr secondMember => exact Or.inr secondMember
+
+theorem literalListWorkSymbols_allowed (literals : List CNFLiteral)
+    (symbol : WorkSymbol) (member : List.Mem symbol
+      (literalListWorkSymbols literals)) : FormulaScanSymbol symbol := by
+  induction literals with
+  | nil => contradiction
+  | cons literal rest ih =>
+      unfold literalListWorkSymbols at member
+      have split := workSymbol_mem_append_cases
+        (literalWorkSymbols literal) (literalListWorkSymbols rest)
+        symbol member
+      cases split with
+      | inl literalMember =>
+          exact literalWorkSymbols_allowed literal symbol literalMember
+      | inr restMember => exact ih restMember
+
+theorem literalListWorkSymbols_cons (literal : CNFLiteral)
+    (rest : List CNFLiteral) :
+    literalListWorkSymbols (literal :: rest) =
+      literalWorkSymbols literal ++ literalListWorkSymbols rest := rfl
+
+theorem clauseContinue_literal_step (alreadySatisfied positive : Bool)
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord (CNFWorkState.clauseContinue alreadySatisfied)
+          left
+          (FrameTraceDesign.assignmentValueWorkSymbol positive :: suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalIndex alreadySatisfied positive)
+        (cnfBoundaryGuard :: left) suffix) := by
+  cases alreadySatisfied <;> cases positive <;> rfl
+
+theorem clauseContinue_true_finish_step
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord (CNFWorkState.clauseContinue true)
+          left (cnfFinish :: suffix)) =
+      some (workConfigAtWord CNFWorkState.clauseStart
+        (cnfFinish :: left) suffix) := by
+  rfl
+
+def clauseSemanticFinal (result : Bool)
+    (left formulaRest : List WorkSymbol) : WorkConfiguration :=
+  if result then
+    workConfigAtWord CNFWorkState.clauseStart
+      (cnfFinish :: left) formulaRest
+  else
+    workConfigAtWord CNFWorkState.reject left (cnfFinish :: formulaRest)
+
+theorem clauseFormulaSuffix_allowed (literals : List CNFLiteral)
+    (formulaRest : List WorkSymbol)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaRest →
+      FormulaScanSymbol symbol)
+    (symbol : WorkSymbol)
+    (member : List.Mem symbol
+      (literalListWorkSymbols literals ++ cnfFinish :: formulaRest)) :
+    FormulaScanSymbol symbol := by
+  have split := workSymbol_mem_append_cases
+    (literalListWorkSymbols literals) (cnfFinish :: formulaRest)
+    symbol member
+  cases split with
+  | inl literalMember =>
+      exact literalListWorkSymbols_allowed literals symbol literalMember
+  | inr tailMember =>
+      cases tailMember with
+      | head => exact .finish
+      | tail _ restMember => exact formulaAllowed symbol restMember
+
+theorem clauseContinue_semantic_exact (alreadySatisfied : Bool)
+    (literals : List CNFLiteral) (assignment : BitString)
+    (counter formulaRest left right : List WorkSymbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaRest →
+      FormulaScanSymbol symbol) :
+    ∃ steps,
+      workRunExact? cnfWorkMachine steps
+          (workConfigAtWord (CNFWorkState.clauseContinue alreadySatisfied)
+            left
+            (literalListWorkSymbols literals ++
+              (cnfFinish ::
+                (formulaRest ++
+                  (cnfBoundaryGuard ::
+                    (counter ++
+                      (cnfFinish ::
+                        (assignmentWorkSymbols assignment ++
+                          (cnfRootGuard :: right))))))))) =
+        some
+          (clauseSemanticFinal
+            (alreadySatisfied || checkClause literals assignment)
+            (pushWorkLeft (literalListWorkSymbols literals) left)
+            (formulaRest ++
+              (cnfBoundaryGuard ::
+                (counter ++
+                  (cnfFinish ::
+                    (assignmentWorkSymbols assignment ++
+                      (cnfRootGuard :: right))))))) := by
+  induction literals generalizing alreadySatisfied left with
+  | nil =>
+      cases alreadySatisfied with
+      | false =>
+          let clauseTail := formulaRest ++
+            (cnfBoundaryGuard ::
+              (counter ++
+                (cnfFinish ::
+                  (assignmentWorkSymbols assignment ++
+                    (cnfRootGuard :: right)))))
+          have h := unsatisfiedClauseFinish_reject_run left clauseTail
+          refine ⟨1, ?_⟩
+          unfold literalListWorkSymbols clauseSemanticFinal checkClause
+          change workRunExact? cnfWorkMachine 1
+              (workConfigAtWord (CNFWorkState.clauseContinue false) left
+                (cnfFinish :: clauseTail)) =
+            some (workConfigAtWord CNFWorkState.reject left
+              (cnfFinish :: clauseTail))
+          exact h
+      | true =>
+          let clauseTail := formulaRest ++
+            (cnfBoundaryGuard ::
+              (counter ++
+                (cnfFinish ::
+                  (assignmentWorkSymbols assignment ++
+                    (cnfRootGuard :: right)))))
+          have h := workRunExact?_one_of_step cnfWorkMachine _ _
+            (clauseContinue_true_finish_step left clauseTail)
+          refine ⟨1, ?_⟩
+          unfold literalListWorkSymbols clauseSemanticFinal checkClause
+          change workRunExact? cnfWorkMachine 1
+              (workConfigAtWord (CNFWorkState.clauseContinue true) left
+                (cnfFinish :: clauseTail)) =
+            some (workConfigAtWord CNFWorkState.clauseStart
+              (cnfFinish :: left) clauseTail)
+          exact h
+  | cons literal rest ih =>
+      let literalSuffix :=
+        literalListWorkSymbols rest ++ cnfFinish :: formulaRest
+      let certificateTail := cnfBoundaryGuard ::
+        (counter ++
+          (cnfFinish ::
+            (assignmentWorkSymbols assignment ++ (cnfRootGuard :: right))))
+      have suffixAllowed : ∀ symbol, List.Mem symbol literalSuffix →
+          FormulaScanSymbol symbol := by
+        intro symbol member
+        exact clauseFormulaSuffix_allowed rest formulaRest formulaAllowed
+          symbol member
+      have hSign := workRunExact?_one_of_step cnfWorkMachine _ _
+        (clauseContinue_literal_step alreadySatisfied literal.positive left
+          (List.replicate literal.variableIndex cnfT ++
+            (cnfF :: (literalSuffix ++ certificateTail))))
+      rcases literalIndex_full_exact alreadySatisfied literal.positive
+        literal.variableIndex assignment counter literalSuffix left right
+        counterAllowed suffixAllowed with ⟨literalSteps, literalRun⟩
+      unfold literalSemanticStart literalSemanticFinal at literalRun
+      have signLiteralRun := workRunExact?_compose cnfWorkMachine 1
+        literalSteps _ _ _ hSign literalRun
+      rw [← assignmentValueWorkSymbol_eq_if literal.positive]
+        at signLiteralRun
+      rw [← literalWorkSymbols_push literal left] at signLiteralRun
+      rw [FrameTraceDesign.frameWork_append_assoc] at signLiteralRun
+      rcases ih
+        (alreadySatisfied || checkLiteral literal assignment)
+        (pushWorkLeft (literalWorkSymbols literal) left) with
+        ⟨restSteps, restRun⟩
+      have complete := workRunExact?_compose cnfWorkMachine
+        (1 + literalSteps) restSteps _ _ _ signLiteralRun restRun
+      rw [Bool.or_assoc] at complete
+      repeat' rw [FrameTraceDesign.frameWork_append_assoc] at complete
+      refine ⟨(1 + literalSteps) + restSteps, ?_⟩
+      unfold literalListWorkSymbols checkClause
+      rw [FrameTraceDesign.pushWorkLeft_append]
+      repeat' rw [FrameTraceDesign.frameWork_append_assoc]
+      rw [literalWorkSymbols_append]
+      exact complete
+
+theorem clauseNeedLiteral_step (positive : Bool)
+    (left suffix : List WorkSymbol) :
+    workStep? cnfWorkMachine
+        (workConfigAtWord CNFWorkState.clauseNeedLiteral left
+          (FrameTraceDesign.assignmentValueWorkSymbol positive :: suffix)) =
+      some (workConfigAtWord
+        (CNFWorkState.literalIndex false positive)
+        (cnfBoundaryGuard :: left) suffix) := by
+  cases positive <;> rfl
+
+theorem clause_semantic_exact (clause : List CNFLiteral)
+    (assignment : BitString)
+    (counter formulaRest left right : List WorkSymbol)
+    (counterAllowed : ∀ symbol, List.Mem symbol counter →
+      symbol = cnfMarkFalse)
+    (formulaAllowed : ∀ symbol, List.Mem symbol formulaRest →
+      FormulaScanSymbol symbol) :
+    ∃ steps,
+      workRunExact? cnfWorkMachine steps
+          (workConfigAtWord CNFWorkState.clauseNeedLiteral left
+            (literalListWorkSymbols clause ++
+              (cnfFinish ::
+                (formulaRest ++
+                  (cnfBoundaryGuard ::
+                    (counter ++
+                      (cnfFinish ::
+                        (assignmentWorkSymbols assignment ++
+                          (cnfRootGuard :: right))))))))) =
+        some
+          (clauseSemanticFinal (checkClause clause assignment)
+            (pushWorkLeft (literalListWorkSymbols clause) left)
+            (formulaRest ++
+              (cnfBoundaryGuard ::
+                (counter ++
+                  (cnfFinish ::
+                    (assignmentWorkSymbols assignment ++
+                      (cnfRootGuard :: right))))))) := by
+  cases clause with
+  | nil =>
+      let clauseTail := formulaRest ++
+        (cnfBoundaryGuard ::
+          (counter ++
+            (cnfFinish ::
+              (assignmentWorkSymbols assignment ++
+                (cnfRootGuard :: right)))))
+      have h := emptyClause_reject_run left clauseTail
+      refine ⟨1, ?_⟩
+      unfold literalListWorkSymbols clauseSemanticFinal checkClause
+      change workRunExact? cnfWorkMachine 1
+          (workConfigAtWord CNFWorkState.clauseNeedLiteral left
+            (cnfFinish :: clauseTail)) =
+        some (workConfigAtWord CNFWorkState.reject left
+          (cnfFinish :: clauseTail))
+      exact h
+  | cons literal rest =>
+      let literalSuffix :=
+        literalListWorkSymbols rest ++ cnfFinish :: formulaRest
+      let certificateTail := cnfBoundaryGuard ::
+        (counter ++
+          (cnfFinish ::
+            (assignmentWorkSymbols assignment ++ (cnfRootGuard :: right))))
+      have suffixAllowed : ∀ symbol, List.Mem symbol literalSuffix →
+          FormulaScanSymbol symbol := by
+        intro symbol member
+        exact clauseFormulaSuffix_allowed rest formulaRest formulaAllowed
+          symbol member
+      have hSign := workRunExact?_one_of_step cnfWorkMachine _ _
+        (clauseNeedLiteral_step literal.positive left
+          (List.replicate literal.variableIndex cnfT ++
+            (cnfF :: (literalSuffix ++ certificateTail))))
+      rcases literalIndex_full_exact false literal.positive
+        literal.variableIndex assignment counter literalSuffix left right
+        counterAllowed suffixAllowed with ⟨literalSteps, literalRun⟩
+      unfold literalSemanticStart literalSemanticFinal at literalRun
+      have signLiteralRun := workRunExact?_compose cnfWorkMachine 1
+        literalSteps _ _ _ hSign literalRun
+      rw [← assignmentValueWorkSymbol_eq_if literal.positive]
+        at signLiteralRun
+      rw [← literalWorkSymbols_push literal left] at signLiteralRun
+      rw [FrameTraceDesign.frameWork_append_assoc] at signLiteralRun
+      rw [Bool.false_or] at signLiteralRun
+      rcases clauseContinue_semantic_exact
+        (checkLiteral literal assignment) rest assignment counter formulaRest
+        (pushWorkLeft (literalWorkSymbols literal) left) right
+        counterAllowed formulaAllowed with ⟨restSteps, restRun⟩
+      have complete := workRunExact?_compose cnfWorkMachine
+        (1 + literalSteps) restSteps _ _ _ signLiteralRun restRun
+      repeat' rw [FrameTraceDesign.frameWork_append_assoc] at complete
+      refine ⟨(1 + literalSteps) + restSteps, ?_⟩
+      unfold literalListWorkSymbols checkClause
+      rw [FrameTraceDesign.pushWorkLeft_append]
+      repeat' rw [FrameTraceDesign.frameWork_append_assoc]
+      rw [literalWorkSymbols_append]
+      exact complete
+
+/-- Conditional accumulated ledger for the operational clause induction.
+Each unary-index or clause-control unit is charged at most twelve full tape
+spans; no more than one shifted span of such units fits on the raw tape. -/
+theorem clauseLiteral_accumulated_le_singlePhaseBudget
+    (n outerUnits unitCharge steps : Nat)
+    (outerBound : outerUnits ≤ cnfShiftedWorkSpan n)
+    (unitChargeBound : unitCharge ≤ cnfShiftedWorkSpan n * 12)
+    (accumulated : steps ≤ outerUnits * unitCharge) :
+    steps ≤ cnfSinglePhaseBudget n := by
+  have productBound : outerUnits * unitCharge ≤
+      cnfShiftedWorkSpan n * (cnfShiftedWorkSpan n * 12) :=
+    Nat.mul_le_mul outerBound unitChargeBound
+  have normalized :
+      cnfShiftedWorkSpan n * (cnfShiftedWorkSpan n * 12) =
+        (cnfShiftedWorkSpan n * cnfShiftedWorkSpan n) * 12 :=
+    (FrameTraceDesign.natMulAssocClean (cnfShiftedWorkSpan n)
+      (cnfShiftedWorkSpan n) 12).symm
+  have coefficientBound : 12 ≤ 16 := by
+    change 12 ≤ 12 + 4
+    exact Nat.le_add_right 12 4
+  have phaseBound :=
+    cnfScaledQuadratic_le_singlePhaseBudget n 12 coefficientBound
+  rw [normalized] at productBound
+  exact Nat.le_trans accumulated (Nat.le_trans productBound phaseBound)
+end ClauseLiteralDesign
+
 end PNP.Concrete
