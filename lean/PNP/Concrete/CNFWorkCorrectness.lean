@@ -463,6 +463,637 @@ inductive FormulaOrCounterSymbol : WorkSymbol → Prop where
   | sep : FormulaOrCounterSymbol cnfSep
   | finish : FormulaOrCounterSymbol cnfFinish
 
+/-- Indexed classification of the complete nine-symbol work alphabet. -/
+inductive CNFWorkSymbolCase : WorkSymbol → Prop where
+  | blank : CNFWorkSymbolCase cnfBlank
+  | markFalse : CNFWorkSymbolCase cnfMarkFalse
+  | markTrue : CNFWorkSymbolCase cnfMarkTrue
+  | rootGuard : CNFWorkSymbolCase cnfRootGuard
+  | f : CNFWorkSymbolCase cnfF
+  | sep : CNFWorkSymbolCase cnfSep
+  | boundaryGuard : CNFWorkSymbolCase cnfBoundaryGuard
+  | finish : CNFWorkSymbolCase cnfFinish
+  | t : CNFWorkSymbolCase cnfT
+
+theorem cnfWorkSymbolCase (symbol : WorkSymbol) :
+    CNFWorkSymbolCase symbol := by
+  cases symbol with
+  | mk first second =>
+      cases first <;> cases second
+      · exact .blank
+      · exact .markFalse
+      · exact .markTrue
+      · exact .rootGuard
+      · exact .f
+      · exact .sep
+      · exact .boundaryGuard
+      · exact .finish
+      · exact .t
+
+/- The following small indexed whitelists are the grammar contracts of the
+states that make semantic choices.  Symbols outside a whitelist take the
+explicit reject rule from that state's complete suffix. -/
+
+inductive BootSymbol : WorkSymbol → Prop where
+  | t : BootSymbol cnfT
+
+inductive BlankSymbol : WorkSymbol → Prop where
+  | blank : BlankSymbol cnfBlank
+
+inductive RootGuardSymbol : WorkSymbol → Prop where
+  | rootGuard : RootGuardSymbol cnfRootGuard
+
+inductive WidthHeaderSymbol : WorkSymbol → Prop where
+  | markTrue : WidthHeaderSymbol cnfMarkTrue
+  | f : WidthHeaderSymbol cnfF
+  | t : WidthHeaderSymbol cnfT
+
+inductive WidthDoneAssignmentSymbol : WorkSymbol → Prop where
+  | markFalse : WidthDoneAssignmentSymbol cnfMarkFalse
+  | markTrue : WidthDoneAssignmentSymbol cnfMarkTrue
+  | rootGuard : WidthDoneAssignmentSymbol cnfRootGuard
+
+inductive WidthRestoreFormulaSymbol : WorkSymbol → Prop where
+  | markTrue : WidthRestoreFormulaSymbol cnfMarkTrue
+  | f : WidthRestoreFormulaSymbol cnfF
+
+inductive ClauseStartSymbol : WorkSymbol → Prop where
+  | sep : ClauseStartSymbol cnfSep
+  | finish : ClauseStartSymbol cnfFinish
+
+inductive LiteralSignSymbol : WorkSymbol → Prop where
+  | f : LiteralSignSymbol cnfF
+  | t : LiteralSignSymbol cnfT
+
+inductive SatisfiedClauseSymbol : WorkSymbol → Prop where
+  | f : SatisfiedClauseSymbol cnfF
+  | finish : SatisfiedClauseSymbol cnfFinish
+  | t : SatisfiedClauseSymbol cnfT
+
+inductive BoundarySymbol : WorkSymbol → Prop where
+  | boundaryGuard : BoundarySymbol cnfBoundaryGuard
+
+inductive AssignmentSearchSymbol : WorkSymbol → Prop where
+  | markFalse : AssignmentSearchSymbol cnfMarkFalse
+  | markTrue : AssignmentSearchSymbol cnfMarkTrue
+  | rootGuard : AssignmentSearchSymbol cnfRootGuard
+  | f : AssignmentSearchSymbol cnfF
+  | t : AssignmentSearchSymbol cnfT
+
+inductive RestoreIndexSymbol : WorkSymbol → Prop where
+  | markTrue : RestoreIndexSymbol cnfMarkTrue
+  | f : RestoreIndexSymbol cnfF
+  | t : RestoreIndexSymbol cnfT
+
+inductive FrameOneCheckSymbol : WorkSymbol → Prop where
+  | markFalse : FrameOneCheckSymbol cnfMarkFalse
+  | markTrue : FrameOneCheckSymbol cnfMarkTrue
+  | rootGuard : FrameOneCheckSymbol cnfRootGuard
+  | sep : FrameOneCheckSymbol cnfSep
+  | boundaryGuard : FrameOneCheckSymbol cnfBoundaryGuard
+
+inductive FrameTwoCheckSymbol : WorkSymbol → Prop where
+  | markFalse : FrameTwoCheckSymbol cnfMarkFalse
+  | markTrue : FrameTwoCheckSymbol cnfMarkTrue
+  | finish : FrameTwoCheckSymbol cnfFinish
+
+/-- Once lookup has selected the complete-suffix reject rule, the exact
+interpreter reaches the unchanged tape in the halted reject state in one
+transition. -/
+theorem cnfReject_run_one (state : Nat) (tape : WorkTape)
+    (notHalted : cnfWorkMachine.isHalted
+      ({ state := state, tape := tape } : WorkConfiguration) = false)
+    (selected : findWorkRule cnfWorkRules state tape.head =
+      some (cnfRejectRule state tape.head)) :
+    workRunExact? cnfWorkMachine 1
+        ({ state := state, tape := tape } : WorkConfiguration) =
+      some
+        ({ state := CNFWorkState.reject, tape := tape } :
+          WorkConfiguration) := by
+  have hSelected := workRunExact?_one_of_find cnfWorkMachine
+    ({ state := state, tape := tape } : WorkConfiguration)
+    (cnfRejectRule state tape.head) notHalted selected
+  exact hSelected
+
+/-! ### Exact malformed frame and width branches -/
+
+set_option maxRecDepth 100000 in
+theorem boot_reject_run (left right : List WorkSymbol) (symbol : WorkSymbol)
+    (invalid : ¬ BootSymbol symbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.boot
+          tape := WorkTape.focus left symbol right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left symbol right } := by
+  apply cnfReject_run_one CNFWorkState.boot _ (by rfl)
+  cases cnfWorkSymbolCase symbol with
+  | blank => rfl
+  | markFalse => rfl
+  | markTrue => rfl
+  | rootGuard => rfl
+  | f => rfl
+  | sep => rfl
+  | boundaryGuard => rfl
+  | finish => rfl
+  | t => exact False.elim (invalid .t)
+
+set_option maxRecDepth 100000 in
+theorem bootLeft_reject_run (left right : List WorkSymbol)
+    (symbol : WorkSymbol) (invalid : ¬ BlankSymbol symbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.bootLeft
+          tape := WorkTape.focus left symbol right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left symbol right } := by
+  apply cnfReject_run_one CNFWorkState.bootLeft _ (by rfl)
+  cases cnfWorkSymbolCase symbol with
+  | blank => exact False.elim (invalid .blank)
+  | markFalse => rfl
+  | markTrue => rfl
+  | rootGuard => rfl
+  | f => rfl
+  | sep => rfl
+  | boundaryGuard => rfl
+  | finish => rfl
+  | t => rfl
+
+set_option maxRecDepth 100000 in
+theorem frameOneCheckPayload_reject_run
+    (left right : List WorkSymbol) (symbol : WorkSymbol)
+    (invalid : ¬ FrameOneCheckSymbol symbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.frameOneCheckPayload
+          tape := WorkTape.focus left symbol right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left symbol right } := by
+  apply cnfReject_run_one CNFWorkState.frameOneCheckPayload _ (by rfl)
+  cases cnfWorkSymbolCase symbol with
+  | blank => rfl
+  | markFalse => exact False.elim (invalid .markFalse)
+  | markTrue => exact False.elim (invalid .markTrue)
+  | rootGuard => exact False.elim (invalid .rootGuard)
+  | f => rfl
+  | sep => exact False.elim (invalid .sep)
+  | boundaryGuard => exact False.elim (invalid .boundaryGuard)
+  | finish => rfl
+  | t => rfl
+
+set_option maxRecDepth 100000 in
+theorem frameTwoCheckPayload_reject_run
+    (left right : List WorkSymbol) (symbol : WorkSymbol)
+    (invalid : ¬ FrameTwoCheckSymbol symbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.frameTwoCheckPayload
+          tape := WorkTape.focus left symbol right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left symbol right } := by
+  apply cnfReject_run_one CNFWorkState.frameTwoCheckPayload _ (by rfl)
+  cases cnfWorkSymbolCase symbol with
+  | blank => rfl
+  | markFalse => exact False.elim (invalid .markFalse)
+  | markTrue => exact False.elim (invalid .markTrue)
+  | rootGuard => rfl
+  | f => rfl
+  | sep => rfl
+  | boundaryGuard => rfl
+  | finish => exact False.elim (invalid .finish)
+  | t => rfl
+
+set_option maxRecDepth 100000 in
+theorem frameTwoEnsureBlank_reject_run
+    (left right : List WorkSymbol) (symbol : WorkSymbol)
+    (invalid : ¬ BlankSymbol symbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.frameTwoEnsureBlank
+          tape := WorkTape.focus left symbol right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left symbol right } := by
+  apply cnfReject_run_one CNFWorkState.frameTwoEnsureBlank _ (by rfl)
+  cases cnfWorkSymbolCase symbol with
+  | blank => exact False.elim (invalid .blank)
+  | markFalse => rfl
+  | markTrue => rfl
+  | rootGuard => rfl
+  | f => rfl
+  | sep => rfl
+  | boundaryGuard => rfl
+  | finish => rfl
+  | t => rfl
+
+set_option maxRecDepth 100000 in
+theorem frameTwoAtRightGuard_reject_run
+    (left right : List WorkSymbol) (symbol : WorkSymbol)
+    (invalid : ¬ RootGuardSymbol symbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.frameTwoAtRightGuard
+          tape := WorkTape.focus left symbol right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left symbol right } := by
+  apply cnfReject_run_one CNFWorkState.frameTwoAtRightGuard _ (by rfl)
+  cases cnfWorkSymbolCase symbol with
+  | blank => rfl
+  | markFalse => rfl
+  | markTrue => rfl
+  | rootGuard => exact False.elim (invalid .rootGuard)
+  | f => rfl
+  | sep => rfl
+  | boundaryGuard => rfl
+  | finish => rfl
+  | t => rfl
+
+set_option maxRecDepth 100000 in
+theorem widthFindFormula_reject_run
+    (left right : List WorkSymbol) (symbol : WorkSymbol)
+    (invalid : ¬ WidthHeaderSymbol symbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.widthFindFormula
+          tape := WorkTape.focus left symbol right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left symbol right } := by
+  apply cnfReject_run_one CNFWorkState.widthFindFormula _ (by rfl)
+  cases cnfWorkSymbolCase symbol with
+  | blank => rfl
+  | markFalse => rfl
+  | markTrue => exact False.elim (invalid .markTrue)
+  | rootGuard => rfl
+  | f => exact False.elim (invalid .f)
+  | sep => rfl
+  | boundaryGuard => rfl
+  | finish => rfl
+  | t => exact False.elim (invalid .t)
+
+set_option maxRecDepth 100000 in
+theorem widthDoneCheckAssignment_reject_run
+    (left right : List WorkSymbol) (symbol : WorkSymbol)
+    (invalid : ¬ WidthDoneAssignmentSymbol symbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.widthDoneCheckAssignment
+          tape := WorkTape.focus left symbol right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left symbol right } := by
+  apply cnfReject_run_one CNFWorkState.widthDoneCheckAssignment _ (by rfl)
+  cases cnfWorkSymbolCase symbol with
+  | blank => rfl
+  | markFalse => exact False.elim (invalid .markFalse)
+  | markTrue => exact False.elim (invalid .markTrue)
+  | rootGuard => exact False.elim (invalid .rootGuard)
+  | f => rfl
+  | sep => rfl
+  | boundaryGuard => rfl
+  | finish => rfl
+  | t => rfl
+
+set_option maxRecDepth 100000 in
+theorem widthRestoreFormula_reject_run
+    (left right : List WorkSymbol) (symbol : WorkSymbol)
+    (invalid : ¬ WidthRestoreFormulaSymbol symbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.widthRestoreFormula
+          tape := WorkTape.focus left symbol right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left symbol right } := by
+  apply cnfReject_run_one CNFWorkState.widthRestoreFormula _ (by rfl)
+  cases cnfWorkSymbolCase symbol with
+  | blank => rfl
+  | markFalse => rfl
+  | markTrue => exact False.elim (invalid .markTrue)
+  | rootGuard => rfl
+  | f => exact False.elim (invalid .f)
+  | sep => rfl
+  | boundaryGuard => rfl
+  | finish => rfl
+  | t => rfl
+
+/-! ### Exact strict formula-grammar reject branches -/
+
+set_option maxRecDepth 100000 in
+theorem clauseStart_reject_run
+    (left right : List WorkSymbol) (symbol : WorkSymbol)
+    (invalid : ¬ ClauseStartSymbol symbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.clauseStart
+          tape := WorkTape.focus left symbol right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left symbol right } := by
+  apply cnfReject_run_one CNFWorkState.clauseStart _ (by rfl)
+  cases cnfWorkSymbolCase symbol with
+  | blank => rfl
+  | markFalse => rfl
+  | markTrue => rfl
+  | rootGuard => rfl
+  | f => rfl
+  | sep => exact False.elim (invalid .sep)
+  | boundaryGuard => rfl
+  | finish => exact False.elim (invalid .finish)
+  | t => rfl
+
+set_option maxRecDepth 100000 in
+theorem clauseNeedLiteral_reject_run
+    (left right : List WorkSymbol) (symbol : WorkSymbol)
+    (invalid : ¬ LiteralSignSymbol symbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.clauseNeedLiteral
+          tape := WorkTape.focus left symbol right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left symbol right } := by
+  apply cnfReject_run_one CNFWorkState.clauseNeedLiteral _ (by rfl)
+  cases cnfWorkSymbolCase symbol with
+  | blank => rfl
+  | markFalse => rfl
+  | markTrue => rfl
+  | rootGuard => rfl
+  | f => exact False.elim (invalid .f)
+  | sep => rfl
+  | boundaryGuard => rfl
+  | finish => rfl
+  | t => exact False.elim (invalid .t)
+
+set_option maxRecDepth 100000 in
+theorem clauseContinueFalse_reject_run
+    (left right : List WorkSymbol) (symbol : WorkSymbol)
+    (invalid : ¬ LiteralSignSymbol symbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.clauseContinue false
+          tape := WorkTape.focus left symbol right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left symbol right } := by
+  apply cnfReject_run_one (CNFWorkState.clauseContinue false) _ (by rfl)
+  cases cnfWorkSymbolCase symbol with
+  | blank => rfl
+  | markFalse => rfl
+  | markTrue => rfl
+  | rootGuard => rfl
+  | f => exact False.elim (invalid .f)
+  | sep => rfl
+  | boundaryGuard => rfl
+  | finish => rfl
+  | t => exact False.elim (invalid .t)
+
+set_option maxRecDepth 100000 in
+theorem clauseContinueTrue_reject_run
+    (left right : List WorkSymbol) (symbol : WorkSymbol)
+    (invalid : ¬ SatisfiedClauseSymbol symbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.clauseContinue true
+          tape := WorkTape.focus left symbol right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left symbol right } := by
+  apply cnfReject_run_one (CNFWorkState.clauseContinue true) _ (by rfl)
+  cases cnfWorkSymbolCase symbol with
+  | blank => rfl
+  | markFalse => rfl
+  | markTrue => rfl
+  | rootGuard => rfl
+  | f => exact False.elim (invalid .f)
+  | sep => rfl
+  | boundaryGuard => rfl
+  | finish => exact False.elim (invalid .finish)
+  | t => exact False.elim (invalid .t)
+
+set_option maxRecDepth 100000 in
+theorem finalCheck_reject_run
+    (left right : List WorkSymbol) (symbol : WorkSymbol)
+    (invalid : ¬ BoundarySymbol symbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.finalCheck
+          tape := WorkTape.focus left symbol right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left symbol right } := by
+  apply cnfReject_run_one CNFWorkState.finalCheck _ (by rfl)
+  cases cnfWorkSymbolCase symbol with
+  | blank => rfl
+  | markFalse => rfl
+  | markTrue => rfl
+  | rootGuard => rfl
+  | f => rfl
+  | sep => rfl
+  | boundaryGuard => exact False.elim (invalid .boundaryGuard)
+  | finish => rfl
+  | t => rfl
+
+set_option maxRecDepth 100000 in
+theorem literalIndex_reject_run (alreadySatisfied positive : Bool)
+    (left right : List WorkSymbol) (symbol : WorkSymbol)
+    (invalid : ¬ LiteralSignSymbol symbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.literalIndex alreadySatisfied positive
+          tape := WorkTape.focus left symbol right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left symbol right } := by
+  apply cnfReject_run_one
+    (CNFWorkState.literalIndex alreadySatisfied positive) _
+    (by cases alreadySatisfied <;> cases positive <;> rfl)
+  cases cnfWorkSymbolCase symbol with
+  | blank => cases alreadySatisfied <;> cases positive <;> rfl
+  | markFalse => cases alreadySatisfied <;> cases positive <;> rfl
+  | markTrue => cases alreadySatisfied <;> cases positive <;> rfl
+  | rootGuard => cases alreadySatisfied <;> cases positive <;> rfl
+  | f => exact False.elim (invalid .f)
+  | sep => cases alreadySatisfied <;> cases positive <;> rfl
+  | boundaryGuard => cases alreadySatisfied <;> cases positive <;> rfl
+  | finish => cases alreadySatisfied <;> cases positive <;> rfl
+  | t => exact False.elim (invalid .t)
+
+set_option maxRecDepth 100000 in
+theorem literalMarkAssignment_reject_run
+    (alreadySatisfied positive : Bool)
+    (left right : List WorkSymbol) (symbol : WorkSymbol)
+    (invalid : ¬ AssignmentSearchSymbol symbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.literalMarkAssignment alreadySatisfied positive
+          tape := WorkTape.focus left symbol right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left symbol right } := by
+  apply cnfReject_run_one
+    (CNFWorkState.literalMarkAssignment alreadySatisfied positive) _
+    (by cases alreadySatisfied <;> cases positive <;> rfl)
+  cases cnfWorkSymbolCase symbol with
+  | blank => cases alreadySatisfied <;> cases positive <;> rfl
+  | markFalse => exact False.elim (invalid .markFalse)
+  | markTrue => exact False.elim (invalid .markTrue)
+  | rootGuard => exact False.elim (invalid .rootGuard)
+  | f => exact False.elim (invalid .f)
+  | sep => cases alreadySatisfied <;> cases positive <;> rfl
+  | boundaryGuard => cases alreadySatisfied <;> cases positive <;> rfl
+  | finish => cases alreadySatisfied <;> cases positive <;> rfl
+  | t => exact False.elim (invalid .t)
+
+set_option maxRecDepth 100000 in
+theorem literalLookupAssignment_reject_run
+    (alreadySatisfied positive : Bool)
+    (left right : List WorkSymbol) (symbol : WorkSymbol)
+    (invalid : ¬ AssignmentSearchSymbol symbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.literalLookupAssignment
+            alreadySatisfied positive
+          tape := WorkTape.focus left symbol right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left symbol right } := by
+  apply cnfReject_run_one
+    (CNFWorkState.literalLookupAssignment alreadySatisfied positive) _
+    (by cases alreadySatisfied <;> cases positive <;> rfl)
+  cases cnfWorkSymbolCase symbol with
+  | blank => cases alreadySatisfied <;> cases positive <;> rfl
+  | markFalse => exact False.elim (invalid .markFalse)
+  | markTrue => exact False.elim (invalid .markTrue)
+  | rootGuard => exact False.elim (invalid .rootGuard)
+  | f => exact False.elim (invalid .f)
+  | sep => cases alreadySatisfied <;> cases positive <;> rfl
+  | boundaryGuard => cases alreadySatisfied <;> cases positive <;> rfl
+  | finish => cases alreadySatisfied <;> cases positive <;> rfl
+  | t => exact False.elim (invalid .t)
+
+set_option maxRecDepth 100000 in
+theorem literalRestoreIndex_reject_run (result positive : Bool)
+    (left right : List WorkSymbol) (symbol : WorkSymbol)
+    (invalid : ¬ RestoreIndexSymbol symbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.literalRestoreIndex result positive
+          tape := WorkTape.focus left symbol right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left symbol right } := by
+  apply cnfReject_run_one
+    (CNFWorkState.literalRestoreIndex result positive) _
+    (by cases result <;> cases positive <;> rfl)
+  cases cnfWorkSymbolCase symbol with
+  | blank => cases result <;> cases positive <;> rfl
+  | markFalse => cases result <;> cases positive <;> rfl
+  | markTrue => exact False.elim (invalid .markTrue)
+  | rootGuard => cases result <;> cases positive <;> rfl
+  | f => exact False.elim (invalid .f)
+  | sep => cases result <;> cases positive <;> rfl
+  | boundaryGuard => cases result <;> cases positive <;> rfl
+  | finish => cases result <;> cases positive <;> rfl
+  | t => exact False.elim (invalid .t)
+
+/- Named terminal corollaries make the strict decoder failure modes visible
+without asking later semantic inductions to unfold a whitelist proof. -/
+
+theorem frameOne_missingSeparator_reject_run
+    (left right : List WorkSymbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.frameOneCheckPayload
+          tape := WorkTape.focus left cnfFinish right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left cnfFinish right } :=
+  frameOneCheckPayload_reject_run left right cnfFinish (by
+    intro allowed
+    cases allowed)
+
+theorem frameTwo_falseTerminal_reject_run
+    (left right : List WorkSymbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.frameTwoCheckPayload
+          tape := WorkTape.focus left cnfF right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left cnfF right } :=
+  frameTwoCheckPayload_reject_run left right cnfF (by
+    intro allowed
+    cases allowed)
+
+theorem frameTwo_trueTerminal_reject_run
+    (left right : List WorkSymbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.frameTwoCheckPayload
+          tape := WorkTape.focus left cnfT right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left cnfT right } :=
+  frameTwoCheckPayload_reject_run left right cnfT (by
+    intro allowed
+    cases allowed)
+
+theorem width_missingHeaderTerminator_reject_run
+    (left right : List WorkSymbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.widthFindFormula
+          tape := WorkTape.focus left cnfFinish right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left cnfFinish right } :=
+  widthFindFormula_reject_run left right cnfFinish (by
+    intro allowed
+    cases allowed)
+
+theorem width_extraFalseAssignment_reject_run
+    (left right : List WorkSymbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.widthDoneCheckAssignment
+          tape := WorkTape.focus left cnfF right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left cnfF right } :=
+  widthDoneCheckAssignment_reject_run left right cnfF (by
+    intro allowed
+    cases allowed)
+
+theorem width_extraTrueAssignment_reject_run
+    (left right : List WorkSymbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.widthDoneCheckAssignment
+          tape := WorkTape.focus left cnfT right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left cnfT right } :=
+  widthDoneCheckAssignment_reject_run left right cnfT (by
+    intro allowed
+    cases allowed)
+
+theorem emptyClause_reject_run (left right : List WorkSymbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.clauseNeedLiteral
+          tape := WorkTape.focus left cnfFinish right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left cnfFinish right } :=
+  clauseNeedLiteral_reject_run left right cnfFinish (by
+    intro allowed
+    cases allowed)
+
+theorem unsatisfiedClauseFinish_reject_run
+    (left right : List WorkSymbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.clauseContinue false
+          tape := WorkTape.focus left cnfFinish right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left cnfFinish right } :=
+  clauseContinueFalse_reject_run left right cnfFinish (by
+    intro allowed
+    cases allowed)
+
+theorem literal_missingIndex_reject_run
+    (alreadySatisfied positive : Bool) (left right : List WorkSymbol) :
+    workRunExact? cnfWorkMachine 1
+        { state := CNFWorkState.literalIndex alreadySatisfied positive
+          tape := WorkTape.focus left cnfFinish right } =
+      some
+        { state := CNFWorkState.reject
+          tape := WorkTape.focus left cnfFinish right } :=
+  literalIndex_reject_run alreadySatisfied positive left right cnfFinish (by
+    intro allowed
+    cases allowed)
+
 theorem cnfTokenWorkSymbol_formulaScan (token : CNFToken) :
     FormulaScanSymbol token.workSymbol := by
   cases token with
@@ -1032,5 +1663,118 @@ theorem literalIndexToAssignmentPrefix_run
   exact workRunExact?_compose cnfWorkMachine
     (((formulaTail.length + 1) + counter.length) + 1)
     markedAssignment.length _ _ _ hThroughFinish hAssignment
+
+/-! ### Conservative cubic phase ledger -/
+
+def cnfShiftedWorkSpan (n : Nat) : Nat := n + 2
+
+def cnfWorkPhaseCube (n : Nat) : Nat :=
+  cnfShiftedWorkSpan n * cnfShiftedWorkSpan n * cnfShiftedWorkSpan n
+
+/-- Each of frame validation, width checking, and clause/literal evaluation
+receives sixteen shifted-span cubes. -/
+def cnfSinglePhaseBudget (n : Nat) : Nat := cnfWorkPhaseCube n * 16
+
+/-- Eight fixed transitions plus three independent sixteen-cube phase
+allocations. -/
+def cnfConservativePhaseBudget (n : Nat) : Nat :=
+  ((8 + cnfSinglePhaseBudget n) + cnfSinglePhaseBudget n) +
+    cnfSinglePhaseBudget n
+
+theorem cnfShiftedSquare_le_phaseCube (n : Nat) :
+    cnfShiftedWorkSpan n * cnfShiftedWorkSpan n ≤
+      cnfWorkPhaseCube n := by
+  have positive : 1 ≤ n + 2 :=
+    Nat.succ_le_succ (Nat.zero_le (n + 1))
+  unfold cnfShiftedWorkSpan cnfWorkPhaseCube
+  exact Nat.le_mul_of_pos_right ((n + 2) * (n + 2)) positive
+
+theorem cnfConservativePhaseBudget_normalized (n : Nat) :
+    cnfConservativePhaseBudget n = 8 + cnfWorkPhaseCube n * 48 := by
+  unfold cnfConservativePhaseBudget cnfSinglePhaseBudget
+  rw [Nat.add_assoc 8]
+  rw [Nat.add_assoc 8]
+  rw [← Nat.mul_add]
+  rw [← Nat.mul_add]
+
+theorem cnfPhaseCoefficient_le_declared : 48 ≤ 64 := by
+  change 48 ≤ 48 + 16
+  exact Nat.le_add_right 48 16
+
+theorem cnfConservativePhaseBudget_le_polynomial (n : Nat) :
+    cnfConservativePhaseBudget n ≤ cnfWorkStepPolynomial.eval n := by
+  rw [cnfConservativePhaseBudget_normalized]
+  rw [cnfWorkStepPolynomial_eval]
+  have scaled : cnfWorkPhaseCube n * 48 ≤
+      cnfWorkPhaseCube n * 64 :=
+    Nat.mul_le_mul_left (cnfWorkPhaseCube n)
+      cnfPhaseCoefficient_le_declared
+  have commute : cnfWorkPhaseCube n * 64 = 64 * cnfWorkPhaseCube n :=
+    Nat.mul_comm (cnfWorkPhaseCube n) 64
+  exact Nat.add_le_add (Nat.le_refl 8)
+    (Nat.le_trans scaled (Nat.le_of_eq commute))
+
+/-- Pointwise phase bounds add to the conservative cubic allocation. -/
+theorem cnfPhaseSteps_le_polynomial (n fixedSteps frameSteps widthSteps
+    grammarSteps : Nat)
+    (fixedBound : fixedSteps ≤ 8)
+    (frameBound : frameSteps ≤ cnfSinglePhaseBudget n)
+    (widthBound : widthSteps ≤ cnfSinglePhaseBudget n)
+    (grammarBound : grammarSteps ≤ cnfSinglePhaseBudget n) :
+    ((fixedSteps + frameSteps) + widthSteps) + grammarSteps ≤
+      cnfWorkStepPolynomial.eval n := by
+  have fixedFrame : fixedSteps + frameSteps ≤
+      8 + cnfSinglePhaseBudget n :=
+    Nat.add_le_add fixedBound frameBound
+  have throughWidth : (fixedSteps + frameSteps) + widthSteps ≤
+      (8 + cnfSinglePhaseBudget n) + cnfSinglePhaseBudget n :=
+    Nat.add_le_add fixedFrame widthBound
+  have throughGrammar :
+      ((fixedSteps + frameSteps) + widthSteps) + grammarSteps ≤
+        cnfConservativePhaseBudget n :=
+    Nat.add_le_add throughWidth grammarBound
+  exact Nat.le_trans throughGrammar
+    (cnfConservativePhaseBudget_le_polynomial n)
+
+/-- Four exact phase traces compose into a halted exact execution within the
+declared cubic fuel.  The theorem is deliberately conditional on the phase
+traces; the remaining semantic inductions supply those traces. -/
+theorem cnfWorkExact_phaseLedger
+    (n fixedSteps frameSteps widthSteps grammarSteps : Nat)
+    (start afterFixed afterFrame afterWidth final : WorkConfiguration)
+    (fixedRun : workRunExact? cnfWorkMachine fixedSteps start =
+      some afterFixed)
+    (frameRun : workRunExact? cnfWorkMachine frameSteps afterFixed =
+      some afterFrame)
+    (widthRun : workRunExact? cnfWorkMachine widthSteps afterFrame =
+      some afterWidth)
+    (grammarRun : workRunExact? cnfWorkMachine grammarSteps afterWidth =
+      some final)
+    (fixedBound : fixedSteps ≤ 8)
+    (frameBound : frameSteps ≤ cnfSinglePhaseBudget n)
+    (widthBound : widthSteps ≤ cnfSinglePhaseBudget n)
+    (grammarBound : grammarSteps ≤ cnfSinglePhaseBudget n)
+    (halted : cnfWorkMachine.isHalted final = true) :
+    ∃ steps,
+      steps ≤ cnfWorkStepPolynomial.eval n ∧
+      workRunExact? cnfWorkMachine steps start = some final ∧
+      cnfWorkMachine.isHalted final = true ∧
+      workRun cnfWorkMachine (cnfWorkStepPolynomial.eval n) start = final := by
+  have fixedFrameRun := workRunExact?_compose cnfWorkMachine
+    fixedSteps frameSteps start afterFixed afterFrame fixedRun frameRun
+  have throughWidthRun := workRunExact?_compose cnfWorkMachine
+    (fixedSteps + frameSteps) widthSteps start afterFrame afterWidth
+    fixedFrameRun widthRun
+  have completeRun := workRunExact?_compose cnfWorkMachine
+    ((fixedSteps + frameSteps) + widthSteps) grammarSteps
+    start afterWidth final throughWidthRun grammarRun
+  have completeBound := cnfPhaseSteps_le_polynomial n fixedSteps
+    frameSteps widthSteps grammarSteps fixedBound frameBound widthBound
+    grammarBound
+  refine ⟨((fixedSteps + frameSteps) + widthSteps) + grammarSteps,
+    completeBound, completeRun, halted, ?_⟩
+  exact workRun_pad_exact_halted cnfWorkMachine
+    (((fixedSteps + frameSteps) + widthSteps) + grammarSteps)
+    (cnfWorkStepPolynomial.eval n) start final completeRun halted completeBound
 
 end PNP.Concrete
