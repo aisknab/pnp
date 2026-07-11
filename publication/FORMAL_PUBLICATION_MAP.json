@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-11-15",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-11-16",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "cdfd10fdf8461c246fe0cf89247a0051d69beb3b55b7e14963943fb0ff702943",
+  "milestoneSourceClosureSha256": "a7212ca4cef1a004b8f3201ae72d207a3227f61e06bcaa3d7264b47c8ad4ab74",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.FinalUniversalDesign.cnfCompiled_accept_iff_check": "4a8661d567079e1f47c288b8a36805a20ac7040338d84325723079f3fada4efa",
@@ -30,6 +30,10 @@
     "PNP.Concrete.FinalUniversalDesign.formulaGrammarOutcome": "b17bca26b10ff836c6ebadaa593a6236e7633d80b75b34e0357f371223692ec0",
     "PNP.Concrete.FunctionProgram.RawRefinement.output_size_le": "f9d23e2b448974c617d83666b18c5950ce025067a959a74e98d3b20f54229c8f",
     "PNP.Concrete.NatPolynomial.eval_mono": "08eef194a6dad5f3443646446dd9aa44bb62f71881897bd2721f5e10b0ed31ca",
+    "PNP.Concrete.PipelineMachineSimulation.findIndexedRawRuleFrom_map_snd": "07fc0ddc64f43e2c787b292eede94e2e92d69b608ca5d618941104799139e5e1",
+    "PNP.Concrete.PipelineMachineSimulation.find_liftMachine_entry": "e479fdab90f65bfeb52121a418b02df2680781d6a39cc7a56816423c9f2af3c7",
+    "PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_of_step": "a0465c371b7c21ec042fe86b9393f961ef1aa18a31d032e354b8dd3282115a5f",
+    "PNP.Concrete.PipelineMachineSimulation.workRunExact_three_of_step": "27ac4425bf506e7172f9811d87d7f5a733e7d16012cf92d619e1087e46fdf020",
     "PNP.Concrete.PipelineTape.frameWithGarbage_represents": "b37f88af38904ec0c539e3a92c6aaa1767989d090536180c0db3aa10b18c709e",
     "PNP.Concrete.PipelineTape.handoffTarget_withGarbage_represents": "ed6384cc3cb42bf5e5900b65f1e578de794a1ff1f4fbd2de85a112151ff40032",
     "PNP.Concrete.PipelineTape.represents_expandLeft_of_nil": "005090ae90a511441dfb32d916fcdb82fd684049a2290d542a02c3851f74467e",
@@ -79,10 +83,14 @@
       "id": "concrete-machine-cost-kernel",
       "title": "Concrete machine and cost kernel",
       "classification": "formalized-foundation-only",
-      "scope": "Executable bitstrings and codecs, finite rule-list machine semantics, fuel-bounded execution, blank-delimited representation-stable output, a pure canonical handoff target, garbage-tolerant two-track boundary geometry, and proof-bearing natural-polynomial runtime witnesses.",
+      "scope": "Executable bitstrings and codecs, finite rule-list machine semantics, fuel-bounded execution, blank-delimited representation-stable output, boundary-framed two-track geometry, ordered one-step raw-to-work simulation at exactly three work transitions, its exact eighteen-transition literal-compiler image, and proof-bearing natural-polynomial runtime witnesses.",
       "requiredTheorems": [
         "PNP.Concrete.BitString.decodePair_pair",
         "PNP.Concrete.NatPolynomial.eval_mono",
+        "PNP.Concrete.PipelineMachineSimulation.findIndexedRawRuleFrom_map_snd",
+        "PNP.Concrete.PipelineMachineSimulation.find_liftMachine_entry",
+        "PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_of_step",
+        "PNP.Concrete.PipelineMachineSimulation.workRunExact_three_of_step",
         "PNP.Concrete.PipelineTape.frameWithGarbage_represents",
         "PNP.Concrete.PipelineTape.handoffTarget_withGarbage_represents",
         "PNP.Concrete.PipelineTape.represents_expandLeft_of_nil",
@@ -99,7 +107,7 @@
         "PNP.Concrete.run_succ",
         "PNP.Concrete.run_zero"
       ],
-      "nonClaim": "The boundary frame and expansion functions are pure tape data and identities, not transition rules or an executable normalization/handoff machine. They supply no state reset, rule simulation, first-match proof, composition compiler, or runtime theorem. This foundation alone does not prove SAT, NP-completeness, or P = NP."
+      "nonClaim": "The simulator theorem covers one already-framed successful raw step, configuration to configuration. It does not construct an initial frame, de-tag output, implement terminal handoff, lift an arbitrary bounded run, compile function composition or decision precomposition, prove RawRefinement or an end-to-end polynomial bound, put CNF-SAT in P, prove NP-completeness, or establish P = NP."
     },
     {
       "id": "concrete-complexity-classes",

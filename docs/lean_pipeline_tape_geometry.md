@@ -72,7 +72,8 @@ attempt to remove the compiler blocker or open the publication gate.
 ## Exact nonclaim
 
 The expansion functions are pure tape identities, not transition-rule lists or a `WorkMachine`.
-This module does not construct a frame recognizer or creator, state namespace, rule simulation,
-first-match preservation theorem, transition-count bound, normalization run, executable handoff,
-composition or precomposition refinement, verifier adapter, charged/raw class equivalence,
-`CNFSAT ∈ P`, NP-completeness, a root theorem, or `P = NP`.
+The separate `PipelineMachineSimulation` layer now supplies an ordered finite rule lift and an exact
+one-step simulation theorem over this relation. Neither module constructs an initial frame,
+normalizes or decodes output, executes a terminal handoff, lifts a bounded run, compiles composition
+or precomposition, proves a polynomial end-to-end bound or charged/raw class equivalence,
+establishes `CNFSAT ∈ P` or NP-completeness, activates a root theorem, or proves `P = NP`.

@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'c23c4c7b155635f3671328b8dd0e98797d98e3637e7648acae751c8fc766d526';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'b5423fccc3023eb1c42c2d88e4a10bac823cdfbd2afbab7300a44d7b2af5ed35';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -19,6 +19,10 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.FinalUniversalDesign.formulaGrammarOutcome',
   'PNP.Concrete.FunctionProgram.RawRefinement.output_size_le',
   'PNP.Concrete.NatPolynomial.eval_mono',
+  'PNP.Concrete.PipelineMachineSimulation.findIndexedRawRuleFrom_map_snd',
+  'PNP.Concrete.PipelineMachineSimulation.find_liftMachine_entry',
+  'PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_of_step',
+  'PNP.Concrete.PipelineMachineSimulation.workRunExact_three_of_step',
   'PNP.Concrete.PipelineTape.frameWithGarbage_represents',
   'PNP.Concrete.PipelineTape.handoffTarget_withGarbage_represents',
   'PNP.Concrete.PipelineTape.represents_expandLeft_of_nil',
@@ -95,7 +99,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-11-15') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-11-16') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -369,7 +373,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-11-15') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-11-16') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
@@ -387,7 +391,7 @@ function validatePublicationMap0(map) {
     'expectedRootKernelTypeSha256',
     'expectedAxiomClosureSha256',
     'expectedSourceClosureSha256',
-  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 15`);
+  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 16`);
   if (!isSha2560(map.milestoneSourceClosureSha256)
       || !isObject0(map.earnedMilestoneTheoremKernelTypeSha256)) {
     throw new Error('reviewed milestone theorem/source fingerprints are missing');
@@ -406,7 +410,7 @@ function validatePublicationMap0(map) {
     throw new Error('reviewed milestone theorem kernel-type fingerprint inventory mismatch');
   }
   if (sha256Text0(stableStringify0(map)) !== REQUIRED_PUBLICATION_MAP_SHA2560) {
-    throw new Error('formal publication milestone map drifted from the reviewed release-15 specification');
+    throw new Error('formal publication milestone map drifted from the reviewed release-16 specification');
   }
 }
 

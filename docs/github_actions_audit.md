@@ -15,9 +15,9 @@ from current theorem status.
   declaration inventory from `Lean.Environment.constants` plus `Lean.collectAxioms`, and prints
   the focused axiom transcripts for the 41-declaration concrete bitstring/polynomial kernel, the
   38-declaration finite-rule machine kernel, the 14-declaration blank-delimited output/handoff
-  boundary, the 20-declaration boundary-marked pipeline tape geometry, the 48-declaration finite
-  charged-pipeline complexity interface, the six-declaration raw-pipeline refinement boundary, the
-  two-declaration inactive
+  boundary, the 20-declaration boundary-marked pipeline tape geometry, the framed raw-machine
+  simulation surface, the 48-declaration finite charged-pipeline complexity interface, the
+  six-declaration raw-pipeline refinement boundary, and the two-declaration inactive
   concrete target, the concrete CNF semantics/codec,
   paired work-input bridge, direct verifier bridge, and complete work-machine correctness closure,
   and enforced zero-axiom direct-wire semantics, enumerator, finite truth-table,
@@ -66,12 +66,20 @@ to one raw machine.
 The tape-handoff audit corrects the earlier list-boundary-sensitive output convention: explicit and
 implicit blanks now terminate output identically. Its `handoffTarget` is a pure canonical data target,
 not a machine, rule list, or paid copy algorithm. Boundary framing, stale-cell isolation, state
-namespacing, and polynomial handoff execution remain unproved.
+normalization, output de-tagging, and polynomial handoff execution remain unproved.
 
 The pipeline-tape geometry audit proves a two-track representation with distinct data/left/right
 tags, arbitrary stale cells outside the first markers, and exact preservation under data writes,
 interior moves, and empty-side boundary expansion. The expansion terms are pure `WorkTape` data
 functions. They do not supply rules, machine states, a simulation run, or a transition-count bound.
+
+The pipeline-machine simulation audit covers the separate executable local layer. It checks that
+ordered raw rules preserve first-match behavior, terminal-source entries are omitted, boundary
+growth tolerates every exterior work symbol, and one successful raw transition takes exactly three
+work transitions and eighteen transitions after literal compilation. The theorem starts from an
+already encoded represented configuration. It does not provide `startConfig` framing,
+`machineOutput` equality, a terminal handoff, a bounded-run lift, composition/precomposition
+refinement, or a polynomial end-to-end theorem.
 
 The concrete-CNF checks do establish a narrower raw-machine result. They require complete axiom
 transcripts for the canonical CNF codec and semantics, paired work-input layout, generic direct

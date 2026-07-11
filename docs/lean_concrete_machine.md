@@ -53,6 +53,10 @@ This machine-kernel milestone by itself does not define P, NP, reductions, SAT, 
 [finite charged-pipeline complexity interface](./lean_concrete_complexity.md) now defines bitstring
 P/NP witnesses, polynomial reductions, and the inactive `PNP.Main.ConcretePEqualsNP` target. Its
 finite syntax is grounded at `Machine` leaves, but no compiler/refinement from an arbitrary
-composite pipeline to one raw single-tape machine has been proved. Therefore
+composite pipeline to one raw single-tape machine has been proved. The local framed simulator now
+reproduces one successful raw step from an already encoded frame in exactly three work/eighteen
+compiled raw transitions, but supplies no initial framing, output handoff, bounded-run lift, or
+composite refinement. Therefore
 `Formal.ConcreteComplexityMachineLink` remains the first of seven blockers. All five
-project-specific axioms remain, `PNP.Main.p_eq_np` is absent, and the publication gate is false.
+reviewed activation fingerprints remain unset, the four project-specific axioms remain,
+`PNP.Main.p_eq_np` is absent, and the publication gate is false.

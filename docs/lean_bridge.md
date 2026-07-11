@@ -46,6 +46,7 @@ lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
 lean/PNP/Concrete/TapeHandoff.lean
 lean/PNP/Concrete/PipelineTapeGeometry.lean
+lean/PNP/Concrete/PipelineMachineSimulation.lean
 lean/PNP/Concrete/Complexity.lean
 lean/PNP/Concrete/PipelineRefinement.lean
 lean/PNP/Concrete/Target.lean
@@ -79,6 +80,7 @@ lean-audit/PNPConcreteBitStringAxiomAudit.lean
 lean-audit/PNPConcreteMachineAxiomAudit.lean
 lean-audit/PNPConcreteTapeHandoffAxiomAudit.lean
 lean-audit/PNPConcretePipelineTapeGeometryAxiomAudit.lean
+lean-audit/PNPConcretePipelineMachineSimulationAxiomAudit.lean
 lean-audit/PNPConcreteComplexityAxiomAudit.lean
 lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean
 lean-audit/PNPConcreteTargetAxiomAudit.lean
@@ -102,6 +104,7 @@ docs/lean_nand_semantics.md
 docs/lean_concrete_machine.md
 docs/lean_tape_handoff.md
 docs/lean_pipeline_tape_geometry.md
+docs/lean_pipeline_machine_simulation.md
 docs/lean_concrete_complexity.md
 docs/lean_nand_enumerator.md
 docs/lean_locked_nand_macros.md
@@ -141,7 +144,11 @@ and the pure canonical handoff target, prove representation-stable decoding, and
 handoff claim. The twenty declarations in `lean/PNP/Concrete/PipelineTapeGeometry.lean` are also
 axiom-free: they define distinct two-track data and boundary tags, an arbitrary-exterior-garbage
 frame, and pure write/move/boundary-expansion geometry. They define no rules, machine, simulation,
-or runtime bound. The two declarations in
+or runtime bound. `lean/PNP/Concrete/PipelineMachineSimulation.lean` supplies the separate finite
+rule lift: it preserves ordered first-match selection and simulates one successful transition from
+an already represented configuration in exactly three work/eighteen compiled raw steps. It does
+not create the frame, decode output, perform terminal handoff, lift a bounded run, or construct a
+pipeline refinement. The two declarations in
 `lean/PNP/Concrete/Target.lean` are also axiom-free: `PNP.Main.ConcretePEqualsNP` is an inactive
 definition naming mutual inclusion, and `PNP.Main.concretePEqualsNP_iff` pins its expansion. This
 does not prove the target. The six explicit declarations in
@@ -598,7 +605,8 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 5. A deterministic polynomial-time decider proving `CNFSAT ∈ P`, together with concrete SAT
    NP-hardness/NP-completeness; the current direct verifier proves only `CNFSAT ∈ NP`.
 6. A compiler/refinement proving that every finite charged function, decision, and verifier
-   pipeline is implemented with the stated costs by the selected raw machine model.
+   pipeline is implemented with the stated costs by the selected raw machine model. The local
+   one-step framed simulator does not yet provide this end-to-end result.
 ```
 
 ## Next formalization targets
@@ -611,8 +619,9 @@ The highest-value next targets are:
 3. Prove first-output preservation, `TraceEquivalence`, and the two derived final-output laws.
 4. Instantiate the conditional boundary uniformly and prove the report threshold theorem.
 5. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
-6. Compile/refine the finite charged-pipeline interface to raw machine programs while preserving
-   semantics and polynomial runtime/output bounds.
+6. Extend the local framed step simulator with executable input framing, bounded-run lifting,
+   terminal output de-tagging/handoff, and second-stage launch; then construct the full pipeline
+   refinement with polynomial runtime/output bounds.
 7. Formalize or import concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.
 8. Formalize checker/reflection soundness for the PCC package.

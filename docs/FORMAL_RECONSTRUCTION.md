@@ -32,7 +32,11 @@ minimizer, ZeroSlack theorem, or final complexity conclusion.
 The current Lean development makes parts of the intended route explicit and now defines an
 axiom-free finite charged-pipeline interface for P, bounded-certificate NP, and polynomial
 many-one reductions. It does not yet prove that every such pipeline compiles or refines to the raw
-single-tape machine kernel. It now does provide one direct raw-machine instance: a universally
+single-tape machine kernel. A new local layer preserves the raw interpreter's first matching rule
+and simulates one successful transition from an already encoded boundary frame in exactly three
+work transitions and eighteen compiled raw transitions. It does not create that frame, decode or
+hand off terminal output, lift a bounded run, or construct a composite refinement. The development
+also provides one direct raw-machine instance: a universally
 correct polynomial-time verifier for canonically encoded finite CNF formulae and bounded assignment
 certificates, proving `PNP.Concrete.CNFSAT ∈ NP`. It does not provide a deterministic polynomial-time
 decider proving `CNFSAT ∈ P`, concrete NP-hardness or NP-completeness, the complete locked-NAND
@@ -52,8 +56,10 @@ decoding, natural-polynomial bound syntax, a finite rule-list single-tape machin
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and
 decision pipeline syntax carries polynomial runtime, output-size, certificate-size, and handoff
 bounds. Lean constructs P contained in NP, reduction identity/composition/transport, and the
-NP-complete-in-P implication. This is a charged interpreter interface, not yet a compiler or
-refinement theorem to one raw machine. See
+NP-complete-in-P implication. Boundary geometry and the local simulator now discharge one
+configuration-to-configuration step, including marker growth across arbitrary exterior garbage.
+This is still a charged interpreter interface without a complete compiler or refinement theorem to
+one raw machine. See
 [`lean_concrete_complexity.md`](./lean_concrete_complexity.md).
 
 The concrete CNF layer separately defines canonical formula and assignment codecs, propositional
@@ -106,7 +112,8 @@ available only from the pinned legacy source coordinate recorded under
 
 The direct CNF verifier closes one formerly abstract obligation—concrete NP membership for
 `PNP.Concrete.CNFSAT`—but it does not discharge the remaining publication blockers. In particular,
-the general charged-pipeline compiler/refinement, a deterministic polynomial-time CNF-SAT decider,
+the executable initial framer, output handoff, bounded-run and composition refinement, a
+deterministic polynomial-time CNF-SAT decider,
 concrete NP-hardness/NP-completeness, locked-NAND threshold, residual-band minimizer, ZeroSlack,
 the remaining end-to-end polynomial bounds, and the root theorem/axiom audit remain incomplete.
 
