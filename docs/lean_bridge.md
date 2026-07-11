@@ -147,10 +147,13 @@ frame, and pure write/move/boundary-expansion geometry. They define no rules, ma
 or runtime bound. `lean/PNP/Concrete/PipelineMachineSimulation.lean` supplies the separate finite
 rule lift: it preserves ordered first-match selection and lifts every supplied exact `n`-step chain
 of successful raw transitions from an already represented configuration to exactly `3 * n`
-successful work steps. Ordinary compiled-machine `run` with fuel `18 * n` reaches the encoded
-endpoint; it does not claim that many successful transitions. The layer does not create the frame,
-prove bounded-decision or output semantics, decode output, perform terminal handoff, or construct a
-pipeline refinement. The two declarations in
+successful work steps. An ordinary `F`-fuel raw run also yields an exact prefix of length `k ≤ F`
+to its endpoint. Conditional on that endpoint being designated halting, `workRun` at fuel
+`3 * F` and compiled `run` at fuel `18 * F` reach its representation and encoding. This proves no
+termination result: those full fuels are at-most budgets rather than successful-step counts or
+input-size bounds, and a stuck nonhalting stop is not a verdict. The layer does not create the
+frame, prove `boundedDecide` or output preservation, decode output, perform terminal handoff, or
+construct composition/precomposition pipeline refinement. The two declarations in
 `lean/PNP/Concrete/Target.lean` are also axiom-free: `PNP.Main.ConcretePEqualsNP` is an inactive
 definition naming mutual inclusion, and `PNP.Main.concretePEqualsNP_iff` pins its expansion. This
 does not prove the target. The six explicit declarations in

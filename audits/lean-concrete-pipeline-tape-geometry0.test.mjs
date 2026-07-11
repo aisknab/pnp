@@ -201,11 +201,15 @@ test('the executable compiler blocker and publication gate remain fail-closed', 
   assert.equal(foundation.requiredTheorems.includes(
     'PNP.Concrete.PipelineTape.represents_expandRight_of_nil'), true);
   assert.match(foundation.nonClaim,
-    /starts from an already represented frame/u);
+    /assumes a represented start/u);
   assert.match(foundation.nonClaim,
-    /compiled theorem does not assert 18 \* n successful transitions/u);
+    /designated-halting source endpoint/u);
   assert.match(foundation.nonClaim,
-    /supplies no initial framer, boundedDecide/u);
+    /proves no termination or stuck\/timeout\/verdict correspondence/u);
+  assert.match(foundation.nonClaim,
+    /only 3 \* n is an exact successful work count/u);
+  assert.match(foundation.nonClaim,
+    /No executable framer, boundedDecide or machineOutput preservation/u);
   assert.equal(map.gate.standardComplexityModelEligible, false);
   assert.equal(map.gate.expectedSourceClosureSha256, null);
 });

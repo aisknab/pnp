@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-11-17');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-11-18');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -140,15 +140,15 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.match(out.siteStatusSha256, /^[0-9a-f]{64}$/u);
 });
 
-test('formal reconstruction status pins the pipeline multistep simulation inventory and source closure', async () => {
+test('formal reconstruction status pins the bounded-halting simulation inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 4672);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 1938);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 1837);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 4676);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 1942);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 1841);
   assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 560);
   assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 40);
   assert.equal(status.leanSourceClosureSha256,
-    '82d8ff2a4af58385f8420baf5061ae0528bbd8eda516b209e9055ef3298f9e66');
+    'e254c2f581d20d20d083f4c446c9a1b3af80ea2143be4f6df7488af3ebd6725e');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -162,11 +162,27 @@ test('formal reconstruction status pins the pipeline multistep simulation invent
     'PNP.Concrete.PipelineMachineSimulation.workRunExact_three_mul_of_rawRunExact'), true);
   assert.equal(machine.requiredTheorems.includes(
     'PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_mul_of_rawRunExact'), true);
-  assert.match(machine.scope, /exactly 3 \* n successful work transitions/u);
-  assert.match(machine.scope, /run with fuel 18 \* n reaches its encoding/u);
+  assert.equal(machine.requiredTheorems.includes(
+    'PNP.Concrete.PipelineMachineSimulation.liftMachine_isHalted_eq_of_representsConfiguration'), true);
+  assert.equal(machine.requiredTheorems.includes(
+    'PNP.Concrete.PipelineMachineSimulation.rawRunExact?_exists_le_run'), true);
+  assert.equal(machine.requiredTheorems.includes(
+    'PNP.Concrete.PipelineMachineSimulation.workRun_three_mul_of_run_halted'), true);
+  assert.equal(machine.requiredTheorems.includes(
+    'PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_mul_of_run_halted'), true);
+  assert.match(machine.scope, /exactly 3 \* n successful work steps/u);
+  assert.match(machine.scope, /exact prefix of length k at most F/u);
+  assert.match(machine.scope, /if it is designated halting/u);
+  assert.match(machine.scope, /work fuel 3 \* F/u);
+  assert.match(machine.scope, /compiled fuel 18 \* F/u);
   assert.doesNotMatch(machine.scope, /exactly 18 \* n/u);
-  assert.match(machine.nonClaim, /does not assert 18 \* n successful transitions/u);
-  assert.match(machine.nonClaim, /not input length/u);
+  assert.match(machine.nonClaim, /designated-halting source endpoint/u);
+  assert.match(machine.nonClaim, /proves no termination or stuck\/timeout\/verdict correspondence/u);
+  assert.match(machine.nonClaim, /only 3 \* n is an exact successful work count/u);
+  assert.match(machine.nonClaim, /F a source-transition fuel bound, not input length/u);
+  assert.match(machine.nonClaim, /boundedDecide or machineOutput preservation/u);
+  assert.match(machine.nonClaim, /pipeline RawRefinement\/composition/u);
+  assert.match(machine.nonClaim, /P = NP/u);
   const cnf = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-cnf-universal-verifier',
   );
@@ -192,13 +208,15 @@ test('formal reconstruction status pins the pipeline multistep simulation invent
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
-    'compiled theorem does not assert 18 * n successful transitions')), true);
+    'exact successful prefix of length k at most F')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes(
+    'does not construct a frame from Tape.ofInput, prove termination, classify a stuck nonhalting stop as a verdict')), true);
 });
 
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-11-PIPELINE-MULTISTEP-SIMULATION-17');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-11-PIPELINE-BOUNDED-HALTING-18');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);

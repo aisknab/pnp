@@ -47,10 +47,13 @@ provide transition rules, and has no runtime theorem.
 boundary frame that tolerates exterior garbage and handles empty and odd logical lengths.
 `PipelineMachineSimulation.lean` supplies ordered finite rules for every supplied exact `n`-step
 successful raw execution inside an already represented frame, with exactly `3 * n` successful work
-steps; ordinary compiled `run` with fuel `18 * n` reaches the encoded endpoint. A future compiler
-still needs an executable initial framer, a `boundedDecide` halt/timeout/verdict bridge, terminal
-output de-tagging and handoff, second-stage launch, and the full input-size polynomial
-copy/simulation bound.
+steps. It extracts an exact prefix `k ≤ F` from an ordinary `F`-fuel run and, only if its endpoint is
+designated halting, pads to work fuel `3 * F` and compiled fuel `18 * F`. Those are at-most fuel
+budgets, not successful-step counts or input-size bounds. This proves no termination result and
+does not treat a stuck nonhalting stop as a verdict. A future compiler still needs an executable
+initial framer, a `boundedDecide` halt/timeout/verdict bridge, terminal output de-tagging and
+handoff, second-stage launch, composition/precomposition `RawRefinement`, and the full input-size
+polynomial copy/simulation bound.
 
 ## Audit
 

@@ -37,9 +37,13 @@ axiom-free definition for mutual inclusion in the finite charged-pipeline model,
 fingerprints remain unset. The compatibility/root theorem `PNP.Main.p_eq_np` is absent, and the
 pipeline still lacks a proved end-to-end compiler/refinement to the raw machine kernel. The local
 framed simulator lifts a supplied exact `n`-step successful raw execution from an already
-represented configuration to exactly `3 * n` successful work steps and a compiled run with fuel
-`18 * n`; it does not prove that many compiled transitions succeed. It supplies no input framing,
-`boundedDecide` or output theorem, output handoff, input-size polynomial bound, or `RawRefinement`.
+represented configuration to exactly `3 * n` successful work steps. It also extracts a `k ≤ F`
+exact prefix from an ordinary `F`-fuel raw run; conditional on a designated-halting endpoint, work
+fuel `3 * F` and compiled fuel `18 * F` reach the representation and encoding. The full fuels are
+at-most budgets, not successful-step counts or input-size bounds. This proves no termination result
+and does not classify a stuck nonhalting stop as a verdict. It supplies no input framing,
+`boundedDecide`, verdict/output preservation, output handoff, composition/precomposition
+`RawRefinement`, or input-size polynomial bound.
 Consequently the gate
 is false, and every theorem-emission field derived from it remains false or `null`.
 

@@ -74,8 +74,12 @@ attempt to remove the compiler blocker or open the publication gate.
 The expansion functions are pure tape identities, not transition-rule lists or a `WorkMachine`.
 The separate `PipelineMachineSimulation` layer now supplies an ordered finite rule lift for every
 supplied exact `n`-step successful raw execution over this relation, with exactly `3 * n` successful
-work steps and compiled-run fuel `18 * n`. Neither module constructs an initial frame, proves
-`boundedDecide` or output semantics, normalizes or decodes output, executes a terminal handoff,
-compiles composition or precomposition, proves an input-size polynomial end-to-end bound or
+work steps. It also extracts an exact prefix `k ≤ F` from an ordinary `F`-fuel raw run. Conditional
+on that endpoint being designated halting, `workRun` with fuel `3 * F` and compiled `run` with
+fuel `18 * F` reach its representation and encoding. This does not prove termination; the full
+fuels are at-most budgets, not successful-step counts or input-size bounds, and a stuck nonhalting
+stop is not a verdict. Neither module constructs an initial frame, proves `boundedDecide`, verdict
+or output preservation, normalizes or decodes output, executes a terminal handoff, constructs
+composition/precomposition `RawRefinement`, proves an input-size polynomial end-to-end bound or
 charged/raw class equivalence, establishes `CNFSAT ∈ P` or NP-completeness, activates a root
 theorem, or proves `P = NP`.

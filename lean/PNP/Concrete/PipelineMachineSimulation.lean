@@ -10,12 +10,15 @@ The local result simulates one successful raw `step?` by exactly three work
 transitions from any `PipelineTape.Represents` frame, including arbitrary
 exterior garbage.  The finite-run result iterates this over every exact chain
 of `n` successful raw transitions, using exactly `3 * n` work transitions and
-a compiled raw fuel budget of `18 * n` to reach the encoded endpoint.
+a compiled raw fuel budget of `18 * n` to reach the encoded endpoint.  The
+bounded-halting result extracts the exact successful prefix of an ordinary
+run and safely pads the work and compiled interpreters when its endpoint is a
+designated halt.
 
-This module does not construct a frame from raw input, prove arbitrary
-at-most-run or bounded-verdict preservation, decode or hand off output,
-provide a pipeline refinement or end-to-end input-size polynomial bound,
-establish a complexity-class equality, or prove `P = NP`.
+This module does not construct a frame from raw input, prove termination,
+pad nonhalting stuck endpoints, preserve timeout/verdict semantics, decode or
+hand off output, provide a pipeline refinement or end-to-end input-size
+polynomial bound, establish a complexity-class equality, or prove `P = NP`.
 -/
 
 import PNP.Concrete.PipelineTapeGeometry
@@ -1785,6 +1788,207 @@ theorem run_compileWorkMachine_eighteen_mul_of_rawRunExact
         (encodeWorkConfiguration
           (liftConfiguration machine config workTape))) hFuel
   exact ⟨workFinal, hRunCost.trans hCompiled, hFinalRep⟩
+
+/-! ### Fuel-bounded runs with a halting endpoint
+
+Every ordinary at-most run reaches its endpoint through some exact successful
+prefix no longer than the supplied fuel.  When that endpoint is a designated
+halt, the exact simulation may be padded to the full `3 * fuel` work budget
+and `18 * fuel` compiled raw budget because the represented endpoint is also
+halting.  These are at-most fuel budgets, not successful-transition counts.
+
+A stuck nonhalting endpoint is intentionally not promoted to a verdict.  This
+layer proves neither termination nor a `boundedDecide` correspondence, and
+its fuel parameter is not an input-size bound.
+-/
+
+/-- Halt status is preserved by every represented lifted configuration. -/
+theorem liftMachine_isHalted_eq_of_representsConfiguration
+    (machine : Machine) (raw : Configuration) (work : WorkConfiguration)
+    (hRepresents : RepresentsConfiguration machine raw work) :
+    (liftMachine machine).isHalted work = machine.isHalted raw := by
+  cases raw with
+  | mk rawState rawTape =>
+    cases work with
+    | mk workState workTape =>
+      have hState : workState = controlState machine rawState :=
+        hRepresents.1
+      change
+        (liftMachine machine).isHalted
+            { state := workState, tape := workTape } =
+          machine.isHalted { state := rawState, tape := rawTape }
+      rw [hState]
+      cases hAcceptBool : (rawState == machine.acceptState) with
+      | true =>
+          have hAccept : rawState = machine.acceptState :=
+            (nat_beq_true_iff _ _).mp hAcceptBool
+          have hControl :
+              controlState machine rawState = acceptSentinel := by
+            unfold controlState
+            rw [if_pos hAccept]
+          rw [hControl]
+          unfold WorkMachine.isHalted liftMachine Machine.isHalted
+          have hSentinelRefl :
+              (acceptSentinel == acceptSentinel) = true :=
+            (nat_beq_true_iff _ _).mpr rfl
+          rw [hSentinelRefl, hAcceptBool]
+          cases hLeft : (acceptSentinel == rejectSentinel) <;>
+            cases hRight : (rawState == machine.rejectState) <;> rfl
+      | false =>
+          have hAccept : rawState ≠ machine.acceptState := by
+            intro hEq
+            have hTrue : (rawState == machine.acceptState) = true :=
+              (nat_beq_true_iff _ _).mpr hEq
+            rw [hAcceptBool] at hTrue
+            contradiction
+          cases hRejectBool : (rawState == machine.rejectState) with
+          | true =>
+              have hReject : rawState = machine.rejectState :=
+                (nat_beq_true_iff _ _).mp hRejectBool
+              have hControl :
+                  controlState machine rawState = rejectSentinel := by
+                unfold controlState
+                rw [if_neg hAccept, if_pos hReject]
+              rw [hControl]
+              unfold WorkMachine.isHalted liftMachine Machine.isHalted
+              have hSentinelAccept :
+                  (rejectSentinel == acceptSentinel) = false := by
+                cases hEq : (rejectSentinel == acceptSentinel) with
+                | false => rfl
+                | true =>
+                    have hEqual := (nat_beq_true_iff _ _).mp hEq
+                    exact False.elim
+                      (taggedState_ne_of_phase_ne
+                        (leftPayload := 0) (rightPayload := 0)
+                        (leftPhase := .reject) (rightPhase := .accept)
+                        (by intro impossible; contradiction) hEqual)
+              have hSentinelRefl :
+                  (rejectSentinel == rejectSentinel) = true :=
+                (nat_beq_true_iff _ _).mpr rfl
+              rw [hSentinelAccept, hSentinelRefl,
+                hAcceptBool, hRejectBool]
+          | false =>
+              have hReject : rawState ≠ machine.rejectState := by
+                intro hEq
+                have hTrue : (rawState == machine.rejectState) = true :=
+                  (nat_beq_true_iff _ _).mpr hEq
+                rw [hRejectBool] at hTrue
+                contradiction
+              rw [controlState_of_nonterminal machine rawState
+                hAccept hReject]
+              unfold Machine.isHalted
+              rw [hAcceptBool, hRejectBool]
+              exact liftMachine_main_not_halted machine rawState workTape
+
+/-- Every at-most run endpoint is reached by an exact successful prefix whose
+length is bounded by the supplied fuel. -/
+theorem rawRunExact?_exists_le_run (machine : Machine)
+    (fuel : Nat) (config : Configuration) :
+    ∃ steps,
+      steps ≤ fuel ∧
+      rawRunExact? machine steps config =
+        some (run machine fuel config) := by
+  induction fuel generalizing config with
+  | zero =>
+      exact ⟨0, Nat.le_refl 0, rfl⟩
+  | succ fuel ih =>
+      cases hStep : step? machine config with
+      | none =>
+          refine ⟨0, Nat.zero_le _, ?_⟩
+          change some config = some
+            (match step? machine config with
+             | none => config
+             | some next => run machine fuel next)
+          rw [hStep]
+      | some next =>
+          rcases ih next with ⟨steps, hLe, hTail⟩
+          refine ⟨steps + 1, Nat.succ_le_succ hLe, ?_⟩
+          have hOne := rawRunExact?_one_of_step machine config next hStep
+          have hComposed := rawRunExact?_compose machine 1 steps config next
+            (run machine fuel next) hOne hTail
+          rw [Nat.add_comm 1 steps] at hComposed
+          change rawRunExact? machine (steps + 1) config = some
+            (match step? machine config with
+             | none => config
+             | some next => run machine fuel next)
+          rw [hStep]
+          exact hComposed
+
+/-- If an at-most source run ends in a designated halt, work fuel
+`3 * fuel` reaches a represented halting endpoint. -/
+theorem workRun_three_mul_of_run_halted (machine : Machine)
+    (fuel : Nat) (config : Configuration) (workTape : WorkTape)
+    (hHalted : machine.isHalted (run machine fuel config) = true)
+    (hRepresents : Represents config.tape workTape) :
+    ∃ workFinal,
+      workRun (liftMachine machine) (3 * fuel)
+          (liftConfiguration machine config workTape) = workFinal ∧
+      RepresentsConfiguration machine (run machine fuel config) workFinal ∧
+      (liftMachine machine).isHalted workFinal = true := by
+  rcases rawRunExact?_exists_le_run machine fuel config with
+    ⟨steps, hStepsLe, hExact⟩
+  rcases workRunExact_three_mul_of_rawRunExact machine steps config
+      (run machine fuel config) workTape hExact hRepresents with
+    ⟨workFinal, hWorkExact, hFinalRepresents⟩
+  have hWorkHalted : (liftMachine machine).isHalted workFinal = true :=
+    (liftMachine_isHalted_eq_of_representsConfiguration machine
+      (run machine fuel config) workFinal hFinalRepresents).trans hHalted
+  have hWorkLe : 3 * steps ≤ 3 * fuel :=
+    Nat.mul_le_mul_left 3 hStepsLe
+  have hWorkRun := workRun_of_workRunExact_halted_le
+    (liftMachine machine) (3 * steps) (3 * fuel)
+    (liftConfiguration machine config workTape) workFinal
+    hWorkExact hWorkHalted hWorkLe
+  exact ⟨workFinal, hWorkRun, hFinalRepresents, hWorkHalted⟩
+
+/-- If an at-most source run ends in a designated halt, compiled raw fuel
+`18 * fuel` reaches the encoding of a represented halting endpoint. -/
+theorem run_compileWorkMachine_eighteen_mul_of_run_halted
+    (machine : Machine) (fuel : Nat)
+    (config : Configuration) (workTape : WorkTape)
+    (hHalted : machine.isHalted (run machine fuel config) = true)
+    (hRepresents : Represents config.tape workTape) :
+    ∃ workFinal,
+      run (compileWorkMachine (liftMachine machine)) (18 * fuel)
+          (encodeWorkConfiguration
+            (liftConfiguration machine config workTape)) =
+        encodeWorkConfiguration workFinal ∧
+      RepresentsConfiguration machine (run machine fuel config) workFinal ∧
+      (liftMachine machine).isHalted workFinal = true := by
+  rcases rawRunExact?_exists_le_run machine fuel config with
+    ⟨steps, hStepsLe, hExact⟩
+  rcases workRunExact_three_mul_of_rawRunExact machine steps config
+      (run machine fuel config) workTape hExact hRepresents with
+    ⟨workFinal, hWorkExact, hFinalRepresents⟩
+  have hWorkHalted : (liftMachine machine).isHalted workFinal = true :=
+    (liftMachine_isHalted_eq_of_representsConfiguration machine
+      (run machine fuel config) workFinal hFinalRepresents).trans hHalted
+  have hWorkLe : 3 * steps ≤ 3 * fuel :=
+    Nat.mul_le_mul_left 3 hStepsLe
+  have hCompiledLe : 6 * (3 * steps) ≤ 6 * (3 * fuel) :=
+    Nat.mul_le_mul_left 6 hWorkLe
+  have hFuelAll : ∀ count : Nat, 18 * count = 6 * (3 * count) := by
+    intro count
+    induction count with
+    | zero => rfl
+    | succ count ih =>
+        calc
+          18 * (count + 1) = 18 * count + 18 := Nat.mul_succ 18 count
+          _ = 6 * (3 * count) + 18 :=
+            congrArg (fun value => value + 18) ih
+          _ = 6 * (3 * count) + 6 * 3 := rfl
+          _ = 6 * (3 * count + 3) :=
+            (Nat.mul_add 6 (3 * count) 3).symm
+          _ = 6 * (3 * (count + 1)) :=
+            congrArg (fun value => 6 * value) (Nat.mul_succ 3 count).symm
+  have hCompiledLe' : 6 * (3 * steps) ≤ 18 * fuel := by
+    rw [hFuelAll fuel]
+    exact hCompiledLe
+  have hCompiled := run_compileWorkMachine_of_workRunExact_halted_le
+    (liftMachine machine) (3 * steps) (18 * fuel)
+    (liftConfiguration machine config workTape) workFinal
+    hWorkExact hWorkHalted hCompiledLe'
+  exact ⟨workFinal, hCompiled, hFinalRepresents, hWorkHalted⟩
 
 end PipelineMachineSimulation
 
