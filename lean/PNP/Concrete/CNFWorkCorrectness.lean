@@ -3607,6 +3607,469 @@ theorem pairedWorkTape_of_decoders_some
   rw [← formulaShape, ← assignmentShape]
   exact pairedWorkTape_encoded_cnf_assignment formula assignment
 
+/-! ### Recursive successful frame composition -/
+
+theorem frameWork_append_assoc
+    (left middle right : List WorkSymbol) :
+    (left ++ middle) ++ right = left ++ (middle ++ right) := by
+  induction left with
+  | nil => rfl
+  | cons symbol rest ih => exact congrArg (List.cons symbol) ih
+
+theorem frameAllowed_append_one (Allowed : WorkSymbol → Prop)
+    (word : List WorkSymbol) (last : WorkSymbol)
+    (wordAllowed : ∀ symbol, List.Mem symbol word → Allowed symbol)
+    (lastAllowed : Allowed last) :
+    ∀ symbol, List.Mem symbol (word ++ [last]) → Allowed symbol := by
+  induction word with
+  | nil =>
+      intro symbol member
+      cases member with
+      | head => exact lastAllowed
+      | tail _ tailMember => contradiction
+  | cons head tail ih =>
+      intro symbol member
+      cases member with
+      | head => exact wordAllowed head (List.Mem.head tail)
+      | tail _ tailMember =>
+          exact ih
+            (fun found foundMember =>
+              wordAllowed found (List.Mem.tail head foundMember))
+            symbol tailMember
+
+theorem replicate_bit_cons_length (value : Bool) (rest : BitString)
+    (symbol : WorkSymbol) :
+    List.replicate (value :: rest).length symbol =
+      symbol :: List.replicate rest.length symbol := by
+  rfl
+
+def frameOneFoldStart (doneCounter donePayload : List WorkSymbol)
+    (tokens : List CNFToken) (suffix : List WorkSymbol) : WorkConfiguration :=
+  workConfigAtWord CNFWorkState.frameOneFindCounter [cnfRootGuard]
+    ((doneCounter ++ List.replicate tokens.length cnfT) ++
+      cnfFinish ::
+        ((donePayload ++ cnfTokenWorkSymbols tokens) ++ cnfSep :: suffix))
+
+def frameOneFoldFinal (doneCounter donePayload : List WorkSymbol)
+    (tokens : List CNFToken) (suffix : List WorkSymbol) : WorkConfiguration :=
+  workConfigAtWord CNFWorkState.frameOneFindCounter [cnfRootGuard]
+    ((doneCounter ++ List.replicate tokens.length cnfMarkFalse) ++
+      cnfFinish ::
+        ((donePayload ++ frameOneMarkedTokens tokens) ++ cnfSep :: suffix))
+
+def frameOneFoldSteps :
+    List WorkSymbol → List WorkSymbol → List CNFToken → Nat
+  | _, _, [] => 0
+  | doneCounter, donePayload, token :: rest =>
+      frameOneIterationSteps doneCounter
+          (List.replicate rest.length cnfT) donePayload +
+        frameOneFoldSteps (doneCounter ++ [cnfMarkFalse])
+          (donePayload ++ [frameOneMarkedToken token]) rest
+
+theorem frameOneFoldStart_cons
+    (doneCounter donePayload : List WorkSymbol)
+    (token : CNFToken) (rest : List CNFToken)
+    (suffix : List WorkSymbol) :
+    frameOneFoldStart doneCounter donePayload (token :: rest) suffix =
+      workConfigAtWord CNFWorkState.frameOneFindCounter [cnfRootGuard]
+        (doneCounter ++ cnfT ::
+          (List.replicate rest.length cnfT ++ cnfFinish ::
+            (donePayload ++ token.workSymbol ::
+              (cnfTokenWorkSymbols rest ++ cnfSep :: suffix)))) := by
+  unfold frameOneFoldStart
+  change workConfigAtWord _ _
+      ((doneCounter ++ cnfT :: List.replicate rest.length cnfT) ++
+        cnfFinish ::
+          ((donePayload ++ token.workSymbol :: cnfTokenWorkSymbols rest) ++
+            cnfSep :: suffix)) = _
+  repeat' rw [frameWork_append_assoc]
+  rfl
+
+theorem frameOneFold_after_iteration
+    (doneCounter donePayload : List WorkSymbol)
+    (token : CNFToken) (rest : List CNFToken)
+    (suffix : List WorkSymbol) :
+    workConfigAtWord CNFWorkState.frameOneFindCounter [cnfRootGuard]
+        ((doneCounter ++ cnfMarkFalse ::
+          List.replicate rest.length cnfT) ++
+            (cnfFinish :: donePayload ++ frameOneMarkedToken token ::
+              (cnfTokenWorkSymbols rest ++ cnfSep :: suffix))) =
+      frameOneFoldStart (doneCounter ++ [cnfMarkFalse])
+        (donePayload ++ [frameOneMarkedToken token]) rest suffix := by
+  unfold frameOneFoldStart
+  repeat' rw [frameWork_append_assoc]
+  rfl
+
+theorem frameOneFoldFinal_cons
+    (doneCounter donePayload : List WorkSymbol)
+    (token : CNFToken) (rest : List CNFToken)
+    (suffix : List WorkSymbol) :
+    frameOneFoldFinal (doneCounter ++ [cnfMarkFalse])
+        (donePayload ++ [frameOneMarkedToken token]) rest suffix =
+      frameOneFoldFinal doneCounter donePayload (token :: rest) suffix := by
+  unfold frameOneFoldFinal
+  change workConfigAtWord _ _
+      (((doneCounter ++ [cnfMarkFalse]) ++
+          List.replicate rest.length cnfMarkFalse) ++
+        cnfFinish ::
+          (((donePayload ++ [frameOneMarkedToken token]) ++
+              frameOneMarkedTokens rest) ++ cnfSep :: suffix)) =
+    workConfigAtWord _ _
+      ((doneCounter ++ cnfMarkFalse ::
+          List.replicate rest.length cnfMarkFalse) ++
+        cnfFinish ::
+          ((donePayload ++ frameOneMarkedToken token ::
+              frameOneMarkedTokens rest) ++ cnfSep :: suffix))
+  repeat' rw [frameWork_append_assoc]
+  rfl
+
+theorem frameOne_fold_exact
+    (doneCounter donePayload : List WorkSymbol)
+    (tokens : List CNFToken) (suffix : List WorkSymbol)
+    (doneCounterAllowed : ∀ symbol, List.Mem symbol doneCounter →
+      symbol = cnfMarkFalse)
+    (donePayloadAllowed : ∀ symbol, List.Mem symbol donePayload →
+      FrameOneMarkedSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (frameOneFoldSteps doneCounter donePayload tokens)
+        (frameOneFoldStart doneCounter donePayload tokens suffix) =
+      some (frameOneFoldFinal doneCounter donePayload tokens suffix) := by
+  induction tokens generalizing doneCounter donePayload with
+  | nil => rfl
+  | cons token rest ih =>
+      have restCounterAllowed : ∀ symbol,
+          List.Mem symbol (List.replicate rest.length cnfT) →
+            symbol = cnfT := by
+        intro symbol member
+        exact mem_replicate_workSymbol_eq rest.length cnfT symbol member
+      have hIteration := frameOne_iteration_exact doneCounter
+        (List.replicate rest.length cnfT) donePayload token
+        (cnfTokenWorkSymbols rest ++ cnfSep :: suffix)
+        doneCounterAllowed restCounterAllowed donePayloadAllowed
+      rw [← frameOneFoldStart_cons] at hIteration
+      have nextCounterAllowed : ∀ symbol,
+          List.Mem symbol (doneCounter ++ [cnfMarkFalse]) →
+            symbol = cnfMarkFalse := by
+        exact frameAllowed_append_one
+          (fun candidate => candidate = cnfMarkFalse)
+          doneCounter cnfMarkFalse doneCounterAllowed rfl
+      have nextPayloadAllowed : ∀ symbol,
+          List.Mem symbol (donePayload ++ [frameOneMarkedToken token]) →
+            FrameOneMarkedSymbol symbol := by
+        exact frameAllowed_append_one FrameOneMarkedSymbol donePayload
+          (frameOneMarkedToken token) donePayloadAllowed (by
+            cases token <;> constructor)
+      have hRest := ih (doneCounter ++ [cnfMarkFalse])
+        (donePayload ++ [frameOneMarkedToken token])
+        nextCounterAllowed nextPayloadAllowed
+      rw [← frameOneFold_after_iteration] at hRest
+      rw [frameOneFoldFinal_cons] at hRest
+      exact workRunExact?_compose cnfWorkMachine
+        (frameOneIterationSteps doneCounter
+          (List.replicate rest.length cnfT) donePayload)
+        (frameOneFoldSteps (doneCounter ++ [cnfMarkFalse])
+          (donePayload ++ [frameOneMarkedToken token]) rest)
+        _ _ _ hIteration hRest
+
+def frameTwoFoldStart (doneCounter donePayload : List WorkSymbol)
+    (assignment : BitString) (leftBase : List WorkSymbol) : WorkConfiguration :=
+  workConfigAtWord CNFWorkState.frameTwoFindCounter
+    (cnfBoundaryGuard :: leftBase)
+    ((doneCounter ++ List.replicate assignment.length cnfT) ++
+      cnfFinish ::
+        ((donePayload ++ assignmentWorkSymbols assignment) ++ [cnfFinish]))
+
+def frameTwoFoldFinal (doneCounter donePayload : List WorkSymbol)
+    (assignment : BitString) (leftBase : List WorkSymbol) : WorkConfiguration :=
+  workConfigAtWord CNFWorkState.frameTwoFindCounter
+    (cnfBoundaryGuard :: leftBase)
+    ((doneCounter ++ List.replicate assignment.length cnfMarkFalse) ++
+      cnfFinish ::
+        ((donePayload ++ markedAssignmentWorkSymbols assignment) ++
+          [cnfFinish]))
+
+def frameTwoFoldSteps :
+    List WorkSymbol → List WorkSymbol → BitString → Nat
+  | _, _, [] => 0
+  | doneCounter, donePayload, value :: rest =>
+      frameOneIterationSteps doneCounter
+          (List.replicate rest.length cnfT) donePayload +
+        frameTwoFoldSteps (doneCounter ++ [cnfMarkFalse])
+          (donePayload ++ [markedAssignmentValueWorkSymbol value]) rest
+
+theorem frameTwoFoldStart_cons
+    (doneCounter donePayload : List WorkSymbol)
+    (value : Bool) (rest : BitString) (leftBase : List WorkSymbol) :
+    frameTwoFoldStart doneCounter donePayload (value :: rest) leftBase =
+      workConfigAtWord CNFWorkState.frameTwoFindCounter
+        (cnfBoundaryGuard :: leftBase)
+        (doneCounter ++ cnfT ::
+          (List.replicate rest.length cnfT ++ cnfFinish ::
+            (donePayload ++ assignmentValueWorkSymbol value ::
+              (assignmentWorkSymbols rest ++ [cnfFinish])))) := by
+  unfold frameTwoFoldStart
+  rw [replicate_bit_cons_length]
+  rw [assignmentWorkSymbols_cons]
+  repeat' rw [frameWork_append_assoc]
+  rfl
+
+theorem frameTwoFold_after_iteration
+    (doneCounter donePayload : List WorkSymbol)
+    (value : Bool) (rest : BitString) (leftBase : List WorkSymbol) :
+    workConfigAtWord CNFWorkState.frameTwoFindCounter
+        (cnfBoundaryGuard :: leftBase)
+        ((doneCounter ++ cnfMarkFalse ::
+          List.replicate rest.length cnfT) ++
+            (cnfFinish :: donePayload ++
+              markedAssignmentValueWorkSymbol value ::
+                (assignmentWorkSymbols rest ++ [cnfFinish]))) =
+      frameTwoFoldStart (doneCounter ++ [cnfMarkFalse])
+        (donePayload ++ [markedAssignmentValueWorkSymbol value]) rest
+        leftBase := by
+  unfold frameTwoFoldStart
+  repeat' rw [frameWork_append_assoc]
+  rfl
+
+theorem frameTwoFoldFinal_cons
+    (doneCounter donePayload : List WorkSymbol)
+    (value : Bool) (rest : BitString) (leftBase : List WorkSymbol) :
+    frameTwoFoldFinal (doneCounter ++ [cnfMarkFalse])
+        (donePayload ++ [markedAssignmentValueWorkSymbol value]) rest
+        leftBase =
+      frameTwoFoldFinal doneCounter donePayload (value :: rest) leftBase := by
+  unfold frameTwoFoldFinal
+  rw [replicate_bit_cons_length]
+  rw [markedAssignmentWorkSymbols_cons]
+  repeat' rw [frameWork_append_assoc]
+  rfl
+
+theorem frameTwo_fold_exact
+    (doneCounter donePayload : List WorkSymbol)
+    (assignment : BitString) (leftBase : List WorkSymbol)
+    (doneCounterAllowed : ∀ symbol, List.Mem symbol doneCounter →
+      symbol = cnfMarkFalse)
+    (donePayloadAllowed : ∀ symbol, List.Mem symbol donePayload →
+      AssignmentMarkSymbol symbol) :
+    workRunExact? cnfWorkMachine
+        (frameTwoFoldSteps doneCounter donePayload assignment)
+        (frameTwoFoldStart doneCounter donePayload assignment leftBase) =
+      some (frameTwoFoldFinal doneCounter donePayload assignment leftBase) := by
+  induction assignment generalizing doneCounter donePayload with
+  | nil => rfl
+  | cons value rest ih =>
+      have restCounterAllowed : ∀ symbol,
+          List.Mem symbol (List.replicate rest.length cnfT) →
+            symbol = cnfT := by
+        intro symbol member
+        exact mem_replicate_workSymbol_eq rest.length cnfT symbol member
+      have hIteration := frameTwo_iteration_exact doneCounter
+        (List.replicate rest.length cnfT) donePayload leftBase value
+        (assignmentWorkSymbols rest ++ [cnfFinish])
+        doneCounterAllowed restCounterAllowed donePayloadAllowed
+      rw [← frameTwoFoldStart_cons] at hIteration
+      have nextCounterAllowed : ∀ symbol,
+          List.Mem symbol (doneCounter ++ [cnfMarkFalse]) →
+            symbol = cnfMarkFalse :=
+        frameAllowed_append_one
+          (fun candidate => candidate = cnfMarkFalse)
+          doneCounter cnfMarkFalse doneCounterAllowed rfl
+      have nextPayloadAllowed : ∀ symbol,
+          List.Mem symbol
+            (donePayload ++ [markedAssignmentValueWorkSymbol value]) →
+              AssignmentMarkSymbol symbol :=
+        frameAllowed_append_one AssignmentMarkSymbol donePayload
+          (markedAssignmentValueWorkSymbol value) donePayloadAllowed (by
+            cases value <;> constructor)
+      have hRest := ih (doneCounter ++ [cnfMarkFalse])
+        (donePayload ++ [markedAssignmentValueWorkSymbol value])
+        nextCounterAllowed nextPayloadAllowed
+      rw [← frameTwoFold_after_iteration] at hRest
+      rw [frameTwoFoldFinal_cons] at hRest
+      exact workRunExact?_compose cnfWorkMachine
+        (frameOneIterationSteps doneCounter
+          (List.replicate rest.length cnfT) donePayload)
+        (frameTwoFoldSteps (doneCounter ++ [cnfMarkFalse])
+          (donePayload ++ [markedAssignmentValueWorkSymbol value]) rest)
+        _ _ _ hIteration hRest
+
+def frameOneTerminalSteps (tokens : List CNFToken) : Nat :=
+  (((((((tokens.length + 1) + tokens.length) + 1) +
+    tokens.length) + 1) + tokens.length) + 1)
+
+def frameTwoTerminalSteps (assignment : BitString) : Nat :=
+  (((((((assignment.length + 1) + assignment.length) + 1) + 1) + 1) +
+    assignment.length) + 1)
+
+theorem frameOne_complete_exact
+    (tokens : List CNFToken) (suffix : List WorkSymbol) :
+    workRunExact? cnfWorkMachine
+        (frameOneFoldSteps [] [] tokens + frameOneTerminalSteps tokens)
+        (frameOneFoldStart [] [] tokens suffix) =
+      some
+        (workConfigAtWord CNFWorkState.frameTwoFindCounter
+          (cnfBoundaryGuard ::
+            pushWorkLeft (cnfTokenWorkSymbols tokens)
+              (cnfFinish ::
+                pushWorkLeft
+                  (List.replicate tokens.length cnfMarkFalse)
+                  [cnfRootGuard]))
+          suffix) := by
+  have hFold := frameOne_fold_exact [] [] tokens suffix
+    (by intro symbol member; contradiction)
+    (by intro symbol member; contradiction)
+  unfold frameOneFoldFinal at hFold
+  have hTerminal := frameOne_terminal_exact tokens suffix
+  unfold frameOneTerminalSteps
+  exact workRunExact?_compose cnfWorkMachine
+    (frameOneFoldSteps [] [] tokens)
+    (((((((tokens.length + 1) + tokens.length) + 1) + tokens.length) + 1) +
+      tokens.length) + 1) _ _ _ hFold hTerminal
+
+theorem frameTwo_complete_exact
+    (assignment : BitString) (leftBase : List WorkSymbol) :
+    workRunExact? cnfWorkMachine
+        (frameTwoFoldSteps [] [] assignment +
+          frameTwoTerminalSteps assignment)
+        (frameTwoFoldStart [] [] assignment leftBase) =
+      some
+        (workConfigAtLeftWord CNFWorkState.seekLeftRoot
+          (pushWorkLeft
+            (List.replicate assignment.length cnfMarkFalse)
+            (cnfBoundaryGuard :: leftBase))
+          (cnfFinish ::
+            (assignmentWorkSymbols assignment ++
+              [cnfRootGuard, cnfBlank]))) := by
+  have hFold := frameTwo_fold_exact [] [] assignment leftBase
+    (by intro symbol member; contradiction)
+    (by intro symbol member; contradiction)
+  unfold frameTwoFoldFinal at hFold
+  have hTerminal := frameTwo_terminal_exact assignment leftBase
+  unfold frameTwoTerminalSteps
+  exact workRunExact?_compose cnfWorkMachine
+    (frameTwoFoldSteps [] [] assignment)
+    (((((((assignment.length + 1) + assignment.length) + 1) + 1) + 1) +
+      assignment.length) + 1) _ _ _ hFold hTerminal
+
+def frameFormulaLeftBase (tokens : List CNFToken) : List WorkSymbol :=
+  pushWorkLeft (cnfTokenWorkSymbols tokens)
+    (cnfFinish ::
+      pushWorkLeft (List.replicate tokens.length cnfMarkFalse)
+        [cnfRootGuard])
+
+def frameAssignmentSuffix (assignment : BitString) : List WorkSymbol :=
+  List.replicate assignment.length cnfT ++
+    cnfFinish :: (assignmentWorkSymbols assignment ++ [cnfFinish])
+
+def frameSuccessSteps (tokens : List CNFToken)
+    (assignment : BitString) : Nat :=
+  (2 + (frameOneFoldSteps [] [] tokens + frameOneTerminalSteps tokens)) +
+    (frameTwoFoldSteps [] [] assignment + frameTwoTerminalSteps assignment)
+
+theorem frameOneFoldStart_empty_cons
+    (first : CNFToken) (rest : List CNFToken)
+    (suffix : List WorkSymbol) :
+    frameOneFoldStart [] [] (first :: rest) suffix =
+      workConfigAtWord CNFWorkState.frameOneFindCounter [cnfRootGuard]
+        (cnfT ::
+          (List.replicate rest.length cnfT ++
+            cnfFinish :: first.workSymbol ::
+              (cnfTokenWorkSymbols rest ++ cnfSep :: suffix))) := by
+  rw [frameOneFoldStart_cons]
+  rfl
+
+theorem frameTwoFoldStart_empty
+    (assignment : BitString) (leftBase : List WorkSymbol) :
+    frameTwoFoldStart [] [] assignment leftBase =
+      workConfigAtWord CNFWorkState.frameTwoFindCounter
+        (cnfBoundaryGuard :: leftBase) (frameAssignmentSuffix assignment) := by
+  unfold frameTwoFoldStart frameAssignmentSuffix
+  rfl
+
+theorem frames_success_exact
+    (first : CNFToken) (formulaRest : List CNFToken)
+    (assignment : BitString) :
+    workRunExact? cnfWorkMachine
+        (frameSuccessSteps (first :: formulaRest) assignment)
+        (workStartConfiguration cnfWorkMachine
+          (WorkTape.ofSymbols
+            (pairedTokenLayout (first :: formulaRest)
+              (assignmentValueTokens assignment)))) =
+      some
+        (workConfigAtLeftWord CNFWorkState.seekLeftRoot
+          (pushWorkLeft
+            (List.replicate assignment.length cnfMarkFalse)
+            (cnfBoundaryGuard ::
+              frameFormulaLeftBase (first :: formulaRest)))
+          (cnfFinish ::
+            (assignmentWorkSymbols assignment ++
+              [cnfRootGuard, cnfBlank]))) := by
+  have hBoot := boot_nonempty_formula_exact first formulaRest
+    (assignmentValueTokens assignment)
+  rw [assignmentValueTokens_length] at hBoot
+  rw [assignmentValueTokens_workSymbols] at hBoot
+  have hFrameOne := frameOne_complete_exact (first :: formulaRest)
+    (List.replicate assignment.length cnfT ++
+      cnfFinish :: (assignmentWorkSymbols assignment ++ [cnfFinish]))
+  rw [frameOneFoldStart_empty_cons] at hFrameOne
+  unfold frameFormulaLeftBase
+  have hFrameTwo := frameTwo_complete_exact assignment
+    (pushWorkLeft (cnfTokenWorkSymbols (first :: formulaRest))
+      (cnfFinish ::
+        pushWorkLeft
+          (List.replicate (first :: formulaRest).length cnfMarkFalse)
+          [cnfRootGuard]))
+  rw [frameTwoFoldStart_empty] at hFrameTwo
+  have hBootFrameOne := workRunExact?_compose cnfWorkMachine 2
+    (frameOneFoldSteps [] [] (first :: formulaRest) +
+      frameOneTerminalSteps (first :: formulaRest))
+    _ _ _ hBoot hFrameOne
+  unfold frameSuccessSteps
+  exact workRunExact?_compose cnfWorkMachine
+    (2 + (frameOneFoldSteps [] [] (first :: formulaRest) +
+      frameOneTerminalSteps (first :: formulaRest)))
+    (frameTwoFoldSteps [] [] assignment +
+      frameTwoTerminalSteps assignment)
+    _ _ _ hBootFrameOne hFrameTwo
+
+theorem encodeFormulaTokens_cons (formula : CNFFormula) :
+    ∃ first rest, encodeFormulaTokens formula = first :: rest := by
+  unfold encodeFormulaTokens encodeCNFTokens
+  cases formula.variableCount with
+  | zero =>
+      exact ⟨CNFToken.f,
+        encodeClauseListTokens formula.clauses ++ [.finish], rfl⟩
+  | succ count =>
+      exact ⟨CNFToken.t,
+        encodeUnaryTokens count ++
+          encodeClauseListTokens formula.clauses ++ [.finish], rfl⟩
+
+/-- Successful strict decoders drive both self-delimiting frame validators
+to the exact restored semantic tape in `seekLeftRoot`. -/
+theorem decoded_frames_success_exact
+    (input certificate : BitString) (formula : CNFFormula)
+    (assignment : BitString)
+    (formulaDecoded : decodeEncodedCNF input = some formula)
+    (assignmentDecoded :
+      decodeAssignmentCertificate certificate = some assignment) :
+    workRunExact? cnfWorkMachine
+        (frameSuccessSteps (encodeFormulaTokens formula) assignment)
+        (workStartConfiguration cnfWorkMachine
+          (pairedWorkTape input certificate)) =
+      some
+        (workConfigAtLeftWord CNFWorkState.seekLeftRoot
+          (pushWorkLeft
+            (List.replicate assignment.length cnfMarkFalse)
+            (cnfBoundaryGuard ::
+              frameFormulaLeftBase (encodeFormulaTokens formula)))
+          (cnfFinish ::
+            (assignmentWorkSymbols assignment ++
+              [cnfRootGuard, cnfBlank]))) := by
+  rw [pairedWorkTape_of_decoders_some input certificate formula assignment
+    formulaDecoded assignmentDecoded]
+  rcases encodeFormulaTokens_cons formula with ⟨first, rest, shape⟩
+  rw [shape]
+  exact frames_success_exact first rest assignment
+
 end FrameTraceDesign
 
 end PNP.Concrete
