@@ -39,9 +39,15 @@ fuel `F`, it extracts an exact prefix of length `k ≤ F` reaching the same endp
 is designated halting, `workRun` with fuel `3 * F` and compiled-machine `run` with fuel `18 * F`
 reach its representation and encoding. This is conditional padding, not a termination result: the
 full budgets are not successful-transition counts or input-size bounds, and a stuck nonhalting stop
-is not classified as a verdict. The layer does not create the frame, prove `boundedDecide` or
-output preservation, decode or hand off terminal output, or construct composition/precomposition
-refinement. The development
+is not classified as a verdict. A separate finite framer starts its compiled machine at literal
+canonical `BitString.pair` input, reaches a represented boundary frame, and halts accepting under an
+exact quadratic raw-input-length budget. Its public theorem is restricted to paired input and
+permits blanked source cells as exterior garbage. The framer and simulator are not composed: no
+combined rule list, disjoint state allocation, accepting-to-start retagging, or simulated-stage
+launch theorem exists. The development does not prove simulated-stage `boundedDecide` or target
+output preservation, decode or hand off terminal output, or construct composition/precomposition refinement. The local
+framer `boundedDecide` theorem records only acceptance of the framer's own endpoint; there is no
+simulated-stage `boundedDecide` or target verdict/output correspondence. It
 also provides one direct raw-machine instance: a universally
 correct polynomial-time verifier for canonically encoded finite CNF formulae and bounded assignment
 certificates, proving `PNP.Concrete.CNFSAT ∈ NP`. It does not provide a deterministic polynomial-time
@@ -65,6 +71,8 @@ bounds. Lean constructs P contained in NP, reduction identity/composition/transp
 NP-complete-in-P implication. Boundary geometry and the local simulator now discharge exact finite
 configuration runs, including marker growth across arbitrary exterior garbage, exact-prefix
 extraction, and the conditional designated-halting padding described above.
+The separate paired-input framer supplies an executable canonical-input-to-frame trace with exact
+work and compiled raw budgets, but is not yet connected to the simulator as one machine.
 This is still a charged interpreter interface without a complete compiler or refinement theorem to
 one raw machine. See
 [`lean_concrete_complexity.md`](./lean_concrete_complexity.md).
@@ -119,8 +127,9 @@ available only from the pinned legacy source coordinate recorded under
 
 The direct CNF verifier closes one formerly abstract obligation—concrete NP membership for
 `PNP.Concrete.CNFSAT`—but it does not discharge the remaining publication blockers. In particular,
-the executable initial framer, a `boundedDecide` halt/timeout/verdict bridge, output handoff,
-composition refinement with an input-size polynomial bound, a
+a state-safe executable composition from the paired-input framer into the lifted simulator, a
+simulated-target `boundedDecide` halt/timeout/verdict bridge, output handoff, composition refinement with an
+input-size polynomial bound, a
 deterministic polynomial-time CNF-SAT decider,
 concrete NP-hardness/NP-completeness, locked-NAND threshold, residual-band minimizer, ZeroSlack,
 the remaining end-to-end polynomial bounds, and the root theorem/axiom audit remain incomplete.

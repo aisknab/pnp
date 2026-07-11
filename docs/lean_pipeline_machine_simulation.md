@@ -52,6 +52,11 @@ Because both interpreters leave a designated halt unchanged, `workRun` with fuel
 `3 * F` and `18 * F` quantities are at-most fuel budgets; they do not say that all those
 transitions succeed.
 
+`PipelineInputFramer` now supplies a separate executable trace from literal canonical paired input
+to a represented frame. That result does not alter this module's premise: no theorem composes the
+framer's finite rule list or accepting state with `liftMachine`, so every simulation theorem here
+still begins from an explicitly supplied represented configuration.
+
 ## Selection and halting discipline
 
 Raw rule order is preserved. Conflicting duplicate left-hand sides remain legal, and the simulator
@@ -89,8 +94,9 @@ This is a local configuration simulation from an already represented frame. The 
 `3 * k` successful work steps for the extracted `k ≤ F`; the padded `3 * F` work fuel and
 `18 * F` compiled fuel are at-most budgets measured in source transitions, not input length. The
 padding conclusions assume that the supplied `F`-fuel endpoint is designated halting. They do not
-prove termination or classify a stuck nonhalting stop as a verdict. The module does not construct a
-frame from `Tape.ofInput`, prove `boundedDecide`, accept/reject/timeout or `machineOutput`
+prove termination or classify a stuck nonhalting stop as a verdict. This module does not construct a
+frame from `Tape.ofInput`; the separate paired-input framer is not composed with it. It does not
+prove `boundedDecide`, accept/reject/timeout or `machineOutput`
 preservation, decode the interleaved work encoding, normalize or hand off a terminal tape, reset and
 launch a second stage, construct a `FunctionProgram.RawRefinement` or
 `DecisionProgram.RawRefinement`, compile composition or precomposition, prove an end-to-end

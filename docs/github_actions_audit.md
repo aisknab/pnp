@@ -15,8 +15,9 @@ from current theorem status.
   declaration inventory from `Lean.Environment.constants` plus `Lean.collectAxioms`, and prints
   the focused axiom transcripts for the 41-declaration concrete bitstring/polynomial kernel, the
   38-declaration finite-rule machine kernel, the 14-declaration blank-delimited output/handoff
-  boundary, the 20-declaration boundary-marked pipeline tape geometry, the framed raw-machine
-  simulation surface, the 48-declaration finite charged-pipeline complexity interface, the
+  boundary, the 20-declaration boundary-marked pipeline tape geometry, the executable canonical
+  paired-input framer, the framed raw-machine simulation surface, the 48-declaration finite
+  charged-pipeline complexity interface, the
   six-declaration raw-pipeline refinement boundary, and the two-declaration inactive
   concrete target, the concrete CNF semantics/codec,
   paired work-input bridge, direct verifier bridge, and complete work-machine correctness closure,
@@ -84,6 +85,15 @@ budgets are not successful-step counts or input-size bounds, and a stuck nonhalt
 verdict. The theorems start from an already represented configuration and provide no `startConfig`
 framing, `boundedDecide` or `machineOutput` equality, terminal handoff,
 composition/precomposition refinement, or input-size polynomial end-to-end theorem.
+
+The pipeline-input-framer audit covers a different literal finite machine. Its compiled theorem
+starts at canonical `BitString.pair left right`, reaches an accepting represented frame with
+permitted exterior garbage, and pins exact work and quadratic compiled raw budgets. CI rejects any
+attempt to widen that theorem to arbitrary empty, odd, malformed, or unpaired input. It also keeps
+the missing boundary explicit: the framer's rules and accepting state are not composed with the
+lifted simulator, so it provides no simulated-stage termination, `boundedDecide` or output
+preservation beyond the framer's own local accept result, terminal handoff, pipeline refinement,
+class equality, or `P = NP`.
 
 The concrete-CNF checks do establish a narrower raw-machine result. They require complete axiom
 transcripts for the canonical CNF codec and semantics, paired work-input layout, generic direct

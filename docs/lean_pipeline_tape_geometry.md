@@ -78,8 +78,9 @@ work steps. It also extracts an exact prefix `k ≤ F` from an ordinary `F`-fuel
 on that endpoint being designated halting, `workRun` with fuel `3 * F` and compiled `run` with
 fuel `18 * F` reach its representation and encoding. This does not prove termination; the full
 fuels are at-most budgets, not successful-step counts or input-size bounds, and a stuck nonhalting
-stop is not a verdict. Neither module constructs an initial frame, proves `boundedDecide`, verdict
-or output preservation, normalizes or decodes output, executes a terminal handoff, constructs
-composition/precomposition `RawRefinement`, proves an input-size polynomial end-to-end bound or
-charged/raw class equivalence, establishes `CNFSAT ∈ P` or NP-completeness, activates a root
-theorem, or proves `P = NP`.
+stop is not a verdict. A separate paired-input framer now constructs a represented initial frame
+from literal canonical paired input with an exact quadratic bound, but it is not composed with the
+simulator. These layers do not prove `boundedDecide`, verdict or output preservation, normalize or
+decode output, execute a terminal handoff, construct composition/precomposition `RawRefinement`,
+prove an input-size polynomial end-to-end bound or charged/raw class equivalence, establish
+`CNFSAT ∈ P` or NP-completeness, activate a root theorem, or prove `P = NP`.

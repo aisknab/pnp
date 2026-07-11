@@ -624,9 +624,10 @@ The highest-value next targets are:
 3. Prove first-output preservation, `TraceEquivalence`, and the two derived final-output laws.
 4. Instantiate the conditional boundary uniformly and prove the report threshold theorem.
 5. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
-6. Connect the exact-successful-run simulator to executable input framing, `boundedDecide`
-   halt/timeout/verdict semantics, terminal output de-tagging/handoff, and second-stage launch; then
-   construct the full pipeline refinement with input-size polynomial runtime/output bounds.
+6. Compose the paired-input framer with the exact-successful-run simulator using disjoint control
+   states and a proved accepting-to-start handoff; then add `boundedDecide` halt/timeout/verdict
+   semantics, terminal output de-tagging/handoff, and the full pipeline refinement with input-size
+   polynomial runtime/output bounds.
 7. Formalize or import concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.
 8. Formalize checker/reflection soundness for the PCC package.
