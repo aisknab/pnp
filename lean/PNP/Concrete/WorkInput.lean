@@ -263,4 +263,72 @@ theorem startConfig_compileWorkMachine_paired (machine : WorkMachine)
     workStartConfiguration
   rw [encodeWorkTape_pairedWorkTape]
 
+/-- An exact halting work trace within `workBound` gives an exact compiled
+acceptance characterization on the canonical paired raw input. -/
+theorem boundedDecide_compileWorkMachine_paired_accept_iff_final
+    (machine : WorkMachine) (steps workBound : Nat)
+    (left right : BitString) (final : WorkConfiguration)
+    (hRun : workRunExact? machine steps
+      (workStartConfiguration machine (pairedWorkTape left right)) = some final)
+    (hHalted : machine.isHalted final = true)
+    (hLe : steps ≤ workBound) :
+    boundedDecide (compileWorkMachine machine) (6 * workBound)
+        (BitString.pair left right) = .accept ↔
+      final.state = machine.acceptState := by
+  have hRawLe : 6 * steps ≤ 6 * workBound :=
+    Nat.mul_le_mul_left 6 hLe
+  have hRawFinal :
+      run (compileWorkMachine machine) (6 * workBound)
+          (startConfig (compileWorkMachine machine)
+            (BitString.pair left right)) =
+        encodeWorkConfiguration final := by
+    rw [startConfig_compileWorkMachine_paired]
+    exact run_compileWorkMachine_of_workRunExact_halted_le
+      machine steps (6 * workBound)
+      (workStartConfiguration machine (pairedWorkTape left right)) final
+      hRun hHalted hRawLe
+  constructor
+  · intro hVerdict
+    have hRawAccept :=
+      (boundedDecide_accept_iff_final
+        (compileWorkMachine machine) (6 * workBound)
+        (BitString.pair left right)).mp hVerdict
+    rw [hRawFinal] at hRawAccept
+    exact (encodeWorkConfiguration_accept_iff machine final).mp hRawAccept
+  · intro hAccept
+    apply (boundedDecide_accept_iff_final
+      (compileWorkMachine machine) (6 * workBound)
+      (BitString.pair left right)).mpr
+    rw [hRawFinal]
+    exact (encodeWorkConfiguration_accept_iff machine final).mpr hAccept
+
+/-- The same exact halting trace proves that the compiled paired-input run
+cannot time out at the sixfold work budget. -/
+theorem boundedDecide_compileWorkMachine_paired_ne_timeout
+    (machine : WorkMachine) (steps workBound : Nat)
+    (left right : BitString) (final : WorkConfiguration)
+    (hRun : workRunExact? machine steps
+      (workStartConfiguration machine (pairedWorkTape left right)) = some final)
+    (hHalted : machine.isHalted final = true)
+    (hLe : steps ≤ workBound) :
+    boundedDecide (compileWorkMachine machine) (6 * workBound)
+        (BitString.pair left right) ≠ .timeout := by
+  have hRawLe : 6 * steps ≤ 6 * workBound :=
+    Nat.mul_le_mul_left 6 hLe
+  have hRawFinal :
+      run (compileWorkMachine machine) (6 * workBound)
+          (startConfig (compileWorkMachine machine)
+            (BitString.pair left right)) =
+        encodeWorkConfiguration final := by
+    rw [startConfig_compileWorkMachine_paired]
+    exact run_compileWorkMachine_of_workRunExact_halted_le
+      machine steps (6 * workBound)
+      (workStartConfiguration machine (pairedWorkTape left right)) final
+      hRun hHalted hRawLe
+  apply (boundedDecide_ne_timeout_iff_final_isHalted
+    (compileWorkMachine machine) (6 * workBound)
+    (BitString.pair left right)).mpr
+  rw [hRawFinal]
+  exact (compileWorkMachine_isHalted_encode machine final).trans hHalted
+
 end PNP.Concrete

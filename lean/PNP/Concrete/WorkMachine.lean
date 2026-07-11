@@ -2593,6 +2593,21 @@ theorem run_compileWorkMachine_mul_accept_iff
     unfold encodeWorkConfiguration compileWorkMachine
     exact congrArg boundaryState hAccept
 
+/-- An encoded boundary configuration is in the compiled accept state exactly
+when its work configuration is accepting. -/
+theorem encodeWorkConfiguration_accept_iff (machine : WorkMachine)
+    (config : WorkConfiguration) :
+    (encodeWorkConfiguration config).state =
+        (compileWorkMachine machine).acceptState ↔
+      config.state = machine.acceptState := by
+  constructor
+  · intro hAccept
+    unfold encodeWorkConfiguration compileWorkMachine at hAccept
+    exact boundaryState_injective hAccept
+  · intro hAccept
+    unfold encodeWorkConfiguration compileWorkMachine
+    exact congrArg boundaryState hAccept
+
 /-- At an exact simulated budget, raw rejection is exactly rejection of the
 work trace's final configuration. -/
 theorem run_compileWorkMachine_mul_reject_iff
@@ -2612,6 +2627,21 @@ theorem run_compileWorkMachine_mul_reject_iff
     exact boundaryState_injective hReject
   · intro hReject
     rw [hSimulation]
+    unfold encodeWorkConfiguration compileWorkMachine
+    exact congrArg boundaryState hReject
+
+/-- An encoded boundary configuration is in the compiled reject state exactly
+when its work configuration is rejecting. -/
+theorem encodeWorkConfiguration_reject_iff (machine : WorkMachine)
+    (config : WorkConfiguration) :
+    (encodeWorkConfiguration config).state =
+        (compileWorkMachine machine).rejectState ↔
+      config.state = machine.rejectState := by
+  constructor
+  · intro hReject
+    unfold encodeWorkConfiguration compileWorkMachine at hReject
+    exact boundaryState_injective hReject
+  · intro hReject
     unfold encodeWorkConfiguration compileWorkMachine
     exact congrArg boundaryState hReject
 
@@ -2763,6 +2793,240 @@ theorem workBoundedDecide_accept_iff_final (machine : WorkMachine)
           (nat_beq_true_iff final.state machine.acceptState).mpr hState
         rw [hAccept] at hTrue
         contradiction
+
+/-- Work bounded rejection means that acceptance failed and the final state is
+the designated reject state.  The first conjunct records the interpreter's
+accept-before-reject priority when the two designated states coincide. -/
+theorem workBoundedDecide_reject_iff_final (machine : WorkMachine)
+    (fuel : Nat) (initialTape : WorkTape) :
+    workBoundedDecide machine fuel initialTape = .reject ↔
+      (workRun machine fuel
+        (workStartConfiguration machine initialTape)).state ≠
+          machine.acceptState ∧
+      (workRun machine fuel
+        (workStartConfiguration machine initialTape)).state =
+          machine.rejectState := by
+  let final := workRun machine fuel
+    (workStartConfiguration machine initialTape)
+  change
+    (if final.state == machine.acceptState then
+       WorkVerdict.accept
+     else if final.state == machine.rejectState then
+       WorkVerdict.reject
+     else WorkVerdict.timeout) = WorkVerdict.reject ↔
+      final.state ≠ machine.acceptState ∧
+        final.state = machine.rejectState
+  cases hAccept : (final.state == machine.acceptState) with
+  | true =>
+      constructor
+      · intro hVerdict
+        rw [if_pos rfl] at hVerdict
+        contradiction
+      · intro hFinal
+        have hEq :=
+          (nat_beq_true_iff final.state machine.acceptState).mp hAccept
+        exact False.elim (hFinal.1 hEq)
+  | false =>
+      have hNotAccept : final.state ≠ machine.acceptState := by
+        intro hEq
+        have hTrue :=
+          (nat_beq_true_iff final.state machine.acceptState).mpr hEq
+        rw [hAccept] at hTrue
+        contradiction
+      cases hReject : (final.state == machine.rejectState) with
+      | true =>
+          constructor
+          · intro _
+            exact ⟨hNotAccept,
+              (nat_beq_true_iff final.state machine.rejectState).mp hReject⟩
+          · intro _
+            rw [if_neg Bool.false_ne_true, if_pos rfl]
+      | false =>
+          constructor
+          · intro hVerdict
+            rw [if_neg Bool.false_ne_true,
+              if_neg Bool.false_ne_true] at hVerdict
+            contradiction
+          · intro hFinal
+            have hTrue :=
+              (nat_beq_true_iff final.state machine.rejectState).mpr hFinal.2
+            rw [hReject] at hTrue
+            contradiction
+
+/-- A work bounded decision is non-timeout exactly when its final state is
+halting. -/
+theorem workBoundedDecide_ne_timeout_iff_final_isHalted
+    (machine : WorkMachine) (fuel : Nat) (initialTape : WorkTape) :
+    workBoundedDecide machine fuel initialTape ≠ .timeout ↔
+      machine.isHalted
+        (workRun machine fuel
+          (workStartConfiguration machine initialTape)) = true := by
+  let final := workRun machine fuel
+    (workStartConfiguration machine initialTape)
+  change
+    (if final.state == machine.acceptState then
+       WorkVerdict.accept
+     else if final.state == machine.rejectState then
+       WorkVerdict.reject
+     else WorkVerdict.timeout) ≠ WorkVerdict.timeout ↔
+      ((final.state == machine.acceptState) ||
+        (final.state == machine.rejectState)) = true
+  cases hAccept : (final.state == machine.acceptState) with
+  | true =>
+      rw [if_pos rfl]
+      constructor
+      · intro _
+        rfl
+      · intro _ hImpossible
+        contradiction
+  | false =>
+      cases hReject : (final.state == machine.rejectState) with
+      | true =>
+          rw [if_neg Bool.false_ne_true, if_pos rfl]
+          constructor
+          · intro _
+            rfl
+          · intro _ hImpossible
+            contradiction
+      | false =>
+          rw [if_neg Bool.false_ne_true, if_neg Bool.false_ne_true]
+          constructor
+          · intro hImpossible
+            exact False.elim (hImpossible rfl)
+          · intro hImpossible
+            contradiction
+
+/-- Raw bounded acceptance is exactly acceptance of its final bounded-run
+configuration. -/
+theorem boundedDecide_accept_iff_final (machine : Machine)
+    (fuel : Nat) (input : BitString) :
+    boundedDecide machine fuel input = .accept ↔
+      (run machine fuel (startConfig machine input)).state =
+        machine.acceptState := by
+  let final := run machine fuel (startConfig machine input)
+  change
+    (if final.state == machine.acceptState then
+       Verdict.accept
+     else if final.state == machine.rejectState then
+       Verdict.reject
+     else Verdict.timeout) = Verdict.accept ↔
+      final.state = machine.acceptState
+  cases hAccept : (final.state == machine.acceptState) with
+  | true =>
+      constructor
+      · intro _
+        exact (nat_beq_true_iff final.state machine.acceptState).mp hAccept
+      · intro _
+        rw [if_pos rfl]
+  | false =>
+      constructor
+      · intro hVerdict
+        rw [if_neg Bool.false_ne_true] at hVerdict
+        by_cases hReject : (final.state == machine.rejectState) = true
+        · rw [if_pos hReject] at hVerdict
+          contradiction
+        · rw [if_neg hReject] at hVerdict
+          contradiction
+      · intro hState
+        have hTrue :=
+          (nat_beq_true_iff final.state machine.acceptState).mpr hState
+        rw [hAccept] at hTrue
+        contradiction
+
+/-- Raw bounded rejection means that acceptance failed and the final state is
+the designated reject state. -/
+theorem boundedDecide_reject_iff_final (machine : Machine)
+    (fuel : Nat) (input : BitString) :
+    boundedDecide machine fuel input = .reject ↔
+      (run machine fuel (startConfig machine input)).state ≠
+          machine.acceptState ∧
+      (run machine fuel (startConfig machine input)).state =
+          machine.rejectState := by
+  let final := run machine fuel (startConfig machine input)
+  change
+    (if final.state == machine.acceptState then
+       Verdict.accept
+     else if final.state == machine.rejectState then
+       Verdict.reject
+     else Verdict.timeout) = Verdict.reject ↔
+      final.state ≠ machine.acceptState ∧
+        final.state = machine.rejectState
+  cases hAccept : (final.state == machine.acceptState) with
+  | true =>
+      constructor
+      · intro hVerdict
+        rw [if_pos rfl] at hVerdict
+        contradiction
+      · intro hFinal
+        have hEq :=
+          (nat_beq_true_iff final.state machine.acceptState).mp hAccept
+        exact False.elim (hFinal.1 hEq)
+  | false =>
+      have hNotAccept : final.state ≠ machine.acceptState := by
+        intro hEq
+        have hTrue :=
+          (nat_beq_true_iff final.state machine.acceptState).mpr hEq
+        rw [hAccept] at hTrue
+        contradiction
+      cases hReject : (final.state == machine.rejectState) with
+      | true =>
+          constructor
+          · intro _
+            exact ⟨hNotAccept,
+              (nat_beq_true_iff final.state machine.rejectState).mp hReject⟩
+          · intro _
+            rw [if_neg Bool.false_ne_true, if_pos rfl]
+      | false =>
+          constructor
+          · intro hVerdict
+            rw [if_neg Bool.false_ne_true,
+              if_neg Bool.false_ne_true] at hVerdict
+            contradiction
+          · intro hFinal
+            have hTrue :=
+              (nat_beq_true_iff final.state machine.rejectState).mpr hFinal.2
+            rw [hReject] at hTrue
+            contradiction
+
+/-- A raw bounded decision is non-timeout exactly when its final state is
+halting. -/
+theorem boundedDecide_ne_timeout_iff_final_isHalted
+    (machine : Machine) (fuel : Nat) (input : BitString) :
+    boundedDecide machine fuel input ≠ .timeout ↔
+      machine.isHalted (run machine fuel (startConfig machine input)) = true := by
+  let final := run machine fuel (startConfig machine input)
+  change
+    (if final.state == machine.acceptState then
+       Verdict.accept
+     else if final.state == machine.rejectState then
+       Verdict.reject
+     else Verdict.timeout) ≠ Verdict.timeout ↔
+      ((final.state == machine.acceptState) ||
+        (final.state == machine.rejectState)) = true
+  cases hAccept : (final.state == machine.acceptState) with
+  | true =>
+      rw [if_pos rfl]
+      constructor
+      · intro _
+        rfl
+      · intro _ hImpossible
+        contradiction
+  | false =>
+      cases hReject : (final.state == machine.rejectState) with
+      | true =>
+          rw [if_neg Bool.false_ne_true, if_pos rfl]
+          constructor
+          · intro _
+            rfl
+          · intro _ hImpossible
+            contradiction
+      | false =>
+          rw [if_neg Bool.false_ne_true, if_neg Bool.false_ne_true]
+          constructor
+          · intro hImpossible
+            exact False.elim (hImpossible rfl)
+          · intro hImpossible
+            contradiction
 
 /-- Under an exact halting trace and sufficient work/raw budgets, work
 acceptance is equivalent to the compiled raw run ending in its accept state. -/
