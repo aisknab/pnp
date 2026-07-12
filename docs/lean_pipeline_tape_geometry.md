@@ -82,8 +82,8 @@ stop is not a verdict. A separate paired-input framer now constructs a represent
 from literal canonical paired input with an exact quadratic bound. A separate output-handoff
 machine reaches a represented `Tape.handoffTarget` at an exact linear logical-output-length cost.
 The bridge layer now connects both around supplied exact target runs and preserves the target
-verdict, but its compiled endpoint is not a terminal raw-output layout. These layers do not prove
-target termination, terminal output de-tagging, construct
+verdict. A separate `TerminalOutputPacker` now proves the terminal raw-output layout, but it is not
+launched from this bridge endpoint. These layers do not prove target termination or construct
 composition/precomposition `RawRefinement`,
 prove an input-size polynomial end-to-end bound or charged/raw class equivalence, establish
 `CNFSAT ∈ P` or NP-completeness, activate a root theorem, or prove `P = NP`.

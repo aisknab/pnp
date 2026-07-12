@@ -46,7 +46,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-12-22}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-12-23}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -65,15 +65,15 @@
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 4912 \\
-Theorem-kind declarations & 2045 \\
-Assumption-free theorem-kind declarations & 1944 \\
+Compiled declarations & 5023 \\
+Theorem-kind declarations & 2081 \\
+Assumption-free theorem-kind declarations & 1980 \\
 Project-specific axioms & 4 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{6a5073b885cdaed765186ddef2beba44bd29432d88fd4516822ecd94a1b0cb45}\par}
+{\small Inventory SHA-256: \code{6f5d04356e86d2c775f7913d5e8e8a891a59559a9dbc533f34ebfa18b619d1fc}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -187,7 +187,7 @@ remain absent.
 \section{Formal milestone ledger}
 
 Each earned row requires exact compiled names and theorem kinds, empty axiom closures, per-name
-domain-separated kernel-type SHA-256 matches for 100 detailed candidates, and the pinned whole-Lean
+domain-separated kernel-type SHA-256 matches for 108 detailed candidates, and the pinned whole-Lean
 source closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
 {\small
@@ -197,7 +197,7 @@ source closure. Human-readable scope remains conservative: type or source drift 
 Milestone & Status & Exact scope & Boundary \\
 \midrule
 \endhead
-Concrete machine and cost kernel & formalized-foundation-only & Literal canonical paired input reaches an accepting representation under an exact quadratic raw-input-length polynomial. Every supplied exact n-step raw target run lifts to exactly 3 * n successful work steps. The bridge module adds a symbol-preserving one-step framer-to-simulator launch and one accept/reject-to-handoff launch, uses two disjoint verdict-indexed handoff copies, and proves first-match isolation for every ordinary stage step. Exact target acceptance and rejection remain the corresponding bounded work verdict; a supplied stuck nonhalting endpoint is timeout at the exact simulation-prefix budget. The cumulative internal work cost is inputFramerWorkSteps + 1 + 3 * n + 1 + framedOutputHandoffWorkSteps, and compilation from ordinary canonical paired raw input costs exactly six times that sum. All reviewed bridge declarations have empty axiom closure. & The composed endpoint is still the internal two-track representation of Tape.handoffTarget. There is no terminal raw output packer or de-tagger, no ordinary machineOutput equality theorem, no complete FunctionProgram.RawRefinement or DecisionProgram.RawRefinement, and no external encoded-input-size polynomial. The cumulative bound depends on a supplied exact source-transition count and final output length, and the theorem does not prove target termination. It therefore does not close the concrete complexity machine-link blocker, establish CNF-SAT in P, prove NP-completeness, or prove P = NP. PNP.Main.p\_eq\_np remains absent and the publication gate remains false. \\
+Concrete machine and cost kernel & formalized-foundation-only & Literal canonical paired input reaches an accepting representation under an exact quadratic raw-input-length polynomial. Every supplied exact n-step raw target run lifts to exactly 3 * n successful work steps. The bridge module adds a symbol-preserving one-step framer-to-simulator launch and one accept/reject-to-handoff launch, uses two disjoint verdict-indexed handoff copies, and proves first-match isolation for every ordinary stage step. Exact target acceptance and rejection remain the corresponding bounded work verdict; a supplied stuck nonhalting endpoint is timeout at the exact simulation-prefix budget. The cumulative internal bridge work cost is inputFramerWorkSteps + 1 + 3 * n + 1 + framedOutputHandoffWorkSteps, and bridge compilation from ordinary canonical paired raw input costs exactly six times that sum. Separately, the literal terminal packer uniformly reaches a blank-delimited raw-visible accepting output for arbitrary logical words and exterior garbage. Its compiled exact trace costs six times its work steps and fits 18*m\textasciicircum{}2 + 36*m + 6 for logical output length m; one work step short is timeout. All 69 reviewed terminal-packer declarations have empty axiom closure. & The terminal packer is a separate encoded-internal stage and has not been launched from the bridge endpoint or incorporated into the bridge rule table and cumulative trace. There is no complete FunctionProgram.RawRefinement or DecisionProgram.RawRefinement and no polynomial in external encoded input length. The bridge bound still depends on a supplied exact source-transition count and final output length, and no theorem proves target termination. The concrete complexity machine-link blocker therefore remains open; CNF-SAT in P, NP-completeness, and P = NP are not established. PNP.Main.p\_eq\_np remains absent and the publication gate remains false. \\
 Concrete P, NP, and polynomial reductions & formalized-with-machine-link-pending & Bitstring languages, finite charged decision/verifier/function pipelines grounded in concrete machines, polynomial certificate/runtime/output bounds, exact raw-machine refinement contracts and machine-leaf witnesses, many-one reductions, and the NP-complete-in-P implication. & The refinement contracts and leaf cases do not compile function composition or decision precomposition, construct raw paired verifiers, prove charged/raw class equivalence, discharge the general machine-link blocker, prove CNF-SAT is in P or NP-complete, or establish the publication root theorem. \\
 Concrete universal CNF-SAT verifier & formalized-np-membership-only & An unconditional formula-grammar outcome, universal bounded work outcome, exact accept/reject semantics, no-timeout theorem, literal finite-machine paired verifier, and CNF-SAT membership in NP. & This proves CNF-SAT membership in NP only; it does not prove CNF-SAT is in P, NP-completeness, or P = NP. \\
 Typed direct-wire NAND semantics & formalized & Typed topological Boolean NAND programs and ordered multi-output direct-wire semantics. & This does not establish circuit minimization, SAT, or P = NP. \\
@@ -215,8 +215,8 @@ Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-mac
 
 \section{Compiled inventory summary}
 
-The inventory contains 4912 exported \code{PNP.*} kernel declarations from
-44 modules. It excludes 749 private compiler auxiliaries.
+The inventory contains 5023 exported \code{PNP.*} kernel declarations from
+45 modules. It excludes 950 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -248,6 +248,7 @@ PNP.Concrete.PipelineStateNamespace & 77 & 34 \\
 PNP.Concrete.PipelineTapeGeometry & 20 & 12 \\
 PNP.Concrete.TapeHandoff & 18 & 11 \\
 PNP.Concrete.Target & 2 & 1 \\
+PNP.Concrete.TerminalOutputPacker & 111 & 36 \\
 PNP.Concrete.WorkInput & 23 & 14 \\
 PNP.Concrete.WorkMachine & 308 & 108 \\
 PNP.DirectWireBaseline & 48 & 25 \\
@@ -332,10 +333,10 @@ npm run report:check
 \end{verbatim}
 }
 
-The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-12-22}. Its exact byte digest is
-\code{6a5073b885cdaed765186ddef2beba44bd29432d88fd4516822ecd94a1b0cb45}. The report is regenerated from that inventory and the reviewed
+The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-12-23}. Its exact byte digest is
+\code{6f5d04356e86d2c775f7913d5e8e8a891a59559a9dbc533f34ebfa18b619d1fc}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{584778c158d1d6d3f2b89e8b53390f248d2311cefde7bd98c2a3d508ca1a03a9}; the computed and pinned values match. Successful regeneration
+\code{befaf6130fb3c1636d3d8e6d4d415231994791d4a7ed7cd9f51cd6b56acb4b22}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 

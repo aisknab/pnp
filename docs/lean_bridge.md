@@ -49,6 +49,9 @@ lean/PNP/Concrete/PipelineTapeGeometry.lean
 lean/PNP/Concrete/PipelineInputFramer.lean
 lean/PNP/Concrete/PipelineOutputHandoff.lean
 lean/PNP/Concrete/PipelineMachineSimulation.lean
+lean/PNP/Concrete/PipelineStateNamespace.lean
+lean/PNP/Concrete/PipelineStageBridges.lean
+lean/PNP/Concrete/TerminalOutputPacker.lean
 lean/PNP/Concrete/Complexity.lean
 lean/PNP/Concrete/PipelineRefinement.lean
 lean/PNP/Concrete/Target.lean
@@ -86,6 +89,7 @@ lean-audit/PNPConcretePipelineInputFramerAxiomAudit.lean
 lean-audit/PNPConcretePipelineOutputHandoffAxiomAudit.lean
 lean-audit/PNPConcretePipelineStateNamespaceAxiomAudit.lean
 lean-audit/PNPConcretePipelineStageBridgesAxiomAudit.lean
+lean-audit/PNPConcreteTerminalOutputPackerAxiomAudit.lean
 lean-audit/PNPConcretePipelineMachineSimulationAxiomAudit.lean
 lean-audit/PNPConcreteComplexityAxiomAudit.lean
 lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean
@@ -178,8 +182,9 @@ to its endpoint. Conditional on that endpoint being designated halting, `workRun
 termination result: those full fuels are at-most budgets rather than successful-step counts or
 input-size bounds, and a stuck nonhalting stop is not a verdict. The layer does not create the
 frame inside its own theorem or prove target termination. The bridge module supplies exact launch
-and verdict theorems, but neither layer performs terminal de-tagging, proves ordinary
-`machineOutput`, derives an external-input-size polynomial, or constructs complete
+and verdict theorems. `TerminalOutputPacker.lean` separately performs terminal de-tagging and proves
+ordinary `machineOutput` equality with a local quadratic bound, but it is not yet part of that
+bridge trace. The layers do not derive an external-input-size polynomial or construct complete
 composition/precomposition pipeline refinement. The two declarations in
 `lean/PNP/Concrete/Target.lean` are also axiom-free: `PNP.Main.ConcretePEqualsNP` is an inactive
 definition naming mutual inclusion, and `PNP.Main.concretePEqualsNP_iff` pins its expansion. This
@@ -658,9 +663,9 @@ The highest-value next targets are:
 3. Prove first-output preservation, `TraceEquivalence`, and the two derived final-output laws.
 4. Instantiate the conditional boundary uniformly and prove the report threshold theorem.
 5. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
-6. Add the terminal raw-output packer/de-tagger, prove ordinary `machineOutput` equality and all
-   edge cases, then turn the exact internal bridge trace into the full pipeline refinement with
-   external-input-size polynomial runtime/output bounds.
+6. Add the explicit handoff-to-terminal-packer launch and turn the proved stage-local output theorem
+   plus exact internal bridge trace into one full pipeline refinement with external-input-size
+   polynomial runtime/output bounds.
 7. Formalize or import concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.
 8. Formalize checker/reflection soundness for the PCC package.

@@ -52,9 +52,11 @@ state renaming, ordered first-match preservation, lookup isolation in the litera
 table, and transport of the three exact local traces. The bridge layer then adds exact launches and
 verdict-indexed handoff copies, preserves accept/reject for supplied exact target runs, leaves a
 supplied stuck nonhalting endpoint as timeout at the exact prefix budget, and compiles the cumulative
-trace from canonical paired raw input at six times its work cost. It supplies no target termination,
-ordinary raw `machineOutput` theorem, terminal de-tagging, external-input-size polynomial, complete
-composition/precomposition `RawRefinement`, or class result.
+trace from canonical paired raw input at six times its work cost. A fourth reviewed module now
+proves terminal packing and ordinary raw `machineOutput` equality with a local quadratic bound,
+but it is not launched from that bridge trace. The combined development supplies no target
+termination, external-input-size polynomial, complete composition/precomposition `RawRefinement`,
+or class result.
 Consequently the gate
 is false, and every theorem-emission field derived from it remains false or `null`.
 
