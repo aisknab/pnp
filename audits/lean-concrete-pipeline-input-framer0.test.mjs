@@ -195,8 +195,12 @@ test('framer milestone remains local and the concrete publication gate remains c
   assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), true);
   assert.equal(status.projectSpecificAxiomInventory.length, 4);
   assert.equal(status.rootLeanTheoremPresent, false);
-  assert.equal(status.nonClaims.some((entry) => entry.includes(
-    'PipelineInputFramer is one literal finite machine for canonical BitString.pair inputs')), true);
+  const framerNonClaim = status.nonClaims.find((entry) => entry.includes(
+    'PipelineInputFramer is one literal finite machine for canonical BitString.pair inputs'));
+  assert.equal(typeof framerNonClaim, 'string');
+  assert.match(framerNonClaim, /launches that endpoint into the lifted target/u);
+  assert.match(framerNonClaim, /does not accept arbitrary empty, odd, malformed, or unpaired raw words/u);
+  assert.match(framerNonClaim, /does not .*prove target termination/u);
   const foundation = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -208,8 +212,9 @@ test('framer milestone remains local and the concrete publication gate remains c
   ]) assert.equal(foundation.requiredTheorems.includes(name), true, name);
   assert.match(foundation.scope, /canonical paired input/u);
   assert.match(foundation.scope, /exact quadratic raw-input-length polynomial/u);
-  assert.match(foundation.nonClaim, /not composed with the lifted simulator/u);
-  assert.match(foundation.nonClaim, /paired-input-only/u);
+  assert.match(foundation.scope, /one-step framer-to-simulator launch/u);
+  assert.match(foundation.nonClaim, /does not prove target termination/u);
+  assert.match(foundation.nonClaim, /no external encoded-input-size polynomial/u);
   assert.equal(map.gate.standardComplexityModelEligible, false);
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,

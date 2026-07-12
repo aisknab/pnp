@@ -16,7 +16,8 @@ from current theorem status.
   the focused axiom transcripts for the 41-declaration concrete bitstring/polynomial kernel, the
   38-declaration finite-rule machine kernel, the 14-declaration blank-delimited output/handoff
   boundary, the 20-declaration boundary-marked pipeline tape geometry, the executable canonical
-  paired-input framer, the 39-declaration collision-free pipeline state namespace, the framed
+  paired-input framer, the 39-declaration collision-free pipeline state namespace, the
+  56-declaration executable pipeline stage-bridge surface, the framed
   raw-machine simulation surface, the 48-declaration finite
   charged-pipeline complexity interface, the
   six-declaration raw-pipeline refinement boundary, and the two-declaration inactive
@@ -70,8 +71,11 @@ implicit blanks now terminate output identically. Its `handoffTarget` is a pure 
 not a machine, rule list, or paid copy algorithm. The separate pipeline-output-handoff module now
 implements one exact internal represented handoff to that target. The state-namespace audit now
 checks injective three-stage renaming, first-match preservation, lookup-isolated concatenation, and
-transport of all three exact stage-local traces; bridge transitions, complete execution, and terminal
-raw output de-tagging remain unproved.
+transport of all three exact stage-local traces. The stage-bridge audit checks literal
+symbol-preserving launches, verdict-indexed handoff copies, bridge-first dispatch isolation,
+cumulative exact work traces, six-for-one compiled raw traces, and supplied-exact-run
+accept/reject/timeout classification. Terminal raw output de-tagging and complete refinement remain
+unproved.
 
 The pipeline-tape geometry audit proves a two-track representation with distinct data/left/right
 tags, arbitrary stale cells outside the first markers, and exact preservation under data writes,
@@ -86,30 +90,29 @@ prefix of length `k ≤ F` reaching the same endpoint. If that endpoint is desig
 `workRun` with fuel `3 * F` and compiled `run` with fuel `18 * F` reach the represented endpoint
 and its encoding. CI keeps the premise and accounting explicit: this does not prove termination, the full
 budgets are not successful-step counts or input-size bounds, and a stuck nonhalting stop is not a
-verdict. The theorems start from an already represented configuration and provide no `startConfig`
-framing, `boundedDecide` or `machineOutput` equality, connection to the separate internal handoff,
-terminal raw output de-tagging,
-composition/precomposition refinement, or input-size polynomial end-to-end theorem.
+verdict. The local theorems start from an already represented configuration. The separate bridge
+module now supplies canonical paired framing, exact launches, and target verdict preservation for a
+supplied exact run, but no target termination, `machineOutput` equality, terminal raw output
+de-tagging, composition/precomposition refinement, or external-input-size polynomial theorem.
 
 The pipeline-input-framer audit covers a different literal finite machine. Its compiled theorem
 starts at canonical `BitString.pair left right`, reaches an accepting represented frame with
 permitted exterior garbage, and pins exact work and quadratic compiled raw budgets. CI rejects any
 attempt to widen that theorem to arbitrary empty, odd, malformed, or unpaired input. It also keeps
-the missing boundary explicit: the framer's renamed rules now occur in a collision-free concatenated
-table, but no bridge rule connects its accepting state to the renamed lifted simulator, so it
-provides no simulated-stage termination, `boundedDecide` or output
-preservation beyond the framer's own local accept result, connection to the separate internal
-handoff, terminal raw output de-tagging, pipeline refinement,
-class equality, or `P = NP`.
+the remaining boundary explicit: the bridge module connects its accepting state to the renamed
+lifted simulator in one exact step, but neither module proves target termination, terminal raw
+output de-tagging, an external-input-size pipeline bound, complete refinement, class equality, or
+`P = NP`.
 
 The pipeline-output-handoff audit covers a third literal finite machine. From an already represented
 logical tape `raw`, it reaches an accepting representation of `raw.handoffTarget` after exactly
 `2 * raw.outputBits.length + 4` work steps and `12 * raw.outputBits.length + 24` compiled steps.
 CI requires the compiled theorem to start at an encoded internal work configuration and rejects an
 ordinary-`startConfig` or raw-visible-`machineOutput` claim. The handoff now has a disjoint renamed
-state image and lookup-isolated table position, but no simulator-halt bridge connects it; it gives no verdict/timeout bridge or external
-input-size polynomial, and does not supply terminal de-tagging, pipeline refinement, class equality,
-or `P = NP`.
+state image and two verdict-indexed bridge copies. The cumulative theorem begins at ordinary paired
+`startConfig` and preserves accept/reject for supplied exact target runs, but supplies no target
+termination, external-input-size polynomial, terminal de-tagging, pipeline refinement, class
+equality, or `P = NP`.
 
 The concrete-CNF checks do establish a narrower raw-machine result. They require complete axiom
 transcripts for the canonical CNF codec and semantics, paired work-input layout, generic direct

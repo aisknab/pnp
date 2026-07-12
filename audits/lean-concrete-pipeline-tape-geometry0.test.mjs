@@ -200,20 +200,18 @@ test('the executable compiler blocker and publication gate remain fail-closed', 
     'PNP.Concrete.PipelineTape.represents_expandLeft_of_nil'), true);
   assert.equal(foundation.requiredTheorems.includes(
     'PNP.Concrete.PipelineTape.represents_expandRight_of_nil'), true);
+  assert.match(foundation.scope,
+    /one-step framer-to-simulator launch/u);
+  assert.match(foundation.scope,
+    /supplied stuck nonhalting endpoint is timeout/u);
   assert.match(foundation.nonClaim,
-    /assumes a represented start/u);
+    /internal two-track representation of Tape\.handoffTarget/u);
   assert.match(foundation.nonClaim,
-    /designated-halting source endpoint/u);
+    /does not prove target termination/u);
   assert.match(foundation.nonClaim,
-    /proves no termination or stuck\/timeout\/verdict correspondence/u);
+    /no ordinary machineOutput equality theorem/u);
   assert.match(foundation.nonClaim,
-    /only 3 \* n is an exact successful work count/u);
-  assert.match(foundation.nonClaim,
-    /paired-input-only/u);
-  assert.match(foundation.nonClaim,
-    /not composed with the lifted simulator/u);
-  assert.match(foundation.nonClaim,
-    /boundedDecide or machineOutput preservation/u);
+    /no complete FunctionProgram\.RawRefinement or DecisionProgram\.RawRefinement/u);
   assert.equal(map.gate.standardComplexityModelEligible, false);
   assert.equal(map.gate.expectedSourceClosureSha256, null);
 });

@@ -96,12 +96,11 @@ This is a local configuration simulation from an already represented frame. The 
 `3 * k` successful work steps for the extracted `k ≤ F`; the padded `3 * F` work fuel and
 `18 * F` compiled fuel are at-most budgets measured in source transitions, not input length. The
 padding conclusions assume that the supplied `F`-fuel endpoint is designated halting. They do not
-prove termination or classify a stuck nonhalting stop as a verdict. This module does not construct a
-frame from `Tape.ofInput`; the separate paired-input framer is not composed with it into one
-execution even though both now have disjoint images in a concatenated rule table. It does not
-prove `boundedDecide`, accept/reject/timeout or `machineOutput`
-preservation, decode the interleaved work encoding, connect to the separate internal handoff,
-de-tag terminal raw output, reset and launch a second stage, construct a `FunctionProgram.RawRefinement` or
-`DecisionProgram.RawRefinement`, compile composition or precomposition, prove an end-to-end
-input-size polynomial bound, establish `CNFSAT ∈ P` or NP-completeness, activate the publication
-gate, or prove `P = NP`.
+prove termination or classify an arbitrary early fuel stop as a final target verdict. This local
+module starts from an already represented frame. `PipelineStageBridges` now composes every supplied
+exact run with the canonical paired-input framer and a verdict-indexed internal handoff, and proves
+that a supplied stuck nonhalting endpoint is timeout at the exact prefix budget. The result still
+does not decode the interleaved work encoding into terminal raw `machineOutput`, construct a
+`FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement`, prove an external-input-size
+polynomial, establish `CNFSAT ∈ P` or NP-completeness, activate the publication gate, or prove
+`P = NP`.

@@ -85,6 +85,7 @@ lean-audit/PNPConcretePipelineTapeGeometryAxiomAudit.lean
 lean-audit/PNPConcretePipelineInputFramerAxiomAudit.lean
 lean-audit/PNPConcretePipelineOutputHandoffAxiomAudit.lean
 lean-audit/PNPConcretePipelineStateNamespaceAxiomAudit.lean
+lean-audit/PNPConcretePipelineStageBridgesAxiomAudit.lean
 lean-audit/PNPConcretePipelineMachineSimulationAxiomAudit.lean
 lean-audit/PNPConcreteComplexityAxiomAudit.lean
 lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean
@@ -154,7 +155,8 @@ axiom-free: they define distinct two-track data and boundary tags, an arbitrary-
 frame, and pure write/move/boundary-expansion geometry. They define no rules, machine, simulation,
 or runtime bound. `lean/PNP/Concrete/PipelineInputFramer.lean` supplies a separate literal finite
 machine from canonical paired input to an accepting represented frame under exact work and compiled
-raw budgets. It is paired-input-only and is not composed with the simulator into one execution; the separate namespace layer only renames and concatenates the tables without a launch bridge.
+raw budgets. It is paired-input-only; the separate bridge layer now launches its exact accepting
+endpoint into the simulator but does not broaden the framer's input domain.
 `lean/PNP/Concrete/PipelineOutputHandoff.lean` supplies another literal finite machine from an
 already represented logical tape to an accepting representation of its blank-delimited handoff
 target. Its exact costs are `2 * n + 4` work steps and `12 * n + 24` compiled steps for logical
@@ -162,8 +164,12 @@ output length `n`. Its compiled trace starts from an encoded internal configurat
 `startConfig`, and its represented two-track encoding is not a terminal raw `machineOutput` layout.
 `lean/PNP/Concrete/PipelineStateNamespace.lean` injectively renames the framer, simulator, and
 handoff into pairwise-disjoint state images, proves first-match lookup isolation in their literal
-concatenated rule table, and transports all three existing exact stage-local traces. It supplies no
-bridge transition or global execution. `lean/PNP/Concrete/PipelineMachineSimulation.lean` supplies
+concatenated rule table, and transports all three existing exact stage-local traces. The subsequent
+56-declaration `PipelineStageBridges.lean` adds literal symbol-preserving launch rules, two disjoint
+verdict-indexed handoff copies, first-match isolation under bridge priority, cumulative exact work
+traces, and six-for-one compiled raw traces from canonical paired input for every supplied exact
+target run. It preserves accept/reject classification and leaves a supplied stuck nonhalting
+endpoint as timeout at the exact prefix budget. `lean/PNP/Concrete/PipelineMachineSimulation.lean` supplies
 the separate finite rule lift: it preserves ordered first-match selection and lifts every supplied exact `n`-step chain
 of successful raw transitions from an already represented configuration to exactly `3 * n`
 successful work steps. An ordinary `F`-fuel raw run also yields an exact prefix of length `k ≤ F`
@@ -171,9 +177,10 @@ to its endpoint. Conditional on that endpoint being designated halting, `workRun
 `3 * F` and compiled `run` at fuel `18 * F` reach its representation and encoding. This proves no
 termination result: those full fuels are at-most budgets rather than successful-step counts or
 input-size bounds, and a stuck nonhalting stop is not a verdict. The layer does not create the
-frame inside its own theorem, prove `boundedDecide` or output preservation, launch from the
-renamed framer stage, launch the separate renamed internal handoff, perform terminal de-tagging, or
-construct composition/precomposition pipeline refinement. The two declarations in
+frame inside its own theorem or prove target termination. The bridge module supplies exact launch
+and verdict theorems, but neither layer performs terminal de-tagging, proves ordinary
+`machineOutput`, derives an external-input-size polynomial, or constructs complete
+composition/precomposition pipeline refinement. The two declarations in
 `lean/PNP/Concrete/Target.lean` are also axiom-free: `PNP.Main.ConcretePEqualsNP` is an inactive
 definition naming mutual inclusion, and `PNP.Main.concretePEqualsNP_iff` pins its expansion. This
 does not prove the target. The six explicit declarations in
@@ -621,6 +628,9 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 21. Injective work-machine state renaming, three disjoint stage images, lookup-isolated finite
     rule-table concatenation, and exact stage-local trace transport for the framer, simulator, and
     internal handoff.
+22. Exact framer-to-simulator and accept/reject-to-verdict-indexed-handoff launches, first-match
+    bridge isolation, cumulative internal work cost, six-for-one compiled raw cost from canonical
+    paired input, and accept/reject/timeout preservation for supplied exact target traces.
 ```
 
 ## Explicit trust base after this pass
@@ -634,8 +644,8 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
    NP-hardness/NP-completeness; the current direct verifier proves only `CNFSAT ∈ NP`.
 6. A compiler/refinement proving that every finite charged function, decision, and verifier
    pipeline is implemented with the stated input-size costs by the selected raw machine model. The
-   local exact-successful-run simulator and collision-free table namespace do not yet provide this
-   end-to-end result because no stage-launch or terminal-output bridge has been proved.
+   exact bridge machine still does not provide this result because terminal raw output,
+   external-input-size bounds, and the complete refinement contract remain unproved.
 ```
 
 ## Next formalization targets
@@ -648,11 +658,9 @@ The highest-value next targets are:
 3. Prove first-output preservation, `TraceEquivalence`, and the two derived final-output laws.
 4. Instantiate the conditional boundary uniformly and prove the report threshold theorem.
 5. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
-6. Add explicit bridge rules and proved stage launches to the now-disjoint paired-input framer,
-   exact-successful-run simulator, and internal output handoff; then prove one complete execution
-   and add `boundedDecide`
-   halt/timeout/verdict semantics, terminal output de-tagging, and the full pipeline refinement with
-   input-size polynomial runtime/output bounds.
+6. Add the terminal raw-output packer/de-tagger, prove ordinary `machineOutput` equality and all
+   edge cases, then turn the exact internal bridge trace into the full pipeline refinement with
+   external-input-size polynomial runtime/output bounds.
 7. Formalize or import concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.
 8. Formalize checker/reflection soundness for the PCC package.

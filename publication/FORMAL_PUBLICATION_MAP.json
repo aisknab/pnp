@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-12-21",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-12-22",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "1237f6f5934d09a4f2a2b48b98f9f7306003f871f59f9a80d795c05bb24eb85e",
+  "milestoneSourceClosureSha256": "584778c158d1d6d3f2b89e8b53390f248d2311cefde7bd98c2a3d508ca1a03a9",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.FinalUniversalDesign.cnfCompiled_accept_iff_check": "4a8661d567079e1f47c288b8a36805a20ac7040338d84325723079f3fada4efa",
@@ -52,6 +52,22 @@
     "PNP.Concrete.PipelineOutputHandoff.framedOutputHandoffFinal_isHalted": "164b9bf86cc421a1930e211b8fc1086cd78312471a3f5f6723784e98ea7bcf33",
     "PNP.Concrete.PipelineOutputHandoff.framedOutputHandoffRawTimeBound_exact": "665bac0dbfa88babe693a5b199c34e3cadfd99e7968adca8aead6c0360fb63ec",
     "PNP.Concrete.PipelineOutputHandoff.run_compileFramedOutputHandoff_of_represents": "e34aa606d363894f41b20c4911a72ff796dc6e8bdc800b545638c8d83e0495df",
+    "PNP.Concrete.PipelineStageBridges.acceptingHandoffState_ne_rejectingHandoffState": "b0a17262efe8c8b144b91a571ce4f979fc3ad0db14cad152c316adcc6e93b148",
+    "PNP.Concrete.PipelineStageBridges.acceptingLaunch_workStep": "0f40a1c94b06d93144d6ebb2ba1487e5be9d81d4b1c8e213e2ab74b127f4d4d9",
+    "PNP.Concrete.PipelineStageBridges.bridgedAccept_workRunExact_of_rawRunExact": "c987488cebaee32d9774ee94659c7fb6b1ebc637694d21c37998d3345508c00a",
+    "PNP.Concrete.PipelineStageBridges.bridgedReject_workRunExact_of_rawRunExact": "c71f200701ca6cd332142bec5ec3f5ede9cbcaeeda75058f923e4669fe29c7aa",
+    "PNP.Concrete.PipelineStageBridges.bridgedWorkSteps_eq": "3ae2093bcf7c847c36843677f9c40d3f79b5ab9d7aebd97c5d032839a4011fba",
+    "PNP.Concrete.PipelineStageBridges.findWorkRule_bridged_acceptingHandoff_of_some": "c79ca69e2d5eab8a93dde453a10621e60bf4e678cb93876cbd2a2f1cd888bb66",
+    "PNP.Concrete.PipelineStageBridges.findWorkRule_bridged_input_of_some": "111a1cc4d27a2c94d5409a367442685bcfb31d69a1a6dcfcc28747d58aef444e",
+    "PNP.Concrete.PipelineStageBridges.findWorkRule_bridged_rejectingHandoff_of_some": "3c69b60cb063968dc902799e807112462e2d51740a01c1a5c503d9200e4964b4",
+    "PNP.Concrete.PipelineStageBridges.findWorkRule_bridged_simulation_of_some": "712433eb3f9efb4af45bec2410182282cc9bc25e7694d9ad227d000232e17c44",
+    "PNP.Concrete.PipelineStageBridges.inputLaunch_workStep": "a48db32b35f635b3c9c5072ddbbe58be93c333084d5b6de70edfc391cd41338b",
+    "PNP.Concrete.PipelineStageBridges.rejectingLaunch_workStep": "b95fd4a27988813fe1e24ce54f40c4c2c2199f446ac013d752ba0809cb750bcd",
+    "PNP.Concrete.PipelineStageBridges.run_compileBridgedMachine_accept_of_rawRunExact": "2378ad955045351a915910245137e75f435f1c2032df13dec5b64cc68911f2a6",
+    "PNP.Concrete.PipelineStageBridges.run_compileBridgedMachine_reject_of_rawRunExact": "3242867e70b70843a53ba8ccda1e1c0aa07c158d30801ccf2f2ee31dcbe41bb4",
+    "PNP.Concrete.PipelineStageBridges.workBoundedDecide_bridged_accept_of_rawRunExact": "ea765aad896406d72b2bdf1ae6a152e7604ade6f7c748a7f388f2c603cfbe432",
+    "PNP.Concrete.PipelineStageBridges.workBoundedDecide_bridged_reject_of_rawRunExact": "500f37fc67c88830f3655acd2938d6f74478c0dd8d09d54103fb60a43b01270d",
+    "PNP.Concrete.PipelineStageBridges.workBoundedDecide_bridged_timeout_of_stuck_rawRunExact": "490138147578c1c70e0f9ea55f30efbd2d81a3f4ce0668d781bec8076925402c",
     "PNP.Concrete.PipelineStateNamespace.findWorkRule_composedRules_handoff": "02b9123244df11bff2ac07382edd3e8e860b1511f8a465fae22e2b4a3c824ff7",
     "PNP.Concrete.PipelineStateNamespace.findWorkRule_composedRules_input": "95dabc92ef9edd36491d0da983a9cb87004b6b75f28936de4b93e01f638dc17a",
     "PNP.Concrete.PipelineStateNamespace.findWorkRule_composedRules_simulation": "52b5fe1ad0bca836281a2bc9b3cd6bb09252cc6861c29b745f4b3d31ea833e35",
@@ -109,7 +125,7 @@
       "id": "concrete-machine-cost-kernel",
       "title": "Concrete machine and cost kernel",
       "classification": "formalized-foundation-only",
-      "scope": "Literal canonical paired input reaches an accepting representation under an exact quadratic raw-input-length polynomial. Separately, each n-step raw run lifts to exactly 3 * n successful work steps; each F-fuel run has an exact prefix of length k at most F; if it is designated halting, work fuel 3 * F and compiled fuel 18 * F reach its representation. An internal represented output handoff separately reaches Tape.handoffTarget in exactly 2 * n + 4 successful work steps and 12 * n + 24 compiled steps for logical output length n. The module proves injective state renaming preserves ordered first-match lookup, halt status, one-step execution, exact and at-most runs, start configurations, and bounded verdicts. The framer, lifted simulator, and internal handoff occupy three disjoint stage images, and one literal concatenated finite rule table has proved first-match lookup isolation in all three images. The existing exact stage-local traces survive those renamings.",
+      "scope": "Literal canonical paired input reaches an accepting representation under an exact quadratic raw-input-length polynomial. Every supplied exact n-step raw target run lifts to exactly 3 * n successful work steps. The bridge module adds a symbol-preserving one-step framer-to-simulator launch and one accept/reject-to-handoff launch, uses two disjoint verdict-indexed handoff copies, and proves first-match isolation for every ordinary stage step. Exact target acceptance and rejection remain the corresponding bounded work verdict; a supplied stuck nonhalting endpoint is timeout at the exact simulation-prefix budget. The cumulative internal work cost is inputFramerWorkSteps + 1 + 3 * n + 1 + framedOutputHandoffWorkSteps, and compilation from ordinary canonical paired raw input costs exactly six times that sum. All reviewed bridge declarations have empty axiom closure.",
       "requiredTheorems": [
         "PNP.Concrete.BitString.decodePair_pair",
         "PNP.Concrete.NatPolynomial.eval_mono",
@@ -133,6 +149,22 @@
         "PNP.Concrete.PipelineOutputHandoff.framedOutputHandoffRawTimeBound_exact",
         "PNP.Concrete.PipelineOutputHandoff.framedOutputHandoff_workRunExact_of_represents",
         "PNP.Concrete.PipelineOutputHandoff.run_compileFramedOutputHandoff_of_represents",
+        "PNP.Concrete.PipelineStageBridges.acceptingHandoffState_ne_rejectingHandoffState",
+        "PNP.Concrete.PipelineStageBridges.acceptingLaunch_workStep",
+        "PNP.Concrete.PipelineStageBridges.bridgedAccept_workRunExact_of_rawRunExact",
+        "PNP.Concrete.PipelineStageBridges.bridgedReject_workRunExact_of_rawRunExact",
+        "PNP.Concrete.PipelineStageBridges.bridgedWorkSteps_eq",
+        "PNP.Concrete.PipelineStageBridges.findWorkRule_bridged_acceptingHandoff_of_some",
+        "PNP.Concrete.PipelineStageBridges.findWorkRule_bridged_input_of_some",
+        "PNP.Concrete.PipelineStageBridges.findWorkRule_bridged_rejectingHandoff_of_some",
+        "PNP.Concrete.PipelineStageBridges.findWorkRule_bridged_simulation_of_some",
+        "PNP.Concrete.PipelineStageBridges.inputLaunch_workStep",
+        "PNP.Concrete.PipelineStageBridges.rejectingLaunch_workStep",
+        "PNP.Concrete.PipelineStageBridges.run_compileBridgedMachine_accept_of_rawRunExact",
+        "PNP.Concrete.PipelineStageBridges.run_compileBridgedMachine_reject_of_rawRunExact",
+        "PNP.Concrete.PipelineStageBridges.workBoundedDecide_bridged_accept_of_rawRunExact",
+        "PNP.Concrete.PipelineStageBridges.workBoundedDecide_bridged_reject_of_rawRunExact",
+        "PNP.Concrete.PipelineStageBridges.workBoundedDecide_bridged_timeout_of_stuck_rawRunExact",
         "PNP.Concrete.PipelineStateNamespace.findWorkRule_composedRules_handoff",
         "PNP.Concrete.PipelineStateNamespace.findWorkRule_composedRules_input",
         "PNP.Concrete.PipelineStateNamespace.findWorkRule_composedRules_simulation",
@@ -159,7 +191,7 @@
         "PNP.Concrete.run_succ",
         "PNP.Concrete.run_zero"
       ],
-      "nonClaim": "The framer remains paired-input-only and, despite collision-free table concatenation, is not composed with the lifted simulator into one execution: the concatenated table has no bridge rule that launches the simulator from the framer halt. The internal handoff compiled theorem starts from an encoded internal configuration, not ordinary startConfig, has no raw-visible machineOutput or terminal de-tagging, and is not composed with the lifted simulator into one execution; no simulator halt launches the handoff. Bounded padding assumes a represented start and a designated-halting source endpoint; it proves no termination or stuck/timeout/verdict correspondence. There is no complete composed WorkMachine execution, no target-stage boundedDecide or machineOutput preservation, no terminal raw output packer, no external input-size polynomial, and no pipeline RawRefinement/composition theorem or charged/raw class equivalence. Here n is a source-transition count and F a source-transition fuel bound, not input length: only 3 * n is an exact successful work count. This does not establish CNF-SAT in P, NP-completeness, or P = NP."
+      "nonClaim": "The composed endpoint is still the internal two-track representation of Tape.handoffTarget. There is no terminal raw output packer or de-tagger, no ordinary machineOutput equality theorem, no complete FunctionProgram.RawRefinement or DecisionProgram.RawRefinement, and no external encoded-input-size polynomial. The cumulative bound depends on a supplied exact source-transition count and final output length, and the theorem does not prove target termination. It therefore does not close the concrete complexity machine-link blocker, establish CNF-SAT in P, prove NP-completeness, or prove P = NP. PNP.Main.p_eq_np remains absent and the publication gate remains false."
     },
     {
       "id": "concrete-complexity-classes",
