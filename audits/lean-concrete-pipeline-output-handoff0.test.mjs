@@ -188,7 +188,8 @@ test('internal handoff milestone remains local and the publication gate remains 
   assert.match(handoffNonClaim, /exactly 2 \* n \+ 4 work steps/u);
   assert.match(handoffNonClaim, /12 \* n \+ 24 compiled steps/u);
   assert.match(handoffNonClaim, /two disjoint verdict-indexed copies/u);
-  assert.match(handoffNonClaim, /endpoint remains an internal two-track representation/u);
+  assert.match(handoffNonClaim, /TerminalOutputPacker separately turns a canonical represented word/u);
+  assert.match(handoffNonClaim, /no theorem launches the bridge endpoint into that packer/u);
   const foundation = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -200,10 +201,9 @@ test('internal handoff milestone remains local and the publication gate remains 
   ]) assert.equal(foundation.requiredTheorems.includes(name), true, name);
   assert.match(foundation.scope, /accept\/reject-to-handoff launch/u);
   assert.match(foundation.scope, /framedOutputHandoffWorkSteps/u);
-  assert.match(foundation.nonClaim, /internal two-track representation of Tape\.handoffTarget/u);
-  assert.match(foundation.nonClaim, /no terminal raw output packer or de-tagger/u);
-  assert.match(foundation.nonClaim, /no ordinary machineOutput equality theorem/u);
-  assert.match(foundation.nonClaim, /no external encoded-input-size polynomial/u);
+  assert.match(foundation.nonClaim, /terminal packer is a separate encoded-internal stage/u);
+  assert.match(foundation.nonClaim, /not been launched from the bridge endpoint/u);
+  assert.match(foundation.nonClaim, /no polynomial in external encoded input length/u);
   assert.equal(map.gate.standardComplexityModelEligible, false);
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,

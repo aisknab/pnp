@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-12-22",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-12-23",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "584778c158d1d6d3f2b89e8b53390f248d2311cefde7bd98c2a3d508ca1a03a9",
+  "milestoneSourceClosureSha256": "befaf6130fb3c1636d3d8e6d4d415231994791d4a7ed7cd9f51cd6b56acb4b22",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.FinalUniversalDesign.cnfCompiled_accept_iff_check": "4a8661d567079e1f47c288b8a36805a20ac7040338d84325723079f3fada4efa",
@@ -96,6 +96,14 @@
     "PNP.Concrete.Tape.outputBits_moveRight_moveLeft": "f39ae4d724e13c4e8afb0d310f27ccf4bca551162b7899af6db173f82996fab7",
     "PNP.Concrete.Tape.outputBits_ofInput": "4d4d7f8b96c6d1f5978ea6020a381170f18a9e40794d15cce5117ed8c94edc14",
     "PNP.Concrete.Tape.outputBits_right_append_blank": "8792acc8efd57d92f756f4a6536f91f33eae11f76b74a5b75c87f8f6229f0aed",
+    "PNP.Concrete.TerminalOutputPacker.machineOutput_compileTerminalOutputPacker_eq": "2e8a41501c1bfb17ac78b70a93c2996db1ab607465c4a61a91236a4787b07b66",
+    "PNP.Concrete.TerminalOutputPacker.run_compileTerminalOutputPacker": "a84a5f8f72a0b8e03da3a3e345f8d28d76411223e185d1cc81b570f402b09823",
+    "PNP.Concrete.TerminalOutputPacker.run_compileTerminalOutputPacker_exact": "f16f7b3137d4ffe8e497c34183dff3373283f5185053f97e579c8d379293c951",
+    "PNP.Concrete.TerminalOutputPacker.terminalOutputPackerFinal_isHalted": "882c7aa79b7d5d536677bfe2945e40b8e46078433050b9a14db3f797a4c71980",
+    "PNP.Concrete.TerminalOutputPacker.terminalOutputPacker_one_step_short_timeout": "7393199999e52b4aeb3cb6ee7dc2e67f60e5a8235bcad052b3ee7e104baf1b8b",
+    "PNP.Concrete.TerminalOutputPacker.terminalOutputPacker_output_eq": "c2d6f6ebc40cc24fba6440aa00026224a879aa0a88a1eb488b96fc3a9cee75c2",
+    "PNP.Concrete.TerminalOutputPacker.terminalOutputPacker_runtime_le": "051cf74cfe0e528ee581d013da5189c1424beecec5b3a13112c366bedaaea8d5",
+    "PNP.Concrete.TerminalOutputPacker.terminalOutputPacker_workRunExact": "bb574370b1aaa65babbe1491d5495ae758ba716e15246bff1f67a078fb398387",
     "PNP.DirectWire.andCircuit_spec": "43c4801753810dec20c372ae4eac3f248e03f62e084c80089aacbe38dbeaac50",
     "PNP.DirectWire.compatibleReplacement_framed": "450f861075f4eb11bb719e7248543c09ab9239de1ad5c1ab5c721c640da3dd2b",
     "PNP.DirectWire.ConditionalThresholdBoundaryPremises.fullResidualSlack_le_four": "824e81b304d52fb83d75e95ac136e06ced495ab460d6d621503e2444ee08c93e",
@@ -125,7 +133,7 @@
       "id": "concrete-machine-cost-kernel",
       "title": "Concrete machine and cost kernel",
       "classification": "formalized-foundation-only",
-      "scope": "Literal canonical paired input reaches an accepting representation under an exact quadratic raw-input-length polynomial. Every supplied exact n-step raw target run lifts to exactly 3 * n successful work steps. The bridge module adds a symbol-preserving one-step framer-to-simulator launch and one accept/reject-to-handoff launch, uses two disjoint verdict-indexed handoff copies, and proves first-match isolation for every ordinary stage step. Exact target acceptance and rejection remain the corresponding bounded work verdict; a supplied stuck nonhalting endpoint is timeout at the exact simulation-prefix budget. The cumulative internal work cost is inputFramerWorkSteps + 1 + 3 * n + 1 + framedOutputHandoffWorkSteps, and compilation from ordinary canonical paired raw input costs exactly six times that sum. All reviewed bridge declarations have empty axiom closure.",
+      "scope": "Literal canonical paired input reaches an accepting representation under an exact quadratic raw-input-length polynomial. Every supplied exact n-step raw target run lifts to exactly 3 * n successful work steps. The bridge module adds a symbol-preserving one-step framer-to-simulator launch and one accept/reject-to-handoff launch, uses two disjoint verdict-indexed handoff copies, and proves first-match isolation for every ordinary stage step. Exact target acceptance and rejection remain the corresponding bounded work verdict; a supplied stuck nonhalting endpoint is timeout at the exact simulation-prefix budget. The cumulative internal bridge work cost is inputFramerWorkSteps + 1 + 3 * n + 1 + framedOutputHandoffWorkSteps, and bridge compilation from ordinary canonical paired raw input costs exactly six times that sum. Separately, the literal terminal packer uniformly reaches a blank-delimited raw-visible accepting output for arbitrary logical words and exterior garbage. Its compiled exact trace costs six times its work steps and fits 18*m^2 + 36*m + 6 for logical output length m; one work step short is timeout. All 69 reviewed terminal-packer declarations have empty axiom closure.",
       "requiredTheorems": [
         "PNP.Concrete.BitString.decodePair_pair",
         "PNP.Concrete.NatPolynomial.eval_mono",
@@ -188,10 +196,18 @@
         "PNP.Concrete.Tape.outputBits_moveRight_moveLeft",
         "PNP.Concrete.Tape.outputBits_ofInput",
         "PNP.Concrete.Tape.outputBits_right_append_blank",
+        "PNP.Concrete.TerminalOutputPacker.machineOutput_compileTerminalOutputPacker_eq",
+        "PNP.Concrete.TerminalOutputPacker.run_compileTerminalOutputPacker",
+        "PNP.Concrete.TerminalOutputPacker.run_compileTerminalOutputPacker_exact",
+        "PNP.Concrete.TerminalOutputPacker.terminalOutputPackerFinal_isHalted",
+        "PNP.Concrete.TerminalOutputPacker.terminalOutputPacker_one_step_short_timeout",
+        "PNP.Concrete.TerminalOutputPacker.terminalOutputPacker_output_eq",
+        "PNP.Concrete.TerminalOutputPacker.terminalOutputPacker_runtime_le",
+        "PNP.Concrete.TerminalOutputPacker.terminalOutputPacker_workRunExact",
         "PNP.Concrete.run_succ",
         "PNP.Concrete.run_zero"
       ],
-      "nonClaim": "The composed endpoint is still the internal two-track representation of Tape.handoffTarget. There is no terminal raw output packer or de-tagger, no ordinary machineOutput equality theorem, no complete FunctionProgram.RawRefinement or DecisionProgram.RawRefinement, and no external encoded-input-size polynomial. The cumulative bound depends on a supplied exact source-transition count and final output length, and the theorem does not prove target termination. It therefore does not close the concrete complexity machine-link blocker, establish CNF-SAT in P, prove NP-completeness, or prove P = NP. PNP.Main.p_eq_np remains absent and the publication gate remains false."
+      "nonClaim": "The terminal packer is a separate encoded-internal stage and has not been launched from the bridge endpoint or incorporated into the bridge rule table and cumulative trace. There is no complete FunctionProgram.RawRefinement or DecisionProgram.RawRefinement and no polynomial in external encoded input length. The bridge bound still depends on a supplied exact source-transition count and final output length, and no theorem proves target termination. The concrete complexity machine-link blocker therefore remains open; CNF-SAT in P, NP-completeness, and P = NP are not established. PNP.Main.p_eq_np remains absent and the publication gate remains false."
     },
     {
       "id": "concrete-complexity-classes",

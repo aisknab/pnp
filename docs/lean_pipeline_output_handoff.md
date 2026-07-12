@@ -59,9 +59,9 @@ cell in the compiled encoding, and that tag may be a raw blank. Consequently, or
 `machineOutput` does not in general read a multi-bit represented logical output contiguously. This
 module deliberately proves no equality between compiled `machineOutput` and `raw.outputBits`.
 
-The represented endpoint is suitable as an internal logical handoff target for a later state-safe
-pipeline construction. A separate terminal packer or de-tagger is still required before claiming
-ordinary raw-machine output semantics.
+The represented endpoint is suitable as an internal logical handoff target. The separate
+`TerminalOutputPacker` now proves ordinary raw-machine output semantics from that canonical
+represented layout, but no theorem in this module launches the endpoint into it.
 
 ## Exact boundary of the result
 
@@ -70,7 +70,8 @@ internal configuration. `PipelineStageBridges` now launches simulator accept and
 into two disjoint copies, preserves the target verdict, and compiles the cumulative supplied exact
 trace from ordinary canonical paired `startConfig`.
 
-The resulting endpoint is still the two-track represented `Tape.handoffTarget`. There is no
-ordinary raw `machineOutput` equality, terminal packer or de-tagger, external-input-size polynomial,
-complete `FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement`, `CNFSAT`-in-P result,
+The resulting endpoint is still the two-track represented `Tape.handoffTarget`. The separate
+terminal packer supplies raw `machineOutput` equality only from its encoded internal start; it is
+not composed here. There is no external-input-size polynomial, complete
+`FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement`, `CNFSAT`-in-P result,
 NP-completeness result, or `P = NP` consequence.

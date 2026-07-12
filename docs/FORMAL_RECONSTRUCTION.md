@@ -56,8 +56,10 @@ development also includes the executable internal handoff machine: from an alrea
 tape `raw`, it reaches an accepting representation of `raw.handoffTarget` in exactly
 `2 * raw.outputBits.length + 4` work steps and `12 * raw.outputBits.length + 24` compiled steps.
 The local handoff theorem begins at an encoded internal work configuration; the cumulative bridge
-theorem begins at ordinary paired `startConfig`. Its two-track encoded endpoint is not an ordinary
-raw-visible `machineOutput` layout; a separate terminal packer or de-tagger remains necessary.
+theorem begins at ordinary paired `startConfig`. Its two-track encoded endpoint is not itself an
+ordinary raw-visible `machineOutput` layout. A separate literal `TerminalOutputPacker` now proves
+exact blank-delimited raw output equality with a local `18*n^2 + 36*n + 6` bound and one-step-short
+timeout, but it has not yet been launched from the bridge endpoint or included in its cumulative trace.
 The development also provides one direct raw-machine instance: a universally
 correct polynomial-time verifier for canonically encoded finite CNF formulae and bounded assignment
 certificates, proving `PNP.Concrete.CNFSAT ∈ NP`. It does not provide a deterministic polynomial-time
@@ -86,9 +88,9 @@ work and compiled raw budgets. The state-namespace layer gives it, the simulator
 handoff pairwise-disjoint images in one lookup-isolated concatenated rule table and proves that the
 three established exact traces survive renaming. The stage-bridge layer connects supplied exact
 target runs into one verdict-preserving internal execution with explicit cumulative work and raw
-costs. The internal handoff still does not provide terminal raw output de-tagging. This remains a
-charged interpreter interface without a complete external-size compiler or refinement theorem to
-one raw machine. See
+costs. The separate terminal packer supplies raw output de-tagging from its encoded internal start,
+but no theorem composes it with the bridge. This remains a charged interpreter interface without a
+complete external-size compiler or refinement theorem to one raw machine. See
 [`lean_concrete_complexity.md`](./lean_concrete_complexity.md) and
 [`lean_pipeline_stage_bridges.md`](./lean_pipeline_stage_bridges.md).
 
@@ -141,10 +143,10 @@ available only from the pinned legacy source coordinate recorded under
 [`archive/legacy-v0/`](../archive/legacy-v0/README.md).
 
 The direct CNF verifier closes one formerly abstract obligation—concrete NP membership for
-`PNP.Concrete.CNFSAT`—and the bridge milestone closes exact internal stage launch for supplied
-target runs. They do not discharge the remaining publication blockers. In particular, terminal
-output de-tagging, ordinary `machineOutput` equality, complete composition refinement with an
-external-input-size polynomial bound, a
+`PNP.Concrete.CNFSAT`—the bridge milestone closes exact internal stage launch for supplied
+target runs, and the terminal-packer milestone closes stage-local raw output equality. They do not
+discharge the remaining publication blockers. In particular, the handoff-to-packer launch and
+four-stage composition, complete refinement with an external-input-size polynomial bound, a
 deterministic polynomial-time CNF-SAT decider,
 concrete NP-hardness/NP-completeness, locked-NAND threshold, residual-band minimizer, ZeroSlack,
 the remaining end-to-end polynomial bounds, and the root theorem/axiom audit remain incomplete.

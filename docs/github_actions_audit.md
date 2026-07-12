@@ -108,11 +108,12 @@ The pipeline-output-handoff audit covers a third literal finite machine. From an
 logical tape `raw`, it reaches an accepting representation of `raw.handoffTarget` after exactly
 `2 * raw.outputBits.length + 4` work steps and `12 * raw.outputBits.length + 24` compiled steps.
 CI requires the compiled theorem to start at an encoded internal work configuration and rejects an
-ordinary-`startConfig` or raw-visible-`machineOutput` claim. The handoff now has a disjoint renamed
+ordinary-`startConfig` or raw-visible-`machineOutput` claim for that module. The handoff now has a disjoint renamed
 state image and two verdict-indexed bridge copies. The cumulative theorem begins at ordinary paired
 `startConfig` and preserves accept/reject for supplied exact target runs, but supplies no target
-termination, external-input-size polynomial, terminal de-tagging, pipeline refinement, class
-equality, or `P = NP`.
+termination, external-input-size polynomial, pipeline refinement, class equality, or `P = NP`.
+The separate terminal-packer audit proves raw-visible output with a local quadratic bound, while
+requiring the complete bridge-to-packer composition and external-size result to remain false.
 
 The concrete-CNF checks do establish a narrower raw-machine result. They require complete axiom
 transcripts for the canonical CNF codec and semantics, paired work-input layout, generic direct

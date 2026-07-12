@@ -78,8 +78,9 @@ or broadened complexity claims.
 This namespace module itself supplies no bridge transition. The subsequent
 `PipelineStageBridges` module uses these disjoint images to prove the exact
 framer-to-simulator and simulator-to-verdict-indexed-handoff launches and one
-cumulative internal execution. No terminal raw-output packer removes the
-two-track tags, so there is still no complete `FunctionProgram.RawRefinement`
-or `DecisionProgram.RawRefinement`, external-input-size polynomial,
+cumulative internal execution. `TerminalOutputPacker` separately removes the
+two-track tags and proves ordinary raw output equality, but it is not yet a
+fourth launched stage in this namespace or bridge rule table. There is still
+no complete `FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement`, external-input-size polynomial,
 `CNFSAT ∈ P`, NP-completeness, or `P = NP`. The
 `Formal.ConcreteComplexityMachineLink` blocker remains active.

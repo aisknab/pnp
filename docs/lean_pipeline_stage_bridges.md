@@ -93,10 +93,10 @@ overclaims.
 
 ## Exact remaining boundary
 
-The handoff endpoint is still a two-track represented work tape. Ordinary raw
-`machineOutput` may stop at an interleaved tag blank, so a terminal packer or
-de-tagger is still required. This module does not prove output equality under
-ordinary raw observation, a `FunctionProgram.RawRefinement`, a
+The handoff endpoint of this module is still a two-track represented work
+tape. `TerminalOutputPacker` now separately proves ordinary raw output
+equality, but no bridge rule or cumulative theorem launches this endpoint into
+that packer. This module does not prove a `FunctionProgram.RawRefinement`, a
 `DecisionProgram.RawRefinement`, a polynomial in external encoded input
 length, `CNFSAT ∈ P`, CNFSAT NP-completeness, or `P = NP`.
 

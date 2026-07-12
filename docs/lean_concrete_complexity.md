@@ -16,7 +16,8 @@ compiled `run` with fuel `18 * F` reach its representation and encoding.
 lookup-isolated concatenated finite rule table, and preservation of all three existing exact
 stage-local traces. `lean/PNP/Concrete/PipelineStageBridges.lean` adds exact stage launches,
 verdict-indexed handoff copies, supplied-exact-run composition, and six-for-one compiled raw traces
-from canonical paired input; it still supplies no terminal raw output or external-size refinement.
+from canonical paired input. `TerminalOutputPacker` separately proves raw-visible output, but it
+has not been joined to that bridge trace and still supplies no external-size refinement.
 `lean/PNP/Concrete/PipelineRefinement.lean` pins exact raw-machine refinement
 contracts and proves the two machine-leaf cases. `lean/PNP/Concrete/Target.lean` names the
 corresponding inactive target proposition. The explicit declarations in all nine layers have empty
@@ -160,6 +161,7 @@ lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineOutputHandoffA
 lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineMachineSimulationAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineStateNamespaceAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineStageBridgesAxiomAudit.lean
+lake env lean -DwarningAsError=true lean-audit/PNPConcreteTerminalOutputPackerAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcreteComplexityAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcreteTargetAxiomAudit.lean
@@ -171,6 +173,7 @@ node --test audits/lean-concrete-pipeline-output-handoff0.test.mjs
 node --test audits/lean-concrete-pipeline-machine-simulation0.test.mjs
 node --test audits/lean-concrete-pipeline-state-namespace0.test.mjs
 node --test audits/lean-concrete-pipeline-stage-bridges0.test.mjs
+node --test audits/lean-concrete-terminal-output-packer0.test.mjs
 node --test audits/lean-concrete-pipeline-refinement0.test.mjs
 ```
 

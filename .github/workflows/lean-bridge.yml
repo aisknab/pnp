@@ -34,6 +34,7 @@ on:
       - 'audits/lean-concrete-pipeline-output-handoff0.test.mjs'
       - 'audits/lean-concrete-pipeline-state-namespace0.test.mjs'
       - 'audits/lean-concrete-pipeline-stage-bridges0.test.mjs'
+      - 'audits/lean-concrete-terminal-output-packer0.test.mjs'
       - 'audits/lean-concrete-pipeline-machine-simulation0.test.mjs'
       - 'audits/lean-concrete-complexity0.test.mjs'
       - 'audits/lean-concrete-pipeline-refinement0.test.mjs'
@@ -52,6 +53,7 @@ on:
       - 'docs/lean_pipeline_output_handoff.md'
       - 'docs/lean_pipeline_state_namespace.md'
       - 'docs/lean_pipeline_stage_bridges.md'
+      - 'docs/lean_terminal_output_packer.md'
       - 'docs/lean_pipeline_machine_simulation.md'
       - 'docs/lean_concrete_complexity.md'
       - 'docs/lean_nand_semantics.md'
@@ -102,6 +104,7 @@ on:
       - 'audits/lean-concrete-pipeline-output-handoff0.test.mjs'
       - 'audits/lean-concrete-pipeline-state-namespace0.test.mjs'
       - 'audits/lean-concrete-pipeline-stage-bridges0.test.mjs'
+      - 'audits/lean-concrete-terminal-output-packer0.test.mjs'
       - 'audits/lean-concrete-pipeline-machine-simulation0.test.mjs'
       - 'audits/lean-concrete-complexity0.test.mjs'
       - 'audits/lean-concrete-pipeline-refinement0.test.mjs'
@@ -120,6 +123,7 @@ on:
       - 'docs/lean_pipeline_output_handoff.md'
       - 'docs/lean_pipeline_state_namespace.md'
       - 'docs/lean_pipeline_stage_bridges.md'
+      - 'docs/lean_terminal_output_packer.md'
       - 'docs/lean_pipeline_machine_simulation.md'
       - 'docs/lean_concrete_complexity.md'
       - 'docs/lean_nand_semantics.md'
@@ -190,7 +194,7 @@ jobs:
           grep -F 'Lake version 5.0.0-src+68218e8 (Lean version 4.31.0)' /tmp/lake-version.txt
 
       - name: Audit explicit root and assumption inventory
-        run: node --test audits/lean-root-target0.test.mjs audits/lean-concrete-machine0.test.mjs audits/lean-concrete-tape-handoff0.test.mjs audits/lean-concrete-pipeline-tape-geometry0.test.mjs audits/lean-concrete-pipeline-input-framer0.test.mjs audits/lean-concrete-pipeline-output-handoff0.test.mjs audits/lean-concrete-pipeline-state-namespace0.test.mjs audits/lean-concrete-pipeline-stage-bridges0.test.mjs audits/lean-concrete-pipeline-machine-simulation0.test.mjs audits/lean-concrete-complexity0.test.mjs audits/lean-concrete-pipeline-refinement0.test.mjs audits/lean-concrete-cnf0.test.mjs audits/lean-nand-semantics0.test.mjs audits/lean-nand-enumerator0.test.mjs audits/lean-nand-reference-minimum0.test.mjs audits/lean-locked-nand-baseline0.test.mjs audits/lean-locked-nand-threshold-boundary0.test.mjs audits/lean-residual-routes0.test.mjs audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs
+        run: node --test audits/lean-root-target0.test.mjs audits/lean-concrete-machine0.test.mjs audits/lean-concrete-tape-handoff0.test.mjs audits/lean-concrete-pipeline-tape-geometry0.test.mjs audits/lean-concrete-pipeline-input-framer0.test.mjs audits/lean-concrete-pipeline-output-handoff0.test.mjs audits/lean-concrete-pipeline-state-namespace0.test.mjs audits/lean-concrete-pipeline-stage-bridges0.test.mjs audits/lean-concrete-terminal-output-packer0.test.mjs audits/lean-concrete-pipeline-machine-simulation0.test.mjs audits/lean-concrete-complexity0.test.mjs audits/lean-concrete-pipeline-refinement0.test.mjs audits/lean-concrete-cnf0.test.mjs audits/lean-nand-semantics0.test.mjs audits/lean-nand-enumerator0.test.mjs audits/lean-nand-reference-minimum0.test.mjs audits/lean-locked-nand-baseline0.test.mjs audits/lean-locked-nand-threshold-boundary0.test.mjs audits/lean-residual-routes0.test.mjs audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs
 
       - name: Build explicit PNP root
         run: lake build PNP
@@ -296,6 +300,16 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 56
+
+      - name: Print executable terminal raw-output packer axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteTerminalOutputPackerAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          if printf '%s\n' "$audit_output" | grep -F 'depends on axioms:'; then
+            echo 'Executable terminal raw-output packer unexpectedly depends on axioms.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 69
 
       - name: Print framed raw-machine simulation axioms
         run: |

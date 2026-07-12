@@ -213,8 +213,8 @@ test('framer milestone remains local and the concrete publication gate remains c
   assert.match(foundation.scope, /canonical paired input/u);
   assert.match(foundation.scope, /exact quadratic raw-input-length polynomial/u);
   assert.match(foundation.scope, /one-step framer-to-simulator launch/u);
-  assert.match(foundation.nonClaim, /does not prove target termination/u);
-  assert.match(foundation.nonClaim, /no external encoded-input-size polynomial/u);
+  assert.match(foundation.nonClaim, /no theorem proves target termination/u);
+  assert.match(foundation.nonClaim, /no polynomial in external encoded input length/u);
   assert.equal(map.gate.standardComplexityModelEligible, false);
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,

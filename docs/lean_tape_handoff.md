@@ -50,12 +50,12 @@ successful raw execution inside an already represented frame, with exactly `3 * 
 steps. It extracts an exact prefix `k ≤ F` from an ordinary `F`-fuel run and, only if its endpoint is
 designated halting, pads to work fuel `3 * F` and compiled fuel `18 * F`. Those are at-most fuel
 budgets, not successful-step counts or input-size bounds. This proves no termination result and
-does not treat a stuck nonhalting stop as a verdict. A future compiler still needs an executable
-stage composition, a `boundedDecide` halt/timeout/verdict bridge, terminal output de-tagging,
-second-stage launch, composition/precomposition `RawRefinement`, and the full input-size polynomial
-copy/simulation bound. `PipelineInputFramer.lean` now supplies the paired-input initial-framing step,
-and `PipelineOutputHandoff.lean` supplies an exact internal represented handoff to this pure target,
-but neither is connected to the simulator and the latter is not terminal raw output normalization.
+does not treat a stuck nonhalting stop as a verdict. `PipelineStageBridges.lean` now supplies the
+framer/simulator/handoff launches and bounded verdict classification for supplied exact target
+runs. `TerminalOutputPacker.lean` separately proves terminal raw output normalization. A future
+compiler still needs the explicit handoff-to-packer launch, one four-stage rule table and trace,
+composition/precomposition `RawRefinement`, target termination, and the full external-input-size
+polynomial copy/simulation/output bound.
 
 ## Audit
 
