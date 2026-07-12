@@ -16,7 +16,8 @@ from current theorem status.
   the focused axiom transcripts for the 41-declaration concrete bitstring/polynomial kernel, the
   38-declaration finite-rule machine kernel, the 14-declaration blank-delimited output/handoff
   boundary, the 20-declaration boundary-marked pipeline tape geometry, the executable canonical
-  paired-input framer, the framed raw-machine simulation surface, the 48-declaration finite
+  paired-input framer, the 39-declaration collision-free pipeline state namespace, the framed
+  raw-machine simulation surface, the 48-declaration finite
   charged-pipeline complexity interface, the
   six-declaration raw-pipeline refinement boundary, and the two-declaration inactive
   concrete target, the concrete CNF semantics/codec,
@@ -67,8 +68,10 @@ to one raw machine.
 The tape-handoff audit corrects the earlier list-boundary-sensitive output convention: explicit and
 implicit blanks now terminate output identically. Its `handoffTarget` is a pure canonical data target,
 not a machine, rule list, or paid copy algorithm. The separate pipeline-output-handoff module now
-implements one exact internal represented handoff to that target; state-safe composition and
-terminal raw output de-tagging remain unproved.
+implements one exact internal represented handoff to that target. The state-namespace audit now
+checks injective three-stage renaming, first-match preservation, lookup-isolated concatenation, and
+transport of all three exact stage-local traces; bridge transitions, complete execution, and terminal
+raw output de-tagging remain unproved.
 
 The pipeline-tape geometry audit proves a two-track representation with distinct data/left/right
 tags, arbitrary stale cells outside the first markers, and exact preservation under data writes,
@@ -92,8 +95,9 @@ The pipeline-input-framer audit covers a different literal finite machine. Its c
 starts at canonical `BitString.pair left right`, reaches an accepting represented frame with
 permitted exterior garbage, and pins exact work and quadratic compiled raw budgets. CI rejects any
 attempt to widen that theorem to arbitrary empty, odd, malformed, or unpaired input. It also keeps
-the missing boundary explicit: the framer's rules and accepting state are not composed with the
-lifted simulator, so it provides no simulated-stage termination, `boundedDecide` or output
+the missing boundary explicit: the framer's renamed rules now occur in a collision-free concatenated
+table, but no bridge rule connects its accepting state to the renamed lifted simulator, so it
+provides no simulated-stage termination, `boundedDecide` or output
 preservation beyond the framer's own local accept result, connection to the separate internal
 handoff, terminal raw output de-tagging, pipeline refinement,
 class equality, or `P = NP`.
@@ -102,8 +106,8 @@ The pipeline-output-handoff audit covers a third literal finite machine. From an
 logical tape `raw`, it reaches an accepting representation of `raw.handoffTarget` after exactly
 `2 * raw.outputBits.length + 4` work steps and `12 * raw.outputBits.length + 24` compiled steps.
 CI requires the compiled theorem to start at an encoded internal work configuration and rejects an
-ordinary-`startConfig` or raw-visible-`machineOutput` claim. The handoff is not connected to the
-simulator, has no state-renaming or composition theorem, gives no verdict/timeout bridge or external
+ordinary-`startConfig` or raw-visible-`machineOutput` claim. The handoff now has a disjoint renamed
+state image and lookup-isolated table position, but no simulator-halt bridge connects it; it gives no verdict/timeout bridge or external
 input-size polynomial, and does not supply terminal de-tagging, pipeline refinement, class equality,
 or `P = NP`.
 

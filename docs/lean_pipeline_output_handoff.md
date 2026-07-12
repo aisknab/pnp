@@ -69,7 +69,9 @@ The public compiled trace starts from `encodeWorkConfiguration` of an already re
 work configuration. It does not start from ordinary `startConfig`, frame an external input, or
 connect a simulator's accept or reject states to the handoff machine's start state.
 
-There is no state renaming, collision-free rule-list composition, simulator launch, verdict or
-timeout bridge, `boundedDecide` theorem, output-size theorem, `FunctionProgram.RawRefinement` or
+There is now injective handoff-stage renaming and collision-free lookup-isolated rule-list
+concatenation in `PipelineStateNamespace`, but there is no simulator-to-handoff bridge rule, stage
+launch, complete composed execution, verdict or timeout bridge, `boundedDecide` theorem, output-size theorem, `FunctionProgram.RawRefinement` or
 `DecisionProgram.RawRefinement`, end-to-end polynomial, `CNFSAT`-in-P result, NP-completeness result,
-or `P = NP` consequence. The separate paired-input framer and local simulator remain uncomposed.
+or `P = NP` consequence. The separate paired-input framer, local simulator, and handoff remain
+uncomposed as an execution.

@@ -2,6 +2,7 @@
 \ifdefined\pdfinfoomitdate\pdfinfoomitdate=1\fi
 \ifdefined\pdftrailerid\pdftrailerid{}\fi
 \ifdefined\pdfsuppressptexinfo\pdfsuppressptexinfo=15\fi
+\ifdefined\pdfminorversion\pdfminorversion=5\fi
 \documentclass[11pt,a4paper]{article}
 \usepackage[margin=0.86in]{geometry}
 \usepackage[T1]{fontenc}
@@ -17,7 +18,8 @@
   urlcolor=blue!45!black,
   pdftitle={PNP Formal Reconstruction Report},
   pdfsubject={Compiled Lean theorem inventory and current non-activation boundary},
-  pdfauthor={PNP Labs}
+  pdfauthor={PNP Labs},
+  pdfproducer={PNP deterministic report build}
 }
 \definecolor{statusred}{RGB}{130,29,42}
 \definecolor{statusblue}{RGB}{20,78,104}
@@ -44,7 +46,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-11-20}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-12-21}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -63,15 +65,15 @@
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 4758 \\
-Theorem-kind declarations & 1952 \\
-Assumption-free theorem-kind declarations & 1851 \\
+Compiled declarations & 4835 \\
+Theorem-kind declarations & 1986 \\
+Assumption-free theorem-kind declarations & 1885 \\
 Project-specific axioms & 4 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{8639466301d4648e41fba48676681e6f008b7a3696195b788c9737529fb7e691}\par}
+{\small Inventory SHA-256: \code{8d370c5f96ecd2665216ed7b2bbc7c21dc8f5d1c43ef6856fabf0eb2b28c0d94}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -185,7 +187,7 @@ remain absent.
 \section{Formal milestone ledger}
 
 Each earned row requires exact compiled names and theorem kinds, empty axiom closures, per-name
-domain-separated kernel-type SHA-256 matches for 74 detailed candidates, and the pinned whole-Lean
+domain-separated kernel-type SHA-256 matches for 84 detailed candidates, and the pinned whole-Lean
 source closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
 {\small
@@ -195,7 +197,7 @@ source closure. Human-readable scope remains conservative: type or source drift 
 Milestone & Status & Exact scope & Boundary \\
 \midrule
 \endhead
-Concrete machine and cost kernel & formalized-foundation-only & Literal canonical paired input reaches an accepting representation under an exact quadratic raw-input-length polynomial. Separately, each n-step raw run lifts to exactly 3 * n successful work steps; each F-fuel run has an exact prefix of length k at most F; if it is designated halting, work fuel 3 * F and compiled fuel 18 * F reach its representation. An internal represented output handoff separately reaches Tape.handoffTarget in exactly 2 * n + 4 successful work steps and 12 * n + 24 compiled steps for logical output length n. & The framer is paired-input-only and not composed with the lifted simulator. The internal handoff is also not composed with the lifted simulator and its compiled theorem starts from an encoded internal configuration, not ordinary startConfig; it supplies no raw-visible machineOutput or terminal de-tagging and no external input-size polynomial. Bounded padding assumes a represented start and designated-halting source endpoint; it proves no termination or stuck/timeout/verdict correspondence. n is a source-transition count and F a source-transition fuel bound, not input length: only 3 * n is an exact successful work count. No target-stage boundedDecide or machineOutput preservation, pipeline RawRefinement/composition, CNF-SAT in P, NP-completeness, or P = NP. \\
+Concrete machine and cost kernel & formalized-foundation-only & Literal canonical paired input reaches an accepting representation under an exact quadratic raw-input-length polynomial. Separately, each n-step raw run lifts to exactly 3 * n successful work steps; each F-fuel run has an exact prefix of length k at most F; if it is designated halting, work fuel 3 * F and compiled fuel 18 * F reach its representation. An internal represented output handoff separately reaches Tape.handoffTarget in exactly 2 * n + 4 successful work steps and 12 * n + 24 compiled steps for logical output length n. The module proves injective state renaming preserves ordered first-match lookup, halt status, one-step execution, exact and at-most runs, start configurations, and bounded verdicts. The framer, lifted simulator, and internal handoff occupy three disjoint stage images, and one literal concatenated finite rule table has proved first-match lookup isolation in all three images. The existing exact stage-local traces survive those renamings. & The framer remains paired-input-only and, despite collision-free table concatenation, is not composed with the lifted simulator into one execution: the concatenated table has no bridge rule that launches the simulator from the framer halt. The internal handoff compiled theorem starts from an encoded internal configuration, not ordinary startConfig, has no raw-visible machineOutput or terminal de-tagging, and is not composed with the lifted simulator into one execution; no simulator halt launches the handoff. Bounded padding assumes a represented start and a designated-halting source endpoint; it proves no termination or stuck/timeout/verdict correspondence. There is no complete composed WorkMachine execution, no target-stage boundedDecide or machineOutput preservation, no terminal raw output packer, no external input-size polynomial, and no pipeline RawRefinement/composition theorem or charged/raw class equivalence. Here n is a source-transition count and F a source-transition fuel bound, not input length: only 3 * n is an exact successful work count. This does not establish CNF-SAT in P, NP-completeness, or P = NP. \\
 Concrete P, NP, and polynomial reductions & formalized-with-machine-link-pending & Bitstring languages, finite charged decision/verifier/function pipelines grounded in concrete machines, polynomial certificate/runtime/output bounds, exact raw-machine refinement contracts and machine-leaf witnesses, many-one reductions, and the NP-complete-in-P implication. & The refinement contracts and leaf cases do not compile function composition or decision precomposition, construct raw paired verifiers, prove charged/raw class equivalence, discharge the general machine-link blocker, prove CNF-SAT is in P or NP-complete, or establish the publication root theorem. \\
 Concrete universal CNF-SAT verifier & formalized-np-membership-only & An unconditional formula-grammar outcome, universal bounded work outcome, exact accept/reject semantics, no-timeout theorem, literal finite-machine paired verifier, and CNF-SAT membership in NP. & This proves CNF-SAT membership in NP only; it does not prove CNF-SAT is in P, NP-completeness, or P = NP. \\
 Typed direct-wire NAND semantics & formalized & Typed topological Boolean NAND programs and ordered multi-output direct-wire semantics. & This does not establish circuit minimization, SAT, or P = NP. \\
@@ -213,8 +215,8 @@ Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-mac
 
 \section{Compiled inventory summary}
 
-The inventory contains 4758 exported \code{PNP.*} kernel declarations from
-42 modules. It excludes 737 private compiler auxiliaries.
+The inventory contains 4835 exported \code{PNP.*} kernel declarations from
+43 modules. It excludes 739 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -241,6 +243,7 @@ PNP.Concrete.PipelineInputFramer & 59 & 6 \\
 PNP.Concrete.PipelineMachineSimulation & 175 & 79 \\
 PNP.Concrete.PipelineOutputHandoff & 23 & 4 \\
 PNP.Concrete.PipelineRefinement & 46 & 15 \\
+PNP.Concrete.PipelineStateNamespace & 77 & 34 \\
 PNP.Concrete.PipelineTapeGeometry & 20 & 12 \\
 PNP.Concrete.TapeHandoff & 18 & 11 \\
 PNP.Concrete.Target & 2 & 1 \\
@@ -328,10 +331,10 @@ npm run report:check
 \end{verbatim}
 }
 
-The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-11-20}. Its exact byte digest is
-\code{8639466301d4648e41fba48676681e6f008b7a3696195b788c9737529fb7e691}. The report is regenerated from that inventory and the reviewed
+The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-12-21}. Its exact byte digest is
+\code{8d370c5f96ecd2665216ed7b2bbc7c21dc8f5d1c43ef6856fabf0eb2b28c0d94}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{f76bfda75e187238ce62f188a964fe7dffa3f8c472ceb4b491390236bb832909}; the computed and pinned values match. Successful regeneration
+\code{1237f6f5934d09a4f2a2b48b98f9f7306003f871f59f9a80d795c05bb24eb85e}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 

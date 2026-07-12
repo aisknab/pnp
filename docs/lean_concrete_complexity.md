@@ -5,14 +5,19 @@ witnesses, and polynomial many-one reductions without storing executable Lean fu
 code handles. `lean/PNP/Concrete/TapeHandoff.lean` supplies the observable first-blank output
 decoder and a pure canonical handoff target. `lean/PNP/Concrete/PipelineTapeGeometry.lean` supplies
 a two-track boundary frame with arbitrary exterior garbage and proved local move/expansion geometry.
-`lean/PNP/Concrete/PipelineMachineSimulation.lean` supplies ordered finite rules and lifts every
+`lean/PNP/Concrete/PipelineInputFramer.lean` supplies the exact canonical paired-input-to-frame
+trace, and `lean/PNP/Concrete/PipelineOutputHandoff.lean` supplies the exact represented-output
+re-framing trace. `lean/PNP/Concrete/PipelineMachineSimulation.lean` supplies ordered finite rules and lifts every
 supplied exact `n`-step successful raw execution from an already represented frame to exactly
 `3 * n` successful work steps. For an ordinary raw run with fuel `F`, it extracts an exact prefix
 of length `k ≤ F`; when the endpoint is designated halting, `workRun` with fuel `3 * F` and
 compiled `run` with fuel `18 * F` reach its representation and encoding.
+`lean/PNP/Concrete/PipelineStateNamespace.lean` supplies injective three-stage renaming, a
+lookup-isolated concatenated finite rule table, and preservation of all three existing exact
+stage-local traces; it supplies no bridge rules or complete run.
 `lean/PNP/Concrete/PipelineRefinement.lean` pins exact raw-machine refinement
 contracts and proves the two machine-leaf cases. `lean/PNP/Concrete/Target.lean` names the
-corresponding inactive target proposition. The explicit declarations in all six layers have empty
+corresponding inactive target proposition. The explicit declarations in all nine layers have empty
 compiled axiom closures.
 
 This is a finite charged-pipeline interface. Its leaves are concrete `Machine` values, but the
@@ -28,7 +33,9 @@ does not prove termination; the padded full fuels are at-most budgets, and a stu
 endpoint is not a verdict. Its theorem starts from
 `encodeWorkConfiguration`, not the
 canonical `Tape.ofInput` used by `machineOutput`; blank tag cells also require an executable
-de-tagging and handoff pass before another raw stage can consume the result.
+de-tagging and handoff pass before another raw stage can consume the result. The namespace layer
+removes state collisions and rule-lookup interference, but does not add the missing framer-to-
+simulator or simulator-to-handoff transitions.
 
 The refinement boundary is intentionally proof-bearing. A `FunctionProgram.RawRefinement` or
 `DecisionProgram.RawRefinement` supplies one raw machine, one natural-polynomial budget, a
@@ -146,14 +153,20 @@ axioms. Seven blockers remain, beginning with `Formal.ConcreteComplexityMachineL
 lake build PNP
 lake env lean -DwarningAsError=true lean-audit/PNPConcreteTapeHandoffAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineTapeGeometryAxiomAudit.lean
+lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineInputFramerAxiomAudit.lean
+lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineOutputHandoffAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineMachineSimulationAxiomAudit.lean
+lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineStateNamespaceAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcreteComplexityAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcreteTargetAxiomAudit.lean
 node --test audits/lean-concrete-complexity0.test.mjs
 node --test audits/lean-concrete-tape-handoff0.test.mjs
 node --test audits/lean-concrete-pipeline-tape-geometry0.test.mjs
+node --test audits/lean-concrete-pipeline-input-framer0.test.mjs
+node --test audits/lean-concrete-pipeline-output-handoff0.test.mjs
 node --test audits/lean-concrete-pipeline-machine-simulation0.test.mjs
+node --test audits/lean-concrete-pipeline-state-namespace0.test.mjs
 node --test audits/lean-concrete-pipeline-refinement0.test.mjs
 ```
 
@@ -173,7 +186,8 @@ to be designated halting; work fuel `3 * F` and compiled fuel `18 * F` are at-mo
 successful-step counts. This proves no
 termination result, does not classify a stuck nonhalting stop as a verdict, and gives no input-size
 bound. Separate literal machines now supply paired-input framing and an exact internal represented
-handoff, but are not connected to the simulator. This milestone supplies no `boundedDecide`, verdict
+handoff. Their state images and rule lists are collision-free and lookup-isolated in one concatenated
+table, but no bridge rule connects them to the simulator as one execution. This milestone supplies no `boundedDecide`, verdict
 or output-preservation theorem, terminal raw output de-tagging, composition/precomposition
 `RawRefinement`, or input-size polynomial end-to-end bound. This milestone also
 does not formalize concrete SAT or SAT NP-hardness, instantiate
