@@ -122,17 +122,17 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   ]) assert.equal(byId.get(id).status, 'not-formalized');
 });
 
-test('publication consumes the reviewed internal output-handoff map and inventory counts', async () => {
+test('publication consumes the reviewed pipeline state-namespace map and inventory counts', async () => {
   const [status, mapText] = await Promise.all([
     status0(),
     readFile(new URL('../publication/FORMAL_PUBLICATION_MAP.json', import.meta.url), 'utf8'),
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'a2efa232d7ba0c00d34ea84d42740c133e12f9872b51cdabf11eac74889ca68b');
+    '443509a463c219845b2bec6c03dff9c42f60eea8c7a532ed17ad15d21a14060d');
   assert.equal(map.milestoneSourceClosureSha256,
-    'f76bfda75e187238ce62f188a964fe7dffa3f8c472ceb4b491390236bb832909');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 74);
+    '1237f6f5934d09a4f2a2b48b98f9f7306003f871f59f9a80d795c05bb24eb85e');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 84);
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,
     map.gate.expectedConcreteTargetKernelValueSha256,
@@ -146,7 +146,7 @@ test('publication consumes the reviewed internal output-handoff map and inventor
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [4758, 1952, 1851, 737, 42]);
+  ], [4835, 1986, 1885, 739, 43]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

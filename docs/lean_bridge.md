@@ -84,6 +84,7 @@ lean-audit/PNPConcreteTapeHandoffAxiomAudit.lean
 lean-audit/PNPConcretePipelineTapeGeometryAxiomAudit.lean
 lean-audit/PNPConcretePipelineInputFramerAxiomAudit.lean
 lean-audit/PNPConcretePipelineOutputHandoffAxiomAudit.lean
+lean-audit/PNPConcretePipelineStateNamespaceAxiomAudit.lean
 lean-audit/PNPConcretePipelineMachineSimulationAxiomAudit.lean
 lean-audit/PNPConcreteComplexityAxiomAudit.lean
 lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean
@@ -110,6 +111,7 @@ docs/lean_tape_handoff.md
 docs/lean_pipeline_tape_geometry.md
 docs/lean_pipeline_input_framer.md
 docs/lean_pipeline_output_handoff.md
+docs/lean_pipeline_state_namespace.md
 docs/lean_pipeline_machine_simulation.md
 docs/lean_concrete_complexity.md
 docs/lean_nand_enumerator.md
@@ -152,22 +154,26 @@ axiom-free: they define distinct two-track data and boundary tags, an arbitrary-
 frame, and pure write/move/boundary-expansion geometry. They define no rules, machine, simulation,
 or runtime bound. `lean/PNP/Concrete/PipelineInputFramer.lean` supplies a separate literal finite
 machine from canonical paired input to an accepting represented frame under exact work and compiled
-raw budgets. It is paired-input-only and is not composed with the simulator.
+raw budgets. It is paired-input-only and is not composed with the simulator into one execution; the separate namespace layer only renames and concatenates the tables without a launch bridge.
 `lean/PNP/Concrete/PipelineOutputHandoff.lean` supplies another literal finite machine from an
 already represented logical tape to an accepting representation of its blank-delimited handoff
 target. Its exact costs are `2 * n + 4` work steps and `12 * n + 24` compiled steps for logical
 output length `n`. Its compiled trace starts from an encoded internal configuration, not ordinary
 `startConfig`, and its represented two-track encoding is not a terminal raw `machineOutput` layout.
-`lean/PNP/Concrete/PipelineMachineSimulation.lean` supplies the separate finite
-rule lift: it preserves ordered first-match selection and lifts every supplied exact `n`-step chain
+`lean/PNP/Concrete/PipelineStateNamespace.lean` injectively renames the framer, simulator, and
+handoff into pairwise-disjoint state images, proves first-match lookup isolation in their literal
+concatenated rule table, and transports all three existing exact stage-local traces. It supplies no
+bridge transition or global execution. `lean/PNP/Concrete/PipelineMachineSimulation.lean` supplies
+the separate finite rule lift: it preserves ordered first-match selection and lifts every supplied exact `n`-step chain
 of successful raw transitions from an already represented configuration to exactly `3 * n`
 successful work steps. An ordinary `F`-fuel raw run also yields an exact prefix of length `k ≤ F`
 to its endpoint. Conditional on that endpoint being designated halting, `workRun` at fuel
 `3 * F` and compiled `run` at fuel `18 * F` reach its representation and encoding. This proves no
 termination result: those full fuels are at-most budgets rather than successful-step counts or
 input-size bounds, and a stuck nonhalting stop is not a verdict. The layer does not create the
-frame, prove `boundedDecide` or output preservation, connect to the separate internal handoff,
-perform terminal de-tagging, or construct composition/precomposition pipeline refinement. The two declarations in
+frame inside its own theorem, prove `boundedDecide` or output preservation, launch from the
+renamed framer stage, launch the separate renamed internal handoff, perform terminal de-tagging, or
+construct composition/precomposition pipeline refinement. The two declarations in
 `lean/PNP/Concrete/Target.lean` are also axiom-free: `PNP.Main.ConcretePEqualsNP` is an inactive
 definition naming mutual inclusion, and `PNP.Main.concretePEqualsNP_iff` pins its expansion. This
 does not prove the target. The six explicit declarations in
@@ -612,6 +618,9 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 19. Canonical concrete CNF and bounded-assignment semantics, including Boolean-checker correctness.
 20. Universal accept/reject/no-timeout correctness and an explicit polynomial bound for a finite
     raw machine on every paired CNF input/certificate, yielding `CNFSAT ∈ NP`.
+21. Injective work-machine state renaming, three disjoint stage images, lookup-isolated finite
+    rule-table concatenation, and exact stage-local trace transport for the framer, simulator, and
+    internal handoff.
 ```
 
 ## Explicit trust base after this pass
@@ -625,7 +634,8 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
    NP-hardness/NP-completeness; the current direct verifier proves only `CNFSAT ∈ NP`.
 6. A compiler/refinement proving that every finite charged function, decision, and verifier
    pipeline is implemented with the stated input-size costs by the selected raw machine model. The
-   local exact-successful-run simulator does not yet provide this end-to-end result.
+   local exact-successful-run simulator and collision-free table namespace do not yet provide this
+   end-to-end result because no stage-launch or terminal-output bridge has been proved.
 ```
 
 ## Next formalization targets
@@ -638,8 +648,9 @@ The highest-value next targets are:
 3. Prove first-output preservation, `TraceEquivalence`, and the two derived final-output laws.
 4. Instantiate the conditional boundary uniformly and prove the report threshold theorem.
 5. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
-6. Compose the paired-input framer, exact-successful-run simulator, and internal output handoff
-   using disjoint control states and proved stage launches; then add `boundedDecide`
+6. Add explicit bridge rules and proved stage launches to the now-disjoint paired-input framer,
+   exact-successful-run simulator, and internal output handoff; then prove one complete execution
+   and add `boundedDecide`
    halt/timeout/verdict semantics, terminal output de-tagging, and the full pipeline refinement with
    input-size polynomial runtime/output bounds.
 7. Formalize or import concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as

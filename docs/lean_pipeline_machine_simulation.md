@@ -53,9 +53,11 @@ Because both interpreters leave a designated halt unchanged, `workRun` with fuel
 transitions succeed.
 
 `PipelineInputFramer` now supplies a separate executable trace from literal canonical paired input
-to a represented frame. That result does not alter this module's premise: no theorem composes the
-framer's finite rule list or accepting state with `liftMachine`, so every simulation theorem here
-still begins from an explicitly supplied represented configuration.
+to a represented frame. `PipelineStateNamespace` now injectively renames and concatenates the
+framer, simulator, and handoff rule tables, proves lookup isolation, and transports this module's
+exact traces into the simulation-stage image. That result does not alter this module's premise: no
+bridge theorem launches `liftMachine` from the renamed framer accept state, so every simulation
+theorem here still begins from an explicitly supplied represented configuration.
 
 ## Selection and halting discipline
 
@@ -95,7 +97,8 @@ This is a local configuration simulation from an already represented frame. The 
 `18 * F` compiled fuel are at-most budgets measured in source transitions, not input length. The
 padding conclusions assume that the supplied `F`-fuel endpoint is designated halting. They do not
 prove termination or classify a stuck nonhalting stop as a verdict. This module does not construct a
-frame from `Tape.ofInput`; the separate paired-input framer is not composed with it. It does not
+frame from `Tape.ofInput`; the separate paired-input framer is not composed with it into one
+execution even though both now have disjoint images in a concatenated rule table. It does not
 prove `boundedDecide`, accept/reject/timeout or `machineOutput`
 preservation, decode the interleaved work encoding, connect to the separate internal handoff,
 de-tag terminal raw output, reset and launch a second stage, construct a `FunctionProgram.RawRefinement` or
