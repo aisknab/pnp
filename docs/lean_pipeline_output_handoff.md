@@ -65,13 +65,12 @@ ordinary raw-machine output semantics.
 
 ## Exact boundary of the result
 
-The public compiled trace starts from `encodeWorkConfiguration` of an already represented internal
-work configuration. It does not start from ordinary `startConfig`, frame an external input, or
-connect a simulator's accept or reject states to the handoff machine's start state.
+This module's local compiled trace starts from `encodeWorkConfiguration` of an already represented
+internal configuration. `PipelineStageBridges` now launches simulator accept and reject sentinels
+into two disjoint copies, preserves the target verdict, and compiles the cumulative supplied exact
+trace from ordinary canonical paired `startConfig`.
 
-There is now injective handoff-stage renaming and collision-free lookup-isolated rule-list
-concatenation in `PipelineStateNamespace`, but there is no simulator-to-handoff bridge rule, stage
-launch, complete composed execution, verdict or timeout bridge, `boundedDecide` theorem, output-size theorem, `FunctionProgram.RawRefinement` or
-`DecisionProgram.RawRefinement`, end-to-end polynomial, `CNFSAT`-in-P result, NP-completeness result,
-or `P = NP` consequence. The separate paired-input framer, local simulator, and handoff remain
-uncomposed as an execution.
+The resulting endpoint is still the two-track represented `Tape.handoffTarget`. There is no
+ordinary raw `machineOutput` equality, terminal packer or de-tagger, external-input-size polynomial,
+complete `FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement`, `CNFSAT`-in-P result,
+NP-completeness result, or `P = NP` consequence.

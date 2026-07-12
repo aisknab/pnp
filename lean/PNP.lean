@@ -15,6 +15,7 @@ import PNP.Concrete.PipelineMachineSimulation
 import PNP.Concrete.PipelineInputFramer
 import PNP.Concrete.PipelineOutputHandoff
 import PNP.Concrete.PipelineStateNamespace
+import PNP.Concrete.PipelineStageBridges
 import PNP.Concrete.Complexity
 import PNP.Concrete.PipelineRefinement
 import PNP.Concrete.Target

@@ -18,9 +18,9 @@ const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const TEMPLATE_PATH = 'publication/canonical_proof_report.template.tex';
 const REPORT_TEX_PATH = 'canonical_proof_report.tex';
-const STATUS_COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-12-21';
-const PUBLIC_SURFACE_COORDINATE = 'PUBLIC-SURFACE-BASELINE-2026-07-12-PIPELINE-STATE-NAMESPACE-21';
-const REPORT_COORDINATE = 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-12-21';
+const STATUS_COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-12-22';
+const PUBLIC_SURFACE_COORDINATE = 'PUBLIC-SURFACE-BASELINE-2026-07-12-PIPELINE-STAGE-BRIDGES-22';
+const REPORT_COORDINATE = 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-12-22';
 
 const NEW_NON_CLAIMS = Object.freeze([
   'The compiled Lean theorem inventory is declaration and axiom-dependency evidence; it does not widen any theorem beyond its exact type and stated scope.',
@@ -55,7 +55,7 @@ export async function BuildFormalPublication0(root) {
     inventoryBytes,
     sourceClosureSha256,
   );
-  if (publication.gate.passed !== false) throw new Error('Release-21 publication gate must remain intentionally fail-closed');
+  if (publication.gate.passed !== false) throw new Error('Release-22 publication gate must remain intentionally fail-closed');
   const mapSha256 = sha256Bytes0(mapBytes);
   const rootCandidate = inventory.compatibilityRootCandidate;
   const status = {

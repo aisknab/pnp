@@ -45,20 +45,18 @@ exact quadratic raw-input-length budget. Its public theorem is restricted to pai
 permits blanked source cells as exterior garbage. An additional axiom-free namespace layer now
 injectively retags the framer, lifted simulator, and handoff into pairwise-disjoint state images,
 proves first-match lookup isolation for one concatenated finite rule table, and transports each
-existing exact stage-local trace. The framer and simulator are still not composed into one
-execution: no bridge rule retags the renamed framer accept state as the renamed simulator start, and
-no simulated-stage launch theorem exists. The development does not prove simulated-stage
-`boundedDecide` or target
-output preservation, connect terminal simulator states to another machine, de-tag terminal raw
-output, or construct composition/precomposition refinement. The local
-framer `boundedDecide` theorem records only acceptance of the framer's own endpoint; there is no
-simulated-stage `boundedDecide` or target verdict/output correspondence. It
-also includes a separate executable internal handoff machine: from an already represented logical
+existing exact stage-local trace. A bridge-first finite work machine now adds one exact
+symbol-preserving framer-to-simulator launch and separate accept/reject launches into two disjoint
+verdict-indexed handoff copies. For every supplied exact target run it composes the three stages,
+preserves bounded accept/reject classification, leaves a supplied stuck nonhalting endpoint as
+timeout at the exact prefix budget, and compiles from ordinary canonical paired raw input at exactly
+six times the cumulative work cost. It does not prove target termination or turn the supplied
+source-transition count and final output length into an external-input-size polynomial. The
+development also includes the executable internal handoff machine: from an already represented logical
 tape `raw`, it reaches an accepting representation of `raw.handoffTarget` in exactly
 `2 * raw.outputBits.length + 4` work steps and `12 * raw.outputBits.length + 24` compiled steps.
-The compiled trace begins at an encoded internal work configuration, not ordinary `startConfig`.
-Its rules now occupy a collision-free handoff image in the concatenated table, but no bridge rule
-connects a renamed simulator halt to that image. Its two-track encoded endpoint is not an ordinary
+The local handoff theorem begins at an encoded internal work configuration; the cumulative bridge
+theorem begins at ordinary paired `startConfig`. Its two-track encoded endpoint is not an ordinary
 raw-visible `machineOutput` layout; a separate terminal packer or de-tagger remains necessary.
 The development also provides one direct raw-machine instance: a universally
 correct polynomial-time verifier for canonically encoded finite CNF formulae and bounded assignment
@@ -86,12 +84,13 @@ extraction, and the conditional designated-halting padding described above.
 The separate paired-input framer supplies an executable canonical-input-to-frame trace with exact
 work and compiled raw budgets. The state-namespace layer gives it, the simulator, and the internal
 handoff pairwise-disjoint images in one lookup-isolated concatenated rule table and proves that the
-three established exact traces survive renaming. No bridge transition connects those traces into one
-execution. The internal handoff also does not provide terminal raw output de-tagging. This is still
-a charged interpreter interface without a complete compiler or refinement theorem to
+three established exact traces survive renaming. The stage-bridge layer connects supplied exact
+target runs into one verdict-preserving internal execution with explicit cumulative work and raw
+costs. The internal handoff still does not provide terminal raw output de-tagging. This remains a
+charged interpreter interface without a complete external-size compiler or refinement theorem to
 one raw machine. See
 [`lean_concrete_complexity.md`](./lean_concrete_complexity.md) and
-[`lean_pipeline_state_namespace.md`](./lean_pipeline_state_namespace.md).
+[`lean_pipeline_stage_bridges.md`](./lean_pipeline_stage_bridges.md).
 
 The concrete CNF layer separately defines canonical formula and assignment codecs, propositional
 CNF semantics, a Boolean certificate checker, a finite work machine, and its compiled raw machine.
@@ -142,11 +141,10 @@ available only from the pinned legacy source coordinate recorded under
 [`archive/legacy-v0/`](../archive/legacy-v0/README.md).
 
 The direct CNF verifier closes one formerly abstract obligation—concrete NP membership for
-`PNP.Concrete.CNFSAT`—but it does not discharge the remaining publication blockers. In particular,
-bridge transitions and an executable run from the renamed paired-input framer into the renamed
-lifted simulator, a simulated-target `boundedDecide` halt/timeout/verdict bridge, state-safe launch
-of the renamed internal handoff, terminal output de-tagging, composition refinement with an
-input-size polynomial bound, a
+`PNP.Concrete.CNFSAT`—and the bridge milestone closes exact internal stage launch for supplied
+target runs. They do not discharge the remaining publication blockers. In particular, terminal
+output de-tagging, ordinary `machineOutput` equality, complete composition refinement with an
+external-input-size polynomial bound, a
 deterministic polynomial-time CNF-SAT decider,
 concrete NP-hardness/NP-completeness, locked-NAND threshold, residual-band minimizer, ZeroSlack,
 the remaining end-to-end polynomial bounds, and the root theorem/axiom audit remain incomplete.

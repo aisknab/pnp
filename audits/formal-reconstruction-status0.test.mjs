@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-12-21');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-12-22');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -55,7 +55,14 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanConcretePipelineStateNamespaceAxiomAuditPassed, true);
   assert.equal(out.leanConcretePipelineStateNamespaceAuditedDeclarationCount, 39);
   assert.equal(out.leanConcretePipelineRuleTableCompositionFormalized, true);
-  assert.equal(out.leanConcretePipelineStageLaunchFormalized, false);
+  assert.equal(out.leanConcretePipelineStageBridgesFormalized, true);
+  assert.equal(out.leanConcretePipelineStageBridgesAxiomAuditPassed, true);
+  assert.equal(out.leanConcretePipelineStageBridgesAuditedDeclarationCount, 56);
+  assert.equal(out.leanConcretePipelineStageLaunchFormalized, true);
+  assert.equal(out.leanConcretePipelineVerdictPreservationFormalized, true);
+  assert.equal(out.leanConcretePipelineInternalOutputHandoffComposed, true);
+  assert.equal(out.leanConcretePipelineTerminalOutputPackingFormalized, false);
+  assert.equal(out.leanConcretePipelineRawRefinementFormalized, false);
   assert.equal(out.leanNANDDirectWireCoreFormalized, true);
   assert.equal(out.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(out.leanNANDEnumeratorFormalized, true);
@@ -145,15 +152,15 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.match(out.siteStatusSha256, /^[0-9a-f]{64}$/u);
 });
 
-test('formal reconstruction status pins the pipeline state-namespace inventory and source closure', async () => {
+test('formal reconstruction status pins the pipeline stage-bridge inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 4835);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 1986);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 1885);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 739);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 43);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 4912);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 2045);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 1944);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 749);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 44);
   assert.equal(status.leanSourceClosureSha256,
-    '1237f6f5934d09a4f2a2b48b98f9f7306003f871f59f9a80d795c05bb24eb85e');
+    '584778c158d1d6d3f2b89e8b53390f248d2311cefde7bd98c2a3d508ca1a03a9');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -175,18 +182,27 @@ test('formal reconstruction status pins the pipeline state-namespace inventory a
     'PNP.Concrete.PipelineMachineSimulation.workRun_three_mul_of_run_halted'), true);
   assert.equal(machine.requiredTheorems.includes(
     'PNP.Concrete.PipelineMachineSimulation.run_compileWorkMachine_eighteen_mul_of_run_halted'), true);
-  assert.match(machine.scope, /exactly 3 \* n successful work steps/u);
-  assert.match(machine.scope, /exact prefix of length k at most F/u);
-  assert.match(machine.scope, /if it is designated halting/u);
-  assert.match(machine.scope, /work fuel 3 \* F/u);
-  assert.match(machine.scope, /compiled fuel 18 \* F/u);
-  assert.doesNotMatch(machine.scope, /exactly 18 \* n/u);
-  assert.match(machine.nonClaim, /designated-halting source endpoint/u);
-  assert.match(machine.nonClaim, /proves no termination or stuck\/timeout\/verdict correspondence/u);
-  assert.match(machine.nonClaim, /only 3 \* n is an exact successful work count/u);
-  assert.match(machine.nonClaim, /F a source-transition fuel bound, not input length/u);
-  assert.match(machine.nonClaim, /boundedDecide or machineOutput preservation/u);
-  assert.match(machine.nonClaim, /pipeline RawRefinement\/composition/u);
+  for (const name of [
+    'PNP.Concrete.PipelineStageBridges.inputLaunch_workStep',
+    'PNP.Concrete.PipelineStageBridges.acceptingLaunch_workStep',
+    'PNP.Concrete.PipelineStageBridges.rejectingLaunch_workStep',
+    'PNP.Concrete.PipelineStageBridges.bridgedWorkSteps_eq',
+    'PNP.Concrete.PipelineStageBridges.workBoundedDecide_bridged_accept_of_rawRunExact',
+    'PNP.Concrete.PipelineStageBridges.workBoundedDecide_bridged_reject_of_rawRunExact',
+    'PNP.Concrete.PipelineStageBridges.workBoundedDecide_bridged_timeout_of_stuck_rawRunExact',
+    'PNP.Concrete.PipelineStageBridges.run_compileBridgedMachine_accept_of_rawRunExact',
+    'PNP.Concrete.PipelineStageBridges.run_compileBridgedMachine_reject_of_rawRunExact',
+  ]) assert.equal(machine.requiredTheorems.includes(name), true, name);
+  assert.match(machine.scope, /supplied exact n-step raw target run/u);
+  assert.match(machine.scope, /symbol-preserving one-step framer-to-simulator launch/u);
+  assert.match(machine.scope, /verdict-indexed handoff copies/u);
+  assert.match(machine.scope, /inputFramerWorkSteps \+ 1 \+ 3 \* n \+ 1/u);
+  assert.match(machine.scope, /six times that sum/u);
+  assert.match(machine.nonClaim, /does not prove target termination/u);
+  assert.match(machine.nonClaim, /no terminal raw output packer/u);
+  assert.match(machine.nonClaim, /machineOutput equality theorem/u);
+  assert.match(machine.nonClaim, /no external encoded-input-size polynomial/u);
+  assert.match(machine.nonClaim, /no complete FunctionProgram.RawRefinement/u);
   assert.match(machine.nonClaim, /P = NP/u);
   const cnf = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-cnf-universal-verifier',
@@ -199,6 +215,7 @@ test('formal reconstruction status pins the pipeline state-namespace inventory a
     'node --test audits/lean-concrete-pipeline-input-framer0.test.mjs',
     'node --test audits/lean-concrete-pipeline-output-handoff0.test.mjs',
     'node --test audits/lean-concrete-pipeline-state-namespace0.test.mjs',
+    'node --test audits/lean-concrete-pipeline-stage-bridges0.test.mjs',
     'node --test audits/lean-concrete-pipeline-machine-simulation0.test.mjs',
     'node --test audits/lean-concrete-pipeline-tape-geometry0.test.mjs',
     'node --test audits/lean-concrete-tape-handoff0.test.mjs',
@@ -206,6 +223,7 @@ test('formal reconstruction status pins the pipeline state-namespace inventory a
     'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineInputFramerAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineOutputHandoffAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineStateNamespaceAxiomAudit.lean',
+    'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineStageBridgesAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineMachineSimulationAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineTapeGeometryAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcreteTapeHandoffAxiomAudit.lean',
@@ -225,19 +243,19 @@ test('formal reconstruction status pins the pipeline state-namespace inventory a
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'PipelineOutputHandoff is one literal finite machine for an already represented internal tape')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
-    'It does not start from ordinary startConfig; provide raw-visible machineOutput or terminal de-tagging')), true);
+    'The endpoint remains an internal two-track representation')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
-    'injective simulation-stage renaming and lookup-isolated position')), true);
+    'A stuck nonhalting exact endpoint is timeout')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
-    'PipelineStateNamespace proves injective state renaming preserves ordered first-match lookup')), true);
+    'PipelineStateNamespace itself remains the injective renaming and lookup-isolation prerequisite')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
-    'no bridge transitions, no global composed WorkMachine execution')), true);
+    'PipelineStageBridges proves exact framer-to-simulator and accept/reject-to-handoff launches')), true);
 });
 
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-12-PIPELINE-STATE-NAMESPACE-21');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-12-PIPELINE-STAGE-BRIDGES-22');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);

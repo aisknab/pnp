@@ -75,11 +75,11 @@ or broadened complexity claims.
 
 ## Exact nonclaim
 
-There is not yet a bridge transition from the framer's renamed accept state
-to the simulator's renamed start state.  Simulator accept/reject states are
-not connected to the represented-output handoff, and no terminal raw-output
-packer removes the two-track tags.  The module therefore does not construct a
-complete `WorkMachine`, a `FunctionProgram.RawRefinement`, or a
-`DecisionProgram.RawRefinement`; it supplies no external-input-size
-polynomial, no `CNFSAT ∈ P` result, no NP-completeness result, and no `P = NP`
-consequence.  `Formal.ConcreteComplexityMachineLink` remains active.
+This namespace module itself supplies no bridge transition. The subsequent
+`PipelineStageBridges` module uses these disjoint images to prove the exact
+framer-to-simulator and simulator-to-verdict-indexed-handoff launches and one
+cumulative internal execution. No terminal raw-output packer removes the
+two-track tags, so there is still no complete `FunctionProgram.RawRefinement`
+or `DecisionProgram.RawRefinement`, external-input-size polynomial,
+`CNFSAT ∈ P`, NP-completeness, or `P = NP`. The
+`Formal.ConcreteComplexityMachineLink` blocker remains active.

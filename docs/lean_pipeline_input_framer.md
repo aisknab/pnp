@@ -66,14 +66,10 @@ This is a paired-input framer only. Every input in its public theorem has the fo
 `BitString.pair left right`, whose raw length is positive and even. There is no theorem for an
 arbitrary empty, odd, malformed, or otherwise unpaired raw bitstring.
 
-The accepting framer is still not composed with `PipelineMachineSimulation.liftMachine` into one
-execution. `PipelineStateNamespace` now injectively renames the three stage state spaces, places
-their finite rule lists into one lookup-isolated concatenation, and transports this exact framer
-trace. It does not add the bridge rule that changes the renamed framer accept state into the renamed
-simulator start state, launch the simulator, or establish a
-`FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement`, or derive an end-to-end input
-size bound. Its local `boundedDecide` theorem says only that the framer accepts at its proved
-budget. It does not prove target-machine termination, simulated-stage `boundedDecide`
-correspondence, target accept/reject/timeout preservation, output decoding, connection to the
-separate internal represented-output handoff, terminal raw output de-tagging,
-`CNFSAT ∈ P`, NP-completeness, or `P = NP`.
+This module's local theorem ends at the accepting frame. `PipelineStateNamespace` injectively
+renames the stage spaces, and `PipelineStageBridges.inputLaunch_workStep` now changes that endpoint
+to the renamed lifted-machine start in one exact symbol-preserving step. The cumulative bridge
+theorems preserve accept/reject for supplied exact target runs. They still do not make this a
+framer for arbitrary malformed input, prove target-machine termination, pack terminal raw output,
+derive an external-input-size polynomial, establish a `FunctionProgram.RawRefinement` or
+`DecisionProgram.RawRefinement`, prove `CNFSAT ∈ P` or NP-completeness, or prove `P = NP`.

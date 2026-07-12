@@ -182,8 +182,13 @@ test('internal handoff milestone remains local and the publication gate remains 
   assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), true);
   assert.equal(status.projectSpecificAxiomInventory.length, 4);
   assert.equal(status.rootLeanTheoremPresent, false);
-  assert.equal(status.nonClaims.some((entry) => entry.includes(
-    'PipelineOutputHandoff is one literal finite machine for an already represented internal tape')), true);
+  const handoffNonClaim = status.nonClaims.find((entry) => entry.includes(
+    'PipelineOutputHandoff is one literal finite machine for an already represented internal tape'));
+  assert.equal(typeof handoffNonClaim, 'string');
+  assert.match(handoffNonClaim, /exactly 2 \* n \+ 4 work steps/u);
+  assert.match(handoffNonClaim, /12 \* n \+ 24 compiled steps/u);
+  assert.match(handoffNonClaim, /two disjoint verdict-indexed copies/u);
+  assert.match(handoffNonClaim, /endpoint remains an internal two-track representation/u);
   const foundation = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -193,13 +198,12 @@ test('internal handoff milestone remains local and the publication gate remains 
     `${PREFIX}framedOutputHandoffRawTimeBound_exact`,
     `${PREFIX}run_compileFramedOutputHandoff_of_represents`,
   ]) assert.equal(foundation.requiredTheorems.includes(name), true, name);
-  assert.match(foundation.scope, /internal represented output handoff/u);
-  assert.match(foundation.scope, /exactly 2 \* n \+ 4 successful work steps/u);
-  assert.match(foundation.scope, /12 \* n \+ 24 compiled steps/u);
-  assert.match(foundation.nonClaim, /encoded internal configuration, not ordinary startConfig/u);
-  assert.match(foundation.nonClaim, /no raw-visible machineOutput or terminal de-tagging/u);
-  assert.match(foundation.nonClaim, /not composed with the lifted simulator/u);
-  assert.match(foundation.nonClaim, /no external input-size polynomial/u);
+  assert.match(foundation.scope, /accept\/reject-to-handoff launch/u);
+  assert.match(foundation.scope, /framedOutputHandoffWorkSteps/u);
+  assert.match(foundation.nonClaim, /internal two-track representation of Tape\.handoffTarget/u);
+  assert.match(foundation.nonClaim, /no terminal raw output packer or de-tagger/u);
+  assert.match(foundation.nonClaim, /no ordinary machineOutput equality theorem/u);
+  assert.match(foundation.nonClaim, /no external encoded-input-size polynomial/u);
   assert.equal(map.gate.standardComplexityModelEligible, false);
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,

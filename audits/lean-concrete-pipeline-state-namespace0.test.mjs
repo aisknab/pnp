@@ -223,7 +223,7 @@ test('pipeline state namespace audit rejects collisions, dropped stages, broaden
   }
 });
 
-test('namespace milestone stays pre-launch and the concrete publication gate remains closed', async () => {
+test('namespace remains the prerequisite while the separate bridge milestone stays fail-closed', async () => {
   const [status, map] = await Promise.all([
     text0('status/FORMAL_RECONSTRUCTION_STATUS.json').then(JSON.parse),
     text0('publication/FORMAL_PUBLICATION_MAP.json').then(JSON.parse),
@@ -232,7 +232,8 @@ test('namespace milestone stays pre-launch and the concrete publication gate rem
   assert.equal(status.leanConcretePipelineStateNamespaceAxiomAuditPassed, true);
   assert.equal(status.leanConcretePipelineStateNamespaceAuditedDeclarationCount, 39);
   assert.equal(status.leanConcretePipelineRuleTableCompositionFormalized, true);
-  assert.equal(status.leanConcretePipelineStageLaunchFormalized, false);
+  assert.equal(status.leanConcretePipelineStageLaunchFormalized, true);
+  assert.equal(status.leanConcretePipelineStageBridgesFormalized, true);
   assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), true);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);
@@ -251,11 +252,10 @@ test('namespace milestone stays pre-launch and the concrete publication gate rem
     `${PREFIX}renamedLiftMachine_workRunExact_of_rawRunExact`,
     `${PREFIX}renamedOutputHandoff_workRunExact_of_represents`,
   ]) assert.equal(foundation.requiredTheorems.includes(name), true, name);
-  assert.match(foundation.scope, /injective state renaming/u);
-  assert.match(foundation.scope, /three disjoint stage images/u);
-  assert.match(foundation.scope, /first-match lookup isolation/u);
-  assert.match(foundation.nonClaim, /no bridge rule(?: that)? launches the simulator/u);
-  assert.match(foundation.nonClaim, /no simulator halt launches the handoff/u);
+  assert.match(foundation.scope, /symbol-preserving one-step framer-to-simulator launch/u);
+  assert.match(foundation.scope, /two disjoint verdict-indexed handoff copies/u);
+  assert.match(foundation.scope, /first-match isolation/u);
   assert.match(foundation.nonClaim, /no terminal raw output packer/u);
+  assert.match(foundation.nonClaim, /no complete FunctionProgram.RawRefinement/u);
   assert.equal(map.gate.standardComplexityModelEligible, false);
 });

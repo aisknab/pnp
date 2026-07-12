@@ -14,7 +14,9 @@ of length `k ≤ F`; when the endpoint is designated halting, `workRun` with fue
 compiled `run` with fuel `18 * F` reach its representation and encoding.
 `lean/PNP/Concrete/PipelineStateNamespace.lean` supplies injective three-stage renaming, a
 lookup-isolated concatenated finite rule table, and preservation of all three existing exact
-stage-local traces; it supplies no bridge rules or complete run.
+stage-local traces. `lean/PNP/Concrete/PipelineStageBridges.lean` adds exact stage launches,
+verdict-indexed handoff copies, supplied-exact-run composition, and six-for-one compiled raw traces
+from canonical paired input; it still supplies no terminal raw output or external-size refinement.
 `lean/PNP/Concrete/PipelineRefinement.lean` pins exact raw-machine refinement
 contracts and proves the two machine-leaf cases. `lean/PNP/Concrete/Target.lean` names the
 corresponding inactive target proposition. The explicit declarations in all nine layers have empty
@@ -157,6 +159,7 @@ lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineInputFramerAxi
 lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineOutputHandoffAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineMachineSimulationAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineStateNamespaceAxiomAudit.lean
+lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineStageBridgesAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcreteComplexityAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcreteTargetAxiomAudit.lean
@@ -167,6 +170,7 @@ node --test audits/lean-concrete-pipeline-input-framer0.test.mjs
 node --test audits/lean-concrete-pipeline-output-handoff0.test.mjs
 node --test audits/lean-concrete-pipeline-machine-simulation0.test.mjs
 node --test audits/lean-concrete-pipeline-state-namespace0.test.mjs
+node --test audits/lean-concrete-pipeline-stage-bridges0.test.mjs
 node --test audits/lean-concrete-pipeline-refinement0.test.mjs
 ```
 
@@ -187,9 +191,10 @@ successful-step counts. This proves no
 termination result, does not classify a stuck nonhalting stop as a verdict, and gives no input-size
 bound. Separate literal machines now supply paired-input framing and an exact internal represented
 handoff. Their state images and rule lists are collision-free and lookup-isolated in one concatenated
-table, but no bridge rule connects them to the simulator as one execution. This milestone supplies no `boundedDecide`, verdict
-or output-preservation theorem, terminal raw output de-tagging, composition/precomposition
-`RawRefinement`, or input-size polynomial end-to-end bound. This milestone also
+table. The bridge milestone connects supplied exact runs, preserves accept/reject, and keeps a
+supplied stuck nonhalting endpoint as timeout at the exact prefix budget. It supplies no target
+termination theorem, ordinary `machineOutput`, terminal raw output de-tagging,
+composition/precomposition `RawRefinement`, or external-input-size polynomial bound. This milestone also
 does not formalize concrete SAT or SAT NP-hardness, instantiate
 the global locked-NAND threshold package, prove the residual-band or ZeroSlack obligations, prove
 the remaining end-to-end polynomial bounds, or establish `P = NP`.

@@ -62,10 +62,12 @@ no termination result; the full fuels are at-most budgets rather than successful
 input-size bounds, and a stuck nonhalting stop is not a verdict. Separate literal machines now
 provide paired-input framing and an internal represented-output handoff. A collision-free namespace
 renames all three machines into disjoint images, concatenates their rule lists with proved lookup
-isolation, and preserves their stage-local exact traces; no bridge rule connects the stages. The
-simulator layer supplies no `boundedDecide`, verdict/output preservation,
-terminal raw output de-tagging,
-composition/precomposition `RawRefinement`, or composite refinement. Therefore
+isolation, and preserves their stage-local exact traces. A bridge-first finite machine now connects
+supplied exact runs, preserves accept/reject, retains timeout for a supplied stuck nonhalting
+endpoint at the exact prefix budget, and compiles from paired raw input at six times the cumulative
+work cost. It still supplies no target termination, terminal raw output de-tagging,
+external-input-size polynomial, composition/precomposition `RawRefinement`, or complete composite
+refinement. Therefore
 `Formal.ConcreteComplexityMachineLink` remains the first of seven blockers. All five
 reviewed activation fingerprints remain unset, the four project-specific axioms remain,
 `PNP.Main.p_eq_np` is absent, and the publication gate is false.

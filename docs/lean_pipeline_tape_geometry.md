@@ -79,11 +79,11 @@ on that endpoint being designated halting, `workRun` with fuel `3 * F` and compi
 fuel `18 * F` reach its representation and encoding. This does not prove termination; the full
 fuels are at-most budgets, not successful-step counts or input-size bounds, and a stuck nonhalting
 stop is not a verdict. A separate paired-input framer now constructs a represented initial frame
-from literal canonical paired input with an exact quadratic bound, but it is not composed with the
-simulator. A separate output-handoff machine now reaches a represented `Tape.handoffTarget` from an
-already represented tape at an exact linear logical-output-length cost, but it is not connected to
-the simulator and its compiled trace is not a terminal raw-output layout. These layers do not prove
-`boundedDecide`, verdict or output preservation, terminal output de-tagging, construct
+from literal canonical paired input with an exact quadratic bound. A separate output-handoff
+machine reaches a represented `Tape.handoffTarget` at an exact linear logical-output-length cost.
+The bridge layer now connects both around supplied exact target runs and preserves the target
+verdict, but its compiled endpoint is not a terminal raw-output layout. These layers do not prove
+target termination, terminal output de-tagging, construct
 composition/precomposition `RawRefinement`,
 prove an input-size polynomial end-to-end bound or charged/raw class equivalence, establish
 `CNFSAT ∈ P` or NP-completeness, activate a root theorem, or prove `P = NP`.
