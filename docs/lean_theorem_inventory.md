@@ -54,9 +54,12 @@ verdict-indexed handoff copies, preserves accept/reject for supplied exact targe
 supplied stuck nonhalting endpoint as timeout at the exact prefix budget, and compiles the cumulative
 trace from canonical paired raw input at six times its work cost. A fourth reviewed module now
 proves terminal packing and ordinary raw `machineOutput` equality with a local quadratic bound,
-but it is not launched from that bridge trace. The combined development supplies no target
-termination, external-input-size polynomial, complete composition/precomposition `RawRefinement`,
-or class result.
+and a fifth reviewed terminal-bridge module places two disjoint packer copies in an extended rule
+table and proves exact accepting/rejecting launches and output equality from represented handoff
+endpoints under a local `18*n^2 + 36*n + 12` bound. The earlier ordinary-input trace has not been
+transported into that extended machine. The combined development supplies no target termination,
+external-input-size polynomial, complete composition/precomposition `RawRefinement`, or class
+result.
 Consequently the gate
 is false, and every theorem-emission field derived from it remains false or `null`.
 
@@ -96,7 +99,7 @@ concrete-gate activation fingerprints.
 
 The formal status, public status mirror, TeX report, and PDF report are generated from the checked
 inventory and publication map. The root
-[`canonical_proof_report.pdf`](../canonical_proof_report.pdf) is the current concise nine-page formal
+[`canonical_proof_report.pdf`](../canonical_proof_report.pdf) is the current concise ten-page formal
 reconstruction report. It is a non-activation report, not the historical claim manuscript. The
 historical 56-page claim artifact is available only through the pinned legacy source coordinate;
 its immutable coordinates are recorded under [`archive/legacy-v0/`](../archive/legacy-v0/README.md).

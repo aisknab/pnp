@@ -24,6 +24,7 @@ test('current verifier plan contains status, surface, archive integrity, and cur
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-concrete-pipeline-state-namespace0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-concrete-pipeline-stage-bridges0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-concrete-terminal-output-packer0.test.mjs'), true);
+  assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-concrete-pipeline-terminal-bridge0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-concrete-pipeline-machine-simulation0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-concrete-complexity0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-concrete-pipeline-refinement0.test.mjs'), true);

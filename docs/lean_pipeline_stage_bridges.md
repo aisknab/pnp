@@ -94,11 +94,14 @@ overclaims.
 ## Exact remaining boundary
 
 The handoff endpoint of this module is still a two-track represented work
-tape. `TerminalOutputPacker` now separately proves ordinary raw output
-equality, but no bridge rule or cumulative theorem launches this endpoint into
-that packer. This module does not prove a `FunctionProgram.RawRefinement`, a
-`DecisionProgram.RawRefinement`, a polynomial in external encoded input
-length, `CNFSAT ∈ P`, CNFSAT NP-completeness, or `P = NP`.
+tape. `PipelineTerminalBridge` now extends this rule table with two terminal-
+packer copies and proves the local accepting and rejecting suffixes from that
+endpoint. The cumulative trace above, however, is a theorem about
+`bridgedMachine`; it has not yet been transported into the extended
+`terminalBridgeMachine`. This module does not prove a complete four-stage
+trace, a `FunctionProgram.RawRefinement`, a `DecisionProgram.RawRefinement`, a
+polynomial in external encoded input length, `CNFSAT ∈ P`, CNFSAT
+NP-completeness, or `P = NP`.
 
 `Formal.ConcreteComplexityMachineLink` therefore remains active,
 `PNP.Main.p_eq_np` remains absent, and the publication gate remains false.

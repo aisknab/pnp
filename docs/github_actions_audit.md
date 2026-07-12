@@ -31,7 +31,7 @@ from current theorem status.
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual
   routes require 30. The workflow also checks the byte-identical inventory mirrors, derives the
   false concrete publication gate and status/report outputs, and verifies same-environment
-  double-build determinism plus exact committed bytes for the current concise nine-page PDF. The
+  double-build determinism plus exact committed bytes for the current concise ten-page PDF. The
   hosted runner's apt-installed TeX and Poppler versions are not cryptographically pinned, so this
   is not a universal cross-toolchain reproducibility claim.
 - `.github/workflows/legacy-v0-replay.yml` is manual only. It replays the immutable historical
@@ -74,8 +74,10 @@ checks injective three-stage renaming, first-match preservation, lookup-isolated
 transport of all three exact stage-local traces. The stage-bridge audit checks literal
 symbol-preserving launches, verdict-indexed handoff copies, bridge-first dispatch isolation,
 cumulative exact work traces, six-for-one compiled raw traces, and supplied-exact-run
-accept/reject/timeout classification. Terminal raw output de-tagging and complete refinement remain
-unproved.
+accept/reject/timeout classification. The terminal-bridge audit separately checks two disjoint
+packer copies, first-match isolation, exact accepting/rejecting endpoint launches, terminal halts,
+raw output equality, and the local `18*n^2 + 36*n + 12` bound. Transport of the earlier trace into
+that extended machine and complete refinement remain unproved.
 
 The pipeline-tape geometry audit proves a two-track representation with distinct data/left/right
 tags, arbitrary stale cells outside the first markers, and exact preservation under data writes,
@@ -91,9 +93,10 @@ prefix of length `k ≤ F` reaching the same endpoint. If that endpoint is desig
 and its encoding. CI keeps the premise and accounting explicit: this does not prove termination, the full
 budgets are not successful-step counts or input-size bounds, and a stuck nonhalting stop is not a
 verdict. The local theorems start from an already represented configuration. The separate bridge
-module now supplies canonical paired framing, exact launches, and target verdict preservation for a
-supplied exact run, but no target termination, `machineOutput` equality, terminal raw output
-de-tagging, composition/precomposition refinement, or external-input-size polynomial theorem.
+module supplies canonical paired framing, exact launches, and target verdict preservation for a
+supplied exact run. The terminal bridge supplies the subsequent local raw-output suffix, but the
+earlier trace is not yet transported into that extended machine; target termination,
+composition/precomposition refinement, and an external-input-size polynomial remain unproved.
 
 The pipeline-input-framer audit covers a different literal finite machine. Its compiled theorem
 starts at canonical `BitString.pair left right`, reaches an accepting represented frame with
@@ -110,10 +113,10 @@ logical tape `raw`, it reaches an accepting representation of `raw.handoffTarget
 CI requires the compiled theorem to start at an encoded internal work configuration and rejects an
 ordinary-`startConfig` or raw-visible-`machineOutput` claim for that module. The handoff now has a disjoint renamed
 state image and two verdict-indexed bridge copies. The cumulative theorem begins at ordinary paired
-`startConfig` and preserves accept/reject for supplied exact target runs, but supplies no target
-termination, external-input-size polynomial, pipeline refinement, class equality, or `P = NP`.
-The separate terminal-packer audit proves raw-visible output with a local quadratic bound, while
-requiring the complete bridge-to-packer composition and external-size result to remain false.
+`startConfig` and preserves accept/reject for supplied exact target runs. The terminal bridge proves
+the local launch from either resulting endpoint into a packer copy and raw-visible output with a
+local quadratic bound, while requiring earlier-trace transport, target termination, the complete
+pipeline refinement, and the external-size result to remain false.
 
 The concrete-CNF checks do establish a narrower raw-machine result. They require complete axiom
 transcripts for the canonical CNF codec and semantics, paired work-input layout, generic direct
@@ -139,7 +142,7 @@ node scripts/generate-formal-publication.mjs --check
 npm run report:check
 ```
 
-The current root PDF is the generated nine-page formal-reconstruction report. The historical
+The current root PDF is the generated ten-page formal-reconstruction report. The historical
 56-page claim artifact is not a current workflow output and is available only at the pinned legacy
 coordinate recorded under `archive/legacy-v0/`.
 
