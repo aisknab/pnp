@@ -323,7 +323,7 @@ jobs:
             echo 'Executable handoff-to-terminal bridge unexpectedly depends on axioms.' >&2
             exit 1
           fi
-          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 44
+          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 59
 
       - name: Print framed raw-machine simulation axioms
         run: |

@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '3a4b96129befc032a91b973e5b5acfbf7884f51770c8a43b226a6379ca49fa8b';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '295160109f44df899235ff6cbab708ac3af32c401876a0d3499fd98e83d45240';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -73,21 +73,34 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.PipelineTape.represents_moveRight_of_cons',
   'PNP.Concrete.PipelineTape.represents_write',
   'PNP.Concrete.PipelineTerminalBridge.acceptingPackerLaunch_workStep',
+  'PNP.Concrete.PipelineTerminalBridge.acceptingSuppliedTrace_workRunExact_of_rawRunExact',
   'PNP.Concrete.PipelineTerminalBridge.acceptingTerminalFinal_isHalted',
   'PNP.Concrete.PipelineTerminalBridge.acceptingTerminal_workRunExact_of_represents',
+  'PNP.Concrete.PipelineTerminalBridge.bridged_workRunExact_of_exact',
+  'PNP.Concrete.PipelineTerminalBridge.bridged_workStep?_of_some',
   'PNP.Concrete.PipelineTerminalBridge.findWorkRule_terminalBridge_acceptingPacker_of_some',
   'PNP.Concrete.PipelineTerminalBridge.findWorkRule_terminalBridge_rejectingPacker_of_some',
+  'PNP.Concrete.PipelineTerminalBridge.machineOutput_compileTerminalBridge_accept_of_rawRunExact',
+  'PNP.Concrete.PipelineTerminalBridge.machineOutput_compileTerminalBridge_reject_of_rawRunExact',
   'PNP.Concrete.PipelineTerminalBridge.outputBits_compileTerminalBridge_accepting_of_represents',
   'PNP.Concrete.PipelineTerminalBridge.outputBits_compileTerminalBridge_rejecting_of_represents',
   'PNP.Concrete.PipelineTerminalBridge.rejectingPackerLaunch_workStep',
+  'PNP.Concrete.PipelineTerminalBridge.rejectingSuppliedTrace_workRunExact_of_rawRunExact',
   'PNP.Concrete.PipelineTerminalBridge.rejectingTerminalFinal_isHalted',
   'PNP.Concrete.PipelineTerminalBridge.rejectingTerminal_workRunExact_of_represents',
+  'PNP.Concrete.PipelineTerminalBridge.run_compileTerminalBridge_accept_of_rawRunExact',
   'PNP.Concrete.PipelineTerminalBridge.run_compileTerminalBridge_accepting_of_represents',
   'PNP.Concrete.PipelineTerminalBridge.run_compileTerminalBridge_accepting_of_represents_at_bound',
+  'PNP.Concrete.PipelineTerminalBridge.run_compileTerminalBridge_reject_of_rawRunExact',
   'PNP.Concrete.PipelineTerminalBridge.run_compileTerminalBridge_rejecting_of_represents',
   'PNP.Concrete.PipelineTerminalBridge.run_compileTerminalBridge_rejecting_of_represents_at_bound',
+  'PNP.Concrete.PipelineTerminalBridge.simulationPrefix_terminalBridge_workBoundedDecide_timeout',
+  'PNP.Concrete.PipelineTerminalBridge.suppliedTraceTerminalWorkSteps_eq',
   'PNP.Concrete.PipelineTerminalBridge.terminalBridgeMachine_acceptState_ne_rejectState',
   'PNP.Concrete.PipelineTerminalBridge.terminalBridge_runtime_le',
+  'PNP.Concrete.PipelineTerminalBridge.workBoundedDecide_terminalBridge_accept_of_rawRunExact',
+  'PNP.Concrete.PipelineTerminalBridge.workBoundedDecide_terminalBridge_reject_of_rawRunExact',
+  'PNP.Concrete.PipelineTerminalBridge.workBoundedDecide_terminalBridge_timeout_of_stuck_rawRunExact',
   'PNP.Concrete.PolynomialTimeMachine.verdict_accepts_iff',
   'PNP.Concrete.PolynomialTimeMachine.verdict_ne_timeout',
   'PNP.Concrete.Tape.outputBits_handoffTarget',
@@ -165,7 +178,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-12-24') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-13-25') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -439,7 +452,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-12-24') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-13-25') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
@@ -457,7 +470,7 @@ function validatePublicationMap0(map) {
     'expectedRootKernelTypeSha256',
     'expectedAxiomClosureSha256',
     'expectedSourceClosureSha256',
-  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 24`);
+  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 25`);
   if (!isSha2560(map.milestoneSourceClosureSha256)
       || !isObject0(map.earnedMilestoneTheoremKernelTypeSha256)) {
     throw new Error('reviewed milestone theorem/source fingerprints are missing');
@@ -476,7 +489,7 @@ function validatePublicationMap0(map) {
     throw new Error('reviewed milestone theorem kernel-type fingerprint inventory mismatch');
   }
   if (sha256Text0(stableStringify0(map)) !== REQUIRED_PUBLICATION_MAP_SHA2560) {
-    throw new Error('formal publication milestone map drifted from the reviewed release-24 specification');
+    throw new Error('formal publication milestone map drifted from the reviewed release-25 specification');
   }
 }
 

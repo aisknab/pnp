@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-12-24';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-13-25';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -132,12 +132,12 @@ const NON_CLAIMS = Object.freeze([
   'Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.',
   'PipelineTape frames raw cells between distinct two-track markers and tolerates arbitrary exterior garbage; its boundary expansions are pure tape identities, not transition rules, a handoff machine, a compiler, or a runtime proof.',
   'PipelineInputFramer is one literal finite machine for canonical BitString.pair inputs. It reaches an accepting represented frame with permitted exterior garbage at an exact quadratic raw-input-length budget. PipelineStageBridges launches that endpoint into the lifted target in one exact symbol-preserving step. The framer still does not accept arbitrary empty, odd, malformed, or unpaired raw words, prove target termination, or by itself provide the trace transport into the extended terminal-bridge machine, a pipeline RawRefinement, CNF-SAT in P, NP-completeness, or P = NP.',
-  'PipelineOutputHandoff is one literal finite machine for an already represented internal tape. For logical output length n it reaches an accepting representation of Tape.handoffTarget in exactly 2 * n + 4 work steps and 12 * n + 24 compiled steps. PipelineTerminalBridge now launches either verdict-indexed handoff endpoint into a disjoint terminal-packer copy and proves local raw-output equality. The earlier ordinary-input trace is still a theorem about PipelineStageBridges.bridgedMachine and has not been transported into the extended terminalBridgeMachine, so there is no complete external-input-size pipeline polynomial or RawRefinement. CNF-SAT in P, NP-completeness, and P = NP remain unproved.',
-  'PipelineMachineSimulation extracts from every at-most raw run with fuel F an exact successful prefix of length k at most F reaching the same endpoint, and each supplied exact n-step run costs exactly 3 * n work transitions. PipelineStageBridges composes such supplied exact runs with the framer and internal handoff, and PipelineTerminalBridge proves the subsequent local launch-and-pack trace from that endpoint. The earlier prefix has not yet been transported into the extended machine; target termination and an external-input-size polynomial, FunctionProgram.RawRefinement, DecisionProgram.RawRefinement, CNF-SAT in P, NP-completeness, and P = NP remain missing. A stuck nonhalting exact endpoint is timeout at the proved prefix budget, not rejection.',
-  'PipelineStateNamespace remains the injective renaming and lookup-isolation prerequisite. PipelineStageBridges adds literal launch tables, verdict-indexed handoff copies, exact cumulative work traces, and six-for-one compiled raw traces from canonical paired input. PipelineTerminalBridge allocates two further disjoint packer copies and proves their first-match isolation and local launches, but the earlier trace transport, external-input-size polynomial, and pipeline RawRefinement remain missing.',
-  'PipelineStageBridges proves exact framer-to-simulator and accept/reject-to-handoff launches, collision-free first-match dispatch, exact cumulative work cost, six-for-one compiled raw cost, and accept/reject/timeout classification for supplied exact target traces. PipelineTerminalBridge proves exact accepting and rejecting handoff-to-packer launches and raw-visible output under a local 18*n^2 + 36*n + 12 bound. It does not transport the earlier ordinary-input trace into the extended machine, prove target termination, supply a complete pipeline RawRefinement or external-input-size polynomial, establish CNF-SAT in P or NP-completeness, or prove P = NP.',
-  'TerminalOutputPacker is a literal finite work machine that uniformly packs empty, one-bit, odd, even, all-zero, all-one, and mixed logical outputs in the presence of arbitrary exterior garbage. It proves exact work execution, a designated halt, ordinary blank-delimited raw output equality, exact six-for-one compilation, the local raw bound 18*n^2 + 36*n + 6, and one-step-short timeout, all with empty axiom closure. PipelineTerminalBridge now launches a represented handoff endpoint into verdict-indexed copies of this machine, but does not yet carry the earlier framer/simulator/handoff trace into that extended rule table or establish a complete pipeline RawRefinement, external encoded-input-size polynomial, CNF-SAT in P, NP-completeness, or P = NP.',
-  'PipelineTerminalBridge is one literal extended finite work machine containing both earlier bridge rules and two disjoint terminal-packer copies. From an accepting or rejecting represented-handoff endpoint it proves an exact one-step launch, exact local packing, distinct designated terminal halts, six-for-one compilation, ordinary raw-output equality, and the local bound 18*n^2 + 36*n + 12 with empty axiom closure across all 44 public declarations. It does not yet prove a trace from ordinary external startConfig through the extended machine, target termination, a complete RawRefinement, or an external-input-size polynomial.',
+  'PipelineOutputHandoff is one literal finite machine for an already represented internal tape. For logical output length n it reaches an accepting representation of Tape.handoffTarget in exactly 2 * n + 4 work steps and 12 * n + 24 compiled steps. PipelineTerminalBridge preserves the earlier ordinary-input trace in its extended rule table and composes it with verdict-indexed terminal-packer copies for every supplied exact target execution. This still supplies no target-termination theorem, complete external-input-size polynomial, or RawRefinement. CNF-SAT in P, NP-completeness, and P = NP remain unproved.',
+  'PipelineMachineSimulation extracts from every at-most raw run with fuel F an exact successful prefix of length k at most F reaching the same endpoint, and each supplied exact n-step run costs exactly 3 * n work transitions. PipelineTerminalBridge composes supplied exact runs with framing, simulation, internal handoff, and terminal packing in one literal machine from ordinary paired startConfig. The cumulative bound still depends on the supplied exact source-transition count and final output length; target termination and an external-input-size polynomial, FunctionProgram.RawRefinement, DecisionProgram.RawRefinement, CNF-SAT in P, NP-completeness, and P = NP remain missing. A stuck nonhalting exact endpoint remains timeout, not rejection.',
+  'PipelineStateNamespace remains the injective renaming and lookup-isolation prerequisite. PipelineTerminalBridge now proves that every successful earlier bridge step and exact trace is preserved without shadowing, then composes accepting and rejecting supplied traces through two disjoint packer copies. Target termination, an external-input-size polynomial, and pipeline RawRefinement remain missing.',
+  'PipelineStageBridges proves exact framer-to-simulator and accept/reject-to-handoff launches, collision-free first-match dispatch, exact cumulative work cost, six-for-one compiled raw cost, and accept/reject/timeout classification for supplied exact target traces. PipelineTerminalBridge transports those traces into the extended machine and composes the terminal suffix, with exact ordinary machineOutput and the local 18*n^2 + 36*n + 12 suffix bound. It does not prove target termination, supply a complete pipeline RawRefinement or external-input-size polynomial, establish CNF-SAT in P or NP-completeness, or prove P = NP.',
+  'TerminalOutputPacker is a literal finite work machine that uniformly packs empty, one-bit, odd, even, all-zero, all-one, and mixed logical outputs in the presence of arbitrary exterior garbage. It proves exact work execution, a designated halt, ordinary blank-delimited raw output equality, exact six-for-one compilation, the local raw bound 18*n^2 + 36*n + 6, and one-step-short timeout, all with empty axiom closure. PipelineTerminalBridge now carries supplied exact framer/simulator/handoff traces into verdict-indexed copies of this machine, but does not establish target termination, a complete pipeline RawRefinement, external encoded-input-size polynomial, CNF-SAT in P, NP-completeness, or P = NP.',
+  'PipelineTerminalBridge is one literal extended finite work machine containing the earlier bridge rules and two disjoint terminal-packer copies. It preserves every successful prior step and exact trace, and for each supplied accepting or rejecting target execution proves one exact trace from ordinary paired startConfig through terminal packing, the corresponding bounded verdict, six-for-one compiled execution, ordinary machineOutput equality, and stuck-endpoint timeout. The local suffix bound is 18*n^2 + 36*n + 12, and all 59 public declarations have empty axiom closure. It does not prove target termination, a complete RawRefinement, or an external-input-size polynomial.',
   'The concrete bitstring, natural-polynomial, and finite-rule machine kernel is now consumed by a finite charged-pipeline P/NP/reduction interface; the compiler/refinement from composite pipelines to one raw machine is not yet proved.',
   'The concrete complexity interface proves P subset NP, reduction composition and transport, and the NP-complete-in-P implication relative to its exact pipeline semantics; it does not prove concrete SAT complete or in P.',
   'The integrated direct CNF-SAT finite-machine verifier proves exact accept/reject correctness, bounded no-timeout behavior, and PNP.Concrete.FinalUniversalDesign.cnfSATInNP; it proves CNF-SAT membership in NP only, not CNF-SAT in P, NP-completeness, or P = NP.',
@@ -319,8 +319,8 @@ const EXACT_FIELDS = Object.freeze({
   leanConcretePipelineTerminalOutputPackerAuditedDeclarationCount: 69,
   leanConcretePipelineTerminalOutputPackerConnectedToBridgeEndpointFormalized: true,
   leanConcretePipelineTerminalBridgeAxiomAuditPassed: true,
-  leanConcretePipelineTerminalBridgeAuditedDeclarationCount: 44,
-  leanConcretePipelinePriorTraceTransportToTerminalBridgeFormalized: false,
+  leanConcretePipelineTerminalBridgeAuditedDeclarationCount: 59,
+  leanConcretePipelinePriorTraceTransportToTerminalBridgeFormalized: true,
   leanConcretePipelineRawRefinementFormalized: false,
   leanConcretePipelineExternalInputSizePolynomialFormalized: false,
   leanNANDDirectWireCoreFormalized: true,
@@ -411,7 +411,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-12-PIPELINE-TERMINAL-BRIDGE-24',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-13-PIPELINE-SUPPLIED-TRACE-25',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -554,8 +554,8 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanConcretePipelineTerminalOutputPackerAuditedDeclarationCount: 69,
       leanConcretePipelineTerminalOutputPackerConnectedToBridgeEndpointFormalized: true,
       leanConcretePipelineTerminalBridgeAxiomAuditPassed: true,
-      leanConcretePipelineTerminalBridgeAuditedDeclarationCount: 44,
-      leanConcretePipelinePriorTraceTransportToTerminalBridgeFormalized: false,
+      leanConcretePipelineTerminalBridgeAuditedDeclarationCount: 59,
+      leanConcretePipelinePriorTraceTransportToTerminalBridgeFormalized: true,
       leanConcretePipelineRawRefinementFormalized: false,
       leanConcretePipelineExternalInputSizePolynomialFormalized: false,
       leanNANDDirectWireCoreFormalized: true,
@@ -697,7 +697,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-12-24',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-13-25',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

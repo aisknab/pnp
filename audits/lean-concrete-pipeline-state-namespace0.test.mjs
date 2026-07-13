@@ -255,8 +255,9 @@ test('namespace remains the prerequisite while the separate bridge milestone sta
   assert.match(foundation.scope, /symbol-preserving one-step framer-to-simulator launch/u);
   assert.match(foundation.scope, /two disjoint verdict-indexed handoff copies/u);
   assert.match(foundation.scope, /first-match isolation/u);
-  assert.match(foundation.nonClaim, /earlier ordinary-input framer\/simulator\/handoff trace/u);
-  assert.match(foundation.nonClaim, /has not yet been transported through the extended/u);
-  assert.match(foundation.nonClaim, /no complete FunctionProgram.RawRefinement/u);
+  assert.match(foundation.scope, /preserves every successful prior-bridge step/u);
+  assert.match(foundation.scope, /one finite machine/u);
+  assert.match(foundation.nonClaim, /caller-supplied exact target execution/u);
+  assert.match(foundation.nonClaim, /FunctionProgram.RawRefinement/u);
   assert.equal(map.gate.standardComplexityModelEligible, false);
 });

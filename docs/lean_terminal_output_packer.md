@@ -103,13 +103,13 @@ overclaims.
 
 Terminal raw-output packing is proved as a literal executable stage, and
 `PipelineTerminalBridge` now places two verdict-indexed copies in an extended
-rule table and proves exact local launches from represented handoff endpoints.
-The earlier ordinary-input framer/simulator/handoff trace is still proved for
-the smaller bridge machine and has not been transported through that extended
-machine. There is therefore no single trace through all four stages, complete
-`FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement`, or
-polynomial in external encoded input length. Target termination also remains
-an input to the earlier stage-bridge theorem.
+rule table, proves exact local launches from represented handoff endpoints,
+and preserves every successful earlier bridge trace without shadowing. For a
+caller-supplied exact accepting or rejecting target execution, the terminal
+module now composes all four stages from ordinary paired input and proves the
+exact raw output. There is still no target-termination theorem, uniform
+all-input `FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement`,
+or polynomial in external encoded input length.
 
 Consequently `Formal.ConcreteComplexityMachineLink` remains open,
 `PNP.Concrete.cnfSATInP` and `PNP.Concrete.cnfSATNPComplete` remain absent,

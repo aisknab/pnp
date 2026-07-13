@@ -61,9 +61,12 @@ ordinary raw-visible `machineOutput` layout. A separate literal `TerminalOutputP
 exact blank-delimited raw output equality with a local `18*n^2 + 36*n + 6` bound and one-step-short
 timeout. `PipelineTerminalBridge` appends two disjoint verdict-indexed packer copies to an extended
 finite rule table and proves exact accepting/rejecting endpoint launches, terminal halts, and raw
-output equality under the local `18*n^2 + 36*n + 12` suffix bound. The earlier cumulative trace is
-still a theorem about the smaller bridge machine and has not yet been transported through the
-extended machine.
+output equality under the local `18*n^2 + 36*n + 12` suffix bound. It also preserves every
+successful earlier bridge step and exact trace in the extended rule table. For each caller-supplied
+exact accepting or rejecting target execution, one theorem now composes the ordinary paired input,
+framer, simulator, represented handoff, terminal launch, and packer in that literal machine, with
+exact verdict and raw-output equality. No theorem supplies target termination, an all-input
+`RawRefinement`, or an external encoded-input-size polynomial.
 The development also provides one direct raw-machine instance: a universally
 correct polynomial-time verifier for canonically encoded finite CNF formulae and bounded assignment
 certificates, proving `PNP.Concrete.CNFSAT ∈ NP`. It does not provide a deterministic polynomial-time

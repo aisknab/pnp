@@ -8,7 +8,7 @@ import { CheckFormalReconstructionStatus0 } from './pcc-formal-reconstruction-st
 
 const CHECKER = 'CheckFormalPublicSurface0';
 const VERSION = 0;
-const COORDINATE = 'PUBLIC-SURFACE-BASELINE-2026-07-12-PIPELINE-TERMINAL-BRIDGE-24';
+const COORDINATE = 'PUBLIC-SURFACE-BASELINE-2026-07-13-PIPELINE-SUPPLIED-TRACE-25';
 const OUTPUT_PATH = 'artifacts/formal-public-surface/latest-verdict.json';
 
 export const CURRENT_PACKAGE_EXPORTS0 = Object.freeze({

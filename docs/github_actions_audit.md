@@ -75,9 +75,11 @@ transport of all three exact stage-local traces. The stage-bridge audit checks l
 symbol-preserving launches, verdict-indexed handoff copies, bridge-first dispatch isolation,
 cumulative exact work traces, six-for-one compiled raw traces, and supplied-exact-run
 accept/reject/timeout classification. The terminal-bridge audit separately checks two disjoint
-packer copies, first-match isolation, exact accepting/rejecting endpoint launches, terminal halts,
-raw output equality, and the local `18*n^2 + 36*n + 12` bound. Transport of the earlier trace into
-that extended machine and complete refinement remain unproved.
+packer copies, first-match isolation, preservation of every successful earlier bridge step, exact
+supplied accepting/rejecting four-stage traces, terminal halts, raw output equality, timeout
+behavior, and the local `18*n^2 + 36*n + 12` suffix bound. The complete trace still requires a
+caller-supplied exact target execution; target termination, external-input-size bounds, and
+complete refinement remain unproved.
 
 The pipeline-tape geometry audit proves a two-track representation with distinct data/left/right
 tags, arbitrary stale cells outside the first markers, and exact preservation under data writes,
@@ -94,9 +96,10 @@ and its encoding. CI keeps the premise and accounting explicit: this does not pr
 budgets are not successful-step counts or input-size bounds, and a stuck nonhalting stop is not a
 verdict. The local theorems start from an already represented configuration. The separate bridge
 module supplies canonical paired framing, exact launches, and target verdict preservation for a
-supplied exact run. The terminal bridge supplies the subsequent local raw-output suffix, but the
-earlier trace is not yet transported into that extended machine; target termination,
-composition/precomposition refinement, and an external-input-size polynomial remain unproved.
+supplied exact run. The terminal bridge preserves that trace in its extended machine and, for a
+caller-supplied exact accepting or rejecting target execution, composes the subsequent raw-output
+suffix. Target termination, composition/precomposition refinement, and an external-input-size
+polynomial remain unproved.
 
 The pipeline-input-framer audit covers a different literal finite machine. Its compiled theorem
 starts at canonical `BitString.pair left right`, reaches an accepting represented frame with

@@ -185,13 +185,14 @@ termination result: those full fuels are at-most budgets rather than successful-
 input-size bounds, and a stuck nonhalting stop is not a verdict. The layer does not create the
 frame inside its own theorem or prove target termination. The bridge module supplies exact launch
 and verdict theorems. `TerminalOutputPacker.lean` performs terminal de-tagging and proves ordinary
-raw output equality with a local quadratic bound. The 44-declaration
+raw output equality with a local quadratic bound. The 59-declaration
 `PipelineTerminalBridge.lean` places two disjoint packer copies after the earlier bridge rules and
 proves exact accepting/rejecting launches, terminal halts, and output equality from represented
-handoff endpoints under the local bound `18*n^2 + 36*n + 12`. The earlier trace from paired
-`startConfig` is still a theorem about the smaller bridge machine and has not been transported into
-this extended machine. The layers do not derive an external-input-size polynomial or construct
-complete composition/precomposition pipeline refinement. The two declarations in
+handoff endpoints under the local bound `18*n^2 + 36*n + 12`. It preserves every successful
+earlier bridge step in the extended table and, for each caller-supplied exact accepting or rejecting
+target execution, composes one exact four-stage trace from paired `startConfig` with exact verdict
+and raw-output equality. The layers do not prove target termination, derive an external-input-size
+polynomial, or construct complete composition/precomposition pipeline refinement. The two declarations in
 `lean/PNP/Concrete/Target.lean` are also axiom-free: `PNP.Main.ConcretePEqualsNP` is an inactive
 definition naming mutual inclusion, and `PNP.Main.concretePEqualsNP_iff` pins its expansion. This
 does not prove the target. The six explicit declarations in
@@ -655,8 +656,9 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
    NP-hardness/NP-completeness; the current direct verifier proves only `CNFSAT ∈ NP`.
 6. A compiler/refinement proving that every finite charged function, decision, and verifier
    pipeline is implemented with the stated input-size costs by the selected raw machine model. The
-   exact terminal bridge still does not provide this result because transport of the earlier trace,
-   external-input-size bounds, and the complete refinement contract remain unproved.
+   exact terminal bridge still does not provide this result because its complete trace requires a
+   caller-supplied exact target execution; target termination, external-input-size bounds, and the
+   complete refinement contract remain unproved.
 ```
 
 ## Next formalization targets

@@ -32,10 +32,14 @@ const EXPECTED_HEADS = Object.freeze([
   ['def', 'terminalBridgeMachine'],
   ['def', 'terminalBridgeWorkSteps'],
   ['def', 'terminalBridgeRawSteps'],
+  ['def', 'suppliedTraceTerminalWorkSteps'],
+  ['def', 'suppliedTraceTerminalRawSteps'],
   ['def', 'terminalBridgeRawTimeBound'],
   ['theorem', 'terminalBridge_runtime_le'],
   ['theorem', 'findWorkRule_terminalBridge_acceptingPacker_of_some'],
   ['theorem', 'findWorkRule_terminalBridge_rejectingPacker_of_some'],
+  ['theorem', 'bridged_workStep?_of_some'],
+  ['theorem', 'bridged_workRunExact_of_exact'],
   ['theorem', 'terminalBridgeMachine_isHalted_acceptingHandoff_false'],
   ['theorem', 'terminalBridgeMachine_isHalted_rejectingHandoff_false'],
   ['theorem', 'terminalBridgeMachine_isHalted_acceptingPacker_false_of_local'],
@@ -48,17 +52,28 @@ const EXPECTED_HEADS = Object.freeze([
   ['theorem', 'rejectingPackerLaunch_workStep'],
   ['theorem', 'acceptingTerminal_workRunExact_of_represents'],
   ['theorem', 'rejectingTerminal_workRunExact_of_represents'],
+  ['theorem', 'acceptingSuppliedTrace_workRunExact_of_rawRunExact'],
+  ['theorem', 'rejectingSuppliedTrace_workRunExact_of_rawRunExact'],
   ['theorem', 'acceptingTerminalFinal_state_eq_accept'],
   ['theorem', 'rejectingTerminalFinal_state_eq_reject'],
   ['theorem', 'terminalBridgeMachine_acceptState_ne_rejectState'],
   ['theorem', 'acceptingTerminalFinal_isHalted'],
   ['theorem', 'rejectingTerminalFinal_isHalted'],
+  ['theorem', 'suppliedTraceTerminalWorkSteps_eq'],
+  ['theorem', 'simulationPrefix_terminalBridge_workBoundedDecide_timeout'],
+  ['theorem', 'workBoundedDecide_terminalBridge_timeout_of_stuck_rawRunExact'],
+  ['theorem', 'workBoundedDecide_terminalBridge_accept_of_rawRunExact'],
+  ['theorem', 'workBoundedDecide_terminalBridge_reject_of_rawRunExact'],
+  ['theorem', 'run_compileTerminalBridge_accept_of_rawRunExact'],
+  ['theorem', 'run_compileTerminalBridge_reject_of_rawRunExact'],
   ['theorem', 'run_compileTerminalBridge_accepting_of_represents'],
   ['theorem', 'run_compileTerminalBridge_rejecting_of_represents'],
   ['theorem', 'run_compileTerminalBridge_accepting_of_represents_at_bound'],
   ['theorem', 'run_compileTerminalBridge_rejecting_of_represents_at_bound'],
   ['theorem', 'acceptingTerminal_output_eq'],
   ['theorem', 'rejectingTerminal_output_eq'],
+  ['theorem', 'machineOutput_compileTerminalBridge_accept_of_rawRunExact'],
+  ['theorem', 'machineOutput_compileTerminalBridge_reject_of_rawRunExact'],
   ['theorem', 'outputBits_compileTerminalBridge_accepting_of_represents'],
   ['theorem', 'outputBits_compileTerminalBridge_rejecting_of_represents'],
 ]);
@@ -108,8 +123,8 @@ function validate0(source) {
   require0(JSON.stringify(publicHeadPairs0(source)) === JSON.stringify(EXPECTED_HEADS),
     'declaration-surface');
 
-  require0(prose.includes('does not yet transport the earlier framer/simulator/handoff trace')
-    && prose.includes('ordinary paired input into the extended machine')
+  require0(prose.includes('earlier framer/simulator/handoff trace is transported into this extended machine')
+    && prose.includes('only from a supplied exact target execution')
     && prose.includes('does not construct a complete pipeline RawRefinement')
     && prose.includes('prove target termination')
     && prose.includes('polynomial in external encoded input length')
@@ -139,6 +154,13 @@ function validate0(source) {
       'findWorkRule (terminalBridgeMachine machine).rules (rejectingPackerState state) symbol = some (renameRule rejectingPackerState rule)'),
   'first-match-packer-isolation');
   require0(compact.includes(
+    'theorem bridged_workStep?_of_some (machine : Machine) (config next : WorkConfiguration)')
+    && compact.includes(
+      'theorem bridged_workRunExact_of_exact (machine : Machine)')
+    && compact.includes(
+      'workRunExact? (terminalBridgeMachine machine) steps start = some final'),
+  'prior-bridge-trace-transport');
+  require0(compact.includes(
     'theorem acceptingPackerLaunch_workStep (machine : Machine) (tape : WorkTape)')
     && compact.includes(
       'theorem rejectingPackerLaunch_workStep (machine : Machine) (tape : WorkTape)'),
@@ -166,6 +188,29 @@ function validate0(source) {
     && compact.includes('theorem rejectingTerminalFinal_isHalted (machine : Machine)'),
   'distinct-terminal-verdicts');
   require0(compact.includes(
+    'theorem acceptingSuppliedTrace_workRunExact_of_rawRunExact')
+    && compact.includes(
+      'theorem rejectingSuppliedTrace_workRunExact_of_rawRunExact')
+    && compact.includes(
+      'def suppliedTraceTerminalRawSteps (left right : BitString) (sourceSteps : Nat) (finalTape : Tape) : Nat := 6 * suppliedTraceTerminalWorkSteps left right sourceSteps finalTape')
+    && compact.includes(
+      'theorem workBoundedDecide_terminalBridge_timeout_of_stuck_rawRunExact')
+    && compact.includes(
+      'theorem workBoundedDecide_terminalBridge_accept_of_rawRunExact')
+    && compact.includes(
+      'theorem workBoundedDecide_terminalBridge_reject_of_rawRunExact'),
+  'supplied-complete-work-traces');
+  require0(compact.includes(
+    'theorem run_compileTerminalBridge_accept_of_rawRunExact')
+    && compact.includes(
+      'theorem run_compileTerminalBridge_reject_of_rawRunExact')
+    && compact.includes(
+      'theorem machineOutput_compileTerminalBridge_accept_of_rawRunExact')
+    && compact.includes(
+      'theorem machineOutput_compileTerminalBridge_reject_of_rawRunExact')
+    && compact.match(/= final\.tape\.outputBits := by/gu)?.length === 2,
+  'external-start-compiled-output');
+  require0(compact.includes(
     'theorem run_compileTerminalBridge_accepting_of_represents_at_bound')
     && compact.includes(
       'theorem run_compileTerminalBridge_rejecting_of_represents_at_bound')
@@ -183,14 +228,14 @@ test('terminal bridge has literal launches, isolated packer copies, and no short
   assert.deepEqual(validate0(await text0(SOURCE_PATH)), []);
 });
 
-test('terminal bridge axiom transcript covers all 44 public heads', async () => {
+test('terminal bridge axiom transcript covers all 59 public heads', async () => {
   const [source, audit] = await Promise.all([text0(SOURCE_PATH), text0(AUDIT_PATH)]);
   const expectedNames = EXPECTED_HEADS.map(([, name]) => `${PREFIX}${name}`);
-  assert.equal(EXPECTED_HEADS.length, 44);
+  assert.equal(EXPECTED_HEADS.length, 59);
   assert.deepEqual(publicHeadPairs0(source), EXPECTED_HEADS);
   assert.deepEqual(imports0(audit), ['PNP']);
   assert.deepEqual(printed0(audit), expectedNames);
-  assert.equal(new Set(printed0(audit)).size, 44);
+  assert.equal(new Set(printed0(audit)).size, 59);
 });
 
 test('root, package, and workflow enforce the terminal bridge audit', async () => {
@@ -200,7 +245,7 @@ test('root, package, and workflow enforce the terminal bridge audit', async () =
   assert.equal(imports0(root).includes('PNP.Concrete.PipelineTerminalBridge'), true);
   assert.match(packageText, /audits\/lean-concrete-pipeline-terminal-bridge0\.test\.mjs/u);
   assert.match(workflow, /PNPConcretePipelineTerminalBridgeAxiomAudit\.lean/u);
-  assert.match(workflow, /grep -Fc 'does not depend on any axioms'\)" -eq 44/u);
+  assert.match(workflow, /grep -Fc 'does not depend on any axioms'\)" -eq 59/u);
 });
 
 test('terminal bridge audit rejects namespace, dispatch, bound, output, assumption, and claim mutations', async () => {
@@ -212,8 +257,10 @@ test('terminal bridge audit rejects namespace, dispatch, bound, output, assumpti
     source.replace('.linear 0 6', '.linear 0 5'),
     source.replaceAll(')).tape = raw.outputBits := by', ')).tape = [] := by'),
     `${source}\naxiom hiddenTerminalBridgeOracle : True\n`,
-    source.replace('does not yet transport the earlier framer/simulator/handoff trace',
-      'transports the earlier framer/simulator/handoff trace'),
+    source.replace('only from a supplied exact\ntarget execution',
+      'for every target execution'),
+    source.replace('workBoundedDecide_terminalBridge_timeout_of_stuck_rawRunExact',
+      'workBoundedDecide_terminalBridge_reject_of_stuck_rawRunExact'),
     `${source}\ntheorem p_eq_np : True := True.intro\n`,
   ];
   for (const [index, mutated] of mutations.entries()) {
@@ -222,13 +269,13 @@ test('terminal bridge audit rejects namespace, dispatch, bound, output, assumpti
   }
 });
 
-test('handoff-to-packer launch is earned while the full compiler remains fail-closed', async () => {
+test('supplied complete trace is earned while the full compiler remains fail-closed', async () => {
   const status = JSON.parse(await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'));
   assert.equal(status.leanConcretePipelineTerminalOutputPackingFormalized, true);
   assert.equal(status.leanConcretePipelineTerminalOutputPackerConnectedToBridgeEndpointFormalized, true);
   assert.equal(status.leanConcretePipelineTerminalBridgeAxiomAuditPassed, true);
-  assert.equal(status.leanConcretePipelineTerminalBridgeAuditedDeclarationCount, 44);
-  assert.equal(status.leanConcretePipelinePriorTraceTransportToTerminalBridgeFormalized, false);
+  assert.equal(status.leanConcretePipelineTerminalBridgeAuditedDeclarationCount, 59);
+  assert.equal(status.leanConcretePipelinePriorTraceTransportToTerminalBridgeFormalized, true);
   assert.equal(status.leanConcretePipelineRawRefinementFormalized, false);
   assert.equal(status.leanConcretePipelineExternalInputSizePolynomialFormalized, false);
   assert.equal(status.leanConcreteCNFSATInPFormalized, false);
