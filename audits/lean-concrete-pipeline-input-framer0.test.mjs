@@ -19,6 +19,8 @@ const PREFIX = 'PNP.Concrete.PipelineInputFramer.';
 const EXPECTED_HEADS = Object.freeze([
   ['def', 'sourceSymbols'],
   ['inductive', 'SourceSymbol'],
+  ['inductive', 'InputSourceSymbol'],
+  ['inductive', 'PartialSourceSymbol'],
   ['def', 'bootState'],
   ['def', 'installOuterState'],
   ['def', 'seekSourceEndState'],
@@ -34,6 +36,12 @@ const EXPECTED_HEADS = Object.freeze([
   ['def', 'installMovingRightState'],
   ['def', 'acceptState'],
   ['def', 'rejectState'],
+  ['def', 'partialZeroState'],
+  ['def', 'partialOneState'],
+  ['def', 'partialInstallRightState'],
+  ['def', 'emptyInstallLeftState'],
+  ['def', 'emptyReturnHeadState'],
+  ['def', 'emptyInstallRightState'],
   ['def', 'keepRule'],
   ['def', 'writeRule'],
   ['def', 'bootRules'],
@@ -48,6 +56,10 @@ const EXPECTED_HEADS = Object.freeze([
   ['def', 'pairedInputFramer'],
   ['def', 'packedPairCount'],
   ['def', 'inputFramerWorkSteps'],
+  ['def', 'partialInputFramerWorkSteps'],
+  ['def', 'packedInputCount'],
+  ['def', 'inputHasPartialCell'],
+  ['def', 'totalInputFramerWorkSteps'],
   ['inductive', 'CarryScanSymbol'],
   ['def', 'pairedInputFramerOutsideLeft'],
   ['def', 'pairedInputFramerFinalTape'],
@@ -59,6 +71,22 @@ const EXPECTED_HEADS = Object.freeze([
   ['theorem', 'run_compilePairedInputFramer_rawTimeBound'],
   ['theorem', 'pairedInputFramerFinal_isHalted'],
   ['theorem', 'boundedDecide_compilePairedInputFramer_accept'],
+  ['def', 'totalInputFramerOutsideLeft'],
+  ['def', 'totalInputFramerFinalTape'],
+  ['def', 'totalInputFramerFinalConfiguration'],
+  ['theorem', 'totalInputFramerFinal_represents'],
+  ['theorem', 'totalInputFramer_workRunExact'],
+  ['theorem', 'totalInputFramerWorkSteps_empty'],
+  ['def', 'totalInputFramerRawTimeBound'],
+  ['theorem', 'totalInputFramerRawTimeBound_le'],
+  ['theorem', 'totalInputFramerFinal_isHalted'],
+  ['theorem', 'run_compileTotalInputFramer_encoded_rawTimeBound'],
+  ['theorem', 'run_compileTotalInputFramer_rawTimeBound_blankEquivalent'],
+  ['theorem', 'boundedDecide_compileTotalInputFramer_accept'],
+  ['theorem', 'boundedDecide_compileTotalInputFramer_ne_timeout'],
+  ['theorem', 'workBoundedDecide_totalInputFramer_empty_oneStepShort'],
+  ['theorem', 'workBoundedDecide_totalInputFramer_zero_oneStepShort'],
+  ['theorem', 'workBoundedDecide_totalInputFramer_one_oneStepShort'],
 ]);
 
 async function text0(relativePath) {
@@ -93,7 +121,7 @@ function validate0(source) {
 
   require0(JSON.stringify(imports0(source)) === JSON.stringify([
     'PNP.Concrete.PipelineTapeGeometry',
-    'PNP.Concrete.WorkInput',
+    'PNP.Concrete.TapeBlankEquivalence',
   ]), 'closed-imports');
   require0(/^namespace PNP\.Concrete$/mu.test(stripped)
     && /^namespace PipelineInputFramer$/mu.test(stripped)
@@ -101,14 +129,15 @@ function validate0(source) {
   'namespace');
   require0(!hasLeanAssumptionDeclaration0(source), 'assumption-declaration');
   require0(!hasUnauditedLeanDeclarationForm0(source), 'unaudited-declaration-form');
-  require0(!/\b(?:sorry|admit|unsafe|native_decide|omega|ac_rfl)\b/u.test(stripped)
+  require0(!/\b(?:sorry|admit|unsafe|native_decide|omega|ac_rfl|aesop|simp_all|grind|Classical|funext|propext)\b/u.test(stripped)
     && !/Nat\.(?:add_mul|mul_assoc|mul_left_comm)\b/u.test(stripped),
     'forbidden-shortcut');
   require0(JSON.stringify(publicHeadPairs0(source)) === JSON.stringify(EXPECTED_HEADS),
     'declaration-surface');
 
-  require0(prose.includes('The public exact trace is restricted to BitString.pair inputs.')
-    && prose.includes('It does not frame arbitrary empty or odd raw inputs')
+  require0(prose.includes('The all-input declarations additionally handle the empty word and an odd final raw cell by literal finite transitions.')
+    && prose.includes('They do not combine the framer with a simulated machine')
+    && prose.includes('prove malformed-input semantics for the full pipeline')
     && prose.includes('construct a pipeline refinement, or establish any complexity-class equality.'),
   'explicit-nonclaims');
   require0(!/\b(?:liftMachine|RawRefinement|FunctionProgram|DecisionProgram|machineOutput|outputBits|handoffTarget|CNFSAT|PEqualsNP)\b/u
@@ -120,6 +149,17 @@ function validate0(source) {
     'packed-pair-count');
   require0(compact.includes('def inputFramerWorkSteps (packedCells : Nat) : Nat := 4 * packedCells * packedCells + 9 * packedCells + 7'),
     'exact-work-cost');
+  require0(compact.includes('def partialInputFramerWorkSteps (packedCells : Nat) : Nat := 4 * packedCells * packedCells + 9 * packedCells + 5'),
+    'exact-partial-work-cost');
+  require0(compact.includes('def partialZeroState : Nat := 15')
+    && compact.includes('def partialInstallRightState : Nat := 17')
+    && compact.includes('def emptyInstallLeftState : Nat := 18')
+    && compact.includes('def emptyInstallRightState : Nat := 20'),
+  'literal-total-control-states');
+  require0(compact.includes('writeRule seekUnprocessedState WorkSymbol.zeroBlank partialZeroState WorkSymbol.blank .right')
+    && compact.includes('writeRule partialInstallRightState WorkSymbol.blank returnOuterState rightMarker .left')
+    && compact.includes('writeRule emptyInstallRightState WorkSymbol.blank acceptState rightMarker .left'),
+  'literal-empty-and-partial-rules');
   require0(compact.includes('List.replicate (packedPairCount left right) WorkSymbol.blank ++ [rightMarker]'),
     'exterior-garbage-shape');
   require0(compact.includes('frameWithGarbage (Tape.ofInput (BitString.pair left right)) (pairedInputFramerOutsideLeft left right) []'),
@@ -137,48 +177,72 @@ function validate0(source) {
   require0(compact.includes('boundedDecide (compileWorkMachine pairedInputFramer)')
     && compact.includes('(BitString.pair left right) = .accept'),
   'bounded-framer-accept');
+  require0(compact.includes('frameWithGarbage (Tape.ofInput input) (totalInputFramerOutsideLeft input) []'),
+    'all-input-represented-endpoint');
+  require0(compact.includes('workRunExact? pairedInputFramer (totalInputFramerWorkSteps input) (workStartConfiguration pairedInputFramer (rawInputWorkTape input)) = some (totalInputFramerFinalConfiguration input)'),
+    'all-input-exact-work-trace');
+  require0(compact.includes('def totalInputFramerRawTimeBound : NatPolynomial := .add (.quadratic 6 75) (.linear 39 0)'),
+    'all-input-raw-polynomial');
+  require0(compact.includes('6 * totalInputFramerWorkSteps input ≤ totalInputFramerRawTimeBound.eval (BitString.size input)'),
+    'all-input-raw-polynomial-bound');
+  require0(compact.includes('run_compileTotalInputFramer_rawTimeBound_blankEquivalent')
+    && compact.includes('Configuration.BlankEquivalent')
+    && compact.includes('(startConfig (compileWorkMachine pairedInputFramer) input)'),
+  'ordinary-start-blank-equivalence');
+  require0(compact.includes('boundedDecide_compileTotalInputFramer_accept')
+    && compact.includes('boundedDecide_compileTotalInputFramer_ne_timeout'),
+  'all-input-accepts-without-timeout');
+  require0(compact.includes('workBoundedDecide pairedInputFramer 3 (rawInputWorkTape []) = .timeout')
+    && compact.includes('workBoundedDecide pairedInputFramer 17 (rawInputWorkTape [false]) = .timeout')
+    && compact.includes('workBoundedDecide pairedInputFramer 17 (rawInputWorkTape [true]) = .timeout'),
+  'one-step-short-regressions');
 
   return failures;
 }
 
-test('paired-input framer source is closed, literal, exact, and shortcut-free', async () => {
+test('all-input framer source is closed, literal, exact, and shortcut-free', async () => {
   const source = await text0(SOURCE_PATH);
   assert.deepEqual(validate0(source), []);
 });
 
-test('paired-input framer axiom transcript covers all 42 explicit public heads', async () => {
+test('all-input framer axiom transcript covers all 70 explicit public heads', async () => {
   const [source, audit] = await Promise.all([text0(SOURCE_PATH), text0(AUDIT_PATH)]);
   const expectedNames = EXPECTED_HEADS.map(([, name]) => `${PREFIX}${name}`);
-  assert.equal(EXPECTED_HEADS.length, 42);
+  assert.equal(EXPECTED_HEADS.length, 70);
   assert.deepEqual(publicHeadPairs0(source), EXPECTED_HEADS);
   assert.deepEqual(imports0(audit), ['PNP']);
   assert.deepEqual(printed0(audit), expectedNames);
-  assert.equal(new Set(printed0(audit)).size, 42);
+  assert.equal(new Set(printed0(audit)).size, 70);
 });
 
-test('root, package, and workflow enforce the paired-input framer audit', async () => {
+test('root, package, and workflow enforce the all-input framer audit', async () => {
   const [root, packageText, workflow] = await Promise.all([
     text0('lean/PNP.lean'), text0('package.json'), text0('.github/workflows/lean-bridge.yml'),
   ]);
   assert.equal(imports0(root).includes('PNP.Concrete.PipelineInputFramer'), true);
   assert.match(packageText, /audits\/lean-concrete-pipeline-input-framer0\.test\.mjs/u);
   assert.match(workflow, /PNPConcretePipelineInputFramerAxiomAudit\.lean/u);
-  assert.match(workflow, /grep -Fc 'does not depend on any axioms'\)" -eq 42/u);
+  assert.match(workflow, /grep -Fc 'does not depend on any axioms'\)" -eq 70/u);
 });
 
-test('paired-input framer audit rejects scope, cost, endpoint, and trust regressions', async () => {
+test('all-input framer audit rejects scope, cost, endpoint, and trust regressions', async () => {
   const source = await text0(SOURCE_PATH);
   const mutations = [
     source.replace('4 * packedCells * packedCells + 9 * packedCells + 7',
       '4 * packedCells * packedCells + 9 * packedCells + 8'),
     source.replace('.add (.quadratic 6 42) (.linear 27 0)',
       '.add (.quadratic 6 43) (.linear 27 0)'),
+    source.replace('4 * packedCells * packedCells + 9 * packedCells + 5',
+      '4 * packedCells * packedCells + 9 * packedCells + 6'),
+    source.replace('.add (.quadratic 6 75) (.linear 39 0)',
+      '.add (.quadratic 6 74) (.linear 39 0)'),
+    source.replace('writeRule emptyInstallRightState WorkSymbol.blank acceptState',
+      'writeRule emptyInstallRightState WorkSymbol.blank rejectState'),
     source.replace('frameWithGarbage (Tape.ofInput (BitString.pair left right))',
       'frameWithGarbage (Tape.ofInput left)'),
     `${source}\naxiom broadenedFramer : True\n`,
-    `${source}\ntheorem arbitraryRawInputFramer (input : BitString) : True := True.intro\n`,
-    source.replace('The public exact trace is restricted to `BitString.pair` inputs.',
-      'The public exact trace applies to every raw input.'),
+    `${source}\ntheorem hiddenPipelineRefinement : FunctionProgram.RawRefinement := by trivial\n`,
+    source.replace('They do not combine the', 'They combine the'),
   ];
   for (const [index, mutated] of mutations.entries()) {
     assert.notEqual(mutated, source, `mutation ${index} must change the source`);
@@ -195,12 +259,18 @@ test('framer milestone remains local and the concrete publication gate remains c
   assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), true);
   assert.equal(status.projectSpecificAxiomInventory.length, 4);
   assert.equal(status.rootLeanTheoremPresent, false);
+  assert.equal(status.leanConcretePipelineInputFramerAxiomAuditPassed, true);
+  assert.equal(status.leanConcretePipelineInputFramerAuditedDeclarationCount, 70);
+  assert.equal(status.leanConcretePipelineAllInputFramingFormalized, true);
+  assert.equal(status.leanConcretePipelineMalformedInputBehaviorFormalized, false);
   const framerNonClaim = status.nonClaims.find((entry) => entry.includes(
-    'PipelineInputFramer is one literal finite machine for canonical BitString.pair inputs'));
+    'PipelineInputFramer is one literal finite machine for every raw bitstring'));
   assert.equal(typeof framerNonClaim, 'string');
-  assert.match(framerNonClaim, /launches that endpoint into the lifted target/u);
-  assert.match(framerNonClaim, /does not accept arbitrary empty, odd, malformed, or unpaired raw words/u);
-  assert.match(framerNonClaim, /does not .*prove target termination/u);
+  assert.match(framerNonClaim, /empty word, complete two-bit work cells, and an odd final raw bit/u);
+  assert.match(framerNonClaim, /6 \* m \* m \+ 39 \* m \+ 75/u);
+  assert.match(framerNonClaim, /All 70 public declarations have empty axiom closure/u);
+  assert.match(framerNonClaim, /remain canonical-pair-only/u);
+  assert.match(framerNonClaim, /does not prove full-pipeline malformed-input behavior/u);
   const foundation = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -209,11 +279,22 @@ test('framer milestone remains local and the concrete publication gate remains c
     `${PREFIX}pairedInputFramer_workRunExact`,
     `${PREFIX}pairedInputFramerRawTimeBound_exact`,
     `${PREFIX}run_compilePairedInputFramer_rawTimeBound`,
+    `${PREFIX}boundedDecide_compileTotalInputFramer_accept`,
+    `${PREFIX}boundedDecide_compileTotalInputFramer_ne_timeout`,
+    `${PREFIX}run_compileTotalInputFramer_encoded_rawTimeBound`,
+    `${PREFIX}run_compileTotalInputFramer_rawTimeBound_blankEquivalent`,
+    `${PREFIX}totalInputFramerFinal_isHalted`,
+    `${PREFIX}totalInputFramerFinal_represents`,
+    `${PREFIX}totalInputFramerRawTimeBound_le`,
+    `${PREFIX}totalInputFramer_workRunExact`,
   ]) assert.equal(foundation.requiredTheorems.includes(name), true, name);
-  assert.match(foundation.scope, /canonical paired input/u);
-  assert.match(foundation.scope, /exact quadratic raw-input-length polynomial/u);
+  assert.match(foundation.scope, /handles every raw bitstring locally/u);
+  assert.match(foundation.scope, /exactly 4 work steps on empty input/u);
+  assert.match(foundation.scope, /6 \* m \* m \+ 39 \* m \+ 75/u);
+  assert.match(foundation.scope, /All 70 input-framer declarations/u);
   assert.match(foundation.scope, /symbol-preserving framer-to-simulator/u);
   assert.match(foundation.scope, /R\(m\) = inputFramerRawTimeBound\(m\)/u);
+  assert.match(foundation.nonClaim, /all-input theorem stops at the accepting framer frame/u);
   assert.match(foundation.nonClaim, /canonical BitString\.pair inputs/u);
   assert.match(foundation.nonClaim, /malformed/u);
   assert.match(foundation.nonClaim, /FunctionProgram\.RawRefinement/u);

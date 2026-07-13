@@ -2,6 +2,8 @@ import PNP
 
 #print axioms PNP.Concrete.PipelineInputFramer.sourceSymbols
 #print axioms PNP.Concrete.PipelineInputFramer.SourceSymbol
+#print axioms PNP.Concrete.PipelineInputFramer.InputSourceSymbol
+#print axioms PNP.Concrete.PipelineInputFramer.PartialSourceSymbol
 #print axioms PNP.Concrete.PipelineInputFramer.bootState
 #print axioms PNP.Concrete.PipelineInputFramer.installOuterState
 #print axioms PNP.Concrete.PipelineInputFramer.seekSourceEndState
@@ -17,6 +19,12 @@ import PNP
 #print axioms PNP.Concrete.PipelineInputFramer.installMovingRightState
 #print axioms PNP.Concrete.PipelineInputFramer.acceptState
 #print axioms PNP.Concrete.PipelineInputFramer.rejectState
+#print axioms PNP.Concrete.PipelineInputFramer.partialZeroState
+#print axioms PNP.Concrete.PipelineInputFramer.partialOneState
+#print axioms PNP.Concrete.PipelineInputFramer.partialInstallRightState
+#print axioms PNP.Concrete.PipelineInputFramer.emptyInstallLeftState
+#print axioms PNP.Concrete.PipelineInputFramer.emptyReturnHeadState
+#print axioms PNP.Concrete.PipelineInputFramer.emptyInstallRightState
 #print axioms PNP.Concrete.PipelineInputFramer.keepRule
 #print axioms PNP.Concrete.PipelineInputFramer.writeRule
 #print axioms PNP.Concrete.PipelineInputFramer.bootRules
@@ -31,6 +39,10 @@ import PNP
 #print axioms PNP.Concrete.PipelineInputFramer.pairedInputFramer
 #print axioms PNP.Concrete.PipelineInputFramer.packedPairCount
 #print axioms PNP.Concrete.PipelineInputFramer.inputFramerWorkSteps
+#print axioms PNP.Concrete.PipelineInputFramer.partialInputFramerWorkSteps
+#print axioms PNP.Concrete.PipelineInputFramer.packedInputCount
+#print axioms PNP.Concrete.PipelineInputFramer.inputHasPartialCell
+#print axioms PNP.Concrete.PipelineInputFramer.totalInputFramerWorkSteps
 #print axioms PNP.Concrete.PipelineInputFramer.CarryScanSymbol
 #print axioms PNP.Concrete.PipelineInputFramer.pairedInputFramerOutsideLeft
 #print axioms PNP.Concrete.PipelineInputFramer.pairedInputFramerFinalTape
@@ -42,3 +54,19 @@ import PNP
 #print axioms PNP.Concrete.PipelineInputFramer.run_compilePairedInputFramer_rawTimeBound
 #print axioms PNP.Concrete.PipelineInputFramer.pairedInputFramerFinal_isHalted
 #print axioms PNP.Concrete.PipelineInputFramer.boundedDecide_compilePairedInputFramer_accept
+#print axioms PNP.Concrete.PipelineInputFramer.totalInputFramerOutsideLeft
+#print axioms PNP.Concrete.PipelineInputFramer.totalInputFramerFinalTape
+#print axioms PNP.Concrete.PipelineInputFramer.totalInputFramerFinalConfiguration
+#print axioms PNP.Concrete.PipelineInputFramer.totalInputFramerFinal_represents
+#print axioms PNP.Concrete.PipelineInputFramer.totalInputFramer_workRunExact
+#print axioms PNP.Concrete.PipelineInputFramer.totalInputFramerWorkSteps_empty
+#print axioms PNP.Concrete.PipelineInputFramer.totalInputFramerRawTimeBound
+#print axioms PNP.Concrete.PipelineInputFramer.totalInputFramerRawTimeBound_le
+#print axioms PNP.Concrete.PipelineInputFramer.totalInputFramerFinal_isHalted
+#print axioms PNP.Concrete.PipelineInputFramer.run_compileTotalInputFramer_encoded_rawTimeBound
+#print axioms PNP.Concrete.PipelineInputFramer.run_compileTotalInputFramer_rawTimeBound_blankEquivalent
+#print axioms PNP.Concrete.PipelineInputFramer.boundedDecide_compileTotalInputFramer_accept
+#print axioms PNP.Concrete.PipelineInputFramer.boundedDecide_compileTotalInputFramer_ne_timeout
+#print axioms PNP.Concrete.PipelineInputFramer.workBoundedDecide_totalInputFramer_empty_oneStepShort
+#print axioms PNP.Concrete.PipelineInputFramer.workBoundedDecide_totalInputFramer_zero_oneStepShort
+#print axioms PNP.Concrete.PipelineInputFramer.workBoundedDecide_totalInputFramer_one_oneStepShort

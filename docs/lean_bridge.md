@@ -160,9 +160,11 @@ handoff claim. The twenty declarations in `lean/PNP/Concrete/PipelineTapeGeometr
 axiom-free: they define distinct two-track data and boundary tags, an arbitrary-exterior-garbage
 frame, and pure write/move/boundary-expansion geometry. They define no rules, machine, simulation,
 or runtime bound. `lean/PNP/Concrete/PipelineInputFramer.lean` supplies a separate literal finite
-machine from canonical paired input to an accepting represented frame under exact work and compiled
-raw budgets. It is paired-input-only; the separate bridge layer now launches its exact accepting
-endpoint into the simulator but does not broaden the framer's input domain.
+machine from every raw bitstring to an accepting represented frame. It proves exact empty,
+complete-cell, and partial-final-cell work costs plus the uniform compiled bound
+`6 * m * m + 39 * m + 75` from ordinary raw input; all 70 public declarations have empty axiom
+closure. The existing renamed bridge and complete compiler theorems still quantify canonical
+pairs, so the all-input local framer does not broaden the complete pipeline's input domain.
 `lean/PNP/Concrete/PipelineOutputHandoff.lean` supplies another literal finite machine from an
 already represented logical tape to an accepting representation of its blank-delimited handoff
 target. Its exact costs are `2 * n + 4` work steps and `12 * n + 24` compiled steps for logical
@@ -323,7 +325,7 @@ ineligible for the general charged-pipeline target, even though the direct CNF v
 to one raw machine. The abstract `PNP.PEqualsNP` bridge remains ineligible. See
 [`lean_theorem_inventory.md`](./lean_theorem_inventory.md) for the full contract and commands.
 
-The inventory and false gate generate the current root TeX/PDF: a concise nine-page
+The inventory and false gate generate the current root TeX/PDF: a concise ten-page
 formal-reconstruction report with no theorem emission. It replaces the historical 56-page claim
 manuscript at the repository root; that historical artifact is available only through the pinned
 legacy coordinate recorded under [`archive/legacy-v0/`](../archive/legacy-v0/README.md).
