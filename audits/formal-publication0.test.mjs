@@ -122,17 +122,20 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   ]) assert.equal(byId.get(id).status, 'not-formalized');
 });
 
-test('publication consumes the reviewed all-input-framer map and inventory counts', async () => {
+test('publication consumes the reviewed all-input compiler map and inventory counts', async () => {
   const [status, mapText] = await Promise.all([
     status0(),
     readFile(new URL('../publication/FORMAL_PUBLICATION_MAP.json', import.meta.url), 'utf8'),
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '87f538085e612210e6f8be1e75653c589279227b9e220230190d5f9c2f4b27ec');
+    '2d7cc0f642dcddc334d33b98dbc1a9476c8c8d4a50522268b8c430ef580f20e7');
   assert.equal(map.milestoneSourceClosureSha256,
-    '6b6558134e01809a69181416bf121cf3250dee4e468e6bb0efd7351cb5e5b1a6');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 157);
+    'cfd2b1263520068a0dc3e4b46a1ddbe76cd704a7368457c03bf40b9f4ec21fc2');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 172);
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.PipelineCompiler.pipeline_correct'
+  ], 'string');
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,
     map.gate.expectedConcreteTargetKernelValueSha256,
@@ -146,7 +149,7 @@ test('publication consumes the reviewed all-input-framer map and inventory count
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [5197, 2197, 2096, 1032, 48]);
+  ], [5235, 2224, 2123, 1036, 49]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

@@ -107,9 +107,11 @@ rule table, proves exact local launches from represented handoff endpoints,
 and preserves every successful earlier bridge trace without shadowing. For a
 caller-supplied exact accepting or rejecting target execution, the terminal
 module now composes all four stages from ordinary paired input and proves the
-exact raw output. There is still no target-termination theorem, uniform
-all-input `FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement`,
-or polynomial in external encoded input length.
+exact raw output. `PipelineCompiler` now adds target termination and a
+polynomial in external encoded input length for every raw input to an
+already-raw proof-bearing target. There is still no recursive
+`FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement` for the
+charged program syntax.
 
 Consequently `Formal.ConcreteComplexityMachineLink` remains open,
 `PNP.Concrete.cnfSATInP` and `PNP.Concrete.cnfSATNPComplete` remain absent,

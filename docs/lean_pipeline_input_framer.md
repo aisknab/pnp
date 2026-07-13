@@ -94,15 +94,16 @@ public head appears exactly once in the transcript.
 
 ## Exact boundary of the result
 
-This milestone ends at the accepting input frame. The existing
-`PipelineStateNamespace`, `PipelineStageBridges`, `PipelineTerminalBridge`, and
-`PipelinePairedCompiler` composition theorems still quantify canonical paired
-inputs. No theorem in this milestone transports an arbitrary empty, odd,
-trailing, malformed, or other non-pair raw word through the renamed simulator,
-represented-output handoff, and terminal packer.
+This module's local theorem ends at the accepting input frame. The successor
+[`PipelineCompiler`](./lean_pipeline_compiler.md) now transports every raw word
+from that endpoint through the renamed simulator, represented-output handoff,
+and terminal packer. Thus complete-pipeline empty, odd, trailing, malformed,
+and other non-pair behavior is now covered for an already-raw proof-bearing
+target.
 
-Consequently, full-pipeline malformed-input behavior, a uniform all-input
-`FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement`, and the
-concrete complexity machine link remain unproved. This result does not establish
-`CNFSAT ∈ P`, CNF-SAT NP-completeness, `PNP.Main.p_eq_np`, or `P = NP`; the
-publication gate remains false.
+The remaining boundary is recursive charged-program compilation: there is no
+general `FunctionProgram.RawRefinement.compose` or
+`DecisionProgram.RawRefinement.precompose`, so the concrete complexity machine
+link remains open. These results do not establish `CNFSAT ∈ P`, CNF-SAT
+NP-completeness, `PNP.Main.p_eq_np`, or `P = NP`; the publication gate remains
+false.

@@ -201,15 +201,13 @@ test('the executable compiler blocker and publication gate remain fail-closed', 
   assert.equal(foundation.requiredTheorems.includes(
     'PNP.Concrete.PipelineTape.represents_expandRight_of_nil'), true);
   assert.match(foundation.scope,
-    /symbol-preserving framer-to-simulator/u);
+    /launches the target on the unchanged raw input/u);
   assert.match(foundation.scope,
-    /bounded verdict, no-timeout result/u);
+    /exact accept\/reject\/timeout classification/u);
   assert.match(foundation.nonClaim,
-    /canonical BitString\.pair inputs/u);
+    /every raw bitstring/u);
   assert.match(foundation.nonClaim,
-    /malformed/u);
-  assert.match(foundation.nonClaim,
-    /FunctionProgram\.RawRefinement and DecisionProgram\.RawRefinement/u);
+    /raw-refinement composition for function or decision programs/u);
   assert.equal(map.gate.standardComplexityModelEligible, false);
   assert.equal(map.gate.expectedSourceClosureSha256, null);
 });

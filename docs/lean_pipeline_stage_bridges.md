@@ -98,10 +98,12 @@ tape. `PipelineTerminalBridge` now extends this rule table with two terminal-
 packer copies, preserves every successful earlier bridge step in the extended
 table, and composes the local accepting and rejecting suffixes. For every
 caller-supplied exact accepting or rejecting target execution, the terminal
-module proves one four-stage exact trace from ordinary paired input. No theorem
-supplies target termination, a uniform all-input `FunctionProgram.RawRefinement`
-or `DecisionProgram.RawRefinement`, a polynomial in external encoded input
-length, `CNFSAT ∈ P`, CNFSAT NP-completeness, or `P = NP`.
+module proves one four-stage exact trace from ordinary paired input.
+`PipelineCompiler` now supplies target termination, every-raw-input behavior,
+and a polynomial in external encoded input length for an already-raw
+`PolynomialTimeMachine`. It does not supply recursive
+`FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement`, `CNFSAT ∈ P`,
+CNFSAT NP-completeness, or `P = NP`.
 
 `Formal.ConcreteComplexityMachineLink` therefore remains active,
 `PNP.Main.p_eq_np` remains absent, and the publication gate remains false.

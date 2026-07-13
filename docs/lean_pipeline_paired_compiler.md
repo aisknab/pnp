@@ -82,12 +82,15 @@ shortcuts, output loss, and class/root overclaims.
 
 ## Exact remaining boundary
 
-This milestone covers canonical `BitString.pair left right` inputs only. It
-does not define exact behavior for empty, odd, malformed, trailing, or other
-arbitrary raw bitstrings outside that canonical image. Therefore it is not an
-all-bitstring `FunctionProgram.RawRefinement` or
-`DecisionProgram.RawRefinement`, and
-`Formal.ConcreteComplexityMachineLink` remains open.
+This module's sharper theorem covers canonical `BitString.pair left right`
+inputs. Its successor [`PipelineCompiler`](./lean_pipeline_compiler.md) uses the
+same executable table and now proves exact behavior for empty, odd, malformed,
+trailing, and every other raw bitstring when the target is already a
+proof-bearing raw `PolynomialTimeMachine`.
+
+That successor is still not the recursive `FunctionProgram.RawRefinement` or
+`DecisionProgram.RawRefinement` compiler required by the charged-program
+interface, and `Formal.ConcreteComplexityMachineLink` remains open.
 
 `PNP.Concrete.cnfSATInP`, `PNP.Concrete.cnfSATNPComplete`, and
 `PNP.Main.p_eq_np` remain absent. All seven formal blockers and four disclosed

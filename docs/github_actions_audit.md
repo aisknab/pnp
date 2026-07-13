@@ -20,8 +20,8 @@ from current theorem status.
   56-declaration executable pipeline stage-bridge surface, the framed
   raw-machine simulation surface, the 48-declaration finite
   charged-pipeline complexity interface, the
-  six-declaration raw-pipeline refinement boundary, and the two-declaration inactive
-  concrete target, the concrete CNF semantics/codec,
+  six-declaration raw-pipeline refinement boundary, the two-declaration inactive
+  concrete target, the 29-declaration all-input four-stage compiler, the concrete CNF semantics/codec,
   paired work-input bridge, direct verifier bridge, and complete work-machine correctness closure,
   and enforced zero-axiom direct-wire semantics, enumerator, finite truth-table,
   exhaustive reference-minimum, concrete framed composition/slack, typed locked-NAND candidate,
@@ -31,7 +31,7 @@ from current theorem status.
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual
   routes require 30. The workflow also checks the byte-identical inventory mirrors, derives the
   false concrete publication gate and status/report outputs, and verifies same-environment
-  double-build determinism plus exact committed bytes for the current concise ten-page PDF. The
+  double-build determinism plus exact committed bytes for the current concise nine-page PDF. The
   hosted runner's apt-installed TeX and Poppler versions are not cryptographically pinned, so this
   is not a universal cross-toolchain reproducibility claim.
 - `.github/workflows/legacy-v0-replay.yml` is manual only. It replays the immutable historical
@@ -79,8 +79,10 @@ packer copies, first-match isolation, preservation of every successful earlier b
 supplied accepting/rejecting four-stage traces, terminal halts, raw output equality, timeout
 behavior, and the local `18*n^2 + 36*n + 12` suffix bound. The supplied-trace theorem still requires
 a caller-supplied exact target execution. `PipelinePairedCompiler` separately derives termination
-and an external polynomial for proof-bearing targets on canonical pairs; all-input complete
-refinement remains unproved.
+and an external polynomial for proof-bearing targets on canonical pairs. `PipelineCompiler` then
+extracts the target prefix internally and proves the same literal table correct for every raw
+bitstring, including exact verdict/output and no-timeout at an external polynomial. Recursive
+charged-program refinement remains unproved.
 
 The pipeline-tape geometry audit proves a two-track representation with distinct data/left/right
 tags, arbitrary stale cells outside the first markers, and exact preservation under data writes,
@@ -100,17 +102,18 @@ module supplies canonical paired framing, exact launches, and target verdict pre
 supplied exact run. The terminal bridge preserves that trace in its extended machine and, for a
 caller-supplied exact accepting or rejecting target execution, composes the subsequent raw-output
 suffix. `PipelinePairedCompiler` adds target termination and an external polynomial for canonical
-pairs, but composition/precomposition refinement and arbitrary-input complete behavior remain
-unproved.
+pairs. `PipelineCompiler` proves arbitrary-input complete behavior for the same raw table; only
+the general composition/precomposition refinement remains unproved at this layer.
 
 The pipeline-input-framer audit covers a different literal finite machine. Its compiled theorem
 starts from every ordinary raw input, including empty and odd words, reaches an accepting
 represented frame with permitted exterior garbage, and pins exact branch costs plus the uniform
 raw bound `6 * m * m + 39 * m + 75`. CI closes all 70 public declarations, requires empty axiom
 closures, and mutates the empty/partial transitions, costs, endpoint, and one-step-short behavior.
-It also keeps the remaining boundary explicit: the bridge and complete compiler theorems still
-quantify canonical pairs. No theorem yet carries arbitrary non-pair input through the simulator,
-handoff, and terminal packer into a complete refinement, class equality, or `P = NP`.
+It also keeps the successor boundary explicit: `PipelineCompiler` now carries arbitrary non-pair
+input through the simulator, handoff, and terminal packer for an already-raw target, but does not
+compile charged function/decision composition into a complete refinement, class equality, or
+`P = NP`.
 
 The pipeline-output-handoff audit covers a third literal finite machine. From an already represented
 logical tape `raw`, it reaches an accepting representation of `raw.handoffTarget` after exactly
@@ -121,7 +124,8 @@ state image and two verdict-indexed bridge copies. The cumulative theorem begins
 `startConfig` and preserves accept/reject for supplied exact target runs. The terminal bridge proves
 the local launch from either resulting endpoint into a packer copy and raw-visible output with a
 local quadratic bound, while requiring earlier-trace transport, target termination, the complete
-pipeline refinement, and the external-size result to remain false.
+pipeline run, and the external-size result from later modules. `PipelineCompiler` supplies those
+facts for an already-raw proof-bearing target; the general charged-program refinement stays false.
 
 The concrete-CNF checks do establish a narrower raw-machine result. They require complete axiom
 transcripts for the canonical CNF codec and semantics, paired work-input layout, generic direct
@@ -147,7 +151,7 @@ node scripts/generate-formal-publication.mjs --check
 npm run report:check
 ```
 
-The current root PDF is the generated ten-page formal-reconstruction report. The historical
+The current root PDF is the generated nine-page formal-reconstruction report. The historical
 56-page claim artifact is not a current workflow output and is available only at the pinned legacy
 coordinate recorded under `archive/legacy-v0/`.
 

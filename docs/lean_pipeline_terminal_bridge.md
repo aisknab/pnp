@@ -139,9 +139,11 @@ bound drift, output drift, hidden assumptions, and class/root overclaims.
 
 The complete literal trace theorem in this module requires a caller-supplied
 exact target execution. `PipelinePairedCompiler` extracts that trace and
-derives an external polynomial for canonical pairs, but no theorem supplies a
-uniform all-input `FunctionProgram.RawRefinement` or
-`DecisionProgram.RawRefinement` with malformed-input behavior.
+derives an external polynomial for canonical pairs. `PipelineCompiler` now
+does so for every raw input, including malformed and non-pair words, while
+preserving exact verdict and raw output. No theorem supplies recursive
+`FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement` for the
+charged program syntax.
 
 `Formal.ConcreteComplexityMachineLink` remains open;
 `PNP.Concrete.cnfSATInP`, `PNP.Concrete.cnfSATNPComplete`, and

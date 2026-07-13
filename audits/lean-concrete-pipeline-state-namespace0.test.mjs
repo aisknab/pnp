@@ -223,7 +223,7 @@ test('pipeline state namespace audit rejects collisions, dropped stages, broaden
   }
 });
 
-test('namespace remains the prerequisite while the separate bridge milestone stays fail-closed', async () => {
+test('namespace remains the collision-free prerequisite while recursive refinement stays fail-closed', async () => {
   const [status, map] = await Promise.all([
     text0('status/FORMAL_RECONSTRUCTION_STATUS.json').then(JSON.parse),
     text0('publication/FORMAL_PUBLICATION_MAP.json').then(JSON.parse),
@@ -252,12 +252,12 @@ test('namespace remains the prerequisite while the separate bridge milestone sta
     `${PREFIX}renamedLiftMachine_workRunExact_of_rawRunExact`,
     `${PREFIX}renamedOutputHandoff_workRunExact_of_represents`,
   ]) assert.equal(foundation.requiredTheorems.includes(name), true, name);
-  assert.match(foundation.scope, /symbol-preserving framer-to-simulator/u);
-  assert.match(foundation.scope, /two disjoint packer copies/u);
-  assert.match(foundation.scope, /internally extracts an exact target prefix/u);
+  assert.match(foundation.scope, /same terminal-bridge rule table/u);
+  assert.match(foundation.scope, /launches the target on the unchanged raw input/u);
+  assert.match(foundation.scope, /Every supplied exact n-step target run/u);
   assert.match(foundation.scope, /pads the complete execution/u);
-  assert.match(foundation.scope, /one raw machine/u);
-  assert.match(foundation.nonClaim, /canonical BitString\.pair inputs/u);
-  assert.match(foundation.nonClaim, /FunctionProgram.RawRefinement/u);
+  assert.match(foundation.scope, /finite four-stage pipeline/u);
+  assert.match(foundation.nonClaim, /every raw bitstring/u);
+  assert.match(foundation.nonClaim, /raw-refinement composition/u);
   assert.equal(map.gate.standardComplexityModelEligible, false);
 });

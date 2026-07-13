@@ -199,11 +199,10 @@ test('internal handoff milestone remains local and the publication gate remains 
     `${PREFIX}framedOutputHandoffRawTimeBound_exact`,
     `${PREFIX}run_compileFramedOutputHandoff_of_represents`,
   ]) assert.equal(foundation.requiredTheorems.includes(name), true, name);
-  assert.match(foundation.scope, /verdict-indexed handoff launches/u);
+  assert.match(foundation.scope, /preserves exact accept\/reject\/timeout classification/u);
   assert.match(foundation.scope, /framedOutputHandoffRawTimeBound/u);
-  assert.match(foundation.nonClaim, /canonical BitString\.pair inputs/u);
-  assert.match(foundation.nonClaim, /malformed/u);
-  assert.match(foundation.nonClaim, /FunctionProgram\.RawRefinement/u);
+  assert.match(foundation.nonClaim, /every raw bitstring/u);
+  assert.match(foundation.nonClaim, /raw-refinement composition/u);
   assert.equal(map.gate.standardComplexityModelEligible, false);
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,
