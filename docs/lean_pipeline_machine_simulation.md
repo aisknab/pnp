@@ -97,10 +97,10 @@ This is a local configuration simulation from an already represented frame. The 
 `18 * F` compiled fuel are at-most budgets measured in source transitions, not input length. The
 padding conclusions assume that the supplied `F`-fuel endpoint is designated halting. They do not
 prove termination or classify an arbitrary early fuel stop as a final target verdict. This local
-module starts from an already represented frame. `PipelineStageBridges` now composes every supplied
+module starts from an already represented frame. `PipelineStageBridges` composes every supplied
 exact run with the canonical paired-input framer and a verdict-indexed internal handoff, and proves
-that a supplied stuck nonhalting endpoint is timeout at the exact prefix budget. The result still
-does not decode the interleaved work encoding into terminal raw `machineOutput`, construct a
-`FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement`, prove an external-input-size
-polynomial, establish `CNFSAT ∈ P` or NP-completeness, activate the publication gate, or prove
-`P = NP`.
+that a supplied stuck nonhalting endpoint is timeout at the exact prefix budget.
+`PipelineCompiler` now supplies terminal raw `machineOutput`, target termination, and an
+external-input-size polynomial for every raw input to an already-raw target. It still does not
+construct recursive `FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement`, establish
+`CNFSAT ∈ P` or NP-completeness, activate the publication gate, or prove `P = NP`.

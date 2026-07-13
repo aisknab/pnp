@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-13-28');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-14-29');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -71,10 +71,13 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanConcretePipelinePairedCompilerAxiomAuditPassed, true);
   assert.equal(out.leanConcretePipelinePairedCompilerAuditedDeclarationCount, 28);
   assert.equal(out.leanConcretePipelineCanonicalPairCompilationFormalized, true);
+  assert.equal(out.leanConcretePipelineCompilerAxiomAuditPassed, true);
+  assert.equal(out.leanConcretePipelineCompilerAuditedDeclarationCount, 29);
+  assert.equal(out.leanConcretePipelineAllInputCompilationFormalized, true);
   assert.equal(out.leanConcretePipelineInputFramerAxiomAuditPassed, true);
   assert.equal(out.leanConcretePipelineInputFramerAuditedDeclarationCount, 70);
   assert.equal(out.leanConcretePipelineAllInputFramingFormalized, true);
-  assert.equal(out.leanConcretePipelineMalformedInputBehaviorFormalized, false);
+  assert.equal(out.leanConcretePipelineMalformedInputBehaviorFormalized, true);
   assert.equal(out.leanConcretePipelineRawRefinementFormalized, false);
   assert.equal(out.leanConcretePipelineExternalInputSizePolynomialFormalized, true);
   assert.equal(out.leanNANDDirectWireCoreFormalized, true);
@@ -166,20 +169,30 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.match(out.siteStatusSha256, /^[0-9a-f]{64}$/u);
 });
 
-test('formal reconstruction status pins the all-input framer inventory and source closure', async () => {
+test('formal reconstruction status pins the all-input compiler inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 5197);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 2197);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 2096);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 1032);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 48);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 5235);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 2224);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 2123);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 1036);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 49);
   assert.equal(status.leanSourceClosureSha256,
-    '6b6558134e01809a69181416bf121cf3250dee4e468e6bb0efd7351cb5e5b1a6');
+    'cfd2b1263520068a0dc3e4b46a1ddbe76cd704a7368457c03bf40b9f4ec21fc2');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
   assert.equal(machine.status, 'formalized-foundation-only');
   assert.equal(machine.earned, true);
+  for (const name of [
+    'PNP.Concrete.PipelineCompiler.pipeline_correct',
+    'PNP.Concrete.PipelineCompiler.pipeline_boundedDecide_eq',
+    'PNP.Concrete.PipelineCompiler.pipeline_machineOutput_eq',
+    'PNP.Concrete.PipelineCompiler.pipeline_ne_timeout',
+    'PNP.Concrete.PipelineCompiler.pipeline_accepts_iff',
+    'PNP.Concrete.PipelineCompiler.pipeline_timeout_of_stuck_rawRunExact',
+    'PNP.Concrete.PipelineCompiler.pipelineOutputSizeBound_eval',
+    'PNP.Concrete.PipelineCompiler.suppliedTraceRawSteps_le_pipelineRawTimeBound',
+  ]) assert.equal(machine.requiredTheorems.includes(name), true, name);
   for (const name of [
     'PNP.Concrete.PipelineInputFramer.boundedDecide_compileTotalInputFramer_accept',
     'PNP.Concrete.PipelineInputFramer.boundedDecide_compileTotalInputFramer_ne_timeout',
@@ -266,24 +279,18 @@ test('formal reconstruction status pins the all-input framer inventory and sourc
     'PNP.Concrete.PipelinePairedCompiler.suppliedTraceTerminalRawSteps_le_of_rawRunExact',
     'PNP.Concrete.PipelinePairedCompiler.suppliedTraceTerminalRawSteps_le_pairedPipelineRawTimeBound',
   ]) assert.equal(machine.requiredTheorems.includes(name), true, name);
-  assert.match(machine.scope, /One literal finite input framer handles every raw bitstring locally/u);
+  assert.match(machine.scope, /One literal finite four-stage pipeline handles every raw bitstring/u);
   assert.match(machine.scope, /exactly 4 work steps on empty input/u);
   assert.match(machine.scope, /6 \* m \* m \+ 39 \* m \+ 75/u);
-  assert.match(machine.scope, /All 70 input-framer declarations have empty axiom closure/u);
-  assert.match(machine.scope, /PipelinePairedCompiler compiles that complete canonical-pair table/u);
-  assert.match(machine.scope, /symbol-preserving framer-to-simulator/u);
-  assert.match(machine.scope, /verdict-indexed handoff launches/u);
+  assert.match(machine.scope, /PipelineCompiler uses the same terminal-bridge rule table/u);
+  assert.match(machine.scope, /launches the target on the unchanged raw input/u);
+  assert.match(machine.scope, /preserves exact accept\/reject\/timeout classification/u);
   assert.match(machine.scope, /B\(m\) = m \+ p\(m\) \+ 1/u);
-  assert.match(machine.scope, /R\(m\) = inputFramerRawTimeBound\(m\) \+ 6 \+ 18\*p\(m\) \+ 6/u);
-  assert.match(machine.scope, /terminal bridge appends two disjoint packer copies/u);
-  assert.match(machine.scope, /one raw machine/u);
-  assert.match(machine.scope, /ordinary machineOutput are exact/u);
-  assert.match(machine.scope, /bounded verdict, no-timeout result/u);
-  assert.match(machine.scope, /All 28 paired-compiler declarations/u);
-  assert.match(machine.nonClaim, /all-input theorem stops at the accepting framer frame/u);
-  assert.match(machine.nonClaim, /canonical BitString\.pair inputs/u);
-  assert.match(machine.nonClaim, /malformed/u);
-  assert.match(machine.nonClaim, /FunctionProgram.RawRefinement/u);
+  assert.match(machine.scope, /R\(m\) = totalInputFramerRawTimeBound\(m\) \+ 6 \+ 18\*p\(m\) \+ 6/u);
+  assert.match(machine.scope, /29 audited declarations with empty axiom closure/u);
+  assert.match(machine.nonClaim, /every raw bitstring/u);
+  assert.match(machine.nonClaim, /does not yet define raw-refinement composition/u);
+  assert.match(machine.nonClaim, /complexity machine-link blocker/u);
   assert.match(machine.nonClaim, /P = NP/u);
   const cnf = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-cnf-universal-verifier',
@@ -300,6 +307,7 @@ test('formal reconstruction status pins the all-input framer inventory and sourc
     'node --test audits/lean-concrete-terminal-output-packer0.test.mjs',
     'node --test audits/lean-concrete-pipeline-terminal-bridge0.test.mjs',
     'node --test audits/lean-concrete-pipeline-paired-compiler0.test.mjs',
+    'node --test audits/lean-concrete-pipeline-compiler0.test.mjs',
     'node --test audits/lean-concrete-pipeline-machine-simulation0.test.mjs',
     'node --test audits/lean-concrete-pipeline-tape-geometry0.test.mjs',
     'node --test audits/lean-concrete-tape-handoff0.test.mjs',
@@ -312,6 +320,8 @@ test('formal reconstruction status pins the all-input framer inventory and sourc
     'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineTerminalBridgeAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelinePairedCompilerAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-regression/PNPConcretePipelinePairedCompiler.lean',
+    'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineCompilerAxiomAudit.lean',
+    'lake env lean -DwarningAsError=true lean-regression/PNPConcretePipelineCompiler.lean',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineMachineSimulationAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineTapeGeometryAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcreteTapeHandoffAxiomAudit.lean',
@@ -343,13 +353,15 @@ test('formal reconstruction status pins the all-input framer inventory and sourc
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'PipelineTerminalBridge is one literal extended finite work machine')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
-    'PipelinePairedCompiler compiles the complete four-stage work table')), true);
+    'PipelinePairedCompiler remains the sharper canonical-pair theorem')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes(
+    'PipelineCompiler now extracts that prefix internally on every raw bitstring')), true);
 });
 
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-13-PIPELINE-ALL-INPUT-FRAMER-27');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-14-PIPELINE-ALL-INPUT-COMPILER-28');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);

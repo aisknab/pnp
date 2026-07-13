@@ -53,6 +53,8 @@ lean/PNP/Concrete/PipelineStateNamespace.lean
 lean/PNP/Concrete/PipelineStageBridges.lean
 lean/PNP/Concrete/TerminalOutputPacker.lean
 lean/PNP/Concrete/PipelineTerminalBridge.lean
+lean/PNP/Concrete/PipelinePairedCompiler.lean
+lean/PNP/Concrete/PipelineCompiler.lean
 lean/PNP/Concrete/Complexity.lean
 lean/PNP/Concrete/PipelineRefinement.lean
 lean/PNP/Concrete/Target.lean
@@ -92,6 +94,8 @@ lean-audit/PNPConcretePipelineStateNamespaceAxiomAudit.lean
 lean-audit/PNPConcretePipelineStageBridgesAxiomAudit.lean
 lean-audit/PNPConcreteTerminalOutputPackerAxiomAudit.lean
 lean-audit/PNPConcretePipelineTerminalBridgeAxiomAudit.lean
+lean-audit/PNPConcretePipelinePairedCompilerAxiomAudit.lean
+lean-audit/PNPConcretePipelineCompilerAxiomAudit.lean
 lean-audit/PNPConcretePipelineMachineSimulationAxiomAudit.lean
 lean-audit/PNPConcreteComplexityAxiomAudit.lean
 lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean
@@ -120,6 +124,8 @@ docs/lean_pipeline_input_framer.md
 docs/lean_pipeline_output_handoff.md
 docs/lean_pipeline_state_namespace.md
 docs/lean_pipeline_machine_simulation.md
+docs/lean_pipeline_paired_compiler.md
+docs/lean_pipeline_compiler.md
 docs/lean_concrete_complexity.md
 docs/lean_nand_enumerator.md
 docs/lean_locked_nand_macros.md
@@ -163,8 +169,9 @@ or runtime bound. `lean/PNP/Concrete/PipelineInputFramer.lean` supplies a separa
 machine from every raw bitstring to an accepting represented frame. It proves exact empty,
 complete-cell, and partial-final-cell work costs plus the uniform compiled bound
 `6 * m * m + 39 * m + 75` from ordinary raw input; all 70 public declarations have empty axiom
-closure. The existing renamed bridge and complete compiler theorems still quantify canonical
-pairs, so the all-input local framer does not broaden the complete pipeline's input domain.
+closure. The predecessor bridge and paired-compiler theorems quantify canonical pairs.
+`PipelineCompiler.lean` now consumes the same framer endpoint for
+every raw bitstring and broadens the complete literal pipeline's input domain.
 `lean/PNP/Concrete/PipelineOutputHandoff.lean` supplies another literal finite machine from an
 already represented logical tape to an accepting representation of its blank-delimited handoff
 target. Its exact costs are `2 * n + 4` work steps and `12 * n + 24` compiled steps for logical
@@ -193,8 +200,12 @@ proves exact accepting/rejecting launches, terminal halts, and output equality f
 handoff endpoints under the local bound `18*n^2 + 36*n + 12`. It preserves every successful
 earlier bridge step in the extended table and, for each caller-supplied exact accepting or rejecting
 target execution, composes one exact four-stage trace from paired `startConfig` with exact verdict
-and raw-output equality. The layers do not prove target termination, derive an external-input-size
-polynomial, or construct complete composition/precomposition pipeline refinement. The two declarations in
+and raw-output equality. `PipelinePairedCompiler.lean` derives target termination and an external
+polynomial for canonical pairs. Its 29-declaration successor `PipelineCompiler.lean` proves exact
+verdict, no-timeout, language acceptance, and ordinary output equality for every raw bitstring at
+the explicit output bound `B(m) = m + p(m) + 1` and complete runtime polynomial. Every public
+successor declaration has empty axiom closure. This wraps an already-raw proof-bearing target; it
+does not construct recursive composition/precomposition pipeline refinement. The two declarations in
 `lean/PNP/Concrete/Target.lean` are also axiom-free: `PNP.Main.ConcretePEqualsNP` is an inactive
 definition naming mutual inclusion, and `PNP.Main.concretePEqualsNP_iff` pins its expansion. This
 does not prove the target. The six explicit declarations in
@@ -202,9 +213,10 @@ does not prove the target. The six explicit declarations in
 pin exact raw-machine refinement obligations, prove the raw function/decision leaf cases, transport
 a function output-size bound, and convert a decider to a raw-machine witness only from a supplied
 complete-program refinement. They do not build that refinement for composition or precomposition.
-Consequently this still does not compile or refine a composite pipeline into one raw single-tape
-machine, so `Formal.ConcreteComplexityMachineLink` remains blocked. See
-[`lean_concrete_complexity.md`](./lean_concrete_complexity.md).
+Consequently the charged function/decision program syntax still does not compile recursively into
+one raw single-tape machine, so `Formal.ConcreteComplexityMachineLink` remains blocked. See
+[`lean_concrete_complexity.md`](./lean_concrete_complexity.md) and
+[`lean_pipeline_compiler.md`](./lean_pipeline_compiler.md).
 
 ### Direct concrete CNF verifier
 
@@ -325,7 +337,7 @@ ineligible for the general charged-pipeline target, even though the direct CNF v
 to one raw machine. The abstract `PNP.PEqualsNP` bridge remains ineligible. See
 [`lean_theorem_inventory.md`](./lean_theorem_inventory.md) for the full contract and commands.
 
-The inventory and false gate generate the current root TeX/PDF: a concise ten-page
+The inventory and false gate generate the current root TeX/PDF: a concise nine-page
 formal-reconstruction report with no theorem emission. It replaces the historical 56-page claim
 manuscript at the repository root; that historical artifact is available only through the pinned
 legacy coordinate recorded under [`archive/legacy-v0/`](../archive/legacy-v0/README.md).

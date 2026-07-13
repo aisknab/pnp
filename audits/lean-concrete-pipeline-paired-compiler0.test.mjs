@@ -203,14 +203,17 @@ test('paired compiler audit rejects dropped stages, hidden evidence, weak bounds
   }
 });
 
-test('paired-input compiler milestone remains fail-closed outside its exact domain', async () => {
+test('paired compiler remains exact while its all-input successor stays fail-closed at refinement', async () => {
   const status = JSON.parse(await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'));
   assert.equal(status.leanConcretePipelinePairedCompilerAxiomAuditPassed, true);
   assert.equal(status.leanConcretePipelinePairedCompilerAuditedDeclarationCount, 28);
   assert.equal(status.leanConcretePipelineCanonicalPairCompilationFormalized, true);
+  assert.equal(status.leanConcretePipelineCompilerAxiomAuditPassed, true);
+  assert.equal(status.leanConcretePipelineCompilerAuditedDeclarationCount, 29);
+  assert.equal(status.leanConcretePipelineAllInputCompilationFormalized, true);
   assert.equal(status.leanConcretePipelineExternalInputSizePolynomialFormalized, true);
   assert.equal(status.leanConcretePipelineRawRefinementFormalized, false);
-  assert.equal(status.leanConcretePipelineMalformedInputBehaviorFormalized, false);
+  assert.equal(status.leanConcretePipelineMalformedInputBehaviorFormalized, true);
   assert.equal(status.leanConcreteCNFSATInPFormalized, false);
   assert.equal(status.leanConcreteCNFNPCompletenessFormalized, false);
   assert.equal(status.rootLeanTheoremPresent, false);

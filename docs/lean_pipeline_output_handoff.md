@@ -70,8 +70,9 @@ internal configuration. `PipelineStageBridges` now launches simulator accept and
 into two disjoint copies, preserves the target verdict, and compiles the cumulative supplied exact
 trace from ordinary canonical paired `startConfig`.
 
-The resulting endpoint is still the two-track represented `Tape.handoffTarget`. The separate
-terminal packer supplies raw `machineOutput` equality only from its encoded internal start; it is
-not composed here. There is no external-input-size polynomial, complete
+The resulting endpoint is still the two-track represented `Tape.handoffTarget` in this local
+module. `PipelineTerminalBridge` composes it with the terminal packer, and `PipelineCompiler`
+places that trace inside an all-input execution with a complete external polynomial for an
+already-raw proof-bearing target. There is still no recursive
 `FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement`, `CNFSAT`-in-P result,
 NP-completeness result, or `P = NP` consequence.

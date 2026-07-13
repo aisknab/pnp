@@ -38,8 +38,8 @@ empty, odd, or even input agrees with its packed work-tape start. The literal fi
 now consumes that equivalence: it handles every raw bitstring, reaches an accepting represented
 frame under exact empty/full/partial branch costs, and accepts without timeout from ordinary
 `startConfig` within `6 * m * m + 39 * m + 75` raw steps. All 70 public framer declarations have
-empty axiom closure. This all-input result ends at the framer frame; the renamed bridge and complete
-compiler theorems remain canonical-pair-only. A separate local layer preserves the raw interpreter's first matching rule
+empty axiom closure. The local framer theorem ends at that frame; the later all-input compiler now
+consumes it for every raw bitstring. A separate local layer preserves the raw interpreter's first matching rule
 and lifts every supplied exact chain of `n` successful raw transitions from an already represented
 boundary frame to exactly `3 * n` successful work transitions. From an ordinary raw `run` with
 fuel `F`, it extracts an exact prefix of length `k ≤ F` reaching the same endpoint. If that endpoint
@@ -74,8 +74,12 @@ exact verdict and raw-output equality. `PipelinePairedCompiler` now extracts the
 the target's proof-bearing bounded run, proves that an `F`-step target exposes at most `m + F + 1`
 output bits, and pads the same literal compiled machine to an explicit polynomial in external pair
 length `m`. For every `PolynomialTimeMachine` and every canonical pair it preserves exact verdict,
-no-timeout, language acceptance, and ordinary raw output. It does not specify arbitrary malformed or
-non-pair raw input and therefore does not yet supply an all-input `RawRefinement`.
+no-timeout, language acceptance, and ordinary raw output. `PipelineCompiler` now uses the same
+literal table for every raw `BitString`: it extracts the target prefix internally, preserves exact
+verdict and ordinary output, excludes timeout, and proves language acceptance at
+`B(m) = m + p(m) + 1` and an explicit complete runtime polynomial in external length `m`. All 29
+public declarations have empty axiom closure. This wraps one already-raw proof-bearing target; it
+does not yet define recursive function-composition or decision-precomposition `RawRefinement`.
 The development also provides one direct raw-machine instance: a universally
 correct polynomial-time verifier for canonically encoded finite CNF formulae and bounded assignment
 certificates, proving `PNP.Concrete.CNFSAT ∈ NP`. It does not provide a deterministic polynomial-time
@@ -109,13 +113,16 @@ costs. The separate terminal packer supplies raw output de-tagging from its enco
 and the terminal-bridge layer proves the subsequent local suffix from either represented handoff
 endpoint and transports the earlier ordinary-input trace into that extended machine. The paired
 compiler derives target termination and a complete external-size polynomial for canonical pair
-inputs. Transport of arbitrary raw inputs through that complete table, full malformed-input
-behavior, and the general all-input refinement theorem to one raw machine remain open.
+inputs. The all-input compiler generalizes that result to every raw input, including empty, odd,
+malformed, and non-pair words, while preserving exact verdict and raw-visible output. The remaining
+machine-link gap is the recursive compiler from the charged function/decision program syntax into
+the existing `RawRefinement` contracts.
 See
 [`lean_concrete_complexity.md`](./lean_concrete_complexity.md) and
 [`lean_pipeline_stage_bridges.md`](./lean_pipeline_stage_bridges.md), and
 [`lean_pipeline_terminal_bridge.md`](./lean_pipeline_terminal_bridge.md), and
-[`lean_pipeline_paired_compiler.md`](./lean_pipeline_paired_compiler.md).
+[`lean_pipeline_paired_compiler.md`](./lean_pipeline_paired_compiler.md), and
+[`lean_pipeline_compiler.md`](./lean_pipeline_compiler.md).
 
 The concrete CNF layer separately defines canonical formula and assignment codecs, propositional
 CNF semantics, a Boolean certificate checker, a finite work machine, and its compiled raw machine.
@@ -160,17 +167,16 @@ check is also false. Therefore the gate does not pass and every theorem-emission
 from it remains false or `null`.
 
 The root `canonical_proof_report.tex` and `canonical_proof_report.pdf` now form the generated,
-concise ten-page formal-reconstruction report. They replace the historical claim manuscript at the
+concise nine-page formal-reconstruction report. They replace the historical claim manuscript at the
 root and make the non-activation boundary explicit. The historical 56-page claim artifact is
 available only from the pinned legacy source coordinate recorded under
 [`archive/legacy-v0/`](../archive/legacy-v0/README.md).
 
 The direct CNF verifier closes one formerly abstract obligation—concrete NP membership for
-`PNP.Concrete.CNFSAT`—the bridge milestone closes exact internal stage launch for supplied
-target runs, and the terminal-packer milestone closes stage-local raw output equality. They do not
-discharge the remaining publication blockers. In particular, the handoff-to-packer launch and
-four-stage composition, complete refinement with an external-input-size polynomial bound, a
-deterministic polynomial-time CNF-SAT decider,
+`PNP.Concrete.CNFSAT`—and the all-input compiler closes literal four-stage raw execution,
+raw-visible output, timeout behavior, and an external-input-size polynomial for an already-raw
+proof-bearing target. These results do not discharge the remaining publication blockers. In
+particular, recursive charged-program refinement, a deterministic polynomial-time CNF-SAT decider,
 concrete NP-hardness/NP-completeness, locked-NAND threshold, residual-band minimizer, ZeroSlack,
 the remaining end-to-end polynomial bounds, and the root theorem/axiom audit remain incomplete.
 

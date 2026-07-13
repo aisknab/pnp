@@ -262,15 +262,17 @@ test('framer milestone remains local and the concrete publication gate remains c
   assert.equal(status.leanConcretePipelineInputFramerAxiomAuditPassed, true);
   assert.equal(status.leanConcretePipelineInputFramerAuditedDeclarationCount, 70);
   assert.equal(status.leanConcretePipelineAllInputFramingFormalized, true);
-  assert.equal(status.leanConcretePipelineMalformedInputBehaviorFormalized, false);
+  assert.equal(status.leanConcretePipelineMalformedInputBehaviorFormalized, true);
+  assert.equal(status.leanConcretePipelineAllInputCompilationFormalized, true);
+  assert.equal(status.leanConcretePipelineRawRefinementFormalized, false);
   const framerNonClaim = status.nonClaims.find((entry) => entry.includes(
     'PipelineInputFramer is one literal finite machine for every raw bitstring'));
   assert.equal(typeof framerNonClaim, 'string');
   assert.match(framerNonClaim, /empty word, complete two-bit work cells, and an odd final raw bit/u);
   assert.match(framerNonClaim, /6 \* m \* m \+ 39 \* m \+ 75/u);
   assert.match(framerNonClaim, /All 70 public declarations have empty axiom closure/u);
-  assert.match(framerNonClaim, /remain canonical-pair-only/u);
-  assert.match(framerNonClaim, /does not prove full-pipeline malformed-input behavior/u);
+  assert.match(framerNonClaim, /PipelineCompiler now transports that endpoint/u);
+  assert.match(framerNonClaim, /recursive pipeline RawRefinement/u);
   const foundation = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -288,16 +290,14 @@ test('framer milestone remains local and the concrete publication gate remains c
     `${PREFIX}totalInputFramerRawTimeBound_le`,
     `${PREFIX}totalInputFramer_workRunExact`,
   ]) assert.equal(foundation.requiredTheorems.includes(name), true, name);
-  assert.match(foundation.scope, /handles every raw bitstring locally/u);
+  assert.match(foundation.scope, /four-stage pipeline handles every raw bitstring/u);
   assert.match(foundation.scope, /exactly 4 work steps on empty input/u);
   assert.match(foundation.scope, /6 \* m \* m \+ 39 \* m \+ 75/u);
-  assert.match(foundation.scope, /All 70 input-framer declarations/u);
-  assert.match(foundation.scope, /symbol-preserving framer-to-simulator/u);
-  assert.match(foundation.scope, /R\(m\) = inputFramerRawTimeBound\(m\)/u);
-  assert.match(foundation.nonClaim, /all-input theorem stops at the accepting framer frame/u);
-  assert.match(foundation.nonClaim, /canonical BitString\.pair inputs/u);
-  assert.match(foundation.nonClaim, /malformed/u);
-  assert.match(foundation.nonClaim, /FunctionProgram\.RawRefinement/u);
+  assert.match(foundation.scope, /PipelineCompiler uses the same terminal-bridge rule table/u);
+  assert.match(foundation.scope, /R\(m\) = totalInputFramerRawTimeBound\(m\)/u);
+  assert.match(foundation.scope, /29 audited declarations with empty axiom closure/u);
+  assert.match(foundation.nonClaim, /transports every raw bitstring/u);
+  assert.match(foundation.nonClaim, /raw-refinement composition/u);
   assert.equal(map.gate.standardComplexityModelEligible, false);
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,

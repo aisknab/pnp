@@ -278,8 +278,9 @@ test('supplied trace and canonical-pair compiler are earned while general refine
   assert.equal(status.leanConcretePipelinePriorTraceTransportToTerminalBridgeFormalized, true);
   assert.equal(status.leanConcretePipelineRawRefinementFormalized, false);
   assert.equal(status.leanConcretePipelineCanonicalPairCompilationFormalized, true);
+  assert.equal(status.leanConcretePipelineAllInputCompilationFormalized, true);
   assert.equal(status.leanConcretePipelineExternalInputSizePolynomialFormalized, true);
-  assert.equal(status.leanConcretePipelineMalformedInputBehaviorFormalized, false);
+  assert.equal(status.leanConcretePipelineMalformedInputBehaviorFormalized, true);
   assert.equal(status.leanConcreteCNFSATInPFormalized, false);
   assert.equal(status.leanConcreteCNFNPCompletenessFormalized, false);
   assert.equal(status.rootLeanTheoremPresent, false);

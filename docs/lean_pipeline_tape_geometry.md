@@ -79,12 +79,13 @@ on that endpoint being designated halting, `workRun` with fuel `3 * F` and compi
 fuel `18 * F` reach its representation and encoding. This does not prove termination; the full
 fuels are at-most budgets, not successful-step counts or input-size bounds, and a stuck nonhalting
 stop is not a verdict. A separate all-input framer now constructs a represented initial frame from
-every literal raw bitstring with exact branch costs and one uniform quadratic bound. Its complete
-bridge/compiler transport remains canonical-pair-only. A separate output-handoff
+every literal raw bitstring with exact branch costs and one uniform quadratic bound. The successor
+`PipelineCompiler` now transports every raw word through the complete literal table. A separate output-handoff
 machine reaches a represented `Tape.handoffTarget` at an exact linear logical-output-length cost.
 The bridge layer now connects both around supplied exact target runs and preserves the target
 verdict. A separate `TerminalOutputPacker` now proves the terminal raw-output layout, and
 `PipelinePairedCompiler` connects the complete trace, target termination, and an external
-polynomial for proof-bearing targets on canonical pairs. These layers do not construct an
-all-input composition/precomposition `RawRefinement`, prove full non-pair behavior or charged/raw class equivalence, establish
+polynomial for proof-bearing targets on canonical pairs; `PipelineCompiler` proves the all-input
+version for an already-raw target. These layers do not construct recursive
+composition/precomposition `RawRefinement` or charged/raw class equivalence, establish
 `CNFSAT ∈ P` or NP-completeness, activate a root theorem, or prove `P = NP`.
