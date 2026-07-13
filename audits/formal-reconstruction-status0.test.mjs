@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-13-26');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-13-27');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -165,13 +165,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the canonical-pair compiler inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 5125);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 2168);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 2067);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 961);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 47);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 5150);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 2185);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 2084);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 975);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 48);
   assert.equal(status.leanSourceClosureSha256,
-    '28fd37ce1d55d25fa1c9a354d6c698fa5be8207ab3606d6441efb988387d2730');
+    '8f3171f44c8aa02b94a573158618c475e6642dd65dd34bf6d1824a14a4b19e6b');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );

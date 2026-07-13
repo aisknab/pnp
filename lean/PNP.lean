@@ -10,6 +10,7 @@ import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine
 import PNP.Concrete.TapeHandoff
+import PNP.Concrete.TapeBlankEquivalence
 import PNP.Concrete.PipelineTapeGeometry
 import PNP.Concrete.PipelineMachineSimulation
 import PNP.Concrete.PipelineInputFramer

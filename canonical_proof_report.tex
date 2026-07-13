@@ -46,7 +46,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-13-26}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-13-27}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -65,15 +65,15 @@
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 5125 \\
-Theorem-kind declarations & 2168 \\
-Assumption-free theorem-kind declarations & 2067 \\
+Compiled declarations & 5150 \\
+Theorem-kind declarations & 2185 \\
+Assumption-free theorem-kind declarations & 2084 \\
 Project-specific axioms & 4 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{ed67c989a5e6955d30d2a9f8d121e102c08de43a429c5238bb5b4944119f49b6}\par}
+{\small Inventory SHA-256: \code{454fda683b68dd21105ca07beb1cd641596d18f2b61cce7b74cc4da8f85fbeb4}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -215,8 +215,8 @@ Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-mac
 
 \section{Compiled inventory summary}
 
-The inventory contains 5125 exported \code{PNP.*} kernel declarations from
-47 modules. It excludes 961 private compiler auxiliaries.
+The inventory contains 5150 exported \code{PNP.*} kernel declarations from
+48 modules. It excludes 975 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -248,6 +248,7 @@ PNP.Concrete.PipelineStageBridges & 77 & 59 \\
 PNP.Concrete.PipelineStateNamespace & 77 & 34 \\
 PNP.Concrete.PipelineTapeGeometry & 20 & 12 \\
 PNP.Concrete.PipelineTerminalBridge & 73 & 62 \\
+PNP.Concrete.TapeBlankEquivalence & 25 & 17 \\
 PNP.Concrete.TapeHandoff & 18 & 11 \\
 PNP.Concrete.Target & 2 & 1 \\
 PNP.Concrete.TerminalOutputPacker & 111 & 36 \\
@@ -335,10 +336,10 @@ npm run report:check
 \end{verbatim}
 }
 
-The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-13-26}. Its exact byte digest is
-\code{ed67c989a5e6955d30d2a9f8d121e102c08de43a429c5238bb5b4944119f49b6}. The report is regenerated from that inventory and the reviewed
+The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-13-27}. Its exact byte digest is
+\code{454fda683b68dd21105ca07beb1cd641596d18f2b61cce7b74cc4da8f85fbeb4}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{28fd37ce1d55d25fa1c9a354d6c698fa5be8207ab3606d6441efb988387d2730}; the computed and pinned values match. Successful regeneration
+\code{8f3171f44c8aa02b94a573158618c475e6642dd65dd34bf6d1824a14a4b19e6b}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 

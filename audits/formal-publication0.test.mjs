@@ -129,9 +129,9 @@ test('publication consumes the reviewed canonical-pair compiler map and inventor
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '33d908e23260f11fce083afec0ba94a6823a5f0bce453d6ae99bed53fe5a74a6');
+    '6cdad7539c7a2159f0591ae67960ad5dccb673df2136a39bbfbe020ce6077280');
   assert.equal(map.milestoneSourceClosureSha256,
-    '28fd37ce1d55d25fa1c9a354d6c698fa5be8207ab3606d6441efb988387d2730');
+    '8f3171f44c8aa02b94a573158618c475e6642dd65dd34bf6d1824a14a4b19e6b');
   assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 149);
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,
@@ -146,7 +146,7 @@ test('publication consumes the reviewed canonical-pair compiler map and inventor
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [5125, 2168, 2067, 961, 47]);
+  ], [5150, 2185, 2084, 975, 48]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
