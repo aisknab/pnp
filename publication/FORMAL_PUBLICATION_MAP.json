@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-13-27",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-13-28",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "8f3171f44c8aa02b94a573158618c475e6642dd65dd34bf6d1824a14a4b19e6b",
+  "milestoneSourceClosureSha256": "6b6558134e01809a69181416bf121cf3250dee4e468e6bb0efd7351cb5e5b1a6",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.FinalUniversalDesign.cnfCompiled_accept_iff_check": "4a8661d567079e1f47c288b8a36805a20ac7040338d84325723079f3fada4efa",
@@ -33,11 +33,19 @@
     "PNP.Concrete.np_complete_in_p_implies_p_eq_np": "3026a17865cacc2dc65ad62f38e735451ad7009c062c3ff364169c3875c56f9e",
     "PNP.Concrete.p_subset_np": "ff7fb433d85b53c61c1409ffbfa47b22a1d8184b11ae18f11895b972ad6f6bed",
     "PNP.Concrete.PipelineInputFramer.boundedDecide_compilePairedInputFramer_accept": "0dbc687793784de76f8d6d69681d46ba7e9b941599da534fb2f9b00940097cf7",
+    "PNP.Concrete.PipelineInputFramer.boundedDecide_compileTotalInputFramer_accept": "3ef9f8377ec7ad7ebb70aa41b978cdb22f2c1c029b26e1e4c241ce00c20781d4",
+    "PNP.Concrete.PipelineInputFramer.boundedDecide_compileTotalInputFramer_ne_timeout": "48b9ee1743a6881a663fb7a1cc59984c371ff853524f9b18bad58014c229f9fe",
     "PNP.Concrete.PipelineInputFramer.pairedInputFramer_workRunExact": "ebaa825de7b92d243332d83ce2bfd5231240aed5b33d46321468c4311cc20685",
     "PNP.Concrete.PipelineInputFramer.pairedInputFramerFinal_isHalted": "698610028e1ec61fc4743d30cc340790109fb0fbd1a15cef8e7d7bf53314e8fe",
     "PNP.Concrete.PipelineInputFramer.pairedInputFramerFinal_represents": "4e3173a7ccb943866cb0a0c7e69cac2d2adc1e622ef5678abc6178902637ccbc",
     "PNP.Concrete.PipelineInputFramer.pairedInputFramerRawTimeBound_exact": "5ce1dbf04040f7c4c7f000dd8caf5b6d7f76c04445e29ec3eb0d57eb196a9cdb",
     "PNP.Concrete.PipelineInputFramer.run_compilePairedInputFramer_rawTimeBound": "e5638faf30f2346e0507c6ead9dc5c247c31912db15fc190af67073a16ae9c95",
+    "PNP.Concrete.PipelineInputFramer.run_compileTotalInputFramer_encoded_rawTimeBound": "4efe0f62d185b7ac19d73aebb09008e97f00c96a8252e263c901f8a6add7c45b",
+    "PNP.Concrete.PipelineInputFramer.run_compileTotalInputFramer_rawTimeBound_blankEquivalent": "1eaa31ea98226c202722a0e67aa796b7b461ccf5367f35fff194973bb609ce8a",
+    "PNP.Concrete.PipelineInputFramer.totalInputFramerFinal_isHalted": "beca62f878cccce7434d899512cf9aaea25b222d113ec60df90da0fde8801faa",
+    "PNP.Concrete.PipelineInputFramer.totalInputFramerFinal_represents": "8f1fa6f45f267d60eadad754d9c88e4ea58631b881152af0a51244f5f7d207af",
+    "PNP.Concrete.PipelineInputFramer.totalInputFramerRawTimeBound_le": "bac4d4c78cb57e3ab70f752e2895a2f7ddd3c5356a6d1c457dd5832413d89eab",
+    "PNP.Concrete.PipelineInputFramer.totalInputFramer_workRunExact": "ad6e7cfe1206448f72a57135408a3c2e057411b4f418cdca0fd6a376a2863a1a",
     "PNP.Concrete.PipelineMachineSimulation.find_liftMachine_entry": "e479fdab90f65bfeb52121a418b02df2680781d6a39cc7a56816423c9f2af3c7",
     "PNP.Concrete.PipelineMachineSimulation.findIndexedRawRuleFrom_map_snd": "07fc0ddc64f43e2c787b292eede94e2e92d69b608ca5d618941104799139e5e1",
     "PNP.Concrete.PipelineMachineSimulation.liftMachine_isHalted_eq_of_representsConfiguration": "3acc80808e90c9aba56c1170ac95b2e9e42a41c1f93531afcdc0a8a415866ac6",
@@ -174,16 +182,24 @@
       "id": "concrete-machine-cost-kernel",
       "title": "Concrete machine and cost kernel",
       "classification": "formalized-foundation-only",
-      "scope": "Literal canonical paired input reaches an accepting representation under an exact quadratic raw-input-length polynomial. Every supplied exact n-step raw target run lifts to exactly 3 * n successful work steps. The bridge module adds symbol-preserving framer-to-simulator and verdict-indexed handoff launches; the terminal bridge appends two disjoint packer copies to one finite work table. PipelinePairedCompiler compiles that complete table to one raw machine. For every proof-bearing PolynomialTimeMachine and every canonical pair, it internally extracts an exact target prefix k <= p(m), proves target output length at most B(m) = m + p(m) + 1, and pads the complete execution to R(m) = inputFramerRawTimeBound(m) + 6 + 18*p(m) + 6 + framedOutputHandoffRawTimeBound(B(m)) + terminalBridgeRawTimeBound(B(m)). The compiled bounded verdict, no-timeout result, language acceptance, and ordinary machineOutput are exact. All 28 paired-compiler declarations, 59 terminal-bridge declarations, and 69 terminal-packer declarations have empty axiom closure.",
+      "scope": "One literal finite input framer handles every raw bitstring locally. It uses exactly 4 work steps on empty input, 4 * k * k + 9 * k + 7 for k complete two-bit cells, and 4 * k * k + 9 * k + 5 when the final cell is partial; from ordinary raw startConfig it accepts without timeout within 6 * m * m + 39 * m + 75 and is blank-equivalent to the represented endpoint. All 70 input-framer declarations have empty axiom closure. Every supplied exact n-step raw target run lifts to exactly 3 * n successful work steps. The bridge module adds symbol-preserving framer-to-simulator and verdict-indexed handoff launches for canonical paired inputs; the terminal bridge appends two disjoint packer copies to one finite work table. PipelinePairedCompiler compiles that complete canonical-pair table to one raw machine. For every proof-bearing PolynomialTimeMachine and every canonical pair, it internally extracts an exact target prefix k <= p(m), proves target output length at most B(m) = m + p(m) + 1, and pads the complete execution to R(m) = inputFramerRawTimeBound(m) + 6 + 18*p(m) + 6 + framedOutputHandoffRawTimeBound(B(m)) + terminalBridgeRawTimeBound(B(m)). The compiled bounded verdict, no-timeout result, language acceptance, and ordinary machineOutput are exact. All 28 paired-compiler declarations, 59 terminal-bridge declarations, and 69 terminal-packer declarations have empty axiom closure.",
       "requiredTheorems": [
         "PNP.Concrete.BitString.decodePair_pair",
         "PNP.Concrete.NatPolynomial.eval_mono",
         "PNP.Concrete.PipelineInputFramer.boundedDecide_compilePairedInputFramer_accept",
+        "PNP.Concrete.PipelineInputFramer.boundedDecide_compileTotalInputFramer_accept",
+        "PNP.Concrete.PipelineInputFramer.boundedDecide_compileTotalInputFramer_ne_timeout",
         "PNP.Concrete.PipelineInputFramer.pairedInputFramerFinal_isHalted",
         "PNP.Concrete.PipelineInputFramer.pairedInputFramerFinal_represents",
         "PNP.Concrete.PipelineInputFramer.pairedInputFramerRawTimeBound_exact",
         "PNP.Concrete.PipelineInputFramer.pairedInputFramer_workRunExact",
         "PNP.Concrete.PipelineInputFramer.run_compilePairedInputFramer_rawTimeBound",
+        "PNP.Concrete.PipelineInputFramer.run_compileTotalInputFramer_encoded_rawTimeBound",
+        "PNP.Concrete.PipelineInputFramer.run_compileTotalInputFramer_rawTimeBound_blankEquivalent",
+        "PNP.Concrete.PipelineInputFramer.totalInputFramerFinal_isHalted",
+        "PNP.Concrete.PipelineInputFramer.totalInputFramerFinal_represents",
+        "PNP.Concrete.PipelineInputFramer.totalInputFramerRawTimeBound_le",
+        "PNP.Concrete.PipelineInputFramer.totalInputFramer_workRunExact",
         "PNP.Concrete.PipelineMachineSimulation.findIndexedRawRuleFrom_map_snd",
         "PNP.Concrete.PipelineMachineSimulation.find_liftMachine_entry",
         "PNP.Concrete.PipelineMachineSimulation.liftMachine_isHalted_eq_of_representsConfiguration",
@@ -289,7 +305,7 @@
         "PNP.Concrete.run_succ",
         "PNP.Concrete.run_zero"
       ],
-      "nonClaim": "The complete external polynomial and correctness theorem is restricted to canonical BitString.pair inputs. No theorem specifies empty, odd, trailing, malformed, or other arbitrary raw inputs outside that image, so uniform all-input FunctionProgram.RawRefinement and DecisionProgram.RawRefinement remain absent. The concrete complexity machine-link blocker remains open; CNF-SAT in P, NP-completeness, and P = NP are not established. PNP.Main.p_eq_np remains absent and the publication gate remains false."
+      "nonClaim": "The all-input theorem stops at the accepting framer frame. The only complete four-stage compiler remains restricted to canonical BitString.pair inputs: no theorem transports an arbitrary empty, odd, trailing, malformed, or other non-pair input through the renamed simulator, handoff, and terminal packer. Uniform all-input FunctionProgram.RawRefinement and DecisionProgram.RawRefinement therefore remain absent. The concrete complexity machine-link blocker remains open; CNF-SAT in P, NP-completeness, and P = NP are not established. PNP.Main.p_eq_np remains absent and the publication gate remains false."
     },
     {
       "id": "concrete-complexity-classes",

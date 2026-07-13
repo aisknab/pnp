@@ -5,8 +5,9 @@ witnesses, and polynomial many-one reductions without storing executable Lean fu
 code handles. `lean/PNP/Concrete/TapeHandoff.lean` supplies the observable first-blank output
 decoder and a pure canonical handoff target. `lean/PNP/Concrete/PipelineTapeGeometry.lean` supplies
 a two-track boundary frame with arbitrary exterior garbage and proved local move/expansion geometry.
-`lean/PNP/Concrete/PipelineInputFramer.lean` supplies the exact canonical paired-input-to-frame
-trace, and `lean/PNP/Concrete/PipelineOutputHandoff.lean` supplies the exact represented-output
+`lean/PNP/Concrete/PipelineInputFramer.lean` supplies an exact all-raw-input-to-frame trace and a
+single external-size polynomial, while retaining the sharper canonical-pair trace; the complete
+bridge/compiler theorems remain canonical-pair-only. `lean/PNP/Concrete/PipelineOutputHandoff.lean` supplies the exact represented-output
 re-framing trace. `lean/PNP/Concrete/PipelineMachineSimulation.lean` supplies ordered finite rules and lifts every
 supplied exact `n`-step successful raw execution from an already represented frame to exactly
 `3 * n` successful work steps. For an ordinary raw run with fuel `F`, it extracts an exact prefix

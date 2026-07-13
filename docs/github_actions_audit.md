@@ -15,8 +15,8 @@ from current theorem status.
   declaration inventory from `Lean.Environment.constants` plus `Lean.collectAxioms`, and prints
   the focused axiom transcripts for the 41-declaration concrete bitstring/polynomial kernel, the
   38-declaration finite-rule machine kernel, the 14-declaration blank-delimited output/handoff
-  boundary, the 20-declaration boundary-marked pipeline tape geometry, the executable canonical
-  paired-input framer, the 39-declaration collision-free pipeline state namespace, the
+  boundary, the 20-declaration boundary-marked pipeline tape geometry, the 70-declaration
+  executable all-input framer, the 39-declaration collision-free pipeline state namespace, the
   56-declaration executable pipeline stage-bridge surface, the framed
   raw-machine simulation surface, the 48-declaration finite
   charged-pipeline complexity interface, the
@@ -31,7 +31,7 @@ from current theorem status.
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual
   routes require 30. The workflow also checks the byte-identical inventory mirrors, derives the
   false concrete publication gate and status/report outputs, and verifies same-environment
-  double-build determinism plus exact committed bytes for the current concise nine-page PDF. The
+  double-build determinism plus exact committed bytes for the current concise ten-page PDF. The
   hosted runner's apt-installed TeX and Poppler versions are not cryptographically pinned, so this
   is not a universal cross-toolchain reproducibility claim.
 - `.github/workflows/legacy-v0-replay.yml` is manual only. It replays the immutable historical
@@ -77,9 +77,10 @@ cumulative exact work traces, six-for-one compiled raw traces, and supplied-exac
 accept/reject/timeout classification. The terminal-bridge audit separately checks two disjoint
 packer copies, first-match isolation, preservation of every successful earlier bridge step, exact
 supplied accepting/rejecting four-stage traces, terminal halts, raw output equality, timeout
-behavior, and the local `18*n^2 + 36*n + 12` suffix bound. The complete trace still requires a
-caller-supplied exact target execution; target termination, external-input-size bounds, and
-complete refinement remain unproved.
+behavior, and the local `18*n^2 + 36*n + 12` suffix bound. The supplied-trace theorem still requires
+a caller-supplied exact target execution. `PipelinePairedCompiler` separately derives termination
+and an external polynomial for proof-bearing targets on canonical pairs; all-input complete
+refinement remains unproved.
 
 The pipeline-tape geometry audit proves a two-track representation with distinct data/left/right
 tags, arbitrary stale cells outside the first markers, and exact preservation under data writes,
@@ -98,17 +99,18 @@ verdict. The local theorems start from an already represented configuration. The
 module supplies canonical paired framing, exact launches, and target verdict preservation for a
 supplied exact run. The terminal bridge preserves that trace in its extended machine and, for a
 caller-supplied exact accepting or rejecting target execution, composes the subsequent raw-output
-suffix. Target termination, composition/precomposition refinement, and an external-input-size
-polynomial remain unproved.
+suffix. `PipelinePairedCompiler` adds target termination and an external polynomial for canonical
+pairs, but composition/precomposition refinement and arbitrary-input complete behavior remain
+unproved.
 
 The pipeline-input-framer audit covers a different literal finite machine. Its compiled theorem
-starts at canonical `BitString.pair left right`, reaches an accepting represented frame with
-permitted exterior garbage, and pins exact work and quadratic compiled raw budgets. CI rejects any
-attempt to widen that theorem to arbitrary empty, odd, malformed, or unpaired input. It also keeps
-the remaining boundary explicit: the bridge module connects its accepting state to the renamed
-lifted simulator in one exact step, but neither module proves target termination, terminal raw
-output de-tagging, an external-input-size pipeline bound, complete refinement, class equality, or
-`P = NP`.
+starts from every ordinary raw input, including empty and odd words, reaches an accepting
+represented frame with permitted exterior garbage, and pins exact branch costs plus the uniform
+raw bound `6 * m * m + 39 * m + 75`. CI closes all 70 public declarations, requires empty axiom
+closures, and mutates the empty/partial transitions, costs, endpoint, and one-step-short behavior.
+It also keeps the remaining boundary explicit: the bridge and complete compiler theorems still
+quantify canonical pairs. No theorem yet carries arbitrary non-pair input through the simulator,
+handoff, and terminal packer into a complete refinement, class equality, or `P = NP`.
 
 The pipeline-output-handoff audit covers a third literal finite machine. From an already represented
 logical tape `raw`, it reaches an accepting representation of `raw.handoffTarget` after exactly
@@ -145,7 +147,7 @@ node scripts/generate-formal-publication.mjs --check
 npm run report:check
 ```
 
-The current root PDF is the generated nine-page formal-reconstruction report. The historical
+The current root PDF is the generated ten-page formal-reconstruction report. The historical
 56-page claim artifact is not a current workflow output and is available only at the pinned legacy
 coordinate recorded under `archive/legacy-v0/`.
 

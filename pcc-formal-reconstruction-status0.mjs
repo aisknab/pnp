@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-13-27';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-13-28';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -136,9 +136,9 @@ const NON_CLAIMS = Object.freeze([
   'The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.',
   'The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.',
   'Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.',
-  'TapeBlankEquivalence proves that finite tapes which differ only by materialized exterior blanks have identical raw execution and observable output. It also relates every ordinary empty, odd, or even raw input to its packed work-tape view. This is representation invariance only: the executable input framer and complete pipeline remain canonical-pair-only.',
+  'TapeBlankEquivalence proves that finite tapes which differ only by materialized exterior blanks have identical raw execution and observable output. It also relates every ordinary empty, odd, or even raw input to its packed work-tape view. PipelineInputFramer now consumes that representation theorem to connect its literal all-input work trace to ordinary raw startConfig; the complete bridged pipeline remains canonical-pair-only.',
   'PipelineTape frames raw cells between distinct two-track markers and tolerates arbitrary exterior garbage; its boundary expansions are pure tape identities, not transition rules, a handoff machine, a compiler, or a runtime proof.',
-  'PipelineInputFramer is one literal finite machine for canonical BitString.pair inputs. It reaches an accepting represented frame with permitted exterior garbage at an exact quadratic raw-input-length budget. PipelineStageBridges launches that endpoint into the lifted target in one exact symbol-preserving step. The framer still does not accept arbitrary empty, odd, malformed, or unpaired raw words, prove target termination, or by itself provide the trace transport into the extended terminal-bridge machine, a pipeline RawRefinement, CNF-SAT in P, NP-completeness, or P = NP.',
+  'PipelineInputFramer is one literal finite machine for every raw bitstring. It handles the empty word, complete two-bit work cells, and an odd final raw bit through explicit finite transitions; reaches an accepting represented frame with permitted exterior garbage at exact branch costs; and from ordinary startConfig accepts without timeout within 6 * m * m + 39 * m + 75 raw steps. All 70 public declarations have empty axiom closure. The existing renamed launch, terminal bridge, and paired compiler theorems remain canonical-pair-only, so this local framer result does not prove full-pipeline malformed-input behavior, target termination, an all-input pipeline RawRefinement, CNF-SAT in P, NP-completeness, or P = NP.',
   'PipelineOutputHandoff is one literal finite machine for an already represented internal tape. For logical output length n it reaches an accepting representation of Tape.handoffTarget in exactly 2 * n + 4 work steps and 12 * n + 24 compiled steps. PipelineTerminalBridge preserves the earlier ordinary-input trace in its extended rule table and composes it with verdict-indexed terminal-packer copies for every supplied exact target execution. This still supplies no target-termination theorem, complete external-input-size polynomial, or RawRefinement. CNF-SAT in P, NP-completeness, and P = NP remain unproved.',
   'PipelineMachineSimulation extracts from every at-most raw run with fuel F an exact successful prefix of length k at most F reaching the same endpoint, and each supplied exact n-step run costs exactly 3 * n work transitions. PipelinePairedCompiler now extracts that prefix internally from every proof-bearing target run on canonical BitString.pair input, bounds target output by m + F + 1, composes all four executable stages in one literal raw machine, and proves exact verdict, no-timeout, and machineOutput equality at an explicit polynomial in external encoded length m. It still does not define behavior for arbitrary malformed or non-pair raw inputs and therefore does not provide FunctionProgram.RawRefinement or DecisionProgram.RawRefinement; CNF-SAT in P, NP-completeness, and P = NP remain missing.',
   'PipelineStateNamespace remains the injective renaming and lookup-isolation prerequisite. PipelineTerminalBridge now proves that every successful earlier bridge step and exact trace is preserved without shadowing, then composes accepting and rejecting supplied traces through two disjoint packer copies. Target termination, an external-input-size polynomial, and pipeline RawRefinement remain missing.',
@@ -332,6 +332,9 @@ const EXACT_FIELDS = Object.freeze({
   leanConcretePipelinePairedCompilerAxiomAuditPassed: true,
   leanConcretePipelinePairedCompilerAuditedDeclarationCount: 28,
   leanConcretePipelineCanonicalPairCompilationFormalized: true,
+  leanConcretePipelineInputFramerAxiomAuditPassed: true,
+  leanConcretePipelineInputFramerAuditedDeclarationCount: 70,
+  leanConcretePipelineAllInputFramingFormalized: true,
   leanConcretePipelineMalformedInputBehaviorFormalized: false,
   leanConcretePipelineRawRefinementFormalized: false,
   leanConcretePipelineExternalInputSizePolynomialFormalized: true,
@@ -423,7 +426,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-13-PIPELINE-CANONICAL-PAIR-26',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-13-PIPELINE-ALL-INPUT-FRAMER-27',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -571,6 +574,9 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanConcretePipelinePairedCompilerAxiomAuditPassed: true,
       leanConcretePipelinePairedCompilerAuditedDeclarationCount: 28,
       leanConcretePipelineCanonicalPairCompilationFormalized: true,
+      leanConcretePipelineInputFramerAxiomAuditPassed: true,
+      leanConcretePipelineInputFramerAuditedDeclarationCount: 70,
+      leanConcretePipelineAllInputFramingFormalized: true,
       leanConcretePipelineMalformedInputBehaviorFormalized: false,
       leanConcretePipelineRawRefinementFormalized: false,
       leanConcretePipelineExternalInputSizePolynomialFormalized: true,
@@ -713,7 +719,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-13-27',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-13-28',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

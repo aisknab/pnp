@@ -1,6 +1,6 @@
 # Formal reconstruction notice
 
-**Effective: 12 July 2026**
+**Effective: 13 July 2026**
 
 ## Current status
 
@@ -32,20 +32,21 @@ minimizer, ZeroSlack theorem, or final complexity conclusion.
 The current Lean development makes parts of the intended route explicit and now defines an
 axiom-free finite charged-pipeline interface for P, bounded-certificate NP, and polynomial
 many-one reductions. It does not yet prove that every such pipeline compiles or refines to the raw
-single-tape machine kernel. A blank-materialization layer proves that finite tape lists denote the same raw
-execution whenever their infinite blank extensions agree. In particular, every ordinary empty,
-odd, or even input agrees with its packed work-tape start, without claiming that the existing
-canonical-pair framer handles those inputs. A new local layer preserves the raw interpreter's first matching rule
+single-tape machine kernel. A blank-materialization layer proves that finite tape lists denote the
+same raw execution whenever their infinite blank extensions agree. In particular, every ordinary
+empty, odd, or even input agrees with its packed work-tape start. The literal finite input framer
+now consumes that equivalence: it handles every raw bitstring, reaches an accepting represented
+frame under exact empty/full/partial branch costs, and accepts without timeout from ordinary
+`startConfig` within `6 * m * m + 39 * m + 75` raw steps. All 70 public framer declarations have
+empty axiom closure. This all-input result ends at the framer frame; the renamed bridge and complete
+compiler theorems remain canonical-pair-only. A separate local layer preserves the raw interpreter's first matching rule
 and lifts every supplied exact chain of `n` successful raw transitions from an already represented
 boundary frame to exactly `3 * n` successful work transitions. From an ordinary raw `run` with
 fuel `F`, it extracts an exact prefix of length `k ≤ F` reaching the same endpoint. If that endpoint
 is designated halting, `workRun` with fuel `3 * F` and compiled-machine `run` with fuel `18 * F`
 reach its representation and encoding. This is conditional padding, not a termination result: the
 full budgets are not successful-transition counts or input-size bounds, and a stuck nonhalting stop
-is not classified as a verdict. A separate finite framer starts its compiled machine at literal
-canonical `BitString.pair` input, reaches a represented boundary frame, and halts accepting under an
-exact quadratic raw-input-length budget. Its public theorem is restricted to paired input and
-permits blanked source cells as exterior garbage. An additional axiom-free namespace layer now
+is not classified as a verdict. An additional axiom-free namespace layer
 injectively retags the framer, lifted simulator, and handoff into pairwise-disjoint state images,
 proves first-match lookup isolation for one concatenated finite rule table, and transports each
 existing exact stage-local trace. A bridge-first finite work machine now adds one exact
@@ -53,8 +54,9 @@ symbol-preserving framer-to-simulator launch and separate accept/reject launches
 verdict-indexed handoff copies. For every supplied exact target run it composes the three stages,
 preserves bounded accept/reject classification, leaves a supplied stuck nonhalting endpoint as
 timeout at the exact prefix budget, and compiles from ordinary canonical paired raw input at exactly
-six times the cumulative work cost. It does not prove target termination or turn the supplied
-source-transition count and final output length into an external-input-size polynomial. The
+six times the cumulative work cost. This supplied-trace bridge alone does not prove target
+termination or turn the supplied source-transition count and final output length into an
+external-input-size polynomial. The
 development also includes the executable internal handoff machine: from an already represented logical
 tape `raw`, it reaches an accepting representation of `raw.handoffTarget` in exactly
 `2 * raw.outputBits.length + 4` work steps and `12 * raw.outputBits.length + 24` compiled steps.
@@ -97,8 +99,9 @@ bounds. Lean constructs P contained in NP, reduction identity/composition/transp
 NP-complete-in-P implication. Boundary geometry and the local simulator now discharge exact finite
 configuration runs, including marker growth across arbitrary exterior garbage, exact-prefix
 extraction, and the conditional designated-halting padding described above.
-The separate paired-input framer supplies an executable canonical-input-to-frame trace with exact
-work and compiled raw budgets. The state-namespace layer gives it, the simulator, and the internal
+The separate input framer supplies an executable all-input-to-frame trace with exact branch costs
+and the uniform raw polynomial `6 * m * m + 39 * m + 75`; its earlier canonical-pair route retains
+the sharper exact paired bound. The state-namespace layer gives it, the simulator, and the internal
 handoff pairwise-disjoint images in one lookup-isolated concatenated rule table and proves that the
 three established exact traces survive renaming. The stage-bridge layer connects supplied exact
 target runs into one verdict-preserving internal execution with explicit cumulative work and raw
@@ -106,7 +109,8 @@ costs. The separate terminal packer supplies raw output de-tagging from its enco
 and the terminal-bridge layer proves the subsequent local suffix from either represented handoff
 endpoint and transports the earlier ordinary-input trace into that extended machine. The paired
 compiler derives target termination and a complete external-size polynomial for canonical pair
-inputs. Malformed-input behavior and the general refinement theorem to one raw machine remain open.
+inputs. Transport of arbitrary raw inputs through that complete table, full malformed-input
+behavior, and the general all-input refinement theorem to one raw machine remain open.
 See
 [`lean_concrete_complexity.md`](./lean_concrete_complexity.md) and
 [`lean_pipeline_stage_bridges.md`](./lean_pipeline_stage_bridges.md), and
@@ -156,7 +160,7 @@ check is also false. Therefore the gate does not pass and every theorem-emission
 from it remains false or `null`.
 
 The root `canonical_proof_report.tex` and `canonical_proof_report.pdf` now form the generated,
-concise nine-page formal-reconstruction report. They replace the historical claim manuscript at the
+concise ten-page formal-reconstruction report. They replace the historical claim manuscript at the
 root and make the non-activation boundary explicit. The historical 56-page claim artifact is
 available only from the pinned legacy source coordinate recorded under
 [`archive/legacy-v0/`](../archive/legacy-v0/README.md).

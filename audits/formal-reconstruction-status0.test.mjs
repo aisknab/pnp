@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-13-27');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-13-28');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -71,6 +71,9 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanConcretePipelinePairedCompilerAxiomAuditPassed, true);
   assert.equal(out.leanConcretePipelinePairedCompilerAuditedDeclarationCount, 28);
   assert.equal(out.leanConcretePipelineCanonicalPairCompilationFormalized, true);
+  assert.equal(out.leanConcretePipelineInputFramerAxiomAuditPassed, true);
+  assert.equal(out.leanConcretePipelineInputFramerAuditedDeclarationCount, 70);
+  assert.equal(out.leanConcretePipelineAllInputFramingFormalized, true);
   assert.equal(out.leanConcretePipelineMalformedInputBehaviorFormalized, false);
   assert.equal(out.leanConcretePipelineRawRefinementFormalized, false);
   assert.equal(out.leanConcretePipelineExternalInputSizePolynomialFormalized, true);
@@ -163,20 +166,30 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.match(out.siteStatusSha256, /^[0-9a-f]{64}$/u);
 });
 
-test('formal reconstruction status pins the canonical-pair compiler inventory and source closure', async () => {
+test('formal reconstruction status pins the all-input framer inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 5150);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 2185);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 2084);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 975);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 5197);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 2197);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 2096);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 1032);
   assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 48);
   assert.equal(status.leanSourceClosureSha256,
-    '8f3171f44c8aa02b94a573158618c475e6642dd65dd34bf6d1824a14a4b19e6b');
+    '6b6558134e01809a69181416bf121cf3250dee4e468e6bb0efd7351cb5e5b1a6');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
   assert.equal(machine.status, 'formalized-foundation-only');
   assert.equal(machine.earned, true);
+  for (const name of [
+    'PNP.Concrete.PipelineInputFramer.boundedDecide_compileTotalInputFramer_accept',
+    'PNP.Concrete.PipelineInputFramer.boundedDecide_compileTotalInputFramer_ne_timeout',
+    'PNP.Concrete.PipelineInputFramer.run_compileTotalInputFramer_encoded_rawTimeBound',
+    'PNP.Concrete.PipelineInputFramer.run_compileTotalInputFramer_rawTimeBound_blankEquivalent',
+    'PNP.Concrete.PipelineInputFramer.totalInputFramerFinal_isHalted',
+    'PNP.Concrete.PipelineInputFramer.totalInputFramerFinal_represents',
+    'PNP.Concrete.PipelineInputFramer.totalInputFramerRawTimeBound_le',
+    'PNP.Concrete.PipelineInputFramer.totalInputFramer_workRunExact',
+  ]) assert.equal(machine.requiredTheorems.includes(name), true, name);
   assert.equal(machine.requiredTheorems.includes(
     'PNP.Concrete.PipelineMachineSimulation.workRunExact_three_of_step'), true);
   assert.equal(machine.requiredTheorems.includes(
@@ -253,7 +266,11 @@ test('formal reconstruction status pins the canonical-pair compiler inventory an
     'PNP.Concrete.PipelinePairedCompiler.suppliedTraceTerminalRawSteps_le_of_rawRunExact',
     'PNP.Concrete.PipelinePairedCompiler.suppliedTraceTerminalRawSteps_le_pairedPipelineRawTimeBound',
   ]) assert.equal(machine.requiredTheorems.includes(name), true, name);
-  assert.match(machine.scope, /PipelinePairedCompiler compiles that complete table/u);
+  assert.match(machine.scope, /One literal finite input framer handles every raw bitstring locally/u);
+  assert.match(machine.scope, /exactly 4 work steps on empty input/u);
+  assert.match(machine.scope, /6 \* m \* m \+ 39 \* m \+ 75/u);
+  assert.match(machine.scope, /All 70 input-framer declarations have empty axiom closure/u);
+  assert.match(machine.scope, /PipelinePairedCompiler compiles that complete canonical-pair table/u);
   assert.match(machine.scope, /symbol-preserving framer-to-simulator/u);
   assert.match(machine.scope, /verdict-indexed handoff launches/u);
   assert.match(machine.scope, /B\(m\) = m \+ p\(m\) \+ 1/u);
@@ -263,6 +280,7 @@ test('formal reconstruction status pins the canonical-pair compiler inventory an
   assert.match(machine.scope, /ordinary machineOutput are exact/u);
   assert.match(machine.scope, /bounded verdict, no-timeout result/u);
   assert.match(machine.scope, /All 28 paired-compiler declarations/u);
+  assert.match(machine.nonClaim, /all-input theorem stops at the accepting framer frame/u);
   assert.match(machine.nonClaim, /canonical BitString\.pair inputs/u);
   assert.match(machine.nonClaim, /malformed/u);
   assert.match(machine.nonClaim, /FunctionProgram.RawRefinement/u);
@@ -309,7 +327,7 @@ test('formal reconstruction status pins the canonical-pair compiler inventory an
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'exact successful prefix of length k at most F')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
-    'PipelineInputFramer is one literal finite machine for canonical BitString.pair inputs')), true);
+    'PipelineInputFramer is one literal finite machine for every raw bitstring')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'PipelineOutputHandoff is one literal finite machine for an already represented internal tape')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
@@ -331,7 +349,7 @@ test('formal reconstruction status pins the canonical-pair compiler inventory an
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-13-PIPELINE-CANONICAL-PAIR-26');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-13-PIPELINE-ALL-INPUT-FRAMER-27');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);

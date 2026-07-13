@@ -42,9 +42,10 @@ exact prefix from an ordinary `F`-fuel raw run; conditional on a designated-halt
 fuel `3 * F` and compiled fuel `18 * F` reach the representation and encoding. The full fuels are
 at-most budgets, not successful-step counts or input-size bounds. This proves no termination result
 and does not classify a stuck nonhalting stop as a verdict. A separate executable machine now
-frames literal canonical `BitString.pair` input at an exact quadratic input-length budget, leaving
-only representation-permitted exterior garbage. That theorem is paired-input-only, ends in the
-framer's accepting state, and its local `boundedDecide` theorem records only framer acceptance. A
+frames every literal raw bitstring, including empty and odd inputs, at exact branch costs and the
+uniform compiled bound `6 * m * m + 39 * m + 75`, leaving only representation-permitted exterior
+garbage. That theorem ends in the framer's accepting state; the renamed bridge and complete
+compiler theorems remain canonical-pair-only. A
 third literal finite machine now reaches a represented `Tape.handoffTarget` from an already
 represented internal tape in exactly `2 * n + 4` work steps and `12 * n + 24` compiled steps for
 logical output length `n`. A namespace layer proves injective three-stage
@@ -99,7 +100,7 @@ concrete-gate activation fingerprints.
 
 The formal status, public status mirror, TeX report, and PDF report are generated from the checked
 inventory and publication map. The root
-[`canonical_proof_report.pdf`](../canonical_proof_report.pdf) is the current concise nine-page formal
+[`canonical_proof_report.pdf`](../canonical_proof_report.pdf) is the current concise ten-page formal
 reconstruction report. It is a non-activation report, not the historical claim manuscript. The
 historical 56-page claim artifact is available only through the pinned legacy source coordinate;
 its immutable coordinates are recorded under [`archive/legacy-v0/`](../archive/legacy-v0/README.md).

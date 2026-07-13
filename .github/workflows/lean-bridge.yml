@@ -284,15 +284,15 @@ jobs:
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 20
 
-      - name: Print executable paired-input framer axioms
+      - name: Print executable all-input framer axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineInputFramerAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
           if printf '%s\n' "$audit_output" | grep -F 'depends on axioms:'; then
-            echo 'Executable paired-input framer unexpectedly depends on axioms.' >&2
+            echo 'Executable all-input framer unexpectedly depends on axioms.' >&2
             exit 1
           fi
-          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 42
+          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 70
 
       - name: Print executable internal output-handoff axioms
         run: |

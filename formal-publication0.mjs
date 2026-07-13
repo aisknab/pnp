@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '6cdad7539c7a2159f0591ae67960ad5dccb673df2136a39bbfbe020ce6077280';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '87f538085e612210e6f8be1e75653c589279227b9e220230190d5f9c2f4b27ec';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -20,11 +20,19 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.FunctionProgram.RawRefinement.output_size_le',
   'PNP.Concrete.NatPolynomial.eval_mono',
   'PNP.Concrete.PipelineInputFramer.boundedDecide_compilePairedInputFramer_accept',
+  'PNP.Concrete.PipelineInputFramer.boundedDecide_compileTotalInputFramer_accept',
+  'PNP.Concrete.PipelineInputFramer.boundedDecide_compileTotalInputFramer_ne_timeout',
   'PNP.Concrete.PipelineInputFramer.pairedInputFramerFinal_isHalted',
   'PNP.Concrete.PipelineInputFramer.pairedInputFramerFinal_represents',
   'PNP.Concrete.PipelineInputFramer.pairedInputFramerRawTimeBound_exact',
   'PNP.Concrete.PipelineInputFramer.pairedInputFramer_workRunExact',
   'PNP.Concrete.PipelineInputFramer.run_compilePairedInputFramer_rawTimeBound',
+  'PNP.Concrete.PipelineInputFramer.run_compileTotalInputFramer_encoded_rawTimeBound',
+  'PNP.Concrete.PipelineInputFramer.run_compileTotalInputFramer_rawTimeBound_blankEquivalent',
+  'PNP.Concrete.PipelineInputFramer.totalInputFramerFinal_isHalted',
+  'PNP.Concrete.PipelineInputFramer.totalInputFramerFinal_represents',
+  'PNP.Concrete.PipelineInputFramer.totalInputFramerRawTimeBound_le',
+  'PNP.Concrete.PipelineInputFramer.totalInputFramer_workRunExact',
   'PNP.Concrete.PipelineMachineSimulation.findIndexedRawRuleFrom_map_snd',
   'PNP.Concrete.PipelineMachineSimulation.find_liftMachine_entry',
   'PNP.Concrete.PipelineMachineSimulation.liftMachine_isHalted_eq_of_representsConfiguration',
@@ -190,7 +198,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-13-27') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-13-28') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -464,7 +472,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-13-27') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-13-28') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
@@ -482,7 +490,7 @@ function validatePublicationMap0(map) {
     'expectedRootKernelTypeSha256',
     'expectedAxiomClosureSha256',
     'expectedSourceClosureSha256',
-  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 27`);
+  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 28`);
   if (!isSha2560(map.milestoneSourceClosureSha256)
       || !isObject0(map.earnedMilestoneTheoremKernelTypeSha256)) {
     throw new Error('reviewed milestone theorem/source fingerprints are missing');
@@ -501,7 +509,7 @@ function validatePublicationMap0(map) {
     throw new Error('reviewed milestone theorem kernel-type fingerprint inventory mismatch');
   }
   if (sha256Text0(stableStringify0(map)) !== REQUIRED_PUBLICATION_MAP_SHA2560) {
-    throw new Error('formal publication milestone map drifted from the reviewed release-27 specification');
+    throw new Error('formal publication milestone map drifted from the reviewed release-28 specification');
   }
 }
 
