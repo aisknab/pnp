@@ -114,7 +114,8 @@ inputFramerWorkSteps (packedPairCount left right)
 
 and the compiled raw cost is exactly six times that sum. Target termination,
 a source runtime polynomial in external input size, and final-output-size
-transport remain unproved.
+transport are not proved in this module. `PipelinePairedCompiler` now supplies
+those facts for proof-bearing targets on canonical pair inputs.
 
 ## Audit
 
@@ -136,10 +137,11 @@ bound drift, output drift, hidden assumptions, and class/root overclaims.
 
 ## Exact remaining boundary
 
-The complete literal trace theorem requires a caller-supplied exact target
-execution. No theorem supplies target termination, a uniform all-input
-`FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement`, or a
-polynomial in external encoded input length.
+The complete literal trace theorem in this module requires a caller-supplied
+exact target execution. `PipelinePairedCompiler` extracts that trace and
+derives an external polynomial for canonical pairs, but no theorem supplies a
+uniform all-input `FunctionProgram.RawRefinement` or
+`DecisionProgram.RawRefinement` with malformed-input behavior.
 
 `Formal.ConcreteComplexityMachineLink` remains open;
 `PNP.Concrete.cnfSATInP`, `PNP.Concrete.cnfSATNPComplete`, and

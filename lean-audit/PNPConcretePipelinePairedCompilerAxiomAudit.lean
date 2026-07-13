@@ -1,0 +1,30 @@
+import PNP
+
+#print axioms PNP.Concrete.Tape.outputWindowSize
+#print axioms PNP.Concrete.Tape.decodeOutputCells_length_le
+#print axioms PNP.Concrete.Tape.outputBits_length_le_outputWindowSize
+#print axioms PNP.Concrete.Tape.outputWindowSize_ofInput_le
+#print axioms PNP.Concrete.Tape.outputWindowSize_write
+#print axioms PNP.Concrete.Tape.outputWindowSize_moveLeft
+#print axioms PNP.Concrete.Tape.outputWindowSize_moveRight_le
+#print axioms PNP.Concrete.Tape.outputWindowSize_move_le
+#print axioms PNP.Concrete.PipelinePairedCompiler.pairedPipelineMachine
+#print axioms PNP.Concrete.PipelinePairedCompiler.pairedPipelineOutputSizeBound
+#print axioms PNP.Concrete.PipelinePairedCompiler.pairedPipelineRawTimeBound
+#print axioms PNP.Concrete.PipelinePairedCompiler.framedOutputHandoffRawTimeBound_exact
+#print axioms PNP.Concrete.PipelinePairedCompiler.suppliedTraceTerminalRawSteps_eq_components
+#print axioms PNP.Concrete.PipelinePairedCompiler.pairedPipelineOutputSizeBound_eval
+#print axioms PNP.Concrete.PipelinePairedCompiler.suppliedTraceTerminalRawSteps_le_pairedPipelineRawTimeBound
+#print axioms PNP.Concrete.PipelinePairedCompiler.outputWindowSize_applyRule_le
+#print axioms PNP.Concrete.PipelinePairedCompiler.outputWindowSize_step_le
+#print axioms PNP.Concrete.PipelinePairedCompiler.outputWindowSize_run_le
+#print axioms PNP.Concrete.PipelinePairedCompiler.machineOutput_length_le_input_add_fuel
+#print axioms PNP.Concrete.PipelinePairedCompiler.outputBits_length_le_pairedPipelineOutputSizeBound_of_rawRunExact
+#print axioms PNP.Concrete.PipelinePairedCompiler.suppliedTraceTerminalRawSteps_le_of_rawRunExact
+#print axioms PNP.Concrete.PipelinePairedCompiler.run_pairedPipeline_accept_at_bound_of_rawRunExact
+#print axioms PNP.Concrete.PipelinePairedCompiler.run_pairedPipeline_reject_at_bound_of_rawRunExact
+#print axioms PNP.Concrete.PipelinePairedCompiler.pairedPipeline_correct_on_pair
+#print axioms PNP.Concrete.PipelinePairedCompiler.pairedPipeline_boundedDecide_eq
+#print axioms PNP.Concrete.PipelinePairedCompiler.pairedPipeline_machineOutput_eq
+#print axioms PNP.Concrete.PipelinePairedCompiler.pairedPipeline_ne_timeout
+#print axioms PNP.Concrete.PipelinePairedCompiler.pairedPipeline_accepts_iff
