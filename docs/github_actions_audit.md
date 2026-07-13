@@ -31,7 +31,7 @@ from current theorem status.
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual
   routes require 30. The workflow also checks the byte-identical inventory mirrors, derives the
   false concrete publication gate and status/report outputs, and verifies same-environment
-  double-build determinism plus exact committed bytes for the current concise ten-page PDF. The
+  double-build determinism plus exact committed bytes for the current concise nine-page PDF. The
   hosted runner's apt-installed TeX and Poppler versions are not cryptographically pinned, so this
   is not a universal cross-toolchain reproducibility claim.
 - `.github/workflows/legacy-v0-replay.yml` is manual only. It replays the immutable historical
@@ -145,7 +145,7 @@ node scripts/generate-formal-publication.mjs --check
 npm run report:check
 ```
 
-The current root PDF is the generated ten-page formal-reconstruction report. The historical
+The current root PDF is the generated nine-page formal-reconstruction report. The historical
 56-page claim artifact is not a current workflow output and is available only at the pinned legacy
 coordinate recorded under `archive/legacy-v0/`.
 

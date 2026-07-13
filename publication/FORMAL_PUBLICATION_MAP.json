@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-13-25",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-13-26",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "75a1111a5241e678ef617b8cbd47d0db43a415db27ac0072c64e9f9bc7638cf7",
+  "milestoneSourceClosureSha256": "28fd37ce1d55d25fa1c9a354d6c698fa5be8207ab3606d6441efb988387d2730",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.FinalUniversalDesign.cnfCompiled_accept_iff_check": "4a8661d567079e1f47c288b8a36805a20ac7040338d84325723079f3fada4efa",
@@ -52,6 +52,18 @@
     "PNP.Concrete.PipelineOutputHandoff.framedOutputHandoffFinal_isHalted": "164b9bf86cc421a1930e211b8fc1086cd78312471a3f5f6723784e98ea7bcf33",
     "PNP.Concrete.PipelineOutputHandoff.framedOutputHandoffRawTimeBound_exact": "665bac0dbfa88babe693a5b199c34e3cadfd99e7968adca8aead6c0360fb63ec",
     "PNP.Concrete.PipelineOutputHandoff.run_compileFramedOutputHandoff_of_represents": "e34aa606d363894f41b20c4911a72ff796dc6e8bdc800b545638c8d83e0495df",
+    "PNP.Concrete.PipelinePairedCompiler.machineOutput_length_le_input_add_fuel": "dc551b37f9979cfa39a5fe9b7d21fa3ee4f27cc8f7a8c001c958bdc7953e5ae6",
+    "PNP.Concrete.PipelinePairedCompiler.outputBits_length_le_pairedPipelineOutputSizeBound_of_rawRunExact": "2d212f155dd88b0dc4a02a633353f310d5b97d5f973a59ca1b498d6f9f460045",
+    "PNP.Concrete.PipelinePairedCompiler.pairedPipelineOutputSizeBound_eval": "b6a9c4a7067f898ab85c946933f318056e6691753d2d9aa37a4ca33802092dc9",
+    "PNP.Concrete.PipelinePairedCompiler.pairedPipeline_accepts_iff": "719c9d81b90ba7938ae9cd5485fc9d2cc0e0a14a6b98c118cfeba39d788a75d9",
+    "PNP.Concrete.PipelinePairedCompiler.pairedPipeline_boundedDecide_eq": "99b8ecf29c6542e9646f70d9f973e99bd5a2ed8a18563b929213a9af38474731",
+    "PNP.Concrete.PipelinePairedCompiler.pairedPipeline_correct_on_pair": "1b7567b84777ef6b8b545548fb1b1a7431c9ad231090505335986e6b1d780112",
+    "PNP.Concrete.PipelinePairedCompiler.pairedPipeline_machineOutput_eq": "7640e6416b0b4ebf12fa4619cfcff4d242af337e82416c372875afbfb2986267",
+    "PNP.Concrete.PipelinePairedCompiler.pairedPipeline_ne_timeout": "a59b8e38ee0be8c579aab8989c32c53cdf20c59168c6d8a5310db9b6bbb225ab",
+    "PNP.Concrete.PipelinePairedCompiler.run_pairedPipeline_accept_at_bound_of_rawRunExact": "eb2e9b97342110f130e4207802cf6e4ceeb06d508caf984c4c2400cddf6d2ad6",
+    "PNP.Concrete.PipelinePairedCompiler.run_pairedPipeline_reject_at_bound_of_rawRunExact": "e48071abf07ebb9014c45b1a56c20f1a0f1627921b27980cf737078fba6efede",
+    "PNP.Concrete.PipelinePairedCompiler.suppliedTraceTerminalRawSteps_le_of_rawRunExact": "6414b2502789e7859e4e67c0cb900a8cf756bce4cfa1dee39b552f7ac9b1f9c0",
+    "PNP.Concrete.PipelinePairedCompiler.suppliedTraceTerminalRawSteps_le_pairedPipelineRawTimeBound": "5508023af56484d3bcf2cf1d1bc100f0c016481b1be03ffb55a1b7b977df174e",
     "PNP.Concrete.PipelineStageBridges.acceptingHandoffState_ne_rejectingHandoffState": "b0a17262efe8c8b144b91a571ce4f979fc3ad0db14cad152c316adcc6e93b148",
     "PNP.Concrete.PipelineStageBridges.acceptingLaunch_workStep": "0f40a1c94b06d93144d6ebb2ba1487e5be9d81d4b1c8e213e2ab74b127f4d4d9",
     "PNP.Concrete.PipelineStageBridges.bridgedAccept_workRunExact_of_rawRunExact": "c987488cebaee32d9774ee94659c7fb6b1ebc637694d21c37998d3345508c00a",
@@ -162,7 +174,7 @@
       "id": "concrete-machine-cost-kernel",
       "title": "Concrete machine and cost kernel",
       "classification": "formalized-foundation-only",
-      "scope": "Literal canonical paired input reaches an accepting representation under an exact quadratic raw-input-length polynomial. Every supplied exact n-step raw target run lifts to exactly 3 * n successful work steps. The bridge module adds a symbol-preserving one-step framer-to-simulator launch and one accept/reject-to-handoff launch, uses two disjoint verdict-indexed handoff copies, and proves first-match isolation for every ordinary stage step. The terminal bridge appends two disjoint verdict-indexed copies of the literal terminal packer to one extended rule table and preserves every successful prior-bridge step and exact trace without shadowing. Every supplied exact accepting or rejecting target run now composes from ordinary paired startConfig through framing, simulation, represented handoff, terminal launch, and raw-output packing in that one finite machine; the corresponding bounded verdict and ordinary machineOutput are exact. A supplied stuck nonhalting endpoint remains timeout, never rejection. The cumulative work cost is inputFramerWorkSteps + 1 + 3 * n + 1 + framedOutputHandoffWorkSteps + 1 + terminalOutputPackerWorkSteps, and the compiled raw cost is exactly six times that sum. The local terminal suffix fits 18*m^2 + 36*m + 12 for logical output length m. All 59 reviewed terminal-bridge declarations and all 69 terminal-packer declarations have empty axiom closure.",
+      "scope": "Literal canonical paired input reaches an accepting representation under an exact quadratic raw-input-length polynomial. Every supplied exact n-step raw target run lifts to exactly 3 * n successful work steps. The bridge module adds symbol-preserving framer-to-simulator and verdict-indexed handoff launches; the terminal bridge appends two disjoint packer copies to one finite work table. PipelinePairedCompiler compiles that complete table to one raw machine. For every proof-bearing PolynomialTimeMachine and every canonical pair, it internally extracts an exact target prefix k <= p(m), proves target output length at most B(m) = m + p(m) + 1, and pads the complete execution to R(m) = inputFramerRawTimeBound(m) + 6 + 18*p(m) + 6 + framedOutputHandoffRawTimeBound(B(m)) + terminalBridgeRawTimeBound(B(m)). The compiled bounded verdict, no-timeout result, language acceptance, and ordinary machineOutput are exact. All 28 paired-compiler declarations, 59 terminal-bridge declarations, and 69 terminal-packer declarations have empty axiom closure.",
       "requiredTheorems": [
         "PNP.Concrete.BitString.decodePair_pair",
         "PNP.Concrete.NatPolynomial.eval_mono",
@@ -186,6 +198,18 @@
         "PNP.Concrete.PipelineOutputHandoff.framedOutputHandoffRawTimeBound_exact",
         "PNP.Concrete.PipelineOutputHandoff.framedOutputHandoff_workRunExact_of_represents",
         "PNP.Concrete.PipelineOutputHandoff.run_compileFramedOutputHandoff_of_represents",
+        "PNP.Concrete.PipelinePairedCompiler.machineOutput_length_le_input_add_fuel",
+        "PNP.Concrete.PipelinePairedCompiler.outputBits_length_le_pairedPipelineOutputSizeBound_of_rawRunExact",
+        "PNP.Concrete.PipelinePairedCompiler.pairedPipelineOutputSizeBound_eval",
+        "PNP.Concrete.PipelinePairedCompiler.pairedPipeline_accepts_iff",
+        "PNP.Concrete.PipelinePairedCompiler.pairedPipeline_boundedDecide_eq",
+        "PNP.Concrete.PipelinePairedCompiler.pairedPipeline_correct_on_pair",
+        "PNP.Concrete.PipelinePairedCompiler.pairedPipeline_machineOutput_eq",
+        "PNP.Concrete.PipelinePairedCompiler.pairedPipeline_ne_timeout",
+        "PNP.Concrete.PipelinePairedCompiler.run_pairedPipeline_accept_at_bound_of_rawRunExact",
+        "PNP.Concrete.PipelinePairedCompiler.run_pairedPipeline_reject_at_bound_of_rawRunExact",
+        "PNP.Concrete.PipelinePairedCompiler.suppliedTraceTerminalRawSteps_le_of_rawRunExact",
+        "PNP.Concrete.PipelinePairedCompiler.suppliedTraceTerminalRawSteps_le_pairedPipelineRawTimeBound",
         "PNP.Concrete.PipelineStageBridges.acceptingHandoffState_ne_rejectingHandoffState",
         "PNP.Concrete.PipelineStageBridges.acceptingLaunch_workStep",
         "PNP.Concrete.PipelineStageBridges.bridgedAccept_workRunExact_of_rawRunExact",
@@ -265,7 +289,7 @@
         "PNP.Concrete.run_succ",
         "PNP.Concrete.run_zero"
       ],
-      "nonClaim": "The complete literal trace theorem requires a caller-supplied exact target execution and its cost still depends on the supplied source-transition count and final output length. No theorem supplies target termination, a uniform all-input FunctionProgram.RawRefinement or DecisionProgram.RawRefinement, or a polynomial in external encoded input length. The concrete complexity machine-link blocker remains open; CNF-SAT in P, NP-completeness, and P = NP are not established. PNP.Main.p_eq_np remains absent and the publication gate remains false."
+      "nonClaim": "The complete external polynomial and correctness theorem is restricted to canonical BitString.pair inputs. No theorem specifies empty, odd, trailing, malformed, or other arbitrary raw inputs outside that image, so uniform all-input FunctionProgram.RawRefinement and DecisionProgram.RawRefinement remain absent. The concrete complexity machine-link blocker remains open; CNF-SAT in P, NP-completeness, and P = NP are not established. PNP.Main.p_eq_np remains absent and the publication gate remains false."
     },
     {
       "id": "concrete-complexity-classes",

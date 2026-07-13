@@ -252,12 +252,12 @@ test('namespace remains the prerequisite while the separate bridge milestone sta
     `${PREFIX}renamedLiftMachine_workRunExact_of_rawRunExact`,
     `${PREFIX}renamedOutputHandoff_workRunExact_of_represents`,
   ]) assert.equal(foundation.requiredTheorems.includes(name), true, name);
-  assert.match(foundation.scope, /symbol-preserving one-step framer-to-simulator launch/u);
-  assert.match(foundation.scope, /two disjoint verdict-indexed handoff copies/u);
-  assert.match(foundation.scope, /first-match isolation/u);
-  assert.match(foundation.scope, /preserves every successful prior-bridge step/u);
-  assert.match(foundation.scope, /one finite machine/u);
-  assert.match(foundation.nonClaim, /caller-supplied exact target execution/u);
+  assert.match(foundation.scope, /symbol-preserving framer-to-simulator/u);
+  assert.match(foundation.scope, /two disjoint packer copies/u);
+  assert.match(foundation.scope, /internally extracts an exact target prefix/u);
+  assert.match(foundation.scope, /pads the complete execution/u);
+  assert.match(foundation.scope, /one raw machine/u);
+  assert.match(foundation.nonClaim, /canonical BitString\.pair inputs/u);
   assert.match(foundation.nonClaim, /FunctionProgram.RawRefinement/u);
   assert.equal(map.gate.standardComplexityModelEligible, false);
 });

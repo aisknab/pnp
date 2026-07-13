@@ -233,7 +233,7 @@ test('packer audit rejects packing, delimiter, bound, timeout, assumption, and c
   }
 });
 
-test('terminal packing is earned while the complete pipeline and publication remain fail-closed', async () => {
+test('terminal packing and canonical-pair compiler are earned while general refinement stays fail-closed', async () => {
   const status = JSON.parse(await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'));
   assert.equal(status.leanConcretePipelineInternalOutputHandoffComposed, true);
   assert.equal(status.leanConcretePipelineTerminalOutputPackingFormalized, true);
@@ -242,7 +242,9 @@ test('terminal packing is earned while the complete pipeline and publication rem
   assert.equal(status.leanConcretePipelineTerminalOutputPackerConnectedToBridgeEndpointFormalized, true);
   assert.equal(status.leanConcretePipelinePriorTraceTransportToTerminalBridgeFormalized, true);
   assert.equal(status.leanConcretePipelineRawRefinementFormalized, false);
-  assert.equal(status.leanConcretePipelineExternalInputSizePolynomialFormalized, false);
+  assert.equal(status.leanConcretePipelineCanonicalPairCompilationFormalized, true);
+  assert.equal(status.leanConcretePipelineExternalInputSizePolynomialFormalized, true);
+  assert.equal(status.leanConcretePipelineMalformedInputBehaviorFormalized, false);
   assert.equal(status.leanConcreteCNFSATInPFormalized, false);
   assert.equal(status.leanConcreteCNFNPCompletenessFormalized, false);
   assert.equal(status.rootLeanTheoremPresent, false);

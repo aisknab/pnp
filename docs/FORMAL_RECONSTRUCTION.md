@@ -65,8 +65,12 @@ output equality under the local `18*n^2 + 36*n + 12` suffix bound. It also prese
 successful earlier bridge step and exact trace in the extended rule table. For each caller-supplied
 exact accepting or rejecting target execution, one theorem now composes the ordinary paired input,
 framer, simulator, represented handoff, terminal launch, and packer in that literal machine, with
-exact verdict and raw-output equality. No theorem supplies target termination, an all-input
-`RawRefinement`, or an external encoded-input-size polynomial.
+exact verdict and raw-output equality. `PipelinePairedCompiler` now extracts the exact prefix from
+the target's proof-bearing bounded run, proves that an `F`-step target exposes at most `m + F + 1`
+output bits, and pads the same literal compiled machine to an explicit polynomial in external pair
+length `m`. For every `PolynomialTimeMachine` and every canonical pair it preserves exact verdict,
+no-timeout, language acceptance, and ordinary raw output. It does not specify arbitrary malformed or
+non-pair raw input and therefore does not yet supply an all-input `RawRefinement`.
 The development also provides one direct raw-machine instance: a universally
 correct polynomial-time verifier for canonically encoded finite CNF formulae and bounded assignment
 certificates, proving `PNP.Concrete.CNFSAT ∈ NP`. It does not provide a deterministic polynomial-time
@@ -97,12 +101,14 @@ three established exact traces survive renaming. The stage-bridge layer connects
 target runs into one verdict-preserving internal execution with explicit cumulative work and raw
 costs. The separate terminal packer supplies raw output de-tagging from its encoded internal start,
 and the terminal-bridge layer proves the subsequent local suffix from either represented handoff
-endpoint. No theorem yet transports the earlier ordinary-input trace into that extended machine.
-This remains a charged interpreter interface without a complete external-size compiler or
-refinement theorem to one raw machine. See
+endpoint and transports the earlier ordinary-input trace into that extended machine. The paired
+compiler derives target termination and a complete external-size polynomial for canonical pair
+inputs. Malformed-input behavior and the general refinement theorem to one raw machine remain open.
+See
 [`lean_concrete_complexity.md`](./lean_concrete_complexity.md) and
 [`lean_pipeline_stage_bridges.md`](./lean_pipeline_stage_bridges.md), and
-[`lean_pipeline_terminal_bridge.md`](./lean_pipeline_terminal_bridge.md).
+[`lean_pipeline_terminal_bridge.md`](./lean_pipeline_terminal_bridge.md), and
+[`lean_pipeline_paired_compiler.md`](./lean_pipeline_paired_compiler.md).
 
 The concrete CNF layer separately defines canonical formula and assignment codecs, propositional
 CNF semantics, a Boolean certificate checker, a finite work machine, and its compiled raw machine.
@@ -147,7 +153,7 @@ check is also false. Therefore the gate does not pass and every theorem-emission
 from it remains false or `null`.
 
 The root `canonical_proof_report.tex` and `canonical_proof_report.pdf` now form the generated,
-concise ten-page formal-reconstruction report. They replace the historical claim manuscript at the
+concise nine-page formal-reconstruction report. They replace the historical claim manuscript at the
 root and make the non-activation boundary explicit. The historical 56-page claim artifact is
 available only from the pinned legacy source coordinate recorded under
 [`archive/legacy-v0/`](../archive/legacy-v0/README.md).

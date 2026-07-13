@@ -18,6 +18,7 @@ import PNP.Concrete.PipelineStateNamespace
 import PNP.Concrete.PipelineStageBridges
 import PNP.Concrete.TerminalOutputPacker
 import PNP.Concrete.PipelineTerminalBridge
+import PNP.Concrete.PipelinePairedCompiler
 import PNP.Concrete.Complexity
 import PNP.Concrete.PipelineRefinement
 import PNP.Concrete.Target
