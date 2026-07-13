@@ -32,7 +32,10 @@ minimizer, ZeroSlack theorem, or final complexity conclusion.
 The current Lean development makes parts of the intended route explicit and now defines an
 axiom-free finite charged-pipeline interface for P, bounded-certificate NP, and polynomial
 many-one reductions. It does not yet prove that every such pipeline compiles or refines to the raw
-single-tape machine kernel. A new local layer preserves the raw interpreter's first matching rule
+single-tape machine kernel. A blank-materialization layer proves that finite tape lists denote the same raw
+execution whenever their infinite blank extensions agree. In particular, every ordinary empty,
+odd, or even input agrees with its packed work-tape start, without claiming that the existing
+canonical-pair framer handles those inputs. A new local layer preserves the raw interpreter's first matching rule
 and lifts every supplied exact chain of `n` successful raw transitions from an already represented
 boundary frame to exactly `3 * n` successful work transitions. From an ordinary raw `run` with
 fuel `F`, it extracts an exact prefix of length `k ≤ F` reaching the same endpoint. If that endpoint

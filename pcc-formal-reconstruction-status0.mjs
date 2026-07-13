@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-13-26';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-13-27';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -65,6 +65,7 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'node --test audits/lean-root-target0.test.mjs',
   'node --test audits/lean-concrete-machine0.test.mjs',
   'node --test audits/lean-concrete-tape-handoff0.test.mjs',
+  'node --test audits/lean-concrete-tape-blank-equivalence0.test.mjs',
   'node --test audits/lean-concrete-pipeline-tape-geometry0.test.mjs',
   'node --test audits/lean-concrete-pipeline-input-framer0.test.mjs',
   'node --test audits/lean-concrete-pipeline-output-handoff0.test.mjs',
@@ -88,6 +89,8 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteBitStringAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteMachineAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteTapeHandoffAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-audit/PNPConcreteTapeBlankEquivalenceAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPConcreteTapeBlankEquivalence.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineTapeGeometryAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineInputFramerAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineOutputHandoffAxiomAudit.lean',
@@ -133,6 +136,7 @@ const NON_CLAIMS = Object.freeze([
   'The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.',
   'The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.',
   'Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.',
+  'TapeBlankEquivalence proves that finite tapes which differ only by materialized exterior blanks have identical raw execution and observable output. It also relates every ordinary empty, odd, or even raw input to its packed work-tape view. This is representation invariance only: the executable input framer and complete pipeline remain canonical-pair-only.',
   'PipelineTape frames raw cells between distinct two-track markers and tolerates arbitrary exterior garbage; its boundary expansions are pure tape identities, not transition rules, a handoff machine, a compiler, or a runtime proof.',
   'PipelineInputFramer is one literal finite machine for canonical BitString.pair inputs. It reaches an accepting represented frame with permitted exterior garbage at an exact quadratic raw-input-length budget. PipelineStageBridges launches that endpoint into the lifted target in one exact symbol-preserving step. The framer still does not accept arbitrary empty, odd, malformed, or unpaired raw words, prove target termination, or by itself provide the trace transport into the extended terminal-bridge machine, a pipeline RawRefinement, CNF-SAT in P, NP-completeness, or P = NP.',
   'PipelineOutputHandoff is one literal finite machine for an already represented internal tape. For logical output length n it reaches an accepting representation of Tape.handoffTarget in exactly 2 * n + 4 work steps and 12 * n + 24 compiled steps. PipelineTerminalBridge preserves the earlier ordinary-input trace in its extended rule table and composes it with verdict-indexed terminal-packer copies for every supplied exact target execution. This still supplies no target-termination theorem, complete external-input-size polynomial, or RawRefinement. CNF-SAT in P, NP-completeness, and P = NP remain unproved.',
@@ -709,7 +713,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-13-26',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-13-27',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

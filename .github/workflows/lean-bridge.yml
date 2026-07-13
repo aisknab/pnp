@@ -29,6 +29,7 @@ on:
       - 'audits/lean-root-target0.test.mjs'
       - 'audits/lean-concrete-machine0.test.mjs'
       - 'audits/lean-concrete-tape-handoff0.test.mjs'
+      - 'audits/lean-concrete-tape-blank-equivalence0.test.mjs'
       - 'audits/lean-concrete-pipeline-tape-geometry0.test.mjs'
       - 'audits/lean-concrete-pipeline-input-framer0.test.mjs'
       - 'audits/lean-concrete-pipeline-output-handoff0.test.mjs'
@@ -50,6 +51,7 @@ on:
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_machine.md'
       - 'docs/lean_tape_handoff.md'
+      - 'docs/lean_tape_blank_equivalence.md'
       - 'docs/lean_pipeline_tape_geometry.md'
       - 'docs/lean_pipeline_input_framer.md'
       - 'docs/lean_pipeline_output_handoff.md'
@@ -103,6 +105,7 @@ on:
       - 'audits/lean-root-target0.test.mjs'
       - 'audits/lean-concrete-machine0.test.mjs'
       - 'audits/lean-concrete-tape-handoff0.test.mjs'
+      - 'audits/lean-concrete-tape-blank-equivalence0.test.mjs'
       - 'audits/lean-concrete-pipeline-tape-geometry0.test.mjs'
       - 'audits/lean-concrete-pipeline-input-framer0.test.mjs'
       - 'audits/lean-concrete-pipeline-output-handoff0.test.mjs'
@@ -124,6 +127,7 @@ on:
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_machine.md'
       - 'docs/lean_tape_handoff.md'
+      - 'docs/lean_tape_blank_equivalence.md'
       - 'docs/lean_pipeline_tape_geometry.md'
       - 'docs/lean_pipeline_input_framer.md'
       - 'docs/lean_pipeline_output_handoff.md'
@@ -202,7 +206,7 @@ jobs:
           grep -F 'Lake version 5.0.0-src+68218e8 (Lean version 4.31.0)' /tmp/lake-version.txt
 
       - name: Audit explicit root and assumption inventory
-        run: node --test audits/lean-root-target0.test.mjs audits/lean-concrete-machine0.test.mjs audits/lean-concrete-tape-handoff0.test.mjs audits/lean-concrete-pipeline-tape-geometry0.test.mjs audits/lean-concrete-pipeline-input-framer0.test.mjs audits/lean-concrete-pipeline-output-handoff0.test.mjs audits/lean-concrete-pipeline-state-namespace0.test.mjs audits/lean-concrete-pipeline-stage-bridges0.test.mjs audits/lean-concrete-terminal-output-packer0.test.mjs audits/lean-concrete-pipeline-terminal-bridge0.test.mjs audits/lean-concrete-pipeline-paired-compiler0.test.mjs audits/lean-concrete-pipeline-machine-simulation0.test.mjs audits/lean-concrete-complexity0.test.mjs audits/lean-concrete-pipeline-refinement0.test.mjs audits/lean-concrete-cnf0.test.mjs audits/lean-nand-semantics0.test.mjs audits/lean-nand-enumerator0.test.mjs audits/lean-nand-reference-minimum0.test.mjs audits/lean-locked-nand-baseline0.test.mjs audits/lean-locked-nand-threshold-boundary0.test.mjs audits/lean-residual-routes0.test.mjs audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs
+        run: node --test audits/lean-root-target0.test.mjs audits/lean-concrete-machine0.test.mjs audits/lean-concrete-tape-handoff0.test.mjs audits/lean-concrete-tape-blank-equivalence0.test.mjs audits/lean-concrete-pipeline-tape-geometry0.test.mjs audits/lean-concrete-pipeline-input-framer0.test.mjs audits/lean-concrete-pipeline-output-handoff0.test.mjs audits/lean-concrete-pipeline-state-namespace0.test.mjs audits/lean-concrete-pipeline-stage-bridges0.test.mjs audits/lean-concrete-terminal-output-packer0.test.mjs audits/lean-concrete-pipeline-terminal-bridge0.test.mjs audits/lean-concrete-pipeline-paired-compiler0.test.mjs audits/lean-concrete-pipeline-machine-simulation0.test.mjs audits/lean-concrete-complexity0.test.mjs audits/lean-concrete-pipeline-refinement0.test.mjs audits/lean-concrete-cnf0.test.mjs audits/lean-nand-semantics0.test.mjs audits/lean-nand-enumerator0.test.mjs audits/lean-nand-reference-minimum0.test.mjs audits/lean-locked-nand-baseline0.test.mjs audits/lean-locked-nand-threshold-boundary0.test.mjs audits/lean-residual-routes0.test.mjs audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs
 
       - name: Build explicit PNP root
         run: lake build PNP
@@ -258,6 +262,17 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 14
+
+      - name: Print blank-materialization equivalence axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteTapeBlankEquivalenceAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          if printf '%s\n' "$audit_output" | grep -F 'depends on axioms:'; then
+            echo 'Blank-materialization equivalence unexpectedly depends on axioms.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 21
+          lake env lean -DwarningAsError=true lean-regression/PNPConcreteTapeBlankEquivalence.lean
 
       - name: Print boundary-marked pipeline tape geometry axioms
         run: |
