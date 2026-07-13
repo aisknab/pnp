@@ -52,6 +52,7 @@ lean/PNP/Concrete/PipelineMachineSimulation.lean
 lean/PNP/Concrete/PipelineStateNamespace.lean
 lean/PNP/Concrete/PipelineStageBridges.lean
 lean/PNP/Concrete/TerminalOutputPacker.lean
+lean/PNP/Concrete/PipelineTerminalBridge.lean
 lean/PNP/Concrete/Complexity.lean
 lean/PNP/Concrete/PipelineRefinement.lean
 lean/PNP/Concrete/Target.lean
@@ -90,6 +91,7 @@ lean-audit/PNPConcretePipelineOutputHandoffAxiomAudit.lean
 lean-audit/PNPConcretePipelineStateNamespaceAxiomAudit.lean
 lean-audit/PNPConcretePipelineStageBridgesAxiomAudit.lean
 lean-audit/PNPConcreteTerminalOutputPackerAxiomAudit.lean
+lean-audit/PNPConcretePipelineTerminalBridgeAxiomAudit.lean
 lean-audit/PNPConcretePipelineMachineSimulationAxiomAudit.lean
 lean-audit/PNPConcreteComplexityAxiomAudit.lean
 lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean
@@ -182,10 +184,14 @@ to its endpoint. Conditional on that endpoint being designated halting, `workRun
 termination result: those full fuels are at-most budgets rather than successful-step counts or
 input-size bounds, and a stuck nonhalting stop is not a verdict. The layer does not create the
 frame inside its own theorem or prove target termination. The bridge module supplies exact launch
-and verdict theorems. `TerminalOutputPacker.lean` separately performs terminal de-tagging and proves
-ordinary `machineOutput` equality with a local quadratic bound, but it is not yet part of that
-bridge trace. The layers do not derive an external-input-size polynomial or construct complete
-composition/precomposition pipeline refinement. The two declarations in
+and verdict theorems. `TerminalOutputPacker.lean` performs terminal de-tagging and proves ordinary
+raw output equality with a local quadratic bound. The 44-declaration
+`PipelineTerminalBridge.lean` places two disjoint packer copies after the earlier bridge rules and
+proves exact accepting/rejecting launches, terminal halts, and output equality from represented
+handoff endpoints under the local bound `18*n^2 + 36*n + 12`. The earlier trace from paired
+`startConfig` is still a theorem about the smaller bridge machine and has not been transported into
+this extended machine. The layers do not derive an external-input-size polynomial or construct
+complete composition/precomposition pipeline refinement. The two declarations in
 `lean/PNP/Concrete/Target.lean` are also axiom-free: `PNP.Main.ConcretePEqualsNP` is an inactive
 definition naming mutual inclusion, and `PNP.Main.concretePEqualsNP_iff` pins its expansion. This
 does not prove the target. The six explicit declarations in
@@ -316,7 +322,7 @@ ineligible for the general charged-pipeline target, even though the direct CNF v
 to one raw machine. The abstract `PNP.PEqualsNP` bridge remains ineligible. See
 [`lean_theorem_inventory.md`](./lean_theorem_inventory.md) for the full contract and commands.
 
-The inventory and false gate generate the current root TeX/PDF: a concise nine-page
+The inventory and false gate generate the current root TeX/PDF: a concise ten-page
 formal-reconstruction report with no theorem emission. It replaces the historical 56-page claim
 manuscript at the repository root; that historical artifact is available only through the pinned
 legacy coordinate recorded under [`archive/legacy-v0/`](../archive/legacy-v0/README.md).
@@ -649,7 +655,7 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
    NP-hardness/NP-completeness; the current direct verifier proves only `CNFSAT ∈ NP`.
 6. A compiler/refinement proving that every finite charged function, decision, and verifier
    pipeline is implemented with the stated input-size costs by the selected raw machine model. The
-   exact bridge machine still does not provide this result because terminal raw output,
+   exact terminal bridge still does not provide this result because transport of the earlier trace,
    external-input-size bounds, and the complete refinement contract remain unproved.
 ```
 
@@ -663,9 +669,9 @@ The highest-value next targets are:
 3. Prove first-output preservation, `TraceEquivalence`, and the two derived final-output laws.
 4. Instantiate the conditional boundary uniformly and prove the report threshold theorem.
 5. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
-6. Add the explicit handoff-to-terminal-packer launch and turn the proved stage-local output theorem
-   plus exact internal bridge trace into one full pipeline refinement with external-input-size
-   polynomial runtime/output bounds.
+6. Transport the exact framer/simulator/handoff trace into `terminalBridgeMachine`, then turn the
+   proved four-stage trace into one full pipeline refinement with external-input-size polynomial
+   runtime/output bounds.
 7. Formalize or import concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.
 8. Formalize checker/reflection soundness for the PCC package.

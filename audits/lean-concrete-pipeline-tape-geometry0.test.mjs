@@ -205,11 +205,11 @@ test('the executable compiler blocker and publication gate remain fail-closed', 
   assert.match(foundation.scope,
     /supplied stuck nonhalting endpoint is timeout/u);
   assert.match(foundation.nonClaim,
-    /terminal packer is a separate encoded-internal stage/u);
+    /earlier ordinary-input framer\/simulator\/handoff trace/u);
   assert.match(foundation.nonClaim,
     /no theorem proves target termination/u);
   assert.match(foundation.nonClaim,
-    /not been launched from the bridge endpoint/u);
+    /has not yet been transported through the extended/u);
   assert.match(foundation.nonClaim,
     /no complete FunctionProgram\.RawRefinement or DecisionProgram\.RawRefinement/u);
   assert.equal(map.gate.standardComplexityModelEligible, false);

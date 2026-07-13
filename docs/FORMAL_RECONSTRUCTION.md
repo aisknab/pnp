@@ -59,7 +59,11 @@ The local handoff theorem begins at an encoded internal work configuration; the 
 theorem begins at ordinary paired `startConfig`. Its two-track encoded endpoint is not itself an
 ordinary raw-visible `machineOutput` layout. A separate literal `TerminalOutputPacker` now proves
 exact blank-delimited raw output equality with a local `18*n^2 + 36*n + 6` bound and one-step-short
-timeout, but it has not yet been launched from the bridge endpoint or included in its cumulative trace.
+timeout. `PipelineTerminalBridge` appends two disjoint verdict-indexed packer copies to an extended
+finite rule table and proves exact accepting/rejecting endpoint launches, terminal halts, and raw
+output equality under the local `18*n^2 + 36*n + 12` suffix bound. The earlier cumulative trace is
+still a theorem about the smaller bridge machine and has not yet been transported through the
+extended machine.
 The development also provides one direct raw-machine instance: a universally
 correct polynomial-time verifier for canonically encoded finite CNF formulae and bounded assignment
 certificates, proving `PNP.Concrete.CNFSAT ∈ NP`. It does not provide a deterministic polynomial-time
@@ -89,10 +93,13 @@ handoff pairwise-disjoint images in one lookup-isolated concatenated rule table 
 three established exact traces survive renaming. The stage-bridge layer connects supplied exact
 target runs into one verdict-preserving internal execution with explicit cumulative work and raw
 costs. The separate terminal packer supplies raw output de-tagging from its encoded internal start,
-but no theorem composes it with the bridge. This remains a charged interpreter interface without a
-complete external-size compiler or refinement theorem to one raw machine. See
+and the terminal-bridge layer proves the subsequent local suffix from either represented handoff
+endpoint. No theorem yet transports the earlier ordinary-input trace into that extended machine.
+This remains a charged interpreter interface without a complete external-size compiler or
+refinement theorem to one raw machine. See
 [`lean_concrete_complexity.md`](./lean_concrete_complexity.md) and
-[`lean_pipeline_stage_bridges.md`](./lean_pipeline_stage_bridges.md).
+[`lean_pipeline_stage_bridges.md`](./lean_pipeline_stage_bridges.md), and
+[`lean_pipeline_terminal_bridge.md`](./lean_pipeline_terminal_bridge.md).
 
 The concrete CNF layer separately defines canonical formula and assignment codecs, propositional
 CNF semantics, a Boolean certificate checker, a finite work machine, and its compiled raw machine.
@@ -137,7 +144,7 @@ check is also false. Therefore the gate does not pass and every theorem-emission
 from it remains false or `null`.
 
 The root `canonical_proof_report.tex` and `canonical_proof_report.pdf` now form the generated,
-concise nine-page formal-reconstruction report. They replace the historical claim manuscript at the
+concise ten-page formal-reconstruction report. They replace the historical claim manuscript at the
 root and make the non-activation boundary explicit. The historical 56-page claim artifact is
 available only from the pinned legacy source coordinate recorded under
 [`archive/legacy-v0/`](../archive/legacy-v0/README.md).

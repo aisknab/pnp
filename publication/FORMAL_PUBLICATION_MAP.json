@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-12-23",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-12-24",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "befaf6130fb3c1636d3d8e6d4d415231994791d4a7ed7cd9f51cd6b56acb4b22",
+  "milestoneSourceClosureSha256": "be74c8fcce907f63e60cdcdf57fe301737e451e8451d48e466e8b2f9f4ab8f14",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.FinalUniversalDesign.cnfCompiled_accept_iff_check": "4a8661d567079e1f47c288b8a36805a20ac7040338d84325723079f3fada4efa",
@@ -85,6 +85,22 @@
     "PNP.Concrete.PipelineTape.represents_moveLeft_of_cons": "03c141f4dc76a6e43db371c1eff68d16c317ed2678182b0e9d0ea0bf77b0544e",
     "PNP.Concrete.PipelineTape.represents_moveRight_of_cons": "d522d1ae6c2bcc160a8661d49e3ccbe4a5ccf4ee2013a0a4cd0864c8fd700264",
     "PNP.Concrete.PipelineTape.represents_write": "de758926dc25ad343a7301310c32753b437074077f10a2915ec66e2a0485c911",
+    "PNP.Concrete.PipelineTerminalBridge.acceptingPackerLaunch_workStep": "ca3480456c2cce95b98138326094be6f24ac0788eabab5e09818725e289350fb",
+    "PNP.Concrete.PipelineTerminalBridge.acceptingTerminalFinal_isHalted": "3d13e7a6052261adcf16cb95e3830b453655d742428abf701b5a6bde33da05de",
+    "PNP.Concrete.PipelineTerminalBridge.acceptingTerminal_workRunExact_of_represents": "0030e218ac54f732f2cd68a2c19ea647ab34c272b5087f0aaac57afade28aab3",
+    "PNP.Concrete.PipelineTerminalBridge.findWorkRule_terminalBridge_acceptingPacker_of_some": "6087312bcae8f8e2625a38020e0e3f817135423ba8c5ae3dea0295fa4795c60f",
+    "PNP.Concrete.PipelineTerminalBridge.findWorkRule_terminalBridge_rejectingPacker_of_some": "504a8d545682b91f8fc629c25e3b16bb92dc3841d52df5b6e666762936dda327",
+    "PNP.Concrete.PipelineTerminalBridge.outputBits_compileTerminalBridge_accepting_of_represents": "f6ff227ee77408d4b833da4b277cbe24950b52f12bb8aaec3b8d0f48a4000001",
+    "PNP.Concrete.PipelineTerminalBridge.outputBits_compileTerminalBridge_rejecting_of_represents": "ebdf594cf57d6ab317bc692ac491746099ba5c955853b6deaf41b17240c1a9db",
+    "PNP.Concrete.PipelineTerminalBridge.rejectingPackerLaunch_workStep": "4a8ca4d5e1ee56d2ecd951c028db24b7c0f0fe846a1ff79f54f08102567e41f8",
+    "PNP.Concrete.PipelineTerminalBridge.rejectingTerminalFinal_isHalted": "eec5dd895ed46c9d8b2e63005ddf2aec12d7e2c31cecf2a8da89e970b8158170",
+    "PNP.Concrete.PipelineTerminalBridge.rejectingTerminal_workRunExact_of_represents": "ecb49c4a53ab8ab52531392dc4da05027acc823ccc46a659a9ec1d3f6cb4ce26",
+    "PNP.Concrete.PipelineTerminalBridge.run_compileTerminalBridge_accepting_of_represents": "cde9317f1548d6eb3432892e48f180dc9831444051f6cfb10de5ec64745ec1c0",
+    "PNP.Concrete.PipelineTerminalBridge.run_compileTerminalBridge_accepting_of_represents_at_bound": "baa20b079db4c2868a4648c3d39b4041a7192638a508e1b36d5b045f561cb819",
+    "PNP.Concrete.PipelineTerminalBridge.run_compileTerminalBridge_rejecting_of_represents": "404ee5dd4c567e4005952b6fbac7d3b5530d7d09bcd9800af556ab9eeb0f23e9",
+    "PNP.Concrete.PipelineTerminalBridge.run_compileTerminalBridge_rejecting_of_represents_at_bound": "bae20c22787ee148d80ffa56f7e48675210760e2c22f4050bb2b9adca1714b20",
+    "PNP.Concrete.PipelineTerminalBridge.terminalBridgeMachine_acceptState_ne_rejectState": "0dab900fec493eec94a911851cb1b44d29c81d1673fe68e0fa5a56a9bf64fefa",
+    "PNP.Concrete.PipelineTerminalBridge.terminalBridge_runtime_le": "c262bc219faa325dc768689fbc2e88e58785ecf7fcd47f1a7564f6158a299691",
     "PNP.Concrete.PolynomialTimeMachine.verdict_accepts_iff": "d99481e6c7e062b5faf06d8bdb544efa434e2528ba40dfb6f87f9ccced49b56f",
     "PNP.Concrete.PolynomialTimeMachine.verdict_ne_timeout": "ba634559b6494abc43978e3b34abf1f94b9d2e4cc3aa0856db8d5de36cefd1c5",
     "PNP.Concrete.reduction_comp": "ca5ad5f4ccae69b3efa95b875f6561a934b8b81dffd76583bd344f5938235d2c",
@@ -133,7 +149,7 @@
       "id": "concrete-machine-cost-kernel",
       "title": "Concrete machine and cost kernel",
       "classification": "formalized-foundation-only",
-      "scope": "Literal canonical paired input reaches an accepting representation under an exact quadratic raw-input-length polynomial. Every supplied exact n-step raw target run lifts to exactly 3 * n successful work steps. The bridge module adds a symbol-preserving one-step framer-to-simulator launch and one accept/reject-to-handoff launch, uses two disjoint verdict-indexed handoff copies, and proves first-match isolation for every ordinary stage step. Exact target acceptance and rejection remain the corresponding bounded work verdict; a supplied stuck nonhalting endpoint is timeout at the exact simulation-prefix budget. The cumulative internal bridge work cost is inputFramerWorkSteps + 1 + 3 * n + 1 + framedOutputHandoffWorkSteps, and bridge compilation from ordinary canonical paired raw input costs exactly six times that sum. Separately, the literal terminal packer uniformly reaches a blank-delimited raw-visible accepting output for arbitrary logical words and exterior garbage. Its compiled exact trace costs six times its work steps and fits 18*m^2 + 36*m + 6 for logical output length m; one work step short is timeout. All 69 reviewed terminal-packer declarations have empty axiom closure.",
+      "scope": "Literal canonical paired input reaches an accepting representation under an exact quadratic raw-input-length polynomial. Every supplied exact n-step raw target run lifts to exactly 3 * n successful work steps. The bridge module adds a symbol-preserving one-step framer-to-simulator launch and one accept/reject-to-handoff launch, uses two disjoint verdict-indexed handoff copies, and proves first-match isolation for every ordinary stage step. Exact target acceptance and rejection remain the corresponding bounded work verdict; a supplied stuck nonhalting endpoint is timeout at the exact simulation-prefix budget. The cumulative internal bridge work cost is inputFramerWorkSteps + 1 + 3 * n + 1 + framedOutputHandoffWorkSteps, and bridge compilation from ordinary canonical paired raw input costs exactly six times that sum. The terminal bridge now appends two disjoint verdict-indexed copies of the literal terminal packer to one extended rule table, proves first-match isolation and exact one-step launches from accepting and rejecting represented-handoff endpoints, and reaches distinct designated terminal halts with ordinary raw-visible output equality. Its local launch-and-pack work cost is 1 + terminalOutputPackerWorkSteps, its exact compiled cost is six times that sum, and it fits 18*m^2 + 36*m + 12 for logical output length m. All 44 reviewed terminal-bridge declarations and all 69 terminal-packer declarations have empty axiom closure.",
       "requiredTheorems": [
         "PNP.Concrete.BitString.decodePair_pair",
         "PNP.Concrete.NatPolynomial.eval_mono",
@@ -190,6 +206,22 @@
         "PNP.Concrete.PipelineTape.represents_moveLeft_of_cons",
         "PNP.Concrete.PipelineTape.represents_moveRight_of_cons",
         "PNP.Concrete.PipelineTape.represents_write",
+        "PNP.Concrete.PipelineTerminalBridge.acceptingPackerLaunch_workStep",
+        "PNP.Concrete.PipelineTerminalBridge.acceptingTerminalFinal_isHalted",
+        "PNP.Concrete.PipelineTerminalBridge.acceptingTerminal_workRunExact_of_represents",
+        "PNP.Concrete.PipelineTerminalBridge.findWorkRule_terminalBridge_acceptingPacker_of_some",
+        "PNP.Concrete.PipelineTerminalBridge.findWorkRule_terminalBridge_rejectingPacker_of_some",
+        "PNP.Concrete.PipelineTerminalBridge.outputBits_compileTerminalBridge_accepting_of_represents",
+        "PNP.Concrete.PipelineTerminalBridge.outputBits_compileTerminalBridge_rejecting_of_represents",
+        "PNP.Concrete.PipelineTerminalBridge.rejectingPackerLaunch_workStep",
+        "PNP.Concrete.PipelineTerminalBridge.rejectingTerminalFinal_isHalted",
+        "PNP.Concrete.PipelineTerminalBridge.rejectingTerminal_workRunExact_of_represents",
+        "PNP.Concrete.PipelineTerminalBridge.run_compileTerminalBridge_accepting_of_represents",
+        "PNP.Concrete.PipelineTerminalBridge.run_compileTerminalBridge_accepting_of_represents_at_bound",
+        "PNP.Concrete.PipelineTerminalBridge.run_compileTerminalBridge_rejecting_of_represents",
+        "PNP.Concrete.PipelineTerminalBridge.run_compileTerminalBridge_rejecting_of_represents_at_bound",
+        "PNP.Concrete.PipelineTerminalBridge.terminalBridgeMachine_acceptState_ne_rejectState",
+        "PNP.Concrete.PipelineTerminalBridge.terminalBridge_runtime_le",
         "PNP.Concrete.PolynomialTimeMachine.verdict_accepts_iff",
         "PNP.Concrete.PolynomialTimeMachine.verdict_ne_timeout",
         "PNP.Concrete.Tape.outputBits_handoffTarget",
@@ -207,7 +239,7 @@
         "PNP.Concrete.run_succ",
         "PNP.Concrete.run_zero"
       ],
-      "nonClaim": "The terminal packer is a separate encoded-internal stage and has not been launched from the bridge endpoint or incorporated into the bridge rule table and cumulative trace. There is no complete FunctionProgram.RawRefinement or DecisionProgram.RawRefinement and no polynomial in external encoded input length. The bridge bound still depends on a supplied exact source-transition count and final output length, and no theorem proves target termination. The concrete complexity machine-link blocker therefore remains open; CNF-SAT in P, NP-completeness, and P = NP are not established. PNP.Main.p_eq_np remains absent and the publication gate remains false."
+      "nonClaim": "The earlier ordinary-input framer/simulator/handoff trace is proved for the smaller bridge machine and has not yet been transported through the extended terminal-bridge machine. There is therefore no single exact trace from external startConfig through all four stages, no complete FunctionProgram.RawRefinement or DecisionProgram.RawRefinement, and no polynomial in external encoded input length. The earlier bridge bound still depends on a supplied exact source-transition count and final output length, and no theorem proves target termination. The concrete complexity machine-link blocker remains open; CNF-SAT in P, NP-completeness, and P = NP are not established. PNP.Main.p_eq_np remains absent and the publication gate remains false."
     },
     {
       "id": "concrete-complexity-classes",

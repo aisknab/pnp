@@ -217,7 +217,7 @@ test('bridge audit rejects verdict collapse, missing launches, cost drift, assum
   }
 });
 
-test('bridge remains internal-output-only while the separate terminal stage stays fail-closed', async () => {
+test('earlier bridge remains internal-output-only while the terminal suffix stays fail-closed', async () => {
   const status = JSON.parse(await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'));
   assert.equal(status.leanConcretePipelineStageBridgesFormalized, true);
   assert.equal(status.leanConcretePipelineStageBridgesAxiomAuditPassed, true);
@@ -225,6 +225,8 @@ test('bridge remains internal-output-only while the separate terminal stage stay
   assert.equal(status.leanConcretePipelineStageLaunchFormalized, true);
   assert.equal(status.leanConcretePipelineTerminalOutputPackingFormalized, true);
   assert.equal(status.leanConcretePipelineTerminalOutputPackerAxiomAuditPassed, true);
+  assert.equal(status.leanConcretePipelineTerminalOutputPackerConnectedToBridgeEndpointFormalized, true);
+  assert.equal(status.leanConcretePipelinePriorTraceTransportToTerminalBridgeFormalized, false);
   assert.equal(status.leanConcretePipelineRawRefinementFormalized, false);
   assert.equal(status.leanConcreteCNFSATInPFormalized, false);
   assert.equal(status.leanConcreteCNFNPCompletenessFormalized, false);
