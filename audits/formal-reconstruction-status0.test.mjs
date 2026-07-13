@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-12-24');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-13-25');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -66,8 +66,8 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanConcretePipelineTerminalOutputPackerAuditedDeclarationCount, 69);
   assert.equal(out.leanConcretePipelineTerminalOutputPackerConnectedToBridgeEndpointFormalized, true);
   assert.equal(out.leanConcretePipelineTerminalBridgeAxiomAuditPassed, true);
-  assert.equal(out.leanConcretePipelineTerminalBridgeAuditedDeclarationCount, 44);
-  assert.equal(out.leanConcretePipelinePriorTraceTransportToTerminalBridgeFormalized, false);
+  assert.equal(out.leanConcretePipelineTerminalBridgeAuditedDeclarationCount, 59);
+  assert.equal(out.leanConcretePipelinePriorTraceTransportToTerminalBridgeFormalized, true);
   assert.equal(out.leanConcretePipelineRawRefinementFormalized, false);
   assert.equal(out.leanConcretePipelineExternalInputSizePolynomialFormalized, false);
   assert.equal(out.leanNANDDirectWireCoreFormalized, true);
@@ -161,13 +161,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the terminal-bridge inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 5076);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 2125);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 2024);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 956);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 5096);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 2143);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 2042);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 957);
   assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 46);
   assert.equal(status.leanSourceClosureSha256,
-    'be74c8fcce907f63e60cdcdf57fe301737e451e8451d48e466e8b2f9f4ab8f14');
+    '75a1111a5241e678ef617b8cbd47d0db43a415db27ac0072c64e9f9bc7638cf7');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -208,36 +208,49 @@ test('formal reconstruction status pins the terminal-bridge inventory and source
     'PNP.Concrete.TerminalOutputPacker.machineOutput_compileTerminalOutputPacker_eq',
     'PNP.Concrete.TerminalOutputPacker.terminalOutputPacker_one_step_short_timeout',
     'PNP.Concrete.PipelineTerminalBridge.acceptingPackerLaunch_workStep',
+    'PNP.Concrete.PipelineTerminalBridge.acceptingSuppliedTrace_workRunExact_of_rawRunExact',
     'PNP.Concrete.PipelineTerminalBridge.acceptingTerminalFinal_isHalted',
     'PNP.Concrete.PipelineTerminalBridge.acceptingTerminal_workRunExact_of_represents',
+    'PNP.Concrete.PipelineTerminalBridge.bridged_workRunExact_of_exact',
+    'PNP.Concrete.PipelineTerminalBridge.bridged_workStep?_of_some',
     'PNP.Concrete.PipelineTerminalBridge.findWorkRule_terminalBridge_acceptingPacker_of_some',
     'PNP.Concrete.PipelineTerminalBridge.findWorkRule_terminalBridge_rejectingPacker_of_some',
+    'PNP.Concrete.PipelineTerminalBridge.machineOutput_compileTerminalBridge_accept_of_rawRunExact',
+    'PNP.Concrete.PipelineTerminalBridge.machineOutput_compileTerminalBridge_reject_of_rawRunExact',
     'PNP.Concrete.PipelineTerminalBridge.outputBits_compileTerminalBridge_accepting_of_represents',
     'PNP.Concrete.PipelineTerminalBridge.outputBits_compileTerminalBridge_rejecting_of_represents',
     'PNP.Concrete.PipelineTerminalBridge.rejectingPackerLaunch_workStep',
+    'PNP.Concrete.PipelineTerminalBridge.rejectingSuppliedTrace_workRunExact_of_rawRunExact',
     'PNP.Concrete.PipelineTerminalBridge.rejectingTerminalFinal_isHalted',
     'PNP.Concrete.PipelineTerminalBridge.rejectingTerminal_workRunExact_of_represents',
+    'PNP.Concrete.PipelineTerminalBridge.run_compileTerminalBridge_accept_of_rawRunExact',
     'PNP.Concrete.PipelineTerminalBridge.run_compileTerminalBridge_accepting_of_represents',
     'PNP.Concrete.PipelineTerminalBridge.run_compileTerminalBridge_accepting_of_represents_at_bound',
+    'PNP.Concrete.PipelineTerminalBridge.run_compileTerminalBridge_reject_of_rawRunExact',
     'PNP.Concrete.PipelineTerminalBridge.run_compileTerminalBridge_rejecting_of_represents',
     'PNP.Concrete.PipelineTerminalBridge.run_compileTerminalBridge_rejecting_of_represents_at_bound',
+    'PNP.Concrete.PipelineTerminalBridge.simulationPrefix_terminalBridge_workBoundedDecide_timeout',
+    'PNP.Concrete.PipelineTerminalBridge.suppliedTraceTerminalWorkSteps_eq',
     'PNP.Concrete.PipelineTerminalBridge.terminalBridgeMachine_acceptState_ne_rejectState',
     'PNP.Concrete.PipelineTerminalBridge.terminalBridge_runtime_le',
+    'PNP.Concrete.PipelineTerminalBridge.workBoundedDecide_terminalBridge_accept_of_rawRunExact',
+    'PNP.Concrete.PipelineTerminalBridge.workBoundedDecide_terminalBridge_reject_of_rawRunExact',
+    'PNP.Concrete.PipelineTerminalBridge.workBoundedDecide_terminalBridge_timeout_of_stuck_rawRunExact',
   ]) assert.equal(machine.requiredTheorems.includes(name), true, name);
   assert.match(machine.scope, /supplied exact n-step raw target run/u);
   assert.match(machine.scope, /symbol-preserving one-step framer-to-simulator launch/u);
   assert.match(machine.scope, /verdict-indexed handoff copies/u);
   assert.match(machine.scope, /inputFramerWorkSteps \+ 1 \+ 3 \* n \+ 1/u);
-  assert.match(machine.scope, /bridge compilation.*six times that sum/u);
-  assert.match(machine.scope, /terminal bridge now appends two disjoint verdict-indexed copies/u);
+  assert.match(machine.scope, /compiled raw cost is exactly six times that sum/u);
+  assert.match(machine.scope, /terminal bridge appends two disjoint verdict-indexed copies/u);
+  assert.match(machine.scope, /one finite machine/u);
+  assert.match(machine.scope, /ordinary machineOutput are exact/u);
   assert.match(machine.scope, /18\*m\^2 \+ 36\*m \+ 12/u);
-  assert.match(machine.scope, /All 44 reviewed terminal-bridge declarations/u);
-  assert.match(machine.nonClaim, /no theorem proves target termination/u);
-  assert.match(machine.nonClaim, /earlier ordinary-input framer\/simulator\/handoff trace/u);
-  assert.match(machine.nonClaim, /has not yet been transported through the extended/u);
-  assert.match(machine.nonClaim, /no single exact trace from external startConfig/u);
-  assert.match(machine.nonClaim, /no polynomial in external encoded input length/u);
-  assert.match(machine.nonClaim, /no complete FunctionProgram.RawRefinement/u);
+  assert.match(machine.scope, /All 59 reviewed terminal-bridge declarations/u);
+  assert.match(machine.nonClaim, /caller-supplied exact target execution/u);
+  assert.match(machine.nonClaim, /No theorem supplies target termination/u);
+  assert.match(machine.nonClaim, /polynomial in external encoded input length/u);
+  assert.match(machine.nonClaim, /FunctionProgram.RawRefinement/u);
   assert.match(machine.nonClaim, /P = NP/u);
   const cnf = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-cnf-universal-verifier',
@@ -282,9 +295,9 @@ test('formal reconstruction status pins the terminal-bridge inventory and source
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'PipelineOutputHandoff is one literal finite machine for an already represented internal tape')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
-    'PipelineTerminalBridge now launches either verdict-indexed handoff endpoint')), true);
+    'PipelineTerminalBridge preserves the earlier ordinary-input trace')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
-    'A stuck nonhalting exact endpoint is timeout')), true);
+    'A stuck nonhalting exact endpoint remains timeout')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'PipelineStateNamespace remains the injective renaming and lookup-isolation prerequisite')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
@@ -298,7 +311,7 @@ test('formal reconstruction status pins the terminal-bridge inventory and source
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-12-PIPELINE-TERMINAL-BRIDGE-24');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-13-PIPELINE-SUPPLIED-TRACE-25');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);

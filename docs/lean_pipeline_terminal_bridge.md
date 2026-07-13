@@ -4,11 +4,11 @@
 bridge rule table with two verdict-indexed copies of
 `TerminalOutputPacker`. From an already reached accepting or rejecting
 represented-handoff endpoint, it proves one exact launch followed by the
-complete terminal-packing trace.
-
-This is a local suffix theorem. The earlier trace from ordinary paired input
-is proved for `PipelineStageBridges.bridgedMachine`; it has not yet been
-transported through the extended machine in this module.
+complete terminal-packing trace. It also proves that every successful step
+and exact trace in the earlier bridge machine is preserved without shadowing
+in the extended table. For a caller-supplied exact accepting or rejecting
+target execution, these results compose into one exact trace from ordinary
+paired input through all four stages of the literal finite machine.
 
 ## Finite namespace and rule table
 
@@ -36,7 +36,7 @@ counterpart prove first-match isolation: every successful local packer lookup
 is the corresponding renamed lookup in the combined table. The two launch
 tables contain one symbol-preserving `.stay` rule for each `WorkSymbol`.
 
-## Exact local traces
+## Exact local and supplied traces
 
 For any `PipelineTape.Represents raw.handoffTarget work`, the representation
 witness exposes arbitrary exterior garbage around the canonical packer input.
@@ -56,6 +56,26 @@ At that budget,
 `outputBits_compileTerminalBridge_rejecting_of_represents` prove that ordinary
 blank-delimited `Tape.outputBits` equals `raw.outputBits`. The rejecting copy
 preserves the output while retaining the rejecting control-state image.
+
+`bridged_workStep?_of_some` and `bridged_workRunExact_of_exact` transport the
+earlier bridge rules into the extended machine. The two theorems
+
+- `acceptingSuppliedTrace_workRunExact_of_rawRunExact`; and
+- `rejectingSuppliedTrace_workRunExact_of_rawRunExact`
+
+then compose framing, lifted simulation, represented handoff, terminal
+launch, and terminal packing from ordinary `BitString.pair` input. Their
+premise is a supplied `rawRunExact?` target execution with an accepting or
+rejecting endpoint. They do not prove that such an execution exists for every
+input.
+
+At the same exact cumulative budget,
+`workBoundedDecide_terminalBridge_accept_of_rawRunExact` and its rejecting
+counterpart preserve the target verdict. A supplied stuck nonhalting endpoint
+remains `.timeout` at the exact simulation-prefix budget. The two
+`machineOutput_compileTerminalBridge_*_of_rawRunExact` theorems prove that
+ordinary raw-machine output is exactly the supplied target final tape's
+logical output.
 
 ## Explicit local polynomial
 
@@ -79,9 +99,22 @@ terminalBridgeRawTimeBound
 ```
 
 This polynomial is in logical output length at the represented endpoint. It
-is not a polynomial in the complete pipeline's external encoded input length,
-because target termination, source runtime, and output-size transport into
-this extended machine remain unproved.
+is not a polynomial in the complete pipeline's external encoded input length.
+For a supplied exact target trace, the total work cost is
+
+```text
+inputFramerWorkSteps (packedPairCount left right)
+  + 1
+  + 3 * sourceSteps
+  + 1
+  + framedOutputHandoffWorkSteps finalTape
+  + 1
+  + terminalOutputPackerWorkSteps finalTape.outputBits
+```
+
+and the compiled raw cost is exactly six times that sum. Target termination,
+a source runtime polynomial in external input size, and final-output-size
+transport remain unproved.
 
 ## Audit
 
@@ -92,23 +125,21 @@ lake env lean -DwarningAsError=true \
 node --test audits/lean-concrete-pipeline-terminal-bridge0.test.mjs
 ```
 
-The compiled transcript covers all 44 public declarations and reports an
+The compiled transcript covers all 59 public declarations and reports an
 empty axiom closure for every declaration. The hostile audit fixes the closed
 import and declaration surfaces, disjoint state images, literal rule order,
-first-match lookup isolation, both exact launches, both verdict-indexed
-traces, final halts, raw output equality, the local polynomial, and the
-explicit nonclaim boundary. Mutations reject namespace collapse, missing
-prior rules, bound drift, output drift, hidden assumptions, and class/root
-overclaims.
+first-match lookup isolation, preservation of all successful earlier steps,
+both supplied verdict-indexed traces, final halts, exact raw output, timeout
+behavior, the cumulative cost, the local polynomial, and the explicit
+nonclaim boundary. Mutations reject namespace collapse, missing prior rules,
+bound drift, output drift, hidden assumptions, and class/root overclaims.
 
 ## Exact remaining boundary
 
-There is still no theorem transporting the earlier framer, simulator, and
-handoff trace from ordinary paired `startConfig` into
-`terminalBridgeMachine`. Consequently there is no single four-stage exact
-trace, no complete `FunctionProgram.RawRefinement` or
-`DecisionProgram.RawRefinement`, no external encoded-input-size polynomial,
-and no target-termination result.
+The complete literal trace theorem requires a caller-supplied exact target
+execution. No theorem supplies target termination, a uniform all-input
+`FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement`, or a
+polynomial in external encoded input length.
 
 `Formal.ConcreteComplexityMachineLink` remains open;
 `PNP.Concrete.cnfSATInP`, `PNP.Concrete.cnfSATNPComplete`, and

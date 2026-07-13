@@ -203,15 +203,15 @@ test('the executable compiler blocker and publication gate remain fail-closed', 
   assert.match(foundation.scope,
     /one-step framer-to-simulator launch/u);
   assert.match(foundation.scope,
-    /supplied stuck nonhalting endpoint is timeout/u);
+    /supplied stuck nonhalting endpoint remains timeout/u);
   assert.match(foundation.nonClaim,
-    /earlier ordinary-input framer\/simulator\/handoff trace/u);
+    /caller-supplied exact target execution/u);
   assert.match(foundation.nonClaim,
-    /no theorem proves target termination/u);
+    /No theorem supplies target termination/u);
   assert.match(foundation.nonClaim,
-    /has not yet been transported through the extended/u);
+    /FunctionProgram\.RawRefinement or DecisionProgram\.RawRefinement/u);
   assert.match(foundation.nonClaim,
-    /no complete FunctionProgram\.RawRefinement or DecisionProgram\.RawRefinement/u);
+    /polynomial in external encoded input length/u);
   assert.equal(map.gate.standardComplexityModelEligible, false);
   assert.equal(map.gate.expectedSourceClosureSha256, null);
 });

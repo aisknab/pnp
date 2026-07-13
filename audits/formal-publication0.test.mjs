@@ -129,10 +129,10 @@ test('publication consumes the reviewed terminal-bridge map and inventory counts
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '3a4b96129befc032a91b973e5b5acfbf7884f51770c8a43b226a6379ca49fa8b');
+    '295160109f44df899235ff6cbab708ac3af32c401876a0d3499fd98e83d45240');
   assert.equal(map.milestoneSourceClosureSha256,
-    'be74c8fcce907f63e60cdcdf57fe301737e451e8451d48e466e8b2f9f4ab8f14');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 124);
+    '75a1111a5241e678ef617b8cbd47d0db43a415db27ac0072c64e9f9bc7638cf7');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 137);
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,
     map.gate.expectedConcreteTargetKernelValueSha256,
@@ -146,7 +146,7 @@ test('publication consumes the reviewed terminal-bridge map and inventory counts
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [5076, 2125, 2024, 956, 46]);
+  ], [5096, 2143, 2042, 957, 46]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

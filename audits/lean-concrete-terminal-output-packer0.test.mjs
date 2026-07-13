@@ -240,7 +240,7 @@ test('terminal packing is earned while the complete pipeline and publication rem
   assert.equal(status.leanConcretePipelineTerminalOutputPackerAxiomAuditPassed, true);
   assert.equal(status.leanConcretePipelineTerminalOutputPackerAuditedDeclarationCount, 69);
   assert.equal(status.leanConcretePipelineTerminalOutputPackerConnectedToBridgeEndpointFormalized, true);
-  assert.equal(status.leanConcretePipelinePriorTraceTransportToTerminalBridgeFormalized, false);
+  assert.equal(status.leanConcretePipelinePriorTraceTransportToTerminalBridgeFormalized, true);
   assert.equal(status.leanConcretePipelineRawRefinementFormalized, false);
   assert.equal(status.leanConcretePipelineExternalInputSizePolynomialFormalized, false);
   assert.equal(status.leanConcreteCNFSATInPFormalized, false);
