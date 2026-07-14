@@ -1,0 +1,32 @@
+import PNP
+
+#print axioms PNP.Concrete.CookLevin.advance
+#print axioms PNP.Concrete.CookLevin.traceTail
+#print axioms PNP.Concrete.CookLevin.trace
+#print axioms PNP.Concrete.CookLevin.traceTail_length
+#print axioms PNP.Concrete.CookLevin.trace_length
+#print axioms PNP.Concrete.CookLevin.run_succ_eq_run_advance
+#print axioms PNP.Concrete.CookLevin.endpointFrom
+#print axioms PNP.Concrete.CookLevin.tableauEndpoint
+#print axioms PNP.Concrete.CookLevin.endpointFrom_traceTail
+#print axioms PNP.Concrete.CookLevin.tableauEndpoint_trace
+#print axioms PNP.Concrete.CookLevin.FollowsFrom
+#print axioms PNP.Concrete.CookLevin.ValidTableau
+#print axioms PNP.Concrete.CookLevin.traceTail_followsFrom
+#print axioms PNP.Concrete.CookLevin.canonicalTableau_valid
+#print axioms PNP.Concrete.CookLevin.followsFrom_eq_traceTail
+#print axioms PNP.Concrete.CookLevin.validTableau_iff_eq_trace
+#print axioms PNP.Concrete.CookLevin.tableauEndpoint_of_valid
+#print axioms PNP.Concrete.CookLevin.configurationVerdict
+#print axioms PNP.Concrete.CookLevin.FixedTableauInstance
+#print axioms PNP.Concrete.CookLevin.FixedTableauInstance.rawInput
+#print axioms PNP.Concrete.CookLevin.FixedTableauInstance.initial
+#print axioms PNP.Concrete.CookLevin.FixedTableauInstance.canonicalTableau
+#print axioms PNP.Concrete.CookLevin.FixedTableauInstance.Valid
+#print axioms PNP.Concrete.CookLevin.FixedTableauInstance.tableauVerdict
+#print axioms PNP.Concrete.CookLevin.FixedTableauInstance.Accepting
+#print axioms PNP.Concrete.CookLevin.FixedTableauInstance.canonicalTableau_valid
+#print axioms PNP.Concrete.CookLevin.FixedTableauInstance.valid_iff_eq_canonical
+#print axioms PNP.Concrete.CookLevin.FixedTableauInstance.tableauEndpoint_of_valid
+#print axioms PNP.Concrete.CookLevin.FixedTableauInstance.tableauVerdict_of_valid
+#print axioms PNP.Concrete.CookLevin.FixedTableauInstance.exists_accepting_iff_boundedDecide_accept
