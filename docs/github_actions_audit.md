@@ -17,6 +17,7 @@ from current theorem status.
   38-declaration finite-rule machine kernel, the 14-declaration blank-delimited output/handoff
   boundary, the 20-declaration boundary-marked pipeline tape geometry, the 70-declaration
   executable all-input framer, the 39-declaration collision-free pipeline state namespace, the
+  26-declaration sequential whole-component state namespace, the
   56-declaration executable pipeline stage-bridge surface, the framed
   raw-machine simulation surface, the 48-declaration finite
   charged-pipeline complexity interface, the
@@ -83,6 +84,11 @@ and an external polynomial for proof-bearing targets on canonical pairs. `Pipeli
 extracts the target prefix internally and proves the same literal table correct for every raw
 bitstring, including exact verdict/output and no-timeout at an external polynomial. Recursive
 charged-program refinement remains unproved.
+
+The sequential state-namespace audit checks two nested complete component tables rather than
+individual stages. It requires disjoint outer images, isolated first-match lookup, exact local-run
+transport, and the two literal first-verdict-to-second-simulator launches, with exactly 26 empty
+axiom closures. CI does not treat those local facts as an end-to-end sequential compiler.
 
 The pipeline-tape geometry audit proves a two-track representation with distinct data/left/right
 tags, arbitrary stale cells outside the first markers, and exact preservation under data writes,

@@ -61,6 +61,10 @@ endpoints under a local `18*n^2 + 36*n + 12` bound. The earlier ordinary-input t
 transported into that extended machine. The combined development supplies no target termination,
 external-input-size polynomial, complete composition/precomposition `RawRefinement`, or class
 result.
+The inventory now also binds the six reviewed sequential-namespace theorems for disjoint
+whole-component images, isolated lookup, and accept/reject launches. Those fingerprints establish
+only that local namespace milestone; no end-to-end two-machine execution or refinement theorem is
+present.
 Consequently the gate
 is false, and every theorem-emission field derived from it remains false or `null`.
 

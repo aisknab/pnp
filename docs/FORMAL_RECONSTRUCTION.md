@@ -80,6 +80,12 @@ verdict and ordinary output, excludes timeout, and proves language acceptance at
 `B(m) = m + p(m) + 1` and an explicit complete runtime polynomial in external length `m`. All 29
 public declarations have empty axiom closure. This wraps one already-raw proof-bearing target; it
 does not yet define recursive function-composition or decision-precomposition `RawRefinement`.
+`PipelineSequentialStateNamespace` now supplies the next literal composition prerequisite: two
+complete component rule tables are injectively renamed into disjoint outer images, lookup remains
+isolated, successful exact local traces transport, and both first-component verdict endpoints take
+one explicit launch step to the second component's internal simulator start. It deliberately stops
+before an end-to-end two-machine trace, terminal output equality, an external input-size polynomial,
+or recursive refinement.
 The development also provides one direct raw-machine instance: a universally
 correct polynomial-time verifier for canonically encoded finite CNF formulae and bounded assignment
 certificates, proving `PNP.Concrete.CNFSAT ∈ NP`. It does not provide a deterministic polynomial-time
