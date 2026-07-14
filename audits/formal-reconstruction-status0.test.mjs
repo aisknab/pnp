@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-14-37');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-14-38');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -186,13 +186,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the recursive refinement inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 6007);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 2514);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 2401);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 1042);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 56);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 6197);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 2650);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 2436);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 1049);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 57);
   assert.equal(status.leanSourceClosureSha256,
-    '1a4b7aee6800b4eee817d1e87ee14f9f49c8df7bb9055525d0dd821b211461da');
+    'cbe836d56946c5af755877b92e69f56a38c98058da28ef58a9d48260a412ecda');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -409,7 +409,7 @@ test('formal reconstruction status pins the recursive refinement inventory and s
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-14-COOK-LEVIN-TABLEAU-CNF-36');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-14-COOK-LEVIN-TABLEAU-CNF-SEMANTICS-37');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);

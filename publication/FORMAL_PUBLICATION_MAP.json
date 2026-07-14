@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-14-37",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-14-38",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "1a4b7aee6800b4eee817d1e87ee14f9f49c8df7bb9055525d0dd821b211461da",
+  "milestoneSourceClosureSha256": "cbe836d56946c5af755877b92e69f56a38c98058da28ef58a9d48260a412ecda",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CookLevin.BoundedLiteral.emit_variable_lt": "c089b0fedc7320ec14f46b5b74f7ec26158cdad85ecbe647b4c728660dcb6a68",
@@ -33,17 +33,23 @@
     "PNP.Concrete.CookLevin.VerifierTableauProblem.certificateBitWidth_eq_of_paired": "8f909f88887d1f94a0da2fb83c8296231a21e7d1dd33bb9d0d2f1a64e4819027",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.certificateLengthWidth_eq_of_paired": "9d525c3ac7896848309a5572432e16e66a161da988512e7b0d078c88a34fec9e",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.decode_encodedFormula": "958b9c618da5bd37240505d2cbc6d15c5018eff3d23e5b4278da07d3826b8fb9",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.decodedInitialRow_eq_paired": "0f09a7b0db113a0a5da0a35b611b4f593a43a36942505d82f0ad02ed2da91f15",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.decodedRow_next": "f54ac456ee45eebe1870f4aabb2eb2474ae2c186275b3380f8997a9d6a1fae6b",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.decodedTableau_transitions": "b6e20cd7f7be56528966348f0440c966fded683350dc6568ec9e0bff0ca6c7f7",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.dimensions_encodedInputLength": "c3ea1b40ab0bd79ff824d504a807107ebe08de6e3af69fd09ed1ea7be02140ea",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.dimensions_timeBound": "abc46f094c1fddd2d3ef2d3f8cdaa1a21ec8842ed23485ea479c097af309e802",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.encodedFormula_mem_CNFSAT_iff": "94a0172b80bf24b4f755fb3993e88b9c6bd5f39a3e6e60d9325daa4aaf415f58",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.encodedFormula_mem_CNFSAT_iff_finiteAccepting": "181e39478dc6a2a891d090790c8d345547d15d3e00a2ac50c157957f91b15ceb",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.exists_accepting_iff_program_accept": "fc072a8bea1e74f18a4713c580e060c5b826219dcb87b6c8a26a598a7d57683d",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.findRule_some_mem": "501b96f885967a0a2598f9eac5c4b57cebe5485bba6a1f3bda8fa2bec074af42",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.formula_clauseCount": "69b8c747c903a1c0c8706b340cb8d7aa6b25af05742de951a63e106ffd2869f8",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.formula_satisfiable_iff": "514c1e52e50664c459c11c09a61510b0550c3b26bc85294bc603b9780dedeb3f",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.formula_satisfiable_iff_finiteAccepting": "1f8d284d2f0153a5fe9da84155a959dc277b0ee591cfe63e3a131dbb9a60eacb",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.formula_satisfied_iff": "f285ab7fab210401cf8f8c67066633480d0171e2511330151199e981b2abd356",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.formula_wellScoped": "d4582f49cd67afef6907d9db323fe1151362f8e72dc246fc25c8d31b029ce935",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.language_iff_exists_acceptingTableau": "7e4d432c55c5c65707e8dbe8263397a3f35bc0bf38d51ced5214b45ce0c354b5",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.rawInput_size_le": "3e053199a556d3ae5fa2f950a0ce81d51ce861f419071083a1d9deda20a7ef07",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.tableauAssignment_transitionProgram_holds": "da7d2ae2b23a2b13d66937c9134e56a6746096cf36883fd47d3322ab3d3a382e",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.tableauVerdict_eq_program_of_valid": "b565dfb1e1b43c2844895d7c99adf6899abe732dddac0c2e7eed074bd1b8b8a8",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.uniformFuel_verdict_eq": "c16317c99973aa4ac6a28cf640591eefddfd23f120d8297372bf046f850e1a69",
     "PNP.Concrete.CookLevin.assignmentAt_assignmentOf": "138ace06e46c2ba101542489b6bb13a2fbff763efa13eb8575ab60939cc709cc",
@@ -578,6 +584,21 @@
         "PNP.Concrete.CookLevin.VerifierTableauProblem.formula_wellScoped"
       ],
       "nonClaim": "This is finite formula syntax and local-clause reflection only. It does not yet prove that formula satisfiability is equivalent to an accepting raw verifier execution, prove external encoded-output-size or construction-runtime polynomials, define a concrete polynomial reduction to CNFSAT, or establish CNFSAT NP-completeness, CNFSAT in P, or P = NP."
+    },
+    {
+      "id": "concrete-cook-levin-tableau-cnf-semantics",
+      "title": "Finite whole-tableau Cook-Levin CNF semantics",
+      "classification": "formalized-foundation-only",
+      "scope": "Every satisfying assignment decodes to a unique-symbol, unique-head, unique-state finite row at each bounded time. The decoded initial row is exact in both verifier modes, each adjacent row is the literal deterministic first-match successor, and the final state is accepting. Conversely, every such intrinsic finite accepting tableau constructs a satisfying assignment. Formula satisfiability and concrete CNFSAT membership are therefore equivalent to this finite semantics. All 161 explicit declarations are axiom-audited; the six reviewed theorem types depend only on the permitted Lean standard axioms Quot.sound and propext, with no project axiom.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.decodedInitialRow_eq_paired",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.decodedRow_next",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.decodedTableau_transitions",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.encodedFormula_mem_CNFSAT_iff_finiteAccepting",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.formula_satisfiable_iff_finiteAccepting",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.tableauAssignment_transitionProgram_holds"
+      ],
+      "nonClaim": "This proves equivalence with an intrinsic finite-row model, not yet with ordinary raw Tape execution. It does not prove the finite-window/raw-tape bridge, external encoded-output-size or construction-runtime polynomials, a concrete polynomial reduction to CNFSAT, CNFSAT NP-completeness, CNFSAT in P, or P = NP."
     },
     {
       "id": "direct-wire-semantics",
