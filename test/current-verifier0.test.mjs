@@ -39,6 +39,8 @@ test('current verifier plan contains status, surface, archive integrity, and cur
     'audits/lean-concrete-cook-levin-tableau0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes(
     'audits/lean-concrete-cook-levin-verifier-tableau0.test.mjs'), true);
+  assert.equal(CURRENT_VERIFICATION_TESTS0.includes(
+    'audits/lean-concrete-cook-levin-local-cnf0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-theorem-inventory0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/formal-publication0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-nand-semantics0.test.mjs'), true);
