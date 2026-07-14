@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '99804be315b601050c74d906d34d356394af26bba90107f4d32074931fb39a30';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'f5f77cc5ac3a01038af1eed221ca0dc16d15a4eff90060c5c0a2226447947d6f';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -26,10 +26,12 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.CookLevin.VariableLayout.stateVariable_ne_certificateBitVariable',
   'PNP.Concrete.CookLevin.VariableLayout.symbolVariable_lt_variableCount',
   'PNP.Concrete.CookLevin.VariableLayout.symbolVariable_ne_headVariable',
+  'PNP.Concrete.CookLevin.VerifierTableauProblem.FiniteRow.next_represents_advance',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.actualFuel_le_uniformFuel',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.actualFuel_ne_timeout',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.certificateBitWidth_eq_of_paired',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.certificateLengthWidth_eq_of_paired',
+  'PNP.Concrete.CookLevin.VerifierTableauProblem.certificateOf_certificate',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.decode_encodedFormula',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.decodedInitialRow_eq_paired',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.decodedRow_next',
@@ -38,14 +40,19 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.CookLevin.VerifierTableauProblem.dimensions_timeBound',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.encodedFormula_mem_CNFSAT_iff',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.encodedFormula_mem_CNFSAT_iff_finiteAccepting',
+  'PNP.Concrete.CookLevin.VerifierTableauProblem.encodedFormula_mem_CNFSAT_iff_language',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.exists_accepting_iff_program_accept',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.findRule_some_mem',
+  'PNP.Concrete.CookLevin.VerifierTableauProblem.finiteRun_head_bounds',
+  'PNP.Concrete.CookLevin.VerifierTableauProblem.finiteRun_represents_run',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.formula_clauseCount',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.formula_satisfiable_iff',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.formula_satisfiable_iff_finiteAccepting',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.formula_satisfied_iff',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.formula_wellScoped',
+  'PNP.Concrete.CookLevin.VerifierTableauProblem.hasFiniteAccepting_iff_language',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.language_iff_exists_acceptingTableau',
+  'PNP.Concrete.CookLevin.VerifierTableauProblem.pairedInitialRowFor_represents',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.rawInput_size_le',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.tableauAssignment_transitionProgram_holds',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.tableauVerdict_eq_program_of_valid',
@@ -230,6 +237,8 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.Tape.outputBits_moveRight_moveLeft',
   'PNP.Concrete.Tape.outputBits_ofInput',
   'PNP.Concrete.Tape.outputBits_right_append_blank',
+  'PNP.Concrete.Tape.symbolAt_moveLeft',
+  'PNP.Concrete.Tape.symbolAt_moveRight',
   'PNP.Concrete.TerminalOutputPacker.machineOutput_compileTerminalOutputPacker_eq',
   'PNP.Concrete.TerminalOutputPacker.run_compileTerminalOutputPacker',
   'PNP.Concrete.TerminalOutputPacker.run_compileTerminalOutputPacker_exact',
@@ -301,7 +310,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-14-38') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-14-39') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -578,7 +587,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-14-38') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-14-39') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
@@ -596,7 +605,7 @@ function validatePublicationMap0(map) {
     'expectedRootKernelTypeSha256',
     'expectedAxiomClosureSha256',
     'expectedSourceClosureSha256',
-  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 38`);
+  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 39`);
   if (!isSha2560(map.milestoneSourceClosureSha256)
       || !isObject0(map.earnedMilestoneTheoremKernelTypeSha256)) {
     throw new Error('reviewed milestone theorem/source fingerprints are missing');
@@ -615,7 +624,7 @@ function validatePublicationMap0(map) {
     throw new Error('reviewed milestone theorem kernel-type fingerprint inventory mismatch');
   }
   if (sha256Text0(stableStringify0(map)) !== REQUIRED_PUBLICATION_MAP_SHA2560) {
-    throw new Error('formal publication milestone map drifted from the reviewed release-38 specification');
+    throw new Error('formal publication milestone map drifted from the reviewed release-39 specification');
   }
 }
 

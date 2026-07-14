@@ -51,6 +51,7 @@ on:
       - 'audits/lean-concrete-cook-levin-local-cnf0.test.mjs'
       - 'audits/lean-concrete-cook-levin-tableau-cnf0.test.mjs'
       - 'audits/lean-concrete-cook-levin-tableau-cnf-semantics0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-raw-tape-bridge0.test.mjs'
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
       - 'audits/lean-nand-reference-minimum0.test.mjs'
@@ -80,6 +81,7 @@ on:
       - 'docs/lean_cook_levin_local_cnf.md'
       - 'docs/lean_cook_levin_tableau_cnf.md'
       - 'docs/lean_cook_levin_tableau_cnf_semantics.md'
+      - 'docs/lean_cook_levin_raw_tape_bridge.md'
       - 'docs/lean_nand_semantics.md'
       - 'docs/lean_nand_enumerator.md'
       - 'docs/lean_nand_reference_minimum.md'
@@ -145,6 +147,7 @@ on:
       - 'audits/lean-concrete-cook-levin-local-cnf0.test.mjs'
       - 'audits/lean-concrete-cook-levin-tableau-cnf0.test.mjs'
       - 'audits/lean-concrete-cook-levin-tableau-cnf-semantics0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-raw-tape-bridge0.test.mjs'
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
       - 'audits/lean-nand-reference-minimum0.test.mjs'
@@ -174,6 +177,7 @@ on:
       - 'docs/lean_cook_levin_local_cnf.md'
       - 'docs/lean_cook_levin_tableau_cnf.md'
       - 'docs/lean_cook_levin_tableau_cnf_semantics.md'
+      - 'docs/lean_cook_levin_raw_tape_bridge.md'
       - 'docs/lean_nand_semantics.md'
       - 'docs/lean_nand_enumerator.md'
       - 'docs/lean_nand_reference_minimum.md'
@@ -255,6 +259,9 @@ jobs:
 
       - name: Audit finite whole-tableau Cook-Levin CNF semantics
         run: node --test audits/lean-concrete-cook-levin-tableau-cnf-semantics0.test.mjs
+
+      - name: Audit finite Cook-Levin raw-tape bridge
+        run: node --test audits/lean-concrete-cook-levin-raw-tape-bridge0.test.mjs
 
       - name: Build explicit PNP root
         run: lake build PNP
@@ -540,6 +547,23 @@ jobs:
           fi
           if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
             echo 'Tableau-CNF semantics reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+
+      - name: Print finite Cook-Levin raw-tape bridge axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinRawTapeBridgeAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.(Tape\.|CookLevin\.)")" -eq 54
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(Classical.choice|Quot.sound|propext)(, (Classical.choice|Quot.sound|propext))*\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected Cook-Levin raw-tape bridge axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Cook-Levin raw-tape bridge reached a forbidden project axiom.' >&2
             exit 1
           fi
 
