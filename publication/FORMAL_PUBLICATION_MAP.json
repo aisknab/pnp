@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-14-36",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-14-37",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "2614476660c4d0ef7480ddcb55847879284d71a0bc5570390a5d6fcc9cb50f09",
+  "milestoneSourceClosureSha256": "1a4b7aee6800b4eee817d1e87ee14f9f49c8df7bb9055525d0dd821b211461da",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CookLevin.BoundedLiteral.emit_variable_lt": "c089b0fedc7320ec14f46b5b74f7ec26158cdad85ecbe647b4c728660dcb6a68",
@@ -30,8 +30,18 @@
     "PNP.Concrete.CookLevin.LocalProgram.toFormula_satisfied_iff": "56ae700d17d52a3666b6c77276fa21098919af5993577b6e53caa226f8cb29f8",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.actualFuel_le_uniformFuel": "61c131f02ea26a353b8b5a636c023d969d9ccf5d636c2fcdf17d3ed4917396df",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.actualFuel_ne_timeout": "4097f3def4d038e9cba2f177f487a79da6b4de71729b8d17cb83c46120d052de",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.certificateBitWidth_eq_of_paired": "8f909f88887d1f94a0da2fb83c8296231a21e7d1dd33bb9d0d2f1a64e4819027",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.certificateLengthWidth_eq_of_paired": "9d525c3ac7896848309a5572432e16e66a161da988512e7b0d078c88a34fec9e",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.decode_encodedFormula": "958b9c618da5bd37240505d2cbc6d15c5018eff3d23e5b4278da07d3826b8fb9",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.dimensions_encodedInputLength": "c3ea1b40ab0bd79ff824d504a807107ebe08de6e3af69fd09ed1ea7be02140ea",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.dimensions_timeBound": "abc46f094c1fddd2d3ef2d3f8cdaa1a21ec8842ed23485ea479c097af309e802",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.encodedFormula_mem_CNFSAT_iff": "94a0172b80bf24b4f755fb3993e88b9c6bd5f39a3e6e60d9325daa4aaf415f58",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.exists_accepting_iff_program_accept": "fc072a8bea1e74f18a4713c580e060c5b826219dcb87b6c8a26a598a7d57683d",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.findRule_some_mem": "501b96f885967a0a2598f9eac5c4b57cebe5485bba6a1f3bda8fa2bec074af42",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.formula_clauseCount": "69b8c747c903a1c0c8706b340cb8d7aa6b25af05742de951a63e106ffd2869f8",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.formula_satisfiable_iff": "514c1e52e50664c459c11c09a61510b0550c3b26bc85294bc603b9780dedeb3f",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.formula_satisfied_iff": "f285ab7fab210401cf8f8c67066633480d0171e2511330151199e981b2abd356",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.formula_wellScoped": "d4582f49cd67afef6907d9db323fe1151362f8e72dc246fc25c8d31b029ce935",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.language_iff_exists_acceptingTableau": "7e4d432c55c5c65707e8dbe8263397a3f35bc0bf38d51ced5214b45ce0c354b5",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.rawInput_size_le": "3e053199a556d3ae5fa2f950a0ce81d51ce861f419071083a1d9deda20a7ef07",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.tableauVerdict_eq_program_of_valid": "b565dfb1e1b43c2844895d7c99adf6899abe732dddac0c2e7eed074bd1b8b8a8",
@@ -549,6 +559,25 @@
         "PNP.Concrete.CookLevin.localProgram_formula_wellScoped"
       ],
       "nonClaim": "This is a local clause compiler only. It does not enumerate the verifier tableau, encode initialization, transition windows, certificate length, or acceptance as a complete formula; prove an all-input emitter size/runtime polynomial; define a reduction to CNFSAT; or establish CNFSAT NP-completeness, CNFSAT in P, or P = NP."
+    },
+    {
+      "id": "concrete-cook-levin-tableau-cnf",
+      "title": "Finite whole-tableau Cook-Levin CNF syntax",
+      "classification": "formalized-foundation-only",
+      "scope": "A uniform bounded verifier-tableau problem is compiled answer-independently into one finite, well-scoped concrete CNF formula. The program emits one-hot symbol/head/state rows, first-match control updates, untouched-cell preservation, exact input-only or symbolic paired-certificate initialization, and a designated final accept constraint. Canonical encoding/decoding, exact local satisfaction reflection, and exact emitted clause counting are proved. All 81 declarations and ten reviewed theorem types have empty axiom closure.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.certificateBitWidth_eq_of_paired",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.certificateLengthWidth_eq_of_paired",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.decode_encodedFormula",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.dimensions_encodedInputLength",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.encodedFormula_mem_CNFSAT_iff",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.findRule_some_mem",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.formula_clauseCount",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.formula_satisfiable_iff",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.formula_satisfied_iff",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.formula_wellScoped"
+      ],
+      "nonClaim": "This is finite formula syntax and local-clause reflection only. It does not yet prove that formula satisfiability is equivalent to an accepting raw verifier execution, prove external encoded-output-size or construction-runtime polynomials, define a concrete polynomial reduction to CNFSAT, or establish CNFSAT NP-completeness, CNFSAT in P, or P = NP."
     },
     {
       "id": "direct-wire-semantics",
