@@ -46,6 +46,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-concrete-cook-levin-verifier-tableau0.test.mjs',
   'audits/lean-concrete-cook-levin-local-cnf0.test.mjs',
   'audits/lean-concrete-cook-levin-tableau-cnf0.test.mjs',
+  'audits/lean-concrete-cook-levin-tableau-cnf-semantics0.test.mjs',
   'audits/lean-nand-semantics0.test.mjs',
   'audits/lean-nand-enumerator0.test.mjs',
   'audits/lean-nand-reference-minimum0.test.mjs',
