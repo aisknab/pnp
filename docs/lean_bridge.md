@@ -50,6 +50,7 @@ lean/PNP/Concrete/PipelineInputFramer.lean
 lean/PNP/Concrete/PipelineOutputHandoff.lean
 lean/PNP/Concrete/PipelineMachineSimulation.lean
 lean/PNP/Concrete/PipelineStateNamespace.lean
+lean/PNP/Concrete/PipelineSequentialStateNamespace.lean
 lean/PNP/Concrete/PipelineStageBridges.lean
 lean/PNP/Concrete/TerminalOutputPacker.lean
 lean/PNP/Concrete/PipelineTerminalBridge.lean
@@ -91,6 +92,7 @@ lean-audit/PNPConcretePipelineTapeGeometryAxiomAudit.lean
 lean-audit/PNPConcretePipelineInputFramerAxiomAudit.lean
 lean-audit/PNPConcretePipelineOutputHandoffAxiomAudit.lean
 lean-audit/PNPConcretePipelineStateNamespaceAxiomAudit.lean
+lean-audit/PNPConcretePipelineSequentialStateNamespaceAxiomAudit.lean
 lean-audit/PNPConcretePipelineStageBridgesAxiomAudit.lean
 lean-audit/PNPConcreteTerminalOutputPackerAxiomAudit.lean
 lean-audit/PNPConcretePipelineTerminalBridgeAxiomAudit.lean
@@ -213,6 +215,12 @@ does not prove the target. The six explicit declarations in
 pin exact raw-machine refinement obligations, prove the raw function/decision leaf cases, transport
 a function output-size bound, and convert a decider to a raw-machine witness only from a supplied
 complete-program refinement. They do not build that refinement for composition or precomposition.
+
+The 26 declarations in `PipelineSequentialStateNamespace.lean` are also axiom-free. They rename
+two complete component tables into disjoint outer state images, isolate first-match lookup for both
+images, transport exact local steps and runs, and provide literal accept/reject launches from the
+first component to the second simulator. No theorem in that module claims the complete sequential
+run, final output equality, an external polynomial, or recursive `RawRefinement`.
 Consequently the charged function/decision program syntax still does not compile recursively into
 one raw single-tape machine, so `Formal.ConcreteComplexityMachineLink` remains blocked. See
 [`lean_concrete_complexity.md`](./lean_concrete_complexity.md) and

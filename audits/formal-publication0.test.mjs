@@ -129,10 +129,10 @@ test('publication consumes the reviewed all-input compiler map and inventory cou
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '2d7cc0f642dcddc334d33b98dbc1a9476c8c8d4a50522268b8c430ef580f20e7');
+    '857ec9ba51d53a52ad77dd3be3098cdf16de0a3eacefb79c0dfa4e6e812dd587');
   assert.equal(map.milestoneSourceClosureSha256,
-    'cfd2b1263520068a0dc3e4b46a1ddbe76cd704a7368457c03bf40b9f4ec21fc2');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 172);
+    '7f886156b0ae16e0a04b8b16b4febd593033bb4dadd61c3684d422b19f393a9e');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 178);
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.PipelineCompiler.pipeline_correct'
   ], 'string');
@@ -149,7 +149,7 @@ test('publication consumes the reviewed all-input compiler map and inventory cou
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [5235, 2224, 2123, 1036, 49]);
+  ], [5265, 2245, 2144, 1036, 50]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

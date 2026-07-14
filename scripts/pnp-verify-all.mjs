@@ -30,6 +30,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-concrete-pipeline-input-framer0.test.mjs',
   'audits/lean-concrete-pipeline-output-handoff0.test.mjs',
   'audits/lean-concrete-pipeline-state-namespace0.test.mjs',
+  'audits/lean-concrete-pipeline-sequential-state-namespace0.test.mjs',
   'audits/lean-concrete-pipeline-stage-bridges0.test.mjs',
   'audits/lean-concrete-terminal-output-packer0.test.mjs',
   'audits/lean-concrete-pipeline-terminal-bridge0.test.mjs',

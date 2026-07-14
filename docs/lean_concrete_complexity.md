@@ -19,6 +19,10 @@ stage-local traces. `lean/PNP/Concrete/PipelineStageBridges.lean` adds exact sta
 verdict-indexed handoff copies, supplied-exact-run composition, and six-for-one compiled raw traces
 from canonical paired input. `TerminalOutputPacker` separately proves raw-visible output, but it
 has not been joined to that bridge trace and still supplies no external-size refinement.
+`lean/PNP/Concrete/PipelineSequentialStateNamespace.lean` separately nests two complete component
+machines in disjoint outer state images. It proves first-match isolation, exact local-trace
+transport, and literal launches from either first-component verdict to the second simulator start;
+it does not yet compose those facts into a complete two-machine execution or refinement.
 `lean/PNP/Concrete/PipelineRefinement.lean` pins exact raw-machine refinement
 contracts and proves the two machine-leaf cases. `lean/PNP/Concrete/Target.lean` names the
 corresponding inactive target proposition. The explicit declarations in all nine layers have empty
@@ -202,3 +206,8 @@ composition/precomposition `RawRefinement`, or external-input-size polynomial bo
 does not formalize concrete SAT or SAT NP-hardness, instantiate
 the global locked-NAND threshold package, prove the residual-band or ZeroSlack obligations, prove
 the remaining end-to-end polynomial bounds, or establish `P = NP`.
+
+The sequential namespace milestone removes collisions between two whole compiled components and
+proves their launch dispatch, but it adds no claim beyond that boundary. In particular, the second
+component's terminal endpoint has not yet been connected to an all-input two-machine trace or to a
+`FunctionProgram.RawRefinement`/`DecisionProgram.RawRefinement` constructor.
