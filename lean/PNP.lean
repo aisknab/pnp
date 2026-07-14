@@ -31,6 +31,7 @@ import PNP.Concrete.CookLevinLayout
 import PNP.Concrete.CookLevinTableau
 import PNP.Concrete.CookLevinVerifierTableau
 import PNP.Concrete.CookLevinLocalCNF
+import PNP.Concrete.CookLevinTableauCNF
 import PNP.Concrete.CNFVerifier
 import PNP.Concrete.CNFWorkInput
 import PNP.Concrete.CNFWorkUniversalCorrectness

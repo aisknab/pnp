@@ -109,6 +109,10 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     'formalized-foundation-only');
   assert.match(byId.get('concrete-cook-levin-local-cnf').nonClaim,
     /does not enumerate the verifier tableau/u);
+  assert.equal(byId.get('concrete-cook-levin-tableau-cnf').status,
+    'formalized-foundation-only');
+  assert.match(byId.get('concrete-cook-levin-tableau-cnf').nonClaim,
+    /does not yet prove that formula satisfiability is equivalent/u);
   assert.equal(byId.get('concrete-cnf-universal-verifier').requiredTheorems.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP'), true);
   assert.match(byId.get('concrete-cnf-universal-verifier').nonClaim,
@@ -136,10 +140,10 @@ test('publication consumes the reviewed recursive-refinement map and inventory c
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '6d2891557440a0208b6dca85c51a9ccac3b26e063b4e845004b4594a753dcf67');
+    '4b97260c4e586dbf7c26f84aa70c1d29ab7eed72c08ce1a38fdc12edffaff00d');
   assert.equal(map.milestoneSourceClosureSha256,
-    '2614476660c4d0ef7480ddcb55847879284d71a0bc5570390a5d6fcc9cb50f09');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 244);
+    '1a4b7aee6800b4eee817d1e87ee14f9f49c8df7bb9055525d0dd821b211461da');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 254);
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.PipelineCompiler.pipeline_correct'
   ], 'string');
@@ -151,6 +155,9 @@ test('publication consumes the reviewed recursive-refinement map and inventory c
   ], 'string');
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.CookLevin.LocalProgram.toFormula_satisfiable_iff'
+  ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.VerifierTableauProblem.formula_wellScoped'
   ], 'string');
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,
@@ -165,7 +172,7 @@ test('publication consumes the reviewed recursive-refinement map and inventory c
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [5828, 2454, 2344, 1042, 55]);
+  ], [6007, 2514, 2401, 1042, 56]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
