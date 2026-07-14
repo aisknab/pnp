@@ -269,14 +269,14 @@ test('terminal bridge audit rejects namespace, dispatch, bound, output, assumpti
   }
 });
 
-test('supplied trace and canonical-pair compiler are earned while general refinement stays fail-closed', async () => {
+test('supplied trace, compilers, and general refinement are earned while publication stays fail-closed', async () => {
   const status = JSON.parse(await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'));
   assert.equal(status.leanConcretePipelineTerminalOutputPackingFormalized, true);
   assert.equal(status.leanConcretePipelineTerminalOutputPackerConnectedToBridgeEndpointFormalized, true);
   assert.equal(status.leanConcretePipelineTerminalBridgeAxiomAuditPassed, true);
   assert.equal(status.leanConcretePipelineTerminalBridgeAuditedDeclarationCount, 59);
   assert.equal(status.leanConcretePipelinePriorTraceTransportToTerminalBridgeFormalized, true);
-  assert.equal(status.leanConcretePipelineRawRefinementFormalized, false);
+  assert.equal(status.leanConcretePipelineRawRefinementFormalized, true);
   assert.equal(status.leanConcretePipelineCanonicalPairCompilationFormalized, true);
   assert.equal(status.leanConcretePipelineAllInputCompilationFormalized, true);
   assert.equal(status.leanConcretePipelineExternalInputSizePolynomialFormalized, true);

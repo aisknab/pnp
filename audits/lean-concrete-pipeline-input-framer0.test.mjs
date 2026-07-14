@@ -255,8 +255,8 @@ test('framer milestone remains local and the concrete publication gate remains c
     text0('status/FORMAL_RECONSTRUCTION_STATUS.json').then(JSON.parse),
     text0('publication/FORMAL_PUBLICATION_MAP.json').then(JSON.parse),
   ]);
-  assert.equal(status.remainingBlockers.length, 7);
-  assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), true);
+  assert.equal(status.remainingBlockers.length, 6);
+  assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), false);
   assert.equal(status.projectSpecificAxiomInventory.length, 4);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.leanConcretePipelineInputFramerAxiomAuditPassed, true);
@@ -264,15 +264,15 @@ test('framer milestone remains local and the concrete publication gate remains c
   assert.equal(status.leanConcretePipelineAllInputFramingFormalized, true);
   assert.equal(status.leanConcretePipelineMalformedInputBehaviorFormalized, true);
   assert.equal(status.leanConcretePipelineAllInputCompilationFormalized, true);
-  assert.equal(status.leanConcretePipelineRawRefinementFormalized, false);
+  assert.equal(status.leanConcretePipelineRawRefinementFormalized, true);
   const framerNonClaim = status.nonClaims.find((entry) => entry.includes(
     'PipelineInputFramer is one literal finite machine for every raw bitstring'));
   assert.equal(typeof framerNonClaim, 'string');
   assert.match(framerNonClaim, /empty word, complete two-bit work cells, and an odd final raw bit/u);
   assert.match(framerNonClaim, /6 \* m \* m \+ 39 \* m \+ 75/u);
   assert.match(framerNonClaim, /All 70 public declarations have empty axiom closure/u);
-  assert.match(framerNonClaim, /PipelineCompiler now transports that endpoint/u);
-  assert.match(framerNonClaim, /recursive pipeline RawRefinement/u);
+  assert.match(framerNonClaim, /PipelineCompiler and PipelineRefinement now transport that endpoint/u);
+  assert.match(framerNonClaim, /complete recursive raw refinement/u);
   const foundation = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -293,13 +293,12 @@ test('framer milestone remains local and the concrete publication gate remains c
   assert.match(foundation.scope, /four-stage pipeline handles every raw bitstring/u);
   assert.match(foundation.scope, /exactly 4 work steps on empty input/u);
   assert.match(foundation.scope, /6 \* m \* m \+ 39 \* m \+ 75/u);
-  assert.match(foundation.scope, /PipelineCompiler uses the same terminal-bridge rule table/u);
+  assert.match(foundation.scope, /PipelineCompiler preserves one raw target's verdict/u);
   assert.match(foundation.scope,
     /R\(m\) = PipelineRaw\(p\)\(m\) \+ 6 \+ PipelineRaw\(q\)\(m \+ p\(m\) \+ 1\)/u);
-  assert.match(foundation.scope, /31 public declarations have empty axiom closure/u);
-  assert.match(foundation.nonClaim, /composes two already-raw proof-bearing targets/u);
-  assert.match(foundation.nonClaim, /recursive raw-refinement constructors/u);
-  assert.equal(map.gate.standardComplexityModelEligible, false);
+  assert.match(foundation.scope, /16 audited declarations have empty axiom closure/u);
+  assert.match(foundation.nonClaim, /closes the concrete complexity machine-link blocker only/u);
+  assert.equal(map.gate.standardComplexityModelEligible, true);
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,
     map.gate.expectedConcreteTargetKernelValueSha256,

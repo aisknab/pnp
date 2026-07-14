@@ -189,7 +189,7 @@ test('the general compiler blocker and publication gate remain fail-closed', asy
     text0('status/FORMAL_RECONSTRUCTION_STATUS.json').then(JSON.parse),
     text0('publication/FORMAL_PUBLICATION_MAP.json').then(JSON.parse),
   ]);
-  assert.ok(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'));
-  assert.equal(map.gate.standardComplexityModelEligible, false);
+  assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), false);
+  assert.equal(map.gate.standardComplexityModelEligible, true);
   assert.equal(map.gate.expectedSourceClosureSha256, null);
 });

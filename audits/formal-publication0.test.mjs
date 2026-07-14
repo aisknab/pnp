@@ -48,7 +48,7 @@ test('every theorem-emission field is derived from the concrete publication gate
   assert.equal(status.publicTheoremConclusion, null);
   assert.equal(status.publicationStatusDerivedOnlyFromConcreteGate, true);
   assert.equal(status.abstractPEqualsNPPublicationEligible, false);
-  assert.equal(status.standardComplexityModelFormalized, false);
+  assert.equal(status.standardComplexityModelFormalized, true);
 });
 
 test('status checker rejects forged gate activation and independent theorem-emission overrides', async () => {
@@ -84,9 +84,9 @@ test('historical activation and checker acceptance cannot override the concrete 
   }
 });
 
-test('status retains seven blockers, four project axioms, and an absent compatibility root', async () => {
+test('status retains six blockers, four project axioms, and an absent compatibility root', async () => {
   const status = await status0();
-  assert.equal(status.remainingBlockers.length, 7);
+  assert.equal(status.remainingBlockers.length, 6);
   assert.deepEqual(status.remainingBlockers, status.remainingFormalObligations);
   assert.equal(status.projectSpecificAxiomInventory.length, 4);
   assert.equal(status.projectSpecificAxiomsRemaining, true);
@@ -107,6 +107,7 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP'), true);
   assert.match(byId.get('concrete-cnf-universal-verifier').nonClaim,
     /does not prove CNF-SAT is in P, NP-completeness, or P = NP/u);
+  assert.equal(byId.get('concrete-complexity-classes').status, 'formalized');
   for (const id of [
     'direct-wire-semantics',
     'finite-enumeration-minimum',
@@ -122,22 +123,25 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   ]) assert.equal(byId.get(id).status, 'not-formalized');
 });
 
-test('publication consumes the reviewed all-input compiler map and inventory counts', async () => {
+test('publication consumes the reviewed recursive-refinement map and inventory counts', async () => {
   const [status, mapText] = await Promise.all([
     status0(),
     readFile(new URL('../publication/FORMAL_PUBLICATION_MAP.json', import.meta.url), 'utf8'),
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '5b50407c8ea3537d05f39400c0834b44f9653746995b26c1c8a7581833cc9cf0');
+    'b421a09f5a5baff537cc67cc848ce2500ae3995f79dcdb18bcb917a8c765f36f');
   assert.equal(map.milestoneSourceClosureSha256,
-    '6d99522905d644f0e13d06b7c89646a40a753b082c8e1549fa260e1080995092');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 193);
+    '4fa4576322602277c9f7caffca38e0f2132b2576da1b25fe2625885d55aafb67');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 198);
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.PipelineCompiler.pipeline_correct'
   ], 'string');
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.PipelineSequentialCompiler.sequential_correct'
+  ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.PolynomialTimeDecider.compileToMachine_accepts_iff'
   ], 'string');
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,
@@ -152,7 +156,7 @@ test('publication consumes the reviewed all-input compiler map and inventory cou
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [5301, 2273, 2172, 1042, 51]);
+  ], [5323, 2282, 2181, 1042, 51]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

@@ -101,9 +101,9 @@ and terminal packer. Thus complete-pipeline empty, odd, trailing, malformed,
 and other non-pair behavior is now covered for an already-raw proof-bearing
 target.
 
-The remaining boundary is recursive charged-program compilation: there is no
-general `FunctionProgram.RawRefinement.compose` or
+`PipelineRefinement` now supplies general
+`FunctionProgram.RawRefinement.compose` and
 `DecisionProgram.RawRefinement.precompose`, so the concrete complexity machine
-link remains open. These results do not establish `CNFSAT ∈ P`, CNF-SAT
+link is discharged. These results do not establish `CNFSAT ∈ P`, CNF-SAT
 NP-completeness, `PNP.Main.p_eq_np`, or `P = NP`; the publication gate remains
 false.

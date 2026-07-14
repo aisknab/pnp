@@ -80,7 +80,7 @@ This namespace module itself supplies no bridge transition. The subsequent
 framer-to-simulator and simulator-to-verdict-indexed-handoff launches and one
 cumulative internal execution. `PipelineTerminalBridge` adds the fourth
 terminal-packer stage, and `PipelineCompiler` proves the complete literal table
-correct for every raw input with an external polynomial. There is still no
-recursive `FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement`,
-`CNFSAT ∈ P`, NP-completeness, or `P = NP`. The
-`Formal.ConcreteComplexityMachineLink` blocker remains active.
+correct for every raw input with an external polynomial. `PipelineRefinement`
+now adds recursive `FunctionProgram.RawRefinement` and
+`DecisionProgram.RawRefinement`, discharging `Formal.ConcreteComplexityMachineLink`.
+There is still no `CNFSAT ∈ P`, NP-completeness, or `P = NP`.

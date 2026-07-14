@@ -208,15 +208,15 @@ and raw-output equality. `PipelinePairedCompiler.lean` derives target terminatio
 polynomial for canonical pairs. Its 29-declaration successor `PipelineCompiler.lean` proves exact
 verdict, no-timeout, language acceptance, and ordinary output equality for every raw bitstring at
 the explicit output bound `B(m) = m + p(m) + 1` and complete runtime polynomial. Every public
-successor declaration has empty axiom closure. This wraps an already-raw proof-bearing target; it
-does not construct recursive composition/precomposition pipeline refinement. The two declarations in
+successor declaration has empty axiom closure. This wraps an already-raw proof-bearing target; the
+recursive refinement module consumes that wrapper at every syntax-tree node. The two declarations in
 `lean/PNP/Concrete/Target.lean` are also axiom-free: `PNP.Main.ConcretePEqualsNP` is an inactive
 definition naming mutual inclusion, and `PNP.Main.concretePEqualsNP_iff` pins its expansion. This
-does not prove the target. The six explicit declarations in
-`lean/PNP/Concrete/PipelineRefinement.lean` are axiom-free. They
-pin exact raw-machine refinement obligations, prove the raw function/decision leaf cases, transport
-a function output-size bound, and convert a decider to a raw-machine witness only from a supplied
-complete-program refinement. They do not build that refinement for composition or precomposition.
+does not prove the target. The 16 explicit declarations in
+`lean/PNP/Concrete/PipelineRefinement.lean` are axiom-free. They pin exact
+raw-machine refinement obligations, prove the raw function/decision leaf cases, compose function
+refinements, precompose decision refinements, recursively compile both finite program syntaxes,
+preserve exact output/verdict, and expose a complete decider as one raw machine.
 
 The 26 declarations in `PipelineSequentialStateNamespace.lean` are also axiom-free. They rename
 two complete component tables into disjoint outer state images, isolate first-match lookup for both
@@ -226,16 +226,17 @@ first component to the second simulator. The 31 public declarations in
 table. Either first verdict continues on the represented first output; the second verdict and
 ordinary raw output are exact, stuck first endpoints remain timeout, and the external bound is
 `PipelineRaw(p)(m) + 6 + PipelineRaw(q)(m + p(m) + 1)`. Their compiled axiom closures are empty.
-The charged function/decision program syntax still lacks recursive composition and precomposition
-`RawRefinement` constructors, so `Formal.ConcreteComplexityMachineLink` remains blocked. See
+The recursive `RawRefinement` constructors consume this compiler at every composite node, so
+`Formal.ConcreteComplexityMachineLink` is now discharged. CNF-SAT in P, CNF-SAT NP-completeness,
+and the root theorem remain absent. See
 [`lean_concrete_complexity.md`](./lean_concrete_complexity.md) and
 [`lean_pipeline_compiler.md`](./lean_pipeline_compiler.md), and
 [`lean_pipeline_sequential_compiler.md`](./lean_pipeline_sequential_compiler.md).
 
 ### Direct concrete CNF verifier
 
-The concrete CNF path is a closed raw-machine instance rather than an invocation of the still-
-missing general pipeline compiler. `lean/PNP/Concrete/CNF.lean` defines canonical encodings for
+The concrete CNF path is a closed raw-machine instance. The general compiler is now available for
+future charged-program compositions. `lean/PNP/Concrete/CNF.lean` defines canonical encodings for
 finite CNF formulae and assignments, propositional satisfaction, the executable
 `checkEncodedCertificate`, a linear certificate-size bound, and the language
 `PNP.Concrete.CNFSAT`. `CNFWorkInput.lean` proves that canonical pairing and the work-tape layout

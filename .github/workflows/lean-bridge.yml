@@ -409,15 +409,16 @@ jobs:
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 96
 
-      - name: Print raw-pipeline refinement contract axioms
+      - name: Print recursive raw-pipeline refinement axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
           if printf '%s\n' "$audit_output" | grep -F 'depends on axioms:'; then
-            echo 'Raw-pipeline refinement contracts unexpectedly depend on axioms.' >&2
+            echo 'Recursive raw-pipeline refinement unexpectedly depends on axioms.' >&2
             exit 1
           fi
-          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 6
+          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 16
+          lake env lean -DwarningAsError=true lean-regression/PNPConcretePipelineRefinementRecursive.lean
 
       - name: Print concrete publication-target axioms
         run: |

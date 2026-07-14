@@ -131,13 +131,13 @@ test('state collision, launch loss, timeout widening, and compiler overclaim mut
   }
 });
 
-test('machine-link blocker and publication gate remain fail-closed', async () => {
+test('machine-link blocker is discharged while publication remains fail-closed', async () => {
   const [status, map] = await Promise.all([
     text0('status/FORMAL_RECONSTRUCTION_STATUS.json').then(JSON.parse),
     text0('publication/FORMAL_PUBLICATION_MAP.json').then(JSON.parse),
   ]);
-  assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), true);
-  assert.equal(status.leanConcretePipelineRawRefinementFormalized, false);
-  assert.equal(map.gate.standardComplexityModelEligible, false);
+  assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), false);
+  assert.equal(status.leanConcretePipelineRawRefinementFormalized, true);
+  assert.equal(map.gate.standardComplexityModelEligible, true);
   assert.equal(map.gate.expectedSourceClosureSha256, null);
 });

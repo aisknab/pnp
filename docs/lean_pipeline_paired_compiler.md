@@ -88,10 +88,10 @@ same executable table and now proves exact behavior for empty, odd, malformed,
 trailing, and every other raw bitstring when the target is already a
 proof-bearing raw `PolynomialTimeMachine`.
 
-That successor is still not the recursive `FunctionProgram.RawRefinement` or
-`DecisionProgram.RawRefinement` compiler required by the charged-program
-interface, and `Formal.ConcreteComplexityMachineLink` remains open.
+`PipelineRefinement` now consumes that successor and the sequential compiler
+to implement recursive `FunctionProgram.RawRefinement` and
+`DecisionProgram.RawRefinement`, discharging `Formal.ConcreteComplexityMachineLink`.
 
 `PNP.Concrete.cnfSATInP`, `PNP.Concrete.cnfSATNPComplete`, and
-`PNP.Main.p_eq_np` remain absent. All seven formal blockers and four disclosed
+`PNP.Main.p_eq_np` remain absent. Six formal blockers and four disclosed
 project assumptions remain, and the concrete publication gate remains false.

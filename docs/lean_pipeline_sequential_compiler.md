@@ -32,9 +32,9 @@ Accept/accept, reject/accept, accept/reject, arbitrary-output, empty/odd input,
 and stuck-first-machine regressions are compiled. A stuck nonhalting first
 endpoint remains timeout and cannot be reclassified as rejection.
 
-This milestone does not yet define recursive `FunctionProgram.RawRefinement`
-or `DecisionProgram.RawRefinement` constructors, so the concrete complexity
-machine-link blocker remains open. It does not prove CNFSAT in P,
+`PipelineRefinement` now recursively applies this compiler to define
+`FunctionProgram.RawRefinement` and `DecisionProgram.RawRefinement`, so the
+concrete complexity machine-link blocker is discharged. It does not prove CNFSAT in P,
 NP-completeness, or P = NP. The publication gate remains false.
 
 ```bash

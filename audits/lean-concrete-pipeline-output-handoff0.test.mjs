@@ -178,8 +178,8 @@ test('internal handoff milestone remains local and the publication gate remains 
     text0('status/FORMAL_RECONSTRUCTION_STATUS.json').then(JSON.parse),
     text0('publication/FORMAL_PUBLICATION_MAP.json').then(JSON.parse),
   ]);
-  assert.equal(status.remainingBlockers.length, 7);
-  assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), true);
+  assert.equal(status.remainingBlockers.length, 6);
+  assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), false);
   assert.equal(status.projectSpecificAxiomInventory.length, 4);
   assert.equal(status.rootLeanTheoremPresent, false);
   const handoffNonClaim = status.nonClaims.find((entry) => entry.includes(
@@ -199,11 +199,10 @@ test('internal handoff milestone remains local and the publication gate remains 
     `${PREFIX}framedOutputHandoffRawTimeBound_exact`,
     `${PREFIX}run_compileFramedOutputHandoff_of_represents`,
   ]) assert.equal(foundation.requiredTheorems.includes(name), true, name);
-  assert.match(foundation.scope, /second verdict and ordinary output are exact/u);
-  assert.match(foundation.scope, /same terminal-bridge rule table/u);
-  assert.match(foundation.nonClaim, /composes two already-raw proof-bearing targets/u);
-  assert.match(foundation.nonClaim, /recursive raw-refinement constructors/u);
-  assert.equal(map.gate.standardComplexityModelEligible, false);
+  assert.match(foundation.scope, /preserves the second verdict and output/u);
+  assert.match(foundation.scope, /PipelineRefinement recursively applies that compiler/u);
+  assert.match(foundation.nonClaim, /closes the concrete complexity machine-link blocker only/u);
+  assert.equal(map.gate.standardComplexityModelEligible, true);
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,
     map.gate.expectedConcreteTargetKernelValueSha256,

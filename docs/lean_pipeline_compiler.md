@@ -96,13 +96,13 @@ activation.
 
 ## Exact remaining boundary
 
-This compiler wraps one already-raw `PolynomialTimeMachine`. It does not yet
-define the recursive raw-refinement constructors needed to compile
-`FunctionProgram.compose` or `DecisionProgram.precompose` from the finite
-charged-pipeline complexity language. Consequently
-`Formal.ConcreteComplexityMachineLink` remains open.
+This compiler wraps one already-raw `PolynomialTimeMachine`.
+`PipelineSequentialCompiler` composes two such wrappers, and
+`PipelineRefinement` recursively uses that construction for every
+`FunctionProgram.compose` and `DecisionProgram.precompose` node. Consequently
+`Formal.ConcreteComplexityMachineLink` is now discharged.
 
 It does not prove `PNP.Concrete.cnfSATInP`,
 `PNP.Concrete.cnfSATNPComplete`, or `PNP.Main.p_eq_np`. Four disclosed project
-assumptions and all seven formal blockers remain. The concrete publication
+assumptions and six formal blockers remain. The concrete publication
 gate remains false, so the repository does not establish `P = NP`.

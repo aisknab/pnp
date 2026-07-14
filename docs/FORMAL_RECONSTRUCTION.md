@@ -78,8 +78,7 @@ no-timeout, language acceptance, and ordinary raw output. `PipelineCompiler` now
 literal table for every raw `BitString`: it extracts the target prefix internally, preserves exact
 verdict and ordinary output, excludes timeout, and proves language acceptance at
 `B(m) = m + p(m) + 1` and an explicit complete runtime polynomial in external length `m`. All 29
-public declarations have empty axiom closure. This wraps one already-raw proof-bearing target; it
-does not yet define recursive function-composition or decision-precomposition `RawRefinement`.
+public declarations have empty axiom closure. This wraps one already-raw proof-bearing target.
 `PipelineSequentialStateNamespace` supplies collision-free outer images for two complete component
 tables and literal launches from either first verdict. `PipelineSequentialCompiler` now completes
 that execution for every raw input in one finite table: either first verdict launches the second
@@ -87,8 +86,9 @@ simulator on the represented first output, the second verdict and ordinary outpu
 stuck nonhalting first endpoint remains timeout. If the component time bounds are `p` and `q`, the
 external polynomial is
 `PipelineRaw(p)(m) + 6 + PipelineRaw(q)(m + p(m) + 1)`. All 31 public declarations have empty
-axiom closure. Recursive function-composition and decision-precomposition `RawRefinement`
-constructors remain absent.
+axiom closure. `PipelineRefinement` now recursively applies this compiler to function composition
+and decision precomposition, proving exact output/verdict and a polynomial raw-machine refinement
+for every finite charged program tree. All 16 public declarations have empty axiom closure.
 The development also provides one direct raw-machine instance: a universally
 correct polynomial-time verifier for canonically encoded finite CNF formulae and bounded assignment
 certificates, proving `PNP.Concrete.CNFSAT ∈ NP`. It does not provide a deterministic polynomial-time

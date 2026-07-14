@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-14-31",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-14-32",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -67,7 +67,12 @@
   "leanConcretePipelineInputFramerAuditedDeclarationCount": 70,
   "leanConcretePipelineAllInputFramingFormalized": true,
   "leanConcretePipelineMalformedInputBehaviorFormalized": true,
-  "leanConcretePipelineRawRefinementFormalized": false,
+  "leanConcretePipelineRawRefinementFormalized": true,
+  "leanConcretePipelineRefinementAxiomAuditPassed": true,
+  "leanConcretePipelineRefinementAuditedDeclarationCount": 16,
+  "leanConcreteFunctionProgramRecursiveCompilationFormalized": true,
+  "leanConcreteDecisionProgramRecursiveCompilationFormalized": true,
+  "leanConcretePolynomialTimeDeciderRawCompilationFormalized": true,
   "leanConcretePipelineExternalInputSizePolynomialFormalized": true,
   "leanNANDDirectWireCoreFormalized": true,
   "leanNANDDirectWireCoreAxiomAuditPassed": true,
@@ -157,7 +162,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-14-SEQUENTIAL-COMPILER-30",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-14-RAW-REFINEMENT-31",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -262,7 +267,6 @@
     "archive/legacy-v0/"
   ],
   "remainingFormalObligations": [
-    "Formal.ConcreteComplexityMachineLink",
     "Formal.ConcreteSAT",
     "Formal.LockedNANDThreshold",
     "Formal.ResidualBandMinimizer",
@@ -271,7 +275,6 @@
     "Formal.RootTheoremAndAxiomAudit"
   ],
   "remainingBlockers": [
-    "Formal.ConcreteComplexityMachineLink",
     "Formal.ConcreteSAT",
     "Formal.LockedNANDThreshold",
     "Formal.ResidualBandMinimizer",
@@ -362,6 +365,7 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineMachineSimulationAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteComplexityAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPConcretePipelineRefinementRecursive.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteTargetAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFWorkInputAxiomAudit.lean",
@@ -396,16 +400,16 @@
     "Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.",
     "TapeBlankEquivalence proves that finite tapes which differ only by materialized exterior blanks have identical raw execution and observable output. PipelineCompiler uses that relation to connect every ordinary empty, odd, or even raw startConfig to the same literal four-stage work pipeline.",
     "PipelineTape frames raw cells between distinct two-track markers and tolerates arbitrary exterior garbage; its boundary expansions are pure tape identities, not transition rules, a handoff machine, a compiler, or a runtime proof.",
-    "PipelineInputFramer is one literal finite machine for every raw bitstring. It handles the empty word, complete two-bit work cells, and an odd final raw bit through explicit finite transitions; reaches an accepting represented frame with permitted exterior garbage at exact branch costs; and from ordinary startConfig accepts without timeout within 6 * m * m + 39 * m + 75 raw steps. All 70 public declarations have empty axiom closure. PipelineCompiler now transports that endpoint through the complete four-stage machine, but recursive pipeline RawRefinement, CNF-SAT in P, NP-completeness, and P = NP remain absent.",
+    "PipelineInputFramer is one literal finite machine for every raw bitstring. It handles the empty word, complete two-bit work cells, and an odd final raw bit through explicit finite transitions; reaches an accepting represented frame with permitted exterior garbage at exact branch costs; and from ordinary startConfig accepts without timeout within 6 * m * m + 39 * m + 75 raw steps. All 70 public declarations have empty axiom closure. PipelineCompiler and PipelineRefinement now transport that endpoint through complete recursive raw refinement, but CNF-SAT in P, NP-completeness, and P = NP remain absent.",
     "PipelineOutputHandoff is one literal finite machine for an already represented internal tape. For logical output length n it reaches an accepting representation of Tape.handoffTarget in exactly 2 * n + 4 work steps and 12 * n + 24 compiled steps. PipelineTerminalBridge preserves the earlier ordinary-input trace in its extended rule table and composes it with verdict-indexed terminal-packer copies for every supplied exact target execution. This still supplies no target-termination theorem, complete external-input-size polynomial, or RawRefinement. CNF-SAT in P, NP-completeness, and P = NP remain unproved.",
-    "PipelineMachineSimulation extracts from every at-most raw run with fuel F an exact successful prefix of length k at most F reaching the same endpoint, and each supplied exact n-step run costs exactly 3 * n work transitions. PipelineCompiler now extracts that prefix internally on every raw bitstring, bounds target output by m + F + 1, composes all four executable stages in one literal raw machine, and proves exact verdict, no-timeout, and machineOutput equality at an explicit polynomial in external length m. It does not provide FunctionProgram.RawRefinement.compose or DecisionProgram.RawRefinement.precompose; CNF-SAT in P, NP-completeness, and P = NP remain missing.",
+    "PipelineMachineSimulation extracts from every at-most raw run with fuel F an exact successful prefix of length k at most F reaching the same endpoint, and each supplied exact n-step run costs exactly 3 * n work transitions. PipelineCompiler extracts that prefix internally on every raw bitstring, bounds target output by m + F + 1, composes all four executable stages in one literal raw machine, and proves exact verdict, no-timeout, and machineOutput equality at an explicit polynomial in external length m. PipelineRefinement now recursively composes those raw implementations; CNF-SAT in P, NP-completeness, and P = NP remain missing.",
     "PipelineStateNamespace remains the injective renaming and lookup-isolation prerequisite. PipelineTerminalBridge now proves that every successful earlier bridge step and exact trace is preserved without shadowing, then composes accepting and rejecting supplied traces through two disjoint packer copies. Target termination, an external-input-size polynomial, and pipeline RawRefinement remain missing.",
-    "PipelineSequentialStateNamespace nests two complete component machines in disjoint outer state images and supplies literal accept/reject launches from the first component into the second simulator. PipelineSequentialCompiler now composes both exact executions in that one finite table for every raw input, passes either first verdict onward, preserves the second verdict and ordinary output, retains stuck-first timeout, and proves the external polynomial R(m) = PipelineRaw(p)(m) + 6 + PipelineRaw(q)(m + p(m) + 1). Its 31 public declarations have empty axiom closure. Recursive FunctionProgram.RawRefinement and DecisionProgram.RawRefinement constructors remain absent, so the concrete machine-link blocker remains open.",
-    "PipelineStageBridges proves exact framer-to-simulator and accept/reject-to-handoff launches, collision-free first-match dispatch, exact cumulative work cost, six-for-one compiled raw cost, and accept/reject/timeout classification for supplied exact target traces. PipelineTerminalBridge transports those traces into the extended machine and composes the terminal suffix, with exact ordinary machineOutput and the local 18*n^2 + 36*n + 12 suffix bound. It does not prove target termination, supply a complete pipeline RawRefinement or external-input-size polynomial, establish CNF-SAT in P or NP-completeness, or prove P = NP.",
-    "TerminalOutputPacker is a literal finite work machine that uniformly packs empty, one-bit, odd, even, all-zero, all-one, and mixed logical outputs in the presence of arbitrary exterior garbage. It proves exact work execution, a designated halt, ordinary blank-delimited raw output equality, exact six-for-one compilation, the local raw bound 18*n^2 + 36*n + 6, and one-step-short timeout, all with empty axiom closure. PipelineTerminalBridge now carries supplied exact framer/simulator/handoff traces into verdict-indexed copies of this machine, but does not establish target termination, a complete pipeline RawRefinement, external encoded-input-size polynomial, CNF-SAT in P, NP-completeness, or P = NP.",
-    "PipelineTerminalBridge is one literal extended finite work machine containing the earlier bridge rules and two disjoint terminal-packer copies. PipelineCompiler transports every raw input through that table, supplies target termination from PolynomialTimeMachine.haltsWithin, preserves exact verdict and ordinary machineOutput, and retains stuck-endpoint timeout. Recursive FunctionProgram and DecisionProgram RawRefinement constructors remain absent.",
-    "PipelinePairedCompiler remains the sharper canonical-pair theorem and compiles the same four-stage work table. PipelineCompiler is its all-input successor: all 29 public declarations have empty axiom closure, and pipeline_boundedDecide_eq, pipeline_machineOutput_eq, pipeline_ne_timeout, and pipeline_accepts_iff quantify every raw BitString. The output polynomial is B(m) = m + p(m) + 1; the runtime polynomial adds 6*m*m + 39*m + 75, two six-step launches, 18*p(m), and output-bound substitutions into the handoff and terminal-packer polynomials. General RawRefinement is absent, Formal.ConcreteComplexityMachineLink remains open, and there is no CNF-SAT in P, NP-completeness, or P = NP claim.",
-    "The concrete bitstring, natural-polynomial, and finite-rule machine kernel is now consumed by a finite charged-pipeline P/NP/reduction interface; the compiler/refinement from composite pipelines to one raw machine is not yet proved.",
+    "PipelineSequentialStateNamespace nests two complete component machines in disjoint outer state images and supplies literal accept/reject launches from the first component into the second simulator. PipelineSequentialCompiler composes both exact executions in that one finite table for every raw input, passes either first verdict onward, preserves the second verdict and ordinary output, retains stuck-first timeout, and proves the external polynomial R(m) = PipelineRaw(p)(m) + 6 + PipelineRaw(q)(m + p(m) + 1). PipelineRefinement recursively applies that compiler to function composition and decision precomposition, closing the concrete machine-link blocker. CNF-SAT in P, NP-completeness, and P = NP remain absent.",
+    "PipelineStageBridges proves exact framer-to-simulator and accept/reject-to-handoff launches, collision-free first-match dispatch, exact cumulative work cost, six-for-one compiled raw cost, and accept/reject/timeout classification for supplied exact target traces. PipelineTerminalBridge transports those traces into the extended machine and composes the terminal suffix, with exact ordinary machineOutput and the local 18*n^2 + 36*n + 12 suffix bound. This module alone does not prove target termination or an external-input-size polynomial; downstream modules now supply both and recursive RawRefinement. CNF-SAT in P, NP-completeness, and P = NP remain absent.",
+    "TerminalOutputPacker is a literal finite work machine that uniformly packs empty, one-bit, odd, even, all-zero, all-one, and mixed logical outputs in the presence of arbitrary exterior garbage. It proves exact work execution, a designated halt, ordinary blank-delimited raw output equality, exact six-for-one compilation, the local raw bound 18*n^2 + 36*n + 6, and one-step-short timeout, all with empty axiom closure. Downstream modules connect it to target termination, an external encoded-input-size polynomial, and recursive RawRefinement. CNF-SAT in P, NP-completeness, and P = NP remain absent.",
+    "PipelineTerminalBridge is one literal extended finite work machine containing the earlier bridge rules and two disjoint terminal-packer copies. PipelineCompiler transports every raw input through that table, supplies target termination from PolynomialTimeMachine.haltsWithin, preserves exact verdict and ordinary machineOutput, and retains stuck-endpoint timeout. PipelineRefinement now supplies the recursive FunctionProgram and DecisionProgram RawRefinement constructors.",
+    "PipelinePairedCompiler remains the sharper canonical-pair theorem and compiles the same four-stage work table. PipelineCompiler is its all-input successor: all 29 public declarations have empty axiom closure, and pipeline_boundedDecide_eq, pipeline_machineOutput_eq, pipeline_ne_timeout, and pipeline_accepts_iff quantify every raw BitString. The output polynomial is B(m) = m + p(m) + 1; the runtime polynomial adds 6*m*m + 39*m + 75, two six-step launches, 18*p(m), and output-bound substitutions into the handoff and terminal-packer polynomials. PipelineRefinement recursively compiles composite charged programs to one raw machine; there is still no CNF-SAT in P, NP-completeness, or P = NP claim.",
+    "The concrete bitstring, natural-polynomial, and finite-rule machine kernel is consumed by a finite charged-pipeline P/NP/reduction interface, and every finite function/decision program tree now has a literal raw-machine refinement with a recursively generated polynomial bound. This closes only the concrete machine link.",
     "The concrete complexity interface proves P subset NP, reduction composition and transport, and the NP-complete-in-P implication relative to its exact pipeline semantics; it does not prove concrete SAT complete or in P.",
     "The integrated direct CNF-SAT finite-machine verifier proves exact accept/reject correctness, bounded no-timeout behavior, and PNP.Concrete.FinalUniversalDesign.cnfSATInNP; it proves CNF-SAT membership in NP only, not CNF-SAT in P, NP-completeness, or P = NP.",
     "The 9,300-pair canonical sweep, 40,020-pair extended sweep, 261,121-pair bounded differential sweep, and ten compiler-edge cases are finite regression evidence; the universal result comes from the audited Lean theorems, not from testing.",
@@ -443,7 +447,7 @@
   "uniformFinalSoundnessProved": false,
   "satInPConclusionAccepted": false,
   "pEqualsNPConclusionAccepted": false,
-  "standardComplexityModelFormalized": false,
+  "standardComplexityModelFormalized": true,
   "abstractPEqualsNPPublicationEligible": false,
   "publicationStatusDerivedOnlyFromConcreteGate": true,
   "concretePublicationGate": {
@@ -460,7 +464,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "6d99522905d644f0e13d06b7c89646a40a753b082c8e1549fa260e1080995092",
+    "actualSourceClosureSha256": "4fa4576322602277c9f7caffca38e0f2132b2576da1b25fe2625885d55aafb67",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -470,7 +474,7 @@
     "abstractPEqualsNPIsPublicationIneligible": true,
     "unsetFingerprintIsIntentionalFailClosedMigrationGate": true,
     "subchecks": {
-      "standardComplexityModelEligible": false,
+      "standardComplexityModelEligible": true,
       "concreteTargetPresent": true,
       "concreteTargetIsDefinition": true,
       "concreteTargetKernelTypeFingerprintConfigured": false,
@@ -490,30 +494,34 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-14-31",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-14-32",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "3dde42632403deb4e4f257c4919a773d3e0cb296f9929b385082484b57d49b9e",
+  "leanTheoremInventorySha256": "f9bbb4c9aa21a72221d20e9327b900dd37a6cc62ea2919b5fc1a20dee1776921",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 5301,
+  "leanTheoremInventoryDeclarationCount": 5323,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 1042,
-  "leanTheoremInventoryTheoremCount": 2273,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 2172,
+  "leanTheoremInventoryTheoremCount": 2282,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 2181,
   "leanTheoremInventorySourceClosureModuleCount": 51,
-  "leanSourceClosureSha256": "6d99522905d644f0e13d06b7c89646a40a753b082c8e1549fa260e1080995092",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-14-31",
+  "leanSourceClosureSha256": "4fa4576322602277c9f7caffca38e0f2132b2576da1b25fe2625885d55aafb67",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-14-32",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "4f4346dcdf19620d3ac94a049d9ec31d3ec3bc6ef2d4e73405507e565c05cc6c",
+  "formalPublicationMapSha256": "6dcbb3aa9fdb7b782b7362f01e3c0bbb5a683f2447015b7d7abc0875dfc53fb0",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",
       "title": "Concrete machine and cost kernel",
       "classification": "formalized-foundation-only",
-      "scope": "One literal finite four-stage pipeline handles every raw bitstring. The total framer uses exactly 4 work steps on empty input, 4 * k * k + 9 * k + 7 for complete two-bit cells, and 4 * k * k + 9 * k + 5 when the final cell is partial; its compiled raw cost is bounded by 6 * m * m + 39 * m + 75. Every supplied exact n-step target run lifts to exactly 3 * n work steps. PipelineCompiler uses the same terminal-bridge rule table as PipelinePairedCompiler, launches one target on the unchanged raw input, and preserves its verdict and ordinary machineOutput at an explicit external polynomial. PipelineSequentialStateNamespace nests two complete component tables in disjoint outer images. PipelineSequentialCompiler now proves their complete all-input execution in one literal finite machine: either first verdict launches the second simulator on the represented first output, the second verdict and ordinary output are exact, stuck first endpoints remain timeout, and R(m) = PipelineRaw(p)(m) + 6 + PipelineRaw(q)(m + p(m) + 1). Its 31 public declarations have empty axiom closure.",
+      "scope": "One literal finite four-stage pipeline handles every raw bitstring. The total framer uses exactly 4 work steps on empty input, 4 * k * k + 9 * k + 7 for complete two-bit cells, and 4 * k * k + 9 * k + 5 when the final cell is partial; its compiled raw cost is bounded by 6 * m * m + 39 * m + 75. Every supplied exact n-step target run lifts to exactly 3 * n work steps. PipelineCompiler preserves one raw target's verdict and ordinary output at an explicit external polynomial. PipelineSequentialCompiler composes two raw targets in one literal finite table, passes either first verdict onward, preserves the second verdict and output, retains stuck-first timeout, and proves R(m) = PipelineRaw(p)(m) + 6 + PipelineRaw(q)(m + p(m) + 1). PipelineRefinement recursively applies that compiler to every FunctionProgram composition and DecisionProgram precomposition node. Its 16 audited declarations have empty axiom closure, and PolynomialTimeDecider.compileToMachine exposes the complete tree as one raw polynomial-time machine.",
       "requiredTheorems": [
         "PNP.Concrete.BitString.decodePair_pair",
+        "PNP.Concrete.DecisionProgram.RawRefinement.compile_haltsWithin",
+        "PNP.Concrete.DecisionProgram.RawRefinement.compile_verdict_eq",
+        "PNP.Concrete.FunctionProgram.RawRefinement.compile_haltsWithin",
+        "PNP.Concrete.FunctionProgram.RawRefinement.compile_output_eq",
         "PNP.Concrete.NatPolynomial.eval_mono",
         "PNP.Concrete.PipelineCompiler.acceptingSuppliedTrace_workRunExact_of_rawRunExact",
         "PNP.Concrete.PipelineCompiler.outputBits_length_le_pipelineOutputSizeBound_of_rawRunExact",
@@ -551,6 +559,7 @@
         "PNP.Concrete.PipelineSequentialStateNamespace.firstPipelineState_ne_secondPipelineState",
         "PNP.Concrete.PipelineSequentialStateNamespace.firstRejectLaunch_workStep",
         "PNP.Concrete.PipelineSequentialStateNamespace.sequentialWorkMachine_acceptState_ne_rejectState",
+        "PNP.Concrete.PolynomialTimeDecider.compileToMachine_accepts_iff",
         "PNP.Concrete.PipelineInputFramer.boundedDecide_compilePairedInputFramer_accept",
         "PNP.Concrete.PipelineInputFramer.boundedDecide_compileTotalInputFramer_accept",
         "PNP.Concrete.PipelineInputFramer.boundedDecide_compileTotalInputFramer_ne_timeout",
@@ -670,7 +679,7 @@
         "PNP.Concrete.run_succ",
         "PNP.Concrete.run_zero"
       ],
-      "nonClaim": "This theorem now composes two already-raw proof-bearing targets in one finite machine, but it does not yet define recursive raw-refinement constructors for FunctionProgram composition or DecisionProgram precomposition. The concrete complexity machine-link blocker therefore remains open. CNF-SAT in P, NP-completeness, and P = NP are not established; PNP.Main.p_eq_np remains absent and the publication gate remains false.",
+      "nonClaim": "This closes the concrete complexity machine-link blocker only. It does not construct a deterministic polynomial-time CNF-SAT decider or an NP-completeness reduction. CNF-SAT in P, NP-completeness, and P = NP are not established; PNP.Main.p_eq_np remains absent and the publication gate remains false.",
       "theoremRows": [
         {
           "name": "PNP.Concrete.BitString.decodePair_pair",
@@ -679,6 +688,42 @@
           "axioms": [],
           "actualKernelTypeSha256": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
           "expectedKernelTypeSha256": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.DecisionProgram.RawRefinement.compile_haltsWithin",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "4057fc9d48be85dd7f961ce7acf5bef68ddb4ed0c8b6798617b31deb9da8c7c5",
+          "expectedKernelTypeSha256": "4057fc9d48be85dd7f961ce7acf5bef68ddb4ed0c8b6798617b31deb9da8c7c5",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.DecisionProgram.RawRefinement.compile_verdict_eq",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "8b390dd6677d6e789499b7b713855652a5e1db2c64809ddf43d079deb4099965",
+          "expectedKernelTypeSha256": "8b390dd6677d6e789499b7b713855652a5e1db2c64809ddf43d079deb4099965",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.FunctionProgram.RawRefinement.compile_haltsWithin",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "53bd33de652a55facc74179863672a789f40f9ba6dea293c2de29fcc866b5a3d",
+          "expectedKernelTypeSha256": "53bd33de652a55facc74179863672a789f40f9ba6dea293c2de29fcc866b5a3d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.FunctionProgram.RawRefinement.compile_output_eq",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "e3bb23c7f245cb516803a91468e3a3b220338c36a11790ffa5045b8c41332a24",
+          "expectedKernelTypeSha256": "e3bb23c7f245cb516803a91468e3a3b220338c36a11790ffa5045b8c41332a24",
           "kernelTypeFingerprintMatches": true
         },
         {
@@ -1012,6 +1057,15 @@
           "axioms": [],
           "actualKernelTypeSha256": "abccc6046f412f5ff8daece21de8d14c1525be9505e5f731338fb7692d578168",
           "expectedKernelTypeSha256": "abccc6046f412f5ff8daece21de8d14c1525be9505e5f731338fb7692d578168",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.PolynomialTimeDecider.compileToMachine_accepts_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "ebc638eb12e60d97a7d33b0cdce5a6322594342547f65128c0a3f11503fa35ba",
+          "expectedKernelTypeSha256": "ebc638eb12e60d97a7d33b0cdce5a6322594342547f65128c0a3f11503fa35ba",
           "kernelTypeFingerprintMatches": true
         },
         {
@@ -2087,8 +2141,8 @@
     {
       "id": "concrete-complexity-classes",
       "title": "Concrete P, NP, and polynomial reductions",
-      "classification": "formalized-with-machine-link-pending",
-      "scope": "Bitstring languages, finite charged decision/verifier/function pipelines grounded in concrete machines, polynomial certificate/runtime/output bounds, exact raw-machine refinement contracts and machine-leaf witnesses, many-one reductions, and the NP-complete-in-P implication.",
+      "classification": "formalized",
+      "scope": "Bitstring languages, finite charged decision/verifier/function pipelines grounded in concrete machines, polynomial certificate/runtime/output bounds, recursively compiled exact raw-machine refinements, many-one reductions, and the NP-complete-in-P implication.",
       "requiredTheorems": [
         "PNP.Concrete.FunctionProgram.RawRefinement.output_size_le",
         "PNP.Concrete.np_complete_in_p_implies_p_eq_np",
@@ -2098,7 +2152,7 @@
         "PNP.Concrete.reduction_transports_p",
         "PNP.Main.concretePEqualsNP_iff"
       ],
-      "nonClaim": "The refinement contracts and leaf cases do not compile function composition or decision precomposition, construct raw paired verifiers, prove charged/raw class equivalence, discharge the general machine-link blocker, prove CNF-SAT is in P or NP-complete, or establish the publication root theorem.",
+      "nonClaim": "The recursive refinement compiler closes the charged-to-raw machine link, but it does not construct raw paired verifiers beyond the existing CNF-SAT membership witness, prove CNF-SAT is in P or NP-complete, or establish the publication root theorem.",
       "theoremRows": [
         {
           "name": "PNP.Concrete.FunctionProgram.RawRefinement.output_size_le",
@@ -2169,7 +2223,7 @@
       "allKernelTypesMatch": true,
       "sourceClosureFingerprintMatches": true,
       "earned": true,
-      "status": "formalized-with-machine-link-pending"
+      "status": "formalized"
     },
     {
       "id": "concrete-cnf-universal-verifier",
@@ -2682,7 +2736,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-14-31",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-14-32",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

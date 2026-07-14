@@ -46,7 +46,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-14-31}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-14-32}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -65,15 +65,15 @@
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 5301 \\
-Theorem-kind declarations & 2273 \\
-Assumption-free theorem-kind declarations & 2172 \\
+Compiled declarations & 5323 \\
+Theorem-kind declarations & 2282 \\
+Assumption-free theorem-kind declarations & 2181 \\
 Project-specific axioms & 4 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{3dde42632403deb4e4f257c4919a773d3e0cb296f9929b385082484b57d49b9e}\par}
+{\small Inventory SHA-256: \code{f9bbb4c9aa21a72221d20e9327b900dd37a6cc62ea2919b5fc1a20dee1776921}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -134,7 +134,7 @@ fingerprint is null, while the concrete model is ineligible, or while any other 
 Gate subcheck & Result \\
 \midrule
 \endhead
-standardComplexityModelEligible & \statusfalse \\
+standardComplexityModelEligible & \statustrue \\
 concreteTargetPresent & \statustrue \\
 concreteTargetIsDefinition & \statustrue \\
 concreteTargetKernelTypeFingerprintConfigured & \statusfalse \\
@@ -187,7 +187,7 @@ remain absent.
 \section{Formal milestone ledger}
 
 Each earned row requires exact compiled names and theorem kinds, empty axiom closures, per-name
-domain-separated kernel-type SHA-256 matches for 193 detailed candidates, and the pinned whole-Lean
+domain-separated kernel-type SHA-256 matches for 198 detailed candidates, and the pinned whole-Lean
 source closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
 {\small
@@ -198,8 +198,8 @@ source closure. Human-readable scope remains conservative: type or source drift 
 Milestone & Status & Exact scope & Boundary \\
 \midrule
 \endhead
-Concrete machine and cost kernel & formalized-foundation-only & One literal finite four-stage pipeline handles every raw bitstring. The total framer uses exactly 4 work steps on empty input, 4 * k * k + 9 * k + 7 for complete two-bit cells, and 4 * k * k + 9 * k + 5 when the final cell is partial; its compiled raw cost is bounded by 6 * m * m + 39 * m + 75. Every supplied exact n-step target run lifts to exactly 3 * n work steps. PipelineCompiler uses the same terminal-bridge rule table as PipelinePairedCompiler, launches one target on the unchanged raw input, and preserves its verdict and ordinary machineOutput at an explicit external polynomial. PipelineSequentialStateNamespace nests two complete component tables in disjoint outer images. PipelineSequentialCompiler now proves their complete all-input execution in one literal finite machine: either first verdict launches the second simulator on the represented first output, the second verdict and ordinary output are exact, stuck first endpoints remain timeout, and R(m) = PipelineRaw(p)(m) + 6 + PipelineRaw(q)(m + p(m) + 1). Its 31 public declarations have empty axiom closure. & This theorem now composes two already-raw proof-bearing targets in one finite machine, but it does not yet define recursive raw-refinement constructors for FunctionProgram composition or DecisionProgram precomposition. The concrete complexity machine-link blocker therefore remains open. CNF-SAT in P, NP-completeness, and P = NP are not established; PNP.Main.p\_eq\_np remains absent and the publication gate remains false. \\
-Concrete P, NP, and polynomial reductions & formalized-with-machine-link-pending & Bitstring languages, finite charged decision/verifier/function pipelines grounded in concrete machines, polynomial certificate/runtime/output bounds, exact raw-machine refinement contracts and machine-leaf witnesses, many-one reductions, and the NP-complete-in-P implication. & The refinement contracts and leaf cases do not compile function composition or decision precomposition, construct raw paired verifiers, prove charged/raw class equivalence, discharge the general machine-link blocker, prove CNF-SAT is in P or NP-complete, or establish the publication root theorem. \\
+Concrete machine and cost kernel & formalized-foundation-only & One literal finite four-stage pipeline handles every raw bitstring. The total framer uses exactly 4 work steps on empty input, 4 * k * k + 9 * k + 7 for complete two-bit cells, and 4 * k * k + 9 * k + 5 when the final cell is partial; its compiled raw cost is bounded by 6 * m * m + 39 * m + 75. Every supplied exact n-step target run lifts to exactly 3 * n work steps. PipelineCompiler preserves one raw target's verdict and ordinary output at an explicit external polynomial. PipelineSequentialCompiler composes two raw targets in one literal finite table, passes either first verdict onward, preserves the second verdict and output, retains stuck-first timeout, and proves R(m) = PipelineRaw(p)(m) + 6 + PipelineRaw(q)(m + p(m) + 1). PipelineRefinement recursively applies that compiler to every FunctionProgram composition and DecisionProgram precomposition node. Its 16 audited declarations have empty axiom closure, and PolynomialTimeDecider.compileToMachine exposes the complete tree as one raw polynomial-time machine. & This closes the concrete complexity machine-link blocker only. It does not construct a deterministic polynomial-time CNF-SAT decider or an NP-completeness reduction. CNF-SAT in P, NP-completeness, and P = NP are not established; PNP.Main.p\_eq\_np remains absent and the publication gate remains false. \\
+Concrete P, NP, and polynomial reductions & formalized & Bitstring languages, finite charged decision/verifier/function pipelines grounded in concrete machines, polynomial certificate/runtime/output bounds, recursively compiled exact raw-machine refinements, many-one reductions, and the NP-complete-in-P implication. & The recursive refinement compiler closes the charged-to-raw machine link, but it does not construct raw paired verifiers beyond the existing CNF-SAT membership witness, prove CNF-SAT is in P or NP-complete, or establish the publication root theorem. \\
 Concrete universal CNF-SAT verifier & formalized-np-membership-only & An unconditional formula-grammar outcome, universal bounded work outcome, exact accept/reject semantics, no-timeout theorem, literal finite-machine paired verifier, and CNF-SAT membership in NP. & This proves CNF-SAT membership in NP only; it does not prove CNF-SAT is in P, NP-completeness, or P = NP. \\
 Typed direct-wire NAND semantics & formalized & Typed topological Boolean NAND programs and ordered multi-output direct-wire semantics. & This does not establish circuit minimization, SAT, or P = NP. \\
 Finite enumeration, equivalence, and reference minimum & formalized & Exhaustive finite Boolean direct-wire search under the empty-profile reference model. & No polynomial-runtime result is obtained from this exhaustive reference search. \\
@@ -216,7 +216,7 @@ Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-mac
 
 \section{Compiled inventory summary}
 
-The inventory contains 5301 exported \code{PNP.*} kernel declarations from
+The inventory contains 5323 exported \code{PNP.*} kernel declarations from
 51 modules. It excludes 1042 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
@@ -245,7 +245,7 @@ PNP.Concrete.PipelineInputFramer & 106 & 18 \\
 PNP.Concrete.PipelineMachineSimulation & 175 & 79 \\
 PNP.Concrete.PipelineOutputHandoff & 23 & 4 \\
 PNP.Concrete.PipelinePairedCompiler & 29 & 25 \\
-PNP.Concrete.PipelineRefinement & 46 & 15 \\
+PNP.Concrete.PipelineRefinement & 68 & 24 \\
 PNP.Concrete.PipelineSequentialCompiler & 36 & 28 \\
 PNP.Concrete.PipelineSequentialStateNamespace & 30 & 21 \\
 PNP.Concrete.PipelineStageBridges & 77 & 59 \\
@@ -291,7 +291,6 @@ Seven formal blockers remain active:
 \setlength{\parsep}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\topsep}{3pt}
-\item \code{Formal.ConcreteComplexityMachineLink}
 \item \code{Formal.ConcreteSAT}
 \item \code{Formal.LockedNANDThreshold}
 \item \code{Formal.ResidualBandMinimizer}
@@ -340,10 +339,10 @@ npm run report:check
 \end{verbatim}
 }
 
-The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-14-31}. Its exact byte digest is
-\code{3dde42632403deb4e4f257c4919a773d3e0cb296f9929b385082484b57d49b9e}. The report is regenerated from that inventory and the reviewed
+The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-14-32}. Its exact byte digest is
+\code{f9bbb4c9aa21a72221d20e9327b900dd37a6cc62ea2919b5fc1a20dee1776921}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{6d99522905d644f0e13d06b7c89646a40a753b082c8e1549fa260e1080995092}; the computed and pinned values match. Successful regeneration
+\code{4fa4576322602277c9f7caffca38e0f2132b2576da1b25fe2625885d55aafb67}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 

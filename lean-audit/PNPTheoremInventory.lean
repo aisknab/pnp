@@ -64,6 +64,8 @@ private def isProjectDeclaration (env : Environment) (name : Name) : Bool :=
 
 private def reviewedMilestoneTheoremNames : Array Name := #[
   `PNP.Concrete.BitString.decodePair_pair,
+  `PNP.Concrete.DecisionProgram.RawRefinement.compile_haltsWithin,
+  `PNP.Concrete.DecisionProgram.RawRefinement.compile_verdict_eq,
   `PNP.Concrete.FinalUniversalDesign.cnfCompiled_accept_iff_check,
   `PNP.Concrete.FinalUniversalDesign.cnfCompiled_ne_timeout,
   `PNP.Concrete.FinalUniversalDesign.cnfCompiled_reject_iff_check_false,
@@ -72,6 +74,8 @@ private def reviewedMilestoneTheoremNames : Array Name := #[
   `PNP.Concrete.FinalUniversalDesign.cnfSATInNP,
   `PNP.Concrete.FinalUniversalDesign.cnfUniversalWorkOutcome,
   `PNP.Concrete.FinalUniversalDesign.formulaGrammarOutcome,
+  `PNP.Concrete.FunctionProgram.RawRefinement.compile_haltsWithin,
+  `PNP.Concrete.FunctionProgram.RawRefinement.compile_output_eq,
   `PNP.Concrete.FunctionProgram.RawRefinement.output_size_le,
   `PNP.Concrete.NatPolynomial.eval_mono,
   `PNP.Concrete.PipelineCompiler.acceptingSuppliedTrace_workRunExact_of_rawRunExact,
@@ -220,6 +224,7 @@ private def reviewedMilestoneTheoremNames : Array Name := #[
   `PNP.Concrete.PipelineTape.represents_moveLeft_of_cons,
   `PNP.Concrete.PipelineTape.represents_moveRight_of_cons,
   `PNP.Concrete.PipelineTape.represents_write,
+  `PNP.Concrete.PolynomialTimeDecider.compileToMachine_accepts_iff,
   `PNP.Concrete.PolynomialTimeMachine.verdict_accepts_iff,
   `PNP.Concrete.PolynomialTimeMachine.verdict_ne_timeout,
   `PNP.Concrete.Tape.outputBits_handoffTarget,
@@ -314,7 +319,7 @@ private def inventory : CommandElabM Json := do
   return Json.mkObj [
     ("kind", toJson "PNPLeanTheoremInventory0"),
     ("version", toJson 0),
-    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-07-14-31"),
+    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-07-14-32"),
     ("leanToolchain", toJson "leanprover/lean4:v4.31.0"),
     ("rootModule", toJson "PNP"),
     ("environmentProbeComplete", toJson true),

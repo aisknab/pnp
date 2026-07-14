@@ -1033,12 +1033,11 @@ def toPolynomialTimeMachine
 /-!
 ## Exact boundary
 
-This all-input compiler wraps one already raw `PolynomialTimeMachine`.  It
-does not define `FunctionProgram.RawRefinement.compose` or
-`DecisionProgram.RawRefinement.precompose`, and it does not discharge the
-concrete complexity machine-link blocker.  It does not establish CNF-SAT in
-P, CNF-SAT NP-completeness, `PNP.Main.p_eq_np`, or P = NP.  The publication
-gate remains false.
+This all-input compiler wraps one already raw `PolynomialTimeMachine`.
+`PipelineRefinement` uses it together with the sequential compiler to close
+the concrete complexity machine link, but this module does not establish
+CNF-SAT in P, CNF-SAT NP-completeness, `PNP.Main.p_eq_np`, or P = NP.  The
+publication gate remains false.
 -/
 
 end PipelineCompiler
