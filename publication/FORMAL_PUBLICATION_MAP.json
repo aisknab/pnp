@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-14-34",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-14-35",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,12 +17,20 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "6139040080662d4ac136e19a1379f751c0492107ed7f264f9ec57b7304fe247c",
+  "milestoneSourceClosureSha256": "6f9e9a86b966ce2d7eacc929bb55806313d406ad2295cc55ac52be3f38ae8032",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CookLevin.FixedTableauInstance.exists_accepting_iff_boundedDecide_accept": "15748139f6108728bea8db01a2b72e6a8b90824eef0cea4b4b0d315d6ad044ab",
     "PNP.Concrete.CookLevin.FixedTableauInstance.tableauVerdict_of_valid": "f6ecc5ce14c577602cccc5c9a803997d1cec8496d93b5e217b7ab6dd52ff1067",
     "PNP.Concrete.CookLevin.FixedTableauInstance.valid_iff_eq_canonical": "abd3746c15d3ad1b61b4122e9df8de0765718ce0058771728f5b6c6bcbc04998",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.actualFuel_le_uniformFuel": "61c131f02ea26a353b8b5a636c023d969d9ccf5d636c2fcdf17d3ed4917396df",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.actualFuel_ne_timeout": "4097f3def4d038e9cba2f177f487a79da6b4de71729b8d17cb83c46120d052de",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.dimensions_timeBound": "abc46f094c1fddd2d3ef2d3f8cdaa1a21ec8842ed23485ea479c097af309e802",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.exists_accepting_iff_program_accept": "fc072a8bea1e74f18a4713c580e060c5b826219dcb87b6c8a26a598a7d57683d",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.language_iff_exists_acceptingTableau": "7e4d432c55c5c65707e8dbe8263397a3f35bc0bf38d51ced5214b45ce0c354b5",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.rawInput_size_le": "3e053199a556d3ae5fa2f950a0ce81d51ce861f419071083a1d9deda20a7ef07",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.tableauVerdict_eq_program_of_valid": "b565dfb1e1b43c2844895d7c99adf6899abe732dddac0c2e7eed074bd1b8b8a8",
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.uniformFuel_verdict_eq": "c16317c99973aa4ac6a28cf640591eefddfd23f120d8297372bf046f850e1a69",
     "PNP.Concrete.CookLevin.VariableLayout.certificateBitVariable_lt_variableCount": "34d87d731566df6a2f0f27d8d144758bccbd3956200134f2283e01002997c15e",
     "PNP.Concrete.CookLevin.VariableLayout.certificateBitVariable_ne_certificateLengthVariable": "64abf1907a702826012ce0e400eed255b9ceca87fbc962fe96101d3f5fc77a86",
     "PNP.Concrete.CookLevin.VariableLayout.certificateLengthVariable_lt_variableCount": "24d2dbec0fbbdf56fb13e28a7507da6a7e090e00467659fee7efa47676108465",
@@ -48,6 +56,7 @@
     "PNP.Concrete.CookLevin.tableauEndpoint_of_valid": "e345602084cebf67acf1caa10f05549532e56b7beefd10370645871fa50a98f0",
     "PNP.Concrete.CookLevin.trace_length": "1be8329e0a2fca8500ca0cd46085cc75fd77a6203e7478d3428d981a9049d9c9",
     "PNP.Concrete.CookLevin.validTableau_iff_eq_trace": "3cb083e99e5dc76a4336a2f532be76cedf25221e6352943bff6119bf4d442d4d",
+    "PNP.Concrete.CookLevin.verifierEncodedInput_size_le": "96f7b461caadb95496cfc9e5ceda6648e873e70956579fc0cf3228c00abcb3f7",
     "PNP.Concrete.DecisionProgram.RawRefinement.compile_haltsWithin": "4057fc9d48be85dd7f961ce7acf5bef68ddb4ed0c8b6798617b31deb9da8c7c5",
     "PNP.Concrete.DecisionProgram.RawRefinement.compile_verdict_eq": "8b390dd6677d6e789499b7b713855652a5e1db2c64809ddf43d079deb4099965",
     "PNP.Concrete.FinalUniversalDesign.cnfCompiled_accept_iff_check": "4a8661d567079e1f47c288b8a36805a20ac7040338d84325723079f3fada4efa",
@@ -495,6 +504,24 @@
         "PNP.Concrete.CookLevin.validTableau_iff_eq_trace"
       ],
       "nonClaim": "This is the semantic fixed-certificate tableau only. It does not yet quantify a variable certificate, encode tape windows or tableau rows as CNF, compile a formula emitter, define a polynomial reduction to CNFSAT, or establish CNFSAT NP-completeness, CNFSAT in P, or P = NP."
+    },
+    {
+      "id": "concrete-cook-levin-verifier-tableau",
+      "title": "Uniform bounded verifier tableaux",
+      "classification": "formalized-foundation-only",
+      "scope": "For an arbitrary proof-bearing verifier in the concrete NP model and one source input, the complete finite decision pipeline is compiled to one raw machine. Every certificate inside the explicit certificate polynomial shares one answer-independent raw fuel obtained by evaluating the compiled raw-time polynomial at the maximum encoded input size. Per-certificate fuel is below that bound, padding follows a proved halt, exact verdicts are preserved, and language membership is equivalent to an existential bounded accepting semantic tableau. All 41 declarations and nine reviewed theorem types have empty axiom closure.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.actualFuel_le_uniformFuel",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.actualFuel_ne_timeout",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.dimensions_timeBound",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.exists_accepting_iff_program_accept",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.language_iff_exists_acceptingTableau",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.rawInput_size_le",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.tableauVerdict_eq_program_of_valid",
+        "PNP.Concrete.CookLevin.VerifierTableauProblem.uniformFuel_verdict_eq",
+        "PNP.Concrete.CookLevin.verifierEncodedInput_size_le"
+      ],
+      "nonClaim": "This is a uniform semantic verifier-tableau equivalence only. It does not encode configurations, transition windows, or variable-length certificates as Boolean clauses; emit CNF; prove emitter size or runtime polynomials; define a polynomial reduction to CNFSAT; or establish CNFSAT NP-completeness, CNFSAT in P, or P = NP."
     },
     {
       "id": "direct-wire-semantics",
