@@ -80,18 +80,21 @@ verdict and ordinary output, excludes timeout, and proves language acceptance at
 `B(m) = m + p(m) + 1` and an explicit complete runtime polynomial in external length `m`. All 29
 public declarations have empty axiom closure. This wraps one already-raw proof-bearing target; it
 does not yet define recursive function-composition or decision-precomposition `RawRefinement`.
-`PipelineSequentialStateNamespace` now supplies the next literal composition prerequisite: two
-complete component rule tables are injectively renamed into disjoint outer images, lookup remains
-isolated, successful exact local traces transport, and both first-component verdict endpoints take
-one explicit launch step to the second component's internal simulator start. It deliberately stops
-before an end-to-end two-machine trace, terminal output equality, an external input-size polynomial,
-or recursive refinement.
+`PipelineSequentialStateNamespace` supplies collision-free outer images for two complete component
+tables and literal launches from either first verdict. `PipelineSequentialCompiler` now completes
+that execution for every raw input in one finite table: either first verdict launches the second
+simulator on the represented first output, the second verdict and ordinary output are exact, and a
+stuck nonhalting first endpoint remains timeout. If the component time bounds are `p` and `q`, the
+external polynomial is
+`PipelineRaw(p)(m) + 6 + PipelineRaw(q)(m + p(m) + 1)`. All 31 public declarations have empty
+axiom closure. Recursive function-composition and decision-precomposition `RawRefinement`
+constructors remain absent.
 The development also provides one direct raw-machine instance: a universally
 correct polynomial-time verifier for canonically encoded finite CNF formulae and bounded assignment
 certificates, proving `PNP.Concrete.CNFSAT ∈ NP`. It does not provide a deterministic polynomial-time
 decider proving `CNFSAT ∈ P`, concrete NP-hardness or NP-completeness, the complete locked-NAND
-threshold theorem, the residual-band exact minimizer, ZeroSlack, the remaining end-to-end
-polynomial bounds, or a root theorem `PNP.Main.p_eq_np` with an acceptable axiom audit.
+threshold theorem, the residual-band exact minimizer, ZeroSlack, the recursive complexity-model
+machine link, or a root theorem `PNP.Main.p_eq_np` with an acceptable axiom audit.
 
 The repository now pins `leanprover/lean4:v4.31.0` and builds the explicit `PNP` library root. That
 root imports every tracked Lean source module. `PNP.Main.rootTheoremStatus` is assumption-free data
@@ -121,14 +124,17 @@ endpoint and transports the earlier ordinary-input trace into that extended mach
 compiler derives target termination and a complete external-size polynomial for canonical pair
 inputs. The all-input compiler generalizes that result to every raw input, including empty, odd,
 malformed, and non-pair words, while preserving exact verdict and raw-visible output. The remaining
-machine-link gap is the recursive compiler from the charged function/decision program syntax into
-the existing `RawRefinement` contracts.
+sequential compiler then composes two such proof-bearing targets in one literal table, transfers the
+first output internally, and proves the second verdict, raw-visible output, timeout behavior, and an
+external polynomial. The remaining machine-link gap is the recursive compiler from the charged
+function/decision program syntax into the existing `RawRefinement` contracts.
 See
 [`lean_concrete_complexity.md`](./lean_concrete_complexity.md) and
 [`lean_pipeline_stage_bridges.md`](./lean_pipeline_stage_bridges.md), and
 [`lean_pipeline_terminal_bridge.md`](./lean_pipeline_terminal_bridge.md), and
 [`lean_pipeline_paired_compiler.md`](./lean_pipeline_paired_compiler.md), and
-[`lean_pipeline_compiler.md`](./lean_pipeline_compiler.md).
+[`lean_pipeline_compiler.md`](./lean_pipeline_compiler.md), and
+[`lean_pipeline_sequential_compiler.md`](./lean_pipeline_sequential_compiler.md).
 
 The concrete CNF layer separately defines canonical formula and assignment codecs, propositional
 CNF semantics, a Boolean certificate checker, a finite work machine, and its compiled raw machine.

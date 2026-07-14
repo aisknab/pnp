@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-14-30';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-14-31';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -71,6 +71,7 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'node --test audits/lean-concrete-pipeline-output-handoff0.test.mjs',
   'node --test audits/lean-concrete-pipeline-state-namespace0.test.mjs',
   'node --test audits/lean-concrete-pipeline-sequential-state-namespace0.test.mjs',
+  'node --test audits/lean-concrete-pipeline-sequential-compiler0.test.mjs',
   'node --test audits/lean-concrete-pipeline-stage-bridges0.test.mjs',
   'node --test audits/lean-concrete-terminal-output-packer0.test.mjs',
   'node --test audits/lean-concrete-pipeline-terminal-bridge0.test.mjs',
@@ -98,6 +99,8 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineOutputHandoffAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineStateNamespaceAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineSequentialStateNamespaceAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineSequentialCompilerAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPConcretePipelineSequentialCompiler.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineStageBridgesAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteTerminalOutputPackerAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineTerminalBridgeAxiomAudit.lean',
@@ -147,7 +150,7 @@ const NON_CLAIMS = Object.freeze([
   'PipelineOutputHandoff is one literal finite machine for an already represented internal tape. For logical output length n it reaches an accepting representation of Tape.handoffTarget in exactly 2 * n + 4 work steps and 12 * n + 24 compiled steps. PipelineTerminalBridge preserves the earlier ordinary-input trace in its extended rule table and composes it with verdict-indexed terminal-packer copies for every supplied exact target execution. This still supplies no target-termination theorem, complete external-input-size polynomial, or RawRefinement. CNF-SAT in P, NP-completeness, and P = NP remain unproved.',
   'PipelineMachineSimulation extracts from every at-most raw run with fuel F an exact successful prefix of length k at most F reaching the same endpoint, and each supplied exact n-step run costs exactly 3 * n work transitions. PipelineCompiler now extracts that prefix internally on every raw bitstring, bounds target output by m + F + 1, composes all four executable stages in one literal raw machine, and proves exact verdict, no-timeout, and machineOutput equality at an explicit polynomial in external length m. It does not provide FunctionProgram.RawRefinement.compose or DecisionProgram.RawRefinement.precompose; CNF-SAT in P, NP-completeness, and P = NP remain missing.',
   'PipelineStateNamespace remains the injective renaming and lookup-isolation prerequisite. PipelineTerminalBridge now proves that every successful earlier bridge step and exact trace is preserved without shadowing, then composes accepting and rejecting supplied traces through two disjoint packer copies. Target termination, an external-input-size polynomial, and pipeline RawRefinement remain missing.',
-  'PipelineSequentialStateNamespace nests two complete component machines in disjoint outer state images, proves first-match lookup isolation and exact local-trace transport for both images, and adds literal accept/reject launches from the first component into the second simulator. It does not yet prove an end-to-end two-machine trace, terminal output equality, an external input-size polynomial, or recursive RawRefinement composition.',
+  'PipelineSequentialStateNamespace nests two complete component machines in disjoint outer state images and supplies literal accept/reject launches from the first component into the second simulator. PipelineSequentialCompiler now composes both exact executions in that one finite table for every raw input, passes either first verdict onward, preserves the second verdict and ordinary output, retains stuck-first timeout, and proves the external polynomial R(m) = PipelineRaw(p)(m) + 6 + PipelineRaw(q)(m + p(m) + 1). Its 31 public declarations have empty axiom closure. Recursive FunctionProgram.RawRefinement and DecisionProgram.RawRefinement constructors remain absent, so the concrete machine-link blocker remains open.',
   'PipelineStageBridges proves exact framer-to-simulator and accept/reject-to-handoff launches, collision-free first-match dispatch, exact cumulative work cost, six-for-one compiled raw cost, and accept/reject/timeout classification for supplied exact target traces. PipelineTerminalBridge transports those traces into the extended machine and composes the terminal suffix, with exact ordinary machineOutput and the local 18*n^2 + 36*n + 12 suffix bound. It does not prove target termination, supply a complete pipeline RawRefinement or external-input-size polynomial, establish CNF-SAT in P or NP-completeness, or prove P = NP.',
   'TerminalOutputPacker is a literal finite work machine that uniformly packs empty, one-bit, odd, even, all-zero, all-one, and mixed logical outputs in the presence of arbitrary exterior garbage. It proves exact work execution, a designated halt, ordinary blank-delimited raw output equality, exact six-for-one compilation, the local raw bound 18*n^2 + 36*n + 6, and one-step-short timeout, all with empty axiom closure. PipelineTerminalBridge now carries supplied exact framer/simulator/handoff traces into verdict-indexed copies of this machine, but does not establish target termination, a complete pipeline RawRefinement, external encoded-input-size polynomial, CNF-SAT in P, NP-completeness, or P = NP.',
   'PipelineTerminalBridge is one literal extended finite work machine containing the earlier bridge rules and two disjoint terminal-packer copies. PipelineCompiler transports every raw input through that table, supplies target termination from PolynomialTimeMachine.haltsWithin, preserves exact verdict and ordinary machineOutput, and retains stuck-endpoint timeout. Recursive FunctionProgram and DecisionProgram RawRefinement constructors remain absent.',
@@ -324,6 +327,12 @@ const EXACT_FIELDS = Object.freeze({
   leanConcretePipelineSequentialNamespaceFormalized: true,
   leanConcretePipelineSequentialNamespaceAxiomAuditPassed: true,
   leanConcretePipelineSequentialNamespaceAuditedDeclarationCount: 26,
+  leanConcretePipelineSequentialCompilationFormalized: true,
+  leanConcretePipelineSequentialCompilerAxiomAuditPassed: true,
+  leanConcretePipelineSequentialCompilerAuditedDeclarationCount: 31,
+  leanConcretePipelineSequentialVerdictAndOutputPreservationFormalized: true,
+  leanConcretePipelineSequentialExternalInputSizePolynomialFormalized: true,
+  leanConcretePipelineSequentialStuckFirstTimeoutFormalized: true,
   leanConcretePipelineRuleTableCompositionFormalized: true,
   leanConcretePipelineStageBridgesFormalized: true,
   leanConcretePipelineStageBridgesAxiomAuditPassed: true,
@@ -438,7 +447,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-14-SEQUENTIAL-NAMESPACE-29',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-14-SEQUENTIAL-COMPILER-30',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -572,6 +581,12 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanConcretePipelineSequentialNamespaceFormalized: true,
       leanConcretePipelineSequentialNamespaceAxiomAuditPassed: true,
       leanConcretePipelineSequentialNamespaceAuditedDeclarationCount: 26,
+      leanConcretePipelineSequentialCompilationFormalized: true,
+      leanConcretePipelineSequentialCompilerAxiomAuditPassed: true,
+      leanConcretePipelineSequentialCompilerAuditedDeclarationCount: 31,
+      leanConcretePipelineSequentialVerdictAndOutputPreservationFormalized: true,
+      leanConcretePipelineSequentialExternalInputSizePolynomialFormalized: true,
+      leanConcretePipelineSequentialStuckFirstTimeoutFormalized: true,
       leanConcretePipelineRuleTableCompositionFormalized: true,
       leanConcretePipelineStageBridgesFormalized: true,
       leanConcretePipelineStageBridgesAxiomAuditPassed: true,
@@ -737,7 +752,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-14-30',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-14-31',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

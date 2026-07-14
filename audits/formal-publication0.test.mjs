@@ -129,12 +129,15 @@ test('publication consumes the reviewed all-input compiler map and inventory cou
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '857ec9ba51d53a52ad77dd3be3098cdf16de0a3eacefb79c0dfa4e6e812dd587');
+    '5b50407c8ea3537d05f39400c0834b44f9653746995b26c1c8a7581833cc9cf0');
   assert.equal(map.milestoneSourceClosureSha256,
-    '7f886156b0ae16e0a04b8b16b4febd593033bb4dadd61c3684d422b19f393a9e');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 178);
+    '6d99522905d644f0e13d06b7c89646a40a753b082c8e1549fa260e1080995092');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 193);
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.PipelineCompiler.pipeline_correct'
+  ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.PipelineSequentialCompiler.sequential_correct'
   ], 'string');
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,
@@ -149,7 +152,7 @@ test('publication consumes the reviewed all-input compiler map and inventory cou
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [5265, 2245, 2144, 1036, 50]);
+  ], [5301, 2273, 2172, 1042, 51]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

@@ -294,10 +294,11 @@ test('framer milestone remains local and the concrete publication gate remains c
   assert.match(foundation.scope, /exactly 4 work steps on empty input/u);
   assert.match(foundation.scope, /6 \* m \* m \+ 39 \* m \+ 75/u);
   assert.match(foundation.scope, /PipelineCompiler uses the same terminal-bridge rule table/u);
-  assert.match(foundation.scope, /R\(m\) = totalInputFramerRawTimeBound\(m\)/u);
-  assert.match(foundation.scope, /29 audited declarations with empty axiom closure/u);
-  assert.match(foundation.nonClaim, /transports every raw bitstring/u);
-  assert.match(foundation.nonClaim, /raw-refinement composition/u);
+  assert.match(foundation.scope,
+    /R\(m\) = PipelineRaw\(p\)\(m\) \+ 6 \+ PipelineRaw\(q\)\(m \+ p\(m\) \+ 1\)/u);
+  assert.match(foundation.scope, /31 public declarations have empty axiom closure/u);
+  assert.match(foundation.nonClaim, /composes two already-raw proof-bearing targets/u);
+  assert.match(foundation.nonClaim, /recursive raw-refinement constructors/u);
   assert.equal(map.gate.standardComplexityModelEligible, false);
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,
