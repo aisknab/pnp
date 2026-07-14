@@ -5,10 +5,30 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'b421a09f5a5baff537cc67cc848ce2500ae3995f79dcdb18bcb917a8c765f36f';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'a7e386a31215e2282ff22f791399605af77a67bb2cf240ab21332d81599b8b40';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
+  'PNP.Concrete.CookLevin.VariableLayout.certificateBitVariable_lt_variableCount',
+  'PNP.Concrete.CookLevin.VariableLayout.certificateBitVariable_ne_certificateLengthVariable',
+  'PNP.Concrete.CookLevin.VariableLayout.certificateLengthVariable_lt_variableCount',
+  'PNP.Concrete.CookLevin.VariableLayout.headVariable_lt_variableCount',
+  'PNP.Concrete.CookLevin.VariableLayout.headVariable_ne_stateVariable',
+  'PNP.Concrete.CookLevin.VariableLayout.stateVariable_lt_variableCount',
+  'PNP.Concrete.CookLevin.VariableLayout.stateVariable_ne_certificateBitVariable',
+  'PNP.Concrete.CookLevin.VariableLayout.symbolVariable_lt_variableCount',
+  'PNP.Concrete.CookLevin.VariableLayout.symbolVariable_ne_headVariable',
+  'PNP.Concrete.CookLevin.atLeastOneClause_satisfied_iff',
+  'PNP.Concrete.CookLevin.eval_encodedInputPolynomial',
+  'PNP.Concrete.CookLevin.eval_tapeWidthPolynomial',
+  'PNP.Concrete.CookLevin.excludePairClause_not_satisfied_of_both_true',
+  'PNP.Concrete.CookLevin.machine_acceptState_lt_bound',
+  'PNP.Concrete.CookLevin.machine_rejectState_lt_bound',
+  'PNP.Concrete.CookLevin.machine_startState_lt_bound',
+  'PNP.Concrete.CookLevin.rule_source_lt_machineStateBound',
+  'PNP.Concrete.CookLevin.rule_target_lt_machineStateBound',
+  'PNP.Concrete.CookLevin.run_pad_of_halted',
+  'PNP.Concrete.CookLevin.run_pad_of_stuck',
   'PNP.Concrete.DecisionProgram.RawRefinement.compile_haltsWithin',
   'PNP.Concrete.DecisionProgram.RawRefinement.compile_verdict_eq',
   'PNP.Concrete.FinalUniversalDesign.cnfCompiled_accept_iff_check',
@@ -239,7 +259,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-14-32') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-14-33') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -513,7 +533,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-14-32') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-14-33') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
@@ -531,7 +551,7 @@ function validatePublicationMap0(map) {
     'expectedRootKernelTypeSha256',
     'expectedAxiomClosureSha256',
     'expectedSourceClosureSha256',
-  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 32`);
+  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 33`);
   if (!isSha2560(map.milestoneSourceClosureSha256)
       || !isObject0(map.earnedMilestoneTheoremKernelTypeSha256)) {
     throw new Error('reviewed milestone theorem/source fingerprints are missing');
@@ -550,7 +570,7 @@ function validatePublicationMap0(map) {
     throw new Error('reviewed milestone theorem kernel-type fingerprint inventory mismatch');
   }
   if (sha256Text0(stableStringify0(map)) !== REQUIRED_PUBLICATION_MAP_SHA2560) {
-    throw new Error('formal publication milestone map drifted from the reviewed release-32 specification');
+    throw new Error('formal publication milestone map drifted from the reviewed release-33 specification');
   }
 }
 

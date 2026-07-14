@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-14-32",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-14-33",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,9 +17,29 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "4fa4576322602277c9f7caffca38e0f2132b2576da1b25fe2625885d55aafb67",
+  "milestoneSourceClosureSha256": "7a6a8e827ec198449d9422579e5933bcdd0e86d4f3499cd408eb095f36f6b4b3",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
+    "PNP.Concrete.CookLevin.VariableLayout.certificateBitVariable_lt_variableCount": "34d87d731566df6a2f0f27d8d144758bccbd3956200134f2283e01002997c15e",
+    "PNP.Concrete.CookLevin.VariableLayout.certificateBitVariable_ne_certificateLengthVariable": "64abf1907a702826012ce0e400eed255b9ceca87fbc962fe96101d3f5fc77a86",
+    "PNP.Concrete.CookLevin.VariableLayout.certificateLengthVariable_lt_variableCount": "24d2dbec0fbbdf56fb13e28a7507da6a7e090e00467659fee7efa47676108465",
+    "PNP.Concrete.CookLevin.VariableLayout.headVariable_lt_variableCount": "183d5d5df2f001a6b30148a2b0ad67cb82126c1d9b470ba418e1dd8b8a0ec803",
+    "PNP.Concrete.CookLevin.VariableLayout.headVariable_ne_stateVariable": "74d5bb8f47d0e589a97d08f746c3e679e2bdf54383b9c10653792962c00eeff2",
+    "PNP.Concrete.CookLevin.VariableLayout.stateVariable_lt_variableCount": "4272ecf8b0760dee605bfa8347d784fa892da7bdaf41ffb11351b7a7d32d0677",
+    "PNP.Concrete.CookLevin.VariableLayout.stateVariable_ne_certificateBitVariable": "19919480965833927df246adb67d54b34f88202747bc6ea51652f6cb472b5f5a",
+    "PNP.Concrete.CookLevin.VariableLayout.symbolVariable_lt_variableCount": "847f0f8166ab0eeaace0b5d862e03caad19974cc4eccac086512efc463b66735",
+    "PNP.Concrete.CookLevin.VariableLayout.symbolVariable_ne_headVariable": "db65783d0ee02f45ffc050ffaf3f38fedd91c0a2c9d5e41261f7d67a9d7d1231",
+    "PNP.Concrete.CookLevin.atLeastOneClause_satisfied_iff": "75c0347a2a50292afbf475b83655688fd926101bba87bedb79aa6f0b545ada43",
+    "PNP.Concrete.CookLevin.eval_encodedInputPolynomial": "b541a38f9211d7b9850cf0aac39df343a19f089c0b5ba966253f0a9c039cf3de",
+    "PNP.Concrete.CookLevin.eval_tapeWidthPolynomial": "e11b510a5173422b0e11fe9ab0a06fbe34e54029d6df754c7626a2f5e1068e71",
+    "PNP.Concrete.CookLevin.excludePairClause_not_satisfied_of_both_true": "f5bb0180b1d6d290cbf3b9a25f7ca76067cda3e6b8dfbceef985388164e231c4",
+    "PNP.Concrete.CookLevin.machine_acceptState_lt_bound": "7e829e8f08e558b7ab6fa4dbb3a160792eb5cf5ac5feca10372ad94560f77a07",
+    "PNP.Concrete.CookLevin.machine_rejectState_lt_bound": "26880be07568cdeaff339af2b99b73c2f05f8a95fde2f84d21c9b10befb3d5c3",
+    "PNP.Concrete.CookLevin.machine_startState_lt_bound": "61100c5ecd78076b9283719da5caed9669ca4b49855a6d96fce1a8e734988bd8",
+    "PNP.Concrete.CookLevin.rule_source_lt_machineStateBound": "6df11a17f2edcca48c7681e897da512db973e31bb3c3221e937fca49e50907fe",
+    "PNP.Concrete.CookLevin.rule_target_lt_machineStateBound": "8f106504927efb4de31aa9350dca7cdc650891c3080d12cda5f15e776979d631",
+    "PNP.Concrete.CookLevin.run_pad_of_halted": "13dcbedb868887207e2fc02525025caa8d399c1194bf7eac2930a270b1b40120",
+    "PNP.Concrete.CookLevin.run_pad_of_stuck": "0b8bf676d6bdd8562a5045681a5e0e687af8acc7b62e7851788de0a98ca0b72b",
     "PNP.Concrete.DecisionProgram.RawRefinement.compile_haltsWithin": "4057fc9d48be85dd7f961ce7acf5bef68ddb4ed0c8b6798617b31deb9da8c7c5",
     "PNP.Concrete.DecisionProgram.RawRefinement.compile_verdict_eq": "8b390dd6677d6e789499b7b713855652a5e1db2c64809ddf43d079deb4099965",
     "PNP.Concrete.FinalUniversalDesign.cnfCompiled_accept_iff_check": "4a8661d567079e1f47c288b8a36805a20ac7040338d84325723079f3fada4efa",
@@ -421,6 +441,35 @@
         "PNP.Concrete.FinalUniversalDesign.formulaGrammarOutcome"
       ],
       "nonClaim": "This proves CNF-SAT membership in NP only; it does not prove CNF-SAT is in P, NP-completeness, or P = NP."
+    },
+    {
+      "id": "concrete-cook-levin-layout",
+      "title": "Concrete Cook-Levin dimensions and variable layout",
+      "classification": "formalized-foundation-only",
+      "scope": "Fuel padding preserves designated halts and stuck timeouts; every literal machine state is below an explicit finite ceiling; the input, time, and tape dimensions are executable NatPolynomial expressions; and tape-symbol, head, state, certificate-bit, and certificate-length variables occupy proved disjoint in-range blocks. Elementary at-least-one and pair-exclusion CNF clauses have exact propositional semantics. All 20 reviewed theorems have empty axiom closure.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.VariableLayout.certificateBitVariable_lt_variableCount",
+        "PNP.Concrete.CookLevin.VariableLayout.certificateBitVariable_ne_certificateLengthVariable",
+        "PNP.Concrete.CookLevin.VariableLayout.certificateLengthVariable_lt_variableCount",
+        "PNP.Concrete.CookLevin.VariableLayout.headVariable_lt_variableCount",
+        "PNP.Concrete.CookLevin.VariableLayout.headVariable_ne_stateVariable",
+        "PNP.Concrete.CookLevin.VariableLayout.stateVariable_lt_variableCount",
+        "PNP.Concrete.CookLevin.VariableLayout.stateVariable_ne_certificateBitVariable",
+        "PNP.Concrete.CookLevin.VariableLayout.symbolVariable_lt_variableCount",
+        "PNP.Concrete.CookLevin.VariableLayout.symbolVariable_ne_headVariable",
+        "PNP.Concrete.CookLevin.atLeastOneClause_satisfied_iff",
+        "PNP.Concrete.CookLevin.eval_encodedInputPolynomial",
+        "PNP.Concrete.CookLevin.eval_tapeWidthPolynomial",
+        "PNP.Concrete.CookLevin.excludePairClause_not_satisfied_of_both_true",
+        "PNP.Concrete.CookLevin.machine_acceptState_lt_bound",
+        "PNP.Concrete.CookLevin.machine_rejectState_lt_bound",
+        "PNP.Concrete.CookLevin.machine_startState_lt_bound",
+        "PNP.Concrete.CookLevin.rule_source_lt_machineStateBound",
+        "PNP.Concrete.CookLevin.rule_target_lt_machineStateBound",
+        "PNP.Concrete.CookLevin.run_pad_of_halted",
+        "PNP.Concrete.CookLevin.run_pad_of_stuck"
+      ],
+      "nonClaim": "This is the finite layout substrate only. It does not yet construct a transition tableau, prove tableau soundness or completeness, compile a formula emitter, define a polynomial reduction to CNFSAT, or establish CNFSAT NP-completeness, CNFSAT in P, or P = NP."
     },
     {
       "id": "direct-wire-semantics",
