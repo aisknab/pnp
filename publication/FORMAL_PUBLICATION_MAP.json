@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-14-33",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-14-34",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,9 +17,12 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "7a6a8e827ec198449d9422579e5933bcdd0e86d4f3499cd408eb095f36f6b4b3",
+  "milestoneSourceClosureSha256": "6139040080662d4ac136e19a1379f751c0492107ed7f264f9ec57b7304fe247c",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
+    "PNP.Concrete.CookLevin.FixedTableauInstance.exists_accepting_iff_boundedDecide_accept": "15748139f6108728bea8db01a2b72e6a8b90824eef0cea4b4b0d315d6ad044ab",
+    "PNP.Concrete.CookLevin.FixedTableauInstance.tableauVerdict_of_valid": "f6ecc5ce14c577602cccc5c9a803997d1cec8496d93b5e217b7ab6dd52ff1067",
+    "PNP.Concrete.CookLevin.FixedTableauInstance.valid_iff_eq_canonical": "abd3746c15d3ad1b61b4122e9df8de0765718ce0058771728f5b6c6bcbc04998",
     "PNP.Concrete.CookLevin.VariableLayout.certificateBitVariable_lt_variableCount": "34d87d731566df6a2f0f27d8d144758bccbd3956200134f2283e01002997c15e",
     "PNP.Concrete.CookLevin.VariableLayout.certificateBitVariable_ne_certificateLengthVariable": "64abf1907a702826012ce0e400eed255b9ceca87fbc962fe96101d3f5fc77a86",
     "PNP.Concrete.CookLevin.VariableLayout.certificateLengthVariable_lt_variableCount": "24d2dbec0fbbdf56fb13e28a7507da6a7e090e00467659fee7efa47676108465",
@@ -30,6 +33,7 @@
     "PNP.Concrete.CookLevin.VariableLayout.symbolVariable_lt_variableCount": "847f0f8166ab0eeaace0b5d862e03caad19974cc4eccac086512efc463b66735",
     "PNP.Concrete.CookLevin.VariableLayout.symbolVariable_ne_headVariable": "db65783d0ee02f45ffc050ffaf3f38fedd91c0a2c9d5e41261f7d67a9d7d1231",
     "PNP.Concrete.CookLevin.atLeastOneClause_satisfied_iff": "75c0347a2a50292afbf475b83655688fd926101bba87bedb79aa6f0b545ada43",
+    "PNP.Concrete.CookLevin.canonicalTableau_valid": "98802a6e4342f2f43375dec2ac884b2db004185053e6981af40712704bf8e4dd",
     "PNP.Concrete.CookLevin.eval_encodedInputPolynomial": "b541a38f9211d7b9850cf0aac39df343a19f089c0b5ba966253f0a9c039cf3de",
     "PNP.Concrete.CookLevin.eval_tapeWidthPolynomial": "e11b510a5173422b0e11fe9ab0a06fbe34e54029d6df754c7626a2f5e1068e71",
     "PNP.Concrete.CookLevin.excludePairClause_not_satisfied_of_both_true": "f5bb0180b1d6d290cbf3b9a25f7ca76067cda3e6b8dfbceef985388164e231c4",
@@ -40,6 +44,10 @@
     "PNP.Concrete.CookLevin.rule_target_lt_machineStateBound": "8f106504927efb4de31aa9350dca7cdc650891c3080d12cda5f15e776979d631",
     "PNP.Concrete.CookLevin.run_pad_of_halted": "13dcbedb868887207e2fc02525025caa8d399c1194bf7eac2930a270b1b40120",
     "PNP.Concrete.CookLevin.run_pad_of_stuck": "0b8bf676d6bdd8562a5045681a5e0e687af8acc7b62e7851788de0a98ca0b72b",
+    "PNP.Concrete.CookLevin.run_succ_eq_run_advance": "205d8436f6de13712c2ffe7365523496bb84bda859c27b30db06ba589ff4b4f0",
+    "PNP.Concrete.CookLevin.tableauEndpoint_of_valid": "e345602084cebf67acf1caa10f05549532e56b7beefd10370645871fa50a98f0",
+    "PNP.Concrete.CookLevin.trace_length": "1be8329e0a2fca8500ca0cd46085cc75fd77a6203e7478d3428d981a9049d9c9",
+    "PNP.Concrete.CookLevin.validTableau_iff_eq_trace": "3cb083e99e5dc76a4336a2f532be76cedf25221e6352943bff6119bf4d442d4d",
     "PNP.Concrete.DecisionProgram.RawRefinement.compile_haltsWithin": "4057fc9d48be85dd7f961ce7acf5bef68ddb4ed0c8b6798617b31deb9da8c7c5",
     "PNP.Concrete.DecisionProgram.RawRefinement.compile_verdict_eq": "8b390dd6677d6e789499b7b713855652a5e1db2c64809ddf43d079deb4099965",
     "PNP.Concrete.FinalUniversalDesign.cnfCompiled_accept_iff_check": "4a8661d567079e1f47c288b8a36805a20ac7040338d84325723079f3fada4efa",
@@ -470,6 +478,23 @@
         "PNP.Concrete.CookLevin.run_pad_of_stuck"
       ],
       "nonClaim": "This is the finite layout substrate only. It does not yet construct a transition tableau, prove tableau soundness or completeness, compile a formula emitter, define a polynomial reduction to CNFSAT, or establish CNFSAT NP-completeness, CNFSAT in P, or P = NP."
+    },
+    {
+      "id": "concrete-cook-levin-fixed-tableau",
+      "title": "Concrete fixed-certificate execution tableau",
+      "classification": "formalized-foundation-only",
+      "scope": "For one fixed source input, certificate, finite-rule machine, and fuel budget, the canonical raw execution trace has exactly fuel + 1 configurations. Intrinsic first-match transition validity is equivalent to equality with that trace, every valid endpoint equals the ordinary run endpoint, and accept/reject/timeout verdicts agree exactly with boundedDecide. All 30 declarations and eight reviewed theorem types have empty axiom closure.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.FixedTableauInstance.exists_accepting_iff_boundedDecide_accept",
+        "PNP.Concrete.CookLevin.FixedTableauInstance.tableauVerdict_of_valid",
+        "PNP.Concrete.CookLevin.FixedTableauInstance.valid_iff_eq_canonical",
+        "PNP.Concrete.CookLevin.canonicalTableau_valid",
+        "PNP.Concrete.CookLevin.run_succ_eq_run_advance",
+        "PNP.Concrete.CookLevin.tableauEndpoint_of_valid",
+        "PNP.Concrete.CookLevin.trace_length",
+        "PNP.Concrete.CookLevin.validTableau_iff_eq_trace"
+      ],
+      "nonClaim": "This is the semantic fixed-certificate tableau only. It does not yet quantify a variable certificate, encode tape windows or tableau rows as CNF, compile a formula emitter, define a polynomial reduction to CNFSAT, or establish CNFSAT NP-completeness, CNFSAT in P, or P = NP."
     },
     {
       "id": "direct-wire-semantics",

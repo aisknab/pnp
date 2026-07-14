@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-14-33');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-14-34');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -186,13 +186,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the recursive refinement inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 5527);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 2353);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 2249);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 5598);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 2376);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 2271);
   assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 1042);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 52);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 53);
   assert.equal(status.leanSourceClosureSha256,
-    '7a6a8e827ec198449d9422579e5933bcdd0e86d4f3499cd408eb095f36f6b4b3');
+    '6139040080662d4ac136e19a1379f751c0492107ed7f264f9ec57b7304fe247c');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -409,7 +409,7 @@ test('formal reconstruction status pins the recursive refinement inventory and s
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-14-COOK-LEVIN-LAYOUT-32');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-14-COOK-LEVIN-TABLEAU-33');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);

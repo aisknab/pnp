@@ -64,7 +64,11 @@ private def isProjectDeclaration (env : Environment) (name : Name) : Bool :=
 
 private def reviewedMilestoneTheoremNames : Array Name := #[
   `PNP.Concrete.BitString.decodePair_pair,
+  `PNP.Concrete.CookLevin.FixedTableauInstance.exists_accepting_iff_boundedDecide_accept,
+  `PNP.Concrete.CookLevin.FixedTableauInstance.tableauVerdict_of_valid,
+  `PNP.Concrete.CookLevin.FixedTableauInstance.valid_iff_eq_canonical,
   `PNP.Concrete.CookLevin.atLeastOneClause_satisfied_iff,
+  `PNP.Concrete.CookLevin.canonicalTableau_valid,
   `PNP.Concrete.CookLevin.eval_encodedInputPolynomial,
   `PNP.Concrete.CookLevin.eval_tapeWidthPolynomial,
   `PNP.Concrete.CookLevin.excludePairClause_not_satisfied_of_both_true,
@@ -75,6 +79,10 @@ private def reviewedMilestoneTheoremNames : Array Name := #[
   `PNP.Concrete.CookLevin.rule_target_lt_machineStateBound,
   `PNP.Concrete.CookLevin.run_pad_of_halted,
   `PNP.Concrete.CookLevin.run_pad_of_stuck,
+  `PNP.Concrete.CookLevin.run_succ_eq_run_advance,
+  `PNP.Concrete.CookLevin.tableauEndpoint_of_valid,
+  `PNP.Concrete.CookLevin.trace_length,
+  `PNP.Concrete.CookLevin.validTableau_iff_eq_trace,
   `PNP.Concrete.CookLevin.VariableLayout.symbolVariable_ne_headVariable,
   `PNP.Concrete.CookLevin.VariableLayout.headVariable_ne_stateVariable,
   `PNP.Concrete.CookLevin.VariableLayout.stateVariable_ne_certificateBitVariable,
@@ -339,7 +347,7 @@ private def inventory : CommandElabM Json := do
   return Json.mkObj [
     ("kind", toJson "PNPLeanTheoremInventory0"),
     ("version", toJson 0),
-    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-07-14-33"),
+    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-07-14-34"),
     ("leanToolchain", toJson "leanprover/lean4:v4.31.0"),
     ("rootModule", toJson "PNP"),
     ("environmentProbeComplete", toJson true),

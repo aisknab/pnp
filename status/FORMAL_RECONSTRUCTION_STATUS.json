@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-14-33",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-14-34",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -162,7 +162,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-14-COOK-LEVIN-LAYOUT-32",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-14-COOK-LEVIN-TABLEAU-33",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -464,7 +464,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "7a6a8e827ec198449d9422579e5933bcdd0e86d4f3499cd408eb095f36f6b4b3",
+    "actualSourceClosureSha256": "6139040080662d4ac136e19a1379f751c0492107ed7f264f9ec57b7304fe247c",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -494,22 +494,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-14-33",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-14-34",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "33c30b1f0b2340488fa3eaf60ee2f2516ca0bb4589deccb153af60cbc8fb114c",
+  "leanTheoremInventorySha256": "691d04b6d59b06328e287ec877a930ed3aebab8ee4192db63e106358362ab5cc",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 5527,
+  "leanTheoremInventoryDeclarationCount": 5598,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 1042,
-  "leanTheoremInventoryTheoremCount": 2353,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 2249,
-  "leanTheoremInventorySourceClosureModuleCount": 52,
-  "leanSourceClosureSha256": "7a6a8e827ec198449d9422579e5933bcdd0e86d4f3499cd408eb095f36f6b4b3",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-14-33",
+  "leanTheoremInventoryTheoremCount": 2376,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 2271,
+  "leanTheoremInventorySourceClosureModuleCount": 53,
+  "leanSourceClosureSha256": "6139040080662d4ac136e19a1379f751c0492107ed7f264f9ec57b7304fe247c",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-14-34",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "7c8beaeb2c87a8663bb6a918eff24c5959148ba40829b6c36dc163f2b5d46880",
+  "formalPublicationMapSha256": "f3d3e62c9b4e40229947c76acb9de1ac63a622617b4f0f325b1be479968ce4e5",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",
@@ -2540,6 +2540,103 @@
       "status": "formalized-foundation-only"
     },
     {
+      "id": "concrete-cook-levin-fixed-tableau",
+      "title": "Concrete fixed-certificate execution tableau",
+      "classification": "formalized-foundation-only",
+      "scope": "For one fixed source input, certificate, finite-rule machine, and fuel budget, the canonical raw execution trace has exactly fuel + 1 configurations. Intrinsic first-match transition validity is equivalent to equality with that trace, every valid endpoint equals the ordinary run endpoint, and accept/reject/timeout verdicts agree exactly with boundedDecide. All 30 declarations and eight reviewed theorem types have empty axiom closure.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.FixedTableauInstance.exists_accepting_iff_boundedDecide_accept",
+        "PNP.Concrete.CookLevin.FixedTableauInstance.tableauVerdict_of_valid",
+        "PNP.Concrete.CookLevin.FixedTableauInstance.valid_iff_eq_canonical",
+        "PNP.Concrete.CookLevin.canonicalTableau_valid",
+        "PNP.Concrete.CookLevin.run_succ_eq_run_advance",
+        "PNP.Concrete.CookLevin.tableauEndpoint_of_valid",
+        "PNP.Concrete.CookLevin.trace_length",
+        "PNP.Concrete.CookLevin.validTableau_iff_eq_trace"
+      ],
+      "nonClaim": "This is the semantic fixed-certificate tableau only. It does not yet quantify a variable certificate, encode tape windows or tableau rows as CNF, compile a formula emitter, define a polynomial reduction to CNFSAT, or establish CNFSAT NP-completeness, CNFSAT in P, or P = NP.",
+      "theoremRows": [
+        {
+          "name": "PNP.Concrete.CookLevin.FixedTableauInstance.exists_accepting_iff_boundedDecide_accept",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "15748139f6108728bea8db01a2b72e6a8b90824eef0cea4b4b0d315d6ad044ab",
+          "expectedKernelTypeSha256": "15748139f6108728bea8db01a2b72e6a8b90824eef0cea4b4b0d315d6ad044ab",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.FixedTableauInstance.tableauVerdict_of_valid",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "f6ecc5ce14c577602cccc5c9a803997d1cec8496d93b5e217b7ab6dd52ff1067",
+          "expectedKernelTypeSha256": "f6ecc5ce14c577602cccc5c9a803997d1cec8496d93b5e217b7ab6dd52ff1067",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.FixedTableauInstance.valid_iff_eq_canonical",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "abd3746c15d3ad1b61b4122e9df8de0765718ce0058771728f5b6c6bcbc04998",
+          "expectedKernelTypeSha256": "abd3746c15d3ad1b61b4122e9df8de0765718ce0058771728f5b6c6bcbc04998",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.canonicalTableau_valid",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "98802a6e4342f2f43375dec2ac884b2db004185053e6981af40712704bf8e4dd",
+          "expectedKernelTypeSha256": "98802a6e4342f2f43375dec2ac884b2db004185053e6981af40712704bf8e4dd",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.run_succ_eq_run_advance",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "205d8436f6de13712c2ffe7365523496bb84bda859c27b30db06ba589ff4b4f0",
+          "expectedKernelTypeSha256": "205d8436f6de13712c2ffe7365523496bb84bda859c27b30db06ba589ff4b4f0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.tableauEndpoint_of_valid",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "e345602084cebf67acf1caa10f05549532e56b7beefd10370645871fa50a98f0",
+          "expectedKernelTypeSha256": "e345602084cebf67acf1caa10f05549532e56b7beefd10370645871fa50a98f0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.trace_length",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "1be8329e0a2fca8500ca0cd46085cc75fd77a6203e7478d3428d981a9049d9c9",
+          "expectedKernelTypeSha256": "1be8329e0a2fca8500ca0cd46085cc75fd77a6203e7478d3428d981a9049d9c9",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.validTableau_iff_eq_trace",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "3cb083e99e5dc76a4336a2f532be76cedf25221e6352943bff6119bf4d442d4d",
+          "expectedKernelTypeSha256": "3cb083e99e5dc76a4336a2f532be76cedf25221e6352943bff6119bf4d442d4d",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
+    },
+    {
       "id": "direct-wire-semantics",
       "title": "Typed direct-wire NAND semantics",
       "classification": "formalized",
@@ -2953,7 +3050,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-14-33",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-14-34",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true
