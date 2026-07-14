@@ -104,7 +104,7 @@ concrete-gate activation fingerprints.
 
 The formal status, public status mirror, TeX report, and PDF report are generated from the checked
 inventory and publication map. The root
-[`canonical_proof_report.pdf`](../canonical_proof_report.pdf) is the current concise nine-page formal
+[`canonical_proof_report.pdf`](../canonical_proof_report.pdf) is the current concise thirteen-page formal
 reconstruction report. It is a non-activation report, not the historical claim manuscript. The
 historical 56-page claim artifact is available only through the pinned legacy source coordinate;
 its immutable coordinates are recorded under [`archive/legacy-v0/`](../archive/legacy-v0/README.md).

@@ -56,9 +56,11 @@
   \vspace{0.3cm}
   Public theorem emission is disabled. A direct finite raw-machine verifier now proves concrete
   CNF-SAT membership in NP with an explicit polynomial bound. It does not prove CNF-SAT in P,
-  NP-hardness, NP-completeness, or $P=NP$. The general charged pipeline has not been linked to the
-  raw machine kernel, its reviewed activation fingerprints are unset, and no root theorem exists.
-  The abstract string-handle bridge is never an activation source.
+  NP-hardness, NP-completeness, or $P=NP$. The general charged pipeline is linked to the raw machine
+  kernel, and the Cook--Levin formula has an external encoded-size polynomial, but there is no raw
+  polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation
+  fingerprints are unset and no root theorem exists. The abstract string-handle bridge is never an
+  activation source.
   \vspace{0.3cm}
   \end{minipage}
 }
@@ -99,6 +101,12 @@ assignment certificate. Lean proves universal acceptance equivalence, rejection 
 absence of timeout at its explicit polynomial fuel bound, and constructs a proof-bearing
 \code{PolynomialTimeVerifier CNFSAT}. Thus \code{PNP.Concrete.CNFSAT} is in the concrete NP class.
 This is a verifier theorem, not a deterministic polynomial-time SAT algorithm.
+
+The concrete Cook--Levin development proves that the generated CNF formula is semantically
+equivalent to ordinary raw verifier execution in both input modes. It now also bounds the actual
+canonical unary-indexed formula encoding by an explicit fixed-verifier polynomial evaluated only at
+external source-input length. That output-size theorem does not execute the formula builder as a raw
+finite machine, prove its construction runtime, or package a concrete polynomial reduction.
 
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
