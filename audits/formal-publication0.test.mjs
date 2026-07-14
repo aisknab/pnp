@@ -103,6 +103,8 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
     'formalized-np-membership-only');
+  assert.equal(byId.get('concrete-cook-levin-layout').status,
+    'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').requiredTheorems.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP'), true);
   assert.match(byId.get('concrete-cnf-universal-verifier').nonClaim,
@@ -130,10 +132,10 @@ test('publication consumes the reviewed recursive-refinement map and inventory c
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'b421a09f5a5baff537cc67cc848ce2500ae3995f79dcdb18bcb917a8c765f36f');
+    'a7e386a31215e2282ff22f791399605af77a67bb2cf240ab21332d81599b8b40');
   assert.equal(map.milestoneSourceClosureSha256,
-    '4fa4576322602277c9f7caffca38e0f2132b2576da1b25fe2625885d55aafb67');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 198);
+    '7a6a8e827ec198449d9422579e5933bcdd0e86d4f3499cd408eb095f36f6b4b3');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 218);
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.PipelineCompiler.pipeline_correct'
   ], 'string');
@@ -156,7 +158,7 @@ test('publication consumes the reviewed recursive-refinement map and inventory c
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [5323, 2282, 2181, 1042, 51]);
+  ], [5527, 2353, 2249, 1042, 52]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

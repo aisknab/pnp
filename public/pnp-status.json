@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-14-32",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-14-33",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -162,7 +162,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-14-RAW-REFINEMENT-31",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-14-COOK-LEVIN-LAYOUT-32",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -464,7 +464,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "4fa4576322602277c9f7caffca38e0f2132b2576da1b25fe2625885d55aafb67",
+    "actualSourceClosureSha256": "7a6a8e827ec198449d9422579e5933bcdd0e86d4f3499cd408eb095f36f6b4b3",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -494,22 +494,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-14-32",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-14-33",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "f9bbb4c9aa21a72221d20e9327b900dd37a6cc62ea2919b5fc1a20dee1776921",
+  "leanTheoremInventorySha256": "33c30b1f0b2340488fa3eaf60ee2f2516ca0bb4589deccb153af60cbc8fb114c",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 5323,
+  "leanTheoremInventoryDeclarationCount": 5527,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 1042,
-  "leanTheoremInventoryTheoremCount": 2282,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 2181,
-  "leanTheoremInventorySourceClosureModuleCount": 51,
-  "leanSourceClosureSha256": "4fa4576322602277c9f7caffca38e0f2132b2576da1b25fe2625885d55aafb67",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-14-32",
+  "leanTheoremInventoryTheoremCount": 2353,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 2249,
+  "leanTheoremInventorySourceClosureModuleCount": 52,
+  "leanSourceClosureSha256": "7a6a8e827ec198449d9422579e5933bcdd0e86d4f3499cd408eb095f36f6b4b3",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-14-33",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "6dcbb3aa9fdb7b782b7362f01e3c0bbb5a683f2447015b7d7abc0875dfc53fb0",
+  "formalPublicationMapSha256": "7c8beaeb2c87a8663bb6a918eff24c5959148ba40829b6c36dc163f2b5d46880",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",
@@ -2323,6 +2323,223 @@
       "status": "formalized-np-membership-only"
     },
     {
+      "id": "concrete-cook-levin-layout",
+      "title": "Concrete Cook-Levin dimensions and variable layout",
+      "classification": "formalized-foundation-only",
+      "scope": "Fuel padding preserves designated halts and stuck timeouts; every literal machine state is below an explicit finite ceiling; the input, time, and tape dimensions are executable NatPolynomial expressions; and tape-symbol, head, state, certificate-bit, and certificate-length variables occupy proved disjoint in-range blocks. Elementary at-least-one and pair-exclusion CNF clauses have exact propositional semantics. All 20 reviewed theorems have empty axiom closure.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.VariableLayout.certificateBitVariable_lt_variableCount",
+        "PNP.Concrete.CookLevin.VariableLayout.certificateBitVariable_ne_certificateLengthVariable",
+        "PNP.Concrete.CookLevin.VariableLayout.certificateLengthVariable_lt_variableCount",
+        "PNP.Concrete.CookLevin.VariableLayout.headVariable_lt_variableCount",
+        "PNP.Concrete.CookLevin.VariableLayout.headVariable_ne_stateVariable",
+        "PNP.Concrete.CookLevin.VariableLayout.stateVariable_lt_variableCount",
+        "PNP.Concrete.CookLevin.VariableLayout.stateVariable_ne_certificateBitVariable",
+        "PNP.Concrete.CookLevin.VariableLayout.symbolVariable_lt_variableCount",
+        "PNP.Concrete.CookLevin.VariableLayout.symbolVariable_ne_headVariable",
+        "PNP.Concrete.CookLevin.atLeastOneClause_satisfied_iff",
+        "PNP.Concrete.CookLevin.eval_encodedInputPolynomial",
+        "PNP.Concrete.CookLevin.eval_tapeWidthPolynomial",
+        "PNP.Concrete.CookLevin.excludePairClause_not_satisfied_of_both_true",
+        "PNP.Concrete.CookLevin.machine_acceptState_lt_bound",
+        "PNP.Concrete.CookLevin.machine_rejectState_lt_bound",
+        "PNP.Concrete.CookLevin.machine_startState_lt_bound",
+        "PNP.Concrete.CookLevin.rule_source_lt_machineStateBound",
+        "PNP.Concrete.CookLevin.rule_target_lt_machineStateBound",
+        "PNP.Concrete.CookLevin.run_pad_of_halted",
+        "PNP.Concrete.CookLevin.run_pad_of_stuck"
+      ],
+      "nonClaim": "This is the finite layout substrate only. It does not yet construct a transition tableau, prove tableau soundness or completeness, compile a formula emitter, define a polynomial reduction to CNFSAT, or establish CNFSAT NP-completeness, CNFSAT in P, or P = NP.",
+      "theoremRows": [
+        {
+          "name": "PNP.Concrete.CookLevin.VariableLayout.certificateBitVariable_lt_variableCount",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "34d87d731566df6a2f0f27d8d144758bccbd3956200134f2283e01002997c15e",
+          "expectedKernelTypeSha256": "34d87d731566df6a2f0f27d8d144758bccbd3956200134f2283e01002997c15e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.VariableLayout.certificateBitVariable_ne_certificateLengthVariable",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "64abf1907a702826012ce0e400eed255b9ceca87fbc962fe96101d3f5fc77a86",
+          "expectedKernelTypeSha256": "64abf1907a702826012ce0e400eed255b9ceca87fbc962fe96101d3f5fc77a86",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.VariableLayout.certificateLengthVariable_lt_variableCount",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "24d2dbec0fbbdf56fb13e28a7507da6a7e090e00467659fee7efa47676108465",
+          "expectedKernelTypeSha256": "24d2dbec0fbbdf56fb13e28a7507da6a7e090e00467659fee7efa47676108465",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.VariableLayout.headVariable_lt_variableCount",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "183d5d5df2f001a6b30148a2b0ad67cb82126c1d9b470ba418e1dd8b8a0ec803",
+          "expectedKernelTypeSha256": "183d5d5df2f001a6b30148a2b0ad67cb82126c1d9b470ba418e1dd8b8a0ec803",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.VariableLayout.headVariable_ne_stateVariable",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "74d5bb8f47d0e589a97d08f746c3e679e2bdf54383b9c10653792962c00eeff2",
+          "expectedKernelTypeSha256": "74d5bb8f47d0e589a97d08f746c3e679e2bdf54383b9c10653792962c00eeff2",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.VariableLayout.stateVariable_lt_variableCount",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "4272ecf8b0760dee605bfa8347d784fa892da7bdaf41ffb11351b7a7d32d0677",
+          "expectedKernelTypeSha256": "4272ecf8b0760dee605bfa8347d784fa892da7bdaf41ffb11351b7a7d32d0677",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.VariableLayout.stateVariable_ne_certificateBitVariable",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "19919480965833927df246adb67d54b34f88202747bc6ea51652f6cb472b5f5a",
+          "expectedKernelTypeSha256": "19919480965833927df246adb67d54b34f88202747bc6ea51652f6cb472b5f5a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.VariableLayout.symbolVariable_lt_variableCount",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "847f0f8166ab0eeaace0b5d862e03caad19974cc4eccac086512efc463b66735",
+          "expectedKernelTypeSha256": "847f0f8166ab0eeaace0b5d862e03caad19974cc4eccac086512efc463b66735",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.VariableLayout.symbolVariable_ne_headVariable",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "db65783d0ee02f45ffc050ffaf3f38fedd91c0a2c9d5e41261f7d67a9d7d1231",
+          "expectedKernelTypeSha256": "db65783d0ee02f45ffc050ffaf3f38fedd91c0a2c9d5e41261f7d67a9d7d1231",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.atLeastOneClause_satisfied_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "75c0347a2a50292afbf475b83655688fd926101bba87bedb79aa6f0b545ada43",
+          "expectedKernelTypeSha256": "75c0347a2a50292afbf475b83655688fd926101bba87bedb79aa6f0b545ada43",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.eval_encodedInputPolynomial",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "b541a38f9211d7b9850cf0aac39df343a19f089c0b5ba966253f0a9c039cf3de",
+          "expectedKernelTypeSha256": "b541a38f9211d7b9850cf0aac39df343a19f089c0b5ba966253f0a9c039cf3de",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.eval_tapeWidthPolynomial",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "e11b510a5173422b0e11fe9ab0a06fbe34e54029d6df754c7626a2f5e1068e71",
+          "expectedKernelTypeSha256": "e11b510a5173422b0e11fe9ab0a06fbe34e54029d6df754c7626a2f5e1068e71",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.excludePairClause_not_satisfied_of_both_true",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "f5bb0180b1d6d290cbf3b9a25f7ca76067cda3e6b8dfbceef985388164e231c4",
+          "expectedKernelTypeSha256": "f5bb0180b1d6d290cbf3b9a25f7ca76067cda3e6b8dfbceef985388164e231c4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.machine_acceptState_lt_bound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "7e829e8f08e558b7ab6fa4dbb3a160792eb5cf5ac5feca10372ad94560f77a07",
+          "expectedKernelTypeSha256": "7e829e8f08e558b7ab6fa4dbb3a160792eb5cf5ac5feca10372ad94560f77a07",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.machine_rejectState_lt_bound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "26880be07568cdeaff339af2b99b73c2f05f8a95fde2f84d21c9b10befb3d5c3",
+          "expectedKernelTypeSha256": "26880be07568cdeaff339af2b99b73c2f05f8a95fde2f84d21c9b10befb3d5c3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.machine_startState_lt_bound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "61100c5ecd78076b9283719da5caed9669ca4b49855a6d96fce1a8e734988bd8",
+          "expectedKernelTypeSha256": "61100c5ecd78076b9283719da5caed9669ca4b49855a6d96fce1a8e734988bd8",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.rule_source_lt_machineStateBound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "6df11a17f2edcca48c7681e897da512db973e31bb3c3221e937fca49e50907fe",
+          "expectedKernelTypeSha256": "6df11a17f2edcca48c7681e897da512db973e31bb3c3221e937fca49e50907fe",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.rule_target_lt_machineStateBound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "8f106504927efb4de31aa9350dca7cdc650891c3080d12cda5f15e776979d631",
+          "expectedKernelTypeSha256": "8f106504927efb4de31aa9350dca7cdc650891c3080d12cda5f15e776979d631",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.run_pad_of_halted",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "13dcbedb868887207e2fc02525025caa8d399c1194bf7eac2930a270b1b40120",
+          "expectedKernelTypeSha256": "13dcbedb868887207e2fc02525025caa8d399c1194bf7eac2930a270b1b40120",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.run_pad_of_stuck",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "0b8bf676d6bdd8562a5045681a5e0e687af8acc7b62e7851788de0a98ca0b72b",
+          "expectedKernelTypeSha256": "0b8bf676d6bdd8562a5045681a5e0e687af8acc7b62e7851788de0a98ca0b72b",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
+    },
+    {
       "id": "direct-wire-semantics",
       "title": "Typed direct-wire NAND semantics",
       "classification": "formalized",
@@ -2736,7 +2953,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-14-32",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-14-33",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

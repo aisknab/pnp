@@ -45,7 +45,7 @@ export async function RunLeanInventoryProbe0(root) {
     cwd: root,
     encoding: 'utf8',
     timeout: TIMEOUT_MS,
-    maxBuffer: 16 * 1024 * 1024,
+    maxBuffer: 32 * 1024 * 1024,
   });
   try {
     const { stdout, stderr } = await execFileAsync('lake', [
@@ -54,7 +54,7 @@ export async function RunLeanInventoryProbe0(root) {
       cwd: root,
       encoding: 'utf8',
       timeout: TIMEOUT_MS,
-      maxBuffer: 16 * 1024 * 1024,
+      maxBuffer: 32 * 1024 * 1024,
     });
     return ParseLeanInventoryProbe0({ stdout, stderr, exitCode: 0, timedOut: false });
   } catch (error) {
