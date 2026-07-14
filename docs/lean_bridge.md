@@ -51,6 +51,7 @@ lean/PNP/Concrete/PipelineOutputHandoff.lean
 lean/PNP/Concrete/PipelineMachineSimulation.lean
 lean/PNP/Concrete/PipelineStateNamespace.lean
 lean/PNP/Concrete/PipelineSequentialStateNamespace.lean
+lean/PNP/Concrete/PipelineSequentialCompiler.lean
 lean/PNP/Concrete/PipelineStageBridges.lean
 lean/PNP/Concrete/TerminalOutputPacker.lean
 lean/PNP/Concrete/PipelineTerminalBridge.lean
@@ -93,6 +94,7 @@ lean-audit/PNPConcretePipelineInputFramerAxiomAudit.lean
 lean-audit/PNPConcretePipelineOutputHandoffAxiomAudit.lean
 lean-audit/PNPConcretePipelineStateNamespaceAxiomAudit.lean
 lean-audit/PNPConcretePipelineSequentialStateNamespaceAxiomAudit.lean
+lean-audit/PNPConcretePipelineSequentialCompilerAxiomAudit.lean
 lean-audit/PNPConcretePipelineStageBridgesAxiomAudit.lean
 lean-audit/PNPConcreteTerminalOutputPackerAxiomAudit.lean
 lean-audit/PNPConcretePipelineTerminalBridgeAxiomAudit.lean
@@ -219,12 +221,16 @@ complete-program refinement. They do not build that refinement for composition o
 The 26 declarations in `PipelineSequentialStateNamespace.lean` are also axiom-free. They rename
 two complete component tables into disjoint outer state images, isolate first-match lookup for both
 images, transport exact local steps and runs, and provide literal accept/reject launches from the
-first component to the second simulator. No theorem in that module claims the complete sequential
-run, final output equality, an external polynomial, or recursive `RawRefinement`.
-Consequently the charged function/decision program syntax still does not compile recursively into
-one raw single-tape machine, so `Formal.ConcreteComplexityMachineLink` remains blocked. See
+first component to the second simulator. The 31 public declarations in
+`PipelineSequentialCompiler.lean` then prove the complete all-input run in the literal combined
+table. Either first verdict continues on the represented first output; the second verdict and
+ordinary raw output are exact, stuck first endpoints remain timeout, and the external bound is
+`PipelineRaw(p)(m) + 6 + PipelineRaw(q)(m + p(m) + 1)`. Their compiled axiom closures are empty.
+The charged function/decision program syntax still lacks recursive composition and precomposition
+`RawRefinement` constructors, so `Formal.ConcreteComplexityMachineLink` remains blocked. See
 [`lean_concrete_complexity.md`](./lean_concrete_complexity.md) and
-[`lean_pipeline_compiler.md`](./lean_pipeline_compiler.md).
+[`lean_pipeline_compiler.md`](./lean_pipeline_compiler.md), and
+[`lean_pipeline_sequential_compiler.md`](./lean_pipeline_sequential_compiler.md).
 
 ### Direct concrete CNF verifier
 

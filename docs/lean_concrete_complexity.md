@@ -7,7 +7,7 @@ decoder and a pure canonical handoff target. `lean/PNP/Concrete/PipelineTapeGeom
 a two-track boundary frame with arbitrary exterior garbage and proved local move/expansion geometry.
 `lean/PNP/Concrete/PipelineInputFramer.lean` supplies an exact all-raw-input-to-frame trace and a
 single external-size polynomial, while retaining the sharper canonical-pair trace; the complete
-bridge/compiler theorems remain canonical-pair-only. `lean/PNP/Concrete/PipelineOutputHandoff.lean` supplies the exact represented-output
+compiler now covers all raw inputs. `lean/PNP/Concrete/PipelineOutputHandoff.lean` supplies the exact represented-output
 re-framing trace. `lean/PNP/Concrete/PipelineMachineSimulation.lean` supplies ordered finite rules and lifts every
 supplied exact `n`-step successful raw execution from an already represented frame to exactly
 `3 * n` successful work steps. For an ordinary raw run with fuel `F`, it extracts an exact prefix
@@ -17,15 +17,19 @@ compiled `run` with fuel `18 * F` reach its representation and encoding.
 lookup-isolated concatenated finite rule table, and preservation of all three existing exact
 stage-local traces. `lean/PNP/Concrete/PipelineStageBridges.lean` adds exact stage launches,
 verdict-indexed handoff copies, supplied-exact-run composition, and six-for-one compiled raw traces
-from canonical paired input. `TerminalOutputPacker` separately proves raw-visible output, but it
-has not been joined to that bridge trace and still supplies no external-size refinement.
+from canonical paired input. `TerminalOutputPacker` proves raw-visible output and is joined to that
+bridge trace by `PipelineTerminalBridge`, `PipelinePairedCompiler`, and the all-input
+`PipelineCompiler` with an external-size polynomial.
 `lean/PNP/Concrete/PipelineSequentialStateNamespace.lean` separately nests two complete component
 machines in disjoint outer state images. It proves first-match isolation, exact local-trace
-transport, and literal launches from either first-component verdict to the second simulator start;
-it does not yet compose those facts into a complete two-machine execution or refinement.
+transport, and literal launches from either first-component verdict to the second simulator start.
+`lean/PNP/Concrete/PipelineSequentialCompiler.lean` composes those facts into a complete all-input
+two-machine execution in one literal finite table. It preserves the second verdict and ordinary
+output, keeps stuck first endpoints as timeout, and proves the external polynomial
+`PipelineRaw(p)(m) + 6 + PipelineRaw(q)(m + p(m) + 1)`.
 `lean/PNP/Concrete/PipelineRefinement.lean` pins exact raw-machine refinement
 contracts and proves the two machine-leaf cases. `lean/PNP/Concrete/Target.lean` names the
-corresponding inactive target proposition. The explicit declarations in all nine layers have empty
+corresponding inactive target proposition. The explicit declarations in these layers have empty
 compiled axiom closures.
 
 This is a finite charged-pipeline interface. Its leaves are concrete `Machine` values, but the
@@ -34,16 +38,16 @@ single-tape `Machine`. That missing link is recorded as
 `Formal.ConcreteComplexityMachineLink`; consequently the publication map keeps
 `standardComplexityModelEligible` false.
 
-The local simulator narrows that gap without closing it. It preserves the source interpreter's
-first matching rule, handles boundary growth across arbitrary exterior garbage, and exposes an
+The local simulator and literal pipeline compilers narrow that gap without closing it. The
+simulator preserves the source interpreter's first matching rule, handles boundary growth across
+arbitrary exterior garbage, and exposes an
 exact work-step count, exact-prefix extraction, and conditional designated-halting fuel bounds. It
 does not prove termination; the padded full fuels are at-most budgets, and a stuck nonhalting
-endpoint is not a verdict. Its theorem starts from
-`encodeWorkConfiguration`, not the
-canonical `Tape.ofInput` used by `machineOutput`; blank tag cells also require an executable
-de-tagging and handoff pass before another raw stage can consume the result. The namespace layer
-removes state collisions and rule-lookup interference, but does not add the missing framer-to-
-simulator or simulator-to-handoff transitions.
+endpoint is not a verdict. Its theorem starts from `encodeWorkConfiguration`, not the canonical
+`Tape.ofInput` used by `machineOutput`. The later framer, handoff, terminal packer, bridge, and
+sequential compiler modules discharge those concrete execution gaps for already-raw proof-bearing
+target machines. They do not recursively traverse the charged `FunctionProgram` or
+`DecisionProgram` syntax.
 
 The refinement boundary is intentionally proof-bearing. A `FunctionProgram.RawRefinement` or
 `DecisionProgram.RawRefinement` supplies one raw machine, one natural-polynomial budget, a
@@ -197,17 +201,17 @@ to its represented endpoint. The full-budget padding theorems additionally requi
 to be designated halting; work fuel `3 * F` and compiled fuel `18 * F` are at-most budgets, not
 successful-step counts. This proves no
 termination result, does not classify a stuck nonhalting stop as a verdict, and gives no input-size
-bound. Separate literal machines now supply paired-input framing and an exact internal represented
-handoff. Their state images and rule lists are collision-free and lookup-isolated in one concatenated
-table. The bridge milestone connects supplied exact runs, preserves accept/reject, and keeps a
-supplied stuck nonhalting endpoint as timeout at the exact prefix budget. It supplies no target
-termination theorem, ordinary `machineOutput`, terminal raw output de-tagging,
-composition/precomposition `RawRefinement`, or external-input-size polynomial bound. This milestone also
-does not formalize concrete SAT or SAT NP-hardness, instantiate
+bound on its own. Separate literal machines now supply all-input framing, exact internal represented
+handoff, and terminal raw-output packing. The bridge and single-machine compiler prove target
+termination, ordinary `machineOutput`, and external-size bounds for an already-raw proof-bearing
+target. The sequential compiler composes two such targets in one collision-free table, passes the
+first output without host interpretation, proves the second verdict/output at an external
+polynomial, and keeps a stuck nonhalting first endpoint as timeout. It still supplies no recursive
+composition/precomposition `RawRefinement`. This milestone also does not formalize concrete SAT or
+SAT NP-hardness, instantiate
 the global locked-NAND threshold package, prove the residual-band or ZeroSlack obligations, prove
 the remaining end-to-end polynomial bounds, or establish `P = NP`.
 
-The sequential namespace milestone removes collisions between two whole compiled components and
-proves their launch dispatch, but it adds no claim beyond that boundary. In particular, the second
-component's terminal endpoint has not yet been connected to an all-input two-machine trace or to a
-`FunctionProgram.RawRefinement`/`DecisionProgram.RawRefinement` constructor.
+The sequential execution milestone stops at two already-raw proof-bearing machines. It does not yet
+provide the recursive `FunctionProgram.RawRefinement` and `DecisionProgram.RawRefinement`
+constructors needed to compile charged composition and precomposition syntax.

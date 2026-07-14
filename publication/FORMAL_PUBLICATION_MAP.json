@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-14-30",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-14-31",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "7f886156b0ae16e0a04b8b16b4febd593033bb4dadd61c3684d422b19f393a9e",
+  "milestoneSourceClosureSha256": "6d99522905d644f0e13d06b7c89646a40a753b082c8e1549fa260e1080995092",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.FinalUniversalDesign.cnfCompiled_accept_iff_check": "4a8661d567079e1f47c288b8a36805a20ac7040338d84325723079f3fada4efa",
@@ -87,6 +87,21 @@
     "PNP.Concrete.PipelinePairedCompiler.run_pairedPipeline_reject_at_bound_of_rawRunExact": "e48071abf07ebb9014c45b1a56c20f1a0f1627921b27980cf737078fba6efede",
     "PNP.Concrete.PipelinePairedCompiler.suppliedTraceTerminalRawSteps_le_of_rawRunExact": "6414b2502789e7859e4e67c0cb900a8cf756bce4cfa1dee39b552f7ac9b1f9c0",
     "PNP.Concrete.PipelinePairedCompiler.suppliedTraceTerminalRawSteps_le_pairedPipelineRawTimeBound": "5508023af56484d3bcf2cf1d1bc100f0c016481b1be03ffb55a1b7b977df174e",
+    "PNP.Concrete.PipelineSequentialCompiler.acceptingSequentialTrace_workRunExact_of_rawRunExact": "ea1fe3a05de55ed14758cd24aebdf342d691ee80d6401cc897277444ee8714c9",
+    "PNP.Concrete.PipelineSequentialCompiler.firstOutputSizeBound_eval": "78f82026738793d2efbfb896b771244f71f7b7965c61bf254666fd30e6265bd9",
+    "PNP.Concrete.PipelineSequentialCompiler.firstTraceAndLaunch_workRunExact_of_rawRunExact": "feae3b9b0925804ed49923dc7fba3c45e56f2dba0d82c9b00aa0ac3affd37c66",
+    "PNP.Concrete.PipelineSequentialCompiler.rejectingSequentialTrace_workRunExact_of_rawRunExact": "e8a60741e8084c99959daa62aa2a5013a51c63b05ac7c35cea78384174e4712e",
+    "PNP.Concrete.PipelineSequentialCompiler.run_sequential_accept_at_bound_of_rawRunExact": "1d66eb19566317d2a4abf341a21f17b609a2c136b684e85fe41917a125782e6f",
+    "PNP.Concrete.PipelineSequentialCompiler.run_sequential_reject_at_bound_of_rawRunExact": "dbb85f0e7aa92216edc29dbde6175b86a8f03700648c162c1519b504cb5eea07",
+    "PNP.Concrete.PipelineSequentialCompiler.sequentialOutputSizeBound_eval": "cb577ff0cbc660e3e7eed41245868674054695c5a63d22d44dcc2410a9b34b78",
+    "PNP.Concrete.PipelineSequentialCompiler.sequentialRawSteps_le_of_rawRunExact": "99537344c7763f446be14ff2c76297bcae15af267d38388ed568be6c624cc207",
+    "PNP.Concrete.PipelineSequentialCompiler.sequentialRawSteps_le_sequentialRawTimeBound": "ba8363700b4d5229a5ed002212adec054ffd01ff0d0da8028081eedabf875428",
+    "PNP.Concrete.PipelineSequentialCompiler.sequential_accepts_iff": "7a6d0d03c735c83a2fb0c764a174a79402ec196a98169614b15dbee442df099e",
+    "PNP.Concrete.PipelineSequentialCompiler.sequential_boundedDecide_eq": "dd282c364787b165c9be9ca80b712c3ebf61ac95d097218300a65433a690e386",
+    "PNP.Concrete.PipelineSequentialCompiler.sequential_correct": "8943f2f2c396dfb2e6e8232244b9ecb386fe3a7259590ed96cedb82d1cc7b22a",
+    "PNP.Concrete.PipelineSequentialCompiler.sequential_machineOutput_eq": "8d954e0e65847ff071a3a79a7be1c7f7d5a2f1696e3f94be3a7288500598b9d7",
+    "PNP.Concrete.PipelineSequentialCompiler.sequential_ne_timeout": "116c522c8a64988fd815b32bad08df882534b94b87cfa42a705fd1d8158d45af",
+    "PNP.Concrete.PipelineSequentialCompiler.sequential_timeout_of_stuck_first_rawRunExact": "5f5f0889b807ea0ccefdfb911ba8b583de9999f2a627745bc9317c0c6ff21a34",
     "PNP.Concrete.PipelineSequentialStateNamespace.findWorkRule_sequential_first_of_some": "d3a00e7ecb3b54ab9168803fc78ad63413ea495b41c153cd95e2a6fab6e22ff8",
     "PNP.Concrete.PipelineSequentialStateNamespace.findWorkRule_sequential_second_of_some": "f925c57f2f26b47d195929e736bb5fe21169443a12af6da729bb31fe48ef1dd5",
     "PNP.Concrete.PipelineSequentialStateNamespace.firstAcceptLaunch_workStep": "3b205b804d0365ebe9d4a98a5d7e349c02143e27516eb9b0a712859f10cf07ae",
@@ -203,7 +218,7 @@
       "id": "concrete-machine-cost-kernel",
       "title": "Concrete machine and cost kernel",
       "classification": "formalized-foundation-only",
-      "scope": "One literal finite four-stage pipeline handles every raw bitstring. The total framer uses exactly 4 work steps on empty input, 4 * k * k + 9 * k + 7 for complete two-bit cells, and 4 * k * k + 9 * k + 5 when the final cell is partial; its compiled raw cost is bounded by 6 * m * m + 39 * m + 75. Every supplied exact n-step target run lifts to exactly 3 * n work steps. PipelineCompiler uses the same terminal-bridge rule table as PipelinePairedCompiler, launches the target on the unchanged raw input, preserves exact accept/reject/timeout classification and ordinary machineOutput, and pads the complete execution to R(m) = totalInputFramerRawTimeBound(m) + 6 + 18*p(m) + 6 + framedOutputHandoffRawTimeBound(B(m)) + terminalBridgeRawTimeBound(B(m)), where B(m) = m + p(m) + 1. The all-input compiler has 29 audited declarations with empty axiom closure. PipelineSequentialStateNamespace additionally nests two complete component rule tables in disjoint outer state images, proves first-match lookup isolation, transports exact local traces, and gives literal accept/reject launches from the first component into the second component's internal simulator start. Its 26 audited declarations have empty axiom closure.",
+      "scope": "One literal finite four-stage pipeline handles every raw bitstring. The total framer uses exactly 4 work steps on empty input, 4 * k * k + 9 * k + 7 for complete two-bit cells, and 4 * k * k + 9 * k + 5 when the final cell is partial; its compiled raw cost is bounded by 6 * m * m + 39 * m + 75. Every supplied exact n-step target run lifts to exactly 3 * n work steps. PipelineCompiler uses the same terminal-bridge rule table as PipelinePairedCompiler, launches one target on the unchanged raw input, and preserves its verdict and ordinary machineOutput at an explicit external polynomial. PipelineSequentialStateNamespace nests two complete component tables in disjoint outer images. PipelineSequentialCompiler now proves their complete all-input execution in one literal finite machine: either first verdict launches the second simulator on the represented first output, the second verdict and ordinary output are exact, stuck first endpoints remain timeout, and R(m) = PipelineRaw(p)(m) + 6 + PipelineRaw(q)(m + p(m) + 1). Its 31 public declarations have empty axiom closure.",
       "requiredTheorems": [
         "PNP.Concrete.BitString.decodePair_pair",
         "PNP.Concrete.NatPolynomial.eval_mono",
@@ -222,6 +237,21 @@
         "PNP.Concrete.PipelineCompiler.suppliedTraceRawSteps_le_of_rawRunExact",
         "PNP.Concrete.PipelineCompiler.suppliedTraceRawSteps_le_pipelineRawTimeBound",
         "PNP.Concrete.PipelineCompiler.totalInputLaunch_workStep",
+        "PNP.Concrete.PipelineSequentialCompiler.acceptingSequentialTrace_workRunExact_of_rawRunExact",
+        "PNP.Concrete.PipelineSequentialCompiler.firstOutputSizeBound_eval",
+        "PNP.Concrete.PipelineSequentialCompiler.firstTraceAndLaunch_workRunExact_of_rawRunExact",
+        "PNP.Concrete.PipelineSequentialCompiler.rejectingSequentialTrace_workRunExact_of_rawRunExact",
+        "PNP.Concrete.PipelineSequentialCompiler.run_sequential_accept_at_bound_of_rawRunExact",
+        "PNP.Concrete.PipelineSequentialCompiler.run_sequential_reject_at_bound_of_rawRunExact",
+        "PNP.Concrete.PipelineSequentialCompiler.sequentialOutputSizeBound_eval",
+        "PNP.Concrete.PipelineSequentialCompiler.sequentialRawSteps_le_of_rawRunExact",
+        "PNP.Concrete.PipelineSequentialCompiler.sequentialRawSteps_le_sequentialRawTimeBound",
+        "PNP.Concrete.PipelineSequentialCompiler.sequential_accepts_iff",
+        "PNP.Concrete.PipelineSequentialCompiler.sequential_boundedDecide_eq",
+        "PNP.Concrete.PipelineSequentialCompiler.sequential_correct",
+        "PNP.Concrete.PipelineSequentialCompiler.sequential_machineOutput_eq",
+        "PNP.Concrete.PipelineSequentialCompiler.sequential_ne_timeout",
+        "PNP.Concrete.PipelineSequentialCompiler.sequential_timeout_of_stuck_first_rawRunExact",
         "PNP.Concrete.PipelineSequentialStateNamespace.findWorkRule_sequential_first_of_some",
         "PNP.Concrete.PipelineSequentialStateNamespace.findWorkRule_sequential_second_of_some",
         "PNP.Concrete.PipelineSequentialStateNamespace.firstAcceptLaunch_workStep",
@@ -347,7 +377,7 @@
         "PNP.Concrete.run_succ",
         "PNP.Concrete.run_zero"
       ],
-      "nonClaim": "This theorem transports every raw bitstring through one already-raw proof-bearing target. The sequential namespace and launch rules do not yet prove an end-to-end two-machine execution, terminal output equality, an external input-size polynomial, or raw-refinement composition for function or decision programs. The concrete complexity machine-link blocker therefore remains open. CNF-SAT in P, NP-completeness, and P = NP are not established; PNP.Main.p_eq_np remains absent and the publication gate remains false."
+      "nonClaim": "This theorem now composes two already-raw proof-bearing targets in one finite machine, but it does not yet define recursive raw-refinement constructors for FunctionProgram composition or DecisionProgram precomposition. The concrete complexity machine-link blocker therefore remains open. CNF-SAT in P, NP-completeness, and P = NP are not established; PNP.Main.p_eq_np remains absent and the publication gate remains false."
     },
     {
       "id": "concrete-complexity-classes",

@@ -253,11 +253,11 @@ test('namespace remains the collision-free prerequisite while recursive refineme
     `${PREFIX}renamedOutputHandoff_workRunExact_of_represents`,
   ]) assert.equal(foundation.requiredTheorems.includes(name), true, name);
   assert.match(foundation.scope, /same terminal-bridge rule table/u);
-  assert.match(foundation.scope, /launches the target on the unchanged raw input/u);
+  assert.match(foundation.scope, /launches one target on the unchanged raw input/u);
   assert.match(foundation.scope, /Every supplied exact n-step target run/u);
-  assert.match(foundation.scope, /pads the complete execution/u);
+  assert.match(foundation.scope, /complete all-input execution/u);
   assert.match(foundation.scope, /finite four-stage pipeline/u);
-  assert.match(foundation.nonClaim, /every raw bitstring/u);
-  assert.match(foundation.nonClaim, /raw-refinement composition/u);
+  assert.match(foundation.nonClaim, /composes two already-raw proof-bearing targets/u);
+  assert.match(foundation.nonClaim, /recursive raw-refinement constructors/u);
   assert.equal(map.gate.standardComplexityModelEligible, false);
 });
