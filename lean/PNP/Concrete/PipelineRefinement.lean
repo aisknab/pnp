@@ -1,16 +1,15 @@
 /-
 Copyright (c) 2026 PNP Labs.
 
-Raw-machine refinement contracts for the finite charged-pipeline interface.
+Raw-machine refinement contracts and recursive compilers for the finite
+charged-pipeline interface.
 
-This module pins the exact semantic obligations for a future composite
-pipeline compiler and proves the two machine-leaf cases.  It deliberately
-does not define composition or precomposition constructors: those require a
-real boundary-marked tape simulation and output handoff, not rule-list
-concatenation.
+Every composite is implemented by the literal two-machine compiler.  The
+proof recursively consumes only the child refinements and the source
+interpreter's own halting evidence.
 -/
 
-import PNP.Concrete.Complexity
+import PNP.Concrete.PipelineSequentialCompiler
 
 namespace PNP.Concrete
 
@@ -46,6 +45,79 @@ def ofMachine (machine : Machine) (stepBound : NatPolynomial) :
     output_eq := by
       intro input _
       rfl }
+
+/-- Compose two already proved function refinements using one literal finite
+sequential machine.  Either first-machine verdict launches the second machine;
+only the raw output is passed between them. -/
+def compose {first second : FunctionProgram}
+    (firstRefinement : RawRefinement first)
+    (secondRefinement : RawRefinement second) :
+    RawRefinement (.compose first second) :=
+  { machine := PipelineSequentialCompiler.sequentialMachine
+      firstRefinement.machine secondRefinement.machine
+    timeBound := PipelineSequentialCompiler.sequentialRawTimeBound
+      firstRefinement.timeBound secondRefinement.timeBound
+    haltsWithin := by
+      intro input halts
+      rcases halts with ⟨firstHalts, secondHalts⟩
+      have hFirst := firstRefinement.haltsWithin input firstHalts
+      have hFirstOutput := firstRefinement.output_eq input firstHalts
+      have hSecond : boundedDecide secondRefinement.machine
+          (secondRefinement.timeBound.eval (BitString.size
+            (machineOutput firstRefinement.machine
+              (firstRefinement.timeBound.eval (BitString.size input)) input)))
+          (machineOutput firstRefinement.machine
+            (firstRefinement.timeBound.eval (BitString.size input)) input) ≠
+          .timeout := by
+        rw [hFirstOutput]
+        exact secondRefinement.haltsWithin (first.eval input) secondHalts
+      rw [(PipelineSequentialCompiler.sequential_correct
+        firstRefinement.machine secondRefinement.machine
+        firstRefinement.timeBound secondRefinement.timeBound input
+        hFirst hSecond).1]
+      exact hSecond
+    output_eq := by
+      intro input halts
+      rcases halts with ⟨firstHalts, secondHalts⟩
+      have hFirst := firstRefinement.haltsWithin input firstHalts
+      have hFirstOutput := firstRefinement.output_eq input firstHalts
+      have hSecond : boundedDecide secondRefinement.machine
+          (secondRefinement.timeBound.eval (BitString.size
+            (machineOutput firstRefinement.machine
+              (firstRefinement.timeBound.eval (BitString.size input)) input)))
+          (machineOutput firstRefinement.machine
+            (firstRefinement.timeBound.eval (BitString.size input)) input) ≠
+          .timeout := by
+        rw [hFirstOutput]
+        exact secondRefinement.haltsWithin (first.eval input) secondHalts
+      rw [(PipelineSequentialCompiler.sequential_correct
+        firstRefinement.machine secondRefinement.machine
+        firstRefinement.timeBound secondRefinement.timeBound input
+        hFirst hSecond).2]
+      rw [hFirstOutput]
+      exact secondRefinement.output_eq (first.eval input) secondHalts }
+
+/-- Structurally compile every finite function-program tree to one raw
+single-tape machine. -/
+def compile : (source : FunctionProgram) → RawRefinement source
+  | .machine machine stepBound => ofMachine machine stepBound
+  | .compose first second => compose (compile first) (compile second)
+
+/-- The recursive compiler inherits its exact conditional halting contract. -/
+theorem compile_haltsWithin (source : FunctionProgram) (input : BitString)
+    (halts : source.Halts input) :
+    boundedDecide (compile source).machine
+      ((compile source).timeBound.eval (BitString.size input)) input ≠
+      .timeout :=
+  (compile source).haltsWithin input halts
+
+/-- The recursive compiler preserves the interpreter's exact output. -/
+theorem compile_output_eq (source : FunctionProgram) (input : BitString)
+    (halts : source.Halts input) :
+    machineOutput (compile source).machine
+      ((compile source).timeBound.eval (BitString.size input)) input =
+      source.eval input :=
+  (compile source).output_eq input halts
 
 /-- Raw output inherits the proved output-size bound of a polynomial function
 witness whenever a refinement of its complete program is supplied. -/
@@ -94,6 +166,91 @@ def ofMachine (machine : Machine) (stepBound : NatPolynomial) :
       intro input _
       rfl }
 
+/-- Precompose an already proved decision refinement with an already proved
+function refinement using the literal two-machine compiler. -/
+def precompose {preprocessor : FunctionProgram} {decision : DecisionProgram}
+    (preprocessorRefinement : FunctionProgram.RawRefinement preprocessor)
+    (decisionRefinement : RawRefinement decision) :
+    RawRefinement (.precompose preprocessor decision) :=
+  { machine := PipelineSequentialCompiler.sequentialMachine
+      preprocessorRefinement.machine decisionRefinement.machine
+    timeBound := PipelineSequentialCompiler.sequentialRawTimeBound
+      preprocessorRefinement.timeBound decisionRefinement.timeBound
+    haltsWithin := by
+      intro input halts
+      rcases halts with ⟨preprocessorHalts, decisionHalts⟩
+      have hPreprocessor := preprocessorRefinement.haltsWithin input
+        preprocessorHalts
+      have hPreprocessorOutput := preprocessorRefinement.output_eq input
+        preprocessorHalts
+      have hDecision : boundedDecide decisionRefinement.machine
+          (decisionRefinement.timeBound.eval (BitString.size
+            (machineOutput preprocessorRefinement.machine
+              (preprocessorRefinement.timeBound.eval
+                (BitString.size input)) input)))
+          (machineOutput preprocessorRefinement.machine
+            (preprocessorRefinement.timeBound.eval
+              (BitString.size input)) input) ≠ .timeout := by
+        rw [hPreprocessorOutput]
+        exact decisionRefinement.haltsWithin (preprocessor.eval input)
+          decisionHalts
+      rw [(PipelineSequentialCompiler.sequential_correct
+        preprocessorRefinement.machine decisionRefinement.machine
+        preprocessorRefinement.timeBound decisionRefinement.timeBound input
+        hPreprocessor hDecision).1]
+      exact hDecision
+    verdict_eq := by
+      intro input halts
+      rcases halts with ⟨preprocessorHalts, decisionHalts⟩
+      have hPreprocessor := preprocessorRefinement.haltsWithin input
+        preprocessorHalts
+      have hPreprocessorOutput := preprocessorRefinement.output_eq input
+        preprocessorHalts
+      have hDecision : boundedDecide decisionRefinement.machine
+          (decisionRefinement.timeBound.eval (BitString.size
+            (machineOutput preprocessorRefinement.machine
+              (preprocessorRefinement.timeBound.eval
+                (BitString.size input)) input)))
+          (machineOutput preprocessorRefinement.machine
+            (preprocessorRefinement.timeBound.eval
+              (BitString.size input)) input) ≠ .timeout := by
+        rw [hPreprocessorOutput]
+        exact decisionRefinement.haltsWithin (preprocessor.eval input)
+          decisionHalts
+      rw [(PipelineSequentialCompiler.sequential_correct
+        preprocessorRefinement.machine decisionRefinement.machine
+        preprocessorRefinement.timeBound decisionRefinement.timeBound input
+        hPreprocessor hDecision).1]
+      rw [hPreprocessorOutput]
+      exact decisionRefinement.verdict_eq (preprocessor.eval input)
+        decisionHalts }
+
+/-- Structurally compile every finite decision-program tree to one raw
+single-tape machine. -/
+def compile : (source : DecisionProgram) → RawRefinement source
+  | .machine machine stepBound => ofMachine machine stepBound
+  | .precompose preprocessor decision =>
+      precompose (FunctionProgram.RawRefinement.compile preprocessor)
+        (compile decision)
+
+/-- The recursive decision compiler inherits its conditional halting
+contract. -/
+theorem compile_haltsWithin (source : DecisionProgram) (input : BitString)
+    (halts : source.Halts input) :
+    boundedDecide (compile source).machine
+      ((compile source).timeBound.eval (BitString.size input)) input ≠
+      .timeout :=
+  (compile source).haltsWithin input halts
+
+/-- The recursive decision compiler preserves the interpreter's exact
+verdict, including timeout exclusion rather than timeout-as-rejection. -/
+theorem compile_verdict_eq (source : DecisionProgram) (input : BitString)
+    (halts : source.Halts input) :
+    boundedDecide (compile source).machine
+      ((compile source).timeBound.eval (BitString.size input)) input =
+      source.verdict input :=
+  (compile source).verdict_eq input halts
+
 end RawRefinement
 
 end DecisionProgram
@@ -115,6 +272,24 @@ def toMachine {language : Language}
       intro input
       rw [refinement.verdict_eq input (decision.haltsWithin input)]
       exact decision.accepts_iff input }
+
+/-- Compile the complete charged decision tree recursively and expose it as
+one raw polynomial-time machine for the same language. -/
+def compileToMachine {language : Language}
+    (decision : PolynomialTimeDecider language) :
+    PolynomialTimeMachine language :=
+  toMachine decision
+    (DecisionProgram.RawRefinement.compile decision.program)
+
+/-- The recursively compiled raw machine accepts exactly the source
+language. -/
+theorem compileToMachine_accepts_iff {language : Language}
+    (decision : PolynomialTimeDecider language) (input : BitString) :
+    boundedDecide (compileToMachine decision).machine
+        ((compileToMachine decision).timeBound.eval (BitString.size input))
+        input = .accept ↔
+      language input :=
+  (compileToMachine decision).accepts_iff input
 
 end PolynomialTimeDecider
 

@@ -109,11 +109,11 @@ caller-supplied exact accepting or rejecting target execution, the terminal
 module now composes all four stages from ordinary paired input and proves the
 exact raw output. `PipelineCompiler` now adds target termination and a
 polynomial in external encoded input length for every raw input to an
-already-raw proof-bearing target. There is still no recursive
-`FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement` for the
+already-raw proof-bearing target. `PipelineRefinement` now supplies recursive
+`FunctionProgram.RawRefinement` and `DecisionProgram.RawRefinement` for the
 charged program syntax.
 
-Consequently `Formal.ConcreteComplexityMachineLink` remains open,
+Consequently `Formal.ConcreteComplexityMachineLink` is now discharged,
 `PNP.Concrete.cnfSATInP` and `PNP.Concrete.cnfSATNPComplete` remain absent,
-`PNP.Main.p_eq_np` remains absent, all seven formal blockers and four project
+`PNP.Main.p_eq_np` remains absent, six formal blockers and four project
 assumptions remain, and the concrete publication gate remains false.

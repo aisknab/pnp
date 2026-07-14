@@ -152,8 +152,8 @@ test('the machine-link and publication gate remain fail closed', async () => {
     text0('status/FORMAL_RECONSTRUCTION_STATUS.json').then(JSON.parse),
     text0('publication/FORMAL_PUBLICATION_MAP.json').then(JSON.parse),
   ]);
-  assert.equal(status.leanConcretePipelineRawRefinementFormalized, false);
-  assert.ok(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'));
-  assert.equal(map.gate.standardComplexityModelEligible, false);
+  assert.equal(status.leanConcretePipelineRawRefinementFormalized, true);
+  assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), false);
+  assert.equal(map.gate.standardComplexityModelEligible, true);
   assert.equal(status.concretePublicationGate.passed, false);
 });

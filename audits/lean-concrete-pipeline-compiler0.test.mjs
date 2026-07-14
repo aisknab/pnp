@@ -99,9 +99,8 @@ function validate0(source) {
   require0(JSON.stringify(publicHeadPairs0(source)) === JSON.stringify(EXPECTED_HEADS),
     'declaration-surface');
 
-  require0(prose.includes('does not define FunctionProgram.RawRefinement.compose')
-    && prose.includes('DecisionProgram.RawRefinement.precompose')
-    && prose.includes('concrete complexity machine-link blocker')
+  require0(prose.includes('PipelineRefinement uses it together with the sequential compiler')
+    && prose.includes('close the concrete complexity machine link')
     && prose.includes('CNF-SAT in P')
     && prose.includes('CNF-SAT NP-completeness')
     && prose.includes('PNP.Main.p_eq_np')
@@ -221,14 +220,14 @@ test('all-input compiler audit rejects narrowed input, hidden evidence, weak bou
   }
 });
 
-test('all-input compiler milestone remains fail-closed before refinement composition', async () => {
+test('publication remains fail-closed after refinement composition', async () => {
   const status = JSON.parse(await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'));
   assert.equal(status.leanConcretePipelineCompilerAxiomAuditPassed, true);
   assert.equal(status.leanConcretePipelineCompilerAuditedDeclarationCount, 29);
   assert.equal(status.leanConcretePipelineAllInputCompilationFormalized, true);
   assert.equal(status.leanConcretePipelineMalformedInputBehaviorFormalized, true);
   assert.equal(status.leanConcretePipelineExternalInputSizePolynomialFormalized, true);
-  assert.equal(status.leanConcretePipelineRawRefinementFormalized, false);
+  assert.equal(status.leanConcretePipelineRawRefinementFormalized, true);
   assert.equal(status.leanConcreteCNFSATInPFormalized, false);
   assert.equal(status.leanConcreteCNFNPCompletenessFormalized, false);
   assert.equal(status.rootLeanTheoremPresent, false);

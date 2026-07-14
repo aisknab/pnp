@@ -119,8 +119,8 @@ test('formal publication records only the concrete kernel milestone', async () =
   const milestone = status.formalPublicationMilestones.find(({ id }) => id === 'concrete-machine-cost-kernel');
   assert.equal(milestone.status, 'formalized-foundation-only');
   assert.equal(milestone.earned, true);
-  assert.equal(status.standardComplexityModelFormalized, false);
-  assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), true);
+  assert.equal(status.standardComplexityModelFormalized, true);
+  assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), false);
   assert.equal(status.projectSpecificAxiomInventory.length, 4);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);

@@ -65,9 +65,8 @@ renames all three machines into disjoint images, concatenates their rule lists w
 isolation, and preserves their stage-local exact traces. A bridge-first finite machine now connects
 supplied exact runs, preserves accept/reject, retains timeout for a supplied stuck nonhalting
 endpoint at the exact prefix budget, and compiles from paired raw input at six times the cumulative
-work cost. It still supplies no target termination, terminal raw output de-tagging,
-external-input-size polynomial, composition/precomposition `RawRefinement`, or complete composite
-refinement. Therefore
-`Formal.ConcreteComplexityMachineLink` remains the first of seven blockers. All five
+work cost. Later pipeline modules supply target termination, terminal raw output de-tagging,
+the external-input-size polynomial, and recursive composition/precomposition `RawRefinement`.
+Therefore `Formal.ConcreteComplexityMachineLink` is discharged and six blockers remain. All five
 reviewed activation fingerprints remain unset, the four project-specific axioms remain,
 `PNP.Main.p_eq_np` is absent, and the publication gate is false.

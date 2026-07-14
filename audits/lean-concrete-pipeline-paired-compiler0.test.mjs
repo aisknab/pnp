@@ -203,7 +203,7 @@ test('paired compiler audit rejects dropped stages, hidden evidence, weak bounds
   }
 });
 
-test('paired compiler remains exact while its all-input successor stays fail-closed at refinement', async () => {
+test('paired compiler remains exact after its all-input successor gains recursive refinement', async () => {
   const status = JSON.parse(await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'));
   assert.equal(status.leanConcretePipelinePairedCompilerAxiomAuditPassed, true);
   assert.equal(status.leanConcretePipelinePairedCompilerAuditedDeclarationCount, 28);
@@ -212,7 +212,7 @@ test('paired compiler remains exact while its all-input successor stays fail-clo
   assert.equal(status.leanConcretePipelineCompilerAuditedDeclarationCount, 29);
   assert.equal(status.leanConcretePipelineAllInputCompilationFormalized, true);
   assert.equal(status.leanConcretePipelineExternalInputSizePolynomialFormalized, true);
-  assert.equal(status.leanConcretePipelineRawRefinementFormalized, false);
+  assert.equal(status.leanConcretePipelineRawRefinementFormalized, true);
   assert.equal(status.leanConcretePipelineMalformedInputBehaviorFormalized, true);
   assert.equal(status.leanConcreteCNFSATInPFormalized, false);
   assert.equal(status.leanConcreteCNFNPCompletenessFormalized, false);

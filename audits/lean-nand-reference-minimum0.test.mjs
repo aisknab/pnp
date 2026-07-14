@@ -122,7 +122,7 @@ test('reference minimum is exhaustive and carries no polynomial-runtime claim', 
   assert.equal(status.leanNANDReplacementScope, 'concrete-serial-framed-context');
   assert.equal(status.leanCompatibleReplacementFormalized, false);
   assert.equal(status.leanGlobalSlackLawFormalized, false);
-  assert.equal(status.remainingBlockers.length, 7);
+  assert.equal(status.remainingBlockers.length, 6);
   assert.equal(status.rootLeanTheoremPresent, false);
 });
 

@@ -223,7 +223,7 @@ test('pipeline state namespace audit rejects collisions, dropped stages, broaden
   }
 });
 
-test('namespace remains the collision-free prerequisite while recursive refinement stays fail-closed', async () => {
+test('namespace remains the collision-free prerequisite after recursive refinement closes the machine link', async () => {
   const [status, map] = await Promise.all([
     text0('status/FORMAL_RECONSTRUCTION_STATUS.json').then(JSON.parse),
     text0('publication/FORMAL_PUBLICATION_MAP.json').then(JSON.parse),
@@ -234,7 +234,7 @@ test('namespace remains the collision-free prerequisite while recursive refineme
   assert.equal(status.leanConcretePipelineRuleTableCompositionFormalized, true);
   assert.equal(status.leanConcretePipelineStageLaunchFormalized, true);
   assert.equal(status.leanConcretePipelineStageBridgesFormalized, true);
-  assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), true);
+  assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), false);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);
   const foundation = status.formalPublicationMilestones.find(
@@ -252,12 +252,10 @@ test('namespace remains the collision-free prerequisite while recursive refineme
     `${PREFIX}renamedLiftMachine_workRunExact_of_rawRunExact`,
     `${PREFIX}renamedOutputHandoff_workRunExact_of_represents`,
   ]) assert.equal(foundation.requiredTheorems.includes(name), true, name);
-  assert.match(foundation.scope, /same terminal-bridge rule table/u);
-  assert.match(foundation.scope, /launches one target on the unchanged raw input/u);
+  assert.match(foundation.scope, /PipelineCompiler preserves one raw target's verdict/u);
   assert.match(foundation.scope, /Every supplied exact n-step target run/u);
-  assert.match(foundation.scope, /complete all-input execution/u);
-  assert.match(foundation.scope, /finite four-stage pipeline/u);
-  assert.match(foundation.nonClaim, /composes two already-raw proof-bearing targets/u);
-  assert.match(foundation.nonClaim, /recursive raw-refinement constructors/u);
-  assert.equal(map.gate.standardComplexityModelEligible, false);
+  assert.match(foundation.scope, /PipelineSequentialCompiler composes two raw targets/u);
+  assert.match(foundation.scope, /literal finite four-stage pipeline/u);
+  assert.match(foundation.nonClaim, /closes the concrete complexity machine-link blocker only/u);
+  assert.equal(map.gate.standardComplexityModelEligible, true);
 });

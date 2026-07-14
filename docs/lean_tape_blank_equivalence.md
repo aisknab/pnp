@@ -32,8 +32,8 @@ node --test audits/lean-concrete-tape-blank-equivalence0.test.mjs
 
 ## Exact boundary
 
-This module contains no executable framing rules and does not alter the
-canonical-pair-only compiler. It does not construct a function or decision
-`RawRefinement`, discharge `Formal.ConcreteComplexityMachineLink`, prove
-CNF-SAT in P or NP-completeness, or establish P = NP. All seven formal
-blockers, four project assumptions, and the false publication gate remain.
+This module contains no executable framing rules. Downstream compiler and
+refinement modules now construct function and decision `RawRefinement` and
+discharge `Formal.ConcreteComplexityMachineLink`. They do not prove CNF-SAT in
+P or NP-completeness, or establish P = NP. Six formal blockers, four project
+assumptions, and the false publication gate remain.

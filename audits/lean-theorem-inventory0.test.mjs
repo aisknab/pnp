@@ -85,21 +85,21 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
   assert.equal(`${stableStringify0(inventory)}\n`, inventoryBytes.toString('utf8'));
   ValidateLeanTheoremInventory0(inventory);
   assert.equal(inventory.environmentProbeComplete, true);
-  assert.equal(inventory.declarationCount, 5301);
+  assert.equal(inventory.declarationCount, 5323);
   assert.equal(inventory.excludedPrivateDeclarationCount, 1042);
-  assert.equal(inventory.theoremCount, 2273);
-  assert.equal(inventory.assumptionFreeTheoremCount, 2172);
+  assert.equal(inventory.theoremCount, 2282);
+  assert.equal(inventory.assumptionFreeTheoremCount, 2181);
   assert.equal(inventory.axiomCount, 4);
   assert.equal(inventory.sourceClosureModuleCount, 51);
   assert.deepEqual(inventory.declarationKindCounts, {
     axiom: 4,
     constructor: 284,
-    definition: 2498,
+    definition: 2511,
     inductive: 121,
     opaque: 0,
     quotient: 0,
     recursor: 121,
-    theorem: 2273,
+    theorem: 2282,
   });
   assert.deepEqual(inventory.projectAxioms, [
     'PNP.CheckPCCPackexp',
@@ -116,7 +116,7 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
     module: 'PNP.Concrete.Target',
     name: 'PNP.Main.ConcretePEqualsNP',
   });
-  assert.equal(inventory.milestoneCandidates.length, 193);
+  assert.equal(inventory.milestoneCandidates.length, 198);
   assert.deepEqual(inventory.milestoneCandidates.map((entry) => entry.name), REQUIRED_MILESTONE_THEOREMS0);
   assert.equal(inventory.milestoneCandidates.every((entry) => entry.kind === 'theorem'
     && entry.kernelValue === null && typeof entry.kernelType === 'string'), true);
@@ -173,7 +173,7 @@ test('positive Lean probe parser rejects empty, malformed, noisy, failed, or non
   const valid = ParseLeanInventoryProbe0({
     stdout: inventoryBytes.toString('utf8'), stderr: '', exitCode: 0, timedOut: false,
   });
-  assert.equal(valid.inventory.declarationCount, 5301);
+  assert.equal(valid.inventory.declarationCount, 5323);
   for (const input of [
     { stdout: '', stderr: '', exitCode: 0, timedOut: false },
     { stdout: '{}\n', stderr: '', exitCode: 0, timedOut: false },
@@ -215,7 +215,7 @@ test('publication derivation binds the validated inventory to its exact canonica
   assert.doesNotThrow(() => DeriveFormalPublication0(inventory, map, inventoryBytes, '0'.repeat(64)));
 });
 
-test('target-present publication derivation remains false with null fingerprints and an ineligible model', async () => {
+test('target-present publication derivation remains false with null fingerprints despite an eligible model', async () => {
   const { inventoryBytes, inventory, map } = await fixture0();
   const sourceClosure = await ComputeLeanSourceClosureSha2560(ROOT, inventory);
   assert.match(sourceClosure, /^[0-9a-f]{64}$/u);
@@ -223,7 +223,7 @@ test('target-present publication derivation remains false with null fingerprints
   assert.equal(publication.gate.passed, false);
   assert.equal(publication.gate.abstractPEqualsNPIsPublicationIneligible, true);
   assert.equal(publication.gate.unsetFingerprintIsIntentionalFailClosedMigrationGate, true);
-  assert.equal(publication.gate.subchecks.standardComplexityModelEligible, false);
+  assert.equal(publication.gate.subchecks.standardComplexityModelEligible, true);
   assert.equal(publication.gate.subchecks.concreteTargetPresent, true);
   assert.equal(publication.gate.subchecks.concreteTargetIsDefinition, true);
   assert.match(publication.gate.actualConcreteTargetKernelTypeSha256, /^[0-9a-f]{64}$/u);
@@ -358,7 +358,7 @@ test('project, unknown, and sorry axioms cannot pass the fixed standard-axiom cl
   }
 });
 
-test('publication map cannot set fingerprints or expand the axiom allowlist in release 31', async () => {
+test('publication map cannot set fingerprints or expand the axiom allowlist in release 32', async () => {
   const { inventoryBytes, inventory, map } = await fixture0();
   const fingerprinted = structuredClone(map);
   fingerprinted.gate.expectedRootKernelTypeSha256 = 'a'.repeat(64);

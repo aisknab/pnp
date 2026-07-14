@@ -15,14 +15,25 @@ import {
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const SOURCE_PATH = 'lean/PNP/Concrete/PipelineRefinement.lean';
 const AUDIT_PATH = 'lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean';
+const REGRESSION_PATH = 'lean-regression/PNPConcretePipelineRefinementRecursive.lean';
 
 const EXPECTED_HEADS = Object.freeze([
   ['structure', 'RawRefinement', 'PNP.Concrete.FunctionProgram.RawRefinement'],
   ['def', 'ofMachine', 'PNP.Concrete.FunctionProgram.RawRefinement.ofMachine'],
+  ['def', 'compose', 'PNP.Concrete.FunctionProgram.RawRefinement.compose'],
+  ['def', 'compile', 'PNP.Concrete.FunctionProgram.RawRefinement.compile'],
+  ['theorem', 'compile_haltsWithin', 'PNP.Concrete.FunctionProgram.RawRefinement.compile_haltsWithin'],
+  ['theorem', 'compile_output_eq', 'PNP.Concrete.FunctionProgram.RawRefinement.compile_output_eq'],
   ['theorem', 'output_size_le', 'PNP.Concrete.FunctionProgram.RawRefinement.output_size_le'],
   ['structure', 'RawRefinement', 'PNP.Concrete.DecisionProgram.RawRefinement'],
   ['def', 'ofMachine', 'PNP.Concrete.DecisionProgram.RawRefinement.ofMachine'],
+  ['def', 'precompose', 'PNP.Concrete.DecisionProgram.RawRefinement.precompose'],
+  ['def', 'compile', 'PNP.Concrete.DecisionProgram.RawRefinement.compile'],
+  ['theorem', 'compile_haltsWithin', 'PNP.Concrete.DecisionProgram.RawRefinement.compile_haltsWithin'],
+  ['theorem', 'compile_verdict_eq', 'PNP.Concrete.DecisionProgram.RawRefinement.compile_verdict_eq'],
   ['def', 'toMachine', 'PNP.Concrete.PolynomialTimeDecider.toMachine'],
+  ['def', 'compileToMachine', 'PNP.Concrete.PolynomialTimeDecider.compileToMachine'],
+  ['theorem', 'compileToMachine_accepts_iff', 'PNP.Concrete.PolynomialTimeDecider.compileToMachine_accepts_iff'],
 ]);
 
 const EXPECTED_STRUCTURE_FIELDS = Object.freeze([
@@ -74,7 +85,7 @@ function validate0(source) {
   const compact = compactLean0(source);
 
   require0(JSON.stringify(imports0(source)) ===
-    JSON.stringify(['PNP.Concrete.Complexity']), 'closed-import');
+    JSON.stringify(['PNP.Concrete.PipelineSequentialCompiler']), 'closed-import');
   require0(/^namespace PNP\.Concrete$/mu.test(stripped) &&
     /end PNP\.Concrete\s*$/u.test(stripped), 'namespace');
   require0(!hasLeanAssumptionDeclaration0(source), 'assumption-declaration');
@@ -98,14 +109,26 @@ function validate0(source) {
     'decision-refinement-contract');
   require0((compact.match(/timeBound := stepBound/g) ?? []).length === 2,
     'both-leaves-preserve-budget');
+  require0((compact.match(/PipelineSequentialCompiler\.sequentialMachine/g) ?? []).length === 2
+    && (compact.match(/PipelineSequentialCompiler\.sequentialRawTimeBound/g) ?? []).length === 2,
+  'literal-sequential-machine-and-polynomial');
+  require0((compact.match(/PipelineSequentialCompiler\.sequential_correct/g) ?? []).length === 4,
+    'exact-sequential-correctness');
+  require0(compact.includes('def compile : (source : FunctionProgram) → RawRefinement source | .machine machine stepBound => ofMachine machine stepBound | .compose first second => compose (compile first) (compile second)'),
+    'recursive-function-compiler');
+  require0(compact.includes('def compile : (source : DecisionProgram) → RawRefinement source | .machine machine stepBound => ofMachine machine stepBound | .precompose preprocessor decision => precompose (FunctionProgram.RawRefinement.compile preprocessor) (compile decision)'),
+    'recursive-decision-compiler');
+  require0(compact.includes('rw [hFirstOutput] exact secondRefinement.haltsWithin')
+    && compact.includes('rw [hPreprocessorOutput] exact decisionRefinement.haltsWithin'),
+  'intermediate-output-transport');
   require0(compact.includes('exact refinement.haltsWithin input (decision.haltsWithin input)'),
     'decider-halting-transport');
   require0(compact.includes('rw [refinement.verdict_eq input (decision.haltsWithin input)] exact decision.accepts_iff input'),
     'decider-acceptance-transport');
+  require0(compact.includes('def compileToMachine {language : Language} (decision : PolynomialTimeDecider language) : PolynomialTimeMachine language := toMachine decision (DecisionProgram.RawRefinement.compile decision.program)'),
+    'complete-decider-compiler');
 
   for (const forbidden of [
-    'FunctionProgram.RawRefinement.compose',
-    'DecisionProgram.RawRefinement.precompose',
     'functionProgram_rawCompilable',
     'decisionProgram_rawCompilable',
     'PolynomialTimeVerifier.toRawPairedVerifier',
@@ -119,17 +142,24 @@ test('raw-pipeline contracts are closed, finite, exact, and shortcut-free', asyn
   assert.deepEqual(validate0(await text0(SOURCE_PATH)), []);
 });
 
-test('axiom transcript covers every explicit refinement declaration exactly once', async () => {
-  const [source, audit, root] = await Promise.all([
+test('axiom transcript, regression, root, and workflow cover the recursive compiler', async () => {
+  const [source, audit, regression, root, workflow] = await Promise.all([
     text0(SOURCE_PATH),
     text0(AUDIT_PATH),
+    text0(REGRESSION_PATH),
     text0('lean/PNP.lean'),
+    text0('.github/workflows/lean-bridge.yml'),
   ]);
   assert.deepEqual(headPairs0(source), EXPECTED_HEADS.map(([kind, name]) => [kind, name]));
   assert.deepEqual(imports0(audit), ['PNP']);
   assert.deepEqual(printed0(audit), EXPECTED_HEADS.map(([, , full]) => full));
   assert.equal(new Set(printed0(audit)).size, EXPECTED_HEADS.length);
   assert.ok(imports0(root).includes('PNP.Concrete.PipelineRefinement'));
+  assert.match(regression, /compile_output_eq identityThrice/u);
+  assert.match(regression, /compile_verdict_eq nestedReject/u);
+  assert.match(regression, /compileToMachine_accepts_iff/u);
+  assert.match(workflow, /PNPConcretePipelineRefinementRecursive\.lean/u);
+  assert.match(workflow, /grep -Fc 'does not depend on any axioms'\)" -eq 16/u);
 });
 
 test('contracts fail closed under halting, budget, output, verdict, and compiler overclaims', async () => {
@@ -139,9 +169,18 @@ test('contracts fail closed under halting, budget, output, verdict, and compiler
     source.replace('timeBound := stepBound', 'timeBound := .constant 0'),
     source.replace('source.eval input\n', '[]\n'),
     source.replace('source.verdict input\n', '.reject\n'),
+    source.replaceAll('PipelineSequentialCompiler.sequentialMachine',
+      'PipelineCompiler.pipelineMachine'),
+    source.replaceAll('PipelineSequentialCompiler.sequentialRawTimeBound',
+      'PipelineCompiler.pipelineRawTimeBound'),
+    source.replaceAll('rw [hFirstOutput]\n        exact secondRefinement.haltsWithin',
+      'exact secondRefinement.haltsWithin'),
+    source.replace('| .compose first second => compose (compile first) (compile second)',
+      '| .compose first second => compose (ofMachine immediateAcceptMachine (.constant 0)) (compile second)'),
     source.replace('= source.eval input\n\nnamespace RawRefinement',
       '= source.eval input\n  oracle : BitString → BitString\n\nnamespace RawRefinement'),
-    `${source}\nnamespace PNP.Concrete.FunctionProgram.RawRefinement\ndef compose := True\nend PNP.Concrete.FunctionProgram.RawRefinement\n`,
+    `${source}\naxiom hiddenRefinementOracle : True\n`,
+    `${source}\ndef pipelineClasses_equivalent_rawClasses := True\n`,
   ];
   for (const [index, mutated] of mutations.entries()) {
     assert.notEqual(mutated, source, `mutation ${index} must change the source`);
@@ -149,14 +188,16 @@ test('contracts fail closed under halting, budget, output, verdict, and compiler
   }
 });
 
-test('the general machine-link blocker and fail-closed publication gate remain present', async () => {
+test('the recursive machine link is earned while the publication gate remains fail-closed', async () => {
   const [statusSource, status, map] = await Promise.all([
     text0('pcc-formal-reconstruction-status0.mjs'),
     text0('status/FORMAL_RECONSTRUCTION_STATUS.json').then(JSON.parse),
     text0('publication/FORMAL_PUBLICATION_MAP.json').then(JSON.parse),
   ]);
-  assert.match(statusSource, /Formal\.ConcreteComplexityMachineLink/);
-  assert.ok(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'));
-  assert.equal(map.gate.standardComplexityModelEligible, false);
+  assert.doesNotMatch(statusSource, /'Formal\.ConcreteComplexityMachineLink'/);
+  assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), false);
+  assert.equal(status.leanConcretePipelineRawRefinementFormalized, true);
+  assert.equal(map.gate.standardComplexityModelEligible, true);
+  assert.equal(status.concretePublicationGate.passed, false);
   assert.equal(map.gate.expectedSourceClosureSha256, null);
 });

@@ -227,7 +227,7 @@ test('earlier bridge remains internal-output-only while the terminal suffix stay
   assert.equal(status.leanConcretePipelineTerminalOutputPackerAxiomAuditPassed, true);
   assert.equal(status.leanConcretePipelineTerminalOutputPackerConnectedToBridgeEndpointFormalized, true);
   assert.equal(status.leanConcretePipelinePriorTraceTransportToTerminalBridgeFormalized, true);
-  assert.equal(status.leanConcretePipelineRawRefinementFormalized, false);
+  assert.equal(status.leanConcretePipelineRawRefinementFormalized, true);
   assert.equal(status.leanConcreteCNFSATInPFormalized, false);
   assert.equal(status.leanConcreteCNFNPCompletenessFormalized, false);
   assert.equal(status.rootLeanTheoremPresent, false);

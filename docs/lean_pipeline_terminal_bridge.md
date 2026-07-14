@@ -141,11 +141,11 @@ The complete literal trace theorem in this module requires a caller-supplied
 exact target execution. `PipelinePairedCompiler` extracts that trace and
 derives an external polynomial for canonical pairs. `PipelineCompiler` now
 does so for every raw input, including malformed and non-pair words, while
-preserving exact verdict and raw output. No theorem supplies recursive
-`FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement` for the
-charged program syntax.
+preserving exact verdict and raw output. `PipelineRefinement` now supplies
+recursive `FunctionProgram.RawRefinement` and `DecisionProgram.RawRefinement`
+for the charged program syntax.
 
-`Formal.ConcreteComplexityMachineLink` remains open;
+`Formal.ConcreteComplexityMachineLink` is discharged;
 `PNP.Concrete.cnfSATInP`, `PNP.Concrete.cnfSATNPComplete`, and
-`PNP.Main.p_eq_np` remain absent; all seven formal blockers and four project
+`PNP.Main.p_eq_np` remain absent; six formal blockers and four project
 assumptions remain; and the concrete publication gate remains false.

@@ -181,12 +181,12 @@ test('host composition, verdict suppression, weak bounds, and overclaims fail', 
   }
 });
 
-test('publication remains fail-closed before recursive refinements', async () => {
+test('recursive refinements are earned while publication remains fail-closed', async () => {
   const status = JSON.parse(await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'));
   assert.equal(status.leanConcretePipelineSequentialCompilationFormalized, true);
   assert.equal(status.leanConcretePipelineSequentialCompilerAxiomAuditPassed, true);
   assert.equal(status.leanConcretePipelineSequentialCompilerAuditedDeclarationCount, 31);
-  assert.equal(status.leanConcretePipelineRawRefinementFormalized, false);
+  assert.equal(status.leanConcretePipelineRawRefinementFormalized, true);
   assert.equal(status.leanConcreteCNFSATInPFormalized, false);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);

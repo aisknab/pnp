@@ -26,7 +26,6 @@ const EXPECTED_AXIOMS = Object.freeze([
 ]);
 
 const EXPECTED_BLOCKERS = Object.freeze([
-  'Formal.ConcreteComplexityMachineLink',
   'Formal.ConcreteSAT',
   'Formal.LockedNANDThreshold',
   'Formal.ResidualBandMinimizer',
@@ -301,21 +300,21 @@ test('reduction identity, composition, transport, and NP-complete-in-P are const
   ]) assert.equal(failures.includes(label), false, label);
 });
 
-test('target remains an inactive definition, the raw-machine link remains blocked, and the gate stays false', async () => {
+test('target remains an inactive definition after the raw-machine link closes, and the gate stays false', async () => {
   const [status, publicationMap] = await Promise.all([
     text0('status/FORMAL_RECONSTRUCTION_STATUS.json').then(JSON.parse),
     text0('publication/FORMAL_PUBLICATION_MAP.json').then(JSON.parse),
   ]);
   assert.deepEqual(status.remainingBlockers, EXPECTED_BLOCKERS);
   assert.deepEqual(status.projectSpecificAxiomInventory, EXPECTED_AXIOMS);
-  assert.equal(status.standardComplexityModelFormalized, false);
+  assert.equal(status.standardComplexityModelFormalized, true);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);
-  assert.equal(status.concretePublicationGate.subchecks.standardComplexityModelEligible, false);
+  assert.equal(status.concretePublicationGate.subchecks.standardComplexityModelEligible, true);
   assert.equal(status.concretePublicationGate.subchecks.concreteTargetPresent, true);
   assert.equal(status.concretePublicationGate.subchecks.concreteTargetIsDefinition, true);
   assert.equal(status.concretePublicationGate.subchecks.compatibilityRootPresent, false);
-  assert.equal(publicationMap.gate.standardComplexityModelEligible, false);
+  assert.equal(publicationMap.gate.standardComplexityModelEligible, true);
   for (const field of [
     'expectedConcreteTargetKernelTypeSha256',
     'expectedConcreteTargetKernelValueSha256',

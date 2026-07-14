@@ -189,7 +189,7 @@ test('the executable compiler blocker and publication gate remain fail-closed', 
     text0('status/FORMAL_RECONSTRUCTION_STATUS.json').then(JSON.parse),
     text0('publication/FORMAL_PUBLICATION_MAP.json').then(JSON.parse),
   ]);
-  assert.ok(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'));
+  assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), false);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'PipelineTape frames raw cells between distinct two-track markers')), true);
@@ -201,13 +201,9 @@ test('the executable compiler blocker and publication gate remain fail-closed', 
   assert.equal(foundation.requiredTheorems.includes(
     'PNP.Concrete.PipelineTape.represents_expandRight_of_nil'), true);
   assert.match(foundation.scope,
-    /launches one target on the unchanged raw input/u);
-  assert.match(foundation.scope,
-    /second verdict and ordinary output are exact/u);
+    /preserves the second verdict and output/u);
   assert.match(foundation.nonClaim,
-    /composes two already-raw proof-bearing targets/u);
-  assert.match(foundation.nonClaim,
-    /recursive raw-refinement constructors/u);
-  assert.equal(map.gate.standardComplexityModelEligible, false);
+    /closes the concrete complexity machine-link blocker only/u);
+  assert.equal(map.gate.standardComplexityModelEligible, true);
   assert.equal(map.gate.expectedSourceClosureSha256, null);
 });

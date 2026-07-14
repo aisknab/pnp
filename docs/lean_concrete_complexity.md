@@ -28,17 +28,19 @@ two-machine execution in one literal finite table. It preserves the second verdi
 output, keeps stuck first endpoints as timeout, and proves the external polynomial
 `PipelineRaw(p)(m) + 6 + PipelineRaw(q)(m + p(m) + 1)`.
 `lean/PNP/Concrete/PipelineRefinement.lean` pins exact raw-machine refinement
-contracts and proves the two machine-leaf cases. `lean/PNP/Concrete/Target.lean` names the
-corresponding inactive target proposition. The explicit declarations in these layers have empty
-compiled axiom closures.
+contracts, proves the two machine-leaf cases, composes function refinements, precomposes decision
+refinements, and structurally compiles every finite function or decision tree. It then exposes any
+`PolynomialTimeDecider` as one raw `PolynomialTimeMachine` for the same language.
+`lean/PNP/Concrete/Target.lean` names the corresponding inactive target proposition. The explicit
+declarations in these layers have empty compiled axiom closures.
 
-This is a finite charged-pipeline interface. Its leaves are concrete `Machine` values, but the
-current formalization does not compile or refine an arbitrary composite pipeline into one raw
-single-tape `Machine`. That missing link is recorded as
-`Formal.ConcreteComplexityMachineLink`; consequently the publication map keeps
-`standardComplexityModelEligible` false.
+The concrete machine link is therefore closed: every charged function/decision program has a
+literal raw single-tape implementation with an explicit recursively constructed natural
+polynomial. The publication map records `standardComplexityModelEligible` true. That eligibility
+is only one gate subcheck; the compatibility root and all activation fingerprints remain absent,
+so the publication gate remains false.
 
-The local simulator and literal pipeline compilers narrow that gap without closing it. The
+The local simulator and literal pipeline compilers provide the executable basis for that link. The
 simulator preserves the source interpreter's first matching rule, handles boundary growth across
 arbitrary exterior garbage, and exposes an
 exact work-step count, exact-prefix extraction, and conditional designated-halting fuel bounds. It
@@ -46,22 +48,19 @@ does not prove termination; the padded full fuels are at-most budgets, and a stu
 endpoint is not a verdict. Its theorem starts from `encodeWorkConfiguration`, not the canonical
 `Tape.ofInput` used by `machineOutput`. The later framer, handoff, terminal packer, bridge, and
 sequential compiler modules discharge those concrete execution gaps for already-raw proof-bearing
-target machines. They do not recursively traverse the charged `FunctionProgram` or
-`DecisionProgram` syntax.
+target machines. `PipelineRefinement` recursively traverses the charged `FunctionProgram` and
+`DecisionProgram` syntax and applies the sequential compiler at every composite node.
 
 The refinement boundary is intentionally proof-bearing. A `FunctionProgram.RawRefinement` or
 `DecisionProgram.RawRefinement` supplies one raw machine, one natural-polynomial budget, a
 no-timeout theorem for every source input covered by `Halts`, and exact output or verdict equality.
-The module constructs these witnesses for raw machine leaves, transports the output bound of a
-`PolynomialTimeFunction`, and converts a `PolynomialTimeDecider` to a raw
-`PolynomialTimeMachine` only when a refinement of its complete program is supplied. It does not
-construct that refinement for composition or precomposition.
-
-Clearing that blocker requires more than compiling the pipeline syntax. The refinement must prove
-output preservation with polynomial overhead, realize both verifier input modes (including an
-input-only-to-canonical-pair adapter), preserve the fixed tape-output convention, and establish
-equivalence of the resulting raw-machine P/NP classes. Until all of those facts are proved, the
-charged interpreter remains a distinct, not-yet-linked model.
+The module constructs these witnesses for raw machine leaves, composes two proved function
+refinements, precomposes a decision refinement with a function refinement, preserves exact output
+or verdict, and recursively constructs the complete-program refinement. The generated bound at a
+binary node is
+`PipelineRaw(p)(m) + 6 + PipelineRaw(q)(m + p(m) + 1)`, where `p` is also the proved output bound
+for the first raw refinement. The verifier modes remain part of the charged interface, but the
+machine-link obligation itself is discharged.
 
 ## Finite programs and costs
 
@@ -157,7 +156,7 @@ string-handle proposition `PNP.PEqualsNP` remains publication-ineligible.
 The compiled-inventory generator supplies the exact declaration, theorem, module, private-
 auxiliary, and reviewed-candidate counts after each source-closure regeneration; this prose does
 not duplicate those moving totals. The current Lean source closure contains four project-specific
-axioms. Seven blockers remain, beginning with `Formal.ConcreteComplexityMachineLink`.
+axioms. Six blockers remain, beginning with `Formal.ConcreteSAT`.
 
 ## Audit
 
@@ -173,6 +172,7 @@ lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineStageBridgesAx
 lake env lean -DwarningAsError=true lean-audit/PNPConcreteTerminalOutputPackerAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcreteComplexityAxiomAudit.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean
+lake env lean -DwarningAsError=true lean-regression/PNPConcretePipelineRefinementRecursive.lean
 lake env lean -DwarningAsError=true lean-audit/PNPConcreteTargetAxiomAudit.lean
 node --test audits/lean-concrete-complexity0.test.mjs
 node --test audits/lean-concrete-tape-handoff0.test.mjs
@@ -206,12 +206,12 @@ handoff, and terminal raw-output packing. The bridge and single-machine compiler
 termination, ordinary `machineOutput`, and external-size bounds for an already-raw proof-bearing
 target. The sequential compiler composes two such targets in one collision-free table, passes the
 first output without host interpretation, proves the second verdict/output at an external
-polynomial, and keeps a stuck nonhalting first endpoint as timeout. It still supplies no recursive
-composition/precomposition `RawRefinement`. This milestone also does not formalize concrete SAT or
+polynomial, and keeps a stuck nonhalting first endpoint as timeout. `PipelineRefinement` now uses it
+to supply recursive composition/precomposition `RawRefinement`. This milestone does not formalize concrete SAT or
 SAT NP-hardness, instantiate
 the global locked-NAND threshold package, prove the residual-band or ZeroSlack obligations, prove
 the remaining end-to-end polynomial bounds, or establish `P = NP`.
 
-The sequential execution milestone stops at two already-raw proof-bearing machines. It does not yet
-provide the recursive `FunctionProgram.RawRefinement` and `DecisionProgram.RawRefinement`
-constructors needed to compile charged composition and precomposition syntax.
+The sequential execution milestone stops at two already-raw proof-bearing machines. The recursive
+`FunctionProgram.RawRefinement` and `DecisionProgram.RawRefinement` constructors now lift that
+result over all charged composition and precomposition syntax.

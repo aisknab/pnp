@@ -100,7 +100,8 @@ prove termination or classify an arbitrary early fuel stop as a final target ver
 module starts from an already represented frame. `PipelineStageBridges` composes every supplied
 exact run with the canonical paired-input framer and a verdict-indexed internal handoff, and proves
 that a supplied stuck nonhalting endpoint is timeout at the exact prefix budget.
-`PipelineCompiler` now supplies terminal raw `machineOutput`, target termination, and an
-external-input-size polynomial for every raw input to an already-raw target. It still does not
-construct recursive `FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement`, establish
-`CNFSAT ∈ P` or NP-completeness, activate the publication gate, or prove `P = NP`.
+`PipelineCompiler` supplies terminal raw `machineOutput`, target termination, and an
+external-input-size polynomial for every raw input to an already-raw target. `PipelineRefinement`
+now constructs recursive `FunctionProgram.RawRefinement` and `DecisionProgram.RawRefinement`.
+Neither establishes `CNFSAT ∈ P` or NP-completeness, activates the publication gate, or proves
+`P = NP`.

@@ -1353,12 +1353,11 @@ def toPolynomialTimeMachine
 
 This module proves an all-input two-machine sequential compiler with a literal
 finite raw rule table, exact verdict/output preservation, and an external
-input-size polynomial.  It does not yet define recursive
-`FunctionProgram.RawRefinement` or `DecisionProgram.RawRefinement`
-constructors and therefore does not discharge the concrete complexity
-machine-link blocker.  It does not prove CNF-SAT in P, CNF-SAT
-NP-completeness, `PNP.Main.p_eq_np`, or P = NP.  The publication gate remains
-false.
+input-size polynomial.  `PipelineRefinement` recursively applies this
+compiler to every function-composition and decision-precomposition node,
+closing the concrete complexity machine link.  It does not prove CNF-SAT in
+P, CNF-SAT NP-completeness, `PNP.Main.p_eq_np`, or P = NP.  The publication
+gate remains false.
 -/
 
 end PipelineSequentialCompiler

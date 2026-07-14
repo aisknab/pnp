@@ -18,10 +18,11 @@ exact local trace, and exact accept/reject launches into the second simulator.
 The component tables are renamed and concatenated as finite `WorkRule` lists;
 there is no host-interpreted execution or rule dispatch.
 
-This is an isolation milestone only.  It does not yet compose an end-to-end
-two-machine trace, provide an external input-size polynomial, define recursive
-`RawRefinement`, close `Formal.ConcreteComplexityMachineLink`, prove CNFSAT in
-P or NP-complete, or establish P = NP.  The publication gate remains false.
+This module is an isolation milestone only. Downstream modules now compose the
+end-to-end two-machine trace, provide an external input-size polynomial, define
+recursive `RawRefinement`, and close `Formal.ConcreteComplexityMachineLink`.
+They do not prove CNFSAT in P or NP-complete, or establish P = NP. The
+publication gate remains false.
 
 The kernel and hostile-source checks are:
 
