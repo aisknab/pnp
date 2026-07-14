@@ -45,6 +45,10 @@ on:
       - 'audits/lean-concrete-complexity0.test.mjs'
       - 'audits/lean-concrete-pipeline-refinement0.test.mjs'
       - 'audits/lean-concrete-cnf0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-layout0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-tableau0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-verifier-tableau0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-local-cnf0.test.mjs'
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
       - 'audits/lean-nand-reference-minimum0.test.mjs'
@@ -68,6 +72,10 @@ on:
       - 'docs/lean_pipeline_compiler.md'
       - 'docs/lean_pipeline_machine_simulation.md'
       - 'docs/lean_concrete_complexity.md'
+      - 'docs/lean_cook_levin_layout.md'
+      - 'docs/lean_cook_levin_tableau.md'
+      - 'docs/lean_cook_levin_verifier_tableau.md'
+      - 'docs/lean_cook_levin_local_cnf.md'
       - 'docs/lean_nand_semantics.md'
       - 'docs/lean_nand_enumerator.md'
       - 'docs/lean_nand_reference_minimum.md'
@@ -127,6 +135,10 @@ on:
       - 'audits/lean-concrete-complexity0.test.mjs'
       - 'audits/lean-concrete-pipeline-refinement0.test.mjs'
       - 'audits/lean-concrete-cnf0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-layout0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-tableau0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-verifier-tableau0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-local-cnf0.test.mjs'
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
       - 'audits/lean-nand-reference-minimum0.test.mjs'
@@ -150,6 +162,10 @@ on:
       - 'docs/lean_pipeline_compiler.md'
       - 'docs/lean_pipeline_machine_simulation.md'
       - 'docs/lean_concrete_complexity.md'
+      - 'docs/lean_cook_levin_layout.md'
+      - 'docs/lean_cook_levin_tableau.md'
+      - 'docs/lean_cook_levin_verifier_tableau.md'
+      - 'docs/lean_cook_levin_local_cnf.md'
       - 'docs/lean_nand_semantics.md'
       - 'docs/lean_nand_enumerator.md'
       - 'docs/lean_nand_reference_minimum.md'
@@ -222,6 +238,9 @@ jobs:
 
       - name: Audit uniform bounded verifier-tableau source
         run: node --test audits/lean-concrete-cook-levin-verifier-tableau0.test.mjs
+
+      - name: Audit finite local Cook-Levin CNF compiler source
+        run: node --test audits/lean-concrete-cook-levin-local-cnf0.test.mjs
 
       - name: Build explicit PNP root
         run: lake build PNP
@@ -472,6 +491,16 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 41
+
+      - name: Print finite local Cook-Levin CNF compiler axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinLocalCNFAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          if printf '%s\n' "$audit_output" | grep -F 'depends on axioms:'; then
+            echo 'Finite local Cook-Levin CNF compiler unexpectedly depends on axioms.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 75
 
       - name: Print concrete CNF work-input bridge axioms
         run: |
