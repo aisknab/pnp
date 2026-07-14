@@ -132,10 +132,10 @@ test('publication consumes the reviewed recursive-refinement map and inventory c
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'f61b4a84b1cefff428269cb807f636729dec8a6318d0316f776af656df06bb77');
+    '25587cb2a98675bab288df57a61fd64b39d06661e948e74d76904ae663bd8f85');
   assert.equal(map.milestoneSourceClosureSha256,
-    '6139040080662d4ac136e19a1379f751c0492107ed7f264f9ec57b7304fe247c');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 226);
+    '6f9e9a86b966ce2d7eacc929bb55806313d406ad2295cc55ac52be3f38ae8032');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 235);
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.PipelineCompiler.pipeline_correct'
   ], 'string');
@@ -158,7 +158,7 @@ test('publication consumes the reviewed recursive-refinement map and inventory c
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [5598, 2376, 2271, 1042, 53]);
+  ], [5656, 2401, 2295, 1042, 54]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
