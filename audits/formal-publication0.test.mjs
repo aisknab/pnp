@@ -125,6 +125,16 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     .axiomClosureUsesOnlyLeanStandardAllowlist, true);
   assert.match(byId.get('concrete-cook-levin-raw-tape-bridge').nonClaim,
     /does not yet prove external encoded-formula-size/u);
+  assert.equal(byId.get('concrete-cook-levin-formula-size').status,
+    'formalized-foundation-only');
+  assert.equal(byId.get('concrete-cook-levin-formula-size').earned, true);
+  assert.equal(byId.get('concrete-cook-levin-formula-size').allAssumptionFree, false);
+  assert.equal(byId.get('concrete-cook-levin-formula-size')
+    .axiomClosureUsesOnlyLeanStandardAllowlist, true);
+  assert.equal(byId.get('concrete-cook-levin-formula-size').requiredTheorems.includes(
+    'PNP.Concrete.CookLevin.VerifierTableauProblem.encodedFormula_size_le'), true);
+  assert.match(byId.get('concrete-cook-levin-formula-size').nonClaim,
+    /does not implement or time a raw finite formula builder/u);
   assert.equal(byId.get('concrete-cnf-universal-verifier').requiredTheorems.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP'), true);
   assert.match(byId.get('concrete-cnf-universal-verifier').nonClaim,
@@ -152,10 +162,10 @@ test('publication consumes the reviewed recursive-refinement map and inventory c
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'f5f77cc5ac3a01038af1eed221ca0dc16d15a4eff90060c5c0a2226447947d6f');
+    '7f20da9e994317be392dd6bac4028948860c7b50b582d706d53df221d443d38e');
   assert.equal(map.milestoneSourceClosureSha256,
-    '0a7ac112bc72844c0c670bae50275a1c01d94171351720c2ad34220bbe46b1e0');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 269);
+    '79da4cdee30162ef20a69b8a3592ea5ed2c59ed5ad692c2015f6a16add3adc02');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 278);
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.PipelineCompiler.pipeline_correct'
   ], 'string');
@@ -190,7 +200,7 @@ test('publication consumes the reviewed recursive-refinement map and inventory c
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [6306, 2747, 2456, 1068, 58]);
+  ], [6459, 2883, 2495, 1077, 59]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

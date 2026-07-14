@@ -38,7 +38,9 @@ The endpoint theorems are:
 Thus the generated formula is semantically equivalent to the concrete raw
 verifier execution for each verifier and source input.
 
-This milestone does not yet prove polynomial bounds for the external encoded
-formula size or the formula-construction runtime, does not package the
-builder as a concrete `PolynomialReduction`, and does not establish CNFSAT
-NP-completeness, CNFSAT in P, or P = NP. The publication gate remains false.
+This module does not itself prove polynomial bounds for the external encoded
+formula size or the formula-construction runtime. The following
+`CookLevinFormulaSize` milestone now supplies the external output-size bound,
+but it does not implement or time a raw formula builder or package a concrete
+`PolynomialReduction`. CNFSAT NP-completeness, CNFSAT in P, and P = NP remain
+absent, and the publication gate remains false.

@@ -352,7 +352,7 @@ ineligible for the general charged-pipeline target, even though the direct CNF v
 to one raw machine. The abstract `PNP.PEqualsNP` bridge remains ineligible. See
 [`lean_theorem_inventory.md`](./lean_theorem_inventory.md) for the full contract and commands.
 
-The inventory and false gate generate the current root TeX/PDF: a concise nine-page
+The inventory and false gate generate the current root TeX/PDF: a concise thirteen-page
 formal-reconstruction report with no theorem emission. It replaces the historical 56-page claim
 manuscript at the repository root; that historical artifact is available only through the pinned
 legacy coordinate recorded under [`archive/legacy-v0/`](../archive/legacy-v0/README.md).

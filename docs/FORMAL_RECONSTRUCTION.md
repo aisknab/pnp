@@ -155,7 +155,8 @@ and public copies must be byte-identical. See
 commands.
 
 Every earned intermediate milestone row requires its configured detailed theorem candidates to
-match by exact name and theorem kind, have empty axiom closures, preserve their per-name
+match by exact name and theorem kind, have axiom closures within the fixed Lean standard
+allowlist and no project axioms, preserve their per-name
 domain-separated kernel-type SHA-256 values, and match the pinned closure over every
 `lean/**/*.lean` file plus the Lean/Lake pins and inventory probe. Type or source drift revokes
 milestone credit until reviewed pins change.
@@ -174,21 +175,23 @@ abstract and explicitly publication-ineligible.
 
 The expected kernel fingerprints for the concrete target type and value, compatibility-root type,
 axiom closure, and source closure are intentionally `null` in this migration step. Unset
-fingerprints fail closed; `null` never matches `null`. The standard-complexity-model eligibility
-check is also false. Therefore the gate does not pass and every theorem-emission field derived
-from it remains false or `null`.
+fingerprints fail closed; `null` never matches `null`. The concrete finite charged-pipeline model is
+eligible, but eligibility alone cannot replace the absent root theorem or unset fingerprints.
+Therefore the gate does not pass and every theorem-emission field derived from it remains false or
+`null`.
 
 The root `canonical_proof_report.tex` and `canonical_proof_report.pdf` now form the generated,
-concise nine-page formal-reconstruction report. They replace the historical claim manuscript at the
+concise thirteen-page formal-reconstruction report. They replace the historical claim manuscript at the
 root and make the non-activation boundary explicit. The historical 56-page claim artifact is
 available only from the pinned legacy source coordinate recorded under
 [`archive/legacy-v0/`](../archive/legacy-v0/README.md).
 
-The direct CNF verifier closes one formerly abstract obligation—concrete NP membership for
-`PNP.Concrete.CNFSAT`—and the all-input compiler closes literal four-stage raw execution,
-raw-visible output, timeout behavior, and an external-input-size polynomial for an already-raw
-proof-bearing target. These results do not discharge the remaining publication blockers. In
-particular, recursive charged-program refinement, a deterministic polynomial-time CNF-SAT decider,
+The direct CNF verifier closes concrete NP membership for `PNP.Concrete.CNFSAT`; the all-input and
+sequential compilers plus recursive refinement close the concrete machine-link blocker. The
+Cook–Levin development now proves exact raw-verifier semantic equivalence and an explicit
+polynomial bound for the actual canonical encoded formula in external source-input length. These
+results still do not provide a raw formula builder with a polynomial construction-runtime proof or
+package a concrete `PolynomialReduction`. A deterministic polynomial-time CNF-SAT decider,
 concrete NP-hardness/NP-completeness, locked-NAND threshold, residual-band minimizer, ZeroSlack,
 the remaining end-to-end polynomial bounds, and the root theorem/axiom audit remain incomplete.
 
