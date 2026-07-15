@@ -56,6 +56,7 @@ on:
       - 'audits/lean-concrete-cook-levin-formula-schedule0.test.mjs'
       - 'audits/lean-concrete-cook-levin-formula-cursor0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-input-length0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-builder-input-prefix0.test.mjs'
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
       - 'audits/lean-nand-reference-minimum0.test.mjs'
@@ -90,6 +91,7 @@ on:
       - 'docs/lean_cook_levin_formula_schedule.md'
       - 'docs/lean_cook_levin_formula_cursor.md'
       - 'docs/lean_cook_levin_builder_input_length.md'
+      - 'docs/lean_cook_levin_builder_input_prefix.md'
       - 'docs/lean_nand_semantics.md'
       - 'docs/lean_nand_enumerator.md'
       - 'docs/lean_nand_reference_minimum.md'
@@ -160,6 +162,7 @@ on:
       - 'audits/lean-concrete-cook-levin-formula-schedule0.test.mjs'
       - 'audits/lean-concrete-cook-levin-formula-cursor0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-input-length0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-builder-input-prefix0.test.mjs'
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
       - 'audits/lean-nand-reference-minimum0.test.mjs'
@@ -194,6 +197,7 @@ on:
       - 'docs/lean_cook_levin_formula_schedule.md'
       - 'docs/lean_cook_levin_formula_cursor.md'
       - 'docs/lean_cook_levin_builder_input_length.md'
+      - 'docs/lean_cook_levin_builder_input_prefix.md'
       - 'docs/lean_nand_semantics.md'
       - 'docs/lean_nand_enumerator.md'
       - 'docs/lean_nand_reference_minimum.md'
@@ -290,6 +294,9 @@ jobs:
 
       - name: Audit literal Cook-Levin builder input-length tally
         run: node --test audits/lean-concrete-cook-levin-builder-input-length0.test.mjs
+
+      - name: Audit executable Cook-Levin builder input prefix
+        run: node --test audits/lean-concrete-cook-levin-builder-input-prefix0.test.mjs
 
       - name: Build explicit PNP root
         run: lake build PNP
@@ -669,6 +676,27 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 1
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 6
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderInputLength.lean
+
+      - name: Print executable Cook-Levin builder input-prefix axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderInputPrefixAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderInputPrefix\.")" -eq 40
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected Cook-Levin builder input-prefix axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Cook-Levin builder input prefix reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 29
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 1
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 10
+          lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderInputPrefix.lean
 
       - name: Print concrete CNF work-input bridge axioms
         run: |

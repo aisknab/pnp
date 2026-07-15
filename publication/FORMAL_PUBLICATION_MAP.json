@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-15-43",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-15-44",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "77534b5f3a99d890c1e8f53630531a430c1ab37edf0e2e1648f450fd71610ab6",
+  "milestoneSourceClosureSha256": "fb3ecdea2590b6a65ae8de5ebd9e1b86c1e36f2ae9659de7febb817f4306ce3d",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CookLevin.assignmentAt_assignmentOf": "138ace06e46c2ba101542489b6bb13a2fbff763efa13eb8575ab60939cc709cc",
@@ -327,7 +327,21 @@
     "PNP.Concrete.CookLevin.VerifierTableauProblem.formulaBitSlotDirect_eq": "6a3c74f3924ed7defe38713b118e0fecc8a1e71f50b20d2ac1dc0c6535bf6e2c",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.formulaClauseSlotDirect_eq": "0ed670f82237e1984c35dec8edbc2b3ad392759310b5ba0b12311fc799531a98",
     "PNP.Concrete.CookLevin.VerifierTableauProblem.formulaConstraintSlotDirect_eq": "46a46409172b2443dcc6eb4dccf939737ce3fb25583a957acfdfb34dde7c0edc",
-    "PNP.Concrete.CookLevin.VerifierTableauProblem.formulaTokenSlotDirect_eq": "4675f18d3c1f1fa7fb16c2dec7b1e370589ef6977367eb8e4da97b2a03452d1a"
+    "PNP.Concrete.CookLevin.VerifierTableauProblem.formulaTokenSlotDirect_eq": "4675f18d3c1f1fa7fb16c2dec7b1e370589ef6977367eb8e4da97b2a03452d1a",
+    "PNP.Concrete.CookLevin.BuilderInputPrefix.boundedDecide_compile_accept": "6fbd596723b2a97d405d1d8129e20901d51008c773af5d80b4633a819fead57d",
+    "PNP.Concrete.CookLevin.BuilderInputPrefix.finalTape_represents": "14cba9d7647fcef8f062c2ab6e3d16e84eed233e1ec53491382991421795e2cc",
+    "PNP.Concrete.CookLevin.BuilderInputPrefix.finalTape_tally_length": "92f992615d4bde8569d585f54ec0d7963cb5ec043e81b410433c1d3f6e190dfe",
+    "PNP.Concrete.CookLevin.BuilderInputPrefix.findWorkRule_framer_of_some": "3e82d88005087443565389d5dda84a673b4eaecf637e60eff5cc4cb414679b18",
+    "PNP.Concrete.CookLevin.BuilderInputPrefix.findWorkRule_tally_of_some": "e88f5a2d04ae75d874e6be87f837e3eb73a70aaad095ef44c8bc40383ac90dab",
+    "PNP.Concrete.CookLevin.BuilderInputPrefix.framerState_ne_tallyState": "b37cc329b82a3489b6cbbf59f49d6f85494e1cba3b6d74afd111177f882691f0",
+    "PNP.Concrete.CookLevin.BuilderInputPrefix.launch_workStep": "7ddf442477605b69a2a48fa9de34c9d3e231fc125fb2ffbe2f862464c0646bd9",
+    "PNP.Concrete.CookLevin.BuilderInputPrefix.malformedTallyScanSymbol_timeout": "e6799395b2907abc1740c4fd7d96fc9ac8f1ee24670e4b7aceb39a0927fbdd66",
+    "PNP.Concrete.CookLevin.BuilderInputPrefix.rawTimeBound_eval": "d875640901af586ab3e6ab4507d62c25b94e34ef8c87082fb35fcf58c757dc1c",
+    "PNP.Concrete.CookLevin.BuilderInputPrefix.rawTimeBound_le": "0bb31c2ccec14489cb58eef73d58cd55053f684ece8105a311c516723178fd1d",
+    "PNP.Concrete.CookLevin.BuilderInputPrefix.run_compile_exact": "963473ed4426824bdbf27defba1524964c2a5b245c428a885c4207eb76f48ee6",
+    "PNP.Concrete.CookLevin.BuilderInputPrefix.run_compile_rawTimeBound": "7a9d88bb8b61f9d4629a16f11b0bb0e54c61845d2e9a2775aa8b5c7998ce58c9",
+    "PNP.Concrete.CookLevin.BuilderInputPrefix.work_one_step_short_timeout": "a395f5f859d7689faa0236d2660746c52e438e6e174aa34b698725f7eae40538",
+    "PNP.Concrete.CookLevin.BuilderInputPrefix.workRunExact": "c4d91b64e983bc5a6713fa64ab86821edd442cc79cbf872b2fafe6f3194ab2b3"
   },
   "milestones": [
     {
@@ -742,6 +756,29 @@
         "PNP.Concrete.CookLevin.BuilderInputLength.work_one_step_short_timeout"
       ],
       "nonClaim": "This is only the input-length preparation stage. It does not emit formula bits, interpret direct cursor slots as raw transitions, compose a complete raw formula builder, construct a FunctionProgram.RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-completeness, establish CNFSAT in P, or prove P = NP."
+    },
+    {
+      "id": "concrete-cook-levin-builder-input-prefix",
+      "title": "Executable Cook-Levin builder input prefix",
+      "classification": "formalized-foundation-only",
+      "scope": "One literal finite work machine contains collision-free renamed copies of the total all-input framer and fixed 19-rule unary tally, with a total nine-symbol tape/head-preserving launch between them. Every raw bitstring reaches the exact preserved-input tally endpoint in totalInputFramerWorkSteps(input) + 1 + 2*n*n + 4*n + 2 work transitions and within the external compiled polynomial 18*n*n + 63*n + 93. All 40 public declarations are axiom-audited: 29 have empty closure, one uses only propext, and ten use only propext and Quot.sound.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.boundedDecide_compile_accept",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.finalTape_represents",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.finalTape_tally_length",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.findWorkRule_framer_of_some",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.findWorkRule_tally_of_some",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.framerState_ne_tallyState",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.launch_workStep",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.malformedTallyScanSymbol_timeout",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.rawTimeBound_eval",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.rawTimeBound_le",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.run_compile_exact",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.run_compile_rawTimeBound",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.workRunExact",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.work_one_step_short_timeout"
+      ],
+      "nonClaim": "This is still only an executable input-preparation prefix. It emits no formula bit, performs no raw formula-cursor interpretation, supplies no complete formula builder or construction-time RawRefinement, packages no concrete PolynomialReduction, and establishes neither CNFSAT NP-completeness, CNFSAT in P, nor P = NP."
     },
     {
       "id": "direct-wire-semantics",

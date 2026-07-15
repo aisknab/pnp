@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-15-43",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-15-44",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -38,6 +38,13 @@
   "leanConcreteCookLevinBuilderInputLengthExternalInputSizePolynomialFormalized": true,
   "leanConcreteCookLevinBuilderInputLengthMalformedInternalInputTimeoutFormalized": true,
   "leanConcreteCookLevinBuilderInputLengthConnectedToTotalInputFramerEndpointFormalized": true,
+  "leanConcreteCookLevinBuilderInputPrefixFormalized": true,
+  "leanConcreteCookLevinBuilderInputPrefixAxiomAuditPassed": true,
+  "leanConcreteCookLevinBuilderInputPrefixAuditedDeclarationCount": 40,
+  "leanConcreteCookLevinBuilderInputPrefixCompiledRawMachineFormalized": true,
+  "leanConcreteCookLevinBuilderInputPrefixExternalInputSizePolynomialFormalized": true,
+  "leanConcreteCookLevinBuilderInputPrefixMalformedScanSymbolTimeoutFormalized": true,
+  "leanConcreteCookLevinBuilderInputPrefixLiteralFramerLaunchFormalized": true,
   "leanConcretePipelineStateNamespaceFormalized": true,
   "leanConcretePipelineStateNamespaceAxiomAuditPassed": true,
   "leanConcretePipelineStateNamespaceAuditedDeclarationCount": 39,
@@ -169,7 +176,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-15-COOK-LEVIN-BUILDER-INPUT-LENGTH-42",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-15-COOK-LEVIN-BUILDER-INPUT-PREFIX-43",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -347,6 +354,7 @@
     "node --test audits/lean-concrete-cook-levin-formula-schedule0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-formula-cursor0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-builder-input-length0.test.mjs",
+    "node --test audits/lean-concrete-cook-levin-builder-input-prefix0.test.mjs",
     "node --test audits/lean-nand-semantics0.test.mjs",
     "node --test audits/lean-nand-enumerator0.test.mjs",
     "node --test audits/lean-nand-reference-minimum0.test.mjs",
@@ -392,6 +400,8 @@
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinFormulaCursor.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderInputLengthAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderInputLength.lean",
+    "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderInputPrefixAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderInputPrefix.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFWorkCanonical.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteWorkCompilerEdges.lean",
     "lake env lean -DwarningAsError=true --run lean-regression/PNPConcreteCNFWorkCanonicalExtended.lean",
@@ -438,6 +448,7 @@
     "CookLevinFormulaSchedule allocates exact rectangular constraint, clause, token, and raw-bit slots without reading the canonical program, formula, token encoding, or encoded formula as schedule inputs. Filtering populated slots reproduces those existing canonical objects, and the bit-slot count is exactly encodedFormulaSizePolynomial at external input length. This is a pure schedule specification: it is not a raw finite builder, a construction-runtime theorem, a RawRefinement, or a PolynomialReduction.",
     "CookLevinFormulaCursor decodes constraint, clause, token, and raw-bit coordinates without constructing the complete canonical program, formula, token stream, or encoded formula. Its nested options distinguish out-of-range, valid padding, and populated slots; exact prefix, full, one-step-short, terminal, and excess-fuel theorems reproduce the canonical schedule and encoded output. This remains a Lean specification cursor, not a constant-time raw slot interpreter, raw finite builder, construction-runtime theorem, RawRefinement, or PolynomialReduction.",
     "CookLevin.BuilderInputLength is a fixed 19-rule work machine that preserves every source bit, appends exactly one unary tally cell per bit in fresh right-side workspace, and accepts after exactly 2*n*n + 4*n + 2 work steps. Its compiled raw run uses exactly 12*n*n + 24*n + 12 steps, malformed internal scan symbols and one-step-short fuel time out, and its start tape is definitionally the proved total-input-framer endpoint. This is one preparatory builder stage only: it does not emit a formula bit, interpret a formula cursor slot, compose the complete builder, establish RawRefinement or PolynomialReduction, prove CNFSAT NP-completeness or in P, or prove P = NP.",
+    "CookLevin.BuilderInputPrefix places the total all-input framer, one total symbol-preserving launch, and BuilderInputLength in one collision-free finite work-machine table. Every raw bitstring reaches the exact preserved-input unary-tally endpoint within 18*n*n + 63*n + 93 compiled raw steps; a tally scan configuration headed by the unused zeroOne symbol times out for every exterior tape and fuel, and one-step-short fuel remains fail-closed. This is still only an input-preparation prefix: it emits no formula bit, interprets no formula cursor coordinate, supplies no complete builder, RawRefinement, PolynomialReduction, CNFSAT NP-completeness or in-P theorem, or P = NP theorem.",
     "The 9,300-pair canonical sweep, 40,020-pair extended sweep, 261,121-pair bounded differential sweep, and ten compiler-edge cases are finite regression evidence; the universal result comes from the audited Lean theorems, not from testing.",
     "The formalized direct-wire NAND semantics layer does not by itself prove enumeration, minimum size, replacement/slack, the locked NAND builder, its threshold, SAT, or P = NP.",
     "The exact-width syntactic NAND enumeration remains intentionally noncanonical and may contain duplicates.",
@@ -490,7 +501,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "77534b5f3a99d890c1e8f53630531a430c1ab37edf0e2e1648f450fd71610ab6",
+    "actualSourceClosureSha256": "fb3ecdea2590b6a65ae8de5ebd9e1b86c1e36f2ae9659de7febb817f4306ce3d",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -520,22 +531,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-15-43",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-15-44",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "26411d463de689718ce384def4af53b386bdcfb4e2c17334d23bf471a787f43f",
+  "leanTheoremInventorySha256": "32f224f98afff60f9ab8d8a789648431976242313562758a66036946bbfde6fd",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 6849,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 1220,
-  "leanTheoremInventoryTheoremCount": 3104,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 2560,
-  "leanTheoremInventorySourceClosureModuleCount": 62,
-  "leanSourceClosureSha256": "77534b5f3a99d890c1e8f53630531a430c1ab37edf0e2e1648f450fd71610ab6",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-15-43",
+  "leanTheoremInventoryDeclarationCount": 6901,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 1228,
+  "leanTheoremInventoryTheoremCount": 3143,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 2585,
+  "leanTheoremInventorySourceClosureModuleCount": 63,
+  "leanSourceClosureSha256": "fb3ecdea2590b6a65ae8de5ebd9e1b86c1e36f2ae9659de7febb817f4306ce3d",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-15-44",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "61225b42d5c3ecfd6ada2e08902fa7ecf9d1c8faf49deda543e477c484a689d7",
+  "formalPublicationMapSha256": "b86963591d9bed41c6c75892a3af9c19e62179c518f034d5a7f4a96156304f5c",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",
@@ -3809,6 +3820,187 @@
       "status": "formalized-foundation-only"
     },
     {
+      "id": "concrete-cook-levin-builder-input-prefix",
+      "title": "Executable Cook-Levin builder input prefix",
+      "classification": "formalized-foundation-only",
+      "scope": "One literal finite work machine contains collision-free renamed copies of the total all-input framer and fixed 19-rule unary tally, with a total nine-symbol tape/head-preserving launch between them. Every raw bitstring reaches the exact preserved-input tally endpoint in totalInputFramerWorkSteps(input) + 1 + 2*n*n + 4*n + 2 work transitions and within the external compiled polynomial 18*n*n + 63*n + 93. All 40 public declarations are axiom-audited: 29 have empty closure, one uses only propext, and ten use only propext and Quot.sound.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.boundedDecide_compile_accept",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.finalTape_represents",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.finalTape_tally_length",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.findWorkRule_framer_of_some",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.findWorkRule_tally_of_some",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.framerState_ne_tallyState",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.launch_workStep",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.malformedTallyScanSymbol_timeout",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.rawTimeBound_eval",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.rawTimeBound_le",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.run_compile_exact",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.run_compile_rawTimeBound",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.workRunExact",
+        "PNP.Concrete.CookLevin.BuilderInputPrefix.work_one_step_short_timeout"
+      ],
+      "nonClaim": "This is still only an executable input-preparation prefix. It emits no formula bit, performs no raw formula-cursor interpretation, supplies no complete formula builder or construction-time RawRefinement, packages no concrete PolynomialReduction, and establishes neither CNFSAT NP-completeness, CNFSAT in P, nor P = NP.",
+      "theoremRows": [
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderInputPrefix.boundedDecide_compile_accept",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6fbd596723b2a97d405d1d8129e20901d51008c773af5d80b4633a819fead57d",
+          "expectedKernelTypeSha256": "6fbd596723b2a97d405d1d8129e20901d51008c773af5d80b4633a819fead57d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderInputPrefix.finalTape_represents",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "14cba9d7647fcef8f062c2ab6e3d16e84eed233e1ec53491382991421795e2cc",
+          "expectedKernelTypeSha256": "14cba9d7647fcef8f062c2ab6e3d16e84eed233e1ec53491382991421795e2cc",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderInputPrefix.finalTape_tally_length",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "92f992615d4bde8569d585f54ec0d7963cb5ec043e81b410433c1d3f6e190dfe",
+          "expectedKernelTypeSha256": "92f992615d4bde8569d585f54ec0d7963cb5ec043e81b410433c1d3f6e190dfe",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderInputPrefix.findWorkRule_framer_of_some",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "3e82d88005087443565389d5dda84a673b4eaecf637e60eff5cc4cb414679b18",
+          "expectedKernelTypeSha256": "3e82d88005087443565389d5dda84a673b4eaecf637e60eff5cc4cb414679b18",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderInputPrefix.findWorkRule_tally_of_some",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "e88f5a2d04ae75d874e6be87f837e3eb73a70aaad095ef44c8bc40383ac90dab",
+          "expectedKernelTypeSha256": "e88f5a2d04ae75d874e6be87f837e3eb73a70aaad095ef44c8bc40383ac90dab",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderInputPrefix.framerState_ne_tallyState",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "b37cc329b82a3489b6cbbf59f49d6f85494e1cba3b6d74afd111177f882691f0",
+          "expectedKernelTypeSha256": "b37cc329b82a3489b6cbbf59f49d6f85494e1cba3b6d74afd111177f882691f0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderInputPrefix.launch_workStep",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "7ddf442477605b69a2a48fa9de34c9d3e231fc125fb2ffbe2f862464c0646bd9",
+          "expectedKernelTypeSha256": "7ddf442477605b69a2a48fa9de34c9d3e231fc125fb2ffbe2f862464c0646bd9",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderInputPrefix.malformedTallyScanSymbol_timeout",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "e6799395b2907abc1740c4fd7d96fc9ac8f1ee24670e4b7aceb39a0927fbdd66",
+          "expectedKernelTypeSha256": "e6799395b2907abc1740c4fd7d96fc9ac8f1ee24670e4b7aceb39a0927fbdd66",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderInputPrefix.rawTimeBound_eval",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d875640901af586ab3e6ab4507d62c25b94e34ef8c87082fb35fcf58c757dc1c",
+          "expectedKernelTypeSha256": "d875640901af586ab3e6ab4507d62c25b94e34ef8c87082fb35fcf58c757dc1c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderInputPrefix.rawTimeBound_le",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0bb31c2ccec14489cb58eef73d58cd55053f684ece8105a311c516723178fd1d",
+          "expectedKernelTypeSha256": "0bb31c2ccec14489cb58eef73d58cd55053f684ece8105a311c516723178fd1d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderInputPrefix.run_compile_exact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "963473ed4426824bdbf27defba1524964c2a5b245c428a885c4207eb76f48ee6",
+          "expectedKernelTypeSha256": "963473ed4426824bdbf27defba1524964c2a5b245c428a885c4207eb76f48ee6",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderInputPrefix.run_compile_rawTimeBound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7a9d88bb8b61f9d4629a16f11b0bb0e54c61845d2e9a2775aa8b5c7998ce58c9",
+          "expectedKernelTypeSha256": "7a9d88bb8b61f9d4629a16f11b0bb0e54c61845d2e9a2775aa8b5c7998ce58c9",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderInputPrefix.workRunExact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c4d91b64e983bc5a6713fa64ab86821edd442cc79cbf872b2fafe6f3194ab2b3",
+          "expectedKernelTypeSha256": "c4d91b64e983bc5a6713fa64ab86821edd442cc79cbf872b2fafe6f3194ab2b3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderInputPrefix.work_one_step_short_timeout",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a395f5f859d7689faa0236d2660746c52e438e6e174aa34b698725f7eae40538",
+          "expectedKernelTypeSha256": "a395f5f859d7689faa0236d2660746c52e438e6e174aa34b698725f7eae40538",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
+    },
+    {
       "id": "direct-wire-semantics",
       "title": "Typed direct-wire NAND semantics",
       "classification": "formalized",
@@ -4231,7 +4423,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-15-43",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-15-44",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true
