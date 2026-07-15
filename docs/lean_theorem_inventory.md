@@ -80,8 +80,13 @@ The reviewed Cook--Levin builder boundary now includes one executable input pref
 collision-free finite table runs the total all-input framer, one nine-symbol launch, and the fixed
 unary length tally from every raw bitstring. The exact cumulative trace has the external compiled
 bound `18*n*n + 63*n + 93`; a tally scan configuration headed by the unused `zeroOne` symbol and one-step-short fuel remain timeout. These
-fingerprints establish only input preparation. No formula bit is emitted and no complete builder,
-construction-runtime `RawRefinement`, or concrete `PolynomialReduction` is present.
+fingerprints establish input preparation. A separate fixed 59-rule state-selected table now appends
+any canonical CNF token after a supplied tally endpoint, with exact append/rewind behavior for every
+prior token list and arbitrary exterior garbage. Its distinguished first `T` token has compiled raw
+bound `24*n + 48` and is proved equal to direct formula coordinates zero and one and to the first two
+bits of the actual canonical encoded formula. The two tables are not composed. No remaining header,
+dynamic raw cursor interpreter, complete builder, construction-runtime `RawRefinement`, or concrete
+`PolynomialReduction` is present.
 
 The current four project-specific axioms remain visible as an independent inventory:
 

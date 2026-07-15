@@ -1,6 +1,6 @@
 # Formal reconstruction notice
 
-**Effective: 13 July 2026**
+**Effective: 16 July 2026**
 
 ## Current status
 
@@ -200,7 +200,14 @@ compiled raw polynomials plus malformed and one-step-short timeout. A collision-
 now executes the total framer, one literal symbol-preserving launch, and that tally from every raw
 bitstring within the external compiled polynomial `18*n*n + 63*n + 93`; a tally scan configuration
 headed by the unused `zeroOne` symbol and one-step-short fuel remain timeout. These results still do
-not emit formula bits, compose a complete
+not compose into the next standalone table. That next fixed 59-rule machine now appends any one of
+the four canonical two-bit CNF tokens after a supplied tally endpoint and restores the source focus
+for every input, canonical prior output, and arbitrary exterior garbage. Its distinguished start
+appends the first `T` width-header token within `24*n + 48` compiled raw steps. Lean proves that the
+token is exactly direct formula-bit coordinates zero and one and `encodedFormula.take 2` for every
+concrete problem in either input mode. Malformed tally/output phases and one-step-short fuel remain
+timeout. This earns one literal formula-token stage, but it does not compute the rest of the header,
+interpret a dynamic cursor, or compose a complete
 raw formula builder with a polynomial construction-runtime proof, or package a concrete
 `PolynomialReduction`. A deterministic polynomial-time CNF-SAT decider,
 concrete NP-hardness/NP-completeness, locked-NAND threshold, residual-band minimizer, ZeroSlack,

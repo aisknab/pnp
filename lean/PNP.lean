@@ -39,6 +39,7 @@ import PNP.Concrete.CookLevinFormulaSchedule
 import PNP.Concrete.CookLevinFormulaCursor
 import PNP.Concrete.CookLevinBuilderInputLength
 import PNP.Concrete.CookLevinBuilderInputPrefix
+import PNP.Concrete.CookLevinBuilderTokenAppender
 import PNP.Concrete.CNFVerifier
 import PNP.Concrete.CNFWorkInput
 import PNP.Concrete.CNFWorkUniversalCorrectness
