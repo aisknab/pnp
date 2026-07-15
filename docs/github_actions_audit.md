@@ -30,8 +30,11 @@ from current theorem status.
   threshold-boundary audits plus the explicit-list residual-route audit when Lean inputs change.
   The Cook--Levin lane additionally audits the 79-declaration rectangular formula schedule, the
   129-declaration direct formula cursor, the 39-declaration literal input-length tally machine, the
-  40-declaration executable framer-to-tally prefix, and their empty/one-bit/odd/even regression
-  instantiations.
+  40-declaration executable framer-to-tally prefix, the 68-declaration standalone four-token
+  appender, and their empty/one-bit/odd/even regression instantiations. The appender checks all four
+  state-selected token traces, the external `24*n + 48` first-token raw bound, both malformed scan
+  phases, one-step-short timeout, and the first two direct/canonical formula bits in both verifier
+  input modes. It does not treat the supplied prefix endpoint as a composed rule table.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual

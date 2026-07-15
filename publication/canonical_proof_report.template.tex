@@ -58,11 +58,12 @@
   CNF-SAT membership in NP with an explicit polynomial bound. It does not prove CNF-SAT in P,
   NP-hardness, NP-completeness, or $P=NP$. The general charged pipeline is linked to the raw machine
   kernel, and the Cook--Levin formula has an exact externally sized answer-independent slot
-  schedule plus a direct fuelled specification cursor. A fixed 19-rule preparatory stage now
-  preserves the input while tallying its length at an exact quadratic raw cost. That stage and the
+  schedule plus a direct fuelled specification cursor. A fixed 19-rule preparatory stage and the
   total raw-input framer now execute in one collision-free finite table within
-  $18n^2+63n+93$ raw steps, but there is no complete raw polynomial-time formula builder or concrete
-  CNFSAT reduction. The reviewed activation fingerprints are unset and no root theorem exists. The
+  $18n^2+63n+93$ raw steps. A separate 59-rule machine appends any selected canonical token and
+  proves its first \code{T} token is the actual formula's first two bits within $24n+48$ raw steps.
+  Those tables are not composed, and there is no complete raw polynomial-time formula builder or
+  concrete CNFSAT reduction. The reviewed activation fingerprints are unset and no root theorem exists. The
   abstract string-handle bridge is never an activation source.
   \vspace{0.3cm}
   \end{minipage}
@@ -136,6 +137,16 @@ one launch, and compilation is bounded by $18n^2+63n+93$ in external input lengt
 isolation, timeout for the unused \texttt{zeroOne} tally scan symbol, and one-step-short timeout are
 explicit. No formula bit,
 cursor coordinate, or construction-time refinement is produced.
+
+The standalone token appender carries one of the four canonical CNF tokens in its finite control
+state, scans the represented source, exact tally, and existing token suffix, writes exactly the
+selected two-bit symbol, and rewinds to the source focus. Its generic theorem quantifies every input,
+canonical prior token list, request, and exterior-left region. The distinguished start requests
+\code{T}; Lean proves direct formula-bit slots zero and one are populated true bits and that
+\code{CNFToken.t.bits = problem.encodedFormula.take 2} for every concrete tableau problem. The
+compiled first-token bound is $24n+48$. Malformed tally/output symbols and one-step-short fuel time
+out. This module starts at a supplied tally endpoint: it does not concatenate the prefix, compute
+the remaining header, interpret a dynamic cursor, or emit the complete formula.
 
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
