@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-15-41');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-15-42');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -186,13 +186,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the recursive refinement inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 6571);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 2964);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 2524);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 1101);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 60);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 6800);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 3077);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 2543);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 1128);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 61);
   assert.equal(status.leanSourceClosureSha256,
-    'a22b98c3a56c1bed1ae3f64da5f5b92737ffa13702a99507080d8cf6e00e7cf3');
+    'd88b76196a15dba8be17ce2cde2612c36391efe1df03243687ce5005c8a71c5e');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -410,12 +410,14 @@ test('formal reconstruction status pins the recursive refinement inventory and s
     'CookLevinFormulaSize bounds the actual canonical unary-indexed CNF bitstring')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'CookLevinFormulaSchedule allocates exact rectangular constraint')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes(
+    'CookLevinFormulaCursor decodes constraint')), true);
 });
 
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-15-COOK-LEVIN-FORMULA-SCHEDULE-40');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-15-COOK-LEVIN-FORMULA-CURSOR-41');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);

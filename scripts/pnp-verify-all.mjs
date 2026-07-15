@@ -50,6 +50,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-concrete-cook-levin-raw-tape-bridge0.test.mjs',
   'audits/lean-concrete-cook-levin-formula-size0.test.mjs',
   'audits/lean-concrete-cook-levin-formula-schedule0.test.mjs',
+  'audits/lean-concrete-cook-levin-formula-cursor0.test.mjs',
   'audits/lean-nand-semantics0.test.mjs',
   'audits/lean-nand-enumerator0.test.mjs',
   'audits/lean-nand-reference-minimum0.test.mjs',

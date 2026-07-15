@@ -58,7 +58,8 @@
   CNF-SAT membership in NP with an explicit polynomial bound. It does not prove CNF-SAT in P,
   NP-hardness, NP-completeness, or $P=NP$. The general charged pipeline is linked to the raw machine
   kernel, and the Cook--Levin formula has an exact externally sized answer-independent slot
-  schedule, but there is no raw polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation
+  schedule plus a direct fuelled specification cursor, but there is no raw polynomial-time formula
+  builder or concrete CNFSAT reduction. The reviewed activation
   fingerprints are unset and no root theorem exists. The abstract string-handle bridge is never an
   activation source.
   \vspace{0.3cm}
@@ -113,6 +114,12 @@ without reading the already-materialized program, formula, token encoding, or en
 schedule inputs. Filtering populated slots reproduces those canonical objects, and the raw-bit slot
 count is exactly the external encoded-size polynomial. This remains a pure specification: no theorem
 charges constant time per slot, implements a raw builder, or proves a construction-runtime bound.
+
+The direct formula cursor decodes constraint, clause, token, and bit coordinates without first
+constructing those complete canonical lists. Its nested options distinguish out-of-range lookup from
+valid empty padding, and Lean proves exact prefix, full, one-step-short, terminal, and excess-fuel
+behavior. Filtering the exact full cursor output yields the canonical encoding. These are
+specification-level evaluation theorems, not a constant-time raw slot interpreter or raw builder.
 
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}

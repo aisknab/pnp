@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '3e94ad852ebc0c6f28ac0156c9cabe61f2e78f698dfbf18f5d7d52854a7f6f07';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '21d01d161bf89a476c3d77a2a613289f1e442741e9f5bdeda994ab452734bc31';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -27,6 +27,14 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.CookLevin.VariableLayout.symbolVariable_lt_variableCount',
   'PNP.Concrete.CookLevin.VariableLayout.symbolVariable_ne_headVariable',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.FiniteRow.next_represents_advance',
+  'PNP.Concrete.CookLevin.VerifierTableauProblem.FormulaBitCursor.run_excess',
+  'PNP.Concrete.CookLevin.VerifierTableauProblem.FormulaBitCursor.run_full',
+  'PNP.Concrete.CookLevin.VerifierTableauProblem.FormulaBitCursor.run_full_emit_eq_encodedFormula',
+  'PNP.Concrete.CookLevin.VerifierTableauProblem.FormulaBitCursor.run_one_step_short',
+  'PNP.Concrete.CookLevin.VerifierTableauProblem.FormulaBitCursor.run_prefix',
+  'PNP.Concrete.CookLevin.VerifierTableauProblem.FormulaBitCursor.run_to_end',
+  'PNP.Concrete.CookLevin.VerifierTableauProblem.FormulaBitCursor.step_after_one_step_short',
+  'PNP.Concrete.CookLevin.VerifierTableauProblem.FormulaBitCursor.step_at_end',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.actualFuel_le_uniformFuel',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.actualFuel_ne_timeout',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.certificateBitWidth_eq_of_paired',
@@ -49,12 +57,17 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.CookLevin.VerifierTableauProblem.finiteRun_represents_run',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.formulaBitSchedule_emit_eq_encodedFormula',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.formulaBitSchedule_length',
+  'PNP.Concrete.CookLevin.VerifierTableauProblem.formulaBitSlotCountDirect_eq_polynomial',
+  'PNP.Concrete.CookLevin.VerifierTableauProblem.formulaBitSlotDirect_eq',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.formulaClauseSchedule_emit_eq_formulaClauses',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.formulaClauseSchedule_length',
+  'PNP.Concrete.CookLevin.VerifierTableauProblem.formulaClauseSlotDirect_eq',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.formulaConstraintCountPolynomial_eval',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.formulaConstraintSchedule_emit_eq_program',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.formulaConstraintSchedule_length',
+  'PNP.Concrete.CookLevin.VerifierTableauProblem.formulaConstraintSlotDirect_eq',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.formulaTokenSchedule_length',
+  'PNP.Concrete.CookLevin.VerifierTableauProblem.formulaTokenSlotDirect_eq',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.formulaVariableCountPolynomial_eval',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.formula_clauseCount',
   'PNP.Concrete.CookLevin.VerifierTableauProblem.formula_clauseCount_le_formulaClauseCountPolynomial',
@@ -327,7 +340,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-15-41') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-15-42') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -604,7 +617,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-15-41') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-15-42') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
@@ -622,7 +635,7 @@ function validatePublicationMap0(map) {
     'expectedRootKernelTypeSha256',
     'expectedAxiomClosureSha256',
     'expectedSourceClosureSha256',
-  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 41`);
+  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 42`);
   if (!isSha2560(map.milestoneSourceClosureSha256)
       || !isObject0(map.earnedMilestoneTheoremKernelTypeSha256)) {
     throw new Error('reviewed milestone theorem/source fingerprints are missing');
@@ -641,7 +654,7 @@ function validatePublicationMap0(map) {
     throw new Error('reviewed milestone theorem kernel-type fingerprint inventory mismatch');
   }
   if (sha256Text0(stableStringify0(map)) !== REQUIRED_PUBLICATION_MAP_SHA2560) {
-    throw new Error('formal publication milestone map drifted from the reviewed release-41 specification');
+    throw new Error('formal publication milestone map drifted from the reviewed release-42 specification');
   }
 }
 

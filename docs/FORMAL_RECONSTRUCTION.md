@@ -192,7 +192,9 @@ Cook–Levin development now proves exact raw-verifier semantic equivalence and 
 polynomial bound for the actual canonical encoded formula in external source-input length. It also
 provides a rectangular answer-independent constraint/clause/token/bit schedule whose populated
 slots reproduce that exact encoding and whose total bit-slot count is the same external polynomial.
-These results still do not provide a raw formula builder with a polynomial construction-runtime
+Direct coordinate decoders now agree pointwise with every schedule layer, and a fuelled cursor has
+exact prefix, full, one-step-short, terminal, excess-fuel, and canonical-output theorems. These
+results still do not provide a raw formula builder with a polynomial construction-runtime
 proof or package a concrete `PolynomialReduction`. A deterministic polynomial-time CNF-SAT decider,
 concrete NP-hardness/NP-completeness, locked-NAND threshold, residual-band minimizer, ZeroSlack,
 the remaining end-to-end polynomial bounds, and the root theorem/axiom audit remain incomplete.
