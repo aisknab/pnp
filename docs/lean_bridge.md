@@ -347,9 +347,9 @@ Publication is controlled by a separate, fail-closed gate for compatibility decl
 `PNP.Main.p_eq_np` and concrete target `PNP.Main.ConcretePEqualsNP`. The target is present as an
 axiom-free definition, but the compatibility/root theorem is absent. The expected target
 type/value, root type, axiom-closure, and source-closure fingerprints are intentionally `null`;
-unset fingerprints do not match and cannot activate the gate. Raw-machine linkage is still
-ineligible for the general charged-pipeline target, even though the direct CNF verifier is linked
-to one raw machine. The abstract `PNP.PEqualsNP` bridge remains ineligible. See
+unset fingerprints do not match and cannot activate the gate. The recursively compiled
+charged-pipeline model is now eligible, but model eligibility cannot replace the absent SAT
+completeness, SAT-in-P, and compatibility-root theorems. The abstract `PNP.PEqualsNP` bridge remains ineligible. See
 [`lean_theorem_inventory.md`](./lean_theorem_inventory.md) for the full contract and commands.
 
 The inventory and false gate generate the current root TeX/PDF: a concise thirteen-page

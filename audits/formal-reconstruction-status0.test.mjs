@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-15-40');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-15-41');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -186,13 +186,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the recursive refinement inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 6459);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 2883);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 2495);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 1077);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 59);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 6571);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 2964);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 2524);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 1101);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 60);
   assert.equal(status.leanSourceClosureSha256,
-    '79da4cdee30162ef20a69b8a3592ea5ed2c59ed5ad692c2015f6a16add3adc02');
+    'a22b98c3a56c1bed1ae3f64da5f5b92737ffa13702a99507080d8cf6e00e7cf3');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -408,12 +408,14 @@ test('formal reconstruction status pins the recursive refinement inventory and s
     'CookLevinRawTapeBridge proves that the finite tableau semantics exactly represent ordinary two-sided raw Tape execution')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'CookLevinFormulaSize bounds the actual canonical unary-indexed CNF bitstring')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes(
+    'CookLevinFormulaSchedule allocates exact rectangular constraint')), true);
 });
 
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-15-COOK-LEVIN-FORMULA-SIZE-39');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-15-COOK-LEVIN-FORMULA-SCHEDULE-40');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
