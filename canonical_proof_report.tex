@@ -46,7 +46,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-15-42}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-15-43}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -58,8 +58,9 @@
   CNF-SAT membership in NP with an explicit polynomial bound. It does not prove CNF-SAT in P,
   NP-hardness, NP-completeness, or $P=NP$. The general charged pipeline is linked to the raw machine
   kernel, and the Cook--Levin formula has an exact externally sized answer-independent slot
-  schedule plus a direct fuelled specification cursor, but there is no raw polynomial-time formula
-  builder or concrete CNFSAT reduction. The reviewed activation
+  schedule plus a direct fuelled specification cursor. A fixed 19-rule preparatory stage now
+  preserves the input while tallying its length at an exact quadratic raw cost, but there is no
+  complete raw polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation
   fingerprints are unset and no root theorem exists. The abstract string-handle bridge is never an
   activation source.
   \vspace{0.3cm}
@@ -68,15 +69,15 @@
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 6800 \\
-Theorem-kind declarations & 3077 \\
-Assumption-free theorem-kind declarations & 2543 \\
+Compiled declarations & 6849 \\
+Theorem-kind declarations & 3104 \\
+Assumption-free theorem-kind declarations & 2560 \\
 Project-specific axioms & 4 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{af5a7560f15f77e988300dd90dcd7e1d2bb77d465c78900d30dd1791fa50b708}\par}
+{\small Inventory SHA-256: \code{26411d463de689718ce384def4af53b386bdcfb4e2c17334d23bf471a787f43f}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -120,6 +121,12 @@ constructing those complete canonical lists. Its nested options distinguish out-
 valid empty padding, and Lean proves exact prefix, full, one-step-short, terminal, and excess-fuel
 behavior. Filtering the exact full cursor output yields the canonical encoding. These are
 specification-level evaluation theorems, not a constant-time raw slot interpreter or raw builder.
+
+The first literal builder stage is a fixed 19-rule work machine. Starting at the proved all-input
+framer endpoint, it restores every source bit and appends exactly one unary tally symbol per bit in
+fresh right-side workspace. Its exact work cost is $2n^2+4n+2$, and six-for-one compilation gives
+the exact raw cost $12n^2+24n+12$. Malformed scan symbols and one-step-short fuel time out. This is
+only length preparation: it emits no formula bits and does not compose or refine a complete builder.
 
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
@@ -208,7 +215,7 @@ remain absent.
 \section{Formal milestone ledger}
 
 Each earned row requires exact compiled names and theorem kinds, empty axiom closures, per-name
-domain-separated kernel-type SHA-256 matches for 299 detailed candidates, and the pinned whole-Lean
+domain-separated kernel-type SHA-256 matches for 309 detailed candidates, and the pinned whole-Lean
 source closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
 {\small
@@ -232,6 +239,7 @@ Finite tableau to raw Tape semantics & formalized-foundation-only & The finite C
 External Cook-Levin encoded-formula size & formalized-foundation-only & The actual canonical unary-indexed CNF bitstring generated for a fixed concrete polynomial-time verifier is bounded by an explicit NatPolynomial evaluated only at the external source-input length. Exact codec lengths, both verifier input modes, every concrete tableau constraint family, program and emitted-clause counts, and clause width are covered. All 108 explicit declarations are axiom-audited; the nine reviewed theorem types use only the permitted Lean standard axioms Quot.sound and propext, with no project axiom or choice axiom. & This does not implement or time a raw finite formula builder, package a concrete PolynomialReduction, establish CNFSAT NP-completeness, establish CNFSAT in P, or prove P = NP. \\
 Rectangular Cook-Levin formula schedule & formalized-foundation-only & For every concrete verifier-tableau problem, a finite answer-independent rectangular schedule allocates exact constraint, clause, token, and raw-bit slots. Removing empty slots in order reproduces the existing canonical local program, bounded clauses, CNF tokens, and encoded formula. The raw-bit schedule length is exactly the previously proved encodedFormulaSizePolynomial evaluated at external source-input length. All 79 explicit declarations are axiom-audited; the eight reviewed theorem types use only the permitted Lean standard axioms Quot.sound and propext, with no project axiom or choice axiom. & This is a pure schedule specification. It does not interpret a slot as a constant-time raw-machine action, implement or time a raw finite formula builder, construct a FunctionProgram.RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-completeness, establish CNFSAT in P, or prove P = NP. \\
 Direct Cook-Levin formula cursor & formalized-foundation-only & For every concrete verifier-tableau problem and natural coordinate, direct constraint, clause, token, and raw-bit decoders agree pointwise with the canonical rectangular schedules while preserving out-of-range, valid-padding, and populated states. A fuelled specification cursor proves exact bounded prefixes, complete traversal, one-step-short behavior, terminal behavior, excess-fuel stability, the external encoded-size polynomial, and canonical emitted output. All 129 explicit declarations are axiom-audited; the 13 reviewed theorem types use only the permitted Lean standard axioms Quot.sound and propext, with no project axiom or choice axiom. & This is a Lean specification cursor. It does not prove constant-time raw slot interpretation, implement or time a raw finite formula builder, construct a FunctionProgram.RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-completeness, establish CNFSAT in P, or prove P = NP. \\
+Literal Cook-Levin builder input-length tally & formalized-foundation-only & A fixed 19-rule work machine starts at the proved all-input framer endpoint, preserves every external source bit, appends exactly one unary tally symbol per source bit in fresh right-side workspace, and returns to the source head. It accepts after exactly 2*n*n + 4*n + 2 work steps; the compiled raw machine reaches the encoded endpoint after exactly 12*n*n + 24*n + 12 steps. Malformed internal scan symbols and one-step-short fuel both time out. All 39 public declarations are axiom-audited; the ten reviewed theorem types use only the permitted Lean standard axioms Quot.sound and propext, with no project or choice axiom. & This is only the input-length preparation stage. It does not emit formula bits, interpret direct cursor slots as raw transitions, compose a complete raw formula builder, construct a FunctionProgram.RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-completeness, establish CNFSAT in P, or prove P = NP. \\
 Typed direct-wire NAND semantics & formalized & Typed topological Boolean NAND programs and ordered multi-output direct-wire semantics. & This does not establish circuit minimization, SAT, or P = NP. \\
 Finite enumeration, equivalence, and reference minimum & formalized & Exhaustive finite Boolean direct-wire search under the empty-profile reference model. & No polynomial-runtime result is obtained from this exhaustive reference search. \\
 Concrete framed replacement and slack & formalized & The concrete serial framed context with support outputs and explicit bypass wires. & This is not an arbitrary-support replacement theorem for the report's global family. \\
@@ -247,8 +255,8 @@ Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-mac
 
 \section{Compiled inventory summary}
 
-The inventory contains 6800 exported \code{PNP.*} kernel declarations from
-61 modules. It excludes 1128 private compiler auxiliaries.
+The inventory contains 6849 exported \code{PNP.*} kernel declarations from
+62 modules. It excludes 1220 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -270,6 +278,7 @@ PNP.Concrete.CNFWorkMachine & 85 & 3 \\
 PNP.Concrete.CNFWorkTransitions & 64 & 63 \\
 PNP.Concrete.CNFWorkUniversalCorrectness & 294 & 145 \\
 PNP.Concrete.Complexity & 312 & 92 \\
+PNP.Concrete.CookLevinBuilderInputLength & 49 & 27 \\
 PNP.Concrete.CookLevinFormulaCursor & 229 & 113 \\
 PNP.Concrete.CookLevinFormulaSchedule & 112 & 81 \\
 PNP.Concrete.CookLevinFormulaSize & 153 & 136 \\
@@ -380,10 +389,10 @@ npm run report:check
 \end{verbatim}
 }
 
-The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-15-42}. Its exact byte digest is
-\code{af5a7560f15f77e988300dd90dcd7e1d2bb77d465c78900d30dd1791fa50b708}. The report is regenerated from that inventory and the reviewed
+The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-15-43}. Its exact byte digest is
+\code{26411d463de689718ce384def4af53b386bdcfb4e2c17334d23bf471a787f43f}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{d88b76196a15dba8be17ce2cde2612c36391efe1df03243687ce5005c8a71c5e}; the computed and pinned values match. Successful regeneration
+\code{77534b5f3a99d890c1e8f53630531a430c1ab37edf0e2e1648f450fd71610ab6}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 

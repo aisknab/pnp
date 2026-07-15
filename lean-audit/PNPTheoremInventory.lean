@@ -64,6 +64,16 @@ private def isProjectDeclaration (env : Environment) (name : Name) : Bool :=
 
 private def reviewedMilestoneTheoremNames : Array Name := #[
   `PNP.Concrete.BitString.decodePair_pair,
+  `PNP.Concrete.CookLevin.BuilderInputLength.finalTape_represents,
+  `PNP.Concrete.CookLevin.BuilderInputLength.inputTape_eq_totalInputFramerFinalTape,
+  `PNP.Concrete.CookLevin.BuilderInputLength.malformedScanSymbol_timeout,
+  `PNP.Concrete.CookLevin.BuilderInputLength.rawTimeBound_exact,
+  `PNP.Concrete.CookLevin.BuilderInputLength.run_compile,
+  `PNP.Concrete.CookLevin.BuilderInputLength.tallySizeBound_exact,
+  `PNP.Concrete.CookLevin.BuilderInputLength.workBoundedDecide_accept,
+  `PNP.Concrete.CookLevin.BuilderInputLength.workRunExact,
+  `PNP.Concrete.CookLevin.BuilderInputLength.workRunExact_after_totalInputFramer,
+  `PNP.Concrete.CookLevin.BuilderInputLength.work_one_step_short_timeout,
   `PNP.Concrete.CookLevin.FixedTableauInstance.exists_accepting_iff_boundedDecide_accept,
   `PNP.Concrete.CookLevin.FixedTableauInstance.tableauVerdict_of_valid,
   `PNP.Concrete.CookLevin.FixedTableauInstance.valid_iff_eq_canonical,
@@ -420,7 +430,7 @@ private def inventory : CommandElabM Json := do
   return Json.mkObj [
     ("kind", toJson "PNPLeanTheoremInventory0"),
     ("version", toJson 0),
-    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-07-15-42"),
+    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-07-15-43"),
     ("leanToolchain", toJson "leanprover/lean4:v4.31.0"),
     ("rootModule", toJson "PNP"),
     ("environmentProbeComplete", toJson true),

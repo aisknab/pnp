@@ -58,8 +58,9 @@
   CNF-SAT membership in NP with an explicit polynomial bound. It does not prove CNF-SAT in P,
   NP-hardness, NP-completeness, or $P=NP$. The general charged pipeline is linked to the raw machine
   kernel, and the Cook--Levin formula has an exact externally sized answer-independent slot
-  schedule plus a direct fuelled specification cursor, but there is no raw polynomial-time formula
-  builder or concrete CNFSAT reduction. The reviewed activation
+  schedule plus a direct fuelled specification cursor. A fixed 19-rule preparatory stage now
+  preserves the input while tallying its length at an exact quadratic raw cost, but there is no
+  complete raw polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation
   fingerprints are unset and no root theorem exists. The abstract string-handle bridge is never an
   activation source.
   \vspace{0.3cm}
@@ -120,6 +121,12 @@ constructing those complete canonical lists. Its nested options distinguish out-
 valid empty padding, and Lean proves exact prefix, full, one-step-short, terminal, and excess-fuel
 behavior. Filtering the exact full cursor output yields the canonical encoding. These are
 specification-level evaluation theorems, not a constant-time raw slot interpreter or raw builder.
+
+The first literal builder stage is a fixed 19-rule work machine. Starting at the proved all-input
+framer endpoint, it restores every source bit and appends exactly one unary tally symbol per bit in
+fresh right-side workspace. Its exact work cost is $2n^2+4n+2$, and six-for-one compilation gives
+the exact raw cost $12n^2+24n+12$. Malformed scan symbols and one-step-short fuel time out. This is
+only length preparation: it emits no formula bits and does not compose or refine a complete builder.
 
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
