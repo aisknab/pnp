@@ -146,6 +146,17 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   true);
   assert.match(byId.get('concrete-cook-levin-formula-schedule').nonClaim,
     /pure schedule specification/u);
+  assert.equal(byId.get('concrete-cook-levin-formula-cursor').status,
+    'formalized-foundation-only');
+  assert.equal(byId.get('concrete-cook-levin-formula-cursor').earned, true);
+  assert.equal(byId.get('concrete-cook-levin-formula-cursor').allAssumptionFree, false);
+  assert.equal(byId.get('concrete-cook-levin-formula-cursor')
+    .axiomClosureUsesOnlyLeanStandardAllowlist, true);
+  assert.equal(byId.get('concrete-cook-levin-formula-cursor').requiredTheorems.includes(
+    'PNP.Concrete.CookLevin.VerifierTableauProblem.FormulaBitCursor.run_full_emit_eq_encodedFormula'),
+  true);
+  assert.match(byId.get('concrete-cook-levin-formula-cursor').nonClaim,
+    /Lean specification cursor/u);
   assert.equal(byId.get('concrete-cnf-universal-verifier').requiredTheorems.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP'), true);
   assert.match(byId.get('concrete-cnf-universal-verifier').nonClaim,
@@ -173,10 +184,10 @@ test('publication consumes the reviewed recursive-refinement map and inventory c
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '3e94ad852ebc0c6f28ac0156c9cabe61f2e78f698dfbf18f5d7d52854a7f6f07');
+    '21d01d161bf89a476c3d77a2a613289f1e442741e9f5bdeda994ab452734bc31');
   assert.equal(map.milestoneSourceClosureSha256,
-    'a22b98c3a56c1bed1ae3f64da5f5b92737ffa13702a99507080d8cf6e00e7cf3');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 286);
+    'd88b76196a15dba8be17ce2cde2612c36391efe1df03243687ce5005c8a71c5e');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 299);
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.PipelineCompiler.pipeline_correct'
   ], 'string');
@@ -201,6 +212,9 @@ test('publication consumes the reviewed recursive-refinement map and inventory c
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.CookLevin.VerifierTableauProblem.formulaBitSchedule_length'
   ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.VerifierTableauProblem.FormulaBitCursor.run_full_emit_eq_encodedFormula'
+  ], 'string');
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,
     map.gate.expectedConcreteTargetKernelValueSha256,
@@ -214,7 +228,7 @@ test('publication consumes the reviewed recursive-refinement map and inventory c
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [6571, 2964, 2524, 1101, 60]);
+  ], [6800, 3077, 2543, 1128, 61]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

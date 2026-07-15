@@ -28,8 +28,9 @@ from current theorem status.
   exhaustive reference-minimum, concrete framed composition/slack, typed locked-NAND candidate,
   semantic output-lower-bound, source-accounting, finite local-baseline, and conditional
   threshold-boundary audits plus the explicit-list residual-route audit when Lean inputs change.
-  The Cook--Levin lane additionally audits the 79-declaration rectangular formula schedule and its
-  empty/one-bit/odd/even regression instantiations. Each transcript has an exact declaration count,
+  The Cook--Levin lane additionally audits the 79-declaration rectangular formula schedule, the
+  129-declaration direct formula cursor, and their empty/one-bit/odd/even regression instantiations.
+  Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual
   routes require 30. The workflow also checks the byte-identical inventory mirrors, derives the
