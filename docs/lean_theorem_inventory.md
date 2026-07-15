@@ -76,6 +76,13 @@ correctness and no timeout under an explicit polynomial bound, constructs a `.pa
 It does not establish `CNFSAT ∈ P`, NP-hardness, NP-completeness, or `P = NP`, and it is not the
 missing general compiler/refinement for arbitrary charged pipelines.
 
+The reviewed Cook--Levin builder boundary now includes one executable input prefix. A literal
+collision-free finite table runs the total all-input framer, one nine-symbol launch, and the fixed
+unary length tally from every raw bitstring. The exact cumulative trace has the external compiled
+bound `18*n*n + 63*n + 93`; a tally scan configuration headed by the unused `zeroOne` symbol and one-step-short fuel remain timeout. These
+fingerprints establish only input preparation. No formula bit is emitted and no complete builder,
+construction-runtime `RawRefinement`, or concrete `PolynomialReduction` is present.
+
 The current four project-specific axioms remain visible as an independent inventory:
 
 ```text

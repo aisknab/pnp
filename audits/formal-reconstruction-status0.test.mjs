@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-15-43');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-15-44');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -58,6 +58,13 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanConcreteCookLevinBuilderInputLengthExternalInputSizePolynomialFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderInputLengthMalformedInternalInputTimeoutFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderInputLengthConnectedToTotalInputFramerEndpointFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderInputPrefixFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderInputPrefixAxiomAuditPassed, true);
+  assert.equal(out.leanConcreteCookLevinBuilderInputPrefixAuditedDeclarationCount, 40);
+  assert.equal(out.leanConcreteCookLevinBuilderInputPrefixCompiledRawMachineFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderInputPrefixExternalInputSizePolynomialFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderInputPrefixMalformedScanSymbolTimeoutFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderInputPrefixLiteralFramerLaunchFormalized, true);
   assert.equal(out.leanConcretePipelineStateNamespaceFormalized, true);
   assert.equal(out.leanConcretePipelineStateNamespaceAxiomAuditPassed, true);
   assert.equal(out.leanConcretePipelineStateNamespaceAuditedDeclarationCount, 39);
@@ -193,13 +200,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the recursive refinement inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 6849);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 3104);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 2560);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 1220);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 62);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 6901);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 3143);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 2585);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 1228);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 63);
   assert.equal(status.leanSourceClosureSha256,
-    '77534b5f3a99d890c1e8f53630531a430c1ab37edf0e2e1648f450fd71610ab6');
+    'fb3ecdea2590b6a65ae8de5ebd9e1b86c1e36f2ae9659de7febb817f4306ce3d');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -426,7 +433,7 @@ test('formal reconstruction status pins the recursive refinement inventory and s
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-15-COOK-LEVIN-BUILDER-INPUT-LENGTH-42');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-15-COOK-LEVIN-BUILDER-INPUT-PREFIX-43');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);

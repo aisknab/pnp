@@ -196,9 +196,13 @@ Direct coordinate decoders now agree pointwise with every schedule layer, and a 
 exact prefix, full, one-step-short, terminal, excess-fuel, and canonical-output theorems. The first
 literal builder stage is also present: a fixed 19-rule machine preserves the source input, appends
 an exact unary length tally, connects to the total-input-framer endpoint, and proves exact work and
-compiled raw polynomials plus malformed and one-step-short timeout. These results still do not
-emit formula bits, compose a complete raw formula builder with a polynomial construction-runtime
-proof, or package a concrete `PolynomialReduction`. A deterministic polynomial-time CNF-SAT decider,
+compiled raw polynomials plus malformed and one-step-short timeout. A collision-free finite table
+now executes the total framer, one literal symbol-preserving launch, and that tally from every raw
+bitstring within the external compiled polynomial `18*n*n + 63*n + 93`; a tally scan configuration
+headed by the unused `zeroOne` symbol and one-step-short fuel remain timeout. These results still do
+not emit formula bits, compose a complete
+raw formula builder with a polynomial construction-runtime proof, or package a concrete
+`PolynomialReduction`. A deterministic polynomial-time CNF-SAT decider,
 concrete NP-hardness/NP-completeness, locked-NAND threshold, residual-band minimizer, ZeroSlack,
 the remaining end-to-end polynomial bounds, and the root theorem/axiom audit remain incomplete.
 
