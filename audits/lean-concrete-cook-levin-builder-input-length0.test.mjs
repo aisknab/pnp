@@ -203,6 +203,15 @@ test('root, package, verifier, workflow, and regression enforce the milestone', 
   assert.match(workflow, /PNPConcreteCookLevinBuilderInputLengthAxiomAudit\.lean/u);
   assert.match(workflow, /PNPConcreteCookLevinBuilderInputLength\.lean/u);
   assert.match(workflow, /Cook-Levin builder input-length axiom closure/u);
+  assert.ok(workflow.includes(
+    "grep -Fc 'does not depend on any axioms')\" -eq 32",
+  ));
+  assert.ok(workflow.includes(
+    "grep -Fc 'depends on axioms: [propext]')\" -eq 1",
+  ));
+  assert.ok(workflow.includes(
+    "grep -Fc 'depends on axioms: [propext, Quot.sound]')\" -eq 6",
+  ));
   assert.match(regression, /workSteps 0 = 2[\s\S]*workSteps 4 = 50/u);
   assert.match(regression, /rawTimeBound\.eval 0 = 12[\s\S]*rawTimeBound\.eval 4 = 300/u);
   assert.match(regression, /\[false, false, false, false\][\s\S]*\[true, true, true, true\]/u);

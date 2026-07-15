@@ -79,9 +79,9 @@ compose the two rule tables into a new machine.
 The complete public surface contains 39 declarations. The compiled axiom
 transcript records:
 
-- 31 declarations with empty axiom closure;
+- 32 declarations with empty axiom closure;
 - one declaration using only Lean's standard `propext` axiom;
-- seven declarations using only `propext` and `Quot.sound`.
+- six declarations using only `propext` and `Quot.sound`.
 
 No declaration reaches a project axiom or `Classical.choice`. The regression
 file covers empty, one-bit, odd, even, all-zero, all-one, and mixed inputs,

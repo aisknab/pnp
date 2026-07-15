@@ -665,9 +665,9 @@ jobs:
             echo 'Cook-Levin builder input-length tally reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 31
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 32
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 1
-          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 7
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 6
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderInputLength.lean
 
       - name: Print concrete CNF work-input bridge axioms
