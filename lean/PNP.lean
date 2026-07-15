@@ -37,6 +37,7 @@ import PNP.Concrete.CookLevinRawTapeBridge
 import PNP.Concrete.CookLevinFormulaSize
 import PNP.Concrete.CookLevinFormulaSchedule
 import PNP.Concrete.CookLevinFormulaCursor
+import PNP.Concrete.CookLevinBuilderInputLength
 import PNP.Concrete.CNFVerifier
 import PNP.Concrete.CNFWorkInput
 import PNP.Concrete.CNFWorkUniversalCorrectness

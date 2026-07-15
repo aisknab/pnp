@@ -29,13 +29,14 @@ from current theorem status.
   semantic output-lower-bound, source-accounting, finite local-baseline, and conditional
   threshold-boundary audits plus the explicit-list residual-route audit when Lean inputs change.
   The Cook--Levin lane additionally audits the 79-declaration rectangular formula schedule, the
-  129-declaration direct formula cursor, and their empty/one-bit/odd/even regression instantiations.
+  129-declaration direct formula cursor, the 39-declaration literal input-length tally machine, and
+  their empty/one-bit/odd/even regression instantiations.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual
   routes require 30. The workflow also checks the byte-identical inventory mirrors, derives the
   false concrete publication gate and status/report outputs, and verifies same-environment
-  double-build determinism plus exact committed bytes for the current concise thirteen-page PDF. The
+  double-build determinism plus exact committed bytes for the current concise PDF. The
   hosted runner's apt-installed TeX and Poppler versions are not cryptographically pinned, so this
   is not a universal cross-toolchain reproducibility claim.
 - `.github/workflows/legacy-v0-replay.yml` is manual only. It replays the immutable historical
@@ -160,7 +161,7 @@ node scripts/generate-formal-publication.mjs --check
 npm run report:check
 ```
 
-The current root PDF is the generated thirteen-page formal-reconstruction report. The historical
+The current root PDF is the generated concise formal-reconstruction report. The historical
 56-page claim artifact is not a current workflow output and is available only at the pinned legacy
 coordinate recorded under `archive/legacy-v0/`.
 

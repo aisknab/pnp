@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-15-42",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-15-43",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,12 +17,22 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "d88b76196a15dba8be17ce2cde2612c36391efe1df03243687ce5005c8a71c5e",
+  "milestoneSourceClosureSha256": "77534b5f3a99d890c1e8f53630531a430c1ab37edf0e2e1648f450fd71610ab6",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CookLevin.assignmentAt_assignmentOf": "138ace06e46c2ba101542489b6bb13a2fbff763efa13eb8575ab60939cc709cc",
     "PNP.Concrete.CookLevin.atLeastOneClause_satisfied_iff": "75c0347a2a50292afbf475b83655688fd926101bba87bedb79aa6f0b545ada43",
     "PNP.Concrete.CookLevin.BoundedLiteral.emit_variable_lt": "c089b0fedc7320ec14f46b5b74f7ec26158cdad85ecbe647b4c728660dcb6a68",
+    "PNP.Concrete.CookLevin.BuilderInputLength.finalTape_represents": "824e9a4f2785da71c1b5810e4995984e220b131bf643bd4f0271ed53628970dd",
+    "PNP.Concrete.CookLevin.BuilderInputLength.inputTape_eq_totalInputFramerFinalTape": "59e20384fa787f70aabd8222780edaa8660715675d896e71c763e6549520ab2b",
+    "PNP.Concrete.CookLevin.BuilderInputLength.malformedScanSymbol_timeout": "d8ec5d9a5ff569cacf7daef576030f255222680883e9b4159e6e72b624dca031",
+    "PNP.Concrete.CookLevin.BuilderInputLength.rawTimeBound_exact": "e81660fecf035c3c8a89eeb0a6e6a77c717152d3d452689d173b69b648fbcd9f",
+    "PNP.Concrete.CookLevin.BuilderInputLength.run_compile": "629c5a35979a7aadb823a0adbd06a2728d3fbc22f569906c986d377a205cc1f9",
+    "PNP.Concrete.CookLevin.BuilderInputLength.tallySizeBound_exact": "194c981ca92498b47b4396539cdb8f8221a7b944a7144bd5e54d8ed98e4a8d13",
+    "PNP.Concrete.CookLevin.BuilderInputLength.workBoundedDecide_accept": "0b5a2b65a9a4aa8e4c361a003bd34e79f8c914f2b4b0aa6e5f58eb9450ba44d7",
+    "PNP.Concrete.CookLevin.BuilderInputLength.workRunExact": "ca6d55f38eae1850bd532a9cfbb86bf6fa2bc45edf9acc34537e7793b1c75f98",
+    "PNP.Concrete.CookLevin.BuilderInputLength.workRunExact_after_totalInputFramer": "3fdcf061036fc5b1c6caf667cda8718c9d738a7281d30be9785841b40f034c16",
+    "PNP.Concrete.CookLevin.BuilderInputLength.work_one_step_short_timeout": "9a70e81fe0f85ea22e9fd2b41166dc4f7281245501f8cd70bbac7895936bfa4d",
     "PNP.Concrete.CookLevin.canonicalTableau_valid": "98802a6e4342f2f43375dec2ac884b2db004185053e6981af40712704bf8e4dd",
     "PNP.Concrete.CookLevin.encodeCNF_size_exact": "ca78ff9cda8cf5ebb4a9e1ca96e1b3971700cf2981f7db7a25e9aa93ad2111c7",
     "PNP.Concrete.CookLevin.encodeCNF_size_le": "f89183aa91602a3a47b7e8d1b72d3cc4559346676c235d8a5cae76b2a1ead75c",
@@ -713,6 +723,25 @@
         "PNP.Concrete.CookLevin.VerifierTableauProblem.FormulaBitCursor.run_full_emit_eq_encodedFormula"
       ],
       "nonClaim": "This is a Lean specification cursor. It does not prove constant-time raw slot interpretation, implement or time a raw finite formula builder, construct a FunctionProgram.RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-completeness, establish CNFSAT in P, or prove P = NP."
+    },
+    {
+      "id": "concrete-cook-levin-builder-input-length",
+      "title": "Literal Cook-Levin builder input-length tally",
+      "classification": "formalized-foundation-only",
+      "scope": "A fixed 19-rule work machine starts at the proved all-input framer endpoint, preserves every external source bit, appends exactly one unary tally symbol per source bit in fresh right-side workspace, and returns to the source head. It accepts after exactly 2*n*n + 4*n + 2 work steps; the compiled raw machine reaches the encoded endpoint after exactly 12*n*n + 24*n + 12 steps. Malformed internal scan symbols and one-step-short fuel both time out. All 39 public declarations are axiom-audited; the ten reviewed theorem types use only the permitted Lean standard axioms Quot.sound and propext, with no project or choice axiom.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.BuilderInputLength.finalTape_represents",
+        "PNP.Concrete.CookLevin.BuilderInputLength.inputTape_eq_totalInputFramerFinalTape",
+        "PNP.Concrete.CookLevin.BuilderInputLength.malformedScanSymbol_timeout",
+        "PNP.Concrete.CookLevin.BuilderInputLength.rawTimeBound_exact",
+        "PNP.Concrete.CookLevin.BuilderInputLength.run_compile",
+        "PNP.Concrete.CookLevin.BuilderInputLength.tallySizeBound_exact",
+        "PNP.Concrete.CookLevin.BuilderInputLength.workBoundedDecide_accept",
+        "PNP.Concrete.CookLevin.BuilderInputLength.workRunExact",
+        "PNP.Concrete.CookLevin.BuilderInputLength.workRunExact_after_totalInputFramer",
+        "PNP.Concrete.CookLevin.BuilderInputLength.work_one_step_short_timeout"
+      ],
+      "nonClaim": "This is only the input-length preparation stage. It does not emit formula bits, interpret direct cursor slots as raw transitions, compose a complete raw formula builder, construct a FunctionProgram.RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-completeness, establish CNFSAT in P, or prove P = NP."
     },
     {
       "id": "direct-wire-semantics",

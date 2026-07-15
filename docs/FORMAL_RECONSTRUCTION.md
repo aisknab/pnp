@@ -181,7 +181,7 @@ Therefore the gate does not pass and every theorem-emission field derived from i
 `null`.
 
 The root `canonical_proof_report.tex` and `canonical_proof_report.pdf` now form the generated,
-concise thirteen-page formal-reconstruction report. They replace the historical claim manuscript at the
+concise formal-reconstruction report. They replace the historical claim manuscript at the
 root and make the non-activation boundary explicit. The historical 56-page claim artifact is
 available only from the pinned legacy source coordinate recorded under
 [`archive/legacy-v0/`](../archive/legacy-v0/README.md).
@@ -193,9 +193,12 @@ polynomial bound for the actual canonical encoded formula in external source-inp
 provides a rectangular answer-independent constraint/clause/token/bit schedule whose populated
 slots reproduce that exact encoding and whose total bit-slot count is the same external polynomial.
 Direct coordinate decoders now agree pointwise with every schedule layer, and a fuelled cursor has
-exact prefix, full, one-step-short, terminal, excess-fuel, and canonical-output theorems. These
-results still do not provide a raw formula builder with a polynomial construction-runtime
-proof or package a concrete `PolynomialReduction`. A deterministic polynomial-time CNF-SAT decider,
+exact prefix, full, one-step-short, terminal, excess-fuel, and canonical-output theorems. The first
+literal builder stage is also present: a fixed 19-rule machine preserves the source input, appends
+an exact unary length tally, connects to the total-input-framer endpoint, and proves exact work and
+compiled raw polynomials plus malformed and one-step-short timeout. These results still do not
+emit formula bits, compose a complete raw formula builder with a polynomial construction-runtime
+proof, or package a concrete `PolynomialReduction`. A deterministic polynomial-time CNF-SAT decider,
 concrete NP-hardness/NP-completeness, locked-NAND threshold, residual-band minimizer, ZeroSlack,
 the remaining end-to-end polynomial bounds, and the root theorem/axiom audit remain incomplete.
 
