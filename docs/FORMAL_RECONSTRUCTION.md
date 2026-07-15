@@ -189,9 +189,11 @@ available only from the pinned legacy source coordinate recorded under
 The direct CNF verifier closes concrete NP membership for `PNP.Concrete.CNFSAT`; the all-input and
 sequential compilers plus recursive refinement close the concrete machine-link blocker. The
 Cook–Levin development now proves exact raw-verifier semantic equivalence and an explicit
-polynomial bound for the actual canonical encoded formula in external source-input length. These
-results still do not provide a raw formula builder with a polynomial construction-runtime proof or
-package a concrete `PolynomialReduction`. A deterministic polynomial-time CNF-SAT decider,
+polynomial bound for the actual canonical encoded formula in external source-input length. It also
+provides a rectangular answer-independent constraint/clause/token/bit schedule whose populated
+slots reproduce that exact encoding and whose total bit-slot count is the same external polynomial.
+These results still do not provide a raw formula builder with a polynomial construction-runtime
+proof or package a concrete `PolynomialReduction`. A deterministic polynomial-time CNF-SAT decider,
 concrete NP-hardness/NP-completeness, locked-NAND threshold, residual-band minimizer, ZeroSlack,
 the remaining end-to-end polynomial bounds, and the root theorem/axiom audit remain incomplete.
 

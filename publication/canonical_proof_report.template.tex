@@ -57,8 +57,8 @@
   Public theorem emission is disabled. A direct finite raw-machine verifier now proves concrete
   CNF-SAT membership in NP with an explicit polynomial bound. It does not prove CNF-SAT in P,
   NP-hardness, NP-completeness, or $P=NP$. The general charged pipeline is linked to the raw machine
-  kernel, and the Cook--Levin formula has an external encoded-size polynomial, but there is no raw
-  polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation
+  kernel, and the Cook--Levin formula has an exact externally sized answer-independent slot
+  schedule, but there is no raw polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation
   fingerprints are unset and no root theorem exists. The abstract string-handle bridge is never an
   activation source.
   \vspace{0.3cm}
@@ -107,6 +107,12 @@ equivalent to ordinary raw verifier execution in both input modes. It now also b
 canonical unary-indexed formula encoding by an explicit fixed-verifier polynomial evaluated only at
 external source-input length. That output-size theorem does not execute the formula builder as a raw
 finite machine, prove its construction runtime, or package a concrete polynomial reduction.
+
+The new rectangular schedule allocates exact constraint, clause, token, and raw-bit opportunities
+without reading the already-materialized program, formula, token encoding, or encoded formula as
+schedule inputs. Filtering populated slots reproduces those canonical objects, and the raw-bit slot
+count is exactly the external encoded-size polynomial. This remains a pure specification: no theorem
+charges constant time per slot, implements a raw builder, or proves a construction-runtime bound.
 
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}

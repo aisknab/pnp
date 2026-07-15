@@ -50,3 +50,8 @@ This milestone does not provide a raw finite machine that constructs the
 formula, does not prove a formula-construction runtime polynomial, and does
 not package a concrete `PolynomialReduction`. CNFSAT NP-completeness, CNFSAT
 in P, `PNP.Main.p_eq_np`, and publication activation remain absent.
+
+The next specification milestone is documented in
+[`lean_cook_levin_formula_schedule.md`](./lean_cook_levin_formula_schedule.md). It turns this
+polynomial capacity into exact padded constraint, clause, token, and bit slots, but still does not
+execute or time a raw formula builder.
