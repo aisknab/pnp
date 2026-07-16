@@ -277,7 +277,7 @@ test('alphabet, table, bound, endpoint, formula, timeout, assumption, and overcl
   }
 });
 
-test('token appender remains below a complete builder, reduction, and class theorems', async () => {
+test('token appender remains earned beneath the complete-header boundary', async () => {
   const status = JSON.parse(await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'));
   assert.equal(status.leanConcreteCookLevinBuilderTokenAppenderFormalized, true);
   assert.equal(status.leanConcreteCookLevinBuilderTokenAppenderAxiomAuditPassed, true);
@@ -287,7 +287,8 @@ test('token appender remains below a complete builder, reduction, and class theo
   assert.equal(status.leanConcreteCookLevinBuilderTokenAppenderFirstFormulaBitsFormalized, true);
   assert.equal(status.leanConcreteCookLevinBuilderTokenAppenderInputPrefixComposed, true);
   assert.equal(status.leanConcreteCookLevinBuilderFirstTokenPrefixFormalized, true);
-  assert.equal(status.leanConcreteCookLevinBuilderCompleteHeaderFormalized, false);
+  assert.equal(status.leanConcreteCookLevinBuilderCompleteHeaderFormalized, true);
+  assert.equal(status.leanConcreteCookLevinBuilderCompleteHeaderExactFormulaBitsFormalized, true);
   assert.equal(status.leanConcreteCookLevinBuilderDynamicCursorFormalized, false);
   assert.equal(status.leanConcreteCookLevinFormulaBuilderFormalized, false);
   assert.equal(status.leanConcreteCookLevinBuilderRawRefinementFormalized, false);

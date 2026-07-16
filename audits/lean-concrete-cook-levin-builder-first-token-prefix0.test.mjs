@@ -258,13 +258,15 @@ test('collision, bridge, shadowing, token, bound, timeout, and shortcut mutation
   }
 });
 
-test('first-token composition keeps every later builder and publication claim false', async () => {
+test('first-token composition remains earned beneath the complete-header boundary', async () => {
   const status = JSON.parse(await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'));
   assert.equal(status.leanConcreteCookLevinBuilderFirstTokenPrefixFormalized, true);
   assert.equal(status.leanConcreteCookLevinBuilderFirstTokenPrefixAxiomAuditPassed, true);
   assert.equal(status.leanConcreteCookLevinBuilderFirstTokenPrefixAuditedDeclarationCount, 37);
   assert.equal(status.leanConcreteCookLevinBuilderTokenAppenderInputPrefixComposed, true);
-  assert.equal(status.leanConcreteCookLevinBuilderCompleteHeaderFormalized, false);
+  assert.equal(status.leanConcreteCookLevinBuilderUnaryPolynomialFormalized, true);
+  assert.equal(status.leanConcreteCookLevinBuilderCompleteHeaderFormalized, true);
+  assert.equal(status.leanConcreteCookLevinBuilderCompleteHeaderInputPrefixAppenderComposed, true);
   assert.equal(status.leanConcreteCookLevinBuilderDynamicCursorFormalized, false);
   assert.equal(status.leanConcreteCookLevinFormulaBuilderFormalized, false);
   assert.equal(status.leanConcreteCookLevinBuilderRawRefinementFormalized, false);

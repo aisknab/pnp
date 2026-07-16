@@ -577,6 +577,28 @@ def formulaVariableCountPolynomial {language : Language}
       certificate)
     (.add certificate (.constant 1))
 
+/-- Exact width of the five collision-free Boolean-variable blocks.  Unlike
+`formulaVariableCountPolynomial`, this expression follows the verifier input
+mode, so the certificate blocks contribute zero in input-only mode and their
+exact two unary widths in paired mode. -/
+def formulaWidthPolynomial {language : Language}
+    (verifier : PolynomialTimeVerifier language) : NatPolynomial :=
+  let time := formulaTimeCountPolynomial verifier
+  let tape := formulaTapeWidthPolynomial verifier
+  let states := formulaStateCountPolynomial verifier
+  let common :=
+    .add
+      (.add
+        (.mul (.mul (.constant 3) time) tape)
+        (.mul time tape))
+      (.mul time states)
+  match verifier.program.inputMode with
+  | .inputOnly => common
+  | .paired =>
+      .add common
+        (.add verifier.certificateBound
+          (.add verifier.certificateBound (.constant 1)))
+
 /-- Constraint-family bound: row shape, control updates, untouched-cell
 preservation, both initialization modes, and final acceptance. -/
 def formulaConstraintCountPolynomial {language : Language}
@@ -692,6 +714,38 @@ theorem formulaVariableCountPolynomial_eval {language : Language}
     problem.formulaTapeWidthPolynomial_eval,
     problem.formulaStateCountPolynomial_eval]
   rfl
+
+/-- The mode-sensitive external polynomial evaluates to the actual layout
+width, not merely an upper bound. -/
+theorem formulaWidthPolynomial_eval {language : Language}
+    (problem : VerifierTableauProblem language) :
+    (formulaWidthPolynomial problem.verifier).eval
+        (BitString.size problem.input) = problem.FormulaWidth := by
+  cases hMode : problem.verifier.program.inputMode with
+  | inputOnly =>
+      simp [formulaWidthPolynomial, hMode,
+        problem.formulaTimeCountPolynomial_eval,
+        problem.formulaTapeWidthPolynomial_eval,
+        problem.formulaStateCountPolynomial_eval, FormulaWidth,
+        VerifierTableauProblem.layout, VariableLayout.variableCount_eq_sum,
+        VariableLayout.symbolWidth, VariableLayout.headWidth,
+        VariableLayout.stateWidth, VariableLayout.certificateBitWidth,
+        VariableLayout.certificateLengthWidth,
+        VerifierTableauProblem.tableauInputMode, inputModeOfVerifier,
+        Nat.mul_comm, Nat.mul_left_comm] <;> omega
+  | paired =>
+      simp [formulaWidthPolynomial, hMode,
+        problem.formulaTimeCountPolynomial_eval,
+        problem.formulaTapeWidthPolynomial_eval,
+        problem.formulaStateCountPolynomial_eval, FormulaWidth,
+        VerifierTableauProblem.layout, VariableLayout.variableCount_eq_sum,
+        VariableLayout.symbolWidth, VariableLayout.headWidth,
+        VariableLayout.stateWidth, VariableLayout.certificateBitWidth,
+        VariableLayout.certificateLengthWidth,
+        VerifierTableauProblem.tableauInputMode, inputModeOfVerifier,
+        VerifierTableauProblem.dimensions_certificateBound,
+        VerifierTableauProblem.certificateLimit,
+        Nat.mul_comm, Nat.mul_left_comm] <;> omega
 
 theorem formulaConstraintCountPolynomial_eval {language : Language}
     (problem : VerifierTableauProblem language) :
