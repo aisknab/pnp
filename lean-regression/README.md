@@ -21,6 +21,20 @@ no mismatch or timeout was found in that finite universe; it does not replace
 the systematic canonical-clause regression or the universal operational-
 correctness proof.
 
+Run the composed Cook--Levin first-token prefix regression with:
+
+```sh
+lake env lean -DwarningAsError=true \
+  lean-regression/PNPConcreteCookLevinBuilderFirstTokenPrefix.lean
+```
+
+Its finite examples exercise empty, one-bit zero/one, odd/even, all-zero, and
+all-one source words; exact work and raw-polynomial values; the literal bridge;
+the final represented tally workspace containing `T`; disjoint state images;
+malformed prefix/appender phases; a stuck prefix reject image; and one-step-short
+fuel. The universal behavior is established by the Lean theorems in the main
+module, not by this finite case list.
+
 Run the targeted canonical CNF regression with:
 
 ```sh

@@ -197,19 +197,23 @@ exact prefix, full, one-step-short, terminal, excess-fuel, and canonical-output 
 literal builder stage is also present: a fixed 19-rule machine preserves the source input, appends
 an exact unary length tally, connects to the total-input-framer endpoint, and proves exact work and
 compiled raw polynomials plus malformed and one-step-short timeout. A collision-free finite table
-now executes the total framer, one literal symbol-preserving launch, and that tally from every raw
+executes the total framer, one literal symbol-preserving launch, and that tally from every raw
 bitstring within the external compiled polynomial `18*n*n + 63*n + 93`; a tally scan configuration
-headed by the unused `zeroOne` symbol and one-step-short fuel remain timeout. These results still do
-not compose into the next standalone table. That next fixed 59-rule machine now appends any one of
-the four canonical two-bit CNF tokens after a supplied tally endpoint and restores the source focus
-for every input, canonical prior output, and arbitrary exterior garbage. Its distinguished start
-appends the first `T` width-header token within `24*n + 48` compiled raw steps. Lean proves that the
-token is exactly direct formula-bit coordinates zero and one and `encodedFormula.take 2` for every
-concrete problem in either input mode. Malformed tally/output phases and one-step-short fuel remain
-timeout. This earns one literal formula-token stage, but it does not compute the rest of the header,
-interpret a dynamic cursor, or compose a complete
-raw formula builder with a polynomial construction-runtime proof, or package a concrete
-`PolynomialReduction`. A deterministic polynomial-time CNF-SAT decider,
+headed by the unused `zeroOne` symbol and one-step-short fuel remain timeout. A separate fixed
+59-rule machine appends any one of the four canonical two-bit CNF tokens after a supplied tally
+endpoint and restores the source focus for every input, canonical prior output, and arbitrary
+exterior garbage.
+
+The current builder milestone composes those two complete tables. One literal 184-rule work
+machine uses disjoint injective state images for all 116 input-prefix rules and all 59 appender rules,
+with nine total bridge rules between them. Every raw bitstring reaches the preserved input/tally
+workspace containing exactly the first `T` token within the external compiled bound
+`18*n*n + 87*n + 147`. Lean proves that the token is direct formula-bit coordinates zero and one and
+`encodedFormula.take 2` for every concrete problem in either input mode. The prefix endpoint before
+launch, malformed prefix/appender phases, and one-step-short fuel remain timeout. This earns one
+literal formula-token prefix, but it does not compute the rest of the header, interpret a dynamic
+cursor, compose a complete raw formula builder with a polynomial construction-runtime proof, or
+package a concrete `PolynomialReduction`. A deterministic polynomial-time CNF-SAT decider,
 concrete NP-hardness/NP-completeness, locked-NAND threshold, residual-band minimizer, ZeroSlack,
 the remaining end-to-end polynomial bounds, and the root theorem/axiom audit remain incomplete.
 

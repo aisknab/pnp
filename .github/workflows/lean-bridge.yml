@@ -58,6 +58,7 @@ on:
       - 'audits/lean-concrete-cook-levin-builder-input-length0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-input-prefix0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-token-appender0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-builder-first-token-prefix0.test.mjs'
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
       - 'audits/lean-nand-reference-minimum0.test.mjs'
@@ -94,6 +95,7 @@ on:
       - 'docs/lean_cook_levin_builder_input_length.md'
       - 'docs/lean_cook_levin_builder_input_prefix.md'
       - 'docs/lean_cook_levin_builder_token_appender.md'
+      - 'docs/lean_cook_levin_builder_first_token_prefix.md'
       - 'docs/lean_nand_semantics.md'
       - 'docs/lean_nand_enumerator.md'
       - 'docs/lean_nand_reference_minimum.md'
@@ -166,6 +168,7 @@ on:
       - 'audits/lean-concrete-cook-levin-builder-input-length0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-input-prefix0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-token-appender0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-builder-first-token-prefix0.test.mjs'
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
       - 'audits/lean-nand-reference-minimum0.test.mjs'
@@ -202,6 +205,7 @@ on:
       - 'docs/lean_cook_levin_builder_input_length.md'
       - 'docs/lean_cook_levin_builder_input_prefix.md'
       - 'docs/lean_cook_levin_builder_token_appender.md'
+      - 'docs/lean_cook_levin_builder_first_token_prefix.md'
       - 'docs/lean_nand_semantics.md'
       - 'docs/lean_nand_enumerator.md'
       - 'docs/lean_nand_reference_minimum.md'
@@ -304,6 +308,9 @@ jobs:
 
       - name: Audit standalone Cook-Levin builder token appender
         run: node --test audits/lean-concrete-cook-levin-builder-token-appender0.test.mjs
+
+      - name: Audit composed Cook-Levin builder first-token prefix
+        run: node --test audits/lean-concrete-cook-levin-builder-first-token-prefix0.test.mjs
 
       - name: Build explicit PNP root
         run: lake build PNP
@@ -725,6 +732,27 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 13
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 13
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderTokenAppender.lean
+
+      - name: Print Cook-Levin builder first-token-prefix axiom closure
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFirstTokenPrefixAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderFirstTokenPrefix\.")" -eq 37
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected Cook-Levin builder first-token-prefix axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Cook-Levin builder first-token prefix reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 21
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 3
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 13
+          lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFirstTokenPrefix.lean
 
       - name: Print concrete CNF work-input bridge axioms
         run: |

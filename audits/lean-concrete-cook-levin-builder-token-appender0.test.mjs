@@ -285,8 +285,13 @@ test('token appender remains below a complete builder, reduction, and class theo
   assert.equal(status.leanConcreteCookLevinBuilderTokenAppenderCompiledRawMachineFormalized, true);
   assert.equal(status.leanConcreteCookLevinBuilderTokenAppenderExternalInputSizePolynomialFormalized, true);
   assert.equal(status.leanConcreteCookLevinBuilderTokenAppenderFirstFormulaBitsFormalized, true);
-  assert.equal(status.leanConcreteCookLevinBuilderTokenAppenderInputPrefixComposed, false);
+  assert.equal(status.leanConcreteCookLevinBuilderTokenAppenderInputPrefixComposed, true);
+  assert.equal(status.leanConcreteCookLevinBuilderFirstTokenPrefixFormalized, true);
+  assert.equal(status.leanConcreteCookLevinBuilderCompleteHeaderFormalized, false);
+  assert.equal(status.leanConcreteCookLevinBuilderDynamicCursorFormalized, false);
   assert.equal(status.leanConcreteCookLevinFormulaBuilderFormalized, false);
+  assert.equal(status.leanConcreteCookLevinBuilderRawRefinementFormalized, false);
+  assert.equal(status.leanConcreteCookLevinBuilderPolynomialReductionFormalized, false);
   assert.equal(status.leanConcreteCNFNPCompletenessFormalized, false);
   assert.equal(status.leanConcreteCNFSATInPFormalized, false);
   assert.equal(status.rootLeanTheoremPresent, false);
