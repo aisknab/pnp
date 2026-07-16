@@ -58,15 +58,14 @@
   CNF-SAT membership in NP with an explicit polynomial bound. It does not prove CNF-SAT in P,
   NP-hardness, NP-completeness, or $P=NP$. The general charged pipeline is linked to the raw machine
   kernel, and the Cook--Levin formula has an exact externally sized answer-independent slot
-  schedule plus a direct fuelled specification cursor. A fixed 19-rule preparatory stage and the
-  total raw-input framer now execute in one collision-free finite table within
-  $18n^2+63n+93$ raw steps. That complete 116-rule prefix is now composed with all 59 token-appender
-  rules behind nine total bridge rules. The resulting literal 184-rule machine emits the first
-  \code{T} token---the actual formula's first two bits---within $18n^2+87n+147$ raw steps. It does
-  not compute the remaining header or complete formula, and there is no complete raw
+  schedule plus a direct fuelled specification cursor. A literal finite builder now composes the
+  raw-input/first-token prefix, a structurally generated unary polynomial evaluator, a 16-rule
+  controller, two 59-rule token appenders, and five total bridges in pairwise-disjoint state images.
+  Every raw input emits exactly \code{FormulaWidth} copies of \code{T} followed by \code{F}; these
+  bits equal the complete canonical width header, and an external polynomial bounds the compiled
+  run. The dynamic cursor and formula body are not implemented, so there is no complete raw
   polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation fingerprints
-  are unset and no root theorem exists. The
-  abstract string-handle bridge is never an activation source.
+  are unset, no root theorem exists, and the abstract string-handle bridge is never an activation source.
   \vspace{0.3cm}
   \end{minipage}
 }
@@ -157,6 +156,15 @@ the exact framing, tally, launch, and append trace to the preserved workspace co
 reach the same encoded endpoint. Ending at the prefix endpoint before launch, malformed prefix or
 appender phases, and one-step-short fuel all remain timeout. This emits only two fixed formula bits:
 it does not compute the remaining header, interpret a dynamic cursor, or emit the complete formula.
+
+The complete-header composition continues from that endpoint with a structurally generated unary
+\code{NatPolynomial} evaluator, a 16-rule unary-root controller, two complete 59-rule appender
+copies, and five total nine-symbol bridges under pairwise-disjoint injective state renamings. Its
+literal table has exactly \code{363 + evaluator.ruleCount} rules. Every raw input emits exactly
+\code{FormulaWidth} copies of \code{T} followed by \code{F}; the emitted bits equal
+\code{encodedFormula.take (2 * (FormulaWidth + 1))}, and an external \code{NatPolynomial} bounds
+the compiled run. This is the complete answer-independent width header only: dynamic cursor and
+formula-body emission, a complete builder refinement, and a concrete polynomial reduction remain absent.
 
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
