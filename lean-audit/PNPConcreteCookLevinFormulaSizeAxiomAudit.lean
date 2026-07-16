@@ -44,6 +44,7 @@ import PNP
 #print axioms PNP.Concrete.CookLevin.formulaTapeWidthPolynomial
 #print axioms PNP.Concrete.CookLevin.formulaStateCountPolynomial
 #print axioms PNP.Concrete.CookLevin.formulaVariableCountPolynomial
+#print axioms PNP.Concrete.CookLevin.formulaWidthPolynomial
 #print axioms PNP.Concrete.CookLevin.formulaConstraintCountPolynomial
 #print axioms PNP.Concrete.CookLevin.formulaClauseCountPolynomial
 #print axioms PNP.Concrete.CookLevin.formulaClauseTokenPolynomial
@@ -54,6 +55,7 @@ import PNP
 #print axioms PNP.Concrete.CookLevin.VerifierTableauProblem.formulaTapeWidthPolynomial_eval
 #print axioms PNP.Concrete.CookLevin.VerifierTableauProblem.formulaStateCountPolynomial_eval
 #print axioms PNP.Concrete.CookLevin.VerifierTableauProblem.formulaVariableCountPolynomial_eval
+#print axioms PNP.Concrete.CookLevin.VerifierTableauProblem.formulaWidthPolynomial_eval
 #print axioms PNP.Concrete.CookLevin.VerifierTableauProblem.formulaConstraintCountPolynomial_eval
 #print axioms PNP.Concrete.CookLevin.VerifierTableauProblem.formulaClauseCountPolynomial_eval
 #print axioms PNP.Concrete.CookLevin.VerifierTableauProblem.formulaClauseTokenPolynomial_eval

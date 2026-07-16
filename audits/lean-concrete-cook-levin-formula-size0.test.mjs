@@ -99,7 +99,7 @@ test('Cook-Levin formula size is external, mode-complete, polynomial, and shortc
   assert.deepEqual(validate0(await text0(SOURCE)), []);
 });
 
-test('kernel audit covers all 108 explicit formula-size declarations', async () => {
+test('kernel audit covers all 110 explicit formula-size declarations', async () => {
   const [source, audit, root, workflow, packageText, verifierScript, regression] = await Promise.all([
     text0(SOURCE), text0(AUDIT), text0('lean/PNP.lean'),
     text0('.github/workflows/lean-bridge.yml'), text0('package.json'),
@@ -108,14 +108,14 @@ test('kernel audit covers all 108 explicit formula-size declarations', async () 
   const declarations = explicitLeanDeclarationHeads0(source);
   const printed = printed0(audit);
   assert.equal(imports0(audit).join(','), 'PNP');
-  assert.equal(declarations.length, 108);
+  assert.equal(declarations.length, 110);
   assert.equal(printed.length, declarations.length);
   assert.equal(new Set(printed).size, printed.length);
   assert.ok(printed.every((name) => name.startsWith(PREFIX)));
   assert.ok(imports0(root).includes('PNP.Concrete.CookLevinFormulaSize'));
   assert.ok(workflow.includes('PNPConcreteCookLevinFormulaSizeAxiomAudit.lean'));
   assert.ok(workflow.includes('PNPConcreteCookLevinFormulaSize.lean'));
-  assert.ok(workflow.includes(' -eq 108'));
+  assert.ok(workflow.includes(' -eq 110'));
   assert.ok(workflow.includes('Unexpected Cook-Levin formula-size axiom closure.'));
   const packageJson = JSON.parse(packageText);
   assert.ok(packageJson.scripts.test.includes(

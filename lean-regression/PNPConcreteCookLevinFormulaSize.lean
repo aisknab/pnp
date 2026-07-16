@@ -40,6 +40,14 @@ def oddProblem : VerifierTableauProblem (fun _ => True) :=
 def evenProblem : VerifierTableauProblem (fun _ => True) :=
   { verifier := pairedVerifier, input := [true, true, false, false] }
 
+example : (formulaWidthPolynomial emptyProblem.verifier).eval
+    (BitString.size emptyProblem.input) = emptyProblem.FormulaWidth :=
+  emptyProblem.formulaWidthPolynomial_eval
+
+example : (formulaWidthPolynomial oddProblem.verifier).eval
+    (BitString.size oddProblem.input) = oddProblem.FormulaWidth :=
+  oddProblem.formulaWidthPolynomial_eval
+
 example : BitString.size emptyProblem.encodedFormula ≤
     (encodedFormulaSizePolynomial emptyProblem.verifier).eval
       (BitString.size emptyProblem.input) :=

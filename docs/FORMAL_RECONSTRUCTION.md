@@ -204,18 +204,32 @@ headed by the unused `zeroOne` symbol and one-step-short fuel remain timeout. A 
 endpoint and restores the source focus for every input, canonical prior output, and arbitrary
 exterior garbage.
 
-The current builder milestone composes those two complete tables. One literal 184-rule work
+The first composed builder prefix joins those two complete tables. One literal 184-rule work
 machine uses disjoint injective state images for all 116 input-prefix rules and all 59 appender rules,
 with nine total bridge rules between them. Every raw bitstring reaches the preserved input/tally
 workspace containing exactly the first `T` token within the external compiled bound
 `18*n*n + 87*n + 147`. Lean proves that the token is direct formula-bit coordinates zero and one and
 `encodedFormula.take 2` for every concrete problem in either input mode. The prefix endpoint before
-launch, malformed prefix/appender phases, and one-step-short fuel remain timeout. This earns one
-literal formula-token prefix, but it does not compute the rest of the header, interpret a dynamic
-cursor, compose a complete raw formula builder with a polynomial construction-runtime proof, or
-package a concrete `PolynomialReduction`. A deterministic polynomial-time CNF-SAT decider,
-concrete NP-hardness/NP-completeness, locked-NAND threshold, residual-band minimizer, ZeroSlack,
-the remaining end-to-end polynomial bounds, and the root theorem/axiom audit remain incomplete.
+launch, malformed prefix/appender phases, and one-step-short fuel remain timeout.
+
+The current milestone extends that exact trace through a structurally generated literal unary
+evaluator for the verifier-fixed, mode-sensitive formula-width polynomial. Five total nine-symbol
+bridges place the prefix, evaluator, a 16-rule unary-root controller, and reusable `T` and final `F`
+appenders in pairwise-disjoint injective state images. The resulting finite table has exactly
+`363 + evaluator.ruleCount` rules and never calls `NatPolynomial.eval` from its executable table.
+For every raw input it accepts at the exact preserved workspace containing `T` repeated
+`FormulaWidth` times followed by `F`; the corresponding bits equal
+`encodedFormula.take (2 * (FormulaWidth + 1))`. The exact compiled trace is bounded by a public
+external `NatPolynomial`, while the pre-launch prefix endpoint and one-step-short full trace remain
+timeout. All 74 evaluator declarations and all 83 composed-header declarations have complete
+kernel-axiom audits whose closures are empty or use only `propext` and `Quot.sound`.
+
+This earns the complete answer-independent width header, but it does not interpret the dynamic
+formula cursor as raw transitions, emit the formula body, compose a complete raw formula builder
+with a construction-runtime proof, or package a concrete `PolynomialReduction`. A deterministic
+polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,
+residual-band minimizer, ZeroSlack, the remaining end-to-end polynomial bounds, and the root
+theorem/axiom audit remain incomplete.
 
 The first concrete foundation is now checked in `PNP.DirectWire`: intrinsically topological direct-wire
 NAND programs, total Boolean evaluation, gate-count size, ordered output wiring, and elementary

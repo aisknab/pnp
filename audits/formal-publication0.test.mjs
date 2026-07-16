@@ -133,6 +133,8 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     .axiomClosureUsesOnlyLeanStandardAllowlist, true);
   assert.equal(byId.get('concrete-cook-levin-formula-size').requiredTheorems.includes(
     'PNP.Concrete.CookLevin.VerifierTableauProblem.encodedFormula_size_le'), true);
+  assert.equal(byId.get('concrete-cook-levin-formula-size').requiredTheorems.includes(
+    'PNP.Concrete.CookLevin.VerifierTableauProblem.formulaWidthPolynomial_eval'), true);
   assert.match(byId.get('concrete-cook-levin-formula-size').nonClaim,
     /does not implement or time a raw finite formula builder/u);
   assert.equal(byId.get('concrete-cook-levin-formula-schedule').status,
@@ -205,6 +207,20 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /literal 184-rule finite work machine/u);
   assert.match(byId.get('concrete-cook-levin-builder-first-token-prefix').nonClaim,
     /only the first two canonical formula bits/u);
+  assert.equal(byId.get('concrete-cook-levin-builder-complete-header').status,
+    'formalized-foundation-only');
+  assert.equal(byId.get('concrete-cook-levin-builder-complete-header').earned, true);
+  assert.equal(byId.get('concrete-cook-levin-builder-complete-header').allAssumptionFree, false);
+  assert.equal(byId.get('concrete-cook-levin-builder-complete-header')
+    .axiomClosureUsesOnlyLeanStandardAllowlist, true);
+  assert.equal(byId.get('concrete-cook-levin-builder-complete-header').requiredTheorems.includes(
+    'PNP.Concrete.CookLevin.BuilderUnaryPolynomial.workTimePolynomial_eval'), true);
+  assert.equal(byId.get('concrete-cook-levin-builder-complete-header').requiredTheorems.includes(
+    'PNP.Concrete.CookLevin.BuilderCompleteHeader.finalTokenBits_eq_encodedFormula_header'), true);
+  assert.match(byId.get('concrete-cook-levin-builder-complete-header').scope,
+    /363 plus the evaluator rule count/u);
+  assert.match(byId.get('concrete-cook-levin-builder-complete-header').nonClaim,
+    /complete answer-independent width header only/u);
   assert.equal(byId.get('concrete-cnf-universal-verifier').requiredTheorems.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP'), true);
   assert.match(byId.get('concrete-cnf-universal-verifier').nonClaim,
@@ -232,10 +248,10 @@ test('publication consumes the reviewed recursive-refinement map and inventory c
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '49200c1a6336a435b4d2006d7904fd732cb89e768898bb5c929bec6ad8afdc48');
+    '2cdccb9b08910c6e2a11305c56bf5459126063ce1f62c0147da53a1149e31381');
   assert.equal(map.milestoneSourceClosureSha256,
-    '575720b63a17efc574f1d89333e7996af1139d8fa224a027cac756c3808f42f3');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 365);
+    '75ed4e71af40ea8b2efc0c271e1c53ed5c5e62a1113c887e3669c58848f8978b');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 414);
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.PipelineCompiler.pipeline_correct'
   ], 'string');
@@ -278,6 +294,12 @@ test('publication consumes the reviewed recursive-refinement map and inventory c
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.CookLevin.BuilderFirstTokenPrefix.run_compile_rawTimeBound_blankEquivalent'
   ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderUnaryPolynomial.workTimePolynomial_eval'
+  ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderCompleteHeader.finalTokenBits_eq_encodedFormula_header'
+  ], 'string');
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,
     map.gate.expectedConcreteTargetKernelValueSha256,
@@ -291,7 +313,7 @@ test('publication consumes the reviewed recursive-refinement map and inventory c
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [7054, 3249, 2636, 1355, 65]);
+  ], [7418, 3473, 2764, 2032, 67]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
