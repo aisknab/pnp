@@ -3,8 +3,9 @@
 `lean/PNP/Concrete/CookLevinBuilderTokenAppender.lean` formalizes the next
 bounded builder component: one fixed finite work machine that appends exactly
 one state-selected canonical CNF token after the unary input-length tally. It
-is deliberately standalone. Its rule table is not yet concatenated with the
-executable input prefix.
+is audited here as a standalone component. The separate
+`BuilderFirstTokenPrefix` module later concatenates its complete renamed table
+with the executable input prefix through a literal bridge.
 
 ## Literal token and state encoding
 
@@ -68,8 +69,9 @@ and arbitrary exterior garbage.
 The machine start state requests `CNFToken.t`. From a supplied tally endpoint,
 `firstHeaderToken_workRunExact` therefore appends the first header token.
 `firstHeaderToken_after_builderInputPrefix` specializes the supplied tape to
-the endpoint established by the separate input-prefix theorem; it is not a
-rule-table composition theorem.
+the endpoint established by the separate input-prefix theorem. That theorem
+is a local endpoint specialization; the later `BuilderFirstTokenPrefix`
+module supplies the rule-table composition theorem.
 
 The compiler uses six raw transitions per work transition. For the first
 token, Lean proves the external encoded-input-size bound:
@@ -133,9 +135,10 @@ node --test \
 
 ## Exact nonclaim
 
-This milestone does not concatenate the input-prefix and token-appender rule
-tables, compute the remaining width header, interpret a dynamic formula cursor
-coordinate, emit a complete formula, or establish a construction-time
-`RawRefinement`. It supplies no concrete `PolynomialReduction`, CNFSAT
-NP-hardness or NP-completeness, CNFSAT-in-P theorem, or P-equals-NP theorem.
+This standalone component does not itself prove the later input-prefix
+composition. Neither this component nor that first-token composition computes
+the remaining width header, interprets a dynamic formula cursor coordinate,
+emits a complete formula, or establishes a construction-time `RawRefinement`.
+They supply no concrete `PolynomialReduction`, CNFSAT NP-hardness or
+NP-completeness, CNFSAT-in-P theorem, or P-equals-NP theorem.
 `PNP.Main.p_eq_np` remains absent and the publication gate remains false.

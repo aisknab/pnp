@@ -60,10 +60,12 @@
   kernel, and the Cook--Levin formula has an exact externally sized answer-independent slot
   schedule plus a direct fuelled specification cursor. A fixed 19-rule preparatory stage and the
   total raw-input framer now execute in one collision-free finite table within
-  $18n^2+63n+93$ raw steps. A separate 59-rule machine appends any selected canonical token and
-  proves its first \code{T} token is the actual formula's first two bits within $24n+48$ raw steps.
-  Those tables are not composed, and there is no complete raw polynomial-time formula builder or
-  concrete CNFSAT reduction. The reviewed activation fingerprints are unset and no root theorem exists. The
+  $18n^2+63n+93$ raw steps. That complete 116-rule prefix is now composed with all 59 token-appender
+  rules behind nine total bridge rules. The resulting literal 184-rule machine emits the first
+  \code{T} token---the actual formula's first two bits---within $18n^2+87n+147$ raw steps. It does
+  not compute the remaining header or complete formula, and there is no complete raw
+  polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation fingerprints
+  are unset and no root theorem exists. The
   abstract string-handle bridge is never an activation source.
   \vspace{0.3cm}
   \end{minipage}
@@ -145,8 +147,16 @@ canonical prior token list, request, and exterior-left region. The distinguished
 \code{T}; Lean proves direct formula-bit slots zero and one are populated true bits and that
 \code{CNFToken.t.bits = problem.encodedFormula.take 2} for every concrete tableau problem. The
 compiled first-token bound is $24n+48$. Malformed tally/output symbols and one-step-short fuel time
-out. This module starts at a supplied tally endpoint: it does not concatenate the prefix, compute
-the remaining header, interpret a dynamic cursor, or emit the complete formula.
+out.
+
+The composed first-token prefix renames the complete 116-rule input prefix and complete 59-rule
+appender into disjoint injective state images and places nine symbol-preserving rules first in the
+literal table. Only the appender's accept/reject images are global halts. Every raw bitstring follows
+the exact framing, tally, launch, and append trace to the preserved workspace containing
+\code{[CNFToken.t]}. Its compiled external bound is $18n^2+87n+147$, and blank-equivalent raw tapes
+reach the same encoded endpoint. Ending at the prefix endpoint before launch, malformed prefix or
+appender phases, and one-step-short fuel all remain timeout. This emits only two fixed formula bits:
+it does not compute the remaining header, interpret a dynamic cursor, or emit the complete formula.
 
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}

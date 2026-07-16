@@ -46,7 +46,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-16-45}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-16-46}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -60,10 +60,12 @@
   kernel, and the Cook--Levin formula has an exact externally sized answer-independent slot
   schedule plus a direct fuelled specification cursor. A fixed 19-rule preparatory stage and the
   total raw-input framer now execute in one collision-free finite table within
-  $18n^2+63n+93$ raw steps. A separate 59-rule machine appends any selected canonical token and
-  proves its first \code{T} token is the actual formula's first two bits within $24n+48$ raw steps.
-  Those tables are not composed, and there is no complete raw polynomial-time formula builder or
-  concrete CNFSAT reduction. The reviewed activation fingerprints are unset and no root theorem exists. The
+  $18n^2+63n+93$ raw steps. That complete 116-rule prefix is now composed with all 59 token-appender
+  rules behind nine total bridge rules. The resulting literal 184-rule machine emits the first
+  \code{T} token---the actual formula's first two bits---within $18n^2+87n+147$ raw steps. It does
+  not compute the remaining header or complete formula, and there is no complete raw
+  polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation fingerprints
+  are unset and no root theorem exists. The
   abstract string-handle bridge is never an activation source.
   \vspace{0.3cm}
   \end{minipage}
@@ -71,15 +73,15 @@
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 7006 \\
-Theorem-kind declarations & 3213 \\
-Assumption-free theorem-kind declarations & 2620 \\
+Compiled declarations & 7054 \\
+Theorem-kind declarations & 3249 \\
+Assumption-free theorem-kind declarations & 2636 \\
 Project-specific axioms & 4 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{2f8280035717c4223b465ca64ffe4c10c7fd4bc973c28d4a79a92ab2e78851a5}\par}
+{\small Inventory SHA-256: \code{7ddd275e3094957ac3ed7a2c07deadb3d599883c6a2206f80e17b97eee848f30}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -145,8 +147,16 @@ canonical prior token list, request, and exterior-left region. The distinguished
 \code{T}; Lean proves direct formula-bit slots zero and one are populated true bits and that
 \code{CNFToken.t.bits = problem.encodedFormula.take 2} for every concrete tableau problem. The
 compiled first-token bound is $24n+48$. Malformed tally/output symbols and one-step-short fuel time
-out. This module starts at a supplied tally endpoint: it does not concatenate the prefix, compute
-the remaining header, interpret a dynamic cursor, or emit the complete formula.
+out.
+
+The composed first-token prefix renames the complete 116-rule input prefix and complete 59-rule
+appender into disjoint injective state images and places nine symbol-preserving rules first in the
+literal table. Only the appender's accept/reject images are global halts. Every raw bitstring follows
+the exact framing, tally, launch, and append trace to the preserved workspace containing
+\code{[CNFToken.t]}. Its compiled external bound is $18n^2+87n+147$, and blank-equivalent raw tapes
+reach the same encoded endpoint. Ending at the prefix endpoint before launch, malformed prefix or
+appender phases, and one-step-short fuel all remain timeout. This emits only two fixed formula bits:
+it does not compute the remaining header, interpret a dynamic cursor, or emit the complete formula.
 
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
@@ -235,7 +245,7 @@ remain absent.
 \section{Formal milestone ledger}
 
 Each earned row requires exact compiled names and theorem kinds, empty axiom closures, per-name
-domain-separated kernel-type SHA-256 matches for 340 detailed candidates, and the pinned whole-Lean
+domain-separated kernel-type SHA-256 matches for 365 detailed candidates, and the pinned whole-Lean
 source closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
 {\small
@@ -261,7 +271,8 @@ Rectangular Cook-Levin formula schedule & formalized-foundation-only & For every
 Direct Cook-Levin formula cursor & formalized-foundation-only & For every concrete verifier-tableau problem and natural coordinate, direct constraint, clause, token, and raw-bit decoders agree pointwise with the canonical rectangular schedules while preserving out-of-range, valid-padding, and populated states. A fuelled specification cursor proves exact bounded prefixes, complete traversal, one-step-short behavior, terminal behavior, excess-fuel stability, the external encoded-size polynomial, and canonical emitted output. All 129 explicit declarations are axiom-audited; the 13 reviewed theorem types use only the permitted Lean standard axioms Quot.sound and propext, with no project axiom or choice axiom. & This is a Lean specification cursor. It does not prove constant-time raw slot interpretation, implement or time a raw finite formula builder, construct a FunctionProgram.RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-completeness, establish CNFSAT in P, or prove P = NP. \\
 Literal Cook-Levin builder input-length tally & formalized-foundation-only & A fixed 19-rule work machine starts at the proved all-input framer endpoint, preserves every external source bit, appends exactly one unary tally symbol per source bit in fresh right-side workspace, and returns to the source head. It accepts after exactly 2*n*n + 4*n + 2 work steps; the compiled raw machine reaches the encoded endpoint after exactly 12*n*n + 24*n + 12 steps. Malformed internal scan symbols and one-step-short fuel both time out. All 39 public declarations are axiom-audited; the ten reviewed theorem types use only the permitted Lean standard axioms Quot.sound and propext, with no project or choice axiom. & This is only the input-length preparation stage. It does not emit formula bits, interpret direct cursor slots as raw transitions, compose a complete raw formula builder, construct a FunctionProgram.RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-completeness, establish CNFSAT in P, or prove P = NP. \\
 Executable Cook-Levin builder input prefix & formalized-foundation-only & One literal finite work machine contains collision-free renamed copies of the total all-input framer and fixed 19-rule unary tally, with a total nine-symbol tape/head-preserving launch between them. Every raw bitstring reaches the exact preserved-input tally endpoint in totalInputFramerWorkSteps(input) + 1 + 2*n*n + 4*n + 2 work transitions and within the external compiled polynomial 18*n*n + 63*n + 93. All 40 public declarations are axiom-audited: 29 have empty closure, one uses only propext, and ten use only propext and Quot.sound. & This is still only an executable input-preparation prefix. It emits no formula bit, performs no raw formula-cursor interpretation, supplies no complete formula builder or construction-time RawRefinement, packages no concrete PolynomialReduction, and establishes neither CNFSAT NP-completeness, CNFSAT in P, nor P = NP. \\
-Standalone Cook-Levin builder token appender & formalized-foundation-only & A fixed 59-rule work machine appends any of the four canonical two-bit CNF tokens selected only by its finite control state after a represented source word and exact unary input-length tally. For source length n and k existing tokens, it accepts at the exact endpoint after 2 * (max 1 n + n + k + 3) work steps. Its distinguished start state appends T, the first canonical formula header token, within the external compiled bound 24*n + 48; the two emitted bits are proved equal to the first two bits of every concrete verifier-tableau encoding. Malformed tally/output phases and one-step-short fuel remain timeouts. All 68 public declarations are axiom-audited: 42 have empty closure, 13 use only propext, and 13 use only propext and Quot.sound. & This is a standalone token appender whose rule table is not concatenated with the executable input prefix. It does not compute the remaining width header, interpret a dynamic formula cursor coordinate, emit a complete formula, construct a builder RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-hardness or NP-completeness, establish CNFSAT in P, or prove P = NP. \\
+Standalone Cook-Levin builder token appender & formalized-foundation-only & A fixed 59-rule work machine appends any of the four canonical two-bit CNF tokens selected only by its finite control state after a represented source word and exact unary input-length tally. For source length n and k existing tokens, it accepts at the exact endpoint after 2 * (max 1 n + n + k + 3) work steps. Its distinguished start state appends T, the first canonical formula header token, within the external compiled bound 24*n + 48; the two emitted bits are proved equal to the first two bits of every concrete verifier-tableau encoding. Malformed tally/output phases and one-step-short fuel remain timeouts. All 68 public declarations are axiom-audited: 42 have empty closure, 13 use only propext, and 13 use only propext and Quot.sound. & This milestone audits the token appender independently of its later composed use. It does not compute the remaining width header, interpret a dynamic formula cursor coordinate, emit a complete formula, construct a builder RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-hardness or NP-completeness, establish CNFSAT in P, or prove P = NP. \\
+Composed Cook-Levin builder first-token prefix & formalized-foundation-only & One literal 184-rule finite work machine contains all 116 executable input-prefix rules, nine total symbol-preserving bridge rules, and all 59 token-appender rules under injective disjoint state renamings. Every raw bitstring runs through total framing, exact unary input tallying, the bridge, and the appender to preserve the workspace and emit exactly the first T header token. The exact all-input work trace compiles within 18*n*n + 87*n + 147 raw steps; the final two bits equal the first two bits of every canonical encoded verifier-tableau formula. Prefix-endpoint, malformed tally/output, and one-step-short negative cases time out. All 37 public declarations are axiom-audited: 21 have empty closure, three use only propext, and 13 use only propext and Quot.sound, with no project axiom or Classical.choice. & This emits exactly the fixed answer-independent first T token, hence only the first two canonical formula bits. It does not compute the remaining width header, implement a dynamic cursor, emit a complete formula, construct a builder RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-hardness or NP-completeness, establish CNFSAT in P, or prove P = NP. \\
 Typed direct-wire NAND semantics & formalized & Typed topological Boolean NAND programs and ordered multi-output direct-wire semantics. & This does not establish circuit minimization, SAT, or P = NP. \\
 Finite enumeration, equivalence, and reference minimum & formalized & Exhaustive finite Boolean direct-wire search under the empty-profile reference model. & No polynomial-runtime result is obtained from this exhaustive reference search. \\
 Concrete framed replacement and slack & formalized & The concrete serial framed context with support outputs and explicit bypass wires. & This is not an arbitrary-support replacement theorem for the report's global family. \\
@@ -277,8 +288,8 @@ Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-mac
 
 \section{Compiled inventory summary}
 
-The inventory contains 7006 exported \code{PNP.*} kernel declarations from
-64 modules. It excludes 1333 private compiler auxiliaries.
+The inventory contains 7054 exported \code{PNP.*} kernel declarations from
+65 modules. It excludes 1355 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -300,6 +311,7 @@ PNP.Concrete.CNFWorkMachine & 85 & 3 \\
 PNP.Concrete.CNFWorkTransitions & 64 & 63 \\
 PNP.Concrete.CNFWorkUniversalCorrectness & 294 & 145 \\
 PNP.Concrete.Complexity & 312 & 92 \\
+PNP.Concrete.CookLevinBuilderFirstTokenPrefix & 48 & 36 \\
 PNP.Concrete.CookLevinBuilderInputLength & 49 & 27 \\
 PNP.Concrete.CookLevinBuilderInputPrefix & 52 & 39 \\
 PNP.Concrete.CookLevinBuilderTokenAppender & 105 & 70 \\
@@ -413,10 +425,10 @@ npm run report:check
 \end{verbatim}
 }
 
-The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-16-45}. Its exact byte digest is
-\code{2f8280035717c4223b465ca64ffe4c10c7fd4bc973c28d4a79a92ab2e78851a5}. The report is regenerated from that inventory and the reviewed
+The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-16-46}. Its exact byte digest is
+\code{7ddd275e3094957ac3ed7a2c07deadb3d599883c6a2206f80e17b97eee848f30}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{4f2514ad9f89916ac6bb89ba037005bcc41b99d4a65b2347eaceeb4bd36f619a}; the computed and pinned values match. Successful regeneration
+\code{575720b63a17efc574f1d89333e7996af1139d8fa224a027cac756c3808f42f3}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 

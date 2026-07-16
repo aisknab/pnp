@@ -76,17 +76,19 @@ correctness and no timeout under an explicit polynomial bound, constructs a `.pa
 It does not establish `CNFSAT ∈ P`, NP-hardness, NP-completeness, or `P = NP`, and it is not the
 missing general compiler/refinement for arbitrary charged pipelines.
 
-The reviewed Cook--Levin builder boundary now includes one executable input prefix. A literal
-collision-free finite table runs the total all-input framer, one nine-symbol launch, and the fixed
-unary length tally from every raw bitstring. The exact cumulative trace has the external compiled
-bound `18*n*n + 63*n + 93`; a tally scan configuration headed by the unused `zeroOne` symbol and one-step-short fuel remain timeout. These
-fingerprints establish input preparation. A separate fixed 59-rule state-selected table now appends
-any canonical CNF token after a supplied tally endpoint, with exact append/rewind behavior for every
-prior token list and arbitrary exterior garbage. Its distinguished first `T` token has compiled raw
-bound `24*n + 48` and is proved equal to direct formula coordinates zero and one and to the first two
-bits of the actual canonical encoded formula. The two tables are not composed. No remaining header,
-dynamic raw cursor interpreter, complete builder, construction-runtime `RawRefinement`, or concrete
-`PolynomialReduction` is present.
+The reviewed Cook--Levin builder boundary now includes a composed executable first-token prefix. A
+literal collision-free finite table runs the total all-input framer, one nine-symbol launch, and the
+fixed unary length tally from every raw bitstring. A separate fixed 59-rule state-selected table
+appends any canonical CNF token after a supplied tally endpoint. The current milestone renames both
+complete machines into disjoint injective state images and connects them with a second total
+nine-symbol launch. Its literal table therefore contains exactly 184 rules: 116 input-prefix rules,
+nine bridge rules, and 59 appender rules. Every raw bitstring reaches the preserved input/tally
+workspace containing exactly the first `T` token within `18*n*n + 87*n + 147` compiled raw steps.
+That token is proved equal to direct formula coordinates zero and one and to the first two bits of
+the actual canonical encoded formula. The prefix endpoint before launch, malformed prefix/appender
+phases, and one-step-short fuel remain timeout. No remaining header, dynamic raw cursor interpreter,
+complete builder, construction-runtime `RawRefinement`, or concrete `PolynomialReduction` is
+present.
 
 The current four project-specific axioms remain visible as an independent inventory:
 
