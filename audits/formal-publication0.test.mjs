@@ -322,6 +322,10 @@ test('canonical report source is current and the committed PDF artifact exists',
     status0(),
   ]);
   assert.match(tex, /The repository does not currently establish \$P=NP\$\./u);
+  assert.match(tex, /Every raw input emits exactly \\code\{FormulaWidth\} copies of \\code\{T\} followed by \\code\{F\}/u);
+  assert.match(tex, /bits equal the complete canonical width header/u);
+  assert.match(tex, /The dynamic cursor and formula body are not implemented/u);
+  assert.equal(tex.includes('It does not compute the remaining header or complete formula'), false);
   assert.ok(tex.includes(status.leanTheoremInventorySha256));
   assert.ok(tex.includes(status.coordinate.replaceAll('_', '\\_')) || tex.includes(status.coordinate));
   for (const forbidden of [
