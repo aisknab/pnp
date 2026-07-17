@@ -29,6 +29,7 @@ import PNP
 #print axioms PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.rules_length
 #print axioms PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.machine_acceptState_ne_rejectState
 #print axioms PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.rules_pairwise_query_distinct
+#print axioms PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.rule_source_ne_acceptState
 #print axioms PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.firstLiteralSignTokens
 #print axioms PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.firstLiteralTokens
 #print axioms PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.finalOutside

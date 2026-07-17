@@ -51,6 +51,7 @@ def machine
 theorem rules_length
 theorem machine_acceptState_ne_rejectState
 theorem rules_pairwise_query_distinct
+theorem rule_source_ne_acceptState
 def firstLiteralSignTokens
 def firstLiteralTokens
 def finalOutside
@@ -216,9 +217,9 @@ test('kernel transcript covers every public declaration exactly once',
   async () => {
     const audit = await text0(AXIOM_AUDIT);
     const printed = printed0(audit);
-    assert.equal(HEADS.length, 73);
-    assert.equal(printed.length, 73);
-    assert.equal(new Set(printed).size, 73);
+    assert.equal(HEADS.length, 74);
+    assert.equal(printed.length, 74);
+    assert.equal(new Set(printed).size, 74);
     assert.deepEqual(imports0(audit), ['PNP']);
     assert.ok(printed.every((name) => name.startsWith(
       'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.')));
