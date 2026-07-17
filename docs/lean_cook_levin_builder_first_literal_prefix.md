@@ -143,7 +143,7 @@ altered token, or shortened fuel cannot be reclassified as global acceptance.
 
 ## Kernel, regression, and hostile audits
 
-The complete 73-declaration public surface is printed by:
+The complete 74-declaration public surface is printed by:
 
 ```sh
 lake env lean -DwarningAsError=true \

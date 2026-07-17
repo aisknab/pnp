@@ -230,19 +230,31 @@ raw input emits exactly `T^FormulaWidth F Sep`, retains that token coordinate an
 cursor, and follows an external compiled polynomial. Its 60 public declarations have complete
 kernel-axiom audits using only the approved Lean-standard closure.
 
-The current first-literal milestone continues again through a unary evaluator for token coordinate
+The first-literal milestone continues again through a unary evaluator for token coordinate
 `FormulaVariableSlotBound + 4`, three total bridges, and fixed `T` and `F` appender copies in four
 disjoint state images. Every raw input emits exactly `T^FormulaWidth F Sep T F`; a constructive
 schedule proof identifies the final pair as the positive sign and unary-zero terminator of the first
 shape-clause literal, positive variable zero. The emitted bits equal
 `encodedFormula.take (2 * (FormulaWidth + 4))`, and the external compiled bound evaluates to the
-body-start bound plus `174 + 6*Unary.workSteps(nextTokenSlotPolynomial) + 48*n + 24*width`. All 73
-public declarations have complete kernel-axiom audits using only `propext` and `Quot.sound`.
+body-start bound plus `174 + 6*Unary.workSteps(nextTokenSlotPolynomial) + 48*n + 24*width`. Its 74
+public declarations, including the halt-source separation theorem required for safe downstream
+composition, have complete kernel-axiom audits using only `propext` and `Quot.sound`.
 
-This earns only the canonical prefix through the first literal. The retained coordinate is data: no
-machine interprets the dynamic formula cursor as raw transitions, emits the remaining formula body,
-composes a complete raw formula builder with a construction-runtime proof, or packages a concrete
-`PolynomialReduction`. A deterministic
+The current first-clause milestone extends that trace through a unary evaluator for token coordinate
+`FormulaVariableSlotBound + 12` and a fixed 535-rule tail containing eight complete token appenders
+and seven total bridges. Every raw input emits exactly
+`T^FormulaWidth F Sep T F T T F T T T F Finish`. A constructive schedule proof identifies the three
+clause literals as positive variables zero, one, and two, and the emitted bits equal
+`encodedFormula.take (2 * (FormulaWidth + 12))`. The external compiled bound evaluates to the
+first-literal bound plus
+`1158 + 6*Unary.workSteps(firstClauseNextTokenSlotPolynomial) + 192*n + 96*width`. All 77 new public
+declarations, and the combined 78-declaration audit including the predecessor separation theorem,
+use only the approved Lean-standard closure.
+
+This earns exactly the canonical prefix through the complete first clause. The retained coordinate
+is data: no machine interprets the dynamic formula cursor as raw transitions, emits the remaining
+formula body, composes a complete raw formula builder with a construction-runtime proof, or packages
+a concrete `PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,
 residual-band minimizer, ZeroSlack, the remaining end-to-end polynomial bounds, and the root
 theorem/axiom audit remain incomplete.

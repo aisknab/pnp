@@ -254,6 +254,24 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /585 plus the width, body-start next-slot, and first-literal next-slot evaluator rule counts/u);
   assert.match(byId.get('concrete-cook-levin-builder-first-literal-prefix').nonClaim,
     /does not implement a dynamic formula cursor/u);
+  assert.equal(byId.get('concrete-cook-levin-builder-first-clause-prefix').status,
+    'formalized-foundation-only');
+  assert.equal(byId.get('concrete-cook-levin-builder-first-clause-prefix').earned, true);
+  assert.equal(byId.get('concrete-cook-levin-builder-first-clause-prefix').allAssumptionFree,
+    false);
+  assert.equal(byId.get('concrete-cook-levin-builder-first-clause-prefix')
+    .axiomClosureUsesOnlyLeanStandardAllowlist, true);
+  assert.equal(byId.get('concrete-cook-levin-builder-first-clause-prefix')
+    .requiredTheorems.includes(
+      'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.workRunExact'), true);
+  assert.equal(byId.get('concrete-cook-levin-builder-first-clause-prefix')
+    .requiredTheorems.includes(
+      'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.finalTokenBits_eq_encodedFormula_firstClause'),
+  true);
+  assert.match(byId.get('concrete-cook-levin-builder-first-clause-prefix').scope,
+    /1138 plus the width, body-start next-slot, first-literal next-slot, and first-clause next-slot evaluator rule counts/u);
+  assert.match(byId.get('concrete-cook-levin-builder-first-clause-prefix').nonClaim,
+    /does not implement a dynamic formula cursor/u);
   assert.equal(byId.get('concrete-cnf-universal-verifier').requiredTheorems.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP'), true);
   assert.match(byId.get('concrete-cnf-universal-verifier').nonClaim,
@@ -274,17 +292,17 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   ]) assert.equal(byId.get(id).status, 'not-formalized');
 });
 
-test('publication consumes the reviewed recursive-refinement map and inventory counts', async () => {
+test('publication consumes the reviewed first-clause map and inventory counts', async () => {
   const [status, mapText] = await Promise.all([
     status0(),
     readFile(new URL('../publication/FORMAL_PUBLICATION_MAP.json', import.meta.url), 'utf8'),
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'fbbf9022ced67765f75e602dcb2eefe1bae5d7e03d4aa2fce03bed17d715ae85');
+    'd5a8506bdfa29df539f4aa0d5a0c27ebe58eb8542ae28baa9923ecc842663ddc');
   assert.equal(map.milestoneSourceClosureSha256,
-    'e27625c999419988dcf401be91caac9aaba5992eb743fd6a85f0b1b6b7a50ab0');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 508);
+    '791b8e5df59265f19faf287af634f2a36d52a271180e887189af92527e4d593a');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 549);
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.PipelineCompiler.pipeline_correct'
   ], 'string');
@@ -342,6 +360,12 @@ test('publication consumes the reviewed recursive-refinement map and inventory c
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.finalTokenBits_eq_encodedFormula_firstLiteral'
   ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.workRunExact'
+  ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.finalTokenBits_eq_encodedFormula_firstClause'
+  ], 'string');
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,
     map.gate.expectedConcreteTargetKernelValueSha256,
@@ -355,7 +379,7 @@ test('publication consumes the reviewed recursive-refinement map and inventory c
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [7626, 3640, 2827, 2214, 69]);
+  ], [7746, 3725, 2865, 2286, 70]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
@@ -364,9 +388,9 @@ test('canonical report source is current and the committed PDF artifact exists',
     status0(),
   ]);
   assert.match(tex, /The repository does not currently establish \$P=NP\$\./u);
-  assert.match(tex, /Every raw input\s+emits exactly \\code\{FormulaWidth\} copies of \\code\{T\} followed by \\code\{F\}, \\code\{Sep\}, \\code\{T\},\s+and \\code\{F\}/u);
-  assert.match(tex, /canonical prefix through positive variable zero/u);
-  assert.match(tex, /The dynamic cursor and remaining formula body are not/u);
+  assert.match(tex, /Every raw input emits exactly\s+\\code\{FormulaWidth\} copies of \\code\{T\} followed by \\code\{F\}, \\code\{Sep\}, and the complete positive\s+clause on variables zero, one, and two/u);
+  assert.match(tex, /complete positive at-least-one shape clause on variables zero,\s+one, and two/u);
+  assert.match(tex, /The dynamic cursor and remaining formula\s+body are not/u);
   assert.equal(tex.includes('It does not compute the remaining header or complete formula'), false);
   assert.ok(tex.includes(status.leanTheoremInventorySha256));
   assert.ok(tex.includes(status.coordinate.replaceAll('_', '\\_')) || tex.includes(status.coordinate));

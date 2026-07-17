@@ -59,12 +59,12 @@
   NP-hardness, NP-completeness, or $P=NP$. The general charged pipeline is linked to the raw machine
   kernel, and the Cook--Levin formula has an exact externally sized answer-independent slot
   schedule plus a direct fuelled specification cursor. A literal finite builder now composes the
-  complete body-start machine with another structurally generated unary evaluator, three total
-  bridges, and fixed \code{T}/\code{F} appenders in pairwise-disjoint state images. Every raw input
-  emits exactly \code{FormulaWidth} copies of \code{T} followed by \code{F}, \code{Sep}, \code{T},
-  and \code{F}; these bits equal the canonical prefix through positive variable zero, and an external
-  polynomial bounds the compiled run. The dynamic cursor and remaining formula body are not
-  implemented, so there is no complete raw
+  complete first-literal machine with another structurally generated unary evaluator and a fixed
+  eight-token tail in pairwise-disjoint state images. Every raw input emits exactly
+  \code{FormulaWidth} copies of \code{T} followed by \code{F}, \code{Sep}, and the complete positive
+  clause on variables zero, one, and two; these bits equal the corresponding canonical encoded-formula
+  prefix, and an external polynomial bounds the compiled run. The dynamic cursor and remaining formula
+  body are not implemented, so there is no complete raw
   polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation fingerprints
   are unset, no root theorem exists, and the abstract string-handle bridge is never an activation source.
   \vspace{0.3cm}
@@ -185,6 +185,18 @@ The emitted bits equal \code{encodedFormula.take (2 * (FormulaWidth + 4))}. The 
 coordinate is four past the formula variable slot bound, but it remains data rather than an executable
 dynamic cursor; the rest of the formula body remains absent.
 
+The first-clause composition continues from that endpoint with a fourth unary evaluator and a fixed
+535-rule tail appender assembled from eight complete token-appender copies and seven total bridges.
+The global literal table has exactly 1138 plus the width, body-start next-slot, first-literal next-slot,
+and first-clause next-slot evaluator rule counts. Every raw input reaches \code{T} repeated
+\code{FormulaWidth} times, followed by \code{F}, \code{Sep}, \code{T}, \code{F}, \code{T},
+\code{T}, \code{F}, \code{T}, \code{T}, \code{T}, \code{F}, and \code{Finish}. A constructive
+schedule proof identifies this as the complete positive at-least-one shape clause on variables zero,
+one, and two. The emitted bits equal
+\code{encodedFormula.take (2 * (FormulaWidth + 12))}; the retained next token coordinate is twelve
+past the formula variable slot bound. It remains data rather than an executable dynamic cursor, and
+the remaining formula body is absent.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule
@@ -289,7 +301,7 @@ Module & Declarations & Theorems \\
 
 \section{Remaining formal blockers}
 
-Seven formal blockers remain active:
+Six formal blockers remain active:
 
 \begin{enumerate}
 \setlength{\itemsep}{0pt}

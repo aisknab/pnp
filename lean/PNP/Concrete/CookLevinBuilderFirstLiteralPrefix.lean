@@ -594,6 +594,52 @@ theorem rules_pairwise_query_distinct {language : Language}
   rw [List.pairwise_append]
   exact ⟨hBridges, hComponents, hCross⟩
 
+/-- No local rule leaves the global accepting state.  Later bridge-first
+compositions use this separation to preserve query determinism. -/
+theorem rule_source_ne_acceptState {language : Language}
+    (problem : VerifierTableauProblem language) (rule : WorkRule)
+    (hMem : rule ∈ (machine problem).rules) :
+    rule.sourceState ≠ (machine problem).acceptState := by
+  unfold machine rules at hMem ⊢
+  rw [List.mem_append] at hMem
+  rcases hMem with hBridge | hComponent
+  · unfold bridgeRules at hBridge
+    simp only [List.mem_append] at hBridge
+    rcases hBridge with hPrefix | hEvaluator | hT
+    · have hSource := launchRules_source_eq
+        (by simpa [prefixEvaluatorBridge] using hPrefix)
+      rw [hSource]
+      exact prefixState_ne_fAppenderState _ _
+    · have hSource := launchRules_source_eq
+        (by simpa [evaluatorTBridge] using hEvaluator)
+      rw [hSource]
+      exact evaluatorState_ne_fAppenderState _ _
+    · have hSource := launchRules_source_eq
+        (by simpa [tFBridge] using hT)
+      rw [hSource]
+      exact tAppenderState_ne_fAppenderState _ _
+  · unfold componentRules at hComponent
+    simp only [List.mem_append] at hComponent
+    rcases hComponent with hPrefix | hEvaluator | hT | hF
+    · rcases renamedRules_source hPrefix with
+        ⟨localRule, _hLocal, hSource⟩
+      rw [hSource]
+      exact prefixState_ne_fAppenderState _ _
+    · rcases renamedRules_source hEvaluator with
+        ⟨localRule, _hLocal, hSource⟩
+      rw [hSource]
+      exact evaluatorState_ne_fAppenderState _ _
+    · rcases renamedRules_source hT with
+        ⟨localRule, _hLocal, hSource⟩
+      rw [hSource]
+      exact tAppenderState_ne_fAppenderState _ _
+    · rcases renamedRules_source hF with
+        ⟨localRule, hLocal, hSource⟩
+      rw [hSource]
+      intro hEqual
+      exact appender_rule_source_ne_accept localRule hLocal
+        (fAppenderState_injective hEqual)
+
 /-! ### Exact endpoint and costs -/
 
 def firstLiteralSignTokens {language : Language}

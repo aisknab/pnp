@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'fbbf9022ced67765f75e602dcb2eefe1bae5d7e03d4aa2fce03bed17d715ae85';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'd5a8506bdfa29df539f4aa0d5a0c27ebe58eb8542ae28baa9923ecc842663ddc';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -90,6 +90,46 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.CookLevin.BuilderCompleteHeader.workBoundedDecide_accept',
   'PNP.Concrete.CookLevin.BuilderCompleteHeader.workRunExact',
   'PNP.Concrete.CookLevin.BuilderCompleteHeader.work_one_step_short_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.finalTape_represents',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.machine_acceptState_ne_rejectState',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.rules_length',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.rules_pairwise_query_distinct',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.tailTokens_length',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.WorkChain.firstState_injective',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.WorkChain.firstState_ne_secondState',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.WorkChain.launch_workStep',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.WorkChain.rules_pairwise_query_distinct',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.WorkChain.secondState_injective',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.WorkChain.workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.boundedDecide_compile_accept',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.boundedDecide_compile_ne_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.evaluatorEndpoint_before_launch_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.evaluatorTail_launch_workStep',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.evaluator_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.finalTape_represents',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.finalTokenBits_eq_encodedFormula_firstClause',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.firstClauseTokens_eq_canonical_formula_prefix',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.firstClauseTokens_eq_canonical_prefix',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.launch_workStep',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.machine_acceptState_ne_rejectState',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.malformedAppenderOutput_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.malformedAppenderTally_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.nextBitCursor_nextSlot',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.nextTokenSlot_eq_formulaVariableSlotBound_add_twelve',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.prefixEndpoint_before_launch_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.prefix_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.rawTimeBound_eval',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.rawTimeBound_le',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.rules_length',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.rules_pairwise_query_distinct',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.run_compile_exact',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.run_compile_rawTimeBound',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.run_compile_rawTimeBound_blankEquivalent',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.tail_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.workBoundedDecide_accept',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.work_one_step_short_timeout',
   'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.boundedDecide_compile_accept',
   'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.boundedDecide_compile_ne_timeout',
   'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.evaluatorDeadState_timeout',
@@ -129,6 +169,7 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.prefix_workRunExact',
   'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.rawTimeBound_eval',
   'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.rawTimeBound_le',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.rule_source_ne_acceptState',
   'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.rules_length',
   'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.rules_pairwise_query_distinct',
   'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.run_compile_exact',
@@ -549,7 +590,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-17-49') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-17-50') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -826,7 +867,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-17-49') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-17-50') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
@@ -844,7 +885,7 @@ function validatePublicationMap0(map) {
     'expectedRootKernelTypeSha256',
     'expectedAxiomClosureSha256',
     'expectedSourceClosureSha256',
-  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 49`);
+  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 50`);
   if (!isSha2560(map.milestoneSourceClosureSha256)
       || !isObject0(map.earnedMilestoneTheoremKernelTypeSha256)) {
     throw new Error('reviewed milestone theorem/source fingerprints are missing');
@@ -863,7 +904,7 @@ function validatePublicationMap0(map) {
     throw new Error('reviewed milestone theorem kernel-type fingerprint inventory mismatch');
   }
   if (sha256Text0(stableStringify0(map)) !== REQUIRED_PUBLICATION_MAP_SHA2560) {
-    throw new Error('formal publication milestone map drifted from the reviewed release-49 specification');
+    throw new Error('formal publication milestone map drifted from the reviewed release-50 specification');
   }
 }
 
