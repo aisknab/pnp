@@ -59,11 +59,11 @@
   NP-hardness, NP-completeness, or $P=NP$. The general charged pipeline is linked to the raw machine
   kernel, and the Cook--Levin formula has an exact externally sized answer-independent slot
   schedule plus a direct fuelled specification cursor. A literal finite builder now composes the
-  raw-input/first-token prefix, a structurally generated unary polynomial evaluator, a 16-rule
-  controller, two 59-rule token appenders, and five total bridges in pairwise-disjoint state images.
-  Every raw input emits exactly \code{FormulaWidth} copies of \code{T} followed by \code{F}; these
-  bits equal the complete canonical width header, and an external polynomial bounds the compiled
-  run. The dynamic cursor and formula body are not implemented, so there is no complete raw
+  complete width-header machine with a second structurally generated unary evaluator, two total
+  bridges, and a 59-rule separator appender in pairwise-disjoint state images. Every raw input emits
+  exactly \code{FormulaWidth} copies of \code{T} followed by \code{F} and \code{Sep}; these bits equal
+  the canonical prefix through the first body separator, and an external polynomial bounds the
+  compiled run. The dynamic cursor and subsequent formula body are not implemented, so there is no complete raw
   polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation fingerprints
   are unset, no root theorem exists, and the abstract string-handle bridge is never an activation source.
   \vspace{0.3cm}
@@ -165,6 +165,14 @@ literal table has exactly \code{363 + evaluator.ruleCount} rules. Every raw inpu
 \code{encodedFormula.take (2 * (FormulaWidth + 1))}, and an external \code{NatPolynomial} bounds
 the compiled run. This is the complete answer-independent width header only: dynamic cursor and
 formula-body emission, a complete builder refinement, and a concrete polynomial reduction remain absent.
+
+The body-start composition continues from the complete header with a unary evaluator for the retained
+next-token coordinate, two total nine-symbol bridges, and one complete separator appender. Its literal
+table has exactly 440 plus the two evaluator rule counts. Every raw input reaches
+\code{T} repeated \code{FormulaWidth} times, followed by \code{F} and \code{Sep}; its bits equal the
+canonical encoded-formula prefix through that separator. The token coordinate is two past the formula
+variable slot bound and the corresponding bit coordinate is twice it. This retained coordinate is data,
+not an executable dynamic cursor; all subsequent body emission remains absent.
 
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
