@@ -212,7 +212,7 @@ workspace containing exactly the first `T` token within the external compiled bo
 `encodedFormula.take 2` for every concrete problem in either input mode. The prefix endpoint before
 launch, malformed prefix/appender phases, and one-step-short fuel remain timeout.
 
-The current milestone extends that exact trace through a structurally generated literal unary
+The complete-header milestone extends that exact trace through a structurally generated literal unary
 evaluator for the verifier-fixed, mode-sensitive formula-width polynomial. Five total nine-symbol
 bridges place the prefix, evaluator, a 16-rule unary-root controller, and reusable `T` and final `F`
 appenders in pairwise-disjoint injective state images. The resulting finite table has exactly
@@ -224,9 +224,25 @@ external `NatPolynomial`, while the pre-launch prefix endpoint and one-step-shor
 timeout. All 74 evaluator declarations and all 83 composed-header declarations have complete
 kernel-axiom audits whose closures are empty or use only `propext` and `Quot.sound`.
 
-This earns the complete answer-independent width header, but it does not interpret the dynamic
-formula cursor as raw transitions, emit the formula body, compose a complete raw formula builder
-with a construction-runtime proof, or package a concrete `PolynomialReduction`. A deterministic
+The body-start milestone continues through a structurally generated unary evaluator for token
+coordinate `FormulaVariableSlotBound + 2`, two total bridges, and a fixed separator appender. Every
+raw input emits exactly `T^FormulaWidth F Sep`, retains that token coordinate and its doubled raw-bit
+cursor, and follows an external compiled polynomial. Its 60 public declarations have complete
+kernel-axiom audits using only the approved Lean-standard closure.
+
+The current first-literal milestone continues again through a unary evaluator for token coordinate
+`FormulaVariableSlotBound + 4`, three total bridges, and fixed `T` and `F` appender copies in four
+disjoint state images. Every raw input emits exactly `T^FormulaWidth F Sep T F`; a constructive
+schedule proof identifies the final pair as the positive sign and unary-zero terminator of the first
+shape-clause literal, positive variable zero. The emitted bits equal
+`encodedFormula.take (2 * (FormulaWidth + 4))`, and the external compiled bound evaluates to the
+body-start bound plus `174 + 6*Unary.workSteps(nextTokenSlotPolynomial) + 48*n + 24*width`. All 73
+public declarations have complete kernel-axiom audits using only `propext` and `Quot.sound`.
+
+This earns only the canonical prefix through the first literal. The retained coordinate is data: no
+machine interprets the dynamic formula cursor as raw transitions, emits the remaining formula body,
+composes a complete raw formula builder with a construction-runtime proof, or packages a concrete
+`PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,
 residual-band minimizer, ZeroSlack, the remaining end-to-end polynomial bounds, and the root
 theorem/axiom audit remain incomplete.

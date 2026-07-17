@@ -31,12 +31,18 @@ from current theorem status.
   The Cook--Levin lane additionally audits the 79-declaration rectangular formula schedule, the
   129-declaration direct formula cursor, the 39-declaration literal input-length tally machine, the
   40-declaration executable framer-to-tally prefix, the 68-declaration standalone four-token
-  appender, the 37-declaration composed first-token prefix, and their empty/one-bit/odd/even
+  appender, the 37-declaration composed first-token prefix, the 74-declaration unary polynomial
+  evaluator, the 83-declaration complete-header composition, the 60-declaration body-start
+  composition, the 73-declaration first-literal composition, and their empty/one-bit/odd/even
   regression instantiations. The appender checks all four state-selected token traces and its local
   `24*n + 48` first-token raw bound. The composed audit checks the exact 184-rule table, disjoint
   state images, nine-rule bridge, all-input exact trace, final `T` token, external
   `18*n^2 + 87*n + 147` bound, malformed phases, one-step-short timeout, and the first two
-  direct/canonical formula bits in both verifier input modes.
+  direct/canonical formula bits in both verifier input modes. The first-literal audit additionally
+  checks four disjoint state images, three total bridges, exact `T^FormulaWidth F Sep T F` output,
+  the constructive positive-variable-zero schedule proof, retained coordinate
+  `FormulaVariableSlotBound + 4`, the external compiled polynomial, malformed phases, and all
+  endpoint/one-step-short timeout boundaries.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual

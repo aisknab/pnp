@@ -38,6 +38,8 @@ const HEADS = Object.freeze([
   ['theorem', 'rules_length'],
   ['theorem', 'machine_acceptState_ne_rejectState'],
   ['theorem', 'rules_pairwise_query_distinct'],
+  ['theorem', 'rule_source_ne_acceptState'],
+  ['theorem', 'rule_source_ne_rejectState'],
   ['def', 'bodyStartTokens'], ['def', 'finalOutside'],
   ['def', 'finalTape'], ['def', 'finalConfiguration'],
   ['def', 'workSteps'], ['def', 'rawTimeBound'],
@@ -178,9 +180,9 @@ test('kernel transcript covers every public declaration exactly once',
   async () => {
     const audit = await text0(AXIOM_AUDIT);
     const printed = printed0(audit);
-    assert.equal(HEADS.length, 58);
-    assert.equal(printed.length, 58);
-    assert.equal(new Set(printed).size, 58);
+    assert.equal(HEADS.length, 60);
+    assert.equal(printed.length, 60);
+    assert.equal(new Set(printed).size, 60);
     assert.deepEqual(imports0(audit), ['PNP']);
     assert.ok(printed.every((name) => name.startsWith(
       'PNP.Concrete.CookLevin.BuilderBodyStartPrefix.')));

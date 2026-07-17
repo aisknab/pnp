@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'a4bf5d10877791fc370d2423ae6ec4b7de70f21837745691d44608875d92bd4a';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'fbbf9022ced67765f75e602dcb2eefe1bae5d7e03d4aa2fce03bed17d715ae85';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -42,6 +42,8 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.CookLevin.BuilderBodyStartPrefix.nextTokenSlot_eq_formulaVariableSlotBound_add_two',
   'PNP.Concrete.CookLevin.BuilderBodyStartPrefix.rawTimeBound_eval',
   'PNP.Concrete.CookLevin.BuilderBodyStartPrefix.rawTimeBound_le',
+  'PNP.Concrete.CookLevin.BuilderBodyStartPrefix.rule_source_ne_acceptState',
+  'PNP.Concrete.CookLevin.BuilderBodyStartPrefix.rule_source_ne_rejectState',
   'PNP.Concrete.CookLevin.BuilderBodyStartPrefix.rules_length',
   'PNP.Concrete.CookLevin.BuilderBodyStartPrefix.rules_pairwise_query_distinct',
   'PNP.Concrete.CookLevin.BuilderBodyStartPrefix.run_compile_exact',
@@ -88,6 +90,58 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.CookLevin.BuilderCompleteHeader.workBoundedDecide_accept',
   'PNP.Concrete.CookLevin.BuilderCompleteHeader.workRunExact',
   'PNP.Concrete.CookLevin.BuilderCompleteHeader.work_one_step_short_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.boundedDecide_compile_accept',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.boundedDecide_compile_ne_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.evaluatorDeadState_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.evaluatorEndpoint_before_launch_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.evaluatorState_injective',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.evaluatorState_ne_fAppenderState',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.evaluatorState_ne_tAppenderState',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.evaluatorT_launch_workStep',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.evaluator_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.fAppenderState_injective',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.fAppender_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.finalOutside_contains_nextTokenSlot',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.finalTape_represents',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.finalTokenBits_eq_encodedFormula_firstLiteral',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.findWorkRule_evaluator_of_some',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.findWorkRule_fAppender_of_some',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.findWorkRule_prefix_of_some',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.findWorkRule_tAppender_of_some',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.firstLiteralSignSlotDirect_eq_t',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.firstLiteralTokens_eq_canonical_formula_prefix',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.firstLiteralTokens_eq_canonical_prefix',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.firstLiteralZeroTerminatorSlotDirect_eq_f',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.machine_acceptState_ne_rejectState',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.malformedAppenderOutput_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.malformedAppenderTally_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.malformedFAppenderOutput_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.malformedFAppenderTally_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.nextBitCursor_nextSlot',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.nextTokenSlot_eq_formulaVariableSlotBound_add_four',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.prefixEndpoint_before_launch_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.prefixEvaluator_launch_workStep',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.prefixRejectEndpoint_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.prefixState_injective',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.prefixState_ne_evaluatorState',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.prefixState_ne_fAppenderState',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.prefixState_ne_tAppenderState',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.prefix_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.rawTimeBound_eval',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.rawTimeBound_le',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.rules_length',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.rules_pairwise_query_distinct',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.run_compile_exact',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.run_compile_rawTimeBound',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.run_compile_rawTimeBound_blankEquivalent',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.tAppenderEndpoint_before_launch_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.tAppenderState_injective',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.tAppenderState_ne_fAppenderState',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.tAppender_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.tF_launch_workStep',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.workBoundedDecide_accept',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.work_one_step_short_timeout',
   'PNP.Concrete.CookLevin.BuilderFirstTokenPrefix.appenderState_injective',
   'PNP.Concrete.CookLevin.BuilderFirstTokenPrefix.appender_workRunExact',
   'PNP.Concrete.CookLevin.BuilderFirstTokenPrefix.boundedDecide_compile_accept',
@@ -495,7 +549,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-17-48') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-17-49') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -772,7 +826,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-17-48') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-17-49') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
@@ -790,7 +844,7 @@ function validatePublicationMap0(map) {
     'expectedRootKernelTypeSha256',
     'expectedAxiomClosureSha256',
     'expectedSourceClosureSha256',
-  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 48`);
+  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 49`);
   if (!isSha2560(map.milestoneSourceClosureSha256)
       || !isObject0(map.earnedMilestoneTheoremKernelTypeSha256)) {
     throw new Error('reviewed milestone theorem/source fingerprints are missing');
@@ -809,7 +863,7 @@ function validatePublicationMap0(map) {
     throw new Error('reviewed milestone theorem kernel-type fingerprint inventory mismatch');
   }
   if (sha256Text0(stableStringify0(map)) !== REQUIRED_PUBLICATION_MAP_SHA2560) {
-    throw new Error('formal publication milestone map drifted from the reviewed release-48 specification');
+    throw new Error('formal publication milestone map drifted from the reviewed release-49 specification');
   }
 }
 

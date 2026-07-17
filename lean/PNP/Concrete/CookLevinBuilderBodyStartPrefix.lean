@@ -629,6 +629,99 @@ theorem rules_pairwise_query_distinct {language : Language}
   rw [List.pairwise_append]
   exact ⟨hBridges, hComponents, hCross⟩
 
+/-- No rule in the literal body-start table is sourced at its global accept
+state.  This is the exact non-shadowing interface needed by a later literal
+composition bridge. -/
+theorem rule_source_ne_acceptState {language : Language}
+    (problem : VerifierTableauProblem language) (rule : WorkRule)
+    (hMem : rule ∈ (machine problem).rules) :
+    rule.sourceState ≠ (machine problem).acceptState := by
+  change rule.sourceState ≠
+    appenderState BuilderTokenAppender.machine.acceptState
+  change rule ∈ rules problem at hMem
+  unfold rules at hMem
+  rcases List.mem_append.mp hMem with hBridges | hComponents
+  · unfold bridgeRules at hBridges
+    simp only [List.mem_append] at hBridges
+    rcases hBridges with hHeader | hCursor
+    · have hSource : rule.sourceState =
+          headerState (BuilderCompleteHeader.machine problem).acceptState := by
+        apply launchRules_source_eq
+        simpa [headerCursorBridge] using hHeader
+      rw [hSource]
+      exact headerState_ne_appenderState _ _
+    · have hSource : rule.sourceState =
+          cursorState
+            (BuilderUnaryPolynomial.machine
+              (nextTokenSlotPolynomial problem.verifier)).acceptState := by
+        apply launchRules_source_eq
+        simpa [cursorAppenderBridge] using hCursor
+      rw [hSource]
+      exact cursorState_ne_appenderState _ _
+  · unfold componentRules at hComponents
+    simp only [List.mem_append] at hComponents
+    rcases hComponents with hHeader | hCursor | hAppender
+    · rcases renamedRules_source hHeader with
+        ⟨localRule, _hLocal, hSource⟩
+      rw [hSource]
+      exact headerState_ne_appenderState _ _
+    · rcases renamedRules_source hCursor with
+        ⟨localRule, _hLocal, hSource⟩
+      rw [hSource]
+      exact cursorState_ne_appenderState _ _
+    · rcases renamedRules_source hAppender with
+        ⟨localRule, hLocal, hSource⟩
+      rw [hSource]
+      intro hEqual
+      exact appender_rule_source_ne_accept localRule hLocal
+        (appenderState_injective hEqual)
+
+/-- No rule in the literal body-start table is sourced at its global reject
+state. -/
+theorem rule_source_ne_rejectState {language : Language}
+    (problem : VerifierTableauProblem language) (rule : WorkRule)
+    (hMem : rule ∈ (machine problem).rules) :
+    rule.sourceState ≠ (machine problem).rejectState := by
+  change rule.sourceState ≠
+    appenderState BuilderTokenAppender.machine.rejectState
+  change rule ∈ rules problem at hMem
+  unfold rules at hMem
+  rcases List.mem_append.mp hMem with hBridges | hComponents
+  · unfold bridgeRules at hBridges
+    simp only [List.mem_append] at hBridges
+    rcases hBridges with hHeader | hCursor
+    · have hSource : rule.sourceState =
+          headerState (BuilderCompleteHeader.machine problem).acceptState := by
+        apply launchRules_source_eq
+        simpa [headerCursorBridge] using hHeader
+      rw [hSource]
+      exact headerState_ne_appenderState _ _
+    · have hSource : rule.sourceState =
+          cursorState
+            (BuilderUnaryPolynomial.machine
+              (nextTokenSlotPolynomial problem.verifier)).acceptState := by
+        apply launchRules_source_eq
+        simpa [cursorAppenderBridge] using hCursor
+      rw [hSource]
+      exact cursorState_ne_appenderState _ _
+  · unfold componentRules at hComponents
+    simp only [List.mem_append] at hComponents
+    rcases hComponents with hHeader | hCursor | hAppender
+    · rcases renamedRules_source hHeader with
+        ⟨localRule, _hLocal, hSource⟩
+      rw [hSource]
+      exact headerState_ne_appenderState _ _
+    · rcases renamedRules_source hCursor with
+        ⟨localRule, _hLocal, hSource⟩
+      rw [hSource]
+      exact cursorState_ne_appenderState _ _
+    · rcases renamedRules_source hAppender with
+        ⟨localRule, hLocal, hSource⟩
+      rw [hSource]
+      intro hEqual
+      exact appender_rule_source_ne_reject localRule hLocal
+        (appenderState_injective hEqual)
+
 /-! ### Exact endpoint and costs -/
 
 def bodyStartTokens {language : Language}

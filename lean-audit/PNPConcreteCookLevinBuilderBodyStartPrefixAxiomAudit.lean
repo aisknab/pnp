@@ -23,6 +23,8 @@ import PNP
 #print axioms PNP.Concrete.CookLevin.BuilderBodyStartPrefix.rules_length
 #print axioms PNP.Concrete.CookLevin.BuilderBodyStartPrefix.machine_acceptState_ne_rejectState
 #print axioms PNP.Concrete.CookLevin.BuilderBodyStartPrefix.rules_pairwise_query_distinct
+#print axioms PNP.Concrete.CookLevin.BuilderBodyStartPrefix.rule_source_ne_acceptState
+#print axioms PNP.Concrete.CookLevin.BuilderBodyStartPrefix.rule_source_ne_rejectState
 #print axioms PNP.Concrete.CookLevin.BuilderBodyStartPrefix.bodyStartTokens
 #print axioms PNP.Concrete.CookLevin.BuilderBodyStartPrefix.finalOutside
 #print axioms PNP.Concrete.CookLevin.BuilderBodyStartPrefix.finalTape
