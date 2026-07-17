@@ -130,7 +130,7 @@ reclassified as global acceptance.
 
 ## Kernel, regression, and hostile audits
 
-The complete 58-declaration public surface is printed by:
+The complete 60-declaration public surface is printed by:
 
 ```sh
 lake env lean -DwarningAsError=true \

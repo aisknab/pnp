@@ -61,6 +61,7 @@ on:
       - 'audits/lean-concrete-cook-levin-builder-first-token-prefix0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-complete-header0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-body-start-prefix0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-builder-first-literal-prefix0.test.mjs'
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
       - 'audits/lean-nand-reference-minimum0.test.mjs'
@@ -100,6 +101,7 @@ on:
       - 'docs/lean_cook_levin_builder_first_token_prefix.md'
       - 'docs/lean_cook_levin_builder_complete_header.md'
       - 'docs/lean_cook_levin_builder_body_start_prefix.md'
+      - 'docs/lean_cook_levin_builder_first_literal_prefix.md'
       - 'docs/lean_nand_semantics.md'
       - 'docs/lean_nand_enumerator.md'
       - 'docs/lean_nand_reference_minimum.md'
@@ -175,6 +177,7 @@ on:
       - 'audits/lean-concrete-cook-levin-builder-first-token-prefix0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-complete-header0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-body-start-prefix0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-builder-first-literal-prefix0.test.mjs'
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
       - 'audits/lean-nand-reference-minimum0.test.mjs'
@@ -214,6 +217,7 @@ on:
       - 'docs/lean_cook_levin_builder_first_token_prefix.md'
       - 'docs/lean_cook_levin_builder_complete_header.md'
       - 'docs/lean_cook_levin_builder_body_start_prefix.md'
+      - 'docs/lean_cook_levin_builder_first_literal_prefix.md'
       - 'docs/lean_nand_semantics.md'
       - 'docs/lean_nand_enumerator.md'
       - 'docs/lean_nand_reference_minimum.md'
@@ -325,6 +329,9 @@ jobs:
 
       - name: Audit composed Cook-Levin body-start prefix
         run: node --test audits/lean-concrete-cook-levin-builder-body-start-prefix0.test.mjs
+
+      - name: Audit composed Cook-Levin first-literal prefix
+        run: node --test audits/lean-concrete-cook-levin-builder-first-literal-prefix0.test.mjs
 
       - name: Build explicit PNP root
         run: lake build PNP
@@ -813,7 +820,7 @@ jobs:
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderBodyStartPrefixAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
-          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderBodyStartPrefix\.")" -eq 58
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderBodyStartPrefix\.")" -eq 60
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
@@ -827,8 +834,29 @@ jobs:
           fi
           test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 30
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 5
-          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 23
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 25
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderBodyStartPrefix.lean
+
+      - name: Print Cook-Levin first-literal-prefix builder axiom closure
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFirstLiteralPrefixAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderFirstLiteralPrefix\.")" -eq 73
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected Cook-Levin first-literal-prefix builder axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Cook-Levin first-literal-prefix builder reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 21
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 3
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 49
+          lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFirstLiteralPrefix.lean
 
       - name: Print concrete CNF work-input bridge axioms
         run: |

@@ -236,6 +236,24 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /440 plus the width-evaluator and next-token-slot-evaluator rule counts/u);
   assert.match(byId.get('concrete-cook-levin-builder-body-start-prefix').nonClaim,
     /not implement a dynamic formula cursor/u);
+  assert.equal(byId.get('concrete-cook-levin-builder-first-literal-prefix').status,
+    'formalized-foundation-only');
+  assert.equal(byId.get('concrete-cook-levin-builder-first-literal-prefix').earned, true);
+  assert.equal(byId.get('concrete-cook-levin-builder-first-literal-prefix').allAssumptionFree,
+    false);
+  assert.equal(byId.get('concrete-cook-levin-builder-first-literal-prefix')
+    .axiomClosureUsesOnlyLeanStandardAllowlist, true);
+  assert.equal(byId.get('concrete-cook-levin-builder-first-literal-prefix')
+    .requiredTheorems.includes(
+      'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.workRunExact'), true);
+  assert.equal(byId.get('concrete-cook-levin-builder-first-literal-prefix')
+    .requiredTheorems.includes(
+      'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.finalTokenBits_eq_encodedFormula_firstLiteral'),
+  true);
+  assert.match(byId.get('concrete-cook-levin-builder-first-literal-prefix').scope,
+    /585 plus the width, body-start next-slot, and first-literal next-slot evaluator rule counts/u);
+  assert.match(byId.get('concrete-cook-levin-builder-first-literal-prefix').nonClaim,
+    /does not implement a dynamic formula cursor/u);
   assert.equal(byId.get('concrete-cnf-universal-verifier').requiredTheorems.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP'), true);
   assert.match(byId.get('concrete-cnf-universal-verifier').nonClaim,
@@ -263,10 +281,10 @@ test('publication consumes the reviewed recursive-refinement map and inventory c
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'a4bf5d10877791fc370d2423ae6ec4b7de70f21837745691d44608875d92bd4a');
+    'fbbf9022ced67765f75e602dcb2eefe1bae5d7e03d4aa2fce03bed17d715ae85');
   assert.equal(map.milestoneSourceClosureSha256,
-    '17d3594b778d9e9c6f82d9111673378913a279229fb1b8fc21079e8f3052098c');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 454);
+    'e27625c999419988dcf401be91caac9aaba5992eb743fd6a85f0b1b6b7a50ab0');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 508);
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.PipelineCompiler.pipeline_correct'
   ], 'string');
@@ -318,6 +336,12 @@ test('publication consumes the reviewed recursive-refinement map and inventory c
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.CookLevin.BuilderBodyStartPrefix.finalTokenBits_eq_encodedFormula_bodyStart'
   ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.workRunExact'
+  ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.finalTokenBits_eq_encodedFormula_firstLiteral'
+  ], 'string');
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,
     map.gate.expectedConcreteTargetKernelValueSha256,
@@ -331,7 +355,7 @@ test('publication consumes the reviewed recursive-refinement map and inventory c
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [7500, 3536, 2795, 2124, 68]);
+  ], [7626, 3640, 2827, 2214, 69]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
@@ -340,9 +364,9 @@ test('canonical report source is current and the committed PDF artifact exists',
     status0(),
   ]);
   assert.match(tex, /The repository does not currently establish \$P=NP\$\./u);
-  assert.match(tex, /Every raw input emits\s+exactly \\code\{FormulaWidth\} copies of \\code\{T\} followed by \\code\{F\} and \\code\{Sep\}/u);
-  assert.match(tex, /canonical prefix through the first body separator/u);
-  assert.match(tex, /The dynamic cursor and subsequent formula body are not implemented/u);
+  assert.match(tex, /Every raw input\s+emits exactly \\code\{FormulaWidth\} copies of \\code\{T\} followed by \\code\{F\}, \\code\{Sep\}, \\code\{T\},\s+and \\code\{F\}/u);
+  assert.match(tex, /canonical prefix through positive variable zero/u);
+  assert.match(tex, /The dynamic cursor and remaining formula body are not/u);
   assert.equal(tex.includes('It does not compute the remaining header or complete formula'), false);
   assert.ok(tex.includes(status.leanTheoremInventorySha256));
   assert.ok(tex.includes(status.coordinate.replaceAll('_', '\\_')) || tex.includes(status.coordinate));
