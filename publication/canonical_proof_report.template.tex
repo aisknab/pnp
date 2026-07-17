@@ -58,13 +58,13 @@
   CNF-SAT membership in NP with an explicit polynomial bound. It does not prove CNF-SAT in P,
   NP-hardness, NP-completeness, or $P=NP$. The general charged pipeline is linked to the raw machine
   kernel, and the Cook--Levin formula has an exact externally sized answer-independent slot
-  schedule plus a direct fuelled specification cursor. A literal finite builder now composes the
-  complete first-literal machine with another structurally generated unary evaluator and a fixed
-  eight-token tail in pairwise-disjoint state images. Every raw input emits exactly
+  schedule plus direct fuelled bit and token specification cursors. A literal finite builder emits
   \code{FormulaWidth} copies of \code{T} followed by \code{F}, \code{Sep}, and the complete positive
-  clause on variables zero, one, and two; these bits equal the corresponding canonical encoded-formula
-  prefix, and an external polynomial bounds the compiled run. The dynamic cursor and remaining formula
-  body are not implemented, so there is no complete raw
+  clause on variables zero, one, and two. It then executes one fixed 45-rule padding-coordinate
+  transition, preserving those bits while advancing the retained unary token coordinate from twelve
+  to thirteen past the variable-slot bound. The consumed direct slot is proved to be valid padding,
+  and an external polynomial bounds the compiled run. A general dynamic cursor loop, arbitrary raw
+  slot decoder, and remaining formula body are not implemented, so there is no complete raw
   polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation fingerprints
   are unset, no root theorem exists, and the abstract string-handle bridge is never an activation source.
   \vspace{0.3cm}
@@ -196,6 +196,17 @@ one, and two. The emitted bits equal
 \code{encodedFormula.take (2 * (FormulaWidth + 12))}; the retained next token coordinate is twelve
 past the formula variable slot bound. It remains data rather than an executable dynamic cursor, and
 the remaining formula body is absent.
+
+One literal token-cursor step continues from that first-clause endpoint. A total nine-symbol launch
+enters a fixed 45-rule cursor-advance table, giving a global table of exactly 1192 plus the four
+inherited unary-evaluator rule counts. Every raw input preserves the emitted clause while moving the
+retained unary coordinate from \code{FormulaVariableSlotBound + 12} to
+\code{FormulaVariableSlotBound + 13}. The direct decoder and token-level specification cursor prove
+that the consumed coordinate is the first in-range padding opportunity and therefore emits no token.
+Including launch, the suffix costs exactly \code{2*cursorWord.length + 8} work steps; the compiled
+run is bounded by \code{FirstClausePrefix.rawTimeBound + 48 + 12*cursorWord.length}. Malformed
+scratch, the unlaunched predecessor endpoint, and one-step-short total fuel remain timeout. This is
+one fixed padding transition, not a general cursor loop or arbitrary schedule decoder.
 
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}

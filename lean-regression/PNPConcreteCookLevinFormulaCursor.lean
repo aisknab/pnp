@@ -96,6 +96,25 @@ example : FormulaBitCursor.run emptyProblem
       ⟨emptyProblem.formulaBitSlotCountDirect⟩) :=
   FormulaBitCursor.run_full emptyProblem
 
+example : FormulaTokenCursor.step evenProblem
+      ⟨evenProblem.formulaTokenSlotCountDirect⟩ = none :=
+  FormulaTokenCursor.step_at_end evenProblem
+
+example (cursor : FormulaTokenCursor)
+    (hDone : FormulaTokenCursor.done oneBitProblem cursor) :
+    FormulaTokenCursor.step oneBitProblem cursor = none :=
+  FormulaTokenCursor.step_of_done oneBitProblem cursor hDone
+
+example (cursor : FormulaTokenCursor)
+    (hCursor : cursor.nextSlot < oddProblem.formulaTokenSlotCountDirect) :
+    FormulaTokenCursor.step oddProblem cursor =
+      some (oddProblem.formulaTokenSchedule.get
+          ⟨cursor.nextSlot, by
+            rw [← oddProblem.formulaTokenSlotCountDirect_eq]
+            exact hCursor⟩,
+        ⟨cursor.nextSlot + 1⟩) :=
+  FormulaTokenCursor.step_of_lt oddProblem cursor hCursor
+
 example : FormulaBitCursor.run oddProblem
       (oddProblem.formulaBitSlotCountDirect - 1) FormulaBitCursor.initial =
     (oddProblem.formulaBitSchedule.take

@@ -75,6 +75,7 @@ def workSteps
 theorem rules_length
 theorem rules_pairwise_query_distinct
 theorem machine_acceptState_ne_rejectState
+theorem rule_source_ne_acceptState
 theorem finalTape_represents
 theorem prefix_workRunExact
 theorem launch_workStep
@@ -83,6 +84,7 @@ theorem tail_workRunExact
 theorem evaluatorTail_launch_workStep
 theorem workRunExact
 theorem firstClauseTokens_eq_canonical_prefix
+theorem nextTokenSlot_direct_eq_padding
 theorem firstClauseTokens_eq_canonical_formula_prefix
 theorem finalTokenBits_eq_encodedFormula_firstClause
 def rawTimeBound
@@ -220,9 +222,9 @@ test('kernel transcript covers every public declaration and predecessor delta',
     const printed = printed0(audit);
     const prefix =
       'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.';
-    assert.equal(HEADS.length, 77);
-    assert.equal(printed.length, 78);
-    assert.equal(new Set(printed).size, 78);
+    assert.equal(HEADS.length, 79);
+    assert.equal(printed.length, 80);
+    assert.equal(new Set(printed).size, 80);
     assert.deepEqual(imports0(audit), ['PNP']);
     assert.equal(printed[0],
       'PNP.Concrete.CookLevin.BuilderFirstLiteralPrefix.rule_source_ne_acceptState');

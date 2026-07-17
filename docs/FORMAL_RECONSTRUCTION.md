@@ -247,12 +247,23 @@ and seven total bridges. Every raw input emits exactly
 clause literals as positive variables zero, one, and two, and the emitted bits equal
 `encodedFormula.take (2 * (FormulaWidth + 12))`. The external compiled bound evaluates to the
 first-literal bound plus
-`1158 + 6*Unary.workSteps(firstClauseNextTokenSlotPolynomial) + 192*n + 96*width`. All 77 new public
-declarations, and the combined 78-declaration audit including the predecessor separation theorem,
-use only the approved Lean-standard closure.
+`1158 + 6*Unary.workSteps(firstClauseNextTokenSlotPolynomial) + 192*n + 96*width`. The following
+direct token slot is constructively proved to be valid padding. All 79 new public declarations, and
+the combined 80-declaration audit including the predecessor separation theorem, use only the
+approved Lean-standard closure.
 
-This earns exactly the canonical prefix through the complete first clause. The retained coordinate
-is data: no machine interprets the dynamic formula cursor as raw transitions, emits the remaining
+The token-cursor-step milestone composes that exact endpoint with one total nine-symbol launch and a
+fixed 45-rule cursor-advance table. Every raw input preserves the complete first-clause output and
+moves the retained unary coordinate from `FormulaVariableSlotBound + 12` to
+`FormulaVariableSlotBound + 13`. Its consumed coordinate is the first in-range padding opportunity,
+so the token-level specification cursor advances without emitting a token. The cursor suffix takes
+exactly `2*cursorWord.length + 8` work steps including the launch, and the full compiled run is
+bounded by `FirstClausePrefix.rawTimeBound + 48 + 12*cursorWord.length`. Malformed cursor scratch,
+the unlaunched predecessor endpoint, and one-step-short total fuel remain timeout. All 45 public
+declarations use only the approved Lean-standard closure.
+
+This earns exactly one literal padding transition after the canonical first clause. It is not a
+general dynamic cursor loop or an arbitrary raw slot decoder: no machine emits the remaining
 formula body, composes a complete raw formula builder with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,

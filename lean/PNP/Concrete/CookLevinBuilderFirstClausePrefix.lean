@@ -938,6 +938,19 @@ theorem machine_acceptState_ne_rejectState {language : Language}
       FirstClauseTailAppender.machine
       FirstClauseTailAppender.machine_acceptState_ne_rejectState)
 
+/-- No rule is sourced at the global accept state.  This is the exact
+halt-separation interface required by a reviewed downstream composition. -/
+theorem rule_source_ne_acceptState {language : Language}
+    (problem : VerifierTableauProblem language) (rule : WorkRule)
+    (hRule : rule ∈ (machine problem).rules) :
+    rule.sourceState ≠ (machine problem).acceptState := by
+  exact WorkChain.noRuleAtAccept
+    (BuilderFirstLiteralPrefix.machine problem)
+    (evaluatorTailMachine problem) (WorkChain.noRuleAtAccept
+      (BuilderUnaryPolynomial.machine
+        (nextTokenSlotPolynomial problem.verifier))
+      FirstClauseTailAppender.machine tail_noRuleAtAccept) rule hRule
+
 theorem finalTape_represents {language : Language}
     (problem : VerifierTableauProblem language) :
     Represents (Tape.ofInput problem.input) (finalTape problem) := by
@@ -1275,6 +1288,80 @@ private theorem formulaClauseTokens_starts_firstClause
     encodeLiteralTokens, encodeUnaryTokens]
   unfold FormulaSchedule.pad
   exact ⟨_, rfl⟩
+
+private theorem formulaClauseTokens_starts_firstPadding
+    {language : Language} (problem : VerifierTableauProblem language) :
+    ∃ rest,
+      problem.formulaClauseSchedule.flatMap problem.scheduledClauseTokens =
+        some CNFToken.sep ::
+        some CNFToken.t :: some CNFToken.f ::
+        some CNFToken.t :: some CNFToken.t :: some CNFToken.f ::
+        some CNFToken.t :: some CNFToken.t :: some CNFToken.t ::
+        some CNFToken.f :: some CNFToken.finish :: none :: rest := by
+  rcases formulaClauseSchedule_starts_firstShapeClause problem with
+    ⟨clauses, hClauses⟩
+  rw [hClauses]
+  simp only [List.flatMap_cons]
+  dsimp [VerifierTableauProblem.scheduledClauseTokens]
+  rw [firstShapeClause_emit_eq]
+  simp only [encodeClauseTokens, encodeLiteralListTokens,
+    encodeLiteralTokens, encodeUnaryTokens]
+  unfold FormulaSchedule.pad
+  have hPositive := BuilderTokenAppender.formulaWidth_positive problem
+  have hVariables : 1 ≤ problem.formulaVariableSlotBound := by
+    apply Nat.succ_le_iff.mpr
+    exact Nat.lt_of_lt_of_le hPositive
+      problem.formulaWidth_le_formulaVariableCountPolynomial
+  have hProduct : 5 * 2 ≤
+      (problem.formulaVariableSlotBound + 4) *
+        (problem.formulaVariableSlotBound + 1) := by
+    exact Nat.mul_le_mul (by omega) (by omega)
+  have hWidth : 12 ≤ problem.formulaTokensPerClause := by
+    unfold VerifierTableauProblem.formulaTokensPerClause
+    omega
+  change ∃ rest,
+    [some CNFToken.sep,
+      some CNFToken.t, some CNFToken.f,
+      some CNFToken.t, some CNFToken.t, some CNFToken.f,
+      some CNFToken.t, some CNFToken.t, some CNFToken.t,
+      some CNFToken.f, some CNFToken.finish] ++
+        List.replicate (problem.formulaTokensPerClause - 11) none ++
+          clauses.flatMap problem.scheduledClauseTokens =
+      [some CNFToken.sep,
+        some CNFToken.t, some CNFToken.f,
+        some CNFToken.t, some CNFToken.t, some CNFToken.f,
+        some CNFToken.t, some CNFToken.t, some CNFToken.t,
+        some CNFToken.f, some CNFToken.finish, none] ++ rest
+  rw [show problem.formulaTokensPerClause - 11 =
+      (problem.formulaTokensPerClause - 12) + 1 by omega]
+  rw [List.replicate_succ]
+  exact ⟨List.replicate
+      (problem.formulaTokensPerClause - 12) none ++
+      clauses.flatMap problem.scheduledClauseTokens, by
+    simp⟩
+
+/-- The retained token coordinate immediately after the first canonical
+clause is the first in-range padding opportunity of that clause rectangle. -/
+theorem nextTokenSlot_direct_eq_padding {language : Language}
+    (problem : VerifierTableauProblem language) :
+    problem.formulaTokenSlotDirect (nextTokenSlot problem) = some none := by
+  rw [problem.formulaTokenSlotDirect_eq]
+  rcases formulaClauseTokens_starts_firstPadding problem with
+    ⟨rest, hRest⟩
+  unfold VerifierTableauProblem.formulaTokenSchedule
+  rw [hRest, nextTokenSlot_eq_formulaVariableSlotBound_add_twelve]
+  have hHeader :
+      (FormulaSchedule.pad (problem.formulaVariableSlotBound + 1)
+        (encodeUnaryTokens problem.FormulaWidth)).length =
+          problem.formulaVariableSlotBound + 1 := by
+    apply FormulaSchedule.pad_length
+    rw [encodeUnaryTokens_length]
+    exact Nat.add_le_add_right
+      problem.formulaWidth_le_formulaVariableCountPolynomial 1
+  simp only [List.append_assoc]
+  rw [List.getElem?_append]
+  rw [hHeader, if_neg (by omega)]
+  simp
 
 private theorem encodeCNFTokens_starts_firstClausePrefix
     {language : Language} (problem : VerifierTableauProblem language) :

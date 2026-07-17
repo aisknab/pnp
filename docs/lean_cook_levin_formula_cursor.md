@@ -106,9 +106,16 @@ fuel stops at the final opportunity, the next exact step reaches the terminal
 cursor, excess fuel does not change the result, and filtering populated output
 bits yields the canonical encoded formula.
 
+The module also exposes `FormulaTokenCursor`, a token-coordinate specification
+state used by the literal cursor-step milestone. Its `step` returns the current
+direct token outcome together with the successor coordinate while the cursor is
+in range, and returns `none` when it is done. `step_of_lt`, `step_of_done`, and
+`step_at_end` pin those in-range, terminal-state, and exact-endpoint behaviors.
+This token cursor is specification data; it is not itself a raw transition table.
+
 ## Audit and exact boundary
 
-All 129 explicit declarations are listed in
+All 136 explicit declarations are listed in
 `lean-audit/PNPConcreteCookLevinFormulaCursorAxiomAudit.lean`. Their compiled
 closures use only `propext` and `Quot.sound` where Lean library proofs require
 them. They use no project axiom, `Classical.choice`, `sorry`, `admit`, oracle,

@@ -85,21 +85,21 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
   assert.equal(`${stableStringify0(inventory)}\n`, inventoryBytes.toString('utf8'));
   ValidateLeanTheoremInventory0(inventory);
   assert.equal(inventory.environmentProbeComplete, true);
-  assert.equal(inventory.declarationCount, 7746);
-  assert.equal(inventory.excludedPrivateDeclarationCount, 2286);
-  assert.equal(inventory.theoremCount, 3725);
-  assert.equal(inventory.assumptionFreeTheoremCount, 2865);
+  assert.equal(inventory.declarationCount, 7845);
+  assert.equal(inventory.excludedPrivateDeclarationCount, 2380);
+  assert.equal(inventory.theoremCount, 3788);
+  assert.equal(inventory.assumptionFreeTheoremCount, 2886);
   assert.equal(inventory.axiomCount, 4);
-  assert.equal(inventory.sourceClosureModuleCount, 70);
+  assert.equal(inventory.sourceClosureModuleCount, 71);
   assert.deepEqual(inventory.declarationKindCounts, {
     axiom: 4,
-    constructor: 302,
-    definition: 3447,
-    inductive: 134,
+    constructor: 303,
+    definition: 3480,
+    inductive: 135,
     opaque: 0,
     quotient: 0,
-    recursor: 134,
-    theorem: 3725,
+    recursor: 135,
+    theorem: 3788,
   });
   assert.deepEqual(inventory.projectAxioms, [
     'PNP.CheckPCCPackexp',
@@ -116,7 +116,7 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
     module: 'PNP.Concrete.Target',
     name: 'PNP.Main.ConcretePEqualsNP',
   });
-  assert.equal(inventory.milestoneCandidates.length, 549);
+  assert.equal(inventory.milestoneCandidates.length, 585);
   assert.deepEqual(inventory.milestoneCandidates.map((entry) => entry.name), REQUIRED_MILESTONE_THEOREMS0);
   assert.equal(inventory.milestoneCandidates.every((entry) => entry.kind === 'theorem'
     && entry.kernelValue === null && typeof entry.kernelType === 'string'), true);
@@ -124,7 +124,7 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
 
 test('source closure scans every Lean source and rejects a symlinked source root', async () => {
   const files = await CollectLeanSourceFiles0(ROOT);
-  assert.equal(files.length, 71);
+  assert.equal(files.length, 72);
   assert.equal(files.every((file) => file.startsWith('lean/') && file.endsWith('.lean')), true);
   assert.deepEqual(files, [...files].sort());
   assert.equal(files.includes('lean/PNP.lean'), true);
@@ -144,6 +144,8 @@ test('source closure scans every Lean source and rejects a symlinked source root
   assert.equal(files.includes('lean/PNP/Concrete/CookLevinBuilderBodyStartPrefix.lean'), true);
   assert.equal(files.includes('lean/PNP/Concrete/CookLevinBuilderFirstLiteralPrefix.lean'), true);
   assert.equal(files.includes('lean/PNP/Concrete/CookLevinBuilderFirstClausePrefix.lean'), true);
+  assert.equal(files.includes(
+    'lean/PNP/Concrete/CookLevinBuilderDynamicTokenCursorStep.lean'), true);
   assert.equal(files.includes('lean/PNP/Concrete/PipelinePairedCompiler.lean'), true);
   assert.equal(files.includes('lean/PNP/Concrete/PipelineCompiler.lean'), true);
   assert.equal(files.includes('lean/PNP/Concrete/TerminalOutputPacker.lean'), true);
@@ -188,7 +190,7 @@ test('positive Lean probe parser rejects empty, malformed, noisy, failed, or non
   const valid = ParseLeanInventoryProbe0({
     stdout: inventoryBytes.toString('utf8'), stderr: '', exitCode: 0, timedOut: false,
   });
-  assert.equal(valid.inventory.declarationCount, 7746);
+  assert.equal(valid.inventory.declarationCount, 7845);
   for (const input of [
     { stdout: '', stderr: '', exitCode: 0, timedOut: false },
     { stdout: '{}\n', stderr: '', exitCode: 0, timedOut: false },
@@ -321,7 +323,7 @@ test('same-name theorem type weakening and source-closure drift revoke milestone
     inventoryBytes,
     map.milestoneSourceClosureSha256,
   );
-  assert.equal(current.milestones.filter((entry) => entry.earned).length, 27);
+  assert.equal(current.milestones.filter((entry) => entry.earned).length, 28);
   const tableauSemantics = current.milestones.find(
     (entry) => entry.id === 'concrete-cook-levin-tableau-cnf-semantics',
   );
@@ -402,7 +404,7 @@ test('project, unknown, and sorry axioms cannot pass the fixed standard-axiom cl
   }
 });
 
-test('publication map cannot set fingerprints or expand the axiom allowlist in release 50', async () => {
+test('publication map cannot set fingerprints or expand the axiom allowlist in release 51', async () => {
   const { inventoryBytes, inventory, map } = await fixture0();
   const fingerprinted = structuredClone(map);
   fingerprinted.gate.expectedRootKernelTypeSha256 = 'a'.repeat(64);

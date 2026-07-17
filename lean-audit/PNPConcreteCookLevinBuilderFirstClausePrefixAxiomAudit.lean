@@ -57,6 +57,7 @@ import PNP
 #print axioms PNP.Concrete.CookLevin.BuilderFirstClausePrefix.rules_length
 #print axioms PNP.Concrete.CookLevin.BuilderFirstClausePrefix.rules_pairwise_query_distinct
 #print axioms PNP.Concrete.CookLevin.BuilderFirstClausePrefix.machine_acceptState_ne_rejectState
+#print axioms PNP.Concrete.CookLevin.BuilderFirstClausePrefix.rule_source_ne_acceptState
 #print axioms PNP.Concrete.CookLevin.BuilderFirstClausePrefix.finalTape_represents
 #print axioms PNP.Concrete.CookLevin.BuilderFirstClausePrefix.prefix_workRunExact
 #print axioms PNP.Concrete.CookLevin.BuilderFirstClausePrefix.launch_workStep
@@ -65,6 +66,7 @@ import PNP
 #print axioms PNP.Concrete.CookLevin.BuilderFirstClausePrefix.evaluatorTail_launch_workStep
 #print axioms PNP.Concrete.CookLevin.BuilderFirstClausePrefix.workRunExact
 #print axioms PNP.Concrete.CookLevin.BuilderFirstClausePrefix.firstClauseTokens_eq_canonical_prefix
+#print axioms PNP.Concrete.CookLevin.BuilderFirstClausePrefix.nextTokenSlot_direct_eq_padding
 #print axioms PNP.Concrete.CookLevin.BuilderFirstClausePrefix.firstClauseTokens_eq_canonical_formula_prefix
 #print axioms PNP.Concrete.CookLevin.BuilderFirstClausePrefix.finalTokenBits_eq_encodedFormula_firstClause
 #print axioms PNP.Concrete.CookLevin.BuilderFirstClausePrefix.rawTimeBound

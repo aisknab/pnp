@@ -76,17 +76,19 @@ correctness and no timeout under an explicit polynomial bound, constructs a `.pa
 It does not establish `CNFSAT ∈ P`, NP-hardness, NP-completeness, or `P = NP`, and it is not the
 missing general compiler/refinement for arbitrary charged pipelines.
 
-The reviewed Cook--Levin builder boundary now includes a composed executable first-token prefix. A
-literal collision-free finite table runs the total all-input framer, one nine-symbol launch, and the
-fixed unary length tally from every raw bitstring. A separate fixed 59-rule state-selected table
-appends any canonical CNF token after a supplied tally endpoint. The current milestone renames both
-complete machines into disjoint injective state images and connects them with a second total
-nine-symbol launch. Its literal table therefore contains exactly 184 rules: 116 input-prefix rules,
-nine bridge rules, and 59 appender rules. Every raw bitstring reaches the preserved input/tally
-workspace containing exactly the first `T` token within `18*n*n + 87*n + 147` compiled raw steps.
-That token is proved equal to direct formula coordinates zero and one and to the first two bits of
-the actual canonical encoded formula. The prefix endpoint before launch, malformed prefix/appender
-phases, and one-step-short fuel remain timeout. No remaining header, dynamic raw cursor interpreter,
+The reviewed Cook--Levin builder boundary now reaches one literal token-cursor transition after the
+complete first clause. The inherited collision-free machine frames every raw input, builds its unary
+length tally, evaluates the verifier-fixed width and retained coordinates, and emits exactly
+`T^FormulaWidth F Sep T F T T F T T T F Finish`. A direct decoder proves the following token
+coordinate, `FormulaVariableSlotBound + 12`, is the first valid padding opportunity. The current
+milestone adds one total nine-symbol launch and a fixed 45-rule cursor-advance table. Its literal
+table has exactly 1192 plus the four inherited unary-evaluator rule counts. Every raw input preserves
+the complete-clause output and advances the unary coordinate to
+`FormulaVariableSlotBound + 13`; including launch, the suffix takes exactly
+`2*cursorWord.length + 8` work steps, and the compiled trace is bounded by
+`FirstClausePrefix.rawTimeBound + 48 + 12*cursorWord.length`. The unlaunched predecessor endpoint,
+malformed cursor scratch, and one-step-short total fuel remain timeout. This is one fixed padding
+transition, not a general dynamic raw cursor loop or arbitrary schedule decoder. No remaining body,
 complete builder, construction-runtime `RawRefinement`, or concrete `PolynomialReduction` is
 present.
 
@@ -106,8 +108,8 @@ plain legacy witness-model label, not an axiom and not an alias for `PNP.Concret
 
 Intermediate milestone credit has a separate evidence boundary from theorem publication. Every
 configured candidate must have its reviewed per-name, domain-separated compiled kernel-type
-SHA-256 in the publication map, retain an empty compiled axiom closure, and match by exact
-declaration name and theorem kind. The milestone source-closure hash must also match. That closure
+SHA-256 in the publication map, use only the fixed permitted Lean-standard axiom closure, and match
+by exact declaration name and theorem kind. The milestone source-closure hash must also match. That closure
 covers all modules under `lean/**/*.lean` plus `lean-toolchain`, `lakefile.lean`,
 `lake-manifest.json`, and the compiled inventory probe. A same-name theorem with a weakened type,
 or a change to any Lean source or pin, revokes milestone credit until the reviewed map is
