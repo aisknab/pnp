@@ -67,7 +67,9 @@ immediately after the first clause. The specification-only `nextBitCursor`
 records the corresponding bit coordinate
 `2 * (formulaVariableSlotBound + 12)`. The finite machine materializes the
 token coordinate as a unary root register but does not execute a dynamic
-schedule lookup.
+schedule lookup. `nextTokenSlot_direct_eq_padding` nevertheless proves at the
+specification boundary that this exact coordinate decodes to `some none`: it
+is in range and is padding, not a populated token or an out-of-range slot.
 
 ## Exact clause semantics and trace
 
@@ -135,7 +137,7 @@ collision, bridge removal, bridge shadowing, and altered clause bits.
 
 ## Kernel, regression, and hostile audits
 
-The audit prints all 77 public declarations in the new module plus the one
+The audit prints all 79 public declarations in the new module plus the one
 new predecessor separation theorem:
 
 ```sh

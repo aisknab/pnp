@@ -63,6 +63,7 @@ on:
       - 'audits/lean-concrete-cook-levin-builder-body-start-prefix0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-first-literal-prefix0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-first-clause-prefix0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-builder-dynamic-token-cursor-step0.test.mjs'
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
       - 'audits/lean-nand-reference-minimum0.test.mjs'
@@ -181,6 +182,7 @@ on:
       - 'audits/lean-concrete-cook-levin-builder-body-start-prefix0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-first-literal-prefix0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-first-clause-prefix0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-builder-dynamic-token-cursor-step0.test.mjs'
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
       - 'audits/lean-nand-reference-minimum0.test.mjs'
@@ -339,6 +341,9 @@ jobs:
 
       - name: Audit composed Cook-Levin first-clause prefix
         run: node --test audits/lean-concrete-cook-levin-builder-first-clause-prefix0.test.mjs
+
+      - name: Audit Cook-Levin dynamic token-cursor step
+        run: node --test audits/lean-concrete-cook-levin-builder-dynamic-token-cursor-step0.test.mjs
 
       - name: Build explicit PNP root
         run: lake build PNP
@@ -684,7 +689,7 @@ jobs:
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinFormulaCursorAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
-          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.")" -eq 129
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.")" -eq 136
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
@@ -869,7 +874,7 @@ jobs:
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFirstClausePrefixAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
-          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.(BuilderFirstClausePrefix|BuilderFirstLiteralPrefix\.rule_source_ne_acceptState)")" -eq 78
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.(BuilderFirstClausePrefix|BuilderFirstLiteralPrefix\.rule_source_ne_acceptState)")" -eq 80
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
@@ -883,8 +888,29 @@ jobs:
           fi
           test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 38
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 13
-          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 27
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 29
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFirstClausePrefix.lean
+
+      - name: Print Cook-Levin dynamic-token-cursor-step axiom closure
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderDynamicTokenCursorStepAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderDynamicTokenCursorStep\.")" -eq 45
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected Cook-Levin dynamic-token-cursor-step axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Cook-Levin dynamic token cursor reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 14
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 7
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 24
+          lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderDynamicTokenCursorStep.lean
 
       - name: Print concrete CNF work-input bridge axioms
         run: |

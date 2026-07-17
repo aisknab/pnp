@@ -29,11 +29,13 @@ from current theorem status.
   semantic output-lower-bound, source-accounting, finite local-baseline, and conditional
   threshold-boundary audits plus the explicit-list residual-route audit when Lean inputs change.
   The Cook--Levin lane additionally audits the 79-declaration rectangular formula schedule, the
-  129-declaration direct formula cursor, the 39-declaration literal input-length tally machine, the
+  136-declaration direct formula cursor, the 39-declaration literal input-length tally machine, the
   40-declaration executable framer-to-tally prefix, the 68-declaration standalone four-token
   appender, the 37-declaration composed first-token prefix, the 74-declaration unary polynomial
   evaluator, the 83-declaration complete-header composition, the 60-declaration body-start
-  composition, the 73-declaration first-literal composition, and their empty/one-bit/odd/even
+  composition, the 74-declaration first-literal composition, the combined 80-declaration
+  first-clause audit, the 45-declaration literal token-cursor padding step, and their
+  empty/one-bit/odd/even
   regression instantiations. The appender checks all four state-selected token traces and its local
   `24*n + 48` first-token raw bound. The composed audit checks the exact 184-rule table, disjoint
   state images, nine-rule bridge, all-input exact trace, final `T` token, external
@@ -42,7 +44,10 @@ from current theorem status.
   checks four disjoint state images, three total bridges, exact `T^FormulaWidth F Sep T F` output,
   the constructive positive-variable-zero schedule proof, retained coordinate
   `FormulaVariableSlotBound + 4`, the external compiled polynomial, malformed phases, and all
-  endpoint/one-step-short timeout boundaries.
+  endpoint/one-step-short timeout boundaries. The token-cursor-step audit checks the exact fixed
+  45-rule suffix table, total launch, first valid-padding outcome, unchanged first-clause output,
+  advancement from `FormulaVariableSlotBound + 12` to `+ 13`, external compiled bound, malformed
+  scratch timeout, and one-step-short total timeout without claiming a complete cursor loop.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual

@@ -59,9 +59,10 @@ function validate0(source) {
     && /^namespace LocalConstraint$/mu.test(stripped)
     && /^namespace DirectToken$/mu.test(stripped)
     && /^namespace VerifierTableauProblem$/mu.test(stripped)
+    && /^namespace FormulaTokenCursor$/mu.test(stripped)
     && /^namespace FormulaBitCursor$/mu.test(stripped)
     && /end PNP\.Concrete\s*$/u.test(stripped), 'namespace');
-  require0(declarations.length === 129, 'declaration-count');
+  require0(declarations.length === 136, 'declaration-count');
   require0(!hasLeanAssumptionDeclaration0(source), 'assumption');
   require0(!hasPrivateLeanDeclaration0(source), 'private');
   require0(!hasUnauditedLeanDeclarationForm0(source), 'unaudited');
@@ -105,8 +106,10 @@ function validate0(source) {
   'token-bit-nested-option');
   require0(/def formulaBitSlotDirect[\s\S]*formulaTokenBitSlotDirect[\s\S]*DirectSlot\.singleton \(some false\)/u
     .test(declarationBlock0(stripped, 'formulaBitSlotDirect')), 'direct-final-zero');
-  require0(/def step[\s\S]*formulaBitSlotDirect cursor\.nextSlot[\s\S]*\| none => none[\s\S]*cursor\.nextSlot \+ 1/u
-    .test(declarationBlock0(stripped, 'step')), 'cursor-step');
+  require0(/namespace FormulaTokenCursor[\s\S]*def step[\s\S]*formulaTokenSlotDirect cursor\.nextSlot[\s\S]*\| none => none[\s\S]*cursor\.nextSlot \+ 1/u
+    .test(stripped), 'token-cursor-step');
+  require0(/namespace FormulaBitCursor[\s\S]*def step[\s\S]*formulaBitSlotDirect cursor\.nextSlot[\s\S]*\| none => none[\s\S]*cursor\.nextSlot \+ 1/u
+    .test(stripped), 'cursor-step');
   require0(/def run[\s\S]*\| 0, cursor => \(\[\], cursor\)[\s\S]*\| fuel \+ 1, cursor =>[\s\S]*step problem cursor[\s\S]*\| none => \(\[\], cursor\)[\s\S]*entry :: tail\.1/u
     .test(declarationBlock0(stripped, 'run')), 'cursor-run');
 
@@ -136,7 +139,7 @@ test('direct Cook-Levin cursor is coordinate-driven, answer-independent, and sho
   assert.deepEqual(validate0(await text0(SOURCE)), []);
 });
 
-test('kernel audit covers all 129 explicit cursor declarations', async () => {
+test('kernel audit covers all 136 explicit cursor declarations', async () => {
   const [source, audit, root, workflow, packageText, verifierScript, regression] = await Promise.all([
     text0(SOURCE), text0(AUDIT), text0('lean/PNP.lean'),
     text0('.github/workflows/lean-bridge.yml'), text0('package.json'),
@@ -145,14 +148,14 @@ test('kernel audit covers all 129 explicit cursor declarations', async () => {
   const declarations = explicitLeanDeclarationHeads0(source);
   const printed = printed0(audit);
   assert.equal(imports0(audit).join(','), 'PNP');
-  assert.equal(declarations.length, 129);
+  assert.equal(declarations.length, 136);
   assert.equal(printed.length, declarations.length);
   assert.equal(new Set(printed).size, printed.length);
   assert.ok(printed.every((name) => name.startsWith(PREFIX)));
   assert.ok(imports0(root).includes('PNP.Concrete.CookLevinFormulaCursor'));
   assert.ok(workflow.includes('PNPConcreteCookLevinFormulaCursorAxiomAudit.lean'));
   assert.ok(workflow.includes('PNPConcreteCookLevinFormulaCursor.lean'));
-  assert.ok(workflow.includes(' -eq 129'));
+  assert.ok(workflow.includes(' -eq 136'));
   assert.ok(workflow.includes('Unexpected Cook-Levin formula-cursor axiom closure.'));
   const packageJson = JSON.parse(packageText);
   assert.ok(packageJson.scripts.test.includes(TEST));
@@ -162,6 +165,8 @@ test('kernel audit covers all 129 explicit cursor declarations', async () => {
       `${problem}\\.formulaBitSlotCountDirect_eq_polynomial`, 'u'));
   }
   assert.match(regression, /run_one_step_short oddProblem/u);
+  assert.match(regression, /FormulaTokenCursor\.step_at_end evenProblem/u);
+  assert.match(regression, /FormulaTokenCursor\.step_of_lt oddProblem/u);
   assert.match(regression, /step_at_end evenProblem/u);
   assert.match(regression, /run_excess oneBitProblem 7/u);
   assert.match(regression, /run_full_emit_eq_encodedFormula evenProblem/u);

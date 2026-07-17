@@ -272,6 +272,26 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /1138 plus the width, body-start next-slot, first-literal next-slot, and first-clause next-slot evaluator rule counts/u);
   assert.match(byId.get('concrete-cook-levin-builder-first-clause-prefix').nonClaim,
     /does not implement a dynamic formula cursor/u);
+  assert.equal(byId.get('concrete-cook-levin-builder-dynamic-token-cursor-step').status,
+    'formalized-foundation-only');
+  assert.equal(byId.get('concrete-cook-levin-builder-dynamic-token-cursor-step').earned, true);
+  assert.equal(byId.get('concrete-cook-levin-builder-dynamic-token-cursor-step')
+    .allAssumptionFree, false);
+  assert.equal(byId.get('concrete-cook-levin-builder-dynamic-token-cursor-step')
+    .axiomClosureUsesOnlyLeanStandardAllowlist, true);
+  assert.equal(byId.get('concrete-cook-levin-builder-dynamic-token-cursor-step')
+    .requiredTheorems.includes(
+      'PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.workRunExact'), true);
+  assert.equal(byId.get('concrete-cook-levin-builder-dynamic-token-cursor-step')
+    .requiredTheorems.includes(
+      'PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.specification_step'), true);
+  assert.equal(byId.get('concrete-cook-levin-builder-dynamic-token-cursor-step')
+    .requiredTheorems.includes(
+      'PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.malformedCursorScratch_timeout'), true);
+  assert.match(byId.get('concrete-cook-levin-builder-dynamic-token-cursor-step').scope,
+    /1192 plus the four inherited unary-evaluator rule counts/u);
+  assert.match(byId.get('concrete-cook-levin-builder-dynamic-token-cursor-step').nonClaim,
+    /not a general dynamic cursor loop/u);
   assert.equal(byId.get('concrete-cnf-universal-verifier').requiredTheorems.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP'), true);
   assert.match(byId.get('concrete-cnf-universal-verifier').nonClaim,
@@ -292,17 +312,17 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   ]) assert.equal(byId.get(id).status, 'not-formalized');
 });
 
-test('publication consumes the reviewed first-clause map and inventory counts', async () => {
+test('publication consumes the reviewed token-cursor-step map and inventory counts', async () => {
   const [status, mapText] = await Promise.all([
     status0(),
     readFile(new URL('../publication/FORMAL_PUBLICATION_MAP.json', import.meta.url), 'utf8'),
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'd5a8506bdfa29df539f4aa0d5a0c27ebe58eb8542ae28baa9923ecc842663ddc');
+    '4ce7a7492e6f88b8d600c6b7b5038e65e5acf3ea758d69dab9c6dbc881245d12');
   assert.equal(map.milestoneSourceClosureSha256,
-    '791b8e5df59265f19faf287af634f2a36d52a271180e887189af92527e4d593a');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 549);
+    '0aed80fa88615185f184b0f905b69fa17f8769ff8adae28db0e210731e811b66');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 585);
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.PipelineCompiler.pipeline_correct'
   ], 'string');
@@ -366,6 +386,18 @@ test('publication consumes the reviewed first-clause map and inventory counts', 
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.finalTokenBits_eq_encodedFormula_firstClause'
   ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.VerifierTableauProblem.FormulaTokenCursor.step_of_lt'
+  ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.nextTokenSlot_direct_eq_padding'
+  ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.workRunExact'
+  ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.run_compile_rawTimeBound'
+  ], 'string');
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,
     map.gate.expectedConcreteTargetKernelValueSha256,
@@ -379,7 +411,7 @@ test('publication consumes the reviewed first-clause map and inventory counts', 
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [7746, 3725, 2865, 2286, 70]);
+  ], [7845, 3788, 2886, 2380, 71]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
@@ -388,9 +420,10 @@ test('canonical report source is current and the committed PDF artifact exists',
     status0(),
   ]);
   assert.match(tex, /The repository does not currently establish \$P=NP\$\./u);
-  assert.match(tex, /Every raw input emits exactly\s+\\code\{FormulaWidth\} copies of \\code\{T\} followed by \\code\{F\}, \\code\{Sep\}, and the complete positive\s+clause on variables zero, one, and two/u);
+  assert.match(tex, /A literal finite builder emits\s+\\code\{FormulaWidth\} copies of \\code\{T\} followed by \\code\{F\}, \\code\{Sep\}, and the complete positive\s+clause on variables zero, one, and two/u);
   assert.match(tex, /complete positive at-least-one shape clause on variables zero,\s+one, and two/u);
-  assert.match(tex, /The dynamic cursor and remaining formula\s+body are not/u);
+  assert.match(tex, /One literal token-cursor step continues from that first-clause endpoint/u);
+  assert.match(tex, /not a general cursor loop or arbitrary schedule decoder/u);
   assert.equal(tex.includes('It does not compute the remaining header or complete formula'), false);
   assert.ok(tex.includes(status.leanTheoremInventorySha256));
   assert.ok(tex.includes(status.coordinate.replaceAll('_', '\\_')) || tex.includes(status.coordinate));

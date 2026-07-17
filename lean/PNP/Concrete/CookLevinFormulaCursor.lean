@@ -1465,6 +1465,70 @@ theorem formulaTokenSlotCountDirect_eq {language : Language}
   unfold formulaTokenSlotCountDirect
   rw [problem.formulaTokenSchedule_length]
 
+/-! ### Fuelled direct token cursor -/
+
+/-- Token-level cursor used by the literal formula builder.  The existing
+raw-bit cursor remains the final encoding specification; this cursor matches
+the builder workspace, where one emitted token occupies one work cell. -/
+structure FormulaTokenCursor where
+  nextSlot : Nat
+deriving DecidableEq, Repr
+
+namespace FormulaTokenCursor
+
+def initial : FormulaTokenCursor := ⟨0⟩
+
+def done {language : Language} (problem : VerifierTableauProblem language)
+    (cursor : FormulaTokenCursor) : Prop :=
+  problem.formulaTokenSlotCountDirect ≤ cursor.nextSlot
+
+/-- Decode one padded token opportunity and advance.  `none` means the
+cursor is outside the complete token schedule, while `some none` is an
+in-range padding opportunity. -/
+def step {language : Language} (problem : VerifierTableauProblem language)
+    (cursor : FormulaTokenCursor) :
+    Option (Option CNFToken × FormulaTokenCursor) :=
+  match problem.formulaTokenSlotDirect cursor.nextSlot with
+  | none => none
+  | some entry => some (entry, ⟨cursor.nextSlot + 1⟩)
+
+theorem step_of_lt {language : Language}
+    (problem : VerifierTableauProblem language)
+    (cursor : FormulaTokenCursor)
+    (hCursor : cursor.nextSlot < problem.formulaTokenSlotCountDirect) :
+    step problem cursor =
+      some (problem.formulaTokenSchedule.get
+          ⟨cursor.nextSlot, by
+            rw [← problem.formulaTokenSlotCountDirect_eq]
+            exact hCursor⟩,
+        ⟨cursor.nextSlot + 1⟩) := by
+  unfold step
+  rw [problem.formulaTokenSlotDirect_eq]
+  have hSchedule : cursor.nextSlot < problem.formulaTokenSchedule.length := by
+    rw [← problem.formulaTokenSlotCountDirect_eq]
+    exact hCursor
+  rw [List.getElem?_eq_getElem hSchedule]
+  simp only
+  congr
+
+theorem step_of_done {language : Language}
+    (problem : VerifierTableauProblem language)
+    (cursor : FormulaTokenCursor) (hDone : done problem cursor) :
+    step problem cursor = none := by
+  unfold step done at *
+  rw [problem.formulaTokenSlotDirect_eq]
+  rw [List.getElem?_eq_none]
+  rw [← problem.formulaTokenSlotCountDirect_eq]
+  exact hDone
+
+theorem step_at_end {language : Language}
+    (problem : VerifierTableauProblem language) :
+    step problem ⟨problem.formulaTokenSlotCountDirect⟩ = none := by
+  apply step_of_done
+  exact Nat.le_refl _
+
+end FormulaTokenCursor
+
 /-- Direct lookup in one token's two raw-bit opportunities. -/
 def tokenBitBlockSlotDirect {language : Language}
     (problem : VerifierTableauProblem language)

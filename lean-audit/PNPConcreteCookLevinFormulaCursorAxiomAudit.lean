@@ -101,6 +101,13 @@ import PNP
 #print axioms PNP.Concrete.CookLevin.VerifierTableauProblem.tokenBitSlotDirect_eq
 #print axioms PNP.Concrete.CookLevin.VerifierTableauProblem.formulaTokenSlotCountDirect
 #print axioms PNP.Concrete.CookLevin.VerifierTableauProblem.formulaTokenSlotCountDirect_eq
+#print axioms PNP.Concrete.CookLevin.VerifierTableauProblem.FormulaTokenCursor
+#print axioms PNP.Concrete.CookLevin.VerifierTableauProblem.FormulaTokenCursor.initial
+#print axioms PNP.Concrete.CookLevin.VerifierTableauProblem.FormulaTokenCursor.done
+#print axioms PNP.Concrete.CookLevin.VerifierTableauProblem.FormulaTokenCursor.step
+#print axioms PNP.Concrete.CookLevin.VerifierTableauProblem.FormulaTokenCursor.step_of_lt
+#print axioms PNP.Concrete.CookLevin.VerifierTableauProblem.FormulaTokenCursor.step_of_done
+#print axioms PNP.Concrete.CookLevin.VerifierTableauProblem.FormulaTokenCursor.step_at_end
 #print axioms PNP.Concrete.CookLevin.VerifierTableauProblem.tokenBitBlockSlotDirect
 #print axioms PNP.Concrete.CookLevin.VerifierTableauProblem.tokenBitBlockSlotDirect_eq
 #print axioms PNP.Concrete.CookLevin.VerifierTableauProblem.formulaTokenCoordinateEnumeration
