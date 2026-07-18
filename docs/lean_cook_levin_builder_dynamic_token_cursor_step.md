@@ -110,8 +110,10 @@ node --test \
   audits/lean-concrete-cook-levin-builder-dynamic-token-cursor-step0.test.mjs
 ```
 
-All 45 public declarations close over only the approved Lean-standard axioms
-`propext` and `Quot.sound`. The hostile audit rejects state collision, removal
+All 47 public declarations close over only the approved Lean-standard axioms
+`propext` and `Quot.sound`. The two additional reviewed dispatch facts expose
+the malformed-scratch transition into the dead state and its total self-loop
+for collision-free downstream composition. The hostile audit rejects state collision, removal
 of a cursor phase or the launch bridge, an altered padding result or increment,
 host-side lookup in the rule table, and any new assumption.
 

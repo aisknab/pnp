@@ -9,6 +9,8 @@ import PNP
 #print axioms PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.CursorAdvance.advanceWorkSteps
 #print axioms PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.CursorAdvance.advance_workRunExact
 #print axioms PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.CursorAdvance.malformedScratchConfiguration
+#print axioms PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.CursorAdvance.malformedScratch_enters_dead
+#print axioms PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.CursorAdvance.deadState_workStep
 
 #print axioms PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.cursorWord
 #print axioms PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.finalOutside

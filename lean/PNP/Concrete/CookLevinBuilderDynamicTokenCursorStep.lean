@@ -602,6 +602,22 @@ private theorem dead_workStep (tape : WorkTape) :
     Unary.deadAction, BuilderUnaryPolynomial.deadAction,
     BuilderUnaryPolynomial.keepAction, WorkTape.move, hWrite] using hStep
 
+/-- Public phase-local dispatch fact used by later literal compositions:
+an invalid seek symbol enters the explicit dead state without halting. -/
+theorem malformedScratch_enters_dead (left right : List WorkSymbol) :
+    workStep? machine (malformedScratchConfiguration left right) =
+      some
+        { state := 4
+          tape := (malformedScratchConfiguration left right).tape } := by
+  simpa [deadConfiguration] using malformedScratch_workStep left right
+
+/-- Public phase-local dispatch fact used by later literal compositions:
+the explicit cursor dead state is a nonhalting self-loop. -/
+theorem deadState_workStep (tape : WorkTape) :
+    workStep? machine { state := 4, tape := tape } =
+      some { state := 4, tape := tape } := by
+  simpa [deadConfiguration] using dead_workStep tape
+
 private theorem dead_workRun (fuel : Nat) (tape : WorkTape) :
     workRun machine fuel (deadConfiguration tape) = deadConfiguration tape := by
   induction fuel with

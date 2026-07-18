@@ -91,7 +91,11 @@ agrees throughout the no-emission run and at that next separator step. Exact com
 bounded by a verifier-fixed external input-size polynomial; malformed countdown scratch/root states,
 the unlaunched predecessor endpoint, and one-step-short total fuel remain timeout. This is the exact
 remaining first-clause padding block and second-clause boundary, not a general dynamic raw formula
-cursor or arbitrary schedule decoder. No second-clause emission, remaining body, complete builder,
+cursor or arbitrary schedule decoder. The next literal machine selects the complete 59-rule `Sep`
+appender, launches the existing 45-rule cursor advance, emits the exact canonical prefix through the
+separator beginning clause two, and retains the following `F` coordinate. Its table has `1366` plus
+six evaluator rule counts, and its combined 56-declaration audit has exactly 15 empty, 11 `propext`,
+and 30 `propext`/`Quot.sound` closures. No following-`F` or remaining-body emission, complete builder,
 construction-runtime `RawRefinement`, or concrete `PolynomialReduction` is present.
 
 The current four project-specific axioms remain visible as an independent inventory:

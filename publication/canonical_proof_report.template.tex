@@ -61,10 +61,11 @@
   schedule plus direct fuelled bit and token specification cursors. A literal finite builder emits
   \code{FormulaWidth} copies of \code{T} followed by \code{F}, \code{Sep}, and the complete positive
   clause on variables zero, one, and two. It then executes the first padding transition and the
-  entire remaining first-clause padding run, preserving those bits while reaching the exact start
-  coordinate of the second clause. Every traversed direct slot is proved to be padding, the next
-  direct outcome is proved to be \code{Sep}, and an external polynomial bounds the compiled run. A
-  general dynamic formula cursor, arbitrary raw slot decoder, and remaining formula body are not
+  entire remaining first-clause padding run, emits the \code{Sep} beginning clause two, and advances
+  the retained coordinate to its following \code{F}. Every traversed direct slot is proved to be
+  padding, the emitted bits are the exact canonical prefix, and an external polynomial bounds the
+  compiled run. A general dynamic formula cursor, arbitrary raw slot decoder, following-\code{F}
+  emission, and remaining formula body are not
   implemented, so there is no complete raw
   polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation fingerprints
   are unset, no root theorem exists, and the abstract string-handle bridge is never an activation source.
@@ -220,6 +221,18 @@ step and the following separator observation. The exact compiled run has a verif
 input-size polynomial bound; malformed countdown scratch/root states, the unlaunched endpoint, and
 one-step-short fuel remain timeout. This identifies the second-clause boundary but does not emit the
 second clause or implement a general formula cursor.
+
+The second-clause-separator composition continues with a selected 59-rule \code{Sep} appender, two
+total nine-symbol bridges, and the existing fixed 45-rule cursor advance. Its literal table has
+exactly 1366 plus the six inherited and generated evaluator rule counts. Every raw input emits the
+canonical prefix through the separator beginning clause two and advances the retained unary
+coordinate by one; direct lookup proves the following token is \code{F}. The emitted bits equal
+\code{encodedFormula.take (2 * (FormulaWidth + 13))}. The compiled run is bounded by the predecessor
+bound plus \code{246 + 24*n + 12*FormulaWidth + 12*cursorWord.length}. The combined 56-declaration
+audit has 15 empty closures, 11 using only \code{propext}, and 30 using only \code{propext} and
+\code{Quot.sound}. Malformed appender tally/output, malformed cursor scratch, both unlaunched
+endpoints, and one-step-short total fuel remain timeout. This is one fixed populated transition, not
+a general dynamic cursor or remaining-body builder, and it does not emit the following \code{F}.
 
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}

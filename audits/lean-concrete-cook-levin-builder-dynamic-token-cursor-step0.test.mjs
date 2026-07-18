@@ -32,6 +32,8 @@ theorem rule_source_ne_acceptState
 def advanceWorkSteps
 theorem advance_workRunExact
 def malformedScratchConfiguration
+theorem malformedScratch_enters_dead
+theorem deadState_workStep
 def cursorWord
 def finalOutside
 def finalTape
@@ -183,9 +185,9 @@ test('kernel transcript covers every public cursor-step declaration',
     const printed = printed0(audit);
     const prefix =
       'PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.';
-    assert.equal(HEADS.length, 45);
-    assert.equal(printed.length, 45);
-    assert.equal(new Set(printed).size, 45);
+    assert.equal(HEADS.length, 47);
+    assert.equal(printed.length, 47);
+    assert.equal(new Set(printed).size, 47);
     assert.deepEqual(imports0(audit), ['PNP']);
     assert.ok(printed.every((name) => name.startsWith(prefix)));
     assert.deepEqual(
