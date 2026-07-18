@@ -57,6 +57,11 @@ from current theorem status.
   prefix through clause two's separator, retained following-`F` coordinate, external polynomial,
   malformed appender/cursor phases, both unlaunched endpoints, and one-step-short timeout. Its exact
   56-line closure split is 15 empty, 11 `propext`, and 30 `propext`/`Quot.sound` declarations.
+  The second-clause-first-literal audit checks both selected `F` appenders, both cursor copies, all
+  four total launches, the exact negative-variable-zero formula prefix, the three direct `F`
+  schedule outcomes, the external polynomial, every malformed copy and pre-launch boundary, and
+  the exact 87-line closure split of 25 empty, 18 `propext`, and 44 `propext`/`Quot.sound`
+  declarations without claiming a complete clause-two emitter or general dynamic cursor.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual

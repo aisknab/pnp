@@ -283,8 +283,19 @@ has 15 empty closures, 11 using only `propext`, and 30 using only `propext` and 
 Malformed appender tally/output, malformed cursor scratch, both unlaunched endpoints, and
 one-step-short total fuel remain timeout.
 
-This earns one exact populated transition at the start of clause two. It is not a general dynamic
-cursor or an arbitrary raw slot decoder: no machine emits the following `F` or remaining formula
+The second-clause-first-literal milestone continues with two selected 59-rule `F` appenders, four
+total symbol-preserving bridges, and two copies of the fixed 45-rule cursor advance. Its table has
+`1610` plus the six inherited/generated unary-evaluator rule counts. Every raw input emits the
+complete negative literal on variable zero in clause two; its bits are exactly
+`encodedFormula.take (2 * (FormulaWidth + 15))`. Direct schedule proofs identify the sign,
+unary-zero terminator, and following variable-one sign as `F`, while the machine emits the first
+two. Its external bound adds `564 + 48*n + 24*FormulaWidth + 24*cursorWord.length` to the separator
+prefix bound. The combined 87-declaration audit has 25 empty, 18 `propext`, and 44
+`propext`/`Quot.sound` closures. All four pre-launch endpoints, both appender copies, both cursor
+copies, and one-step-short total fuel are fail-closed.
+
+This earns one complete negative literal at the start of clause two. It is not a general dynamic
+cursor or an arbitrary raw slot decoder: no machine completes clause two or the remaining formula
 body, composes a complete raw formula builder with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,
