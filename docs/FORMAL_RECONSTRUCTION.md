@@ -294,9 +294,21 @@ prefix bound. The combined 87-declaration audit has 25 empty, 18 `propext`, and 
 `propext`/`Quot.sound` closures. All four pre-launch endpoints, both appender copies, both cursor
 copies, and one-step-short total fuel are fail-closed.
 
-This earns one complete negative literal at the start of clause two. It is not a general dynamic
-cursor or an arbitrary raw slot decoder: no machine completes clause two or the remaining formula
-body, composes a complete raw formula builder with a construction-runtime proof, or packages
+The second-clause-second-literal milestone then composes selected 59-rule `F`, `T`, and `F`
+appenders, six total symbol-preserving bridges, and three copies of the fixed 45-rule cursor advance.
+Its table has `1976` plus the six inherited/generated unary-evaluator rule counts. Every raw input
+emits the complete negative literal on variable one in clause two; its bits are exactly
+`encodedFormula.take (2 * (FormulaWidth + 18))`. Direct schedule proofs identify the sign as `F`,
+the unary unit as `T`, the literal terminator as `F`, and the retained next token as `Finish`.
+Its external bound adds `1026 + 72*n + 36*FormulaWidth + 36*cursorWord.length` to the first-literal
+prefix bound. The combined 115-declaration audit has 34 empty, 25 `propext`, and 56
+`propext`/`Quot.sound` closures. All six pre-launch endpoints, all three appenders and cursors, and
+one-step-short total fuel are fail-closed.
+
+This earns the first two complete negative literals at the start of clause two. It is not a general
+dynamic cursor or an arbitrary raw slot decoder: no machine emits the retained clause terminator,
+completes clause two, or emits the remaining formula body, composes a complete raw formula builder
+with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,
 residual-band minimizer, ZeroSlack, the remaining end-to-end polynomial bounds, and the root

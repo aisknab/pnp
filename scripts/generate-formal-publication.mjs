@@ -18,9 +18,9 @@ const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const TEMPLATE_PATH = 'publication/canonical_proof_report.template.tex';
 const REPORT_TEX_PATH = 'canonical_proof_report.tex';
-const STATUS_COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-18-54';
-const PUBLIC_SURFACE_COORDINATE = 'PUBLIC-SURFACE-BASELINE-2026-07-18-COOK-LEVIN-BUILDER-SECOND-CLAUSE-FIRST-LITERAL-PREFIX-53';
-const REPORT_COORDINATE = 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-18-54';
+const STATUS_COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-18-55';
+const PUBLIC_SURFACE_COORDINATE = 'PUBLIC-SURFACE-BASELINE-2026-07-18-COOK-LEVIN-BUILDER-SECOND-CLAUSE-SECOND-LITERAL-PREFIX-54';
+const REPORT_COORDINATE = 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-18-55';
 
 const NEW_NON_CLAIMS = Object.freeze([
   'The compiled Lean theorem inventory is declaration and axiom-dependency evidence; it does not widen any theorem beyond its exact type and stated scope.',
@@ -55,7 +55,7 @@ export async function BuildFormalPublication0(root) {
     inventoryBytes,
     sourceClosureSha256,
   );
-  if (publication.gate.passed !== false) throw new Error('Release-53 publication gate must remain intentionally fail-closed');
+  if (publication.gate.passed !== false) throw new Error('Release-55 publication gate must remain intentionally fail-closed');
   const mapSha256 = sha256Bytes0(mapBytes);
   const rootCandidate = inventory.compatibilityRootCandidate;
   const status = {
@@ -147,7 +147,7 @@ function renderReport0(template, status, inventory, publication) {
       texEscape0(milestone.nonClaim),
     ].join(' & ') + ' \\\\').join('\n')],
     ['@@MODULE_ROWS@@', [...modules.entries()].sort(([left], [right]) => left.localeCompare(right))
-      .map(([name, counts]) => `${texEscape0(name)} & ${counts.declarations} & ${counts.theorems} \\\\`)
+      .map(([name, counts]) => `${texBreakableModuleName0(name)} & ${counts.declarations} & ${counts.theorems} \\\\`)
       .join('\n')],
     ['@@BLOCKER_ITEMS@@', status.remainingBlockers.map((name) => `\\item \\code{${texEscape0(name)}}`).join('\n')],
   ]);
@@ -170,6 +170,10 @@ function texEscape0(value) {
     .replaceAll('}', '\\}')
     .replaceAll('~', '\\textasciitilde{}')
     .replaceAll('^', '\\textasciicircum{}');
+}
+
+function texBreakableModuleName0(value) {
+  return texEscape0(value).replaceAll('.', '.\\allowbreak{}');
 }
 
 function unique0(values) {

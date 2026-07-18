@@ -62,6 +62,12 @@ from current theorem status.
   schedule outcomes, the external polynomial, every malformed copy and pre-launch boundary, and
   the exact 87-line closure split of 25 empty, 18 `propext`, and 44 `propext`/`Quot.sound`
   declarations without claiming a complete clause-two emitter or general dynamic cursor.
+  The second-clause-second-literal audit checks the selected `F`, `T`, and `F` appenders, all three
+  cursor copies, all six total launches, the exact negative-variable-one formula prefix, the direct
+  `F`/`T`/`F` outcomes and retained `Finish`, the external polynomial, every malformed copy and
+  pre-launch boundary, and the exact 115-line closure split of 34 empty, 25 `propext`, and 56
+  `propext`/`Quot.sound` declarations without claiming that the terminator or complete clause two
+  is emitted.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual
