@@ -67,7 +67,13 @@ from current theorem status.
   `F`/`T`/`F` outcomes and retained `Finish`, the external polynomial, every malformed copy and
   pre-launch boundary, and the exact 115-line closure split of 34 empty, 25 `propext`, and 56
   `propext`/`Quot.sound` declarations without claiming that the terminator or complete clause two
-  is emitted.
+  is emitted. The complete-second-clause audit checks the selected 59-rule `Finish` appender, the
+  two total launches, one fixed cursor advance, the exact 113-rule suffix and symbolic 2098-rule
+  global base, the canonical formula prefix through the complete second clause, direct `Finish`
+  execution, the retained first padding coordinate, the external polynomial, malformed phases,
+  both unlaunched endpoints, and one-step-short timeout. Its exact 57-line closure split is 15
+  empty, 10 `propext`, and 32 `propext`/`Quot.sound` declarations; it does not traverse clause-two
+  padding or claim a general cursor or complete formula builder.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual
