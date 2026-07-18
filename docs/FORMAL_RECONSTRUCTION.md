@@ -221,7 +221,7 @@ For every raw input it accepts at the exact preserved workspace containing `T` r
 `FormulaWidth` times followed by `F`; the corresponding bits equal
 `encodedFormula.take (2 * (FormulaWidth + 1))`. The exact compiled trace is bounded by a public
 external `NatPolynomial`, while the pre-launch prefix endpoint and one-step-short full trace remain
-timeout. All 74 evaluator declarations and all 83 composed-header declarations have complete
+timeout. All 74 evaluator declarations and all 84 composed-header declarations have complete
 kernel-axiom audits whose closures are empty or use only `propext` and `Quot.sound`.
 
 The body-start milestone continues through a structurally generated unary evaluator for token
@@ -262,8 +262,17 @@ bounded by `FirstClausePrefix.rawTimeBound + 48 + 12*cursorWord.length`. Malform
 the unlaunched predecessor endpoint, and one-step-short total fuel remain timeout. All 45 public
 declarations use only the approved Lean-standard closure.
 
-This earns exactly one literal padding transition after the canonical first clause. It is not a
-general dynamic cursor loop or an arbitrary raw slot decoder: no machine emits the remaining
+The first-clause-padding-run milestone continues from that one-step endpoint. It evaluates the exact
+remaining count `(FormulaVariableSlotBound - 1) * (FormulaVariableSlotBound + 6)`, consumes it with
+a literal 25-rule unary countdown loop, and evaluates the absolute second-clause-start coordinate.
+Every looped-over direct slot is proved to be in-range padding, the recursive specification run emits
+no token, and its endpoint is proved to contain the `Sep` that begins clause two. The complete table
+has `1244` plus six unary-evaluator rule counts and is bounded by an external polynomial covering both
+evaluators, three launches, and the quadratic countdown. The 83 new declarations plus one predecessor
+controller interface use only the approved Lean-standard closure.
+
+This earns one complete traversal of the remaining padding block in the first clause rectangle. It is
+not a general dynamic cursor or an arbitrary raw slot decoder: no machine emits the second clause or remaining
 formula body, composes a complete raw formula builder with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,

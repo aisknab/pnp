@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '4ce7a7492e6f88b8d600c6b7b5038e65e5acf3ea758d69dab9c6dbc881245d12';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '47c2d99df4c8da006f9327c4934c3b3b18bec1df58ad51ec7b6e9414218f86a2';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -56,6 +56,7 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.CookLevin.BuilderCompleteHeader.HeaderController.rules_length',
   'PNP.Concrete.CookLevin.BuilderCompleteHeader.HeaderController.rules_pairwise_query_distinct',
   'PNP.Concrete.CookLevin.BuilderCompleteHeader.HeaderController.workRunExact',
+  'PNP.Concrete.CookLevin.BuilderCompleteHeader.HeaderController.workRunExact_of_unit_or_separator',
   'PNP.Concrete.CookLevin.BuilderCompleteHeader.boundedDecide_compile_accept',
   'PNP.Concrete.CookLevin.BuilderCompleteHeader.boundedDecide_compile_ne_timeout',
   'PNP.Concrete.CookLevin.BuilderCompleteHeader.controllerF_launch_workStep',
@@ -121,6 +122,53 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.workBoundedDecide_accept',
   'PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.workRunExact',
   'PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.work_one_step_short_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.PaddingCountdown.loopSteps_le',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.PaddingCountdown.loop_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.PaddingCountdown.loopback_workStep',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.PaddingCountdown.machine_acceptState_ne_rejectState',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.PaddingCountdown.rule_source_ne_acceptState',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.PaddingCountdown.rules_length',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.PaddingCountdown.rules_pairwise_query_distinct',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.boundedDecide_compile_accept',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.boundedDecide_compile_ne_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.countEvaluator_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.countdownBoundPolynomial_eval',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.countdown_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.finalConfiguration_state',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.finalOutside_contains_finalTokenSlot',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.finalTape_represents',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.finalTokenBits_eq_encodedFormula_firstClause',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.finalTokenSlot_eq_secondClauseStart',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.formulaVariablePredecessorPolynomial_eval',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.formulaVariablePredecessorPolynomial_eval_add_one',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.formulaVariableSlotBound_at_least_three',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.launch_workStep',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.machine_acceptState_ne_rejectState',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.malformedCountdownRoot_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.malformedCountdownScratch_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.paddingSlot_direct_eq_padding',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.predecessorSlot_add_remainingPaddingCount',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.prefixEndpoint_before_launch_timeout',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.prefix_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.rawTimeBound_eval',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.rawTimeBound_le',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.remainingPaddingCount_eq',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.remainingPaddingCount_eq_formulaTokensPerClause_sub_twelve',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.remainingPaddingCount_positive',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.rule_source_ne_acceptState',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.rules_length',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.rules_pairwise_query_distinct',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.run_compile_exact',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.run_compile_rawTimeBound',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.run_compile_rawTimeBound_blankEquivalent',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.secondClauseStart_direct_eq_sep',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.secondClauseStart_eq',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.specification_padding_run',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.specification_target_step',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.targetEvaluator_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.workBoundedDecide_accept',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.work_one_step_short_timeout',
   'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.finalTape_represents',
   'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.machine_acceptState_ne_rejectState',
   'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.rules_length',
@@ -626,7 +674,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-17-51') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-18-52') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -903,7 +951,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-17-51') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-18-52') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
@@ -921,7 +969,7 @@ function validatePublicationMap0(map) {
     'expectedRootKernelTypeSha256',
     'expectedAxiomClosureSha256',
     'expectedSourceClosureSha256',
-  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 51`);
+  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 52`);
   if (!isSha2560(map.milestoneSourceClosureSha256)
       || !isObject0(map.earnedMilestoneTheoremKernelTypeSha256)) {
     throw new Error('reviewed milestone theorem/source fingerprints are missing');
@@ -940,7 +988,7 @@ function validatePublicationMap0(map) {
     throw new Error('reviewed milestone theorem kernel-type fingerprint inventory mismatch');
   }
   if (sha256Text0(stableStringify0(map)) !== REQUIRED_PUBLICATION_MAP_SHA2560) {
-    throw new Error('formal publication milestone map drifted from the reviewed release-51 specification');
+    throw new Error('formal publication milestone map drifted from the reviewed release-52 specification');
   }
 }
 

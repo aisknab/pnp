@@ -701,6 +701,7 @@ theorem workRunExact (input : BitString) (wordPrefix : List WorkSymbol)
         omega
       rw [← hSteps]
       simpa [c0, final] using h07
+
   | succ rest =>
       let inside := insideWord input output
       let rewindWord :=
@@ -830,6 +831,23 @@ theorem workRunExact (input : BitString) (wordPrefix : List WorkSymbol)
         omega
       rw [← hSteps]
       simpa [c0, final] using h07
+
+/-- Public equality-based interface to the exact unary-root decrement.  The
+controller's internal scratch predicate remains an implementation detail;
+downstream literal loops only need to establish that their materialized
+prefix contains unary units and register separators. -/
+theorem workRunExact_of_unit_or_separator (input : BitString)
+    (wordPrefix : List WorkSymbol) (remaining : Nat)
+    (tail : List WorkSymbol) (output : List CNFToken)
+    (hPrefix : ∀ symbol ∈ wordPrefix,
+      symbol = BuilderUnaryPolynomial.unitSymbol ∨
+      symbol = BuilderUnaryPolynomial.separatorSymbol) :
+    workRunExact? machine (steps wordPrefix.length remaining)
+        (initialConfiguration input wordPrefix remaining tail output) =
+      some (finalConfiguration input wordPrefix remaining tail output) := by
+  apply workRunExact input wordPrefix remaining tail output
+  intro symbol hMem
+  exact hPrefix symbol hMem
 
 end HeaderController
 

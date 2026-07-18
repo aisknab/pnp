@@ -76,21 +76,23 @@ correctness and no timeout under an explicit polynomial bound, constructs a `.pa
 It does not establish `CNFSAT ∈ P`, NP-hardness, NP-completeness, or `P = NP`, and it is not the
 missing general compiler/refinement for arbitrary charged pipelines.
 
-The reviewed Cook--Levin builder boundary now reaches one literal token-cursor transition after the
+The reviewed Cook--Levin builder boundary now executes the entire remaining padding run after the
 complete first clause. The inherited collision-free machine frames every raw input, builds its unary
 length tally, evaluates the verifier-fixed width and retained coordinates, and emits exactly
-`T^FormulaWidth F Sep T F T T F T T T F Finish`. A direct decoder proves the following token
-coordinate, `FormulaVariableSlotBound + 12`, is the first valid padding opportunity. The current
-milestone adds one total nine-symbol launch and a fixed 45-rule cursor-advance table. Its literal
-table has exactly 1192 plus the four inherited unary-evaluator rule counts. Every raw input preserves
-the complete-clause output and advances the unary coordinate to
-`FormulaVariableSlotBound + 13`; including launch, the suffix takes exactly
-`2*cursorWord.length + 8` work steps, and the compiled trace is bounded by
-`FirstClausePrefix.rawTimeBound + 48 + 12*cursorWord.length`. The unlaunched predecessor endpoint,
-malformed cursor scratch, and one-step-short total fuel remain timeout. This is one fixed padding
-transition, not a general dynamic raw cursor loop or arbitrary schedule decoder. No remaining body,
-complete builder, construction-runtime `RawRefinement`, or concrete `PolynomialReduction` is
-present.
+`T^FormulaWidth F Sep T F T T F T T T F Finish`. The predecessor milestone consumes the first
+valid padding opportunity and retains coordinate `FormulaVariableSlotBound + 13`. The current
+literal machine adds structurally generated unary evaluators and a fixed 25-rule countdown
+controller to traverse the remaining
+`D = (FormulaVariableSlotBound - 1) * (FormulaVariableSlotBound + 6)` padding coordinates without
+emitting a token. Its table has exactly 1244 plus six inherited/generated evaluator rule counts.
+Every raw input reaches `FormulaVariableSlotBound + 1 + FormulaTokensPerClause`, and direct lookup
+there is proved to return `Sep`, the start of the second clause. The recursive schedule specification
+agrees throughout the no-emission run and at that next separator step. Exact compiled execution is
+bounded by a verifier-fixed external input-size polynomial; malformed countdown scratch/root states,
+the unlaunched predecessor endpoint, and one-step-short total fuel remain timeout. This is the exact
+remaining first-clause padding block and second-clause boundary, not a general dynamic raw formula
+cursor or arbitrary schedule decoder. No second-clause emission, remaining body, complete builder,
+construction-runtime `RawRefinement`, or concrete `PolynomialReduction` is present.
 
 The current four project-specific axioms remain visible as an independent inventory:
 

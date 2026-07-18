@@ -32,9 +32,10 @@ from current theorem status.
   136-declaration direct formula cursor, the 39-declaration literal input-length tally machine, the
   40-declaration executable framer-to-tally prefix, the 68-declaration standalone four-token
   appender, the 37-declaration composed first-token prefix, the 74-declaration unary polynomial
-  evaluator, the 83-declaration complete-header composition, the 60-declaration body-start
+  evaluator, the 84-declaration complete-header composition, the 60-declaration body-start
   composition, the 74-declaration first-literal composition, the combined 80-declaration
-  first-clause audit, the 45-declaration literal token-cursor padding step, and their
+  first-clause audit, the 45-declaration literal token-cursor padding step, the combined
+  84-declaration first-clause remaining-padding run, and their
   empty/one-bit/odd/even
   regression instantiations. The appender checks all four state-selected token traces and its local
   `24*n + 48` first-token raw bound. The composed audit checks the exact 184-rule table, disjoint
@@ -48,6 +49,10 @@ from current theorem status.
   45-rule suffix table, total launch, first valid-padding outcome, unchanged first-clause output,
   advancement from `FormulaVariableSlotBound + 12` to `+ 13`, external compiled bound, malformed
   scratch timeout, and one-step-short total timeout without claiming a complete cursor loop.
+  The remaining-padding audit additionally checks the fixed 25-rule loop, three total launches,
+  exact input-dependent padding count, no-emission specification traversal, second-clause `Sep`
+  target, external polynomial bound, malformed countdown timeouts, and one-step-short total timeout
+  without claiming a general dynamic cursor.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual

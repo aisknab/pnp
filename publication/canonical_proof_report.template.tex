@@ -60,11 +60,12 @@
   kernel, and the Cook--Levin formula has an exact externally sized answer-independent slot
   schedule plus direct fuelled bit and token specification cursors. A literal finite builder emits
   \code{FormulaWidth} copies of \code{T} followed by \code{F}, \code{Sep}, and the complete positive
-  clause on variables zero, one, and two. It then executes one fixed 45-rule padding-coordinate
-  transition, preserving those bits while advancing the retained unary token coordinate from twelve
-  to thirteen past the variable-slot bound. The consumed direct slot is proved to be valid padding,
-  and an external polynomial bounds the compiled run. A general dynamic cursor loop, arbitrary raw
-  slot decoder, and remaining formula body are not implemented, so there is no complete raw
+  clause on variables zero, one, and two. It then executes the first padding transition and the
+  entire remaining first-clause padding run, preserving those bits while reaching the exact start
+  coordinate of the second clause. Every traversed direct slot is proved to be padding, the next
+  direct outcome is proved to be \code{Sep}, and an external polynomial bounds the compiled run. A
+  general dynamic formula cursor, arbitrary raw slot decoder, and remaining formula body are not
+  implemented, so there is no complete raw
   polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation fingerprints
   are unset, no root theorem exists, and the abstract string-handle bridge is never an activation source.
   \vspace{0.3cm}
@@ -207,6 +208,18 @@ Including launch, the suffix costs exactly \code{2*cursorWord.length + 8} work s
 run is bounded by \code{FirstClausePrefix.rawTimeBound + 48 + 12*cursorWord.length}. Malformed
 scratch, the unlaunched predecessor endpoint, and one-step-short total fuel remain timeout. This is
 one fixed padding transition, not a general cursor loop or arbitrary schedule decoder.
+
+The remaining-padding composition continues from that one-step endpoint with two structurally
+generated unary evaluators and one fixed 25-rule countdown controller. Writing
+\code{D = (FormulaVariableSlotBound - 1) * (FormulaVariableSlotBound + 6)}, its literal table has
+exactly 1244 plus the six inherited and generated evaluator rule counts. Every raw input traverses
+all \code{D} remaining first-clause padding coordinates without emitting a token and reaches
+\code{FormulaVariableSlotBound + 1 + FormulaTokensPerClause}. Direct lookup at that coordinate is
+proved to return \code{Sep}, and the recursive specification run agrees across every no-emission
+step and the following separator observation. The exact compiled run has a verifier-fixed external
+input-size polynomial bound; malformed countdown scratch/root states, the unlaunched endpoint, and
+one-step-short fuel remain timeout. This identifies the second-clause boundary but does not emit the
+second clause or implement a general formula cursor.
 
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
