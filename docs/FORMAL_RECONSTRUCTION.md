@@ -259,8 +259,9 @@ moves the retained unary coordinate from `FormulaVariableSlotBound + 12` to
 so the token-level specification cursor advances without emitting a token. The cursor suffix takes
 exactly `2*cursorWord.length + 8` work steps including the launch, and the full compiled run is
 bounded by `FirstClausePrefix.rawTimeBound + 48 + 12*cursorWord.length`. Malformed cursor scratch,
-the unlaunched predecessor endpoint, and one-step-short total fuel remain timeout. All 45 public
-declarations use only the approved Lean-standard closure.
+the unlaunched predecessor endpoint, and one-step-short total fuel remain timeout. All 47 public
+declarations, including two reviewed dead-state dispatch facts for downstream composition, use only
+the approved Lean-standard closure.
 
 The first-clause-padding-run milestone continues from that one-step endpoint. It evaluates the exact
 remaining count `(FormulaVariableSlotBound - 1) * (FormulaVariableSlotBound + 6)`, consumes it with
@@ -271,9 +272,20 @@ has `1244` plus six unary-evaluator rule counts and is bounded by an external po
 evaluators, three launches, and the quadratic countdown. The 83 new declarations plus one predecessor
 controller interface use only the approved Lean-standard closure.
 
-This earns one complete traversal of the remaining padding block in the first clause rectangle. It is
-not a general dynamic cursor or an arbitrary raw slot decoder: no machine emits the second clause or remaining
-formula body, composes a complete raw formula builder with a construction-runtime proof, or packages
+The second-clause-separator milestone then composes that endpoint with a selected 59-rule `Sep`
+appender, two total nine-symbol bridges, and the same fixed 45-rule cursor advance. Its literal table
+has `1366` plus six unary-evaluator rule counts. Every raw input emits the canonical prefix through
+the separator beginning clause two, advances the retained unary coordinate by one, and proves that
+the following direct token is `F`; the emitted bits are exactly
+`encodedFormula.take (2 * (FormulaWidth + 13))`. Its external compiled bound is the predecessor
+bound plus `246 + 24*n + 12*FormulaWidth + 12*cursorWord.length`. The combined 56-declaration audit
+has 15 empty closures, 11 using only `propext`, and 30 using only `propext` and `Quot.sound`.
+Malformed appender tally/output, malformed cursor scratch, both unlaunched endpoints, and
+one-step-short total fuel remain timeout.
+
+This earns one exact populated transition at the start of clause two. It is not a general dynamic
+cursor or an arbitrary raw slot decoder: no machine emits the following `F` or remaining formula
+body, composes a complete raw formula builder with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,
 residual-band minimizer, ZeroSlack, the remaining end-to-end polynomial bounds, and the root

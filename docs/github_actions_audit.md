@@ -52,7 +52,11 @@ from current theorem status.
   The remaining-padding audit additionally checks the fixed 25-rule loop, three total launches,
   exact input-dependent padding count, no-emission specification traversal, second-clause `Sep`
   target, external polynomial bound, malformed countdown timeouts, and one-step-short total timeout
-  without claiming a general dynamic cursor.
+  without claiming a general dynamic cursor. The second-clause-separator audit then checks the
+  selected 59-rule `Sep` appender, both total launches, the fixed cursor suffix, exact canonical
+  prefix through clause two's separator, retained following-`F` coordinate, external polynomial,
+  malformed appender/cursor phases, both unlaunched endpoints, and one-step-short timeout. Its exact
+  56-line closure split is 15 empty, 11 `propext`, and 30 `propext`/`Quot.sound` declarations.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual
