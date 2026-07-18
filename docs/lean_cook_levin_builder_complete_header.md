@@ -123,9 +123,10 @@ lake env lean -DwarningAsError=true \
   lean-audit/PNPConcreteCookLevinBuilderCompleteHeaderAxiomAudit.lean
 ```
 
-Every declaration closes over only the approved Lean-standard axioms
-`propext` and `Quot.sound`; no declaration reaches `Classical.choice`, a
-project axiom, `sorryAx`, or an unaudited assumption.
+The unary audit covers 74 declarations. The complete-header audit covers all
+84 current declarations: 43 have empty closure, six use only `propext`, and
+35 use only `propext` and `Quot.sound`. No declaration reaches
+`Classical.choice`, a project axiom, `sorryAx`, or an unaudited assumption.
 
 The regression module covers empty, one-bit zero/one, odd-length, even-length,
 all-zero, and all-one inputs; exact controller zero/successor traces; concrete

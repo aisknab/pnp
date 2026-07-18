@@ -292,6 +292,26 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /1192 plus the four inherited unary-evaluator rule counts/u);
   assert.match(byId.get('concrete-cook-levin-builder-dynamic-token-cursor-step').nonClaim,
     /not a general dynamic cursor loop/u);
+  assert.equal(byId.get('concrete-cook-levin-builder-first-clause-padding-run').status,
+    'formalized-foundation-only');
+  assert.equal(byId.get('concrete-cook-levin-builder-first-clause-padding-run').earned, true);
+  assert.equal(byId.get('concrete-cook-levin-builder-first-clause-padding-run')
+    .allAssumptionFree, false);
+  assert.equal(byId.get('concrete-cook-levin-builder-first-clause-padding-run')
+    .axiomClosureUsesOnlyLeanStandardAllowlist, true);
+  assert.equal(byId.get('concrete-cook-levin-builder-first-clause-padding-run')
+    .requiredTheorems.includes(
+      'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.workRunExact'), true);
+  assert.equal(byId.get('concrete-cook-levin-builder-first-clause-padding-run')
+    .requiredTheorems.includes(
+      'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.specification_padding_run'), true);
+  assert.equal(byId.get('concrete-cook-levin-builder-first-clause-padding-run')
+    .requiredTheorems.includes(
+      'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.secondClauseStart_direct_eq_sep'), true);
+  assert.match(byId.get('concrete-cook-levin-builder-first-clause-padding-run').scope,
+    /1244 plus the six inherited and generated evaluator rule counts/u);
+  assert.match(byId.get('concrete-cook-levin-builder-first-clause-padding-run').nonClaim,
+    /not a general dynamic formula cursor/u);
   assert.equal(byId.get('concrete-cnf-universal-verifier').requiredTheorems.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP'), true);
   assert.match(byId.get('concrete-cnf-universal-verifier').nonClaim,
@@ -312,17 +332,17 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   ]) assert.equal(byId.get(id).status, 'not-formalized');
 });
 
-test('publication consumes the reviewed token-cursor-step map and inventory counts', async () => {
+test('publication consumes the reviewed first-clause-padding-run map and inventory counts', async () => {
   const [status, mapText] = await Promise.all([
     status0(),
     readFile(new URL('../publication/FORMAL_PUBLICATION_MAP.json', import.meta.url), 'utf8'),
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '4ce7a7492e6f88b8d600c6b7b5038e65e5acf3ea758d69dab9c6dbc881245d12');
+    '47c2d99df4c8da006f9327c4934c3b3b18bec1df58ad51ec7b6e9414218f86a2');
   assert.equal(map.milestoneSourceClosureSha256,
-    '0aed80fa88615185f184b0f905b69fa17f8769ff8adae28db0e210731e811b66');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 585);
+    'd7acbdace52e522810a2afb22915c9226f16363ebaec721646fda7ab4d3a3c06');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 633);
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.PipelineCompiler.pipeline_correct'
   ], 'string');
@@ -398,6 +418,12 @@ test('publication consumes the reviewed token-cursor-step map and inventory coun
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.run_compile_rawTimeBound'
   ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.workRunExact'
+  ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.specification_padding_run'
+  ], 'string');
   assert.deepEqual([
     map.gate.expectedConcreteTargetKernelTypeSha256,
     map.gate.expectedConcreteTargetKernelValueSha256,
@@ -411,7 +437,7 @@ test('publication consumes the reviewed token-cursor-step map and inventory coun
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [7845, 3788, 2886, 2380, 71]);
+  ], [8006, 3903, 2921, 2444, 72]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
@@ -424,6 +450,8 @@ test('canonical report source is current and the committed PDF artifact exists',
   assert.match(tex, /complete positive at-least-one shape clause on variables zero,\s+one, and two/u);
   assert.match(tex, /One literal token-cursor step continues from that first-clause endpoint/u);
   assert.match(tex, /not a general cursor loop or arbitrary schedule decoder/u);
+  assert.match(tex, /The remaining-padding composition continues from that one-step endpoint/u);
+  assert.match(tex, /Direct lookup at that coordinate is\s+proved to return \\code\{Sep\}/u);
   assert.equal(tex.includes('It does not compute the remaining header or complete formula'), false);
   assert.ok(tex.includes(status.leanTheoremInventorySha256));
   assert.ok(tex.includes(status.coordinate.replaceAll('_', '\\_')) || tex.includes(status.coordinate));

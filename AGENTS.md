@@ -2,6 +2,24 @@
 
 These instructions apply to the whole repository.
 
+## Remote Builder Policy
+
+The local workstation is memory-constrained. Treat it as an edit-and-inspection
+host, not as a build host.
+
+- Run full or clean Lean builds, Lean regression/axiom audits, `npm test`, broad
+  repository checks, report/PDF generation, and clean-clone reproduction on the
+  configured SSH host alias `pnpbuilder`.
+- Use the `pnp-builder` account's user-level `systemd-run` resource limits for
+  remote jobs. Do not bypass those limits for a large verification command.
+- Never silently fall back to a heavyweight local command when the remote builder
+  is unavailable. Stop and report the connection problem instead.
+- Local commands should be limited to source edits and lightweight inspection,
+  such as `rg`, `sed`, `git diff`, `git status`, and targeted syntax checks that
+  cannot consume substantial memory.
+- Keep host, proxy, key, and network details in the user's SSH configuration;
+  do not copy private connection data into this repository.
+
 ## GitHub Actions Policy
 
 Do not create temporary self-mutating GitHub Actions workflows.

@@ -81,7 +81,8 @@ const HEADER_HEADS = Object.freeze([
   ['theorem', 'machine_acceptState_ne_rejectState'],
   ['def', 'outsideBefore'], ['def', 'outsideAfter'], ['def', 'steps'],
   ['def', 'initialConfiguration'], ['def', 'finalConfiguration'],
-  ['theorem', 'workRunExact'], ['def', 'prefixState'],
+  ['theorem', 'workRunExact'],
+  ['theorem', 'workRunExact_of_unit_or_separator'], ['def', 'prefixState'],
   ['def', 'evaluatorState'], ['def', 'controllerState'],
   ['def', 'tAppenderState'], ['def', 'fAppenderState'],
   ['theorem', 'prefixState_injective'],
@@ -263,11 +264,11 @@ test('kernel transcripts cover every public declaration exactly once', async () 
     text0(UNARY_AUDIT), text0(HEADER_AUDIT),
   ]);
   assert.equal(UNARY_HEADS.length, 74);
-  assert.equal(HEADER_HEADS.length, 83);
+  assert.equal(HEADER_HEADS.length, 84);
   assert.equal(printed0(unaryAudit).length, 74);
   assert.equal(new Set(printed0(unaryAudit)).size, 74);
-  assert.equal(printed0(headerAudit).length, 83);
-  assert.equal(new Set(printed0(headerAudit)).size, 83);
+  assert.equal(printed0(headerAudit).length, 84);
+  assert.equal(new Set(printed0(headerAudit)).size, 84);
   assert.deepEqual(imports0(unaryAudit), ['PNP']);
   assert.deepEqual(imports0(headerAudit), ['PNP']);
   assert.ok(printed0(unaryAudit).every((name) =>

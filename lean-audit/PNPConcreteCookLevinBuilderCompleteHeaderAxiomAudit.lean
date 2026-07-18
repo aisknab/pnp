@@ -25,6 +25,7 @@ import PNP
 #print axioms PNP.Concrete.CookLevin.BuilderCompleteHeader.HeaderController.initialConfiguration
 #print axioms PNP.Concrete.CookLevin.BuilderCompleteHeader.HeaderController.finalConfiguration
 #print axioms PNP.Concrete.CookLevin.BuilderCompleteHeader.HeaderController.workRunExact
+#print axioms PNP.Concrete.CookLevin.BuilderCompleteHeader.HeaderController.workRunExact_of_unit_or_separator
 #print axioms PNP.Concrete.CookLevin.BuilderCompleteHeader.prefixState
 #print axioms PNP.Concrete.CookLevin.BuilderCompleteHeader.evaluatorState
 #print axioms PNP.Concrete.CookLevin.BuilderCompleteHeader.controllerState
