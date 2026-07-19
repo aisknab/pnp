@@ -344,9 +344,22 @@ both direct and specification cursors that the following token is `F`. The outpu
 and `Quot.sound`. Malformed appender tally/output, malformed cursor scratch, both unlaunched
 endpoints, and one-step-short fuel remain fail-closed.
 
+The third-clause-first-literal milestone then reuses the audited 235-rule two-`F` appender/cursor
+suffix behind one total symbol-preserving bridge. The resulting literal table has `2516` plus the
+eight inherited unary-evaluator rule counts. Every raw input emits the negative sign and unary-zero
+terminator at coordinates `V + 1 + 2 * formulaTokensPerClause + 1` and `+ 2`, then retains
+coordinate `+ 3`. Constructive schedule proofs identify the third excluded pair as variables zero
+and two, the emitted sign and terminator as `F`, and the retained variable-two sign as `F`. The
+output bits are exactly `encodedFormula.take (2 * (FormulaWidth + 22))`; the external compiled
+bound adds `732 + 48*n + 24*FormulaWidth + 24*cursorWord.length` to the separator bound. The
+combined 87-declaration audit has 25 empty closures, 18 using only `propext`, and 44 using only
+`propext` and `Quot.sound`. Malformed tally/output in both appenders, malformed scratch in both
+cursors, all four unlaunched endpoints, and one-step-short fuel remain fail-closed.
+
 This earns the complete second clause, traverses its remaining padding, and emits clause three's
-opening separator. It is not a general dynamic cursor or an arbitrary raw slot decoder: no machine
-emits the following `F` or the remaining formula body, composes a complete raw formula builder
+opening separator and complete negative literal on variable zero. It is not a general dynamic
+cursor or an arbitrary raw slot decoder: no machine emits the following negative-sign `F`,
+completes clause three, or emits the remaining formula body, composes a complete raw formula builder
 with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,
