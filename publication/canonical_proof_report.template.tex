@@ -62,10 +62,11 @@
   \code{FormulaWidth} copies of \code{T} followed by \code{F}, \code{Sep}, and the complete positive
   clause on variables zero, one, and two. It then executes the first padding transition and the
   entire remaining first-clause padding run, then emits the complete second clause
-  \code{Sep F F F T F Finish}, traverses the entire remaining clause-two padding block, and retains
-  clause three's opening \code{Sep} coordinate. Every traversed
+  \code{Sep F F F T F Finish}, traverses the entire remaining clause-two padding block, and then
+  emits clause three's opening \code{Sep} and complete negative literal \code{F F} on variable
+  zero, retaining the next negative-sign coordinate on variable two. Every traversed
   padding slot and emitted populated slot has a direct schedule proof, the emitted bits are the exact
-  canonical prefix, and an external polynomial bounds the compiled run. The third-clause separator,
+  canonical prefix, and an external polynomial bounds the compiled run. The rest of clause three,
   a general dynamic formula cursor, arbitrary raw slot decoder, and the remaining formula body are not
   implemented, so there is no complete raw
   polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation fingerprints
@@ -272,6 +273,19 @@ following direct token is \code{F}. The emitted bits equal
 56-line audit has 14 empty, 11 \code{propext}, and 31
 \code{propext}/\code{Quot.sound} closures. This emits one fixed separator but does not emit the
 following \code{F}, complete clause three, or implement a general formula cursor.
+
+The third-clause-first-literal composition reuses the audited 235-rule two-\code{F}
+appender/cursor suffix behind one total bridge. Its global table has exactly 2516 plus the eight
+inherited evaluator rule counts. Every raw input emits the complete negative literal on variable
+zero in clause three and retains
+\code{V + 1 + 2 * formulaTokensPerClause + 3}, the negative-sign coordinate on variable two.
+Constructive schedule proofs identify the third excluded pair as zero and two and prove that the
+emitted sign, unary-zero terminator, and retained sign are all \code{F}. The emitted bits equal
+\code{encodedFormula.take (2 * (FormulaWidth + 22))}. Its external bound adds
+\code{732 + 48*n + 24*FormulaWidth + 24*cursorWord.length} to the separator bound. The exact
+87-line audit has 24 empty, 18 \code{propext}, and 45
+\code{propext}/\code{Quot.sound} closures. This emits one fixed literal but does not emit the next
+negative sign, complete clause three, or implement a general formula cursor.
 
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}

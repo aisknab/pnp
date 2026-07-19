@@ -87,6 +87,14 @@ from current theorem status.
   and one-step-short timeout. Its exact 56-line closure split is 14 empty, 11 `propext`, and 31
   `propext`/`Quot.sound` declarations; it does not emit that `F` or claim a general cursor or
   complete formula builder.
+  The third-clause-first-literal audit checks reuse of the complete 235-rule two-`F`
+  appender/cursor suffix behind one total bridge, all four internal launches, the symbolic
+  2516-rule global base, the exact canonical prefix through negative variable zero in clause
+  three, constructive identification of excluded pair `(0,2)`, the direct `F` sign, terminator,
+  and following-sign outcomes, the external polynomial, every malformed appender/cursor copy,
+  all four unlaunched endpoints, and one-step-short timeout. Its exact 87-line closure split is
+  24 empty, 18 `propext`, and 45 `propext`/`Quot.sound` declarations; it does not emit that next
+  `F`, complete clause three, or claim a general cursor or complete formula builder.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual
