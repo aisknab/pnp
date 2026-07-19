@@ -129,10 +129,10 @@ node --test \
 
 The combined audit covers all 48 public declarations in the new module plus
 eight reviewed interfaces reused from the separator/cursor suffix and its
-dead-state boundary. Every closure is restricted to the approved Lean-standard
-allowlist. No declaration reaches a project axiom, `Classical.choice`, `sorry`,
-`admit`, SAT/minimization code, host-side composition, or a caller-supplied
-execution certificate.
+dead-state boundary. Exactly 14 closures are empty, 11 use only `propext`, and
+31 use only `propext` and `Quot.sound`. No declaration reaches a project axiom,
+`Classical.choice`, `sorry`, `admit`, SAT/minimization code, host-side
+composition, or a caller-supplied execution certificate.
 
 ## Generated publication artifacts
 
