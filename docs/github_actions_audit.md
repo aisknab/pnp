@@ -80,7 +80,13 @@ from current theorem status.
   unchanged canonical output, the external polynomial, malformed countdown phases, the unlaunched
   predecessor endpoint, and one-step-short timeout. Its exact 68-line closure split is 26 empty, 9
   `propext`, and 33 `propext`/`Quot.sound` declarations; it does not emit clause three or claim a
-  general cursor or complete formula builder.
+  general cursor or complete formula builder. The third-clause-separator audit checks reuse of the
+  selected 59-rule `Sep` appender and fixed 45-rule cursor table, both total launches, the symbolic
+  2272-rule global base, the exact canonical prefix through the third clause's opening separator,
+  the following direct `F`, the external polynomial, malformed phases, both unlaunched endpoints,
+  and one-step-short timeout. Its exact 56-line closure split is 14 empty, 11 `propext`, and 31
+  `propext`/`Quot.sound` declarations; it does not emit that `F` or claim a general cursor or
+  complete formula builder.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual

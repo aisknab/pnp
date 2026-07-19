@@ -333,9 +333,20 @@ empty closures, 9 using only `propext`, and 33 using only `propext` and `Quot.so
 countdown scratch/root phases, the unlaunched predecessor endpoint, and one-step-short total fuel
 remain fail-closed.
 
-This earns the complete second clause, traverses its remaining padding, and retains clause three's
-opening schedule coordinate. It is not a general dynamic cursor or an arbitrary raw slot decoder:
-no machine emits that `Sep` or the remaining formula body, composes a complete raw formula builder
+The third-clause-separator milestone then reuses the audited selected 59-rule `Sep` appender and
+45-rule cursor advance behind one new total bridge. The resulting literal table has `2272` plus
+the eight inherited unary-evaluator rule counts. Every raw input emits the separator at
+`V + 1 + 2 * formulaTokensPerClause`, advances the retained coordinate to `+ 1`, and proves by
+both direct and specification cursors that the following token is `F`. The output bits are exactly
+`encodedFormula.take (2 * (FormulaWidth + 20))`; the external compiled bound adds
+`330 + 24*n + 12*FormulaWidth + 12*cursorWord.length` to the predecessor bound. The combined
+56-declaration audit has 14 empty closures, 11 using only `propext`, and 31 using only `propext`
+and `Quot.sound`. Malformed appender tally/output, malformed cursor scratch, both unlaunched
+endpoints, and one-step-short fuel remain fail-closed.
+
+This earns the complete second clause, traverses its remaining padding, and emits clause three's
+opening separator. It is not a general dynamic cursor or an arbitrary raw slot decoder: no machine
+emits the following `F` or the remaining formula body, composes a complete raw formula builder
 with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,
