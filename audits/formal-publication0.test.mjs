@@ -674,6 +674,9 @@ test('canonical report source is current and the committed PDF artifact exists',
   assert.match(tex, /complete second clause/u);
   assert.match(tex, /second-clause-padding composition evaluates/u);
   assert.match(tex, /retained coordinate is the third clause's opening/u);
+  assert.match(tex, /third-clause-separator composition reuses the selected 59-rule/u);
+  assert.match(tex, /emits the separator beginning clause three/u);
+  assert.match(tex, /does not emit the\s+following \\code\{F\}/u);
   assert.equal(tex.includes('It does not compute the remaining header or complete formula'), false);
   assert.ok(tex.includes(status.leanTheoremInventorySha256));
   assert.ok(tex.includes(status.coordinate.replaceAll('_', '\\_')) || tex.includes(status.coordinate));

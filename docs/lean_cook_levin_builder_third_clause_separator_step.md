@@ -136,10 +136,30 @@ composition, or a caller-supplied execution certificate.
 
 ## Generated publication artifacts
 
-The theorem inventory, publication map, reconstruction status, canonical TeX,
-PDF, and report metadata are regenerated mechanically after the kernel audit.
-Their resulting coordinates, byte counts, page count, and SHA-256 identities
-are recorded here as part of the reviewed publication diff.
+The compiled environment records inventory coordinate
+`PNP-LEAN-THEOREM-INVENTORY-2026-07-19-58`, 8,680 declarations, 4,425
+theorems, 3,043 assumption-free theorems, 78 source-closure modules, and 912
+reviewed milestone candidates. Its canonical byte SHA-256 is
+`9db4fc68c45e470777c5607c0ea1440e86c59b1222d7e2d62f2898b3d424c8e7`;
+the Lean source-closure SHA-256 is
+`c34dec0242ed84b5f915166a55ee1183dd0450cee9445b8dd0a8721c765facaf`.
+
+Publication map coordinate `PNP-FORMAL-PUBLICATION-MAP-2026-07-19-58` has
+38 milestones. Its exact file SHA-256 is
+`daddcdf827fd1b1643995ddbd8b2e449a1608a2e6f73444f3b945a78b5ad6f40`,
+and its canonical reviewed-object fingerprint is
+`6790039daf44d45b6cae9351964e4ac1a2de635b76a71504afcc387630123747`.
+All activation fingerprints remain unset and the publication gate remains
+false.
+
+Status coordinate `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-19-58` has
+SHA-256 `146bbf914afe66256f6573dcc59a8cdfe825420f7cb021829f55708ab64a48ad`.
+The generated canonical report coordinate is
+`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-19-58`; its 71,742-byte
+TeX SHA-256 is
+`d15fab89c2bf172de01f4bb69ec6a804450d755d1a6a9b274df1dafd8ec5cc16`
+and its 33-page, 328,449-byte PDF SHA-256 is
+`24d577e14345f5e4aee7c2d84a560a3eb3bb652a6d9e50feb15bc0adaa182a43`.
 
 ## Remaining boundary
 
