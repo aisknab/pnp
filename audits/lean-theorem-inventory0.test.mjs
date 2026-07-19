@@ -90,7 +90,7 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
   assert.equal(inventory.theoremCount, 4425);
   assert.equal(inventory.assumptionFreeTheoremCount, 3043);
   assert.equal(inventory.axiomCount, 4);
-  assert.equal(inventory.sourceClosureModuleCount, 77);
+  assert.equal(inventory.sourceClosureModuleCount, 78);
   assert.deepEqual(inventory.declarationKindCounts, {
     axiom: 4,
     constructor: 303,
@@ -335,7 +335,7 @@ test('same-name theorem type weakening and source-closure drift revoke milestone
     inventoryBytes,
     map.milestoneSourceClosureSha256,
   );
-  assert.equal(current.milestones.filter((entry) => entry.earned).length, 34);
+  assert.equal(current.milestones.filter((entry) => entry.earned).length, 35);
   const tableauSemantics = current.milestones.find(
     (entry) => entry.id === 'concrete-cook-levin-tableau-cnf-semantics',
   );
@@ -416,7 +416,7 @@ test('project, unknown, and sorry axioms cannot pass the fixed standard-axiom cl
   }
 });
 
-test('publication map cannot set fingerprints or expand the axiom allowlist in release 57', async () => {
+test('publication map cannot set fingerprints or expand the axiom allowlist in release 58', async () => {
   const { inventoryBytes, inventory, map } = await fixture0();
   const fingerprinted = structuredClone(map);
   fingerprinted.gate.expectedRootKernelTypeSha256 = 'a'.repeat(64);
