@@ -62,11 +62,11 @@
   \code{FormulaWidth} copies of \code{T} followed by \code{F}, \code{Sep}, and the complete positive
   clause on variables zero, one, and two. It then executes the first padding transition and the
   entire remaining first-clause padding run, then emits the complete second clause
-  \code{Sep F F F T F Finish} and retains its first in-range padding coordinate. Every traversed
+  \code{Sep F F F T F Finish}, traverses the entire remaining clause-two padding block, and retains
+  clause three's opening \code{Sep} coordinate. Every traversed
   padding slot and emitted populated slot has a direct schedule proof, the emitted bits are the exact
-  canonical prefix, and an external polynomial bounds the compiled run. Clause-two padding
-  traversal, clause three, a general dynamic formula cursor, arbitrary raw slot decoder, and the
-  remaining formula body are not
+  canonical prefix, and an external polynomial bounds the compiled run. The third-clause separator,
+  a general dynamic formula cursor, arbitrary raw slot decoder, and the remaining formula body are not
   implemented, so there is no complete raw
   polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation fingerprints
   are unset, no root theorem exists, and the abstract string-handle bridge is never an activation source.
@@ -248,7 +248,19 @@ executed coordinate is the clause terminator and the retained next coordinate is
 The new external raw bound is the predecessor bound plus
 \code{390 + 24*n + 12*FormulaWidth + 12*cursorWord.length}. The exact 57-line audit has 15 empty,
 10 \code{propext}, and 32 \code{propext}/\code{Quot.sound} closures. This completes clause two but
-does not traverse its padding or implement a general formula cursor.
+does not by itself traverse its padding or implement a general formula cursor.
+
+The second-clause-padding composition evaluates
+\code{D = (V - 1) * (V + 6) + 5}. With \code{C} abbreviating
+\code{formulaTokensPerClause}, Lean proves \code{D = C - 7}, traverses exactly those remaining
+padding opportunities with the reused 25-rule countdown, and evaluates the target coordinate.
+Three total bridges and two fixed unary evaluators yield a global table with exactly 2150 plus the
+six inherited/generated evaluator counts and the two new evaluator counts. Every raw input reaches
+\code{V + 1 + 2 * formulaTokensPerClause}; every traversed coordinate is direct padding and the
+retained coordinate is the third clause's opening \code{Sep}. No token is emitted, so the bits
+remain \code{encodedFormula.take (2 * (FormulaWidth + 19))}. The exact 68-line audit has 26 empty,
+9 \code{propext}, and 33 \code{propext}/\code{Quot.sound} closures. This reaches clause three only
+as a retained coordinate; it does not emit the separator or implement a general formula cursor.
 
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}

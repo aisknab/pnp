@@ -73,7 +73,14 @@ from current theorem status.
   execution, the retained first padding coordinate, the external polynomial, malformed phases,
   both unlaunched endpoints, and one-step-short timeout. Its exact 57-line closure split is 15
   empty, 10 `propext`, and 32 `propext`/`Quot.sound` declarations; it does not traverse clause-two
-  padding or claim a general cursor or complete formula builder.
+  padding or claim a general cursor or complete formula builder. The second-clause-padding audit
+  checks both fixed unary evaluators, all three total `WorkChain` bridges, reuse rather than
+  duplication of the 25-rule countdown, the symbolic 2150-rule global base, the exact `C - 7`
+  positive count, every direct padding opportunity, the retained third-clause `Sep` coordinate,
+  unchanged canonical output, the external polynomial, malformed countdown phases, the unlaunched
+  predecessor endpoint, and one-step-short timeout. Its exact 68-line closure split is 26 empty, 9
+  `propext`, and 33 `propext`/`Quot.sound` declarations; it does not emit clause three or claim a
+  general cursor or complete formula builder.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual
