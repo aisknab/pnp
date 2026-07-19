@@ -352,7 +352,7 @@ coordinate `+ 3`. Constructive schedule proofs identify the third excluded pair 
 and two, the emitted sign and terminator as `F`, and the retained variable-two sign as `F`. The
 output bits are exactly `encodedFormula.take (2 * (FormulaWidth + 22))`; the external compiled
 bound adds `732 + 48*n + 24*FormulaWidth + 24*cursorWord.length` to the separator bound. The
-combined 87-declaration audit has 25 empty closures, 18 using only `propext`, and 44 using only
+combined 87-declaration audit has 24 empty closures, 18 using only `propext`, and 45 using only
 `propext` and `Quot.sound`. Malformed tally/output in both appenders, malformed scratch in both
 cursors, all four unlaunched endpoints, and one-step-short fuel remain fail-closed.
 

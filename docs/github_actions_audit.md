@@ -93,7 +93,7 @@ from current theorem status.
   three, constructive identification of excluded pair `(0,2)`, the direct `F` sign, terminator,
   and following-sign outcomes, the external polynomial, every malformed appender/cursor copy,
   all four unlaunched endpoints, and one-step-short timeout. Its exact 87-line closure split is
-  25 empty, 18 `propext`, and 44 `propext`/`Quot.sound` declarations; it does not emit that next
+  24 empty, 18 `propext`, and 45 `propext`/`Quot.sound` declarations; it does not emit that next
   `F`, complete clause three, or claim a general cursor or complete formula builder.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five

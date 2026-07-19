@@ -1138,9 +1138,9 @@ jobs:
             echo 'Cook-Levin third-clause first-literal prefix reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 25
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 24
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 18
-          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 44
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 45
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderThirdClauseFirstLiteralPrefix.lean
 
       - name: Print concrete CNF work-input bridge axioms

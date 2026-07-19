@@ -554,7 +554,7 @@ test('publication consumes the reviewed third-clause first-literal map and inven
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '054bb1f0d98730b7cc744fc4a47f43eb4e37a07c16ca26f7676a5eaa4bfb55a6');
+    'b2dd901f9aceb87ffcb977548b3a9e27947a1780cfbd2ee0000e5e607f9e3c85');
   assert.equal(map.milestoneSourceClosureSha256,
     '49d0e1f95d163c3ae68ba9e8e8234bf8af77f67e7f692b41f292dfceba3a0eb3');
   assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 960);
