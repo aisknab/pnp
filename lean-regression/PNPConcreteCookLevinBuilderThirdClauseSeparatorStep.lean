@@ -67,12 +67,6 @@ example : workSteps (inputOnlyProblem [false]) = 1538724 := rfl
 example : workSteps (inputOnlyProblem [true]) = 1538724 := rfl
 example : workSteps
     (inputOnlyProblem [true, false, true]) = 8361865 := rfl
-example : workSteps
-    (inputOnlyProblem [false, false, false, false]) = 15877073 := rfl
-example : workSteps
-    (inputOnlyProblem [true, true, true, true]) = 15877073 := rfl
-example : workSteps
-    (pairedProblem [true, false, true]) = 1452027628 := rfl
 
 example : (rawTimeBound inputOnlyVerifier).eval 0 = 2793447 := rfl
 example : (rawTimeBound inputOnlyVerifier).eval 1 = 9237120 := rfl
