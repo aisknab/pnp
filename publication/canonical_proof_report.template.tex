@@ -262,6 +262,17 @@ remain \code{encodedFormula.take (2 * (FormulaWidth + 19))}. The exact 68-line a
 9 \code{propext}, and 33 \code{propext}/\code{Quot.sound} closures. This reaches clause three only
 as a retained coordinate; it does not emit the separator or implement a general formula cursor.
 
+The third-clause-separator composition reuses the selected 59-rule \code{Sep} appender and fixed
+45-rule cursor advance behind one new total bridge. Its global table has exactly 2272 plus the
+eight inherited evaluator rule counts. Every raw input emits the separator beginning clause three,
+advances the retained coordinate to \code{V + 1 + 2 * formulaTokensPerClause + 1}, and proves the
+following direct token is \code{F}. The emitted bits equal
+\code{encodedFormula.take (2 * (FormulaWidth + 20))}. Its external bound adds
+\code{330 + 24*n + 12*FormulaWidth + 12*cursorWord.length} to the predecessor bound. The exact
+56-line audit has 14 empty, 11 \code{propext}, and 31
+\code{propext}/\code{Quot.sound} closures. This emits one fixed separator but does not emit the
+following \code{F}, complete clause three, or implement a general formula cursor.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule
