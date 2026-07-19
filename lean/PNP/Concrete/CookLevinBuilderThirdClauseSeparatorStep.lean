@@ -1110,7 +1110,7 @@ private theorem machine_isHalted_predecessor_false {language : Language}
       BuilderSecondClauseSeparatorStep.SeparatorCursor.machine config
   simpa [machine] using hHalted
 
-/-- The complete first-clause padding endpoint is still globally nonhalting
+/-- The complete second-clause padding endpoint is still globally nonhalting
 until the outer bridge launches the selected separator appender. -/
 theorem prefixEndpoint_before_launch_timeout {language : Language}
     (problem : VerifierTableauProblem language) :
