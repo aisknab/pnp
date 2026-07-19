@@ -527,6 +527,42 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   assert.match(byId.get(
     'concrete-cook-levin-builder-third-clause-first-literal-prefix').nonClaim,
     /does not emit that following F/u);
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-third-clause-second-literal-prefix').status,
+    'formalized-foundation-only');
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-third-clause-second-literal-prefix').earned, true);
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-third-clause-second-literal-prefix')
+    .allAssumptionFree, false);
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-third-clause-second-literal-prefix')
+    .axiomClosureUsesOnlyLeanStandardAllowlist, true);
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-third-clause-second-literal-prefix')
+    .requiredTheorems.length, 92);
+  for (const theorem of [
+    'PNP.Concrete.CookLevin.BuilderThirdClauseSecondLiteralPrefix.SecondLiteralSuffix.rules_length',
+    'PNP.Concrete.CookLevin.BuilderThirdClauseSecondLiteralPrefix.workRunExact',
+    'PNP.Concrete.CookLevin.BuilderThirdClauseSecondLiteralPrefix.finalTokenBits_eq_encodedFormula_thirdClauseSecondLiteral',
+    'PNP.Concrete.CookLevin.BuilderThirdClauseSecondLiteralPrefix.secondLiteralSignSlot_direct_eq_f',
+    'PNP.Concrete.CookLevin.BuilderThirdClauseSecondLiteralPrefix.secondLiteralFirstUnaryUnitSlot_direct_eq_t',
+    'PNP.Concrete.CookLevin.BuilderThirdClauseSecondLiteralPrefix.secondLiteralSecondUnaryUnitSlot_direct_eq_t',
+    'PNP.Concrete.CookLevin.BuilderThirdClauseSecondLiteralPrefix.secondLiteralTerminatorSlot_direct_eq_f',
+    'PNP.Concrete.CookLevin.BuilderThirdClauseSecondLiteralPrefix.nextTokenSlot_direct_eq_finish',
+    'PNP.Concrete.CookLevin.BuilderThirdClauseSecondLiteralPrefix.rawTimeBound_le',
+    'PNP.Concrete.CookLevin.BuilderThirdClauseSecondLiteralPrefix.malformedTerminatorCursorScratch_timeout',
+    'PNP.Concrete.CookLevin.BuilderThirdClauseSecondLiteralPrefix.work_one_step_short_timeout',
+    'PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.CursorAdvance.deadState_workStep',
+  ]) assert.equal(byId.get(
+    'concrete-cook-levin-builder-third-clause-second-literal-prefix')
+    .requiredTheorems.includes(theorem), true, theorem);
+  assert.match(byId.get(
+    'concrete-cook-levin-builder-third-clause-second-literal-prefix').scope,
+    /3004 plus the eight inherited and generated unary-evaluator rule counts/u);
+  assert.match(byId.get(
+    'concrete-cook-levin-builder-third-clause-second-literal-prefix').nonClaim,
+    /does not emit the following Finish/u);
   assert.equal(byId.get('concrete-cnf-universal-verifier').requiredTheorems.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP'), true);
   assert.match(byId.get('concrete-cnf-universal-verifier').nonClaim,
@@ -547,17 +583,17 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   ]) assert.equal(byId.get(id).status, 'not-formalized');
 });
 
-test('publication consumes the reviewed third-clause first-literal map and inventory counts', async () => {
+test('publication consumes the reviewed third-clause second-literal map and inventory counts', async () => {
   const [status, mapText] = await Promise.all([
     status0(),
     readFile(new URL('../publication/FORMAL_PUBLICATION_MAP.json', import.meta.url), 'utf8'),
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'b2dd901f9aceb87ffcb977548b3a9e27947a1780cfbd2ee0000e5e607f9e3c85');
+    '45019958363732c256a7b806333e74c909c3c726325742a9ed5c2d4aa852c67c');
   assert.equal(map.milestoneSourceClosureSha256,
-    '49d0e1f95d163c3ae68ba9e8e8234bf8af77f67e7f692b41f292dfceba3a0eb3');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 960);
+    '9a711cfc0c85aea0ef04efaf16a885e38f14a98831874c81b5cc889a5ef3715e');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 1050);
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.PipelineCompiler.pipeline_correct'
   ], 'string');
@@ -599,6 +635,12 @@ test('publication consumes the reviewed third-clause first-literal map and inven
   ], 'string');
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.CookLevin.BuilderThirdClauseFirstLiteralPrefix.finalTokenBits_eq_encodedFormula_thirdClauseFirstLiteral'
+  ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderThirdClauseSecondLiteralPrefix.workRunExact'
+  ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderThirdClauseSecondLiteralPrefix.finalTokenBits_eq_encodedFormula_thirdClauseSecondLiteral'
   ], 'string');
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.CursorAdvance.deadState_workStep'
@@ -688,7 +730,7 @@ test('publication consumes the reviewed third-clause first-literal map and inven
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [8811, 4530, 3062, 2974, 79]);
+  ], [9024, 4688, 3108, 3089, 80]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
@@ -720,6 +762,9 @@ test('canonical report source is current and the committed PDF artifact exists',
   assert.match(tex, /third-clause-first-literal composition reuses the audited 235-rule/u);
   assert.match(tex, /complete negative literal on variable zero in clause three/u);
   assert.match(tex, /does not emit the next\s+negative sign/u);
+  assert.match(tex, /third-clause-second-literal composition adds a fixed 479-rule/u);
+  assert.match(tex, /complete negative literal on variable two/u);
+  assert.match(tex, /does not emit\s+the following \\code\{Finish\}/u);
   assert.equal(tex.includes('It does not compute the remaining header or complete formula'), false);
   assert.ok(tex.includes(status.leanTheoremInventorySha256));
   assert.ok(tex.includes(status.coordinate.replaceAll('_', '\\_')) || tex.includes(status.coordinate));

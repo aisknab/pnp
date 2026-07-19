@@ -356,9 +356,22 @@ combined 87-declaration audit has 24 empty closures, 18 using only `propext`, an
 `propext` and `Quot.sound`. Malformed tally/output in both appenders, malformed scratch in both
 cursors, all four unlaunched endpoints, and one-step-short fuel remain fail-closed.
 
+The third-clause-second-literal milestone composes that prefix with a fixed 479-rule
+`F T T F` appender/cursor suffix behind one total symbol-preserving bridge. Its nested component
+tables have 113, 235, 357, and 479 rules, and the resulting global table has `3004` plus the eight
+inherited unary-evaluator rule counts. Every raw input emits the negative sign, two unary units,
+and terminator for variable two, retaining coordinate
+`V + 1 + 2 * formulaTokensPerClause + 7`. Direct and specification schedule proofs establish
+`F`, `T`, `T`, `F`, and the following `Finish`; the output bits are exactly
+`encodedFormula.take (2 * (FormulaWidth + 26))`. The external compiled bound adds
+`1752 + 96*n + 48*FormulaWidth + 48*cursorWord.length` to the first-literal bound. The complete
+145-declaration audit has 46 empty closures, 32 using only `propext`, and 67 using only `propext`
+and `Quot.sound`. Malformed tally/output in all four appenders, malformed scratch in all four
+cursors, all eight unlaunched endpoints, and one-step-short fuel remain fail-closed.
+
 This earns the complete second clause, traverses its remaining padding, and emits clause three's
-opening separator and complete negative literal on variable zero. It is not a general dynamic
-cursor or an arbitrary raw slot decoder: no machine emits the following negative-sign `F`,
+opening separator and complete negative literals on variables zero and two. It is not a general
+dynamic cursor or an arbitrary raw slot decoder: no machine emits the following `Finish`,
 completes clause three, or emits the remaining formula body, composes a complete raw formula builder
 with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
