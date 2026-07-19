@@ -318,10 +318,25 @@ combined 57-line audit covers all 55 new declarations plus the two reviewed curs
 Malformed appender tally/output, malformed cursor scratch, both unlaunched endpoints, and
 one-step-short total fuel remain fail-closed.
 
-This earns the complete second clause and retains its first padding coordinate. It is not a general
-dynamic cursor or an arbitrary raw slot decoder: no machine traverses clause-two padding, reaches
-clause three, or emits the remaining formula body, composes a complete raw formula builder with a
-construction-runtime proof, or packages
+The second-clause-padding milestone then evaluates the exact remaining count
+`D = (V - 1) * (V + 6) + 5 = formulaTokensPerClause - 7`, reuses the audited 25-rule
+`PaddingCountdown` table to consume those opportunities, and evaluates the target coordinate.
+Three total `WorkChain` bridges compose those phases with the complete-second-clause prefix. The
+literal global table has `2150` plus the six inherited/generated predecessor unary-evaluator rule
+counts and the two new evaluator rule counts. Every raw input follows an exact trace through all
+`D` padding coordinates and reaches `V + 1 + 2 * formulaTokensPerClause`, whose direct schedule
+outcome is the third clause's opening `Sep`. No token is emitted: the final bits remain exactly
+`encodedFormula.take (2 * (FormulaWidth + 19))`. The compiled bound adds two evaluator costs,
+three six-step launches, and the exact countdown term
+`6 * (D * (2 * R + 8) + D^2)` to the predecessor bound. The combined 68-declaration audit has 26
+empty closures, 9 using only `propext`, and 33 using only `propext` and `Quot.sound`. Malformed
+countdown scratch/root phases, the unlaunched predecessor endpoint, and one-step-short total fuel
+remain fail-closed.
+
+This earns the complete second clause, traverses its remaining padding, and retains clause three's
+opening schedule coordinate. It is not a general dynamic cursor or an arbitrary raw slot decoder:
+no machine emits that `Sep` or the remaining formula body, composes a complete raw formula builder
+with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,
 residual-band minimizer, ZeroSlack, the remaining end-to-end polynomial bounds, and the root

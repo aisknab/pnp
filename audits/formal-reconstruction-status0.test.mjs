@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-19-56');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-19-57');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -185,7 +185,18 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanConcreteCookLevinBuilderSecondClausePrefixRetainedAdvancedTokenCoordinateFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderSecondClausePrefixInputPrefixAppenderComposed, true);
   assert.equal(out.leanConcreteCookLevinBuilderSecondClausePrefixFailClosedBoundaryTimeoutFormalized, true);
-  assert.equal(out.leanConcreteCookLevinBuilderSecondClausePaddingRunFormalized, false);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondClausePaddingRunFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondClausePaddingRunAxiomAuditPassed, true);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondClausePaddingRunAuditedDeclarationCount, 68);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondClausePaddingRunCompiledRawMachineFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondClausePaddingRunExternalInputSizePolynomialFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondClausePaddingRunExactFormulaBitsFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondClausePaddingRunRemainingPaddingCountFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondClausePaddingRunDirectPaddingBlockFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondClausePaddingRunThirdClauseStartFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondClausePaddingRunNoEmissionSpecificationFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondClausePaddingRunInputPrefixAppenderComposed, true);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondClausePaddingRunFailClosedBoundaryTimeoutFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderInputPrefixAppenderComposed, true);
   assert.equal(out.leanConcreteCookLevinBuilderDynamicCursorFormalized, false);
   assert.equal(out.leanConcreteCookLevinFormulaBuilderFormalized, false);
@@ -324,15 +335,15 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.match(out.siteStatusSha256, /^[0-9a-f]{64}$/u);
 });
 
-test('formal reconstruction status pins the complete-second-clause inventory and source closure', async () => {
+test('formal reconstruction status pins the clause-two-padding inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 8473);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 4267);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 3013);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 2779);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 76);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 8599);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 4359);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 3031);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 2833);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 77);
   assert.equal(status.leanSourceClosureSha256,
-    'bdc976391d9229224a6e006452af9aa6422a0ec2a5a40ae37e096e3b0b393f8e');
+    'bc78667ff2331b3658d50babb93c36927449453cfb0b36acb4e2779f0b2efec9');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -552,6 +563,9 @@ test('formal reconstruction status pins the complete-second-clause inventory and
     'node --test audits/lean-concrete-cook-levin-builder-second-clause-prefix0.test.mjs',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClausePrefixAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClausePrefix.lean',
+    'node --test audits/lean-concrete-cook-levin-builder-second-clause-padding-run0.test.mjs',
+    'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClausePaddingRunAxiomAudit.lean',
+    'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClausePaddingRun.lean',
   ]) assert.equal(status.verificationCommands.includes(command), true, command);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP')), true);
@@ -615,12 +629,14 @@ test('formal reconstruction status pins the complete-second-clause inventory and
     'CookLevin.BuilderSecondClauseSecondLiteralPrefix composes the complete clause-two first-literal prefix')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'CookLevin.BuilderSecondClausePrefix composes the complete clause-two second-literal prefix')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes(
+    'CookLevin.BuilderSecondClausePaddingRun composes the complete second-clause prefix')), true);
 });
 
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-19-COOK-LEVIN-BUILDER-SECOND-CLAUSE-PREFIX-55');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-19-COOK-LEVIN-BUILDER-SECOND-CLAUSE-PADDING-RUN-56');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
