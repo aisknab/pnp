@@ -63,10 +63,11 @@
   clause on variables zero, one, and two. It then executes the first padding transition and the
   entire remaining first-clause padding run, then emits the complete second clause
   \code{Sep F F F T F Finish}, traverses the entire remaining clause-two padding block, and then
-  emits clause three's opening \code{Sep} and complete negative literal \code{F F} on variable
-  zero, retaining the next negative-sign coordinate on variable two. Every traversed
+  emits clause three's opening \code{Sep} and complete negative literals \code{F F} and
+  \code{F T T F} on variables zero and two, retaining the following \code{Finish} coordinate.
+  Every traversed
   padding slot and emitted populated slot has a direct schedule proof, the emitted bits are the exact
-  canonical prefix, and an external polynomial bounds the compiled run. The rest of clause three,
+  canonical prefix, and an external polynomial bounds the compiled run. The terminator and rest of clause three,
   a general dynamic formula cursor, arbitrary raw slot decoder, and the remaining formula body are not
   implemented, so there is no complete raw
   polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation fingerprints
@@ -286,6 +287,19 @@ emitted sign, unary-zero terminator, and retained sign are all \code{F}. The emi
 87-line audit has 24 empty, 18 \code{propext}, and 45
 \code{propext}/\code{Quot.sound} closures. This emits one fixed literal but does not emit the next
 negative sign, complete clause three, or implement a general formula cursor.
+
+The third-clause-second-literal composition adds a fixed 479-rule \code{F T T F}
+appender/cursor suffix behind one total bridge. Its nested component tables have 113, 235, 357,
+and 479 rules, and its global table has exactly 3004 plus the eight inherited evaluator rule
+counts. Every raw input emits the complete negative literal on variable two and retains
+\code{V + 1 + 2 * formulaTokensPerClause + 7}, the following clause-terminator coordinate.
+Direct and specification schedule proofs establish \code{F}, \code{T}, \code{T}, \code{F},
+and the following \code{Finish}. The emitted bits equal
+\code{encodedFormula.take (2 * (FormulaWidth + 26))}. Its external bound adds
+\code{1752 + 96*n + 48*FormulaWidth + 48*cursorWord.length} to the first-literal bound. The exact
+145-line audit has 46 empty, 32 \code{propext}, and 67
+\code{propext}/\code{Quot.sound} closures. This emits the second fixed literal but does not emit
+the following \code{Finish}, complete clause three, or implement a general formula cursor.
 
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
