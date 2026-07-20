@@ -59,6 +59,7 @@ import PNP.Concrete.CookLevinBuilderThirdClauseSecondLiteralPrefix
 import PNP.Concrete.CookLevinBuilderThirdClausePrefix
 import PNP.Concrete.CookLevinBuilderThirdClausePaddingRun
 import PNP.Concrete.CookLevinBuilderFourthClauseSeparatorStep
+import PNP.Concrete.CookLevinBuilderFourthClauseFirstLiteralPrefix
 import PNP.Concrete.CNFVerifier
 import PNP.Concrete.CNFWorkInput
 import PNP.Concrete.CNFWorkUniversalCorrectness
