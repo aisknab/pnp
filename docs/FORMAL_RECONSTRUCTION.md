@@ -408,10 +408,22 @@ eight reused separator/cursor interfaces: 14 closures are empty, 11 use only `pr
 only `propext` and `Quot.sound`. Malformed appender tally/output, malformed cursor scratch, both
 unlaunched endpoints, and one-step-short total fuel remain fail-closed.
 
-This earns the complete first three populated clauses, traverses their remaining padding, and
-emits clause four's opening separator. It is not a general dynamic cursor or an arbitrary raw slot
-decoder: no machine emits the following `F` or the remaining formula body, composes a complete raw
-formula builder with a construction-runtime proof, or packages
+The fourth-clause-first-literal milestone then places the reused 357-rule selected `F T F`
+appender/cursor suffix after the separator prefix through one outer total nine-symbol bridge. The
+resulting table has `3666` plus the ten inherited/generated unary-evaluator rule counts. Every raw
+input emits the complete first negative literal on variable one, advances the retained coordinate
+to `V + 1 + 3 * formulaTokensPerClause + 4`, and proves the following token is the second
+literal's negative sign `F`. The output bits are exactly
+`encodedFormula.take (2 * (FormulaWidth + 31))`; the external bound is
+`BuilderFourthClauseSeparatorStep.rawTimeBound + 1422 + 72*n + 36*FormulaWidth +
+36*cursorWord.length`. The 115-declaration audit has 33 empty closures, 25 using only `propext`,
+and 57 using only `propext` and `Quot.sound`. Malformed tally/output/scratch states, all six
+unlaunched endpoints, and one-step-short fuel remain fail-closed.
+
+This earns the complete first three populated clauses, traverses their remaining padding, emits
+clause four's opening separator, and emits its first literal. It is not a general dynamic cursor or
+an arbitrary raw slot decoder: no machine emits the second literal or the remaining formula body,
+composes a complete raw formula builder with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,
 residual-band minimizer, ZeroSlack, the remaining end-to-end polynomial bounds, and the root

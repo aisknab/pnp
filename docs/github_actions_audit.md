@@ -124,6 +124,13 @@ from current theorem status.
   48 new public declarations plus eight reused interfaces, with 14 empty, 11 `propext`, and 31
   `propext`/`Quot.sound` closures; it does not emit the following `F`, complete clause four, or
   claim a general cursor or complete formula builder.
+  The fourth-clause-first-literal audit checks the reused 357-rule `F T F` suffix, all six
+  launches, the symbolic 3666-rule global base, exact output through the first negative literal
+  on variable one, the retained following `F`, the external polynomial, malformed tally/output/
+  scratch phases, all six unlaunched endpoints, and one-step-short timeout. Its exact 115-line
+  audit covers 97 new declarations, 16 reused suffix interfaces, and two dead-state facts, with
+  33 empty, 25 `propext`, and 57 `propext`/`Quot.sound` closures; it does not emit the second
+  literal, complete clause four, or claim a general cursor or complete formula builder.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual

@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'a02ecb01312466a1ed23dd841cc5057cdf0af82dce6ae67b63c8c6a4e80cf555';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '022c475509edbadbbbabda2e65d00365a76044ef0533fa83a922e834e5b28b93';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -716,6 +716,67 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.workBoundedDecide_accept',
   'PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.workRunExact',
   'PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.work_one_step_short_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.boundedDecide_compile_accept',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.boundedDecide_compile_ne_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.finalConfiguration_state',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.finalOutside_contains_finalTokenSlot',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.finalTape_represents',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.finalTokenBits_eq_encodedFormula_fourthClauseFirstLiteral',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.finalTokenSlot_eq_fourthClauseStart_add_four',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.firstAppender_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.firstCursor_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.firstLiteralSignSlot_direct_eq_f',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.firstLiteralSuffix_launch_workStep',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.firstLiteralTerminatorSlot_direct_eq_f',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.firstLiteralUnaryUnitSlot_direct_eq_t',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.fourthClauseFirstLiteralTokens_eq_canonical_formula_prefix',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.machine_acceptState_ne_rejectState',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.malformedSignAppenderOutput_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.malformedSignAppenderTally_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.malformedSignCursorScratch_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.malformedTerminatorAppenderOutput_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.malformedTerminatorAppenderTally_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.malformedTerminatorCursorScratch_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.malformedUnaryAppenderOutput_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.malformedUnaryAppenderTally_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.malformedUnaryCursorScratch_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.nextTokenSlot_direct_eq_f',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.prefixEndpoint_before_launch_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.prefixFirstLiteral_launch_workStep',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.prefix_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.rawTimeBound_eval',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.rawTimeBound_le',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.rule_source_ne_acceptState',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.rules_length',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.rules_pairwise_query_distinct',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.run_compile_exact',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.run_compile_rawTimeBound',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.run_compile_rawTimeBound_blankEquivalent',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.secondAppender_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.secondCursor_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.signAppenderCursor_launch_workStep',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.signAppenderEndpoint_before_cursor_launch_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.signCursorEndpoint_before_unary_launch_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.signTokenCursor_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.specification_firstLiteral_sign_step',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.specification_firstLiteral_terminator_step',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.specification_firstLiteral_unaryUnit_step',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.specification_next_step',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.suffix_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.terminatorAppenderCursor_launch_workStep',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.terminatorAppenderEndpoint_before_cursor_launch_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.terminatorTokenCursor_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.thirdAppender_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.thirdCursor_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.trueFalseSuffix_launch_workStep',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.trueFalseSuffix_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.unaryAppenderCursor_launch_workStep',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.unaryAppenderEndpoint_before_cursor_launch_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.unaryCursorEndpoint_before_terminator_launch_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.unaryTokenCursor_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.workBoundedDecide_accept',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFourthClauseFirstLiteralPrefix.work_one_step_short_timeout',
   'PNP.Concrete.CookLevin.BuilderFourthClauseSeparatorStep.appenderEndpoint_before_cursor_launch_timeout',
   'PNP.Concrete.CookLevin.BuilderFourthClauseSeparatorStep.appender_workRunExact',
   'PNP.Concrete.CookLevin.BuilderFourthClauseSeparatorStep.boundedDecide_compile_accept',
@@ -1201,7 +1262,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-20-63') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-21-64') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -1478,7 +1539,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-20-63') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-21-64') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
@@ -1496,7 +1557,7 @@ function validatePublicationMap0(map) {
     'expectedRootKernelTypeSha256',
     'expectedAxiomClosureSha256',
     'expectedSourceClosureSha256',
-  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 63`);
+  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 64`);
   if (!isSha2560(map.milestoneSourceClosureSha256)
       || !isObject0(map.earnedMilestoneTheoremKernelTypeSha256)) {
     throw new Error('reviewed milestone theorem/source fingerprints are missing');
@@ -1515,7 +1576,7 @@ function validatePublicationMap0(map) {
     throw new Error('reviewed milestone theorem kernel-type fingerprint inventory mismatch');
   }
   if (sha256Text0(stableStringify0(map)) !== REQUIRED_PUBLICATION_MAP_SHA2560) {
-    throw new Error('formal publication milestone map drifted from the reviewed release-63 specification');
+    throw new Error('formal publication milestone map drifted from the reviewed release-64 specification');
   }
 }
 

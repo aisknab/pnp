@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-20-63');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-21-64');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -261,6 +261,16 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanConcreteCookLevinBuilderFourthClauseSeparatorStepRetainedAdvancedTokenCoordinateFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderFourthClauseSeparatorStepInputPrefixAppenderComposed, true);
   assert.equal(out.leanConcreteCookLevinBuilderFourthClauseSeparatorStepFailClosedBoundaryTimeoutFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderFourthClauseFirstLiteralPrefixFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderFourthClauseFirstLiteralPrefixAxiomAuditPassed, true);
+  assert.equal(out.leanConcreteCookLevinBuilderFourthClauseFirstLiteralPrefixAuditedDeclarationCount, 115);
+  assert.equal(out.leanConcreteCookLevinBuilderFourthClauseFirstLiteralPrefixCompiledRawMachineFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderFourthClauseFirstLiteralPrefixExternalInputSizePolynomialFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderFourthClauseFirstLiteralPrefixExactFormulaBitsFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderFourthClauseFirstLiteralPrefixCompleteFirstNegativeLiteralFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderFourthClauseFirstLiteralPrefixRetainedAdvancedTokenCoordinateFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderFourthClauseFirstLiteralPrefixInputPrefixAppenderComposed, true);
+  assert.equal(out.leanConcreteCookLevinBuilderFourthClauseFirstLiteralPrefixFailClosedBoundaryTimeoutFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderInputPrefixAppenderComposed, true);
   assert.equal(out.leanConcreteCookLevinBuilderDynamicCursorFormalized, false);
   assert.equal(out.leanConcreteCookLevinFormulaBuilderFormalized, false);
@@ -399,15 +409,15 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.match(out.siteStatusSha256, /^[0-9a-f]{64}$/u);
 });
 
-test('formal reconstruction status pins the fourth-clause-separator inventory and source closure', async () => {
+test('formal reconstruction status pins the fourth-clause-first-literal inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 9336);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 4934);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 3152);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 3264);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 83);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 9474);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 5036);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 3178);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 3398);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 84);
   assert.equal(status.leanSourceClosureSha256,
-    'c8e724e433996168ad1c937d9c8b68af8dc034d425577302c6d58b2334c8d66c');
+    '102d1806647c18354cbe40744e516d997f03db9a5aeda73af178b8c618cac09c');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -647,6 +657,9 @@ test('formal reconstruction status pins the fourth-clause-separator inventory an
     'node --test audits/lean-concrete-cook-levin-builder-fourth-clause-separator-step0.test.mjs',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFourthClauseSeparatorStepAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFourthClauseSeparatorStep.lean',
+    'node --test audits/lean-concrete-cook-levin-builder-fourth-clause-first-literal-prefix0.test.mjs',
+    'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFourthClauseFirstLiteralPrefixAxiomAudit.lean',
+    'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFourthClauseFirstLiteralPrefix.lean',
   ]) assert.equal(status.verificationCommands.includes(command), true, command);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP')), true);
@@ -724,12 +737,14 @@ test('formal reconstruction status pins the fourth-clause-separator inventory an
     'CookLevin.BuilderThirdClausePaddingRun composes the complete third-clause prefix')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'CookLevin.BuilderFourthClauseSeparatorStep composes the complete third-clause padding run')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes(
+    'CookLevin.BuilderFourthClauseFirstLiteralPrefix composes the complete fourth-clause separator prefix')), true);
 });
 
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-20-COOK-LEVIN-BUILDER-FOURTH-CLAUSE-SEPARATOR-STEP-62');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-21-COOK-LEVIN-BUILDER-FOURTH-CLAUSE-FIRST-LITERAL-PREFIX-63');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
