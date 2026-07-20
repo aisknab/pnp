@@ -120,8 +120,8 @@ node --test \
 ```
 
 The combined kernel audit covers all 55 public declarations plus the two
-reviewed cursor dead-loop facts. Fifteen declarations have empty closure, ten
-use only `propext`, and 32 use only `propext` and `Quot.sound`. No
+reviewed cursor dead-loop facts. Fourteen declarations have empty closure, ten
+use only `propext`, and 33 use only `propext` and `Quot.sound`. No
 declaration reaches a project axiom, `Classical.choice`, `sorry`, `admit`,
 SAT/minimization code, host-side composition, or a caller-supplied execution
 certificate.
@@ -139,17 +139,17 @@ the Lean source-closure SHA-256 is
 Publication map coordinate `PNP-FORMAL-PUBLICATION-MAP-2026-07-20-61` has
 41 milestones and 1,089 exact kernel-type fingerprints. Its exact file
 SHA-256 is
-`8c15948cb67f456fc6234530d70ee09a10d3473bcab97a11d7d29df4157a3181`,
+`c931f62bdc480c02a1a2c3556fbb480999a653282282ff0ecc5558a5f283659e`,
 and its canonical reviewed-object fingerprint is
-`8b615d244d1fab6096d94028a77ba33bf2eb0b459328e5380333f2efb45488a5`.
+`cd34ccfe2634eea66b4e9f0f21e04a542624cd240fe2ed11f9072b879cc9fb71`.
 
 Status coordinate `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-20-61` has
-SHA-256 `71eb857340cfba2074ce50258f46eee542f6c9944187a626fa9ecd21da5cef99`.
+SHA-256 `8cce5744e3f8a1f5a0f9119bea2034c5afad1685c9b6f8bcbdb9939baeb9a09b`.
 The generated report coordinate is
 `PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-20-61`; its 79,940-byte
-TeX SHA-256 is `c6e298b92aff965887d3cf10dbbf0ec05233da42edb6d9e01587731ae872536f`
-and its 36-page, 334,680-byte PDF SHA-256 is
-`84c4167914fa408bc8c10dfd2b4fdef479e9bf60f165b9ed8dc1489f139f4584`.
+TeX SHA-256 is `0d6d5d3270c20f985bd137016a572fc89c7fb95621c2a3008adc9f0b2e3b029d`
+and its 36-page, 334,685-byte PDF SHA-256 is
+`2ea1b5b4f789fbdc8fa8c3fadf0c1370d10b1aa415340a711829e9aed271972c`.
 All activation fingerprints remain unset and the publication gate remains
 false.
 

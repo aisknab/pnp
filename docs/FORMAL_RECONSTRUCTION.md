@@ -376,7 +376,7 @@ advances from `V + 1 + 2 * formulaTokensPerClause + 7` to `+ 8`, and proves by b
 specification cursors that the retained opportunity is the first in-range padding slot. The output
 bits are exactly `encodedFormula.take (2 * (FormulaWidth + 27))`; the external compiled bound adds
 `498 + 24*n + 12*FormulaWidth + 12*cursorWord.length` to the second-literal bound. The combined
-57-declaration audit has 15 empty closures, 10 using only `propext`, and 32 using only `propext`
+57-declaration audit has 14 empty closures, 10 using only `propext`, and 33 using only `propext`
 and `Quot.sound`. Malformed appender tally/output, malformed cursor scratch, both unlaunched
 endpoints, and one-step-short fuel remain fail-closed.
 

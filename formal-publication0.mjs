@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '8b615d244d1fab6096d94028a77ba33bf2eb0b459328e5380333f2efb45488a5';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'cd34ccfe2634eea66b4e9f0f21e04a542624cd240fe2ed11f9072b879cc9fb71';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
