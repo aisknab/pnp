@@ -85,21 +85,21 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
   assert.equal(`${stableStringify0(inventory)}\n`, inventoryBytes.toString('utf8'));
   ValidateLeanTheoremInventory0(inventory);
   assert.equal(inventory.environmentProbeComplete, true);
-  assert.equal(inventory.declarationCount, 9117);
-  assert.equal(inventory.excludedPrivateDeclarationCount, 3151);
-  assert.equal(inventory.theoremCount, 4764);
-  assert.equal(inventory.assumptionFreeTheoremCount, 3122);
+  assert.equal(inventory.declarationCount, 9251);
+  assert.equal(inventory.excludedPrivateDeclarationCount, 3205);
+  assert.equal(inventory.theoremCount, 4864);
+  assert.equal(inventory.assumptionFreeTheoremCount, 3140);
   assert.equal(inventory.axiomCount, 4);
-  assert.equal(inventory.sourceClosureModuleCount, 81);
+  assert.equal(inventory.sourceClosureModuleCount, 82);
   assert.deepEqual(inventory.declarationKindCounts, {
     axiom: 4,
     constructor: 303,
-    definition: 3776,
+    definition: 3810,
     inductive: 135,
     opaque: 0,
     quotient: 0,
     recursor: 135,
-    theorem: 4764,
+    theorem: 4864,
   });
   assert.deepEqual(inventory.projectAxioms, [
     'PNP.CheckPCCPackexp',
@@ -116,7 +116,7 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
     module: 'PNP.Concrete.Target',
     name: 'PNP.Main.ConcretePEqualsNP',
   });
-  assert.equal(inventory.milestoneCandidates.length, 1089);
+  assert.equal(inventory.milestoneCandidates.length, 1126);
   assert.deepEqual(inventory.milestoneCandidates.map((entry) => entry.name), REQUIRED_MILESTONE_THEOREMS0);
   assert.equal(inventory.milestoneCandidates.every((entry) => entry.kind === 'theorem'
     && entry.kernelValue === null && typeof entry.kernelType === 'string'), true);
@@ -124,7 +124,7 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
 
 test('source closure scans every Lean source and rejects a symlinked source root', async () => {
   const files = await CollectLeanSourceFiles0(ROOT);
-  assert.equal(files.length, 82);
+  assert.equal(files.length, 83);
   assert.equal(files.every((file) => file.startsWith('lean/') && file.endsWith('.lean')), true);
   assert.deepEqual(files, [...files].sort());
   assert.equal(files.includes('lean/PNP.lean'), true);
@@ -144,6 +144,8 @@ test('source closure scans every Lean source and rejects a symlinked source root
     'lean/PNP/Concrete/CookLevinBuilderThirdClauseSecondLiteralPrefix.lean'), true);
   assert.equal(files.includes(
     'lean/PNP/Concrete/CookLevinBuilderThirdClausePrefix.lean'), true);
+  assert.equal(files.includes(
+    'lean/PNP/Concrete/CookLevinBuilderThirdClausePaddingRun.lean'), true);
   assert.equal(files.includes(
     'lean/PNP/Concrete/CookLevinBuilderSecondClauseFirstLiteralPrefix.lean'), true);
   assert.equal(files.includes(
@@ -208,7 +210,7 @@ test('positive Lean probe parser rejects empty, malformed, noisy, failed, or non
   const valid = ParseLeanInventoryProbe0({
     stdout: inventoryBytes.toString('utf8'), stderr: '', exitCode: 0, timedOut: false,
   });
-  assert.equal(valid.inventory.declarationCount, 9117);
+  assert.equal(valid.inventory.declarationCount, 9251);
   for (const input of [
     { stdout: '', stderr: '', exitCode: 0, timedOut: false },
     { stdout: '{}\n', stderr: '', exitCode: 0, timedOut: false },
@@ -341,7 +343,7 @@ test('same-name theorem type weakening and source-closure drift revoke milestone
     inventoryBytes,
     map.milestoneSourceClosureSha256,
   );
-  assert.equal(current.milestones.filter((entry) => entry.earned).length, 38);
+  assert.equal(current.milestones.filter((entry) => entry.earned).length, 39);
   const tableauSemantics = current.milestones.find(
     (entry) => entry.id === 'concrete-cook-levin-tableau-cnf-semantics',
   );
@@ -422,7 +424,7 @@ test('project, unknown, and sorry axioms cannot pass the fixed standard-axiom cl
   }
 });
 
-test('publication map cannot set fingerprints or expand the axiom allowlist in release 61', async () => {
+test('publication map cannot set fingerprints or expand the axiom allowlist in release 62', async () => {
   const { inventoryBytes, inventory, map } = await fixture0();
   const fingerprinted = structuredClone(map);
   fingerprinted.gate.expectedRootKernelTypeSha256 = 'a'.repeat(64);

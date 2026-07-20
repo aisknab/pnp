@@ -64,10 +64,11 @@
   entire remaining first-clause padding run, then emits the complete second clause
   \code{Sep F F F T F Finish}, traverses the entire remaining clause-two padding block, and then
   emits the complete third clause \code{Sep F F F T T F Finish} on variables zero and two,
-  retaining its first in-range padding coordinate. Every traversed
+  traverses the entire remaining clause-three padding block, and retains clause four's opening
+  \code{Sep} coordinate. Every traversed
   padding slot and emitted populated slot has a direct schedule proof, the emitted bits are the exact
-  canonical prefix, and an external polynomial bounds the compiled run. The remaining clause-three
-  padding, a general dynamic formula cursor, arbitrary raw slot decoder, and the remaining formula body are not
+  canonical prefix, and an external polynomial bounds the compiled run. The fourth-clause separator,
+  a general dynamic formula cursor, arbitrary raw slot decoder, and the remaining formula body are not
   implemented, so there is no complete raw
   polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation fingerprints
   are unset, no root theorem exists, and the abstract string-handle bridge is never an activation source.
@@ -299,6 +300,28 @@ and the following \code{Finish}. The emitted bits equal
 145-line audit has 46 empty, 32 \code{propext}, and 67
 \code{propext}/\code{Quot.sound} closures. This emits the second fixed literal but does not emit
 the following \code{Finish}, complete clause three, or implement a general formula cursor.
+
+The complete-third-clause composition emits that retained \code{Finish} with one selected 59-rule
+appender and advances the cursor once. Its suffix has exactly 113 rules, while the global table has
+exactly 3126 plus the eight inherited evaluator rule counts. Every raw input emits bits equal to
+\code{encodedFormula.take (2 * (FormulaWidth + 27))}. Direct lookup proves that the executed
+coordinate is the clause terminator and the retained next coordinate is in-range padding. The new
+external raw bound is the predecessor bound plus
+\code{498 + 24*n + 12*FormulaWidth + 12*cursorWord.length}. The exact 57-line audit has 14 empty,
+10 \code{propext}, and 33 \code{propext}/\code{Quot.sound} closures. This completes clause three
+but does not by itself traverse its padding or implement a general formula cursor.
+
+The third-clause-padding composition evaluates
+\code{D = (V - 1) * (V + 6) + 4}. With \code{C} abbreviating
+\code{formulaTokensPerClause}, Lean proves \code{D = C - 8}, traverses exactly those remaining
+padding opportunities with the reused 25-rule countdown, and evaluates the target coordinate.
+Three total bridges and two fixed unary evaluators yield a global table with exactly 3178 plus the
+eight inherited/generated evaluator counts and the two new evaluator counts. Every raw input reaches
+\code{V + 1 + 3 * formulaTokensPerClause}; every traversed coordinate is direct padding and the
+retained coordinate is the fourth clause's opening \code{Sep}. No token is emitted, so the bits
+remain \code{encodedFormula.take (2 * (FormulaWidth + 27))}. The exact 68-line audit has 26 empty,
+9 \code{propext}, and 33 \code{propext}/\code{Quot.sound} closures. This reaches clause four only
+as a retained coordinate; it does not emit the separator or implement a general formula cursor.
 
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}

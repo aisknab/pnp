@@ -46,7 +46,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-20-61}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-20-62}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -64,10 +64,11 @@
   entire remaining first-clause padding run, then emits the complete second clause
   \code{Sep F F F T F Finish}, traverses the entire remaining clause-two padding block, and then
   emits the complete third clause \code{Sep F F F T T F Finish} on variables zero and two,
-  retaining its first in-range padding coordinate. Every traversed
+  traverses the entire remaining clause-three padding block, and retains clause four's opening
+  \code{Sep} coordinate. Every traversed
   padding slot and emitted populated slot has a direct schedule proof, the emitted bits are the exact
-  canonical prefix, and an external polynomial bounds the compiled run. The remaining clause-three
-  padding, a general dynamic formula cursor, arbitrary raw slot decoder, and the remaining formula body are not
+  canonical prefix, and an external polynomial bounds the compiled run. The fourth-clause separator,
+  a general dynamic formula cursor, arbitrary raw slot decoder, and the remaining formula body are not
   implemented, so there is no complete raw
   polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation fingerprints
   are unset, no root theorem exists, and the abstract string-handle bridge is never an activation source.
@@ -77,15 +78,15 @@
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 9117 \\
-Theorem-kind declarations & 4764 \\
-Assumption-free theorem-kind declarations & 3122 \\
+Compiled declarations & 9251 \\
+Theorem-kind declarations & 4864 \\
+Assumption-free theorem-kind declarations & 3140 \\
 Project-specific axioms & 4 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{155a862474126aa8fb8c5c75c6e2e7126f1b69febac1e4100d505e405d974db5}\par}
+{\small Inventory SHA-256: \code{be49e777c8d5fe6ca74fe4bcb808e67157091fc9c2f15502da7649e64e7287c4}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -300,6 +301,28 @@ and the following \code{Finish}. The emitted bits equal
 \code{propext}/\code{Quot.sound} closures. This emits the second fixed literal but does not emit
 the following \code{Finish}, complete clause three, or implement a general formula cursor.
 
+The complete-third-clause composition emits that retained \code{Finish} with one selected 59-rule
+appender and advances the cursor once. Its suffix has exactly 113 rules, while the global table has
+exactly 3126 plus the eight inherited evaluator rule counts. Every raw input emits bits equal to
+\code{encodedFormula.take (2 * (FormulaWidth + 27))}. Direct lookup proves that the executed
+coordinate is the clause terminator and the retained next coordinate is in-range padding. The new
+external raw bound is the predecessor bound plus
+\code{498 + 24*n + 12*FormulaWidth + 12*cursorWord.length}. The exact 57-line audit has 14 empty,
+10 \code{propext}, and 33 \code{propext}/\code{Quot.sound} closures. This completes clause three
+but does not by itself traverse its padding or implement a general formula cursor.
+
+The third-clause-padding composition evaluates
+\code{D = (V - 1) * (V + 6) + 4}. With \code{C} abbreviating
+\code{formulaTokensPerClause}, Lean proves \code{D = C - 8}, traverses exactly those remaining
+padding opportunities with the reused 25-rule countdown, and evaluates the target coordinate.
+Three total bridges and two fixed unary evaluators yield a global table with exactly 3178 plus the
+eight inherited/generated evaluator counts and the two new evaluator counts. Every raw input reaches
+\code{V + 1 + 3 * formulaTokensPerClause}; every traversed coordinate is direct padding and the
+retained coordinate is the fourth clause's opening \code{Sep}. No token is emitted, so the bits
+remain \code{encodedFormula.take (2 * (FormulaWidth + 27))}. The exact 68-line audit has 26 empty,
+9 \code{propext}, and 33 \code{propext}/\code{Quot.sound} closures. This reaches clause four only
+as a retained coordinate; it does not emit the separator or implement a general formula cursor.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule
@@ -387,7 +410,7 @@ remain absent.
 \section{Formal milestone ledger}
 
 Each earned row requires exact compiled names and theorem kinds, empty axiom closures, per-name
-domain-separated kernel-type SHA-256 matches for 1089 detailed candidates, and the pinned whole-Lean
+domain-separated kernel-type SHA-256 matches for 1126 detailed candidates, and the pinned whole-Lean
 source closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
 {\small
@@ -430,6 +453,7 @@ Cook-Levin third-clause separator step & formalized-foundation-only & For every 
 Cook-Levin third-clause first-literal prefix & formalized-foundation-only & For every fixed concrete polynomial-time verifier, one literal finite work machine composes the complete third-clause-separator prefix with the reused 235-rule two-F appender/cursor suffix behind one total nine-symbol bridge under collision-free nested state images. One F/cursor component has 113 rules, the two-component suffix has 235 rules, and the global table has exactly 2516 plus the eight inherited and generated unary-evaluator rule counts. Every raw input follows an exact all-input trace, emits the canonical prefix through the complete negative literal on variable zero in clause three, and retains the negative-sign coordinate on variable two. The emitted bits equal encodedFormula.take (2 * (FormulaWidth + 22)); direct schedule lookup proves the sign, unary-zero terminator, and following sign are all F, with the third excluded pair constructively identified as variables zero and two. The compiled run is bounded by BuilderThirdClauseSeparatorStep.rawTimeBound + 732 + 48*n + 24*FormulaWidth + 24*cursorWord.length. All four pre-launch endpoints, malformed tally/output in both appenders, malformed scratch in both cursors, and one-step-short fuel remain timeout. All 74 new public declarations plus eleven reviewed suffix declarations and two reviewed cursor dead-loop facts are axiom-audited: 24 have empty closure, 18 use only propext, and 45 use only propext and Quot.sound, with no project axiom or Classical.choice. & This milestone emits only the fixed negative literal on variable zero in clause three and advances to the following negative-sign coordinate. It does not emit that following F, complete clause three, implement a general dynamic formula cursor or raw decoder for arbitrary schedule coordinates, emit the remaining formula body, construct a complete formula builder or FunctionProgram.RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-hardness or NP-completeness, establish CNFSAT in P, or prove P = NP. \\
 Cook-Levin third-clause second-literal prefix & formalized-foundation-only & For every fixed concrete polynomial-time verifier, one literal finite work machine composes the complete third-clause-first-literal prefix with a fixed 479-rule F/T/T/F appender/cursor suffix behind one total nine-symbol bridge under collision-free nested state images. The nested component tables have 113, 235, 357, and 479 rules, and the global table has exactly 3004 plus the eight inherited and generated unary-evaluator rule counts. Every raw input follows an exact all-input trace, emits the canonical prefix through the complete negative literal on variable two in clause three, and retains the following Finish coordinate. The emitted bits equal encodedFormula.take (2 * (FormulaWidth + 26)); direct schedule lookup proves the sign F, both unary units T, the terminator F, and the following Finish. The compiled run is bounded by BuilderThirdClauseFirstLiteralPrefix.rawTimeBound + 1752 + 96*n + 48*FormulaWidth + 48*cursorWord.length. All eight pre-launch endpoints, malformed tally/output in all four appenders, malformed scratch in all four cursors, and one-step-short fuel remain timeout. All 145 public declarations are axiom-audited: 46 have empty closure, 32 use only propext, and 67 use only propext and Quot.sound, with no project axiom or Classical.choice. & This milestone emits only the fixed negative literal on variable two in clause three and advances to the following Finish coordinate. It does not emit the following Finish, complete clause three, implement a general dynamic formula cursor or raw decoder for arbitrary schedule coordinates, emit the remaining formula body, construct a complete formula builder or FunctionProgram.RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-hardness or NP-completeness, establish CNFSAT in P, or prove P = NP. \\
 Cook-Levin complete third-clause prefix & formalized-foundation-only & For every fixed concrete polynomial-time verifier, one literal finite work machine composes the complete clause-three second-literal prefix with a selected 59-rule Finish appender, two total symbol-preserving bridges, and one copy of the existing 45-rule cursor advance under collision-free state images. The fixed suffix has exactly 113 rules and the global table has exactly 3126 plus the eight inherited unary-evaluator rule counts. Every raw input follows an exact all-input trace, emits the canonical prefix through the complete third clause, and retains its first in-range padding coordinate. The emitted bits equal encodedFormula.take (2 * (FormulaWidth + 27)); direct schedule lookup proves the executed opportunity is Finish and the retained next opportunity is padding. The compiled run is bounded by BuilderThirdClauseSecondLiteralPrefix.rawTimeBound + 498 + 24*n + 12*FormulaWidth + 12*BuilderThirdClauseSeparatorStep.cursorWord.length. Both pre-launch endpoints, malformed appender tally/output, malformed cursor scratch, and one-step-short fuel remain timeout. All 55 new public declarations plus two reviewed cursor dead-loop facts are axiom-audited: 14 have empty closure, 10 use only propext, and 33 use only propext and Quot.sound, with no project axiom or Classical.choice. & This milestone emits only the fixed Finish terminator that completes clause three and advances to its first padding coordinate. It does not traverse clause-three padding, implement a general dynamic formula cursor or raw decoder for arbitrary schedule coordinates, emit the remaining formula body, construct a complete formula builder or FunctionProgram.RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-hardness or NP-completeness, establish CNFSAT in P, or prove P = NP. \\
+Cook-Levin third-clause remaining-padding run & formalized-foundation-only & For every fixed concrete polynomial-time verifier, one literal finite work machine composes the complete third-clause prefix with structurally generated unary evaluators for D = (FormulaVariableSlotBound - 1) * (FormulaVariableSlotBound + 6) + 4 and the fourth-clause coordinate, plus the reused fixed 25-rule PaddingCountdown controller. Three total symbol-preserving WorkChain bridges yield a table with exactly 3178 plus the eight inherited/generated predecessor evaluator rule counts and the two new evaluator rule counts. Every raw input follows an exact all-input trace, preserves the complete third-clause output, traverses all D = FormulaTokensPerClause - 8 remaining third-clause padding coordinates without emitting a token, and reaches FormulaVariableSlotBound + 1 + 3 * FormulaTokensPerClause, where direct schedule lookup is proved to return Sep. The recursive specification run agrees at every padding coordinate and the following specification step observes Sep. The emitted bits remain encodedFormula.take (2 * (FormulaWidth + 27)). The compiled exact run is bounded by BuilderThirdClausePrefix.rawTimeBound + 18 + 6 * countEvaluator.workSteps + 6 * (D * (2 * countRootPrefixLength + 8) + D * D) + 6 * targetEvaluator.workSteps, accepts within that external input-size polynomial, and remains fail-closed for malformed countdown scratch/root states, the unlaunched prefix endpoint, and one-step-short fuel. All 65 new public declarations plus the three reviewed reused-countdown declarations are axiom-audited: 26 have empty closure, 9 use only propext, and 33 use only propext and Quot.sound, with no project axiom or Classical.choice. & This milestone executes exactly the remaining third-clause padding block and identifies the fourth-clause separator boundary without emitting a token. It reaches clause four only as a retained coordinate. It is not a general dynamic formula cursor or raw decoder for arbitrary schedule coordinates, does not emit the fourth-clause separator or remaining formula body, and does not construct a complete formula builder or FunctionProgram.RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-hardness or NP-completeness, establish CNFSAT in P, or prove P = NP. \\
 Typed direct-wire NAND semantics & formalized & Typed topological Boolean NAND programs and ordered multi-output direct-wire semantics. & This does not establish circuit minimization, SAT, or P = NP. \\
 Finite enumeration, equivalence, and reference minimum & formalized & Exhaustive finite Boolean direct-wire search under the empty-profile reference model. & No polynomial-runtime result is obtained from this exhaustive reference search. \\
 Concrete framed replacement and slack & formalized & The concrete serial framed context with support outputs and explicit bypass wires. & This is not an arbitrary-support replacement theorem for the report's global family. \\
@@ -445,8 +469,8 @@ Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-mac
 
 \section{Compiled inventory summary}
 
-The inventory contains 9117 exported \code{PNP.*} kernel declarations from
-81 modules. It excludes 3151 private compiler auxiliaries.
+The inventory contains 9251 exported \code{PNP.*} kernel declarations from
+82 modules. It excludes 3205 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -483,6 +507,7 @@ PNP.\allowbreak{}Concrete.\allowbreak{}CookLevinBuilderSecondClausePrefix & 86 &
 PNP.\allowbreak{}Concrete.\allowbreak{}CookLevinBuilderSecondClauseSecondLiteralPrefix & 158 & 118 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CookLevinBuilderSecondClauseSeparatorStep & 86 & 69 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CookLevinBuilderThirdClauseFirstLiteralPrefix & 131 & 105 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}CookLevinBuilderThirdClausePaddingRun & 134 & 100 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CookLevinBuilderThirdClausePrefix & 93 & 76 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CookLevinBuilderThirdClauseSecondLiteralPrefix & 213 & 158 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CookLevinBuilderThirdClauseSeparatorStep & 81 & 66 \\
@@ -598,10 +623,10 @@ npm run report:check
 \end{verbatim}
 }
 
-The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-20-61}. Its exact byte digest is
-\code{155a862474126aa8fb8c5c75c6e2e7126f1b69febac1e4100d505e405d974db5}. The report is regenerated from that inventory and the reviewed
+The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-20-62}. Its exact byte digest is
+\code{be49e777c8d5fe6ca74fe4bcb808e67157091fc9c2f15502da7649e64e7287c4}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{0d09467c09dbdd99b07c0fea2f21e24d75b9efc4701c6d5c6e3102a913cba0c8}; the computed and pinned values match. Successful regeneration
+\code{522c47713a55db0605db09c3340b39de686139ff45f5259d087a068a8bfe7db6}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 

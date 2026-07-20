@@ -103,6 +103,19 @@ from current theorem status.
   timeout. Its exact 145-line closure split is 46 empty, 32 `propext`, and 67
   `propext`/`Quot.sound` declarations; it does not emit `Finish`, complete clause three, or claim
   a general cursor or complete formula builder.
+  The complete-third-clause audit checks the selected 59-rule `Finish` appender, both total
+  launches, one fixed cursor advance, the exact 113-rule suffix and symbolic 3126-rule global
+  base, the canonical formula prefix through the complete third clause, direct `Finish` execution,
+  the retained first padding coordinate, the external polynomial, malformed phases, both
+  unlaunched endpoints, and one-step-short timeout. Its exact 57-line closure split is 14 empty,
+  10 `propext`, and 33 `propext`/`Quot.sound` declarations. The third-clause-padding audit checks
+  both fixed unary evaluators, all three total `WorkChain` bridges, reuse rather than duplication
+  of the 25-rule countdown, the symbolic 3178-rule global base, the exact `C - 8` positive count,
+  every direct padding opportunity, the retained fourth-clause `Sep` coordinate, unchanged
+  canonical output, the external polynomial, malformed countdown phases, the unlaunched
+  predecessor endpoint, and one-step-short timeout. Its exact 68-line closure split is 26 empty,
+  9 `propext`, and 33 `propext`/`Quot.sound` declarations; it does not emit clause four or claim a
+  general cursor or complete formula builder.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual
