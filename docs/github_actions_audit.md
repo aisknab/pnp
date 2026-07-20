@@ -116,6 +116,14 @@ from current theorem status.
   predecessor endpoint, and one-step-short timeout. Its exact 68-line closure split is 26 empty,
   9 `propext`, and 33 `propext`/`Quot.sound` declarations; it does not emit clause four or claim a
   general cursor or complete formula builder.
+  The fourth-clause-separator audit checks the reused selected 59-rule `Sep` appender and fixed
+  45-rule cursor table, the reused inner launch and new outer total bridge, the exact 113-rule
+  suffix and symbolic 3300-rule global base, the canonical output through clause four's opening
+  separator, the retained following `F`, the external polynomial, malformed appender and cursor
+  phases, both unlaunched endpoints, and one-step-short timeout. Its exact 56-line audit covers all
+  48 new public declarations plus eight reused interfaces, with 14 empty, 11 `propext`, and 31
+  `propext`/`Quot.sound` closures; it does not emit the following `F`, complete clause four, or
+  claim a general cursor or complete formula builder.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual
