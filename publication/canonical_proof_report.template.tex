@@ -63,12 +63,11 @@
   clause on variables zero, one, and two. It then executes the first padding transition and the
   entire remaining first-clause padding run, then emits the complete second clause
   \code{Sep F F F T F Finish}, traverses the entire remaining clause-two padding block, and then
-  emits clause three's opening \code{Sep} and complete negative literals \code{F F} and
-  \code{F T T F} on variables zero and two, retaining the following \code{Finish} coordinate.
-  Every traversed
+  emits the complete third clause \code{Sep F F F T T F Finish} on variables zero and two,
+  retaining its first in-range padding coordinate. Every traversed
   padding slot and emitted populated slot has a direct schedule proof, the emitted bits are the exact
-  canonical prefix, and an external polynomial bounds the compiled run. The terminator and rest of clause three,
-  a general dynamic formula cursor, arbitrary raw slot decoder, and the remaining formula body are not
+  canonical prefix, and an external polynomial bounds the compiled run. The remaining clause-three
+  padding, a general dynamic formula cursor, arbitrary raw slot decoder, and the remaining formula body are not
   implemented, so there is no complete raw
   polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation fingerprints
   are unset, no root theorem exists, and the abstract string-handle bridge is never an activation source.
