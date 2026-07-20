@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-20-60');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-20-61');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -227,6 +227,18 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanConcreteCookLevinBuilderThirdClauseSecondLiteralPrefixRetainedClauseTerminatorCoordinateFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderThirdClauseSecondLiteralPrefixInputPrefixAppenderComposed, true);
   assert.equal(out.leanConcreteCookLevinBuilderThirdClauseSecondLiteralPrefixFailClosedBoundaryTimeoutFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderThirdClausePrefixFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderThirdClausePrefixAxiomAuditPassed, true);
+  assert.equal(out.leanConcreteCookLevinBuilderThirdClausePrefixAuditedDeclarationCount, 57);
+  assert.equal(out.leanConcreteCookLevinBuilderThirdClausePrefixCompiledRawMachineFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderThirdClausePrefixExternalInputSizePolynomialFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderThirdClausePrefixExactFormulaBitsFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderThirdClausePrefixCompleteThirdClauseFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderThirdClausePrefixClauseTerminatorFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderThirdClausePrefixRetainedFirstPaddingCoordinateFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderThirdClausePrefixRetainedAdvancedTokenCoordinateFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderThirdClausePrefixInputPrefixAppenderComposed, true);
+  assert.equal(out.leanConcreteCookLevinBuilderThirdClausePrefixFailClosedBoundaryTimeoutFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderInputPrefixAppenderComposed, true);
   assert.equal(out.leanConcreteCookLevinBuilderDynamicCursorFormalized, false);
   assert.equal(out.leanConcreteCookLevinFormulaBuilderFormalized, false);
@@ -365,15 +377,15 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.match(out.siteStatusSha256, /^[0-9a-f]{64}$/u);
 });
 
-test('formal reconstruction status pins the clause-three second-literal inventory and source closure', async () => {
+test('formal reconstruction status pins the complete clause-three inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 9024);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 4688);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 3108);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 3089);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 80);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 9117);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 4764);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 3122);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 3151);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 81);
   assert.equal(status.leanSourceClosureSha256,
-    '9a711cfc0c85aea0ef04efaf16a885e38f14a98831874c81b5cc889a5ef3715e');
+    '0d09467c09dbdd99b07c0fea2f21e24d75b9efc4701c6d5c6e3102a913cba0c8');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -605,6 +617,8 @@ test('formal reconstruction status pins the clause-three second-literal inventor
     'node --test audits/lean-concrete-cook-levin-builder-third-clause-second-literal-prefix0.test.mjs',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderThirdClauseSecondLiteralPrefixAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderThirdClauseSecondLiteralPrefix.lean',
+    'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderThirdClausePrefixAxiomAudit.lean',
+    'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderThirdClausePrefix.lean',
   ]) assert.equal(status.verificationCommands.includes(command), true, command);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP')), true);
@@ -676,12 +690,14 @@ test('formal reconstruction status pins the clause-three second-literal inventor
     'CookLevin.BuilderThirdClauseFirstLiteralPrefix composes the complete third-clause separator prefix')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'CookLevin.BuilderThirdClauseSecondLiteralPrefix composes the complete third-clause first-literal prefix')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes(
+    'CookLevin.BuilderThirdClausePrefix composes the complete third-clause second-literal prefix')), true);
 });
 
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-20-COOK-LEVIN-BUILDER-THIRD-CLAUSE-SECOND-LITERAL-PREFIX-59');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-20-COOK-LEVIN-BUILDER-THIRD-CLAUSE-PREFIX-60');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);

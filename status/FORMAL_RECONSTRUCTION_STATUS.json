@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-20-60",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-20-61",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -207,6 +207,18 @@
   "leanConcreteCookLevinBuilderThirdClauseSecondLiteralPrefixRetainedClauseTerminatorCoordinateFormalized": true,
   "leanConcreteCookLevinBuilderThirdClauseSecondLiteralPrefixInputPrefixAppenderComposed": true,
   "leanConcreteCookLevinBuilderThirdClauseSecondLiteralPrefixFailClosedBoundaryTimeoutFormalized": true,
+  "leanConcreteCookLevinBuilderThirdClausePrefixFormalized": true,
+  "leanConcreteCookLevinBuilderThirdClausePrefixAxiomAuditPassed": true,
+  "leanConcreteCookLevinBuilderThirdClausePrefixAuditedDeclarationCount": 57,
+  "leanConcreteCookLevinBuilderThirdClausePrefixCompiledRawMachineFormalized": true,
+  "leanConcreteCookLevinBuilderThirdClausePrefixExternalInputSizePolynomialFormalized": true,
+  "leanConcreteCookLevinBuilderThirdClausePrefixExactFormulaBitsFormalized": true,
+  "leanConcreteCookLevinBuilderThirdClausePrefixCompleteThirdClauseFormalized": true,
+  "leanConcreteCookLevinBuilderThirdClausePrefixClauseTerminatorFormalized": true,
+  "leanConcreteCookLevinBuilderThirdClausePrefixRetainedFirstPaddingCoordinateFormalized": true,
+  "leanConcreteCookLevinBuilderThirdClausePrefixRetainedAdvancedTokenCoordinateFormalized": true,
+  "leanConcreteCookLevinBuilderThirdClausePrefixInputPrefixAppenderComposed": true,
+  "leanConcreteCookLevinBuilderThirdClausePrefixFailClosedBoundaryTimeoutFormalized": true,
   "leanConcreteCookLevinBuilderInputPrefixAppenderComposed": true,
   "leanConcreteCookLevinBuilderDynamicCursorFormalized": false,
   "leanConcreteCookLevinFormulaBuilderFormalized": false,
@@ -343,7 +355,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-20-COOK-LEVIN-BUILDER-THIRD-CLAUSE-SECOND-LITERAL-PREFIX-59",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-20-COOK-LEVIN-BUILDER-THIRD-CLAUSE-PREFIX-60",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -538,6 +550,7 @@
     "node --test audits/lean-concrete-cook-levin-builder-third-clause-separator-step0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-builder-third-clause-first-literal-prefix0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-builder-third-clause-second-literal-prefix0.test.mjs",
+    "node --test audits/lean-concrete-cook-levin-builder-third-clause-prefix0.test.mjs",
     "node --test audits/lean-nand-semantics0.test.mjs",
     "node --test audits/lean-nand-enumerator0.test.mjs",
     "node --test audits/lean-nand-reference-minimum0.test.mjs",
@@ -618,6 +631,8 @@
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderThirdClauseFirstLiteralPrefix.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderThirdClauseSecondLiteralPrefixAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderThirdClauseSecondLiteralPrefix.lean",
+    "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderThirdClausePrefixAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderThirdClausePrefix.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFWorkCanonical.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteWorkCompilerEdges.lean",
     "lake env lean -DwarningAsError=true --run lean-regression/PNPConcreteCNFWorkCanonicalExtended.lean",
@@ -681,6 +696,7 @@
     "CookLevin.BuilderThirdClauseSeparatorStep composes the complete second-clause padding run with the reused selected 59-rule Sep appender, two total symbol-preserving bridges, and the reused 45-rule cursor advance. Its literal table has 2272 plus eight inherited unary-evaluator rule counts. Every raw bitstring emits the separator beginning clause three, retains the following negative-sign coordinate, and proves exact equality with encodedFormula.take (2 * (FormulaWidth + 20)). Direct and specification cursors both prove that the following token is F. The external compiled bound is BuilderSecondClausePaddingRun.rawTimeBound + 330 + 24*n + 12*FormulaWidth + 12*cursorWord.length. The combined 56-declaration audit has 14 empty closures, 11 using only propext, and 31 using only propext and Quot.sound, never Classical.choice or a project axiom. Both pre-launch endpoints, malformed appender tally/output, malformed cursor scratch, and one-step-short fuel remain timeout. This emits only the third-clause separator and does not emit the following F, complete clause three, implement a general dynamic formula cursor, emit the remaining body, construct a complete builder, provide RawRefinement or PolynomialReduction, prove CNFSAT NP-complete or in P, or prove P = NP.",
     "CookLevin.BuilderThirdClauseFirstLiteralPrefix composes the complete third-clause separator prefix with the reused 235-rule two-F appender/cursor suffix behind one total symbol-preserving bridge. Its literal table has 2516 plus eight inherited unary-evaluator rule counts. Every raw bitstring emits the complete negative literal on variable zero in clause three, retains the following negative-sign coordinate on variable two, and proves exact equality with encodedFormula.take (2 * (FormulaWidth + 22)). The external compiled bound is BuilderThirdClauseSeparatorStep.rawTimeBound + 732 + 48*n + 24*FormulaWidth + 24*cursorWord.length. The combined 87-declaration audit has 24 empty closures, 18 using only propext, and 45 using only propext and Quot.sound, never Classical.choice or a project axiom. All four pre-launch endpoints, malformed appender tally/output in both copies, malformed cursor scratch in both copies, and one-step-short fuel remain timeout. This is one fixed negative literal and does not emit the following F, complete clause three, implement a general dynamic formula cursor, emit the remaining body, construct a complete builder, provide RawRefinement or PolynomialReduction, prove CNFSAT NP-complete or in P, or prove P = NP.",
     "CookLevin.BuilderThirdClauseSecondLiteralPrefix composes the complete third-clause first-literal prefix with one fixed 479-rule F/T/T/F appender/cursor suffix behind one total symbol-preserving bridge. Its literal table has 3004 plus eight inherited unary-evaluator rule counts. Every raw bitstring emits the complete negative literal on variable two in clause three, retains the following clause-terminator coordinate, and proves exact equality with encodedFormula.take (2 * (FormulaWidth + 26)). The external compiled bound is BuilderThirdClauseFirstLiteralPrefix.rawTimeBound + 1752 + 96*n + 48*FormulaWidth + 48*cursorWord.length. The complete 145-declaration audit has 46 empty closures, 32 using only propext, and 67 using only propext and Quot.sound, never Classical.choice or a project axiom. All eight pre-launch endpoints, malformed tally/output in all four appenders, malformed scratch in all four cursors, and one-step-short fuel remain timeout. This is the second fixed negative literal and does not emit the following Finish, complete clause three, implement a general dynamic formula cursor, emit the remaining body, construct a complete builder, provide RawRefinement or PolynomialReduction, prove CNFSAT NP-complete or in P, or prove P = NP.",
+    "CookLevin.BuilderThirdClausePrefix composes the complete third-clause second-literal prefix with one selected 59-rule Finish appender, two total symbol-preserving bridges, and the existing 45-rule cursor advance. Its literal table has 3126 plus eight inherited unary-evaluator rule counts. Every raw bitstring emits the complete third clause, advances to its first in-range padding coordinate, and proves exact equality with encodedFormula.take (2 * (FormulaWidth + 27)). The external compiled bound is BuilderThirdClauseSecondLiteralPrefix.rawTimeBound + 498 + 24*n + 12*FormulaWidth + 12*BuilderThirdClauseSeparatorStep.cursorWord.length. The combined 57-declaration audit has 14 empty closures, 10 using only propext, and 33 using only propext and Quot.sound, never Classical.choice or a project axiom. Both pre-launch endpoints, malformed appender tally/output, malformed cursor scratch, and one-step-short fuel remain timeout. This completes clause three only and does not traverse its padding, implement a general dynamic formula cursor, emit the remaining body, construct a complete builder, provide RawRefinement or PolynomialReduction, prove CNFSAT NP-complete or in P, or prove P = NP.",
     "The 9,300-pair canonical sweep, 40,020-pair extended sweep, 261,121-pair bounded differential sweep, and ten compiler-edge cases are finite regression evidence; the universal result comes from the audited Lean theorems, not from testing.",
     "The formalized direct-wire NAND semantics layer does not by itself prove enumeration, minimum size, replacement/slack, the locked NAND builder, its threshold, SAT, or P = NP.",
     "The exact-width syntactic NAND enumeration remains intentionally noncanonical and may contain duplicates.",
@@ -733,7 +749,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "9a711cfc0c85aea0ef04efaf16a885e38f14a98831874c81b5cc889a5ef3715e",
+    "actualSourceClosureSha256": "0d09467c09dbdd99b07c0fea2f21e24d75b9efc4701c6d5c6e3102a913cba0c8",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -763,22 +779,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-20-60",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-20-61",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "d03df5df6a48f11abc39ec6bb2905f5527125b8cba04fbd8bd513a151b31c5f3",
+  "leanTheoremInventorySha256": "155a862474126aa8fb8c5c75c6e2e7126f1b69febac1e4100d505e405d974db5",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 9024,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 3089,
-  "leanTheoremInventoryTheoremCount": 4688,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 3108,
-  "leanTheoremInventorySourceClosureModuleCount": 80,
-  "leanSourceClosureSha256": "9a711cfc0c85aea0ef04efaf16a885e38f14a98831874c81b5cc889a5ef3715e",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-20-60",
+  "leanTheoremInventoryDeclarationCount": 9117,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 3151,
+  "leanTheoremInventoryTheoremCount": 4764,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 3122,
+  "leanTheoremInventorySourceClosureModuleCount": 81,
+  "leanSourceClosureSha256": "0d09467c09dbdd99b07c0fea2f21e24d75b9efc4701c6d5c6e3102a913cba0c8",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-20-61",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "041eef6821e839f112579c0adfa33a411f8a92e72487579a069fdde241275c78",
+  "formalPublicationMapSha256": "c931f62bdc480c02a1a2c3556fbb480999a653282282ff0ecc5558a5f283659e",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",
@@ -13966,6 +13982,545 @@
       "status": "formalized-foundation-only"
     },
     {
+      "id": "concrete-cook-levin-builder-third-clause-prefix",
+      "title": "Cook-Levin complete third-clause prefix",
+      "classification": "formalized-foundation-only",
+      "scope": "For every fixed concrete polynomial-time verifier, one literal finite work machine composes the complete clause-three second-literal prefix with a selected 59-rule Finish appender, two total symbol-preserving bridges, and one copy of the existing 45-rule cursor advance under collision-free state images. The fixed suffix has exactly 113 rules and the global table has exactly 3126 plus the eight inherited unary-evaluator rule counts. Every raw input follows an exact all-input trace, emits the canonical prefix through the complete third clause, and retains its first in-range padding coordinate. The emitted bits equal encodedFormula.take (2 * (FormulaWidth + 27)); direct schedule lookup proves the executed opportunity is Finish and the retained next opportunity is padding. The compiled run is bounded by BuilderThirdClauseSecondLiteralPrefix.rawTimeBound + 498 + 24*n + 12*FormulaWidth + 12*BuilderThirdClauseSeparatorStep.cursorWord.length. Both pre-launch endpoints, malformed appender tally/output, malformed cursor scratch, and one-step-short fuel remain timeout. All 55 new public declarations plus two reviewed cursor dead-loop facts are axiom-audited: 14 have empty closure, 10 use only propext, and 33 use only propext and Quot.sound, with no project axiom or Classical.choice.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.CursorAdvance.deadState_workStep",
+        "PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.CursorAdvance.malformedScratch_enters_dead",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.FinishTokenCursor.machine_acceptState_ne_rejectState",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.FinishTokenCursor.rule_source_ne_acceptState",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.FinishTokenCursor.rules_length",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.FinishTokenCursor.rules_pairwise_query_distinct",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.appenderEndpoint_before_cursor_launch_timeout",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.appender_workRunExact",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.boundedDecide_compile_accept",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.boundedDecide_compile_ne_timeout",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.clauseTerminatorSlot_direct_eq_finish",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.cursor_workRunExact",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.finalConfiguration_state",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.finalOutside_contains_finalTokenSlot",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.finalTape_represents",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.finalTokenBits_eq_encodedFormula_thirdClause",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.finalTokenSlot_eq_thirdClauseStart_add_eight",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.finishTokenCursor_launch_workStep",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.machine_acceptState_ne_rejectState",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.malformedAppenderOutput_timeout",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.malformedAppenderTally_timeout",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.malformedCursorScratch_timeout",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.nextTokenSlot_direct_eq_padding",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.prefixEndpoint_before_launch_timeout",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.prefixFinish_launch_workStep",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.prefix_workRunExact",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.rawTimeBound_eval",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.rawTimeBound_le",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.rule_source_ne_acceptState",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.rules_length",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.rules_pairwise_query_distinct",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.run_compile_exact",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.run_compile_rawTimeBound",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.run_compile_rawTimeBound_blankEquivalent",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.specification_next_step",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.specification_terminator_step",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.suffix_workRunExact",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.thirdClauseTokens_eq_canonical_formula_prefix",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.workBoundedDecide_accept",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.workRunExact",
+        "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.work_one_step_short_timeout"
+      ],
+      "nonClaim": "This milestone emits only the fixed Finish terminator that completes clause three and advances to its first padding coordinate. It does not traverse clause-three padding, implement a general dynamic formula cursor or raw decoder for arbitrary schedule coordinates, emit the remaining formula body, construct a complete formula builder or FunctionProgram.RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-hardness or NP-completeness, establish CNFSAT in P, or prove P = NP.",
+      "theoremRows": [
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.CursorAdvance.deadState_workStep",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "681cac71bc2a0b9c3c42250a3b3e4ef28bb743f8b409b0b440a64230655eabaf",
+          "expectedKernelTypeSha256": "681cac71bc2a0b9c3c42250a3b3e4ef28bb743f8b409b0b440a64230655eabaf",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.CursorAdvance.malformedScratch_enters_dead",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "bfde87bc9e3bc501eb3ca0f3edb197ab2b120fef845b632574bdf14209c72292",
+          "expectedKernelTypeSha256": "bfde87bc9e3bc501eb3ca0f3edb197ab2b120fef845b632574bdf14209c72292",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.FinishTokenCursor.machine_acceptState_ne_rejectState",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "085381a296da46be4e957d68e063026810db4855c2fe2f74a8ad13705a2c6a43",
+          "expectedKernelTypeSha256": "085381a296da46be4e957d68e063026810db4855c2fe2f74a8ad13705a2c6a43",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.FinishTokenCursor.rule_source_ne_acceptState",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c9bca6b81c8c7ef40929c045d8e7527cc5f673f645dd087785f5e677148af184",
+          "expectedKernelTypeSha256": "c9bca6b81c8c7ef40929c045d8e7527cc5f673f645dd087785f5e677148af184",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.FinishTokenCursor.rules_length",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "13f07acc2df0542753393765f038d0a567a15fbc61e31fbd22b7407d59eb589d",
+          "expectedKernelTypeSha256": "13f07acc2df0542753393765f038d0a567a15fbc61e31fbd22b7407d59eb589d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.FinishTokenCursor.rules_pairwise_query_distinct",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "14a7b49176c64cbc29d038c4cbd6f5bcade9a660e4bb2b2d308182fb3ae369c8",
+          "expectedKernelTypeSha256": "14a7b49176c64cbc29d038c4cbd6f5bcade9a660e4bb2b2d308182fb3ae369c8",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.appenderEndpoint_before_cursor_launch_timeout",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5333ea3774ad1d00eaedcd2bbcd295b6c372ccccf906fa78ad196c2efd45b37c",
+          "expectedKernelTypeSha256": "5333ea3774ad1d00eaedcd2bbcd295b6c372ccccf906fa78ad196c2efd45b37c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.appender_workRunExact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "86b7e16c9bb3ff5782deb385e0b2654a82a46b87348600d8417dfe5406da80f3",
+          "expectedKernelTypeSha256": "86b7e16c9bb3ff5782deb385e0b2654a82a46b87348600d8417dfe5406da80f3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.boundedDecide_compile_accept",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4879b56d09425763782427481cc0698af9a90ba59c54e1dd8ce461d6163334f5",
+          "expectedKernelTypeSha256": "4879b56d09425763782427481cc0698af9a90ba59c54e1dd8ce461d6163334f5",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.boundedDecide_compile_ne_timeout",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "fb51a3a95ccaecdba08da7ee2415f4df8cfbeaf567ae68a8f6650703da7b731b",
+          "expectedKernelTypeSha256": "fb51a3a95ccaecdba08da7ee2415f4df8cfbeaf567ae68a8f6650703da7b731b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.clauseTerminatorSlot_direct_eq_finish",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "469513eb11e5474d00e27321b86942e61dae005fefffe81c5ecd11a198cd9055",
+          "expectedKernelTypeSha256": "469513eb11e5474d00e27321b86942e61dae005fefffe81c5ecd11a198cd9055",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.cursor_workRunExact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4a3d019f45b85fb97bb24b640c943524087cfd95259083d83f82d1c53bfeefe7",
+          "expectedKernelTypeSha256": "4a3d019f45b85fb97bb24b640c943524087cfd95259083d83f82d1c53bfeefe7",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.finalConfiguration_state",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "47f8564a92976c270f5905b67532dc6c62dd8ac1b40100e39c9602d55294c46f",
+          "expectedKernelTypeSha256": "47f8564a92976c270f5905b67532dc6c62dd8ac1b40100e39c9602d55294c46f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.finalOutside_contains_finalTokenSlot",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "edbe14a3caced903a3b1ff04834d355dc8a964a4181314ad491e815166c4a1d7",
+          "expectedKernelTypeSha256": "edbe14a3caced903a3b1ff04834d355dc8a964a4181314ad491e815166c4a1d7",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.finalTape_represents",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "19a1d224dc1815de31a20e318031cfc4dcb36fbafb5f998cb7f048ce5007d265",
+          "expectedKernelTypeSha256": "19a1d224dc1815de31a20e318031cfc4dcb36fbafb5f998cb7f048ce5007d265",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.finalTokenBits_eq_encodedFormula_thirdClause",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a8711d3a0e1d183e8a18b0d4490c753d64b07747639d50d4e96814d11133c47b",
+          "expectedKernelTypeSha256": "a8711d3a0e1d183e8a18b0d4490c753d64b07747639d50d4e96814d11133c47b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.finalTokenSlot_eq_thirdClauseStart_add_eight",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5751378f4a8db7806c76121fa9db3ba23bf0051d7fa58a108becc64467e2f3db",
+          "expectedKernelTypeSha256": "5751378f4a8db7806c76121fa9db3ba23bf0051d7fa58a108becc64467e2f3db",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.finishTokenCursor_launch_workStep",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c27bdc9f389fc095349896236e5ff5f1086891be758029cfe8411c103e952088",
+          "expectedKernelTypeSha256": "c27bdc9f389fc095349896236e5ff5f1086891be758029cfe8411c103e952088",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.machine_acceptState_ne_rejectState",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "39df940577968fde13b2b47b606747ed2b196f08b77a2f8adbd5c06dc99a7c30",
+          "expectedKernelTypeSha256": "39df940577968fde13b2b47b606747ed2b196f08b77a2f8adbd5c06dc99a7c30",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.malformedAppenderOutput_timeout",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "85b5cfbc421c0baf4def6cb648d7a3e77dc7e62166dda88c2415cb43328d7ae2",
+          "expectedKernelTypeSha256": "85b5cfbc421c0baf4def6cb648d7a3e77dc7e62166dda88c2415cb43328d7ae2",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.malformedAppenderTally_timeout",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e46a74465a167cb4ecb34580720b0b83c3e7a0d4591c0cf8f323c72b3d47d2ef",
+          "expectedKernelTypeSha256": "e46a74465a167cb4ecb34580720b0b83c3e7a0d4591c0cf8f323c72b3d47d2ef",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.malformedCursorScratch_timeout",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f3c43228d9fc2b650d435352117d3434df5adfacabd6d2c26183485a20009557",
+          "expectedKernelTypeSha256": "f3c43228d9fc2b650d435352117d3434df5adfacabd6d2c26183485a20009557",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.nextTokenSlot_direct_eq_padding",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "cf94e231582120a0b1e638929359b7b343b32c77be2562cb3a5afd68e9681fce",
+          "expectedKernelTypeSha256": "cf94e231582120a0b1e638929359b7b343b32c77be2562cb3a5afd68e9681fce",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.prefixEndpoint_before_launch_timeout",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "bf0c0daa8d899381ffd4ec937ec540e521dc17935d5b3e36f4d3ccccd40f528a",
+          "expectedKernelTypeSha256": "bf0c0daa8d899381ffd4ec937ec540e521dc17935d5b3e36f4d3ccccd40f528a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.prefixFinish_launch_workStep",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f1a2da449333f7a3e872abb128448c047b2cd0f14b89bdcaaca306cfc747380d",
+          "expectedKernelTypeSha256": "f1a2da449333f7a3e872abb128448c047b2cd0f14b89bdcaaca306cfc747380d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.prefix_workRunExact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e9b6513e6a432072be40e4a6e0855e82e5a16ace99ae19d33307be0ecc37ca6d",
+          "expectedKernelTypeSha256": "e9b6513e6a432072be40e4a6e0855e82e5a16ace99ae19d33307be0ecc37ca6d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.rawTimeBound_eval",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0fb6da98fab563b511af87602a7dc92ec646a2498619b92e53fb9e73c473fd02",
+          "expectedKernelTypeSha256": "0fb6da98fab563b511af87602a7dc92ec646a2498619b92e53fb9e73c473fd02",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.rawTimeBound_le",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0c6e16ad24372dd734027089e09167ac3e9f8b52d10a12e91cbd4ca4956d21b1",
+          "expectedKernelTypeSha256": "0c6e16ad24372dd734027089e09167ac3e9f8b52d10a12e91cbd4ca4956d21b1",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.rule_source_ne_acceptState",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9bad8e5e20457c730807972c3ef54356d066493d294318afbda32e18111d17dc",
+          "expectedKernelTypeSha256": "9bad8e5e20457c730807972c3ef54356d066493d294318afbda32e18111d17dc",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.rules_length",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5ccd5111f0e6490ca7f841abb7e3135a9059639a966d5d9a917301e9734c00af",
+          "expectedKernelTypeSha256": "5ccd5111f0e6490ca7f841abb7e3135a9059639a966d5d9a917301e9734c00af",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.rules_pairwise_query_distinct",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5d2bda00893162af9c4c265d90beded2927e4cc425c7ff56649697d882bc7dab",
+          "expectedKernelTypeSha256": "5d2bda00893162af9c4c265d90beded2927e4cc425c7ff56649697d882bc7dab",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.run_compile_exact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "386d6372459efb419def9197f97025a83daec0539177c8f6be7c7abfe247703a",
+          "expectedKernelTypeSha256": "386d6372459efb419def9197f97025a83daec0539177c8f6be7c7abfe247703a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.run_compile_rawTimeBound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "888185e7abf7d0158c969bc03bc47c81b03e382b1189829d679584727975caeb",
+          "expectedKernelTypeSha256": "888185e7abf7d0158c969bc03bc47c81b03e382b1189829d679584727975caeb",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.run_compile_rawTimeBound_blankEquivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0b6ec6cab92f3035f0da87262007b5ebdedb6cf27bdbe5c8177ad2b4501b0975",
+          "expectedKernelTypeSha256": "0b6ec6cab92f3035f0da87262007b5ebdedb6cf27bdbe5c8177ad2b4501b0975",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.specification_next_step",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a7d47c19e2a6423fa06cb6968206f527d8c0838b7bca4a6078fe014c50264867",
+          "expectedKernelTypeSha256": "a7d47c19e2a6423fa06cb6968206f527d8c0838b7bca4a6078fe014c50264867",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.specification_terminator_step",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "cb975c3f55a9a9e42e94e42234e831506ad6dc3307d2fda9716a18755814b8bf",
+          "expectedKernelTypeSha256": "cb975c3f55a9a9e42e94e42234e831506ad6dc3307d2fda9716a18755814b8bf",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.suffix_workRunExact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c4cf3144bdbecb6c1ca5920afac7c992931b4b251de4e0f09ed89e58b9d15bdb",
+          "expectedKernelTypeSha256": "c4cf3144bdbecb6c1ca5920afac7c992931b4b251de4e0f09ed89e58b9d15bdb",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.thirdClauseTokens_eq_canonical_formula_prefix",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "adf0ef05eaf503599e482f976d8bee54ecc8158ef042ccbf5cf656457c82c765",
+          "expectedKernelTypeSha256": "adf0ef05eaf503599e482f976d8bee54ecc8158ef042ccbf5cf656457c82c765",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.workBoundedDecide_accept",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "34d15063d2b9f9959a4cf20e51e73dee9bedbb93a99e09dfa66136039322f37f",
+          "expectedKernelTypeSha256": "34d15063d2b9f9959a4cf20e51e73dee9bedbb93a99e09dfa66136039322f37f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.workRunExact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "29a8862876d69b1c90f8382f325c9a4f81c906eecaf3a2e6ad74f6d07117239f",
+          "expectedKernelTypeSha256": "29a8862876d69b1c90f8382f325c9a4f81c906eecaf3a2e6ad74f6d07117239f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderThirdClausePrefix.work_one_step_short_timeout",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "2357eca86e6707f27b61bcc0fa33e711ad024622b95263478917f280025126ea",
+          "expectedKernelTypeSha256": "2357eca86e6707f27b61bcc0fa33e711ad024622b95263478917f280025126ea",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
+    },
+    {
       "id": "direct-wire-semantics",
       "title": "Typed direct-wire NAND semantics",
       "classification": "formalized",
@@ -14388,7 +14943,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-20-60",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-20-61",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

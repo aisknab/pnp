@@ -369,10 +369,20 @@ and terminator for variable two, retaining coordinate
 and `Quot.sound`. Malformed tally/output in all four appenders, malformed scratch in all four
 cursors, all eight unlaunched endpoints, and one-step-short fuel remain fail-closed.
 
-This earns the complete second clause, traverses its remaining padding, and emits clause three's
-opening separator and complete negative literals on variables zero and two. It is not a general
-dynamic cursor or an arbitrary raw slot decoder: no machine emits the following `Finish`,
-completes clause three, or emits the remaining formula body, composes a complete raw formula builder
+The complete-third-clause milestone then reuses the selected 59-rule `Finish` appender and 45-rule
+cursor advance behind one total symbol-preserving bridge. The resulting literal table has `3126`
+plus the eight inherited unary-evaluator rule counts. Every raw input emits the clause terminator,
+advances from `V + 1 + 2 * formulaTokensPerClause + 7` to `+ 8`, and proves by both direct and
+specification cursors that the retained opportunity is the first in-range padding slot. The output
+bits are exactly `encodedFormula.take (2 * (FormulaWidth + 27))`; the external compiled bound adds
+`498 + 24*n + 12*FormulaWidth + 12*cursorWord.length` to the second-literal bound. The combined
+57-declaration audit has 14 empty closures, 10 using only `propext`, and 33 using only `propext`
+and `Quot.sound`. Malformed appender tally/output, malformed cursor scratch, both unlaunched
+endpoints, and one-step-short fuel remain fail-closed.
+
+This earns the complete first three populated clauses and traverses all padding before clause
+three. It is not a general dynamic cursor or an arbitrary raw slot decoder: no machine traverses
+clause-three padding or emits the remaining formula body, composes a complete raw formula builder
 with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,
