@@ -1,0 +1,77 @@
+import PNP
+
+#print axioms PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.PaddingCountdown.machine
+#print axioms PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.PaddingCountdown.loop_workRunExact
+#print axioms PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.PaddingCountdown.loopSteps_le
+
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.remainingPaddingPolynomial
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.remainingPaddingCount
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.remainingPaddingCount_eq
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.remainingPaddingCount_eq_formulaTokensPerClause_sub_eight
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.remainingPaddingCount_positive
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.fourthClauseStartPolynomial
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.fourthClauseStart
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.fourthClauseStart_eq
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.predecessorSlot_add_remainingPaddingCount
+
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.countEvaluator
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.targetEvaluator
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.countdownTargetMachine
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.paddingSuffixMachine
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.machine
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.rules_length
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.rules_pairwise_query_distinct
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.machine_acceptState_ne_rejectState
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.rule_source_ne_acceptState
+
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.countWord
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.countRootPrefixLength
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.countControllerPrefixLength
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.countOutside
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.countTape
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.countdownFinalOutside
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.countdownFinalTape
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.finalOutside
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.finalTape
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.finalConfiguration
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.countdownWorkSteps
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.suffixWorkSteps
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.workSteps
+
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.finalTape_represents
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.countEvaluator_workRunExact
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.countdown_workRunExact
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.targetEvaluator_workRunExact
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.prefix_workRunExact
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.launch_workStep
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.workRunExact
+
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.paddingSlot_direct_eq_padding
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.fourthClauseStart_direct_eq_sep
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.specificationRun
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.specification_padding_run
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.specification_target_step
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.finalTokenBits_eq_encodedFormula_thirdClause
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.finalTokenSlot
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.finalTokenSlot_eq_fourthClauseStart
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.finalOutside_contains_finalTokenSlot
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.finalConfiguration_state
+
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.countdownBoundPolynomial
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.rawTimeBound
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.countdownBoundPolynomial_eval
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.rawTimeBound_eval
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.rawTimeBound_le
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.run_compile_exact
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.run_compile_rawTimeBound
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.run_compile_rawTimeBound_blankEquivalent
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.boundedDecide_compile_accept
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.boundedDecide_compile_ne_timeout
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.workBoundedDecide_accept
+
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.malformedCountdownScratchConfiguration
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.malformedCountdownRootConfiguration
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.malformedCountdownScratch_timeout
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.malformedCountdownRoot_timeout
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.prefixEndpoint_before_launch_timeout
+#print axioms PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.work_one_step_short_timeout

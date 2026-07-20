@@ -595,6 +595,37 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   assert.match(byId.get(
     'concrete-cook-levin-builder-third-clause-prefix').nonClaim,
     /does not traverse clause-three padding/u);
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-third-clause-padding-run').status,
+    'formalized-foundation-only');
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-third-clause-padding-run').earned, true);
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-third-clause-padding-run').allAssumptionFree, false);
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-third-clause-padding-run')
+    .axiomClosureUsesOnlyLeanStandardAllowlist, true);
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-third-clause-padding-run').requiredTheorems.length, 39);
+  for (const theorem of [
+    'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.PaddingCountdown.loop_workRunExact',
+    'PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.workRunExact',
+    'PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.finalTokenBits_eq_encodedFormula_thirdClause',
+    'PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.remainingPaddingCount_eq_formulaTokensPerClause_sub_eight',
+    'PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.paddingSlot_direct_eq_padding',
+    'PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.fourthClauseStart_direct_eq_sep',
+    'PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.rawTimeBound_le',
+    'PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.malformedCountdownRoot_timeout',
+    'PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.work_one_step_short_timeout',
+  ]) assert.equal(byId.get(
+    'concrete-cook-levin-builder-third-clause-padding-run')
+    .requiredTheorems.includes(theorem), true, theorem);
+  assert.match(byId.get(
+    'concrete-cook-levin-builder-third-clause-padding-run').scope,
+    /3178 plus the eight inherited\/generated predecessor evaluator rule counts and the two new evaluator rule counts/u);
+  assert.match(byId.get(
+    'concrete-cook-levin-builder-third-clause-padding-run').nonClaim,
+    /does not emit the fourth-clause separator/u);
   assert.equal(byId.get('concrete-cnf-universal-verifier').requiredTheorems.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP'), true);
   assert.match(byId.get('concrete-cnf-universal-verifier').nonClaim,
@@ -615,17 +646,17 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   ]) assert.equal(byId.get(id).status, 'not-formalized');
 });
 
-test('publication consumes the reviewed complete third-clause map and inventory counts', async () => {
+test('publication consumes the reviewed third-clause-padding map and inventory counts', async () => {
   const [status, mapText] = await Promise.all([
     status0(),
     readFile(new URL('../publication/FORMAL_PUBLICATION_MAP.json', import.meta.url), 'utf8'),
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'cd34ccfe2634eea66b4e9f0f21e04a542624cd240fe2ed11f9072b879cc9fb71');
+    'f085d50a19201eb132474479bc6b660a4a9db6dd10297bd74da12c1eabfe0af4');
   assert.equal(map.milestoneSourceClosureSha256,
-    '0d09467c09dbdd99b07c0fea2f21e24d75b9efc4701c6d5c6e3102a913cba0c8');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 1089);
+    '522c47713a55db0605db09c3340b39de686139ff45f5259d087a068a8bfe7db6');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 1126);
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.PipelineCompiler.pipeline_correct'
   ], 'string');
@@ -679,6 +710,12 @@ test('publication consumes the reviewed complete third-clause map and inventory 
   ], 'string');
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.CookLevin.BuilderThirdClausePrefix.nextTokenSlot_direct_eq_padding'
+  ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.workRunExact'
+  ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderThirdClausePaddingRun.fourthClauseStart_direct_eq_sep'
   ], 'string');
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.CursorAdvance.deadState_workStep'
@@ -768,7 +805,7 @@ test('publication consumes the reviewed complete third-clause map and inventory 
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [9117, 4764, 3122, 3151, 81]);
+  ], [9251, 4864, 3140, 3205, 82]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
@@ -808,6 +845,9 @@ test('canonical report source is current and the committed PDF artifact exists',
   assert.match(tex, /canonical prefix through the complete third clause/u);
   assert.match(tex, /retains its first in-range padding coordinate/u);
   assert.match(tex, /does not traverse clause-three padding/u);
+  assert.match(tex, /third-clause-padding composition evaluates/u);
+  assert.match(tex, /retained coordinate is the fourth clause's opening/u);
+  assert.match(tex, /does not emit the fourth-clause separator/u);
   assert.equal(tex.includes('The terminator and rest of clause three'), false);
   assert.equal(tex.includes('It does not compute the remaining header or complete formula'), false);
   assert.ok(tex.includes(status.leanTheoremInventorySha256));
