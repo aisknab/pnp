@@ -75,6 +75,7 @@ on:
       - 'audits/lean-concrete-cook-levin-builder-third-clause-second-literal-prefix0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-third-clause-prefix0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-third-clause-padding-run0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-builder-fourth-clause-separator-step0.test.mjs'
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
       - 'audits/lean-nand-reference-minimum0.test.mjs'
@@ -214,6 +215,7 @@ on:
       - 'audits/lean-concrete-cook-levin-builder-third-clause-second-literal-prefix0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-third-clause-prefix0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-third-clause-padding-run0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-builder-fourth-clause-separator-step0.test.mjs'
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
       - 'audits/lean-nand-reference-minimum0.test.mjs'
@@ -417,6 +419,9 @@ jobs:
 
       - name: Audit Cook-Levin third-clause padding run
         run: node --test audits/lean-concrete-cook-levin-builder-third-clause-padding-run0.test.mjs
+
+      - name: Audit Cook-Levin fourth-clause separator step
+        run: node --test audits/lean-concrete-cook-levin-builder-fourth-clause-separator-step0.test.mjs
 
       - name: Build explicit PNP root
         run: lake build PNP
@@ -1228,6 +1233,29 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 9
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderThirdClausePaddingRun.lean
+
+      - name: Print Cook-Levin fourth-clause-separator-step axiom closure
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFourthClauseSeparatorStepAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderFourthClauseSeparatorStep\.")" -eq 48
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondClauseSeparatorStep\.SeparatorCursor\.(appender|machine|rules_length|rules_pairwise_query_distinct|machine_acceptState_ne_rejectState|rule_source_ne_acceptState)'")" -eq 6
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderDynamicTokenCursorStep\.CursorAdvance\.(malformedScratch_enters_dead|deadState_workStep)'")" -eq 2
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected Cook-Levin fourth-clause separator-step axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Cook-Levin fourth-clause separator step reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 14
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
+          lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFourthClauseSeparatorStep.lean
 
       - name: Print concrete CNF work-input bridge axioms
         run: |

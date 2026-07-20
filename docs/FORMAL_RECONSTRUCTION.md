@@ -395,10 +395,23 @@ empty closures, 9 using only `propext`, and 33 using only `propext` and `Quot.so
 countdown scratch/root phases, the unlaunched predecessor endpoint, and one-step-short total fuel
 remain fail-closed.
 
+The fourth-clause-separator milestone then places the reused selected 59-rule `Sep` appender and
+45-rule cursor advance after that complete padding run through one outer total nine-symbol bridge.
+The resulting global table has `3300` plus the ten inherited/generated unary-evaluator rule counts.
+Every raw input follows exact predecessor, appender, cursor, bridge, suffix, and combined traces;
+emits exactly the separator at `V + 1 + 3 * formulaTokensPerClause`; and advances the retained
+coordinate to `+ 1`, whose direct and specification outcomes are the following negative sign `F`.
+The output bits are exactly `encodedFormula.take (2 * (FormulaWidth + 28))`; the external compiled
+bound is `BuilderThirdClausePaddingRun.rawTimeBound + 426 + 24*n + 12*FormulaWidth +
+12*cursorWord.length`. The combined 56-declaration audit covers all 48 new public declarations and
+eight reused separator/cursor interfaces: 14 closures are empty, 11 use only `propext`, and 31 use
+only `propext` and `Quot.sound`. Malformed appender tally/output, malformed cursor scratch, both
+unlaunched endpoints, and one-step-short total fuel remain fail-closed.
+
 This earns the complete first three populated clauses, traverses their remaining padding, and
-retains clause four's opening schedule coordinate. It is not a general dynamic cursor or an
-arbitrary raw slot decoder: no machine emits that `Sep` or the remaining formula body, composes a
-complete raw formula builder with a construction-runtime proof, or packages
+emits clause four's opening separator. It is not a general dynamic cursor or an arbitrary raw slot
+decoder: no machine emits the following `F` or the remaining formula body, composes a complete raw
+formula builder with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,
 residual-band minimizer, ZeroSlack, the remaining end-to-end polynomial bounds, and the root
