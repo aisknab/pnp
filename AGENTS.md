@@ -20,6 +20,37 @@ host, not as a build host.
 - Keep host, proxy, key, and network details in the user's SSH configuration;
   do not copy private connection data into this repository.
 
+### SSH and remote-job preflight
+
+- Before starting a long remote job, test the configured identity without opening
+  an interactive credential prompt:
+
+  ```bash
+  ssh -o BatchMode=yes -o ConnectTimeout=10 pnpbuilder true
+  ```
+
+- If that probe reports a missing or locked identity, stop and ask the user to
+  unlock or add the already-configured key in their own terminal. Do not create a
+  KDE Wallet, generate a replacement key, rewrite SSH configuration, or repeatedly
+  launch GUI askpass dialogs on the user's behalf.
+- Create one named remote temporary checkout per verification run. Print its path,
+  checked commit, checked tree, command exit status, and the final `systemd-run`
+  resource summary. This makes truncated terminal output diagnosable without
+  rerunning an expensive suite.
+- Give long remote commands phase markers or retain their full log in the remote
+  temporary directory. Return concise success markers; on failure, return the
+  failing phase and a useful tail of its log.
+
+### Package-manager preflight
+
+- Inspect `package.json` and the repository lockfiles before choosing an install
+  command. Run `npm ci` only when the checkout has the required lockfile and the
+  repository documentation calls for it; do not assume every sibling repository
+  uses the same package-manager layout.
+- Do not install dependencies merely as a ritual before a dependency-free script.
+  Prefer the repository's documented verification command and treat a missing
+  lockfile as a preflight finding, not as a reason to generate one.
+
 ## GitHub Actions Policy
 
 Do not create temporary self-mutating GitHub Actions workflows.
@@ -54,6 +85,46 @@ Before finishing a PR branch, make sure its diff contains only the intended file
 Temporary files under `.github/workflows/`, `tools/`, diagnostics directories, or
 generated helper scripts must be removed unless the user explicitly asked to keep
 them as product code.
+
+## Cross-Repository Publication And Deployment
+
+When a formal milestone is published through both this repository and PNPLabs,
+use the following order:
+
+1. Finish the core source, audits, regression tests, generated artefacts, and
+   clean-clone verification before opening or updating the publication sync.
+2. Merge the core PR first. Fetch `origin/main` and record the resulting merge
+   commit and tree; never bind PNPLabs to the feature-branch tip merely because
+   its file tree happens to match.
+3. Synchronize PNPLabs from a clean checkout of that exact core merge commit.
+   Treat theorem pins, non-claim text, counts, coordinates, sizes, and digests as
+   exact generated data. Do not paraphrase or independently retype them in test
+   fixtures.
+4. Run PNPLabs source-bound checks with `PNP_SOURCE_DIR` pointing at that exact
+   core checkout. A test that skips because the source checkout is absent is not
+   cross-repository verification evidence.
+5. Run targeted checks first, then the complete remote suite, then a fresh
+   clean-clone reproduction. This catches cheap syntax or fixture failures before
+   consuming a full verification run.
+6. Merge the PNPLabs PR only after its durable read-only checks are green. Fetch
+   PNPLabs `origin/main` and use the PNPLabs merge commit—not its feature tip—as
+   the deployment coordinate.
+7. Keep privileged production deployment user-owned unless the user explicitly
+   authorizes otherwise. After the user runs the pinned one-line deployment,
+   independently run the read-only production verifier from a clean checkout of
+   the exact PNPLabs merge commit.
+
+Generated counts, theorem totals, hashes, page counts, byte sizes, and coordinates
+are outputs of the generators and verifiers. Do not preselect them. Regenerate
+after the source has stabilized, then record the values that the tools actually
+produce.
+
+Before switching branches, staging, or committing in either repository, inspect
+`git status`. Treat pre-existing untracked files as user-owned and exclude them
+from the change unless the user explicitly places them in scope. After a PR has
+merged, fetch `origin/main` and start follow-up work on a new branch from that
+merge; do not continue stacking unrelated work on the already-merged feature
+branch.
 
 ## Workflow Version And Permission Rules
 
