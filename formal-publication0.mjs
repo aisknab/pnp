@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'dbfe0ebce50bf597ee3a884a2816446ef0afa0161918491f6cfce7e022e3c18f';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'da7f64e7b5833bc4d4399dd191a943a6ceb1fd5aef8d722deaa9d2cb26fdfcbd';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -816,6 +816,44 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.CookLevin.BuilderFourthClausePrefix.workBoundedDecide_accept',
   'PNP.Concrete.CookLevin.BuilderFourthClausePrefix.workRunExact',
   'PNP.Concrete.CookLevin.BuilderFourthClausePrefix.work_one_step_short_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.boundedDecide_compile_accept',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.boundedDecide_compile_ne_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.countEvaluator_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.countdownBoundPolynomial_eval',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.countdown_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.fifthClauseSlotStart_direct_eq_padding',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.fifthClauseSlotStart_eq',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.finalConfiguration_state',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.finalOutside_contains_finalTokenSlot',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.finalTape_represents',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.finalTokenBits_eq_encodedFormula_fourthClause',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.finalTokenSlot_eq_fifthClauseSlotStart',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.launch_workStep',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.machine_acceptState_ne_rejectState',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.malformedCountdownRoot_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.malformedCountdownScratch_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.paddingSlot_direct_eq_padding',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.predecessorSlot_add_remainingPaddingCount',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.prefixEndpoint_before_launch_timeout',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.prefix_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.rawTimeBound_eval',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.rawTimeBound_le',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.remainingPaddingCount_eq',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.remainingPaddingCount_eq_formulaTokensPerClause_sub_nine',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.remainingPaddingCount_positive',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.rule_source_ne_acceptState',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.rules_length',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.rules_pairwise_query_distinct',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.run_compile_exact',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.run_compile_rawTimeBound',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.run_compile_rawTimeBound_blankEquivalent',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.specification_padding_run',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.specification_target_step',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.targetEvaluator_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.workBoundedDecide_accept',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.workRunExact',
+  'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.work_one_step_short_timeout',
+
   'PNP.Concrete.CookLevin.BuilderFourthClauseSecondLiteralPrefix.boundedDecide_compile_accept',
   'PNP.Concrete.CookLevin.BuilderFourthClauseSecondLiteralPrefix.boundedDecide_compile_ne_timeout',
   'PNP.Concrete.CookLevin.BuilderFourthClauseSecondLiteralPrefix.finalConfiguration_state',
@@ -1375,7 +1413,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-21-66') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-21-67') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -1652,7 +1690,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-21-66') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-21-67') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
@@ -1670,7 +1708,7 @@ function validatePublicationMap0(map) {
     'expectedRootKernelTypeSha256',
     'expectedAxiomClosureSha256',
     'expectedSourceClosureSha256',
-  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 66`);
+  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 67`);
   if (!isSha2560(map.milestoneSourceClosureSha256)
       || !isObject0(map.earnedMilestoneTheoremKernelTypeSha256)) {
     throw new Error('reviewed milestone theorem/source fingerprints are missing');
@@ -1689,7 +1727,7 @@ function validatePublicationMap0(map) {
     throw new Error('reviewed milestone theorem kernel-type fingerprint inventory mismatch');
   }
   if (sha256Text0(stableStringify0(map)) !== REQUIRED_PUBLICATION_MAP_SHA2560) {
-    throw new Error('formal publication milestone map drifted from the reviewed release-66 specification');
+    throw new Error('formal publication milestone map drifted from the reviewed release-67 specification');
   }
 }
 
