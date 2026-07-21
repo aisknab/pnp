@@ -128,34 +128,35 @@ node --test \
 ```
 
 The combined audit covers all 65 public declarations in the module and three
-reused countdown interfaces. It rejects project axioms,
+reused countdown interfaces. Exactly 26 closures are empty, 9 use only
+`propext`, and 33 use only `propext` and `Quot.sound`. It rejects project axioms,
 `Classical.choice`, `sorry`, `admit`, native or SAT shortcuts, host-side
 schedule lookup, and caller-supplied execution certificates.
 
 ## Generated publication artifacts
 
 The compiled environment records inventory coordinate
-`PNP-LEAN-THEOREM-INVENTORY-2026-07-21-67`, 9,906 declarations, 5,367
-theorems, 3,252 assumption-free theorems, 87 source-closure modules, and 1,371
+`PNP-LEAN-THEOREM-INVENTORY-2026-07-22-68`, 10,049 declarations, 5,476
+theorems, 3,272 assumption-free theorems, 88 source-closure modules, and 1,408
 reviewed milestone candidates. Its canonical byte SHA-256 is
-`6431a458dbb72513518ecb2b64fb9cd5813323130f49c281df18cd3933da4c16`;
+`db681f0f80c03980c03daec19163be30662789e0c665cc283994d1ea3dc10ccd`;
 the Lean source-closure SHA-256 is
-`2a69acbcb5db358a7b85d0994847dd23a0fddc749cf9e3c73febc55e240ba581`.
+`45c8bca48241157a31c64ece179a1c99b2515476b80e093010976df3dfdba6ae`.
 
-Publication map coordinate `PNP-FORMAL-PUBLICATION-MAP-2026-07-21-67` has
-47 milestones and 1,371 exact kernel-type fingerprints. Its exact file
+Publication map coordinate `PNP-FORMAL-PUBLICATION-MAP-2026-07-22-68` has
+48 milestones, 45 earned milestones, and 1,408 exact kernel-type fingerprints. Its exact file
 SHA-256 is
-`330d204ca47ddd6dbd44e6b83dbd0796559afea5c3592775c67899e3028cc0f9`,
+`84779692d181ec267d437200a97185c398952616be417deec20cc42ccfa7c746`,
 and its canonical reviewed-object fingerprint is
-`da7f64e7b5833bc4d4399dd191a943a6ceb1fd5aef8d722deaa9d2cb26fdfcbd`.
+`db31fbd4bde1abb683f22ee229b03e4b5a05ae724828db0d0bba28724fa4569b`.
 
-Status coordinate `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-21-67` has
-SHA-256 `f59c5a127e0e8d635d5a7283cbc1c5cd70fd9ed2401008cf2164e96b3dda01d6`.
+Status coordinate `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-22-68` has
+SHA-256 `c5214510c22a862b32b03f668801553cb8477f0b49ad59b2735c9d7ed5dbe90a`.
 The generated report coordinate is
-`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-21-67`; its 98,064-byte
-TeX SHA-256 is `6a22031e8a428a174dcfeb6b31a8a4e02ded30add67041f7dc750bd243669d3c`
-and its 43-page, 352,982-byte PDF SHA-256 is
-`ac4c86c2d9658ed4d8b005f388739cbcd6a9931d9b2925af8535ac191ad83d34`.
+`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-22-68`; its 100,115-byte
+TeX SHA-256 is `5e2cfa108b5c9b77bb037f0f3ba1f04a448025dd17436f8e0be1f29612e20185`
+and its 44-page, 356,709-byte PDF SHA-256 is
+`d4daa916897bcbef6b06f862ee69fddb51b02bbe33ed7d98bede454bdd805ad5`.
 All activation fingerprints remain unset and the publication gate remains
 false.
 

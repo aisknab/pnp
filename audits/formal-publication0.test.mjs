@@ -850,7 +850,7 @@ test('publication consumes the reviewed fifth-clause-padding map and inventory c
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'f3556eb8843bef0258036fdcbcf203eaa729ac08482e83dcf2acdd0e230fd557');
+    'db31fbd4bde1abb683f22ee229b03e4b5a05ae724828db0d0bba28724fa4569b');
   assert.equal(map.milestoneSourceClosureSha256,
     '45c8bca48241157a31c64ece179a1c99b2515476b80e093010976df3dfdba6ae');
   assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 1408);
@@ -1104,6 +1104,10 @@ test('canonical report source is current and the committed PDF artifact exists',
   assert.match(tex, /traverses exactly FormulaTokensPerClause - 9 padding opportunities/u);
   assert.match(tex, /first opportunity in the intentionally empty fifth fixed-width clause slot is padding/u);
   assert.match(tex, /does not traverse that empty rectangle/u);
+  assert.match(tex, /Cook-Levin empty fifth-clause padding run/u);
+  assert.match(tex, /traverses exactly FormulaTokensPerClause padding opportunities in the intentionally empty fifth fixed-width clause rectangle/u);
+  assert.match(tex, /first opportunity in the intentionally empty sixth slot are padding/u);
+  assert.match(tex, /does not traverse that sixth rectangle/u);
   assert.equal(tex.includes('The terminator and rest of clause three'), false);
   assert.equal(tex.includes('It does not compute the remaining header or complete formula'), false);
   assert.ok(tex.includes(status.leanTheoremInventorySha256));
