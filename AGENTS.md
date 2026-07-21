@@ -119,6 +119,28 @@ are outputs of the generators and verifiers. Do not preselect them. Regenerate
 after the source has stabilized, then record the values that the tools actually
 produce.
 
+### Cross-repository audit preflight
+
+- Before a source-bound PNPLabs audit, enumerate the refs named by its
+  `docs/audit_targets.json` and verify that every current and historical ref
+  resolves inside `PNP_SOURCE_DIR`. A single-branch checkout may omit required
+  historical tags, and a reused checkout may retain a fetch refspec for a deleted
+  feature branch. Prefer a fresh checkout of the exact core merge or fetch the
+  named tags explicitly before starting an expensive audit.
+- When a generated boundary value changes, search durable workflow shell blocks
+  as well as source, documentation, and tests for the previous exact value. Run
+  the equivalent of every changed workflow assertion on `pnpbuilder` before
+  pushing; changing a step label does not update an embedded assertion.
+- A clean-clone result is evidence only for the commit that was checked. If any
+  follow-up fix changes the PR head, including a workflow-only fix, repeat the
+  exact-head clean-clone reproduction before merging.
+- Keep remote command quoting shallow. Avoid placing command substitutions,
+  `awk` programs, or regular expressions through several nested local-shell,
+  SSH, `systemd-run`, and `bash -lc` quoting layers. Prefer checked-in commands or
+  separate simple remote commands; if orchestration is necessary, use an
+  uncommitted temporary script in the named remote verification directory and
+  confirm that the intended job actually launched before interpreting its exit.
+
 Before switching branches, staging, or committing in either repository, inspect
 `git status`. Treat pre-existing untracked files as user-owned and exclude them
 from the change unless the user explicitly places them in scope. After a PR has
