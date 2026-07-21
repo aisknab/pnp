@@ -466,8 +466,8 @@ opportunity in the intentionally empty sixth fixed-width clause slot. Direct loo
 specification cursor prove every traversed coordinate and the endpoint are padding. The external
 compiled bound is `BuilderFourthClausePaddingRun.rawTimeBound + 18` plus six times the
 count-evaluator work, countdown bound, and target-evaluator work. The 68-declaration audit covers
-all 65 new public declarations and three reused countdown interfaces: 26 closures are empty, 9 use
-only `propext`, and 33 use only `propext` and `Quot.sound`. Both malformed countdown phases, the
+all 65 new public declarations and three reused countdown interfaces: 28 closures are empty, 9 use
+only `propext`, and 31 use only `propext` and `Quot.sound`. Both malformed countdown phases, the
 unlaunched predecessor endpoint, and one-step-short fuel remain fail-closed.
 
 This earns the complete first four populated clauses, traverses all four clauses' remaining padding,

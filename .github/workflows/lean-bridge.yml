@@ -1399,9 +1399,9 @@ jobs:
             echo 'Cook-Levin fifth-clause padding run reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 26
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 28
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 9
-          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFifthClausePaddingRun.lean
 
       - name: Print concrete CNF work-input bridge axioms

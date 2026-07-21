@@ -128,8 +128,8 @@ node --test \
 ```
 
 The combined audit covers all 65 public declarations in the module and three
-reused countdown interfaces. Exactly 26 closures are empty, 9 use only
-`propext`, and 33 use only `propext` and `Quot.sound`. It rejects project axioms,
+reused countdown interfaces. Exactly 28 closures are empty, 9 use only
+`propext`, and 31 use only `propext` and `Quot.sound`. It rejects project axioms,
 `Classical.choice`, `sorry`, `admit`, native or SAT shortcuts, host-side
 schedule lookup, and caller-supplied execution certificates.
 
@@ -146,9 +146,9 @@ the Lean source-closure SHA-256 is
 Publication map coordinate `PNP-FORMAL-PUBLICATION-MAP-2026-07-22-68` has
 48 milestones, 45 earned milestones, and 1,408 exact kernel-type fingerprints. Its exact file
 SHA-256 is
-`84779692d181ec267d437200a97185c398952616be417deec20cc42ccfa7c746`,
+`0ffa3a87b6b9ab0db3b17b7db7b7b9bef43e57a5b0748a701516dd359f4d379c`,
 and its canonical reviewed-object fingerprint is
-`db31fbd4bde1abb683f22ee229b03e4b5a05ae724828db0d0bba28724fa4569b`.
+`6fffe4eff8e91621ce47733dd277b44dd4534f3b3724438204755563b9961934`.
 
 Status coordinate `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-22-68` has
 SHA-256 `b1b27d1d14eb4ef261cbf534a17526cf24dc68e3dc4ffd2d4a2ba06b566e6122`.

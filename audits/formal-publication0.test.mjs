@@ -850,7 +850,7 @@ test('publication consumes the reviewed fifth-clause-padding map and inventory c
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'db31fbd4bde1abb683f22ee229b03e4b5a05ae724828db0d0bba28724fa4569b');
+    '6fffe4eff8e91621ce47733dd277b44dd4534f3b3724438204755563b9961934');
   assert.equal(map.milestoneSourceClosureSha256,
     '45c8bca48241157a31c64ece179a1c99b2515476b80e093010976df3dfdba6ae');
   assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 1408);
