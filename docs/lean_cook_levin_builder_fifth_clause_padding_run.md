@@ -151,12 +151,12 @@ and its canonical reviewed-object fingerprint is
 `6fffe4eff8e91621ce47733dd277b44dd4534f3b3724438204755563b9961934`.
 
 Status coordinate `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-22-68` has
-SHA-256 `b1b27d1d14eb4ef261cbf534a17526cf24dc68e3dc4ffd2d4a2ba06b566e6122`.
+SHA-256 `70522e3c68aa8decbe22f117fd947557b97441d5b171267dff6aa0d0f0f0872a`.
 The generated report coordinate is
 `PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-22-68`; its 100,199-byte
-TeX SHA-256 is `e913ca4b58645a90d6a49b76dae2f1f3a4452663af18b8c5909f50455b1d80c6`
+TeX SHA-256 is `cd6947bad0397b106f93aa1748c04112e14b72f749542a0ec273182cc824027f`
 and its 44-page, 356,778-byte PDF SHA-256 is
-`4f78aea8188173ed03c849248c451d5fe52c6e9bbe000c286b45eafee9110fec`.
+`e4bedede0ea5c5094e0bcf015f5c4f6d6a5d96fef6496e6fbcd506bf65861e24`.
 All activation fingerprints remain unset and the publication gate remains
 false.
 
