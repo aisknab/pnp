@@ -850,10 +850,10 @@ test('publication consumes the reviewed fifth-clause-padding map and inventory c
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'da7f64e7b5833bc4d4399dd191a943a6ceb1fd5aef8d722deaa9d2cb26fdfcbd');
+    'f3556eb8843bef0258036fdcbcf203eaa729ac08482e83dcf2acdd0e230fd557');
   assert.equal(map.milestoneSourceClosureSha256,
-    '2a69acbcb5db358a7b85d0994847dd23a0fddc749cf9e3c73febc55e240ba581');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 1371);
+    '45c8bca48241157a31c64ece179a1c99b2515476b80e093010976df3dfdba6ae');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 1408);
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.PipelineCompiler.pipeline_correct'
   ], 'string');
@@ -1038,7 +1038,7 @@ test('publication consumes the reviewed fifth-clause-padding map and inventory c
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [9906, 5367, 3252, 3630, 87]);
+  ], [10049, 5476, 3272, 3686, 88]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

@@ -457,13 +457,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the fifth-clause-padding inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 9906);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 5367);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 3252);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 3630);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 87);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 10049);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 5476);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 3272);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 3686);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 88);
   assert.equal(status.leanSourceClosureSha256,
-    '2a69acbcb5db358a7b85d0994847dd23a0fddc749cf9e3c73febc55e240ba581');
+    '45c8bca48241157a31c64ece179a1c99b2515476b80e093010976df3dfdba6ae');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
