@@ -431,9 +431,20 @@ external bound is `BuilderFourthClauseFirstLiteralPrefix.rawTimeBound + 2232 + 9
 using only `propext`, and 69 using only `propext` and `Quot.sound`. Malformed tally/output/scratch
 states, all eight unlaunched endpoints, and one-step-short fuel remain fail-closed.
 
-This earns the complete first three populated clauses, traverses their remaining padding, emits
-clause four's opening separator, and emits its first two literals. It is not a general dynamic
-cursor or an arbitrary raw slot decoder: no machine emits the clause terminator or the remaining formula body,
+The complete-fourth-clause milestone then places a selected 59-rule `Finish` appender and the
+existing 45-rule cursor after the second-literal prefix through two total nine-symbol bridges. The
+selected suffix has 113 rules and the resulting table has `4276` plus the ten inherited/generated
+unary-evaluator rule counts. Every raw input emits the clause-four terminator, advances the retained
+coordinate to `V + 1 + 3 * formulaTokensPerClause + 9`, and proves the following token is padding.
+The output bits are exactly `encodedFormula.take (2 * (FormulaWidth + 36))`; the external bound is
+`BuilderFourthClauseSecondLiteralPrefix.rawTimeBound + 618 + 24*n + 12*FormulaWidth +
+12*cursorWord.length`. The 57-declaration audit has 14 empty closures, 10 using only `propext`,
+and 33 using only `propext` and `Quot.sound`. Malformed tally/output/scratch states, both
+unlaunched endpoints, and one-step-short fuel remain fail-closed.
+
+This earns the complete first four populated clauses and traverses the first three clauses'
+remaining padding. It is not a general dynamic cursor or an arbitrary raw slot decoder: no machine
+traverses clause-four padding or emits the remaining formula body,
 composes a complete raw formula builder with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,

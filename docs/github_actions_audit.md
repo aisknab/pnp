@@ -138,6 +138,13 @@ from current theorem status.
   147-line audit covers 124 new declarations, 21 reused suffix interfaces, and two dead-state
   facts, with 46 empty, 32 `propext`, and 69 `propext`/`Quot.sound` closures; it does not emit the
   following `Finish`, complete clause four, or claim a general cursor or complete formula builder.
+  The complete-fourth-clause audit checks the selected 59-rule `Finish` appender, fixed 45-rule
+  cursor, both launches, exact 113-rule suffix and symbolic 4276-rule global base, exact output
+  through the complete fourth clause, the retained first-padding coordinate, external polynomial,
+  malformed appender and cursor phases, both unlaunched endpoints, and one-step-short timeout. Its
+  exact 57-line audit covers 55 new public declarations and two dead-state facts, with 14 empty, 10
+  `propext`, and 33 `propext`/`Quot.sound` closures; it does not traverse clause-four padding or
+  claim a general cursor or complete formula builder.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual
