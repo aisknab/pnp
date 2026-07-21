@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 47);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 44);
+  assert.equal(status.formalPublicationMilestones.length, 48);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 45);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -791,6 +791,38 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   assert.match(byId.get(
     'concrete-cook-levin-builder-fourth-clause-padding-run').nonClaim,
     /does not traverse that empty rectangle/u);
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-fifth-clause-padding-run').status,
+  'formalized-foundation-only');
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-fifth-clause-padding-run').earned, true);
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-fifth-clause-padding-run').allAssumptionFree, false);
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-fifth-clause-padding-run')
+    .axiomClosureUsesOnlyLeanStandardAllowlist, true);
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-fifth-clause-padding-run').requiredTheorems.length, 39);
+  for (const theorem of [
+    'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.PaddingCountdown.loopSteps_le',
+    'PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.PaddingCountdown.loop_workRunExact',
+    'PNP.Concrete.CookLevin.BuilderFifthClausePaddingRun.workRunExact',
+    'PNP.Concrete.CookLevin.BuilderFifthClausePaddingRun.finalTokenBits_eq_encodedFormula_fourthClause',
+    'PNP.Concrete.CookLevin.BuilderFifthClausePaddingRun.paddingCount_eq_formulaTokensPerClause',
+    'PNP.Concrete.CookLevin.BuilderFifthClausePaddingRun.paddingSlot_direct_eq_padding',
+    'PNP.Concrete.CookLevin.BuilderFifthClausePaddingRun.sixthClauseSlotStart_direct_eq_padding',
+    'PNP.Concrete.CookLevin.BuilderFifthClausePaddingRun.rawTimeBound_le',
+    'PNP.Concrete.CookLevin.BuilderFifthClausePaddingRun.malformedCountdownRoot_timeout',
+    'PNP.Concrete.CookLevin.BuilderFifthClausePaddingRun.work_one_step_short_timeout',
+  ]) assert.equal(byId.get(
+    'concrete-cook-levin-builder-fifth-clause-padding-run')
+    .requiredTheorems.includes(theorem), true, theorem);
+  assert.match(byId.get(
+    'concrete-cook-levin-builder-fifth-clause-padding-run').scope,
+    /4380 plus fourteen inherited\/generated unary-evaluator rule counts/u);
+  assert.match(byId.get(
+    'concrete-cook-levin-builder-fifth-clause-padding-run').nonClaim,
+    /does not traverse that sixth rectangle/u);
   assert.equal(byId.get('concrete-cnf-universal-verifier').requiredTheorems.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP'), true);
   assert.match(byId.get('concrete-cnf-universal-verifier').nonClaim,
@@ -811,17 +843,17 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   ]) assert.equal(byId.get(id).status, 'not-formalized');
 });
 
-test('publication consumes the reviewed fourth-clause-padding map and inventory counts', async () => {
+test('publication consumes the reviewed fifth-clause-padding map and inventory counts', async () => {
   const [status, mapText] = await Promise.all([
     status0(),
     readFile(new URL('../publication/FORMAL_PUBLICATION_MAP.json', import.meta.url), 'utf8'),
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'da7f64e7b5833bc4d4399dd191a943a6ceb1fd5aef8d722deaa9d2cb26fdfcbd');
+    '6fffe4eff8e91621ce47733dd277b44dd4534f3b3724438204755563b9961934');
   assert.equal(map.milestoneSourceClosureSha256,
-    '2a69acbcb5db358a7b85d0994847dd23a0fddc749cf9e3c73febc55e240ba581');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 1371);
+    '45c8bca48241157a31c64ece179a1c99b2515476b80e093010976df3dfdba6ae');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 1408);
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.PipelineCompiler.pipeline_correct'
   ], 'string');
@@ -857,6 +889,12 @@ test('publication consumes the reviewed fourth-clause-padding map and inventory 
   ], 'string');
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.CookLevin.BuilderFourthClausePaddingRun.fifthClauseSlotStart_direct_eq_padding'
+  ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderFifthClausePaddingRun.workRunExact'
+  ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderFifthClausePaddingRun.sixthClauseSlotStart_direct_eq_padding'
   ], 'string');
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.CookLevin.BuilderThirdClauseSeparatorStep.workRunExact'
@@ -1000,7 +1038,7 @@ test('publication consumes the reviewed fourth-clause-padding map and inventory 
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [9906, 5367, 3252, 3630, 87]);
+  ], [10049, 5476, 3272, 3686, 88]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
@@ -1066,6 +1104,10 @@ test('canonical report source is current and the committed PDF artifact exists',
   assert.match(tex, /traverses exactly FormulaTokensPerClause - 9 padding opportunities/u);
   assert.match(tex, /first opportunity in the intentionally empty fifth fixed-width clause slot is padding/u);
   assert.match(tex, /does not traverse that empty rectangle/u);
+  assert.match(tex, /Cook-Levin empty fifth-clause padding run/u);
+  assert.match(tex, /traverses exactly FormulaTokensPerClause padding opportunities in the intentionally empty fifth fixed-width clause rectangle/u);
+  assert.match(tex, /first opportunity in the intentionally empty sixth slot are padding/u);
+  assert.match(tex, /does not traverse that sixth rectangle/u);
   assert.equal(tex.includes('The terminator and rest of clause three'), false);
   assert.equal(tex.includes('It does not compute the remaining header or complete formula'), false);
   assert.ok(tex.includes(status.leanTheoremInventorySha256));
