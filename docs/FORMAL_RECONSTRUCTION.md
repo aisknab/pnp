@@ -420,9 +420,20 @@ literal's negative sign `F`. The output bits are exactly
 and 57 using only `propext` and `Quot.sound`. Malformed tally/output/scratch states, all six
 unlaunched endpoints, and one-step-short fuel remain fail-closed.
 
+The fourth-clause-second-literal milestone then places the reused 479-rule selected `F T T F`
+appender/cursor suffix after the first-literal prefix through one outer total nine-symbol bridge.
+The resulting table has `4154` plus the ten inherited/generated unary-evaluator rule counts. Every
+raw input emits the complete second negative literal on variable two, advances the retained
+coordinate to `V + 1 + 3 * formulaTokensPerClause + 8`, and proves the following token is
+`Finish`. The output bits are exactly `encodedFormula.take (2 * (FormulaWidth + 35))`; the
+external bound is `BuilderFourthClauseFirstLiteralPrefix.rawTimeBound + 2232 + 96*n +
+48*FormulaWidth + 48*cursorWord.length`. The 147-declaration audit has 46 empty closures, 32
+using only `propext`, and 69 using only `propext` and `Quot.sound`. Malformed tally/output/scratch
+states, all eight unlaunched endpoints, and one-step-short fuel remain fail-closed.
+
 This earns the complete first three populated clauses, traverses their remaining padding, emits
-clause four's opening separator, and emits its first literal. It is not a general dynamic cursor or
-an arbitrary raw slot decoder: no machine emits the second literal or the remaining formula body,
+clause four's opening separator, and emits its first two literals. It is not a general dynamic
+cursor or an arbitrary raw slot decoder: no machine emits the clause terminator or the remaining formula body,
 composes a complete raw formula builder with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,
