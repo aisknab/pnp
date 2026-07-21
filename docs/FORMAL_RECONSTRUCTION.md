@@ -442,9 +442,24 @@ The output bits are exactly `encodedFormula.take (2 * (FormulaWidth + 36))`; the
 and 33 using only `propext` and `Quot.sound`. Malformed tally/output/scratch states, both
 unlaunched endpoints, and one-step-short fuel remain fail-closed.
 
-This earns the complete first four populated clauses and traverses the first three clauses'
-remaining padding. It is not a general dynamic cursor or an arbitrary raw slot decoder: no machine
-traverses clause-four padding or emits the remaining formula body,
+The fourth-clause-padding milestone then evaluates the exact remaining count
+`(V - 1) * (V + 6) + 3 = formulaTokensPerClause - 9`, runs the reused 25-rule padding countdown,
+and materializes `V + 1 + 4 * formulaTokensPerClause` through two new unary evaluators and three
+total nine-symbol bridges. The resulting table has `4328` plus twelve inherited/generated
+unary-evaluator rule counts. Every raw input traverses the entire remaining clause-four padding
+block without emitting a token, preserves `encodedFormula.take (2 * (FormulaWidth + 36))`, and
+stops at the first opportunity in the intentionally empty fifth fixed-width clause slot. Direct
+lookup and the specification cursor both prove that endpoint is padding. The external compiled
+bound is `BuilderFourthClausePrefix.rawTimeBound + 18` plus six times the count-evaluator work,
+countdown bound, and target-evaluator work. The 68-declaration audit covers all 65 new public
+declarations and three reused countdown interfaces: 26 closures are empty, 9 use only `propext`,
+and 33 use only `propext` and `Quot.sound`. Both malformed countdown phases, the unlaunched
+predecessor endpoint, and one-step-short fuel remain fail-closed.
+
+This earns the complete first four populated clauses and traverses all four clauses' remaining
+padding. It is not a general dynamic cursor or an arbitrary raw slot decoder: no machine traverses
+the intentionally empty fifth clause rectangle, reaches the next constraint, or emits the remaining
+formula body,
 composes a complete raw formula builder with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,
