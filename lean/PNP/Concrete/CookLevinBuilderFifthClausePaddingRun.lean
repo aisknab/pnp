@@ -922,6 +922,7 @@ private theorem formulaClauseTokens_first_four_rectangles_then_two_emptySlots
     encodeUnaryTokens, hLeft, hRight, hThirdLeft, hThirdRight,
     hFourthLeft, hFourthRight, List.append_assoc]
   rw [← List.append_assoc, List.replicate_append_replicate]
+  rw [← List.append_assoc, List.replicate_append_replicate]
 
 private theorem formulaTokensPerClause_at_least_twelve
     {language : Language} (problem : VerifierTableauProblem language) :
@@ -949,8 +950,7 @@ theorem paddingSlot_direct_eq_padding {language : Language}
     ⟨rest, hClauses⟩
   unfold VerifierTableauProblem.formulaTokenSchedule
   rw [hClauses,
-    BuilderFourthClausePaddingRun.finalTokenSlot_eq_fifthClauseSlotStart,
-    BuilderFourthClausePaddingRun.fifthClauseSlotStart_eq]
+    BuilderFourthClausePaddingRun.finalTokenSlot_eq_fifthClauseSlotStart]
   have hHeader :
       (FormulaSchedule.pad (problem.formulaVariableSlotBound + 1)
         (encodeUnaryTokens problem.FormulaWidth)).length =
