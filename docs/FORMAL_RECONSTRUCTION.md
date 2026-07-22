@@ -470,10 +470,27 @@ all 65 new public declarations and three reused countdown interfaces: 28 closure
 only `propext`, and 31 use only `propext` and `Quot.sound`. Both malformed countdown phases, the
 unlaunched predecessor endpoint, and one-step-short fuel remain fail-closed.
 
+The first-constraint-padding milestone then evaluates the exact remaining empty suffix
+`(V - 2) * (V + 2) * formulaTokensPerClause =
+(formulaClauseSlotsPerConstraint - 5) * formulaTokensPerClause`, runs the reused 25-rule padding
+countdown, and materializes
+`V + 1 + formulaClauseSlotsPerConstraint * formulaTokensPerClause` through two new unary
+evaluators and three total nine-symbol bridges. The resulting table has `4432` plus sixteen
+inherited/generated unary-evaluator rule counts. Every raw input traverses the sixth and all later
+empty clause rectangles belonging to the first scheduled constraint without emitting a token,
+preserves `encodedFormula.take (2 * (FormulaWidth + 36))`, and stops at the `Sep` beginning the
+second scheduled constraint. Direct lookup and the specification cursor prove every traversed
+coordinate is padding and the endpoint is that separator. The external compiled bound is
+`BuilderFifthClausePaddingRun.rawTimeBound + 18` plus six times the count-evaluator work,
+countdown bound, and target-evaluator work. The 68-declaration audit covers all 65 new public
+declarations and three reused countdown interfaces: 26 closures are empty, 9 use only `propext`,
+and 33 use only `propext` and `Quot.sound`. Both malformed countdown phases, the unlaunched
+predecessor endpoint, and one-step-short fuel remain fail-closed.
+
 This earns the complete first four populated clauses, traverses all four clauses' remaining padding,
-and crosses the intentionally empty fifth clause rectangle. It is not a general dynamic cursor or an
-arbitrary raw slot decoder: no machine traverses the intentionally empty sixth clause rectangle,
-reaches the next constraint, or emits the remaining formula body,
+crosses every remaining empty clause rectangle of the first scheduled constraint, and retains the
+separator that begins the second constraint. It is not a general dynamic cursor or an arbitrary raw
+slot decoder: no machine emits that retained separator or the remaining formula body,
 composes a complete raw formula builder with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,
