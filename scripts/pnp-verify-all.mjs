@@ -78,6 +78,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-concrete-cook-levin-builder-fourth-clause-padding-run0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-fifth-clause-padding-run0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-first-constraint-padding-run0.test.mjs',
+  'audits/lean-concrete-cook-levin-builder-second-constraint-separator-step0.test.mjs',
   'audits/lean-nand-semantics0.test.mjs',
   'audits/lean-nand-enumerator0.test.mjs',
   'audits/lean-nand-reference-minimum0.test.mjs',
