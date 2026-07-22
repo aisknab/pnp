@@ -501,10 +501,27 @@ eight reused separator/cursor and dead-state interfaces: 14 closures are empty, 
 `propext`, and 31 use only `propext` and `Quot.sound`. Malformed appender tally/output states,
 malformed cursor scratch, both unlaunched endpoints, and one-step-short fuel remain fail-closed.
 
+The second-constraint-first-literal-sign milestone then composes that separator endpoint with the
+reused selected 59-rule `T` appender and fixed 45-rule cursor advance through one outer and one
+inner total nine-symbol bridge. The resulting table has `4676` plus sixteen inherited/generated
+unary-evaluator rule counts. Every raw input emits exactly the positive sign beginning the second
+constraint's first literal, preserves `encodedFormula.take (2 * (FormulaWidth + 38))`, and advances
+the retained unary coordinate to
+`V + 1 + formulaClauseSlotsPerConstraint * formulaTokensPerClause + 2`. A constructive schedule
+case split handles both the width-one head constraint and the wider-tape position-one symbol
+constraint; direct lookup and the specification cursor prove that the following token is the first
+unary `T` of a nonzero variable index. The external compiled bound evaluates to
+`BuilderSecondConstraintSeparatorStep.rawTimeBound + 546 + 24*n + 12*FormulaWidth +
+12*cursorWord.length`. The 56-declaration combined audit covers all 48 new public declarations plus
+eight reused true-token/cursor and dead-state interfaces: 14 closures are empty, 11 use only
+`propext`, and 31 use only `propext` and `Quot.sound`. Malformed appender tally/output states,
+malformed cursor scratch, both unlaunched endpoints, and one-step-short fuel remain fail-closed.
+
 This earns the complete first four populated clauses, traverses all four clauses' remaining padding,
 crosses every remaining empty clause rectangle of the first scheduled constraint, and emits the
-separator that begins the second constraint. It is not a general dynamic cursor or an arbitrary raw
-slot decoder: no machine emits the following `T` or the remaining formula body,
+separator and positive first-literal sign that begin the second constraint. It is not a general
+dynamic cursor or an arbitrary raw slot decoder: no machine emits the following unary `T`,
+completes that literal, or emits the remaining formula body,
 composes a complete raw formula builder with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,
