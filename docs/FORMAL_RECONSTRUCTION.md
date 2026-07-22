@@ -487,10 +487,24 @@ declarations and three reused countdown interfaces: 26 closures are empty, 9 use
 and 33 use only `propext` and `Quot.sound`. Both malformed countdown phases, the unlaunched
 predecessor endpoint, and one-step-short fuel remain fail-closed.
 
+The second-constraint-separator milestone then composes that endpoint with the reused selected
+59-rule `Sep` appender and fixed 45-rule cursor advance through one outer and one inner total
+nine-symbol bridge. The resulting table has `4554` plus sixteen inherited/generated unary-evaluator
+rule counts. Every raw input emits exactly the separator beginning the second scheduled constraint,
+preserves `encodedFormula.take (2 * (FormulaWidth + 37))`, and advances the retained unary coordinate
+to `V + 1 + formulaClauseSlotsPerConstraint * formulaTokensPerClause + 1`. Direct lookup and the
+specification cursor prove that the following token is `T`, the positive sign beginning the next
+constraint's at-least-one clause. The external compiled bound evaluates to
+`BuilderFirstConstraintPaddingRun.rawTimeBound + 534 + 24*n + 12*FormulaWidth +
+12*cursorWord.length`. The 56-declaration combined audit covers all 48 new public declarations plus
+eight reused separator/cursor and dead-state interfaces: 14 closures are empty, 11 use only
+`propext`, and 31 use only `propext` and `Quot.sound`. Malformed appender tally/output states,
+malformed cursor scratch, both unlaunched endpoints, and one-step-short fuel remain fail-closed.
+
 This earns the complete first four populated clauses, traverses all four clauses' remaining padding,
-crosses every remaining empty clause rectangle of the first scheduled constraint, and retains the
+crosses every remaining empty clause rectangle of the first scheduled constraint, and emits the
 separator that begins the second constraint. It is not a general dynamic cursor or an arbitrary raw
-slot decoder: no machine emits that retained separator or the remaining formula body,
+slot decoder: no machine emits the following `T` or the remaining formula body,
 composes a complete raw formula builder with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,

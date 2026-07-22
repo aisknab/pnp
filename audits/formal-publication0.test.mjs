@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 49);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 46);
+  assert.equal(status.formalPublicationMilestones.length, 50);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 47);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -855,6 +855,41 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   assert.match(byId.get(
     'concrete-cook-levin-builder-first-constraint-padding-run').nonClaim,
     /observes but does not emit that separator/u);
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-second-constraint-separator-step').status,
+  'formalized-foundation-only');
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-second-constraint-separator-step').earned, true);
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-second-constraint-separator-step').allAssumptionFree, false);
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-second-constraint-separator-step')
+    .axiomClosureUsesOnlyLeanStandardAllowlist, true);
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-second-constraint-separator-step').requiredTheorems.length, 40);
+  for (const theorem of [
+    'PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.CursorAdvance.deadState_workStep',
+    'PNP.Concrete.CookLevin.BuilderDynamicTokenCursorStep.CursorAdvance.malformedScratch_enters_dead',
+    'PNP.Concrete.CookLevin.BuilderSecondClauseSeparatorStep.SeparatorCursor.machine_acceptState_ne_rejectState',
+    'PNP.Concrete.CookLevin.BuilderSecondClauseSeparatorStep.SeparatorCursor.rule_source_ne_acceptState',
+    'PNP.Concrete.CookLevin.BuilderSecondClauseSeparatorStep.SeparatorCursor.rules_length',
+    'PNP.Concrete.CookLevin.BuilderSecondClauseSeparatorStep.SeparatorCursor.rules_pairwise_query_distinct',
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.workRunExact',
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.finalTokenBits_eq_encodedFormula_secondConstraintStart',
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.secondConstraintStartTokens_eq_canonical_formula_prefix',
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.nextTokenSlot_direct_eq_t',
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.rawTimeBound_le',
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.malformedCursorScratch_timeout',
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.work_one_step_short_timeout',
+  ]) assert.equal(byId.get(
+    'concrete-cook-levin-builder-second-constraint-separator-step')
+    .requiredTheorems.includes(theorem), true, theorem);
+  assert.match(byId.get(
+    'concrete-cook-levin-builder-second-constraint-separator-step').scope,
+    /4554 plus the sixteen inherited\/generated unary-evaluator rule counts/u);
+  assert.match(byId.get(
+    'concrete-cook-levin-builder-second-constraint-separator-step').nonClaim,
+    /does not emit the following T/u);
   assert.equal(byId.get('concrete-cnf-universal-verifier').requiredTheorems.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP'), true);
   assert.match(byId.get('concrete-cnf-universal-verifier').nonClaim,
@@ -875,17 +910,17 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   ]) assert.equal(byId.get(id).status, 'not-formalized');
 });
 
-test('publication consumes the reviewed first-constraint-padding map and inventory counts', async () => {
+test('publication consumes the reviewed second-constraint-separator map and inventory counts', async () => {
   const [status, mapText] = await Promise.all([
     status0(),
     readFile(new URL('../publication/FORMAL_PUBLICATION_MAP.json', import.meta.url), 'utf8'),
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '9a106769643a49d8925bcab16e537260a0ee486d09b0ef7840f13b38d08a3d0f');
+    'f791433da2ab37e85f6f25d960eab10d0b21b3d20d546047fac5d7f59f58520e');
   assert.equal(map.milestoneSourceClosureSha256,
-    'a601805206f7106d4b226ae42906d17be8840e53817eb2b2e92aeeb06ae38a59');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 1445);
+    'f8b784bc6158939b63a2ae7e1a0c4d03a5603778585575d424971e1c70c95442');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 1479);
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.PipelineCompiler.pipeline_correct'
   ], 'string');
@@ -933,6 +968,12 @@ test('publication consumes the reviewed first-constraint-padding map and invento
   ], 'string');
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.CookLevin.BuilderFirstConstraintPaddingRun.secondConstraintStart_direct_eq_sep'
+  ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.workRunExact'
+  ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.nextTokenSlot_direct_eq_t'
   ], 'string');
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.CookLevin.BuilderThirdClauseSeparatorStep.workRunExact'
@@ -1076,7 +1117,7 @@ test('publication consumes the reviewed first-constraint-padding map and invento
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [10207, 5600, 3294, 3760, 89]);
+  ], [10300, 5678, 3306, 3828, 90]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
@@ -1151,6 +1192,11 @@ test('canonical report source is current and the committed PDF artifact exists',
   assert.match(tex, /FormulaClauseSlotsPerConstraint - 5/u);
   assert.match(tex, /endpoint is the Sep beginning the second scheduled constraint/u);
   assert.match(tex, /observes but does not emit that separator/u);
+  assert.match(tex, /Cook-Levin second-constraint separator step/u);
+  assert.match(tex, /4554 plus the sixteen inherited\/generated unary-evaluator rule counts/u);
+  assert.match(tex, /encodedFormula\.take \(2 \* \(FormulaWidth \+ 37\)\)/u);
+  assert.match(tex, /direct next schedule token is T/u);
+  assert.match(tex, /does not emit the following T/u);
   assert.equal(tex.includes('The terminator and rest of clause three'), false);
   assert.equal(tex.includes('It does not compute the remaining header or complete formula'), false);
   assert.ok(tex.includes(status.leanTheoremInventorySha256));

@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '9a106769643a49d8925bcab16e537260a0ee486d09b0ef7840f13b38d08a3d0f';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'f791433da2ab37e85f6f25d960eab10d0b21b3d20d546047fac5d7f59f58520e';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -558,6 +558,40 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.CookLevin.BuilderSecondClausePaddingRun.workBoundedDecide_accept',
   'PNP.Concrete.CookLevin.BuilderSecondClausePaddingRun.workRunExact',
   'PNP.Concrete.CookLevin.BuilderSecondClausePaddingRun.work_one_step_short_timeout',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.appenderEndpoint_before_cursor_launch_timeout',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.appender_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.boundedDecide_compile_accept',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.boundedDecide_compile_ne_timeout',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.cursor_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.finalConfiguration_state',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.finalOutside_contains_finalTokenSlot',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.finalTape_represents',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.finalTokenBits_eq_encodedFormula_secondConstraintStart',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.finalTokenSlot_eq_secondConstraintStart_add_one',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.machine_acceptState_ne_rejectState',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.malformedAppenderOutput_timeout',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.malformedAppenderTally_timeout',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.malformedCursorScratch_timeout',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.nextTokenSlot_direct_eq_t',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.prefixEndpoint_before_launch_timeout',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.prefixSeparator_launch_workStep',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.prefix_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.rawTimeBound_eval',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.rawTimeBound_le',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.rule_source_ne_acceptState',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.rules_length',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.rules_pairwise_query_distinct',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.run_compile_exact',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.run_compile_rawTimeBound',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.run_compile_rawTimeBound_blankEquivalent',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.secondConstraintStartTokens_eq_canonical_formula_prefix',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.separatorCursor_launch_workStep',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.specification_next_step',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.specification_separator_step',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.suffix_workRunExact',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.workBoundedDecide_accept',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.workRunExact',
+  'PNP.Concrete.CookLevin.BuilderSecondConstraintSeparatorStep.work_one_step_short_timeout',
   'PNP.Concrete.CookLevin.BuilderThirdClauseSeparatorStep.appenderEndpoint_before_cursor_launch_timeout',
   'PNP.Concrete.CookLevin.BuilderThirdClauseSeparatorStep.appender_workRunExact',
   'PNP.Concrete.CookLevin.BuilderThirdClauseSeparatorStep.boundedDecide_compile_accept',
@@ -1487,7 +1521,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-22-69') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-22-70') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -1764,7 +1798,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-22-69') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-22-70') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
@@ -1782,7 +1816,7 @@ function validatePublicationMap0(map) {
     'expectedRootKernelTypeSha256',
     'expectedAxiomClosureSha256',
     'expectedSourceClosureSha256',
-  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 69`);
+  ]) if (map.gate[field] !== null) throw new Error(`${field} must remain intentionally unset in release 70`);
   if (!isSha2560(map.milestoneSourceClosureSha256)
       || !isObject0(map.earnedMilestoneTheoremKernelTypeSha256)) {
     throw new Error('reviewed milestone theorem/source fingerprints are missing');
