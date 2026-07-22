@@ -68,6 +68,7 @@ import PNP.Concrete.CookLevinBuilderFirstConstraintPaddingRun
 import PNP.Concrete.CookLevinBuilderSecondConstraintSeparatorStep
 import PNP.Concrete.CookLevinBuilderSecondConstraintFirstLiteralSignStep
 import PNP.Concrete.CookLevinBuilderSecondConstraintFirstLiteralFirstUnaryUnitStep
+import PNP.Concrete.CookLevinBuilderSecondConstraintFirstLiteralSecondUnaryUnitStep
 import PNP.Concrete.CNFVerifier
 import PNP.Concrete.CNFWorkInput
 import PNP.Concrete.CNFWorkUniversalCorrectness

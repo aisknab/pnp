@@ -533,11 +533,29 @@ eight reused true-token/cursor and dead-state interfaces: 14 closures are empty,
 `propext`, and 31 use only `propext` and `Quot.sound`. Malformed appender tally/output states,
 malformed cursor scratch, both unlaunched endpoints, and one-step-short fuel remain fail-closed.
 
+The second-constraint-first-literal-second-unary-unit milestone composes that first-unary-unit
+endpoint with the same selected 59-rule `T` appender and fixed 45-rule cursor advance through one
+outer and one inner total nine-symbol bridge. The resulting table has `4920` plus sixteen
+inherited/generated unary-evaluator rule counts. Every raw input emits exactly the second unary `T`
+of the second constraint's first variable index, preserves
+`encodedFormula.take (2 * (FormulaWidth + 40))`, and advances the retained coordinate to
+`V + 1 + formulaClauseSlotsPerConstraint * formulaTokensPerClause + 4`. The constructive schedule
+proof again establishes that the selected index is at least three; direct lookup and the
+specification cursor therefore prove the following token is the third unary `T`. The external
+compiled bound evaluates to
+`BuilderSecondConstraintFirstLiteralFirstUnaryUnitStep.rawTimeBound + 570 + 24*n +
+12*FormulaWidth + 12*cursorWord.length`. The measured 56-declaration audit covers all 48 new public
+declarations plus eight reused true-token/cursor and dead-state interfaces: 14 closures are empty,
+11 use only `propext`, and 31 use only `propext` and `Quot.sound`. Malformed appender tally/output
+states, malformed cursor scratch, both unlaunched endpoints, and one-step-short fuel remain
+fail-closed.
+
 This earns the complete first four populated clauses, traverses all four clauses' remaining padding,
 crosses every remaining empty clause rectangle of the first scheduled constraint, and emits the
-separator, positive first-literal sign, and first unary index unit that begin the second constraint.
+separator, positive first-literal sign, and first two unary index units that begin the second
+constraint.
 It is not a general dynamic cursor or an arbitrary raw slot decoder: no machine emits the following
-second unary `T`,
+third unary `T`,
 completes that literal, or emits the remaining formula body,
 composes a complete raw formula builder with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
