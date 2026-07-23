@@ -16,8 +16,10 @@ const SOURCE =
   'lean/PNP/Concrete/CookLevinBuilderSecondConstraintFirstLiteralTerminatorStep.lean';
 const AXIOM_AUDIT =
   'lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralTerminatorStepAxiomAudit.lean';
-const SUPPLEMENTAL_AXIOM_AUDIT =
-  'lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralSuccessorTokenStepAxiomAudit.lean';
+const SUPPLEMENTAL_AXIOM_AUDITS = [
+  'lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralSuccessorTokenStepAxiomAudit.lean',
+  'lean-audit/PNPConcreteCookLevinBuilderSecondConstraintPaddingOrUnaryOpportunityStepAxiomAudit.lean',
+];
 const REGRESSION =
   'lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralTerminatorStep.lean';
 const DOCS =
@@ -52,6 +54,7 @@ theorem prefixTerminator_launch_workStep
 theorem workRunExact
 theorem specification_terminator_step
 theorem encodeCNFTokens_eq_terminator_then_successor
+theorem encodeCNFTokens_eq_terminator_then_successor_and_optional_unary
 theorem secondConstraintFirstLiteralTerminatorTokens_eq_canonical_formula_prefix
 theorem finalTokenBits_eq_encodedFormula_secondConstraintFirstLiteralTerminator
 def finalTokenSlot
@@ -59,6 +62,7 @@ theorem finalTokenSlot_eq_secondConstraintStart_add_six
 theorem finalOutside_contains_finalTokenSlot
 theorem nextTokenSlot_direct_eq_finish_or_t
 theorem followingTokenSlot_direct_eq_padding_or_t
+theorem secondFollowingTokenSlot_direct_eq_padding_or_t
 theorem specification_next_step
 theorem finalConfiguration_state
 def rawTimeBound
@@ -230,11 +234,12 @@ test('second-constraint first-literal terminator is literal, exact, and shortcut
 
 test('kernel transcript covers every public terminator-step declaration',
   async () => {
-    const [source, audit, supplementalAudit] = await Promise.all([
-      text0(SOURCE), text0(AXIOM_AUDIT), text0(SUPPLEMENTAL_AXIOM_AUDIT),
+    const [source, audit, ...supplementalAudits] = await Promise.all([
+      text0(SOURCE), text0(AXIOM_AUDIT),
+      ...SUPPLEMENTAL_AXIOM_AUDITS.map(text0),
     ]);
     const printed = printed0(audit);
-    const supplementalPrinted = printed0(supplementalAudit);
+    const supplementalPrinted = supplementalAudits.flatMap(printed0);
     const prefix =
       'PNP.Concrete.CookLevin.BuilderSecondConstraintFirstLiteralTerminatorStep.';
     const wrappers = [
@@ -249,9 +254,11 @@ test('kernel transcript covers every public terminator-step declaration',
     ];
     const supplementalNames = [
       'encodeCNFTokens_eq_terminator_then_successor',
+      'encodeCNFTokens_eq_terminator_then_successor_and_optional_unary',
       'followingTokenSlot_direct_eq_padding_or_t',
+      'secondFollowingTokenSlot_direct_eq_padding_or_t',
     ];
-    assert.equal(HEADS.length, 50);
+    assert.equal(HEADS.length, 52);
     assert.equal(printed.length, 56);
     assert.equal(new Set(printed).size, 56);
     assert.deepEqual(imports0(audit), ['PNP']);
