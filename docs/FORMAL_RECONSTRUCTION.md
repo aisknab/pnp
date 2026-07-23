@@ -550,12 +550,30 @@ declarations plus eight reused true-token/cursor and dead-state interfaces: 14 c
 states, malformed cursor scratch, both unlaunched endpoints, and one-step-short fuel remain
 fail-closed.
 
+The second-constraint-first-literal-third-unary-unit milestone composes that second-unary-unit
+endpoint with the same selected 59-rule `T` appender and fixed 45-rule cursor advance through one
+outer and one inner total nine-symbol bridge. The resulting table has `5042` plus sixteen
+inherited/generated unary-evaluator rule counts. Every raw input emits exactly the third and final
+unary `T` of the second constraint's first variable index, preserves
+`encodedFormula.take (2 * (FormulaWidth + 41))`, and advances the retained coordinate to
+`V + 1 + formulaClauseSlotsPerConstraint * formulaTokensPerClause + 5`. The constructive schedule
+case split proves the index is exactly three: the width-one branch has time bound zero and head
+index three, while the wider branch selects the position-one blank-symbol index three. Direct
+lookup and the specification cursor therefore prove the following token is the terminating `F`.
+The external compiled bound evaluates to
+`BuilderSecondConstraintFirstLiteralSecondUnaryUnitStep.rawTimeBound + 582 + 24*n +
+12*FormulaWidth + 12*cursorWord.length`. The 56-declaration audit covers all 48 new public
+declarations plus eight reused true-token/cursor and dead-state interfaces. Malformed appender
+Exactly 14 closures are empty, 11 use only `propext`, and 31 use only `propext` and `Quot.sound`.
+Malformed appender tally/output states, malformed cursor scratch, both unlaunched endpoints, and
+one-step-short fuel remain fail-closed.
+
 This earns the complete first four populated clauses, traverses all four clauses' remaining padding,
 crosses every remaining empty clause rectangle of the first scheduled constraint, and emits the
-separator, positive first-literal sign, and first two unary index units that begin the second
+separator, positive first-literal sign, and all three unary index units that begin the second
 constraint.
 It is not a general dynamic cursor or an arbitrary raw slot decoder: no machine emits the following
-third unary `T`,
+terminating `F`,
 completes that literal, or emits the remaining formula body,
 composes a complete raw formula builder with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
