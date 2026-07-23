@@ -87,6 +87,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-successor-token-step0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-constraint-padding-or-unary-opportunity-step0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-constraint-second-padding-or-unary-opportunity-step0.test.mjs',
+  'audits/lean-concrete-cook-levin-builder-second-constraint-third-padding-or-unary-opportunity-step0.test.mjs',
   'audits/lean-nand-semantics0.test.mjs',
   'audits/lean-nand-enumerator0.test.mjs',
   'audits/lean-nand-reference-minimum0.test.mjs',
