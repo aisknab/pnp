@@ -563,18 +563,33 @@ lookup and the specification cursor therefore prove the following token is the t
 The external compiled bound evaluates to
 `BuilderSecondConstraintFirstLiteralSecondUnaryUnitStep.rawTimeBound + 582 + 24*n +
 12*FormulaWidth + 12*cursorWord.length`. The 56-declaration audit covers all 48 new public
-declarations plus eight reused true-token/cursor and dead-state interfaces. Malformed appender
-Exactly 14 closures are empty, 11 use only `propext`, and 31 use only `propext` and `Quot.sound`.
+declarations plus eight reused true-token/cursor and dead-state interfaces. Exactly 14 closures are
+empty, 11 use only `propext`, and 31 use only `propext` and `Quot.sound`.
 Malformed appender tally/output states, malformed cursor scratch, both unlaunched endpoints, and
 one-step-short fuel remain fail-closed.
 
+The second-constraint-first-literal-terminator milestone composes that third-unary-unit endpoint
+with the selected 59-rule `F` appender and fixed 45-rule cursor advance through one outer and one
+inner total nine-symbol bridge. The resulting table has `5164` plus sixteen inherited/generated
+unary-evaluator rule counts. Every raw input emits exactly the terminating `F`, preserves
+`encodedFormula.take (2 * (FormulaWidth + 42))`, and advances the retained coordinate to
+`V + 1 + formulaClauseSlotsPerConstraint * formulaTokensPerClause + 6`. A constructive schedule
+case split proves that the retained next token is `Finish` when the tableau tape width is one and
+the positive `T` beginning the next literal at wider widths. The external compiled bound evaluates
+to `BuilderSecondConstraintFirstLiteralThirdUnaryUnitStep.rawTimeBound + 594 + 24*n +
+12*FormulaWidth + 12*cursorWord.length`. The 56-declaration audit covers all 48 new public
+declarations plus eight reused false-token/cursor and dead-state interfaces: 14 closures are empty,
+11 use only `propext`, and 31 use only `propext` and `Quot.sound`. Malformed appender tally/output
+states, malformed cursor scratch, both unlaunched endpoints, and one-step-short fuel remain
+fail-closed.
+
 This earns the complete first four populated clauses, traverses all four clauses' remaining padding,
 crosses every remaining empty clause rectangle of the first scheduled constraint, and emits the
-separator, positive first-literal sign, and all three unary index units that begin the second
-constraint.
+separator, positive first-literal sign, all three unary index units, and the terminating `F` of the
+second constraint's first literal.
 It is not a general dynamic cursor or an arbitrary raw slot decoder: no machine emits the following
-terminating `F`,
-completes that literal, or emits the remaining formula body,
+width-dependent `Finish` or `T`, traverses the rest of the second constraint, or emits the remaining
+formula body,
 composes a complete raw formula builder with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,
