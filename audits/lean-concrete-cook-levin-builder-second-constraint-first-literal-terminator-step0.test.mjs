@@ -16,6 +16,8 @@ const SOURCE =
   'lean/PNP/Concrete/CookLevinBuilderSecondConstraintFirstLiteralTerminatorStep.lean';
 const AXIOM_AUDIT =
   'lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralTerminatorStepAxiomAudit.lean';
+const SUPPLEMENTAL_AXIOM_AUDIT =
+  'lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralSuccessorTokenStepAxiomAudit.lean';
 const REGRESSION =
   'lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralTerminatorStep.lean';
 const DOCS =
@@ -49,12 +51,14 @@ theorem prefix_workRunExact
 theorem prefixTerminator_launch_workStep
 theorem workRunExact
 theorem specification_terminator_step
+theorem encodeCNFTokens_eq_terminator_then_successor
 theorem secondConstraintFirstLiteralTerminatorTokens_eq_canonical_formula_prefix
 theorem finalTokenBits_eq_encodedFormula_secondConstraintFirstLiteralTerminator
 def finalTokenSlot
 theorem finalTokenSlot_eq_secondConstraintStart_add_six
 theorem finalOutside_contains_finalTokenSlot
 theorem nextTokenSlot_direct_eq_finish_or_t
+theorem followingTokenSlot_direct_eq_padding_or_t
 theorem specification_next_step
 theorem finalConfiguration_state
 def rawTimeBound
@@ -206,7 +210,9 @@ function validate0(source) {
     'cursor_workRunExact', 'falseTokenCursor_launch_workStep',
     'prefixTerminator_launch_workStep', 'workRunExact',
     'finalTokenBits_eq_encodedFormula_secondConstraintFirstLiteralTerminator',
-    'nextTokenSlot_direct_eq_finish_or_t', 'rawTimeBound_le',
+    'encodeCNFTokens_eq_terminator_then_successor',
+    'nextTokenSlot_direct_eq_finish_or_t',
+    'followingTokenSlot_direct_eq_padding_or_t', 'rawTimeBound_le',
     'prefixEndpoint_before_launch_timeout',
     'appenderEndpoint_before_cursor_launch_timeout',
     'malformedAppenderTally_timeout', 'malformedAppenderOutput_timeout',
@@ -224,10 +230,11 @@ test('second-constraint first-literal terminator is literal, exact, and shortcut
 
 test('kernel transcript covers every public terminator-step declaration',
   async () => {
-    const [source, audit] = await Promise.all([
-      text0(SOURCE), text0(AXIOM_AUDIT),
+    const [source, audit, supplementalAudit] = await Promise.all([
+      text0(SOURCE), text0(AXIOM_AUDIT), text0(SUPPLEMENTAL_AXIOM_AUDIT),
     ]);
     const printed = printed0(audit);
+    const supplementalPrinted = printed0(supplementalAudit);
     const prefix =
       'PNP.Concrete.CookLevin.BuilderSecondConstraintFirstLiteralTerminatorStep.';
     const wrappers = [
@@ -240,7 +247,11 @@ test('kernel transcript covers every public terminator-step declaration',
       'PNP.Concrete.CookLevin.BuilderSecondClauseFirstLiteralPrefix.FalseTokenCursor.machine_acceptState_ne_rejectState',
       'PNP.Concrete.CookLevin.BuilderSecondClauseFirstLiteralPrefix.FalseTokenCursor.rule_source_ne_acceptState',
     ];
-    assert.equal(HEADS.length, 48);
+    const supplementalNames = [
+      'encodeCNFTokens_eq_terminator_then_successor',
+      'followingTokenSlot_direct_eq_padding_or_t',
+    ];
+    assert.equal(HEADS.length, 50);
     assert.equal(printed.length, 56);
     assert.equal(new Set(printed).size, 56);
     assert.deepEqual(imports0(audit), ['PNP']);
@@ -249,8 +260,12 @@ test('kernel transcript covers every public terminator-step declaration',
     const modulePrinted = printed.filter((name) => name.startsWith(prefix));
     assert.deepEqual(
       modulePrinted.map((name) => name.split('.').at(-1)).sort(),
-      HEADS.map(([, name]) => name).sort(),
+      HEADS.map(([, name]) => name)
+        .filter((name) => !supplementalNames.includes(name)).sort(),
     );
+    for (const name of supplementalNames) {
+      assert.ok(supplementalPrinted.includes(`${prefix}${name}`), name);
+    }
     assert.deepEqual(declarations0(source), HEADS);
   });
 
@@ -315,7 +330,7 @@ test('hostile request, bridge, cursor, output, and shortcut mutations fail',
       'then CNFToken.finish else CNFToken.t',
       'then CNFToken.t else CNFToken.finish');
     assert.ok(validate0(wrongNext).includes('schedule-semantics'));
-    const weakenedIndex = source.replace(
+    const weakenedIndex = source.replaceAll(
       '(hEqualsThree : first.val = 3)',
       '(hEqualsThree : 2 < first.val)');
     assert.ok(validate0(weakenedIndex).includes('schedule-semantics'));

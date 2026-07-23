@@ -387,6 +387,19 @@ wider widths; neither token is emitted. The external bound is the predecessor bo
 11 \code{propext}, and 31 \code{propext}/\code{Quot.sound} closures. This completes one literal,
 not the second constraint or the formula builder.
 
+The successor-token composition now evaluates the represented tableau width and selects one of two
+literal transitions inside a fixed 93-rule branch table. At width one it appends \code{Finish}; at
+every wider width it appends \code{T}. The global table has exactly 5284 plus the eighteen
+inherited/generated unary-evaluator rule counts, preserves
+\code{encodedFormula.take (2 * (FormulaWidth + 43))}, and retains
+\code{V + 1 + Q*C + 7}. The next opportunity is proved to be padding at width one and unary
+\code{T} at wider widths, but is not emitted. The external bound is the predecessor bound plus
+\code{600 + 24*n + 12*FormulaWidth + 12*width + 12*widthRootPrefixLength
+  + 6*widthWorkSteps + 6*targetWorkSteps}. The 82-declaration audit has 37 empty,
+12 \code{propext}, and 33 \code{propext}/\code{Quot.sound} closures, with no project axiom or
+\code{Classical.choice}. This is one width-selected token transition, not the remaining second
+constraint or a complete formula builder.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule
