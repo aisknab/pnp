@@ -88,6 +88,7 @@ on:
       - 'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-second-unary-unit-step0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-third-unary-unit-step0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-terminator-step0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-successor-token-step0.test.mjs'
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
       - 'audits/lean-nand-reference-minimum0.test.mjs'
@@ -245,6 +246,7 @@ on:
       - 'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-second-unary-unit-step0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-third-unary-unit-step0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-terminator-step0.test.mjs'
+      - 'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-successor-token-step0.test.mjs'
       - 'audits/lean-nand-semantics0.test.mjs'
       - 'audits/lean-nand-enumerator0.test.mjs'
       - 'audits/lean-nand-reference-minimum0.test.mjs'
@@ -492,6 +494,9 @@ jobs:
 
       - name: Audit Cook-Levin second-constraint first-literal terminator step
         run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-terminator-step0.test.mjs
+
+      - name: Audit Cook-Levin second-constraint first-literal successor-token step
+        run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-successor-token-step0.test.mjs
 
       - name: Build explicit PNP root
         run: lake build PNP
@@ -1598,6 +1603,28 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralTerminatorStep.lean
+
+      - name: Print Cook-Levin second-constraint-first-literal-successor-token-step axiom closure
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralSuccessorTokenStepAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondConstraintFirstLiteralSuccessorTokenStep\.")" -eq 80
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondConstraintFirstLiteralTerminatorStep\.(encodeCNFTokens_eq_terminator_then_successor|followingTokenSlot_direct_eq_padding_or_t)'")" -eq 2
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected Cook-Levin second-constraint first-literal successor-token-step axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Cook-Levin second-constraint first-literal successor-token step reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 37
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 12
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
+          lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralSuccessorTokenStep.lean
 
       - name: Print concrete CNF work-input bridge axioms
         run: |

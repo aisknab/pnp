@@ -583,13 +583,30 @@ declarations plus eight reused false-token/cursor and dead-state interfaces: 14 
 states, malformed cursor scratch, both unlaunched endpoints, and one-step-short fuel remain
 fail-closed.
 
+The second-constraint-first-literal-successor-token milestone then evaluates the represented
+tableau width and enters one reused 59-rule token appender through a fixed 93-rule branch table.
+At width one the branch appends `Finish`; at every wider width it appends `T`. A final unary
+evaluator materializes the following coordinate. The global table has `5284` plus eighteen
+inherited/generated unary-evaluator rule counts. Every raw input preserves
+`encodedFormula.take (2 * (FormulaWidth + 43))` and advances the retained coordinate to
+`V + 1 + formulaClauseSlotsPerConstraint * formulaTokensPerClause + 7`. Direct lookup and the
+specification cursor prove that the next opportunity is padding at width one and unary `T` at
+wider widths, but the machine does not emit it. The external compiled bound evaluates to
+`BuilderSecondConstraintFirstLiteralTerminatorStep.rawTimeBound + 600 + 24*n +
+12*FormulaWidth + 12*width + 12*widthRootPrefixLength + 6*widthWorkSteps +
+6*targetWorkSteps`. The 82-declaration audit covers all 80 new public declarations plus two
+strengthened predecessor boundaries: 37 closures are empty, 12 use only `propext`, and 33 use
+only `propext` and `Quot.sound`. No closure reaches `Classical.choice` or a project axiom.
+The predecessor endpoint before launch and one-step-short fuel remain fail-closed, and the
+component machines retain their malformed-workspace guarantees.
+
 This earns the complete first four populated clauses, traverses all four clauses' remaining padding,
 crosses every remaining empty clause rectangle of the first scheduled constraint, and emits the
-separator, positive first-literal sign, all three unary index units, and the terminating `F` of the
-second constraint's first literal.
+separator, positive first-literal sign, all three unary index units, the terminating `F`, and its
+width-selected `Finish` or `T` successor in the second constraint's first literal.
 It is not a general dynamic cursor or an arbitrary raw slot decoder: no machine emits the following
-width-dependent `Finish` or `T`, traverses the rest of the second constraint, or emits the remaining
-formula body,
+padding or unary `T` opportunity, traverses the rest of the second constraint, or emits the
+remaining formula body,
 composes a complete raw formula builder with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic
 polynomial-time CNF-SAT decider, concrete NP-hardness/NP-completeness, locked-NAND threshold,
