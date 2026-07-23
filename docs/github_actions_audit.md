@@ -145,6 +145,16 @@ from current theorem status.
   exact 57-line audit covers 55 new public declarations and two dead-state facts, with 14 empty, 10
   `propext`, and 33 `propext`/`Quot.sound` closures; it does not traverse clause-four padding or
   claim a general cursor or complete formula builder.
+  Subsequent durable checks cover the fourth-clause padding run, the empty fifth-clause rectangle,
+  all remaining first-constraint padding, the second-constraint separator, the complete first
+  positive literal through its width-selected successor, and two following width-dependent
+  schedule opportunities. The newest opportunity audit requires exactly 66 new declarations,
+  fourteen reused declarations from the single reviewed 93-rule optional appender, and two
+  strengthened schedule boundaries. Its exact 82-line closure split is 37 empty, 12 `propext`,
+  and 33 `propext`/`Quot.sound`; it checks the 5524-rule symbolic base, width-one no-emission
+  branch, wider-width second-unary-`T` branch, `V+1+Q*C+9` retained coordinate, external
+  polynomial, unlaunched predecessor endpoint, and one-step-short timeout without claiming the
+  following slot, a complete second literal, or a complete formula builder.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual

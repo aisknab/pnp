@@ -46,7 +46,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-23-77}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-23-78}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -65,11 +65,15 @@
   \code{Sep F F F T F Finish}, traverses the entire remaining clause-two padding block, and then
   emits the complete third clause \code{Sep F F F T T F Finish} on variables zero and two,
   traverses the entire remaining clause-three padding block, and emits the complete fourth clause
-  \code{Sep F T F F T T F Finish} on variables one and two, retaining its first padding
-  coordinate. Every traversed
+  \code{Sep F T F F T T F Finish} on variables one and two, traverses the remainder of the first
+  scheduled constraint, emits the second constraint's first positive literal through its
+  width-selected successor, and consumes the next two width-dependent opportunities. At width one
+  those opportunities are padding and emit nothing; at wider widths they emit the first two unary
+  \code{T} tokens of the second literal. Every traversed
   padding slot and emitted populated slot has a direct schedule proof, the emitted bits are the exact
-  canonical prefix, and an external polynomial bounds the compiled run. Clause-four padding,
-  a general dynamic formula cursor, arbitrary raw slot decoder, and the remaining formula body are not
+  canonical prefix, and an external polynomial bounds the compiled run. The following
+  padding-or-third-unary opportunity, a general dynamic formula cursor, arbitrary raw slot decoder,
+  and the remaining formula body are not
   implemented, so there is no complete raw
   polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation fingerprints
   are unset, no root theorem exists, and the abstract string-handle bridge is never an activation source.
@@ -79,15 +83,15 @@
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 11055 \\
-Theorem-kind declarations & 6294 \\
-Assumption-free theorem-kind declarations & 3428 \\
+Compiled declarations & 11178 \\
+Theorem-kind declarations & 6388 \\
+Assumption-free theorem-kind declarations & 3451 \\
 Project-specific axioms & 4 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{b2c61b8afcac8df4e71b2f9dd53b779631347dbaac678db77c65113acbdd93b5}\par}
+{\small Inventory SHA-256: \code{3c9fd0f32bd9678eb7de0c5c41544582f16931b2c9c3a3e05da91ae6ff514fd9}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -400,6 +404,19 @@ inherited/generated unary-evaluator rule counts, preserves
 \code{Classical.choice}. This is one width-selected token transition, not the remaining second
 constraint or a complete formula builder.
 
+The next two opportunity machines use the same reviewed 93-rule optional-appender table. At width
+one each schedule position is padding, so its direct skip bridge emits nothing. At wider widths the
+first appends the first unary \code{T} of the second literal and the second appends its second unary
+\code{T}. The second machine has exactly 5524 literal rules plus the twenty-two inherited/generated
+unary-evaluator rule counts, preserves
+\code{encodedFormula.take (2 * (FormulaWidth + 43 + if tapeWidth = 1 then 0 else 2))}, and retains
+\code{V + 1 + Q*C + 9}. The following position is proved to be padding at width one and the third
+unary \code{T} at wider widths, but is not consumed. Its external bound is the first opportunity
+bound plus \code{624 + 24*n + 12*FormulaWidth + 12*width + 12*widthRootPrefixLength
+  + 6*widthWorkSteps + 6*targetWorkSteps}. The 82-declaration audit covers all 66 new declarations,
+fourteen reused optional-appender interfaces, and two strengthened schedule boundaries: 37 closures
+are empty, 12 use only \code{propext}, and 33 use only \code{propext} and \code{Quot.sound}.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule
@@ -487,7 +504,7 @@ remain absent.
 \section{Formal milestone ledger}
 
 Each earned row requires exact compiled names and theorem kinds, empty axiom closures, per-name
-domain-separated kernel-type SHA-256 matches for 1729 detailed candidates, and the pinned whole-Lean
+domain-separated kernel-type SHA-256 matches for 1764 detailed candidates, and the pinned whole-Lean
 source closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
 {\small
@@ -546,6 +563,7 @@ Cook-Levin second-constraint first-literal third unary-unit step & formalized-fo
 Cook-Levin second-constraint first-literal terminator step & formalized-foundation-only & For every fixed concrete polynomial-time verifier, one literal finite work machine composes the complete second-constraint first-literal third-unary-unit step with the reused selected 59-rule F appender and 45-rule cursor advance through one outer total nine-symbol WorkChain bridge. The global table has exactly 5164 plus the sixteen inherited/generated unary-evaluator rule counts. Every raw input follows exact prefix, appender, cursor, bridge, suffix, and combined traces; emits exactly the terminating F of the second scheduled constraint's first literal; preserves encodedFormula.take (2 * (FormulaWidth + 42)); and retains coordinate FormulaVariableSlotBound + 1 + FormulaClauseSlotsPerConstraint * FormulaTokensPerClause + 6. A constructive schedule case split proves the direct next schedule token is Finish when tapeWidth is one and the positive T beginning the next literal at wider widths. The external compiled bound evaluates to BuilderSecondConstraintFirstLiteralThirdUnaryUnitStep.rawTimeBound + 594 + 24 * n + 12 * FormulaWidth + 12 * cursorWord.length. Compiled exact, bounded, blank-equivalent, accepting, non-timeout, malformed-workspace, both unlaunched-endpoint, and one-step-short results are proved. All 48 new public declarations plus eight reviewed reused false-token/cursor and dead-state interfaces are axiom-audited: 14 have empty closure, 11 use only propext, and 31 use only propext and Quot.sound, with no project axiom or Classical.choice. & This milestone emits exactly one token: the terminating F of the second scheduled constraint's first literal. It observes but does not emit the following Finish in the width-one case or the following positive T in wider cases, does not emit the remainder of the second constraint or traverse that constraint, does not implement a general dynamic formula cursor or raw decoder for arbitrary schedule coordinates, does not emit the remaining formula body, and does not construct a complete formula builder or FunctionProgram.RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-hardness or NP-completeness, establish CNFSAT in P, or prove P = NP. \\
 Cook-Levin second-constraint first-literal successor token step & formalized-foundation-only & For every fixed concrete polynomial-time verifier, one literal finite work machine composes the complete second-constraint first-literal terminator with the represented-width unary evaluator, one 93-rule finite width branch that enters a single reused 59-rule token appender at either Finish or T, and the retained-coordinate unary evaluator through three total nine-symbol WorkChain bridges. The global table has exactly 5284 plus the eighteen inherited/generated unary-evaluator rule counts. Every raw input follows exact predecessor, width-evaluator, branch/appender, retained-coordinate, bridge, suffix, and combined traces; emits Finish exactly when tapeWidth is one and T at every wider width; preserves encodedFormula.take (2 * (FormulaWidth + 43)); and retains coordinate FormulaVariableSlotBound + 1 + FormulaClauseSlotsPerConstraint * FormulaTokensPerClause + 7. Direct lookup and the specification cursor prove the following opportunity is padding at width one and unary T at wider widths. The external compiled bound evaluates to BuilderSecondConstraintFirstLiteralTerminatorStep.rawTimeBound + 600 + 24 * n + 12 * FormulaWidth + 12 * width + 12 * widthRootPrefixLength + 6 * widthWorkSteps + 6 * targetWorkSteps. Compiled exact, bounded, blank-equivalent, accepting, non-timeout, predecessor-unlaunched-endpoint, and one-step-short results are proved while component malformed-workspace behavior remains fail-closed. All 80 new public declarations plus two strengthened predecessor boundary lemmas are axiom-audited: 37 have empty closure, 12 use only propext, and 33 use only propext and Quot.sound, with no project axiom or Classical.choice. & This milestone emits exactly one width-selected token after the terminating F of the second scheduled constraint's first literal: Finish at width one or positive T at wider widths. It observes but does not emit the following padding opportunity at width one or unary T at wider widths, does not emit the remainder of the second constraint or traverse that constraint, does not implement a general dynamic formula cursor or raw decoder for arbitrary schedule coordinates, does not emit the remaining formula body, and does not construct a complete formula builder or FunctionProgram.RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-hardness or NP-completeness, establish CNFSAT in P, or prove P = NP. \\
 Cook-Levin second-constraint padding-or-unary opportunity step & formalized-foundation-only & For every fixed concrete polynomial-time verifier, one literal finite work machine composes the complete second-constraint first-literal successor-token predecessor with the represented-width unary evaluator, one 93-rule finite optional-appender table, and the retained-coordinate unary evaluator through three total nine-symbol WorkChain bridges. The global table has exactly 5404 plus the twenty inherited/generated unary-evaluator rule counts. Every raw input follows exact predecessor, width-evaluator, width-one skip or wider-width T-appender, retained-coordinate, bridge, suffix, and combined traces. At tapeWidth one it consumes padding and emits no token; at every wider width it appends exactly the first unary T of the second literal. The output equals encodedFormula.take (2 * (FormulaWidth + 43 + if tapeWidth = 1 then 0 else 1)) and the retained coordinate is FormulaVariableSlotBound + 1 + FormulaClauseSlotsPerConstraint * FormulaTokensPerClause + 8. Direct lookup and the specification cursor prove the following slot is again padding at width one and the second unary T at wider widths. The external compiled bound evaluates to BuilderSecondConstraintFirstLiteralSuccessorTokenStep.rawTimeBound + 612 + 24 * n + 12 * FormulaWidth + 12 * width + 12 * widthRootPrefixLength + 6 * widthWorkSteps + 6 * targetWorkSteps. Compiled exact, bounded, blank-equivalent, accepting, non-timeout, predecessor-unlaunched-endpoint, and one-step-short results are proved while component malformed-workspace behavior remains fail-closed. All 80 new public declarations plus two strengthened schedule lemmas are axiom-audited: 37 have empty closure, 12 use only propext, and 33 use only propext and Quot.sound, with no project axiom or Classical.choice. & This milestone consumes exactly one width-selected schedule opportunity after the second scheduled constraint first literal: padding with no emitted token at width one or the first unary T of the second literal at wider widths. It observes but does not consume the following padding opportunity at width one or second unary T at wider widths, does not complete the second literal or traverse the remainder of the second constraint, does not implement a general dynamic formula cursor or raw decoder for arbitrary schedule coordinates, does not emit the remaining formula body, and does not construct a complete formula builder or FunctionProgram.RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-hardness or NP-completeness, establish CNFSAT in P, or prove P = NP. \\
+Cook-Levin second-constraint second padding-or-unary opportunity step & formalized-foundation-only & For every fixed concrete polynomial-time verifier, one literal finite work machine composes the complete first padding-or-unary-opportunity predecessor with the represented-width unary evaluator, the same reviewed 93-rule finite optional-appender table, and the retained-coordinate unary evaluator through three total nine-symbol WorkChain bridges. The global table has exactly 5524 plus the twenty-two inherited/generated unary-evaluator rule counts. Every raw input follows exact predecessor, width-evaluator, width-one skip or wider-width T-appender, retained-coordinate, bridge, suffix, and combined traces. At tapeWidth one it consumes padding and emits no token; at every wider width it appends exactly the second unary T of the second literal. The output equals encodedFormula.take (2 * (FormulaWidth + 43 + if tapeWidth = 1 then 0 else 2)) and the retained coordinate is FormulaVariableSlotBound + 1 + FormulaClauseSlotsPerConstraint * FormulaTokensPerClause + 9. Direct lookup and the specification cursor prove the following slot is again padding at width one and the third unary T at wider widths. The external compiled bound evaluates to BuilderSecondConstraintPaddingOrUnaryOpportunityStep.rawTimeBound + 624 + 24 * n + 12 * FormulaWidth + 12 * width + 12 * widthRootPrefixLength + 6 * widthWorkSteps + 6 * targetWorkSteps. Compiled exact, bounded, blank-equivalent, accepting, non-timeout, predecessor-unlaunched-endpoint, and one-step-short results are proved while component malformed-workspace behavior remains fail-closed. All 66 new public declarations, fourteen reused optional-appender interfaces, and two strengthened schedule lemmas are axiom-audited: 37 have empty closure, 12 use only propext, and 33 use only propext and Quot.sound, with no project axiom or Classical.choice. & This milestone consumes exactly one additional width-selected schedule opportunity after the second scheduled constraint first literal: padding with no emitted token at width one or the second unary T of the second literal at wider widths. It observes but does not consume the following padding opportunity at width one or third unary T at wider widths, does not complete the second literal or traverse the remainder of the second constraint, does not implement a general dynamic formula cursor or raw decoder for arbitrary schedule coordinates, does not emit the remaining formula body, and does not construct a complete formula builder or FunctionProgram.RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-hardness or NP-completeness, establish CNFSAT in P, or prove P = NP. \\
 Typed direct-wire NAND semantics & formalized & Typed topological Boolean NAND programs and ordered multi-output direct-wire semantics. & This does not establish circuit minimization, SAT, or P = NP. \\
 Finite enumeration, equivalence, and reference minimum & formalized & Exhaustive finite Boolean direct-wire search under the empty-profile reference model. & No polynomial-runtime result is obtained from this exhaustive reference search. \\
 Concrete framed replacement and slack & formalized & The concrete serial framed context with support outputs and explicit bypass wires. & This is not an arbitrary-support replacement theorem for the report's global family. \\
@@ -561,8 +579,8 @@ Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-mac
 
 \section{Compiled inventory summary}
 
-The inventory contains 11055 exported \code{PNP.*} kernel declarations from
-97 modules. It excludes 4278 private compiler auxiliaries.
+The inventory contains 11178 exported \code{PNP.*} kernel declarations from
+98 modules. It excludes 4308 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -609,9 +627,10 @@ PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builde
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Constraint\allowbreak{}First\allowbreak{}Literal\allowbreak{}Second\allowbreak{}Unary\allowbreak{}Unit\allowbreak{}Step & 94 & 79 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Constraint\allowbreak{}First\allowbreak{}Literal\allowbreak{}Sign\allowbreak{}Step & 99 & 84 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Constraint\allowbreak{}First\allowbreak{}Literal\allowbreak{}Successor\allowbreak{}Token\allowbreak{}Step & 112 & 80 \\
-PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Constraint\allowbreak{}First\allowbreak{}Literal\allowbreak{}Terminator\allowbreak{}Step & 148 & 133 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Constraint\allowbreak{}First\allowbreak{}Literal\allowbreak{}Terminator\allowbreak{}Step & 175 & 160 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Constraint\allowbreak{}First\allowbreak{}Literal\allowbreak{}Third\allowbreak{}Unary\allowbreak{}Unit\allowbreak{}Step & 94 & 79 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Constraint\allowbreak{}Padding\allowbreak{}Or\allowbreak{}Unary\allowbreak{}Opportunity\allowbreak{}Step & 114 & 82 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Constraint\allowbreak{}Second\allowbreak{}Padding\allowbreak{}Or\allowbreak{}Unary\allowbreak{}Opportunity\allowbreak{}Step & 96 & 67 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Constraint\allowbreak{}Separator\allowbreak{}Step & 93 & 78 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Third\allowbreak{}Clause\allowbreak{}First\allowbreak{}Literal\allowbreak{}Prefix & 131 & 105 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Third\allowbreak{}Clause\allowbreak{}Padding\allowbreak{}Run & 134 & 100 \\
@@ -730,10 +749,10 @@ npm run report:check
 \end{verbatim}
 }
 
-The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-23-77}. Its exact byte digest is
-\code{b2c61b8afcac8df4e71b2f9dd53b779631347dbaac678db77c65113acbdd93b5}. The report is regenerated from that inventory and the reviewed
+The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-23-78}. Its exact byte digest is
+\code{3c9fd0f32bd9678eb7de0c5c41544582f16931b2c9c3a3e05da91ae6ff514fd9}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{c6213632859bace723f284a2c7d3722fd8e763f918ea310f0e4026a1e3917b48}; the computed and pinned values match. Successful regeneration
+\code{e4a252b5035528e0751fa447bacedc95e569d2477b4e5e81d9571052bd8ef347}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 

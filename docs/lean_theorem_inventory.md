@@ -76,27 +76,24 @@ correctness and no timeout under an explicit polynomial bound, constructs a `.pa
 It does not establish `CNFSAT ∈ P`, NP-hardness, NP-completeness, or `P = NP`, and it is not the
 missing general compiler/refinement for arbitrary charged pipelines.
 
-The reviewed Cook--Levin builder boundary now executes the entire remaining padding run after the
-complete first clause. The inherited collision-free machine frames every raw input, builds its unary
-length tally, evaluates the verifier-fixed width and retained coordinates, and emits exactly
-`T^FormulaWidth F Sep T F T T F T T T F Finish`. The predecessor milestone consumes the first
-valid padding opportunity and retains coordinate `FormulaVariableSlotBound + 13`. The current
-literal machine adds structurally generated unary evaluators and a fixed 25-rule countdown
-controller to traverse the remaining
-`D = (FormulaVariableSlotBound - 1) * (FormulaVariableSlotBound + 6)` padding coordinates without
-emitting a token. Its table has exactly 1244 plus six inherited/generated evaluator rule counts.
-Every raw input reaches `FormulaVariableSlotBound + 1 + FormulaTokensPerClause`, and direct lookup
-there is proved to return `Sep`, the start of the second clause. The recursive schedule specification
-agrees throughout the no-emission run and at that next separator step. Exact compiled execution is
-bounded by a verifier-fixed external input-size polynomial; malformed countdown scratch/root states,
-the unlaunched predecessor endpoint, and one-step-short total fuel remain timeout. This is the exact
-remaining first-clause padding block and second-clause boundary, not a general dynamic raw formula
-cursor or arbitrary schedule decoder. The next literal machine selects the complete 59-rule `Sep`
-appender, launches the existing 45-rule cursor advance, emits the exact canonical prefix through the
-separator beginning clause two, and retains the following `F` coordinate. Its table has `1366` plus
-six evaluator rule counts, and its combined 56-declaration audit has exactly 15 empty, 11 `propext`,
-and 30 `propext`/`Quot.sound` closures. No following-`F` or remaining-body emission, complete builder,
-construction-runtime `RawRefinement`, or concrete `PolynomialReduction` is present.
+The reviewed Cook--Levin builder boundary now emits all four populated clauses of the first
+scheduled constraint, traverses every remaining padding opportunity in that constraint, and emits
+the second constraint's separator and complete first positive literal through its width-selected
+successor. Two further finite opportunity machines reuse one reviewed 93-rule optional appender.
+At tape width one both positions are padding and emit no token; at every wider width they append the
+first and second unary `T` tokens of the second literal. The newest table has `5524` literal rules
+plus twenty-two inherited/generated unary-evaluator rule counts, preserves
+`encodedFormula.take (2 * (FormulaWidth + 43 + if tapeWidth = 1 then 0 else 2))`, and retains
+`FormulaVariableSlotBound + 1 + FormulaClauseSlotsPerConstraint * FormulaTokensPerClause + 9`.
+Direct lookup and the specification cursor prove that the following slot is padding at width one
+and the third unary `T` at wider widths. Exact compiled execution is bounded by the predecessor
+polynomial plus `624 + 24*n + 12*FormulaWidth + 12*width + 12*widthRootPrefixLength +
+6*widthWorkSteps + 6*targetWorkSteps`. The newest 82-declaration audit covers all 66 new public
+declarations, fourteen reused optional-appender interfaces, and two strengthened schedule
+boundaries with exactly 37 empty, 12 `propext`, and 33 `propext`/`Quot.sound` closures. This is
+still not a general dynamic raw formula cursor or arbitrary schedule decoder; the following
+padding-or-third-unary slot, the rest of the second constraint, a complete builder,
+construction-runtime `RawRefinement`, and a concrete `PolynomialReduction` remain absent.
 
 The current four project-specific axioms remain visible as an independent inventory:
 
