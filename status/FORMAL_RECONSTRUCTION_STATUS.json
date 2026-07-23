@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-23-77",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-23-78",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -390,6 +390,16 @@
   "leanConcreteCookLevinBuilderSecondConstraintPaddingOrUnaryOpportunityStepRetainedAdvancedTokenCoordinateFormalized": true,
   "leanConcreteCookLevinBuilderSecondConstraintPaddingOrUnaryOpportunityStepInputPrefixOptionalAppenderComposed": true,
   "leanConcreteCookLevinBuilderSecondConstraintPaddingOrUnaryOpportunityStepFailClosedBoundaryTimeoutFormalized": true,
+  "leanConcreteCookLevinBuilderSecondConstraintSecondPaddingOrUnaryOpportunityStepFormalized": true,
+  "leanConcreteCookLevinBuilderSecondConstraintSecondPaddingOrUnaryOpportunityStepAxiomAuditPassed": true,
+  "leanConcreteCookLevinBuilderSecondConstraintSecondPaddingOrUnaryOpportunityStepAuditedDeclarationCount": 82,
+  "leanConcreteCookLevinBuilderSecondConstraintSecondPaddingOrUnaryOpportunityStepCompiledRawMachineFormalized": true,
+  "leanConcreteCookLevinBuilderSecondConstraintSecondPaddingOrUnaryOpportunityStepExternalInputSizePolynomialFormalized": true,
+  "leanConcreteCookLevinBuilderSecondConstraintSecondPaddingOrUnaryOpportunityStepExactFormulaBitsFormalized": true,
+  "leanConcreteCookLevinBuilderSecondConstraintSecondPaddingOrUnaryOpportunityStepSecondPaddingOrUnaryOpportunityFormalized": true,
+  "leanConcreteCookLevinBuilderSecondConstraintSecondPaddingOrUnaryOpportunityStepRetainedAdvancedTokenCoordinateFormalized": true,
+  "leanConcreteCookLevinBuilderSecondConstraintSecondPaddingOrUnaryOpportunityStepInputPrefixOptionalAppenderComposed": true,
+  "leanConcreteCookLevinBuilderSecondConstraintSecondPaddingOrUnaryOpportunityStepFailClosedBoundaryTimeoutFormalized": true,
   "leanConcreteCookLevinBuilderInputPrefixAppenderComposed": true,
   "leanConcreteCookLevinBuilderDynamicCursorFormalized": false,
   "leanConcreteCookLevinFormulaBuilderFormalized": false,
@@ -526,7 +536,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-23-COOK-LEVIN-BUILDER-SECOND-CONSTRAINT-PADDING-OR-UNARY-OPPORTUNITY-STEP-76",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-23-COOK-LEVIN-BUILDER-SECOND-CONSTRAINT-SECOND-PADDING-OR-UNARY-OPPORTUNITY-STEP-77",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -738,6 +748,7 @@
     "node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-terminator-step0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-successor-token-step0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-builder-second-constraint-padding-or-unary-opportunity-step0.test.mjs",
+    "node --test audits/lean-concrete-cook-levin-builder-second-constraint-second-padding-or-unary-opportunity-step0.test.mjs",
     "node --test audits/lean-nand-semantics0.test.mjs",
     "node --test audits/lean-nand-enumerator0.test.mjs",
     "node --test audits/lean-nand-reference-minimum0.test.mjs",
@@ -852,6 +863,8 @@
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralSuccessorTokenStep.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintPaddingOrUnaryOpportunityStepAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintPaddingOrUnaryOpportunityStep.lean",
+    "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintSecondPaddingOrUnaryOpportunityStepAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFWorkCanonical.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteWorkCompilerEdges.lean",
     "lake env lean -DwarningAsError=true --run lean-regression/PNPConcreteCNFWorkCanonicalExtended.lean",
@@ -932,6 +945,7 @@
     "CookLevin.BuilderSecondConstraintFirstLiteralTerminatorStep composes the complete second-constraint first-literal third-unary-unit step with the reused 113-rule selected F appender/cursor machine through one outer total nine-symbol WorkChain bridge. Its literal table has 5164 plus sixteen inherited/generated unary-evaluator rule counts. Every raw bitstring emits exactly the terminating F of the second scheduled constraint first literal, preserves encodedFormula.take (2 * (FormulaWidth + 42)), and advances the retained unary coordinate to V + 1 + Q*C + 6, where Q = formulaClauseSlotsPerConstraint. A constructive schedule case split proves the following direct token is Finish when tapeWidth is one and the positive T beginning the next literal at wider widths. The exact work trace is bounded by BuilderSecondConstraintFirstLiteralThirdUnaryUnitStep.rawTimeBound + 594 + 24*n + 12*FormulaWidth + 12*cursorWord.length. The measured 56-declaration audit covers all 48 new public declarations plus eight reused false-token/cursor and dead-state interfaces: 14 closures are empty, 11 use only propext, and 31 use only propext and Quot.sound, with no project axiom or Classical.choice. Malformed appender tally/output states, malformed cursor scratch, both unlaunched endpoints, and one-step-short fuel remain timeout. This emits only the terminating F; it does not emit the following width-dependent Finish or T, traverse the second constraint, implement a general dynamic formula cursor, emit the remaining body, construct a complete builder, provide RawRefinement or PolynomialReduction, prove CNFSAT NP-complete or in P, or prove P = NP.",
     "CookLevin.BuilderSecondConstraintFirstLiteralSuccessorTokenStep composes the complete first-literal terminator with a represented-width evaluator, one 93-rule finite branch table, one reused 59-rule token appender, and a retained-coordinate evaluator. Its literal table has 5284 plus eighteen inherited/generated unary-evaluator rule counts. Every raw bitstring emits exactly one width-selected successor token: Finish when tapeWidth is one and T at every wider width. The emitted bits equal encodedFormula.take (2 * (FormulaWidth + 43)), and the retained coordinate is V + 1 + Q*C + 7, where Q = formulaClauseSlotsPerConstraint. Direct lookup and the specification cursor prove that the following opportunity is padding at width one and unary T at wider widths. The exact work trace is bounded by BuilderSecondConstraintFirstLiteralTerminatorStep.rawTimeBound + 600 + 24*n + 12*FormulaWidth + 12*width + 12*widthRootPrefixLength + 6*widthWorkSteps + 6*targetWorkSteps. The measured 82-declaration audit covers all 80 new public declarations plus two strengthened predecessor boundary lemmas: 37 closures are empty, 12 use only propext, and 33 use only propext and Quot.sound, with no project axiom or Classical.choice. The predecessor endpoint before launch and one-step-short fuel remain timeout, while component malformed-workspace results are retained. This emits only the width-selected successor; it does not emit the following padding or unary token, traverse the second constraint, implement a general dynamic formula cursor, emit the remaining body, construct a complete builder, provide RawRefinement or PolynomialReduction, prove CNFSAT NP-complete or in P, or prove P = NP.",
     "CookLevin.BuilderSecondConstraintPaddingOrUnaryOpportunityStep composes the complete width-selected successor-token predecessor with a represented-width evaluator, one 93-rule optional-appender table, and a retained-coordinate evaluator. Its literal table has 5404 plus twenty inherited/generated unary-evaluator rule counts. At tapeWidth one the controller takes a direct skip bridge and emits no token; at every wider width it appends exactly the first unary T of the second literal. The emitted bits equal encodedFormula.take (2 * (FormulaWidth + 43 + if tapeWidth = 1 then 0 else 1)), and the retained coordinate is V + 1 + Q*C + 8, where Q = formulaClauseSlotsPerConstraint. Direct lookup and the specification cursor prove that the following slot is again padding at width one and the second unary T at wider widths. The exact work trace is bounded by BuilderSecondConstraintFirstLiteralSuccessorTokenStep.rawTimeBound + 612 + 24*n + 12*FormulaWidth + 12*width + 12*widthRootPrefixLength + 6*widthWorkSteps + 6*targetWorkSteps. The measured 82-declaration audit covers all 80 new public declarations plus two strengthened schedule lemmas: 37 closures are empty, 12 use only propext, and 33 use only propext and Quot.sound, with no project axiom or Classical.choice. The predecessor endpoint before launch and one-step-short fuel remain timeout, while component malformed-workspace results are retained. This consumes only one fixed schedule opportunity; it does not consume the following padding or unary token, complete the second literal, traverse the second constraint, implement a general dynamic formula cursor, emit the remaining body, construct a complete builder, provide RawRefinement or PolynomialReduction, prove CNFSAT NP-complete or in P, or prove P = NP.",
+    "CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep composes the complete first padding-or-unary-opportunity predecessor with a represented-width evaluator, the same reviewed 93-rule optional-appender table, and a retained-coordinate evaluator. Its literal table has 5524 plus twenty-two inherited/generated unary-evaluator rule counts. At tapeWidth one the controller takes a direct skip bridge and emits no token; at every wider width it appends exactly the second unary T of the second literal. The emitted bits equal encodedFormula.take (2 * (FormulaWidth + 43 + if tapeWidth = 1 then 0 else 2)), and the retained coordinate is V + 1 + Q*C + 9, where Q = formulaClauseSlotsPerConstraint. Direct lookup and the specification cursor prove that the following slot is again padding at width one and the third unary T at wider widths. The exact work trace is bounded by BuilderSecondConstraintPaddingOrUnaryOpportunityStep.rawTimeBound + 624 + 24*n + 12*FormulaWidth + 12*width + 12*widthRootPrefixLength + 6*widthWorkSteps + 6*targetWorkSteps. The measured 82-declaration audit covers all 66 new public declarations, fourteen reused optional-appender interfaces, and two strengthened schedule lemmas: 37 closures are empty, 12 use only propext, and 33 use only propext and Quot.sound, with no project axiom or Classical.choice. The predecessor endpoint before launch and one-step-short fuel remain timeout, while component malformed-workspace results are retained. This consumes only one additional fixed schedule opportunity; it does not consume the following padding or unary token, complete the second literal, traverse the remainder of the second constraint, implement a general dynamic formula cursor, emit the remaining body, construct a complete builder, provide RawRefinement or PolynomialReduction, prove CNFSAT NP-complete or in P, or prove P = NP.",
     "The 9,300-pair canonical sweep, 40,020-pair extended sweep, 261,121-pair bounded differential sweep, and ten compiler-edge cases are finite regression evidence; the universal result comes from the audited Lean theorems, not from testing.",
     "The formalized direct-wire NAND semantics layer does not by itself prove enumeration, minimum size, replacement/slack, the locked NAND builder, its threshold, SAT, or P = NP.",
     "The exact-width syntactic NAND enumeration remains intentionally noncanonical and may contain duplicates.",
@@ -984,7 +998,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "c6213632859bace723f284a2c7d3722fd8e763f918ea310f0e4026a1e3917b48",
+    "actualSourceClosureSha256": "e4a252b5035528e0751fa447bacedc95e569d2477b4e5e81d9571052bd8ef347",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1014,22 +1028,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-23-77",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-23-78",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "b2c61b8afcac8df4e71b2f9dd53b779631347dbaac678db77c65113acbdd93b5",
+  "leanTheoremInventorySha256": "3c9fd0f32bd9678eb7de0c5c41544582f16931b2c9c3a3e05da91ae6ff514fd9",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 11055,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 4278,
-  "leanTheoremInventoryTheoremCount": 6294,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 3428,
-  "leanTheoremInventorySourceClosureModuleCount": 97,
-  "leanSourceClosureSha256": "c6213632859bace723f284a2c7d3722fd8e763f918ea310f0e4026a1e3917b48",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-23-77",
+  "leanTheoremInventoryDeclarationCount": 11178,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 4308,
+  "leanTheoremInventoryTheoremCount": 6388,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 3451,
+  "leanTheoremInventorySourceClosureModuleCount": 98,
+  "leanSourceClosureSha256": "e4a252b5035528e0751fa447bacedc95e569d2477b4e5e81d9571052bd8ef347",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-23-78",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "270af07378eca03dff852d1b9f70b034e058b63a8a0e24dd0257e5358ecf3a7b",
+  "formalPublicationMapSha256": "7f312d2fecaf087c4c4a4b210ccf67c8ae1f842899bb9353decc93d7b05ca7a0",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",
@@ -24210,6 +24224,525 @@
       "status": "formalized-foundation-only"
     },
     {
+      "id": "concrete-cook-levin-builder-second-constraint-second-padding-or-unary-opportunity-step",
+      "title": "Cook-Levin second-constraint second padding-or-unary opportunity step",
+      "classification": "formalized-foundation-only",
+      "scope": "For every fixed concrete polynomial-time verifier, one literal finite work machine composes the complete first padding-or-unary-opportunity predecessor with the represented-width unary evaluator, the same reviewed 93-rule finite optional-appender table, and the retained-coordinate unary evaluator through three total nine-symbol WorkChain bridges. The global table has exactly 5524 plus the twenty-two inherited/generated unary-evaluator rule counts. Every raw input follows exact predecessor, width-evaluator, width-one skip or wider-width T-appender, retained-coordinate, bridge, suffix, and combined traces. At tapeWidth one it consumes padding and emits no token; at every wider width it appends exactly the second unary T of the second literal. The output equals encodedFormula.take (2 * (FormulaWidth + 43 + if tapeWidth = 1 then 0 else 2)) and the retained coordinate is FormulaVariableSlotBound + 1 + FormulaClauseSlotsPerConstraint * FormulaTokensPerClause + 9. Direct lookup and the specification cursor prove the following slot is again padding at width one and the third unary T at wider widths. The external compiled bound evaluates to BuilderSecondConstraintPaddingOrUnaryOpportunityStep.rawTimeBound + 624 + 24 * n + 12 * FormulaWidth + 12 * width + 12 * widthRootPrefixLength + 6 * widthWorkSteps + 6 * targetWorkSteps. Compiled exact, bounded, blank-equivalent, accepting, non-timeout, predecessor-unlaunched-endpoint, and one-step-short results are proved while component malformed-workspace behavior remains fail-closed. All 66 new public declarations, fourteen reused optional-appender interfaces, and two strengthened schedule lemmas are axiom-audited: 37 have empty closure, 12 use only propext, and 33 use only propext and Quot.sound, with no project axiom or Classical.choice.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintFirstLiteralTerminatorStep.encodeCNFTokens_eq_terminator_then_successor_and_two_optional_unary",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintFirstLiteralTerminatorStep.thirdFollowingTokenSlot_direct_eq_padding_or_t",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintPaddingOrUnaryOpportunityStep.WidthOptionalAppender.machine_acceptState_ne_rejectState",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintPaddingOrUnaryOpportunityStep.WidthOptionalAppender.rule_source_ne_acceptState",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintPaddingOrUnaryOpportunityStep.WidthOptionalAppender.rules_length",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintPaddingOrUnaryOpportunityStep.WidthOptionalAppender.rules_pairwise_query_distinct",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintPaddingOrUnaryOpportunityStep.WidthOptionalAppender.workRunExact",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.boundedDecide_compile_accept",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.boundedDecide_compile_ne_timeout",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.finalConfiguration_state",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.finalOutside_contains_finalTokenSlot",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.finalTape_represents",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.finalTokenBits_eq_encodedFormula_secondConstraintSecondPaddingOrUnary",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.finalTokenSlot_eq_secondConstraintStart_add_nine",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.followingTokenSlot_direct_eq_padding_or_t",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.machine_acceptState_ne_rejectState",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.opportunitySlot_eq_secondConstraintStart_add_nine",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.optionalAppender_workRunExact",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.prefixEndpoint_before_launch_timeout",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.prefixSuffix_launch_workStep",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.prefix_workRunExact",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.rawTimeBound_eval",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.rawTimeBound_le",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.rule_source_ne_acceptState",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.rules_length",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.rules_pairwise_query_distinct",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.run_compile_exact",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.run_compile_rawTimeBound",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.run_compile_rawTimeBound_blankEquivalent",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.secondConstraintSecondPaddingOrUnaryTokens_eq_canonical_formula_prefix",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.specification_following_step",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.specification_opportunity_step",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.suffix_workRunExact",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.targetEvaluator_workRunExact",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.widthEvaluator_workRunExact",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.width_eq_tapeWidth",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.width_positive",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.workBoundedDecide_accept",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.workRunExact",
+        "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.work_one_step_short_timeout"
+      ],
+      "nonClaim": "This milestone consumes exactly one additional width-selected schedule opportunity after the second scheduled constraint first literal: padding with no emitted token at width one or the second unary T of the second literal at wider widths. It observes but does not consume the following padding opportunity at width one or third unary T at wider widths, does not complete the second literal or traverse the remainder of the second constraint, does not implement a general dynamic formula cursor or raw decoder for arbitrary schedule coordinates, does not emit the remaining formula body, and does not construct a complete formula builder or FunctionProgram.RawRefinement, package a concrete PolynomialReduction, establish CNFSAT NP-hardness or NP-completeness, establish CNFSAT in P, or prove P = NP.",
+      "theoremRows": [
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintFirstLiteralTerminatorStep.encodeCNFTokens_eq_terminator_then_successor_and_two_optional_unary",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4309cbc40036e6dda6d29606d9a319c356abdbb382c43a5a909987a8dbc1c0f3",
+          "expectedKernelTypeSha256": "4309cbc40036e6dda6d29606d9a319c356abdbb382c43a5a909987a8dbc1c0f3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintFirstLiteralTerminatorStep.thirdFollowingTokenSlot_direct_eq_padding_or_t",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "25f8bf25202acf3019cc7072b45b90e8325170b7522d75bee353feb025969eb9",
+          "expectedKernelTypeSha256": "25f8bf25202acf3019cc7072b45b90e8325170b7522d75bee353feb025969eb9",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintPaddingOrUnaryOpportunityStep.WidthOptionalAppender.machine_acceptState_ne_rejectState",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "00646e05af7bfd520e71f745bb259cb69485558c6549bf815ef6fcd133d94a6d",
+          "expectedKernelTypeSha256": "00646e05af7bfd520e71f745bb259cb69485558c6549bf815ef6fcd133d94a6d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintPaddingOrUnaryOpportunityStep.WidthOptionalAppender.rule_source_ne_acceptState",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8f8b05a91e211208c224875a9178377c3e52b724cca70c9a59ef9c65e610d6cb",
+          "expectedKernelTypeSha256": "8f8b05a91e211208c224875a9178377c3e52b724cca70c9a59ef9c65e610d6cb",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintPaddingOrUnaryOpportunityStep.WidthOptionalAppender.rules_length",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "e4e38f2778e12014f5fccec5f35db63144b3892d78798da71c1bf240a6e30f06",
+          "expectedKernelTypeSha256": "e4e38f2778e12014f5fccec5f35db63144b3892d78798da71c1bf240a6e30f06",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintPaddingOrUnaryOpportunityStep.WidthOptionalAppender.rules_pairwise_query_distinct",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "34c9b99b71b666b3b9755adbb941b34e0cb6192e81693ffa80fd59ef162c64dd",
+          "expectedKernelTypeSha256": "34c9b99b71b666b3b9755adbb941b34e0cb6192e81693ffa80fd59ef162c64dd",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintPaddingOrUnaryOpportunityStep.WidthOptionalAppender.workRunExact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "484d423ea288bf93972998a36b7dab40469fe765882ac47cdcb2a178fa2c396a",
+          "expectedKernelTypeSha256": "484d423ea288bf93972998a36b7dab40469fe765882ac47cdcb2a178fa2c396a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.boundedDecide_compile_accept",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8082f8d56e61a6064afd28ffeb1fc1b8b136887f3ff046041316b2b9338f81af",
+          "expectedKernelTypeSha256": "8082f8d56e61a6064afd28ffeb1fc1b8b136887f3ff046041316b2b9338f81af",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.boundedDecide_compile_ne_timeout",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "245dfb4f9773c8a072d9d7ecf5007f01b91b0ee22b4a38a4a8d9c6a3f18a3c31",
+          "expectedKernelTypeSha256": "245dfb4f9773c8a072d9d7ecf5007f01b91b0ee22b4a38a4a8d9c6a3f18a3c31",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.finalConfiguration_state",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b6d9b7995e581af5d49a260fabe8ce4ed3d065da59087809288dc87efad1fd96",
+          "expectedKernelTypeSha256": "b6d9b7995e581af5d49a260fabe8ce4ed3d065da59087809288dc87efad1fd96",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.finalOutside_contains_finalTokenSlot",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f94b90fb579d810e4e1b3d3d2774701bcd8645312bfc6b146d991b738128a9e4",
+          "expectedKernelTypeSha256": "f94b90fb579d810e4e1b3d3d2774701bcd8645312bfc6b146d991b738128a9e4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.finalTape_represents",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b29ab1f8f8417a2c5c21a0e32dbe02ed2c4a23830ddcf05045de59d91bc05621",
+          "expectedKernelTypeSha256": "b29ab1f8f8417a2c5c21a0e32dbe02ed2c4a23830ddcf05045de59d91bc05621",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.finalTokenBits_eq_encodedFormula_secondConstraintSecondPaddingOrUnary",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "2f4835387ee326d866b10371f16b02770bc3f691de4fa03ab000dfdfb3ec487a",
+          "expectedKernelTypeSha256": "2f4835387ee326d866b10371f16b02770bc3f691de4fa03ab000dfdfb3ec487a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.finalTokenSlot_eq_secondConstraintStart_add_nine",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0a8cb78e57f830da9389e15f128d833a7fd723f17511efb12bbdee37673b6955",
+          "expectedKernelTypeSha256": "0a8cb78e57f830da9389e15f128d833a7fd723f17511efb12bbdee37673b6955",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.followingTokenSlot_direct_eq_padding_or_t",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6004bec0f471fe12a53b010760637ebbe8cbfe0da9fc6845e6d1e7e0ae36d1b8",
+          "expectedKernelTypeSha256": "6004bec0f471fe12a53b010760637ebbe8cbfe0da9fc6845e6d1e7e0ae36d1b8",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.machine_acceptState_ne_rejectState",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "430117862d1a3474a2c9275cb87cbba1807cc73cc7fe35817ee245353c3a3d68",
+          "expectedKernelTypeSha256": "430117862d1a3474a2c9275cb87cbba1807cc73cc7fe35817ee245353c3a3d68",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.opportunitySlot_eq_secondConstraintStart_add_nine",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9052bbd700ea965f0b10e0adc4c5a725c3c2e40f23282e605b527f0013282ada",
+          "expectedKernelTypeSha256": "9052bbd700ea965f0b10e0adc4c5a725c3c2e40f23282e605b527f0013282ada",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.optionalAppender_workRunExact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5a81b5425c227fb5fdc59ac8b618797e3ec97d5ebee878672ba4d0b014bf2bf0",
+          "expectedKernelTypeSha256": "5a81b5425c227fb5fdc59ac8b618797e3ec97d5ebee878672ba4d0b014bf2bf0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.prefixEndpoint_before_launch_timeout",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "795169d31065f5bb229af91e0572d5518aa1f9cd072d2dccb70fb418baeb388e",
+          "expectedKernelTypeSha256": "795169d31065f5bb229af91e0572d5518aa1f9cd072d2dccb70fb418baeb388e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.prefixSuffix_launch_workStep",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "779c89d1bc04ae8028f27f7cf4d47007d47c24d63bf96d29e9c83f192351bda7",
+          "expectedKernelTypeSha256": "779c89d1bc04ae8028f27f7cf4d47007d47c24d63bf96d29e9c83f192351bda7",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.prefix_workRunExact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "be1495f169bc7fe60f92bf7a939283756f0c303b5db69287f397823ce3dd4d56",
+          "expectedKernelTypeSha256": "be1495f169bc7fe60f92bf7a939283756f0c303b5db69287f397823ce3dd4d56",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.rawTimeBound_eval",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3ae80e9ed046a54aa23aeee2dba61be8e89b945b8575ffd510d870435e511f9e",
+          "expectedKernelTypeSha256": "3ae80e9ed046a54aa23aeee2dba61be8e89b945b8575ffd510d870435e511f9e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.rawTimeBound_le",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "accaee4998623e994a3badd3424c9030b6faf0a1bb6127ead87816ce2bcac987",
+          "expectedKernelTypeSha256": "accaee4998623e994a3badd3424c9030b6faf0a1bb6127ead87816ce2bcac987",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.rule_source_ne_acceptState",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e58dc29c3aadb32874c00e1b178d9738bd22c3d6cf6293f751438dcf6bfa509c",
+          "expectedKernelTypeSha256": "e58dc29c3aadb32874c00e1b178d9738bd22c3d6cf6293f751438dcf6bfa509c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.rules_length",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "51c6c353d332ff1143a375b3569f5aaae8304717160e915868b6b87ffa3f19d1",
+          "expectedKernelTypeSha256": "51c6c353d332ff1143a375b3569f5aaae8304717160e915868b6b87ffa3f19d1",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.rules_pairwise_query_distinct",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6c3ec55e4659c4fb40982f56b5707ae917934a16e5f7f475bebaab9c2da7e8e3",
+          "expectedKernelTypeSha256": "6c3ec55e4659c4fb40982f56b5707ae917934a16e5f7f475bebaab9c2da7e8e3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.run_compile_exact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "2f51fcc98b6f68b019f22606595fd5ae1225202b0022e076e6c1ba780d833859",
+          "expectedKernelTypeSha256": "2f51fcc98b6f68b019f22606595fd5ae1225202b0022e076e6c1ba780d833859",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.run_compile_rawTimeBound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6fde993a44e536af0f626b8c2e90851ed71006dea7eefdb5ae4b52690ebc619f",
+          "expectedKernelTypeSha256": "6fde993a44e536af0f626b8c2e90851ed71006dea7eefdb5ae4b52690ebc619f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.run_compile_rawTimeBound_blankEquivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a83539f8f1479af523274716e798a91230d8e83637e1629f79e00ab50491b885",
+          "expectedKernelTypeSha256": "a83539f8f1479af523274716e798a91230d8e83637e1629f79e00ab50491b885",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.secondConstraintSecondPaddingOrUnaryTokens_eq_canonical_formula_prefix",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8845fba9169410b3a6ef378fbd66eda8e14b5f40e297b8a49ea93e15426badac",
+          "expectedKernelTypeSha256": "8845fba9169410b3a6ef378fbd66eda8e14b5f40e297b8a49ea93e15426badac",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.specification_following_step",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7056fc7493b5c14137e2dde0005dcef015667b1feaa081f9c2131a0c224ac9e9",
+          "expectedKernelTypeSha256": "7056fc7493b5c14137e2dde0005dcef015667b1feaa081f9c2131a0c224ac9e9",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.specification_opportunity_step",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c4f2ed8dd7a01b0052a2bb30ba3f5e9e32efd829ff14669002aae261e8d8cdf2",
+          "expectedKernelTypeSha256": "c4f2ed8dd7a01b0052a2bb30ba3f5e9e32efd829ff14669002aae261e8d8cdf2",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.suffix_workRunExact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "930694db17ec2841b3129bf5184be1f10057959a595961eb8eab86b1268aef8f",
+          "expectedKernelTypeSha256": "930694db17ec2841b3129bf5184be1f10057959a595961eb8eab86b1268aef8f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.targetEvaluator_workRunExact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "33c98d8e4f3174ac3be6acf00e6dd4c75e12fc99e699e43a5fdcb8ccab13c05c",
+          "expectedKernelTypeSha256": "33c98d8e4f3174ac3be6acf00e6dd4c75e12fc99e699e43a5fdcb8ccab13c05c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.widthEvaluator_workRunExact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "cc014a6b37d87b836753d6cb8bd2f7d6a7ee17b22774ea2b1e7b1bf3e8dcffb5",
+          "expectedKernelTypeSha256": "cc014a6b37d87b836753d6cb8bd2f7d6a7ee17b22774ea2b1e7b1bf3e8dcffb5",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.width_eq_tapeWidth",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "0b7350be6f623b47381e0bc758061bca1543e0d68d9c7feb6524a74c112617bc",
+          "expectedKernelTypeSha256": "0b7350be6f623b47381e0bc758061bca1543e0d68d9c7feb6524a74c112617bc",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.width_positive",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "aaadfe185e75dfd6fa9103bed1258a39b9755b4f3f38b302b0ee311ab99576e0",
+          "expectedKernelTypeSha256": "aaadfe185e75dfd6fa9103bed1258a39b9755b4f3f38b302b0ee311ab99576e0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.workBoundedDecide_accept",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "54d8c5dff4059bee4c153b88057632b86aba39126ba7d1b878b7f5cfe67bdce7",
+          "expectedKernelTypeSha256": "54d8c5dff4059bee4c153b88057632b86aba39126ba7d1b878b7f5cfe67bdce7",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.workRunExact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0e354ae7c354d6ed25aa769bbc0a9221edd7c96c74382ce4e524ff1c967d735d",
+          "expectedKernelTypeSha256": "0e354ae7c354d6ed25aa769bbc0a9221edd7c96c74382ce4e524ff1c967d735d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.work_one_step_short_timeout",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "499f390011dc2edd24e6166de34d10d4e833160d2d70df3741b038d6fe4d972b",
+          "expectedKernelTypeSha256": "499f390011dc2edd24e6166de34d10d4e833160d2d70df3741b038d6fe4d972b",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
+    },
+    {
       "id": "direct-wire-semantics",
       "title": "Typed direct-wire NAND semantics",
       "classification": "formalized",
@@ -24632,7 +25165,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-23-77",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-23-78",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true
