@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-24-82');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-25-83');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -460,6 +460,16 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanConcreteCookLevinBuilderSecondConstraintSixthPaddingOrOpeningUnaryOpportunityStepRetainedAdvancedTokenCoordinateFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderSecondConstraintSixthPaddingOrOpeningUnaryOpportunityStepInputPrefixOptionalAppenderComposed, true);
   assert.equal(out.leanConcreteCookLevinBuilderSecondConstraintSixthPaddingOrOpeningUnaryOpportunityStepFailClosedBoundaryTimeoutFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondConstraintSeventhPaddingOrUnaryOpportunityStepFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondConstraintSeventhPaddingOrUnaryOpportunityStepAxiomAuditPassed, true);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondConstraintSeventhPaddingOrUnaryOpportunityStepAuditedDeclarationCount, 82);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondConstraintSeventhPaddingOrUnaryOpportunityStepCompiledRawMachineFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondConstraintSeventhPaddingOrUnaryOpportunityStepExternalInputSizePolynomialFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondConstraintSeventhPaddingOrUnaryOpportunityStepExactFormulaBitsFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondConstraintSeventhPaddingOrUnaryOpportunityStepSeventhPaddingOrUnaryOpportunityFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondConstraintSeventhPaddingOrUnaryOpportunityStepRetainedAdvancedTokenCoordinateFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondConstraintSeventhPaddingOrUnaryOpportunityStepInputPrefixOptionalAppenderComposed, true);
+  assert.equal(out.leanConcreteCookLevinBuilderSecondConstraintSeventhPaddingOrUnaryOpportunityStepFailClosedBoundaryTimeoutFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderInputPrefixAppenderComposed, true);
   assert.equal(out.leanConcreteCookLevinBuilderDynamicCursorFormalized, false);
   assert.equal(out.leanConcreteCookLevinFormulaBuilderFormalized, false);
@@ -598,15 +608,15 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.match(out.siteStatusSha256, /^[0-9a-f]{64}$/u);
 });
 
-test('formal reconstruction status pins the padding-or-opening-unary inventory and source closure', async () => {
+test('formal reconstruction status pins the seventh padding-or-unary inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 11688);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 6779);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 3551);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 4464);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 102);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 11811);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 6873);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 3574);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 4511);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 103);
   assert.equal(status.leanSourceClosureSha256,
-    '20d430cdd1fdca800d118ffcc7e487fc743dca5b4c5f170dc868384ed3d31d90');
+    '203119b036adfbb429800396a175ae7e8e01ebd5e142e17a48d8724b7a5b9f9f');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -903,6 +913,9 @@ test('formal reconstruction status pins the padding-or-opening-unary inventory a
     'node --test audits/lean-concrete-cook-levin-builder-second-constraint-sixth-padding-or-opening-unary-opportunity-step0.test.mjs',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintSixthPaddingOrOpeningUnaryOpportunityStepAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintSixthPaddingOrOpeningUnaryOpportunityStep.lean',
+    'node --test audits/lean-concrete-cook-levin-builder-second-constraint-seventh-padding-or-unary-opportunity-step0.test.mjs',
+    'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintSeventhPaddingOrUnaryOpportunityStepAxiomAudit.lean',
+    'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintSeventhPaddingOrUnaryOpportunityStep.lean',
   ]) assert.equal(status.verificationCommands.includes(command), true, command);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP')), true);
@@ -1018,12 +1031,14 @@ test('formal reconstruction status pins the padding-or-opening-unary inventory a
     'CookLevin.BuilderSecondConstraintFifthPaddingOrTerminatorOpportunityStep composes the complete fourth padding-or-unary-opportunity predecessor')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'CookLevin.BuilderSecondConstraintSixthPaddingOrOpeningUnaryOpportunityStep composes the complete fifth padding-or-terminator-opportunity predecessor')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes(
+    'CookLevin.BuilderSecondConstraintSeventhPaddingOrUnaryOpportunityStep composes the complete sixth padding-or-opening-unary-opportunity predecessor')), true);
 });
 
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-24-COOK-LEVIN-BUILDER-SECOND-CONSTRAINT-SIXTH-PADDING-OR-OPENING-UNARY-OPPORTUNITY-STEP-81');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-25-COOK-LEVIN-BUILDER-SECOND-CONSTRAINT-SEVENTH-PADDING-OR-UNARY-OPPORTUNITY-STEP-82');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
