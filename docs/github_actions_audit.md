@@ -147,14 +147,15 @@ from current theorem status.
   claim a general cursor or complete formula builder.
   Subsequent durable checks cover the fourth-clause padding run, the empty fifth-clause rectangle,
   all remaining first-constraint padding, the second-constraint separator, the complete first
-  positive literal through its width-selected successor, and four following width-dependent
-  schedule opportunities. The newest opportunity audit requires exactly 66 new declarations,
-  fourteen reused declarations from the single reviewed 93-rule optional appender, and two
-  strengthened schedule boundaries. Its exact 82-line closure split is 37 empty, 12 `propext`,
-  and 33 `propext`/`Quot.sound`; it checks the 5764-rule symbolic base, width-one no-emission
-  branch, wider-width fourth-unary-`T` branch, `V+1+Q*C+11` retained coordinate, external
-  polynomial, unlaunched predecessor endpoint, and one-step-short timeout without claiming the
-  following slot, a complete second literal, or a complete formula builder.
+  positive literal through its width-selected successor, and five following width-dependent
+  schedule opportunities. The newest opportunity audit requires exactly 66 new outer declarations,
+  fourteen declarations from the new 93-rule optional-terminator controller, and two strengthened
+  schedule boundaries. Its exact 82-line transcript checks the 5884-rule symbolic base, width-one
+  no-emission branch, wider-width terminating-`F` branch, `V+1+Q*C+12` retained coordinate,
+  external polynomial, unlaunched predecessor endpoint, and one-step-short timeout. Its measured
+  closure split is 37 empty, 12 `propext`, and 33 `propext`/`Quot.sound`, without
+  claiming the following padding-or-opening-`T` slot, a complete following literal, or a complete
+  formula builder.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
   locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual

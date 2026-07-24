@@ -29,6 +29,18 @@ host, not as a build host.
   ssh -o BatchMode=yes -o ConnectTimeout=10 pnpbuilder true
   ```
 
+- For a target reached through `ProxyJump`, inspect the effective configuration
+  for both the destination and jump host with `ssh -G`. A destination key being
+  loaded does not establish that the jump-host key is loaded. Before asking the
+  user to unlock anything, compare the configured public-key fingerprints with
+  the identities already available from the user's existing agent sockets. If
+  one existing socket contains both exact identities, use that socket for the
+  run. Otherwise ask for the specific missing configured key, not the destination
+  key generically.
+- Make nested probes non-interactive at both hops. Top-level `BatchMode=yes` is
+  not reliably inherited by the implicit jump process, so use an explicit
+  non-interactive proxy command when necessary and disable askpass for the probe.
+  A successful probe must produce no wallet dialog or passphrase prompt.
 - If that probe reports a missing or locked identity, stop and ask the user to
   unlock or add the already-configured key in their own terminal. Do not create a
   KDE Wallet, generate a replacement key, rewrite SSH configuration, or repeatedly
@@ -37,6 +49,16 @@ host, not as a build host.
   checked commit, checked tree, command exit status, and the final `systemd-run`
   resource summary. This makes truncated terminal output diagnosable without
   rerunning an expensive suite.
+- A user-level `systemd-run` service may not inherit the login shell's toolchain
+  path. Before the first proof phase, verify the exact `lake` and `lean` binaries
+  visible inside the service environment and set the already-installed toolchain
+  path explicitly when needed. Treat status 127 with `command not found` as a
+  launch-environment failure, not a theorem failure.
+- A fresh checkout has no `.olean` cache. A cache may be seeded from another
+  checkout only after its source tree and pinned toolchain have been shown to
+  match exactly. Then rebuild the modified dependency chain and root import
+  incrementally before running an audit that imports the root; otherwise the
+  audit can see a stale namespace even though the new leaf module compiled.
 - Give long remote commands phase markers or retain their full log in the remote
   temporary directory. Return concise success markers; on failure, return the
   failing phase and a useful tail of its log.
@@ -118,6 +140,38 @@ Generated counts, theorem totals, hashes, page counts, byte sizes, and coordinat
 are outputs of the generators and verifiers. Do not preselect them. Regenerate
 after the source has stabilized, then record the values that the tools actually
 produce.
+
+### Reconcile expected values before expensive verification
+
+When a source or generator change predictably changes a count, page total,
+coordinate, byte size, digest, or similar checked value, update the complete
+expectation chain before running a broad test:
+
+1. Identify the authoritative source or generator and derive the new value from
+   it. Never change a test merely to accept an unexplained observed result.
+2. Search source, documentation, tests, generated fixtures, and durable workflow
+   shell blocks for the old exact value.
+3. Dump a structured summary of every changed generated field and check it
+   field-by-field against the focused test fixture. Do not rely only on searching
+   for old values: a missed adjacent field may use a common number that also
+   appears legitimately in historical material.
+4. Regenerate authoritative artefacts first, then update every derived assertion
+   and fixture from that output in the same change.
+5. Run the smallest targeted check that exercises the changed expectation.
+6. Only after that targeted check passes, run the full remote suite and
+   clean-clone reproduction.
+
+For example, if a generated inventory now contains 43 entries where the previous
+release contained 42, establish that the added authoritative entry is intended,
+regenerate the inventory, update the assertions that consume its generated
+count, and run the focused inventory/publication check before `npm test` or a
+full Lean build. This ordering avoids spending a heavyweight run on a stale
+known expectation while preserving fail-closed tests.
+
+For documentation assertions, compare semantic text after normalizing whitespace
+when line wrapping is not part of the contract. Do not make a broad verification
+run fail merely because an unchanged sentence was reflowed across Markdown
+lines.
 
 ### Cross-repository audit preflight
 

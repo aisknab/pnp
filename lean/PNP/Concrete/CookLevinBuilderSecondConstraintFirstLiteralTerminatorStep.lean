@@ -627,7 +627,11 @@ private theorem scheduledShapeConstraints_second_firstVariable_shape
         problem.dimensions.tapeWidth problem.tableauInputMode = 1) ∧
       (nextVariables ≠ [] →
         ∃ next remaining, nextVariables = next :: remaining ∧
-          next.val = 4) := by
+          next.val = 4) ∧
+      (nextVariables ≠ [] →
+        ∃ next third remaining,
+          nextVariables = next :: third :: remaining ∧
+          next.val = 4 ∧ third.val = 5) := by
   dsimp at hSchedule
   have hSecond : problem.scheduledShapeConstraints[1]? =
       some (some (.exactlyOne (nextVariable :: nextVariables))) := by
@@ -672,6 +676,7 @@ private theorem scheduledShapeConstraints_second_firstVariable_shape
       simp at hIndex
       have hTail : nextVariables = [] := hSecond.2
       exact ⟨hIndex.symm, ⟨fun _ => hTapeWidth, fun _ => hTail⟩,
+        fun hNonempty => False.elim (hNonempty hTail),
         fun hNonempty => False.elim (hNonempty hTail)⟩
   | cons position remaining =>
       have hWidthAtLeastTwo :
@@ -707,15 +712,31 @@ private theorem scheduledShapeConstraints_second_firstVariable_shape
         have hTail := congrArg
           (fun values => values[0]?.map Fin.val) hSecond.2
         simpa [hPositionOne] using hTail.symm
+      have hTailSecond :
+          nextVariables[1]?.map Fin.val = some 5 := by
+        have hTail := congrArg
+          (fun values => values[1]?.map Fin.val) hSecond.2
+        simpa [hPositionOne] using hTail.symm
       refine ⟨hIndex.symm, ⟨
         fun hEmpty => False.elim (hTailNonempty hEmpty),
-        fun hWidthOne => False.elim (by omega)⟩, ?_⟩
-      intro _hNonempty
-      cases nextVariables with
-      | nil => contradiction
-      | cons next remaining =>
-          refine ⟨next, remaining, rfl, ?_⟩
-          simpa using hTailFirst
+        fun hWidthOne => False.elim (by omega)⟩, ?_, ?_⟩
+      · intro _hNonempty
+        cases nextVariables with
+        | nil => contradiction
+        | cons next remaining =>
+            refine ⟨next, remaining, rfl, ?_⟩
+            simpa using hTailFirst
+      · intro _hNonempty
+        cases nextVariables with
+        | nil => contradiction
+        | cons next remaining =>
+            cases remaining with
+            | nil =>
+                simp at hTailSecond
+            | cons third tail =>
+                refine ⟨next, third, tail, rfl, ?_, ?_⟩
+                · simpa using hTailFirst
+                · simpa using hTailSecond
 
 private theorem formulaConstraintSchedule_starts_firstSymbol
     {language : Language} (problem : VerifierTableauProblem language) :
@@ -755,7 +776,11 @@ private theorem formulaConstraintSchedule_starts_twoExactlyOne_nonempty
         problem.dimensions.tapeWidth problem.tableauInputMode = 1) ∧
       (nextVariables ≠ [] →
         ∃ next remaining, nextVariables = next :: remaining ∧
-          next.val = 4) := by
+          next.val = 4) ∧
+      (nextVariables ≠ [] →
+        ∃ next third remaining,
+          nextVariables = next :: third :: remaining ∧
+          next.val = 4 ∧ third.val = 5) := by
   dsimp
   rcases scheduledShapeConstraints_starts_twoExactlyOne_nonempty problem with
     ⟨nextVariable, nextVariables, rest, hRest⟩
@@ -768,7 +793,7 @@ private theorem formulaConstraintSchedule_starts_twoExactlyOne_nonempty
       problem.scheduledPreservationConstraints ++
       [some (.require
         (problem.stateLiteral problem.finalTime problem.acceptingState))],
-    ?_, hShape.1, hShape.2.1, hShape.2.2⟩
+    ?_, hShape.1, hShape.2.1, hShape.2.2.1, hShape.2.2.2⟩
   unfold VerifierTableauProblem.formulaConstraintSchedule
   rw [hRest]
   simp [List.append_assoc]
@@ -811,13 +836,17 @@ private theorem formulaClauseSchedule_starts_firstConstraint_then_nextClause
         (nextVariables ≠ [] →
           ∃ next remaining, nextVariables = next :: remaining ∧
             next.val = 4) ∧
+        (nextVariables ≠ [] →
+          ∃ next third remaining,
+            nextVariables = next :: third :: remaining ∧
+            next.val = 4 ∧ third.val = 5) ∧
         left.val = 0 ∧ right.val = 1 ∧
         thirdLeft.val = 0 ∧ thirdRight.val = 2 ∧
         fourthLeft.val = 1 ∧ fourthRight.val = 2 := by
   dsimp
   rcases formulaConstraintSchedule_starts_twoExactlyOne_nonempty problem with
     ⟨nextVariable, nextVariables, constraints, hConstraints, hEqualsThree,
-      hTailShape, hTailHead⟩
+      hTailShape, hTailHead, hTailThird⟩
   rcases scheduledExactlyOneClauses_starts_atLeast problem
       (nextVariable :: nextVariables) with
     ⟨nextClauses, hNextClauses⟩
@@ -852,7 +881,8 @@ private theorem formulaClauseSchedule_starts_firstConstraint_then_nextClause
     (problem.symbolLiteral firstTime firstPosition .one).index
   refine ⟨blankIndex, zeroIndex, blankIndex, oneIndex,
     zeroIndex, oneIndex, nextVariable, nextVariables, rest,
-    ?_, hEqualsThree, hTailShape, hTailHead, ?_, ?_, ?_, ?_, ?_, ?_⟩
+    ?_, hEqualsThree, hTailShape, hTailHead, hTailThird,
+    ?_, ?_, ?_, ?_, ?_, ?_⟩
   · simp [rest, blankIndex, zeroIndex, oneIndex, firstTime,
       firstPosition]
   · simp [VerifierTableauProblem.symbolLiteral,
@@ -1120,6 +1150,95 @@ private theorem scheduledAtLeastOneClauseTokens_includes_fourth_opportunity
         atLeastOneBoundedClause, trueLiteral, BoundedLiteral.emit,
         hEqualsThree, hNext', rest, List.append_assoc]
 
+private theorem scheduledAtLeastOneClauseTokens_includes_terminator_and_following
+    {language : Language} (problem : VerifierTableauProblem language)
+    (first : Fin problem.FormulaWidth)
+    (variables : List (Fin problem.FormulaWidth))
+    (hEqualsThree : first.val = 3)
+    (hTailThird : variables ≠ [] →
+      ∃ next third remaining,
+        variables = next :: third :: remaining ∧
+        next.val = 4 ∧ third.val = 5) :
+    ∃ rest,
+      problem.scheduledClauseTokens
+          (some (atLeastOneBoundedClause (first :: variables))) =
+        some CNFToken.sep :: some CNFToken.t :: some CNFToken.t ::
+          some CNFToken.t :: some CNFToken.t :: some CNFToken.f ::
+          some (if variables = [] then CNFToken.finish else CNFToken.t) ::
+          (if variables = [] then none else some CNFToken.t) ::
+          (if variables = [] then none else some CNFToken.t) ::
+          (if variables = [] then none else some CNFToken.t) ::
+          (if variables = [] then none else some CNFToken.t) ::
+          (if variables = [] then none else some CNFToken.f) ::
+          (if variables = [] then none else some CNFToken.t) :: rest := by
+  have hVariableBound :=
+    BuilderFirstClausePaddingRun.formulaVariableSlotBound_at_least_three
+      problem
+  have hClauseWidth : 13 ≤ problem.formulaTokensPerClause := by
+    unfold VerifierTableauProblem.formulaTokensPerClause
+    have hProduct : 11 ≤
+        (problem.formulaVariableSlotBound + 4) *
+          (problem.formulaVariableSlotBound + 1) := by
+      exact Nat.le_trans (by decide : 11 ≤ 7 * 4)
+        (Nat.mul_le_mul (by omega) (by omega))
+    omega
+  cases variables with
+  | nil =>
+      let rest : List (Option CNFToken) :=
+        List.replicate (problem.formulaTokensPerClause - 13) none
+      refine ⟨rest, ?_⟩
+      simp [VerifierTableauProblem.scheduledClauseTokens,
+        FormulaSchedule.pad, encodeClauseTokens, encodeLiteralListTokens,
+        encodeLiteralTokens, encodeUnaryTokens, BoundedClause.emit,
+        atLeastOneBoundedClause, trueLiteral, BoundedLiteral.emit,
+        hEqualsThree, rest]
+      rw [show problem.formulaTokensPerClause - 7 =
+        (problem.formulaTokensPerClause - 8) + 1 by omega,
+        List.replicate_succ,
+        show problem.formulaTokensPerClause - 8 =
+          (problem.formulaTokensPerClause - 9) + 1 by omega,
+        List.replicate_succ,
+        show problem.formulaTokensPerClause - 9 =
+          (problem.formulaTokensPerClause - 10) + 1 by omega,
+        List.replicate_succ,
+        show problem.formulaTokensPerClause - 10 =
+          (problem.formulaTokensPerClause - 11) + 1 by omega,
+        List.replicate_succ,
+        show problem.formulaTokensPerClause - 11 =
+          (problem.formulaTokensPerClause - 12) + 1 by omega,
+        List.replicate_succ,
+        show problem.formulaTokensPerClause - 12 =
+          (problem.formulaTokensPerClause - 13) + 1 by omega,
+        List.replicate_succ]
+  | cons next remaining =>
+      have hShape := hTailThird (by simp)
+      rcases hShape with
+        ⟨actualNext, third, tail, hVariables, hNext, hThird⟩
+      simp only [List.cons.injEq] at hVariables
+      have hNext' : next.val = 4 := by
+        rw [hVariables.1]
+        exact hNext
+      have hRemaining : remaining = third :: tail := hVariables.2
+      let rest :=
+        ([CNFToken.t, CNFToken.t, CNFToken.t, CNFToken.t,
+            CNFToken.t, CNFToken.f] ++
+          encodeLiteralListTokens
+            (BoundedClause.emit (atLeastOneBoundedClause tail)) ++
+          [CNFToken.finish]).map some ++
+        List.replicate
+          (problem.formulaTokensPerClause -
+            (encodeClauseTokens
+              (BoundedClause.emit
+                (atLeastOneBoundedClause
+                  (first :: next :: remaining)))).length) none
+      refine ⟨rest, ?_⟩
+      simp [VerifierTableauProblem.scheduledClauseTokens,
+        FormulaSchedule.pad, encodeClauseTokens, encodeLiteralListTokens,
+        encodeLiteralTokens, encodeUnaryTokens, BoundedClause.emit,
+        atLeastOneBoundedClause, trueLiteral, BoundedLiteral.emit,
+        hEqualsThree, hNext', hRemaining, hThird, rest,
+        List.append_assoc]
+
 private theorem formulaClauseTokens_firstConstraint_padding_then_sep_t_t_t_t_f
     {language : Language} (problem : VerifierTableauProblem language) :
     ∃ rest,
@@ -1155,8 +1274,8 @@ private theorem formulaClauseTokens_firstConstraint_padding_then_sep_t_t_t_t_f
   rcases formulaClauseSchedule_starts_firstConstraint_then_nextClause problem with
     ⟨left, right, thirdLeft, thirdRight, fourthLeft, fourthRight,
       nextVariable, nextVariables, clauses, hClauses,
-      hNextEqualsThree, hTailShape, _hTailHead, hLeft, hRight, hThirdLeft,
-      hThirdRight, hFourthLeft, hFourthRight⟩
+      hNextEqualsThree, hTailShape, _hTailHead, _hTailThird,
+      hLeft, hRight, hThirdLeft, hThirdRight, hFourthLeft, hFourthRight⟩
   rcases scheduledAtLeastOneClauseTokens_starts_sep_t_t_t_t_f_next problem
       nextVariable nextVariables hNextEqualsThree with
     ⟨nextTokens, hNextTokens⟩
@@ -1239,8 +1358,8 @@ private theorem formulaClauseTokens_through_successor_and_following
   rcases formulaClauseSchedule_starts_firstConstraint_then_nextClause problem with
     ⟨left, right, thirdLeft, thirdRight, fourthLeft, fourthRight,
       nextVariable, nextVariables, clauses, hClauses,
-      hNextEqualsThree, hTailShape, hTailHead, hLeft, hRight, hThirdLeft,
-      hThirdRight, hFourthLeft, hFourthRight⟩
+      hNextEqualsThree, hTailShape, hTailHead, _hTailThird,
+      hLeft, hRight, hThirdLeft, hThirdRight, hFourthLeft, hFourthRight⟩
   rcases scheduledAtLeastOneClauseTokens_includes_following_opportunity
       problem nextVariable nextVariables hNextEqualsThree hTailHead with
     ⟨nextTokens, hNextTokens⟩
@@ -1339,8 +1458,8 @@ private theorem formulaClauseTokens_through_fourth_opportunity
   rcases formulaClauseSchedule_starts_firstConstraint_then_nextClause problem with
     ⟨left, right, thirdLeft, thirdRight, fourthLeft, fourthRight,
       nextVariable, nextVariables, clauses, hClauses,
-      hNextEqualsThree, hTailShape, hTailHead, hLeft, hRight, hThirdLeft,
-      hThirdRight, hFourthLeft, hFourthRight⟩
+      hNextEqualsThree, hTailShape, hTailHead, hTailThird,
+      hLeft, hRight, hThirdLeft, hThirdRight, hFourthLeft, hFourthRight⟩
   rcases scheduledAtLeastOneClauseTokens_includes_fourth_opportunity
       problem nextVariable nextVariables hNextEqualsThree hTailHead with
     ⟨nextTokens, hNextTokens⟩
@@ -1398,6 +1517,120 @@ private theorem formulaClauseTokens_through_fourth_opportunity
         (problem.formulaVariableSlotBound + 4) *
           (problem.formulaVariableSlotBound + 1) := by
       exact Nat.le_trans (by decide : 10 ≤ 7 * 4)
+        (Nat.mul_le_mul (by omega) (by omega))
+    omega
+  refine ⟨nextTokens ++ clauses.flatMap problem.scheduledClauseTokens, ?_⟩
+  simp [BoundedClause.emit, excludeBoundedPairClause, falseLiteral,
+    BoundedLiteral.emit, encodeLiteralListTokens, encodeLiteralTokens,
+    encodeUnaryTokens, hLeft, hRight, hThirdLeft, hThirdRight,
+    hFourthLeft, hFourthRight, List.append_assoc]
+
+private theorem formulaClauseTokens_through_fifth_opportunity
+    {language : Language} (problem : VerifierTableauProblem language) :
+    ∃ rest,
+      problem.formulaClauseSchedule.flatMap problem.scheduledClauseTokens =
+        [some CNFToken.sep,
+         some CNFToken.t, some CNFToken.f,
+         some CNFToken.t, some CNFToken.t, some CNFToken.f,
+         some CNFToken.t, some CNFToken.t, some CNFToken.t,
+         some CNFToken.f, some CNFToken.finish] ++
+        List.replicate (problem.formulaTokensPerClause - 11) none ++
+        [some CNFToken.sep,
+         some CNFToken.f, some CNFToken.f,
+         some CNFToken.f, some CNFToken.t, some CNFToken.f,
+         some CNFToken.finish] ++
+        List.replicate (problem.formulaTokensPerClause - 7) none ++
+        [some CNFToken.sep,
+         some CNFToken.f, some CNFToken.f,
+         some CNFToken.f, some CNFToken.t, some CNFToken.t,
+         some CNFToken.f, some CNFToken.finish] ++
+        List.replicate (problem.formulaTokensPerClause - 8) none ++
+        [some CNFToken.sep,
+         some CNFToken.f, some CNFToken.t, some CNFToken.f,
+         some CNFToken.f, some CNFToken.t, some CNFToken.t,
+         some CNFToken.f, some CNFToken.finish] ++
+        List.replicate (problem.formulaTokensPerClause - 9) none ++
+        List.replicate
+          ((problem.formulaClauseSlotsPerConstraint - 4) *
+            problem.formulaTokensPerClause) none ++
+        some CNFToken.sep :: some CNFToken.t :: some CNFToken.t ::
+          some CNFToken.t :: some CNFToken.t :: some CNFToken.f ::
+          some (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+            then CNFToken.finish else CNFToken.t) ::
+          (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+            then none else some CNFToken.t) ::
+          (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+            then none else some CNFToken.t) ::
+          (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+            then none else some CNFToken.t) ::
+          (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+            then none else some CNFToken.t) ::
+          (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+            then none else some CNFToken.f) ::
+          (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+            then none else some CNFToken.t) :: rest := by
+  rcases formulaClauseSchedule_starts_firstConstraint_then_nextClause problem with
+    ⟨left, right, thirdLeft, thirdRight, fourthLeft, fourthRight,
+      nextVariable, nextVariables, clauses, hClauses,
+      hNextEqualsThree, hTailShape, hTailHead, hTailThird,
+      hLeft, hRight, hThirdLeft, hThirdRight, hFourthLeft, hFourthRight⟩
+  rcases scheduledAtLeastOneClauseTokens_includes_terminator_and_following
+      problem nextVariable nextVariables hNextEqualsThree hTailThird with
+    ⟨nextTokens, hNextTokens⟩
+  have hNextToken :
+      (if nextVariables = [] then CNFToken.finish else CNFToken.t) =
+        (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+          then CNFToken.finish else CNFToken.t) := by
+    by_cases hEmpty : nextVariables = []
+    · have hWidthOne := hTailShape.mp hEmpty
+      simp [hEmpty, hWidthOne]
+    · have hWidthNotOne :
+          problem.dimensions.tapeWidth problem.tableauInputMode ≠ 1 := by
+        intro hWidthOne
+        exact hEmpty (hTailShape.mpr hWidthOne)
+      simp [hEmpty, hWidthNotOne]
+  have hFollowing :
+      (if nextVariables = [] then none else some CNFToken.t) =
+        (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+          then none else some CNFToken.t) := by
+    by_cases hEmpty : nextVariables = []
+    · have hWidthOne := hTailShape.mp hEmpty
+      simp [hEmpty, hWidthOne]
+    · have hWidthNotOne :
+          problem.dimensions.tapeWidth problem.tableauInputMode ≠ 1 := by
+        intro hWidthOne
+        exact hEmpty (hTailShape.mpr hWidthOne)
+      simp [hEmpty, hWidthNotOne]
+  have hTerminator :
+      (if nextVariables = [] then none else some CNFToken.f) =
+        (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+          then none else some CNFToken.f) := by
+    by_cases hEmpty : nextVariables = []
+    · have hWidthOne := hTailShape.mp hEmpty
+      simp [hEmpty, hWidthOne]
+    · have hWidthNotOne :
+          problem.dimensions.tapeWidth problem.tableauInputMode ≠ 1 := by
+        intro hWidthOne
+        exact hEmpty (hTailShape.mpr hWidthOne)
+      simp [hEmpty, hWidthNotOne]
+  rw [hNextToken, hFollowing, hTerminator] at hNextTokens
+  rw [hClauses]
+  simp only [List.flatMap_cons, List.flatMap_append]
+  rw [flatMap_empty_clause_rectangles problem, hNextTokens]
+  dsimp [VerifierTableauProblem.scheduledClauseTokens]
+  rw [firstShapeClause_emit_eq]
+  simp only [encodeClauseTokens, encodeLiteralListTokens,
+    encodeLiteralTokens, encodeUnaryTokens]
+  unfold FormulaSchedule.pad
+  have hVariableBound :=
+    BuilderFirstClausePaddingRun.formulaVariableSlotBound_at_least_three
+      problem
+  have hClauseWidth : 13 ≤ problem.formulaTokensPerClause := by
+    unfold VerifierTableauProblem.formulaTokensPerClause
+    have hProduct : 11 ≤
+        (problem.formulaVariableSlotBound + 4) *
+          (problem.formulaVariableSlotBound + 1) := by
+      exact Nat.le_trans (by decide : 11 ≤ 7 * 4)
         (Nat.mul_le_mul (by omega) (by omega))
     omega
   refine ⟨nextTokens ++ clauses.flatMap problem.scheduledClauseTokens, ?_⟩
@@ -1716,6 +1949,110 @@ theorem encodeCNFTokens_eq_terminator_then_successor_and_four_optional_unary
   refine ⟨
     (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
       then [] else [CNFToken.f]) ++
+      FormulaSchedule.emit clauseTail ++ [CNFToken.finish], ?_⟩
+  rw [← problem.formulaTokenSchedule_emit_eq_encodeCNFTokens]
+  unfold VerifierTableauProblem.formulaTokenSchedule
+  rw [FormulaSchedule.emit_append, FormulaSchedule.emit_append,
+    FormulaSchedule.emit_pad, hEmit]
+  unfold secondConstraintFirstLiteralTerminatorTokens
+    BuilderSecondConstraintFirstLiteralThirdUnaryUnitStep.secondConstraintFirstLiteralThirdUnaryTokens
+    BuilderSecondConstraintFirstLiteralSecondUnaryUnitStep.secondConstraintFirstLiteralSecondUnaryTokens
+    BuilderSecondConstraintFirstLiteralFirstUnaryUnitStep.secondConstraintFirstLiteralFirstUnaryTokens
+    BuilderSecondConstraintFirstLiteralSignStep.secondConstraintFirstLiteralSignTokens
+    BuilderSecondConstraintSeparatorStep.secondConstraintStartTokens
+    BuilderFourthClausePrefix.fourthClauseTokens
+    BuilderFourthClauseSecondLiteralPrefix.fourthClauseSecondLiteralTokens
+    BuilderFourthClauseSecondLiteralPrefix.secondUnaryTokenOutput
+    BuilderFourthClauseSecondLiteralPrefix.firstUnaryTokenOutput
+    BuilderFourthClauseSecondLiteralPrefix.signTokenOutput
+    BuilderFourthClauseFirstLiteralPrefix.fourthClauseFirstLiteralTokens
+    BuilderFourthClauseFirstLiteralPrefix.unaryTokenOutput
+    BuilderFourthClauseFirstLiteralPrefix.signTokenOutput
+    BuilderFourthClauseSeparatorStep.fourthClauseStartTokens
+    BuilderThirdClausePrefix.thirdClauseTokens
+    BuilderThirdClauseSecondLiteralPrefix.thirdClauseSecondLiteralTokens
+    BuilderThirdClauseSecondLiteralPrefix.secondUnaryTokenOutput
+    BuilderThirdClauseSecondLiteralPrefix.firstUnaryTokenOutput
+    BuilderThirdClauseSecondLiteralPrefix.signTokenOutput
+    BuilderThirdClauseFirstLiteralPrefix.thirdClauseFirstLiteralTokens
+    BuilderThirdClauseFirstLiteralPrefix.firstTokenOutput
+    BuilderThirdClauseSeparatorStep.thirdClauseStartTokens
+    BuilderSecondClausePrefix.secondClauseTokens
+    BuilderSecondClauseSecondLiteralPrefix.secondClauseSecondLiteralTokens
+    BuilderSecondClauseSecondLiteralPrefix.unaryTokenOutput
+    BuilderSecondClauseSecondLiteralPrefix.signTokenOutput
+    BuilderSecondClauseFirstLiteralPrefix.secondClauseFirstLiteralTokens
+    BuilderSecondClauseFirstLiteralPrefix.firstTokenOutput
+    BuilderSecondClauseSeparatorStep.secondClauseStartTokens
+  rw [BuilderFirstClausePrefix.firstClauseTokens_eq_canonical_prefix]
+  by_cases hWidth :
+      problem.dimensions.tapeWidth problem.tableauInputMode = 1
+  · simp [hWidth, List.append_assoc]
+  · simp [hWidth, List.append_assoc]
+
+/-- The canonical stream through the next five schedule opportunities
+contains no new token at width one.  At every wider width it contains four
+unary `T` tokens followed by the second literal's terminating `F`. -/
+theorem encodeCNFTokens_eq_terminator_then_successor_and_four_optional_unary_and_optional_terminator
+    {language : Language} (problem : VerifierTableauProblem language) :
+    ∃ rest, encodeCNFTokens problem.formula =
+      secondConstraintFirstLiteralTerminatorTokens problem ++
+        [if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+          then CNFToken.finish else CNFToken.t] ++
+        (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+          then [] else [CNFToken.t]) ++
+        (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+          then [] else [CNFToken.t]) ++
+        (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+          then [] else [CNFToken.t]) ++
+        (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+          then [] else [CNFToken.t]) ++
+        (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+          then [] else [CNFToken.f]) ++ rest := by
+  rcases formulaClauseTokens_through_fifth_opportunity problem with
+    ⟨clauseTail, hClauseTail⟩
+  have hEmit :
+      FormulaSchedule.emit
+          (problem.formulaClauseSchedule.flatMap
+            problem.scheduledClauseTokens) =
+        [CNFToken.sep,
+         CNFToken.t, CNFToken.f,
+         CNFToken.t, CNFToken.t, CNFToken.f,
+         CNFToken.t, CNFToken.t, CNFToken.t,
+         CNFToken.f, CNFToken.finish,
+         CNFToken.sep, CNFToken.f, CNFToken.f,
+         CNFToken.f, CNFToken.t, CNFToken.f,
+         CNFToken.finish,
+         CNFToken.sep, CNFToken.f, CNFToken.f,
+         CNFToken.f, CNFToken.t, CNFToken.t, CNFToken.f,
+         CNFToken.finish,
+         CNFToken.sep, CNFToken.f, CNFToken.t, CNFToken.f,
+         CNFToken.f, CNFToken.t, CNFToken.t, CNFToken.f,
+         CNFToken.finish, CNFToken.sep, CNFToken.t, CNFToken.t,
+         CNFToken.t, CNFToken.t, CNFToken.f,
+         (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+            then CNFToken.finish else CNFToken.t)] ++
+          (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+            then [] else [CNFToken.t]) ++
+          (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+            then [] else [CNFToken.t]) ++
+          (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+            then [] else [CNFToken.t]) ++
+          (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+            then [] else [CNFToken.t]) ++
+          (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+            then [] else [CNFToken.f]) ++
+          (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+            then [] else [CNFToken.t]) ++
+          FormulaSchedule.emit clauseTail := by
+    rw [hClauseTail]
+    by_cases hWidth :
+        problem.dimensions.tapeWidth problem.tableauInputMode = 1
+    · simp [hWidth]
+    · simp [hWidth]
+  refine ⟨
+    (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+      then [] else [CNFToken.t]) ++
       FormulaSchedule.emit clauseTail ++ [CNFToken.finish], ?_⟩
   rw [← problem.formulaTokenSchedule_emit_eq_encodeCNFTokens]
   unfold VerifierTableauProblem.formulaTokenSchedule
@@ -2680,6 +3017,127 @@ theorem fifthFollowingTokenSlot_direct_eq_padding_or_f
       problem.formulaTokensPerClause = emptyCount by rfl]
   rw [if_neg (by omega)]
   rw [show emptyCount + 11 - emptyCount = 11 by omega]
+  simp
+
+/-- The schedule opportunity six positions after the terminator is still
+padding at width one and is the first unary `T` of the following literal at
+every wider width. -/
+theorem sixthFollowingTokenSlot_direct_eq_padding_or_t
+    {language : Language} (problem : VerifierTableauProblem language) :
+  problem.formulaTokenSlotDirect (finalTokenSlot problem + 6) =
+      some
+        (if problem.dimensions.tapeWidth problem.tableauInputMode = 1
+          then none else some CNFToken.t) := by
+  rw [problem.formulaTokenSlotDirect_eq]
+  rcases formulaClauseTokens_through_fifth_opportunity problem with
+    ⟨rest, hClauses⟩
+  have hCoordinate :
+      finalTokenSlot problem + 6 =
+        problem.formulaVariableSlotBound + 1 +
+          problem.formulaClauseSlotsPerConstraint *
+            problem.formulaTokensPerClause + 12 := by
+    rw [finalTokenSlot_eq_secondConstraintStart_add_six]
+  unfold VerifierTableauProblem.formulaTokenSchedule
+  rw [hClauses, hCoordinate]
+  have hHeader :
+      (FormulaSchedule.pad (problem.formulaVariableSlotBound + 1)
+        (encodeUnaryTokens problem.FormulaWidth)).length =
+          problem.formulaVariableSlotBound + 1 := by
+    apply FormulaSchedule.pad_length
+    rw [encodeUnaryTokens_length]
+    exact Nat.add_le_add_right
+      problem.formulaWidth_le_formulaVariableCountPolynomial 1
+  have hVariableBound :=
+    BuilderFirstClausePaddingRun.formulaVariableSlotBound_at_least_three
+      problem
+  have hClauseWidth : 13 ≤ problem.formulaTokensPerClause := by
+    unfold VerifierTableauProblem.formulaTokensPerClause
+    have hProduct : 11 ≤
+        (problem.formulaVariableSlotBound + 4) *
+          (problem.formulaVariableSlotBound + 1) := by
+      exact Nat.le_trans (by decide : 11 ≤ 7 * 4)
+        (Nat.mul_le_mul (by omega) (by omega))
+    omega
+  have hSlots : 4 ≤ problem.formulaClauseSlotsPerConstraint := by
+    unfold VerifierTableauProblem.formulaClauseSlotsPerConstraint
+    have hProduct : 9 ≤
+        problem.formulaVariableSlotBound *
+          problem.formulaVariableSlotBound :=
+      Nat.mul_le_mul hVariableBound hVariableBound
+    omega
+  let emptyCount :=
+    (problem.formulaClauseSlotsPerConstraint - 4) *
+      problem.formulaTokensPerClause
+  have hDecompose :
+      problem.formulaClauseSlotsPerConstraint *
+          problem.formulaTokensPerClause =
+        4 * problem.formulaTokensPerClause + emptyCount := by
+    have hSlotsDecompose :
+        problem.formulaClauseSlotsPerConstraint =
+          4 + (problem.formulaClauseSlotsPerConstraint - 4) := by
+      omega
+    rw [hSlotsDecompose]
+    simp only [Nat.add_mul]
+    rfl
+  simp only [List.append_assoc]
+  rw [List.getElem?_append, hHeader, if_neg (by omega)]
+  rw [show problem.formulaVariableSlotBound + 1 +
+      problem.formulaClauseSlotsPerConstraint *
+          problem.formulaTokensPerClause + 12 -
+      (problem.formulaVariableSlotBound + 1) =
+        4 * problem.formulaTokensPerClause + emptyCount + 12 by
+          rw [hDecompose]
+          omega]
+  rw [List.getElem?_append]
+  simp only [List.length_cons, List.length_nil]
+  rw [if_neg (by omega)]
+  rw [show 4 * problem.formulaTokensPerClause + emptyCount + 12 - 11 =
+      (problem.formulaTokensPerClause - 11) +
+        3 * problem.formulaTokensPerClause + emptyCount + 12 by omega]
+  rw [List.getElem?_append, List.length_replicate]
+  rw [if_neg (by omega)]
+  rw [show (problem.formulaTokensPerClause - 11) +
+      3 * problem.formulaTokensPerClause + emptyCount + 12 -
+      (problem.formulaTokensPerClause - 11) =
+        3 * problem.formulaTokensPerClause + emptyCount + 12 by omega]
+  rw [List.getElem?_append]
+  simp only [List.length_cons, List.length_nil]
+  rw [if_neg (by omega)]
+  rw [show 3 * problem.formulaTokensPerClause + emptyCount + 12 - 7 =
+      (problem.formulaTokensPerClause - 7) +
+        2 * problem.formulaTokensPerClause + emptyCount + 12 by omega]
+  rw [List.getElem?_append, List.length_replicate]
+  rw [if_neg (by omega)]
+  rw [show (problem.formulaTokensPerClause - 7) +
+      2 * problem.formulaTokensPerClause + emptyCount + 12 -
+      (problem.formulaTokensPerClause - 7) =
+        2 * problem.formulaTokensPerClause + emptyCount + 12 by omega]
+  rw [List.getElem?_append]
+  simp only [List.length_cons, List.length_nil]
+  rw [if_neg (by omega)]
+  rw [show 2 * problem.formulaTokensPerClause + emptyCount + 12 - 8 =
+      (problem.formulaTokensPerClause - 8) +
+        problem.formulaTokensPerClause + emptyCount + 12 by omega]
+  rw [List.getElem?_append, List.length_replicate]
+  rw [if_neg (by omega)]
+  rw [show (problem.formulaTokensPerClause - 8) +
+      problem.formulaTokensPerClause + emptyCount + 12 -
+      (problem.formulaTokensPerClause - 8) =
+        problem.formulaTokensPerClause + emptyCount + 12 by omega]
+  rw [List.getElem?_append]
+  simp only [List.length_cons, List.length_nil]
+  rw [if_neg (by omega)]
+  rw [show problem.formulaTokensPerClause + emptyCount + 12 - 9 =
+      (problem.formulaTokensPerClause - 9) + emptyCount + 12 by omega]
+  rw [List.getElem?_append, List.length_replicate]
+  rw [if_neg (by omega)]
+  rw [show (problem.formulaTokensPerClause - 9) + emptyCount + 12 -
+      (problem.formulaTokensPerClause - 9) = emptyCount + 12 by omega]
+  rw [List.getElem?_append, List.length_replicate]
+  rw [show (problem.formulaClauseSlotsPerConstraint - 4) *
+      problem.formulaTokensPerClause = emptyCount by rfl]
+  rw [if_neg (by omega)]
+  rw [show emptyCount + 12 - emptyCount = 12 by omega]
   simp
 
 theorem specification_next_step {language : Language}
