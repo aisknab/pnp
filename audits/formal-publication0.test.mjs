@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 59);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 56);
+  assert.equal(status.formalPublicationMilestones.length, 60);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 57);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -1205,6 +1205,41 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   assert.match(byId.get(
     'concrete-cook-levin-builder-second-constraint-third-padding-or-unary-opportunity-step').nonClaim,
     /does not consume the following padding opportunity at width one or fourth unary T at wider widths/u);
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-second-constraint-fourth-padding-or-unary-opportunity-step').status,
+  'formalized-foundation-only');
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-second-constraint-fourth-padding-or-unary-opportunity-step').earned, true);
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-second-constraint-fourth-padding-or-unary-opportunity-step').allAssumptionFree, false);
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-second-constraint-fourth-padding-or-unary-opportunity-step')
+    .axiomClosureUsesOnlyLeanStandardAllowlist, true);
+  assert.equal(byId.get(
+    'concrete-cook-levin-builder-second-constraint-fourth-padding-or-unary-opportunity-step')
+    .requiredTheorems.length, 40);
+  for (const theorem of [
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintFirstLiteralTerminatorStep.encodeCNFTokens_eq_terminator_then_successor_and_four_optional_unary',
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintFirstLiteralTerminatorStep.fifthFollowingTokenSlot_direct_eq_padding_or_f',
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintPaddingOrUnaryOpportunityStep.WidthOptionalAppender.rules_length',
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintPaddingOrUnaryOpportunityStep.WidthOptionalAppender.rules_pairwise_query_distinct',
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintPaddingOrUnaryOpportunityStep.WidthOptionalAppender.workRunExact',
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintFourthPaddingOrUnaryOpportunityStep.optionalAppender_workRunExact',
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintFourthPaddingOrUnaryOpportunityStep.workRunExact',
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintFourthPaddingOrUnaryOpportunityStep.finalTokenBits_eq_encodedFormula_secondConstraintFourthPaddingOrUnary',
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintFourthPaddingOrUnaryOpportunityStep.secondConstraintFourthPaddingOrUnaryTokens_eq_canonical_formula_prefix',
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintFourthPaddingOrUnaryOpportunityStep.followingTokenSlot_direct_eq_padding_or_f',
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintFourthPaddingOrUnaryOpportunityStep.rawTimeBound_le',
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintFourthPaddingOrUnaryOpportunityStep.work_one_step_short_timeout',
+  ]) assert.equal(byId.get(
+    'concrete-cook-levin-builder-second-constraint-fourth-padding-or-unary-opportunity-step')
+    .requiredTheorems.includes(theorem), true, theorem);
+  assert.match(byId.get(
+    'concrete-cook-levin-builder-second-constraint-fourth-padding-or-unary-opportunity-step').scope,
+    /5764 plus the twenty-six inherited\/generated unary-evaluator rule counts/u);
+  assert.match(byId.get(
+    'concrete-cook-levin-builder-second-constraint-fourth-padding-or-unary-opportunity-step').nonClaim,
+    /does not consume the following padding opportunity at width one or terminating F at wider widths/u);
   assert.equal(byId.get('concrete-cnf-universal-verifier').requiredTheorems.includes(
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP'), true);
   assert.match(byId.get('concrete-cnf-universal-verifier').nonClaim,
@@ -1225,17 +1260,17 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   ]) assert.equal(byId.get(id).status, 'not-formalized');
 });
 
-test('publication consumes the reviewed third padding-or-unary map and inventory counts', async () => {
+test('publication consumes the reviewed fourth padding-or-unary map and inventory counts', async () => {
   const [status, mapText] = await Promise.all([
     status0(),
     readFile(new URL('../publication/FORMAL_PUBLICATION_MAP.json', import.meta.url), 'utf8'),
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '542924b70dca9dc98c64d58c7003fc6c7cd916576b1d1fa72913cbbf32eb84b4');
+    '4027f35da3106cc34eabd372db753c9555a5794b9e6d1092775945c065ad31d8');
   assert.equal(map.milestoneSourceClosureSha256,
-    '15c3038cde96ace23dc91e97f5068a46669b5d3f8a50981609f6841599f61a1f');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 1799);
+    '2ba454458c36cd1bc1f82fc816aca8b5b87f011bfef113c66d3e1eeec689d065');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 1834);
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.CookLevin.BuilderSecondConstraintPaddingOrUnaryOpportunityStep.workRunExact'
   ], 'string');
@@ -1253,6 +1288,12 @@ test('publication consumes the reviewed third padding-or-unary map and inventory
   ], 'string');
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.CookLevin.BuilderSecondConstraintFirstLiteralTerminatorStep.fourthFollowingTokenSlot_direct_eq_padding_or_t'
+  ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintFourthPaddingOrUnaryOpportunityStep.workRunExact'
+  ], 'string');
+  assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
+    'PNP.Concrete.CookLevin.BuilderSecondConstraintFirstLiteralTerminatorStep.fifthFollowingTokenSlot_direct_eq_padding_or_f'
   ], 'string');
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.PipelineCompiler.pipeline_correct'
@@ -1486,7 +1527,7 @@ test('publication consumes the reviewed third padding-or-unary map and inventory
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [11301, 6482, 3474, 4349, 99]);
+  ], [11424, 6576, 3497, 4379, 100]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

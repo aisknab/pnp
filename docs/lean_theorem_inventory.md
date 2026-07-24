@@ -79,20 +79,20 @@ missing general compiler/refinement for arbitrary charged pipelines.
 The reviewed Cook--Levin builder boundary now emits all four populated clauses of the first
 scheduled constraint, traverses every remaining padding opportunity in that constraint, and emits
 the second constraint's separator and complete first positive literal through its width-selected
-successor. Three further finite opportunity machines reuse one reviewed 93-rule optional appender.
-At tape width one all three positions are padding and emit no token; at every wider width they append
-the first three unary `T` tokens of the second literal. The newest table has `5644` literal rules
-plus twenty-four inherited/generated unary-evaluator rule counts, preserves
-`encodedFormula.take (2 * (FormulaWidth + 43 + if tapeWidth = 1 then 0 else 3))`, and retains
-`FormulaVariableSlotBound + 1 + FormulaClauseSlotsPerConstraint * FormulaTokensPerClause + 10`.
+successor. Four further finite opportunity machines reuse one reviewed 93-rule optional appender.
+At tape width one all four positions are padding and emit no token; at every wider width they append
+the first four unary `T` tokens of the second literal. The newest table has `5764` literal rules
+plus twenty-six inherited/generated unary-evaluator rule counts, preserves
+`encodedFormula.take (2 * (FormulaWidth + 43 + if tapeWidth = 1 then 0 else 4))`, and retains
+`FormulaVariableSlotBound + 1 + FormulaClauseSlotsPerConstraint * FormulaTokensPerClause + 11`.
 Direct lookup and the specification cursor prove that the following slot is padding at width one
-and the fourth unary `T` at wider widths. Exact compiled execution is bounded by the predecessor
-polynomial plus `636 + 24*n + 12*FormulaWidth + 12*width + 12*widthRootPrefixLength +
+and the terminating `F` at wider widths. Exact compiled execution is bounded by the predecessor
+polynomial plus `648 + 24*n + 12*FormulaWidth + 12*width + 12*widthRootPrefixLength +
 6*widthWorkSteps + 6*targetWorkSteps`. The newest 82-declaration audit covers all 66 new public
 declarations, fourteen reused optional-appender interfaces, and two strengthened schedule
 boundaries with exactly 37 empty, 12 `propext`, and 33 `propext`/`Quot.sound` closures. This is
 still not a general dynamic raw formula cursor or arbitrary schedule decoder; the following
-padding-or-fourth-unary slot, the rest of the second constraint, a complete builder,
+padding-or-terminating-`F` slot, the rest of the second constraint, a complete builder,
 construction-runtime `RawRefinement`, and a concrete `PolynomialReduction` remain absent.
 
 The current four project-specific axioms remain visible as an independent inventory:

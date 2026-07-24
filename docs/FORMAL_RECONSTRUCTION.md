@@ -659,14 +659,34 @@ two strengthened schedule boundaries: 37 closures are empty, 12 use only
 `propext`, and 33 use only `propext` and `Quot.sound`. No closure reaches
 `Classical.choice` or a project axiom.
 
+The second-constraint-fourth-padding-or-unary-opportunity milestone reuses
+the same reviewed 93-rule optional appender at the following schedule
+position. At width one the controller again takes its direct skip bridge and
+emits no token; at every wider width it appends exactly the fourth unary `T`
+of the second literal. The global table has `5764` plus twenty-six
+inherited/generated unary-evaluator rule counts. Its exact bits are
+`encodedFormula.take (2 * (FormulaWidth + 43 + if tapeWidth = 1 then 0 else
+4))`, and its retained coordinate is
+`V + 1 + formulaClauseSlotsPerConstraint * formulaTokensPerClause + 11`.
+Direct lookup and the specification cursor prove that the following slot is
+padding at width one and the terminating `F` at every wider width. The
+external compiled bound evaluates to
+`BuilderSecondConstraintThirdPaddingOrUnaryOpportunityStep.rawTimeBound +
+648 + 24*n + 12*FormulaWidth + 12*width + 12*widthRootPrefixLength +
+6*widthWorkSteps + 6*targetWorkSteps`. The 82-declaration audit covers all 66
+new public declarations, fourteen reused optional-appender interfaces, and
+two strengthened schedule boundaries: 37 closures are empty, 12 use only
+`propext`, and 33 use only `propext` and `Quot.sound`. No closure reaches
+`Classical.choice` or a project axiom.
+
 This earns the complete first four populated clauses, traverses all four clauses' remaining padding,
 crosses every remaining empty clause rectangle of the first scheduled constraint, and emits the
 separator, positive first-literal sign, all three unary index units, the terminating `F`, and its
 width-selected `Finish` or `T` successor in the second constraint's first literal. It also consumes
-the next three schedule opportunities, emitting nothing for width-one padding or the first three unary
+the next four schedule opportunities, emitting nothing for width-one padding or the first four unary
 `T` tokens of the second literal at wider widths.
 It is not a general dynamic cursor or an arbitrary raw slot decoder: no machine emits the following
-padding or fourth-unary-`T` opportunity, traverses the rest of the second constraint, or emits the
+padding or terminating-`F` opportunity, traverses the rest of the second constraint, or emits the
 remaining formula body,
 composes a complete raw formula builder with a construction-runtime proof, or packages
 a concrete `PolynomialReduction`. A deterministic

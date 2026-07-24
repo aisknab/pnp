@@ -21,6 +21,7 @@ const SUPPLEMENTAL_AXIOM_AUDITS = [
   'lean-audit/PNPConcreteCookLevinBuilderSecondConstraintPaddingOrUnaryOpportunityStepAxiomAudit.lean',
   'lean-audit/PNPConcreteCookLevinBuilderSecondConstraintSecondPaddingOrUnaryOpportunityStepAxiomAudit.lean',
   'lean-audit/PNPConcreteCookLevinBuilderSecondConstraintThirdPaddingOrUnaryOpportunityStepAxiomAudit.lean',
+  'lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFourthPaddingOrUnaryOpportunityStepAxiomAudit.lean',
 ];
 const REGRESSION =
   'lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralTerminatorStep.lean';
@@ -58,6 +59,7 @@ theorem specification_terminator_step
 theorem encodeCNFTokens_eq_terminator_then_successor
 theorem encodeCNFTokens_eq_terminator_then_successor_and_two_optional_unary
 theorem encodeCNFTokens_eq_terminator_then_successor_and_three_optional_unary
+theorem encodeCNFTokens_eq_terminator_then_successor_and_four_optional_unary
 theorem encodeCNFTokens_eq_terminator_then_successor_and_optional_unary
 theorem secondConstraintFirstLiteralTerminatorTokens_eq_canonical_formula_prefix
 theorem finalTokenBits_eq_encodedFormula_secondConstraintFirstLiteralTerminator
@@ -69,6 +71,7 @@ theorem followingTokenSlot_direct_eq_padding_or_t
 theorem secondFollowingTokenSlot_direct_eq_padding_or_t
 theorem thirdFollowingTokenSlot_direct_eq_padding_or_t
 theorem fourthFollowingTokenSlot_direct_eq_padding_or_t
+theorem fifthFollowingTokenSlot_direct_eq_padding_or_f
 theorem specification_next_step
 theorem finalConfiguration_state
 def rawTimeBound
@@ -262,13 +265,15 @@ test('kernel transcript covers every public terminator-step declaration',
       'encodeCNFTokens_eq_terminator_then_successor',
       'encodeCNFTokens_eq_terminator_then_successor_and_two_optional_unary',
       'encodeCNFTokens_eq_terminator_then_successor_and_three_optional_unary',
+      'encodeCNFTokens_eq_terminator_then_successor_and_four_optional_unary',
       'encodeCNFTokens_eq_terminator_then_successor_and_optional_unary',
       'followingTokenSlot_direct_eq_padding_or_t',
       'secondFollowingTokenSlot_direct_eq_padding_or_t',
       'thirdFollowingTokenSlot_direct_eq_padding_or_t',
       'fourthFollowingTokenSlot_direct_eq_padding_or_t',
+      'fifthFollowingTokenSlot_direct_eq_padding_or_f',
     ];
-    assert.equal(HEADS.length, 56);
+    assert.equal(HEADS.length, 58);
     assert.equal(printed.length, 56);
     assert.equal(new Set(printed).size, 56);
     assert.deepEqual(imports0(audit), ['PNP']);
