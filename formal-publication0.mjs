@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '1036c804208e5843a372510945c0da8b7773670730c5412abf722f5f66bfebf3';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'd66d2b6962c1b100952b606974076a7e19e7e11518910cf051f07ccdd72df234';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -1945,6 +1945,14 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.firstListedGain_sound',
   'PNP.DirectWire.framedGlobalSlackLaw',
   'PNP.DirectWire.lockedBaselineCount_report_formula',
+  'PNP.DirectWire.LockedNANDTrace.carrierSeparation',
+  'PNP.DirectWire.LockedNANDTrace.distinguishedChecks_length',
+  'PNP.DirectWire.LockedNANDTrace.exists_coherent_trace',
+  'PNP.DirectWire.LockedNANDTrace.finalLock_fresh',
+  'PNP.DirectWire.LockedNANDTrace.satisfiable_iff_trace_extension',
+  'PNP.DirectWire.LockedNANDTrace.traceEquivalence',
+  'PNP.DirectWire.LockedNANDTrace.tracePredicate_coherentExtension',
+  'PNP.DirectWire.LockedNANDTrace.trace_sound_of_predicate_true',
   'PNP.DirectWire.nandCircuit_spec',
   'PNP.DirectWire.prefixAndDirect_referenceMinimum',
   'PNP.DirectWire.referenceMinimum_invariant',
@@ -1986,7 +1994,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-25-83') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-25-84') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -2263,7 +2271,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-25-83') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-25-84') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

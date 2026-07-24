@@ -280,6 +280,7 @@ recorded by [`archive/legacy-v0/`](./archive/legacy-v0/README.md).
 - [Lean exhaustive reference minimum](./docs/lean_nand_reference_minimum.md): decidable truth tables, exact finite minimum, residual slack, and the concrete framed boundary.
 - [Lean locked-NAND local baselines](./docs/lean_locked_nand_baseline.md): typed candidates, semantic output lower bounds, source-derived accounting, five exact local minima, and the quarantined legacy fixture.
 - [Lean conditional locked-NAND threshold boundary](./docs/lean_locked_nand_threshold_boundary.md): the six proof-bearing premises, derived semantic boundary, hostile-review mapping, and exact missing instantiations.
+- [Lean locked-NAND carrier layout and trace equivalence](./docs/lean_locked_nand_carrier_trace.md): an exact unbounded carrier partition and both directions of the legacy Section 17 trace induction for arbitrary finite NAND circuits.
 - [Lean explicit-list residual routes](./docs/lean_residual_routes.md): sound gain scanning, proof-bearing terminal results, and fail-closed unresolved outcomes.
 
 ## Install and current package surface

@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-25-83';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-25-84';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -130,6 +130,7 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'node --test audits/lean-nand-reference-minimum0.test.mjs',
   'node --test audits/lean-locked-nand-baseline0.test.mjs',
   'node --test audits/lean-locked-nand-threshold-boundary0.test.mjs',
+  'node --test audits/lean-locked-nand-carrier-trace0.test.mjs',
   'node --test audits/lean-residual-routes0.test.mjs',
   'lake build PNP',
   'lake env lean -DwarningAsError=true lean-audit/PNPBridgeAxiomAudit.lean',
@@ -266,6 +267,8 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDBaselineAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDLocalBaselineAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDThresholdBoundaryAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDCarrierTraceAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPLockedNANDCarrierTrace.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualRoutesAxiomAudit.lean',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
@@ -348,7 +351,8 @@ const NON_CLAIMS = Object.freeze([
   'The legacy synthetic m=2 fixture is quarantined as internally inconsistent: honest source-derived baseline/displayed counts are 86/90, metadata-consistent counts are 95/99, and stored hybrid counts are 91/95.',
   'The proof-bearing conditional locked-NAND semantic boundary is not the report threshold theorem: it assumes typed baseline and full candidates, baseline output conditions, preservation of the first outputs, an unsatisfiable final-zero law, and satisfiable final-output laws instead of constructing them for arbitrary circuits.',
   'The residual-slack-at-most-four result is conditional on that six-field premise package; it is not an unconditional result for the report locked-NAND family.',
-  'Against the hostile-review inventory, DirectWireOutputLowerBound and the model-level ZeroOutputConvention are now discharged, while global MacroDistinct, TraceEquivalence, FinalLockSeparation, carrier layout, and uniform polynomial premise construction remain missing.',
+  'The locked-NAND carrier and TraceEquivalence milestone is unbounded over arbitrary finite topological NAND circuits: it proves the exact X/T/O/R/L/z partition, generates three checks per gate, constructs coherent traces, and proves accepted traces equal genuine evaluation. It does not assemble the complete exposed candidates or prove the threshold.',
+  'Against the hostile-review inventory, DirectWireOutputLowerBound, semantic-carrier TraceEquivalence, and the model-level ZeroOutputConvention are now discharged, while global MacroDistinct, FinalLockSeparation, complete candidate assembly, derived final-output laws, and uniform polynomial premise construction remain missing.',
   'The conditional module quantifies an arbitrary satisfiable proposition and baseline natural number; it does not identify them with source-circuit SAT and lockedBaselineCount, enforce answer-independent uniform construction, or connect the candidate boundary to the abstract PNP.LockedNANDThreshold language.',
   'The executable residual-route scan is complete only for the explicit finite implementation list supplied by its caller; unresolved excludes no unlisted gain and does not imply global minimality or ZeroSlack.',
   'An empty-list scan is formally shown to remain unresolved on a positive-slack implementation, so search failure cannot be promoted to zero residual slack.',
@@ -1011,8 +1015,12 @@ const EXACT_FIELDS = Object.freeze({
   leanLockedNANDThresholdBoundaryScope: 'proof-bearing-typed-candidate-and-semantic-premises-only',
   leanLockedNANDThresholdBoundaryPremisesInstantiated: false,
   leanLockedNANDGlobalBaselineDistinctFormalized: false,
-  leanLockedNANDCarrierLayoutFormalized: false,
-  leanLockedNANDTraceEquivalenceFormalized: false,
+  leanLockedNANDCarrierLayoutFormalized: true,
+  leanLockedNANDTraceEquivalenceFormalized: true,
+  leanLockedNANDCarrierTraceAxiomAuditPassed: true,
+  leanLockedNANDCarrierTraceAuditedDeclarationCount: 71,
+  leanLockedNANDCarrierTraceScope:
+    'arbitrary-finite-topological-nand-circuits-carrier-separation-and-trace-equivalence',
   leanLockedNANDDerivedFinalOutputLawsFormalized: false,
   leanLockedNANDResidualSlackAtMostFourFormalized: false,
   leanLockedNANDPolynomialBuilderFormalized: false,
@@ -1056,7 +1064,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-25-COOK-LEVIN-BUILDER-SECOND-CONSTRAINT-SEVENTH-PADDING-OR-UNARY-OPPORTUNITY-STEP-82',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-25-LOCKED-NAND-CARRIER-TRACE-83',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -1694,8 +1702,12 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanLockedNANDThresholdBoundaryScope: 'proof-bearing-typed-candidate-and-semantic-premises-only',
       leanLockedNANDThresholdBoundaryPremisesInstantiated: false,
       leanLockedNANDGlobalBaselineDistinctFormalized: false,
-      leanLockedNANDCarrierLayoutFormalized: false,
-      leanLockedNANDTraceEquivalenceFormalized: false,
+      leanLockedNANDCarrierLayoutFormalized: true,
+      leanLockedNANDTraceEquivalenceFormalized: true,
+      leanLockedNANDCarrierTraceAxiomAuditPassed: true,
+      leanLockedNANDCarrierTraceAuditedDeclarationCount: 71,
+      leanLockedNANDCarrierTraceScope:
+        'arbitrary-finite-topological-nand-circuits-carrier-separation-and-trace-equivalence',
       leanLockedNANDDerivedFinalOutputLawsFormalized: false,
       leanLockedNANDResidualSlackAtMostFourFormalized: false,
       leanLockedNANDPolynomialBuilderFormalized: false,
@@ -1790,7 +1802,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-25-83',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-25-84',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

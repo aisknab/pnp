@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-25-83",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-25-84",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "203119b036adfbb429800396a175ae7e8e01ebd5e142e17a48d8724b7a5b9f9f",
+  "milestoneSourceClosureSha256": "3830caf4570da74521ede477a38aa7c6ba815c9b9ecea0d2cefcf5be28155e40",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CookLevin.BoundedLiteral.emit_variable_lt": "c089b0fedc7320ec14f46b5b74f7ec26158cdad85ecbe647b4c728660dcb6a68",
@@ -1943,6 +1943,14 @@
     "PNP.DirectWire.ConditionalThresholdBoundaryPremises.fullResidualSlack_le_four": "824e81b304d52fb83d75e95ac136e06ced495ab460d6d621503e2444ee08c93e",
     "PNP.DirectWire.ConditionalThresholdBoundaryPremises.satisfiable_iff_minimum_ge_succ": "d282ec937186b2c041cf999bbee8ff016d4c9f5b71e65c504a8c4a7e7b8ec971",
     "PNP.DirectWire.Equivalent.trans": "7a931de781c961c3ed9386ca2c615fc8531604efc94b823839e5e0a0bf164709",
+    "PNP.DirectWire.LockedNANDTrace.carrierSeparation": "748fd3f6c689ac2c00886db1f78df41e470df0fcba8707cd67b557fd9211e50e",
+    "PNP.DirectWire.LockedNANDTrace.distinguishedChecks_length": "04ca15ec2c3413a7a53af02158f4548370e4fa062cb4f91015022ce6541ac814",
+    "PNP.DirectWire.LockedNANDTrace.exists_coherent_trace": "af33a38d0820bdb3d55953e74724f2145acd38cf488655aea729a1e5c4c98fbd",
+    "PNP.DirectWire.LockedNANDTrace.finalLock_fresh": "9dffcd1537324536e04e7132916bd68cf74233f8c7e0b3ded2492bed1622a1c8",
+    "PNP.DirectWire.LockedNANDTrace.satisfiable_iff_trace_extension": "69a2643bb429af1fda7116530c28c566250bd339b177e97b8f23fe3361152622",
+    "PNP.DirectWire.LockedNANDTrace.traceEquivalence": "633ead68500221c21ca6d328b616e1504ba1d16c72721e027cfe074a689ad533",
+    "PNP.DirectWire.LockedNANDTrace.tracePredicate_coherentExtension": "db97cc7424a7096c2860803878849314be1d4c8d9c9403c6b41e44237cfbfcbf",
+    "PNP.DirectWire.LockedNANDTrace.trace_sound_of_predicate_true": "3adff8c3a32fb2289de57ac5125c920a5c249817d3cafb34dc12f4c096a35c05",
     "PNP.DirectWire.StrictEquivalentGain.strictResidualDescent": "f936c792a4f8f45d27da4512b16ba28222dc64b81f50016c9d30433fbfadae6e",
     "PNP.DirectWire.andCircuit_spec": "43c4801753810dec20c372ae4eac3f248e03f62e084c80089aacbe38dbeaac50",
     "PNP.DirectWire.compatibleReplacement_framed": "450f861075f4eb11bb719e7248543c09ab9239de1ad5c1ab5c721c640da3dd2b",
@@ -4562,6 +4570,23 @@
       "nonClaim": "Local minima are not a global BaselineDistinct or locked-NAND threshold theorem."
     },
     {
+      "id": "locked-nand-global-carrier-trace-equivalence",
+      "title": "Locked-NAND global carrier and trace equivalence",
+      "classification": "formalized",
+      "scope": "Exact X/T/O/R/L/z carrier separation and both trace-equivalence directions for arbitrary finite topological NAND circuits.",
+      "requiredTheorems": [
+        "PNP.DirectWire.LockedNANDTrace.carrierSeparation",
+        "PNP.DirectWire.LockedNANDTrace.finalLock_fresh",
+        "PNP.DirectWire.LockedNANDTrace.distinguishedChecks_length",
+        "PNP.DirectWire.LockedNANDTrace.tracePredicate_coherentExtension",
+        "PNP.DirectWire.LockedNANDTrace.trace_sound_of_predicate_true",
+        "PNP.DirectWire.LockedNANDTrace.traceEquivalence",
+        "PNP.DirectWire.LockedNANDTrace.satisfiable_iff_trace_extension",
+        "PNP.DirectWire.LockedNANDTrace.exists_coherent_trace"
+      ],
+      "nonClaim": "Carrier/trace equivalence does not assemble the complete exposed candidates, prove cross-instance BaselineDistinct or final-output laws, construct the uniform polynomial builder, or establish the locked-NAND threshold."
+    },
+    {
       "id": "locked-nand-conditional-threshold",
       "title": "Conditional locked-NAND threshold boundary",
       "classification": "formalized-with-premises",
@@ -4590,11 +4615,11 @@
       "id": "global-locked-nand-threshold",
       "title": "Global locked-NAND construction and threshold",
       "classification": "not-formalized",
-      "scope": "A uniform answer-independent SAT instance builder, global baseline, trace equivalence, and threshold.",
+      "scope": "A uniform answer-independent SAT instance builder, complete exposed baseline, final-output laws, and threshold.",
       "requiredTheorems": [
         "PNP.Main.locked_nand_threshold"
       ],
-      "nonClaim": "The conditional boundary does not discharge this missing theorem."
+      "nonClaim": "The carrier/trace theorem and conditional boundary do not assemble or discharge this missing global theorem."
     },
     {
       "id": "global-zeroslack-pccmin",

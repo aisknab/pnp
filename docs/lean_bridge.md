@@ -79,6 +79,7 @@ lean/PNP/DirectWireBaseline.lean
 lean/PNP/LockedNANDBaseline.lean
 lean/PNP/LockedNANDLocalBaseline.lean
 lean/PNP/LockedNANDThresholdBoundary.lean
+lean/PNP/LockedNANDCarrierTrace.lean
 lean/PNP/LockedNAND.lean
 lean/PNP/ResidualBand.lean
 lean/PNP/ZeroSlack.lean
@@ -120,6 +121,7 @@ lean-audit/PNPDirectWireBaselineAxiomAudit.lean
 lean-audit/PNPLockedNANDBaselineAxiomAudit.lean
 lean-audit/PNPLockedNANDLocalBaselineAxiomAudit.lean
 lean-audit/PNPLockedNANDThresholdBoundaryAxiomAudit.lean
+lean-audit/PNPLockedNANDCarrierTraceAxiomAudit.lean
 docs/lean_nand_semantics.md
 docs/lean_concrete_machine.md
 docs/lean_tape_handoff.md
@@ -537,11 +539,32 @@ from the hostile review, not the source-circuit trace theorem.
 
 The package is not constructed here. Its `satisfiable` parameter is an arbitrary proposition and
 its `baseline` parameter an arbitrary natural number; neither is identified with circuit SAT or
-`lockedBaselineCount`. Global carrier layout, cross-instance `BaselineDistinct`/`MacroDistinct`,
-`TraceEquivalence`, derived unsatisfiable and satisfiable final-output laws,
+`lockedBaselineCount`. Complete baseline/full candidates, cross-instance
+`BaselineDistinct`/`MacroDistinct`, derived unsatisfiable and satisfiable final-output laws,
 `FinalLockSeparation`, an answer-independent uniform polynomial builder, and connection to
 `PNP.LockedNANDThreshold` remain absent. See `docs/lean_locked_nand_threshold_boundary.md` for the
 exact premise and hostile-review inventories.
+
+## Locked-NAND global carrier and trace equivalence
+
+`lean/PNP/LockedNANDCarrierTrace.lean` defines the exact
+`X ⊔ T ⊔ O ⊔ R ⊔ L ⊔ {z}` carrier for an arbitrary finite topological NAND
+program. Its numeric width is `inputs + 6*gates + 1`; typed encoders and the
+total decoder are mutual inverses, and the final lock is fresh from every
+non-final family.
+
+The module derives the ordered source occurrences and exactly three
+distinguished checks per actual gate from the typed program. A canonical
+coherent extension makes every check true. Conversely, topological induction
+proves that every accepted trace coordinate is genuine program evaluation.
+The fixed-input and existential forms establish the legacy Section 17
+`TraceEquivalence` boundary for arbitrary finite NAND circuits.
+
+The 71-declaration audit uses only empty closure, `propext`, and
+`propext`/`Quot.sound`; it has no `Classical.choice` or project axiom. This is
+not the complete exposed baseline/full candidate, cross-instance
+`BaselineDistinct`, the four-gate final-output argument, a polynomial builder,
+or the threshold theorem. See `docs/lean_locked_nand_carrier_trace.md`.
 
 ## Global locked-NAND layer
 
@@ -555,11 +578,11 @@ structure LockedNANDReductionTrust where
 ```
 
 The local macro truth laws, supplied-list prefix exactness, typed local candidates, source-derived
-accounting, semantic output lower bound, five local square minima, and deductions from the
-six-field conditional boundary package are no longer part of that trust object. Remaining global
-work includes instantiating that package with the exact global distinguished-check list and
-candidates, carrier freshness, cross-instance separation, trace equivalence, derived final-output
-laws, the uniform polynomial builder, and the report threshold/unconditional slack theorem.
+accounting, semantic output lower bound, five local square minima, carrier/trace equivalence, and
+deductions from the six-field conditional boundary package are no longer part of that trust
+object. Remaining global work includes constructing the complete exposed candidates on that
+carrier, cross-instance separation, derived final-output laws, the uniform polynomial builder, and
+the report threshold/unconditional slack theorem.
 
 ## Residual-band, ZeroSlack, and PCCMin layers
 
@@ -695,10 +718,13 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 The highest-value next targets are:
 
 ```text
-1. Construct the exact global distinguished-check list, baseline candidate, and full candidate.
-2. Formalize carrier layout, cross-instance locked-NAND freshness, and baseline distinctness.
-3. Prove first-output preservation, `TraceEquivalence`, and the two derived final-output laws.
-4. Instantiate the conditional boundary uniformly and prove the report threshold theorem.
+1. Assemble the exact global baseline and full candidates from the now-formalized carrier and
+   distinguished-check list.
+2. Prove cross-instance `BaselineDistinct` for every exposed macro and prefix output.
+3. Construct the four-gate final output and derive the unsatisfiable-zero and satisfiable
+   `FinalLockSeparation` laws.
+4. Instantiate the conditional boundary uniformly and prove the report threshold theorem and
+   polynomial construction bound.
 5. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
 6. Transport the exact framer/simulator/handoff trace into `terminalBridgeMachine`, then turn the
    proved four-stage trace into one full pipeline refinement with external-input-size polynomial

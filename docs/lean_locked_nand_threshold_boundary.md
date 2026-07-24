@@ -55,21 +55,21 @@ The historical adversarial review named exactly five threshold lemmas:
 | --- | --- |
 | `DirectWireOutputLowerBound` | Discharged generally by the direct-wire output-to-gate injection and used here through reference-minimum lower bounds. |
 | `MacroDistinct` | Only the five local square macro instances are discharged. The global carrier-tagged, cross-instance form remains missing and must instantiate `baselineConditions`. |
-| `TraceEquivalence` | The circuit-specific theorem remains missing. It must justify `initialOutputsPreserved` and the source-specific final-output laws. |
+| `TraceEquivalence` | Discharged for arbitrary finite typed NAND circuits by `LockedNANDCarrierTrace`: accepted distinguished checks are equivalent to genuine topological evaluation. Connecting that semantic carrier theorem to the complete exposed baseline/full candidates and deriving the final-output laws remain open. |
 | `ZeroOutputConvention` | The model-level convention is discharged: appending a constant-zero output preserves the program and gate count. The global `unsatisfiableFinalZero` law still has to be derived from trace equivalence. |
 | `FinalLockSeparation` | The required semantic consequences are stored in `satisfiableFinalConditions`; deriving them from a fresh final lock and the real construction remains missing. |
 
 Thus the new module closes the deduction from the explicit semantic package. It does not hide the
-global cross-instance `BaselineDistinct`, `TraceEquivalence`, or final-lock argument inside the
-theorem statement.
+global cross-instance `BaselineDistinct`, complete-candidate construction, derived final-output
+laws, or final-lock argument inside the theorem statement.
 
 ## Missing global instantiation
 
 A report-level use still has to supply all six fields above for the concrete circuit construction.
 In particular it must:
 
-1. construct the baseline and full candidates with the exact widths, using a concrete carrier
-   layout and globally fresh tags;
+1. construct the baseline and full candidates with the exact widths on the now-formalized carrier
+   layout and its globally fresh tags;
 2. prove global cross-instance `BaselineDistinct`/`MacroDistinct` for the complete baseline tuple;
 3. prove preservation of the first `B` functions;
 4. prove the whole-carrier unsatisfiable final-zero law from `TraceEquivalence`;
@@ -88,15 +88,18 @@ and reduction trust surface.
 
 ## Audit boundary
 
-The dedicated transcript covers all 32 explicit declarations and reports no axioms. Nevertheless,
-the global carrier layout, global baseline distinctness, trace equivalence, derived final-output
-laws, uniform builder, threshold theorem, unconditional residual-slack-at-most-four theorem, and
-polynomiality all remain false in the formal status. The charged-pipeline-to-raw-machine link is
-now discharged; six blockers remain, including the still-missing global threshold work. The four
-project-specific axioms and absent
+The dedicated conditional-boundary transcript covers all 32 explicit declarations and reports no
+axioms. The separate carrier/trace transcript covers all 71 public declarations using only the
+approved Lean-standard closure and no `Classical.choice`. Carrier layout and semantic trace
+equivalence are now true in formal status. Global baseline distinctness, derived final-output laws,
+uniform builder, threshold theorem, unconditional residual-slack-at-most-four theorem, and
+polynomiality remain false. Six blockers remain, including the still-missing global threshold
+work. The four project-specific axioms and absent
 `PNP.Main.p_eq_np` root theorem also remain. The axiom-free inactive
 `PNP.Main.ConcretePEqualsNP` definition does not change this threshold boundary or activate the
 publication gate.
 
 The ordered multi-output convention and quarantined legacy `m = 2` accounting remain as documented
-in [Lean locked-NAND direct candidates and local baselines](./lean_locked_nand_baseline.md).
+in [Lean locked-NAND direct candidates and local baselines](./lean_locked_nand_baseline.md). The
+new semantic carrier theorem is documented in
+[Lean locked-NAND carrier layout and trace equivalence](./lean_locked_nand_carrier_trace.md).

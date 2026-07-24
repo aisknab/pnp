@@ -100,7 +100,13 @@ residual slack at most four from six explicit typed semantic premises. It does n
 those premises; see [Lean conditional locked-NAND threshold
 boundary](./lean_locked_nand_threshold_boundary.md).
 
-They do not establish a global locked-NAND builder, cross-instance `BaselineDistinct`, carrier
-freshness, the report locked-NAND threshold equivalence, unconditional residual slack at most four, polynomial
-construction/runtime, SAT correctness, or `P = NP`. All seven recorded reconstruction blockers and
-all four disclosed project-specific axioms remain.
+A separate carrier/trace module now proves exact carrier-family separation, final-lock freshness,
+and `TraceEquivalence` for arbitrary finite typed NAND circuits; see
+[Lean locked-NAND carrier layout and trace
+equivalence](./lean_locked_nand_carrier_trace.md).
+
+Together these results still do not establish a global locked-NAND builder, cross-instance
+`BaselineDistinct`, derived whole-carrier final-output laws, the report locked-NAND threshold,
+unconditional residual slack at most four, polynomial construction/runtime, SAT correctness, or
+`P = NP`. All six recorded reconstruction blockers and all four disclosed project-specific axioms
+remain.

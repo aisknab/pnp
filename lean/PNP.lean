@@ -90,6 +90,7 @@ import PNP.LockedNANDDirect
 import PNP.LockedNANDLocalBaseline
 import PNP.LockedNANDBaseline
 import PNP.LockedNANDThresholdBoundary
+import PNP.LockedNANDCarrierTrace
 import PNP.LockedNAND
 import PNP.ResidualBand
 import PNP.ZeroSlack
