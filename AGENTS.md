@@ -175,6 +175,12 @@ lines.
 
 ### Cross-repository audit preflight
 
+- Before running `npm test` in any fresh core-repository clone, enumerate the
+  annotated tag names in `archive/legacy-v0/ARCHIVE.json`, fetch those exact
+  tags, and verify that their pinned tag objects, commits, and trees resolve.
+  A `--single-branch` or filtered clone can omit these required historical
+  refs; treat that as a clone-preflight failure rather than a product
+  regression.
 - Before a source-bound PNPLabs audit, enumerate the refs named by its
   `docs/audit_targets.json` and verify that every current and historical ref
   resolves inside `PNP_SOURCE_DIR`. A single-branch checkout may omit required
