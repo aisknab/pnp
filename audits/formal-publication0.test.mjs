@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 63);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 60);
+  assert.equal(status.formalPublicationMilestones.length, 64);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 61);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -1356,6 +1356,26 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     'framed-replacement-slack',
     'locked-nand-local-baseline',
   ]) assert.equal(byId.get(id).status, 'formalized');
+  const carrierTrace = byId.get('locked-nand-global-carrier-trace-equivalence');
+  assert.equal(carrierTrace.status, 'formalized');
+  assert.equal(carrierTrace.earned, true);
+  assert.equal(carrierTrace.allAssumptionFree, false);
+  assert.equal(carrierTrace.axiomClosureUsesOnlyLeanStandardAllowlist, true);
+  assert.equal(carrierTrace.requiredTheorems.length, 8);
+  for (const theorem of [
+    'PNP.DirectWire.LockedNANDTrace.carrierSeparation',
+    'PNP.DirectWire.LockedNANDTrace.finalLock_fresh',
+    'PNP.DirectWire.LockedNANDTrace.distinguishedChecks_length',
+    'PNP.DirectWire.LockedNANDTrace.tracePredicate_coherentExtension',
+    'PNP.DirectWire.LockedNANDTrace.trace_sound_of_predicate_true',
+    'PNP.DirectWire.LockedNANDTrace.traceEquivalence',
+    'PNP.DirectWire.LockedNANDTrace.satisfiable_iff_trace_extension',
+    'PNP.DirectWire.LockedNANDTrace.exists_coherent_trace',
+  ]) assert.equal(carrierTrace.requiredTheorems.includes(theorem), true, theorem);
+  assert.match(carrierTrace.scope,
+    /arbitrary finite topological NAND circuits/u);
+  assert.match(carrierTrace.nonClaim,
+    /does not assemble the complete exposed candidates/u);
   assert.equal(byId.get('locked-nand-conditional-threshold').status, 'formalized-with-premises');
   assert.equal(byId.get('explicit-residual-routes').status, 'formalized-explicit-list-only');
   for (const id of [
@@ -1365,17 +1385,28 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   ]) assert.equal(byId.get(id).status, 'not-formalized');
 });
 
-test('publication consumes the reviewed seventh padding-or-unary map and inventory counts', async () => {
+test('publication consumes the reviewed locked-NAND carrier map and inventory counts', async () => {
   const [status, mapText] = await Promise.all([
     status0(),
     readFile(new URL('../publication/FORMAL_PUBLICATION_MAP.json', import.meta.url), 'utf8'),
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '1036c804208e5843a372510945c0da8b7773670730c5412abf722f5f66bfebf3');
+    'd66d2b6962c1b100952b606974076a7e19e7e11518910cf051f07ccdd72df234');
   assert.equal(map.milestoneSourceClosureSha256,
-    '203119b036adfbb429800396a175ae7e8e01ebd5e142e17a48d8724b7a5b9f9f');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 1944);
+    '3830caf4570da74521ede477a38aa7c6ba815c9b9ecea0d2cefcf5be28155e40');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 1952);
+  for (const theorem of [
+    'PNP.DirectWire.LockedNANDTrace.carrierSeparation',
+    'PNP.DirectWire.LockedNANDTrace.finalLock_fresh',
+    'PNP.DirectWire.LockedNANDTrace.distinguishedChecks_length',
+    'PNP.DirectWire.LockedNANDTrace.tracePredicate_coherentExtension',
+    'PNP.DirectWire.LockedNANDTrace.trace_sound_of_predicate_true',
+    'PNP.DirectWire.LockedNANDTrace.traceEquivalence',
+    'PNP.DirectWire.LockedNANDTrace.satisfiable_iff_trace_extension',
+    'PNP.DirectWire.LockedNANDTrace.exists_coherent_trace',
+  ]) assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[theorem],
+    'string', theorem);
   assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[
     'PNP.Concrete.CookLevin.BuilderSecondConstraintPaddingOrUnaryOpportunityStep.workRunExact'
   ], 'string');
@@ -1650,7 +1681,7 @@ test('publication consumes the reviewed seventh padding-or-unary map and invento
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [11811, 6873, 3574, 4511, 103]);
+  ], [12138, 7074, 3654, 4532, 104]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
@@ -1757,6 +1788,9 @@ test('canonical report source is current and the committed PDF artifact exists',
   assert.match(tex,
     /encodedFormula\.take \(2 \* \(FormulaWidth \+ 43 \+ if tapeWidth = 1 then 0 else 6\)\)/u);
   assert.match(tex, /first unary-index\s+\\code\{T\} of the following literal/u);
+  assert.match(tex, /Locked-NAND global carrier and trace equivalence/u);
+  assert.match(tex, /Exact X\/T\/O\/R\/L\/z carrier separation/u);
+  assert.match(tex, /does not assemble the complete exposed candidates/u);
   assert.equal(tex.includes('The terminator and rest of clause three'), false);
   assert.equal(tex.includes('It does not compute the remaining header or complete formula'), false);
   assert.ok(tex.includes(status.leanTheoremInventorySha256));

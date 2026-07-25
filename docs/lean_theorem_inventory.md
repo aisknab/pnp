@@ -76,24 +76,16 @@ correctness and no timeout under an explicit polynomial bound, constructs a `.pa
 It does not establish `CNFSAT ∈ P`, NP-hardness, NP-completeness, or `P = NP`, and it is not the
 missing general compiler/refinement for arbitrary charged pipelines.
 
-The reviewed Cook--Levin builder boundary now emits all four populated clauses of the first
-scheduled constraint, traverses every remaining padding opportunity in that constraint, and emits
-the second constraint's separator and complete first positive literal through its width-selected
-successor. Four further finite opportunity machines reuse one reviewed 93-rule optional appender.
-At tape width one all four positions are padding and emit no token; at every wider width they append
-the first four unary `T` tokens of the second literal. The newest table has `5764` literal rules
-plus twenty-six inherited/generated unary-evaluator rule counts, preserves
-`encodedFormula.take (2 * (FormulaWidth + 43 + if tapeWidth = 1 then 0 else 4))`, and retains
-`FormulaVariableSlotBound + 1 + FormulaClauseSlotsPerConstraint * FormulaTokensPerClause + 11`.
-Direct lookup and the specification cursor prove that the following slot is padding at width one
-and the terminating `F` at wider widths. Exact compiled execution is bounded by the predecessor
-polynomial plus `648 + 24*n + 12*FormulaWidth + 12*width + 12*widthRootPrefixLength +
-6*widthWorkSteps + 6*targetWorkSteps`. The newest 82-declaration audit covers all 66 new public
-declarations, fourteen reused optional-appender interfaces, and two strengthened schedule
-boundaries with exactly 37 empty, 12 `propext`, and 33 `propext`/`Quot.sound` closures. This is
-still not a general dynamic raw formula cursor or arbitrary schedule decoder; the following
-padding-or-terminating-`F` slot, the rest of the second constraint, a complete builder,
-construction-runtime `RawRefinement`, and a concrete `PolynomialReduction` remain absent.
+The newest reviewed milestone moves from fixed Cook--Levin schedule slots to an unbounded legacy
+dependency. `PNP.LockedNANDCarrierTrace` defines the exact
+`X ⊔ T ⊔ O ⊔ R ⊔ L ⊔ {z}` carrier for every finite topologically ordered NAND circuit, proves its
+families disjoint and its final-lock coordinate fresh, generates exactly three source/trace checks
+per gate, and proves both directions of `TraceEquivalence` by induction over the entire gate list.
+Its 71-declaration audit has 18 empty, 13 `propext`, and 40
+`propext`/`Quot.sound` closures, with no `Classical.choice` or project axiom. This closes the
+semantic trace lemma only: complete exposed baseline/full candidates, cross-instance
+`BaselineDistinct`, the four-gate final-output semantics, `FinalLockSeparation`, the uniform
+polynomial builder, and the locked-NAND threshold remain absent.
 
 The current four project-specific axioms remain visible as an independent inventory:
 

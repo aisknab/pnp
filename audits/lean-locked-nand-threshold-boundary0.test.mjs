@@ -125,7 +125,8 @@ test('documentation preserves the hostile-review inventory and exact missing ins
   for (const field of PREMISE_FIELDS) assert.match(docs, new RegExp(`\\b${field}\\b`, 'u'));
   assert.match(docs, /not the report(?:'s)? (?:locked-NAND )?threshold theorem/iu);
   assert.match(docs, /global cross-instance [`']?BaselineDistinct/iu);
-  assert.match(docs, /TraceEquivalence[\s\S]*missing/iu);
+  assert.match(docs, /TraceEquivalence[\s\S]*(?:formalized|discharged)/iu);
+  assert.match(docs, /derived (?:whole-carrier )?final-output laws[\s\S]*(?:remain|open)/iu);
 });
 
 test('status credits the conditional boundary while every global threshold claim stays false', async () => {
@@ -134,7 +135,11 @@ test('status credits the conditional boundary while every global threshold claim
     'leanLockedNANDConditionalThresholdBoundaryFormalized',
     'leanLockedNANDConditionalResidualSlackAtMostFourFormalized',
     'leanLockedNANDThresholdBoundaryAxiomAuditPassed',
+    'leanLockedNANDCarrierLayoutFormalized',
+    'leanLockedNANDTraceEquivalenceFormalized',
+    'leanLockedNANDCarrierTraceAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
+  assert.equal(status.leanLockedNANDCarrierTraceAuditedDeclarationCount, 71);
   assert.equal(status.leanLockedNANDThresholdBoundaryScope, 'proof-bearing-typed-candidate-and-semantic-premises-only');
   assert.deepEqual(status.lockedNANDThresholdHostileReviewLemmaInventory, HOSTILE_REVIEW_LEMMAS);
   assert.deepEqual(status.leanLockedNANDThresholdPremiseInventory, PREMISE_FIELDS);
@@ -142,8 +147,6 @@ test('status credits the conditional boundary while every global threshold claim
   for (const field of [
     'leanLockedNANDThresholdBoundaryPremisesInstantiated',
     'leanLockedNANDGlobalBaselineDistinctFormalized',
-    'leanLockedNANDCarrierLayoutFormalized',
-    'leanLockedNANDTraceEquivalenceFormalized',
     'leanLockedNANDDerivedFinalOutputLawsFormalized',
     'leanLockedNANDBuilderFormalized',
     'leanLockedNANDThresholdFormalized',

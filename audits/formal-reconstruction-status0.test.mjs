@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-25-83');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-25-84');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -561,8 +561,12 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanLockedNANDThresholdBoundaryScope, 'proof-bearing-typed-candidate-and-semantic-premises-only');
   assert.equal(out.leanLockedNANDThresholdBoundaryPremisesInstantiated, false);
   assert.equal(out.leanLockedNANDGlobalBaselineDistinctFormalized, false);
-  assert.equal(out.leanLockedNANDCarrierLayoutFormalized, false);
-  assert.equal(out.leanLockedNANDTraceEquivalenceFormalized, false);
+  assert.equal(out.leanLockedNANDCarrierLayoutFormalized, true);
+  assert.equal(out.leanLockedNANDTraceEquivalenceFormalized, true);
+  assert.equal(out.leanLockedNANDCarrierTraceAxiomAuditPassed, true);
+  assert.equal(out.leanLockedNANDCarrierTraceAuditedDeclarationCount, 71);
+  assert.equal(out.leanLockedNANDCarrierTraceScope,
+    'arbitrary-finite-topological-nand-circuits-carrier-separation-and-trace-equivalence');
   assert.equal(out.leanLockedNANDDerivedFinalOutputLawsFormalized, false);
   assert.equal(out.leanLockedNANDResidualSlackAtMostFourFormalized, false);
   assert.equal(out.leanLockedNANDPolynomialBuilderFormalized, false);
@@ -608,15 +612,15 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.match(out.siteStatusSha256, /^[0-9a-f]{64}$/u);
 });
 
-test('formal reconstruction status pins the seventh padding-or-unary inventory and source closure', async () => {
+test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 11811);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 6873);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 3574);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 4511);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 103);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 12138);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 7074);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 3654);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 4532);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 104);
   assert.equal(status.leanSourceClosureSha256,
-    '203119b036adfbb429800396a175ae7e8e01ebd5e142e17a48d8724b7a5b9f9f');
+    '3830caf4570da74521ede477a38aa7c6ba815c9b9ecea0d2cefcf5be28155e40');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -1038,7 +1042,7 @@ test('formal reconstruction status pins the seventh padding-or-unary inventory a
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-25-COOK-LEVIN-BUILDER-SECOND-CONSTRAINT-SEVENTH-PADDING-OR-UNARY-OPPORTUNITY-STEP-82');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-25-LOCKED-NAND-CARRIER-TRACE-83');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
@@ -1081,8 +1085,12 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(status.leanLockedNANDThresholdBoundaryScope, 'proof-bearing-typed-candidate-and-semantic-premises-only');
   assert.equal(status.leanLockedNANDThresholdBoundaryPremisesInstantiated, false);
   assert.equal(status.leanLockedNANDGlobalBaselineDistinctFormalized, false);
-  assert.equal(status.leanLockedNANDCarrierLayoutFormalized, false);
-  assert.equal(status.leanLockedNANDTraceEquivalenceFormalized, false);
+  assert.equal(status.leanLockedNANDCarrierLayoutFormalized, true);
+  assert.equal(status.leanLockedNANDTraceEquivalenceFormalized, true);
+  assert.equal(status.leanLockedNANDCarrierTraceAxiomAuditPassed, true);
+  assert.equal(status.leanLockedNANDCarrierTraceAuditedDeclarationCount, 71);
+  assert.equal(status.leanLockedNANDCarrierTraceScope,
+    'arbitrary-finite-topological-nand-circuits-carrier-separation-and-trace-equivalence');
   assert.equal(status.leanLockedNANDDerivedFinalOutputLawsFormalized, false);
   assert.equal(status.leanLockedNANDResidualSlackAtMostFourFormalized, false);
   assert.equal(status.leanLockedNANDPolynomialBuilderFormalized, false);
@@ -1305,6 +1313,9 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanLockedNANDConditionalThresholdBoundaryFormalized',
     'leanLockedNANDConditionalResidualSlackAtMostFourFormalized',
     'leanLockedNANDThresholdBoundaryAxiomAuditPassed',
+    'leanLockedNANDCarrierLayoutFormalized',
+    'leanLockedNANDTraceEquivalenceFormalized',
+    'leanLockedNANDCarrierTraceAxiomAuditPassed',
     'leanResidualRoutesListedGainScanFormalized',
     'leanResidualRoutesAxiomAuditPassed',
     'leanResidualRoutesGainSoundnessFormalized',
@@ -1330,8 +1341,6 @@ test('formal reconstruction status rejects unearned broad downstream NAND claims
     'leanNANDReferenceMinimumPolynomialRuntimeProved',
     'leanLockedNANDGlobalBaselineDistinctFormalized',
     'leanLockedNANDThresholdBoundaryPremisesInstantiated',
-    'leanLockedNANDCarrierLayoutFormalized',
-    'leanLockedNANDTraceEquivalenceFormalized',
     'leanLockedNANDDerivedFinalOutputLawsFormalized',
     'leanLockedNANDResidualSlackAtMostFourFormalized',
     'leanLockedNANDPolynomialBuilderFormalized',
