@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-25-84",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-26-85",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -546,6 +546,12 @@
   "leanLockedNANDCarrierTraceAxiomAuditPassed": true,
   "leanLockedNANDCarrierTraceAuditedDeclarationCount": 71,
   "leanLockedNANDCarrierTraceScope": "arbitrary-finite-topological-nand-circuits-carrier-separation-and-trace-equivalence",
+  "leanLockedNANDGlobalCandidateAssemblyFormalized": true,
+  "leanLockedNANDGlobalBaselineCandidateFormalized": true,
+  "leanLockedNANDFullCandidateFormalized": true,
+  "leanLockedNANDGlobalCandidateAxiomAuditPassed": true,
+  "leanLockedNANDGlobalCandidateAuditedDeclarationCount": 59,
+  "leanLockedNANDGlobalCandidateScope": "arbitrary-finite-topological-nand-circuits-exact-baseline-and-four-gate-extension",
   "leanLockedNANDDerivedFinalOutputLawsFormalized": false,
   "leanLockedNANDResidualSlackAtMostFourFormalized": false,
   "leanLockedNANDPolynomialBuilderFormalized": false,
@@ -589,7 +595,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-25-LOCKED-NAND-CARRIER-TRACE-83",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-26-LOCKED-NAND-GLOBAL-CANDIDATES-84",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -731,10 +737,7 @@
     "satisfiableFinalConditions"
   ],
   "leanLockedNANDThresholdMissingInstantiationInventory": [
-    "baselineCandidate",
-    "fullCandidate",
     "baselineConditions",
-    "initialOutputsPreserved",
     "unsatisfiableFinalZero",
     "satisfiableFinalConditions"
   ],
@@ -951,6 +954,8 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDThresholdBoundaryAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDCarrierTraceAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPLockedNANDCarrierTrace.lean",
+    "lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDGlobalCandidatesAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPLockedNANDGlobalCandidates.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualRoutesAxiomAudit.lean",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
@@ -1030,10 +1035,11 @@
     "The typed local locked-NAND candidates, source-derived accounting, conditional square-baseline theorem, and five discharged local square baselines do not prove global cross-instance BaselineDistinct, a locked builder or threshold, residual slack at most four, or polynomial runtime.",
     "The report threshold word is multi-output: its baseline coordinates remain present alongside one final coordinate; a legacy single-output seed is not that construction.",
     "The legacy synthetic m=2 fixture is quarantined as internally inconsistent: honest source-derived baseline/displayed counts are 86/90, metadata-consistent counts are 95/99, and stored hybrid counts are 91/95.",
-    "The proof-bearing conditional locked-NAND semantic boundary is not the report threshold theorem: it assumes typed baseline and full candidates, baseline output conditions, preservation of the first outputs, an unsatisfiable final-zero law, and satisfiable final-output laws instead of constructing them for arbitrary circuits.",
+    "The proof-bearing conditional locked-NAND semantic boundary is not the report threshold theorem: global candidate assembly now constructs the typed baseline, full candidate, and preservation of the first outputs, but baseline output conditions, the unsatisfiable final-zero law, and satisfiable final-output laws remain assumptions rather than instantiated circuit theorems.",
     "The residual-slack-at-most-four result is conditional on that six-field premise package; it is not an unconditional result for the report locked-NAND family.",
     "The locked-NAND carrier and TraceEquivalence milestone is unbounded over arbitrary finite topological NAND circuits: it proves the exact X/T/O/R/L/z partition, generates three checks per gate, constructs coherent traces, and proves accepted traces equal genuine evaluation. It does not assemble the complete exposed candidates or prove the threshold.",
-    "Against the hostile-review inventory, DirectWireOutputLowerBound, semantic-carrier TraceEquivalence, and the model-level ZeroOutputConvention are now discharged, while global MacroDistinct, FinalLockSeparation, complete candidate assembly, derived final-output laws, and uniform polynomial premise construction remain missing.",
+    "The global locked-NAND candidate milestone constructs the exact square B-gate/B-output baseline and the B+4-gate/B+1-output extension for every finite typed circuit, preserves every baseline output, proves the final coordinate is z AND TraceChecks AND T_out, excludes internal constants, and proves every baseline coordinate is independent of z. It does not prove global BaselineDistinct, either satisfiable/unsatisfiable final branch law, the threshold, or a uniform polynomial bitstring builder.",
+    "Against the hostile-review inventory, DirectWireOutputLowerBound, semantic-carrier TraceEquivalence, the model-level ZeroOutputConvention, and complete candidate assembly are now discharged, while global MacroDistinct, FinalLockSeparation, derived final-output laws, and uniform polynomial premise construction remain missing.",
     "The conditional module quantifies an arbitrary satisfiable proposition and baseline natural number; it does not identify them with source-circuit SAT and lockedBaselineCount, enforce answer-independent uniform construction, or connect the candidate boundary to the abstract PNP.LockedNANDThreshold language.",
     "The executable residual-route scan is complete only for the explicit finite implementation list supplied by its caller; unresolved excludes no unlisted gain and does not imply global minimality or ZeroSlack.",
     "An empty-list scan is formally shown to remain unresolved on a positive-slack implementation, so search failure cannot be promoted to zero residual slack.",
@@ -1075,7 +1081,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "3830caf4570da74521ede477a38aa7c6ba815c9b9ecea0d2cefcf5be28155e40",
+    "actualSourceClosureSha256": "d2cf588681499eef5328b85fba8965097fae5dbacdd0d4efe766c7b5d48277e9",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1105,22 +1111,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-25-84",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-26-85",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "da77e1663fdbb70c0796ef006e66e68636dd45e3c33c350262bd9d0b2a0a0524",
+  "leanTheoremInventorySha256": "72261ed03643251129b75a87b8248c861d96a0d9badfd9d8783f90de7221fca9",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 12138,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 4532,
-  "leanTheoremInventoryTheoremCount": 7074,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 3654,
-  "leanTheoremInventorySourceClosureModuleCount": 104,
-  "leanSourceClosureSha256": "3830caf4570da74521ede477a38aa7c6ba815c9b9ecea0d2cefcf5be28155e40",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-25-84",
+  "leanTheoremInventoryDeclarationCount": 12233,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 4738,
+  "leanTheoremInventoryTheoremCount": 7146,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 3669,
+  "leanTheoremInventorySourceClosureModuleCount": 105,
+  "leanSourceClosureSha256": "d2cf588681499eef5328b85fba8965097fae5dbacdd0d4efe766c7b5d48277e9",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-26-85",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "f910d7ace254717eea3827fb3a454741c82d43f6f6a132c55c58ad6ede623dd8",
+  "formalPublicationMapSha256": "63022a0afe898f61545175159f82d1deadd504b5d620ccb6d3c83bdc4e5b9d50",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",
@@ -27759,6 +27765,167 @@
       "status": "formalized"
     },
     {
+      "id": "locked-nand-global-candidate-assembly",
+      "title": "Locked-NAND global baseline and four-gate candidate assembly",
+      "classification": "formalized",
+      "scope": "Exact source-derived B/B baseline and B+4/B+1 extension for arbitrary finite topological NAND circuits.",
+      "requiredTheorems": [
+        "PNP.DirectWire.LockedNANDGlobalCandidates.macroGateCount_report_formula",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.nonemptyPrefixCandidate_semantics",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.rawBaselineGateCount_eq_lockedBaselineCount",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_size",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.baselinePrefixSource_semantics",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_size",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_initial_semantics",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_final_semantics",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_no_internal_constants",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_no_internal_constants",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_finalLock_irrelevant"
+      ],
+      "nonClaim": "Candidate assembly does not prove global BaselineDistinct, either conditional final-output branch law, the locked-NAND threshold, residual slack at most four, or a uniform polynomial bitstring builder.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.LockedNANDGlobalCandidates.macroGateCount_report_formula",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "47f9e6796152f2a642f7bce44b99528bc01ccdddccdacbae86ab56e0f5b3d073",
+          "expectedKernelTypeSha256": "47f9e6796152f2a642f7bce44b99528bc01ccdddccdacbae86ab56e0f5b3d073",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.LockedNANDGlobalCandidates.nonemptyPrefixCandidate_semantics",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "80710291bd5f2267463e6f1e6e684401668895d2606768b8e4debb12eaa6fd11",
+          "expectedKernelTypeSha256": "80710291bd5f2267463e6f1e6e684401668895d2606768b8e4debb12eaa6fd11",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.LockedNANDGlobalCandidates.rawBaselineGateCount_eq_lockedBaselineCount",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "786e99e031afc8a409e2d317241de6db21cfd1bd2215ce3e32d7578ecfbaac16",
+          "expectedKernelTypeSha256": "786e99e031afc8a409e2d317241de6db21cfd1bd2215ce3e32d7578ecfbaac16",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_size",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a90b49956ea8792ef7ea73fda703498f3c100cdc0dba875190fda7cfd48d559b",
+          "expectedKernelTypeSha256": "a90b49956ea8792ef7ea73fda703498f3c100cdc0dba875190fda7cfd48d559b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.LockedNANDGlobalCandidates.baselinePrefixSource_semantics",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ffa9219e7109a7b70497348282e9ed79c36a149641018583407667a4d687b56f",
+          "expectedKernelTypeSha256": "ffa9219e7109a7b70497348282e9ed79c36a149641018583407667a4d687b56f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_size",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5c9a273659067867278736693748a1b2d97795f852af3c35daeaefbace963ded",
+          "expectedKernelTypeSha256": "5c9a273659067867278736693748a1b2d97795f852af3c35daeaefbace963ded",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_initial_semantics",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "20f4ade3b0f930ad17ebdced9c5e8e49877e97223454b7b88a1a29fc94eed0fa",
+          "expectedKernelTypeSha256": "20f4ade3b0f930ad17ebdced9c5e8e49877e97223454b7b88a1a29fc94eed0fa",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_final_semantics",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "893c8e3b74b2ca59e31cc5a9830e17fc6f22d9561921edb789ad109838f8dae1",
+          "expectedKernelTypeSha256": "893c8e3b74b2ca59e31cc5a9830e17fc6f22d9561921edb789ad109838f8dae1",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_no_internal_constants",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b2b072ad2c4d3090ff9269819603623e68fc3d2ad98ee72571b616219a06da42",
+          "expectedKernelTypeSha256": "b2b072ad2c4d3090ff9269819603623e68fc3d2ad98ee72571b616219a06da42",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_no_internal_constants",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "55931f820f8438dc22676feaed1404c19e4a0b6542ae72f57eddc8aa2bcf977d",
+          "expectedKernelTypeSha256": "55931f820f8438dc22676feaed1404c19e4a0b6542ae72f57eddc8aa2bcf977d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_finalLock_irrelevant",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3724c566fdb5621934142d6b3d3e5e90b94ea972940191f41243db7590b40d06",
+          "expectedKernelTypeSha256": "3724c566fdb5621934142d6b3d3e5e90b94ea972940191f41243db7590b40d06",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized"
+    },
+    {
       "id": "locked-nand-conditional-threshold",
       "title": "Conditional locked-NAND threshold boundary",
       "classification": "formalized-with-premises",
@@ -27959,7 +28126,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-25-84",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-26-85",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

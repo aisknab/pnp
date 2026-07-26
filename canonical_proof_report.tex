@@ -46,7 +46,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-25-84}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-26-85}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -83,15 +83,15 @@
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 12138 \\
-Theorem-kind declarations & 7074 \\
-Assumption-free theorem-kind declarations & 3654 \\
+Compiled declarations & 12233 \\
+Theorem-kind declarations & 7146 \\
+Assumption-free theorem-kind declarations & 3669 \\
 Project-specific axioms & 4 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{da77e1663fdbb70c0796ef006e66e68636dd45e3c33c350262bd9d0b2a0a0524}\par}
+{\small Inventory SHA-256: \code{72261ed03643251129b75a87b8248c861d96a0d9badfd9d8783f90de7221fca9}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -547,7 +547,7 @@ remain absent.
 \section{Formal milestone ledger}
 
 Each earned row requires exact compiled names and theorem kinds, empty axiom closures, per-name
-domain-separated kernel-type SHA-256 matches for 1952 detailed candidates, and the pinned whole-Lean
+domain-separated kernel-type SHA-256 matches for 1963 detailed candidates, and the pinned whole-Lean
 source closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
 {\small
@@ -617,6 +617,7 @@ Finite enumeration, equivalence, and reference minimum & formalized & Exhaustive
 Concrete framed replacement and slack & formalized & The concrete serial framed context with support outputs and explicit bypass wires. & This is not an arbitrary-support replacement theorem for the report's global family. \\
 Locked-NAND local candidates and baseline accounting & formalized & Typed local macro candidates, source-derived counts, and five finite local square baselines. & Local minima are not a global BaselineDistinct or locked-NAND threshold theorem. \\
 Locked-NAND global carrier and trace equivalence & formalized & Exact X/T/O/R/L/z carrier separation and both trace-equivalence directions for arbitrary finite topological NAND circuits. & Carrier/trace equivalence does not assemble the complete exposed candidates, prove cross-instance BaselineDistinct or final-output laws, construct the uniform polynomial builder, or establish the locked-NAND threshold. \\
+Locked-NAND global baseline and four-gate candidate assembly & formalized & Exact source-derived B/B baseline and B+4/B+1 extension for arbitrary finite topological NAND circuits. & Candidate assembly does not prove global BaselineDistinct, either conditional final-output branch law, the locked-NAND threshold, residual slack at most four, or a uniform polynomial bitstring builder. \\
 Conditional locked-NAND threshold boundary & formalized-with-premises & A proof-bearing six-premise candidate boundary for an arbitrary satisfiable proposition. & The premises are not instantiated by a uniform SAT-to-locked-NAND builder. \\
 Fail-closed explicit-list residual routes & formalized-explicit-list-only & Executable strict-gain search over a caller-supplied finite implementation list. & Unresolved excludes no gain outside the supplied list and cannot imply ZeroSlack. \\
 Global locked-NAND construction and threshold & not-formalized & A uniform answer-independent SAT instance builder, complete exposed baseline, final-output laws, and threshold. & The carrier/trace theorem and conditional boundary do not assemble or discharge this missing global theorem. \\
@@ -628,8 +629,8 @@ Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-mac
 
 \section{Compiled inventory summary}
 
-The inventory contains 12138 exported \code{PNP.*} kernel declarations from
-104 modules. It excludes 4532 private compiler auxiliaries.
+The inventory contains 12233 exported \code{PNP.*} kernel declarations from
+105 modules. It excludes 4738 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -727,6 +728,7 @@ PNP.\allowbreak{}Locked\allowbreak{}NAND & 11 & 4 \\
 PNP.\allowbreak{}Locked\allowbreak{}NANDBaseline & 57 & 22 \\
 PNP.\allowbreak{}Locked\allowbreak{}NANDCarrier\allowbreak{}Trace & 327 & 201 \\
 PNP.\allowbreak{}Locked\allowbreak{}NANDDirect & 84 & 57 \\
+PNP.\allowbreak{}Locked\allowbreak{}NANDGlobal\allowbreak{}Candidates & 95 & 72 \\
 PNP.\allowbreak{}Locked\allowbreak{}NANDLocal\allowbreak{}Baseline & 30 & 22 \\
 PNP.\allowbreak{}Locked\allowbreak{}NANDMacros & 288 & 98 \\
 PNP.\allowbreak{}Locked\allowbreak{}NANDPrefix & 84 & 40 \\
@@ -804,10 +806,10 @@ npm run report:check
 \end{verbatim}
 }
 
-The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-25-84}. Its exact byte digest is
-\code{da77e1663fdbb70c0796ef006e66e68636dd45e3c33c350262bd9d0b2a0a0524}. The report is regenerated from that inventory and the reviewed
+The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-26-85}. Its exact byte digest is
+\code{72261ed03643251129b75a87b8248c861d96a0d9badfd9d8783f90de7221fca9}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{3830caf4570da74521ede477a38aa7c6ba815c9b9ecea0d2cefcf5be28155e40}; the computed and pinned values match. Successful regeneration
+\code{d2cf588681499eef5328b85fba8965097fae5dbacdd0d4efe766c7b5d48277e9}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 

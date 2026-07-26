@@ -191,6 +191,12 @@ lines.
   as well as source, documentation, and tests for the previous exact value. Run
   the equivalent of every changed workflow assertion on `pnpbuilder` before
   pushing; changing a step label does not update an embedded assertion.
+- Treat a reviewed theorem-pin set as one interface with several synchronized
+  producers and consumers. Before running the expensive inventory probe, update
+  the Lean-side `reviewedMilestoneTheoremNames`, the JavaScript required-name
+  contract, the publication milestone, and its fingerprint-key set together;
+  then run a lightweight name-set comparison. Do not discover a stale producer
+  only after rebuilding the compiled inventory.
 - A clean-clone result is evidence only for the commit that was checked. If any
   follow-up fix changes the PR head, including a workflow-only fix, repeat the
   exact-head clean-clone reproduction before merging.
@@ -244,6 +250,31 @@ branch.
   the exact theorem type, and the remaining downstream blockers. A failed
   general proof stops the milestone; it must not be replaced by another finite
   prefix or by an added assumption.
+
+### Legacy-theory reconstruction priority
+
+- Treat the canonical manuscript pinned by
+  `archive/legacy-v0/ARCHIVE.json`, especially the document tag
+  `final-pnp-proof-report-docs-hardened-7072f8d-sealed`, as the project's
+  intended correct mathematical route, construction specification, and default
+  dependency order for the Lean reconstruction.
+- Reconstruct its definitions, carrier conventions, objects, and theorem
+  dependencies faithfully. Do not silently replace the manuscript route merely
+  because a different statement or construction is easier to formalize.
+- The manuscript and its historical checker remain specification and provenance
+  evidence, not Lean theorem authority. Only the kernel-checked Lean statements
+  establish the reconstructed results.
+- An innovative alternative is allowed when Lean gives a concrete counterexample,
+  proves a conflicting statement, exposes an ill-typed or inconsistent
+  definition, or demonstrates that a stated step is false under its stated
+  premises. Difficulty finding a proof is not by itself such evidence.
+- Before departing from the manuscript, record the exact section or theorem,
+  the minimal formal failure, whether the issue is a transcription error,
+  missing premise, or mathematical contradiction, the replacement construction,
+  and every new proof obligation. Preserve the intended external theorem
+  interface where it remains coherent, and rerun the complete axiom and
+  publication audits. Never bridge a discrepancy with a project axiom, `sorry`,
+  `admit`, a weakened theorem, or a caller-supplied correctness certificate.
 
 ## Workflow Version And Permission Rules
 

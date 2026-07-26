@@ -76,16 +76,17 @@ correctness and no timeout under an explicit polynomial bound, constructs a `.pa
 It does not establish `CNFSAT ∈ P`, NP-hardness, NP-completeness, or `P = NP`, and it is not the
 missing general compiler/refinement for arbitrary charged pipelines.
 
-The newest reviewed milestone moves from fixed Cook--Levin schedule slots to an unbounded legacy
-dependency. `PNP.LockedNANDCarrierTrace` defines the exact
-`X ⊔ T ⊔ O ⊔ R ⊔ L ⊔ {z}` carrier for every finite topologically ordered NAND circuit, proves its
-families disjoint and its final-lock coordinate fresh, generates exactly three source/trace checks
-per gate, and proves both directions of `TraceEquivalence` by induction over the entire gate list.
-Its 71-declaration audit has 18 empty, 13 `propext`, and 40
-`propext`/`Quot.sound` closures, with no `Classical.choice` or project axiom. This closes the
-semantic trace lemma only: complete exposed baseline/full candidates, cross-instance
-`BaselineDistinct`, the four-gate final-output semantics, `FinalLockSeparation`, the uniform
-polynomial builder, and the locked-NAND threshold remain absent.
+The newest reviewed milestone continues the unbounded legacy Section 17 dependency after
+`PNP.LockedNANDCarrierTrace`. `PNP.LockedNANDGlobalCandidates` constructs every selected source
+and trace macro, the exact nonempty prefix tree, the square `B`-gate/`B`-output baseline, and the
+`B + 4`-gate/`B + 1`-output extension for every finite topologically ordered NAND circuit. It
+proves all baseline outputs are preserved, the final coordinate is
+`z ∧ TraceChecks ∧ T_out`, both programs contain no internal constants, and no baseline output
+depends on `z`. Its 59-declaration audit has three empty, two `propext`, and 54
+`propext`/`Quot.sound` closures, with no `Classical.choice` or project axiom. This constructs three
+of the six conditional threshold-premise fields. Cross-instance `BaselineDistinct`, the
+unsatisfiable and satisfiable final branch laws, `FinalLockSeparation`, the uniform polynomial
+bitstring builder, and the locked-NAND threshold remain absent.
 
 The current four project-specific axioms remain visible as an independent inventory:
 

@@ -49,6 +49,11 @@ const PREMISE_FIELDS = Object.freeze([
   'unsatisfiableFinalZero',
   'satisfiableFinalConditions',
 ]);
+const MISSING_FIELDS = Object.freeze([
+  'baselineConditions',
+  'unsatisfiableFinalZero',
+  'satisfiableFinalConditions',
+]);
 
 async function text0(relativePath) {
   return readFile(path.join(ROOT, relativePath), 'utf8');
@@ -138,12 +143,17 @@ test('status credits the conditional boundary while every global threshold claim
     'leanLockedNANDCarrierLayoutFormalized',
     'leanLockedNANDTraceEquivalenceFormalized',
     'leanLockedNANDCarrierTraceAxiomAuditPassed',
+    'leanLockedNANDGlobalCandidateAssemblyFormalized',
+    'leanLockedNANDGlobalBaselineCandidateFormalized',
+    'leanLockedNANDFullCandidateFormalized',
+    'leanLockedNANDGlobalCandidateAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
   assert.equal(status.leanLockedNANDCarrierTraceAuditedDeclarationCount, 71);
+  assert.equal(status.leanLockedNANDGlobalCandidateAuditedDeclarationCount, 59);
   assert.equal(status.leanLockedNANDThresholdBoundaryScope, 'proof-bearing-typed-candidate-and-semantic-premises-only');
   assert.deepEqual(status.lockedNANDThresholdHostileReviewLemmaInventory, HOSTILE_REVIEW_LEMMAS);
   assert.deepEqual(status.leanLockedNANDThresholdPremiseInventory, PREMISE_FIELDS);
-  assert.deepEqual(status.leanLockedNANDThresholdMissingInstantiationInventory, PREMISE_FIELDS);
+  assert.deepEqual(status.leanLockedNANDThresholdMissingInstantiationInventory, MISSING_FIELDS);
   for (const field of [
     'leanLockedNANDThresholdBoundaryPremisesInstantiated',
     'leanLockedNANDGlobalBaselineDistinctFormalized',
