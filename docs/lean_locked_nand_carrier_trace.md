@@ -79,23 +79,22 @@ semantic carrier level for arbitrary finite NAND circuits. It replaces an
 infinitely repeatable fixed-slot construction tactic with one induction over
 the entire gate list.
 
-It does not yet:
+This carrier/trace module by itself does not:
 
-- assemble the report's complete exposed baseline tuple from all macro
-  instances;
 - prove cross-instance `BaselineDistinct`/`MacroDistinct` on the whole
   carrier;
-- turn the fresh `z` coordinate into the four-gate final output and prove the
-  whole-carrier unsatisfiable-zero and satisfiable separation laws;
-- instantiate the six fields of
-  `ConditionalThresholdBoundaryPremises`;
+- prove the whole-carrier unsatisfiable-zero and satisfiable separation laws;
 - construct the answer-independent bitstring-level builder or prove its
   polynomial runtime; or
 - prove the locked-NAND threshold, CNF-SAT in P, or `P = NP`.
 
-In particular, this theorem does not establish `FinalLockSeparation` merely
-because `z` is syntactically fresh. The semantic final-output laws remain a
-separate proof obligation.
+The following
+[`LockedNANDGlobalCandidates`](./lean_locked_nand_global_candidates.md)
+milestone now assembles the complete baseline and four-gate extension and
+constructs three of the six conditional-boundary fields. In particular, this
+carrier theorem alone does not establish `FinalLockSeparation` merely because
+`z` is syntactically fresh; the remaining semantic branch laws are separate
+proof obligations.
 
 ## Audit and regression boundary
 
@@ -110,7 +109,7 @@ width, zero-, one-, and two-gate check counts, accepting and rejecting truth
 branches, constant-source satisfiability, an incorrect trace value, an
 inactive source lock, and the general reverse soundness theorem.
 
-## Generated publication artifacts
+## Generated publication artifacts at this milestone
 
 The compiled environment records inventory coordinate
 `PNP-LEAN-THEOREM-INVENTORY-2026-07-25-84`: 12,138 declarations, 7,074

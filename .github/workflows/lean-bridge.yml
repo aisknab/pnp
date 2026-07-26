@@ -102,6 +102,7 @@ on:
       - 'audits/lean-locked-nand-baseline0.test.mjs'
       - 'audits/lean-locked-nand-threshold-boundary0.test.mjs'
       - 'audits/lean-locked-nand-carrier-trace0.test.mjs'
+      - 'audits/lean-locked-nand-global-candidates0.test.mjs'
       - 'audits/lean-residual-routes0.test.mjs'
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_machine.md'
@@ -160,6 +161,7 @@ on:
       - 'docs/lean_locked_nand_baseline.md'
       - 'docs/lean_locked_nand_threshold_boundary.md'
       - 'docs/lean_locked_nand_carrier_trace.md'
+      - 'docs/lean_locked_nand_global_candidates.md'
       - 'docs/lean_residual_routes.md'
       - 'docs/lean_theorem_inventory.md'
       - 'docs/FORMAL_RECONSTRUCTION.md'
@@ -269,6 +271,7 @@ on:
       - 'audits/lean-locked-nand-baseline0.test.mjs'
       - 'audits/lean-locked-nand-threshold-boundary0.test.mjs'
       - 'audits/lean-locked-nand-carrier-trace0.test.mjs'
+      - 'audits/lean-locked-nand-global-candidates0.test.mjs'
       - 'audits/lean-residual-routes0.test.mjs'
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_machine.md'
@@ -327,6 +330,7 @@ on:
       - 'docs/lean_locked_nand_baseline.md'
       - 'docs/lean_locked_nand_threshold_boundary.md'
       - 'docs/lean_locked_nand_carrier_trace.md'
+      - 'docs/lean_locked_nand_global_candidates.md'
       - 'docs/lean_residual_routes.md'
       - 'docs/lean_theorem_inventory.md'
       - 'docs/FORMAL_RECONSTRUCTION.md'
@@ -1989,6 +1993,27 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 13
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 40
           lake env lean -DwarningAsError=true lean-regression/PNPLockedNANDCarrierTrace.lean
+
+      - name: Print locked-NAND global candidate assembly axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDGlobalCandidatesAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.DirectWire\.LockedNANDGlobalCandidates\.")" -eq 59
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|propext, Quot.sound)\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected locked-NAND global-candidate axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Locked-NAND global candidates reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 3
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 2
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 54
+          lake env lean -DwarningAsError=true lean-regression/PNPLockedNANDGlobalCandidates.lean
 
       - name: Print explicit-list residual-route axioms
         run: |

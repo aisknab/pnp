@@ -80,6 +80,7 @@ lean/PNP/LockedNANDBaseline.lean
 lean/PNP/LockedNANDLocalBaseline.lean
 lean/PNP/LockedNANDThresholdBoundary.lean
 lean/PNP/LockedNANDCarrierTrace.lean
+lean/PNP/LockedNANDGlobalCandidates.lean
 lean/PNP/LockedNAND.lean
 lean/PNP/ResidualBand.lean
 lean/PNP/ZeroSlack.lean
@@ -122,6 +123,7 @@ lean-audit/PNPLockedNANDBaselineAxiomAudit.lean
 lean-audit/PNPLockedNANDLocalBaselineAxiomAudit.lean
 lean-audit/PNPLockedNANDThresholdBoundaryAxiomAudit.lean
 lean-audit/PNPLockedNANDCarrierTraceAxiomAudit.lean
+lean-audit/PNPLockedNANDGlobalCandidatesAxiomAudit.lean
 docs/lean_nand_semantics.md
 docs/lean_concrete_machine.md
 docs/lean_tape_handoff.md
@@ -565,6 +567,28 @@ The 71-declaration audit uses only empty closure, `propext`, and
 not the complete exposed baseline/full candidate, cross-instance
 `BaselineDistinct`, the four-gate final-output argument, a polynomial builder,
 or the threshold theorem. See `docs/lean_locked_nand_carrier_trace.md`.
+
+## Locked-NAND global candidate assembly
+
+`lean/PNP/LockedNANDGlobalCandidates.lean` follows the next dependency in
+legacy Section 17 for every finite typed circuit. It flattens the exact
+carrier, builds every source and trace macro in topological order, folds the
+three checks per gate with the exact two-gate prefix construction, and proves
+the resulting count equals `lockedBaselineCount`.
+
+Writing that count as `B`, Lean now constructs an exact `B`-gate/`B`-output
+square baseline and an exact `B + 4`-gate/`B + 1`-output full candidate. Every
+baseline output is preserved by the append. The new final coordinate is
+proved equal to `z ∧ TraceChecks ∧ T_out`; both programs contain no internal
+constants, and every baseline output is structurally independent of `z`.
+
+The 59-declaration audit has three empty closures, two using only `propext`,
+and 54 using only `propext` plus `Quot.sound`, with no `Classical.choice` or
+project axiom. The remaining conditional-premise fields are exactly
+`baselineConditions`, `unsatisfiableFinalZero`, and
+`satisfiableFinalConditions`. Global `BaselineDistinct`, the two branch laws,
+the polynomial builder, and the threshold remain absent. See
+`docs/lean_locked_nand_global_candidates.md`.
 
 ## Global locked-NAND layer
 

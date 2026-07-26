@@ -808,11 +808,13 @@ proof-bearing premises it derives the baseline lower bound, conditional residual
 four, unsatisfiable minimum exactly at the baseline, satisfiable minimum between baseline plus one
 and baseline plus four, and the corresponding conditional iff.
 
-This is not the report locked-NAND threshold theorem. The six fields are not instantiated for a
-source circuit. In particular, the arbitrary proposition and natural-number parameters are not
-identified with circuit SAT and `lockedBaselineCount`; the complete baseline/full candidates,
-cross-instance `BaselineDistinct`, derived whole-carrier final-output laws, answer-independent
-uniform builder, and polynomial bound are not supplied. The module is not connected to the
+This is not the report locked-NAND threshold theorem. The later global-candidate module now
+instantiates the typed `baselineCandidate`, `fullCandidate`, and
+`initialOutputsPreserved` fields with circuit SAT and `lockedBaselineCount` as their intended
+indices. The remaining missing fields are `baselineConditions`,
+`unsatisfiableFinalZero`, and `satisfiableFinalConditions`. Cross-instance
+`BaselineDistinct`, the derived whole-carrier branch laws, the answer-independent uniform builder,
+and its polynomial bound are not supplied. The conditional module is not yet connected to the
 abstract `PNP.LockedNANDThreshold` language.
 
 `LockedNANDCarrierTrace` now closes the next unbounded Section 17 dependency for arbitrary finite
@@ -824,19 +826,32 @@ has a canonical coherent extension, and every accepted trace equals genuine prog
 every gate. The existential trace predicate is therefore satisfiable exactly when the declared
 source-circuit output is satisfiable.
 
-This is the legacy trace lemma, not the complete locked-NAND threshold construction. The carrier
-has not yet been expanded into the complete exposed macro-output baseline/full candidates;
-cross-instance `BaselineDistinct`, the semantic four-gate final output,
-`FinalLockSeparation`, both whole-carrier final-output laws, uniform polynomial construction, and
-the threshold remain open. See
+This is the legacy trace lemma rather than the complete locked-NAND threshold construction. Its
+carrier is consumed by the following global-candidate milestone. Cross-instance
+`BaselineDistinct`, both whole-carrier final-output branch laws, uniform polynomial construction,
+and the threshold remain open. See
 [`lean_locked_nand_carrier_trace.md`](./lean_locked_nand_carrier_trace.md).
+
+`LockedNANDGlobalCandidates` now reconstructs the next Section 17 layer uniformly over every
+finite typed circuit. It assembles source and trace macros in topological order, folds all
+distinguished checks with the exact nonempty prefix tree, and proves the resulting raw count is
+`lockedBaselineCount`. Writing that count as `B`, Lean constructs the exact `B`-gate/`B`-output
+square baseline and exact `B + 4`-gate/`B + 1`-output extension.
+
+Every initial full-candidate output is proved equal to its corresponding baseline output. The new
+final coordinate is exactly `z ∧ TraceChecks ∧ T_out`; both candidates have constant-free
+internal syntax, and every baseline output is structurally independent of the fresh `z` input.
+This constructs three of the six conditional-boundary fields, but it does not prove global
+`BaselineDistinct`, `unsatisfiableFinalZero`, `satisfiableFinalConditions`, the threshold, or the
+uniform polynomial bitstring builder. See
+[`lean_locked_nand_global_candidates.md`](./lean_locked_nand_global_candidates.md).
 
 The historical hostile review named `DirectWireOutputLowerBound`, `MacroDistinct`,
 `TraceEquivalence`, `ZeroOutputConvention`, and `FinalLockSeparation`. The general output lower
 bound and model-level free-zero append convention were discharged in preceding layers.
-`TraceEquivalence` is now formalized for the typed semantic carrier. Global `MacroDistinct` and
-`FinalLockSeparation` remain missing, as do the complete candidates, derived final-output laws,
-and all six concrete premise instantiations above. See
+`TraceEquivalence` and complete candidate assembly are now formalized for the typed semantic
+carrier. Global `MacroDistinct` and `FinalLockSeparation` remain missing, as do the derived
+final-output branch laws and the three conditional premise instantiations listed above. See
 [`lean_locked_nand_threshold_boundary.md`](./lean_locked_nand_threshold_boundary.md).
 
 The residual-route layer now performs one honest executable operation: it scans an explicit finite

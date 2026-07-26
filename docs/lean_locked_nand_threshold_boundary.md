@@ -19,9 +19,12 @@ requires one `ConditionalThresholdBoundaryPremises` value with exactly these fie
 | `satisfiableFinalConditions` | If `satisfiable` is true, the final output is nonconstant, nonprojection, and distinct from every baseline output. |
 
 These are propositions about actual typed candidates and their Boolean semantics. They are not
-metadata flags, certificate identifiers, or string claims. They are also not instantiated in this
-module. The machine-readable `leanLockedNANDThresholdMissingInstantiationInventory` repeats these
-six field names exactly so none can disappear behind a broad completion flag.
+metadata flags, certificate identifiers, or string claims. They are not instantiated in this
+conditional module. The later global-candidate layer constructs `baselineCandidate`,
+`fullCandidate`, and `initialOutputsPreserved`; the machine-readable
+`leanLockedNANDThresholdMissingInstantiationInventory` now repeats exactly the three fields still
+missing: `baselineConditions`, `unsatisfiableFinalZero`, and
+`satisfiableFinalConditions`.
 
 ## What Lean derives from the package
 
@@ -55,46 +58,45 @@ The historical adversarial review named exactly five threshold lemmas:
 | --- | --- |
 | `DirectWireOutputLowerBound` | Discharged generally by the direct-wire output-to-gate injection and used here through reference-minimum lower bounds. |
 | `MacroDistinct` | Only the five local square macro instances are discharged. The global carrier-tagged, cross-instance form remains missing and must instantiate `baselineConditions`. |
-| `TraceEquivalence` | Discharged for arbitrary finite typed NAND circuits by `LockedNANDCarrierTrace`: accepted distinguished checks are equivalent to genuine topological evaluation. Connecting that semantic carrier theorem to the complete exposed baseline/full candidates and deriving the final-output laws remain open. |
+| `TraceEquivalence` | Discharged for arbitrary finite typed NAND circuits by `LockedNANDCarrierTrace`; `LockedNANDGlobalCandidates` connects it to the complete exposed baseline/full candidates and exact final-conjunction semantics. The derived final-output laws remain open. |
 | `ZeroOutputConvention` | The model-level convention is discharged: appending a constant-zero output preserves the program and gate count. The global `unsatisfiableFinalZero` law still has to be derived from trace equivalence. |
 | `FinalLockSeparation` | The required semantic consequences are stored in `satisfiableFinalConditions`; deriving them from a fresh final lock and the real construction remains missing. |
 
-Thus the new module closes the deduction from the explicit semantic package. It does not hide the
-global cross-instance `BaselineDistinct`, complete-candidate construction, derived final-output
-laws, or final-lock argument inside the theorem statement.
+Thus the conditional module closes the deduction from the explicit semantic package. The later
+candidate milestone supplies the construction and preservation fields without hiding global
+cross-instance `BaselineDistinct`, the derived final-output branch laws, or the final-lock
+separation argument inside the theorem statement.
 
 ## Missing global instantiation
 
-A report-level use still has to supply all six fields above for the concrete circuit construction.
-In particular it must:
+A report-level use still has to supply the remaining three fields for the concrete circuit
+construction. In particular it must:
 
-1. construct the baseline and full candidates with the exact widths on the now-formalized carrier
-   layout and its globally fresh tags;
-2. prove global cross-instance `BaselineDistinct`/`MacroDistinct` for the complete baseline tuple;
-3. prove preservation of the first `B` functions;
-4. prove the whole-carrier unsatisfiable final-zero law from `TraceEquivalence`;
-5. prove the satisfiable final output is nonconstant, nonprojection, and distinct from each
+1. prove global cross-instance `BaselineDistinct`/`MacroDistinct` for the complete baseline tuple;
+2. prove the whole-carrier unsatisfiable final-zero law from `TraceEquivalence`;
+3. prove the satisfiable final output is nonconstant, nonprojection, and distinct from each
    baseline coordinate using `FinalLockSeparation`; and
-6. construct this package uniformly, answer-independently, and in polynomial time.
+4. package those facts uniformly, answer-independently, and in polynomial time.
 
 The last condition matters: the premise structure by itself does not prevent choosing candidates
 after inspecting whether `satisfiable` is true. Such an answer-dependent witness would not be a SAT
 reduction.
 
-The parameters are merely an arbitrary proposition and an arbitrary natural number. This module
-does not identify them with source-circuit satisfiability and `lockedBaselineCount program`, prove
-their size alignment, or connect the boundary to the abstract `PNP.LockedNANDThreshold` language
-and reduction trust surface.
+The conditional parameters are merely an arbitrary proposition and an arbitrary natural number.
+The candidate layer proves the exact `lockedBaselineCount program` size alignment, but no completed
+premise value yet identifies the proposition with source-circuit satisfiability or connects the
+boundary to the abstract `PNP.LockedNANDThreshold` language and reduction trust surface.
 
 ## Audit boundary
 
 The dedicated conditional-boundary transcript covers all 32 explicit declarations and reports no
-axioms. The separate carrier/trace transcript covers all 71 public declarations using only the
-approved Lean-standard closure and no `Classical.choice`. Carrier layout and semantic trace
-equivalence are now true in formal status. Global baseline distinctness, derived final-output laws,
-uniform builder, threshold theorem, unconditional residual-slack-at-most-four theorem, and
-polynomiality remain false. Six blockers remain, including the still-missing global threshold
-work. The four project-specific axioms and absent
+axioms. The separate carrier/trace transcript covers all 71 public declarations, and the global
+candidate transcript covers all 59 public declarations, using only the approved Lean-standard
+closure and no `Classical.choice`. Carrier layout, semantic trace equivalence, and exact candidate
+assembly are now true in formal status. Global baseline distinctness, derived final-output branch
+laws, uniform polynomial builder, threshold theorem, unconditional residual-slack-at-most-four
+theorem, and polynomiality remain false. Six blockers remain, including the still-missing global
+threshold work. The four project-specific axioms and absent
 `PNP.Main.p_eq_np` root theorem also remain. The axiom-free inactive
 `PNP.Main.ConcretePEqualsNP` definition does not change this threshold boundary or activate the
 publication gate.
@@ -102,4 +104,6 @@ publication gate.
 The ordered multi-output convention and quarantined legacy `m = 2` accounting remain as documented
 in [Lean locked-NAND direct candidates and local baselines](./lean_locked_nand_baseline.md). The
 new semantic carrier theorem is documented in
-[Lean locked-NAND carrier layout and trace equivalence](./lean_locked_nand_carrier_trace.md).
+[Lean locked-NAND carrier layout and trace equivalence](./lean_locked_nand_carrier_trace.md), and
+the constructed candidates are documented in
+[Lean locked-NAND global candidate assembly](./lean_locked_nand_global_candidates.md).

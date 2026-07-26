@@ -191,6 +191,12 @@ lines.
   as well as source, documentation, and tests for the previous exact value. Run
   the equivalent of every changed workflow assertion on `pnpbuilder` before
   pushing; changing a step label does not update an embedded assertion.
+- Treat a reviewed theorem-pin set as one interface with several synchronized
+  producers and consumers. Before running the expensive inventory probe, update
+  the Lean-side `reviewedMilestoneTheoremNames`, the JavaScript required-name
+  contract, the publication milestone, and its fingerprint-key set together;
+  then run a lightweight name-set comparison. Do not discover a stale producer
+  only after rebuilding the compiled inventory.
 - A clean-clone result is evidence only for the commit that was checked. If any
   follow-up fix changes the PR head, including a workflow-only fix, repeat the
   exact-head clean-clone reproduction before merging.
