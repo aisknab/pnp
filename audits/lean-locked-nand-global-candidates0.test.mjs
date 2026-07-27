@@ -142,12 +142,12 @@ test('global candidate source is closed, constructive, and narrowly imported', a
   assert.deepEqual(validateAssembly0(source), []);
 });
 
-test('axiom transcript covers all 59 public declarations exactly once', async () => {
+test('axiom transcript covers all 64 public declarations exactly once', async () => {
   const expected = declarations0(await text0(SOURCE_PATH));
   const printed = printed0(await text0(AUDIT_PATH));
-  assert.equal(expected.length, 59);
+  assert.equal(expected.length, 64);
   assert.deepEqual(printed, expected);
-  assert.equal(new Set(printed).size, 59);
+  assert.equal(new Set(printed).size, 64);
 });
 
 test('compiled closure of every audited declaration excludes project axioms and Classical.choice', async () => {
@@ -240,12 +240,11 @@ test('documentation and status credit assembly without claiming the missing boun
     'leanLockedNANDFullCandidateFormalized',
     'leanLockedNANDGlobalCandidateAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
-  assert.equal(status.leanLockedNANDGlobalCandidateAuditedDeclarationCount, 59);
+  assert.equal(status.leanLockedNANDGlobalCandidateAuditedDeclarationCount, 64);
   assert.equal(status.leanLockedNANDGlobalCandidateScope,
     'arbitrary-finite-topological-nand-circuits-exact-baseline-and-four-gate-extension');
   for (const field of [
     'leanLockedNANDThresholdBoundaryPremisesInstantiated',
-    'leanLockedNANDGlobalBaselineDistinctFormalized',
     'leanLockedNANDDerivedFinalOutputLawsFormalized',
     'leanLockedNANDBuilderFormalized',
     'leanLockedNANDThresholdFormalized',

@@ -124,6 +124,7 @@ lean-audit/PNPLockedNANDLocalBaselineAxiomAudit.lean
 lean-audit/PNPLockedNANDThresholdBoundaryAxiomAudit.lean
 lean-audit/PNPLockedNANDCarrierTraceAxiomAudit.lean
 lean-audit/PNPLockedNANDGlobalCandidatesAxiomAudit.lean
+lean-audit/PNPLockedNANDGlobalBaselineDistinctAxiomAudit.lean
 docs/lean_nand_semantics.md
 docs/lean_concrete_machine.md
 docs/lean_tape_handoff.md
@@ -582,13 +583,21 @@ baseline output is preserved by the append. The new final coordinate is
 proved equal to `z ∧ TraceChecks ∧ T_out`; both programs contain no internal
 constants, and every baseline output is structurally independent of `z`.
 
-The 59-declaration audit has three empty closures, two using only `propext`,
-and 54 using only `propext` plus `Quot.sound`, with no `Classical.choice` or
-project axiom. The remaining conditional-premise fields are exactly
-`baselineConditions`, `unsatisfiableFinalZero`, and
-`satisfiableFinalConditions`. Global `BaselineDistinct`, the two branch laws,
-the polynomial builder, and the threshold remain absent. See
-`docs/lean_locked_nand_global_candidates.md`.
+The complete 64-declaration audit has three empty closures, two using only
+`propext`, and 59 using only `propext` plus `Quot.sound`, with no
+`Classical.choice` or project axiom.
+
+The final five declarations establish global baseline distinctness. Every
+exposed output is nonconstant, is not a positive carrier projection, and is
+pairwise semantically distinct; the square baseline consequently has exact
+exhaustive reference minimum `B`. The dedicated five-theorem transcript uses
+only `propext` and `Quot.sound`.
+
+The remaining conditional-premise fields are exactly `unsatisfiableFinalZero`
+and `satisfiableFinalConditions`. The two branch laws, polynomial builder,
+global residual-slack result, and threshold remain absent. See
+`docs/lean_locked_nand_global_candidates.md` and
+`docs/lean_locked_nand_global_baseline_distinct.md`.
 
 ## Global locked-NAND layer
 
@@ -604,9 +613,10 @@ structure LockedNANDReductionTrust where
 The local macro truth laws, supplied-list prefix exactness, typed local candidates, source-derived
 accounting, semantic output lower bound, five local square minima, carrier/trace equivalence, and
 deductions from the six-field conditional boundary package are no longer part of that trust
-object. Remaining global work includes constructing the complete exposed candidates on that
-carrier, cross-instance separation, derived final-output laws, the uniform polynomial builder, and
-the report threshold/unconditional slack theorem.
+object. The complete exposed candidates and cross-instance baseline separation
+are now constructed on that carrier. Remaining global work includes the
+derived final-output laws, the uniform polynomial builder, and the report
+threshold/unconditional slack theorem.
 
 ## Residual-band, ZeroSlack, and PCCMin layers
 

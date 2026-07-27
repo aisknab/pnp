@@ -7,9 +7,10 @@ is indexed by an intrinsically topological NAND circuit and uses the exact
 `X ⊔ T ⊔ O ⊔ R ⊔ L ⊔ {z}` carrier from `LockedNANDCarrierTrace`.
 
 This file constructs the two typed candidates required by the conditional
-threshold boundary and proves their structural and semantic interface.  It
-does not prove global `BaselineDistinct`, either conditional final-output law,
-the locked-NAND threshold, a bitstring encoder, or polynomial runtime.
+threshold boundary, proves their structural interface, and discharges the
+global `BaselineDistinct` conditions for the square baseline.  It does not
+prove either conditional final-output law, the locked-NAND threshold, a
+bitstring encoder, or polynomial runtime.
 -/
 
 import PNP.LockedNANDCarrierTrace
@@ -2663,6 +2664,3423 @@ theorem baselineCandidate_finalLock_irrelevant {inputs : Nat}
       rw [setFinalLockValue_nonfinal _ _ index notFinal,
         setFinalLockValue_nonfinal _ _ index notFinal])
     output
+
+/-! ## Private semantic support machinery for global BaselineDistinct -/
+
+/-- Two carrier valuations differ at one named coordinate and nowhere else. -/
+private def DiffersOnlyAt {inputs : Nat} (target : Fin inputs)
+    (left right : Valuation inputs) : Prop :=
+  left target ≠ right target ∧
+    ∀ index, index ≠ target → left index = right index
+
+/-- One exposed output depends essentially on a named carrier coordinate. -/
+private def OutputEssentialAt {inputs gates outputs : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (target : Fin inputs) (output : Fin outputs) : Prop :=
+  ∃ left right,
+    DiffersOnlyAt target left right ∧
+      candidate.semantics left output ≠
+        candidate.semantics right output
+
+/-- One exposed output is independent of a named carrier coordinate. -/
+private def OutputIrrelevantAt {inputs gates outputs : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (target : Fin inputs) (output : Fin outputs) : Prop :=
+  ∀ left right,
+    (∀ index, index ≠ target → left index = right index) →
+      candidate.semantics left output =
+        candidate.semantics right output
+
+/-- Boolean existential quantification over a concrete finite list. -/
+private def anyTrue {alpha : Type} : List alpha → (alpha → Bool) → Bool
+  | [], _ => false
+  | item :: items, predicate =>
+      predicate item || anyTrue items predicate
+
+private theorem anyTrue_sound {alpha : Type} {items : List alpha}
+    {predicate : alpha → Bool}
+    (checked : anyTrue items predicate = true) :
+    ∃ item, item ∈ items ∧ predicate item = true := by
+  induction items with
+  | nil =>
+      exact False.elim (Bool.noConfusion checked)
+  | cons head tail ih =>
+      change (predicate head || anyTrue tail predicate) = true at checked
+      cases headCheck : predicate head with
+      | false =>
+          rw [headCheck] at checked
+          obtain ⟨item, member, itemCheck⟩ := ih checked
+          exact ⟨item, List.Mem.tail head member, itemCheck⟩
+      | true =>
+          exact ⟨head, List.Mem.head _, headCheck⟩
+
+private theorem boolNotEqual_sound (left right : Bool)
+    (checked : (!boolEqual left right) = true) :
+    left ≠ right := by
+  cases left <;> cases right <;> simp [boolEqual] at checked ⊢
+
+private theorem boolEqual_of_not_ne (left right : Bool)
+    (notDifferent : ¬ left ≠ right) :
+    left = right := by
+  cases left <;> cases right <;> simp at notDifferent ⊢
+
+/-- Executable check that two finite valuations differ at exactly one input. -/
+private def differsOnlyAtBool {inputs : Nat} (target : Fin inputs)
+    (left right : Valuation inputs) : Bool :=
+  (!boolEqual (left target) (right target)) &&
+    allTrue (allFin inputs) fun index =>
+      if index = target then true
+      else boolEqual (left index) (right index)
+
+private theorem differsOnlyAtBool_sound {inputs : Nat}
+    (target : Fin inputs) (left right : Valuation inputs)
+    (checked : differsOnlyAtBool target left right = true) :
+    DiffersOnlyAt target left right := by
+  have targetCheck := boolAndTrue_left checked
+  have remainingChecks := boolAndTrue_right checked
+  constructor
+  · exact boolNotEqual_sound _ _ targetCheck
+  · intro index notTarget
+    have indexCheck :=
+      allTrue_sound remainingChecks (mem_allFin index)
+    rw [if_neg notTarget] at indexCheck
+    exact (boolEqual_eq_true_iff _ _).mp indexCheck
+
+/-- Finite checker for essential dependence on one declared local input. -/
+private def finiteOutputEssentialCheck
+    {row : Type} {inputs gates outputs : Nat}
+    (rows : List row) (rowValuation : row → Valuation inputs)
+    (candidate : Candidate inputs gates outputs)
+    (target : Fin inputs) : Bool :=
+  allTrue (allFin outputs) fun output =>
+    anyTrue rows fun left =>
+      anyTrue rows fun right =>
+        differsOnlyAtBool target (rowValuation left)
+            (rowValuation right) &&
+          (!boolEqual
+            (candidate.semantics (rowValuation left) output)
+            (candidate.semantics (rowValuation right) output))
+
+private theorem finiteOutputEssentialCheck_sound
+    {row : Type} {inputs gates outputs : Nat}
+    (rows : List row) (rowValuation : row → Valuation inputs)
+    (candidate : Candidate inputs gates outputs)
+    (target : Fin inputs)
+    (checked :
+      finiteOutputEssentialCheck rows rowValuation candidate target = true) :
+    ∀ output, OutputEssentialAt candidate target output := by
+  intro output
+  have outputCheck := allTrue_sound checked (mem_allFin output)
+  obtain ⟨left, _leftMember, leftCheck⟩ := anyTrue_sound outputCheck
+  obtain ⟨right, _rightMember, pairCheck⟩ := anyTrue_sound leftCheck
+  have differsCheck := boolAndTrue_left pairCheck
+  have semanticCheck := boolAndTrue_right pairCheck
+  exact ⟨rowValuation left, rowValuation right,
+    differsOnlyAtBool_sound target _ _ differsCheck,
+    boolNotEqual_sound _ _ semanticCheck⟩
+
+private theorem equalityDirect_lockEssential :
+    ∀ output,
+      OutputEssentialAt equalityDirect ⟨0, by decide⟩ output :=
+  finiteOutputEssentialCheck_sound boolRows3 bool3RowValuation
+    equalityDirect ⟨0, by decide⟩ (by decide)
+
+private theorem constantOneDirect_lockEssential :
+    ∀ output,
+      OutputEssentialAt constantOneDirect fin2Zero output :=
+  finiteOutputEssentialCheck_sound boolRows2 bool2RowValuation
+    constantOneDirect fin2Zero (by decide)
+
+private theorem constantZeroDirect_lockEssential :
+    ∀ output,
+      OutputEssentialAt constantZeroDirect fin2Zero output :=
+  finiteOutputEssentialCheck_sound boolRows2 bool2RowValuation
+    constantZeroDirect fin2Zero (by decide)
+
+private theorem traceDirect_lockEssential :
+    ∀ output,
+      OutputEssentialAt traceDirect ⟨0, by decide⟩ output :=
+  finiteOutputEssentialCheck_sound boolRows4 bool4RowValuation
+    traceDirect ⟨0, by decide⟩ (by decide)
+
+private theorem prefixAndDirect_leftEssential :
+    ∀ output,
+      OutputEssentialAt prefixAndDirect fin2Zero output :=
+  finiteOutputEssentialCheck_sound boolRows2 bool2RowValuation
+    prefixAndDirect fin2Zero (by decide)
+
+private theorem prefixAndDirect_rightEssential :
+    ∀ output,
+      OutputEssentialAt prefixAndDirect fin2One output :=
+  finiteOutputEssentialCheck_sound boolRows2 bool2RowValuation
+    prefixAndDirect fin2One (by decide)
+
+private theorem OutputEssentialAt.nonconstant
+    {inputs gates outputs : Nat}
+    {candidate : Candidate inputs gates outputs}
+    {target : Fin inputs} {output : Fin outputs}
+    (essential : OutputEssentialAt candidate target output) :
+    OutputNonconstant candidate output := by
+  obtain ⟨left, right, _differsOnly, semanticDifferent⟩ := essential
+  exact ⟨left, right, semanticDifferent⟩
+
+/-- Essential dependence away from a queried coordinate supplies a concrete
+    witness that the output is not that positive projection. -/
+private theorem OutputEssentialAt.notProjection_of_ne
+    {inputs gates outputs : Nat}
+    {candidate : Candidate inputs gates outputs}
+    {target queried : Fin inputs} {output : Fin outputs}
+    (essential : OutputEssentialAt candidate target output)
+    (differentCoordinate : target ≠ queried) :
+    ∃ valuation,
+      candidate.semantics valuation output ≠ valuation queried := by
+  obtain ⟨left, right, differsOnly, semanticDifferent⟩ := essential
+  have queriedEqual : left queried = right queried :=
+    differsOnly.2 queried (Ne.symm differentCoordinate)
+  by_cases leftDifferent :
+      candidate.semantics left output ≠ left queried
+  · exact ⟨left, leftDifferent⟩
+  · refine ⟨right, ?_⟩
+    intro rightEqual
+    apply semanticDifferent
+    exact (boolEqual_of_not_ne _ _ leftDifferent).trans
+      (queriedEqual.trans rightEqual.symm)
+
+/-- If one function changes at a coordinate and another is independent of it,
+    the two functions are semantically distinct. -/
+private theorem essential_irrelevant_distinct
+    {inputs leftGates rightGates leftOutputs rightOutputs : Nat}
+    {left : Candidate inputs leftGates leftOutputs}
+    {right : Candidate inputs rightGates rightOutputs}
+    {target : Fin inputs}
+    {leftOutput : Fin leftOutputs} {rightOutput : Fin rightOutputs}
+    (essential : OutputEssentialAt left target leftOutput)
+    (irrelevant : OutputIrrelevantAt right target rightOutput) :
+    ∃ valuation,
+      left.semantics valuation leftOutput ≠
+        right.semantics valuation rightOutput := by
+  obtain ⟨first, second, differsOnly, leftDifferent⟩ := essential
+  have rightEqual :
+      right.semantics first rightOutput =
+        right.semantics second rightOutput :=
+    irrelevant first second differsOnly.2
+  by_cases firstDifferent :
+      left.semantics first leftOutput ≠
+        right.semantics first rightOutput
+  · exact ⟨first, firstDifferent⟩
+  · refine ⟨second, ?_⟩
+    intro secondEqual
+    apply leftDifferent
+    exact (boolEqual_of_not_ne _ _ firstDifferent).trans
+      (rightEqual.trans secondEqual.symm)
+
+private theorem exposeAllGates_outputIrrelevant
+    {inputs gates : Nat} (program : Program inputs gates)
+    (target : Fin inputs)
+    (avoids : programAvoidsInput target program)
+    (output : Fin gates) :
+    OutputIrrelevantAt (exposeAllGates program) target output := by
+  intro left right equalAway
+  unfold Candidate.semantics DirectWire.semantics DirectWireWord.eval
+  rw [exposeAllGates_source]
+  change program.eval left output = program.eval right output
+  exact program_eval_eq_of_avoidsInput target program avoids
+    left right equalAway output
+
+/-- Constructive lifting data for one locally checked macro block. -/
+private structure LocalBlockLift
+    {outerInputs innerInputs prefixGates : Nat}
+    (initial : Program outerInputs prefixGates)
+    (binding : Fin innerInputs → Source outerInputs prefixGates)
+    (innerTarget : Fin innerInputs) (outerTarget : Fin outerInputs) where
+  lift : Valuation innerInputs → Valuation outerInputs
+  bindingValues : ∀ valuation index,
+    (binding index).eval (lift valuation)
+        (initial.eval (lift valuation)) =
+      valuation index
+  targetValue : ∀ valuation,
+    lift valuation outerTarget = valuation innerTarget
+  preservesDifference : ∀ left right,
+    DiffersOnlyAt innerTarget left right →
+      DiffersOnlyAt outerTarget (lift left) (lift right)
+
+private def inputLift2 {outerInputs : Nat}
+    (first second : Fin outerInputs) (valuation : Valuation 2) :
+    Valuation outerInputs :=
+  fun index =>
+    if index = first then valuation fin2Zero
+    else if index = second then valuation fin2One
+    else false
+
+private def inputLift3 {outerInputs : Nat}
+    (first second third : Fin outerInputs) (valuation : Valuation 3) :
+    Valuation outerInputs :=
+  fun index =>
+    if index = first then valuation ⟨0, by decide⟩
+    else if index = second then valuation ⟨1, by decide⟩
+    else if index = third then valuation ⟨2, by decide⟩
+    else false
+
+private def inputLift4 {outerInputs : Nat}
+    (first second third fourth : Fin outerInputs)
+    (valuation : Valuation 4) : Valuation outerInputs :=
+  fun index =>
+    if index = first then valuation ⟨0, by decide⟩
+    else if index = second then valuation ⟨1, by decide⟩
+    else if index = third then valuation ⟨2, by decide⟩
+    else if index = fourth then valuation ⟨3, by decide⟩
+    else false
+
+private def inputBinding2Lift
+    {outerInputs prefixGates : Nat}
+    (initial : Program outerInputs prefixGates)
+    (first second : Fin outerInputs) (firstNeSecond : first ≠ second) :
+    LocalBlockLift initial
+      (binding2 (Source.input first) (Source.input second))
+      fin2Zero first where
+  lift := inputLift2 first second
+  bindingValues := by
+    intro valuation index
+    by_cases indexZero : index.val = 0
+    · have indexEqual : index = fin2Zero := Fin.ext indexZero
+      subst index
+      change inputLift2 first second valuation first = valuation fin2Zero
+      simp [inputLift2]
+    · have indexOne : index.val = 1 := by omega
+      have indexEqual : index = fin2One := Fin.ext indexOne
+      subst index
+      change inputLift2 first second valuation second = valuation fin2One
+      simp [inputLift2, Ne.symm firstNeSecond]
+  targetValue := by
+    intro valuation
+    simp [inputLift2]
+  preservesDifference := by
+    intro left right differs
+    constructor
+    · simpa [inputLift2] using differs.1
+    · intro index indexNeFirst
+      simp only [inputLift2, if_neg indexNeFirst]
+      split
+      · rename_i indexEqual
+        subst index
+        exact differs.2 fin2One (by decide)
+      · rfl
+
+private def inputBinding3Lift
+    {outerInputs prefixGates : Nat}
+    (initial : Program outerInputs prefixGates)
+    (first second third : Fin outerInputs)
+    (firstNeSecond : first ≠ second)
+    (firstNeThird : first ≠ third)
+    (secondNeThird : second ≠ third) :
+    LocalBlockLift initial
+      (binding3 (Source.input first) (Source.input second)
+        (Source.input third))
+      ⟨0, by decide⟩ first where
+  lift := inputLift3 first second third
+  bindingValues := by
+    intro valuation index
+    by_cases indexZero : index.val = 0
+    · have indexEqual : index = ⟨0, by decide⟩ := Fin.ext indexZero
+      subst index
+      change
+        inputLift3 first second third valuation first =
+          valuation ⟨0, by decide⟩
+      simp [inputLift3]
+    · by_cases indexOne : index.val = 1
+      · have indexEqual : index = ⟨1, by decide⟩ := Fin.ext indexOne
+        subst index
+        change
+          inputLift3 first second third valuation second =
+            valuation ⟨1, by decide⟩
+        simp [inputLift3, Ne.symm firstNeSecond]
+      · have indexTwo : index.val = 2 := by omega
+        have indexEqual : index = ⟨2, by decide⟩ := Fin.ext indexTwo
+        subst index
+        change
+          inputLift3 first second third valuation third =
+            valuation ⟨2, by decide⟩
+        simp [inputLift3, Ne.symm firstNeThird,
+          Ne.symm secondNeThird]
+  targetValue := by
+    intro valuation
+    simp [inputLift3]
+  preservesDifference := by
+    intro left right differs
+    constructor
+    · simpa [inputLift3] using differs.1
+    · intro index indexNeFirst
+      simp only [inputLift3, if_neg indexNeFirst]
+      split
+      · rename_i indexEqual
+        subst index
+        exact differs.2 ⟨1, by decide⟩ (by decide)
+      · split
+        · rename_i indexEqual
+          subst index
+          exact differs.2 ⟨2, by decide⟩ (by decide)
+        · rfl
+
+private def inputBinding4Lift
+    {outerInputs prefixGates : Nat}
+    (initial : Program outerInputs prefixGates)
+    (first second third fourth : Fin outerInputs)
+    (firstNeSecond : first ≠ second)
+    (firstNeThird : first ≠ third)
+    (firstNeFourth : first ≠ fourth)
+    (secondNeThird : second ≠ third)
+    (secondNeFourth : second ≠ fourth)
+    (thirdNeFourth : third ≠ fourth) :
+    LocalBlockLift initial
+      (binding4 (Source.input first) (Source.input second)
+        (Source.input third) (Source.input fourth))
+      ⟨0, by decide⟩ first where
+  lift := inputLift4 first second third fourth
+  bindingValues := by
+    intro valuation index
+    by_cases indexZero : index.val = 0
+    · have indexEqual : index = ⟨0, by decide⟩ := Fin.ext indexZero
+      subst index
+      change
+        inputLift4 first second third fourth valuation first =
+          valuation ⟨0, by decide⟩
+      simp [inputLift4]
+    · by_cases indexOne : index.val = 1
+      · have indexEqual : index = ⟨1, by decide⟩ := Fin.ext indexOne
+        subst index
+        change
+          inputLift4 first second third fourth valuation second =
+            valuation ⟨1, by decide⟩
+        simp [inputLift4, Ne.symm firstNeSecond]
+      · by_cases indexTwo : index.val = 2
+        · have indexEqual : index = ⟨2, by decide⟩ := Fin.ext indexTwo
+          subst index
+          change
+            inputLift4 first second third fourth valuation third =
+              valuation ⟨2, by decide⟩
+          simp [inputLift4, Ne.symm firstNeThird,
+            Ne.symm secondNeThird]
+        · have indexThree : index.val = 3 := by omega
+          have indexEqual : index = ⟨3, by decide⟩ :=
+            Fin.ext indexThree
+          subst index
+          change
+            inputLift4 first second third fourth valuation fourth =
+              valuation ⟨3, by decide⟩
+          simp [inputLift4, Ne.symm firstNeFourth,
+            Ne.symm secondNeFourth, Ne.symm thirdNeFourth]
+  targetValue := by
+    intro valuation
+    simp [inputLift4]
+  preservesDifference := by
+    intro left right differs
+    constructor
+    · simpa [inputLift4] using differs.1
+    · intro index indexNeFirst
+      simp only [inputLift4, if_neg indexNeFirst]
+      split
+      · rename_i indexEqual
+        subst index
+        exact differs.2 ⟨1, by decide⟩ (by decide)
+      · split
+        · rename_i indexEqual
+          subst index
+          exact differs.2 ⟨2, by decide⟩ (by decide)
+        · split
+          · rename_i indexEqual
+            subst index
+            exact differs.2 ⟨3, by decide⟩ (by decide)
+          · rfl
+
+private theorem appendedExpose_prefix_semantics
+    {outerInputs innerInputs prefixGates suffixGates : Nat}
+    (initial : Program outerInputs prefixGates)
+    (binding : Fin innerInputs → Source outerInputs prefixGates)
+    (block : Candidate innerInputs suffixGates suffixGates)
+    (input : Valuation outerInputs) (output : Fin prefixGates) :
+    (exposeAllGates
+      (appendCandidateProgram initial binding block)).semantics
+        input (Fin.castAdd suffixGates output) =
+      (exposeAllGates initial).semantics input output := by
+  unfold Candidate.semantics DirectWire.semantics DirectWireWord.eval
+  rw [exposeAllGates_source, exposeAllGates_source]
+  exact Program.eval_appendSubstituted_prefix initial binding
+    block.program input output
+
+private theorem appendedExpose_suffix_semantics
+    {outerInputs innerInputs prefixGates suffixGates : Nat}
+    (initial : Program outerInputs prefixGates)
+    (binding : Fin innerInputs → Source outerInputs prefixGates)
+    (block : Candidate innerInputs suffixGates suffixGates)
+    (blockExposes : ∀ output,
+      block.directWireWord.source output = .gate output)
+    (input : Valuation outerInputs) (output : Fin suffixGates) :
+    (exposeAllGates
+      (appendCandidateProgram initial binding block)).semantics
+        input (Fin.natAdd prefixGates output) =
+      block.semantics
+        (fun index =>
+          (binding index).eval input (initial.eval input))
+        output := by
+  unfold Candidate.semantics DirectWire.semantics DirectWireWord.eval
+  rw [exposeAllGates_source, blockExposes]
+  exact Program.eval_appendSubstituted_suffix initial binding
+    block.program input output
+
+private theorem appendedExpose_suffix_essential
+    {outerInputs innerInputs prefixGates suffixGates : Nat}
+    (initial : Program outerInputs prefixGates)
+    (binding : Fin innerInputs → Source outerInputs prefixGates)
+    (block : Candidate innerInputs suffixGates suffixGates)
+    (blockExposes : ∀ output,
+      block.directWireWord.source output = .gate output)
+    (innerTarget : Fin innerInputs) (outerTarget : Fin outerInputs)
+    (lift : LocalBlockLift initial binding innerTarget outerTarget)
+    (output : Fin suffixGates)
+    (localEssential : OutputEssentialAt block innerTarget output) :
+    OutputEssentialAt
+      (exposeAllGates (appendCandidateProgram initial binding block))
+      outerTarget (Fin.natAdd prefixGates output) := by
+  obtain ⟨left, right, differsOnly, semanticDifferent⟩ := localEssential
+  refine ⟨lift.lift left, lift.lift right,
+    lift.preservesDifference left right differsOnly, ?_⟩
+  rw [appendedExpose_suffix_semantics initial binding block blockExposes,
+    appendedExpose_suffix_semantics initial binding block blockExposes]
+  simpa only [lift.bindingValues] using semanticDifferent
+
+private theorem appendedExpose_prefix_irrelevant
+    {outerInputs innerInputs prefixGates suffixGates : Nat}
+    (initial : Program outerInputs prefixGates)
+    (binding : Fin innerInputs → Source outerInputs prefixGates)
+    (block : Candidate innerInputs suffixGates suffixGates)
+    (outerTarget : Fin outerInputs)
+    (initialAvoids : programAvoidsInput outerTarget initial)
+    (output : Fin prefixGates) :
+    OutputIrrelevantAt
+      (exposeAllGates (appendCandidateProgram initial binding block))
+      outerTarget (Fin.castAdd suffixGates output) := by
+  intro left right equalAway
+  rw [appendedExpose_prefix_semantics,
+    appendedExpose_prefix_semantics]
+  exact exposeAllGates_outputIrrelevant initial outerTarget
+    initialAvoids output left right equalAway
+
+private theorem appendedExpose_prefix_irrelevant_of_irrelevant
+    {outerInputs innerInputs prefixGates suffixGates : Nat}
+    (initial : Program outerInputs prefixGates)
+    (binding : Fin innerInputs → Source outerInputs prefixGates)
+    (block : Candidate innerInputs suffixGates suffixGates)
+    (outerTarget : Fin outerInputs) (output : Fin prefixGates)
+    (irrelevant :
+      OutputIrrelevantAt (exposeAllGates initial) outerTarget output) :
+    OutputIrrelevantAt
+      (exposeAllGates (appendCandidateProgram initial binding block))
+      outerTarget (Fin.castAdd suffixGates output) := by
+  intro left right equalAway
+  rw [appendedExpose_prefix_semantics,
+    appendedExpose_prefix_semantics]
+  exact irrelevant left right equalAway
+
+private theorem appendedExpose_suffix_irrelevant
+    {outerInputs innerInputs prefixGates suffixGates : Nat}
+    (initial : Program outerInputs prefixGates)
+    (binding : Fin innerInputs → Source outerInputs prefixGates)
+    (block : Candidate innerInputs suffixGates suffixGates)
+    (blockExposes : ∀ output,
+      block.directWireWord.source output = .gate output)
+    (outerTarget : Fin outerInputs)
+    (bindingIndependent :
+      ∀ left right,
+        (∀ index, index ≠ outerTarget → left index = right index) →
+          ∀ bindingIndex,
+            (binding bindingIndex).eval left (initial.eval left) =
+              (binding bindingIndex).eval right (initial.eval right))
+    (output : Fin suffixGates) :
+    OutputIrrelevantAt
+      (exposeAllGates (appendCandidateProgram initial binding block))
+      outerTarget (Fin.natAdd prefixGates output) := by
+  intro left right equalAway
+  rw [appendedExpose_suffix_semantics initial binding block blockExposes,
+    appendedExpose_suffix_semantics initial binding block blockExposes]
+  have boundValues :
+      (fun index =>
+        (binding index).eval left (initial.eval left)) =
+        (fun index =>
+          (binding index).eval right (initial.eval right)) := by
+    funext bindingIndex
+    exact bindingIndependent left right equalAway bindingIndex
+  rw [boundValues]
+
+/-- Append one square local macro whose every gate depends on a fresh outer
+    lock.  Existing gate outputs retain their conditions, local witnesses lift
+    constructively, and the fresh lock separates every cross-block pair. -/
+private theorem appendFreshSquareBlock_conditions
+    {outerInputs innerInputs prefixGates suffixGates : Nat}
+    (initial : Program outerInputs prefixGates)
+    (binding : Fin innerInputs → Source outerInputs prefixGates)
+    (block : Candidate innerInputs suffixGates suffixGates)
+    (blockExposes : ∀ output,
+      block.directWireWord.source output = .gate output)
+    (innerTarget : Fin innerInputs) (outerTarget : Fin outerInputs)
+    (lift : LocalBlockLift initial binding innerTarget outerTarget)
+    (initialConditions :
+      BaselineOutputConditions (exposeAllGates initial))
+    (initialAvoids : programAvoidsInput outerTarget initial)
+    (blockConditions : BaselineOutputConditions block)
+    (blockEssential :
+      ∀ output, OutputEssentialAt block innerTarget output) :
+    BaselineOutputConditions
+      (exposeAllGates
+        (appendCandidateProgram initial binding block)) := by
+  have suffixEssential :
+      ∀ output,
+        OutputEssentialAt
+          (exposeAllGates
+            (appendCandidateProgram initial binding block)) outerTarget
+          (Fin.natAdd prefixGates output) := by
+    intro output
+    exact appendedExpose_suffix_essential initial binding block
+      blockExposes innerTarget outerTarget lift output
+      (blockEssential output)
+  constructor
+  · intro output
+    cases finSum_decompose output with
+    | inl prefixCase =>
+        rcases prefixCase with ⟨prefixOutput, outputEqual⟩
+        subst output
+        obtain ⟨left, right, different⟩ :=
+          initialConditions.nonconstant prefixOutput
+        refine ⟨left, right, ?_⟩
+        simpa only [appendedExpose_prefix_semantics] using different
+    | inr suffixCase =>
+        rcases suffixCase with ⟨suffixOutput, outputEqual⟩
+        subst output
+        exact (suffixEssential suffixOutput).nonconstant
+  · intro output queried
+    cases finSum_decompose output with
+    | inl prefixCase =>
+        rcases prefixCase with ⟨prefixOutput, outputEqual⟩
+        subst output
+        obtain ⟨valuation, different⟩ :=
+          initialConditions.notPositiveProjection prefixOutput queried
+        refine ⟨valuation, ?_⟩
+        simpa only [appendedExpose_prefix_semantics] using different
+    | inr suffixCase =>
+        rcases suffixCase with ⟨suffixOutput, outputEqual⟩
+        subst output
+        if targetEqual : outerTarget = queried then
+          obtain ⟨localValuation, localDifferent⟩ :=
+            blockConditions.notPositiveProjection suffixOutput innerTarget
+          refine ⟨lift.lift localValuation, ?_⟩
+          rw [appendedExpose_suffix_semantics initial binding block
+            blockExposes]
+          simp only [lift.bindingValues]
+          rw [← targetEqual, lift.targetValue]
+          exact localDifferent
+        else
+          exact (suffixEssential suffixOutput).notProjection_of_ne
+            targetEqual
+  · intro leftOutput rightOutput outputDifferent
+    cases finSum_decompose leftOutput with
+    | inl leftPrefixCase =>
+        rcases leftPrefixCase with ⟨leftPrefix, leftEqual⟩
+        subst leftOutput
+        cases finSum_decompose rightOutput with
+        | inl rightPrefixCase =>
+            rcases rightPrefixCase with ⟨rightPrefix, rightEqual⟩
+            subst rightOutput
+            have prefixDifferent : leftPrefix ≠ rightPrefix := by
+              intro equal
+              apply outputDifferent
+              exact congrArg (Fin.castAdd suffixGates) equal
+            obtain ⟨valuation, different⟩ :=
+              initialConditions.pairwiseDistinct prefixDifferent
+            refine ⟨valuation, ?_⟩
+            simpa only [appendedExpose_prefix_semantics] using different
+        | inr rightSuffixCase =>
+            rcases rightSuffixCase with ⟨rightSuffix, rightEqual⟩
+            subst rightOutput
+            obtain ⟨valuation, different⟩ :=
+              essential_irrelevant_distinct
+                (suffixEssential rightSuffix)
+                (appendedExpose_prefix_irrelevant initial binding block
+                  outerTarget initialAvoids leftPrefix)
+            exact ⟨valuation, fun equal => different equal.symm⟩
+    | inr leftSuffixCase =>
+        rcases leftSuffixCase with ⟨leftSuffix, leftEqual⟩
+        subst leftOutput
+        cases finSum_decompose rightOutput with
+        | inl rightPrefixCase =>
+            rcases rightPrefixCase with ⟨rightPrefix, rightEqual⟩
+            subst rightOutput
+            exact essential_irrelevant_distinct
+              (suffixEssential leftSuffix)
+              (appendedExpose_prefix_irrelevant initial binding block
+                outerTarget initialAvoids rightPrefix)
+        | inr rightSuffixCase =>
+            rcases rightSuffixCase with ⟨rightSuffix, rightEqual⟩
+            subst rightOutput
+            have suffixDifferent : leftSuffix ≠ rightSuffix := by
+              intro equal
+              apply outputDifferent
+              exact congrArg (Fin.natAdd prefixGates) equal
+            obtain ⟨localValuation, localDifferent⟩ :=
+              blockConditions.pairwiseDistinct suffixDifferent
+            refine ⟨lift.lift localValuation, ?_⟩
+            rw [appendedExpose_suffix_semantics initial binding block
+              blockExposes,
+              appendedExpose_suffix_semantics initial binding block
+                blockExposes]
+            simpa only [lift.bindingValues] using localDifferent
+
+private theorem carrierSlot_encode_ne
+    {inputs gates : Nat}
+    (slot target : CarrierSlot inputs gates) (different : slot ≠ target) :
+    slot.encode ≠ target.encode := by
+  intro encodedEqual
+  exact different (CarrierSlot.encode_injective encodedEqual)
+
+private theorem carrierInputSource_avoids
+    {inputs gates prefixGates : Nat}
+    (slot target : CarrierSlot inputs gates) (different : slot ≠ target) :
+    sourceAvoidsInput target.encode
+      (Source.input slot.encode :
+        Source (carrierWidth inputs gates) prefixGates) := by
+  exact carrierSlot_encode_ne slot target different
+
+private theorem sourceLockSlot_ne_occurrenceSlot
+    {inputs gates : Nat} (lock occurrence : Fin (2 * gates)) :
+  sourceLockSlot (inputs := inputs) lock ≠
+      occurrenceSlot (inputs := inputs) occurrence := by
+  simpa [CarrierSlot.encode] using
+    (carrierSlot_encode_ne
+      (CarrierSlot.sourceLock lock)
+      (CarrierSlot.occurrence occurrence) (by simp))
+
+private theorem sourceLockSlot_ne_primarySlot
+    {inputs gates : Nat} (lock : Fin (2 * gates))
+    (input : Fin inputs) :
+    sourceLockSlot lock ≠ primarySlot (gates := gates) input := by
+  simpa [CarrierSlot.encode] using
+    (carrierSlot_encode_ne
+      (CarrierSlot.sourceLock lock)
+      (CarrierSlot.primary input) (by simp))
+
+private theorem sourceLockSlot_ne_traceSlot
+    {inputs gates : Nat} (lock : Fin (2 * gates))
+    (trace : Fin gates) :
+    sourceLockSlot (inputs := inputs) lock ≠
+      traceSlot (inputs := inputs) trace := by
+  simpa [CarrierSlot.encode] using
+    (carrierSlot_encode_ne
+      (CarrierSlot.sourceLock lock)
+      (CarrierSlot.trace trace) (by simp))
+
+private theorem occurrenceSlot_ne_primarySlot
+    {inputs gates : Nat} (occurrence : Fin (2 * gates))
+    (input : Fin inputs) :
+    occurrenceSlot occurrence ≠ primarySlot (gates := gates) input := by
+  simpa [CarrierSlot.encode] using
+    (carrierSlot_encode_ne
+      (CarrierSlot.occurrence occurrence)
+      (CarrierSlot.primary input) (by simp))
+
+private theorem occurrenceSlot_ne_traceSlot
+    {inputs gates : Nat} (occurrence : Fin (2 * gates))
+    (trace : Fin gates) :
+    occurrenceSlot (inputs := inputs) occurrence ≠
+      traceSlot (inputs := inputs) trace := by
+  simpa [CarrierSlot.encode] using
+    (carrierSlot_encode_ne
+      (CarrierSlot.occurrence occurrence)
+      (CarrierSlot.trace trace) (by simp))
+
+private theorem traceLockSlot_ne_traceSlot
+    {inputs gates : Nat} (lock trace : Fin gates) :
+    traceLockSlot (inputs := inputs) lock ≠
+      traceSlot (inputs := inputs) trace := by
+  simpa [CarrierSlot.encode] using
+    (carrierSlot_encode_ne
+      (CarrierSlot.traceLock lock)
+      (CarrierSlot.trace trace) (by simp))
+
+private theorem traceLockSlot_ne_occurrenceSlot
+    {inputs gates : Nat} (lock : Fin gates)
+    (occurrence : Fin (2 * gates)) :
+    traceLockSlot (inputs := inputs) lock ≠
+      occurrenceSlot (inputs := inputs) occurrence := by
+  simpa [CarrierSlot.encode] using
+    (carrierSlot_encode_ne
+      (CarrierSlot.traceLock lock)
+      (CarrierSlot.occurrence occurrence) (by simp))
+
+private theorem occurrenceSlot_injective {inputs gates : Nat} :
+    Function.Injective
+      (occurrenceSlot (inputs := inputs) :
+        Fin (2 * gates) → Fin (carrierWidth inputs gates)) := by
+  intro left right equal
+  have decoded := congrArg decodeCarrierSlot equal
+  simpa using decoded
+
+private theorem appendSourceMacro_conditions
+    {inputs priorGates totalGates prefixGates : Nat}
+    (initial : Program (carrierWidth inputs totalGates) prefixGates)
+    (source : Source inputs priorGates)
+    (priorWithin : priorGates ≤ totalGates)
+    (gate : Fin totalGates) (side : OccurrenceSide)
+    (initialConditions :
+      BaselineOutputConditions (exposeAllGates initial))
+    (initialAvoids :
+      programAvoidsInput
+        (sourceLockSlot (occurrenceCoordinate gate side)) initial) :
+    BaselineOutputConditions
+      (exposeAllGates
+        (appendSourceMacro initial source priorWithin gate side).program) := by
+  let lock :=
+    sourceLockSlot (inputs := inputs) (occurrenceCoordinate gate side)
+  let occurrence :=
+    occurrenceSlot (inputs := inputs) (occurrenceCoordinate gate side)
+  have lockNeOccurrence : lock ≠ occurrence :=
+    sourceLockSlot_ne_occurrenceSlot _ _
+  cases source with
+  | input index =>
+      let sourceValue := primarySlot (gates := totalGates) index
+      have lockNeSource : lock ≠ sourceValue :=
+        sourceLockSlot_ne_primarySlot _ _
+      have occurrenceNeSource : occurrence ≠ sourceValue :=
+        occurrenceSlot_ne_primarySlot _ _
+      change
+        BaselineOutputConditions
+          (exposeAllGates
+            (appendCandidateProgram initial
+              (binding3 (.input lock) (.input occurrence)
+                (.input sourceValue))
+              equalityDirect))
+      exact appendFreshSquareBlock_conditions initial
+        (binding3 (.input lock) (.input occurrence)
+          (.input sourceValue))
+        equalityDirect equalityDirect_output_source
+        ⟨0, by decide⟩ lock
+        (inputBinding3Lift initial lock occurrence sourceValue
+          lockNeOccurrence lockNeSource occurrenceNeSource)
+        initialConditions initialAvoids
+        equalityDirect_baselineOutputConditions
+        equalityDirect_lockEssential
+  | constant value =>
+      cases value with
+      | false =>
+          change
+            BaselineOutputConditions
+              (exposeAllGates
+                (appendCandidateProgram initial
+                  (binding2 (.input lock) (.input occurrence))
+                  constantZeroDirect))
+          exact appendFreshSquareBlock_conditions initial
+            (binding2 (.input lock) (.input occurrence))
+            constantZeroDirect constantZeroDirect_output_source
+            fin2Zero lock
+            (inputBinding2Lift initial lock occurrence lockNeOccurrence)
+            initialConditions initialAvoids
+            constantZeroDirect_baselineOutputConditions
+            constantZeroDirect_lockEssential
+      | true =>
+          change
+            BaselineOutputConditions
+              (exposeAllGates
+                (appendCandidateProgram initial
+                  (binding2 (.input lock) (.input occurrence))
+                  constantOneDirect))
+          exact appendFreshSquareBlock_conditions initial
+            (binding2 (.input lock) (.input occurrence))
+            constantOneDirect constantOneDirect_output_source
+            fin2Zero lock
+            (inputBinding2Lift initial lock occurrence lockNeOccurrence)
+            initialConditions initialAvoids
+            constantOneDirect_baselineOutputConditions
+            constantOneDirect_lockEssential
+  | gate index =>
+      let sourceValue :=
+        traceSlot (inputs := inputs) (Fin.castLE priorWithin index)
+      have lockNeSource : lock ≠ sourceValue :=
+        sourceLockSlot_ne_traceSlot _ _
+      have occurrenceNeSource : occurrence ≠ sourceValue :=
+        occurrenceSlot_ne_traceSlot _ _
+      change
+        BaselineOutputConditions
+          (exposeAllGates
+            (appendCandidateProgram initial
+              (binding3 (.input lock) (.input occurrence)
+                (.input sourceValue))
+              equalityDirect))
+      exact appendFreshSquareBlock_conditions initial
+        (binding3 (.input lock) (.input occurrence)
+          (.input sourceValue))
+        equalityDirect equalityDirect_output_source
+        ⟨0, by decide⟩ lock
+        (inputBinding3Lift initial lock occurrence sourceValue
+          lockNeOccurrence lockNeSource occurrenceNeSource)
+        initialConditions initialAvoids
+        equalityDirect_baselineOutputConditions
+        equalityDirect_lockEssential
+
+private theorem appendTraceMacro_conditions
+    {inputs totalGates prefixGates : Nat}
+    (initial : Program (carrierWidth inputs totalGates) prefixGates)
+    (gate : Fin totalGates)
+    (initialConditions :
+      BaselineOutputConditions (exposeAllGates initial))
+    (initialAvoids :
+      programAvoidsInput (traceLockSlot (inputs := inputs) gate) initial) :
+    BaselineOutputConditions
+      (exposeAllGates (appendTraceMacro initial gate).program) := by
+  let lock := traceLockSlot (inputs := inputs) gate
+  let trace := traceSlot (inputs := inputs) gate
+  let left :=
+    occurrenceSlot (inputs := inputs) (occurrenceCoordinate gate .left)
+  let right :=
+    occurrenceSlot (inputs := inputs) (occurrenceCoordinate gate .right)
+  have lockNeTrace : lock ≠ trace :=
+    traceLockSlot_ne_traceSlot _ _
+  have lockNeLeft : lock ≠ left :=
+    traceLockSlot_ne_occurrenceSlot _ _
+  have lockNeRight : lock ≠ right :=
+    traceLockSlot_ne_occurrenceSlot _ _
+  have traceNeLeft : trace ≠ left :=
+    Ne.symm (occurrenceSlot_ne_traceSlot _ _)
+  have traceNeRight : trace ≠ right :=
+    Ne.symm (occurrenceSlot_ne_traceSlot _ _)
+  have leftNeRight : left ≠ right := by
+    intro equal
+    exact occurrenceCoordinate_left_ne_right gate
+      (occurrenceSlot_injective equal)
+  change
+    BaselineOutputConditions
+      (exposeAllGates
+        (appendCandidateProgram initial
+          (binding4 (.input lock) (.input trace)
+            (.input left) (.input right))
+          traceDirect))
+  exact appendFreshSquareBlock_conditions initial
+    (binding4 (.input lock) (.input trace)
+      (.input left) (.input right))
+    traceDirect traceDirect_output_source
+    ⟨0, by decide⟩ lock
+    (inputBinding4Lift initial lock trace left right
+      lockNeTrace lockNeLeft lockNeRight traceNeLeft traceNeRight
+      leftNeRight)
+    initialConditions initialAvoids
+    traceDirect_baselineOutputConditions
+    traceDirect_lockEssential
+
+private theorem appendSourceMacro_avoidsSourceLock
+    {inputs priorGates totalGates prefixGates : Nat}
+    (initial : Program (carrierWidth inputs totalGates) prefixGates)
+    (source : Source inputs priorGates)
+    (priorWithin : priorGates ≤ totalGates)
+    (gate : Fin totalGates) (side : OccurrenceSide)
+    (target : Fin (2 * totalGates))
+    (lockDifferent : occurrenceCoordinate gate side ≠ target)
+    (initialAvoids :
+      programAvoidsInput (sourceLockSlot (inputs := inputs) target)
+        initial) :
+    programAvoidsInput (sourceLockSlot (inputs := inputs) target)
+      (appendSourceMacro initial source priorWithin gate side).program := by
+  have currentLockAvoids :
+      sourceAvoidsInput (sourceLockSlot (inputs := inputs) target)
+        (Source.input
+          (sourceLockSlot (inputs := inputs)
+            (occurrenceCoordinate gate side)) :
+          Source (carrierWidth inputs totalGates) prefixGates) := by
+    simpa [CarrierSlot.encode] using
+      (carrierInputSource_avoids
+        (prefixGates := prefixGates)
+        (CarrierSlot.sourceLock (occurrenceCoordinate gate side))
+        (CarrierSlot.sourceLock target) (by
+          intro equal
+          exact lockDifferent (CarrierSlot.sourceLock.inj equal)))
+  have occurrenceAvoids :
+      sourceAvoidsInput (sourceLockSlot (inputs := inputs) target)
+        (Source.input
+          (occurrenceSlot (inputs := inputs)
+            (occurrenceCoordinate gate side)) :
+          Source (carrierWidth inputs totalGates) prefixGates) := by
+    simpa [CarrierSlot.encode] using
+      (carrierInputSource_avoids
+        (prefixGates := prefixGates)
+        (CarrierSlot.occurrence (occurrenceCoordinate gate side))
+        (CarrierSlot.sourceLock target) (by simp))
+  cases source with
+  | input index =>
+      let binding : Fin 3 →
+          Source (carrierWidth inputs totalGates) prefixGates :=
+        binding3
+          (Source.input
+            (sourceLockSlot (inputs := inputs)
+              (occurrenceCoordinate gate side)))
+          (Source.input
+            (occurrenceSlot (inputs := inputs)
+              (occurrenceCoordinate gate side)))
+          (Source.input (primarySlot (gates := totalGates) index))
+      have bindingAvoids :
+          ∀ bindingIndex,
+            sourceAvoidsInput
+              (sourceLockSlot (inputs := inputs) target)
+              (binding bindingIndex) := by
+        intro bindingIndex
+        dsimp only [binding]
+        unfold binding3
+        split
+        · exact currentLockAvoids
+        · split
+          · exact occurrenceAvoids
+          · simpa [CarrierSlot.encode] using
+              (carrierInputSource_avoids
+                (prefixGates := prefixGates)
+                (CarrierSlot.primary index)
+                (CarrierSlot.sourceLock target) (by simp))
+      change
+        programAvoidsInput (sourceLockSlot (inputs := inputs) target)
+          (appendCandidateProgram initial binding equalityDirect)
+      exact appendCandidateProgram_avoidsInput
+        (sourceLockSlot (inputs := inputs) target)
+        initial binding bindingAvoids equalityDirect initialAvoids
+  | constant value =>
+      let binding : Fin 2 →
+          Source (carrierWidth inputs totalGates) prefixGates :=
+        binding2
+          (Source.input
+            (sourceLockSlot (inputs := inputs)
+              (occurrenceCoordinate gate side)))
+          (Source.input
+            (occurrenceSlot (inputs := inputs)
+              (occurrenceCoordinate gate side)))
+      have bindingAvoids :
+          ∀ bindingIndex,
+            sourceAvoidsInput
+              (sourceLockSlot (inputs := inputs) target)
+              (binding bindingIndex) := by
+        intro bindingIndex
+        dsimp only [binding]
+        unfold binding2
+        split
+        · exact currentLockAvoids
+        · exact occurrenceAvoids
+      cases value with
+      | false =>
+          change
+            programAvoidsInput (sourceLockSlot (inputs := inputs) target)
+              (appendCandidateProgram initial binding constantZeroDirect)
+          exact appendCandidateProgram_avoidsInput
+            (sourceLockSlot (inputs := inputs) target)
+            initial binding bindingAvoids constantZeroDirect initialAvoids
+      | true =>
+          change
+            programAvoidsInput (sourceLockSlot (inputs := inputs) target)
+              (appendCandidateProgram initial binding constantOneDirect)
+          exact appendCandidateProgram_avoidsInput
+            (sourceLockSlot (inputs := inputs) target)
+            initial binding bindingAvoids constantOneDirect initialAvoids
+  | gate index =>
+      let binding : Fin 3 →
+          Source (carrierWidth inputs totalGates) prefixGates :=
+        binding3
+          (Source.input
+            (sourceLockSlot (inputs := inputs)
+              (occurrenceCoordinate gate side)))
+          (Source.input
+            (occurrenceSlot (inputs := inputs)
+              (occurrenceCoordinate gate side)))
+          (Source.input
+            (traceSlot (inputs := inputs)
+              (Fin.castLE priorWithin index)))
+      have bindingAvoids :
+          ∀ bindingIndex,
+            sourceAvoidsInput
+              (sourceLockSlot (inputs := inputs) target)
+              (binding bindingIndex) := by
+        intro bindingIndex
+        dsimp only [binding]
+        unfold binding3
+        split
+        · exact currentLockAvoids
+        · split
+          · exact occurrenceAvoids
+          · simpa [CarrierSlot.encode] using
+              (carrierInputSource_avoids
+                (prefixGates := prefixGates)
+                (CarrierSlot.trace (Fin.castLE priorWithin index))
+                (CarrierSlot.sourceLock target) (by simp))
+      change
+        programAvoidsInput (sourceLockSlot (inputs := inputs) target)
+          (appendCandidateProgram initial binding equalityDirect)
+      exact appendCandidateProgram_avoidsInput
+        (sourceLockSlot (inputs := inputs) target)
+        initial binding bindingAvoids equalityDirect initialAvoids
+
+private theorem appendTraceMacro_avoidsSourceLock
+    {inputs totalGates prefixGates : Nat}
+    (initial : Program (carrierWidth inputs totalGates) prefixGates)
+    (gate : Fin totalGates) (target : Fin (2 * totalGates))
+    (initialAvoids :
+      programAvoidsInput (sourceLockSlot (inputs := inputs) target)
+        initial) :
+    programAvoidsInput (sourceLockSlot (inputs := inputs) target)
+      (appendTraceMacro initial gate).program := by
+  let binding : Fin 4 →
+      Source (carrierWidth inputs totalGates) prefixGates :=
+    binding4
+      (Source.input (traceLockSlot (inputs := inputs) gate))
+      (Source.input (traceSlot (inputs := inputs) gate))
+      (Source.input (occurrenceSlot (inputs := inputs)
+        (occurrenceCoordinate gate .left)))
+      (Source.input (occurrenceSlot (inputs := inputs)
+        (occurrenceCoordinate gate .right)))
+  have bindingAvoids :
+      ∀ bindingIndex,
+        sourceAvoidsInput (sourceLockSlot (inputs := inputs) target)
+          (binding bindingIndex) := by
+    intro bindingIndex
+    dsimp only [binding]
+    unfold binding4
+    split
+    · simpa [CarrierSlot.encode] using
+        (carrierInputSource_avoids
+          (prefixGates := prefixGates)
+          (CarrierSlot.traceLock gate)
+          (CarrierSlot.sourceLock target) (by simp))
+    · split
+      · simpa [CarrierSlot.encode] using
+          (carrierInputSource_avoids
+            (prefixGates := prefixGates)
+            (CarrierSlot.trace gate)
+            (CarrierSlot.sourceLock target) (by simp))
+      · split
+        · simpa [CarrierSlot.encode] using
+            (carrierInputSource_avoids
+              (prefixGates := prefixGates)
+              (CarrierSlot.occurrence
+                (occurrenceCoordinate gate .left))
+              (CarrierSlot.sourceLock target) (by simp))
+        · simpa [CarrierSlot.encode] using
+            (carrierInputSource_avoids
+              (prefixGates := prefixGates)
+              (CarrierSlot.occurrence
+                (occurrenceCoordinate gate .right))
+              (CarrierSlot.sourceLock target) (by simp))
+  change
+    programAvoidsInput (sourceLockSlot (inputs := inputs) target)
+      (appendCandidateProgram initial binding traceDirect)
+  exact appendCandidateProgram_avoidsInput
+    (sourceLockSlot (inputs := inputs) target)
+    initial binding bindingAvoids traceDirect initialAvoids
+
+private theorem appendSourceMacro_avoidsTraceLock
+    {inputs priorGates totalGates prefixGates : Nat}
+    (initial : Program (carrierWidth inputs totalGates) prefixGates)
+    (source : Source inputs priorGates)
+    (priorWithin : priorGates ≤ totalGates)
+    (gate : Fin totalGates) (side : OccurrenceSide)
+    (target : Fin totalGates)
+    (initialAvoids :
+      programAvoidsInput (traceLockSlot (inputs := inputs) target)
+        initial) :
+    programAvoidsInput (traceLockSlot (inputs := inputs) target)
+      (appendSourceMacro initial source priorWithin gate side).program := by
+  cases source with
+  | input index =>
+      let binding : Fin 3 →
+          Source (carrierWidth inputs totalGates) prefixGates :=
+        binding3
+          (Source.input
+            (sourceLockSlot (inputs := inputs)
+              (occurrenceCoordinate gate side)))
+          (Source.input
+            (occurrenceSlot (inputs := inputs)
+              (occurrenceCoordinate gate side)))
+          (Source.input (primarySlot (gates := totalGates) index))
+      have bindingAvoids :
+          ∀ bindingIndex,
+            sourceAvoidsInput (traceLockSlot (inputs := inputs) target)
+              (binding bindingIndex) := by
+        intro bindingIndex
+        dsimp only [binding]
+        unfold binding3
+        split
+        · simpa [CarrierSlot.encode] using
+            (carrierInputSource_avoids
+              (prefixGates := prefixGates)
+              (CarrierSlot.sourceLock (occurrenceCoordinate gate side))
+              (CarrierSlot.traceLock target) (by simp))
+        · split
+          · simpa [CarrierSlot.encode] using
+              (carrierInputSource_avoids
+                (prefixGates := prefixGates)
+                (CarrierSlot.occurrence
+                  (occurrenceCoordinate gate side))
+                (CarrierSlot.traceLock target) (by simp))
+          · simpa [CarrierSlot.encode] using
+              (carrierInputSource_avoids
+                (prefixGates := prefixGates)
+                (CarrierSlot.primary index)
+                (CarrierSlot.traceLock target) (by simp))
+      change
+        programAvoidsInput (traceLockSlot (inputs := inputs) target)
+          (appendCandidateProgram initial binding equalityDirect)
+      exact appendCandidateProgram_avoidsInput
+        (traceLockSlot (inputs := inputs) target)
+        initial binding bindingAvoids equalityDirect initialAvoids
+  | constant value =>
+      let binding : Fin 2 →
+          Source (carrierWidth inputs totalGates) prefixGates :=
+        binding2
+          (Source.input
+            (sourceLockSlot (inputs := inputs)
+              (occurrenceCoordinate gate side)))
+          (Source.input
+            (occurrenceSlot (inputs := inputs)
+              (occurrenceCoordinate gate side)))
+      have bindingAvoids :
+          ∀ bindingIndex,
+            sourceAvoidsInput (traceLockSlot (inputs := inputs) target)
+              (binding bindingIndex) := by
+        intro bindingIndex
+        dsimp only [binding]
+        unfold binding2
+        split
+        · simpa [CarrierSlot.encode] using
+            (carrierInputSource_avoids
+              (prefixGates := prefixGates)
+              (CarrierSlot.sourceLock (occurrenceCoordinate gate side))
+              (CarrierSlot.traceLock target) (by simp))
+        · simpa [CarrierSlot.encode] using
+            (carrierInputSource_avoids
+              (prefixGates := prefixGates)
+              (CarrierSlot.occurrence (occurrenceCoordinate gate side))
+              (CarrierSlot.traceLock target) (by simp))
+      cases value with
+      | false =>
+          change
+            programAvoidsInput (traceLockSlot (inputs := inputs) target)
+              (appendCandidateProgram initial binding constantZeroDirect)
+          exact appendCandidateProgram_avoidsInput
+            (traceLockSlot (inputs := inputs) target)
+            initial binding bindingAvoids constantZeroDirect initialAvoids
+      | true =>
+          change
+            programAvoidsInput (traceLockSlot (inputs := inputs) target)
+              (appendCandidateProgram initial binding constantOneDirect)
+          exact appendCandidateProgram_avoidsInput
+            (traceLockSlot (inputs := inputs) target)
+            initial binding bindingAvoids constantOneDirect initialAvoids
+  | gate index =>
+      let binding : Fin 3 →
+          Source (carrierWidth inputs totalGates) prefixGates :=
+        binding3
+          (Source.input
+            (sourceLockSlot (inputs := inputs)
+              (occurrenceCoordinate gate side)))
+          (Source.input
+            (occurrenceSlot (inputs := inputs)
+              (occurrenceCoordinate gate side)))
+          (Source.input
+            (traceSlot (inputs := inputs)
+              (Fin.castLE priorWithin index)))
+      have bindingAvoids :
+          ∀ bindingIndex,
+            sourceAvoidsInput (traceLockSlot (inputs := inputs) target)
+              (binding bindingIndex) := by
+        intro bindingIndex
+        dsimp only [binding]
+        unfold binding3
+        split
+        · simpa [CarrierSlot.encode] using
+            (carrierInputSource_avoids
+              (prefixGates := prefixGates)
+              (CarrierSlot.sourceLock (occurrenceCoordinate gate side))
+              (CarrierSlot.traceLock target) (by simp))
+        · split
+          · simpa [CarrierSlot.encode] using
+              (carrierInputSource_avoids
+                (prefixGates := prefixGates)
+                (CarrierSlot.occurrence
+                  (occurrenceCoordinate gate side))
+                (CarrierSlot.traceLock target) (by simp))
+          · simpa [CarrierSlot.encode] using
+              (carrierInputSource_avoids
+                (prefixGates := prefixGates)
+                (CarrierSlot.trace (Fin.castLE priorWithin index))
+                (CarrierSlot.traceLock target) (by simp))
+      change
+        programAvoidsInput (traceLockSlot (inputs := inputs) target)
+          (appendCandidateProgram initial binding equalityDirect)
+      exact appendCandidateProgram_avoidsInput
+        (traceLockSlot (inputs := inputs) target)
+        initial binding bindingAvoids equalityDirect initialAvoids
+
+private theorem appendTraceMacro_avoidsTraceLock
+    {inputs totalGates prefixGates : Nat}
+    (initial : Program (carrierWidth inputs totalGates) prefixGates)
+    (gate target : Fin totalGates) (gateDifferent : gate ≠ target)
+    (initialAvoids :
+      programAvoidsInput (traceLockSlot (inputs := inputs) target)
+        initial) :
+    programAvoidsInput (traceLockSlot (inputs := inputs) target)
+      (appendTraceMacro initial gate).program := by
+  let binding : Fin 4 →
+      Source (carrierWidth inputs totalGates) prefixGates :=
+    binding4
+      (Source.input (traceLockSlot (inputs := inputs) gate))
+      (Source.input (traceSlot (inputs := inputs) gate))
+      (Source.input (occurrenceSlot (inputs := inputs)
+        (occurrenceCoordinate gate .left)))
+      (Source.input (occurrenceSlot (inputs := inputs)
+        (occurrenceCoordinate gate .right)))
+  have bindingAvoids :
+      ∀ bindingIndex,
+        sourceAvoidsInput (traceLockSlot (inputs := inputs) target)
+          (binding bindingIndex) := by
+    intro bindingIndex
+    dsimp only [binding]
+    unfold binding4
+    split
+    · simpa [CarrierSlot.encode] using
+        (carrierInputSource_avoids
+          (prefixGates := prefixGates)
+          (CarrierSlot.traceLock gate)
+          (CarrierSlot.traceLock target) (by
+            intro equal
+            exact gateDifferent (CarrierSlot.traceLock.inj equal)))
+    · split
+      · simpa [CarrierSlot.encode] using
+          (carrierInputSource_avoids
+            (prefixGates := prefixGates)
+            (CarrierSlot.trace gate)
+            (CarrierSlot.traceLock target) (by simp))
+      · split
+        · simpa [CarrierSlot.encode] using
+            (carrierInputSource_avoids
+              (prefixGates := prefixGates)
+              (CarrierSlot.occurrence
+                (occurrenceCoordinate gate .left))
+              (CarrierSlot.traceLock target) (by simp))
+        · simpa [CarrierSlot.encode] using
+            (carrierInputSource_avoids
+              (prefixGates := prefixGates)
+              (CarrierSlot.occurrence
+                (occurrenceCoordinate gate .right))
+              (CarrierSlot.traceLock target) (by simp))
+  change
+    programAvoidsInput (traceLockSlot (inputs := inputs) target)
+      (appendCandidateProgram initial binding traceDirect)
+  exact appendCandidateProgram_avoidsInput
+    (traceLockSlot (inputs := inputs) target)
+    initial binding bindingAvoids traceDirect initialAvoids
+
+private theorem macroAssembly_avoidsSourceLock_after
+    {inputs gates totalGates : Nat}
+    (program : Program inputs gates) (within : gates ≤ totalGates)
+    (targetGate : Fin totalGates) (targetSide : OccurrenceSide)
+    (after : gates ≤ targetGate.val) :
+    programAvoidsInput
+      (sourceLockSlot (inputs := inputs)
+        (occurrenceCoordinate targetGate targetSide))
+      (macroAssembly program within).program := by
+  induction program with
+  | empty =>
+      trivial
+  | @snoc gates initial gate ih =>
+      let earlierWithin : gates ≤ totalGates :=
+        Nat.le_trans (Nat.le_succ gates) within
+      let coordinate : Fin totalGates :=
+        Fin.castLE within (Fin.last gates)
+      let earlier := macroAssembly initial earlierWithin
+      let left := appendSourceMacro earlier.program gate.left
+        earlierWithin coordinate .left
+      let right := appendSourceMacro left.program gate.right
+        earlierWithin coordinate .right
+      let trace := appendTraceMacro right.program coordinate
+      have coordinateNeTarget : coordinate ≠ targetGate := by
+        intro equal
+        have valueEqual := congrArg Fin.val equal
+        change gates = targetGate.val at valueEqual
+        omega
+      have occurrenceDifferent :
+          ∀ side,
+            occurrenceCoordinate coordinate side ≠
+              occurrenceCoordinate targetGate targetSide := by
+        intro side equal
+        exact coordinateNeTarget
+          (occurrenceCoordinate_injective equal).1
+      have earlierAvoids :
+          programAvoidsInput
+            (sourceLockSlot (inputs := inputs)
+              (occurrenceCoordinate targetGate targetSide))
+            earlier.program := by
+        exact ih earlierWithin (by omega)
+      have leftAvoids :
+          programAvoidsInput
+            (sourceLockSlot (inputs := inputs)
+              (occurrenceCoordinate targetGate targetSide))
+            left.program :=
+        appendSourceMacro_avoidsSourceLock earlier.program gate.left
+          earlierWithin coordinate .left
+          (occurrenceCoordinate targetGate targetSide)
+          (occurrenceDifferent .left) earlierAvoids
+      have rightAvoids :
+          programAvoidsInput
+            (sourceLockSlot (inputs := inputs)
+              (occurrenceCoordinate targetGate targetSide))
+            right.program :=
+        appendSourceMacro_avoidsSourceLock left.program gate.right
+          earlierWithin coordinate .right
+          (occurrenceCoordinate targetGate targetSide)
+          (occurrenceDifferent .right) leftAvoids
+      change
+        programAvoidsInput
+          (sourceLockSlot (inputs := inputs)
+            (occurrenceCoordinate targetGate targetSide))
+          trace.program
+      exact appendTraceMacro_avoidsSourceLock right.program coordinate
+        (occurrenceCoordinate targetGate targetSide) rightAvoids
+
+private theorem macroAssembly_avoidsTraceLock_after
+    {inputs gates totalGates : Nat}
+    (program : Program inputs gates) (within : gates ≤ totalGates)
+    (targetGate : Fin totalGates) (after : gates ≤ targetGate.val) :
+    programAvoidsInput (traceLockSlot (inputs := inputs) targetGate)
+      (macroAssembly program within).program := by
+  induction program with
+  | empty =>
+      trivial
+  | @snoc gates initial gate ih =>
+      let earlierWithin : gates ≤ totalGates :=
+        Nat.le_trans (Nat.le_succ gates) within
+      let coordinate : Fin totalGates :=
+        Fin.castLE within (Fin.last gates)
+      let earlier := macroAssembly initial earlierWithin
+      let left := appendSourceMacro earlier.program gate.left
+        earlierWithin coordinate .left
+      let right := appendSourceMacro left.program gate.right
+        earlierWithin coordinate .right
+      let trace := appendTraceMacro right.program coordinate
+      have coordinateNeTarget : coordinate ≠ targetGate := by
+        intro equal
+        have valueEqual := congrArg Fin.val equal
+        change gates = targetGate.val at valueEqual
+        omega
+      have earlierAvoids :
+          programAvoidsInput
+            (traceLockSlot (inputs := inputs) targetGate)
+            earlier.program := by
+        exact ih earlierWithin (by omega)
+      have leftAvoids :
+          programAvoidsInput
+            (traceLockSlot (inputs := inputs) targetGate)
+            left.program :=
+        appendSourceMacro_avoidsTraceLock earlier.program gate.left
+          earlierWithin coordinate .left targetGate earlierAvoids
+      have rightAvoids :
+          programAvoidsInput
+            (traceLockSlot (inputs := inputs) targetGate)
+            right.program :=
+        appendSourceMacro_avoidsTraceLock left.program gate.right
+          earlierWithin coordinate .right targetGate leftAvoids
+      change
+        programAvoidsInput (traceLockSlot (inputs := inputs) targetGate)
+          trace.program
+      exact appendTraceMacro_avoidsTraceLock right.program coordinate
+        targetGate coordinateNeTarget rightAvoids
+
+private theorem exposeEmpty_conditions {inputs : Nat} :
+    BaselineOutputConditions
+      (exposeAllGates (Program.empty : Program inputs 0)) := by
+  constructor
+  · intro output
+    exact Fin.elim0 output
+  · intro output
+    exact Fin.elim0 output
+  · intro leftOutput
+    exact Fin.elim0 leftOutput
+
+private theorem macroAssembly_conditions
+    {inputs gates totalGates : Nat}
+    (program : Program inputs gates) (within : gates ≤ totalGates) :
+    BaselineOutputConditions
+      (exposeAllGates (macroAssembly program within).program) := by
+  induction program with
+  | empty =>
+      exact exposeEmpty_conditions
+  | @snoc gates initial gate ih =>
+      let earlierWithin : gates ≤ totalGates :=
+        Nat.le_trans (Nat.le_succ gates) within
+      let coordinate : Fin totalGates :=
+        Fin.castLE within (Fin.last gates)
+      let earlier := macroAssembly initial earlierWithin
+      let left := appendSourceMacro earlier.program gate.left
+        earlierWithin coordinate .left
+      let right := appendSourceMacro left.program gate.right
+        earlierWithin coordinate .right
+      let trace := appendTraceMacro right.program coordinate
+      have earlierConditions :
+          BaselineOutputConditions (exposeAllGates earlier.program) :=
+        ih earlierWithin
+      have earlierAvoidsLeft :
+          programAvoidsInput
+            (sourceLockSlot (inputs := inputs)
+              (occurrenceCoordinate coordinate .left))
+            earlier.program :=
+        macroAssembly_avoidsSourceLock_after initial earlierWithin
+          coordinate .left (Nat.le_refl gates)
+      have leftConditions :
+          BaselineOutputConditions (exposeAllGates left.program) :=
+        appendSourceMacro_conditions earlier.program gate.left
+          earlierWithin coordinate .left earlierConditions
+          earlierAvoidsLeft
+      have earlierAvoidsRight :
+          programAvoidsInput
+            (sourceLockSlot (inputs := inputs)
+              (occurrenceCoordinate coordinate .right))
+            earlier.program :=
+        macroAssembly_avoidsSourceLock_after initial earlierWithin
+          coordinate .right (Nat.le_refl gates)
+      have leftAvoidsRight :
+          programAvoidsInput
+            (sourceLockSlot (inputs := inputs)
+              (occurrenceCoordinate coordinate .right))
+            left.program :=
+        appendSourceMacro_avoidsSourceLock earlier.program gate.left
+          earlierWithin coordinate .left
+          (occurrenceCoordinate coordinate .right)
+          (occurrenceCoordinate_left_ne_right coordinate)
+          earlierAvoidsRight
+      have rightConditions :
+          BaselineOutputConditions (exposeAllGates right.program) :=
+        appendSourceMacro_conditions left.program gate.right
+          earlierWithin coordinate .right leftConditions
+          leftAvoidsRight
+      have earlierAvoidsTrace :
+          programAvoidsInput (traceLockSlot (inputs := inputs) coordinate)
+            earlier.program :=
+        macroAssembly_avoidsTraceLock_after initial earlierWithin
+          coordinate (Nat.le_refl gates)
+      have leftAvoidsTrace :
+          programAvoidsInput (traceLockSlot (inputs := inputs) coordinate)
+            left.program :=
+        appendSourceMacro_avoidsTraceLock earlier.program gate.left
+          earlierWithin coordinate .left coordinate earlierAvoidsTrace
+      have rightAvoidsTrace :
+          programAvoidsInput (traceLockSlot (inputs := inputs) coordinate)
+            right.program :=
+        appendSourceMacro_avoidsTraceLock left.program gate.right
+          earlierWithin coordinate .right coordinate leftAvoidsTrace
+      have traceConditions :
+          BaselineOutputConditions (exposeAllGates trace.program) :=
+        appendTraceMacro_conditions right.program coordinate
+          rightConditions rightAvoidsTrace
+      change
+        BaselineOutputConditions (exposeAllGates trace.program)
+      exact traceConditions
+
+private def prependValuation {inputs : Nat} (head : Bool)
+    (tail : Valuation inputs) : Valuation (inputs + 1) :=
+  fun index =>
+    if atHead : index.val = 0 then head
+    else tail ⟨index.val - 1, by omega⟩
+
+private theorem prependValuation_zero {inputs : Nat} (head : Bool)
+    (tail : Valuation inputs) :
+    prependValuation head tail ⟨0, by omega⟩ = head := by
+  simp [prependValuation]
+
+private theorem prependValuation_succ {inputs : Nat} (head : Bool)
+    (tail : Valuation inputs) (index : Fin inputs) :
+    prependValuation head tail index.succ = tail index := by
+  simp [prependValuation]
+
+private theorem exposeRenameSucc_semantics
+    {inputs gates : Nat} (program : Program inputs gates)
+    (head : Bool) (input : Valuation inputs) (output : Fin gates) :
+    (exposeAllGates (program.renameInputs Fin.succ)).semantics
+        (prependValuation head input) output =
+      (exposeAllGates program).semantics input output := by
+  unfold Candidate.semantics DirectWire.semantics DirectWireWord.eval
+  rw [exposeAllGates_source, exposeAllGates_source]
+  change
+    (program.renameInputs Fin.succ).eval
+        (prependValuation head input) output =
+      program.eval input output
+  rw [Program.eval_renameInputs]
+  apply congrArg (fun valuation => program.eval valuation output)
+  funext index
+  exact prependValuation_succ head input index
+
+private theorem OutputNonconstant.notConstantValue
+    {inputs gates outputs : Nat}
+    {candidate : Candidate inputs gates outputs}
+    {output : Fin outputs}
+    (nonconstant : OutputNonconstant candidate output)
+    (value : Bool) :
+    ∃ valuation, candidate.semantics valuation output ≠ value := by
+  obtain ⟨left, right, different⟩ := nonconstant
+  by_cases leftDifferent :
+      candidate.semantics left output ≠ value
+  · exact ⟨left, leftDifferent⟩
+  · by_cases rightDifferent :
+      candidate.semantics right output ≠ value
+    · exact ⟨right, rightDifferent⟩
+    · exact False.elim (different
+        ((boolEqual_of_not_ne _ _ leftDifferent).trans
+          (boolEqual_of_not_ne _ _ rightDifferent).symm))
+
+private theorem exposeRenameSucc_conditions
+    {inputs gates : Nat} (program : Program inputs gates)
+    (conditions : BaselineOutputConditions (exposeAllGates program)) :
+    BaselineOutputConditions
+      (exposeAllGates (program.renameInputs Fin.succ)) := by
+  constructor
+  · intro output
+    obtain ⟨left, right, different⟩ :=
+      conditions.nonconstant output
+    refine ⟨prependValuation false left,
+      prependValuation false right, ?_⟩
+    simpa only [exposeRenameSucc_semantics] using different
+  · intro output queried
+    by_cases atHead : queried.val = 0
+    · have queriedEqual : queried = ⟨0, by omega⟩ := Fin.ext atHead
+      obtain ⟨valuation, different⟩ :=
+        OutputNonconstant.notConstantValue
+          (conditions.nonconstant output) false
+      refine ⟨prependValuation false valuation, ?_⟩
+      rw [exposeRenameSucc_semantics, queriedEqual,
+        prependValuation_zero]
+      exact different
+    · let oldIndex : Fin inputs :=
+        ⟨queried.val - 1, by omega⟩
+      have queriedPositive : 0 < queried.val :=
+        Nat.pos_of_ne_zero atHead
+      have queriedEqual : queried = oldIndex.succ := by
+        apply Fin.ext
+        simp only [Fin.val_succ]
+        dsimp only [oldIndex]
+        omega
+      obtain ⟨valuation, different⟩ :=
+        conditions.notPositiveProjection output oldIndex
+      refine ⟨prependValuation false valuation, ?_⟩
+      rw [exposeRenameSucc_semantics, queriedEqual,
+        prependValuation_succ]
+      exact different
+  · intro leftOutput rightOutput outputDifferent
+    obtain ⟨valuation, different⟩ :=
+      conditions.pairwiseDistinct outputDifferent
+    refine ⟨prependValuation false valuation, ?_⟩
+    simpa only [exposeRenameSucc_semantics] using different
+
+private theorem sourceRenameSucc_avoidsZero
+    {inputs gates : Nat} (source : Source inputs gates) :
+    sourceAvoidsInput (⟨0, by omega⟩ : Fin (inputs + 1))
+      (source.renameInputs Fin.succ) := by
+  cases source with
+  | input index =>
+      intro equal
+      have valueEqual := congrArg Fin.val equal
+      simp at valueEqual
+  | constant value => trivial
+  | gate index => trivial
+
+private theorem programRenameSucc_avoidsZero
+    {inputs gates : Nat} (program : Program inputs gates) :
+    programAvoidsInput (⟨0, by omega⟩ : Fin (inputs + 1))
+      (program.renameInputs Fin.succ) := by
+  induction program with
+  | empty =>
+      trivial
+  | snoc initial gate ih =>
+      exact ⟨ih,
+        sourceRenameSucc_avoidsZero gate.left,
+        sourceRenameSucc_avoidsZero gate.right⟩
+
+private theorem prefixConjunction_constant (tailChecks : Nat)
+    (value : Bool) :
+    prefixConjunction
+        (List.ofFn (fun _ : Fin (tailChecks + 1) => value)) =
+      value := by
+  rw [prefixConjunction_spec]
+  cases value with
+  | false =>
+      rw [List.ofFn_succ]
+      rfl
+  | true =>
+      induction tailChecks with
+      | zero => rfl
+      | succ tailChecks ih =>
+          rw [List.ofFn_succ]
+          simp only [allChecks, Bool.true_and]
+          exact ih
+
+private def prefixStepValuation (tailChecks : Nat)
+    (valuation : Valuation 2) : Valuation (tailChecks + 2) :=
+  fun index =>
+    if index.val = 0 then valuation fin2One
+    else valuation fin2Zero
+
+private theorem prefixStepValuation_zero (tailChecks : Nat)
+    (valuation : Valuation 2) :
+    prefixStepValuation tailChecks valuation ⟨0, by omega⟩ =
+      valuation fin2One := by
+  simp [prefixStepValuation]
+
+private theorem prefixStepValuation_succ (tailChecks : Nat)
+    (valuation : Valuation 2) (index : Fin (tailChecks + 1)) :
+    prefixStepValuation tailChecks valuation index.succ =
+      valuation fin2Zero := by
+  simp [prefixStepValuation]
+
+private theorem renamedPrefixOutput_step
+    (tailChecks : Nat) (valuation : Valuation 2) :
+    let earlier := nonemptyPrefixAssembly tailChecks
+    (earlier.output.renameInputs Fin.succ).eval
+        (prefixStepValuation tailChecks valuation)
+        ((earlier.program.renameInputs Fin.succ).eval
+          (prefixStepValuation tailChecks valuation)) =
+      valuation fin2Zero := by
+  let earlier := nonemptyPrefixAssembly tailChecks
+  have inputEqual :
+      (fun index : Fin (tailChecks + 1) =>
+        prefixStepValuation tailChecks valuation index.succ) =
+        (fun _ => valuation fin2Zero) := by
+    funext index
+    exact prefixStepValuation_succ tailChecks valuation index
+  have gateEqual :
+      ∀ gate,
+        (earlier.program.renameInputs Fin.succ).eval
+            (prefixStepValuation tailChecks valuation) gate =
+          earlier.program.eval (fun _ => valuation fin2Zero) gate := by
+    intro gate
+    rw [Program.eval_renameInputs]
+    exact congrArg (fun input => earlier.program.eval input gate)
+      inputEqual
+  dsimp only [earlier]
+  rw [Source.eval_renameInputs]
+  rw [(nonemptyPrefixAssembly tailChecks).output.eval_congr
+    (fun index => congrFun inputEqual index) gateEqual]
+  have semantic :=
+    nonemptyPrefixCandidate_semantics tailChecks
+      (fun _ => valuation fin2Zero)
+  unfold Candidate.semantics DirectWire.semantics
+    DirectWireWord.eval at semantic
+  rw [nonemptyPrefixCandidate_output_source] at semantic
+  change
+    earlier.output.eval (fun _ => valuation fin2Zero)
+        (earlier.program.eval fun _ => valuation fin2Zero) =
+      prefixConjunction
+        (List.ofFn (fun _ : Fin (tailChecks + 1) =>
+          valuation fin2Zero)) at semantic
+  rw [semantic, prefixConjunction_constant]
+
+private def prefixStepLift (tailChecks : Nat) :
+    let earlier := nonemptyPrefixAssembly tailChecks
+    let renamedProgram := earlier.program.renameInputs Fin.succ
+    let renamedOutput := earlier.output.renameInputs Fin.succ
+    let newest : Source (tailChecks + 2) (2 * tailChecks) :=
+      .input ⟨0, by omega⟩
+    LocalBlockLift renamedProgram
+      (binding2 renamedOutput newest) fin2One ⟨0, by omega⟩ := by
+  dsimp only
+  refine
+    { lift := prefixStepValuation tailChecks
+      bindingValues := ?_
+      targetValue := ?_
+      preservesDifference := ?_ }
+  · intro valuation index
+    by_cases indexZero : index.val = 0
+    · have indexEqual : index = fin2Zero := Fin.ext indexZero
+      subst index
+      change
+        ((nonemptyPrefixAssembly tailChecks).output.renameInputs
+          Fin.succ).eval
+            (prefixStepValuation tailChecks valuation)
+            (((nonemptyPrefixAssembly tailChecks).program.renameInputs
+              Fin.succ).eval
+                (prefixStepValuation tailChecks valuation)) =
+          valuation fin2Zero
+      exact renamedPrefixOutput_step tailChecks valuation
+    · have indexOne : index.val = 1 := by omega
+      have indexEqual : index = fin2One := Fin.ext indexOne
+      subst index
+      change
+        prefixStepValuation tailChecks valuation ⟨0, by omega⟩ =
+          valuation fin2One
+      exact prefixStepValuation_zero tailChecks valuation
+  · intro valuation
+    exact prefixStepValuation_zero tailChecks valuation
+  · intro left right differs
+    constructor
+    · simpa [prefixStepValuation] using differs.1
+    · intro index indexNeZero
+      have valueNeZero : index.val ≠ 0 :=
+        fun valueEqual => indexNeZero (Fin.ext valueEqual)
+      simpa only [prefixStepValuation, if_neg valueNeZero] using
+        differs.2 fin2Zero (by decide)
+
+private theorem nonemptyPrefixAssembly_conditions (tailChecks : Nat) :
+    BaselineOutputConditions
+      (exposeAllGates (nonemptyPrefixAssembly tailChecks).program) := by
+  induction tailChecks with
+  | zero =>
+      exact exposeEmpty_conditions
+  | succ tailChecks ih =>
+      let earlier := nonemptyPrefixAssembly tailChecks
+      let renamedProgram := earlier.program.renameInputs Fin.succ
+      let renamedOutput := earlier.output.renameInputs Fin.succ
+      let newest : Source (tailChecks + 2) (2 * tailChecks) :=
+        .input ⟨0, by omega⟩
+      let binding := binding2 renamedOutput newest
+      have renamedConditions :
+          BaselineOutputConditions (exposeAllGates renamedProgram) :=
+        exposeRenameSucc_conditions earlier.program ih
+      have renamedAvoids :
+          programAvoidsInput (⟨0, by omega⟩ : Fin (tailChecks + 2))
+            renamedProgram :=
+        programRenameSucc_avoidsZero earlier.program
+      change
+        BaselineOutputConditions
+          (exposeAllGates
+            (appendCandidateProgram renamedProgram binding
+              prefixAndDirect))
+      exact appendFreshSquareBlock_conditions renamedProgram binding
+        prefixAndDirect prefixAndDirect_output_source
+        fin2One ⟨0, by omega⟩ (prefixStepLift tailChecks)
+        renamedConditions renamedAvoids
+        prefixAndDirect_baselineOutputConditions
+        prefixAndDirect_rightEssential
+
+private theorem exposeRenameSucc_essential
+    {inputs gates : Nat} (program : Program inputs gates)
+    (target : Fin inputs) (output : Fin gates)
+    (essential :
+      OutputEssentialAt (exposeAllGates program) target output) :
+    OutputEssentialAt
+      (exposeAllGates (program.renameInputs Fin.succ))
+      target.succ output := by
+  obtain ⟨left, right, differs, semanticDifferent⟩ := essential
+  refine ⟨prependValuation false left,
+    prependValuation false right, ?_, ?_⟩
+  · constructor
+    · simpa only [prependValuation_succ] using differs.1
+    · intro index indexNeTarget
+      by_cases atHead : index.val = 0
+      · have indexEqual : index = ⟨0, by omega⟩ := Fin.ext atHead
+        rw [indexEqual]
+        rfl
+      · let oldIndex : Fin inputs := ⟨index.val - 1, by omega⟩
+        have indexPositive : 0 < index.val :=
+          Nat.pos_of_ne_zero atHead
+        have indexEqual : index = oldIndex.succ := by
+          apply Fin.ext
+          simp only [Fin.val_succ]
+          dsimp only [oldIndex]
+          omega
+        have oldNeTarget : oldIndex ≠ target := by
+          intro equal
+          apply indexNeTarget
+          rw [indexEqual, equal]
+        rw [indexEqual, prependValuation_succ,
+          prependValuation_succ]
+        exact differs.2 oldIndex oldNeTarget
+  · simpa only [exposeRenameSucc_semantics] using semanticDifferent
+
+private theorem appendedExpose_prefix_essential
+    {outerInputs innerInputs prefixGates suffixGates : Nat}
+    (initial : Program outerInputs prefixGates)
+    (binding : Fin innerInputs → Source outerInputs prefixGates)
+    (block : Candidate innerInputs suffixGates suffixGates)
+    (target : Fin outerInputs) (output : Fin prefixGates)
+    (essential :
+      OutputEssentialAt (exposeAllGates initial) target output) :
+    OutputEssentialAt
+      (exposeAllGates
+        (appendCandidateProgram initial binding block))
+      target (Fin.castAdd suffixGates output) := by
+  obtain ⟨left, right, differs, semanticDifferent⟩ := essential
+  refine ⟨left, right, differs, ?_⟩
+  simpa only [appendedExpose_prefix_semantics] using semanticDifferent
+
+private def singleTargetValuation {inputs : Nat}
+    (target : Fin inputs) (value : Bool) : Valuation inputs :=
+  fun index => if index = target then value else true
+
+private theorem prefixConjunction_singleTarget
+    {inputs : Nat} (target : Fin inputs) (value : Bool) :
+    prefixConjunction
+        (List.ofFn (singleTargetValuation target value)) =
+      value := by
+  cases value with
+  | true =>
+      have valuationEqual :
+          singleTargetValuation target true = (fun _ => true) := by
+        funext index
+        simp [singleTargetValuation]
+      rw [valuationEqual]
+      have positive : 0 < inputs :=
+        Nat.zero_lt_of_lt target.isLt
+      have sizeEqual : inputs - 1 + 1 = inputs := by omega
+      have listEqual :
+          List.ofFn (fun _ : Fin (inputs - 1 + 1) => true) =
+            List.ofFn (fun _ : Fin inputs => true) := by
+        simpa using
+          list_ofFn_finCast sizeEqual
+            (fun _ : Fin inputs => true)
+      rw [← listEqual]
+      exact prefixConjunction_constant (inputs - 1) true
+  | false =>
+      cases result :
+          prefixConjunction
+            (List.ofFn (singleTargetValuation target false)) with
+      | false => rfl
+      | true =>
+          have allTrue :=
+            (prefixConjunction_eq_true_iff
+              (List.ofFn
+                (singleTargetValuation target false))).mp result
+          let items :=
+            List.ofFn (singleTargetValuation target false)
+          have lengthEqual : items.length = inputs := by
+            simp [items]
+          let position : Fin items.length :=
+            Fin.cast lengthEqual.symm target
+          have valueEqual : items.get position = false := by
+            simp [items, position, singleTargetValuation]
+          have member : false ∈ items := by
+            rw [← valueEqual]
+            exact List.get_mem items position
+          exact Bool.noConfusion (allTrue false member)
+
+private theorem renamedPrefixOutput_semantics
+    (tailChecks : Nat) (head : Bool)
+    (input : Valuation (tailChecks + 1)) :
+    let earlier := nonemptyPrefixAssembly tailChecks
+    (earlier.output.renameInputs Fin.succ).eval
+        (prependValuation head input)
+        ((earlier.program.renameInputs Fin.succ).eval
+          (prependValuation head input)) =
+      prefixConjunction (List.ofFn input) := by
+  let earlier := nonemptyPrefixAssembly tailChecks
+  have gateEqual :
+      ∀ gate,
+        (earlier.program.renameInputs Fin.succ).eval
+            (prependValuation head input) gate =
+          earlier.program.eval input gate := by
+    intro gate
+    rw [Program.eval_renameInputs]
+    apply congrArg (fun valuation => earlier.program.eval valuation gate)
+    funext index
+    exact prependValuation_succ head input index
+  dsimp only [earlier]
+  rw [Source.eval_renameInputs]
+  rw [(nonemptyPrefixAssembly tailChecks).output.eval_congr
+    (fun index => prependValuation_succ head input index) gateEqual]
+  have semantic :=
+    nonemptyPrefixCandidate_semantics tailChecks input
+  unfold Candidate.semantics DirectWire.semantics
+    DirectWireWord.eval at semantic
+  rw [nonemptyPrefixCandidate_output_source] at semantic
+  exact semantic
+
+private def prefixOldTargetValuation (tailChecks : Nat)
+    (target : Fin (tailChecks + 1)) (valuation : Valuation 2) :
+    Valuation (tailChecks + 2) :=
+  prependValuation (valuation fin2One)
+    (singleTargetValuation target (valuation fin2Zero))
+
+private def prefixOldTargetLift (tailChecks : Nat)
+    (target : Fin (tailChecks + 1)) :
+    let earlier := nonemptyPrefixAssembly tailChecks
+    let renamedProgram := earlier.program.renameInputs Fin.succ
+    let renamedOutput := earlier.output.renameInputs Fin.succ
+    let newest : Source (tailChecks + 2) (2 * tailChecks) :=
+      .input ⟨0, by omega⟩
+    LocalBlockLift renamedProgram
+      (binding2 renamedOutput newest) fin2Zero target.succ := by
+  dsimp only
+  refine
+    { lift := prefixOldTargetValuation tailChecks target
+      bindingValues := ?_
+      targetValue := ?_
+      preservesDifference := ?_ }
+  · intro valuation index
+    by_cases indexZero : index.val = 0
+    · have indexEqual : index = fin2Zero := Fin.ext indexZero
+      subst index
+      change
+        ((nonemptyPrefixAssembly tailChecks).output.renameInputs
+          Fin.succ).eval
+            (prefixOldTargetValuation tailChecks target valuation)
+            (((nonemptyPrefixAssembly tailChecks).program.renameInputs
+              Fin.succ).eval
+                (prefixOldTargetValuation tailChecks target valuation)) =
+          valuation fin2Zero
+      rw [show prefixOldTargetValuation tailChecks target valuation =
+          prependValuation (valuation fin2One)
+            (singleTargetValuation target
+              (valuation fin2Zero)) from rfl]
+      rw [renamedPrefixOutput_semantics,
+        prefixConjunction_singleTarget]
+    · have indexOne : index.val = 1 := by omega
+      have indexEqual : index = fin2One := Fin.ext indexOne
+      subst index
+      change
+        prefixOldTargetValuation tailChecks target valuation
+            ⟨0, by omega⟩ =
+          valuation fin2One
+      exact prependValuation_zero _ _
+  · intro valuation
+    change
+      prefixOldTargetValuation tailChecks target valuation
+          target.succ =
+        valuation fin2Zero
+    rw [show prefixOldTargetValuation tailChecks target valuation =
+        prependValuation (valuation fin2One)
+          (singleTargetValuation target
+            (valuation fin2Zero)) from rfl]
+    rw [prependValuation_succ]
+    simp [singleTargetValuation]
+  · intro left right differs
+    constructor
+    · change
+        prefixOldTargetValuation tailChecks target left target.succ ≠
+          prefixOldTargetValuation tailChecks target right target.succ
+      rw [show prefixOldTargetValuation tailChecks target left =
+          prependValuation (left fin2One)
+            (singleTargetValuation target (left fin2Zero)) from rfl,
+        show prefixOldTargetValuation tailChecks target right =
+          prependValuation (right fin2One)
+            (singleTargetValuation target (right fin2Zero)) from rfl,
+        prependValuation_succ, prependValuation_succ]
+      simpa [singleTargetValuation] using differs.1
+    · intro index indexNeTarget
+      by_cases atHead : index.val = 0
+      · have indexEqual : index = ⟨0, by omega⟩ := Fin.ext atHead
+        rw [indexEqual]
+        change left fin2One = right fin2One
+        exact differs.2 fin2One (by decide)
+      · let oldIndex : Fin (tailChecks + 1) :=
+          ⟨index.val - 1, by omega⟩
+        have indexPositive : 0 < index.val :=
+          Nat.pos_of_ne_zero atHead
+        have indexEqual : index = oldIndex.succ := by
+          apply Fin.ext
+          simp only [Fin.val_succ]
+          dsimp only [oldIndex]
+          omega
+        have oldNeTarget : oldIndex ≠ target := by
+          intro equal
+          apply indexNeTarget
+          rw [indexEqual, equal]
+        rw [indexEqual]
+        change
+          singleTargetValuation target (left fin2Zero) oldIndex =
+            singleTargetValuation target (right fin2Zero) oldIndex
+        simp [singleTargetValuation, oldNeTarget]
+
+private theorem appendedPrefix_oldTargetEssential
+    (tailChecks : Nat) (target : Fin (tailChecks + 1))
+    (output : Fin 2) :
+    let earlier := nonemptyPrefixAssembly tailChecks
+    let renamedProgram := earlier.program.renameInputs Fin.succ
+    let renamedOutput := earlier.output.renameInputs Fin.succ
+    let newest : Source (tailChecks + 2) (2 * tailChecks) :=
+      .input ⟨0, by omega⟩
+    let binding := binding2 renamedOutput newest
+    OutputEssentialAt
+      (exposeAllGates
+        (appendCandidateProgram renamedProgram binding prefixAndDirect))
+      target.succ (Fin.natAdd (2 * tailChecks) output) := by
+  dsimp only
+  exact appendedExpose_suffix_essential
+    ((nonemptyPrefixAssembly tailChecks).program.renameInputs Fin.succ)
+    (binding2
+      ((nonemptyPrefixAssembly tailChecks).output.renameInputs Fin.succ)
+      (.input ⟨0, by omega⟩))
+    prefixAndDirect prefixAndDirect_output_source
+    fin2Zero target.succ
+    (prefixOldTargetLift tailChecks target) output
+    (prefixAndDirect_leftEssential output)
+
+private theorem appendedPrefix_newestEssential
+    (tailChecks : Nat) (output : Fin 2) :
+    let earlier := nonemptyPrefixAssembly tailChecks
+    let renamedProgram := earlier.program.renameInputs Fin.succ
+    let renamedOutput := earlier.output.renameInputs Fin.succ
+    let newest : Source (tailChecks + 2) (2 * tailChecks) :=
+      .input ⟨0, by omega⟩
+    let binding := binding2 renamedOutput newest
+    OutputEssentialAt
+      (exposeAllGates
+        (appendCandidateProgram renamedProgram binding prefixAndDirect))
+      ⟨0, by omega⟩ (Fin.natAdd (2 * tailChecks) output) := by
+  dsimp only
+  exact appendedExpose_suffix_essential
+    ((nonemptyPrefixAssembly tailChecks).program.renameInputs Fin.succ)
+    (binding2
+      ((nonemptyPrefixAssembly tailChecks).output.renameInputs Fin.succ)
+      (.input ⟨0, by omega⟩))
+    prefixAndDirect prefixAndDirect_output_source
+    fin2One ⟨0, by omega⟩
+    (prefixStepLift tailChecks) output
+    (prefixAndDirect_rightEssential output)
+
+/-- Every prefix gate depends on both of the two oldest checks.  Under the
+    front-insertion recursion these are the final two local input
+    coordinates, and they remain common anchors for the entire fold. -/
+private theorem nonemptyPrefixAssembly_lastTwoEssential
+    (earlierChecks : Nat) :
+    let tailChecks := earlierChecks + 1
+    let candidate :=
+      exposeAllGates (nonemptyPrefixAssembly tailChecks).program
+    ∀ output,
+      OutputEssentialAt candidate
+          (Fin.last (earlierChecks + 1)) output ∧
+        OutputEssentialAt candidate
+          ⟨earlierChecks, by omega⟩ output := by
+  dsimp only
+  induction earlierChecks with
+  | zero =>
+      intro output
+      have suffixForm :
+          ∃ localOutput : Fin 2,
+            output = Fin.natAdd 0 localOutput := by
+        exact ⟨Fin.cast (by omega) output, Fin.ext (by simp)⟩
+      obtain ⟨localOutput, outputEqual⟩ := suffixForm
+      subst output
+      constructor
+      · have targetEqual :
+            fin1Zero.succ = Fin.last 1 := Fin.ext rfl
+        rw [← targetEqual]
+        simpa [nonemptyPrefixAssembly] using
+          appendedPrefix_oldTargetEssential 0 fin1Zero localOutput
+      · simpa [nonemptyPrefixAssembly] using
+          appendedPrefix_newestEssential 0 localOutput
+  | succ earlierChecks ih =>
+      let oldAssembly :=
+        nonemptyPrefixAssembly (earlierChecks + 1)
+      let renamedProgram := oldAssembly.program.renameInputs Fin.succ
+      let renamedOutput := oldAssembly.output.renameInputs Fin.succ
+      let newest :
+          Source (earlierChecks + 3) (2 * (earlierChecks + 1)) :=
+        .input ⟨0, by omega⟩
+      let binding := binding2 renamedOutput newest
+      intro output
+      cases finSum_decompose output with
+      | inl prefixCase =>
+          rcases prefixCase with ⟨oldOutput, outputEqual⟩
+          subst output
+          obtain ⟨oldLastEssential, oldSecondEssential⟩ :=
+            ih oldOutput
+          have renamedLastEssential :=
+            exposeRenameSucc_essential oldAssembly.program
+              (Fin.last (earlierChecks + 1)) oldOutput
+              oldLastEssential
+          have renamedSecondEssential :=
+            exposeRenameSucc_essential oldAssembly.program
+              ⟨earlierChecks, by omega⟩ oldOutput
+              oldSecondEssential
+          constructor
+          · simpa [oldAssembly, renamedProgram, renamedOutput, newest,
+              binding, nonemptyPrefixAssembly] using
+              appendedExpose_prefix_essential renamedProgram binding
+                prefixAndDirect
+                (Fin.last (earlierChecks + 1)).succ oldOutput
+                renamedLastEssential
+          · simpa [oldAssembly, renamedProgram, renamedOutput, newest,
+              binding, nonemptyPrefixAssembly] using
+              appendedExpose_prefix_essential renamedProgram binding
+                prefixAndDirect
+                (⟨earlierChecks, by omega⟩ :
+                  Fin (earlierChecks + 2)).succ oldOutput
+                renamedSecondEssential
+      | inr suffixCase =>
+          rcases suffixCase with ⟨localOutput, outputEqual⟩
+          subst output
+          constructor
+          · simpa [oldAssembly, renamedProgram, renamedOutput, newest,
+              binding, nonemptyPrefixAssembly] using
+              appendedPrefix_oldTargetEssential
+                (earlierChecks + 1)
+                (Fin.last (earlierChecks + 1)) localOutput
+          · have targetEqual :
+                (⟨earlierChecks, by omega⟩ :
+                  Fin (earlierChecks + 2)).succ =
+                  (⟨earlierChecks + 1, by omega⟩ :
+                    Fin (earlierChecks + 3)) := Fin.ext rfl
+            have anchorEssential :=
+              appendedPrefix_oldTargetEssential
+                (earlierChecks + 1)
+                ⟨earlierChecks, by omega⟩ localOutput
+            rw [targetEqual] at anchorEssential
+            simpa [oldAssembly, renamedProgram, renamedOutput, newest,
+              binding, nonemptyPrefixAssembly] using
+              anchorEssential
+
+/-! ## Realizing arbitrary distinguished-check valuations -/
+
+private def sourceCheckIndex {gates : Nat}
+    (occurrence : Fin (2 * gates)) : Fin (3 * gates) :=
+  ⟨occurrence.val + occurrence.val / 2, by omega⟩
+
+private def traceCheckIndex {gates : Nat}
+    (gate : Fin gates) : Fin (3 * gates) :=
+  ⟨3 * gate.val + 2, by omega⟩
+
+private theorem sourceCheckIndex_left {gates : Nat}
+    (gate : Fin gates) :
+    sourceCheckIndex (occurrenceCoordinate gate .left) =
+      ⟨3 * gate.val, by omega⟩ := by
+  apply Fin.ext
+  simp [sourceCheckIndex, occurrenceCoordinate]
+  omega
+
+private theorem sourceCheckIndex_right {gates : Nat}
+    (gate : Fin gates) :
+    sourceCheckIndex (occurrenceCoordinate gate .right) =
+      ⟨3 * gate.val + 1, by omega⟩ := by
+  apply Fin.ext
+  simp [sourceCheckIndex, occurrenceCoordinate]
+  omega
+
+private def checkCarrierValuation {inputs gates : Nat}
+    (program : Program inputs gates) (input : Valuation inputs)
+    (checks : Valuation (3 * gates)) :
+    CarrierValuation inputs gates :=
+  let coherent := coherentExtension program input
+  { primary := coherent.primary
+    trace := coherent.trace
+    occurrence := coherent.occurrence
+    sourceLock := fun occurrence => checks (sourceCheckIndex occurrence)
+    traceLock := fun gate => checks (traceCheckIndex gate)
+    finalLock := coherent.finalLock }
+
+private theorem sourceCheck_coherentLock
+    {inputs gates : Nat} (source : Source inputs gates)
+    (lock : Bool) (input : Valuation inputs)
+    (trace : Valuation gates) :
+    sourceCheck source lock (source.eval input trace) input trace =
+      lock := by
+  cases source with
+  | input index =>
+      rw [sourceCheck, equalityMacro_distinguished_spec]
+      simp [Source.eval, boolEq_eq_true_iff]
+  | constant value =>
+      cases value with
+      | false =>
+          rw [sourceCheck, constantZeroMacro_distinguished_spec]
+          cases lock <;> rfl
+      | true =>
+          rw [sourceCheck, constantOneMacro_distinguished_spec]
+          cases lock <;> rfl
+  | gate index =>
+      rw [sourceCheck, equalityMacro_distinguished_spec]
+      simp [Source.eval, boolEq_eq_true_iff]
+
+private theorem traceCheck_coherentLock
+    (lock left right : Bool) :
+    traceCheck lock (boolNand left right) left right = lock := by
+  rw [traceCheck, traceMacro_distinguished_spec]
+  simp [boolEq_eq_true_iff]
+
+private theorem checkCarrierValuation_restrict
+    {inputs gates : Nat} (initial : Program inputs gates)
+    (gate : Gate inputs gates) (input : Valuation inputs)
+    (checks : Valuation (3 * (gates + 1))) :
+    (checkCarrierValuation (.snoc initial gate) input checks).restrict =
+      checkCarrierValuation initial input
+        (fun index => checks (Fin.castAdd 3 index)) := by
+  apply CarrierValuation.ext
+  · rfl
+  · funext index
+    exact Program.eval_snoc_castSucc initial gate input index
+  · funext index
+    exact coherentOccurrences_snoc_earlier initial gate input index
+  · funext index
+    apply congrArg checks
+    apply Fin.ext
+    rfl
+  · funext index
+    apply congrArg checks
+    apply Fin.ext
+    rfl
+  · rfl
+
+private theorem gateChecks_checkCarrierValuation
+    {inputs gates : Nat} (initial : Program inputs gates)
+    (gate : Gate inputs gates) (input : Valuation inputs)
+    (checks : Valuation (3 * (gates + 1))) :
+    gateChecks gate
+        (checkCarrierValuation (.snoc initial gate) input checks) =
+      [checks ⟨3 * gates, by omega⟩,
+       checks ⟨3 * gates + 1, by omega⟩,
+       checks ⟨3 * gates + 2, by omega⟩] := by
+  unfold gateChecks
+  simp only [checkCarrierValuation, coherentExtension,
+    CarrierValuation.sourceLockAt, CarrierValuation.occurrenceAt,
+    coherentOccurrences_snoc_left,
+    coherentOccurrences_snoc_right, Program.eval_snoc_castSucc,
+    sourceCheckIndex_left, sourceCheckIndex_right]
+  rw [sourceCheck_coherentLock, sourceCheck_coherentLock]
+  rw [Program.eval_snoc_last]
+  unfold Gate.eval
+  rw [traceCheck_coherentLock]
+  congr 2
+
+private theorem listOfFn_add_three (count : Nat)
+    (valuation : Valuation (count + 3)) :
+    List.ofFn
+          (fun index : Fin count =>
+            valuation (Fin.castAdd 3 index)) ++
+        [valuation ⟨count, by omega⟩,
+         valuation ⟨count + 1, by omega⟩,
+         valuation ⟨count + 2, by omega⟩] =
+      List.ofFn valuation := by
+  apply List.ext_getElem
+  · simp
+  · intro index leftWithin rightWithin
+    rw [List.getElem_ofFn]
+    by_cases inPrefix : index < count
+    · simp [inPrefix]
+    · have cases : index = count ∨
+          index = count + 1 ∨ index = count + 2 := by
+        simp only [List.length_append, List.length_ofFn,
+          List.length_cons, List.length_nil] at leftWithin
+        omega
+      rcases cases with equal | equal | equal
+      · subst index
+        simp
+      · subst index
+        simp
+      · subst index
+        simp
+
+private theorem distinguishedChecks_checkCarrierValuation
+    {inputs gates : Nat} (program : Program inputs gates)
+    (input : Valuation inputs) (checks : Valuation (3 * gates)) :
+    distinguishedChecks program
+        (checkCarrierValuation program input checks) =
+      List.ofFn checks := by
+  induction program with
+  | empty =>
+      rfl
+  | @snoc gates initial gate ih =>
+      rw [distinguishedChecks,
+        checkCarrierValuation_restrict,
+        ih,
+        gateChecks_checkCarrierValuation]
+      simpa [Nat.mul_add, Nat.mul_one, Nat.add_assoc] using
+        listOfFn_add_three (3 * gates) checks
+
+private def checkRealization {inputs : Nat}
+    (circuit : Circuit inputs)
+    (checks : Valuation (3 * circuit.gateCount)) :
+    Valuation (carrierWidth inputs circuit.gateCount) :=
+  flattenCarrier
+    (checkCarrierValuation circuit.program (fun _ => false) checks)
+
+private theorem macroCheckSource_checkRealization
+    {inputs : Nat} (circuit : Circuit inputs)
+    (checks : Valuation (3 * circuit.gateCount))
+    (index : Fin (3 * circuit.gateCount)) :
+    let assembly :=
+      macroAssembly circuit.program (Nat.le_refl circuit.gateCount)
+    (macroCheckSource circuit index).eval
+        (checkRealization circuit checks)
+        (assembly.program.eval (checkRealization circuit checks)) =
+      checks index := by
+  let assembly :=
+    macroAssembly circuit.program (Nat.le_refl circuit.gateCount)
+  let realized := checkRealization circuit checks
+  have sourceValues :
+      List.ofFn (fun index =>
+          (macroCheckSource circuit index).eval realized
+            (assembly.program.eval realized)) =
+        checkSourceValues assembly.program assembly.checks realized :=
+    macroCheckSource_values circuit realized
+  have assemblyValues :
+      checkSourceValues assembly.program assembly.checks realized =
+        distinguishedChecks circuit.program
+          (checkCarrierValuation circuit.program (fun _ => false)
+            checks) := by
+    rw [macroAssembly_check_values]
+    rw [show unflattenCarrier realized =
+        checkCarrierValuation circuit.program (fun _ => false)
+          checks by
+      dsimp only [realized, checkRealization]
+      exact unflatten_flatten _]
+    rw [restrictCarrier_refl]
+  have listEqual :
+      List.ofFn (fun index =>
+          (macroCheckSource circuit index).eval realized
+            (assembly.program.eval realized)) =
+        List.ofFn checks := by
+    rw [sourceValues, assemblyValues,
+      distinguishedChecks_checkCarrierValuation]
+  have pointEqual := congrArg
+    (fun items => items[index.val]?) listEqual
+  simpa [realized] using pointEqual
+
+private theorem exposeRenameInputs_semantics
+    {fromInputs toInputs gates : Nat}
+    (program : Program fromInputs gates)
+    (rename : Fin fromInputs → Fin toInputs)
+    (input : Valuation toInputs) (output : Fin gates) :
+    (exposeAllGates (program.renameInputs rename)).semantics
+        input output =
+      (exposeAllGates program).semantics
+        (fun index => input (rename index)) output := by
+  unfold Candidate.semantics DirectWire.semantics DirectWireWord.eval
+  rw [exposeAllGates_source, exposeAllGates_source]
+  change
+    (program.renameInputs rename).eval input output =
+      program.eval (fun index => input (rename index)) output
+  exact Program.eval_renameInputs program rename input output
+
+private theorem exposeRenameCast_conditions
+    {leftInputs rightInputs gates : Nat}
+    (equal : leftInputs = rightInputs)
+    (program : Program leftInputs gates)
+    (conditions : BaselineOutputConditions (exposeAllGates program)) :
+    BaselineOutputConditions
+      (exposeAllGates (program.renameInputs (Fin.cast equal))) := by
+  cases equal
+  constructor
+  · intro output
+    obtain ⟨left, right, different⟩ :=
+      conditions.nonconstant output
+    refine ⟨left, right, ?_⟩
+    rw [exposeRenameInputs_semantics, exposeRenameInputs_semantics]
+    have leftEqual :
+        (fun index => left (Fin.cast rfl index)) = left := by
+      funext index
+      apply congrArg left
+      apply Fin.ext
+      rfl
+    have rightEqual :
+        (fun index => right (Fin.cast rfl index)) = right := by
+      funext index
+      apply congrArg right
+      apply Fin.ext
+      rfl
+    rw [leftEqual, rightEqual]
+    exact different
+  · intro output input
+    obtain ⟨valuation, different⟩ :=
+      conditions.notPositiveProjection output input
+    refine ⟨valuation, ?_⟩
+    rw [exposeRenameInputs_semantics]
+    have valuationEqual :
+        (fun index => valuation (Fin.cast rfl index)) = valuation := by
+      funext index
+      apply congrArg valuation
+      apply Fin.ext
+      rfl
+    rw [valuationEqual]
+    exact different
+  · intro leftOutput rightOutput outputDifferent
+    obtain ⟨valuation, different⟩ :=
+      conditions.pairwiseDistinct outputDifferent
+    refine ⟨valuation, ?_⟩
+    rw [exposeRenameInputs_semantics, exposeRenameInputs_semantics]
+    have valuationEqual :
+        (fun index => valuation (Fin.cast rfl index)) = valuation := by
+      funext index
+      apply congrArg valuation
+      apply Fin.ext
+      rfl
+    rw [valuationEqual]
+    exact different
+
+private theorem exposeRenameCast_essential
+    {leftInputs rightInputs gates : Nat}
+    (equal : leftInputs = rightInputs)
+    (program : Program leftInputs gates)
+    (target : Fin leftInputs) (output : Fin gates)
+    (essential :
+      OutputEssentialAt (exposeAllGates program) target output) :
+    OutputEssentialAt
+      (exposeAllGates (program.renameInputs (Fin.cast equal)))
+      (Fin.cast equal target) output := by
+  cases equal
+  obtain ⟨left, right, differs, semanticDifferent⟩ := essential
+  refine ⟨left, right, differs, ?_⟩
+  rw [exposeRenameInputs_semantics, exposeRenameInputs_semantics]
+  have leftEqual :
+      (fun index => left (Fin.cast rfl index)) = left := by
+    funext index
+    apply congrArg left
+    apply Fin.ext
+    rfl
+  have rightEqual :
+      (fun index => right (Fin.cast rfl index)) = right := by
+    funext index
+    apply congrArg right
+    apply Fin.ext
+    rfl
+  rw [leftEqual, rightEqual]
+  exact semanticDifferent
+
+private theorem nonemptyPrefixAssembly_lastTwoEssential_of_pos
+    (tailChecks : Nat) (positive : 0 < tailChecks) :
+    ∀ output,
+      OutputEssentialAt
+          (exposeAllGates
+            (nonemptyPrefixAssembly tailChecks).program)
+          (Fin.last tailChecks) output ∧
+        OutputEssentialAt
+          (exposeAllGates
+            (nonemptyPrefixAssembly tailChecks).program)
+          ⟨tailChecks - 1, by omega⟩ output := by
+  cases tailChecks with
+  | zero =>
+      exact False.elim (Nat.not_lt_zero 0 positive)
+  | succ tailChecks =>
+      intro output
+      obtain ⟨lastEssential, secondEssential⟩ :=
+        nonemptyPrefixAssembly_lastTwoEssential tailChecks output
+      constructor
+      · exact lastEssential
+      · have targetEqual :
+            (⟨tailChecks, by omega⟩ : Fin (tailChecks + 2)) =
+              ⟨tailChecks + 1 - 1, by omega⟩ := by
+          apply Fin.ext
+          simp
+        rw [← targetEqual]
+        exact secondEssential
+
+private theorem circuitPrefixProgram_conditions {inputs : Nat}
+    (circuit : Circuit inputs) :
+    BaselineOutputConditions
+      (exposeAllGates (circuitPrefixCandidate circuit).program) := by
+  change
+    BaselineOutputConditions
+      (exposeAllGates
+        ((nonemptyPrefixAssembly (checkTailCount circuit)).program.renameInputs
+            (fun index =>
+              Fin.cast (checkTailCount_add_one circuit) index)))
+  exact exposeRenameCast_conditions
+    (checkTailCount_add_one circuit)
+    (nonemptyPrefixAssembly (checkTailCount circuit)).program
+    (nonemptyPrefixAssembly_conditions (checkTailCount circuit))
+
+private def rightAnchorCheck {inputs : Nat}
+    (circuit : Circuit inputs) :
+    Fin (3 * circuit.gateCount) :=
+  ⟨3 * circuit.gateCount - 2, by
+    have positive : 0 < circuit.gateCount :=
+      Nat.zero_lt_of_lt circuit.outputGate.isLt
+    omega⟩
+
+private def traceAnchorCheck {inputs : Nat}
+    (circuit : Circuit inputs) :
+    Fin (3 * circuit.gateCount) :=
+  ⟨3 * circuit.gateCount - 1, by
+    have positive : 0 < circuit.gateCount :=
+      Nat.zero_lt_of_lt circuit.outputGate.isLt
+    omega⟩
+
+private theorem circuitPrefixProgram_anchorEssential
+    {inputs : Nat} (circuit : Circuit inputs)
+    (output : Fin (2 * checkTailCount circuit)) :
+    OutputEssentialAt
+        (exposeAllGates (circuitPrefixCandidate circuit).program)
+        (traceAnchorCheck circuit) output ∧
+      OutputEssentialAt
+        (exposeAllGates (circuitPrefixCandidate circuit).program)
+        (rightAnchorCheck circuit) output := by
+  have gatesPositive : 0 < circuit.gateCount :=
+    Nat.zero_lt_of_lt circuit.outputGate.isLt
+  have tailPositive : 0 < checkTailCount circuit := by
+    unfold checkTailCount
+    omega
+  obtain ⟨traceEssential, rightEssential⟩ :=
+    nonemptyPrefixAssembly_lastTwoEssential_of_pos
+      (checkTailCount circuit) tailPositive output
+  have renamedTrace :=
+    exposeRenameCast_essential
+      (checkTailCount_add_one circuit)
+      (nonemptyPrefixAssembly (checkTailCount circuit)).program
+      (Fin.last (checkTailCount circuit)) output traceEssential
+  have renamedRight :=
+    exposeRenameCast_essential
+      (checkTailCount_add_one circuit)
+      (nonemptyPrefixAssembly (checkTailCount circuit)).program
+      ⟨checkTailCount circuit - 1, by omega⟩ output rightEssential
+  have prefixProgramEqual :
+      (circuitPrefixCandidate circuit).program =
+        (nonemptyPrefixAssembly
+            (checkTailCount circuit)).program.renameInputs
+          (fun index =>
+            Fin.cast (checkTailCount_add_one circuit) index) := rfl
+  have traceTargetEqual :
+      Fin.cast (checkTailCount_add_one circuit)
+          (Fin.last (checkTailCount circuit)) =
+        traceAnchorCheck circuit := by
+    apply Fin.ext
+    simp [traceAnchorCheck, checkTailCount]
+  have rightTargetEqual :
+      Fin.cast (checkTailCount_add_one circuit)
+          ⟨checkTailCount circuit - 1, by omega⟩ =
+        rightAnchorCheck circuit := by
+    apply Fin.ext
+    simp [rightAnchorCheck, checkTailCount]
+    omega
+  rw [traceTargetEqual] at renamedTrace
+  rw [rightTargetEqual] at renamedRight
+  rw [prefixProgramEqual]
+  constructor
+  · exact renamedTrace
+  · exact renamedRight
+
+private def lastGateCoordinate {inputs : Nat}
+    (circuit : Circuit inputs) : Fin circuit.gateCount :=
+  ⟨circuit.gateCount - 1, by
+    have positive : 0 < circuit.gateCount :=
+      Nat.zero_lt_of_lt circuit.outputGate.isLt
+    omega⟩
+
+private def rightAnchorLock {inputs : Nat}
+    (circuit : Circuit inputs) :
+    Fin (carrierWidth inputs circuit.gateCount) :=
+  sourceLockSlot
+    (occurrenceCoordinate (lastGateCoordinate circuit) .right)
+
+private def traceAnchorLock {inputs : Nat}
+    (circuit : Circuit inputs) :
+    Fin (carrierWidth inputs circuit.gateCount) :=
+  traceLockSlot (inputs := inputs) (lastGateCoordinate circuit)
+
+private theorem sourceCheckIndex_injective {gates : Nat} :
+    Function.Injective
+      (sourceCheckIndex :
+        Fin (2 * gates) → Fin (3 * gates)) := by
+  intro left right equal
+  apply Fin.ext
+  have valueEqual := congrArg Fin.val equal
+  dsimp only [sourceCheckIndex] at valueEqual
+  omega
+
+private theorem traceCheckIndex_injective {gates : Nat} :
+    Function.Injective
+      (traceCheckIndex : Fin gates → Fin (3 * gates)) := by
+  intro left right equal
+  apply Fin.ext
+  have valueEqual := congrArg Fin.val equal
+  dsimp only [traceCheckIndex] at valueEqual
+  omega
+
+private theorem finalRight_sourceCheckIndex {inputs : Nat}
+    (circuit : Circuit inputs) :
+    sourceCheckIndex
+        (occurrenceCoordinate (lastGateCoordinate circuit) .right) =
+      rightAnchorCheck circuit := by
+  have positive : 0 < circuit.gateCount :=
+    Nat.zero_lt_of_lt circuit.outputGate.isLt
+  rw [sourceCheckIndex_right]
+  apply Fin.ext
+  simp [lastGateCoordinate, rightAnchorCheck]
+  omega
+
+private theorem finalTrace_traceCheckIndex {inputs : Nat}
+    (circuit : Circuit inputs) :
+    traceCheckIndex (lastGateCoordinate circuit) =
+      traceAnchorCheck circuit := by
+  have positive : 0 < circuit.gateCount :=
+    Nat.zero_lt_of_lt circuit.outputGate.isLt
+  apply Fin.ext
+  simp [traceCheckIndex, lastGateCoordinate, traceAnchorCheck]
+  omega
+
+private theorem traceCheckIndex_ne_rightAnchor {inputs : Nat}
+    (circuit : Circuit inputs) (gate : Fin circuit.gateCount) :
+    traceCheckIndex gate ≠ rightAnchorCheck circuit := by
+  intro equal
+  have valueEqual := congrArg Fin.val equal
+  simp [traceCheckIndex, rightAnchorCheck] at valueEqual
+  have gateWithin := gate.isLt
+  omega
+
+private theorem sourceCheckIndex_ne_traceAnchor {inputs : Nat}
+    (circuit : Circuit inputs)
+    (occurrence : Fin (2 * circuit.gateCount)) :
+    sourceCheckIndex occurrence ≠ traceAnchorCheck circuit := by
+  intro equal
+  have valueEqual := congrArg Fin.val equal
+  simp [sourceCheckIndex, traceAnchorCheck] at valueEqual
+  have occurrenceWithin := occurrence.isLt
+  have gatesPositive : 0 < circuit.gateCount :=
+    Nat.zero_lt_of_lt circuit.outputGate.isLt
+  omega
+
+private theorem checkRealization_rightValue {inputs : Nat}
+    (circuit : Circuit inputs)
+    (checks : Valuation (3 * circuit.gateCount)) :
+    checkRealization circuit checks (rightAnchorLock circuit) =
+      checks (rightAnchorCheck circuit) := by
+  rw [checkRealization, rightAnchorLock, flattenCarrier_sourceLock]
+  exact congrArg checks (finalRight_sourceCheckIndex circuit)
+
+private theorem checkRealization_traceValue {inputs : Nat}
+    (circuit : Circuit inputs)
+    (checks : Valuation (3 * circuit.gateCount)) :
+    checkRealization circuit checks (traceAnchorLock circuit) =
+      checks (traceAnchorCheck circuit) := by
+  rw [checkRealization, traceAnchorLock, flattenCarrier_traceLock]
+  exact congrArg checks (finalTrace_traceCheckIndex circuit)
+
+private theorem checkRealization_primaryValue {inputs : Nat}
+    (circuit : Circuit inputs)
+    (checks : Valuation (3 * circuit.gateCount))
+    (coordinate : Fin inputs) :
+    checkRealization circuit checks
+        (primarySlot (gates := circuit.gateCount) coordinate) =
+      false := by
+  rw [checkRealization, flattenCarrier_primary]
+  rfl
+
+private theorem checkRealization_gateValue {inputs : Nat}
+    (circuit : Circuit inputs)
+    (checks : Valuation (3 * circuit.gateCount))
+    (coordinate : Fin circuit.gateCount) :
+    checkRealization circuit checks
+        (traceSlot (inputs := inputs) coordinate) =
+      circuit.program.eval (fun _ => false) coordinate := by
+  rw [checkRealization, flattenCarrier_trace]
+  rfl
+
+private theorem checkRealization_occurrenceValue {inputs : Nat}
+    (circuit : Circuit inputs)
+    (checks : Valuation (3 * circuit.gateCount))
+    (coordinate : Fin (2 * circuit.gateCount)) :
+    checkRealization circuit checks
+        (occurrenceSlot (inputs := inputs) coordinate) =
+      coherentOccurrences circuit.program (fun _ => false) coordinate := by
+  rw [checkRealization, flattenCarrier_occurrence]
+  rfl
+
+private theorem checkRealization_sourceLockValue {inputs : Nat}
+    (circuit : Circuit inputs)
+    (checks : Valuation (3 * circuit.gateCount))
+    (coordinate : Fin (2 * circuit.gateCount)) :
+    checkRealization circuit checks
+        (sourceLockSlot (inputs := inputs) coordinate) =
+      checks (sourceCheckIndex coordinate) := by
+  rw [checkRealization, flattenCarrier_sourceLock]
+  rfl
+
+private theorem checkRealization_traceLockValue {inputs : Nat}
+    (circuit : Circuit inputs)
+    (checks : Valuation (3 * circuit.gateCount))
+    (coordinate : Fin circuit.gateCount) :
+    checkRealization circuit checks
+        (traceLockSlot (inputs := inputs) coordinate) =
+      checks (traceCheckIndex coordinate) := by
+  rw [checkRealization, flattenCarrier_traceLock]
+  rfl
+
+private theorem checkRealization_finalValue {inputs : Nat}
+    (circuit : Circuit inputs)
+    (checks : Valuation (3 * circuit.gateCount)) :
+    checkRealization circuit checks
+        (finalLockSlot inputs circuit.gateCount) =
+      true := by
+  rw [checkRealization, flattenCarrier_finalLock]
+  rfl
+
+private theorem checkRealization_differsOnlyAtRight
+    {inputs : Nat} (circuit : Circuit inputs)
+    (left right : Valuation (3 * circuit.gateCount))
+    (differs : DiffersOnlyAt (rightAnchorCheck circuit) left right) :
+    DiffersOnlyAt (rightAnchorLock circuit)
+      (checkRealization circuit left)
+      (checkRealization circuit right) := by
+  constructor
+  · rw [checkRealization_rightValue, checkRealization_rightValue]
+    exact differs.1
+  · intro index indexNeTarget
+    generalize slotEqual : decodeCarrierSlot index = slot
+    have encoded : slot.encode = index := by
+      rw [← slotEqual]
+      exact encode_decode index
+    rw [← encoded] at indexNeTarget ⊢
+    cases slot with
+    | primary coordinate =>
+        rw [show (CarrierSlot.primary coordinate).encode =
+            primarySlot (gates := circuit.gateCount) coordinate from rfl,
+          checkRealization_primaryValue,
+          checkRealization_primaryValue]
+    | trace coordinate =>
+        rw [show (CarrierSlot.trace coordinate).encode =
+            traceSlot (inputs := inputs) coordinate from rfl,
+          checkRealization_gateValue,
+          checkRealization_gateValue]
+    | occurrence coordinate =>
+        rw [show (CarrierSlot.occurrence coordinate).encode =
+            occurrenceSlot (inputs := inputs) coordinate from rfl,
+          checkRealization_occurrenceValue,
+          checkRealization_occurrenceValue]
+    | sourceLock coordinate =>
+        rw [show (CarrierSlot.sourceLock coordinate).encode =
+            sourceLockSlot (inputs := inputs) coordinate from rfl,
+          checkRealization_sourceLockValue,
+          checkRealization_sourceLockValue]
+        change
+          left (sourceCheckIndex coordinate) =
+            right (sourceCheckIndex coordinate)
+        apply differs.2
+        intro checkEqual
+        have coordinateEqual :
+            coordinate =
+              occurrenceCoordinate (lastGateCoordinate circuit) .right :=
+          sourceCheckIndex_injective
+            (checkEqual.trans
+              (finalRight_sourceCheckIndex circuit).symm)
+        change
+          (CarrierSlot.sourceLock coordinate).encode ≠
+            rightAnchorLock circuit at indexNeTarget
+        apply indexNeTarget
+        simp [rightAnchorLock, CarrierSlot.encode, coordinateEqual]
+    | traceLock coordinate =>
+        rw [show (CarrierSlot.traceLock coordinate).encode =
+            traceLockSlot (inputs := inputs) coordinate from rfl,
+          checkRealization_traceLockValue,
+          checkRealization_traceLockValue]
+        change
+          left (traceCheckIndex coordinate) =
+            right (traceCheckIndex coordinate)
+        exact differs.2 (traceCheckIndex coordinate)
+          (traceCheckIndex_ne_rightAnchor circuit coordinate)
+    | finalLock =>
+        rw [show (CarrierSlot.finalLock :
+              CarrierSlot inputs circuit.gateCount).encode =
+            finalLockSlot inputs circuit.gateCount from rfl,
+          checkRealization_finalValue,
+          checkRealization_finalValue]
+
+private theorem checkRealization_differsOnlyAtTrace
+    {inputs : Nat} (circuit : Circuit inputs)
+    (left right : Valuation (3 * circuit.gateCount))
+    (differs : DiffersOnlyAt (traceAnchorCheck circuit) left right) :
+    DiffersOnlyAt (traceAnchorLock circuit)
+      (checkRealization circuit left)
+      (checkRealization circuit right) := by
+  constructor
+  · rw [checkRealization_traceValue, checkRealization_traceValue]
+    exact differs.1
+  · intro index indexNeTarget
+    generalize slotEqual : decodeCarrierSlot index = slot
+    have encoded : slot.encode = index := by
+      rw [← slotEqual]
+      exact encode_decode index
+    rw [← encoded] at indexNeTarget ⊢
+    cases slot with
+    | primary coordinate =>
+        rw [show (CarrierSlot.primary coordinate).encode =
+            primarySlot (gates := circuit.gateCount) coordinate from rfl,
+          checkRealization_primaryValue,
+          checkRealization_primaryValue]
+    | trace coordinate =>
+        rw [show (CarrierSlot.trace coordinate).encode =
+            traceSlot (inputs := inputs) coordinate from rfl,
+          checkRealization_gateValue,
+          checkRealization_gateValue]
+    | occurrence coordinate =>
+        rw [show (CarrierSlot.occurrence coordinate).encode =
+            occurrenceSlot (inputs := inputs) coordinate from rfl,
+          checkRealization_occurrenceValue,
+          checkRealization_occurrenceValue]
+    | sourceLock coordinate =>
+        rw [show (CarrierSlot.sourceLock coordinate).encode =
+            sourceLockSlot (inputs := inputs) coordinate from rfl,
+          checkRealization_sourceLockValue,
+          checkRealization_sourceLockValue]
+        change
+          left (sourceCheckIndex coordinate) =
+            right (sourceCheckIndex coordinate)
+        exact differs.2 (sourceCheckIndex coordinate)
+          (sourceCheckIndex_ne_traceAnchor circuit coordinate)
+    | traceLock coordinate =>
+        rw [show (CarrierSlot.traceLock coordinate).encode =
+            traceLockSlot (inputs := inputs) coordinate from rfl,
+          checkRealization_traceLockValue,
+          checkRealization_traceLockValue]
+        change
+          left (traceCheckIndex coordinate) =
+            right (traceCheckIndex coordinate)
+        apply differs.2
+        intro checkEqual
+        have coordinateEqual :
+            coordinate = lastGateCoordinate circuit :=
+          traceCheckIndex_injective
+            (checkEqual.trans
+              (finalTrace_traceCheckIndex circuit).symm)
+        change
+          (CarrierSlot.traceLock coordinate).encode ≠
+            traceAnchorLock circuit at indexNeTarget
+        apply indexNeTarget
+        simp [traceAnchorLock, CarrierSlot.encode, coordinateEqual]
+    | finalLock =>
+        rw [show (CarrierSlot.finalLock :
+              CarrierSlot inputs circuit.gateCount).encode =
+            finalLockSlot inputs circuit.gateCount from rfl,
+          checkRealization_finalValue,
+          checkRealization_finalValue]
+
+private def circuitPrefixRightLift {inputs : Nat}
+    (circuit : Circuit inputs) :
+    let assembly :=
+      macroAssembly circuit.program (Nat.le_refl circuit.gateCount)
+    LocalBlockLift assembly.program (macroCheckSource circuit)
+      (rightAnchorCheck circuit) (rightAnchorLock circuit) where
+  lift := checkRealization circuit
+  bindingValues := by
+    intro checks index
+    exact macroCheckSource_checkRealization circuit checks index
+  targetValue := by
+    intro checks
+    exact checkRealization_rightValue circuit checks
+  preservesDifference := by
+    intro left right differs
+    exact checkRealization_differsOnlyAtRight circuit left right differs
+
+private def circuitPrefixTraceLift {inputs : Nat}
+    (circuit : Circuit inputs) :
+    let assembly :=
+      macroAssembly circuit.program (Nat.le_refl circuit.gateCount)
+    LocalBlockLift assembly.program (macroCheckSource circuit)
+      (traceAnchorCheck circuit) (traceAnchorLock circuit) where
+  lift := checkRealization circuit
+  bindingValues := by
+    intro checks index
+    exact macroCheckSource_checkRealization circuit checks index
+  targetValue := by
+    intro checks
+    exact checkRealization_traceValue circuit checks
+  preservesDifference := by
+    intro left right differs
+    exact checkRealization_differsOnlyAtTrace circuit left right differs
+
+private theorem rawBaselinePrefix_anchorEssential
+    {inputs : Nat} (circuit : Circuit inputs)
+    (output : Fin (2 * checkTailCount circuit)) :
+    OutputEssentialAt
+        (exposeAllGates (rawBaselineProgram circuit))
+        (traceAnchorLock circuit)
+        (Fin.natAdd (macroGateCount circuit.program) output) ∧
+      OutputEssentialAt
+        (exposeAllGates (rawBaselineProgram circuit))
+        (rightAnchorLock circuit)
+        (Fin.natAdd (macroGateCount circuit.program) output) := by
+  let assembly :=
+    macroAssembly circuit.program (Nat.le_refl circuit.gateCount)
+  obtain ⟨traceEssential, rightEssential⟩ :=
+    circuitPrefixProgram_anchorEssential circuit output
+  constructor
+  · change
+      OutputEssentialAt
+        (exposeAllGates
+          (appendCandidateProgram assembly.program
+            (macroCheckSource circuit)
+            (exposeAllGates
+              (circuitPrefixCandidate circuit).program)))
+        (traceAnchorLock circuit)
+        (Fin.natAdd (macroGateCount circuit.program) output)
+    exact appendedExpose_suffix_essential assembly.program
+      (macroCheckSource circuit)
+      (exposeAllGates (circuitPrefixCandidate circuit).program)
+      (exposeAllGates_source _)
+      (traceAnchorCheck circuit) (traceAnchorLock circuit)
+      (circuitPrefixTraceLift circuit) output traceEssential
+  · change
+      OutputEssentialAt
+        (exposeAllGates
+          (appendCandidateProgram assembly.program
+            (macroCheckSource circuit)
+            (exposeAllGates
+              (circuitPrefixCandidate circuit).program)))
+        (rightAnchorLock circuit)
+        (Fin.natAdd (macroGateCount circuit.program) output)
+    exact appendedExpose_suffix_essential assembly.program
+      (macroCheckSource circuit)
+      (exposeAllGates (circuitPrefixCandidate circuit).program)
+      (exposeAllGates_source _)
+      (rightAnchorCheck circuit) (rightAnchorLock circuit)
+      (circuitPrefixRightLift circuit) output rightEssential
+
+private theorem rawBaselinePrefix_pairwiseDistinct
+    {inputs : Nat} (circuit : Circuit inputs)
+    {leftOutput rightOutput :
+      Fin (2 * checkTailCount circuit)}
+    (different : leftOutput ≠ rightOutput) :
+    ∃ valuation,
+      (exposeAllGates (rawBaselineProgram circuit)).semantics
+          valuation
+          (Fin.natAdd (macroGateCount circuit.program) leftOutput) ≠
+        (exposeAllGates (rawBaselineProgram circuit)).semantics
+          valuation
+          (Fin.natAdd (macroGateCount circuit.program) rightOutput) := by
+  let assembly :=
+    macroAssembly circuit.program (Nat.le_refl circuit.gateCount)
+  obtain ⟨checks, semanticDifferent⟩ :=
+    (circuitPrefixProgram_conditions circuit).pairwiseDistinct different
+  refine ⟨checkRealization circuit checks, ?_⟩
+  change
+    (exposeAllGates
+      (appendCandidateProgram assembly.program
+        (macroCheckSource circuit)
+        (exposeAllGates
+          (circuitPrefixCandidate circuit).program))).semantics
+        (checkRealization circuit checks)
+        (Fin.natAdd (macroGateCount circuit.program) leftOutput) ≠
+      (exposeAllGates
+        (appendCandidateProgram assembly.program
+          (macroCheckSource circuit)
+          (exposeAllGates
+            (circuitPrefixCandidate circuit).program))).semantics
+        (checkRealization circuit checks)
+        (Fin.natAdd (macroGateCount circuit.program) rightOutput)
+  rw [appendedExpose_suffix_semantics assembly.program
+      (macroCheckSource circuit)
+      (exposeAllGates (circuitPrefixCandidate circuit).program)
+      (exposeAllGates_source _),
+    appendedExpose_suffix_semantics assembly.program
+      (macroCheckSource circuit)
+      (exposeAllGates (circuitPrefixCandidate circuit).program)
+      (exposeAllGates_source _)]
+  have sourceValues :
+      (fun index =>
+        (macroCheckSource circuit index).eval
+          (checkRealization circuit checks)
+          (assembly.program.eval (checkRealization circuit checks))) =
+        checks := by
+    funext index
+    exact macroCheckSource_checkRealization circuit checks index
+  rw [sourceValues]
+  exact semanticDifferent
+
+private theorem macroAssembly_snoc_output_anchorIrrelevant
+    {inputs gates : Nat}
+    (initial : Program inputs gates) (gate : Gate inputs gates)
+    (output : Fin (macroGateCount (initial.snoc gate))) :
+    OutputIrrelevantAt
+        (exposeAllGates
+          (macroAssembly (initial.snoc gate)
+            (Nat.le_refl (gates + 1))).program)
+        (traceLockSlot (inputs := inputs) (Fin.last gates)) output ∨
+      OutputIrrelevantAt
+        (exposeAllGates
+          (macroAssembly (initial.snoc gate)
+            (Nat.le_refl (gates + 1))).program)
+        (sourceLockSlot (inputs := inputs)
+          (occurrenceCoordinate (Fin.last gates) .right)) output := by
+  let earlierWithin : gates ≤ gates + 1 := Nat.le_succ gates
+  let coordinate : Fin (gates + 1) := Fin.last gates
+  let earlier := macroAssembly initial earlierWithin
+  let left := appendSourceMacro earlier.program gate.left
+    earlierWithin coordinate .left
+  let right := appendSourceMacro left.program gate.right
+    earlierWithin coordinate .right
+  let trace := appendTraceMacro right.program coordinate
+  let traceLock := traceLockSlot (inputs := inputs) coordinate
+  let rightLock :=
+    sourceLockSlot (inputs := inputs)
+      (occurrenceCoordinate coordinate .right)
+  have earlierAvoidsTrace :
+      programAvoidsInput traceLock earlier.program := by
+    exact macroAssembly_avoidsTraceLock_after initial earlierWithin
+      coordinate (Nat.le_refl gates)
+  have leftAvoidsTrace :
+      programAvoidsInput traceLock left.program := by
+    exact appendSourceMacro_avoidsTraceLock earlier.program gate.left
+      earlierWithin coordinate .left coordinate earlierAvoidsTrace
+  have rightAvoidsTrace :
+      programAvoidsInput traceLock right.program := by
+    exact appendSourceMacro_avoidsTraceLock left.program gate.right
+      earlierWithin coordinate .right coordinate leftAvoidsTrace
+  let traceBinding : Fin 4 →
+      Source (carrierWidth inputs (gates + 1))
+        (((macroGateCount initial +
+            sourceMacroGateCount gate.left) +
+          sourceMacroGateCount gate.right)) :=
+    binding4
+      (.input traceLock)
+      (.input (traceSlot (inputs := inputs) coordinate))
+      (.input (occurrenceSlot (inputs := inputs)
+        (occurrenceCoordinate coordinate .left)))
+      (.input (occurrenceSlot (inputs := inputs)
+        (occurrenceCoordinate coordinate .right)))
+  have traceBindingIndependent :
+      ∀ first second,
+        (∀ index, index ≠ rightLock → first index = second index) →
+          ∀ bindingIndex,
+            (traceBinding bindingIndex).eval first
+                (right.program.eval first) =
+              (traceBinding bindingIndex).eval second
+                (right.program.eval second) := by
+    intro first second equalAway bindingIndex
+    dsimp only [traceBinding]
+    unfold binding4
+    split
+    · apply equalAway
+      simpa [traceLock, rightLock, CarrierSlot.encode] using
+        (carrierSlot_encode_ne
+          (CarrierSlot.traceLock coordinate)
+          (CarrierSlot.sourceLock
+            (occurrenceCoordinate coordinate .right)) (by simp))
+    · split
+      · apply equalAway
+        simpa [rightLock, CarrierSlot.encode] using
+          (carrierSlot_encode_ne
+            (CarrierSlot.trace coordinate)
+            (CarrierSlot.sourceLock
+              (occurrenceCoordinate coordinate .right)) (by simp))
+      · split
+        · apply equalAway
+          simpa [rightLock, CarrierSlot.encode] using
+            (carrierSlot_encode_ne
+              (CarrierSlot.occurrence
+                (occurrenceCoordinate coordinate .left))
+              (CarrierSlot.sourceLock
+                (occurrenceCoordinate coordinate .right)) (by simp))
+        · apply equalAway
+          simpa [rightLock, CarrierSlot.encode] using
+            (carrierSlot_encode_ne
+              (CarrierSlot.occurrence
+                (occurrenceCoordinate coordinate .right))
+              (CarrierSlot.sourceLock
+                (occurrenceCoordinate coordinate .right)) (by simp))
+  change
+    OutputIrrelevantAt (exposeAllGates trace.program)
+        traceLock output ∨
+      OutputIrrelevantAt (exposeAllGates trace.program)
+        rightLock output
+  cases finSum_decompose output with
+  | inl prefixCase =>
+      rcases prefixCase with ⟨prefixOutput, outputEqual⟩
+      subst output
+      apply Or.inl
+      change
+        OutputIrrelevantAt
+          (exposeAllGates
+            (appendCandidateProgram right.program traceBinding traceDirect))
+          traceLock (Fin.castAdd 18 prefixOutput)
+      exact appendedExpose_prefix_irrelevant right.program traceBinding
+        traceDirect traceLock rightAvoidsTrace prefixOutput
+  | inr suffixCase =>
+      rcases suffixCase with ⟨suffixOutput, outputEqual⟩
+      subst output
+      apply Or.inr
+      change
+        OutputIrrelevantAt
+          (exposeAllGates
+            (appendCandidateProgram right.program traceBinding traceDirect))
+          rightLock
+          (Fin.natAdd
+            (((macroGateCount initial +
+                sourceMacroGateCount gate.left) +
+              sourceMacroGateCount gate.right))
+            suffixOutput)
+      exact appendedExpose_suffix_irrelevant right.program traceBinding
+        traceDirect traceDirect_output_source rightLock
+        traceBindingIndependent suffixOutput
+
+private theorem macroAssembly_output_anchorIrrelevant
+    {inputs : Nat} (circuit : Circuit inputs)
+    (output : Fin (macroGateCount circuit.program)) :
+    let assembly :=
+      macroAssembly circuit.program (Nat.le_refl circuit.gateCount)
+    OutputIrrelevantAt (exposeAllGates assembly.program)
+        (traceAnchorLock circuit) output ∨
+      OutputIrrelevantAt (exposeAllGates assembly.program)
+        (rightAnchorLock circuit) output := by
+  rcases circuit with ⟨gateCount, program, outputGate⟩
+  cases program with
+  | empty =>
+      exact Fin.elim0 outputGate
+  | @snoc gates initial gate =>
+      have coordinateEqual :
+          (⟨gates, by omega⟩ : Fin (gates + 1)) =
+            Fin.last gates := by
+        apply Fin.ext
+        rfl
+      change
+        OutputIrrelevantAt
+            (exposeAllGates
+              (macroAssembly (initial.snoc gate)
+                (Nat.le_refl (gates + 1))).program)
+            (traceLockSlot (inputs := inputs) ⟨gates, by omega⟩)
+            output ∨
+          OutputIrrelevantAt
+            (exposeAllGates
+              (macroAssembly (initial.snoc gate)
+                (Nat.le_refl (gates + 1))).program)
+            (sourceLockSlot (inputs := inputs)
+              (occurrenceCoordinate
+                (⟨gates, by omega⟩ : Fin (gates + 1)) .right))
+            output
+      rw [coordinateEqual]
+      exact macroAssembly_snoc_output_anchorIrrelevant initial gate output
+
+private theorem rawBaselineMacro_anchorIrrelevant
+    {inputs : Nat} (circuit : Circuit inputs)
+    (output : Fin (macroGateCount circuit.program)) :
+    OutputIrrelevantAt
+        (exposeAllGates (rawBaselineProgram circuit))
+        (traceAnchorLock circuit)
+        (Fin.castAdd (2 * checkTailCount circuit) output) ∨
+      OutputIrrelevantAt
+        (exposeAllGates (rawBaselineProgram circuit))
+        (rightAnchorLock circuit)
+        (Fin.castAdd (2 * checkTailCount circuit) output) := by
+  let assembly :=
+    macroAssembly circuit.program (Nat.le_refl circuit.gateCount)
+  obtain traceIrrelevant | rightIrrelevant :=
+    macroAssembly_output_anchorIrrelevant circuit output
+  · apply Or.inl
+    change
+      OutputIrrelevantAt
+        (exposeAllGates
+          (appendCandidateProgram assembly.program
+            (macroCheckSource circuit)
+            (exposeAllGates
+              (circuitPrefixCandidate circuit).program)))
+        (traceAnchorLock circuit)
+        (Fin.castAdd (2 * checkTailCount circuit) output)
+    exact appendedExpose_prefix_irrelevant_of_irrelevant
+      assembly.program (macroCheckSource circuit)
+      (exposeAllGates (circuitPrefixCandidate circuit).program)
+      (traceAnchorLock circuit) output traceIrrelevant
+  · apply Or.inr
+    change
+      OutputIrrelevantAt
+        (exposeAllGates
+          (appendCandidateProgram assembly.program
+            (macroCheckSource circuit)
+            (exposeAllGates
+              (circuitPrefixCandidate circuit).program)))
+        (rightAnchorLock circuit)
+        (Fin.castAdd (2 * checkTailCount circuit) output)
+    exact appendedExpose_prefix_irrelevant_of_irrelevant
+      assembly.program (macroCheckSource circuit)
+      (exposeAllGates (circuitPrefixCandidate circuit).program)
+      (rightAnchorLock circuit) output rightIrrelevant
+
+private theorem rightAnchorLock_ne_traceAnchorLock
+    {inputs : Nat} (circuit : Circuit inputs) :
+    rightAnchorLock circuit ≠ traceAnchorLock circuit := by
+  simpa [rightAnchorLock, traceAnchorLock, CarrierSlot.encode] using
+    (carrierSlot_encode_ne
+      (CarrierSlot.sourceLock
+        (occurrenceCoordinate (lastGateCoordinate circuit) .right))
+      (CarrierSlot.traceLock (lastGateCoordinate circuit)) (by simp))
+
+private theorem rawBaseline_macro_semantics
+    {inputs : Nat} (circuit : Circuit inputs)
+    (input : Valuation (carrierWidth inputs circuit.gateCount))
+    (output : Fin (macroGateCount circuit.program)) :
+    (exposeAllGates (rawBaselineProgram circuit)).semantics input
+        (Fin.castAdd (2 * checkTailCount circuit) output) =
+      (exposeAllGates
+        (macroAssembly circuit.program
+          (Nat.le_refl circuit.gateCount)).program).semantics
+        input output := by
+  let assembly :=
+    macroAssembly circuit.program (Nat.le_refl circuit.gateCount)
+  change
+    (exposeAllGates
+      (appendCandidateProgram assembly.program
+        (macroCheckSource circuit)
+        (exposeAllGates
+          (circuitPrefixCandidate circuit).program))).semantics input
+        (Fin.castAdd (2 * checkTailCount circuit) output) =
+      (exposeAllGates assembly.program).semantics input output
+  exact appendedExpose_prefix_semantics assembly.program
+    (macroCheckSource circuit)
+    (exposeAllGates (circuitPrefixCandidate circuit).program)
+    input output
+
+private theorem rawBaseline_conditions
+    {inputs : Nat} (circuit : Circuit inputs) :
+    BaselineOutputConditions
+      (exposeAllGates (rawBaselineProgram circuit)) := by
+  let assembly :=
+    macroAssembly circuit.program (Nat.le_refl circuit.gateCount)
+  have macroConditions :
+      BaselineOutputConditions (exposeAllGates assembly.program) :=
+    macroAssembly_conditions circuit.program
+      (Nat.le_refl circuit.gateCount)
+  constructor
+  · intro output
+    cases finSum_decompose output with
+    | inl macroCase =>
+        rcases macroCase with ⟨macroOutput, outputEqual⟩
+        subst output
+        obtain ⟨left, right, semanticDifferent⟩ :=
+          macroConditions.nonconstant macroOutput
+        refine ⟨left, right, ?_⟩
+        rw [rawBaseline_macro_semantics,
+          rawBaseline_macro_semantics]
+        exact semanticDifferent
+    | inr prefixCase =>
+        rcases prefixCase with ⟨prefixOutput, outputEqual⟩
+        subst output
+        exact
+          (rawBaselinePrefix_anchorEssential circuit prefixOutput).1.nonconstant
+  · intro output queried
+    cases finSum_decompose output with
+    | inl macroCase =>
+        rcases macroCase with ⟨macroOutput, outputEqual⟩
+        subst output
+        obtain ⟨valuation, semanticDifferent⟩ :=
+          macroConditions.notPositiveProjection macroOutput queried
+        refine ⟨valuation, ?_⟩
+        rw [rawBaseline_macro_semantics]
+        exact semanticDifferent
+    | inr prefixCase =>
+        rcases prefixCase with ⟨prefixOutput, outputEqual⟩
+        subst output
+        obtain ⟨traceEssential, rightEssential⟩ :=
+          rawBaselinePrefix_anchorEssential circuit prefixOutput
+        by_cases queriedTrace :
+            queried = traceAnchorLock circuit
+        · exact rightEssential.notProjection_of_ne (by
+            rw [queriedTrace]
+            exact rightAnchorLock_ne_traceAnchorLock circuit)
+        · exact traceEssential.notProjection_of_ne (Ne.symm queriedTrace)
+  · intro leftOutput rightOutput outputDifferent
+    cases finSum_decompose leftOutput with
+    | inl leftMacroCase =>
+        rcases leftMacroCase with ⟨leftMacro, leftEqual⟩
+        subst leftOutput
+        cases finSum_decompose rightOutput with
+        | inl rightMacroCase =>
+            rcases rightMacroCase with ⟨rightMacro, rightEqual⟩
+            subst rightOutput
+            have macroDifferent : leftMacro ≠ rightMacro := by
+              intro equal
+              apply outputDifferent
+              exact congrArg
+                (Fin.castAdd (2 * checkTailCount circuit)) equal
+            obtain ⟨valuation, semanticDifferent⟩ :=
+              macroConditions.pairwiseDistinct macroDifferent
+            refine ⟨valuation, ?_⟩
+            rw [rawBaseline_macro_semantics,
+              rawBaseline_macro_semantics]
+            exact semanticDifferent
+        | inr rightPrefixCase =>
+            rcases rightPrefixCase with ⟨rightPrefix, rightEqual⟩
+            subst rightOutput
+            obtain ⟨traceEssential, rightEssential⟩ :=
+              rawBaselinePrefix_anchorEssential circuit rightPrefix
+            obtain traceIrrelevant | rightIrrelevant :=
+              rawBaselineMacro_anchorIrrelevant circuit leftMacro
+            · obtain ⟨valuation, semanticDifferent⟩ :=
+                essential_irrelevant_distinct traceEssential
+                  traceIrrelevant
+              exact ⟨valuation, fun equal =>
+                semanticDifferent equal.symm⟩
+            · obtain ⟨valuation, semanticDifferent⟩ :=
+                essential_irrelevant_distinct rightEssential
+                  rightIrrelevant
+              exact ⟨valuation, fun equal =>
+                semanticDifferent equal.symm⟩
+    | inr leftPrefixCase =>
+        rcases leftPrefixCase with ⟨leftPrefix, leftEqual⟩
+        subst leftOutput
+        cases finSum_decompose rightOutput with
+        | inl rightMacroCase =>
+            rcases rightMacroCase with ⟨rightMacro, rightEqual⟩
+            subst rightOutput
+            obtain ⟨traceEssential, rightEssential⟩ :=
+              rawBaselinePrefix_anchorEssential circuit leftPrefix
+            obtain traceIrrelevant | rightIrrelevant :=
+              rawBaselineMacro_anchorIrrelevant circuit rightMacro
+            · exact essential_irrelevant_distinct traceEssential
+                traceIrrelevant
+            · exact essential_irrelevant_distinct rightEssential
+                rightIrrelevant
+        | inr rightPrefixCase =>
+            rcases rightPrefixCase with ⟨rightPrefix, rightEqual⟩
+            subst rightOutput
+            have prefixDifferent : leftPrefix ≠ rightPrefix := by
+              intro equal
+              apply outputDifferent
+              exact congrArg
+                (Fin.natAdd (macroGateCount circuit.program)) equal
+            exact rawBaselinePrefix_pairwiseDistinct circuit
+              prefixDifferent
+
+private theorem exposeCastProgram_conditions
+    {inputs leftGates rightGates : Nat}
+    (equal : leftGates = rightGates)
+    (program : Program inputs leftGates)
+    (conditions :
+      BaselineOutputConditions (exposeAllGates program)) :
+    BaselineOutputConditions
+      (exposeAllGates (castProgramGateCount equal program)) := by
+  cases equal
+  exact conditions
+
+/-- Every exposed output of the complete locked-NAND baseline is
+semantically nonconstant. -/
+theorem baselineCandidate_outputNonconstant
+    {inputs : Nat} (circuit : Circuit inputs) :
+    ∀ output, OutputNonconstant (baselineCandidate circuit) output := by
+  exact
+    (exposeCastProgram_conditions
+      (rawBaselineGateCount_eq_lockedBaselineCount circuit)
+      (rawBaselineProgram circuit)
+      (rawBaseline_conditions circuit)).nonconstant
+
+/-- No exposed output of the complete locked-NAND baseline is a positive
+projection of any carrier input. -/
+theorem baselineCandidate_outputNotPositiveProjection
+    {inputs : Nat} (circuit : Circuit inputs) :
+    ∀ output,
+      OutputNotPositiveProjection (baselineCandidate circuit) output := by
+  exact
+    (exposeCastProgram_conditions
+      (rawBaselineGateCount_eq_lockedBaselineCount circuit)
+      (rawBaselineProgram circuit)
+      (rawBaseline_conditions circuit)).notPositiveProjection
+
+/-- Distinct exposed coordinates of the complete locked-NAND baseline compute
+distinct Boolean functions. -/
+theorem baselineCandidate_outputPairwiseDistinct
+    {inputs : Nat} (circuit : Circuit inputs) :
+    OutputPairwiseDistinct (baselineCandidate circuit) := by
+  exact
+    (exposeCastProgram_conditions
+      (rawBaselineGateCount_eq_lockedBaselineCount circuit)
+      (rawBaselineProgram circuit)
+      (rawBaseline_conditions circuit)).pairwiseDistinct
+
+/-- The complete locked-NAND baseline satisfies all three semantic conditions
+required by the exhaustive direct-wire lower bound. -/
+theorem baselineCandidate_outputConditions
+    {inputs : Nat} (circuit : Circuit inputs) :
+    BaselineOutputConditions (baselineCandidate circuit) := by
+  exact exposeCastProgram_conditions
+    (rawBaselineGateCount_eq_lockedBaselineCount circuit)
+    (rawBaselineProgram circuit)
+    (rawBaseline_conditions circuit)
+
+/-- The reference minimum of the square complete baseline is exactly its
+source-derived gate count. -/
+theorem baselineCandidate_referenceMinimum
+    {inputs : Nat} (circuit : Circuit inputs) :
+    referenceMinimum
+        (Implementation.mk (lockedBaselineCount circuit.program)
+          (baselineCandidate circuit)) =
+      lockedBaselineCount circuit.program := by
+  exact referenceMinimum_eq_gateCount_of_squareBaseline
+    (baselineCandidate circuit)
+    (baselineCandidate_outputConditions circuit)
 
 end LockedNANDGlobalCandidates
 end DirectWire

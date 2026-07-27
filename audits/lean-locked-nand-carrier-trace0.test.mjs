@@ -198,7 +198,6 @@ test('status and publication credit only carrier layout and trace equivalence', 
   assert.equal(status.leanLockedNANDCarrierTraceScope,
     'arbitrary-finite-topological-nand-circuits-carrier-separation-and-trace-equivalence');
   for (const field of [
-    'leanLockedNANDGlobalBaselineDistinctFormalized',
     'leanLockedNANDDerivedFinalOutputLawsFormalized',
     'leanLockedNANDBuilderFormalized',
     'leanLockedNANDThresholdFormalized',

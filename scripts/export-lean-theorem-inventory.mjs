@@ -19,7 +19,12 @@ const TIMEOUT_MS = 120_000;
 
 export function ParseLeanInventoryProbe0(result) {
   if (result.timedOut === true) throw new Error('Lean environment inventory probe timed out');
-  if (result.exitCode !== 0) throw new Error(`Lean environment inventory probe exited ${result.exitCode}`);
+  if (result.exitCode !== 0) {
+    const detail = typeof result.stderr === 'string'
+      ? result.stderr.trim().slice(-4000)
+      : '';
+    throw new Error(`Lean environment inventory probe exited ${result.exitCode}${detail === '' ? '' : `:\n${detail}`}`);
+  }
   if (typeof result.stderr !== 'string' || result.stderr !== '') {
     throw new Error('Lean environment inventory probe emitted stderr');
   }
