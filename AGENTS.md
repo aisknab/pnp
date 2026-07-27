@@ -49,6 +49,10 @@ host, not as a build host.
   checked commit, checked tree, command exit status, and the final `systemd-run`
   resource summary. This makes truncated terminal output diagnosable without
   rerunning an expensive suite.
+- If a remote runner references auxiliary scripts or fixtures, copy each one to
+  its exact runtime filename and verify every referenced remote path is readable
+  before launching the bounded job. Do not rely on a directory-only `scp`
+  destination when the runner expects a different basename.
 - A user-level `systemd-run` service may not inherit the login shell's toolchain
   path. Before the first proof phase, verify the exact `lake` and `lean` binaries
   visible inside the service environment and set the already-installed toolchain
