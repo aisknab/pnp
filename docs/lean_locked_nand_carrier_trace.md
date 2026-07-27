@@ -93,10 +93,12 @@ The following
 milestone now assembles the complete baseline and four-gate extension and
 constructs three of the six conditional-boundary fields. The following
 [`global baseline distinctness`](./lean_locked_nand_global_baseline_distinct.md)
-milestone supplies the fourth. In particular, this carrier theorem alone does
-not establish `FinalLockSeparation` merely because
-`z` is syntactically fresh; the remaining semantic branch laws are separate
-proof obligations.
+milestone supplies the fourth, the unsatisfiable branch supplies the fifth,
+and the
+[`global semantic threshold`](./lean_locked_nand_global_semantic_threshold.md)
+milestone proves `FinalLockSeparation` and supplies the sixth. This carrier
+theorem alone does not establish that result merely because `z` is
+syntactically fresh; the later semantic argument is essential.
 
 ## Audit and regression boundary
 

@@ -83,10 +83,12 @@ threshold package. At this boundary, two semantic fields remained:
 The following unsatisfiable-final-zero milestone now discharges the first
 field on the whole carrier. `satisfiableFinalConditions` remains open.
 Baseline distinctness alone does not prove either whole-carrier final-output
-law, the locked-NAND threshold, residual slack at most four for the global
-family, or the answer-independent polynomial builder from input bitstrings.
-It does not establish a deterministic polynomial-time CNF-SAT decider,
-NP-completeness, or `P = NP`.
+law. The later unsatisfiable and
+[`global semantic threshold`](./lean_locked_nand_global_semantic_threshold.md)
+milestones now prove both branches, the typed threshold, and residual slack
+at most four. The answer-independent encoded polynomial builder from input
+bitstrings, report-level language link, deterministic polynomial-time CNF-SAT
+decider, NP-completeness theorem, and `P = NP` remain absent.
 
 The legacy manuscript remains the reconstruction specification. An
 alternative construction is appropriate only if a precise Lean obligation

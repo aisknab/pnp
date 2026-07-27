@@ -61,9 +61,15 @@ its exhaustive reference minimum at `B`.
 `PNP.LockedNANDGlobalUnsatisfiableFinalZero` then proves that an unsatisfiable source makes the
 full final coordinate false on the whole carrier and fixes the full exhaustive reference minimum
 at `B`. Its two-theorem transcript uses exactly `propext` and `Quot.sound`, with no
-`Classical.choice` or project axiom. Five of the six conditional threshold-premise fields are now
-instantiated. `satisfiableFinalConditions`, the uniform polynomial bitstring builder, and the
-locked-NAND threshold remain absent.
+`Classical.choice` or project axiom.
+
+`PNP.LockedNANDGlobalSemanticThreshold` proves the remaining satisfiable final conditions by
+toggling only the fresh final lock around a satisfying coherent trace. It packages all six
+conditional premises for the same answer-independent candidate, proves satisfiable minimum bounds
+`B + 1 ≤ minimum ≤ B + 4`, proves residual slack at most four for every source, and proves
+satisfiability iff the exhaustive minimum is at least `B + 1`. Its eight-declaration transcript
+uses exactly `propext` and `Quot.sound`. The encoded polynomial bitstring builder, report-level
+`PNP.LockedNANDThreshold` link, CNFSAT-in-P theorem, and `P = NP` root remain absent.
 
 The current four project-specific axioms remain visible as an independent inventory:
 

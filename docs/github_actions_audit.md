@@ -192,10 +192,10 @@ The Lean workflow's successful build is not a theorem-release signal. Its root s
 assumption-free non-theorem data, `PNP.Main.p_eq_np` is absent, and the conditional bridge's four
 project-specific axioms remain visible in the workflow log. The locked-NAND threshold-boundary
 audit proves deductions only from six explicit premises. Later source-bound milestones now
-instantiate the carrier, candidates, baseline distinctness, trace law, and whole-carrier
-unsatisfiable final-zero law; they do not instantiate the satisfiable final-output conditions,
-uniform builder, report threshold, unconditional residual-slack-at-most-four bound, or
-polynomiality. The concrete-complexity audit
+instantiate the carrier, candidates, baseline distinctness, trace law, both whole-carrier branch
+laws, and all six fields; they derive the exact typed semantic threshold and residual slack at
+most four. They do not supply the encoded polynomial builder, report-level language link,
+construction/runtime bounds, CNFSAT-in-P theorem, or polynomiality. The concrete-complexity audit
 checks finite machine-leaf syntax, certificate and runtime bounds, output handoff costs, reduction
 composition, and the inactive target. The refinement audit adds exact proof-bearing contracts, raw
 machine-leaf witnesses, output-bound transport, and a decider bridge from a supplied refinement; it

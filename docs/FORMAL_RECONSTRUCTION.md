@@ -844,8 +844,8 @@ final coordinate is exactly `z ∧ TraceChecks ∧ T_out`; both candidates have 
 internal syntax, and every baseline output is structurally independent of the fresh `z` input.
 This constructs three of the six conditional-boundary fields. Candidate assembly alone does not
 prove global `BaselineDistinct`, `unsatisfiableFinalZero`, `satisfiableFinalConditions`, the
-threshold, or the uniform polynomial bitstring builder. Later milestones now discharge the first
-two of those three semantic fields. See
+threshold, or the uniform polynomial bitstring builder. Later milestones now discharge all three
+of those semantic fields. See
 [`lean_locked_nand_global_candidates.md`](./lean_locked_nand_global_candidates.md).
 
 The global `BaselineDistinct` milestone now closes the fourth field. Lean proves that every
@@ -868,10 +868,26 @@ baseline, while appending the forced-zero output preserves equivalence without a
 together these bounds prove the full exhaustive `referenceMinimum` is exactly `B`.
 
 Both public theorems use only `propext` and `Quot.sound`; neither reaches `Classical.choice` or a
-project axiom. Exactly `satisfiableFinalConditions` remains missing from the conditional threshold
-package. The satisfiable branch, global residual-slack result, uniform polynomial bitstring
-builder, and locked-NAND threshold remain open. See
+project axiom. This milestone by itself does not discharge the satisfiable branch. See
 [`lean_locked_nand_global_unsatisfiable_final_zero.md`](./lean_locked_nand_global_unsatisfiable_final_zero.md).
+
+`LockedNANDGlobalSemanticThreshold` now closes the sixth and final typed premise. Around a
+satisfying coherent trace, toggling only the fresh final-lock bit toggles the full final output
+while leaving every baseline output unchanged. Lean uses that pair of valuations to prove
+nonconstancy, separation from every positive carrier projection, and separation from every
+baseline coordinate. The special final-lock projection is handled by a separate valuation whose
+output-trace bit is false.
+
+All six fields are packaged from the same answer-independent candidates. Consequently, for every
+finite topological NAND circuit with baseline `B`, satisfiability implies an exhaustive minimum in
+`[B + 1, B + 4]`, unsatisfiability gives minimum exactly `B`, the displayed candidate has residual
+slack at most four, and satisfiability is equivalent to the minimum crossing `B + 1`. The private
+decidability instance is exhaustive finite input search and has no polynomial-runtime claim.
+
+The eight-declaration audit uses exactly `propext` and `Quot.sound`, never `Classical.choice` or a
+project axiom. This closes the typed semantic threshold, not the report's encoded polynomial-time
+builder or the abstract `PNP.LockedNANDThreshold` language. See
+[`lean_locked_nand_global_semantic_threshold.md`](./lean_locked_nand_global_semantic_threshold.md).
 
 The historical hostile review named `DirectWireOutputLowerBound`, `MacroDistinct`,
 `TraceEquivalence`, `ZeroOutputConvention`, and `FinalLockSeparation`. The general output lower
@@ -879,8 +895,8 @@ bound and model-level free-zero append convention were discharged in preceding l
 `TraceEquivalence` and complete candidate assembly are now formalized for the typed semantic
 carrier, global `MacroDistinct` is discharged by the exact baseline output conditions, and the
 whole-carrier `ZeroOutputConvention` consequence is discharged in the unsatisfiable branch.
-`FinalLockSeparation`, its satisfiable final-output conditions, and uniform polynomial premise
-construction remain missing. See
+`FinalLockSeparation` and its satisfiable semantic consequences are now discharged; encoded
+uniform polynomial construction remains missing. See
 [`lean_locked_nand_threshold_boundary.md`](./lean_locked_nand_threshold_boundary.md).
 
 The residual-route layer now performs one honest executable operation: it scans an explicit finite

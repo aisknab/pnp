@@ -81,6 +81,8 @@ lean/PNP/LockedNANDLocalBaseline.lean
 lean/PNP/LockedNANDThresholdBoundary.lean
 lean/PNP/LockedNANDCarrierTrace.lean
 lean/PNP/LockedNANDGlobalCandidates.lean
+lean/PNP/LockedNANDGlobalUnsatisfiableFinalZero.lean
+lean/PNP/LockedNANDGlobalSemanticThreshold.lean
 lean/PNP/LockedNAND.lean
 lean/PNP/ResidualBand.lean
 lean/PNP/ZeroSlack.lean
@@ -125,6 +127,8 @@ lean-audit/PNPLockedNANDThresholdBoundaryAxiomAudit.lean
 lean-audit/PNPLockedNANDCarrierTraceAxiomAudit.lean
 lean-audit/PNPLockedNANDGlobalCandidatesAxiomAudit.lean
 lean-audit/PNPLockedNANDGlobalBaselineDistinctAxiomAudit.lean
+lean-audit/PNPLockedNANDGlobalUnsatisfiableFinalZeroAxiomAudit.lean
+lean-audit/PNPLockedNANDGlobalSemanticThresholdAxiomAudit.lean
 docs/lean_nand_semantics.md
 docs/lean_concrete_machine.md
 docs/lean_tape_handoff.md
@@ -540,13 +544,13 @@ The module also proves the model-level zero-output convention: one constant-zero
 appended by wiring without changing the program or gate count. This closes one direct-wire concern
 from the hostile review, not the source-circuit trace theorem.
 
-The package is not constructed here. Its `satisfiable` parameter is an arbitrary proposition and
+The package is not constructed in the conditional module. Its `satisfiable` parameter is an arbitrary proposition and
 its `baseline` parameter an arbitrary natural number; neither is identified with circuit SAT or
-`lockedBaselineCount`. Complete baseline/full candidates, cross-instance
-`BaselineDistinct`/`MacroDistinct`, derived unsatisfiable and satisfiable final-output laws,
-`FinalLockSeparation`, an answer-independent uniform polynomial builder, and connection to
-`PNP.LockedNANDThreshold` are not supplied by this conditional module. Later global milestones
-now discharge the candidate, baseline-distinctness, and unsatisfiable-final-zero obligations. See
+`lockedBaselineCount`. Later global modules now supply complete baseline/full candidates,
+cross-instance `BaselineDistinct`/`MacroDistinct`, both final-output laws,
+`FinalLockSeparation`, and all six fields for one answer-independent typed candidate. An encoded
+uniform polynomial builder and connection to `PNP.LockedNANDThreshold` remain outside the
+conditional module and are still missing. See
 `docs/lean_locked_nand_threshold_boundary.md` for the exact premise and hostile-review inventories.
 
 ## Locked-NAND global carrier and trace equivalence
@@ -595,13 +599,15 @@ exhaustive reference minimum `B`. The dedicated five-theorem transcript uses
 only `propext` and `Quot.sound`.
 
 The next module proves `unsatisfiableFinalZero` on the whole carrier and the
-corresponding exact full-candidate minimum `B`. The only remaining
-conditional-premise field is `satisfiableFinalConditions`. The satisfiable
-branch law, polynomial builder, global residual-slack result, and threshold
+corresponding exact full-candidate minimum `B`. The following semantic-threshold
+module proves all three satisfiable final conditions by fresh-lock separation,
+packages all six fields, derives the exact typed threshold, and proves residual
+slack at most four. The encoded polynomial builder and report-level linkage
 remain absent. See
 `docs/lean_locked_nand_global_candidates.md` and
 `docs/lean_locked_nand_global_baseline_distinct.md`, then
-`docs/lean_locked_nand_global_unsatisfiable_final_zero.md`.
+`docs/lean_locked_nand_global_unsatisfiable_final_zero.md` and
+`docs/lean_locked_nand_global_semantic_threshold.md`.
 
 ## Global locked-NAND layer
 
@@ -619,9 +625,10 @@ accounting, semantic output lower bound, five local square minima, carrier/trace
 deductions from the six-field conditional boundary package are no longer part of that trust
 object. The complete exposed candidates and cross-instance baseline separation
 are now constructed on that carrier, and the whole-carrier unsatisfiable
-final-zero law is proved. Remaining global work includes the satisfiable
-final-output law, the uniform polynomial builder, and the report
-threshold/unconditional slack theorem.
+final-zero law, satisfiable final-lock separation, typed semantic threshold,
+and residual-slack-at-most-four theorem are proved. Remaining global work is
+the encoded uniform polynomial builder, its runtime/certificate bounds, and
+the report-level language/reduction linkage.
 
 ## Residual-band, ZeroSlack, and PCCMin layers
 
@@ -742,7 +749,7 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 1. Checker/reflection soundness: accepted PCCPack emits a semantically valid structured PCCMin loop certificate.
 2. Semantic adequacy of the PCCMin and ZeroSlack certificate fields.
 3. The locked-NAND-to-residual-band reduction theorem.
-4. The global SAT-to-locked-NAND builder and threshold theorem beyond the checked local macro and prefix semantics.
+4. The encoded polynomial SAT-to-locked-NAND builder and report-level language link beyond the checked typed semantic threshold.
 5. A deterministic polynomial-time decider proving `CNFSAT ∈ P`, together with concrete SAT
    NP-hardness/NP-completeness; the current direct verifier proves only `CNFSAT ∈ NP`.
 6. A compiler/refinement proving that every finite charged function, decision, and verifier
@@ -757,17 +764,15 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 The highest-value next targets are:
 
 ```text
-1. Prove the remaining satisfiable `FinalLockSeparation` consequences on the whole carrier:
-   nonconstancy, nonprojection, and separation from every baseline output.
-2. Assemble all six proved fields into the conditional threshold package for every source circuit
-   and derive the global locked-NAND threshold.
-3. Construct the same candidate family uniformly from encoded inputs with the polynomial
+1. Construct the proved candidate family uniformly from encoded inputs with the polynomial
    construction bound required by the pinned manuscript.
-4. Complete the raw Cook--Levin formula builder and package its concrete polynomial reduction.
-5. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
-6. Formalize or import concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
+2. Link that encoded construction to the abstract `PNP.LockedNANDThreshold` language without
+   adding a caller certificate or answer-dependent witness.
+3. Complete the raw Cook--Levin formula builder and package its concrete polynomial reduction.
+4. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
+5. Formalize or import concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.
-7. Formalize checker/reflection soundness for the PCC package.
+6. Formalize checker/reflection soundness for the PCC package.
 ```
 
 A passing Lean build is a real checked artifact. At this stage it checks an assumption-free status

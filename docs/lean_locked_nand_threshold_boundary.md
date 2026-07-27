@@ -24,9 +24,11 @@ conditional module. The later global-candidate layer constructs
 `baselineCandidate`, `fullCandidate`, and `initialOutputsPreserved`; the
 following global baseline-distinctness layer constructs `baselineConditions`,
 and the unsatisfiable-final-zero layer constructs `unsatisfiableFinalZero` on
-the whole carrier. The machine-readable
-`leanLockedNANDThresholdMissingInstantiationInventory` now repeats exactly
-the one field still missing: `satisfiableFinalConditions`.
+the whole carrier. `LockedNANDGlobalSemanticThreshold` derives
+`satisfiableFinalConditions` from the fresh final lock and packages all six
+fields for the same answer-independent candidate. The machine-readable
+`leanLockedNANDThresholdMissingInstantiationInventory` is now empty.
+The satisfiable final-output conditions are therefore formally discharged.
 
 ## What Lean derives from the package
 
@@ -49,8 +51,11 @@ satisfiable →
   satisfiable ↔ baseline + 1 ≤ referenceMinimum(full)
 ```
 
-The residual bound is therefore conditional on the premise package. It is not an unconditional
-`≤ 4` theorem for every report locked-NAND word.
+The deduction in this module is conditional on the premise package.
+`LockedNANDGlobalSemanticThreshold` now supplies that package and derives an
+unconditional `≤ 4` theorem for the real typed full candidate over every
+finite topological NAND circuit. That is still not an encoded construction
+or runtime theorem for every report locked-NAND word.
 
 ## Exact hostile-review mapping
 
@@ -60,34 +65,34 @@ The historical adversarial review named exactly five threshold lemmas:
 | --- | --- |
 | `DirectWireOutputLowerBound` | Discharged generally by the direct-wire output-to-gate injection and used here through reference-minimum lower bounds. |
 | `MacroDistinct` | Discharged globally for the complete carrier-tagged baseline by `baselineCandidate_outputConditions`; the square baseline consequently has exact reference minimum `B`. |
-| `TraceEquivalence` | Discharged for arbitrary finite typed NAND circuits by `LockedNANDCarrierTrace`; `LockedNANDGlobalCandidates` connects it to the complete exposed baseline/full candidates and exact final-conjunction semantics. The unsatisfiable branch is now derived; the satisfiable final-output conditions remain open. |
+| `TraceEquivalence` | Discharged for arbitrary finite typed NAND circuits by `LockedNANDCarrierTrace`; `LockedNANDGlobalCandidates` connects it to the complete exposed baseline/full candidates and exact final-conjunction semantics. Both semantic branches are now derived. |
 | `ZeroOutputConvention` | Discharged on the whole carrier: appending a constant-zero output preserves the program and gate count, and unsatisfiability now proves the constructed full final output is identically false. |
-| `FinalLockSeparation` | The required semantic consequences are stored in `satisfiableFinalConditions`; deriving them from a fresh final lock and the real construction remains missing. |
+| `FinalLockSeparation` | Discharged by toggling only the fresh final lock around one satisfying coherent trace, while every baseline coordinate remains unchanged. This proves final nonconstancy, nonprojection, and separation from every baseline output. |
 
 Thus the conditional module closes the deduction from the explicit semantic
-package. The candidate and baseline-distinctness milestones supply the
-construction, preservation, and baseline-condition fields without hiding the
-derived final-output branch laws or final-lock separation argument inside the
-theorem statement.
+package, while the later global modules construct and prove every field
+without hiding an answer-dependent candidate or final-lock assumption inside
+the theorem statement.
 
-## Missing global instantiation
+## Completed typed instantiation and remaining report link
 
-A report-level use still has to supply the remaining two fields for the concrete circuit
-construction. In particular it must:
+The typed circuit use now:
 
-1. prove the whole-carrier unsatisfiable final-zero law from `TraceEquivalence`;
-2. prove the satisfiable final output is nonconstant, nonprojection, and distinct from each
-   baseline coordinate using `FinalLockSeparation`; and
-3. package those facts uniformly, answer-independently, and in polynomial time.
+1. proves the whole-carrier unsatisfiable final-zero law from `TraceEquivalence`;
+2. proves the satisfiable final output is nonconstant, nonprojection, and distinct from each
+   baseline coordinate using the fresh final lock; and
+3. packages those facts uniformly and answer-independently for every finite topological NAND
+   circuit.
 
-The last condition matters: the premise structure by itself does not prevent choosing candidates
-after inspecting whether `satisfiable` is true. Such an answer-dependent witness would not be a SAT
-reduction.
+The candidate definitions contain no branch on satisfiability. A private
+exhaustive finite decision is used only to eliminate a proposition-level case
+split in the final iff theorem; it is not a construction step and carries no
+polynomial-runtime claim.
 
-The conditional parameters are merely an arbitrary proposition and an arbitrary natural number.
-The candidate layer proves the exact `lockedBaselineCount program` size alignment, but no completed
-premise value yet identifies the proposition with source-circuit satisfiability or connects the
-boundary to the abstract `PNP.LockedNANDThreshold` language and reduction trust surface.
+The remaining report-level work is different: construct the encoded
+locked-NAND instance with a proved polynomial-time machine and certificate-size
+bound, then connect the typed semantic object to the abstract
+`PNP.LockedNANDThreshold` language and reduction trust surface.
 
 ## Audit boundary
 
@@ -97,13 +102,14 @@ covers all 71 public declarations, and the complete global-candidate
 transcript covers all 64 public declarations, using only the approved
 Lean-standard closure and no `Classical.choice`. The five-theorem
 baseline-distinctness transcript and two-theorem unsatisfiable-final-zero
-transcript use exactly `propext` and `Quot.sound`. Carrier layout, semantic
+transcript use exactly `propext` and `Quot.sound`. The new eight-declaration
+semantic-threshold transcript uses the same exact closure. Carrier layout, semantic
 trace equivalence, exact candidate assembly, global baseline distinctness,
-and the whole-carrier unsatisfiable branch are now true in formal status. The
-satisfiable final-output conditions, uniform polynomial builder, threshold
-theorem, unconditional residual-slack-at-most-four theorem, and polynomiality
-remain false. Six blockers remain, including the still-missing global
-threshold work. The four project-specific axioms and absent
+both whole-carrier branches, the complete six-field package, the typed
+semantic threshold, and global residual slack at most four are now true in
+formal status. The encoded polynomial builder, report-level threshold link,
+and polynomiality remain false. Six blockers remain, including that
+construction/link work. The four project-specific axioms and absent
 `PNP.Main.p_eq_np` root theorem also remain. The axiom-free inactive
 `PNP.Main.ConcretePEqualsNP` definition does not change this threshold boundary or activate the
 publication gate.
@@ -118,3 +124,5 @@ and the discharged baseline conditions are documented in
 [Lean locked-NAND global baseline distinctness](./lean_locked_nand_global_baseline_distinct.md).
 The derived unsatisfiable branch is documented in
 [Lean locked-NAND global unsatisfiable final-zero branch](./lean_locked_nand_global_unsatisfiable_final_zero.md).
+The completed satisfiable branch and typed threshold are documented in
+[Lean locked-NAND global semantic threshold](./lean_locked_nand_global_semantic_threshold.md).

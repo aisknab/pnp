@@ -75,11 +75,14 @@ instantiations were exactly:
 1. `unsatisfiableFinalZero`; and
 2. `satisfiableFinalConditions`.
 
-The later unsatisfiable-final-zero milestone now discharges the first branch
-law. This candidate module alone does not prove either whole-carrier final
-branch law, the locked-NAND threshold, residual slack at most four for the
-global family, or the answer-independent polynomial builder from input bitstrings.
-It also does not prove `CNFSAT ∈ P`, NP-completeness, or `P = NP`.
+The later unsatisfiable-final-zero milestone discharges the first branch law,
+and the
+[`global semantic threshold`](./lean_locked_nand_global_semantic_threshold.md)
+milestone discharges the second, packages all six fields, and derives the
+typed threshold and residual bound. This candidate module alone does not
+prove those later results. The encoded answer-independent polynomial builder,
+report-level language link, `CNFSAT ∈ P`, NP-completeness, and `P = NP`
+remain absent.
 
 The legacy manuscript remains the reconstruction specification. If a later
 Lean obligation exposes a concrete inconsistency or missing premise, that

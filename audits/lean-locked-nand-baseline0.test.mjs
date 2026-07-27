@@ -256,10 +256,10 @@ test('status credits only local and conditional PR7 results', async () => {
     'leanLockedNANDLocalBaselineAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
   assert.equal(status.leanLockedNANDProofScope, 'typed-local-macros-source-derived-counts-and-five-local-square-baselines');
+  assert.equal(status.leanLockedNANDResidualSlackAtMostFourFormalized, true);
   for (const field of [
     'leanLockedNANDBuilderFormalized',
     'leanLockedNANDThresholdFormalized',
-    'leanLockedNANDResidualSlackAtMostFourFormalized',
     'leanLockedNANDPolynomialBuilderFormalized',
   ]) assert.equal(status[field], false, field);
   assert.equal(status.remainingBlockers.length, 6);

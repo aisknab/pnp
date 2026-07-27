@@ -49,9 +49,7 @@ const PREMISE_FIELDS = Object.freeze([
   'unsatisfiableFinalZero',
   'satisfiableFinalConditions',
 ]);
-const MISSING_FIELDS = Object.freeze([
-  'satisfiableFinalConditions',
-]);
+const MISSING_FIELDS = Object.freeze([]);
 
 async function text0(relativePath) {
   return readFile(path.join(ROOT, relativePath), 'utf8');
@@ -129,7 +127,7 @@ test('documentation preserves the hostile-review inventory and exact missing ins
   assert.match(docs, /not the report(?:'s)? (?:locked-NAND )?threshold theorem/iu);
   assert.match(docs, /global [`']?BaselineDistinct[\s\S]*(?:formalized|discharged|closes)/iu);
   assert.match(docs, /TraceEquivalence[\s\S]*(?:formalized|discharged)/iu);
-  assert.match(docs, /satisfiable final-output (?:law|conditions)[\s\S]*(?:remain|open)/iu);
+  assert.match(docs, /satisfiable final-output (?:law|conditions)[\s\S]*(?:formalized|discharged|closed)/iu);
 });
 
 test('status credits the conditional boundary while every global threshold claim stays false', async () => {
@@ -149,6 +147,12 @@ test('status credits the conditional boundary while every global threshold claim
     'leanLockedNANDGlobalBaselineDistinctAxiomAuditPassed',
     'leanLockedNANDUnsatisfiableFinalZeroFormalized',
     'leanLockedNANDUnsatisfiableFinalZeroAxiomAuditPassed',
+    'leanLockedNANDThresholdBoundaryPremisesInstantiated',
+    'leanLockedNANDDerivedFinalOutputLawsFormalized',
+    'leanLockedNANDResidualSlackAtMostFourFormalized',
+    'leanLockedNANDSatisfiableFinalConditionsFormalized',
+    'leanLockedNANDGlobalSemanticThresholdFormalized',
+    'leanLockedNANDGlobalSemanticThresholdAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
   assert.equal(status.leanLockedNANDCarrierTraceAuditedDeclarationCount, 71);
   assert.equal(status.leanLockedNANDGlobalCandidateAuditedDeclarationCount, 64);
@@ -157,11 +161,8 @@ test('status credits the conditional boundary while every global threshold claim
   assert.deepEqual(status.leanLockedNANDThresholdPremiseInventory, PREMISE_FIELDS);
   assert.deepEqual(status.leanLockedNANDThresholdMissingInstantiationInventory, MISSING_FIELDS);
   for (const field of [
-    'leanLockedNANDThresholdBoundaryPremisesInstantiated',
-    'leanLockedNANDDerivedFinalOutputLawsFormalized',
     'leanLockedNANDBuilderFormalized',
     'leanLockedNANDThresholdFormalized',
-    'leanLockedNANDResidualSlackAtMostFourFormalized',
     'leanLockedNANDPolynomialBuilderFormalized',
   ]) assert.equal(status[field], false, field);
   assert.equal(status.remainingBlockers.length, 6);
