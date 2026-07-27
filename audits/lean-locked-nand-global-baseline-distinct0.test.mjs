@@ -173,13 +173,14 @@ test('status and publication credit only BaselineDistinct and retain the remaini
   assert.equal(
     status.leanLockedNANDGlobalBaselineDistinctAuditedDeclarationCount, 5,
   );
-  assert.deepEqual(status.leanLockedNANDThresholdMissingInstantiationInventory, [
-    'satisfiableFinalConditions',
-  ]);
+  assert.deepEqual(status.leanLockedNANDThresholdMissingInstantiationInventory, []);
   for (const field of [
     'leanLockedNANDThresholdBoundaryPremisesInstantiated',
     'leanLockedNANDDerivedFinalOutputLawsFormalized',
     'leanLockedNANDResidualSlackAtMostFourFormalized',
+    'leanLockedNANDGlobalSemanticThresholdFormalized',
+  ]) assert.equal(status[field], true, field);
+  for (const field of [
     'leanLockedNANDPolynomialBuilderFormalized',
     'leanLockedNANDBuilderFormalized',
     'leanLockedNANDThresholdFormalized',

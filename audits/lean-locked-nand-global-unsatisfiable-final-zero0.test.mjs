@@ -185,12 +185,15 @@ test('status credits only the unsatisfiable branch and leaves downstream claims 
   );
   assert.deepEqual(
     status.leanLockedNANDThresholdMissingInstantiationInventory,
-    ['satisfiableFinalConditions'],
+    [],
   );
   for (const field of [
     'leanLockedNANDThresholdBoundaryPremisesInstantiated',
     'leanLockedNANDDerivedFinalOutputLawsFormalized',
     'leanLockedNANDResidualSlackAtMostFourFormalized',
+    'leanLockedNANDGlobalSemanticThresholdFormalized',
+  ]) assert.equal(status[field], true, field);
+  for (const field of [
     'leanLockedNANDPolynomialBuilderFormalized',
     'leanLockedNANDBuilderFormalized',
     'leanLockedNANDThresholdFormalized',

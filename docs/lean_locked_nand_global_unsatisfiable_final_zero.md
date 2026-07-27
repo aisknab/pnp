@@ -53,14 +53,16 @@ also retained as a separation case: its coherent final output can be true.
 ## What this does not prove
 
 This milestone instantiates `unsatisfiableFinalZero` in the six-field
-conditional threshold package. The only missing semantic field is now
-`satisfiableFinalConditions`.
+conditional threshold package. By itself it does not prove satisfiable
+`FinalLockSeparation`.
 
-It does not prove satisfiable `FinalLockSeparation`, instantiate the complete
-threshold package, establish the global locked-NAND threshold or global
-residual-slack bound, construct the answer-independent polynomial bitstring
-builder, establish a deterministic polynomial-time CNF-SAT decider, prove
-NP-completeness, or prove `P = NP`.
+The following
+[`global semantic threshold`](./lean_locked_nand_global_semantic_threshold.md)
+milestone now supplies `satisfiableFinalConditions`, packages all six fields,
+and derives the typed threshold and residual-slack bound. The encoded
+answer-independent polynomial bitstring builder, report-level language link,
+deterministic polynomial-time CNF-SAT decider, NP-completeness theorem, and
+`P = NP` remain absent.
 
 The pinned legacy manuscript remains the reconstruction specification.
 An alternative construction is appropriate only if a precise Lean obligation
@@ -99,3 +101,8 @@ Its 63-page, 402,956-byte PDF has SHA-256
 All five activation fingerprints remain unset, all four project assumptions
 and six blockers remain, `PNP.Main.p_eq_np` remains absent, and the concrete
 publication gate remains false.
+
+The current successor evidence is recorded at inventory coordinate
+`PNP-LEAN-THEOREM-INVENTORY-2026-07-28-88` and status coordinate
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-28-88`; see
+[Lean locked-NAND global semantic threshold](./lean_locked_nand_global_semantic_threshold.md).

@@ -93,6 +93,7 @@ import PNP.LockedNANDThresholdBoundary
 import PNP.LockedNANDCarrierTrace
 import PNP.LockedNANDGlobalCandidates
 import PNP.LockedNANDGlobalUnsatisfiableFinalZero
+import PNP.LockedNANDGlobalSemanticThreshold
 import PNP.LockedNAND
 import PNP.ResidualBand
 import PNP.ZeroSlack

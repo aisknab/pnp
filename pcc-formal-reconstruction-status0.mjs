@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-27-87';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-28-88';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -54,9 +54,7 @@ const LOCKED_NAND_THRESHOLD_PREMISE_INVENTORY = Object.freeze([
 ]);
 
 const LOCKED_NAND_THRESHOLD_MISSING_INSTANTIATION_INVENTORY =
-  Object.freeze([
-    'satisfiableFinalConditions',
-  ]);
+  Object.freeze([]);
 
 const VERIFICATION_COMMANDS = Object.freeze([
   'node pcc-formal-reconstruction-status0.mjs --json',
@@ -279,6 +277,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDGlobalUnsatisfiableFinalZeroAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPLockedNANDGlobalUnsatisfiableFinalZero.lean',
   'node --test audits/lean-locked-nand-global-unsatisfiable-final-zero0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDGlobalSemanticThresholdAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPLockedNANDGlobalSemanticThreshold.lean',
+  'node --test audits/lean-locked-nand-global-semantic-threshold0.test.mjs',
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualRoutesAxiomAudit.lean',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
@@ -356,17 +357,18 @@ const NON_CLAIMS = Object.freeze([
   'The exact-width syntactic NAND enumeration remains intentionally noncanonical and may contain duplicates.',
   'The exhaustive direct-wire truth-table and reference-minimum computation has no polynomial-runtime claim and does not formalize the report\'s residual-band minimizer.',
   'Replacement and global slack are proved only for the concrete serial framed-context construction, not arbitrary support profiles or the report\'s locked-NAND family.',
-  'The typed local locked-NAND candidates, source-derived accounting, conditional square-baseline theorem, and five discharged local square baselines do not prove global cross-instance BaselineDistinct, a locked builder or threshold, residual slack at most four, or polynomial runtime.',
+  'The typed local locked-NAND candidates, source-derived accounting, conditional square-baseline theorem, and five discharged local square baselines do not by themselves prove the later global semantic threshold, an encoded polynomial builder, the report-level locked-NAND theorem, or polynomial runtime.',
   'The report threshold word is multi-output: its baseline coordinates remain present alongside one final coordinate; a legacy single-output seed is not that construction.',
   'The legacy synthetic m=2 fixture is quarantined as internally inconsistent: honest source-derived baseline/displayed counts are 86/90, metadata-consistent counts are 95/99, and stored hybrid counts are 91/95.',
-  'The proof-bearing conditional locked-NAND semantic boundary is not the report threshold theorem: global candidate assembly, BaselineDistinct, and the whole-carrier unsatisfiable final-zero law now instantiate five of its six fields, but the satisfiable final-output conditions remain an assumption rather than an instantiated circuit theorem.',
-  'The residual-slack-at-most-four result is conditional on that six-field premise package; it is not an unconditional result for the report locked-NAND family.',
+  'The proof-bearing conditional locked-NAND semantic boundary is now instantiated in all six fields by one answer-independent typed circuit candidate, but it is not the report threshold theorem or an encoded polynomial-time builder.',
+  'The global typed full candidate now has residual slack at most four for every finite topological NAND circuit; this semantic bound does not construct the report\'s encoded family or prove its polynomial construction time.',
   'The locked-NAND carrier and TraceEquivalence milestone is unbounded over arbitrary finite topological NAND circuits: it proves the exact X/T/O/R/L/z partition, generates three checks per gate, constructs coherent traces, and proves accepted traces equal genuine evaluation. It does not assemble the complete exposed candidates or prove the threshold.',
   'The global locked-NAND candidate milestone constructs the exact square B-gate/B-output baseline and the B+4-gate/B+1-output extension for every finite typed circuit, preserves every baseline output, proves the final coordinate is z AND TraceChecks AND T_out, excludes internal constants, and proves every baseline coordinate is independent of z.',
-  'The global locked-NAND BaselineDistinct milestone proves every exposed baseline coordinate is nonconstant, is not a positive carrier-input projection, and computes a Boolean function distinct from every other exposed coordinate. Consequently its exhaustive reference minimum is exactly B. It does not itself prove either final branch law, the locked-NAND threshold, residual slack at most four for the global family, or a uniform polynomial bitstring builder.',
-  'The global locked-NAND unsatisfiable-final-zero milestone proves that unsatisfiability makes the full final coordinate false on every carrier valuation and makes the full exhaustive reference minimum exactly B. It does not prove the satisfiable final-output conditions, the locked-NAND threshold, residual slack at most four for the global family, or a uniform polynomial bitstring builder.',
-  'Against the hostile-review inventory, DirectWireOutputLowerBound, global MacroDistinct, semantic-carrier TraceEquivalence, whole-carrier ZeroOutputConvention, and complete candidate assembly are now discharged, while FinalLockSeparation and uniform polynomial premise construction remain missing.',
-  'The conditional module quantifies an arbitrary satisfiable proposition and baseline natural number; it does not identify them with source-circuit SAT and lockedBaselineCount, enforce answer-independent uniform construction, or connect the candidate boundary to the abstract PNP.LockedNANDThreshold language.',
+  'The global locked-NAND BaselineDistinct milestone proves every exposed baseline coordinate is nonconstant, is not a positive carrier-input projection, and computes a Boolean function distinct from every other exposed coordinate. Consequently its exhaustive reference minimum is exactly B. By itself it does not prove either final branch law, residual slack at most four for the global family, or a uniform polynomial bitstring builder.',
+  'The global locked-NAND unsatisfiable-final-zero milestone proves that unsatisfiability makes the full final coordinate false on every carrier valuation and makes the full exhaustive reference minimum exactly B. By itself it does not prove the satisfiable final-output conditions, residual slack at most four for the global family, or a uniform polynomial bitstring builder.',
+  'The global locked-NAND semantic-threshold milestone discharges the satisfiable final-output conditions, all six typed premises, the exact satisfiable/unsatisfiable minimum split, and residual slack at most four for one answer-independent candidate over every finite topological NAND circuit. It uses exhaustive finite satisfiability decision only to eliminate a proposition-level case split and makes no polynomial-runtime claim.',
+  'Against the hostile-review inventory, DirectWireOutputLowerBound, global MacroDistinct, semantic-carrier TraceEquivalence, whole-carrier ZeroOutputConvention, and FinalLockSeparation are now discharged; the encoded uniform polynomial builder and its report-level linkage remain missing.',
+  'The generic conditional module quantifies an arbitrary satisfiable proposition and baseline natural number. LockedNANDGlobalSemanticThreshold now identifies those with source-circuit SAT and lockedBaselineCount for the typed candidate, but neither module connects that semantic object to the abstract PNP.LockedNANDThreshold language or supplies an encoded polynomial builder.',
   'The executable residual-route scan is complete only for the explicit finite implementation list supplied by its caller; unresolved excludes no unlisted gain and does not imply global minimality or ZeroSlack.',
   'An empty-list scan is formally shown to remain unresolved on a positive-slack implementation, so search failure cannot be promoted to zero residual slack.',
   'Exact and ZeroSlack route results require Lean proofs of semantic minimality and are never manufactured by the executable gain scanner; no BCEL, HN/BUD, selector, PCCMin-loop, or residual-band completeness follows.',
@@ -1026,7 +1028,7 @@ const EXACT_FIELDS = Object.freeze({
   leanLockedNANDConditionalResidualSlackAtMostFourFormalized: true,
   leanLockedNANDThresholdBoundaryAxiomAuditPassed: true,
   leanLockedNANDThresholdBoundaryScope: 'proof-bearing-typed-candidate-and-semantic-premises-only',
-  leanLockedNANDThresholdBoundaryPremisesInstantiated: false,
+  leanLockedNANDThresholdBoundaryPremisesInstantiated: true,
   leanLockedNANDGlobalBaselineDistinctFormalized: true,
   leanLockedNANDGlobalBaselineDistinctAxiomAuditPassed: true,
   leanLockedNANDGlobalBaselineDistinctAuditedDeclarationCount: 5,
@@ -1050,8 +1052,14 @@ const EXACT_FIELDS = Object.freeze({
   leanLockedNANDGlobalCandidateAuditedDeclarationCount: 64,
   leanLockedNANDGlobalCandidateScope:
     'arbitrary-finite-topological-nand-circuits-exact-baseline-and-four-gate-extension',
-  leanLockedNANDDerivedFinalOutputLawsFormalized: false,
-  leanLockedNANDResidualSlackAtMostFourFormalized: false,
+  leanLockedNANDDerivedFinalOutputLawsFormalized: true,
+  leanLockedNANDResidualSlackAtMostFourFormalized: true,
+  leanLockedNANDSatisfiableFinalConditionsFormalized: true,
+  leanLockedNANDGlobalSemanticThresholdFormalized: true,
+  leanLockedNANDGlobalSemanticThresholdAxiomAuditPassed: true,
+  leanLockedNANDGlobalSemanticThresholdAuditedDeclarationCount: 8,
+  leanLockedNANDGlobalSemanticThresholdScope:
+    'arbitrary-finite-topological-nand-circuits-complete-six-field-premises-and-typed-semantic-threshold',
   leanLockedNANDPolynomialBuilderFormalized: false,
   leanCompatibleReplacementFormalized: false,
   leanGlobalSlackLawFormalized: false,
@@ -1093,7 +1101,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-27-LOCKED-NAND-UNSATISFIABLE-FINAL-ZERO-86',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-28-LOCKED-NAND-GLOBAL-SEMANTIC-THRESHOLD-87',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -1729,7 +1737,7 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanLockedNANDConditionalResidualSlackAtMostFourFormalized: true,
       leanLockedNANDThresholdBoundaryAxiomAuditPassed: true,
       leanLockedNANDThresholdBoundaryScope: 'proof-bearing-typed-candidate-and-semantic-premises-only',
-      leanLockedNANDThresholdBoundaryPremisesInstantiated: false,
+      leanLockedNANDThresholdBoundaryPremisesInstantiated: true,
       leanLockedNANDGlobalBaselineDistinctFormalized: true,
       leanLockedNANDGlobalBaselineDistinctAxiomAuditPassed: true,
       leanLockedNANDGlobalBaselineDistinctAuditedDeclarationCount: 5,
@@ -1753,8 +1761,14 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanLockedNANDGlobalCandidateAuditedDeclarationCount: 64,
       leanLockedNANDGlobalCandidateScope:
         'arbitrary-finite-topological-nand-circuits-exact-baseline-and-four-gate-extension',
-      leanLockedNANDDerivedFinalOutputLawsFormalized: false,
-      leanLockedNANDResidualSlackAtMostFourFormalized: false,
+      leanLockedNANDDerivedFinalOutputLawsFormalized: true,
+      leanLockedNANDResidualSlackAtMostFourFormalized: true,
+      leanLockedNANDSatisfiableFinalConditionsFormalized: true,
+      leanLockedNANDGlobalSemanticThresholdFormalized: true,
+      leanLockedNANDGlobalSemanticThresholdAxiomAuditPassed: true,
+      leanLockedNANDGlobalSemanticThresholdAuditedDeclarationCount: 8,
+      leanLockedNANDGlobalSemanticThresholdScope:
+        'arbitrary-finite-topological-nand-circuits-complete-six-field-premises-and-typed-semantic-threshold',
       leanLockedNANDPolynomialBuilderFormalized: false,
       leanCompatibleReplacementFormalized: false,
       leanGlobalSlackLawFormalized: false,
@@ -1847,7 +1861,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-27-87',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-28-88',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

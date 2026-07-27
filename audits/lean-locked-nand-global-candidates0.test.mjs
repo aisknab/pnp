@@ -246,9 +246,12 @@ test('documentation and status credit assembly without claiming the missing boun
   for (const field of [
     'leanLockedNANDThresholdBoundaryPremisesInstantiated',
     'leanLockedNANDDerivedFinalOutputLawsFormalized',
+    'leanLockedNANDResidualSlackAtMostFourFormalized',
+    'leanLockedNANDGlobalSemanticThresholdFormalized',
+  ]) assert.equal(status[field], true, field);
+  for (const field of [
     'leanLockedNANDBuilderFormalized',
     'leanLockedNANDThresholdFormalized',
-    'leanLockedNANDResidualSlackAtMostFourFormalized',
     'leanLockedNANDPolynomialBuilderFormalized',
   ]) assert.equal(status[field], false, field);
   assert.equal(status.remainingBlockers.length, 6);
