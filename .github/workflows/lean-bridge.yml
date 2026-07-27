@@ -104,6 +104,7 @@ on:
       - 'audits/lean-locked-nand-carrier-trace0.test.mjs'
       - 'audits/lean-locked-nand-global-candidates0.test.mjs'
       - 'audits/lean-locked-nand-global-baseline-distinct0.test.mjs'
+      - 'audits/lean-locked-nand-global-unsatisfiable-final-zero0.test.mjs'
       - 'audits/lean-residual-routes0.test.mjs'
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_machine.md'
@@ -164,6 +165,7 @@ on:
       - 'docs/lean_locked_nand_carrier_trace.md'
       - 'docs/lean_locked_nand_global_candidates.md'
       - 'docs/lean_locked_nand_global_baseline_distinct.md'
+      - 'docs/lean_locked_nand_global_unsatisfiable_final_zero.md'
       - 'docs/lean_residual_routes.md'
       - 'docs/lean_theorem_inventory.md'
       - 'docs/FORMAL_RECONSTRUCTION.md'
@@ -275,6 +277,7 @@ on:
       - 'audits/lean-locked-nand-carrier-trace0.test.mjs'
       - 'audits/lean-locked-nand-global-candidates0.test.mjs'
       - 'audits/lean-locked-nand-global-baseline-distinct0.test.mjs'
+      - 'audits/lean-locked-nand-global-unsatisfiable-final-zero0.test.mjs'
       - 'audits/lean-residual-routes0.test.mjs'
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_machine.md'
@@ -335,6 +338,7 @@ on:
       - 'docs/lean_locked_nand_carrier_trace.md'
       - 'docs/lean_locked_nand_global_candidates.md'
       - 'docs/lean_locked_nand_global_baseline_distinct.md'
+      - 'docs/lean_locked_nand_global_unsatisfiable_final_zero.md'
       - 'docs/lean_residual_routes.md'
       - 'docs/lean_theorem_inventory.md'
       - 'docs/FORMAL_RECONSTRUCTION.md'
@@ -2037,6 +2041,26 @@ jobs:
           fi
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 5
           lake env lean -DwarningAsError=true lean-regression/PNPLockedNANDGlobalBaselineDistinct.lean
+
+      - name: Print locked-NAND global unsatisfiable final-zero axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDGlobalUnsatisfiableFinalZeroAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.DirectWire\.LockedNANDGlobalCandidates\.(fullCandidate_final_eq_false_of_unsatisfiable|fullCandidate_referenceMinimum_eq_baseline_of_unsatisfiable)'" -eq 2
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[propext, Quot.sound\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected locked-NAND unsatisfiable final-zero axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Locked-NAND unsatisfiable final-zero reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 2
+          lake env lean -DwarningAsError=true lean-regression/PNPLockedNANDGlobalUnsatisfiableFinalZero.lean
+          node --test audits/lean-locked-nand-global-unsatisfiable-final-zero0.test.mjs
 
       - name: Print explicit-list residual-route axioms
         run: |

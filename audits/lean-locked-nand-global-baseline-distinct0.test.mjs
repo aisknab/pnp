@@ -174,7 +174,6 @@ test('status and publication credit only BaselineDistinct and retain the remaini
     status.leanLockedNANDGlobalBaselineDistinctAuditedDeclarationCount, 5,
   );
   assert.deepEqual(status.leanLockedNANDThresholdMissingInstantiationInventory, [
-    'unsatisfiableFinalZero',
     'satisfiableFinalConditions',
   ]);
   for (const field of [
