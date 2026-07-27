@@ -75,11 +75,13 @@ threshold overclaims.
 ## What this does not prove
 
 This milestone instantiates `baselineConditions` in the six-field conditional
-threshold package. Exactly two semantic fields remain:
+threshold package. At this boundary, two semantic fields remained:
 
 1. `unsatisfiableFinalZero`; and
 2. `satisfiableFinalConditions`.
 
+The following unsatisfiable-final-zero milestone now discharges the first
+field on the whole carrier. `satisfiableFinalConditions` remains open.
 Baseline distinctness alone does not prove either whole-carrier final-output
 law, the locked-NAND threshold, residual slack at most four for the global
 family, or the answer-independent polynomial builder from input bitstrings.

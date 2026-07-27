@@ -50,7 +50,6 @@ const PREMISE_FIELDS = Object.freeze([
   'satisfiableFinalConditions',
 ]);
 const MISSING_FIELDS = Object.freeze([
-  'unsatisfiableFinalZero',
   'satisfiableFinalConditions',
 ]);
 
@@ -130,7 +129,7 @@ test('documentation preserves the hostile-review inventory and exact missing ins
   assert.match(docs, /not the report(?:'s)? (?:locked-NAND )?threshold theorem/iu);
   assert.match(docs, /global [`']?BaselineDistinct[\s\S]*(?:formalized|discharged|closes)/iu);
   assert.match(docs, /TraceEquivalence[\s\S]*(?:formalized|discharged)/iu);
-  assert.match(docs, /derived (?:whole-carrier )?final-output laws[\s\S]*(?:remain|open)/iu);
+  assert.match(docs, /satisfiable final-output (?:law|conditions)[\s\S]*(?:remain|open)/iu);
 });
 
 test('status credits the conditional boundary while every global threshold claim stays false', async () => {
@@ -148,6 +147,8 @@ test('status credits the conditional boundary while every global threshold claim
     'leanLockedNANDGlobalCandidateAxiomAuditPassed',
     'leanLockedNANDGlobalBaselineDistinctFormalized',
     'leanLockedNANDGlobalBaselineDistinctAxiomAuditPassed',
+    'leanLockedNANDUnsatisfiableFinalZeroFormalized',
+    'leanLockedNANDUnsatisfiableFinalZeroAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
   assert.equal(status.leanLockedNANDCarrierTraceAuditedDeclarationCount, 71);
   assert.equal(status.leanLockedNANDGlobalCandidateAuditedDeclarationCount, 64);

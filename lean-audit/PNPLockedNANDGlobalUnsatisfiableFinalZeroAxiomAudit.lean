@@ -1,0 +1,4 @@
+import PNP.LockedNANDGlobalUnsatisfiableFinalZero
+
+#print axioms PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_final_eq_false_of_unsatisfiable
+#print axioms PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_referenceMinimum_eq_baseline_of_unsatisfiable

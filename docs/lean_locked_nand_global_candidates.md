@@ -69,15 +69,16 @@ audit boundary are documented in
 The preceding conditional threshold theorem asks for six fields. Candidate
 assembly constructs `baselineCandidate`, `fullCandidate`, and
 `initialOutputsPreserved`. The following global-distinctness milestone
-constructs `baselineConditions`. The remaining missing instantiations are
-exactly:
+constructs `baselineConditions`. At that boundary, the remaining missing
+instantiations were exactly:
 
 1. `unsatisfiableFinalZero`; and
 2. `satisfiableFinalConditions`.
 
-Accordingly, this module does not prove either whole-carrier final branch
-law, the locked-NAND threshold, residual slack at most four for the global
-family, or the answer-independent polynomial builder from input bitstrings.
+The later unsatisfiable-final-zero milestone now discharges the first branch
+law. This candidate module alone does not prove either whole-carrier final
+branch law, the locked-NAND threshold, residual slack at most four for the
+global family, or the answer-independent polynomial builder from input bitstrings.
 It also does not prove `CNFSAT ∈ P`, NP-completeness, or `P = NP`.
 
 The legacy manuscript remains the reconstruction specification. If a later

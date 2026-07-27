@@ -545,8 +545,9 @@ its `baseline` parameter an arbitrary natural number; neither is identified with
 `lockedBaselineCount`. Complete baseline/full candidates, cross-instance
 `BaselineDistinct`/`MacroDistinct`, derived unsatisfiable and satisfiable final-output laws,
 `FinalLockSeparation`, an answer-independent uniform polynomial builder, and connection to
-`PNP.LockedNANDThreshold` remain absent. See `docs/lean_locked_nand_threshold_boundary.md` for the
-exact premise and hostile-review inventories.
+`PNP.LockedNANDThreshold` are not supplied by this conditional module. Later global milestones
+now discharge the candidate, baseline-distinctness, and unsatisfiable-final-zero obligations. See
+`docs/lean_locked_nand_threshold_boundary.md` for the exact premise and hostile-review inventories.
 
 ## Locked-NAND global carrier and trace equivalence
 
@@ -593,11 +594,14 @@ pairwise semantically distinct; the square baseline consequently has exact
 exhaustive reference minimum `B`. The dedicated five-theorem transcript uses
 only `propext` and `Quot.sound`.
 
-The remaining conditional-premise fields are exactly `unsatisfiableFinalZero`
-and `satisfiableFinalConditions`. The two branch laws, polynomial builder,
-global residual-slack result, and threshold remain absent. See
+The next module proves `unsatisfiableFinalZero` on the whole carrier and the
+corresponding exact full-candidate minimum `B`. The only remaining
+conditional-premise field is `satisfiableFinalConditions`. The satisfiable
+branch law, polynomial builder, global residual-slack result, and threshold
+remain absent. See
 `docs/lean_locked_nand_global_candidates.md` and
-`docs/lean_locked_nand_global_baseline_distinct.md`.
+`docs/lean_locked_nand_global_baseline_distinct.md`, then
+`docs/lean_locked_nand_global_unsatisfiable_final_zero.md`.
 
 ## Global locked-NAND layer
 
@@ -614,8 +618,9 @@ The local macro truth laws, supplied-list prefix exactness, typed local candidat
 accounting, semantic output lower bound, five local square minima, carrier/trace equivalence, and
 deductions from the six-field conditional boundary package are no longer part of that trust
 object. The complete exposed candidates and cross-instance baseline separation
-are now constructed on that carrier. Remaining global work includes the
-derived final-output laws, the uniform polynomial builder, and the report
+are now constructed on that carrier, and the whole-carrier unsatisfiable
+final-zero law is proved. Remaining global work includes the satisfiable
+final-output law, the uniform polynomial builder, and the report
 threshold/unconditional slack theorem.
 
 ## Residual-band, ZeroSlack, and PCCMin layers
@@ -752,20 +757,17 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 The highest-value next targets are:
 
 ```text
-1. Assemble the exact global baseline and full candidates from the now-formalized carrier and
-   distinguished-check list.
-2. Prove cross-instance `BaselineDistinct` for every exposed macro and prefix output.
-3. Construct the four-gate final output and derive the unsatisfiable-zero and satisfiable
-   `FinalLockSeparation` laws.
-4. Instantiate the conditional boundary uniformly and prove the report threshold theorem and
-   polynomial construction bound.
+1. Prove the remaining satisfiable `FinalLockSeparation` consequences on the whole carrier:
+   nonconstancy, nonprojection, and separation from every baseline output.
+2. Assemble all six proved fields into the conditional threshold package for every source circuit
+   and derive the global locked-NAND threshold.
+3. Construct the same candidate family uniformly from encoded inputs with the polynomial
+   construction bound required by the pinned manuscript.
+4. Complete the raw Cook--Levin formula builder and package its concrete polynomial reduction.
 5. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
-6. Transport the exact framer/simulator/handoff trace into `terminalBridgeMachine`, then turn the
-   proved four-stage trace into one full pipeline refinement with external-input-size polynomial
-   runtime/output bounds.
-7. Formalize or import concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
+6. Formalize or import concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.
-8. Formalize checker/reflection soundness for the PCC package.
+7. Formalize checker/reflection soundness for the PCC package.
 ```
 
 A passing Lean build is a real checked artifact. At this stage it checks an assumption-free status

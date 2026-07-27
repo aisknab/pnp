@@ -26,8 +26,10 @@ from current theorem status.
   paired work-input bridge, direct verifier bridge, and complete work-machine correctness closure,
   and enforced zero-axiom direct-wire semantics, enumerator, finite truth-table,
   exhaustive reference-minimum, concrete framed composition/slack, typed locked-NAND candidate,
-  semantic output-lower-bound, source-accounting, finite local-baseline, and conditional
-  threshold-boundary audits plus the explicit-list residual-route audit when Lean inputs change.
+  semantic output-lower-bound, source-accounting, finite local-baseline, conditional
+  threshold-boundary, global carrier/trace, complete candidate, global baseline-distinctness, and
+  whole-carrier unsatisfiable-final-zero audits plus the explicit-list residual-route audit when
+  Lean inputs change.
   The Cook--Levin lane additionally audits the 79-declaration rectangular formula schedule, the
   136-declaration direct formula cursor, the 39-declaration literal input-length tally machine, the
   40-declaration executable framer-to-tally prefix, the 68-declaration standalone four-token
@@ -159,8 +161,9 @@ from current theorem status.
   a complete formula builder.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
-  locked-NAND transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; residual
-  routes require 30. The workflow also checks the byte-identical inventory mirrors, derives the
+  locked-NAND local transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; the
+  global transcripts require exactly 71, 64, 5, and 2 declarations; residual routes require 30.
+  The workflow also checks the byte-identical inventory mirrors, derives the
   false concrete publication gate and status/report outputs, and verifies same-environment
   double-build determinism plus exact committed bytes for the current concise PDF. The
   hosted runner's apt-installed TeX and Poppler versions are not cryptographically pinned, so this
@@ -188,9 +191,11 @@ historical 1,121-test suite. Those routes are not current package exports, scrip
 The Lean workflow's successful build is not a theorem-release signal. Its root status is
 assumption-free non-theorem data, `PNP.Main.p_eq_np` is absent, and the conditional bridge's four
 project-specific axioms remain visible in the workflow log. The locked-NAND threshold-boundary
-audit proves deductions only from six explicit premises; it does not instantiate the global
-builder, carrier layout, cross-instance baseline distinctness, trace/final laws, report threshold,
-unconditional residual-slack-at-most-four bound, or polynomiality. The concrete-complexity audit
+audit proves deductions only from six explicit premises. Later source-bound milestones now
+instantiate the carrier, candidates, baseline distinctness, trace law, and whole-carrier
+unsatisfiable final-zero law; they do not instantiate the satisfiable final-output conditions,
+uniform builder, report threshold, unconditional residual-slack-at-most-four bound, or
+polynomiality. The concrete-complexity audit
 checks finite machine-leaf syntax, certificate and runtime bounds, output handoff costs, reduction
 composition, and the inactive target. The refinement audit adds exact proof-bearing contracts, raw
 machine-leaf witnesses, output-bound transport, and a decider bridge from a supplied refinement; it

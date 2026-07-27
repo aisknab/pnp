@@ -34,59 +34,36 @@ migration step the expected target type, target value, compatibility-root type, 
 source-closure fingerprints are intentionally `null`. An unset fingerprint fails its configured
 subcheck; two unset values never count as a match. `PNP.Main.ConcretePEqualsNP` now exists as an
 axiom-free definition for mutual inclusion in the finite charged-pipeline model, but its activation
-fingerprints remain unset. The compatibility/root theorem `PNP.Main.p_eq_np` is absent, and the
-pipeline still lacks a proved end-to-end compiler/refinement to the raw machine kernel. The local
-framed simulator lifts a supplied exact `n`-step successful raw execution from an already
-represented configuration to exactly `3 * n` successful work steps. It also extracts a `k ≤ F`
-exact prefix from an ordinary `F`-fuel raw run; conditional on a designated-halting endpoint, work
-fuel `3 * F` and compiled fuel `18 * F` reach the representation and encoding. The full fuels are
-at-most budgets, not successful-step counts or input-size bounds. This proves no termination result
-and does not classify a stuck nonhalting stop as a verdict. A separate executable machine now
-frames every literal raw bitstring, including empty and odd inputs, at exact branch costs and the
-uniform compiled bound `6 * m * m + 39 * m + 75`, leaving only representation-permitted exterior
-garbage. That theorem ends in the framer's accepting state; the renamed bridge and complete
-compiler theorems remain canonical-pair-only. A
-third literal finite machine now reaches a represented `Tape.handoffTarget` from an already
-represented internal tape in exactly `2 * n + 4` work steps and `12 * n + 24` compiled steps for
-logical output length `n`. A namespace layer proves injective three-stage
-state renaming, ordered first-match preservation, lookup isolation in the literal concatenated rule
-table, and transport of the three exact local traces. The bridge layer then adds exact launches and
-verdict-indexed handoff copies, preserves accept/reject for supplied exact target runs, leaves a
-supplied stuck nonhalting endpoint as timeout at the exact prefix budget, and compiles the cumulative
-trace from canonical paired raw input at six times its work cost. A fourth reviewed module now
-proves terminal packing and ordinary raw `machineOutput` equality with a local quadratic bound,
-and a fifth reviewed terminal-bridge module places two disjoint packer copies in an extended rule
-table and proves exact accepting/rejecting launches and output equality from represented handoff
-endpoints under a local `18*n^2 + 36*n + 12` bound. The earlier ordinary-input trace has not been
-transported into that extended machine. The combined development supplies no target termination,
-external-input-size polynomial, complete composition/precomposition `RawRefinement`, or class
-result.
-The inventory now also binds the six reviewed sequential-namespace theorems for disjoint
-whole-component images, isolated lookup, and accept/reject launches. Those fingerprints establish
-only that local namespace milestone; no end-to-end two-machine execution or refinement theorem is
-present.
-Consequently the gate
-is false, and every theorem-emission field derived from it remains false or `null`.
+fingerprints remain unset. The compatibility/root theorem `PNP.Main.p_eq_np` is absent. The
+pipeline development now proves all-input compilation, target termination from a supplied
+polynomial-time machine, ordinary output equality, external-input-size polynomial bounds, and
+recursive function/decision-program `RawRefinement`. Those machine-link results still do not
+provide a deterministic polynomial-time CNF-SAT decider, concrete CNF-SAT NP-hardness, the
+locked-NAND threshold, the residual-minimization chain, or the absent compatibility theorem.
+Consequently the gate is false, and every theorem-emission field derived from it remains false or
+`null`.
 
 The direct CNF development does not change that fail-closed result. It defines one finite raw
 machine that directly consumes `BitString.pair input certificate`, proves universal accept/reject
 correctness and no timeout under an explicit polynomial bound, constructs a `.paired`
 `PolynomialTimeVerifier CNFSAT`, and proves
 `PNP.Concrete.FinalUniversalDesign.cnfSATInNP : InNP CNFSAT`. This establishes `CNFSAT ∈ NP`.
-It does not establish `CNFSAT ∈ P`, NP-hardness, NP-completeness, or `P = NP`, and it is not the
-missing general compiler/refinement for arbitrary charged pipelines.
+It does not establish `CNFSAT ∈ P`, NP-hardness, NP-completeness, or `P = NP`.
 
-The newest reviewed milestone continues the unbounded legacy Section 17 dependency after
-`PNP.LockedNANDCarrierTrace`. `PNP.LockedNANDGlobalCandidates` constructs every selected source
-and trace macro, the exact nonempty prefix tree, the square `B`-gate/`B`-output baseline, and the
-`B + 4`-gate/`B + 1`-output extension for every finite topologically ordered NAND circuit. It
-proves all baseline outputs are preserved, the final coordinate is
-`z ∧ TraceChecks ∧ T_out`, both programs contain no internal constants, and no baseline output
-depends on `z`. Its 59-declaration audit has three empty, two `propext`, and 54
-`propext`/`Quot.sound` closures, with no `Classical.choice` or project axiom. This constructs three
-of the six conditional threshold-premise fields. Cross-instance `BaselineDistinct`, the
-unsatisfiable and satisfiable final branch laws, `FinalLockSeparation`, the uniform polynomial
-bitstring builder, and the locked-NAND threshold remain absent.
+The newest reviewed milestones follow the unbounded legacy Section 17 dependency through complete
+candidate assembly, global baseline distinctness, and the unsatisfiable branch. For every finite
+topologically ordered NAND circuit, `PNP.LockedNANDGlobalCandidates` constructs the exact square
+`B`-gate/`B`-output baseline and `B + 4`-gate/`B + 1`-output extension, preserves every baseline
+output, and proves the final coordinate is `z ∧ TraceChecks ∧ T_out`. Five further theorems prove
+the baseline outputs are nonconstant, nonprojections, and pairwise semantically distinct, fixing
+its exhaustive reference minimum at `B`.
+
+`PNP.LockedNANDGlobalUnsatisfiableFinalZero` then proves that an unsatisfiable source makes the
+full final coordinate false on the whole carrier and fixes the full exhaustive reference minimum
+at `B`. Its two-theorem transcript uses exactly `propext` and `Quot.sound`, with no
+`Classical.choice` or project axiom. Five of the six conditional threshold-premise fields are now
+instantiated. `satisfiableFinalConditions`, the uniform polynomial bitstring builder, and the
+locked-NAND threshold remain absent.
 
 The current four project-specific axioms remain visible as an independent inventory:
 

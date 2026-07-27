@@ -811,11 +811,11 @@ and baseline plus four, and the corresponding conditional iff.
 This is not the report locked-NAND threshold theorem. The later global-candidate module now
 instantiates the typed `baselineCandidate`, `fullCandidate`, and
 `initialOutputsPreserved` fields with circuit SAT and `lockedBaselineCount` as their intended
-indices. The remaining missing fields are `baselineConditions`,
-`unsatisfiableFinalZero`, and `satisfiableFinalConditions` at the candidate-assembly boundary.
-The following milestone now instantiates `baselineConditions`, leaving exactly the latter two
-branch-law fields. The answer-independent uniform builder and its polynomial bound are not
-supplied. The conditional module is not yet connected to the abstract
+indices. The missing fields at the candidate-assembly boundary were `baselineConditions`,
+`unsatisfiableFinalZero`, and `satisfiableFinalConditions`. The following two milestones now
+instantiate `baselineConditions` and the whole-carrier `unsatisfiableFinalZero` law, leaving
+exactly `satisfiableFinalConditions`. The answer-independent uniform builder and its polynomial
+bound are not supplied. The conditional module is not yet connected to the abstract
 `PNP.LockedNANDThreshold` language.
 
 `LockedNANDCarrierTrace` now closes the next unbounded Section 17 dependency for arbitrary finite
@@ -830,7 +830,7 @@ source-circuit output is satisfiable.
 This is the legacy trace lemma rather than the complete locked-NAND threshold construction. Its
 carrier is consumed by the following global-candidate milestone. Cross-instance
 `BaselineDistinct`, both whole-carrier final-output branch laws, uniform polynomial construction,
-and the threshold remain open. See
+and the threshold do not follow from the carrier/trace milestone alone. See
 [`lean_locked_nand_carrier_trace.md`](./lean_locked_nand_carrier_trace.md).
 
 `LockedNANDGlobalCandidates` now reconstructs the next Section 17 layer uniformly over every
@@ -844,7 +844,8 @@ final coordinate is exactly `z ∧ TraceChecks ∧ T_out`; both candidates have 
 internal syntax, and every baseline output is structurally independent of the fresh `z` input.
 This constructs three of the six conditional-boundary fields. Candidate assembly alone does not
 prove global `BaselineDistinct`, `unsatisfiableFinalZero`, `satisfiableFinalConditions`, the
-threshold, or the uniform polynomial bitstring builder. See
+threshold, or the uniform polynomial bitstring builder. Later milestones now discharge the first
+two of those three semantic fields. See
 [`lean_locked_nand_global_candidates.md`](./lean_locked_nand_global_candidates.md).
 
 The global `BaselineDistinct` milestone now closes the fourth field. Lean proves that every
@@ -855,19 +856,31 @@ with two retained check-lock anchors shared by the complete prefix fold. The squ
 therefore has exhaustive `referenceMinimum` exactly `B`.
 
 The five public milestone theorems use only `propext` and `Quot.sound`; they do not reach
-`Classical.choice` or a project axiom. Exactly `unsatisfiableFinalZero` and
-`satisfiableFinalConditions` remain missing from the conditional threshold package. Neither
+`Classical.choice` or a project axiom. Baseline distinctness alone does not prove either
 whole-carrier branch law, the global residual-slack result, the uniform polynomial bitstring
-builder, nor the locked-NAND threshold follows from baseline distinctness alone. See
+builder, or the locked-NAND threshold. See
 [`lean_locked_nand_global_baseline_distinct.md`](./lean_locked_nand_global_baseline_distinct.md).
+
+`LockedNANDGlobalUnsatisfiableFinalZero` now closes the fifth conditional-boundary field. If the
+source circuit is unsatisfiable, Lean proves that the full final coordinate is false on every
+carrier valuation, not merely on coherent traces. Projecting the first `B` outputs recovers the
+baseline, while appending the forced-zero output preserves equivalence without adding a gate;
+together these bounds prove the full exhaustive `referenceMinimum` is exactly `B`.
+
+Both public theorems use only `propext` and `Quot.sound`; neither reaches `Classical.choice` or a
+project axiom. Exactly `satisfiableFinalConditions` remains missing from the conditional threshold
+package. The satisfiable branch, global residual-slack result, uniform polynomial bitstring
+builder, and locked-NAND threshold remain open. See
+[`lean_locked_nand_global_unsatisfiable_final_zero.md`](./lean_locked_nand_global_unsatisfiable_final_zero.md).
 
 The historical hostile review named `DirectWireOutputLowerBound`, `MacroDistinct`,
 `TraceEquivalence`, `ZeroOutputConvention`, and `FinalLockSeparation`. The general output lower
 bound and model-level free-zero append convention were discharged in preceding layers.
 `TraceEquivalence` and complete candidate assembly are now formalized for the typed semantic
-carrier, and global `MacroDistinct` is now discharged by the exact baseline output conditions.
-`FinalLockSeparation` and the derived final-output branch laws remain missing, as do the two
-conditional premise instantiations listed above. See
+carrier, global `MacroDistinct` is discharged by the exact baseline output conditions, and the
+whole-carrier `ZeroOutputConvention` consequence is discharged in the unsatisfiable branch.
+`FinalLockSeparation`, its satisfiable final-output conditions, and uniform polynomial premise
+construction remain missing. See
 [`lean_locked_nand_threshold_boundary.md`](./lean_locked_nand_threshold_boundary.md).
 
 The residual-route layer now performs one honest executable operation: it scans an explicit finite

@@ -49,6 +49,10 @@ host, not as a build host.
   checked commit, checked tree, command exit status, and the final `systemd-run`
   resource summary. This makes truncated terminal output diagnosable without
   rerunning an expensive suite.
+- If a remote runner references auxiliary scripts or fixtures, copy each one to
+  its exact runtime filename and verify every referenced remote path is readable
+  before launching the bounded job. Do not rely on a directory-only `scp`
+  destination when the runner expects a different basename.
 - A user-level `systemd-run` service may not inherit the login shell's toolchain
   path. Before the first proof phase, verify the exact `lake` and `lean` binaries
   visible inside the service environment and set the already-installed toolchain
@@ -72,6 +76,14 @@ host, not as a build host.
 - Do not install dependencies merely as a ritual before a dependency-free script.
   Prefer the repository's documented verification command and treat a missing
   lockfile as a preflight finding, not as a reason to generate one.
+
+### Fresh-checkout Lean command order
+
+- A fresh checkout has no compiled `PNP.olean`. Run `lake build PNP` before any
+  standalone `lake env lean` axiom audit or regression that imports `PNP.*`.
+- If such an audit reports `unknown module prefix 'PNP'` before the root build,
+  classify it as a verification-order failure, not as a theorem regression.
+  Build the root first, then rerun the targeted audit and regression.
 
 ## GitHub Actions Policy
 
@@ -191,6 +203,11 @@ lines.
   as well as source, documentation, and tests for the previous exact value. Run
   the equivalent of every changed workflow assertion on `pnpbuilder` before
   pushing; changing a step label does not update an embedded assertion.
+- For every added or edited YAML `run: |` shell block, extract that exact block
+  into an uncommitted temporary script and run `bash -n` before an expensive
+  workflow. Then execute the exact block after its prerequisites are built.
+  A hand-written equivalent command does not detect quoting, parenthesis, or
+  pipeline syntax defects in the durable workflow itself.
 - Treat a reviewed theorem-pin set as one interface with several synchronized
   producers and consumers. Before running the expensive inventory probe, update
   the Lean-side `reviewedMilestoneTheoremNames`, the JavaScript required-name

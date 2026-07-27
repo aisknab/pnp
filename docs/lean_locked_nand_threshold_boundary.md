@@ -22,11 +22,11 @@ These are propositions about actual typed candidates and their Boolean semantics
 metadata flags, certificate identifiers, or string claims. They are not instantiated in this
 conditional module. The later global-candidate layer constructs
 `baselineCandidate`, `fullCandidate`, and `initialOutputsPreserved`; the
-following global baseline-distinctness layer constructs
-`baselineConditions`. The machine-readable
+following global baseline-distinctness layer constructs `baselineConditions`,
+and the unsatisfiable-final-zero layer constructs `unsatisfiableFinalZero` on
+the whole carrier. The machine-readable
 `leanLockedNANDThresholdMissingInstantiationInventory` now repeats exactly
-the two fields still missing: `unsatisfiableFinalZero` and
-`satisfiableFinalConditions`.
+the one field still missing: `satisfiableFinalConditions`.
 
 ## What Lean derives from the package
 
@@ -60,8 +60,8 @@ The historical adversarial review named exactly five threshold lemmas:
 | --- | --- |
 | `DirectWireOutputLowerBound` | Discharged generally by the direct-wire output-to-gate injection and used here through reference-minimum lower bounds. |
 | `MacroDistinct` | Discharged globally for the complete carrier-tagged baseline by `baselineCandidate_outputConditions`; the square baseline consequently has exact reference minimum `B`. |
-| `TraceEquivalence` | Discharged for arbitrary finite typed NAND circuits by `LockedNANDCarrierTrace`; `LockedNANDGlobalCandidates` connects it to the complete exposed baseline/full candidates and exact final-conjunction semantics. The derived final-output laws remain open. |
-| `ZeroOutputConvention` | The model-level convention is discharged: appending a constant-zero output preserves the program and gate count. The global `unsatisfiableFinalZero` law still has to be derived from trace equivalence. |
+| `TraceEquivalence` | Discharged for arbitrary finite typed NAND circuits by `LockedNANDCarrierTrace`; `LockedNANDGlobalCandidates` connects it to the complete exposed baseline/full candidates and exact final-conjunction semantics. The unsatisfiable branch is now derived; the satisfiable final-output conditions remain open. |
+| `ZeroOutputConvention` | Discharged on the whole carrier: appending a constant-zero output preserves the program and gate count, and unsatisfiability now proves the constructed full final output is identically false. |
 | `FinalLockSeparation` | The required semantic consequences are stored in `satisfiableFinalConditions`; deriving them from a fresh final lock and the real construction remains missing. |
 
 Thus the conditional module closes the deduction from the explicit semantic
@@ -96,13 +96,14 @@ declarations and reports no axioms. The separate carrier/trace transcript
 covers all 71 public declarations, and the complete global-candidate
 transcript covers all 64 public declarations, using only the approved
 Lean-standard closure and no `Classical.choice`. The five-theorem
-baseline-distinctness transcript uses exactly `propext` and `Quot.sound`.
-Carrier layout, semantic trace equivalence, exact candidate assembly, and
-global baseline distinctness are now true in formal status. Derived
-final-output branch laws, uniform polynomial builder, threshold theorem,
-unconditional residual-slack-at-most-four theorem, and polynomiality remain
-false. Six blockers remain, including the still-missing global threshold
-work. The four project-specific axioms and absent
+baseline-distinctness transcript and two-theorem unsatisfiable-final-zero
+transcript use exactly `propext` and `Quot.sound`. Carrier layout, semantic
+trace equivalence, exact candidate assembly, global baseline distinctness,
+and the whole-carrier unsatisfiable branch are now true in formal status. The
+satisfiable final-output conditions, uniform polynomial builder, threshold
+theorem, unconditional residual-slack-at-most-four theorem, and polynomiality
+remain false. Six blockers remain, including the still-missing global
+threshold work. The four project-specific axioms and absent
 `PNP.Main.p_eq_np` root theorem also remain. The axiom-free inactive
 `PNP.Main.ConcretePEqualsNP` definition does not change this threshold boundary or activate the
 publication gate.
@@ -115,3 +116,5 @@ the constructed candidates are documented in
 [Lean locked-NAND global candidate assembly](./lean_locked_nand_global_candidates.md),
 and the discharged baseline conditions are documented in
 [Lean locked-NAND global baseline distinctness](./lean_locked_nand_global_baseline_distinct.md).
+The derived unsatisfiable branch is documented in
+[Lean locked-NAND global unsatisfiable final-zero branch](./lean_locked_nand_global_unsatisfiable_final_zero.md).

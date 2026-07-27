@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-27-86",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-27-87",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -544,6 +544,10 @@
   "leanLockedNANDGlobalBaselineDistinctAxiomAuditPassed": true,
   "leanLockedNANDGlobalBaselineDistinctAuditedDeclarationCount": 5,
   "leanLockedNANDGlobalBaselineDistinctScope": "arbitrary-finite-topological-nand-circuits-global-baseline-output-conditions-and-exact-reference-minimum",
+  "leanLockedNANDUnsatisfiableFinalZeroFormalized": true,
+  "leanLockedNANDUnsatisfiableFinalZeroAxiomAuditPassed": true,
+  "leanLockedNANDUnsatisfiableFinalZeroAuditedDeclarationCount": 2,
+  "leanLockedNANDUnsatisfiableFinalZeroScope": "arbitrary-finite-topological-nand-circuits-whole-carrier-unsatisfiable-final-zero-and-exact-reference-minimum",
   "leanLockedNANDCarrierLayoutFormalized": true,
   "leanLockedNANDTraceEquivalenceFormalized": true,
   "leanLockedNANDCarrierTraceAxiomAuditPassed": true,
@@ -598,7 +602,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-27-LOCKED-NAND-GLOBAL-BASELINE-DISTINCT-85",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-27-LOCKED-NAND-UNSATISFIABLE-FINAL-ZERO-86",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -740,7 +744,6 @@
     "satisfiableFinalConditions"
   ],
   "leanLockedNANDThresholdMissingInstantiationInventory": [
-    "unsatisfiableFinalZero",
     "satisfiableFinalConditions"
   ],
   "verificationCommands": [
@@ -961,6 +964,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDGlobalBaselineDistinctAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPLockedNANDGlobalBaselineDistinct.lean",
     "node --test audits/lean-locked-nand-global-baseline-distinct0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDGlobalUnsatisfiableFinalZeroAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPLockedNANDGlobalUnsatisfiableFinalZero.lean",
+    "node --test audits/lean-locked-nand-global-unsatisfiable-final-zero0.test.mjs",
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualRoutesAxiomAudit.lean",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
@@ -1040,12 +1046,13 @@
     "The typed local locked-NAND candidates, source-derived accounting, conditional square-baseline theorem, and five discharged local square baselines do not prove global cross-instance BaselineDistinct, a locked builder or threshold, residual slack at most four, or polynomial runtime.",
     "The report threshold word is multi-output: its baseline coordinates remain present alongside one final coordinate; a legacy single-output seed is not that construction.",
     "The legacy synthetic m=2 fixture is quarantined as internally inconsistent: honest source-derived baseline/displayed counts are 86/90, metadata-consistent counts are 95/99, and stored hybrid counts are 91/95.",
-    "The proof-bearing conditional locked-NAND semantic boundary is not the report threshold theorem: global candidate assembly and BaselineDistinct now instantiate the typed baseline, full candidate, baseline output conditions, and preservation of the first outputs, but the unsatisfiable final-zero law and satisfiable final-output laws remain assumptions rather than instantiated circuit theorems.",
+    "The proof-bearing conditional locked-NAND semantic boundary is not the report threshold theorem: global candidate assembly, BaselineDistinct, and the whole-carrier unsatisfiable final-zero law now instantiate five of its six fields, but the satisfiable final-output conditions remain an assumption rather than an instantiated circuit theorem.",
     "The residual-slack-at-most-four result is conditional on that six-field premise package; it is not an unconditional result for the report locked-NAND family.",
     "The locked-NAND carrier and TraceEquivalence milestone is unbounded over arbitrary finite topological NAND circuits: it proves the exact X/T/O/R/L/z partition, generates three checks per gate, constructs coherent traces, and proves accepted traces equal genuine evaluation. It does not assemble the complete exposed candidates or prove the threshold.",
     "The global locked-NAND candidate milestone constructs the exact square B-gate/B-output baseline and the B+4-gate/B+1-output extension for every finite typed circuit, preserves every baseline output, proves the final coordinate is z AND TraceChecks AND T_out, excludes internal constants, and proves every baseline coordinate is independent of z.",
-    "The global locked-NAND BaselineDistinct milestone proves every exposed baseline coordinate is nonconstant, is not a positive carrier-input projection, and computes a Boolean function distinct from every other exposed coordinate. Consequently its exhaustive reference minimum is exactly B. It does not prove either satisfiable/unsatisfiable final branch law, the locked-NAND threshold, residual slack at most four for the global family, or a uniform polynomial bitstring builder.",
-    "Against the hostile-review inventory, DirectWireOutputLowerBound, global MacroDistinct, semantic-carrier TraceEquivalence, the model-level ZeroOutputConvention, and complete candidate assembly are now discharged, while FinalLockSeparation, derived final-output laws, and uniform polynomial premise construction remain missing.",
+    "The global locked-NAND BaselineDistinct milestone proves every exposed baseline coordinate is nonconstant, is not a positive carrier-input projection, and computes a Boolean function distinct from every other exposed coordinate. Consequently its exhaustive reference minimum is exactly B. It does not itself prove either final branch law, the locked-NAND threshold, residual slack at most four for the global family, or a uniform polynomial bitstring builder.",
+    "The global locked-NAND unsatisfiable-final-zero milestone proves that unsatisfiability makes the full final coordinate false on every carrier valuation and makes the full exhaustive reference minimum exactly B. It does not prove the satisfiable final-output conditions, the locked-NAND threshold, residual slack at most four for the global family, or a uniform polynomial bitstring builder.",
+    "Against the hostile-review inventory, DirectWireOutputLowerBound, global MacroDistinct, semantic-carrier TraceEquivalence, whole-carrier ZeroOutputConvention, and complete candidate assembly are now discharged, while FinalLockSeparation and uniform polynomial premise construction remain missing.",
     "The conditional module quantifies an arbitrary satisfiable proposition and baseline natural number; it does not identify them with source-circuit SAT and lockedBaselineCount, enforce answer-independent uniform construction, or connect the candidate boundary to the abstract PNP.LockedNANDThreshold language.",
     "The executable residual-route scan is complete only for the explicit finite implementation list supplied by its caller; unresolved excludes no unlisted gain and does not imply global minimality or ZeroSlack.",
     "An empty-list scan is formally shown to remain unresolved on a positive-slack implementation, so search failure cannot be promoted to zero residual slack.",
@@ -1087,7 +1094,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "01b522a560680c69c52c988a0c08c25483d12f5e53de72ff1d8106ae4313a738",
+    "actualSourceClosureSha256": "d6be2beffdfaa94f5a53139fa1a4272bbb7b1cd1b0f7dfe764d1934ba86aed9c",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1117,22 +1124,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-27-86",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-27-87",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "33ceee3aa55116581d0c6b9790a35c046832076b168e77116e71bb8573ec3ea1",
+  "leanTheoremInventorySha256": "6c77607a6c03fd4136c31d62517d7773ec3989dbfd95188f28995c10f32f44fd",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 12245,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 4997,
-  "leanTheoremInventoryTheoremCount": 7158,
+  "leanTheoremInventoryDeclarationCount": 12247,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 5000,
+  "leanTheoremInventoryTheoremCount": 7160,
   "leanTheoremInventoryAssumptionFreeTheoremCount": 3676,
-  "leanTheoremInventorySourceClosureModuleCount": 105,
-  "leanSourceClosureSha256": "01b522a560680c69c52c988a0c08c25483d12f5e53de72ff1d8106ae4313a738",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-27-86",
+  "leanTheoremInventorySourceClosureModuleCount": 106,
+  "leanSourceClosureSha256": "d6be2beffdfaa94f5a53139fa1a4272bbb7b1cd1b0f7dfe764d1934ba86aed9c",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-27-87",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "abf11a2bfcc536c0ba5a509575bed8f6d0cc7ecb1df01f9a079d37e3dc7d8200",
+  "formalPublicationMapSha256": "9d588fb56eb496806bbacf9021fd2fa84a74e91dbe462756bf5eee1d3dc63abe",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",
@@ -28015,6 +28022,50 @@
       "status": "formalized"
     },
     {
+      "id": "locked-nand-global-unsatisfiable-final-zero",
+      "title": "Locked-NAND global unsatisfiable final-zero branch",
+      "classification": "formalized",
+      "scope": "For every finite topologically ordered NAND circuit, unsatisfiability makes the full final coordinate identically false on the whole carrier and fixes the exhaustive reference minimum at B.",
+      "requiredTheorems": [
+        "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_final_eq_false_of_unsatisfiable",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_referenceMinimum_eq_baseline_of_unsatisfiable"
+      ],
+      "nonClaim": "This does not prove satisfiable FinalLockSeparation, instantiate the complete threshold package, establish the global locked-NAND threshold or residual-slack bound, or construct the uniform polynomial builder.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_final_eq_false_of_unsatisfiable",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3841bbc176784b6dfd3c889e576fe74d117ca420f5f79f31063d85797f0bd3de",
+          "expectedKernelTypeSha256": "3841bbc176784b6dfd3c889e576fe74d117ca420f5f79f31063d85797f0bd3de",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_referenceMinimum_eq_baseline_of_unsatisfiable",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "da9bb9d292f6cb2952d58120a4579503d87bd1ac94cd5d9248f40ba5007edf94",
+          "expectedKernelTypeSha256": "da9bb9d292f6cb2952d58120a4579503d87bd1ac94cd5d9248f40ba5007edf94",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized"
+    },
+    {
       "id": "locked-nand-conditional-threshold",
       "title": "Conditional locked-NAND threshold boundary",
       "classification": "formalized-with-premises",
@@ -28124,11 +28175,11 @@
       "id": "global-locked-nand-threshold",
       "title": "Global locked-NAND construction and threshold",
       "classification": "not-formalized",
-      "scope": "A uniform answer-independent SAT instance builder, the two remaining final-output laws, and the locked-NAND threshold.",
+      "scope": "A uniform answer-independent SAT instance builder, the remaining satisfiable final-output law, and the locked-NAND threshold.",
       "requiredTheorems": [
         "PNP.Main.locked_nand_threshold"
       ],
-      "nonClaim": "Carrier/trace equivalence, complete candidate assembly, and global BaselineDistinct do not supply the two final-output laws or uniform polynomial construction needed for this theorem.",
+      "nonClaim": "Carrier/trace equivalence, complete candidate assembly, global BaselineDistinct, and the unsatisfiable final-zero law do not supply the satisfiable final-output conditions or uniform polynomial construction needed for this theorem.",
       "theoremRows": [
         {
           "name": "PNP.Main.locked_nand_threshold",
@@ -28215,7 +28266,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-27-86",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-27-87",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

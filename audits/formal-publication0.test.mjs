@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 66);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 63);
+  assert.equal(status.formalPublicationMilestones.length, 67);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 64);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -1410,6 +1410,25 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     'PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_referenceMinimum',
   ]) assert.equal(baselineDistinct.requiredTheorems.includes(theorem), true, theorem);
   assert.match(baselineDistinct.nonClaim, /does not prove either whole-carrier final-output branch law/u);
+  const unsatisfiableFinalZero = byId.get(
+    'locked-nand-global-unsatisfiable-final-zero',
+  );
+  assert.equal(unsatisfiableFinalZero.status, 'formalized');
+  assert.equal(unsatisfiableFinalZero.earned, true);
+  assert.equal(unsatisfiableFinalZero.allAssumptionFree, false);
+  assert.equal(
+    unsatisfiableFinalZero.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.deepEqual(unsatisfiableFinalZero.requiredTheorems, [
+    'PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_final_eq_false_of_unsatisfiable',
+    'PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_referenceMinimum_eq_baseline_of_unsatisfiable',
+  ]);
+  assert.match(unsatisfiableFinalZero.scope, /whole carrier/u);
+  assert.match(
+    unsatisfiableFinalZero.nonClaim,
+    /does not prove satisfiable FinalLockSeparation/u,
+  );
   assert.equal(byId.get('locked-nand-conditional-threshold').status, 'formalized-with-premises');
   assert.equal(byId.get('explicit-residual-routes').status, 'formalized-explicit-list-only');
   for (const id of [
@@ -1426,10 +1445,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '4f8e3bfd7f028ae17d2d84eef1876ad2e3fc68faf9ca383940c35bd6f0a0a529');
+    'c86ea14da8f100850605ab7ad3b9b9c9dc8bf19d5a1f923cdb4ea4989c369985');
   assert.equal(map.milestoneSourceClosureSha256,
-    '01b522a560680c69c52c988a0c08c25483d12f5e53de72ff1d8106ae4313a738');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 1968);
+    'd6be2beffdfaa94f5a53139fa1a4272bbb7b1cd1b0f7dfe764d1934ba86aed9c');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 1970);
   for (const theorem of [
     'PNP.DirectWire.LockedNANDTrace.carrierSeparation',
     'PNP.DirectWire.LockedNANDTrace.finalLock_fresh',
@@ -1441,6 +1460,18 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     'PNP.DirectWire.LockedNANDTrace.exists_coherent_trace',
   ]) assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[theorem],
     'string', theorem);
+  assert.equal(
+    map.earnedMilestoneTheoremKernelTypeSha256[
+      'PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_final_eq_false_of_unsatisfiable'
+    ],
+    '3841bbc176784b6dfd3c889e576fe74d117ca420f5f79f31063d85797f0bd3de',
+  );
+  assert.equal(
+    map.earnedMilestoneTheoremKernelTypeSha256[
+      'PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_referenceMinimum_eq_baseline_of_unsatisfiable'
+    ],
+    'da9bb9d292f6cb2952d58120a4579503d87bd1ac94cd5d9248f40ba5007edf94',
+  );
   for (const theorem of [
     'PNP.DirectWire.LockedNANDGlobalCandidates.macroGateCount_report_formula',
     'PNP.DirectWire.LockedNANDGlobalCandidates.nonemptyPrefixCandidate_semantics',
@@ -1729,7 +1760,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [12245, 7158, 3676, 4997, 105]);
+  ], [12247, 7160, 3676, 5000, 106]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

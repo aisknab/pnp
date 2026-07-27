@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-27-86",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-27-87",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "01b522a560680c69c52c988a0c08c25483d12f5e53de72ff1d8106ae4313a738",
+  "milestoneSourceClosureSha256": "d6be2beffdfaa94f5a53139fa1a4272bbb7b1cd1b0f7dfe764d1934ba86aed9c",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CookLevin.BoundedLiteral.emit_variable_lt": "c089b0fedc7320ec14f46b5b74f7ec26158cdad85ecbe647b4c728660dcb6a68",
@@ -1952,9 +1952,11 @@
     "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_referenceMinimum": "ec4744b7e417ac76eeb36b354508418311bbcafdedadcb7ce9ef7f1ea336fcb5",
     "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_size": "a90b49956ea8792ef7ea73fda703498f3c100cdc0dba875190fda7cfd48d559b",
     "PNP.DirectWire.LockedNANDGlobalCandidates.baselinePrefixSource_semantics": "ffa9219e7109a7b70497348282e9ed79c36a149641018583407667a4d687b56f",
+    "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_final_eq_false_of_unsatisfiable": "3841bbc176784b6dfd3c889e576fe74d117ca420f5f79f31063d85797f0bd3de",
     "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_final_semantics": "893c8e3b74b2ca59e31cc5a9830e17fc6f22d9561921edb789ad109838f8dae1",
     "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_initial_semantics": "20f4ade3b0f930ad17ebdced9c5e8e49877e97223454b7b88a1a29fc94eed0fa",
     "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_no_internal_constants": "55931f820f8438dc22676feaed1404c19e4a0b6542ae72f57eddc8aa2bcf977d",
+    "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_referenceMinimum_eq_baseline_of_unsatisfiable": "da9bb9d292f6cb2952d58120a4579503d87bd1ac94cd5d9248f40ba5007edf94",
     "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_size": "5c9a273659067867278736693748a1b2d97795f852af3c35daeaefbace963ded",
     "PNP.DirectWire.LockedNANDGlobalCandidates.macroGateCount_report_formula": "47f9e6796152f2a642f7bce44b99528bc01ccdddccdacbae86ab56e0f5b3d073",
     "PNP.DirectWire.LockedNANDGlobalCandidates.nonemptyPrefixCandidate_semantics": "80710291bd5f2267463e6f1e6e684401668895d2606768b8e4debb12eaa6fd11",
@@ -4637,6 +4639,17 @@
       "nonClaim": "BaselineDistinct does not prove either whole-carrier final-output branch law, instantiate the complete threshold premise package, establish the locked-NAND threshold or global residual-slack bound, or construct the uniform polynomial bitstring builder."
     },
     {
+      "id": "locked-nand-global-unsatisfiable-final-zero",
+      "title": "Locked-NAND global unsatisfiable final-zero branch",
+      "classification": "formalized",
+      "scope": "For every finite topologically ordered NAND circuit, unsatisfiability makes the full final coordinate identically false on the whole carrier and fixes the exhaustive reference minimum at B.",
+      "requiredTheorems": [
+        "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_final_eq_false_of_unsatisfiable",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_referenceMinimum_eq_baseline_of_unsatisfiable"
+      ],
+      "nonClaim": "This does not prove satisfiable FinalLockSeparation, instantiate the complete threshold package, establish the global locked-NAND threshold or residual-slack bound, or construct the uniform polynomial builder."
+    },
+    {
       "id": "locked-nand-conditional-threshold",
       "title": "Conditional locked-NAND threshold boundary",
       "classification": "formalized-with-premises",
@@ -4665,11 +4678,11 @@
       "id": "global-locked-nand-threshold",
       "title": "Global locked-NAND construction and threshold",
       "classification": "not-formalized",
-      "scope": "A uniform answer-independent SAT instance builder, the two remaining final-output laws, and the locked-NAND threshold.",
+      "scope": "A uniform answer-independent SAT instance builder, the remaining satisfiable final-output law, and the locked-NAND threshold.",
       "requiredTheorems": [
         "PNP.Main.locked_nand_threshold"
       ],
-      "nonClaim": "Carrier/trace equivalence, complete candidate assembly, and global BaselineDistinct do not supply the two final-output laws or uniform polynomial construction needed for this theorem."
+      "nonClaim": "Carrier/trace equivalence, complete candidate assembly, global BaselineDistinct, and the unsatisfiable final-zero law do not supply the satisfiable final-output conditions or uniform polynomial construction needed for this theorem."
     },
     {
       "id": "global-zeroslack-pccmin",
