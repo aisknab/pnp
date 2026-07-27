@@ -50,7 +50,6 @@ const PREMISE_FIELDS = Object.freeze([
   'satisfiableFinalConditions',
 ]);
 const MISSING_FIELDS = Object.freeze([
-  'baselineConditions',
   'unsatisfiableFinalZero',
   'satisfiableFinalConditions',
 ]);
@@ -129,7 +128,7 @@ test('documentation preserves the hostile-review inventory and exact missing ins
   for (const lemma of HOSTILE_REVIEW_LEMMAS) assert.match(docs, new RegExp(`\\b${lemma}\\b`, 'u'));
   for (const field of PREMISE_FIELDS) assert.match(docs, new RegExp(`\\b${field}\\b`, 'u'));
   assert.match(docs, /not the report(?:'s)? (?:locked-NAND )?threshold theorem/iu);
-  assert.match(docs, /global cross-instance [`']?BaselineDistinct/iu);
+  assert.match(docs, /global [`']?BaselineDistinct[\s\S]*(?:formalized|discharged|closes)/iu);
   assert.match(docs, /TraceEquivalence[\s\S]*(?:formalized|discharged)/iu);
   assert.match(docs, /derived (?:whole-carrier )?final-output laws[\s\S]*(?:remain|open)/iu);
 });
@@ -147,16 +146,17 @@ test('status credits the conditional boundary while every global threshold claim
     'leanLockedNANDGlobalBaselineCandidateFormalized',
     'leanLockedNANDFullCandidateFormalized',
     'leanLockedNANDGlobalCandidateAxiomAuditPassed',
+    'leanLockedNANDGlobalBaselineDistinctFormalized',
+    'leanLockedNANDGlobalBaselineDistinctAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
   assert.equal(status.leanLockedNANDCarrierTraceAuditedDeclarationCount, 71);
-  assert.equal(status.leanLockedNANDGlobalCandidateAuditedDeclarationCount, 59);
+  assert.equal(status.leanLockedNANDGlobalCandidateAuditedDeclarationCount, 64);
   assert.equal(status.leanLockedNANDThresholdBoundaryScope, 'proof-bearing-typed-candidate-and-semantic-premises-only');
   assert.deepEqual(status.lockedNANDThresholdHostileReviewLemmaInventory, HOSTILE_REVIEW_LEMMAS);
   assert.deepEqual(status.leanLockedNANDThresholdPremiseInventory, PREMISE_FIELDS);
   assert.deepEqual(status.leanLockedNANDThresholdMissingInstantiationInventory, MISSING_FIELDS);
   for (const field of [
     'leanLockedNANDThresholdBoundaryPremisesInstantiated',
-    'leanLockedNANDGlobalBaselineDistinctFormalized',
     'leanLockedNANDDerivedFinalOutputLawsFormalized',
     'leanLockedNANDBuilderFormalized',
     'leanLockedNANDThresholdFormalized',

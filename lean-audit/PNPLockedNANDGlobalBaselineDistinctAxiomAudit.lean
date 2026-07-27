@@ -1,0 +1,7 @@
+import PNP.LockedNANDGlobalCandidates
+
+#print axioms PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_outputNonconstant
+#print axioms PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_outputNotPositiveProjection
+#print axioms PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_outputPairwiseDistinct
+#print axioms PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_outputConditions
+#print axioms PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_referenceMinimum

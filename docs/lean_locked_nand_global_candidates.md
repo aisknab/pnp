@@ -59,19 +59,21 @@ value at the circuit output gate.
 Both candidates have constant-free internal NAND syntax. The construction
 also proves structurally that changing only the fresh final-lock input `z`
 cannot change any baseline output. This establishes the retained advanced
-coordinate needed by the later branch-law proof without assuming
-`BaselineDistinct`.
+coordinate needed by the later branch-law proof. The same module now also
+contains the following `BaselineDistinct` milestone; its separate proof and
+audit boundary are documented in
+[`lean_locked_nand_global_baseline_distinct.md`](./lean_locked_nand_global_baseline_distinct.md).
 
 ## What remains conditional
 
-The preceding conditional threshold theorem asks for six fields. This
-milestone constructs `baselineCandidate`, `fullCandidate`, and
-`initialOutputsPreserved`. The remaining missing instantiations are exactly:
+The preceding conditional threshold theorem asks for six fields. Candidate
+assembly constructs `baselineCandidate`, `fullCandidate`, and
+`initialOutputsPreserved`. The following global-distinctness milestone
+constructs `baselineConditions`. The remaining missing instantiations are
+exactly:
 
-1. `baselineConditions`, including global cross-output
-   `BaselineDistinct`;
-2. `unsatisfiableFinalZero`; and
-3. `satisfiableFinalConditions`.
+1. `unsatisfiableFinalZero`; and
+2. `satisfiableFinalConditions`.
 
 Accordingly, this module does not prove either whole-carrier final branch
 law, the locked-NAND threshold, residual slack at most four for the global
@@ -86,8 +88,9 @@ weakened theorem is used to force the manuscript route through.
 
 ## Audit and regression boundary
 
-The dedicated transcript covers all 59 public declarations exactly once.
-Three declarations have empty axiom closure, two use only `propext`, and 54
+The complete module transcript covers all 64 public declarations exactly
+once. Three declarations have empty axiom closure, two use only `propext`,
+and 59
 use only `propext` plus `Quot.sound`. None uses `Classical.choice`, a project
 axiom, `sorry`, `admit`, native/SAT shortcuts, host-side lookup, or a caller
 certificate.
@@ -98,7 +101,7 @@ counts, the `B/B` and `B+4/B+1` dimensions, preservation of every baseline
 output, both final truth branches, constant-free internal syntax, and
 baseline independence from `z`.
 
-## Generated publication artifacts
+## Generated publication artifacts at the candidate-assembly milestone
 
 The compiled environment records inventory coordinate
 `PNP-LEAN-THEOREM-INVENTORY-2026-07-26-85`: 12,233 declarations, 7,146

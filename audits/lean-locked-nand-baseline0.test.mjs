@@ -257,7 +257,6 @@ test('status credits only local and conditional PR7 results', async () => {
   ]) assert.equal(status[field], true, field);
   assert.equal(status.leanLockedNANDProofScope, 'typed-local-macros-source-derived-counts-and-five-local-square-baselines');
   for (const field of [
-    'leanLockedNANDGlobalBaselineDistinctFormalized',
     'leanLockedNANDBuilderFormalized',
     'leanLockedNANDThresholdFormalized',
     'leanLockedNANDResidualSlackAtMostFourFormalized',

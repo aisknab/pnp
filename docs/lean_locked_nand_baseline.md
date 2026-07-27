@@ -105,8 +105,10 @@ and `TraceEquivalence` for arbitrary finite typed NAND circuits; see
 [Lean locked-NAND carrier layout and trace
 equivalence](./lean_locked_nand_carrier_trace.md).
 
-Together these results still do not establish a global locked-NAND builder, cross-instance
-`BaselineDistinct`, derived whole-carrier final-output laws, the report locked-NAND threshold,
-unconditional residual slack at most four, polynomial construction/runtime, SAT correctness, or
-`P = NP`. All six recorded reconstruction blockers and all four disclosed project-specific axioms
-remain.
+Those two earlier layers by themselves do not establish a global locked-NAND
+builder or cross-instance `BaselineDistinct`. The later global-candidate and
+baseline-distinctness milestones now establish the latter, but derived
+whole-carrier final-output laws, the report locked-NAND threshold,
+unconditional residual slack at most four, polynomial construction/runtime,
+SAT correctness, and `P = NP` remain open. All six recorded reconstruction
+blockers and all four disclosed project-specific axioms remain.

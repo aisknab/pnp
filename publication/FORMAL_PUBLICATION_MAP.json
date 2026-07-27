@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-26-85",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-27-86",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "d2cf588681499eef5328b85fba8965097fae5dbacdd0d4efe766c7b5d48277e9",
+  "milestoneSourceClosureSha256": "01b522a560680c69c52c988a0c08c25483d12f5e53de72ff1d8106ae4313a738",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CookLevin.BoundedLiteral.emit_variable_lt": "c089b0fedc7320ec14f46b5b74f7ec26158cdad85ecbe647b4c728660dcb6a68",
@@ -1945,6 +1945,11 @@
     "PNP.DirectWire.Equivalent.trans": "7a931de781c961c3ed9386ca2c615fc8531604efc94b823839e5e0a0bf164709",
     "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_finalLock_irrelevant": "3724c566fdb5621934142d6b3d3e5e90b94ea972940191f41243db7590b40d06",
     "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_no_internal_constants": "b2b072ad2c4d3090ff9269819603623e68fc3d2ad98ee72571b616219a06da42",
+    "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_outputConditions": "59f4e795f643d109eeb500af984e5fd680957ca3b150aa1eaaca7a9a4400e08d",
+    "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_outputNonconstant": "b1b7ca4af24b41d4acbdb2c125198929ca16fd0b7bf8bcee6c47fcf932e267f2",
+    "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_outputNotPositiveProjection": "562537f60e050f3729a3a1f7e71ef3d5cf27d38c458300448f2ab10415262c14",
+    "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_outputPairwiseDistinct": "3c9af60442b8119ed59ee8e2bc9f52b22e30a447bfe4f605a07a3561a9936bb6",
+    "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_referenceMinimum": "ec4744b7e417ac76eeb36b354508418311bbcafdedadcb7ce9ef7f1ea336fcb5",
     "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_size": "a90b49956ea8792ef7ea73fda703498f3c100cdc0dba875190fda7cfd48d559b",
     "PNP.DirectWire.LockedNANDGlobalCandidates.baselinePrefixSource_semantics": "ffa9219e7109a7b70497348282e9ed79c36a149641018583407667a4d687b56f",
     "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_final_semantics": "893c8e3b74b2ca59e31cc5a9830e17fc6f22d9561921edb789ad109838f8dae1",
@@ -4615,7 +4620,21 @@
         "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_no_internal_constants",
         "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_finalLock_irrelevant"
       ],
-      "nonClaim": "Candidate assembly does not prove global BaselineDistinct, either conditional final-output branch law, the locked-NAND threshold, residual slack at most four, or a uniform polynomial bitstring builder."
+      "nonClaim": "Candidate assembly alone does not prove global BaselineDistinct, either conditional final-output branch law, the locked-NAND threshold, residual slack at most four, or a uniform polynomial bitstring builder."
+    },
+    {
+      "id": "locked-nand-global-baseline-distinct",
+      "title": "Locked-NAND global baseline distinctness",
+      "classification": "formalized",
+      "scope": "All exposed baseline outputs are nonconstant, nonprojections, pairwise semantically distinct, and have exact exhaustive reference minimum B for arbitrary finite topological NAND circuits.",
+      "requiredTheorems": [
+        "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_outputNonconstant",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_outputNotPositiveProjection",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_outputPairwiseDistinct",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_outputConditions",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.baselineCandidate_referenceMinimum"
+      ],
+      "nonClaim": "BaselineDistinct does not prove either whole-carrier final-output branch law, instantiate the complete threshold premise package, establish the locked-NAND threshold or global residual-slack bound, or construct the uniform polynomial bitstring builder."
     },
     {
       "id": "locked-nand-conditional-threshold",
@@ -4646,11 +4665,11 @@
       "id": "global-locked-nand-threshold",
       "title": "Global locked-NAND construction and threshold",
       "classification": "not-formalized",
-      "scope": "A uniform answer-independent SAT instance builder, complete exposed baseline, final-output laws, and threshold.",
+      "scope": "A uniform answer-independent SAT instance builder, the two remaining final-output laws, and the locked-NAND threshold.",
       "requiredTheorems": [
         "PNP.Main.locked_nand_threshold"
       ],
-      "nonClaim": "The carrier/trace theorem and conditional boundary do not assemble or discharge this missing global theorem."
+      "nonClaim": "Carrier/trace equivalence, complete candidate assembly, and global BaselineDistinct do not supply the two final-output laws or uniform polynomial construction needed for this theorem."
     },
     {
       "id": "global-zeroslack-pccmin",

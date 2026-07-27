@@ -91,8 +91,10 @@ This carrier/trace module by itself does not:
 The following
 [`LockedNANDGlobalCandidates`](./lean_locked_nand_global_candidates.md)
 milestone now assembles the complete baseline and four-gate extension and
-constructs three of the six conditional-boundary fields. In particular, this
-carrier theorem alone does not establish `FinalLockSeparation` merely because
+constructs three of the six conditional-boundary fields. The following
+[`global baseline distinctness`](./lean_locked_nand_global_baseline_distinct.md)
+milestone supplies the fourth. In particular, this carrier theorem alone does
+not establish `FinalLockSeparation` merely because
 `z` is syntactically fresh; the remaining semantic branch laws are separate
 proof obligations.
 
