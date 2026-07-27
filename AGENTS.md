@@ -73,6 +73,14 @@ host, not as a build host.
   Prefer the repository's documented verification command and treat a missing
   lockfile as a preflight finding, not as a reason to generate one.
 
+### Fresh-checkout Lean command order
+
+- A fresh checkout has no compiled `PNP.olean`. Run `lake build PNP` before any
+  standalone `lake env lean` axiom audit or regression that imports `PNP.*`.
+- If such an audit reports `unknown module prefix 'PNP'` before the root build,
+  classify it as a verification-order failure, not as a theorem regression.
+  Build the root first, then rerun the targeted audit and regression.
+
 ## GitHub Actions Policy
 
 Do not create temporary self-mutating GitHub Actions workflows.
