@@ -199,6 +199,11 @@ lines.
   as well as source, documentation, and tests for the previous exact value. Run
   the equivalent of every changed workflow assertion on `pnpbuilder` before
   pushing; changing a step label does not update an embedded assertion.
+- For every added or edited YAML `run: |` shell block, extract that exact block
+  into an uncommitted temporary script and run `bash -n` before an expensive
+  workflow. Then execute the exact block after its prerequisites are built.
+  A hand-written equivalent command does not detect quoting, parenthesis, or
+  pipeline syntax defects in the durable workflow itself.
 - Treat a reviewed theorem-pin set as one interface with several synchronized
   producers and consumers. Before running the expensive inventory probe, update
   the Lean-side `reviewedMilestoneTheoremNames`, the JavaScript required-name

@@ -2046,7 +2046,7 @@ jobs:
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDGlobalUnsatisfiableFinalZeroAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
-          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.DirectWire\.LockedNANDGlobalCandidates\.(fullCandidate_final_eq_false_of_unsatisfiable|fullCandidate_referenceMinimum_eq_baseline_of_unsatisfiable)'" -eq 2
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.DirectWire\.LockedNANDGlobalCandidates\.(fullCandidate_final_eq_false_of_unsatisfiable|fullCandidate_referenceMinimum_eq_baseline_of_unsatisfiable)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[propext, Quot.sound\]$' || true)"
           if [ -n "$unexpected" ]; then
