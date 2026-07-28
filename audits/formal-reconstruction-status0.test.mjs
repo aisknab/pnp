@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-28-88');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-28-89');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -591,6 +591,26 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanLockedNANDGlobalSemanticThresholdAuditedDeclarationCount, 8);
   assert.equal(out.leanLockedNANDGlobalSemanticThresholdScope,
     'arbitrary-finite-topological-nand-circuits-complete-six-field-premises-and-typed-semantic-threshold');
+  for (const field of [
+    'leanConcreteLockedNANDCanonicalEncodingFormalized',
+    'leanConcreteLockedNANDNormalizationSemanticsFormalized',
+    'leanConcreteLockedNANDCompleteCandidateCodecFormalized',
+    'leanConcreteLockedNANDEncodedSemanticReductionFormalized',
+    'leanConcreteLockedNANDEncodedSemanticReductionAxiomAuditPassed',
+  ]) assert.equal(out[field], true, field);
+  assert.equal(
+    out.leanConcreteLockedNANDEncodedSemanticReductionAuditedDeclarationCount,
+    48,
+  );
+  assert.equal(
+    out.leanConcreteLockedNANDEncodedSemanticReductionScope,
+    'strict-version-zero-codec-direct-normalization-semantics-complete-candidate-bytes-and-fail-closed-semantic-reduction',
+  );
+  for (const field of [
+    'leanConcreteLockedNANDParserMachineFormalized',
+    'leanConcreteLockedNANDEmitterMachineFormalized',
+    'leanConcreteLockedNANDPolynomialReductionFormalized',
+  ]) assert.equal(out[field], false, field);
   assert.equal(out.leanLockedNANDPolynomialBuilderFormalized, false);
   assert.equal(out.leanCompatibleReplacementFormalized, false);
   assert.equal(out.leanGlobalSlackLawFormalized, false);
@@ -636,13 +656,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 12255);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 7167);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 3676);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 5027);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 107);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 12887);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 7395);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 3794);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 5129);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 109);
   assert.equal(status.leanSourceClosureSha256,
-    '11cd24e11180f22c5ca853d94fc0c201dc39a1dd6fa546de003d08279d2f9f4d');
+    '26a4545856b5eb7542e9bf2ba332f68ae6e56ee5a9d140c7dbb8a5e4fe5d1d61');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -1064,7 +1084,7 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-28-LOCKED-NAND-GLOBAL-SEMANTIC-THRESHOLD-87');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-28-LOCKED-NAND-ENCODED-SEMANTIC-BOUNDARY-88');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
@@ -1137,6 +1157,26 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(status.leanLockedNANDGlobalSemanticThresholdAuditedDeclarationCount, 8);
   assert.equal(status.leanLockedNANDGlobalSemanticThresholdScope,
     'arbitrary-finite-topological-nand-circuits-complete-six-field-premises-and-typed-semantic-threshold');
+  for (const field of [
+    'leanConcreteLockedNANDCanonicalEncodingFormalized',
+    'leanConcreteLockedNANDNormalizationSemanticsFormalized',
+    'leanConcreteLockedNANDCompleteCandidateCodecFormalized',
+    'leanConcreteLockedNANDEncodedSemanticReductionFormalized',
+    'leanConcreteLockedNANDEncodedSemanticReductionAxiomAuditPassed',
+  ]) assert.equal(status[field], true, field);
+  assert.equal(
+    status.leanConcreteLockedNANDEncodedSemanticReductionAuditedDeclarationCount,
+    48,
+  );
+  assert.equal(
+    status.leanConcreteLockedNANDEncodedSemanticReductionScope,
+    'strict-version-zero-codec-direct-normalization-semantics-complete-candidate-bytes-and-fail-closed-semantic-reduction',
+  );
+  for (const field of [
+    'leanConcreteLockedNANDParserMachineFormalized',
+    'leanConcreteLockedNANDEmitterMachineFormalized',
+    'leanConcreteLockedNANDPolynomialReductionFormalized',
+  ]) assert.equal(status[field], false, field);
   assert.equal(status.leanLockedNANDPolynomialBuilderFormalized, false);
   assert.equal(status.leanCompatibleReplacementFormalized, false);
   assert.equal(status.leanGlobalSlackLawFormalized, false);

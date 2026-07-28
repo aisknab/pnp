@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 68);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 65);
+  assert.equal(status.formalPublicationMilestones.length, 69);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 66);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -1451,6 +1451,30 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   ]);
   assert.match(semanticThreshold.scope, /answer-independent full candidate/u);
   assert.match(semanticThreshold.nonClaim, /does not construct or compile/u);
+  const encodedBoundary = byId.get(
+    'concrete-locked-nand-encoded-semantic-boundary',
+  );
+  assert.equal(encodedBoundary.status, 'formalized-semantic-boundary');
+  assert.equal(encodedBoundary.earned, true);
+  assert.equal(
+    encodedBoundary.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.deepEqual(encodedBoundary.requiredTheorems, [
+    'PNP.Concrete.LockedNAND.RawCircuit.normalize_idempotent',
+    'PNP.Concrete.LockedNAND.RawCircuit.normalize_eval',
+    'PNP.Concrete.LockedNAND.RawCircuit.elaborate_ofCircuit',
+    'PNP.Concrete.LockedNAND.RawCandidate.elaborate_ofCandidate',
+    'PNP.Concrete.LockedNAND.RawLockedInstance.elaborate_ofCandidate',
+    'PNP.Concrete.LockedNAND.decodeTokens_encodeTokens',
+    'PNP.Concrete.LockedNAND.decodeCircuit_encodeCircuit',
+    'PNP.Concrete.LockedNAND.decodeLockedInstance_encodeLockedInstance',
+    'PNP.Concrete.LockedNAND.decodeElaboratedCircuit_encodeCircuit_ofCircuit',
+    'PNP.Concrete.LockedNAND.encoded_fullCandidate_threshold_iff_satisfiable',
+    'PNP.Concrete.LockedNAND.buildLockedNANDInstance_correct',
+  ]);
+  assert.match(encodedBoundary.scope, /strict version-zero/u);
+  assert.match(encodedBoundary.nonClaim, /not a parser\/validator machine/u);
   assert.equal(byId.get('locked-nand-conditional-threshold').status, 'formalized-with-premises');
   assert.equal(byId.get('explicit-residual-routes').status, 'formalized-explicit-list-only');
   for (const id of [
@@ -1467,10 +1491,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '41d6671235ed90cfad39f427e4059692959078934e30bd2263f978102443d360');
+    'e5db6d818e345b3b2b76a357885291a9664addcd8f3ee21a9585d4b634cba567');
   assert.equal(map.milestoneSourceClosureSha256,
-    '11cd24e11180f22c5ca853d94fc0c201dc39a1dd6fa546de003d08279d2f9f4d');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 1977);
+    '26a4545856b5eb7542e9bf2ba332f68ae6e56ee5a9d140c7dbb8a5e4fe5d1d61');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 1988);
   for (const theorem of [
     'PNP.DirectWire.LockedNANDTrace.carrierSeparation',
     'PNP.DirectWire.LockedNANDTrace.finalLock_fresh',
@@ -1792,7 +1816,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [12255, 7167, 3676, 5027, 107]);
+  ], [12887, 7395, 3794, 5129, 109]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
@@ -1808,6 +1832,14 @@ test('canonical report source is current and the committed PDF artifact exists',
   assert.match(
     tex,
     /one answer-independent full candidate instantiates all six semantic premises/u,
+  );
+  assert.match(
+    tex,
+    /A strict version-zero grammar\s+serializes source circuits, the complete full candidate/u,
+  );
+  assert.match(
+    tex,
+    /This is not yet a parser\/validator machine, emitter\s+machine/u,
   );
   assert.match(tex, /A literal finite builder emits\s+\\code\{FormulaWidth\} copies of \\code\{T\} followed by \\code\{F\}, \\code\{Sep\}, and the complete positive\s+clause on variables zero, one, and two/u);
   assert.match(tex, /complete positive at-least-one shape clause on variables zero,\s+one, and two/u);

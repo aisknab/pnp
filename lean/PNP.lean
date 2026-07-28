@@ -25,6 +25,8 @@ import PNP.Concrete.PipelineSequentialStateNamespace
 import PNP.Concrete.PipelineSequentialCompiler
 import PNP.Concrete.Complexity
 import PNP.Concrete.PipelineRefinement
+import PNP.Concrete.LockedNANDEncoding
+import PNP.Concrete.LockedNANDReduction
 import PNP.Concrete.Target
 import PNP.Concrete.CNF
 import PNP.Concrete.CookLevinLayout

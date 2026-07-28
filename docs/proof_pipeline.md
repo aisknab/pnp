@@ -185,6 +185,15 @@ The reduction requires all of these claims:
 
 The checker records these through GPack fields, G proof-DAG nodes, row coverage, and final G linkage. A reviewer must still verify that the implemented predicates prove the mathematical statements rather than merely restating them as booleans.
 
+The current Lean reconstruction now proves items 1--9 for its typed
+topological NAND circuit and fixes a strict external source/target grammar.
+It serializes the complete candidate and baseline, rejects malformed bytes,
+and proves the pure bitstring transformation preserves satisfiability at the
+threshold. This closes the semantic and byte-level contract only. A concrete
+reduction still requires literal parser/validator and emitter machines,
+external-size polynomial runtime and output bounds, `RawRefinement`, and the
+final `PolynomialReduction` package.
+
 ### 5.3 Residual-band minimisation correctness
 
 The central completeness chain is:

@@ -142,46 +142,47 @@ caller certificates, forbidden shortcuts, and overclaims.
 ## Mechanically generated evidence
 
 Inventory coordinate
-`PNP-LEAN-THEOREM-INVENTORY-2026-07-28-88` records 12,255 declarations,
-7,167 theorems, 3,676 assumption-free theorems, 5,027 excluded private
-declarations, 107 source-closure modules, and 1,977 reviewed milestone
-candidates. Its byte SHA-256 is
-`f5f269dfe182807e7eb1603c1df1de28ac77e958718a47884e98f0a710045eec`;
+`PNP-LEAN-THEOREM-INVENTORY-2026-07-28-89` records 12,887 declarations,
+7,395 theorems, 3,794 assumption-free theorems, 5,129 excluded private
+declarations, 109 source-closure modules, and 1,988 reviewed milestone
+candidates. Its 11,367,243-byte canonical inventory has SHA-256
+`5032a2dd8d3ccf74ebe07a7b3e10bbc8ea6425a34a0c887c4733c0993d168f3c`;
 the Lean source-closure SHA-256 is
-`11cd24e11180f22c5ca853d94fc0c201dc39a1dd6fa546de003d08279d2f9f4d`.
+`26a4545856b5eb7542e9bf2ba332f68ae6e56ee5a9d140c7dbb8a5e4fe5d1d61`.
 
 Publication map coordinate
-`PNP-FORMAL-PUBLICATION-MAP-2026-07-28-88` contains 68 milestones: 65
+`PNP-FORMAL-PUBLICATION-MAP-2026-07-28-89` contains 69 milestones: 66
 earned and three deliberately unearned. The new
 `locked-nand-global-semantic-threshold` milestone pins the seven new theorem
 types plus the reused exact unsatisfiable-minimum theorem. The generated map
-is 649,065 bytes with SHA-256
-`3610e0a281cfe3c5bfee868f291d6c1b84dd7e9391ea933d807120b50c8f5277`.
+is 652,052 bytes with SHA-256
+`d39d79ebaf49dd64ba0e97b30ac0e82c783ec524832788057feaad73b81f67cc`.
 
 Status coordinate
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-28-88` sets the semantic-threshold,
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-28-89` sets the semantic-threshold,
 six-field-package, derived-final-output, and residual-at-most-four evidence
 fields true. It retains all four project assumptions, all six blockers,
 unset activation fingerprints, an absent `PNP.Main.p_eq_np`, and a false
-concrete publication gate. The status is 1,589,230 bytes with SHA-256
-`21b5d5b4ecd727f1bcc4fbcaa2c7b04df62e15c25a9b0190e932c9e3acabdf67`.
+concrete publication gate. The status is 1,597,898 bytes with SHA-256
+`c92553341db2cf128000f3561b290f37a5b8981951754c2a175db62603d79d31`.
 
-The generated canonical report source is 152,833 bytes with SHA-256
-`7f1185fb06f5be94e765a5e4201b3b1225bbd0a13f050ef40fdce93f83446373`.
-Its deterministic A4 PDF is 63 pages and 403,431 bytes with SHA-256
-`bf8a7cdfdf2479b131f0c983d8d664d9982a0fffac130c0cb5451b7d14c4a0c4`.
+The generated canonical report source is 154,275 bytes with SHA-256
+`8c7ca5e5be7ff90a4f09152484c5bfbbba4714f61a23944acb67bc8ab00558ec`.
+Its deterministic A4 PDF is 63 pages and 404,422 bytes with SHA-256
+`8da15655f703e19ceb065b7a70977d31ded9a7870cb0e1567f88d9fbd69b8916`.
 
 ## Exact boundary
 
 This milestone follows the legacy manuscript’s semantic construction and
-closes its typed threshold argument. It does not yet build the report’s
-encoded locked-NAND word with a raw or otherwise explicit polynomial-time
-machine, prove construction and certificate-size bounds, connect this typed
-candidate to the abstract `PNP.LockedNANDThreshold` language, prove CNFSAT is
-in P, supply NP-hardness or NP-completeness transport, discharge the project
-axiom `PNP.LockedNANDThreshold`, or prove `P = NP`.
+closes its typed threshold argument. Its successor now fixes and verifies the
+exact normalized version-zero bitstring semantics. Neither milestone yet
+supplies the parser/validator machine, emitter machine, construction and
+certificate-size polynomial bounds, connection to the abstract
+`PNP.LockedNANDThreshold` language, CNFSAT-in-P theorem, NP-hardness or
+NP-completeness transport, discharge of the project axiom
+`PNP.LockedNANDThreshold`, or `P = NP`.
 
-The next non-repetitive step is therefore the encoded polynomial construction
-link, not another manually repeated semantic coordinate. If Lean exposes a
-contradiction in the legacy route, the formalization must stop and repair or
-replace that step rather than add an assumption.
+The next non-repetitive step is therefore the executable parser/validator for
+the fixed grammar, not another manually repeated semantic coordinate. If Lean
+exposes a contradiction in the legacy route, the formalization must stop and
+repair or replace that step rather than add an assumption.
