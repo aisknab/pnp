@@ -15,7 +15,7 @@ async function packageJson0() {
 test('formal public surface accepts the archive-only legacy boundary', async () => {
   const out = await CheckFormalPublicSurface0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-28-LOCKED-NAND-ENCODED-SEMANTIC-BOUNDARY-88');
+  assert.equal(out.coordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-29-LOCKED-NAND-SOURCE-PARSER-89');
   assert.equal(out.currentStatusAuthority, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);

@@ -7,8 +7,11 @@ on:
       - 'lakefile.lean'
       - 'lake-manifest.json'
       - 'lean/**'
+      - 'lean/PNP/Concrete/LockedNANDSourceParser*.lean'
       - 'lean-audit/**'
+      - 'lean-audit/PNPConcreteLockedNANDSourceParserAxiomAudit.lean'
       - 'lean-regression/**'
+      - 'lean-regression/PNPConcreteLockedNANDSourceParser.lean'
       - 'formal-publication0.mjs'
       - 'pcc-formal-reconstruction-status0.mjs'
       - 'pcc-formal-public-surface0.mjs'
@@ -107,6 +110,7 @@ on:
       - 'audits/lean-locked-nand-global-unsatisfiable-final-zero0.test.mjs'
       - 'audits/lean-locked-nand-global-semantic-threshold0.test.mjs'
       - 'audits/lean-concrete-locked-nand-semantic-reduction0.test.mjs'
+      - 'audits/lean-concrete-locked-nand-source-parser0.test.mjs'
       - 'audits/lean-residual-routes0.test.mjs'
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_machine.md'
@@ -170,6 +174,7 @@ on:
       - 'docs/lean_locked_nand_global_unsatisfiable_final_zero.md'
       - 'docs/lean_locked_nand_global_semantic_threshold.md'
       - 'docs/lean_concrete_locked_nand_semantic_reduction.md'
+      - 'docs/lean_concrete_locked_nand_source_parser.md'
       - 'docs/lean_residual_routes.md'
       - 'docs/lean_theorem_inventory.md'
       - 'docs/proof_pipeline.md'
@@ -185,8 +190,11 @@ on:
       - 'lakefile.lean'
       - 'lake-manifest.json'
       - 'lean/**'
+      - 'lean/PNP/Concrete/LockedNANDSourceParser*.lean'
       - 'lean-audit/**'
+      - 'lean-audit/PNPConcreteLockedNANDSourceParserAxiomAudit.lean'
       - 'lean-regression/**'
+      - 'lean-regression/PNPConcreteLockedNANDSourceParser.lean'
       - 'formal-publication0.mjs'
       - 'pcc-formal-reconstruction-status0.mjs'
       - 'pcc-formal-public-surface0.mjs'
@@ -285,6 +293,7 @@ on:
       - 'audits/lean-locked-nand-global-unsatisfiable-final-zero0.test.mjs'
       - 'audits/lean-locked-nand-global-semantic-threshold0.test.mjs'
       - 'audits/lean-concrete-locked-nand-semantic-reduction0.test.mjs'
+      - 'audits/lean-concrete-locked-nand-source-parser0.test.mjs'
       - 'audits/lean-residual-routes0.test.mjs'
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_machine.md'
@@ -348,6 +357,7 @@ on:
       - 'docs/lean_locked_nand_global_unsatisfiable_final_zero.md'
       - 'docs/lean_locked_nand_global_semantic_threshold.md'
       - 'docs/lean_concrete_locked_nand_semantic_reduction.md'
+      - 'docs/lean_concrete_locked_nand_source_parser.md'
       - 'docs/lean_residual_routes.md'
       - 'docs/lean_theorem_inventory.md'
       - 'docs/proof_pipeline.md'
@@ -2113,6 +2123,32 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 7
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteLockedNANDSemanticReduction.lean
           node --test audits/lean-concrete-locked-nand-semantic-reduction0.test.mjs
+
+      - name: Print strict-v0 locked-NAND source-parser axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDSourceParserAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.LockedNAND\.")" -eq 380
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|propext, Quot\.sound)\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected strict-v0 locked-NAND source-parser axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Strict-v0 locked-NAND source parser reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 247
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 58
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 75
+
+      - name: Run strict-v0 locked-NAND source-parser regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPConcreteLockedNANDSourceParser.lean
+
+      - name: Run strict-v0 locked-NAND source-parser hostile audit
+        run: node --test audits/lean-concrete-locked-nand-source-parser0.test.mjs
 
       - name: Print explicit-list residual-route axioms
         run: |

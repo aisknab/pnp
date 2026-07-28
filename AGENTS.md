@@ -66,6 +66,11 @@ host, not as a build host.
 - Give long remote commands phase markers or retain their full log in the remote
   temporary directory. Return concise success markers; on failure, return the
   failing phase and a useful tail of its log.
+- A successful dependency-build line inside a multi-phase or append-only log is
+  not the job result. Before reporting a checkpoint as green, require the
+  wrapper's final success marker or recorded zero exit status, confirm the
+  `systemd-run` unit has reached its terminal state, and inspect the complete
+  log for output appended by later phases.
 
 ### Package-manager preflight
 

@@ -899,12 +899,42 @@ target language. For every bitstring, source satisfiability is equivalent to
 the encoded full candidate crossing its encoded threshold.
 
 The 48-declaration audit has four empty closures, 37 using only `propext`, and
-seven using only `propext` with `Quot.sound`. This is a pure semantic
-transformation, not a parser/validator machine, emitter machine,
-`RawRefinement`, `PolynomialReduction`, or runtime/output-size proof. The
-strategic next step is to implement and bound the parser/validator against
-these exact bytes before implementing the complete emitter. See
+seven using only `propext` with `Quot.sound`. This module is a pure semantic
+transformation and does not by itself supply a parser/validator machine,
+emitter machine, `RawRefinement`, `PolynomialReduction`, or
+runtime/output-size proof. The following source-parser milestone implements
+and bounds the validator against these exact bytes; the complete emitter
+remains the next executable boundary. See
 [`lean_concrete_locked_nand_semantic_reduction.md`](./lean_concrete_locked_nand_semantic_reduction.md).
+
+`PNP.Concrete.LockedNANDSourceParser` now aggregates the completed bounded
+source parser. Its executable layer is a direct nine-symbol `WorkMachine` with
+228 control states and 2,052 pairwise query-distinct literal rules; its rule
+construction does not call the semantic decoder. Constructive normal forms
+classify reserved or partial four-bit tokens and every strict circuit-grammar
+failure. Separate exact-trace modules prove canonical packed layouts, an accepting boundary that
+exposes the original source bytes, and a generic rejecting cleanup boundary
+that exposes the empty output. The compiled layer records
+`4096 * (n + 1)^3` work transitions and six raw transitions per work
+transition as a literal polynomial expression and proves ordinary-start
+blank equivalence.
+
+The total exact theorem now dispatches every bitstring—valid circuits,
+grammar failures, and well-encoded circuits with invalid references—to a
+halted endpoint within `4096 * (n + 1)^3` work transitions. The endpoint is
+accepting exactly for `ValidEncodedCircuit`; valid source bytes are preserved
+verbatim, while every invalid source exposes the empty output. The compiled
+machine accepts with the same iff, returns exactly `validatedSourceBytes`,
+and cannot time out within `6 * 4096 * (n + 1)^3` raw transitions.
+
+The compiled boundary is packaged as a `PolynomialTimeMachine`, a
+nonexpanding `PolynomialTimeFunction`, and the validator program's exact leaf
+`RawRefinement`. The declaration audit covers the complete public parser
+surface and permits only the approved Lean-standard closure, with no project
+axiom, host-side decoder, schedule lookup, or caller execution certificate.
+This completes the parser/validator milestone, but not the target emitter or
+the composed source-to-target reduction. See
+[`lean_concrete_locked_nand_source_parser.md`](./lean_concrete_locked_nand_source_parser.md).
 
 The historical hostile review named `DirectWireOutputLowerBound`, `MacroDistinct`,
 `TraceEquivalence`, `ZeroOutputConvention`, and `FinalLockSeparation`. The general output lower
@@ -914,8 +944,11 @@ carrier, global `MacroDistinct` is discharged by the exact baseline output condi
 whole-carrier `ZeroOutputConvention` consequence is discharged in the unsatisfiable branch.
 `FinalLockSeparation` and its satisfiable semantic consequences are now
 discharged. The strict encoding and pure semantic transformation are also
-formalized; executable parser/emitter machines, their polynomial bounds, and
-the report-level reduction linkage remain missing. See
+formalized. The literal source parser now has all-input exact correctness,
+byte-preserving-or-empty output, compiled cubic non-timeout, polynomial
+machine/function witnesses, and its leaf raw refinement. The complete
+emitter, composed parser/emitter reduction, concrete `PolynomialReduction`,
+and report-level threshold-language linkage remain missing. See
 [`lean_locked_nand_threshold_boundary.md`](./lean_locked_nand_threshold_boundary.md).
 
 The residual-route layer now performs one honest executable operation: it scans an explicit finite

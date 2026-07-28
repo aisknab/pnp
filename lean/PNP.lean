@@ -27,6 +27,7 @@ import PNP.Concrete.Complexity
 import PNP.Concrete.PipelineRefinement
 import PNP.Concrete.LockedNANDEncoding
 import PNP.Concrete.LockedNANDReduction
+import PNP.Concrete.LockedNANDSourceParser
 import PNP.Concrete.Target
 import PNP.Concrete.CNF
 import PNP.Concrete.CookLevinLayout

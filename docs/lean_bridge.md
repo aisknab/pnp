@@ -59,6 +59,17 @@ lean/PNP/Concrete/PipelinePairedCompiler.lean
 lean/PNP/Concrete/PipelineCompiler.lean
 lean/PNP/Concrete/Complexity.lean
 lean/PNP/Concrete/PipelineRefinement.lean
+lean/PNP/Concrete/LockedNANDEncoding.lean
+lean/PNP/Concrete/LockedNANDReduction.lean
+lean/PNP/Concrete/LockedNANDSourceParserSpec.lean
+lean/PNP/Concrete/LockedNANDSourceParserSemantics.lean
+lean/PNP/Concrete/LockedNANDSourceParserMachine.lean
+lean/PNP/Concrete/LockedNANDSourceParserFailureShapes.lean
+lean/PNP/Concrete/LockedNANDSourceParserValidTrace.lean
+lean/PNP/Concrete/LockedNANDSourceParserTotalTrace.lean
+lean/PNP/Concrete/LockedNANDSourceParserCorrectness.lean
+lean/PNP/Concrete/LockedNANDSourceParserCompiled.lean
+lean/PNP/Concrete/LockedNANDSourceParser.lean
 lean/PNP/Concrete/Target.lean
 lean/PNP/Concrete/WorkInput.lean
 lean/PNP/Concrete/WorkMachine.lean
@@ -107,6 +118,7 @@ lean-audit/PNPConcretePipelineCompilerAxiomAudit.lean
 lean-audit/PNPConcretePipelineMachineSimulationAxiomAudit.lean
 lean-audit/PNPConcreteComplexityAxiomAudit.lean
 lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean
+lean-audit/PNPConcreteLockedNANDSourceParserAxiomAudit.lean
 lean-audit/PNPConcreteTargetAxiomAudit.lean
 lean-audit/PNPConcreteCNFAxiomAudit.lean
 lean-audit/PNPConcreteCNFVerifierAxiomAudit.lean
@@ -129,6 +141,7 @@ lean-audit/PNPLockedNANDGlobalCandidatesAxiomAudit.lean
 lean-audit/PNPLockedNANDGlobalBaselineDistinctAxiomAudit.lean
 lean-audit/PNPLockedNANDGlobalUnsatisfiableFinalZeroAxiomAudit.lean
 lean-audit/PNPLockedNANDGlobalSemanticThresholdAxiomAudit.lean
+lean-regression/PNPConcreteLockedNANDSourceParser.lean
 docs/lean_nand_semantics.md
 docs/lean_concrete_machine.md
 docs/lean_tape_handoff.md
@@ -140,6 +153,7 @@ docs/lean_pipeline_machine_simulation.md
 docs/lean_pipeline_paired_compiler.md
 docs/lean_pipeline_compiler.md
 docs/lean_concrete_complexity.md
+docs/lean_concrete_locked_nand_source_parser.md
 docs/lean_nand_enumerator.md
 docs/lean_locked_nand_macros.md
 docs/lean_locked_nand_prefix.md
@@ -605,13 +619,64 @@ packages all six fields, derives the exact typed threshold, and proves residual
 slack at most four. A further concrete layer now fixes strict external source
 and target bytes, proves direct output-normalization semantics, serializes the
 complete candidate and threshold, and proves the pure all-bitstring semantic
-transformation. Its parser/validator and emitter machines, polynomial bounds,
-`RawRefinement`, and report-level linkage remain absent. See
+transformation. The following source-parser layer now supplies the literal
+validator machine, its all-input exact verdict/output theorem, compiled cubic
+bound, polynomial machine/function witnesses, and leaf `RawRefinement`. The
+emitter, composed reduction, and report-level linkage remain absent. See
 `docs/lean_locked_nand_global_candidates.md` and
 `docs/lean_locked_nand_global_baseline_distinct.md`, then
 `docs/lean_locked_nand_global_unsatisfiable_final_zero.md` and
 `docs/lean_locked_nand_global_semantic_threshold.md`, followed by
 `docs/lean_concrete_locked_nand_semantic_reduction.md`.
+
+## Concrete strict-v0 source parser
+
+`lean/PNP/Concrete/LockedNANDSourceParser.lean` is the public aggregate for
+the executable source side of the encoded locked-NAND boundary. Its direct
+work machine has a fixed nine-symbol alphabet, 228 control states, and 2,052
+pairwise query-distinct literal rules. The executable table does not call the
+pure token/circuit decoder or a host-side schedule.
+
+The constructive failure layer classifies reserved `11xx` code points,
+one-to-three trailing bits, malformed unary counts, both gate-source
+positions, every required terminator, and trailing circuit tokens with exact
+input equalities. The operational layers prove canonical packed layouts,
+exact local source/reference traces, generic guard-seek and output-erasing
+cleanup, and the restored accepting boundary. At those proved endpoints the
+accepting tape exposes the original circuit bytes and the rejecting tape
+exposes the empty output.
+
+The compiled-bound layer fixes the conservative expression
+
+```text
+validWorkBound(n) = 4096 * (n + 1)^3
+validRawBound(n) = 6 * validWorkBound(n).
+```
+
+It proves the polynomial evaluation and ordinary-start blank equivalence.
+The aggregate's total exact theorem connects every valid, grammar-invalid,
+and reference-invalid input to a halted endpoint within the work bound.
+Acceptance is equivalent to `ValidEncodedCircuit`; the exact output is the
+original source for valid input and the empty word for invalid input.
+
+Compilation preserves those results for ordinary raw input. At
+`6 * 4096 * (n + 1)^3` raw transitions, the compiled machine accepts exactly
+the valid source language, returns exactly `validatedSourceBytes`, and never
+times out. The module packages this as a `PolynomialTimeMachine`, a
+nonexpanding `PolynomialTimeFunction`, and the validator program's leaf
+`RawRefinement`. The axiom audit, regression, and hostile test are:
+
+```sh
+lake env lean -DwarningAsError=true \
+  lean-audit/PNPConcreteLockedNANDSourceParserAxiomAudit.lean
+lake env lean -DwarningAsError=true \
+  lean-regression/PNPConcreteLockedNANDSourceParser.lean
+node --test audits/lean-concrete-locked-nand-source-parser0.test.mjs
+```
+
+See
+[`lean_concrete_locked_nand_source_parser.md`](./lean_concrete_locked_nand_source_parser.md)
+for the exact current boundary.
 
 ## Global locked-NAND layer
 
@@ -632,9 +697,12 @@ are now constructed on that carrier, and the whole-carrier unsatisfiable
 final-zero law, satisfiable final-lock separation, typed semantic threshold,
 and residual-slack-at-most-four theorem are proved. A strict encoded semantic
 boundary now contains the complete candidate and proves source/target
-equivalence. Remaining global work is the executable parser/validator and
-emitter, their runtime and output-size bounds, the resulting concrete
-polynomial reduction, and the report-level language linkage.
+equivalence. Its strict-v0 source parser now has total exact correctness,
+compiled non-timeout, exact validated-byte output, polynomial machine/function
+witnesses, and leaf raw refinement. Remaining global work is the complete
+emitter, the composed parser/emitter refinement and output-size interface, the
+resulting concrete `PolynomialReduction`, and the report-level language
+linkage.
 
 ## Residual-band, ZeroSlack, and PCCMin layers
 
@@ -747,6 +815,10 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 22. Exact framer-to-simulator and accept/reject-to-verdict-indexed-handoff launches, first-match
     bridge isolation, cumulative internal work cost, six-for-one compiled raw cost from canonical
     paired input, and accept/reject/timeout preservation for supplied exact target traces.
+23. A literal 228-state, 2,052-rule strict-v0 locked-NAND source parser with constructive exact
+    decoder-failure normal forms, all-input exact accept/reject behavior, valid-byte preservation,
+    invalid-byte erasure, compiled non-timeout within `6 * 4096 * (n + 1)^3`, polynomial
+    machine/function witnesses, and an exact leaf raw-machine refinement.
 ```
 
 ## Explicit trust base after this pass
@@ -770,10 +842,10 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 The highest-value next targets are:
 
 ```text
-1. Construct the proved candidate family uniformly from encoded inputs with the polynomial
-   construction bound required by the pinned manuscript.
-2. Link that encoded construction to the abstract `PNP.LockedNANDThreshold` language without
-   adding a caller certificate or answer-dependent witness.
+1. Implement the complete locked-NAND emitter and prove its exact bytes, output-size bound, and
+   runtime bound.
+2. Compose the parser and emitter with a raw-machine refinement, package the required concrete
+   `PolynomialReduction`, and link it to the abstract `PNP.LockedNANDThreshold` language.
 3. Complete the raw Cook--Levin formula builder and package its concrete polynomial reduction.
 4. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
 5. Formalize or import concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as

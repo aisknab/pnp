@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 69);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 66);
+  assert.equal(status.formalPublicationMilestones.length, 70);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 67);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -1475,6 +1475,39 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   ]);
   assert.match(encodedBoundary.scope, /strict version-zero/u);
   assert.match(encodedBoundary.nonClaim, /not a parser\/validator machine/u);
+  const sourceParser = byId.get(
+    'concrete-locked-nand-source-parser',
+  );
+  assert.equal(sourceParser.status, 'formalized-foundation-only');
+  assert.equal(sourceParser.earned, true);
+  assert.equal(
+    sourceParser.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.deepEqual(sourceParser.requiredTheorems, [
+    'PNP.Concrete.LockedNAND.SourceParser.acceptedTape_outputBits',
+    'PNP.Concrete.LockedNAND.SourceParser.allInput_exact',
+    'PNP.Concrete.LockedNAND.SourceParser.canonicalSteps_le_validWorkBound',
+    'PNP.Concrete.LockedNAND.SourceParser.compiledBoundedDecide_accept_iff',
+    'PNP.Concrete.LockedNAND.SourceParser.compiledBoundedDecide_ne_timeout',
+    'PNP.Concrete.LockedNAND.SourceParser.compiledMachineOutput_eq_validatedSourceBytes',
+    'PNP.Concrete.LockedNAND.SourceParser.compiledStart_blankEquivalent',
+    'PNP.Concrete.LockedNAND.SourceParser.decodeCircuitTokens_eq_none_iff_failure',
+    'PNP.Concrete.LockedNAND.SourceParser.illFormed_exact',
+    'PNP.Concrete.LockedNAND.SourceParser.machine_acceptState_ne_rejectState',
+    'PNP.Concrete.LockedNAND.SourceParser.malformed_exact',
+    'PNP.Concrete.LockedNAND.SourceParser.rules_length',
+    'PNP.Concrete.LockedNAND.SourceParser.rules_pairwise_query_distinct',
+    'PNP.Concrete.LockedNAND.SourceParser.statePrograms_length',
+    'PNP.Concrete.LockedNAND.SourceParser.validFinalConfiguration_isHalted',
+    'PNP.Concrete.LockedNAND.SourceParser.validFinalConfiguration_state',
+    'PNP.Concrete.LockedNAND.SourceParser.validRawBound_eq',
+    'PNP.Concrete.LockedNAND.SourceParser.validRawTimePolynomial_eval',
+    'PNP.Concrete.LockedNAND.SourceParser.validatedSourceBytesPolynomialTimeFunction_output',
+    'PNP.Concrete.LockedNAND.SourceParser.wellFormed_exact',
+  ]);
+  assert.match(sourceParser.scope, /literal nine-symbol finite work machine/u);
+  assert.match(sourceParser.nonClaim, /does not emit the locked-NAND target/u);
   assert.equal(byId.get('locked-nand-conditional-threshold').status, 'formalized-with-premises');
   assert.equal(byId.get('explicit-residual-routes').status, 'formalized-explicit-list-only');
   for (const id of [
@@ -1491,10 +1524,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'e5db6d818e345b3b2b76a357885291a9664addcd8f3ee21a9585d4b634cba567');
+    'c7e5aea71351c084354d0dc2e7c3cb65f613a3d1bf898aa3929ebd1d168818fe');
   assert.equal(map.milestoneSourceClosureSha256,
-    '26a4545856b5eb7542e9bf2ba332f68ae6e56ee5a9d140c7dbb8a5e4fe5d1d61');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 1988);
+    '22510170cf53b25ddd89df7cf9d01fefc0aff38ba52ae030c55c46c1b16cf50e');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2008);
   for (const theorem of [
     'PNP.DirectWire.LockedNANDTrace.carrierSeparation',
     'PNP.DirectWire.LockedNANDTrace.finalLock_fresh',
@@ -1816,7 +1849,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [12887, 7395, 3794, 5129, 109]);
+  ], [13731, 7827, 4012, 6908, 117]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
@@ -1839,7 +1872,15 @@ test('canonical report source is current and the committed PDF artifact exists',
   );
   assert.match(
     tex,
-    /This is not yet a parser\/validator machine, emitter\s+machine/u,
+    /That module is a pure semantic transformation and does not\s+by itself supply an executable parser or emitter/u,
+  );
+  assert.match(
+    tex,
+    /The following strict-v0 source-parser milestone supplies a direct\s+nine-symbol machine with 228 control states and 2,052 pairwise/u,
+  );
+  assert.match(
+    tex,
+    /accepts exactly the valid source encodings, preserves valid source bytes\s+verbatim, and returns the empty word for invalid grammar or references/u,
   );
   assert.match(tex, /A literal finite builder emits\s+\\code\{FormulaWidth\} copies of \\code\{T\} followed by \\code\{F\}, \\code\{Sep\}, and the complete positive\s+clause on variables zero, one, and two/u);
   assert.match(tex, /complete positive at-least-one shape clause on variables zero,\s+one, and two/u);
