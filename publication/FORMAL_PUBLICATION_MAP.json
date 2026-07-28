@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-28-89",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-29-90",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "26a4545856b5eb7542e9bf2ba332f68ae6e56ee5a9d140c7dbb8a5e4fe5d1d61",
+  "milestoneSourceClosureSha256": "22510170cf53b25ddd89df7cf9d01fefc0aff38ba52ae030c55c46c1b16cf50e",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CookLevin.BoundedLiteral.emit_variable_lt": "c089b0fedc7320ec14f46b5b74f7ec26158cdad85ecbe647b4c728660dcb6a68",
@@ -1782,6 +1782,26 @@
     "PNP.Concrete.LockedNAND.RawCircuit.normalize_eval": "f18064d9bb1f00d62077374aa7ac7cbf4340557f6b7d9c85137077aa329f93a4",
     "PNP.Concrete.LockedNAND.RawCircuit.normalize_idempotent": "7001ae372f765c79569bf135c4fb74a284d215ecac39babf32492c38334fa2b8",
     "PNP.Concrete.LockedNAND.RawLockedInstance.elaborate_ofCandidate": "132a6b83f0f98ae2af3dedd26a242d6b7c0d59e2be72ca638c0d340121ea7978",
+    "PNP.Concrete.LockedNAND.SourceParser.acceptedTape_outputBits": "d701ab9e34ecabc1d16ea08faa44671e875b59bd6133b11e2fcf7e020d3e1634",
+    "PNP.Concrete.LockedNAND.SourceParser.allInput_exact": "78d0acb8ae788b9216e67ac5be635c1d0f34953e1bc57c9b6e884d7f04d54a03",
+    "PNP.Concrete.LockedNAND.SourceParser.canonicalSteps_le_validWorkBound": "28467e05ff2e43332360757992c3cd5850a45f3ef7d3fb48bebac47ad090a2ff",
+    "PNP.Concrete.LockedNAND.SourceParser.compiledBoundedDecide_accept_iff": "55182cfbf83ffaf4a839519e7fceccc72378c5a5b0993dda4a48fb16888cb82c",
+    "PNP.Concrete.LockedNAND.SourceParser.compiledBoundedDecide_ne_timeout": "f8a1ccfa5a54373f004c1973a2115fe51bd6f53403cc6f72de4dfc3e01cc6ad9",
+    "PNP.Concrete.LockedNAND.SourceParser.compiledMachineOutput_eq_validatedSourceBytes": "adc61884c960f3eb7c1a6a32e3383b23f33f581685509f7f40c4d4c14e05bcf0",
+    "PNP.Concrete.LockedNAND.SourceParser.compiledStart_blankEquivalent": "453d8927f184e5f25c348ce8a7d80b1668044759e265c0f9306b2ce03e9642da",
+    "PNP.Concrete.LockedNAND.SourceParser.decodeCircuitTokens_eq_none_iff_failure": "12ba3b565d2c3c1d7d7e49e902ea626da22e434b85fe2305dc8b203c46d98485",
+    "PNP.Concrete.LockedNAND.SourceParser.illFormed_exact": "9a5f16bda1ce85f865517b78762bdf5c665748edb297920d211ac2aca6016625",
+    "PNP.Concrete.LockedNAND.SourceParser.machine_acceptState_ne_rejectState": "9cd9ae748e010284b27d3cde34af163c0250dfc15dd20dde8bb8d7971849cc74",
+    "PNP.Concrete.LockedNAND.SourceParser.malformed_exact": "62e8161b3a17d5aab547da24f4eb7e53db5f645a42f5fd79a748d20d7ad73c89",
+    "PNP.Concrete.LockedNAND.SourceParser.rules_length": "eee4e770ed3bd75cd5a13135decf7feac2c03dc8c76bc3f09e24520a831d72a8",
+    "PNP.Concrete.LockedNAND.SourceParser.rules_pairwise_query_distinct": "3b03582def97acf6905f685fff8c51a7aa89a339fa30842cb33f6cb3053fa879",
+    "PNP.Concrete.LockedNAND.SourceParser.statePrograms_length": "e9c49bf192094aadf7c4fe4047ffa0eb700e81962aa17d16ea2ad26594e40c7e",
+    "PNP.Concrete.LockedNAND.SourceParser.validFinalConfiguration_isHalted": "29e6b966bbdbec361b56a604a2a4f9bf9a7e67029089eaa25546bf7eb34a49e4",
+    "PNP.Concrete.LockedNAND.SourceParser.validFinalConfiguration_state": "df16e89b9b9047047bcf3ef4edae078a0aabc845e1d82a4a0c990b2b3464868d",
+    "PNP.Concrete.LockedNAND.SourceParser.validRawBound_eq": "6a31cd6fb0d34dab788f6be4ad428f9bbcac5c4fd35ef29bf90d33cf39743bc4",
+    "PNP.Concrete.LockedNAND.SourceParser.validRawTimePolynomial_eval": "2eece133162707f053182b7b838877dd2f63eea10dfc2005e4a1fc001302dc43",
+    "PNP.Concrete.LockedNAND.SourceParser.validatedSourceBytesPolynomialTimeFunction_output": "c80a0e9b2352eb5029cc5538d2962a0bbd9fb3cbea93641eba66d6386255d899",
+    "PNP.Concrete.LockedNAND.SourceParser.wellFormed_exact": "df3b9bffacae9dd23069ac927ea471b6e72d1a548cd9e0c2a53885386348905f",
     "PNP.Concrete.LockedNAND.buildLockedNANDInstance_correct": "0d97147c27f39b417f82efd1e45e0defb1bf26bdc2e5fbd27312dd36b5ce23a8",
     "PNP.Concrete.LockedNAND.decodeCircuit_encodeCircuit": "1b7c4676782fa2625e2b13d28da390caed1c50394d53f4f690f7a00340c0899f",
     "PNP.Concrete.LockedNAND.decodeElaboratedCircuit_encodeCircuit_ofCircuit": "2100056c33b88ef04bd7db5c12ae458d4336dd90400baa2e0d0dc6b96b12c6dd",
@@ -4705,6 +4725,35 @@
       "nonClaim": "This is not a parser/validator machine, emitter machine, RawRefinement, PolynomialReduction, construction-runtime or output-size bound, abstract locked-NAND threshold discharge, CNFSAT-in-P result, or P = NP."
     },
     {
+      "id": "concrete-locked-nand-source-parser",
+      "title": "Concrete strict-v0 locked-NAND source parser",
+      "classification": "formalized-foundation-only",
+      "scope": "One literal nine-symbol finite work machine validates every strict version-zero source bitstring: it accepts exactly ValidEncodedCircuit, preserves valid bytes, clears invalid bytes, cannot time out within the proved compiled cubic bound, and supplies polynomial-time machine/function witnesses plus the validator's exact leaf RawRefinement.",
+      "requiredTheorems": [
+        "PNP.Concrete.LockedNAND.SourceParser.acceptedTape_outputBits",
+        "PNP.Concrete.LockedNAND.SourceParser.allInput_exact",
+        "PNP.Concrete.LockedNAND.SourceParser.canonicalSteps_le_validWorkBound",
+        "PNP.Concrete.LockedNAND.SourceParser.compiledBoundedDecide_accept_iff",
+        "PNP.Concrete.LockedNAND.SourceParser.compiledBoundedDecide_ne_timeout",
+        "PNP.Concrete.LockedNAND.SourceParser.compiledMachineOutput_eq_validatedSourceBytes",
+        "PNP.Concrete.LockedNAND.SourceParser.compiledStart_blankEquivalent",
+        "PNP.Concrete.LockedNAND.SourceParser.decodeCircuitTokens_eq_none_iff_failure",
+        "PNP.Concrete.LockedNAND.SourceParser.illFormed_exact",
+        "PNP.Concrete.LockedNAND.SourceParser.machine_acceptState_ne_rejectState",
+        "PNP.Concrete.LockedNAND.SourceParser.malformed_exact",
+        "PNP.Concrete.LockedNAND.SourceParser.rules_length",
+        "PNP.Concrete.LockedNAND.SourceParser.rules_pairwise_query_distinct",
+        "PNP.Concrete.LockedNAND.SourceParser.statePrograms_length",
+        "PNP.Concrete.LockedNAND.SourceParser.validFinalConfiguration_isHalted",
+        "PNP.Concrete.LockedNAND.SourceParser.validFinalConfiguration_state",
+        "PNP.Concrete.LockedNAND.SourceParser.validRawBound_eq",
+        "PNP.Concrete.LockedNAND.SourceParser.validRawTimePolynomial_eval",
+        "PNP.Concrete.LockedNAND.SourceParser.validatedSourceBytesPolynomialTimeFunction_output",
+        "PNP.Concrete.LockedNAND.SourceParser.wellFormed_exact"
+      ],
+      "nonClaim": "This source parser does not emit the locked-NAND target, bound the future emitter's runtime or output size, compose parser and emitter, establish the source-to-target PolynomialReduction, discharge the abstract locked-NAND threshold assumption, put CNFSAT in P, prove NP-hardness or NP-completeness transport, or prove P = NP."
+    },
+    {
       "id": "locked-nand-conditional-threshold",
       "title": "Conditional locked-NAND threshold boundary",
       "classification": "formalized-with-premises",
@@ -4737,7 +4786,7 @@
       "requiredTheorems": [
         "PNP.Main.locked_nand_threshold"
       ],
-      "nonClaim": "The strict encoding and pure correct transformation are now formalized, but they do not supply the parser/validator machine, emitter machine, RawRefinement, polynomial runtime or output-size bounds, or report-level language linkage."
+      "nonClaim": "The strict encoding, pure correct transformation, and total polynomial-time source parser are now formalized, but they do not supply the target emitter, the composed source-to-target PolynomialReduction, the emitter's polynomial runtime or output-size bounds, or report-level language linkage."
     },
     {
       "id": "global-zeroslack-pccmin",

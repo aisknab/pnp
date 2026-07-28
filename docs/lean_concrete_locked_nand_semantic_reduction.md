@@ -125,34 +125,34 @@ shortcuts, and reduction overclaims.
 ## Mechanically generated publication evidence
 
 Inventory coordinate
-`PNP-LEAN-THEOREM-INVENTORY-2026-07-28-89` records 12,887 declarations,
-7,395 theorems, 3,794 assumption-free theorems, 5,129 excluded private
-declarations, 109 source-closure modules, and 1,988 reviewed milestone
-candidates. The canonical inventory is 11,367,243 bytes with SHA-256
-`5032a2dd8d3ccf74ebe07a7b3e10bbc8ea6425a34a0c887c4733c0993d168f3c`.
+`PNP-LEAN-THEOREM-INVENTORY-2026-07-29-90` records 13,731 declarations,
+7,827 theorems, 4,012 assumption-free theorems, 6,908 excluded private
+declarations, 117 source-closure modules, and 2,008 reviewed milestone
+candidates. The canonical inventory is 11,544,049 bytes with SHA-256
+`bc9f93749d14dd5d646ee37540f365d9c712f599a4aadd45262bb1ab063146c5`.
 The reviewed Lean source-closure SHA-256 is
-`26a4545856b5eb7542e9bf2ba332f68ae6e56ee5a9d140c7dbb8a5e4fe5d1d61`.
+`22510170cf53b25ddd89df7cf9d01fefc0aff38ba52ae030c55c46c1b16cf50e`.
 
 Publication map coordinate
-`PNP-FORMAL-PUBLICATION-MAP-2026-07-28-89` contains 69 milestones: 66
+`PNP-FORMAL-PUBLICATION-MAP-2026-07-29-90` contains 70 milestones: 67
 earned and three deliberately unearned. It pins eleven theorem types for
 `concrete-locked-nand-encoded-semantic-boundary`; the complete pin inventory
-contains 1,988 theorem types. The map is 652,052 bytes with SHA-256
-`d39d79ebaf49dd64ba0e97b30ac0e82c783ec524832788057feaad73b81f67cc`.
+contains 2,008 theorem types. The map is 657,356 bytes with SHA-256
+`abc16d916b77f37dffceed60440fcf966056e1da1785834867a8c49ddc58f383`.
 
 Status coordinate
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-28-89` records the semantic
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-29-90` records the semantic
 boundary fields as true while retaining all four project assumptions, all six
 blockers, unset activation fingerprints, an absent `PNP.Main.p_eq_np`, and a
-false concrete publication gate. The status is 1,597,898 bytes with SHA-256
-`c92553341db2cf128000f3561b290f37a5b8981951754c2a175db62603d79d31`.
+false concrete publication gate. The status is 1,611,774 bytes with SHA-256
+`c5f375d6a2fe9cae42901997357ab626ae69481f6a81f7217a889937c8d26ed5`.
 
 Canonical report coordinate
-`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-28-89` has a
-154,275-byte TeX source with SHA-256
-`8c7ca5e5be7ff90a4f09152484c5bfbbba4714f61a23944acb67bc8ab00558ec`
-and a 63-page, 404,422-byte PDF with SHA-256
-`8da15655f703e19ceb065b7a70977d31ded9a7870cb0e1567f88d9fbd69b8916`.
+`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-29-90` has a
+156,947-byte TeX source with SHA-256
+`4fef9bd1525e1f700b8eb98f5a9c54396b39013e1619fe803df8c1a047588fad`
+and a 64-page, 408,994-byte PDF with SHA-256
+`40e93415f0ce334d53ac8ee0c691df828b8ea5ddaeb45d3c22d2faec6d88d9eb`.
 
 ## Exact boundary and strategic next step
 
@@ -162,10 +162,9 @@ This milestone proves no parser runtime, emitter runtime, output-size
 polynomial, CNFSAT-in-P theorem, NP-hardness transport, abstract
 `PNP.LockedNANDThreshold` discharge, or P = NP.
 
-The next strategic milestone is an executable parser/validator machine for
-this exact version-zero grammar, with malformed-input timeout or rejection
-and a proved external-size polynomial. The following milestone can then
-compile the complete candidate emitter against the bytes fixed here. Only
-after both sides are composed, bounded, and connected through
-`RawRefinement` can the repository honestly construct a concrete
-`PolynomialReduction`.
+The following milestone now supplies the executable parser/validator machine
+for this exact version-zero grammar, with exact malformed-input rejection and
+a proved external-size polynomial. The next strategic milestone is the
+complete candidate emitter against the bytes fixed here. Only after parser and
+emitter are composed, bounded, and connected through `RawRefinement` can the
+repository honestly construct a concrete `PolynomialReduction`.

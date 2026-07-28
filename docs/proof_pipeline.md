@@ -189,10 +189,18 @@ The current Lean reconstruction now proves items 1--9 for its typed
 topological NAND circuit and fixes a strict external source/target grammar.
 It serializes the complete candidate and baseline, rejects malformed bytes,
 and proves the pure bitstring transformation preserves satisfiability at the
-threshold. This closes the semantic and byte-level contract only. A concrete
-reduction still requires literal parser/validator and emitter machines,
-external-size polynomial runtime and output bounds, `RawRefinement`, and the
-final `PolynomialReduction` package.
+threshold. A literal 228-state, 2,052-rule source parser now decides every
+bitstring exactly: valid source bytes are preserved, invalid bytes produce the
+empty word, and the compiled parser cannot time out within
+`6 * 4096 * (n + 1)^3` raw transitions. It is packaged as a polynomial-time
+language machine, a nonexpanding polynomial-time validation function, and a
+leaf raw-machine refinement.
+
+This closes the source-validation side, not the concrete reduction. The
+remaining executable boundary is the exact target emitter with its runtime
+and output-size bounds, followed by parser/emitter composition and the final
+`PolynomialReduction` package. The abstract threshold-language discharge,
+CNFSAT-in-P result, NP-hardness transport, and `P = NP` remain unproved.
 
 ### 5.3 Residual-band minimisation correctness
 

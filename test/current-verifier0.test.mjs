@@ -52,6 +52,8 @@ test('current verifier plan contains status, surface, archive integrity, and cur
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-nand-reference-minimum0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-locked-nand-baseline0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-locked-nand-threshold-boundary0.test.mjs'), true);
+  assert.equal(CURRENT_VERIFICATION_TESTS0.includes(
+    'audits/lean-concrete-locked-nand-source-parser0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-residual-routes0.test.mjs'), true);
 });
 

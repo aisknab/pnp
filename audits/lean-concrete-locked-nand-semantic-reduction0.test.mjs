@@ -271,7 +271,7 @@ test('regression covers codecs, three normalization branches, exact bytes, and f
   );
 });
 
-test('status earns only the semantic boundary and retains executable blockers', async () => {
+test('status retains the semantic boundary and records its executable parser successor', async () => {
   const status = JSON.parse(
     await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'),
   );
@@ -290,8 +290,11 @@ test('status earns only the semantic boundary and retains executable blockers', 
     status.leanConcreteLockedNANDEncodedSemanticReductionScope,
     'strict-version-zero-codec-direct-normalization-semantics-complete-candidate-bytes-and-fail-closed-semantic-reduction',
   );
+  assert.equal(
+    status.leanConcreteLockedNANDParserMachineFormalized,
+    true,
+  );
   for (const field of [
-    'leanConcreteLockedNANDParserMachineFormalized',
     'leanConcreteLockedNANDEmitterMachineFormalized',
     'leanConcreteLockedNANDPolynomialReductionFormalized',
     'leanLockedNANDPolynomialBuilderFormalized',

@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-28-89');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-29-90');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -608,6 +608,20 @@ test('formal reconstruction status accepts the current source and public mirrors
   );
   for (const field of [
     'leanConcreteLockedNANDParserMachineFormalized',
+    'leanConcreteLockedNANDParserAxiomAuditPassed',
+    'leanConcreteLockedNANDParserAllInputExactFormalized',
+    'leanConcreteLockedNANDParserExactOutputFormalized',
+    'leanConcreteLockedNANDParserCompiledNonTimeoutFormalized',
+    'leanConcreteLockedNANDParserPolynomialTimeMachineFormalized',
+    'leanConcreteLockedNANDParserPolynomialTimeFunctionFormalized',
+    'leanConcreteLockedNANDParserRawRefinementFormalized',
+  ]) assert.equal(out[field], true, field);
+  assert.equal(out.leanConcreteLockedNANDParserAuditedDeclarationCount, 380);
+  assert.equal(
+    out.leanConcreteLockedNANDParserScope,
+    'literal-228-state-2052-rule-strict-version-zero-all-input-parser-byte-preserving-or-empty-with-compiled-cubic-bound',
+  );
+  for (const field of [
     'leanConcreteLockedNANDEmitterMachineFormalized',
     'leanConcreteLockedNANDPolynomialReductionFormalized',
   ]) assert.equal(out[field], false, field);
@@ -656,13 +670,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 12887);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 7395);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 3794);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 5129);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 109);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 13731);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 7827);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 4012);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 6908);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 117);
   assert.equal(status.leanSourceClosureSha256,
-    '26a4545856b5eb7542e9bf2ba332f68ae6e56ee5a9d140c7dbb8a5e4fe5d1d61');
+    '22510170cf53b25ddd89df7cf9d01fefc0aff38ba52ae030c55c46c1b16cf50e');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -1084,7 +1098,7 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-28-LOCKED-NAND-ENCODED-SEMANTIC-BOUNDARY-88');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-29-LOCKED-NAND-SOURCE-PARSER-89');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
@@ -1174,6 +1188,20 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   );
   for (const field of [
     'leanConcreteLockedNANDParserMachineFormalized',
+    'leanConcreteLockedNANDParserAxiomAuditPassed',
+    'leanConcreteLockedNANDParserAllInputExactFormalized',
+    'leanConcreteLockedNANDParserExactOutputFormalized',
+    'leanConcreteLockedNANDParserCompiledNonTimeoutFormalized',
+    'leanConcreteLockedNANDParserPolynomialTimeMachineFormalized',
+    'leanConcreteLockedNANDParserPolynomialTimeFunctionFormalized',
+    'leanConcreteLockedNANDParserRawRefinementFormalized',
+  ]) assert.equal(status[field], true, field);
+  assert.equal(status.leanConcreteLockedNANDParserAuditedDeclarationCount, 380);
+  assert.equal(
+    status.leanConcreteLockedNANDParserScope,
+    'literal-228-state-2052-rule-strict-version-zero-all-input-parser-byte-preserving-or-empty-with-compiled-cubic-bound',
+  );
+  for (const field of [
     'leanConcreteLockedNANDEmitterMachineFormalized',
     'leanConcreteLockedNANDPolynomialReductionFormalized',
   ]) assert.equal(status[field], false, field);
@@ -1237,6 +1265,9 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDGlobalSemanticThresholdAxiomAudit.lean'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-regression/PNPLockedNANDGlobalSemanticThreshold.lean'), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-locked-nand-global-semantic-threshold0.test.mjs'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDSourceParserAxiomAudit.lean'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-regression/PNPConcreteLockedNANDSourceParser.lean'), true);
+  assert.equal(status.verificationCommands.includes('node --test audits/lean-concrete-locked-nand-source-parser0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPResidualRoutesAxiomAudit.lean'), true);
   assert.deepEqual(status.lockedNANDThresholdHostileReviewLemmaInventory, [
     'DirectWireOutputLowerBound',
@@ -1424,6 +1455,14 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanLockedNANDSatisfiableFinalConditionsFormalized',
     'leanLockedNANDGlobalSemanticThresholdFormalized',
     'leanLockedNANDGlobalSemanticThresholdAxiomAuditPassed',
+    'leanConcreteLockedNANDParserMachineFormalized',
+    'leanConcreteLockedNANDParserAxiomAuditPassed',
+    'leanConcreteLockedNANDParserAllInputExactFormalized',
+    'leanConcreteLockedNANDParserExactOutputFormalized',
+    'leanConcreteLockedNANDParserCompiledNonTimeoutFormalized',
+    'leanConcreteLockedNANDParserPolynomialTimeMachineFormalized',
+    'leanConcreteLockedNANDParserPolynomialTimeFunctionFormalized',
+    'leanConcreteLockedNANDParserRawRefinementFormalized',
     'leanResidualRoutesListedGainScanFormalized',
     'leanResidualRoutesAxiomAuditPassed',
     'leanResidualRoutesGainSoundnessFormalized',

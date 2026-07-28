@@ -468,9 +468,23 @@ source-derived baseline. Direct normalization semantics, codec round trips,
 fail-closed malformed input, and the pure all-bitstring source/target
 equivalence are proved. The 48-declaration audit has four empty closures, 37
 using only \code{propext}, and seven using only \code{propext} and
-\code{Quot.sound}. This is not yet a parser/validator machine, emitter
-machine, \code{RawRefinement}, polynomial runtime/output-size theorem, or
-\code{PolynomialReduction}.
+\code{Quot.sound}. That module is a pure semantic transformation and does not
+by itself supply an executable parser or emitter.
+
+The following strict-v0 source-parser milestone supplies a direct
+nine-symbol machine with 228 control states and 2,052 pairwise
+query-distinct literal rules. For every input bitstring, its exact execution
+accepts exactly the valid source encodings, preserves valid source bytes
+verbatim, and returns the empty word for invalid grammar or references. The
+compiled machine cannot time out within
+\(6 \cdot 4096 \cdot (n+1)^3\) raw transitions. It is packaged as a
+polynomial-time language machine, a nonexpanding polynomial-time validation
+function, and the validator program's exact leaf raw-machine refinement.
+
+This parser does not emit the target candidate and is not a composed
+source-to-target machine or \code{PolynomialReduction}. The emitter,
+abstract threshold-language discharge, deterministic CNF-SAT-in-P result,
+NP-hardness transport, and \(P=NP\) remain unproved.
 
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}

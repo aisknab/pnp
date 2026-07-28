@@ -73,8 +73,11 @@ uses exactly `propext` and `Quot.sound`.
 `PNP.Concrete.LockedNANDEncoding` and `PNP.Concrete.LockedNANDReduction` now fix a strict
 version-zero bit grammar, normalize the legacy output forms, round-trip circuits and complete
 candidates, reject malformed words, and prove a pure all-bitstring transformation correct. This
-is an encoded semantic boundary, not an executable parser/validator or emitter machine and not a
-polynomial reduction. Those machines and their bounds, the report-level
+semantic module remains an encoded boundary rather than an executable machine. The following
+strict-v0 source-parser milestone supplies the literal validator, total exact accept/reject and
+byte-preserving-or-empty output behavior, the compiled cubic non-timeout theorem, polynomial-time
+machine/function witnesses, and its leaf raw-machine refinement. The complete target emitter,
+composed parser/emitter refinement, concrete polynomial reduction, report-level
 `PNP.LockedNANDThreshold` link, CNFSAT-in-P theorem, and `P = NP` root remain absent.
 
 The current four project-specific axioms remain visible as an independent inventory:

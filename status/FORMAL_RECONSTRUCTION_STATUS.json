@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-28-89",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-29-90",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -573,7 +573,16 @@
   "leanConcreteLockedNANDEncodedSemanticReductionAxiomAuditPassed": true,
   "leanConcreteLockedNANDEncodedSemanticReductionAuditedDeclarationCount": 48,
   "leanConcreteLockedNANDEncodedSemanticReductionScope": "strict-version-zero-codec-direct-normalization-semantics-complete-candidate-bytes-and-fail-closed-semantic-reduction",
-  "leanConcreteLockedNANDParserMachineFormalized": false,
+  "leanConcreteLockedNANDParserMachineFormalized": true,
+  "leanConcreteLockedNANDParserAxiomAuditPassed": true,
+  "leanConcreteLockedNANDParserAuditedDeclarationCount": 380,
+  "leanConcreteLockedNANDParserAllInputExactFormalized": true,
+  "leanConcreteLockedNANDParserExactOutputFormalized": true,
+  "leanConcreteLockedNANDParserCompiledNonTimeoutFormalized": true,
+  "leanConcreteLockedNANDParserPolynomialTimeMachineFormalized": true,
+  "leanConcreteLockedNANDParserPolynomialTimeFunctionFormalized": true,
+  "leanConcreteLockedNANDParserRawRefinementFormalized": true,
+  "leanConcreteLockedNANDParserScope": "literal-228-state-2052-rule-strict-version-zero-all-input-parser-byte-preserving-or-empty-with-compiled-cubic-bound",
   "leanConcreteLockedNANDEmitterMachineFormalized": false,
   "leanConcreteLockedNANDPolynomialReductionFormalized": false,
   "leanLockedNANDPolynomialBuilderFormalized": false,
@@ -617,7 +626,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-28-LOCKED-NAND-ENCODED-SEMANTIC-BOUNDARY-88",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-29-LOCKED-NAND-SOURCE-PARSER-89",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -986,6 +995,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDSemanticReductionAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteLockedNANDSemanticReduction.lean",
     "node --test audits/lean-concrete-locked-nand-semantic-reduction0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDSourceParserAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPConcreteLockedNANDSourceParser.lean",
+    "node --test audits/lean-concrete-locked-nand-source-parser0.test.mjs",
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualRoutesAxiomAudit.lean",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
@@ -1073,6 +1085,7 @@
     "The global locked-NAND unsatisfiable-final-zero milestone proves that unsatisfiability makes the full final coordinate false on every carrier valuation and makes the full exhaustive reference minimum exactly B. By itself it does not prove the satisfiable final-output conditions, residual slack at most four for the global family, or a uniform polynomial bitstring builder.",
     "The global locked-NAND semantic-threshold milestone discharges the satisfiable final-output conditions, all six typed premises, the exact satisfiable/unsatisfiable minimum split, and residual slack at most four for one answer-independent candidate over every finite topological NAND circuit. It uses exhaustive finite satisfiability decision only to eliminate a proposition-level case split and makes no polynomial-runtime claim.",
     "The encoded locked-NAND semantic boundary fixes a strict version-zero grammar, proves direct legacy output-normalization semantics, serializes the complete candidate and source-derived baseline, rejects malformed input, and proves the pure bitstring transformation correct. Its 48 audited declarations use only propext and Quot.sound. It is not a parser/validator machine, emitter machine, RawRefinement, PolynomialReduction, runtime bound, abstract PNP.LockedNANDThreshold discharge, CNFSAT-in-P theorem, or P = NP theorem.",
+    "The strict-v0 locked-NAND source parser is one literal 228-state, 2,052-rule machine with unconditional exact behavior on every bitstring: valid sources accept and are preserved byte-for-byte, invalid sources reject with empty output, and the compiled six-for-one machine cannot time out within its explicit cubic bound. Its polynomial-time function and leaf RawRefinement validate source bytes only; no target emitter, composed PolynomialReduction, abstract threshold-language discharge, CNFSAT-in-P theorem, NP-hardness transport, or P = NP theorem follows.",
     "Against the hostile-review inventory, DirectWireOutputLowerBound, global MacroDistinct, semantic-carrier TraceEquivalence, whole-carrier ZeroOutputConvention, and FinalLockSeparation are now discharged; the encoded uniform polynomial builder and its report-level linkage remain missing.",
     "The generic conditional module quantifies an arbitrary satisfiable proposition and baseline natural number. LockedNANDGlobalSemanticThreshold now identifies those with source-circuit SAT and lockedBaselineCount for the typed candidate, but neither module connects that semantic object to the abstract PNP.LockedNANDThreshold language or supplies an encoded polynomial builder.",
     "The executable residual-route scan is complete only for the explicit finite implementation list supplied by its caller; unresolved excludes no unlisted gain and does not imply global minimality or ZeroSlack.",
@@ -1115,7 +1128,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "26a4545856b5eb7542e9bf2ba332f68ae6e56ee5a9d140c7dbb8a5e4fe5d1d61",
+    "actualSourceClosureSha256": "22510170cf53b25ddd89df7cf9d01fefc0aff38ba52ae030c55c46c1b16cf50e",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1145,22 +1158,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-28-89",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-29-90",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "5032a2dd8d3ccf74ebe07a7b3e10bbc8ea6425a34a0c887c4733c0993d168f3c",
+  "leanTheoremInventorySha256": "bc9f93749d14dd5d646ee37540f365d9c712f599a4aadd45262bb1ab063146c5",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 12887,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 5129,
-  "leanTheoremInventoryTheoremCount": 7395,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 3794,
-  "leanTheoremInventorySourceClosureModuleCount": 109,
-  "leanSourceClosureSha256": "26a4545856b5eb7542e9bf2ba332f68ae6e56ee5a9d140c7dbb8a5e4fe5d1d61",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-28-89",
+  "leanTheoremInventoryDeclarationCount": 13731,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 6908,
+  "leanTheoremInventoryTheoremCount": 7827,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 4012,
+  "leanTheoremInventorySourceClosureModuleCount": 117,
+  "leanSourceClosureSha256": "22510170cf53b25ddd89df7cf9d01fefc0aff38ba52ae030c55c46c1b16cf50e",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-29-90",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "d39d79ebaf49dd64ba0e97b30ac0e82c783ec524832788057feaad73b81f67cc",
+  "formalPublicationMapSha256": "abc16d916b77f37dffceed60440fcf966056e1da1785834867a8c49ddc58f383",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",
@@ -28362,6 +28375,260 @@
       "status": "formalized-semantic-boundary"
     },
     {
+      "id": "concrete-locked-nand-source-parser",
+      "title": "Concrete strict-v0 locked-NAND source parser",
+      "classification": "formalized-foundation-only",
+      "scope": "One literal nine-symbol finite work machine validates every strict version-zero source bitstring: it accepts exactly ValidEncodedCircuit, preserves valid bytes, clears invalid bytes, cannot time out within the proved compiled cubic bound, and supplies polynomial-time machine/function witnesses plus the validator's exact leaf RawRefinement.",
+      "requiredTheorems": [
+        "PNP.Concrete.LockedNAND.SourceParser.acceptedTape_outputBits",
+        "PNP.Concrete.LockedNAND.SourceParser.allInput_exact",
+        "PNP.Concrete.LockedNAND.SourceParser.canonicalSteps_le_validWorkBound",
+        "PNP.Concrete.LockedNAND.SourceParser.compiledBoundedDecide_accept_iff",
+        "PNP.Concrete.LockedNAND.SourceParser.compiledBoundedDecide_ne_timeout",
+        "PNP.Concrete.LockedNAND.SourceParser.compiledMachineOutput_eq_validatedSourceBytes",
+        "PNP.Concrete.LockedNAND.SourceParser.compiledStart_blankEquivalent",
+        "PNP.Concrete.LockedNAND.SourceParser.decodeCircuitTokens_eq_none_iff_failure",
+        "PNP.Concrete.LockedNAND.SourceParser.illFormed_exact",
+        "PNP.Concrete.LockedNAND.SourceParser.machine_acceptState_ne_rejectState",
+        "PNP.Concrete.LockedNAND.SourceParser.malformed_exact",
+        "PNP.Concrete.LockedNAND.SourceParser.rules_length",
+        "PNP.Concrete.LockedNAND.SourceParser.rules_pairwise_query_distinct",
+        "PNP.Concrete.LockedNAND.SourceParser.statePrograms_length",
+        "PNP.Concrete.LockedNAND.SourceParser.validFinalConfiguration_isHalted",
+        "PNP.Concrete.LockedNAND.SourceParser.validFinalConfiguration_state",
+        "PNP.Concrete.LockedNAND.SourceParser.validRawBound_eq",
+        "PNP.Concrete.LockedNAND.SourceParser.validRawTimePolynomial_eval",
+        "PNP.Concrete.LockedNAND.SourceParser.validatedSourceBytesPolynomialTimeFunction_output",
+        "PNP.Concrete.LockedNAND.SourceParser.wellFormed_exact"
+      ],
+      "nonClaim": "This source parser does not emit the locked-NAND target, bound the future emitter's runtime or output size, compose parser and emitter, establish the source-to-target PolynomialReduction, discharge the abstract locked-NAND threshold assumption, put CNFSAT in P, prove NP-hardness or NP-completeness transport, or prove P = NP.",
+      "theoremRows": [
+        {
+          "name": "PNP.Concrete.LockedNAND.SourceParser.acceptedTape_outputBits",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d701ab9e34ecabc1d16ea08faa44671e875b59bd6133b11e2fcf7e020d3e1634",
+          "expectedKernelTypeSha256": "d701ab9e34ecabc1d16ea08faa44671e875b59bd6133b11e2fcf7e020d3e1634",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.SourceParser.allInput_exact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "78d0acb8ae788b9216e67ac5be635c1d0f34953e1bc57c9b6e884d7f04d54a03",
+          "expectedKernelTypeSha256": "78d0acb8ae788b9216e67ac5be635c1d0f34953e1bc57c9b6e884d7f04d54a03",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.SourceParser.canonicalSteps_le_validWorkBound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "28467e05ff2e43332360757992c3cd5850a45f3ef7d3fb48bebac47ad090a2ff",
+          "expectedKernelTypeSha256": "28467e05ff2e43332360757992c3cd5850a45f3ef7d3fb48bebac47ad090a2ff",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.SourceParser.compiledBoundedDecide_accept_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "55182cfbf83ffaf4a839519e7fceccc72378c5a5b0993dda4a48fb16888cb82c",
+          "expectedKernelTypeSha256": "55182cfbf83ffaf4a839519e7fceccc72378c5a5b0993dda4a48fb16888cb82c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.SourceParser.compiledBoundedDecide_ne_timeout",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f8a1ccfa5a54373f004c1973a2115fe51bd6f53403cc6f72de4dfc3e01cc6ad9",
+          "expectedKernelTypeSha256": "f8a1ccfa5a54373f004c1973a2115fe51bd6f53403cc6f72de4dfc3e01cc6ad9",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.SourceParser.compiledMachineOutput_eq_validatedSourceBytes",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "adc61884c960f3eb7c1a6a32e3383b23f33f581685509f7f40c4d4c14e05bcf0",
+          "expectedKernelTypeSha256": "adc61884c960f3eb7c1a6a32e3383b23f33f581685509f7f40c4d4c14e05bcf0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.SourceParser.compiledStart_blankEquivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "453d8927f184e5f25c348ce8a7d80b1668044759e265c0f9306b2ce03e9642da",
+          "expectedKernelTypeSha256": "453d8927f184e5f25c348ce8a7d80b1668044759e265c0f9306b2ce03e9642da",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.SourceParser.decodeCircuitTokens_eq_none_iff_failure",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "12ba3b565d2c3c1d7d7e49e902ea626da22e434b85fe2305dc8b203c46d98485",
+          "expectedKernelTypeSha256": "12ba3b565d2c3c1d7d7e49e902ea626da22e434b85fe2305dc8b203c46d98485",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.SourceParser.illFormed_exact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9a5f16bda1ce85f865517b78762bdf5c665748edb297920d211ac2aca6016625",
+          "expectedKernelTypeSha256": "9a5f16bda1ce85f865517b78762bdf5c665748edb297920d211ac2aca6016625",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.SourceParser.machine_acceptState_ne_rejectState",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "9cd9ae748e010284b27d3cde34af163c0250dfc15dd20dde8bb8d7971849cc74",
+          "expectedKernelTypeSha256": "9cd9ae748e010284b27d3cde34af163c0250dfc15dd20dde8bb8d7971849cc74",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.SourceParser.malformed_exact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "62e8161b3a17d5aab547da24f4eb7e53db5f645a42f5fd79a748d20d7ad73c89",
+          "expectedKernelTypeSha256": "62e8161b3a17d5aab547da24f4eb7e53db5f645a42f5fd79a748d20d7ad73c89",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.SourceParser.rules_length",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "eee4e770ed3bd75cd5a13135decf7feac2c03dc8c76bc3f09e24520a831d72a8",
+          "expectedKernelTypeSha256": "eee4e770ed3bd75cd5a13135decf7feac2c03dc8c76bc3f09e24520a831d72a8",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.SourceParser.rules_pairwise_query_distinct",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3b03582def97acf6905f685fff8c51a7aa89a339fa30842cb33f6cb3053fa879",
+          "expectedKernelTypeSha256": "3b03582def97acf6905f685fff8c51a7aa89a339fa30842cb33f6cb3053fa879",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.SourceParser.statePrograms_length",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "e9c49bf192094aadf7c4fe4047ffa0eb700e81962aa17d16ea2ad26594e40c7e",
+          "expectedKernelTypeSha256": "e9c49bf192094aadf7c4fe4047ffa0eb700e81962aa17d16ea2ad26594e40c7e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.SourceParser.validFinalConfiguration_isHalted",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "29e6b966bbdbec361b56a604a2a4f9bf9a7e67029089eaa25546bf7eb34a49e4",
+          "expectedKernelTypeSha256": "29e6b966bbdbec361b56a604a2a4f9bf9a7e67029089eaa25546bf7eb34a49e4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.SourceParser.validFinalConfiguration_state",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "df16e89b9b9047047bcf3ef4edae078a0aabc845e1d82a4a0c990b2b3464868d",
+          "expectedKernelTypeSha256": "df16e89b9b9047047bcf3ef4edae078a0aabc845e1d82a4a0c990b2b3464868d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.SourceParser.validRawBound_eq",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "6a31cd6fb0d34dab788f6be4ad428f9bbcac5c4fd35ef29bf90d33cf39743bc4",
+          "expectedKernelTypeSha256": "6a31cd6fb0d34dab788f6be4ad428f9bbcac5c4fd35ef29bf90d33cf39743bc4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.SourceParser.validRawTimePolynomial_eval",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "2eece133162707f053182b7b838877dd2f63eea10dfc2005e4a1fc001302dc43",
+          "expectedKernelTypeSha256": "2eece133162707f053182b7b838877dd2f63eea10dfc2005e4a1fc001302dc43",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.SourceParser.validatedSourceBytesPolynomialTimeFunction_output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c80a0e9b2352eb5029cc5538d2962a0bbd9fb3cbea93641eba66d6386255d899",
+          "expectedKernelTypeSha256": "c80a0e9b2352eb5029cc5538d2962a0bbd9fb3cbea93641eba66d6386255d899",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.SourceParser.wellFormed_exact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "df3b9bffacae9dd23069ac927ea471b6e72d1a548cd9e0c2a53885386348905f",
+          "expectedKernelTypeSha256": "df3b9bffacae9dd23069ac927ea471b6e72d1a548cd9e0c2a53885386348905f",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
+    },
+    {
       "id": "locked-nand-conditional-threshold",
       "title": "Conditional locked-NAND threshold boundary",
       "classification": "formalized-with-premises",
@@ -28475,7 +28742,7 @@
       "requiredTheorems": [
         "PNP.Main.locked_nand_threshold"
       ],
-      "nonClaim": "The strict encoding and pure correct transformation are now formalized, but they do not supply the parser/validator machine, emitter machine, RawRefinement, polynomial runtime or output-size bounds, or report-level language linkage.",
+      "nonClaim": "The strict encoding, pure correct transformation, and total polynomial-time source parser are now formalized, but they do not supply the target emitter, the composed source-to-target PolynomialReduction, the emitter's polynomial runtime or output-size bounds, or report-level language linkage.",
       "theoremRows": [
         {
           "name": "PNP.Main.locked_nand_threshold",
@@ -28562,7 +28829,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-28-89",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-29-90",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true
