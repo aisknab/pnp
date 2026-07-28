@@ -106,6 +106,7 @@ on:
       - 'audits/lean-locked-nand-global-baseline-distinct0.test.mjs'
       - 'audits/lean-locked-nand-global-unsatisfiable-final-zero0.test.mjs'
       - 'audits/lean-locked-nand-global-semantic-threshold0.test.mjs'
+      - 'audits/lean-concrete-locked-nand-semantic-reduction0.test.mjs'
       - 'audits/lean-residual-routes0.test.mjs'
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_machine.md'
@@ -168,6 +169,7 @@ on:
       - 'docs/lean_locked_nand_global_baseline_distinct.md'
       - 'docs/lean_locked_nand_global_unsatisfiable_final_zero.md'
       - 'docs/lean_locked_nand_global_semantic_threshold.md'
+      - 'docs/lean_concrete_locked_nand_semantic_reduction.md'
       - 'docs/lean_residual_routes.md'
       - 'docs/lean_theorem_inventory.md'
       - 'docs/proof_pipeline.md'
@@ -282,6 +284,7 @@ on:
       - 'audits/lean-locked-nand-global-baseline-distinct0.test.mjs'
       - 'audits/lean-locked-nand-global-unsatisfiable-final-zero0.test.mjs'
       - 'audits/lean-locked-nand-global-semantic-threshold0.test.mjs'
+      - 'audits/lean-concrete-locked-nand-semantic-reduction0.test.mjs'
       - 'audits/lean-residual-routes0.test.mjs'
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_machine.md'
@@ -344,6 +347,7 @@ on:
       - 'docs/lean_locked_nand_global_baseline_distinct.md'
       - 'docs/lean_locked_nand_global_unsatisfiable_final_zero.md'
       - 'docs/lean_locked_nand_global_semantic_threshold.md'
+      - 'docs/lean_concrete_locked_nand_semantic_reduction.md'
       - 'docs/lean_residual_routes.md'
       - 'docs/lean_theorem_inventory.md'
       - 'docs/proof_pipeline.md'
@@ -2087,6 +2091,28 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 8
           lake env lean -DwarningAsError=true lean-regression/PNPLockedNANDGlobalSemanticThreshold.lean
           node --test audits/lean-locked-nand-global-semantic-threshold0.test.mjs
+
+      - name: Print encoded locked-NAND semantic-boundary axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDSemanticReductionAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.LockedNAND\.")" -eq 48
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|propext, Quot\.sound)\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected encoded locked-NAND semantic-boundary axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Encoded locked-NAND semantic boundary reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 4
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 37
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 7
+          lake env lean -DwarningAsError=true lean-regression/PNPConcreteLockedNANDSemanticReduction.lean
+          node --test audits/lean-concrete-locked-nand-semantic-reduction0.test.mjs
 
       - name: Print explicit-list residual-route axioms
         run: |

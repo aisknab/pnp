@@ -68,7 +68,13 @@ toggling only the fresh final lock around a satisfying coherent trace. It packag
 conditional premises for the same answer-independent candidate, proves satisfiable minimum bounds
 `B + 1 ≤ minimum ≤ B + 4`, proves residual slack at most four for every source, and proves
 satisfiability iff the exhaustive minimum is at least `B + 1`. Its eight-declaration transcript
-uses exactly `propext` and `Quot.sound`. The encoded polynomial bitstring builder, report-level
+uses exactly `propext` and `Quot.sound`.
+
+`PNP.Concrete.LockedNANDEncoding` and `PNP.Concrete.LockedNANDReduction` now fix a strict
+version-zero bit grammar, normalize the legacy output forms, round-trip circuits and complete
+candidates, reject malformed words, and prove a pure all-bitstring transformation correct. This
+is an encoded semantic boundary, not an executable parser/validator or emitter machine and not a
+polynomial reduction. Those machines and their bounds, the report-level
 `PNP.LockedNANDThreshold` link, CNFSAT-in-P theorem, and `P = NP` root remain absent.
 
 The current four project-specific axioms remain visible as an independent inventory:

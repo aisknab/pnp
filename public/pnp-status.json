@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-28-88",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-28-89",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -566,6 +566,16 @@
   "leanLockedNANDGlobalSemanticThresholdAxiomAuditPassed": true,
   "leanLockedNANDGlobalSemanticThresholdAuditedDeclarationCount": 8,
   "leanLockedNANDGlobalSemanticThresholdScope": "arbitrary-finite-topological-nand-circuits-complete-six-field-premises-and-typed-semantic-threshold",
+  "leanConcreteLockedNANDCanonicalEncodingFormalized": true,
+  "leanConcreteLockedNANDNormalizationSemanticsFormalized": true,
+  "leanConcreteLockedNANDCompleteCandidateCodecFormalized": true,
+  "leanConcreteLockedNANDEncodedSemanticReductionFormalized": true,
+  "leanConcreteLockedNANDEncodedSemanticReductionAxiomAuditPassed": true,
+  "leanConcreteLockedNANDEncodedSemanticReductionAuditedDeclarationCount": 48,
+  "leanConcreteLockedNANDEncodedSemanticReductionScope": "strict-version-zero-codec-direct-normalization-semantics-complete-candidate-bytes-and-fail-closed-semantic-reduction",
+  "leanConcreteLockedNANDParserMachineFormalized": false,
+  "leanConcreteLockedNANDEmitterMachineFormalized": false,
+  "leanConcreteLockedNANDPolynomialReductionFormalized": false,
   "leanLockedNANDPolynomialBuilderFormalized": false,
   "leanCompatibleReplacementFormalized": false,
   "leanGlobalSlackLawFormalized": false,
@@ -607,7 +617,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-28-LOCKED-NAND-GLOBAL-SEMANTIC-THRESHOLD-87",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-28-LOCKED-NAND-ENCODED-SEMANTIC-BOUNDARY-88",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -973,6 +983,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDGlobalSemanticThresholdAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPLockedNANDGlobalSemanticThreshold.lean",
     "node --test audits/lean-locked-nand-global-semantic-threshold0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDSemanticReductionAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPConcreteLockedNANDSemanticReduction.lean",
+    "node --test audits/lean-concrete-locked-nand-semantic-reduction0.test.mjs",
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualRoutesAxiomAudit.lean",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
@@ -1059,6 +1072,7 @@
     "The global locked-NAND BaselineDistinct milestone proves every exposed baseline coordinate is nonconstant, is not a positive carrier-input projection, and computes a Boolean function distinct from every other exposed coordinate. Consequently its exhaustive reference minimum is exactly B. By itself it does not prove either final branch law, residual slack at most four for the global family, or a uniform polynomial bitstring builder.",
     "The global locked-NAND unsatisfiable-final-zero milestone proves that unsatisfiability makes the full final coordinate false on every carrier valuation and makes the full exhaustive reference minimum exactly B. By itself it does not prove the satisfiable final-output conditions, residual slack at most four for the global family, or a uniform polynomial bitstring builder.",
     "The global locked-NAND semantic-threshold milestone discharges the satisfiable final-output conditions, all six typed premises, the exact satisfiable/unsatisfiable minimum split, and residual slack at most four for one answer-independent candidate over every finite topological NAND circuit. It uses exhaustive finite satisfiability decision only to eliminate a proposition-level case split and makes no polynomial-runtime claim.",
+    "The encoded locked-NAND semantic boundary fixes a strict version-zero grammar, proves direct legacy output-normalization semantics, serializes the complete candidate and source-derived baseline, rejects malformed input, and proves the pure bitstring transformation correct. Its 48 audited declarations use only propext and Quot.sound. It is not a parser/validator machine, emitter machine, RawRefinement, PolynomialReduction, runtime bound, abstract PNP.LockedNANDThreshold discharge, CNFSAT-in-P theorem, or P = NP theorem.",
     "Against the hostile-review inventory, DirectWireOutputLowerBound, global MacroDistinct, semantic-carrier TraceEquivalence, whole-carrier ZeroOutputConvention, and FinalLockSeparation are now discharged; the encoded uniform polynomial builder and its report-level linkage remain missing.",
     "The generic conditional module quantifies an arbitrary satisfiable proposition and baseline natural number. LockedNANDGlobalSemanticThreshold now identifies those with source-circuit SAT and lockedBaselineCount for the typed candidate, but neither module connects that semantic object to the abstract PNP.LockedNANDThreshold language or supplies an encoded polynomial builder.",
     "The executable residual-route scan is complete only for the explicit finite implementation list supplied by its caller; unresolved excludes no unlisted gain and does not imply global minimality or ZeroSlack.",
@@ -1101,7 +1115,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "11cd24e11180f22c5ca853d94fc0c201dc39a1dd6fa546de003d08279d2f9f4d",
+    "actualSourceClosureSha256": "26a4545856b5eb7542e9bf2ba332f68ae6e56ee5a9d140c7dbb8a5e4fe5d1d61",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1131,22 +1145,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-28-88",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-28-89",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "f5f269dfe182807e7eb1603c1df1de28ac77e958718a47884e98f0a710045eec",
+  "leanTheoremInventorySha256": "5032a2dd8d3ccf74ebe07a7b3e10bbc8ea6425a34a0c887c4733c0993d168f3c",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 12255,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 5027,
-  "leanTheoremInventoryTheoremCount": 7167,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 3676,
-  "leanTheoremInventorySourceClosureModuleCount": 107,
-  "leanSourceClosureSha256": "11cd24e11180f22c5ca853d94fc0c201dc39a1dd6fa546de003d08279d2f9f4d",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-28-88",
+  "leanTheoremInventoryDeclarationCount": 12887,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 5129,
+  "leanTheoremInventoryTheoremCount": 7395,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 3794,
+  "leanTheoremInventorySourceClosureModuleCount": 109,
+  "leanSourceClosureSha256": "26a4545856b5eb7542e9bf2ba332f68ae6e56ee5a9d140c7dbb8a5e4fe5d1d61",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-28-89",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "3610e0a281cfe3c5bfee868f291d6c1b84dd7e9391ea933d807120b50c8f5277",
+  "formalPublicationMapSha256": "d39d79ebaf49dd64ba0e97b30ac0e82c783ec524832788057feaad73b81f67cc",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",
@@ -28195,6 +28209,159 @@
       "status": "formalized"
     },
     {
+      "id": "concrete-locked-nand-encoded-semantic-boundary",
+      "title": "Encoded locked-NAND semantic boundary",
+      "classification": "formalized-semantic-boundary",
+      "scope": "A strict version-zero bit grammar round-trips normalized NAND circuits and complete locked-NAND candidates; the pure all-bitstring transformation is fail-closed and preserves source satisfiability at the exact target threshold.",
+      "requiredTheorems": [
+        "PNP.Concrete.LockedNAND.RawCircuit.normalize_idempotent",
+        "PNP.Concrete.LockedNAND.RawCircuit.normalize_eval",
+        "PNP.Concrete.LockedNAND.RawCircuit.elaborate_ofCircuit",
+        "PNP.Concrete.LockedNAND.RawCandidate.elaborate_ofCandidate",
+        "PNP.Concrete.LockedNAND.RawLockedInstance.elaborate_ofCandidate",
+        "PNP.Concrete.LockedNAND.decodeTokens_encodeTokens",
+        "PNP.Concrete.LockedNAND.decodeCircuit_encodeCircuit",
+        "PNP.Concrete.LockedNAND.decodeLockedInstance_encodeLockedInstance",
+        "PNP.Concrete.LockedNAND.decodeElaboratedCircuit_encodeCircuit_ofCircuit",
+        "PNP.Concrete.LockedNAND.encoded_fullCandidate_threshold_iff_satisfiable",
+        "PNP.Concrete.LockedNAND.buildLockedNANDInstance_correct"
+      ],
+      "nonClaim": "This is not a parser/validator machine, emitter machine, RawRefinement, PolynomialReduction, construction-runtime or output-size bound, abstract locked-NAND threshold discharge, CNFSAT-in-P result, or P = NP.",
+      "theoremRows": [
+        {
+          "name": "PNP.Concrete.LockedNAND.RawCircuit.normalize_idempotent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7001ae372f765c79569bf135c4fb74a284d215ecac39babf32492c38334fa2b8",
+          "expectedKernelTypeSha256": "7001ae372f765c79569bf135c4fb74a284d215ecac39babf32492c38334fa2b8",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.RawCircuit.normalize_eval",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f18064d9bb1f00d62077374aa7ac7cbf4340557f6b7d9c85137077aa329f93a4",
+          "expectedKernelTypeSha256": "f18064d9bb1f00d62077374aa7ac7cbf4340557f6b7d9c85137077aa329f93a4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.RawCircuit.elaborate_ofCircuit",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "cc5df3330d8f519d92018129d849a7ae3b23a515b35ef6b9d04dcdc5fd3d2ce8",
+          "expectedKernelTypeSha256": "cc5df3330d8f519d92018129d849a7ae3b23a515b35ef6b9d04dcdc5fd3d2ce8",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.RawCandidate.elaborate_ofCandidate",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8e8cac3274337782776be94c76653f8223857b60abad641db312d59a9d79b3fa",
+          "expectedKernelTypeSha256": "8e8cac3274337782776be94c76653f8223857b60abad641db312d59a9d79b3fa",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.RawLockedInstance.elaborate_ofCandidate",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "132a6b83f0f98ae2af3dedd26a242d6b7c0d59e2be72ca638c0d340121ea7978",
+          "expectedKernelTypeSha256": "132a6b83f0f98ae2af3dedd26a242d6b7c0d59e2be72ca638c0d340121ea7978",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.decodeTokens_encodeTokens",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c3bb485a0fc23e33bc70dd16c77efbd63100acf72c46e17045bd7b8ceef2c1fc",
+          "expectedKernelTypeSha256": "c3bb485a0fc23e33bc70dd16c77efbd63100acf72c46e17045bd7b8ceef2c1fc",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.decodeCircuit_encodeCircuit",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "1b7c4676782fa2625e2b13d28da390caed1c50394d53f4f690f7a00340c0899f",
+          "expectedKernelTypeSha256": "1b7c4676782fa2625e2b13d28da390caed1c50394d53f4f690f7a00340c0899f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.decodeLockedInstance_encodeLockedInstance",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8eaf33980f5ded9ded8c35183ba634cca7e5db2de7e03ce055da0f9fb5049dc4",
+          "expectedKernelTypeSha256": "8eaf33980f5ded9ded8c35183ba634cca7e5db2de7e03ce055da0f9fb5049dc4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.decodeElaboratedCircuit_encodeCircuit_ofCircuit",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "2100056c33b88ef04bd7db5c12ae458d4336dd90400baa2e0d0dc6b96b12c6dd",
+          "expectedKernelTypeSha256": "2100056c33b88ef04bd7db5c12ae458d4336dd90400baa2e0d0dc6b96b12c6dd",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.encoded_fullCandidate_threshold_iff_satisfiable",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "fb43665ecc791a7b2825cb13491288f0f007f8e2cf1cdcd620e0c192494d912b",
+          "expectedKernelTypeSha256": "fb43665ecc791a7b2825cb13491288f0f007f8e2cf1cdcd620e0c192494d912b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.buildLockedNANDInstance_correct",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0d97147c27f39b417f82efd1e45e0defb1bf26bdc2e5fbd27312dd36b5ce23a8",
+          "expectedKernelTypeSha256": "0d97147c27f39b417f82efd1e45e0defb1bf26bdc2e5fbd27312dd36b5ce23a8",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-semantic-boundary"
+    },
+    {
       "id": "locked-nand-conditional-threshold",
       "title": "Conditional locked-NAND threshold boundary",
       "classification": "formalized-with-premises",
@@ -28308,7 +28475,7 @@
       "requiredTheorems": [
         "PNP.Main.locked_nand_threshold"
       ],
-      "nonClaim": "The typed semantic threshold is now formalized, but it does not supply the encoded polynomial-time construction, runtime proof, or certificate-size bounds required for the report-level theorem.",
+      "nonClaim": "The strict encoding and pure correct transformation are now formalized, but they do not supply the parser/validator machine, emitter machine, RawRefinement, polynomial runtime or output-size bounds, or report-level language linkage.",
       "theoremRows": [
         {
           "name": "PNP.Main.locked_nand_threshold",
@@ -28395,7 +28562,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-28-88",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-28-89",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

@@ -602,12 +602,16 @@ The next module proves `unsatisfiableFinalZero` on the whole carrier and the
 corresponding exact full-candidate minimum `B`. The following semantic-threshold
 module proves all three satisfiable final conditions by fresh-lock separation,
 packages all six fields, derives the exact typed threshold, and proves residual
-slack at most four. The encoded polynomial builder and report-level linkage
-remain absent. See
+slack at most four. A further concrete layer now fixes strict external source
+and target bytes, proves direct output-normalization semantics, serializes the
+complete candidate and threshold, and proves the pure all-bitstring semantic
+transformation. Its parser/validator and emitter machines, polynomial bounds,
+`RawRefinement`, and report-level linkage remain absent. See
 `docs/lean_locked_nand_global_candidates.md` and
 `docs/lean_locked_nand_global_baseline_distinct.md`, then
 `docs/lean_locked_nand_global_unsatisfiable_final_zero.md` and
-`docs/lean_locked_nand_global_semantic_threshold.md`.
+`docs/lean_locked_nand_global_semantic_threshold.md`, followed by
+`docs/lean_concrete_locked_nand_semantic_reduction.md`.
 
 ## Global locked-NAND layer
 
@@ -626,9 +630,11 @@ deductions from the six-field conditional boundary package are no longer part of
 object. The complete exposed candidates and cross-instance baseline separation
 are now constructed on that carrier, and the whole-carrier unsatisfiable
 final-zero law, satisfiable final-lock separation, typed semantic threshold,
-and residual-slack-at-most-four theorem are proved. Remaining global work is
-the encoded uniform polynomial builder, its runtime/certificate bounds, and
-the report-level language/reduction linkage.
+and residual-slack-at-most-four theorem are proved. A strict encoded semantic
+boundary now contains the complete candidate and proves source/target
+equivalence. Remaining global work is the executable parser/validator and
+emitter, their runtime and output-size bounds, the resulting concrete
+polynomial reduction, and the report-level language linkage.
 
 ## Residual-band, ZeroSlack, and PCCMin layers
 

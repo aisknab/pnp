@@ -46,7 +46,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-28-88}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-28-89}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -67,9 +67,10 @@
   traverses the entire remaining clause-three padding block, and emits the complete fourth clause
   \code{Sep F T F F T T F Finish} on variables one and two, traverses the remainder of the first
   scheduled constraint, emits the second constraint's first positive literal through its
-  width-selected successor, and consumes the next four width-dependent opportunities. At width one
+  width-selected successor, and consumes the next seven width-dependent opportunities. At width one
   those opportunities are padding and emit nothing; at wider widths they emit the first four unary
-  \code{T} tokens of the second literal. Every traversed
+  \code{T} tokens and terminating \code{F} of the second literal, followed by the next literal's
+  opening \code{T} and first unary-index \code{T}. Every traversed
   padding slot and emitted populated slot has a direct schedule proof, the emitted bits are the exact
   canonical prefix, and an external polynomial bounds the compiled run. The following
   padding-or-terminating-\code{F} opportunity, a general dynamic formula cursor, arbitrary raw slot decoder,
@@ -83,15 +84,15 @@
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 12255 \\
-Theorem-kind declarations & 7167 \\
-Assumption-free theorem-kind declarations & 3676 \\
+Compiled declarations & 12887 \\
+Theorem-kind declarations & 7395 \\
+Assumption-free theorem-kind declarations & 3794 \\
 Project-specific axioms & 4 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{f5f269dfe182807e7eb1603c1df1de28ac77e958718a47884e98f0a710045eec}\par}
+{\small Inventory SHA-256: \code{5032a2dd8d3ccf74ebe07a7b3e10bbc8ea6425a34a0c887c4733c0993d168f3c}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -460,6 +461,17 @@ fourteen reused optional-appender interfaces, and two strengthened schedule boun
 closures are empty, 12 use only \code{propext}, and 33 use only \code{propext} and
 \code{Quot.sound}.
 
+Separately, the global locked-NAND construction now has both final semantic
+branches and the exact typed threshold. A strict version-zero grammar
+serializes source circuits, the complete full candidate, and the
+source-derived baseline. Direct normalization semantics, codec round trips,
+fail-closed malformed input, and the pure all-bitstring source/target
+equivalence are proved. The 48-declaration audit has four empty closures, 37
+using only \code{propext}, and seven using only \code{propext} and
+\code{Quot.sound}. This is not yet a parser/validator machine, emitter
+machine, \code{RawRefinement}, polynomial runtime/output-size theorem, or
+\code{PolynomialReduction}.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule
@@ -481,9 +493,9 @@ The compatibility entry is \code{PNP.Main.p\_eq\_np}; a matching name alone is i
 The separate publication target is \code{PNP.Main.ConcretePEqualsNP}. Eligibility also requires
 the exact theorem type, reviewed kernel fingerprints, and a tightly fixed Lean-standard axiom
 closure. The target is present as an inactive definition backed by finite charged-pipeline
-semantics; its presence is not a proof, and the compiler/refinement link to the raw machine kernel
-remains an explicit blocker for the general charged-pipeline target. The direct CNF verifier is one
-closed raw-machine instance; it does not supply that general link.
+semantics; its presence is not a proof. The compiler/refinement link to the raw machine kernel is
+formalized, but no deterministic polynomial CNF-SAT decider or concrete publication root is
+present. The direct CNF verifier proves NP membership only.
 
 The expected fingerprints are intentionally unset. This is a fail-closed migration gate, not a
 missing runtime input. A verifier must reject any attempt to set \code{passed=true} while a
@@ -540,14 +552,13 @@ would not establish the standard P-versus-NP statement. It is compatibility info
 
 The separate \code{PNP.Concrete.PEqualsNP} target uses proof-bearing P and NP witnesses,
 canonical input/certificate pairing, finite program syntax, and charged polynomial runtime and
-output bounds. This is a substantive formalization milestone, but it is not yet proved equivalent
-to execution in the raw machine kernel. SAT completeness, SAT in P, and the root theorem also
-remain absent.
+output bounds. Its recursive compiler/refinement link to the raw machine kernel is formalized.
+SAT completeness, SAT in P, and the root theorem remain absent.
 
 \section{Formal milestone ledger}
 
 Each earned row requires exact compiled names and theorem kinds, empty axiom closures, per-name
-domain-separated kernel-type SHA-256 matches for 1977 detailed candidates, and the pinned whole-Lean
+domain-separated kernel-type SHA-256 matches for 1988 detailed candidates, and the pinned whole-Lean
 source closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
 {\small
@@ -621,9 +632,10 @@ Locked-NAND global baseline and four-gate candidate assembly & formalized & Exac
 Locked-NAND global baseline distinctness & formalized & All exposed baseline outputs are nonconstant, nonprojections, pairwise semantically distinct, and have exact exhaustive reference minimum B for arbitrary finite topological NAND circuits. & BaselineDistinct does not prove either whole-carrier final-output branch law, instantiate the complete threshold premise package, establish the locked-NAND threshold or global residual-slack bound, or construct the uniform polynomial bitstring builder. \\
 Locked-NAND global unsatisfiable final-zero branch & formalized & For every finite topologically ordered NAND circuit, unsatisfiability makes the full final coordinate identically false on the whole carrier and fixes the exhaustive reference minimum at B. & This does not prove satisfiable FinalLockSeparation, instantiate the complete threshold package, establish the global locked-NAND threshold or residual-slack bound, or construct the uniform polynomial builder. \\
 Locked-NAND satisfiable separation and typed semantic threshold & formalized & For every finite topologically ordered NAND circuit, one answer-independent full candidate instantiates all six semantic premises, has residual slack at most four, and crosses the exact source-derived minimum threshold exactly when the source circuit is satisfiable. & This typed semantic theorem does not construct or compile the report's encoded polynomial-time SAT-to-locked-NAND builder, establish CNFSAT in P, prove NP-hardness transport, discharge the abstract locked-NAND threshold axiom, or prove P = NP. \\
+Encoded locked-NAND semantic boundary & formalized-semantic-boundary & A strict version-zero bit grammar round-trips normalized NAND circuits and complete locked-NAND candidates; the pure all-bitstring transformation is fail-closed and preserves source satisfiability at the exact target threshold. & This is not a parser/validator machine, emitter machine, RawRefinement, PolynomialReduction, construction-runtime or output-size bound, abstract locked-NAND threshold discharge, CNFSAT-in-P result, or P = NP. \\
 Conditional locked-NAND threshold boundary & formalized-with-premises & A proof-bearing six-premise candidate boundary for an arbitrary satisfiable proposition. & The premises are not instantiated by a uniform SAT-to-locked-NAND builder. \\
 Fail-closed explicit-list residual routes & formalized-explicit-list-only & Executable strict-gain search over a caller-supplied finite implementation list. & Unresolved excludes no gain outside the supplied list and cannot imply ZeroSlack. \\
-Global locked-NAND construction and threshold & not-formalized & A uniform encoded polynomial-time SAT instance builder and the report-level locked-NAND threshold theorem linked to that builder. & The typed semantic threshold is now formalized, but it does not supply the encoded polynomial-time construction, runtime proof, or certificate-size bounds required for the report-level theorem. \\
+Global locked-NAND construction and threshold & not-formalized & A uniform encoded polynomial-time SAT instance builder and the report-level locked-NAND threshold theorem linked to that builder. & The strict encoding and pure correct transformation are now formalized, but they do not supply the parser/validator machine, emitter machine, RawRefinement, polynomial runtime or output-size bounds, or report-level language linkage. \\
 Global ZeroSlack, PCCMin, and polynomial runtime & not-formalized & Complete residual routing, global ZeroSlack contradiction, exact minimization, and polynomial bounds. & Proof-bearing result structures and explicit-list failure do not supply global completeness. \\
 Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-machine-linked complexity classes, concrete SAT completeness and a SAT decider, plus the publication root theorem. & The concrete target definition remains inactive: CNF-SAT now has a raw-machine verifier and NP-membership proof, but a deterministic polynomial-time CNF-SAT decider, NP-completeness transport, and PNP.Main.p\_eq\_np remain absent; the legacy string-handle bridge is ineligible. \\
 \bottomrule
@@ -632,8 +644,8 @@ Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-mac
 
 \section{Compiled inventory summary}
 
-The inventory contains 12255 exported \code{PNP.*} kernel declarations from
-107 modules. It excludes 5027 private compiler auxiliaries.
+The inventory contains 12887 exported \code{PNP.*} kernel declarations from
+109 modules. It excludes 5129 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -707,6 +719,8 @@ PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Tablea
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Tableau\allowbreak{}CNF & 179 & 60 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Tableau\allowbreak{}CNFSemantics & 190 & 136 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Verifier\allowbreak{}Tableau & 58 & 25 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Locked\allowbreak{}NANDEncoding & 611 & 215 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Locked\allowbreak{}NANDReduction & 21 & 13 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Machine & 284 & 67 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Pipeline\allowbreak{}Compiler & 38 & 27 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Pipeline\allowbreak{}Input\allowbreak{}Framer & 106 & 18 \\
@@ -811,10 +825,10 @@ npm run report:check
 \end{verbatim}
 }
 
-The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-28-88}. Its exact byte digest is
-\code{f5f269dfe182807e7eb1603c1df1de28ac77e958718a47884e98f0a710045eec}. The report is regenerated from that inventory and the reviewed
+The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-28-89}. Its exact byte digest is
+\code{5032a2dd8d3ccf74ebe07a7b3e10bbc8ea6425a34a0c887c4733c0993d168f3c}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{11cd24e11180f22c5ca853d94fc0c201dc39a1dd6fa546de003d08279d2f9f4d}; the computed and pinned values match. Successful regeneration
+\code{26a4545856b5eb7542e9bf2ba332f68ae6e56ee5a9d140c7dbb8a5e4fe5d1d61}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 

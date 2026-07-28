@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-28-88",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-28-89",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "11cd24e11180f22c5ca853d94fc0c201dc39a1dd6fa546de003d08279d2f9f4d",
+  "milestoneSourceClosureSha256": "26a4545856b5eb7542e9bf2ba332f68ae6e56ee5a9d140c7dbb8a5e4fe5d1d61",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CookLevin.BoundedLiteral.emit_variable_lt": "c089b0fedc7320ec14f46b5b74f7ec26158cdad85ecbe647b4c728660dcb6a68",
@@ -1777,6 +1777,17 @@
     "PNP.Concrete.FunctionProgram.RawRefinement.compile_haltsWithin": "53bd33de652a55facc74179863672a789f40f9ba6dea293c2de29fcc866b5a3d",
     "PNP.Concrete.FunctionProgram.RawRefinement.compile_output_eq": "e3bb23c7f245cb516803a91468e3a3b220338c36a11790ffa5045b8c41332a24",
     "PNP.Concrete.FunctionProgram.RawRefinement.output_size_le": "f9d23e2b448974c617d83666b18c5950ce025067a959a74e98d3b20f54229c8f",
+    "PNP.Concrete.LockedNAND.RawCandidate.elaborate_ofCandidate": "8e8cac3274337782776be94c76653f8223857b60abad641db312d59a9d79b3fa",
+    "PNP.Concrete.LockedNAND.RawCircuit.elaborate_ofCircuit": "cc5df3330d8f519d92018129d849a7ae3b23a515b35ef6b9d04dcdc5fd3d2ce8",
+    "PNP.Concrete.LockedNAND.RawCircuit.normalize_eval": "f18064d9bb1f00d62077374aa7ac7cbf4340557f6b7d9c85137077aa329f93a4",
+    "PNP.Concrete.LockedNAND.RawCircuit.normalize_idempotent": "7001ae372f765c79569bf135c4fb74a284d215ecac39babf32492c38334fa2b8",
+    "PNP.Concrete.LockedNAND.RawLockedInstance.elaborate_ofCandidate": "132a6b83f0f98ae2af3dedd26a242d6b7c0d59e2be72ca638c0d340121ea7978",
+    "PNP.Concrete.LockedNAND.buildLockedNANDInstance_correct": "0d97147c27f39b417f82efd1e45e0defb1bf26bdc2e5fbd27312dd36b5ce23a8",
+    "PNP.Concrete.LockedNAND.decodeCircuit_encodeCircuit": "1b7c4676782fa2625e2b13d28da390caed1c50394d53f4f690f7a00340c0899f",
+    "PNP.Concrete.LockedNAND.decodeElaboratedCircuit_encodeCircuit_ofCircuit": "2100056c33b88ef04bd7db5c12ae458d4336dd90400baa2e0d0dc6b96b12c6dd",
+    "PNP.Concrete.LockedNAND.decodeLockedInstance_encodeLockedInstance": "8eaf33980f5ded9ded8c35183ba634cca7e5db2de7e03ce055da0f9fb5049dc4",
+    "PNP.Concrete.LockedNAND.decodeTokens_encodeTokens": "c3bb485a0fc23e33bc70dd16c77efbd63100acf72c46e17045bd7b8ceef2c1fc",
+    "PNP.Concrete.LockedNAND.encoded_fullCandidate_threshold_iff_satisfiable": "fb43665ecc791a7b2825cb13491288f0f007f8e2cf1cdcd620e0c192494d912b",
     "PNP.Concrete.NatPolynomial.eval_mono": "08eef194a6dad5f3443646446dd9aa44bb62f71881897bd2721f5e10b0ed31ca",
     "PNP.Concrete.PipelineCompiler.acceptingSuppliedTrace_workRunExact_of_rawRunExact": "3e3bc6d4d2c5ce6977467b11a1065da973c0f5aab978ba15d26bbbcf0caabab8",
     "PNP.Concrete.PipelineCompiler.outputBits_length_le_pipelineOutputSizeBound_of_rawRunExact": "096c66f58db4e4ecaa5d88613a9a46718deef1b911fd8d59a3c4b8b12d4eb807",
@@ -4674,6 +4685,26 @@
       "nonClaim": "This typed semantic theorem does not construct or compile the report's encoded polynomial-time SAT-to-locked-NAND builder, establish CNFSAT in P, prove NP-hardness transport, discharge the abstract locked-NAND threshold axiom, or prove P = NP."
     },
     {
+      "id": "concrete-locked-nand-encoded-semantic-boundary",
+      "title": "Encoded locked-NAND semantic boundary",
+      "classification": "formalized-semantic-boundary",
+      "scope": "A strict version-zero bit grammar round-trips normalized NAND circuits and complete locked-NAND candidates; the pure all-bitstring transformation is fail-closed and preserves source satisfiability at the exact target threshold.",
+      "requiredTheorems": [
+        "PNP.Concrete.LockedNAND.RawCircuit.normalize_idempotent",
+        "PNP.Concrete.LockedNAND.RawCircuit.normalize_eval",
+        "PNP.Concrete.LockedNAND.RawCircuit.elaborate_ofCircuit",
+        "PNP.Concrete.LockedNAND.RawCandidate.elaborate_ofCandidate",
+        "PNP.Concrete.LockedNAND.RawLockedInstance.elaborate_ofCandidate",
+        "PNP.Concrete.LockedNAND.decodeTokens_encodeTokens",
+        "PNP.Concrete.LockedNAND.decodeCircuit_encodeCircuit",
+        "PNP.Concrete.LockedNAND.decodeLockedInstance_encodeLockedInstance",
+        "PNP.Concrete.LockedNAND.decodeElaboratedCircuit_encodeCircuit_ofCircuit",
+        "PNP.Concrete.LockedNAND.encoded_fullCandidate_threshold_iff_satisfiable",
+        "PNP.Concrete.LockedNAND.buildLockedNANDInstance_correct"
+      ],
+      "nonClaim": "This is not a parser/validator machine, emitter machine, RawRefinement, PolynomialReduction, construction-runtime or output-size bound, abstract locked-NAND threshold discharge, CNFSAT-in-P result, or P = NP."
+    },
+    {
       "id": "locked-nand-conditional-threshold",
       "title": "Conditional locked-NAND threshold boundary",
       "classification": "formalized-with-premises",
@@ -4706,7 +4737,7 @@
       "requiredTheorems": [
         "PNP.Main.locked_nand_threshold"
       ],
-      "nonClaim": "The typed semantic threshold is now formalized, but it does not supply the encoded polynomial-time construction, runtime proof, or certificate-size bounds required for the report-level theorem."
+      "nonClaim": "The strict encoding and pure correct transformation are now formalized, but they do not supply the parser/validator machine, emitter machine, RawRefinement, polynomial runtime or output-size bounds, or report-level language linkage."
     },
     {
       "id": "global-zeroslack-pccmin",

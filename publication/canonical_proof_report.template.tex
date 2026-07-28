@@ -67,9 +67,10 @@
   traverses the entire remaining clause-three padding block, and emits the complete fourth clause
   \code{Sep F T F F T T F Finish} on variables one and two, traverses the remainder of the first
   scheduled constraint, emits the second constraint's first positive literal through its
-  width-selected successor, and consumes the next four width-dependent opportunities. At width one
+  width-selected successor, and consumes the next seven width-dependent opportunities. At width one
   those opportunities are padding and emit nothing; at wider widths they emit the first four unary
-  \code{T} tokens of the second literal. Every traversed
+  \code{T} tokens and terminating \code{F} of the second literal, followed by the next literal's
+  opening \code{T} and first unary-index \code{T}. Every traversed
   padding slot and emitted populated slot has a direct schedule proof, the emitted bits are the exact
   canonical prefix, and an external polynomial bounds the compiled run. The following
   padding-or-terminating-\code{F} opportunity, a general dynamic formula cursor, arbitrary raw slot decoder,
@@ -460,6 +461,17 @@ fourteen reused optional-appender interfaces, and two strengthened schedule boun
 closures are empty, 12 use only \code{propext}, and 33 use only \code{propext} and
 \code{Quot.sound}.
 
+Separately, the global locked-NAND construction now has both final semantic
+branches and the exact typed threshold. A strict version-zero grammar
+serializes source circuits, the complete full candidate, and the
+source-derived baseline. Direct normalization semantics, codec round trips,
+fail-closed malformed input, and the pure all-bitstring source/target
+equivalence are proved. The 48-declaration audit has four empty closures, 37
+using only \code{propext}, and seven using only \code{propext} and
+\code{Quot.sound}. This is not yet a parser/validator machine, emitter
+machine, \code{RawRefinement}, polynomial runtime/output-size theorem, or
+\code{PolynomialReduction}.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule
@@ -481,9 +493,9 @@ The compatibility entry is \code{PNP.Main.p\_eq\_np}; a matching name alone is i
 The separate publication target is \code{PNP.Main.ConcretePEqualsNP}. Eligibility also requires
 the exact theorem type, reviewed kernel fingerprints, and a tightly fixed Lean-standard axiom
 closure. The target is present as an inactive definition backed by finite charged-pipeline
-semantics; its presence is not a proof, and the compiler/refinement link to the raw machine kernel
-remains an explicit blocker for the general charged-pipeline target. The direct CNF verifier is one
-closed raw-machine instance; it does not supply that general link.
+semantics; its presence is not a proof. The compiler/refinement link to the raw machine kernel is
+formalized, but no deterministic polynomial CNF-SAT decider or concrete publication root is
+present. The direct CNF verifier proves NP membership only.
 
 The expected fingerprints are intentionally unset. This is a fail-closed migration gate, not a
 missing runtime input. A verifier must reject any attempt to set \code{passed=true} while a
@@ -521,9 +533,8 @@ would not establish the standard P-versus-NP statement. It is compatibility info
 
 The separate \code{PNP.Concrete.PEqualsNP} target uses proof-bearing P and NP witnesses,
 canonical input/certificate pairing, finite program syntax, and charged polynomial runtime and
-output bounds. This is a substantive formalization milestone, but it is not yet proved equivalent
-to execution in the raw machine kernel. SAT completeness, SAT in P, and the root theorem also
-remain absent.
+output bounds. Its recursive compiler/refinement link to the raw machine kernel is formalized.
+SAT completeness, SAT in P, and the root theorem remain absent.
 
 \section{Formal milestone ledger}
 

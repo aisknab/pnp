@@ -889,14 +889,33 @@ project axiom. This closes the typed semantic threshold, not the report's encode
 builder or the abstract `PNP.LockedNANDThreshold` language. See
 [`lean_locked_nand_global_semantic_threshold.md`](./lean_locked_nand_global_semantic_threshold.md).
 
+`PNP.Concrete.LockedNANDEncoding` and `PNP.Concrete.LockedNANDReduction` now
+place that typed theorem behind one strict version-zero bit grammar. The
+boundary includes raw topological NAND syntax, direct legacy output
+normalization semantics, constructive intrinsic validation, exact round trips,
+the complete full-candidate output word, and the source-derived baseline.
+Malformed source bytes map to the empty word, which is proved outside the
+target language. For every bitstring, source satisfiability is equivalent to
+the encoded full candidate crossing its encoded threshold.
+
+The 48-declaration audit has four empty closures, 37 using only `propext`, and
+seven using only `propext` with `Quot.sound`. This is a pure semantic
+transformation, not a parser/validator machine, emitter machine,
+`RawRefinement`, `PolynomialReduction`, or runtime/output-size proof. The
+strategic next step is to implement and bound the parser/validator against
+these exact bytes before implementing the complete emitter. See
+[`lean_concrete_locked_nand_semantic_reduction.md`](./lean_concrete_locked_nand_semantic_reduction.md).
+
 The historical hostile review named `DirectWireOutputLowerBound`, `MacroDistinct`,
 `TraceEquivalence`, `ZeroOutputConvention`, and `FinalLockSeparation`. The general output lower
 bound and model-level free-zero append convention were discharged in preceding layers.
 `TraceEquivalence` and complete candidate assembly are now formalized for the typed semantic
 carrier, global `MacroDistinct` is discharged by the exact baseline output conditions, and the
 whole-carrier `ZeroOutputConvention` consequence is discharged in the unsatisfiable branch.
-`FinalLockSeparation` and its satisfiable semantic consequences are now discharged; encoded
-uniform polynomial construction remains missing. See
+`FinalLockSeparation` and its satisfiable semantic consequences are now
+discharged. The strict encoding and pure semantic transformation are also
+formalized; executable parser/emitter machines, their polynomial bounds, and
+the report-level reduction linkage remain missing. See
 [`lean_locked_nand_threshold_boundary.md`](./lean_locked_nand_threshold_boundary.md).
 
 The residual-route layer now performs one honest executable operation: it scans an explicit finite
