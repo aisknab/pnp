@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-29-90');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-29-91');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -580,7 +580,7 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanLockedNANDGlobalBaselineCandidateFormalized, true);
   assert.equal(out.leanLockedNANDFullCandidateFormalized, true);
   assert.equal(out.leanLockedNANDGlobalCandidateAxiomAuditPassed, true);
-  assert.equal(out.leanLockedNANDGlobalCandidateAuditedDeclarationCount, 64);
+  assert.equal(out.leanLockedNANDGlobalCandidateAuditedDeclarationCount, 71);
   assert.equal(out.leanLockedNANDGlobalCandidateScope,
     'arbitrary-finite-topological-nand-circuits-exact-baseline-and-four-gate-extension');
   assert.equal(out.leanLockedNANDDerivedFinalOutputLawsFormalized, true);
@@ -623,8 +623,22 @@ test('formal reconstruction status accepts the current source and public mirrors
   );
   for (const field of [
     'leanConcreteLockedNANDEmitterMachineFormalized',
-    'leanConcreteLockedNANDPolynomialReductionFormalized',
-  ]) assert.equal(out[field], false, field);
+    'leanConcreteLockedNANDEmitterAxiomAuditPassed',
+    'leanConcreteLockedNANDEmitterAllInputExactFormalized',
+    'leanConcreteLockedNANDEmitterExactTargetBytesFormalized',
+    'leanConcreteLockedNANDEmitterCompiledNonTimeoutFormalized',
+    'leanConcreteLockedNANDEmitterPolynomialTimeMachineFormalized',
+    'leanConcreteLockedNANDEmitterPolynomialTimeFunctionFormalized',
+    'leanConcreteLockedNANDEmitterRawRefinementFormalized',
+    'leanConcreteLockedNANDEmitterStrictParserCompositionFormalized',
+    'leanConcreteLockedNANDEmitterOutputSizeBoundFormalized',
+  ]) assert.equal(out[field], true, field);
+  assert.equal(out.leanConcreteLockedNANDEmitterAuditedDeclarationCount, 3295);
+  assert.equal(
+    out.leanConcreteLockedNANDEmitterScope,
+    'literal-1387921-rule-grammar-only-all-input-target-emitter-with-strict-parser-composition-polynomial-bounds-and-recursive-raw-refinement',
+  );
+  assert.equal(out.leanConcreteLockedNANDPolynomialReductionFormalized, false);
   assert.equal(out.leanLockedNANDPolynomialBuilderFormalized, false);
   assert.equal(out.leanCompatibleReplacementFormalized, false);
   assert.equal(out.leanGlobalSlackLawFormalized, false);
@@ -670,13 +684,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 13731);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 7827);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 4012);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 6908);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 117);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 20957);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 11424);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 5968);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 11692);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 184);
   assert.equal(status.leanSourceClosureSha256,
-    '22510170cf53b25ddd89df7cf9d01fefc0aff38ba52ae030c55c46c1b16cf50e');
+    'b54846d2e1bf730445fce72e21ec9a82465a32b3be6a473d037e882da87ec394');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -1098,7 +1112,7 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-29-LOCKED-NAND-SOURCE-PARSER-89');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-29-LOCKED-NAND-TARGET-EMITTER-90');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
@@ -1160,7 +1174,7 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(status.leanLockedNANDGlobalBaselineCandidateFormalized, true);
   assert.equal(status.leanLockedNANDFullCandidateFormalized, true);
   assert.equal(status.leanLockedNANDGlobalCandidateAxiomAuditPassed, true);
-  assert.equal(status.leanLockedNANDGlobalCandidateAuditedDeclarationCount, 64);
+  assert.equal(status.leanLockedNANDGlobalCandidateAuditedDeclarationCount, 71);
   assert.equal(status.leanLockedNANDGlobalCandidateScope,
     'arbitrary-finite-topological-nand-circuits-exact-baseline-and-four-gate-extension');
   assert.equal(status.leanLockedNANDDerivedFinalOutputLawsFormalized, true);
@@ -1203,8 +1217,26 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   );
   for (const field of [
     'leanConcreteLockedNANDEmitterMachineFormalized',
-    'leanConcreteLockedNANDPolynomialReductionFormalized',
-  ]) assert.equal(status[field], false, field);
+    'leanConcreteLockedNANDEmitterAxiomAuditPassed',
+    'leanConcreteLockedNANDEmitterAllInputExactFormalized',
+    'leanConcreteLockedNANDEmitterExactTargetBytesFormalized',
+    'leanConcreteLockedNANDEmitterCompiledNonTimeoutFormalized',
+    'leanConcreteLockedNANDEmitterPolynomialTimeMachineFormalized',
+    'leanConcreteLockedNANDEmitterPolynomialTimeFunctionFormalized',
+    'leanConcreteLockedNANDEmitterRawRefinementFormalized',
+    'leanConcreteLockedNANDEmitterStrictParserCompositionFormalized',
+    'leanConcreteLockedNANDEmitterOutputSizeBoundFormalized',
+  ]) assert.equal(status[field], true, field);
+  assert.equal(
+    status.leanConcreteLockedNANDEmitterAuditedDeclarationCount,
+    3295,
+  );
+  assert.equal(
+    status.leanConcreteLockedNANDEmitterScope,
+    'literal-1387921-rule-grammar-only-all-input-target-emitter-with-strict-parser-composition-polynomial-bounds-and-recursive-raw-refinement',
+  );
+  assert.equal(status.leanConcreteLockedNANDPolynomialReductionFormalized,
+    false);
   assert.equal(status.leanLockedNANDPolynomialBuilderFormalized, false);
   assert.equal(status.leanCompatibleReplacementFormalized, false);
   assert.equal(status.leanGlobalSlackLawFormalized, false);
@@ -1268,6 +1300,9 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDSourceParserAxiomAudit.lean'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-regression/PNPConcreteLockedNANDSourceParser.lean'), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-concrete-locked-nand-source-parser0.test.mjs'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDTargetEmitterAxiomAudit.lean'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-regression/PNPConcreteLockedNANDTargetEmitter.lean'), true);
+  assert.equal(status.verificationCommands.includes('node --test audits/lean-concrete-locked-nand-target-emitter0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPResidualRoutesAxiomAudit.lean'), true);
   assert.deepEqual(status.lockedNANDThresholdHostileReviewLemmaInventory, [
     'DirectWireOutputLowerBound',
@@ -1463,6 +1498,16 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanConcreteLockedNANDParserPolynomialTimeMachineFormalized',
     'leanConcreteLockedNANDParserPolynomialTimeFunctionFormalized',
     'leanConcreteLockedNANDParserRawRefinementFormalized',
+    'leanConcreteLockedNANDEmitterMachineFormalized',
+    'leanConcreteLockedNANDEmitterAxiomAuditPassed',
+    'leanConcreteLockedNANDEmitterAllInputExactFormalized',
+    'leanConcreteLockedNANDEmitterExactTargetBytesFormalized',
+    'leanConcreteLockedNANDEmitterCompiledNonTimeoutFormalized',
+    'leanConcreteLockedNANDEmitterPolynomialTimeMachineFormalized',
+    'leanConcreteLockedNANDEmitterPolynomialTimeFunctionFormalized',
+    'leanConcreteLockedNANDEmitterRawRefinementFormalized',
+    'leanConcreteLockedNANDEmitterStrictParserCompositionFormalized',
+    'leanConcreteLockedNANDEmitterOutputSizeBoundFormalized',
     'leanResidualRoutesListedGainScanFormalized',
     'leanResidualRoutesAxiomAuditPassed',
     'leanResidualRoutesGainSoundnessFormalized',

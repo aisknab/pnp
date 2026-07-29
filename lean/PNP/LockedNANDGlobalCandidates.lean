@@ -347,12 +347,14 @@ private def checkSourceValues
 
 /-! ## Selected macro blocks -/
 
-private structure SourceMacroAppend
+/-- Typed structural result of appending one selected source macro. -/
+structure SourceMacroAppend
     (outerInputs prefixGates extraGates : Nat) where
   program : Program outerInputs (prefixGates + extraGates)
   check : Source outerInputs (prefixGates + extraGates)
 
-private def appendSourceMacro
+/-- Append the exact source macro selected by one typed source occurrence. -/
+def appendSourceMacro
     {inputs priorGates totalGates prefixGates : Nat}
     (initial : Program (carrierWidth inputs totalGates) prefixGates)
     (source : Source inputs priorGates)
@@ -610,12 +612,14 @@ private theorem appendSourceMacro_preserves_sources
               (Fin.castLE priorWithin index))))
           equalityDirect input old
 
-private structure TraceMacroAppend
+/-- Typed structural result of appending one trace macro. -/
+structure TraceMacroAppend
     (outerInputs prefixGates : Nat) where
   program : Program outerInputs (prefixGates + 18)
   check : Source outerInputs (prefixGates + 18)
 
-private def appendTraceMacro
+/-- Append the exact eighteen-gate trace macro. -/
+def appendTraceMacro
     {inputs totalGates prefixGates : Nat}
     (initial : Program (carrierWidth inputs totalGates) prefixGates)
     (gate : Fin totalGates) :
@@ -692,12 +696,14 @@ private theorem appendTraceMacro_preserves_sources
 
 /-! ## Macro assembly over an arbitrary finite typed program -/
 
-private structure MacroAssembly
+/-- Typed macro program and its three ordered checks per source gate. -/
+structure MacroAssembly
     (carrierInputs gateCount : Nat) where
   program : Program carrierInputs gateCount
   checks : List (Source carrierInputs gateCount)
 
-private def macroAssembly
+/-- Assemble every selected source and trace macro in source-program order. -/
+def macroAssembly
     {inputs gates totalGates : Nat}
     (program : Program inputs gates)
     (within : gates ≤ totalGates) :
@@ -1108,7 +1114,8 @@ theorem circuitPrefixCandidate_semantics {inputs : Nat}
   exact congrArg prefixConjunction
     (list_ofFn_finCast (checkTailCount_add_one circuit) input)
 
-private def macroCheckSource {inputs : Nat} (circuit : Circuit inputs)
+/-- Bind the ordered macro checks into the standalone prefix candidate. -/
+def macroCheckSource {inputs : Nat} (circuit : Circuit inputs)
     (index : Fin (3 * circuit.gateCount)) :
     Source (carrierWidth inputs circuit.gateCount)
       (macroGateCount circuit.program) :=

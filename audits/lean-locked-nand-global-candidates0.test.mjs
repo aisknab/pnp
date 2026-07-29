@@ -33,10 +33,17 @@ const REQUIRED = Object.freeze([
   'theorem sourceMacroGateCount_eq_weighted_occurrenceCounts',
   'def macroGateCount',
   'theorem macroGateCount_report_formula',
+  'structure SourceMacroAppend',
+  'def appendSourceMacro',
+  'structure TraceMacroAppend',
+  'def appendTraceMacro',
+  'structure MacroAssembly',
+  'def macroAssembly',
   'def nonemptyPrefixCandidate',
   'theorem nonemptyPrefixCandidate_semantics',
   'def circuitPrefixCandidate',
   'theorem circuitPrefixCandidate_semantics',
+  'def macroCheckSource',
   'def rawBaselineGateCount',
   'theorem rawBaselineGateCount_eq_lockedBaselineCount',
   'def baselineCandidate',
@@ -142,12 +149,12 @@ test('global candidate source is closed, constructive, and narrowly imported', a
   assert.deepEqual(validateAssembly0(source), []);
 });
 
-test('axiom transcript covers all 64 public declarations exactly once', async () => {
+test('axiom transcript covers all 71 public declarations exactly once', async () => {
   const expected = declarations0(await text0(SOURCE_PATH));
   const printed = printed0(await text0(AUDIT_PATH));
-  assert.equal(expected.length, 64);
+  assert.equal(expected.length, 71);
   assert.deepEqual(printed, expected);
-  assert.equal(new Set(printed).size, 64);
+  assert.equal(new Set(printed).size, 71);
 });
 
 test('compiled closure of every audited declaration excludes project axioms and Classical.choice', async () => {
@@ -240,7 +247,7 @@ test('documentation and status credit assembly without claiming the missing boun
     'leanLockedNANDFullCandidateFormalized',
     'leanLockedNANDGlobalCandidateAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
-  assert.equal(status.leanLockedNANDGlobalCandidateAuditedDeclarationCount, 64);
+  assert.equal(status.leanLockedNANDGlobalCandidateAuditedDeclarationCount, 71);
   assert.equal(status.leanLockedNANDGlobalCandidateScope,
     'arbitrary-finite-topological-nand-circuits-exact-baseline-and-four-gate-extension');
   for (const field of [

@@ -22,6 +22,12 @@ import PNP.LockedNANDGlobalCandidates
 #print axioms PNP.DirectWire.LockedNANDGlobalCandidates.sourceMacroGateCount_eq_weighted_occurrenceCounts
 #print axioms PNP.DirectWire.LockedNANDGlobalCandidates.macroGateCount
 #print axioms PNP.DirectWire.LockedNANDGlobalCandidates.macroGateCount_report_formula
+#print axioms PNP.DirectWire.LockedNANDGlobalCandidates.SourceMacroAppend
+#print axioms PNP.DirectWire.LockedNANDGlobalCandidates.appendSourceMacro
+#print axioms PNP.DirectWire.LockedNANDGlobalCandidates.TraceMacroAppend
+#print axioms PNP.DirectWire.LockedNANDGlobalCandidates.appendTraceMacro
+#print axioms PNP.DirectWire.LockedNANDGlobalCandidates.MacroAssembly
+#print axioms PNP.DirectWire.LockedNANDGlobalCandidates.macroAssembly
 #print axioms PNP.DirectWire.LockedNANDGlobalCandidates.nonemptyPrefixCandidate
 #print axioms PNP.DirectWire.LockedNANDGlobalCandidates.nonemptyPrefixCandidate_size
 #print axioms PNP.DirectWire.LockedNANDGlobalCandidates.nonemptyPrefixCandidate_output_source
@@ -31,6 +37,7 @@ import PNP.LockedNANDGlobalCandidates
 #print axioms PNP.DirectWire.LockedNANDGlobalCandidates.circuitPrefixCandidate
 #print axioms PNP.DirectWire.LockedNANDGlobalCandidates.circuitPrefixCandidate_size
 #print axioms PNP.DirectWire.LockedNANDGlobalCandidates.circuitPrefixCandidate_semantics
+#print axioms PNP.DirectWire.LockedNANDGlobalCandidates.macroCheckSource
 #print axioms PNP.DirectWire.LockedNANDGlobalCandidates.rawBaselineGateCount
 #print axioms PNP.DirectWire.LockedNANDGlobalCandidates.rawBaselineProgram
 #print axioms PNP.DirectWire.LockedNANDGlobalCandidates.rawBaselinePrefixSource

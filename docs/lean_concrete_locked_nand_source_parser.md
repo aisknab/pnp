@@ -196,29 +196,29 @@ host.
 ## Mechanically generated publication evidence
 
 Inventory coordinate
-`PNP-LEAN-THEOREM-INVENTORY-2026-07-29-90` records 13,731 declarations,
-7,827 theorems, 4,012 assumption-free theorems, 6,908 excluded private
-declarations, 117 source-closure modules, and 2,008 reviewed milestone
-candidates. Its 11,544,049 canonical bytes have SHA-256
-`bc9f93749d14dd5d646ee37540f365d9c712f599a4aadd45262bb1ab063146c5`.
+`PNP-LEAN-THEOREM-INVENTORY-2026-07-29-91` records 20,957 declarations,
+11,424 theorems, 5,968 assumption-free theorems, 11,692 excluded private
+declarations, 184 source-closure modules, and 2,030 reviewed milestone
+candidates. Its 12,883,572 canonical bytes have SHA-256
+`7d9f871badb77f300b36425e99ecb906d94fb73120e95a62a774c618fe48d100`.
 The pinned Lean source closure is
-`22510170cf53b25ddd89df7cf9d01fefc0aff38ba52ae030c55c46c1b16cf50e`.
+`b54846d2e1bf730445fce72e21ec9a82465a32b3be6a473d037e882da87ec394`.
 
 Publication-map coordinate
-`PNP-FORMAL-PUBLICATION-MAP-2026-07-29-90` contains 70 milestones, of
-which 67 are earned and three global milestones remain unearned. The map pins
-2,008 theorem types. Its 657,356 bytes have SHA-256
-`abc16d916b77f37dffceed60440fcf966056e1da1785834867a8c49ddc58f383`.
+`PNP-FORMAL-PUBLICATION-MAP-2026-07-29-91` contains 71 milestones, of
+which 68 are earned and three global milestones remain unearned. The map pins
+2,030 theorem types. Its 664,137 bytes have SHA-256
+`e77c95963004c3e170eebb3984df15ac73530243c76fe23cb424fb3b0c722726`.
 The source-parser milestone contributes 20 theorem types.
 
 Status coordinate
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-29-90`, paired with public-surface
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-29-91`, paired with public-surface
 coordinate
-`PUBLIC-SURFACE-BASELINE-2026-07-29-LOCKED-NAND-SOURCE-PARSER-89`, records
+`PUBLIC-SURFACE-BASELINE-2026-07-29-LOCKED-NAND-TARGET-EMITTER-90`, records
 the four disclosed project assumptions, six blockers, absent
 `PNP.Main.p_eq_np`, unset activation fingerprints, and a false concrete
-publication gate. The status is 1,611,774 bytes with SHA-256
-`c5f375d6a2fe9cae42901997357ab626ae69481f6a81f7217a889937c8d26ed5`.
+publication gate. The status is 1,628,650 bytes with SHA-256
+`e246e54524b5ef8d6a94a33ebe0888020e607be90e49362df33222d792a9e929`.
 
 The complete parser audit covers 380 audited declarations: 247 have empty
 axiom closure, 58 use only `propext`, and 75 use only `propext` and
@@ -226,22 +226,23 @@ axiom closure, 58 use only `propext`, and 75 use only `propext` and
 a project axiom.
 
 Canonical report coordinate
-`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-29-90` renders as a
-64-page A4 PDF. The generated TeX is 156,947 bytes with SHA-256
-`4fef9bd1525e1f700b8eb98f5a9c54396b39013e1619fe803df8c1a047588fad`;
-the deterministic PDF is 408,994 bytes with SHA-256
-`40e93415f0ce334d53ac8ee0c691df828b8ea5ddaeb45d3c22d2faec6d88d9eb`.
+`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-29-91` renders as a
+65-page A4 PDF. The generated TeX is 167,716 bytes with SHA-256
+`49c9df4b981fa87b378fac3ac5b70b257c3fac1166732f9221478fcdf30fbe58`;
+the deterministic PDF is 411,556 bytes with SHA-256
+`52e455c3cae86c2ae9b797fde18535035460bac4dc90c72c9c508a817a4c4beb`.
 
 ## Explicit non-claims
 
 This parser does not emit the locked-NAND target instance. It is not the
-candidate emitter or the composed source-to-target machine. Its leaf-machine
-`RawRefinement` validates source bytes only; it is not the composed
-parser/emitter refinement or a `PolynomialReduction`. It does not prove an
-output-size bound for the future emitter, discharge the abstract
+candidate emitter or, by itself, the composed source-to-target machine. Its
+leaf-machine `RawRefinement` validates source bytes only. The downstream
+target-emitter milestone now supplies exact target bytes, its own output-size
+bound, and recursive parser/emitter refinement, but neither module yet
+packages the language theorem as `PolynomialReduction` or discharges the abstract
 `PNP.LockedNANDThreshold` language, put CNF-SAT in P, establish CNF-SAT
 NP-hardness, or prove P = NP.
 
-The strategic next boundary is the exact target-byte emitter fixed by the
-legacy-aligned semantic reduction, followed by its composition with this
-parser as the concrete polynomial reduction.
+The strategic next boundary is to package the completed strict parser/emitter
+function and the existing encoded semantic equivalence as the concrete
+polynomial reduction.

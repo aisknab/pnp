@@ -92,10 +92,9 @@ weakened theorem is used to force the manuscript route through.
 
 ## Audit and regression boundary
 
-The complete module transcript covers all 64 public declarations exactly
-once. Three declarations have empty axiom closure, two use only `propext`,
-and 59
-use only `propext` plus `Quot.sound`. None uses `Classical.choice`, a project
+The complete module transcript covers all 71 public declarations exactly
+once. Six declarations have empty axiom closure, two use only `propext`, and
+63 use only `propext` plus `Quot.sound`. None uses `Classical.choice`, a project
 axiom, `sorry`, `admit`, native/SAT shortcuts, host-side lookup, or a caller
 certificate.
 

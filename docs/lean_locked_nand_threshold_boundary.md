@@ -99,7 +99,7 @@ bound, then connect the typed semantic object to the abstract
 The dedicated conditional-boundary transcript covers all 32 explicit
 declarations and reports no axioms. The separate carrier/trace transcript
 covers all 71 public declarations, and the complete global-candidate
-transcript covers all 64 public declarations, using only the approved
+transcript covers all 71 public declarations, using only the approved
 Lean-standard closure and no `Classical.choice`. The five-theorem
 baseline-distinctness transcript and two-theorem unsatisfiable-final-zero
 transcript use exactly `propext` and `Quot.sound`. The new eight-declaration

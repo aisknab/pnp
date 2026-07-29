@@ -49,10 +49,20 @@ host, not as a build host.
   checked commit, checked tree, command exit status, and the final `systemd-run`
   resource summary. This makes truncated terminal output diagnosable without
   rerunning an expensive suite.
+- Never let concurrent agents build in the same remote Lean checkout. Lake's
+  mutable `.olean`/`.ilean` outputs can race, disappear, or leave an import
+  observing an older declaration set even when a leaf source build was green.
+  Give every concurrent proof or audit worker its own named checkout; perform
+  the final dependency, root, and axiom builds serially in one clean checkout.
 - If a remote runner references auxiliary scripts or fixtures, copy each one to
   its exact runtime filename and verify every referenced remote path is readable
   before launching the bounded job. Do not rely on a directory-only `scp`
   destination when the runner expects a different basename.
+- Probe optional observability wrappers such as `/usr/bin/time` before putting
+  them in the service command. A missing wrapper must fail during launch
+  preflight, not after the clean checkout is prepared; when it is absent, retain
+  the resource summary already emitted by `systemd-run --wait` instead of
+  installing or assuming another package.
 - A user-level `systemd-run` service may not inherit the login shell's toolchain
   path. Before the first proof phase, verify the exact `lake` and `lean` binaries
   visible inside the service environment and set the already-installed toolchain
@@ -198,6 +208,11 @@ lines.
   A `--single-branch` or filtered clone can omit these required historical
   refs; treat that as a clone-preflight failure rather than a product
   regression.
+- Remember that a normal fresh clone records remote branches under
+  `refs/remotes/origin/...`; it does not create a matching local
+  `refs/heads/...` branch until one is checked out. Verify a pushed feature tip
+  with its remote-tracking ref or `git ls-remote`, and reserve local-head checks
+  for branches the verifier explicitly creates.
 - Before a source-bound PNPLabs audit, enumerate the refs named by its
   `docs/audit_targets.json` and verify that every current and historical ref
   resolves inside `PNP_SOURCE_DIR`. A single-branch checkout may omit required
@@ -222,6 +237,12 @@ lines.
 - A clean-clone result is evidence only for the commit that was checked. If any
   follow-up fix changes the PR head, including a workflow-only fix, repeat the
   exact-head clean-clone reproduction before merging.
+- When a durable sequential workflow grows, compare its expected duration with
+  recent successful runs and preserve meaningful timeout headroom. A job can
+  finish its final substantive command successfully yet be reported as
+  cancelled when cleanup crosses the exact job timeout; update the durable
+  timeout before rerunning instead of changing theorem checks or treating that
+  boundary race as a proof failure.
 - Keep remote command quoting shallow. Avoid placing command substitutions,
   `awk` programs, or regular expressions through several nested local-shell,
   SSH, `systemd-run`, and `bash -lc` quoting layers. Prefer checked-in commands or

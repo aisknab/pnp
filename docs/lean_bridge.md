@@ -70,6 +70,10 @@ lean/PNP/Concrete/LockedNANDSourceParserTotalTrace.lean
 lean/PNP/Concrete/LockedNANDSourceParserCorrectness.lean
 lean/PNP/Concrete/LockedNANDSourceParserCompiled.lean
 lean/PNP/Concrete/LockedNANDSourceParser.lean
+lean/PNP/Concrete/LockedNANDRawBuilder.lean
+lean/PNP/Concrete/LockedNANDTargetEmitterSpec.lean
+lean/PNP/Concrete/LockedNANDTargetEmitterControllerCompiled.lean
+lean/PNP/Concrete/LockedNANDTargetEmitter.lean
 lean/PNP/Concrete/Target.lean
 lean/PNP/Concrete/WorkInput.lean
 lean/PNP/Concrete/WorkMachine.lean
@@ -119,6 +123,7 @@ lean-audit/PNPConcretePipelineMachineSimulationAxiomAudit.lean
 lean-audit/PNPConcreteComplexityAxiomAudit.lean
 lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean
 lean-audit/PNPConcreteLockedNANDSourceParserAxiomAudit.lean
+lean-audit/PNPConcreteLockedNANDTargetEmitterAxiomAudit.lean
 lean-audit/PNPConcreteTargetAxiomAudit.lean
 lean-audit/PNPConcreteCNFAxiomAudit.lean
 lean-audit/PNPConcreteCNFVerifierAxiomAudit.lean
@@ -142,6 +147,7 @@ lean-audit/PNPLockedNANDGlobalBaselineDistinctAxiomAudit.lean
 lean-audit/PNPLockedNANDGlobalUnsatisfiableFinalZeroAxiomAudit.lean
 lean-audit/PNPLockedNANDGlobalSemanticThresholdAxiomAudit.lean
 lean-regression/PNPConcreteLockedNANDSourceParser.lean
+lean-regression/PNPConcreteLockedNANDTargetEmitter.lean
 docs/lean_nand_semantics.md
 docs/lean_concrete_machine.md
 docs/lean_tape_handoff.md
@@ -622,7 +628,10 @@ complete candidate and threshold, and proves the pure all-bitstring semantic
 transformation. The following source-parser layer now supplies the literal
 validator machine, its all-input exact verdict/output theorem, compiled cubic
 bound, polynomial machine/function witnesses, and leaf `RawRefinement`. The
-emitter, composed reduction, and report-level linkage remain absent. See
+following target-emitter layer now supplies exact raw target bytes,
+polynomial bounds, strict parser composition, and recursive raw refinement.
+Concrete `PolynomialReduction` packaging and report-level linkage remain
+absent. See
 `docs/lean_locked_nand_global_candidates.md` and
 `docs/lean_locked_nand_global_baseline_distinct.md`, then
 `docs/lean_locked_nand_global_unsatisfiable_final_zero.md` and
@@ -678,6 +687,39 @@ See
 [`lean_concrete_locked_nand_source_parser.md`](./lean_concrete_locked_nand_source_parser.md)
 for the exact current boundary.
 
+## Concrete strict-v0 target emitter
+
+`lean/PNP/Concrete/LockedNANDTargetEmitter.lean` is the public aggregate for
+the executable target side. It combines a direct raw reconstruction of the
+legacy locked-NAND candidate with one fixed 1,387,921-rule grammar-only
+controller. Its executable graph uses disjoint parity-tagged control/block
+addresses and does not call the decoder, semantic target function, host
+schedule, or caller certificate while constructing the table.
+
+Every input has an internally constructed exact halted trace. Grammar failure
+rejects with empty output; grammar success accepts and emits
+`RawBuilder.targetBytes`, including the deliberately broader
+decoded-but-intrinsically-invalid case. A degree-five all-input runtime
+polynomial and quadratic output-size polynomial bound the compiled function.
+
+The strict public function composes this emitter with the source parser. It
+therefore clears malformed and intrinsically invalid inputs and computes
+`buildLockedNANDInstance` exactly on valid inputs. Both the standalone leaf
+and recursive composition have `RawRefinement` witnesses. The audit,
+regression, and hostile checks are:
+
+```sh
+lake env lean -DwarningAsError=true \
+  lean-audit/PNPConcreteLockedNANDTargetEmitterAxiomAudit.lean
+lake env lean -DwarningAsError=true \
+  lean-regression/PNPConcreteLockedNANDTargetEmitter.lean
+node --test audits/lean-concrete-locked-nand-target-emitter0.test.mjs
+```
+
+See
+[`lean_concrete_locked_nand_target_emitter.md`](./lean_concrete_locked_nand_target_emitter.md)
+for the exact grammar/strict boundary and remaining non-claims.
+
 ## Global locked-NAND layer
 
 `lean/PNP/LockedNAND.lean` keeps the full SAT builder and threshold theorem abstract:
@@ -699,10 +741,11 @@ and residual-slack-at-most-four theorem are proved. A strict encoded semantic
 boundary now contains the complete candidate and proves source/target
 equivalence. Its strict-v0 source parser now has total exact correctness,
 compiled non-timeout, exact validated-byte output, polynomial machine/function
-witnesses, and leaf raw refinement. Remaining global work is the complete
-emitter, the composed parser/emitter refinement and output-size interface, the
-resulting concrete `PolynomialReduction`, and the report-level language
-linkage.
+witnesses, and leaf raw refinement. Its target emitter now adds exact raw
+target bytes, an all-input compiled polynomial, an output-size polynomial,
+strict parser composition, and recursive raw refinement. Remaining global
+work is the resulting concrete `PolynomialReduction` packaging and the
+report-level language linkage.
 
 ## Residual-band, ZeroSlack, and PCCMin layers
 
@@ -819,6 +862,10 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
     decoder-failure normal forms, all-input exact accept/reject behavior, valid-byte preservation,
     invalid-byte erasure, compiled non-timeout within `6 * 4096 * (n + 1)^3`, polynomial
     machine/function witnesses, and an exact leaf raw-machine refinement.
+24. A literal 1,387,921-rule grammar-only locked-NAND target emitter with internally constructed
+    all-input exact traces, exact target bytes, explicit runtime and output-size polynomials,
+    compiled non-timeout, polynomial machine/function witnesses, leaf raw refinement, and strict
+    parser/emitter composition with recursive raw refinement.
 ```
 
 ## Explicit trust base after this pass
