@@ -237,6 +237,12 @@ lines.
 - A clean-clone result is evidence only for the commit that was checked. If any
   follow-up fix changes the PR head, including a workflow-only fix, repeat the
   exact-head clean-clone reproduction before merging.
+- When a durable sequential workflow grows, compare its expected duration with
+  recent successful runs and preserve meaningful timeout headroom. A job can
+  finish its final substantive command successfully yet be reported as
+  cancelled when cleanup crosses the exact job timeout; update the durable
+  timeout before rerunning instead of changing theorem checks or treating that
+  boundary race as a proof failure.
 - Keep remote command quoting shallow. Avoid placing command substitutions,
   `awk` programs, or regular expressions through several nested local-shell,
   SSH, `systemd-run`, and `bash -lc` quoting layers. Prefer checked-in commands or
