@@ -203,6 +203,11 @@ lines.
   A `--single-branch` or filtered clone can omit these required historical
   refs; treat that as a clone-preflight failure rather than a product
   regression.
+- Remember that a normal fresh clone records remote branches under
+  `refs/remotes/origin/...`; it does not create a matching local
+  `refs/heads/...` branch until one is checked out. Verify a pushed feature tip
+  with its remote-tracking ref or `git ls-remote`, and reserve local-head checks
+  for branches the verifier explicitly creates.
 - Before a source-bound PNPLabs audit, enumerate the refs named by its
   `docs/audit_targets.json` and verify that every current and historical ref
   resolves inside `PNP_SOURCE_DIR`. A single-branch checkout may omit required
