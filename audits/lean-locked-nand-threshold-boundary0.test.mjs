@@ -155,7 +155,7 @@ test('status credits the conditional boundary while every global threshold claim
     'leanLockedNANDGlobalSemanticThresholdAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
   assert.equal(status.leanLockedNANDCarrierTraceAuditedDeclarationCount, 71);
-  assert.equal(status.leanLockedNANDGlobalCandidateAuditedDeclarationCount, 64);
+  assert.equal(status.leanLockedNANDGlobalCandidateAuditedDeclarationCount, 71);
   assert.equal(status.leanLockedNANDThresholdBoundaryScope, 'proof-bearing-typed-candidate-and-semantic-premises-only');
   assert.deepEqual(status.lockedNANDThresholdHostileReviewLemmaInventory, HOSTILE_REVIEW_LEMMAS);
   assert.deepEqual(status.leanLockedNANDThresholdPremiseInventory, PREMISE_FIELDS);

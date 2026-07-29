@@ -294,8 +294,11 @@ test('status retains the semantic boundary and records its executable parser suc
     status.leanConcreteLockedNANDParserMachineFormalized,
     true,
   );
+  assert.equal(
+    status.leanConcreteLockedNANDEmitterMachineFormalized,
+    true,
+  );
   for (const field of [
-    'leanConcreteLockedNANDEmitterMachineFormalized',
     'leanConcreteLockedNANDPolynomialReductionFormalized',
     'leanLockedNANDPolynomialBuilderFormalized',
     'leanLockedNANDBuilderFormalized',

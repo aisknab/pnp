@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'c7e5aea71351c084354d0dc2e7c3cb65f613a3d1bf898aa3929ebd1d168818fe';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '3eaf540fc74a0ac1ac755592d3219a48389620e4c6aade469c434c1bef464c12';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -1768,6 +1768,8 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.FunctionProgram.RawRefinement.compile_output_eq',
   'PNP.Concrete.FunctionProgram.RawRefinement.output_size_le',
   'PNP.Concrete.NatPolynomial.eval_mono',
+  'PNP.Concrete.LockedNAND.RawBuilder.rawLockedInstance_of_elaborate',
+  'PNP.Concrete.LockedNAND.RawBuilder.targetBytes_of_elaborated',
   'PNP.Concrete.LockedNAND.RawCandidate.elaborate_ofCandidate',
   'PNP.Concrete.LockedNAND.RawCircuit.elaborate_ofCircuit',
   'PNP.Concrete.LockedNAND.RawCircuit.normalize_eval',
@@ -1793,6 +1795,26 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.LockedNAND.SourceParser.validRawTimePolynomial_eval',
   'PNP.Concrete.LockedNAND.SourceParser.validatedSourceBytesPolynomialTimeFunction_output',
   'PNP.Concrete.LockedNAND.SourceParser.wellFormed_exact',
+  'PNP.Concrete.LockedNAND.TargetEmitterController.graph_wellFormed',
+  'PNP.Concrete.LockedNAND.TargetEmitterController.machine_accept_ne_reject',
+  'PNP.Concrete.LockedNAND.TargetEmitterController.rules_length_literal',
+  'PNP.Concrete.LockedNAND.TargetEmitterController.rules_pairwise',
+  'PNP.Concrete.LockedNAND.TargetEmitterControllerCompiled.compiledBoundedDecide_accept_iff',
+  'PNP.Concrete.LockedNAND.TargetEmitterControllerCompiled.compiledBoundedDecide_ne_timeout',
+  'PNP.Concrete.LockedNAND.TargetEmitterControllerCompiled.compiledMachineOutput_eq_targetBytes',
+  'PNP.Concrete.LockedNAND.TargetEmitterControllerCompiled.compiledStart_blankEquivalent',
+  'PNP.Concrete.LockedNAND.TargetEmitterControllerCompiled.rawTargetBytesPolynomialTimeFunction_output',
+  'PNP.Concrete.LockedNAND.TargetEmitterControllerCompiled.strictLockedNANDPolynomialTimeFunction_output',
+  'PNP.Concrete.LockedNAND.TargetEmitterControllerPolynomialBound.allInputWorkTimePolynomial_eval',
+  'PNP.Concrete.LockedNAND.TargetEmitterControllerPolynomialBound.compiledRawTimePolynomial_eval',
+  'PNP.Concrete.LockedNAND.TargetEmitterControllerPolynomialBound.controllerUniformEnvelope_le_workBound',
+  'PNP.Concrete.LockedNAND.TargetEmitterControllerPolynomialBound.controllerWorkTimePolynomial_eval',
+  'PNP.Concrete.LockedNAND.TargetEmitterControllerPolynomialBound.controller_complete_path_polynomial',
+  'PNP.Concrete.LockedNAND.TargetEmitterControllerTotalTrace.allInput_bounded_exact',
+  'PNP.Concrete.LockedNAND.TargetEmitterControllerTotalTrace.decoded_bounded_exact',
+  'PNP.Concrete.LockedNAND.TargetEmitterControllerTotalTrace.malformed_bounded_exact',
+  'PNP.Concrete.LockedNAND.TargetEmitterSpec.targetBytes_size_le',
+  'PNP.Concrete.LockedNAND.TargetEmitterSpec.targetBytes_validatedSourceBytes_eq_buildLockedNANDInstance',
   'PNP.Concrete.LockedNAND.buildLockedNANDInstance_correct',
   'PNP.Concrete.LockedNAND.decodeCircuit_encodeCircuit',
   'PNP.Concrete.LockedNAND.decodeElaboratedCircuit_encodeCircuit_ofCircuit',
@@ -2050,7 +2072,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-29-90') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-29-91') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -2327,7 +2349,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-29-90') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-29-91') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

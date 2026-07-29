@@ -49,6 +49,11 @@ host, not as a build host.
   checked commit, checked tree, command exit status, and the final `systemd-run`
   resource summary. This makes truncated terminal output diagnosable without
   rerunning an expensive suite.
+- Never let concurrent agents build in the same remote Lean checkout. Lake's
+  mutable `.olean`/`.ilean` outputs can race, disappear, or leave an import
+  observing an older declaration set even when a leaf source build was green.
+  Give every concurrent proof or audit worker its own named checkout; perform
+  the final dependency, root, and axiom builds serially in one clean checkout.
 - If a remote runner references auxiliary scripts or fixtures, copy each one to
   its exact runtime filename and verify every referenced remote path is readable
   before launching the bounded job. Do not rely on a directory-only `scp`

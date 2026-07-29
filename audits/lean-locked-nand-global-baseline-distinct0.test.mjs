@@ -129,9 +129,9 @@ test('complete and milestone axiom transcripts cover the reviewed declarations e
   const sourceDeclarations = declarations0(await text0(SOURCE_PATH));
   const completePrinted = printed0(await text0(COMPLETE_AUDIT_PATH));
   const milestonePrinted = printed0(await text0(MILESTONE_AUDIT_PATH));
-  assert.equal(sourceDeclarations.length, 64);
+  assert.equal(sourceDeclarations.length, 71);
   assert.deepEqual(completePrinted, sourceDeclarations);
-  assert.equal(new Set(completePrinted).size, 64);
+  assert.equal(new Set(completePrinted).size, 71);
   assert.deepEqual(milestonePrinted, REQUIRED_THEOREMS);
 });
 

@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 70);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 67);
+  assert.equal(status.formalPublicationMilestones.length, 71);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 68);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -1508,6 +1508,41 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   ]);
   assert.match(sourceParser.scope, /literal nine-symbol finite work machine/u);
   assert.match(sourceParser.nonClaim, /does not emit the locked-NAND target/u);
+  const targetEmitter = byId.get(
+    'concrete-locked-nand-target-emitter',
+  );
+  assert.equal(targetEmitter.status, 'formalized-foundation-only');
+  assert.equal(targetEmitter.earned, true);
+  assert.equal(
+    targetEmitter.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.deepEqual(targetEmitter.requiredTheorems, [
+    'PNP.Concrete.LockedNAND.RawBuilder.rawLockedInstance_of_elaborate',
+    'PNP.Concrete.LockedNAND.RawBuilder.targetBytes_of_elaborated',
+    'PNP.Concrete.LockedNAND.TargetEmitterSpec.targetBytes_validatedSourceBytes_eq_buildLockedNANDInstance',
+    'PNP.Concrete.LockedNAND.TargetEmitterSpec.targetBytes_size_le',
+    'PNP.Concrete.LockedNAND.TargetEmitterController.rules_length_literal',
+    'PNP.Concrete.LockedNAND.TargetEmitterController.rules_pairwise',
+    'PNP.Concrete.LockedNAND.TargetEmitterController.machine_accept_ne_reject',
+    'PNP.Concrete.LockedNAND.TargetEmitterController.graph_wellFormed',
+    'PNP.Concrete.LockedNAND.TargetEmitterControllerTotalTrace.malformed_bounded_exact',
+    'PNP.Concrete.LockedNAND.TargetEmitterControllerTotalTrace.decoded_bounded_exact',
+    'PNP.Concrete.LockedNAND.TargetEmitterControllerTotalTrace.allInput_bounded_exact',
+    'PNP.Concrete.LockedNAND.TargetEmitterControllerPolynomialBound.controllerWorkTimePolynomial_eval',
+    'PNP.Concrete.LockedNAND.TargetEmitterControllerPolynomialBound.allInputWorkTimePolynomial_eval',
+    'PNP.Concrete.LockedNAND.TargetEmitterControllerPolynomialBound.compiledRawTimePolynomial_eval',
+    'PNP.Concrete.LockedNAND.TargetEmitterControllerPolynomialBound.controller_complete_path_polynomial',
+    'PNP.Concrete.LockedNAND.TargetEmitterControllerPolynomialBound.controllerUniformEnvelope_le_workBound',
+    'PNP.Concrete.LockedNAND.TargetEmitterControllerCompiled.compiledStart_blankEquivalent',
+    'PNP.Concrete.LockedNAND.TargetEmitterControllerCompiled.compiledMachineOutput_eq_targetBytes',
+    'PNP.Concrete.LockedNAND.TargetEmitterControllerCompiled.compiledBoundedDecide_accept_iff',
+    'PNP.Concrete.LockedNAND.TargetEmitterControllerCompiled.compiledBoundedDecide_ne_timeout',
+    'PNP.Concrete.LockedNAND.TargetEmitterControllerCompiled.rawTargetBytesPolynomialTimeFunction_output',
+    'PNP.Concrete.LockedNAND.TargetEmitterControllerCompiled.strictLockedNANDPolynomialTimeFunction_output',
+  ]);
+  assert.match(targetEmitter.scope, /1,387,921-rule grammar-only controller/u);
+  assert.match(targetEmitter.nonClaim, /does not yet package the language equivalence as PolynomialReduction/u);
   assert.equal(byId.get('locked-nand-conditional-threshold').status, 'formalized-with-premises');
   assert.equal(byId.get('explicit-residual-routes').status, 'formalized-explicit-list-only');
   for (const id of [
@@ -1524,10 +1559,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'c7e5aea71351c084354d0dc2e7c3cb65f613a3d1bf898aa3929ebd1d168818fe');
+    '3eaf540fc74a0ac1ac755592d3219a48389620e4c6aade469c434c1bef464c12');
   assert.equal(map.milestoneSourceClosureSha256,
-    '22510170cf53b25ddd89df7cf9d01fefc0aff38ba52ae030c55c46c1b16cf50e');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2008);
+    'b54846d2e1bf730445fce72e21ec9a82465a32b3be6a473d037e882da87ec394');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2030);
   for (const theorem of [
     'PNP.DirectWire.LockedNANDTrace.carrierSeparation',
     'PNP.DirectWire.LockedNANDTrace.finalLock_fresh',
@@ -1849,7 +1884,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [13731, 7827, 4012, 6908, 117]);
+  ], [20957, 11424, 5968, 11692, 184]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

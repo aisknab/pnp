@@ -76,8 +76,11 @@ candidates, reject malformed words, and prove a pure all-bitstring transformatio
 semantic module remains an encoded boundary rather than an executable machine. The following
 strict-v0 source-parser milestone supplies the literal validator, total exact accept/reject and
 byte-preserving-or-empty output behavior, the compiled cubic non-timeout theorem, polynomial-time
-machine/function witnesses, and its leaf raw-machine refinement. The complete target emitter,
-composed parser/emitter refinement, concrete polynomial reduction, report-level
+machine/function witnesses, and its leaf raw-machine refinement. The following target-emitter
+milestone supplies one fixed grammar-only controller, exact raw target bytes, all-input polynomial
+runtime and output-size bounds, compiled non-timeout, polynomial machine/function witnesses, a
+leaf raw refinement, and strict parser/emitter composition computing the established pure
+reduction. Concrete `PolynomialReduction` packaging, the report-level
 `PNP.LockedNANDThreshold` link, CNFSAT-in-P theorem, and `P = NP` root remain absent.
 
 The current four project-specific axioms remain visible as an independent inventory:

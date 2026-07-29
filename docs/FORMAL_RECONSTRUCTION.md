@@ -903,8 +903,8 @@ seven using only `propext` with `Quot.sound`. This module is a pure semantic
 transformation and does not by itself supply a parser/validator machine,
 emitter machine, `RawRefinement`, `PolynomialReduction`, or
 runtime/output-size proof. The following source-parser milestone implements
-and bounds the validator against these exact bytes; the complete emitter
-remains the next executable boundary. See
+and bounds the validator against these exact bytes, and the target-emitter
+milestone implements the downstream exact byte construction. See
 [`lean_concrete_locked_nand_semantic_reduction.md`](./lean_concrete_locked_nand_semantic_reduction.md).
 
 `PNP.Concrete.LockedNANDSourceParser` now aggregates the completed bounded
@@ -936,6 +936,32 @@ This completes the parser/validator milestone, but not the target emitter or
 the composed source-to-target reduction. See
 [`lean_concrete_locked_nand_source_parser.md`](./lean_concrete_locked_nand_source_parser.md).
 
+`PNP.Concrete.LockedNANDTargetEmitter` now aggregates the complete
+grammar-only target builder. The fixed controller contains 1,387,921 literal
+rules, keeps all control and primitive-block states disjoint, and constructs
+its rule table without the semantic decoder, target function, schedule
+lookup, or caller certificate. On every bitstring it either rejects malformed
+grammar with empty output or accepts a decoded raw circuit and emits exactly
+`RawBuilder.targetBytes`.
+
+The all-input work trace is bounded by a literal degree-five polynomial; raw
+compilation multiplies that bound by six. A separate quadratic polynomial
+bounds emitted bytes. The compiled interface proves exact output,
+grammar-decoder acceptance, and non-timeout, then packages a
+`PolynomialTimeMachine`, standalone `PolynomialTimeFunction`, and leaf
+`RawRefinement`.
+
+Composition with the strict source parser computes
+`buildLockedNANDInstance` on every input and has a recursively compiled
+`RawRefinement`. In particular, a grammar-decoded circuit with an invalid
+reference is accepted at the standalone grammar boundary but cleared by the
+strict composition. The 3,295-declaration transcript permits only empty
+closure, `propext`, and `propext` with `Quot.sound`. This closes target
+emission and strict parser/emitter composition, but does not yet package the
+language theorem as `PolynomialReduction` or discharge the abstract
+`PNP.LockedNANDThreshold` assumption. See
+[`lean_concrete_locked_nand_target_emitter.md`](./lean_concrete_locked_nand_target_emitter.md).
+
 The historical hostile review named `DirectWireOutputLowerBound`, `MacroDistinct`,
 `TraceEquivalence`, `ZeroOutputConvention`, and `FinalLockSeparation`. The general output lower
 bound and model-level free-zero append convention were discharged in preceding layers.
@@ -946,9 +972,12 @@ whole-carrier `ZeroOutputConvention` consequence is discharged in the unsatisfia
 discharged. The strict encoding and pure semantic transformation are also
 formalized. The literal source parser now has all-input exact correctness,
 byte-preserving-or-empty output, compiled cubic non-timeout, polynomial
-machine/function witnesses, and its leaf raw refinement. The complete
-emitter, composed parser/emitter reduction, concrete `PolynomialReduction`,
-and report-level threshold-language linkage remain missing. See
+machine/function witnesses, and its leaf raw refinement. The literal target
+emitter now has exact all-input target bytes, polynomial runtime and output
+bounds, compiled non-timeout, polynomial machine/function witnesses, strict
+parser composition, and recursive raw refinement. Concrete
+`PolynomialReduction` packaging and report-level threshold-language linkage
+remain missing. See
 [`lean_locked_nand_threshold_boundary.md`](./lean_locked_nand_threshold_boundary.md).
 
 The residual-route layer now performs one honest executable operation: it scans an explicit finite
