@@ -58,6 +58,11 @@ host, not as a build host.
   its exact runtime filename and verify every referenced remote path is readable
   before launching the bounded job. Do not rely on a directory-only `scp`
   destination when the runner expects a different basename.
+- Probe optional observability wrappers such as `/usr/bin/time` before putting
+  them in the service command. A missing wrapper must fail during launch
+  preflight, not after the clean checkout is prepared; when it is absent, retain
+  the resource summary already emitted by `systemd-run --wait` instead of
+  installing or assuming another package.
 - A user-level `systemd-run` service may not inherit the login shell's toolchain
   path. Before the first proof phase, verify the exact `lake` and `lean` binaries
   visible inside the service environment and set the already-installed toolchain
