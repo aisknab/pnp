@@ -747,6 +747,33 @@ See
 [`lean_concrete_locked_nand_polynomial_reduction.md`](./lean_concrete_locked_nand_polynomial_reduction.md)
 for the exact interface and non-claims.
 
+## Concrete CNF-to-NAND semantic compiler
+
+`lean/PNP/Concrete/CNFToNAND.lean` traverses any decoded CNF formula
+structurally and constructs an intrinsically topological NAND circuit without
+querying satisfiability. Lean proves strict decoder inversion, exact
+valuation and satisfiability semantics, well-formed strict-v0 output, exact
+gate count, a quadratic serialized-output bound in external input length,
+and fail-closed equivalence on every bitstring. Empty formulas are true,
+empty clauses are false, and both signs of an out-of-range literal are false.
+
+Pure semantic composition with the existing locked-NAND builder proves the
+corresponding `EncodedLockedNANDThreshold` equivalence. This compiler is not
+yet implemented by a finite work machine and has no `RawRefinement`,
+`PolynomialTimeFunction`, or packaged `PolynomialReduction`.
+
+```sh
+lake env lean -DwarningAsError=true \
+  lean-audit/PNPConcreteCNFToNANDAxiomAudit.lean
+lake env lean -DwarningAsError=true \
+  lean-regression/PNPConcreteCNFToNAND.lean
+node --test audits/lean-concrete-cnf-to-nand0.test.mjs
+```
+
+See
+[`lean_concrete_cnf_to_nand_semantic_compiler.md`](./lean_concrete_cnf_to_nand_semantic_compiler.md)
+for the exact semantics, accounting, and remaining boundary.
+
 ## Global locked-NAND layer
 
 `lean/PNP/LockedNAND.lean` keeps the full SAT builder and threshold theorem abstract:
@@ -896,6 +923,10 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 25. A concrete strict-v0 polynomial many-one reduction from `EncodedNANDSAT` to
     `EncodedLockedNANDThreshold`, with exact composed-function identity, exact output,
     all-bitstring language equivalence, a `ReducesTo` witness, and recursive raw refinement.
+26. A universal answer-independent semantic compiler from strict canonical CNF to
+    intrinsically topological NAND circuits, with exact edge semantics, exact gate count,
+    a quadratic serialized-output bound, all-bitstring fail-closed language equivalence,
+    and semantic composition with the concrete locked-NAND threshold builder.
 ```
 
 ## Explicit trust base after this pass
@@ -919,10 +950,11 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 The highest-value next targets are:
 
 ```text
-1. Connect the concrete `EncodedLockedNANDThreshold` language to the report-level abstract
+1. Implement `compileEncodedCNFToNAND` as a total finite work machine, prove its external
+   polynomial runtime and exact output, and package its `RawRefinement`,
+   `PolynomialTimeFunction`, and concrete `PolynomialReduction`.
+2. Connect the concrete `EncodedLockedNANDThreshold` language to the report-level abstract
    locked-NAND threshold theorem without adding an assumption.
-2. Compose the parser and emitter with a raw-machine refinement, package the required concrete
-   `PolynomialReduction`, and link it to the abstract `PNP.LockedNANDThreshold` language.
 3. Complete the raw Cook--Levin formula builder and package its concrete polynomial reduction.
 4. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
 5. Formalize or import concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as

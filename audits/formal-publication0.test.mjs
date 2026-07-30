@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 72);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 69);
+  assert.equal(status.formalPublicationMilestones.length, 73);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 70);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -1571,8 +1571,39 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   );
   assert.match(
     polynomialReduction.nonClaim,
-    /does not identify the concrete source language with CNFSAT/u,
+    /semantic compiler now identifies CNFSAT/u,
   );
+  const cnfToNAND = byId.get(
+    'concrete-cnf-to-nand-semantic-compiler',
+  );
+  assert.equal(cnfToNAND.status, 'formalized-semantic-boundary');
+  assert.equal(cnfToNAND.earned, true);
+  assert.equal(
+    cnfToNAND.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.deepEqual(cnfToNAND.requiredTheorems, [
+    'PNP.Concrete.CNFToNAND.encodeCNF_of_decodeEncodedCNF',
+    'PNP.Concrete.CNFToNAND.compileFormula_inputCount',
+    'PNP.Concrete.CNFToNAND.compileFormula_output_is_gate',
+    'PNP.Concrete.CNFToNAND.compileFormula_wellFormed',
+    'PNP.Concrete.CNFToNAND.decodeValidCircuit_encode_compileFormula',
+    'PNP.Concrete.CNFToNAND.compiledFormulaCircuit_eval_eq_true_iff',
+    'PNP.Concrete.CNFToNAND.compiledFormulaCircuit_satisfiable_iff',
+    'PNP.Concrete.CNFToNAND.compileFormula_satisfiable_iff',
+    'PNP.Concrete.CNFToNAND.formula_satisfiable_iff_encoded_compileFormula',
+    'PNP.Concrete.CNFToNAND.compileFormula_gateCount_exact',
+    'PNP.Concrete.CNFToNAND.compileFormula_gateCount_le',
+    'PNP.Concrete.CNFToNAND.cnfToNANDOutputSizePolynomial_eval',
+    'PNP.Concrete.CNFToNAND.compileEncodedCNFToNAND_of_decoded',
+    'PNP.Concrete.CNFToNAND.compileEncodedCNFToNAND_of_malformed',
+    'PNP.Concrete.CNFToNAND.compileEncodedCNFToNAND_size_le',
+    'PNP.Concrete.CNFToNAND.empty_not_encodedNANDSAT',
+    'PNP.Concrete.CNFToNAND.compileEncodedCNFToNAND_correct',
+    'PNP.Concrete.CNFToNAND.buildLockedNANDFromCNF_correct',
+  ]);
+  assert.match(cnfToNAND.scope, /answer-independent compiler/u);
+  assert.match(cnfToNAND.nonClaim, /not yet a compiled finite work machine/u);
   assert.equal(byId.get('locked-nand-conditional-threshold').status, 'formalized-with-premises');
   assert.equal(byId.get('explicit-residual-routes').status, 'formalized-explicit-list-only');
   for (const id of [
@@ -1589,10 +1620,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'd7bccc262d21b14440452b5b2d5c13aeef167d36b7d1850f9fda103fb8c9efef');
+    'abf7b98d7b6721576eb7c9d827fa5ea2cc95454f31c2a5d8950dfe570d8c01bb');
   assert.equal(map.milestoneSourceClosureSha256,
-    '8f98bd81a6993bf025b232863107c1e71f932f509d6653cd92189acb6922958c');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2035);
+    'daed8c40eb6416b42d6b78d87b118b8033bbb5f3e857874c3d1ee45cf89e8876');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2053);
   for (const theorem of [
     'PNP.DirectWire.LockedNANDTrace.carrierSeparation',
     'PNP.DirectWire.LockedNANDTrace.finalLock_fresh',
@@ -1914,7 +1945,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [20965, 11430, 5968, 11692, 185]);
+  ], [21020, 11477, 5987, 11970, 186]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

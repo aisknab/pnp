@@ -46,7 +46,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-30-92}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-31-93}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -76,7 +76,10 @@
   padding-or-terminating-\code{F} opportunity, a general dynamic formula cursor, arbitrary raw slot decoder,
   and the remaining formula body are not
   implemented, so there is no complete raw
-  polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation fingerprints
+  polynomial-time Cook--Levin formula builder. A separate universal semantic compiler now translates
+  strict canonical CNF into well-formed topological NAND and preserves satisfiability exactly, but it
+  has no finite-machine refinement or polynomial-time function witness, so there is no complete
+  concrete CNFSAT \code{PolynomialReduction}. The reviewed activation fingerprints
   are unset, no root theorem exists, and the abstract string-handle bridge is never an activation source.
   \vspace{0.3cm}
   \end{minipage}
@@ -84,15 +87,15 @@
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 20965 \\
-Theorem-kind declarations & 11430 \\
-Assumption-free theorem-kind declarations & 5968 \\
+Compiled declarations & 21020 \\
+Theorem-kind declarations & 11477 \\
+Assumption-free theorem-kind declarations & 5987 \\
 Project-specific axioms & 4 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{3413510e8712416cdb1b5d846053e5c886bbc1cd550fe7533411573e5f88bf64}\par}
+{\small Inventory SHA-256: \code{576816bd782378cd1d19ad1de76485b82896e6f141853946b6e0ad7df1fefa82}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -124,6 +127,17 @@ equivalent to ordinary raw verifier execution in both input modes. It now also b
 canonical unary-indexed formula encoding by an explicit fixed-verifier polynomial evaluated only at
 external source-input length. That output-size theorem does not execute the formula builder as a raw
 finite machine, prove its construction runtime, or package a concrete polynomial reduction.
+
+The concrete CNF-to-NAND development traverses any decoded formula
+structurally and constructs an intrinsically topological NAND circuit without
+querying satisfiability. Lean proves exact valuation and satisfiability
+semantics, strict canonical decoder inversion, well-formed output bytes, the
+exact gate count, a quadratic serialized-output bound in external input
+length, and fail-closed equivalence on every bitstring. It also composes
+semantically with the concrete locked-NAND threshold builder. This pure
+compiler has no finite work-machine execution, \code{RawRefinement}, or
+\code{PolynomialTimeFunction}; it is not yet a packaged concrete polynomial
+reduction.
 
 The new rectangular schedule allocates exact constraint, clause, token, and raw-bit opportunities
 without reading the already-materialized program, formula, token encoding, or encoded formula as
@@ -583,7 +597,7 @@ SAT completeness, SAT in P, and the root theorem remain absent.
 \section{Formal milestone ledger}
 
 Each earned row requires exact compiled names and theorem kinds, empty axiom closures, per-name
-domain-separated kernel-type SHA-256 matches for 2035 detailed candidates, and the pinned whole-Lean
+domain-separated kernel-type SHA-256 matches for 2053 detailed candidates, and the pinned whole-Lean
 source closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
 {\small
@@ -660,20 +674,21 @@ Locked-NAND satisfiable separation and typed semantic threshold & formalized & F
 Encoded locked-NAND semantic boundary & formalized-semantic-boundary & A strict version-zero bit grammar round-trips normalized NAND circuits and complete locked-NAND candidates; the pure all-bitstring transformation is fail-closed and preserves source satisfiability at the exact target threshold. & This is not a parser/validator machine, emitter machine, RawRefinement, PolynomialReduction, construction-runtime or output-size bound, abstract locked-NAND threshold discharge, CNFSAT-in-P result, or P = NP. \\
 Concrete strict-v0 locked-NAND source parser & formalized-foundation-only & One literal nine-symbol finite work machine validates every strict version-zero source bitstring: it accepts exactly ValidEncodedCircuit, preserves valid bytes, clears invalid bytes, cannot time out within the proved compiled cubic bound, and supplies polynomial-time machine/function witnesses plus the validator's exact leaf RawRefinement. & This source parser alone does not emit the locked-NAND target or establish the source-to-target PolynomialReduction. The downstream emitter now supplies its own runtime/output bounds and strict composition, but the abstract locked-NAND threshold assumption, CNFSAT-in-P result, NP-hardness or NP-completeness transport, and P = NP remain absent. \\
 Concrete strict-v0 locked-NAND target emitter & formalized-foundation-only & One literal 1,387,921-rule grammar-only controller emits the exact direct locked-NAND target on every grammar-decoded circuit, rejects malformed grammar with empty output, cannot time out within an explicit all-input polynomial, has an explicit quadratic output-size bound, and supplies compiled polynomial-time machine/function witnesses, exact leaf RawRefinement, and strict parser/emitter composition computing buildLockedNANDInstance. & The standalone emitter intentionally accepts every grammar-decoded raw circuit, including intrinsically invalid references; strict fail-closed semantics come from parser composition. The standalone emitter does not itself package the language equivalence as PolynomialReduction; the downstream concrete reduction milestone now does. The abstract locked-NAND threshold assumption, CNFSAT-in-P result, NP-hardness transport, and P = NP remain absent. \\
-Concrete strict-v0 locked-NAND polynomial reduction & formalized-polynomial-reduction & The existing strict parser/emitter composition is packaged as a concrete polynomial many-one reduction from EncodedNANDSAT to EncodedLockedNANDThreshold, with exact function identity, exact output, all-bitstring language equivalence, a ReducesTo witness, and recursive raw-machine refinement. & This does not identify the concrete source language with CNFSAT or establish NP-hardness, discharge the abstract target-language assumption, prove the report-level locked-NAND threshold theorem, put CNFSAT in P, complete residual minimization or ZeroSlack, or prove P = NP. \\
+Concrete strict-v0 locked-NAND polynomial reduction & formalized-polynomial-reduction & The existing strict parser/emitter composition is packaged as a concrete polynomial many-one reduction from EncodedNANDSAT to EncodedLockedNANDThreshold, with exact function identity, exact output, all-bitstring language equivalence, a ReducesTo witness, and recursive raw-machine refinement. & The downstream semantic compiler now identifies CNFSAT with this concrete source language, but no finite-machine implementation or PolynomialTimeFunction for that compiler has been formalized. This milestone does not establish NP-hardness, discharge the abstract target-language assumption, prove the report-level locked-NAND threshold theorem, put CNFSAT in P, complete residual minimization or ZeroSlack, or prove P = NP. \\
+Concrete CNF-to-NAND semantic compiler & formalized-semantic-boundary & A total answer-independent compiler transforms every strict canonical CNF formula into an intrinsically topological well-formed NAND circuit, preserves satisfiability exactly, proves the exact gate count and a quadratic serialized-output bound, fails closed on every malformed bitstring, and composes semantically with the concrete locked-NAND threshold builder. & This is a pure semantic and size-bound compiler, not yet a compiled finite work machine, a PolynomialTimeFunction, or a PolynomialReduction witness. It does not establish CNFSAT NP-hardness transport, a deterministic polynomial-time CNFSAT decider, the abstract report-level locked-NAND premise, ZeroSlack/PCCMin, or P = NP. \\
 Conditional locked-NAND threshold boundary & formalized-with-premises & A proof-bearing six-premise candidate boundary for an arbitrary satisfiable proposition. & The premises are not instantiated by a uniform SAT-to-locked-NAND builder. \\
 Fail-closed explicit-list residual routes & formalized-explicit-list-only & Executable strict-gain search over a caller-supplied finite implementation list. & Unresolved excludes no gain outside the supplied list and cannot imply ZeroSlack. \\
-Global locked-NAND construction and threshold & not-formalized & A uniform encoded polynomial-time SAT instance builder and the report-level locked-NAND threshold theorem linked to that builder. & The strict encoding, total source parser, literal target emitter, exact formula bytes, strict parser/emitter composition, polynomial runtime, output-size bound, recursive RawRefinement, and concrete strict-v0 source-to-target PolynomialReduction are now formalized. The concrete languages are not yet linked to the report-level theorem, and the abstract threshold assumption remains. \\
+Global locked-NAND construction and threshold & not-formalized & A uniform encoded polynomial-time SAT instance builder and the report-level locked-NAND threshold theorem linked to that builder. & The strict encoding, total source parser, literal target emitter, exact formula bytes, strict parser/emitter composition, polynomial runtime, output-size bound, recursive RawRefinement, concrete strict-v0 source-to-target PolynomialReduction, and semantic CNFSAT-to-NAND compiler are now formalized. The new CNF compiler does not yet have a finite-machine PolynomialTimeFunction or PolynomialReduction witness; the concrete target language is not linked to the report-level theorem, and the abstract threshold assumption remains. \\
 Global ZeroSlack, PCCMin, and polynomial runtime & not-formalized & Complete residual routing, global ZeroSlack contradiction, exact minimization, and polynomial bounds. & Proof-bearing result structures and explicit-list failure do not supply global completeness. \\
-Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-machine-linked complexity classes, concrete SAT completeness and a SAT decider, plus the publication root theorem. & The concrete target definition remains inactive: CNF-SAT now has a raw-machine verifier and NP-membership proof, but a deterministic polynomial-time CNF-SAT decider, NP-completeness transport, and PNP.Main.p\_eq\_np remain absent; the legacy string-handle bridge is ineligible. \\
+Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-machine-linked complexity classes, concrete SAT completeness and a SAT decider, plus the publication root theorem. & The concrete target definition remains inactive: CNF-SAT now has a raw-machine verifier, NP-membership proof, and semantic CNF-to-NAND compiler, but the compiler has no finite-machine polynomial-time witness, and a deterministic polynomial-time CNF-SAT decider, NP-completeness transport, and PNP.Main.p\_eq\_np remain absent; the legacy string-handle bridge is ineligible. \\
 \bottomrule
 \end{longtable}
 }
 
 \section{Compiled inventory summary}
 
-The inventory contains 20965 exported \code{PNP.*} kernel declarations from
-185 modules. It excludes 11692 private compiler auxiliaries.
+The inventory contains 21020 exported \code{PNP.*} kernel declarations from
+186 modules. It excludes 11970 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -687,22 +702,23 @@ PNP.\allowbreak{}Bridge & 93 & 22 \\
 PNP.\allowbreak{}Complexity & 93 & 20 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Bit\allowbreak{}String & 123 & 60 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CNF & 247 & 60 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}CNFTo\allowbreak{}NAND & 70 & 62 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CNFVerifier & 10 & 7 \\
-PNP.\allowbreak{}Concrete.\allowbreak{}CNFWork\allowbreak{}Correctness & 858 & 524 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}CNFWork\allowbreak{}Correctness & 855 & 521 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CNFWork\allowbreak{}Frame\allowbreak{}Correctness & 16 & 4 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CNFWork\allowbreak{}Input & 29 & 14 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CNFWork\allowbreak{}Machine & 85 & 3 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CNFWork\allowbreak{}Transitions & 64 & 63 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CNFWork\allowbreak{}Universal\allowbreak{}Correctness & 294 & 145 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Complexity & 312 & 92 \\
-PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Body\allowbreak{}Start\allowbreak{}Prefix & 86 & 67 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Body\allowbreak{}Start\allowbreak{}Prefix & 85 & 66 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Complete\allowbreak{}Header & 134 & 85 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Dynamic\allowbreak{}Token\allowbreak{}Cursor\allowbreak{}Step & 68 & 54 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Fifth\allowbreak{}Clause\allowbreak{}Padding\allowbreak{}Run & 143 & 109 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}First\allowbreak{}Clause\allowbreak{}Padding\allowbreak{}Run & 160 & 114 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}First\allowbreak{}Clause\allowbreak{}Prefix & 120 & 85 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}First\allowbreak{}Constraint\allowbreak{}Padding\allowbreak{}Run & 158 & 124 \\
-PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}First\allowbreak{}Literal\allowbreak{}Prefix & 125 & 103 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}First\allowbreak{}Literal\allowbreak{}Prefix & 121 & 99 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}First\allowbreak{}Token\allowbreak{}Prefix & 48 & 36 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Fourth\allowbreak{}Clause\allowbreak{}First\allowbreak{}Literal\allowbreak{}Prefix & 138 & 102 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Fourth\allowbreak{}Clause\allowbreak{}Padding\allowbreak{}Run & 148 & 114 \\
@@ -735,10 +751,10 @@ PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builde
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Third\allowbreak{}Clause\allowbreak{}Prefix & 93 & 76 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Third\allowbreak{}Clause\allowbreak{}Second\allowbreak{}Literal\allowbreak{}Prefix & 213 & 158 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Third\allowbreak{}Clause\allowbreak{}Separator\allowbreak{}Step & 81 & 66 \\
-PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Token\allowbreak{}Appender & 104 & 69 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Token\allowbreak{}Appender & 100 & 65 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Unary\allowbreak{}Polynomial & 208 & 119 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Formula\allowbreak{}Cursor & 259 & 121 \\
-PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Formula\allowbreak{}Schedule & 112 & 81 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Formula\allowbreak{}Schedule & 109 & 78 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Formula\allowbreak{}Size & 168 & 149 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Layout & 204 & 71 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Local\allowbreak{}CNF & 172 & 53 \\
@@ -929,10 +945,10 @@ npm run report:check
 \end{verbatim}
 }
 
-The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-30-92}. Its exact byte digest is
-\code{3413510e8712416cdb1b5d846053e5c886bbc1cd550fe7533411573e5f88bf64}. The report is regenerated from that inventory and the reviewed
+The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-31-93}. Its exact byte digest is
+\code{576816bd782378cd1d19ad1de76485b82896e6f141853946b6e0ad7df1fefa82}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{8f98bd81a6993bf025b232863107c1e71f932f509d6653cd92189acb6922958c}; the computed and pinned values match. Successful regeneration
+\code{daed8c40eb6416b42d6b78d87b118b8033bbb5f3e857874c3d1ee45cf89e8876}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 

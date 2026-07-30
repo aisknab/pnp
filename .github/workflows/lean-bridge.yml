@@ -10,14 +10,17 @@ on:
       - 'lean/PNP/Concrete/LockedNANDSourceParser*.lean'
       - 'lean/PNP/Concrete/LockedNANDTargetEmitter*.lean'
       - 'lean/PNP/Concrete/LockedNANDPolynomialReduction.lean'
+      - 'lean/PNP/Concrete/CNFToNAND.lean'
       - 'lean-audit/**'
       - 'lean-audit/PNPConcreteLockedNANDSourceParserAxiomAudit.lean'
       - 'lean-audit/PNPConcreteLockedNANDTargetEmitterAxiomAudit.lean'
       - 'lean-audit/PNPConcreteLockedNANDPolynomialReductionAxiomAudit.lean'
+      - 'lean-audit/PNPConcreteCNFToNANDAxiomAudit.lean'
       - 'lean-regression/**'
       - 'lean-regression/PNPConcreteLockedNANDSourceParser.lean'
       - 'lean-regression/PNPConcreteLockedNANDTargetEmitter.lean'
       - 'lean-regression/PNPConcreteLockedNANDPolynomialReduction.lean'
+      - 'lean-regression/PNPConcreteCNFToNAND.lean'
       - 'formal-publication0.mjs'
       - 'pcc-formal-reconstruction-status0.mjs'
       - 'pcc-formal-public-surface0.mjs'
@@ -119,9 +122,11 @@ on:
       - 'audits/lean-concrete-locked-nand-source-parser0.test.mjs'
       - 'audits/lean-concrete-locked-nand-target-emitter0.test.mjs'
       - 'audits/lean-concrete-locked-nand-polynomial-reduction0.test.mjs'
+      - 'audits/lean-concrete-cnf-to-nand0.test.mjs'
       - 'audits/lean-residual-routes0.test.mjs'
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_locked_nand_polynomial_reduction.md'
+      - 'docs/lean_concrete_cnf_to_nand_semantic_compiler.md'
       - 'docs/lean_concrete_machine.md'
       - 'docs/lean_tape_handoff.md'
       - 'docs/lean_tape_blank_equivalence.md'
@@ -203,14 +208,17 @@ on:
       - 'lean/PNP/Concrete/LockedNANDSourceParser*.lean'
       - 'lean/PNP/Concrete/LockedNANDTargetEmitter*.lean'
       - 'lean/PNP/Concrete/LockedNANDPolynomialReduction.lean'
+      - 'lean/PNP/Concrete/CNFToNAND.lean'
       - 'lean-audit/**'
       - 'lean-audit/PNPConcreteLockedNANDSourceParserAxiomAudit.lean'
       - 'lean-audit/PNPConcreteLockedNANDTargetEmitterAxiomAudit.lean'
       - 'lean-audit/PNPConcreteLockedNANDPolynomialReductionAxiomAudit.lean'
+      - 'lean-audit/PNPConcreteCNFToNANDAxiomAudit.lean'
       - 'lean-regression/**'
       - 'lean-regression/PNPConcreteLockedNANDSourceParser.lean'
       - 'lean-regression/PNPConcreteLockedNANDTargetEmitter.lean'
       - 'lean-regression/PNPConcreteLockedNANDPolynomialReduction.lean'
+      - 'lean-regression/PNPConcreteCNFToNAND.lean'
       - 'formal-publication0.mjs'
       - 'pcc-formal-reconstruction-status0.mjs'
       - 'pcc-formal-public-surface0.mjs'
@@ -312,9 +320,11 @@ on:
       - 'audits/lean-concrete-locked-nand-source-parser0.test.mjs'
       - 'audits/lean-concrete-locked-nand-target-emitter0.test.mjs'
       - 'audits/lean-concrete-locked-nand-polynomial-reduction0.test.mjs'
+      - 'audits/lean-concrete-cnf-to-nand0.test.mjs'
       - 'audits/lean-residual-routes0.test.mjs'
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_locked_nand_polynomial_reduction.md'
+      - 'docs/lean_concrete_cnf_to_nand_semantic_compiler.md'
       - 'docs/lean_concrete_machine.md'
       - 'docs/lean_tape_handoff.md'
       - 'docs/lean_tape_blank_equivalence.md'
@@ -2219,6 +2229,33 @@ jobs:
 
       - name: Run strict-v0 locked-NAND polynomial-reduction hostile audit
         run: node --test audits/lean-concrete-locked-nand-polynomial-reduction0.test.mjs
+
+      - name: Print CNF-to-NAND semantic-compiler axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFToNANDAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.")" -eq 41
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|propext, Quot\.sound)\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected CNF-to-NAND semantic-compiler axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'CNF-to-NAND semantic compiler reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms:')" -eq 41
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 16
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 14
+
+      - name: Run CNF-to-NAND semantic-compiler regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFToNAND.lean
+
+      - name: Run CNF-to-NAND semantic-compiler hostile audit
+        run: node --test audits/lean-concrete-cnf-to-nand0.test.mjs
 
       - name: Print explicit-list residual-route axioms
         run: |

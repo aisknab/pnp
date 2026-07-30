@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-30-92",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-31-93",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,9 +17,27 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "8f98bd81a6993bf025b232863107c1e71f932f509d6653cd92189acb6922958c",
+  "milestoneSourceClosureSha256": "daed8c40eb6416b42d6b78d87b118b8033bbb5f3e857874c3d1ee45cf89e8876",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
+    "PNP.Concrete.CNFToNAND.buildLockedNANDFromCNF_correct": "bec1b560f9aca586a63372b66d117b7e41bb2830244651a046c8c5604cb83bb7",
+    "PNP.Concrete.CNFToNAND.cnfToNANDOutputSizePolynomial_eval": "b9f50a2ab6dc7e2b96c7a56a96ca0dffaa550fe6a5c04dc500cf87ea14f1b58b",
+    "PNP.Concrete.CNFToNAND.compileEncodedCNFToNAND_correct": "00ca8667e061fcec81bba0b667b00c5d079bac3be6d822bbef8143128e3ef378",
+    "PNP.Concrete.CNFToNAND.compileEncodedCNFToNAND_of_decoded": "0cf6b70c9198e4411b395824caf260f261c87f685be51973e6f101067a30a719",
+    "PNP.Concrete.CNFToNAND.compileEncodedCNFToNAND_of_malformed": "02fc5a015699e63deae7a9fbe7beebdca95cd10a82d60f59975d6b8e14e88c05",
+    "PNP.Concrete.CNFToNAND.compileEncodedCNFToNAND_size_le": "68456996b2894d4cbc340933f7402800819efedf189f30d36bfb28caaec3fa0a",
+    "PNP.Concrete.CNFToNAND.compileFormula_gateCount_exact": "6dc747fb980879b6d3287df260f0479a7be14e1dd332e1aa6b1a93663479b5cf",
+    "PNP.Concrete.CNFToNAND.compileFormula_gateCount_le": "fa1d6ec0c97350b579845b511886aa2d22fda309dd836d1eecbf297d361306c8",
+    "PNP.Concrete.CNFToNAND.compileFormula_inputCount": "0566e8b291362fd0023cc14515b93a449204aa5d451206dd3aca5e152b5abe74",
+    "PNP.Concrete.CNFToNAND.compileFormula_output_is_gate": "9ff1cc16506ef47f17bdd42960f6f4b85e4c4e9ecd9de910b92483316228ed10",
+    "PNP.Concrete.CNFToNAND.compileFormula_satisfiable_iff": "18b7fb6b9f883d2856b4e38cf6591445faa85f25e4bab179c264abc520716d2d",
+    "PNP.Concrete.CNFToNAND.compileFormula_wellFormed": "9439a0166de39d674eda4a8abe58c327e24770275a66ef2e9743c35d6787eb21",
+    "PNP.Concrete.CNFToNAND.compiledFormulaCircuit_eval_eq_true_iff": "b7eb59df8c9fb1db41a4ec32ea35d39cae0db546f0bb81c943d588f374980a86",
+    "PNP.Concrete.CNFToNAND.compiledFormulaCircuit_satisfiable_iff": "e88dc11492aa681196b6526402055d972f7fed4f6118b5e93d6f1033321f8aa9",
+    "PNP.Concrete.CNFToNAND.decodeValidCircuit_encode_compileFormula": "940fc051622b0bb5c58436f9ca129af5511112177e0782b7294148ece316f0d1",
+    "PNP.Concrete.CNFToNAND.empty_not_encodedNANDSAT": "6b3b3fc1a2556e9a85328c445ae1f7eacb64ea34ae093d5871e5e2a94560e9b2",
+    "PNP.Concrete.CNFToNAND.encodeCNF_of_decodeEncodedCNF": "a56dccb2670f82612e631706445aed45fcb7870cec9ce8870554c815c5d4aa90",
+    "PNP.Concrete.CNFToNAND.formula_satisfiable_iff_encoded_compileFormula": "9e6f42889012c0fbd90718bce18ce1619d598934ced43411bc1a775bb80227dd",
     "PNP.Concrete.CookLevin.assignmentAt_assignmentOf": "138ace06e46c2ba101542489b6bb13a2fbff763efa13eb8575ab60939cc709cc",
     "PNP.Concrete.CookLevin.atLeastOneClause_satisfied_iff": "75c0347a2a50292afbf475b83655688fd926101bba87bedb79aa6f0b545ada43",
     "PNP.Concrete.CookLevin.BoundedLiteral.emit_variable_lt": "c089b0fedc7320ec14f46b5b74f7ec26158cdad85ecbe647b4c728660dcb6a68",
@@ -4823,7 +4841,34 @@
         "PNP.Concrete.LockedNAND.encodedNANDSAT_reducesTo_encodedLockedNANDThreshold",
         "PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_hasRawRefinement"
       ],
-      "nonClaim": "This does not identify the concrete source language with CNFSAT or establish NP-hardness, discharge the abstract target-language assumption, prove the report-level locked-NAND threshold theorem, put CNFSAT in P, complete residual minimization or ZeroSlack, or prove P = NP."
+      "nonClaim": "The downstream semantic compiler now identifies CNFSAT with this concrete source language, but no finite-machine implementation or PolynomialTimeFunction for that compiler has been formalized. This milestone does not establish NP-hardness, discharge the abstract target-language assumption, prove the report-level locked-NAND threshold theorem, put CNFSAT in P, complete residual minimization or ZeroSlack, or prove P = NP."
+    },
+    {
+      "id": "concrete-cnf-to-nand-semantic-compiler",
+      "title": "Concrete CNF-to-NAND semantic compiler",
+      "classification": "formalized-semantic-boundary",
+      "scope": "A total answer-independent compiler transforms every strict canonical CNF formula into an intrinsically topological well-formed NAND circuit, preserves satisfiability exactly, proves the exact gate count and a quadratic serialized-output bound, fails closed on every malformed bitstring, and composes semantically with the concrete locked-NAND threshold builder.",
+      "requiredTheorems": [
+        "PNP.Concrete.CNFToNAND.encodeCNF_of_decodeEncodedCNF",
+        "PNP.Concrete.CNFToNAND.compileFormula_inputCount",
+        "PNP.Concrete.CNFToNAND.compileFormula_output_is_gate",
+        "PNP.Concrete.CNFToNAND.compileFormula_wellFormed",
+        "PNP.Concrete.CNFToNAND.decodeValidCircuit_encode_compileFormula",
+        "PNP.Concrete.CNFToNAND.compiledFormulaCircuit_eval_eq_true_iff",
+        "PNP.Concrete.CNFToNAND.compiledFormulaCircuit_satisfiable_iff",
+        "PNP.Concrete.CNFToNAND.compileFormula_satisfiable_iff",
+        "PNP.Concrete.CNFToNAND.formula_satisfiable_iff_encoded_compileFormula",
+        "PNP.Concrete.CNFToNAND.compileFormula_gateCount_exact",
+        "PNP.Concrete.CNFToNAND.compileFormula_gateCount_le",
+        "PNP.Concrete.CNFToNAND.cnfToNANDOutputSizePolynomial_eval",
+        "PNP.Concrete.CNFToNAND.compileEncodedCNFToNAND_of_decoded",
+        "PNP.Concrete.CNFToNAND.compileEncodedCNFToNAND_of_malformed",
+        "PNP.Concrete.CNFToNAND.compileEncodedCNFToNAND_size_le",
+        "PNP.Concrete.CNFToNAND.empty_not_encodedNANDSAT",
+        "PNP.Concrete.CNFToNAND.compileEncodedCNFToNAND_correct",
+        "PNP.Concrete.CNFToNAND.buildLockedNANDFromCNF_correct"
+      ],
+      "nonClaim": "This is a pure semantic and size-bound compiler, not yet a compiled finite work machine, a PolynomialTimeFunction, or a PolynomialReduction witness. It does not establish CNFSAT NP-hardness transport, a deterministic polynomial-time CNFSAT decider, the abstract report-level locked-NAND premise, ZeroSlack/PCCMin, or P = NP."
     },
     {
       "id": "locked-nand-conditional-threshold",
@@ -4858,7 +4903,7 @@
       "requiredTheorems": [
         "PNP.Main.locked_nand_threshold"
       ],
-      "nonClaim": "The strict encoding, total source parser, literal target emitter, exact formula bytes, strict parser/emitter composition, polynomial runtime, output-size bound, recursive RawRefinement, and concrete strict-v0 source-to-target PolynomialReduction are now formalized. The concrete languages are not yet linked to the report-level theorem, and the abstract threshold assumption remains."
+    "nonClaim": "The strict encoding, total source parser, literal target emitter, exact formula bytes, strict parser/emitter composition, polynomial runtime, output-size bound, recursive RawRefinement, concrete strict-v0 source-to-target PolynomialReduction, and semantic CNFSAT-to-NAND compiler are now formalized. The new CNF compiler does not yet have a finite-machine PolynomialTimeFunction or PolynomialReduction witness; the concrete target language is not linked to the report-level theorem, and the abstract threshold assumption remains."
     },
     {
       "id": "global-zeroslack-pccmin",
@@ -4879,7 +4924,7 @@
       "requiredTheorems": [
         "PNP.Main.p_eq_np"
       ],
-      "nonClaim": "The concrete target definition remains inactive: CNF-SAT now has a raw-machine verifier and NP-membership proof, but a deterministic polynomial-time CNF-SAT decider, NP-completeness transport, and PNP.Main.p_eq_np remain absent; the legacy string-handle bridge is ineligible."
+    "nonClaim": "The concrete target definition remains inactive: CNF-SAT now has a raw-machine verifier, NP-membership proof, and semantic CNF-to-NAND compiler, but the compiler has no finite-machine polynomial-time witness, and a deterministic polynomial-time CNF-SAT decider, NP-completeness transport, and PNP.Main.p_eq_np remain absent; the legacy string-handle bridge is ineligible."
     }
   ]
 }

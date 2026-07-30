@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-30-92');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-31-93');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -655,6 +655,32 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanConcreteLockedNANDPolynomialReductionScope,
     'strict-version-zero-parser-emitter-polynomial-reduction-with-exact-language-equivalence-and-recursive-raw-refinement',
   );
+  for (const field of [
+    'leanConcreteCNFToNANDSemanticCompilerFormalized',
+    'leanConcreteCNFToNANDSemanticCompilerAxiomAuditPassed',
+    'leanConcreteCNFToNANDExactCodecCanonicalityFormalized',
+    'leanConcreteCNFToNANDTypedTopologicalCompilationFormalized',
+    'leanConcreteCNFToNANDWellFormedOutputFormalized',
+    'leanConcreteCNFToNANDExactSemanticsFormalized',
+    'leanConcreteCNFToNANDEdgeSemanticsFormalized',
+    'leanConcreteCNFToNANDExactGateCountFormalized',
+    'leanConcreteCNFToNANDPolynomialOutputSizeBoundFormalized',
+    'leanConcreteCNFToNANDAllBitstringFailClosedFormalized',
+    'leanConcreteCNFToNANDLockedThresholdCompositionFormalized',
+  ]) assert.equal(out[field], true, field);
+  assert.equal(
+    out.leanConcreteCNFToNANDSemanticCompilerAuditedDeclarationCount,
+    41,
+  );
+  assert.equal(
+    out.leanConcreteCNFToNANDSemanticCompilerScope,
+    'strict-canonical-cnf-to-intrinsically-topological-nand-semantic-compiler-with-exact-gate-count-quadratic-output-bound-and-all-bitstring-fail-closed-equivalence',
+  );
+  assert.equal(out.leanConcreteCNFToNANDFiniteMachineFormalized, false);
+  assert.equal(
+    out.leanConcreteCNFToNANDPolynomialTimeFunctionFormalized,
+    false,
+  );
   assert.equal(out.leanLockedNANDPolynomialBuilderFormalized, false);
   assert.equal(out.leanCompatibleReplacementFormalized, false);
   assert.equal(out.leanGlobalSlackLawFormalized, false);
@@ -700,13 +726,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 20965);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 11430);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 5968);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 11692);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 185);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 21020);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 11477);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 5987);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 11970);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 186);
   assert.equal(status.leanSourceClosureSha256,
-    '8f98bd81a6993bf025b232863107c1e71f932f509d6653cd92189acb6922958c');
+    'daed8c40eb6416b42d6b78d87b118b8033bbb5f3e857874c3d1ee45cf89e8876');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -1128,7 +1154,7 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-30-LOCKED-NAND-POLYNOMIAL-REDUCTION-91');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-31-CNF-TO-NAND-SEMANTIC-COMPILER-92');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
@@ -1268,6 +1294,32 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
     status.leanConcreteLockedNANDPolynomialReductionScope,
     'strict-version-zero-parser-emitter-polynomial-reduction-with-exact-language-equivalence-and-recursive-raw-refinement',
   );
+  for (const field of [
+    'leanConcreteCNFToNANDSemanticCompilerFormalized',
+    'leanConcreteCNFToNANDSemanticCompilerAxiomAuditPassed',
+    'leanConcreteCNFToNANDExactCodecCanonicalityFormalized',
+    'leanConcreteCNFToNANDTypedTopologicalCompilationFormalized',
+    'leanConcreteCNFToNANDWellFormedOutputFormalized',
+    'leanConcreteCNFToNANDExactSemanticsFormalized',
+    'leanConcreteCNFToNANDEdgeSemanticsFormalized',
+    'leanConcreteCNFToNANDExactGateCountFormalized',
+    'leanConcreteCNFToNANDPolynomialOutputSizeBoundFormalized',
+    'leanConcreteCNFToNANDAllBitstringFailClosedFormalized',
+    'leanConcreteCNFToNANDLockedThresholdCompositionFormalized',
+  ]) assert.equal(status[field], true, field);
+  assert.equal(
+    status.leanConcreteCNFToNANDSemanticCompilerAuditedDeclarationCount,
+    41,
+  );
+  assert.equal(
+    status.leanConcreteCNFToNANDSemanticCompilerScope,
+    'strict-canonical-cnf-to-intrinsically-topological-nand-semantic-compiler-with-exact-gate-count-quadratic-output-bound-and-all-bitstring-fail-closed-equivalence',
+  );
+  assert.equal(status.leanConcreteCNFToNANDFiniteMachineFormalized, false);
+  assert.equal(
+    status.leanConcreteCNFToNANDPolynomialTimeFunctionFormalized,
+    false,
+  );
   assert.equal(status.leanLockedNANDPolynomialBuilderFormalized, false);
   assert.equal(status.leanCompatibleReplacementFormalized, false);
   assert.equal(status.leanGlobalSlackLawFormalized, false);
@@ -1337,6 +1389,9 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDPolynomialReductionAxiomAudit.lean'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-regression/PNPConcreteLockedNANDPolynomialReduction.lean'), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-concrete-locked-nand-polynomial-reduction0.test.mjs'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFToNANDAxiomAudit.lean'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFToNAND.lean'), true);
+  assert.equal(status.verificationCommands.includes('node --test audits/lean-concrete-cnf-to-nand0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPResidualRoutesAxiomAudit.lean'), true);
   assert.deepEqual(status.lockedNANDThresholdHostileReviewLemmaInventory, [
     'DirectWireOutputLowerBound',
@@ -1549,6 +1604,17 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanConcreteLockedNANDPolynomialReductionLanguageEquivalenceFormalized',
     'leanConcreteLockedNANDPolynomialReductionWitnessFormalized',
     'leanConcreteLockedNANDPolynomialReductionRawRefinementFormalized',
+    'leanConcreteCNFToNANDSemanticCompilerFormalized',
+    'leanConcreteCNFToNANDSemanticCompilerAxiomAuditPassed',
+    'leanConcreteCNFToNANDExactCodecCanonicalityFormalized',
+    'leanConcreteCNFToNANDTypedTopologicalCompilationFormalized',
+    'leanConcreteCNFToNANDWellFormedOutputFormalized',
+    'leanConcreteCNFToNANDExactSemanticsFormalized',
+    'leanConcreteCNFToNANDEdgeSemanticsFormalized',
+    'leanConcreteCNFToNANDExactGateCountFormalized',
+    'leanConcreteCNFToNANDPolynomialOutputSizeBoundFormalized',
+    'leanConcreteCNFToNANDAllBitstringFailClosedFormalized',
+    'leanConcreteCNFToNANDLockedThresholdCompositionFormalized',
     'leanResidualRoutesListedGainScanFormalized',
     'leanResidualRoutesAxiomAuditPassed',
     'leanResidualRoutesGainSoundnessFormalized',
@@ -1577,6 +1643,8 @@ test('formal reconstruction status rejects unearned broad downstream NAND claims
     'leanGlobalSlackLawFormalized',
     'leanLockedNANDBuilderFormalized',
     'leanLockedNANDThresholdFormalized',
+    'leanConcreteCNFToNANDFiniteMachineFormalized',
+    'leanConcreteCNFToNANDPolynomialTimeFunctionFormalized',
     'leanResidualRoutesCandidateListCompletenessFormalized',
     'leanResidualRoutesGlobalGainCompletenessFormalized',
     'leanZeroSlackPositiveSlackContradictionFormalized',
