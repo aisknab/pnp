@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-29-91",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-30-92",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "b54846d2e1bf730445fce72e21ec9a82465a32b3be6a473d037e882da87ec394",
+  "milestoneSourceClosureSha256": "8f98bd81a6993bf025b232863107c1e71f932f509d6653cd92189acb6922958c",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CookLevin.assignmentAt_assignmentOf": "138ace06e46c2ba101542489b6bb13a2fbff763efa13eb8575ab60939cc709cc",
@@ -1782,7 +1782,12 @@
     "PNP.Concrete.LockedNAND.decodeElaboratedCircuit_encodeCircuit_ofCircuit": "2100056c33b88ef04bd7db5c12ae458d4336dd90400baa2e0d0dc6b96b12c6dd",
     "PNP.Concrete.LockedNAND.decodeLockedInstance_encodeLockedInstance": "8eaf33980f5ded9ded8c35183ba634cca7e5db2de7e03ce055da0f9fb5049dc4",
     "PNP.Concrete.LockedNAND.decodeTokens_encodeTokens": "c3bb485a0fc23e33bc70dd16c77efbd63100acf72c46e17045bd7b8ceef2c1fc",
+    "PNP.Concrete.LockedNAND.encodedNANDSAT_reducesTo_encodedLockedNANDThreshold": "6c133d95b3eb1d8d04f89be467dfbe6405883cb352654eacc5b8a23b99857f4d",
     "PNP.Concrete.LockedNAND.encoded_fullCandidate_threshold_iff_satisfiable": "fb43665ecc791a7b2825cb13491288f0f007f8e2cf1cdcd620e0c192494d912b",
+    "PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_correct": "94955e4d9826f8364e0ecae478eb33cc92620403673db079c7f4a961c15b3739",
+    "PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_function": "3e8000fd18d8836c1ae1ded6b3d0bb46d0ea618c31ba32c7f1425773e62d09c3",
+    "PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_hasRawRefinement": "9f0b15fadf98e634edafe5d6a2025d1d92424a6876a018802153a96b934b1061",
+    "PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_output": "06df8e094590a5b0bf522a9daf5921a28667c7d44e73d447d9366ae201ca3ef4",
     "PNP.Concrete.LockedNAND.RawBuilder.rawLockedInstance_of_elaborate": "410e04af4a9b137bd47635b19e695c71147c4405583b0736a39ba58ad388506b",
     "PNP.Concrete.LockedNAND.RawBuilder.targetBytes_of_elaborated": "f9a282f4879b6d5596f53e5a3b99ee98db4f5e1f2722fecac4a6e10f4c762deb",
     "PNP.Concrete.LockedNAND.RawCandidate.elaborate_ofCandidate": "8e8cac3274337782776be94c76653f8223857b60abad641db312d59a9d79b3fa",
@@ -4804,7 +4809,21 @@
         "PNP.Concrete.LockedNAND.TargetEmitterControllerCompiled.rawTargetBytesPolynomialTimeFunction_output",
         "PNP.Concrete.LockedNAND.TargetEmitterControllerCompiled.strictLockedNANDPolynomialTimeFunction_output"
       ],
-      "nonClaim": "The standalone emitter intentionally accepts every grammar-decoded raw circuit, including intrinsically invalid references; strict fail-closed semantics come from parser composition. This milestone does not yet package the language equivalence as PolynomialReduction, discharge the abstract locked-NAND threshold assumption, put CNFSAT in P, transport NP-hardness, or prove P = NP."
+      "nonClaim": "The standalone emitter intentionally accepts every grammar-decoded raw circuit, including intrinsically invalid references; strict fail-closed semantics come from parser composition. The standalone emitter does not itself package the language equivalence as PolynomialReduction; the downstream concrete reduction milestone now does. The abstract locked-NAND threshold assumption, CNFSAT-in-P result, NP-hardness transport, and P = NP remain absent."
+    },
+    {
+      "id": "concrete-locked-nand-polynomial-reduction",
+      "title": "Concrete strict-v0 locked-NAND polynomial reduction",
+      "classification": "formalized-polynomial-reduction",
+      "scope": "The existing strict parser/emitter composition is packaged as a concrete polynomial many-one reduction from EncodedNANDSAT to EncodedLockedNANDThreshold, with exact function identity, exact output, all-bitstring language equivalence, a ReducesTo witness, and recursive raw-machine refinement.",
+      "requiredTheorems": [
+        "PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_function",
+        "PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_output",
+        "PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_correct",
+        "PNP.Concrete.LockedNAND.encodedNANDSAT_reducesTo_encodedLockedNANDThreshold",
+        "PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_hasRawRefinement"
+      ],
+      "nonClaim": "This does not identify the concrete source language with CNFSAT or establish NP-hardness, discharge the abstract target-language assumption, prove the report-level locked-NAND threshold theorem, put CNFSAT in P, complete residual minimization or ZeroSlack, or prove P = NP."
     },
     {
       "id": "locked-nand-conditional-threshold",
@@ -4839,7 +4858,7 @@
       "requiredTheorems": [
         "PNP.Main.locked_nand_threshold"
       ],
-      "nonClaim": "The strict encoding, total source parser, literal target emitter, exact formula bytes, strict parser/emitter composition, polynomial runtime, output-size bound, and recursive RawRefinement are now formalized. The source/target language equivalence is not yet packaged as PolynomialReduction or linked to the report-level threshold theorem, and the abstract threshold assumption remains."
+      "nonClaim": "The strict encoding, total source parser, literal target emitter, exact formula bytes, strict parser/emitter composition, polynomial runtime, output-size bound, recursive RawRefinement, and concrete strict-v0 source-to-target PolynomialReduction are now formalized. The concrete languages are not yet linked to the report-level theorem, and the abstract threshold assumption remains."
     },
     {
       "id": "global-zeroslack-pccmin",

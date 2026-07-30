@@ -957,10 +957,28 @@ Composition with the strict source parser computes
 reference is accepted at the standalone grammar boundary but cleared by the
 strict composition. The 3,295-declaration transcript permits only empty
 closure, `propext`, and `propext` with `Quot.sound`. This closes target
-emission and strict parser/emitter composition, but does not yet package the
-language theorem as `PolynomialReduction` or discharge the abstract
-`PNP.LockedNANDThreshold` assumption. See
+emission and strict parser/emitter composition. The following reduction
+milestone packages that composition; this emitter module alone does not
+discharge the abstract `PNP.LockedNANDThreshold` assumption. See
 [`lean_concrete_locked_nand_target_emitter.md`](./lean_concrete_locked_nand_target_emitter.md).
+
+`PNP.Concrete.LockedNANDPolynomialReduction` now packages the existing strict
+parser/emitter function as
+`PolynomialReduction EncodedNANDSAT EncodedLockedNANDThreshold`. Its function
+field is exactly `strictLockedNANDPolynomialTimeFunction`; its output theorem
+is exactly `buildLockedNANDInstance`; and its correctness theorem is an iff on
+every bitstring. The package also exposes the corresponding `ReducesTo`
+witness and preserves the recursive `FunctionProgram.RawRefinement`.
+
+The audit covers all seven new public declarations and nine reused boundary
+interfaces. It permits only the existing Lean-standard `propext` and
+`Quot.sound` closure, with no project axiom, `Classical.choice`, host lookup,
+or caller certificate. This closes the concrete polynomial-reduction
+packaging edge in the legacy locked-NAND route. It does not connect the
+concrete target language to the abstract `PNP.LockedNANDThreshold`, prove the
+report-level threshold theorem, put CNFSAT in P, establish NP-hardness, or
+prove P = NP. See
+[`lean_concrete_locked_nand_polynomial_reduction.md`](./lean_concrete_locked_nand_polynomial_reduction.md).
 
 The historical hostile review named `DirectWireOutputLowerBound`, `MacroDistinct`,
 `TraceEquivalence`, `ZeroOutputConvention`, and `FinalLockSeparation`. The general output lower
@@ -975,9 +993,10 @@ byte-preserving-or-empty output, compiled cubic non-timeout, polynomial
 machine/function witnesses, and its leaf raw refinement. The literal target
 emitter now has exact all-input target bytes, polynomial runtime and output
 bounds, compiled non-timeout, polynomial machine/function witnesses, strict
-parser composition, and recursive raw refinement. Concrete
-`PolynomialReduction` packaging and report-level threshold-language linkage
-remain missing. See
+parser composition, and recursive raw refinement. That composition is now
+packaged as the concrete
+`EncodedNANDSAT`-to-`EncodedLockedNANDThreshold` `PolynomialReduction`.
+Report-level abstract threshold-language linkage remains missing. See
 [`lean_locked_nand_threshold_boundary.md`](./lean_locked_nand_threshold_boundary.md).
 
 The residual-route layer now performs one honest executable operation: it scans an explicit finite

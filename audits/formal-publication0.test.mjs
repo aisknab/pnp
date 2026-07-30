@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 71);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 68);
+  assert.equal(status.formalPublicationMilestones.length, 72);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 69);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -1542,7 +1542,37 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     'PNP.Concrete.LockedNAND.TargetEmitterControllerCompiled.strictLockedNANDPolynomialTimeFunction_output',
   ]);
   assert.match(targetEmitter.scope, /1,387,921-rule grammar-only controller/u);
-  assert.match(targetEmitter.nonClaim, /does not yet package the language equivalence as PolynomialReduction/u);
+  assert.match(
+    targetEmitter.nonClaim,
+    /standalone emitter does not itself package the language equivalence as PolynomialReduction/u,
+  );
+  const polynomialReduction = byId.get(
+    'concrete-locked-nand-polynomial-reduction',
+  );
+  assert.equal(
+    polynomialReduction.status,
+    'formalized-polynomial-reduction',
+  );
+  assert.equal(polynomialReduction.earned, true);
+  assert.equal(
+    polynomialReduction.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.deepEqual(polynomialReduction.requiredTheorems, [
+    'PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_function',
+    'PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_output',
+    'PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_correct',
+    'PNP.Concrete.LockedNAND.encodedNANDSAT_reducesTo_encodedLockedNANDThreshold',
+    'PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_hasRawRefinement',
+  ]);
+  assert.match(
+    polynomialReduction.scope,
+    /concrete polynomial many-one reduction/u,
+  );
+  assert.match(
+    polynomialReduction.nonClaim,
+    /does not identify the concrete source language with CNFSAT/u,
+  );
   assert.equal(byId.get('locked-nand-conditional-threshold').status, 'formalized-with-premises');
   assert.equal(byId.get('explicit-residual-routes').status, 'formalized-explicit-list-only');
   for (const id of [
@@ -1559,10 +1589,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '3eaf540fc74a0ac1ac755592d3219a48389620e4c6aade469c434c1bef464c12');
+    'd7bccc262d21b14440452b5b2d5c13aeef167d36b7d1850f9fda103fb8c9efef');
   assert.equal(map.milestoneSourceClosureSha256,
-    'b54846d2e1bf730445fce72e21ec9a82465a32b3be6a473d037e882da87ec394');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2030);
+    '8f98bd81a6993bf025b232863107c1e71f932f509d6653cd92189acb6922958c');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2035);
   for (const theorem of [
     'PNP.DirectWire.LockedNANDTrace.carrierSeparation',
     'PNP.DirectWire.LockedNANDTrace.finalLock_fresh',
@@ -1884,7 +1914,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [20957, 11424, 5968, 11692, 184]);
+  ], [20965, 11430, 5968, 11692, 185]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
@@ -1916,6 +1946,18 @@ test('canonical report source is current and the committed PDF artifact exists',
   assert.match(
     tex,
     /accepts exactly the valid source encodings, preserves valid source bytes\s+verbatim, and returns the empty word for invalid grammar or references/u,
+  );
+  assert.match(
+    tex,
+    /target-emitter milestone supplies a literal finite controller\s+with an exact all-input polynomial work bound/u,
+  );
+  assert.match(
+    tex,
+    /binds that exact composed function and the already-proved\s+encoded language equivalence as a concrete \\code\{PolynomialReduction\}/u,
+  );
+  assert.match(
+    tex,
+    /Its 16-declaration audit has two empty closures, two\s+using only \\code\{propext\}, and twelve using only \\code\{propext\} and\s+\\code\{Quot\.sound\}/u,
   );
   assert.match(tex, /A literal finite builder emits\s+\\code\{FormulaWidth\} copies of \\code\{T\} followed by \\code\{F\}, \\code\{Sep\}, and the complete positive\s+clause on variables zero, one, and two/u);
   assert.match(tex, /complete positive at-least-one shape clause on variables zero,\s+one, and two/u);

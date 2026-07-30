@@ -720,6 +720,33 @@ See
 [`lean_concrete_locked_nand_target_emitter.md`](./lean_concrete_locked_nand_target_emitter.md)
 for the exact grammar/strict boundary and remaining non-claims.
 
+## Concrete strict-v0 polynomial reduction
+
+`lean/PNP/Concrete/LockedNANDPolynomialReduction.lean` packages the exact
+strict parser/emitter composition as
+`PolynomialReduction EncodedNANDSAT EncodedLockedNANDThreshold`. The
+reduction function is definitionally the existing
+`strictLockedNANDPolynomialTimeFunction`; its output is exactly
+`buildLockedNANDInstance`, its correctness field is the existing all-bitstring
+language equivalence, and its recursive `RawRefinement` is retained.
+
+This closes the concrete reduction-packaging edge in the legacy locked-NAND
+route. It does not discharge the separate abstract threshold-language link.
+Run the focused checks with:
+
+```sh
+lake env lean -DwarningAsError=true \
+  lean-audit/PNPConcreteLockedNANDPolynomialReductionAxiomAudit.lean
+lake env lean -DwarningAsError=true \
+  lean-regression/PNPConcreteLockedNANDPolynomialReduction.lean
+node --test \
+  audits/lean-concrete-locked-nand-polynomial-reduction0.test.mjs
+```
+
+See
+[`lean_concrete_locked_nand_polynomial_reduction.md`](./lean_concrete_locked_nand_polynomial_reduction.md)
+for the exact interface and non-claims.
+
 ## Global locked-NAND layer
 
 `lean/PNP/LockedNAND.lean` keeps the full SAT builder and threshold theorem abstract:
@@ -866,6 +893,9 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
     all-input exact traces, exact target bytes, explicit runtime and output-size polynomials,
     compiled non-timeout, polynomial machine/function witnesses, leaf raw refinement, and strict
     parser/emitter composition with recursive raw refinement.
+25. A concrete strict-v0 polynomial many-one reduction from `EncodedNANDSAT` to
+    `EncodedLockedNANDThreshold`, with exact composed-function identity, exact output,
+    all-bitstring language equivalence, a `ReducesTo` witness, and recursive raw refinement.
 ```
 
 ## Explicit trust base after this pass
@@ -874,7 +904,7 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 1. Checker/reflection soundness: accepted PCCPack emits a semantically valid structured PCCMin loop certificate.
 2. Semantic adequacy of the PCCMin and ZeroSlack certificate fields.
 3. The locked-NAND-to-residual-band reduction theorem.
-4. The encoded polynomial SAT-to-locked-NAND builder and report-level language link beyond the checked typed semantic threshold.
+4. The report-level link from the concrete encoded locked-NAND threshold language to the abstract threshold theorem.
 5. A deterministic polynomial-time decider proving `CNFSAT ∈ P`, together with concrete SAT
    NP-hardness/NP-completeness; the current direct verifier proves only `CNFSAT ∈ NP`.
 6. A compiler/refinement proving that every finite charged function, decision, and verifier
@@ -889,8 +919,8 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 The highest-value next targets are:
 
 ```text
-1. Implement the complete locked-NAND emitter and prove its exact bytes, output-size bound, and
-   runtime bound.
+1. Connect the concrete `EncodedLockedNANDThreshold` language to the report-level abstract
+   locked-NAND threshold theorem without adding an assumption.
 2. Compose the parser and emitter with a raw-machine refinement, package the required concrete
    `PolynomialReduction`, and link it to the abstract `PNP.LockedNANDThreshold` language.
 3. Complete the raw Cook--Levin formula builder and package its concrete polynomial reduction.
