@@ -82,6 +82,31 @@ host, not as a build host.
   `systemd-run` unit has reached its terminal state, and inspect the complete
   log for output appended by later phases.
 
+### Temporary-artifact lifecycle
+
+Temporary means temporary. Every agent-created checkout, fixture directory, log,
+archive, patch, generated helper, and orchestration script on both the local host
+and `pnpbuilder` must have an explicit cleanup point.
+
+- Record each temporary path when it is created. Prefer one task-specific parent
+  directory so the cleanup scope is exact and reviewable.
+- Keep temporary evidence only while a run is active or while diagnosing a current
+  failure. If anything must remain across turns, tell the user its exact path and
+  why it is still needed.
+- After the relevant verification, merge, deployment check, or failure diagnosis
+  is complete, remove every temporary artifact created for that work on both
+  hosts. Do not leave old clean clones, mutation fixtures, logs, archives, or
+  helper scripts for a future agent to discover.
+- Before deleting, resolve and validate every target. Delete only exact named
+  task paths; never use a broad `/tmp`, `/var/tmp`, home-directory, or workspace
+  wildcard, and never touch system, application, or user-owned temporary entries.
+- Use a cleanup trap for short-lived scripts where it will not erase evidence
+  needed to diagnose a failed run. For long verification work, perform an explicit
+  end-of-run cleanup after recording the checked commit, tree, exit status, and
+  resource summary.
+- Finish with a lightweight residual check for the task prefix on both hosts and
+  report any intentional remainder. A successful task should normally leave none.
+
 ### Package-manager preflight
 
 - Inspect `package.json` and the repository lockfiles before choosing an install
