@@ -980,6 +980,23 @@ report-level threshold theorem, put CNFSAT in P, establish NP-hardness, or
 prove P = NP. See
 [`lean_concrete_locked_nand_polynomial_reduction.md`](./lean_concrete_locked_nand_polynomial_reduction.md).
 
+`PNP.Concrete.CNFToNAND` now supplies the next legacy-route semantic edge.
+It traverses every decoded CNF formula structurally and constructs an
+intrinsically topological NAND program without querying satisfiability. Lean
+proves exact valuation semantics, strict canonical decoder inversion,
+well-formed encoded output, the exact gate count, a quadratic serialized
+output bound in external input length, and fail-closed correctness on every
+bitstring. Empty formulas are true, empty clauses are false, and either sign
+of an out-of-range literal is false.
+
+The resulting all-bitstring theorem is
+`CNFSAT bits ↔ EncodedNANDSAT (compileEncodedCNFToNAND bits)`, and pure
+composition with the locked-NAND builder reaches
+`EncodedLockedNANDThreshold`. This is not yet a finite-machine implementation,
+`PolynomialTimeFunction`, `RawRefinement`, or packaged
+`PolynomialReduction`; those runtime/refinement obligations remain. See
+[`lean_concrete_cnf_to_nand_semantic_compiler.md`](./lean_concrete_cnf_to_nand_semantic_compiler.md).
+
 The historical hostile review named `DirectWireOutputLowerBound`, `MacroDistinct`,
 `TraceEquivalence`, `ZeroOutputConvention`, and `FinalLockSeparation`. The general output lower
 bound and model-level free-zero append convention were discharged in preceding layers.

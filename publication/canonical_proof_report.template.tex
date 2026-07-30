@@ -76,7 +76,10 @@
   padding-or-terminating-\code{F} opportunity, a general dynamic formula cursor, arbitrary raw slot decoder,
   and the remaining formula body are not
   implemented, so there is no complete raw
-  polynomial-time formula builder or concrete CNFSAT reduction. The reviewed activation fingerprints
+  polynomial-time Cook--Levin formula builder. A separate universal semantic compiler now translates
+  strict canonical CNF into well-formed topological NAND and preserves satisfiability exactly, but it
+  has no finite-machine refinement or polynomial-time function witness, so there is no complete
+  concrete CNFSAT \code{PolynomialReduction}. The reviewed activation fingerprints
   are unset, no root theorem exists, and the abstract string-handle bridge is never an activation source.
   \vspace{0.3cm}
   \end{minipage}
@@ -124,6 +127,17 @@ equivalent to ordinary raw verifier execution in both input modes. It now also b
 canonical unary-indexed formula encoding by an explicit fixed-verifier polynomial evaluated only at
 external source-input length. That output-size theorem does not execute the formula builder as a raw
 finite machine, prove its construction runtime, or package a concrete polynomial reduction.
+
+The concrete CNF-to-NAND development traverses any decoded formula
+structurally and constructs an intrinsically topological NAND circuit without
+querying satisfiability. Lean proves exact valuation and satisfiability
+semantics, strict canonical decoder inversion, well-formed output bytes, the
+exact gate count, a quadratic serialized-output bound in external input
+length, and fail-closed equivalence on every bitstring. It also composes
+semantically with the concrete locked-NAND threshold builder. This pure
+compiler has no finite work-machine execution, \code{RawRefinement}, or
+\code{PolynomialTimeFunction}; it is not yet a packaged concrete polynomial
+reduction.
 
 The new rectangular schedule allocates exact constraint, clause, token, and raw-bit opportunities
 without reading the already-materialized program, formula, token encoding, or encoded formula as

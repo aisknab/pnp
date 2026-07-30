@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-30-92';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-31-93';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -292,6 +292,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDPolynomialReductionAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPConcreteLockedNANDPolynomialReduction.lean',
   'node --test audits/lean-concrete-locked-nand-polynomial-reduction0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFToNANDAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFToNAND.lean',
+  'node --test audits/lean-concrete-cnf-to-nand0.test.mjs',
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualRoutesAxiomAudit.lean',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
@@ -1118,6 +1121,22 @@ const EXACT_FIELDS = Object.freeze({
   leanConcreteLockedNANDPolynomialReductionRawRefinementFormalized: true,
   leanConcreteLockedNANDPolynomialReductionScope:
     'strict-version-zero-parser-emitter-polynomial-reduction-with-exact-language-equivalence-and-recursive-raw-refinement',
+  leanConcreteCNFToNANDSemanticCompilerFormalized: true,
+  leanConcreteCNFToNANDSemanticCompilerAxiomAuditPassed: true,
+  leanConcreteCNFToNANDSemanticCompilerAuditedDeclarationCount: 41,
+  leanConcreteCNFToNANDExactCodecCanonicalityFormalized: true,
+  leanConcreteCNFToNANDTypedTopologicalCompilationFormalized: true,
+  leanConcreteCNFToNANDWellFormedOutputFormalized: true,
+  leanConcreteCNFToNANDExactSemanticsFormalized: true,
+  leanConcreteCNFToNANDEdgeSemanticsFormalized: true,
+  leanConcreteCNFToNANDExactGateCountFormalized: true,
+  leanConcreteCNFToNANDPolynomialOutputSizeBoundFormalized: true,
+  leanConcreteCNFToNANDAllBitstringFailClosedFormalized: true,
+  leanConcreteCNFToNANDLockedThresholdCompositionFormalized: true,
+  leanConcreteCNFToNANDFiniteMachineFormalized: false,
+  leanConcreteCNFToNANDPolynomialTimeFunctionFormalized: false,
+  leanConcreteCNFToNANDSemanticCompilerScope:
+    'strict-canonical-cnf-to-intrinsically-topological-nand-semantic-compiler-with-exact-gate-count-quadratic-output-bound-and-all-bitstring-fail-closed-equivalence',
   leanLockedNANDPolynomialBuilderFormalized: false,
   leanCompatibleReplacementFormalized: false,
   leanGlobalSlackLawFormalized: false,
@@ -1159,7 +1178,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-30-LOCKED-NAND-POLYNOMIAL-REDUCTION-91',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-31-CNF-TO-NAND-SEMANTIC-COMPILER-92',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -1869,6 +1888,22 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanConcreteLockedNANDPolynomialReductionRawRefinementFormalized: true,
       leanConcreteLockedNANDPolynomialReductionScope:
         'strict-version-zero-parser-emitter-polynomial-reduction-with-exact-language-equivalence-and-recursive-raw-refinement',
+      leanConcreteCNFToNANDSemanticCompilerFormalized: true,
+      leanConcreteCNFToNANDSemanticCompilerAxiomAuditPassed: true,
+      leanConcreteCNFToNANDSemanticCompilerAuditedDeclarationCount: 41,
+      leanConcreteCNFToNANDExactCodecCanonicalityFormalized: true,
+      leanConcreteCNFToNANDTypedTopologicalCompilationFormalized: true,
+      leanConcreteCNFToNANDWellFormedOutputFormalized: true,
+      leanConcreteCNFToNANDExactSemanticsFormalized: true,
+      leanConcreteCNFToNANDEdgeSemanticsFormalized: true,
+      leanConcreteCNFToNANDExactGateCountFormalized: true,
+      leanConcreteCNFToNANDPolynomialOutputSizeBoundFormalized: true,
+      leanConcreteCNFToNANDAllBitstringFailClosedFormalized: true,
+      leanConcreteCNFToNANDLockedThresholdCompositionFormalized: true,
+      leanConcreteCNFToNANDFiniteMachineFormalized: false,
+      leanConcreteCNFToNANDPolynomialTimeFunctionFormalized: false,
+      leanConcreteCNFToNANDSemanticCompilerScope:
+        'strict-canonical-cnf-to-intrinsically-topological-nand-semantic-compiler-with-exact-gate-count-quadratic-output-bound-and-all-bitstring-fail-closed-equivalence',
       leanLockedNANDPolynomialBuilderFormalized: false,
       leanCompatibleReplacementFormalized: false,
       leanGlobalSlackLawFormalized: false,
@@ -1961,7 +1996,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-30-92',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-31-93',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,
