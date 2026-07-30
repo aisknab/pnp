@@ -9,12 +9,15 @@ on:
       - 'lean/**'
       - 'lean/PNP/Concrete/LockedNANDSourceParser*.lean'
       - 'lean/PNP/Concrete/LockedNANDTargetEmitter*.lean'
+      - 'lean/PNP/Concrete/LockedNANDPolynomialReduction.lean'
       - 'lean-audit/**'
       - 'lean-audit/PNPConcreteLockedNANDSourceParserAxiomAudit.lean'
       - 'lean-audit/PNPConcreteLockedNANDTargetEmitterAxiomAudit.lean'
+      - 'lean-audit/PNPConcreteLockedNANDPolynomialReductionAxiomAudit.lean'
       - 'lean-regression/**'
       - 'lean-regression/PNPConcreteLockedNANDSourceParser.lean'
       - 'lean-regression/PNPConcreteLockedNANDTargetEmitter.lean'
+      - 'lean-regression/PNPConcreteLockedNANDPolynomialReduction.lean'
       - 'formal-publication0.mjs'
       - 'pcc-formal-reconstruction-status0.mjs'
       - 'pcc-formal-public-surface0.mjs'
@@ -115,8 +118,10 @@ on:
       - 'audits/lean-concrete-locked-nand-semantic-reduction0.test.mjs'
       - 'audits/lean-concrete-locked-nand-source-parser0.test.mjs'
       - 'audits/lean-concrete-locked-nand-target-emitter0.test.mjs'
+      - 'audits/lean-concrete-locked-nand-polynomial-reduction0.test.mjs'
       - 'audits/lean-residual-routes0.test.mjs'
       - 'docs/lean_bridge.md'
+      - 'docs/lean_concrete_locked_nand_polynomial_reduction.md'
       - 'docs/lean_concrete_machine.md'
       - 'docs/lean_tape_handoff.md'
       - 'docs/lean_tape_blank_equivalence.md'
@@ -197,12 +202,15 @@ on:
       - 'lean/**'
       - 'lean/PNP/Concrete/LockedNANDSourceParser*.lean'
       - 'lean/PNP/Concrete/LockedNANDTargetEmitter*.lean'
+      - 'lean/PNP/Concrete/LockedNANDPolynomialReduction.lean'
       - 'lean-audit/**'
       - 'lean-audit/PNPConcreteLockedNANDSourceParserAxiomAudit.lean'
       - 'lean-audit/PNPConcreteLockedNANDTargetEmitterAxiomAudit.lean'
+      - 'lean-audit/PNPConcreteLockedNANDPolynomialReductionAxiomAudit.lean'
       - 'lean-regression/**'
       - 'lean-regression/PNPConcreteLockedNANDSourceParser.lean'
       - 'lean-regression/PNPConcreteLockedNANDTargetEmitter.lean'
+      - 'lean-regression/PNPConcreteLockedNANDPolynomialReduction.lean'
       - 'formal-publication0.mjs'
       - 'pcc-formal-reconstruction-status0.mjs'
       - 'pcc-formal-public-surface0.mjs'
@@ -303,8 +311,10 @@ on:
       - 'audits/lean-concrete-locked-nand-semantic-reduction0.test.mjs'
       - 'audits/lean-concrete-locked-nand-source-parser0.test.mjs'
       - 'audits/lean-concrete-locked-nand-target-emitter0.test.mjs'
+      - 'audits/lean-concrete-locked-nand-polynomial-reduction0.test.mjs'
       - 'audits/lean-residual-routes0.test.mjs'
       - 'docs/lean_bridge.md'
+      - 'docs/lean_concrete_locked_nand_polynomial_reduction.md'
       - 'docs/lean_concrete_machine.md'
       - 'docs/lean_tape_handoff.md'
       - 'docs/lean_tape_blank_equivalence.md'
@@ -2185,6 +2195,30 @@ jobs:
 
       - name: Run strict-v0 locked-NAND target-emitter hostile audit
         run: node --test audits/lean-concrete-locked-nand-target-emitter0.test.mjs
+
+      - name: Print strict-v0 locked-NAND polynomial-reduction axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDPolynomialReductionAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.")" -eq 16
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|propext, Quot\.sound)\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected strict-v0 locked-NAND polynomial-reduction axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Strict-v0 locked-NAND polynomial reduction reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms:')" -eq 16
+
+      - name: Run strict-v0 locked-NAND polynomial-reduction regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPConcreteLockedNANDPolynomialReduction.lean
+
+      - name: Run strict-v0 locked-NAND polynomial-reduction hostile audit
+        run: node --test audits/lean-concrete-locked-nand-polynomial-reduction0.test.mjs
 
       - name: Print explicit-list residual-route axioms
         run: |

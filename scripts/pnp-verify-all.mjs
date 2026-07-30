@@ -99,6 +99,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-locked-nand-threshold-boundary0.test.mjs',
   'audits/lean-concrete-locked-nand-source-parser0.test.mjs',
   'audits/lean-concrete-locked-nand-target-emitter0.test.mjs',
+  'audits/lean-concrete-locked-nand-polynomial-reduction0.test.mjs',
   'audits/lean-residual-routes0.test.mjs',
   'audits/legacy-v0-archive0.test.mjs',
   'test/current-package-surface0.test.mjs',

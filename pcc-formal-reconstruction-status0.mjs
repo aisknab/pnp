@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-29-91';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-30-92';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -289,6 +289,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDTargetEmitterAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPConcreteLockedNANDTargetEmitter.lean',
   'node --test audits/lean-concrete-locked-nand-target-emitter0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDPolynomialReductionAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPConcreteLockedNANDPolynomialReduction.lean',
+  'node --test audits/lean-concrete-locked-nand-polynomial-reduction0.test.mjs',
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualRoutesAxiomAudit.lean',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
@@ -378,7 +381,8 @@ const NON_CLAIMS = Object.freeze([
   'The global locked-NAND semantic-threshold milestone discharges the satisfiable final-output conditions, all six typed premises, the exact satisfiable/unsatisfiable minimum split, and residual slack at most four for one answer-independent candidate over every finite topological NAND circuit. It uses exhaustive finite satisfiability decision only to eliminate a proposition-level case split and makes no polynomial-runtime claim.',
   'The encoded locked-NAND semantic boundary fixes a strict version-zero grammar, proves direct legacy output-normalization semantics, serializes the complete candidate and source-derived baseline, rejects malformed input, and proves the pure bitstring transformation correct. Its 48 audited declarations use only propext and Quot.sound. It is not a parser/validator machine, emitter machine, RawRefinement, PolynomialReduction, runtime bound, abstract PNP.LockedNANDThreshold discharge, CNFSAT-in-P theorem, or P = NP theorem.',
   'The strict-v0 locked-NAND source parser is one literal 228-state, 2,052-rule machine with unconditional exact behavior on every bitstring: valid sources accept and are preserved byte-for-byte, invalid sources reject with empty output, and the compiled six-for-one machine cannot time out within its explicit cubic bound. Its polynomial-time function and leaf RawRefinement validate source bytes only. The downstream target emitter now composes with it, but this parser alone supplies no PolynomialReduction, abstract threshold-language discharge, CNFSAT-in-P theorem, NP-hardness transport, or P = NP theorem.',
-  'The strict-v0 locked-NAND target emitter is one fixed 1,387,921-rule grammar-only controller. It emits the exact direct raw target on every grammar-decoded circuit, including intrinsically invalid references, rejects malformed grammar with empty output, and has all-input polynomial runtime and output-size bounds. Composition with the strict source parser clears intrinsically invalid inputs and computes buildLockedNANDInstance with recursively compiled RawRefinement. This still does not package the source/target language theorem as PolynomialReduction, discharge the abstract PNP.LockedNANDThreshold assumption, put CNFSAT in P, transport NP-hardness, or prove P = NP.',
+  'The strict-v0 locked-NAND target emitter is one fixed 1,387,921-rule grammar-only controller. It emits the exact direct raw target on every grammar-decoded circuit, including intrinsically invalid references, rejects malformed grammar with empty output, and has all-input polynomial runtime and output-size bounds. Composition with the strict source parser clears intrinsically invalid inputs and computes buildLockedNANDInstance with recursively compiled RawRefinement.',
+  'The strict parser/emitter composition is now packaged as a concrete PolynomialReduction from EncodedNANDSAT to EncodedLockedNANDThreshold, with exact output, all-bitstring language equivalence, a ReducesTo witness, and recursive RawRefinement. This does not discharge the abstract PNP.LockedNANDThreshold assumption, prove PNP.Main.locked_nand_threshold, put CNFSAT in P, transport NP-hardness, complete ZeroSlack/PCCMin, or prove P = NP.',
   'Against the hostile-review inventory, DirectWireOutputLowerBound, global MacroDistinct, semantic-carrier TraceEquivalence, whole-carrier ZeroOutputConvention, and FinalLockSeparation are now discharged; the encoded uniform polynomial builder and its report-level linkage remain missing.',
   'The generic conditional module quantifies an arbitrary satisfiable proposition and baseline natural number. LockedNANDGlobalSemanticThreshold now identifies those with source-circuit SAT and lockedBaselineCount for the typed candidate, but neither module connects that semantic object to the abstract PNP.LockedNANDThreshold language or supplies an encoded polynomial builder.',
   'The executable residual-route scan is complete only for the explicit finite implementation list supplied by its caller; unresolved excludes no unlisted gain and does not imply global minimality or ZeroSlack.',
@@ -1104,7 +1108,16 @@ const EXACT_FIELDS = Object.freeze({
   leanConcreteLockedNANDEmitterOutputSizeBoundFormalized: true,
   leanConcreteLockedNANDEmitterScope:
     'literal-1387921-rule-grammar-only-all-input-target-emitter-with-strict-parser-composition-polynomial-bounds-and-recursive-raw-refinement',
-  leanConcreteLockedNANDPolynomialReductionFormalized: false,
+  leanConcreteLockedNANDPolynomialReductionFormalized: true,
+  leanConcreteLockedNANDPolynomialReductionAxiomAuditPassed: true,
+  leanConcreteLockedNANDPolynomialReductionAuditedDeclarationCount: 16,
+  leanConcreteLockedNANDPolynomialReductionExactFunctionFormalized: true,
+  leanConcreteLockedNANDPolynomialReductionExactOutputFormalized: true,
+  leanConcreteLockedNANDPolynomialReductionLanguageEquivalenceFormalized: true,
+  leanConcreteLockedNANDPolynomialReductionWitnessFormalized: true,
+  leanConcreteLockedNANDPolynomialReductionRawRefinementFormalized: true,
+  leanConcreteLockedNANDPolynomialReductionScope:
+    'strict-version-zero-parser-emitter-polynomial-reduction-with-exact-language-equivalence-and-recursive-raw-refinement',
   leanLockedNANDPolynomialBuilderFormalized: false,
   leanCompatibleReplacementFormalized: false,
   leanGlobalSlackLawFormalized: false,
@@ -1146,7 +1159,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-29-LOCKED-NAND-TARGET-EMITTER-90',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-07-30-LOCKED-NAND-POLYNOMIAL-REDUCTION-91',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -1846,7 +1859,16 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanConcreteLockedNANDEmitterOutputSizeBoundFormalized: true,
       leanConcreteLockedNANDEmitterScope:
         'literal-1387921-rule-grammar-only-all-input-target-emitter-with-strict-parser-composition-polynomial-bounds-and-recursive-raw-refinement',
-      leanConcreteLockedNANDPolynomialReductionFormalized: false,
+      leanConcreteLockedNANDPolynomialReductionFormalized: true,
+      leanConcreteLockedNANDPolynomialReductionAxiomAuditPassed: true,
+      leanConcreteLockedNANDPolynomialReductionAuditedDeclarationCount: 16,
+      leanConcreteLockedNANDPolynomialReductionExactFunctionFormalized: true,
+      leanConcreteLockedNANDPolynomialReductionExactOutputFormalized: true,
+      leanConcreteLockedNANDPolynomialReductionLanguageEquivalenceFormalized: true,
+      leanConcreteLockedNANDPolynomialReductionWitnessFormalized: true,
+      leanConcreteLockedNANDPolynomialReductionRawRefinementFormalized: true,
+      leanConcreteLockedNANDPolynomialReductionScope:
+        'strict-version-zero-parser-emitter-polynomial-reduction-with-exact-language-equivalence-and-recursive-raw-refinement',
       leanLockedNANDPolynomialBuilderFormalized: false,
       leanCompatibleReplacementFormalized: false,
       leanGlobalSlackLawFormalized: false,
@@ -1939,7 +1961,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-29-91',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-30-92',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

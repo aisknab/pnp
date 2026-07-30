@@ -416,7 +416,7 @@ test('root, generated evidence, workflow, and documentation bind the emitter',
       3295,
     );
     assert.equal(status.leanConcreteLockedNANDPolynomialReductionFormalized,
-      false);
+      true);
     assert.equal(status.projectSpecificAxiomInventory.length, 4);
     assert.equal(status.remainingBlockers.length, 6);
     assert.equal(status.rootLeanTheoremPresent, false);

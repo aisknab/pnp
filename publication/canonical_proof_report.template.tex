@@ -481,10 +481,21 @@ compiled machine cannot time out within
 polynomial-time language machine, a nonexpanding polynomial-time validation
 function, and the validator program's exact leaf raw-machine refinement.
 
-This parser does not emit the target candidate and is not a composed
-source-to-target machine or \code{PolynomialReduction}. The emitter,
-abstract threshold-language discharge, deterministic CNF-SAT-in-P result,
-NP-hardness transport, and \(P=NP\) remain unproved.
+The subsequent target-emitter milestone supplies a literal finite controller
+with an exact all-input polynomial work bound, a separate output-size bound,
+exact target bytes, and recursive raw-machine refinement for the strict
+parser/emitter composition. Malformed grammar and intrinsically invalid
+references remain fail closed at that strict boundary.
+
+The present package binds that exact composed function and the already-proved
+encoded language equivalence as a concrete \code{PolynomialReduction} from
+\code{EncodedNANDSAT} to \code{EncodedLockedNANDThreshold}. It preserves exact
+function identity, output bytes, a \code{ReducesTo} witness, and recursive
+raw-machine refinement. Its 16-declaration audit has two empty closures, two
+using only \code{propext}, and twelve using only \code{propext} and
+\code{Quot.sound}. Abstract threshold-language discharge, the report-level
+locked-NAND theorem, deterministic CNF-SAT-in-P, NP-hardness transport,
+ZeroSlack/PCCMin completion, and \(P=NP\) remain unproved.
 
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}

@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-29-91",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-30-92",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -595,7 +595,15 @@
   "leanConcreteLockedNANDEmitterStrictParserCompositionFormalized": true,
   "leanConcreteLockedNANDEmitterOutputSizeBoundFormalized": true,
   "leanConcreteLockedNANDEmitterScope": "literal-1387921-rule-grammar-only-all-input-target-emitter-with-strict-parser-composition-polynomial-bounds-and-recursive-raw-refinement",
-  "leanConcreteLockedNANDPolynomialReductionFormalized": false,
+  "leanConcreteLockedNANDPolynomialReductionFormalized": true,
+  "leanConcreteLockedNANDPolynomialReductionAxiomAuditPassed": true,
+  "leanConcreteLockedNANDPolynomialReductionAuditedDeclarationCount": 16,
+  "leanConcreteLockedNANDPolynomialReductionExactFunctionFormalized": true,
+  "leanConcreteLockedNANDPolynomialReductionExactOutputFormalized": true,
+  "leanConcreteLockedNANDPolynomialReductionLanguageEquivalenceFormalized": true,
+  "leanConcreteLockedNANDPolynomialReductionWitnessFormalized": true,
+  "leanConcreteLockedNANDPolynomialReductionRawRefinementFormalized": true,
+  "leanConcreteLockedNANDPolynomialReductionScope": "strict-version-zero-parser-emitter-polynomial-reduction-with-exact-language-equivalence-and-recursive-raw-refinement",
   "leanLockedNANDPolynomialBuilderFormalized": false,
   "leanCompatibleReplacementFormalized": false,
   "leanGlobalSlackLawFormalized": false,
@@ -637,7 +645,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-29-LOCKED-NAND-TARGET-EMITTER-90",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-30-LOCKED-NAND-POLYNOMIAL-REDUCTION-91",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -1012,6 +1020,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDTargetEmitterAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteLockedNANDTargetEmitter.lean",
     "node --test audits/lean-concrete-locked-nand-target-emitter0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDPolynomialReductionAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPConcreteLockedNANDPolynomialReduction.lean",
+    "node --test audits/lean-concrete-locked-nand-polynomial-reduction0.test.mjs",
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualRoutesAxiomAudit.lean",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
@@ -1100,7 +1111,8 @@
     "The global locked-NAND semantic-threshold milestone discharges the satisfiable final-output conditions, all six typed premises, the exact satisfiable/unsatisfiable minimum split, and residual slack at most four for one answer-independent candidate over every finite topological NAND circuit. It uses exhaustive finite satisfiability decision only to eliminate a proposition-level case split and makes no polynomial-runtime claim.",
     "The encoded locked-NAND semantic boundary fixes a strict version-zero grammar, proves direct legacy output-normalization semantics, serializes the complete candidate and source-derived baseline, rejects malformed input, and proves the pure bitstring transformation correct. Its 48 audited declarations use only propext and Quot.sound. It is not a parser/validator machine, emitter machine, RawRefinement, PolynomialReduction, runtime bound, abstract PNP.LockedNANDThreshold discharge, CNFSAT-in-P theorem, or P = NP theorem.",
     "The strict-v0 locked-NAND source parser is one literal 228-state, 2,052-rule machine with unconditional exact behavior on every bitstring: valid sources accept and are preserved byte-for-byte, invalid sources reject with empty output, and the compiled six-for-one machine cannot time out within its explicit cubic bound. Its polynomial-time function and leaf RawRefinement validate source bytes only. The downstream target emitter now composes with it, but this parser alone supplies no PolynomialReduction, abstract threshold-language discharge, CNFSAT-in-P theorem, NP-hardness transport, or P = NP theorem.",
-    "The strict-v0 locked-NAND target emitter is one fixed 1,387,921-rule grammar-only controller. It emits the exact direct raw target on every grammar-decoded circuit, including intrinsically invalid references, rejects malformed grammar with empty output, and has all-input polynomial runtime and output-size bounds. Composition with the strict source parser clears intrinsically invalid inputs and computes buildLockedNANDInstance with recursively compiled RawRefinement. This still does not package the source/target language theorem as PolynomialReduction, discharge the abstract PNP.LockedNANDThreshold assumption, put CNFSAT in P, transport NP-hardness, or prove P = NP.",
+    "The strict-v0 locked-NAND target emitter is one fixed 1,387,921-rule grammar-only controller. It emits the exact direct raw target on every grammar-decoded circuit, including intrinsically invalid references, rejects malformed grammar with empty output, and has all-input polynomial runtime and output-size bounds. Composition with the strict source parser clears intrinsically invalid inputs and computes buildLockedNANDInstance with recursively compiled RawRefinement.",
+    "The strict parser/emitter composition is now packaged as a concrete PolynomialReduction from EncodedNANDSAT to EncodedLockedNANDThreshold, with exact output, all-bitstring language equivalence, a ReducesTo witness, and recursive RawRefinement. This does not discharge the abstract PNP.LockedNANDThreshold assumption, prove PNP.Main.locked_nand_threshold, put CNFSAT in P, transport NP-hardness, complete ZeroSlack/PCCMin, or prove P = NP.",
     "Against the hostile-review inventory, DirectWireOutputLowerBound, global MacroDistinct, semantic-carrier TraceEquivalence, whole-carrier ZeroOutputConvention, and FinalLockSeparation are now discharged; the encoded uniform polynomial builder and its report-level linkage remain missing.",
     "The generic conditional module quantifies an arbitrary satisfiable proposition and baseline natural number. LockedNANDGlobalSemanticThreshold now identifies those with source-circuit SAT and lockedBaselineCount for the typed candidate, but neither module connects that semantic object to the abstract PNP.LockedNANDThreshold language or supplies an encoded polynomial builder.",
     "The executable residual-route scan is complete only for the explicit finite implementation list supplied by its caller; unresolved excludes no unlisted gain and does not imply global minimality or ZeroSlack.",
@@ -1143,7 +1155,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "b54846d2e1bf730445fce72e21ec9a82465a32b3be6a473d037e882da87ec394",
+    "actualSourceClosureSha256": "8f98bd81a6993bf025b232863107c1e71f932f509d6653cd92189acb6922958c",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1173,22 +1185,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-29-91",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-30-92",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "7d9f871badb77f300b36425e99ecb906d94fb73120e95a62a774c618fe48d100",
+  "leanTheoremInventorySha256": "3413510e8712416cdb1b5d846053e5c886bbc1cd550fe7533411573e5f88bf64",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 20957,
+  "leanTheoremInventoryDeclarationCount": 20965,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 11692,
-  "leanTheoremInventoryTheoremCount": 11424,
+  "leanTheoremInventoryTheoremCount": 11430,
   "leanTheoremInventoryAssumptionFreeTheoremCount": 5968,
-  "leanTheoremInventorySourceClosureModuleCount": 184,
-  "leanSourceClosureSha256": "b54846d2e1bf730445fce72e21ec9a82465a32b3be6a473d037e882da87ec394",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-29-91",
+  "leanTheoremInventorySourceClosureModuleCount": 185,
+  "leanSourceClosureSha256": "8f98bd81a6993bf025b232863107c1e71f932f509d6653cd92189acb6922958c",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-30-92",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "e77c95963004c3e170eebb3984df15ac73530243c76fe23cb424fb3b0c722726",
+  "formalPublicationMapSha256": "e9a0866b3d12afb6015be386250b02805fb0b5a772c1215e563ad4fe50e7117c",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",
@@ -28672,7 +28684,7 @@
         "PNP.Concrete.LockedNAND.TargetEmitterControllerCompiled.rawTargetBytesPolynomialTimeFunction_output",
         "PNP.Concrete.LockedNAND.TargetEmitterControllerCompiled.strictLockedNANDPolynomialTimeFunction_output"
       ],
-      "nonClaim": "The standalone emitter intentionally accepts every grammar-decoded raw circuit, including intrinsically invalid references; strict fail-closed semantics come from parser composition. This milestone does not yet package the language equivalence as PolynomialReduction, discharge the abstract locked-NAND threshold assumption, put CNFSAT in P, transport NP-hardness, or prove P = NP.",
+      "nonClaim": "The standalone emitter intentionally accepts every grammar-decoded raw circuit, including intrinsically invalid references; strict fail-closed semantics come from parser composition. The standalone emitter does not itself package the language equivalence as PolynomialReduction; the downstream concrete reduction milestone now does. The abstract locked-NAND threshold assumption, CNFSAT-in-P result, NP-hardness transport, and P = NP remain absent.",
       "theoremRows": [
         {
           "name": "PNP.Concrete.LockedNAND.RawBuilder.rawLockedInstance_of_elaborate",
@@ -28946,6 +28958,89 @@
       "status": "formalized-foundation-only"
     },
     {
+      "id": "concrete-locked-nand-polynomial-reduction",
+      "title": "Concrete strict-v0 locked-NAND polynomial reduction",
+      "classification": "formalized-polynomial-reduction",
+      "scope": "The existing strict parser/emitter composition is packaged as a concrete polynomial many-one reduction from EncodedNANDSAT to EncodedLockedNANDThreshold, with exact function identity, exact output, all-bitstring language equivalence, a ReducesTo witness, and recursive raw-machine refinement.",
+      "requiredTheorems": [
+        "PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_function",
+        "PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_output",
+        "PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_correct",
+        "PNP.Concrete.LockedNAND.encodedNANDSAT_reducesTo_encodedLockedNANDThreshold",
+        "PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_hasRawRefinement"
+      ],
+      "nonClaim": "This does not identify the concrete source language with CNFSAT or establish NP-hardness, discharge the abstract target-language assumption, prove the report-level locked-NAND threshold theorem, put CNFSAT in P, complete residual minimization or ZeroSlack, or prove P = NP.",
+      "theoremRows": [
+        {
+          "name": "PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_function",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3e8000fd18d8836c1ae1ded6b3d0bb46d0ea618c31ba32c7f1425773e62d09c3",
+          "expectedKernelTypeSha256": "3e8000fd18d8836c1ae1ded6b3d0bb46d0ea618c31ba32c7f1425773e62d09c3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "06df8e094590a5b0bf522a9daf5921a28667c7d44e73d447d9366ae201ca3ef4",
+          "expectedKernelTypeSha256": "06df8e094590a5b0bf522a9daf5921a28667c7d44e73d447d9366ae201ca3ef4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_correct",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "94955e4d9826f8364e0ecae478eb33cc92620403673db079c7f4a961c15b3739",
+          "expectedKernelTypeSha256": "94955e4d9826f8364e0ecae478eb33cc92620403673db079c7f4a961c15b3739",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.encodedNANDSAT_reducesTo_encodedLockedNANDThreshold",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6c133d95b3eb1d8d04f89be467dfbe6405883cb352654eacc5b8a23b99857f4d",
+          "expectedKernelTypeSha256": "6c133d95b3eb1d8d04f89be467dfbe6405883cb352654eacc5b8a23b99857f4d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_hasRawRefinement",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9f0b15fadf98e634edafe5d6a2025d1d92424a6876a018802153a96b934b1061",
+          "expectedKernelTypeSha256": "9f0b15fadf98e634edafe5d6a2025d1d92424a6876a018802153a96b934b1061",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-polynomial-reduction"
+    },
+    {
       "id": "locked-nand-conditional-threshold",
       "title": "Conditional locked-NAND threshold boundary",
       "classification": "formalized-with-premises",
@@ -29059,7 +29154,7 @@
       "requiredTheorems": [
         "PNP.Main.locked_nand_threshold"
       ],
-      "nonClaim": "The strict encoding, total source parser, literal target emitter, exact formula bytes, strict parser/emitter composition, polynomial runtime, output-size bound, and recursive RawRefinement are now formalized. The source/target language equivalence is not yet packaged as PolynomialReduction or linked to the report-level threshold theorem, and the abstract threshold assumption remains.",
+      "nonClaim": "The strict encoding, total source parser, literal target emitter, exact formula bytes, strict parser/emitter composition, polynomial runtime, output-size bound, recursive RawRefinement, and concrete strict-v0 source-to-target PolynomialReduction are now formalized. The concrete languages are not yet linked to the report-level theorem, and the abstract threshold assumption remains.",
       "theoremRows": [
         {
           "name": "PNP.Main.locked_nand_threshold",
@@ -29146,7 +29241,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-29-91",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-30-92",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true
