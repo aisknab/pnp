@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 73);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 70);
+  assert.equal(status.formalPublicationMilestones.length, 74);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 71);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -1571,7 +1571,7 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   );
   assert.match(
     polynomialReduction.nonClaim,
-    /semantic compiler now identifies CNFSAT/u,
+    /all-input CNF compiler now identifies CNFSAT/u,
   );
   const cnfToNAND = byId.get(
     'concrete-cnf-to-nand-semantic-compiler',
@@ -1603,7 +1603,57 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     'PNP.Concrete.CNFToNAND.buildLockedNANDFromCNF_correct',
   ]);
   assert.match(cnfToNAND.scope, /answer-independent compiler/u);
-  assert.match(cnfToNAND.nonClaim, /not yet a compiled finite work machine/u);
+  assert.match(
+    cnfToNAND.nonClaim,
+    /subsequent all-input milestone supplies the finite-machine/u,
+  );
+  const cnfToNANDReduction = byId.get(
+    'concrete-cnf-to-nand-polynomial-reduction',
+  );
+  assert.equal(
+    cnfToNANDReduction.status,
+    'formalized-polynomial-reduction',
+  );
+  assert.equal(cnfToNANDReduction.earned, true);
+  assert.equal(
+    cnfToNANDReduction.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.deepEqual(cnfToNANDReduction.requiredTheorems, [
+    'PNP.Concrete.CNFSourceParser.allInput_exact',
+    'PNP.Concrete.CNFSourceParser.compiledMachineOutput_eq_validatedCNFBytes',
+    'PNP.Concrete.CNFSourceParser.compiledBoundedDecide_ne_timeout',
+    'PNP.Concrete.CNFToNANDCarrierEncoder.canonical_exact',
+    'PNP.Concrete.CNFToNANDCarrierEncoder.canonicalWorkSteps_polynomial_bound',
+    'PNP.Concrete.CNFToNANDWorkspace.exact_execution_output',
+    'PNP.Concrete.CNFToNANDController.rules_length_literal',
+    'PNP.Concrete.CNFToNANDControllerTotalTrace.canonical_path',
+    'PNP.Concrete.CNFToNANDControllerTotalTrace.canonical_bounded_exact',
+    'PNP.Concrete.CNFToNANDCompilerMachine.rules_length_literal',
+    'PNP.Concrete.CNFToNANDCompilerTotalTrace.malformed_bounded_exact',
+    'PNP.Concrete.CNFToNANDCompilerTotalTrace.decoded_bounded_exact',
+    'PNP.Concrete.CNFToNANDCompilerTotalTrace.allInput_bounded_exact',
+    'PNP.Concrete.CNFToNANDCompilerPolynomialBound.allInputWorkTimePolynomial_eval',
+    'PNP.Concrete.CNFToNANDCompilerPolynomialBound.compiledRawTimePolynomial_eval',
+    'PNP.Concrete.CNFToNANDCompilerCompiled.compiledMachineOutput_eq_compileEncodedCNFToNAND',
+    'PNP.Concrete.CNFToNANDCompilerCompiled.compiledBoundedDecide_accept_iff',
+    'PNP.Concrete.CNFToNANDCompilerCompiled.compiledBoundedDecide_ne_timeout',
+    'PNP.Concrete.CNFToNANDCompilerCompiled.cnfToNANDPolynomialTimeFunction_output',
+    'PNP.Concrete.CNFToNAND.cnfToNANDPolynomialReduction_function',
+    'PNP.Concrete.CNFToNAND.cnfToNANDPolynomialReduction_output',
+    'PNP.Concrete.CNFToNAND.cnfToNANDPolynomialReduction_correct',
+    'PNP.Concrete.CNFToNAND.cnfSAT_reducesTo_encodedNANDSAT',
+    'PNP.Concrete.CNFToNAND.cnfToNANDPolynomialReduction_hasRawRefinement',
+    'PNP.Concrete.CNFToNAND.cnfToLockedNANDPolynomialReduction_output',
+    'PNP.Concrete.CNFToNAND.cnfToLockedNANDPolynomialReduction_correct',
+    'PNP.Concrete.CNFToNAND.cnfSAT_reducesTo_encodedLockedNANDThreshold',
+    'PNP.Concrete.CNFToNAND.cnfToLockedNANDPolynomialReduction_hasRawRefinement',
+  ]);
+  assert.match(cnfToNANDReduction.scope, /fixed 135,070-rule/u);
+  assert.match(
+    cnfToNANDReduction.nonClaim,
+    /does not itself decide CNF-SAT/u,
+  );
   assert.equal(byId.get('locked-nand-conditional-threshold').status, 'formalized-with-premises');
   assert.equal(byId.get('explicit-residual-routes').status, 'formalized-explicit-list-only');
   for (const id of [
@@ -1620,10 +1670,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'abf7b98d7b6721576eb7c9d827fa5ea2cc95454f31c2a5d8950dfe570d8c01bb');
+    'd06c41e96fdbf6afbc4cea4903d35edd4b329b82aad5a386cb398de825d0befc');
   assert.equal(map.milestoneSourceClosureSha256,
-    'daed8c40eb6416b42d6b78d87b118b8033bbb5f3e857874c3d1ee45cf89e8876');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2053);
+    '72c9997c0ce9aa5a748abb273b49871f3583ad6c9ad8d8d1b7ae1e96ee9538f1');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2081);
   for (const theorem of [
     'PNP.DirectWire.LockedNANDTrace.carrierSeparation',
     'PNP.DirectWire.LockedNANDTrace.finalLock_fresh',
@@ -1945,7 +1995,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [21020, 11477, 5987, 11970, 186]);
+  ], [23575, 12806, 6767, 14273, 208]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
@@ -1989,6 +2039,30 @@ test('canonical report source is current and the committed PDF artifact exists',
   assert.match(
     tex,
     /Its 16-declaration audit has two empty closures, two\s+using only \\code\{propext\}, and twelve using only \\code\{propext\} and\s+\\code\{Quot\.sound\}/u,
+  );
+  assert.match(
+    tex,
+    /fixed parser\/carrier\/controller work graph now implements exactly that pure\s+compiler on every bitstring within one external-input polynomial/u,
+  );
+  assert.match(
+    tex,
+    /separate fixed all-input machine now translates\s+strict canonical CNF into well-formed topological NAND, preserves satisfiability exactly, supplies\s+a polynomial-time function and raw refinement/u,
+  );
+  assert.match(
+    tex,
+    /compiled\s+machine never times out at the advertised bound, retains literal\s+\\code\{RawRefinement\}/u,
+  );
+  assert.match(
+    tex,
+    /\\code\{PolynomialReduction CNFSAT EncodedNANDSAT\}/u,
+  );
+  assert.match(
+    tex,
+    /explicitly composes with\s+the strict locked-NAND reduction/u,
+  );
+  assert.match(
+    tex,
+    /syntax-directed compiler still does not\s+decide CNF-SAT, connect the concrete target to the report-level threshold\s+assumption, or prove \$P=NP\$/u,
   );
   assert.match(tex, /A literal finite builder emits\s+\\code\{FormulaWidth\} copies of \\code\{T\} followed by \\code\{F\}, \\code\{Sep\}, and the complete positive\s+clause on variables zero, one, and two/u);
   assert.match(tex, /complete positive at-least-one shape clause on variables zero,\s+one, and two/u);

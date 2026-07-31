@@ -123,10 +123,12 @@ on:
       - 'audits/lean-concrete-locked-nand-target-emitter0.test.mjs'
       - 'audits/lean-concrete-locked-nand-polynomial-reduction0.test.mjs'
       - 'audits/lean-concrete-cnf-to-nand0.test.mjs'
+      - 'audits/lean-concrete-cnf-to-nand-polynomial-reduction0.test.mjs'
       - 'audits/lean-residual-routes0.test.mjs'
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_locked_nand_polynomial_reduction.md'
       - 'docs/lean_concrete_cnf_to_nand_semantic_compiler.md'
+      - 'docs/lean_concrete_cnf_to_nand_polynomial_reduction.md'
       - 'docs/lean_concrete_machine.md'
       - 'docs/lean_tape_handoff.md'
       - 'docs/lean_tape_blank_equivalence.md'
@@ -321,10 +323,12 @@ on:
       - 'audits/lean-concrete-locked-nand-target-emitter0.test.mjs'
       - 'audits/lean-concrete-locked-nand-polynomial-reduction0.test.mjs'
       - 'audits/lean-concrete-cnf-to-nand0.test.mjs'
+      - 'audits/lean-concrete-cnf-to-nand-polynomial-reduction0.test.mjs'
       - 'audits/lean-residual-routes0.test.mjs'
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_locked_nand_polynomial_reduction.md'
       - 'docs/lean_concrete_cnf_to_nand_semantic_compiler.md'
+      - 'docs/lean_concrete_cnf_to_nand_polynomial_reduction.md'
       - 'docs/lean_concrete_machine.md'
       - 'docs/lean_tape_handoff.md'
       - 'docs/lean_tape_blank_equivalence.md'
@@ -2234,9 +2238,10 @@ jobs:
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFToNANDAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
-          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.")" -eq 41
+          expected_count="$(node -p "require('./status/FORMAL_RECONSTRUCTION_STATUS.json').leanConcreteCNFToNANDSemanticCompilerAuditedDeclarationCount")"
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.")" -eq "$expected_count"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|propext, Quot\.sound)\]$' || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound|propext, Quot\.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected CNF-to-NAND semantic-compiler axiom closure.' >&2
@@ -2246,16 +2251,38 @@ jobs:
             echo 'CNF-to-NAND semantic compiler reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-          test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms:')" -eq 41
-          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 16
-          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
-          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 14
+          test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms:')" -eq "$expected_count"
 
       - name: Run CNF-to-NAND semantic-compiler regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFToNAND.lean
 
       - name: Run CNF-to-NAND semantic-compiler hostile audit
         run: node --test audits/lean-concrete-cnf-to-nand0.test.mjs
+
+      - name: Print all-input CNF-to-NAND polynomial-reduction axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFToNANDPolynomialReductionAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          expected_count="$(node -p "require('./status/FORMAL_RECONSTRUCTION_STATUS.json').leanConcreteCNFToNANDPolynomialReductionAuditedDeclarationCount")"
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.")" -eq "$expected_count"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound|propext, Quot\.sound)\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected all-input CNF-to-NAND polynomial-reduction axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'All-input CNF-to-NAND polynomial reduction reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms:')" -eq "$expected_count"
+
+      - name: Run all-input CNF-to-NAND polynomial-reduction regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFToNANDPolynomialReduction.lean
+
+      - name: Run all-input CNF-to-NAND polynomial-reduction hostile audit
+        run: node --test audits/lean-concrete-cnf-to-nand-polynomial-reduction0.test.mjs
 
       - name: Print explicit-list residual-route axioms
         run: |

@@ -27,9 +27,10 @@ threshold route in the canonical legacy manuscript pinned by
 legacy report supplies the intended construction and dependency order.
 
 This closes the concrete polynomial-reduction packaging edge. The downstream
-semantic compiler now identifies CNFSAT with `EncodedNANDSAT`, but does not
-yet supply a finite-machine or polynomial-time reduction witness for that
-translation. This milestone does not identify the concrete target with the
+CNF-to-NAND milestone now identifies CNFSAT with `EncodedNANDSAT` through a
+fixed finite machine, a polynomial-time function, and a direct polynomial
+reduction, then composes that reduction with this one. This milestone does not
+identify the concrete target with the
 abstract `PNP.LockedNANDThreshold` language, prove the report-level
 `PNP.Main.locked_nand_threshold`, establish CNFSAT NP-hardness or membership
 in P, finish ZeroSlack/PCCMin, or prove P = NP.
@@ -59,38 +60,38 @@ node --test \
 ## Mechanically generated publication evidence
 
 Inventory coordinate
-`PNP-LEAN-THEOREM-INVENTORY-2026-07-31-93` records 21,020 declarations,
-11,477 theorems, 5,987 assumption-free theorems, 11,970 excluded private
-declarations, 186 source-closure modules, and 2,053 reviewed milestone
-candidates. Its 12,933,372 canonical bytes have SHA-256
-`576816bd782378cd1d19ad1de76485b82896e6f141853946b6e0ad7df1fefa82`.
+`PNP-LEAN-THEOREM-INVENTORY-2026-07-31-94` records 23,575 declarations,
+12,806 theorems, 6,767 assumption-free theorems, 14,273 excluded private
+declarations, 208 source-closure modules, and 2,081 reviewed milestone
+candidates. Its 13,380,071 canonical bytes have SHA-256
+`f6dc633360d0aad4df37e2273c7304723d5187a66c67a88e1416e4adbf7e62ca`.
 The exact Lean source closure has SHA-256
-`daed8c40eb6416b42d6b78d87b118b8033bbb5f3e857874c3d1ee45cf89e8876`.
+`72c9997c0ce9aa5a748abb273b49871f3583ad6c9ad8d8d1b7ae1e96ee9538f1`.
 
 Publication-map coordinate
-`PNP-FORMAL-PUBLICATION-MAP-2026-07-31-93` contains 73 milestones: 69
+`PNP-FORMAL-PUBLICATION-MAP-2026-07-31-94` contains 74 milestones: 71
 earned and three deliberately unearned. The reduction milestone pins five
 theorem types, while its audit covers nine reused interfaces and all seven
 new public declarations. Of those 16 declarations, two have empty axiom
 closure, two use only `propext`, and twelve use only `propext` and
 `Quot.sound`. None reaches `Classical.choice` or a project axiom. The complete
-map pins 2,053 theorem types; its 671,083 bytes have SHA-256
-`c821adfcb65b9bce9c894b5debf99b9ba661457d865e9fed4ecedfd5ff3db88b`.
+map pins 2,081 theorem types; its 678,310 bytes have SHA-256
+`3743f38dd65073bf0e57d4525d4989dda530676a74bd61a5d7caf0cb7b616aa5`.
 
 Status coordinate
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-31-93`, paired with public-surface
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-31-94`, paired with public-surface
 coordinate
-`PUBLIC-SURFACE-BASELINE-2026-07-31-CNF-TO-NAND-SEMANTIC-COMPILER-92`,
+`PUBLIC-SURFACE-BASELINE-2026-07-31-CNF-TO-NAND-POLYNOMIAL-REDUCTION-93`,
 records the exact function, output, language equivalence, reduction witness,
-and recursive raw refinement as earned. Its 1,646,904 bytes have SHA-256
-`1fa05f578f1291018c07f3fea452ff970c5bb00950f9382f13956358c94e17ae`.
+and recursive raw refinement as earned. Its 1,665,641 bytes have SHA-256
+`feaf6bca770c3e4e71b1fee10b60ce0e9ca7321a1a5b81da45b013184c1d0fa3`.
 
 Canonical report coordinate
-`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-31-93` has a
-171,476-byte TeX source with SHA-256
-`505442a00b5b3ebf40a173ee22faf86bc0eb6a12a921899a670a23fc54c6e67d`
-and a deterministic 67-page, 415,380-byte A4 PDF with SHA-256
-`e042bd2d3263b541adb57295c925aaef4ef38fef7b4cfe7d192d45f772593e49`.
+`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-31-94` has a
+175,276-byte TeX source with SHA-256
+`2c6283ed6f6f54fc442e75b795afb389521fa9f3fa3a27ddf9adfa80e8f18483`
+and a deterministic 68-page, 419,182-byte A4 PDF with SHA-256
+`6a3823fd204005cbed79b487a4b90d1567b14f359529dcb0a037e4e81d3972cc`.
 
 The concrete publication gate remains false. All four project assumptions,
 all six blockers, unset activation fingerprints, and the absence of

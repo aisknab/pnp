@@ -1023,6 +1023,738 @@ def compiledFormulaCircuit (formula : CNFFormula) :
 def compileFormula (formula : CNFFormula) : LockedNAND.RawCircuit :=
   LockedNAND.RawCircuit.ofCircuit (compiledFormulaCircuit formula)
 
+/-! ## Pure postfix compilation plan
+
+The semantic compiler above is intrinsically typed.  The following plan is
+the same construction expressed as three finite actions over an untyped
+gate accumulator and source stack.  It is suitable for later realization by
+a fixed machine: source actions only push data, while each `negate` or
+`nand` action emits exactly one gate at the current accumulator length.
+-/
+
+inductive CompilationAction where
+  | push (source : LockedNAND.RawSource)
+  | negate
+  | nand
+deriving BEq, DecidableEq, Repr
+
+structure CompilationState where
+  gates : List LockedNAND.RawGate
+  stack : List LockedNAND.RawSource
+deriving BEq, DecidableEq, Repr
+
+private def CompilationState.emitNand
+    (state : CompilationState)
+    (left right : LockedNAND.RawSource)
+    (rest : List LockedNAND.RawSource) : CompilationState :=
+  let output := LockedNAND.RawSource.gate state.gates.length
+  { gates := state.gates ++ [{ left := left, right := right }]
+    stack := output :: rest }
+
+/-- One fail-closed postfix action.  `nand` pops the right operand first,
+then the left operand, preserving the typed compiler's gate orientation. -/
+def CompilationAction.step
+    (action : CompilationAction)
+    (state : CompilationState) : Option CompilationState :=
+  match action with
+  | .push source =>
+      some { state with stack := source :: state.stack }
+  | .negate =>
+      match state.stack with
+      | source :: rest =>
+          some (state.emitNand source source rest)
+      | [] => none
+  | .nand =>
+      match state.stack with
+      | right :: left :: rest =>
+          some (state.emitNand left right rest)
+      | _ => none
+
+/-- Execute a finite postfix plan without any host-side lookup. -/
+def runCompilationPlan :
+    List CompilationAction → CompilationState →
+      Option CompilationState
+  | [], state => some state
+  | action :: rest, state =>
+      match action.step state with
+      | none => none
+      | some next => runCompilationPlan rest next
+
+private theorem runCompilationPlan_append
+    (first second : List CompilationAction)
+    (state : CompilationState) :
+    runCompilationPlan (first ++ second) state =
+      match runCompilationPlan first state with
+      | none => none
+      | some middle => runCompilationPlan second middle := by
+  induction first generalizing state with
+  | nil =>
+      rfl
+  | cons action rest ih =>
+      simp only [List.cons_append, runCompilationPlan]
+      cases stepped : action.step state with
+      | none => rfl
+      | some next => exact ih next
+
+/-- Literal actions.  Both polarities of an out-of-range literal compile to
+false; only an in-range negative occurrence emits a literal-negation gate. -/
+def literalPlan (inputs : Nat)
+    (literal : CNFLiteral) : List CompilationAction :=
+  if literal.variableIndex < inputs then
+    [.push (.input literal.variableIndex)] ++
+      if literal.positive then [] else [.negate]
+  else
+    [.push (.constant false)]
+
+/-- Out-of-range literals of either polarity compile to the same false
+source, matching the fail-closed CNF semantics. -/
+theorem literalPlan_of_out_of_range
+    (inputs : Nat) (literal : CNFLiteral)
+    (outOfRange : inputs ≤ literal.variableIndex) :
+    literalPlan inputs literal =
+      [.push (.constant false)] := by
+  have invalid : ¬ literal.variableIndex < inputs :=
+    Nat.not_lt.mpr outOfRange
+  simp [literalPlan, invalid]
+
+/-- Right-recursive disjunction plan.  Its order is literal, literal
+negation for the NAND encoding of OR, recursive tail, tail negation, NAND. -/
+def clausePlan (inputs : Nat) :
+    List CNFLiteral → List CompilationAction
+  | [] => [.push (.constant false)]
+  | literal :: rest =>
+      literalPlan inputs literal ++ [.negate] ++
+        clausePlan inputs rest ++ [.negate, .nand]
+
+@[simp] theorem clausePlan_empty (inputs : Nat) :
+    clausePlan inputs [] =
+      [.push (.constant false)] := rfl
+
+theorem clausePlan_cons
+    (inputs : Nat) (literal : CNFLiteral)
+    (rest : List CNFLiteral) :
+    clausePlan inputs (literal :: rest) =
+      literalPlan inputs literal ++ [.negate] ++
+        clausePlan inputs rest ++ [.negate, .nand] := rfl
+
+/-- Right-recursive conjunction plan.  Each clause/tail pair emits NAND and
+then a self-NAND, exactly matching the current compiler's AND encoding. -/
+def clausesPlan (inputs : Nat) :
+    List (List CNFLiteral) → List CompilationAction
+  | [] => [.push (.constant true)]
+  | clause :: rest =>
+      clausePlan inputs clause ++ clausesPlan inputs rest ++
+        [.nand, .negate]
+
+@[simp] theorem clausesPlan_empty (inputs : Nat) :
+    clausesPlan inputs [] =
+      [.push (.constant true)] := rfl
+
+theorem clausesPlan_cons
+    (inputs : Nat) (clause : List CNFLiteral)
+    (rest : List (List CNFLiteral)) :
+    clausesPlan inputs (clause :: rest) =
+      clausePlan inputs clause ++ clausesPlan inputs rest ++
+        [.nand, .negate] := rfl
+
+/-- Complete action list for one decoded formula. -/
+def formulaPlan (formula : CNFFormula) : List CompilationAction :=
+  clausesPlan formula.variableCount formula.clauses
+
+@[simp] theorem formulaPlan_empty (inputs : Nat) :
+    formulaPlan { variableCount := inputs, clauses := [] } =
+      [.push (.constant true)] := rfl
+
+@[simp] theorem formulaPlan_single_empty_clause (inputs : Nat) :
+    formulaPlan { variableCount := inputs, clauses := [[]] } =
+      [ .push (.constant false)
+      , .push (.constant true)
+      , .nand
+      , .negate ] := rfl
+
+private theorem literalPlan_length
+    (inputs : Nat) (literal : CNFLiteral) :
+    (literalPlan inputs literal).length =
+      1 +
+        (if !literal.positive &&
+            literal.variableIndex < inputs then 1 else 0) := by
+  unfold literalPlan
+  by_cases valid : literal.variableIndex < inputs
+  · cases literal.positive <;> simp [valid]
+  · simp [valid]
+
+private theorem clausePlan_length
+    (inputs : Nat) (clause : List CNFLiteral) :
+    (clausePlan inputs clause).length =
+      (clause.filter fun literal =>
+        !literal.positive &&
+          literal.variableIndex < inputs).length +
+        4 * clause.length + 1 := by
+  induction clause with
+  | nil => rfl
+  | cons literal rest ih =>
+      rw [clausePlan_cons]
+      cases polarity : literal.positive <;>
+        by_cases valid : literal.variableIndex < inputs <;>
+          simp [literalPlan_length, ih, polarity, valid] <;> omega
+
+private theorem clausesPlan_length
+    (inputs : Nat) (clauses : List (List CNFLiteral)) :
+    (clausesPlan inputs clauses).length =
+      (clauses.map fun clause =>
+        (clause.filter fun literal =>
+          !literal.positive &&
+            literal.variableIndex < inputs).length).sum +
+        4 * (clauses.map List.length).sum +
+        3 * clauses.length + 1 := by
+  induction clauses with
+  | nil => rfl
+  | cons clause rest ih =>
+      rw [clausesPlan_cons]
+      simp only [List.length_append, List.length_cons,
+        List.length_nil, clausePlan_length, ih,
+        List.map_cons, List.sum_cons]
+      omega
+
+/-- Exact size of the machine-friendly postfix schedule.  The constant
+`1` is its terminal Boolean source; every other action is forced by a
+literal polarity or one of the fixed recursive NAND wrappers. -/
+theorem formulaPlan_length_exact (formula : CNFFormula) :
+    (formulaPlan formula).length =
+      validNegativeLiteralCount formula +
+        4 * literalCount formula +
+        3 * formula.clauses.length + 1 := by
+  unfold formulaPlan validNegativeLiteralCount literalCount
+  exact clausesPlan_length formula.variableCount formula.clauses
+
+private theorem validNegativeLiteralCount_le_literalCount
+    (formula : CNFFormula) :
+    validNegativeLiteralCount formula ≤ literalCount formula := by
+  unfold validNegativeLiteralCount literalCount
+  induction formula.clauses with
+  | nil => exact Nat.le_refl 0
+  | cons clause rest ih =>
+      simp only [List.map_cons, List.sum_cons]
+      exact Nat.add_le_add (List.length_filter_le _ _) ih
+
+/-- Linear structural upper bound for the postfix schedule. -/
+theorem formulaPlan_length_le (formula : CNFFormula) :
+    (formulaPlan formula).length ≤
+      5 * literalCount formula +
+        3 * formula.clauses.length + 1 := by
+  rw [formulaPlan_length_exact]
+  have negativeBound :=
+    validNegativeLiteralCount_le_literalCount formula
+  omega
+
+/-- A decoded source word bounds the complete postfix schedule linearly. -/
+theorem formulaPlan_length_le_encoded_bits
+    (bits : BitString) (formula : CNFFormula)
+    (decoded : decodeEncodedCNF bits = some formula) :
+    (formulaPlan formula).length ≤ 5 * bits.length + 1 := by
+  have planBound := formulaPlan_length_le formula
+  have structural :=
+    decodedFormula_structural_size_le bits formula decoded
+  omega
+
+/-- Normalize the single postfix result to a mandatory gate output using the
+same legacy cases as `CompiledExpression.toCircuit`. -/
+def finalizeCompilation (inputs : Nat)
+    (state : CompilationState) :
+    Option LockedNAND.RawCircuit :=
+  match state.stack with
+  | [output] =>
+      match output with
+      | .gate index =>
+          some
+            { inputCount := inputs
+              gates := state.gates
+              output := .gate index }
+      | .input index =>
+          let first := state.gates.length
+          some
+            { inputCount := inputs
+              gates := state.gates ++
+                [ { left := .input index, right := .constant true }
+                , { left := .gate first, right := .gate first } ]
+              output := .gate (first + 1) }
+      | .constant false =>
+          let first := state.gates.length
+          some
+            { inputCount := inputs
+              gates := state.gates ++
+                [{ left := .constant true, right := .constant true }]
+              output := .gate first }
+      | .constant true =>
+          let first := state.gates.length
+          some
+            { inputCount := inputs
+              gates := state.gates ++
+                [{ left := .constant false, right := .constant false }]
+              output := .gate first }
+  | _ => none
+
+/-- Pure plan execution from the empty accumulator. -/
+def executeFormulaPlan
+    (formula : CNFFormula) : Option LockedNAND.RawCircuit :=
+  match runCompilationPlan (formulaPlan formula)
+      { gates := [], stack := [] } with
+  | none => none
+  | some state => finalizeCompilation formula.variableCount state
+
+/-- Exact byte emitter induced by the pure plan; malformed internal stack
+states fail closed to the empty word. -/
+def emitFormulaPlan (formula : CNFFormula) : BitString :=
+  match executeFormulaPlan formula with
+  | none => []
+  | some circuit => LockedNAND.encodeCircuit circuit
+
+private def expressionPlan {inputs : Nat} :
+    BoolExpression inputs → List CompilationAction
+  | .input index => [.push (.input index.val)]
+  | .constant value => [.push (.constant value)]
+  | .neg body => expressionPlan body ++ [.negate]
+  | .conj left right =>
+      expressionPlan left ++ expressionPlan right ++
+        [.nand, .negate]
+  | .disj left right =>
+      expressionPlan left ++ [.negate] ++
+        expressionPlan right ++ [.negate, .nand]
+
+private theorem literalPlan_eq_expressionPlan
+    (inputs : Nat) (literal : CNFLiteral) :
+    literalPlan inputs literal =
+      expressionPlan (literalExpression inputs literal) := by
+  unfold literalPlan literalExpression
+  split
+  · rename_i valid
+    cases literal.positive <;> rfl
+  · rfl
+
+private theorem clausePlan_eq_expressionPlan
+    (inputs : Nat) (clause : List CNFLiteral) :
+    clausePlan inputs clause =
+      expressionPlan (clauseExpression inputs clause) := by
+  induction clause with
+  | nil =>
+      rfl
+  | cons literal rest ih =>
+      simp only [clausePlan, clauseExpression, expressionPlan,
+        literalPlan_eq_expressionPlan, ih, List.append_assoc]
+
+private theorem clausesPlan_eq_expressionPlan
+    (inputs : Nat) (clauses : List (List CNFLiteral)) :
+    clausesPlan inputs clauses =
+      expressionPlan (clausesExpression inputs clauses) := by
+  induction clauses with
+  | nil =>
+      rfl
+  | cons clause rest ih =>
+      simp only [clausesPlan, clausesExpression, expressionPlan,
+        clausePlan_eq_expressionPlan, ih, List.append_assoc]
+
+private def shiftRawSource (offset : Nat) :
+    LockedNAND.RawSource → LockedNAND.RawSource
+  | .input index => .input index
+  | .constant value => .constant value
+  | .gate index => .gate (offset + index)
+
+private def shiftRawGate (offset : Nat)
+    (gate : LockedNAND.RawGate) : LockedNAND.RawGate :=
+  { left := shiftRawSource offset gate.left
+    right := shiftRawSource offset gate.right }
+
+private def shiftRawGates (offset : Nat)
+    (gates : List LockedNAND.RawGate) :
+    List LockedNAND.RawGate :=
+  gates.map (shiftRawGate offset)
+
+private theorem shiftRawSource_zero
+    (source : LockedNAND.RawSource) :
+    shiftRawSource 0 source = source := by
+  cases source <;> simp [shiftRawSource]
+
+private theorem shiftRawSource_add
+    (first second : Nat) (source : LockedNAND.RawSource) :
+    shiftRawSource first (shiftRawSource second source) =
+      shiftRawSource (first + second) source := by
+  cases source <;> simp [shiftRawSource, Nat.add_assoc]
+
+private theorem shiftRawGate_add
+    (first second : Nat) (gate : LockedNAND.RawGate) :
+    shiftRawGate first (shiftRawGate second gate) =
+      shiftRawGate (first + second) gate := by
+  cases gate
+  simp [shiftRawGate, shiftRawSource_add]
+
+private theorem shiftRawGates_add
+    (first second : Nat) (gates : List LockedNAND.RawGate) :
+    shiftRawGates first (shiftRawGates second gates) =
+      shiftRawGates (first + second) gates := by
+  simp [shiftRawGates, List.map_map, shiftRawGate_add]
+
+private theorem shiftRawGates_append
+    (offset : Nat) (first second : List LockedNAND.RawGate) :
+    shiftRawGates offset (first ++ second) =
+      shiftRawGates offset first ++ shiftRawGates offset second := by
+  simp [shiftRawGates]
+
+private theorem shiftRawGates_singleton
+    (offset : Nat) (gate : LockedNAND.RawGate) :
+    shiftRawGates offset [gate] = [shiftRawGate offset gate] := rfl
+
+private theorem shiftRawGate_zero
+    (gate : LockedNAND.RawGate) :
+    shiftRawGate 0 gate = gate := by
+  cases gate
+  simp [shiftRawGate, shiftRawSource_zero]
+
+private theorem shiftRawGates_zero
+    (gates : List LockedNAND.RawGate) :
+    shiftRawGates 0 gates = gates := by
+  induction gates with
+  | nil => rfl
+  | cons gate rest ih =>
+      change shiftRawGate 0 gate :: shiftRawGates 0 rest =
+        gate :: rest
+      rw [shiftRawGate_zero, ih]
+
+private theorem shiftRawGates_length
+    (offset : Nat) (gates : List LockedNAND.RawGate) :
+    (shiftRawGates offset gates).length = gates.length := by
+  simp [shiftRawGates]
+
+private theorem rawProgramGates_length_plan
+    {inputs gates : Nat} (program : Program inputs gates) :
+    (LockedNAND.rawProgramGates program).length = gates := by
+  induction program with
+  | empty => rfl
+  | @snoc gates initial gate ih =>
+      simp [LockedNAND.rawProgramGates, ih]
+
+private theorem rawSource_ofSource_weakenGates
+    {inputs gates : Nat} (source : Source inputs gates)
+    (extra : Nat) :
+    LockedNAND.RawSource.ofSource (source.weakenGates extra) =
+      LockedNAND.RawSource.ofSource source := by
+  cases source <;> rfl
+
+private theorem rawSource_ofSource_substitute_identity
+    {inputs prefixGates suffixGates : Nat}
+    (source : Source inputs suffixGates) :
+    LockedNAND.RawSource.ofSource
+        (source.substituteInputs
+          (identityBinding (inputs := inputs)
+            (gates := prefixGates))) =
+      shiftRawSource prefixGates
+        (LockedNAND.RawSource.ofSource source) := by
+  cases source with
+  | input index =>
+      change LockedNAND.RawSource.input index.val =
+        LockedNAND.RawSource.input index.val
+      rfl
+  | constant value =>
+      rfl
+  | gate index =>
+      rfl
+
+private theorem rawGate_ofGate_substitute_identity
+    {inputs prefixGates suffixGates : Nat}
+    (gate : Gate inputs suffixGates) :
+    LockedNAND.RawGate.ofGate
+        (gate.substituteInputs
+          (identityBinding (inputs := inputs)
+            (gates := prefixGates))) =
+      shiftRawGate prefixGates
+        (LockedNAND.RawGate.ofGate gate) := by
+  cases gate with
+  | mk left right =>
+      simp [Gate.substituteInputs, LockedNAND.RawGate.ofGate,
+        shiftRawGate, rawSource_ofSource_substitute_identity]
+
+private theorem rawProgramGates_appendSubstituted_identity
+    {inputs prefixGates suffixGates : Nat}
+    (initialProgram : Program inputs prefixGates)
+    (suffix : Program inputs suffixGates) :
+    LockedNAND.rawProgramGates
+        (initialProgram.appendSubstituted
+          (identityBinding (inputs := inputs)
+            (gates := prefixGates)) suffix) =
+      LockedNAND.rawProgramGates initialProgram ++
+        shiftRawGates prefixGates
+          (LockedNAND.rawProgramGates suffix) := by
+  induction suffix with
+  | empty =>
+      simp [Program.appendSubstituted, LockedNAND.rawProgramGates,
+        shiftRawGates]
+  | @snoc gates initial gate ih =>
+      simp [Program.appendSubstituted,
+        LockedNAND.rawProgramGates, ih,
+        shiftRawGates,
+        rawGate_ofGate_substitute_identity, List.append_assoc]
+
+private def appendCompiledState {inputs : Nat}
+    (compiled : CompiledExpression inputs)
+    (state : CompilationState) : CompilationState :=
+  { gates :=
+      state.gates ++
+        shiftRawGates state.gates.length
+          (LockedNAND.rawProgramGates compiled.program)
+    stack :=
+      shiftRawSource state.gates.length
+        (LockedNAND.RawSource.ofSource compiled.output) ::
+          state.stack }
+
+private theorem run_negate_appendCompiledState
+    {inputs : Nat} (compiled : CompiledExpression inputs)
+    (state : CompilationState) :
+    runCompilationPlan [.negate]
+        (appendCompiledState compiled state) =
+      some (appendCompiledState compiled.negate state) := by
+  simp [runCompilationPlan, CompilationAction.step,
+    CompilationState.emitNand, appendCompiledState,
+    CompiledExpression.negate, LockedNAND.rawProgramGates,
+    LockedNAND.RawGate.ofGate,
+    LockedNAND.RawSource.ofSource,
+    shiftRawGates, shiftRawSource,
+    rawProgramGates_length_plan]
+  cases compiled.output <;> rfl
+
+private theorem pairCompilations_rawProgram
+    {inputs : Nat} (left right : CompiledExpression inputs) :
+    LockedNAND.rawProgramGates
+        (pairCompilations left right).program =
+      LockedNAND.rawProgramGates left.program ++
+        shiftRawGates left.gateCount
+          (LockedNAND.rawProgramGates right.program) := by
+  exact rawProgramGates_appendSubstituted_identity
+    left.program right.program
+
+private theorem pairCompilations_gateCount
+    {inputs : Nat} (left right : CompiledExpression inputs) :
+    (pairCompilations left right).gateCount =
+      left.gateCount + right.gateCount := rfl
+
+private theorem pairCompilations_rawLeft
+    {inputs : Nat} (left right : CompiledExpression inputs) :
+    LockedNAND.RawSource.ofSource
+        (pairCompilations left right).left =
+      LockedNAND.RawSource.ofSource left.output := by
+  simp [pairCompilations, rawSource_ofSource_weakenGates]
+
+private theorem pairCompilations_rawRight
+    {inputs : Nat} (left right : CompiledExpression inputs) :
+    LockedNAND.RawSource.ofSource
+        (pairCompilations left right).right =
+      shiftRawSource left.gateCount
+        (LockedNAND.RawSource.ofSource right.output) := by
+  exact rawSource_ofSource_substitute_identity right.output
+
+private theorem run_nand_appendCompiledStates
+    {inputs : Nat} (left right : CompiledExpression inputs)
+    (state : CompilationState) :
+    runCompilationPlan [.nand]
+        (appendCompiledState right
+          (appendCompiledState left state)) =
+      some
+        (appendCompiledState
+          (pairCompilations left right).nand state) := by
+  simp only [runCompilationPlan, CompilationAction.step,
+    CompilationState.emitNand, appendCompiledState,
+    PairedCompilation.nand, LockedNAND.rawProgramGates,
+    LockedNAND.RawGate.ofGate]
+  rw [pairCompilations_rawProgram,
+    pairCompilations_rawLeft, pairCompilations_rawRight]
+  simp [shiftRawGates_append, shiftRawGates_add,
+    shiftRawSource_add, shiftRawGates_length,
+    rawProgramGates_length_plan,
+    LockedNAND.RawSource.ofSource,
+    shiftRawGates_singleton, shiftRawGate,
+    pairCompilations_gateCount]
+  rfl
+
+private theorem run_nand_negate_appendCompiledStates
+    {inputs : Nat} (left right : CompiledExpression inputs)
+    (state : CompilationState) :
+    runCompilationPlan [.nand, .negate]
+        (appendCompiledState right
+          (appendCompiledState left state)) =
+      some
+        (appendCompiledState
+          (pairCompilations left right).nand.negate state) := by
+  calc
+    _ =
+        match
+          runCompilationPlan [.nand]
+            (appendCompiledState right
+              (appendCompiledState left state)) with
+        | none => none
+        | some middle =>
+            runCompilationPlan [.negate] middle := by
+              exact runCompilationPlan_append
+                [.nand] [.negate]
+                (appendCompiledState right
+                  (appendCompiledState left state))
+    _ = _ := by
+      simpa only [run_nand_appendCompiledStates] using
+        run_negate_appendCompiledState
+          (pairCompilations left right).nand state
+
+private theorem run_negate_nand_appendCompiledStates
+    {inputs : Nat} (left right : CompiledExpression inputs)
+    (state : CompilationState) :
+    runCompilationPlan [.negate, .nand]
+        (appendCompiledState right
+          (appendCompiledState left state)) =
+      some
+        (appendCompiledState
+          (pairCompilations left right.negate).nand state) := by
+  calc
+    _ =
+        match
+          runCompilationPlan [.negate]
+            (appendCompiledState right
+              (appendCompiledState left state)) with
+        | none => none
+        | some middle =>
+            runCompilationPlan [.nand] middle := by
+              exact runCompilationPlan_append
+                [.negate] [.nand]
+                (appendCompiledState right
+                  (appendCompiledState left state))
+    _ = _ := by
+      simpa only [run_negate_appendCompiledState] using
+        run_nand_appendCompiledStates left right.negate state
+
+private theorem run_expressionPlan
+    {inputs : Nat} (expression : BoolExpression inputs)
+    (state : CompilationState) :
+    runCompilationPlan (expressionPlan expression) state =
+      some
+        (appendCompiledState
+          (compileExpression expression) state) := by
+  induction expression generalizing state with
+  | input index =>
+      simp [expressionPlan, runCompilationPlan,
+        CompilationAction.step, appendCompiledState,
+        compileExpression, shiftRawGates, shiftRawSource,
+        LockedNAND.rawProgramGates,
+        LockedNAND.RawSource.ofSource]
+  | constant value =>
+      simp [expressionPlan, runCompilationPlan,
+        CompilationAction.step, appendCompiledState,
+        compileExpression, shiftRawGates, shiftRawSource,
+        LockedNAND.rawProgramGates,
+        LockedNAND.RawSource.ofSource]
+  | neg body ih =>
+      rw [expressionPlan, runCompilationPlan_append, ih]
+      exact run_negate_appendCompiledState
+        (compileExpression body) state
+  | conj left right leftIH rightIH =>
+      simp only [expressionPlan, List.append_assoc,
+        runCompilationPlan_append, leftIH, rightIH]
+      simpa [compileExpression] using
+        run_nand_negate_appendCompiledStates
+          (compileExpression left) (compileExpression right) state
+  | disj left right leftIH rightIH =>
+      simp only [expressionPlan, List.append_assoc,
+        runCompilationPlan_append, leftIH,
+        run_negate_appendCompiledState, rightIH]
+      simpa [compileExpression] using
+        run_negate_nand_appendCompiledStates
+          (compileExpression left).negate
+          (compileExpression right) state
+
+private theorem finalize_appendCompiledState
+    {inputs : Nat} (compiled : CompiledExpression inputs) :
+    finalizeCompilation inputs
+        (appendCompiledState compiled
+          { gates := [], stack := [] }) =
+      some
+        (LockedNAND.RawCircuit.ofCircuit compiled.toCircuit) := by
+  cases compiled with
+  | mk gateCount program output =>
+      cases output with
+      | input index =>
+          simp [appendCompiledState, finalizeCompilation,
+            CompiledExpression.toCircuit,
+            shiftRawGates_zero, shiftRawSource,
+            LockedNAND.RawCircuit.ofCircuit,
+            LockedNAND.rawProgramGates,
+            LockedNAND.RawSource.ofSource,
+            LockedNAND.RawGate.ofGate,
+            rawProgramGates_length_plan]
+      | gate index =>
+          simp [appendCompiledState, finalizeCompilation,
+            CompiledExpression.toCircuit,
+            shiftRawGates_zero, shiftRawSource_zero,
+            LockedNAND.RawCircuit.ofCircuit,
+            LockedNAND.RawSource.ofSource]
+      | constant value =>
+          cases value <;>
+            simp [appendCompiledState, finalizeCompilation,
+              CompiledExpression.toCircuit,
+              shiftRawGates_zero, shiftRawSource,
+              LockedNAND.RawCircuit.ofCircuit,
+              LockedNAND.rawProgramGates,
+              LockedNAND.RawSource.ofSource,
+              LockedNAND.RawGate.ofGate,
+              rawProgramGates_length_plan]
+
+/-- The pure postfix plan produces exactly the existing intrinsically typed
+compiler result, including all recursive gate indices and finalization
+cases. -/
+theorem executeFormulaPlan_exact (formula : CNFFormula) :
+    executeFormulaPlan formula = some (compileFormula formula) := by
+  unfold executeFormulaPlan formulaPlan
+  rw [clausesPlan_eq_expressionPlan]
+  change
+    (match
+        runCompilationPlan
+          (expressionPlan (formulaExpression formula))
+          { gates := [], stack := [] } with
+      | none => none
+      | some state =>
+          finalizeCompilation formula.variableCount state) =
+      some (compileFormula formula)
+  rw [run_expressionPlan]
+  simpa [compileFormula, compiledFormulaCircuit] using
+    finalize_appendCompiledState
+      (compileExpression (formulaExpression formula))
+
+/-- Exact byte-level bridge required by the concrete reduction. -/
+theorem emitFormulaPlan_exact (formula : CNFFormula) :
+    emitFormulaPlan formula =
+      LockedNAND.encodeCircuit (compileFormula formula) := by
+  rw [emitFormulaPlan, executeFormulaPlan_exact]
+
+/-- The empty conjunction is true and is normalized to one `false NAND
+false` gate. -/
+@[simp] theorem executeFormulaPlan_empty_formula (inputs : Nat) :
+    executeFormulaPlan
+        { variableCount := inputs, clauses := [] } =
+      some
+        { inputCount := inputs
+          gates :=
+            [{ left := .constant false
+               right := .constant false }]
+          output := .gate 0 } := rfl
+
+/-- A formula containing one empty clause is false.  Its exact two gates
+preserve the compiler's NAND-then-self-NAND ordering. -/
+@[simp] theorem executeFormulaPlan_single_empty_clause
+    (inputs : Nat) :
+    executeFormulaPlan
+        { variableCount := inputs, clauses := [[]] } =
+      some
+        { inputCount := inputs
+          gates :=
+            [ { left := .constant false
+                right := .constant true }
+            , { left := .gate 0
+                right := .gate 0 } ]
+          output := .gate 1 } := rfl
+
 theorem compileFormula_inputCount (formula : CNFFormula) :
     (compileFormula formula).inputCount = formula.variableCount := rfl
 
@@ -1250,6 +1982,20 @@ theorem compileFormula_gateCount_exact (formula : CNFFormula) :
   unfold compileFormula LockedNAND.RawCircuit.ofCircuit
   rw [rawProgramGates_length, compiledFormulaCircuit_gateCount]
 
+/-- The action executor succeeds with the exact compiler circuit and hence
+inherits its closed gate-count formula. -/
+theorem executeFormulaPlan_gateCount_exact (formula : CNFFormula) :
+    ∃ circuit,
+      executeFormulaPlan formula = some circuit ∧
+        circuit.gates.length =
+          validNegativeLiteralCount formula +
+            3 * literalCount formula +
+            2 * formula.clauses.length +
+            (if formula.clauses.isEmpty then 1 else 0) := by
+  exact
+    ⟨compileFormula formula, executeFormulaPlan_exact formula,
+      compileFormula_gateCount_exact formula⟩
+
 theorem compileFormula_gateCount_le (formula : CNFFormula) :
     (compileFormula formula).gates.length ≤
       4 * literalCount formula + 2 * formula.clauses.length + 1 := by
@@ -1440,6 +2186,16 @@ theorem compileEncodedCNFToNAND_of_decoded
     compileEncodedCNFToNAND bits =
       LockedNAND.encodeCircuit (compileFormula formula) := by
   simp [compileEncodedCNFToNAND, decoded]
+
+/-- On a successfully decoded source word, the pure action emitter is
+byte-for-byte the total concrete CNF-to-NAND transformation. -/
+theorem emitFormulaPlan_eq_compileEncodedCNFToNAND_of_decoded
+    (bits : BitString) (formula : CNFFormula)
+    (decoded : decodeEncodedCNF bits = some formula) :
+    emitFormulaPlan formula =
+      compileEncodedCNFToNAND bits := by
+  rw [emitFormulaPlan_exact,
+    compileEncodedCNFToNAND_of_decoded bits formula decoded]
 
 theorem compileEncodedCNFToNAND_of_malformed
     (bits : BitString)

@@ -72,6 +72,36 @@ example :
   simpa [emptyClauseFormula, literalCount, validNegativeLiteralCount] using
     compileFormula_gateCount_exact emptyClauseFormula
 
+example :
+    formulaPlan emptyFormula =
+      [.push (.constant true)] := by
+  rfl
+
+example :
+    executeFormulaPlan emptyFormula =
+      some (compileFormula emptyFormula) :=
+  executeFormulaPlan_exact emptyFormula
+
+example :
+    executeFormulaPlan emptyClauseFormula =
+      some (compileFormula emptyClauseFormula) :=
+  executeFormulaPlan_exact emptyClauseFormula
+
+example :
+    emitFormulaPlan duplicateMultiClauseFormula =
+      encodeCircuit (compileFormula duplicateMultiClauseFormula) :=
+  emitFormulaPlan_exact duplicateMultiClauseFormula
+
+example :
+    ∃ circuit,
+      executeFormulaPlan duplicateMultiClauseFormula = some circuit ∧
+        circuit.gates.length =
+          validNegativeLiteralCount duplicateMultiClauseFormula +
+            3 * literalCount duplicateMultiClauseFormula +
+            2 * duplicateMultiClauseFormula.clauses.length +
+            (if duplicateMultiClauseFormula.clauses.isEmpty then 1 else 0) :=
+  executeFormulaPlan_gateCount_exact duplicateMultiClauseFormula
+
 /-! Positive, negative, and both out-of-range signs exercise every literal
 branch.  Out-of-range literals remain false rather than acquiring an
 invented assignment bit. -/
@@ -154,6 +184,15 @@ example :
     compileEncodedCNFToNAND (encodeCNF duplicateMultiClauseFormula) =
       encodeCircuit (compileFormula duplicateMultiClauseFormula) :=
   compileEncodedCNFToNAND_of_decoded
+    (encodeCNF duplicateMultiClauseFormula)
+    duplicateMultiClauseFormula
+    (decodeEncodedCNF_canonical duplicateMultiClauseFormula)
+
+example :
+    emitFormulaPlan duplicateMultiClauseFormula =
+      compileEncodedCNFToNAND
+        (encodeCNF duplicateMultiClauseFormula) :=
+  emitFormulaPlan_eq_compileEncodedCNFToNAND_of_decoded
     (encodeCNF duplicateMultiClauseFormula)
     duplicateMultiClauseFormula
     (decodeEncodedCNF_canonical duplicateMultiClauseFormula)
