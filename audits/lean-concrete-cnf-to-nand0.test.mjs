@@ -47,6 +47,31 @@ const PUBLIC_DECLARATIONS = Object.freeze([
   `${NAMESPACE}.encodeCNF_of_decodeEncodedCNF`,
   `${NAMESPACE}.compiledFormulaCircuit`,
   `${NAMESPACE}.compileFormula`,
+  `${NAMESPACE}.CompilationAction`,
+  `${NAMESPACE}.CompilationState`,
+  `${NAMESPACE}.CompilationAction.step`,
+  `${NAMESPACE}.runCompilationPlan`,
+  `${NAMESPACE}.literalPlan`,
+  `${NAMESPACE}.literalPlan_of_out_of_range`,
+  `${NAMESPACE}.clausePlan`,
+  `${NAMESPACE}.clausePlan_empty`,
+  `${NAMESPACE}.clausePlan_cons`,
+  `${NAMESPACE}.clausesPlan`,
+  `${NAMESPACE}.clausesPlan_empty`,
+  `${NAMESPACE}.clausesPlan_cons`,
+  `${NAMESPACE}.formulaPlan`,
+  `${NAMESPACE}.formulaPlan_empty`,
+  `${NAMESPACE}.formulaPlan_single_empty_clause`,
+  `${NAMESPACE}.formulaPlan_length_exact`,
+  `${NAMESPACE}.formulaPlan_length_le`,
+  `${NAMESPACE}.formulaPlan_length_le_encoded_bits`,
+  `${NAMESPACE}.finalizeCompilation`,
+  `${NAMESPACE}.executeFormulaPlan`,
+  `${NAMESPACE}.emitFormulaPlan`,
+  `${NAMESPACE}.executeFormulaPlan_exact`,
+  `${NAMESPACE}.emitFormulaPlan_exact`,
+  `${NAMESPACE}.executeFormulaPlan_empty_formula`,
+  `${NAMESPACE}.executeFormulaPlan_single_empty_clause`,
   `${NAMESPACE}.compileFormula_inputCount`,
   `${NAMESPACE}.compileFormula_output_is_gate`,
   `${NAMESPACE}.compileFormula_wellFormed`,
@@ -56,11 +81,13 @@ const PUBLIC_DECLARATIONS = Object.freeze([
   `${NAMESPACE}.compileFormula_satisfiable_iff`,
   `${NAMESPACE}.formula_satisfiable_iff_encoded_compileFormula`,
   `${NAMESPACE}.compileFormula_gateCount_exact`,
+  `${NAMESPACE}.executeFormulaPlan_gateCount_exact`,
   `${NAMESPACE}.compileFormula_gateCount_le`,
   `${NAMESPACE}.cnfToNANDOutputSizePolynomial`,
   `${NAMESPACE}.cnfToNANDOutputSizePolynomial_eval`,
   `${NAMESPACE}.compileEncodedCNFToNAND`,
   `${NAMESPACE}.compileEncodedCNFToNAND_of_decoded`,
+  `${NAMESPACE}.emitFormulaPlan_eq_compileEncodedCNFToNAND_of_decoded`,
   `${NAMESPACE}.compileEncodedCNFToNAND_of_malformed`,
   `${NAMESPACE}.compileEncodedCNFToNAND_size_le`,
   `${NAMESPACE}.empty_not_encodedNANDSAT`,
@@ -230,6 +257,31 @@ test('module is a universal typed NAND compiler with the exact public surface',
         ['theorem', 'encodeCNF_of_decodeEncodedCNF'],
         ['def', 'compiledFormulaCircuit'],
         ['def', 'compileFormula'],
+        ['inductive', 'CompilationAction'],
+        ['structure', 'CompilationState'],
+        ['def', 'CompilationAction.step'],
+        ['def', 'runCompilationPlan'],
+        ['def', 'literalPlan'],
+        ['theorem', 'literalPlan_of_out_of_range'],
+        ['def', 'clausePlan'],
+        ['theorem', 'clausePlan_empty'],
+        ['theorem', 'clausePlan_cons'],
+        ['def', 'clausesPlan'],
+        ['theorem', 'clausesPlan_empty'],
+        ['theorem', 'clausesPlan_cons'],
+        ['def', 'formulaPlan'],
+        ['theorem', 'formulaPlan_empty'],
+        ['theorem', 'formulaPlan_single_empty_clause'],
+        ['theorem', 'formulaPlan_length_exact'],
+        ['theorem', 'formulaPlan_length_le'],
+        ['theorem', 'formulaPlan_length_le_encoded_bits'],
+        ['def', 'finalizeCompilation'],
+        ['def', 'executeFormulaPlan'],
+        ['def', 'emitFormulaPlan'],
+        ['theorem', 'executeFormulaPlan_exact'],
+        ['theorem', 'emitFormulaPlan_exact'],
+        ['theorem', 'executeFormulaPlan_empty_formula'],
+        ['theorem', 'executeFormulaPlan_single_empty_clause'],
         ['theorem', 'compileFormula_inputCount'],
         ['theorem', 'compileFormula_output_is_gate'],
         ['theorem', 'compileFormula_wellFormed'],
@@ -239,11 +291,14 @@ test('module is a universal typed NAND compiler with the exact public surface',
         ['theorem', 'compileFormula_satisfiable_iff'],
         ['theorem', 'formula_satisfiable_iff_encoded_compileFormula'],
         ['theorem', 'compileFormula_gateCount_exact'],
+        ['theorem', 'executeFormulaPlan_gateCount_exact'],
         ['theorem', 'compileFormula_gateCount_le'],
         ['def', 'cnfToNANDOutputSizePolynomial'],
         ['theorem', 'cnfToNANDOutputSizePolynomial_eval'],
         ['def', 'compileEncodedCNFToNAND'],
         ['theorem', 'compileEncodedCNFToNAND_of_decoded'],
+        ['theorem',
+          'emitFormulaPlan_eq_compileEncodedCNFToNAND_of_decoded'],
         ['theorem', 'compileEncodedCNFToNAND_of_malformed'],
         ['theorem', 'compileEncodedCNFToNAND_size_le'],
         ['theorem', 'empty_not_encodedNANDSAT'],
@@ -262,7 +317,7 @@ test('axiom transcript covers every new and reused boundary declaration',
       ...REUSED_DECLARATIONS,
       ...PUBLIC_DECLARATIONS,
     ]);
-    assert.equal(new Set(printed0(audit)).size, 41);
+    assert.equal(new Set(printed0(audit)).size, 68);
 
     const inventory = JSON.parse(
       await text0('status/LEAN_THEOREM_INVENTORY.json'),
@@ -299,6 +354,11 @@ test('regression fixes edge semantics, exact counts, and universal boundaries',
       '(compileFormula emptyClauseFormula).gates.length = 2',
       '(compileFormula positiveFormula).gates.length = 5',
       '(compileFormula negativeFormula).gates.length = 6',
+      'formulaPlan emptyFormula',
+      'executeFormulaPlan_exact',
+      'emitFormulaPlan_exact',
+      'executeFormulaPlan_gateCount_exact',
+      'emitFormulaPlan_eq_compileEncodedCNFToNAND_of_decoded',
       'decodeEncodedCNF_canonical',
       'encodeCNF_of_decodeEncodedCNF',
       'decodeValidCircuit_encode_compileFormula',
@@ -342,7 +402,7 @@ test('root, status, milestone, workflow, and documentation publish only the sema
     ]) assert.equal(status[field], true, field);
     assert.equal(
       status.leanConcreteCNFToNANDSemanticCompilerAuditedDeclarationCount,
-      41,
+      68,
     );
     assert.equal(
       status.leanConcreteCNFToNANDSemanticCompilerScope,
@@ -350,11 +410,11 @@ test('root, status, milestone, workflow, and documentation publish only the sema
     );
     assert.equal(
       status.leanConcreteCNFToNANDFiniteMachineFormalized,
-      false,
+      true,
     );
     assert.equal(
       status.leanConcreteCNFToNANDPolynomialTimeFunctionFormalized,
-      false,
+      true,
     );
     assert.equal(status.projectSpecificAxiomInventory.length, 4);
     assert.equal(status.remainingBlockers.length, 6);
@@ -435,7 +495,14 @@ test('hostile mutations revoke semantic-compiler credit', async () => {
     source.replace(')).nand.negate', ')).nand'),
   ).includes('nand-construction'));
   assert.ok(validateSource0(
-    source.replace('| none => []', '| none => [false]'),
+    source.replace(
+      'def compileEncodedCNFToNAND (bits : BitString) : BitString :=\n'
+        + '  match decodeEncodedCNF bits with\n'
+        + '  | none => []',
+      'def compileEncodedCNFToNAND (bits : BitString) : BitString :=\n'
+        + '  match decodeEncodedCNF bits with\n'
+        + '  | none => [false]',
+    ),
   ).includes('fail-closed-codec'));
   assert.ok(validateSource0(
     source.replaceAll('3 * literalCount formula', '2 * literalCount formula'),

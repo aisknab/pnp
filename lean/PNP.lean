@@ -31,6 +31,7 @@ import PNP.Concrete.LockedNANDSourceParser
 import PNP.Concrete.LockedNANDTargetEmitter
 import PNP.Concrete.LockedNANDPolynomialReduction
 import PNP.Concrete.CNFToNAND
+import PNP.Concrete.CNFToNANDPolynomialReduction
 import PNP.Concrete.Target
 import PNP.Concrete.CNF
 import PNP.Concrete.CookLevinLayout

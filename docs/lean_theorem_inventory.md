@@ -50,7 +50,7 @@ correctness and no timeout under an explicit polynomial bound, constructs a `.pa
 `PNP.Concrete.FinalUniversalDesign.cnfSATInNP : InNP CNFSAT`. This establishes `CNFSAT ∈ NP`.
 It does not establish `CNFSAT ∈ P`, NP-hardness, NP-completeness, or `P = NP`.
 
-The newest reviewed milestones follow the unbounded legacy Section 17 dependency through complete
+The locked-NAND semantic milestones follow the unbounded legacy Section 17 dependency through complete
 candidate assembly, global baseline distinctness, and the unsatisfiable branch. For every finite
 topologically ordered NAND circuit, `PNP.LockedNANDGlobalCandidates` constructs the exact square
 `B`-gate/`B`-output baseline and `B + 4`-gate/`B + 1`-output extension, preserves every baseline
@@ -80,8 +80,13 @@ machine/function witnesses, and its leaf raw-machine refinement. The following t
 milestone supplies one fixed grammar-only controller, exact raw target bytes, all-input polynomial
 runtime and output-size bounds, compiled non-timeout, polynomial machine/function witnesses, a
 leaf raw refinement, and strict parser/emitter composition computing the established pure
-reduction. Concrete `PolynomialReduction` packaging, the report-level
-`PNP.LockedNANDThreshold` link, CNFSAT-in-P theorem, and `P = NP` root remain absent.
+reduction. The composition is packaged as
+`PolynomialReduction EncodedNANDSAT EncodedLockedNANDThreshold`. A separate fixed
+all-input compiler computes the exact encoded CNF-to-NAND translation in polynomial time,
+retains raw refinement, packages `PolynomialReduction CNFSAT EncodedNANDSAT`, and exposes
+the composed locked-NAND reduction. The report-level `PNP.LockedNANDThreshold` link,
+CNFSAT-in-P theorem, remaining NP-hardness/NP-completeness transport, and `P = NP` root
+remain absent.
 
 The current four project-specific axioms remain visible as an independent inventory:
 

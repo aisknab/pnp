@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-31-93",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-31-94",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -606,7 +606,7 @@
   "leanConcreteLockedNANDPolynomialReductionScope": "strict-version-zero-parser-emitter-polynomial-reduction-with-exact-language-equivalence-and-recursive-raw-refinement",
   "leanConcreteCNFToNANDSemanticCompilerFormalized": true,
   "leanConcreteCNFToNANDSemanticCompilerAxiomAuditPassed": true,
-  "leanConcreteCNFToNANDSemanticCompilerAuditedDeclarationCount": 41,
+  "leanConcreteCNFToNANDSemanticCompilerAuditedDeclarationCount": 68,
   "leanConcreteCNFToNANDExactCodecCanonicalityFormalized": true,
   "leanConcreteCNFToNANDTypedTopologicalCompilationFormalized": true,
   "leanConcreteCNFToNANDWellFormedOutputFormalized": true,
@@ -616,8 +616,18 @@
   "leanConcreteCNFToNANDPolynomialOutputSizeBoundFormalized": true,
   "leanConcreteCNFToNANDAllBitstringFailClosedFormalized": true,
   "leanConcreteCNFToNANDLockedThresholdCompositionFormalized": true,
-  "leanConcreteCNFToNANDFiniteMachineFormalized": false,
-  "leanConcreteCNFToNANDPolynomialTimeFunctionFormalized": false,
+  "leanConcreteCNFToNANDFiniteMachineFormalized": true,
+  "leanConcreteCNFToNANDPolynomialTimeFunctionFormalized": true,
+  "leanConcreteCNFToNANDPolynomialReductionFormalized": true,
+  "leanConcreteCNFToNANDPolynomialReductionAxiomAuditPassed": true,
+  "leanConcreteCNFToNANDPolynomialReductionAuditedDeclarationCount": 1316,
+  "leanConcreteCNFToNANDAllInputExactFormalized": true,
+  "leanConcreteCNFToNANDExactMachineOutputFormalized": true,
+  "leanConcreteCNFToNANDCompiledNonTimeoutFormalized": true,
+  "leanConcreteCNFToNANDRawRefinementFormalized": true,
+  "leanConcreteCNFToNANDDirectReductionFormalized": true,
+  "leanConcreteCNFToNANDLockedReductionCompositionFormalized": true,
+  "leanConcreteCNFToNANDPolynomialReductionScope": "fixed-135070-rule-three-node-all-bitstring-cnf-to-nand-compiler-with-exact-output-polynomial-time-function-direct-reduction-locked-threshold-composition-and-recursive-raw-refinement",
   "leanConcreteCNFToNANDSemanticCompilerScope": "strict-canonical-cnf-to-intrinsically-topological-nand-semantic-compiler-with-exact-gate-count-quadratic-output-bound-and-all-bitstring-fail-closed-equivalence",
   "leanLockedNANDPolynomialBuilderFormalized": false,
   "leanCompatibleReplacementFormalized": false,
@@ -660,7 +670,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-31-CNF-TO-NAND-SEMANTIC-COMPILER-92",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-31-CNF-TO-NAND-POLYNOMIAL-REDUCTION-93",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -1041,6 +1051,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFToNANDAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFToNAND.lean",
     "node --test audits/lean-concrete-cnf-to-nand0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFToNANDPolynomialReductionAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFToNANDPolynomialReduction.lean",
+    "node --test audits/lean-concrete-cnf-to-nand-polynomial-reduction0.test.mjs",
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualRoutesAxiomAudit.lean",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
@@ -1173,7 +1186,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "daed8c40eb6416b42d6b78d87b118b8033bbb5f3e857874c3d1ee45cf89e8876",
+    "actualSourceClosureSha256": "f4cec303e24b1e7b58bcab141d3fcbe7e1306b5e5913028bf8696a6af6160b42",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1203,22 +1216,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-31-93",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-31-94",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "576816bd782378cd1d19ad1de76485b82896e6f141853946b6e0ad7df1fefa82",
+  "leanTheoremInventorySha256": "f6dc633360d0aad4df37e2273c7304723d5187a66c67a88e1416e4adbf7e62ca",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 21020,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 11970,
-  "leanTheoremInventoryTheoremCount": 11477,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 5987,
-  "leanTheoremInventorySourceClosureModuleCount": 186,
-  "leanSourceClosureSha256": "daed8c40eb6416b42d6b78d87b118b8033bbb5f3e857874c3d1ee45cf89e8876",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-31-93",
+  "leanTheoremInventoryDeclarationCount": 23575,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 14273,
+  "leanTheoremInventoryTheoremCount": 12806,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 6767,
+  "leanTheoremInventorySourceClosureModuleCount": 208,
+  "leanSourceClosureSha256": "f4cec303e24b1e7b58bcab141d3fcbe7e1306b5e5913028bf8696a6af6160b42",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-31-94",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "c821adfcb65b9bce9c894b5debf99b9ba661457d865e9fed4ecedfd5ff3db88b",
+  "formalPublicationMapSha256": "84af7674ba9cdbf844068e9d0a0d4213ea90ef5c63f2f607c61381a60f886704",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",
@@ -28987,7 +29000,7 @@
         "PNP.Concrete.LockedNAND.encodedNANDSAT_reducesTo_encodedLockedNANDThreshold",
         "PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_hasRawRefinement"
       ],
-      "nonClaim": "The downstream semantic compiler now identifies CNFSAT with this concrete source language, but no finite-machine implementation or PolynomialTimeFunction for that compiler has been formalized. This milestone does not establish NP-hardness, discharge the abstract target-language assumption, prove the report-level locked-NAND threshold theorem, put CNFSAT in P, complete residual minimization or ZeroSlack, or prove P = NP.",
+      "nonClaim": "The downstream all-input CNF compiler now identifies CNFSAT with this concrete source language through a fixed finite machine and a direct polynomial reduction, then composes with this reduction. This milestone does not discharge the abstract target-language assumption, prove the report-level locked-NAND threshold theorem, put CNFSAT in P, complete residual minimization or ZeroSlack, or prove P = NP.",
       "theoremRows": [
         {
           "name": "PNP.Concrete.LockedNAND.strictLockedNANDPolynomialReduction_function",
@@ -29083,7 +29096,7 @@
         "PNP.Concrete.CNFToNAND.compileEncodedCNFToNAND_correct",
         "PNP.Concrete.CNFToNAND.buildLockedNANDFromCNF_correct"
       ],
-      "nonClaim": "This is a pure semantic and size-bound compiler, not yet a compiled finite work machine, a PolynomialTimeFunction, or a PolynomialReduction witness. It does not establish CNFSAT NP-hardness transport, a deterministic polynomial-time CNFSAT decider, the abstract report-level locked-NAND premise, ZeroSlack/PCCMin, or P = NP.",
+      "nonClaim": "This milestone is the pure semantic and size-bound layer; the subsequent all-input milestone supplies the finite-machine, PolynomialTimeFunction, RawRefinement, and PolynomialReduction interfaces. Neither layer decides CNF-SAT, proves CNFSAT is in deterministic polynomial time, discharges the abstract report-level locked-NAND premise, completes ZeroSlack/PCCMin, or proves P = NP.",
       "theoremRows": [
         {
           "name": "PNP.Concrete.CNFToNAND.encodeCNF_of_decodeEncodedCNF",
@@ -29302,6 +29315,386 @@
       "status": "formalized-semantic-boundary"
     },
     {
+      "id": "concrete-cnf-to-nand-polynomial-reduction",
+      "title": "Concrete all-input CNF-to-NAND polynomial reduction",
+      "classification": "formalized-polynomial-reduction",
+      "scope": "One fixed 135,070-rule three-node parser/carrier/controller work graph halts on every bitstring, rejects malformed CNF words with empty output, emits exactly compileEncodedCNFToNAND on every valid source, has one external encoded-input polynomial, compiles to a non-timeout PolynomialTimeFunction, retains literal RawRefinement, packages a direct PolynomialReduction from CNFSAT to EncodedNANDSAT, and composes it with the strict locked-NAND reduction to EncodedLockedNANDThreshold.",
+      "requiredTheorems": [
+        "PNP.Concrete.CNFSourceParser.allInput_exact",
+        "PNP.Concrete.CNFSourceParser.compiledMachineOutput_eq_validatedCNFBytes",
+        "PNP.Concrete.CNFSourceParser.compiledBoundedDecide_ne_timeout",
+        "PNP.Concrete.CNFToNANDCarrierEncoder.canonical_exact",
+        "PNP.Concrete.CNFToNANDCarrierEncoder.canonicalWorkSteps_polynomial_bound",
+        "PNP.Concrete.CNFToNANDWorkspace.exact_execution_output",
+        "PNP.Concrete.CNFToNANDController.rules_length_literal",
+        "PNP.Concrete.CNFToNANDControllerTotalTrace.canonical_path",
+        "PNP.Concrete.CNFToNANDControllerTotalTrace.canonical_bounded_exact",
+        "PNP.Concrete.CNFToNANDCompilerMachine.rules_length_literal",
+        "PNP.Concrete.CNFToNANDCompilerTotalTrace.malformed_bounded_exact",
+        "PNP.Concrete.CNFToNANDCompilerTotalTrace.decoded_bounded_exact",
+        "PNP.Concrete.CNFToNANDCompilerTotalTrace.allInput_bounded_exact",
+        "PNP.Concrete.CNFToNANDCompilerPolynomialBound.allInputWorkTimePolynomial_eval",
+        "PNP.Concrete.CNFToNANDCompilerPolynomialBound.compiledRawTimePolynomial_eval",
+        "PNP.Concrete.CNFToNANDCompilerCompiled.compiledMachineOutput_eq_compileEncodedCNFToNAND",
+        "PNP.Concrete.CNFToNANDCompilerCompiled.compiledBoundedDecide_accept_iff",
+        "PNP.Concrete.CNFToNANDCompilerCompiled.compiledBoundedDecide_ne_timeout",
+        "PNP.Concrete.CNFToNANDCompilerCompiled.cnfToNANDPolynomialTimeFunction_output",
+        "PNP.Concrete.CNFToNAND.cnfToNANDPolynomialReduction_function",
+        "PNP.Concrete.CNFToNAND.cnfToNANDPolynomialReduction_output",
+        "PNP.Concrete.CNFToNAND.cnfToNANDPolynomialReduction_correct",
+        "PNP.Concrete.CNFToNAND.cnfSAT_reducesTo_encodedNANDSAT",
+        "PNP.Concrete.CNFToNAND.cnfToNANDPolynomialReduction_hasRawRefinement",
+        "PNP.Concrete.CNFToNAND.cnfToLockedNANDPolynomialReduction_output",
+        "PNP.Concrete.CNFToNAND.cnfToLockedNANDPolynomialReduction_correct",
+        "PNP.Concrete.CNFToNAND.cnfSAT_reducesTo_encodedLockedNANDThreshold",
+        "PNP.Concrete.CNFToNAND.cnfToLockedNANDPolynomialReduction_hasRawRefinement"
+      ],
+      "nonClaim": "This syntax-directed compiler does not itself decide CNF-SAT, put CNFSAT in deterministic polynomial time, establish SAT NP-hardness or CNFSAT NP-completeness, connect the concrete locked-NAND target to the abstract report-level threshold theorem, complete residual minimization or ZeroSlack/PCCMin, discharge any project assumption, or prove P = NP.",
+      "theoremRows": [
+        {
+          "name": "PNP.Concrete.CNFSourceParser.allInput_exact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
+          "expectedKernelTypeSha256": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFSourceParser.compiledMachineOutput_eq_validatedCNFBytes",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "eac4855420429c6ccc98e381534f870f8a14fbb9e04d200940934892e674f997",
+          "expectedKernelTypeSha256": "eac4855420429c6ccc98e381534f870f8a14fbb9e04d200940934892e674f997",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFSourceParser.compiledBoundedDecide_ne_timeout",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b53d4b484be3ed5e2d1f7374561a0e2e9774c54cbf8a4358e2aa2d20aa0dba28",
+          "expectedKernelTypeSha256": "b53d4b484be3ed5e2d1f7374561a0e2e9774c54cbf8a4358e2aa2d20aa0dba28",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNANDCarrierEncoder.canonical_exact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "1011b1659187ad69f11c8ec1041beb3960095d7770a5060a86d4fcc02c6ae767",
+          "expectedKernelTypeSha256": "1011b1659187ad69f11c8ec1041beb3960095d7770a5060a86d4fcc02c6ae767",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNANDCarrierEncoder.canonicalWorkSteps_polynomial_bound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "35abeeed863b558d7609db62e3fcbdfcf4d4519195d8a8c9d95e5c5a214a8418",
+          "expectedKernelTypeSha256": "35abeeed863b558d7609db62e3fcbdfcf4d4519195d8a8c9d95e5c5a214a8418",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNANDWorkspace.exact_execution_output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c18b2463f9ba766aa9919b784868275d63ec6d121704e07f162099aa2c5671ea",
+          "expectedKernelTypeSha256": "c18b2463f9ba766aa9919b784868275d63ec6d121704e07f162099aa2c5671ea",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNANDController.rules_length_literal",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b7a6f2c3f91c9f54be6d9e9e1026b33b8c0111d74be783e40fcca363b3dace40",
+          "expectedKernelTypeSha256": "b7a6f2c3f91c9f54be6d9e9e1026b33b8c0111d74be783e40fcca363b3dace40",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNANDControllerTotalTrace.canonical_path",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "13d4e3c6ae39fae86825806e6d8e98c2b5f9729930d4bab787bb4aa445856f65",
+          "expectedKernelTypeSha256": "13d4e3c6ae39fae86825806e6d8e98c2b5f9729930d4bab787bb4aa445856f65",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNANDControllerTotalTrace.canonical_bounded_exact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "31bc22ce4c93dbbc0fa17e89354e6c64088b8df5d9ec6fe2354ae28cb3df483f",
+          "expectedKernelTypeSha256": "31bc22ce4c93dbbc0fa17e89354e6c64088b8df5d9ec6fe2354ae28cb3df483f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNANDCompilerMachine.rules_length_literal",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d0b8f3d3224541b58d7a779edb0fb108e5cd286191a297a297e572141409780b",
+          "expectedKernelTypeSha256": "d0b8f3d3224541b58d7a779edb0fb108e5cd286191a297a297e572141409780b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNANDCompilerTotalTrace.malformed_bounded_exact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "86a5b7354a461736a5ec98db75864d8fc923fac4e0efaa08740dee8d82db9d8d",
+          "expectedKernelTypeSha256": "86a5b7354a461736a5ec98db75864d8fc923fac4e0efaa08740dee8d82db9d8d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNANDCompilerTotalTrace.decoded_bounded_exact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "be2c9ff9aca1e3be1615dd8c7b2a56294794d42f2b46e8838a6b3cc56070f852",
+          "expectedKernelTypeSha256": "be2c9ff9aca1e3be1615dd8c7b2a56294794d42f2b46e8838a6b3cc56070f852",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNANDCompilerTotalTrace.allInput_bounded_exact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "341e4379db02ad188111d7d0f4998f8353f1456d43cbaf88a4c16d0e69414161",
+          "expectedKernelTypeSha256": "341e4379db02ad188111d7d0f4998f8353f1456d43cbaf88a4c16d0e69414161",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNANDCompilerPolynomialBound.allInputWorkTimePolynomial_eval",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "45b7598b215b193e767ccb5acd47eb7ee54499c56f31c64476e08a494e4251f1",
+          "expectedKernelTypeSha256": "45b7598b215b193e767ccb5acd47eb7ee54499c56f31c64476e08a494e4251f1",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNANDCompilerPolynomialBound.compiledRawTimePolynomial_eval",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4a97fa944421808923a6e288992ea71c047875ba291142a4a594b3fb25eeaf34",
+          "expectedKernelTypeSha256": "4a97fa944421808923a6e288992ea71c047875ba291142a4a594b3fb25eeaf34",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNANDCompilerCompiled.compiledMachineOutput_eq_compileEncodedCNFToNAND",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6878d3576e74856d76fead6619d8eb6df64b25935b0eea6921f08221de19094f",
+          "expectedKernelTypeSha256": "6878d3576e74856d76fead6619d8eb6df64b25935b0eea6921f08221de19094f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNANDCompilerCompiled.compiledBoundedDecide_accept_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "53e14a9b3fe9b9f3e1c7d917405e8ea049909de164dc1ac44a1b82c3353a7461",
+          "expectedKernelTypeSha256": "53e14a9b3fe9b9f3e1c7d917405e8ea049909de164dc1ac44a1b82c3353a7461",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNANDCompilerCompiled.compiledBoundedDecide_ne_timeout",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a733db3c994ab97ceb089f9e8d3c92d74ad835caf7417e6becd25c52b533803d",
+          "expectedKernelTypeSha256": "a733db3c994ab97ceb089f9e8d3c92d74ad835caf7417e6becd25c52b533803d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNANDCompilerCompiled.cnfToNANDPolynomialTimeFunction_output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a5f03860069e91fd93687f187af204dc6d5cb836217f57a97c7f6c65b92de90f",
+          "expectedKernelTypeSha256": "a5f03860069e91fd93687f187af204dc6d5cb836217f57a97c7f6c65b92de90f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNAND.cnfToNANDPolynomialReduction_function",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b386bdd8592653d91dfd1807ec89c37a16742b7802157198a423c8935b944762",
+          "expectedKernelTypeSha256": "b386bdd8592653d91dfd1807ec89c37a16742b7802157198a423c8935b944762",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNAND.cnfToNANDPolynomialReduction_output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9b669178316dc83edb173c6d413caaa362b896de656e95f50799cfa78a991cbf",
+          "expectedKernelTypeSha256": "9b669178316dc83edb173c6d413caaa362b896de656e95f50799cfa78a991cbf",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNAND.cnfToNANDPolynomialReduction_correct",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b8d9bdee2a2b5b00f542cee4ccee1f22353c8333e1f3cb58492b3c9c6a441e6d",
+          "expectedKernelTypeSha256": "b8d9bdee2a2b5b00f542cee4ccee1f22353c8333e1f3cb58492b3c9c6a441e6d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNAND.cnfSAT_reducesTo_encodedNANDSAT",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c02c6c4348f7da3bc683db412dc9bde7ebf34e2350f2742cda2e07272117214c",
+          "expectedKernelTypeSha256": "c02c6c4348f7da3bc683db412dc9bde7ebf34e2350f2742cda2e07272117214c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNAND.cnfToNANDPolynomialReduction_hasRawRefinement",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d7a790335337e9ba0a3eaba84b27b8dec690a0abe9fea69d5a6017f7ac445935",
+          "expectedKernelTypeSha256": "d7a790335337e9ba0a3eaba84b27b8dec690a0abe9fea69d5a6017f7ac445935",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNAND.cnfToLockedNANDPolynomialReduction_output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f2f51f52a39307bd2d5508960084e0ddf23ad9502a87ec169509d75734d5d5fe",
+          "expectedKernelTypeSha256": "f2f51f52a39307bd2d5508960084e0ddf23ad9502a87ec169509d75734d5d5fe",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNAND.cnfToLockedNANDPolynomialReduction_correct",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ed49b9d58aa5d515626030b14b58bd94a9fa17dc3f0fb10258e84a1ecfa9ef9b",
+          "expectedKernelTypeSha256": "ed49b9d58aa5d515626030b14b58bd94a9fa17dc3f0fb10258e84a1ecfa9ef9b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNAND.cnfSAT_reducesTo_encodedLockedNANDThreshold",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "835669097f31eea9bfae1571e7dbfea5e310489c4fd18cb41edbfa561fb924e6",
+          "expectedKernelTypeSha256": "835669097f31eea9bfae1571e7dbfea5e310489c4fd18cb41edbfa561fb924e6",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CNFToNAND.cnfToLockedNANDPolynomialReduction_hasRawRefinement",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "73ef05c12f8b87d3867e46b3a2c555adad77f1a9c49c0f1c7827cea11e7965cf",
+          "expectedKernelTypeSha256": "73ef05c12f8b87d3867e46b3a2c555adad77f1a9c49c0f1c7827cea11e7965cf",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-polynomial-reduction"
+    },
+    {
       "id": "locked-nand-conditional-threshold",
       "title": "Conditional locked-NAND threshold boundary",
       "classification": "formalized-with-premises",
@@ -29415,7 +29808,7 @@
       "requiredTheorems": [
         "PNP.Main.locked_nand_threshold"
       ],
-      "nonClaim": "The strict encoding, total source parser, literal target emitter, exact formula bytes, strict parser/emitter composition, polynomial runtime, output-size bound, recursive RawRefinement, concrete strict-v0 source-to-target PolynomialReduction, and semantic CNFSAT-to-NAND compiler are now formalized. The new CNF compiler does not yet have a finite-machine PolynomialTimeFunction or PolynomialReduction witness; the concrete target language is not linked to the report-level theorem, and the abstract threshold assumption remains.",
+      "nonClaim": "The strict encoding, total source parser, literal target emitter, exact formula bytes, strict parser/emitter composition, polynomial runtime, output-size bound, recursive RawRefinement, concrete strict-v0 source-to-target PolynomialReduction, semantic CNF-to-NAND compiler, and its all-input finite-machine PolynomialReduction are now formalized. The concrete target language is still not linked to the report-level theorem, and the abstract threshold assumption remains.",
       "theoremRows": [
         {
           "name": "PNP.Main.locked_nand_threshold",
@@ -29481,7 +29874,7 @@
       "requiredTheorems": [
         "PNP.Main.p_eq_np"
       ],
-      "nonClaim": "The concrete target definition remains inactive: CNF-SAT now has a raw-machine verifier, NP-membership proof, and semantic CNF-to-NAND compiler, but the compiler has no finite-machine polynomial-time witness, and a deterministic polynomial-time CNF-SAT decider, NP-completeness transport, and PNP.Main.p_eq_np remain absent; the legacy string-handle bridge is ineligible.",
+      "nonClaim": "The concrete target definition remains inactive: CNF-SAT now has a raw-machine verifier, NP-membership proof, and an all-input finite-machine polynomial reduction through NAND to the concrete locked target, but a deterministic polynomial-time CNF-SAT decider, the concrete-to-abstract threshold link, SAT NP-hardness and CNFSAT NP-completeness transport, and PNP.Main.p_eq_np remain absent; the legacy string-handle bridge is ineligible.",
       "theoremRows": [
         {
           "name": "PNP.Main.p_eq_np",
@@ -29502,7 +29895,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-31-93",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-31-94",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

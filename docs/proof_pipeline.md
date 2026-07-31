@@ -196,11 +196,14 @@ empty word, and the compiled parser cannot time out within
 language machine, a nonexpanding polynomial-time validation function, and a
 leaf raw-machine refinement.
 
-This closes the source-validation side, not the concrete reduction. The
-remaining executable boundary is the exact target emitter with its runtime
-and output-size bounds, followed by parser/emitter composition and the final
-`PolynomialReduction` package. The abstract threshold-language discharge,
-CNFSAT-in-P result, NP-hardness transport, and `P = NP` remain unproved.
+The exact target emitter, parser/emitter composition, runtime and output-size
+bounds, and final strict-v0 `PolynomialReduction` package are now formalized.
+A separate fixed all-input machine computes the exact encoded CNF-to-NAND
+translation in polynomial time and packages both the direct
+`CNFSAT`-to-`EncodedNANDSAT` reduction and its explicit composition with the
+strict locked-NAND reduction. The abstract threshold-language discharge,
+CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
+unproved.
 
 ### 5.3 Residual-band minimisation correctness
 

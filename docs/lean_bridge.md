@@ -630,8 +630,11 @@ validator machine, its all-input exact verdict/output theorem, compiled cubic
 bound, polynomial machine/function witnesses, and leaf `RawRefinement`. The
 following target-emitter layer now supplies exact raw target bytes,
 polynomial bounds, strict parser composition, and recursive raw refinement.
-Concrete `PolynomialReduction` packaging and report-level linkage remain
-absent. See
+The strict parser/emitter function is now packaged as
+`PolynomialReduction EncodedNANDSAT EncodedLockedNANDThreshold`. A separate
+all-input finite compiler packages `PolynomialReduction CNFSAT EncodedNANDSAT`
+and their explicit composition. Report-level locked-NAND language linkage
+remains absent. See
 `docs/lean_locked_nand_global_candidates.md` and
 `docs/lean_locked_nand_global_baseline_distinct.md`, then
 `docs/lean_locked_nand_global_unsatisfiable_final_zero.md` and
@@ -758,9 +761,9 @@ and fail-closed equivalence on every bitstring. Empty formulas are true,
 empty clauses are false, and both signs of an out-of-range literal are false.
 
 Pure semantic composition with the existing locked-NAND builder proves the
-corresponding `EncodedLockedNANDThreshold` equivalence. This compiler is not
-yet implemented by a finite work machine and has no `RawRefinement`,
-`PolynomialTimeFunction`, or packaged `PolynomialReduction`.
+corresponding `EncodedLockedNANDThreshold` equivalence. The all-input milestone
+in the following section now implements this exact pure function with a fixed
+finite work machine and packages the resulting polynomial reductions.
 
 ```sh
 lake env lean -DwarningAsError=true \
@@ -772,7 +775,41 @@ node --test audits/lean-concrete-cnf-to-nand0.test.mjs
 
 See
 [`lean_concrete_cnf_to_nand_semantic_compiler.md`](./lean_concrete_cnf_to_nand_semantic_compiler.md)
-for the exact semantics, accounting, and remaining boundary.
+for the exact semantic foundation and accounting.
+
+## Concrete all-input CNF-to-NAND polynomial reduction
+
+`lean/PNP/Concrete/CNFToNANDPolynomialReduction.lean` closes the executable
+edge left by the semantic compiler. A fixed three-node work graph validates
+every bitstring, constructs a retained CNF carrier, counts the exact target
+gates, and emits the exact strict NAND bytes. Malformed inputs halt in reject
+with empty output. Successfully decoded inputs halt in accept with output
+equal to `CNFToNAND.compileEncodedCNFToNAND`.
+
+The complete path has one polynomial bound in the original encoded input
+length. The compiled boundary never times out at that bound and supplies a
+literal `PolynomialTimeFunction` plus `FunctionProgram.RawRefinement`.
+`CNFToNAND.cnfToNANDPolynomialReduction` reduces strict encoded CNF
+satisfiability to strict encoded NAND satisfiability. Its explicit composition
+with `LockedNAND.strictLockedNANDPolynomialReduction` reduces the same source
+language to strict locked-NAND threshold instances.
+
+The machine performs only syntax-directed compilation. It does not itself
+decide CNF-SAT, prove CNF-SAT is in deterministic polynomial time, discharge
+the remaining locked-NAND threshold assumption, or establish `P = NP`.
+
+```sh
+lake env lean -DwarningAsError=true \
+  lean-audit/PNPConcreteCNFToNANDPolynomialReductionAxiomAudit.lean
+lake env lean -DwarningAsError=true \
+  lean-regression/PNPConcreteCNFToNANDPolynomialReduction.lean
+node --test \
+  audits/lean-concrete-cnf-to-nand-polynomial-reduction0.test.mjs
+```
+
+See
+[`lean_concrete_cnf_to_nand_polynomial_reduction.md`](./lean_concrete_cnf_to_nand_polynomial_reduction.md)
+for the executable architecture, exact theorem boundary, and non-claims.
 
 ## Global locked-NAND layer
 
@@ -798,8 +835,9 @@ compiled non-timeout, exact validated-byte output, polynomial machine/function
 witnesses, and leaf raw refinement. Its target emitter now adds exact raw
 target bytes, an all-input compiled polynomial, an output-size polynomial,
 strict parser composition, and recursive raw refinement. Remaining global
-work is the resulting concrete `PolynomialReduction` packaging and the
-report-level language linkage.
+work is the report-level language linkage; the concrete strict locked-NAND
+reduction and the all-input CNF-to-NAND direct and composed reductions are now
+packaged.
 
 ## Residual-band, ZeroSlack, and PCCMin layers
 
@@ -927,6 +965,10 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
     intrinsically topological NAND circuits, with exact edge semantics, exact gate count,
     a quadratic serialized-output bound, all-bitstring fail-closed language equivalence,
     and semantic composition with the concrete locked-NAND threshold builder.
+27. A fixed 135,070-rule three-node all-input implementation of that compiler, with exact
+    output on every bitstring, one external polynomial bound, compiled non-timeout,
+    `PolynomialTimeFunction`, literal `RawRefinement`, a direct reduction from `CNFSAT` to
+    `EncodedNANDSAT`, and explicit composition to `EncodedLockedNANDThreshold`.
 ```
 
 ## Explicit trust base after this pass
@@ -950,16 +992,13 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 The highest-value next targets are:
 
 ```text
-1. Implement `compileEncodedCNFToNAND` as a total finite work machine, prove its external
-   polynomial runtime and exact output, and package its `RawRefinement`,
-   `PolynomialTimeFunction`, and concrete `PolynomialReduction`.
-2. Connect the concrete `EncodedLockedNANDThreshold` language to the report-level abstract
+1. Connect the concrete `EncodedLockedNANDThreshold` language to the report-level abstract
    locked-NAND threshold theorem without adding an assumption.
-3. Complete the raw Cook--Levin formula builder and package its concrete polynomial reduction.
-4. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
-5. Formalize or import concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
+2. Complete the raw Cook--Levin formula builder and package its concrete polynomial reduction.
+3. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
+4. Formalize or import concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.
-6. Formalize checker/reflection soundness for the PCC package.
+5. Formalize checker/reflection soundness for the PCC package.
 ```
 
 A passing Lean build is a real checked artifact. At this stage it checks an assumption-free status

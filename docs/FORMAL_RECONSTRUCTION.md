@@ -93,8 +93,8 @@ The development also provides one direct raw-machine instance: a universally
 correct polynomial-time verifier for canonically encoded finite CNF formulae and bounded assignment
 certificates, proving `PNP.Concrete.CNFSAT ∈ NP`. It does not provide a deterministic polynomial-time
 decider proving `CNFSAT ∈ P`, concrete NP-hardness or NP-completeness, the complete locked-NAND
-threshold theorem, the residual-band exact minimizer, ZeroSlack, the recursive complexity-model
-machine link, or a root theorem `PNP.Main.p_eq_np` with an acceptable axiom audit.
+threshold theorem, the residual-band exact minimizer, ZeroSlack, or a root theorem
+`PNP.Main.p_eq_np` with an acceptable axiom audit.
 
 The repository now pins `leanprover/lean4:v4.31.0` and builds the explicit `PNP` library root. That
 root imports every tracked Lean source module. `PNP.Main.rootTheoremStatus` is assumption-free data
@@ -992,10 +992,21 @@ of an out-of-range literal is false.
 The resulting all-bitstring theorem is
 `CNFSAT bits ↔ EncodedNANDSAT (compileEncodedCNFToNAND bits)`, and pure
 composition with the locked-NAND builder reaches
-`EncodedLockedNANDThreshold`. This is not yet a finite-machine implementation,
-`PolynomialTimeFunction`, `RawRefinement`, or packaged
-`PolynomialReduction`; those runtime/refinement obligations remain. See
+`EncodedLockedNANDThreshold`. See
 [`lean_concrete_cnf_to_nand_semantic_compiler.md`](./lean_concrete_cnf_to_nand_semantic_compiler.md).
+
+The all-input CNF-to-NAND milestone now implements that exact pure function
+with one fixed parser/carrier/controller graph. Every bitstring halts within a
+polynomial in its encoded length. Valid CNF words emit the exact strict NAND
+bytes; malformed words reject with empty output. The compiled machine supplies
+the corresponding `PolynomialTimeFunction` and literal `RawRefinement`.
+Lean packages the direct `PolynomialReduction CNFSAT EncodedNANDSAT` and its
+explicit composition with the strict locked-NAND polynomial reduction. This
+closes the general compiler/reduction edge rather than extending another
+finite formula prefix. It does not decide CNF-SAT, connect the concrete target
+to the abstract report-level threshold assumption, complete ZeroSlack/PCCMin,
+or prove P = NP. See
+[`lean_concrete_cnf_to_nand_polynomial_reduction.md`](./lean_concrete_cnf_to_nand_polynomial_reduction.md).
 
 The historical hostile review named `DirectWireOutputLowerBound`, `MacroDistinct`,
 `TraceEquivalence`, `ZeroOutputConvention`, and `FinalLockSeparation`. The general output lower

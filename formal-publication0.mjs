@@ -5,10 +5,22 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'abf7b98d7b6721576eb7c9d827fa5ea2cc95454f31c2a5d8950dfe570d8c01bb';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '8ed05ce233e4fd319805ac43266154276a8a9159ca838d831634ec73bd5a857e';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
+  'PNP.Concrete.CNFSourceParser.allInput_exact',
+  'PNP.Concrete.CNFSourceParser.compiledBoundedDecide_ne_timeout',
+  'PNP.Concrete.CNFSourceParser.compiledMachineOutput_eq_validatedCNFBytes',
+  'PNP.Concrete.CNFToNAND.cnfSAT_reducesTo_encodedLockedNANDThreshold',
+  'PNP.Concrete.CNFToNAND.cnfSAT_reducesTo_encodedNANDSAT',
+  'PNP.Concrete.CNFToNAND.cnfToLockedNANDPolynomialReduction_correct',
+  'PNP.Concrete.CNFToNAND.cnfToLockedNANDPolynomialReduction_hasRawRefinement',
+  'PNP.Concrete.CNFToNAND.cnfToLockedNANDPolynomialReduction_output',
+  'PNP.Concrete.CNFToNAND.cnfToNANDPolynomialReduction_correct',
+  'PNP.Concrete.CNFToNAND.cnfToNANDPolynomialReduction_function',
+  'PNP.Concrete.CNFToNAND.cnfToNANDPolynomialReduction_hasRawRefinement',
+  'PNP.Concrete.CNFToNAND.cnfToNANDPolynomialReduction_output',
   'PNP.Concrete.CNFToNAND.buildLockedNANDFromCNF_correct',
   'PNP.Concrete.CNFToNAND.cnfToNANDOutputSizePolynomial_eval',
   'PNP.Concrete.CNFToNAND.compileEncodedCNFToNAND_correct',
@@ -27,6 +39,22 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.CNFToNAND.empty_not_encodedNANDSAT',
   'PNP.Concrete.CNFToNAND.encodeCNF_of_decodeEncodedCNF',
   'PNP.Concrete.CNFToNAND.formula_satisfiable_iff_encoded_compileFormula',
+  'PNP.Concrete.CNFToNANDCarrierEncoder.canonicalWorkSteps_polynomial_bound',
+  'PNP.Concrete.CNFToNANDCarrierEncoder.canonical_exact',
+  'PNP.Concrete.CNFToNANDCompilerCompiled.cnfToNANDPolynomialTimeFunction_output',
+  'PNP.Concrete.CNFToNANDCompilerCompiled.compiledBoundedDecide_accept_iff',
+  'PNP.Concrete.CNFToNANDCompilerCompiled.compiledBoundedDecide_ne_timeout',
+  'PNP.Concrete.CNFToNANDCompilerCompiled.compiledMachineOutput_eq_compileEncodedCNFToNAND',
+  'PNP.Concrete.CNFToNANDCompilerMachine.rules_length_literal',
+  'PNP.Concrete.CNFToNANDCompilerPolynomialBound.allInputWorkTimePolynomial_eval',
+  'PNP.Concrete.CNFToNANDCompilerPolynomialBound.compiledRawTimePolynomial_eval',
+  'PNP.Concrete.CNFToNANDCompilerTotalTrace.allInput_bounded_exact',
+  'PNP.Concrete.CNFToNANDCompilerTotalTrace.decoded_bounded_exact',
+  'PNP.Concrete.CNFToNANDCompilerTotalTrace.malformed_bounded_exact',
+  'PNP.Concrete.CNFToNANDController.rules_length_literal',
+  'PNP.Concrete.CNFToNANDControllerTotalTrace.canonical_bounded_exact',
+  'PNP.Concrete.CNFToNANDControllerTotalTrace.canonical_path',
+  'PNP.Concrete.CNFToNANDWorkspace.exact_execution_output',
   'PNP.Concrete.CookLevin.BoundedLiteral.emit_variable_lt',
   'PNP.Concrete.CookLevin.BuilderBodyStartPrefix.appenderState_injective',
   'PNP.Concrete.CookLevin.BuilderBodyStartPrefix.appender_workRunExact',
@@ -2095,7 +2123,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-31-93') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-31-94') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -2372,7 +2400,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-31-93') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-31-94') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
