@@ -1186,7 +1186,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "72c9997c0ce9aa5a748abb273b49871f3583ad6c9ad8d8d1b7ae1e96ee9538f1",
+    "actualSourceClosureSha256": "f4cec303e24b1e7b58bcab141d3fcbe7e1306b5e5913028bf8696a6af6160b42",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1228,10 +1228,10 @@
   "leanTheoremInventoryTheoremCount": 12806,
   "leanTheoremInventoryAssumptionFreeTheoremCount": 6767,
   "leanTheoremInventorySourceClosureModuleCount": 208,
-  "leanSourceClosureSha256": "72c9997c0ce9aa5a748abb273b49871f3583ad6c9ad8d8d1b7ae1e96ee9538f1",
+  "leanSourceClosureSha256": "f4cec303e24b1e7b58bcab141d3fcbe7e1306b5e5913028bf8696a6af6160b42",
   "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-31-94",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "3743f38dd65073bf0e57d4525d4989dda530676a74bd61a5d7caf0cb7b616aa5",
+  "formalPublicationMapSha256": "84af7674ba9cdbf844068e9d0a0d4213ea90ef5c63f2f607c61381a60f886704",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",

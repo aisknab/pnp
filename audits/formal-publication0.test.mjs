@@ -1670,9 +1670,9 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'd06c41e96fdbf6afbc4cea4903d35edd4b329b82aad5a386cb398de825d0befc');
+    '8ed05ce233e4fd319805ac43266154276a8a9159ca838d831634ec73bd5a857e');
   assert.equal(map.milestoneSourceClosureSha256,
-    '72c9997c0ce9aa5a748abb273b49871f3583ad6c9ad8d8d1b7ae1e96ee9538f1');
+    'f4cec303e24b1e7b58bcab141d3fcbe7e1306b5e5913028bf8696a6af6160b42');
   assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2081);
   for (const theorem of [
     'PNP.DirectWire.LockedNANDTrace.carrierSeparation',

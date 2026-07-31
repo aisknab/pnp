@@ -126,20 +126,20 @@ declarations, 208 source-closure modules, and 2,081 reviewed milestone
 candidates. Its 13,380,071 canonical bytes have SHA-256
 `f6dc633360d0aad4df37e2273c7304723d5187a66c67a88e1416e4adbf7e62ca`;
 the Lean source-closure SHA-256 is
-`72c9997c0ce9aa5a748abb273b49871f3583ad6c9ad8d8d1b7ae1e96ee9538f1`.
+`f4cec303e24b1e7b58bcab141d3fcbe7e1306b5e5913028bf8696a6af6160b42`.
 
 Publication-map coordinate
 `PNP-FORMAL-PUBLICATION-MAP-2026-07-31-94` contains 74 milestones: 71
 earned and three deliberately unearned. It pins 2,081 theorem types. Its
 678,310 bytes have SHA-256
-`3743f38dd65073bf0e57d4525d4989dda530676a74bd61a5d7caf0cb7b616aa5`.
+`84af7674ba9cdbf844068e9d0a0d4213ea90ef5c63f2f607c61381a60f886704`.
 
 Status coordinate
 `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-31-94`, paired with
 public-surface coordinate
 `PUBLIC-SURFACE-BASELINE-2026-07-31-CNF-TO-NAND-POLYNOMIAL-REDUCTION-93`,
 records this reduction boundary as earned. Its 1,665,641 bytes have SHA-256
-`feaf6bca770c3e4e71b1fee10b60ce0e9ca7321a1a5b81da45b013184c1d0fa3`.
+`f960c968ee7cf879316a9968d5f0b9559511b16bd87e430986203dfa74e8d44f`.
 All four project assumptions, all six blockers, unset activation
 fingerprints, the absence of `PNP.Main.p_eq_np`, and the false concrete
 publication gate remain unchanged.
@@ -147,9 +147,9 @@ publication gate remain unchanged.
 Canonical-report coordinate
 `PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-31-94` has a
 175,276-byte TeX source with SHA-256
-`2c6283ed6f6f54fc442e75b795afb389521fa9f3fa3a27ddf9adfa80e8f18483`
+`1017838eb64fdbb4b31522f725ec0d20ece8d8dd25d50fc3ba4b33d94c642102`
 and a deterministic 68-page, 419,182-byte A4 PDF with SHA-256
-`6a3823fd204005cbed79b487a4b90d1567b14f359529dcb0a037e4e81d3972cc`.
+`673aa9d6b5bb916459b426978d1a63bb5dbf88e39f7a48488069ed176fb29e0c`.
 
 ## Verification surface
 

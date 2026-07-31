@@ -745,7 +745,7 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
   assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14273);
   assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 208);
   assert.equal(status.leanSourceClosureSha256,
-    '72c9997c0ce9aa5a748abb273b49871f3583ad6c9ad8d8d1b7ae1e96ee9538f1');
+    'f4cec303e24b1e7b58bcab141d3fcbe7e1306b5e5913028bf8696a6af6160b42');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
