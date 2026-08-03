@@ -43,6 +43,7 @@ lean/PNP/NANDComposition.lean
 lean/PNP/NANDSlack.lean
 lean/PNP/ResidualRoutes.lean
 lean/PNP/ResidualGainChain.lean
+lean/PNP/ResidualGainStopping.lean
 lean/PNP/LockedNANDResidualGainBound.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
@@ -139,6 +140,7 @@ lean-audit/PNPNANDCompositionAxiomAudit.lean
 lean-audit/PNPNANDSlackAxiomAudit.lean
 lean-audit/PNPResidualRoutesAxiomAudit.lean
 lean-audit/PNPResidualGainChainAxiomAudit.lean
+lean-audit/PNPResidualGainStoppingAxiomAudit.lean
 lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean
 lean-audit/PNPLockedNANDDirectAxiomAudit.lean
 lean-audit/PNPDirectWireBaselineAxiomAudit.lean
@@ -864,6 +866,17 @@ is at most starting residual slack. The locked candidate's report-§17 slack
 bound then gives at most four verified steps. This still does not generate a
 route, turn failure into ZeroSlack, prove exact minimization, or establish a
 polynomial runtime. See `docs/lean_residual_gain_chain.md`.
+
+`lean/PNP/ResidualGainStopping.lean` closes the next semantic edge from report
+§16. For every finite direct-wire implementation, positive residual slack is
+equivalent to existence of some strict equivalent gain; zero slack and
+semantic minimality are equivalent to global absence of every such gain. A
+proof-bearing or executably checked chain whose endpoint separately carries
+that global no-gain proof therefore yields endpoint slack zero and an exact
+minimum result. The positive witness is supplied by the exhaustive semantic
+reference minimum, so this statement neither generates a route nor supplies a
+polynomial stopping procedure. Finite-list failure remains insufficient. See
+`docs/lean_residual_gain_stopping.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 

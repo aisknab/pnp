@@ -28,8 +28,8 @@ from current theorem status.
   exhaustive reference-minimum, concrete framed composition/slack, typed locked-NAND candidate,
   semantic output-lower-bound, source-accounting, finite local-baseline, conditional
   threshold-boundary, global carrier/trace, complete candidate, global baseline-distinctness, and
-  whole-carrier unsatisfiable-final-zero audits plus the explicit-list residual-route and universal
-  residual-gain-chain audits when Lean inputs change.
+  whole-carrier unsatisfiable-final-zero audits plus the explicit-list residual-route, universal
+  residual-gain-chain, and global semantic stopping audits when Lean inputs change.
   The Cook--Levin lane additionally audits the 79-declaration rectangular formula schedule, the
   136-declaration direct formula cursor, the 39-declaration literal input-length tally machine, the
   40-declaration executable framer-to-tally prefix, the 68-declaration standalone four-token
@@ -213,6 +213,19 @@ cover changed adjacency, Boolean disjunction, stale endpoint threading,
 changed family bounds, removed slack dependencies, transcript drift, hidden
 assumptions, host lookup, and overclaims. CI gives no credit for gain
 generation, route completeness, ZeroSlack, exact minimization, or runtime.
+
+The semantic stopping lane checks the distinct report-§16 endpoint statement
+over every finite direct-wire implementation. It requires both directions of
+positive-slack iff existence of a strict equivalent gain, zero-slack iff
+global no-gain, and semantic minimum iff global no-gain. Proof-bearing and
+Boolean-checked chain endpoints may use a separately proved global no-gain
+premise to return zero slack or package an exact minimum. The transcript must
+cover all 12 public declarations with empty closure. Hostile mutations cover
+weakened quantification or strictness, finite-list stopping, removed endpoint
+premises, hidden assumptions, project axioms, native shortcuts, host lookup,
+and overclaims. CI gives no credit for deriving global absence from scan
+failure, route completeness, the report ZeroSlack certificate, or polynomial
+runtime.
 
 The tape-handoff audit corrects the earlier list-boundary-sensitive output convention: explicit and
 implicit blanks now terminate output identically. Its `handoffTarget` is a pure canonical data target,

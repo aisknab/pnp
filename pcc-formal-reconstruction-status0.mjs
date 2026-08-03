@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-03-95';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-03-96';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -133,6 +133,7 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'node --test audits/lean-locked-nand-carrier-trace0.test.mjs',
   'node --test audits/lean-residual-routes0.test.mjs',
   'node --test audits/lean-residual-gain-chain0.test.mjs',
+  'node --test audits/lean-residual-gain-stopping0.test.mjs',
   'lake build PNP',
   'lake env lean -DwarningAsError=true lean-audit/PNPBridgeAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteBitStringAxiomAudit.lean',
@@ -303,6 +304,8 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualGainChainAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualGainChain.lean',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualGainStoppingAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualGainStopping.lean',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -401,6 +404,8 @@ const NON_CLAIMS = Object.freeze([
   'The residual-route equivalence check exhausts finite Boolean valuations and has no polynomial-runtime claim.',
   'The residual-gain chain checker validates every adjacent disclosed strict equivalent gain and proves that the number of accepted gains is at most the starting residual slack; it does not generate a route or prove that an undisclosed gain does not exist.',
   'The complete locked candidate has residual slack at most four, so every proof-bearing or executably accepted strict-gain chain from it has at most four steps. This is an iteration-count bound only, not route completeness, ZeroSlack, exact minimization, a polynomial checker, SAT in P, or P = NP.',
+  'Global semantic stopping is now characterized for every finite direct-wire implementation: positive residual slack is equivalent to the existence of a strict equivalent gain, while zero slack and semantic minimality are equivalent to global absence of one.',
+  'The global stopping theorem uses the exhaustive semantic reference minimum as a mathematical witness and requires a proof of global no-gain at a chain endpoint. It does not generate a route, derive global absence from a finite scan, construct the report ZeroSlack certificate, or establish polynomial runtime.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
   'The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.',
@@ -1180,6 +1185,16 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualGainChainScope:
     'all-finite-proof-bearing-or-executably-verified-strict-equivalent-gain-chains-with-locked-family-four-step-specialization',
   leanResidualGainChainPolynomialRuntimeFormalized: false,
+  leanResidualGainStoppingSpecificationFormalized: true,
+  leanResidualGainStoppingAxiomAuditPassed: true,
+  leanResidualGainReferenceMinimumWitnessFormalized: true,
+  leanResidualGainPositiveIffGlobalStrictGainFormalized: true,
+  leanResidualGainZeroIffGlobalNoStrictGainFormalized: true,
+  leanResidualGainSemanticMinimumIffGlobalNoStrictGainFormalized: true,
+  leanResidualGainChainGlobalStoppingConsequenceFormalized: true,
+  leanResidualGainChainExactMinimumPackagingFormalized: true,
+  leanResidualGainStoppingScope:
+    'all-finite-direct-wire-implementations-with-global-strict-equivalent-gain-quantification-and-proof-supplied-chain-endpoint-stopping',
   leanZeroSlackPositiveSlackContradictionFormalized: false,
   leanZeroSlackCompletenessFormalized: false,
   leanPCCMinLoopExactnessFormalized: false,
@@ -1206,7 +1221,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-03-RESIDUAL-GAIN-CHAIN-BOUND-94',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-03-RESIDUAL-GAIN-STOPPING-SPECIFICATION-95',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -1966,6 +1981,16 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualGainChainScope:
         'all-finite-proof-bearing-or-executably-verified-strict-equivalent-gain-chains-with-locked-family-four-step-specialization',
       leanResidualGainChainPolynomialRuntimeFormalized: false,
+      leanResidualGainStoppingSpecificationFormalized: true,
+      leanResidualGainStoppingAxiomAuditPassed: true,
+      leanResidualGainReferenceMinimumWitnessFormalized: true,
+      leanResidualGainPositiveIffGlobalStrictGainFormalized: true,
+      leanResidualGainZeroIffGlobalNoStrictGainFormalized: true,
+      leanResidualGainSemanticMinimumIffGlobalNoStrictGainFormalized: true,
+      leanResidualGainChainGlobalStoppingConsequenceFormalized: true,
+      leanResidualGainChainExactMinimumPackagingFormalized: true,
+      leanResidualGainStoppingScope:
+        'all-finite-direct-wire-implementations-with-global-strict-equivalent-gain-quantification-and-proof-supplied-chain-endpoint-stopping',
       leanZeroSlackPositiveSlackContradictionFormalized: false,
       leanZeroSlackCompletenessFormalized: false,
       leanPCCMinLoopExactnessFormalized: false,
@@ -2043,7 +2068,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-03-95',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-03-96',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

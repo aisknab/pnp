@@ -213,6 +213,16 @@ residual slack at most four, no such verified chain can contain more than four
 gains. This does not construct the chain, prove its completeness, justify a
 stopping decision, or prove the remaining exactness and runtime claims.
 
+The semantic stopping condition is now also kernel checked over the whole
+finite direct-wire implementation space. Positive residual slack holds if and
+only if some strict equivalent gain exists; zero residual slack and semantic
+minimality hold if and only if no such implementation exists. Thus a verified
+chain endpoint can be packaged as an exact minimum once global no-gain is
+separately proved. The proof uses exhaustive reference minimization as its
+existence witness. It does not derive global absence from a finite candidate
+scan, construct the report's `ZeroSlack` certificate, generate the route, or
+provide a polynomial stopping algorithm.
+
 ### 5.3 Residual-band minimisation correctness
 
 The central completeness chain is:
