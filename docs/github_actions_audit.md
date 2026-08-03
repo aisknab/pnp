@@ -29,7 +29,10 @@ from current theorem status.
   semantic output-lower-bound, source-accounting, finite local-baseline, conditional
   threshold-boundary, global carrier/trace, complete candidate, global baseline-distinctness, and
   whole-carrier unsatisfiable-final-zero audits plus the explicit-list residual-route, universal
-  residual-gain-chain, and global semantic stopping audits when Lean inputs change.
+  residual-gain-chain, global semantic stopping, and 22-declaration terminal full-carrier bridge
+  audits when Lean inputs change. The terminal bridge lane also runs zero-/multi-output regression
+  fixtures and rejects partial semantics, fake minima, non-strict witnesses, hidden assumptions,
+  and overclaims.
   The Cook--Levin lane additionally audits the 79-declaration rectangular formula schedule, the
   136-declaration direct formula cursor, the 39-declaration literal input-length tally machine, the
   40-declaration executable framer-to-tally prefix, the 68-declaration standalone four-token

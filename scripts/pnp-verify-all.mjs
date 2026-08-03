@@ -105,6 +105,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-residual-routes0.test.mjs',
   'audits/lean-residual-gain-chain0.test.mjs',
   'audits/lean-residual-gain-stopping0.test.mjs',
+  'audits/lean-residual-terminal-full-bridge0.test.mjs',
   'audits/legacy-v0-archive0.test.mjs',
   'test/current-package-surface0.test.mjs',
   'test/current-verifier0.test.mjs',
