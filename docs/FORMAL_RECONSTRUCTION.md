@@ -1052,6 +1052,19 @@ ZeroSlack contradiction, exact minimizer, or polynomial checker/PCCMin
 runtime. See
 [`lean_residual_gain_chain.md`](./lean_residual_gain_chain.md).
 
+`ResidualGainStopping` now reconstructs the corresponding semantic stopping
+criterion from report §16 over the whole finite implementation space. Positive
+residual slack is equivalent to existence of some strict equivalent gain, and
+zero slack and semantic minimality are each equivalent to global absence of
+one. A verified chain endpoint with a separately proved global no-gain premise
+therefore has zero slack and yields an exact minimum result equivalent to the
+start. The witness for positive slack is the exhaustive reference-minimum
+implementation. Consequently, this theorem does not make the stopping test
+polynomial, generate a route, or turn a failed finite scan into global absence.
+The report's ZeroSlack certificate, route completeness, exact PCCMin loop, and
+runtime obligations remain open. See
+[`lean_residual_gain_stopping.md`](./lean_residual_gain_stopping.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

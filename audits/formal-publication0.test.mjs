@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 75);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 72);
+  assert.equal(status.formalPublicationMilestones.length, 76);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 73);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -1677,6 +1677,24 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     'PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_strictGainChainBool_length_le_four',
   ]);
   assert.match(residualGainChain.nonClaim, /does not find the next gain/u);
+  const residualGainStopping = byId.get('residual-gain-stopping-specification');
+  assert.equal(residualGainStopping.status, 'formalized-semantic-stopping-only');
+  assert.equal(residualGainStopping.earned, true);
+  assert.equal(residualGainStopping.axiomClosureUsesOnlyLeanStandardAllowlist, true);
+  assert.deepEqual(residualGainStopping.requiredTheorems, [
+    'PNP.DirectWire.referenceMinimumImplementation_gateCount_eq_referenceMinimum',
+    'PNP.DirectWire.referenceMinimumImplementation_equivalent',
+    'PNP.DirectWire.referenceMinimumImplementation_isSemanticallyMinimum',
+    'PNP.DirectWire.referenceMinimumImplementation_residualSlack_eq_zero',
+    'PNP.DirectWire.referenceMinimumImplementation_strictEquivalentGain_of_residualSlack_pos',
+    'PNP.DirectWire.residualSlack_pos_iff_exists_strictEquivalentGain',
+    'PNP.DirectWire.residualSlack_eq_zero_iff_forall_not_strictEquivalentGain',
+    'PNP.DirectWire.isSemanticallyMinimum_iff_forall_not_strictEquivalentGain',
+    'PNP.DirectWire.StrictGainChain.end_residualSlack_eq_zero_of_no_strictEquivalentGain',
+    'PNP.DirectWire.strictGainChainBool_end_residualSlack_eq_zero_of_no_strictEquivalentGain',
+  ]);
+  assert.match(residualGainStopping.nonClaim, /semantic stopping criterion/u);
+  assert.match(residualGainStopping.nonClaim, /does not derive global absence from a finite scan/u);
   for (const id of [
     'global-locked-nand-threshold',
     'global-zeroslack-pccmin',
@@ -1691,10 +1709,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '365297f6dc5f0958fb0b28c79392747aa9ef75e92f6a754d634ceceae2b7f455');
+    'e2e7acc9723250131808137993f04abf9c4c4436583a06d0b6c8e43ff4e02262');
   assert.equal(map.milestoneSourceClosureSha256,
-    '3430306ac20401ae6967122be54eab38adeb843595f83049e97c09397eeb468b');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2093);
+    '23ebbd4f1251d92adb3c0a1d60cf63b52683a41f39a84375c87b0781d2f522ac');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2103);
   for (const theorem of [
     'PNP.DirectWire.LockedNANDTrace.carrierSeparation',
     'PNP.DirectWire.LockedNANDTrace.finalLock_fresh',
@@ -2016,7 +2034,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [23601, 12818, 6776, 14273, 210]);
+  ], [23615, 12830, 6788, 14273, 211]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
@@ -2072,6 +2090,14 @@ test('canonical report source is current and the committed PDF artifact exists',
   assert.match(
     tex,
     /compiled\s+machine never times out at the advertised bound, retains literal\s+\\code\{RawRefinement\}/u,
+  );
+  assert.match(
+    tex,
+    /The global strict-gain stopping milestone reconstructs the corresponding\s+semantic endpoint condition from legacy report Section 16/u,
+  );
+  assert.match(
+    tex,
+    /finite-list failure still cannot establish global absence/u,
   );
   assert.match(
     tex,

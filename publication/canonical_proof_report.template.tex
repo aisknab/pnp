@@ -529,6 +529,20 @@ use only \code{propext} and \code{Quot.sound}. This does not find a route,
 certify stopping, prove ZeroSlack or exact minimization, or establish a
 polynomial checker or PCCMin runtime.
 
+The global strict-gain stopping milestone reconstructs the corresponding
+semantic endpoint condition from legacy report Section 16. For every finite
+direct-wire implementation, positive residual slack is equivalent to the
+existence of some strictly smaller semantically equivalent implementation.
+Zero slack and semantic minimality are each equivalent to global absence of
+such an implementation. A verified chain endpoint with separately proved
+global no-gain evidence therefore has zero slack and packages an exact minimum
+result equivalent to the starting implementation. All 12 public declarations
+have empty axiom closure. The positive witness comes from exhaustive reference
+minimization, so this is not a route generator or polynomial stopping
+algorithm; finite-list failure still cannot establish global absence, and the
+report's ZeroSlack certificate, PCCMin exactness/runtime, SAT-in-P conclusion,
+and (P=NP) theorem remain unproved.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule

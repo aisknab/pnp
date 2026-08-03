@@ -58,6 +58,7 @@ test('current verifier plan contains status, surface, archive integrity, and cur
     'audits/lean-concrete-cnf-to-nand-polynomial-reduction0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-residual-routes0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-residual-gain-chain0.test.mjs'), true);
+  assert.equal(CURRENT_VERIFICATION_TESTS0.includes('audits/lean-residual-gain-stopping0.test.mjs'), true);
 });
 
 test('current verifier cannot be configured to execute the historical replay', () => {
