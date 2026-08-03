@@ -6,6 +6,7 @@ import PNP.NANDMinimum
 import PNP.NANDComposition
 import PNP.NANDSlack
 import PNP.ResidualRoutes
+import PNP.ResidualGainChain
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine
@@ -101,6 +102,7 @@ import PNP.LockedNANDCarrierTrace
 import PNP.LockedNANDGlobalCandidates
 import PNP.LockedNANDGlobalUnsatisfiableFinalZero
 import PNP.LockedNANDGlobalSemanticThreshold
+import PNP.LockedNANDResidualGainBound
 import PNP.LockedNAND
 import PNP.ResidualBand
 import PNP.ZeroSlack

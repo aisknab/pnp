@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-31-94",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-03-95",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "f4cec303e24b1e7b58bcab141d3fcbe7e1306b5e5913028bf8696a6af6160b42",
+  "milestoneSourceClosureSha256": "3430306ac20401ae6967122be54eab38adeb843595f83049e97c09397eeb468b",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2066,6 +2066,9 @@
     "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_referenceMinimum_bounds_of_satisfiable": "5486d22416c93cf76b2bb4de69729f7e3421321fc553a60df4807e141decc559",
     "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_referenceMinimum_eq_baseline_of_unsatisfiable": "da9bb9d292f6cb2952d58120a4579503d87bd1ac94cd5d9248f40ba5007edf94",
     "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_residualSlack_le_four": "2e2c9cab0c3977704f66cb272e972e949cd7bbd899487c1cc9ba3527ef2d9e0a",
+    "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_strictGainChainBool_length_le_four": "6424411112c8f2316541d234cf90b37cb807b7ec38cca84e52edfe6af98fe750",
+    "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_strictGainChain_length_le_four": "dc3962312e29cc2ea9b36aeb4b6fc2fa4626d7e72053838d317636a61b68fe9c",
+    "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidateImplementation_residualSlack_le_four": "0a138524071766b4eb12d0de6550bcf776d948bb4df133619387a4f9781e98ff",
     "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_satisfiableFinalConditions": "da58fd2dcfdbc4fefc2d9c805d38e115760ab45872c9a5d60c0acc12eb981acb",
     "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_satisfiable_iff_referenceMinimum_ge_succ": "a3d7a636124fb00a6b3dd10d9a4c548afdb5f7f171ba82c1ce5aa8ffb540a6e3",
     "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_size": "5c9a273659067867278736693748a1b2d97795f852af3c35daeaefbace963ded",
@@ -2081,6 +2084,11 @@
     "PNP.DirectWire.LockedNANDTrace.tracePredicate_coherentExtension": "db97cc7424a7096c2860803878849314be1d4c8d9c9403c6b41e44237cfbfcbf",
     "PNP.DirectWire.LockedNANDTrace.trace_sound_of_predicate_true": "3adff8c3a32fb2289de57ac5125c920a5c249817d3cafb34dc12f4c096a35c05",
     "PNP.DirectWire.StrictEquivalentGain.strictResidualDescent": "f936c792a4f8f45d27da4512b16ba28222dc64b81f50016c9d30433fbfadae6e",
+    "PNP.DirectWire.StrictGainChain.end_equivalent": "16d9be66d41e255a85e99776eae299ede9b96fbb4a52b092975ba2668e955782",
+    "PNP.DirectWire.StrictGainChain.end_referenceMinimum_eq": "f5d2b9c7314081efa5545b0244c69f7cb1913724d67882b0973241106edd37c0",
+    "PNP.DirectWire.StrictGainChain.end_residualSlack_add_length_le": "3d9578eb0b87eaae79f3d0fefb693d4e45a44bfda7c9237e38fdc4429db8a968",
+    "PNP.DirectWire.StrictGainChain.eq_nil_of_residualSlack_eq_zero": "f0ad692f62354727bdb5e3f44617f8ad5decf5ad1b25d0c03912dbec38d38d07",
+    "PNP.DirectWire.StrictGainChain.length_le_residualSlack": "a9ae79ffa40af537d1e2b54bcec4f2733bddbf7c20b0799dc031e61d410cf20e",
     "PNP.DirectWire.andCircuit_spec": "43c4801753810dec20c372ae4eac3f248e03f62e084c80089aacbe38dbeaac50",
     "PNP.DirectWire.compatibleReplacement_framed": "450f861075f4eb11bb719e7248543c09ab9239de1ad5c1ab5c721c640da3dd2b",
     "PNP.DirectWire.constantOneDirect_referenceMinimum": "f1f6cb0d57db26a915ee2baabd95118c614ec6b89b5625f930a443f139973323",
@@ -2097,6 +2105,10 @@
     "PNP.DirectWire.referenceMinimum_invariant": "f6b8c8f2483a8397ffe369ee7fd0873af9f883e2d74bf1ebbede2a915a0464e2",
     "PNP.DirectWire.residualSlack_eq_zero_iff_minimum": "8ea9f50b981a61811209e0a3d8cbe820b6a1793fc42b9eb6121519bc98414b84",
     "PNP.DirectWire.strictEquivalentGainBool_complete": "849f9dfaa63acbd5f7bcdf28eac5552c2862aba5994727b2535cc0832bc796ec",
+    "PNP.DirectWire.strictGainChainBool_eq_nil_of_residualSlack_eq_zero": "66812e7f8c2f41711af1788bbf9871959030891d88554aa9a5b6beb56ef1a65b",
+    "PNP.DirectWire.strictGainChainBool_eq_true_iff": "816e54e4531107de91901686549b1c2e040df4feef9b16b066592bd999a04898",
+    "PNP.DirectWire.strictGainChainBool_length_le_of_residualSlack_le": "a3963469939a052165f47d2aca5171bf5fa934483d25ab91451df2674a9b0f87",
+    "PNP.DirectWire.strictGainChainBool_length_le_residualSlack": "20c5ad2948288e7607ef952b5f155133fb4b9ed18e4e8690bddbf993c8c8b535",
     "PNP.DirectWire.traceDirect_referenceMinimum": "cbef9349e46dd570d0e02c81170ea1257f3d1a76a49db39123074892e3196ea2",
     "PNP.DirectWire.unresolved_positiveSlack_regression": "db564cb64914fa82c134c8e4e2dfbef40a143e1fe78b2ceb8f81dece3b895977",
     "PNP.Main.concretePEqualsNP_iff": "66d644a7be721e907db2bf854137ac76150c5ad3284aca8fccad8b7ee36ca364"
@@ -4959,6 +4971,29 @@
         "PNP.DirectWire.unresolved_positiveSlack_regression"
       ],
       "nonClaim": "Unresolved excludes no gain outside the supplied list and cannot imply ZeroSlack."
+    },
+    {
+      "id": "residual-gain-chain-bound",
+      "title": "Universal verified residual-gain chain bound",
+      "classification": "formalized-iteration-bound-only",
+      "scope": "Every finite proof-bearing or executably verified chain of adjacent strict equivalent gains preserves semantics and the exhaustive reference minimum, while its endpoint residual slack plus its length is at most its starting residual slack. For the complete locked-NAND candidate, the existing residual-slack-at-most-four theorem specializes this to at most four verified gain steps.",
+      "requiredTheorems": [
+        "PNP.DirectWire.StrictEquivalentGain.strictResidualDescent",
+        "PNP.DirectWire.strictGainChainBool_eq_true_iff",
+        "PNP.DirectWire.StrictGainChain.end_equivalent",
+        "PNP.DirectWire.StrictGainChain.end_referenceMinimum_eq",
+        "PNP.DirectWire.StrictGainChain.end_residualSlack_add_length_le",
+        "PNP.DirectWire.StrictGainChain.length_le_residualSlack",
+        "PNP.DirectWire.strictGainChainBool_length_le_residualSlack",
+        "PNP.DirectWire.strictGainChainBool_length_le_of_residualSlack_le",
+        "PNP.DirectWire.StrictGainChain.eq_nil_of_residualSlack_eq_zero",
+        "PNP.DirectWire.strictGainChainBool_eq_nil_of_residualSlack_eq_zero",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_residualSlack_le_four",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidateImplementation_residualSlack_le_four",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_strictGainChain_length_le_four",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_strictGainChainBool_length_le_four"
+      ],
+      "nonClaim": "This milestone bounds only a disclosed, independently verified sequence. It does not find the next gain, prove route or candidate-list completeness, justify stopping after fewer than the bound, construct ZeroSlack, compute an exact minimizer, establish polynomial checker or PCCMin runtime, put SAT in P, discharge a project assumption, or prove P = NP."
     },
     {
       "id": "global-locked-nand-threshold",

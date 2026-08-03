@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 74);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 71);
+  assert.equal(status.formalPublicationMilestones.length, 75);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 72);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -1656,6 +1656,27 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   );
   assert.equal(byId.get('locked-nand-conditional-threshold').status, 'formalized-with-premises');
   assert.equal(byId.get('explicit-residual-routes').status, 'formalized-explicit-list-only');
+  const residualGainChain = byId.get('residual-gain-chain-bound');
+  assert.equal(residualGainChain.status, 'formalized-iteration-bound-only');
+  assert.equal(residualGainChain.earned, true);
+  assert.equal(residualGainChain.axiomClosureUsesOnlyLeanStandardAllowlist, true);
+  assert.deepEqual(residualGainChain.requiredTheorems, [
+    'PNP.DirectWire.StrictEquivalentGain.strictResidualDescent',
+    'PNP.DirectWire.strictGainChainBool_eq_true_iff',
+    'PNP.DirectWire.StrictGainChain.end_equivalent',
+    'PNP.DirectWire.StrictGainChain.end_referenceMinimum_eq',
+    'PNP.DirectWire.StrictGainChain.end_residualSlack_add_length_le',
+    'PNP.DirectWire.StrictGainChain.length_le_residualSlack',
+    'PNP.DirectWire.strictGainChainBool_length_le_residualSlack',
+    'PNP.DirectWire.strictGainChainBool_length_le_of_residualSlack_le',
+    'PNP.DirectWire.StrictGainChain.eq_nil_of_residualSlack_eq_zero',
+    'PNP.DirectWire.strictGainChainBool_eq_nil_of_residualSlack_eq_zero',
+    'PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_residualSlack_le_four',
+    'PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidateImplementation_residualSlack_le_four',
+    'PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_strictGainChain_length_le_four',
+    'PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_strictGainChainBool_length_le_four',
+  ]);
+  assert.match(residualGainChain.nonClaim, /does not find the next gain/u);
   for (const id of [
     'global-locked-nand-threshold',
     'global-zeroslack-pccmin',
@@ -1670,10 +1691,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '8ed05ce233e4fd319805ac43266154276a8a9159ca838d831634ec73bd5a857e');
+    '365297f6dc5f0958fb0b28c79392747aa9ef75e92f6a754d634ceceae2b7f455');
   assert.equal(map.milestoneSourceClosureSha256,
-    'f4cec303e24b1e7b58bcab141d3fcbe7e1306b5e5913028bf8696a6af6160b42');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2081);
+    '3430306ac20401ae6967122be54eab38adeb843595f83049e97c09397eeb468b');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2093);
   for (const theorem of [
     'PNP.DirectWire.LockedNANDTrace.carrierSeparation',
     'PNP.DirectWire.LockedNANDTrace.finalLock_fresh',
@@ -1995,7 +2016,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [23575, 12806, 6767, 14273, 208]);
+  ], [23601, 12818, 6776, 14273, 210]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

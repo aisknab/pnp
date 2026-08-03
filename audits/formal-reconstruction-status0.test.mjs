@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-31-94');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-03-95');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -710,8 +710,20 @@ test('formal reconstruction status accepts the current source and public mirrors
   ]) assert.equal(out[field], true, field);
   assert.equal(out.leanResidualRoutesScope, 'explicit-caller-supplied-finite-candidate-list');
   for (const field of [
+    'leanResidualGainChainVerifierFormalized',
+    'leanResidualGainChainAxiomAuditPassed',
+    'leanResidualGainChainSemanticInvariantFormalized',
+    'leanResidualGainChainSlackIterationBoundFormalized',
+    'leanLockedNANDGainIterationsAtMostFourFormalized',
+  ]) assert.equal(out[field], true, field);
+  assert.equal(
+    out.leanResidualGainChainScope,
+    'all-finite-proof-bearing-or-executably-verified-strict-equivalent-gain-chains-with-locked-family-four-step-specialization',
+  );
+  for (const field of [
     'leanResidualRoutesCandidateListCompletenessFormalized',
     'leanResidualRoutesGlobalGainCompletenessFormalized',
+    'leanResidualGainChainPolynomialRuntimeFormalized',
     'leanZeroSlackPositiveSlackContradictionFormalized',
     'leanZeroSlackCompletenessFormalized',
     'leanPCCMinLoopExactnessFormalized',
@@ -739,13 +751,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 23575);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 12806);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 6767);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 23601);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 12818);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 6776);
   assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14273);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 208);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 210);
   assert.equal(status.leanSourceClosureSha256,
-    'f4cec303e24b1e7b58bcab141d3fcbe7e1306b5e5913028bf8696a6af6160b42');
+    '3430306ac20401ae6967122be54eab38adeb843595f83049e97c09397eeb468b');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -1167,7 +1179,7 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-07-31-CNF-TO-NAND-POLYNOMIAL-REDUCTION-93');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-03-RESIDUAL-GAIN-CHAIN-BOUND-94');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
@@ -1363,6 +1375,16 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(status.leanResidualRoutesScope, 'explicit-caller-supplied-finite-candidate-list');
   assert.equal(status.leanResidualRoutesCandidateListCompletenessFormalized, false);
   assert.equal(status.leanResidualRoutesGlobalGainCompletenessFormalized, false);
+  assert.equal(status.leanResidualGainChainVerifierFormalized, true);
+  assert.equal(status.leanResidualGainChainAxiomAuditPassed, true);
+  assert.equal(status.leanResidualGainChainSemanticInvariantFormalized, true);
+  assert.equal(status.leanResidualGainChainSlackIterationBoundFormalized, true);
+  assert.equal(status.leanLockedNANDGainIterationsAtMostFourFormalized, true);
+  assert.equal(
+    status.leanResidualGainChainScope,
+    'all-finite-proof-bearing-or-executably-verified-strict-equivalent-gain-chains-with-locked-family-four-step-specialization',
+  );
+  assert.equal(status.leanResidualGainChainPolynomialRuntimeFormalized, false);
   assert.equal(status.leanZeroSlackPositiveSlackContradictionFormalized, false);
   assert.equal(status.leanZeroSlackCompletenessFormalized, false);
   assert.equal(status.leanPCCMinLoopExactnessFormalized, false);
@@ -1380,12 +1402,15 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(status.nonClaims.some((entry) => entry.includes('complete only for the explicit finite implementation list')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes('empty-list scan is formally shown')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes('never manufactured by the executable gain scanner')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes('number of accepted gains is at most the starting residual slack')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes('iteration-count bound only')), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-nand-semantics0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-nand-enumerator0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-nand-reference-minimum0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-locked-nand-baseline0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-locked-nand-threshold-boundary0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-residual-routes0.test.mjs'), true);
+  assert.equal(status.verificationCommands.includes('node --test audits/lean-residual-gain-chain0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPNANDSemanticsAxiomAudit.lean'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPNANDEnumeratorAxiomAudit.lean'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPNANDTruthTableAxiomAudit.lean'), true);
@@ -1421,6 +1446,9 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFToNAND.lean'), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-concrete-cnf-to-nand0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPResidualRoutesAxiomAudit.lean'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPResidualGainChainAxiomAudit.lean'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-regression/PNPResidualGainChain.lean'), true);
   assert.deepEqual(status.lockedNANDThresholdHostileReviewLemmaInventory, [
     'DirectWireOutputLowerBound',
     'MacroDistinct',
@@ -1660,6 +1688,11 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanResidualRoutesExactResultProofBearing',
     'leanResidualRoutesZeroSlackResultProofBearing',
     'leanResidualRoutesUnresolvedFailClosed',
+    'leanResidualGainChainVerifierFormalized',
+    'leanResidualGainChainAxiomAuditPassed',
+    'leanResidualGainChainSemanticInvariantFormalized',
+    'leanResidualGainChainSlackIterationBoundFormalized',
+    'leanLockedNANDGainIterationsAtMostFourFormalized',
   ];
 
   for (const field of fields) {
@@ -1683,6 +1716,7 @@ test('formal reconstruction status rejects unearned broad downstream NAND claims
     'leanLockedNANDThresholdFormalized',
     'leanResidualRoutesCandidateListCompletenessFormalized',
     'leanResidualRoutesGlobalGainCompletenessFormalized',
+    'leanResidualGainChainPolynomialRuntimeFormalized',
     'leanZeroSlackPositiveSlackContradictionFormalized',
     'leanZeroSlackCompletenessFormalized',
     'leanPCCMinLoopExactnessFormalized',

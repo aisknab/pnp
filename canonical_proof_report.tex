@@ -46,7 +46,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-31-94}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-03-95}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -88,15 +88,15 @@
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 23575 \\
-Theorem-kind declarations & 12806 \\
-Assumption-free theorem-kind declarations & 6767 \\
+Compiled declarations & 23601 \\
+Theorem-kind declarations & 12818 \\
+Assumption-free theorem-kind declarations & 6776 \\
 Project-specific axioms & 4 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{f6dc633360d0aad4df37e2273c7304723d5187a66c67a88e1416e4adbf7e62ca}\par}
+{\small Inventory SHA-256: \code{26fdb6098e7169b2ba8fbbfd6554370e820ee9598709d484138eecea53f4450b}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -517,6 +517,18 @@ using only \code{propext}, and twelve using only \code{propext} and
 locked-NAND theorem, deterministic CNF-SAT-in-P, NP-hardness transport,
 ZeroSlack/PCCMin completion, and \(P=NP\) remain unproved.
 
+The residual-gain chain milestone reconstructs the iteration-count edge from
+legacy report Sections 16 and 17. For every finite disclosed chain whose
+adjacent implementations pass the strict equivalent-gain checker, Lean proves
+that the endpoint residual slack plus the chain length is at most the starting
+residual slack. The endpoint remains semantically equivalent and has the same
+exhaustive reference minimum. The already-proved locked-candidate bound then
+specializes every accepted chain to at most four gains. All 12 declarations in
+the universal module have empty axiom closure; the four locked declarations
+use only \code{propext} and \code{Quot.sound}. This does not find a route,
+certify stopping, prove ZeroSlack or exact minimization, or establish a
+polynomial checker or PCCMin runtime.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule
@@ -603,7 +615,7 @@ SAT completeness, SAT in P, and the root theorem remain absent.
 \section{Formal milestone ledger}
 
 Each earned row requires exact compiled names and theorem kinds, empty axiom closures, per-name
-domain-separated kernel-type SHA-256 matches for 2081 detailed candidates, and the pinned whole-Lean
+domain-separated kernel-type SHA-256 matches for 2093 detailed candidates, and the pinned whole-Lean
 source closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
 {\small
@@ -685,6 +697,7 @@ Concrete CNF-to-NAND semantic compiler & formalized-semantic-boundary & A total 
 Concrete all-input CNF-to-NAND polynomial reduction & formalized-polynomial-reduction & One fixed 135,070-rule three-node parser/carrier/controller work graph halts on every bitstring, rejects malformed CNF words with empty output, emits exactly compileEncodedCNFToNAND on every valid source, has one external encoded-input polynomial, compiles to a non-timeout PolynomialTimeFunction, retains literal RawRefinement, packages a direct PolynomialReduction from CNFSAT to EncodedNANDSAT, and composes it with the strict locked-NAND reduction to EncodedLockedNANDThreshold. & This syntax-directed compiler does not itself decide CNF-SAT, put CNFSAT in deterministic polynomial time, establish SAT NP-hardness or CNFSAT NP-completeness, connect the concrete locked-NAND target to the abstract report-level threshold theorem, complete residual minimization or ZeroSlack/PCCMin, discharge any project assumption, or prove P = NP. \\
 Conditional locked-NAND threshold boundary & formalized-with-premises & A proof-bearing six-premise candidate boundary for an arbitrary satisfiable proposition. & The premises are not instantiated by a uniform SAT-to-locked-NAND builder. \\
 Fail-closed explicit-list residual routes & formalized-explicit-list-only & Executable strict-gain search over a caller-supplied finite implementation list. & Unresolved excludes no gain outside the supplied list and cannot imply ZeroSlack. \\
+Universal verified residual-gain chain bound & formalized-iteration-bound-only & Every finite proof-bearing or executably verified chain of adjacent strict equivalent gains preserves semantics and the exhaustive reference minimum, while its endpoint residual slack plus its length is at most its starting residual slack. For the complete locked-NAND candidate, the existing residual-slack-at-most-four theorem specializes this to at most four verified gain steps. & This milestone bounds only a disclosed, independently verified sequence. It does not find the next gain, prove route or candidate-list completeness, justify stopping after fewer than the bound, construct ZeroSlack, compute an exact minimizer, establish polynomial checker or PCCMin runtime, put SAT in P, discharge a project assumption, or prove P = NP. \\
 Global locked-NAND construction and threshold & not-formalized & A uniform encoded polynomial-time SAT instance builder and the report-level locked-NAND threshold theorem linked to that builder. & The strict encoding, total source parser, literal target emitter, exact formula bytes, strict parser/emitter composition, polynomial runtime, output-size bound, recursive RawRefinement, concrete strict-v0 source-to-target PolynomialReduction, semantic CNF-to-NAND compiler, and its all-input finite-machine PolynomialReduction are now formalized. The concrete target language is still not linked to the report-level theorem, and the abstract threshold assumption remains. \\
 Global ZeroSlack, PCCMin, and polynomial runtime & not-formalized & Complete residual routing, global ZeroSlack contradiction, exact minimization, and polynomial bounds. & Proof-bearing result structures and explicit-list failure do not supply global completeness. \\
 Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-machine-linked complexity classes, concrete SAT completeness and a SAT decider, plus the publication root theorem. & The concrete target definition remains inactive: CNF-SAT now has a raw-machine verifier, NP-membership proof, and an all-input finite-machine polynomial reduction through NAND to the concrete locked target, but a deterministic polynomial-time CNF-SAT decider, the concrete-to-abstract threshold link, SAT NP-hardness and CNFSAT NP-completeness transport, and PNP.Main.p\_eq\_np remain absent; the legacy string-handle bridge is ineligible. \\
@@ -694,8 +707,8 @@ Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-mac
 
 \section{Compiled inventory summary}
 
-The inventory contains 23575 exported \code{PNP.*} kernel declarations from
-208 modules. It excludes 14273 private compiler auxiliaries.
+The inventory contains 23601 exported \code{PNP.*} kernel declarations from
+210 modules. It excludes 14273 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -900,6 +913,7 @@ PNP.\allowbreak{}Locked\allowbreak{}NANDGlobal\allowbreak{}Unsatisfiable\allowbr
 PNP.\allowbreak{}Locked\allowbreak{}NANDLocal\allowbreak{}Baseline & 30 & 22 \\
 PNP.\allowbreak{}Locked\allowbreak{}NANDMacros & 288 & 98 \\
 PNP.\allowbreak{}Locked\allowbreak{}NANDPrefix & 84 & 40 \\
+PNP.\allowbreak{}Locked\allowbreak{}NANDResidual\allowbreak{}Gain\allowbreak{}Bound & 4 & 3 \\
 PNP.\allowbreak{}Locked\allowbreak{}NANDThreshold\allowbreak{}Boundary & 60 & 35 \\
 PNP.\allowbreak{}Main & 36 & 12 \\
 PNP.\allowbreak{}NANDComposition & 77 & 38 \\
@@ -910,6 +924,7 @@ PNP.\allowbreak{}NANDSlack & 15 & 12 \\
 PNP.\allowbreak{}NANDTruth\allowbreak{}Table & 72 & 28 \\
 PNP.\allowbreak{}PCCMin & 44 & 8 \\
 PNP.\allowbreak{}Residual\allowbreak{}Band & 9 & 2 \\
+PNP.\allowbreak{}Residual\allowbreak{}Gain\allowbreak{}Chain & 22 & 9 \\
 PNP.\allowbreak{}Residual\allowbreak{}Routes & 141 & 46 \\
 PNP.\allowbreak{}SAT & 4 & 1 \\
 PNP.\allowbreak{}Zero\allowbreak{}Slack & 141 & 21 \\
@@ -938,8 +953,9 @@ Six formal blockers remain active:
 The conditional locked-NAND threshold module assumes typed baseline and full candidates,
 baseline conditions, preservation of existing outputs, an unsatisfiable final-zero law, and
 satisfiable final-output laws. The explicit residual scanner searches only a caller-supplied finite
-list. Neither result constructs the missing global reduction or proves global ZeroSlack,
-polynomial PCCMin, SAT in P, or P equals NP.
+list. The gain-chain theorem bounds every supplied verified sequence, including locked-family
+sequences by four, but does not generate or complete that sequence. None of these results proves
+global ZeroSlack, polynomial PCCMin, SAT in P, or P equals NP.
 \end{samepage}
 
 \section{Historical report provenance}
@@ -974,10 +990,10 @@ npm run report:check
 \end{verbatim}
 }
 
-The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-07-31-94}. Its exact byte digest is
-\code{f6dc633360d0aad4df37e2273c7304723d5187a66c67a88e1416e4adbf7e62ca}. The report is regenerated from that inventory and the reviewed
+The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-08-03-95}. Its exact byte digest is
+\code{26fdb6098e7169b2ba8fbbfd6554370e820ee9598709d484138eecea53f4450b}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{f4cec303e24b1e7b58bcab141d3fcbe7e1306b5e5913028bf8696a6af6160b42}; the computed and pinned values match. Successful regeneration
+\code{3430306ac20401ae6967122be54eab38adeb843595f83049e97c09397eeb468b}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 

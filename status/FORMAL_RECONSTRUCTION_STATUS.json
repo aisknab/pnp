@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-07-31-94",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-03-95",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -644,6 +644,13 @@
   "leanResidualRoutesScope": "explicit-caller-supplied-finite-candidate-list",
   "leanResidualRoutesCandidateListCompletenessFormalized": false,
   "leanResidualRoutesGlobalGainCompletenessFormalized": false,
+  "leanResidualGainChainVerifierFormalized": true,
+  "leanResidualGainChainAxiomAuditPassed": true,
+  "leanResidualGainChainSemanticInvariantFormalized": true,
+  "leanResidualGainChainSlackIterationBoundFormalized": true,
+  "leanLockedNANDGainIterationsAtMostFourFormalized": true,
+  "leanResidualGainChainScope": "all-finite-proof-bearing-or-executably-verified-strict-equivalent-gain-chains-with-locked-family-four-step-specialization",
+  "leanResidualGainChainPolynomialRuntimeFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
   "leanZeroSlackCompletenessFormalized": false,
   "leanPCCMinLoopExactnessFormalized": false,
@@ -670,7 +677,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-07-31-CNF-TO-NAND-POLYNOMIAL-REDUCTION-93",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-08-03-RESIDUAL-GAIN-CHAIN-BOUND-94",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -888,6 +895,7 @@
     "node --test audits/lean-locked-nand-threshold-boundary0.test.mjs",
     "node --test audits/lean-locked-nand-carrier-trace0.test.mjs",
     "node --test audits/lean-residual-routes0.test.mjs",
+    "node --test audits/lean-residual-gain-chain0.test.mjs",
     "lake build PNP",
     "lake env lean -DwarningAsError=true lean-audit/PNPBridgeAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteBitStringAxiomAudit.lean",
@@ -1055,6 +1063,9 @@
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFToNANDPolynomialReduction.lean",
     "node --test audits/lean-concrete-cnf-to-nand-polynomial-reduction0.test.mjs",
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualRoutesAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualGainChainAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualGainChain.lean",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1150,6 +1161,8 @@
     "An empty-list scan is formally shown to remain unresolved on a positive-slack implementation, so search failure cannot be promoted to zero residual slack.",
     "Exact and ZeroSlack route results require Lean proofs of semantic minimality and are never manufactured by the executable gain scanner; no BCEL, HN/BUD, selector, PCCMin-loop, or residual-band completeness follows.",
     "The residual-route equivalence check exhausts finite Boolean valuations and has no polynomial-runtime claim.",
+    "The residual-gain chain checker validates every adjacent disclosed strict equivalent gain and proves that the number of accepted gains is at most the starting residual slack; it does not generate a route or prove that an undisclosed gain does not exist.",
+    "The complete locked candidate has residual slack at most four, so every proof-bearing or executably accepted strict-gain chain from it has at most four steps. This is an iteration-count bound only, not route completeness, ZeroSlack, exact minimization, a polynomial checker, SAT in P, or P = NP.",
     "External review is optional audit evidence and is not a mathematical premise or release blocker.",
     "Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.",
     "The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.",
@@ -1186,7 +1199,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "f4cec303e24b1e7b58bcab141d3fcbe7e1306b5e5913028bf8696a6af6160b42",
+    "actualSourceClosureSha256": "3430306ac20401ae6967122be54eab38adeb843595f83049e97c09397eeb468b",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1216,22 +1229,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-07-31-94",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-03-95",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "f6dc633360d0aad4df37e2273c7304723d5187a66c67a88e1416e4adbf7e62ca",
+  "leanTheoremInventorySha256": "26fdb6098e7169b2ba8fbbfd6554370e820ee9598709d484138eecea53f4450b",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 23575,
+  "leanTheoremInventoryDeclarationCount": 23601,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 14273,
-  "leanTheoremInventoryTheoremCount": 12806,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 6767,
-  "leanTheoremInventorySourceClosureModuleCount": 208,
-  "leanSourceClosureSha256": "f4cec303e24b1e7b58bcab141d3fcbe7e1306b5e5913028bf8696a6af6160b42",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-07-31-94",
+  "leanTheoremInventoryTheoremCount": 12818,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 6776,
+  "leanTheoremInventorySourceClosureModuleCount": 210,
+  "leanSourceClosureSha256": "3430306ac20401ae6967122be54eab38adeb843595f83049e97c09397eeb468b",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-03-95",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "84af7674ba9cdbf844068e9d0a0d4213ea90ef5c63f2f607c61381a60f886704",
+  "formalPublicationMapSha256": "66f06c9891f0f60236ba2742f5965ac94813bb08b4cf722ff021ac8a37ea9fb1",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",
@@ -29801,6 +29814,176 @@
       "status": "formalized-explicit-list-only"
     },
     {
+      "id": "residual-gain-chain-bound",
+      "title": "Universal verified residual-gain chain bound",
+      "classification": "formalized-iteration-bound-only",
+      "scope": "Every finite proof-bearing or executably verified chain of adjacent strict equivalent gains preserves semantics and the exhaustive reference minimum, while its endpoint residual slack plus its length is at most its starting residual slack. For the complete locked-NAND candidate, the existing residual-slack-at-most-four theorem specializes this to at most four verified gain steps.",
+      "requiredTheorems": [
+        "PNP.DirectWire.StrictEquivalentGain.strictResidualDescent",
+        "PNP.DirectWire.strictGainChainBool_eq_true_iff",
+        "PNP.DirectWire.StrictGainChain.end_equivalent",
+        "PNP.DirectWire.StrictGainChain.end_referenceMinimum_eq",
+        "PNP.DirectWire.StrictGainChain.end_residualSlack_add_length_le",
+        "PNP.DirectWire.StrictGainChain.length_le_residualSlack",
+        "PNP.DirectWire.strictGainChainBool_length_le_residualSlack",
+        "PNP.DirectWire.strictGainChainBool_length_le_of_residualSlack_le",
+        "PNP.DirectWire.StrictGainChain.eq_nil_of_residualSlack_eq_zero",
+        "PNP.DirectWire.strictGainChainBool_eq_nil_of_residualSlack_eq_zero",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_residualSlack_le_four",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidateImplementation_residualSlack_le_four",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_strictGainChain_length_le_four",
+        "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_strictGainChainBool_length_le_four"
+      ],
+      "nonClaim": "This milestone bounds only a disclosed, independently verified sequence. It does not find the next gain, prove route or candidate-list completeness, justify stopping after fewer than the bound, construct ZeroSlack, compute an exact minimizer, establish polynomial checker or PCCMin runtime, put SAT in P, discharge a project assumption, or prove P = NP.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.StrictEquivalentGain.strictResidualDescent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "f936c792a4f8f45d27da4512b16ba28222dc64b81f50016c9d30433fbfadae6e",
+          "expectedKernelTypeSha256": "f936c792a4f8f45d27da4512b16ba28222dc64b81f50016c9d30433fbfadae6e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.strictGainChainBool_eq_true_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "816e54e4531107de91901686549b1c2e040df4feef9b16b066592bd999a04898",
+          "expectedKernelTypeSha256": "816e54e4531107de91901686549b1c2e040df4feef9b16b066592bd999a04898",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.StrictGainChain.end_equivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "16d9be66d41e255a85e99776eae299ede9b96fbb4a52b092975ba2668e955782",
+          "expectedKernelTypeSha256": "16d9be66d41e255a85e99776eae299ede9b96fbb4a52b092975ba2668e955782",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.StrictGainChain.end_referenceMinimum_eq",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "f5d2b9c7314081efa5545b0244c69f7cb1913724d67882b0973241106edd37c0",
+          "expectedKernelTypeSha256": "f5d2b9c7314081efa5545b0244c69f7cb1913724d67882b0973241106edd37c0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.StrictGainChain.end_residualSlack_add_length_le",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "3d9578eb0b87eaae79f3d0fefb693d4e45a44bfda7c9237e38fdc4429db8a968",
+          "expectedKernelTypeSha256": "3d9578eb0b87eaae79f3d0fefb693d4e45a44bfda7c9237e38fdc4429db8a968",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.StrictGainChain.length_le_residualSlack",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "a9ae79ffa40af537d1e2b54bcec4f2733bddbf7c20b0799dc031e61d410cf20e",
+          "expectedKernelTypeSha256": "a9ae79ffa40af537d1e2b54bcec4f2733bddbf7c20b0799dc031e61d410cf20e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.strictGainChainBool_length_le_residualSlack",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "20c5ad2948288e7607ef952b5f155133fb4b9ed18e4e8690bddbf993c8c8b535",
+          "expectedKernelTypeSha256": "20c5ad2948288e7607ef952b5f155133fb4b9ed18e4e8690bddbf993c8c8b535",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.strictGainChainBool_length_le_of_residualSlack_le",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "a3963469939a052165f47d2aca5171bf5fa934483d25ab91451df2674a9b0f87",
+          "expectedKernelTypeSha256": "a3963469939a052165f47d2aca5171bf5fa934483d25ab91451df2674a9b0f87",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.StrictGainChain.eq_nil_of_residualSlack_eq_zero",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "f0ad692f62354727bdb5e3f44617f8ad5decf5ad1b25d0c03912dbec38d38d07",
+          "expectedKernelTypeSha256": "f0ad692f62354727bdb5e3f44617f8ad5decf5ad1b25d0c03912dbec38d38d07",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.strictGainChainBool_eq_nil_of_residualSlack_eq_zero",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "66812e7f8c2f41711af1788bbf9871959030891d88554aa9a5b6beb56ef1a65b",
+          "expectedKernelTypeSha256": "66812e7f8c2f41711af1788bbf9871959030891d88554aa9a5b6beb56ef1a65b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_residualSlack_le_four",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "2e2c9cab0c3977704f66cb272e972e949cd7bbd899487c1cc9ba3527ef2d9e0a",
+          "expectedKernelTypeSha256": "2e2c9cab0c3977704f66cb272e972e949cd7bbd899487c1cc9ba3527ef2d9e0a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidateImplementation_residualSlack_le_four",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0a138524071766b4eb12d0de6550bcf776d948bb4df133619387a4f9781e98ff",
+          "expectedKernelTypeSha256": "0a138524071766b4eb12d0de6550bcf776d948bb4df133619387a4f9781e98ff",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_strictGainChain_length_le_four",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "dc3962312e29cc2ea9b36aeb4b6fc2fa4626d7e72053838d317636a61b68fe9c",
+          "expectedKernelTypeSha256": "dc3962312e29cc2ea9b36aeb4b6fc2fa4626d7e72053838d317636a61b68fe9c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_strictGainChainBool_length_le_four",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6424411112c8f2316541d234cf90b37cb807b7ec38cca84e52edfe6af98fe750",
+          "expectedKernelTypeSha256": "6424411112c8f2316541d234cf90b37cb807b7ec38cca84e52edfe6af98fe750",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-iteration-bound-only"
+    },
+    {
       "id": "global-locked-nand-threshold",
       "title": "Global locked-NAND construction and threshold",
       "classification": "not-formalized",
@@ -29895,7 +30078,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-07-31-94",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-03-95",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

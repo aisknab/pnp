@@ -1039,6 +1039,19 @@ so unresolved cannot establish global minimality or zero slack. Candidate-list c
 BCEL/HN/BUD/selector contradiction, a complete PCCMin loop, and every polynomial runtime claim
 remain absent. The residual-band, ZeroSlack, and polynomial blockers therefore remain unchanged.
 
+The next reconstructed edge is universal rather than another fixed route.
+`ResidualGainChain` checks every adjacent strict equivalent gain in any finite
+disclosed chain and proves
+`residualSlack(endpoint) + chain.length ≤ residualSlack(start)`. The endpoint
+remains semantically equivalent and has the same exhaustive reference
+minimum. Specializing the existing locked-candidate slack-at-most-four theorem
+therefore bounds every accepted locked-family chain by four steps. This is the
+iteration-count sentence in legacy report §16 combined with the family bound
+in §17. It does not supply the missing gain generator, route completeness,
+ZeroSlack contradiction, exact minimizer, or polynomial checker/PCCMin
+runtime. See
+[`lean_residual_gain_chain.md`](./lean_residual_gain_chain.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

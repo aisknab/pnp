@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '8ed05ce233e4fd319805ac43266154276a8a9159ca838d831634ec73bd5a857e';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '365297f6dc5f0958fb0b28c79392747aa9ef75e92f6a754d634ceceae2b7f455';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -2038,6 +2038,11 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.ConditionalThresholdBoundaryPremises.satisfiable_iff_minimum_ge_succ',
   'PNP.DirectWire.Equivalent.trans',
   'PNP.DirectWire.StrictEquivalentGain.strictResidualDescent',
+  'PNP.DirectWire.StrictGainChain.end_equivalent',
+  'PNP.DirectWire.StrictGainChain.end_referenceMinimum_eq',
+  'PNP.DirectWire.StrictGainChain.end_residualSlack_add_length_le',
+  'PNP.DirectWire.StrictGainChain.eq_nil_of_residualSlack_eq_zero',
+  'PNP.DirectWire.StrictGainChain.length_le_residualSlack',
   'PNP.DirectWire.andCircuit_spec',
   'PNP.DirectWire.compatibleReplacement_framed',
   'PNP.DirectWire.constantOneDirect_referenceMinimum',
@@ -2068,6 +2073,9 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_referenceMinimum_bounds_of_satisfiable',
   'PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_referenceMinimum_eq_baseline_of_unsatisfiable',
   'PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_residualSlack_le_four',
+  'PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_strictGainChain_length_le_four',
+  'PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_strictGainChainBool_length_le_four',
+  'PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidateImplementation_residualSlack_le_four',
   'PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_satisfiableFinalConditions',
   'PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_satisfiable_iff_referenceMinimum_ge_succ',
   'PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_size',
@@ -2087,6 +2095,10 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.referenceMinimum_invariant',
   'PNP.DirectWire.residualSlack_eq_zero_iff_minimum',
   'PNP.DirectWire.strictEquivalentGainBool_complete',
+  'PNP.DirectWire.strictGainChainBool_eq_nil_of_residualSlack_eq_zero',
+  'PNP.DirectWire.strictGainChainBool_eq_true_iff',
+  'PNP.DirectWire.strictGainChainBool_length_le_of_residualSlack_le',
+  'PNP.DirectWire.strictGainChainBool_length_le_residualSlack',
   'PNP.DirectWire.traceDirect_referenceMinimum',
   'PNP.DirectWire.unresolved_positiveSlack_regression',
   'PNP.Main.concretePEqualsNP_iff',
@@ -2123,7 +2135,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-07-31-94') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-03-95') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -2400,7 +2412,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-07-31-94') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-03-95') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

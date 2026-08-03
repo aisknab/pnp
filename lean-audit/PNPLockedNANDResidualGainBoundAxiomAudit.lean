@@ -1,0 +1,6 @@
+import PNP
+
+#print axioms PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidateImplementation
+#print axioms PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidateImplementation_residualSlack_le_four
+#print axioms PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_strictGainChain_length_le_four
+#print axioms PNP.DirectWire.LockedNANDGlobalCandidates.fullCandidate_strictGainChainBool_length_le_four
