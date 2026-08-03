@@ -1,0 +1,31 @@
+import PNP.ResidualTerminalModeFirewall
+
+#print axioms PNP.DirectWire.TerminalProfileRole
+#print axioms PNP.DirectWire.TerminalProfile
+#print axioms PNP.DirectWire.TerminalProfileSystem
+#print axioms PNP.DirectWire.TerminalProfileProjection
+#print axioms PNP.DirectWire.TerminalProfileProjection.Keeps
+#print axioms PNP.DirectWire.TerminalProfileProjection.Forgets
+#print axioms PNP.DirectWire.TerminalProfileProjection.KeepsAll
+#print axioms PNP.DirectWire.TerminalProfileSystem.ObligationsDischarged
+#print axioms PNP.DirectWire.TerminalFullCarrierRealization
+#print axioms PNP.DirectWire.TerminalQuotientComparison
+#print axioms PNP.DirectWire.TerminalFullCarrierRealization.project
+#print axioms PNP.DirectWire.TerminalFullCarrierRealization.project_realization
+#print axioms PNP.DirectWire.TerminalFullCarrierRealization.project_implementation
+#print axioms PNP.DirectWire.TerminalFullCarrierRealization.project_gateCount
+#print axioms PNP.DirectWire.TerminalFullCarrierRealization.project_equivalent
+#print axioms PNP.DirectWire.TerminalFullCarrierRealization.project_semantics
+#print axioms PNP.DirectWire.TerminalQuotientComparison.LostProfileAgreement
+#print axioms PNP.DirectWire.TerminalCheckedFullLift
+#print axioms PNP.DirectWire.TerminalCheckedFullLift.fullRealization
+#print axioms PNP.DirectWire.TerminalCheckedFullLift.fullRealization_realization
+#print axioms PNP.DirectWire.TerminalCheckedFullLift.fullRealization_profileEqual
+#print axioms PNP.DirectWire.TerminalFullCarrierRealization.checkedFullLift
+#print axioms PNP.DirectWire.TerminalQuotientComparison.FullProfileEqual
+#print axioms PNP.DirectWire.terminalCheckedFullLift_iff_fullProfileEqual
+#print axioms PNP.DirectWire.TerminalQuotientComparison.checkedFullLift_of_keepsAll
+#print axioms PNP.DirectWire.TerminalFullCarrierRealization.obligationsDischarged
+#print axioms PNP.DirectWire.TerminalCheckedFullLift.obligationsDischarged
+#print axioms PNP.DirectWire.TerminalQuotientComparison.ForgottenMismatch
+#print axioms PNP.DirectWire.terminalQuotientEqualityNotConstructive

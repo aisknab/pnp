@@ -128,9 +128,11 @@ on:
       - 'audits/lean-residual-gain-chain0.test.mjs'
       - 'audits/lean-residual-gain-stopping0.test.mjs'
       - 'audits/lean-residual-terminal-full-bridge0.test.mjs'
+      - 'audits/lean-residual-terminal-mode-firewall0.test.mjs'
       - 'docs/lean_residual_gain_chain.md'
       - 'docs/lean_residual_gain_stopping.md'
       - 'docs/lean_residual_terminal_full_bridge.md'
+      - 'docs/lean_residual_terminal_mode_firewall.md'
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_locked_nand_polynomial_reduction.md'
       - 'docs/lean_concrete_cnf_to_nand_semantic_compiler.md'
@@ -334,9 +336,11 @@ on:
       - 'audits/lean-residual-gain-chain0.test.mjs'
       - 'audits/lean-residual-gain-stopping0.test.mjs'
       - 'audits/lean-residual-terminal-full-bridge0.test.mjs'
+      - 'audits/lean-residual-terminal-mode-firewall0.test.mjs'
       - 'docs/lean_residual_gain_chain.md'
       - 'docs/lean_residual_gain_stopping.md'
       - 'docs/lean_residual_terminal_full_bridge.md'
+      - 'docs/lean_residual_terminal_mode_firewall.md'
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_locked_nand_polynomial_reduction.md'
       - 'docs/lean_concrete_cnf_to_nand_semantic_compiler.md'
@@ -466,7 +470,7 @@ jobs:
           grep -F 'Lake version 5.0.0-src+68218e8 (Lean version 4.31.0)' /tmp/lake-version.txt
 
       - name: Audit explicit root and assumption inventory
-        run: node --test audits/lean-root-target0.test.mjs audits/lean-concrete-machine0.test.mjs audits/lean-concrete-tape-handoff0.test.mjs audits/lean-concrete-tape-blank-equivalence0.test.mjs audits/lean-concrete-pipeline-tape-geometry0.test.mjs audits/lean-concrete-pipeline-input-framer0.test.mjs audits/lean-concrete-pipeline-output-handoff0.test.mjs audits/lean-concrete-pipeline-state-namespace0.test.mjs audits/lean-concrete-pipeline-sequential-state-namespace0.test.mjs audits/lean-concrete-pipeline-sequential-compiler0.test.mjs audits/lean-concrete-pipeline-stage-bridges0.test.mjs audits/lean-concrete-terminal-output-packer0.test.mjs audits/lean-concrete-pipeline-terminal-bridge0.test.mjs audits/lean-concrete-pipeline-paired-compiler0.test.mjs audits/lean-concrete-pipeline-compiler0.test.mjs audits/lean-concrete-pipeline-machine-simulation0.test.mjs audits/lean-concrete-complexity0.test.mjs audits/lean-concrete-pipeline-refinement0.test.mjs audits/lean-concrete-cnf0.test.mjs audits/lean-concrete-cook-levin-layout0.test.mjs audits/lean-concrete-cook-levin-tableau0.test.mjs audits/lean-nand-semantics0.test.mjs audits/lean-nand-enumerator0.test.mjs audits/lean-nand-reference-minimum0.test.mjs audits/lean-locked-nand-baseline0.test.mjs audits/lean-locked-nand-threshold-boundary0.test.mjs audits/lean-locked-nand-carrier-trace0.test.mjs audits/lean-residual-routes0.test.mjs audits/lean-residual-gain-chain0.test.mjs audits/lean-residual-gain-stopping0.test.mjs audits/lean-residual-terminal-full-bridge0.test.mjs audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs
+        run: node --test audits/lean-root-target0.test.mjs audits/lean-concrete-machine0.test.mjs audits/lean-concrete-tape-handoff0.test.mjs audits/lean-concrete-tape-blank-equivalence0.test.mjs audits/lean-concrete-pipeline-tape-geometry0.test.mjs audits/lean-concrete-pipeline-input-framer0.test.mjs audits/lean-concrete-pipeline-output-handoff0.test.mjs audits/lean-concrete-pipeline-state-namespace0.test.mjs audits/lean-concrete-pipeline-sequential-state-namespace0.test.mjs audits/lean-concrete-pipeline-sequential-compiler0.test.mjs audits/lean-concrete-pipeline-stage-bridges0.test.mjs audits/lean-concrete-terminal-output-packer0.test.mjs audits/lean-concrete-pipeline-terminal-bridge0.test.mjs audits/lean-concrete-pipeline-paired-compiler0.test.mjs audits/lean-concrete-pipeline-compiler0.test.mjs audits/lean-concrete-pipeline-machine-simulation0.test.mjs audits/lean-concrete-complexity0.test.mjs audits/lean-concrete-pipeline-refinement0.test.mjs audits/lean-concrete-cnf0.test.mjs audits/lean-concrete-cook-levin-layout0.test.mjs audits/lean-concrete-cook-levin-tableau0.test.mjs audits/lean-nand-semantics0.test.mjs audits/lean-nand-enumerator0.test.mjs audits/lean-nand-reference-minimum0.test.mjs audits/lean-locked-nand-baseline0.test.mjs audits/lean-locked-nand-threshold-boundary0.test.mjs audits/lean-locked-nand-carrier-trace0.test.mjs audits/lean-residual-routes0.test.mjs audits/lean-residual-gain-chain0.test.mjs audits/lean-residual-gain-stopping0.test.mjs audits/lean-residual-terminal-full-bridge0.test.mjs audits/lean-residual-terminal-mode-firewall0.test.mjs audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs
 
       - name: Audit uniform bounded verifier-tableau source
         run: node --test audits/lean-concrete-cook-levin-verifier-tableau0.test.mjs
@@ -2371,3 +2375,19 @@ jobs:
 
       - name: Run terminal full-carrier residual bridge hostile audit
         run: node --test audits/lean-residual-terminal-full-bridge0.test.mjs
+
+      - name: Print terminal quotient mode firewall axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalModeFirewallAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          if printf '%s\n' "$audit_output" | grep -F 'depends on axioms:'; then
+            echo 'Terminal quotient mode firewall unexpectedly depends on axioms.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 29
+
+      - name: Run terminal quotient mode firewall regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalModeFirewall.lean
+
+      - name: Run terminal quotient mode firewall hostile audit
+        run: node --test audits/lean-residual-terminal-mode-firewall0.test.mjs

@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-03-97",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-04-98",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "637927ee2f3fe48f8f8c7495ea0c2ecc6da66d85190c80b961b9079aa5e6128c",
+  "milestoneSourceClosureSha256": "d7b361d14706fa7194432f6e8510a20221ce1f2795064aea153171f19e31efa1",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2090,8 +2090,18 @@
     "PNP.DirectWire.StrictGainChain.end_residualSlack_eq_zero_of_no_strictEquivalentGain": "7e70d84ebd96fc91004f391498a0ba3869902abc56060ab5517dc38d0f0b06cd",
     "PNP.DirectWire.StrictGainChain.eq_nil_of_residualSlack_eq_zero": "f0ad692f62354727bdb5e3f44617f8ad5decf5ad1b25d0c03912dbec38d38d07",
     "PNP.DirectWire.StrictGainChain.length_le_residualSlack": "a9ae79ffa40af537d1e2b54bcec4f2733bddbf7c20b0799dc031e61d410cf20e",
+    "PNP.DirectWire.TerminalCheckedFullLift.fullRealization_profileEqual": "ee608d7e17b2846b5a87c15b8e6874ac7de023798ebdd827994e9503dc43d7c1",
+    "PNP.DirectWire.TerminalCheckedFullLift.fullRealization_realization": "1f98a1fbc39672b171e5d1a5f6f1716c785dbcf128c24c3071802e7fbf5d0caf",
+    "PNP.DirectWire.TerminalCheckedFullLift.obligationsDischarged": "619562c57b2ccbe271d44d8902d27c8788a9ee262dfab89059b6bf8164fda69b",
+    "PNP.DirectWire.TerminalFullCarrierRealization.obligationsDischarged": "44dd06dc5c2d17056eaf5271522830951da6a77bd69fdd28a098880780361d38",
+    "PNP.DirectWire.TerminalFullCarrierRealization.project_equivalent": "79c2680c1645a5bb087ae3786eba52204e2297ebcc8049a8f4103603c9343a08",
+    "PNP.DirectWire.TerminalFullCarrierRealization.project_gateCount": "cf7fb7ec364e8a65984ac9001ea5f4653959f2d0599ad0706aed74bd970a3551",
+    "PNP.DirectWire.TerminalFullCarrierRealization.project_implementation": "4adb38449d826339de7be4ef2f076ee3a96bf5da4b0fff319ef956391012acf5",
+    "PNP.DirectWire.TerminalFullCarrierRealization.project_realization": "e18ceb7862c428c17a83e7709f12149179b9618aecdb92de9885dec5a7a6cf8a",
+    "PNP.DirectWire.TerminalFullCarrierRealization.project_semantics": "bcc4254513f072db91e3757f0c3962d757480d72d4270b91139a6bf57a325ee6",
     "PNP.DirectWire.TerminalFullRealization.realize_equivalent": "28387dc9783f19113dfc9ec147d7d0d8b6906753e823698e024c3fd14edc0ac7",
     "PNP.DirectWire.TerminalFullRealization.realize_semantics": "16d7dd8e293e851e41d5d0552dfadbd8f9eb8df41f5f1731d062960e1d8ff3c1",
+    "PNP.DirectWire.TerminalQuotientComparison.checkedFullLift_of_keepsAll": "22011cdf57634577ca660f526487e3a2a309c716c5ab419a201bc323c0c566ca",
     "PNP.DirectWire.WholeSpanResidualWitness.strictResidualDescent": "bbeb896c3ba81d61e882ef600de8617bae37133f66c8cb7f905ebaa65d5460ce",
     "PNP.DirectWire.andCircuit_spec": "43c4801753810dec20c372ae4eac3f248e03f62e084c80089aacbe38dbeaac50",
     "PNP.DirectWire.compatibleReplacement_framed": "450f861075f4eb11bb719e7248543c09ab9239de1ad5c1ab5c721c640da3dd2b",
@@ -2127,8 +2137,10 @@
     "PNP.DirectWire.strictGainChainBool_eq_true_iff": "816e54e4531107de91901686549b1c2e040df4feef9b16b066592bd999a04898",
     "PNP.DirectWire.strictGainChainBool_length_le_of_residualSlack_le": "a3963469939a052165f47d2aca5171bf5fa934483d25ab91451df2674a9b0f87",
     "PNP.DirectWire.strictGainChainBool_length_le_residualSlack": "20c5ad2948288e7607ef952b5f155133fb4b9ed18e4e8690bddbf993c8c8b535",
+    "PNP.DirectWire.terminalCheckedFullLift_iff_fullProfileEqual": "a038fc4300e2f93af3cdac76907511237e0dd6d6b9e0d3015a7301b82ce8d899",
     "PNP.DirectWire.terminalFullMinimum_eq_referenceMinimum": "1953784d386ebbde2afe37cdcf4967bd4864109a7e6a54ceac1e6b3a1eb1cc5d",
     "PNP.DirectWire.terminalFullMinimum_spec": "d4c836a72896091bb8a0215b7f9c274803f9ca36b28ee2ada0f0d37177280520",
+    "PNP.DirectWire.terminalQuotientEqualityNotConstructive": "d9f2582756a57c87b345e1b462ae765c654e719dc56171939ecbf3de8a2c0e1c",
     "PNP.DirectWire.terminalize_gateCount": "05ffc10d0fcfd63531119a3a7ff69baf871d270412c93d345e45dc1167dc1aee",
     "PNP.DirectWire.terminalize_implementation": "f8b947cab5adb66f9a7314b3522f9e96a083ff752df2bb7f26e09bf8159a40c5",
     "PNP.DirectWire.traceDirect_referenceMinimum": "cbef9349e46dd570d0e02c81170ea1257f3d1a76a49db39123074892e3196ea2",
@@ -5057,6 +5069,27 @@
         "PNP.DirectWire.StrictEquivalentGain.strictResidualDescent"
       ],
       "nonClaim": "This is the direct-wire terminal full-mode specialization of the manuscript bridge. It does not formalize the quotient carrier or quotient-to-full firewall, proper or governed supports, SaturatePositive, BCEL/BN2-BN6, packet or selector completeness, route generation, the ZeroSlack certificate, PCCMin, polynomial minimum search or checking, SAT in P, discharge a project assumption, or prove P = NP."
+    },
+    {
+      "id": "residual-terminal-mode-firewall",
+      "title": "Terminal quotient/full mode firewall",
+      "classification": "formalized-terminal-mode-firewall",
+      "scope": "For every finite direct-wire implementation, a computed finite profile observer records the ten terminal carrier roles and an explicit forgetful projection selects the quotient coordinates. Projection retains the exact implementation, gate count, and complete multi-output Boolean semantics. A quotient comparison has a checked full lift exactly when every forgotten profile coordinate agrees, lossless projections lift directly, and obligation discharge transports across a checked lift.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalFullCarrierRealization.project_realization",
+        "PNP.DirectWire.TerminalFullCarrierRealization.project_implementation",
+        "PNP.DirectWire.TerminalFullCarrierRealization.project_gateCount",
+        "PNP.DirectWire.TerminalFullCarrierRealization.project_equivalent",
+        "PNP.DirectWire.TerminalFullCarrierRealization.project_semantics",
+        "PNP.DirectWire.TerminalCheckedFullLift.fullRealization_realization",
+        "PNP.DirectWire.TerminalCheckedFullLift.fullRealization_profileEqual",
+        "PNP.DirectWire.terminalCheckedFullLift_iff_fullProfileEqual",
+        "PNP.DirectWire.TerminalQuotientComparison.checkedFullLift_of_keepsAll",
+        "PNP.DirectWire.TerminalFullCarrierRealization.obligationsDischarged",
+        "PNP.DirectWire.TerminalCheckedFullLift.obligationsDischarged",
+        "PNP.DirectWire.terminalQuotientEqualityNotConstructive"
+      ],
+      "nonClaim": "This is a terminal comparison/lifting firewall only. It supplies no proper or governed supports, arbitrary quotient construction, support or projection-defect minimum, saturation, Package E, BCEL/BN2-BN6, packet or selector completeness, global residual route, ZeroSlack certificate, PCCMin exactness or polynomial runtime, SAT-in-P result, discharged project assumption, or proof that P = NP."
     },
     {
       "id": "global-locked-nand-threshold",
