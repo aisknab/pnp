@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '048a4061b0014344ac3564d6f39575a75b0cc5f66bc0afdece7015d42a3691c2';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'e07c3c406e946a31c8e0d2fe94873922c78299e8da908ffa9630dc8a260a68b2';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -2111,14 +2111,26 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.residualSlack_eq_zero_iff_no_wholeSpanResidualWitness',
   'PNP.DirectWire.residualSlack_pos_iff_exists_strictEquivalentGain',
   'PNP.DirectWire.residualSlack_pos_iff_exists_wholeSpanResidualWitness',
+  'PNP.DirectWire.TerminalFullCarrierRealization.obligationsDischarged',
+  'PNP.DirectWire.TerminalFullCarrierRealization.project_equivalent',
+  'PNP.DirectWire.TerminalFullCarrierRealization.project_gateCount',
+  'PNP.DirectWire.TerminalFullCarrierRealization.project_implementation',
+  'PNP.DirectWire.TerminalFullCarrierRealization.project_realization',
+  'PNP.DirectWire.TerminalFullCarrierRealization.project_semantics',
+  'PNP.DirectWire.TerminalCheckedFullLift.fullRealization_profileEqual',
+  'PNP.DirectWire.TerminalCheckedFullLift.fullRealization_realization',
+  'PNP.DirectWire.TerminalCheckedFullLift.obligationsDischarged',
+  'PNP.DirectWire.TerminalQuotientComparison.checkedFullLift_of_keepsAll',
   'PNP.DirectWire.strictEquivalentGainBool_complete',
   'PNP.DirectWire.strictGainChainBool_end_residualSlack_eq_zero_of_no_strictEquivalentGain',
   'PNP.DirectWire.strictGainChainBool_eq_nil_of_residualSlack_eq_zero',
   'PNP.DirectWire.strictGainChainBool_eq_true_iff',
   'PNP.DirectWire.strictGainChainBool_length_le_of_residualSlack_le',
   'PNP.DirectWire.strictGainChainBool_length_le_residualSlack',
+  'PNP.DirectWire.terminalCheckedFullLift_iff_fullProfileEqual',
   'PNP.DirectWire.terminalFullMinimum_eq_referenceMinimum',
   'PNP.DirectWire.terminalFullMinimum_spec',
+  'PNP.DirectWire.terminalQuotientEqualityNotConstructive',
   'PNP.DirectWire.terminalize_gateCount',
   'PNP.DirectWire.terminalize_implementation',
   'PNP.DirectWire.traceDirect_referenceMinimum',
@@ -2157,7 +2169,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-03-97') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-04-98') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -2434,7 +2446,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-03-97') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-04-98') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

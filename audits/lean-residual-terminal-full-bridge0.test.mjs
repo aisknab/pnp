@@ -214,7 +214,7 @@ test('regression covers boundary arities, exact terminalization, a strict witnes
   );
 });
 
-test('status earns only the direct-wire terminal full-mode bridge', async () => {
+test('status retains the direct-wire terminal full-mode bridge', async () => {
   const status = JSON.parse(
     await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'),
   );
@@ -227,13 +227,13 @@ test('status earns only the direct-wire terminal full-mode bridge', async () => 
     'leanResidualWholeSpanPositiveWitnessIffFormalized',
     'leanResidualWholeSpanStrictDescentFormalized',
     'leanResidualWholeSpanZeroAbsenceIffFormalized',
+    'leanResidualTerminalQuotientCarrierFormalized',
   ]) assert.equal(status[field], true, field);
   assert.equal(
     status.leanResidualTerminalFullBridgeScope,
     'all-finite-direct-wire-implementations-with-complete-multi-output-semantics-and-exhaustive-reference-minimum-witnesses',
   );
   for (const field of [
-    'leanResidualTerminalQuotientCarrierFormalized',
     'leanResidualTerminalProperSupportFormalized',
     'leanResidualTerminalSaturationFormalized',
     'leanResidualRoutesGlobalGainCompletenessFormalized',

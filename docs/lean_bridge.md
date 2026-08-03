@@ -889,9 +889,22 @@ minimum. This gives the direct-wire terminal `RW-MuBridge`. Positive slack is
 equivalent to a cheaper complete whole-span realization, which supplies strict
 residual descent, while zero slack is equivalent to absence of such a
 realization. This does not formalize the manuscript's quotient carrier or mode
-firewall, proper supports, saturation, BCEL/BN2–BN6, selectors, ZeroSlack,
-PCCMin, or polynomial runtime. See
+firewall in this module, proper supports, saturation, BCEL/BN2–BN6, selectors,
+ZeroSlack, PCCMin, or polynomial runtime. See
 `docs/lean_residual_terminal_full_bridge.md`.
+
+`lean/PNP/ResidualTerminalModeFirewall.lean` closes the adjacent finite-profile
+mode edge from report §§5.1–5.2. A role-indexed observer computes finite
+carrier-profile coordinates from the represented implementation, and a
+forgetful projection selects which coordinates a quotient comparison retains.
+Projection preserves the exact implementation, gate count, and all Boolean
+semantics. Promotion back to the full carrier is checked: it exists exactly
+when every forgotten coordinate agrees, and a concrete forgotten mismatch
+rules it out. Obligation-coordinate discharge also transports across a checked
+lift. This is still only the terminal comparison/lifting firewall; it does not
+construct proper or governed supports, a projection-defect minimum, saturation,
+Package E, BCEL/BN2–BN6, ZeroSlack, PCCMin, or a polynomial residual route. See
+`docs/lean_residual_terminal_mode_firewall.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 

@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-03-97';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-04-98';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -309,6 +309,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualGainStopping.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFullBridgeAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFullBridge.lean',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalModeFirewallAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalModeFirewall.lean',
+  'node --test audits/lean-residual-terminal-mode-firewall0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -411,6 +414,8 @@ const NON_CLAIMS = Object.freeze([
   'The global stopping theorem uses the exhaustive semantic reference minimum as a mathematical witness and requires a proof of global no-gain at a chain endpoint. It does not generate a route, derive global absence from a finite scan, construct the report ZeroSlack certificate, or establish polynomial runtime.',
   'The terminal full-carrier bridge preserves every input/output coordinate and exact gate count, proves an independently stated universal terminal minimum specification equal to the exhaustive reference minimum, and sends every cheaper whole-span realization to strict residual descent.',
   'This terminal bridge is direct-wire full-mode semantics only. It does not formalize the quotient carrier or mode firewall, proper supports, SaturatePositive, BCEL/BN2-BN6, selector completeness, ZeroSlack, PCCMin, route generation, or polynomial runtime.',
+  'The terminal finite-profile mode firewall now computes role-indexed profile coordinates from each implementation, preserves the exact NAND implementation under projection, reconstructs full equality only from an explicit checked lift, and proves that a mismatch at any forgotten coordinate makes such a lift impossible.',
+  'This mode-firewall milestone is terminal and forgetful-projection only. It does not formalize proper or governed support carriers, arbitrary quotient coarsening, full or quotient support minima, projection defect, SaturatePositive, BCEL/BN2-BN6, selector completeness, ZeroSlack, PCCMin, route generation, or polynomial runtime.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
   'The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.',
@@ -1210,9 +1215,18 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualWholeSpanZeroAbsenceIffFormalized: true,
   leanResidualTerminalFullBridgeScope:
     'all-finite-direct-wire-implementations-with-complete-multi-output-semantics-and-exhaustive-reference-minimum-witnesses',
-  leanResidualTerminalQuotientCarrierFormalized: false,
+  leanResidualTerminalQuotientCarrierFormalized: true,
+  leanResidualTerminalModeFirewallFormalized: true,
+  leanResidualTerminalModeFirewallAxiomAuditPassed: true,
+  leanResidualTerminalProfileProjectionExactFormalized: true,
+  leanResidualTerminalCheckedFullLiftFormalized: true,
+  leanResidualTerminalQuotientEqualityNotConstructiveFormalized: true,
+  leanResidualTerminalObligationDischargePreservedFormalized: true,
+  leanResidualTerminalModeFirewallScope:
+    'all-finite-direct-wire-implementations-with-computed-finite-profile-observers-and-explicit-forgetful-projections',
   leanResidualTerminalProperSupportFormalized: false,
   leanResidualTerminalSaturationFormalized: false,
+  leanResidualProjectionMinimumFormalized: false,
   leanZeroSlackPositiveSlackContradictionFormalized: false,
   leanZeroSlackCompletenessFormalized: false,
   leanPCCMinLoopExactnessFormalized: false,
@@ -1239,7 +1253,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-03-RESIDUAL-TERMINAL-FULL-CARRIER-BRIDGE-96',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-04-RESIDUAL-TERMINAL-MODE-FIREWALL-97',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -2019,9 +2033,18 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualWholeSpanZeroAbsenceIffFormalized: true,
       leanResidualTerminalFullBridgeScope:
         'all-finite-direct-wire-implementations-with-complete-multi-output-semantics-and-exhaustive-reference-minimum-witnesses',
-      leanResidualTerminalQuotientCarrierFormalized: false,
+      leanResidualTerminalQuotientCarrierFormalized: true,
+      leanResidualTerminalModeFirewallFormalized: true,
+      leanResidualTerminalModeFirewallAxiomAuditPassed: true,
+      leanResidualTerminalProfileProjectionExactFormalized: true,
+      leanResidualTerminalCheckedFullLiftFormalized: true,
+      leanResidualTerminalQuotientEqualityNotConstructiveFormalized: true,
+      leanResidualTerminalObligationDischargePreservedFormalized: true,
+      leanResidualTerminalModeFirewallScope:
+        'all-finite-direct-wire-implementations-with-computed-finite-profile-observers-and-explicit-forgetful-projections',
       leanResidualTerminalProperSupportFormalized: false,
       leanResidualTerminalSaturationFormalized: false,
+      leanResidualProjectionMinimumFormalized: false,
       leanZeroSlackPositiveSlackContradictionFormalized: false,
       leanZeroSlackCompletenessFormalized: false,
       leanPCCMinLoopExactnessFormalized: false,
@@ -2099,7 +2122,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-03-97',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-04-98',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,
