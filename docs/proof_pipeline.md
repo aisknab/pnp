@@ -205,6 +205,14 @@ strict locked-NAND reduction. The abstract threshold-language discharge,
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved.
 
+The reconstruction now also verifies the iteration-count subclaim used by
+`PCCMin`: for any finite supplied chain whose every adjacent replacement is a
+strict equivalent gain, the final residual slack plus the number of steps is
+at most the initial residual slack. Since the complete locked candidate has
+residual slack at most four, no such verified chain can contain more than four
+gains. This does not construct the chain, prove its completeness, justify a
+stopping decision, or prove the remaining exactness and runtime claims.
+
 ### 5.3 Residual-band minimisation correctness
 
 The central completeness chain is:

@@ -42,6 +42,8 @@ lean/PNP/NANDMinimum.lean
 lean/PNP/NANDComposition.lean
 lean/PNP/NANDSlack.lean
 lean/PNP/ResidualRoutes.lean
+lean/PNP/ResidualGainChain.lean
+lean/PNP/LockedNANDResidualGainBound.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
 lean/PNP/Concrete/TapeHandoff.lean
@@ -136,6 +138,8 @@ lean-audit/PNPNANDMinimumAxiomAudit.lean
 lean-audit/PNPNANDCompositionAxiomAudit.lean
 lean-audit/PNPNANDSlackAxiomAudit.lean
 lean-audit/PNPResidualRoutesAxiomAudit.lean
+lean-audit/PNPResidualGainChainAxiomAudit.lean
+lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean
 lean-audit/PNPLockedNANDDirectAxiomAudit.lean
 lean-audit/PNPDirectWireBaselineAxiomAudit.lean
 lean-audit/PNPLockedNANDBaselineAxiomAudit.lean
@@ -851,6 +855,15 @@ Search failure is not ZeroSlack. `firstListedGain_none_no_listed_gain` excludes 
 supplied list, and `unresolved_positiveSlack_regression` constructs an unresolved empty-list case
 with residual slack one. No list-generation completeness, global route completeness, or polynomial
 runtime is proved. See `docs/lean_residual_routes.md`.
+
+`lean/PNP/ResidualGainChain.lean` now closes the separate iteration-count
+edge from report §16. It validates every adjacent strict equivalent gain in
+an arbitrary finite disclosed chain, preserves the endpoint semantics and
+reference minimum, and proves that endpoint residual slack plus chain length
+is at most starting residual slack. The locked candidate's report-§17 slack
+bound then gives at most four verified steps. This still does not generate a
+route, turn failure into ZeroSlack, prove exact minimization, or establish a
+polynomial runtime. See `docs/lean_residual_gain_chain.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 

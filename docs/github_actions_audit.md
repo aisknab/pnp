@@ -28,8 +28,8 @@ from current theorem status.
   exhaustive reference-minimum, concrete framed composition/slack, typed locked-NAND candidate,
   semantic output-lower-bound, source-accounting, finite local-baseline, conditional
   threshold-boundary, global carrier/trace, complete candidate, global baseline-distinctness, and
-  whole-carrier unsatisfiable-final-zero audits plus the explicit-list residual-route audit when
-  Lean inputs change.
+  whole-carrier unsatisfiable-final-zero audits plus the explicit-list residual-route and universal
+  residual-gain-chain audits when Lean inputs change.
   The Cook--Levin lane additionally audits the 79-declaration rectangular formula schedule, the
   136-declaration direct formula cursor, the 39-declaration literal input-length tally machine, the
   40-declaration executable framer-to-tally prefix, the 68-declaration standalone four-token
@@ -162,7 +162,9 @@ from current theorem status.
   Each transcript has an exact declaration count,
   so a truncated audit fails closed. The five
   locked-NAND local transcripts require exactly 48, 25, 23, 30, and 32 clean declarations; the
-  global transcripts require exactly 71, 64, 5, and 2 declarations; residual routes require 30.
+  global transcripts require exactly 71, 64, 5, and 2 declarations; residual routes require 30,
+  the universal gain-chain transcript requires 12 empty closures, and the locked specialization
+  requires four closures using only `propext` and `Quot.sound`.
   The workflow also checks the byte-identical inventory mirrors, derives the
   false concrete publication gate and status/report outputs, and verifies same-environment
   double-build determinism plus exact committed bytes for the current concise PDF. The
@@ -201,6 +203,16 @@ composition, and the inactive target. The refinement audit adds exact proof-bear
 machine-leaf witnesses, output-bound transport, and a decider bridge from a supplied refinement; it
 does not construct composition/precomposition refinements or supply the missing general compiler
 to one raw machine.
+
+The gain-chain lane checks a separate report-§16 iteration invariant. Every
+adjacent disclosed implementation must pass the strict equivalent-gain
+checker, the endpoint must retain the same semantics and reference minimum,
+and endpoint slack plus chain length must be bounded by starting slack. The
+existing locked-family bound specializes this to four steps. Hostile mutations
+cover changed adjacency, Boolean disjunction, stale endpoint threading,
+changed family bounds, removed slack dependencies, transcript drift, hidden
+assumptions, host lookup, and overclaims. CI gives no credit for gain
+generation, route completeness, ZeroSlack, exact minimization, or runtime.
 
 The tape-handoff audit corrects the earlier list-boundary-sensitive output convention: explicit and
 implicit blanks now terminate output identically. Its `handoffTarget` is a pure canonical data target,

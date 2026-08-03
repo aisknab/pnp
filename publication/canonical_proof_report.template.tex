@@ -517,6 +517,18 @@ using only \code{propext}, and twelve using only \code{propext} and
 locked-NAND theorem, deterministic CNF-SAT-in-P, NP-hardness transport,
 ZeroSlack/PCCMin completion, and \(P=NP\) remain unproved.
 
+The residual-gain chain milestone reconstructs the iteration-count edge from
+legacy report Sections 16 and 17. For every finite disclosed chain whose
+adjacent implementations pass the strict equivalent-gain checker, Lean proves
+that the endpoint residual slack plus the chain length is at most the starting
+residual slack. The endpoint remains semantically equivalent and has the same
+exhaustive reference minimum. The already-proved locked-candidate bound then
+specializes every accepted chain to at most four gains. All 12 declarations in
+the universal module have empty axiom closure; the four locked declarations
+use only \code{propext} and \code{Quot.sound}. This does not find a route,
+certify stopping, prove ZeroSlack or exact minimization, or establish a
+polynomial checker or PCCMin runtime.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule
@@ -634,8 +646,9 @@ Six formal blockers remain active:
 The conditional locked-NAND threshold module assumes typed baseline and full candidates,
 baseline conditions, preservation of existing outputs, an unsatisfiable final-zero law, and
 satisfiable final-output laws. The explicit residual scanner searches only a caller-supplied finite
-list. Neither result constructs the missing global reduction or proves global ZeroSlack,
-polynomial PCCMin, SAT in P, or P equals NP.
+list. The gain-chain theorem bounds every supplied verified sequence, including locked-family
+sequences by four, but does not generate or complete that sequence. None of these results proves
+global ZeroSlack, polynomial PCCMin, SAT in P, or P equals NP.
 \end{samepage}
 
 \section{Historical report provenance}
