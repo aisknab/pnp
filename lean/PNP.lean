@@ -8,6 +8,7 @@ import PNP.NANDSlack
 import PNP.ResidualRoutes
 import PNP.ResidualGainChain
 import PNP.ResidualGainStopping
+import PNP.ResidualTerminalFullBridge
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine

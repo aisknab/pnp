@@ -85,21 +85,21 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
   assert.equal(`${stableStringify0(inventory)}\n`, inventoryBytes.toString('utf8'));
   ValidateLeanTheoremInventory0(inventory);
   assert.equal(inventory.environmentProbeComplete, true);
-  assert.equal(inventory.declarationCount, 23615);
+  assert.equal(inventory.declarationCount, 23671);
   assert.equal(inventory.excludedPrivateDeclarationCount, 14273);
-  assert.equal(inventory.theoremCount, 12830);
-  assert.equal(inventory.assumptionFreeTheoremCount, 6788);
+  assert.equal(inventory.theoremCount, 12853);
+  assert.equal(inventory.assumptionFreeTheoremCount, 6809);
   assert.equal(inventory.axiomCount, 4);
-  assert.equal(inventory.sourceClosureModuleCount, 211);
+  assert.equal(inventory.sourceClosureModuleCount, 212);
   assert.deepEqual(inventory.declarationKindCounts, {
     axiom: 4,
-    constructor: 635,
-    definition: 9598,
-    inductive: 274,
+    constructor: 637,
+    definition: 9625,
+    inductive: 276,
     opaque: 0,
     quotient: 0,
-    recursor: 274,
-    theorem: 12830,
+    recursor: 276,
+    theorem: 12853,
   });
   assert.deepEqual(inventory.projectAxioms, [
     'PNP.CheckPCCPackexp',
@@ -116,7 +116,7 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
     module: 'PNP.Concrete.Target',
     name: 'PNP.Main.ConcretePEqualsNP',
   });
-  assert.equal(inventory.milestoneCandidates.length, 2103);
+  assert.equal(inventory.milestoneCandidates.length, 2115);
   assert.deepEqual(inventory.milestoneCandidates.map((entry) => entry.name), REQUIRED_MILESTONE_THEOREMS0);
   assert.equal(inventory.milestoneCandidates.every((entry) => entry.kind === 'theorem'
     && entry.kernelValue === null && typeof entry.kernelType === 'string'), true);
@@ -124,7 +124,7 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
 
 test('source closure scans every Lean source and rejects a symlinked source root', async () => {
   const files = await CollectLeanSourceFiles0(ROOT);
-  assert.equal(files.length, 214);
+  assert.equal(files.length, 215);
   assert.equal(files.every((file) => file.startsWith('lean/') && file.endsWith('.lean')), true);
   assert.deepEqual(files, [...files].sort());
   assert.equal(files.includes('lean/PNP.lean'), true);
@@ -139,6 +139,7 @@ test('source closure scans every Lean source and rejects a symlinked source root
   assert.equal(files.includes('lean/PNP/ResidualRoutes.lean'), true);
   assert.equal(files.includes('lean/PNP/ResidualGainChain.lean'), true);
   assert.equal(files.includes('lean/PNP/ResidualGainStopping.lean'), true);
+  assert.equal(files.includes('lean/PNP/ResidualTerminalFullBridge.lean'), true);
   assert.equal(files.includes('lean/PNP/LockedNANDResidualGainBound.lean'), true);
   assert.equal(files.includes('lean/PNP/LockedNANDCarrierTrace.lean'), true);
   assert.equal(files.includes('lean/PNP/LockedNANDGlobalCandidates.lean'), true);
@@ -261,7 +262,7 @@ test('positive Lean probe parser rejects empty, malformed, noisy, failed, or non
   const valid = ParseLeanInventoryProbe0({
     stdout: inventoryBytes.toString('utf8'), stderr: '', exitCode: 0, timedOut: false,
   });
-  assert.equal(valid.inventory.declarationCount, 23615);
+  assert.equal(valid.inventory.declarationCount, 23671);
   for (const input of [
     { stdout: '', stderr: '', exitCode: 0, timedOut: false },
     { stdout: '{}\n', stderr: '', exitCode: 0, timedOut: false },
@@ -394,7 +395,7 @@ test('same-name theorem type weakening and source-closure drift revoke milestone
     inventoryBytes,
     map.milestoneSourceClosureSha256,
   );
-  assert.equal(current.milestones.filter((entry) => entry.earned).length, 73);
+  assert.equal(current.milestones.filter((entry) => entry.earned).length, 74);
   const tableauSemantics = current.milestones.find(
     (entry) => entry.id === 'concrete-cook-levin-tableau-cnf-semantics',
   );

@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 76);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 73);
+  assert.equal(status.formalPublicationMilestones.length, 77);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 74);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -1695,6 +1695,28 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   ]);
   assert.match(residualGainStopping.nonClaim, /semantic stopping criterion/u);
   assert.match(residualGainStopping.nonClaim, /does not derive global absence from a finite scan/u);
+  const terminalFullBridge = byId.get('residual-terminal-full-carrier-bridge');
+  assert.equal(terminalFullBridge.status,
+    'formalized-terminal-full-mode-semantic-bridge');
+  assert.equal(terminalFullBridge.earned, true);
+  assert.equal(terminalFullBridge.axiomClosureUsesOnlyLeanStandardAllowlist, true);
+  assert.deepEqual(terminalFullBridge.requiredTheorems, [
+    'PNP.DirectWire.terminalize_implementation',
+    'PNP.DirectWire.terminalize_gateCount',
+    'PNP.DirectWire.TerminalFullRealization.realize_equivalent',
+    'PNP.DirectWire.TerminalFullRealization.realize_semantics',
+    'PNP.DirectWire.referenceMinimumTerminalFullRealization_gateCount',
+    'PNP.DirectWire.terminalFullMinimum_eq_referenceMinimum',
+    'PNP.DirectWire.terminalFullMinimum_spec',
+    'PNP.DirectWire.isTerminalFullMinimum_iff_eq_terminalFullMinimum',
+    'PNP.DirectWire.isTerminalFullMinimum_iff_eq_referenceMinimum',
+    'PNP.DirectWire.WholeSpanResidualWitness.strictResidualDescent',
+    'PNP.DirectWire.residualSlack_pos_iff_exists_wholeSpanResidualWitness',
+    'PNP.DirectWire.residualSlack_eq_zero_iff_no_wholeSpanResidualWitness',
+    'PNP.DirectWire.StrictEquivalentGain.strictResidualDescent',
+  ]);
+  assert.match(terminalFullBridge.scope, /every input\/output coordinate/u);
+  assert.match(terminalFullBridge.nonClaim, /does not formalize the quotient carrier/u);
   for (const id of [
     'global-locked-nand-threshold',
     'global-zeroslack-pccmin',
@@ -1709,10 +1731,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'e2e7acc9723250131808137993f04abf9c4c4436583a06d0b6c8e43ff4e02262');
+    '048a4061b0014344ac3564d6f39575a75b0cc5f66bc0afdece7015d42a3691c2');
   assert.equal(map.milestoneSourceClosureSha256,
-    '23ebbd4f1251d92adb3c0a1d60cf63b52683a41f39a84375c87b0781d2f522ac');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2103);
+    '637927ee2f3fe48f8f8c7495ea0c2ecc6da66d85190c80b961b9079aa5e6128c');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2115);
   for (const theorem of [
     'PNP.DirectWire.LockedNANDTrace.carrierSeparation',
     'PNP.DirectWire.LockedNANDTrace.finalLock_fresh',
@@ -2034,7 +2056,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [23615, 12830, 6788, 14273, 211]);
+  ], [23671, 12853, 6809, 14273, 212]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
@@ -2098,6 +2120,14 @@ test('canonical report source is current and the committed PDF artifact exists',
   assert.match(
     tex,
     /finite-list failure still cannot establish global absence/u,
+  );
+  assert.match(
+    tex,
+    /The terminal full-carrier milestone reconstructs the direct-wire full-mode[\s\S]*legacy report Section 8/u,
+  );
+  assert.match(
+    tex,
+    /All 22 public declarations have empty axiom closure/u,
   );
   assert.match(
     tex,

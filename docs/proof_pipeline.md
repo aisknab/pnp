@@ -223,6 +223,17 @@ existence witness. It does not derive global absence from a finite candidate
 scan, construct the report's `ZeroSlack` certificate, generate the route, or
 provide a polynomial stopping algorithm.
 
+The reconstruction now also kernel-checks the direct-wire terminal
+whole-carrier bridge from report §8. A terminal full realization preserves the
+whole implementation's semantics at every input/output coordinate and its
+actual gate count. The independently stated attained universal terminal
+minimum is equal to the exhaustive reference minimum (`RW-MuBridge`), and a
+cheaper whole-span realization gives strict residual descent. Positive slack
+is equivalent to existence of such a realization; zero slack is equivalent to
+its absence. The quotient/full-mode firewall, proper-support extraction,
+SaturatePositive, BCEL/BN2–BN6, selectors, ZeroSlack, and the polynomial
+PCCMin route are not supplied by this bridge.
+
 ### 5.3 Residual-band minimisation correctness
 
 The central completeness chain is:

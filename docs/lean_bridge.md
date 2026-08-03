@@ -44,6 +44,7 @@ lean/PNP/NANDSlack.lean
 lean/PNP/ResidualRoutes.lean
 lean/PNP/ResidualGainChain.lean
 lean/PNP/ResidualGainStopping.lean
+lean/PNP/ResidualTerminalFullBridge.lean
 lean/PNP/LockedNANDResidualGainBound.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
@@ -141,6 +142,7 @@ lean-audit/PNPNANDSlackAxiomAudit.lean
 lean-audit/PNPResidualRoutesAxiomAudit.lean
 lean-audit/PNPResidualGainChainAxiomAudit.lean
 lean-audit/PNPResidualGainStoppingAxiomAudit.lean
+lean-audit/PNPResidualTerminalFullBridgeAxiomAudit.lean
 lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean
 lean-audit/PNPLockedNANDDirectAxiomAudit.lean
 lean-audit/PNPDirectWireBaselineAxiomAudit.lean
@@ -877,6 +879,19 @@ minimum result. The positive witness is supplied by the exhaustive semantic
 reference minimum, so this statement neither generates a route nor supplies a
 polynomial stopping procedure. Finite-list failure remains insufficient. See
 `docs/lean_residual_gain_stopping.md`.
+
+`lean/PNP/ResidualTerminalFullBridge.lean` closes the direct-wire full-mode
+part of the terminal whole-carrier bridge from report §8. Its terminal
+realizations agree with the whole implementation at every input/output
+coordinate, terminalization preserves exact gate count, and an independently
+stated attained universal minimum is equal to the exhaustive reference
+minimum. This gives the direct-wire terminal `RW-MuBridge`. Positive slack is
+equivalent to a cheaper complete whole-span realization, which supplies strict
+residual descent, while zero slack is equivalent to absence of such a
+realization. This does not formalize the manuscript's quotient carrier or mode
+firewall, proper supports, saturation, BCEL/BN2–BN6, selectors, ZeroSlack,
+PCCMin, or polynomial runtime. See
+`docs/lean_residual_terminal_full_bridge.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 

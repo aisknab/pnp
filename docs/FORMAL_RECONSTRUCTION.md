@@ -1065,6 +1065,19 @@ The report's ZeroSlack certificate, route completeness, exact PCCMin loop, and
 runtime obligations remain open. See
 [`lean_residual_gain_stopping.md`](./lean_residual_gain_stopping.md).
 
+`ResidualTerminalFullBridge` now reconstructs the direct-wire full-mode part
+of the terminal whole-carrier bridge in legacy report §8. Terminalization
+preserves the exact implementation, gate count, and semantics at every input
+and output coordinate. An independent attained-and-universal minimum
+specification is proved equal to the exhaustive reference minimum, which is
+the direct-wire terminal `RW-MuBridge`. A cheaper complete whole-span
+realization exists exactly when residual slack is positive and every such
+realization gives strict residual descent; zero slack is equivalent to its
+absence. The quotient carrier and mode firewall, proper supports,
+SaturatePositive, BCEL/BN2–BN6, selector completeness, ZeroSlack/PCCMin, and
+polynomial runtime remain open. See
+[`lean_residual_terminal_full_bridge.md`](./lean_residual_terminal_full_bridge.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

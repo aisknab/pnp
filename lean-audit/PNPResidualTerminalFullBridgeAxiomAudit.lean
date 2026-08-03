@@ -1,0 +1,24 @@
+import PNP
+
+#print axioms PNP.DirectWire.TerminalFullRealization
+#print axioms PNP.DirectWire.terminalize
+#print axioms PNP.DirectWire.terminalize_implementation
+#print axioms PNP.DirectWire.terminalize_gateCount
+#print axioms PNP.DirectWire.TerminalFullRealization.realize
+#print axioms PNP.DirectWire.TerminalFullRealization.realize_gateCount
+#print axioms PNP.DirectWire.TerminalFullRealization.realize_equivalent
+#print axioms PNP.DirectWire.TerminalFullRealization.realize_semantics
+#print axioms PNP.DirectWire.IsTerminalFullMinimum
+#print axioms PNP.DirectWire.referenceMinimumTerminalFullRealization
+#print axioms PNP.DirectWire.referenceMinimumTerminalFullRealization_gateCount
+#print axioms PNP.DirectWire.terminalFullMinimum
+#print axioms PNP.DirectWire.terminalFullMinimum_eq_referenceMinimum
+#print axioms PNP.DirectWire.terminalFullMinimum_spec
+#print axioms PNP.DirectWire.isTerminalFullMinimum_iff_eq_terminalFullMinimum
+#print axioms PNP.DirectWire.isTerminalFullMinimum_iff_eq_referenceMinimum
+#print axioms PNP.DirectWire.WholeSpanResidualWitness
+#print axioms PNP.DirectWire.referenceMinimumWholeSpanWitnessOfPositive
+#print axioms PNP.DirectWire.WholeSpanResidualWitness.strictEquivalentGain
+#print axioms PNP.DirectWire.WholeSpanResidualWitness.strictResidualDescent
+#print axioms PNP.DirectWire.residualSlack_pos_iff_exists_wholeSpanResidualWitness
+#print axioms PNP.DirectWire.residualSlack_eq_zero_iff_no_wholeSpanResidualWitness
