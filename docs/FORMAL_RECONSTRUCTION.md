@@ -1093,6 +1093,18 @@ E, BCEL/BN2–BN6, route completeness, ZeroSlack/PCCMin, polynomial runtime, and
 the root theorem remain open. See
 [`lean_residual_terminal_projection_minimum.md`](./lean_residual_terminal_projection_minimum.md).
 
+`ResidualTerminalProjectionTransfer` now reconstructs the signed arithmetic
+identity from legacy report §5.2. For every finite family of meet, left, right,
+and join implementations sharing one computed terminal-profile observer and
+one projection, Lean relates the four full-profile minima, quotient-profile
+minima, and projection defects exactly. In the constant-cut case, zero defect
+at meet and both sides plus join defect `D` gives projection excess exactly
+`D`, hence positive excess for positive `D`. This does not construct or certify
+the proper-support/saturated square needed by the manuscript's later
+contradiction. `SaturatePositive`, Package E, BCEL/BN2–BN6, route completeness,
+ZeroSlack/PCCMin, polynomial runtime, and the root theorem remain open. See
+[`lean_residual_terminal_projection_transfer.md`](./lean_residual_terminal_projection_transfer.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-04-99",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-04-100",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -687,6 +687,12 @@
   "leanResidualProjectionDefectDecompositionFormalized": true,
   "leanResidualProjectionDefectZeroIffCheckedLiftAtMinimumFormalized": true,
   "leanResidualProjectionMinimumScope": "all-finite-direct-wire-implementations-with-computed-finite-profile-observers-explicit-projections-and-exhaustive-search-through-the-current-gate-count",
+  "leanResidualProjectionTransferFormalized": true,
+  "leanResidualProjectionTransferAxiomAuditPassed": true,
+  "leanResidualProjectionTransferSignedDeltasFormalized": true,
+  "leanResidualProjectionTransferIdentityFormalized": true,
+  "leanResidualProjectionTransferConstantCutFormalized": true,
+  "leanResidualProjectionTransferScope": "all-finite-direct-wire-four-corner-terminal-profile-families-sharing-one-computed-observer-and-one-explicit-projection",
   "leanResidualTerminalProperSupportFormalized": false,
   "leanResidualTerminalSaturationFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -715,7 +721,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-08-04-RESIDUAL-TERMINAL-PROJECTION-MINIMUM-98",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-08-04-RESIDUAL-TERMINAL-PROJECTION-TRANSFER-99",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -1116,6 +1122,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalProjectionMinimumAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalProjectionMinimum.lean",
     "node --test audits/lean-residual-terminal-projection-minimum0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalProjectionTransferAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalProjectionTransfer.lean",
+    "node --test audits/lean-residual-terminal-projection-transfer0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1221,6 +1230,8 @@
     "This mode-firewall milestone is terminal and forgetful-projection only. It does not formalize proper or governed support carriers, arbitrary quotient coarsening, full or quotient support minima, projection defect, SaturatePositive, BCEL/BN2-BN6, selector completeness, ZeroSlack, PCCMin, route generation, or polynomial runtime.",
     "The terminal projection-minimum layer exhaustively scans every direct-wire candidate size through the current implementation gate count. It computes attained full-profile and quotient-profile minima, proves both universal lower bounds and projection monotonicity, and characterizes zero projection defect exactly by a checked full lift at an attained quotient minimum.",
     "These terminal minima are finite reference computations, not polynomial algorithms. They do not construct proper or governed supports, SaturatePositive, Package E, BCEL/BN2-BN6, a complete residual route, ZeroSlack, PCCMin, SAT in P, or P = NP.",
+    "The terminal projection-transfer layer proves the manuscript Section 5.2 signed four-corner balance law for every finite family sharing one computed terminal-profile observer and one explicit projection. Under constant-cut defect hypotheses, the projection excess equals the join defect and is positive when that defect is positive.",
+    "This transfer theorem is arithmetic over supplied corners. It does not construct or certify a proper governed support square, prove SaturatePositive, discharge Package E or BCEL/BN2-BN6, generate a complete residual route, prove ZeroSlack or PCCMin, establish polynomial runtime, put SAT in P, or prove P = NP.",
     "External review is optional audit evidence and is not a mathematical premise or release blocker.",
     "Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.",
     "The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.",
@@ -1257,7 +1268,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "7a2758acc431c096d32534b9b0860fdf996b27a5f3def918e131dd10c1b99006",
+    "actualSourceClosureSha256": "6a6617e881fca16a46ac1fcb3c5f0968e35cee759596bdbb537d098c6ba24e10",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1287,22 +1298,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-04-99",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-04-100",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "7c3daaa3cbf191508d48054ecf1d1b48cfbd7601d5e3756fa9d057db383c6121",
+  "leanTheoremInventorySha256": "6807fe409ff302b55bffe69f3f7a13c4f0692c297504c9a9ab50692dc57e601e",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 23855,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 14316,
-  "leanTheoremInventoryTheoremCount": 12917,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 6849,
-  "leanTheoremInventorySourceClosureModuleCount": 214,
-  "leanSourceClosureSha256": "7a2758acc431c096d32534b9b0860fdf996b27a5f3def918e131dd10c1b99006",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-04-99",
+  "leanTheoremInventoryDeclarationCount": 23884,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 14317,
+  "leanTheoremInventoryTheoremCount": 12925,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 6851,
+  "leanTheoremInventorySourceClosureModuleCount": 215,
+  "leanSourceClosureSha256": "6a6617e881fca16a46ac1fcb3c5f0968e35cee759596bdbb537d098c6ba24e10",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-04-100",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "9851bbb8e0cecbf94bd88e79c18b1713fb9803db838cbe1ffdb0564f35f40103",
+  "formalPublicationMapSha256": "258f841262220fb0d78db65d35a99809ac2898aed961ba7593dfeadccb6fda54",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",
@@ -30632,6 +30643,75 @@
       "status": "formalized-terminal-projection-minimum"
     },
     {
+      "id": "residual-terminal-projection-transfer",
+      "title": "Terminal projection transfer identity",
+      "classification": "formalized-terminal-projection-transfer",
+      "scope": "For every finite direct-wire four-corner terminal-profile family sharing one computed observer and one explicit projection, signed full and quotient minimum deltas obey the exact Section 5.2 transfer identity. The projection excess is the quotient delta minus the full delta; if meet and both side defects are zero while the join defect is D, the excess equals D and is positive whenever D is positive.",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalProjectionDefect_int",
+        "PNP.DirectWire.TerminalProjectionFourCorners.transferIdentity",
+        "PNP.DirectWire.TerminalProjectionFourCorners.constantCutEquation_of_defects",
+        "PNP.DirectWire.TerminalProjectionFourCorners.projectionExcess_pos_of_constantCut"
+      ],
+      "nonClaim": "This is signed arithmetic over four supplied corners. It does not construct or certify a proper governed support square, prove SaturatePositive, discharge Package E or BCEL/BN2-BN6, generate a complete residual route, prove ZeroSlack or PCCMin, establish polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.terminalProjectionDefect_int",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4d4ea43bca6e64d8e7b2867003d8cc32e5b00dc0686a7f99dfb1f1bd369f82bf",
+          "expectedKernelTypeSha256": "4d4ea43bca6e64d8e7b2867003d8cc32e5b00dc0686a7f99dfb1f1bd369f82bf",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalProjectionFourCorners.transferIdentity",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8a834cd3525cc543e7ec42d58e23836853ad71d0bc2ff97655f7dab1562880ac",
+          "expectedKernelTypeSha256": "8a834cd3525cc543e7ec42d58e23836853ad71d0bc2ff97655f7dab1562880ac",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalProjectionFourCorners.constantCutEquation_of_defects",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3924c2b0c70aa6dd413da7141d59aae08668cfdec5ba70273d495e58ff838623",
+          "expectedKernelTypeSha256": "3924c2b0c70aa6dd413da7141d59aae08668cfdec5ba70273d495e58ff838623",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalProjectionFourCorners.projectionExcess_pos_of_constantCut",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7f7c6eacac8e119e2ee7b56ca03e323fdf7f191d56c0ff5476883dba1a61e7d0",
+          "expectedKernelTypeSha256": "7f7c6eacac8e119e2ee7b56ca03e323fdf7f191d56c0ff5476883dba1a61e7d0",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-terminal-projection-transfer"
+    },
+    {
       "id": "global-locked-nand-threshold",
       "title": "Global locked-NAND construction and threshold",
       "classification": "not-formalized",
@@ -30726,7 +30806,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-04-99",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-04-100",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

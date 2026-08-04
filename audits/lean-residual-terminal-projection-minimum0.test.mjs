@@ -253,7 +253,7 @@ test('regression covers empty, lossless, forgotten, semantic, and minimum cases'
   assert.doesNotMatch(stripLeanCommentsAndStrings0(regression), /\b(?:Classical(?:\.choice)?|native_decide|sorry|admit)\b/u);
 });
 
-test('status earns only the finite terminal projection-minimum edge', async () => {
+test('status retains the finite terminal projection minimum beneath its earned successor', async () => {
   const status = JSON.parse(await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'));
   for (const field of [
     'leanResidualProjectionMinimumFormalized',
@@ -268,6 +268,7 @@ test('status earns only the finite terminal projection-minimum edge', async () =
   ]) assert.equal(status[field], true, field);
   assert.equal(status.leanResidualProjectionMinimumScope,
     'all-finite-direct-wire-implementations-with-computed-finite-profile-observers-explicit-projections-and-exhaustive-search-through-the-current-gate-count');
+  assert.equal(status.leanResidualProjectionTransferFormalized, true);
   for (const field of [
     'leanResidualTerminalProperSupportFormalized',
     'leanResidualTerminalSaturationFormalized',

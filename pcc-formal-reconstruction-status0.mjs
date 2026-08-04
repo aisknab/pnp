@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-04-99';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-04-100';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -315,6 +315,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalProjectionMinimumAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalProjectionMinimum.lean',
   'node --test audits/lean-residual-terminal-projection-minimum0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalProjectionTransferAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalProjectionTransfer.lean',
+  'node --test audits/lean-residual-terminal-projection-transfer0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -421,6 +424,8 @@ const NON_CLAIMS = Object.freeze([
   'This mode-firewall milestone is terminal and forgetful-projection only. It does not formalize proper or governed support carriers, arbitrary quotient coarsening, full or quotient support minima, projection defect, SaturatePositive, BCEL/BN2-BN6, selector completeness, ZeroSlack, PCCMin, route generation, or polynomial runtime.',
   'The terminal projection-minimum layer exhaustively scans every direct-wire candidate size through the current implementation gate count. It computes attained full-profile and quotient-profile minima, proves both universal lower bounds and projection monotonicity, and characterizes zero projection defect exactly by a checked full lift at an attained quotient minimum.',
   'These terminal minima are finite reference computations, not polynomial algorithms. They do not construct proper or governed supports, SaturatePositive, Package E, BCEL/BN2-BN6, a complete residual route, ZeroSlack, PCCMin, SAT in P, or P = NP.',
+  'The terminal projection-transfer layer proves the manuscript Section 5.2 signed four-corner balance law for every finite family sharing one computed terminal-profile observer and one explicit projection. Under constant-cut defect hypotheses, the projection excess equals the join defect and is positive when that defect is positive.',
+  'This transfer theorem is arithmetic over supplied corners. It does not construct or certify a proper governed support square, prove SaturatePositive, discharge Package E or BCEL/BN2-BN6, generate a complete residual route, prove ZeroSlack or PCCMin, establish polynomial runtime, put SAT in P, or prove P = NP.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
   'The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.',
@@ -1240,6 +1245,13 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualProjectionDefectZeroIffCheckedLiftAtMinimumFormalized: true,
   leanResidualProjectionMinimumScope:
     'all-finite-direct-wire-implementations-with-computed-finite-profile-observers-explicit-projections-and-exhaustive-search-through-the-current-gate-count',
+  leanResidualProjectionTransferFormalized: true,
+  leanResidualProjectionTransferAxiomAuditPassed: true,
+  leanResidualProjectionTransferSignedDeltasFormalized: true,
+  leanResidualProjectionTransferIdentityFormalized: true,
+  leanResidualProjectionTransferConstantCutFormalized: true,
+  leanResidualProjectionTransferScope:
+    'all-finite-direct-wire-four-corner-terminal-profile-families-sharing-one-computed-observer-and-one-explicit-projection',
   leanResidualTerminalProperSupportFormalized: false,
   leanResidualTerminalSaturationFormalized: false,
   leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -1268,7 +1280,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-04-RESIDUAL-TERMINAL-PROJECTION-MINIMUM-98',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-04-RESIDUAL-TERMINAL-PROJECTION-TRANSFER-99',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -2068,6 +2080,13 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualProjectionDefectZeroIffCheckedLiftAtMinimumFormalized: true,
       leanResidualProjectionMinimumScope:
         'all-finite-direct-wire-implementations-with-computed-finite-profile-observers-explicit-projections-and-exhaustive-search-through-the-current-gate-count',
+      leanResidualProjectionTransferFormalized: true,
+      leanResidualProjectionTransferAxiomAuditPassed: true,
+      leanResidualProjectionTransferSignedDeltasFormalized: true,
+      leanResidualProjectionTransferIdentityFormalized: true,
+      leanResidualProjectionTransferConstantCutFormalized: true,
+      leanResidualProjectionTransferScope:
+        'all-finite-direct-wire-four-corner-terminal-profile-families-sharing-one-computed-observer-and-one-explicit-projection',
       leanResidualTerminalProperSupportFormalized: false,
       leanResidualTerminalSaturationFormalized: false,
       leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2147,7 +2166,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-04-99',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-04-100',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

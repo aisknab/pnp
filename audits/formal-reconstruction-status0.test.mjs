@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-04-99');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-04-100');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -777,6 +777,17 @@ test('formal reconstruction status accepts the current source and public mirrors
     'all-finite-direct-wire-implementations-with-computed-finite-profile-observers-explicit-projections-and-exhaustive-search-through-the-current-gate-count',
   );
   for (const field of [
+    'leanResidualProjectionTransferFormalized',
+    'leanResidualProjectionTransferAxiomAuditPassed',
+    'leanResidualProjectionTransferSignedDeltasFormalized',
+    'leanResidualProjectionTransferIdentityFormalized',
+    'leanResidualProjectionTransferConstantCutFormalized',
+  ]) assert.equal(out[field], true, field);
+  assert.equal(
+    out.leanResidualProjectionTransferScope,
+    'all-finite-direct-wire-four-corner-terminal-profile-families-sharing-one-computed-observer-and-one-explicit-projection',
+  );
+  for (const field of [
     'leanResidualTerminalProperSupportFormalized',
     'leanResidualTerminalSaturationFormalized',
   ]) assert.equal(out[field], false, field);
@@ -811,13 +822,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 23855);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 12917);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 6849);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14316);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 214);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 23884);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 12925);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 6851);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14317);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 215);
   assert.equal(status.leanSourceClosureSha256,
-    '7a2758acc431c096d32534b9b0860fdf996b27a5f3def918e131dd10c1b99006');
+    '6a6617e881fca16a46ac1fcb3c5f0968e35cee759596bdbb537d098c6ba24e10');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -1239,7 +1250,7 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-04-RESIDUAL-TERMINAL-PROJECTION-MINIMUM-98');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-04-RESIDUAL-TERMINAL-PROJECTION-TRANSFER-99');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
@@ -1495,6 +1506,17 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
     status.leanResidualProjectionMinimumScope,
     'all-finite-direct-wire-implementations-with-computed-finite-profile-observers-explicit-projections-and-exhaustive-search-through-the-current-gate-count',
   );
+  for (const field of [
+    'leanResidualProjectionTransferFormalized',
+    'leanResidualProjectionTransferAxiomAuditPassed',
+    'leanResidualProjectionTransferSignedDeltasFormalized',
+    'leanResidualProjectionTransferIdentityFormalized',
+    'leanResidualProjectionTransferConstantCutFormalized',
+  ]) assert.equal(status[field], true, field);
+  assert.equal(
+    status.leanResidualProjectionTransferScope,
+    'all-finite-direct-wire-four-corner-terminal-profile-families-sharing-one-computed-observer-and-one-explicit-projection',
+  );
   assert.equal(status.leanResidualTerminalProperSupportFormalized, false);
   assert.equal(status.leanResidualTerminalSaturationFormalized, false);
   assert.equal(status.leanZeroSlackPositiveSlackContradictionFormalized, false);
@@ -1524,6 +1546,8 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(status.nonClaims.some((entry) => entry.includes('terminal and forgetful-projection only')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes('exhaustively scans every direct-wire candidate size')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes('terminal minima are finite reference computations')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes('signed four-corner balance law')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes('arithmetic over supplied corners')), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-nand-semantics0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-nand-enumerator0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-nand-reference-minimum0.test.mjs'), true);
@@ -1535,6 +1559,7 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(status.verificationCommands.includes('node --test audits/lean-residual-terminal-full-bridge0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-residual-terminal-mode-firewall0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-residual-terminal-projection-minimum0.test.mjs'), true);
+  assert.equal(status.verificationCommands.includes('node --test audits/lean-residual-terminal-projection-transfer0.test.mjs'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPNANDSemanticsAxiomAudit.lean'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPNANDEnumeratorAxiomAudit.lean'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPNANDTruthTableAxiomAudit.lean'), true);
@@ -1581,6 +1606,8 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalModeFirewall.lean'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalProjectionMinimumAxiomAudit.lean'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalProjectionMinimum.lean'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalProjectionTransferAxiomAudit.lean'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalProjectionTransfer.lean'), true);
   assert.deepEqual(status.lockedNANDThresholdHostileReviewLemmaInventory, [
     'DirectWireOutputLowerBound',
     'MacroDistinct',
@@ -1857,6 +1884,11 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanResidualProjectionMinimumMonotonicityFormalized',
     'leanResidualProjectionDefectDecompositionFormalized',
     'leanResidualProjectionDefectZeroIffCheckedLiftAtMinimumFormalized',
+    'leanResidualProjectionTransferFormalized',
+    'leanResidualProjectionTransferAxiomAuditPassed',
+    'leanResidualProjectionTransferSignedDeltasFormalized',
+    'leanResidualProjectionTransferIdentityFormalized',
+    'leanResidualProjectionTransferConstantCutFormalized',
   ];
 
   for (const field of fields) {
