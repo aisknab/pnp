@@ -1,0 +1,10 @@
+import PNP.ResidualTerminalProjectionTransfer
+
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.fullDelta
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.quotientDelta
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.projectionExcess
+#print axioms PNP.DirectWire.terminalProjectionDefect_int
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.transferIdentity
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.constantCutEquation_of_defects
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.projectionExcess_pos_of_constantCut

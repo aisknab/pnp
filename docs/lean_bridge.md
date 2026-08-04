@@ -47,6 +47,7 @@ lean/PNP/ResidualGainStopping.lean
 lean/PNP/ResidualTerminalFullBridge.lean
 lean/PNP/ResidualTerminalModeFirewall.lean
 lean/PNP/ResidualTerminalProjectionMinimum.lean
+lean/PNP/ResidualTerminalProjectionTransfer.lean
 lean/PNP/LockedNANDResidualGainBound.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
@@ -147,6 +148,7 @@ lean-audit/PNPResidualGainStoppingAxiomAudit.lean
 lean-audit/PNPResidualTerminalFullBridgeAxiomAudit.lean
 lean-audit/PNPResidualTerminalModeFirewallAxiomAudit.lean
 lean-audit/PNPResidualTerminalProjectionMinimumAxiomAudit.lean
+lean-audit/PNPResidualTerminalProjectionTransferAxiomAudit.lean
 lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean
 lean-audit/PNPLockedNANDDirectAxiomAudit.lean
 lean-audit/PNPDirectWireBaselineAxiomAudit.lean
@@ -923,6 +925,19 @@ finite reference computation, not a polynomial minimizer, and it does not yet
 construct proper supports, SaturatePositive, Package E, BCEL/BN2–BN6,
 ZeroSlack, or PCCMin. See
 `docs/lean_residual_terminal_projection_minimum.md`.
+
+`lean/PNP/ResidualTerminalProjectionTransfer.lean` closes the adjacent bounded
+arithmetic edge from report §5.2, Mode firewall and transfer identity. Four
+implementations share one computed observer and one projection. Their full and
+quotient four-corner deltas live in signed integers, and the difference of
+those deltas is proved exactly equal to the corresponding balance of the four
+projection defects. Under the manuscript's constant-cut defect hypotheses,
+the projection excess equals the join defect and is positive when that defect
+is positive. The record carries data, not a certificate that the corners form
+a proper or saturated support square. Proper-support construction,
+`SaturatePositive`, Package E, BCEL/BN2–BN6, ZeroSlack, PCCMin, and polynomial
+runtime therefore remain open. See
+`docs/lean_residual_terminal_projection_transfer.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 
