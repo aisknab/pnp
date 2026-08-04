@@ -12,6 +12,7 @@ import PNP.ResidualTerminalFullBridge
 import PNP.ResidualTerminalModeFirewall
 import PNP.ResidualTerminalProjectionMinimum
 import PNP.ResidualTerminalProjectionTransfer
+import PNP.ResidualTerminalSaturation
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine

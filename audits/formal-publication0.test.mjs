@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 80);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 77);
+  assert.equal(status.formalPublicationMilestones.length, 81);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 78);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -1774,6 +1774,22 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   ]);
   assert.match(terminalProjectionTransfer.scope, /signed full and quotient minimum deltas/u);
   assert.match(terminalProjectionTransfer.nonClaim, /does not construct or certify a proper governed support square/u);
+  const terminalSaturation = byId.get('residual-terminal-saturation-closure');
+  assert.equal(terminalSaturation.status,
+    'formalized-terminal-saturation-closure');
+  assert.equal(terminalSaturation.earned, true);
+  assert.equal(terminalSaturation.axiomClosureUsesOnlyLeanStandardAllowlist, true);
+  assert.deepEqual(terminalSaturation.requiredTheorems, [
+    'PNP.DirectWire.mem_allTerminalPrimitiveRecords',
+    'PNP.DirectWire.terminalSaturate_extensive',
+    'PNP.DirectWire.terminalSaturate_closed',
+    'PNP.DirectWire.terminalSaturate_least',
+    'PNP.DirectWire.terminalSaturate_monotone',
+    'PNP.DirectWire.terminalSaturate_idempotent',
+    'PNP.DirectWire.terminalSaturate_fixed_iff_closed',
+  ]);
+  assert.match(terminalSaturation.scope, /reflexive transitive closure/u);
+  assert.match(terminalSaturation.nonClaim, /does not derive the dependency relation from an arbitrary circuit/u);
   for (const id of [
     'global-locked-nand-threshold',
     'global-zeroslack-pccmin',
@@ -1788,10 +1804,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '027b90fcab4d04d9d523b1eb26befb962a06d980a946b9bf072d7d74f942c5e3');
+    'fbd916598cf7ceeb9a2b0c020368f1717b7536bab81d80adbd3e374230f7db00');
   assert.equal(map.milestoneSourceClosureSha256,
-    '6a6617e881fca16a46ac1fcb3c5f0968e35cee759596bdbb537d098c6ba24e10');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2145);
+    '5cb2ae9d032d09c08f34424ccdf0b67452d75b8a933b60114c5267cc69385a7f');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2152);
   for (const theorem of [
     'PNP.DirectWire.LockedNANDTrace.carrierSeparation',
     'PNP.DirectWire.LockedNANDTrace.finalLock_fresh',
@@ -2113,7 +2129,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [23884, 12925, 6851, 14317, 215]);
+  ], [24054, 12985, 6903, 14317, 216]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

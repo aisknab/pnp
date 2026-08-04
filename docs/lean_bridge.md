@@ -48,6 +48,7 @@ lean/PNP/ResidualTerminalFullBridge.lean
 lean/PNP/ResidualTerminalModeFirewall.lean
 lean/PNP/ResidualTerminalProjectionMinimum.lean
 lean/PNP/ResidualTerminalProjectionTransfer.lean
+lean/PNP/ResidualTerminalSaturation.lean
 lean/PNP/LockedNANDResidualGainBound.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
@@ -149,6 +150,7 @@ lean-audit/PNPResidualTerminalFullBridgeAxiomAudit.lean
 lean-audit/PNPResidualTerminalModeFirewallAxiomAudit.lean
 lean-audit/PNPResidualTerminalProjectionMinimumAxiomAudit.lean
 lean-audit/PNPResidualTerminalProjectionTransferAxiomAudit.lean
+lean-audit/PNPResidualTerminalSaturationAxiomAudit.lean
 lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean
 lean-audit/PNPLockedNANDDirectAxiomAudit.lean
 lean-audit/PNPDirectWireBaselineAxiomAudit.lean
@@ -938,6 +940,17 @@ a proper or saturated support square. Proper-support construction,
 `SaturatePositive`, Package E, BCEL/BN2–BN6, ZeroSlack, PCCMin, and polynomial
 runtime therefore remain open. See
 `docs/lean_residual_terminal_projection_transfer.md`.
+
+`lean/PNP/ResidualTerminalSaturation.lean` closes the general support-closure
+edge from report §3, Saturated support calculus and square closure.  A finite
+primitive universe contains gate, boundary, interface, and computed profile
+records.  An explicit Boolean dependency relation uses the manuscript's ten
+rule tags.  Its reflexive transitive closure is proved extensive, closed,
+least, monotone, and idempotent, with fixed points exactly the closed supports.
+This does not yet extract those dependencies from an arbitrary circuit or
+construct proper support, support completion, a legitimate projection square,
+`SaturatePositive`, Package E, BCEL/BN2–BN6, ZeroSlack, PCCMin, or polynomial
+runtime.  See `docs/lean_residual_terminal_saturation.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 

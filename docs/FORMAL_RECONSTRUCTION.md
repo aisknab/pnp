@@ -1105,6 +1105,20 @@ contradiction. `SaturatePositive`, Package E, BCEL/BN2–BN6, route completeness
 ZeroSlack/PCCMin, polynomial runtime, and the root theorem remain open. See
 [`lean_residual_terminal_projection_transfer.md`](./lean_residual_terminal_projection_transfer.md).
 
+`ResidualTerminalSaturation` now reconstructs the general “Saturation closure”
+operator from legacy report §3, “Saturated support calculus and square
+closure.”  For every finite universe of gate, boundary, interface, and computed
+profile records, an explicit Boolean relation tags required dependencies with
+the manuscript's ten closure mechanisms.  The generated reflexive transitive
+closure contains its seed, is dependency-closed, is least among closed
+supersets, is monotone and idempotent, and has exactly the closed supports as
+fixed points.  The relation is still explicit data rather than an extraction
+from an arbitrary circuit.  Proper-support construction, support completion,
+square legitimacy, projection-compatible squares, `SaturatePositive`, Package
+E, BCEL/BN2–BN6, route completeness, ZeroSlack/PCCMin, polynomial runtime, and
+the root theorem remain open.  See
+[`lean_residual_terminal_saturation.md`](./lean_residual_terminal_saturation.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

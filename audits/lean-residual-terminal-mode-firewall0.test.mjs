@@ -231,9 +231,9 @@ test('status retains the terminal quotient/full mode firewall beneath its earned
   assert.equal(status.leanResidualTerminalModeFirewallScope,
     'all-finite-direct-wire-implementations-with-computed-finite-profile-observers-and-explicit-forgetful-projections');
   assert.equal(status.leanResidualProjectionMinimumFormalized, true);
+  assert.equal(status.leanResidualTerminalSaturationFormalized, true);
   for (const field of [
     'leanResidualTerminalProperSupportFormalized',
-    'leanResidualTerminalSaturationFormalized',
     'leanResidualRoutesGlobalGainCompletenessFormalized',
     'leanZeroSlackCompletenessFormalized',
     'leanPCCMinLoopExactnessFormalized',

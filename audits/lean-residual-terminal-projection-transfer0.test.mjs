@@ -212,9 +212,9 @@ test('status earns only the bounded terminal projection-transfer edge', async ()
   ]) assert.equal(status[field], true, field);
   assert.equal(status.leanResidualProjectionTransferScope,
     'all-finite-direct-wire-four-corner-terminal-profile-families-sharing-one-computed-observer-and-one-explicit-projection');
+  assert.equal(status.leanResidualTerminalSaturationFormalized, true);
   for (const field of [
     'leanResidualTerminalProperSupportFormalized',
-    'leanResidualTerminalSaturationFormalized',
     'leanResidualRoutesGlobalGainCompletenessFormalized',
     'leanZeroSlackCompletenessFormalized',
     'leanPCCMinLoopExactnessFormalized',

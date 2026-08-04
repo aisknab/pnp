@@ -90,24 +90,24 @@ BCEL obligations.
 ## Generated publication evidence
 
 The compiled inventory coordinate
-`PNP-LEAN-THEOREM-INVENTORY-2026-08-04-100` records 23,884 declarations,
-12,925 theorem-kind declarations, 6,851 assumption-free theorem-kind
-declarations, 14,317 excluded private declarations, 215 source modules, and
-2,145 reviewed milestone candidates. Its byte-identical status/public copies
+`PNP-LEAN-THEOREM-INVENTORY-2026-08-04-101` records 24,054 declarations,
+12,985 theorem-kind declarations, 6,903 assumption-free theorem-kind
+declarations, 14,317 excluded private declarations, 216 source modules, and
+2,152 reviewed milestone candidates. Its byte-identical status/public copies
 have SHA-256
-`6807fe409ff302b55bffe69f3f7a13c4f0692c297504c9a9ab50692dc57e601e`.
+`58d8118f3aef8976a3f1bdb2063a6d08baa7f2fe01e7393881fc9776f738aac9`.
 The reviewed Lean source closure is
-`6a6617e881fca16a46ac1fcb3c5f0968e35cee759596bdbb537d098c6ba24e10`.
+`5cb2ae9d032d09c08f34424ccdf0b67452d75b8a933b60114c5267cc69385a7f`.
 
-`PNP-FORMAL-PUBLICATION-MAP-2026-08-04-100` contains 80 milestones: 77
+`PNP-FORMAL-PUBLICATION-MAP-2026-08-04-101` contains 81 milestones: 77
 earned and three deliberately unearned global milestones. The generated status
-coordinate is `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-04-100`; it retains all
+coordinate is `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-04-101`; it retains all
 four project assumptions, all six blockers, unset activation fingerprints, an
 absent `PNP.Main.p_eq_np`, and a false concrete publication gate.
 
 The canonical non-claiming report coordinate is
-`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-04-100`. Its deterministic
-72-page PDF is 427,894 bytes with SHA-256
-`da6c2ef9919aef7901253e477a3889808bc6496a79966566e7831bafda5d1b2f`;
-the 184,334-byte generated TeX has SHA-256
-`4b1f709d9bc591832962253a3bc52bec0d8548ea0b0da4a745f4602d04c27aae`.
+`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-04-101`. Its deterministic
+73-page PDF is 428,831 bytes with SHA-256
+`654dc634d86e7ebf2633c4d7d67d4cbf36a10c57bede51b4f8cf246fd169fefb`;
+the 185,272-byte generated TeX has SHA-256
+`f1d9b3f85b0ee7414ab9e40a9e1095f153f208ab9e121f5fd8aa3efef46d7c4a`.
