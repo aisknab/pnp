@@ -269,9 +269,9 @@ test('status retains the finite terminal projection minimum beneath its earned s
   assert.equal(status.leanResidualProjectionMinimumScope,
     'all-finite-direct-wire-implementations-with-computed-finite-profile-observers-explicit-projections-and-exhaustive-search-through-the-current-gate-count');
   assert.equal(status.leanResidualProjectionTransferFormalized, true);
+  assert.equal(status.leanResidualTerminalSaturationFormalized, true);
   for (const field of [
     'leanResidualTerminalProperSupportFormalized',
-    'leanResidualTerminalSaturationFormalized',
     'leanResidualRoutesGlobalGainCompletenessFormalized',
     'leanZeroSlackCompletenessFormalized',
     'leanPCCMinLoopExactnessFormalized',

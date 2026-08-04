@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-04-100",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-04-101",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "6a6617e881fca16a46ac1fcb3c5f0968e35cee759596bdbb537d098c6ba24e10",
+  "milestoneSourceClosureSha256": "5cb2ae9d032d09c08f34424ccdf0b67452d75b8a933b60114c5267cc69385a7f",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2120,6 +2120,7 @@
     "PNP.DirectWire.isTerminalFullMinimum_iff_eq_referenceMinimum": "a2314e7b4616021b9be832aabb457aacb4cb9d8118c4450ab9968b897071623a",
     "PNP.DirectWire.isTerminalFullMinimum_iff_eq_terminalFullMinimum": "670efe7841d43136a86f95b26c7657f988977bb44ed3b7ad4bf6927bc827cf50",
     "PNP.DirectWire.lockedBaselineCount_report_formula": "39a494358dd5d78afa1b12e83fb2f455d9ff6c2495287b6e35858836767b79b1",
+    "PNP.DirectWire.mem_allTerminalPrimitiveRecords": "06dc32945403e76a76eed4fdbe31b1962c878af2cd8c136103fa1243d304a9a6",
     "PNP.DirectWire.nandCircuit_spec": "1bf0b598c94cb351ae92c47ef2d686a086d3b55c84c56283aefa937f5a30241b",
     "PNP.DirectWire.prefixAndDirect_referenceMinimum": "831dea53cb4c0420136d9dab078b9b8ab0ef89760b179ecb2ca39ab215ec8b4a",
     "PNP.DirectWire.referenceMinimumImplementation_equivalent": "dbbb97229e4cc25be761758a73728b6801d96cacc8c1b2f8c1dd2950c29bdf64",
@@ -2159,6 +2160,12 @@
     "PNP.DirectWire.terminalQuotientProfileMinimumComparison_gateCount": "32349bacfe9e5efd16f42006fe912234b0c7459b66db9905e5c5867a696dba80",
     "PNP.DirectWire.terminalQuotientProfileMinimum_le": "ce8486f3b736f1bac59f6a388c73a32d5bfdb4ec64f0994b1ba94fb1c57ab753",
     "PNP.DirectWire.terminalQuotientProfileMinimum_spec": "494e3230379f9fb0bbe634f68987117605fffe8dbcfe130311b2724e9b65c73a",
+    "PNP.DirectWire.terminalSaturate_closed": "3f4566c23897191ee812427490e9ce9a4df87e90983775289f60a9472895bdf5",
+    "PNP.DirectWire.terminalSaturate_extensive": "80a5d112df19cb4fd03210ffdd06be067829549a28e2da0746230f79994761fc",
+    "PNP.DirectWire.terminalSaturate_fixed_iff_closed": "ac4339ee65e025371c429d3de428d39118f9d8d5eba92749fa7b08f8013bd22a",
+    "PNP.DirectWire.terminalSaturate_idempotent": "60fbcc602264e47fa5fea3bd772bfa344a1a0d6d2086baf3c7ac7b453b7efda0",
+    "PNP.DirectWire.terminalSaturate_least": "0cc287c76c18cfe0b0ce632d92b85e6a8173b9cd0841b8fdfafeffc9cb025790",
+    "PNP.DirectWire.terminalSaturate_monotone": "d1bc557a4eb268ad67b96377c3cb668d1d141234cc1548155252f2429f9123ba",
     "PNP.DirectWire.terminalize_gateCount": "05ffc10d0fcfd63531119a3a7ff69baf871d270412c93d345e45dc1167dc1aee",
     "PNP.DirectWire.terminalize_implementation": "f8b947cab5adb66f9a7314b3522f9e96a083ff752df2bb7f26e09bf8159a40c5",
     "PNP.DirectWire.traceDirect_referenceMinimum": "cbef9349e46dd570d0e02c81170ea1257f3d1a76a49db39123074892e3196ea2",
@@ -5144,6 +5151,22 @@
         "PNP.DirectWire.TerminalProjectionFourCorners.projectionExcess_pos_of_constantCut"
       ],
       "nonClaim": "This is signed arithmetic over four supplied corners. It does not construct or certify a proper governed support square, prove SaturatePositive, discharge Package E or BCEL/BN2-BN6, generate a complete residual route, prove ZeroSlack or PCCMin, establish polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP."
+    },
+    {
+      "id": "residual-terminal-saturation-closure",
+      "title": "Terminal saturation closure",
+      "classification": "formalized-terminal-saturation-closure",
+      "scope": "For every finite terminal primitive-record universe and every explicit Boolean dependency system tagged by the manuscript's ten closure mechanisms, the generated reflexive transitive closure contains the seed, is dependency-closed, is least among closed supersets, is monotone and idempotent, and has exactly the closed supports as fixed points.",
+      "requiredTheorems": [
+        "PNP.DirectWire.mem_allTerminalPrimitiveRecords",
+        "PNP.DirectWire.terminalSaturate_extensive",
+        "PNP.DirectWire.terminalSaturate_closed",
+        "PNP.DirectWire.terminalSaturate_least",
+        "PNP.DirectWire.terminalSaturate_monotone",
+        "PNP.DirectWire.terminalSaturate_idempotent",
+        "PNP.DirectWire.terminalSaturate_fixed_iff_closed"
+      ],
+      "nonClaim": "This closure theorem does not derive the dependency relation from an arbitrary circuit, construct proper support, prove support completion or square legitimacy, instantiate a projection-compatible square, prove SaturatePositive or BCELReady, discharge Package E or BCEL/BN2-BN6, generate a complete residual route, prove ZeroSlack or PCCMin, establish polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP."
     },
     {
       "id": "global-locked-nand-threshold",

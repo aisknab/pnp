@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-04-100",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-04-101",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -694,7 +694,19 @@
   "leanResidualProjectionTransferConstantCutFormalized": true,
   "leanResidualProjectionTransferScope": "all-finite-direct-wire-four-corner-terminal-profile-families-sharing-one-computed-observer-and-one-explicit-projection",
   "leanResidualTerminalProperSupportFormalized": false,
-  "leanResidualTerminalSaturationFormalized": false,
+  "leanResidualTerminalSaturationFormalized": true,
+  "leanResidualTerminalSaturationAxiomAuditPassed": true,
+  "leanResidualTerminalPrimitiveUniverseFormalized": true,
+  "leanResidualTerminalSaturationExtensiveFormalized": true,
+  "leanResidualTerminalSaturationLeastFormalized": true,
+  "leanResidualTerminalSaturationMonotoneFormalized": true,
+  "leanResidualTerminalSaturationIdempotentFormalized": true,
+  "leanResidualTerminalSaturationScope": "all-finite-terminal-primitive-record-universes-with-explicit-boolean-rule-tagged-dependencies",
+  "leanResidualTerminalSupportCompletionFormalized": false,
+  "leanResidualTerminalSquareLegitimacyFormalized": false,
+  "leanResidualTerminalProjectionSquareFormalized": false,
+  "leanSaturatePositiveFormalized": false,
+  "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
   "leanZeroSlackCompletenessFormalized": false,
   "leanPCCMinLoopExactnessFormalized": false,
@@ -721,7 +733,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-08-04-RESIDUAL-TERMINAL-PROJECTION-TRANSFER-99",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-08-04-RESIDUAL-TERMINAL-SATURATION-100",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -1125,6 +1137,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalProjectionTransferAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalProjectionTransfer.lean",
     "node --test audits/lean-residual-terminal-projection-transfer0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalSaturationAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalSaturation.lean",
+    "node --test audits/lean-residual-terminal-saturation0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1232,6 +1247,8 @@
     "These terminal minima are finite reference computations, not polynomial algorithms. They do not construct proper or governed supports, SaturatePositive, Package E, BCEL/BN2-BN6, a complete residual route, ZeroSlack, PCCMin, SAT in P, or P = NP.",
     "The terminal projection-transfer layer proves the manuscript Section 5.2 signed four-corner balance law for every finite family sharing one computed terminal-profile observer and one explicit projection. Under constant-cut defect hypotheses, the projection excess equals the join defect and is positive when that defect is positive.",
     "This transfer theorem is arithmetic over supplied corners. It does not construct or certify a proper governed support square, prove SaturatePositive, discharge Package E or BCEL/BN2-BN6, generate a complete residual route, prove ZeroSlack or PCCMin, establish polynomial runtime, put SAT in P, or prove P = NP.",
+    "The terminal saturation milestone reconstructs the manuscript Section 3 closure operator over every finite gate, boundary, interface, and computed-profile record universe with an explicit Boolean dependency relation carrying all ten rule tags. Its reflexive transitive closure is extensive, closed, least, monotone, and idempotent, and its fixed points are exactly the dependency-closed supports.",
+    "This saturation theorem does not extract dependencies from an arbitrary circuit, construct proper support, prove support completion or square legitimacy, instantiate a projection-compatible square, prove SaturatePositive or BCELReady, generate a complete residual route, prove ZeroSlack or PCCMin, establish polynomial runtime, put SAT in P, or prove P = NP.",
     "External review is optional audit evidence and is not a mathematical premise or release blocker.",
     "Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.",
     "The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.",
@@ -1268,7 +1285,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "6a6617e881fca16a46ac1fcb3c5f0968e35cee759596bdbb537d098c6ba24e10",
+    "actualSourceClosureSha256": "5cb2ae9d032d09c08f34424ccdf0b67452d75b8a933b60114c5267cc69385a7f",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1298,22 +1315,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-04-100",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-04-101",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "6807fe409ff302b55bffe69f3f7a13c4f0692c297504c9a9ab50692dc57e601e",
+  "leanTheoremInventorySha256": "58d8118f3aef8976a3f1bdb2063a6d08baa7f2fe01e7393881fc9776f738aac9",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 23884,
+  "leanTheoremInventoryDeclarationCount": 24054,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 14317,
-  "leanTheoremInventoryTheoremCount": 12925,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 6851,
-  "leanTheoremInventorySourceClosureModuleCount": 215,
-  "leanSourceClosureSha256": "6a6617e881fca16a46ac1fcb3c5f0968e35cee759596bdbb537d098c6ba24e10",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-04-100",
+  "leanTheoremInventoryTheoremCount": 12985,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 6903,
+  "leanTheoremInventorySourceClosureModuleCount": 216,
+  "leanSourceClosureSha256": "5cb2ae9d032d09c08f34424ccdf0b67452d75b8a933b60114c5267cc69385a7f",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-04-101",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "258f841262220fb0d78db65d35a99809ac2898aed961ba7593dfeadccb6fda54",
+  "formalPublicationMapSha256": "a86df7f8d45a5430bc1b7cc67dfac31e8663a9e81ed24abc0f25a2cd299b0b7c",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",
@@ -30712,6 +30729,100 @@
       "status": "formalized-terminal-projection-transfer"
     },
     {
+      "id": "residual-terminal-saturation-closure",
+      "title": "Terminal saturation closure",
+      "classification": "formalized-terminal-saturation-closure",
+      "scope": "For every finite terminal primitive-record universe and every explicit Boolean dependency system tagged by the manuscript's ten closure mechanisms, the generated reflexive transitive closure contains the seed, is dependency-closed, is least among closed supersets, is monotone and idempotent, and has exactly the closed supports as fixed points.",
+      "requiredTheorems": [
+        "PNP.DirectWire.mem_allTerminalPrimitiveRecords",
+        "PNP.DirectWire.terminalSaturate_extensive",
+        "PNP.DirectWire.terminalSaturate_closed",
+        "PNP.DirectWire.terminalSaturate_least",
+        "PNP.DirectWire.terminalSaturate_monotone",
+        "PNP.DirectWire.terminalSaturate_idempotent",
+        "PNP.DirectWire.terminalSaturate_fixed_iff_closed"
+      ],
+      "nonClaim": "This closure theorem does not derive the dependency relation from an arbitrary circuit, construct proper support, prove support completion or square legitimacy, instantiate a projection-compatible square, prove SaturatePositive or BCELReady, discharge Package E or BCEL/BN2-BN6, generate a complete residual route, prove ZeroSlack or PCCMin, establish polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.mem_allTerminalPrimitiveRecords",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "06dc32945403e76a76eed4fdbe31b1962c878af2cd8c136103fa1243d304a9a6",
+          "expectedKernelTypeSha256": "06dc32945403e76a76eed4fdbe31b1962c878af2cd8c136103fa1243d304a9a6",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalSaturate_extensive",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "80a5d112df19cb4fd03210ffdd06be067829549a28e2da0746230f79994761fc",
+          "expectedKernelTypeSha256": "80a5d112df19cb4fd03210ffdd06be067829549a28e2da0746230f79994761fc",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalSaturate_closed",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "3f4566c23897191ee812427490e9ce9a4df87e90983775289f60a9472895bdf5",
+          "expectedKernelTypeSha256": "3f4566c23897191ee812427490e9ce9a4df87e90983775289f60a9472895bdf5",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalSaturate_least",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "0cc287c76c18cfe0b0ce632d92b85e6a8173b9cd0841b8fdfafeffc9cb025790",
+          "expectedKernelTypeSha256": "0cc287c76c18cfe0b0ce632d92b85e6a8173b9cd0841b8fdfafeffc9cb025790",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalSaturate_monotone",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "d1bc557a4eb268ad67b96377c3cb668d1d141234cc1548155252f2429f9123ba",
+          "expectedKernelTypeSha256": "d1bc557a4eb268ad67b96377c3cb668d1d141234cc1548155252f2429f9123ba",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalSaturate_idempotent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "60fbcc602264e47fa5fea3bd772bfa344a1a0d6d2086baf3c7ac7b453b7efda0",
+          "expectedKernelTypeSha256": "60fbcc602264e47fa5fea3bd772bfa344a1a0d6d2086baf3c7ac7b453b7efda0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalSaturate_fixed_iff_closed",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ac4339ee65e025371c429d3de428d39118f9d8d5eba92749fa7b08f8013bd22a",
+          "expectedKernelTypeSha256": "ac4339ee65e025371c429d3de428d39118f9d8d5eba92749fa7b08f8013bd22a",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-terminal-saturation-closure"
+    },
+    {
       "id": "global-locked-nand-threshold",
       "title": "Global locked-NAND construction and threshold",
       "classification": "not-formalized",
@@ -30806,7 +30917,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-04-100",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-04-101",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

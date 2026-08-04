@@ -233,9 +233,9 @@ test('status retains the direct-wire terminal full-mode bridge', async () => {
     status.leanResidualTerminalFullBridgeScope,
     'all-finite-direct-wire-implementations-with-complete-multi-output-semantics-and-exhaustive-reference-minimum-witnesses',
   );
+  assert.equal(status.leanResidualTerminalSaturationFormalized, true);
   for (const field of [
     'leanResidualTerminalProperSupportFormalized',
-    'leanResidualTerminalSaturationFormalized',
     'leanResidualRoutesGlobalGainCompletenessFormalized',
     'leanZeroSlackCompletenessFormalized',
     'leanPCCMinLoopExactnessFormalized',
