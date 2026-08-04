@@ -217,7 +217,7 @@ test('regression covers dropped, lossless, empty, obligation, and semantic cases
   assert.doesNotMatch(stripLeanCommentsAndStrings0(regression), /\b(?:Classical(?:\.choice)?|native_decide|sorry|admit)\b/u);
 });
 
-test('status earns only the terminal quotient/full mode firewall', async () => {
+test('status retains the terminal quotient/full mode firewall beneath its earned successor', async () => {
   const status = JSON.parse(await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'));
   for (const field of [
     'leanResidualTerminalQuotientCarrierFormalized',
@@ -230,10 +230,10 @@ test('status earns only the terminal quotient/full mode firewall', async () => {
   ]) assert.equal(status[field], true, field);
   assert.equal(status.leanResidualTerminalModeFirewallScope,
     'all-finite-direct-wire-implementations-with-computed-finite-profile-observers-and-explicit-forgetful-projections');
+  assert.equal(status.leanResidualProjectionMinimumFormalized, true);
   for (const field of [
     'leanResidualTerminalProperSupportFormalized',
     'leanResidualTerminalSaturationFormalized',
-    'leanResidualProjectionMinimumFormalized',
     'leanResidualRoutesGlobalGainCompletenessFormalized',
     'leanZeroSlackCompletenessFormalized',
     'leanPCCMinLoopExactnessFormalized',
