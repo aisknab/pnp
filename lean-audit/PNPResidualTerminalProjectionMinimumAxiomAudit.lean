@@ -1,0 +1,29 @@
+import PNP.ResidualTerminalProjectionMinimum
+
+#print axioms PNP.DirectWire.terminalFullProfileMatchBool
+#print axioms PNP.DirectWire.terminalQuotientProfileMatchBool
+#print axioms PNP.DirectWire.terminalFullProfileMatchBool_sound
+#print axioms PNP.DirectWire.terminalFullProfileMatchBool_complete
+#print axioms PNP.DirectWire.terminalQuotientProfileMatchBool_sound
+#print axioms PNP.DirectWire.terminalQuotientProfileMatchBool_complete
+#print axioms PNP.DirectWire.terminalCurrentFullCarrierRealization
+#print axioms PNP.DirectWire.terminalCurrentQuotientComparison
+#print axioms PNP.DirectWire.terminalFullProfileMinimumImplementation
+#print axioms PNP.DirectWire.terminalQuotientProfileMinimumImplementation
+#print axioms PNP.DirectWire.terminalFullProfileMinimum
+#print axioms PNP.DirectWire.terminalQuotientProfileMinimum
+#print axioms PNP.DirectWire.terminalFullProfileMinimumRealization
+#print axioms PNP.DirectWire.terminalQuotientProfileMinimumComparison
+#print axioms PNP.DirectWire.terminalFullProfileMinimumRealization_gateCount
+#print axioms PNP.DirectWire.terminalQuotientProfileMinimumComparison_gateCount
+#print axioms PNP.DirectWire.terminalFullProfileMinimum_le
+#print axioms PNP.DirectWire.terminalQuotientProfileMinimum_le
+#print axioms PNP.DirectWire.terminalFullProfileMinimum_spec
+#print axioms PNP.DirectWire.terminalQuotientProfileMinimum_spec
+#print axioms PNP.DirectWire.terminalProjectionMinimum_mono
+#print axioms PNP.DirectWire.terminalProjectionDefect
+#print axioms PNP.DirectWire.terminalQuotientMinimum_add_projectionDefect
+#print axioms PNP.DirectWire.terminalProjectionDefect_eq_zero_iff_minima_eq
+#print axioms PNP.DirectWire.terminalProjectionDefect_eq_zero_iff_exists_checkedFullLiftAtMinimum
+#print axioms PNP.DirectWire.terminalProfileMinima_eq_of_keepsAll
+#print axioms PNP.DirectWire.terminalProjectionDefect_pos_no_checkedFullLiftAtMinimum

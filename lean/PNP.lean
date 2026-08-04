@@ -10,6 +10,7 @@ import PNP.ResidualGainChain
 import PNP.ResidualGainStopping
 import PNP.ResidualTerminalFullBridge
 import PNP.ResidualTerminalModeFirewall
+import PNP.ResidualTerminalProjectionMinimum
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine
