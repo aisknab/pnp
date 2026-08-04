@@ -1078,6 +1078,21 @@ SaturatePositive, BCEL/BN2–BN6, selector completeness, ZeroSlack/PCCMin, and
 polynomial runtime remain open. See
 [`lean_residual_terminal_full_bridge.md`](./lean_residual_terminal_full_bridge.md).
 
+`ResidualTerminalProjectionMinimum` now reconstructs the finite reference
+minimum behind legacy report §5.1, Projection Monotonicity. For every finite
+direct-wire implementation, computed terminal-profile observer, and explicit
+forgetful projection, Lean exhaustively searches every implementation size
+through the current gate count. The resulting full-profile and
+quotient-profile minima are attained and satisfy universal lower bounds. The
+quotient minimum cannot exceed the full minimum, and their exact difference is
+the projection defect. That defect is zero exactly when an attained quotient
+minimum carries the mode firewall's checked full lift; a positive defect rules
+out such a lift. This is an exhaustive finite reference construction, not a
+polynomial minimizer. Proper or governed supports, `SaturatePositive`, Package
+E, BCEL/BN2–BN6, route completeness, ZeroSlack/PCCMin, polynomial runtime, and
+the root theorem remain open. See
+[`lean_residual_terminal_projection_minimum.md`](./lean_residual_terminal_projection_minimum.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

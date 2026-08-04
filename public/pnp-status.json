@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-04-98",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-04-99",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -677,9 +677,18 @@
   "leanResidualTerminalQuotientEqualityNotConstructiveFormalized": true,
   "leanResidualTerminalObligationDischargePreservedFormalized": true,
   "leanResidualTerminalModeFirewallScope": "all-finite-direct-wire-implementations-with-computed-finite-profile-observers-and-explicit-forgetful-projections",
+  "leanResidualProjectionMinimumFormalized": true,
+  "leanResidualProjectionMinimumAxiomAuditPassed": true,
+  "leanResidualProjectionMinimumExecutableFullScanFormalized": true,
+  "leanResidualProjectionMinimumExecutableQuotientScanFormalized": true,
+  "leanResidualProjectionMinimumAttainmentFormalized": true,
+  "leanResidualProjectionMinimumUniversalLowerBoundsFormalized": true,
+  "leanResidualProjectionMinimumMonotonicityFormalized": true,
+  "leanResidualProjectionDefectDecompositionFormalized": true,
+  "leanResidualProjectionDefectZeroIffCheckedLiftAtMinimumFormalized": true,
+  "leanResidualProjectionMinimumScope": "all-finite-direct-wire-implementations-with-computed-finite-profile-observers-explicit-projections-and-exhaustive-search-through-the-current-gate-count",
   "leanResidualTerminalProperSupportFormalized": false,
   "leanResidualTerminalSaturationFormalized": false,
-  "leanResidualProjectionMinimumFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
   "leanZeroSlackCompletenessFormalized": false,
   "leanPCCMinLoopExactnessFormalized": false,
@@ -706,7 +715,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-08-04-RESIDUAL-TERMINAL-MODE-FIREWALL-97",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-08-04-RESIDUAL-TERMINAL-PROJECTION-MINIMUM-98",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -1104,6 +1113,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalModeFirewallAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalModeFirewall.lean",
     "node --test audits/lean-residual-terminal-mode-firewall0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalProjectionMinimumAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalProjectionMinimum.lean",
+    "node --test audits/lean-residual-terminal-projection-minimum0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1207,6 +1219,8 @@
     "This terminal bridge is direct-wire full-mode semantics only. It does not formalize the quotient carrier or mode firewall, proper supports, SaturatePositive, BCEL/BN2-BN6, selector completeness, ZeroSlack, PCCMin, route generation, or polynomial runtime.",
     "The terminal finite-profile mode firewall now computes role-indexed profile coordinates from each implementation, preserves the exact NAND implementation under projection, reconstructs full equality only from an explicit checked lift, and proves that a mismatch at any forgotten coordinate makes such a lift impossible.",
     "This mode-firewall milestone is terminal and forgetful-projection only. It does not formalize proper or governed support carriers, arbitrary quotient coarsening, full or quotient support minima, projection defect, SaturatePositive, BCEL/BN2-BN6, selector completeness, ZeroSlack, PCCMin, route generation, or polynomial runtime.",
+    "The terminal projection-minimum layer exhaustively scans every direct-wire candidate size through the current implementation gate count. It computes attained full-profile and quotient-profile minima, proves both universal lower bounds and projection monotonicity, and characterizes zero projection defect exactly by a checked full lift at an attained quotient minimum.",
+    "These terminal minima are finite reference computations, not polynomial algorithms. They do not construct proper or governed supports, SaturatePositive, Package E, BCEL/BN2-BN6, a complete residual route, ZeroSlack, PCCMin, SAT in P, or P = NP.",
     "External review is optional audit evidence and is not a mathematical premise or release blocker.",
     "Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.",
     "The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.",
@@ -1243,7 +1257,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "d7b361d14706fa7194432f6e8510a20221ce1f2795064aea153171f19e31efa1",
+    "actualSourceClosureSha256": "7a2758acc431c096d32534b9b0860fdf996b27a5f3def918e131dd10c1b99006",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1273,22 +1287,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-04-98",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-04-99",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "82d2b3ec7446b39e9387f8cd24c50e6e6123e4de78aa20c375dd7e34ca16643c",
+  "leanTheoremInventorySha256": "7c3daaa3cbf191508d48054ecf1d1b48cfbd7601d5e3756fa9d057db383c6121",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 23819,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 14273,
-  "leanTheoremInventoryTheoremCount": 12894,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 6846,
-  "leanTheoremInventorySourceClosureModuleCount": 213,
-  "leanSourceClosureSha256": "d7b361d14706fa7194432f6e8510a20221ce1f2795064aea153171f19e31efa1",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-04-98",
+  "leanTheoremInventoryDeclarationCount": 23855,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 14316,
+  "leanTheoremInventoryTheoremCount": 12917,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 6849,
+  "leanTheoremInventorySourceClosureModuleCount": 214,
+  "leanSourceClosureSha256": "7a2758acc431c096d32534b9b0860fdf996b27a5f3def918e131dd10c1b99006",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-04-99",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "35f75fd42c70a29aedd19847abe43062cde26226884d8f25be0f2ccb91e50241",
+  "formalPublicationMapSha256": "9851bbb8e0cecbf94bd88e79c18b1713fb9803db838cbe1ffdb0564f35f40103",
   "formalPublicationMilestones": [
     {
       "id": "concrete-machine-cost-kernel",
@@ -30432,6 +30446,192 @@
       "status": "formalized-terminal-mode-firewall"
     },
     {
+      "id": "residual-terminal-projection-minimum",
+      "title": "Terminal full/quotient projection minima",
+      "classification": "formalized-terminal-projection-minimum",
+      "scope": "For every finite direct-wire implementation, computed finite terminal-profile observer, and explicit forgetful projection, complete enumeration through the current gate count computes an attained full-profile minimum and an attained quotient-profile minimum. Both minima universally lower-bound every matching realization, forgetting coordinates cannot increase the minimum, the full minimum decomposes as the quotient minimum plus a nonnegative projection defect, and that defect is zero exactly when an attained quotient minimum has a checked full lift.",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalFullProfileMatchBool_complete",
+        "PNP.DirectWire.terminalQuotientProfileMatchBool_complete",
+        "PNP.DirectWire.terminalFullProfileMinimumRealization_gateCount",
+        "PNP.DirectWire.terminalQuotientProfileMinimumComparison_gateCount",
+        "PNP.DirectWire.terminalFullProfileMinimum_le",
+        "PNP.DirectWire.terminalQuotientProfileMinimum_le",
+        "PNP.DirectWire.terminalFullProfileMinimum_spec",
+        "PNP.DirectWire.terminalQuotientProfileMinimum_spec",
+        "PNP.DirectWire.terminalProjectionMinimum_mono",
+        "PNP.DirectWire.terminalQuotientMinimum_add_projectionDefect",
+        "PNP.DirectWire.terminalProjectionDefect_eq_zero_iff_minima_eq",
+        "PNP.DirectWire.terminalProjectionDefect_eq_zero_iff_exists_checkedFullLiftAtMinimum",
+        "PNP.DirectWire.terminalProfileMinima_eq_of_keepsAll",
+        "PNP.DirectWire.terminalProjectionDefect_pos_no_checkedFullLiftAtMinimum"
+      ],
+      "nonClaim": "These are exhaustive finite reference minima through the supplied implementation size. This milestone proves no polynomial runtime, proper or governed support construction, arbitrary manuscript quotient carrier, SaturatePositive, Package E, BCEL/BN2-BN6, complete residual routing, ZeroSlack certificate, PCCMin exactness, SAT-in-P result, discharged project assumption, or proof that P = NP.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.terminalFullProfileMatchBool_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ce2551dced7c7b0f50749844f9113fcc9d9de4daf288a07f3932874ac5a9467f",
+          "expectedKernelTypeSha256": "ce2551dced7c7b0f50749844f9113fcc9d9de4daf288a07f3932874ac5a9467f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalQuotientProfileMatchBool_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "bbbe9447463d113efe13ac57c0fbadc387eda47aeb1eef6c08c06e70f885e4c2",
+          "expectedKernelTypeSha256": "bbbe9447463d113efe13ac57c0fbadc387eda47aeb1eef6c08c06e70f885e4c2",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalFullProfileMinimumRealization_gateCount",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "798da3be48963130ca415d60dbaea20fc06087f64068798e5c62634178d98259",
+          "expectedKernelTypeSha256": "798da3be48963130ca415d60dbaea20fc06087f64068798e5c62634178d98259",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalQuotientProfileMinimumComparison_gateCount",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "32349bacfe9e5efd16f42006fe912234b0c7459b66db9905e5c5867a696dba80",
+          "expectedKernelTypeSha256": "32349bacfe9e5efd16f42006fe912234b0c7459b66db9905e5c5867a696dba80",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalFullProfileMinimum_le",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "56059f1da9c8fe821569dc651bb112eef6ad0f056a6496c668ff45250ada6f0e",
+          "expectedKernelTypeSha256": "56059f1da9c8fe821569dc651bb112eef6ad0f056a6496c668ff45250ada6f0e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalQuotientProfileMinimum_le",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ce8486f3b736f1bac59f6a388c73a32d5bfdb4ec64f0994b1ba94fb1c57ab753",
+          "expectedKernelTypeSha256": "ce8486f3b736f1bac59f6a388c73a32d5bfdb4ec64f0994b1ba94fb1c57ab753",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalFullProfileMinimum_spec",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "aa0ecb861cb6454b659931d96a1bb107edc42902fb0be66ca287b369f2659bfc",
+          "expectedKernelTypeSha256": "aa0ecb861cb6454b659931d96a1bb107edc42902fb0be66ca287b369f2659bfc",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalQuotientProfileMinimum_spec",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "494e3230379f9fb0bbe634f68987117605fffe8dbcfe130311b2724e9b65c73a",
+          "expectedKernelTypeSha256": "494e3230379f9fb0bbe634f68987117605fffe8dbcfe130311b2724e9b65c73a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalProjectionMinimum_mono",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c3e9aa3c01a5a9702c311df28dcbadd2a8e8005776418307147b424cc988f034",
+          "expectedKernelTypeSha256": "c3e9aa3c01a5a9702c311df28dcbadd2a8e8005776418307147b424cc988f034",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalQuotientMinimum_add_projectionDefect",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "2487f2fa58c556c6166f02e57ed79ed5c1d0e6c2a9ac86fa96630ef10a66d4a0",
+          "expectedKernelTypeSha256": "2487f2fa58c556c6166f02e57ed79ed5c1d0e6c2a9ac86fa96630ef10a66d4a0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalProjectionDefect_eq_zero_iff_minima_eq",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0abc70a2376500b301bb104cc45264d70640a8212175fb9c1dba9817bb91059c",
+          "expectedKernelTypeSha256": "0abc70a2376500b301bb104cc45264d70640a8212175fb9c1dba9817bb91059c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalProjectionDefect_eq_zero_iff_exists_checkedFullLiftAtMinimum",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8c1b490e05aca8450c836267b85afeb88f838b5d5b26301599b8392bd0178a17",
+          "expectedKernelTypeSha256": "8c1b490e05aca8450c836267b85afeb88f838b5d5b26301599b8392bd0178a17",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalProfileMinima_eq_of_keepsAll",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "973db9a1c04cce7aa637d65512904844dc9a26e645ed2720d89d3818cdc79c3a",
+          "expectedKernelTypeSha256": "973db9a1c04cce7aa637d65512904844dc9a26e645ed2720d89d3818cdc79c3a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalProjectionDefect_pos_no_checkedFullLiftAtMinimum",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6cb0a806515c14a4b43fdbe133833861a3cb21fdf0d48cd350f93ad8507eace2",
+          "expectedKernelTypeSha256": "6cb0a806515c14a4b43fdbe133833861a3cb21fdf0d48cd350f93ad8507eace2",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-terminal-projection-minimum"
+    },
+    {
       "id": "global-locked-nand-threshold",
       "title": "Global locked-NAND construction and threshold",
       "classification": "not-formalized",
@@ -30526,7 +30726,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-04-98",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-04-99",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

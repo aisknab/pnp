@@ -45,6 +45,8 @@ lean/PNP/ResidualRoutes.lean
 lean/PNP/ResidualGainChain.lean
 lean/PNP/ResidualGainStopping.lean
 lean/PNP/ResidualTerminalFullBridge.lean
+lean/PNP/ResidualTerminalModeFirewall.lean
+lean/PNP/ResidualTerminalProjectionMinimum.lean
 lean/PNP/LockedNANDResidualGainBound.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
@@ -143,6 +145,8 @@ lean-audit/PNPResidualRoutesAxiomAudit.lean
 lean-audit/PNPResidualGainChainAxiomAudit.lean
 lean-audit/PNPResidualGainStoppingAxiomAudit.lean
 lean-audit/PNPResidualTerminalFullBridgeAxiomAudit.lean
+lean-audit/PNPResidualTerminalModeFirewallAxiomAudit.lean
+lean-audit/PNPResidualTerminalProjectionMinimumAxiomAudit.lean
 lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean
 lean-audit/PNPLockedNANDDirectAxiomAudit.lean
 lean-audit/PNPDirectWireBaselineAxiomAudit.lean
@@ -905,6 +909,20 @@ lift. This is still only the terminal comparison/lifting firewall; it does not
 construct proper or governed supports, a projection-defect minimum, saturation,
 Package E, BCEL/BN2–BN6, ZeroSlack, PCCMin, or a polynomial residual route. See
 `docs/lean_residual_terminal_mode_firewall.md`.
+
+`lean/PNP/ResidualTerminalProjectionMinimum.lean` closes the next unbounded
+finite-family edge from report §5.1, Projection Monotonicity. For every finite
+direct-wire implementation, computed terminal-profile observer, and explicit
+projection, it exhaustively scans all candidate sizes through the current gate
+count and returns attained full-profile and quotient-profile minima. Both are
+universal minima, projection cannot increase the quotient minimum, and their
+difference is an exact nonnegative projection defect. The defect is zero
+exactly when an attained quotient minimum has the mode firewall's checked full
+lift; positive defect rules that lift out at every quotient minimum. This is a
+finite reference computation, not a polynomial minimizer, and it does not yet
+construct proper supports, SaturatePositive, Package E, BCEL/BN2–BN6,
+ZeroSlack, or PCCMin. See
+`docs/lean_residual_terminal_projection_minimum.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 

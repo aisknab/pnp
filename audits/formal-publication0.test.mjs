@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 78);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 75);
+  assert.equal(status.formalPublicationMilestones.length, 79);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 76);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -1738,6 +1738,29 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   ]);
   assert.match(terminalModeFirewall.scope, /computed finite profile observer/u);
   assert.match(terminalModeFirewall.nonClaim, /no proper or governed supports/u);
+  const terminalProjectionMinimum = byId.get('residual-terminal-projection-minimum');
+  assert.equal(terminalProjectionMinimum.status,
+    'formalized-terminal-projection-minimum');
+  assert.equal(terminalProjectionMinimum.earned, true);
+  assert.equal(terminalProjectionMinimum.axiomClosureUsesOnlyLeanStandardAllowlist, true);
+  assert.deepEqual(terminalProjectionMinimum.requiredTheorems, [
+    'PNP.DirectWire.terminalFullProfileMatchBool_complete',
+    'PNP.DirectWire.terminalQuotientProfileMatchBool_complete',
+    'PNP.DirectWire.terminalFullProfileMinimumRealization_gateCount',
+    'PNP.DirectWire.terminalQuotientProfileMinimumComparison_gateCount',
+    'PNP.DirectWire.terminalFullProfileMinimum_le',
+    'PNP.DirectWire.terminalQuotientProfileMinimum_le',
+    'PNP.DirectWire.terminalFullProfileMinimum_spec',
+    'PNP.DirectWire.terminalQuotientProfileMinimum_spec',
+    'PNP.DirectWire.terminalProjectionMinimum_mono',
+    'PNP.DirectWire.terminalQuotientMinimum_add_projectionDefect',
+    'PNP.DirectWire.terminalProjectionDefect_eq_zero_iff_minima_eq',
+    'PNP.DirectWire.terminalProjectionDefect_eq_zero_iff_exists_checkedFullLiftAtMinimum',
+    'PNP.DirectWire.terminalProfileMinima_eq_of_keepsAll',
+    'PNP.DirectWire.terminalProjectionDefect_pos_no_checkedFullLiftAtMinimum',
+  ]);
+  assert.match(terminalProjectionMinimum.scope, /complete enumeration through the current gate count/u);
+  assert.match(terminalProjectionMinimum.nonClaim, /no polynomial runtime/u);
   for (const id of [
     'global-locked-nand-threshold',
     'global-zeroslack-pccmin',
@@ -1752,10 +1775,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'e07c3c406e946a31c8e0d2fe94873922c78299e8da908ffa9630dc8a260a68b2');
+    '47f8806686c5063ba5847708e1b4c57894e2d2d297e99724c338438d94cd7912');
   assert.equal(map.milestoneSourceClosureSha256,
-    'd7b361d14706fa7194432f6e8510a20221ce1f2795064aea153171f19e31efa1');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2127);
+    '7a2758acc431c096d32534b9b0860fdf996b27a5f3def918e131dd10c1b99006');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2141);
   for (const theorem of [
     'PNP.DirectWire.LockedNANDTrace.carrierSeparation',
     'PNP.DirectWire.LockedNANDTrace.finalLock_fresh',
@@ -2077,7 +2100,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [23819, 12894, 6846, 14273, 213]);
+  ], [23855, 12917, 6849, 14316, 214]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
