@@ -1,0 +1,43 @@
+import PNP.ResidualTerminalSupportSquareClosure
+
+#print axioms PNP.DirectWire.TerminalSupportSquareCorner
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare
+#print axioms PNP.DirectWire.terminalSaturatedSupportSquare
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.leftRecords
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.rightRecords
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.meetRecords
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.joinRecords
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.records
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.mem_meetRecords_iff
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.leftRecords_closed
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.rightRecords_closed
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.meetRecords_closed
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.mem_joinRecords_iff
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.joinRecords_closed
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.records_closed
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.meetRecords_subset_left
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.meetRecords_subset_right
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.leftRecords_subset_join
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.rightRecords_subset_join
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.meetRecords_greatest
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.joinRecords_least
+#print axioms PNP.DirectWire.terminalSaturateRecords_mem_congr
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.records_congr
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.completed
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.physically_compatible
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.extracted
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.extracted_gateCount
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.extracted_semantics
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.extracted_induced
+
+#print axioms PNP.DirectWire.mem_allTerminalPrimitiveRecords
+#print axioms PNP.DirectWire.terminalSaturate_least
+#print axioms PNP.DirectWire.terminalSaturate_monotone
+#print axioms PNP.DirectWire.terminalSaturateRecords
+#print axioms PNP.DirectWire.terminalSaturateRecords_extensive
+#print axioms PNP.DirectWire.terminalSaturateRecords_closed
+#print axioms PNP.DirectWire.mem_terminalSaturateRecords_iff
+#print axioms PNP.DirectWire.completeTerminalPhysicalSupport_compatible
+#print axioms PNP.DirectWire.extractTerminalSupport_gateCount
+#print axioms PNP.DirectWire.extractTerminalSupport_semantics
+#print axioms PNP.DirectWire.extractTerminalSupport_induced

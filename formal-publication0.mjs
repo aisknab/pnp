@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '541fba305a8410a462acd55a5ae3d343dad2919a3dd648381c63721c7af23de7';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '06fd8b74713b71b5f6e033b180f6b51cbf2c678aeaf44dcdc3f08b1643893126';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -2188,6 +2188,7 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.terminalSaturate_monotone',
   'PNP.DirectWire.terminalSaturateRecords_closed',
   'PNP.DirectWire.terminalSaturateRecords_extensive',
+  'PNP.DirectWire.terminalSaturateRecords_mem_congr',
   'PNP.DirectWire.terminalSaturateRecords_sound',
   'PNP.DirectWire.terminalSaturationEdge_eq_true_iff',
   'PNP.DirectWire.terminalProperPositiveSupportBool_eq_true_iff',
@@ -2204,6 +2205,24 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.TerminalProperPositiveSupport.physically_compatible',
   'PNP.DirectWire.TerminalProperPositiveSupport.referenceMinimum_lt_gateCount',
   'PNP.DirectWire.TerminalProperPositiveSupport.saturatedRecords_closed',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.extracted_gateCount',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.extracted_induced',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.extracted_semantics',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.joinRecords_closed',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.joinRecords_least',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.leftRecords_closed',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.leftRecords_subset_join',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.meetRecords_closed',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.meetRecords_greatest',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.meetRecords_subset_left',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.meetRecords_subset_right',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.mem_joinRecords_iff',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.mem_meetRecords_iff',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.physically_compatible',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.records_closed',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.records_congr',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.rightRecords_closed',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.rightRecords_subset_join',
   'PNP.DirectWire.terminalize_gateCount',
   'PNP.DirectWire.terminalize_implementation',
   'PNP.DirectWire.traceDirect_referenceMinimum',
@@ -2242,7 +2261,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-05-104') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-06-105') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -2519,7 +2538,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-05-104') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-06-105') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

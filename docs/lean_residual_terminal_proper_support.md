@@ -117,36 +117,36 @@ node --test audits/lean-residual-terminal-proper-support0.test.mjs
 
 ## Generated publication evidence
 
-Inventory coordinate `PNP-LEAN-THEOREM-INVENTORY-2026-08-05-104` records
-24,260 declarations, 13,074 theorem-kind declarations, 6,927 assumption-free
-theorems, 14,574 excluded private declarations, 220 source-closure modules,
-and 2,200 reviewed milestone candidates. Its 14,200,832 canonical bytes have
+Inventory coordinate `PNP-LEAN-THEOREM-INVENTORY-2026-08-06-105` records
+24,337 declarations, 13,104 theorem-kind declarations, 6,937 assumption-free
+theorems, 14,575 excluded private declarations, 221 source-closure modules,
+and 2,219 reviewed milestone candidates. Its 14,403,337 canonical bytes have
 SHA-256
-`fc56f19a06459903b4d234edb72133a398f6e1138230420e2de94f5adeaefcf6`;
+`7712cae2dd53ef95a9ec7e10ea89ff29681101268a92c06d21a94be5efc02b32`;
 the exact Lean source closure has SHA-256
-`18d12d424a1f62f08dbd8ccd9fd96ea4ebd111276d28907c89e7f89a89e40efb`.
+`0e4bb045091e6b4c53181698b4c43f97f7cfe1c0081a8895e572d9035ff454dd`.
 
-Publication-map coordinate `PNP-FORMAL-PUBLICATION-MAP-2026-08-05-104`
-contains 84 milestones: 81 earned and three deliberately unearned. Its
-714,925 bytes pin 2,200 exact kernel theorem types, including all 22 theorem
+Publication-map coordinate `PNP-FORMAL-PUBLICATION-MAP-2026-08-06-105`
+contains 85 milestones: 82 earned and three deliberately unearned. Its
+720,540 bytes pin 2,219 exact kernel theorem types, including all 22 theorem
 pins for this milestone, and have SHA-256
-`11be1da6f2509275c140e6a86815b626f39661c57ec4d44428dd62ec08c69a75`.
+`1ed4556de466e6a4d079bee37479c6ca3e2d9c7a26dcd256d2cb02fa8ca482c6`.
 
-Status coordinate `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-05-104`, paired
+Status coordinate `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-06-105`, paired
 with public-surface coordinate
-`PUBLIC-SURFACE-BASELINE-2026-08-05-RESIDUAL-TERMINAL-PROPER-POSITIVE-SUPPORT-SEARCH-103`,
-is 1,764,999 bytes with SHA-256
-`5e261783dc48acfdf7f9b1a78291faa8be3e26ad8e85c188de77978b58184f17`.
+`PUBLIC-SURFACE-BASELINE-2026-08-06-RESIDUAL-TERMINAL-SATURATED-SUPPORT-SQUARE-CLOSURE-104`,
+is 1,780,999 bytes with SHA-256
+`ba386511f193e7f0b18714773e84a91e591c32a91adda70810fa24d6d634a2ec`.
 It retains all four project assumptions, all six blockers, unset activation
 fingerprints, an absent `PNP.Main.p_eq_np`, and a false concrete publication
 gate.
 
 Canonical report coordinate
-`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-05-104` has a 188,927-byte
+`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-06-105` has a 190,115-byte
 TeX source with SHA-256
-`719c9c79e2014b33843a86a665220dbea89146c15195c396be3d1cd918ff101c`
-and a deterministic 74-page, 431,630-byte A4 PDF with SHA-256
-`2e8d545dc874f8e2bdadb696c629f9d8a5a13516778eb315d61802bc34b68056`.
+`f151378f77052be84f05edea03b8a0052e1955aebff4b3afa1964aca8937961d`
+and a deterministic 75-page, 432,278-byte A4 PDF with SHA-256
+`39556a8d59f7dfe9407cfa4d49a7ddf388e4e9f456c3562eb76d672523461505`.
 
 ## What remains open
 

@@ -1168,6 +1168,20 @@ legitimacy, construct the required projection square, or establish
 `SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin, or the root theorem. See
 [`lean_residual_terminal_proper_support.md`](./lean_residual_terminal_proper_support.md).
 
+`ResidualTerminalSupportSquareClosure` now reconstructs the algebraic and
+physical part of the named “Saturated support square closure” theorem in
+legacy report §3. For every finite direct-wire candidate, explicit terminal
+dependency system, and pair of finite terminal seeds, it computes saturated
+left and right corners, their canonical intersection meet, and their
+saturated-union join. Lean proves closure of every corner, the exact
+greatest-lower-bound and least-upper-bound laws, invariance under seed
+reordering and duplication, computed physical compatibility, and exact open
+semantics with induced whole-circuit recovery. The dependency system remains
+explicit caller data. This does not establish the frontier pushout, projection
+compatibility, side-tight minima, BN2 square legitimacy, `SaturatePositive`,
+`BCELReady`, ZeroSlack, PCCMin, polynomial runtime, or the root theorem. See
+[`lean_residual_terminal_support_square_closure.md`](./lean_residual_terminal_support_square_closure.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:
