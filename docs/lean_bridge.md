@@ -49,6 +49,8 @@ lean/PNP/ResidualTerminalModeFirewall.lean
 lean/PNP/ResidualTerminalProjectionMinimum.lean
 lean/PNP/ResidualTerminalProjectionTransfer.lean
 lean/PNP/ResidualTerminalSaturation.lean
+lean/PNP/ResidualTerminalExecutableSaturation.lean
+lean/PNP/ResidualTerminalPhysicalSupportCompletion.lean
 lean/PNP/LockedNANDResidualGainBound.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
@@ -151,6 +153,7 @@ lean-audit/PNPResidualTerminalModeFirewallAxiomAudit.lean
 lean-audit/PNPResidualTerminalProjectionMinimumAxiomAudit.lean
 lean-audit/PNPResidualTerminalProjectionTransferAxiomAudit.lean
 lean-audit/PNPResidualTerminalSaturationAxiomAudit.lean
+lean-audit/PNPResidualTerminalPhysicalSupportCompletionAxiomAudit.lean
 lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean
 lean-audit/PNPLockedNANDDirectAxiomAudit.lean
 lean-audit/PNPDirectWireBaselineAxiomAudit.lean
@@ -951,6 +954,22 @@ This does not yet extract those dependencies from an arbitrary circuit or
 construct proper support, support completion, a legitimate projection square,
 `SaturatePositive`, Package E, BCEL/BN2–BN6, ZeroSlack, PCCMin, or polynomial
 runtime.  See `docs/lean_residual_terminal_saturation.md`.
+
+`lean/PNP/ResidualTerminalExecutableSaturation.lean` and
+`lean/PNP/ResidualTerminalPhysicalSupportCompletion.lean` close the next
+bounded dependency edge from report §§2–3. A deterministic finite work list
+computes exactly the existing inductive saturation for every finite seed and
+explicit terminal dependency system. The actual direct-wire program then
+computes the canonically ordered physical support triple `(U, ∂U, ιU)` for the
+selected gates: input and external-gate wires crossing inward form `∂U`, while
+selected gate outputs consumed outside the selection or exposed as program
+outputs form `ιU`. Constants and internal wires remain internal. Universal
+membership theorems prove no crossing wire is omitted or added and package the
+combined saturation/physical result as compatible. The dependency system is
+still explicit rather than the manuscript profile frontier; proper positive
+support, square legitimacy, the required projection square,
+`SaturatePositive`, ZeroSlack, PCCMin, and polynomial runtime remain open. See
+`docs/lean_residual_terminal_physical_support_completion.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 

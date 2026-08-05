@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-04-101');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-05-102');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -801,6 +801,18 @@ test('formal reconstruction status accepts the current source and public mirrors
     'all-finite-terminal-primitive-record-universes-with-explicit-boolean-rule-tagged-dependencies',
   );
   for (const field of [
+    'leanResidualTerminalExecutableSaturationFormalized',
+    'leanResidualTerminalPhysicalSupportCompletionFormalized',
+    'leanResidualTerminalPhysicalBoundaryFormalized',
+    'leanResidualTerminalPhysicalInterfaceFormalized',
+    'leanResidualTerminalPhysicalCompatibilityFormalized',
+    'leanResidualTerminalPhysicalSupportCompletionAxiomAuditPassed',
+  ]) assert.equal(out[field], true, field);
+  assert.equal(
+    out.leanResidualTerminalPhysicalSupportCompletionScope,
+    'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-and-finite-seed-lists',
+  );
+  for (const field of [
     'leanResidualTerminalProperSupportFormalized',
     'leanResidualTerminalSupportCompletionFormalized',
     'leanResidualTerminalSquareLegitimacyFormalized',
@@ -839,13 +851,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 24054);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 12985);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 6903);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14317);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 216);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 24150);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 13019);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 6918);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14409);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 218);
   assert.equal(status.leanSourceClosureSha256,
-    '5cb2ae9d032d09c08f34424ccdf0b67452d75b8a933b60114c5267cc69385a7f');
+    'dd6fd7a05cce2c156ce9196a3c60814a9a220d3d8d0e753e2bcd75d184b2184b');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -1267,7 +1279,7 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-04-RESIDUAL-TERMINAL-SATURATION-100');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-05-RESIDUAL-TERMINAL-PHYSICAL-SUPPORT-COMPLETION-101');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
@@ -1548,6 +1560,18 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
     'all-finite-terminal-primitive-record-universes-with-explicit-boolean-rule-tagged-dependencies',
   );
   for (const field of [
+    'leanResidualTerminalExecutableSaturationFormalized',
+    'leanResidualTerminalPhysicalSupportCompletionFormalized',
+    'leanResidualTerminalPhysicalBoundaryFormalized',
+    'leanResidualTerminalPhysicalInterfaceFormalized',
+    'leanResidualTerminalPhysicalCompatibilityFormalized',
+    'leanResidualTerminalPhysicalSupportCompletionAxiomAuditPassed',
+  ]) assert.equal(status[field], true, field);
+  assert.equal(
+    status.leanResidualTerminalPhysicalSupportCompletionScope,
+    'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-and-finite-seed-lists',
+  );
+  for (const field of [
     'leanResidualTerminalProperSupportFormalized',
     'leanResidualTerminalSupportCompletionFormalized',
     'leanResidualTerminalSquareLegitimacyFormalized',
@@ -1649,6 +1673,9 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalProjectionTransfer.lean'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalSaturationAxiomAudit.lean'), true);
   assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalSaturation.lean'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPhysicalSupportCompletionAxiomAudit.lean'), true);
+  assert.equal(status.verificationCommands.includes('lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPhysicalSupportCompletion.lean'), true);
+  assert.equal(status.verificationCommands.includes('node --test audits/lean-residual-terminal-physical-support-completion0.test.mjs'), true);
   assert.deepEqual(status.lockedNANDThresholdHostileReviewLemmaInventory, [
     'DirectWireOutputLowerBound',
     'MacroDistinct',
@@ -1937,6 +1964,12 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanResidualTerminalSaturationLeastFormalized',
     'leanResidualTerminalSaturationMonotoneFormalized',
     'leanResidualTerminalSaturationIdempotentFormalized',
+    'leanResidualTerminalExecutableSaturationFormalized',
+    'leanResidualTerminalPhysicalSupportCompletionFormalized',
+    'leanResidualTerminalPhysicalBoundaryFormalized',
+    'leanResidualTerminalPhysicalInterfaceFormalized',
+    'leanResidualTerminalPhysicalCompatibilityFormalized',
+    'leanResidualTerminalPhysicalSupportCompletionAxiomAuditPassed',
   ];
 
   for (const field of fields) {
