@@ -1,7 +1,7 @@
 {
   "kind": "PNPFormalPublicationMap0",
   "version": 0,
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-04-101",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-05-102",
   "gate": {
     "compatibilityRootName": "PNP.Main.p_eq_np",
     "concreteTargetName": "PNP.Main.ConcretePEqualsNP",
@@ -17,7 +17,7 @@
       "propext"
     ]
   },
-  "milestoneSourceClosureSha256": "5cb2ae9d032d09c08f34424ccdf0b67452d75b8a933b60114c5267cc69385a7f",
+  "milestoneSourceClosureSha256": "dd6fd7a05cce2c156ce9196a3c60814a9a220d3d8d0e753e2bcd75d184b2184b",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2108,6 +2108,11 @@
     "PNP.DirectWire.WholeSpanResidualWitness.strictResidualDescent": "bbeb896c3ba81d61e882ef600de8617bae37133f66c8cb7f905ebaa65d5460ce",
     "PNP.DirectWire.andCircuit_spec": "43c4801753810dec20c372ae4eac3f248e03f62e084c80089aacbe38dbeaac50",
     "PNP.DirectWire.compatibleReplacement_framed": "450f861075f4eb11bb719e7248543c09ab9239de1ad5c1ab5c721c640da3dd2b",
+    "PNP.DirectWire.completeSaturatedTerminalPhysicalSupport_compatible": "831f8ce697624f2e413d5da6a56fde592b2157793a1dd1f4f85060154faafc58",
+    "PNP.DirectWire.completeSaturatedTerminalPhysicalSupport_records": "619c37407e969a13746611f68b4169ba34a8cac4e6d8a01d5388808eec58fe91",
+    "PNP.DirectWire.completeTerminalPhysicalSupport_compatible": "54f14acec8c40024eb7982e02373e24a80e864b0478a7815105f94362601b1fd",
+    "PNP.DirectWire.completeTerminalPhysicalSupport_incoming_complete": "e541fac972a4f9402aab6b47c6aa6164cdf54d5a490beb750a8ddf498719e789",
+    "PNP.DirectWire.completeTerminalPhysicalSupport_outgoing_complete": "5955b959132cd6a3f3bf734ea8f62513554f476a2ee7b46a65ff716e9a328b7a",
     "PNP.DirectWire.constantOneDirect_referenceMinimum": "f1f6cb0d57db26a915ee2baabd95118c614ec6b89b5625f930a443f139973323",
     "PNP.DirectWire.constantZeroDirect_referenceMinimum": "f76206ba0e7b20eb0c278ec735c73098404447def9af32234a3a4e4bad31e35a",
     "PNP.DirectWire.equalityDirect_referenceMinimum": "df8212be9d5cb824c6eee4d6f59954c350977c7d5b10ed161ef5e68815c8a812",
@@ -2121,6 +2126,11 @@
     "PNP.DirectWire.isTerminalFullMinimum_iff_eq_terminalFullMinimum": "670efe7841d43136a86f95b26c7657f988977bb44ed3b7ad4bf6927bc827cf50",
     "PNP.DirectWire.lockedBaselineCount_report_formula": "39a494358dd5d78afa1b12e83fb2f455d9ff6c2495287b6e35858836767b79b1",
     "PNP.DirectWire.mem_allTerminalPrimitiveRecords": "06dc32945403e76a76eed4fdbe31b1962c878af2cd8c136103fa1243d304a9a6",
+    "PNP.DirectWire.mem_allTerminalSaturationRuleKinds": "03a4d65b659d07d57238bad64dad52372af05333832ea659ac16aec3beadeed3",
+    "PNP.DirectWire.mem_allTerminalSupportWires": "685c10956690b6971338b1bc1b27dc7b29a585384c6fb58e725d179f71174579",
+    "PNP.DirectWire.mem_terminalBoundaryPorts_iff": "96d01f7650e0584503501f4278dc196e1b1a2ea658abf237e99978715d942ef0",
+    "PNP.DirectWire.mem_terminalInterfacePorts_iff": "e8b19b45e351818396a7f70d83d1e975bdd50458ad3169fcc68e1a06f7c1c56f",
+    "PNP.DirectWire.mem_terminalSaturateRecords_iff": "055750aa6beee13c31f532a3f37f67c915a0f6a20ddac7d6f83e5058869db36b",
     "PNP.DirectWire.nandCircuit_spec": "1bf0b598c94cb351ae92c47ef2d686a086d3b55c84c56283aefa937f5a30241b",
     "PNP.DirectWire.prefixAndDirect_referenceMinimum": "831dea53cb4c0420136d9dab078b9b8ab0ef89760b179ecb2ca39ab215ec8b4a",
     "PNP.DirectWire.referenceMinimumImplementation_equivalent": "dbbb97229e4cc25be761758a73728b6801d96cacc8c1b2f8c1dd2950c29bdf64",
@@ -2160,12 +2170,16 @@
     "PNP.DirectWire.terminalQuotientProfileMinimumComparison_gateCount": "32349bacfe9e5efd16f42006fe912234b0c7459b66db9905e5c5867a696dba80",
     "PNP.DirectWire.terminalQuotientProfileMinimum_le": "ce8486f3b736f1bac59f6a388c73a32d5bfdb4ec64f0994b1ba94fb1c57ab753",
     "PNP.DirectWire.terminalQuotientProfileMinimum_spec": "494e3230379f9fb0bbe634f68987117605fffe8dbcfe130311b2724e9b65c73a",
+    "PNP.DirectWire.terminalSaturateRecords_closed": "f1b4202a9fa0e8d76c6289201eac729860a7f4735c9700c4299f71e1f1792e6d",
+    "PNP.DirectWire.terminalSaturateRecords_extensive": "533849d672d9c5ee45392918c55c9ca1368d31e648907bf7dc84e91216c94931",
+    "PNP.DirectWire.terminalSaturateRecords_sound": "9747453dfa3c380e960cc892ea527f61558d97b8e050260fba2a4e1a213f8abe",
     "PNP.DirectWire.terminalSaturate_closed": "3f4566c23897191ee812427490e9ce9a4df87e90983775289f60a9472895bdf5",
     "PNP.DirectWire.terminalSaturate_extensive": "80a5d112df19cb4fd03210ffdd06be067829549a28e2da0746230f79994761fc",
     "PNP.DirectWire.terminalSaturate_fixed_iff_closed": "ac4339ee65e025371c429d3de428d39118f9d8d5eba92749fa7b08f8013bd22a",
     "PNP.DirectWire.terminalSaturate_idempotent": "60fbcc602264e47fa5fea3bd772bfa344a1a0d6d2086baf3c7ac7b453b7efda0",
     "PNP.DirectWire.terminalSaturate_least": "0cc287c76c18cfe0b0ce632d92b85e6a8173b9cd0841b8fdfafeffc9cb025790",
     "PNP.DirectWire.terminalSaturate_monotone": "d1bc557a4eb268ad67b96377c3cb668d1d141234cc1548155252f2429f9123ba",
+    "PNP.DirectWire.terminalSaturationEdge_eq_true_iff": "de000096df6c020f18c90908546b029eea14d9a53f698ead470acea3d19ad1a5",
     "PNP.DirectWire.terminalize_gateCount": "05ffc10d0fcfd63531119a3a7ff69baf871d270412c93d345e45dc1167dc1aee",
     "PNP.DirectWire.terminalize_implementation": "f8b947cab5adb66f9a7314b3522f9e96a083ff752df2bb7f26e09bf8159a40c5",
     "PNP.DirectWire.traceDirect_referenceMinimum": "cbef9349e46dd570d0e02c81170ea1257f3d1a76a49db39123074892e3196ea2",
@@ -5167,6 +5181,29 @@
         "PNP.DirectWire.terminalSaturate_fixed_iff_closed"
       ],
       "nonClaim": "This closure theorem does not derive the dependency relation from an arbitrary circuit, construct proper support, prove support completion or square legitimacy, instantiate a projection-compatible square, prove SaturatePositive or BCELReady, discharge Package E or BCEL/BN2-BN6, generate a complete residual route, prove ZeroSlack or PCCMin, establish polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP."
+    },
+    {
+      "id": "residual-terminal-physical-support-completion",
+      "title": "Terminal executable and physical support completion",
+      "classification": "formalized-terminal-physical-support-completion",
+      "scope": "For every finite direct-wire candidate, explicit terminal dependency system, and finite seed list, a deterministic finite work list computes exactly the inductive saturation, then the actual program computes canonically ordered incoming boundary and outgoing interface wires. Lean proves no crossing wire is omitted or added and the composed physical support is compatible.",
+      "requiredTheorems": [
+        "PNP.DirectWire.mem_allTerminalSaturationRuleKinds",
+        "PNP.DirectWire.terminalSaturationEdge_eq_true_iff",
+        "PNP.DirectWire.terminalSaturateRecords_extensive",
+        "PNP.DirectWire.terminalSaturateRecords_sound",
+        "PNP.DirectWire.terminalSaturateRecords_closed",
+        "PNP.DirectWire.mem_terminalSaturateRecords_iff",
+        "PNP.DirectWire.mem_allTerminalSupportWires",
+        "PNP.DirectWire.mem_terminalBoundaryPorts_iff",
+        "PNP.DirectWire.mem_terminalInterfacePorts_iff",
+        "PNP.DirectWire.completeTerminalPhysicalSupport_incoming_complete",
+        "PNP.DirectWire.completeTerminalPhysicalSupport_outgoing_complete",
+        "PNP.DirectWire.completeTerminalPhysicalSupport_compatible",
+        "PNP.DirectWire.completeSaturatedTerminalPhysicalSupport_records",
+        "PNP.DirectWire.completeSaturatedTerminalPhysicalSupport_compatible"
+      ],
+      "nonClaim": "The terminal dependency system remains explicit data rather than an extracted profile frontier. This milestone does not construct proper positive support, prove support completion in the manuscript's full sense or square legitimacy, instantiate the required projection square, prove SaturatePositive, discharge Package E or BCEL/BN2-BN6, generate a complete residual route, prove ZeroSlack or PCCMin, establish polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP."
     },
     {
       "id": "global-locked-nand-threshold",

@@ -74,21 +74,21 @@ node --test audits/lean-residual-terminal-mode-firewall0.test.mjs
 ## Generated publication evidence
 
 The compiled inventory coordinate
-`PNP-LEAN-THEOREM-INVENTORY-2026-08-04-101` contains 24,054 declarations,
-12,985 theorems, 6,903 assumption-free theorems, four project axioms, and 215
+`PNP-LEAN-THEOREM-INVENTORY-2026-08-05-102` contains 24,150 declarations,
+13,019 theorems, 6,918 assumption-free theorems, four project axioms, and 215
 source-closure modules. Its canonical bytes have SHA-256
-`58d8118f3aef8976a3f1bdb2063a6d08baa7f2fe01e7393881fc9776f738aac9`;
+`869875ff563e3aedad0f2b24d241ff91c7c6eb3f35b4ac655346b6f237041188`;
 the source closure is
-`5cb2ae9d032d09c08f34424ccdf0b67452d75b8a933b60114c5267cc69385a7f`.
+`dd6fd7a05cce2c156ce9196a3c60814a9a220d3d8d0e753e2bcd75d184b2184b`.
 
-`PNP-FORMAL-PUBLICATION-MAP-2026-08-04-101` contains 81 milestones: 77
-earned and three intentionally unearned, plus 2,152 exact kernel-type pins.
+`PNP-FORMAL-PUBLICATION-MAP-2026-08-05-102` contains 81 milestones: 77
+earned and three intentionally unearned, plus 2,166 exact kernel-type pins.
 The current non-claiming report coordinate is
-`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-04-101`. Its 185,272-byte
+`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-05-102`. Its 186,475-byte
 TeX has SHA-256
-`f1d9b3f85b0ee7414ab9e40a9e1095f153f208ab9e121f5fd8aa3efef46d7c4a`;
-the deterministic 73-page, 428,831-byte A4 PDF has SHA-256
-`654dc634d86e7ebf2633c4d7d67d4cbf36a10c57bede51b4f8cf246fd169fefb`.
+`5cc640d457bd64d61c842c2b89bd164052b7cd5a4b123409d821018fac46b396`;
+the deterministic 73-page, 429,037-byte A4 PDF has SHA-256
+`d4aceaca58c7554027b1c9424da90548c1310dacec77d4074861569b32298938`.
 
 ## Exact non-claims
 

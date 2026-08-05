@@ -325,6 +325,16 @@ branch.
   definition-only, and declaration-prefix slices to distinguish import pressure
   from one elaboration hotspot. After the source fix, rebuild the permanent Lake
   target and use that terminal run as evidence.
+- A clean root build can also stall because Lake launches several independently
+  ready high-RSS modules together. If the retained log has no completed action
+  for an extended interval, several Lean processes collectively exceed
+  `MemoryHigh`, and `memory.events` shows sustained `high` growth without an OOM,
+  classify that orchestration attempt as non-evidence. Stop only its exact named
+  unit, prebuild the identified contending modules one at a time in the same
+  checkout, then resume the root build so the valid completed cache is retained.
+  Do not guess a jobs flag: pinned Lake 5 does not accept `lake build -j`; inspect
+  the pinned help before changing invocation syntax. The resumed root build must
+  still reach its own final green marker and terminal zero status.
 - Avoid `change` when it would delta-reduce a machine-valued
   `PolynomialReduction`, `PolynomialTimeFunction`, or `FunctionProgram`
   composition. Prove a small private projection equality with `rfl`, rewrite by

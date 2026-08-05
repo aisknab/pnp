@@ -1119,6 +1119,24 @@ E, BCEL/BN2–BN6, route completeness, ZeroSlack/PCCMin, polynomial runtime, and
 the root theorem remain open.  See
 [`lean_residual_terminal_saturation.md`](./lean_residual_terminal_saturation.md).
 
+`ResidualTerminalExecutableSaturation` and
+`ResidualTerminalPhysicalSupportCompletion` now reconstruct the next bounded
+parts of the physical support construction from legacy report §§2–3. For every
+finite primitive-record universe, explicit terminal dependency system, and
+finite seed, a deterministic finite work list computes exactly the prior
+inductive saturation. For every selected set of gates, the actual direct-wire
+program then computes the canonical physical support triple `(U, ∂U, ιU)`:
+every input or external gate wire crossing into `U` is in `∂U`, and every gate
+wire crossing out or named as a program output is in `ιU`. Lean proves both
+directions of these membership specifications, so no crossing wire is omitted
+and no unrelated wire is added; constants and wires internal to `U` remain
+internal. The dependency system is still explicit data rather than the
+manuscript's extracted profile frontier. Proper positive support, full support
+completion, square legitimacy, the required projection square,
+`SaturatePositive`, Package E, BCEL/BN2–BN6, route completeness,
+ZeroSlack/PCCMin, polynomial runtime, and the root theorem remain open. See
+[`lean_residual_terminal_physical_support_completion.md`](./lean_residual_terminal_physical_support_completion.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

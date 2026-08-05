@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'fbd916598cf7ceeb9a2b0c020368f1717b7536bab81d80adbd3e374230f7db00';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '164e47fa5825c8521982ac5beed207f5dcd8bbfefb8f559c740b7b3a5952650f';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -2097,7 +2097,16 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.LockedNANDTrace.traceEquivalence',
   'PNP.DirectWire.LockedNANDTrace.tracePredicate_coherentExtension',
   'PNP.DirectWire.LockedNANDTrace.trace_sound_of_predicate_true',
+  'PNP.DirectWire.completeSaturatedTerminalPhysicalSupport_compatible',
+  'PNP.DirectWire.completeSaturatedTerminalPhysicalSupport_records',
+  'PNP.DirectWire.completeTerminalPhysicalSupport_compatible',
+  'PNP.DirectWire.completeTerminalPhysicalSupport_incoming_complete',
+  'PNP.DirectWire.completeTerminalPhysicalSupport_outgoing_complete',
   'PNP.DirectWire.mem_allTerminalPrimitiveRecords',
+  'PNP.DirectWire.mem_allTerminalSaturationRuleKinds',
+  'PNP.DirectWire.mem_allTerminalSupportWires',
+  'PNP.DirectWire.mem_terminalBoundaryPorts_iff',
+  'PNP.DirectWire.mem_terminalInterfacePorts_iff',
   'PNP.DirectWire.nandCircuit_spec',
   'PNP.DirectWire.prefixAndDirect_referenceMinimum',
   'PNP.DirectWire.referenceMinimumImplementation_equivalent',
@@ -2156,6 +2165,11 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.terminalSaturate_idempotent',
   'PNP.DirectWire.terminalSaturate_least',
   'PNP.DirectWire.terminalSaturate_monotone',
+  'PNP.DirectWire.terminalSaturateRecords_closed',
+  'PNP.DirectWire.terminalSaturateRecords_extensive',
+  'PNP.DirectWire.terminalSaturateRecords_sound',
+  'PNP.DirectWire.terminalSaturationEdge_eq_true_iff',
+  'PNP.DirectWire.mem_terminalSaturateRecords_iff',
   'PNP.DirectWire.terminalize_gateCount',
   'PNP.DirectWire.terminalize_implementation',
   'PNP.DirectWire.traceDirect_referenceMinimum',
@@ -2194,7 +2208,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-04-101') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-05-102') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -2471,7 +2485,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-04-101') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-05-102') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

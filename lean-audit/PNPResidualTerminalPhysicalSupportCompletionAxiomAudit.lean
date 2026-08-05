@@ -1,0 +1,37 @@
+import PNP.ResidualTerminalPhysicalSupportCompletion
+
+#print axioms PNP.DirectWire.allTerminalSaturationRuleKinds
+#print axioms PNP.DirectWire.mem_allTerminalSaturationRuleKinds
+#print axioms PNP.DirectWire.terminalSaturationEdge
+#print axioms PNP.DirectWire.terminalSaturationEdge_eq_true_iff
+#print axioms PNP.DirectWire.terminalSaturateRecords
+#print axioms PNP.DirectWire.terminalSaturateRecords_extensive
+#print axioms PNP.DirectWire.terminalSaturateRecords_sound
+#print axioms PNP.DirectWire.terminalSaturateRecords_closed
+#print axioms PNP.DirectWire.mem_terminalSaturateRecords_iff
+#print axioms PNP.DirectWire.TerminalSupportWire
+#print axioms PNP.DirectWire.allTerminalSupportWires
+#print axioms PNP.DirectWire.mem_allTerminalSupportWires
+#print axioms PNP.DirectWire.Source.terminalSupportWire?
+#print axioms PNP.DirectWire.Program.terminalGateSources
+#print axioms PNP.DirectWire.Program.terminalGateUsesWire
+#print axioms PNP.DirectWire.terminalGateSelected
+#print axioms PNP.DirectWire.terminalWireExternal
+#print axioms PNP.DirectWire.terminalBoundaryWire
+#print axioms PNP.DirectWire.terminalGateHasExternalConsumer
+#print axioms PNP.DirectWire.terminalGateIsGlobalOutput
+#print axioms PNP.DirectWire.terminalInterfaceGate
+#print axioms PNP.DirectWire.terminalBoundaryPorts
+#print axioms PNP.DirectWire.terminalInterfacePorts
+#print axioms PNP.DirectWire.mem_terminalBoundaryPorts_iff
+#print axioms PNP.DirectWire.mem_terminalInterfacePorts_iff
+#print axioms PNP.DirectWire.TerminalPhysicalCompletedSupport
+#print axioms PNP.DirectWire.completeTerminalPhysicalSupport
+#print axioms PNP.DirectWire.TerminalPhysicalCompletedSupport.SourceAccounted
+#print axioms PNP.DirectWire.TerminalPhysicalCompletedSupport.Compatible
+#print axioms PNP.DirectWire.completeTerminalPhysicalSupport_incoming_complete
+#print axioms PNP.DirectWire.completeTerminalPhysicalSupport_outgoing_complete
+#print axioms PNP.DirectWire.completeTerminalPhysicalSupport_compatible
+#print axioms PNP.DirectWire.completeSaturatedTerminalPhysicalSupport
+#print axioms PNP.DirectWire.completeSaturatedTerminalPhysicalSupport_records
+#print axioms PNP.DirectWire.completeSaturatedTerminalPhysicalSupport_compatible

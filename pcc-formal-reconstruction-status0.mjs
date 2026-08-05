@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-04-101';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-05-102';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -321,6 +321,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalSaturationAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalSaturation.lean',
   'node --test audits/lean-residual-terminal-saturation0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPhysicalSupportCompletionAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPhysicalSupportCompletion.lean',
+  'node --test audits/lean-residual-terminal-physical-support-completion0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -430,6 +433,8 @@ const NON_CLAIMS = Object.freeze([
   'The terminal projection-transfer layer proves the manuscript Section 5.2 signed four-corner balance law for every finite family sharing one computed terminal-profile observer and one explicit projection. Under constant-cut defect hypotheses, the projection excess equals the join defect and is positive when that defect is positive.',
   'This transfer theorem is arithmetic over supplied corners. It does not construct or certify a proper governed support square, prove SaturatePositive, discharge Package E or BCEL/BN2-BN6, generate a complete residual route, prove ZeroSlack or PCCMin, establish polynomial runtime, put SAT in P, or prove P = NP.',
   'The terminal saturation milestone reconstructs the manuscript Section 3 closure operator over every finite gate, boundary, interface, and computed-profile record universe with an explicit Boolean dependency relation carrying all ten rule tags. Its reflexive transitive closure is extensive, closed, least, monotone, and idempotent, and its fixed points are exactly the dependency-closed supports.',
+  'Terminal executable saturation is a deterministic finite work-list implementation whose output is proved exactly equivalent to the inductive closure for every finite primitive-record universe and finite seed. The dependency relation is still explicit input data rather than the manuscript profile frontier extracted from a circuit.',
+  'Terminal physical support completion computes the canonical incoming boundary and outgoing interface of every selected gate set in the actual finite direct-wire program, excluding constants and internal wires, and proves exact no-omission/no-addition compatibility. It does not construct proper positive support, a legitimate projection square, SaturatePositive, ZeroSlack, a polynomial algorithm, or P = NP.',
   'This saturation theorem does not extract dependencies from an arbitrary circuit, construct proper support, prove support completion or square legitimacy, instantiate a projection-compatible square, prove SaturatePositive or BCELReady, generate a complete residual route, prove ZeroSlack or PCCMin, establish polynomial runtime, put SAT in P, or prove P = NP.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
@@ -1267,6 +1272,14 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalSaturationIdempotentFormalized: true,
   leanResidualTerminalSaturationScope:
     'all-finite-terminal-primitive-record-universes-with-explicit-boolean-rule-tagged-dependencies',
+  leanResidualTerminalExecutableSaturationFormalized: true,
+  leanResidualTerminalPhysicalSupportCompletionFormalized: true,
+  leanResidualTerminalPhysicalBoundaryFormalized: true,
+  leanResidualTerminalPhysicalInterfaceFormalized: true,
+  leanResidualTerminalPhysicalCompatibilityFormalized: true,
+  leanResidualTerminalPhysicalSupportCompletionAxiomAuditPassed: true,
+  leanResidualTerminalPhysicalSupportCompletionScope:
+    'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-and-finite-seed-lists',
   leanResidualTerminalSupportCompletionFormalized: false,
   leanResidualTerminalSquareLegitimacyFormalized: false,
   leanResidualTerminalProjectionSquareFormalized: false,
@@ -1298,7 +1311,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-04-RESIDUAL-TERMINAL-SATURATION-100',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-05-RESIDUAL-TERMINAL-PHYSICAL-SUPPORT-COMPLETION-101',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -2115,6 +2128,14 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalSaturationIdempotentFormalized: true,
       leanResidualTerminalSaturationScope:
         'all-finite-terminal-primitive-record-universes-with-explicit-boolean-rule-tagged-dependencies',
+      leanResidualTerminalExecutableSaturationFormalized: true,
+      leanResidualTerminalPhysicalSupportCompletionFormalized: true,
+      leanResidualTerminalPhysicalBoundaryFormalized: true,
+      leanResidualTerminalPhysicalInterfaceFormalized: true,
+      leanResidualTerminalPhysicalCompatibilityFormalized: true,
+      leanResidualTerminalPhysicalSupportCompletionAxiomAuditPassed: true,
+      leanResidualTerminalPhysicalSupportCompletionScope:
+        'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-and-finite-seed-lists',
       leanResidualTerminalSupportCompletionFormalized: false,
       leanResidualTerminalSquareLegitimacyFormalized: false,
       leanResidualTerminalProjectionSquareFormalized: false,
@@ -2197,7 +2218,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-04-101',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-05-102',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,
