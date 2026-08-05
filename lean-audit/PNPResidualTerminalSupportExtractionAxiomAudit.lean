@@ -1,0 +1,37 @@
+import PNP.ResidualTerminalSupportExtraction
+
+#print axioms PNP.DirectWire.terminalSelectedGateIndices
+#print axioms PNP.DirectWire.terminalSelectedGates
+#print axioms PNP.DirectWire.mem_terminalSelectedGateIndices_iff
+#print axioms PNP.DirectWire.mem_terminalSelectedGates_iff
+#print axioms PNP.DirectWire.terminalSelectedGateIndices_nodup
+#print axioms PNP.DirectWire.terminalSelectedGates_nodup
+#print axioms PNP.DirectWire.TerminalExtractedSupport
+#print axioms PNP.DirectWire.extractTerminalSupport
+#print axioms PNP.DirectWire.extractTerminalSupport_records
+#print axioms PNP.DirectWire.extractTerminalSupport_boundary
+#print axioms PNP.DirectWire.extractTerminalSupport_selectedGates
+#print axioms PNP.DirectWire.extractTerminalSupport_interface
+#print axioms PNP.DirectWire.extractTerminalSupport_gateCount
+#print axioms PNP.DirectWire.terminalOpenGateEvaluation
+#print axioms PNP.DirectWire.terminalOpenSupportSemantics
+#print axioms PNP.DirectWire.TerminalSupportWire.candidateValue
+#print axioms PNP.DirectWire.terminalInducedBoundaryValuation
+#print axioms PNP.DirectWire.terminalOpenGateEvaluation_induced_selected
+#print axioms PNP.DirectWire.terminalOpenSupportSemantics_induced
+#print axioms PNP.DirectWire.extractTerminalSupport_semantics
+#print axioms PNP.DirectWire.extractTerminalSupport_induced
+#print axioms PNP.DirectWire.extractSaturatedTerminalSupport
+#print axioms PNP.DirectWire.extractSaturatedTerminalSupport_records
+#print axioms PNP.DirectWire.extractSaturatedTerminalSupport_gateCount
+#print axioms PNP.DirectWire.extractSaturatedTerminalSupport_semantics
+#print axioms PNP.DirectWire.extractSaturatedTerminalSupport_induced
+
+#print axioms PNP.DirectWire.terminalSaturateRecords
+#print axioms PNP.DirectWire.mem_terminalSaturateRecords_iff
+#print axioms PNP.DirectWire.terminalGateSelected
+#print axioms PNP.DirectWire.terminalBoundaryPorts
+#print axioms PNP.DirectWire.terminalInterfacePorts
+#print axioms PNP.DirectWire.completeTerminalPhysicalSupport_incoming_complete
+#print axioms PNP.DirectWire.completeTerminalPhysicalSupport_compatible
+#print axioms PNP.DirectWire.completeSaturatedTerminalPhysicalSupport_compatible

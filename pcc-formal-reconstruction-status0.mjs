@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-05-102';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-05-103';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -324,6 +324,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPhysicalSupportCompletionAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPhysicalSupportCompletion.lean',
   'node --test audits/lean-residual-terminal-physical-support-completion0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalSupportExtractionAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalSupportExtraction.lean',
+  'node --test audits/lean-residual-terminal-support-extraction0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -1280,6 +1283,12 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalPhysicalSupportCompletionAxiomAuditPassed: true,
   leanResidualTerminalPhysicalSupportCompletionScope:
     'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-and-finite-seed-lists',
+  leanResidualTerminalSupportExtractionFormalized: true,
+  leanResidualTerminalOpenSemanticsFormalized: true,
+  leanResidualTerminalInducedRecoveryFormalized: true,
+  leanResidualTerminalSupportExtractionAxiomAuditPassed: true,
+  leanResidualTerminalSupportExtractionScope:
+    'all-finite-direct-wire-candidates-terminal-record-lists-boundary-valuations-and-interface-coordinates',
   leanResidualTerminalSupportCompletionFormalized: false,
   leanResidualTerminalSquareLegitimacyFormalized: false,
   leanResidualTerminalProjectionSquareFormalized: false,
@@ -1311,7 +1320,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-05-RESIDUAL-TERMINAL-PHYSICAL-SUPPORT-COMPLETION-101',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-05-RESIDUAL-TERMINAL-SUPPORT-EXTRACTION-102',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -2136,6 +2145,12 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalPhysicalSupportCompletionAxiomAuditPassed: true,
       leanResidualTerminalPhysicalSupportCompletionScope:
         'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-and-finite-seed-lists',
+      leanResidualTerminalSupportExtractionFormalized: true,
+      leanResidualTerminalOpenSemanticsFormalized: true,
+      leanResidualTerminalInducedRecoveryFormalized: true,
+      leanResidualTerminalSupportExtractionAxiomAuditPassed: true,
+      leanResidualTerminalSupportExtractionScope:
+        'all-finite-direct-wire-candidates-terminal-record-lists-boundary-valuations-and-interface-coordinates',
       leanResidualTerminalSupportCompletionFormalized: false,
       leanResidualTerminalSquareLegitimacyFormalized: false,
       leanResidualTerminalProjectionSquareFormalized: false,
@@ -2218,7 +2233,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-05-102',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-05-103',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

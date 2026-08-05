@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '164e47fa5825c8521982ac5beed207f5dcd8bbfefb8f559c740b7b3a5952650f';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'befc6f06ed391ecbf39b770f438c8dfada15c32a133693ed3b2e457bb41f5e06';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -2102,11 +2102,24 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.completeTerminalPhysicalSupport_compatible',
   'PNP.DirectWire.completeTerminalPhysicalSupport_incoming_complete',
   'PNP.DirectWire.completeTerminalPhysicalSupport_outgoing_complete',
+  'PNP.DirectWire.extractSaturatedTerminalSupport_gateCount',
+  'PNP.DirectWire.extractSaturatedTerminalSupport_induced',
+  'PNP.DirectWire.extractSaturatedTerminalSupport_records',
+  'PNP.DirectWire.extractSaturatedTerminalSupport_semantics',
+  'PNP.DirectWire.extractTerminalSupport_boundary',
+  'PNP.DirectWire.extractTerminalSupport_gateCount',
+  'PNP.DirectWire.extractTerminalSupport_induced',
+  'PNP.DirectWire.extractTerminalSupport_interface',
+  'PNP.DirectWire.extractTerminalSupport_records',
+  'PNP.DirectWire.extractTerminalSupport_selectedGates',
+  'PNP.DirectWire.extractTerminalSupport_semantics',
   'PNP.DirectWire.mem_allTerminalPrimitiveRecords',
   'PNP.DirectWire.mem_allTerminalSaturationRuleKinds',
   'PNP.DirectWire.mem_allTerminalSupportWires',
   'PNP.DirectWire.mem_terminalBoundaryPorts_iff',
   'PNP.DirectWire.mem_terminalInterfacePorts_iff',
+  'PNP.DirectWire.mem_terminalSelectedGateIndices_iff',
+  'PNP.DirectWire.mem_terminalSelectedGates_iff',
   'PNP.DirectWire.nandCircuit_spec',
   'PNP.DirectWire.prefixAndDirect_referenceMinimum',
   'PNP.DirectWire.referenceMinimumImplementation_equivalent',
@@ -2169,6 +2182,10 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.terminalSaturateRecords_extensive',
   'PNP.DirectWire.terminalSaturateRecords_sound',
   'PNP.DirectWire.terminalSaturationEdge_eq_true_iff',
+  'PNP.DirectWire.terminalOpenGateEvaluation_induced_selected',
+  'PNP.DirectWire.terminalOpenSupportSemantics_induced',
+  'PNP.DirectWire.terminalSelectedGateIndices_nodup',
+  'PNP.DirectWire.terminalSelectedGates_nodup',
   'PNP.DirectWire.mem_terminalSaturateRecords_iff',
   'PNP.DirectWire.terminalize_gateCount',
   'PNP.DirectWire.terminalize_implementation',
@@ -2208,7 +2225,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-05-102') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-05-103') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -2485,7 +2502,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-05-102') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-05-103') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
