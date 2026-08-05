@@ -53,6 +53,7 @@ lean/PNP/ResidualTerminalExecutableSaturation.lean
 lean/PNP/ResidualTerminalPhysicalSupportCompletion.lean
 lean/PNP/ResidualTerminalSupportExtraction.lean
 lean/PNP/ResidualTerminalProperSupport.lean
+lean/PNP/ResidualTerminalSupportSquareClosure.lean
 lean/PNP/LockedNANDResidualGainBound.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
@@ -158,6 +159,7 @@ lean-audit/PNPResidualTerminalSaturationAxiomAudit.lean
 lean-audit/PNPResidualTerminalPhysicalSupportCompletionAxiomAudit.lean
 lean-audit/PNPResidualTerminalSupportExtractionAxiomAudit.lean
 lean-audit/PNPResidualTerminalProperSupportAxiomAudit.lean
+lean-audit/PNPResidualTerminalSupportSquareClosureAxiomAudit.lean
 lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean
 lean-audit/PNPLockedNANDDirectAxiomAudit.lean
 lean-audit/PNPDirectWireBaselineAxiomAudit.lean
@@ -1000,6 +1002,20 @@ and the exhaustive search has no polynomial-runtime claim. Full profile
 frontier derivation, governed completion, square legitimacy, the projection
 square, `SaturatePositive`, `BCELReady`, ZeroSlack, and PCCMin remain open. See
 `docs/lean_residual_terminal_proper_support.md`.
+
+`lean/PNP/ResidualTerminalSupportSquareClosure.lean` closes the algebraic and
+physical part of the report §3 saturated support-square closure edge. For every
+finite direct-wire candidate, explicit terminal dependency system, and pair of
+finite seeds, it computes closed left and right saturations, their canonical
+intersection meet, and the saturated-union join. The meet and join satisfy the
+exact greatest-lower-bound and least-upper-bound laws, all four corners are
+closed, and seed ordering or duplication does not change corner membership.
+Every corner has a computed compatible physical boundary and an exact open
+candidate with proved semantics and induced whole-circuit recovery. The
+dependency system is still explicit data. Frontier pushout, profile transport,
+projection compatibility, BN2 square legitimacy, `SaturatePositive`,
+`BCELReady`, ZeroSlack, PCCMin, and polynomial runtime remain open. See
+`docs/lean_residual_terminal_support_square_closure.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 
