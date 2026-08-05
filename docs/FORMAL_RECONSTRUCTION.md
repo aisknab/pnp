@@ -1152,6 +1152,22 @@ or the required projection square, establish `SaturatePositive`, or close any
 later global blocker. See
 [`lean_residual_terminal_support_extraction.md`](./lean_residual_terminal_support_extraction.md).
 
+`ResidualTerminalProperSupport` now reconstructs the next finite
+proper-positive search edge from legacy report §§2.2, 3, and 10. For every
+finite direct-wire candidate and explicit terminal dependency system, it
+enumerates every canonical primitive-record seed, performs executable
+saturation and extraction, and compares the extracted gate count with the
+exhaustive exact minimum for the same open function. Every returned support is
+nonempty, strictly smaller than the ambient gate carrier, closed, physically
+compatible, semantically exact, and equipped with an equivalent strictly
+smaller minimum replacement. The exact negative theorem proves that `none`
+means no governed canonical seed is both proper and positive. This is a finite
+reference computation rather than a polynomial algorithm. It does not derive
+the full manuscript profile frontier, prove governed completion or square
+legitimacy, construct the required projection square, or establish
+`SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin, or the root theorem. See
+[`lean_residual_terminal_proper_support.md`](./lean_residual_terminal_proper_support.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

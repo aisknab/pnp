@@ -52,6 +52,7 @@ lean/PNP/ResidualTerminalSaturation.lean
 lean/PNP/ResidualTerminalExecutableSaturation.lean
 lean/PNP/ResidualTerminalPhysicalSupportCompletion.lean
 lean/PNP/ResidualTerminalSupportExtraction.lean
+lean/PNP/ResidualTerminalProperSupport.lean
 lean/PNP/LockedNANDResidualGainBound.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
@@ -156,6 +157,7 @@ lean-audit/PNPResidualTerminalProjectionTransferAxiomAudit.lean
 lean-audit/PNPResidualTerminalSaturationAxiomAudit.lean
 lean-audit/PNPResidualTerminalPhysicalSupportCompletionAxiomAudit.lean
 lean-audit/PNPResidualTerminalSupportExtractionAxiomAudit.lean
+lean-audit/PNPResidualTerminalProperSupportAxiomAudit.lean
 lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean
 lean-audit/PNPLockedNANDDirectAxiomAudit.lean
 lean-audit/PNPDirectWireBaselineAxiomAudit.lean
@@ -984,6 +986,20 @@ recover original interface values on whole-circuit-induced boundaries. This
 still does not derive the profile frontier, proper positive support, square
 legitimacy, `SaturatePositive`, ZeroSlack, PCCMin, or polynomial runtime. See
 `docs/lean_residual_terminal_support_extraction.md`.
+
+`lean/PNP/ResidualTerminalProperSupport.lean` closes the next finite
+proper-positive search edge from report §§2.2, 3, and 10. It enumerates every
+canonical subset of the terminal primitive-record universe, saturates and
+extracts each seed, and computes exact local gain against the exhaustive
+minimum for the same open function. A proof-bearing result is nonempty,
+strictly smaller than the ambient gate carrier, dependency-closed, physically
+compatible, and equipped with an equivalent strictly smaller minimum
+replacement. Search failure is equivalent to absence of every governed
+proper-positive canonical seed. The explicit dependency system remains data,
+and the exhaustive search has no polynomial-runtime claim. Full profile
+frontier derivation, governed completion, square legitimacy, the projection
+square, `SaturatePositive`, `BCELReady`, ZeroSlack, and PCCMin remain open. See
+`docs/lean_residual_terminal_proper_support.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 

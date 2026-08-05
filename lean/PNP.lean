@@ -16,6 +16,7 @@ import PNP.ResidualTerminalSaturation
 import PNP.ResidualTerminalExecutableSaturation
 import PNP.ResidualTerminalPhysicalSupportCompletion
 import PNP.ResidualTerminalSupportExtraction
+import PNP.ResidualTerminalProperSupport
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine

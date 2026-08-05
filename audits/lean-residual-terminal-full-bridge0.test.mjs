@@ -236,6 +236,11 @@ test('status retains the direct-wire terminal full-mode bridge', async () => {
   assert.equal(status.leanResidualTerminalSaturationFormalized, true);
   for (const field of [
     'leanResidualTerminalProperSupportFormalized',
+    'leanResidualTerminalProperSupportSearchCompleteFormalized',
+    'leanResidualTerminalProperSupportExactLocalGainFormalized',
+    'leanResidualTerminalProperSupportAxiomAuditPassed',
+  ]) assert.equal(status[field], true, field);
+  for (const field of [
     'leanResidualRoutesGlobalGainCompletenessFormalized',
     'leanZeroSlackCompletenessFormalized',
     'leanPCCMinLoopExactnessFormalized',
