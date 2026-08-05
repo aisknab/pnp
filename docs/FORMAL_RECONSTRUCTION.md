@@ -1137,6 +1137,21 @@ completion, square legitimacy, the required projection square,
 ZeroSlack/PCCMin, polynomial runtime, and the root theorem remain open. See
 [`lean_residual_terminal_physical_support_completion.md`](./lean_residual_terminal_physical_support_completion.md).
 
+`ResidualTerminalSupportExtraction` now reconstructs the adjacent extraction
+edge from legacy report §2.2. For every finite direct-wire candidate and every
+finite, possibly noncontiguous terminal record list, it builds an actual
+direct-wire candidate over the computed incoming boundary and ordered outgoing
+interface. Selected predecessors are reindexed internally, unselected
+predecessors and primary inputs become exact boundary inputs, and constants
+remain local. Lean proves equality with an independent open-support evaluator
+for every boundary valuation, and proves recovery of original interface gate
+values when the boundary is induced by a whole-circuit execution. The result
+also composes with executable terminal saturation. It does not yet derive the
+profile frontier, construct a proper positive support, prove square legitimacy
+or the required projection square, establish `SaturatePositive`, or close any
+later global blocker. See
+[`lean_residual_terminal_support_extraction.md`](./lean_residual_terminal_support_extraction.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

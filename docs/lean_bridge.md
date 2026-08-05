@@ -51,6 +51,7 @@ lean/PNP/ResidualTerminalProjectionTransfer.lean
 lean/PNP/ResidualTerminalSaturation.lean
 lean/PNP/ResidualTerminalExecutableSaturation.lean
 lean/PNP/ResidualTerminalPhysicalSupportCompletion.lean
+lean/PNP/ResidualTerminalSupportExtraction.lean
 lean/PNP/LockedNANDResidualGainBound.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
@@ -154,6 +155,7 @@ lean-audit/PNPResidualTerminalProjectionMinimumAxiomAudit.lean
 lean-audit/PNPResidualTerminalProjectionTransferAxiomAudit.lean
 lean-audit/PNPResidualTerminalSaturationAxiomAudit.lean
 lean-audit/PNPResidualTerminalPhysicalSupportCompletionAxiomAudit.lean
+lean-audit/PNPResidualTerminalSupportExtractionAxiomAudit.lean
 lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean
 lean-audit/PNPLockedNANDDirectAxiomAudit.lean
 lean-audit/PNPDirectWireBaselineAxiomAudit.lean
@@ -970,6 +972,18 @@ still explicit rather than the manuscript profile frontier; proper positive
 support, square legitimacy, the required projection square,
 `SaturatePositive`, ZeroSlack, PCCMin, and polynomial runtime remain open. See
 `docs/lean_residual_terminal_physical_support_completion.md`.
+
+`lean/PNP/ResidualTerminalSupportExtraction.lean` closes the adjacent general
+extraction edge from report §2.2. It structurally scans every finite direct-wire
+program and extracts any canonically selected, possibly noncontiguous gate set
+over the exact incoming boundary and ordered outgoing interface. Constants and
+selected-to-selected wires stay local; primary inputs and unselected
+predecessors become boundary inputs. The extracted candidate is proved equal
+to an independent open-support semantics for every boundary valuation and to
+recover original interface values on whole-circuit-induced boundaries. This
+still does not derive the profile frontier, proper positive support, square
+legitimacy, `SaturatePositive`, ZeroSlack, PCCMin, or polynomial runtime. See
+`docs/lean_residual_terminal_support_extraction.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 
