@@ -1,0 +1,40 @@
+import PNP.ResidualTerminalProperSupport
+
+#print axioms PNP.DirectWire.allTerminalSupportSeeds
+#print axioms PNP.DirectWire.canonicalTerminalSupportSeed
+#print axioms PNP.DirectWire.canonicalTerminalSupportSeed_mem
+#print axioms PNP.DirectWire.mem_canonicalTerminalSupportSeed_iff
+#print axioms PNP.DirectWire.terminalSupportLocalGain
+#print axioms PNP.DirectWire.TerminalSupportProper
+#print axioms PNP.DirectWire.TerminalSupportPositive
+#print axioms PNP.DirectWire.terminalProperPositiveSupportBool
+#print axioms PNP.DirectWire.terminalProperPositiveSupportBool_eq_true_iff
+#print axioms PNP.DirectWire.TerminalProperPositiveSupport
+#print axioms PNP.DirectWire.findTerminalProperPositiveSupport
+#print axioms PNP.DirectWire.findTerminalProperPositiveSupport_sound
+#print axioms PNP.DirectWire.findTerminalProperPositiveSupport_exists_of_seed
+#print axioms PNP.DirectWire.findTerminalProperPositiveSupport_eq_none_iff
+#print axioms PNP.DirectWire.findTerminalProperPositiveSupport_unique
+#print axioms PNP.DirectWire.TerminalProperPositiveSupport.saturatedRecords
+#print axioms PNP.DirectWire.TerminalProperPositiveSupport.extractedSupport
+#print axioms PNP.DirectWire.TerminalProperPositiveSupport.saturatedRecords_closed
+#print axioms PNP.DirectWire.TerminalProperPositiveSupport.physically_compatible
+#print axioms PNP.DirectWire.TerminalProperPositiveSupport.gateCount_bounds
+#print axioms PNP.DirectWire.TerminalProperPositiveSupport.extracted_semantics
+#print axioms PNP.DirectWire.TerminalProperPositiveSupport.extracted_induced
+#print axioms PNP.DirectWire.TerminalProperPositiveSupport.minimumReplacement
+#print axioms PNP.DirectWire.TerminalProperPositiveSupport.minimumReplacement_equivalent
+#print axioms PNP.DirectWire.TerminalProperPositiveSupport.referenceMinimum_lt_gateCount
+#print axioms PNP.DirectWire.TerminalProperPositiveSupport.minimumReplacement_size_lt
+
+#print axioms PNP.DirectWire.allTerminalPrimitiveRecords
+#print axioms PNP.DirectWire.mem_allTerminalPrimitiveRecords
+#print axioms PNP.DirectWire.terminalSaturateRecords
+#print axioms PNP.DirectWire.terminalSaturateRecords_closed
+#print axioms PNP.DirectWire.mem_terminalSaturateRecords_iff
+#print axioms PNP.DirectWire.completeSaturatedTerminalPhysicalSupport_compatible
+#print axioms PNP.DirectWire.extractSaturatedTerminalSupport_gateCount
+#print axioms PNP.DirectWire.extractSaturatedTerminalSupport_semantics
+#print axioms PNP.DirectWire.extractSaturatedTerminalSupport_induced
+#print axioms PNP.DirectWire.Candidate.referenceMinimumReplacement_equivalent
+#print axioms PNP.DirectWire.Candidate.referenceMinimumReplacement_size

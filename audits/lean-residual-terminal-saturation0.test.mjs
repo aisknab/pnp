@@ -258,6 +258,11 @@ test('status earns only terminal saturation closure and preserves downstream blo
     'all-finite-terminal-primitive-record-universes-with-explicit-boolean-rule-tagged-dependencies');
   for (const field of [
     'leanResidualTerminalProperSupportFormalized',
+    'leanResidualTerminalProperSupportSearchCompleteFormalized',
+    'leanResidualTerminalProperSupportExactLocalGainFormalized',
+    'leanResidualTerminalProperSupportAxiomAuditPassed',
+  ]) assert.equal(status[field], true, field);
+  for (const field of [
     'leanResidualTerminalSupportCompletionFormalized',
     'leanResidualTerminalSquareLegitimacyFormalized',
     'leanResidualTerminalProjectionSquareFormalized',

@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-05-103';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-05-104';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -327,6 +327,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalSupportExtractionAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalSupportExtraction.lean',
   'node --test audits/lean-residual-terminal-support-extraction0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalProperSupportAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalProperSupport.lean',
+  'node --test audits/lean-residual-terminal-proper-support0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -439,6 +442,7 @@ const NON_CLAIMS = Object.freeze([
   'Terminal executable saturation is a deterministic finite work-list implementation whose output is proved exactly equivalent to the inductive closure for every finite primitive-record universe and finite seed. The dependency relation is still explicit input data rather than the manuscript profile frontier extracted from a circuit.',
   'Terminal physical support completion computes the canonical incoming boundary and outgoing interface of every selected gate set in the actual finite direct-wire program, excluding constants and internal wires, and proves exact no-omission/no-addition compatibility. It does not construct proper positive support, a legitimate projection square, SaturatePositive, ZeroSlack, a polynomial algorithm, or P = NP.',
   'This saturation theorem does not extract dependencies from an arbitrary circuit, construct proper support, prove support completion or square legitimacy, instantiate a projection-compatible square, prove SaturatePositive or BCELReady, generate a complete residual route, prove ZeroSlack or PCCMin, establish polynomial runtime, put SAT in P, or prove P = NP.',
+  'The terminal proper-positive support search is exhaustive only over the canonical finite primitive-record seed universe for a caller-supplied terminal dependency system. It computes exact reference-minimum local gain and returns a proof-bearing governed support when one exists in that universe; it does not derive the manuscript profile frontier, prove global gain completeness, construct a legitimate projection square, prove SaturatePositive or BCELReady, establish polynomial runtime, prove ZeroSlack or PCCMin, put SAT in P, or prove P = NP.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
   'The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.',
@@ -1265,7 +1269,12 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualProjectionTransferConstantCutFormalized: true,
   leanResidualProjectionTransferScope:
     'all-finite-direct-wire-four-corner-terminal-profile-families-sharing-one-computed-observer-and-one-explicit-projection',
-  leanResidualTerminalProperSupportFormalized: false,
+  leanResidualTerminalProperSupportFormalized: true,
+  leanResidualTerminalProperSupportSearchCompleteFormalized: true,
+  leanResidualTerminalProperSupportExactLocalGainFormalized: true,
+  leanResidualTerminalProperSupportAxiomAuditPassed: true,
+  leanResidualTerminalProperSupportScope:
+    'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-and-canonical-primitive-record-seeds-with-exhaustive-reference-minimum-local-gain',
   leanResidualTerminalSaturationFormalized: true,
   leanResidualTerminalSaturationAxiomAuditPassed: true,
   leanResidualTerminalPrimitiveUniverseFormalized: true,
@@ -1320,7 +1329,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-05-RESIDUAL-TERMINAL-SUPPORT-EXTRACTION-102',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-05-RESIDUAL-TERMINAL-PROPER-POSITIVE-SUPPORT-SEARCH-103',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -2127,7 +2136,12 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualProjectionTransferConstantCutFormalized: true,
       leanResidualProjectionTransferScope:
         'all-finite-direct-wire-four-corner-terminal-profile-families-sharing-one-computed-observer-and-one-explicit-projection',
-      leanResidualTerminalProperSupportFormalized: false,
+      leanResidualTerminalProperSupportFormalized: true,
+      leanResidualTerminalProperSupportSearchCompleteFormalized: true,
+      leanResidualTerminalProperSupportExactLocalGainFormalized: true,
+      leanResidualTerminalProperSupportAxiomAuditPassed: true,
+      leanResidualTerminalProperSupportScope:
+        'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-and-canonical-primitive-record-seeds-with-exhaustive-reference-minimum-local-gain',
       leanResidualTerminalSaturationFormalized: true,
       leanResidualTerminalSaturationAxiomAuditPassed: true,
       leanResidualTerminalPrimitiveUniverseFormalized: true,
@@ -2233,7 +2247,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-05-103',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-05-104',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

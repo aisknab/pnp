@@ -234,6 +234,11 @@ test('status retains the terminal quotient/full mode firewall beneath its earned
   assert.equal(status.leanResidualTerminalSaturationFormalized, true);
   for (const field of [
     'leanResidualTerminalProperSupportFormalized',
+    'leanResidualTerminalProperSupportSearchCompleteFormalized',
+    'leanResidualTerminalProperSupportExactLocalGainFormalized',
+    'leanResidualTerminalProperSupportAxiomAuditPassed',
+  ]) assert.equal(status[field], true, field);
+  for (const field of [
     'leanResidualRoutesGlobalGainCompletenessFormalized',
     'leanZeroSlackCompletenessFormalized',
     'leanPCCMinLoopExactnessFormalized',
