@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'ae76920ca1f242f3668ff2d0d7427252f4e9fffa48ba1e3d595b15c7506abfbc';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '24969820f0798b07a7bb8821d8773179165726f3212e4bb39a686543d25781a7';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -2099,6 +2099,7 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.LockedNANDTrace.trace_sound_of_predicate_true',
   'PNP.DirectWire.Candidate.referenceMinimumReplacement_equivalent',
   'PNP.DirectWire.Candidate.referenceMinimumReplacement_size',
+  'PNP.DirectWire.allTerminalSupportWires_nodup',
   'PNP.DirectWire.canonicalTerminalSupportSeed_mem',
   'PNP.DirectWire.completeSaturatedTerminalGovernedSupport_compatible',
   'PNP.DirectWire.completeSaturatedTerminalGovernedSupport_records',
@@ -2129,7 +2130,10 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.mem_allTerminalSaturationRuleKinds',
   'PNP.DirectWire.mem_allTerminalSupportWires',
   'PNP.DirectWire.mem_terminalBoundaryPorts_iff',
+  'PNP.DirectWire.mem_terminalBoundaryFrontierPushout_iff',
   'PNP.DirectWire.mem_terminalInterfacePorts_iff',
+  'PNP.DirectWire.mem_terminalInterfaceFrontierPushout_iff',
+  'PNP.DirectWire.mem_terminalProfileFrontierPushout_iff',
   'PNP.DirectWire.mem_canonicalTerminalSupportSeed_iff',
   'PNP.DirectWire.mem_terminalSelectedGateIndices_iff',
   'PNP.DirectWire.mem_terminalSelectedGates_iff',
@@ -2166,6 +2170,7 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.TerminalGovernedCompletedSupport.profileCoordinates_nodup',
   'PNP.DirectWire.TerminalGovernedCompletedSupport.required_mem',
   'PNP.DirectWire.TerminalGovernedCompletedSupport.required_profile_mem',
+  'PNP.DirectWire.TerminalGovernedFrontier.extensionality',
   'PNP.DirectWire.TerminalProjectionFourCorners.constantCutEquation_of_defects',
   'PNP.DirectWire.TerminalProjectionFourCorners.projectionExcess_pos_of_constantCut',
   'PNP.DirectWire.TerminalProjectionFourCorners.transferIdentity',
@@ -2177,12 +2182,19 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.strictGainChainBool_length_le_of_residualSlack_le',
   'PNP.DirectWire.strictGainChainBool_length_le_residualSlack',
   'PNP.DirectWire.terminalCheckedFullLift_iff_fullProfileEqual',
+  'PNP.DirectWire.terminalBoundaryFrontierPushout_nodup',
+  'PNP.DirectWire.terminalBoundaryWire_eq_true_iff',
   'PNP.DirectWire.terminalFullMinimum_eq_referenceMinimum',
   'PNP.DirectWire.terminalFullMinimum_spec',
   'PNP.DirectWire.terminalFullProfileMatchBool_complete',
   'PNP.DirectWire.terminalFullProfileMinimumRealization_gateCount',
   'PNP.DirectWire.terminalFullProfileMinimum_le',
   'PNP.DirectWire.terminalFullProfileMinimum_spec',
+  'PNP.DirectWire.terminalGateHasExternalConsumer_eq_true_iff',
+  'PNP.DirectWire.terminalGateSelected_eq_true_iff',
+  'PNP.DirectWire.terminalInterfaceFrontierPushout_nodup',
+  'PNP.DirectWire.terminalInterfaceGate_eq_true_iff',
+  'PNP.DirectWire.terminalProfileFrontierPushout_nodup',
   'PNP.DirectWire.terminalProfileCoordinatesForRole_nodup',
   'PNP.DirectWire.terminalProfileMinima_eq_of_keepsAll',
   'PNP.DirectWire.terminalProjectionDefect_eq_zero_iff_exists_checkedFullLiftAtMinimum',
@@ -2212,6 +2224,7 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.terminalOpenSupportSemantics_induced',
   'PNP.DirectWire.terminalSelectedGateIndices_nodup',
   'PNP.DirectWire.terminalSelectedGates_nodup',
+  'PNP.DirectWire.terminalWireExternal_eq_true_iff',
   'PNP.DirectWire.mem_terminalSaturateRecords_iff',
   'PNP.DirectWire.TerminalProperPositiveSupport.extracted_induced',
   'PNP.DirectWire.TerminalProperPositiveSupport.extracted_semantics',
@@ -2222,7 +2235,13 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.TerminalProperPositiveSupport.referenceMinimum_lt_gateCount',
   'PNP.DirectWire.TerminalProperPositiveSupport.saturatedRecords_closed',
   'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_compatible',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_join_boundary_eq_pushout',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_join_interface_eq_pushout',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_join_profile_eq_pushout',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_join_profile_iff',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_meet_profile_iff',
   'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_profile_iff',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.governed_frontier_pushout',
   'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_records',
   'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_required_mem',
   'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_required_profile_mem',
@@ -2233,6 +2252,7 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.TerminalSaturatedSupportSquare.joinRecords_least',
   'PNP.DirectWire.TerminalSaturatedSupportSquare.leftRecords_closed',
   'PNP.DirectWire.TerminalSaturatedSupportSquare.leftRecords_subset_join',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.left_boundary_disposition',
   'PNP.DirectWire.TerminalSaturatedSupportSquare.meetRecords_closed',
   'PNP.DirectWire.TerminalSaturatedSupportSquare.meetRecords_greatest',
   'PNP.DirectWire.TerminalSaturatedSupportSquare.meetRecords_subset_left',
@@ -2244,6 +2264,9 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.TerminalSaturatedSupportSquare.records_congr',
   'PNP.DirectWire.TerminalSaturatedSupportSquare.rightRecords_closed',
   'PNP.DirectWire.TerminalSaturatedSupportSquare.rightRecords_subset_join',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.right_boundary_disposition',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.side_interface_disposition',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.side_profile_mem_join',
   'PNP.DirectWire.terminalize_gateCount',
   'PNP.DirectWire.terminalize_implementation',
   'PNP.DirectWire.traceDirect_referenceMinimum',
@@ -2282,7 +2305,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-06-106') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-06-107') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -2559,7 +2582,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-06-106') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-06-107') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

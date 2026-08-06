@@ -1,0 +1,42 @@
+import PNP.ResidualTerminalFrontierPushout
+
+#print axioms PNP.DirectWire.TerminalFrontierDisposition
+#print axioms PNP.DirectWire.allTerminalSupportWires_nodup
+#print axioms PNP.DirectWire.terminalBoundaryFrontierPushout
+#print axioms PNP.DirectWire.terminalInterfaceFrontierPushout
+#print axioms PNP.DirectWire.terminalProfileFrontierPushout
+#print axioms PNP.DirectWire.terminalGovernedFrontierPushout
+#print axioms PNP.DirectWire.TerminalGovernedFrontier.extensionality
+#print axioms PNP.DirectWire.mem_terminalBoundaryFrontierPushout_iff
+#print axioms PNP.DirectWire.mem_terminalInterfaceFrontierPushout_iff
+#print axioms PNP.DirectWire.mem_terminalProfileFrontierPushout_iff
+#print axioms PNP.DirectWire.terminalBoundaryFrontierPushout_nodup
+#print axioms PNP.DirectWire.terminalInterfaceFrontierPushout_nodup
+#print axioms PNP.DirectWire.terminalProfileFrontierPushout_nodup
+#print axioms PNP.DirectWire.terminalBoundaryFrontierDisposition
+#print axioms PNP.DirectWire.terminalInterfaceFrontierDisposition
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_join_boundary_eq_pushout
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_join_interface_eq_pushout
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_meet_profile_iff
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_join_profile_iff
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_join_profile_eq_pushout
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.side_profile_mem_join
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.left_boundary_disposition
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.right_boundary_disposition
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.side_interface_disposition
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governed_frontier_pushout
+
+#print axioms PNP.DirectWire.mem_allTerminalSupportWires
+#print axioms PNP.DirectWire.mem_allFin
+#print axioms PNP.DirectWire.terminalGateSelected_eq_true_iff
+#print axioms PNP.DirectWire.terminalWireExternal_eq_true_iff
+#print axioms PNP.DirectWire.terminalBoundaryWire_eq_true_iff
+#print axioms PNP.DirectWire.terminalGateHasExternalConsumer_eq_true_iff
+#print axioms PNP.DirectWire.terminalInterfaceGate_eq_true_iff
+#print axioms PNP.DirectWire.mem_terminalBoundaryPorts_iff
+#print axioms PNP.DirectWire.mem_terminalInterfacePorts_iff
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.mem_meetRecords_iff
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.mem_joinRecords_iff
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.records_closed
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.physically_compatible
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_profile_iff

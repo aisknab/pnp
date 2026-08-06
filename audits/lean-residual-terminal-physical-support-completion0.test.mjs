@@ -47,6 +47,11 @@ const PHYSICAL_DECLARATIONS = Object.freeze([
   `${NAMESPACE}.terminalGateHasExternalConsumer`,
   `${NAMESPACE}.terminalGateIsGlobalOutput`,
   `${NAMESPACE}.terminalInterfaceGate`,
+  `${NAMESPACE}.terminalGateSelected_eq_true_iff`,
+  `${NAMESPACE}.terminalWireExternal_eq_true_iff`,
+  `${NAMESPACE}.terminalBoundaryWire_eq_true_iff`,
+  `${NAMESPACE}.terminalGateHasExternalConsumer_eq_true_iff`,
+  `${NAMESPACE}.terminalInterfaceGate_eq_true_iff`,
   `${NAMESPACE}.terminalBoundaryPorts`,
   `${NAMESPACE}.terminalInterfacePorts`,
   `${NAMESPACE}.mem_terminalBoundaryPorts_iff`,
@@ -309,10 +314,10 @@ test('physical completion derives exact ports from the actual candidate', async 
   assert.deepEqual(validatePhysical0(await text0(PHYSICAL_PATH)), []);
 });
 
-test('axiom transcript covers all 35 public declarations exactly once', async () => {
+test('axiom transcript covers all 40 public declarations exactly once', async () => {
   assert.deepEqual(printed0(await text0(AUDIT_PATH)), PUBLIC_DECLARATIONS);
-  assert.equal(new Set(PUBLIC_DECLARATIONS).size, 35);
-  assert.equal(PUBLIC_DECLARATIONS.length, 35);
+  assert.equal(new Set(PUBLIC_DECLARATIONS).size, 40);
+  assert.equal(PUBLIC_DECLARATIONS.length, 40);
   const root = await text0('lean/PNP.lean');
   assert.match(root, /^import PNP\.ResidualTerminalExecutableSaturation$/mu);
   assert.match(root, /^import PNP\.ResidualTerminalPhysicalSupportCompletion$/mu);
@@ -402,7 +407,7 @@ test('documentation records the manuscript anchor and the exact remaining bounda
 test('durable workflow runs transcript, regression, and hostile audit', async () => {
   const workflow = await text0('.github/workflows/lean-bridge.yml');
   assert.match(workflow, /audits\/lean-residual-terminal-physical-support-completion0\.test\.mjs/u);
-  assert.match(workflow, /PNPResidualTerminalPhysicalSupportCompletionAxiomAudit\.lean[\s\S]{0,1800}-eq 35/u);
+  assert.match(workflow, /PNPResidualTerminalPhysicalSupportCompletionAxiomAudit\.lean[\s\S]{0,1800}-eq 40/u);
   assert.match(workflow, /lean-regression\/PNPResidualTerminalPhysicalSupportCompletion\.lean/u);
 });
 

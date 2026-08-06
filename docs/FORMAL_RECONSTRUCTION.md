@@ -1196,6 +1196,19 @@ legitimacy, `SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin, polynomial
 runtime, or the root theorem. See
 [`lean_residual_terminal_governed_support_completion.md`](./lean_residual_terminal_governed_support_completion.md).
 
+`ResidualTerminalFrontierPushout` now reconstructs the legacy report §3
+equation `Front_{A∨B} = Front_A star_{Front_{A∧B}} Front_B` for every
+finite direct-wire candidate, explicit terminal dependency system, and
+computed saturated support square. The construction reads only the two side
+completions. Lean proves exact join-boundary, join-interface, and
+role-preserving join-profile gluing, exact meet-profile overlap, and witnessed
+retention or internalization of side physical coordinates. This closes the
+frontier-pushout dependency edge, but it does not establish projection
+compatibility, side-tight minima, BN2 square legitimacy, `SaturatePositive`,
+`BCELReady`, complete obstruction routing, ZeroSlack, PCCMin, polynomial
+runtime, or the root theorem. See
+[`lean_residual_terminal_frontier_pushout.md`](./lean_residual_terminal_frontier_pushout.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:
