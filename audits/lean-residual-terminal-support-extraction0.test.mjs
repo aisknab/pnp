@@ -336,7 +336,6 @@ test('status earns extraction while preserving every downstream blocker', async 
     'leanResidualTerminalProperSupportAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
   for (const field of [
-    'leanResidualTerminalSupportCompletionFormalized',
     'leanResidualTerminalSquareLegitimacyFormalized',
     'leanResidualTerminalProjectionSquareFormalized',
     'leanSaturatePositiveFormalized',

@@ -54,6 +54,7 @@ lean/PNP/ResidualTerminalPhysicalSupportCompletion.lean
 lean/PNP/ResidualTerminalSupportExtraction.lean
 lean/PNP/ResidualTerminalProperSupport.lean
 lean/PNP/ResidualTerminalSupportSquareClosure.lean
+lean/PNP/ResidualTerminalGovernedSupportCompletion.lean
 lean/PNP/LockedNANDResidualGainBound.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
@@ -160,6 +161,7 @@ lean-audit/PNPResidualTerminalPhysicalSupportCompletionAxiomAudit.lean
 lean-audit/PNPResidualTerminalSupportExtractionAxiomAudit.lean
 lean-audit/PNPResidualTerminalProperSupportAxiomAudit.lean
 lean-audit/PNPResidualTerminalSupportSquareClosureAxiomAudit.lean
+lean-audit/PNPResidualTerminalGovernedSupportCompletionAxiomAudit.lean
 lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean
 lean-audit/PNPLockedNANDDirectAxiomAudit.lean
 lean-audit/PNPDirectWireBaselineAxiomAudit.lean
@@ -1016,6 +1018,19 @@ dependency system is still explicit data. Frontier pushout, profile transport,
 projection compatibility, BN2 square legitimacy, `SaturatePositive`,
 `BCELReady`, ZeroSlack, PCCMin, and polynomial runtime remain open. See
 `docs/lean_residual_terminal_support_square_closure.md`.
+
+`lean/PNP/ResidualTerminalGovernedSupportCompletion.lean` closes the next
+bounded completed-support edge from report §§2 and 3. For every saturated
+support-square corner, it retains the exact closed record list and computes
+the physical boundary, ordered interface, and selected profile coordinates in
+each of the ten terminal profile roles. Lean proves exact profile membership,
+duplicate freedom, pairwise role disjointness, complete selected-record
+coverage, dependency closure, and physical compatibility. The dependency
+system remains explicit data. This does not prove the frontier pushout,
+projection compatibility, side-tight minima, BN2 square legitimacy,
+`SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin, polynomial runtime, or the
+root theorem. See
+`docs/lean_residual_terminal_governed_support_completion.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 

@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-06-105",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-06-106",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -724,7 +724,11 @@
   "leanResidualTerminalInducedRecoveryFormalized": true,
   "leanResidualTerminalSupportExtractionAxiomAuditPassed": true,
   "leanResidualTerminalSupportExtractionScope": "all-finite-direct-wire-candidates-terminal-record-lists-boundary-valuations-and-interface-coordinates",
-  "leanResidualTerminalSupportCompletionFormalized": false,
+  "leanResidualTerminalSupportCompletionFormalized": true,
+  "leanResidualTerminalGovernedSupportCompletionFormalized": true,
+  "leanResidualTerminalGovernedProfilePartitionFormalized": true,
+  "leanResidualTerminalGovernedSupportCompletionAxiomAuditPassed": true,
+  "leanResidualTerminalGovernedSupportCompletionScope": "all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-finite-seed-lists-and-saturated-support-square-corners",
   "leanResidualTerminalSquareLegitimacyFormalized": false,
   "leanResidualTerminalProjectionSquareFormalized": false,
   "leanSaturatePositiveFormalized": false,
@@ -755,7 +759,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-08-06-RESIDUAL-TERMINAL-SATURATED-SUPPORT-SQUARE-CLOSURE-104",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-08-06-RESIDUAL-TERMINAL-GOVERNED-SUPPORT-COMPLETION-105",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -1174,6 +1178,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalSupportSquareClosureAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalSupportSquareClosure.lean",
     "node --test audits/lean-residual-terminal-support-square-closure0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalGovernedSupportCompletionAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalGovernedSupportCompletion.lean",
+    "node --test audits/lean-residual-terminal-governed-support-completion0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1287,6 +1294,7 @@
     "This saturation theorem does not extract dependencies from an arbitrary circuit, construct proper support, prove support completion or square legitimacy, instantiate a projection-compatible square, prove SaturatePositive or BCELReady, generate a complete residual route, prove ZeroSlack or PCCMin, establish polynomial runtime, put SAT in P, or prove P = NP.",
     "The terminal proper-positive support search is exhaustive only over the canonical finite primitive-record seed universe for a caller-supplied terminal dependency system. It computes exact reference-minimum local gain and returns a proof-bearing governed support when one exists in that universe; it does not derive the manuscript profile frontier, prove global gain completeness, construct a legitimate projection square, prove SaturatePositive or BCELReady, establish polynomial runtime, prove ZeroSlack or PCCMin, put SAT in P, or prove P = NP.",
     "The terminal saturated support-square milestone computes the exact closed left, right, meet, and join record sets for every pair of finite seeds under one caller-supplied dependency system. It proves the meet and join laws, computed physical compatibility, and exact open-support extraction for every corner. It does not derive the manuscript profile frontier, route completion obstructions, prove the frontier pushout or projection compatibility, establish BN2 square legitimacy or SaturatePositive, prove polynomial runtime, put SAT in P, or prove P = NP.",
+    "Governed terminal support completion computes the physical boundary, ordered interface, and ten-role partition of every selected finite profile coordinate for saturated seeds and all four support-square corners. The dependency system remains explicit. It does not derive that system from an arbitrary circuit, prove the frontier pushout or projection compatibility, route every completion obstruction, establish BN2 square legitimacy or SaturatePositive, prove polynomial runtime, put SAT in P, or prove P = NP.",
     "External review is optional audit evidence and is not a mathematical premise or release blocker.",
     "Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.",
     "The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.",
@@ -1323,7 +1331,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "0e4bb045091e6b4c53181698b4c43f97f7cfe1c0081a8895e572d9035ff454dd",
+    "actualSourceClosureSha256": "b4be2de72b2909cd9e47f0748e061f03041fbecbac1360e5797e89fef18404f6",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1353,22 +1361,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-06-105",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-06-106",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "7712cae2dd53ef95a9ec7e10ea89ff29681101268a92c06d21a94be5efc02b32",
+  "leanTheoremInventorySha256": "38c53b1e3e80059332ff62f135ffebcf04d6b5e39e158f0f48965295894c6e8d",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 24337,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 14575,
-  "leanTheoremInventoryTheoremCount": 13104,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 6937,
-  "leanTheoremInventorySourceClosureModuleCount": 221,
-  "leanSourceClosureSha256": "0e4bb045091e6b4c53181698b4c43f97f7cfe1c0081a8895e572d9035ff454dd",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-06-105",
+  "leanTheoremInventoryDeclarationCount": 24405,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 14576,
+  "leanTheoremInventoryTheoremCount": 13134,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 6945,
+  "leanTheoremInventorySourceClosureModuleCount": 222,
+  "leanSourceClosureSha256": "b4be2de72b2909cd9e47f0748e061f03041fbecbac1360e5797e89fef18404f6",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-06-106",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "1ed4556de466e6a4d079bee37479c6ca3e2d9c7a26dcd256d2cb02fa8ca482c6",
+  "formalPublicationMapSha256": "3b27c4f934c3897bb71584846005e93a4816b63f4f8750a6884d18f1aedfe7ce",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -31943,6 +31951,339 @@
       "status": "formalized-terminal-saturated-support-square-closure"
     },
     {
+      "classification": "formalized-terminal-governed-support-completion",
+      "id": "residual-terminal-governed-support-completion",
+      "nonClaim": "The terminal dependency system remains explicit input rather than a profile frontier derived from the circuit. This milestone computes a governed finite completion of each saturated support-square corner, not the manuscript's obstruction routing, frontier pushout, projection-compatible square, side-tight four-corner minima, BN2 square legitimacy, SaturatePositive, Package E, BCEL/BN2-BN6, complete residual routing, ZeroSlack, PCCMin, polynomial runtime, SAT in P, removal of a project assumption, or P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.mem_allTerminalProfileRoles",
+        "PNP.DirectWire.mem_terminalProfileCoordinatesForRole_iff",
+        "PNP.DirectWire.terminalProfileCoordinatesForRole_nodup",
+        "PNP.DirectWire.completeTerminalGovernedSupport_records",
+        "PNP.DirectWire.TerminalGovernedCompletedSupport.frontier_boundary",
+        "PNP.DirectWire.TerminalGovernedCompletedSupport.frontier_interface",
+        "PNP.DirectWire.TerminalGovernedCompletedSupport.mem_profileCoordinates_iff",
+        "PNP.DirectWire.TerminalGovernedCompletedSupport.profileCoordinates_nodup",
+        "PNP.DirectWire.TerminalGovernedCompletedSupport.mem_own_profile_role_iff",
+        "PNP.DirectWire.TerminalGovernedCompletedSupport.profile_role_unique",
+        "PNP.DirectWire.TerminalGovernedCompletedSupport.profileCoordinates_disjoint",
+        "PNP.DirectWire.TerminalGovernedCompletedSupport.profile_record_covered_iff",
+        "PNP.DirectWire.TerminalGovernedCompletedSupport.required_mem",
+        "PNP.DirectWire.TerminalGovernedCompletedSupport.required_profile_mem",
+        "PNP.DirectWire.completeSaturatedTerminalGovernedSupport_records",
+        "PNP.DirectWire.completeSaturatedTerminalGovernedSupport_compatible",
+        "PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_records",
+        "PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_compatible",
+        "PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_profile_iff",
+        "PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_required_mem",
+        "PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_required_profile_mem",
+        "PNP.DirectWire.completeTerminalPhysicalSupport_compatible",
+        "PNP.DirectWire.terminalSaturateRecords_closed",
+        "PNP.DirectWire.mem_terminalSaturateRecords_iff",
+        "PNP.DirectWire.TerminalSaturatedSupportSquare.records_closed",
+        "PNP.DirectWire.TerminalSaturatedSupportSquare.physically_compatible"
+      ],
+      "scope": "For every finite direct-wire candidate, explicit terminal dependency system, finite seed list, and computed saturated support-square corner, Lean computes the exact physical boundary, ordered interface, and partition of selected profile coordinates among all ten terminal profile roles. It proves exact membership, no duplicates, pairwise disjointness, record coverage, dependency closure, physical compatibility, and retention of each exact corner.",
+      "title": "Governed terminal support completion",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.mem_allTerminalProfileRoles",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "95b57d90a6a83f87c9c36e1ec306cb05fc10870bbab4a206ac751e6f5c12ee0e",
+          "expectedKernelTypeSha256": "95b57d90a6a83f87c9c36e1ec306cb05fc10870bbab4a206ac751e6f5c12ee0e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.mem_terminalProfileCoordinatesForRole_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a6e7958f1f9227d3f0a83ea18c49f88fc81b1f06b16a30436b5f0c73c008dc4c",
+          "expectedKernelTypeSha256": "a6e7958f1f9227d3f0a83ea18c49f88fc81b1f06b16a30436b5f0c73c008dc4c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalProfileCoordinatesForRole_nodup",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a5c0d1eac8e390d94a274c75fe0b03b11379680654fea2948246c73ba52852ee",
+          "expectedKernelTypeSha256": "a5c0d1eac8e390d94a274c75fe0b03b11379680654fea2948246c73ba52852ee",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.completeTerminalGovernedSupport_records",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "fc56858cdef8cb222781fd1998b550ce993c72dc40f1994527dd22f1e61addf4",
+          "expectedKernelTypeSha256": "fc56858cdef8cb222781fd1998b550ce993c72dc40f1994527dd22f1e61addf4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalGovernedCompletedSupport.frontier_boundary",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e340ac8efd05f6760b8c8f18e88a5e80c53c81599e3876913898c167f2308b13",
+          "expectedKernelTypeSha256": "e340ac8efd05f6760b8c8f18e88a5e80c53c81599e3876913898c167f2308b13",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalGovernedCompletedSupport.frontier_interface",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d4415e5f4b90980b4170664d526e3c51eec5c6c9013e814e9f4529451fc23792",
+          "expectedKernelTypeSha256": "d4415e5f4b90980b4170664d526e3c51eec5c6c9013e814e9f4529451fc23792",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalGovernedCompletedSupport.mem_profileCoordinates_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "aff01078ce9ceea7e18afb1ca3c079fec1400eed49b73bb891d347e5883a0178",
+          "expectedKernelTypeSha256": "aff01078ce9ceea7e18afb1ca3c079fec1400eed49b73bb891d347e5883a0178",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalGovernedCompletedSupport.profileCoordinates_nodup",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f289e58b7c7eeda0ae808b7de5927e2b43f2e426642c45eac7077e2727589d7a",
+          "expectedKernelTypeSha256": "f289e58b7c7eeda0ae808b7de5927e2b43f2e426642c45eac7077e2727589d7a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalGovernedCompletedSupport.mem_own_profile_role_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ca2efaf1a8993528a20716d0d5b0440e45ed65cd53a39b023002d2c0e862e529",
+          "expectedKernelTypeSha256": "ca2efaf1a8993528a20716d0d5b0440e45ed65cd53a39b023002d2c0e862e529",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalGovernedCompletedSupport.profile_role_unique",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5b437c2f9018649967a5750b40149e52bf06b09ce9d681744cefbd3f722ad055",
+          "expectedKernelTypeSha256": "5b437c2f9018649967a5750b40149e52bf06b09ce9d681744cefbd3f722ad055",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalGovernedCompletedSupport.profileCoordinates_disjoint",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "55d53c267bcf9232db61b1b3b519cd2faf9b9d834e30996ab0cfa039c48535c9",
+          "expectedKernelTypeSha256": "55d53c267bcf9232db61b1b3b519cd2faf9b9d834e30996ab0cfa039c48535c9",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalGovernedCompletedSupport.profile_record_covered_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ca1b74c7b2a1845ece0b2bad47f9d7773c18fc67539bb477e576b4d155ef92bd",
+          "expectedKernelTypeSha256": "ca1b74c7b2a1845ece0b2bad47f9d7773c18fc67539bb477e576b4d155ef92bd",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalGovernedCompletedSupport.required_mem",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "6e9f933d9c34be75ad59d4d7cf8409352d0223c6693361d9d3c3c5b922b6213c",
+          "expectedKernelTypeSha256": "6e9f933d9c34be75ad59d4d7cf8409352d0223c6693361d9d3c3c5b922b6213c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalGovernedCompletedSupport.required_profile_mem",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "042278fe2f7807016f398ab5e580071f05241e4ecd431b2c23ca133e3852cb69",
+          "expectedKernelTypeSha256": "042278fe2f7807016f398ab5e580071f05241e4ecd431b2c23ca133e3852cb69",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.completeSaturatedTerminalGovernedSupport_records",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9c9d5dd949b1d8b43d815cadac92c5861dd9cd429a75f372a65ebe6c6c07d889",
+          "expectedKernelTypeSha256": "9c9d5dd949b1d8b43d815cadac92c5861dd9cd429a75f372a65ebe6c6c07d889",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.completeSaturatedTerminalGovernedSupport_compatible",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e535f50fdb9045d5e1e45ee4a0fb3490d10e2fe831b53095cb18edbcba3348e8",
+          "expectedKernelTypeSha256": "e535f50fdb9045d5e1e45ee4a0fb3490d10e2fe831b53095cb18edbcba3348e8",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_records",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4e804d18a19d04ab70775d69514903fb5e32f712a54eedf77d4fafe429f07236",
+          "expectedKernelTypeSha256": "4e804d18a19d04ab70775d69514903fb5e32f712a54eedf77d4fafe429f07236",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_compatible",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3d8b72bef8f77704e577cd3377720c41c0e035818fa7d598406e385d8fd05e5d",
+          "expectedKernelTypeSha256": "3d8b72bef8f77704e577cd3377720c41c0e035818fa7d598406e385d8fd05e5d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_profile_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9736ce34b616c8b00ac7ca4ba123c3c093dc464c1f07a7a0635b5b5bbe28a9dd",
+          "expectedKernelTypeSha256": "9736ce34b616c8b00ac7ca4ba123c3c093dc464c1f07a7a0635b5b5bbe28a9dd",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_required_mem",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "89af8357b78aece85e9130d05174823c0b21ac461e57e3decd86c3cc10f29b79",
+          "expectedKernelTypeSha256": "89af8357b78aece85e9130d05174823c0b21ac461e57e3decd86c3cc10f29b79",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_required_profile_mem",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "aba462df754b833c8351179b8f7ceb65c9493ef7e982e279451065239301043b",
+          "expectedKernelTypeSha256": "aba462df754b833c8351179b8f7ceb65c9493ef7e982e279451065239301043b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.completeTerminalPhysicalSupport_compatible",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "54f14acec8c40024eb7982e02373e24a80e864b0478a7815105f94362601b1fd",
+          "expectedKernelTypeSha256": "54f14acec8c40024eb7982e02373e24a80e864b0478a7815105f94362601b1fd",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalSaturateRecords_closed",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f1b4202a9fa0e8d76c6289201eac729860a7f4735c9700c4299f71e1f1792e6d",
+          "expectedKernelTypeSha256": "f1b4202a9fa0e8d76c6289201eac729860a7f4735c9700c4299f71e1f1792e6d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.mem_terminalSaturateRecords_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "055750aa6beee13c31f532a3f37f67c915a0f6a20ddac7d6f83e5058869db36b",
+          "expectedKernelTypeSha256": "055750aa6beee13c31f532a3f37f67c915a0f6a20ddac7d6f83e5058869db36b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalSaturatedSupportSquare.records_closed",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0fb6aed85d2c9d9f5ef89004077552853e3ffaec207f7c2884e033c73067df4f",
+          "expectedKernelTypeSha256": "0fb6aed85d2c9d9f5ef89004077552853e3ffaec207f7c2884e033c73067df4f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalSaturatedSupportSquare.physically_compatible",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "2a19ccf8594f3749b91d263b915e1d2156a90ad2681ca6ed527f124de4b564f3",
+          "expectedKernelTypeSha256": "2a19ccf8594f3749b91d263b915e1d2156a90ad2681ca6ed527f124de4b564f3",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-terminal-governed-support-completion"
+    },
+    {
       "classification": "not-formalized",
       "id": "global-locked-nand-threshold",
       "nonClaim": "The strict encoding, total source parser, literal target emitter, exact formula bytes, strict parser/emitter composition, polynomial runtime, output-size bound, recursive RawRefinement, concrete strict-v0 source-to-target PolynomialReduction, semantic CNF-to-NAND compiler, and its all-input finite-machine PolynomialReduction are now formalized. The concrete target language is still not linked to the report-level theorem, and the abstract threshold assumption remains.",
@@ -32037,7 +32378,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-06-105",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-06-106",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true
