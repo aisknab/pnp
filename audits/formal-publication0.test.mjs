@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 87);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 84);
+  assert.equal(status.formalPublicationMilestones.length, 88);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 85);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -1990,6 +1990,43 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   ]);
   assert.match(terminalFrontierPushout.scope, /computed saturated support square/u);
   assert.match(terminalFrontierPushout.nonClaim, /projection compatibility/u);
+  const terminalProjectionSquare = byId.get(
+    'residual-terminal-governed-projection-square',
+  );
+  assert.equal(terminalProjectionSquare.status,
+    'formalized-terminal-governed-projection-square');
+  assert.equal(terminalProjectionSquare.earned, true);
+  assert.equal(
+    terminalProjectionSquare.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.deepEqual(terminalProjectionSquare.requiredTheorems, [
+    'PNP.DirectWire.TerminalGovernedFrontier.project_boundary',
+    'PNP.DirectWire.TerminalGovernedFrontier.project_interface',
+    'PNP.DirectWire.TerminalGovernedFrontier.mem_project_profiles_iff',
+    'PNP.DirectWire.TerminalGovernedFrontier.project_profiles_nodup',
+    'PNP.DirectWire.TerminalGovernedFrontier.project_idempotent',
+    'PNP.DirectWire.mem_terminalProjectedGovernedFrontierPushout_profiles_iff',
+    'PNP.DirectWire.TerminalGovernedFrontier.project_pushout',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.projectedFrontier_boundary',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.projectedFrontier_interface',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.mem_projectedFrontier_profiles_iff',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.projectedFrontier_profiles_nodup',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.forgotten_not_mem_projectedFrontier',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.projected_meet_profile_iff',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.projected_join_profile_iff',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.projected_join_eq_pushout',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.governed_projection_compatible',
+    'PNP.DirectWire.TerminalGovernedFrontier.extensionality',
+    'PNP.DirectWire.mem_terminalProfileFrontierPushout_iff',
+    'PNP.DirectWire.terminalProfileFrontierPushout_nodup',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_profile_iff',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_meet_profile_iff',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_join_profile_iff',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.governed_frontier_pushout',
+  ]);
+  assert.match(terminalProjectionSquare.scope, /forgetful terminal projection/u);
+  assert.match(terminalProjectionSquare.nonClaim, /BN2 square legitimacy/u);
   for (const id of [
     'global-locked-nand-threshold',
     'global-zeroslack-pccmin',
@@ -2004,10 +2041,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '24969820f0798b07a7bb8821d8773179165726f3212e4bb39a686543d25781a7');
+    'ebfc3498be3d1d4b22c2a2389084869dda23f96a66bf9cf8ffa94aa58cab4d8f');
   assert.equal(map.milestoneSourceClosureSha256,
-    '4f08c63941db8fd92e7a33e8f16f698929247d968ae6fce45f4406f8e0aa02fb');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2263);
+    '54ced1d99c5c88c2580956e2b065101f45cbaef8c41de40f0996a3bf74ca0d3a');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2279);
   for (const theorem of [
     'PNP.DirectWire.LockedNANDTrace.carrierSeparation',
     'PNP.DirectWire.LockedNANDTrace.finalLock_fresh',
@@ -2329,7 +2366,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [24464, 13166, 6953, 14594, 223]);
+  ], [24485, 13183, 6956, 14594, 224]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

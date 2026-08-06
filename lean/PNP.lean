@@ -20,6 +20,7 @@ import PNP.ResidualTerminalProperSupport
 import PNP.ResidualTerminalSupportSquareClosure
 import PNP.ResidualTerminalGovernedSupportCompletion
 import PNP.ResidualTerminalFrontierPushout
+import PNP.ResidualTerminalProjectionSquare
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine

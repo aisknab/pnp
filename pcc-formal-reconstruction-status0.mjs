@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-06-107';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-06-108';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -338,6 +338,8 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'node --test audits/lean-residual-terminal-governed-support-completion0.test.mjs',
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFrontierPushoutAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFrontierPushout.lean',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalProjectionSquareAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalProjectionSquare.lean',
   'node --test audits/lean-residual-terminal-frontier-pushout0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
@@ -455,6 +457,7 @@ const NON_CLAIMS = Object.freeze([
   'The terminal saturated support-square milestone computes the exact closed left, right, meet, and join record sets for every pair of finite seeds under one caller-supplied dependency system. It proves the meet and join laws, computed physical compatibility, and exact open-support extraction for every corner. It does not derive the manuscript profile frontier, route completion obstructions, prove the frontier pushout or projection compatibility, establish BN2 square legitimacy or SaturatePositive, prove polynomial runtime, put SAT in P, or prove P = NP.',
   'Governed terminal support completion computes the physical boundary, ordered interface, and ten-role partition of every selected finite profile coordinate for saturated seeds and all four support-square corners. The dependency system remains explicit. It does not derive that system from an arbitrary circuit, prove the frontier pushout or projection compatibility, route every completion obstruction, establish BN2 square legitimacy or SaturatePositive, prove polynomial runtime, put SAT in P, or prove P = NP.',
   'Governed terminal frontier pushout proves the manuscript Section 3 gluing equation for every finite direct-wire candidate and computed saturated support square. Side boundary wires and interface producers are retained exactly when they remain external after union, otherwise their internalization is witnessed; meet profiles are the exact shared role coordinates and join profiles are their exact union. The dependency system remains explicit. This does not prove projection compatibility, BN2 square legitimacy, SaturatePositive, complete obstruction routing, polynomial runtime, SAT in P, or P = NP.',
+  'Governed terminal projection squares prove the manuscript Section 3 structural projection-commutation law for every finite direct-wire candidate, computed saturated support square, and explicit forgetful terminal projection. Physical frontiers are retained, each of the ten role profiles is filtered exactly, projected meet is side overlap, and projected join is the side-only projected pushout. The dependency system remains explicit. This does not prove side-tight four-corner minima, BN2 square legitimacy, SaturatePositive, complete obstruction routing, polynomial runtime, SAT in P, or P = NP.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
   'The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.',
@@ -1332,7 +1335,14 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalFrontierPushoutScope:
     'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-and-computed-saturated-support-squares',
   leanResidualTerminalSquareLegitimacyFormalized: false,
-  leanResidualTerminalProjectionSquareFormalized: false,
+  leanResidualTerminalProjectionSquareFormalized: true,
+  leanResidualTerminalProjectionPhysicalInvariantFormalized: true,
+  leanResidualTerminalProjectionProfileExactFormalized: true,
+  leanResidualTerminalProjectionMeetJoinCommuteFormalized: true,
+  leanResidualTerminalProjectionPushoutCommuteFormalized: true,
+  leanResidualTerminalProjectionSquareAxiomAuditPassed: true,
+  leanResidualTerminalProjectionSquareScope:
+    'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-computed-saturated-support-squares-and-forgetful-terminal-projections',
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
   leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -1361,7 +1371,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-06-RESIDUAL-TERMINAL-FRONTIER-PUSHOUT-106',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-06-RESIDUAL-TERMINAL-PROJECTION-SQUARE-107',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -2219,7 +2229,14 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalFrontierPushoutScope:
         'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-and-computed-saturated-support-squares',
       leanResidualTerminalSquareLegitimacyFormalized: false,
-      leanResidualTerminalProjectionSquareFormalized: false,
+      leanResidualTerminalProjectionSquareFormalized: true,
+      leanResidualTerminalProjectionPhysicalInvariantFormalized: true,
+      leanResidualTerminalProjectionProfileExactFormalized: true,
+      leanResidualTerminalProjectionMeetJoinCommuteFormalized: true,
+      leanResidualTerminalProjectionPushoutCommuteFormalized: true,
+      leanResidualTerminalProjectionSquareAxiomAuditPassed: true,
+      leanResidualTerminalProjectionSquareScope:
+        'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-computed-saturated-support-squares-and-forgetful-terminal-projections',
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
       leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2299,7 +2316,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-06-107',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-06-108',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

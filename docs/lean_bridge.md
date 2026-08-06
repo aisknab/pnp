@@ -56,6 +56,7 @@ lean/PNP/ResidualTerminalProperSupport.lean
 lean/PNP/ResidualTerminalSupportSquareClosure.lean
 lean/PNP/ResidualTerminalGovernedSupportCompletion.lean
 lean/PNP/ResidualTerminalFrontierPushout.lean
+lean/PNP/ResidualTerminalProjectionSquare.lean
 lean/PNP/LockedNANDResidualGainBound.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
@@ -164,6 +165,7 @@ lean-audit/PNPResidualTerminalProperSupportAxiomAudit.lean
 lean-audit/PNPResidualTerminalSupportSquareClosureAxiomAudit.lean
 lean-audit/PNPResidualTerminalGovernedSupportCompletionAxiomAudit.lean
 lean-audit/PNPResidualTerminalFrontierPushoutAxiomAudit.lean
+lean-audit/PNPResidualTerminalProjectionSquareAxiomAudit.lean
 lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean
 lean-audit/PNPLockedNANDDirectAxiomAudit.lean
 lean-audit/PNPDirectWireBaselineAxiomAudit.lean
@@ -1046,6 +1048,17 @@ does not prove projection compatibility, side-tight minima, BN2 square
 legitimacy, `SaturatePositive`, `BCELReady`, obstruction routing, ZeroSlack,
 PCCMin, polynomial runtime, or the root theorem. See
 `docs/lean_residual_terminal_frontier_pushout.md`.
+
+`lean/PNP/ResidualTerminalProjectionSquare.lean` closes the next report §3
+structural projection-commutation edge. For every finite computed saturated
+support square and every explicit forgetful terminal projection, it retains
+the exact physical boundary and interface, filters each profile role exactly,
+proves projected meet is the shared side profile, and proves projected join is
+the side-only projected frontier pushout. The terminal dependency system
+remains explicit data. This does not prove side-tight four-corner minima, BN2
+square legitimacy, `SaturatePositive`, `BCELReady`, obstruction routing,
+ZeroSlack, PCCMin, polynomial runtime, or the root theorem. See
+`docs/lean_residual_terminal_projection_square.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 
