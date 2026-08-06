@@ -18,6 +18,7 @@ import PNP.ResidualTerminalPhysicalSupportCompletion
 import PNP.ResidualTerminalSupportExtraction
 import PNP.ResidualTerminalProperSupport
 import PNP.ResidualTerminalSupportSquareClosure
+import PNP.ResidualTerminalGovernedSupportCompletion
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine

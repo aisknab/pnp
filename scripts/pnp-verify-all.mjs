@@ -114,6 +114,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-residual-terminal-support-extraction0.test.mjs',
   'audits/lean-residual-terminal-proper-support0.test.mjs',
   'audits/lean-residual-terminal-support-square-closure0.test.mjs',
+  'audits/lean-residual-terminal-governed-support-completion0.test.mjs',
   'audits/legacy-v0-archive0.test.mjs',
   'test/current-package-surface0.test.mjs',
   'test/current-verifier0.test.mjs',

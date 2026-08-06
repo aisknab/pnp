@@ -1,0 +1,45 @@
+import PNP.ResidualTerminalGovernedSupportCompletion
+
+#print axioms PNP.DirectWire.allTerminalProfileRoles
+#print axioms PNP.DirectWire.mem_allTerminalProfileRoles
+#print axioms PNP.DirectWire.terminalProfileCoordinatesForRole
+#print axioms PNP.DirectWire.mem_terminalProfileCoordinatesForRole_iff
+#print axioms PNP.DirectWire.terminalProfileCoordinatesForRole_nodup
+#print axioms PNP.DirectWire.TerminalGovernedFrontier
+#print axioms PNP.DirectWire.TerminalGovernedCompletedSupport
+#print axioms PNP.DirectWire.completeTerminalGovernedSupport
+#print axioms PNP.DirectWire.TerminalGovernedCompletedSupport.physical
+#print axioms PNP.DirectWire.TerminalGovernedCompletedSupport.profileCoordinates
+#print axioms PNP.DirectWire.TerminalGovernedCompletedSupport.frontier
+#print axioms PNP.DirectWire.TerminalGovernedCompletedSupport.Governed
+#print axioms PNP.DirectWire.TerminalGovernedCompletedSupport.Compatible
+#print axioms PNP.DirectWire.completeTerminalGovernedSupport_records
+#print axioms PNP.DirectWire.TerminalGovernedCompletedSupport.frontier_boundary
+#print axioms PNP.DirectWire.TerminalGovernedCompletedSupport.frontier_interface
+#print axioms PNP.DirectWire.TerminalGovernedCompletedSupport.mem_profileCoordinates_iff
+#print axioms PNP.DirectWire.TerminalGovernedCompletedSupport.profileCoordinates_nodup
+#print axioms PNP.DirectWire.TerminalGovernedCompletedSupport.mem_own_profile_role_iff
+#print axioms PNP.DirectWire.TerminalGovernedCompletedSupport.profile_role_unique
+#print axioms PNP.DirectWire.TerminalGovernedCompletedSupport.profileCoordinates_disjoint
+#print axioms PNP.DirectWire.TerminalGovernedCompletedSupport.profile_record_covered_iff
+#print axioms PNP.DirectWire.TerminalGovernedCompletedSupport.required_mem
+#print axioms PNP.DirectWire.TerminalGovernedCompletedSupport.required_profile_mem
+#print axioms PNP.DirectWire.completeSaturatedTerminalGovernedSupport
+#print axioms PNP.DirectWire.completeSaturatedTerminalGovernedSupport_records
+#print axioms PNP.DirectWire.completeSaturatedTerminalGovernedSupport_compatible
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_records
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_compatible
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_profile_iff
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_required_mem
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_required_profile_mem
+
+#print axioms PNP.DirectWire.allFin_noDuplicates
+#print axioms PNP.DirectWire.mem_allFin
+#print axioms PNP.DirectWire.completeTerminalPhysicalSupport
+#print axioms PNP.DirectWire.completeTerminalPhysicalSupport_compatible
+#print axioms PNP.DirectWire.terminalSaturateRecords
+#print axioms PNP.DirectWire.terminalSaturateRecords_closed
+#print axioms PNP.DirectWire.mem_terminalSaturateRecords_iff
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.records_closed
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.physically_compatible

@@ -263,7 +263,6 @@ test('status earns only terminal saturation closure and preserves downstream blo
     'leanResidualTerminalProperSupportAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
   for (const field of [
-    'leanResidualTerminalSupportCompletionFormalized',
     'leanResidualTerminalSquareLegitimacyFormalized',
     'leanResidualTerminalProjectionSquareFormalized',
     'leanSaturatePositiveFormalized',

@@ -1182,6 +1182,20 @@ compatibility, side-tight minima, BN2 square legitimacy, `SaturatePositive`,
 `BCELReady`, ZeroSlack, PCCMin, polynomial runtime, or the root theorem. See
 [`lean_residual_terminal_support_square_closure.md`](./lean_residual_terminal_support_square_closure.md).
 
+`ResidualTerminalGovernedSupportCompletion` now reconstructs the next bounded
+completed-support edge from legacy report §§2 and 3. For every finite
+direct-wire candidate, explicit terminal dependency system, finite seed list,
+and saturated support-square corner, it retains the exact closed records and
+computes the physical boundary, ordered interface, and selected profile
+coordinates in all ten terminal profile roles. Lean proves exact membership,
+duplicate freedom, pairwise role disjointness, complete selected-record
+coverage, dependency closure, and physical compatibility. The dependency
+system remains explicit caller data. This does not establish the frontier
+pushout, projection-compatible square, side-tight minima, BN2 square
+legitimacy, `SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin, polynomial
+runtime, or the root theorem. See
+[`lean_residual_terminal_governed_support_completion.md`](./lean_residual_terminal_governed_support_completion.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

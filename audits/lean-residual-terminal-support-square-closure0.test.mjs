@@ -365,7 +365,6 @@ test('status earns only the bounded support-square closure', async () => {
     'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-and-pairs-of-finite-terminal-seeds',
   );
   for (const field of [
-    'leanResidualTerminalSupportCompletionFormalized',
     'leanResidualTerminalSquareLegitimacyFormalized',
     'leanResidualTerminalProjectionSquareFormalized',
     'leanSaturatePositiveFormalized',
