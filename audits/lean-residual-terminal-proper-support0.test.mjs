@@ -316,7 +316,6 @@ test('status earns only governed proper-positive support search', async () => {
   );
   for (const field of [
     'leanResidualTerminalSquareLegitimacyFormalized',
-    'leanResidualTerminalProjectionSquareFormalized',
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
     'leanResidualRoutesGlobalGainCompletenessFormalized',

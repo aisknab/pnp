@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '24969820f0798b07a7bb8821d8773179165726f3212e4bb39a686543d25781a7';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'ebfc3498be3d1d4b22c2a2389084869dda23f96a66bf9cf8ffa94aa58cab4d8f';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -2134,6 +2134,7 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.mem_terminalInterfacePorts_iff',
   'PNP.DirectWire.mem_terminalInterfaceFrontierPushout_iff',
   'PNP.DirectWire.mem_terminalProfileFrontierPushout_iff',
+  'PNP.DirectWire.mem_terminalProjectedGovernedFrontierPushout_profiles_iff',
   'PNP.DirectWire.mem_canonicalTerminalSupportSeed_iff',
   'PNP.DirectWire.mem_terminalSelectedGateIndices_iff',
   'PNP.DirectWire.mem_terminalSelectedGates_iff',
@@ -2171,6 +2172,12 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.TerminalGovernedCompletedSupport.required_mem',
   'PNP.DirectWire.TerminalGovernedCompletedSupport.required_profile_mem',
   'PNP.DirectWire.TerminalGovernedFrontier.extensionality',
+  'PNP.DirectWire.TerminalGovernedFrontier.mem_project_profiles_iff',
+  'PNP.DirectWire.TerminalGovernedFrontier.project_boundary',
+  'PNP.DirectWire.TerminalGovernedFrontier.project_idempotent',
+  'PNP.DirectWire.TerminalGovernedFrontier.project_interface',
+  'PNP.DirectWire.TerminalGovernedFrontier.project_profiles_nodup',
+  'PNP.DirectWire.TerminalGovernedFrontier.project_pushout',
   'PNP.DirectWire.TerminalProjectionFourCorners.constantCutEquation_of_defects',
   'PNP.DirectWire.TerminalProjectionFourCorners.projectionExcess_pos_of_constantCut',
   'PNP.DirectWire.TerminalProjectionFourCorners.transferIdentity',
@@ -2242,6 +2249,15 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_meet_profile_iff',
   'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_profile_iff',
   'PNP.DirectWire.TerminalSaturatedSupportSquare.governed_frontier_pushout',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.forgotten_not_mem_projectedFrontier',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.governed_projection_compatible',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.mem_projectedFrontier_profiles_iff',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.projectedFrontier_boundary',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.projectedFrontier_interface',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.projectedFrontier_profiles_nodup',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.projected_join_eq_pushout',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.projected_join_profile_iff',
+  'PNP.DirectWire.TerminalSaturatedSupportSquare.projected_meet_profile_iff',
   'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_records',
   'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_required_mem',
   'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_required_profile_mem',
@@ -2305,7 +2321,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-06-107') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-06-108') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -2582,7 +2598,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-06-107') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-06-108') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

@@ -1,0 +1,36 @@
+import PNP.ResidualTerminalProjectionSquare
+
+#print axioms PNP.DirectWire.TerminalGovernedFrontier.project
+#print axioms PNP.DirectWire.TerminalGovernedFrontier.project_boundary
+#print axioms PNP.DirectWire.TerminalGovernedFrontier.project_interface
+#print axioms PNP.DirectWire.TerminalGovernedFrontier.mem_project_profiles_iff
+#print axioms PNP.DirectWire.TerminalGovernedFrontier.project_profiles_nodup
+#print axioms PNP.DirectWire.TerminalGovernedFrontier.project_idempotent
+#print axioms PNP.DirectWire.terminalProjectedGovernedFrontierPushout
+#print axioms PNP.DirectWire.mem_terminalProjectedGovernedFrontierPushout_profiles_iff
+#print axioms PNP.DirectWire.TerminalGovernedFrontier.project_pushout
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.projectedFrontier
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.projectedFrontier_boundary
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.projectedFrontier_interface
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.mem_projectedFrontier_profiles_iff
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.projectedFrontier_profiles_nodup
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.forgotten_not_mem_projectedFrontier
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.projected_meet_profile_iff
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.projected_join_profile_iff
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.projected_join_eq_pushout
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.ProjectionCompatible
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governed_projection_compatible
+
+#print axioms PNP.DirectWire.TerminalProfileProjection.Keeps
+#print axioms PNP.DirectWire.TerminalProfileProjection.Forgets
+#print axioms PNP.DirectWire.TerminalGovernedFrontier.extensionality
+#print axioms PNP.DirectWire.terminalBoundaryFrontierPushout
+#print axioms PNP.DirectWire.terminalInterfaceFrontierPushout
+#print axioms PNP.DirectWire.terminalProfileFrontierPushout
+#print axioms PNP.DirectWire.terminalGovernedFrontierPushout
+#print axioms PNP.DirectWire.mem_terminalProfileFrontierPushout_iff
+#print axioms PNP.DirectWire.TerminalGovernedCompletedSupport.profileCoordinates_nodup
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_profile_iff
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_meet_profile_iff
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_join_profile_iff
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governed_frontier_pushout

@@ -1209,6 +1209,19 @@ compatibility, side-tight minima, BN2 square legitimacy, `SaturatePositive`,
 runtime, or the root theorem. See
 [`lean_residual_terminal_frontier_pushout.md`](./lean_residual_terminal_frontier_pushout.md).
 
+`ResidualTerminalProjectionSquare` now reconstructs the next legacy report §3
+projection-commutation edge. For every finite direct-wire candidate, explicit
+terminal dependency system, computed saturated support square, and forgetful
+terminal projection, it preserves every physical boundary and interface,
+filters each of the ten profile roles exactly, and proves that projected meet
+is side overlap while projected join is the side-only projected pushout. The
+pushout construction does not read the join corner. This closes the structural
+projection-square dependency edge, but it does not establish side-tight
+four-corner minima, BN2 square legitimacy, `SaturatePositive`, `BCELReady`,
+complete obstruction routing, ZeroSlack, PCCMin, polynomial runtime, or the
+root theorem. See
+[`lean_residual_terminal_projection_square.md`](./lean_residual_terminal_projection_square.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

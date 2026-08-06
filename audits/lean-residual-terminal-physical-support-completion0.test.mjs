@@ -375,7 +375,6 @@ test('status earns only executable physical completion and preserves open blocke
   ]) assert.equal(status[field], true, field);
   for (const field of [
     'leanResidualTerminalSquareLegitimacyFormalized',
-    'leanResidualTerminalProjectionSquareFormalized',
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
     'leanResidualRoutesGlobalGainCompletenessFormalized',
