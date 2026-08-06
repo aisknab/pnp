@@ -175,6 +175,110 @@ def terminalInterfaceGate
     (terminalGateHasExternalConsumer candidate.program records producer ||
       terminalGateIsGlobalOutput candidate.directWireWord producer)
 
+/-- A gate is selected exactly when its primitive gate record occurs in the
+    supplied terminal record list. -/
+theorem terminalGateSelected_eq_true_iff
+    {inputs gates outputs profileWidth : Nat}
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (gate : Fin gates) :
+    terminalGateSelected records gate = true ↔
+      TerminalPrimitiveRecord.gate gate ∈ records := by
+  unfold terminalGateSelected
+  constructor
+  · exact of_decide_eq_true
+  · exact decide_eq_true
+
+/-- Exact semantic form of the physical external-wire predicate. -/
+theorem terminalWireExternal_eq_true_iff
+    {inputs gates outputs profileWidth : Nat}
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (wire : TerminalSupportWire inputs gates) :
+    terminalWireExternal records wire = true ↔
+      match wire with
+      | .input _index => True
+      | .gate gate => terminalGateSelected records gate = false := by
+  cases wire with
+  | input index =>
+      constructor <;> intro _checked
+      · trivial
+      · rfl
+  | gate gate =>
+      change (!terminalGateSelected records gate) = true ↔
+        terminalGateSelected records gate = false
+      cases selected : terminalGateSelected records gate with
+      | false =>
+          constructor <;> intro _checked <;> rfl
+      | true =>
+          constructor
+          · intro impossible
+            exact Bool.noConfusion impossible
+          · intro impossible
+            exact Bool.noConfusion impossible
+
+/-- Exact witness form of the incoming-boundary predicate. -/
+theorem terminalBoundaryWire_eq_true_iff
+    {inputs gates outputs profileWidth : Nat}
+    (program : Program inputs gates)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (wire : TerminalSupportWire inputs gates) :
+    terminalBoundaryWire program records wire = true ↔
+      terminalWireExternal records wire = true ∧
+        ∃ consumer, consumer ∈ allFin gates ∧
+          terminalGateSelected records consumer = true ∧
+            program.terminalGateUsesWire consumer wire = true := by
+  simp only [terminalBoundaryWire, Bool.and_eq_true,
+    physicalTerminalAny_true_iff]
+
+/-- Exact witness form of an external consumer of a selected producer. -/
+theorem terminalGateHasExternalConsumer_eq_true_iff
+    {inputs gates outputs profileWidth : Nat}
+    (program : Program inputs gates)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (producer : Fin gates) :
+    terminalGateHasExternalConsumer program records producer = true ↔
+      ∃ consumer, consumer ∈ allFin gates ∧
+        terminalGateSelected records consumer = false ∧
+          program.terminalGateUsesWire consumer (.gate producer) = true := by
+  constructor
+  · intro checked
+    obtain ⟨consumer, consumerMember, both⟩ :=
+      (physicalTerminalAny_true_iff (allFin gates) (fun consumer =>
+        !(terminalGateSelected records consumer) &&
+          program.terminalGateUsesWire consumer (.gate producer))).1 checked
+    have split :
+        (!terminalGateSelected records consumer) = true ∧
+          program.terminalGateUsesWire consumer (.gate producer) = true := by
+      simpa only [Bool.and_eq_true] using both
+    have selectedFalse : terminalGateSelected records consumer = false := by
+      cases selected : terminalGateSelected records consumer with
+      | false => rfl
+      | true =>
+          rw [selected] at split
+          exact Bool.noConfusion split.1
+    exact ⟨consumer, consumerMember, selectedFalse, split.2⟩
+  · rintro ⟨consumer, consumerMember, selectedFalse, uses⟩
+    apply (physicalTerminalAny_true_iff (allFin gates) (fun consumer =>
+      !(terminalGateSelected records consumer) &&
+        program.terminalGateUsesWire consumer (.gate producer))).2
+    refine ⟨consumer, consumerMember, ?_⟩
+    simp only [Bool.and_eq_true]
+    constructor
+    · rw [selectedFalse]
+      rfl
+    · exact uses
+
+/-- Exact semantic form of the outgoing-interface predicate. -/
+theorem terminalInterfaceGate_eq_true_iff
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (producer : Fin gates) :
+    terminalInterfaceGate candidate records producer = true ↔
+      terminalGateSelected records producer = true ∧
+        (terminalGateHasExternalConsumer candidate.program records producer = true ∨
+          terminalGateIsGlobalOutput candidate.directWireWord producer = true) := by
+  simp only [terminalInterfaceGate, Bool.and_eq_true, Bool.or_eq_true]
+
 /-- Canonically ordered incoming physical ports. -/
 def terminalBoundaryPorts
     {inputs gates outputs profileWidth : Nat}

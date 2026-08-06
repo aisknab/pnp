@@ -55,6 +55,7 @@ lean/PNP/ResidualTerminalSupportExtraction.lean
 lean/PNP/ResidualTerminalProperSupport.lean
 lean/PNP/ResidualTerminalSupportSquareClosure.lean
 lean/PNP/ResidualTerminalGovernedSupportCompletion.lean
+lean/PNP/ResidualTerminalFrontierPushout.lean
 lean/PNP/LockedNANDResidualGainBound.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
@@ -162,6 +163,7 @@ lean-audit/PNPResidualTerminalSupportExtractionAxiomAudit.lean
 lean-audit/PNPResidualTerminalProperSupportAxiomAudit.lean
 lean-audit/PNPResidualTerminalSupportSquareClosureAxiomAudit.lean
 lean-audit/PNPResidualTerminalGovernedSupportCompletionAxiomAudit.lean
+lean-audit/PNPResidualTerminalFrontierPushoutAxiomAudit.lean
 lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean
 lean-audit/PNPLockedNANDDirectAxiomAudit.lean
 lean-audit/PNPDirectWireBaselineAxiomAudit.lean
@@ -1031,6 +1033,19 @@ projection compatibility, side-tight minima, BN2 square legitimacy,
 `SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin, polynomial runtime, or the
 root theorem. See
 `docs/lean_residual_terminal_governed_support_completion.md`.
+
+`lean/PNP/ResidualTerminalFrontierPushout.lean` closes the report §3
+governed frontier-gluing edge. For every finite direct-wire candidate and
+computed saturated support square, it constructs the boundary, interface, and
+role-preserving profile gluing from the two side completions alone. Lean proves
+that the independently computed join frontier equals this pushout, that the
+meet profiles are exactly the shared side coordinates, and that physical
+coordinates which disappear are genuinely internalized by the opposite side
+or by the combined support. The dependency system remains explicit data. This
+does not prove projection compatibility, side-tight minima, BN2 square
+legitimacy, `SaturatePositive`, `BCELReady`, obstruction routing, ZeroSlack,
+PCCMin, polynomial runtime, or the root theorem. See
+`docs/lean_residual_terminal_frontier_pushout.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 

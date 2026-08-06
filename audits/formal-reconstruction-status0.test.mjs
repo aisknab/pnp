@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-06-106');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-06-107');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -824,6 +824,12 @@ test('formal reconstruction status accepts the current source and public mirrors
     'leanResidualTerminalGovernedSupportCompletionFormalized',
     'leanResidualTerminalGovernedProfilePartitionFormalized',
     'leanResidualTerminalGovernedSupportCompletionAxiomAuditPassed',
+    'leanResidualTerminalFrontierPushoutFormalized',
+    'leanResidualTerminalFrontierBoundaryGlueExactFormalized',
+    'leanResidualTerminalFrontierInterfaceGlueExactFormalized',
+    'leanResidualTerminalFrontierProfileGlueExactFormalized',
+    'leanResidualTerminalFrontierInternalizationFormalized',
+    'leanResidualTerminalFrontierPushoutAxiomAuditPassed',
   ]) assert.equal(out[field], true, field);
   assert.equal(
     out.leanResidualTerminalPhysicalSupportCompletionScope,
@@ -844,6 +850,10 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(
     out.leanResidualTerminalGovernedSupportCompletionScope,
     'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-finite-seed-lists-and-saturated-support-square-corners',
+  );
+  assert.equal(
+    out.leanResidualTerminalFrontierPushoutScope,
+    'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-and-computed-saturated-support-squares',
   );
   for (const field of [
     'leanResidualTerminalSquareLegitimacyFormalized',
@@ -882,13 +892,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 24405);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 13134);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 6945);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14576);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 222);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 24464);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 13166);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 6953);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14594);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 223);
   assert.equal(status.leanSourceClosureSha256,
-    'b4be2de72b2909cd9e47f0748e061f03041fbecbac1360e5797e89fef18404f6');
+    '4f08c63941db8fd92e7a33e8f16f698929247d968ae6fce45f4406f8e0aa02fb');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -1310,7 +1320,7 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-06-RESIDUAL-TERMINAL-GOVERNED-SUPPORT-COMPLETION-105');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-06-RESIDUAL-TERMINAL-FRONTIER-PUSHOUT-106');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
@@ -1614,6 +1624,12 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
     'leanResidualTerminalGovernedSupportCompletionFormalized',
     'leanResidualTerminalGovernedProfilePartitionFormalized',
     'leanResidualTerminalGovernedSupportCompletionAxiomAuditPassed',
+    'leanResidualTerminalFrontierPushoutFormalized',
+    'leanResidualTerminalFrontierBoundaryGlueExactFormalized',
+    'leanResidualTerminalFrontierInterfaceGlueExactFormalized',
+    'leanResidualTerminalFrontierProfileGlueExactFormalized',
+    'leanResidualTerminalFrontierInternalizationFormalized',
+    'leanResidualTerminalFrontierPushoutAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
   assert.equal(
     status.leanResidualTerminalPhysicalSupportCompletionScope,
@@ -1634,6 +1650,10 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(
     status.leanResidualTerminalGovernedSupportCompletionScope,
     'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-finite-seed-lists-and-saturated-support-square-corners',
+  );
+  assert.equal(
+    status.leanResidualTerminalFrontierPushoutScope,
+    'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-and-computed-saturated-support-squares',
   );
   for (const field of [
     'leanResidualTerminalSquareLegitimacyFormalized',
@@ -2060,6 +2080,12 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanResidualTerminalGovernedSupportCompletionFormalized',
     'leanResidualTerminalGovernedProfilePartitionFormalized',
     'leanResidualTerminalGovernedSupportCompletionAxiomAuditPassed',
+    'leanResidualTerminalFrontierPushoutFormalized',
+    'leanResidualTerminalFrontierBoundaryGlueExactFormalized',
+    'leanResidualTerminalFrontierInterfaceGlueExactFormalized',
+    'leanResidualTerminalFrontierProfileGlueExactFormalized',
+    'leanResidualTerminalFrontierInternalizationFormalized',
+    'leanResidualTerminalFrontierPushoutAxiomAuditPassed',
   ];
 
   for (const field of fields) {

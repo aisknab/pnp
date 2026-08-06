@@ -110,33 +110,33 @@ node --test audits/lean-residual-terminal-governed-support-completion0.test.mjs
 ## Generated publication evidence
 
 The compiled inventory coordinate is
-`PNP-LEAN-THEOREM-INVENTORY-2026-08-06-106`. Its 14,564,176-byte canonical
-JSON records 24,405 public declarations, 13,134 theorems, 6,945
-assumption-free theorems, 14,576 excluded private declarations, 222
-source-closure modules, four unchanged project assumptions, and 2,240 reviewed
+`PNP-LEAN-THEOREM-INVENTORY-2026-08-06-107`. Its 14,824,236-byte canonical
+JSON records 24,464 public declarations, 13,166 theorems, 6,953
+assumption-free theorems, 14,594 excluded private declarations, 223
+source-closure modules, four unchanged project assumptions, and 2,263 reviewed
 milestone candidates. Its SHA-256 digest is
-`38c53b1e3e80059332ff62f135ffebcf04d6b5e39e158f0f48965295894c6e8d`.
+`7e0e7feb895f6ea1c677314b1c2bd8b2ec5f33e826219b0421301e198984720e`.
 
 Publication-map coordinate
-`PNP-FORMAL-PUBLICATION-MAP-2026-08-06-106` contains 86 milestones. Eighty-three
+`PNP-FORMAL-PUBLICATION-MAP-2026-08-06-107` contains 87 milestones. Eighty-four
 are earned and the same three global milestones remain unearned. Its
-726,779-byte JSON has file SHA-256 digest
-`3b27c4f934c3897bb71584846005e93a4816b63f4f8750a6884d18f1aedfe7ce`,
+733,234-byte JSON has file SHA-256 digest
+`84fe388d393239530a12a76cf14a262c1fdf35e2e1089ced0e90e981aa1c8f09`,
 canonical-object digest
-`ae76920ca1f242f3668ff2d0d7427252f4e9fffa48ba1e3d595b15c7506abfbc`,
+`24969820f0798b07a7bb8821d8773179165726f3212e4bb39a686543d25781a7`,
 and source-closure digest
-`b4be2de72b2909cd9e47f0748e061f03041fbecbac1360e5797e89fef18404f6`.
+`4f08c63941db8fd92e7a33e8f16f698929247d968ae6fce45f4406f8e0aa02fb`.
 
 Reconstruction-status coordinate
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-06-106` occupies 1,798,304 bytes and
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-06-107` occupies 1,816,951 bytes and
 has SHA-256 digest
-`5e6356f2b13da0161b4b0fb0ea299b504bfef54f7670f3a4371d1b19df26d10f`.
+`b793312d1177ceaaadb41dda0adafc9c3c5735ed0f19a2b74050faedd97e0685`.
 The canonical report coordinate is
-`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-06-106`. Its 191,295-byte
+`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-06-107`. Its 192,373-byte
 TeX has digest
-`1dc4a81c1f7a9805405019d1298f5324aaf39f599a4b58433bf72ceeb97a5a9c`;
-the deterministic 75-page, 432,609-byte PDF has digest
-`04683262a3cd12a893f7d1d67c750502f52f40a9c8bf7755912b3ebbff76d5fb`.
+`6536c56f5fa0f8c0c8141f214b7f040f2f942b82748652084a5d9ebbafaef435`;
+the deterministic 76-page, 434,167-byte PDF has digest
+`2bdea0fd4e18e25d08a7b66cf30820d8db83893cc4ab50e14cc8bbcd30b1a264`.
 All values above are recorded from the generated artifacts.
 
 ## What remains open

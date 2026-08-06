@@ -77,6 +77,8 @@ test('current verifier plan contains status, surface, archive integrity, and cur
     'audits/lean-residual-terminal-support-square-closure0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes(
     'audits/lean-residual-terminal-governed-support-completion0.test.mjs'), true);
+  assert.equal(CURRENT_VERIFICATION_TESTS0.includes(
+    'audits/lean-residual-terminal-frontier-pushout0.test.mjs'), true);
 });
 
 test('current verifier cannot be configured to execute the historical replay', () => {

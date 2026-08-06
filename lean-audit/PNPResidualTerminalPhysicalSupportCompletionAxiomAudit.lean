@@ -21,6 +21,11 @@ import PNP.ResidualTerminalPhysicalSupportCompletion
 #print axioms PNP.DirectWire.terminalGateHasExternalConsumer
 #print axioms PNP.DirectWire.terminalGateIsGlobalOutput
 #print axioms PNP.DirectWire.terminalInterfaceGate
+#print axioms PNP.DirectWire.terminalGateSelected_eq_true_iff
+#print axioms PNP.DirectWire.terminalWireExternal_eq_true_iff
+#print axioms PNP.DirectWire.terminalBoundaryWire_eq_true_iff
+#print axioms PNP.DirectWire.terminalGateHasExternalConsumer_eq_true_iff
+#print axioms PNP.DirectWire.terminalInterfaceGate_eq_true_iff
 #print axioms PNP.DirectWire.terminalBoundaryPorts
 #print axioms PNP.DirectWire.terminalInterfacePorts
 #print axioms PNP.DirectWire.mem_terminalBoundaryPorts_iff
