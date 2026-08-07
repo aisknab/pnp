@@ -96,34 +96,34 @@ node --test audits/lean-residual-terminal-side-tight-minimum0.test.mjs
 
 ## Generated publication evidence
 
-Inventory coordinate `PNP-LEAN-THEOREM-INVENTORY-2026-08-07-109` records
-24,583 declarations, 13,218 theorem-kind declarations, 6,971 assumption-free
-theorems, 14,595 excluded private declarations, 225 source-closure modules,
-and 2,299 reviewed milestone candidates. Its 15,014,491 canonical bytes have
+Inventory coordinate `PNP-LEAN-THEOREM-INVENTORY-2026-08-07-110` records
+24,675 declarations, 13,260 theorem-kind declarations, 6,984 assumption-free
+theorems, 14,607 excluded private declarations, 226 source-closure modules,
+and 2,316 reviewed milestone candidates. Its 15,168,239 canonical bytes have
 SHA-256
-`d1743c46154588f40b4f04f5f1a0e02fdd043aa1b62c7f01e5c667d408357212`;
+`2e585d493c1b5364f0bf340b7d141bbb231bef97d609056909f19481c77e45c9`;
 the exact Lean source closure has SHA-256
-`c13bb497e99007317cf71871ac88dc94c21645caa70c82770690833f05a2494d`.
+`77155b9e3cd7ba5c931ccd20f587cb5aa0567e1b016b37845d904eec4205426d`.
 
-Publication-map coordinate `PNP-FORMAL-PUBLICATION-MAP-2026-08-07-109`
-contains 89 milestones: 86 earned and three deliberately unearned. Its
-744,575 bytes pin 2,299 exact kernel theorem types and have canonical-object
+Publication-map coordinate `PNP-FORMAL-PUBLICATION-MAP-2026-08-07-110`
+contains 90 milestones: 87 earned and three deliberately unearned. Its
+750,275 bytes pin 2,316 exact kernel theorem types and have canonical-object
 SHA-256
-`8f78366b3ecfcf756eddf9445028dac0bc5563eca062e222e4c29f8612ae4406`
+`94f46541a5e524e9b4989cf28331c74456c52d41098b5a2634c8cf2a8c11fc17`
 and file SHA-256
-`b628ea8684a56e748da90d753b054cce50428af9d213ff8928d0492b82f9cd1f`.
+`20d29d0d85e4edd2ee0ab1cfbe41f403e17b2655ea82651ffeb089c0fe88372b`.
 
-Status coordinate `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-07-109`, paired
+Status coordinate `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-07-110`, paired
 with public-surface coordinate
-`PUBLIC-SURFACE-BASELINE-2026-08-07-RESIDUAL-TERMINAL-SIDE-TIGHT-MINIMUM-108`,
-has byte-identical 1,849,193-byte status mirrors with SHA-256
-`a29d10e7bc211b2c919910624557941898dc1f2888eb5cd6fc10ba00a6e89abb`.
+`PUBLIC-SURFACE-BASELINE-2026-08-07-RESIDUAL-TERMINAL-FOUR-CORNER-CARRIER-109`,
+has byte-identical 1,867,836-byte status mirrors with SHA-256
+`a411b2dae18d3869cea0ba236628604e9041f06010553d1e0cfc8b2434cef805`.
 Canonical report coordinate
-`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-07-109` has a
-194,451-byte TeX source with SHA-256
-`2c4421043189beee57aaf5d2bc6e14aa27584904739dadedbdb40fda4c88555c`
-and a deterministic 76-page, 435,428-byte A4 PDF with SHA-256
-`3495459a678fdf52d06553ffe2bff603438f037e282b8c257711eb855a0760b3`.
+`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-07-110` has a
+195,614-byte TeX source with SHA-256
+`51e174f1cbff5030a905ce6e791741a0f69facb1500acfad3b6b1c72ccdea641`
+and a deterministic 77-page, 436,374-byte A4 PDF with SHA-256
+`ed75cd52e1a5bb6a143838fa7a86f0d9a88ad66e9f1d039413fab5dc671690ad`.
 
 The concrete publication gate remains false. All four project assumptions,
 all six blockers, unset activation fingerprints, and the absence of

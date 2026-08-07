@@ -1,0 +1,41 @@
+import PNP.ResidualTerminalFourCornerCarrier
+
+#print axioms PNP.DirectWire.TerminalSupportSquareSide
+#print axioms PNP.DirectWire.TerminalSupportSquareSide.corner
+#print axioms PNP.DirectWire.TerminalSupportSquareSide.oppositeCorner
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.fourCornerCarrier
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.support
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.extracted
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.projectedFrontier
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.boundaryDisposition?
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.interfaceDisposition?
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.boundaryDisposition?_eq_some_iff
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.interfaceDisposition?_eq_some_iff
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.boundary_nodup
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.interface_nodup
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.profile_nodup
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.extracted_boundary
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.extracted_interface
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.corner_compatible
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.meet_profile_transport
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.side_profile_transport
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.join_profile_transport
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.boundary_retained
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.boundary_internalized
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.interface_retained
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.interface_internalized
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.projection_compatible
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.Compatible
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.complete_transport
+
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_compatible
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_meet_profile_iff
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.side_profile_mem_join
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_join_profile_iff
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.left_boundary_disposition
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.right_boundary_disposition
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.side_interface_disposition
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_join_boundary_eq_pushout
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_join_interface_eq_pushout
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governed_projection_compatible

@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 89);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 86);
+  assert.equal(status.formalPublicationMilestones.length, 90);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 87);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -2068,6 +2068,50 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   assert.match(terminalSideTightMinimum.scope, /independently attained/u);
   assert.match(terminalSideTightMinimum.nonClaim, /coherent four-corner basis/u);
   assert.match(terminalSideTightMinimum.nonClaim, /BN2 square legitimacy/u);
+  const terminalFourCornerCarrier = byId.get(
+    'residual-terminal-four-corner-carrier-transport',
+  );
+  assert.equal(terminalFourCornerCarrier.status,
+    'formalized-residual-terminal-four-corner-carrier-transport');
+  assert.equal(terminalFourCornerCarrier.earned, true);
+  assert.equal(
+    terminalFourCornerCarrier.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.deepEqual(terminalFourCornerCarrier.requiredTheorems, [
+    'PNP.DirectWire.TerminalFourCornerCarrier.boundaryDisposition?_eq_some_iff',
+    'PNP.DirectWire.TerminalFourCornerCarrier.interfaceDisposition?_eq_some_iff',
+    'PNP.DirectWire.TerminalFourCornerCarrier.boundary_nodup',
+    'PNP.DirectWire.TerminalFourCornerCarrier.interface_nodup',
+    'PNP.DirectWire.TerminalFourCornerCarrier.profile_nodup',
+    'PNP.DirectWire.TerminalFourCornerCarrier.extracted_boundary',
+    'PNP.DirectWire.TerminalFourCornerCarrier.extracted_interface',
+    'PNP.DirectWire.TerminalFourCornerCarrier.corner_compatible',
+    'PNP.DirectWire.TerminalFourCornerCarrier.meet_profile_transport',
+    'PNP.DirectWire.TerminalFourCornerCarrier.side_profile_transport',
+    'PNP.DirectWire.TerminalFourCornerCarrier.join_profile_transport',
+    'PNP.DirectWire.TerminalFourCornerCarrier.boundary_retained',
+    'PNP.DirectWire.TerminalFourCornerCarrier.boundary_internalized',
+    'PNP.DirectWire.TerminalFourCornerCarrier.interface_retained',
+    'PNP.DirectWire.TerminalFourCornerCarrier.interface_internalized',
+    'PNP.DirectWire.TerminalFourCornerCarrier.projection_compatible',
+    'PNP.DirectWire.TerminalFourCornerCarrier.complete_transport',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_compatible',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_meet_profile_iff',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.side_profile_mem_join',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_join_profile_iff',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.left_boundary_disposition',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.right_boundary_disposition',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.side_interface_disposition',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_join_boundary_eq_pushout',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.governedCompleted_join_interface_eq_pushout',
+    'PNP.DirectWire.TerminalSaturatedSupportSquare.governed_projection_compatible',
+  ]);
+  assert.match(terminalFourCornerCarrier.scope,
+    /every finite computed saturated terminal support square/u);
+  assert.match(terminalFourCornerCarrier.scope, /common ambient coordinates/u);
+  assert.match(terminalFourCornerCarrier.nonClaim, /four-corner optimum/u);
+  assert.match(terminalFourCornerCarrier.nonClaim, /BN2 square legitimacy/u);
   for (const id of [
     'global-locked-nand-threshold',
     'global-zeroslack-pccmin',
@@ -2082,10 +2126,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '8f78366b3ecfcf756eddf9445028dac0bc5563eca062e222e4c29f8612ae4406');
+    '94f46541a5e524e9b4989cf28331c74456c52d41098b5a2634c8cf2a8c11fc17');
   assert.equal(map.milestoneSourceClosureSha256,
-    'c13bb497e99007317cf71871ac88dc94c21645caa70c82770690833f05a2494d');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2299);
+    '77155b9e3cd7ba5c931ccd20f587cb5aa0567e1b016b37845d904eec4205426d');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2316);
   for (const theorem of [
     'PNP.DirectWire.LockedNANDTrace.carrierSeparation',
     'PNP.DirectWire.LockedNANDTrace.finalLock_fresh',
@@ -2407,7 +2451,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [24583, 13218, 6971, 14595, 225]);
+  ], [24675, 13260, 6984, 14607, 226]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
