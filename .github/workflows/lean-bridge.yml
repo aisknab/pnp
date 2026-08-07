@@ -139,6 +139,7 @@ on:
       - 'audits/lean-residual-terminal-governed-support-completion0.test.mjs'
       - 'audits/lean-residual-terminal-frontier-pushout0.test.mjs'
       - 'audits/lean-residual-terminal-projection-square0.test.mjs'
+      - 'audits/lean-residual-terminal-side-tight-minimum0.test.mjs'
       - 'docs/lean_residual_gain_chain.md'
       - 'docs/lean_residual_gain_stopping.md'
       - 'docs/lean_residual_terminal_full_bridge.md'
@@ -153,6 +154,7 @@ on:
       - 'docs/lean_residual_terminal_governed_support_completion.md'
       - 'docs/lean_residual_terminal_frontier_pushout.md'
       - 'docs/lean_residual_terminal_projection_square.md'
+      - 'docs/lean_residual_terminal_side_tight_minimum.md'
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_locked_nand_polynomial_reduction.md'
       - 'docs/lean_concrete_cnf_to_nand_semantic_compiler.md'
@@ -367,6 +369,7 @@ on:
       - 'audits/lean-residual-terminal-governed-support-completion0.test.mjs'
       - 'audits/lean-residual-terminal-frontier-pushout0.test.mjs'
       - 'audits/lean-residual-terminal-projection-square0.test.mjs'
+      - 'audits/lean-residual-terminal-side-tight-minimum0.test.mjs'
       - 'docs/lean_residual_gain_chain.md'
       - 'docs/lean_residual_gain_stopping.md'
       - 'docs/lean_residual_terminal_full_bridge.md'
@@ -381,6 +384,7 @@ on:
       - 'docs/lean_residual_terminal_governed_support_completion.md'
       - 'docs/lean_residual_terminal_frontier_pushout.md'
       - 'docs/lean_residual_terminal_projection_square.md'
+      - 'docs/lean_residual_terminal_side_tight_minimum.md'
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_locked_nand_polynomial_reduction.md'
       - 'docs/lean_concrete_cnf_to_nand_semantic_compiler.md'
@@ -2671,3 +2675,27 @@ jobs:
 
       - name: Run terminal governed projection-square hostile audit
         run: node --test audits/lean-residual-terminal-projection-square0.test.mjs
+
+      - name: Print terminal side-tight minimum axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalSideTightMinimumAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 43
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected terminal side-tight minimum axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Terminal side-tight minimum reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 43
+
+      - name: Run terminal side-tight minimum regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalSideTightMinimum.lean
+
+      - name: Run terminal side-tight minimum hostile audit
+        run: node --test audits/lean-residual-terminal-side-tight-minimum0.test.mjs
