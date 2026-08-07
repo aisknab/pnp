@@ -59,6 +59,7 @@ lean/PNP/ResidualTerminalFrontierPushout.lean
 lean/PNP/ResidualTerminalProjectionSquare.lean
 lean/PNP/ResidualTerminalSideTightMinimum.lean
 lean/PNP/ResidualTerminalFourCornerCarrier.lean
+lean/PNP/ResidualTerminalFourCornerOptimumCompatibility.lean
 lean/PNP/LockedNANDResidualGainBound.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
@@ -170,6 +171,7 @@ lean-audit/PNPResidualTerminalFrontierPushoutAxiomAudit.lean
 lean-audit/PNPResidualTerminalProjectionSquareAxiomAudit.lean
 lean-audit/PNPResidualTerminalSideTightMinimumAxiomAudit.lean
 lean-audit/PNPResidualTerminalFourCornerCarrierAxiomAudit.lean
+lean-audit/PNPResidualTerminalFourCornerOptimumCompatibilityAxiomAudit.lean
 lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean
 lean-audit/PNPLockedNANDDirectAxiomAudit.lean
 lean-audit/PNPDirectWireBaselineAxiomAudit.lean
@@ -1089,6 +1091,18 @@ four-corner optimum, prove BN2 square legitimacy, or establish
 `SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin, polynomial runtime, or the
 root theorem. See
 `docs/lean_residual_terminal_four_corner_carrier.md`.
+
+`lean/PNP/ResidualTerminalFourCornerOptimumCompatibility.lean` closes the
+legacy §11.1 obligation `fourCornerOptimaCarrierCompatible`. It provides a
+reversible common ambient coordinate system for all four exact corner
+candidates and proves semantic, equivalence, gate-count, and
+reference-minimum preservation in both directions. One explicit observer and
+the carrier's one quotient projection then govern all four canonical full and
+quotient optima, whose localized realizers retain their exact minimum counts.
+This does not establish coherent square-leg transport,
+`sideTightCompletionExists`, BN2 square legitimacy, `SaturatePositive`,
+`BCELReady`, ZeroSlack, PCCMin, polynomial runtime, or the root theorem. See
+`docs/lean_residual_terminal_four_corner_optimum_compatibility.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 

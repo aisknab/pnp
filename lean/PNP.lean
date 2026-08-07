@@ -23,6 +23,7 @@ import PNP.ResidualTerminalFrontierPushout
 import PNP.ResidualTerminalProjectionSquare
 import PNP.ResidualTerminalSideTightMinimum
 import PNP.ResidualTerminalFourCornerCarrier
+import PNP.ResidualTerminalFourCornerOptimumCompatibility
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine

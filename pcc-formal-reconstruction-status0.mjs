@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-07-110';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-08-111';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -346,6 +346,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFourCornerCarrierAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFourCornerCarrier.lean',
   'node --test audits/lean-residual-terminal-four-corner-carrier0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFourCornerOptimumCompatibilityAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFourCornerOptimumCompatibility.lean',
+  'node --test audits/lean-residual-terminal-four-corner-optimum-compatibility0.test.mjs',
   'node --test audits/lean-residual-terminal-frontier-pushout0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
@@ -1367,6 +1370,14 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalFourCornerCarrierAxiomAuditPassed: true,
   leanResidualTerminalFourCornerCarrierScope:
     'all-finite-computed-saturated-terminal-support-squares-and-canonical-physical-profile-transport-coordinates',
+  leanResidualTerminalFourCornerOptimaCarrierCompatibleFormalized: true,
+  leanResidualTerminalFourCornerOptimaFaithfulAmbientizationFormalized: true,
+  leanResidualTerminalFourCornerOptimaReferenceMinimumPreservedFormalized: true,
+  leanResidualTerminalFourCornerOptimaLocalizedMinimaFormalized: true,
+  leanResidualTerminalFourCornerOptimaSharedObserverProjectionFormalized: true,
+  leanResidualTerminalFourCornerOptimaAxiomAuditPassed: true,
+  leanResidualTerminalFourCornerOptimaCarrierScope:
+    'all-finite-computed-saturated-terminal-support-squares-one-reversible-ambient-carrier-and-shared-observer-projection',
   leanResidualTerminalCoherentFourCornerBasisFormalized: false,
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
@@ -1396,7 +1407,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-07-RESIDUAL-TERMINAL-FOUR-CORNER-CARRIER-109',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-08-RESIDUAL-TERMINAL-FOUR-CORNER-OPTIMUM-COMPATIBILITY-110',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -2278,6 +2289,14 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalFourCornerCarrierAxiomAuditPassed: true,
       leanResidualTerminalFourCornerCarrierScope:
         'all-finite-computed-saturated-terminal-support-squares-and-canonical-physical-profile-transport-coordinates',
+      leanResidualTerminalFourCornerOptimaCarrierCompatibleFormalized: true,
+      leanResidualTerminalFourCornerOptimaFaithfulAmbientizationFormalized: true,
+      leanResidualTerminalFourCornerOptimaReferenceMinimumPreservedFormalized: true,
+      leanResidualTerminalFourCornerOptimaLocalizedMinimaFormalized: true,
+      leanResidualTerminalFourCornerOptimaSharedObserverProjectionFormalized: true,
+      leanResidualTerminalFourCornerOptimaAxiomAuditPassed: true,
+      leanResidualTerminalFourCornerOptimaCarrierScope:
+        'all-finite-computed-saturated-terminal-support-squares-one-reversible-ambient-carrier-and-shared-observer-projection',
       leanResidualTerminalCoherentFourCornerBasisFormalized: false,
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
@@ -2358,7 +2377,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-07-110',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-08-111',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,
