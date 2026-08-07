@@ -58,6 +58,7 @@ lean/PNP/ResidualTerminalGovernedSupportCompletion.lean
 lean/PNP/ResidualTerminalFrontierPushout.lean
 lean/PNP/ResidualTerminalProjectionSquare.lean
 lean/PNP/ResidualTerminalSideTightMinimum.lean
+lean/PNP/ResidualTerminalFourCornerCarrier.lean
 lean/PNP/LockedNANDResidualGainBound.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
@@ -168,6 +169,7 @@ lean-audit/PNPResidualTerminalGovernedSupportCompletionAxiomAudit.lean
 lean-audit/PNPResidualTerminalFrontierPushoutAxiomAudit.lean
 lean-audit/PNPResidualTerminalProjectionSquareAxiomAudit.lean
 lean-audit/PNPResidualTerminalSideTightMinimumAxiomAudit.lean
+lean-audit/PNPResidualTerminalFourCornerCarrierAxiomAudit.lean
 lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean
 lean-audit/PNPLockedNANDDirectAxiomAudit.lean
 lean-audit/PNPDirectWireBaselineAxiomAudit.lean
@@ -1073,6 +1075,20 @@ BN2 square legitimacy, maximize a tight family, or establish
 `SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin, polynomial runtime, or the
 root theorem. See
 `docs/lean_residual_terminal_side_tight_minimum.md`.
+
+`lean/PNP/ResidualTerminalFourCornerCarrier.lean` closes the checked common
+carrier prerequisite between report §3 and §11.1
+`BN2-CoherentOptimum`. Every computed saturated support square supplies the
+meet, left, right, and join endpoints from the same candidate and projection.
+Lean proves exact extracted endpoints, duplicate-free canonical coordinate
+lists, exact profile overlap and union, fail-closed retained or internalized
+physical transport, and projection compatibility. No caller supplies a
+coordinate map or transport certificate. This does not transport four optimum
+realizers, prove `fourCornerOptimaCarrierCompatible`, construct a coherent
+four-corner optimum, prove BN2 square legitimacy, or establish
+`SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin, polynomial runtime, or the
+root theorem. See
+`docs/lean_residual_terminal_four_corner_carrier.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 

@@ -142,34 +142,34 @@ caller certificates, forbidden shortcuts, and overclaims.
 ## Mechanically generated evidence
 
 Inventory coordinate
-`PNP-LEAN-THEOREM-INVENTORY-2026-08-07-109` records 24,583 declarations,
-13,218 theorems, 6,971 assumption-free theorems, 14,595 excluded private
-declarations, 225 source-closure modules, and 2,299 reviewed milestone
-candidates. Its 15,014,491-byte canonical inventory has SHA-256
-`d1743c46154588f40b4f04f5f1a0e02fdd043aa1b62c7f01e5c667d408357212`;
+`PNP-LEAN-THEOREM-INVENTORY-2026-08-07-110` records 24,675 declarations,
+13,260 theorems, 6,984 assumption-free theorems, 14,607 excluded private
+declarations, 226 source-closure modules, and 2,316 reviewed milestone
+candidates. Its 15,168,239-byte canonical inventory has SHA-256
+`2e585d493c1b5364f0bf340b7d141bbb231bef97d609056909f19481c77e45c9`;
 the Lean source-closure SHA-256 is
-`c13bb497e99007317cf71871ac88dc94c21645caa70c82770690833f05a2494d`.
+`77155b9e3cd7ba5c931ccd20f587cb5aa0567e1b016b37845d904eec4205426d`.
 
 Publication map coordinate
-`PNP-FORMAL-PUBLICATION-MAP-2026-08-07-109` contains 89 milestones: 85
+`PNP-FORMAL-PUBLICATION-MAP-2026-08-07-110` contains 90 milestones: 87
 earned and three deliberately unearned. The new
 `locked-nand-global-semantic-threshold` milestone pins the seven new theorem
 types plus the reused exact unsatisfiable-minimum theorem. The generated map
-is 744,575 bytes with SHA-256
-`b628ea8684a56e748da90d753b054cce50428af9d213ff8928d0492b82f9cd1f`.
+is 750,275 bytes with SHA-256
+`20d29d0d85e4edd2ee0ab1cfbe41f403e17b2655ea82651ffeb089c0fe88372b`.
 
 Status coordinate
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-07-109` sets the semantic-threshold,
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-07-110` sets the semantic-threshold,
 six-field-package, derived-final-output, and residual-at-most-four evidence
 fields true. It retains all four project assumptions, all six blockers,
 unset activation fingerprints, an absent `PNP.Main.p_eq_np`, and a false
-concrete publication gate. The status is 1,849,193 bytes with SHA-256
-`a29d10e7bc211b2c919910624557941898dc1f2888eb5cd6fc10ba00a6e89abb`.
+concrete publication gate. The status is 1,867,836 bytes with SHA-256
+`a411b2dae18d3869cea0ba236628604e9041f06010553d1e0cfc8b2434cef805`.
 
-The generated canonical report source is 194,451 bytes with SHA-256
-`2c4421043189beee57aaf5d2bc6e14aa27584904739dadedbdb40fda4c88555c`.
-Its deterministic A4 PDF is 76 pages and 435,428 bytes with SHA-256
-`3495459a678fdf52d06553ffe2bff603438f037e282b8c257711eb855a0760b3`.
+The generated canonical report source is 195,614 bytes with SHA-256
+`51e174f1cbff5030a905ce6e791741a0f69facb1500acfad3b6b1c72ccdea641`.
+Its deterministic A4 PDF is 77 pages and 436,374 bytes with SHA-256
+`ed75cd52e1a5bb6a143838fa7a86f0d9a88ad66e9f1d039413fab5dc671690ad`.
 
 ## Exact boundary
 

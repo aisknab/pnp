@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-07-109';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-07-110';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -343,6 +343,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalSideTightMinimumAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalSideTightMinimum.lean',
   'node --test audits/lean-residual-terminal-side-tight-minimum0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFourCornerCarrierAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFourCornerCarrier.lean',
+  'node --test audits/lean-residual-terminal-four-corner-carrier0.test.mjs',
   'node --test audits/lean-residual-terminal-frontier-pushout0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
@@ -462,6 +465,7 @@ const NON_CLAIMS = Object.freeze([
   'Governed terminal frontier pushout proves the manuscript Section 3 gluing equation for every finite direct-wire candidate and computed saturated support square. Side boundary wires and interface producers are retained exactly when they remain external after union, otherwise their internalization is witnessed; meet profiles are the exact shared role coordinates and join profiles are their exact union. The dependency system remains explicit. This does not prove projection compatibility, BN2 square legitimacy, SaturatePositive, complete obstruction routing, polynomial runtime, SAT in P, or P = NP.',
   'Governed terminal projection squares prove the manuscript Section 3 structural projection-commutation law for every finite direct-wire candidate, computed saturated support square, and explicit forgetful terminal projection. Physical frontiers are retained, each of the ten role profiles is filtered exactly, projected meet is side overlap, and projected join is the side-only projected pushout. The dependency system remains explicit. This does not prove side-tight four-corner minima, BN2 square legitimacy, SaturatePositive, complete obstruction routing, polynomial runtime, SAT in P, or P = NP.',
   'Side-tight four-corner minimum arithmetic proves the manuscript Section 11.1 signed slack identity and a fail-closed exactness gate for every finite terminal projection four-corner family and independently attained full or quotient basis. Canonical minima pass and return the existing deltas. This does not construct a coherent four-corner basis, prove BN2 square legitimacy, maximize a tight family, establish SaturatePositive or BCELReady, complete obstruction routing, prove polynomial runtime, put SAT in P, or prove P = NP.',
+  'Checked four-corner carrier transport derives all four governed and extracted endpoints from every finite computed saturated support square in common ambient coordinates. Profile overlap and union are exact; retained physical coordinates keep their identity, internalized coordinates carry concrete witnesses, and absent side queries fail closed. This is a prerequisite for the Section 11.1 four-corner optimum compatibility obligation, not transport of four optimum realizers, coherent completion, BN2 square legitimacy, SaturatePositive, BCELReady, polynomial runtime, SAT in P, or P = NP.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
   'The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.',
@@ -1355,6 +1359,14 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalSideTightMinimumAxiomAuditPassed: true,
   leanResidualTerminalSideTightMinimumScope:
     'all-finite-terminal-projection-four-corner-families-and-independently-attained-full-and-quotient-minimum-bases',
+  leanResidualTerminalFourCornerCarrierTransportFormalized: true,
+  leanResidualTerminalFourCornerCarrierExactEndpointsFormalized: true,
+  leanResidualTerminalFourCornerCarrierInjectiveCoordinatesFormalized: true,
+  leanResidualTerminalFourCornerCarrierProfileTransportFormalized: true,
+  leanResidualTerminalFourCornerCarrierFailClosedPhysicalTransportFormalized: true,
+  leanResidualTerminalFourCornerCarrierAxiomAuditPassed: true,
+  leanResidualTerminalFourCornerCarrierScope:
+    'all-finite-computed-saturated-terminal-support-squares-and-canonical-physical-profile-transport-coordinates',
   leanResidualTerminalCoherentFourCornerBasisFormalized: false,
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
@@ -1384,7 +1396,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-07-RESIDUAL-TERMINAL-SIDE-TIGHT-MINIMUM-108',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-07-RESIDUAL-TERMINAL-FOUR-CORNER-CARRIER-109',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -2258,6 +2270,14 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalSideTightMinimumAxiomAuditPassed: true,
       leanResidualTerminalSideTightMinimumScope:
         'all-finite-terminal-projection-four-corner-families-and-independently-attained-full-and-quotient-minimum-bases',
+      leanResidualTerminalFourCornerCarrierTransportFormalized: true,
+      leanResidualTerminalFourCornerCarrierExactEndpointsFormalized: true,
+      leanResidualTerminalFourCornerCarrierInjectiveCoordinatesFormalized: true,
+      leanResidualTerminalFourCornerCarrierProfileTransportFormalized: true,
+      leanResidualTerminalFourCornerCarrierFailClosedPhysicalTransportFormalized: true,
+      leanResidualTerminalFourCornerCarrierAxiomAuditPassed: true,
+      leanResidualTerminalFourCornerCarrierScope:
+        'all-finite-computed-saturated-terminal-support-squares-and-canonical-physical-profile-transport-coordinates',
       leanResidualTerminalCoherentFourCornerBasisFormalized: false,
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
@@ -2338,7 +2358,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-07-109',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-07-110',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

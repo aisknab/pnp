@@ -243,28 +243,74 @@ theorem nodes_length_literal :
 node. -/
 def ruleCount : Nat := 135070
 
-theorem rules_length_literal :
-    machine.rules.length = ruleCount := by
-  change (WorkMachineProgramGraph.rules graph).length = ruleCount
-  rw [WorkMachineProgramGraph.rules_length graph]
-  rw [show graph.nodes =
-      [parserNode, carrierNode, controllerNode] by rfl]
+private theorem machine_rules_eq_graph_rules :
+    machine.rules = WorkMachineProgramGraph.rules graph := by
+  rfl
+
+private theorem graph_nodes_eq_literal :
+    graph.nodes = [parserNode, carrierNode, controllerNode] := by
+  rfl
+
+private theorem parserNode_program_rules_length :
+    parserNode.program.rules.length = 99 := by
+  exact CNFSourceParser.rules_length
+
+private theorem carrierNode_program_rules_length :
+    carrierNode.program.rules.length = 13844 := by
+  exact CNFToNANDCarrierEncoder.rules_length
+
+private theorem controllerNode_program_rules_length :
+    controllerNode.program.rules.length = 121073 := by
+  exact CNFToNANDController.rules_length_literal
+
+private theorem three_node_rule_sum
+    (first second third : Node)
+    (firstCount secondCount thirdCount : Nat)
+    (firstLength : first.program.rules.length = firstCount)
+    (secondLength : second.program.rules.length = secondCount)
+    (thirdLength : third.program.rules.length = thirdCount) :
+    ([first, second, third].map
+      (fun node => 18 + node.program.rules.length)).sum =
+        18 + firstCount +
+          (18 + secondCount + (18 + thirdCount + 0)) := by
   simp only [List.map_cons, List.map_nil,
     List.sum_cons, List.sum_nil]
-  have parserRules :
-      parserNode.program.rules.length =
-        99 := by
-    exact CNFSourceParser.rules_length
-  have carrierRules :
-      carrierNode.program.rules.length =
-        13844 := by
-    exact CNFToNANDCarrierEncoder.rules_length
-  have controllerRules :
-      controllerNode.program.rules.length =
-        121073 := by
-    exact CNFToNANDController.rules_length_literal
-  rw [parserRules, carrierRules, controllerRules]
-  unfold ruleCount
-  omega
+  rw [firstLength, secondLength, thirdLength]
+
+private theorem graph_rule_sum_eq_literal :
+    (graph.nodes.map
+      (fun node => 18 + node.program.rules.length)).sum =
+        ruleCount := by
+  calc
+    (graph.nodes.map
+        (fun node => 18 + node.program.rules.length)).sum =
+        ([parserNode, carrierNode, controllerNode].map
+          (fun node => 18 + node.program.rules.length)).sum :=
+      congrArg
+        (fun nodeList =>
+          (nodeList.map
+            (fun node => 18 + node.program.rules.length)).sum)
+        graph_nodes_eq_literal
+    _ = 18 + 99 + (18 + 13844 + (18 + 121073 + 0)) :=
+      three_node_rule_sum
+        parserNode carrierNode controllerNode
+        99 13844 121073
+        parserNode_program_rules_length
+        carrierNode_program_rules_length
+        controllerNode_program_rules_length
+    _ = ruleCount := by
+      unfold ruleCount
+      omega
+
+theorem rules_length_literal :
+    machine.rules.length = ruleCount := by
+  calc
+    machine.rules.length =
+        (WorkMachineProgramGraph.rules graph).length :=
+      congrArg List.length machine_rules_eq_graph_rules
+    _ = (graph.nodes.map
+          (fun node => 18 + node.program.rules.length)).sum :=
+      WorkMachineProgramGraph.rules_length graph
+    _ = ruleCount := graph_rule_sum_eq_literal
 
 end PNP.Concrete.CNFToNANDCompilerMachine

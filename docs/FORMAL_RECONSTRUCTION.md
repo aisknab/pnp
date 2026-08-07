@@ -1235,6 +1235,21 @@ legitimacy, maximize a finite tight family, or establish `SaturatePositive`,
 `BCELReady`, ZeroSlack, PCCMin, polynomial runtime, or the root theorem. See
 [`lean_residual_terminal_side_tight_minimum.md`](./lean_residual_terminal_side_tight_minimum.md).
 
+`ResidualTerminalFourCornerCarrier` now reconstructs the common-carrier edge
+between legacy report §3 and the §11.1 `BN2-CoherentOptimum` obligation
+`fourCornerOptimaCarrierCompatible`. For every finite computed saturated
+support square, one carrier derives all four governed completions, exact
+extracted endpoints, and projected frontiers from the same square, candidate,
+and projection. Lean proves duplicate-free canonical coordinate lists, exact
+meet and join profile transport, identity-preserving retained physical
+coordinates, witnessed internalization, fail-closed absence, and projection
+compatibility. This closes the carrier prerequisite, but it does not transport
+four optimum realizers, prove the full optimum-compatibility obligation,
+construct a coherent four-corner optimum, prove BN2 square legitimacy, or
+establish `SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin, polynomial
+runtime, or the root theorem. See
+[`lean_residual_terminal_four_corner_carrier.md`](./lean_residual_terminal_four_corner_carrier.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:
