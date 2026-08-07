@@ -1250,6 +1250,20 @@ establish `SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin, polynomial
 runtime, or the root theorem. See
 [`lean_residual_terminal_four_corner_carrier.md`](./lean_residual_terminal_four_corner_carrier.md).
 
+`ResidualTerminalFourCornerOptimumCompatibility` now reconstructs the full
+§11.1 dependency named `fourCornerOptimaCarrierCompatible`. It embeds every
+corner boundary and interface into one reversible common ambient carrier,
+fixes outputs absent from a corner to false, and proves that ambientization
+and localization preserve semantics, gate counts, equivalence, and the exact
+semantic reference minimum. All four canonical full and quotient optima then
+use one derived role map, one observer, and one projection, and their eight
+localized realizers retain the exact shared-family minimum counts. This closes
+optimum carrier compatibility, but it does not prove coherent transport along
+the square, `sideTightCompletionExists`, BN2 square legitimacy,
+`SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin, polynomial runtime, or the
+root theorem. See
+[`lean_residual_terminal_four_corner_optimum_compatibility.md`](./lean_residual_terminal_four_corner_optimum_compatibility.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

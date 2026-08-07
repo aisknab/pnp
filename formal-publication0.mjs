@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '94f46541a5e524e9b4989cf28331c74456c52d41098b5a2634c8cf2a8c11fc17';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '8c208bb3815b2513a3a167dd72adf77903c5a1f1d5c75e590e8064448a309737';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -2169,6 +2169,31 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.TerminalFourCornerCarrier.profile_nodup',
   'PNP.DirectWire.TerminalFourCornerCarrier.projection_compatible',
   'PNP.DirectWire.TerminalFourCornerCarrier.side_profile_transport',
+  'PNP.DirectWire.TerminalFourCornerCarrier.ambient_referenceMinimum_eq_corner',
+  'PNP.DirectWire.TerminalFourCornerCarrier.ambientizeCandidate_equivalent',
+  'PNP.DirectWire.TerminalFourCornerCarrier.ambientizeCandidate_gateCount',
+  'PNP.DirectWire.TerminalFourCornerCarrier.ambientizeCandidate_semantics_absent',
+  'PNP.DirectWire.TerminalFourCornerCarrier.ambientizeCandidate_semantics_present',
+  'PNP.DirectWire.TerminalFourCornerCarrier.boundaryAdapter_semantics_get',
+  'PNP.DirectWire.TerminalFourCornerCarrier.boundaryIndex?_ambient_get',
+  'PNP.DirectWire.TerminalFourCornerCarrier.boundaryIndex?_eq_some_iff',
+  'PNP.DirectWire.TerminalFourCornerCarrier.fourCornerOptimaCarrierCompatible',
+  'PNP.DirectWire.TerminalFourCornerCarrier.interfaceIndex?_eq_some_iff',
+  'PNP.DirectWire.TerminalFourCornerCarrier.interfaceIndex?_get',
+  'PNP.DirectWire.TerminalFourCornerCarrier.localizeCandidate_equivalent',
+  'PNP.DirectWire.TerminalFourCornerCarrier.localizeCandidate_gateCount',
+  'PNP.DirectWire.TerminalFourCornerCarrier.localizeCandidate_semantics',
+  'PNP.DirectWire.TerminalFourCornerCarrier.localizeImplementation_gateCount',
+  'PNP.DirectWire.TerminalFourCornerCarrier.localizeRealization_gateCount',
+  'PNP.DirectWire.TerminalFourCornerCarrier.localize_ambientize_equivalent',
+  'PNP.DirectWire.TerminalFourCornerCarrier.localize_ambientize_semantics',
+  'PNP.DirectWire.TerminalFourCornerCarrier.optimizationCorners_at',
+  'PNP.DirectWire.TerminalFourCornerCarrier.optimizationCorners_projection',
+  'PNP.DirectWire.TerminalFourCornerCarrier.optimizationCorners_role',
+  'PNP.DirectWire.TerminalSupportWire.ambientIndex_injective',
+  'PNP.DirectWire.TerminalSupportWire.ambientIndex_terminalSupportWireAt',
+  'PNP.DirectWire.terminalSupportWireAt_ambientIndex',
+  'PNP.DirectWire.referenceMinimum_le_of_equivalent',
   'PNP.DirectWire.TerminalFourCornerSizes.componentwiseLE_refl',
   'PNP.DirectWire.TerminalFourCornerSizes.incidenceValue_eq_minimum_add_slacks',
   'PNP.DirectWire.TerminalFourCornerSizes.numericallySideTight_iff_eq',
@@ -2358,7 +2383,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-07-110') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-08-111') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -2635,7 +2660,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-07-110') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-08-111') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
