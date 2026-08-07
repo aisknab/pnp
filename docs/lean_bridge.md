@@ -57,6 +57,7 @@ lean/PNP/ResidualTerminalSupportSquareClosure.lean
 lean/PNP/ResidualTerminalGovernedSupportCompletion.lean
 lean/PNP/ResidualTerminalFrontierPushout.lean
 lean/PNP/ResidualTerminalProjectionSquare.lean
+lean/PNP/ResidualTerminalSideTightMinimum.lean
 lean/PNP/LockedNANDResidualGainBound.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
@@ -166,6 +167,7 @@ lean-audit/PNPResidualTerminalSupportSquareClosureAxiomAudit.lean
 lean-audit/PNPResidualTerminalGovernedSupportCompletionAxiomAudit.lean
 lean-audit/PNPResidualTerminalFrontierPushoutAxiomAudit.lean
 lean-audit/PNPResidualTerminalProjectionSquareAxiomAudit.lean
+lean-audit/PNPResidualTerminalSideTightMinimumAxiomAudit.lean
 lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean
 lean-audit/PNPLockedNANDDirectAxiomAudit.lean
 lean-audit/PNPDirectWireBaselineAxiomAudit.lean
@@ -1059,6 +1061,18 @@ remains explicit data. This does not prove side-tight four-corner minima, BN2
 square legitimacy, `SaturatePositive`, `BCELReady`, obstruction routing,
 ZeroSlack, PCCMin, polynomial runtime, or the root theorem. See
 `docs/lean_residual_terminal_projection_square.md`.
+
+`lean/PNP/ResidualTerminalSideTightMinimum.lean` closes the numerical
+arithmetic and no-overclaim edge in report §11.1 `BN2-CoherentOptimum`. For
+every finite four-corner family it proves componentwise lower bounds for typed
+full and quotient bases, the signed four-slack identity, and a fail-closed
+extractor which returns the existing delta only after all four minima are
+attained exactly. Canonical independently attained full and quotient minima
+pass that gate. This does not construct a coherent four-corner basis, prove
+BN2 square legitimacy, maximize a tight family, or establish
+`SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin, polynomial runtime, or the
+root theorem. See
+`docs/lean_residual_terminal_side_tight_minimum.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 

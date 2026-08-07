@@ -1222,6 +1222,19 @@ complete obstruction routing, ZeroSlack, PCCMin, polynomial runtime, or the
 root theorem. See
 [`lean_residual_terminal_projection_square.md`](./lean_residual_terminal_projection_square.md).
 
+`ResidualTerminalSideTightMinimum` now reconstructs the arithmetic and
+no-overclaim part of legacy report §11.1 `BN2-CoherentOptimum`. Every typed
+full or quotient four-corner basis lies componentwise above the exact
+exhaustive minima, and its signed incidence value equals the corresponding
+delta plus left and right slack minus meet and join slack. A Boolean gate and
+`Option` extractor reject any basis with even one loose corner, including
+canceling slacks that leave the raw total unchanged. Canonical independently
+attained full and quotient minima pass and return the existing deltas. This
+does not construct one coherent four-corner basis, prove BN2 square
+legitimacy, maximize a finite tight family, or establish `SaturatePositive`,
+`BCELReady`, ZeroSlack, PCCMin, polynomial runtime, or the root theorem. See
+[`lean_residual_terminal_side_tight_minimum.md`](./lean_residual_terminal_side_tight_minimum.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

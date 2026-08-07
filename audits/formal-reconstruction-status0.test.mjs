@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-06-108');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-07-109');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -836,6 +836,12 @@ test('formal reconstruction status accepts the current source and public mirrors
     'leanResidualTerminalProjectionMeetJoinCommuteFormalized',
     'leanResidualTerminalProjectionPushoutCommuteFormalized',
     'leanResidualTerminalProjectionSquareAxiomAuditPassed',
+    'leanResidualTerminalSideTightMinimumArithmeticFormalized',
+    'leanResidualTerminalSideTightSignedSlackIdentityFormalized',
+    'leanResidualTerminalSideTightFailClosedGateFormalized',
+    'leanResidualTerminalSideTightCanonicalFullBasisFormalized',
+    'leanResidualTerminalSideTightCanonicalQuotientBasisFormalized',
+    'leanResidualTerminalSideTightMinimumAxiomAuditPassed',
   ]) assert.equal(out[field], true, field);
   assert.equal(
     out.leanResidualTerminalPhysicalSupportCompletionScope,
@@ -865,8 +871,13 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalProjectionSquareScope,
     'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-computed-saturated-support-squares-and-forgetful-terminal-projections',
   );
+  assert.equal(
+    out.leanResidualTerminalSideTightMinimumScope,
+    'all-finite-terminal-projection-four-corner-families-and-independently-attained-full-and-quotient-minimum-bases',
+  );
   for (const field of [
     'leanResidualTerminalSquareLegitimacyFormalized',
+    'leanResidualTerminalCoherentFourCornerBasisFormalized',
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
   ]) assert.equal(out[field], false, field);
@@ -901,13 +912,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 24485);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 13183);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 6956);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14594);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 224);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 24583);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 13218);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 6971);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14595);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 225);
   assert.equal(status.leanSourceClosureSha256,
-    '54ced1d99c5c88c2580956e2b065101f45cbaef8c41de40f0996a3bf74ca0d3a');
+    'c13bb497e99007317cf71871ac88dc94c21645caa70c82770690833f05a2494d');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -1329,7 +1340,7 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-06-RESIDUAL-TERMINAL-PROJECTION-SQUARE-107');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-07-RESIDUAL-TERMINAL-SIDE-TIGHT-MINIMUM-108');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
@@ -1645,6 +1656,12 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
     'leanResidualTerminalProjectionMeetJoinCommuteFormalized',
     'leanResidualTerminalProjectionPushoutCommuteFormalized',
     'leanResidualTerminalProjectionSquareAxiomAuditPassed',
+    'leanResidualTerminalSideTightMinimumArithmeticFormalized',
+    'leanResidualTerminalSideTightSignedSlackIdentityFormalized',
+    'leanResidualTerminalSideTightFailClosedGateFormalized',
+    'leanResidualTerminalSideTightCanonicalFullBasisFormalized',
+    'leanResidualTerminalSideTightCanonicalQuotientBasisFormalized',
+    'leanResidualTerminalSideTightMinimumAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
   assert.equal(
     status.leanResidualTerminalPhysicalSupportCompletionScope,
@@ -1674,8 +1691,13 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
     status.leanResidualTerminalProjectionSquareScope,
     'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-computed-saturated-support-squares-and-forgetful-terminal-projections',
   );
+  assert.equal(
+    status.leanResidualTerminalSideTightMinimumScope,
+    'all-finite-terminal-projection-four-corner-families-and-independently-attained-full-and-quotient-minimum-bases',
+  );
   for (const field of [
     'leanResidualTerminalSquareLegitimacyFormalized',
+    'leanResidualTerminalCoherentFourCornerBasisFormalized',
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
   ]) assert.equal(status[field], false, field);
@@ -2110,6 +2132,12 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanResidualTerminalProjectionMeetJoinCommuteFormalized',
     'leanResidualTerminalProjectionPushoutCommuteFormalized',
     'leanResidualTerminalProjectionSquareAxiomAuditPassed',
+    'leanResidualTerminalSideTightMinimumArithmeticFormalized',
+    'leanResidualTerminalSideTightSignedSlackIdentityFormalized',
+    'leanResidualTerminalSideTightFailClosedGateFormalized',
+    'leanResidualTerminalSideTightCanonicalFullBasisFormalized',
+    'leanResidualTerminalSideTightCanonicalQuotientBasisFormalized',
+    'leanResidualTerminalSideTightMinimumAxiomAuditPassed',
   ];
 
   for (const field of fields) {
@@ -2135,6 +2163,7 @@ test('formal reconstruction status rejects unearned broad downstream NAND claims
     'leanResidualRoutesGlobalGainCompletenessFormalized',
     'leanResidualGainChainPolynomialRuntimeFormalized',
     'leanResidualTerminalSquareLegitimacyFormalized',
+    'leanResidualTerminalCoherentFourCornerBasisFormalized',
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
     'leanZeroSlackPositiveSlackContradictionFormalized',

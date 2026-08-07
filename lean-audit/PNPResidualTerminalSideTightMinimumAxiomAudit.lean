@@ -1,0 +1,46 @@
+import PNP.ResidualTerminalSideTightMinimum
+
+#print axioms PNP.DirectWire.TerminalFourCornerSizes
+#print axioms PNP.DirectWire.TerminalFourCornerSizes.incidenceValue
+#print axioms PNP.DirectWire.TerminalFourCornerSizes.ComponentwiseLE
+#print axioms PNP.DirectWire.TerminalFourCornerSizes.slack
+#print axioms PNP.DirectWire.TerminalFourCornerSizes.NumericallySideTight
+#print axioms PNP.DirectWire.TerminalFourCornerSizes.sideTightBool
+#print axioms PNP.DirectWire.TerminalFourCornerSizes.tightValue?
+#print axioms PNP.DirectWire.TerminalFourCornerSizes.componentwiseLE_refl
+#print axioms PNP.DirectWire.TerminalFourCornerSizes.numericallySideTight_iff_eq
+#print axioms PNP.DirectWire.TerminalFourCornerSizes.sideTightBool_eq_true_iff
+#print axioms PNP.DirectWire.TerminalFourCornerSizes.tightValue?_eq_some_iff
+#print axioms PNP.DirectWire.TerminalFourCornerSizes.tightValue?_sound
+#print axioms PNP.DirectWire.TerminalFourCornerSizes.tightValue?_complete
+#print axioms PNP.DirectWire.TerminalFourCornerSizes.incidenceValue_eq_minimum_add_slacks
+#print axioms PNP.DirectWire.TerminalFullFourCornerBasis
+#print axioms PNP.DirectWire.TerminalFullFourCornerBasis.sizes
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.fullMinimumSizes
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.fullMinimumSizes_incidenceValue
+#print axioms PNP.DirectWire.TerminalFullFourCornerBasis.minimum_componentwiseLE_sizes
+#print axioms PNP.DirectWire.TerminalFullFourCornerBasis.incidenceValue_eq_fullDelta_add_slacks
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.canonicalFullBasis
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.canonicalFullBasis_sizes
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.canonicalFullBasis_numericallySideTight
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.canonicalFullBasis_tightValue?
+#print axioms PNP.DirectWire.TerminalQuotientFourCornerBasis
+#print axioms PNP.DirectWire.TerminalQuotientFourCornerBasis.sizes
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.quotientMinimumSizes
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.quotientMinimumSizes_incidenceValue
+#print axioms PNP.DirectWire.TerminalQuotientFourCornerBasis.minimum_componentwiseLE_sizes
+#print axioms PNP.DirectWire.TerminalQuotientFourCornerBasis.incidenceValue_eq_quotientDelta_add_slacks
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.canonicalQuotientBasis
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.canonicalQuotientBasis_sizes
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.canonicalQuotientBasis_numericallySideTight
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.canonicalQuotientBasis_tightValue?
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.canonical_numericallySideTight_values
+
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.fullDelta
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.quotientDelta
+#print axioms PNP.DirectWire.terminalFullProfileMinimumRealization
+#print axioms PNP.DirectWire.terminalQuotientProfileMinimumComparison
+#print axioms PNP.DirectWire.terminalFullProfileMinimumRealization_gateCount
+#print axioms PNP.DirectWire.terminalQuotientProfileMinimumComparison_gateCount
+#print axioms PNP.DirectWire.terminalFullProfileMinimum_le
+#print axioms PNP.DirectWire.terminalQuotientProfileMinimum_le
