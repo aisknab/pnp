@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-08-111';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-08-112';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -469,6 +469,8 @@ const NON_CLAIMS = Object.freeze([
   'Governed terminal projection squares prove the manuscript Section 3 structural projection-commutation law for every finite direct-wire candidate, computed saturated support square, and explicit forgetful terminal projection. Physical frontiers are retained, each of the ten role profiles is filtered exactly, projected meet is side overlap, and projected join is the side-only projected pushout. The dependency system remains explicit. This does not prove side-tight four-corner minima, BN2 square legitimacy, SaturatePositive, complete obstruction routing, polynomial runtime, SAT in P, or P = NP.',
   'Side-tight four-corner minimum arithmetic proves the manuscript Section 11.1 signed slack identity and a fail-closed exactness gate for every finite terminal projection four-corner family and independently attained full or quotient basis. Canonical minima pass and return the existing deltas. This does not construct a coherent four-corner basis, prove BN2 square legitimacy, maximize a tight family, establish SaturatePositive or BCELReady, complete obstruction routing, prove polynomial runtime, put SAT in P, or prove P = NP.',
   'Checked four-corner carrier transport derives all four governed and extracted endpoints from every finite computed saturated support square in common ambient coordinates. Profile overlap and union are exact; retained physical coordinates keep their identity, internalized coordinates carry concrete witnesses, and absent side queries fail closed. This is a prerequisite for the Section 11.1 four-corner optimum compatibility obligation, not transport of four optimum realizers, coherent completion, BN2 square legitimacy, SaturatePositive, BCELReady, polynomial runtime, SAT in P, or P = NP.',
+  'Four-corner optimum carrier compatibility places all four canonical full and quotient minima on one reversible ambient carrier under one observer and projection, with exact localized minimum counts. It does not assert coherent transport along the square.',
+  'The Section 11.1 optimum-coherence classifier now traverses every finite computed support square in a deterministic order. It either returns a side-tight canonical tuple with exact commutation and incidence facts or the first exact semantic, profile, charge-profile, obligation, or mode-firewall mismatch. It does not prove that the coherent branch always occurs, discharge a later no-outcome route, prove sideTightCompletionExists, or prove P = NP.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
   'The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.',
@@ -1378,6 +1380,15 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalFourCornerOptimaAxiomAuditPassed: true,
   leanResidualTerminalFourCornerOptimaCarrierScope:
     'all-finite-computed-saturated-terminal-support-squares-one-reversible-ambient-carrier-and-shared-observer-projection',
+  leanResidualTerminalFourCornerOptimumCoherenceClassifierFormalized: true,
+  leanResidualTerminalFourCornerOptimumFirstFailureFormalized: true,
+  leanResidualTerminalFourCornerOptimumRetainedSemanticsFormalized: true,
+  leanResidualTerminalFourCornerOptimumProfileTransportFormalized: true,
+  leanResidualTerminalFourCornerOptimumModeFirewallFormalized: true,
+  leanResidualTerminalFourCornerOptimumSideTightTupleFactsFormalized: true,
+  leanResidualTerminalFourCornerOptimumCoherenceAxiomAuditPassed: true,
+  leanResidualTerminalFourCornerOptimumCoherenceScope:
+    'all-finite-computed-terminal-support-squares-observers-projections-and-full-or-quotient-modes-coherent-tuple-or-deterministic-first-failure',
   leanResidualTerminalCoherentFourCornerBasisFormalized: false,
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
@@ -1407,7 +1418,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-08-RESIDUAL-TERMINAL-FOUR-CORNER-OPTIMUM-COMPATIBILITY-110',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-08-RESIDUAL-TERMINAL-FOUR-CORNER-OPTIMUM-COHERENCE-111',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -2297,6 +2308,15 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalFourCornerOptimaAxiomAuditPassed: true,
       leanResidualTerminalFourCornerOptimaCarrierScope:
         'all-finite-computed-saturated-terminal-support-squares-one-reversible-ambient-carrier-and-shared-observer-projection',
+      leanResidualTerminalFourCornerOptimumCoherenceClassifierFormalized: true,
+      leanResidualTerminalFourCornerOptimumFirstFailureFormalized: true,
+      leanResidualTerminalFourCornerOptimumRetainedSemanticsFormalized: true,
+      leanResidualTerminalFourCornerOptimumProfileTransportFormalized: true,
+      leanResidualTerminalFourCornerOptimumModeFirewallFormalized: true,
+      leanResidualTerminalFourCornerOptimumSideTightTupleFactsFormalized: true,
+      leanResidualTerminalFourCornerOptimumCoherenceAxiomAuditPassed: true,
+      leanResidualTerminalFourCornerOptimumCoherenceScope:
+        'all-finite-computed-terminal-support-squares-observers-projections-and-full-or-quotient-modes-coherent-tuple-or-deterministic-first-failure',
       leanResidualTerminalCoherentFourCornerBasisFormalized: false,
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
@@ -2377,7 +2397,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-08-111',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-08-112',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

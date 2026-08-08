@@ -1264,6 +1264,23 @@ the square, `sideTightCompletionExists`, BN2 square legitimacy,
 root theorem. See
 [`lean_residual_terminal_four_corner_optimum_compatibility.md`](./lean_residual_terminal_four_corner_optimum_compatibility.md).
 
+`ResidualTerminalFourCornerOptimumCoherence` now reconstructs the next
+§11.1 `BN2-CoherentOptimum` dependency over that shared carrier. For every
+finite computed terminal support square, observer, projection, and full or
+quotient mode, an executable classifier traverses the four directed square
+legs in a fixed order. It compares semantics only at outputs retained by both
+endpoints, compares mode-appropriate profiles in canonical role and coordinate
+order, and checks full-mode obligations first. The result is either a checked
+side-tight canonical tuple with exact minimum sizes, incidence values, and
+physical square commutation, or the exact sound first semantic, profile,
+charge-profile, obligation, or mode-firewall mismatch. Quotient success remains
+comparison-only. This closes the finite coherence-or-first-failure interface,
+but it does not prove that every square is coherent, connect a mismatch to a
+later no-outcome route, prove `sideTightCompletionExists`, establish BN2 square
+legitimacy, or establish `SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin,
+polynomial runtime, or the root theorem. See
+[`lean_residual_terminal_four_corner_optimum_coherence.md`](./lean_residual_terminal_four_corner_optimum_coherence.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

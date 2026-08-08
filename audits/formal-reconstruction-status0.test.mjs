@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-08-111');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-08-112');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -932,13 +932,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 24758);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 13298);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 6989);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14645);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 227);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 24934);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 13352);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7015);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14691);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 228);
   assert.equal(status.leanSourceClosureSha256,
-    '55b94c1f15c1003306e4efcf83469416817e29530e7eae8a25aa4948efa9d370');
+    '3161b45bbf5468a66e86fac1cf8dd6bef3ea19b1d472c536a620695085e589d1');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -1360,7 +1360,7 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-08-RESIDUAL-TERMINAL-FOUR-CORNER-OPTIMUM-COMPATIBILITY-110');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-08-RESIDUAL-TERMINAL-FOUR-CORNER-OPTIMUM-COHERENCE-111');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);

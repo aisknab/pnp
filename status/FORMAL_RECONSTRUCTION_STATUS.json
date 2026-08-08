@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-08-111",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-08-112",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -765,6 +765,14 @@
   "leanResidualTerminalFourCornerOptimaSharedObserverProjectionFormalized": true,
   "leanResidualTerminalFourCornerOptimaAxiomAuditPassed": true,
   "leanResidualTerminalFourCornerOptimaCarrierScope": "all-finite-computed-saturated-terminal-support-squares-one-reversible-ambient-carrier-and-shared-observer-projection",
+  "leanResidualTerminalFourCornerOptimumCoherenceClassifierFormalized": true,
+  "leanResidualTerminalFourCornerOptimumFirstFailureFormalized": true,
+  "leanResidualTerminalFourCornerOptimumRetainedSemanticsFormalized": true,
+  "leanResidualTerminalFourCornerOptimumProfileTransportFormalized": true,
+  "leanResidualTerminalFourCornerOptimumModeFirewallFormalized": true,
+  "leanResidualTerminalFourCornerOptimumSideTightTupleFactsFormalized": true,
+  "leanResidualTerminalFourCornerOptimumCoherenceAxiomAuditPassed": true,
+  "leanResidualTerminalFourCornerOptimumCoherenceScope": "all-finite-computed-terminal-support-squares-observers-projections-and-full-or-quotient-modes-coherent-tuple-or-deterministic-first-failure",
   "leanResidualTerminalCoherentFourCornerBasisFormalized": false,
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
@@ -794,7 +802,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-08-08-RESIDUAL-TERMINAL-FOUR-CORNER-OPTIMUM-COMPATIBILITY-110",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-08-08-RESIDUAL-TERMINAL-FOUR-CORNER-OPTIMUM-COHERENCE-111",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -1348,6 +1356,8 @@
     "Governed terminal projection squares prove the manuscript Section 3 structural projection-commutation law for every finite direct-wire candidate, computed saturated support square, and explicit forgetful terminal projection. Physical frontiers are retained, each of the ten role profiles is filtered exactly, projected meet is side overlap, and projected join is the side-only projected pushout. The dependency system remains explicit. This does not prove side-tight four-corner minima, BN2 square legitimacy, SaturatePositive, complete obstruction routing, polynomial runtime, SAT in P, or P = NP.",
     "Side-tight four-corner minimum arithmetic proves the manuscript Section 11.1 signed slack identity and a fail-closed exactness gate for every finite terminal projection four-corner family and independently attained full or quotient basis. Canonical minima pass and return the existing deltas. This does not construct a coherent four-corner basis, prove BN2 square legitimacy, maximize a tight family, establish SaturatePositive or BCELReady, complete obstruction routing, prove polynomial runtime, put SAT in P, or prove P = NP.",
     "Checked four-corner carrier transport derives all four governed and extracted endpoints from every finite computed saturated support square in common ambient coordinates. Profile overlap and union are exact; retained physical coordinates keep their identity, internalized coordinates carry concrete witnesses, and absent side queries fail closed. This is a prerequisite for the Section 11.1 four-corner optimum compatibility obligation, not transport of four optimum realizers, coherent completion, BN2 square legitimacy, SaturatePositive, BCELReady, polynomial runtime, SAT in P, or P = NP.",
+    "Four-corner optimum carrier compatibility places all four canonical full and quotient minima on one reversible ambient carrier under one observer and projection, with exact localized minimum counts. It does not assert coherent transport along the square.",
+    "The Section 11.1 optimum-coherence classifier now traverses every finite computed support square in a deterministic order. It either returns a side-tight canonical tuple with exact commutation and incidence facts or the first exact semantic, profile, charge-profile, obligation, or mode-firewall mismatch. It does not prove that the coherent branch always occurs, discharge a later no-outcome route, prove sideTightCompletionExists, or prove P = NP.",
     "External review is optional audit evidence and is not a mathematical premise or release blocker.",
     "Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.",
     "The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.",
@@ -1384,7 +1394,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "55b94c1f15c1003306e4efcf83469416817e29530e7eae8a25aa4948efa9d370",
+    "actualSourceClosureSha256": "3161b45bbf5468a66e86fac1cf8dd6bef3ea19b1d472c536a620695085e589d1",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1414,22 +1424,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-08-111",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-08-112",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "ea373cfe65d8c99fab5c3896b7d594f96724a8eab2b3d2b7ddf0abdfee81aabe",
+  "leanTheoremInventorySha256": "10ca3467d9c899300ac9c76c84ce62f87c8157e73fc39f8af82b203a4be9a8eb",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 24758,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 14645,
-  "leanTheoremInventoryTheoremCount": 13298,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 6989,
-  "leanTheoremInventorySourceClosureModuleCount": 227,
-  "leanSourceClosureSha256": "55b94c1f15c1003306e4efcf83469416817e29530e7eae8a25aa4948efa9d370",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-08-111",
+  "leanTheoremInventoryDeclarationCount": 24934,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 14691,
+  "leanTheoremInventoryTheoremCount": 13352,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 7015,
+  "leanTheoremInventorySourceClosureModuleCount": 228,
+  "leanSourceClosureSha256": "3161b45bbf5468a66e86fac1cf8dd6bef3ea19b1d472c536a620695085e589d1",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-08-112",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "8efcfb683a0aeb7f2b6884bf6374493b3e69c20f6bb5617d2e63252646b384d6",
+  "formalPublicationMapSha256": "8404f2c2b178d87c42f4501b4490286c90da593281dad2708297c22b0fbfa9df",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -34054,6 +34064,262 @@
       "status": "formalized-residual-terminal-four-corner-optimum-carrier-compatibility"
     },
     {
+      "classification": "formalized-residual-terminal-four-corner-optimum-coherence-dichotomy",
+      "id": "residual-terminal-four-corner-optimum-coherence-dichotomy",
+      "nonClaim": "This milestone classifies coherent transport or its exact first failure. It does not prove that every square is coherent, construct the later no-outcome route, prove sideTightCompletionExists or BN2 square legitimacy, establish SaturatePositive, Package E, BCELReady or BCEL/BN2-BN6, complete obstruction routing, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, removal of a project assumption, or P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalOptimumLegTransport.recordsSubset",
+        "PNP.DirectWire.TerminalOptimumLegTransport.profileTransport",
+        "PNP.DirectWire.TerminalOptimumLegTransport.ambientCoordinate_exact",
+        "PNP.DirectWire.TerminalOptimumLegTransport.retainedOutput?_eq_some_iff",
+        "PNP.DirectWire.TerminalOptimumLegTransport.retained_or_internalized",
+        "PNP.DirectWire.TerminalFourCornerCarrier.optimumTransportTheta",
+        "PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_sound",
+        "PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumModeMismatch?_sound",
+        "PNP.DirectWire.TerminalFourCornerCarrier.noFailure_iff_coherentOptimumTuple",
+        "PNP.DirectWire.TerminalFourCornerCarrier.classifyOptimumCoherence_exhaustive",
+        "PNP.DirectWire.TerminalFourCornerCarrier.fourCornerOptimumCoherenceDichotomy",
+        "PNP.DirectWire.TerminalFourCornerCarrier.fourCornerOptimaCarrierCompatible",
+        "PNP.DirectWire.TerminalFourCornerCarrier.complete_transport",
+        "PNP.DirectWire.TerminalFourCornerCarrier.meet_profile_transport",
+        "PNP.DirectWire.TerminalFourCornerCarrier.side_profile_transport",
+        "PNP.DirectWire.TerminalFourCornerCarrier.interfaceIndex?_eq_some_iff",
+        "PNP.DirectWire.TerminalProjectionFourCorners.canonicalFullBasis_numericallySideTight",
+        "PNP.DirectWire.TerminalProjectionFourCorners.canonicalQuotientBasis_numericallySideTight",
+        "PNP.DirectWire.TerminalProjectionFourCorners.canonical_numericallySideTight_values"
+      ],
+      "scope": "For every finite computed terminal support square, every explicit observer, every terminal projection, and either full or quotient coherence mode, Lean checks the four square legs in a deterministic order and returns either one coherent canonical optimum tuple with exact transport, side-tight, and incidence facts or the exact deterministic first failure.",
+      "title": "Four-corner optimum coherence dichotomy",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.TerminalOptimumLegTransport.recordsSubset",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "506a2ab9eaa978c106fd713b1eedeb34b6ddca2a8b5863fda8aad1595a1d5857",
+          "expectedKernelTypeSha256": "506a2ab9eaa978c106fd713b1eedeb34b6ddca2a8b5863fda8aad1595a1d5857",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalOptimumLegTransport.profileTransport",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ba4e1e374205d15ef1fef813ec06ea2ef6f437b78a17707beb657e5bc3bfe266",
+          "expectedKernelTypeSha256": "ba4e1e374205d15ef1fef813ec06ea2ef6f437b78a17707beb657e5bc3bfe266",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalOptimumLegTransport.ambientCoordinate_exact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "58ccdb01bc7d5d4009f5ff91a79e30761ff9c2412d44079666234fd23bad15d5",
+          "expectedKernelTypeSha256": "58ccdb01bc7d5d4009f5ff91a79e30761ff9c2412d44079666234fd23bad15d5",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalOptimumLegTransport.retainedOutput?_eq_some_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3ca872ed3070e25f52506eb992876b903dd80f3d141f0cbe00dcb4f917db0aea",
+          "expectedKernelTypeSha256": "3ca872ed3070e25f52506eb992876b903dd80f3d141f0cbe00dcb4f917db0aea",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalOptimumLegTransport.retained_or_internalized",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "33ab10a138405195706d2917e58736ff22a742d316600b62aacc94a671faee4a",
+          "expectedKernelTypeSha256": "33ab10a138405195706d2917e58736ff22a742d316600b62aacc94a671faee4a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalFourCornerCarrier.optimumTransportTheta",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "e11bb3cfbc27c2e39c731d4e7fa5842859dcbc4d9a61c6031790f9d1893a37a2",
+          "expectedKernelTypeSha256": "e11bb3cfbc27c2e39c731d4e7fa5842859dcbc4d9a61c6031790f9d1893a37a2",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_sound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f34159b818fab99a0eaba5f7efc5c7016e02d2dca51e5e9d5b0ef2baa7fc31bc",
+          "expectedKernelTypeSha256": "f34159b818fab99a0eaba5f7efc5c7016e02d2dca51e5e9d5b0ef2baa7fc31bc",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumModeMismatch?_sound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e0839eb9e393f9e2d6a03976dc1d8518cff735298274d6ce4e0d14d6977e5796",
+          "expectedKernelTypeSha256": "e0839eb9e393f9e2d6a03976dc1d8518cff735298274d6ce4e0d14d6977e5796",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalFourCornerCarrier.noFailure_iff_coherentOptimumTuple",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9a9baca321ea735cf5e48f17587acf7dad8c46d2fcac08729fc811c7bf2069bd",
+          "expectedKernelTypeSha256": "9a9baca321ea735cf5e48f17587acf7dad8c46d2fcac08729fc811c7bf2069bd",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalFourCornerCarrier.classifyOptimumCoherence_exhaustive",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5508c5cb130ca54056c44d276865590baaa5530df0b6e4ec3ac946c02bd61af9",
+          "expectedKernelTypeSha256": "5508c5cb130ca54056c44d276865590baaa5530df0b6e4ec3ac946c02bd61af9",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalFourCornerCarrier.fourCornerOptimumCoherenceDichotomy",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "dbda182bed221380c62b320a31510636262e22cba6f71508812634a8e206fd23",
+          "expectedKernelTypeSha256": "dbda182bed221380c62b320a31510636262e22cba6f71508812634a8e206fd23",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalFourCornerCarrier.fourCornerOptimaCarrierCompatible",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0c8b453d9b62cca81206e8097b11fe630fb81467c30842548b9fabb1b2725304",
+          "expectedKernelTypeSha256": "0c8b453d9b62cca81206e8097b11fe630fb81467c30842548b9fabb1b2725304",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalFourCornerCarrier.complete_transport",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5976aa24e0dfafa1d0bab889dbee53df1ca2686923df8b5dab9c0752888ecb27",
+          "expectedKernelTypeSha256": "5976aa24e0dfafa1d0bab889dbee53df1ca2686923df8b5dab9c0752888ecb27",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalFourCornerCarrier.meet_profile_transport",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "401a598c9f5d9f9a5db940695710f9d44df9a2317cf498b08d9b95a59af08e10",
+          "expectedKernelTypeSha256": "401a598c9f5d9f9a5db940695710f9d44df9a2317cf498b08d9b95a59af08e10",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalFourCornerCarrier.side_profile_transport",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e7c7d3f5c7b2d1ed33543e8f1af2408e4740ad83a42a1e1651feeb46e66e1198",
+          "expectedKernelTypeSha256": "e7c7d3f5c7b2d1ed33543e8f1af2408e4740ad83a42a1e1651feeb46e66e1198",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalFourCornerCarrier.interfaceIndex?_eq_some_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c96c26a35dbac2dd661438e54b893a6edf9dfc2ad925bce62cb9c0b7f65e415c",
+          "expectedKernelTypeSha256": "c96c26a35dbac2dd661438e54b893a6edf9dfc2ad925bce62cb9c0b7f65e415c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalProjectionFourCorners.canonicalFullBasis_numericallySideTight",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "30667d03f2b79304ef3ba521fdfb603ddbc0fed9d7a500b5cb82b873b5d848b8",
+          "expectedKernelTypeSha256": "30667d03f2b79304ef3ba521fdfb603ddbc0fed9d7a500b5cb82b873b5d848b8",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalProjectionFourCorners.canonicalQuotientBasis_numericallySideTight",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "cf09d5ab284e8ab70e5a292eacf1365ba8ed36726befdaac7437a9391a18e446",
+          "expectedKernelTypeSha256": "cf09d5ab284e8ab70e5a292eacf1365ba8ed36726befdaac7437a9391a18e446",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalProjectionFourCorners.canonical_numericallySideTight_values",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4288f8f3bd740dcdb96a2f0b1178e6b86a473f0d06e8c2977381838ab6f538ac",
+          "expectedKernelTypeSha256": "4288f8f3bd740dcdb96a2f0b1178e6b86a473f0d06e8c2977381838ab6f538ac",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-four-corner-optimum-coherence-dichotomy"
+    },
+    {
       "classification": "not-formalized",
       "id": "global-locked-nand-threshold",
       "nonClaim": "The strict encoding, total source parser, literal target emitter, exact formula bytes, strict parser/emitter composition, polynomial runtime, output-size bound, recursive RawRefinement, concrete strict-v0 source-to-target PolynomialReduction, semantic CNF-to-NAND compiler, and its all-input finite-machine PolynomialReduction are now formalized. The concrete target language is still not linked to the report-level theorem, and the abstract threshold assumption remains.",
@@ -34148,7 +34414,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-08-111",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-08-112",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

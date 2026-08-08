@@ -1,0 +1,40 @@
+import PNP.ResidualTerminalFourCornerOptimumCoherence
+
+#print axioms PNP.DirectWire.TerminalOptimumCoherenceMode
+#print axioms PNP.DirectWire.TerminalOptimumSquareLeg
+#print axioms PNP.DirectWire.allTerminalOptimumSquareLegs
+#print axioms PNP.DirectWire.TerminalOptimumSquareLeg.source
+#print axioms PNP.DirectWire.TerminalOptimumSquareLeg.target
+#print axioms PNP.DirectWire.TerminalOptimumLegTransport
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.optimumLegTransport
+#print axioms PNP.DirectWire.TerminalOptimumLegTransport.recordsSubset
+#print axioms PNP.DirectWire.TerminalOptimumLegTransport.profileTransport
+#print axioms PNP.DirectWire.TerminalOptimumLegTransport.ambientCoordinate
+#print axioms PNP.DirectWire.TerminalOptimumLegTransport.ambientCoordinate_exact
+#print axioms PNP.DirectWire.TerminalOptimumLegTransport.retainedOutput?
+#print axioms PNP.DirectWire.TerminalOptimumLegTransport.retainedOutput?_eq_some_iff
+#print axioms PNP.DirectWire.TerminalOptimumLegTransport.OutputInternalized
+#print axioms PNP.DirectWire.TerminalOptimumLegTransport.retained_or_internalized
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.optimumTransportTheta
+#print axioms PNP.DirectWire.TerminalFourCornerOptimumFamily.implementationAt
+#print axioms PNP.DirectWire.TerminalFourCornerOptimumFailure
+#print axioms PNP.DirectWire.TerminalFourCornerOptimumFailure.Sound
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumCoherenceFailure?
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_sound
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumModeMismatch?
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumModeMismatch?_sound
+#print axioms PNP.DirectWire.TerminalFourCornerCoherentOptimumTuple
+#print axioms PNP.DirectWire.TerminalFourCornerOptimumClassification
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.classifyOptimumCoherence
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.noFailure_iff_coherentOptimumTuple
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.classifyOptimumCoherence_exhaustive
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.fourCornerOptimumCoherenceDichotomy
+
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.fourCornerOptimaCarrierCompatible
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.complete_transport
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.meet_profile_transport
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.side_profile_transport
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.interfaceIndex?_eq_some_iff
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.canonicalFullBasis_numericallySideTight
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.canonicalQuotientBasis_numericallySideTight
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.canonical_numericallySideTight_values
