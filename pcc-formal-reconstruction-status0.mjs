@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-08-113';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-08-114';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -471,7 +471,8 @@ const NON_CLAIMS = Object.freeze([
   'Checked four-corner carrier transport derives all four governed and extracted endpoints from every finite computed saturated support square in common ambient coordinates. Profile overlap and union are exact; retained physical coordinates keep their identity, internalized coordinates carry concrete witnesses, and absent side queries fail closed. This is a prerequisite for the Section 11.1 four-corner optimum compatibility obligation, not transport of four optimum realizers, coherent completion, BN2 square legitimacy, SaturatePositive, BCELReady, polynomial runtime, SAT in P, or P = NP.',
   'Four-corner optimum carrier compatibility places all four canonical full and quotient minima on one reversible ambient carrier under one observer and projection, with exact localized minimum counts. It does not assert coherent transport along the square.',
   'The Section 11.1 optimum-coherence classifier traverses every finite computed support square in a deterministic order. It either returns a side-tight canonical tuple with exact commutation and incidence facts or the first exact semantic, profile, charge-profile, obligation, or mode-firewall mismatch. That classifier alone does not prove that the coherent branch always occurs or discharge a later no-outcome route.',
-  'The sideTightCompletionExists milestone now turns exact mode-appropriate local route silence into the checked side-tight coherent optimum tuple and its exact incidence value for every finite computed terminal support square. Full and quotient modes are discharged independently, and the quotient-promotion firewall remains separate. This is conditional local completion, not universal route silence, BN2 square legitimacy, the complete global no-outcome route system, terminal dependency extraction, complete tight-basis maximization, SaturatePositive, BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.',
+  'The sideTightCompletionExists milestone turns exact mode-appropriate local route silence into the checked side-tight coherent optimum tuple and its exact incidence value for every finite computed terminal support square. Full and quotient modes are discharged independently, and the quotient-promotion firewall remains separate.',
+  'The complete BN2 tight-basis milestone enumerates every profile-constrained minimum implementation at all four corners, crosses and coherence-filters the full finite family, and proves that its signed maximum equals the selected delta under exact local route silence. This is a local all-finite maximum, not universal route silence, BN2 square legitimacy, the complete global no-outcome route system, terminal dependency extraction, SaturatePositive, BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
   'The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.',
@@ -1399,6 +1400,14 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalFourCornerSideTightCompletionAxiomAuditPassed: true,
   leanResidualTerminalFourCornerSideTightCompletionScope:
     'all-finite-computed-terminal-support-squares-observers-and-full-or-quotient-modes-side-tight-coherent-completion-under-exact-local-route-silence',
+  leanResidualTerminalFourCornerArbitraryFamilyCoherenceFormalized: true,
+  leanResidualTerminalFourCornerExactMinimumFamilyEnumerated: true,
+  leanResidualTerminalFourCornerTightBasisFamilyComplete: true,
+  leanResidualTerminalFourCornerSignedTightBasisMaximumFormalized: true,
+  leanResidualTerminalFourCornerTightBasisMaximumEqualsDeltaFormalized: true,
+  leanResidualTerminalFourCornerTightBasisMaximumAxiomAuditPassed: true,
+  leanResidualTerminalFourCornerTightBasisMaximumScope:
+    'all-finite-computed-terminal-support-squares-observers-and-full-or-quotient-modes-complete-tight-basis-family-and-signed-maximum-under-exact-local-route-silence',
   leanResidualTerminalCoherentFourCornerBasisFormalized: true,
   leanResidualTerminalCoherentFourCornerBasisScope:
     'conditional-on-exact-mode-appropriate-local-route-silence-not-universal-bn2-square-legitimacy',
@@ -1430,7 +1439,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-08-RESIDUAL-TERMINAL-FOUR-CORNER-SIDE-TIGHT-COMPLETION-112',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-08-RESIDUAL-TERMINAL-FOUR-CORNER-TIGHT-BASIS-MAXIMUM-113',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -2338,6 +2347,14 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalFourCornerSideTightCompletionAxiomAuditPassed: true,
       leanResidualTerminalFourCornerSideTightCompletionScope:
         'all-finite-computed-terminal-support-squares-observers-and-full-or-quotient-modes-side-tight-coherent-completion-under-exact-local-route-silence',
+      leanResidualTerminalFourCornerArbitraryFamilyCoherenceFormalized: true,
+      leanResidualTerminalFourCornerExactMinimumFamilyEnumerated: true,
+      leanResidualTerminalFourCornerTightBasisFamilyComplete: true,
+      leanResidualTerminalFourCornerSignedTightBasisMaximumFormalized: true,
+      leanResidualTerminalFourCornerTightBasisMaximumEqualsDeltaFormalized: true,
+      leanResidualTerminalFourCornerTightBasisMaximumAxiomAuditPassed: true,
+      leanResidualTerminalFourCornerTightBasisMaximumScope:
+        'all-finite-computed-terminal-support-squares-observers-and-full-or-quotient-modes-complete-tight-basis-family-and-signed-maximum-under-exact-local-route-silence',
       leanResidualTerminalCoherentFourCornerBasisFormalized: true,
       leanResidualTerminalCoherentFourCornerBasisScope:
         'conditional-on-exact-mode-appropriate-local-route-silence-not-universal-bn2-square-legitimacy',
@@ -2420,7 +2437,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-08-113',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-08-114',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

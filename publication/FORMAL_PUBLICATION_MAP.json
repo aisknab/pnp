@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-08-113",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-08-114",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2364,7 +2364,28 @@
     "PNP.DirectWire.traceDirect_referenceMinimum": "cbef9349e46dd570d0e02c81170ea1257f3d1a76a49db39123074892e3196ea2",
     "PNP.DirectWire.unresolved_positiveSlack_regression": "db564cb64914fa82c134c8e4e2dfbef40a143e1fe78b2ceb8f81dece3b895977",
     "PNP.DirectWire.WholeSpanResidualWitness.strictResidualDescent": "bbeb896c3ba81d61e882ef600de8617bae37133f66c8cb7f905ebaa65d5460ce",
-    "PNP.Main.concretePEqualsNP_iff": "66d644a7be721e907db2bf854137ac76150c5ad3284aca8fccad8b7ee36ca364"
+    "PNP.Main.concretePEqualsNP_iff": "66d644a7be721e907db2bf854137ac76150c5ad3284aca8fccad8b7ee36ca364",
+    "PNP.DirectWire.TerminalOptimumCoherenceMode.minimumAt_le_current": "6c4809c980c1db6594fcf6f245e24dbc193fa9c846635c3f9bdbbb1499df8aaa",
+    "PNP.DirectWire.mem_allBoundedCandidates": "32b216ecf3faa1be6eb7d6e9f3f32f3de24ed3b5d3d49e1c303a38cad32f6aae",
+    "PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationsAt_sound": "3d49ba6e76035e93207da04f7cc351cedf024d30efcb5a826f6d34552f6a64a5",
+    "PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationsAt_complete": "b9eebae3442c7490b366c64f129bff33be7b6fe1de59c11e466482e89a6c6d0f",
+    "PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationsAt_iff": "a473241e90752a2117efbb2df0a16400aea4affba7f0287a3941b25097d0424e",
+    "PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationBases_iff": "c654d12ee2ef6faf1e42a5193afee03e41fe32f38321fc0e7dbd3661d3721829",
+    "PNP.DirectWire.TerminalFourCornerCarrier.tightBasisBool_eq_true_iff": "3c76bfac012bfee03a64ae2d635ce12f42194f41f279784fd4543aaaebaad300",
+    "PNP.DirectWire.TerminalFourCornerCarrier.mem_tightBasisFamily_sound": "e18e651e881debd70be534ccc9bbcf32c8db8499cc8b516970da92cdbe6c6ecc",
+    "PNP.DirectWire.TerminalFourCornerCarrier.mem_tightBasisFamily_complete": "f2f95759eb14f30cdfaa7ad173f325ff4fc13152b0236deb213a30f67fae2b66",
+    "PNP.DirectWire.TerminalFourCornerCarrier.mem_tightBasisFamily_iff": "444b7f59074e4ef386c04cdb1c917f8eeba5cca6cd50894aff7a82abeff5e877",
+    "PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis_at": "50d2ae7c306e621301a1a71831d3cc07cb55c86bfdf4158b65769f0caf11e4a3",
+    "PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis_sizes": "a3a79b0d6e5d6cb6a56a8cc365fc611661df47e62781322367260f361de74b4b",
+    "PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis_isTightCoherent": "b24e97c1e2219daeaf197d2f106660a20e225ed0ea6194672f118233a62f9dee",
+    "PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis_mem_tightFamily": "c777345eaecc95749978bb08477f9b20a4d15fcc3ed16b2db6359c1ac1274e13",
+    "PNP.DirectWire.TerminalFourCornerCarrier.tightBasis_incidenceValue_eq_delta": "f9c4269ad9aef9cf22898abeca683841a0b07a976074610ac61e159f7c4f0da3",
+    "PNP.DirectWire.TerminalFourCornerCarrier.mem_tightBasisValues_eq_delta": "66d896dc9993b760660b204d1e42b8c7f3f20c89e244fb13bf4cd8543d28c5f8",
+    "PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_eq_delta": "cf899f2ca453722f04ad1e9648edefd3772303ffc70f7a3e35e9116d7e0fed55",
+    "PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_full": "15b31bdefa9557e49c23e97eed5540a4ded842e6dfd6e8de3918bb1819d157d3",
+    "PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_quotient": "4a49571efc6e506071fe848b68683172739162cfaff84516f7a1df21a12bff73",
+    "PNP.DirectWire.TerminalFourCornerCarrier.firstBasisCoherenceFailure?_sound": "71ac14a1fd03c250d1c1f3b3bb8c5ff9a0a35e6b6ef436b1c0e6df1b3d56aee3",
+    "PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_eq_basis": "fee448e50ef580e58823afaa0d44537cc65e5deede514535e40ce14f826c09b7"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -2382,7 +2403,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "1ed937ea678bb853929da8c6958fe30fe09b837ad53fda5b53d5ce4da2584830",
+  "milestoneSourceClosureSha256": "588c6626fcd4c0996f770b1118648ee99c82453ab303faf884e5e712d0107771",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -5763,6 +5784,43 @@
       ],
       "scope": "For every finite computed terminal support square, every explicit observer, and either full or quotient coherence mode, the exact first local coherence query returns a proof-bearing sound route or, under computed local route silence, Lean supplies the complete checked side-tight coherent optimum tuple with exact minimum incidence value while retaining the separate quotient-promotion firewall.",
       "title": "Four-corner side-tight completion under local route silence"
+    },
+    {
+      "classification": "formalized-residual-terminal-four-corner-complete-tight-basis-maximum",
+      "id": "residual-terminal-four-corner-tight-basis-maximum",
+      "nonClaim": "This milestone closes the remaining local BN2 tight-basis maximum under computed local route silence. It does not prove universal route silence, connect a local obstruction to the complete global no-outcome route system, prove BN2 square legitimacy, derive the terminal dependency system, establish SaturatePositive, Package E, BCELReady or BCEL/BN2-BN6, complete obstruction routing, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalOptimumCoherenceMode.minimumAt_le_current",
+        "PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationsAt_sound",
+        "PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationsAt_complete",
+        "PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationsAt_iff",
+        "PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationBases_iff",
+        "PNP.DirectWire.TerminalFourCornerCarrier.tightBasisBool_eq_true_iff",
+        "PNP.DirectWire.TerminalFourCornerCarrier.mem_tightBasisFamily_sound",
+        "PNP.DirectWire.TerminalFourCornerCarrier.mem_tightBasisFamily_complete",
+        "PNP.DirectWire.TerminalFourCornerCarrier.mem_tightBasisFamily_iff",
+        "PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis_at",
+        "PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis_sizes",
+        "PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis_isTightCoherent",
+        "PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis_mem_tightFamily",
+        "PNP.DirectWire.TerminalFourCornerCarrier.tightBasis_incidenceValue_eq_delta",
+        "PNP.DirectWire.TerminalFourCornerCarrier.mem_tightBasisValues_eq_delta",
+        "PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_eq_delta",
+        "PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_full",
+        "PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_quotient",
+        "PNP.DirectWire.TerminalFourCornerCarrier.firstBasisCoherenceFailure?_sound",
+        "PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_eq_basis",
+        "PNP.DirectWire.mem_allBoundedCandidates",
+        "PNP.DirectWire.terminalFullProfileMatchBool_complete",
+        "PNP.DirectWire.terminalQuotientProfileMatchBool_complete",
+        "PNP.DirectWire.terminalFullProfileMinimum_le",
+        "PNP.DirectWire.terminalQuotientProfileMinimum_le",
+        "PNP.DirectWire.TerminalFourCornerSizes.numericallySideTight_iff_eq",
+        "PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_sound",
+        "PNP.DirectWire.TerminalFourCornerCarrier.sideTightCompletionExists"
+      ],
+      "scope": "For every finite computed terminal support square, every explicit observer, and either full or quotient mode, Lean enumerates the complete finite tight-basis family, retains every exact profile-constrained minimum implementation at each corner, filters the full Cartesian product with the arbitrary-family coherence query, and proves under exact local route silence that the signed maximum equals the selected delta.",
+      "title": "Complete four-corner BN2 tight-basis maximum"
     },
     {
       "classification": "not-formalized",

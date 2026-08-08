@@ -197,29 +197,29 @@ host.
 ## Mechanically generated publication evidence
 
 Inventory coordinate
-`PNP-LEAN-THEOREM-INVENTORY-2026-08-08-113` records 24,999 declarations,
-13,376 theorems, 7,022 assumption-free theorems, 14,691 excluded private
-declarations, 229 source-closure modules, and 2,364 reviewed milestone
-candidates. Its 15,930,331 canonical bytes have SHA-256
-`82fcdfd7443489f917d3987d31f604af6c163e9cb2a6fca2cd8aff98c38ff97f`.
+`PNP-LEAN-THEOREM-INVENTORY-2026-08-08-114` records 25,059 declarations,
+13,401 theorems, 7,025 assumption-free theorems, 14,705 excluded private
+declarations, 230 source-closure modules, and 2,385 reviewed milestone
+candidates. Its 16,124,474 canonical bytes have SHA-256
+`fe036a74807d08c1e763a850722eb8113c1b3d186ef41d900641ed6e9eadb44c`.
 The pinned Lean source closure is
-`1ed937ea678bb853929da8c6958fe30fe09b837ad53fda5b53d5ce4da2584830`.
+`588c6626fcd4c0996f770b1118648ee99c82453ab303faf884e5e712d0107771`.
 
 Publication-map coordinate
-`PNP-FORMAL-PUBLICATION-MAP-2026-08-08-113` contains 93 milestones, of
+`PNP-FORMAL-PUBLICATION-MAP-2026-08-08-114` contains 94 milestones, of
 which 90 are earned and three global milestones remain unearned. The map pins
-2,364 theorem types. Its 766,476 bytes have SHA-256
-`6d05c3a4d70ea78994a0302a60c8ba8381e37ff4e9c30a774ab474a13bb9baac`.
+2,385 theorem types. Its 773,039 bytes have SHA-256
+`5ee8bb52412e04ce7b5ba9bccb619070d0963df00044f8f26b2bfe0aef73d186`.
 The source-parser milestone contributes 20 theorem types.
 
 Status coordinate
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-08-113`, paired with public-surface
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-08-114`, paired with public-surface
 coordinate
-`PUBLIC-SURFACE-BASELINE-2026-08-08-RESIDUAL-TERMINAL-FOUR-CORNER-SIDE-TIGHT-COMPLETION-112`, records
+`PUBLIC-SURFACE-BASELINE-2026-08-08-RESIDUAL-TERMINAL-FOUR-CORNER-TIGHT-BASIS-MAXIMUM-113`, records
 the four disclosed project assumptions, six blockers, absent
 `PNP.Main.p_eq_np`, unset activation fingerprints, and a false concrete
-publication gate. The status is 1,916,515 bytes with SHA-256
-`b9aff3d3eee8fed7d232c41cf0e81dc2355a3cd27a720b64aafde01746b20656`.
+publication gate. The status is 1,935,171 bytes with SHA-256
+`a72f8bfd4df79e29c1ea8908883f6211e65094ab162cf98b19a12b8ae080b158`.
 
 The complete parser audit covers 380 audited declarations: 247 have empty
 axiom closure, 58 use only `propext`, and 75 use only `propext` and
@@ -227,11 +227,11 @@ axiom closure, 58 use only `propext`, and 75 use only `propext` and
 a project axiom.
 
 Canonical report coordinate
-`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-08-113` renders as a
-78-page A4 PDF. The generated TeX is 199,054 bytes with SHA-256
-`73ef5719cc112e91e262b42846db82f4e92cd1dc1184484ad67f2b0b5006a01f`;
-the deterministic PDF is 438,997 bytes with SHA-256
-`e196ce1a2c373dbab4bf5e0e70418f0029beed4e1cfb959c78981c4880c6db02`.
+`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-08-114` renders as a
+78-page A4 PDF. The generated TeX is 200,233 bytes with SHA-256
+`785181cde2595e9f21cb95239530b1aa9bc194b2e5d5d0198925956c8e853fd5`;
+the deterministic PDF is 439,981 bytes with SHA-256
+`447832f2f4992227446044f188aed18d07443dc0f9c285799f8eeeee8617d6e7`.
 
 ## Explicit non-claims
 

@@ -19,7 +19,10 @@ import PNP.ResidualTerminalFourCornerOptimumCoherence
 #print axioms PNP.DirectWire.TerminalFourCornerOptimumFamily.implementationAt
 #print axioms PNP.DirectWire.TerminalFourCornerOptimumFailure
 #print axioms PNP.DirectWire.TerminalFourCornerOptimumFailure.Sound
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstBasisCoherenceFailure?
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstBasisCoherenceFailure?_sound
 #print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumCoherenceFailure?
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_eq_basis
 #print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_sound
 #print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumModeMismatch?
 #print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumModeMismatch?_sound

@@ -45,7 +45,10 @@ const PUBLIC_LOCAL_DECLARATIONS = Object.freeze([
   'TerminalFourCornerOptimumFamily.implementationAt',
   'TerminalFourCornerOptimumFailure',
   'TerminalFourCornerOptimumFailure.Sound',
+  'TerminalFourCornerCarrier.firstBasisCoherenceFailure?',
+  'TerminalFourCornerCarrier.firstBasisCoherenceFailure?_sound',
   'TerminalFourCornerCarrier.firstOptimumCoherenceFailure?',
+  'TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_eq_basis',
   'TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_sound',
   'TerminalFourCornerCarrier.firstOptimumModeMismatch?',
   'TerminalFourCornerCarrier.firstOptimumModeMismatch?_sound',
@@ -104,11 +107,11 @@ const PRIVATE_HELPERS = Object.freeze([
   'profileCheck',
   'modeCheck',
   'terminalOptimumCornerOrder',
-  'TerminalFourCornerCarrier.obligationChecks',
-  'TerminalFourCornerCarrier.semanticChecks',
-  'TerminalFourCornerCarrier.profileChecks',
   'TerminalFourCornerCarrier.forgottenModeChecks',
-  'TerminalFourCornerCarrier.coherenceChecks',
+  'TerminalFourCornerCarrier.obligationChecksFor',
+  'TerminalFourCornerCarrier.semanticChecksFor',
+  'TerminalFourCornerCarrier.profileChecksFor',
+  'TerminalFourCornerCarrier.coherenceChecksFor',
   'firstFailedCheck',
   'firstFailedCheck_sound',
   'coherentOptimumTupleOfNoFailure',
@@ -201,6 +204,10 @@ function validateSource0(source) {
     source,
     'TerminalFourCornerCarrier.firstOptimumCoherenceFailure?',
   );
+  const arbitraryFirst = declarationBlock0(
+    source,
+    'TerminalFourCornerCarrier.firstBasisCoherenceFailure?',
+  );
   const mode = declarationBlock0(
     source,
     'TerminalFourCornerCarrier.firstOptimumModeMismatch?',
@@ -248,7 +255,9 @@ function validateSource0(source) {
     'chargeProfileMismatch',
     'modeMismatch',
   ]) if (!failure.includes(`| ${constructor}`)) failures.push('complete-failure-types');
-  if (!/firstFailedCheck \(carrier\.coherenceChecks observe mode\)/u.test(first)) {
+  if (!/firstFailedCheck[\s\S]*carrier\.coherenceChecksFor observe implementations mode/u.test(arbitraryFirst)
+      || !/carrier\.firstBasisCoherenceFailure\? observe mode/u.test(first)
+      || !/canonicalOptimumFamily observe\)\.implementationAt mode/u.test(first)) {
     failures.push('computed-first-failure');
   }
   if (!/forgottenModeChecks/u.test(mode)
@@ -284,9 +293,9 @@ function validateSource0(source) {
       || !/\| \.quotient => carrier\.projection\.keep coordinate/u.test(stripped)) {
     failures.push('quotient-comparison-only');
   }
-  const checks = stripped.indexOf('carrier.obligationChecks observe mode ++');
-  const semantics = stripped.indexOf('carrier.semanticChecks observe mode transport', checks);
-  const profile = stripped.indexOf('carrier.profileChecks observe mode transport', semantics);
+  const checks = stripped.indexOf('carrier.obligationChecksFor observe implementations mode ++');
+  const semantics = stripped.indexOf('carrier.semanticChecksFor implementations transport', checks);
+  const profile = stripped.indexOf('carrier.profileChecksFor observe implementations mode transport', semantics);
   if (!(checks >= 0 && semantics > checks && profile > semantics)) {
     failures.push('deterministic-check-order');
   }
@@ -303,8 +312,8 @@ test('four-corner optima are classified by one all-finite fail-closed square tra
 test('axiom transcript covers every public and reused declaration exactly once', async () => {
   const audit = await text0(AUDIT_PATH);
   assert.deepEqual(printed0(audit), AUDITED_DECLARATIONS);
-  assert.equal(new Set(AUDITED_DECLARATIONS).size, 37);
-  assert.equal(PUBLIC_DECLARATIONS.length, 29);
+  assert.equal(new Set(AUDITED_DECLARATIONS).size, 40);
+  assert.equal(PUBLIC_DECLARATIONS.length, 32);
   assert.equal(REUSED_DECLARATIONS.length, 8);
   assert.equal(audit.startsWith(
     'import PNP.ResidualTerminalFourCornerOptimumCoherence\n',
@@ -338,6 +347,8 @@ test('regression covers both modes, all legs, exact successes, and every failure
     'OutputInternalized',
     'retainedOutput?',
     'optimumTransportTheta',
+    'firstBasisCoherenceFailure?',
+    'firstOptimumCoherenceFailure?_eq_basis',
     '.full = none',
     '.quotient = none',
     'classifyOptimumCoherence',
@@ -411,7 +422,7 @@ test('durable workflow runs transcript, regression, and hostile audit', async ()
   assert.match(workflow,
     /audits\/lean-residual-terminal-four-corner-optimum-coherence0\.test\.mjs/u);
   assert.match(workflow,
-    /PNPResidualTerminalFourCornerOptimumCoherenceAxiomAudit\.lean[\s\S]{0,1800}-eq 37/u);
+    /PNPResidualTerminalFourCornerOptimumCoherenceAxiomAudit\.lean[\s\S]{0,1800}-eq 40/u);
   assert.match(workflow,
     /lean-regression\/PNPResidualTerminalFourCornerOptimumCoherence\.lean/u);
 });
@@ -434,13 +445,13 @@ test('hostile coherence mutations fail closed', async () => {
     'internalized-output-not-observed'],
     [source.replace('| .quotient => carrier.projection.keep coordinate',
       '| .quotient => true'), 'quotient-comparison-only'],
-    [source.replace('carrier.semanticChecks observe mode transport ++\n        carrier.profileChecks observe mode transport',
-      'carrier.profileChecks observe mode transport ++\n        carrier.semanticChecks observe mode transport'),
+    [source.replace('carrier.semanticChecksFor implementations transport ++\n        carrier.profileChecksFor observe implementations mode transport',
+      'carrier.profileChecksFor observe implementations mode transport ++\n        carrier.semanticChecksFor implementations transport'),
     'deterministic-check-order'],
-    [source.replace('firstFailedCheck (carrier.coherenceChecks observe mode)',
+    [source.replace('firstFailedCheck\n    (carrier.coherenceChecksFor observe implementations mode)',
       'none'), 'computed-first-failure'],
     [source.replace('carrier.forgottenModeChecks observe',
-      'carrier.profileChecks observe .quotient'), 'separate-mode-firewall'],
+      'carrier.profileChecksFor observe\n        ((carrier.canonicalOptimumFamily observe).implementationAt .quotient)\n        .quotient'), 'separate-mode-firewall'],
     [source.replace('  | chargeProfileMismatch', '  | chargeMismatchRemoved'),
       'complete-failure-types'],
     [source.replace('| some reason => .failure reason found',
