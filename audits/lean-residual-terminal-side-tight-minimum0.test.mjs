@@ -348,7 +348,7 @@ test('compiled inventory and publication pin the exact side-tight boundary', asy
   assert.match(docs, /Side-tight four-corner minimum arithmetic/u);
 });
 
-test('status earns numerical arithmetic without coherent-basis overclaim', async () => {
+test('status retains numerical arithmetic after conditional completion', async () => {
   const status = JSON.parse(await text0(STATUS_PATH));
   for (const field of [
     'leanResidualTerminalSideTightMinimumArithmeticFormalized',
@@ -362,9 +362,13 @@ test('status earns numerical arithmetic without coherent-basis overclaim', async
     status.leanResidualTerminalSideTightMinimumScope,
     'all-finite-terminal-projection-four-corner-families-and-independently-attained-full-and-quotient-minimum-bases',
   );
+  assert.equal(status.leanResidualTerminalCoherentFourCornerBasisFormalized, true);
+  assert.equal(
+    status.leanResidualTerminalCoherentFourCornerBasisScope,
+    'conditional-on-exact-mode-appropriate-local-route-silence-not-universal-bn2-square-legitimacy',
+  );
   for (const field of [
     'leanResidualTerminalSquareLegitimacyFormalized',
-    'leanResidualTerminalCoherentFourCornerBasisFormalized',
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
     'leanResidualRoutesGlobalGainCompletenessFormalized',

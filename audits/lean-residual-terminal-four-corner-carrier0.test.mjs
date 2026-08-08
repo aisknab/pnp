@@ -399,7 +399,7 @@ test('compiled inventory and publication pin the exact carrier boundary', async 
   assert.match(docs, /Checked four-corner carrier transport/u);
 });
 
-test('status earns carrier transport without coherent-optimum overclaim', async () => {
+test('status retains carrier transport after conditional coherent completion', async () => {
   const status = JSON.parse(await text0(STATUS_PATH));
   for (const field of [
     'leanResidualTerminalFourCornerCarrierTransportFormalized',
@@ -413,9 +413,13 @@ test('status earns carrier transport without coherent-optimum overclaim', async 
     status.leanResidualTerminalFourCornerCarrierScope,
     'all-finite-computed-saturated-terminal-support-squares-and-canonical-physical-profile-transport-coordinates',
   );
+  assert.equal(status.leanResidualTerminalCoherentFourCornerBasisFormalized, true);
+  assert.equal(
+    status.leanResidualTerminalCoherentFourCornerBasisScope,
+    'conditional-on-exact-mode-appropriate-local-route-silence-not-universal-bn2-square-legitimacy',
+  );
   for (const field of [
     'leanResidualTerminalSquareLegitimacyFormalized',
-    'leanResidualTerminalCoherentFourCornerBasisFormalized',
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
     'leanResidualRoutesGlobalGainCompletenessFormalized',

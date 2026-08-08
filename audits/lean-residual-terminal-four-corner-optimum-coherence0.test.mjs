@@ -382,7 +382,7 @@ test('publication pins the exact coherence-dichotomy theorem boundary', async ()
   assert.match(docs, /BN2-CoherentOptimum/u);
 });
 
-test('status earns the classifier without claiming universal coherent completion', async () => {
+test('status retains the classifier after conditional coherent completion', async () => {
   const status = JSON.parse(await text0(STATUS_PATH));
   for (const field of [
     'leanResidualTerminalFourCornerOptimumCoherenceClassifierFormalized',
@@ -393,7 +393,11 @@ test('status earns the classifier without claiming universal coherent completion
     'leanResidualTerminalFourCornerOptimumSideTightTupleFactsFormalized',
     'leanResidualTerminalFourCornerOptimumCoherenceAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
-  assert.equal(status.leanResidualTerminalCoherentFourCornerBasisFormalized, false);
+  assert.equal(status.leanResidualTerminalCoherentFourCornerBasisFormalized, true);
+  assert.equal(
+    status.leanResidualTerminalCoherentFourCornerBasisScope,
+    'conditional-on-exact-mode-appropriate-local-route-silence-not-universal-bn2-square-legitimacy',
+  );
   assert.equal(status.leanResidualTerminalSquareLegitimacyFormalized, false);
   assert.equal(status.leanSaturatePositiveFormalized, false);
   assert.equal(status.remainingBlockers.length, 6);

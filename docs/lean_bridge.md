@@ -61,6 +61,7 @@ lean/PNP/ResidualTerminalSideTightMinimum.lean
 lean/PNP/ResidualTerminalFourCornerCarrier.lean
 lean/PNP/ResidualTerminalFourCornerOptimumCompatibility.lean
 lean/PNP/ResidualTerminalFourCornerOptimumCoherence.lean
+lean/PNP/ResidualTerminalFourCornerSideTightCompletion.lean
 lean/PNP/LockedNANDResidualGainBound.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
@@ -174,6 +175,7 @@ lean-audit/PNPResidualTerminalSideTightMinimumAxiomAudit.lean
 lean-audit/PNPResidualTerminalFourCornerCarrierAxiomAudit.lean
 lean-audit/PNPResidualTerminalFourCornerOptimumCompatibilityAxiomAudit.lean
 lean-audit/PNPResidualTerminalFourCornerOptimumCoherenceAxiomAudit.lean
+lean-audit/PNPResidualTerminalFourCornerSideTightCompletionAxiomAudit.lean
 lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean
 lean-audit/PNPLockedNANDDirectAxiomAudit.lean
 lean-audit/PNPDirectWireBaselineAxiomAudit.lean
@@ -1120,6 +1122,21 @@ coherent branch always occurs, discharge the later no-outcome routes, prove
 `SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin, polynomial runtime, or the
 root theorem. See
 `docs/lean_residual_terminal_four_corner_optimum_coherence.md`.
+
+`lean/PNP/ResidualTerminalFourCornerSideTightCompletion.lean` closes the local
+legacy Section 11.1 `sideTightCompletionExists` edge. It reuses the exact
+deterministic first coherence-failure query as a proof-bearing local route.
+For every finite carrier and selected mode, Lean returns either that exact
+first sound route or the complete checked side-tight coherent optimum tuple.
+The route and completion branches are disjoint, and computed route silence
+implies the completion together with the exact full or quotient incidence
+value. The forgotten-coordinate promotion query remains separate and cannot
+promote quotient evidence into a full completion. This does not prove
+universal route silence, discharge the complete global no-outcome routes,
+prove BN2 square legitimacy, derive the terminal dependency system, maximize
+the complete tight-basis family, or establish `SaturatePositive`, `BCELReady`,
+ZeroSlack, PCCMin, polynomial runtime, or the root theorem. See
+`docs/lean_residual_terminal_four_corner_side_tight_completion.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 

@@ -1281,6 +1281,23 @@ legitimacy, or establish `SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin,
 polynomial runtime, or the root theorem. See
 [`lean_residual_terminal_four_corner_optimum_coherence.md`](./lean_residual_terminal_four_corner_optimum_coherence.md).
 
+`ResidualTerminalFourCornerSideTightCompletion` now reconstructs the local
+Section 11.1 dependency named `sideTightCompletionExists`. For every finite
+computed terminal support square, observer, and selected full or quotient
+comparison mode, one exact route query returns either its proof-bearing first
+local coherence obstruction or a checked coherent optimum tuple. The tuple
+retains the common carrier, exact minimum sizes, numerical side-tightness,
+exact incidence values, and physical square commutation. Computed route
+silence therefore implies the side-tight completion in that mode, and silence
+in both modes supplies both completions without using the separate
+quotient-to-full promotion query. This closes the local completion edge, but
+it does not establish universal route silence, connect a local obstruction to
+the complete global no-outcome system, prove BN2 square legitimacy, derive the
+terminal dependency system, maximize the complete tight-basis family, or
+establish `SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin, polynomial
+runtime, or the root theorem. See
+[`lean_residual_terminal_four_corner_side_tight_completion.md`](./lean_residual_terminal_four_corner_side_tight_completion.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

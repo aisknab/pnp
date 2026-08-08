@@ -121,6 +121,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-residual-terminal-four-corner-carrier0.test.mjs',
   'audits/lean-residual-terminal-four-corner-optimum-compatibility0.test.mjs',
   'audits/lean-residual-terminal-four-corner-optimum-coherence0.test.mjs',
+  'audits/lean-residual-terminal-four-corner-side-tight-completion0.test.mjs',
   'audits/legacy-v0-archive0.test.mjs',
   'test/current-package-surface0.test.mjs',
   'test/current-verifier0.test.mjs',
