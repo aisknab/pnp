@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '2bab8fea8dbd56ee8594ceb2c5335efa7f8dd935fb11ff00f944c4c252b239c2';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '2e86afbec493f6cf4c30155c512e197a26e70b3c79b4f2a76dde71b0e6c650f9';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -2181,8 +2181,13 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.TerminalFourCornerCarrier.classifyOptimumCoherence_exhaustive',
   'PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_sound',
   'PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumModeMismatch?_sound',
+  'PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumRoute?_coherence',
+  'PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumRoute?_quotientPromotion',
+  'PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumRoute?_sound',
   'PNP.DirectWire.TerminalFourCornerCarrier.fourCornerOptimumCoherenceDichotomy',
   'PNP.DirectWire.TerminalFourCornerCarrier.noFailure_iff_coherentOptimumTuple',
+  'PNP.DirectWire.TerminalFourCornerCarrier.noOptimumCoherenceRoute_iff_noFailure',
+  'PNP.DirectWire.TerminalFourCornerCarrier.noOptimumPromotionRoute_iff_noModeMismatch',
   'PNP.DirectWire.TerminalFourCornerCarrier.optimumTransportTheta',
   'PNP.DirectWire.TerminalFourCornerCarrier.interfaceIndex?_eq_some_iff',
   'PNP.DirectWire.TerminalFourCornerCarrier.interfaceIndex?_get',
@@ -2196,6 +2201,13 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.TerminalFourCornerCarrier.optimizationCorners_at',
   'PNP.DirectWire.TerminalFourCornerCarrier.optimizationCorners_projection',
   'PNP.DirectWire.TerminalFourCornerCarrier.optimizationCorners_role',
+  'PNP.DirectWire.TerminalFourCornerCarrier.sideTightCompletionExists',
+  'PNP.DirectWire.TerminalFourCornerCarrier.sideTightCompletionExistsEachMode',
+  'PNP.DirectWire.TerminalFourCornerCarrier.sideTightCompletionOrFirstRoute',
+  'PNP.DirectWire.TerminalFourCornerCarrier.sideTightCompletion_fullValue',
+  'PNP.DirectWire.TerminalFourCornerCarrier.sideTightCompletion_quotientValue',
+  'PNP.DirectWire.TerminalFourCornerOptimumRoutedFailure.excludesCoherentOptimum',
+  'PNP.DirectWire.TerminalFourCornerOptimumRoutedFailure.sound',
   'PNP.DirectWire.TerminalSupportWire.ambientIndex_injective',
   'PNP.DirectWire.TerminalSupportWire.ambientIndex_terminalSupportWireAt',
   'PNP.DirectWire.terminalSupportWireAt_ambientIndex',
@@ -2394,7 +2406,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-08-112') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-08-113') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -2671,7 +2683,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-08-112') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-08-113') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

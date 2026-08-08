@@ -436,7 +436,7 @@ test('compiled inventory and publication pin the exact optimum-carrier boundary'
   assert.match(docs, /Checked four-corner optimum carrier compatibility/u);
 });
 
-test('status earns optimum compatibility without coherent-square overclaim', async () => {
+test('status retains optimum compatibility after conditional completion', async () => {
   const status = JSON.parse(await text0(STATUS_PATH));
   for (const field of [
     'leanResidualTerminalFourCornerOptimaCarrierCompatibleFormalized',
@@ -450,9 +450,13 @@ test('status earns optimum compatibility without coherent-square overclaim', asy
     status.leanResidualTerminalFourCornerOptimaCarrierScope,
     'all-finite-computed-saturated-terminal-support-squares-one-reversible-ambient-carrier-and-shared-observer-projection',
   );
+  assert.equal(status.leanResidualTerminalCoherentFourCornerBasisFormalized, true);
+  assert.equal(
+    status.leanResidualTerminalCoherentFourCornerBasisScope,
+    'conditional-on-exact-mode-appropriate-local-route-silence-not-universal-bn2-square-legitimacy',
+  );
   for (const field of [
     'leanResidualTerminalSquareLegitimacyFormalized',
-    'leanResidualTerminalCoherentFourCornerBasisFormalized',
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
     'leanResidualRoutesGlobalGainCompletenessFormalized',

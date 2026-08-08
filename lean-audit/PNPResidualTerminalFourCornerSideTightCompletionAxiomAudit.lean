@@ -1,0 +1,31 @@
+import PNP.ResidualTerminalFourCornerSideTightCompletion
+
+#print axioms PNP.DirectWire.TerminalOptimumRoutePhase
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumRoute?
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumRoute?_coherence
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumRoute?_quotientPromotion
+#print axioms PNP.DirectWire.TerminalFourCornerOptimumRoutedFailure
+#print axioms PNP.DirectWire.TerminalFourCornerOptimumRoutedFailure.sound
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.routedFailureOfFirst
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.NoOptimumRoute
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.NoOptimumCoherenceRoute
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.NoOptimumPromotionRoute
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.NoOptimumCoherenceRoutes
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.noOptimumCoherenceRoute_iff_noFailure
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.noOptimumPromotionRoute_iff_noModeMismatch
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumRoute?_sound
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.sideTightCompletionOrFirstRoute
+#print axioms PNP.DirectWire.TerminalFourCornerOptimumRoutedFailure.excludesCoherentOptimum
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.sideTightCompletionExists
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.sideTightCompletionExistsEachMode
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.sideTightCompletion_fullValue
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.sideTightCompletion_quotientValue
+
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_sound
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumModeMismatch?_sound
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.noFailure_iff_coherentOptimumTuple
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.fourCornerOptimaCarrierCompatible
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.optimumTransportTheta
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.canonicalFullBasis_numericallySideTight
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.canonicalQuotientBasis_numericallySideTight
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.canonical_numericallySideTight_values
