@@ -26,6 +26,7 @@ import PNP.ResidualTerminalFourCornerCarrier
 import PNP.ResidualTerminalFourCornerOptimumCompatibility
 import PNP.ResidualTerminalFourCornerOptimumCoherence
 import PNP.ResidualTerminalFourCornerSideTightCompletion
+import PNP.ResidualTerminalFourCornerTightBasisMaximum
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine

@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-08-113');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-08-114');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -861,6 +861,12 @@ test('formal reconstruction status accepts the current source and public mirrors
     'leanResidualTerminalFourCornerOptimumExactCompletionValuesFormalized',
     'leanResidualTerminalFourCornerOptimumPromotionFirewallRetained',
     'leanResidualTerminalFourCornerSideTightCompletionAxiomAuditPassed',
+    'leanResidualTerminalFourCornerArbitraryFamilyCoherenceFormalized',
+    'leanResidualTerminalFourCornerExactMinimumFamilyEnumerated',
+    'leanResidualTerminalFourCornerTightBasisFamilyComplete',
+    'leanResidualTerminalFourCornerSignedTightBasisMaximumFormalized',
+    'leanResidualTerminalFourCornerTightBasisMaximumEqualsDeltaFormalized',
+    'leanResidualTerminalFourCornerTightBasisMaximumAxiomAuditPassed',
     'leanResidualTerminalCoherentFourCornerBasisFormalized',
   ]) assert.equal(out[field], true, field);
   assert.equal(
@@ -908,6 +914,10 @@ test('formal reconstruction status accepts the current source and public mirrors
     'all-finite-computed-terminal-support-squares-observers-and-full-or-quotient-modes-side-tight-coherent-completion-under-exact-local-route-silence',
   );
   assert.equal(
+    out.leanResidualTerminalFourCornerTightBasisMaximumScope,
+    'all-finite-computed-terminal-support-squares-observers-and-full-or-quotient-modes-complete-tight-basis-family-and-signed-maximum-under-exact-local-route-silence',
+  );
+  assert.equal(
     out.leanResidualTerminalCoherentFourCornerBasisScope,
     'conditional-on-exact-mode-appropriate-local-route-silence-not-universal-bn2-square-legitimacy',
   );
@@ -947,13 +957,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 24999);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 13376);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7022);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14691);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 229);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 25059);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 13401);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7025);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14705);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 230);
   assert.equal(status.leanSourceClosureSha256,
-    '1ed937ea678bb853929da8c6958fe30fe09b837ad53fda5b53d5ce4da2584830');
+    '588c6626fcd4c0996f770b1118648ee99c82453ab303faf884e5e712d0107771');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -1375,7 +1385,7 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-08-RESIDUAL-TERMINAL-FOUR-CORNER-SIDE-TIGHT-COMPLETION-112');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-08-RESIDUAL-TERMINAL-FOUR-CORNER-TIGHT-BASIS-MAXIMUM-113');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
@@ -1716,6 +1726,12 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
     'leanResidualTerminalFourCornerOptimumExactCompletionValuesFormalized',
     'leanResidualTerminalFourCornerOptimumPromotionFirewallRetained',
     'leanResidualTerminalFourCornerSideTightCompletionAxiomAuditPassed',
+    'leanResidualTerminalFourCornerArbitraryFamilyCoherenceFormalized',
+    'leanResidualTerminalFourCornerExactMinimumFamilyEnumerated',
+    'leanResidualTerminalFourCornerTightBasisFamilyComplete',
+    'leanResidualTerminalFourCornerSignedTightBasisMaximumFormalized',
+    'leanResidualTerminalFourCornerTightBasisMaximumEqualsDeltaFormalized',
+    'leanResidualTerminalFourCornerTightBasisMaximumAxiomAuditPassed',
     'leanResidualTerminalCoherentFourCornerBasisFormalized',
   ]) assert.equal(status[field], true, field);
   assert.equal(
@@ -1761,6 +1777,10 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(
     status.leanResidualTerminalFourCornerSideTightCompletionScope,
     'all-finite-computed-terminal-support-squares-observers-and-full-or-quotient-modes-side-tight-coherent-completion-under-exact-local-route-silence',
+  );
+  assert.equal(
+    status.leanResidualTerminalFourCornerTightBasisMaximumScope,
+    'all-finite-computed-terminal-support-squares-observers-and-full-or-quotient-modes-complete-tight-basis-family-and-signed-maximum-under-exact-local-route-silence',
   );
   assert.equal(
     status.leanResidualTerminalCoherentFourCornerBasisScope,
@@ -2227,6 +2247,12 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanResidualTerminalFourCornerOptimumExactCompletionValuesFormalized',
     'leanResidualTerminalFourCornerOptimumPromotionFirewallRetained',
     'leanResidualTerminalFourCornerSideTightCompletionAxiomAuditPassed',
+    'leanResidualTerminalFourCornerArbitraryFamilyCoherenceFormalized',
+    'leanResidualTerminalFourCornerExactMinimumFamilyEnumerated',
+    'leanResidualTerminalFourCornerTightBasisFamilyComplete',
+    'leanResidualTerminalFourCornerSignedTightBasisMaximumFormalized',
+    'leanResidualTerminalFourCornerTightBasisMaximumEqualsDeltaFormalized',
+    'leanResidualTerminalFourCornerTightBasisMaximumAxiomAuditPassed',
     'leanResidualTerminalCoherentFourCornerBasisFormalized',
   ];
 

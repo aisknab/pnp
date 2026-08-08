@@ -321,77 +321,6 @@ private def modeCheck
 private def terminalOptimumCornerOrder : List TerminalSupportSquareCorner :=
   [.meet, .left, .right, .join]
 
-private def TerminalFourCornerCarrier.obligationChecks
-    {inputs gates outputs profileWidth : Nat}
-    {system : TerminalSaturationSystem inputs gates outputs profileWidth}
-    (carrier : TerminalFourCornerCarrier system)
-    (observe : Implementation (inputs + gates) gates ->
-      TerminalProfile profileWidth)
-    (mode : TerminalOptimumCoherenceMode) :
-    List (TerminalOptimumCheck (inputs + gates) gates profileWidth) :=
-  match mode with
-  | .quotient => []
-  | .full => terminalOptimumCornerOrder.flatMap fun corner =>
-      (allFin profileWidth).flatMap fun coordinate =>
-        if system.profileSystem.role coordinate = .obligation then
-          [openObligationCheck corner coordinate
-            (observe
-              ((carrier.canonicalOptimumFamily observe).implementationAt
-                .full corner) coordinate)]
-        else
-          []
-
-private def TerminalFourCornerCarrier.semanticChecks
-    {inputs gates outputs profileWidth : Nat}
-    {system : TerminalSaturationSystem inputs gates outputs profileWidth}
-    (carrier : TerminalFourCornerCarrier system)
-    (observe : Implementation (inputs + gates) gates ->
-      TerminalProfile profileWidth)
-    (mode : TerminalOptimumCoherenceMode)
-    (transport : TerminalOptimumLegTransport carrier) :
-    List (TerminalOptimumCheck (inputs + gates) gates profileWidth) :=
-  (allFin (carrier.extracted transport.leg.source).interface.length).flatMap
-    fun sourceIndex =>
-      match transport.retainedOutput? sourceIndex with
-      | none => []
-      | some _targetIndex =>
-          let producer :=
-            (carrier.extracted transport.leg.source).interface.get sourceIndex
-          (allBoolTuples (inputs + gates)).map fun input =>
-            semanticCheck transport.leg input producer
-              (((carrier.canonicalOptimumFamily observe).implementationAt
-                mode transport.leg.source).candidate.semantics
-                  input.toValuation producer)
-              (((carrier.canonicalOptimumFamily observe).implementationAt
-                mode transport.leg.target).candidate.semantics
-                  input.toValuation producer)
-
-private def TerminalFourCornerCarrier.profileChecks
-    {inputs gates outputs profileWidth : Nat}
-    {system : TerminalSaturationSystem inputs gates outputs profileWidth}
-    (carrier : TerminalFourCornerCarrier system)
-    (observe : Implementation (inputs + gates) gates ->
-      TerminalProfile profileWidth)
-    (mode : TerminalOptimumCoherenceMode)
-    (transport : TerminalOptimumLegTransport carrier) :
-    List (TerminalOptimumCheck (inputs + gates) gates profileWidth) :=
-  allTerminalProfileRoles.flatMap fun role =>
-    ((carrier.support transport.leg.source).frontier.profiles role).flatMap
-      fun coordinate =>
-        let kept := match mode with
-          | .full => true
-          | .quotient => carrier.projection.keep coordinate
-        if kept then
-          [profileCheck transport.leg role coordinate
-            (observe
-              ((carrier.canonicalOptimumFamily observe).implementationAt
-                mode transport.leg.source) coordinate)
-            (observe
-              ((carrier.canonicalOptimumFamily observe).implementationAt
-                mode transport.leg.target) coordinate)]
-        else
-          []
-
 private def TerminalFourCornerCarrier.forgottenModeChecks
     {inputs gates outputs profileWidth : Nat}
     {system : TerminalSaturationSystem inputs gates outputs profileWidth}
@@ -414,19 +343,89 @@ private def TerminalFourCornerCarrier.forgottenModeChecks
               ((carrier.canonicalOptimumFamily observe).implementationAt
                 .quotient transport.leg.target) coordinate)]
 
-private def TerminalFourCornerCarrier.coherenceChecks
+/-! ## Arbitrary implementation-family coherence -/
+
+private def TerminalFourCornerCarrier.obligationChecksFor
+    {inputs gates outputs profileWidth : Nat}
+    {system : TerminalSaturationSystem inputs gates outputs profileWidth}
+    (_carrier : TerminalFourCornerCarrier system)
+    (observe : Implementation (inputs + gates) gates ->
+      TerminalProfile profileWidth)
+    (implementations : TerminalSupportSquareCorner ->
+      Implementation (inputs + gates) gates)
+    (mode : TerminalOptimumCoherenceMode) :
+    List (TerminalOptimumCheck (inputs + gates) gates profileWidth) :=
+  match mode with
+  | .quotient => []
+  | .full => terminalOptimumCornerOrder.flatMap fun corner =>
+      (allFin profileWidth).flatMap fun coordinate =>
+        if system.profileSystem.role coordinate = .obligation then
+          [openObligationCheck corner coordinate
+            (observe (implementations corner) coordinate)]
+        else
+          []
+
+private def TerminalFourCornerCarrier.semanticChecksFor
+    {inputs gates outputs profileWidth : Nat}
+    {system : TerminalSaturationSystem inputs gates outputs profileWidth}
+    (carrier : TerminalFourCornerCarrier system)
+    (implementations : TerminalSupportSquareCorner ->
+      Implementation (inputs + gates) gates)
+    (transport : TerminalOptimumLegTransport carrier) :
+    List (TerminalOptimumCheck (inputs + gates) gates profileWidth) :=
+  (allFin (carrier.extracted transport.leg.source).interface.length).flatMap
+    fun sourceIndex =>
+      match transport.retainedOutput? sourceIndex with
+      | none => []
+      | some _targetIndex =>
+          let producer :=
+            (carrier.extracted transport.leg.source).interface.get sourceIndex
+          (allBoolTuples (inputs + gates)).map fun input =>
+            semanticCheck transport.leg input producer
+              ((implementations transport.leg.source).candidate.semantics
+                input.toValuation producer)
+              ((implementations transport.leg.target).candidate.semantics
+                input.toValuation producer)
+
+private def TerminalFourCornerCarrier.profileChecksFor
     {inputs gates outputs profileWidth : Nat}
     {system : TerminalSaturationSystem inputs gates outputs profileWidth}
     (carrier : TerminalFourCornerCarrier system)
     (observe : Implementation (inputs + gates) gates ->
       TerminalProfile profileWidth)
+    (implementations : TerminalSupportSquareCorner ->
+      Implementation (inputs + gates) gates)
+    (mode : TerminalOptimumCoherenceMode)
+    (transport : TerminalOptimumLegTransport carrier) :
+    List (TerminalOptimumCheck (inputs + gates) gates profileWidth) :=
+  allTerminalProfileRoles.flatMap fun role =>
+    ((carrier.support transport.leg.source).frontier.profiles role).flatMap
+      fun coordinate =>
+        let kept := match mode with
+          | .full => true
+          | .quotient => carrier.projection.keep coordinate
+        if kept then
+          [profileCheck transport.leg role coordinate
+            (observe (implementations transport.leg.source) coordinate)
+            (observe (implementations transport.leg.target) coordinate)]
+        else
+          []
+
+private def TerminalFourCornerCarrier.coherenceChecksFor
+    {inputs gates outputs profileWidth : Nat}
+    {system : TerminalSaturationSystem inputs gates outputs profileWidth}
+    (carrier : TerminalFourCornerCarrier system)
+    (observe : Implementation (inputs + gates) gates ->
+      TerminalProfile profileWidth)
+    (implementations : TerminalSupportSquareCorner ->
+      Implementation (inputs + gates) gates)
     (mode : TerminalOptimumCoherenceMode) :
     List (TerminalOptimumCheck (inputs + gates) gates profileWidth) :=
-  carrier.obligationChecks observe mode ++
+  carrier.obligationChecksFor observe implementations mode ++
     allTerminalOptimumSquareLegs.flatMap fun leg =>
       let transport := carrier.optimumLegTransport leg
-      carrier.semanticChecks observe mode transport ++
-        carrier.profileChecks observe mode transport
+      carrier.semanticChecksFor implementations transport ++
+        carrier.profileChecksFor observe implementations mode transport
 
 private def firstFailedCheck
     {ambientInputs gates profileWidth : Nat} :
@@ -456,6 +455,42 @@ private theorem firstFailedCheck_sound
           rw [agreed] at found
           exact ih found
 
+/-- First coherence failure for an arbitrary four-corner implementation
+    family.  The family supplies implementations, not a coherence certificate:
+    obligation, semantic, and retained-profile checks are recomputed in the
+    same deterministic order as the canonical optimum query. -/
+def TerminalFourCornerCarrier.firstBasisCoherenceFailure?
+    {inputs gates outputs profileWidth : Nat}
+    {system : TerminalSaturationSystem inputs gates outputs profileWidth}
+    (carrier : TerminalFourCornerCarrier system)
+    (observe : Implementation (inputs + gates) gates ->
+      TerminalProfile profileWidth)
+    (mode : TerminalOptimumCoherenceMode)
+    (implementations : TerminalSupportSquareCorner ->
+      Implementation (inputs + gates) gates) :
+    Option (TerminalFourCornerOptimumFailure
+      (inputs + gates) gates profileWidth) :=
+  firstFailedCheck
+    (carrier.coherenceChecksFor observe implementations mode)
+
+/-- Every failure returned for an arbitrary implementation family carries the
+    exact mismatch or open-obligation fact observed by the finite query. -/
+theorem TerminalFourCornerCarrier.firstBasisCoherenceFailure?_sound
+    {inputs gates outputs profileWidth : Nat}
+    {system : TerminalSaturationSystem inputs gates outputs profileWidth}
+    (carrier : TerminalFourCornerCarrier system)
+    (observe : Implementation (inputs + gates) gates ->
+      TerminalProfile profileWidth)
+    (mode : TerminalOptimumCoherenceMode)
+    (implementations : TerminalSupportSquareCorner ->
+      Implementation (inputs + gates) gates)
+    (failure : TerminalFourCornerOptimumFailure
+      (inputs + gates) gates profileWidth)
+    (found : carrier.firstBasisCoherenceFailure? observe mode implementations =
+      some failure) : failure.Sound :=
+  firstFailedCheck_sound
+    (carrier.coherenceChecksFor observe implementations mode) failure found
+
 /-- First coherence failure in the exact obligation, leg, valuation, output,
     role, and coordinate order documented above. -/
 def TerminalFourCornerCarrier.firstOptimumCoherenceFailure?
@@ -467,7 +502,22 @@ def TerminalFourCornerCarrier.firstOptimumCoherenceFailure?
     (mode : TerminalOptimumCoherenceMode) :
     Option (TerminalFourCornerOptimumFailure
       (inputs + gates) gates profileWidth) :=
-  firstFailedCheck (carrier.coherenceChecks observe mode)
+  carrier.firstBasisCoherenceFailure? observe mode
+    ((carrier.canonicalOptimumFamily observe).implementationAt mode)
+
+/-- The canonical optimum query is exactly the arbitrary-family query applied
+    to the four canonical mode-appropriate minimum implementations. -/
+theorem TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_eq_basis
+    {inputs gates outputs profileWidth : Nat}
+    {system : TerminalSaturationSystem inputs gates outputs profileWidth}
+    (carrier : TerminalFourCornerCarrier system)
+    (observe : Implementation (inputs + gates) gates ->
+      TerminalProfile profileWidth)
+    (mode : TerminalOptimumCoherenceMode) :
+    carrier.firstOptimumCoherenceFailure? observe mode =
+      carrier.firstBasisCoherenceFailure? observe mode
+        ((carrier.canonicalOptimumFamily observe).implementationAt mode) :=
+  rfl
 
 /-- The first emitted coherence failure is a genuine Boolean mismatch or an
     actually open obligation. -/
@@ -482,7 +532,9 @@ theorem TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_sound
       (inputs + gates) gates profileWidth)
     (found : carrier.firstOptimumCoherenceFailure? observe mode =
       some failure) : failure.Sound :=
-  firstFailedCheck_sound (carrier.coherenceChecks observe mode) failure found
+  carrier.firstBasisCoherenceFailure?_sound observe mode
+    ((carrier.canonicalOptimumFamily observe).implementationAt mode)
+    failure found
 
 /-- First forgotten quotient-profile mismatch.  This query is deliberately
     separate from quotient coherence: it diagnoses why comparison-only

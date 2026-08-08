@@ -121,6 +121,16 @@ example : coherenceEmptyCarrier.firstOptimumCoherenceFailure?
 example : coherenceEmptyCarrier.firstOptimumCoherenceFailure?
     coherenceConstantObserver .quotient = none := by decide
 
+example (mode : TerminalOptimumCoherenceMode) :
+    coherenceEmptyCarrier.firstOptimumCoherenceFailure?
+        coherenceConstantObserver mode =
+      coherenceEmptyCarrier.firstBasisCoherenceFailure?
+        coherenceConstantObserver mode
+          ((coherenceEmptyCarrier.canonicalOptimumFamily
+            coherenceConstantObserver).implementationAt mode) :=
+  coherenceEmptyCarrier.firstOptimumCoherenceFailure?_eq_basis
+    coherenceConstantObserver mode
+
 example : Nonempty (TerminalFourCornerCoherentOptimumTuple
     coherenceEmptyCarrier coherenceConstantObserver .full) :=
   (coherenceEmptyCarrier.noFailure_iff_coherentOptimumTuple

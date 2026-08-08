@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 93);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 90);
+  assert.equal(status.formalPublicationMilestones.length, 94);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 91);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -2237,6 +2237,54 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /complete global no-outcome route system/u);
   assert.match(terminalFourCornerSideTightCompletion.nonClaim,
     /BN2 square legitimacy/u);
+  const terminalFourCornerTightBasisMaximum = byId.get(
+    'residual-terminal-four-corner-tight-basis-maximum',
+  );
+  assert.equal(terminalFourCornerTightBasisMaximum.status,
+    'formalized-residual-terminal-four-corner-complete-tight-basis-maximum');
+  assert.equal(terminalFourCornerTightBasisMaximum.earned, true);
+  assert.equal(
+    terminalFourCornerTightBasisMaximum.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.deepEqual(terminalFourCornerTightBasisMaximum.requiredTheorems, [
+    'PNP.DirectWire.TerminalOptimumCoherenceMode.minimumAt_le_current',
+    'PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationsAt_sound',
+    'PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationsAt_complete',
+    'PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationsAt_iff',
+    'PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationBases_iff',
+    'PNP.DirectWire.TerminalFourCornerCarrier.tightBasisBool_eq_true_iff',
+    'PNP.DirectWire.TerminalFourCornerCarrier.mem_tightBasisFamily_sound',
+    'PNP.DirectWire.TerminalFourCornerCarrier.mem_tightBasisFamily_complete',
+    'PNP.DirectWire.TerminalFourCornerCarrier.mem_tightBasisFamily_iff',
+    'PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis_at',
+    'PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis_sizes',
+    'PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis_isTightCoherent',
+    'PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis_mem_tightFamily',
+    'PNP.DirectWire.TerminalFourCornerCarrier.tightBasis_incidenceValue_eq_delta',
+    'PNP.DirectWire.TerminalFourCornerCarrier.mem_tightBasisValues_eq_delta',
+    'PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_eq_delta',
+    'PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_full',
+    'PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_quotient',
+    'PNP.DirectWire.TerminalFourCornerCarrier.firstBasisCoherenceFailure?_sound',
+    'PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_eq_basis',
+    'PNP.DirectWire.mem_allBoundedCandidates',
+    'PNP.DirectWire.terminalFullProfileMatchBool_complete',
+    'PNP.DirectWire.terminalQuotientProfileMatchBool_complete',
+    'PNP.DirectWire.terminalFullProfileMinimum_le',
+    'PNP.DirectWire.terminalQuotientProfileMinimum_le',
+    'PNP.DirectWire.TerminalFourCornerSizes.numericallySideTight_iff_eq',
+    'PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_sound',
+    'PNP.DirectWire.TerminalFourCornerCarrier.sideTightCompletionExists',
+  ]);
+  assert.match(terminalFourCornerTightBasisMaximum.scope,
+    /complete finite tight-basis family/u);
+  assert.match(terminalFourCornerTightBasisMaximum.scope,
+    /signed maximum equals the selected delta/u);
+  assert.match(terminalFourCornerTightBasisMaximum.nonClaim,
+    /universal route silence/u);
+  assert.match(terminalFourCornerTightBasisMaximum.nonClaim,
+    /BN2 square legitimacy/u);
   for (const id of [
     'global-locked-nand-threshold',
     'global-zeroslack-pccmin',
@@ -2251,10 +2299,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '2e86afbec493f6cf4c30155c512e197a26e70b3c79b4f2a76dde71b0e6c650f9');
+    '7e5d8cfa5e15971a46f2e52d0fdf32edc06718673d95f1714c771f892e0360cb');
   assert.equal(map.milestoneSourceClosureSha256,
-    '1ed937ea678bb853929da8c6958fe30fe09b837ad53fda5b53d5ce4da2584830');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2364);
+    '588c6626fcd4c0996f770b1118648ee99c82453ab303faf884e5e712d0107771');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2385);
   for (const theorem of [
     'PNP.DirectWire.LockedNANDTrace.carrierSeparation',
     'PNP.DirectWire.LockedNANDTrace.finalLock_fresh',
@@ -2576,7 +2624,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [24999, 13376, 7022, 14691, 229]);
+  ], [25059, 13401, 7025, 14705, 230]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

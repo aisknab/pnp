@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '2e86afbec493f6cf4c30155c512e197a26e70b3c79b4f2a76dde71b0e6c650f9';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '7e5d8cfa5e15971a46f2e52d0fdf32edc06718673d95f1714c771f892e0360cb';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -2179,7 +2179,13 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.TerminalFourCornerCarrier.boundaryIndex?_eq_some_iff',
   'PNP.DirectWire.TerminalFourCornerCarrier.fourCornerOptimaCarrierCompatible',
   'PNP.DirectWire.TerminalFourCornerCarrier.classifyOptimumCoherence_exhaustive',
+  'PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis_at',
+  'PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis_isTightCoherent',
+  'PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis_mem_tightFamily',
+  'PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis_sizes',
+  'PNP.DirectWire.TerminalFourCornerCarrier.firstBasisCoherenceFailure?_sound',
   'PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_sound',
+  'PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_eq_basis',
   'PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumModeMismatch?_sound',
   'PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumRoute?_coherence',
   'PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumRoute?_quotientPromotion',
@@ -2189,6 +2195,10 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.TerminalFourCornerCarrier.noOptimumCoherenceRoute_iff_noFailure',
   'PNP.DirectWire.TerminalFourCornerCarrier.noOptimumPromotionRoute_iff_noModeMismatch',
   'PNP.DirectWire.TerminalFourCornerCarrier.optimumTransportTheta',
+  'PNP.DirectWire.TerminalFourCornerCarrier.mem_tightBasisFamily_complete',
+  'PNP.DirectWire.TerminalFourCornerCarrier.mem_tightBasisFamily_iff',
+  'PNP.DirectWire.TerminalFourCornerCarrier.mem_tightBasisFamily_sound',
+  'PNP.DirectWire.TerminalFourCornerCarrier.mem_tightBasisValues_eq_delta',
   'PNP.DirectWire.TerminalFourCornerCarrier.interfaceIndex?_eq_some_iff',
   'PNP.DirectWire.TerminalFourCornerCarrier.interfaceIndex?_get',
   'PNP.DirectWire.TerminalFourCornerCarrier.localizeCandidate_equivalent',
@@ -2206,6 +2216,11 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.TerminalFourCornerCarrier.sideTightCompletionOrFirstRoute',
   'PNP.DirectWire.TerminalFourCornerCarrier.sideTightCompletion_fullValue',
   'PNP.DirectWire.TerminalFourCornerCarrier.sideTightCompletion_quotientValue',
+  'PNP.DirectWire.TerminalFourCornerCarrier.tightBasisBool_eq_true_iff',
+  'PNP.DirectWire.TerminalFourCornerCarrier.tightBasis_incidenceValue_eq_delta',
+  'PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_eq_delta',
+  'PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_full',
+  'PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_quotient',
   'PNP.DirectWire.TerminalFourCornerOptimumRoutedFailure.excludesCoherentOptimum',
   'PNP.DirectWire.TerminalFourCornerOptimumRoutedFailure.sound',
   'PNP.DirectWire.TerminalSupportWire.ambientIndex_injective',
@@ -2259,6 +2274,12 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.TerminalProjectionFourCorners.canonicalQuotientBasis_sizes',
   'PNP.DirectWire.TerminalProjectionFourCorners.canonicalQuotientBasis_tightValue?',
   'PNP.DirectWire.TerminalProjectionFourCorners.canonical_numericallySideTight_values',
+  'PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationBases_iff',
+  'PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationsAt_complete',
+  'PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationsAt_iff',
+  'PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationsAt_sound',
+  'PNP.DirectWire.TerminalOptimumCoherenceMode.minimumAt_le_current',
+  'PNP.DirectWire.mem_allBoundedCandidates',
   'PNP.DirectWire.TerminalProjectionFourCorners.constantCutEquation_of_defects',
   'PNP.DirectWire.TerminalProjectionFourCorners.fullMinimumSizes_incidenceValue',
   'PNP.DirectWire.TerminalProjectionFourCorners.projectionExcess_pos_of_constantCut',
@@ -2406,7 +2427,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-08-113') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-08-114') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -2683,7 +2704,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-08-113') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-08-114') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

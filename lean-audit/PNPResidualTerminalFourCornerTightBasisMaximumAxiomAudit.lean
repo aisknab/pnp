@@ -1,0 +1,49 @@
+import PNP.ResidualTerminalFourCornerTightBasisMaximum
+
+#print axioms PNP.DirectWire.TerminalFourCornerImplementationBasis
+#print axioms PNP.DirectWire.TerminalFourCornerImplementationBasis.at
+#print axioms PNP.DirectWire.TerminalFourCornerImplementationBasis.sizes
+#print axioms PNP.DirectWire.TerminalOptimumCoherenceMode.minimumSizes
+#print axioms PNP.DirectWire.TerminalOptimumCoherenceMode.delta
+#print axioms PNP.DirectWire.TerminalOptimumCoherenceMode.profileMatchBool
+#print axioms PNP.DirectWire.TerminalOptimumCoherenceMode.minimumAt_le_current
+#print axioms PNP.DirectWire.BoundedCandidate.implementation
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.minimumImplementationsAt
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationsAt_sound
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationsAt_complete
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationsAt_iff
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.minimumImplementationBases
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationBases_iff
+#print axioms PNP.DirectWire.TerminalFourCornerImplementationBasis.IsTightCoherent
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.tightBasisBool
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.tightBasisBool_eq_true_iff
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.tightBasisFamily
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.mem_tightBasisFamily_sound
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.mem_tightBasisFamily_complete
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.mem_tightBasisFamily_iff
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis_at
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis_sizes
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis_isTightCoherent
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.canonicalImplementationBasis_mem_tightFamily
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.tightBasis_incidenceValue_eq_delta
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.tightBasisValues
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.mem_tightBasisValues_eq_delta
+#print axioms PNP.DirectWire.signedMaximum?
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_eq_delta
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_full
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_quotient
+
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstBasisCoherenceFailure?
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstBasisCoherenceFailure?_sound
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_eq_basis
+
+#print axioms PNP.DirectWire.mem_allBoundedCandidates
+#print axioms PNP.DirectWire.terminalFullProfileMatchBool_complete
+#print axioms PNP.DirectWire.terminalQuotientProfileMatchBool_complete
+#print axioms PNP.DirectWire.terminalFullProfileMinimum_le
+#print axioms PNP.DirectWire.terminalQuotientProfileMinimum_le
+#print axioms PNP.DirectWire.TerminalFourCornerSizes.numericallySideTight_iff_eq
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_sound
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.sideTightCompletionExists
