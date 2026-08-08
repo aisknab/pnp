@@ -84,27 +84,27 @@ The generated inventory, publication-map, status, TeX, PDF, size, hash, and
 coordinate evidence was recorded only after the compiled source and
 expectation chain stabilized:
 
-- inventory coordinate `PNP-LEAN-THEOREM-INVENTORY-2026-08-08-111`, with
-  24,758 declarations, 13,298 theorems, 6,989 assumption-free theorems,
-  2,341 reviewed milestone candidates, 227 source-closure modules,
-  15,645,082 bytes, and SHA-256
-  `ea373cfe65d8c99fab5c3896b7d594f96724a8eab2b3d2b7ddf0abdfee81aabe`;
-- publication-map coordinate `PNP-FORMAL-PUBLICATION-MAP-2026-08-08-111`,
-  with 91 milestones, 88 earned milestones, 2,341 exact theorem pins,
-  757,472 bytes, canonical-object SHA-256
-  `8c208bb3815b2513a3a167dd72adf77903c5a1f1d5c75e590e8064448a309737`,
+- inventory coordinate `PNP-LEAN-THEOREM-INVENTORY-2026-08-08-112`, with
+  24,934 declarations, 13,352 theorems, 7,015 assumption-free theorems,
+  2,352 reviewed milestone candidates, 228 source-closure modules,
+  15,824,195 bytes, and SHA-256
+  `10ca3467d9c899300ac9c76c84ce62f87c8157e73fc39f8af82b203a4be9a8eb`;
+- publication-map coordinate `PNP-FORMAL-PUBLICATION-MAP-2026-08-08-112`,
+  with 92 milestones, 89 earned milestones, 2,352 exact theorem pins,
+  761,711 bytes, canonical-object SHA-256
+  `2bab8fea8dbd56ee8594ceb2c5335efa7f8dd935fb11ff00f944c4c252b239c2`,
   and file SHA-256
-  `8efcfb683a0aeb7f2b6884bf6374493b3e69c20f6bb5617d2e63252646b384d6`;
+  `8404f2c2b178d87c42f4501b4490286c90da593281dad2708297c22b0fbfa9df`;
 - Lean source-closure SHA-256
-  `55b94c1f15c1003306e4efcf83469416817e29530e7eae8a25aa4948efa9d370`;
-- status coordinate `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-08-111`,
-  with byte-identical 1,887,604-byte status mirrors and SHA-256
-  `72d754abc757743f41696680d14a795d973fe86285fd93aa61ef322d65062a5f`;
-- canonical TeX with 196,791 bytes and SHA-256
-  `55ffa6aa19ba0c1c3143265d21ac3e481b05556a38f2d9b62591245078b0e492`;
+  `3161b45bbf5468a66e86fac1cf8dd6bef3ea19b1d472c536a620695085e589d1`;
+- status coordinate `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-08-112`,
+  with byte-identical 1,901,511-byte status mirrors and SHA-256
+  `e0515fe3af9c24f155165f172f2f00c1bbcff21822b5479141183262cf34b8d5`;
+- canonical TeX with 197,818 bytes and SHA-256
+  `550fa4769b476b52cae5df3efa912a925b9e4c6d1460fe6a601d060e4a810f72`;
   and
-- deterministic 77-page A4 PDF with 436,878 bytes and SHA-256
-  `121978e29f6f37caf842fe8ad76c6ce7e8812bc1bbb7c018f068d5247e23e431`.
+- deterministic 77-page A4 PDF with 437,284 bytes and SHA-256
+  `0e30911e395f6054e968b2ac0de1a27cf9bb2e77a182e6744ac37407dd1de058`.
 
 The publication gate remains false, all four project assumptions and six
 blockers remain explicit, activation fingerprints remain unset, and

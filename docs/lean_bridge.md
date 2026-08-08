@@ -60,6 +60,7 @@ lean/PNP/ResidualTerminalProjectionSquare.lean
 lean/PNP/ResidualTerminalSideTightMinimum.lean
 lean/PNP/ResidualTerminalFourCornerCarrier.lean
 lean/PNP/ResidualTerminalFourCornerOptimumCompatibility.lean
+lean/PNP/ResidualTerminalFourCornerOptimumCoherence.lean
 lean/PNP/LockedNANDResidualGainBound.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
@@ -172,6 +173,7 @@ lean-audit/PNPResidualTerminalProjectionSquareAxiomAudit.lean
 lean-audit/PNPResidualTerminalSideTightMinimumAxiomAudit.lean
 lean-audit/PNPResidualTerminalFourCornerCarrierAxiomAudit.lean
 lean-audit/PNPResidualTerminalFourCornerOptimumCompatibilityAxiomAudit.lean
+lean-audit/PNPResidualTerminalFourCornerOptimumCoherenceAxiomAudit.lean
 lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean
 lean-audit/PNPLockedNANDDirectAxiomAudit.lean
 lean-audit/PNPDirectWireBaselineAxiomAudit.lean
@@ -1103,6 +1105,21 @@ This does not establish coherent square-leg transport,
 `sideTightCompletionExists`, BN2 square legitimacy, `SaturatePositive`,
 `BCELReady`, ZeroSlack, PCCMin, polynomial runtime, or the root theorem. See
 `docs/lean_residual_terminal_four_corner_optimum_compatibility.md`.
+
+`lean/PNP/ResidualTerminalFourCornerOptimumCoherence.lean` closes the next
+finite interface in the legacy §11.1 `BN2-CoherentOptimum` paragraph. It
+derives the four support inclusions from the computed square, uses exact
+ambient coordinates on every leg, compares only retained output semantics,
+and checks profiles in the manuscript's ten-role order. Full mode checks open
+obligations first. Quotient mode checks only retained coordinates and exposes
+a separate forgotten-coordinate failure query, so quotient evidence is never
+silently promoted. The universal theorem returns either a checked side-tight
+canonical tuple or the exact sound first failure. It does not prove that the
+coherent branch always occurs, discharge the later no-outcome routes, prove
+`sideTightCompletionExists`, establish BN2 square legitimacy, or establish
+`SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin, polynomial runtime, or the
+root theorem. See
+`docs/lean_residual_terminal_four_corner_optimum_coherence.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 
