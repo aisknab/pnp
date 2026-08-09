@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 97);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 94);
+  assert.equal(status.formalPublicationMilestones.length, 98);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 95);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -2413,6 +2413,25 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /projectionPositivityNotLostSilently/u);
   assert.match(terminalSaturationPositivityFirewall.nonClaim,
     /transparentSaturationCostBalanced/u);
+  const terminalSaturationCostBalance = byId.get(
+    'residual-terminal-candidate-saturation-cost-balance',
+  );
+  assert.equal(terminalSaturationCostBalance.status,
+    'formalized-residual-terminal-candidate-saturation-cost-balance');
+  assert.equal(terminalSaturationCostBalance.earned, true);
+  assert.equal(
+    terminalSaturationCostBalance.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.equal(terminalSaturationCostBalance.requiredTheorems.length, 17);
+  assert.match(terminalSaturationCostBalance.scope,
+    /candidate-derived dependency system/u);
+  assert.match(terminalSaturationCostBalance.scope,
+    /first nontransparent event/u);
+  assert.match(terminalSaturationCostBalance.nonClaim,
+    /interfaceExposureRoutesToE/u);
+  assert.match(terminalSaturationCostBalance.nonClaim,
+    /originKernelObligationClosureRouted/u);
   for (const id of [
     'global-locked-nand-threshold',
     'global-zeroslack-pccmin',
@@ -2427,10 +2446,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '586236e61864b8de185acfcb5667e2a2e428ec2ca77a44e83f1836ad8c377f81');
+    '2b2b49249d9744899ba820b62c5bdf10a0d93c4900a9aa1b78c439e109184b58');
   assert.equal(map.milestoneSourceClosureSha256,
-    'eec7fd5794e7fc945e4f3ef219b807cc3a6d5a0b07c67a2da5e33c07eda2ce0b');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2432);
+    'bbede19553a26c6ac1b7075cc22f5fb05662056351406e36183a7a734d32d3d9');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2449);
   for (const theorem of [
     'PNP.DirectWire.TerminalBCELAnchorProblem.wholeCorners_projectionDefect',
     'PNP.DirectWire.TerminalProjectionPositivityLoss.minima_eq',
@@ -2438,6 +2457,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     'PNP.DirectWire.classifyTerminalSaturationPositivity_bcel_of_positive',
     'PNP.DirectWire.terminalSaturationPositivity_no_checkedFullLiftAtMinimum',
     'PNP.DirectWire.classifyTerminalSaturationPositivity_exhaustive',
+    'PNP.DirectWire.terminalSaturateTrace_eventsLinked',
+    'PNP.DirectWire.TerminalTransparentSaturationStep.fullSlack_preserved',
+    'PNP.DirectWire.TerminalSaturationEventsLinked.projectionDefect_mono',
+    'PNP.DirectWire.TerminalSaturationBalanceOutcome.balanced_fullPositive_preserved',
   ]) assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[theorem],
     'string', theorem);
   for (const theorem of [
@@ -2761,7 +2784,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [25571, 13587, 7043, 14779, 233]);
+  ], [25863, 13665, 7079, 14904, 235]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

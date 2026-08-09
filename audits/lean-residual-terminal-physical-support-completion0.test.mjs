@@ -34,13 +34,21 @@ const EXECUTABLE_DECLARATIONS = Object.freeze([
   `${NAMESPACE}.mem_terminalSaturateRecords_iff`,
 ]);
 
-// This theorem was promoted for the later BCEL anchor-nucleus construction.
-// Its kernel closure is audited by that successor milestone, while this list
+// These declarations were promoted for later terminal milestones. Their
+// kernel closures are audited by those successor milestones, while this list
 // continues to pin the original executable-saturation transcript boundary.
 const EXECUTABLE_SOURCE_DECLARATIONS = Object.freeze([
   ...EXECUTABLE_DECLARATIONS.slice(0, 4),
+  `${NAMESPACE}.terminalFirstSaturationRule?`,
   `${NAMESPACE}.allTerminalPrimitiveRecords_nodup`,
   ...EXECUTABLE_DECLARATIONS.slice(4),
+  `${NAMESPACE}.TerminalSaturationTraceEvent`,
+  `${NAMESPACE}.TerminalSaturationEventsLinked`,
+  `${NAMESPACE}.TerminalSaturationTrace`,
+  `${NAMESPACE}.terminalSaturateTrace`,
+  `${NAMESPACE}.terminalSaturateTrace_eventsLinked`,
+  `${NAMESPACE}.terminalSaturateTrace_records`,
+  `${NAMESPACE}.terminalSaturateTrace_normalizedSeed`,
 ]);
 
 const PHYSICAL_DECLARATIONS = Object.freeze([
@@ -102,6 +110,7 @@ const MILESTONE_THEOREMS = Object.freeze([
 const EXECUTABLE_PRIVATE_HELPERS = Object.freeze([
   'terminalAny',
   'terminalAny_true_iff',
+  'firstTerminalSaturationRule?',
   'nodup_of_listNoDuplicates',
   'TerminalSaturationWorkState',
   'TerminalSaturationWorkState.known',
@@ -136,6 +145,17 @@ const EXECUTABLE_PRIVATE_HELPERS = Object.freeze([
   'terminalSaturationFinalState_pending_empty',
   'terminalSaturationFinalState_sound',
   'terminalSaturationFinalState_frontierClosed',
+  'TerminalSaturationPendingOrigin',
+  'TerminalSaturationTracePending',
+  'TerminalSaturationTraceWorkState',
+  'terminalSaturationTraceKnown',
+  'terminalSaturationTraceStep',
+  'terminalSaturationTraceStep_linked',
+  'terminalSaturationTraceWork',
+  'terminalSaturationTraceWork_linked',
+  'terminalSaturationTraceInitialState',
+  'terminalSaturationTraceFinalState',
+  'terminalSaturationTraceFinalState_linked',
 ]);
 
 const PHYSICAL_PRIVATE_HELPERS = Object.freeze([
