@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-09-118",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-10-119",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -813,6 +813,12 @@
   "leanResidualTerminalFirstNontransparentStepFormalized": true,
   "leanResidualTerminalSaturationCostBalanceAxiomAuditPassed": true,
   "leanResidualTerminalSaturationCostBalanceScope": "all-finite-direct-wire-candidates-executable-observers-forgetful-projections-candidate-derived-dependency-system-rule-labelled-exact-cost-balance-or-first-nontransparent-step",
+  "leanResidualTerminalInterfaceExposureRoutingFormalized": true,
+  "leanResidualTerminalFiniteInterfaceExposureRoutesToEFormalized": true,
+  "leanResidualTerminalInterfaceExposureZeroCostRetractFormalized": true,
+  "leanResidualTerminalFirstInterfaceExposureRouteFormalized": true,
+  "leanResidualTerminalInterfaceExposureRoutingAxiomAuditPassed": true,
+  "leanResidualTerminalInterfaceExposureRoutingScope": "all-finite-direct-wire-candidates-executable-observers-forgetful-projections-candidate-derived-interface-consumer-transparent-or-local-e-route-with-exact-first-failure",
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -841,7 +847,7 @@
   "legacyCheckerArchiveManifest": "archive/legacy-v0/ARCHIVE.json",
   "legacyCheckerArchiveCheckCommand": "npm run legacy:v0:check",
   "legacyCheckerReplayCommand": "npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d",
-  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-08-09-CANDIDATE-SATURATION-COST-BALANCE-117",
+  "publicSurfaceBaselineCoordinate": "PUBLIC-SURFACE-BASELINE-2026-08-10-INTERFACE-EXPOSURE-ROUTING-118",
   "formalReconstructionStatusPayload": "status/FORMAL_RECONSTRUCTION_STATUS.json",
   "siteStatusPayload": "public/pnp-status.json",
   "historicalActivatedStatusCoordinate": "PNP-ACTIVATED-STATUS-2026-07-05-01",
@@ -1403,6 +1409,7 @@
     "The computed terminal BCEL anchor-nucleus milestone starts from one proof-bearing governed proper-positive support and an assumed positive whole-support projection defect. It exhaustively selects the canonical minimum positive anchor family, checks exact saturation meet/union algebra, recomputes all four defects on every proper cut, and returns either the exact first failure or constant-cut and local BN2 conclusions for every cut. It does not derive the positive premise or dependency system, identify absent manuscript activation or charge classes, connect local failures to the complete global route system, establish SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.",
     "The computed terminal saturation-positivity firewall removes the caller-supplied whole-support positivity proof: zero projection defect returns an attained quotient minimum with a checked full lift, while positive defect delegates exactly to the existing BCEL anchor-nucleus classifier. This closes only projectionPositivityNotLostSilently. It does not discharge transparentSaturationCostBalanced, interfaceExposureRoutesToE, originKernelObligationClosureRouted, or firstNontransparentStepRecorded; derive the dependency system; establish full SaturatePositive or BCELReady; prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.",
     "Candidate-derived terminal saturation computes physical incidence from the actual circuit, profile incidence from exhaustive context-sensitive observer influence, and a deterministic rule-labelled trace without accepting a dependency relation or extraction certificate. Exact per-event cost classification and linked-history theorems close the finite terminal forms of transparentSaturationCostBalanced and firstNontransparentStepRecorded. Nontransparent events are recorded but not routed: interfaceExposureRoutesToE and originKernelObligationClosureRouted remain open, as do full SaturatePositive, Package E, BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP.",
+    "Finite terminal interface-exposure routing recognizes only candidate-derived interface-consumer events and returns either exact transparency evidence or a proof-bearing local E-route. The production trace classifier preserves the complete transparent prefix and routes only its exact first nontransparent interface event; non-interface failures remain fail-closed. This closes only the finite local form of interfaceExposureRoutesToE. The local route is not Package E VerifyDW, and originKernelObligationClosureRouted, full SaturatePositive, BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.",
     "External review is optional audit evidence and is not a mathematical premise or release blocker.",
     "Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.",
     "The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.",
@@ -1439,7 +1446,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "bbede19553a26c6ac1b7075cc22f5fb05662056351406e36183a7a734d32d3d9",
+    "actualSourceClosureSha256": "a7ba81b064643e574a6a5084e4947a61db2fc19528155cf2b11cf37f67f40682",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1469,22 +1476,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-09-118",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-10-119",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "53768f488ff27bf9e43b5b195daaf263fcdcf60e05651d403af23d9a65ff3d78",
+  "leanTheoremInventorySha256": "1901e247b93dcfedd06dc09be1ba6ded421ba422baa011a4cf4f9806846ef757",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 25863,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 14904,
-  "leanTheoremInventoryTheoremCount": 13665,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 7079,
-  "leanTheoremInventorySourceClosureModuleCount": 235,
-  "leanSourceClosureSha256": "bbede19553a26c6ac1b7075cc22f5fb05662056351406e36183a7a734d32d3d9",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-09-118",
+  "leanTheoremInventoryDeclarationCount": 26087,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 14908,
+  "leanTheoremInventoryTheoremCount": 13740,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 7102,
+  "leanTheoremInventorySourceClosureModuleCount": 236,
+  "leanSourceClosureSha256": "a7ba81b064643e574a6a5084e4947a61db2fc19528155cf2b11cf37f67f40682",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-10-119",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "9cc215a43b6c50be85f32a313eed36aca73bc332db9ea4faa21def8659c28f28",
+  "formalPublicationMapSha256": "410dc11e15005c24df28c455d3d0e1d96926f2dcffd6c080e45c60a395422849",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -36176,6 +36183,154 @@
       "status": "formalized-residual-terminal-candidate-saturation-cost-balance"
     },
     {
+      "classification": "formalized-residual-terminal-interface-exposure-routing",
+      "id": "residual-terminal-interface-exposure-routing",
+      "nonClaim": "This closes only the finite local form of interfaceExposureRoutesToE. The proof-bearing local E-route is an exposure-obligation coordinate, not a full Package E VerifyDW acceptance, a verified global gain, or global route completeness. The executable observer and forgetful projection remain explicit model inputs. It does not discharge originKernelObligationClosureRouted; establish full SaturatePositive, Package E, BCELReady or later BCEL/BN2-BN6 conclusions; prove ZeroSlack, PCCMin, polynomial runtime, SAT in P; remove a project assumption; or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalInterfaceExposureCoordinate?_sound",
+        "PNP.DirectWire.terminalCandidateInterfaceExposureCoordinate?_shape",
+        "PNP.DirectWire.terminalCandidateInterfaceExposureCoordinate?_edge",
+        "PNP.DirectWire.terminalInterfaceOutgoingCoordinate_eventCost_zero",
+        "PNP.DirectWire.TerminalInterfaceExposureERoute.sound",
+        "PNP.DirectWire.TerminalInterfaceExposureZeroCostRetract.eventCost_zero",
+        "PNP.DirectWire.TerminalInterfaceExposureZeroCostRetract.fullSlack_preserved",
+        "PNP.DirectWire.terminalInterfaceExposure_transparent_or_eRoute",
+        "PNP.DirectWire.TerminalFirstInterfaceExposureRoute.sound",
+        "PNP.DirectWire.classifyTerminalSaturationInterfaceRouting_exhaustive"
+      ],
+      "scope": "For every finite direct-wire candidate, executable ambient observer, forgetful projection, and finite terminal seed, Lean recognizes only an exact candidate-derived interface-consumer edge. Each recognized event is transparently cost-balanced or produces a proof-bearing local E-route; the production trace result records the exact first nontransparent event and complete transparent prefix, while non-interface first failures remain fail-closed.",
+      "title": "Finite terminal interface-exposure routing",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.terminalInterfaceExposureCoordinate?_sound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "fd588e1aab5d670afcc23cadd40cc3dcf03214f8f4d222b955116e80a5c8f125",
+          "expectedKernelTypeSha256": "fd588e1aab5d670afcc23cadd40cc3dcf03214f8f4d222b955116e80a5c8f125",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalCandidateInterfaceExposureCoordinate?_shape",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0f6ea712760c01fdb762902ad020dcf4a9f3c45dba0e2a91790b6bfd327cace7",
+          "expectedKernelTypeSha256": "0f6ea712760c01fdb762902ad020dcf4a9f3c45dba0e2a91790b6bfd327cace7",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalCandidateInterfaceExposureCoordinate?_edge",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d168a3362f7b52afd52451d87eff1eedb6302016786c4c763e0965ebcea08880",
+          "expectedKernelTypeSha256": "d168a3362f7b52afd52451d87eff1eedb6302016786c4c763e0965ebcea08880",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalInterfaceOutgoingCoordinate_eventCost_zero",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "74c702f16d6714a455bad571c647ae4903581a174b7c31b1e37b426b10a78160",
+          "expectedKernelTypeSha256": "74c702f16d6714a455bad571c647ae4903581a174b7c31b1e37b426b10a78160",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalInterfaceExposureERoute.sound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "57ae2f434a17a9c5c9a91cd17844f55fa7d72086827598e9bcf6ce7d2441803e",
+          "expectedKernelTypeSha256": "57ae2f434a17a9c5c9a91cd17844f55fa7d72086827598e9bcf6ce7d2441803e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalInterfaceExposureZeroCostRetract.eventCost_zero",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c098e9bfd76067bbc7a2d4223c0107dae920d3378e47a002f58e71f24ed0404b",
+          "expectedKernelTypeSha256": "c098e9bfd76067bbc7a2d4223c0107dae920d3378e47a002f58e71f24ed0404b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalInterfaceExposureZeroCostRetract.fullSlack_preserved",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e47bd2a49bb380282d5c6b7b950390dbfea623a55c0c6a5b93a9875215cff293",
+          "expectedKernelTypeSha256": "e47bd2a49bb380282d5c6b7b950390dbfea623a55c0c6a5b93a9875215cff293",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalInterfaceExposure_transparent_or_eRoute",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "71207620ad161eb833ad413ed00fccd4d14af5c5720f812c7ecff00eca892336",
+          "expectedKernelTypeSha256": "71207620ad161eb833ad413ed00fccd4d14af5c5720f812c7ecff00eca892336",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalFirstInterfaceExposureRoute.sound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "cef4ceb9d4650c0847c740c6126132dc9fa78100d83502b1c887cd6d3d31b8d0",
+          "expectedKernelTypeSha256": "cef4ceb9d4650c0847c740c6126132dc9fa78100d83502b1c887cd6d3d31b8d0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.classifyTerminalSaturationInterfaceRouting_exhaustive",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3f2cf5f03389537c02418758fd531dfa427be40d6773ddfa5fd6104c3a798c38",
+          "expectedKernelTypeSha256": "3f2cf5f03389537c02418758fd531dfa427be40d6773ddfa5fd6104c3a798c38",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-interface-exposure-routing"
+    },
+    {
       "classification": "not-formalized",
       "id": "global-locked-nand-threshold",
       "nonClaim": "The strict encoding, total source parser, literal target emitter, exact formula bytes, strict parser/emitter composition, polynomial runtime, output-size bound, recursive RawRefinement, concrete strict-v0 source-to-target PolynomialReduction, semantic CNF-to-NAND compiler, and its all-input finite-machine PolynomialReduction are now formalized. The concrete target language is still not linked to the report-level theorem, and the abstract threshold assumption remains.",
@@ -36270,7 +36425,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-09-118",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-10-119",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

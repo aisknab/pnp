@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-09-118');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-10-119');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -888,6 +888,11 @@ test('formal reconstruction status accepts the current source and public mirrors
     'leanResidualTerminalSaturationCostBalanceFormalized',
     'leanResidualTerminalFirstNontransparentStepFormalized',
     'leanResidualTerminalSaturationCostBalanceAxiomAuditPassed',
+    'leanResidualTerminalInterfaceExposureRoutingFormalized',
+    'leanResidualTerminalFiniteInterfaceExposureRoutesToEFormalized',
+    'leanResidualTerminalInterfaceExposureZeroCostRetractFormalized',
+    'leanResidualTerminalFirstInterfaceExposureRouteFormalized',
+    'leanResidualTerminalInterfaceExposureRoutingAxiomAuditPassed',
   ]) assert.equal(out[field], true, field);
   assert.equal(
     out.leanResidualTerminalPhysicalSupportCompletionScope,
@@ -957,6 +962,10 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalSaturationCostBalanceScope,
     'all-finite-direct-wire-candidates-executable-observers-forgetful-projections-candidate-derived-dependency-system-rule-labelled-exact-cost-balance-or-first-nontransparent-step',
   );
+  assert.equal(
+    out.leanResidualTerminalInterfaceExposureRoutingScope,
+    'all-finite-direct-wire-candidates-executable-observers-forgetful-projections-candidate-derived-interface-consumer-transparent-or-local-e-route-with-exact-first-failure',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
@@ -992,13 +1001,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 25863);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 13665);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7079);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14904);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 235);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 26087);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 13740);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7102);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14908);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 236);
   assert.equal(status.leanSourceClosureSha256,
-    'bbede19553a26c6ac1b7075cc22f5fb05662056351406e36183a7a734d32d3d9');
+    'a7ba81b064643e574a6a5084e4947a61db2fc19528155cf2b11cf37f67f40682');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -1420,7 +1429,7 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-09-CANDIDATE-SATURATION-COST-BALANCE-117');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-10-INTERFACE-EXPOSURE-ROUTING-118');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
@@ -1788,6 +1797,11 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
     'leanResidualTerminalSaturationCostBalanceFormalized',
     'leanResidualTerminalFirstNontransparentStepFormalized',
     'leanResidualTerminalSaturationCostBalanceAxiomAuditPassed',
+    'leanResidualTerminalInterfaceExposureRoutingFormalized',
+    'leanResidualTerminalFiniteInterfaceExposureRoutesToEFormalized',
+    'leanResidualTerminalInterfaceExposureZeroCostRetractFormalized',
+    'leanResidualTerminalFirstInterfaceExposureRouteFormalized',
+    'leanResidualTerminalInterfaceExposureRoutingAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
   assert.equal(
     status.leanResidualTerminalPhysicalSupportCompletionScope,
@@ -1856,6 +1870,10 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(
     status.leanResidualTerminalSaturationCostBalanceScope,
     'all-finite-direct-wire-candidates-executable-observers-forgetful-projections-candidate-derived-dependency-system-rule-labelled-exact-cost-balance-or-first-nontransparent-step',
+  );
+  assert.equal(
+    status.leanResidualTerminalInterfaceExposureRoutingScope,
+    'all-finite-direct-wire-candidates-executable-observers-forgetful-projections-candidate-derived-interface-consumer-transparent-or-local-e-route-with-exact-first-failure',
   );
   for (const field of [
     'leanSaturatePositiveFormalized',
@@ -2344,6 +2362,11 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanResidualTerminalSaturationCostBalanceFormalized',
     'leanResidualTerminalFirstNontransparentStepFormalized',
     'leanResidualTerminalSaturationCostBalanceAxiomAuditPassed',
+    'leanResidualTerminalInterfaceExposureRoutingFormalized',
+    'leanResidualTerminalFiniteInterfaceExposureRoutesToEFormalized',
+    'leanResidualTerminalInterfaceExposureZeroCostRetractFormalized',
+    'leanResidualTerminalFirstInterfaceExposureRouteFormalized',
+    'leanResidualTerminalInterfaceExposureRoutingAxiomAuditPassed',
   ];
 
   for (const field of fields) {

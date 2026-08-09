@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-09-118",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-10-119",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2449,7 +2449,17 @@
     "PNP.DirectWire.TerminalSaturationBalanceOutcome.balanced_event": "130f1fd981cf6b36eec26e96b2595146850c8388a6076fe4504b9c0915203741",
     "PNP.DirectWire.TerminalSaturationBalanceOutcome.balanced_fullSlack_preserved": "fa9685981cb6b2db8c729a5fe506fffa0f32a43acdfb26f75b50a85ce7213c4c",
     "PNP.DirectWire.TerminalSaturationBalanceOutcome.balanced_projectionDefect_mono": "896b644460ba7b1d32ffa7624285c8b9ff501d0dcfe46e10e304ba3aa4160a55",
-    "PNP.DirectWire.TerminalSaturationBalanceOutcome.balanced_fullPositive_preserved": "41f32ac41a2fa7a60fe34c561ce71c85a606043eab735f60917ff80b161b669f"
+    "PNP.DirectWire.TerminalSaturationBalanceOutcome.balanced_fullPositive_preserved": "41f32ac41a2fa7a60fe34c561ce71c85a606043eab735f60917ff80b161b669f",
+    "PNP.DirectWire.terminalInterfaceExposureCoordinate?_sound": "fd588e1aab5d670afcc23cadd40cc3dcf03214f8f4d222b955116e80a5c8f125",
+    "PNP.DirectWire.terminalCandidateInterfaceExposureCoordinate?_shape": "0f6ea712760c01fdb762902ad020dcf4a9f3c45dba0e2a91790b6bfd327cace7",
+    "PNP.DirectWire.terminalCandidateInterfaceExposureCoordinate?_edge": "d168a3362f7b52afd52451d87eff1eedb6302016786c4c763e0965ebcea08880",
+    "PNP.DirectWire.terminalInterfaceOutgoingCoordinate_eventCost_zero": "74c702f16d6714a455bad571c647ae4903581a174b7c31b1e37b426b10a78160",
+    "PNP.DirectWire.TerminalInterfaceExposureERoute.sound": "57ae2f434a17a9c5c9a91cd17844f55fa7d72086827598e9bcf6ce7d2441803e",
+    "PNP.DirectWire.TerminalInterfaceExposureZeroCostRetract.eventCost_zero": "c098e9bfd76067bbc7a2d4223c0107dae920d3378e47a002f58e71f24ed0404b",
+    "PNP.DirectWire.TerminalInterfaceExposureZeroCostRetract.fullSlack_preserved": "e47bd2a49bb380282d5c6b7b950390dbfea623a55c0c6a5b93a9875215cff293",
+    "PNP.DirectWire.terminalInterfaceExposure_transparent_or_eRoute": "71207620ad161eb833ad413ed00fccd4d14af5c5720f812c7ecff00eca892336",
+    "PNP.DirectWire.TerminalFirstInterfaceExposureRoute.sound": "cef4ceb9d4650c0847c740c6126132dc9fa78100d83502b1c887cd6d3d31b8d0",
+    "PNP.DirectWire.classifyTerminalSaturationInterfaceRouting_exhaustive": "3f2cf5f03389537c02418758fd531dfa427be40d6773ddfa5fd6104c3a798c38"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -2467,7 +2477,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "bbede19553a26c6ac1b7075cc22f5fb05662056351406e36183a7a734d32d3d9",
+  "milestoneSourceClosureSha256": "a7ba81b064643e574a6a5084e4947a61db2fc19528155cf2b11cf37f67f40682",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -6006,6 +6016,25 @@
       ],
       "scope": "For every finite direct-wire candidate, executable ambient observer, forgetful projection, and finite terminal seed, Lean computes the candidate-derived dependency system and deterministic rule-labelled saturation trace, then returns proof that every event is exactly cost-balanced with preserved full slack and nondecreasing projection defect, or records the exact first nontransparent event and complete transparent prefix.",
       "title": "Candidate-derived terminal saturation cost balance"
+    },
+    {
+      "classification": "formalized-residual-terminal-interface-exposure-routing",
+      "id": "residual-terminal-interface-exposure-routing",
+      "nonClaim": "This closes only the finite local form of interfaceExposureRoutesToE. The proof-bearing local E-route is an exposure-obligation coordinate, not a full Package E VerifyDW acceptance, a verified global gain, or global route completeness. The executable observer and forgetful projection remain explicit model inputs. It does not discharge originKernelObligationClosureRouted; establish full SaturatePositive, Package E, BCELReady or later BCEL/BN2-BN6 conclusions; prove ZeroSlack, PCCMin, polynomial runtime, SAT in P; remove a project assumption; or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalInterfaceExposureCoordinate?_sound",
+        "PNP.DirectWire.terminalCandidateInterfaceExposureCoordinate?_shape",
+        "PNP.DirectWire.terminalCandidateInterfaceExposureCoordinate?_edge",
+        "PNP.DirectWire.terminalInterfaceOutgoingCoordinate_eventCost_zero",
+        "PNP.DirectWire.TerminalInterfaceExposureERoute.sound",
+        "PNP.DirectWire.TerminalInterfaceExposureZeroCostRetract.eventCost_zero",
+        "PNP.DirectWire.TerminalInterfaceExposureZeroCostRetract.fullSlack_preserved",
+        "PNP.DirectWire.terminalInterfaceExposure_transparent_or_eRoute",
+        "PNP.DirectWire.TerminalFirstInterfaceExposureRoute.sound",
+        "PNP.DirectWire.classifyTerminalSaturationInterfaceRouting_exhaustive"
+      ],
+      "scope": "For every finite direct-wire candidate, executable ambient observer, forgetful projection, and finite terminal seed, Lean recognizes only an exact candidate-derived interface-consumer edge. Each recognized event is transparently cost-balanced or produces a proof-bearing local E-route; the production trace result records the exact first nontransparent event and complete transparent prefix, while non-interface first failures remain fail-closed.",
+      "title": "Finite terminal interface-exposure routing"
     },
     {
       "classification": "not-formalized",

@@ -1,0 +1,32 @@
+import PNP.ResidualTerminalInterfaceExposureRouting
+
+#print axioms PNP.DirectWire.TerminalInterfaceExposureCoordinate
+#print axioms PNP.DirectWire.terminalInterfaceExposureCoordinate?
+#print axioms PNP.DirectWire.TerminalInterfaceExposureCoordinate.Matches
+#print axioms PNP.DirectWire.terminalInterfaceExposureCoordinate?_sound
+#print axioms PNP.DirectWire.terminalCandidateInterfaceExposureCoordinate?
+#print axioms PNP.DirectWire.terminalCandidateInterfaceExposureCoordinate?_shape
+#print axioms PNP.DirectWire.terminalCandidateInterfaceExposureCoordinate?_edge
+#print axioms PNP.DirectWire.terminalInterfaceOutgoingCoordinate_eventCost_zero
+
+#print axioms PNP.DirectWire.TerminalInterfaceExposureERoute
+#print axioms PNP.DirectWire.TerminalInterfaceExposureERoute.Sound
+#print axioms PNP.DirectWire.TerminalInterfaceExposureERoute.sound
+#print axioms PNP.DirectWire.TerminalInterfaceExposureZeroCostRetract
+#print axioms PNP.DirectWire.TerminalInterfaceExposureZeroCostRetract.eventCost_zero
+#print axioms PNP.DirectWire.TerminalInterfaceExposureZeroCostRetract.fullSlack_preserved
+#print axioms PNP.DirectWire.TerminalInterfaceExposureStepOutcome
+#print axioms PNP.DirectWire.classifyTerminalInterfaceExposureStep
+#print axioms PNP.DirectWire.terminalInterfaceExposureStepRoutedBool
+#print axioms PNP.DirectWire.terminalInterfaceExposure_transparent_or_eRoute
+
+#print axioms PNP.DirectWire.TerminalFirstInterfaceExposureRoute
+#print axioms PNP.DirectWire.TerminalFirstInterfaceExposureRoute.Sound
+#print axioms PNP.DirectWire.TerminalFirstInterfaceExposureRoute.sound
+#print axioms PNP.DirectWire.TerminalFirstNoninterfaceSaturationFailure
+#print axioms PNP.DirectWire.TerminalSaturationInterfaceRoutingOutcome
+#print axioms PNP.DirectWire.classifyTerminalSaturationInterfaceRouting
+#print axioms PNP.DirectWire.terminalSaturationInterfaceERoutedBool
+#print axioms PNP.DirectWire.terminalSaturationInterfaceBalancedBool
+#print axioms PNP.DirectWire.terminalSaturationInterfaceOtherNontransparentBool
+#print axioms PNP.DirectWire.classifyTerminalSaturationInterfaceRouting_exhaustive
