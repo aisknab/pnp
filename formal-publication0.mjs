@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '6391db3d3a1f0530a9197b6193bb0ed507a18acfbc40ca75a418f98c9db3933b';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'b04ecda7eea3f186932b447c3979933b289a22340f095fa7f908a5187abd85b9';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -2164,6 +2164,35 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.TerminalFourCornerCarrier.computedBN2SquareQuantities',
   'PNP.DirectWire.TerminalFourCornerCarrier.computedBN2LocalConclusion',
   'PNP.DirectWire.TerminalFourCornerCarrier.computedBN2LocalConclusionOrFirstRoute',
+  'PNP.DirectWire.TerminalBCELAnchorProblem.mem_anchorRecords_iff',
+  'PNP.DirectWire.TerminalBCELAnchorProblem.anchorRecords_nodup',
+  'PNP.DirectWire.TerminalBCELAnchorProblem.anchorRecords_mem_allAnchorSubfamilies',
+  'PNP.DirectWire.findTerminalPositiveAnchorNucleus_sound',
+  'PNP.DirectWire.findTerminalPositiveAnchorNucleus_eq_none_iff',
+  'PNP.DirectWire.findTerminalPositiveAnchorNucleus_exists_of_whole_positive',
+  'PNP.DirectWire.findTerminalPositiveAnchorNucleus_unique',
+  'PNP.DirectWire.TerminalBCELAnchorAlgebraCheck.disagrees_eq_true_iff',
+  'PNP.DirectWire.terminalBCELAnchorAlgebraCheck_mem',
+  'PNP.DirectWire.mem_allTerminalBCELAnchorAlgebraChecks_governed',
+  'PNP.DirectWire.firstTerminalBCELAnchorAlgebraMismatch?_sound',
+  'PNP.DirectWire.firstTerminalBCELAnchorAlgebraMismatch?_eq_none_iff',
+  'PNP.DirectWire.terminalBCELProperCutSeedBool_eq_true_iff',
+  'PNP.DirectWire.mem_allTerminalBCELProperCutSeeds_iff',
+  'PNP.DirectWire.TerminalBCELCutDefectCheck.disagrees_eq_true_iff',
+  'PNP.DirectWire.terminalBCELCutDefectCheck_mem',
+  'PNP.DirectWire.mem_allTerminalBCELCutDefectChecks_proper',
+  'PNP.DirectWire.firstTerminalBCELCutDefectMismatch?_sound',
+  'PNP.DirectWire.firstTerminalBCELCutDefectMismatch?_eq_none_all',
+  'PNP.DirectWire.firstTerminalBCELCutRoute?_sound',
+  'PNP.DirectWire.firstTerminalBCELCutRoute?_eq_none_noRoutes',
+  'PNP.DirectWire.computedBCELCutConclusionOfNoFailures',
+  'PNP.DirectWire.TerminalComputedBCELAnchorNucleus.strictSubfamily_defect_zero',
+  'PNP.DirectWire.TerminalComputedBCELAnchorNucleus.anchorSizeAtLeastTwo',
+  'PNP.DirectWire.TerminalComputedBCELAnchorNucleus.properCutConstantEquation',
+  'PNP.DirectWire.TerminalComputedBCELAnchorNucleus.properCutLocalConclusion',
+  'PNP.DirectWire.classifyTerminalBCELAnchorNucleus_exhaustive',
+  'PNP.DirectWire.allTerminalPrimitiveRecords_nodup',
+  'PNP.DirectWire.filter_mem_terminalListSubsets',
   'PNP.DirectWire.TerminalFourCornerCarrier.boundaryDisposition?_eq_some_iff',
   'PNP.DirectWire.TerminalFourCornerCarrier.boundary_internalized',
   'PNP.DirectWire.TerminalFourCornerCarrier.boundary_nodup',
@@ -2439,7 +2468,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-09-115') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-09-116') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -2716,7 +2745,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-09-115') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-09-116') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

@@ -34,6 +34,15 @@ const EXECUTABLE_DECLARATIONS = Object.freeze([
   `${NAMESPACE}.mem_terminalSaturateRecords_iff`,
 ]);
 
+// This theorem was promoted for the later BCEL anchor-nucleus construction.
+// Its kernel closure is audited by that successor milestone, while this list
+// continues to pin the original executable-saturation transcript boundary.
+const EXECUTABLE_SOURCE_DECLARATIONS = Object.freeze([
+  ...EXECUTABLE_DECLARATIONS.slice(0, 4),
+  `${NAMESPACE}.allTerminalPrimitiveRecords_nodup`,
+  ...EXECUTABLE_DECLARATIONS.slice(4),
+]);
+
 const PHYSICAL_DECLARATIONS = Object.freeze([
   `${NAMESPACE}.TerminalSupportWire`,
   `${NAMESPACE}.allTerminalSupportWires`,
@@ -94,7 +103,6 @@ const EXECUTABLE_PRIVATE_HELPERS = Object.freeze([
   'terminalAny',
   'terminalAny_true_iff',
   'nodup_of_listNoDuplicates',
-  'allTerminalPrimitiveRecords_nodup',
   'TerminalSaturationWorkState',
   'TerminalSaturationWorkState.known',
   'terminalNewRequiredRecords',
@@ -199,7 +207,7 @@ function validateExecutable0(source) {
     'PNP.ResidualTerminalSaturation',
     'PNP.DirectWireBaseline',
   ])) failures.push('closed-import');
-  if (JSON.stringify(declarations0(source)) !== JSON.stringify(EXECUTABLE_DECLARATIONS)) {
+  if (JSON.stringify(declarations0(source)) !== JSON.stringify(EXECUTABLE_SOURCE_DECLARATIONS)) {
     failures.push('declaration-surface');
   }
   if (JSON.stringify(privateHelpers0(source)) !== JSON.stringify(EXECUTABLE_PRIVATE_HELPERS)) {

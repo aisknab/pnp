@@ -100,8 +100,8 @@ test('status retains six blockers, four project axioms, and an absent compatibil
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 95);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 92);
+  assert.equal(status.formalPublicationMilestones.length, 96);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 93);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -2325,6 +2325,62 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /complete global no-outcome route system/u);
   assert.match(terminalComputedBN2SquareLegitimacy.nonClaim,
     /SaturatePositive/u);
+  const terminalComputedBCELAnchorNucleus = byId.get(
+    'residual-terminal-computed-bcel-anchor-nucleus',
+  );
+  assert.equal(terminalComputedBCELAnchorNucleus.status,
+    'formalized-residual-terminal-computed-bcel-anchor-nucleus');
+  assert.equal(terminalComputedBCELAnchorNucleus.earned, true);
+  assert.equal(
+    terminalComputedBCELAnchorNucleus.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.deepEqual(terminalComputedBCELAnchorNucleus.requiredTheorems, [
+    'PNP.DirectWire.TerminalBCELAnchorProblem.mem_anchorRecords_iff',
+    'PNP.DirectWire.TerminalBCELAnchorProblem.anchorRecords_nodup',
+    'PNP.DirectWire.TerminalBCELAnchorProblem.anchorRecords_mem_allAnchorSubfamilies',
+    'PNP.DirectWire.findTerminalPositiveAnchorNucleus_sound',
+    'PNP.DirectWire.findTerminalPositiveAnchorNucleus_eq_none_iff',
+    'PNP.DirectWire.findTerminalPositiveAnchorNucleus_exists_of_whole_positive',
+    'PNP.DirectWire.findTerminalPositiveAnchorNucleus_unique',
+    'PNP.DirectWire.TerminalBCELAnchorAlgebraCheck.disagrees_eq_true_iff',
+    'PNP.DirectWire.terminalBCELAnchorAlgebraCheck_mem',
+    'PNP.DirectWire.mem_allTerminalBCELAnchorAlgebraChecks_governed',
+    'PNP.DirectWire.firstTerminalBCELAnchorAlgebraMismatch?_sound',
+    'PNP.DirectWire.firstTerminalBCELAnchorAlgebraMismatch?_eq_none_iff',
+    'PNP.DirectWire.terminalBCELProperCutSeedBool_eq_true_iff',
+    'PNP.DirectWire.mem_allTerminalBCELProperCutSeeds_iff',
+    'PNP.DirectWire.TerminalBCELCutDefectCheck.disagrees_eq_true_iff',
+    'PNP.DirectWire.terminalBCELCutDefectCheck_mem',
+    'PNP.DirectWire.mem_allTerminalBCELCutDefectChecks_proper',
+    'PNP.DirectWire.firstTerminalBCELCutDefectMismatch?_sound',
+    'PNP.DirectWire.firstTerminalBCELCutDefectMismatch?_eq_none_all',
+    'PNP.DirectWire.firstTerminalBCELCutRoute?_sound',
+    'PNP.DirectWire.firstTerminalBCELCutRoute?_eq_none_noRoutes',
+    'PNP.DirectWire.computedBCELCutConclusionOfNoFailures',
+    'PNP.DirectWire.TerminalComputedBCELAnchorNucleus.strictSubfamily_defect_zero',
+    'PNP.DirectWire.TerminalComputedBCELAnchorNucleus.anchorSizeAtLeastTwo',
+    'PNP.DirectWire.TerminalComputedBCELAnchorNucleus.properCutConstantEquation',
+    'PNP.DirectWire.TerminalComputedBCELAnchorNucleus.properCutLocalConclusion',
+    'PNP.DirectWire.classifyTerminalBCELAnchorNucleus_exhaustive',
+    'PNP.DirectWire.allTerminalPrimitiveRecords_nodup',
+    'PNP.DirectWire.filter_mem_terminalListSubsets',
+    'PNP.DirectWire.mem_allTerminalPrimitiveRecords',
+    'PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumRoute?_sound',
+    'PNP.DirectWire.TerminalFourCornerOptimumRoutedFailure.sound',
+    'PNP.DirectWire.TerminalFourCornerCarrier.computedBN2SquareLegitimate',
+    'PNP.DirectWire.TerminalFourCornerCarrier.computedBN2LocalConclusion',
+    'PNP.DirectWire.TerminalProjectionFourCorners.constantCutEquation_of_defects',
+    'PNP.DirectWire.TerminalProjectionFourCorners.projectionExcess_pos_of_constantCut',
+  ]);
+  assert.match(terminalComputedBCELAnchorNucleus.scope,
+    /minimum-cardinality positive anchor nucleus/u);
+  assert.match(terminalComputedBCELAnchorNucleus.scope,
+    /full-before-quotient/u);
+  assert.match(terminalComputedBCELAnchorNucleus.nonClaim,
+    /positive whole-support projection defect/u);
+  assert.match(terminalComputedBCELAnchorNucleus.nonClaim,
+    /SaturatePositive/u);
   for (const id of [
     'global-locked-nand-threshold',
     'global-zeroslack-pccmin',
@@ -2339,10 +2395,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '6391db3d3a1f0530a9197b6193bb0ed507a18acfbc40ca75a418f98c9db3933b');
+    'b04ecda7eea3f186932b447c3979933b289a22340f095fa7f908a5187abd85b9');
   assert.equal(map.milestoneSourceClosureSha256,
-    '01503dfe0db82b6672d8ace6cce5061846a8f0ad41322fc022f73676bad80124');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2397);
+    '1f466ddd7a7436ab57ddfbccce989d01c4d8e61e90480d76f6265e82c0fdd228');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2426);
   for (const theorem of [
     'PNP.DirectWire.LockedNANDTrace.carrierSeparation',
     'PNP.DirectWire.LockedNANDTrace.finalLock_fresh',
@@ -2664,7 +2720,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [25099, 13423, 7025, 14705, 231]);
+  ], [25515, 13564, 7043, 14779, 232]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
