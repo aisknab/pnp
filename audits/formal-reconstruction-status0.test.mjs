@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-09-116');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-09-117');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -882,6 +882,8 @@ test('formal reconstruction status accepts the current source and public mirrors
     'leanResidualTerminalBCELCutRouteDichotomyFormalized',
     'leanResidualTerminalBCELConstantCutConclusionFormalized',
     'leanResidualTerminalBCELAnchorNucleusAxiomAuditPassed',
+    'leanResidualTerminalSaturationPositivityFirewallFormalized',
+    'leanResidualTerminalSaturationPositivityFirewallAxiomAuditPassed',
   ]) assert.equal(out[field], true, field);
   assert.equal(
     out.leanResidualTerminalPhysicalSupportCompletionScope,
@@ -943,6 +945,10 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalBCELAnchorNucleusScope,
     'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-computed-governed-proper-positive-supports-forgetful-projections-executable-ambient-observers-and-positive-whole-support-projection-defect',
   );
+  assert.equal(
+    out.leanResidualTerminalSaturationPositivityFirewallScope,
+    'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-computed-governed-proper-positive-supports-forgetful-projections-and-executable-ambient-observers-total-zero-or-positive-whole-support-projection-defect-classification',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
@@ -978,13 +984,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 25515);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 13564);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 25571);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 13587);
   assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7043);
   assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14779);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 232);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 233);
   assert.equal(status.leanSourceClosureSha256,
-    '1f466ddd7a7436ab57ddfbccce989d01c4d8e61e90480d76f6265e82c0fdd228');
+    'eec7fd5794e7fc945e4f3ef219b807cc3a6d5a0b07c67a2da5e33c07eda2ce0b');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -1406,7 +1412,7 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-09-RESIDUAL-TERMINAL-COMPUTED-BCEL-ANCHOR-NUCLEUS-115');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-09-RESIDUAL-TERMINAL-SATURATION-POSITIVITY-FIREWALL-116');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
@@ -1768,6 +1774,8 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
     'leanResidualTerminalBCELCutRouteDichotomyFormalized',
     'leanResidualTerminalBCELConstantCutConclusionFormalized',
     'leanResidualTerminalBCELAnchorNucleusAxiomAuditPassed',
+    'leanResidualTerminalSaturationPositivityFirewallFormalized',
+    'leanResidualTerminalSaturationPositivityFirewallAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
   assert.equal(
     status.leanResidualTerminalPhysicalSupportCompletionScope,
@@ -1828,6 +1836,10 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(
     status.leanResidualTerminalBCELAnchorNucleusScope,
     'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-computed-governed-proper-positive-supports-forgetful-projections-executable-ambient-observers-and-positive-whole-support-projection-defect',
+  );
+  assert.equal(
+    status.leanResidualTerminalSaturationPositivityFirewallScope,
+    'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-computed-governed-proper-positive-supports-forgetful-projections-and-executable-ambient-observers-total-zero-or-positive-whole-support-projection-defect-classification',
   );
   for (const field of [
     'leanSaturatePositiveFormalized',
@@ -2310,6 +2322,8 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanResidualTerminalBCELCutRouteDichotomyFormalized',
     'leanResidualTerminalBCELConstantCutConclusionFormalized',
     'leanResidualTerminalBCELAnchorNucleusAxiomAuditPassed',
+    'leanResidualTerminalSaturationPositivityFirewallFormalized',
+    'leanResidualTerminalSaturationPositivityFirewallAxiomAuditPassed',
   ];
 
   for (const field of fields) {

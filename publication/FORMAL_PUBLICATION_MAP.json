@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-09-116",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-09-117",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2184,6 +2184,12 @@
     "PNP.DirectWire.terminalBCELAnchorAlgebraCheck_mem": "0c887972254ae42d2251cc26fdb984a43f6fd45fa97e047cbff8cfa3cce3d92b",
     "PNP.DirectWire.terminalBCELCutDefectCheck_mem": "ee8f2ddc31eb92b7d340feb65ad9c74c28a50e9e784a44a07c0dc4968fe4c5b5",
     "PNP.DirectWire.terminalBCELProperCutSeedBool_eq_true_iff": "562ac1b728198665ad38ff6b5a9f2d9df0f72cfe9fda2edbc29ef1d3660e6bb9",
+    "PNP.DirectWire.TerminalBCELAnchorProblem.wholeCorners_projectionDefect": "fbee489cf66528eb5de3ea666c16cfb7221542c1fa7517f89abd254e42722969",
+    "PNP.DirectWire.TerminalProjectionPositivityLoss.minima_eq": "7d39c3e10341eea3705465cef7be52efa324670f71c9c414da8ad2f6193c232c",
+    "PNP.DirectWire.classifyTerminalSaturationPositivity_loss_of_zero": "fbfd655a027482cf0a1972df545cdd20956e3f83f964bd9f906f9b67db8f3a05",
+    "PNP.DirectWire.classifyTerminalSaturationPositivity_bcel_of_positive": "8df5cb84391282920fd645d31c0799614ba07666c52afc87b1bcb51dc4a90080",
+    "PNP.DirectWire.terminalSaturationPositivity_no_checkedFullLiftAtMinimum": "4e36c01f1002f0fcfccb4e0defe1f7e6cef7c550d08b265420aadf097997e877",
+    "PNP.DirectWire.classifyTerminalSaturationPositivity_exhaustive": "8a414da78f16be40c2530a341a02eefe740d96b21387641d0dbad3e171d0307d",
     "PNP.DirectWire.TerminalComputedBN2SquareLegitimate.cornerCompatible": "353ae46eab6aa34d13a35841d9645d0872fee705b8bad037d3e767e56a72b071",
     "PNP.DirectWire.TerminalComputedBN2SquareLegitimate.joinProfile": "da482fc3256cea5a7c74a0407cf8c610ec1cb2e784a98cf71dd0a6e12da3035c",
     "PNP.DirectWire.TerminalComputedBN2SquareLegitimate.meetProfile": "5496541d05e720818b80d4c5cb9e01cb19b1e6f39912fb077bfe010ca07a4da3",
@@ -2444,7 +2450,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "1f466ddd7a7436ab57ddfbccce989d01c4d8e61e90480d76f6265e82c0fdd228",
+  "milestoneSourceClosureSha256": "eec7fd5794e7fc945e4f3ef219b807cc3a6d5a0b07c67a2da5e33c07eda2ce0b",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -5936,6 +5942,27 @@
       ],
       "scope": "For every finite direct-wire candidate, explicit terminal dependency system, computed governed proper-positive support, forgetful projection, executable ambient observer, and positive whole-support projection defect, Lean computes the canonical minimum-cardinality positive anchor nucleus and returns either an insufficient nucleus, the exact first anchor-algebra mismatch, the exact first proper-cut defect mismatch, the proof-bearing first full-before-quotient local route, or exact constant-cut and local BN2 conclusions for every proper cut.",
       "title": "Computed terminal BCEL anchor nucleus and cut-square dichotomy"
+    },
+    {
+      "classification": "formalized-residual-terminal-saturation-positivity-firewall",
+      "id": "residual-terminal-saturation-positivity-firewall",
+      "nonClaim": "This closes only projectionPositivityNotLostSilently in the current finite terminal model. It assumes an explicit terminal dependency system and an already computed governed proper-positive support. It does not discharge transparentSaturationCostBalanced, interfaceExposureRoutesToE, originKernelObligationClosureRouted, or firstNontransparentStepRecorded; establish full SaturatePositive, Package E, BCELReady or later BCEL/BN2-BN6 conclusions; prove ZeroSlack, PCCMin, polynomial runtime, SAT in P; remove a project assumption; or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalBCELAnchorProblem.wholeCorners_projectionDefect",
+        "PNP.DirectWire.TerminalProjectionPositivityLoss.minima_eq",
+        "PNP.DirectWire.classifyTerminalSaturationPositivity_loss_of_zero",
+        "PNP.DirectWire.classifyTerminalSaturationPositivity_bcel_of_positive",
+        "PNP.DirectWire.terminalSaturationPositivity_no_checkedFullLiftAtMinimum",
+        "PNP.DirectWire.classifyTerminalSaturationPositivity_exhaustive",
+        "PNP.DirectWire.terminalProjectionDefect_eq_zero_iff_minima_eq",
+        "PNP.DirectWire.terminalFullProfileMinimumRealization_gateCount",
+        "PNP.DirectWire.terminalProjectionDefect_pos_no_checkedFullLiftAtMinimum",
+        "PNP.DirectWire.TerminalProperPositiveSupport.saturatedRecords_closed",
+        "PNP.DirectWire.TerminalProperPositiveSupport.physically_compatible",
+        "PNP.DirectWire.TerminalProperPositiveSupport.extracted_semantics"
+      ],
+      "scope": "For every finite direct-wire candidate, explicit terminal dependency system, computed governed proper-positive support, forgetful projection, and executable ambient observer, Lean computes the whole-support defect: zero projection defect returns an attained quotient minimum with a checked full lift, while positive defect delegates exactly to the existing fail-closed BCEL anchor-nucleus classifier.",
+      "title": "Computed terminal saturation-positivity firewall"
     },
     {
       "classification": "not-formalized",
