@@ -1319,6 +1319,21 @@ this closes the finite terminal forms of
 root theorem remain unproved. See
 [`lean_residual_terminal_saturation_cost_balance.md`](./lean_residual_terminal_saturation_cost_balance.md).
 
+`ResidualTerminalInterfaceExposureRouting` now closes the finite local form of
+`interfaceExposureRoutesToE`. It recognizes only events whose exact
+`interfaceConsumer` edge is recomputed from the candidate-derived dependency
+system, then reuses the cost classifier to return either transparency evidence
+or a proof-bearing local E-route with the selected coordinate, typed reason,
+and nontransparency proof. The trace classifier is tied to the production
+classifier's exact first nontransparent event and complete transparent prefix;
+an earlier non-interface failure remains in a distinct fail-closed branch.
+Outgoing-coordinate completion additionally gives the exact zero-cost retract
+and preserves full slack. The local E-route is not a Package E `VerifyDW`
+acceptance or a proof of global gain. `originKernelObligationClosureRouted`,
+full `SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin, polynomial runtime,
+and the root theorem therefore remain open. See
+[`lean_residual_terminal_interface_exposure_routing.md`](./lean_residual_terminal_interface_exposure_routing.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

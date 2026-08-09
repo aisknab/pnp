@@ -1163,6 +1163,22 @@ yet routed: `interfaceExposureRoutesToE` and
 unproved. See
 `docs/lean_residual_terminal_saturation_cost_balance.md`.
 
+`lean/PNP/ResidualTerminalInterfaceExposureRouting.lean` closes the finite
+local form of `interfaceExposureRoutesToE`. Its shape recognizer accepts only
+the outgoing interface coordinate or its gate/boundary materializer, and the
+production query independently recomputes the exact candidate-derived
+`interfaceConsumer` edge. The step classifier returns either the existing
+transparent cost-balance proof or a local E-route carrying the computed
+coordinate, exact typed failure reason, and nontransparency evidence. At trace
+level the route is tied to the deterministic first nontransparent event and
+its complete transparent prefix; a first non-interface failure remains a
+separate fail-closed outcome. Transparent outgoing-coordinate completion is an
+exact zero-cost retract preserving full slack. This is not Package E
+`VerifyDW`, global gain, or global route completeness, and it does not close
+`originKernelObligationClosureRouted`, full `SaturatePositive`, `BCELReady`,
+ZeroSlack, PCCMin, polynomial runtime, or the root theorem. See
+`docs/lean_residual_terminal_interface_exposure_routing.md`.
+
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 
 ```lean
