@@ -389,7 +389,6 @@ test('status earns frontier pushout without downstream overclaim', async () => {
     'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-and-computed-saturated-support-squares',
   );
   for (const field of [
-    'leanResidualTerminalSquareLegitimacyFormalized',
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
     'leanResidualRoutesGlobalGainCompletenessFormalized',

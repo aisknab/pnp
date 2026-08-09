@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-08-114';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-09-115';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -473,6 +473,7 @@ const NON_CLAIMS = Object.freeze([
   'The Section 11.1 optimum-coherence classifier traverses every finite computed support square in a deterministic order. It either returns a side-tight canonical tuple with exact commutation and incidence facts or the first exact semantic, profile, charge-profile, obligation, or mode-firewall mismatch. That classifier alone does not prove that the coherent branch always occurs or discharge a later no-outcome route.',
   'The sideTightCompletionExists milestone turns exact mode-appropriate local route silence into the checked side-tight coherent optimum tuple and its exact incidence value for every finite computed terminal support square. Full and quotient modes are discharged independently, and the quotient-promotion firewall remains separate.',
   'The complete BN2 tight-basis milestone enumerates every profile-constrained minimum implementation at all four corners, crosses and coherence-filters the full finite family, and proves that its signed maximum equals the selected delta under exact local route silence. This is a local all-finite maximum, not universal route silence, BN2 square legitimacy, the complete global no-outcome route system, terminal dependency extraction, SaturatePositive, BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.',
+  'Computed terminal BN2 square legitimacy now packages exact governed frontier transport, projection commutation, shared full and quotient quantities, and both exact tight-family maxima on every finite square built under one explicit terminal dependency system. The unconditional boundary returns the complete local conclusion under exact local route silence or the deterministic full-then-quotient proof-bearing first coherence failure. It does not derive the dependency system, prove universal route silence, connect local failures to the complete global no-outcome route system, identify a BCEL anchor square, establish SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
   'The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.',
@@ -1349,7 +1350,15 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalFrontierPushoutAxiomAuditPassed: true,
   leanResidualTerminalFrontierPushoutScope:
     'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-and-computed-saturated-support-squares',
-  leanResidualTerminalSquareLegitimacyFormalized: false,
+  leanResidualTerminalSquareLegitimacyFormalized: true,
+  leanResidualTerminalSquareStructuralCompatibilityFormalized: true,
+  leanResidualTerminalSquareFrontierPushoutFormalized: true,
+  leanResidualTerminalSquareSharedQuantityCarrierFormalized: true,
+  leanResidualTerminalSquareLocalConclusionUnderRouteSilenceFormalized: true,
+  leanResidualTerminalSquareFailClosedRouteDichotomyFormalized: true,
+  leanResidualTerminalSquareLegitimacyAxiomAuditPassed: true,
+  leanResidualTerminalSquareLegitimacyScope:
+    'all-finite-computed-terminal-support-squares-explicit-terminal-dependency-systems-direct-wire-candidates-observers-and-forgetful-projections-with-local-route-silence-or-proof-bearing-first-failure',
   leanResidualTerminalProjectionSquareFormalized: true,
   leanResidualTerminalProjectionPhysicalInvariantFormalized: true,
   leanResidualTerminalProjectionProfileExactFormalized: true,
@@ -1439,7 +1448,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-08-RESIDUAL-TERMINAL-FOUR-CORNER-TIGHT-BASIS-MAXIMUM-113',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-09-RESIDUAL-TERMINAL-COMPUTED-BN2-SQUARE-LEGITIMACY-114',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -2296,7 +2305,15 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalFrontierPushoutAxiomAuditPassed: true,
       leanResidualTerminalFrontierPushoutScope:
         'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-and-computed-saturated-support-squares',
-      leanResidualTerminalSquareLegitimacyFormalized: false,
+      leanResidualTerminalSquareLegitimacyFormalized: true,
+      leanResidualTerminalSquareStructuralCompatibilityFormalized: true,
+      leanResidualTerminalSquareFrontierPushoutFormalized: true,
+      leanResidualTerminalSquareSharedQuantityCarrierFormalized: true,
+      leanResidualTerminalSquareLocalConclusionUnderRouteSilenceFormalized: true,
+      leanResidualTerminalSquareFailClosedRouteDichotomyFormalized: true,
+      leanResidualTerminalSquareLegitimacyAxiomAuditPassed: true,
+      leanResidualTerminalSquareLegitimacyScope:
+        'all-finite-computed-terminal-support-squares-explicit-terminal-dependency-systems-direct-wire-candidates-observers-and-forgetful-projections-with-local-route-silence-or-proof-bearing-first-failure',
       leanResidualTerminalProjectionSquareFormalized: true,
       leanResidualTerminalProjectionPhysicalInvariantFormalized: true,
       leanResidualTerminalProjectionProfileExactFormalized: true,
@@ -2437,7 +2454,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-08-114',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-09-115',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

@@ -409,7 +409,7 @@ test('status retains the classifier after conditional coherent completion', asyn
     status.leanResidualTerminalCoherentFourCornerBasisScope,
     'conditional-on-exact-mode-appropriate-local-route-silence-not-universal-bn2-square-legitimacy',
   );
-  assert.equal(status.leanResidualTerminalSquareLegitimacyFormalized, false);
+  assert.equal(status.leanResidualTerminalSquareLegitimacyFormalized, true);
   assert.equal(status.leanSaturatePositiveFormalized, false);
   assert.equal(status.remainingBlockers.length, 6);
   assert.equal(status.projectSpecificAxiomInventory.length, 4);

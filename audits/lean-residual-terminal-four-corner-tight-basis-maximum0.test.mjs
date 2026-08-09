@@ -378,7 +378,7 @@ test('status earns only the local complete-family maximum edge', async () => {
     'leanResidualTerminalFourCornerTightBasisMaximumAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
   assert.equal(status.leanResidualTerminalFourCornerOptimumPromotionFirewallRetained, true);
-  assert.equal(status.leanResidualTerminalSquareLegitimacyFormalized, false);
+  assert.equal(status.leanResidualTerminalSquareLegitimacyFormalized, true);
   assert.equal(status.leanSaturatePositiveFormalized, false);
   assert.equal(status.leanBCELReadyFormalized, false);
   assert.equal(status.remainingBlockers.length, 6);
