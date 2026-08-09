@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'b04ecda7eea3f186932b447c3979933b289a22340f095fa7f908a5187abd85b9';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '586236e61864b8de185acfcb5667e2a2e428ec2ca77a44e83f1836ad8c377f81';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -2191,6 +2191,12 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.TerminalComputedBCELAnchorNucleus.properCutConstantEquation',
   'PNP.DirectWire.TerminalComputedBCELAnchorNucleus.properCutLocalConclusion',
   'PNP.DirectWire.classifyTerminalBCELAnchorNucleus_exhaustive',
+  'PNP.DirectWire.TerminalBCELAnchorProblem.wholeCorners_projectionDefect',
+  'PNP.DirectWire.TerminalProjectionPositivityLoss.minima_eq',
+  'PNP.DirectWire.classifyTerminalSaturationPositivity_loss_of_zero',
+  'PNP.DirectWire.classifyTerminalSaturationPositivity_bcel_of_positive',
+  'PNP.DirectWire.terminalSaturationPositivity_no_checkedFullLiftAtMinimum',
+  'PNP.DirectWire.classifyTerminalSaturationPositivity_exhaustive',
   'PNP.DirectWire.allTerminalPrimitiveRecords_nodup',
   'PNP.DirectWire.filter_mem_terminalListSubsets',
   'PNP.DirectWire.TerminalFourCornerCarrier.boundaryDisposition?_eq_some_iff',
@@ -2468,7 +2474,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-09-116') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-09-117') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -2745,7 +2751,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-09-116') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-09-117') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

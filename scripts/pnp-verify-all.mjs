@@ -125,6 +125,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-residual-terminal-four-corner-tight-basis-maximum0.test.mjs',
   'audits/lean-residual-terminal-bn2-square-legitimacy0.test.mjs',
   'audits/lean-residual-terminal-bcel-anchor-nucleus0.test.mjs',
+  'audits/lean-residual-terminal-saturation-positivity-firewall0.test.mjs',
   'audits/legacy-v0-archive0.test.mjs',
   'test/current-package-surface0.test.mjs',
   'test/current-verifier0.test.mjs',

@@ -1,0 +1,22 @@
+import PNP.ResidualTerminalSaturationPositivityFirewall
+
+#print axioms PNP.DirectWire.TerminalBCELAnchorProblem.wholeCorners
+#print axioms PNP.DirectWire.TerminalBCELAnchorProblem.wholeCorners_projectionDefect
+#print axioms PNP.DirectWire.TerminalProjectionPositivityLoss
+#print axioms PNP.DirectWire.terminalProjectionPositivityLossOfZero
+#print axioms PNP.DirectWire.TerminalProjectionPositivityLoss.minima_eq
+#print axioms PNP.DirectWire.TerminalSaturationPositivityOutcome
+#print axioms PNP.DirectWire.classifyTerminalSaturationPositivity
+#print axioms PNP.DirectWire.classifyTerminalSaturationPositivity_loss_of_zero
+#print axioms PNP.DirectWire.classifyTerminalSaturationPositivity_bcel_of_positive
+#print axioms PNP.DirectWire.terminalSaturationPositivity_no_checkedFullLiftAtMinimum
+#print axioms PNP.DirectWire.classifyTerminalSaturationPositivity_exhaustive
+#print axioms PNP.DirectWire.terminalProjectionDefect_eq_zero_iff_minima_eq
+#print axioms PNP.DirectWire.terminalFullProfileMinimumRealization
+#print axioms PNP.DirectWire.terminalFullProfileMinimumRealization_gateCount
+#print axioms PNP.DirectWire.TerminalFullCarrierRealization.checkedFullLift
+#print axioms PNP.DirectWire.terminalProjectionDefect_pos_no_checkedFullLiftAtMinimum
+#print axioms PNP.DirectWire.classifyTerminalBCELAnchorNucleus
+#print axioms PNP.DirectWire.TerminalProperPositiveSupport.saturatedRecords_closed
+#print axioms PNP.DirectWire.TerminalProperPositiveSupport.physically_compatible
+#print axioms PNP.DirectWire.TerminalProperPositiveSupport.extracted_semantics
