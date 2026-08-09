@@ -1,0 +1,25 @@
+import PNP.ResidualTerminalBN2SquareLegitimacy
+
+#print axioms PNP.DirectWire.TerminalComputedBN2SquareLegitimate
+#print axioms PNP.DirectWire.TerminalComputedBN2SquareLegitimate.cornerCompatible
+#print axioms PNP.DirectWire.TerminalComputedBN2SquareLegitimate.meetProfile
+#print axioms PNP.DirectWire.TerminalComputedBN2SquareLegitimate.joinProfile
+#print axioms PNP.DirectWire.TerminalComputedBN2SquareLegitimate.projectionCompatible
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.computedBN2SquareLegitimate
+#print axioms PNP.DirectWire.TerminalComputedBN2SquareQuantities
+#print axioms PNP.DirectWire.TerminalComputedBN2SquareQuantities.sharedRole
+#print axioms PNP.DirectWire.TerminalComputedBN2SquareQuantities.sharedProjection
+#print axioms PNP.DirectWire.TerminalComputedBN2SquareQuantities.referenceMinimumPreserved
+#print axioms PNP.DirectWire.TerminalComputedBN2SquareQuantities.transferIdentity
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.computedBN2SquareQuantities
+#print axioms PNP.DirectWire.TerminalComputedBN2LocalConclusion
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.computedBN2LocalConclusion
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.computedBN2LocalConclusionOrFirstRoute
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.complete_transport
+#print axioms PNP.DirectWire.TerminalSaturatedSupportSquare.governed_frontier_pushout
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.fourCornerOptimaCarrierCompatible
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.sideTightCompletionExistsEachMode
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_full
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_quotient
+#print axioms PNP.DirectWire.TerminalFourCornerOptimumRoutedFailure.sound
+#print axioms PNP.DirectWire.TerminalProjectionFourCorners.transferIdentity

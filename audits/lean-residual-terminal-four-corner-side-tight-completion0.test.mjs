@@ -347,7 +347,7 @@ test('status earns only the route-silence completion edge', async () => {
     'leanResidualTerminalFourCornerSideTightCompletionAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
   assert.equal(status.leanResidualTerminalCoherentFourCornerBasisFormalized, true);
-  assert.equal(status.leanResidualTerminalSquareLegitimacyFormalized, false);
+  assert.equal(status.leanResidualTerminalSquareLegitimacyFormalized, true);
   assert.equal(status.leanSaturatePositiveFormalized, false);
   assert.equal(status.remainingBlockers.length, 6);
   assert.equal(status.projectSpecificAxiomInventory.length, 4);

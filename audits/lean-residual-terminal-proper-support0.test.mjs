@@ -315,7 +315,6 @@ test('status earns only governed proper-positive support search', async () => {
     'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-and-canonical-primitive-record-seeds-with-exhaustive-reference-minimum-local-gain',
   );
   for (const field of [
-    'leanResidualTerminalSquareLegitimacyFormalized',
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
     'leanResidualRoutesGlobalGainCompletenessFormalized',

@@ -306,7 +306,6 @@ test('status earns projection commutation without downstream overclaim', async (
     'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-computed-saturated-support-squares-and-forgetful-terminal-projections',
   );
   for (const field of [
-    'leanResidualTerminalSquareLegitimacyFormalized',
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
     'leanResidualRoutesGlobalGainCompletenessFormalized',

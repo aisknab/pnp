@@ -456,7 +456,6 @@ test('status retains optimum compatibility after conditional completion', async 
     'conditional-on-exact-mode-appropriate-local-route-silence-not-universal-bn2-square-legitimacy',
   );
   for (const field of [
-    'leanResidualTerminalSquareLegitimacyFormalized',
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
     'leanResidualRoutesGlobalGainCompletenessFormalized',

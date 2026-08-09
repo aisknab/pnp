@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-08-114",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-09-115",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2155,6 +2155,14 @@
     "PNP.DirectWire.TerminalCheckedFullLift.fullRealization_profileEqual": "ee608d7e17b2846b5a87c15b8e6874ac7de023798ebdd827994e9503dc43d7c1",
     "PNP.DirectWire.TerminalCheckedFullLift.fullRealization_realization": "1f98a1fbc39672b171e5d1a5f6f1716c785dbcf128c24c3071802e7fbf5d0caf",
     "PNP.DirectWire.TerminalCheckedFullLift.obligationsDischarged": "619562c57b2ccbe271d44d8902d27c8788a9ee262dfab89059b6bf8164fda69b",
+    "PNP.DirectWire.TerminalComputedBN2SquareLegitimate.cornerCompatible": "353ae46eab6aa34d13a35841d9645d0872fee705b8bad037d3e767e56a72b071",
+    "PNP.DirectWire.TerminalComputedBN2SquareLegitimate.joinProfile": "da482fc3256cea5a7c74a0407cf8c610ec1cb2e784a98cf71dd0a6e12da3035c",
+    "PNP.DirectWire.TerminalComputedBN2SquareLegitimate.meetProfile": "5496541d05e720818b80d4c5cb9e01cb19b1e6f39912fb077bfe010ca07a4da3",
+    "PNP.DirectWire.TerminalComputedBN2SquareLegitimate.projectionCompatible": "7fbd5e63bac42fecd0eec47c5f26007f532a180f5e7635f0f8e552c68973efe3",
+    "PNP.DirectWire.TerminalComputedBN2SquareQuantities.referenceMinimumPreserved": "999c06f0d20fc5781833e93f931b6ce3c9f58a82107feaa510ddffd386263326",
+    "PNP.DirectWire.TerminalComputedBN2SquareQuantities.sharedProjection": "cc534e9461c576cd0619a60217f19a2f8051d10ea4227dd07c315fbb462be0f4",
+    "PNP.DirectWire.TerminalComputedBN2SquareQuantities.sharedRole": "50c7efac8a8400444fd8326e3d68ef103e2d5f7e5f05c15d089c510600b962e1",
+    "PNP.DirectWire.TerminalComputedBN2SquareQuantities.transferIdentity": "716cb27271f5ee1c30b788d038c193a87b74e25984381192c602ce0e3a2fecf1",
     "PNP.DirectWire.TerminalFourCornerCarrier.ambient_referenceMinimum_eq_corner": "de788866dd3f749d769ace9e19bddb3b2b9259dfb83934aafc49331763e855df",
     "PNP.DirectWire.TerminalFourCornerCarrier.ambientizeCandidate_equivalent": "42d5de3ba77b231662262fe2429c4a985801ef4810ae568ac8181cdc432f3943",
     "PNP.DirectWire.TerminalFourCornerCarrier.ambientizeCandidate_gateCount": "69fb8806dbd2fd724b0643b43c6099c6fb35c1a64d7ae224031253546595d5f8",
@@ -2169,6 +2177,10 @@
     "PNP.DirectWire.TerminalFourCornerCarrier.boundaryIndex?_eq_some_iff": "a5d142c0ab5e4d5809895394a0e4aa27bc69c6167690e62ae72afa3d790a6f51",
     "PNP.DirectWire.TerminalFourCornerCarrier.classifyOptimumCoherence_exhaustive": "5508c5cb130ca54056c44d276865590baaa5530df0b6e4ec3ac946c02bd61af9",
     "PNP.DirectWire.TerminalFourCornerCarrier.complete_transport": "5976aa24e0dfafa1d0bab889dbee53df1ca2686923df8b5dab9c0752888ecb27",
+    "PNP.DirectWire.TerminalFourCornerCarrier.computedBN2LocalConclusion": "2ac8a3a6ac748ef68e77c51608c765fe3eedab375e2151ffe3bada21cd4258e1",
+    "PNP.DirectWire.TerminalFourCornerCarrier.computedBN2LocalConclusionOrFirstRoute": "7ef5bbf275ada25d79cc41ab25ac3dee6b2463060159468d057f1b621c01ff7d",
+    "PNP.DirectWire.TerminalFourCornerCarrier.computedBN2SquareLegitimate": "dd1706be5a716430a81242763f216fb58c687178a7363aad9733ad2868c2c47e",
+    "PNP.DirectWire.TerminalFourCornerCarrier.computedBN2SquareQuantities": "caf7e7aa90a62c6d1a8604bc57c4d94a08169cea4db44ee8632409404bbcbc90",
     "PNP.DirectWire.TerminalFourCornerCarrier.corner_compatible": "f0dc36448e05cd05364dfe86e8ba290aa0feea227329cbf1c2cba58032f53b9c",
     "PNP.DirectWire.TerminalFourCornerCarrier.extracted_boundary": "82eeef9f22f94e43cd96eaf5985d16ed367bd91e27c59abe11a0d578e1e6f810",
     "PNP.DirectWire.TerminalFourCornerCarrier.extracted_interface": "1688342912bbc29d92352e2e705d9f29b82e6075dcf3706373348a5685731de8",
@@ -2403,7 +2415,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "588c6626fcd4c0996f770b1118648ee99c82453ab303faf884e5e712d0107771",
+  "milestoneSourceClosureSha256": "01503dfe0db82b6672d8ace6cce5061846a8f0ad41322fc022f73676bad80124",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -5821,6 +5833,35 @@
       ],
       "scope": "For every finite computed terminal support square, every explicit observer, and either full or quotient mode, Lean enumerates the complete finite tight-basis family, retains every exact profile-constrained minimum implementation at each corner, filters the full Cartesian product with the arbitrary-family coherence query, and proves under exact local route silence that the signed maximum equals the selected delta.",
       "title": "Complete four-corner BN2 tight-basis maximum"
+    },
+    {
+      "classification": "formalized-residual-terminal-computed-bn2-square-legitimacy",
+      "id": "residual-terminal-computed-bn2-square-legitimacy",
+      "nonClaim": "This milestone packages computed structural legitimacy and the exact local no-route conclusion. It does not derive the terminal dependency system from an arbitrary circuit, prove universal route silence, connect a local failure to the complete global no-outcome route system, identify a BCEL anchor square, establish SaturatePositive, Package E, BCELReady or later BCEL/BN2-BN6 conclusions, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalComputedBN2SquareLegitimate.cornerCompatible",
+        "PNP.DirectWire.TerminalComputedBN2SquareLegitimate.meetProfile",
+        "PNP.DirectWire.TerminalComputedBN2SquareLegitimate.joinProfile",
+        "PNP.DirectWire.TerminalComputedBN2SquareLegitimate.projectionCompatible",
+        "PNP.DirectWire.TerminalFourCornerCarrier.computedBN2SquareLegitimate",
+        "PNP.DirectWire.TerminalComputedBN2SquareQuantities.sharedRole",
+        "PNP.DirectWire.TerminalComputedBN2SquareQuantities.sharedProjection",
+        "PNP.DirectWire.TerminalComputedBN2SquareQuantities.referenceMinimumPreserved",
+        "PNP.DirectWire.TerminalComputedBN2SquareQuantities.transferIdentity",
+        "PNP.DirectWire.TerminalFourCornerCarrier.computedBN2SquareQuantities",
+        "PNP.DirectWire.TerminalFourCornerCarrier.computedBN2LocalConclusion",
+        "PNP.DirectWire.TerminalFourCornerCarrier.computedBN2LocalConclusionOrFirstRoute",
+        "PNP.DirectWire.TerminalFourCornerCarrier.complete_transport",
+        "PNP.DirectWire.TerminalSaturatedSupportSquare.governed_frontier_pushout",
+        "PNP.DirectWire.TerminalFourCornerCarrier.fourCornerOptimaCarrierCompatible",
+        "PNP.DirectWire.TerminalFourCornerCarrier.sideTightCompletionExistsEachMode",
+        "PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_full",
+        "PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_quotient",
+        "PNP.DirectWire.TerminalFourCornerOptimumRoutedFailure.sound",
+        "PNP.DirectWire.TerminalProjectionFourCorners.transferIdentity"
+      ],
+      "scope": "For every finite computed terminal support square built from two finite seeds under one explicit terminal dependency system, direct-wire candidate, observer, and forgetful projection, Lean constructs the exact compatible governed frontier and projection square, keeps full and quotient minimum quantities on the same carrier, and returns either the complete local conclusion under exact local route silence or the deterministic full-then-quotient proof-bearing first coherence route.",
+      "title": "Computed terminal BN2 square legitimacy"
     },
     {
       "classification": "not-formalized",

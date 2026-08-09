@@ -144,6 +144,8 @@ on:
       - 'audits/lean-residual-terminal-four-corner-optimum-compatibility0.test.mjs'
       - 'audits/lean-residual-terminal-four-corner-optimum-coherence0.test.mjs'
       - 'audits/lean-residual-terminal-four-corner-side-tight-completion0.test.mjs'
+      - 'audits/lean-residual-terminal-four-corner-tight-basis-maximum0.test.mjs'
+      - 'audits/lean-residual-terminal-bn2-square-legitimacy0.test.mjs'
       - 'docs/lean_residual_gain_chain.md'
       - 'docs/lean_residual_gain_stopping.md'
       - 'docs/lean_residual_terminal_full_bridge.md'
@@ -153,6 +155,8 @@ on:
       - 'docs/lean_residual_terminal_saturation.md'
       - 'docs/lean_residual_terminal_physical_support_completion.md'
       - 'docs/lean_residual_terminal_support_extraction.md'
+      - 'docs/lean_residual_terminal_four_corner_tight_basis_maximum.md'
+      - 'docs/lean_residual_terminal_bn2_square_legitimacy.md'
       - 'docs/lean_residual_terminal_proper_support.md'
       - 'docs/lean_residual_terminal_support_square_closure.md'
       - 'docs/lean_residual_terminal_governed_support_completion.md'
@@ -382,6 +386,8 @@ on:
       - 'audits/lean-residual-terminal-four-corner-optimum-compatibility0.test.mjs'
       - 'audits/lean-residual-terminal-four-corner-optimum-coherence0.test.mjs'
       - 'audits/lean-residual-terminal-four-corner-side-tight-completion0.test.mjs'
+      - 'audits/lean-residual-terminal-four-corner-tight-basis-maximum0.test.mjs'
+      - 'audits/lean-residual-terminal-bn2-square-legitimacy0.test.mjs'
       - 'docs/lean_residual_gain_chain.md'
       - 'docs/lean_residual_gain_stopping.md'
       - 'docs/lean_residual_terminal_full_bridge.md'
@@ -391,6 +397,8 @@ on:
       - 'docs/lean_residual_terminal_saturation.md'
       - 'docs/lean_residual_terminal_physical_support_completion.md'
       - 'docs/lean_residual_terminal_support_extraction.md'
+      - 'docs/lean_residual_terminal_four_corner_tight_basis_maximum.md'
+      - 'docs/lean_residual_terminal_bn2_square_legitimacy.md'
       - 'docs/lean_residual_terminal_proper_support.md'
       - 'docs/lean_residual_terminal_support_square_closure.md'
       - 'docs/lean_residual_terminal_governed_support_completion.md'
@@ -2835,3 +2843,27 @@ jobs:
 
       - name: Run terminal four-corner tight-basis maximum hostile audit
         run: node --test audits/lean-residual-terminal-four-corner-tight-basis-maximum0.test.mjs
+
+      - name: Print computed terminal BN2 square legitimacy axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBN2SquareLegitimacyAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 23
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected computed terminal BN2 square legitimacy axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Computed terminal BN2 square legitimacy reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 23
+
+      - name: Run computed terminal BN2 square legitimacy regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBN2SquareLegitimacy.lean
+
+      - name: Run computed terminal BN2 square legitimacy hostile audit
+        run: node --test audits/lean-residual-terminal-bn2-square-legitimacy0.test.mjs

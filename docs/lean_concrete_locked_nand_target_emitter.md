@@ -118,33 +118,33 @@ node --test audits/lean-concrete-locked-nand-target-emitter0.test.mjs
 ## Mechanically generated publication evidence
 
 - Lean inventory:
-  `PNP-LEAN-THEOREM-INVENTORY-2026-08-08-114`
+  `PNP-LEAN-THEOREM-INVENTORY-2026-08-09-115`
 - publication map:
-  `PNP-FORMAL-PUBLICATION-MAP-2026-08-08-114`
+  `PNP-FORMAL-PUBLICATION-MAP-2026-08-09-115`
 - reconstruction status:
-  `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-08-114`
+  `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-09-115`
 - public surface:
-  `PUBLIC-SURFACE-BASELINE-2026-08-08-RESIDUAL-TERMINAL-FOUR-CORNER-TIGHT-BASIS-MAXIMUM-113`
+  `PUBLIC-SURFACE-BASELINE-2026-08-09-RESIDUAL-TERMINAL-COMPUTED-BN2-SQUARE-LEGITIMACY-114`
 - canonical report:
-  `PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-08-114`
+  `PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-09-115`
 
-The compiled inventory records 25,059 declarations, 13,401 theorems, 7,025
+The compiled inventory records 25,099 declarations, 13,423 theorems, 7,025
 assumption-free theorems, 14,705 excluded private declarations, 229
-source-closure modules, and 2,385 reviewed milestone candidates. Its
-16,124,474 canonical bytes have SHA-256
-`fe036a74807d08c1e763a850722eb8113c1b3d186ef41d900641ed6e9eadb44c`;
+source-closure modules, and 2,397 reviewed milestone candidates. Its
+16,265,958 canonical bytes have SHA-256
+`42695c4971028fff27f3c7f03eff1450c62845db0654436f59a190c3d2625af5`;
 the exact Lean source closure has SHA-256
-`588c6626fcd4c0996f770b1118648ee99c82453ab303faf884e5e712d0107771`.
+`01503dfe0db82b6672d8ace6cce5061846a8f0ad41322fc022f73676bad80124`.
 
-The 773,039-byte publication map contains 94 milestones: 91 earned and three
-deliberately unearned. It pins 2,385 theorem types and has SHA-256
-`5ee8bb52412e04ce7b5ba9bccb619070d0963df00044f8f26b2bfe0aef73d186`.
-The generated 1,935,171-byte status has SHA-256
-`a72f8bfd4df79e29c1ea8908883f6211e65094ab162cf98b19a12b8ae080b158`.
-The canonical 200,233-byte TeX source has SHA-256
-`785181cde2595e9f21cb95239530b1aa9bc194b2e5d5d0198925956c8e853fd5`;
-its deterministic 78-page, 439,981-byte A4 PDF has SHA-256
-`447832f2f4992227446044f188aed18d07443dc0f9c285799f8eeeee8617d6e7`.
+The 777,623-byte publication map contains 95 milestones: 92 earned and three
+deliberately unearned. It pins 2,397 theorem types and has SHA-256
+`9e688aae5553d680b6ff1f8fea8587f121edaf76c55efef110909f0d08173af8`.
+The generated 1,949,873-byte status has SHA-256
+`c8adb9479ce14f702d693fc175710dd37670b0095c29d8522ced3ddb534bbeda`.
+The canonical 201,436-byte TeX source has SHA-256
+`391a179f9889bde11aef29b8e7bf7d32c4a7182d55a6bc556b3f80e7001cbc6d`;
+its deterministic 79-page, 440,948-byte A4 PDF has SHA-256
+`8bb12a7777ef0aad2af88a644e08877820bfb667da9636d8fa696f6fec31226e`.
 
 The concrete publication gate remains false. All four project assumptions,
 all six blockers, unset activation fingerprints, and the absence of
