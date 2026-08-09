@@ -23,14 +23,17 @@ namespace DirectWire
 
 /-! ## Canonical finite seed universe -/
 
-/-- Enumerate every order-preserving subset of a finite list. -/
-private def terminalListSubsets {alpha : Type} : List alpha -> List (List alpha)
+/-- Enumerate every order-preserving subset of a finite list.  This helper is
+    public because later finite anchor searches must use exactly the same
+    canonical subset order as the proper-support search. -/
+def terminalListSubsets {alpha : Type} : List alpha -> List (List alpha)
   | [] => [[]]
   | head :: tail =>
       let remaining := terminalListSubsets tail
       remaining ++ remaining.map (fun subset => head :: subset)
 
-private theorem filter_mem_terminalListSubsets {alpha : Type}
+/-- Every Boolean-filtered sublist occurs in the canonical subset enumeration. -/
+theorem filter_mem_terminalListSubsets {alpha : Type}
     (items : List alpha) (select : alpha -> Bool) :
     items.filter select ∈ terminalListSubsets items := by
   induction items with

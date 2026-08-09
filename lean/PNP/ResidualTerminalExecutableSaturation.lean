@@ -106,7 +106,8 @@ private theorem nodup_of_listNoDuplicates {alpha : Type}
   | cons headAbsent _tailDistinct ih =>
       exact List.nodup_cons.mpr ⟨headAbsent, ih⟩
 
-private theorem allTerminalPrimitiveRecords_nodup
+/-- The canonical terminal primitive-record universe contains no duplicates. -/
+theorem allTerminalPrimitiveRecords_nodup
     (inputs gates outputs profileWidth : Nat) :
     (allTerminalPrimitiveRecords inputs gates outputs profileWidth).Nodup := by
   let gateRecords : List

@@ -48,6 +48,14 @@ const PUBLIC_DECLARATIONS = Object.freeze([
   'TerminalProperPositiveSupport.minimumReplacement_size_lt',
 ].map((name) => `${NAMESPACE}.${name}`));
 
+// These canonical subset-order helpers were promoted for the later BCEL
+// anchor-nucleus construction and are audited at that successor boundary.
+const SOURCE_DECLARATIONS = Object.freeze([
+  `${NAMESPACE}.terminalListSubsets`,
+  `${NAMESPACE}.filter_mem_terminalListSubsets`,
+  ...PUBLIC_DECLARATIONS,
+]);
+
 const REUSED_DECLARATIONS = Object.freeze([
   `${NAMESPACE}.allTerminalPrimitiveRecords`,
   `${NAMESPACE}.mem_allTerminalPrimitiveRecords`,
@@ -93,8 +101,6 @@ const MILESTONE_THEOREMS = Object.freeze([
 ]);
 
 const PRIVATE_HELPERS = Object.freeze([
-  'terminalListSubsets',
-  'filter_mem_terminalListSubsets',
   'terminalProperPositiveDecidable',
   'TerminalProperPositiveSeedResult',
   'firstTerminalProperPositiveSupport',
@@ -160,7 +166,7 @@ function validateSource0(source) {
     'PNP.ResidualTerminalSupportExtraction',
     'PNP.NANDSlack',
   ])) failures.push('closed-import');
-  if (JSON.stringify(declarations0(source)) !== JSON.stringify(PUBLIC_DECLARATIONS)) {
+  if (JSON.stringify(declarations0(source)) !== JSON.stringify(SOURCE_DECLARATIONS)) {
     failures.push('declaration-surface');
   }
   if (JSON.stringify(privateHelpers0(source)) !== JSON.stringify(PRIVATE_HELPERS)) {
