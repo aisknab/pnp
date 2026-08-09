@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-09-117",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-09-118",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2432,7 +2432,24 @@
     "PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_full": "15b31bdefa9557e49c23e97eed5540a4ded842e6dfd6e8de3918bb1819d157d3",
     "PNP.DirectWire.TerminalFourCornerCarrier.tightBasisMaximum?_quotient": "4a49571efc6e506071fe848b68683172739162cfaff84516f7a1df21a12bff73",
     "PNP.DirectWire.TerminalFourCornerCarrier.firstBasisCoherenceFailure?_sound": "71ac14a1fd03c250d1c1f3b3bb8c5ff9a0a35e6b6ef436b1c0e6df1b3d56aee3",
-    "PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_eq_basis": "fee448e50ef580e58823afaa0d44537cc65e5deede514535e40ce14f826c09b7"
+    "PNP.DirectWire.TerminalFourCornerCarrier.firstOptimumCoherenceFailure?_eq_basis": "fee448e50ef580e58823afaa0d44537cc65e5deede514535e40ce14f826c09b7",
+    "PNP.DirectWire.terminalSaturateTrace_eventsLinked": "0a2c3c3837e55a3fc6482b86ad0b384afaf0b6756ad836db6d8d97cf70475f33",
+    "PNP.DirectWire.terminalSaturateTrace_records": "ca6777bcf22e71b8a9fd6c6ba9b642bf5cff1e9da0678951e0727270703395e0",
+    "PNP.DirectWire.terminalCandidateSaturationSystem_profileSystem": "c5a0f51477e004b664a703c7689792b7d08d17198c667336c5aaca09af859a5a",
+    "PNP.DirectWire.TerminalTransparentSaturationStep.uniqueMaterializerOwner": "1d99a8ebcdcb8ab4a92ead32a2165c1d9db4ac1578d92a5e641e419119b5716f",
+    "PNP.DirectWire.TerminalTransparentSaturationStep.supportCostBalanced": "5047cdebb2104dc764d1676f5bdd821d8e45f91e2fba2deb1211fd6585363449",
+    "PNP.DirectWire.TerminalTransparentSaturationStep.fullCostBalanced": "4c0a1dffcb5ac72d2743c8b92781c0737ea9b1644c00e4fda6e1036494124ce2",
+    "PNP.DirectWire.TerminalTransparentSaturationStep.quotientCostBounded": "3697d87145c0de4be320b907304b0285aba779420f291e96a0e49e4b4ac4b837",
+    "PNP.DirectWire.TerminalTransparentSaturationStep.fullSlack_preserved": "79cc2719509883de624fd7048b32a6b35a0b42d66a2cfdd03e61ca163e93edbb",
+    "PNP.DirectWire.TerminalTransparentSaturationStep.projectionDefect_mono": "22b7cd1069ba4d5e2353c2c2017d58b7e672de723bbd845ddc2a527bd31b96e1",
+    "PNP.DirectWire.TerminalTransparentSaturationStep.fullPositive_preserved": "69b951a411b9579cdc5ebf2519fc6f304f3866f59fdbf803cdfccc0bc3e853f4",
+    "PNP.DirectWire.TerminalSaturationEventsLinked.fullSlack_preserved": "45847001ac67c7472e6b13432d4602ab47695181c8526459ba3253fb4ad1a34f",
+    "PNP.DirectWire.TerminalSaturationEventsLinked.projectionDefect_mono": "36c7582fb28d35c3bb9a1086fdb5ffa5604778969adb14bd6b49c4e4f1362e32",
+    "PNP.DirectWire.TerminalSaturationEventsLinked.fullPositive_preserved": "da0af342efe39c484b1a5effd9124924581ed638b1e577f511dc6508e9469ffc",
+    "PNP.DirectWire.TerminalSaturationBalanceOutcome.balanced_event": "130f1fd981cf6b36eec26e96b2595146850c8388a6076fe4504b9c0915203741",
+    "PNP.DirectWire.TerminalSaturationBalanceOutcome.balanced_fullSlack_preserved": "fa9685981cb6b2db8c729a5fe506fffa0f32a43acdfb26f75b50a85ce7213c4c",
+    "PNP.DirectWire.TerminalSaturationBalanceOutcome.balanced_projectionDefect_mono": "896b644460ba7b1d32ffa7624285c8b9ff501d0dcfe46e10e304ba3aa4160a55",
+    "PNP.DirectWire.TerminalSaturationBalanceOutcome.balanced_fullPositive_preserved": "41f32ac41a2fa7a60fe34c561ce71c85a606043eab735f60917ff80b161b669f"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -2450,7 +2467,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "eec7fd5794e7fc945e4f3ef219b807cc3a6d5a0b07c67a2da5e33c07eda2ce0b",
+  "milestoneSourceClosureSha256": "bbede19553a26c6ac1b7075cc22f5fb05662056351406e36183a7a734d32d3d9",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -5963,6 +5980,32 @@
       ],
       "scope": "For every finite direct-wire candidate, explicit terminal dependency system, computed governed proper-positive support, forgetful projection, and executable ambient observer, Lean computes the whole-support defect: zero projection defect returns an attained quotient minimum with a checked full lift, while positive defect delegates exactly to the existing fail-closed BCEL anchor-nucleus classifier.",
       "title": "Computed terminal saturation-positivity firewall"
+    },
+    {
+      "classification": "formalized-residual-terminal-candidate-saturation-cost-balance",
+      "id": "residual-terminal-candidate-saturation-cost-balance",
+      "nonClaim": "This closes only the finite terminal forms of transparentSaturationCostBalanced and firstNontransparentStepRecorded. The executable observer and forgetful projection remain explicit model inputs, and a nontransparent event is recorded rather than routed. It does not discharge interfaceExposureRoutesToE or originKernelObligationClosureRouted; establish full SaturatePositive, Package E, BCELReady or later BCEL/BN2-BN6 conclusions; prove ZeroSlack, PCCMin, polynomial runtime, SAT in P; remove a project assumption; or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalSaturateTrace_eventsLinked",
+        "PNP.DirectWire.terminalSaturateTrace_records",
+        "PNP.DirectWire.terminalCandidateSaturationSystem_profileSystem",
+        "PNP.DirectWire.TerminalTransparentSaturationStep.uniqueMaterializerOwner",
+        "PNP.DirectWire.TerminalTransparentSaturationStep.supportCostBalanced",
+        "PNP.DirectWire.TerminalTransparentSaturationStep.fullCostBalanced",
+        "PNP.DirectWire.TerminalTransparentSaturationStep.quotientCostBounded",
+        "PNP.DirectWire.TerminalTransparentSaturationStep.fullSlack_preserved",
+        "PNP.DirectWire.TerminalTransparentSaturationStep.projectionDefect_mono",
+        "PNP.DirectWire.TerminalTransparentSaturationStep.fullPositive_preserved",
+        "PNP.DirectWire.TerminalSaturationEventsLinked.fullSlack_preserved",
+        "PNP.DirectWire.TerminalSaturationEventsLinked.projectionDefect_mono",
+        "PNP.DirectWire.TerminalSaturationEventsLinked.fullPositive_preserved",
+        "PNP.DirectWire.TerminalSaturationBalanceOutcome.balanced_event",
+        "PNP.DirectWire.TerminalSaturationBalanceOutcome.balanced_fullSlack_preserved",
+        "PNP.DirectWire.TerminalSaturationBalanceOutcome.balanced_projectionDefect_mono",
+        "PNP.DirectWire.TerminalSaturationBalanceOutcome.balanced_fullPositive_preserved"
+      ],
+      "scope": "For every finite direct-wire candidate, executable ambient observer, forgetful projection, and finite terminal seed, Lean computes the candidate-derived dependency system and deterministic rule-labelled saturation trace, then returns proof that every event is exactly cost-balanced with preserved full slack and nondecreasing projection defect, or records the exact first nontransparent event and complete transparent prefix.",
+      "title": "Candidate-derived terminal saturation cost balance"
     },
     {
       "classification": "not-formalized",

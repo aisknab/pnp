@@ -1298,6 +1298,27 @@ establish `SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin, polynomial
 runtime, or the root theorem. See
 [`lean_residual_terminal_four_corner_side_tight_completion.md`](./lean_residual_terminal_four_corner_side_tight_completion.md).
 
+`ResidualTerminalCandidateSaturation` and
+`ResidualTerminalSaturationCostBalance` now reconstruct two further finite
+edges of legacy `RW-SaturatePositive`. The production terminal dependency
+system is derived from the direct-wire candidate: physical edges come from
+actual source/output incidence, while profile edges come from exhaustive
+context-sensitive observer influence. No dependency relation or extraction
+certificate is accepted from the caller. The deterministic saturation trace
+records the first rule, dependent, required record, and exact before/after
+support for every event. Its total balance classifier recomputes support,
+full-minimum, and quotient-minimum costs and returns either linked aggregate
+proofs preserving full slack and positivity or the exact first nontransparent
+event with a typed reason. Together with the preceding positivity firewall,
+this closes the finite terminal forms of
+`transparentSaturationCostBalanced` and
+`firstNontransparentStepRecorded`. It does not route a nontransparent event:
+`interfaceExposureRoutesToE` and
+`originKernelObligationClosureRouted` remain open. Accordingly full
+`SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin, polynomial runtime, and the
+root theorem remain unproved. See
+[`lean_residual_terminal_saturation_cost_balance.md`](./lean_residual_terminal_saturation_cost_balance.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

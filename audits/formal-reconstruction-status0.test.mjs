@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-09-117');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-09-118');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -884,6 +884,10 @@ test('formal reconstruction status accepts the current source and public mirrors
     'leanResidualTerminalBCELAnchorNucleusAxiomAuditPassed',
     'leanResidualTerminalSaturationPositivityFirewallFormalized',
     'leanResidualTerminalSaturationPositivityFirewallAxiomAuditPassed',
+    'leanResidualTerminalCandidateSaturationFormalized',
+    'leanResidualTerminalSaturationCostBalanceFormalized',
+    'leanResidualTerminalFirstNontransparentStepFormalized',
+    'leanResidualTerminalSaturationCostBalanceAxiomAuditPassed',
   ]) assert.equal(out[field], true, field);
   assert.equal(
     out.leanResidualTerminalPhysicalSupportCompletionScope,
@@ -949,6 +953,10 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalSaturationPositivityFirewallScope,
     'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-computed-governed-proper-positive-supports-forgetful-projections-and-executable-ambient-observers-total-zero-or-positive-whole-support-projection-defect-classification',
   );
+  assert.equal(
+    out.leanResidualTerminalSaturationCostBalanceScope,
+    'all-finite-direct-wire-candidates-executable-observers-forgetful-projections-candidate-derived-dependency-system-rule-labelled-exact-cost-balance-or-first-nontransparent-step',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
@@ -984,13 +992,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 25571);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 13587);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7043);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14779);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 233);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 25863);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 13665);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7079);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14904);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 235);
   assert.equal(status.leanSourceClosureSha256,
-    'eec7fd5794e7fc945e4f3ef219b807cc3a6d5a0b07c67a2da5e33c07eda2ce0b');
+    'bbede19553a26c6ac1b7075cc22f5fb05662056351406e36183a7a734d32d3d9');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -1412,7 +1420,7 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-09-RESIDUAL-TERMINAL-SATURATION-POSITIVITY-FIREWALL-116');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-09-CANDIDATE-SATURATION-COST-BALANCE-117');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
@@ -1776,6 +1784,10 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
     'leanResidualTerminalBCELAnchorNucleusAxiomAuditPassed',
     'leanResidualTerminalSaturationPositivityFirewallFormalized',
     'leanResidualTerminalSaturationPositivityFirewallAxiomAuditPassed',
+    'leanResidualTerminalCandidateSaturationFormalized',
+    'leanResidualTerminalSaturationCostBalanceFormalized',
+    'leanResidualTerminalFirstNontransparentStepFormalized',
+    'leanResidualTerminalSaturationCostBalanceAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
   assert.equal(
     status.leanResidualTerminalPhysicalSupportCompletionScope,
@@ -1840,6 +1852,10 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(
     status.leanResidualTerminalSaturationPositivityFirewallScope,
     'all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-computed-governed-proper-positive-supports-forgetful-projections-and-executable-ambient-observers-total-zero-or-positive-whole-support-projection-defect-classification',
+  );
+  assert.equal(
+    status.leanResidualTerminalSaturationCostBalanceScope,
+    'all-finite-direct-wire-candidates-executable-observers-forgetful-projections-candidate-derived-dependency-system-rule-labelled-exact-cost-balance-or-first-nontransparent-step',
   );
   for (const field of [
     'leanSaturatePositiveFormalized',
@@ -2324,6 +2340,10 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanResidualTerminalBCELAnchorNucleusAxiomAuditPassed',
     'leanResidualTerminalSaturationPositivityFirewallFormalized',
     'leanResidualTerminalSaturationPositivityFirewallAxiomAuditPassed',
+    'leanResidualTerminalCandidateSaturationFormalized',
+    'leanResidualTerminalSaturationCostBalanceFormalized',
+    'leanResidualTerminalFirstNontransparentStepFormalized',
+    'leanResidualTerminalSaturationCostBalanceAxiomAuditPassed',
   ];
 
   for (const field of fields) {

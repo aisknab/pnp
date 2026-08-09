@@ -62,6 +62,12 @@ lean/PNP/ResidualTerminalFourCornerCarrier.lean
 lean/PNP/ResidualTerminalFourCornerOptimumCompatibility.lean
 lean/PNP/ResidualTerminalFourCornerOptimumCoherence.lean
 lean/PNP/ResidualTerminalFourCornerSideTightCompletion.lean
+lean/PNP/ResidualTerminalFourCornerTightBasisMaximum.lean
+lean/PNP/ResidualTerminalBN2SquareLegitimacy.lean
+lean/PNP/ResidualTerminalBCELAnchorNucleus.lean
+lean/PNP/ResidualTerminalSaturationPositivityFirewall.lean
+lean/PNP/ResidualTerminalCandidateSaturation.lean
+lean/PNP/ResidualTerminalSaturationCostBalance.lean
 lean/PNP/LockedNANDResidualGainBound.lean
 lean/PNP/Concrete/BitString.lean
 lean/PNP/Concrete/Machine.lean
@@ -1137,6 +1143,25 @@ prove BN2 square legitimacy, derive the terminal dependency system, maximize
 the complete tight-basis family, or establish `SaturatePositive`, `BCELReady`,
 ZeroSlack, PCCMin, polynomial runtime, or the root theorem. See
 `docs/lean_residual_terminal_four_corner_side_tight_completion.md`.
+
+`lean/PNP/ResidualTerminalCandidateSaturation.lean` and
+`lean/PNP/ResidualTerminalSaturationCostBalance.lean` close two more finite
+edges of the legacy `RW-SaturatePositive` boundary. The production classifier
+derives physical dependencies from actual circuit incidence and profile
+dependencies from exhaustive context-sensitive observer influence; it accepts
+no caller-supplied dependency relation or extraction certificate. A
+rule-labelled deterministic trace then recomputes exact support, full-minimum,
+and quotient-minimum costs at every event. It either proves transparent cost
+balance through the complete linked history, preserving full slack and
+positivity, or returns the exact first nontransparent event with one of five
+typed reasons. Together with the preceding positivity firewall, this closes
+the finite terminal forms of `transparentSaturationCostBalanced` and
+`firstNontransparentStepRecorded`. Nontransparent events are recorded but not
+yet routed: `interfaceExposureRoutesToE` and
+`originKernelObligationClosureRouted` remain open, so `SaturatePositive`,
+`BCELReady`, ZeroSlack, PCCMin, polynomial runtime, and the root theorem remain
+unproved. See
+`docs/lean_residual_terminal_saturation_cost_balance.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 

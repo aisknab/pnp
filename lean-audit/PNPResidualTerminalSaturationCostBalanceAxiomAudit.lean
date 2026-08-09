@@ -1,0 +1,57 @@
+import PNP.ResidualTerminalSaturationCostBalance
+
+#print axioms PNP.DirectWire.terminalFirstSaturationRule?
+#print axioms PNP.DirectWire.TerminalSaturationTraceEvent
+#print axioms PNP.DirectWire.TerminalSaturationEventsLinked
+#print axioms PNP.DirectWire.TerminalSaturationTrace
+#print axioms PNP.DirectWire.terminalSaturateTrace
+#print axioms PNP.DirectWire.terminalSaturateTrace_eventsLinked
+#print axioms PNP.DirectWire.terminalSaturateTrace_records
+#print axioms PNP.DirectWire.terminalSaturateTrace_normalizedSeed
+
+#print axioms PNP.DirectWire.TerminalExtractedSupport.interfaceIndex?
+#print axioms PNP.DirectWire.terminalAmbientSupportCandidate
+#print axioms PNP.DirectWire.terminalAmbientSupportImplementation
+#print axioms PNP.DirectWire.TerminalCandidateSaturationModel
+#print axioms PNP.DirectWire.TerminalCandidateSaturationModel.ambientProfileSystem
+#print axioms PNP.DirectWire.terminalSaturationRuleOfProfileRole
+#print axioms PNP.DirectWire.terminalGateInfluencesProfile
+#print axioms PNP.DirectWire.terminalCandidateRequires
+#print axioms PNP.DirectWire.terminalCandidateSaturationSystem
+#print axioms PNP.DirectWire.terminalCandidateSaturationSystem_profileSystem
+#print axioms PNP.DirectWire.TerminalCandidateProperPositiveSupport
+#print axioms PNP.DirectWire.findTerminalCandidateProperPositiveSupport
+#print axioms PNP.DirectWire.TerminalCandidateBCELAnchorProblem
+#print axioms PNP.DirectWire.TerminalCandidateBCELAnchorProblem.toProblem
+#print axioms PNP.DirectWire.classifyTerminalCandidateSaturationPositivity
+
+#print axioms PNP.DirectWire.TerminalSaturationCostSnapshot
+#print axioms PNP.DirectWire.terminalSaturationCostSnapshot
+#print axioms PNP.DirectWire.terminalSaturationEventCost
+#print axioms PNP.DirectWire.terminalSaturationEventOwners
+#print axioms PNP.DirectWire.TerminalTransparentSaturationStep
+#print axioms PNP.DirectWire.TerminalTransparentSaturationStep.rulePresent
+#print axioms PNP.DirectWire.TerminalTransparentSaturationStep.uniqueMaterializerOwner
+#print axioms PNP.DirectWire.TerminalTransparentSaturationStep.supportCostBalanced
+#print axioms PNP.DirectWire.TerminalTransparentSaturationStep.fullCostBalanced
+#print axioms PNP.DirectWire.TerminalTransparentSaturationStep.quotientCostBounded
+#print axioms PNP.DirectWire.TerminalTransparentSaturationStep.fullSlack_preserved
+#print axioms PNP.DirectWire.TerminalTransparentSaturationStep.projectionDefect_mono
+#print axioms PNP.DirectWire.TerminalTransparentSaturationStep.fullPositive_preserved
+#print axioms PNP.DirectWire.TerminalSaturationEventsLinked.fullSlack_preserved
+#print axioms PNP.DirectWire.TerminalSaturationEventsLinked.projectionDefect_mono
+#print axioms PNP.DirectWire.TerminalSaturationEventsLinked.fullPositive_preserved
+#print axioms PNP.DirectWire.TerminalNontransparentSaturationReason
+#print axioms PNP.DirectWire.TerminalSaturationStepBalanceOutcome
+#print axioms PNP.DirectWire.classifyTerminalSaturationStepBalance
+#print axioms PNP.DirectWire.terminalSaturationStepTransparentBool
+#print axioms PNP.DirectWire.terminalSaturationStepFailureReason?
+#print axioms PNP.DirectWire.TerminalFirstNontransparentSaturationStep
+#print axioms PNP.DirectWire.TerminalSaturationBalanceOutcome
+#print axioms PNP.DirectWire.classifyTerminalSaturationBalance
+#print axioms PNP.DirectWire.terminalSaturationBalanceBalancedBool
+#print axioms PNP.DirectWire.terminalSaturationBalanceFirstFailure?
+#print axioms PNP.DirectWire.TerminalSaturationBalanceOutcome.balanced_event
+#print axioms PNP.DirectWire.TerminalSaturationBalanceOutcome.balanced_fullSlack_preserved
+#print axioms PNP.DirectWire.TerminalSaturationBalanceOutcome.balanced_projectionDefect_mono
+#print axioms PNP.DirectWire.TerminalSaturationBalanceOutcome.balanced_fullPositive_preserved
