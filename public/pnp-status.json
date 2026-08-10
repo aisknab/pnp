@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-124",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-125",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -833,6 +833,9 @@
   "leanResidualTerminalBN3RequestEnvelopeFormalized": true,
   "leanResidualTerminalBN3RequestEnvelopeAxiomAuditPassed": true,
   "leanResidualTerminalBN3RequestEnvelopeScope": "successful-computed-finite-bcel-anchor-nuclei-canonical-stable-request-identities-exact-singleton-minimal-consumers-duplicate-free-incidence-and-jointly-side-tight-full-or-quotient-basis-family",
+  "leanResidualTerminalBN4ActivationCancellationFormalized": true,
+  "leanResidualTerminalBN4ActivationCancellationAxiomAuditPassed": true,
+  "leanResidualTerminalBN4ActivationCancellationScope": "successful-computed-finite-bn3-envelope-explicit-typed-cell-ledgers-activation-exact-complete-key-same-key-cancellation-and-exact-integer-mass-residuals",
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -1302,6 +1305,9 @@
     "node --test audits/lean-residual-terminal-bn3-request-envelope0.test.mjs",
     "lake env lean -DwarningAsError=true lean-regression/PNPBN3JointRealizabilityGap.lean",
     "node --test audits/bn3-joint-realizability-gap0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBN4ActivationCancellationAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBN4ActivationCancellation.lean",
+    "node --test audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1310,7 +1316,8 @@
   "nonClaims": [
     "The repository does not currently establish P = NP.",
     "Legacy JavaScript checker acceptance verifies assertion-bearing records under implemented predicates; it is not a formal proof of the named mathematical propositions.",
-    "The BN3 joint-realizability gap still shows that arbitrary per-cut side-tight existence cannot imply a stable family. The successful computed BCEL nucleus now has a candidate-derived finite repair with canonical request identities, exact minimal consumers, duplicate-free incidence, and one jointly side-tight basis selection function, but its all-subsets enumeration is exponential and does not supply BN4-BN6 or global ZeroSlack and polynomial PCCMin completeness.",
+    "The BN3 joint-realizability gap still shows that arbitrary per-cut side-tight existence cannot imply a stable family. The successful computed BCEL nucleus has a candidate-derived finite repair with canonical request identities, exact minimal consumers, duplicate-free incidence, and one jointly side-tight basis selection function, but its all-subsets enumeration is exponential. The finite BN4 kernel consumes that repaired envelope without repairing arbitrary caller-supplied per-cut witnesses.",
+    "The finite BN4 activation-exact cancellation kernel classifies exact integer positive and negative mass at each complete typed key over an explicit caller-supplied cell ledger. It does not derive the cells, semantic signatures, or transport types from four-corner bases; establish the full historical BN4 theorem; construct BN5, PkgC, or BN6; complete global routes or selectors; establish ZeroSlack or polynomial PCCMin; put SAT in P; or prove P = NP.",
     "The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.",
     "The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.",
     "Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.",
@@ -1469,7 +1476,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "e30716e5e6ec0ad0f7c084a66d9ff28c1a8cf5a7008b5fc8caff81205e51eb15",
+    "actualSourceClosureSha256": "44067b7a25d092dab39173d5563593fb56921adf0eb3b5d7294c0b5e64b7af2a",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1499,22 +1506,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-11-123",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-11-124",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "231781715e011ebf8b583ce3c26f9896622d6962faaf8fcebd68f36e511ea003",
+  "leanTheoremInventorySha256": "80dae39e58e0053129c34e0105fc9635777e2920a1d93529f14493813508c772",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 26624,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 14939,
-  "leanTheoremInventoryTheoremCount": 13928,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 7165,
-  "leanTheoremInventorySourceClosureModuleCount": 241,
-  "leanSourceClosureSha256": "e30716e5e6ec0ad0f7c084a66d9ff28c1a8cf5a7008b5fc8caff81205e51eb15",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-11-124",
+  "leanTheoremInventoryDeclarationCount": 26851,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 14947,
+  "leanTheoremInventoryTheoremCount": 14025,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 7197,
+  "leanTheoremInventorySourceClosureModuleCount": 242,
+  "leanSourceClosureSha256": "44067b7a25d092dab39173d5563593fb56921adf0eb3b5d7294c0b5e64b7af2a",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-11-125",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "96e4a8b21a717e2190b5eed64ed50f27402b7690b7b80a52bb98782984f54258",
+  "formalPublicationMapSha256": "3385b374bdbc737e8c6808698dc0284ad84ac0850d7bd62b7079d5f6d5b2cfed",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -36845,6 +36852,189 @@
       "status": "formalized-residual-terminal-bn3-request-envelope"
     },
     {
+      "classification": "formalized-residual-terminal-bn4-activation-cancellation",
+      "id": "residual-terminal-bn4-activation-cancellation",
+      "nonClaim": "This is a finite cancellation kernel over an explicit typed cell ledger. It does not derive cells, semantic signatures, or transport types from four-corner bases and is not the full historical BN4 theorem. It supplies no polynomial construction or size bound; does not construct BN5, PkgC, or BN6; does not complete global routes, selectors, or realizers; does not establish ZeroSlack or PCCMin; does not put SAT in P; does not remove a project assumption; and does not prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalBN4ActivationCode_active_iff",
+        "PNP.DirectWire.terminalBN4ActivationCode_eq_iff_activation",
+        "PNP.DirectWire.terminalBN4ActivationKey_eq_iff",
+        "PNP.DirectWire.terminalBN4IntegerMassLedger_exact",
+        "PNP.DirectWire.TerminalBN4KeyCancellation.residual_key_eq",
+        "PNP.DirectWire.TerminalBN4KeyCancellation.residual_mass_positive",
+        "PNP.DirectWire.TerminalBN4KeyCancellation.no_opposite_sign_residual",
+        "PNP.DirectWire.TerminalBN4KeyCancellation.residual_signedContribution_exact",
+        "PNP.DirectWire.terminalBN4CancelAtKey_signedContribution_exact",
+        "PNP.DirectWire.terminalBN4CanonicalKeys_nodup",
+        "PNP.DirectWire.terminalBN4CellsUseCanonicalAtoms_iff",
+        "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.computedBN4ActivationCancellation",
+        "PNP.DirectWire.classifyTerminalBN4ActivationCancellation_exhaustive"
+      ],
+      "scope": "After a successful computed finite BN3 envelope, Lean gives every request atom a canonical singleton activation code; proves activation-code equality exactly equivalent to equality of activation functions without enumerating cuts; checks equality of a complete typed key containing the atom, explicit semantic signature, and explicit transport type; totals positive and negative natural mass only at that same complete key; classifies a canonical balanced, positive, or negative residual; proves exact integer mass conservation, complete-key preservation, positive residual mass, and absence of opposite-sign residual pairs; computes duplicate-free ledger keys; and preserves all upstream failure branches while rejecting foreign request atoms.",
+      "title": "Finite BN4 activation-exact cancellation kernel",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.terminalBN4ActivationCode_active_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8afb6c83f2c71153fa2c1973ce6ce66a1568db44d90e332e767be92d9b6d9049",
+          "expectedKernelTypeSha256": "8afb6c83f2c71153fa2c1973ce6ce66a1568db44d90e332e767be92d9b6d9049",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBN4ActivationCode_eq_iff_activation",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f93b4fd8727f8007268397889168591d99ef685c28745dc9974ab0ffdb0410e4",
+          "expectedKernelTypeSha256": "f93b4fd8727f8007268397889168591d99ef685c28745dc9974ab0ffdb0410e4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBN4ActivationKey_eq_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b2ad109751baa42293aefadde7bf9abd710ee92d29861446fce5e76d5b1f1c75",
+          "expectedKernelTypeSha256": "b2ad109751baa42293aefadde7bf9abd710ee92d29861446fce5e76d5b1f1c75",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBN4IntegerMassLedger_exact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "546e462e0ef7dde2e206b4aa76a5423fdb6e90288d386d5b1e7b40ab4e499307",
+          "expectedKernelTypeSha256": "546e462e0ef7dde2e206b4aa76a5423fdb6e90288d386d5b1e7b40ab4e499307",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN4KeyCancellation.residual_key_eq",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4f9cfd1be354f2d98412ce0a576b6ac70776fe36e14802c144f55f6f8ec9acfa",
+          "expectedKernelTypeSha256": "4f9cfd1be354f2d98412ce0a576b6ac70776fe36e14802c144f55f6f8ec9acfa",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN4KeyCancellation.residual_mass_positive",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "18a3f982541deffbab7328288f27c9234355cb44cb6582e2a5ea214813cbdd57",
+          "expectedKernelTypeSha256": "18a3f982541deffbab7328288f27c9234355cb44cb6582e2a5ea214813cbdd57",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN4KeyCancellation.no_opposite_sign_residual",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "1068875545d4960dffa31dc9b4a07eea73dadb4f959c91c44631809a9b09c712",
+          "expectedKernelTypeSha256": "1068875545d4960dffa31dc9b4a07eea73dadb4f959c91c44631809a9b09c712",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN4KeyCancellation.residual_signedContribution_exact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "09061be38da7ae908439addb860433baa3ab6b3b5cb5fe941a98069f898e40f5",
+          "expectedKernelTypeSha256": "09061be38da7ae908439addb860433baa3ab6b3b5cb5fe941a98069f898e40f5",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBN4CancelAtKey_signedContribution_exact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "32a8c0b81eea0c08a8ad9f2b81a061205c821f47dd02b20a0eaa3e4c49e19bb9",
+          "expectedKernelTypeSha256": "32a8c0b81eea0c08a8ad9f2b81a061205c821f47dd02b20a0eaa3e4c49e19bb9",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBN4CanonicalKeys_nodup",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3bcc443216fe3c17d072c30bc90b0006609e6a3f7222656ac47a622a6c7e3767",
+          "expectedKernelTypeSha256": "3bcc443216fe3c17d072c30bc90b0006609e6a3f7222656ac47a622a6c7e3767",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBN4CellsUseCanonicalAtoms_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ed064aad0541a0234527b9e064b4b9cddadaa699a26517e9bd8b662c0ea27b23",
+          "expectedKernelTypeSha256": "ed064aad0541a0234527b9e064b4b9cddadaa699a26517e9bd8b662c0ea27b23",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.computedBN4ActivationCancellation",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d57599983f9df1f99d9e2784ffb08941c3bf5361754b826e5bf0e6915f3aef7d",
+          "expectedKernelTypeSha256": "d57599983f9df1f99d9e2784ffb08941c3bf5361754b826e5bf0e6915f3aef7d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.classifyTerminalBN4ActivationCancellation_exhaustive",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "bf2a3ab3f2cc83cb4e4d11885d8b7d012b14fe0b813604648990a6f547505f00",
+          "expectedKernelTypeSha256": "bf2a3ab3f2cc83cb4e4d11885d8b7d012b14fe0b813604648990a6f547505f00",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-bn4-activation-cancellation"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -36878,7 +37068,7 @@
     {
       "classification": "not-formalized",
       "id": "global-zeroslack-pccmin",
-      "nonClaim": "The finite candidate-derived BN3 envelope now supplies stable request identities, exact minimal consumers, duplicate-free incidence, and one jointly side-tight canonical basis family after a successful computed BCEL nucleus. Its exhaustive proper-cut enumeration is exponential and it does not construct BN4-BN6, map all residual routes into a decreasing complete global outcome system, or provide selector/realizer and polynomial-runtime completeness; global ZeroSlack and polynomial PCCMin therefore remain unformalized.",
+      "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family, and the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger. The construction still does not derive that ledger from the bases, establish the full historical BN4 theorem, construct BN5, PkgC, or BN6, map all residual routes into a decreasing complete global outcome system, or provide selector/realizer and polynomial-runtime completeness; global ZeroSlack and polynomial PCCMin therefore remain unformalized.",
       "requiredTheorems": [
         "PNP.Main.pccmin_polynomial_exact",
         "PNP.Main.zero_slack_complete"
@@ -36942,7 +37132,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-11-124",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-11-125",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

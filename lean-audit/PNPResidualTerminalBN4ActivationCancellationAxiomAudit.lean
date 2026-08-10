@@ -1,0 +1,35 @@
+import PNP.ResidualTerminalBN4ActivationCancellation
+
+#print axioms PNP.DirectWire.terminalBN4ActivationCode
+#print axioms PNP.DirectWire.TerminalBN4CodeActive
+#print axioms PNP.DirectWire.terminalBN4ActivationCode_active_iff
+#print axioms PNP.DirectWire.terminalBN4ActivationCode_eq_iff
+#print axioms PNP.DirectWire.terminalBN4ActivationCode_eq_iff_activation
+#print axioms PNP.DirectWire.TerminalBN4ActivationKey
+#print axioms PNP.DirectWire.terminalBN4ActivationKey_eq_iff
+#print axioms PNP.DirectWire.TerminalBN4CellSign
+#print axioms PNP.DirectWire.TerminalBN4ActivationCell
+#print axioms PNP.DirectWire.TerminalBN4ActivationCell.signedContribution
+#print axioms PNP.DirectWire.terminalBN4PositiveMass
+#print axioms PNP.DirectWire.terminalBN4NegativeMass
+#print axioms PNP.DirectWire.terminalBN4InputSignedMass
+#print axioms PNP.DirectWire.terminalBN4IntegerMassLedger_exact
+#print axioms PNP.DirectWire.TerminalBN4KeyCancellation
+#print axioms PNP.DirectWire.classifyTerminalBN4KeyCancellation
+#print axioms PNP.DirectWire.terminalBN4CancelAtKey
+#print axioms PNP.DirectWire.TerminalBN4KeyCancellation.residualCells
+#print axioms PNP.DirectWire.TerminalBN4KeyCancellation.residual_key_eq
+#print axioms PNP.DirectWire.TerminalBN4KeyCancellation.residual_mass_positive
+#print axioms PNP.DirectWire.TerminalBN4KeyCancellation.no_opposite_sign_residual
+#print axioms PNP.DirectWire.TerminalBN4KeyCancellation.residual_signedContribution_exact
+#print axioms PNP.DirectWire.terminalBN4CancelAtKey_signedContribution_exact
+#print axioms PNP.DirectWire.terminalBN4CanonicalKeys
+#print axioms PNP.DirectWire.terminalBN4CanonicalKeys_nodup
+#print axioms PNP.DirectWire.mem_terminalBN4CanonicalKeys_iff
+#print axioms PNP.DirectWire.TerminalBN4CellsUseCanonicalAtoms
+#print axioms PNP.DirectWire.terminalBN4CellsUseCanonicalAtoms_iff
+#print axioms PNP.DirectWire.TerminalComputedBN4ActivationCancellation
+#print axioms PNP.DirectWire.TerminalComputedBCELAnchorNucleus.computedBN4ActivationCancellation
+#print axioms PNP.DirectWire.TerminalBN4ActivationCancellationOutcome
+#print axioms PNP.DirectWire.classifyTerminalBN4ActivationCancellation
+#print axioms PNP.DirectWire.classifyTerminalBN4ActivationCancellation_exhaustive
