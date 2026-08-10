@@ -1355,6 +1355,20 @@ RankWF, route completeness, full `SaturatePositive`, `BCELReady`, ZeroSlack,
 PCCMin, polynomial runtime, and the root theorem remain open. See
 [`lean_residual_terminal_finite_saturate_positive.md`](./lean_residual_terminal_finite_saturate_positive.md).
 
+`ResidualTerminalRankWF` now reconstructs the named residual `RankWF` boundary.
+The rank is exactly the manuscript's ten natural coordinates in priority order:
+witness type, span type, mode, frontier defect, projection defect, saturation
+defect, anchor count, charge size, profile size, and canonical code. Nine
+nested `Prod.lex` relations over `Nat.lt_wfRel` provide the strict order and its
+kernel-checked well-foundedness. The same relation drives an executable Boolean
+comparison with both equivalence directions; every coordinate has an explicit
+priority theorem, and proof-bearing descent, accessibility, and induction
+surfaces are public. This does not map current finite routes into the complete
+global outcome system or prove that any route decreases the rank. Route
+completeness, Package E, full `SaturatePositive`, `BCELReady`, ZeroSlack,
+PCCMin, polynomial runtime, and the root theorem remain open. See
+[`lean_residual_terminal_rank_wf.md`](./lean_residual_terminal_rank_wf.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:
