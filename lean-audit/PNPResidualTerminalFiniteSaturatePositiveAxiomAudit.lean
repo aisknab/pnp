@@ -1,0 +1,40 @@
+import PNP.ResidualTerminalFiniteSaturatePositive
+
+#print axioms PNP.DirectWire.TerminalOriginKernelObligationRole
+#print axioms PNP.DirectWire.TerminalOriginKernelObligationRole.profileRole
+#print axioms PNP.DirectWire.TerminalOriginKernelObligationRole.ruleKind
+#print axioms PNP.DirectWire.TerminalOriginKernelObligationOrientation
+#print axioms PNP.DirectWire.TerminalOriginKernelObligationCoordinate
+#print axioms PNP.DirectWire.TerminalOriginKernelObligationCoordinate.Matches
+#print axioms PNP.DirectWire.terminalOriginKernelObligationCoordinate?
+#print axioms PNP.DirectWire.terminalOriginKernelObligationCoordinate?_sound
+#print axioms PNP.DirectWire.terminalCandidateOriginKernelObligationCoordinate?
+#print axioms PNP.DirectWire.terminalCandidateOriginKernelObligationCoordinate?_shape
+#print axioms PNP.DirectWire.terminalCandidateOriginKernelObligationCoordinate?_edge
+#print axioms PNP.DirectWire.terminalOriginKernelObligationProfileValue
+#print axioms PNP.DirectWire.TerminalOriginKernelObligationClosureSafe
+#print axioms PNP.DirectWire.TerminalOriginKernelObligationClosureFailureReason
+#print axioms PNP.DirectWire.TerminalOriginKernelObligationClosureFailureReason.Sound
+#print axioms PNP.DirectWire.TerminalOriginKernelObligationClosureRoute
+#print axioms PNP.DirectWire.TerminalOriginKernelObligationClosureRoute.Sound
+#print axioms PNP.DirectWire.TerminalOriginKernelObligationClosureRoute.sound
+#print axioms PNP.DirectWire.TerminalOriginKernelObligationStepOutcome
+#print axioms PNP.DirectWire.classifyTerminalOriginKernelObligationStep
+#print axioms PNP.DirectWire.terminalOriginKernelObligation_safe_or_route
+#print axioms PNP.DirectWire.TerminalSaturationClosureSafeStep
+#print axioms PNP.DirectWire.TerminalSaturationClosureSafeStep.transparent
+#print axioms PNP.DirectWire.TerminalOtherNontransparentSaturationFailure
+#print axioms PNP.DirectWire.TerminalSaturationClosureStepOutcome
+#print axioms PNP.DirectWire.classifyTerminalSaturationClosureStep
+#print axioms PNP.DirectWire.TerminalFirstSaturationClosureEvent
+#print axioms PNP.DirectWire.TerminalSaturationClosureRoutingOutcome
+#print axioms PNP.DirectWire.classifyTerminalSaturationClosureRouting
+#print axioms PNP.DirectWire.classifyTerminalSaturationClosureRouting_exhaustive
+
+#print axioms PNP.DirectWire.TerminalFiniteSaturatePositiveProblem
+#print axioms PNP.DirectWire.TerminalFiniteSaturatePositiveProblem.trace
+#print axioms PNP.DirectWire.TerminalFiniteSaturatePositiveOutcome
+#print axioms PNP.DirectWire.classifyTerminalFiniteSaturatePositive
+#print axioms PNP.DirectWire.TerminalFiniteSaturatePositiveOutcome.Sound
+#print axioms PNP.DirectWire.TerminalFiniteSaturatePositiveOutcome.sound
+#print axioms PNP.DirectWire.classifyTerminalFiniteSaturatePositive_exhaustive

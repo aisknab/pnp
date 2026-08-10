@@ -1179,6 +1179,29 @@ exact zero-cost retract preserving full slack. This is not Package E
 ZeroSlack, PCCMin, polynomial runtime, or the root theorem. See
 `docs/lean_residual_terminal_interface_exposure_routing.md`.
 
+`lean/PNP/ResidualTerminalOriginKernelObligationRouting.lean` recognizes exact
+candidate-derived origin, kernel, and obligation closure edges in both
+gate/profile orientations. Its safety check combines the existing transparent
+cost proof with an after-state obligation check and equality of every forgotten
+profile coordinate across the event. Unsafe recognized events carry one
+deterministic reason: the existing balance failure, an open obligation, or a
+forgotten-profile mismatch. The composed trace dispatcher gives interface
+routing first priority, then closure routing, and retains every other first
+nontransparent event in a separate fail-closed branch with its complete safe
+prefix.
+
+`lean/PNP/ResidualTerminalFiniteSaturatePositive.lean` defines the explicit
+proof-bearing problem used for finite composition: an existing
+`TerminalCandidateBCELAnchorProblem` plus positive full slack at its normalized
+seed. When every trace event is safe, linked cost balance preserves positive
+full slack and the existing projection-positivity classifier returns either a
+zero-defect checked full lift or a positive-defect BCEL outcome. Otherwise the
+composite returns the exact first interface, origin/kernel/obligation, or other
+nontransparent route. This composes the five reconstructed finite terminal
+sub-obligations only. It is not a mapping to the manuscript's complete global
+outcome set, Package E, RankWF, full `SaturatePositive`, or `BCELReady`. See
+`docs/lean_residual_terminal_finite_saturate_positive.md`.
+
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 
 ```lean
