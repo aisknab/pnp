@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-10-119';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-10-120';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -478,6 +478,7 @@ const NON_CLAIMS = Object.freeze([
   'The computed terminal saturation-positivity firewall removes the caller-supplied whole-support positivity proof: zero projection defect returns an attained quotient minimum with a checked full lift, while positive defect delegates exactly to the existing BCEL anchor-nucleus classifier. This closes only projectionPositivityNotLostSilently. It does not discharge transparentSaturationCostBalanced, interfaceExposureRoutesToE, originKernelObligationClosureRouted, or firstNontransparentStepRecorded; derive the dependency system; establish full SaturatePositive or BCELReady; prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.',
   'Candidate-derived terminal saturation computes physical incidence from the actual circuit, profile incidence from exhaustive context-sensitive observer influence, and a deterministic rule-labelled trace without accepting a dependency relation or extraction certificate. Exact per-event cost classification and linked-history theorems close the finite terminal forms of transparentSaturationCostBalanced and firstNontransparentStepRecorded. Nontransparent events are recorded but not routed: interfaceExposureRoutesToE and originKernelObligationClosureRouted remain open, as do full SaturatePositive, Package E, BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP.',
   'Finite terminal interface-exposure routing recognizes only candidate-derived interface-consumer events and returns either exact transparency evidence or a proof-bearing local E-route. The production trace classifier preserves the complete transparent prefix and routes only its exact first nontransparent interface event; non-interface failures remain fail-closed. This closes only the finite local form of interfaceExposureRoutesToE. The local route is not Package E VerifyDW, and originKernelObligationClosureRouted, full SaturatePositive, BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.',
+  'Finite terminal origin, kernel, and obligation routing recognizes only exact candidate-derived role, rule, orientation, and edge combinations. Safety requires transparent cost, discharged obligations, and stability of forgotten profiles; failures retain deterministic proof-bearing reasons and the exact safe prefix. A proof-bearing candidate BCEL anchor problem with positive initial full slack composes these routes with preservation and the existing checked-lift or BCEL firewall. This closes a finite local routing edge and finite composition only. Local routes are not the complete global outcome system or Package E, the positive premise remains explicit, and full SaturatePositive, BCELReady, RankWF, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
   'The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.',
@@ -1450,6 +1451,16 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalInterfaceExposureRoutingAxiomAuditPassed: true,
   leanResidualTerminalInterfaceExposureRoutingScope:
     'all-finite-direct-wire-candidates-executable-observers-forgetful-projections-candidate-derived-interface-consumer-transparent-or-local-e-route-with-exact-first-failure',
+  leanResidualTerminalOriginKernelObligationRoutingFormalized: true,
+  leanResidualTerminalFiniteOriginKernelObligationClosureRoutedFormalized: true,
+  leanResidualTerminalFirstOriginKernelObligationRouteFormalized: true,
+  leanResidualTerminalOriginKernelObligationRoutingAxiomAuditPassed: true,
+  leanResidualTerminalOriginKernelObligationRoutingScope:
+    'all-finite-direct-wire-candidates-executable-observers-forgetful-projections-candidate-derived-origin-kernel-obligation-closures-with-exact-safety-or-first-route',
+  leanResidualTerminalFiniteSaturatePositiveCompositionFormalized: true,
+  leanResidualTerminalFiniteSaturatePositiveCompositionAxiomAuditPassed: true,
+  leanResidualTerminalFiniteSaturatePositiveCompositionScope:
+    'all-finite-direct-wire-candidates-executable-observers-forgetful-projections-proof-bearing-positive-full-slack-candidate-bcel-anchor-problems-total-finite-saturate-positive-composition',
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
   leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -1478,7 +1489,7 @@ const EXACT_FIELDS = Object.freeze({
   legacyCheckerArchiveManifest: 'archive/legacy-v0/ARCHIVE.json',
   legacyCheckerArchiveCheckCommand: 'npm run legacy:v0:check',
   legacyCheckerReplayCommand: 'npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d',
-  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-10-INTERFACE-EXPOSURE-ROUTING-118',
+  publicSurfaceBaselineCoordinate: 'PUBLIC-SURFACE-BASELINE-2026-08-10-FINITE-SATURATE-POSITIVE-119',
   formalReconstructionStatusPayload: STATUS_PATH,
   siteStatusPayload: SITE_PATH,
   historicalActivatedStatusCoordinate: 'PNP-ACTIVATED-STATUS-2026-07-05-01',
@@ -2431,6 +2442,16 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalInterfaceExposureRoutingAxiomAuditPassed: true,
       leanResidualTerminalInterfaceExposureRoutingScope:
         'all-finite-direct-wire-candidates-executable-observers-forgetful-projections-candidate-derived-interface-consumer-transparent-or-local-e-route-with-exact-first-failure',
+      leanResidualTerminalOriginKernelObligationRoutingFormalized: true,
+      leanResidualTerminalFiniteOriginKernelObligationClosureRoutedFormalized: true,
+      leanResidualTerminalFirstOriginKernelObligationRouteFormalized: true,
+      leanResidualTerminalOriginKernelObligationRoutingAxiomAuditPassed: true,
+      leanResidualTerminalOriginKernelObligationRoutingScope:
+        'all-finite-direct-wire-candidates-executable-observers-forgetful-projections-candidate-derived-origin-kernel-obligation-closures-with-exact-safety-or-first-route',
+      leanResidualTerminalFiniteSaturatePositiveCompositionFormalized: true,
+      leanResidualTerminalFiniteSaturatePositiveCompositionAxiomAuditPassed: true,
+      leanResidualTerminalFiniteSaturatePositiveCompositionScope:
+        'all-finite-direct-wire-candidates-executable-observers-forgetful-projections-proof-bearing-positive-full-slack-candidate-bcel-anchor-problems-total-finite-saturate-positive-composition',
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
       leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2510,7 +2531,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-10-119',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-10-120',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

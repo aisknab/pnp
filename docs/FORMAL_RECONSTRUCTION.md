@@ -1334,6 +1334,27 @@ full `SaturatePositive`, `BCELReady`, ZeroSlack, PCCMin, polynomial runtime,
 and the root theorem therefore remain open. See
 [`lean_residual_terminal_interface_exposure_routing.md`](./lean_residual_terminal_interface_exposure_routing.md).
 
+`ResidualTerminalOriginKernelObligationRouting` and
+`ResidualTerminalFiniteSaturatePositive` close the remaining finite local
+closure-routing edge and compose all five reconstructed terminal
+`RW-SaturatePositive` sub-obligations. Exact origin, kernel, and obligation
+events are recognized only when their role, rule kind, orientation, and
+candidate-derived dependency edge agree. A recognized event is safe only when
+it is cost-transparent, an obligation is discharged after the event, and any
+profile coordinate hidden by the projection is unchanged. The deterministic
+failure order records a balance failure, open obligation, or forgotten-profile
+mismatch. The production classifier preserves the complete safe prefix and
+returns the exact first interface route, origin/kernel/obligation route, or
+other fail-closed nontransparent event. A proof-bearing composite problem then
+adds positive initial full slack to the existing candidate BCEL anchor problem.
+Its total classifier preserves full positivity through safe saturation and
+enters the existing checked-lift or BCEL firewall, or returns that exact first
+route. This is a finite composition, not the manuscript-wide theorem: local
+routes are not mapped to the complete global outcome system or Package E, and
+RankWF, route completeness, full `SaturatePositive`, `BCELReady`, ZeroSlack,
+PCCMin, polynomial runtime, and the root theorem remain open. See
+[`lean_residual_terminal_finite_saturate_positive.md`](./lean_residual_terminal_finite_saturate_positive.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:
