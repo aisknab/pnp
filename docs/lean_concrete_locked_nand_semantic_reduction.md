@@ -134,14 +134,14 @@ The reviewed Lean source-closure SHA-256 is
 `6adc25ee3d9920358ea8803adf47ab94d8e70c91026b8756bb45dbad1dda577d`.
 
 Publication map coordinate
-`PNP-FORMAL-PUBLICATION-MAP-2026-08-10-122` contains 101 milestones: 99
+`PNP-FORMAL-PUBLICATION-MAP-2026-08-11-123` contains 101 milestones: 99
 earned and two deliberately unearned. It pins eleven theorem types for
 `concrete-locked-nand-encoded-semantic-boundary`; the complete pin inventory
 contains 2,487 theorem types. The map is 805,053 bytes with SHA-256
 `531a4dbd6d7925582aed1e6011d917e8dfdaf5576e1c259f63cd76a897d2aa5c`.
 
 Status coordinate
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-10-122` records the semantic
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-123` records the semantic
 boundary fields as true while retaining all four project assumptions, all six
 blockers, unset activation fingerprints, an absent `PNP.Main.p_eq_np`, and a
 false concrete publication gate. The status is 2,024,772 bytes with SHA-256

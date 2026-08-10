@@ -36,8 +36,8 @@ establish `PNP.Main.p_eq_np`.  Those remain the downstream blockers.
 ## Mechanically generated publication evidence
 
 - Lean inventory: `PNP-LEAN-THEOREM-INVENTORY-2026-08-10-122`
-- publication map: `PNP-FORMAL-PUBLICATION-MAP-2026-08-10-122`
-- reconstruction status: `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-10-122`
+- publication map: `PNP-FORMAL-PUBLICATION-MAP-2026-08-11-123`
+- reconstruction status: `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-123`
 - public surface: `PUBLIC-SURFACE-BASELINE-2026-08-10-CONCRETE-LOCKED-NAND-THRESHOLD-121`
 - canonical report: `PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-10-122`
 

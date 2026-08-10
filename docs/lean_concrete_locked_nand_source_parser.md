@@ -206,14 +206,14 @@ The pinned Lean source closure is
 `6adc25ee3d9920358ea8803adf47ab94d8e70c91026b8756bb45dbad1dda577d`.
 
 Publication-map coordinate
-`PNP-FORMAL-PUBLICATION-MAP-2026-08-10-122` contains 101 milestones, of
+`PNP-FORMAL-PUBLICATION-MAP-2026-08-11-123` contains 101 milestones, of
 which 99 are earned and two global milestones remain unearned. The map pins
 2,487 theorem types. Its 805,053 bytes have SHA-256
 `531a4dbd6d7925582aed1e6011d917e8dfdaf5576e1c259f63cd76a897d2aa5c`.
 The source-parser milestone contributes 20 theorem types.
 
 Status coordinate
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-10-122`, paired with public-surface
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-123`, paired with public-surface
 coordinate
 `PUBLIC-SURFACE-BASELINE-2026-08-10-CONCRETE-LOCKED-NAND-THRESHOLD-121`, records
 the four disclosed project assumptions, five blockers, absent

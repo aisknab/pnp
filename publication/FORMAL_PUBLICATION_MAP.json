@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-10-122",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-11-123",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -6122,7 +6122,7 @@
     {
       "classification": "not-formalized",
       "id": "global-zeroslack-pccmin",
-      "nonClaim": "Proof-bearing result structures and explicit-list failure do not supply global completeness.",
+      "nonClaim": "Per-cut BN2 basis existence does not construct the cross-cut-stable BN3 request envelope. The pinned legacy package checks an asserted jointSideTightRealizability Boolean rather than an executable uniform construction, so proof-bearing result structures and explicit-list failure still do not supply global ZeroSlack or polynomial PCCMin completeness.",
       "requiredTheorems": [
         "PNP.Main.pccmin_polynomial_exact",
         "PNP.Main.zero_slack_complete"

@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-10-122",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-123",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -1294,6 +1294,8 @@
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFourCornerOptimumCompatibility.lean",
     "node --test audits/lean-residual-terminal-four-corner-optimum-compatibility0.test.mjs",
     "node --test audits/lean-residual-terminal-frontier-pushout0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-regression/PNPBN3JointRealizabilityGap.lean",
+    "node --test audits/bn3-joint-realizability-gap0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1302,6 +1304,7 @@
   "nonClaims": [
     "The repository does not currently establish P = NP.",
     "Legacy JavaScript checker acceptance verifies assertion-bearing records under implemented predicates; it is not a formal proof of the named mathematical propositions.",
+    "The BN3 joint-realizability gap is now pinned by a kernel-checkable logical boundary witness: per-cut side-tight existence does not by itself construct a cross-cut-stable realizing family. This is a missing-lemma witness, not a counterexample to a future candidate-derived BN3 theorem; global ZeroSlack and polynomial PCCMin remain unformalized.",
     "The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.",
     "The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.",
     "Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.",
@@ -1503,9 +1506,9 @@
   "leanTheoremInventoryAssumptionFreeTheoremCount": 7159,
   "leanTheoremInventorySourceClosureModuleCount": 240,
   "leanSourceClosureSha256": "6adc25ee3d9920358ea8803adf47ab94d8e70c91026b8756bb45dbad1dda577d",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-10-122",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-11-123",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "531a4dbd6d7925582aed1e6011d917e8dfdaf5576e1c259f63cd76a897d2aa5c",
+  "formalPublicationMapSha256": "904a1e65da26d730de3411f5d45fb927311234d2b21538b1edf65921421e9ff7",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -36715,7 +36718,7 @@
     {
       "classification": "not-formalized",
       "id": "global-zeroslack-pccmin",
-      "nonClaim": "Proof-bearing result structures and explicit-list failure do not supply global completeness.",
+      "nonClaim": "Per-cut BN2 basis existence does not construct the cross-cut-stable BN3 request envelope. The pinned legacy package checks an asserted jointSideTightRealizability Boolean rather than an executable uniform construction, so proof-bearing result structures and explicit-list failure still do not supply global ZeroSlack or polynomial PCCMin completeness.",
       "requiredTheorems": [
         "PNP.Main.pccmin_polynomial_exact",
         "PNP.Main.zero_slack_complete"
@@ -36779,7 +36782,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-10-122",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-11-123",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

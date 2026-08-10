@@ -1384,6 +1384,19 @@ completeness, Package E, full `SaturatePositive`, `BCELReady`, ZeroSlack,
 PCCMin, polynomial runtime, and the root theorem remain open. See
 [`lean_residual_terminal_rank_wf.md`](./lean_residual_terminal_rank_wf.md).
 
+The next global step cannot be inferred from that local BN2/RankWF stack. The
+pinned `BN3-SimultaneousEnvelope` text requires request identities and
+activation predicates that are stable across every proper cut, together with a
+jointly side-tight realization. The current BN2 results supply a basis for each
+local square under route silence; they do not construct that stable family.
+`lean-regression/PNPBN3JointRealizabilityGap.lean` gives a kernel-checkable
+two-cut boundary witness: every cut has a realizing basis, while no realizing
+selection can satisfy the required cross-cut stability predicate. This records
+a missing inference, not a counterexample to a future candidate-derived BN3
+theorem. The required uniform construction and concrete polynomial machine are
+still absent, so the global ZeroSlack/PCCMin milestone remains unearned. See
+[`bn3_joint_realizability_gap.md`](../review/bn3_joint_realizability_gap.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:
