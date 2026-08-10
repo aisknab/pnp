@@ -84,9 +84,9 @@ test('historical activation and checker acceptance cannot override the concrete 
   }
 });
 
-test('status retains six blockers, four project axioms, and an absent compatibility root', async () => {
+test('status retains five blockers, four project axioms, and an absent compatibility root', async () => {
   const status = await status0();
-  assert.equal(status.remainingBlockers.length, 6);
+  assert.equal(status.remainingBlockers.length, 5);
   assert.deepEqual(status.remainingBlockers, status.remainingFormalObligations);
   assert.equal(status.projectSpecificAxiomInventory.length, 4);
   assert.equal(status.projectSpecificAxiomsRemaining, true);
@@ -101,8 +101,8 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
   assert.equal(status.formalPublicationMilestones.length, 101);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 98);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 3);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 99);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 2);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
     'formalized-np-membership-only');
@@ -2479,8 +2479,16 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   assert.match(terminalRankWF.scope, /kernel-checked well-foundedness/u);
   assert.match(terminalRankWF.nonClaim, /does not map/u);
   assert.match(terminalRankWF.nonClaim, /strictly decreases/u);
+  const lockedNANDThreshold = byId.get('global-locked-nand-threshold');
+  assert.equal(lockedNANDThreshold.status,
+    'formalized-concrete-locked-nand-threshold');
+  assert.equal(lockedNANDThreshold.earned, true);
+  assert.equal(lockedNANDThreshold.allAssumptionFree, false);
+  assert.equal(lockedNANDThreshold.axiomClosureUsesOnlyLeanStandardAllowlist, true);
+  assert.deepEqual(lockedNANDThreshold.requiredTheorems,
+    ['PNP.Main.locked_nand_threshold']);
+  assert.match(lockedNANDThreshold.nonClaim, /does not put the concrete locked threshold language in P/u);
   for (const id of [
-    'global-locked-nand-threshold',
     'global-zeroslack-pccmin',
     'concrete-publication-root',
   ]) assert.equal(byId.get(id).status, 'not-formalized');
@@ -2493,10 +2501,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'd7fa3d7e912eb3bbe08f0d1f67fbb3d413bed1ba4d7d42941c8fd677bf6bd80a');
+    '22b7df175f7802d0de09e6a323008db91931eec50b8d9778896c26f8f78e0ac7');
   assert.equal(map.milestoneSourceClosureSha256,
-    'd525c3be0e63e15f8a4336d785651f1d1fdef3dc867d2956302da34a947e85d6');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2486);
+    '6adc25ee3d9920358ea8803adf47ab94d8e70c91026b8756bb45dbad1dda577d');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2487);
   for (const theorem of [
     'PNP.DirectWire.TerminalBCELAnchorProblem.wholeCorners_projectionDefect',
     'PNP.DirectWire.TerminalProjectionPositivityLoss.minima_eq',
@@ -2862,7 +2870,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [26539, 13883, 7159, 14935, 239]);
+  ], [26540, 13884, 7159, 14935, 240]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {
@@ -2948,7 +2956,11 @@ test('canonical report source is current and the committed PDF artifact exists',
   );
   assert.match(
     tex,
-    /syntax-directed compiler still does not\s+decide CNF-SAT, connect the concrete target to the report-level threshold\s+assumption, or prove \$P=NP\$/u,
+    /report-facing theorem\s+\\code\{PNP\.Main\.locked\\_nand\\_threshold\} now publishes that composition as a\s+uniform all-bitstring reduction/u,
+  );
+  assert.match(
+    tex,
+    /This reduction still does not decide CNF-SAT, put the\s+locked target in P, discharge residual-band\/ZeroSlack\/PCCMin, or prove \$P=NP\$/u,
   );
   assert.match(tex, /A literal finite builder emits\s+\\code\{FormulaWidth\} copies of \\code\{T\} followed by \\code\{F\}, \\code\{Sep\}, and the complete positive\s+clause on variables zero, one, and two/u);
   assert.match(tex, /complete positive at-least-one shape clause on variables zero,\s+one, and two/u);

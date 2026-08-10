@@ -22,7 +22,6 @@ def rootTheoremStatus : RootTheoremStatus :=
       "Executable checker/reflection soundness",
       "PCCMin and ZeroSlack semantic soundness and polynomial bounds",
       "Residual-band reduction",
-      "Global SAT-to-locked-NAND construction and threshold theorem",
       "SAT NP-hardness in the concrete model"
     ] }
 

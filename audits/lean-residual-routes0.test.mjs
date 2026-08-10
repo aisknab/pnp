@@ -115,7 +115,7 @@ test('formal status earns only explicit-list soundness', async () => {
     'leanPCCMinPolynomialRuntimeFormalized',
     'leanResidualBandMinimizerFormalized',
   ]) assert.equal(status[field], false, field);
-  assert.equal(status.remainingBlockers.length, 6);
+  assert.equal(status.remainingBlockers.length, 5);
   assert.equal(status.projectSpecificAxiomInventory.length, 4);
   assert.equal(status.rootLeanTheoremPresent, false);
 });

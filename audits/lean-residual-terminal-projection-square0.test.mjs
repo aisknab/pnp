@@ -313,7 +313,7 @@ test('status earns projection commutation without downstream overclaim', async (
     'leanPCCMinLoopExactnessFormalized',
     'leanPCCMinPolynomialRuntimeFormalized',
   ]) assert.equal(status[field], false, field);
-  assert.equal(status.remainingBlockers.length, 6);
+  assert.equal(status.remainingBlockers.length, 5);
   assert.equal(status.projectSpecificAxiomInventory.length, 4);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);

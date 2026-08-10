@@ -281,5 +281,5 @@ test('first-token composition remains earned beneath the complete-header boundar
     'PNP.LockedNANDThreshold',
     'PNP.ResidualBandExactMinimization',
   ]);
-  assert.equal(status.remainingBlockers.length, 6);
+  assert.equal(status.remainingBlockers.length, 5);
 });

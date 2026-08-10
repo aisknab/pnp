@@ -178,7 +178,7 @@ test('internal handoff milestone remains local and the publication gate remains 
     text0('status/FORMAL_RECONSTRUCTION_STATUS.json').then(JSON.parse),
     text0('publication/FORMAL_PUBLICATION_MAP.json').then(JSON.parse),
   ]);
-  assert.equal(status.remainingBlockers.length, 6);
+  assert.equal(status.remainingBlockers.length, 5);
   assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), false);
   assert.equal(status.projectSpecificAxiomInventory.length, 4);
   assert.equal(status.rootLeanTheoremPresent, false);

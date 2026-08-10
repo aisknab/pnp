@@ -187,6 +187,7 @@ test('Lean axiom audit distinguishes assumption-free status data from the condit
     'PNP.Main.rootTheoremStatus_has_external_assumptions',
     'PNP.Main.ConcretePEqualsNP',
     'PNP.Main.concretePEqualsNP_iff',
+    'PNP.Main.locked_nand_threshold',
     'PNP.accepted_generated_package_implies_p_eq_np',
     'PNP.final_report_bridge',
   ]) assert.match(audit, new RegExp(`#print axioms ${declaration.replaceAll('.', '\\.')}\\b`, 'u'));

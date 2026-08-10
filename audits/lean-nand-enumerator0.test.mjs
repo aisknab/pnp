@@ -124,10 +124,10 @@ test('formal status retains enumerator caveats after the reference-minimum layer
     'leanNANDReferenceMinimumPolynomialRuntimeProved',
     'leanCompatibleReplacementFormalized',
     'leanGlobalSlackLawFormalized',
-    'leanLockedNANDBuilderFormalized',
-    'leanLockedNANDThresholdFormalized',
   ]) assert.equal(status[field], false, field);
-  assert.equal(status.remainingBlockers.includes('Formal.LockedNANDThreshold'), true);
+  assert.equal(status.leanLockedNANDBuilderFormalized, true);
+  assert.equal(status.leanLockedNANDThresholdFormalized, true);
+  assert.equal(status.remainingBlockers.includes('Formal.LockedNANDThreshold'), false);
   assert.equal(status.rootLeanTheoremPresent, false);
 });
 

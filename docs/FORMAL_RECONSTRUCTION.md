@@ -1008,6 +1008,19 @@ to the abstract report-level threshold assumption, complete ZeroSlack/PCCMin,
 or prove P = NP. See
 [`lean_concrete_cnf_to_nand_polynomial_reduction.md`](./lean_concrete_cnf_to_nand_polynomial_reduction.md).
 
+`PNP.Main.locked_nand_threshold` now closes the report-facing concrete
+locked-NAND construction boundary. Its exact kernel type is
+`PNP.Concrete.ReducesTo PNP.Concrete.CNFSAT
+PNP.Concrete.LockedNAND.EncodedLockedNANDThreshold`. The witness is the
+composed finite parser/compiler/emitter pipeline, so correctness, runtime,
+output-size bounds, malformed-input behavior, and recursive raw refinement
+all apply uniformly to every bitstring. The theorem's compiled closure uses
+only `propext` and `Quot.sound`; it does not depend on the legacy abstract
+string-handle axiom. This is still a many-one reduction, not a polynomial
+decider for the target, a concrete CNFSAT NP-hardness result, a residual-band
+or ZeroSlack/PCCMin theorem, or the root theorem. See
+[`lean_concrete_locked_nand_threshold_publication.md`](./lean_concrete_locked_nand_threshold_publication.md).
+
 The historical hostile review named `DirectWireOutputLowerBound`, `MacroDistinct`,
 `TraceEquivalence`, `ZeroOutputConvention`, and `FinalLockSeparation`. The general output lower
 bound and model-level free-zero append convention were discharged in preceding layers.
@@ -1024,7 +1037,9 @@ bounds, compiled non-timeout, polynomial machine/function witnesses, strict
 parser composition, and recursive raw refinement. That composition is now
 packaged as the concrete
 `EncodedNANDSAT`-to-`EncodedLockedNANDThreshold` `PolynomialReduction`.
-Report-level abstract threshold-language linkage remains missing. See
+The report-facing concrete all-bitstring reduction is now published as
+`PNP.Main.locked_nand_threshold`; the legacy abstract string-handle bridge
+remains quarantined and is not a premise of that theorem. See
 [`lean_locked_nand_threshold_boundary.md`](./lean_locked_nand_threshold_boundary.md).
 
 The residual-route layer now performs one honest executable operation: it scans an explicit finite

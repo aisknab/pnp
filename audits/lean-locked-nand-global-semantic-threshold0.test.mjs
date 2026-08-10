@@ -266,14 +266,16 @@ test('status earns the typed semantic threshold without widening the project cla
     [],
   );
   for (const field of [
-    'leanLockedNANDPolynomialBuilderFormalized',
-    'leanLockedNANDBuilderFormalized',
-    'leanLockedNANDThresholdFormalized',
     'leanResidualRoutesGlobalGainCompletenessFormalized',
     'leanZeroSlackCompletenessFormalized',
   ]) assert.equal(status[field], false, field);
+  for (const field of [
+    'leanLockedNANDPolynomialBuilderFormalized',
+    'leanLockedNANDBuilderFormalized',
+    'leanLockedNANDThresholdFormalized',
+  ]) assert.equal(status[field], true, field);
   assert.equal(status.projectSpecificAxiomInventory.length, 4);
-  assert.equal(status.remainingBlockers.length, 6);
+  assert.equal(status.remainingBlockers.length, 5);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);
   const milestone = status.formalPublicationMilestones.find(

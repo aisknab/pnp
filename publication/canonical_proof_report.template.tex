@@ -79,8 +79,9 @@
   polynomial-time Cook--Levin formula builder. A separate fixed all-input machine now translates
   strict canonical CNF into well-formed topological NAND, preserves satisfiability exactly, supplies
   a polynomial-time function and raw refinement, and packages the direct and locked-NAND-composed
-  polynomial reductions. It does not decide CNF-SAT or discharge the report-level locked-NAND
-  threshold premise. The reviewed activation fingerprints
+  polynomial reductions. The report-facing theorem now publishes their all-bitstring concrete
+  locked-NAND reduction. It does not decide CNF-SAT, put the locked target in P, or discharge
+  residual-band/ZeroSlack/PCCMin. The reviewed activation fingerprints
   are unset, no root theorem exists, and the abstract string-handle bridge is never an activation source.
   \vspace{0.3cm}
   \end{minipage}
@@ -141,9 +142,12 @@ compiler on every bitstring within one external-input polynomial. Its compiled
 machine never times out at the advertised bound, retains literal
 \code{RawRefinement}, packages
 \code{PolynomialReduction CNFSAT EncodedNANDSAT}, and explicitly composes with
-the strict locked-NAND reduction. This syntax-directed compiler still does not
-decide CNF-SAT, connect the concrete target to the report-level threshold
-assumption, or prove $P=NP$.
+the strict locked-NAND reduction. The report-facing theorem
+\code{PNP.Main.locked\_nand\_threshold} now publishes that composition as a
+uniform all-bitstring reduction from \code{CNFSAT} to
+\code{EncodedLockedNANDThreshold}; its closure uses only \code{propext} and
+\code{Quot.sound}. This reduction still does not decide CNF-SAT, put the
+locked target in P, discharge residual-band/ZeroSlack/PCCMin, or prove $P=NP$.
 
 The new rectangular schedule allocates exact constraint, clause, token, and raw-bit opportunities
 without reading the already-materialized program, formula, token encoding, or encoded formula as
@@ -513,9 +517,14 @@ encoded language equivalence as a concrete \code{PolynomialReduction} from
 function identity, output bytes, a \code{ReducesTo} witness, and recursive
 raw-machine refinement. Its 16-declaration audit has two empty closures, two
 using only \code{propext}, and twelve using only \code{propext} and
-\code{Quot.sound}. Abstract threshold-language discharge, the report-level
-locked-NAND theorem, deterministic CNF-SAT-in-P, NP-hardness transport,
-ZeroSlack/PCCMin completion, and \(P=NP\) remain unproved.
+\code{Quot.sound}. The report-facing
+\code{PNP.Main.locked\_nand\_threshold} theorem now composes the CNF-to-NAND
+and strict locked-NAND reductions into an exact all-bitstring
+\code{ReducesTo CNFSAT EncodedLockedNANDThreshold} result. Its axiom
+transcript contains only \code{propext} and \code{Quot.sound}, not the legacy
+abstract string-handle assumption. A deterministic target decider, concrete
+CNFSAT NP-hardness transport, residual-band and ZeroSlack/PCCMin completion,
+and \(P=NP\) remain unproved.
 
 The residual-gain chain milestone reconstructs the iteration-count edge from
 legacy report Sections 16 and 17. For every finite disclosed chain whose
@@ -659,7 +668,7 @@ Module & Declarations & Theorems \\
 
 \section{Remaining formal blockers}
 
-Six formal blockers remain active:
+Five formal blockers remain active:
 
 \begin{enumerate}
 \setlength{\itemsep}{0pt}

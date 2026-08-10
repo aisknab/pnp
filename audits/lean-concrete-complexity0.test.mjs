@@ -27,7 +27,6 @@ const EXPECTED_AXIOMS = Object.freeze([
 
 const EXPECTED_BLOCKERS = Object.freeze([
   'Formal.ConcreteSAT',
-  'Formal.LockedNANDThreshold',
   'Formal.ResidualBandMinimizer',
   'Formal.ZeroSlack',
   'Formal.PolynomialRuntimeAndCertificateBounds',

@@ -436,7 +436,7 @@ test('root, status, workflow, verifier, publication, and docs expose the milesto
       printed0(audit).length,
     );
     assert.equal(status.projectSpecificAxiomInventory.length, 4);
-    assert.equal(status.remainingBlockers.length, 6);
+    assert.equal(status.remainingBlockers.length, 5);
     assert.equal(status.rootLeanTheoremPresent, false);
     assert.equal(status.concretePublicationGate.passed, false);
 
