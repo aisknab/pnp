@@ -1,0 +1,23 @@
+import PNP.ResidualTerminalBN3RequestEnvelope
+
+#print axioms PNP.DirectWire.terminalListSubsets_sublist
+#print axioms PNP.DirectWire.TerminalComputedBCELAnchorNucleus.requestAtoms
+#print axioms PNP.DirectWire.TerminalComputedBCELAnchorNucleus.requestAtoms_nodup
+#print axioms PNP.DirectWire.TerminalBN3RequestPredicate
+#print axioms PNP.DirectWire.terminalBN3RequestPredicateBool
+#print axioms PNP.DirectWire.terminalBN3RequestPredicateBool_eq_true_iff
+#print axioms PNP.DirectWire.terminalBN3RequestPredicate_monotone
+#print axioms PNP.DirectWire.terminalBN3RequestPredicate_stable
+#print axioms PNP.DirectWire.terminalBN3MinimalConsumer
+#print axioms PNP.DirectWire.terminalBN3MinimalConsumer_exact
+#print axioms PNP.DirectWire.TerminalComputedBCELAnchorNucleus.activeRequestAtoms
+#print axioms PNP.DirectWire.TerminalComputedBCELAnchorNucleus.mem_activeRequestAtoms_iff
+#print axioms PNP.DirectWire.TerminalComputedBCELAnchorNucleus.activeRequestAtoms_nodup
+#print axioms PNP.DirectWire.TerminalComputedBCELAnchorNucleus.mem_activeRequestAtoms_iff_properCut
+#print axioms PNP.DirectWire.TerminalComputedBCELAnchorNucleus.canonicalRequestBasis
+#print axioms PNP.DirectWire.TerminalComputedBCELAnchorNucleus.canonicalRequestBasis_jointlySideTight
+#print axioms PNP.DirectWire.TerminalComputedBN3RequestEnvelope
+#print axioms PNP.DirectWire.TerminalComputedBCELAnchorNucleus.computedBN3RequestEnvelope
+#print axioms PNP.DirectWire.TerminalBN3RequestEnvelopeOutcome
+#print axioms PNP.DirectWire.classifyTerminalBN3RequestEnvelope
+#print axioms PNP.DirectWire.classifyTerminalBN3RequestEnvelope_exhaustive

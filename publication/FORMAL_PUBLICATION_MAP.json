@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-11-123",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-11-124",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2160,12 +2160,18 @@
     "PNP.DirectWire.TerminalBCELAnchorProblem.anchorRecords_nodup": "fcff38687dc840da329f49a4f3af94c6b5f5e601e0ffc866e361046fd288bd75",
     "PNP.DirectWire.TerminalBCELAnchorProblem.mem_anchorRecords_iff": "e5e4b4afb6377b6691fb406fdcc8221ff33b65f4a0df4fa5d4ad1b737c3b7cea",
     "PNP.DirectWire.TerminalBCELCutDefectCheck.disagrees_eq_true_iff": "21d996875cdbdfa43f717ee01fbad02bd3b0b6663933e6cb1e26125f524ef0dd",
+    "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.activeRequestAtoms_nodup": "10d73bb885691775aa9ad252db596e67947b09caf7bf57cb64bb8abff1872f01",
     "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.anchorSizeAtLeastTwo": "19082f2ea2f7b1145571e2ddf2092ec6624852e09bf11f9820d8fa6daad5d68f",
+    "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.canonicalRequestBasis_jointlySideTight": "67b597e0839d1fccc67284f54d88fb1fcc8990a5fe42360ea07992525b752a68",
+    "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.computedBN3RequestEnvelope": "f07860cfece7a85bb738c2b951cd6b43b92bbd5ce6365d520888a011b1069ed0",
+    "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.mem_activeRequestAtoms_iff_properCut": "28274a11c24513babce9f9e4c688d850cd5cb0bf4d7c9651bb57271ec1b146b0",
     "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.properCutConstantEquation": "cd65d823551841cf3046ee9a2350229ddee98947f9e8875fc27c61f271502d3e",
     "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.properCutLocalConclusion": "000808b27a16bc73cb544180e9969aa442390aa75173b3c6c46025605e9d563e",
+    "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.requestAtoms_nodup": "70d9d0ef627ae3aee1ec6acd2c18851d0ff7b95205b10b44d2a94bf1a10c0782",
     "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.strictSubfamily_defect_zero": "e0c733dabf361e5ac836d92c4adda2525bc8699b26feb5d480e74d9f84986e23",
     "PNP.DirectWire.allTerminalPrimitiveRecords_nodup": "762735aa6ef686276db73e4375da9633ce1881e66062b5f3a459243938aa9206",
     "PNP.DirectWire.classifyTerminalBCELAnchorNucleus_exhaustive": "b0091a1de2e0cdbeb98dc26355b00259a989cce68429f56f8e5f0083366c87be",
+    "PNP.DirectWire.classifyTerminalBN3RequestEnvelope_exhaustive": "c88c263df187c383ee764d7c39926988cd8994bb894c33aa7482b2924c53c8de",
     "PNP.DirectWire.computedBCELCutConclusionOfNoFailures": "8ad5f859c27f0c8b2c9e703d3815582c828455191fda12adfabd7fc12c83c2f6",
     "PNP.DirectWire.filter_mem_terminalListSubsets": "78efb08f842b84558613fc90cb018d67f3a5ccda8ee0c22a4191cec1d779cff4",
     "PNP.DirectWire.findTerminalPositiveAnchorNucleus_eq_none_iff": "48f0fba6f848150d9d90accc26e1725106ae65af18675224858e776d998dfbd1",
@@ -2487,6 +2493,11 @@
     "PNP.DirectWire.terminalResidualRank_chargeSize_lt": "bba66c1a0a7249c35dd7ecc9cf53a7303ce0187058cb0fd25342e6d7154e11ba",
     "PNP.DirectWire.terminalResidualRank_profileSize_lt": "42228d10e71af76dd08669f00511a1b43bebb0085ccff8b5d14b848e5903a07f",
     "PNP.DirectWire.terminalResidualRank_canonicalCode_lt": "b3783268f850ea30f5e444e8a78a09ed278d1224990bbe725a89681dbd59d10e",
+    "PNP.DirectWire.terminalBN3MinimalConsumer_exact": "a1189497569adab96a59946dd9d36f8a29d2e42f032edeac1b3fff4730c27cc4",
+    "PNP.DirectWire.terminalBN3RequestPredicateBool_eq_true_iff": "d23816d817a4215617f422ba2115ef3479ad37d3874677a233d95d394420a845",
+    "PNP.DirectWire.terminalBN3RequestPredicate_monotone": "46738bea433318a3dd0010b1f7fa4a2c7a459e1f1c9e0afc4a3689f102a69bdf",
+    "PNP.DirectWire.terminalBN3RequestPredicate_stable": "764cfe5b3bc264ca81e21e70e7e37126cc0b0364c3ddef55ad697d04e74b0da4",
+    "PNP.DirectWire.terminalListSubsets_sublist": "ea0fefb3d241ebd81df124fbdb49a8409c1e6e77a111af3b6d4755e78c0c4d75",
     "PNP.DirectWire.TerminalResidualRankDescent.sound": "4c4bf650e6b68d7ec6d654c4fe37ad523959cb254bb5cb871cda50c79515ada5"
   },
   "gate": {
@@ -2505,7 +2516,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "6adc25ee3d9920358ea8803adf47ab94d8e70c91026b8756bb45dbad1dda577d",
+  "milestoneSourceClosureSha256": "e30716e5e6ec0ad0f7c084a66d9ff28c1a8cf5a7008b5fc8caff81205e51eb15",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -6110,6 +6121,26 @@
       "title": "Residual terminal RankWF"
     },
     {
+      "classification": "formalized-residual-terminal-bn3-request-envelope",
+      "id": "residual-terminal-bn3-request-envelope",
+      "nonClaim": "This establishes one exact candidate-derived finite BN3 envelope only after the existing computed BCEL anchor-nucleus classifier succeeds. Proper cuts are enumerated through all subsets, so the construction is exponential reference computation rather than a polynomial algorithm. It does not derive the terminal dependency system, map local routes into the manuscript's complete global outcome system, construct BN4-BN6, prove selector or realizer completeness, establish global ZeroSlack or PCCMin, prove SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalListSubsets_sublist",
+        "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.requestAtoms_nodup",
+        "PNP.DirectWire.terminalBN3RequestPredicateBool_eq_true_iff",
+        "PNP.DirectWire.terminalBN3RequestPredicate_monotone",
+        "PNP.DirectWire.terminalBN3RequestPredicate_stable",
+        "PNP.DirectWire.terminalBN3MinimalConsumer_exact",
+        "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.mem_activeRequestAtoms_iff_properCut",
+        "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.activeRequestAtoms_nodup",
+        "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.canonicalRequestBasis_jointlySideTight",
+        "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.computedBN3RequestEnvelope",
+        "PNP.DirectWire.classifyTerminalBN3RequestEnvelope_exhaustive"
+      ],
+      "scope": "From every successful computed finite BCEL anchor nucleus, Lean uses one canonical duplicate-free primitive-record identity list across every proper cut; gives exact executable monotone request membership stable under extensional transport and exact singleton minimal consumers; accounts active incidences without duplicates; selects one canonical full or quotient side-tight coherent basis for every proper cut; and preserves all upstream proof-bearing classifier failures in a total outcome.",
+      "title": "Candidate-derived finite BN3 request envelope"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -6122,7 +6153,7 @@
     {
       "classification": "not-formalized",
       "id": "global-zeroslack-pccmin",
-      "nonClaim": "Per-cut BN2 basis existence does not construct the cross-cut-stable BN3 request envelope. The pinned legacy package checks an asserted jointSideTightRealizability Boolean rather than an executable uniform construction, so proof-bearing result structures and explicit-list failure still do not supply global ZeroSlack or polynomial PCCMin completeness.",
+      "nonClaim": "The finite candidate-derived BN3 envelope now supplies stable request identities, exact minimal consumers, duplicate-free incidence, and one jointly side-tight canonical basis family after a successful computed BCEL nucleus. Its exhaustive proper-cut enumeration is exponential and it does not construct BN4-BN6, map all residual routes into a decreasing complete global outcome system, or provide selector/realizer and polynomial-runtime completeness; global ZeroSlack and polynomial PCCMin therefore remain unformalized.",
       "requiredTheorems": [
         "PNP.Main.pccmin_polynomial_exact",
         "PNP.Main.zero_slack_complete"

@@ -125,34 +125,34 @@ shortcuts, and reduction overclaims.
 ## Mechanically generated publication evidence
 
 Inventory coordinate
-`PNP-LEAN-THEOREM-INVENTORY-2026-08-10-122` records 26,540 declarations,
-13,884 theorems, 7,159 assumption-free theorems, 14,935 excluded private
-declarations, 240 source-closure modules, and 2,487 reviewed milestone
-candidates. The canonical inventory is 17,207,898 bytes with SHA-256
-`f86ecb4b91dcc4bbd6988aba15b03dc5998a965dc21aabf830d40b41c871f434`.
+`PNP-LEAN-THEOREM-INVENTORY-2026-08-11-123` records 26,624 declarations,
+13,928 theorems, 7,165 assumption-free theorems, 14,939 excluded private
+declarations, 241 source-closure modules, and 2,498 reviewed milestone
+candidates. The canonical inventory is 17,275,021 bytes with SHA-256
+`231781715e011ebf8b583ce3c26f9896622d6962faaf8fcebd68f36e511ea003`.
 The reviewed Lean source-closure SHA-256 is
-`6adc25ee3d9920358ea8803adf47ab94d8e70c91026b8756bb45dbad1dda577d`.
+`e30716e5e6ec0ad0f7c084a66d9ff28c1a8cf5a7008b5fc8caff81205e51eb15`.
 
 Publication map coordinate
-`PNP-FORMAL-PUBLICATION-MAP-2026-08-11-123` contains 101 milestones: 99
+`PNP-FORMAL-PUBLICATION-MAP-2026-08-11-124` contains 102 milestones: 99
 earned and two deliberately unearned. It pins eleven theorem types for
 `concrete-locked-nand-encoded-semantic-boundary`; the complete pin inventory
-contains 2,487 theorem types. The map is 805,053 bytes with SHA-256
-`531a4dbd6d7925582aed1e6011d917e8dfdaf5576e1c259f63cd76a897d2aa5c`.
+contains 2,498 theorem types. The map is 809,177 bytes with SHA-256
+`96e4a8b21a717e2190b5eed64ed50f27402b7690b7b80a52bb98782984f54258`.
 
 Status coordinate
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-123` records the semantic
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-124` records the semantic
 boundary fields as true while retaining all four project assumptions, all six
 blockers, unset activation fingerprints, an absent `PNP.Main.p_eq_np`, and a
-false concrete publication gate. The status is 2,024,772 bytes with SHA-256
-`cb5b4146385a6aa8d91fc1778007e7ea418a382237d5e706277c2d7a362172ac`.
+false concrete publication gate. The status is 2,034,357 bytes with SHA-256
+`0f3e05664980c80d3c8a9fb5cceb4cb10cefaa05a96ea2d0f523c2663956fbc3`.
 
 Canonical report coordinate
-`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-10-122` has a
-209,712-byte TeX source with SHA-256
-`924606c880420091e8aff17f185ea52e8080c7729c3a1fba520f678e848be83a`
-and an 82-page, 447,683-byte PDF with SHA-256
-`44d07e868371fedb86f48492f857a26d9a38b86b9b8e81a2ace8ba13c96eeafe`.
+`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-11-124` has a
+211,420-byte TeX source with SHA-256
+`b81fbdd17af61400d2883493ee90417affddd37f5d23567ede3d808bb417b0e2`
+and an 82-page, 449,511-byte PDF with SHA-256
+`e998779d189f762ffcbcdb82b51de8a15bd0c7c8e4be6d463d5c833323ae45ef`.
 
 ## Exact boundary and strategic next step
 

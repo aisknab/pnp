@@ -1384,17 +1384,26 @@ completeness, Package E, full `SaturatePositive`, `BCELReady`, ZeroSlack,
 PCCMin, polynomial runtime, and the root theorem remain open. See
 [`lean_residual_terminal_rank_wf.md`](./lean_residual_terminal_rank_wf.md).
 
-The next global step cannot be inferred from that local BN2/RankWF stack. The
-pinned `BN3-SimultaneousEnvelope` text requires request identities and
-activation predicates that are stable across every proper cut, together with a
-jointly side-tight realization. The current BN2 results supply a basis for each
-local square under route silence; they do not construct that stable family.
-`lean-regression/PNPBN3JointRealizabilityGap.lean` gives a kernel-checkable
-two-cut boundary witness: every cut has a realizing basis, while no realizing
-selection can satisfy the required cross-cut stability predicate. This records
-a missing inference, not a counterexample to a future candidate-derived BN3
-theorem. The required uniform construction and concrete polynomial machine are
-still absent, so the global ZeroSlack/PCCMin milestone remains unearned. See
+`ResidualTerminalBN3RequestEnvelope` now repairs that inference at the finite
+candidate-derived boundary. After the existing computed BCEL anchor-nucleus
+classifier succeeds, the nucleus's canonically ordered primitive records form
+one duplicate-free request identity list for every proper cut. Exact membership
+is executable, monotone, stable under extensional transport, and represented by
+a singleton minimal consumer. Filtering that one list gives exact,
+duplicate-free active incidence. One canonical selection function then chooses
+the existing full or quotient BN2 basis for every proper cut and proves every
+choice side-tight and coherent. A total wrapper retains each upstream
+proof-bearing failure branch unchanged. See
+[`lean_residual_terminal_bn3_request_envelope.md`](./lean_residual_terminal_bn3_request_envelope.md).
+
+The separate `PNPBN3JointRealizabilityGap` witness remains important: arbitrary
+per-cut basis existence still cannot imply a stable family. The new theorem
+avoids that invalid inference by deriving the identities and bases from one
+successful computed nucleus. Its proper-cut scan enumerates all subsets, so it
+is exponential reference computation rather than a concrete polynomial
+machine. BN4–BN6, complete decreasing route coverage, selector/realizer
+closure, global ZeroSlack, and polynomial PCCMin are still absent; both global
+publication milestones therefore remain unearned. See
 [`bn3_joint_realizability_gap.md`](../review/bn3_joint_realizability_gap.md).
 
 ## The only acceptable future activation gate
