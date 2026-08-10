@@ -3049,3 +3049,9 @@ jobs:
 
       - name: Run residual terminal RankWF hostile audit
         run: node --test audits/lean-residual-terminal-rank-wf0.test.mjs
+
+      - name: Check BN3 joint-realizability logical boundary
+        run: lake env lean -DwarningAsError=true lean-regression/PNPBN3JointRealizabilityGap.lean
+
+      - name: Run BN3 joint-realizability gap audit
+        run: node --test audits/bn3-joint-realizability-gap0.test.mjs

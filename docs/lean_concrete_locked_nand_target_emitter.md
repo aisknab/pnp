@@ -120,9 +120,9 @@ node --test audits/lean-concrete-locked-nand-target-emitter0.test.mjs
 - Lean inventory:
   `PNP-LEAN-THEOREM-INVENTORY-2026-08-10-122`
 - publication map:
-  `PNP-FORMAL-PUBLICATION-MAP-2026-08-10-122`
+  `PNP-FORMAL-PUBLICATION-MAP-2026-08-11-123`
 - reconstruction status:
-  `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-10-122`
+  `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-123`
 - public surface:
   `PUBLIC-SURFACE-BASELINE-2026-08-10-CONCRETE-LOCKED-NAND-THRESHOLD-121`
 - canonical report:

@@ -151,7 +151,7 @@ the Lean source-closure SHA-256 is
 `6adc25ee3d9920358ea8803adf47ab94d8e70c91026b8756bb45dbad1dda577d`.
 
 Publication map coordinate
-`PNP-FORMAL-PUBLICATION-MAP-2026-08-10-122` contains 101 milestones: 99
+`PNP-FORMAL-PUBLICATION-MAP-2026-08-11-123` contains 101 milestones: 99
 earned and two deliberately unearned. The new
 `locked-nand-global-semantic-threshold` milestone pins the seven new theorem
 types plus the reused exact unsatisfiable-minimum theorem. The generated map
@@ -159,7 +159,7 @@ is 805,053 bytes with SHA-256
 `531a4dbd6d7925582aed1e6011d917e8dfdaf5576e1c259f63cd76a897d2aa5c`.
 
 Status coordinate
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-10-122` sets the semantic-threshold,
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-123` sets the semantic-threshold,
 six-field-package, derived-final-output, and residual-at-most-four evidence
 fields true. It retains all four project assumptions, all five blockers,
 unset activation fingerprints, an absent `PNP.Main.p_eq_np`, and a false

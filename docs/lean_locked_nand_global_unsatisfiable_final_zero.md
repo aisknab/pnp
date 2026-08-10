@@ -104,5 +104,5 @@ publication gate remains false.
 
 The current successor evidence is recorded at inventory coordinate
 `PNP-LEAN-THEOREM-INVENTORY-2026-08-10-122` and status coordinate
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-10-122`; see
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-123`; see
 [Lean locked-NAND global semantic threshold](./lean_locked_nand_global_semantic_threshold.md).
