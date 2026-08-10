@@ -367,7 +367,7 @@ test('status earns the narrow edge without widening global claims', async () => 
   assert.equal(status.mathematicalTheoremEstablished, false);
   assert.equal(status.publicTheoremEmissionAllowed, false);
   assert.equal(status.finalTheoremReady, false);
-  assert.equal(status.remainingBlockers.length, 6);
+  assert.equal(status.remainingBlockers.length, 5);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);
 });

@@ -377,7 +377,7 @@ test('status earns finite composition without widening the global claim', async 
   assert.equal(status.mathematicalTheoremEstablished, false);
   assert.equal(status.publicTheoremEmissionAllowed, false);
   assert.equal(status.finalTheoremReady, false);
-  assert.equal(status.remainingBlockers.length, 6);
+  assert.equal(status.remainingBlockers.length, 5);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);
 });

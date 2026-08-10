@@ -124,6 +124,7 @@ on:
       - 'audits/lean-concrete-locked-nand-polynomial-reduction0.test.mjs'
       - 'audits/lean-concrete-cnf-to-nand0.test.mjs'
       - 'audits/lean-concrete-cnf-to-nand-polynomial-reduction0.test.mjs'
+      - 'audits/lean-concrete-locked-nand-threshold-publication0.test.mjs'
       - 'audits/lean-residual-routes0.test.mjs'
       - 'audits/lean-residual-gain-chain0.test.mjs'
       - 'audits/lean-residual-gain-stopping0.test.mjs'
@@ -378,6 +379,7 @@ on:
       - 'audits/lean-concrete-locked-nand-polynomial-reduction0.test.mjs'
       - 'audits/lean-concrete-cnf-to-nand0.test.mjs'
       - 'audits/lean-concrete-cnf-to-nand-polynomial-reduction0.test.mjs'
+      - 'audits/lean-concrete-locked-nand-threshold-publication0.test.mjs'
       - 'audits/lean-residual-routes0.test.mjs'
       - 'audits/lean-residual-gain-chain0.test.mjs'
       - 'audits/lean-residual-gain-stopping0.test.mjs'
@@ -2391,6 +2393,18 @@ jobs:
 
       - name: Run all-input CNF-to-NAND polynomial-reduction hostile audit
         run: node --test audits/lean-concrete-cnf-to-nand-polynomial-reduction0.test.mjs
+
+      - name: Print report-facing concrete locked-NAND threshold axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDThresholdPublicationAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound|propext, Quot\.sound|Quot\.sound, propext)\]$' || true)"
+          test -z "$unexpected"
+          test "$(printf '%s\n' "$audit_output" | grep -Fc "'PNP.Main.locked_nand_threshold'")" -eq 1
+
+      - name: Run report-facing concrete locked-NAND threshold hostile audit
+        run: node --test audits/lean-concrete-locked-nand-threshold-publication0.test.mjs
 
       - name: Print explicit-list residual-route axioms
         run: |

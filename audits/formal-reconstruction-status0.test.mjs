@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-10-121');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-10-122');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -694,11 +694,11 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanConcreteCNFToNANDPolynomialReductionScope,
     'fixed-135070-rule-three-node-all-bitstring-cnf-to-nand-compiler-with-exact-output-polynomial-time-function-direct-reduction-locked-threshold-composition-and-recursive-raw-refinement',
   );
-  assert.equal(out.leanLockedNANDPolynomialBuilderFormalized, false);
+  assert.equal(out.leanLockedNANDPolynomialBuilderFormalized, true);
   assert.equal(out.leanCompatibleReplacementFormalized, false);
   assert.equal(out.leanGlobalSlackLawFormalized, false);
-  assert.equal(out.leanLockedNANDBuilderFormalized, false);
-  assert.equal(out.leanLockedNANDThresholdFormalized, false);
+  assert.equal(out.leanLockedNANDBuilderFormalized, true);
+  assert.equal(out.leanLockedNANDThresholdFormalized, true);
   for (const field of [
     'leanResidualRoutesListedGainScanFormalized',
     'leanResidualRoutesAxiomAuditPassed',
@@ -1012,7 +1012,7 @@ test('formal reconstruction status accepts the current source and public mirrors
   ]);
   assert.equal(out.externalReviewIsMathematicalPremise, false);
   assert.deepEqual(out.remainingBlockers, FORMAL_RECONSTRUCTION_BLOCKERS0);
-  assert.equal(out.remainingBlockers.length, 6);
+  assert.equal(out.remainingBlockers.length, 5);
   assert.equal(out.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), false);
   assert.equal(out.remainingBlockers.includes('Formal.PinnedLeanBuildAndRootTarget'), false);
   assert.match(out.statusSha256, /^[0-9a-f]{64}$/u);
@@ -1021,13 +1021,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 26539);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 13883);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 26540);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 13884);
   assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7159);
   assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14935);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 239);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 240);
   assert.equal(status.leanSourceClosureSha256,
-    'd525c3be0e63e15f8a4336d785651f1d1fdef3dc867d2956302da34a947e85d6');
+    '6adc25ee3d9920358ea8803adf47ab94d8e70c91026b8756bb45dbad1dda577d');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -1449,7 +1449,7 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
 test('formal status records the exhaustive direct-wire reference minimum conservatively', async () => {
   const status = await currentStatus0();
 
-  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-10-RESIDUAL-RANK-WF-120');
+  assert.equal(status.publicSurfaceBaselineCoordinate, 'PUBLIC-SURFACE-BASELINE-2026-08-10-CONCRETE-LOCKED-NAND-THRESHOLD-121');
   assert.equal(status.leanNANDDirectWireCoreFormalized, true);
   assert.equal(status.leanNANDDirectWireCoreAxiomAuditPassed, true);
   assert.equal(status.leanNANDEnumeratorFormalized, true);
@@ -1630,11 +1630,11 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
     status.leanConcreteCNFToNANDPolynomialReductionScope,
     'fixed-135070-rule-three-node-all-bitstring-cnf-to-nand-compiler-with-exact-output-polynomial-time-function-direct-reduction-locked-threshold-composition-and-recursive-raw-refinement',
   );
-  assert.equal(status.leanLockedNANDPolynomialBuilderFormalized, false);
+  assert.equal(status.leanLockedNANDPolynomialBuilderFormalized, true);
   assert.equal(status.leanCompatibleReplacementFormalized, false);
   assert.equal(status.leanGlobalSlackLawFormalized, false);
-  assert.equal(status.leanLockedNANDBuilderFormalized, false);
-  assert.equal(status.leanLockedNANDThresholdFormalized, false);
+  assert.equal(status.leanLockedNANDBuilderFormalized, true);
+  assert.equal(status.leanLockedNANDThresholdFormalized, true);
   assert.equal(status.leanResidualRoutesListedGainScanFormalized, true);
   assert.equal(status.leanResidualRoutesAxiomAuditPassed, true);
   assert.equal(status.leanResidualRoutesGainSoundnessFormalized, true);
@@ -2043,7 +2043,7 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
     'satisfiableFinalConditions',
   ]);
   assert.deepEqual(status.leanLockedNANDThresholdMissingInstantiationInventory, []);
-  assert.equal(status.remainingBlockers.includes('Formal.LockedNANDThreshold'), true);
+  assert.equal(status.remainingBlockers.includes('Formal.LockedNANDThreshold'), false);
 });
 
 test('formal status records a pinned Lean library root without claiming a root theorem', async () => {
@@ -2427,15 +2427,12 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
   }
 });
 
-test('formal reconstruction status rejects unearned broad downstream NAND claims', async () => {
+test('formal reconstruction status rejects unearned downstream claims', async () => {
   const fields = [
     'leanNANDEnumeratorDeduplicated',
     'leanNANDReferenceMinimumPolynomialRuntimeProved',
-    'leanLockedNANDPolynomialBuilderFormalized',
     'leanCompatibleReplacementFormalized',
     'leanGlobalSlackLawFormalized',
-    'leanLockedNANDBuilderFormalized',
-    'leanLockedNANDThresholdFormalized',
     'leanResidualRoutesCandidateListCompletenessFormalized',
     'leanResidualRoutesGlobalGainCompletenessFormalized',
     'leanResidualGainChainPolynomialRuntimeFormalized',
@@ -2458,9 +2455,9 @@ test('formal reconstruction status rejects unearned broad downstream NAND claims
   }
 });
 
-test('formal reconstruction status rejects removing the locked NAND threshold blocker', async () => {
+test('formal reconstruction status rejects restoring the discharged locked NAND blocker', async () => {
   const status = await currentStatus0();
-  status.remainingBlockers = status.remainingBlockers.filter((entry) => entry !== 'Formal.LockedNANDThreshold');
+  status.remainingBlockers = [...status.remainingBlockers, 'Formal.LockedNANDThreshold'];
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false, statusOverride: status, siteOverride: status });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'FormalReconstructionStatus.Blockers');

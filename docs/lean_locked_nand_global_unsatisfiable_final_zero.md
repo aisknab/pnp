@@ -99,10 +99,10 @@ Its 63-page, 402,956-byte PDF has SHA-256
 `9d0743f86dd9da269d6244a543a1c4a21a2ede2b7cfdc5508875b17c7ae8f4ad`.
 
 All five activation fingerprints remain unset, all four project assumptions
-and six blockers remain, `PNP.Main.p_eq_np` remains absent, and the concrete
+and five blockers remain, `PNP.Main.p_eq_np` remains absent, and the concrete
 publication gate remains false.
 
 The current successor evidence is recorded at inventory coordinate
-`PNP-LEAN-THEOREM-INVENTORY-2026-08-10-121` and status coordinate
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-10-121`; see
+`PNP-LEAN-THEOREM-INVENTORY-2026-08-10-122` and status coordinate
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-10-122`; see
 [Lean locked-NAND global semantic threshold](./lean_locked_nand_global_semantic_threshold.md).

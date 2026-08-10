@@ -417,7 +417,7 @@ test('root, status, milestone, workflow, and documentation publish only the sema
       true,
     );
     assert.equal(status.projectSpecificAxiomInventory.length, 4);
-    assert.equal(status.remainingBlockers.length, 6);
+    assert.equal(status.remainingBlockers.length, 5);
     assert.equal(status.rootLeanTheoremPresent, false);
     assert.equal(status.concretePublicationGate.passed, false);
 
@@ -434,8 +434,10 @@ test('root, status, milestone, workflow, and documentation publish only the sema
         name,
       );
     }
+    assert.equal(status.formalPublicationMilestones.find(
+      (row) => row.id === 'global-locked-nand-threshold',
+    )?.earned, true);
     for (const id of [
-      'global-locked-nand-threshold',
       'global-zeroslack-pccmin',
       'concrete-publication-root',
     ]) {

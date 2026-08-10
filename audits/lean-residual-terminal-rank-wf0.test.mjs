@@ -323,7 +323,7 @@ test('publication and status earn only the fixed RankWF milestone', async () => 
   assert.equal(status.leanBCELReadyFormalized, false);
   assert.equal(status.mathematicalTheoremEstablished, false);
   assert.equal(status.publicTheoremEmissionAllowed, false);
-  assert.equal(status.remainingBlockers.length, 6);
+  assert.equal(status.remainingBlockers.length, 5);
   assert.match(docs, /Residual terminal `RankWF`/u);
   assert.match(docs, /does not map the current finite terminal routes/u);
 });

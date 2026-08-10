@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-10-121",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-10-122",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2412,6 +2412,7 @@
     "PNP.DirectWire.unresolved_positiveSlack_regression": "db564cb64914fa82c134c8e4e2dfbef40a143e1fe78b2ceb8f81dece3b895977",
     "PNP.DirectWire.WholeSpanResidualWitness.strictResidualDescent": "bbeb896c3ba81d61e882ef600de8617bae37133f66c8cb7f905ebaa65d5460ce",
     "PNP.Main.concretePEqualsNP_iff": "66d644a7be721e907db2bf854137ac76150c5ad3284aca8fccad8b7ee36ca364",
+    "PNP.Main.locked_nand_threshold": "951ec63c09e9a096aacc26332a97607dade4a1f412229f9185aff5c7f36aa591",
     "PNP.DirectWire.TerminalOptimumCoherenceMode.minimumAt_le_current": "6c4809c980c1db6594fcf6f245e24dbc193fa9c846635c3f9bdbbb1499df8aaa",
     "PNP.DirectWire.mem_allBoundedCandidates": "32b216ecf3faa1be6eb7d6e9f3f32f3de24ed3b5d3d49e1c303a38cad32f6aae",
     "PNP.DirectWire.TerminalProjectionFourCorners.mem_minimumImplementationsAt_sound": "3d49ba6e76035e93207da04f7cc351cedf024d30efcb5a826f6d34552f6a64a5",
@@ -2504,7 +2505,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "d525c3be0e63e15f8a4336d785651f1d1fdef3dc867d2956302da34a947e85d6",
+  "milestoneSourceClosureSha256": "6adc25ee3d9920358ea8803adf47ab94d8e70c91026b8756bb45dbad1dda577d",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -6109,9 +6110,9 @@
       "title": "Residual terminal RankWF"
     },
     {
-      "classification": "not-formalized",
+      "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
-      "nonClaim": "The strict encoding, total source parser, literal target emitter, exact formula bytes, strict parser/emitter composition, polynomial runtime, output-size bound, recursive RawRefinement, concrete strict-v0 source-to-target PolynomialReduction, semantic CNF-to-NAND compiler, and its all-input finite-machine PolynomialReduction are now formalized. The concrete target language is still not linked to the report-level theorem, and the abstract threshold assumption remains.",
+      "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
       "requiredTheorems": [
         "PNP.Main.locked_nand_threshold"
       ],

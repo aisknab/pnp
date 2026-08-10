@@ -2549,7 +2549,8 @@ private def reviewedMilestoneTheoremNames : Array Name := #[
   `PNP.DirectWire.terminalize_implementation,
   `PNP.DirectWire.traceDirect_referenceMinimum,
   `PNP.DirectWire.unresolved_positiveSlack_regression,
-  `PNP.Main.concretePEqualsNP_iff
+  `PNP.Main.concretePEqualsNP_iff,
+  `PNP.Main.locked_nand_threshold
 ]
 
 private def inventory : CommandElabM Json := do
@@ -2608,7 +2609,7 @@ private def inventory : CommandElabM Json := do
   return Json.mkObj [
     ("kind", toJson "PNPLeanTheoremInventory0"),
     ("version", toJson 0),
-    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-08-10-121"),
+    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-08-10-122"),
     ("leanToolchain", toJson "leanprover/lean4:v4.31.0"),
     ("rootModule", toJson "PNP"),
     ("environmentProbeComplete", toJson true),

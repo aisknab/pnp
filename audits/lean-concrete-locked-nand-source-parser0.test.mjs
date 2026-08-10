@@ -408,7 +408,7 @@ test('root, publication, status, workflow, and documentation bind the parser',
       printed.length,
     );
     assert.equal(status.projectSpecificAxiomInventory.length, 4);
-    assert.equal(status.remainingBlockers.length, 6);
+    assert.equal(status.remainingBlockers.length, 5);
     assert.equal(status.rootLeanTheoremPresent, false);
     assert.equal(status.concretePublicationGate.passed, false);
 

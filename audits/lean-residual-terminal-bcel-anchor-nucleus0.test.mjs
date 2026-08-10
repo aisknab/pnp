@@ -440,7 +440,7 @@ test('status earns the scoped anchor edge without widening global claims', async
     /positive-whole-support-projection-defect/u);
   assert.equal(status.leanSaturatePositiveFormalized, false);
   assert.equal(status.leanBCELReadyFormalized, false);
-  assert.equal(status.remainingBlockers.length, 6);
+  assert.equal(status.remainingBlockers.length, 5);
   assert.equal(status.projectSpecificAxiomInventory.length, 4);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);
