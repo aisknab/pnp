@@ -1,6 +1,6 @@
 # BN3 joint-realizability gap
 
-Status: **missing obligation; milestone not earned**
+Status: **finite candidate-derived repair earned; global milestone not earned**
 
 This finding audits the pinned legacy report at tag
 `final-pnp-proof-report-docs-hardened-7072f8d-sealed`, Section
@@ -39,26 +39,30 @@ PNP.DirectWire.BN3Gap.twoCut_noStableRealizingFamily
 PNP.DirectWire.BN3Gap.perCutRealizable_not_uniformly_sufficient
 ```
 
-This is not a counterexample to a future circuit-specific BN3 theorem.  It is
-a countermodel to the inference from per-cut existence alone.  A valid repair
-must add and prove the missing candidate-derived coherence lemma.
+This is not a counterexample to a circuit-specific BN3 theorem. It is a
+countermodel to the inference from per-cut existence alone.
 
-## Required repair
+`PNP.ResidualTerminalBN3RequestEnvelope` now supplies a finite
+candidate-derived repair after the computed BCEL anchor-nucleus classifier
+succeeds. It derives one canonical request-atom list, exact monotone and stable
+membership predicates, singleton minimal consumers, duplicate-free exact
+incidence, and one canonical full/quotient side-tight basis family. The repair
+does not use the historical assertion Boolean or a caller certificate.
 
-An earning proof for `global-zeroslack-pccmin` must provide, without a caller
-certificate, assertion Boolean, exact-minimization oracle, or finite-instance
-list:
+## Remaining global repair
 
-1. one canonical request-atom identity space derived from every encoded
-   residual candidate;
-2. stable monotone request predicates across all proper cuts and transports;
-3. a jointly side-tight realization theorem connecting those identities to
-   the existing BN2 carrier bases;
-4. exact, duplicate-free incidence accounting for every cut;
-5. a concrete polynomial enumeration and runtime bound in the repository's
-   finite-machine complexity model.
+An earning proof for `global-zeroslack-pccmin` must still provide, without a
+caller certificate, assertion Boolean, exact-minimization oracle, or
+finite-instance list:
 
-Only then can BN4–BN6, selector completeness, Realizer/HB closure, global
-ZeroSlack, and polynomial PCCMin consume the result.  Until that repair exists,
+1. a route-complete construction reaching the successful finite nucleus for
+   every encoded residual candidate or returning a globally consuming route;
+2. BN4–BN6 and selector/realizer closure consuming the finite BN3 envelope;
+3. a proof that the global route system strictly decreases the fixed RankWF;
+4. a concrete polynomial enumeration and runtime bound in the repository's
+   finite-machine complexity model, replacing the current all-subsets scan.
+
+Only then can global ZeroSlack and polynomial PCCMin consume the finite result.
+Until that repair exists,
 `PNP.Main.zero_slack_complete` and `PNP.Main.pccmin_polynomial_exact` must
 remain absent and the publication milestone must remain unearned.

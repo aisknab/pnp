@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-123",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-124",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -830,6 +830,9 @@
   "leanResidualTerminalRankWFFormalized": true,
   "leanResidualTerminalRankWFAxiomAuditPassed": true,
   "leanResidualTerminalRankWFScope": "fixed-ten-coordinate-natural-lexicographic-order-executable-comparison-accessibility-induction-and-kernel-well-foundedness",
+  "leanResidualTerminalBN3RequestEnvelopeFormalized": true,
+  "leanResidualTerminalBN3RequestEnvelopeAxiomAuditPassed": true,
+  "leanResidualTerminalBN3RequestEnvelopeScope": "successful-computed-finite-bcel-anchor-nuclei-canonical-stable-request-identities-exact-singleton-minimal-consumers-duplicate-free-incidence-and-jointly-side-tight-full-or-quotient-basis-family",
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -1294,6 +1297,9 @@
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFourCornerOptimumCompatibility.lean",
     "node --test audits/lean-residual-terminal-four-corner-optimum-compatibility0.test.mjs",
     "node --test audits/lean-residual-terminal-frontier-pushout0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBN3RequestEnvelopeAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBN3RequestEnvelope.lean",
+    "node --test audits/lean-residual-terminal-bn3-request-envelope0.test.mjs",
     "lake env lean -DwarningAsError=true lean-regression/PNPBN3JointRealizabilityGap.lean",
     "node --test audits/bn3-joint-realizability-gap0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
@@ -1304,7 +1310,7 @@
   "nonClaims": [
     "The repository does not currently establish P = NP.",
     "Legacy JavaScript checker acceptance verifies assertion-bearing records under implemented predicates; it is not a formal proof of the named mathematical propositions.",
-    "The BN3 joint-realizability gap is now pinned by a kernel-checkable logical boundary witness: per-cut side-tight existence does not by itself construct a cross-cut-stable realizing family. This is a missing-lemma witness, not a counterexample to a future candidate-derived BN3 theorem; global ZeroSlack and polynomial PCCMin remain unformalized.",
+    "The BN3 joint-realizability gap still shows that arbitrary per-cut side-tight existence cannot imply a stable family. The successful computed BCEL nucleus now has a candidate-derived finite repair with canonical request identities, exact minimal consumers, duplicate-free incidence, and one jointly side-tight basis selection function, but its all-subsets enumeration is exponential and does not supply BN4-BN6 or global ZeroSlack and polynomial PCCMin completeness.",
     "The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.",
     "The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.",
     "Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.",
@@ -1463,7 +1469,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "6adc25ee3d9920358ea8803adf47ab94d8e70c91026b8756bb45dbad1dda577d",
+    "actualSourceClosureSha256": "e30716e5e6ec0ad0f7c084a66d9ff28c1a8cf5a7008b5fc8caff81205e51eb15",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1493,22 +1499,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-10-122",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-11-123",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "f86ecb4b91dcc4bbd6988aba15b03dc5998a965dc21aabf830d40b41c871f434",
+  "leanTheoremInventorySha256": "231781715e011ebf8b583ce3c26f9896622d6962faaf8fcebd68f36e511ea003",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 26540,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 14935,
-  "leanTheoremInventoryTheoremCount": 13884,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 7159,
-  "leanTheoremInventorySourceClosureModuleCount": 240,
-  "leanSourceClosureSha256": "6adc25ee3d9920358ea8803adf47ab94d8e70c91026b8756bb45dbad1dda577d",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-11-123",
+  "leanTheoremInventoryDeclarationCount": 26624,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 14939,
+  "leanTheoremInventoryTheoremCount": 13928,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 7165,
+  "leanTheoremInventorySourceClosureModuleCount": 241,
+  "leanSourceClosureSha256": "e30716e5e6ec0ad0f7c084a66d9ff28c1a8cf5a7008b5fc8caff81205e51eb15",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-11-124",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "904a1e65da26d730de3411f5d45fb927311234d2b21538b1edf65921421e9ff7",
+  "formalPublicationMapSha256": "96e4a8b21a717e2190b5eed64ed50f27402b7690b7b80a52bb98782984f54258",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -36685,6 +36691,160 @@
       "status": "formalized-residual-terminal-rank-wf"
     },
     {
+      "classification": "formalized-residual-terminal-bn3-request-envelope",
+      "id": "residual-terminal-bn3-request-envelope",
+      "nonClaim": "This establishes one exact candidate-derived finite BN3 envelope only after the existing computed BCEL anchor-nucleus classifier succeeds. Proper cuts are enumerated through all subsets, so the construction is exponential reference computation rather than a polynomial algorithm. It does not derive the terminal dependency system, map local routes into the manuscript's complete global outcome system, construct BN4-BN6, prove selector or realizer completeness, establish global ZeroSlack or PCCMin, prove SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalListSubsets_sublist",
+        "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.requestAtoms_nodup",
+        "PNP.DirectWire.terminalBN3RequestPredicateBool_eq_true_iff",
+        "PNP.DirectWire.terminalBN3RequestPredicate_monotone",
+        "PNP.DirectWire.terminalBN3RequestPredicate_stable",
+        "PNP.DirectWire.terminalBN3MinimalConsumer_exact",
+        "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.mem_activeRequestAtoms_iff_properCut",
+        "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.activeRequestAtoms_nodup",
+        "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.canonicalRequestBasis_jointlySideTight",
+        "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.computedBN3RequestEnvelope",
+        "PNP.DirectWire.classifyTerminalBN3RequestEnvelope_exhaustive"
+      ],
+      "scope": "From every successful computed finite BCEL anchor nucleus, Lean uses one canonical duplicate-free primitive-record identity list across every proper cut; gives exact executable monotone request membership stable under extensional transport and exact singleton minimal consumers; accounts active incidences without duplicates; selects one canonical full or quotient side-tight coherent basis for every proper cut; and preserves all upstream proof-bearing classifier failures in a total outcome.",
+      "title": "Candidate-derived finite BN3 request envelope",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.terminalListSubsets_sublist",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ea0fefb3d241ebd81df124fbdb49a8409c1e6e77a111af3b6d4755e78c0c4d75",
+          "expectedKernelTypeSha256": "ea0fefb3d241ebd81df124fbdb49a8409c1e6e77a111af3b6d4755e78c0c4d75",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.requestAtoms_nodup",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "70d9d0ef627ae3aee1ec6acd2c18851d0ff7b95205b10b44d2a94bf1a10c0782",
+          "expectedKernelTypeSha256": "70d9d0ef627ae3aee1ec6acd2c18851d0ff7b95205b10b44d2a94bf1a10c0782",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBN3RequestPredicateBool_eq_true_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d23816d817a4215617f422ba2115ef3479ad37d3874677a233d95d394420a845",
+          "expectedKernelTypeSha256": "d23816d817a4215617f422ba2115ef3479ad37d3874677a233d95d394420a845",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBN3RequestPredicate_monotone",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "46738bea433318a3dd0010b1f7fa4a2c7a459e1f1c9e0afc4a3689f102a69bdf",
+          "expectedKernelTypeSha256": "46738bea433318a3dd0010b1f7fa4a2c7a459e1f1c9e0afc4a3689f102a69bdf",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBN3RequestPredicate_stable",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "764cfe5b3bc264ca81e21e70e7e37126cc0b0364c3ddef55ad697d04e74b0da4",
+          "expectedKernelTypeSha256": "764cfe5b3bc264ca81e21e70e7e37126cc0b0364c3ddef55ad697d04e74b0da4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBN3MinimalConsumer_exact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a1189497569adab96a59946dd9d36f8a29d2e42f032edeac1b3fff4730c27cc4",
+          "expectedKernelTypeSha256": "a1189497569adab96a59946dd9d36f8a29d2e42f032edeac1b3fff4730c27cc4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.mem_activeRequestAtoms_iff_properCut",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "28274a11c24513babce9f9e4c688d850cd5cb0bf4d7c9651bb57271ec1b146b0",
+          "expectedKernelTypeSha256": "28274a11c24513babce9f9e4c688d850cd5cb0bf4d7c9651bb57271ec1b146b0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.activeRequestAtoms_nodup",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "10d73bb885691775aa9ad252db596e67947b09caf7bf57cb64bb8abff1872f01",
+          "expectedKernelTypeSha256": "10d73bb885691775aa9ad252db596e67947b09caf7bf57cb64bb8abff1872f01",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.canonicalRequestBasis_jointlySideTight",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "67b597e0839d1fccc67284f54d88fb1fcc8990a5fe42360ea07992525b752a68",
+          "expectedKernelTypeSha256": "67b597e0839d1fccc67284f54d88fb1fcc8990a5fe42360ea07992525b752a68",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.computedBN3RequestEnvelope",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f07860cfece7a85bb738c2b951cd6b43b92bbd5ce6365d520888a011b1069ed0",
+          "expectedKernelTypeSha256": "f07860cfece7a85bb738c2b951cd6b43b92bbd5ce6365d520888a011b1069ed0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.classifyTerminalBN3RequestEnvelope_exhaustive",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c88c263df187c383ee764d7c39926988cd8994bb894c33aa7482b2924c53c8de",
+          "expectedKernelTypeSha256": "c88c263df187c383ee764d7c39926988cd8994bb894c33aa7482b2924c53c8de",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-bn3-request-envelope"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -36718,7 +36878,7 @@
     {
       "classification": "not-formalized",
       "id": "global-zeroslack-pccmin",
-      "nonClaim": "Per-cut BN2 basis existence does not construct the cross-cut-stable BN3 request envelope. The pinned legacy package checks an asserted jointSideTightRealizability Boolean rather than an executable uniform construction, so proof-bearing result structures and explicit-list failure still do not supply global ZeroSlack or polynomial PCCMin completeness.",
+      "nonClaim": "The finite candidate-derived BN3 envelope now supplies stable request identities, exact minimal consumers, duplicate-free incidence, and one jointly side-tight canonical basis family after a successful computed BCEL nucleus. Its exhaustive proper-cut enumeration is exponential and it does not construct BN4-BN6, map all residual routes into a decreasing complete global outcome system, or provide selector/realizer and polynomial-runtime completeness; global ZeroSlack and polynomial PCCMin therefore remain unformalized.",
       "requiredTheorems": [
         "PNP.Main.pccmin_polynomial_exact",
         "PNP.Main.zero_slack_complete"
@@ -36782,7 +36942,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-11-123",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-11-124",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

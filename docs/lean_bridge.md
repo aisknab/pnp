@@ -1213,6 +1213,18 @@ must carry the relation proposition. This is `RankWF` only: the current finite
 routes have not been mapped to the complete global outcome system or proved to
 decrease this rank. See `docs/lean_residual_terminal_rank_wf.md`.
 
+`lean/PNP/ResidualTerminalBN3RequestEnvelope.lean` constructs a finite BN3
+request envelope after the computed BCEL anchor-nucleus classifier succeeds.
+One canonical duplicate-free primitive-record list supplies stable monotone
+membership requests and exact singleton minimal consumers across every proper
+cut. Filtering it gives exact duplicate-free incidence, while one canonical
+full/quotient basis function is proved side-tight and coherent at every proper
+cut. The total classifier retains all existing proof-bearing failure branches.
+Its all-subsets cut enumeration is exponential, and it does not construct
+BN4–BN6, complete the global route system, prove selector/realizer closure,
+ZeroSlack, PCCMin, SAT in P, or the root theorem. See
+`docs/lean_residual_terminal_bn3_request_envelope.md`.
+
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 
 ```lean

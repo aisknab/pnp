@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-123';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-124';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -351,6 +351,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFourCornerOptimumCompatibility.lean',
   'node --test audits/lean-residual-terminal-four-corner-optimum-compatibility0.test.mjs',
   'node --test audits/lean-residual-terminal-frontier-pushout0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBN3RequestEnvelopeAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBN3RequestEnvelope.lean',
+  'node --test audits/lean-residual-terminal-bn3-request-envelope0.test.mjs',
   'lake env lean -DwarningAsError=true lean-regression/PNPBN3JointRealizabilityGap.lean',
   'node --test audits/bn3-joint-realizability-gap0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
@@ -362,7 +365,7 @@ const VERIFICATION_COMMANDS = Object.freeze([
 const NON_CLAIMS = Object.freeze([
   'The repository does not currently establish P = NP.',
   'Legacy JavaScript checker acceptance verifies assertion-bearing records under implemented predicates; it is not a formal proof of the named mathematical propositions.',
-  'The BN3 joint-realizability gap is now pinned by a kernel-checkable logical boundary witness: per-cut side-tight existence does not by itself construct a cross-cut-stable realizing family. This is a missing-lemma witness, not a counterexample to a future candidate-derived BN3 theorem; global ZeroSlack and polynomial PCCMin remain unformalized.',
+  'The BN3 joint-realizability gap still shows that arbitrary per-cut side-tight existence cannot imply a stable family. The successful computed BCEL nucleus now has a candidate-derived finite repair with canonical request identities, exact minimal consumers, duplicate-free incidence, and one jointly side-tight basis selection function, but its all-subsets enumeration is exponential and does not supply BN4-BN6 or global ZeroSlack and polynomial PCCMin completeness.',
   'The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.',
   'The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.',
   'Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.',
@@ -1471,6 +1474,10 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalRankWFAxiomAuditPassed: true,
   leanResidualTerminalRankWFScope:
     'fixed-ten-coordinate-natural-lexicographic-order-executable-comparison-accessibility-induction-and-kernel-well-foundedness',
+  leanResidualTerminalBN3RequestEnvelopeFormalized: true,
+  leanResidualTerminalBN3RequestEnvelopeAxiomAuditPassed: true,
+  leanResidualTerminalBN3RequestEnvelopeScope:
+    'successful-computed-finite-bcel-anchor-nuclei-canonical-stable-request-identities-exact-singleton-minimal-consumers-duplicate-free-incidence-and-jointly-side-tight-full-or-quotient-basis-family',
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
   leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2466,6 +2473,10 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalRankWFAxiomAuditPassed: true,
       leanResidualTerminalRankWFScope:
         'fixed-ten-coordinate-natural-lexicographic-order-executable-comparison-accessibility-induction-and-kernel-well-foundedness',
+      leanResidualTerminalBN3RequestEnvelopeFormalized: true,
+      leanResidualTerminalBN3RequestEnvelopeAxiomAuditPassed: true,
+      leanResidualTerminalBN3RequestEnvelopeScope:
+        'successful-computed-finite-bcel-anchor-nuclei-canonical-stable-request-identities-exact-singleton-minimal-consumers-duplicate-free-incidence-and-jointly-side-tight-full-or-quotient-basis-family',
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
       leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2545,7 +2556,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-11-123',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-11-124',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

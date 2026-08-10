@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-123');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-124');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -901,6 +901,8 @@ test('formal reconstruction status accepts the current source and public mirrors
     'leanResidualTerminalFiniteSaturatePositiveCompositionAxiomAuditPassed',
     'leanResidualTerminalRankWFFormalized',
     'leanResidualTerminalRankWFAxiomAuditPassed',
+    'leanResidualTerminalBN3RequestEnvelopeFormalized',
+    'leanResidualTerminalBN3RequestEnvelopeAxiomAuditPassed',
   ]) assert.equal(out[field], true, field);
   assert.equal(
     out.leanResidualTerminalPhysicalSupportCompletionScope,
@@ -986,6 +988,10 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalRankWFScope,
     'fixed-ten-coordinate-natural-lexicographic-order-executable-comparison-accessibility-induction-and-kernel-well-foundedness',
   );
+  assert.equal(
+    out.leanResidualTerminalBN3RequestEnvelopeScope,
+    'successful-computed-finite-bcel-anchor-nuclei-canonical-stable-request-identities-exact-singleton-minimal-consumers-duplicate-free-incidence-and-jointly-side-tight-full-or-quotient-basis-family',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
@@ -1021,13 +1027,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 26540);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 13884);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7159);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14935);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 240);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 26624);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 13928);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7165);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14939);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 241);
   assert.equal(status.leanSourceClosureSha256,
-    '6adc25ee3d9920358ea8803adf47ab94d8e70c91026b8756bb45dbad1dda577d');
+    'e30716e5e6ec0ad0f7c084a66d9ff28c1a8cf5a7008b5fc8caff81205e51eb15');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -1830,6 +1836,8 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
     'leanResidualTerminalFiniteSaturatePositiveCompositionAxiomAuditPassed',
     'leanResidualTerminalRankWFFormalized',
     'leanResidualTerminalRankWFAxiomAuditPassed',
+    'leanResidualTerminalBN3RequestEnvelopeFormalized',
+    'leanResidualTerminalBN3RequestEnvelopeAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
   assert.equal(
     status.leanResidualTerminalPhysicalSupportCompletionScope,
@@ -1914,6 +1922,10 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(
     status.leanResidualTerminalRankWFScope,
     'fixed-ten-coordinate-natural-lexicographic-order-executable-comparison-accessibility-induction-and-kernel-well-foundedness',
+  );
+  assert.equal(
+    status.leanResidualTerminalBN3RequestEnvelopeScope,
+    'successful-computed-finite-bcel-anchor-nuclei-canonical-stable-request-identities-exact-singleton-minimal-consumers-duplicate-free-incidence-and-jointly-side-tight-full-or-quotient-basis-family',
   );
   for (const field of [
     'leanSaturatePositiveFormalized',
@@ -2415,6 +2427,8 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanResidualTerminalFiniteSaturatePositiveCompositionAxiomAuditPassed',
     'leanResidualTerminalRankWFFormalized',
     'leanResidualTerminalRankWFAxiomAuditPassed',
+    'leanResidualTerminalBN3RequestEnvelopeFormalized',
+    'leanResidualTerminalBN3RequestEnvelopeAxiomAuditPassed',
   ];
 
   for (const field of fields) {

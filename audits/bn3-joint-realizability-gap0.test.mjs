@@ -34,9 +34,10 @@ test('Lean regression and review pin the missing BN3 inference without overclaim
     'perCutRealizable_not_uniformly_sufficient',
   ]) assert.match(lean, new RegExp(`theorem ${name}\\b`, 'u'), name);
   assert.doesNotMatch(lean, /\b(?:axiom|opaque|sorry|admit|Classical\.choice|native_decide)\b/u);
-  assert.match(review, /missing obligation; milestone not earned/u);
+  assert.match(review, /finite candidate-derived repair earned; global milestone not earned/u);
   assert.match(review, /fullHistoricalBN3TheoremDischarged` to `false`/u);
-  assert.match(review, /not a counterexample to a future circuit-specific BN3 theorem/u);
+  assert.match(review, /countermodel to the inference from per-cut existence alone/u);
+  assert.match(review, /ResidualTerminalBN3RequestEnvelope/u);
 });
 
 test('publication status keeps global ZeroSlack/PCCMin fail closed', async () => {
@@ -51,6 +52,12 @@ test('publication status keeps global ZeroSlack/PCCMin fail closed', async () =>
   ]);
   assert.equal(status.leanZeroSlackCompletenessFormalized, false);
   assert.equal(status.leanPCCMinPolynomialRuntimeFormalized, false);
+  assert.equal(status.leanResidualTerminalBN3RequestEnvelopeFormalized, true);
+  const finite = status.formalPublicationMilestones.find(
+    (entry) => entry.id === 'residual-terminal-bn3-request-envelope',
+  );
+  assert.equal(finite?.earned, true);
+  assert.match(finite?.nonClaim, /exponential/u);
   assert.equal(status.nonClaims.some((claim) =>
     claim.includes('BN3 joint-realizability gap')), true);
 });
