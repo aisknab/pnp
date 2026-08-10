@@ -35,6 +35,7 @@ import PNP.ResidualTerminalSaturationCostBalance
 import PNP.ResidualTerminalInterfaceExposureRouting
 import PNP.ResidualTerminalOriginKernelObligationRouting
 import PNP.ResidualTerminalFiniteSaturatePositive
+import PNP.ResidualTerminalRankWF
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine

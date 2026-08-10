@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-10-120",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-10-121",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2468,7 +2468,25 @@
     "PNP.DirectWire.TerminalSaturationClosureSafeStep.transparent": "cb47374327a74960b19f7f9bb46af7bd0ad6b766608187d755f10edddd74d4bd",
     "PNP.DirectWire.classifyTerminalSaturationClosureRouting_exhaustive": "bff24fddcdc569451d7963003194317f0d018bdd4906314ff791d8effd8fac92",
     "PNP.DirectWire.TerminalFiniteSaturatePositiveOutcome.sound": "5acc708881d1450e3e86abe5c1e0152ee6000d58ed0b5999c249d6efafcab69b",
-    "PNP.DirectWire.classifyTerminalFiniteSaturatePositive_exhaustive": "2f114bbe06ba71cfb038dcc5ff686516e7af0461d9a85e6dbda0e1104a814655"
+    "PNP.DirectWire.classifyTerminalFiniteSaturatePositive_exhaustive": "2f114bbe06ba71cfb038dcc5ff686516e7af0461d9a85e6dbda0e1104a814655",
+    "PNP.DirectWire.TerminalResidualRank.coordinates_mk": "57af7b4eb47b5cbe545130dc28fcd2f55639b943e825554d8bf737d697e523da",
+    "PNP.DirectWire.TerminalResidualRank.coordinates_length": "f7c47ca67c9e7cacf3b19d070b7fb357070a24c89e0dbb0c1d71a5f60ba61986",
+    "PNP.DirectWire.terminalResidualRankLTBool_eq_true_iff": "2e5d299f8e31bf5acbdd94d3c4b59aa41a65c8068df3a6e0f7db1adb98fc638f",
+    "PNP.DirectWire.terminalResidualRankLTBool_eq_false_iff": "820ef336efa299fccbd7cb1c821f08e32bc0b48236a3899c1325a5e986fa575a",
+    "PNP.DirectWire.terminalResidualRankLexLT_wellFounded": "150edb34b098834a1bbf25c81962f15d26a019b4ef771b8dd0ff230eeba73322",
+    "PNP.DirectWire.terminalResidualRank_accessible": "eff808821047b3ef8c355aa6b0d5ed7d5cfb5e82d31e271ef00259d34124daa9",
+    "PNP.DirectWire.terminalResidualRank_induction": "cc8b7d24d41d0004ebf5c5dfba80dd253e8525e4da0ba5938c8fdd046b411068",
+    "PNP.DirectWire.terminalResidualRank_witnessType_lt": "2e375926b8965ff0c03cb1db89f9b60ec9cf3f495f379220cd73e8c917532489",
+    "PNP.DirectWire.terminalResidualRank_spanType_lt": "c468941041e0df2788ecc3ad46c121402523c3641cc296108079cc50bd54dca3",
+    "PNP.DirectWire.terminalResidualRank_mode_lt": "350a6ebed3907c37c22c0837ad0ac5f48a24ac67cb3d9cba5ce7738be68129c1",
+    "PNP.DirectWire.terminalResidualRank_frontierDefect_lt": "af32c68cf5b32ff213f822571b28b4aedf5739381e41dca936426c1b2c97af65",
+    "PNP.DirectWire.terminalResidualRank_projectionDefect_lt": "4af50f8b8cbf83c711b554bb95a7722d1c40d1848ba76ca2b3287457701dc454",
+    "PNP.DirectWire.terminalResidualRank_saturationDefect_lt": "c80058655b00ef3a4aead9cd73eaeb2b00657cdaa0844bbeb837d1a64e5dc58a",
+    "PNP.DirectWire.terminalResidualRank_anchorCount_lt": "dc8ee9116a92beb686e2d28a84c78ed5cc0d333fdbc015a365615d5507eac4cb",
+    "PNP.DirectWire.terminalResidualRank_chargeSize_lt": "bba66c1a0a7249c35dd7ecc9cf53a7303ce0187058cb0fd25342e6d7154e11ba",
+    "PNP.DirectWire.terminalResidualRank_profileSize_lt": "42228d10e71af76dd08669f00511a1b43bebb0085ccff8b5d14b848e5903a07f",
+    "PNP.DirectWire.terminalResidualRank_canonicalCode_lt": "b3783268f850ea30f5e444e8a78a09ed278d1224990bbe725a89681dbd59d10e",
+    "PNP.DirectWire.TerminalResidualRankDescent.sound": "4c4bf650e6b68d7ec6d654c4fe37ad523959cb254bb5cb871cda50c79515ada5"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -2486,7 +2504,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "3b31d12fbb322ffd5b93d1315bcff52fce916c120aed66c15c78eca3df983bf2",
+  "milestoneSourceClosureSha256": "d525c3be0e63e15f8a4336d785651f1d1fdef3dc867d2956302da34a947e85d6",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -6062,6 +6080,33 @@
       ],
       "scope": "For every finite direct-wire candidate, executable ambient observer, forgetful projection, and proof-bearing candidate BCEL anchor problem whose normalized seed has positive full slack, Lean recognizes exact candidate-derived origin, kernel, and obligation closures in both gate/profile orientations; checks cost transparency, obligation discharge, and forgotten-profile stability; preserves positive full slack across an all-safe trace into the checked-lift or BCEL firewall; or returns the exact first interface, closure, or other fail-closed nontransparent route with its complete safe prefix.",
       "title": "Finite terminal SaturatePositive composition"
+    },
+    {
+      "classification": "formalized-residual-terminal-rank-wf",
+      "id": "residual-terminal-rank-wf",
+      "nonClaim": "This establishes the fixed residual rank domain and RankWF only. It does not map the current finite terminal routes into the manuscript's complete global outcome system, prove that any existing route strictly decreases the rank, establish route completeness or Package E, remove the explicit positive premise from the finite composition, establish full manuscript-wide SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalResidualRank.coordinates_mk",
+        "PNP.DirectWire.TerminalResidualRank.coordinates_length",
+        "PNP.DirectWire.terminalResidualRankLTBool_eq_true_iff",
+        "PNP.DirectWire.terminalResidualRankLTBool_eq_false_iff",
+        "PNP.DirectWire.terminalResidualRankLexLT_wellFounded",
+        "PNP.DirectWire.terminalResidualRank_accessible",
+        "PNP.DirectWire.terminalResidualRank_induction",
+        "PNP.DirectWire.terminalResidualRank_witnessType_lt",
+        "PNP.DirectWire.terminalResidualRank_spanType_lt",
+        "PNP.DirectWire.terminalResidualRank_mode_lt",
+        "PNP.DirectWire.terminalResidualRank_frontierDefect_lt",
+        "PNP.DirectWire.terminalResidualRank_projectionDefect_lt",
+        "PNP.DirectWire.terminalResidualRank_saturationDefect_lt",
+        "PNP.DirectWire.terminalResidualRank_anchorCount_lt",
+        "PNP.DirectWire.terminalResidualRank_chargeSize_lt",
+        "PNP.DirectWire.terminalResidualRank_profileSize_lt",
+        "PNP.DirectWire.terminalResidualRank_canonicalCode_lt",
+        "PNP.DirectWire.TerminalResidualRankDescent.sound"
+      ],
+      "scope": "For the fixed manuscript residual rank of exactly ten natural coordinates in the stated witness-type, span-type, mode, frontier-defect, projection-defect, saturation-defect, anchor-count, charge-size, profile-size, canonical-code priority order, Lean provides the exact lexicographic proposition, an equivalent executable comparison, all ten priority witnesses, proof-bearing descent, accessibility, induction, and kernel-checked well-foundedness.",
+      "title": "Residual terminal RankWF"
     },
     {
       "classification": "not-formalized",

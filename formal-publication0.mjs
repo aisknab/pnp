@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '491e983cdf4f7d9481c36cbad424ddfdeab0c335f3909402bfe7543f3e518f78';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'd7fa3d7e912eb3bbe08f0d1f67fbb3d413bed1ba4d7d42941c8fd677bf6bd80a';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -2233,6 +2233,24 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.classifyTerminalSaturationClosureRouting_exhaustive',
   'PNP.DirectWire.TerminalFiniteSaturatePositiveOutcome.sound',
   'PNP.DirectWire.classifyTerminalFiniteSaturatePositive_exhaustive',
+  'PNP.DirectWire.TerminalResidualRank.coordinates_mk',
+  'PNP.DirectWire.TerminalResidualRank.coordinates_length',
+  'PNP.DirectWire.terminalResidualRankLTBool_eq_true_iff',
+  'PNP.DirectWire.terminalResidualRankLTBool_eq_false_iff',
+  'PNP.DirectWire.terminalResidualRankLexLT_wellFounded',
+  'PNP.DirectWire.terminalResidualRank_accessible',
+  'PNP.DirectWire.terminalResidualRank_induction',
+  'PNP.DirectWire.terminalResidualRank_witnessType_lt',
+  'PNP.DirectWire.terminalResidualRank_spanType_lt',
+  'PNP.DirectWire.terminalResidualRank_mode_lt',
+  'PNP.DirectWire.terminalResidualRank_frontierDefect_lt',
+  'PNP.DirectWire.terminalResidualRank_projectionDefect_lt',
+  'PNP.DirectWire.terminalResidualRank_saturationDefect_lt',
+  'PNP.DirectWire.terminalResidualRank_anchorCount_lt',
+  'PNP.DirectWire.terminalResidualRank_chargeSize_lt',
+  'PNP.DirectWire.terminalResidualRank_profileSize_lt',
+  'PNP.DirectWire.terminalResidualRank_canonicalCode_lt',
+  'PNP.DirectWire.TerminalResidualRankDescent.sound',
   'PNP.DirectWire.allTerminalPrimitiveRecords_nodup',
   'PNP.DirectWire.filter_mem_terminalListSubsets',
   'PNP.DirectWire.TerminalFourCornerCarrier.boundaryDisposition?_eq_some_iff',
@@ -2510,7 +2528,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-10-120') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-10-121') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -2787,7 +2805,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-10-120') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-10-121') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

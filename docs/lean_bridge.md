@@ -1202,6 +1202,17 @@ sub-obligations only. It is not a mapping to the manuscript's complete global
 outcome set, Package E, RankWF, full `SaturatePositive`, or `BCELReady`. See
 `docs/lean_residual_terminal_finite_saturate_positive.md`.
 
+`lean/PNP/ResidualTerminalRankWF.lean` formalizes the fixed rank named after
+`RW-SaturatePositive`: witness type, span type, mode, frontier defect,
+projection defect, saturation defect, anchor count, charge size, profile size,
+and canonical code. The exact right-associated product is ordered by nine
+nested `Prod.lex` constructions over `Nat.lt_wfRel`; Lean proves this relation
+well-founded and exposes accessibility, induction, per-coordinate priority
+witnesses, and an equivalent executable comparison. A concrete descent record
+must carry the relation proposition. This is `RankWF` only: the current finite
+routes have not been mapped to the complete global outcome system or proved to
+decrease this rank. See `docs/lean_residual_terminal_rank_wf.md`.
+
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 
 ```lean
