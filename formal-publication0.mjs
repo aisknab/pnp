@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '1c7df2f16ffa07b4832757016683b125887e78f2768e1f27cc02b216857001c0';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '03493119962b81156b0860e6cc811addf0482f649ba353fb4ce4913201f7ad62';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -2294,6 +2294,16 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.terminalV54_cutActivation_nonzero_iff_disjoint_consumers',
   'PNP.DirectWire.terminalV54_consumerAntichain_normal_form_iff',
   'PNP.DirectWire.terminalV54_consumerAntichain_normal_form',
+  'PNP.DirectWire.TerminalV53Hypergraph.cell_partition',
+  'PNP.DirectWire.TerminalV53Hypergraph.cut_partition',
+  'PNP.DirectWire.TerminalV53Hypergraph.pair_complement_identity',
+  'PNP.DirectWire.TerminalV53Hypergraph.pairWeights_equal_of_shared',
+  'PNP.DirectWire.TerminalV53Hypergraph.pairWeight_eq_zero_of_four',
+  'PNP.DirectWire.TerminalV53Hypergraph.properFootprintWeight_eq_zero_of_four',
+  'PNP.DirectWire.TerminalV53Hypergraph.twoAnchor_fullWeight',
+  'PNP.DirectWire.TerminalV53Hypergraph.threeAnchor_rigidity',
+  'PNP.DirectWire.TerminalV53Hypergraph.fourAnchor_rigidity',
+  'PNP.DirectWire.terminalV53_constantCut_hypergraph_rigidity',
   'PNP.DirectWire.allTerminalPrimitiveRecords_nodup',
   'PNP.DirectWire.filter_mem_terminalListSubsets',
   'PNP.DirectWire.TerminalFourCornerCarrier.boundaryDisposition?_eq_some_iff',
@@ -2572,7 +2582,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-11-126') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-11-127') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -2849,7 +2859,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-11-127') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-11-128') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

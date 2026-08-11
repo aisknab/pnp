@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-127';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-128';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -365,6 +365,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalConsumerAntichainNormalFormAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalConsumerAntichainNormalForm.lean',
   'node --test audits/lean-residual-terminal-consumer-antichain-normal-form0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalConstantCutHypergraphRigidityAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalConstantCutHypergraphRigidity.lean',
+  'node --test audits/lean-residual-terminal-constant-cut-hypergraph-rigidity0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -377,7 +380,8 @@ const NON_CLAIMS = Object.freeze([
   'The BN3 joint-realizability gap still shows that arbitrary per-cut side-tight existence cannot imply a stable family. The successful computed BCEL nucleus has a candidate-derived finite repair with canonical request identities, exact minimal consumers, duplicate-free incidence, and one jointly side-tight basis selection function, but its all-subsets enumeration is exponential. The finite BN4 kernel consumes that repaired envelope without repairing arbitrary caller-supplied per-cut witnesses.',
   'The finite BN4 activation-exact cancellation kernel classifies exact integer positive and negative mass at each complete typed key over an explicit caller-supplied cell ledger. It does not derive the cells, semantic signatures, or transport types from four-corner bases; establish the full historical BN4 theorem; construct PkgC or BN6; complete global routes or selectors; establish ZeroSlack or polynomial PCCMin; put SAT in P; or prove P = NP.',
   'The finite BN5 full-shadow localization kernel uniformly handles arbitrary finite exact-coordinate unit and quotient-shadow ledgers. It validates negative-mass refinement, computes cut silence, and returns complete multiplicity coverage or a strict Hall deficit routed to local X1. The payloads and shadow universe are explicit inputs; complete matching is not connected back to a BN4 contradiction; full CritC/Q/E/L/X2/X3/X4 diagnosis, the full historical BN5 theorem, PkgC, BN6, global routes, selectors, polynomial generation and runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.',
-  'The arbitrary-finite V54 consumer-antichain normal form proves that two-sided activation is nonzero exactly when a minimal-consumer antichain has a disjoint pair and, under the exact PkgC singletonization premise, is literally the cut indicator of the singleton footprint. It consumes an explicit minimal-consumer antichain; PkgC construction and route silence, derivation from terminal candidates, V53, BN6, global routes, selectors, polynomial runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.',
+  'The arbitrary-finite V54 consumer-antichain normal form proves that two-sided activation is nonzero exactly when a minimal-consumer antichain has a disjoint pair and, under the exact PkgC singletonization premise, is literally the cut indicator of the singleton footprint. It consumes an explicit minimal-consumer antichain; PkgC construction and route silence, derivation from terminal candidates, the bridge from that footprint into V53 and BN6 payloads, global routes, selectors, polynomial runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.',
+  'The arbitrary-finite V53 constant-cut hypergraph rigidity theorem proves the exact q=2, q=3, and q>=4 classification for sparse positive hypergraphs with one common nonempty proper-cut value. It consumes an explicit hypergraph and constant-cut proof; PkgC construction, terminal-candidate and V54 derivation, BN6 cellization and payloads, global routes, selectors, polynomial runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.',
   'The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.',
   'The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.',
   'Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.',
@@ -1502,6 +1506,10 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalConsumerAntichainNormalFormAxiomAuditPassed: true,
   leanResidualTerminalConsumerAntichainNormalFormScope:
     'all-finite-minimal-consumer-antichains-monotone-empty-false-nonzero-iff-disjoint-and-pkgc-singletonized-exact-v54-consumer-antichain-cut-indicator',
+  leanResidualTerminalConstantCutHypergraphRigidityFormalized: true,
+  leanResidualTerminalConstantCutHypergraphRigidityAxiomAuditPassed: true,
+  leanResidualTerminalConstantCutHypergraphRigidityScope:
+    'all-finite-nonnegative-weighted-hypergraphs-constant-cut-hypergraph-rigidity-v53-q2-q3-q4-classification',
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
   leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2513,6 +2521,10 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalConsumerAntichainNormalFormAxiomAuditPassed: true,
       leanResidualTerminalConsumerAntichainNormalFormScope:
         'all-finite-minimal-consumer-antichains-monotone-empty-false-nonzero-iff-disjoint-and-pkgc-singletonized-exact-v54-consumer-antichain-cut-indicator',
+      leanResidualTerminalConstantCutHypergraphRigidityFormalized: true,
+      leanResidualTerminalConstantCutHypergraphRigidityAxiomAuditPassed: true,
+      leanResidualTerminalConstantCutHypergraphRigidityScope:
+        'all-finite-nonnegative-weighted-hypergraphs-constant-cut-hypergraph-rigidity-v53-q2-q3-q4-classification',
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
       leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2592,7 +2604,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-11-127',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-11-128',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

@@ -52,6 +52,7 @@ caller-supplied cut indicator, or removal of the singletonization premise.
 
 This theorem consumes an explicit minimal-consumer antichain.
 It does not yet construct PkgC request traces or restoration universes, prove global PkgC route
-silence, derive the antichain from a terminal candidate, prove V53 or BN6,
+silence, derive the antichain from a terminal candidate, connect its footprint
+to the now-formalized V53 classification or BN6,
 establish polynomial runtime, prove ZeroSlack or PCCMin, put SAT in P, remove a
 project-specific axiom, or prove `P = NP`.

@@ -1451,9 +1451,24 @@ two-sided activation is literally the Boolean cut indicator of the singleton
 footprint. This closes the V54 edge from PkgC singletonization to BN6's
 hyperedge representation without fixing an anchor cardinality. The antichain
 is still explicit: PkgC construction and route silence, candidate derivation,
-V53, BN6, global routes, selectors, polynomial runtime, ZeroSlack, PCCMin, SAT
-in P, and P = NP remain open. See
+the bridge from the V54 footprint into V53 and BN6 payloads, global routes,
+selectors, polynomial runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain
+open. See
 [`lean_residual_terminal_consumer_antichain_normal_form.md`](./lean_residual_terminal_consumer_antichain_normal_form.md).
+
+`ResidualTerminalConstantCutHypergraphRigidity` reconstructs theorem V53 over
+an arbitrary finite duplicate-free carrier and sparse positive hyperedges. An
+exact mass partition converts equality of all nonempty proper cut weights into
+a singleton-to-pair region identity. Shared pairs have equal weight. With four
+or more anchors, two distinct outside pairs force every pair and then every
+proper footprint to have weight zero. The named theorem proves all cardinality
+branches: full-span weight `D` for q=2; one pair weight `p` with
+`w_A + 2p = D` for q=3; and zero proper-footprint weight with full-span weight
+`D` for q>=4. This closes V53's abstract classification, but the hypergraph is
+still explicit. PkgC construction, candidate derivation, the V54-to-V53 and
+V53-to-BN6 bridges, BN6 cells and payloads, global routes, selectors,
+polynomial runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain open. See
+[`lean_residual_terminal_constant_cut_hypergraph_rigidity.md`](./lean_residual_terminal_constant_cut_hypergraph_rigidity.md).
 
 ## The only acceptable future activation gate
 
