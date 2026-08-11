@@ -17,7 +17,7 @@ completeness, establish polynomial runtime, prove ZeroSlack or PCCMin, put SAT
 in P, or prove P = NP.
 -/
 
-import PNP.ResidualTerminalConsumerAntichainNormalForm
+import PNP.ResidualTerminalPkgCSeparatingConsumers
 
 namespace PNP
 namespace DirectWire

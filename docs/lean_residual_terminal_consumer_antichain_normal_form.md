@@ -50,9 +50,12 @@ caller-supplied cut indicator, or removal of the singletonization premise.
 
 ## Deliberate nonclaims
 
-This theorem consumes an explicit minimal-consumer antichain.
-It does not yet construct PkgC request traces or restoration universes, prove global PkgC route
-silence, derive the antichain from a terminal candidate, connect its footprint
-to the now-formalized V53 classification or BN6,
-establish polynomial runtime, prove ZeroSlack or PCCMin, put SAT in P, remove a
-project-specific axiom, or prove `P = NP`.
+This theorem consumes an explicit minimal-consumer antichain. The adjacent
+finite PkgC restoration classifier also consumes an explicit restoration
+coordinate universe. Neither module derives those inputs from a terminal
+candidate, connects complete restoration back to a BN4 or BN5 contradiction,
+embeds the local Q route into the complete global outcome system, or proves
+global PkgC route silence. This theorem also does not connect its footprint to
+the now-formalized V53 classification or BN6, establish polynomial runtime,
+prove ZeroSlack or PCCMin, put SAT in P, remove a project-specific axiom, or
+prove `P = NP`.

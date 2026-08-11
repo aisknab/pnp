@@ -100,8 +100,8 @@ test('status retains five blockers, four project axioms, and an absent compatibi
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 107);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 105);
+  assert.equal(status.formalPublicationMilestones.length, 108);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 106);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 2);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -2550,10 +2550,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'b44976dbce85ba1e2062072846cb6b421c595097a6a8d6f6e214df8d99b1917d');
+    'aaf216f8c9998bb7c8ef4d980064df3a1bd9bd4f1474826799a7bf3c7d4977f6');
   assert.equal(map.milestoneSourceClosureSha256,
-    '4fde46c2f495422c43f5d2eb3ed80500c097a94b511aaecc74f5e8da979cd910');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2548);
+    '4608b17afe6e8d0be3f7f6e0fae526025c0050f64dca9670e71ae89f9f27aa7c');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2557);
   for (const theorem of [
     'PNP.DirectWire.TerminalBCELAnchorProblem.wholeCorners_projectionDefect',
     'PNP.DirectWire.TerminalProjectionPositivityLoss.minima_eq',
@@ -2955,7 +2955,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [27442, 14309, 7290, 14999, 246]);
+  ], [27573, 14360, 7314, 15002, 247]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

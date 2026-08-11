@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-129",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-12-130",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -839,6 +839,9 @@
   "leanResidualTerminalBN5FullShadowLocalizationFormalized": true,
   "leanResidualTerminalBN5FullShadowLocalizationAxiomAuditPassed": true,
   "leanResidualTerminalBN5FullShadowLocalizationScope": "all-finite-exact-coordinate-negative-unit-refinements-computed-cut-silence-complete-multiplicity-coverage-or-strict-hall-deficit-with-local-x1-nonsilence",
+  "leanResidualTerminalPkgCSeparatingConsumersFormalized": true,
+  "leanResidualTerminalPkgCSeparatingConsumersAxiomAuditPassed": true,
+  "leanResidualTerminalPkgCSeparatingConsumersScope": "all-finite-explicit-minimal-consumer-antichains-pkgc-separating-consumer-first-pair-canonical-atoms-exact-coordinate-restoration-or-strict-hall-local-q",
   "leanResidualTerminalConsumerAntichainNormalFormFormalized": true,
   "leanResidualTerminalConsumerAntichainNormalFormAxiomAuditPassed": true,
   "leanResidualTerminalConsumerAntichainNormalFormScope": "all-finite-minimal-consumer-antichains-monotone-empty-false-nonzero-iff-disjoint-and-pkgc-singletonized-exact-v54-consumer-antichain-cut-indicator",
@@ -1323,6 +1326,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBN5FullShadowLocalizationAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBN5FullShadowLocalization.lean",
     "node --test audits/lean-residual-terminal-bn5-full-shadow-localization0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPkgCSeparatingConsumersAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPkgCSeparatingConsumers.lean",
+    "node --test audits/lean-residual-terminal-pkgc-separating-consumers0.test.mjs",
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalConsumerAntichainNormalFormAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalConsumerAntichainNormalForm.lean",
     "node --test audits/lean-residual-terminal-consumer-antichain-normal-form0.test.mjs",
@@ -1342,10 +1348,11 @@
     "Legacy JavaScript checker acceptance verifies assertion-bearing records under implemented predicates; it is not a formal proof of the named mathematical propositions.",
     "The BN3 joint-realizability gap still shows that arbitrary per-cut side-tight existence cannot imply a stable family. The successful computed BCEL nucleus has a candidate-derived finite repair with canonical request identities, exact minimal consumers, duplicate-free incidence, and one jointly side-tight basis selection function, but its all-subsets enumeration is exponential. The finite BN4 kernel consumes that repaired envelope without repairing arbitrary caller-supplied per-cut witnesses.",
     "The finite BN4 activation-exact cancellation kernel classifies exact integer positive and negative mass at each complete typed key over an explicit caller-supplied cell ledger. It does not derive the cells, semantic signatures, or transport types from four-corner bases; establish the full historical BN4 theorem; construct PkgC or BN6; complete global routes or selectors; establish ZeroSlack or polynomial PCCMin; put SAT in P; or prove P = NP.",
-    "The finite BN5 full-shadow localization kernel uniformly handles arbitrary finite exact-coordinate unit and quotient-shadow ledgers. It validates negative-mass refinement, computes cut silence, and returns complete multiplicity coverage or a strict Hall deficit routed to local X1. The payloads and shadow universe are explicit inputs; complete matching is not connected back to a BN4 contradiction; full CritC/Q/E/L/X2/X3/X4 diagnosis, the full historical BN5 theorem, PkgC, BN6, global routes, selectors, polynomial generation and runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.",
-    "The arbitrary-finite V54 consumer-antichain normal form proves that two-sided activation is nonzero exactly when a minimal-consumer antichain has a disjoint pair and, under the exact PkgC singletonization premise, is literally the cut indicator of the singleton footprint. The theorem itself consumes an explicit antichain. The finite BN6 bridge now transports explicitly grouped instances into V53, but PkgC construction and route silence, derivation and grouping from terminal candidates, global routes, selectors, polynomial runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.",
-    "The arbitrary-finite V53 constant-cut hypergraph rigidity theorem proves the exact q=2, q=3, and q>=4 classification for sparse positive hypergraphs with one common nonempty proper-cut value. The finite BN6 bridge now constructs such a hypergraph from explicit grouped V54 cells and retains payload witnesses, but PkgC construction, terminal-candidate derivation and grouping, full historical BN6 and Packet selector/realizer completeness, global routes, polynomial runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.",
-    "The finite BN6 hypergraph-packet bridge transports an explicit already-grouped positive payload-bearing V54 survivor family into the exact V53 cut sum and returns the pair, mixed three-anchor, or full-span packet classification with source payload witnesses. It does not construct PkgC, derive or group survivors from a terminal candidate, establish full historical BN6 or Packet selector/realizer completeness, complete global routes, prove polynomial generation or runtime, ZeroSlack or PCCMin, SAT in P, or P = NP.",
+    "The finite BN5 full-shadow localization kernel uniformly handles arbitrary finite exact-coordinate unit and quotient-shadow ledgers. It validates negative-mass refinement, computes cut silence, and returns complete multiplicity coverage or a strict Hall deficit routed to local X1. The payloads and shadow universe are explicit inputs; complete matching is not connected back to a BN4 contradiction; full CritC/Q/E/L/X2/X3/X4 diagnosis, the full historical BN5 theorem, full PkgC and BN6, global routes, selectors, polynomial generation and runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.",
+    "The finite PkgC separating-consumer classifier scans an arbitrary explicit minimal-consumer antichain for the first disjoint nonsingleton pair, canonically indexes its atoms, and returns exact-coordinate restoration coverage or a strict Hall deficit routed to local Q; absence is exactly the V54 singletonization premise. The restoration coordinate universe remains explicit, coverage is not connected back to a BN4 or BN5 contradiction, the local route is not embedded in the complete global outcome system, and full PkgC route silence, derivation from a terminal candidate, polynomial generation and runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.",
+    "The arbitrary-finite V54 consumer-antichain normal form proves that two-sided activation is nonzero exactly when a minimal-consumer antichain has a disjoint pair and, under the exact PkgC singletonization premise, is literally the cut indicator of the singleton footprint. The theorem itself consumes an explicit antichain. The finite BN6 bridge now transports explicitly grouped instances into V53, but full PkgC construction and route silence, derivation and grouping from terminal candidates, global routes, selectors, polynomial runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.",
+    "The arbitrary-finite V53 constant-cut hypergraph rigidity theorem proves the exact q=2, q=3, and q>=4 classification for sparse positive hypergraphs with one common nonempty proper-cut value. The finite BN6 bridge now constructs such a hypergraph from explicit grouped V54 cells and retains payload witnesses, but full PkgC construction, terminal-candidate derivation and grouping, full historical BN6 and Packet selector/realizer completeness, global routes, polynomial runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.",
+    "The finite BN6 hypergraph-packet bridge transports an explicit already-grouped positive payload-bearing V54 survivor family into the exact V53 cut sum and returns the pair, mixed three-anchor, or full-span packet classification with source payload witnesses. It does not complete PkgC, derive or group survivors from a terminal candidate, establish full historical BN6 or Packet selector/realizer completeness, complete global routes, prove polynomial generation or runtime, ZeroSlack or PCCMin, SAT in P, or P = NP.",
     "The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.",
     "The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.",
     "Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.",
@@ -1504,7 +1511,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "4fde46c2f495422c43f5d2eb3ed80500c097a94b511aaecc74f5e8da979cd910",
+    "actualSourceClosureSha256": "4608b17afe6e8d0be3f7f6e0fae526025c0050f64dca9670e71ae89f9f27aa7c",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1534,22 +1541,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-11-128",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-12-129",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "612342db90e5887e2da6417963946437c82a14003f48deeddeae03d50caf637f",
+  "leanTheoremInventorySha256": "859ef0595f1eeea872518b0f399a788225e3a2ed9fefe987c6ae5bd6b3783aaf",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 27442,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 14999,
-  "leanTheoremInventoryTheoremCount": 14309,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 7290,
-  "leanTheoremInventorySourceClosureModuleCount": 246,
-  "leanSourceClosureSha256": "4fde46c2f495422c43f5d2eb3ed80500c097a94b511aaecc74f5e8da979cd910",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-11-129",
+  "leanTheoremInventoryDeclarationCount": 27573,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 15002,
+  "leanTheoremInventoryTheoremCount": 14360,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 7314,
+  "leanTheoremInventorySourceClosureModuleCount": 247,
+  "leanSourceClosureSha256": "4608b17afe6e8d0be3f7f6e0fae526025c0050f64dca9670e71ae89f9f27aa7c",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-12-130",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "9093dd1bdc84405be1748831ad59b98a60aabbd80d389f26f38f889de44770ea",
+  "formalPublicationMapSha256": "f076b8f813c2877d7a03b7090151d4c9db9f4793a5c4f40fbdc5125c82808ed8",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -37221,6 +37228,133 @@
       "status": "formalized-residual-terminal-bn5-full-shadow-localization"
     },
     {
+      "classification": "formalized-residual-terminal-pkgc-separating-consumers",
+      "id": "residual-terminal-pkgc-separating-consumers",
+      "nonClaim": "The restoration coordinate universe remains explicit. This theorem does not derive consumers or restorations from a terminal candidate, connect complete coverage back to a BN4 or BN5 contradiction, embed the Hall route into the complete global outcome system, prove global route silence, or establish the full historical PkgC theorem. It does not prove full BN6 or Packet selector-realizer completeness, polynomial generation or runtime, ZeroSlack or PCCMin, SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalPkgCPairNeedsRestoration_eq_true_iff",
+        "PNP.DirectWire.firstTerminalPkgCSeparatingPair?_sound",
+        "PNP.DirectWire.firstTerminalPkgCSeparatingPair?_eq_none_iff",
+        "PNP.DirectWire.TerminalPkgCSeparatingPair.quotientUnits_length",
+        "PNP.DirectWire.TerminalPkgCSeparatingPair.quotientUnits_nonempty",
+        "PNP.DirectWire.terminalPkgC_restorationEdge_preservesCoordinate",
+        "PNP.DirectWire.TerminalBN5HallDeficit.pkgCRestorationNotSilent",
+        "PNP.DirectWire.terminalPkgC_separatingConsumers_restorationDichotomy",
+        "PNP.DirectWire.classifyTerminalPkgCSeparatingConsumers_exhaustive"
+      ],
+      "scope": "For an arbitrary finite explicit minimal-consumer antichain, Lean canonically scans for the first disjoint pair that is not singleton-singleton. Absence proves exactly V54's singletonization premise. A found pair's atoms are canonically indexed into exact-coordinate quotient units and an explicit full-restoration universe is classified into complete multiplicity coverage or a strict Hall deficit with a deterministic local Q route.",
+      "title": "Finite PkgC separating-consumer restoration dichotomy",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.terminalPkgCPairNeedsRestoration_eq_true_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "184ddf69a99d22a191c773492f5544b457d72987222ef40fc00edadd977a95e2",
+          "expectedKernelTypeSha256": "184ddf69a99d22a191c773492f5544b457d72987222ef40fc00edadd977a95e2",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.firstTerminalPkgCSeparatingPair?_sound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d13683190a71031aa6df3b201dc1507fe83dd005867b9c5d8a4f8738ad3fd6bf",
+          "expectedKernelTypeSha256": "d13683190a71031aa6df3b201dc1507fe83dd005867b9c5d8a4f8738ad3fd6bf",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.firstTerminalPkgCSeparatingPair?_eq_none_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4b671f164446da2714ecf89d93203f53cf07380f60cfd5d70b7301f6c831cbdc",
+          "expectedKernelTypeSha256": "4b671f164446da2714ecf89d93203f53cf07380f60cfd5d70b7301f6c831cbdc",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPkgCSeparatingPair.quotientUnits_length",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "207c3a318d1e4bbde2a33bc01afd96f674b6973a0cf5d595e3739af8f3b0e6c9",
+          "expectedKernelTypeSha256": "207c3a318d1e4bbde2a33bc01afd96f674b6973a0cf5d595e3739af8f3b0e6c9",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPkgCSeparatingPair.quotientUnits_nonempty",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "1be63df6d57723d5183ecc39a11d3ed346430ecaf57c118399b2358a5862bfbc",
+          "expectedKernelTypeSha256": "1be63df6d57723d5183ecc39a11d3ed346430ecaf57c118399b2358a5862bfbc",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalPkgC_restorationEdge_preservesCoordinate",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "614c064c69d3e39441036d8b1e70a6f2f5f15b2e6523b1ae094ed34b7bae1e8d",
+          "expectedKernelTypeSha256": "614c064c69d3e39441036d8b1e70a6f2f5f15b2e6523b1ae094ed34b7bae1e8d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN5HallDeficit.pkgCRestorationNotSilent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "bec861192dedeca58ccdb1b9764e428715730d5b66c2dd5bdd3f688957ff7b27",
+          "expectedKernelTypeSha256": "bec861192dedeca58ccdb1b9764e428715730d5b66c2dd5bdd3f688957ff7b27",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalPkgC_separatingConsumers_restorationDichotomy",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "690a8f82885a284547a453cbfd6858ef8d8d7c4201e710f79a9eca9faa92df81",
+          "expectedKernelTypeSha256": "690a8f82885a284547a453cbfd6858ef8d8d7c4201e710f79a9eca9faa92df81",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.classifyTerminalPkgCSeparatingConsumers_exhaustive",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a05d8069e347cf7f63b59aef148e10f5587461d09bd0fff8f400b7cc7b4f1d2f",
+          "expectedKernelTypeSha256": "a05d8069e347cf7f63b59aef148e10f5587461d09bd0fff8f400b7cc7b4f1d2f",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-pkgc-separating-consumers"
+    },
+    {
       "classification": "formalized-residual-terminal-v54-consumer-antichain-normal-form",
       "id": "residual-terminal-consumer-antichain-normal-form",
       "nonClaim": "This finite kernel starts from an explicit minimal-consumer antichain and an explicit proof that every disjoint consumer pair is singletonized. It does not construct PkgC, derive that singletonization premise, or connect the footprint back to the full BN6 proof. It does not construct complete global routes, selectors, or realizers; establish polynomial generation or runtime, ZeroSlack, or PCCMin; put SAT in P; remove a project assumption; or prove P = NP.",
@@ -37690,7 +37824,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-11-129",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-12-130",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

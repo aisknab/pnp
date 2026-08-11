@@ -150,7 +150,7 @@ function validateSource0(source) {
   const imports = [...source.matchAll(/^\s*import\s+([^\s]+)\s*$/gmu)]
     .map((match) => match[1]);
   if (JSON.stringify(imports) !== JSON.stringify([
-    'PNP.ResidualTerminalConsumerAntichainNormalForm',
+    'PNP.ResidualTerminalPkgCSeparatingConsumers',
   ])) failures.push('closed-import');
 
   const system = declarationBlock0(source, 'TerminalV53Hypergraph');

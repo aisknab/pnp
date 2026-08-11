@@ -1,0 +1,29 @@
+import PNP.ResidualTerminalPkgCSeparatingConsumers
+
+#print axioms PNP.DirectWire.terminalPkgCConsumerIsSingleton
+#print axioms PNP.DirectWire.terminalPkgCConsumerIsSingleton_eq_true_iff
+#print axioms PNP.DirectWire.terminalPkgCDisjointBool
+#print axioms PNP.DirectWire.terminalPkgCDisjointBool_eq_true_iff
+#print axioms PNP.DirectWire.terminalPkgCConsumerPairs
+#print axioms PNP.DirectWire.mem_terminalPkgCConsumerPairs_iff
+#print axioms PNP.DirectWire.terminalPkgCPairNeedsRestoration
+#print axioms PNP.DirectWire.terminalPkgCPairNeedsRestoration_eq_true_iff
+#print axioms PNP.DirectWire.firstTerminalPkgCSeparatingPair?
+#print axioms PNP.DirectWire.TerminalPkgCSeparatingPair
+#print axioms PNP.DirectWire.terminalPkgCSeparatingPairOfFound
+#print axioms PNP.DirectWire.firstTerminalPkgCSeparatingPair?_sound
+#print axioms PNP.DirectWire.firstTerminalPkgCSeparatingPair?_eq_none_iff
+#print axioms PNP.DirectWire.TerminalPkgCRestorationUniverse
+#print axioms PNP.DirectWire.TerminalPkgCSeparatingPair.quotientUnits
+#print axioms PNP.DirectWire.TerminalPkgCSeparatingPair.quotientUnits_length
+#print axioms PNP.DirectWire.TerminalPkgCSeparatingPair.quotientUnits_nonempty
+#print axioms PNP.DirectWire.TerminalPkgCRestorationUniverse.fullRestorations
+#print axioms PNP.DirectWire.TerminalPkgCExactCoordinateCoverage
+#print axioms PNP.DirectWire.terminalPkgC_restorationEdge_preservesCoordinate
+#print axioms PNP.DirectWire.TerminalPkgCNamedLocalRoute
+#print axioms PNP.DirectWire.TerminalBN5HallDeficit.pkgCNamedLocalRoute
+#print axioms PNP.DirectWire.TerminalBN5HallDeficit.pkgCRestorationNotSilent
+#print axioms PNP.DirectWire.TerminalPkgCSeparatingConsumersOutcome
+#print axioms PNP.DirectWire.classifyTerminalPkgCSeparatingConsumers
+#print axioms PNP.DirectWire.terminalPkgC_separatingConsumers_restorationDichotomy
+#print axioms PNP.DirectWire.classifyTerminalPkgCSeparatingConsumers_exhaustive

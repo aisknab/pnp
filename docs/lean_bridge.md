@@ -1256,6 +1256,24 @@ polynomial generation/runtime, ZeroSlack, PCCMin, SAT in P, and the root
 theorem remain open. See
 `docs/lean_residual_terminal_bn5_full_shadow_localization.md`.
 
+`lean/PNP/ResidualTerminalPkgCSeparatingConsumers.lean` reconstructs a finite
+PkgC separating-consumer restoration edge for an arbitrary explicit
+minimal-consumer antichain. Its canonical nested scan selects the first
+disjoint pair that is not singleton-singleton; scan absence is proved
+equivalent to the exact V54 singletonization premise. For a found pair, the
+module generates canonically indexed quotient units from all atoms of both
+consumers, maps them into exact BN5 coordinates, and classifies an explicit
+finite full-restoration universe as complete coordinate multiplicity coverage
+or a strict Hall deficit with a named local Q route. Its 27-declaration axiom
+transcript stays within `propext` and `Quot.sound`, and regressions exercise
+the singletonized, covered, and Hall-localized branches. The restoration
+universe remains explicit, matching is not connected to a BN4/BN5
+contradiction, and the local route is not embedded into the complete global
+outcome system. Full historical PkgC and route silence, terminal-candidate
+derivation, BN6/Packet selector-realizer completeness, polynomial runtime,
+ZeroSlack, PCCMin, SAT in P, and the root theorem remain open. See
+`docs/lean_residual_terminal_pkgc_separating_consumers.md`.
+
 `lean/PNP/ResidualTerminalConsumerAntichainNormalForm.lean` reconstructs the
 manuscript's unbounded V54 consumer-antichain theorem. For an arbitrary finite
 carrier and explicit minimal-consumer antichain, it generates the monotone
@@ -1264,7 +1282,7 @@ equivalent to existence of a disjoint consumer pair, and proves under PkgC's
 exact singletonization premise that the activation Boolean equals the cut
 indicator of the singleton footprint on every cut. The source contains no
 fixed `Fin` carrier or hard-coded cut coordinate. It consumes the explicit
-antichain and therefore does not construct PkgC or prove its global route
+antichain and therefore does not complete PkgC or prove its global route
 silence, derive consumers from a terminal candidate, connect the V54 footprint
 to V53 or BN6 payloads, complete global routing or selectors, establish
 polynomial runtime, prove ZeroSlack or PCCMin, put SAT in P, or produce the root

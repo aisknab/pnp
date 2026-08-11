@@ -267,7 +267,11 @@ test('publication earns only the V54 normal-form boundary', async () => {
   assert.equal(status.publicTheoremEmissionAllowed, false);
   assert.equal(status.remainingBlockers.length, 5);
   assert.match(docs, /V54 consumer-antichain normal form/u);
-  assert.match(docs, /does not yet construct PkgC/u);
+  assert.match(docs,
+    /finite PkgC restoration classifier[\s\S]{0,120}explicit restoration/u);
+  assert.match(docs,
+    /Neither module derives those inputs from a terminal[\s\n]+candidate/u);
+  assert.match(docs, /global PkgC route silence/u);
 });
 
 test('durable workflow runs the transcript, regression, and hostile audit', async () => {
