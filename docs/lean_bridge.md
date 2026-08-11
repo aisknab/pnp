@@ -1265,10 +1265,25 @@ exact singletonization premise that the activation Boolean equals the cut
 indicator of the singleton footprint on every cut. The source contains no
 fixed `Fin` carrier or hard-coded cut coordinate. It consumes the explicit
 antichain and therefore does not construct PkgC or prove its global route
-silence, derive consumers from a terminal candidate, prove V53/BN6, complete
-global routing or selectors, establish polynomial runtime, prove ZeroSlack or
-PCCMin, put SAT in P, or produce the root theorem. See
+silence, derive consumers from a terminal candidate, connect the V54 footprint
+to V53 or BN6 payloads, complete global routing or selectors, establish
+polynomial runtime, prove ZeroSlack or PCCMin, put SAT in P, or produce the root
+theorem. See
 `docs/lean_residual_terminal_consumer_antichain_normal_form.md`.
+
+`lean/PNP/ResidualTerminalConstantCutHypergraphRigidity.lean` reconstructs the
+manuscript's V53 constant-cut classification for arbitrary finite
+duplicate-free carriers and sparse positive hyperedges. Exact cut mass
+partition and singleton-to-pair comparison prove the q=2, q=3, and q>=4
+branches without a fixed `Fin` carrier: full-span weight `D`; equal pair weight
+`p` with `w_A + 2p = D`; or zero proper-footprint weight and full-span weight
+`D`. Its 58-declaration transcript stays within `propext` and `Quot.sound` and
+the regression exercises all three branches plus hostile unequal-pair data.
+It consumes an explicit hypergraph and therefore does not construct PkgC,
+derive that hypergraph from a terminal candidate, build BN6 cells or payloads,
+complete global routes or selectors, establish polynomial runtime, prove
+ZeroSlack or PCCMin, put SAT in P, or produce the root theorem. See
+`docs/lean_residual_terminal_constant_cut_hypergraph_rigidity.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 
