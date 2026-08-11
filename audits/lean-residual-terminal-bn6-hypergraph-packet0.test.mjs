@@ -239,7 +239,7 @@ test('publication earns only the finite BN6 packet boundary', async () => {
   assert.equal(status.publicTheoremEmissionAllowed, false);
   assert.equal(status.remainingBlockers.length, 5);
   assert.match(docs, /BN6 hypergraph packet/u);
-  assert.match(docs, /does not construct PkgC/u);
+  assert.match(docs, /does not complete PkgC/u);
 });
 
 test('durable workflow runs the transcript, regression, and hostile audit', async () => {

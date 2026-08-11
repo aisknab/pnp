@@ -1440,6 +1440,23 @@ CritC/Q/E/L/X2-X4, PkgC/BN6, global routes or selectors, polynomial
 generation/runtime, ZeroSlack, PCCMin, SAT in P, or P = NP. See
 [`lean_residual_terminal_bn5_full_shadow_localization.md`](./lean_residual_terminal_bn5_full_shadow_localization.md).
 
+`ResidualTerminalPkgCSeparatingConsumers` reconstructs the next finite PkgC
+edge over an arbitrary explicit minimal-consumer antichain. A canonical nested
+scan selects the first disjoint pair that is not singleton-singleton. If no
+such pair exists, Lean proves exactly the `DisjointPairsSingletonized` premise
+consumed by V54. For a found pair, quotient units are generated from all atoms
+of both consumers and mapped into exact BN5 coordinates. The existing
+equality-fibre matcher classifies an explicit finite full-restoration universe
+into complete coordinate multiplicity coverage or a strict Hall deficit with
+a deterministic local Q route. Every edge preserves the entire coordinate,
+and the quotient-unit list is proved nonempty. The restoration universe
+remains explicit, complete coverage is not connected back to a BN4/BN5
+contradiction, and the Hall route is not embedded into the complete global
+outcome system. Full PkgC route silence, terminal-candidate derivation, full
+BN6/Packet selector-realizer completeness, polynomial runtime, ZeroSlack,
+PCCMin, SAT in P, and P = NP remain open. See
+[`lean_residual_terminal_pkgc_separating_consumers.md`](./lean_residual_terminal_pkgc_separating_consumers.md).
+
 `ResidualTerminalConsumerAntichainNormalForm` reconstructs the manuscript's
 unbounded theorem V54 over an arbitrary finite carrier and explicit
 minimal-consumer antichain. The generated request is proved monotone and false
@@ -1450,7 +1467,7 @@ that every disjoint pair is singleton-singleton, it proves on every cut that
 two-sided activation is literally the Boolean cut indicator of the singleton
 footprint. This closes the V54 edge from PkgC singletonization to BN6's
 hyperedge representation without fixing an anchor cardinality. The antichain
-is still explicit: PkgC construction and route silence, candidate derivation,
+is still explicit: full PkgC construction and route silence, candidate derivation,
 the bridge from the V54 footprint into V53 and BN6 payloads, global routes,
 selectors, polynomial runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain
 open. See
