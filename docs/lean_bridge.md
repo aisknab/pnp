@@ -1236,9 +1236,25 @@ balanced or one-sign positive-mass residual with the full key preserved and no
 opposite-sign pair. Its total wrapper preserves every upstream failure and
 rejects foreign atoms. The typed ledger and its semantic/transport labels are
 still caller data, so this is not the full historical BN4 theorem and supplies
-no BN5/PkgC/BN6, complete routes or selectors, ZeroSlack, PCCMin, polynomial
+no PkgC/BN6, complete routes or selectors, ZeroSlack, PCCMin, polynomial
 runtime, SAT in P, or root theorem. See
 `docs/lean_residual_terminal_bn4_activation_cancellation.md`.
+
+`lean/PNP/ResidualTerminalBN5FullShadowLocalization.lean` closes a finite
+full-shadow localization edge over arbitrary explicit finite inputs. It
+canonically refines a negative BN4 residual into indexed full units whose
+complete coordinates include the BN4 key, frontier, charge owner, obligation,
+origin kernel, and mode projection. The total classifier validates the exact
+negative mass, computes cut silence, and otherwise computes complete
+exact-coordinate multiplicity coverage or a strict Hall deficit. Every
+deficit exposes a smaller literal shadow-neighbor list than its full-unit
+fibre and routes to local X1, so an active unmatched unit cannot disappear as
+silence. The payloads and shadow universe are still explicit inputs, matching
+is not connected to a BN4 contradiction, and this is not the full historical
+BN5 theorem. CritC/Q/E/L/X2-X4, PkgC/BN6, global routes and selectors,
+polynomial generation/runtime, ZeroSlack, PCCMin, SAT in P, and the root
+theorem remain open. See
+`docs/lean_residual_terminal_bn5_full_shadow_localization.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 

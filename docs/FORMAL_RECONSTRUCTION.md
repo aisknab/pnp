@@ -1419,9 +1419,26 @@ that key, have positive mass, and cannot contain an opposite-sign pair. The
 total wrapper preserves all upstream proof-bearing failures and rejects cells
 whose atoms are outside the successful envelope. The ledger, signatures, and
 transport labels remain explicit inputs, so this is not the full historical
-BN4 theorem and provides no BN5/PkgC/BN6, global-route, selector, ZeroSlack,
+BN4 theorem and provides no PkgC/BN6, global-route, selector, ZeroSlack,
 PCCMin, or polynomial-runtime conclusion. See
 [`lean_residual_terminal_bn4_activation_cancellation.md`](./lean_residual_terminal_bn4_activation_cancellation.md).
+
+`ResidualTerminalBN5FullShadowLocalization` consumes a successful BN4
+cancellation outcome at one complete key together with arbitrary finite
+explicit payload and quotient-shadow lists. Every refined full unit carries
+the BN4 key plus frontier, charge-owner, obligation, origin-kernel, and
+mode-projection coordinates. The total executable classifier validates that
+the refinement length is the exact negative residual mass, computes whether
+the cut is inactive, and otherwise returns either complete exact-coordinate
+multiplicity coverage or a strict Hall deficit. The deficit exposes literal
+neighbor and full-subset cardinalities, preserves the complete coordinate,
+and is routed to the named local X1 outcome, so no active unmatched unit is
+silently discarded. Payloads and the quotient-shadow universe remain explicit
+finite inputs, and matching is not connected back to a BN4 contradiction.
+This is not the full historical BN5 theorem and does not establish
+CritC/Q/E/L/X2-X4, PkgC/BN6, global routes or selectors, polynomial
+generation/runtime, ZeroSlack, PCCMin, SAT in P, or P = NP. See
+[`lean_residual_terminal_bn5_full_shadow_localization.md`](./lean_residual_terminal_bn5_full_shadow_localization.md).
 
 ## The only acceptable future activation gate
 
