@@ -1,0 +1,30 @@
+import PNP.ResidualTerminalConsumerAntichainNormalForm
+
+#print axioms PNP.DirectWire.TerminalV54Included
+#print axioms PNP.DirectWire.TerminalV54StrictIncluded
+#print axioms PNP.DirectWire.TerminalV54Disjoint
+#print axioms PNP.DirectWire.terminalV54Included_refl
+#print axioms PNP.DirectWire.terminalV54Included_trans
+#print axioms PNP.DirectWire.terminalV54Disjoint_symm
+#print axioms PNP.DirectWire.TerminalV54ConsumerSystem
+#print axioms PNP.DirectWire.TerminalV54ConsumerSystem.RequestActive
+#print axioms PNP.DirectWire.TerminalV54ConsumerSystem.requestBool
+#print axioms PNP.DirectWire.TerminalV54ConsumerSystem.requestBool_eq_true_iff
+#print axioms PNP.DirectWire.TerminalV54ConsumerSystem.requestActive_monotone
+#print axioms PNP.DirectWire.TerminalV54ConsumerSystem.requestActive_empty_false
+#print axioms PNP.DirectWire.TerminalV54ConsumerSystem.consumer_is_minimal
+#print axioms PNP.DirectWire.terminalV54Complement
+#print axioms PNP.DirectWire.mem_terminalV54Complement_iff
+#print axioms PNP.DirectWire.TerminalV54ConsumerSystem.CutActive
+#print axioms PNP.DirectWire.TerminalV54ConsumerSystem.cutActivationBool
+#print axioms PNP.DirectWire.TerminalV54ConsumerSystem.cutActivationBool_eq_true_iff
+#print axioms PNP.DirectWire.TerminalV54ConsumerSystem.singletonFootprint
+#print axioms PNP.DirectWire.TerminalV54ConsumerSystem.mem_singletonFootprint_iff
+#print axioms PNP.DirectWire.TerminalV54ConsumerSystem.FootprintCrossesCut
+#print axioms PNP.DirectWire.TerminalV54ConsumerSystem.cutIndicatorBool
+#print axioms PNP.DirectWire.TerminalV54ConsumerSystem.cutIndicatorBool_eq_true_iff
+#print axioms PNP.DirectWire.TerminalV54ConsumerSystem.cutActive_has_disjoint_consumers
+#print axioms PNP.DirectWire.terminalV54_cutActivation_nonzero_iff_disjoint_consumers
+#print axioms PNP.DirectWire.TerminalV54ConsumerSystem.DisjointPairsSingletonized
+#print axioms PNP.DirectWire.terminalV54_consumerAntichain_normal_form_iff
+#print axioms PNP.DirectWire.terminalV54_consumerAntichain_normal_form

@@ -1256,6 +1256,20 @@ polynomial generation/runtime, ZeroSlack, PCCMin, SAT in P, and the root
 theorem remain open. See
 `docs/lean_residual_terminal_bn5_full_shadow_localization.md`.
 
+`lean/PNP/ResidualTerminalConsumerAntichainNormalForm.lean` reconstructs the
+manuscript's unbounded V54 consumer-antichain theorem. For an arbitrary finite
+carrier and explicit minimal-consumer antichain, it generates the monotone
+empty-false request function, proves that nonzero two-sided activation is
+equivalent to existence of a disjoint consumer pair, and proves under PkgC's
+exact singletonization premise that the activation Boolean equals the cut
+indicator of the singleton footprint on every cut. The source contains no
+fixed `Fin` carrier or hard-coded cut coordinate. It consumes the explicit
+antichain and therefore does not construct PkgC or prove its global route
+silence, derive consumers from a terminal candidate, prove V53/BN6, complete
+global routing or selectors, establish polynomial runtime, prove ZeroSlack or
+PCCMin, put SAT in P, or produce the root theorem. See
+`docs/lean_residual_terminal_consumer_antichain_normal_form.md`.
+
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 
 ```lean

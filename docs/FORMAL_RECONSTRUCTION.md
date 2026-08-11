@@ -1440,6 +1440,21 @@ CritC/Q/E/L/X2-X4, PkgC/BN6, global routes or selectors, polynomial
 generation/runtime, ZeroSlack, PCCMin, SAT in P, or P = NP. See
 [`lean_residual_terminal_bn5_full_shadow_localization.md`](./lean_residual_terminal_bn5_full_shadow_localization.md).
 
+`ResidualTerminalConsumerAntichainNormalForm` reconstructs the manuscript's
+unbounded theorem V54 over an arbitrary finite carrier and explicit
+minimal-consumer antichain. The generated request is proved monotone and false
+on the empty cut, and every listed consumer is proved inclusion-minimal among
+active sets. Lean proves that two-sided activation is nonzero on some cut if
+and only if the antichain contains a disjoint pair. Under the exact PkgC premise
+that every disjoint pair is singleton-singleton, it proves on every cut that
+two-sided activation is literally the Boolean cut indicator of the singleton
+footprint. This closes the V54 edge from PkgC singletonization to BN6's
+hyperedge representation without fixing an anchor cardinality. The antichain
+is still explicit: PkgC construction and route silence, candidate derivation,
+V53, BN6, global routes, selectors, polynomial runtime, ZeroSlack, PCCMin, SAT
+in P, and P = NP remain open. See
+[`lean_residual_terminal_consumer_antichain_normal_form.md`](./lean_residual_terminal_consumer_antichain_normal_form.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

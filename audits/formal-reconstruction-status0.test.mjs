@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-126');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-127');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -907,6 +907,8 @@ test('formal reconstruction status accepts the current source and public mirrors
     'leanResidualTerminalBN4ActivationCancellationAxiomAuditPassed',
     'leanResidualTerminalBN5FullShadowLocalizationFormalized',
     'leanResidualTerminalBN5FullShadowLocalizationAxiomAuditPassed',
+    'leanResidualTerminalConsumerAntichainNormalFormFormalized',
+    'leanResidualTerminalConsumerAntichainNormalFormAxiomAuditPassed',
   ]) assert.equal(out[field], true, field);
   assert.equal(
     out.leanResidualTerminalPhysicalSupportCompletionScope,
@@ -1004,6 +1006,10 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalBN5FullShadowLocalizationScope,
     'all-finite-exact-coordinate-negative-unit-refinements-computed-cut-silence-complete-multiplicity-coverage-or-strict-hall-deficit-with-local-x1-nonsilence',
   );
+  assert.equal(
+    out.leanResidualTerminalConsumerAntichainNormalFormScope,
+    'all-finite-minimal-consumer-antichains-monotone-empty-false-nonzero-iff-disjoint-and-pkgc-singletonized-exact-v54-consumer-antichain-cut-indicator',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
@@ -1039,13 +1045,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 27129);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 14125);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7249);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 27193);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 14163);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7264);
   assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14995);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 243);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 244);
   assert.equal(status.leanSourceClosureSha256,
-    'c939e940c892279b3845b2d30dc0baa724d53b6f9a6249ccfa2900c7c00cb00f');
+    'a6aaa00d8faa48ed1d51bb0346363956d4cd2de8a14ecbe043458831d896dd02');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
