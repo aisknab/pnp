@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-126",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-127",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -839,6 +839,9 @@
   "leanResidualTerminalBN5FullShadowLocalizationFormalized": true,
   "leanResidualTerminalBN5FullShadowLocalizationAxiomAuditPassed": true,
   "leanResidualTerminalBN5FullShadowLocalizationScope": "all-finite-exact-coordinate-negative-unit-refinements-computed-cut-silence-complete-multiplicity-coverage-or-strict-hall-deficit-with-local-x1-nonsilence",
+  "leanResidualTerminalConsumerAntichainNormalFormFormalized": true,
+  "leanResidualTerminalConsumerAntichainNormalFormAxiomAuditPassed": true,
+  "leanResidualTerminalConsumerAntichainNormalFormScope": "all-finite-minimal-consumer-antichains-monotone-empty-false-nonzero-iff-disjoint-and-pkgc-singletonized-exact-v54-consumer-antichain-cut-indicator",
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -1314,6 +1317,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBN5FullShadowLocalizationAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBN5FullShadowLocalization.lean",
     "node --test audits/lean-residual-terminal-bn5-full-shadow-localization0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalConsumerAntichainNormalFormAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalConsumerAntichainNormalForm.lean",
+    "node --test audits/lean-residual-terminal-consumer-antichain-normal-form0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1325,6 +1331,7 @@
     "The BN3 joint-realizability gap still shows that arbitrary per-cut side-tight existence cannot imply a stable family. The successful computed BCEL nucleus has a candidate-derived finite repair with canonical request identities, exact minimal consumers, duplicate-free incidence, and one jointly side-tight basis selection function, but its all-subsets enumeration is exponential. The finite BN4 kernel consumes that repaired envelope without repairing arbitrary caller-supplied per-cut witnesses.",
     "The finite BN4 activation-exact cancellation kernel classifies exact integer positive and negative mass at each complete typed key over an explicit caller-supplied cell ledger. It does not derive the cells, semantic signatures, or transport types from four-corner bases; establish the full historical BN4 theorem; construct PkgC or BN6; complete global routes or selectors; establish ZeroSlack or polynomial PCCMin; put SAT in P; or prove P = NP.",
     "The finite BN5 full-shadow localization kernel uniformly handles arbitrary finite exact-coordinate unit and quotient-shadow ledgers. It validates negative-mass refinement, computes cut silence, and returns complete multiplicity coverage or a strict Hall deficit routed to local X1. The payloads and shadow universe are explicit inputs; complete matching is not connected back to a BN4 contradiction; full CritC/Q/E/L/X2/X3/X4 diagnosis, the full historical BN5 theorem, PkgC, BN6, global routes, selectors, polynomial generation and runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.",
+    "The arbitrary-finite V54 consumer-antichain normal form proves that two-sided activation is nonzero exactly when a minimal-consumer antichain has a disjoint pair and, under the exact PkgC singletonization premise, is literally the cut indicator of the singleton footprint. It consumes an explicit minimal-consumer antichain; PkgC construction and route silence, derivation from terminal candidates, V53, BN6, global routes, selectors, polynomial runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.",
     "The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.",
     "The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.",
     "Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.",
@@ -1483,7 +1490,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "c939e940c892279b3845b2d30dc0baa724d53b6f9a6249ccfa2900c7c00cb00f",
+    "actualSourceClosureSha256": "a6aaa00d8faa48ed1d51bb0346363956d4cd2de8a14ecbe043458831d896dd02",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1513,22 +1520,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-11-125",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-11-126",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "fbd4614c550813bc8deff259f9442b37336efb40be3835e07880842c8e8a3be7",
+  "leanTheoremInventorySha256": "884d84ade0af3ce3d588c6bba011fd21ec0fb7fdf0b0d1fee5d156f051002a8c",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 27129,
+  "leanTheoremInventoryDeclarationCount": 27193,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 14995,
-  "leanTheoremInventoryTheoremCount": 14125,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 7249,
-  "leanTheoremInventorySourceClosureModuleCount": 243,
-  "leanSourceClosureSha256": "c939e940c892279b3845b2d30dc0baa724d53b6f9a6249ccfa2900c7c00cb00f",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-11-126",
+  "leanTheoremInventoryTheoremCount": 14163,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 7264,
+  "leanTheoremInventorySourceClosureModuleCount": 244,
+  "leanSourceClosureSha256": "a6aaa00d8faa48ed1d51bb0346363956d4cd2de8a14ecbe043458831d896dd02",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-11-127",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "c4c3f6234e7bf80626d9e271991cea7ffdf00fe90c49c805c42e4a00628e59a3",
+  "formalPublicationMapSha256": "2935c7cb045d0f7ac2bb9baa98ffa7044543c410c84831fc9db36da66b47d157",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -37200,6 +37207,108 @@
       "status": "formalized-residual-terminal-bn5-full-shadow-localization"
     },
     {
+      "classification": "formalized-residual-terminal-v54-consumer-antichain-normal-form",
+      "id": "residual-terminal-consumer-antichain-normal-form",
+      "nonClaim": "This finite kernel starts from an explicit minimal-consumer antichain and an explicit proof that every disjoint consumer pair is singletonized. It does not construct PkgC, derive that singletonization premise, or connect the footprint back to the full BN6 proof. It does not construct complete global routes, selectors, or realizers; establish polynomial generation or runtime, ZeroSlack, or PCCMin; put SAT in P; remove a project assumption; or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalV54ConsumerSystem.requestActive_monotone",
+        "PNP.DirectWire.TerminalV54ConsumerSystem.requestActive_empty_false",
+        "PNP.DirectWire.TerminalV54ConsumerSystem.consumer_is_minimal",
+        "PNP.DirectWire.TerminalV54ConsumerSystem.cutActive_has_disjoint_consumers",
+        "PNP.DirectWire.terminalV54_cutActivation_nonzero_iff_disjoint_consumers",
+        "PNP.DirectWire.terminalV54_consumerAntichain_normal_form_iff",
+        "PNP.DirectWire.terminalV54_consumerAntichain_normal_form"
+      ],
+      "scope": "For an arbitrary finite carrier and its explicit minimal-consumer antichain, Lean proves monotonicity and empty-request inactivity, proves that nonzero two-sided cut activation is equivalent to the existence of a disjoint consumer pair, and under the exact singletonized-disjoint-pair premise proves literal equality with the corresponding footprint cut indicator.",
+      "title": "Finite V54 consumer-antichain normal form",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.TerminalV54ConsumerSystem.requestActive_monotone",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "2b4b2abc251a6f227f312189bef5f8af6ad139173a5b56bd041b5c0490c56009",
+          "expectedKernelTypeSha256": "2b4b2abc251a6f227f312189bef5f8af6ad139173a5b56bd041b5c0490c56009",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalV54ConsumerSystem.requestActive_empty_false",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6a1188e91a30e61ffbabab94b6419a4e0d9980de8723c4bf3e717c82735e95c9",
+          "expectedKernelTypeSha256": "6a1188e91a30e61ffbabab94b6419a4e0d9980de8723c4bf3e717c82735e95c9",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalV54ConsumerSystem.consumer_is_minimal",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "962b718805829299b8f72bb3623e64290a082100336661f4bf8c35c7e7b2ad01",
+          "expectedKernelTypeSha256": "962b718805829299b8f72bb3623e64290a082100336661f4bf8c35c7e7b2ad01",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalV54ConsumerSystem.cutActive_has_disjoint_consumers",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "85e9ce925cd90213f31797bde659b24a409759777dd994270114a8b1d4476bc6",
+          "expectedKernelTypeSha256": "85e9ce925cd90213f31797bde659b24a409759777dd994270114a8b1d4476bc6",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalV54_cutActivation_nonzero_iff_disjoint_consumers",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "49b42196b9207ded24b4c2c90443a4e704e7ac89eb72742ad2b08d9e492c0b9e",
+          "expectedKernelTypeSha256": "49b42196b9207ded24b4c2c90443a4e704e7ac89eb72742ad2b08d9e492c0b9e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalV54_consumerAntichain_normal_form_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8551d1d8aaab04e96fe846f653c9f7327144623374ab9d7d18a401fb448c0de6",
+          "expectedKernelTypeSha256": "8551d1d8aaab04e96fe846f653c9f7327144623374ab9d7d18a401fb448c0de6",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalV54_consumerAntichain_normal_form",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "2f11e9bb5314944cd0ee20579865210e16792d95a20e754c72d18f401c0bdbf9",
+          "expectedKernelTypeSha256": "2f11e9bb5314944cd0ee20579865210e16792d95a20e754c72d18f401c0bdbf9",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-v54-consumer-antichain-normal-form"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -37297,7 +37406,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-11-126",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-11-127",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

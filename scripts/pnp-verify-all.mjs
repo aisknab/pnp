@@ -134,6 +134,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/bn3-joint-realizability-gap0.test.mjs',
   'audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs',
   'audits/lean-residual-terminal-bn5-full-shadow-localization0.test.mjs',
+  'audits/lean-residual-terminal-consumer-antichain-normal-form0.test.mjs',
   'audits/legacy-v0-archive0.test.mjs',
   'test/current-package-surface0.test.mjs',
   'test/current-verifier0.test.mjs',
