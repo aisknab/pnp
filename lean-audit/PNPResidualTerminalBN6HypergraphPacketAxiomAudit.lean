@@ -1,0 +1,23 @@
+import PNP.ResidualTerminalBN6HypergraphPacket
+
+#print axioms PNP.DirectWire.terminalBN6_disjointPairsSingletonized_of_all_singletons
+#print axioms PNP.DirectWire.TerminalBN6PayloadAtom
+#print axioms PNP.DirectWire.TerminalBN6GroupedCell
+#print axioms PNP.DirectWire.TerminalBN6GroupedCell.mass
+#print axioms PNP.DirectWire.TerminalBN6GroupedCell.massPositive
+#print axioms PNP.DirectWire.TerminalBN6GroupedCell.footprint
+#print axioms PNP.DirectWire.TerminalBN6GroupedCell.toHyperedge
+#print axioms PNP.DirectWire.TerminalBN6GroupedCell.crosses_iff_footprintCrosses
+#print axioms PNP.DirectWire.TerminalBN6GroupedCell.crossesBool_eq_cutIndicatorBool
+#print axioms PNP.DirectWire.TerminalBN6GroupedCell.crossesBool_eq_cutActivationBool
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.activationWeight
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.ConstantActivation
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.hypergraph
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.cutWeight_eq_activationWeight
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.constantProperCuts
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.HasPayloadAt
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.footprintWeight_eq_groupedMass
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.hasPayloadAt_of_footprintWeight_positive
+#print axioms PNP.DirectWire.TerminalBN6PacketConclusion
+#print axioms PNP.DirectWire.terminalBN6_hypergraph_packet

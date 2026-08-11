@@ -1470,6 +1470,24 @@ V53-to-BN6 bridges, BN6 cells and payloads, global routes, selectors,
 polynomial runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain open. See
 [`lean_residual_terminal_constant_cut_hypergraph_rigidity.md`](./lean_residual_terminal_constant_cut_hypergraph_rigidity.md).
 
+`ResidualTerminalBN6HypergraphPacket` now reconstructs the adjacent finite
+BN6 bridge over an arbitrary finite already-grouped survivor family. Every
+group retains a V54 consumer system, the exact PkgC singletonization premise,
+a nonempty positive atom ledger, and payload data. V54 identifies the group's
+two-sided activation with crossing of its singleton footprint; the new theorem
+sums those pointwise equalities into the exact V53 hypergraph cut weight and
+transports a BCEL constant-activation equation into V53's constant-cut
+premise. The resulting classification produces a positive pair packet at two
+anchors, preserves both conditional packet witnesses in the mixed
+three-anchor case, and produces only a positive full-span packet at four or
+more anchors. Every positive packet footprint retains an original payload
+witness. The grouping certificate, PkgC singletonization, atom ledger, and
+constant-cut equation remain explicit inputs. PkgC construction, candidate
+derivation and grouping, full historical BN6, Packet selectors and realizers,
+global route completeness, polynomial runtime, ZeroSlack, PCCMin, SAT in P,
+and P = NP remain open. See
+[`lean_residual_terminal_bn6_hypergraph_packet.md`](./lean_residual_terminal_bn6_hypergraph_packet.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

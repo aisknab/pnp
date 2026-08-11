@@ -1285,6 +1285,22 @@ complete global routes or selectors, establish polynomial runtime, prove
 ZeroSlack or PCCMin, put SAT in P, or produce the root theorem. See
 `docs/lean_residual_terminal_constant_cut_hypergraph_rigidity.md`.
 
+`lean/PNP/ResidualTerminalBN6HypergraphPacket.lean` reconstructs the adjacent
+finite BN6 hypergraph-packet bridge for an arbitrary finite duplicate-free
+anchor carrier and an explicit already-grouped positive survivor family. Each
+group retains its V54 consumer system, exact PkgC singletonization premise,
+positive atom ledger, and payloads. The bridge identifies group activation
+with hyperedge crossing pointwise, sums those identities into the exact V53
+cut weight, applies the constant-cut classification, and retains an original
+payload witness at every positive emitted footprint. Its 21-declaration axiom
+transcript stays within `propext` and `Quot.sound`; regressions cover the q=2,
+mixed q=3, and q>=4 cases plus hostile grouping, singletonization, and
+constant-cut failures. It does not construct PkgC, derive or group survivors
+from a terminal candidate, prove the full historical BN6 or Packet
+selector/realizer route, establish polynomial generation/runtime, prove
+ZeroSlack or PCCMin, put SAT in P, or produce the root theorem. See
+`docs/lean_residual_terminal_bn6_hypergraph_packet.md`.
+
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 
 ```lean

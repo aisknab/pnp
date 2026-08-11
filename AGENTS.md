@@ -169,8 +169,18 @@ them as product code.
 
 ## Cross-Repository Publication And Deployment
 
-When a formal milestone is published through both this repository and PNPLabs,
-use the following order:
+Every formal milestone published through both this repository and PNPLabs must
+pass a full PNPLabs publication-surface audit. This is a release invariant, not
+the mathematical subject or direction of the selected core milestone. Reconcile
+the homepage (including its current bottom line), formal status and complete
+milestone ledger, FAQ and editorial-percentage explanation, updates page, feed,
+progress graphic, paper and architecture pages, README, reviewer and audit
+documentation, source links, download metadata, browser-rendered status, and
+negative tests. Preserve historical milestone coordinates, and keep the
+editorial progress estimate distinct from the number of earned formal-publication
+rows.
+
+Use the following publication order:
 
 1. Finish the core source, audits, regression tests, generated artefacts, and
    clean-clone verification before opening or updating the publication sync.
