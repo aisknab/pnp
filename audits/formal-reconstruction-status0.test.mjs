@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-128');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-129');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -911,6 +911,8 @@ test('formal reconstruction status accepts the current source and public mirrors
     'leanResidualTerminalConsumerAntichainNormalFormAxiomAuditPassed',
     'leanResidualTerminalConstantCutHypergraphRigidityFormalized',
     'leanResidualTerminalConstantCutHypergraphRigidityAxiomAuditPassed',
+    'leanResidualTerminalBN6HypergraphPacketFormalized',
+    'leanResidualTerminalBN6HypergraphPacketAxiomAuditPassed',
   ]) assert.equal(out[field], true, field);
   assert.equal(
     out.leanResidualTerminalPhysicalSupportCompletionScope,
@@ -1016,6 +1018,10 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalConstantCutHypergraphRigidityScope,
     'all-finite-nonnegative-weighted-hypergraphs-constant-cut-hypergraph-rigidity-v53-q2-q3-q4-classification',
   );
+  assert.equal(
+    out.leanResidualTerminalBN6HypergraphPacketScope,
+    'all-finite-explicit-grouped-v54-activation-to-v53-grouped-hypergraph-packet-bn6-pair-mixed-triple-fullspan-with-payload-witnesses',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
@@ -1051,13 +1057,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 27348);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 14272);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7281);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14996);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 245);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 27442);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 14309);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7290);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14999);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 246);
   assert.equal(status.leanSourceClosureSha256,
-    'dbf73b2875e5aa8a8c9dafb5c054869bc453b911ca4d72e33288fe0527b4db02');
+    '4fde46c2f495422c43f5d2eb3ed80500c097a94b511aaecc74f5e8da979cd910');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );

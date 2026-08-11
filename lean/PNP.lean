@@ -41,6 +41,7 @@ import PNP.ResidualTerminalBN4ActivationCancellation
 import PNP.ResidualTerminalBN5FullShadowLocalization
 import PNP.ResidualTerminalConsumerAntichainNormalForm
 import PNP.ResidualTerminalConstantCutHypergraphRigidity
+import PNP.ResidualTerminalBN6HypergraphPacket
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine
