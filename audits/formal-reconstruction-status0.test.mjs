@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-125');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-126');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -905,6 +905,8 @@ test('formal reconstruction status accepts the current source and public mirrors
     'leanResidualTerminalBN3RequestEnvelopeAxiomAuditPassed',
     'leanResidualTerminalBN4ActivationCancellationFormalized',
     'leanResidualTerminalBN4ActivationCancellationAxiomAuditPassed',
+    'leanResidualTerminalBN5FullShadowLocalizationFormalized',
+    'leanResidualTerminalBN5FullShadowLocalizationAxiomAuditPassed',
   ]) assert.equal(out[field], true, field);
   assert.equal(
     out.leanResidualTerminalPhysicalSupportCompletionScope,
@@ -998,6 +1000,10 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalBN4ActivationCancellationScope,
     'successful-computed-finite-bn3-envelope-explicit-typed-cell-ledgers-activation-exact-complete-key-same-key-cancellation-and-exact-integer-mass-residuals',
   );
+  assert.equal(
+    out.leanResidualTerminalBN5FullShadowLocalizationScope,
+    'all-finite-exact-coordinate-negative-unit-refinements-computed-cut-silence-complete-multiplicity-coverage-or-strict-hall-deficit-with-local-x1-nonsilence',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
@@ -1033,13 +1039,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 26851);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 14025);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7197);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14947);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 242);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 27129);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 14125);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7249);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14995);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 243);
   assert.equal(status.leanSourceClosureSha256,
-    '44067b7a25d092dab39173d5563593fb56921adf0eb3b5d7294c0b5e64b7af2a');
+    'c939e940c892279b3845b2d30dc0baa724d53b6f9a6249ccfa2900c7c00cb00f');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -1846,6 +1852,8 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
     'leanResidualTerminalBN3RequestEnvelopeAxiomAuditPassed',
     'leanResidualTerminalBN4ActivationCancellationFormalized',
     'leanResidualTerminalBN4ActivationCancellationAxiomAuditPassed',
+    'leanResidualTerminalBN5FullShadowLocalizationFormalized',
+    'leanResidualTerminalBN5FullShadowLocalizationAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
   assert.equal(
     status.leanResidualTerminalPhysicalSupportCompletionScope,
@@ -1938,6 +1946,10 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(
     status.leanResidualTerminalBN4ActivationCancellationScope,
     'successful-computed-finite-bn3-envelope-explicit-typed-cell-ledgers-activation-exact-complete-key-same-key-cancellation-and-exact-integer-mass-residuals',
+  );
+  assert.equal(
+    status.leanResidualTerminalBN5FullShadowLocalizationScope,
+    'all-finite-exact-coordinate-negative-unit-refinements-computed-cut-silence-complete-multiplicity-coverage-or-strict-hall-deficit-with-local-x1-nonsilence',
   );
   for (const field of [
     'leanSaturatePositiveFormalized',
@@ -2443,6 +2455,8 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanResidualTerminalBN3RequestEnvelopeAxiomAuditPassed',
     'leanResidualTerminalBN4ActivationCancellationFormalized',
     'leanResidualTerminalBN4ActivationCancellationAxiomAuditPassed',
+    'leanResidualTerminalBN5FullShadowLocalizationFormalized',
+    'leanResidualTerminalBN5FullShadowLocalizationAxiomAuditPassed',
   ];
 
   for (const field of fields) {

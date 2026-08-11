@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-125",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-126",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -836,6 +836,9 @@
   "leanResidualTerminalBN4ActivationCancellationFormalized": true,
   "leanResidualTerminalBN4ActivationCancellationAxiomAuditPassed": true,
   "leanResidualTerminalBN4ActivationCancellationScope": "successful-computed-finite-bn3-envelope-explicit-typed-cell-ledgers-activation-exact-complete-key-same-key-cancellation-and-exact-integer-mass-residuals",
+  "leanResidualTerminalBN5FullShadowLocalizationFormalized": true,
+  "leanResidualTerminalBN5FullShadowLocalizationAxiomAuditPassed": true,
+  "leanResidualTerminalBN5FullShadowLocalizationScope": "all-finite-exact-coordinate-negative-unit-refinements-computed-cut-silence-complete-multiplicity-coverage-or-strict-hall-deficit-with-local-x1-nonsilence",
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -1308,6 +1311,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBN4ActivationCancellationAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBN4ActivationCancellation.lean",
     "node --test audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBN5FullShadowLocalizationAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBN5FullShadowLocalization.lean",
+    "node --test audits/lean-residual-terminal-bn5-full-shadow-localization0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1317,7 +1323,8 @@
     "The repository does not currently establish P = NP.",
     "Legacy JavaScript checker acceptance verifies assertion-bearing records under implemented predicates; it is not a formal proof of the named mathematical propositions.",
     "The BN3 joint-realizability gap still shows that arbitrary per-cut side-tight existence cannot imply a stable family. The successful computed BCEL nucleus has a candidate-derived finite repair with canonical request identities, exact minimal consumers, duplicate-free incidence, and one jointly side-tight basis selection function, but its all-subsets enumeration is exponential. The finite BN4 kernel consumes that repaired envelope without repairing arbitrary caller-supplied per-cut witnesses.",
-    "The finite BN4 activation-exact cancellation kernel classifies exact integer positive and negative mass at each complete typed key over an explicit caller-supplied cell ledger. It does not derive the cells, semantic signatures, or transport types from four-corner bases; establish the full historical BN4 theorem; construct BN5, PkgC, or BN6; complete global routes or selectors; establish ZeroSlack or polynomial PCCMin; put SAT in P; or prove P = NP.",
+    "The finite BN4 activation-exact cancellation kernel classifies exact integer positive and negative mass at each complete typed key over an explicit caller-supplied cell ledger. It does not derive the cells, semantic signatures, or transport types from four-corner bases; establish the full historical BN4 theorem; construct PkgC or BN6; complete global routes or selectors; establish ZeroSlack or polynomial PCCMin; put SAT in P; or prove P = NP.",
+    "The finite BN5 full-shadow localization kernel uniformly handles arbitrary finite exact-coordinate unit and quotient-shadow ledgers. It validates negative-mass refinement, computes cut silence, and returns complete multiplicity coverage or a strict Hall deficit routed to local X1. The payloads and shadow universe are explicit inputs; complete matching is not connected back to a BN4 contradiction; full CritC/Q/E/L/X2/X3/X4 diagnosis, the full historical BN5 theorem, PkgC, BN6, global routes, selectors, polynomial generation and runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.",
     "The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.",
     "The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.",
     "Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.",
@@ -1476,7 +1483,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "44067b7a25d092dab39173d5563593fb56921adf0eb3b5d7294c0b5e64b7af2a",
+    "actualSourceClosureSha256": "c939e940c892279b3845b2d30dc0baa724d53b6f9a6249ccfa2900c7c00cb00f",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1506,22 +1513,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-11-124",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-11-125",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "80dae39e58e0053129c34e0105fc9635777e2920a1d93529f14493813508c772",
+  "leanTheoremInventorySha256": "fbd4614c550813bc8deff259f9442b37336efb40be3835e07880842c8e8a3be7",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 26851,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 14947,
-  "leanTheoremInventoryTheoremCount": 14025,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 7197,
-  "leanTheoremInventorySourceClosureModuleCount": 242,
-  "leanSourceClosureSha256": "44067b7a25d092dab39173d5563593fb56921adf0eb3b5d7294c0b5e64b7af2a",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-11-125",
+  "leanTheoremInventoryDeclarationCount": 27129,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 14995,
+  "leanTheoremInventoryTheoremCount": 14125,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 7249,
+  "leanTheoremInventorySourceClosureModuleCount": 243,
+  "leanSourceClosureSha256": "c939e940c892279b3845b2d30dc0baa724d53b6f9a6249ccfa2900c7c00cb00f",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-11-126",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "3385b374bdbc737e8c6808698dc0284ad84ac0850d7bd62b7079d5f6d5b2cfed",
+  "formalPublicationMapSha256": "c4c3f6234e7bf80626d9e271991cea7ffdf00fe90c49c805c42e4a00628e59a3",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -36854,7 +36861,7 @@
     {
       "classification": "formalized-residual-terminal-bn4-activation-cancellation",
       "id": "residual-terminal-bn4-activation-cancellation",
-      "nonClaim": "This is a finite cancellation kernel over an explicit typed cell ledger. It does not derive cells, semantic signatures, or transport types from four-corner bases and is not the full historical BN4 theorem. It supplies no polynomial construction or size bound; does not construct BN5, PkgC, or BN6; does not complete global routes, selectors, or realizers; does not establish ZeroSlack or PCCMin; does not put SAT in P; does not remove a project assumption; and does not prove P = NP.",
+      "nonClaim": "This is a finite cancellation kernel over an explicit typed cell ledger. It does not derive cells, semantic signatures, or transport types from four-corner bases and is not the full historical BN4 theorem. It supplies no polynomial construction or size bound; does not construct PkgC or BN6; does not complete global routes, selectors, or realizers; does not establish ZeroSlack or PCCMin; does not put SAT in P; does not remove a project assumption; and does not prove P = NP.",
       "requiredTheorems": [
         "PNP.DirectWire.terminalBN4ActivationCode_active_iff",
         "PNP.DirectWire.terminalBN4ActivationCode_eq_iff_activation",
@@ -37035,6 +37042,164 @@
       "status": "formalized-residual-terminal-bn4-activation-cancellation"
     },
     {
+      "classification": "formalized-residual-terminal-bn5-full-shadow-localization",
+      "id": "residual-terminal-bn5-full-shadow-localization",
+      "nonClaim": "This kernel starts from explicit finite inputs: one complete BN4 key, a negative cancellation result, a payload list, a cut, and a quotient-shadow coordinate list. It does not derive payloads or shadows from four-corner bases, connect complete matching back to a BN4 contradiction, or prove the full CritC/Q/E/L/X2/X3/X4 diagnosis, so it is not the full historical BN5 theorem. It does not construct PkgC or BN6; complete global routes, selectors, or realizers; establish polynomial generation or runtime, ZeroSlack, or PCCMin; put SAT in P; remove a project assumption; or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalBN5ShadowCoordinate_eq_iff",
+        "PNP.DirectWire.terminalBN5FullUnits_length",
+        "PNP.DirectWire.terminalBN5FullUnits_key_eq",
+        "PNP.DirectWire.TerminalBN5HallDeficit.neighbor_card_lt_full_card",
+        "PNP.DirectWire.TerminalBN5HallDeficit.fullSubset_coordinate_eq",
+        "PNP.DirectWire.TerminalBN5HallDeficit.neighbor_coordinate_eq",
+        "PNP.DirectWire.classifyTerminalBN5ShadowMatching_exhaustive",
+        "PNP.DirectWire.TerminalBN4KeyCancellation.negativeResidualMass?_positive",
+        "PNP.DirectWire.TerminalBN5HallDeficit.namedLocalRoute_eq_x1Hall",
+        "PNP.DirectWire.classifyTerminalBN5FullShadowLocalization_active",
+        "PNP.DirectWire.TerminalBN5HallDeficit.unmatchedShadowNotSilent",
+        "PNP.DirectWire.classifyTerminalBN5FullShadowLocalization_exhaustive"
+      ],
+      "scope": "For every explicit finite negative-unit refinement and quotient-shadow ledger, Lean preserves the complete exact-coordinate data, validates the negative mass refinement, computes whether the cut is silent, and otherwise returns either complete multiplicity coverage or a strict Hall deficit with a literal smaller shadow-neighbor fibre, complete-coordinate preservation, and a proof-bearing local X1 route that prevents active unmatched units from disappearing silently.",
+      "title": "Finite BN5 full-shadow localization kernel",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.terminalBN5ShadowCoordinate_eq_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "8bff617398ee48e2e0b703c252fe76e54989a81857c112937a71e1544db6ce92",
+          "expectedKernelTypeSha256": "8bff617398ee48e2e0b703c252fe76e54989a81857c112937a71e1544db6ce92",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBN5FullUnits_length",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7310efd9f63c51b5578b5b680e2f132235c239111bc3e0fc532131a8a08e846d",
+          "expectedKernelTypeSha256": "7310efd9f63c51b5578b5b680e2f132235c239111bc3e0fc532131a8a08e846d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBN5FullUnits_key_eq",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7de16fa934c64198752a28206304e046a6a0d894436f6624ca8aa688447459d9",
+          "expectedKernelTypeSha256": "7de16fa934c64198752a28206304e046a6a0d894436f6624ca8aa688447459d9",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN5HallDeficit.neighbor_card_lt_full_card",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "d39739401d983bac70c43eb4ea55463b5880586f7f617626023feab137f7e890",
+          "expectedKernelTypeSha256": "d39739401d983bac70c43eb4ea55463b5880586f7f617626023feab137f7e890",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN5HallDeficit.fullSubset_coordinate_eq",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "935e457ede4a6d839787b1c563f1fe9b5c48813b2e1d8dbcfac865dabbb44bf3",
+          "expectedKernelTypeSha256": "935e457ede4a6d839787b1c563f1fe9b5c48813b2e1d8dbcfac865dabbb44bf3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN5HallDeficit.neighbor_coordinate_eq",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7a044d854c4d37be35b31bea28997ea235d7e088d18f859df8d6c7316b6cda5f",
+          "expectedKernelTypeSha256": "7a044d854c4d37be35b31bea28997ea235d7e088d18f859df8d6c7316b6cda5f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.classifyTerminalBN5ShadowMatching_exhaustive",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "daa39d3dc5252bc6eafa09474a9f1f91642c40957251fe7d69b1db28bbd35e29",
+          "expectedKernelTypeSha256": "daa39d3dc5252bc6eafa09474a9f1f91642c40957251fe7d69b1db28bbd35e29",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN4KeyCancellation.negativeResidualMass?_positive",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "dd8fcb3c7caa6eefd822407110d5621906a6a3f812f651d52ff2d0a5d6c07c9d",
+          "expectedKernelTypeSha256": "dd8fcb3c7caa6eefd822407110d5621906a6a3f812f651d52ff2d0a5d6c07c9d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN5HallDeficit.namedLocalRoute_eq_x1Hall",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "76b66e4be0893605464be5e7498b300a796a6913b5194e09577eae4b00b17e04",
+          "expectedKernelTypeSha256": "76b66e4be0893605464be5e7498b300a796a6913b5194e09577eae4b00b17e04",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.classifyTerminalBN5FullShadowLocalization_active",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "022b89b6ed7a65c81d886a4467cea34ee98e37c50fae199996774070ca7b52d4",
+          "expectedKernelTypeSha256": "022b89b6ed7a65c81d886a4467cea34ee98e37c50fae199996774070ca7b52d4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN5HallDeficit.unmatchedShadowNotSilent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "1472e6b4b8992222aac9a8a93b52fd0cce8b696f13bc5d2403ff321462be823f",
+          "expectedKernelTypeSha256": "1472e6b4b8992222aac9a8a93b52fd0cce8b696f13bc5d2403ff321462be823f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.classifyTerminalBN5FullShadowLocalization_exhaustive",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "be1af480ae6864a553e86c154bcbc67ac7b72b01df96b5580c9b9eadeebb4cc3",
+          "expectedKernelTypeSha256": "be1af480ae6864a553e86c154bcbc67ac7b72b01df96b5580c9b9eadeebb4cc3",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-bn5-full-shadow-localization"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -37068,7 +37233,7 @@
     {
       "classification": "not-formalized",
       "id": "global-zeroslack-pccmin",
-      "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family, and the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger. The construction still does not derive that ledger from the bases, establish the full historical BN4 theorem, construct BN5, PkgC, or BN6, map all residual routes into a decreasing complete global outcome system, or provide selector/realizer and polynomial-runtime completeness; global ZeroSlack and polynomial PCCMin therefore remain unformalized.",
+      "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; and the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route. The construction still does not derive the BN4 ledger or BN5 payload/shadow universe from the bases, connect matching back to a contradiction, establish the full historical BN4 or BN5 theorems, construct PkgC or BN6, map all residual routes into a decreasing complete global outcome system, or provide selector/realizer and polynomial-runtime completeness; global ZeroSlack and polynomial PCCMin therefore remain unformalized.",
       "requiredTheorems": [
         "PNP.Main.pccmin_polynomial_exact",
         "PNP.Main.zero_slack_complete"
@@ -37132,7 +37297,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-11-125",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-11-126",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true
