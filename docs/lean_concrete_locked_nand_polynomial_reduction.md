@@ -60,38 +60,38 @@ node --test \
 ## Mechanically generated publication evidence
 
 Inventory coordinate
-`PNP-LEAN-THEOREM-INVENTORY-2026-08-11-123` records 26,624 declarations,
-13,928 theorems, 7,165 assumption-free theorems, 14,939 excluded private
-declarations, 241 source-closure modules, and 2,498 reviewed milestone
-candidates. Its 17,275,021 canonical bytes have SHA-256
-`231781715e011ebf8b583ce3c26f9896622d6962faaf8fcebd68f36e511ea003`.
+`PNP-LEAN-THEOREM-INVENTORY-2026-08-11-124` records 26,851 declarations,
+14,025 theorems, 7,197 assumption-free theorems, 14,947 excluded private
+declarations, 242 source-closure modules, and 2,511 reviewed milestone
+candidates. Its 17,400,943 canonical bytes have SHA-256
+`80dae39e58e0053129c34e0105fc9635777e2920a1d93529f14493813508c772`.
 The exact Lean source closure has SHA-256
-`e30716e5e6ec0ad0f7c084a66d9ff28c1a8cf5a7008b5fc8caff81205e51eb15`.
+`44067b7a25d092dab39173d5563593fb56921adf0eb3b5d7294c0b5e64b7af2a`.
 
 Publication-map coordinate
-`PNP-FORMAL-PUBLICATION-MAP-2026-08-11-124` contains 102 milestones: 99
+`PNP-FORMAL-PUBLICATION-MAP-2026-08-11-125` contains 103 milestones: 101
 earned and two deliberately unearned. The reduction milestone pins five
 theorem types, while its audit covers nine reused interfaces and all seven
 new public declarations. Of those 16 declarations, two have empty axiom
 closure, two use only `propext`, and twelve use only `propext` and
 `Quot.sound`. None reaches `Classical.choice` or a project axiom. The complete
-map pins 2,498 theorem types; its 809,177 bytes have SHA-256
-`96e4a8b21a717e2190b5eed64ed50f27402b7690b7b80a52bb98782984f54258`.
+map pins 2,511 theorem types; its 813,470 bytes have SHA-256
+`3385b374bdbc737e8c6808698dc0284ad84ac0850d7bd62b7079d5f6d5b2cfed`.
 
 Status coordinate
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-124`, paired with public-surface
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-125`, paired with public-surface
 coordinate
 `PUBLIC-SURFACE-BASELINE-2026-08-10-CONCRETE-LOCKED-NAND-THRESHOLD-121`,
 records the exact function, output, language equivalence, reduction witness,
-and recursive raw refinement as earned. Its 2,034,357 bytes have SHA-256
-`0f3e05664980c80d3c8a9fb5cceb4cb10cefaa05a96ea2d0f523c2663956fbc3`.
+and recursive raw refinement as earned. Its 2,044,745 bytes have SHA-256
+`acd3acd30a52590ed16966c55b62b8aaf1d2d5985b08ea627057a0d9ab4db07f`.
 
 Canonical report coordinate
-`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-11-124` has a
-211,420-byte TeX source with SHA-256
-`b81fbdd17af61400d2883493ee90417affddd37f5d23567ede3d808bb417b0e2`
-and a deterministic 82-page, 449,511-byte A4 PDF with SHA-256
-`e998779d189f762ffcbcdb82b51de8a15bd0c7c8e4be6d463d5c833323ae45ef`.
+`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-11-125` has a
+212,960-byte TeX source with SHA-256
+`92f911ee8d3286aba5f75b476d3691260355ad7c0a906c3478b8daf68f2c9d44`
+and a deterministic 83-page, 450,819-byte A4 PDF with SHA-256
+`f84e248a5cd842af25965669f1e8387d8adfbfad4a2e29828798cf9f855151fc`.
 
 The concrete publication gate remains false. All four project assumptions,
 all five blockers, unset activation fingerprints, and the absence of

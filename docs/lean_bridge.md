@@ -1220,10 +1220,25 @@ membership requests and exact singleton minimal consumers across every proper
 cut. Filtering it gives exact duplicate-free incidence, while one canonical
 full/quotient basis function is proved side-tight and coherent at every proper
 cut. The total classifier retains all existing proof-bearing failure branches.
-Its all-subsets cut enumeration is exponential, and it does not construct
-BN4–BN6, complete the global route system, prove selector/realizer closure,
-ZeroSlack, PCCMin, SAT in P, or the root theorem. See
+Its all-subsets cut enumeration is exponential, and it does not construct the
+full historical BN4–BN6 chain, complete the global route system, prove
+selector/realizer closure, ZeroSlack, PCCMin, SAT in P, or the root theorem. See
 `docs/lean_residual_terminal_bn3_request_envelope.md`.
+
+`lean/PNP/ResidualTerminalBN4ActivationCancellation.lean` closes the adjacent
+finite activation and cancellation edge. From a successful BN3 envelope it
+uses the exact singleton minimal consumer as a canonical activation code and
+proves code equality equivalent to activation-function equality without a cut
+scan. Explicit signed cells carry a complete key consisting of the request
+atom, semantic signature, and transport type. The executable per-key
+classifier proves exact integer mass conservation and produces a canonical
+balanced or one-sign positive-mass residual with the full key preserved and no
+opposite-sign pair. Its total wrapper preserves every upstream failure and
+rejects foreign atoms. The typed ledger and its semantic/transport labels are
+still caller data, so this is not the full historical BN4 theorem and supplies
+no BN5/PkgC/BN6, complete routes or selectors, ZeroSlack, PCCMin, polynomial
+runtime, SAT in P, or root theorem. See
+`docs/lean_residual_terminal_bn4_activation_cancellation.md`.
 
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 

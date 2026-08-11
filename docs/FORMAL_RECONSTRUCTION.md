@@ -1401,10 +1401,27 @@ per-cut basis existence still cannot imply a stable family. The new theorem
 avoids that invalid inference by deriving the identities and bases from one
 successful computed nucleus. Its proper-cut scan enumerates all subsets, so it
 is exponential reference computation rather than a concrete polynomial
-machine. BN4–BN6, complete decreasing route coverage, selector/realizer
-closure, global ZeroSlack, and polynomial PCCMin are still absent; both global
-publication milestones therefore remain unearned. See
+machine. The finite BN4 cancellation kernel below closes only the adjacent
+activation and same-key arithmetic edge; the full historical BN4–BN6 chain,
+complete decreasing route coverage, selector/realizer closure, global
+ZeroSlack, and polynomial PCCMin are still absent. Both global publication
+milestones therefore remain unearned. See
 [`bn3_joint_realizability_gap.md`](../review/bn3_joint_realizability_gap.md).
+
+`ResidualTerminalBN4ActivationCancellation` consumes a successful finite BN3
+envelope and an explicit typed signed-cell ledger. The exact singleton request
+code is active precisely on the BN3 request predicate, and code equality is
+equivalent to activation-function equality without enumerating cuts. Each
+complete key retains its request atom, semantic signature, and transport type.
+The executable per-key classifier proves exact integer mass conservation and
+returns a canonical balanced, positive, or negative residual whose cells keep
+that key, have positive mass, and cannot contain an opposite-sign pair. The
+total wrapper preserves all upstream proof-bearing failures and rejects cells
+whose atoms are outside the successful envelope. The ledger, signatures, and
+transport labels remain explicit inputs, so this is not the full historical
+BN4 theorem and provides no BN5/PkgC/BN6, global-route, selector, ZeroSlack,
+PCCMin, or polynomial-runtime conclusion. See
+[`lean_residual_terminal_bn4_activation_cancellation.md`](./lean_residual_terminal_bn4_activation_cancellation.md).
 
 ## The only acceptable future activation gate
 

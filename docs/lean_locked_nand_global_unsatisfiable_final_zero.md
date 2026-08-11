@@ -103,6 +103,6 @@ and five blockers remain, `PNP.Main.p_eq_np` remains absent, and the concrete
 publication gate remains false.
 
 The current successor evidence is recorded at inventory coordinate
-`PNP-LEAN-THEOREM-INVENTORY-2026-08-11-123` and status coordinate
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-124`; see
+`PNP-LEAN-THEOREM-INVENTORY-2026-08-11-124` and status coordinate
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-125`; see
 [Lean locked-NAND global semantic threshold](./lean_locked_nand_global_semantic_threshold.md).

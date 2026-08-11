@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-11-124",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-11-125",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2498,7 +2498,20 @@
     "PNP.DirectWire.terminalBN3RequestPredicate_monotone": "46738bea433318a3dd0010b1f7fa4a2c7a459e1f1c9e0afc4a3689f102a69bdf",
     "PNP.DirectWire.terminalBN3RequestPredicate_stable": "764cfe5b3bc264ca81e21e70e7e37126cc0b0364c3ddef55ad697d04e74b0da4",
     "PNP.DirectWire.terminalListSubsets_sublist": "ea0fefb3d241ebd81df124fbdb49a8409c1e6e77a111af3b6d4755e78c0c4d75",
-    "PNP.DirectWire.TerminalResidualRankDescent.sound": "4c4bf650e6b68d7ec6d654c4fe37ad523959cb254bb5cb871cda50c79515ada5"
+    "PNP.DirectWire.TerminalResidualRankDescent.sound": "4c4bf650e6b68d7ec6d654c4fe37ad523959cb254bb5cb871cda50c79515ada5",
+    "PNP.DirectWire.terminalBN4ActivationCode_active_iff": "8afb6c83f2c71153fa2c1973ce6ce66a1568db44d90e332e767be92d9b6d9049",
+    "PNP.DirectWire.terminalBN4ActivationCode_eq_iff_activation": "f93b4fd8727f8007268397889168591d99ef685c28745dc9974ab0ffdb0410e4",
+    "PNP.DirectWire.terminalBN4ActivationKey_eq_iff": "b2ad109751baa42293aefadde7bf9abd710ee92d29861446fce5e76d5b1f1c75",
+    "PNP.DirectWire.terminalBN4IntegerMassLedger_exact": "546e462e0ef7dde2e206b4aa76a5423fdb6e90288d386d5b1e7b40ab4e499307",
+    "PNP.DirectWire.TerminalBN4KeyCancellation.residual_key_eq": "4f9cfd1be354f2d98412ce0a576b6ac70776fe36e14802c144f55f6f8ec9acfa",
+    "PNP.DirectWire.TerminalBN4KeyCancellation.residual_mass_positive": "18a3f982541deffbab7328288f27c9234355cb44cb6582e2a5ea214813cbdd57",
+    "PNP.DirectWire.TerminalBN4KeyCancellation.no_opposite_sign_residual": "1068875545d4960dffa31dc9b4a07eea73dadb4f959c91c44631809a9b09c712",
+    "PNP.DirectWire.TerminalBN4KeyCancellation.residual_signedContribution_exact": "09061be38da7ae908439addb860433baa3ab6b3b5cb5fe941a98069f898e40f5",
+    "PNP.DirectWire.terminalBN4CancelAtKey_signedContribution_exact": "32a8c0b81eea0c08a8ad9f2b81a061205c821f47dd02b20a0eaa3e4c49e19bb9",
+    "PNP.DirectWire.terminalBN4CanonicalKeys_nodup": "3bcc443216fe3c17d072c30bc90b0006609e6a3f7222656ac47a622a6c7e3767",
+    "PNP.DirectWire.terminalBN4CellsUseCanonicalAtoms_iff": "ed064aad0541a0234527b9e064b4b9cddadaa699a26517e9bd8b662c0ea27b23",
+    "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.computedBN4ActivationCancellation": "d57599983f9df1f99d9e2784ffb08941c3bf5361754b826e5bf0e6915f3aef7d",
+    "PNP.DirectWire.classifyTerminalBN4ActivationCancellation_exhaustive": "bf2a3ab3f2cc83cb4e4d11885d8b7d012b14fe0b813604648990a6f547505f00"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -2516,7 +2529,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "e30716e5e6ec0ad0f7c084a66d9ff28c1a8cf5a7008b5fc8caff81205e51eb15",
+  "milestoneSourceClosureSha256": "44067b7a25d092dab39173d5563593fb56921adf0eb3b5d7294c0b5e64b7af2a",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -6141,6 +6154,28 @@
       "title": "Candidate-derived finite BN3 request envelope"
     },
     {
+      "classification": "formalized-residual-terminal-bn4-activation-cancellation",
+      "id": "residual-terminal-bn4-activation-cancellation",
+      "nonClaim": "This is a finite cancellation kernel over an explicit typed cell ledger. It does not derive cells, semantic signatures, or transport types from four-corner bases and is not the full historical BN4 theorem. It supplies no polynomial construction or size bound; does not construct BN5, PkgC, or BN6; does not complete global routes, selectors, or realizers; does not establish ZeroSlack or PCCMin; does not put SAT in P; does not remove a project assumption; and does not prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalBN4ActivationCode_active_iff",
+        "PNP.DirectWire.terminalBN4ActivationCode_eq_iff_activation",
+        "PNP.DirectWire.terminalBN4ActivationKey_eq_iff",
+        "PNP.DirectWire.terminalBN4IntegerMassLedger_exact",
+        "PNP.DirectWire.TerminalBN4KeyCancellation.residual_key_eq",
+        "PNP.DirectWire.TerminalBN4KeyCancellation.residual_mass_positive",
+        "PNP.DirectWire.TerminalBN4KeyCancellation.no_opposite_sign_residual",
+        "PNP.DirectWire.TerminalBN4KeyCancellation.residual_signedContribution_exact",
+        "PNP.DirectWire.terminalBN4CancelAtKey_signedContribution_exact",
+        "PNP.DirectWire.terminalBN4CanonicalKeys_nodup",
+        "PNP.DirectWire.terminalBN4CellsUseCanonicalAtoms_iff",
+        "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.computedBN4ActivationCancellation",
+        "PNP.DirectWire.classifyTerminalBN4ActivationCancellation_exhaustive"
+      ],
+      "scope": "After a successful computed finite BN3 envelope, Lean gives every request atom a canonical singleton activation code; proves activation-code equality exactly equivalent to equality of activation functions without enumerating cuts; checks equality of a complete typed key containing the atom, explicit semantic signature, and explicit transport type; totals positive and negative natural mass only at that same complete key; classifies a canonical balanced, positive, or negative residual; proves exact integer mass conservation, complete-key preservation, positive residual mass, and absence of opposite-sign residual pairs; computes duplicate-free ledger keys; and preserves all upstream failure branches while rejecting foreign request atoms.",
+      "title": "Finite BN4 activation-exact cancellation kernel"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -6153,7 +6188,7 @@
     {
       "classification": "not-formalized",
       "id": "global-zeroslack-pccmin",
-      "nonClaim": "The finite candidate-derived BN3 envelope now supplies stable request identities, exact minimal consumers, duplicate-free incidence, and one jointly side-tight canonical basis family after a successful computed BCEL nucleus. Its exhaustive proper-cut enumeration is exponential and it does not construct BN4-BN6, map all residual routes into a decreasing complete global outcome system, or provide selector/realizer and polynomial-runtime completeness; global ZeroSlack and polynomial PCCMin therefore remain unformalized.",
+      "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family, and the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger. The construction still does not derive that ledger from the bases, establish the full historical BN4 theorem, construct BN5, PkgC, or BN6, map all residual routes into a decreasing complete global outcome system, or provide selector/realizer and polynomial-runtime completeness; global ZeroSlack and polynomial PCCMin therefore remain unformalized.",
       "requiredTheorems": [
         "PNP.Main.pccmin_polynomial_exact",
         "PNP.Main.zero_slack_complete"

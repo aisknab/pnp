@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-124');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-11-125');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -903,6 +903,8 @@ test('formal reconstruction status accepts the current source and public mirrors
     'leanResidualTerminalRankWFAxiomAuditPassed',
     'leanResidualTerminalBN3RequestEnvelopeFormalized',
     'leanResidualTerminalBN3RequestEnvelopeAxiomAuditPassed',
+    'leanResidualTerminalBN4ActivationCancellationFormalized',
+    'leanResidualTerminalBN4ActivationCancellationAxiomAuditPassed',
   ]) assert.equal(out[field], true, field);
   assert.equal(
     out.leanResidualTerminalPhysicalSupportCompletionScope,
@@ -992,6 +994,10 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalBN3RequestEnvelopeScope,
     'successful-computed-finite-bcel-anchor-nuclei-canonical-stable-request-identities-exact-singleton-minimal-consumers-duplicate-free-incidence-and-jointly-side-tight-full-or-quotient-basis-family',
   );
+  assert.equal(
+    out.leanResidualTerminalBN4ActivationCancellationScope,
+    'successful-computed-finite-bn3-envelope-explicit-typed-cell-ledgers-activation-exact-complete-key-same-key-cancellation-and-exact-integer-mass-residuals',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
@@ -1027,13 +1033,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 26624);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 13928);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7165);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14939);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 241);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 26851);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 14025);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7197);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 14947);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 242);
   assert.equal(status.leanSourceClosureSha256,
-    'e30716e5e6ec0ad0f7c084a66d9ff28c1a8cf5a7008b5fc8caff81205e51eb15');
+    '44067b7a25d092dab39173d5563593fb56921adf0eb3b5d7294c0b5e64b7af2a');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -1838,6 +1844,8 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
     'leanResidualTerminalRankWFAxiomAuditPassed',
     'leanResidualTerminalBN3RequestEnvelopeFormalized',
     'leanResidualTerminalBN3RequestEnvelopeAxiomAuditPassed',
+    'leanResidualTerminalBN4ActivationCancellationFormalized',
+    'leanResidualTerminalBN4ActivationCancellationAxiomAuditPassed',
   ]) assert.equal(status[field], true, field);
   assert.equal(
     status.leanResidualTerminalPhysicalSupportCompletionScope,
@@ -1926,6 +1934,10 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(
     status.leanResidualTerminalBN3RequestEnvelopeScope,
     'successful-computed-finite-bcel-anchor-nuclei-canonical-stable-request-identities-exact-singleton-minimal-consumers-duplicate-free-incidence-and-jointly-side-tight-full-or-quotient-basis-family',
+  );
+  assert.equal(
+    status.leanResidualTerminalBN4ActivationCancellationScope,
+    'successful-computed-finite-bn3-envelope-explicit-typed-cell-ledgers-activation-exact-complete-key-same-key-cancellation-and-exact-integer-mass-residuals',
   );
   for (const field of [
     'leanSaturatePositiveFormalized',
@@ -2429,6 +2441,8 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanResidualTerminalRankWFAxiomAuditPassed',
     'leanResidualTerminalBN3RequestEnvelopeFormalized',
     'leanResidualTerminalBN3RequestEnvelopeAxiomAuditPassed',
+    'leanResidualTerminalBN4ActivationCancellationFormalized',
+    'leanResidualTerminalBN4ActivationCancellationAxiomAuditPassed',
   ];
 
   for (const field of fields) {
