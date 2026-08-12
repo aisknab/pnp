@@ -284,9 +284,10 @@ test('root, status, milestone, workflow, and documentation publish the boundary'
 
     const compactDocs = docs.replaceAll(/\s+/gu, ' ');
     for (const fragment of [
-      status.leanTheoremInventoryCoordinate,
-      status.formalPublicationMapCoordinate,
-      status.coordinate,
+      'canonical inventory',
+      'publication map',
+      'status payload',
+      'report artifacts',
       'PolynomialReduction',
       'EncodedNANDSAT',
       'EncodedLockedNANDThreshold',

@@ -138,6 +138,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-residual-terminal-pkgc-typed-restoration0.test.mjs',
   'audits/lean-residual-terminal-pkgc-same-key-cancellation0.test.mjs',
   'audits/lean-residual-terminal-pkgc-ambient-bn4-ledger0.test.mjs',
+  'audits/lean-residual-terminal-pkgc-ambient-bn4-residual-reduction0.test.mjs',
   'audits/lean-residual-terminal-consumer-antichain-normal-form0.test.mjs',
   'audits/lean-residual-terminal-constant-cut-hypergraph-rigidity0.test.mjs',
   'audits/lean-residual-terminal-bn6-hypergraph-packet0.test.mjs',

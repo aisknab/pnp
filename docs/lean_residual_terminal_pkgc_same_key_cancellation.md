@@ -57,31 +57,12 @@ and claim widening.
 
 ## Mechanically generated publication evidence
 
-Inventory coordinate `PNP-LEAN-THEOREM-INVENTORY-2026-08-12-133` records
-27,794 declarations, 14,454 theorems, 7,347 assumption-free theorems, 15,008
-excluded private declarations, 250 source-closure modules, and 2,589 reviewed
-milestone candidates. Its 18,243,895 canonical bytes have SHA-256
-`696c76220a092e5a84e7caa804fd1c57889f193968d1285b520c408f8237f5c1`;
-the exact Lean source closure has SHA-256
-`9b8afc2bac8c5f5b5fbe3c086f22602358c3f9b641aeb91e7de708f9f1001154`.
-
-Publication-map coordinate `PNP-FORMAL-PUBLICATION-MAP-2026-08-12-133`
-contains 111 milestones: 109 earned and two deliberately unearned. It pins
-2,589 theorem types; its 840,935 bytes have SHA-256
-`a9f7ec898fb04e4842ea86281d2a6b257fc0c65dd422eb04a974bde169bf29d6`.
+Current coordinates, counts, fingerprints, sizes, and report hashes are
+generated in the canonical publication artifacts rather than copied here.
 The same-key-cancellation milestone contributes 11 reviewed theorem types.
-
-Status coordinate `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-12-133` remains
-fail-closed with all four disclosed project assumptions, all five blockers,
-unset activation fingerprints, and absent `PNP.Main.p_eq_np`. Its 2,111,583
-bytes have SHA-256
-`6e7416a60485390b4414251c3b8f00214ed759f93d8091aef73cdb357da2dbfe`.
-Canonical report coordinate
-`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-12-133` has a
-223,061-byte TeX source with SHA-256
-`2e42452a0d270c8e36cf7f381dbd38a64a535d07b8bc653e4e13ff526c574e7d`
-and a deterministic 88-page, 460,049-byte A4 PDF with SHA-256
-`5bca11cba837c8bdf90e27186974bf5398d4be78fae3360987afbf19746d271b`.
+The current status remains fail-closed with all four disclosed project
+assumptions, all five blockers, unset activation fingerprints, and absent
+`PNP.Main.p_eq_np`.
 
 ## Exact non-claim
 

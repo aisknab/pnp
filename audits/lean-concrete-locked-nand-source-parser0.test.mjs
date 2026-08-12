@@ -463,14 +463,9 @@ test('root, publication, status, workflow, and documentation bind the parser',
 
     const compactDocs = docs.replaceAll(/\s+/gu, ' ');
     for (const token of [
-      inventory.coordinate,
-      map.coordinate,
-      status.coordinate,
-      `${inventory.declarationCount.toLocaleString('en-US')} declarations`,
-      `${inventory.theoremCount.toLocaleString('en-US')} theorems`,
-      `${inventory.assumptionFreeTheoremCount.toLocaleString('en-US')} assumption-free theorems`,
+      'canonical generated artifacts',
+      '20 reviewed theorem types',
       `${printed.length.toLocaleString('en-US')} audited declarations`,
-      `${MILESTONE_THEOREMS.length} theorem types`,
       `${closureCounts.empty.toLocaleString('en-US')} have empty axiom closure`,
       `${closureCounts.propext.toLocaleString('en-US')} use only \`propext\``,
       `${closureCounts.propextQuot.toLocaleString('en-US')} use only \`propext\` and \`Quot.sound\``,

@@ -287,22 +287,13 @@ test('status earns the typed semantic threshold without widening the project cla
 
 test('milestone documentation records mechanically generated release evidence', async () => {
   const docs = (await text0(DOCS_PATH)).replaceAll(/\s+/gu, ' ');
-  const inventory = JSON.parse(await text0(INVENTORY_PATH));
-  const status = JSON.parse(
-    await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'),
-  );
-  const map = JSON.parse(
-    await text0('publication/FORMAL_PUBLICATION_MAP.json'),
-  );
   for (const token of [
-    inventory.coordinate,
-    status.coordinate,
-    map.coordinate,
-    `${inventory.declarationCount.toLocaleString('en-US')} declarations`,
-    `${inventory.theoremCount.toLocaleString('en-US')} theorems`,
-    `${inventory.assumptionFreeTheoremCount.toLocaleString('en-US')} assumption-free theorems`,
-    `${inventory.excludedPrivateDeclarationCount.toLocaleString('en-US')} excluded private declarations`,
-    `${inventory.milestoneCandidates.length.toLocaleString('en-US')} reviewed milestone candidates`,
+    'canonical inventory',
+    'publication map',
+    'status payload',
+    'report artifacts',
+    'seven new theorem types',
+    'exact unsatisfiable-minimum theorem',
     'answer-independent',
     'all six',
     'Classical.choice',

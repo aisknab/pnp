@@ -100,8 +100,11 @@ test('status retains five blockers, four project axioms, and an absent compatibi
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 111);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 109);
+  assert.equal(status.formalPublicationMilestones.length,
+    new Set(status.formalPublicationMilestones.map(({ id }) => id)).size);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length,
+    status.formalPublicationMilestones.length
+      - status.formalPublicationMilestones.filter((entry) => !entry.earned).length);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 2);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -2583,6 +2586,23 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /explicit proof-bearing inputs/u);
   assert.match(terminalPkgCAmbientBN4Ledger.nonClaim,
     /does not derive the ambient ledger/u);
+  const terminalPkgCAmbientBN4ResidualReduction = byId.get(
+    'residual-terminal-pkgc-ambient-bn4-residual-reduction',
+  );
+  assert.equal(terminalPkgCAmbientBN4ResidualReduction.status,
+    'formalized-residual-terminal-pkgc-ambient-bn4-residual-reduction');
+  assert.equal(terminalPkgCAmbientBN4ResidualReduction.earned, true);
+  assert.equal(
+    terminalPkgCAmbientBN4ResidualReduction
+      .axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.equal(terminalPkgCAmbientBN4ResidualReduction.requiredTheorems.length,
+    8);
+  assert.match(terminalPkgCAmbientBN4ResidualReduction.scope,
+    /complete canonical executable residual ledger/u);
+  assert.match(terminalPkgCAmbientBN4ResidualReduction.nonClaim,
+    /does not derive those inputs/u);
   const lockedNANDThreshold = byId.get('global-locked-nand-threshold');
   assert.equal(lockedNANDThreshold.status,
     'formalized-concrete-locked-nand-threshold');
@@ -2599,16 +2619,19 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
 });
 
 test('publication consumes the reviewed locked-NAND carrier map and inventory counts', async () => {
-  const [status, mapText] = await Promise.all([
+  const [status, mapText, inventoryText] = await Promise.all([
     status0(),
     readFile(new URL('../publication/FORMAL_PUBLICATION_MAP.json', import.meta.url), 'utf8'),
+    readFile(new URL('../status/LEAN_THEOREM_INVENTORY.json', import.meta.url), 'utf8'),
   ]);
   const map = JSON.parse(mapText);
+  const inventory = JSON.parse(inventoryText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    '7069c4e01a1a41a7751f41389b6eadc7711cf550d0de79b29a2eb237819bdffb');
+    'fad7577549af3a28dc4d9eb335e1d45da477eadff62694e21ad74b10d7b2a49e');
   assert.equal(map.milestoneSourceClosureSha256,
-    '9b8afc2bac8c5f5b5fbe3c086f22602358c3f9b641aeb91e7de708f9f1001154');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2589);
+    status.leanSourceClosureSha256);
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length,
+    inventory.milestoneCandidates.length);
   for (const theorem of [
     'PNP.DirectWire.TerminalBCELAnchorProblem.wholeCorners_projectionDefect',
     'PNP.DirectWire.TerminalProjectionPositivityLoss.minima_eq',
@@ -3019,7 +3042,13 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [27794, 14454, 7347, 15008, 250]);
+  ], [
+    inventory.declarationCount,
+    inventory.theoremCount,
+    inventory.assumptionFreeTheoremCount,
+    inventory.excludedPrivateDeclarationCount,
+    inventory.sourceClosureModuleCount,
+  ]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

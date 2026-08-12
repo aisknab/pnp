@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-12-133');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-12-134');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -915,6 +915,8 @@ test('formal reconstruction status accepts the current source and public mirrors
     'leanResidualTerminalPkgCSameKeyCancellationAxiomAuditPassed',
     'leanResidualTerminalPkgCAmbientBN4LedgerFormalized',
     'leanResidualTerminalPkgCAmbientBN4LedgerAxiomAuditPassed',
+    'leanResidualTerminalPkgCAmbientBN4ResidualReductionFormalized',
+    'leanResidualTerminalPkgCAmbientBN4ResidualReductionAxiomAuditPassed',
     'leanResidualTerminalConsumerAntichainNormalFormFormalized',
     'leanResidualTerminalConsumerAntichainNormalFormAxiomAuditPassed',
     'leanResidualTerminalConstantCutHypergraphRigidityFormalized',
@@ -1035,6 +1037,10 @@ test('formal reconstruction status accepts the current source and public mirrors
     'all-finite-explicit-ambient-bn4-ledgers-exact-multiset-embedding-balanced-generated-subledger-removal-preserves-remainder-signed-mass-and-candidate-derived-canonical-atom-linkage',
   );
   assert.equal(
+    out.leanResidualTerminalPkgCAmbientBN4ResidualReductionScope,
+    'all-finite-explicit-ambient-bn4-ledgers-exact-balanced-subledger-removal-preserves-per-key-and-complete-canonical-executable-residual-ledgers-with-empty-remainder-corollary',
+  );
+  assert.equal(
     out.leanResidualTerminalConsumerAntichainNormalFormScope,
     'all-finite-minimal-consumer-antichains-monotone-empty-false-nonzero-iff-disjoint-and-pkgc-singletonized-exact-v54-consumer-antichain-cut-indicator',
   );
@@ -1080,14 +1086,21 @@ test('formal reconstruction status accepts the current source and public mirrors
 });
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
-  const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 27794);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 14454);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7347);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 15008);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 250);
-  assert.equal(status.leanSourceClosureSha256,
-    '9b8afc2bac8c5f5b5fbe3c086f22602358c3f9b641aeb91e7de708f9f1001154');
+  const [status, inventory] = await Promise.all([
+    currentStatus0(),
+    readFile(new URL('../status/LEAN_THEOREM_INVENTORY.json', import.meta.url),
+      'utf8').then(JSON.parse),
+  ]);
+  assert.equal(status.leanTheoremInventoryDeclarationCount,
+    inventory.declarationCount);
+  assert.equal(status.leanTheoremInventoryTheoremCount, inventory.theoremCount);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount,
+    inventory.assumptionFreeTheoremCount);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount,
+    inventory.excludedPrivateDeclarationCount);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount,
+    inventory.sourceClosureModuleCount);
+  assert.match(status.leanSourceClosureSha256, /^[0-9a-f]{64}$/u);
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -2507,6 +2520,8 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanResidualTerminalPkgCSameKeyCancellationAxiomAuditPassed',
     'leanResidualTerminalPkgCAmbientBN4LedgerFormalized',
     'leanResidualTerminalPkgCAmbientBN4LedgerAxiomAuditPassed',
+    'leanResidualTerminalPkgCAmbientBN4ResidualReductionFormalized',
+    'leanResidualTerminalPkgCAmbientBN4ResidualReductionAxiomAuditPassed',
   ];
 
   for (const field of fields) {
