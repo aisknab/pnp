@@ -1563,6 +1563,18 @@ global route completeness, polynomial runtime, ZeroSlack, PCCMin, SAT in P,
 and P = NP remain open. See
 [`lean_residual_terminal_bn6_hypergraph_packet.md`](./lean_residual_terminal_bn6_hypergraph_packet.md).
 
+`ResidualTerminalPacketSelectorSeeds` reconstructs the next bounded Packet
+edge over an arbitrary finite exact BN6 conclusion. A raw seed records carrier
+containment, a footprint of size at least two, and the original grouped
+cell-and-atom payload witness. The exhaustive theorem yields the pair seed,
+seeds for every pair footprint when the balanced-triple mass is positive, or
+the positive full-span seed in the three-anchor or larger branch. It does not
+claim selector-universe membership, faithfulness, compatibility, realizer or
+route construction, enumeration, or polynomial bounds. Those obligations,
+together with PkgC completion, ZeroSlack, PCCMin, SAT in P, and P = NP, remain
+open. See
+[`lean_residual_terminal_packet_selector_seeds.md`](./lean_residual_terminal_packet_selector_seeds.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

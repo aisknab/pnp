@@ -1377,6 +1377,19 @@ selector/realizer route, establish polynomial generation/runtime, prove
 ZeroSlack or PCCMin, put SAT in P, or produce the root theorem. See
 `docs/lean_residual_terminal_bn6_hypergraph_packet.md`.
 
+`lean/PNP/ResidualTerminalPacketSelectorSeeds.lean` reconstructs the next
+finite Packet edge over every exact BN6 conclusion. It preserves carrier
+containment, selector-relevant footprint size, and the original cell-and-atom
+payload witness. The exhaustive conclusion yields one pair seed, seeds for
+every positive balanced-triple pair footprint, or one positive full-span seed,
+including the full-span side of the mixed three-anchor branch. Its exact
+five-declaration transcript stays within `propext` and `Quot.sound`, and its
+generic regression fixes no carrier. This does not prove selector-universe
+membership, faithfulness or compatibility, construct realizers or routes,
+establish enumeration or polynomial runtime, complete PkgC, ZeroSlack, or
+PCCMin, put SAT in P, or produce the root theorem. See
+`docs/lean_residual_terminal_packet_selector_seeds.md`.
+
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 
 ```lean

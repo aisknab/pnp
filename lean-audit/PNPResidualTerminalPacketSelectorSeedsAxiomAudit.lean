@@ -1,0 +1,7 @@
+import PNP.ResidualTerminalPacketSelectorSeeds
+
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.HasPacketSelectorSeedAt
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.hasPacketSelectorSeedAt_of_hasPayloadAt
+#print axioms PNP.DirectWire.TerminalPacketSelectorSeedConclusion
+#print axioms PNP.DirectWire.TerminalBN6PacketConclusion.selectorSeeds
+#print axioms PNP.DirectWire.terminalBN6_packet_selector_seeds

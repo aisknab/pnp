@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-12-134');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-13-135');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -923,6 +923,8 @@ test('formal reconstruction status accepts the current source and public mirrors
     'leanResidualTerminalConstantCutHypergraphRigidityAxiomAuditPassed',
     'leanResidualTerminalBN6HypergraphPacketFormalized',
     'leanResidualTerminalBN6HypergraphPacketAxiomAuditPassed',
+    'leanResidualTerminalPacketSelectorSeedsFormalized',
+    'leanResidualTerminalPacketSelectorSeedsAxiomAuditPassed',
   ]) assert.equal(out[field], true, field);
   assert.equal(
     out.leanResidualTerminalPhysicalSupportCompletionScope,
@@ -1051,6 +1053,10 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(
     out.leanResidualTerminalBN6HypergraphPacketScope,
     'all-finite-explicit-grouped-v54-activation-to-v53-grouped-hypergraph-packet-bn6-pair-mixed-triple-fullspan-with-payload-witnesses',
+  );
+  assert.equal(
+    out.leanResidualTerminalPacketSelectorSeedsScope,
+    'all-finite-explicit-bn6-packet-conclusions-payload-backed-pair-balanced-triple-or-fullspan-selector-seed-input-extraction',
   );
   for (const field of [
     'leanSaturatePositiveFormalized',

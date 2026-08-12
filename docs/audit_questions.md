@@ -501,6 +501,8 @@ The BN2–BN6 chain converts a BCEL-ready positive nucleus into a positive pair,
 - `PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.canonicalResidualLedger_empty_of_remainder_empty`.
 - `PNP.DirectWire.classifyTerminalPkgCAmbientBN4ResidualReduction_exhaustive`.
 - `BN6.HypergraphPacket`.
+- `PNP.DirectWire.terminalBN6_packet_selector_seeds` for the current raw
+  payload-backed Packet seed boundary.
 - Local-package records and global proof DAG.
 
 **How to test or inspect it**
@@ -554,6 +556,9 @@ Every positive packet has a representative in the polynomial selector universe; 
 **Supporting theorem, file, or function**
 
 - `Packet.SelectorSeeds`.
+- `PNP.DirectWire.TerminalBN6PacketConclusion.selectorSeeds`, which currently
+  establishes only carrier-contained payload-backed raw seeds and not
+  selector-universe membership, faithfulness, compatibility, or bounds.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.

@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-12-134",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-13-135",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2097,7 +2097,9 @@
     "PNP.DirectWire.TerminalBN6GroupedFamily.constantProperCuts": "34b06191ae4d2b810e5073bffd5a361d9ce5a8c0a64a0bf88bc561e61cbe4f3e",
     "PNP.DirectWire.TerminalBN6GroupedFamily.cutWeight_eq_activationWeight": "938b6617e45e2d77005a52cb207b3049a852a9bb27647ba5cbc44bcf7da8b15c",
     "PNP.DirectWire.TerminalBN6GroupedFamily.footprintWeight_eq_groupedMass": "f97902c2a9421081048eae6a85ffa03a1ecc2eda72ba6aacb43bbbed125652c0",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.hasPacketSelectorSeedAt_of_hasPayloadAt": "9896a194aa243404922a3a870bfc5d982f103bbdb3e1c3bdfd42352bb91a3c27",
     "PNP.DirectWire.TerminalBN6GroupedFamily.hasPayloadAt_of_footprintWeight_positive": "c9f5cfab81884d8636e41bff0dd401fb27e8a4a99c5918ce41027a55e26291f4",
+    "PNP.DirectWire.TerminalBN6PacketConclusion.selectorSeeds": "ab62ea35d210a818af73fc38bac3e21d13e7026d2416a9567faba5c0c026b771",
     "PNP.DirectWire.TerminalCheckedFullLift.fullRealization_profileEqual": "ee608d7e17b2846b5a87c15b8e6874ac7de023798ebdd827994e9503dc43d7c1",
     "PNP.DirectWire.TerminalCheckedFullLift.fullRealization_realization": "1f98a1fbc39672b171e5d1a5f6f1716c785dbcf128c24c3071802e7fbf5d0caf",
     "PNP.DirectWire.TerminalCheckedFullLift.obligationsDischarged": "619562c57b2ccbe271d44d8902d27c8788a9ee262dfab89059b6bf8164fda69b",
@@ -2503,6 +2505,7 @@
     "PNP.DirectWire.terminalBN5ShadowCoordinate_eq_iff": "8bff617398ee48e2e0b703c252fe76e54989a81857c112937a71e1544db6ce92",
     "PNP.DirectWire.terminalBN5ShadowMultiplicity_indexed_eq": "e8a05bdc4278abd66b3bdd3bd58a0163a6ccc107019a302fd49613ebffc83cbd",
     "PNP.DirectWire.terminalBN6_hypergraph_packet": "1275e898a6b23670bfbc97c3684c2da75a6b413059e4d2d9c0f0c1cd967a11ba",
+    "PNP.DirectWire.terminalBN6_packet_selector_seeds": "a32e4bc92d0af4fa404d1a8ab6640820c431aa1731198ddb4e605483c15ab386",
     "PNP.DirectWire.terminalBoundaryFrontierPushout_nodup": "bd2dca3adfba6b71888f5a7712942ddddb2902b348df144d8fd0aae98983c213",
     "PNP.DirectWire.terminalBoundaryWire_eq_true_iff": "d389d2551b491f93d8b2ea55d046962f2d35ca88f9c837386f0a8a5dbdf204b7",
     "PNP.DirectWire.terminalCandidateInterfaceExposureCoordinate?_edge": "d168a3362f7b52afd52451d87eff1eedb6302016786c4c763e0965ebcea08880",
@@ -2615,7 +2618,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "ce07f54409913eabe319f1e9c0adaa9738418fc9af406b6c0329dffa2dd0fa89",
+  "milestoneSourceClosureSha256": "7cc382089d974d98edb07a82d8876179583a8d7bb54fe196651e3b9563c55169",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -6427,6 +6430,18 @@
       ],
       "scope": "For an arbitrary finite duplicate-free anchor carrier and explicit already-grouped family of positive payload-bearing survivor cells, V54 activation is transported exactly into the constructed V53 hypergraph cut sum. A positive BCEL constant-cut premise then yields the complete pair, mixed three-anchor balanced-triple/full-span, or four-or-more-anchor full-span classification with original payload witnesses.",
       "title": "Finite BN6 grouped hypergraph packet bridge"
+    },
+    {
+      "classification": "formalized-residual-terminal-packet-selector-seeds",
+      "id": "residual-terminal-packet-selector-seeds",
+      "nonClaim": "This milestone consumes an exact finite BN6 packet conclusion and preserves only carrier containment, selector-relevant footprint size, and original grouped cell-and-atom payload evidence. It does not prove selector-universe membership, selector faithfulness or compatibility, construct a realizer or route, establish enumeration or polynomial generation/runtime, complete PkgC, ZeroSlack, or PCCMin, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalBN6GroupedFamily.hasPacketSelectorSeedAt_of_hasPayloadAt",
+        "PNP.DirectWire.TerminalBN6PacketConclusion.selectorSeeds",
+        "PNP.DirectWire.terminalBN6_packet_selector_seeds"
+      ],
+      "scope": "For an arbitrary finite exact BN6 packet conclusion, Lean extracts a carrier-contained payload-backed raw selector seed at the positive pair footprint, at every positive pair footprint of a balanced triple, or at the positive full-span footprint. The mixed three-anchor positive alternative is handled without asserting that both masses are positive, and the construction fixes no carrier cardinality.",
+      "title": "Finite Packet selector-seed extraction"
     },
     {
       "classification": "formalized-concrete-locked-nand-threshold",
