@@ -557,8 +557,11 @@ Every positive packet has a representative in the polynomial selector universe; 
 
 - `Packet.SelectorSeeds`.
 - `PNP.DirectWire.TerminalBN6PacketConclusion.selectorSeeds`, which currently
-  establishes only carrier-contained payload-backed raw seeds and not
-  selector-universe membership, faithfulness, compatibility, or bounds.
+  establishes carrier-contained payload-backed raw seeds.
+- `PNP.DirectWire.TerminalBN6PacketConclusion.payloadSelectors`, which proves
+  membership only in the exact finite grouped-footprint list supplied by the
+  explicit BN6 family, not in the manuscript's encoded or polynomial selector
+  universe and not manuscript-level faithfulness, compatibility, or bounds.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.

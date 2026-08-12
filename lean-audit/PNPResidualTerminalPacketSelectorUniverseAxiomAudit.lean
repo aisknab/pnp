@@ -1,0 +1,11 @@
+import PNP.ResidualTerminalPacketSelectorUniverse
+
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.packetPayloadSelectorUniverse
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.packetPayloadSelectorUniverse_nodup
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.mem_packetPayloadSelectorUniverse_iff
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.HasPacketPayloadSelectorAt
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.hasPacketPayloadSelectorAt_of_seed
+#print axioms PNP.DirectWire.TerminalPacketPayloadSelectorConclusion
+#print axioms PNP.DirectWire.TerminalPacketSelectorSeedConclusion.payloadSelectors
+#print axioms PNP.DirectWire.TerminalBN6PacketConclusion.payloadSelectors
+#print axioms PNP.DirectWire.terminalBN6_packet_payload_selectors

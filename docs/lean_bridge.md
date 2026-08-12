@@ -1390,6 +1390,18 @@ establish enumeration or polynomial runtime, complete PkgC, ZeroSlack, or
 PCCMin, put SAT in P, or produce the root theorem. See
 `docs/lean_residual_terminal_packet_selector_seeds.md`.
 
+`lean/PNP/ResidualTerminalPacketSelectorUniverse.lean` reconstructs the next
+finite Packet edge. It enumerates the exact duplicate-free grouped-footprint
+list of an arbitrary explicit BN6 family, proves membership equivalent to an
+original grouped cell, and upgrades each earlier raw seed to membership while
+retaining its carrier, footprint-size, cell, and atom evidence. This is an
+input-relative payload-selector universe only. It does not construct the
+manuscript's encoded or polynomial selector universe, prove manuscript-level
+faithfulness or compatibility, construct a realizer or route, derive the
+grouped family, or establish polynomial bounds, ZeroSlack, PCCMin, SAT in P,
+or the root theorem. See
+`docs/lean_residual_terminal_packet_selector_universe.md`.
+
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 
 ```lean

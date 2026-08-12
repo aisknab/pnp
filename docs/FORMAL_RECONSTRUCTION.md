@@ -1575,6 +1575,19 @@ together with PkgC completion, ZeroSlack, PCCMin, SAT in P, and P = NP, remain
 open. See
 [`lean_residual_terminal_packet_selector_seeds.md`](./lean_residual_terminal_packet_selector_seeds.md).
 
+`ResidualTerminalPacketSelectorUniverse` reconstructs the next finite Packet
+edge over the same arbitrary explicit grouped BN6 family. It defines the exact
+duplicate-free grouped-footprint list, proves that list membership is
+equivalent to naming an original grouped cell at the same footprint, and
+upgrades every raw seed to membership without discarding carrier, size, cell,
+or atom evidence. This input-relative payload-selector universe is not the
+manuscript's encoded or polynomial selector universe, and payload retention is
+not manuscript-level faithfulness or compatibility. Realizer and route
+construction, grouped-family derivation, polynomial enumeration and size
+bounds, PkgC completion, ZeroSlack, PCCMin, SAT in P, and P = NP remain open.
+See
+[`lean_residual_terminal_packet_selector_universe.md`](./lean_residual_terminal_packet_selector_universe.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-13-135",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-13-136",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2097,12 +2097,17 @@
     "PNP.DirectWire.TerminalBN6GroupedFamily.constantProperCuts": "34b06191ae4d2b810e5073bffd5a361d9ce5a8c0a64a0bf88bc561e61cbe4f3e",
     "PNP.DirectWire.TerminalBN6GroupedFamily.cutWeight_eq_activationWeight": "938b6617e45e2d77005a52cb207b3049a852a9bb27647ba5cbc44bcf7da8b15c",
     "PNP.DirectWire.TerminalBN6GroupedFamily.footprintWeight_eq_groupedMass": "f97902c2a9421081048eae6a85ffa03a1ecc2eda72ba6aacb43bbbed125652c0",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.hasPacketPayloadSelectorAt_of_seed": "f0aa84ec2d71e332787930b2537fe596ff41531cc123dfcca1368740071eb675",
     "PNP.DirectWire.TerminalBN6GroupedFamily.hasPacketSelectorSeedAt_of_hasPayloadAt": "9896a194aa243404922a3a870bfc5d982f103bbdb3e1c3bdfd42352bb91a3c27",
     "PNP.DirectWire.TerminalBN6GroupedFamily.hasPayloadAt_of_footprintWeight_positive": "c9f5cfab81884d8636e41bff0dd401fb27e8a4a99c5918ce41027a55e26291f4",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.mem_packetPayloadSelectorUniverse_iff": "00957feaa27e826691c08111fd4d5ecdb434d5e4f124044834754de6c1a93ede",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.packetPayloadSelectorUniverse_nodup": "3401f384c5a0d5c441b9d9f97de53b94cb7f41d3a6ac4e6f584b3355a3da298c",
+    "PNP.DirectWire.TerminalBN6PacketConclusion.payloadSelectors": "29b99133c361ab757f954bcf66824d27abb33a60b66d27ffe0004f8df7379c3d",
     "PNP.DirectWire.TerminalBN6PacketConclusion.selectorSeeds": "ab62ea35d210a818af73fc38bac3e21d13e7026d2416a9567faba5c0c026b771",
     "PNP.DirectWire.TerminalCheckedFullLift.fullRealization_profileEqual": "ee608d7e17b2846b5a87c15b8e6874ac7de023798ebdd827994e9503dc43d7c1",
     "PNP.DirectWire.TerminalCheckedFullLift.fullRealization_realization": "1f98a1fbc39672b171e5d1a5f6f1716c785dbcf128c24c3071802e7fbf5d0caf",
     "PNP.DirectWire.TerminalCheckedFullLift.obligationsDischarged": "619562c57b2ccbe271d44d8902d27c8788a9ee262dfab89059b6bf8164fda69b",
+    "PNP.DirectWire.TerminalPacketSelectorSeedConclusion.payloadSelectors": "702f9a375f4655329e29abb5fc8d7c9740dce6aa4800b79baaf87598b0cec4a5",
     "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.activeRequestAtoms_nodup": "10d73bb885691775aa9ad252db596e67947b09caf7bf57cb64bb8abff1872f01",
     "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.anchorSizeAtLeastTwo": "19082f2ea2f7b1145571e2ddf2092ec6624852e09bf11f9820d8fa6daad5d68f",
     "PNP.DirectWire.TerminalComputedBCELAnchorNucleus.canonicalRequestBasis_jointlySideTight": "67b597e0839d1fccc67284f54d88fb1fcc8990a5fe42360ea07992525b752a68",
@@ -2505,6 +2510,7 @@
     "PNP.DirectWire.terminalBN5ShadowCoordinate_eq_iff": "8bff617398ee48e2e0b703c252fe76e54989a81857c112937a71e1544db6ce92",
     "PNP.DirectWire.terminalBN5ShadowMultiplicity_indexed_eq": "e8a05bdc4278abd66b3bdd3bd58a0163a6ccc107019a302fd49613ebffc83cbd",
     "PNP.DirectWire.terminalBN6_hypergraph_packet": "1275e898a6b23670bfbc97c3684c2da75a6b413059e4d2d9c0f0c1cd967a11ba",
+    "PNP.DirectWire.terminalBN6_packet_payload_selectors": "c0d4ac0c1a982783e14ed87ce4294376f90e47b06dd6101d04cb0a63f21b722b",
     "PNP.DirectWire.terminalBN6_packet_selector_seeds": "a32e4bc92d0af4fa404d1a8ab6640820c431aa1731198ddb4e605483c15ab386",
     "PNP.DirectWire.terminalBoundaryFrontierPushout_nodup": "bd2dca3adfba6b71888f5a7712942ddddb2902b348df144d8fd0aae98983c213",
     "PNP.DirectWire.terminalBoundaryWire_eq_true_iff": "d389d2551b491f93d8b2ea55d046962f2d35ca88f9c837386f0a8a5dbdf204b7",
@@ -2618,7 +2624,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "7cc382089d974d98edb07a82d8876179583a8d7bb54fe196651e3b9563c55169",
+  "milestoneSourceClosureSha256": "e6edd5464411a5f0796614709a6b4bcda4d2c64657fd8b25b11beab239bafe2d",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -6442,6 +6448,21 @@
       ],
       "scope": "For an arbitrary finite exact BN6 packet conclusion, Lean extracts a carrier-contained payload-backed raw selector seed at the positive pair footprint, at every positive pair footprint of a balanced triple, or at the positive full-span footprint. The mixed three-anchor positive alternative is handled without asserting that both masses are positive, and the construction fixes no carrier cardinality.",
       "title": "Finite Packet selector-seed extraction"
+    },
+    {
+      "classification": "formalized-residual-terminal-packet-selector-universe",
+      "id": "residual-terminal-packet-selector-universe",
+      "nonClaim": "This finite universe is exactly the grouped-footprint list already present in an explicit BN6 family. It is not the manuscript's encoded or polynomial selector universe, and payload retention is not manuscript-level selector faithfulness. It does not prove selector compatibility, construct a realizer or route, derive the grouped family from a terminal candidate, establish polynomial enumeration or size bounds, complete PkgC, ZeroSlack, or PCCMin, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetPayloadSelectorUniverse_nodup",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.mem_packetPayloadSelectorUniverse_iff",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.hasPacketPayloadSelectorAt_of_seed",
+        "PNP.DirectWire.TerminalPacketSelectorSeedConclusion.payloadSelectors",
+        "PNP.DirectWire.TerminalBN6PacketConclusion.payloadSelectors",
+        "PNP.DirectWire.terminalBN6_packet_payload_selectors"
+      ],
+      "scope": "For every arbitrary finite explicit grouped BN6 family, Lean enumerates the exact duplicate-free list of grouped footprints, proves membership equivalent to an original grouped cell at that footprint, and upgrades every payload-backed pair, balanced-triple pair, or full-span seed to membership in that same finite universe.",
+      "title": "Finite Packet payload-selector universe membership"
     },
     {
       "classification": "formalized-concrete-locked-nand-threshold",
