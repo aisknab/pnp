@@ -1274,6 +1274,21 @@ derivation, BN6/Packet selector-realizer completeness, polynomial runtime,
 ZeroSlack, PCCMin, SAT in P, and the root theorem remain open. See
 `docs/lean_residual_terminal_pkgc_separating_consumers.md`.
 
+`lean/PNP/ResidualTerminalPkgCTypedRestoration.lean` strengthens the same
+finite edge with actual typed full candidates. An explicit
+coordinate-preserving restorer is mapped over every atom of the canonical
+first separating pair. Lean proves exact candidate count, positional
+coordinate preservation, and complete equality-fibre multiplicity coverage;
+the same coverage excludes a strict Hall deficit. The total classifier has
+only V54 singletonization or a proof-bearing typed realization. Its exact
+17-declaration transcript stays within `propext` and `Quot.sound`. The
+restorer and its preservation theorem remain caller data, so this does not
+construct restoration from a terminal candidate, prove semantic adequacy,
+connect the covered branch to a BN4 or BN5 contradiction, complete global
+routing, or establish full PkgC, BN6/Packet, polynomial runtime, ZeroSlack,
+PCCMin, SAT in P, or the root theorem. See
+`docs/lean_residual_terminal_pkgc_typed_restoration.md`.
+
 `lean/PNP/ResidualTerminalConsumerAntichainNormalForm.lean` reconstructs the
 manuscript's unbounded V54 consumer-antichain theorem. For an arbitrary finite
 carrier and explicit minimal-consumer antichain, it generates the monotone

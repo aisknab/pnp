@@ -1457,6 +1457,21 @@ BN6/Packet selector-realizer completeness, polynomial runtime, ZeroSlack,
 PCCMin, SAT in P, and P = NP remain open. See
 [`lean_residual_terminal_pkgc_separating_consumers.md`](./lean_residual_terminal_pkgc_separating_consumers.md).
 
+`ResidualTerminalPkgCTypedRestoration` strengthens that coordinate-only edge
+without changing its claim boundary. Given an explicit typed
+coordinate-preserving restoration operation, Lean maps every atom of the
+canonical first separating pair to an actual full candidate, proves the exact
+candidate count and coordinate list at every position, and derives complete
+equality-fibre multiplicity coverage. Complete coverage contradicts a strict
+Hall deficit for the same graph, so the total classifier returns either V54
+singletonization or a proof-bearing typed realization. The operation and its
+coordinate-preservation proof remain explicit inputs. The theorem does not
+construct the operation from a terminal candidate, prove its full semantic
+adequacy, connect complete restoration to BN4 or BN5 contradiction, embed
+routes globally, or complete historical PkgC, BN6, Packet, ZeroSlack, PCCMin,
+SAT in P, or P = NP. See
+[`lean_residual_terminal_pkgc_typed_restoration.md`](./lean_residual_terminal_pkgc_typed_restoration.md).
+
 `ResidualTerminalConsumerAntichainNormalForm` reconstructs the manuscript's
 unbounded theorem V54 over an arbitrary finite carrier and explicit
 minimal-consumer antichain. The generated request is proved monotone and false

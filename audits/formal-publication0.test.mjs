@@ -100,8 +100,8 @@ test('status retains five blockers, four project axioms, and an absent compatibi
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 108);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 106);
+  assert.equal(status.formalPublicationMilestones.length, 109);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 107);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 2);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -2528,6 +2528,25 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /explicit finite inputs/u);
   assert.match(terminalBN5FullShadowLocalization.nonClaim,
     /not the full historical BN5/u);
+  const terminalPkgCTypedRestoration = byId.get(
+    'residual-terminal-pkgc-typed-restoration',
+  );
+  assert.equal(terminalPkgCTypedRestoration.status,
+    'formalized-residual-terminal-pkgc-typed-restoration');
+  assert.equal(terminalPkgCTypedRestoration.earned, true);
+  assert.equal(
+    terminalPkgCTypedRestoration.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.equal(terminalPkgCTypedRestoration.requiredTheorems.length, 9);
+  assert.match(terminalPkgCTypedRestoration.scope,
+    /typed full-restoration candidates/u);
+  assert.match(terminalPkgCTypedRestoration.scope,
+    /multiplicity coverage/u);
+  assert.match(terminalPkgCTypedRestoration.nonClaim,
+    /restoration operation remains explicit/u);
+  assert.match(terminalPkgCTypedRestoration.nonClaim,
+    /does not construct it from a terminal candidate/u);
   const lockedNANDThreshold = byId.get('global-locked-nand-threshold');
   assert.equal(lockedNANDThreshold.status,
     'formalized-concrete-locked-nand-threshold');
@@ -2550,10 +2569,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'aaf216f8c9998bb7c8ef4d980064df3a1bd9bd4f1474826799a7bf3c7d4977f6');
+    'd74e3253c867cb9a268234bd410908fb519a71bf95a6606767de66d09223b59c');
   assert.equal(map.milestoneSourceClosureSha256,
-    '4608b17afe6e8d0be3f7f6e0fae526025c0050f64dca9670e71ae89f9f27aa7c');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2557);
+    '8bdc5a19e8a7360f6421b229858d95e6a430dece175bcc640b73041c4de768f6');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2566);
   for (const theorem of [
     'PNP.DirectWire.TerminalBCELAnchorProblem.wholeCorners_projectionDefect',
     'PNP.DirectWire.TerminalProjectionPositivityLoss.minima_eq',
@@ -2632,6 +2651,15 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     'PNP.DirectWire.classifyTerminalBN5FullShadowLocalization_active',
     'PNP.DirectWire.TerminalBN5HallDeficit.unmatchedShadowNotSilent',
     'PNP.DirectWire.classifyTerminalBN5FullShadowLocalization_exhaustive',
+    'PNP.DirectWire.TerminalPkgCSeparatingPair.fullRestorationCandidates_length',
+    'PNP.DirectWire.TerminalPkgCSeparatingPair.fullRestorationCandidates_coordinates',
+    'PNP.DirectWire.TerminalPkgCTypedRestorer.coordinateUniverse_coordinates',
+    'PNP.DirectWire.terminalBN5FullMultiplicity_indexed_eq',
+    'PNP.DirectWire.terminalBN5ShadowMultiplicity_indexed_eq',
+    'PNP.DirectWire.TerminalPkgCSeparatingPair.typedRestoration_exactCoverage',
+    'PNP.DirectWire.terminalBN5CompleteMultiplicityMatching_not_hallDeficit',
+    'PNP.DirectWire.terminalPkgC_typedRestoration_realization',
+    'PNP.DirectWire.classifyTerminalPkgCTypedRestoration_exhaustive',
   ]) assert.equal(typeof map.earnedMilestoneTheoremKernelTypeSha256[theorem],
     'string', theorem);
   for (const theorem of [
@@ -2955,7 +2983,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [27573, 14360, 7314, 15002, 247]);
+  ], [27659, 14395, 7336, 15002, 248]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

@@ -135,6 +135,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs',
   'audits/lean-residual-terminal-bn5-full-shadow-localization0.test.mjs',
   'audits/lean-residual-terminal-pkgc-separating-consumers0.test.mjs',
+  'audits/lean-residual-terminal-pkgc-typed-restoration0.test.mjs',
   'audits/lean-residual-terminal-consumer-antichain-normal-form0.test.mjs',
   'audits/lean-residual-terminal-constant-cut-hypergraph-rigidity0.test.mjs',
   'audits/lean-residual-terminal-bn6-hypergraph-packet0.test.mjs',

@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-12-130",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-12-131",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2240,8 +2240,12 @@
     "PNP.DirectWire.TerminalOptimumLegTransport.retainedOutput?_eq_some_iff": "3ca872ed3070e25f52506eb992876b903dd80f3d141f0cbe00dcb4f917db0aea",
     "PNP.DirectWire.TerminalOptimumLegTransport.retained_or_internalized": "33ab10a138405195706d2917e58736ff22a742d316600b62aacc94a671faee4a",
     "PNP.DirectWire.TerminalOriginKernelObligationClosureRoute.sound": "a6ccf72ac02146fb0d00f77f1bd68f5d10e95bd3a9575881976593dbca19ab17",
+    "PNP.DirectWire.TerminalPkgCSeparatingPair.fullRestorationCandidates_coordinates": "57100efabcf0df012a064db5aff2245ac10175a4a707f4e77828ae0a8019853f",
+    "PNP.DirectWire.TerminalPkgCSeparatingPair.fullRestorationCandidates_length": "e8ebfbe79ccfd79fd39fa8fb08f4acc15b21ac3db9921fa8d5b52e0e2a5a79fc",
     "PNP.DirectWire.TerminalPkgCSeparatingPair.quotientUnits_length": "207c3a318d1e4bbde2a33bc01afd96f674b6973a0cf5d595e3739af8f3b0e6c9",
     "PNP.DirectWire.TerminalPkgCSeparatingPair.quotientUnits_nonempty": "1be63df6d57723d5183ecc39a11d3ed346430ecaf57c118399b2358a5862bfbc",
+    "PNP.DirectWire.TerminalPkgCSeparatingPair.typedRestoration_exactCoverage": "51e6dff93008693f5b2daa3c8b8369933abaff1550bb3482c9ec02b3f7ca4d73",
+    "PNP.DirectWire.TerminalPkgCTypedRestorer.coordinateUniverse_coordinates": "4920e21b59be97f91a2a1c65a03e7ec45568c7cefac10befd5e3a2eb7bc9dbe1",
     "PNP.DirectWire.TerminalProjectionFourCorners.canonicalFullBasis_numericallySideTight": "30667d03f2b79304ef3ba521fdfb603ddbc0fed9d7a500b5cb82b873b5d848b8",
     "PNP.DirectWire.TerminalProjectionFourCorners.canonicalFullBasis_sizes": "4eada640b465615c6e3e7fb50d2425f3fb0367ceaf1116f730c7eb8529d4dbe0",
     "PNP.DirectWire.TerminalProjectionFourCorners.canonicalFullBasis_tightValue?": "d4f43cea0b57df4a8bc140c107bde3caa14f6dbbd3bb0ff44ea4a57b1fdf9b99",
@@ -2358,6 +2362,7 @@
     "PNP.DirectWire.classifyTerminalBN5ShadowMatching_exhaustive": "daa39d3dc5252bc6eafa09474a9f1f91642c40957251fe7d69b1db28bbd35e29",
     "PNP.DirectWire.classifyTerminalFiniteSaturatePositive_exhaustive": "2f114bbe06ba71cfb038dcc5ff686516e7af0461d9a85e6dbda0e1104a814655",
     "PNP.DirectWire.classifyTerminalPkgCSeparatingConsumers_exhaustive": "a05d8069e347cf7f63b59aef148e10f5587461d09bd0fff8f400b7cc7b4f1d2f",
+    "PNP.DirectWire.classifyTerminalPkgCTypedRestoration_exhaustive": "8a161f64784fb6fc510c7cf8820556b4e774432191713bd1369944b99db13583",
     "PNP.DirectWire.classifyTerminalSaturationClosureRouting_exhaustive": "bff24fddcdc569451d7963003194317f0d018bdd4906314ff791d8effd8fac92",
     "PNP.DirectWire.classifyTerminalSaturationInterfaceRouting_exhaustive": "3f2cf5f03389537c02418758fd531dfa427be40d6773ddfa5fd6104c3a798c38",
     "PNP.DirectWire.classifyTerminalSaturationPositivity_bcel_of_positive": "8df5cb84391282920fd645d31c0799614ba07666c52afc87b1bcb51dc4a90080",
@@ -2467,9 +2472,12 @@
     "PNP.DirectWire.terminalBN4CanonicalKeys_nodup": "3bcc443216fe3c17d072c30bc90b0006609e6a3f7222656ac47a622a6c7e3767",
     "PNP.DirectWire.terminalBN4CellsUseCanonicalAtoms_iff": "ed064aad0541a0234527b9e064b4b9cddadaa699a26517e9bd8b662c0ea27b23",
     "PNP.DirectWire.terminalBN4IntegerMassLedger_exact": "546e462e0ef7dde2e206b4aa76a5423fdb6e90288d386d5b1e7b40ab4e499307",
+    "PNP.DirectWire.terminalBN5CompleteMultiplicityMatching_not_hallDeficit": "ccad95b996ac06b5c602110f765022263fab1d9db31c979f0fd7b46f9c615929",
+    "PNP.DirectWire.terminalBN5FullMultiplicity_indexed_eq": "ad9719c4739ea079ecad2f390c8d47b5e1d598d4c3a07e8b2dd0934af7c338dd",
     "PNP.DirectWire.terminalBN5FullUnits_key_eq": "7de16fa934c64198752a28206304e046a6a0d894436f6624ca8aa688447459d9",
     "PNP.DirectWire.terminalBN5FullUnits_length": "7310efd9f63c51b5578b5b680e2f132235c239111bc3e0fc532131a8a08e846d",
     "PNP.DirectWire.terminalBN5ShadowCoordinate_eq_iff": "8bff617398ee48e2e0b703c252fe76e54989a81857c112937a71e1544db6ce92",
+    "PNP.DirectWire.terminalBN5ShadowMultiplicity_indexed_eq": "e8a05bdc4278abd66b3bdd3bd58a0163a6ccc107019a302fd49613ebffc83cbd",
     "PNP.DirectWire.terminalBN6_hypergraph_packet": "1275e898a6b23670bfbc97c3684c2da75a6b413059e4d2d9c0f0c1cd967a11ba",
     "PNP.DirectWire.terminalBoundaryFrontierPushout_nodup": "bd2dca3adfba6b71888f5a7712942ddddb2902b348df144d8fd0aae98983c213",
     "PNP.DirectWire.terminalBoundaryWire_eq_true_iff": "d389d2551b491f93d8b2ea55d046962f2d35ca88f9c837386f0a8a5dbdf204b7",
@@ -2500,6 +2508,7 @@
     "PNP.DirectWire.terminalPkgCPairNeedsRestoration_eq_true_iff": "184ddf69a99d22a191c773492f5544b457d72987222ef40fc00edadd977a95e2",
     "PNP.DirectWire.terminalPkgC_restorationEdge_preservesCoordinate": "614c064c69d3e39441036d8b1e70a6f2f5f15b2e6523b1ae094ed34b7bae1e8d",
     "PNP.DirectWire.terminalPkgC_separatingConsumers_restorationDichotomy": "690a8f82885a284547a453cbfd6858ef8d8d7c4201e710f79a9eca9faa92df81",
+    "PNP.DirectWire.terminalPkgC_typedRestoration_realization": "0b26c740c02a95570364ba233ce3671bb5250dae0d99237e06e0374e017b5301",
     "PNP.DirectWire.terminalProfileCoordinatesForRole_nodup": "a5c0d1eac8e390d94a274c75fe0b03b11379680654fea2948246c73ba52852ee",
     "PNP.DirectWire.terminalProfileFrontierPushout_nodup": "8a6d654f7c16696ab68b3fbfcf95fd2572b178ac9fcbcdb52a01a040a7eba33e",
     "PNP.DirectWire.terminalProfileMinima_eq_of_keepsAll": "973db9a1c04cce7aa637d65512904844dc9a26e645ed2720d89d3818cdc79c3a",
@@ -2575,7 +2584,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "4608b17afe6e8d0be3f7f6e0fae526025c0050f64dca9670e71ae89f9f27aa7c",
+  "milestoneSourceClosureSha256": "8bdc5a19e8a7360f6421b229858d95e6a430dece175bcc640b73041c4de768f6",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -6259,6 +6268,24 @@
       ],
       "scope": "For an arbitrary finite explicit minimal-consumer antichain, Lean canonically scans for the first disjoint pair that is not singleton-singleton. Absence proves exactly V54's singletonization premise. A found pair's atoms are canonically indexed into exact-coordinate quotient units and an explicit full-restoration universe is classified into complete multiplicity coverage or a strict Hall deficit with a deterministic local Q route.",
       "title": "Finite PkgC separating-consumer restoration dichotomy"
+    },
+    {
+      "classification": "formalized-residual-terminal-pkgc-typed-restoration",
+      "id": "residual-terminal-pkgc-typed-restoration",
+      "nonClaim": "The typed restoration operation remains explicit caller data. This milestone does not construct it from a terminal candidate or prove its full semantic adequacy. It does not connect complete restoration to a BN4 or BN5 contradiction, embed local routes into the complete global outcome system, prove global PkgC route silence or the full historical PkgC theorem, establish full BN6 or Packet selector-realizer completeness, polynomial generation or runtime, ZeroSlack or PCCMin, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalPkgCSeparatingPair.fullRestorationCandidates_length",
+        "PNP.DirectWire.TerminalPkgCSeparatingPair.fullRestorationCandidates_coordinates",
+        "PNP.DirectWire.TerminalPkgCTypedRestorer.coordinateUniverse_coordinates",
+        "PNP.DirectWire.terminalBN5FullMultiplicity_indexed_eq",
+        "PNP.DirectWire.terminalBN5ShadowMultiplicity_indexed_eq",
+        "PNP.DirectWire.TerminalPkgCSeparatingPair.typedRestoration_exactCoverage",
+        "PNP.DirectWire.terminalBN5CompleteMultiplicityMatching_not_hallDeficit",
+        "PNP.DirectWire.terminalPkgC_typedRestoration_realization",
+        "PNP.DirectWire.classifyTerminalPkgCTypedRestoration_exhaustive"
+      ],
+      "scope": "For an arbitrary finite explicit minimal-consumer antichain and a typed coordinate-preserving restoration operation, Lean materializes typed full-restoration candidates for every atom of the canonical first disjoint nonsingleton pair, proves exact candidate count and positional coordinate preservation, derives complete equality-fibre multiplicity coverage, excludes a strict Hall deficit for that graph, and otherwise proves V54 singletonization.",
+      "title": "Finite PkgC typed restoration realization"
     },
     {
       "classification": "formalized-residual-terminal-v54-consumer-antichain-normal-form",

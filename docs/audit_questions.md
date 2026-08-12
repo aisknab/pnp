@@ -491,6 +491,7 @@ The BN2–BN6 chain converts a BCEL-ready positive nucleus into a positive pair,
 - `BN4.ActivationExact`.
 - `BN5.FullShadowLocalization`.
 - `PkgC.SeparatingConsumers`.
+- `PNP.DirectWire.terminalPkgC_typedRestoration_realization`.
 - `BN6.HypergraphPacket`.
 - Local-package records and global proof DAG.
 
@@ -501,8 +502,11 @@ The BN2–BN6 chain converts a BCEL-ready positive nucleus into a positive pair,
 3. Prove active-antichain equality is equivalent to activation equality without enumerating all cuts.
 4. Recompute signed mass cancellation by full activation-exact keys.
 5. Inspect every negative residual key's shadow graph and Hall witness.
-6. Re-prove V53/V54 and test the mixed three-anchor case.
-7. Measure antichain, graph, cell, and certificate sizes on worst-case accepted schedules.
+6. Inspect every typed restoration candidate, its preserved coordinate, and
+   exact multiplicity; confirm complete coverage contradicts a Hall deficit
+   for the same equality-fibre graph.
+7. Re-prove V53/V54 and test the mixed three-anchor case.
+8. Measure antichain, graph, cell, and certificate sizes on worst-case accepted schedules.
 
 **What would count as a refutation or material defect**
 
@@ -511,6 +515,8 @@ The BN2–BN6 chain converts a BCEL-ready positive nucleus into a positive pair,
 - Cancellation across different semantic or transport keys.
 - A cut-active negative full residual that remains silent.
 - A nonsingleton separating consumer surviving PkgC without a route.
+- A purported typed restoration with a missing candidate, changed coordinate,
+  or simultaneous complete coverage and strict Hall deficit.
 - A nonnegative constant-cut hypergraph outside the claimed packet classification.
 - Exponential antichain or cut work hidden in an asserted polynomial step.
 
