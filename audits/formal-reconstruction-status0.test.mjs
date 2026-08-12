@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-12-132');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-12-133');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -913,6 +913,8 @@ test('formal reconstruction status accepts the current source and public mirrors
     'leanResidualTerminalPkgCTypedRestorationAxiomAuditPassed',
     'leanResidualTerminalPkgCSameKeyCancellationFormalized',
     'leanResidualTerminalPkgCSameKeyCancellationAxiomAuditPassed',
+    'leanResidualTerminalPkgCAmbientBN4LedgerFormalized',
+    'leanResidualTerminalPkgCAmbientBN4LedgerAxiomAuditPassed',
     'leanResidualTerminalConsumerAntichainNormalFormFormalized',
     'leanResidualTerminalConsumerAntichainNormalFormAxiomAuditPassed',
     'leanResidualTerminalConstantCutHypergraphRigidityFormalized',
@@ -1029,6 +1031,10 @@ test('formal reconstruction status accepts the current source and public mirrors
     'all-finite-explicit-minimal-consumer-antichains-typed-exact-coordinate-restoration-canonical-opposite-sign-bn4-ledger-every-key-balanced-empty-residual-or-singletonized-under-cancellation-silence',
   );
   assert.equal(
+    out.leanResidualTerminalPkgCAmbientBN4LedgerScope,
+    'all-finite-explicit-ambient-bn4-ledgers-exact-multiset-embedding-balanced-generated-subledger-removal-preserves-remainder-signed-mass-and-candidate-derived-canonical-atom-linkage',
+  );
+  assert.equal(
     out.leanResidualTerminalConsumerAntichainNormalFormScope,
     'all-finite-minimal-consumer-antichains-monotone-empty-false-nonzero-iff-disjoint-and-pkgc-singletonized-exact-v54-consumer-antichain-cut-indicator',
   );
@@ -1075,13 +1081,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 27734);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 14432);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7342);
-  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 15005);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 249);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 27794);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 14454);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7347);
+  assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 15008);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 250);
   assert.equal(status.leanSourceClosureSha256,
-    'c038a1f4f3d8a95bbb3ff1914dbe5555a448c7b35f7e85a2c2b571b4ce1fb88b');
+    '9b8afc2bac8c5f5b5fbe3c086f22602358c3f9b641aeb91e7de708f9f1001154');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );
@@ -2493,6 +2499,14 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanResidualTerminalBN4ActivationCancellationAxiomAuditPassed',
     'leanResidualTerminalBN5FullShadowLocalizationFormalized',
     'leanResidualTerminalBN5FullShadowLocalizationAxiomAuditPassed',
+    'leanResidualTerminalPkgCSeparatingConsumersFormalized',
+    'leanResidualTerminalPkgCSeparatingConsumersAxiomAuditPassed',
+    'leanResidualTerminalPkgCTypedRestorationFormalized',
+    'leanResidualTerminalPkgCTypedRestorationAxiomAuditPassed',
+    'leanResidualTerminalPkgCSameKeyCancellationFormalized',
+    'leanResidualTerminalPkgCSameKeyCancellationAxiomAuditPassed',
+    'leanResidualTerminalPkgCAmbientBN4LedgerFormalized',
+    'leanResidualTerminalPkgCAmbientBN4LedgerAxiomAuditPassed',
   ];
 
   for (const field of fields) {

@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-12-132';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-12-133';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -368,6 +368,12 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPkgCTypedRestorationAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPkgCTypedRestoration.lean',
   'node --test audits/lean-residual-terminal-pkgc-typed-restoration0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPkgCSameKeyCancellationAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPkgCSameKeyCancellation.lean',
+  'node --test audits/lean-residual-terminal-pkgc-same-key-cancellation0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPkgCAmbientBN4LedgerAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPkgCAmbientBN4Ledger.lean',
+  'node --test audits/lean-residual-terminal-pkgc-ambient-bn4-ledger0.test.mjs',
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalConsumerAntichainNormalFormAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalConsumerAntichainNormalForm.lean',
   'node --test audits/lean-residual-terminal-consumer-antichain-normal-form0.test.mjs',
@@ -391,6 +397,7 @@ const NON_CLAIMS = Object.freeze([
   'The finite BN5 full-shadow localization kernel uniformly handles arbitrary finite exact-coordinate unit and quotient-shadow ledgers. It validates negative-mass refinement, computes cut silence, and returns complete multiplicity coverage or a strict Hall deficit routed to local X1. The payloads and shadow universe are explicit inputs; complete matching is not connected back to a BN4 contradiction; full CritC/Q/E/L/X2/X3/X4 diagnosis, the full historical BN5 theorem, full PkgC and BN6, global routes, selectors, polynomial generation and runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.',
   'The finite PkgC separating-consumer classifier scans an arbitrary explicit minimal-consumer antichain for the first disjoint nonsingleton pair, canonically indexes its atoms, and returns exact-coordinate restoration coverage or a strict Hall deficit routed to local Q; absence is exactly the V54 singletonization premise. The restoration coordinate universe remains explicit, coverage is not connected back to a BN4 or BN5 contradiction, the local route is not embedded in the complete global outcome system, and full PkgC route silence, derivation from a terminal candidate, polynomial generation and runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.',
   'The finite PkgC typed-restoration realization accepts an explicit typed coordinate-preserving restoration operation, materializes one full candidate for each atom of the first separating pair, proves exact positional coordinates and multiplicity coverage, and excludes a strict Hall deficit for that equality-fibre graph. It does not construct the restoration operation from a terminal candidate, prove its full semantic adequacy, connect complete restoration to a BN4 or BN5 contradiction, embed local routes in the global outcome system, establish full PkgC, BN6, or Packet completeness, prove polynomial generation or runtime, ZeroSlack, PCCMin, SAT in P, or P = NP.',
+  'The finite PkgC same-key cancellation kernel mechanically generates an exactly balanced opposite-sign BN4 ledger from an explicit typed restorer. The ambient-ledger milestone embeds those cells into an explicit BN4 ledger by exact permutation, preserves multiplicity, proves balanced-subledger removal leaves exactly the explicit remainder, and retains successful candidate-derived BN4 canonical-atom evidence. It does not derive the restorer or ambient ledger from a terminal candidate, prove semantic restoration adequacy or complete global route silence, establish full historical PkgC, BN6, or Packet completeness, prove polynomial generation or runtime, ZeroSlack, PCCMin, SAT in P, or P = NP.',
   'The arbitrary-finite V54 consumer-antichain normal form proves that two-sided activation is nonzero exactly when a minimal-consumer antichain has a disjoint pair and, under the exact PkgC singletonization premise, is literally the cut indicator of the singleton footprint. The theorem itself consumes an explicit antichain. The finite BN6 bridge now transports explicitly grouped instances into V53, but full PkgC construction and route silence, derivation and grouping from terminal candidates, global routes, selectors, polynomial runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.',
   'The arbitrary-finite V53 constant-cut hypergraph rigidity theorem proves the exact q=2, q=3, and q>=4 classification for sparse positive hypergraphs with one common nonempty proper-cut value. The finite BN6 bridge now constructs such a hypergraph from explicit grouped V54 cells and retains payload witnesses, but full PkgC construction, terminal-candidate derivation and grouping, full historical BN6 and Packet selector/realizer completeness, global routes, polynomial runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.',
   'The finite BN6 hypergraph-packet bridge transports an explicit already-grouped positive payload-bearing V54 survivor family into the exact V53 cut sum and returns the pair, mixed three-anchor, or full-span packet classification with source payload witnesses. It does not complete PkgC, derive or group survivors from a terminal candidate, establish full historical BN6 or Packet selector/realizer completeness, complete global routes, prove polynomial generation or runtime, ZeroSlack or PCCMin, SAT in P, or P = NP.',
@@ -1526,6 +1533,10 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalPkgCSameKeyCancellationAxiomAuditPassed: true,
   leanResidualTerminalPkgCSameKeyCancellationScope:
     'all-finite-explicit-minimal-consumer-antichains-typed-exact-coordinate-restoration-canonical-opposite-sign-bn4-ledger-every-key-balanced-empty-residual-or-singletonized-under-cancellation-silence',
+  leanResidualTerminalPkgCAmbientBN4LedgerFormalized: true,
+  leanResidualTerminalPkgCAmbientBN4LedgerAxiomAuditPassed: true,
+  leanResidualTerminalPkgCAmbientBN4LedgerScope:
+    'all-finite-explicit-ambient-bn4-ledgers-exact-multiset-embedding-balanced-generated-subledger-removal-preserves-remainder-signed-mass-and-candidate-derived-canonical-atom-linkage',
   leanResidualTerminalConsumerAntichainNormalFormFormalized: true,
   leanResidualTerminalConsumerAntichainNormalFormAxiomAuditPassed: true,
   leanResidualTerminalConsumerAntichainNormalFormScope:
@@ -2557,6 +2568,10 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalPkgCSameKeyCancellationAxiomAuditPassed: true,
       leanResidualTerminalPkgCSameKeyCancellationScope:
         'all-finite-explicit-minimal-consumer-antichains-typed-exact-coordinate-restoration-canonical-opposite-sign-bn4-ledger-every-key-balanced-empty-residual-or-singletonized-under-cancellation-silence',
+      leanResidualTerminalPkgCAmbientBN4LedgerFormalized: true,
+      leanResidualTerminalPkgCAmbientBN4LedgerAxiomAuditPassed: true,
+      leanResidualTerminalPkgCAmbientBN4LedgerScope:
+        'all-finite-explicit-ambient-bn4-ledgers-exact-multiset-embedding-balanced-generated-subledger-removal-preserves-remainder-signed-mass-and-candidate-derived-canonical-atom-linkage',
       leanResidualTerminalConsumerAntichainNormalFormFormalized: true,
       leanResidualTerminalConsumerAntichainNormalFormAxiomAuditPassed: true,
       leanResidualTerminalConsumerAntichainNormalFormScope:
@@ -2648,7 +2663,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-12-132',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-12-133',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

@@ -100,8 +100,8 @@ test('status retains five blockers, four project axioms, and an absent compatibi
 test('milestone ledger is evidence-backed and keeps premise/global boundaries explicit', async () => {
   const status = await status0();
   const byId = new Map(status.formalPublicationMilestones.map((entry) => [entry.id, entry]));
-  assert.equal(status.formalPublicationMilestones.length, 110);
-  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 108);
+  assert.equal(status.formalPublicationMilestones.length, 111);
+  assert.equal(status.formalPublicationMilestones.filter((entry) => entry.earned).length, 109);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 2);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
@@ -2566,6 +2566,23 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /complete coordinate maps remain explicit/u);
   assert.match(terminalPkgCSameKeyCancellation.nonClaim,
     /ambient BN4 ledger/u);
+  const terminalPkgCAmbientBN4Ledger = byId.get(
+    'residual-terminal-pkgc-ambient-bn4-ledger',
+  );
+  assert.equal(terminalPkgCAmbientBN4Ledger.status,
+    'formalized-residual-terminal-pkgc-ambient-bn4-ledger');
+  assert.equal(terminalPkgCAmbientBN4Ledger.earned, true);
+  assert.equal(
+    terminalPkgCAmbientBN4Ledger.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.equal(terminalPkgCAmbientBN4Ledger.requiredTheorems.length, 12);
+  assert.match(terminalPkgCAmbientBN4Ledger.scope, /exact multiset/u);
+  assert.match(terminalPkgCAmbientBN4Ledger.scope, /explicit remainder/u);
+  assert.match(terminalPkgCAmbientBN4Ledger.nonClaim,
+    /explicit proof-bearing inputs/u);
+  assert.match(terminalPkgCAmbientBN4Ledger.nonClaim,
+    /does not derive the ambient ledger/u);
   const lockedNANDThreshold = byId.get('global-locked-nand-threshold');
   assert.equal(lockedNANDThreshold.status,
     'formalized-concrete-locked-nand-threshold');
@@ -2588,10 +2605,10 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   assert.equal(sha256Text0(stableStringify0(map)),
-    'e5e01ce800cf1ae07c751051712ded7590eb746292b8f143cfc0cbfb1a64452d');
+    '7069c4e01a1a41a7751f41389b6eadc7711cf550d0de79b29a2eb237819bdffb');
   assert.equal(map.milestoneSourceClosureSha256,
-    'c038a1f4f3d8a95bbb3ff1914dbe5555a448c7b35f7e85a2c2b571b4ce1fb88b');
-  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2577);
+    '9b8afc2bac8c5f5b5fbe3c086f22602358c3f9b641aeb91e7de708f9f1001154');
+  assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length, 2589);
   for (const theorem of [
     'PNP.DirectWire.TerminalBCELAnchorProblem.wholeCorners_projectionDefect',
     'PNP.DirectWire.TerminalProjectionPositivityLoss.minima_eq',
@@ -3002,7 +3019,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
     status.leanTheoremInventoryAssumptionFreeTheoremCount,
     status.leanTheoremInventoryExcludedPrivateDeclarationCount,
     status.leanTheoremInventorySourceClosureModuleCount,
-  ], [27734, 14432, 7342, 15005, 249]);
+  ], [27794, 14454, 7347, 15008, 250]);
 });
 
 test('canonical report source is current and the committed PDF artifact exists', async () => {

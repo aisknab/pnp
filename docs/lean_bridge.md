@@ -1297,12 +1297,28 @@ nested BN4 keys. Lean then proves the exact cell count, positive/negative mass
 equality at every BN4 key, empty executable residual lists, and zero signed
 mass. The total result is singletonization or a proof-bearing typed
 cancellation realization; excluding every such realization forces the exact
-V54 singletonization premise. The restorer and coordinate maps remain explicit
-and the generated ledger is not yet identified with a terminal candidate's
-ambient BN4 ledger, so global route integration and silence, full historical
+V54 singletonization premise. The restorer and coordinate maps remain explicit.
+The successor module binds the generated ledger to an explicit ambient BN4
+ledger while retaining a candidate-derived BN4 kernel, but does not derive
+that ledger or binding from the candidate,
+so global route integration and silence, full historical
 PkgC, BN6/Packet selector-realizer completeness, polynomial runtime,
 ZeroSlack, PCCMin, SAT in P, and the root theorem remain open. See
 `docs/lean_residual_terminal_pkgc_same_key_cancellation.md`.
+
+`lean/PNP/ResidualTerminalPkgCAmbientBN4Ledger.lean` then binds the generated
+cells to an explicit ambient BN4 ledger by exact permutation with an explicit
+remainder. It preserves duplicate counts, decomposes positive and negative
+mass, and proves that removing the balanced generated subledger leaves exactly
+the remainder's signed mass and executable residual contribution. When given
+a successful candidate-derived BN4 kernel, every embedded generated cell is
+also tied to its canonical request-atom space. The executable classifier only
+accepts canonical generated-then-remainder serialization; arbitrary order
+requires a kernel-checked permutation proof. The module does not derive the
+ambient ledger or restorer from the candidate, establish semantic restoration
+adequacy, complete global routes or silence, or prove the downstream global
+claims. See
+`docs/lean_residual_terminal_pkgc_ambient_bn4_ledger.md`.
 
 `lean/PNP/ResidualTerminalConsumerAntichainNormalForm.lean` reconstructs the
 manuscript's unbounded V54 consumer-antichain theorem. For an arbitrary finite

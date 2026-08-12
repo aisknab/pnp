@@ -1487,6 +1487,21 @@ and silence, full PkgC, complete BN6/Packet selectors and realizers,
 polynomial runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain open. See
 [`lean_residual_terminal_pkgc_same_key_cancellation.md`](./lean_residual_terminal_pkgc_same_key_cancellation.md).
 
+`ResidualTerminalPkgCAmbientBN4Ledger` closes the next finite linkage without
+claiming candidate derivation. An exact `List.Perm` certificate proves the
+ambient ledger is precisely the generated balanced cancellation cells plus an
+explicit remainder, up to order, so membership, duplicate multiplicity,
+length, positive and negative mass, signed mass, and executable residual
+contribution all decompose exactly. A successful candidate-derived BN4 kernel
+additionally proves each embedded generated cell uses its canonical request
+atom. The canonical executable classifier accepts only literal
+generated-then-remainder serialization; other orders need a proof certificate.
+The ambient ledger, restorer, certificate, and BN4 kernel remain explicit, so
+candidate derivation, semantic restoration adequacy, complete global route
+integration and silence, full PkgC/BN6/Packet completeness, polynomial runtime,
+ZeroSlack, PCCMin, SAT in P, and P = NP remain open. See
+[`lean_residual_terminal_pkgc_ambient_bn4_ledger.md`](./lean_residual_terminal_pkgc_ambient_bn4_ledger.md).
+
 `ResidualTerminalConsumerAntichainNormalForm` reconstructs the manuscript's
 unbounded theorem V54 over an arbitrary finite carrier and explicit
 minimal-consumer antichain. The generated request is proved monotone and false
