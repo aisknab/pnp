@@ -492,6 +492,8 @@ The BN2–BN6 chain converts a BCEL-ready positive nucleus into a positive pair,
 - `BN5.FullShadowLocalization`.
 - `PkgC.SeparatingConsumers`.
 - `PNP.DirectWire.terminalPkgC_typedRestoration_realization`.
+- `PNP.DirectWire.terminalPkgC_typedRestoration_sameKeyCancellation`.
+- `PNP.DirectWire.terminalPkgC_sameKeyCancellation_silence_singletonizes`.
 - `BN6.HypergraphPacket`.
 - Local-package records and global proof DAG.
 
@@ -505,8 +507,11 @@ The BN2–BN6 chain converts a BCEL-ready positive nucleus into a positive pair,
 6. Inspect every typed restoration candidate, its preserved coordinate, and
    exact multiplicity; confirm complete coverage contradicts a Hall deficit
    for the same equality-fibre graph.
-7. Re-prove V53/V54 and test the mixed three-anchor case.
-8. Measure antichain, graph, cell, and certificate sizes on worst-case accepted schedules.
+7. Recompute the generated opposite-sign restoration ledger; require equal
+   positive and negative mass, empty residual, and zero signed mass at every
+   nested BN4 key, then identify the missing ambient-ledger linkage explicitly.
+8. Re-prove V53/V54 and test the mixed three-anchor case.
+9. Measure antichain, graph, cell, and certificate sizes on worst-case accepted schedules.
 
 **What would count as a refutation or material defect**
 
@@ -517,6 +522,8 @@ The BN2–BN6 chain converts a BCEL-ready positive nucleus into a positive pair,
 - A nonsingleton separating consumer surviving PkgC without a route.
 - A purported typed restoration with a missing candidate, changed coordinate,
   or simultaneous complete coverage and strict Hall deficit.
+- A generated restoration cancellation that changes the nested BN4 key, leaves
+  nonzero signed mass, or is silently treated as the terminal ambient ledger.
 - A nonnegative constant-cut hypergraph outside the claimed packet classification.
 - Exponential antichain or cut work hidden in an asserted polynomial step.
 

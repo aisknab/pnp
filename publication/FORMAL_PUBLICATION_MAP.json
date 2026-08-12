@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-12-131",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-12-132",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2244,6 +2244,10 @@
     "PNP.DirectWire.TerminalPkgCSeparatingPair.fullRestorationCandidates_length": "e8ebfbe79ccfd79fd39fa8fb08f4acc15b21ac3db9921fa8d5b52e0e2a5a79fc",
     "PNP.DirectWire.TerminalPkgCSeparatingPair.quotientUnits_length": "207c3a318d1e4bbde2a33bc01afd96f674b6973a0cf5d595e3739af8f3b0e6c9",
     "PNP.DirectWire.TerminalPkgCSeparatingPair.quotientUnits_nonempty": "1be63df6d57723d5183ecc39a11d3ed346430ecaf57c118399b2358a5862bfbc",
+    "PNP.DirectWire.TerminalPkgCSeparatingPair.restorationCancellationCells_length": "2479de06e3fe85fd636bca248b0596f524b09d68c18625e2423131431530e075",
+    "PNP.DirectWire.TerminalPkgCSeparatingPair.restorationCancellation_balanced": "d319561914eba29a5673945a4e85a7923e0c47396e0c9f243d90b8057be2ac6e",
+    "PNP.DirectWire.TerminalPkgCSeparatingPair.restorationCancellation_residualCells_empty": "6cf6d44aa6e244a8f245a79fee4834e0bb2e1836b9353278f522256176499fb6",
+    "PNP.DirectWire.TerminalPkgCSeparatingPair.restorationCancellation_signedMass_zero": "0524782f70301d75c278d5bda7865945e932e2fce0f4a2eff65a284118312a48",
     "PNP.DirectWire.TerminalPkgCSeparatingPair.typedRestoration_exactCoverage": "51e6dff93008693f5b2daa3c8b8369933abaff1550bb3482c9ec02b3f7ca4d73",
     "PNP.DirectWire.TerminalPkgCTypedRestorer.coordinateUniverse_coordinates": "4920e21b59be97f91a2a1c65a03e7ec45568c7cefac10befd5e3a2eb7bc9dbe1",
     "PNP.DirectWire.TerminalProjectionFourCorners.canonicalFullBasis_numericallySideTight": "30667d03f2b79304ef3ba521fdfb603ddbc0fed9d7a500b5cb82b873b5d848b8",
@@ -2361,6 +2365,7 @@
     "PNP.DirectWire.classifyTerminalBN5FullShadowLocalization_exhaustive": "be1af480ae6864a553e86c154bcbc67ac7b72b01df96b5580c9b9eadeebb4cc3",
     "PNP.DirectWire.classifyTerminalBN5ShadowMatching_exhaustive": "daa39d3dc5252bc6eafa09474a9f1f91642c40957251fe7d69b1db28bbd35e29",
     "PNP.DirectWire.classifyTerminalFiniteSaturatePositive_exhaustive": "2f114bbe06ba71cfb038dcc5ff686516e7af0461d9a85e6dbda0e1104a814655",
+    "PNP.DirectWire.classifyTerminalPkgCSameKeyCancellation_exhaustive": "c8c63bd0d8f1c967d9e4809d87f62692c9532dd52ea3f895b372baf3aacdfe95",
     "PNP.DirectWire.classifyTerminalPkgCSeparatingConsumers_exhaustive": "a05d8069e347cf7f63b59aef148e10f5587461d09bd0fff8f400b7cc7b4f1d2f",
     "PNP.DirectWire.classifyTerminalPkgCTypedRestoration_exhaustive": "8a161f64784fb6fc510c7cf8820556b4e774432191713bd1369944b99db13583",
     "PNP.DirectWire.classifyTerminalSaturationClosureRouting_exhaustive": "bff24fddcdc569451d7963003194317f0d018bdd4906314ff791d8effd8fac92",
@@ -2506,8 +2511,14 @@
     "PNP.DirectWire.terminalOriginKernelObligationCoordinate?_sound": "fe2fafdfcb67fecf4c1b2b544645b0f6af7ec9a5b5761ee8d6a23ba2ae140a60",
     "PNP.DirectWire.terminalOriginKernelObligation_safe_or_route": "996fad4b79e3d3e5b0cce63e094b597d9ee731556df3c73f38bbb9761343330f",
     "PNP.DirectWire.terminalPkgCPairNeedsRestoration_eq_true_iff": "184ddf69a99d22a191c773492f5544b457d72987222ef40fc00edadd977a95e2",
+    "PNP.DirectWire.terminalPkgCRestorationCancellationCellsForAtom_balanced": "c33bffa228c261859ecbf843b325ad9f6d3ca9b0a9015c79d4b92a38e24feb22",
+    "PNP.DirectWire.terminalPkgCRestorationCancellationCellsForAtom_key_eq": "5ae8e007ae6df7f2c31cc9206969f2e8a072aad3286a9ac7f725151f52a813b3",
+    "PNP.DirectWire.terminalPkgCRestorationCancellationCellsForAtoms_balanced": "935e170044233eb06f9abea0e550c455372e73fb13f592096393f9fabf077a92",
+    "PNP.DirectWire.terminalPkgCRestorationCancellationCellsForAtoms_length": "e27a9056fc4becad48acccfbdd79394cf84b3ba2f9fadae0110fe89d08fb637c",
     "PNP.DirectWire.terminalPkgC_restorationEdge_preservesCoordinate": "614c064c69d3e39441036d8b1e70a6f2f5f15b2e6523b1ae094ed34b7bae1e8d",
+    "PNP.DirectWire.terminalPkgC_sameKeyCancellation_silence_singletonizes": "c0feb56a30d17811ddf2d13bb7a645ac55d8e99af90d1ccd9cad99409745c229",
     "PNP.DirectWire.terminalPkgC_separatingConsumers_restorationDichotomy": "690a8f82885a284547a453cbfd6858ef8d8d7c4201e710f79a9eca9faa92df81",
+    "PNP.DirectWire.terminalPkgC_typedRestoration_sameKeyCancellation": "b8acb10618219c2980c026a7bdfa92bddd5da3810f449e8249bd820f31abb1e7",
     "PNP.DirectWire.terminalPkgC_typedRestoration_realization": "0b26c740c02a95570364ba233ce3671bb5250dae0d99237e06e0374e017b5301",
     "PNP.DirectWire.terminalProfileCoordinatesForRole_nodup": "a5c0d1eac8e390d94a274c75fe0b03b11379680654fea2948246c73ba52852ee",
     "PNP.DirectWire.terminalProfileFrontierPushout_nodup": "8a6d654f7c16696ab68b3fbfcf95fd2572b178ac9fcbcdb52a01a040a7eba33e",
@@ -2584,7 +2595,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "8bdc5a19e8a7360f6421b229858d95e6a430dece175bcc640b73041c4de768f6",
+  "milestoneSourceClosureSha256": "c038a1f4f3d8a95bbb3ff1914dbe5555a448c7b35f7e85a2c2b571b4ce1fb88b",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -6286,6 +6297,26 @@
       ],
       "scope": "For an arbitrary finite explicit minimal-consumer antichain and a typed coordinate-preserving restoration operation, Lean materializes typed full-restoration candidates for every atom of the canonical first disjoint nonsingleton pair, proves exact candidate count and positional coordinate preservation, derives complete equality-fibre multiplicity coverage, excludes a strict Hall deficit for that graph, and otherwise proves V54 singletonization.",
       "title": "Finite PkgC typed restoration realization"
+    },
+    {
+      "classification": "formalized-residual-terminal-pkgc-same-key-cancellation",
+      "id": "residual-terminal-pkgc-same-key-cancellation",
+      "nonClaim": "The typed restoration operation and its complete coordinate maps remain explicit inputs, and the generated opposite-sign cells are not yet proved to be the cells of the terminal candidate's ambient BN4 ledger. This milestone does not construct semantic restorations from a terminal candidate, embed cancellation or Hall outcomes into the complete global route system, prove global route silence or the full historical PkgC theorem, establish full BN6 or Packet selector-realizer completeness, polynomial generation or runtime, ZeroSlack or PCCMin, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalPkgCRestorationCancellationCellsForAtom_key_eq",
+        "PNP.DirectWire.terminalPkgCRestorationCancellationCellsForAtom_balanced",
+        "PNP.DirectWire.terminalPkgCRestorationCancellationCellsForAtoms_length",
+        "PNP.DirectWire.terminalPkgCRestorationCancellationCellsForAtoms_balanced",
+        "PNP.DirectWire.TerminalPkgCSeparatingPair.restorationCancellationCells_length",
+        "PNP.DirectWire.TerminalPkgCSeparatingPair.restorationCancellation_balanced",
+        "PNP.DirectWire.TerminalPkgCSeparatingPair.restorationCancellation_residualCells_empty",
+        "PNP.DirectWire.TerminalPkgCSeparatingPair.restorationCancellation_signedMass_zero",
+        "PNP.DirectWire.terminalPkgC_typedRestoration_sameKeyCancellation",
+        "PNP.DirectWire.terminalPkgC_sameKeyCancellation_silence_singletonizes",
+        "PNP.DirectWire.classifyTerminalPkgCSameKeyCancellation_exhaustive"
+      ],
+      "scope": "For an arbitrary finite explicit minimal-consumer antichain and typed exact-BN5-coordinate restoration operation, Lean mechanically pairs every quotient atom with its restored full candidate as opposite-sign unit cells, proves the complete BN5 coordinate gives the same nested BN4 key, proves exact cell count and positive/negative multiplicity equality at every BN4 key, computes an empty canonical residual and zero signed mass at every key, and derives V54 singletonization from exact absence of every such proof-bearing cancellation outcome.",
+      "title": "Finite PkgC typed restoration same-key cancellation"
     },
     {
       "classification": "formalized-residual-terminal-v54-consumer-antichain-normal-form",
