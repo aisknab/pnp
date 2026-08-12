@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-12-131';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-12-132';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -1522,6 +1522,10 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalPkgCTypedRestorationAxiomAuditPassed: true,
   leanResidualTerminalPkgCTypedRestorationScope:
     'all-finite-explicit-minimal-consumer-antichains-typed-full-restoration-candidates-coordinate-preserving-exact-multiplicity-coverage-no-hall-or-singletonized',
+  leanResidualTerminalPkgCSameKeyCancellationFormalized: true,
+  leanResidualTerminalPkgCSameKeyCancellationAxiomAuditPassed: true,
+  leanResidualTerminalPkgCSameKeyCancellationScope:
+    'all-finite-explicit-minimal-consumer-antichains-typed-exact-coordinate-restoration-canonical-opposite-sign-bn4-ledger-every-key-balanced-empty-residual-or-singletonized-under-cancellation-silence',
   leanResidualTerminalConsumerAntichainNormalFormFormalized: true,
   leanResidualTerminalConsumerAntichainNormalFormAxiomAuditPassed: true,
   leanResidualTerminalConsumerAntichainNormalFormScope:
@@ -2549,6 +2553,10 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalPkgCTypedRestorationAxiomAuditPassed: true,
       leanResidualTerminalPkgCTypedRestorationScope:
         'all-finite-explicit-minimal-consumer-antichains-typed-full-restoration-candidates-coordinate-preserving-exact-multiplicity-coverage-no-hall-or-singletonized',
+      leanResidualTerminalPkgCSameKeyCancellationFormalized: true,
+      leanResidualTerminalPkgCSameKeyCancellationAxiomAuditPassed: true,
+      leanResidualTerminalPkgCSameKeyCancellationScope:
+        'all-finite-explicit-minimal-consumer-antichains-typed-exact-coordinate-restoration-canonical-opposite-sign-bn4-ledger-every-key-balanced-empty-residual-or-singletonized-under-cancellation-silence',
       leanResidualTerminalConsumerAntichainNormalFormFormalized: true,
       leanResidualTerminalConsumerAntichainNormalFormAxiomAuditPassed: true,
       leanResidualTerminalConsumerAntichainNormalFormScope:
@@ -2640,7 +2648,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-12-131',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-12-132',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

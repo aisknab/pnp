@@ -158,6 +158,7 @@ on:
       - 'audits/lean-residual-terminal-bn5-full-shadow-localization0.test.mjs'
       - 'audits/lean-residual-terminal-pkgc-separating-consumers0.test.mjs'
       - 'audits/lean-residual-terminal-pkgc-typed-restoration0.test.mjs'
+      - 'audits/lean-residual-terminal-pkgc-same-key-cancellation0.test.mjs'
       - 'audits/lean-residual-terminal-consumer-antichain-normal-form0.test.mjs'
       - 'audits/lean-residual-terminal-constant-cut-hypergraph-rigidity0.test.mjs'
       - 'audits/lean-residual-terminal-bn6-hypergraph-packet0.test.mjs'
@@ -180,6 +181,8 @@ on:
       - 'docs/lean_residual_terminal_bn4_activation_cancellation.md'
       - 'docs/lean_residual_terminal_bn5_full_shadow_localization.md'
       - 'docs/lean_residual_terminal_pkgc_separating_consumers.md'
+      - 'docs/lean_residual_terminal_pkgc_typed_restoration.md'
+      - 'docs/lean_residual_terminal_pkgc_same_key_cancellation.md'
       - 'docs/lean_residual_terminal_consumer_antichain_normal_form.md'
       - 'docs/lean_residual_terminal_constant_cut_hypergraph_rigidity.md'
       - 'docs/lean_residual_terminal_finite_saturate_positive.md'
@@ -427,6 +430,7 @@ on:
       - 'audits/lean-residual-terminal-bn5-full-shadow-localization0.test.mjs'
       - 'audits/lean-residual-terminal-pkgc-separating-consumers0.test.mjs'
       - 'audits/lean-residual-terminal-pkgc-typed-restoration0.test.mjs'
+      - 'audits/lean-residual-terminal-pkgc-same-key-cancellation0.test.mjs'
       - 'audits/lean-residual-terminal-consumer-antichain-normal-form0.test.mjs'
       - 'audits/lean-residual-terminal-constant-cut-hypergraph-rigidity0.test.mjs'
       - 'audits/lean-residual-terminal-bn6-hypergraph-packet0.test.mjs'
@@ -449,6 +453,8 @@ on:
       - 'docs/lean_residual_terminal_bn4_activation_cancellation.md'
       - 'docs/lean_residual_terminal_bn5_full_shadow_localization.md'
       - 'docs/lean_residual_terminal_pkgc_separating_consumers.md'
+      - 'docs/lean_residual_terminal_pkgc_typed_restoration.md'
+      - 'docs/lean_residual_terminal_pkgc_same_key_cancellation.md'
       - 'docs/lean_residual_terminal_consumer_antichain_normal_form.md'
       - 'docs/lean_residual_terminal_constant_cut_hypergraph_rigidity.md'
       - 'docs/lean_residual_terminal_finite_saturate_positive.md'
@@ -3203,6 +3209,30 @@ jobs:
 
       - name: Run finite PkgC typed-restoration hostile audit
         run: node --test audits/lean-residual-terminal-pkgc-typed-restoration0.test.mjs
+
+      - name: Print finite PkgC same-key cancellation axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPkgCSameKeyCancellationAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 21
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected finite PkgC same-key cancellation axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Finite PkgC same-key cancellation reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 21
+
+      - name: Run finite PkgC same-key cancellation regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPkgCSameKeyCancellation.lean
+
+      - name: Run finite PkgC same-key cancellation hostile audit
+        run: node --test audits/lean-residual-terminal-pkgc-same-key-cancellation0.test.mjs
 
       - name: Print V54 consumer-antichain normal-form axioms
         run: |

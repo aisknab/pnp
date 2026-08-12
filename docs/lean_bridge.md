@@ -1289,6 +1289,21 @@ routing, or establish full PkgC, BN6/Packet, polynomial runtime, ZeroSlack,
 PCCMin, SAT in P, or the root theorem. See
 `docs/lean_residual_terminal_pkgc_typed_restoration.md`.
 
+`lean/PNP/ResidualTerminalPkgCSameKeyCancellation.lean` consumes that typed
+realization at the next manuscript edge. It constructs, rather than accepts,
+an opposite-sign unit-cell ledger for every atom of the canonical separating
+pair. Complete BN5-coordinate preservation gives literal equality of the
+nested BN4 keys. Lean then proves the exact cell count, positive/negative mass
+equality at every BN4 key, empty executable residual lists, and zero signed
+mass. The total result is singletonization or a proof-bearing typed
+cancellation realization; excluding every such realization forces the exact
+V54 singletonization premise. The restorer and coordinate maps remain explicit
+and the generated ledger is not yet identified with a terminal candidate's
+ambient BN4 ledger, so global route integration and silence, full historical
+PkgC, BN6/Packet selector-realizer completeness, polynomial runtime,
+ZeroSlack, PCCMin, SAT in P, and the root theorem remain open. See
+`docs/lean_residual_terminal_pkgc_same_key_cancellation.md`.
+
 `lean/PNP/ResidualTerminalConsumerAntichainNormalForm.lean` reconstructs the
 manuscript's unbounded V54 consumer-antichain theorem. For an arbitrary finite
 carrier and explicit minimal-consumer antichain, it generates the monotone
