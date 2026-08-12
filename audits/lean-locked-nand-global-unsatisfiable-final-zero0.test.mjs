@@ -211,21 +211,15 @@ test('status credits only the unsatisfiable branch and leaves downstream claims 
 
 test('milestone documentation records mechanically generated release evidence', async () => {
   const docs = (await text0(DOCS_PATH)).replaceAll(/\s+/gu, ' ');
-  const inventory = JSON.parse(await text0(INVENTORY_PATH));
-  const status = JSON.parse(
-    await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'),
-  );
   for (const token of [
-    inventory.coordinate,
-    status.coordinate,
+    'Current successor coordinates and identities are generated',
+    'canonical inventory and status payload',
     'whole carrier',
     'satisfiableFinalConditions',
     'Classical.choice',
     'Quot.sound',
     'propext',
-    '63-page',
-    '402,956-byte',
-    '9d0743f86dd9da269d6244a543a1c4a21a2ede2b7cfdc5508875b17c7ae8f4ad',
+    'Lean locked-NAND global semantic threshold',
   ]) assert.equal(docs.includes(token), true, token);
 });
 

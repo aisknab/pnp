@@ -497,6 +497,9 @@ The BN2–BN6 chain converts a BCEL-ready positive nucleus into a positive pair,
 - `PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.signedMass_eq_remainder`.
 - `PNP.DirectWire.TerminalPkgCComputedAmbientBN4Cancellation.generatedCell_usesCanonicalAtom`.
 - `PNP.DirectWire.terminalPkgC_computedAmbientBN4_silence_singletonizes`.
+- `PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.canonicalResidualLedger_eq_remainder`.
+- `PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.canonicalResidualLedger_empty_of_remainder_empty`.
+- `PNP.DirectWire.classifyTerminalPkgCAmbientBN4ResidualReduction_exhaustive`.
 - `BN6.HypergraphPacket`.
 - Local-package records and global proof DAG.
 

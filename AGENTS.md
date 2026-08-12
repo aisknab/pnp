@@ -1,54 +1,27 @@
 # Agent Instructions
 
-These instructions apply to the whole repository.
+These instructions apply to the whole repository. Keep workstation-specific
+hostnames, accounts, paths, credentials, connection topology, and capacity
+limits in private user-level instructions rather than this public file.
 
 ## Remote Builder Policy
 
-The local workstation is memory-constrained. Treat it as an edit-and-inspection
-host, not as a build host.
-
-- Run full or clean Lean builds, Lean regression/axiom audits, `npm test`, broad
-  repository checks, report/PDF generation, and clean-clone reproduction on the
-  configured SSH host alias `pnpbuilder`.
-- Use the `pnp-builder` account's user-level `systemd-run` resource limits for
-  remote jobs. Do not bypass those limits for a large verification command.
-- Never silently fall back to a heavyweight local command when the remote builder
-  is unavailable. Stop and report the connection problem instead.
+- Run resource-intensive verification on the configured remote build host under
+  the private user-level resource policy. Do not bypass that policy or silently
+  fall back to a heavyweight local command when the builder is unavailable.
+- Keep host, proxy, account, key, network, capacity, and credential details out
+  of this repository. Perform connection and identity preflight using the
+  private user-level runbook before starting a long remote job.
 - Local commands should be limited to source edits and lightweight inspection,
   such as `rg`, `sed`, `git diff`, `git status`, and targeted syntax checks that
   cannot consume substantial memory.
-- Keep host, proxy, key, and network details in the user's SSH configuration;
-  do not copy private connection data into this repository.
 
-### SSH and remote-job preflight
+### Remote-job preflight
 
-- Before starting a long remote job, test the configured identity without opening
-  an interactive credential prompt:
-
-  ```bash
-  ssh -o BatchMode=yes -o ConnectTimeout=10 pnpbuilder true
-  ```
-
-- For a target reached through `ProxyJump`, inspect the effective configuration
-  for both the destination and jump host with `ssh -G`. A destination key being
-  loaded does not establish that the jump-host key is loaded. Before asking the
-  user to unlock anything, compare the configured public-key fingerprints with
-  the identities already available from the user's existing agent sockets. If
-  one existing socket contains both exact identities, use that socket for the
-  run. Otherwise ask for the specific missing configured key, not the destination
-  key generically.
-- Make nested probes non-interactive at both hops. Top-level `BatchMode=yes` is
-  not reliably inherited by the implicit jump process, so use an explicit
-  non-interactive proxy command when necessary and disable askpass for the probe.
-  A successful probe must produce no wallet dialog or passphrase prompt.
-- If that probe reports a missing or locked identity, stop and ask the user to
-  unlock or add the already-configured key in their own terminal. Do not create a
-  KDE Wallet, generate a replacement key, rewrite SSH configuration, or repeatedly
-  launch GUI askpass dialogs on the user's behalf.
 - Create one named remote temporary checkout per verification run. Print its path,
-  checked commit, checked tree, command exit status, and the final `systemd-run`
-  resource summary. This makes truncated terminal output diagnosable without
-  rerunning an expensive suite.
+  checked commit, checked tree, command exit status, and final resource summary.
+  This makes truncated terminal output diagnosable without rerunning an expensive
+  suite.
 - Never let concurrent agents build in the same remote Lean checkout. Lake's
   mutable `.olean`/`.ilean` outputs can race, disappear, or leave an import
   observing an older declaration set even when a leaf source build was green.
@@ -58,16 +31,15 @@ host, not as a build host.
   its exact runtime filename and verify every referenced remote path is readable
   before launching the bounded job. Do not rely on a directory-only `scp`
   destination when the runner expects a different basename.
-- Probe optional observability wrappers such as `/usr/bin/time` before putting
-  them in the service command. A missing wrapper must fail during launch
-  preflight, not after the clean checkout is prepared; when it is absent, retain
-  the resource summary already emitted by `systemd-run --wait` instead of
-  installing or assuming another package.
-- A user-level `systemd-run` service may not inherit the login shell's toolchain
-  path. Before the first proof phase, verify the exact `lake` and `lean` binaries
-  visible inside the service environment and set the already-installed toolchain
-  path explicitly when needed. Treat status 127 with `command not found` as a
-  launch-environment failure, not a theorem failure.
+- Probe optional observability wrappers before putting them in the remote command.
+  A missing wrapper must fail during launch preflight, not after the clean
+  checkout is prepared; otherwise retain the resource summary supplied by the
+  configured runner.
+- A remote job may not inherit the login shell's toolchain path. Before the first
+  proof phase, verify the exact `lake` and `lean` binaries visible inside the job
+  environment and set the already-installed toolchain path when needed. Treat
+  status 127 with `command not found` as a launch-environment failure, not a
+  theorem failure.
 - A fresh checkout has no `.olean` cache. A cache may be seeded from another
   checkout only after its source tree and pinned toolchain have been shown to
   match exactly. Then rebuild the modified dependency chain and root import
@@ -86,14 +58,14 @@ host, not as a build host.
 - A successful dependency-build line inside a multi-phase or append-only log is
   not the job result. Before reporting a checkpoint as green, require the
   wrapper's final success marker or recorded zero exit status, confirm the
-  `systemd-run` unit has reached its terminal state, and inspect the complete
-  log for output appended by later phases.
+  job has reached its terminal state, and inspect the complete log for output
+  appended by later phases.
 
 ### Temporary-artifact lifecycle
 
 Temporary means temporary. Every agent-created checkout, fixture directory, log,
-archive, patch, generated helper, and orchestration script on both the local host
-and `pnpbuilder` must have an explicit cleanup point.
+archive, patch, generated helper, and orchestration script on both the local and
+remote hosts must have an explicit cleanup point.
 
 - Record each temporary path when it is created. Prefer one task-specific parent
   directory so the cleanup scope is exact and reviewable.
@@ -263,8 +235,9 @@ lines.
   named tags explicitly before starting an expensive audit.
 - When a generated boundary value changes, search durable workflow shell blocks
   as well as source, documentation, and tests for the previous exact value. Run
-  the equivalent of every changed workflow assertion on `pnpbuilder` before
-  pushing; changing a step label does not update an embedded assertion.
+  the equivalent of every changed workflow assertion on the configured remote
+  build host before pushing; changing a step label does not update an embedded
+  assertion.
 - For every added or edited YAML `run: |` shell block, extract that exact block
   into an uncommitted temporary script and run `bash -n` before an expensive
   workflow. Then execute the exact block after its prerequisites are built.
@@ -287,7 +260,7 @@ lines.
   boundary race as a proof failure.
 - Keep remote command quoting shallow. Avoid placing command substitutions,
   `awk` programs, or regular expressions through several nested local-shell,
-  SSH, `systemd-run`, and `bash -lc` quoting layers. Prefer checked-in commands or
+  shell and remote-runner quoting layers. Prefer checked-in commands or
   separate simple remote commands; if orchestration is necessary, use an
   uncommitted temporary script in the named remote verification directory and
   confirm that the intended job actually launched before interpreting its exit.

@@ -1320,6 +1320,18 @@ adequacy, complete global routes or silence, or prove the downstream global
 claims. See
 `docs/lean_residual_terminal_pkgc_ambient_bn4_ledger.md`.
 
+`lean/PNP/ResidualTerminalPkgCAmbientBN4ResidualReduction.lean` then proves
+the executable reduction hidden behind that signed-mass equality. Removing the
+exact balanced generated subledger preserves every per-key residual cell and
+the complete residual ledger on the ambient canonical key universe. It proves
+that universe contains every remainder key, provides a fail-closed canonical
+classifier that constructs the reduction mechanically, and derives empty
+ambient residuals when the explicit remainder is empty. It does not derive the
+ledger, restorer, embedding, or remainder from the candidate, prove the
+remainder is empty or route-producing, establish restoration semantics or
+global route silence, or discharge downstream global claims. See
+`docs/lean_residual_terminal_pkgc_ambient_bn4_residual_reduction.md`.
+
 `lean/PNP/ResidualTerminalConsumerAntichainNormalForm.lean` reconstructs the
 manuscript's unbounded V54 consumer-antichain theorem. For an arbitrary finite
 carrier and explicit minimal-consumer antichain, it generates the monotone

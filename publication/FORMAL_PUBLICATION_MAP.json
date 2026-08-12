@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-12-133",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-12-134",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2240,14 +2240,20 @@
     "PNP.DirectWire.TerminalOptimumLegTransport.retainedOutput?_eq_some_iff": "3ca872ed3070e25f52506eb992876b903dd80f3d141f0cbe00dcb4f917db0aea",
     "PNP.DirectWire.TerminalOptimumLegTransport.retained_or_internalized": "33ab10a138405195706d2917e58736ff22a742d316600b62aacc94a671faee4a",
     "PNP.DirectWire.TerminalOriginKernelObligationClosureRoute.sound": "a6ccf72ac02146fb0d00f77f1bd68f5d10e95bd3a9575881976593dbca19ab17",
+    "PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.canonicalResidualLedger_empty_of_remainder_empty": "b7071dc1bfedd34a95972ddb2306d4acadd1fc2908aa7bca12145846d3e50df3",
+    "PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.canonicalResidualLedger_eq_remainder": "b36d0d118451d5de98066c9fab1ebe4beec820c718e5760bbe752184df2f479c",
     "PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.cellMultiplicity": "aff33101668df454702b45e679f747daafe4d20a52bb22ccbef17cd29c09e0fc",
     "PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.generatedCell_mem_ambient": "0400f254d1878e4f48c958624f668122b42c962f74a364f3bf71d78e5ebf566a",
     "PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.length_eq": "ea024f99fd89e753345fa4f243a4fb33e1bc0c921ca934756d7f67e377f37fc3",
     "PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.negativeMass_decomposition": "440dcc6be267fba103c1d2513b91f8ef08358945423bafc22f60a2a914156a52",
     "PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.positiveMass_decomposition": "36fcc5e8b04c550b486db6de05bb45c390de48ef4bbb5d82437ee188b144a73d",
+    "PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.remainderKey_mem_ambientCanonicalKeys": "917b2e93bf46b18681e610599182e5c55086feb311b348585a0527ebfa588cc5",
+    "PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.residualCells_eq_remainder": "136ed6fe2e3bf2ebe118aa9241c6ed9be9716aa60c38a96f242154bd79a65245",
+    "PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.residualLedgerOver_eq_remainder": "b89662618db4ee812256d3088c53e8e1b910ace8d65db0a5f8a6a99571955f85",
     "PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.residualSignedContribution_eq_remainder": "4cbbe3e3b8dc8fff891e3c1b51be4e243c20e57dd608ae0f89105ea24126c6d5",
     "PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.signedMass_eq_remainder": "9ecef4614b102d75ab6cdd46548c476d8bec4826e01626ce7915670ea83367e7",
     "PNP.DirectWire.TerminalPkgCComputedAmbientBN4Cancellation.generatedCell_usesCanonicalAtom": "6a7666c50b1f30c2cb77e5c753fcb3a38425a2e0f22d26995a255d7d3722044e",
+    "PNP.DirectWire.TerminalPkgCComputedAmbientBN4Cancellation.residualLedger_empty_of_remainder_empty": "88dbcbe83183f60d9fb391aeca7bd156d853637353339d899f5185ffa7c3fdf4",
     "PNP.DirectWire.TerminalPkgCSeparatingPair.fullRestorationCandidates_coordinates": "57100efabcf0df012a064db5aff2245ac10175a4a707f4e77828ae0a8019853f",
     "PNP.DirectWire.TerminalPkgCSeparatingPair.fullRestorationCandidates_length": "e8ebfbe79ccfd79fd39fa8fb08f4acc15b21ac3db9921fa8d5b52e0e2a5a79fc",
     "PNP.DirectWire.TerminalPkgCSeparatingPair.quotientUnits_length": "207c3a318d1e4bbde2a33bc01afd96f674b6973a0cf5d595e3739af8f3b0e6c9",
@@ -2374,6 +2380,7 @@
     "PNP.DirectWire.classifyTerminalBN5ShadowMatching_exhaustive": "daa39d3dc5252bc6eafa09474a9f1f91642c40957251fe7d69b1db28bbd35e29",
     "PNP.DirectWire.classifyTerminalFiniteSaturatePositive_exhaustive": "2f114bbe06ba71cfb038dcc5ff686516e7af0461d9a85e6dbda0e1104a814655",
     "PNP.DirectWire.classifyTerminalPkgCAmbientBN4LedgerBinding_exhaustive": "f1d936219b9bd109c053dd7ab1ba812ab43a2d0ca1e58bc03540240620b24c89",
+    "PNP.DirectWire.classifyTerminalPkgCAmbientBN4ResidualReduction_exhaustive": "a9a7ae5b7dfdf9f1d7e459535bf090da559792ed829a3272cc70f1fa0730451d",
     "PNP.DirectWire.classifyTerminalPkgCSameKeyCancellation_exhaustive": "c8c63bd0d8f1c967d9e4809d87f62692c9532dd52ea3f895b372baf3aacdfe95",
     "PNP.DirectWire.classifyTerminalPkgCSeparatingConsumers_exhaustive": "a05d8069e347cf7f63b59aef148e10f5587461d09bd0fff8f400b7cc7b4f1d2f",
     "PNP.DirectWire.classifyTerminalPkgCTypedRestoration_exhaustive": "8a161f64784fb6fc510c7cf8820556b4e774432191713bd1369944b99db13583",
@@ -2488,6 +2495,7 @@
     "PNP.DirectWire.terminalBN4IntegerMassLedger_exact": "546e462e0ef7dde2e206b4aa76a5423fdb6e90288d386d5b1e7b40ab4e499307",
     "PNP.DirectWire.terminalBN4NegativeMass_perm": "a435189ebdd2cadb72ffdc828902e5742a70454f3ac0ea4e5c3662a77ec0617a",
     "PNP.DirectWire.terminalBN4PositiveMass_perm": "85bd3e3748cd1d2bb7a6a749fccbe75077fe4106abdb04f09f33a565d1490e1a",
+    "PNP.DirectWire.terminalBN4ResidualCells_add_common": "1a6f5d332c00b6d10c7d0e1b0b703f0199bf1f72024e963754cbf1b32e45bb48",
     "PNP.DirectWire.terminalBN5CompleteMultiplicityMatching_not_hallDeficit": "ccad95b996ac06b5c602110f765022263fab1d9db31c979f0fd7b46f9c615929",
     "PNP.DirectWire.terminalBN5FullMultiplicity_indexed_eq": "ad9719c4739ea079ecad2f390c8d47b5e1d598d4c3a07e8b2dd0934af7c338dd",
     "PNP.DirectWire.terminalBN5FullUnits_key_eq": "7de16fa934c64198752a28206304e046a6a0d894436f6624ca8aa688447459d9",
@@ -2607,7 +2615,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "9b8afc2bac8c5f5b5fbe3c086f22602358c3f9b641aeb91e7de708f9f1001154",
+  "milestoneSourceClosureSha256": "ce07f54409913eabe319f1e9c0adaa9738418fc9af406b6c0329dffa2dd0fa89",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -6350,6 +6358,23 @@
       ],
       "scope": "For arbitrary finite explicit BN4 cell ledgers, Lean proves that a proof-bearing exact multiset embedding identifies the generated PkgC opposite-sign cancellation ledger with an ambient subledger and preserves every duplicate. Positive and negative mass decompose at every complete key; removing the balanced generated subledger leaves the ambient signed mass and executable residual signed contribution exactly equal to an explicit remainder. A successful candidate-derived BN4 kernel additionally proves every embedded generated cell uses its canonical request-atom space, and complete bindings plus exact absence of every computed bridge imply V54 singletonization.",
       "title": "Finite PkgC ambient BN4 ledger embedding"
+    },
+    {
+      "classification": "formalized-residual-terminal-pkgc-ambient-bn4-residual-reduction",
+      "id": "residual-terminal-pkgc-ambient-bn4-residual-reduction",
+      "nonClaim": "The ambient ledger, typed restoration operation, exact embedding, and explicit remainder remain proof-bearing inputs. This milestone does not derive those inputs from an arbitrary terminal candidate, prove that the remainder is empty or route-producing, establish restoration semantic adequacy or complete global route silence, reconstruct the full historical PkgC/BN6/Packet path, prove polynomial generation or runtime, establish ZeroSlack or PCCMin, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalBN4ResidualCells_add_common",
+        "PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.residualCells_eq_remainder",
+        "PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.residualLedgerOver_eq_remainder",
+        "PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.remainderKey_mem_ambientCanonicalKeys",
+        "PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.canonicalResidualLedger_eq_remainder",
+        "PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.canonicalResidualLedger_empty_of_remainder_empty",
+        "PNP.DirectWire.classifyTerminalPkgCAmbientBN4ResidualReduction_exhaustive",
+        "PNP.DirectWire.TerminalPkgCComputedAmbientBN4Cancellation.residualLedger_empty_of_remainder_empty"
+      ],
+      "scope": "For arbitrary finite explicit ambient BN4 ledgers, Lean proves that removing an exactly embedded balanced PkgC generated subledger preserves the executable residual cell at every complete key and the complete canonical executable residual ledger over the ambient key universe. Every remainder key occurs in that universe; a fail-closed canonical classifier constructs the exact reduction without caller-provided proof bits; and an empty remainder yields an empty ambient residual ledger, including for the existing candidate-derived computed bridge.",
+      "title": "Finite PkgC ambient BN4 residual reduction"
     },
     {
       "classification": "formalized-residual-terminal-v54-consumer-antichain-normal-form",

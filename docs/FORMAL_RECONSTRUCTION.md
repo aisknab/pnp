@@ -1502,6 +1502,19 @@ integration and silence, full PkgC/BN6/Packet completeness, polynomial runtime,
 ZeroSlack, PCCMin, SAT in P, and P = NP remain open. See
 [`lean_residual_terminal_pkgc_ambient_bn4_ledger.md`](./lean_residual_terminal_pkgc_ambient_bn4_ledger.md).
 
+`ResidualTerminalPkgCAmbientBN4ResidualReduction` strengthens that exact
+embedding at the executable BN4 boundary. Adding the same generated mass to
+both signs preserves the residual cell at each key, so Lean lifts the equality
+to the complete residual ledger over the ambient canonical key universe and
+proves every remainder key occurs there. The canonical classifier constructs
+both the embedding and reduction without caller proof bits, and an empty
+explicit remainder forces the ambient residual ledger to be empty. The ledger,
+restorer, embedding, and remainder remain explicit: candidate derivation,
+proof that the remainder is empty or route-producing, restoration semantics,
+global route integration and silence, full PkgC/BN6/Packet, polynomial runtime,
+ZeroSlack, PCCMin, SAT in P, and P = NP remain open. See
+[`lean_residual_terminal_pkgc_ambient_bn4_residual_reduction.md`](./lean_residual_terminal_pkgc_ambient_bn4_residual_reduction.md).
+
 `ResidualTerminalConsumerAntichainNormalForm` reconstructs the manuscript's
 unbounded theorem V54 over an arbitrary finite carrier and explicit
 minimal-consumer antichain. The generated request is proved monotone and false

@@ -164,4 +164,4 @@ node --test \
 
 The complete root build, focused audit/regression, hostile mutations,
 generated-publication checks, and clean-clone reproduction run on the
-configured resource-limited `pnpbuilder` host.
+configured resource-limited remote build host.

@@ -141,35 +141,11 @@ caller certificates, forbidden shortcuts, and overclaims.
 
 ## Mechanically generated evidence
 
-Inventory coordinate
-`PNP-LEAN-THEOREM-INVENTORY-2026-08-12-133` records 27,794 declarations,
-14,454 theorems, 7,347 assumption-free theorems, 15,008 excluded private
-declarations, 250 source-closure modules, and 2,589 reviewed milestone
-candidates. Its 18,243,895-byte canonical inventory has SHA-256
-`696c76220a092e5a84e7caa804fd1c57889f193968d1285b520c408f8237f5c1`;
-the Lean source-closure SHA-256 is
-`9b8afc2bac8c5f5b5fbe3c086f22602358c3f9b641aeb91e7de708f9f1001154`.
-
-Publication map coordinate
-`PNP-FORMAL-PUBLICATION-MAP-2026-08-12-133` contains 111 milestones: 109
-earned and two deliberately unearned. The new
-`locked-nand-global-semantic-threshold` milestone pins the seven new theorem
-types plus the reused exact unsatisfiable-minimum theorem. The generated map
-is 840,935 bytes with SHA-256
-`a9f7ec898fb04e4842ea86281d2a6b257fc0c65dd422eb04a974bde169bf29d6`.
-
-Status coordinate
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-12-133` sets the semantic-threshold,
-six-field-package, derived-final-output, and residual-at-most-four evidence
-fields true. It retains all four project assumptions, all five blockers,
-unset activation fingerprints, an absent `PNP.Main.p_eq_np`, and a false
-concrete publication gate. The status is 2,111,583 bytes with SHA-256
-`6e7416a60485390b4414251c3b8f00214ed759f93d8091aef73cdb357da2dbfe`.
-
-The generated canonical report source is 223,061 bytes with SHA-256
-`2e42452a0d270c8e36cf7f381dbd38a64a535d07b8bc653e4e13ff526c574e7d`.
-Its deterministic A4 PDF is 88 pages and 460,049 bytes with SHA-256
-`5bca11cba837c8bdf90e27186974bf5398d4be78fae3360987afbf19746d271b`.
+Current coordinates, compiled counts, source-closure and theorem-type
+fingerprints, byte sizes, and report hashes are generated in the canonical
+inventory, publication map, status payload, and report artifacts. The
+semantic-threshold milestone pins its seven new theorem types plus the reused
+exact unsatisfiable-minimum theorem.
 
 ## Exact boundary
 

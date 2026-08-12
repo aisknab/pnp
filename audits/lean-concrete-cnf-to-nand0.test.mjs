@@ -460,9 +460,10 @@ test('root, status, milestone, workflow, and documentation publish only the sema
 
     const compactDocs = docs.replaceAll(/\s+/gu, ' ');
     for (const fragment of [
-      status.leanTheoremInventoryCoordinate,
-      status.formalPublicationMapCoordinate,
-      status.coordinate,
+      'generated inventory',
+      'publication map',
+      'status payload',
+      'canonical report artifacts',
       'CNFSAT',
       'EncodedNANDSAT',
       'empty formula',

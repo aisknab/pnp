@@ -451,9 +451,10 @@ test('root, generated evidence, workflow, and documentation bind the emitter',
 
     const compactDocs = docs.replaceAll(/\s+/gu, ' ');
     for (const token of [
-      inventory.coordinate,
-      map.coordinate,
-      status.coordinate,
+      '`status/LEAN_THEOREM_INVENTORY.json`',
+      '`publication/FORMAL_PUBLICATION_MAP.json`',
+      '`status/FORMAL_RECONSTRUCTION_STATUS.json`',
+      'root report artifacts',
       '3,295 audited declarations',
       '22 theorem types',
       '2,224 have empty axiom closure',

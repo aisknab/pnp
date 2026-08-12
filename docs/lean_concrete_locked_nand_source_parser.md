@@ -191,47 +191,18 @@ node --test \
 ```
 
 Repository policy requires running these Lean jobs, the complete build, and
-clean-clone reproduction on the configured resource-limited `pnpbuilder`
-host.
+clean-clone reproduction on the configured resource-limited remote build host.
 
 ## Mechanically generated publication evidence
 
-Inventory coordinate
-`PNP-LEAN-THEOREM-INVENTORY-2026-08-12-133` records 27,794 declarations,
-14,454 theorems, 7,347 assumption-free theorems, 15,008 excluded private
-declarations, 250 source-closure modules, and 2,589 reviewed milestone
-candidates. Its 18,243,895 canonical bytes have SHA-256
-`696c76220a092e5a84e7caa804fd1c57889f193968d1285b520c408f8237f5c1`.
-The pinned Lean source closure is
-`9b8afc2bac8c5f5b5fbe3c086f22602358c3f9b641aeb91e7de708f9f1001154`.
-
-Publication-map coordinate
-`PNP-FORMAL-PUBLICATION-MAP-2026-08-12-133` contains 111 milestones, of
-which 109 are earned and two global milestones remain unearned. The map pins
-2,589 theorem types. Its 840,935 bytes have SHA-256
-`a9f7ec898fb04e4842ea86281d2a6b257fc0c65dd422eb04a974bde169bf29d6`.
-The source-parser milestone contributes 20 theorem types.
-
-Status coordinate
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-12-133`, paired with public-surface
-coordinate
-`PUBLIC-SURFACE-BASELINE-2026-08-10-CONCRETE-LOCKED-NAND-THRESHOLD-121`, records
-the four disclosed project assumptions, five blockers, absent
-`PNP.Main.p_eq_np`, unset activation fingerprints, and a false concrete
-publication gate. The status is 2,111,583 bytes with SHA-256
-`6e7416a60485390b4414251c3b8f00214ed759f93d8091aef73cdb357da2dbfe`.
+Current inventory, publication-map, status, and report identities are read
+from the canonical generated artifacts rather than duplicated here. The
+source-parser milestone contributes 20 reviewed theorem types.
 
 The complete parser audit covers 380 audited declarations: 247 have empty
 axiom closure, 58 use only `propext`, and 75 use only `propext` and
 `Quot.sound`. No declaration in the transcript reaches `Classical.choice` or
 a project axiom.
-
-Canonical report coordinate
-`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-12-133` renders as an
-88-page A4 PDF. The generated TeX is 223,061 bytes with SHA-256
-`2e42452a0d270c8e36cf7f381dbd38a64a535d07b8bc653e4e13ff526c574e7d`;
-the deterministic PDF is 460,049 bytes with SHA-256
-`5bca11cba837c8bdf90e27186974bf5398d4be78fae3360987afbf19746d271b`.
 
 ## Explicit non-claims
 

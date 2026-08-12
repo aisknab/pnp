@@ -59,39 +59,15 @@ node --test \
 
 ## Mechanically generated publication evidence
 
-Inventory coordinate
-`PNP-LEAN-THEOREM-INVENTORY-2026-08-12-133` records 27,794 declarations,
-14,454 theorems, 7,347 assumption-free theorems, 15,008 excluded private
-declarations, 250 source-closure modules, and 2,589 reviewed milestone
-candidates. Its 18,243,895 canonical bytes have SHA-256
-`696c76220a092e5a84e7caa804fd1c57889f193968d1285b520c408f8237f5c1`.
-The exact Lean source closure has SHA-256
-`9b8afc2bac8c5f5b5fbe3c086f22602358c3f9b641aeb91e7de708f9f1001154`.
-
-Publication-map coordinate
-`PNP-FORMAL-PUBLICATION-MAP-2026-08-12-133` contains 111 milestones: 109
-earned and two deliberately unearned. The reduction milestone pins five
+Current coordinates, counts, fingerprints, sizes, and hashes are generated in
+the canonical inventory, publication map, status payload, and report
+artifacts. The reduction milestone pins five
 theorem types, while its audit covers nine reused interfaces and all seven
 new public declarations. Of those 16 declarations, two have empty axiom
 closure, two use only `propext`, and twelve use only `propext` and
-`Quot.sound`. None reaches `Classical.choice` or a project axiom. The complete
-map pins 2,589 theorem types; its 840,935 bytes have SHA-256
-`a9f7ec898fb04e4842ea86281d2a6b257fc0c65dd422eb04a974bde169bf29d6`.
-
-Status coordinate
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-12-133`, paired with public-surface
-coordinate
-`PUBLIC-SURFACE-BASELINE-2026-08-10-CONCRETE-LOCKED-NAND-THRESHOLD-121`,
+`Quot.sound`. None reaches `Classical.choice` or a project axiom. The status
 records the exact function, output, language equivalence, reduction witness,
-and recursive raw refinement as earned. Its 2,111,583 bytes have SHA-256
-`6e7416a60485390b4414251c3b8f00214ed759f93d8091aef73cdb357da2dbfe`.
-
-Canonical report coordinate
-`PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-12-133` has a
-223,061-byte TeX source with SHA-256
-`2e42452a0d270c8e36cf7f381dbd38a64a535d07b8bc653e4e13ff526c574e7d`
-and a deterministic 88-page, 460,049-byte A4 PDF with SHA-256
-`5bca11cba837c8bdf90e27186974bf5398d4be78fae3360987afbf19746d271b`.
+and recursive raw refinement as earned.
 
 The concrete publication gate remains false. All four project assumptions,
 all five blockers, unset activation fingerprints, and the absence of
