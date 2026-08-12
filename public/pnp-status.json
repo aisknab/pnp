@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-12-134",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-13-135",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -863,6 +863,9 @@
   "leanResidualTerminalBN6HypergraphPacketFormalized": true,
   "leanResidualTerminalBN6HypergraphPacketAxiomAuditPassed": true,
   "leanResidualTerminalBN6HypergraphPacketScope": "all-finite-explicit-grouped-v54-activation-to-v53-grouped-hypergraph-packet-bn6-pair-mixed-triple-fullspan-with-payload-witnesses",
+  "leanResidualTerminalPacketSelectorSeedsFormalized": true,
+  "leanResidualTerminalPacketSelectorSeedsAxiomAuditPassed": true,
+  "leanResidualTerminalPacketSelectorSeedsScope": "all-finite-explicit-bn6-packet-conclusions-payload-backed-pair-balanced-triple-or-fullspan-selector-seed-input-extraction",
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -1362,6 +1365,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBN6HypergraphPacketAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBN6HypergraphPacket.lean",
     "node --test audits/lean-residual-terminal-bn6-hypergraph-packet0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorSeedsAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorSeeds.lean",
+    "node --test audits/lean-residual-terminal-packet-selector-seeds0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1380,6 +1386,7 @@
     "The arbitrary-finite V54 consumer-antichain normal form proves that two-sided activation is nonzero exactly when a minimal-consumer antichain has a disjoint pair and, under the exact PkgC singletonization premise, is literally the cut indicator of the singleton footprint. The theorem itself consumes an explicit antichain. The finite BN6 bridge now transports explicitly grouped instances into V53, but full PkgC construction and route silence, derivation and grouping from terminal candidates, global routes, selectors, polynomial runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.",
     "The arbitrary-finite V53 constant-cut hypergraph rigidity theorem proves the exact q=2, q=3, and q>=4 classification for sparse positive hypergraphs with one common nonempty proper-cut value. The finite BN6 bridge now constructs such a hypergraph from explicit grouped V54 cells and retains payload witnesses, but full PkgC construction, terminal-candidate derivation and grouping, full historical BN6 and Packet selector/realizer completeness, global routes, polynomial runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.",
     "The finite BN6 hypergraph-packet bridge transports an explicit already-grouped positive payload-bearing V54 survivor family into the exact V53 cut sum and returns the pair, mixed three-anchor, or full-span packet classification with source payload witnesses. It does not complete PkgC, derive or group survivors from a terminal candidate, establish full historical BN6 or Packet selector/realizer completeness, complete global routes, prove polynomial generation or runtime, ZeroSlack or PCCMin, SAT in P, or P = NP.",
+    "The arbitrary-finite Packet selector-seed extraction converts every exact BN6 packet conclusion into a payload-backed pair, positive balanced-triple pair family, or positive full-span raw seed outcome. It does not prove selector-universe membership, faithfulness or compatibility, construct selector realizers or routes, establish enumeration or polynomial runtime, complete PkgC, ZeroSlack, or PCCMin, put SAT in P, or prove P = NP.",
     "The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.",
     "The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.",
     "Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.",
@@ -1538,7 +1545,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "ce07f54409913eabe319f1e9c0adaa9738418fc9af406b6c0329dffa2dd0fa89",
+    "actualSourceClosureSha256": "7cc382089d974d98edb07a82d8876179583a8d7bb54fe196651e3b9563c55169",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1568,22 +1575,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-12-134",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-13-135",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "5a1044bbf0438e67cf19749dae710c7a9a2d0fde5757ca57be997c175780cf86",
+  "leanTheoremInventorySha256": "ebdd71cf1e9b234fe6fc2f053bb94b0bcdd02f1930afe0829dd1b584afc66316",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 27837,
+  "leanTheoremInventoryDeclarationCount": 27854,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 15011,
-  "leanTheoremInventoryTheoremCount": 14470,
+  "leanTheoremInventoryTheoremCount": 14479,
   "leanTheoremInventoryAssumptionFreeTheoremCount": 7347,
-  "leanTheoremInventorySourceClosureModuleCount": 251,
-  "leanSourceClosureSha256": "ce07f54409913eabe319f1e9c0adaa9738418fc9af406b6c0329dffa2dd0fa89",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-12-134",
+  "leanTheoremInventorySourceClosureModuleCount": 252,
+  "leanSourceClosureSha256": "7cc382089d974d98edb07a82d8876179583a8d7bb54fe196651e3b9563c55169",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-13-135",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "d8e2bb51eb170e70bf30d9768922fc7b8d86195fc9b8f69abe458bfe3ab97da8",
+  "formalPublicationMapSha256": "91724f6c22a7644768b611489d57b1aacb5a1652e0ce1afb48047ed1bd763325",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -38326,6 +38333,62 @@
       "status": "formalized-residual-terminal-bn6-hypergraph-packet"
     },
     {
+      "classification": "formalized-residual-terminal-packet-selector-seeds",
+      "id": "residual-terminal-packet-selector-seeds",
+      "nonClaim": "This milestone consumes an exact finite BN6 packet conclusion and preserves only carrier containment, selector-relevant footprint size, and original grouped cell-and-atom payload evidence. It does not prove selector-universe membership, selector faithfulness or compatibility, construct a realizer or route, establish enumeration or polynomial generation/runtime, complete PkgC, ZeroSlack, or PCCMin, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalBN6GroupedFamily.hasPacketSelectorSeedAt_of_hasPayloadAt",
+        "PNP.DirectWire.TerminalBN6PacketConclusion.selectorSeeds",
+        "PNP.DirectWire.terminalBN6_packet_selector_seeds"
+      ],
+      "scope": "For an arbitrary finite exact BN6 packet conclusion, Lean extracts a carrier-contained payload-backed raw selector seed at the positive pair footprint, at every positive pair footprint of a balanced triple, or at the positive full-span footprint. The mixed three-anchor positive alternative is handled without asserting that both masses are positive, and the construction fixes no carrier cardinality.",
+      "title": "Finite Packet selector-seed extraction",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.hasPacketSelectorSeedAt_of_hasPayloadAt",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9896a194aa243404922a3a870bfc5d982f103bbdb3e1c3bdfd42352bb91a3c27",
+          "expectedKernelTypeSha256": "9896a194aa243404922a3a870bfc5d982f103bbdb3e1c3bdfd42352bb91a3c27",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6PacketConclusion.selectorSeeds",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ab62ea35d210a818af73fc38bac3e21d13e7026d2416a9567faba5c0c026b771",
+          "expectedKernelTypeSha256": "ab62ea35d210a818af73fc38bac3e21d13e7026d2416a9567faba5c0c026b771",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBN6_packet_selector_seeds",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a32e4bc92d0af4fa404d1a8ab6640820c431aa1731198ddb4e605483c15ab386",
+          "expectedKernelTypeSha256": "a32e4bc92d0af4fa404d1a8ab6640820c431aa1731198ddb4e605483c15ab386",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-packet-selector-seeds"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -38423,7 +38486,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-12-134",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-13-135",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

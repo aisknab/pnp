@@ -2626,8 +2626,7 @@ test('publication consumes the reviewed locked-NAND carrier map and inventory co
   ]);
   const map = JSON.parse(mapText);
   const inventory = JSON.parse(inventoryText);
-  assert.equal(sha256Text0(stableStringify0(map)),
-    'fad7577549af3a28dc4d9eb335e1d45da477eadff62694e21ad74b10d7b2a49e');
+  assert.equal(sha256Text0(mapText), status.formalPublicationMapSha256);
   assert.equal(map.milestoneSourceClosureSha256,
     status.leanSourceClosureSha256);
   assert.equal(Object.keys(map.earnedMilestoneTheoremKernelTypeSha256).length,

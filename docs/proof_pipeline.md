@@ -243,7 +243,8 @@ positive residual slack
 => positive residual witness
 => saturated BCEL-ready positive nucleus
 => BN2–BN6 packet
-=> faithful selector
+=> payload-backed raw selector seed (current Lean boundary)
+=> faithful selector (open)
 => verified gain or typed blocker
 => blocker/rank contradiction
 => ZeroSlack is impossible under positive slack

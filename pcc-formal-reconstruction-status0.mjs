@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-12-134';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-13-135';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -386,6 +386,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBN6HypergraphPacketAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBN6HypergraphPacket.lean',
   'node --test audits/lean-residual-terminal-bn6-hypergraph-packet0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorSeedsAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorSeeds.lean',
+  'node --test audits/lean-residual-terminal-packet-selector-seeds0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -405,6 +408,7 @@ const NON_CLAIMS = Object.freeze([
   'The arbitrary-finite V54 consumer-antichain normal form proves that two-sided activation is nonzero exactly when a minimal-consumer antichain has a disjoint pair and, under the exact PkgC singletonization premise, is literally the cut indicator of the singleton footprint. The theorem itself consumes an explicit antichain. The finite BN6 bridge now transports explicitly grouped instances into V53, but full PkgC construction and route silence, derivation and grouping from terminal candidates, global routes, selectors, polynomial runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.',
   'The arbitrary-finite V53 constant-cut hypergraph rigidity theorem proves the exact q=2, q=3, and q>=4 classification for sparse positive hypergraphs with one common nonempty proper-cut value. The finite BN6 bridge now constructs such a hypergraph from explicit grouped V54 cells and retains payload witnesses, but full PkgC construction, terminal-candidate derivation and grouping, full historical BN6 and Packet selector/realizer completeness, global routes, polynomial runtime, ZeroSlack, PCCMin, SAT in P, and P = NP remain unproved.',
   'The finite BN6 hypergraph-packet bridge transports an explicit already-grouped positive payload-bearing V54 survivor family into the exact V53 cut sum and returns the pair, mixed three-anchor, or full-span packet classification with source payload witnesses. It does not complete PkgC, derive or group survivors from a terminal candidate, establish full historical BN6 or Packet selector/realizer completeness, complete global routes, prove polynomial generation or runtime, ZeroSlack or PCCMin, SAT in P, or P = NP.',
+  'The arbitrary-finite Packet selector-seed extraction converts every exact BN6 packet conclusion into a payload-backed pair, positive balanced-triple pair family, or positive full-span raw seed outcome. It does not prove selector-universe membership, faithfulness or compatibility, construct selector realizers or routes, establish enumeration or polynomial runtime, complete PkgC, ZeroSlack, or PCCMin, put SAT in P, or prove P = NP.',
   'The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.',
   'The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.',
   'Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.',
@@ -1557,6 +1561,10 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalBN6HypergraphPacketAxiomAuditPassed: true,
   leanResidualTerminalBN6HypergraphPacketScope:
     'all-finite-explicit-grouped-v54-activation-to-v53-grouped-hypergraph-packet-bn6-pair-mixed-triple-fullspan-with-payload-witnesses',
+  leanResidualTerminalPacketSelectorSeedsFormalized: true,
+  leanResidualTerminalPacketSelectorSeedsAxiomAuditPassed: true,
+  leanResidualTerminalPacketSelectorSeedsScope:
+    'all-finite-explicit-bn6-packet-conclusions-payload-backed-pair-balanced-triple-or-fullspan-selector-seed-input-extraction',
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
   leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2596,6 +2604,10 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalBN6HypergraphPacketAxiomAuditPassed: true,
       leanResidualTerminalBN6HypergraphPacketScope:
         'all-finite-explicit-grouped-v54-activation-to-v53-grouped-hypergraph-packet-bn6-pair-mixed-triple-fullspan-with-payload-witnesses',
+      leanResidualTerminalPacketSelectorSeedsFormalized: true,
+      leanResidualTerminalPacketSelectorSeedsAxiomAuditPassed: true,
+      leanResidualTerminalPacketSelectorSeedsScope:
+        'all-finite-explicit-bn6-packet-conclusions-payload-backed-pair-balanced-triple-or-fullspan-selector-seed-input-extraction',
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
       leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2675,7 +2687,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-12-134',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-13-135',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

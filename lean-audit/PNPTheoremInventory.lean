@@ -2416,6 +2416,9 @@ private def reviewedMilestoneTheoremNames : Array Name := #[
   `PNP.DirectWire.TerminalBN6GroupedFamily.footprintWeight_eq_groupedMass,
   `PNP.DirectWire.TerminalBN6GroupedFamily.hasPayloadAt_of_footprintWeight_positive,
   `PNP.DirectWire.terminalBN6_hypergraph_packet,
+  `PNP.DirectWire.TerminalBN6GroupedFamily.hasPacketSelectorSeedAt_of_hasPayloadAt,
+  `PNP.DirectWire.TerminalBN6PacketConclusion.selectorSeeds,
+  `PNP.DirectWire.terminalBN6_packet_selector_seeds,
   `PNP.DirectWire.allTerminalPrimitiveRecords_nodup,
   `PNP.DirectWire.filter_mem_terminalListSubsets,
   `PNP.DirectWire.TerminalFourCornerCarrier.boundaryDisposition?_eq_some_iff,
@@ -2719,7 +2722,7 @@ private def inventory : CommandElabM Json := do
   return Json.mkObj [
     ("kind", toJson "PNPLeanTheoremInventory0"),
     ("version", toJson 0),
-    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-08-12-134"),
+    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-08-13-135"),
     ("leanToolchain", toJson "leanprover/lean4:v4.31.0"),
     ("rootModule", toJson "PNP"),
     ("environmentProbeComplete", toJson true),
