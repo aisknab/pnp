@@ -321,7 +321,8 @@ test('publication earns only the finite generated cancellation boundary', async 
   assert.equal(status.publicTheoremEmissionAllowed, false);
   assert.equal(status.remainingBlockers.length, 5);
   assert.match(docs, /finite PkgC typed restoration same-key cancellation/iu);
-  assert.match(docs, /not yet proved[\s\S]{0,120}ambient BN4 ledger/iu);
+  assert.match(docs,
+    /explicit ambient BN4 ledger[\s\S]{0,180}does not derive[\s\S]{0,100}(?:binding|ledger)[\s\S]{0,80}candidate/iu);
 });
 
 test('durable workflow runs transcript, regression, and hostile audit', async () => {

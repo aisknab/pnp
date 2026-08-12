@@ -43,6 +43,7 @@ import PNP.ResidualTerminalConsumerAntichainNormalForm
 import PNP.ResidualTerminalPkgCSeparatingConsumers
 import PNP.ResidualTerminalPkgCTypedRestoration
 import PNP.ResidualTerminalPkgCSameKeyCancellation
+import PNP.ResidualTerminalPkgCAmbientBN4Ledger
 import PNP.ResidualTerminalConstantCutHypergraphRigidity
 import PNP.ResidualTerminalBN6HypergraphPacket
 import PNP.DirectWireBaseline

@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'e5e01ce800cf1ae07c751051712ded7590eb746292b8f143cfc0cbfb1a64452d';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '7069c4e01a1a41a7751f41389b6eadc7711cf550d0de79b29a2eb237819bdffb';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -2323,6 +2323,18 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.terminalPkgC_typedRestoration_sameKeyCancellation',
   'PNP.DirectWire.terminalPkgC_sameKeyCancellation_silence_singletonizes',
   'PNP.DirectWire.classifyTerminalPkgCSameKeyCancellation_exhaustive',
+  'PNP.DirectWire.terminalBN4PositiveMass_perm',
+  'PNP.DirectWire.terminalBN4NegativeMass_perm',
+  'PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.generatedCell_mem_ambient',
+  'PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.cellMultiplicity',
+  'PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.length_eq',
+  'PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.positiveMass_decomposition',
+  'PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.negativeMass_decomposition',
+  'PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.signedMass_eq_remainder',
+  'PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.residualSignedContribution_eq_remainder',
+  'PNP.DirectWire.classifyTerminalPkgCAmbientBN4LedgerBinding_exhaustive',
+  'PNP.DirectWire.TerminalPkgCComputedAmbientBN4Cancellation.generatedCell_usesCanonicalAtom',
+  'PNP.DirectWire.terminalPkgC_computedAmbientBN4_silence_singletonizes',
   'PNP.DirectWire.TerminalV53Hypergraph.cell_partition',
   'PNP.DirectWire.TerminalV53Hypergraph.cut_partition',
   'PNP.DirectWire.TerminalV53Hypergraph.pair_complement_identity',
@@ -2619,7 +2631,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-12-132') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-12-133') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -2896,7 +2908,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-12-132') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-12-133') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

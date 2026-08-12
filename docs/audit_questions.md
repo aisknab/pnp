@@ -494,6 +494,9 @@ The BN2–BN6 chain converts a BCEL-ready positive nucleus into a positive pair,
 - `PNP.DirectWire.terminalPkgC_typedRestoration_realization`.
 - `PNP.DirectWire.terminalPkgC_typedRestoration_sameKeyCancellation`.
 - `PNP.DirectWire.terminalPkgC_sameKeyCancellation_silence_singletonizes`.
+- `PNP.DirectWire.TerminalPkgCAmbientBN4LedgerEmbedding.signedMass_eq_remainder`.
+- `PNP.DirectWire.TerminalPkgCComputedAmbientBN4Cancellation.generatedCell_usesCanonicalAtom`.
+- `PNP.DirectWire.terminalPkgC_computedAmbientBN4_silence_singletonizes`.
 - `BN6.HypergraphPacket`.
 - Local-package records and global proof DAG.
 
@@ -509,9 +512,13 @@ The BN2–BN6 chain converts a BCEL-ready positive nucleus into a positive pair,
    for the same equality-fibre graph.
 7. Recompute the generated opposite-sign restoration ledger; require equal
    positive and negative mass, empty residual, and zero signed mass at every
-   nested BN4 key, then identify the missing ambient-ledger linkage explicitly.
-8. Re-prove V53/V54 and test the mixed three-anchor case.
-9. Measure antichain, graph, cell, and certificate sizes on worst-case accepted schedules.
+   nested BN4 key. Then verify the ambient `List.Perm` certificate preserves
+   every duplicate, decomposes every complete-key mass, and leaves exactly the
+   explicit remainder; do not mistake this certificate for candidate derivation.
+8. Require the retained candidate-derived BN4 kernel to place every embedded
+   generated cell in its canonical request-atom space.
+9. Re-prove V53/V54 and test the mixed three-anchor case.
+10. Measure antichain, graph, cell, and certificate sizes on worst-case accepted schedules.
 
 **What would count as a refutation or material defect**
 
@@ -523,7 +530,8 @@ The BN2–BN6 chain converts a BCEL-ready positive nucleus into a positive pair,
 - A purported typed restoration with a missing candidate, changed coordinate,
   or simultaneous complete coverage and strict Hall deficit.
 - A generated restoration cancellation that changes the nested BN4 key, leaves
-  nonzero signed mass, or is silently treated as the terminal ambient ledger.
+  nonzero signed mass, loses a duplicate in the ambient decomposition, or is
+  silently treated as an ambient ledger derived from the terminal candidate.
 - A nonnegative constant-cut hypergraph outside the claimed packet classification.
 - Exponential antichain or cut work hidden in an asserted polynomial step.
 
