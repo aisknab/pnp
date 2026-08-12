@@ -1,0 +1,19 @@
+import PNP.ResidualTerminalPkgCTypedRestoration
+
+#print axioms PNP.DirectWire.TerminalPkgCTypedRestorer
+#print axioms PNP.DirectWire.TerminalPkgCSeparatingPair.fullRestorationCandidates
+#print axioms PNP.DirectWire.TerminalPkgCSeparatingPair.fullRestorationCandidates_length
+#print axioms PNP.DirectWire.TerminalPkgCSeparatingPair.fullRestorationCandidates_coordinates
+#print axioms PNP.DirectWire.TerminalPkgCTypedRestorer.coordinateUniverse
+#print axioms PNP.DirectWire.TerminalPkgCTypedRestorer.coordinateUniverse_coordinates
+#print axioms PNP.DirectWire.terminalPkgCCoordinateMultiplicity
+#print axioms PNP.DirectWire.terminalBN5FullMultiplicity_indexed_eq
+#print axioms PNP.DirectWire.terminalBN5ShadowMultiplicity_indexed_eq
+#print axioms PNP.DirectWire.TerminalPkgCSeparatingPair.typedRestoration_exactCoverage
+#print axioms PNP.DirectWire.terminalBN5CompleteMultiplicityMatching_not_hallDeficit
+#print axioms PNP.DirectWire.TerminalPkgCTypedRestorationRealization
+#print axioms PNP.DirectWire.TerminalPkgCSeparatingPair.typedRestorationRealization
+#print axioms PNP.DirectWire.TerminalPkgCTypedRestorationOutcome
+#print axioms PNP.DirectWire.classifyTerminalPkgCTypedRestoration
+#print axioms PNP.DirectWire.terminalPkgC_typedRestoration_realization
+#print axioms PNP.DirectWire.classifyTerminalPkgCTypedRestoration_exhaustive

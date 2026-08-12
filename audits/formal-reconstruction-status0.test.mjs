@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-12-130');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-12-131');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -909,6 +909,8 @@ test('formal reconstruction status accepts the current source and public mirrors
     'leanResidualTerminalBN5FullShadowLocalizationAxiomAuditPassed',
     'leanResidualTerminalPkgCSeparatingConsumersFormalized',
     'leanResidualTerminalPkgCSeparatingConsumersAxiomAuditPassed',
+    'leanResidualTerminalPkgCTypedRestorationFormalized',
+    'leanResidualTerminalPkgCTypedRestorationAxiomAuditPassed',
     'leanResidualTerminalConsumerAntichainNormalFormFormalized',
     'leanResidualTerminalConsumerAntichainNormalFormAxiomAuditPassed',
     'leanResidualTerminalConstantCutHypergraphRigidityFormalized',
@@ -1017,6 +1019,10 @@ test('formal reconstruction status accepts the current source and public mirrors
     'all-finite-explicit-minimal-consumer-antichains-pkgc-separating-consumer-first-pair-canonical-atoms-exact-coordinate-restoration-or-strict-hall-local-q',
   );
   assert.equal(
+    out.leanResidualTerminalPkgCTypedRestorationScope,
+    'all-finite-explicit-minimal-consumer-antichains-typed-full-restoration-candidates-coordinate-preserving-exact-multiplicity-coverage-no-hall-or-singletonized',
+  );
+  assert.equal(
     out.leanResidualTerminalConsumerAntichainNormalFormScope,
     'all-finite-minimal-consumer-antichains-monotone-empty-false-nonzero-iff-disjoint-and-pkgc-singletonized-exact-v54-consumer-antichain-cut-indicator',
   );
@@ -1063,13 +1069,13 @@ test('formal reconstruction status accepts the current source and public mirrors
 
 test('formal reconstruction status pins the locked-NAND carrier inventory and source closure', async () => {
   const status = await currentStatus0();
-  assert.equal(status.leanTheoremInventoryDeclarationCount, 27573);
-  assert.equal(status.leanTheoremInventoryTheoremCount, 14360);
-  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7314);
+  assert.equal(status.leanTheoremInventoryDeclarationCount, 27659);
+  assert.equal(status.leanTheoremInventoryTheoremCount, 14395);
+  assert.equal(status.leanTheoremInventoryAssumptionFreeTheoremCount, 7336);
   assert.equal(status.leanTheoremInventoryExcludedPrivateDeclarationCount, 15002);
-  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 247);
+  assert.equal(status.leanTheoremInventorySourceClosureModuleCount, 248);
   assert.equal(status.leanSourceClosureSha256,
-    '4608b17afe6e8d0be3f7f6e0fae526025c0050f64dca9670e71ae89f9f27aa7c');
+    '8bdc5a19e8a7360f6421b229858d95e6a430dece175bcc640b73041c4de768f6');
   const machine = status.formalPublicationMilestones.find(
     (entry) => entry.id === 'concrete-machine-cost-kernel',
   );

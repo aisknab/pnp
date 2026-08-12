@@ -46,7 +46,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-12-130}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-12-131}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -89,15 +89,15 @@
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 27573 \\
-Theorem-kind declarations & 14360 \\
-Assumption-free theorem-kind declarations & 7314 \\
+Compiled declarations & 27659 \\
+Theorem-kind declarations & 14395 \\
+Assumption-free theorem-kind declarations & 7336 \\
 Project-specific axioms & 4 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{859ef0595f1eeea872518b0f399a788225e3a2ed9fefe987c6ae5bd6b3783aaf}\par}
+{\small Inventory SHA-256: \code{7f21404feab8d7f354df31e904fda9a8f5fc9b64caefddf19398602166ca4cf9}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -651,7 +651,7 @@ SAT completeness, SAT in P, and the root theorem remain absent.
 \section{Formal milestone ledger}
 
 Each earned row requires exact compiled names and theorem kinds, empty axiom closures, per-name
-domain-separated kernel-type SHA-256 matches for 2557 detailed candidates, and the pinned whole-Lean
+domain-separated kernel-type SHA-256 matches for 2566 detailed candidates, and the pinned whole-Lean
 source closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
 {\small
@@ -764,6 +764,7 @@ Candidate-derived finite BN3 request envelope & formalized-residual-terminal-bn3
 Finite BN4 activation-exact cancellation kernel & formalized-residual-terminal-bn4-activation-cancellation & After a successful computed finite BN3 envelope, Lean gives every request atom a canonical singleton activation code; proves activation-code equality exactly equivalent to equality of activation functions without enumerating cuts; checks equality of a complete typed key containing the atom, explicit semantic signature, and explicit transport type; totals positive and negative natural mass only at that same complete key; classifies a canonical balanced, positive, or negative residual; proves exact integer mass conservation, complete-key preservation, positive residual mass, and absence of opposite-sign residual pairs; computes duplicate-free ledger keys; and preserves all upstream failure branches while rejecting foreign request atoms. & This is a finite cancellation kernel over an explicit typed cell ledger. It does not derive cells, semantic signatures, or transport types from four-corner bases and is not the full historical BN4 theorem. It supplies no polynomial construction or size bound; does not construct PkgC or BN6; does not complete global routes, selectors, or realizers; does not establish ZeroSlack or PCCMin; does not put SAT in P; does not remove a project assumption; and does not prove P = NP. \\
 Finite BN5 full-shadow localization kernel & formalized-residual-terminal-bn5-full-shadow-localization & For every explicit finite negative-unit refinement and quotient-shadow ledger, Lean preserves the complete exact-coordinate data, validates the negative mass refinement, computes whether the cut is silent, and otherwise returns either complete multiplicity coverage or a strict Hall deficit with a literal smaller shadow-neighbor fibre, complete-coordinate preservation, and a proof-bearing local X1 route that prevents active unmatched units from disappearing silently. & This kernel starts from explicit finite inputs: one complete BN4 key, a negative cancellation result, a payload list, a cut, and a quotient-shadow coordinate list. It does not derive payloads or shadows from four-corner bases, connect complete matching back to a BN4 contradiction, or prove the full CritC/Q/E/L/X2/X3/X4 diagnosis, so it is not the full historical BN5 theorem. It does not construct PkgC or BN6; complete global routes, selectors, or realizers; establish polynomial generation or runtime, ZeroSlack, or PCCMin; put SAT in P; remove a project assumption; or prove P = NP. \\
 Finite PkgC separating-consumer restoration dichotomy & formalized-residual-terminal-pkgc-separating-consumers & For an arbitrary finite explicit minimal-consumer antichain, Lean canonically scans for the first disjoint pair that is not singleton-singleton. Absence proves exactly V54's singletonization premise. A found pair's atoms are canonically indexed into exact-coordinate quotient units and an explicit full-restoration universe is classified into complete multiplicity coverage or a strict Hall deficit with a deterministic local Q route. & The restoration coordinate universe remains explicit. This theorem does not derive consumers or restorations from a terminal candidate, connect complete coverage back to a BN4 or BN5 contradiction, embed the Hall route into the complete global outcome system, prove global route silence, or establish the full historical PkgC theorem. It does not prove full BN6 or Packet selector-realizer completeness, polynomial generation or runtime, ZeroSlack or PCCMin, SAT in P, remove a project assumption, or prove P = NP. \\
+Finite PkgC typed restoration realization & formalized-residual-terminal-pkgc-typed-restoration & For an arbitrary finite explicit minimal-consumer antichain and a typed coordinate-preserving restoration operation, Lean materializes typed full-restoration candidates for every atom of the canonical first disjoint nonsingleton pair, proves exact candidate count and positional coordinate preservation, derives complete equality-fibre multiplicity coverage, excludes a strict Hall deficit for that graph, and otherwise proves V54 singletonization. & The typed restoration operation remains explicit caller data. This milestone does not construct it from a terminal candidate or prove its full semantic adequacy. It does not connect complete restoration to a BN4 or BN5 contradiction, embed local routes into the complete global outcome system, prove global PkgC route silence or the full historical PkgC theorem, establish full BN6 or Packet selector-realizer completeness, polynomial generation or runtime, ZeroSlack or PCCMin, put SAT in P, remove a project assumption, or prove P = NP. \\
 Finite V54 consumer-antichain normal form & formalized-residual-terminal-v54-consumer-antichain-normal-form & For an arbitrary finite carrier and its explicit minimal-consumer antichain, Lean proves monotonicity and empty-request inactivity, proves that nonzero two-sided cut activation is equivalent to the existence of a disjoint consumer pair, and under the exact singletonized-disjoint-pair premise proves literal equality with the corresponding footprint cut indicator. & This finite kernel starts from an explicit minimal-consumer antichain and an explicit proof that every disjoint consumer pair is singletonized. It does not construct PkgC, derive that singletonization premise, or connect the footprint back to the full BN6 proof. It does not construct complete global routes, selectors, or realizers; establish polynomial generation or runtime, ZeroSlack, or PCCMin; put SAT in P; remove a project assumption; or prove P = NP. \\
 Finite V53 constant-cut hypergraph rigidity & formalized-residual-terminal-v53-constant-cut-hypergraph-rigidity & For an arbitrary finite duplicate-free carrier and sparse nonnegative weighted hypergraph with positive listed cells, exact equality of every nonempty proper cut proves the complete V53 q=2, q=3, and q>=4 classification: full-span weight D; one common pair weight p with w\_A + 2p = D; or zero weight on every proper footprint with full-span weight D. & This theorem consumes an explicit sparse positive hypergraph and an explicit proof that every nonempty proper cut has the same positive value. It does not construct PkgC, derive the hypergraph from a terminal candidate or the V54 consumer system, build BN6 cells or payloads, complete global routes, selectors, or realizers, establish polynomial generation or runtime, prove ZeroSlack or PCCMin, put SAT in P, remove a project assumption, or prove P = NP. \\
 Finite BN6 grouped hypergraph packet bridge & formalized-residual-terminal-bn6-hypergraph-packet & For an arbitrary finite duplicate-free anchor carrier and explicit already-grouped family of positive payload-bearing survivor cells, V54 activation is transported exactly into the constructed V53 hypergraph cut sum. A positive BCEL constant-cut premise then yields the complete pair, mixed three-anchor balanced-triple/full-span, or four-or-more-anchor full-span classification with original payload witnesses. & This finite bridge consumes explicit exact footprint grouping, PkgC singletonization proofs, positive atom ledgers, payload data, and the BCEL constant-cut equation. It does not construct PkgC, derive or group survivors from a terminal candidate, establish full historical BN6 or Packet selector/realizer completeness, complete global routes, prove polynomial generation or runtime, ZeroSlack or PCCMin, put SAT in P, remove a project assumption, or prove P = NP. \\
@@ -776,8 +777,8 @@ Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-mac
 
 \section{Compiled inventory summary}
 
-The inventory contains 27573 exported \code{PNP.*} kernel declarations from
-247 modules. It excludes 15002 private compiler auxiliaries.
+The inventory contains 27659 exported \code{PNP.*} kernel declarations from
+248 modules. It excludes 15002 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -1021,6 +1022,7 @@ PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Mode\allowbreak{}Fire
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Origin\allowbreak{}Kernel\allowbreak{}Obligation\allowbreak{}Routing & 330 & 97 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Physical\allowbreak{}Support\allowbreak{}Completion & 93 & 34 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Pkg\allowbreak{}CSeparating\allowbreak{}Consumers & 131 & 51 \\
+PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Pkg\allowbreak{}CTyped\allowbreak{}Restoration & 86 & 35 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Projection\allowbreak{}Minimum & 36 & 23 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Projection\allowbreak{}Square & 21 & 17 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Projection\allowbreak{}Transfer & 29 & 8 \\
@@ -1095,10 +1097,10 @@ npm run report:check
 \end{verbatim}
 }
 
-The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-08-12-129}. Its exact byte digest is
-\code{859ef0595f1eeea872518b0f399a788225e3a2ed9fefe987c6ae5bd6b3783aaf}. The report is regenerated from that inventory and the reviewed
+The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-08-12-131}. Its exact byte digest is
+\code{7f21404feab8d7f354df31e904fda9a8f5fc9b64caefddf19398602166ca4cf9}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{4608b17afe6e8d0be3f7f6e0fae526025c0050f64dca9670e71ae89f9f27aa7c}; the computed and pinned values match. Successful regeneration
+\code{8bdc5a19e8a7360f6421b229858d95e6a430dece175bcc640b73041c4de768f6}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 
