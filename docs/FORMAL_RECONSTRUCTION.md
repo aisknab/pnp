@@ -1588,6 +1588,19 @@ bounds, PkgC completion, ZeroSlack, PCCMin, SAT in P, and P = NP remain open.
 See
 [`lean_residual_terminal_packet_selector_universe.md`](./lean_residual_terminal_packet_selector_universe.md).
 
+`ResidualTerminalPacketSelectorHandles` adds canonical input-relative handles
+for that exact universe. A handle is a position in the explicit grouped list;
+duplicate-free footprints make decoding injective, and each decoded footprint
+retains carrier containment, length at least two, and its original grouped
+cell-and-atom payload witness. Every payload selector has exactly one such
+handle, and the pair, balanced-triple, and full-span alternatives are preserved.
+These list positions are not the manuscript's bit encoding or polynomial
+selector universe and do not establish manuscript-level selector faithfulness
+or compatibility. Realizer and route construction, grouped-family derivation,
+polynomial encoding and enumeration bounds, PkgC completion, ZeroSlack,
+PCCMin, SAT in P, and P = NP remain open. See
+[`lean_residual_terminal_packet_selector_handles.md`](./lean_residual_terminal_packet_selector_handles.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

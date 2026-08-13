@@ -562,6 +562,11 @@ Every positive packet has a representative in the polynomial selector universe; 
   membership only in the exact finite grouped-footprint list supplied by the
   explicit BN6 family, not in the manuscript's encoded or polynomial selector
   universe and not manuscript-level faithfulness, compatibility, or bounds.
+- `PNP.DirectWire.TerminalBN6PacketConclusion.selectorHandles`, which gives
+  those exact finite members unique input-list positions with injective
+  decoding and retained carrier, size, cell, and atom evidence. These are not
+  the manuscript's bit encoding and provide no polynomial count, bit-length,
+  generation-time, realizer, or route theorem.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
