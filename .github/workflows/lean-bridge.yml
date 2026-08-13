@@ -194,6 +194,11 @@ on:
       - 'lean-audit/PNPResidualTerminalPacketSelectorGainScanAxiomAudit.lean'
       - 'lean-regression/PNPResidualTerminalPacketSelectorGainScan.lean'
       - 'docs/lean_residual_terminal_packet_selector_gain_scan.md'
+      - 'audits/lean-residual-terminal-packet-selector-universe-gain-scan0.test.mjs'
+      - 'lean/PNP/ResidualTerminalPacketSelectorUniverseGainScan.lean'
+      - 'lean-audit/PNPResidualTerminalPacketSelectorUniverseGainScanAxiomAudit.lean'
+      - 'lean-regression/PNPResidualTerminalPacketSelectorUniverseGainScan.lean'
+      - 'docs/lean_residual_terminal_packet_selector_universe_gain_scan.md'
       - 'docs/lean_residual_gain_chain.md'
       - 'docs/lean_residual_gain_stopping.md'
       - 'docs/lean_residual_terminal_full_bridge.md'
@@ -500,6 +505,11 @@ on:
       - 'lean-audit/PNPResidualTerminalPacketSelectorGainScanAxiomAudit.lean'
       - 'lean-regression/PNPResidualTerminalPacketSelectorGainScan.lean'
       - 'docs/lean_residual_terminal_packet_selector_gain_scan.md'
+      - 'audits/lean-residual-terminal-packet-selector-universe-gain-scan0.test.mjs'
+      - 'lean/PNP/ResidualTerminalPacketSelectorUniverseGainScan.lean'
+      - 'lean-audit/PNPResidualTerminalPacketSelectorUniverseGainScanAxiomAudit.lean'
+      - 'lean-regression/PNPResidualTerminalPacketSelectorUniverseGainScan.lean'
+      - 'docs/lean_residual_terminal_packet_selector_universe_gain_scan.md'
       - 'docs/lean_residual_gain_chain.md'
       - 'docs/lean_residual_gain_stopping.md'
       - 'docs/lean_residual_terminal_full_bridge.md'
@@ -3568,3 +3578,28 @@ jobs:
 
       - name: Run checked Packet selector candidate-gain scan hostile audit
         run: node --test audits/lean-residual-terminal-packet-selector-gain-scan0.test.mjs
+
+      - name: Print exhaustive Packet selector-universe gain-scan axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorUniverseGainScanAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketSelectorUniverseGainScanAxiomAudit.lean)"
+          test "$expected_count" -gt 0
+          test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -Eq 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            printf '%s\n' "$normalized" >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
+
+      - name: Run exhaustive Packet selector-universe gain-scan regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorUniverseGainScan.lean
+
+      - name: Run exhaustive Packet selector-universe gain-scan hostile audit
+        run: node --test audits/lean-residual-terminal-packet-selector-universe-gain-scan0.test.mjs

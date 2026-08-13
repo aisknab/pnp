@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'a6551626207121da4924252fcf3d8812d7c9de1e3efced229a0d4cbf9072cd0b';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '45b1ff2cf3f4b0de9174e0378012c57e729d6ac9fff802b974c326154a625ef5';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -2415,6 +2415,16 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.TerminalPacketEncodedSelectorConclusion.gainScans',
   'PNP.DirectWire.TerminalBN6PacketConclusion.gainScans',
   'PNP.DirectWire.terminalBN6_packet_selector_gain_scans',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.mem_packetSelectorHandles',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorHandles_length',
+  'PNP.DirectWire.TerminalPacketSelectorHandleListGainOutcome.sound',
+  'PNP.DirectWire.TerminalPacketSelectorUniverseGainOutcome.sound',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.scanPacketSelectorUniverseGains_sound',
+  'PNP.DirectWire.TerminalPacketSelectorUniverseGainOutcome.gain_strictResidualDescent',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.universeGain_source_and_code',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.universeNoGain_of_gainScan',
+  'PNP.DirectWire.TerminalPacketEncodedSelectorConclusion.universeGainScan_packet',
+  'PNP.DirectWire.terminalBN6_packet_selector_universe_gain_scan_sound',
   'PNP.DirectWire.allTerminalPrimitiveRecords_nodup',
   'PNP.DirectWire.filter_mem_terminalListSubsets',
   'PNP.DirectWire.TerminalFourCornerCarrier.boundaryDisposition?_eq_some_iff',
@@ -2693,7 +2703,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-14-140') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-14-141') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -2970,7 +2980,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-14-140') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-14-141') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

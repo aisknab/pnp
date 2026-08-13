@@ -578,6 +578,13 @@ Every positive packet has a representative in the polynomial selector universe; 
   canonical original positive payload atom. This is input-family lookup, not a
   replacement-circuit gain-or-blocker realizer, payload serialization,
   faithfulness/compatibility theorem, route, or polynomial bound.
+- `PNP.DirectWire.TerminalBN6GroupedFamily.scanPacketSelectorUniverseGains_sound`
+  and `PNP.DirectWire.terminalBN6_packet_selector_universe_gain_scan_sound`,
+  which enumerate every canonical handle in the supplied explicit family and
+  check every original direct-wire payload in each exact source cell. Their
+  unresolved outcome proves family-wide no-gain only for that input-relative
+  universe. It is not manuscript selector silence, a typed HN/budget/lower-rank
+  blocker, global minimality, ZeroSlack, or a polynomial completeness theorem.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -586,9 +593,12 @@ Every positive packet has a representative in the polynomial selector universe; 
 
 1. For each packet type, reconstruct the selector handles and payload from the packet witness.
 2. Check the claimed bound on selector count and payload bit length.
-3. Decode representative selectors and verify the same-frontier replacement and strict charge-surplus injection.
-4. Inspect every typed bottom reason and verify rank nonincrease or strict tie-break descent.
-5. Build the complete HN/BUD blocker graph and run an independent cycle check.
+3. Re-run the exhaustive finite-family scan and verify that every canonical
+   handle and every original source-cell payload is covered; do not generalize
+   its no-gain branch beyond the supplied family.
+4. Decode representative selectors and verify the same-frontier replacement and strict charge-surplus injection.
+5. Inspect every typed bottom reason and verify rank nonincrease or strict tie-break descent.
+6. Build the complete HN/BUD blocker graph and run an independent cycle check.
 
 **What would count as a refutation or material defect**
 

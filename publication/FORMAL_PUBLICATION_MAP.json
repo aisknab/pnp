@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-14-140",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-14-141",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2651,7 +2651,17 @@
     "PNP.DirectWire.TerminalPacketCandidateGainOutcome.gain_strictResidualDescent": "7f468d2ffb1d31071c4971c5232e78017d81003e954da16b334313c69155902f",
     "PNP.DirectWire.TerminalPacketCandidateGainOutcome.sound": "14694f4db90e1f37a49a670edf367f06b8e088082d49e2ec5540d74fc0afb94b",
     "PNP.DirectWire.TerminalPacketEncodedSelectorConclusion.gainScans": "d281b4b953c16f80afa51d606669bbb64e41c12cb24decc77ba379b4b1299a58",
-    "PNP.DirectWire.terminalBN6_packet_selector_gain_scans": "54570f3b2c287367fd79ed45fe365049ee662b7c2af25faaa0a7f3fef02f4325"
+    "PNP.DirectWire.terminalBN6_packet_selector_gain_scans": "54570f3b2c287367fd79ed45fe365049ee662b7c2af25faaa0a7f3fef02f4325",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.mem_packetSelectorHandles": "22cb55480f5bbe81fb8540e5e44baae06fe2a37d1f569a315d1ea6e613d77a1d",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorHandles_length": "3d685cc640a9b0eebec7e777ba4eb0ba97e849864b1a49f983701f713c0f72db",
+    "PNP.DirectWire.TerminalPacketSelectorHandleListGainOutcome.sound": "ad8a3c4868e04bac82feacae9f4da4240351fbaea9de3366a0bab4243495af76",
+    "PNP.DirectWire.TerminalPacketSelectorUniverseGainOutcome.sound": "6f1bab3555fe49689a663406f474357fa987a15a5978be77aa0c592d2942b624",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.scanPacketSelectorUniverseGains_sound": "c52533b196e485c0bf91c0dff1f6ae39289c30946c7e8f792786953ca68c76a8",
+    "PNP.DirectWire.TerminalPacketSelectorUniverseGainOutcome.gain_strictResidualDescent": "211b3c22fb1a6c4c6bf9803a38a7d04902d79dd054ebda9e3d3ea492e00a4549",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.universeGain_source_and_code": "908bfb961e16547356af3e1dacda10db97114f3f3658dcbc404fa57527ca38cc",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.universeNoGain_of_gainScan": "b31b67e308423d933c862df8872bd70b331ac6fd86be0e1c658849a569e1f133",
+    "PNP.DirectWire.TerminalPacketEncodedSelectorConclusion.universeGainScan_packet": "373902d79d328259df3d62d93d2ab45f63191d236f52a3cc03eb2e50aeb1c418",
+    "PNP.DirectWire.terminalBN6_packet_selector_universe_gain_scan_sound": "a9a9e9ccf505501b0576f0462c43d3d9283177b2079cae2c2a8d432a43153b8f"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -2669,7 +2679,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "07c0f641a90fec3d9e7649fef1ae68759842885eade9e47d0fddcfbc78666eba",
+  "milestoneSourceClosureSha256": "794760e09b118041da76b16b5eda92a6bff496a96decf07951a7f9a0fc3d987e",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -6591,6 +6601,25 @@
       "title": "Checked Packet selector candidate-gain scan"
     },
     {
+      "classification": "formalized-residual-terminal-packet-selector-universe-gain-scan",
+      "id": "residual-terminal-packet-selector-universe-gain-scan",
+      "nonClaim": "The grouped BN6 family and candidate implementations remain explicit inputs. Family-wide no-gain is silence only for that supplied input-relative selector universe; it is not a manuscript BotHN, BotBUD, or lower-rank BotSeed, does not establish selector faithfulness or compatibility, and does not imply global minimality or ZeroSlack. This milestone does not construct replacement candidates, connect payload mass to charge surplus, derive or group survivors from terminal data, bound the family by encoded circuit size, prove polynomial enumeration or runtime, complete PkgC, ZeroSlack, or PCCMin, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalBN6GroupedFamily.mem_packetSelectorHandles",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorHandles_length",
+        "PNP.DirectWire.TerminalPacketSelectorHandleListGainOutcome.sound",
+        "PNP.DirectWire.TerminalPacketSelectorUniverseGainOutcome.sound",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.scanPacketSelectorUniverseGains_sound",
+        "PNP.DirectWire.TerminalPacketSelectorUniverseGainOutcome.gain_strictResidualDescent",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.universeGain_source_and_code",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.universeNoGain_of_gainScan",
+        "PNP.DirectWire.TerminalPacketEncodedSelectorConclusion.universeGainScan_packet",
+        "PNP.DirectWire.terminalBN6_packet_selector_universe_gain_scan_sound"
+      ],
+      "scope": "For every arbitrary finite explicit grouped BN6 family whose payloads are direct-wire implementations, Lean enumerates every canonical input-relative selector handle, scans every original candidate payload in each exact source cell with the executable strict-equivalent-gain checker, and returns only a canonical source-atom StrictEquivalentGain or proof that the complete supplied selector universe has no such candidate. Every gain retains a canonical accepted code and strictly decreases residual slack, while the pair, balanced-triple, and full-span Packet alternatives are preserved literally.",
+      "title": "Exhaustive Packet selector-universe gain scan"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -6603,7 +6632,7 @@
     {
       "classification": "not-formalized",
       "id": "global-zeroslack-pccmin",
-      "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; and the checked Packet scan verifies strict gains or exact local no-gain over explicit source-cell candidate payloads. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, or replacement candidates from terminal data; connect matching back to a contradiction; construct the permitted HN, budget, or lower-rank selector blockers; map all residual routes into a decreasing complete global outcome system; or provide selector/realizer and polynomial-runtime completeness. Global ZeroSlack and polynomial PCCMin therefore remain unformalized.",
+      "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; and the exhaustive Packet scan verifies strict gains or exact no-gain over every canonical selector in one supplied explicit grouped family. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, or replacement candidates from terminal data; connect matching back to a contradiction; construct the permitted HN, budget, or lower-rank selector blockers; map all residual routes into a decreasing complete global outcome system; or provide selector faithfulness, realizer, blocker, and polynomial-runtime completeness. Global ZeroSlack and polynomial PCCMin therefore remain unformalized.",
       "requiredTheorems": [
         "PNP.Main.pccmin_polynomial_exact",
         "PNP.Main.zero_slack_complete"
