@@ -51,6 +51,7 @@ import PNP.ResidualTerminalPacketSelectorSeeds
 import PNP.ResidualTerminalPacketSelectorUniverse
 import PNP.ResidualTerminalPacketSelectorHandles
 import PNP.ResidualTerminalPacketSelectorCodec
+import PNP.ResidualTerminalPacketSelectorPayloadRealization
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine

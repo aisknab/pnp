@@ -1615,6 +1615,21 @@ or route, derive the grouped family, complete PkgC, ZeroSlack, or PCCMin, put
 SAT in P, or prove P = NP. See
 [`lean_residual_terminal_packet_selector_codec.md`](./lean_residual_terminal_packet_selector_codec.md).
 
+`ResidualTerminalPacketSelectorPayloadRealization` adds the next bounded
+finite interface. Its total function maps every accepted canonical code to the
+exact original grouped cell at that decoded handle, that cell's footprint, and
+the canonical first original positive payload atom. It rejects exactly when
+the existing decoder rejects, proves exact input re-encoding and source-family
+membership for every result, and preserves the pair, balanced-triple, and
+full-span Packet alternatives. This is deterministic source-payload
+materialization relative to a supplied explicit family, not the manuscript's
+gain-or-blocker selector realizer. It does not serialize payload data, construct
+a replacement circuit, establish selector faithfulness or compatibility,
+return a gain or typed blocker route, derive the family, or prove an encoded-
+circuit-size bound or polynomial generation/runtime. PkgC completion,
+ZeroSlack, PCCMin, SAT in P, and P = NP remain open. See
+[`lean_residual_terminal_packet_selector_payload_realization.md`](./lean_residual_terminal_packet_selector_payload_realization.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

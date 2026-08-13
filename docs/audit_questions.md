@@ -573,6 +573,11 @@ Every positive packet has a representative in the polynomial selector universe; 
   grouped list, not encoded circuit size, and it does not encode payload data
   or establish manuscript-level faithfulness, compatibility, or polynomial
   generation/runtime.
+- `PNP.DirectWire.TerminalBN6PacketConclusion.selectorPayloadRealizations`,
+  which maps every accepted code to its exact original grouped cell and a
+  canonical original positive payload atom. This is input-family lookup, not a
+  replacement-circuit gain-or-blocker realizer, payload serialization,
+  faithfulness/compatibility theorem, route, or polynomial bound.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
