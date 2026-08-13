@@ -1646,6 +1646,23 @@ polynomial-runtime bounds, complete PkgC and routes, ZeroSlack, PCCMin, SAT in
 P, and P = NP remain open. See
 [`lean_residual_terminal_packet_selector_gain_scan.md`](./lean_residual_terminal_packet_selector_gain_scan.md).
 
+`ResidualTerminalPacketSelectorUniverseGainScan` closes the next finite
+selector-oracle edge by enumerating every canonical input-relative handle in
+one supplied explicit grouped family and running the complete source-cell scan
+at every handle. Its proof-bearing outcome is either a canonical handle and an
+original source atom carrying a genuine `StrictEquivalentGain`, or exact
+absence of such a gain behind every selector in that supplied universe. Every
+gain retains an accepted canonical code, exact source-cell and footprint
+evidence, and strict residual descent; the complete pair, balanced-triple, and
+full-span Packet conclusion is retained literally. The family and candidate
+implementations remain explicit inputs. Family-wide no-gain is not manuscript
+selector silence, `BotHN`, `BotBUD`, a lower-rank `BotSeed`, global minimality,
+or ZeroSlack. This does not prove selector faithfulness or compatibility,
+construct replacements or typed blockers, connect charge surplus, derive the
+family, establish encoded-size or polynomial-runtime bounds, complete PkgC or
+global routes, put SAT in P, or prove P = NP. See
+[`lean_residual_terminal_packet_selector_universe_gain_scan.md`](./lean_residual_terminal_packet_selector_universe_gain_scan.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

@@ -244,9 +244,10 @@ positive residual slack
 => saturated BCEL-ready positive nucleus
 => BN2–BN6 packet
 => payload-backed raw selector seed
-=> exact finite grouped-footprint selector membership (current Lean boundary)
-=> encoded faithful compatible selector (open)
-=> verified gain or typed blocker
+=> canonical unary handle and exact source-payload materialization
+=> exhaustive checked gain or family-local no-gain across the supplied selector universe (current Lean boundary)
+=> encoded-size-bounded faithful compatible selector construction (open)
+=> replacement gain or typed blocker (open)
 => blocker/rank contradiction
 => ZeroSlack is impossible under positive slack
 ```
@@ -374,7 +375,7 @@ Any approximate, heuristic, promise-only, or unverified minimum invalidates the 
 | All-cut identities | Enumerating all cuts is exponential in anchor count. | BN4 claims activation equality by canonical active-antichain code rather than cut enumeration. | Proof that code equality is equivalent to activation equality and that codes remain polynomial size. |
 | Matching and restoration universes | Matching is polynomial only in an explicitly polynomial graph. | BN5/PkgC use finite matching graphs; the current typed PkgC kernels derive the equality-fibre restoration list and a balanced opposite-sign BN4 ledger from an explicit restorer, embed it by exact multiplicity into an explicit ambient ledger, and prove executable residual reduction to the explicit remainder. | Size and construction cost of both vertex sets and all edges, construction and semantic adequacy of the restorer, derivation of the ambient ledger and embedding from the terminal candidate, and proof that the resulting remainder is empty or route-producing. |
 | HN/BUD dynamic programs | Dynamic programming can have exponentially many states. | Accepted finite grammars and envelope bounds are claimed. | State-key width, transition count, payload size, and dependence on schedule/runtime integers. |
-| Selector universe | Triple and spine payloads can hide large descriptions. The current Lean codec gives each unique position in an explicit finite grouped list one unary bitstring and fails closed on malformed input; the next function uses that position to materialize the exact original cell and a canonical positive payload atom. The code is still list-relative, can be exponential in encoded circuit size, and does not serialize the payload. | Claimed polynomial selector bound and finite payload alphabets. | Bound the explicit list and unary position by encoded circuit size, encode any required payload, prove polynomial generation time, faithfulness, compatibility, and completeness beyond input-relative source lookup. |
+| Selector universe | Triple and spine payloads can hide large descriptions. The current Lean codec gives each unique position in an explicit finite grouped list one unary bitstring and fails closed on malformed input. The latest scan enumerates every such position and checks every original direct-wire payload in its exact source cell, but the list and candidates are explicit inputs, can be exponential in encoded circuit size, and do not encode or construct manuscript replacements. Family-wide no-gain here is not manuscript selector silence. | Claimed polynomial selector bound and finite payload alphabets. | Bound the explicit list and unary position by encoded circuit size, encode and construct every required replacement payload, prove polynomial generation time, faithfulness, compatibility, typed blocker completeness, and the link from family-local no-gain to rank-ordered selector silence. |
 | ZeroSlack negative evidence | Exhaustively proving absence can be larger than the object being checked. | Claimed polynomial-size sidecars, rank lists, selector logs, and proof DAG. | Exact candidate counts and whether one certificate entry covers a class soundly rather than listing exponential cases. |
 | Integer arithmetic | Unit-cost arithmetic can hide exponential bit complexity. | Runtime integers are placed in arithmetic cells. | Maximum bit length and cost of addition, comparison, multiplication, encoding, and Presburger checks. |
 | Package generation | A fixed package can hide unrecorded precomputation, and an input-dependent package can destroy uniformity. | Generator is untrusted; checker validates materialized output. | Whether the SAT algorithm uses one fixed finite package, how it is accessed, and whether any input-dependent proof search occurs before checking. |

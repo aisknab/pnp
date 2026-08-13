@@ -131,6 +131,16 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   assert.match(gainScan.scope, /genuine source-atom StrictEquivalentGain/u);
   assert.match(gainScan.nonClaim,
     /local no-gain result excludes only payload candidates/u);
+  const universeGainScan = byId.get(
+    'residual-terminal-packet-selector-universe-gain-scan');
+  assert.equal(universeGainScan.status,
+    'formalized-residual-terminal-packet-selector-universe-gain-scan');
+  assert.equal(universeGainScan.earned, true);
+  assert.equal(universeGainScan.requiredTheorems.length, 10);
+  assert.match(universeGainScan.scope,
+    /every canonical input-relative selector handle/u);
+  assert.match(universeGainScan.nonClaim,
+    /supplied input-relative selector universe/u);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
     'formalized-np-membership-only');

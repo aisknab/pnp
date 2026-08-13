@@ -1,0 +1,21 @@
+import PNP.ResidualTerminalPacketSelectorUniverseGainScan
+
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorHandles
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.mem_packetSelectorHandles
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorHandles_length
+#print axioms PNP.DirectWire.TerminalPacketSelectorHandleListGainOutcome
+#print axioms PNP.DirectWire.scanTerminalPacketSelectorHandleGains
+#print axioms PNP.DirectWire.TerminalPacketSelectorHandleListGainOutcome.sound
+#print axioms PNP.DirectWire.TerminalPacketSelectorUniverseGainOutcome
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.scanPacketSelectorUniverseGains
+#print axioms PNP.DirectWire.TerminalPacketSelectorUniverseGainOutcome.sound
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.scanPacketSelectorUniverseGains_sound
+#print axioms PNP.DirectWire.TerminalPacketSelectorUniverseGainOutcome.gain_strictResidualDescent
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.universeGain_source_and_code
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.universeNoGain_of_gainScan
+#print axioms PNP.DirectWire.TerminalPacketSelectorUniverseGainScanConclusion
+#print axioms PNP.DirectWire.TerminalPacketEncodedSelectorConclusion.universeGainScan
+#print axioms PNP.DirectWire.TerminalPacketEncodedSelectorConclusion.universeGainScan_packet
+#print axioms PNP.DirectWire.TerminalBN6PacketConclusion.universeGainScan
+#print axioms PNP.DirectWire.terminalBN6_packet_selector_universe_gain_scan
+#print axioms PNP.DirectWire.terminalBN6_packet_selector_universe_gain_scan_sound
