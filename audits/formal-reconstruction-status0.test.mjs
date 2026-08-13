@@ -14,7 +14,7 @@ async function currentStatus0() {
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-13-138');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-13-139');
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);
@@ -931,6 +931,8 @@ test('formal reconstruction status accepts the current source and public mirrors
     'leanResidualTerminalPacketSelectorHandlesAxiomAuditPassed',
     'leanResidualTerminalPacketSelectorCodecFormalized',
     'leanResidualTerminalPacketSelectorCodecAxiomAuditPassed',
+    'leanResidualTerminalPacketSelectorPayloadRealizationFormalized',
+    'leanResidualTerminalPacketSelectorPayloadRealizationAxiomAuditPassed',
   ]) assert.equal(out[field], true, field);
   assert.equal(
     out.leanResidualTerminalPhysicalSupportCompletionScope,
@@ -1075,6 +1077,10 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(
     out.leanResidualTerminalPacketSelectorCodecScope,
     'all-finite-explicit-bn6-grouped-families-canonical-unary-fail-closed-handle-codec-round-trip-unique-decoding-payload-carrier-size-and-explicit-universe-length-bound',
+  );
+  assert.equal(
+    out.leanResidualTerminalPacketSelectorPayloadRealizationScope,
+    'all-finite-explicit-bn6-grouped-families-total-fail-closed-source-payload-realization-exact-original-cell-footprint-positive-atom-and-packet-branch-preservation',
   );
   for (const field of [
     'leanSaturatePositiveFormalized',

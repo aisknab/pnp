@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-13-138",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-13-139",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2628,7 +2628,18 @@
     "PNP.DirectWire.traceDirect_referenceMinimum": "cbef9349e46dd570d0e02c81170ea1257f3d1a76a49db39123074892e3196ea2",
     "PNP.DirectWire.unresolved_positiveSlack_regression": "db564cb64914fa82c134c8e4e2dfbef40a143e1fe78b2ceb8f81dece3b895977",
     "PNP.Main.concretePEqualsNP_iff": "66d644a7be721e907db2bf854137ac76150c5ad3284aca8fccad8b7ee36ca364",
-    "PNP.Main.locked_nand_threshold": "951ec63c09e9a096aacc26332a97607dade4a1f412229f9185aff5c7f36aa591"
+    "PNP.Main.locked_nand_threshold": "951ec63c09e9a096aacc26332a97607dade4a1f412229f9185aff5c7f36aa591",
+    "PNP.DirectWire.terminalBN6_packet_selector_payload_realizations": "87e78d7623809a2026145930b4df7438605f484d17f11e99f700abf99cd5338d",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.decodePacketSelectorHandle_eq_some_of_realize": "d09a9d1b541eed299f676de5b47dfd84fe9b54228b6b2c2789db4a989c033e0e",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.exists_realizePacketSelectorPayload_encode": "5b52d770dcba2dac6f9314dbf3620d01445d2a71b1b47f0fd52d65719a5312bd",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.hasRealizedPacketSelectorAt_iff_payloadSelector": "65968a464059a6b3d4805f2e451306e0fd37d46bf5a7cb30b720b632d376a444",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.isRealizedPacketSelectorAt_iff_encoded": "2d0a3ccb47c7b326c8fb44ce651fe5da452d986adc8435c71385fef772bc8870",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorCell_footprint": "585917f43db54d9d5be3852605dcfcc01256d09d34bde1ed3e7ff0b0e2500e0f",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadAtom_mem": "bc42f6f75392b9ce43345b06aba862a758d32d9a8670945f111f33960abdbe3d",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.realizePacketSelectorPayload_eq_none_iff": "cbc666a2d051af090a607a177509340486e60215434e7ed7b15692e6ffe0557b",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.realizePacketSelectorPayload_sound": "5a40df6a1b6f66efa77c827ff11ce46698aa0960a4891cd70d6196d8bfc156cf",
+    "PNP.DirectWire.TerminalBN6PacketConclusion.selectorPayloadRealizations": "c9ee54cb1fc4b623af2e96a88481a62ccf66e14f5aed608d8975ee4690c0b6c4",
+    "PNP.DirectWire.TerminalPacketEncodedSelectorConclusion.selectorPayloadRealizations": "d369c4f09b76a34298569a24eb7a7586e5e538fa03c5c80061ce057319e7d977"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -2646,7 +2657,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "faa452511b2bf16517c70ffecc20592831e9b270d452a5a8500044e88c41c78e",
+  "milestoneSourceClosureSha256": "3630542354b65b11e33a9ed55fd1a670f4c41887f76286f2c6663622f81247a3",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -6525,6 +6536,26 @@
       ],
       "scope": "For every arbitrary finite explicit grouped BN6 family, Lean gives each canonical input-relative selector handle a unary bitstring with fail-closed total decoding of missing delimiters, trailing data, and out-of-range indices, proves exact round trip, injectivity, canonical successful decoding, exact and explicit-universe-bounded length, retains payload, carrier, size, cell, and atom evidence, and gives every payload selector one unique accepted code across the pair, balanced-triple, and full-span Packet branches.",
       "title": "Canonical fail-closed Packet selector-handle codec"
+    },
+    {
+      "classification": "formalized-residual-terminal-packet-selector-payload-realization",
+      "id": "residual-terminal-packet-selector-payload-realization",
+      "nonClaim": "This is source-payload materialization relative to a supplied explicit grouped family, not the manuscript's gain-or-blocker selector realizer. The unary code still encodes only a list position and does not serialize atom or payload data. This milestone does not construct a replacement circuit, prove selector faithfulness or compatibility, return a gain or typed blocker route, derive or group BN6 survivors from a terminal candidate, bound the selector family by encoded circuit size, prove polynomial generation or runtime, complete PkgC, ZeroSlack, or PCCMin, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorCell_footprint",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadAtom_mem",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.realizePacketSelectorPayload_eq_none_iff",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.decodePacketSelectorHandle_eq_some_of_realize",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.exists_realizePacketSelectorPayload_encode",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.realizePacketSelectorPayload_sound",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.isRealizedPacketSelectorAt_iff_encoded",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.hasRealizedPacketSelectorAt_iff_payloadSelector",
+        "PNP.DirectWire.TerminalPacketEncodedSelectorConclusion.selectorPayloadRealizations",
+        "PNP.DirectWire.TerminalBN6PacketConclusion.selectorPayloadRealizations",
+        "PNP.DirectWire.terminalBN6_packet_selector_payload_realizations"
+      ],
+      "scope": "For every arbitrary finite explicit grouped BN6 family, Lean defines a total fail-closed function that maps each accepted canonical selector code to its exact decoded handle, original source cell, decoded footprint, and a canonical original positive payload atom. Successful results re-encode to the exact input, remain in the supplied family, retain strict atom positivity, are equivalent to the finite payload-selector predicate, and preserve the pair, balanced-triple, and full-span Packet branches.",
+      "title": "Total fail-closed Packet source-payload realization"
     },
     {
       "classification": "formalized-concrete-locked-nand-threshold",

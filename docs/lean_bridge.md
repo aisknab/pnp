@@ -1426,6 +1426,19 @@ manuscript-level faithfulness or compatibility, a realizer or route, family
 derivation, ZeroSlack, PCCMin, SAT in P, or the root theorem. See
 `docs/lean_residual_terminal_packet_selector_codec.md`.
 
+`lean/PNP/ResidualTerminalPacketSelectorPayloadRealization.lean` maps each
+accepted code through the total decoder to its exact source cell in the
+explicit grouped BN6 family and the canonical first original positive payload
+atom of that cell. Successful results recover the exact input code, retain
+source membership and footprint equality, and preserve the pair,
+balanced-triple, and full-span alternatives; rejection is exactly decoder
+rejection. This is source-payload materialization, not the manuscript's gain-
+or-blocker realizer. It does not serialize payload data, construct a replacement
+circuit or route, prove faithfulness or compatibility, derive the family, or
+establish encoded-size or polynomial-runtime bounds, ZeroSlack, PCCMin, SAT in
+P, or the root theorem. See
+`docs/lean_residual_terminal_packet_selector_payload_realization.md`.
+
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 
 ```lean
