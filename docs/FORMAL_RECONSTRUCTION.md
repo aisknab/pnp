@@ -1601,6 +1601,20 @@ polynomial encoding and enumeration bounds, PkgC completion, ZeroSlack,
 PCCMin, SAT in P, and P = NP remain open. See
 [`lean_residual_terminal_packet_selector_handles.md`](./lean_residual_terminal_packet_selector_handles.md).
 
+`ResidualTerminalPacketSelectorCodec` turns each of those handles into a
+canonical unary bitstring and defines one total decoder. The decoder accepts
+only a one-run followed by one final zero, rejects missing delimiters, trailing
+bits, and out-of-range indices, and Lean proves exact round trip, injectivity,
+canonical successful decoding, exact code length, unique accepted codes, and
+retention of the existing payload, carrier, size, cell, and atom evidence in
+every Packet branch. The code-length theorem is bounded by the supplied
+explicit grouped-family list, not by encoded circuit size. It does not prove
+polynomial enumeration or runtime, encode atom or payload data, establish
+manuscript-level selector faithfulness or compatibility, construct a realizer
+or route, derive the grouped family, complete PkgC, ZeroSlack, or PCCMin, put
+SAT in P, or prove P = NP. See
+[`lean_residual_terminal_packet_selector_codec.md`](./lean_residual_terminal_packet_selector_codec.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

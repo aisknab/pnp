@@ -567,6 +567,12 @@ Every positive packet has a representative in the polynomial selector universe; 
   decoding and retained carrier, size, cell, and atom evidence. These are not
   the manuscript's bit encoding and provide no polynomial count, bit-length,
   generation-time, realizer, or route theorem.
+- `PNP.DirectWire.TerminalBN6PacketConclusion.selectorCodes`, which gives each
+  input-list position one canonical unary code and rejects malformed, trailing,
+  or out-of-range bitstrings. Its length theorem is relative to the explicit
+  grouped list, not encoded circuit size, and it does not encode payload data
+  or establish manuscript-level faithfulness, compatibility, or polynomial
+  generation/runtime.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.

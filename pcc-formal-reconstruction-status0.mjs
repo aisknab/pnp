@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-13-137';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-13-138';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -395,6 +395,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorHandlesAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorHandles.lean',
   'node --test audits/lean-residual-terminal-packet-selector-handles0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorCodecAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorCodec.lean',
+  'node --test audits/lean-residual-terminal-packet-selector-codec0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -417,6 +420,7 @@ const NON_CLAIMS = Object.freeze([
   'The arbitrary-finite Packet selector-seed extraction converts every exact BN6 packet conclusion into a payload-backed pair, positive balanced-triple pair family, or positive full-span raw seed outcome. It does not prove selector-universe membership, faithfulness or compatibility, construct selector realizers or routes, establish enumeration or polynomial runtime, complete PkgC, ZeroSlack, or PCCMin, put SAT in P, or prove P = NP.',
   'The finite Packet payload-selector universe is exactly the duplicate-free grouped-footprint list of an explicit BN6 family, and every raw payload-backed seed belongs to it. This is not the manuscript\'s encoded or polynomial selector universe, does not establish manuscript-level faithfulness or compatibility, and constructs no realizer, route, or polynomial bound.',
   'Canonical finite Packet selector handles are positions in the exact duplicate-free grouped-footprint list of an explicit BN6 family. Decoding is injective and retains carrier, size, cell, and atom evidence. These positions are not the manuscript\'s bit encoding or a polynomial selector universe, do not establish manuscript-level selector faithfulness or compatibility, and construct no realizer or route.',
+  'The canonical Packet selector-handle codec encodes each input-relative list position as a unary bitstring and totally rejects missing delimiters, trailing bits, and out-of-range indices. Its length bound is relative to the supplied explicit grouped-family list, not encoded circuit size. It does not establish a polynomial selector universe or runtime, encode atom or payload data, prove manuscript-level selector faithfulness or compatibility, or construct a realizer or route.',
   'The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.',
   'The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.',
   'Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.',
@@ -1581,6 +1585,10 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalPacketSelectorHandlesAxiomAuditPassed: true,
   leanResidualTerminalPacketSelectorHandlesScope:
     'all-finite-explicit-bn6-grouped-families-canonical-indexed-grouped-footprint-handles-unique-decoding-payload-carrier-and-size-compatibility',
+  leanResidualTerminalPacketSelectorCodecFormalized: true,
+  leanResidualTerminalPacketSelectorCodecAxiomAuditPassed: true,
+  leanResidualTerminalPacketSelectorCodecScope:
+    'all-finite-explicit-bn6-grouped-families-canonical-unary-fail-closed-handle-codec-round-trip-unique-decoding-payload-carrier-size-and-explicit-universe-length-bound',
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
   leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2632,6 +2640,10 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalPacketSelectorHandlesAxiomAuditPassed: true,
       leanResidualTerminalPacketSelectorHandlesScope:
         'all-finite-explicit-bn6-grouped-families-canonical-indexed-grouped-footprint-handles-unique-decoding-payload-carrier-and-size-compatibility',
+      leanResidualTerminalPacketSelectorCodecFormalized: true,
+      leanResidualTerminalPacketSelectorCodecAxiomAuditPassed: true,
+      leanResidualTerminalPacketSelectorCodecScope:
+        'all-finite-explicit-bn6-grouped-families-canonical-unary-fail-closed-handle-codec-round-trip-unique-decoding-payload-carrier-size-and-explicit-universe-length-bound',
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
       leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2711,7 +2723,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-13-137',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-13-138',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

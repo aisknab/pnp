@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-13-137",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-13-138",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -872,6 +872,9 @@
   "leanResidualTerminalPacketSelectorHandlesFormalized": true,
   "leanResidualTerminalPacketSelectorHandlesAxiomAuditPassed": true,
   "leanResidualTerminalPacketSelectorHandlesScope": "all-finite-explicit-bn6-grouped-families-canonical-indexed-grouped-footprint-handles-unique-decoding-payload-carrier-and-size-compatibility",
+  "leanResidualTerminalPacketSelectorCodecFormalized": true,
+  "leanResidualTerminalPacketSelectorCodecAxiomAuditPassed": true,
+  "leanResidualTerminalPacketSelectorCodecScope": "all-finite-explicit-bn6-grouped-families-canonical-unary-fail-closed-handle-codec-round-trip-unique-decoding-payload-carrier-size-and-explicit-universe-length-bound",
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -1380,6 +1383,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorHandlesAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorHandles.lean",
     "node --test audits/lean-residual-terminal-packet-selector-handles0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorCodecAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorCodec.lean",
+    "node --test audits/lean-residual-terminal-packet-selector-codec0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1401,6 +1407,7 @@
     "The arbitrary-finite Packet selector-seed extraction converts every exact BN6 packet conclusion into a payload-backed pair, positive balanced-triple pair family, or positive full-span raw seed outcome. It does not prove selector-universe membership, faithfulness or compatibility, construct selector realizers or routes, establish enumeration or polynomial runtime, complete PkgC, ZeroSlack, or PCCMin, put SAT in P, or prove P = NP.",
     "The finite Packet payload-selector universe is exactly the duplicate-free grouped-footprint list of an explicit BN6 family, and every raw payload-backed seed belongs to it. This is not the manuscript's encoded or polynomial selector universe, does not establish manuscript-level faithfulness or compatibility, and constructs no realizer, route, or polynomial bound.",
     "Canonical finite Packet selector handles are positions in the exact duplicate-free grouped-footprint list of an explicit BN6 family. Decoding is injective and retains carrier, size, cell, and atom evidence. These positions are not the manuscript's bit encoding or a polynomial selector universe, do not establish manuscript-level selector faithfulness or compatibility, and construct no realizer or route.",
+    "The canonical Packet selector-handle codec encodes each input-relative list position as a unary bitstring and totally rejects missing delimiters, trailing bits, and out-of-range indices. Its length bound is relative to the supplied explicit grouped-family list, not encoded circuit size. It does not establish a polynomial selector universe or runtime, encode atom or payload data, prove manuscript-level selector faithfulness or compatibility, or construct a realizer or route.",
     "The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.",
     "The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.",
     "Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.",
@@ -1559,7 +1566,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "1c5517f11088a984b0eab7afac73a30850b539024237c36c4f4284080d9237e7",
+    "actualSourceClosureSha256": "faa452511b2bf16517c70ffecc20592831e9b270d452a5a8500044e88c41c78e",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1589,22 +1596,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-13-137",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-13-138",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "b1aaf7ab34ed836a79179d8f383009a7450283ec393f46c3336d3d50a9c0be05",
+  "leanTheoremInventorySha256": "347e07429f53e9d61cd4ccb0492e7710a03879bf5b75a1aa97e0772ca1eb8161",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 27891,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 15022,
-  "leanTheoremInventoryTheoremCount": 14497,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 7347,
-  "leanTheoremInventorySourceClosureModuleCount": 254,
-  "leanSourceClosureSha256": "1c5517f11088a984b0eab7afac73a30850b539024237c36c4f4284080d9237e7",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-13-137",
+  "leanTheoremInventoryDeclarationCount": 27920,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 15030,
+  "leanTheoremInventoryTheoremCount": 14512,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 7351,
+  "leanTheoremInventorySourceClosureModuleCount": 255,
+  "leanSourceClosureSha256": "faa452511b2bf16517c70ffecc20592831e9b270d452a5a8500044e88c41c78e",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-13-138",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "b9a5f91f50a21ce40c2213a925a9b35625ee27b984f6b5a66052bf7dec8e04e6",
+  "formalPublicationMapSha256": "d89bb13875bbce39bd3ea39412fd4398c2270c548905d8844d9d7f31f85f4dad",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -38658,6 +38665,162 @@
       "status": "formalized-residual-terminal-packet-selector-handles"
     },
     {
+      "classification": "formalized-residual-terminal-packet-selector-codec",
+      "id": "residual-terminal-packet-selector-codec",
+      "nonClaim": "The code-length bound is relative to the explicit grouped-family list and does not bound that list by encoded circuit size. This milestone does not prove polynomial enumeration or runtime, encode atom or payload data, prove manuscript-level selector faithfulness or compatibility, construct a selector realizer or route, derive or group BN6 survivors from a terminal candidate, complete PkgC, ZeroSlack, or PCCMin, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalBN6GroupedFamily.decodePacketSelectorHandle_encode",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.encodePacketSelectorHandle_injective",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.encodePacketSelectorHandle_length",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.encodePacketSelectorHandle_length_le_universe",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.decodePacketSelectorHandle_canonical",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.decodePacketSelectorHandle_payloadEvidence",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.hasEncodedPacketSelectorAt_iff_payloadSelector",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.existsUnique_encodedPacketSelector_iff_payloadSelector",
+        "PNP.DirectWire.TerminalPacketPayloadSelectorConclusion.selectorCodes",
+        "PNP.DirectWire.TerminalBN6PacketConclusion.selectorCodes",
+        "PNP.DirectWire.terminalBN6_packet_selector_codes"
+      ],
+      "scope": "For every arbitrary finite explicit grouped BN6 family, Lean gives each canonical input-relative selector handle a unary bitstring with fail-closed total decoding of missing delimiters, trailing data, and out-of-range indices, proves exact round trip, injectivity, canonical successful decoding, exact and explicit-universe-bounded length, retains payload, carrier, size, cell, and atom evidence, and gives every payload selector one unique accepted code across the pair, balanced-triple, and full-span Packet branches.",
+      "title": "Canonical fail-closed Packet selector-handle codec",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.decodePacketSelectorHandle_encode",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0e4d125f4ada88d0f2f9d188a1ba2c69a17d675c555f0e6eed8dacedf4660f40",
+          "expectedKernelTypeSha256": "0e4d125f4ada88d0f2f9d188a1ba2c69a17d675c555f0e6eed8dacedf4660f40",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.encodePacketSelectorHandle_injective",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "be5a7248d1de95c8adb730c061003887a2a0afd7667cd8e085560ffdddc52b7f",
+          "expectedKernelTypeSha256": "be5a7248d1de95c8adb730c061003887a2a0afd7667cd8e085560ffdddc52b7f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.encodePacketSelectorHandle_length",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9e90b81134401241f8e9b448adb3588605e502d8a67b8eeea8d619b7e3b84140",
+          "expectedKernelTypeSha256": "9e90b81134401241f8e9b448adb3588605e502d8a67b8eeea8d619b7e3b84140",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.encodePacketSelectorHandle_length_le_universe",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7f5caf0819a8e1696463e99993399a78d3bc6a786a64b13604e69f08c7c40485",
+          "expectedKernelTypeSha256": "7f5caf0819a8e1696463e99993399a78d3bc6a786a64b13604e69f08c7c40485",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.decodePacketSelectorHandle_canonical",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0a85db798dea4e5fc887c33e7db492fa102a081123cf1adfccd4cf30561f6165",
+          "expectedKernelTypeSha256": "0a85db798dea4e5fc887c33e7db492fa102a081123cf1adfccd4cf30561f6165",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.decodePacketSelectorHandle_payloadEvidence",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "df145b8b2bac1ea58116085bc04500a96c44248cd6aac404e0d9b769565d608b",
+          "expectedKernelTypeSha256": "df145b8b2bac1ea58116085bc04500a96c44248cd6aac404e0d9b769565d608b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.hasEncodedPacketSelectorAt_iff_payloadSelector",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "accf0d6418551d74babe5b1ce76b0f490d217b463e57b7b725b9c9b01b84dd1b",
+          "expectedKernelTypeSha256": "accf0d6418551d74babe5b1ce76b0f490d217b463e57b7b725b9c9b01b84dd1b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.existsUnique_encodedPacketSelector_iff_payloadSelector",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f8f44b0800ee90410e97ae05705549c3bb5f11cd7c5e63a7d6161f605ed40108",
+          "expectedKernelTypeSha256": "f8f44b0800ee90410e97ae05705549c3bb5f11cd7c5e63a7d6161f605ed40108",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketPayloadSelectorConclusion.selectorCodes",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f518eec40806af1a781cddec358e0970e4bca8a5341865477865ad794d5c6ccc",
+          "expectedKernelTypeSha256": "f518eec40806af1a781cddec358e0970e4bca8a5341865477865ad794d5c6ccc",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6PacketConclusion.selectorCodes",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a52bf419363cbe01c1101984c07ee9cf551796860db78d53faeeafa00ee1d2aa",
+          "expectedKernelTypeSha256": "a52bf419363cbe01c1101984c07ee9cf551796860db78d53faeeafa00ee1d2aa",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBN6_packet_selector_codes",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "031617e6b11b9c96848cfb9597d2afff584fc5e8dba4ad0d12b6a329a1b26ffe",
+          "expectedKernelTypeSha256": "031617e6b11b9c96848cfb9597d2afff584fc5e8dba4ad0d12b6a329a1b26ffe",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-packet-selector-codec"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -38755,7 +38918,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-13-137",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-13-138",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true
