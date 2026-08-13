@@ -1414,6 +1414,18 @@ grouped family, establish polynomial bounds, ZeroSlack, PCCMin, SAT in P, or
 the root theorem. See
 `docs/lean_residual_terminal_packet_selector_handles.md`.
 
+`lean/PNP/ResidualTerminalPacketSelectorCodec.lean` adds a canonical unary
+bitstring for every input-relative handle and a total fail-closed decoder. It
+proves exact round trip, encoding injectivity, canonical re-encoding after
+successful decoding, exact and explicit-list-bounded length, unique accepted
+codes for payload selectors, retained carrier/size/cell/atom evidence, and the
+same pair, balanced-triple, and full-span alternatives. The bound is relative
+to the supplied grouped-family list, not encoded circuit size. This does not
+establish polynomial selector enumeration/runtime, atom or payload encoding,
+manuscript-level faithfulness or compatibility, a realizer or route, family
+derivation, ZeroSlack, PCCMin, SAT in P, or the root theorem. See
+`docs/lean_residual_terminal_packet_selector_codec.md`.
+
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 
 ```lean

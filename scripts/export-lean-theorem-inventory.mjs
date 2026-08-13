@@ -15,7 +15,7 @@ import {
 
 const execFileAsync = promisify(execFile);
 const PROBE = 'lean-audit/PNPTheoremInventory.lean';
-const TIMEOUT_MS = 120_000;
+const TIMEOUT_MS = 600_000;
 
 export function ParseLeanInventoryProbe0(result) {
   if (result.timedOut === true) throw new Error('Lean environment inventory probe timed out');

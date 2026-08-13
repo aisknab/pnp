@@ -106,6 +106,14 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     status.formalPublicationMilestones.length
       - status.formalPublicationMilestones.filter((entry) => !entry.earned).length);
   assert.equal(status.formalPublicationMilestones.filter((entry) => !entry.earned).length, 2);
+  const selectorCodec = byId.get('residual-terminal-packet-selector-codec');
+  assert.equal(selectorCodec.status,
+    'formalized-residual-terminal-packet-selector-codec');
+  assert.equal(selectorCodec.earned, true);
+  assert.equal(selectorCodec.requiredTheorems.length, 11);
+  assert.match(selectorCodec.scope, /fail-closed/u);
+  assert.match(selectorCodec.nonClaim,
+    /does not bound that list by encoded circuit size/u);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
     'formalized-np-membership-only');
