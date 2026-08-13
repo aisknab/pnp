@@ -147,6 +147,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-residual-terminal-packet-selector-handles0.test.mjs',
   'audits/lean-residual-terminal-packet-selector-codec0.test.mjs',
   'audits/lean-residual-terminal-packet-selector-payload-realization0.test.mjs',
+  'audits/lean-residual-terminal-packet-selector-gain-scan0.test.mjs',
   'audits/legacy-v0-archive0.test.mjs',
   'test/current-package-surface0.test.mjs',
   'test/current-verifier0.test.mjs',

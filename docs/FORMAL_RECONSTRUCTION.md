@@ -1630,6 +1630,22 @@ circuit-size bound or polynomial generation/runtime. PkgC completion,
 ZeroSlack, PCCMin, SAT in P, and P = NP remain open. See
 [`lean_residual_terminal_packet_selector_payload_realization.md`](./lean_residual_terminal_packet_selector_payload_realization.md).
 
+`ResidualTerminalPacketSelectorGainScan` specializes those source payloads to
+direct-wire implementations and checks every original atom in the exact
+selected cell with the executable strict-equivalent-gain verifier. The total
+decoded scan returns only an original atom carrying a proved
+`StrictEquivalentGain` or proof that the selected cell contains no such
+candidate; every successful gain strictly decreases residual slack. Decoder
+rejection remains exact, and the pair, balanced-triple, and full-span Packet
+alternatives are preserved. Candidate implementations and the grouped family
+remain explicit inputs. Cell-local no-gain is not `BotHN`, `BotBUD`, a
+lower-rank `BotSeed`, global minimality, or ZeroSlack, so this is not the
+manuscript's complete gain-or-blocker selector realizer. Candidate
+construction, selector faithfulness and compatibility, encoded-size and
+polynomial-runtime bounds, complete PkgC and routes, ZeroSlack, PCCMin, SAT in
+P, and P = NP remain open. See
+[`lean_residual_terminal_packet_selector_gain_scan.md`](./lean_residual_terminal_packet_selector_gain_scan.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

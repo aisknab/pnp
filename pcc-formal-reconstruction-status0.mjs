@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-13-139';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-14-140';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -401,6 +401,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorPayloadRealizationAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorPayloadRealization.lean',
   'node --test audits/lean-residual-terminal-packet-selector-payload-realization0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorGainScanAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorGainScan.lean',
+  'node --test audits/lean-residual-terminal-packet-selector-gain-scan0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -425,6 +428,7 @@ const NON_CLAIMS = Object.freeze([
   'Canonical finite Packet selector handles are positions in the exact duplicate-free grouped-footprint list of an explicit BN6 family. Decoding is injective and retains carrier, size, cell, and atom evidence. These positions are not the manuscript\'s bit encoding or a polynomial selector universe, do not establish manuscript-level selector faithfulness or compatibility, and construct no realizer or route.',
   'The canonical Packet selector-handle codec encodes each input-relative list position as a unary bitstring and totally rejects missing delimiters, trailing bits, and out-of-range indices. Its length bound is relative to the supplied explicit grouped-family list, not encoded circuit size. It does not establish a polynomial selector universe or runtime, encode atom or payload data, prove manuscript-level selector faithfulness or compatibility, or construct a realizer or route.',
   'The total fail-closed Packet source-payload realization maps each accepted canonical code to the exact original grouped cell and a canonical original positive payload atom, while rejecting exactly when the decoder rejects. This lookup is relative to the supplied explicit grouped family; its unary bits do not serialize atom or payload data. It is not the manuscript\'s gain-or-blocker realizer, constructs no replacement circuit or route, and proves no selector faithfulness, compatibility, encoded-size bound, or polynomial runtime.',
+  'The checked Packet selector candidate-gain scan decodes one canonical selector and tests every implementation payload in its exact original source cell. A gain outcome carries a genuine StrictEquivalentGain and strict residual descent; local no-gain excludes only candidates in that selected cell. The candidates and grouped family are explicit inputs, and local failure is not BotHN, BotBUD, a lower-rank BotSeed, global minimality, ZeroSlack, or a complete gain-or-blocker realizer.',
   'The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.',
   'The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.',
   'Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.',
@@ -1597,6 +1601,10 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalPacketSelectorPayloadRealizationAxiomAuditPassed: true,
   leanResidualTerminalPacketSelectorPayloadRealizationScope:
     'all-finite-explicit-bn6-grouped-families-total-fail-closed-source-payload-realization-exact-original-cell-footprint-positive-atom-and-packet-branch-preservation',
+  leanResidualTerminalPacketSelectorGainScanFormalized: true,
+  leanResidualTerminalPacketSelectorGainScanAxiomAuditPassed: true,
+  leanResidualTerminalPacketSelectorGainScanScope:
+    'all-finite-explicit-bn6-grouped-families-direct-wire-implementation-payloads-total-fail-closed-exact-source-cell-checked-strict-gain-or-cell-local-no-gain-packet-branch-preservation',
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
   leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2656,6 +2664,10 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalPacketSelectorPayloadRealizationAxiomAuditPassed: true,
       leanResidualTerminalPacketSelectorPayloadRealizationScope:
         'all-finite-explicit-bn6-grouped-families-total-fail-closed-source-payload-realization-exact-original-cell-footprint-positive-atom-and-packet-branch-preservation',
+      leanResidualTerminalPacketSelectorGainScanFormalized: true,
+      leanResidualTerminalPacketSelectorGainScanAxiomAuditPassed: true,
+      leanResidualTerminalPacketSelectorGainScanScope:
+        'all-finite-explicit-bn6-grouped-families-direct-wire-implementation-payloads-total-fail-closed-exact-source-cell-checked-strict-gain-or-cell-local-no-gain-packet-branch-preservation',
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
       leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2735,7 +2747,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-13-139',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-14-140',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,
