@@ -1402,6 +1402,18 @@ grouped family, or establish polynomial bounds, ZeroSlack, PCCMin, SAT in P,
 or the root theorem. See
 `docs/lean_residual_terminal_packet_selector_universe.md`.
 
+`lean/PNP/ResidualTerminalPacketSelectorHandles.lean` adds canonical finite
+handles indexed by the exact input-relative grouped-footprint list. Its total
+decoder is injective, every payload selector has a unique handle, and every
+decoded footprint retains carrier containment, length at least two, and its
+original grouped cell-and-atom evidence. The exhaustive Packet alternatives
+remain unchanged. These list positions are not the manuscript's bit encoding
+or a polynomial selector universe and do not prove manuscript-level
+faithfulness or compatibility, construct a realizer or route, derive the
+grouped family, establish polynomial bounds, ZeroSlack, PCCMin, SAT in P, or
+the root theorem. See
+`docs/lean_residual_terminal_packet_selector_handles.md`.
+
 `lean/PNP/ResidualBand.lean` factors locked-NAND threshold through residual-band exact minimization:
 
 ```lean

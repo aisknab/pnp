@@ -174,6 +174,11 @@ on:
       - 'lean-audit/PNPResidualTerminalPacketSelectorUniverseAxiomAudit.lean'
       - 'lean-regression/PNPResidualTerminalPacketSelectorUniverse.lean'
       - 'docs/lean_residual_terminal_packet_selector_universe.md'
+      - 'audits/lean-residual-terminal-packet-selector-handles0.test.mjs'
+      - 'lean/PNP/ResidualTerminalPacketSelectorHandles.lean'
+      - 'lean-audit/PNPResidualTerminalPacketSelectorHandlesAxiomAudit.lean'
+      - 'lean-regression/PNPResidualTerminalPacketSelectorHandles.lean'
+      - 'docs/lean_residual_terminal_packet_selector_handles.md'
       - 'docs/lean_residual_gain_chain.md'
       - 'docs/lean_residual_gain_stopping.md'
       - 'docs/lean_residual_terminal_full_bridge.md'
@@ -460,6 +465,11 @@ on:
       - 'lean-audit/PNPResidualTerminalPacketSelectorUniverseAxiomAudit.lean'
       - 'lean-regression/PNPResidualTerminalPacketSelectorUniverse.lean'
       - 'docs/lean_residual_terminal_packet_selector_universe.md'
+      - 'audits/lean-residual-terminal-packet-selector-handles0.test.mjs'
+      - 'lean/PNP/ResidualTerminalPacketSelectorHandles.lean'
+      - 'lean-audit/PNPResidualTerminalPacketSelectorHandlesAxiomAudit.lean'
+      - 'lean-regression/PNPResidualTerminalPacketSelectorHandles.lean'
+      - 'docs/lean_residual_terminal_packet_selector_handles.md'
       - 'docs/lean_residual_gain_chain.md'
       - 'docs/lean_residual_gain_stopping.md'
       - 'docs/lean_residual_terminal_full_bridge.md'
@@ -3429,3 +3439,27 @@ jobs:
 
       - name: Run finite Packet payload-selector universe hostile audit
         run: node --test audits/lean-residual-terminal-packet-selector-universe0.test.mjs
+
+      - name: Print canonical finite Packet selector-handle axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorHandlesAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 16
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected canonical finite Packet selector-handle axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Canonical finite Packet selector handles reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 16
+
+      - name: Run canonical finite Packet selector-handle regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorHandles.lean
+
+      - name: Run canonical finite Packet selector-handle hostile audit
+        run: node --test audits/lean-residual-terminal-packet-selector-handles0.test.mjs
