@@ -263,6 +263,18 @@ faithfulness, claims, and blocker activity remain explicit tables; their
 manuscript semantics, construction, HB acyclicity, global silence, and
 polynomial bounds remain open.
 
+The checked HB blocker-graph acyclicity boundary takes the next local step.
+For an arbitrary supplied finite HN/BUD edge list, it exhaustively checks that
+the finite rank indices embed strictly into the existing exact ten-coordinate
+residual rank and that every dependency edge strictly descends that rank.
+Acceptance derives accessibility and a well-founded dependency relation, and
+excludes every nonempty directed cycle rather than only self-loops. A valid
+lower-seed bot also inherits exact-rank descent, and the result composes with
+every faithful canonical typed-realizer handle. The graph, edges, rank map,
+dependency completeness, and blocker semantics remain supplied or open; this
+is not rank-complete selector silence, the full HB negative closure,
+unconditional ZeroSlack, or a polynomial bound.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

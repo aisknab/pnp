@@ -12,9 +12,12 @@ async function currentStatus0() {
 }
 
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
-  const out = await CheckFormalReconstructionStatus0({ writeOutput: false });
+  const [out, status] = await Promise.all([
+    CheckFormalReconstructionStatus0({ writeOutput: false }),
+    currentStatus0(),
+  ]);
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-15-145');
+  assert.equal(out.coordinate, status.coordinate);
   assert.equal(out.formalReconstructionStatusAccepted, true);
   assert.equal(out.mathematicalTheoremEstablished, false);
   assert.equal(out.publicTheoremEmissionAllowed, false);

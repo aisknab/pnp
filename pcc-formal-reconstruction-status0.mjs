@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-15-145';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-15-146';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -419,6 +419,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketTypedRealizerContractAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketTypedRealizerContract.lean',
   'node --test audits/lean-residual-terminal-packet-typed-realizer-contract0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHBBlockerGraphAcyclicityAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHBBlockerGraphAcyclicity.lean',
+  'node --test audits/lean-residual-terminal-hb-blocker-graph-acyclicity0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -449,6 +452,7 @@ const NON_CLAIMS = Object.freeze([
   'The finite Packet charge-surplus kernel derives strict replacement weight from exact occurrence accounting, pairwise weight preservation, and an unmatched positive support charge, then derives a StrictEquivalentGain only when exact gate accounting and semantic equivalence are separately proved. It does not construct a replacement or its ledger from terminal data, so it is not the complete realizer, not unconditional ZeroSlack, and not a polynomial-runtime or PCCMin result.',
   'The checked Packet unit-charge blueprint realizer derives canonical gate-occurrence ledgers, strict charge surplus, and a genuine gain only after a constructive exact-multiplicity validator accepts one supplied data-only blueprint and semantic equivalence. It scans every original blueprint atom behind every canonical handle in one supplied family. The blueprints and family remain explicit; unresolved means only supplied-family validator silence, not BotHN, BotBUD, a lower-rank BotSeed, global no-gain, ZeroSlack, or polynomial realizer completeness.',
   'The checked Packet typed-realizer contract validates every faithful row in an arbitrary finite supplied selector table as only a checked unit-charge gain, active same-or-lower-rank HN bot, active same-or-lower-rank budget bot, or faithful strictly lower-rank seed bot; its grouped-family specialization covers every canonical handle. The rank assignment, faithfulness predicate, claims, and activity tables remain inputs, so this does not construct blockers, prove their semantics or HB acyclicity, establish global selector silence, ZeroSlack, or polynomial realizer completeness.',
+  'The checked HB blocker-graph acyclicity contract exhaustively validates a supplied finite-index embedding into the exact ten-coordinate residual rank and every supplied HN/BUD dependency edge, deriving well-foundedness and excluding every nonempty directed cycle. The graph, edges, rank mapping, blocker semantics, and dependency completeness remain inputs or open obligations; this is not the full HB negative closure, rank-complete selector silence, ZeroSlack, or polynomial PCCMin.',
   'The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.',
   'The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.',
   'Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.',
@@ -1645,6 +1649,10 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalPacketTypedRealizerContractAxiomAuditPassed: true,
   leanResidualTerminalPacketTypedRealizerContractScope:
     'all-arbitrary-finite-selector-lists-and-explicit-bn6-canonical-handle-families-data-only-gain-or-typed-hn-budget-strictly-lower-faithful-seed-validation',
+  leanResidualTerminalHBBlockerGraphAcyclicityFormalized: true,
+  leanResidualTerminalHBBlockerGraphAcyclicityAxiomAuditPassed: true,
+  leanResidualTerminalHBBlockerGraphAcyclicityScope:
+    'all-arbitrary-finite-hn-budget-data-edge-graphs-exhaustive-finite-to-exact-rank-embedding-strict-edge-descent-well-foundedness-and-no-directed-cycle',
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
   leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2728,6 +2736,10 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalPacketTypedRealizerContractAxiomAuditPassed: true,
       leanResidualTerminalPacketTypedRealizerContractScope:
         'all-arbitrary-finite-selector-lists-and-explicit-bn6-canonical-handle-families-data-only-gain-or-typed-hn-budget-strictly-lower-faithful-seed-validation',
+      leanResidualTerminalHBBlockerGraphAcyclicityFormalized: true,
+      leanResidualTerminalHBBlockerGraphAcyclicityAxiomAuditPassed: true,
+      leanResidualTerminalHBBlockerGraphAcyclicityScope:
+        'all-arbitrary-finite-hn-budget-data-edge-graphs-exhaustive-finite-to-exact-rank-embedding-strict-edge-descent-well-foundedness-and-no-directed-cycle',
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
       leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2807,7 +2819,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-15-145',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-15-146',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

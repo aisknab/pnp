@@ -627,6 +627,17 @@ Every positive packet has a representative in the polynomial selector universe; 
   faithfulness predicate, claims, and activity tables remain inputs; this is
   not blocker construction, HB closure, global selector silence, or a
   polynomial completeness theorem.
+- The checked HB blocker-graph acyclicity boundary is witnessed by
+  `PNP.DirectWire.TerminalPacketHBDependencyGraph.check_eq_true_iff`,
+  `PNP.DirectWire.TerminalPacketHBDependencyGraph.depends_wellFounded`,
+  `PNP.DirectWire.TerminalPacketHBDependencyGraph.noCycle`, and
+  `PNP.DirectWire.terminalBN6_packet_typed_realizer_hb_acyclicity_contract`.
+  It scans every strict finite-index comparison against the exact
+  ten-coordinate rank and every edge in one supplied HN/BUD graph, then
+  derives a well-founded relation and excludes every nonempty directed cycle.
+  The graph, edge completeness, rank mapping, and blocker semantics remain
+  inputs or open obligations, so this is not the full HB negative closure or
+  rank-complete selector silence.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
