@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-14-143",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-14-144",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2676,7 +2676,20 @@
     "PNP.DirectWire.TerminalPacketChargeSurplus.replacementLength_lt_supportLength": "0fddee3599dde5c5e14024968ff31be788f5e05dc7a0298a30bf0268b474c6ff",
     "PNP.DirectWire.TerminalPacketChargeSurplus.replacementWeight_lt_supportWeight": "7a862aad6ccb2a54aff55331b8294fe334c8fc005da680e1e2c44672d6205489",
     "PNP.DirectWire.TerminalPacketChargeSurplusRealization.strictEquivalentGain": "22429c08765b2229a69bfb2062cf775e2793a66521cbab4bb264038b34e2496e",
-    "PNP.DirectWire.TerminalPacketChargeSurplusRealization.strictResidualDescent": "996f27da8b42eac154281a84232b7ae57a8f54fce85c34156640080beb462bd2"
+    "PNP.DirectWire.TerminalPacketChargeSurplusRealization.strictResidualDescent": "996f27da8b42eac154281a84232b7ae57a8f54fce85c34156640080beb462bd2",
+    "PNP.DirectWire.eraseFirstNat_sound": "41c42e3a2c2ba56552e198bf30327f62a00307e840f924f9e447da892d779cd9",
+    "PNP.DirectWire.natOccurrencePermBool_sound": "349078e5fa3a02f777e3c0eb230db571f70d6781ef671e3c82a733798477eb2a",
+    "PNP.DirectWire.natOccurrencePermBool_complete": "eb45baf4b6c3fe6dd72e03ac9496fa5a67f117319eacea62b6be281ffb024593",
+    "PNP.DirectWire.natOccurrencePermBool_eq_true_iff": "5ffc15f71957aa9df73245db4ba1ecbc242cd930b6d9697bf5a182fbd8ffdcd3",
+    "PNP.DirectWire.TerminalPacketUnitChargeBlueprint.check_eq_true_iff": "a7448288d95295a5d251ec278f99dfe638033e3a8d60a3e53f563477b451cb38",
+    "PNP.DirectWire.unitChargeRange_sum": "f79d533d5caf48a6d09aa4448f33c4363dac8336e1124551d053346f554461ec",
+    "PNP.DirectWire.TerminalPacketUnitChargeBlueprint.strictEquivalentGain_of_check": "6fc060a0972995d9c384dbb99cf349e06ee0f8942cc255cb93f12d72fb2a5db9",
+    "PNP.DirectWire.TerminalPacketUnitChargeBlueprint.strictResidualDescent_of_check": "6f420ad19588056628c7aa6a57c25ce871412d9b199e0039a838035416a37e45",
+    "PNP.DirectWire.TerminalPacketUnitChargeBlueprintAtomOutcome.sound": "2382b52432df0a7a383730d348c56c60173c3bcd7b1bc3e806ec503cebd62f93",
+    "PNP.DirectWire.TerminalPacketUnitChargeBlueprintRealizerOutcome.sound": "a8e4eff50bd8b2f65944f10946c5108ddf8801d174b280816bc04bc787758b39",
+    "PNP.DirectWire.TerminalPacketUnitChargeBlueprintRealizerOutcome.gain_descent": "b3291ec4e2cf38ce492fdc0db625a10fd18cb6e861d6f24b257fa72049f92856",
+    "PNP.DirectWire.TerminalPacketEncodedSelectorConclusion.unitChargeBlueprintRealizer_packet": "9af5ac2e8f6287e6d0115015251b86c09d4583c85fe32eb0ca11fc4beecc3410",
+    "PNP.DirectWire.terminalBN6_packet_unit_charge_blueprint_realizer_sound": "c4b7dcbb96bd06db9db3f4b862d1586b6a7e96d4a8c9c0c4f9ae7a2a02de3912"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -2694,7 +2707,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "51ef16d4aec38a1c179c7620dcc67980d9842f2bb202726beabf9bdd94ac1cbe",
+  "milestoneSourceClosureSha256": "1de9b2cb477d6b6c668acf5774763e85dc226121b67f5d9ca0be75359cf6ac31",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -6668,6 +6681,28 @@
       "title": "Finite Packet charge-surplus realizer kernel"
     },
     {
+      "classification": "formalized-residual-terminal-packet-unit-charge-blueprint-realizer",
+      "id": "residual-terminal-packet-unit-charge-blueprint-realizer",
+      "nonClaim": "The grouped BN6 family, candidate implementations, replacement blueprints, occurrence pairings, and unmatched lists remain explicit inputs. Supplied-family validator silence is not BotHN, BotBUD, a lower-rank BotSeed, global absence of strict gains, semantic minimality, or ZeroSlack. This milestone does not derive blueprints from terminal data, establish manuscript selector faithfulness or compatibility, close HB/rank routing, establish encoded-size or polynomial-runtime bounds, or complete global PkgC, ZeroSlack, or PCCMin. It does not put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.eraseFirstNat_sound",
+        "PNP.DirectWire.natOccurrencePermBool_sound",
+        "PNP.DirectWire.natOccurrencePermBool_complete",
+        "PNP.DirectWire.natOccurrencePermBool_eq_true_iff",
+        "PNP.DirectWire.TerminalPacketUnitChargeBlueprint.check_eq_true_iff",
+        "PNP.DirectWire.unitChargeRange_sum",
+        "PNP.DirectWire.TerminalPacketUnitChargeBlueprint.strictEquivalentGain_of_check",
+        "PNP.DirectWire.TerminalPacketUnitChargeBlueprint.strictResidualDescent_of_check",
+        "PNP.DirectWire.TerminalPacketUnitChargeBlueprintAtomOutcome.sound",
+        "PNP.DirectWire.TerminalPacketUnitChargeBlueprintRealizerOutcome.sound",
+        "PNP.DirectWire.TerminalPacketUnitChargeBlueprintRealizerOutcome.gain_descent",
+        "PNP.DirectWire.TerminalPacketEncodedSelectorConclusion.unitChargeBlueprintRealizer_packet",
+        "PNP.DirectWire.terminalBN6_packet_unit_charge_blueprint_realizer_sound"
+      ],
+      "scope": "For arbitrary direct-wire input and output arities and every finite explicit grouped BN6 family of replacement blueprints, Lean validates canonical unit-charge gate-occurrence ledgers with a constructive exact permutation checker, a nonempty unmatched current-gate remainder, and semantic equivalence. Acceptance mechanically constructs the generic charge-surplus realization, a genuine StrictEquivalentGain, and strict residual descent without accepting a gate inequality. Every original blueprint atom behind every canonical handle is scanned, and the complete pair, balanced-triple, and full-span Packet conclusion is retained literally.",
+      "title": "Checked Packet unit-charge blueprint realizer"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -6680,7 +6715,7 @@
     {
       "classification": "not-formalized",
       "id": "global-zeroslack-pccmin",
-      "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; the exhaustive Packet scan verifies strict gains or exact no-gain over every canonical selector in one supplied explicit grouped family; an explicit global gain-coverage certificate conditionally upgrades that silence to a proof-bearing ZeroSlack result; and the generic finite R-ChargeSurplus kernel derives strict gain from exact ledgers, an unmatched positive support charge, exact gate accounting, and separately proved semantics. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, replacement candidate, charge-surplus witness, or gain-coverage certificate from terminal data; connect matching back to a contradiction; construct the permitted HN, budget, or lower-rank selector blockers; map all residual routes into a decreasing complete global outcome system; or provide selector faithfulness, realizer, blocker, and polynomial-runtime completeness. Global unconditional ZeroSlack and polynomial PCCMin therefore remain unformalized.",
+      "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; the exhaustive Packet scan verifies strict gains or exact no-gain over every canonical selector in one supplied explicit grouped family; an explicit global gain-coverage certificate conditionally upgrades that silence to a proof-bearing ZeroSlack result; the generic finite R-ChargeSurplus kernel derives strict gain from exact ledgers, an unmatched positive support charge, exact gate accounting, and separately proved semantics; and the checked unit-charge blueprint realizer now derives canonical ledgers and gains for every valid blueprint in one supplied family. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, replacement blueprints, occurrence pairing, or gain-coverage certificate from terminal data; connect matching back to a contradiction; construct the permitted HN, budget, or lower-rank selector blockers; map all residual routes into a decreasing complete global outcome system; or provide selector faithfulness, compatible realizer, blocker, and polynomial-runtime completeness. Global unconditional ZeroSlack and polynomial PCCMin therefore remain unformalized.",
       "requiredTheorems": [
         "PNP.Main.pccmin_polynomial_exact",
         "PNP.Main.zero_slack_complete"

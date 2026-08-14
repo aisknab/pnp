@@ -1696,6 +1696,24 @@ HB/rank routing, or prove polynomial bounds. This is not unconditional
 ZeroSlack; global PkgC, ZeroSlack, PCCMin, SAT in P, and P = NP remain open. See
 [`lean_residual_terminal_packet_charge_surplus.md`](./lean_residual_terminal_packet_charge_surplus.md).
 
+`ResidualTerminalPacketUnitChargeBlueprintRealizer` now specializes that
+kernel to a data-only direct-wire unit-charge blueprint format. The two gate counts
+mechanically determine canonical `List.range` occurrence ledgers with unit
+weights. A constructive remove-first checker, proved exactly equivalent to
+`List.Perm` without `Classical.choice`, validates both occurrence partitions,
+a nonempty unmatched remainder, and semantic equivalence. Acceptance then
+constructs the charge-surplus realization, a genuine strict equivalent gain,
+and strict residual descent. The same validator scans every original blueprint
+atom behind every canonical handle in one supplied explicit grouped BN6 family
+while retaining the complete Packet alternatives. The blueprints, pairing,
+family, and candidates remain inputs; family-local validator silence is not
+`BotHN`, `BotBUD`, a lower-rank `BotSeed`, global no-gain, or ZeroSlack. The
+repository still does not derive these blueprints from terminal data, prove
+selector faithfulness or compatibility, close HB/rank routes, or establish
+polynomial generation/runtime. Global PkgC, ZeroSlack, PCCMin, SAT in P, and
+P = NP remain open. See
+[`lean_residual_terminal_packet_unit_charge_blueprint_realizer.md`](./lean_residual_terminal_packet_unit_charge_blueprint_realizer.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

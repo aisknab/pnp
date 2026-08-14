@@ -1,0 +1,32 @@
+import PNP.ResidualTerminalPacketUnitChargeBlueprintRealizer
+
+#print axioms PNP.DirectWire.eraseFirstNat
+#print axioms PNP.DirectWire.eraseFirstNat_sound
+#print axioms PNP.DirectWire.eraseFirstNat_exists_of_mem
+#print axioms PNP.DirectWire.natOccurrencePermBool
+#print axioms PNP.DirectWire.natOccurrencePermBool_sound
+#print axioms PNP.DirectWire.natOccurrencePermBool_complete
+#print axioms PNP.DirectWire.natOccurrencePermBool_eq_true_iff
+#print axioms PNP.DirectWire.TerminalPacketUnitChargeBlueprint
+#print axioms PNP.DirectWire.TerminalPacketUnitChargeBlueprint.Valid
+#print axioms PNP.DirectWire.TerminalPacketUnitChargeBlueprint.check
+#print axioms PNP.DirectWire.TerminalPacketUnitChargeBlueprint.check_eq_true_iff
+#print axioms PNP.DirectWire.TerminalPacketUnitChargeBlueprint.Valid.chargeSurplus
+#print axioms PNP.DirectWire.unitChargeRange_sum
+#print axioms PNP.DirectWire.TerminalPacketUnitChargeBlueprint.Valid.chargeSurplusRealization
+#print axioms PNP.DirectWire.TerminalPacketUnitChargeBlueprint.strictEquivalentGain_of_check
+#print axioms PNP.DirectWire.TerminalPacketUnitChargeBlueprint.strictResidualDescent_of_check
+#print axioms PNP.DirectWire.TerminalPacketUnitChargeBlueprintAtomOutcome
+#print axioms PNP.DirectWire.scanTerminalPacketUnitChargeBlueprintAtoms
+#print axioms PNP.DirectWire.TerminalPacketUnitChargeBlueprintAtomOutcome.sound
+#print axioms PNP.DirectWire.TerminalPacketUnitChargeBlueprintHandleListOutcome
+#print axioms PNP.DirectWire.scanTerminalPacketUnitChargeBlueprintHandles
+#print axioms PNP.DirectWire.TerminalPacketUnitChargeBlueprintRealizerOutcome
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.realizeUnitChargeBlueprints
+#print axioms PNP.DirectWire.TerminalPacketUnitChargeBlueprintRealizerOutcome.sound
+#print axioms PNP.DirectWire.TerminalPacketUnitChargeBlueprintRealizerOutcome.gain_descent
+#print axioms PNP.DirectWire.TerminalPacketUnitChargeBlueprintRealizerConclusion
+#print axioms PNP.DirectWire.TerminalPacketEncodedSelectorConclusion.unitChargeBlueprintRealizer
+#print axioms PNP.DirectWire.TerminalPacketEncodedSelectorConclusion.unitChargeBlueprintRealizer_packet
+#print axioms PNP.DirectWire.terminalBN6_packet_unit_charge_blueprint_realizer
+#print axioms PNP.DirectWire.terminalBN6_packet_unit_charge_blueprint_realizer_sound
