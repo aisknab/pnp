@@ -1,0 +1,12 @@
+import PNP.ResidualTerminalPacketChargeSurplus
+
+#print axioms PNP.DirectWire.TerminalPacketChargeSurplus
+#print axioms PNP.DirectWire.TerminalPacketChargeSurplus.matchedWeight_eq
+#print axioms PNP.DirectWire.TerminalPacketChargeSurplus.supportWeight_eq_matched_add_unmatched
+#print axioms PNP.DirectWire.TerminalPacketChargeSurplus.replacementWeight_eq_matched
+#print axioms PNP.DirectWire.TerminalPacketChargeSurplus.unmatchedWeight_pos
+#print axioms PNP.DirectWire.TerminalPacketChargeSurplus.replacementLength_lt_supportLength
+#print axioms PNP.DirectWire.TerminalPacketChargeSurplus.replacementWeight_lt_supportWeight
+#print axioms PNP.DirectWire.TerminalPacketChargeSurplusRealization
+#print axioms PNP.DirectWire.TerminalPacketChargeSurplusRealization.strictEquivalentGain
+#print axioms PNP.DirectWire.TerminalPacketChargeSurplusRealization.strictResidualDescent

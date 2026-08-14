@@ -1679,6 +1679,23 @@ establish encoded-size and polynomial-runtime bounds. Global PkgC, ZeroSlack,
 PCCMin, SAT in P, and P = NP remain open. See
 [`lean_residual_terminal_packet_selector_gain_coverage.md`](./lean_residual_terminal_packet_selector_gain_coverage.md).
 
+`ResidualTerminalPacketChargeSurplus` now reconstructs the generic finite
+arithmetic kernel of manuscript Section 14 `R-ChargeSurplus`. For arbitrary
+finite support and replacement charge ledgers, exact occurrence permutations
+preserve multiplicity while pairing every replacement occurrence with one
+support occurrence of equal weight. An unmatched positive support charge then
+forces both strict occurrence count and strict total weight. When the totals
+are proved to be the two NAND gate counts and semantic equivalence is supplied
+independently, Lean derives a genuine `StrictEquivalentGain` and strict
+residual descent; neither strictness fact is an input field. A regression
+rejects reuse of a duplicate support occurrence and a ledger without an
+unmatched occurrence. The ledgers, pairing, exact gate accounting, and
+semantics remain explicit inputs: the repository does not construct the
+replacement or ledger from Packet/terminal data, produce typed blockers, close
+HB/rank routing, or prove polynomial bounds. This is not unconditional
+ZeroSlack; global PkgC, ZeroSlack, PCCMin, SAT in P, and P = NP remain open. See
+[`lean_residual_terminal_packet_charge_surplus.md`](./lean_residual_terminal_packet_charge_surplus.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:
