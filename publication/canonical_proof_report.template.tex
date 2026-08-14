@@ -640,6 +640,20 @@ terminal data, and no selector faithfulness, compatibility, replacement or
 typed-blocker construction, HB/rank closure, encoded-size bound, polynomial
 runtime, global PkgC, PCCMin, SAT decider, or proof of \(P=NP\) follows.
 
+The finite arithmetic kernel of manuscript Section 14
+\code{R-ChargeSurplus} is now checked over arbitrary support and replacement
+charge ledgers. Exact occurrence permutations preserve multiplicity, every
+paired replacement and support occurrence has equal weight, and an unmatched
+positive support charge forces strict replacement weight. If those totals are
+independently proved to equal the replacement and current NAND gate counts and
+semantic equivalence is proved separately, Lean derives a genuine strict
+equivalent gain and strict residual descent. Neither strict inequality is a
+premise. Duplicate support reuse and absence of an unmatched occurrence are
+negative regressions. The replacement circuit, ledgers, pairing, accounting,
+and semantics are not constructed from terminal data, so this is not the
+complete realizer, not unconditional ZeroSlack, and not a polynomial PCCMin,
+SAT decider, or proof of \(P=NP\).
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule

@@ -150,6 +150,15 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   assert.match(gainCoverage.scope, /every strict equivalent gain/u);
   assert.match(gainCoverage.nonClaim,
     /does not construct the coverage certificate/u);
+  const chargeSurplus = byId.get(
+    'residual-terminal-packet-charge-surplus');
+  assert.equal(chargeSurplus.status,
+    'formalized-residual-terminal-packet-charge-surplus');
+  assert.equal(chargeSurplus.earned, true);
+  assert.equal(chargeSurplus.requiredTheorems.length, 8);
+  assert.match(chargeSurplus.scope, /unmatched positive support charge/u);
+  assert.match(chargeSurplus.nonClaim,
+    /does not construct a replacement/u);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
     'formalized-np-membership-only');

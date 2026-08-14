@@ -233,6 +233,15 @@ This is not unconditional ZeroSlack: certificate construction, manuscript
 faithfulness and compatibility, typed blockers, encoded-size bounds, and
 polynomial generation/runtime remain open.
 
+The finite `R-ChargeSurplus` arithmetic edge is now kernel checked separately.
+For arbitrary finite ledgers, exact multiplicity-preserving occurrence pairing,
+pairwise weight preservation, and an unmatched positive support charge force
+strictly smaller replacement weight. Exact gate-count accounting and
+independently proved semantics then yield a `StrictEquivalentGain` and residual
+descent. The replacement circuit, its ledger, and the pairing are not yet
+constructed from a Packet selector, so this result is not unconditional
+ZeroSlack and does not complete the realizer or its typed failure routes.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its
@@ -259,7 +268,8 @@ positive residual slack
 => explicit gain-coverage certificate for every strict equivalent implementation (unconstructed premise)
 => source gain or conditional proof-bearing ZeroSlack (current Lean boundary)
 => encoded-size-bounded faithful compatible certificate construction (open)
-=> replacement gain or typed blocker (open)
+=> exact charge pairing with an unmatched positive support charge (arithmetic implication formalized; witness construction open)
+=> replacement strict equivalent gain (formalized from exact gate accounting and semantics) or typed blocker (open)
 => blocker/rank contradiction
 => ZeroSlack is impossible under positive slack
 ```

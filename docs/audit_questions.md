@@ -594,6 +594,16 @@ Every positive packet has a representative in the polynomial selector universe; 
   proof-bearing semantic minimum and zero residual slack. The certificate is
   not constructed or inferred from scan failure, so this is not unconditional
   ZeroSlack, selector-realizer completeness, or a polynomial bound.
+- `PNP.DirectWire.TerminalPacketChargeSurplus.replacementWeight_lt_supportWeight`
+  and
+  `PNP.DirectWire.TerminalPacketChargeSurplusRealization.strictEquivalentGain`,
+  which formalize the finite `R-ChargeSurplus` implication over arbitrary
+  support and replacement ledgers. Exact occurrence permutations prevent
+  duplicate support reuse; pairwise weight preservation and an unmatched
+  positive support charge force strict total weight. Exact gate accounting and
+  separately proved semantics then yield a genuine strict equivalent gain.
+  The replacement, ledger, pairing, and semantic proof remain inputs, so this
+  is not the complete selector realizer and not unconditional ZeroSlack.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -609,7 +619,10 @@ Every positive packet has a representative in the polynomial selector universe; 
    gain-coverage certificate against every strict equivalent implementation;
    do not infer it from finite-family silence. The empty-family positive-slack
    regression is the required negative control.
-5. Decode representative selectors and verify the same-frontier replacement and strict charge-surplus injection.
+5. Decode representative selectors and verify the same-frontier replacement,
+   exact multiplicity-preserving charge pairing, and unmatched positive support
+   charge. Then confirm that gate accounting and semantic equivalence are
+   independent of the derived strict inequality.
 6. Inspect every typed bottom reason and verify rank nonincrease or strict tie-break descent.
 7. Build the complete HN/BUD blocker graph and run an independent cycle check.
 
@@ -617,7 +630,8 @@ Every positive packet has a representative in the polynomial selector universe; 
 
 - A positive packet with no selector and no earlier route.
 - A faithful selector whose realizer returns an untyped or rank-increasing failure.
-- A claimed strict charge surplus with no unmatched positive-weight charge.
+- A claimed strict charge surplus with no unmatched positive support charge,
+  or one that reuses a support occurrence through duplicate values.
 - A cycle in the HN/BUD blocker graph.
 - A selector universe or payload family that grows super-polynomially.
 - A strict equivalent gain absent from a claimed gain-coverage certificate.
