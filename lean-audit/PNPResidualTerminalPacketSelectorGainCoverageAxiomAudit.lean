@@ -1,0 +1,16 @@
+import PNP.ResidualTerminalPacketSelectorGainCoverage
+
+#print axioms PNP.DirectWire.TerminalPacketSelectorGainCoverage
+#print axioms PNP.DirectWire.TerminalPacketSelectorGainCoverage.noStrictEquivalentGain
+#print axioms PNP.DirectWire.TerminalPacketSelectorGainCoverage.zeroSlackResult
+#print axioms PNP.DirectWire.TerminalPacketSelectorGainCoverage.residualSlack_eq_zero_of_noGain
+#print axioms PNP.DirectWire.TerminalPacketSelectorCoveredGainOutcome
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.scanCoveredPacketSelectorGains
+#print axioms PNP.DirectWire.TerminalPacketSelectorCoveredGainOutcome.sound
+#print axioms PNP.DirectWire.TerminalPacketSelectorCoveredGainOutcome.residualSlack_spec
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.scanCoveredPacketSelectorGains_sound
+#print axioms PNP.DirectWire.TerminalPacketSelectorGainCoverageConclusion
+#print axioms PNP.DirectWire.TerminalPacketEncodedSelectorConclusion.coveredGainScan
+#print axioms PNP.DirectWire.TerminalPacketEncodedSelectorConclusion.coveredGainScan_packet
+#print axioms PNP.DirectWire.terminalBN6_packet_selector_covered_gain_scan
+#print axioms PNP.DirectWire.terminalBN6_packet_selector_covered_gain_scan_sound

@@ -223,6 +223,16 @@ existence witness. It does not derive global absence from a finite candidate
 scan, construct the report's `ZeroSlack` certificate, generate the route, or
 provide a polynomial stopping algorithm.
 
+The latest conditional bridge now derives global absence from the exhaustive
+Packet scan only when the caller supplies an explicit gain-coverage certificate
+mapping every strict equivalent implementation to an original payload in a
+canonical source cell. Under that premise, the unresolved branch carries a
+proof-bearing semantic minimum and zero residual slack. An empty-family
+positive-slack regression proves that finite silence cannot infer the premise.
+This is not unconditional ZeroSlack: certificate construction, manuscript
+faithfulness and compatibility, typed blockers, encoded-size bounds, and
+polynomial generation/runtime remain open.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its
@@ -245,8 +255,10 @@ positive residual slack
 => BN2–BN6 packet
 => payload-backed raw selector seed
 => canonical unary handle and exact source-payload materialization
-=> exhaustive checked gain or family-local no-gain across the supplied selector universe (current Lean boundary)
-=> encoded-size-bounded faithful compatible selector construction (open)
+=> exhaustive checked gain or family-local no-gain across the supplied selector universe (formalized)
+=> explicit gain-coverage certificate for every strict equivalent implementation (unconstructed premise)
+=> source gain or conditional proof-bearing ZeroSlack (current Lean boundary)
+=> encoded-size-bounded faithful compatible certificate construction (open)
 => replacement gain or typed blocker (open)
 => blocker/rank contradiction
 => ZeroSlack is impossible under positive slack

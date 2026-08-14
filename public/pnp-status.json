@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-14-141",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-14-142",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -884,6 +884,9 @@
   "leanResidualTerminalPacketSelectorUniverseGainScanFormalized": true,
   "leanResidualTerminalPacketSelectorUniverseGainScanAxiomAuditPassed": true,
   "leanResidualTerminalPacketSelectorUniverseGainScanScope": "all-finite-explicit-bn6-grouped-families-exhaustive-canonical-selector-scan-with-checked-strict-gain-or-family-local-no-gain-and-packet-branch-preservation",
+  "leanResidualTerminalPacketSelectorGainCoverageFormalized": true,
+  "leanResidualTerminalPacketSelectorGainCoverageAxiomAuditPassed": true,
+  "leanResidualTerminalPacketSelectorGainCoverageScope": "all-finite-explicit-bn6-grouped-families-explicit-global-gain-coverage-certificate-conditional-source-gain-or-proof-bearing-zero-slack-with-packet-branch-preservation",
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -1404,6 +1407,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorUniverseGainScanAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorUniverseGainScan.lean",
     "node --test audits/lean-residual-terminal-packet-selector-universe-gain-scan0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorGainCoverageAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorGainCoverage.lean",
+    "node --test audits/lean-residual-terminal-packet-selector-gain-coverage0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1429,6 +1435,7 @@
     "The total fail-closed Packet source-payload realization maps each accepted canonical code to the exact original grouped cell and a canonical original positive payload atom, while rejecting exactly when the decoder rejects. This lookup is relative to the supplied explicit grouped family; its unary bits do not serialize atom or payload data. It is not the manuscript's gain-or-blocker realizer, constructs no replacement circuit or route, and proves no selector faithfulness, compatibility, encoded-size bound, or polynomial runtime.",
     "The checked Packet selector candidate-gain scan decodes one canonical selector and tests every implementation payload in its exact original source cell. A gain outcome carries a genuine StrictEquivalentGain and strict residual descent; local no-gain excludes only candidates in that selected cell. The candidates and grouped family are explicit inputs, and local failure is not BotHN, BotBUD, a lower-rank BotSeed, global minimality, ZeroSlack, or a complete gain-or-blocker realizer.",
     "The exhaustive Packet selector-universe gain scan enumerates every canonical handle in one supplied explicit grouped family and tests every implementation payload in each exact source cell. A gain retains its source atom and canonical code; family-wide no-gain is only silence for that input-relative universe. It is not manuscript selector silence, BotHN, BotBUD, a lower-rank BotSeed, global minimality, ZeroSlack, selector faithfulness, realizer completeness, or a polynomial-runtime result.",
+    "The conditional Packet gain-or-ZeroSlack bridge consumes an explicit gain-coverage certificate proving that every strict equivalent gain occurs as an original payload in a canonical source cell. Under that premise, exhaustive family silence yields a proof-bearing semantic minimum and zero residual slack. The certificate is not constructed from terminal data, so this is not unconditional ZeroSlack, selector-faithfulness completeness, a polynomial-runtime result, or PCCMin.",
     "The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.",
     "The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.",
     "Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.",
@@ -1587,7 +1594,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "794760e09b118041da76b16b5eda92a6bff496a96decf07951a7f9a0fc3d987e",
+    "actualSourceClosureSha256": "276efe1faa91f14e04a7cbf52734664086c3ab1e43c46323adf1380efb6ed63a",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1617,22 +1624,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-14-141",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-14-142",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "6705f67c74816c38d7c9645a25f4c85d8e0125d7b6f97c73c65bb3fcdd9cfe50",
+  "leanTheoremInventorySha256": "405055d9ac1742189429da35ae4f9367b4d18b977d0a337b97b92ae371c623f2",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 28135,
+  "leanTheoremInventoryDeclarationCount": 28193,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 15033,
-  "leanTheoremInventoryTheoremCount": 14590,
+  "leanTheoremInventoryTheoremCount": 14607,
   "leanTheoremInventoryAssumptionFreeTheoremCount": 7359,
-  "leanTheoremInventorySourceClosureModuleCount": 258,
-  "leanSourceClosureSha256": "794760e09b118041da76b16b5eda92a6bff496a96decf07951a7f9a0fc3d987e",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-14-141",
+  "leanTheoremInventorySourceClosureModuleCount": 259,
+  "leanSourceClosureSha256": "276efe1faa91f14e04a7cbf52734664086c3ab1e43c46323adf1380efb6ed63a",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-14-142",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "684f6bf5dc72e7dc12d1786ff1ad0c234f85087a6adb68b529e29a35bcb2f428",
+  "formalPublicationMapSha256": "e724b339c8e602a9f9d2d2022a4018d169d138f2af83ff7d9197257de01e2c87",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -39309,6 +39316,111 @@
       "status": "formalized-residual-terminal-packet-selector-universe-gain-scan"
     },
     {
+      "classification": "formalized-residual-terminal-packet-selector-gain-coverage",
+      "id": "residual-terminal-packet-selector-gain-coverage",
+      "nonClaim": "The explicit gain-coverage certificate, grouped BN6 family, and candidate implementations remain inputs. This milestone does not construct the coverage certificate from terminal data, prove selector faithfulness or compatibility, construct or polynomially enumerate replacement candidates, establish encoded-size or runtime bounds, produce typed blockers or HB/rank closure, or complete global PkgC, ZeroSlack, or PCCMin. It is conditional and not unconditional ZeroSlack; it does not put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalPacketSelectorGainCoverage.noStrictEquivalentGain",
+        "PNP.DirectWire.TerminalPacketSelectorGainCoverage.residualSlack_eq_zero_of_noGain",
+        "PNP.DirectWire.TerminalPacketSelectorCoveredGainOutcome.sound",
+        "PNP.DirectWire.TerminalPacketSelectorCoveredGainOutcome.residualSlack_spec",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.scanCoveredPacketSelectorGains_sound",
+        "PNP.DirectWire.TerminalPacketEncodedSelectorConclusion.coveredGainScan_packet",
+        "PNP.DirectWire.terminalBN6_packet_selector_covered_gain_scan_sound"
+      ],
+      "scope": "For every arbitrary finite explicit grouped BN6 family whose payloads are direct-wire implementations, an explicit proof-bearing coverage certificate requires every strict equivalent gain from the current implementation to occur as an original payload atom in an exact canonical selector source cell. Under precisely that premise, the exhaustive scan returns either a source-atom gain with strict residual descent or a proof-bearing semantic minimum and zero residual slack, while preserving the pair, balanced-triple, and full-span Packet alternatives literally.",
+      "title": "Conditional Packet selector gain-or-ZeroSlack coverage",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorGainCoverage.noStrictEquivalentGain",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7b1ef90c27c9aceb97b855c14a94d198ef82637d27434fd2de966841a42dee32",
+          "expectedKernelTypeSha256": "7b1ef90c27c9aceb97b855c14a94d198ef82637d27434fd2de966841a42dee32",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorGainCoverage.residualSlack_eq_zero_of_noGain",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "543a2c30236108717a975f337b6fe9e6419d61bf39adb4c0f55735df8b8473c2",
+          "expectedKernelTypeSha256": "543a2c30236108717a975f337b6fe9e6419d61bf39adb4c0f55735df8b8473c2",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorCoveredGainOutcome.sound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "def8db61dd5030d4c8c04c4dec62898c81955561bbdffcee39493ed2dc326380",
+          "expectedKernelTypeSha256": "def8db61dd5030d4c8c04c4dec62898c81955561bbdffcee39493ed2dc326380",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorCoveredGainOutcome.residualSlack_spec",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "59e59cd46feb3e8d7ccd20649d876a17ee8e240acf01b01d7d151cf4017f547c",
+          "expectedKernelTypeSha256": "59e59cd46feb3e8d7ccd20649d876a17ee8e240acf01b01d7d151cf4017f547c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.scanCoveredPacketSelectorGains_sound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7474e55f1b655cfc544b8edd7dbcee3afc58e8f6542eae2c327782eafead28b2",
+          "expectedKernelTypeSha256": "7474e55f1b655cfc544b8edd7dbcee3afc58e8f6542eae2c327782eafead28b2",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketEncodedSelectorConclusion.coveredGainScan_packet",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6e718e5038e7b09be9f0fba0772c7861094c45929f950fe9e859678ed2e1fffd",
+          "expectedKernelTypeSha256": "6e718e5038e7b09be9f0fba0772c7861094c45929f950fe9e859678ed2e1fffd",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBN6_packet_selector_covered_gain_scan_sound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "bcc35fc1024c340c7eac8bb0d3359b66b3363df819002c8eea8bf4cd64272031",
+          "expectedKernelTypeSha256": "bcc35fc1024c340c7eac8bb0d3359b66b3363df819002c8eea8bf4cd64272031",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-packet-selector-gain-coverage"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -39342,7 +39454,7 @@
     {
       "classification": "not-formalized",
       "id": "global-zeroslack-pccmin",
-      "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; and the exhaustive Packet scan verifies strict gains or exact no-gain over every canonical selector in one supplied explicit grouped family. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, or replacement candidates from terminal data; connect matching back to a contradiction; construct the permitted HN, budget, or lower-rank selector blockers; map all residual routes into a decreasing complete global outcome system; or provide selector faithfulness, realizer, blocker, and polynomial-runtime completeness. Global ZeroSlack and polynomial PCCMin therefore remain unformalized.",
+      "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; the exhaustive Packet scan verifies strict gains or exact no-gain over every canonical selector in one supplied explicit grouped family; and an explicit global gain-coverage certificate conditionally upgrades that silence to a proof-bearing ZeroSlack result. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, replacement candidates, or gain-coverage certificate from terminal data; connect matching back to a contradiction; construct the permitted HN, budget, or lower-rank selector blockers; map all residual routes into a decreasing complete global outcome system; or provide selector faithfulness, realizer, blocker, and polynomial-runtime completeness. Global unconditional ZeroSlack and polynomial PCCMin therefore remain unformalized.",
       "requiredTheorems": [
         "PNP.Main.pccmin_polynomial_exact",
         "PNP.Main.zero_slack_complete"
@@ -39406,7 +39518,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-14-141",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-14-142",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

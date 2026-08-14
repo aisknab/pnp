@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-14-141",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-14-142",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2661,7 +2661,14 @@
     "PNP.DirectWire.TerminalBN6GroupedFamily.universeGain_source_and_code": "908bfb961e16547356af3e1dacda10db97114f3f3658dcbc404fa57527ca38cc",
     "PNP.DirectWire.TerminalBN6GroupedFamily.universeNoGain_of_gainScan": "b31b67e308423d933c862df8872bd70b331ac6fd86be0e1c658849a569e1f133",
     "PNP.DirectWire.TerminalPacketEncodedSelectorConclusion.universeGainScan_packet": "373902d79d328259df3d62d93d2ab45f63191d236f52a3cc03eb2e50aeb1c418",
-    "PNP.DirectWire.terminalBN6_packet_selector_universe_gain_scan_sound": "a9a9e9ccf505501b0576f0462c43d3d9283177b2079cae2c2a8d432a43153b8f"
+    "PNP.DirectWire.terminalBN6_packet_selector_universe_gain_scan_sound": "a9a9e9ccf505501b0576f0462c43d3d9283177b2079cae2c2a8d432a43153b8f",
+    "PNP.DirectWire.TerminalPacketSelectorGainCoverage.noStrictEquivalentGain": "7b1ef90c27c9aceb97b855c14a94d198ef82637d27434fd2de966841a42dee32",
+    "PNP.DirectWire.TerminalPacketSelectorGainCoverage.residualSlack_eq_zero_of_noGain": "543a2c30236108717a975f337b6fe9e6419d61bf39adb4c0f55735df8b8473c2",
+    "PNP.DirectWire.TerminalPacketSelectorCoveredGainOutcome.sound": "def8db61dd5030d4c8c04c4dec62898c81955561bbdffcee39493ed2dc326380",
+    "PNP.DirectWire.TerminalPacketSelectorCoveredGainOutcome.residualSlack_spec": "59e59cd46feb3e8d7ccd20649d876a17ee8e240acf01b01d7d151cf4017f547c",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.scanCoveredPacketSelectorGains_sound": "7474e55f1b655cfc544b8edd7dbcee3afc58e8f6542eae2c327782eafead28b2",
+    "PNP.DirectWire.TerminalPacketEncodedSelectorConclusion.coveredGainScan_packet": "6e718e5038e7b09be9f0fba0772c7861094c45929f950fe9e859678ed2e1fffd",
+    "PNP.DirectWire.terminalBN6_packet_selector_covered_gain_scan_sound": "bcc35fc1024c340c7eac8bb0d3359b66b3363df819002c8eea8bf4cd64272031"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -2679,7 +2686,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "794760e09b118041da76b16b5eda92a6bff496a96decf07951a7f9a0fc3d987e",
+  "milestoneSourceClosureSha256": "276efe1faa91f14e04a7cbf52734664086c3ab1e43c46323adf1380efb6ed63a",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -6620,6 +6627,22 @@
       "title": "Exhaustive Packet selector-universe gain scan"
     },
     {
+      "classification": "formalized-residual-terminal-packet-selector-gain-coverage",
+      "id": "residual-terminal-packet-selector-gain-coverage",
+      "nonClaim": "The explicit gain-coverage certificate, grouped BN6 family, and candidate implementations remain inputs. This milestone does not construct the coverage certificate from terminal data, prove selector faithfulness or compatibility, construct or polynomially enumerate replacement candidates, establish encoded-size or runtime bounds, produce typed blockers or HB/rank closure, or complete global PkgC, ZeroSlack, or PCCMin. It is conditional and not unconditional ZeroSlack; it does not put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalPacketSelectorGainCoverage.noStrictEquivalentGain",
+        "PNP.DirectWire.TerminalPacketSelectorGainCoverage.residualSlack_eq_zero_of_noGain",
+        "PNP.DirectWire.TerminalPacketSelectorCoveredGainOutcome.sound",
+        "PNP.DirectWire.TerminalPacketSelectorCoveredGainOutcome.residualSlack_spec",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.scanCoveredPacketSelectorGains_sound",
+        "PNP.DirectWire.TerminalPacketEncodedSelectorConclusion.coveredGainScan_packet",
+        "PNP.DirectWire.terminalBN6_packet_selector_covered_gain_scan_sound"
+      ],
+      "scope": "For every arbitrary finite explicit grouped BN6 family whose payloads are direct-wire implementations, an explicit proof-bearing coverage certificate requires every strict equivalent gain from the current implementation to occur as an original payload atom in an exact canonical selector source cell. Under precisely that premise, the exhaustive scan returns either a source-atom gain with strict residual descent or a proof-bearing semantic minimum and zero residual slack, while preserving the pair, balanced-triple, and full-span Packet alternatives literally.",
+      "title": "Conditional Packet selector gain-or-ZeroSlack coverage"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -6632,7 +6655,7 @@
     {
       "classification": "not-formalized",
       "id": "global-zeroslack-pccmin",
-      "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; and the exhaustive Packet scan verifies strict gains or exact no-gain over every canonical selector in one supplied explicit grouped family. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, or replacement candidates from terminal data; connect matching back to a contradiction; construct the permitted HN, budget, or lower-rank selector blockers; map all residual routes into a decreasing complete global outcome system; or provide selector faithfulness, realizer, blocker, and polynomial-runtime completeness. Global ZeroSlack and polynomial PCCMin therefore remain unformalized.",
+      "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; the exhaustive Packet scan verifies strict gains or exact no-gain over every canonical selector in one supplied explicit grouped family; and an explicit global gain-coverage certificate conditionally upgrades that silence to a proof-bearing ZeroSlack result. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, replacement candidates, or gain-coverage certificate from terminal data; connect matching back to a contradiction; construct the permitted HN, budget, or lower-rank selector blockers; map all residual routes into a decreasing complete global outcome system; or provide selector faithfulness, realizer, blocker, and polynomial-runtime completeness. Global unconditional ZeroSlack and polynomial PCCMin therefore remain unformalized.",
       "requiredTheorems": [
         "PNP.Main.pccmin_polynomial_exact",
         "PNP.Main.zero_slack_complete"

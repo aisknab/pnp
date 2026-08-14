@@ -1663,6 +1663,22 @@ family, establish encoded-size or polynomial-runtime bounds, complete PkgC or
 global routes, put SAT in P, or prove P = NP. See
 [`lean_residual_terminal_packet_selector_universe_gain_scan.md`](./lean_residual_terminal_packet_selector_universe_gain_scan.md).
 
+`ResidualTerminalPacketSelectorGainCoverage` formalizes the exact conditional
+bridge beyond that finite scan. An explicit gain-coverage certificate must map
+every strict equivalent gain from the current implementation to an original
+payload atom in one canonical source cell. Under that premise, exhaustive
+family-wide no-gain proves global absence of strict equivalent gains and
+constructs a proof-bearing `ZeroSlackResult`; the alternative branch retains
+its exact source-atom gain and strict residual descent. Every encoded Packet
+alternative is preserved literally. An empty-family positive-slack regression
+proves that scan silence alone cannot supply the certificate. This is not
+unconditional ZeroSlack: the repository does not construct the explicit
+gain-coverage certificate from terminal data, prove selector faithfulness or
+compatibility, build replacements or typed blockers, close HB/rank routing, or
+establish encoded-size and polynomial-runtime bounds. Global PkgC, ZeroSlack,
+PCCMin, SAT in P, and P = NP remain open. See
+[`lean_residual_terminal_packet_selector_gain_coverage.md`](./lean_residual_terminal_packet_selector_gain_coverage.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

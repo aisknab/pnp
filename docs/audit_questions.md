@@ -585,6 +585,15 @@ Every positive packet has a representative in the polynomial selector universe; 
   unresolved outcome proves family-wide no-gain only for that input-relative
   universe. It is not manuscript selector silence, a typed HN/budget/lower-rank
   blocker, global minimality, ZeroSlack, or a polynomial completeness theorem.
+- `PNP.DirectWire.TerminalPacketSelectorGainCoverage.noStrictEquivalentGain`
+  and
+  `PNP.DirectWire.terminalBN6_packet_selector_covered_gain_scan_sound`, which
+  consume an explicit gain-coverage certificate mapping every strict
+  equivalent gain to an original payload atom in a canonical source cell.
+  Under precisely that premise, exhaustive family silence yields a
+  proof-bearing semantic minimum and zero residual slack. The certificate is
+  not constructed or inferred from scan failure, so this is not unconditional
+  ZeroSlack, selector-realizer completeness, or a polynomial bound.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -596,9 +605,13 @@ Every positive packet has a representative in the polynomial selector universe; 
 3. Re-run the exhaustive finite-family scan and verify that every canonical
    handle and every original source-cell payload is covered; do not generalize
    its no-gain branch beyond the supplied family.
-4. Decode representative selectors and verify the same-frontier replacement and strict charge-surplus injection.
-5. Inspect every typed bottom reason and verify rank nonincrease or strict tie-break descent.
-6. Build the complete HN/BUD blocker graph and run an independent cycle check.
+4. If using the conditional ZeroSlack bridge, inspect the explicit
+   gain-coverage certificate against every strict equivalent implementation;
+   do not infer it from finite-family silence. The empty-family positive-slack
+   regression is the required negative control.
+5. Decode representative selectors and verify the same-frontier replacement and strict charge-surplus injection.
+6. Inspect every typed bottom reason and verify rank nonincrease or strict tie-break descent.
+7. Build the complete HN/BUD blocker graph and run an independent cycle check.
 
 **What would count as a refutation or material defect**
 
@@ -607,6 +620,7 @@ Every positive packet has a representative in the polynomial selector universe; 
 - A claimed strict charge surplus with no unmatched positive-weight charge.
 - A cycle in the HN/BUD blocker graph.
 - A selector universe or payload family that grows super-polynomially.
+- A strict equivalent gain absent from a claimed gain-coverage certificate.
 
 ---
 
