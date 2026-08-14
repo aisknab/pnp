@@ -1714,6 +1714,24 @@ polynomial generation/runtime. Global PkgC, ZeroSlack, PCCMin, SAT in P, and
 P = NP remain open. See
 [`lean_residual_terminal_packet_unit_charge_blueprint_realizer.md`](./lean_residual_terminal_packet_unit_charge_blueprint_realizer.md).
 
+The checked Packet typed-realizer contract in
+`ResidualTerminalPacketTypedRealizerContract` now reconstructs the data-only
+typed-output interface immediately following that blueprint realizer. Over an
+arbitrary finite selector list and supplied finite-rank executable tables, the
+checker accepts each faithful row only as a valid unit-charge blueprint gain,
+an active HN blocker at no greater rank, an active budget blocker at no greater
+rank, or a faithful selector at strictly lower rank. Checked evidence is tied
+by equality to the exact input row, and the grouped-BN6 specialization covers
+every canonical handle through the existing exhaustive handle list. The
+selector family, rank assignment, faithfulness predicate, claims, and blocker
+tables remain inputs. The finite indices are not the manuscript rank tuple,
+and invalid rows are rejected rather than converted into blockers. The
+repository still does not construct those inputs from terminal data, prove
+selector compatibility, blocker semantics, HB acyclicity, global selector
+silence, or polynomial generation/runtime. Global PkgC, ZeroSlack, PCCMin, SAT
+in P, and P = NP remain open. See
+[`lean_residual_terminal_packet_typed_realizer_contract.md`](./lean_residual_terminal_packet_typed_realizer_contract.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:
