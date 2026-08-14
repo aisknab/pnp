@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-14-141';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-14-142';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -407,6 +407,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorUniverseGainScanAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorUniverseGainScan.lean',
   'node --test audits/lean-residual-terminal-packet-selector-universe-gain-scan0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorGainCoverageAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorGainCoverage.lean',
+  'node --test audits/lean-residual-terminal-packet-selector-gain-coverage0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -433,6 +436,7 @@ const NON_CLAIMS = Object.freeze([
   'The total fail-closed Packet source-payload realization maps each accepted canonical code to the exact original grouped cell and a canonical original positive payload atom, while rejecting exactly when the decoder rejects. This lookup is relative to the supplied explicit grouped family; its unary bits do not serialize atom or payload data. It is not the manuscript\'s gain-or-blocker realizer, constructs no replacement circuit or route, and proves no selector faithfulness, compatibility, encoded-size bound, or polynomial runtime.',
   'The checked Packet selector candidate-gain scan decodes one canonical selector and tests every implementation payload in its exact original source cell. A gain outcome carries a genuine StrictEquivalentGain and strict residual descent; local no-gain excludes only candidates in that selected cell. The candidates and grouped family are explicit inputs, and local failure is not BotHN, BotBUD, a lower-rank BotSeed, global minimality, ZeroSlack, or a complete gain-or-blocker realizer.',
   'The exhaustive Packet selector-universe gain scan enumerates every canonical handle in one supplied explicit grouped family and tests every implementation payload in each exact source cell. A gain retains its source atom and canonical code; family-wide no-gain is only silence for that input-relative universe. It is not manuscript selector silence, BotHN, BotBUD, a lower-rank BotSeed, global minimality, ZeroSlack, selector faithfulness, realizer completeness, or a polynomial-runtime result.',
+  'The conditional Packet gain-or-ZeroSlack bridge consumes an explicit gain-coverage certificate proving that every strict equivalent gain occurs as an original payload in a canonical source cell. Under that premise, exhaustive family silence yields a proof-bearing semantic minimum and zero residual slack. The certificate is not constructed from terminal data, so this is not unconditional ZeroSlack, selector-faithfulness completeness, a polynomial-runtime result, or PCCMin.',
   'The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.',
   'The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.',
   'Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.',
@@ -1613,6 +1617,10 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalPacketSelectorUniverseGainScanAxiomAuditPassed: true,
   leanResidualTerminalPacketSelectorUniverseGainScanScope:
     'all-finite-explicit-bn6-grouped-families-exhaustive-canonical-selector-scan-with-checked-strict-gain-or-family-local-no-gain-and-packet-branch-preservation',
+  leanResidualTerminalPacketSelectorGainCoverageFormalized: true,
+  leanResidualTerminalPacketSelectorGainCoverageAxiomAuditPassed: true,
+  leanResidualTerminalPacketSelectorGainCoverageScope:
+    'all-finite-explicit-bn6-grouped-families-explicit-global-gain-coverage-certificate-conditional-source-gain-or-proof-bearing-zero-slack-with-packet-branch-preservation',
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
   leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2680,6 +2688,10 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalPacketSelectorUniverseGainScanAxiomAuditPassed: true,
       leanResidualTerminalPacketSelectorUniverseGainScanScope:
         'all-finite-explicit-bn6-grouped-families-exhaustive-canonical-selector-scan-with-checked-strict-gain-or-family-local-no-gain-and-packet-branch-preservation',
+      leanResidualTerminalPacketSelectorGainCoverageFormalized: true,
+      leanResidualTerminalPacketSelectorGainCoverageAxiomAuditPassed: true,
+      leanResidualTerminalPacketSelectorGainCoverageScope:
+        'all-finite-explicit-bn6-grouped-families-explicit-global-gain-coverage-certificate-conditional-source-gain-or-proof-bearing-zero-slack-with-packet-branch-preservation',
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
       leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2759,7 +2771,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-14-141',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-14-142',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,
