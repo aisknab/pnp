@@ -604,6 +604,18 @@ Every positive packet has a representative in the polynomial selector universe; 
   separately proved semantics then yield a genuine strict equivalent gain.
   The replacement, ledger, pairing, and semantic proof remain inputs, so this
   is not the complete selector realizer and not unconditional ZeroSlack.
+- `PNP.DirectWire.TerminalPacketUnitChargeBlueprint.check_eq_true_iff`,
+  `PNP.DirectWire.TerminalPacketUnitChargeBlueprint.strictEquivalentGain_of_check`,
+  and
+  `PNP.DirectWire.terminalBN6_packet_unit_charge_blueprint_realizer_sound`,
+  which validate data-only replacement blueprints against canonical unit-charge
+  gate-occurrence ledgers. The exact occurrence check is a proved constructive
+  remove-first algorithm with no `Classical.choice` dependency. Acceptance
+  derives the generic charge realization, strict gain, and residual descent;
+  the complete family scan retains the exact canonical handle and original
+  payload atom. The blueprints and family remain inputs, and its unresolved
+  branch is only supplied-family validator silence, not a typed blocker,
+  global no-gain theorem, or ZeroSlack.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -623,8 +635,12 @@ Every positive packet has a representative in the polynomial selector universe; 
    exact multiplicity-preserving charge pairing, and unmatched positive support
    charge. Then confirm that gate accounting and semantic equivalence are
    independent of the derived strict inequality.
-6. Inspect every typed bottom reason and verify rank nonincrease or strict tie-break descent.
-7. Build the complete HN/BUD blocker graph and run an independent cycle check.
+6. For unit-charge blueprints, mutate duplicate occurrences, remove the
+   unmatched remainder, and change semantics; require validator rejection.
+   Check that the exhaustive result ranges over every canonical handle but does
+   not promote family-local rejection to a typed blocker or ZeroSlack.
+7. Inspect every typed bottom reason and verify rank nonincrease or strict tie-break descent.
+8. Build the complete HN/BUD blocker graph and run an independent cycle check.
 
 **What would count as a refutation or material defect**
 
@@ -632,6 +648,8 @@ Every positive packet has a representative in the polynomial selector universe; 
 - A faithful selector whose realizer returns an untyped or rank-increasing failure.
 - A claimed strict charge surplus with no unmatched positive support charge,
   or one that reuses a support occurrence through duplicate values.
+- A unit-charge blueprint accepted with an omitted or duplicated gate
+  occurrence, an empty unmatched remainder, or inequivalent semantics.
 - A cycle in the HN/BUD blocker graph.
 - A selector universe or payload family that grows super-polynomially.
 - A strict equivalent gain absent from a claimed gain-coverage certificate.

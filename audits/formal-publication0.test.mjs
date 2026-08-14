@@ -159,6 +159,19 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   assert.match(chargeSurplus.scope, /unmatched positive support charge/u);
   assert.match(chargeSurplus.nonClaim,
     /does not construct a replacement/u);
+  const unitChargeRealizer = byId.get(
+    'residual-terminal-packet-unit-charge-blueprint-realizer');
+  assert.equal(unitChargeRealizer.status,
+    'formalized-residual-terminal-packet-unit-charge-blueprint-realizer');
+  assert.equal(unitChargeRealizer.earned, true);
+  assert.equal(unitChargeRealizer.requiredTheorems.length, 13);
+  assert.match(unitChargeRealizer.scope,
+    /canonical unit-charge gate-occurrence ledgers/u);
+  assert.match(unitChargeRealizer.scope, /every canonical handle/u);
+  assert.match(unitChargeRealizer.nonClaim,
+    /blueprints.*remain explicit inputs/iu);
+  assert.match(unitChargeRealizer.nonClaim,
+    /not BotHN, BotBUD, a lower-rank BotSeed/u);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
     'formalized-np-membership-only');

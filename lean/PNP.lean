@@ -56,6 +56,7 @@ import PNP.ResidualTerminalPacketSelectorGainScan
 import PNP.ResidualTerminalPacketSelectorUniverseGainScan
 import PNP.ResidualTerminalPacketSelectorGainCoverage
 import PNP.ResidualTerminalPacketChargeSurplus
+import PNP.ResidualTerminalPacketUnitChargeBlueprintRealizer
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine

@@ -242,6 +242,17 @@ descent. The replacement circuit, its ledger, and the pairing are not yet
 constructed from a Packet selector, so this result is not unconditional
 ZeroSlack and does not complete the realizer or its typed failure routes.
 
+The next checked edge accepts data-only unit-charge blueprints for replacements.
+It derives both charge ledgers canonically from the two NAND gate counts,
+validates exact occurrence pairing with a constructive remove-first checker,
+requires a nonempty unmatched remainder, and checks semantic equivalence. An
+accepted blueprint therefore constructs the charge-surplus realization and a
+strict equivalent gain without assuming gate decrease. Every blueprint atom
+behind every canonical handle in one supplied explicit family is scanned, but
+the unresolved result is only family-local validator silence. Blueprint and
+family construction, selector faithfulness/compatibility, typed blockers,
+complete routing, and polynomial bounds remain open.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its
@@ -269,7 +280,8 @@ positive residual slack
 => source gain or conditional proof-bearing ZeroSlack (current Lean boundary)
 => encoded-size-bounded faithful compatible certificate construction (open)
 => exact charge pairing with an unmatched positive support charge (arithmetic implication formalized; witness construction open)
-=> replacement strict equivalent gain (formalized from exact gate accounting and semantics) or typed blocker (open)
+=> supplied unit-charge replacement blueprint validated constructively across every canonical handle (formalized; blueprint construction open)
+=> replacement strict equivalent gain (formalized from validated occurrence accounting and semantics) or typed blocker (open)
 => blocker/rank contradiction
 => ZeroSlack is impossible under positive slack
 ```
