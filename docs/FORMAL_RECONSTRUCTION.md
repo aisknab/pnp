@@ -1732,6 +1732,23 @@ silence, or polynomial generation/runtime. Global PkgC, ZeroSlack, PCCMin, SAT
 in P, and P = NP remain open. See
 [`lean_residual_terminal_packet_typed_realizer_contract.md`](./lean_residual_terminal_packet_typed_realizer_contract.md).
 
+`ResidualTerminalHBBlockerGraphAcyclicity` now reconstructs the next checked
+blocker-graph acyclicity boundary. Its data-only node sum contains only HN and
+budget ranks, and its data-only edges name a blocked node and one dependency.
+The graph checker exhaustively verifies that every strict comparison in the
+supplied finite rank carrier is preserved by a mapping into the already
+formalized ten-coordinate `TerminalResidualRank.LexLT` order, then checks
+strict exact-rank descent for every supplied edge. Lean derives accessibility,
+well-foundedness by inverse image and subrelation, and absence of every
+nonempty directed cycle in the accepted graph. It also upgrades valid
+lower-seed bots to exact-rank descent and composes these facts with the
+canonical Packet typed-realizer contract. The graph, edge list, rank mapping,
+blocker semantics, and dependency completeness remain supplied or open. The
+result does not construct the graph from terminal data, prove rank-complete
+selector silence or the full `HB.NegativeClosure`, establish polynomial
+generation/runtime, or complete ZeroSlack, PCCMin, SAT in P, or P = NP. See
+[`lean_residual_terminal_hb_blocker_graph_acyclicity.md`](./lean_residual_terminal_hb_blocker_graph_acyclicity.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

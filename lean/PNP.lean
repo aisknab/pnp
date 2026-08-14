@@ -58,6 +58,7 @@ import PNP.ResidualTerminalPacketSelectorGainCoverage
 import PNP.ResidualTerminalPacketChargeSurplus
 import PNP.ResidualTerminalPacketUnitChargeBlueprintRealizer
 import PNP.ResidualTerminalPacketTypedRealizerContract
+import PNP.ResidualTerminalHBBlockerGraphAcyclicity
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine

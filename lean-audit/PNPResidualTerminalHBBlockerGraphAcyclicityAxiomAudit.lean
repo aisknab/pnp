@@ -1,0 +1,24 @@
+import PNP.ResidualTerminalHBBlockerGraphAcyclicity
+
+#print axioms PNP.DirectWire.TerminalPacketHBNode
+#print axioms PNP.DirectWire.TerminalPacketHBNode.rankIndex
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyEdge
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyGraph
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyGraph.exactRank
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyGraph.RankEmbeddingValid
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyGraph.checkRankEmbedding
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyGraph.checkRankEmbedding_eq_true_iff
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyEdge.Valid
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyEdge.check
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyEdge.check_eq_true_iff
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyGraph.Valid
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyGraph.check
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyGraph.check_eq_true_iff
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyGraph.Depends
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyGraph.rankTuple_lt_of_lt
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyGraph.depends_rank_lt
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyGraph.depends_wellFounded
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyGraph.depends_accessible
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyGraph.noCycle
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyGraph.lowerSeed_rankTuple_lt_of_valid
+#print axioms PNP.DirectWire.terminalBN6_packet_typed_realizer_hb_acyclicity_contract
