@@ -253,6 +253,16 @@ the unresolved result is only family-local validator silence. Blueprint and
 family construction, selector faithfulness/compatibility, typed blockers,
 complete routing, and polynomial bounds remain open.
 
+The checked Packet typed-realizer contract replaces untyped faithful-row
+silence with a data-only typed contract over arbitrary finite selector lists. Each accepted
+faithful row is exactly a checked unit-charge gain, an active HN bot at no
+greater supplied rank, an active budget bot at no greater supplied rank, or a
+faithful strictly lower-rank seed bot. The specialization checks every
+canonical handle of one supplied grouped BN6 family. Rank assignment,
+faithfulness, claims, and blocker activity remain explicit tables; their
+manuscript semantics, construction, HB acyclicity, global silence, and
+polynomial bounds remain open.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

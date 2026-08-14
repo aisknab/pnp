@@ -214,6 +214,11 @@ on:
       - 'lean-audit/PNPResidualTerminalPacketUnitChargeBlueprintRealizerAxiomAudit.lean'
       - 'lean-regression/PNPResidualTerminalPacketUnitChargeBlueprintRealizer.lean'
       - 'docs/lean_residual_terminal_packet_unit_charge_blueprint_realizer.md'
+      - 'audits/lean-residual-terminal-packet-typed-realizer-contract0.test.mjs'
+      - 'lean/PNP/ResidualTerminalPacketTypedRealizerContract.lean'
+      - 'lean-audit/PNPResidualTerminalPacketTypedRealizerContractAxiomAudit.lean'
+      - 'lean-regression/PNPResidualTerminalPacketTypedRealizerContract.lean'
+      - 'docs/lean_residual_terminal_packet_typed_realizer_contract.md'
       - 'docs/lean_residual_gain_chain.md'
       - 'docs/lean_residual_gain_stopping.md'
       - 'docs/lean_residual_terminal_full_bridge.md'
@@ -540,6 +545,11 @@ on:
       - 'lean-audit/PNPResidualTerminalPacketUnitChargeBlueprintRealizerAxiomAudit.lean'
       - 'lean-regression/PNPResidualTerminalPacketUnitChargeBlueprintRealizer.lean'
       - 'docs/lean_residual_terminal_packet_unit_charge_blueprint_realizer.md'
+      - 'audits/lean-residual-terminal-packet-typed-realizer-contract0.test.mjs'
+      - 'lean/PNP/ResidualTerminalPacketTypedRealizerContract.lean'
+      - 'lean-audit/PNPResidualTerminalPacketTypedRealizerContractAxiomAudit.lean'
+      - 'lean-regression/PNPResidualTerminalPacketTypedRealizerContract.lean'
+      - 'docs/lean_residual_terminal_packet_typed_realizer_contract.md'
       - 'docs/lean_residual_gain_chain.md'
       - 'docs/lean_residual_gain_stopping.md'
       - 'docs/lean_residual_terminal_full_bridge.md'
@@ -3709,3 +3719,29 @@ jobs:
 
       - name: Run checked Packet unit-charge blueprint realizer hostile audit
         run: node --test audits/lean-residual-terminal-packet-unit-charge-blueprint-realizer0.test.mjs
+
+      - name: Print checked Packet typed-realizer contract axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketTypedRealizerContractAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketTypedRealizerContractAxiomAudit.lean)"
+          test "$expected_count" -gt 0
+          test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected checked Packet typed-realizer contract axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -Eq 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            printf '%s\n' "$normalized" >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
+
+      - name: Run checked Packet typed-realizer contract regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketTypedRealizerContract.lean
+
+      - name: Run checked Packet typed-realizer contract hostile audit
+        run: node --test audits/lean-residual-terminal-packet-typed-realizer-contract0.test.mjs

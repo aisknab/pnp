@@ -1,0 +1,22 @@
+import PNP.ResidualTerminalPacketTypedRealizerContract
+
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerEnvironment
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerBot
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerBot.Valid
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerBot.check
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerBot.check_eq_true_iff
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerClaim
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerClaim.Valid
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerClaim.check
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerClaim.check_eq_true_iff
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerClaim.Sound
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerEvidence
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerClaim.evidenceOfCheck
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerEvidence.sound
+#print axioms PNP.DirectWire.checkTerminalPacketFaithfulRealizerClaims
+#print axioms PNP.DirectWire.checkTerminalPacketFaithfulRealizerClaims_handle
+#print axioms PNP.DirectWire.checkTerminalPacketFaithfulRealizerClaims_sound
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerTable
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerTable.checkFaithful
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerTable.checkFaithful_handle
+#print axioms PNP.DirectWire.terminalBN6_packet_typed_realizer_contract

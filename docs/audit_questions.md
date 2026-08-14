@@ -616,6 +616,17 @@ Every positive packet has a representative in the polynomial selector universe; 
   payload atom. The blueprints and family remain inputs, and its unresolved
   branch is only supplied-family validator silence, not a typed blocker,
   global no-gain theorem, or ZeroSlack.
+- The checked Packet typed-realizer contract is witnessed by
+  `PNP.DirectWire.TerminalPacketTypedRealizerBot.check_eq_true_iff`,
+  `PNP.DirectWire.TerminalPacketTypedRealizerEvidence.sound`, and
+  `PNP.DirectWire.terminalBN6_packet_typed_realizer_contract`, which validate
+  arbitrary finite data-only faithful-selector tables. Accepted rows are only
+  checked blueprint gains, active same-or-lower-rank HN bots, active
+  same-or-lower-rank budget bots, or faithful strictly lower-rank seed bots.
+  Canonical-family coverage uses every input-relative handle. The ranks,
+  faithfulness predicate, claims, and activity tables remain inputs; this is
+  not blocker construction, HB closure, global selector silence, or a
+  polynomial completeness theorem.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -639,8 +650,13 @@ Every positive packet has a representative in the polynomial selector universe; 
    unmatched remainder, and change semantics; require validator rejection.
    Check that the exhaustive result ranges over every canonical handle but does
    not promote family-local rejection to a typed blocker or ZeroSlack.
-7. Inspect every typed bottom reason and verify rank nonincrease or strict tie-break descent.
-8. Build the complete HN/BUD blocker graph and run an independent cycle check.
+7. Mutate the typed realizer table by deactivating a named HN or budget row,
+   increasing its rank, making a lower seed nonfaithful, or making its rank
+   equal to the current rank; require rejection. Confirm that every faithful
+   canonical handle is checked and that nonfaithful rows alone may be ignored.
+8. Inspect every accepted typed bottom reason and verify rank nonincrease or
+   strict seed-rank descent.
+9. Build the complete HN/BUD blocker graph and run an independent cycle check.
 
 **What would count as a refutation or material defect**
 
@@ -650,6 +666,9 @@ Every positive packet has a representative in the polynomial selector universe; 
   or one that reuses a support occurrence through duplicate values.
 - A unit-charge blueprint accepted with an omitted or duplicated gate
   occurrence, an empty unmatched remainder, or inequivalent semantics.
+- A faithful typed-realizer row accepted with inactive HN/BUD evidence, a
+  rank-increasing blocker, a nonfaithful or nondecreasing seed, or an untyped
+  failure.
 - A cycle in the HN/BUD blocker graph.
 - A selector universe or payload family that grows super-polynomially.
 - A strict equivalent gain absent from a claimed gain-coverage certificate.

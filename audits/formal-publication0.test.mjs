@@ -172,6 +172,17 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /blueprints.*remain explicit inputs/iu);
   assert.match(unitChargeRealizer.nonClaim,
     /not BotHN, BotBUD, a lower-rank BotSeed/u);
+  const typedRealizer = byId.get(
+    'residual-terminal-packet-typed-realizer-contract');
+  assert.equal(typedRealizer.status,
+    'formalized-residual-terminal-packet-typed-realizer-contract');
+  assert.equal(typedRealizer.earned, true);
+  assert.equal(typedRealizer.requiredTheorems.length, 5);
+  assert.match(typedRealizer.scope, /active same-or-lower-rank HN bot/u);
+  assert.match(typedRealizer.scope, /every canonical input-relative Packet handle/u);
+  assert.match(typedRealizer.nonClaim,
+    /rank assignment.*remain explicit inputs/iu);
+  assert.match(typedRealizer.nonClaim, /does not.*HB acyclicity/iu);
   assert.equal(byId.get('concrete-machine-cost-kernel').status, 'formalized-foundation-only');
   assert.equal(byId.get('concrete-cnf-universal-verifier').status,
     'formalized-np-membership-only');
