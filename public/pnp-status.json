@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-15-146",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-15-147",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -899,6 +899,9 @@
   "leanResidualTerminalHBBlockerGraphAcyclicityFormalized": true,
   "leanResidualTerminalHBBlockerGraphAcyclicityAxiomAuditPassed": true,
   "leanResidualTerminalHBBlockerGraphAcyclicityScope": "all-arbitrary-finite-hn-budget-data-edge-graphs-exhaustive-finite-to-exact-rank-embedding-strict-edge-descent-well-foundedness-and-no-directed-cycle",
+  "leanResidualTerminalHBDependencyTableClosureFormalized": true,
+  "leanResidualTerminalHBDependencyTableClosureAxiomAuditPassed": true,
+  "leanResidualTerminalHBDependencyTableClosureScope": "all-arbitrary-finite-hn-budget-total-dependency-tables-exact-row-to-edge-coverage-strict-exact-rank-descent-well-founded-induction-and-no-directed-cycle",
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -1434,6 +1437,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHBBlockerGraphAcyclicityAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHBBlockerGraphAcyclicity.lean",
     "node --test audits/lean-residual-terminal-hb-blocker-graph-acyclicity0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHBDependencyTableClosureAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHBDependencyTableClosure.lean",
+    "node --test audits/lean-residual-terminal-hb-dependency-table-closure0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1464,6 +1470,7 @@
     "The checked Packet unit-charge blueprint realizer derives canonical gate-occurrence ledgers, strict charge surplus, and a genuine gain only after a constructive exact-multiplicity validator accepts one supplied data-only blueprint and semantic equivalence. It scans every original blueprint atom behind every canonical handle in one supplied family. The blueprints and family remain explicit; unresolved means only supplied-family validator silence, not BotHN, BotBUD, a lower-rank BotSeed, global no-gain, ZeroSlack, or polynomial realizer completeness.",
     "The checked Packet typed-realizer contract validates every faithful row in an arbitrary finite supplied selector table as only a checked unit-charge gain, active same-or-lower-rank HN bot, active same-or-lower-rank budget bot, or faithful strictly lower-rank seed bot; its grouped-family specialization covers every canonical handle. The rank assignment, faithfulness predicate, claims, and activity tables remain inputs, so this does not construct blockers, prove their semantics or HB acyclicity, establish global selector silence, ZeroSlack, or polynomial realizer completeness.",
     "The checked HB blocker-graph acyclicity contract exhaustively validates a supplied finite-index embedding into the exact ten-coordinate residual rank and every supplied HN/BUD dependency edge, deriving well-foundedness and excluding every nonempty directed cycle. The graph, edges, rank mapping, blocker semantics, and dependency completeness remain inputs or open obligations; this is not the full HB negative closure, rank-complete selector silence, ZeroSlack, or polynomial PCCMin.",
+    "The checked total-table HB dependency contract assigns every finite HN/BUD node one data-only row and materializes every listed dependency as a graph edge, deriving exact representation coverage, well-founded rank induction, and cycle exclusion. The table, rank mapping, and local invariant premise remain inputs; this does not prove blocker semantics or semantic dependency completeness, silence an active blocker, establish the full HB negative closure, rank-complete selector silence, ZeroSlack, or polynomial PCCMin.",
     "The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.",
     "The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.",
     "Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.",
@@ -1622,7 +1629,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "2220e0ceef3fdaaf0ca74bf591b45d39666e5801a830b186c5ed3e1ab0d4b662",
+    "actualSourceClosureSha256": "e33c230b5da2e29405b7c69438ecfbace8d66735d5343d63be9bd5316431dbdf",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1652,22 +1659,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-15-146",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-15-147",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "2dc8b59a739778899103da0bb30c43b29319a70da2944f41c25fc76d30a2185b",
+  "leanTheoremInventorySha256": "989d6747a0d2516aff118fb976f1cde5b0cf549cb925188ed5a0afe453bac1be",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 28673,
+  "leanTheoremInventoryDeclarationCount": 28720,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 15047,
-  "leanTheoremInventoryTheoremCount": 14786,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 7452,
-  "leanTheoremInventorySourceClosureModuleCount": 263,
-  "leanSourceClosureSha256": "2220e0ceef3fdaaf0ca74bf591b45d39666e5801a830b186c5ed3e1ab0d4b662",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-15-146",
+  "leanTheoremInventoryTheoremCount": 14811,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 7460,
+  "leanTheoremInventorySourceClosureModuleCount": 264,
+  "leanSourceClosureSha256": "e33c230b5da2e29405b7c69438ecfbace8d66735d5343d63be9bd5316431dbdf",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-15-147",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "ef54168ede6cd460f1f00485cedc205d9fd77890845722fd729044efd60f2103",
+  "formalPublicationMapSha256": "f20395f94e594e690fbba19eabb06c59c7571230a9516faad255ddd9799e8eb6",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -39940,6 +39947,167 @@
       "status": "formalized-residual-terminal-hb-blocker-graph-acyclicity"
     },
     {
+      "classification": "formalized-residual-terminal-hb-dependency-table-closure",
+      "id": "residual-terminal-hb-dependency-table-closure",
+      "nonClaim": "The dependency table, finite-to-exact rank mapping, selector family, faithfulness predicate, blocker activity tables, and realizer claims remain explicit inputs. Total table coverage means only that every finite HN/BUD node has a row and every dependency listed in that row becomes a graph edge. It does not prove blocker semantics, semantic dependency completeness relative to terminal data, or the local invariant premise needed by generic rank induction. It does not establish selector compatibility, rank-complete selector silence, the full HB.NegativeClosure theorem, unconditional ZeroSlack, PCCMin, encoded-size or polynomial-runtime bounds, SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.mem_allTerminalPacketHBNodes",
+        "PNP.DirectWire.TerminalPacketHBDependencyTable.edge_mem_toGraph_iff",
+        "PNP.DirectWire.TerminalPacketHBDependencyTable.toGraph_depends_iff",
+        "PNP.DirectWire.TerminalPacketHBDependencyTable.rowCovered",
+        "PNP.DirectWire.TerminalPacketHBDependencyTable.check_eq_true_iff",
+        "PNP.DirectWire.TerminalPacketHBDependencyTable.depends_rank_lt",
+        "PNP.DirectWire.TerminalPacketHBDependencyTable.depends_wellFounded",
+        "PNP.DirectWire.TerminalPacketHBDependencyTable.depends_induction",
+        "PNP.DirectWire.TerminalPacketHBDependencyTable.noCycle",
+        "PNP.DirectWire.TerminalPacketTypedRealizerEvidence.hbTableSound",
+        "PNP.DirectWire.terminalBN6_packet_typed_realizer_hb_dependency_table_closure_contract"
+      ],
+      "scope": "For every arbitrary finite rank carrier, Lean enumerates all HN and budget nodes, assigns each node one total data-only dependency row, and materializes the graph mechanically from all rows without accepting a second edge list. The checker exhaustively validates the finite-to-exact ten-coordinate rank embedding and strict exact-rank descent for every row dependency. Acceptance proves exact row-to-edge coverage, accessibility, well-founded rank induction for arbitrary predicates with an explicit local premise, absence of every nonempty dependency cycle, covered HN/BUD bot rows, and exact-rank descent for lower seeds.",
+      "title": "Checked total-table HB dependency closure",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.mem_allTerminalPacketHBNodes",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "88fdba9d4e6db862d111ec9c71deb2d8c03db04ddfb07cfeadca7d76da8fb089",
+          "expectedKernelTypeSha256": "88fdba9d4e6db862d111ec9c71deb2d8c03db04ddfb07cfeadca7d76da8fb089",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketHBDependencyTable.edge_mem_toGraph_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7b4e6910383a38eaffdcfbe78d9d5b1ac8f7d7cac7fd24abd344ee878e440171",
+          "expectedKernelTypeSha256": "7b4e6910383a38eaffdcfbe78d9d5b1ac8f7d7cac7fd24abd344ee878e440171",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketHBDependencyTable.toGraph_depends_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ac6d0fe0e870fce5eeb4414f72b0731d4ef293f1337ff9e367d410d28c6f6d1b",
+          "expectedKernelTypeSha256": "ac6d0fe0e870fce5eeb4414f72b0731d4ef293f1337ff9e367d410d28c6f6d1b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketHBDependencyTable.rowCovered",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "84f713c3ad8330c2cad27d49060815a8b109e098d4c46abee74dc0bc18572f64",
+          "expectedKernelTypeSha256": "84f713c3ad8330c2cad27d49060815a8b109e098d4c46abee74dc0bc18572f64",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketHBDependencyTable.check_eq_true_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "04cf8fba733851458892e17a260dc84cd690e6e027c88d4380ca33606ceca335",
+          "expectedKernelTypeSha256": "04cf8fba733851458892e17a260dc84cd690e6e027c88d4380ca33606ceca335",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketHBDependencyTable.depends_rank_lt",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e649f2ea9b1458a21069742edf61e527f166463ee756ad561cf23d243dbf1af6",
+          "expectedKernelTypeSha256": "e649f2ea9b1458a21069742edf61e527f166463ee756ad561cf23d243dbf1af6",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketHBDependencyTable.depends_wellFounded",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4414385e70cab392dfa85c0ec08c2c1f621530d5a227ce791eea8b8b750c7161",
+          "expectedKernelTypeSha256": "4414385e70cab392dfa85c0ec08c2c1f621530d5a227ce791eea8b8b750c7161",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketHBDependencyTable.depends_induction",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "43e488bde4020096ebb22635d00be0716f1b8b8552d24bd1930be5fb55021543",
+          "expectedKernelTypeSha256": "43e488bde4020096ebb22635d00be0716f1b8b8552d24bd1930be5fb55021543",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketHBDependencyTable.noCycle",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "088c0ae7b22b89383e259db7a939a1b93fa921e1c26c6bb30b607b1fc93697ff",
+          "expectedKernelTypeSha256": "088c0ae7b22b89383e259db7a939a1b93fa921e1c26c6bb30b607b1fc93697ff",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketTypedRealizerEvidence.hbTableSound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f78565e502500f88f1a1cfe2e53d8d70c78d06a37b4dad0af58b8cc815a7114d",
+          "expectedKernelTypeSha256": "f78565e502500f88f1a1cfe2e53d8d70c78d06a37b4dad0af58b8cc815a7114d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBN6_packet_typed_realizer_hb_dependency_table_closure_contract",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b8fa8701e2a8fabfbc70d83069fd54b8732e8aa670ab86992ef6c03c3bebc31a",
+          "expectedKernelTypeSha256": "b8fa8701e2a8fabfbc70d83069fd54b8732e8aa670ab86992ef6c03c3bebc31a",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-hb-dependency-table-closure"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -39973,7 +40141,7 @@
     {
       "classification": "not-formalized",
       "id": "global-zeroslack-pccmin",
-      "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; the exhaustive Packet scan verifies strict gains or exact no-gain over every canonical selector in one supplied explicit grouped family; an explicit global gain-coverage certificate conditionally upgrades that silence to a proof-bearing ZeroSlack result; the generic finite R-ChargeSurplus kernel derives strict gain from exact ledgers, an unmatched positive support charge, exact gate accounting, and separately proved semantics; the checked unit-charge blueprint realizer derives canonical ledgers and gains for every valid blueprint in one supplied family; the checked typed-realizer contract rejects every faithful-table row except a genuine blueprint gain or an explicitly active bounded-rank HN, budget, or strictly lower faithful seed bot; and the checked exact-rank HB graph contract validates every edge in a supplied finite HN/BUD dependency graph and excludes all nonempty directed cycles in that graph. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, replacement blueprints, occurrence pairing, gain-coverage certificate, rank assignment, faithfulness predicate, or blocker tables from terminal data; connect matching back to a contradiction; prove blocker semantics, dependency completeness, or coverage of every active blocker row; map all residual routes into a decreasing complete global outcome system; or provide selector faithfulness, compatible realizer, global silence, and polynomial-runtime completeness. Global unconditional ZeroSlack and polynomial PCCMin therefore remain unformalized.",
+      "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; the exhaustive Packet scan verifies strict gains or exact no-gain over every canonical selector in one supplied explicit grouped family; an explicit global gain-coverage certificate conditionally upgrades that silence to a proof-bearing ZeroSlack result; the generic finite R-ChargeSurplus kernel derives strict gain from exact ledgers, an unmatched positive support charge, exact gate accounting, and separately proved semantics; the checked unit-charge blueprint realizer derives canonical ledgers and gains for every valid blueprint in one supplied family; the checked typed-realizer contract rejects every faithful-table row except a genuine blueprint gain or an explicitly active bounded-rank HN, budget, or strictly lower faithful seed bot; the checked exact-rank HB graph contract validates every edge in a supplied finite HN/BUD dependency graph; and the checked total-table HB contract gives every finite HN/BUD node one row, materializes every listed dependency as an edge, and derives well-founded induction and cycle exclusion for that supplied table. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, replacement blueprints, occurrence pairing, gain-coverage certificate, rank assignment, faithfulness predicate, or blocker tables from terminal data; connect matching back to a contradiction; prove blocker semantics, semantic dependency completeness, or the local invariant needed to silence active blocker rows; map all residual routes into a decreasing complete global outcome system; or provide selector faithfulness, compatible realizer, global silence, and polynomial-runtime completeness. Global unconditional ZeroSlack and polynomial PCCMin therefore remain unformalized.",
       "requiredTheorems": [
         "PNP.Main.pccmin_polynomial_exact",
         "PNP.Main.zero_slack_complete"
@@ -40037,7 +40205,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-15-146",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-15-147",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

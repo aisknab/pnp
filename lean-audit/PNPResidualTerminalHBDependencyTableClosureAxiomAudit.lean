@@ -1,0 +1,23 @@
+import PNP.ResidualTerminalHBDependencyTableClosure
+
+#print axioms PNP.DirectWire.allTerminalPacketHBNodes
+#print axioms PNP.DirectWire.mem_allTerminalPacketHBNodes
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyTable
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyTable.exactRank
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyTable.toGraph
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyTable.Depends
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyTable.edge_mem_toGraph_iff
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyTable.toGraph_depends_iff
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyTable.RowCovered
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyTable.rowCovered
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyTable.Valid
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyTable.check
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyTable.check_eq_true_iff
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyTable.depends_rank_lt
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyTable.depends_wellFounded
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyTable.depends_accessible
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyTable.depends_induction
+#print axioms PNP.DirectWire.TerminalPacketHBDependencyTable.noCycle
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerClaim.HBTableSound
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerEvidence.hbTableSound
+#print axioms PNP.DirectWire.terminalBN6_packet_typed_realizer_hb_dependency_table_closure_contract
