@@ -1130,6 +1130,18 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalHBSelectorSilenceClosureScope,
     'all-arbitrary-finite-canonical-selector-tables-explicit-global-semantic-gain-exclusion-checked-hn-budget-inactivity-strong-rank-induction-and-rank-complete-selector-silence',
   );
+  assert.equal(
+    out.leanResidualTerminalHBExecutableSelectorSilenceInductionFormalized,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalHBExecutableSelectorSilenceInductionAxiomAuditPassed,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalHBExecutableSelectorSilenceInductionScope,
+    'all-arbitrary-finite-canonical-selector-tables-executable-all-row-selector-silence-checked-hn-budget-inactivity-strong-rank-induction-without-global-semantic-no-gain',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',

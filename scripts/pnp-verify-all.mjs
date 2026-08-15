@@ -157,6 +157,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-residual-terminal-hb-dependency-table-closure0.test.mjs',
   'audits/lean-residual-terminal-hb-active-dependency-closure0.test.mjs',
   'audits/lean-residual-terminal-hb-selector-silence-closure0.test.mjs',
+  'audits/lean-residual-terminal-hb-executable-selector-silence-induction0.test.mjs',
   'audits/legacy-v0-archive0.test.mjs',
   'test/current-package-surface0.test.mjs',
   'test/current-verifier0.test.mjs',

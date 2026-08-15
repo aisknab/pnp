@@ -1802,6 +1802,19 @@ unconditional `HB.NegativeClosure`, ZeroSlack, PCCMin, polynomial runtime, SAT
 in P, or P = NP. See
 [`lean_residual_terminal_hb_selector_silence_closure.md`](./lean_residual_terminal_hb_selector_silence_closure.md).
 
+`ResidualTerminalHBExecutableSelectorSilenceInduction` now reconstructs the
+executable selector-silence induction itself. Instead of accepting the prior
+global semantic no-gain premise, its checker scans every canonical handle and
+requires every recorded realizer claim to be a typed bottom. Checked HB closure
+eliminates HN/BUD bottoms, and strong finite-rank induction eliminates faithful
+lower seeds. The grouped family, rank and faithfulness functions, claims,
+activity functions, dependency rows, and rank map remain explicit data inputs.
+The result does not construct them from terminal data, establish selector
+faithfulness or compatibility, prove blocker semantics or semantic dependency
+completeness, close the full unconditional `HB.NegativeClosure` or ZeroSlack,
+or provide polynomial bounds. See
+[`lean_residual_terminal_hb_executable_selector_silence_induction.md`](./lean_residual_terminal_hb_executable_selector_silence_induction.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:
