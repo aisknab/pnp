@@ -649,6 +649,19 @@ Every positive packet has a representative in the polynomial selector universe; 
   and cycle exclusion for the supplied table. It does not prove blocker
   semantics, semantic dependency completeness relative to terminal data, or
   the local invariant needed for selector silence.
+- The checked HB active-dependency closure is witnessed by
+  `PNP.DirectWire.TerminalPacketHBDependencyTable.checkActiveDependencyClosed_eq_true_iff`,
+  `PNP.DirectWire.TerminalPacketHBDependencyTable.noActive_of_noOutcomeActiveClosure`,
+  `PNP.DirectWire.TerminalPacketTypedRealizerEvidence.hbActiveClosureSound`,
+  and
+  `PNP.DirectWire.terminalBN6_packet_typed_realizer_hb_active_dependency_closure_contract`.
+  It exhaustively checks the local supplied-table condition that every active
+  HN/BUD node has an active row dependency. Combined with strict exact-rank
+  descent, well-founded induction proves every supplied activity bit false and
+  eliminates HN/BUD typed bots. It does not derive blocker activity, blocker
+  semantics, or semantic dependency completeness from terminal data, and it
+  leaves gain and lower-seed branches open; this is not rank-complete selector
+  silence or the full HB negative closure.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -679,6 +692,10 @@ Every positive packet has a representative in the polynomial selector universe; 
 8. Inspect every accepted typed bottom reason and verify rank nonincrease or
    strict seed-rank descent.
 9. Build the complete HN/BUD blocker graph and run an independent cycle check.
+10. Mutate the active-dependency table with a dangling active node, an inactive
+    dependency, a descending chain ending at an active base, and an active
+    cycle. Require local or exact-rank rejection as applicable, then confirm
+    that combined acceptance proves every supplied HN/BUD activity bit false.
 
 **What would count as a refutation or material defect**
 

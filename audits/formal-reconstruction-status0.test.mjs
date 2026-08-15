@@ -1106,6 +1106,18 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalPacketSelectorUniverseGainScanScope,
     'all-finite-explicit-bn6-grouped-families-exhaustive-canonical-selector-scan-with-checked-strict-gain-or-family-local-no-gain-and-packet-branch-preservation',
   );
+  assert.equal(
+    out.leanResidualTerminalHBActiveDependencyClosureFormalized,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalHBActiveDependencyClosureAxiomAuditPassed,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalHBActiveDependencyClosureScope,
+    'all-arbitrary-finite-hn-budget-total-tables-exhaustive-active-dependency-local-closure-exact-rank-induction-all-node-blocker-silence-and-gain-or-lower-seed-composition',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',

@@ -1769,6 +1769,23 @@ silence, the full `HB.NegativeClosure`, polynomial generation/runtime,
 unconditional ZeroSlack, PCCMin, SAT in P, or P = NP. See
 [`lean_residual_terminal_hb_dependency_table_closure.md`](./lean_residual_terminal_hb_dependency_table_closure.md).
 
+`ResidualTerminalHBActiveDependencyClosure` now reconstructs the manuscript's
+next checked HB active-dependency closure over that total table. Activity for an HN or
+budget node is projected directly from the existing typed-realizer
+environment. An exhaustive Boolean scan requires every active node to name an
+active dependency in its own row, while the preceding table checker requires
+every such dependency to descend the exact ten-coordinate rank. Well-founded
+induction then proves every supplied HN/BUD activity bit false. Composition
+with the checked typed-realizer evidence eliminates HN and budget bot branches,
+leaving only a genuine checked gain or a faithful strictly lower-rank seed.
+The activity bits, dependency rows, rank map, selector family, faithfulness
+predicate, and claims remain explicit inputs. The checker does not derive
+blocker semantics or semantic dependency completeness from terminal data, and
+gain/lower-seed closure remains open. The result therefore is not
+rank-complete selector silence, the full `HB.NegativeClosure`, polynomial
+generation/runtime, unconditional ZeroSlack, PCCMin, SAT in P, or P = NP. See
+[`lean_residual_terminal_hb_active_dependency_closure.md`](./lean_residual_terminal_hb_active_dependency_closure.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

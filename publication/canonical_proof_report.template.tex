@@ -714,6 +714,20 @@ does not prove blocker semantics, semantic dependency completeness relative to
 terminal data, rank-complete selector silence, the full HB negative closure,
 unconditional ZeroSlack, polynomial PCCMin, SAT in P, or \(P=NP\).
 
+The checked HB active-dependency closure now supplies the local no-outcome step
+for those explicit tables. It projects HN/BUD activity directly from the
+typed-realizer environment and exhaustively requires every active node to name
+an active dependency in its own total row. The combined checker also requires
+the prior exact-rank table check. Well-founded induction therefore proves every
+supplied HN and budget activity bit false. Typed-realizer composition removes
+the HN/BUD bot branches and leaves only a verified strict gain or a faithful
+strictly lower-rank seed. The activity bits, dependency rows, rank mapping,
+selector data, and claims remain explicit inputs; blocker semantics and
+semantic dependency completeness are not derived from terminal data. Gain
+exclusion, lower-seed closure, rank-complete selector silence, the full HB
+negative closure, unconditional ZeroSlack, polynomial PCCMin, SAT in P, and
+\(P=NP\) remain open.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule
