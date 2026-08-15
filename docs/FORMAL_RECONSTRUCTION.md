@@ -1749,6 +1749,26 @@ selector silence or the full `HB.NegativeClosure`, establish polynomial
 generation/runtime, or complete ZeroSlack, PCCMin, SAT in P, or P = NP. See
 [`lean_residual_terminal_hb_blocker_graph_acyclicity.md`](./lean_residual_terminal_hb_blocker_graph_acyclicity.md).
 
+`ResidualTerminalHBDependencyTableClosure` reconstructs the checked
+total-table HB dependency boundary and removes the independent edge-list input
+from the prior finite graph. It enumerates every HN and budget node at
+every supplied finite rank and assigns each node one total data-only
+dependency row. The graph is materialized mechanically from every row, so an
+edge occurs exactly when its dependency occurs in the corresponding row. The
+checker exhaustively validates the finite-to-exact rank embedding and strict
+exact-rank descent for every listed dependency. Lean derives exact row
+coverage, accessibility, well-foundedness, generic rank induction, and absence
+of every nonempty cycle. Composition with the Packet typed-realizer contract
+adds covered rows to HN and budget bots and exact-rank descent to lower seeds.
+The dependency table, rank mapping, and local induction premise remain
+explicit. Exact representation coverage does not prove blocker semantics or
+semantic dependency completeness relative to terminal data, and generic
+induction does not silence an active blocker without the missing local
+invariant. The result therefore does not establish rank-complete selector
+silence, the full `HB.NegativeClosure`, polynomial generation/runtime,
+unconditional ZeroSlack, PCCMin, SAT in P, or P = NP. See
+[`lean_residual_terminal_hb_dependency_table_closure.md`](./lean_residual_terminal_hb_dependency_table_closure.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

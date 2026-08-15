@@ -638,6 +638,17 @@ Every positive packet has a representative in the polynomial selector universe; 
   The graph, edge completeness, rank mapping, and blocker semantics remain
   inputs or open obligations, so this is not the full HB negative closure or
   rank-complete selector silence.
+- The checked total-table HB dependency boundary is witnessed by
+  `PNP.DirectWire.TerminalPacketHBDependencyTable.edge_mem_toGraph_iff`,
+  `PNP.DirectWire.TerminalPacketHBDependencyTable.check_eq_true_iff`,
+  `PNP.DirectWire.TerminalPacketHBDependencyTable.depends_induction`, and
+  `PNP.DirectWire.terminalBN6_packet_typed_realizer_hb_dependency_table_closure_contract`.
+  It assigns every finite HN/BUD node one row and materializes all graph edges
+  from those rows, then checks strict exact-rank descent for every listed
+  dependency. This proves representation coverage, well-founded induction,
+  and cycle exclusion for the supplied table. It does not prove blocker
+  semantics, semantic dependency completeness relative to terminal data, or
+  the local invariant needed for selector silence.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.

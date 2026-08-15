@@ -275,6 +275,19 @@ dependency completeness, and blocker semantics remain supplied or open; this
 is not rank-complete selector silence, the full HB negative closure,
 unconditional ZeroSlack, or a polynomial bound.
 
+The checked total-table HB dependency boundary removes the graph's separate
+edge-list input. Every HN and budget node at every finite rank has one total
+data-only dependency row, and the graph is materialized mechanically from all
+rows. Exact theorems identify graph edges with row membership in both
+directions. The checker verifies every listed dependency against the existing
+ten-coordinate rank, yielding accessibility, well-founded induction for any
+predicate with an explicit local step, and exclusion of every nonempty cycle.
+HN and budget typed bots now name covered rows, while lower seeds inherit
+exact-rank descent. The table and local step remain inputs. This closes finite
+representation omissions only, not blocker semantics or semantic dependency
+completeness from terminal data, so it is not rank-complete selector silence,
+the full HB negative closure, unconditional ZeroSlack, or a polynomial bound.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

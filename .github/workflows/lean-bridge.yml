@@ -224,6 +224,11 @@ on:
       - 'lean-audit/PNPResidualTerminalHBBlockerGraphAcyclicityAxiomAudit.lean'
       - 'lean-regression/PNPResidualTerminalHBBlockerGraphAcyclicity.lean'
       - 'docs/lean_residual_terminal_hb_blocker_graph_acyclicity.md'
+      - 'audits/lean-residual-terminal-hb-dependency-table-closure0.test.mjs'
+      - 'lean/PNP/ResidualTerminalHBDependencyTableClosure.lean'
+      - 'lean-audit/PNPResidualTerminalHBDependencyTableClosureAxiomAudit.lean'
+      - 'lean-regression/PNPResidualTerminalHBDependencyTableClosure.lean'
+      - 'docs/lean_residual_terminal_hb_dependency_table_closure.md'
       - 'docs/lean_residual_gain_chain.md'
       - 'docs/lean_residual_gain_stopping.md'
       - 'docs/lean_residual_terminal_full_bridge.md'
@@ -560,6 +565,11 @@ on:
       - 'lean-audit/PNPResidualTerminalHBBlockerGraphAcyclicityAxiomAudit.lean'
       - 'lean-regression/PNPResidualTerminalHBBlockerGraphAcyclicity.lean'
       - 'docs/lean_residual_terminal_hb_blocker_graph_acyclicity.md'
+      - 'audits/lean-residual-terminal-hb-dependency-table-closure0.test.mjs'
+      - 'lean/PNP/ResidualTerminalHBDependencyTableClosure.lean'
+      - 'lean-audit/PNPResidualTerminalHBDependencyTableClosureAxiomAudit.lean'
+      - 'lean-regression/PNPResidualTerminalHBDependencyTableClosure.lean'
+      - 'docs/lean_residual_terminal_hb_dependency_table_closure.md'
       - 'docs/lean_residual_gain_chain.md'
       - 'docs/lean_residual_gain_stopping.md'
       - 'docs/lean_residual_terminal_full_bridge.md'
@@ -3781,3 +3791,29 @@ jobs:
 
       - name: Run checked HB blocker-graph acyclicity hostile audit
         run: node --test audits/lean-residual-terminal-hb-blocker-graph-acyclicity0.test.mjs
+
+      - name: Print checked total-table HB dependency closure axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHBDependencyTableClosureAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalHBDependencyTableClosureAxiomAudit.lean)"
+          test "$expected_count" -gt 0
+          test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected checked total-table HB dependency closure axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -Eq 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            printf '%s\n' "$normalized" >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
+
+      - name: Run checked total-table HB dependency closure regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHBDependencyTableClosure.lean
+
+      - name: Run checked total-table HB dependency closure hostile audit
+        run: node --test audits/lean-residual-terminal-hb-dependency-table-closure0.test.mjs
