@@ -2699,6 +2699,25 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /semantic dependency completeness/u);
   assert.match(terminalHBActiveDependencyClosure.nonClaim,
     /does not establish.*gain exclusion.*lower-seed closure/u);
+  const terminalHBSelectorSilenceClosure = byId.get(
+    'residual-terminal-hb-selector-silence-closure',
+  );
+  assert.equal(terminalHBSelectorSilenceClosure.status,
+    'formalized-residual-terminal-hb-selector-silence-closure');
+  assert.equal(terminalHBSelectorSilenceClosure.earned, true);
+  assert.equal(
+    terminalHBSelectorSilenceClosure.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.equal(terminalHBSelectorSilenceClosure.requiredTheorems.length, 4);
+  assert.match(terminalHBSelectorSilenceClosure.scope,
+    /every canonical selector.*nonfaithful/u);
+  assert.match(terminalHBSelectorSilenceClosure.scope,
+    /semantic exclusion of every strict equivalent gain/u);
+  assert.match(terminalHBSelectorSilenceClosure.nonClaim,
+    /explicit proof-bearing premise/u);
+  assert.match(terminalHBSelectorSilenceClosure.nonClaim,
+    /does not establish selector faithfulness or compatibility/u);
   const lockedNANDThreshold = byId.get('global-locked-nand-threshold');
   assert.equal(lockedNANDThreshold.status,
     'formalized-concrete-locked-nand-threshold');

@@ -300,6 +300,16 @@ not derived from terminal data. Gain exclusion, lower-seed closure,
 rank-complete selector silence, the full HB negative closure, unconditional
 ZeroSlack, and polynomial bounds remain open.
 
+The conditional selector-silence rank closure now consumes explicit global
+semantic gain exclusion after checked HB inactivity. An accepted faithful row
+can then name only a faithful strictly lower-rank selector, and strong induction
+on the supplied finite rank proves every canonical handle nonfaithful. The
+gain-coverage specialization derives global exclusion only from an explicit
+coverage certificate plus exact source-cell no-gain. This does not establish
+selector faithfulness or compatibility, construct the tables or certificate
+from terminal data, prove unconditional HB negative closure or ZeroSlack, or
+provide encoded-size and polynomial-runtime bounds.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its
@@ -330,8 +340,10 @@ positive residual slack
 => supplied unit-charge replacement blueprint validated constructively across every canonical handle (formalized; blueprint construction open)
 => replacement strict equivalent gain (formalized from validated occurrence accounting and semantics) or typed blocker (typed finite contract formalized)
 => supplied HN/BUD active-dependency closure forces blocker inactivity (formalized for checked tables)
-=> verified gain exclusion and lower-seed rank closure (open)
-=> rank-complete selector silence (open)
+=> explicit global semantic gain exclusion (supplied premise; coverage specialization formalized)
+=> faithful lower-seed strong rank induction and supplied-table selector-silence rank closure (formalized conditionally)
+=> selector faithfulness or compatibility and terminal-data construction of the tables and global premise (open)
+=> unconditional rank-complete selector silence (open)
 => ZeroSlack is impossible under positive slack
 ```
 
