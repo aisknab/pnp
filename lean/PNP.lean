@@ -60,6 +60,7 @@ import PNP.ResidualTerminalPacketUnitChargeBlueprintRealizer
 import PNP.ResidualTerminalPacketTypedRealizerContract
 import PNP.ResidualTerminalHBBlockerGraphAcyclicity
 import PNP.ResidualTerminalHBDependencyTableClosure
+import PNP.ResidualTerminalHBActiveDependencyClosure
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine

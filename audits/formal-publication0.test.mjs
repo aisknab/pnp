@@ -2680,6 +2680,25 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /complete canonical executable residual ledger/u);
   assert.match(terminalPkgCAmbientBN4ResidualReduction.nonClaim,
     /does not derive those inputs/u);
+  const terminalHBActiveDependencyClosure = byId.get(
+    'residual-terminal-hb-active-dependency-closure',
+  );
+  assert.equal(terminalHBActiveDependencyClosure.status,
+    'formalized-residual-terminal-hb-active-dependency-closure');
+  assert.equal(terminalHBActiveDependencyClosure.earned, true);
+  assert.equal(
+    terminalHBActiveDependencyClosure.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.equal(terminalHBActiveDependencyClosure.requiredTheorems.length, 7);
+  assert.match(terminalHBActiveDependencyClosure.scope,
+    /every supplied HN and budget activity bit is false/u);
+  assert.match(terminalHBActiveDependencyClosure.scope,
+    /faithful strictly lower-rank seed/u);
+  assert.match(terminalHBActiveDependencyClosure.nonClaim,
+    /semantic dependency completeness/u);
+  assert.match(terminalHBActiveDependencyClosure.nonClaim,
+    /does not establish.*gain exclusion.*lower-seed closure/u);
   const lockedNANDThreshold = byId.get('global-locked-nand-threshold');
   assert.equal(lockedNANDThreshold.status,
     'formalized-concrete-locked-nand-threshold');

@@ -288,6 +288,18 @@ representation omissions only, not blocker semantics or semantic dependency
 completeness from terminal data, so it is not rank-complete selector silence,
 the full HB negative closure, unconditional ZeroSlack, or a polynomial bound.
 
+The checked HB active-dependency closure supplies that structural local step
+for the explicit tables. It projects HN/BUD activity from the typed-realizer
+environment and exhaustively requires every active node to have an active
+dependency in its own total row. Combined with exact-rank descent,
+well-founded induction forces all supplied activity bits false. Typed-realizer
+composition therefore removes HN and budget bots and retains only a verified
+gain or faithful strictly lower-rank seed. The activity and dependency tables
+are still inputs: blocker semantics and semantic dependency completeness are
+not derived from terminal data. Gain exclusion, lower-seed closure,
+rank-complete selector silence, the full HB negative closure, unconditional
+ZeroSlack, and polynomial bounds remain open.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its
@@ -316,8 +328,10 @@ positive residual slack
 => encoded-size-bounded faithful compatible certificate construction (open)
 => exact charge pairing with an unmatched positive support charge (arithmetic implication formalized; witness construction open)
 => supplied unit-charge replacement blueprint validated constructively across every canonical handle (formalized; blueprint construction open)
-=> replacement strict equivalent gain (formalized from validated occurrence accounting and semantics) or typed blocker (open)
-=> blocker/rank contradiction
+=> replacement strict equivalent gain (formalized from validated occurrence accounting and semantics) or typed blocker (typed finite contract formalized)
+=> supplied HN/BUD active-dependency closure forces blocker inactivity (formalized for checked tables)
+=> verified gain exclusion and lower-seed rank closure (open)
+=> rank-complete selector silence (open)
 => ZeroSlack is impossible under positive slack
 ```
 
