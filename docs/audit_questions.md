@@ -662,6 +662,18 @@ Every positive packet has a representative in the polynomial selector universe; 
   semantics, or semantic dependency completeness from terminal data, and it
   leaves gain and lower-seed branches open; this is not rank-complete selector
   silence or the full HB negative closure.
+- The conditional selector-silence rank closure is witnessed by
+  `PNP.DirectWire.TerminalPacketTypedRealizerTable.noFaithful_of_noStrictEquivalentGain`,
+  `PNP.DirectWire.TerminalPacketTypedRealizerTable.noFaithful_of_gainCoverageNoGain`,
+  and the two canonical
+  `terminalBN6_packet_typed_realizer_hb_selector_silence_*_contract`
+  theorems. Checked HN/BUD inactivity plus explicit global semantic gain
+  exclusion leaves only a faithful strictly lower-rank seed; strong induction
+  proves every canonical handle in the accepted supplied table nonfaithful.
+  The coverage specialization still consumes a proof-bearing certificate and
+  source-cell no-gain. It does not establish selector faithfulness or
+  compatibility, construct the sidecars from terminal data, or prove
+  unconditional HB negative closure or ZeroSlack.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -696,6 +708,9 @@ Every positive packet has a representative in the polynomial selector universe; 
     dependency, a descending chain ending at an active base, and an active
     cycle. Require local or exact-rank rejection as applicable, then confirm
     that combined acceptance proves every supplied HN/BUD activity bit false.
+11. Remove the global gain-exclusion premise, weaken strict lower-rank descent,
+    or replace the coverage certificate with ordinary finite scan silence.
+    Require the selector-silence rank closure to fail closed in every case.
 
 **What would count as a refutation or material defect**
 
@@ -711,6 +726,8 @@ Every positive packet has a representative in the polynomial selector universe; 
 - A cycle in the HN/BUD blocker graph.
 - A selector universe or payload family that grows super-polynomially.
 - A strict equivalent gain absent from a claimed gain-coverage certificate.
+- A selector-silence claim that lacks explicit global gain exclusion or uses a
+  non-strict lower-seed rank step.
 
 ---
 

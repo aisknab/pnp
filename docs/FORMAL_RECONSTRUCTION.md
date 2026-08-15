@@ -1786,6 +1786,22 @@ rank-complete selector silence, the full `HB.NegativeClosure`, polynomial
 generation/runtime, unconditional ZeroSlack, PCCMin, SAT in P, or P = NP. See
 [`lean_residual_terminal_hb_active_dependency_closure.md`](./lean_residual_terminal_hb_active_dependency_closure.md).
 
+`ResidualTerminalHBSelectorSilenceClosure` now reconstructs the conditional
+selector-silence rank closure over those accepted supplied tables. Checked HB
+closure removes HN/BUD bots. An explicit global semantic gain exclusion
+premise removes the genuine-gain branch, so any faithful canonical selector
+would require a faithful selector at strictly lower finite rank. Strong
+induction proves every canonical handle in the table nonfaithful. A second
+contract derives global gain exclusion from the existing explicit
+gain-coverage certificate and exact source-cell no-gain evidence. The grouped
+family, ranks, faithfulness predicate, realizer claims, blocker sidecars, and
+global premise or certificate remain inputs. The result does not establish
+selector faithfulness or compatibility, construct those inputs from terminal
+data, prove blocker semantics or semantic dependency completeness, or close
+unconditional `HB.NegativeClosure`, ZeroSlack, PCCMin, polynomial runtime, SAT
+in P, or P = NP. See
+[`lean_residual_terminal_hb_selector_silence_closure.md`](./lean_residual_terminal_hb_selector_silence_closure.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

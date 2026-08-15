@@ -1,0 +1,6 @@
+import PNP.ResidualTerminalHBSelectorSilenceClosure
+
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerTable.noFaithful_of_noStrictEquivalentGain
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerTable.noFaithful_of_gainCoverageNoGain
+#print axioms PNP.DirectWire.terminalBN6_packet_typed_realizer_hb_selector_silence_closure_contract
+#print axioms PNP.DirectWire.terminalBN6_packet_typed_realizer_hb_selector_silence_gain_coverage_contract
