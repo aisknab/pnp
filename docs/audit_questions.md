@@ -686,6 +686,18 @@ Every positive packet has a representative in the polynomial selector universe; 
   rank map remain explicit terminal-relative data; the theorem does not
   construct them from terminal data or prove the full unconditional HB
   negative closure or ZeroSlack.
+- Packet selector-faithfulness routing is witnessed by
+  `PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.check_eq_true_iff`,
+  `PNP.DirectWire.TerminalBN6GroupedFamily.checkPacketSelectorRoutesClear_eq_true_iff`,
+  `PNP.DirectWire.TerminalPacketTypedRealizerTable.checkPacketSelectorFaithfulnessBinding_eq_true_iff`,
+  and
+  `PNP.DirectWire.terminalBN6_packet_selector_faithfulness_hb_contradiction`.
+  It computes faithfulness from the canonical positive source payload, scans
+  every handle, binds the result exactly to the HB table, and contradicts
+  accepted executable selector silence for every positive Packet. Route-clear
+  payload fields, the grouped family, rank tags, HB data, claims, activity, and
+  dependencies remain explicit; positive slack and the terminal-data
+  construction needed for unconditional ZeroSlack remain open.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -728,6 +740,11 @@ Every positive packet has a representative in the polynomial selector universe; 
     the accepted scan, omit one canonical handle, bypass faithful-row checking,
     weaken lower-seed descent, or bypass checked HB closure. Require rejection
     in every case without reintroducing a global no-gain premise.
+13. For Packet selector-faithfulness routing, flip each payload field in turn,
+    alter its finite rank tag, omit a canonical handle, change the first-route
+    priority, or decouple the HB faithfulness bit from the computed payload.
+    Require rejection before composing the positive Packet with selector
+    silence.
 
 **What would count as a refutation or material defect**
 
@@ -746,6 +763,9 @@ Every positive packet has a representative in the polynomial selector universe; 
 - A selector-silence claim that neither exhaustively checks typed-bottom claims
   nor supplies explicit global gain exclusion, or that uses a non-strict
   lower-seed rank step.
+- A positive Packet accepted as route-clear without every canonical payload
+  field and exact rank being checked, or an HB table whose faithfulness bits are
+  not exactly bound to those computed results.
 
 ---
 

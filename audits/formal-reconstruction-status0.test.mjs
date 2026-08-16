@@ -1142,6 +1142,18 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalHBExecutableSelectorSilenceInductionScope,
     'all-arbitrary-finite-canonical-selector-tables-executable-all-row-selector-silence-checked-hn-budget-inactivity-strong-rank-induction-without-global-semantic-no-gain',
   );
+  assert.equal(
+    out.leanResidualTerminalPacketSelectorFaithfulnessRoutingFormalized,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalPacketSelectorFaithfulnessRoutingAxiomAuditPassed,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalPacketSelectorFaithfulnessRoutingScope,
+    'all-arbitrary-finite-positive-bn6-packets-executable-canonical-payload-route-clearance-exact-hb-faithfulness-binding-and-selector-silence-contradiction',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',

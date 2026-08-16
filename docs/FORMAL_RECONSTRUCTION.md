@@ -1815,6 +1815,21 @@ completeness, close the full unconditional `HB.NegativeClosure` or ZeroSlack,
 or provide polynomial bounds. See
 [`lean_residual_terminal_hb_executable_selector_silence_induction.md`](./lean_residual_terminal_hb_executable_selector_silence_induction.md).
 
+`ResidualTerminalPacketSelectorFaithfulnessRouting` now reconstructs the
+Packet selector-faithfulness routing edge into that executable HB result. Ten
+data-only fields on each canonical positive source payload are checked in a
+fixed first-failure order, the complete canonical handle list is scanned, and
+the computed result is bound exactly to the supplied HB faithfulness table.
+Every positive BN6 Packet conclusion supplies a canonical handle, so route-clear
+acceptance makes one handle faithful while accepted executable selector silence
+makes every handle nonfaithful. The resulting contradiction is fully
+kernel-checked. The grouped family, payload fields, rank tags, route-clear data,
+HB table, claims, blocker activity, and dependency rows remain explicit inputs.
+Positive slack, `SaturatePositive`, `BCELReady`, terminal-data construction,
+complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain
+open. See
+[`lean_residual_terminal_packet_selector_faithfulness_routing.md`](./lean_residual_terminal_packet_selector_faithfulness_routing.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:
