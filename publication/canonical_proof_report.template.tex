@@ -800,6 +800,17 @@ data, prove their external manuscript semantics, map failures into a decreasing
 complete global outcome, or establish unconditional HB negative closure,
 ZeroSlack, or polynomial PCCMin.
 
+Rank-reflected Packet descent now removes the free Boolean at the last route.
+The canonical payload preserves the first nine fields and computes
+\code{strictDescentClear} from the exact ten-coordinate \code{RankWF}
+comparison. Acceptance carries actual descent; a final descent failure carries
+actual nondecrease. The positive-Packet/HB endpoint therefore returns that
+proof or an earlier exact route without route-clear or descent-binding
+premises. The before/after ranks, first nine fields, grouped family, and HB data
+remain explicit, and the other nine routes are not yet mapped into a complete
+global outcome. Complete route silence, unconditional HB negative closure,
+ZeroSlack, and polynomial PCCMin remain open.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule

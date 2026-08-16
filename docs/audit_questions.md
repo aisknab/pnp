@@ -729,6 +729,16 @@ Every positive packet has a representative in the polynomial selector universe; 
   endpoint retains that proposition. The payload fields are still supplied:
   terminal-data derivation, external manuscript semantics, decreasing global
   coverage, unconditional HB negative closure, and ZeroSlack remain open.
+- Rank-reflected Packet descent is witnessed by
+  `PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedDescent_firstRoute_eq_some_descent_iff`,
+  `PNP.DirectWire.TerminalBN6GroupedFamily.not_rankDescent_of_computed_firstRoute_descent`,
+  and
+  `PNP.DirectWire.terminalBN6_packet_rank_reflected_hb_first_route_failure`.
+  The final field is computed from the exact ten-coordinate `RankWF`
+  comparison. A forced Packet failure is therefore an earlier route or actual
+  nondecrease. The first nine fields and per-handle ranks remain explicit, and
+  the other nine routes, complete route silence, unconditional ZeroSlack, and
+  polynomial PCCMin remain open.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -791,6 +801,11 @@ Every positive packet has a representative in the polynomial selector universe; 
     route equivalence, remove failure uniqueness, select a noncanonical
     payload, or drop the exact field proof from the HB endpoint. Require
     rejection before assigning any meaning to the route tag.
+17. For rank-reflected descent, restore the original caller Boolean, reverse
+    `after` and `before`, omit a preceding field, change the final outcome to
+    assert descent rather than nondecrease, alter preserved table inputs, or
+    add a descent-binding premise. Require rejection before treating the final
+    Packet route as evidence about `RankWF`.
 
 **What would count as a refutation or material defect**
 
@@ -821,6 +836,9 @@ Every positive packet has a representative in the polynomial selector universe; 
 - A route whose exact proposition omits an earlier accepted field, names the
   wrong failed field, is not unique, or is promoted from supplied-payload
   semantics to an external terminal claim without a derivation theorem.
+- A supposedly rank-reflected payload that retains the original descent
+  Boolean, compares ranks in the wrong direction, changes one of the first nine
+  fields, or reports `.descent` without proving actual nondecrease.
 
 ---
 
