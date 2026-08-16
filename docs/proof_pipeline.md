@@ -310,6 +310,15 @@ selector faithfulness or compatibility, construct the tables or certificate
 from terminal data, prove unconditional HB negative closure or ZeroSlack, or
 provide encoded-size and polynomial-runtime bounds.
 
+The executable selector-silence induction now removes that global semantic
+no-gain premise from the theorem interface. A data-only checker exhaustively
+requires every canonical realizer claim to be a typed bottom. Checked HB
+closure eliminates HN/BUD bottoms, and strong finite-rank induction eliminates
+faithful lower seeds. The grouped family, ranks, faithfulness, claims, activity,
+dependency rows, and rank map remain explicit inputs and are not constructed
+from terminal data. This is not the full unconditional HB negative closure,
+ZeroSlack, or a polynomial completeness theorem.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its
@@ -342,8 +351,9 @@ positive residual slack
 => supplied HN/BUD active-dependency closure forces blocker inactivity (formalized for checked tables)
 => explicit global semantic gain exclusion (supplied premise; coverage specialization formalized)
 => faithful lower-seed strong rank induction and supplied-table selector-silence rank closure (formalized conditionally)
-=> selector faithfulness or compatibility and terminal-data construction of the tables and global premise (open)
-=> unconditional rank-complete selector silence (open)
+=> executable all-row typed-bottom selector-silence scan removes the global no-gain premise (formalized for supplied tables)
+=> selector faithfulness or compatibility and terminal-data construction of the tables (open)
+=> full unconditional HB negative closure (open)
 => ZeroSlack is impossible under positive slack
 ```
 

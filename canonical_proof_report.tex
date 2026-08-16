@@ -46,7 +46,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-15-149}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-16-150}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -89,15 +89,15 @@
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 28740 \\
-Theorem-kind declarations & 14824 \\
-Assumption-free theorem-kind declarations & 7462 \\
+Compiled declarations & 28751 \\
+Theorem-kind declarations & 14832 \\
+Assumption-free theorem-kind declarations & 7463 \\
 Project-specific axioms & 4 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{3dbdf51fd5dccaf5e128c4ea38300b01df8904b349f180ee03529e60571c4d3c}\par}
+{\small Inventory SHA-256: \code{7f4b65411371fd64a741e85c0b8ac55b14a648aba2a9cf34031c4862e58534c5}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -740,6 +740,17 @@ selector faithfulness or compatibility, derive those inputs from terminal
 data, prove unconditional HB negative closure or ZeroSlack, provide polynomial
 bounds, put SAT in P, or prove \(P=NP\).
 
+The executable selector-silence induction removes that global semantic
+no-gain premise from the theorem interface. Its data-only checker scans every
+canonical handle and requires every realizer claim to be a typed bottom.
+Checked HB closure eliminates HN/BUD bottoms, while strong finite-rank
+induction eliminates faithful lower seeds. The grouped family, ranks,
+faithfulness, claims, activity, dependency rows, and rank map remain explicit
+data inputs. The theorem does not construct them from terminal data, establish
+selector faithfulness or compatibility, prove blocker semantics or semantic
+dependency completeness, close the full unconditional HB negative closure or
+ZeroSlack, provide polynomial bounds, put SAT in P, or prove \(P=NP\).
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule
@@ -826,7 +837,7 @@ SAT completeness, SAT in P, and the root theorem remain absent.
 \section{Formal milestone ledger}
 
 Each earned row requires exact compiled names and theorem kinds, empty axiom closures, per-name
-domain-separated kernel-type SHA-256 matches for 2723 detailed candidates, and the pinned whole-Lean
+domain-separated kernel-type SHA-256 matches for 2730 detailed candidates, and the pinned whole-Lean
 source closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
 {\small
@@ -961,8 +972,9 @@ Checked exact-rank HB blocker-graph acyclicity & formalized-residual-terminal-hb
 Checked total-table HB dependency closure & formalized-residual-terminal-hb-dependency-table-closure & For every arbitrary finite rank carrier, Lean enumerates all HN and budget nodes, assigns each node one total data-only dependency row, and materializes the graph mechanically from all rows without accepting a second edge list. The checker exhaustively validates the finite-to-exact ten-coordinate rank embedding and strict exact-rank descent for every row dependency. Acceptance proves exact row-to-edge coverage, accessibility, well-founded rank induction for arbitrary predicates with an explicit local premise, absence of every nonempty dependency cycle, covered HN/BUD bot rows, and exact-rank descent for lower seeds. & The dependency table, finite-to-exact rank mapping, selector family, faithfulness predicate, blocker activity tables, and realizer claims remain explicit inputs. Total table coverage means only that every finite HN/BUD node has a row and every dependency listed in that row becomes a graph edge. It does not prove blocker semantics, semantic dependency completeness relative to terminal data, or the local invariant premise needed by generic rank induction. It does not establish selector compatibility, rank-complete selector silence, the full HB.NegativeClosure theorem, unconditional ZeroSlack, PCCMin, encoded-size or polynomial-runtime bounds, SAT in P, remove a project assumption, or prove P = NP. \\
 Checked HB active-dependency closure & formalized-residual-terminal-hb-active-dependency-closure & For every arbitrary finite rank carrier and supplied typed-realizer environment, Lean exhaustively checks that every active HN or budget node has an active dependency in its own total row and independently checks strict exact-rank descent for every row dependency. Well-founded induction then proves every supplied HN and budget activity bit is false. Composition with every faithful canonical grouped-BN6 handle eliminates HN/BUD typed bots while preserving a genuine checked strict gain or a faithful strictly lower-rank seed. & The activity bits, dependency rows, finite-to-exact rank mapping, selector family, faithfulness predicate, and realizer claims remain explicit inputs. The local check does not derive blocker activity, blocker semantics, or semantic dependency completeness from terminal data. It eliminates HN/BUD bots only after the supplied tables pass; a checked gain or faithful lower-rank seed remains. This milestone does not establish selector compatibility, gain exclusion, lower-seed closure, rank-complete selector silence, the full HB.NegativeClosure theorem, unconditional ZeroSlack, PCCMin, encoded-size or polynomial-runtime bounds, SAT in P, remove a project assumption, or prove P = NP. \\
 Conditional HB selector-silence rank closure & formalized-residual-terminal-hb-selector-silence-closure & For every arbitrary finite accepted typed-realizer table, checked HN/BUD active-dependency closure and semantic exclusion of every strict equivalent gain leave a faithful selector only if there is a faithful selector at strictly lower finite rank. Strong induction proves every canonical selector in the supplied grouped-BN6 family nonfaithful. A second theorem obtains the global gain-exclusion premise from the existing explicit gain-coverage certificate and exact source-cell no-gain evidence. & The global semantic gain exclusion is an explicit proof-bearing premise. The coverage specialization still requires a supplied certificate covering every strict equivalent gain plus exact source-cell no-gain evidence. The grouped family, finite rank and faithfulness tables, realizer claims, blocker activity, dependency rows, and rank map remain explicit inputs. This does not establish selector faithfulness or compatibility, construct those inputs from terminal data, derive blocker semantics or semantic dependency completeness, prove the unconditional HB.NegativeClosure theorem, unconditional ZeroSlack, PCCMin, encoded-size or polynomial-runtime bounds, SAT in P, remove a project assumption, or prove P = NP. \\
+Executable HB selector-silence induction & formalized-residual-terminal-hb-executable-selector-silence-induction & For every arbitrary finite accepted typed-realizer table, one exhaustive executable check proves that every canonical realizer claim is a typed bottom and retains faithful-row validity. Checked HB active-dependency closure eliminates HN and budget bottoms, while strong induction on the supplied finite rank eliminates faithful strictly lower-rank seeds. Every canonical selector is therefore nonfaithful without global semantic no-gain as a theorem premise. & The grouped family, finite rank and faithfulness functions, realizer claim function, blocker activity functions, dependency rows, and finite-to-exact rank map remain explicit data inputs. The checker validates these data but does not construct them from terminal candidates or prove selector faithfulness, selector compatibility, blocker semantics, or semantic dependency completeness. This milestone does not establish the full unconditional HB.NegativeClosure theorem, unconditional ZeroSlack, PCCMin, encoded-size or polynomial-runtime bounds, SAT in P, remove a project assumption, or prove P = NP. \\
 Global locked-NAND construction and threshold & formalized-concrete-locked-nand-threshold & A uniform encoded polynomial-time SAT instance builder and the report-level locked-NAND threshold theorem linked to that builder. & This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP. \\
-Global ZeroSlack, PCCMin, and polynomial runtime & not-formalized & Complete residual routing, global ZeroSlack contradiction, exact minimization, and polynomial bounds. & The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; the exhaustive Packet scan verifies strict gains or exact no-gain over every canonical selector in one supplied explicit grouped family; an explicit global gain-coverage certificate conditionally upgrades that silence to a proof-bearing ZeroSlack result; the generic finite R-ChargeSurplus kernel derives strict gain from exact ledgers, an unmatched positive support charge, exact gate accounting, and separately proved semantics; the checked unit-charge blueprint realizer derives canonical ledgers and gains for every valid blueprint in one supplied family; the checked typed-realizer contract rejects every faithful-table row except a genuine blueprint gain or an explicitly active bounded-rank HN, budget, or strictly lower faithful seed bot; the checked exact-rank HB graph contract validates every edge in a supplied finite HN/BUD dependency graph; the checked total-table HB contract gives every finite HN/BUD node one row, materializes every listed dependency as an edge, and derives well-founded induction and cycle exclusion for that supplied table; the checked HB active-dependency closure combines an exhaustive active-to-active row condition with strict rank descent to prove every supplied HN/BUD activity bit false and remove HN/budget typed-bot branches; and the conditional selector-silence rank closure combines that supplied-table inactivity with explicit global semantic gain exclusion and strong finite-rank induction to prove every canonical handle in the accepted table nonfaithful. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, replacement blueprints, occurrence pairing, gain-coverage certificate, rank assignment, faithfulness predicate, or blocker tables from terminal data; connect matching back to a contradiction; derive blocker semantics, semantic dependency completeness, or the checked local active-dependency premise from terminal data; derive global gain exclusion or its coverage certificate from terminal data rather than consume it as an explicit premise; map all residual routes into a decreasing complete global outcome system; or provide selector faithfulness or compatibility, an independently constructed realizer, unconditional global silence, and polynomial-runtime completeness. Global unconditional ZeroSlack and polynomial PCCMin therefore remain unformalized. \\
+Global ZeroSlack, PCCMin, and polynomial runtime & not-formalized & Complete residual routing, global ZeroSlack contradiction, exact minimization, and polynomial bounds. & The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; the exhaustive Packet scan verifies strict gains or exact no-gain over every canonical selector in one supplied explicit grouped family; an explicit global gain-coverage certificate conditionally upgrades that silence to a proof-bearing ZeroSlack result; the generic finite R-ChargeSurplus kernel derives strict gain from exact ledgers, an unmatched positive support charge, exact gate accounting, and separately proved semantics; the checked unit-charge blueprint realizer derives canonical ledgers and gains for every valid blueprint in one supplied family; the checked typed-realizer contract rejects every faithful-table row except a genuine blueprint gain or an explicitly active bounded-rank HN, budget, or strictly lower faithful seed bot; the checked exact-rank HB graph contract validates every edge in a supplied finite HN/BUD dependency graph; the checked total-table HB contract gives every finite HN/BUD node one row, materializes every listed dependency as an edge, and derives well-founded induction and cycle exclusion for that supplied table; the checked HB active-dependency closure combines an exhaustive active-to-active row condition with strict rank descent to prove every supplied HN/BUD activity bit false and remove HN/budget typed-bot branches; and the executable selector-silence induction exhaustively checks that every canonical realizer claim is a typed bottom, then combines supplied-table HB inactivity with strong finite-rank induction to prove every canonical handle in the accepted table nonfaithful without a global semantic no-gain premise. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, replacement blueprints, occurrence pairing, rank assignment, faithfulness predicate, exhaustive realizer claims, or blocker tables from terminal data; connect matching back to a contradiction; derive blocker semantics, semantic dependency completeness, or the checked local active-dependency premise from terminal data; prove every terminal-derived realizer claim is a typed bottom; map all residual routes into a decreasing complete global outcome system; or provide selector faithfulness or compatibility, an independently constructed realizer, unconditional global silence, and polynomial-runtime completeness. Global unconditional ZeroSlack and polynomial PCCMin therefore remain unformalized. \\
 Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-machine-linked complexity classes, concrete SAT completeness and a SAT decider, plus the publication root theorem. & The concrete target definition remains inactive: CNF-SAT now has a raw-machine verifier, NP-membership proof, and an all-input finite-machine polynomial reduction through NAND to the concrete locked target, but a deterministic polynomial-time CNF-SAT decider, the concrete-to-abstract threshold link, SAT NP-hardness and CNFSAT NP-completeness transport, and PNP.Main.p\_eq\_np remain absent; the legacy string-handle bridge is ineligible. \\
 \bottomrule
 \end{longtable}
@@ -970,8 +982,8 @@ Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-mac
 
 \section{Compiled inventory summary}
 
-The inventory contains 28740 exported \code{PNP.*} kernel declarations from
-266 modules. It excludes 15047 private compiler auxiliaries.
+The inventory contains 28751 exported \code{PNP.*} kernel declarations from
+267 modules. It excludes 15047 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -1213,6 +1225,7 @@ PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Governed\allowbreak{}
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}HBActive\allowbreak{}Dependency\allowbreak{}Closure & 16 & 9 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}HBBlocker\allowbreak{}Graph\allowbreak{}Acyclicity & 93 & 32 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}HBDependency\allowbreak{}Table\allowbreak{}Closure & 47 & 25 \\
+PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}HBExecutable\allowbreak{}Selector\allowbreak{}Silence\allowbreak{}Induction & 11 & 8 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}HBSelector\allowbreak{}Silence\allowbreak{}Closure & 4 & 4 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Interface\allowbreak{}Exposure\allowbreak{}Routing & 224 & 75 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Mode\allowbreak{}Firewall & 148 & 41 \\
@@ -1308,10 +1321,10 @@ npm run report:check
 \end{verbatim}
 }
 
-The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-08-15-149}. Its exact byte digest is
-\code{3dbdf51fd5dccaf5e128c4ea38300b01df8904b349f180ee03529e60571c4d3c}. The report is regenerated from that inventory and the reviewed
+The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-08-16-150}. Its exact byte digest is
+\code{7f4b65411371fd64a741e85c0b8ac55b14a648aba2a9cf34031c4862e58534c5}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{d007c127195b4832e22750de2429d06d157b27e3a047f577ad871030957989d3}; the computed and pinned values match. Successful regeneration
+\code{f76b9f9533621c7e72e4fbbb709c87dbbf1cb216531b849740ad6008facd52e8}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 

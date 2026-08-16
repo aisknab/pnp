@@ -674,6 +674,18 @@ Every positive packet has a representative in the polynomial selector universe; 
   source-cell no-gain. It does not establish selector faithfulness or
   compatibility, construct the sidecars from terminal data, or prove
   unconditional HB negative closure or ZeroSlack.
+- The executable selector-silence induction is witnessed by
+  `PNP.DirectWire.TerminalPacketTypedRealizerTable.checkSelectorSilent_eq_true_iff`,
+  `PNP.DirectWire.TerminalPacketTypedRealizerTable.noFaithful_of_selectorSilent`,
+  and
+  `PNP.DirectWire.terminalBN6_packet_typed_realizer_hb_selector_silence_induction_contract`.
+  Its exhaustive checker requires every canonical realizer claim to be a typed
+  bottom, replacing the conditional theorem's global semantic no-gain premise.
+  Checked HB closure and strong finite-rank induction then eliminate all
+  faithful handles. The family, ranks, claims, activity, dependency rows, and
+  rank map remain explicit terminal-relative data; the theorem does not
+  construct them from terminal data or prove the full unconditional HB
+  negative closure or ZeroSlack.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -710,7 +722,12 @@ Every positive packet has a representative in the polynomial selector universe; 
     that combined acceptance proves every supplied HN/BUD activity bit false.
 11. Remove the global gain-exclusion premise, weaken strict lower-rank descent,
     or replace the coverage certificate with ordinary finite scan silence.
-    Require the selector-silence rank closure to fail closed in every case.
+    Require the older conditional selector-silence rank closure to fail closed
+    in every case.
+12. For the executable selector-silence induction, mutate one gain claim into
+    the accepted scan, omit one canonical handle, bypass faithful-row checking,
+    weaken lower-seed descent, or bypass checked HB closure. Require rejection
+    in every case without reintroducing a global no-gain premise.
 
 **What would count as a refutation or material defect**
 
@@ -726,8 +743,9 @@ Every positive packet has a representative in the polynomial selector universe; 
 - A cycle in the HN/BUD blocker graph.
 - A selector universe or payload family that grows super-polynomially.
 - A strict equivalent gain absent from a claimed gain-coverage certificate.
-- A selector-silence claim that lacks explicit global gain exclusion or uses a
-  non-strict lower-seed rank step.
+- A selector-silence claim that neither exhaustively checks typed-bottom claims
+  nor supplies explicit global gain exclusion, or that uses a non-strict
+  lower-seed rank step.
 
 ---
 
