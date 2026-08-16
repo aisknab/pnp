@@ -1846,6 +1846,23 @@ selector compatibility, complete route silence, unconditional HB negative
 closure, ZeroSlack, and polynomial PCCMin remain open. See
 [`lean_residual_terminal_packet_selector_faithfulness_table.md`](./lean_residual_terminal_packet_selector_faithfulness_table.md).
 
+The total Packet selector first-route outcome in
+`ResidualTerminalPacketSelectorFirstRouteOutcome` now closes the executable
+classification gap at that same supplied-data boundary. For every payload at
+an arbitrary finite rank, the first-route classifier returns `none` exactly
+when the complete checker accepts, and checker rejection returns one concrete
+earliest typed route. The result lifts to every canonical grouped-family
+handle. Every positive Packet therefore yields either a computed faithful
+handle or a first route; accepted executable selector silence and HB
+active-dependency closure for the canonicalized table remove the faithful
+case. The resulting named theorem takes neither a route-clear premise nor an
+independent binding premise. The payload fields, family, rank assignment,
+claims, activity and dependency tables remain explicit inputs, and no theorem
+yet proves the external semantics or decreasing global coverage of a reported
+route. Terminal-data construction, unconditional HB negative closure,
+ZeroSlack, and polynomial PCCMin remain open. See
+[`lean_residual_terminal_packet_selector_first_route_outcome.md`](./lean_residual_terminal_packet_selector_first_route_outcome.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

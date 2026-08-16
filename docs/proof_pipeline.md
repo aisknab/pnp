@@ -342,6 +342,17 @@ terminal-candidate constructions. This is not the manuscript's full external
 selector compatibility claim, complete route silence, unconditional HB
 negative closure, ZeroSlack, or a polynomial bound.
 
+The total Packet selector first-route outcome now proves the converse side of
+that payload classifier. No route is returned exactly on checker acceptance,
+and every rejection returns the earliest of the ten typed routes. Thus every
+positive Packet yields a faithful canonical handle or a concrete first route.
+For the canonicalized table, accepted executable selector silence and HB
+active-dependency closure eliminate the faithful alternative without assuming
+route-clear acceptance or a separate binding. This names every checked payload
+failure, but it does not prove a route's external terminal semantics or map the
+route into a decreasing complete global outcome system. The terminal data and
+all remaining tables are still explicit inputs.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its
@@ -377,6 +388,7 @@ positive residual slack
 => executable all-row typed-bottom selector-silence scan removes the global no-gain premise (formalized for supplied tables)
 => exhaustive canonical-payload route clearance and exact HB faithfulness binding turn every positive Packet into a faithful handle, contradicting executable selector silence (formalized for supplied data)
 => canonicalize the HB faithfulness table from those payload checks and remove the independent binding premise (formalized for supplied route-clear data)
+=> totalize the canonical payload classifier and force one typed first route from every positive Packet under accepted canonical HB selector silence (formalized for supplied data)
 => terminal-data construction of route-clear payloads, the grouped family, and the remaining HB tables; external selector compatibility (open)
 => full unconditional HB negative closure (open)
 => ZeroSlack is impossible under positive slack

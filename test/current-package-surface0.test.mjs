@@ -27,6 +27,8 @@ test('package exports, scripts, and bins are a closed current-authority surface'
   const pkg = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
   assert.deepEqual(pkg.exports, CURRENT_PACKAGE_EXPORTS0);
   assert.deepEqual(pkg.scripts, CURRENT_PACKAGE_SCRIPTS0);
+  assert.equal(pkg.scripts.validate,
+    'npm run check && npm test && npm run pnp:verify -- --no-write --skip-unit-tests');
   assert.equal(Object.hasOwn(pkg, 'bin'), false);
   assert.equal(pkg.private, true);
   assert.deepEqual(Object.keys(pkg.scripts).filter((key) => key.startsWith('legacy:')), [
@@ -54,5 +56,8 @@ test('historical replay is manual-only and automatic CI never executes it', asyn
   assert.doesNotMatch(historical, /\bgit (?:commit|push|tag)\b/u);
 
   assert.doesNotMatch(ci, /replay-legacy-v0|legacy:v0:replay|--historical-replay/u);
-  assert.match(ci, /npm run pnp:verify -- --no-write/u);
+  assert.match(ci,
+    /^\s*run: npm run pnp:verify -- --no-write --skip-unit-tests$/mu);
+  assert.doesNotMatch(ci,
+    /^\s*run: npm run pnp:verify -- --no-write$/mu);
 });

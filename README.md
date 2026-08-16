@@ -30,16 +30,16 @@ mathematical validation.
 | **How do I run the current verification?** | Run `npm ci --ignore-scripts` and `npm run pnp:verify -- --no-write`. This checks the non-claiming formal status, current package surface, pinned archive identity, and the small current-authority test suite; it is not a proof verification. |
 | **Where should reviewers start?** | Start with the current-authority [compiled Lean theorem inventory](./docs/lean_theorem_inventory.md) and [formal reconstruction notice](./docs/FORMAL_RECONSTRUCTION.md). The reviewer guide, proof pipeline, terminology crosswalk, trust model, and audit questions are historical checker-route review aids whose numbered report citations target the pinned 56-page manuscript. |
 
-The latest residual milestone is canonical Packet faithfulness-table
-construction. For every arbitrary finite grouped BN6 family, it rebuilds the
-typed-realizer table so that faithfulness is exactly the canonical positive
-source-payload computation while rank, realizer claims, and HN/BUD activity are
-preserved. The exhaustive binding checker then accepts by construction, and a
-route-clear positive Packet contradicts accepted executable selector silence
-without a caller-supplied binding premise. The payload fields, rank assignment,
-grouped family, claims, activity and dependency tables remain explicit rather
-than derived from terminal data; external selector compatibility, complete
-route silence, unconditional HB negative closure, ZeroSlack, and polynomial
+The latest residual milestone is the total Packet selector first-route
+outcome. The existing data-only classifier now returns no route exactly when
+the canonical payload checker accepts, and returns one concrete earliest typed
+route exactly when it rejects. Every positive Packet therefore yields either a
+computed faithful handle or a first route. For the canonicalized table,
+accepted executable HB selector silence removes the faithful case without a
+route-clear or independent binding premise. The payload fields, rank
+assignment, grouped family, claims, activity and dependency tables remain
+explicit rather than derived from terminal data; route semantics, decreasing
+global coverage, unconditional HB negative closure, ZeroSlack, and polynomial
 PCCMin remain open.
 
 ## Current claim boundary
@@ -275,6 +275,7 @@ suite; it must not be confused with the frozen 1,121-test source release.
 | Executable selector-silence induction | `node --test audits/lean-residual-terminal-hb-executable-selector-silence-induction0.test.mjs`, `lean-audit/PNPResidualTerminalHBExecutableSelectorSilenceInductionAxiomAudit.lean`, and `lean-regression/PNPResidualTerminalHBExecutableSelectorSilenceInduction.lean` | An exhaustive checker proves every canonical realizer claim is a typed bottom. Checked HB closure removes HN/BUD bottoms, and strong finite-rank induction removes faithful lower seeds, so no global semantic no-gain premise is required. | The family, ranks, faithfulness, claims, activity and dependency tables remain explicit terminal-relative data. This does not construct them from terminal data, establish selector faithfulness or compatibility, prove the full unconditional HB negative closure or ZeroSlack, establish polynomial bounds, put SAT in P, or prove `P = NP`. |
 | Packet selector-faithfulness routing and HB contradiction | `node --test audits/lean-residual-terminal-packet-selector-faithfulness-routing0.test.mjs`, `lean-audit/PNPResidualTerminalPacketSelectorFaithfulnessRoutingAxiomAudit.lean`, and `lean-regression/PNPResidualTerminalPacketSelectorFaithfulnessRouting.lean` | Ten data-only payload fields are checked in a fixed first-failure order for every canonical handle and bound exactly to the supplied HB table. Every positive Packet yields a faithful handle, contradicting accepted executable selector silence. | The grouped family, payload checks, ranks, HB binding, claims, activity, and dependencies remain explicit inputs. This does not derive positive slack, `SaturatePositive`, `BCELReady`, terminal data, complete route silence, unconditional ZeroSlack/PCCMin, polynomial bounds, SAT in P, or `P = NP`. |
 | Canonical Packet faithfulness-table construction | `node --test audits/lean-residual-terminal-packet-selector-faithfulness-table0.test.mjs`, `lean-audit/PNPResidualTerminalPacketSelectorFaithfulnessTableAxiomAudit.lean`, and `lean-regression/PNPResidualTerminalPacketSelectorFaithfulnessTable.lean` | The typed-realizer table is rebuilt with faithfulness computed from each canonical positive source payload; rank, claims, and HN/BUD activity are preserved exactly. Binding accepts by construction, so the Packet-to-HB contradiction no longer needs an independent binding premise. | Payload checks, rank assignment, grouped-family derivation, claims, blocker semantics, activity and dependency tables remain explicit or open. This is not full external selector compatibility, terminal-data construction, complete route silence, unconditional HB negative closure or ZeroSlack/PCCMin, polynomial bounds, SAT in P, or `P = NP`. |
+| Total Packet selector first-route outcome | `node --test audits/lean-residual-terminal-packet-selector-first-route-outcome0.test.mjs`, `lean-audit/PNPResidualTerminalPacketSelectorFirstRouteOutcomeAxiomAudit.lean`, and `lean-regression/PNPResidualTerminalPacketSelectorFirstRouteOutcome.lean` | Payload rejection is equivalent to a concrete earliest typed first route. Every positive Packet under the canonical table and accepted executable HB selector silence yields such a route without route-clear or binding premises. | Payload fields and all terminal-relative tables remain explicit. This does not prove route semantics or decreasing global coverage, construct terminal data, close unconditional HB negative closure or ZeroSlack/PCCMin, establish polynomial bounds, put SAT in P, or prove `P = NP`. |
 | Archive integrity | `npm run legacy:v0:check` | Three annotated-tag identities and the pinned release digests match the archive manifest. | Signed provenance, theorem correctness, or checker soundness. |
 | Historical checker replay | `npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d` | The pinned legacy implementation and selected tests reproduce their recorded behavior outside the active checkout. | Current theorem status, independent checker soundness, or validation of every mathematical implication. |
 | Release checksums | `SHA256SUMS` and `SHA256SUMS.sha256` | Published artefact bytes match the sealed ledger. | Correctness of the artefact contents. |
@@ -383,6 +384,7 @@ recorded by [`archive/legacy-v0/`](./archive/legacy-v0/README.md).
 - [Lean executable selector-silence induction](./docs/lean_residual_terminal_hb_executable_selector_silence_induction.md): an exhaustive typed-bottom scan replaces the global semantic no-gain premise, while terminal-data construction, selector faithfulness or compatibility, and the full unconditional HB negative closure remain open.
 - [Lean Packet selector-faithfulness routing](./docs/lean_residual_terminal_packet_selector_faithfulness_routing.md): canonical payload checks and exact HB binding turn every positive Packet into a faithful handle that contradicts executable selector silence; construction of the route-clear terminal data and unconditional ZeroSlack remain open.
 - [Lean canonical Packet faithfulness-table construction](./docs/lean_residual_terminal_packet_selector_faithfulness_table.md): the HB table's faithfulness function is now computed from canonical Packet payloads and binds by construction, while payload semantics and terminal-data derivation remain open.
+- [Lean total Packet selector first-route outcome](./docs/lean_residual_terminal_packet_selector_first_route_outcome.md): rejection now yields a concrete earliest typed route and canonical HB selector silence forces that outcome for every positive Packet, while external route semantics and decreasing global coverage remain open.
 
 ## Install and current package surface
 

@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-16-152';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-17-153';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -440,6 +440,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorFaithfulnessTableAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorFaithfulnessTable.lean',
   'node --test audits/lean-residual-terminal-packet-selector-faithfulness-table0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorFirstRouteOutcomeAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorFirstRouteOutcome.lean',
+  'node --test audits/lean-residual-terminal-packet-selector-first-route-outcome0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -477,6 +480,7 @@ const NON_CLAIMS = Object.freeze([
   'The executable selector-silence induction replaces the global semantic no-gain premise with an exhaustive data-only check that every canonical realizer claim is a typed bottom. Checked HB active-dependency closure removes HN/BUD bottoms, and strong finite-rank induction removes faithful lower seeds. The grouped family, rank and faithfulness functions, claims, activity functions, dependency rows, and rank map remain explicit data inputs; it does not construct them from terminal candidates, establish selector faithfulness or compatibility, prove blocker semantics or semantic dependency completeness, establish the full unconditional HB negative closure or ZeroSlack, or provide encoded-size and polynomial-runtime bounds.',
   'The Packet selector-faithfulness routing checker computes faithfulness from ten data-only fields on each canonical positive source payload, exposes the first failed route, exhaustively checks every canonical handle, and binds the result exactly to the supplied HB table. A positive Packet then yields a faithful handle that contradicts accepted executable HB selector silence. The grouped family, payload fields, rank tags, route-clear data, HB table, claims, blocker activity, and dependencies remain explicit inputs; positive slack, SaturatePositive, BCELReady, terminal-data construction, complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain open.',
   'The canonical Packet faithfulness-table constructor replaces the independently supplied faithfulness function with the canonical positive source-payload computation while preserving the finite rank map, realizer claims, and HN/BUD activity exactly. Binding accepts by construction and the Packet-to-HB contradiction has no binding premise. Payload checks, rank assignment, grouped-family derivation, claims, blocker semantics, activity, and dependency rows remain explicit rather than derived from terminal data; full external selector compatibility, complete route silence, unconditional HB negative closure, ZeroSlack, and polynomial PCCMin remain open.',
+  'The total Packet selector first-route outcome proves that the existing data-only classifier returns no route exactly on acceptance and a concrete earliest typed route exactly on rejection. Every positive Packet under the canonical table and accepted executable HB selector silence therefore exposes a first route without route-clear or binding premises. The payload fields, family, rank assignment, claims, activity, and dependencies remain explicit inputs; the result does not prove route semantics, decreasing global coverage, terminal-data construction, unconditional HB negative closure, ZeroSlack, or polynomial PCCMin.',
   'The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.',
   'The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.',
   'Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.',
@@ -1701,6 +1705,10 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalPacketSelectorFaithfulnessTableAxiomAuditPassed: true,
   leanResidualTerminalPacketSelectorFaithfulnessTableScope:
     'all-arbitrary-finite-canonical-packet-payload-faithfulness-table-construction-preserved-rank-claims-blocker-activity-binding-free-selector-silence-contradiction',
+  leanResidualTerminalPacketSelectorFirstRouteOutcomeFormalized: true,
+  leanResidualTerminalPacketSelectorFirstRouteOutcomeAxiomAuditPassed: true,
+  leanResidualTerminalPacketSelectorFirstRouteOutcomeScope:
+    'all-arbitrary-finite-total-packet-first-route-classification-canonical-hb-selector-silence-without-route-clear-or-binding-premises',
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
   leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2812,6 +2820,10 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalPacketSelectorFaithfulnessTableAxiomAuditPassed: true,
       leanResidualTerminalPacketSelectorFaithfulnessTableScope:
         'all-arbitrary-finite-canonical-packet-payload-faithfulness-table-construction-preserved-rank-claims-blocker-activity-binding-free-selector-silence-contradiction',
+      leanResidualTerminalPacketSelectorFirstRouteOutcomeFormalized: true,
+      leanResidualTerminalPacketSelectorFirstRouteOutcomeAxiomAuditPassed: true,
+      leanResidualTerminalPacketSelectorFirstRouteOutcomeScope:
+        'all-arbitrary-finite-total-packet-first-route-classification-canonical-hb-selector-silence-without-route-clear-or-binding-premises',
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
       leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2891,7 +2903,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-16-152',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-17-153',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

@@ -709,6 +709,16 @@ Every positive packet has a representative in the polynomial selector universe; 
   rank assignment, family construction, blocker semantics, activity, and
   dependency rows remain explicit rather than derived from terminal data, so
   unconditional HB negative closure and ZeroSlack remain open.
+- Total Packet selector first-route classification is witnessed by
+  `PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.exists_firstRoute_iff_check_eq_false`,
+  `PNP.DirectWire.TerminalBN6PacketConclusion.existsFaithfulOrFirstRoute`,
+  and
+  `PNP.DirectWire.terminalBN6_packet_computed_faithfulness_hb_first_route`.
+  Rejection now returns the earliest typed route, and accepted selector silence
+  for the canonical table forces that outcome for every positive Packet without
+  route-clear or binding premises. The route only classifies supplied payload
+  fields: its external terminal semantics, decreasing global coverage, and the
+  terminal-data construction remain open.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -761,6 +771,11 @@ Every positive packet has a representative in the polynomial selector universe; 
     blocker-activity functions, replace a realizer claim, or reintroduce a
     binding premise. Require rejection before accepting the binding-free
     Packet-to-HB composition.
+15. For total first-route classification, delete either direction of the
+    no-route/acceptance equivalence, permit a false checker result with no route,
+    change canonical payload selection, remove selector silence or HB closure,
+    or reintroduce route-clear or binding premises. Require rejection before
+    treating a positive Packet as having a concrete first route.
 
 **What would count as a refutation or material defect**
 
@@ -785,6 +800,9 @@ Every positive packet has a representative in the polynomial selector universe; 
 - A supposedly canonicalized table that retains any caller-selected
   faithfulness bit, changes ranks, blocker activity, or claims, or whose
   Packet-to-HB theorem still relies on an independent binding hypothesis.
+- A rejected canonical payload with no concrete first route, or a positive
+  Packet claimed to have an externally valid or decreasing route merely because
+  its supplied Boolean payload reports one.
 
 ---
 
