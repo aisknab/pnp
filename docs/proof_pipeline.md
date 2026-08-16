@@ -319,6 +319,17 @@ dependency rows, and rank map remain explicit inputs and are not constructed
 from terminal data. This is not the full unconditional HB negative closure,
 ZeroSlack, or a polynomial completeness theorem.
 
+The Packet selector-faithfulness routing bridge now checks ten data-only fields
+on the canonical positive source payload behind every handle, exposes the first
+failed route, and binds the computed result exactly to the supplied HB table.
+Every positive BN6 Packet branch supplies a handle. Complete route-clear
+acceptance therefore produces a faithful handle, contradicting accepted
+executable selector silence. The grouped family, payload checks, rank tags,
+binding, claims, blocker activity, and dependencies remain explicit inputs;
+positive slack, SaturatePositive, BCELReady, terminal-data construction,
+complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain
+open.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its
@@ -352,7 +363,8 @@ positive residual slack
 => explicit global semantic gain exclusion (supplied premise; coverage specialization formalized)
 => faithful lower-seed strong rank induction and supplied-table selector-silence rank closure (formalized conditionally)
 => executable all-row typed-bottom selector-silence scan removes the global no-gain premise (formalized for supplied tables)
-=> selector faithfulness or compatibility and terminal-data construction of the tables (open)
+=> exhaustive canonical-payload route clearance and exact HB faithfulness binding turn every positive Packet into a faithful handle, contradicting executable selector silence (formalized for supplied data)
+=> terminal-data construction of route-clear payloads, the grouped family, and HB tables; selector compatibility (open)
 => full unconditional HB negative closure (open)
 => ZeroSlack is impossible under positive slack
 ```

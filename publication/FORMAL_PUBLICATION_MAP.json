@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-16-150",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-16-151",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2730,7 +2730,18 @@
     "PNP.DirectWire.TerminalPacketTypedRealizerTable.claim_eq_bot_of_selectorSilent": "793b46540495a634d566375f143ab6ab7a85b5bdd0e9bebc791a5f83e12be320",
     "PNP.DirectWire.TerminalPacketTypedRealizerTable.noFaithfulAtOrBelow_of_selectorSilent": "3e392d7466f9986e35656dd110a0b62bb1576961b0ec0c7b5e50569b1d51d018",
     "PNP.DirectWire.TerminalPacketTypedRealizerTable.noFaithful_of_selectorSilent": "ffd3b7e3f436801bb5398c1360c86bd041c5bf8b207c9be0b83bc491232b0201",
-    "PNP.DirectWire.terminalBN6_packet_typed_realizer_hb_selector_silence_induction_contract": "a2b84373303f881928ce4dd46bcb59d1569c3d41e63cab9360218d375ce77d90"
+    "PNP.DirectWire.terminalBN6_packet_typed_realizer_hb_selector_silence_induction_contract": "a2b84373303f881928ce4dd46bcb59d1569c3d41e63cab9360218d375ce77d90",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.checkPacketSelectorRoutesClear_eq_true_iff": "708f48bfd74bd4da6b585cea59cbfa728dce1fac5ae627fe8487b43f7d7348d5",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFaithful_eq_true_iff": "fbec83e97141a40af4736f1faaa334f8e48a3ead9941eceaa0fa0156a5d2d9e3",
+    "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRoute_eq_none": "f943a8f317d63bbe7d1fe386c0ac93cfe48701fc7f41655d5cc18e3417b6f4fa",
+    "PNP.DirectWire.TerminalBN6PacketConclusion.existsFaithfulHandle_of_routesClear": "33688388f34a9d463aa29174da608036b7433b2c2d7faf4ac5ff232be1b49ca1",
+    "PNP.DirectWire.TerminalBN6PacketConclusion.existsPacketSelectorHandle": "4ee2e6f3aff4f13fe61dc4009adc901244d1144ee33d38f46bcd59f73a107a9e",
+    "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.check_eq_false_of_firstRoute": "b20244efafa29ed90265bc2e6afeb0bd37ff3e665b1e363765a4d460c785ba53",
+    "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.check_eq_true_iff": "6494e15fc2f6bd3a2fcd87c2a94588ba0d9ab00a0ce58e7a140e73596ba89bac",
+    "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.firstRoute_eq_none_of_check": "b8ec7bc6f95908e7d01d7d1f69f6cd1fc672a8d6d3725326c6f5a367eda18449",
+    "PNP.DirectWire.TerminalPacketSelectorHandleConclusion.existsHandle": "85578022b001c2bf43499f3cd1b8a655398eeca5f050f938ef76c76934233827",
+    "PNP.DirectWire.TerminalPacketTypedRealizerTable.checkPacketSelectorFaithfulnessBinding_eq_true_iff": "c17f7d216ed04db28b418d851aa7b5805328070e85f29c3999af8829d65ee3e6",
+    "PNP.DirectWire.terminalBN6_packet_selector_faithfulness_hb_contradiction": "1a373a54ce5c7f264483ddaf34593ff550d2cae07c4afd19e918b27f3f7fe058"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -2748,7 +2759,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "f76b9f9533621c7e72e4fbbb709c87dbbf1cb216531b849740ad6008facd52e8",
+  "milestoneSourceClosureSha256": "8e2cce7c3326bc6d1e7e7c47e6e443b0a8b861cadb92302d5a64c6b9e99da5a7",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -6839,6 +6850,26 @@
       "title": "Executable HB selector-silence induction"
     },
     {
+      "classification": "formalized-residual-terminal-packet-selector-faithfulness-routing",
+      "id": "residual-terminal-packet-selector-faithfulness-routing",
+      "nonClaim": "The grouped family, payload field Booleans, finite rank tags, route-clear payload checks, exact HB binding, realizer claims, blocker activity, dependency rows, and finite-to-exact rank map remain explicit terminal-relative inputs. The checkers do not derive those inputs from a terminal candidate or prove their external manuscript semantics. This milestone does not derive positive slack, SaturatePositive, BCELReady, the grouped family, or the no-lower ledger; establish unconditional HB.NegativeClosure or complete route silence; prove unconditional ZeroSlack, PCCMin, encoded-size or polynomial-runtime bounds, SAT in P; remove a project assumption; or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.check_eq_true_iff",
+        "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.firstRoute_eq_none_of_check",
+        "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.check_eq_false_of_firstRoute",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFaithful_eq_true_iff",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRoute_eq_none",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.checkPacketSelectorRoutesClear_eq_true_iff",
+        "PNP.DirectWire.TerminalPacketTypedRealizerTable.checkPacketSelectorFaithfulnessBinding_eq_true_iff",
+        "PNP.DirectWire.TerminalPacketSelectorHandleConclusion.existsHandle",
+        "PNP.DirectWire.TerminalBN6PacketConclusion.existsPacketSelectorHandle",
+        "PNP.DirectWire.TerminalBN6PacketConclusion.existsFaithfulHandle_of_routesClear",
+        "PNP.DirectWire.terminalBN6_packet_selector_faithfulness_hb_contradiction"
+      ],
+      "scope": "For every arbitrary finite explicit grouped BN6 family, exhaustive route-clear canonical payload checks plus exact binding to the supplied HB faithfulness table turn every positive Packet conclusion into a faithful canonical handle. Accepted executable HB selector silence and active-dependency closure prove that same handle nonfaithful, yielding a contradiction with selector silence. A fixed first-failure classifier exposes colour, frontier, charge, obligation, activation, direction, budget, rank, exact-route, or descent failure.",
+      "title": "Packet selector-faithfulness routing and HB contradiction"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -6851,7 +6882,7 @@
     {
       "classification": "not-formalized",
       "id": "global-zeroslack-pccmin",
-      "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; the exhaustive Packet scan verifies strict gains or exact no-gain over every canonical selector in one supplied explicit grouped family; an explicit global gain-coverage certificate conditionally upgrades that silence to a proof-bearing ZeroSlack result; the generic finite R-ChargeSurplus kernel derives strict gain from exact ledgers, an unmatched positive support charge, exact gate accounting, and separately proved semantics; the checked unit-charge blueprint realizer derives canonical ledgers and gains for every valid blueprint in one supplied family; the checked typed-realizer contract rejects every faithful-table row except a genuine blueprint gain or an explicitly active bounded-rank HN, budget, or strictly lower faithful seed bot; the checked exact-rank HB graph contract validates every edge in a supplied finite HN/BUD dependency graph; the checked total-table HB contract gives every finite HN/BUD node one row, materializes every listed dependency as an edge, and derives well-founded induction and cycle exclusion for that supplied table; the checked HB active-dependency closure combines an exhaustive active-to-active row condition with strict rank descent to prove every supplied HN/BUD activity bit false and remove HN/budget typed-bot branches; and the executable selector-silence induction exhaustively checks that every canonical realizer claim is a typed bottom, then combines supplied-table HB inactivity with strong finite-rank induction to prove every canonical handle in the accepted table nonfaithful without a global semantic no-gain premise. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, replacement blueprints, occurrence pairing, rank assignment, faithfulness predicate, exhaustive realizer claims, or blocker tables from terminal data; connect matching back to a contradiction; derive blocker semantics, semantic dependency completeness, or the checked local active-dependency premise from terminal data; prove every terminal-derived realizer claim is a typed bottom; map all residual routes into a decreasing complete global outcome system; or provide selector faithfulness or compatibility, an independently constructed realizer, unconditional global silence, and polynomial-runtime completeness. Global unconditional ZeroSlack and polynomial PCCMin therefore remain unformalized.",
+      "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; the exhaustive Packet scan verifies strict gains or exact no-gain over every canonical selector in one supplied explicit grouped family; an explicit global gain-coverage certificate conditionally upgrades that silence to a proof-bearing ZeroSlack result; the generic finite R-ChargeSurplus kernel derives strict gain from exact ledgers, an unmatched positive support charge, exact gate accounting, and separately proved semantics; the checked unit-charge blueprint realizer derives canonical ledgers and gains for every valid blueprint in one supplied family; the checked typed-realizer contract rejects every faithful-table row except a genuine blueprint gain or an explicitly active bounded-rank HN, budget, or strictly lower faithful seed bot; the checked exact-rank HB graph contract validates every edge in a supplied finite HN/BUD dependency graph; the checked total-table HB contract gives every finite HN/BUD node one row, materializes every listed dependency as an edge, and derives well-founded induction and cycle exclusion for that supplied table; the checked HB active-dependency closure combines an exhaustive active-to-active row condition with strict rank descent to prove every supplied HN/BUD activity bit false and remove HN/budget typed-bot branches; and the executable selector-silence induction exhaustively checks that every canonical realizer claim is a typed bottom, then combines supplied-table HB inactivity with strong finite-rank induction to prove every canonical handle in the accepted table nonfaithful without a global semantic no-gain premise. The Packet selector-faithfulness routing milestone now checks ten canonical source-payload fields, binds computed faithfulness exactly to the HB table, and derives a contradiction for every positive Packet under those explicit route-clear inputs. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, replacement blueprints, occurrence pairing, rank assignment, faithfulness predicate, exhaustive realizer claims, or blocker tables from terminal data; connect matching back to a contradiction; derive blocker semantics, semantic dependency completeness, or the checked local active-dependency premise from terminal data; derive the route-clear payload checks or exact HB binding from terminal data; map all residual routes into a decreasing complete global outcome system; or provide selector compatibility, an independently constructed realizer, unconditional global silence, and polynomial-runtime completeness. Global unconditional ZeroSlack and polynomial PCCMin therefore remain unformalized.",
       "requiredTheorems": [
         "PNP.Main.pccmin_polynomial_exact",
         "PNP.Main.zero_slack_complete"

@@ -751,6 +751,18 @@ selector faithfulness or compatibility, prove blocker semantics or semantic
 dependency completeness, close the full unconditional HB negative closure or
 ZeroSlack, provide polynomial bounds, put SAT in P, or prove \(P=NP\).
 
+The Packet selector-faithfulness routing bridge checks ten data-only fields on
+the canonical positive source payload behind every handle, reports the first
+failed route, exhaustively scans the canonical handle list, and binds the
+computed result exactly to the supplied HB faithfulness table. Every positive
+BN6 Packet supplies a canonical handle. Route-clear acceptance therefore makes
+one handle faithful, while accepted executable selector silence makes every
+handle nonfaithful, yielding a kernel-checked contradiction. The grouped
+family, payload checks, finite rank tags, HB table, claims, blocker activity,
+and dependency rows remain explicit inputs. Positive slack,
+\code{SaturatePositive}, \code{BCELReady}, terminal-data construction, complete
+route silence, unconditional ZeroSlack, and polynomial PCCMin remain open.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule
