@@ -1863,6 +1863,21 @@ route. Terminal-data construction, unconditional HB negative closure,
 ZeroSlack, and polynomial PCCMin remain open. See
 [`lean_residual_terminal_packet_selector_first_route_outcome.md`](./lean_residual_terminal_packet_selector_first_route_outcome.md).
 
+The exact Packet first-route semantics milestone in
+`ResidualTerminalPacketSelectorFirstRouteSemantics` now interprets that route
+at the supplied-payload boundary. For all ten constructors and every arbitrary
+finite rank, `firstRoute = some route` is equivalent to the exact proposition
+that all earlier fields accepted and the named field failed. The exact failure
+is unique, and rejection is equivalent to the existence of one such proof.
+The result lifts through canonical grouped-family payload selection; the
+positive-Packet/HB endpoint now returns both the route equality and its exact
+field-failure proposition without route-clear or binding premises. This does
+not derive the Boolean fields from terminal data, prove their external
+manuscript semantics, or map a failure into a decreasing complete global
+outcome. Unconditional HB negative closure, ZeroSlack, and polynomial PCCMin
+remain open. See
+[`lean_residual_terminal_packet_selector_first_route_semantics.md`](./lean_residual_terminal_packet_selector_first_route_semantics.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:
