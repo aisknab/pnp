@@ -698,6 +698,17 @@ Every positive packet has a representative in the polynomial selector universe; 
   payload fields, the grouped family, rank tags, HB data, claims, activity, and
   dependencies remain explicit; positive slack and the terminal-data
   construction needed for unconditional ZeroSlack remain open.
+- Canonical Packet faithfulness-table construction is witnessed by
+  `PNP.DirectWire.TerminalPacketTypedRealizerTable.withComputedPacketSelectorFaithfulness_binding`,
+  `PNP.DirectWire.TerminalBN6PacketConclusion.existsFaithfulHandle_of_computedTable`,
+  and
+  `PNP.DirectWire.terminalBN6_packet_computed_faithfulness_hb_contradiction`.
+  The constructor replaces the free faithfulness function with the canonical
+  payload computation and preserves ranks, claims, and HN/BUD activity. The
+  resulting contradiction has no independent binding premise. Payload checks,
+  rank assignment, family construction, blocker semantics, activity, and
+  dependency rows remain explicit rather than derived from terminal data, so
+  unconditional HB negative closure and ZeroSlack remain open.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -745,6 +756,11 @@ Every positive packet has a representative in the polynomial selector universe; 
     priority, or decouple the HB faithfulness bit from the computed payload.
     Require rejection before composing the positive Packet with selector
     silence.
+14. For canonical Packet faithfulness-table construction, mutate the
+    constructor to retain the caller's faithfulness function, alter the rank or
+    blocker-activity functions, replace a realizer claim, or reintroduce a
+    binding premise. Require rejection before accepting the binding-free
+    Packet-to-HB composition.
 
 **What would count as a refutation or material defect**
 
@@ -766,6 +782,9 @@ Every positive packet has a representative in the polynomial selector universe; 
 - A positive Packet accepted as route-clear without every canonical payload
   field and exact rank being checked, or an HB table whose faithfulness bits are
   not exactly bound to those computed results.
+- A supposedly canonicalized table that retains any caller-selected
+  faithfulness bit, changes ranks, blocker activity, or claims, or whose
+  Packet-to-HB theorem still relies on an independent binding hypothesis.
 
 ---
 

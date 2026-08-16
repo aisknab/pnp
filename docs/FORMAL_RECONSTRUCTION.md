@@ -1830,6 +1830,22 @@ complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain
 open. See
 [`lean_residual_terminal_packet_selector_faithfulness_routing.md`](./lean_residual_terminal_packet_selector_faithfulness_routing.md).
 
+The canonical Packet faithfulness-table construction in
+`ResidualTerminalPacketSelectorFaithfulnessTable` now removes the independent
+faithfulness-function choice at that boundary. It canonicalizes any supplied
+typed-realizer table by replacing its faithfulness function with the canonical
+positive source-payload computation while preserving the finite rank map,
+realizer claims, and HN/BUD activity functions exactly. Exhaustive
+faithfulness binding therefore accepts by construction. A route-clear positive
+Packet contradicts accepted executable selector silence without a separate
+binding premise. This is uniform over arbitrary finite grouped BN6 families
+and rank counts. The payload-field checks, rank assignment, grouped-family
+derivation, claims, blocker semantics, activity and dependency rows remain
+explicit inputs and are not derived from a terminal candidate. External
+selector compatibility, complete route silence, unconditional HB negative
+closure, ZeroSlack, and polynomial PCCMin remain open. See
+[`lean_residual_terminal_packet_selector_faithfulness_table.md`](./lean_residual_terminal_packet_selector_faithfulness_table.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:
