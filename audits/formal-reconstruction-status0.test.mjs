@@ -1178,6 +1178,18 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalPacketSelectorFirstRouteOutcomeScope,
     'all-arbitrary-finite-total-packet-first-route-classification-canonical-hb-selector-silence-without-route-clear-or-binding-premises',
   );
+  assert.equal(
+    out.leanResidualTerminalPacketSelectorFirstRouteSemanticsFormalized,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalPacketSelectorFirstRouteSemanticsAxiomAuditPassed,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalPacketSelectorFirstRouteSemanticsScope,
+    'all-arbitrary-finite-exact-earliest-field-semantics-for-ten-packet-first-routes-canonical-hb-first-route-failure-without-route-clear-or-binding-premises',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',

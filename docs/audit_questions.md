@@ -719,6 +719,16 @@ Every positive packet has a representative in the polynomial selector universe; 
   route-clear or binding premises. The route only classifies supplied payload
   fields: its external terminal semantics, decreasing global coverage, and the
   terminal-data construction remain open.
+- Exact Packet first-route failure semantics is witnessed by
+  `PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.firstRoute_eq_some_iff_failureAt`,
+  `PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.failureAt_unique`,
+  and
+  `PNP.DirectWire.terminalBN6_packet_computed_faithfulness_hb_first_route_failure`.
+  Each of the ten route constructors now means that all earlier supplied
+  fields accepted and the named field failed, and the positive-Packet/HB
+  endpoint retains that proposition. The payload fields are still supplied:
+  terminal-data derivation, external manuscript semantics, decreasing global
+  coverage, unconditional HB negative closure, and ZeroSlack remain open.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -776,6 +786,11 @@ Every positive packet has a representative in the polynomial selector universe; 
     change canonical payload selection, remove selector silence or HB closure,
     or reintroduce route-clear or binding premises. Require rejection before
     treating a positive Packet as having a concrete first route.
+16. For exact first-route semantics, mutate each constructor's named failed
+    field or one preceding accepted field, reorder the constructors, weaken the
+    route equivalence, remove failure uniqueness, select a noncanonical
+    payload, or drop the exact field proof from the HB endpoint. Require
+    rejection before assigning any meaning to the route tag.
 
 **What would count as a refutation or material defect**
 
@@ -803,6 +818,9 @@ Every positive packet has a representative in the polynomial selector universe; 
 - A rejected canonical payload with no concrete first route, or a positive
   Packet claimed to have an externally valid or decreasing route merely because
   its supplied Boolean payload reports one.
+- A route whose exact proposition omits an earlier accepted field, names the
+  wrong failed field, is not unique, or is promoted from supplied-payload
+  semantics to an external terminal claim without a derivation theorem.
 
 ---
 

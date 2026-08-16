@@ -353,6 +353,14 @@ failure, but it does not prove a route's external terminal semantics or map the
 route into a decreasing complete global outcome system. The terminal data and
 all remaining tables are still explicit inputs.
 
+Exact Packet first-route semantics now strengthens that route witness at the
+same supplied-data boundary. Each of the ten route constructors is equivalent
+to the corresponding earliest failed payload field, so the classifier also
+proves all preceding checks accepted. The exact failure is unique, and the
+canonical positive-Packet/HB endpoint retains this proof alongside the route.
+This does not derive payload fields from terminal data, validate their external
+manuscript semantics, or yet provide a decreasing complete global outcome.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its
@@ -389,6 +397,7 @@ positive residual slack
 => exhaustive canonical-payload route clearance and exact HB faithfulness binding turn every positive Packet into a faithful handle, contradicting executable selector silence (formalized for supplied data)
 => canonicalize the HB faithfulness table from those payload checks and remove the independent binding premise (formalized for supplied route-clear data)
 => totalize the canonical payload classifier and force one typed first route from every positive Packet under accepted canonical HB selector silence (formalized for supplied data)
+=> identify every typed route with its exact earliest supplied-field failure and retain that proof at the positive-Packet/HB endpoint (formalized for supplied data)
 => terminal-data construction of route-clear payloads, the grouped family, and the remaining HB tables; external selector compatibility (open)
 => full unconditional HB negative closure (open)
 => ZeroSlack is impossible under positive slack
