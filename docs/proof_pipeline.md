@@ -330,6 +330,18 @@ positive slack, SaturatePositive, BCELReady, terminal-data construction,
 complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain
 open.
 
+The canonical Packet faithfulness-table constructor now removes that
+independent faithfulness-table choice. For every arbitrary finite grouped BN6
+family, it rebuilds the typed-realizer environment with faithfulness equal to
+the canonical payload computation while preserving the rank map, HN/BUD
+activity, and realizer claims exactly. The binding checker accepts the rebuilt
+table by construction, so the positive-Packet versus selector-silence
+contradiction no longer takes a binding premise. The payload checks, rank map,
+family, claims, activity and dependency rows remain explicit inputs rather than
+terminal-candidate constructions. This is not the manuscript's full external
+selector compatibility claim, complete route silence, unconditional HB
+negative closure, ZeroSlack, or a polynomial bound.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its
@@ -364,7 +376,8 @@ positive residual slack
 => faithful lower-seed strong rank induction and supplied-table selector-silence rank closure (formalized conditionally)
 => executable all-row typed-bottom selector-silence scan removes the global no-gain premise (formalized for supplied tables)
 => exhaustive canonical-payload route clearance and exact HB faithfulness binding turn every positive Packet into a faithful handle, contradicting executable selector silence (formalized for supplied data)
-=> terminal-data construction of route-clear payloads, the grouped family, and HB tables; selector compatibility (open)
+=> canonicalize the HB faithfulness table from those payload checks and remove the independent binding premise (formalized for supplied route-clear data)
+=> terminal-data construction of route-clear payloads, the grouped family, and the remaining HB tables; external selector compatibility (open)
 => full unconditional HB negative closure (open)
 => ZeroSlack is impossible under positive slack
 ```

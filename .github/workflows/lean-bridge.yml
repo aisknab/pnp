@@ -3921,3 +3921,29 @@ jobs:
 
       - name: Run Packet selector-faithfulness routing hostile audit
         run: node --test audits/lean-residual-terminal-packet-selector-faithfulness-routing0.test.mjs
+
+      - name: Print canonical Packet faithfulness-table axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorFaithfulnessTableAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketSelectorFaithfulnessTableAxiomAudit.lean)"
+          test "$expected_count" -gt 0
+          test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected canonical Packet faithfulness-table axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -Eq 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            printf '%s\n' "$normalized" >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
+
+      - name: Run canonical Packet faithfulness-table regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorFaithfulnessTable.lean
+
+      - name: Run canonical Packet faithfulness-table hostile audit
+        run: node --test audits/lean-residual-terminal-packet-selector-faithfulness-table0.test.mjs
