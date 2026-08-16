@@ -43,7 +43,7 @@ jobs:
         run: npm test
 
       - name: Run conservative verifier
-        run: npm run pnp:verify -- --no-write
+        run: npm run pnp:verify -- --no-write --skip-unit-tests
 
       - name: Check documentation links
         run: node tools/check-doc-links.mjs

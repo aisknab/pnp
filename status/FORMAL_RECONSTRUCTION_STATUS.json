@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-16-152",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-17-153",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -917,6 +917,9 @@
   "leanResidualTerminalPacketSelectorFaithfulnessTableFormalized": true,
   "leanResidualTerminalPacketSelectorFaithfulnessTableAxiomAuditPassed": true,
   "leanResidualTerminalPacketSelectorFaithfulnessTableScope": "all-arbitrary-finite-canonical-packet-payload-faithfulness-table-construction-preserved-rank-claims-blocker-activity-binding-free-selector-silence-contradiction",
+  "leanResidualTerminalPacketSelectorFirstRouteOutcomeFormalized": true,
+  "leanResidualTerminalPacketSelectorFirstRouteOutcomeAxiomAuditPassed": true,
+  "leanResidualTerminalPacketSelectorFirstRouteOutcomeScope": "all-arbitrary-finite-total-packet-first-route-classification-canonical-hb-selector-silence-without-route-clear-or-binding-premises",
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -1470,6 +1473,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorFaithfulnessTableAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorFaithfulnessTable.lean",
     "node --test audits/lean-residual-terminal-packet-selector-faithfulness-table0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorFirstRouteOutcomeAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorFirstRouteOutcome.lean",
+    "node --test audits/lean-residual-terminal-packet-selector-first-route-outcome0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1506,6 +1512,7 @@
     "The executable selector-silence induction replaces the global semantic no-gain premise with an exhaustive data-only check that every canonical realizer claim is a typed bottom. Checked HB active-dependency closure removes HN/BUD bottoms, and strong finite-rank induction removes faithful lower seeds. The grouped family, rank and faithfulness functions, claims, activity functions, dependency rows, and rank map remain explicit data inputs; it does not construct them from terminal candidates, establish selector faithfulness or compatibility, prove blocker semantics or semantic dependency completeness, establish the full unconditional HB negative closure or ZeroSlack, or provide encoded-size and polynomial-runtime bounds.",
     "The Packet selector-faithfulness routing checker computes faithfulness from ten data-only fields on each canonical positive source payload, exposes the first failed route, exhaustively checks every canonical handle, and binds the result exactly to the supplied HB table. A positive Packet then yields a faithful handle that contradicts accepted executable HB selector silence. The grouped family, payload fields, rank tags, route-clear data, HB table, claims, blocker activity, and dependencies remain explicit inputs; positive slack, SaturatePositive, BCELReady, terminal-data construction, complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain open.",
     "The canonical Packet faithfulness-table constructor replaces the independently supplied faithfulness function with the canonical positive source-payload computation while preserving the finite rank map, realizer claims, and HN/BUD activity exactly. Binding accepts by construction and the Packet-to-HB contradiction has no binding premise. Payload checks, rank assignment, grouped-family derivation, claims, blocker semantics, activity, and dependency rows remain explicit rather than derived from terminal data; full external selector compatibility, complete route silence, unconditional HB negative closure, ZeroSlack, and polynomial PCCMin remain open.",
+    "The total Packet selector first-route outcome proves that the existing data-only classifier returns no route exactly on acceptance and a concrete earliest typed route exactly on rejection. Every positive Packet under the canonical table and accepted executable HB selector silence therefore exposes a first route without route-clear or binding premises. The payload fields, family, rank assignment, claims, activity, and dependencies remain explicit inputs; the result does not prove route semantics, decreasing global coverage, terminal-data construction, unconditional HB negative closure, ZeroSlack, or polynomial PCCMin.",
     "The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.",
     "The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.",
     "Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.",
@@ -1664,7 +1671,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "e694c3f4edcf59e6ba7c914be035f3d627b1b944a824eb11a032251addd67b6c",
+    "actualSourceClosureSha256": "d956ca0e44b1460f910a81d79082ba8790c2b2d911dabb5a3d9da7904d99e174",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1694,22 +1701,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-16-152",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-17-153",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "c3bfe2aaef651ef74c921e0e253fcd3e2fa9d1516c3f3edd00c5f4cdfef3e7fd",
+  "leanTheoremInventorySha256": "86ec3df3c13b17585118f616bcc3093bfaefb2d2208f20d037ccf57af79f51d8",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 28874,
+  "leanTheoremInventoryDeclarationCount": 28883,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 15047,
-  "leanTheoremInventoryTheoremCount": 14882,
+  "leanTheoremInventoryTheoremCount": 14889,
   "leanTheoremInventoryAssumptionFreeTheoremCount": 7492,
-  "leanTheoremInventorySourceClosureModuleCount": 269,
-  "leanSourceClosureSha256": "e694c3f4edcf59e6ba7c914be035f3d627b1b944a824eb11a032251addd67b6c",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-16-152",
+  "leanTheoremInventorySourceClosureModuleCount": 270,
+  "leanSourceClosureSha256": "d956ca0e44b1460f910a81d79082ba8790c2b2d911dabb5a3d9da7904d99e174",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-17-153",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "1be8e62cb4af7c2a9031890229b672bac14886656facfad4cb80bcfa5c98e667",
+  "formalPublicationMapSha256": "3463ece76b7994f38938c45a3a1822bdd4d94fa0b116e560e35d246798d68ad7",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -40701,6 +40708,111 @@
       "status": "formalized-residual-terminal-packet-selector-faithfulness-table"
     },
     {
+      "classification": "formalized-residual-terminal-packet-selector-first-route-outcome",
+      "id": "residual-terminal-packet-selector-first-route-outcome",
+      "nonClaim": "The grouped family, ten payload field Booleans, finite rank tags and rank assignment, realizer claims, HN/BUD activity, dependency rows, and finite-to-exact rank map remain explicit inputs. The result does not prove any route's external semantics and does not map reported routes into a decreasing complete global outcome system. It does not construct those inputs from a terminal candidate, establish full external selector compatibility, complete route silence, unconditional HB.NegativeClosure, positive slack, SaturatePositive, BCELReady, unconditional ZeroSlack, PCCMin, encoded-size or polynomial-runtime bounds, SAT in P; remove a project assumption; or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.firstRoute_eq_none_iff_check_eq_true",
+        "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.exists_firstRoute_iff_check_eq_false",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRoute_eq_none_iff",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.exists_packetSelectorPayloadFirstRoute_iff",
+        "PNP.DirectWire.TerminalBN6PacketConclusion.existsFaithfulOrFirstRoute",
+        "PNP.DirectWire.TerminalBN6PacketConclusion.existsFirstRoute_of_computedTableSelectorSilence",
+        "PNP.DirectWire.terminalBN6_packet_computed_faithfulness_hb_first_route"
+      ],
+      "scope": "For every arbitrary finite explicit grouped BN6 family and finite rank carrier, Lean proves the canonical payload first-route classifier total: no route exactly on acceptance and one earliest typed route exactly on rejection. Every positive Packet under the canonicalized HB table, accepted executable selector silence, and accepted active-dependency closure yields a first typed route without route-clear or binding premises.",
+      "title": "Total Packet selector first-route outcome",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.firstRoute_eq_none_iff_check_eq_true",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b625a59e34476438f381dda5275afae154e11f3c732ca4917c2c5405b3a0afb0",
+          "expectedKernelTypeSha256": "b625a59e34476438f381dda5275afae154e11f3c732ca4917c2c5405b3a0afb0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.exists_firstRoute_iff_check_eq_false",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "79da1d37a618b4c1cd3d5ba0523c2009a8180fb1f991f926a2ccff81e00c0867",
+          "expectedKernelTypeSha256": "79da1d37a618b4c1cd3d5ba0523c2009a8180fb1f991f926a2ccff81e00c0867",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRoute_eq_none_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4aec62315c14bee2482274c7032dce3f990a4d8fc89efc67d58f2049df72e888",
+          "expectedKernelTypeSha256": "4aec62315c14bee2482274c7032dce3f990a4d8fc89efc67d58f2049df72e888",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.exists_packetSelectorPayloadFirstRoute_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "85f9dcff475feec9607f7c2948e138369086c28f8ec9a1dde16f26ca968f539a",
+          "expectedKernelTypeSha256": "85f9dcff475feec9607f7c2948e138369086c28f8ec9a1dde16f26ca968f539a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6PacketConclusion.existsFaithfulOrFirstRoute",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c4cd83be265db5731337023dcc23f5d6e785e62c159e00c7273cbe573d8dd32a",
+          "expectedKernelTypeSha256": "c4cd83be265db5731337023dcc23f5d6e785e62c159e00c7273cbe573d8dd32a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6PacketConclusion.existsFirstRoute_of_computedTableSelectorSilence",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3631f55536cc941ec835177ec51cf7b4ca58d7ecbb9f9c3a03cfee1e559c895f",
+          "expectedKernelTypeSha256": "3631f55536cc941ec835177ec51cf7b4ca58d7ecbb9f9c3a03cfee1e559c895f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBN6_packet_computed_faithfulness_hb_first_route",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a7aa76d129b8ceb296249d5791fc3bc94e782b6eb5ee94c8e13e2e56ad7b1949",
+          "expectedKernelTypeSha256": "a7aa76d129b8ceb296249d5791fc3bc94e782b6eb5ee94c8e13e2e56ad7b1949",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-packet-selector-first-route-outcome"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -40734,7 +40846,7 @@
     {
       "classification": "not-formalized",
       "id": "global-zeroslack-pccmin",
-      "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; the exhaustive Packet scan verifies strict gains or exact no-gain over every canonical selector in one supplied explicit grouped family; an explicit global gain-coverage certificate conditionally upgrades that silence to a proof-bearing ZeroSlack result; the generic finite R-ChargeSurplus kernel derives strict gain from exact ledgers, an unmatched positive support charge, exact gate accounting, and separately proved semantics; the checked unit-charge blueprint realizer derives canonical ledgers and gains for every valid blueprint in one supplied family; the checked typed-realizer contract rejects every faithful-table row except a genuine blueprint gain or an explicitly active bounded-rank HN, budget, or strictly lower faithful seed bot; the checked exact-rank HB graph contract validates every edge in a supplied finite HN/BUD dependency graph; the checked total-table HB contract gives every finite HN/BUD node one row, materializes every listed dependency as an edge, and derives well-founded induction and cycle exclusion for that supplied table; the checked HB active-dependency closure combines an exhaustive active-to-active row condition with strict rank descent to prove every supplied HN/BUD activity bit false and remove HN/budget typed-bot branches; and the executable selector-silence induction exhaustively checks that every canonical realizer claim is a typed bottom, then combines supplied-table HB inactivity with strong finite-rank induction to prove every canonical handle in the accepted table nonfaithful without a global semantic no-gain premise. The Packet selector-faithfulness routing milestone checks ten canonical source-payload fields and derives a contradiction for every positive Packet under explicit route-clear inputs; the canonical table constructor now computes the HB faithfulness function from those payloads and removes the separate binding premise. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, replacement blueprints, occurrence pairing, rank assignment, payload checks, exhaustive realizer claims, or blocker tables from terminal data; connect matching back to a contradiction; derive blocker semantics, semantic dependency completeness, or the checked local active-dependency premise from terminal data; derive route-clear payload evidence from terminal data; map all residual routes into a decreasing complete global outcome system; or provide full external selector compatibility, an independently constructed realizer, unconditional global silence, and polynomial-runtime completeness. Global unconditional ZeroSlack and polynomial PCCMin therefore remain unformalized.",
+      "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; the exhaustive Packet scan verifies strict gains or exact no-gain over every canonical selector in one supplied explicit grouped family; an explicit global gain-coverage certificate conditionally upgrades that silence to a proof-bearing ZeroSlack result; the generic finite R-ChargeSurplus kernel derives strict gain from exact ledgers, an unmatched positive support charge, exact gate accounting, and separately proved semantics; the checked unit-charge blueprint realizer derives canonical ledgers and gains for every valid blueprint in one supplied family; the checked typed-realizer contract rejects every faithful-table row except a genuine blueprint gain or an explicitly active bounded-rank HN, budget, or strictly lower faithful seed bot; the checked exact-rank HB graph contract validates every edge in a supplied finite HN/BUD dependency graph; the checked total-table HB contract gives every finite HN/BUD node one row, materializes every listed dependency as an edge, and derives well-founded induction and cycle exclusion for that supplied table; the checked HB active-dependency closure combines an exhaustive active-to-active row condition with strict rank descent to prove every supplied HN/BUD activity bit false and remove HN/budget typed-bot branches; and the executable selector-silence induction exhaustively checks that every canonical realizer claim is a typed bottom, then combines supplied-table HB inactivity with strong finite-rank induction to prove every canonical handle in the accepted table nonfaithful without a global semantic no-gain premise. The Packet selector-faithfulness routing milestone checks ten canonical source-payload fields and derives a contradiction for every positive Packet under explicit route-clear inputs; the canonical table constructor now computes the HB faithfulness function from those payloads and removes the separate binding premise; and total first-route classification turns every canonical payload rejection into one earliest typed route, which canonical HB selector silence forces for a positive Packet without route-clear or binding premises. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, replacement blueprints, occurrence pairing, rank assignment, payload checks, exhaustive realizer claims, or blocker tables from terminal data; connect matching back to a contradiction; derive blocker semantics, semantic dependency completeness, or the checked local active-dependency premise from terminal data; prove any reported route's external semantics or map all residual routes into a decreasing complete global outcome system; or provide full external selector compatibility, an independently constructed realizer, unconditional global silence, and polynomial-runtime completeness. Global unconditional ZeroSlack and polynomial PCCMin therefore remain unformalized.",
       "requiredTheorems": [
         "PNP.Main.pccmin_polynomial_exact",
         "PNP.Main.zero_slack_complete"
@@ -40798,7 +40910,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-16-152",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-17-153",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true
