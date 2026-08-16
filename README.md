@@ -30,16 +30,16 @@ mathematical validation.
 | **How do I run the current verification?** | Run `npm ci --ignore-scripts` and `npm run pnp:verify -- --no-write`. This checks the non-claiming formal status, current package surface, pinned archive identity, and the small current-authority test suite; it is not a proof verification. |
 | **Where should reviewers start?** | Start with the current-authority [compiled Lean theorem inventory](./docs/lean_theorem_inventory.md) and [formal reconstruction notice](./docs/FORMAL_RECONSTRUCTION.md). The reviewer guide, proof pipeline, terminology crosswalk, trust model, and audit questions are historical checker-route review aids whose numbered report citations target the pinned 56-page manuscript. |
 
-The latest residual milestone is exact Packet first-route failure semantics.
-For every arbitrary finite payload rank, each of the ten route constructors is
-now equivalent to the exact earliest failed supplied field: every preceding
-field accepted and the named field failed. The failure is unique, rejection is
-equivalent to the existence of one such proof, and the canonical positive-
-Packet/HB endpoint carries both the executable route equality and its exact
-field-failure proposition without route-clear or binding premises. These are
-semantics of the existing Boolean payload only. Derivation from terminal data,
-external manuscript semantics, decreasing global coverage, unconditional HB
-negative closure, ZeroSlack, and polynomial PCCMin remain open.
+The latest residual milestone is the rank-reflected Packet descent route. The
+canonical payload now ignores its caller-supplied final descent Boolean and
+computes that field from the exact ten-coordinate `RankWF` comparison. An
+accepted computed payload therefore carries actual rank descent, while a final
+`.descent` failure proves that the supplied transition is nondecreasing. Every
+positive Packet under executable HB silence returns either that proof or an
+earlier exact field route, without route-clear or descent-binding premises.
+The first nine fields, per-handle ranks, grouped family, and HB tables remain
+explicit. External semantics for the other nine routes, complete route
+silence, unconditional ZeroSlack, and polynomial PCCMin remain open.
 
 ## Current claim boundary
 
@@ -276,6 +276,7 @@ suite; it must not be confused with the frozen 1,121-test source release.
 | Canonical Packet faithfulness-table construction | `node --test audits/lean-residual-terminal-packet-selector-faithfulness-table0.test.mjs`, `lean-audit/PNPResidualTerminalPacketSelectorFaithfulnessTableAxiomAudit.lean`, and `lean-regression/PNPResidualTerminalPacketSelectorFaithfulnessTable.lean` | The typed-realizer table is rebuilt with faithfulness computed from each canonical positive source payload; rank, claims, and HN/BUD activity are preserved exactly. Binding accepts by construction, so the Packet-to-HB contradiction no longer needs an independent binding premise. | Payload checks, rank assignment, grouped-family derivation, claims, blocker semantics, activity and dependency tables remain explicit or open. This is not full external selector compatibility, terminal-data construction, complete route silence, unconditional HB negative closure or ZeroSlack/PCCMin, polynomial bounds, SAT in P, or `P = NP`. |
 | Total Packet selector first-route outcome | `node --test audits/lean-residual-terminal-packet-selector-first-route-outcome0.test.mjs`, `lean-audit/PNPResidualTerminalPacketSelectorFirstRouteOutcomeAxiomAudit.lean`, and `lean-regression/PNPResidualTerminalPacketSelectorFirstRouteOutcome.lean` | Payload rejection is equivalent to a concrete earliest typed first route. Every positive Packet under the canonical table and accepted executable HB selector silence yields such a route without route-clear or binding premises. | Payload fields and all terminal-relative tables remain explicit. This does not prove route semantics or decreasing global coverage, construct terminal data, close unconditional HB negative closure or ZeroSlack/PCCMin, establish polynomial bounds, put SAT in P, or prove `P = NP`. |
 | Exact Packet first-route failure semantics | `node --test audits/lean-residual-terminal-packet-selector-first-route-semantics0.test.mjs`, `lean-audit/PNPResidualTerminalPacketSelectorFirstRouteSemanticsAxiomAudit.lean`, and `lean-regression/PNPResidualTerminalPacketSelectorFirstRouteSemantics.lean` | Each of the ten route values is equivalent to its exact earliest failed supplied field; failure is unique, and the canonical positive-Packet/HB endpoint retains the field proof alongside the route. | This interprets supplied Boolean payload fields only. It does not derive them from terminal data, prove their external manuscript semantics, establish decreasing global coverage, close unconditional HB negative closure or ZeroSlack/PCCMin, put SAT in P, or prove `P = NP`. |
+| Rank-reflected Packet descent route | `node --test audits/lean-residual-terminal-packet-descent-route-reflection0.test.mjs`, `lean-audit/PNPResidualTerminalPacketDescentRouteReflectionAxiomAudit.lean`, and `lean-regression/PNPResidualTerminalPacketDescentRouteReflection.lean` | The final payload field is computed from the exact ten-coordinate `RankWF` comparison. A forced positive-Packet/HB failure is either an earlier exact field route or proof that the supplied transition is nondecreasing. | The first nine fields and all rank, family, claim, activity, and dependency data remain explicit. This does not map the other nine routes globally, close unconditional HB negative closure or ZeroSlack/PCCMin, establish polynomial bounds, put SAT in P, or prove `P = NP`. |
 | Archive integrity | `npm run legacy:v0:check` | Three annotated-tag identities and the pinned release digests match the archive manifest. | Signed provenance, theorem correctness, or checker soundness. |
 | Historical checker replay | `npm run legacy:v0:replay -- --output /tmp/pnp-legacy-v0-7072f8d` | The pinned legacy implementation and selected tests reproduce their recorded behavior outside the active checkout. | Current theorem status, independent checker soundness, or validation of every mathematical implication. |
 | Release checksums | `SHA256SUMS` and `SHA256SUMS.sha256` | Published artefact bytes match the sealed ledger. | Correctness of the artefact contents. |
@@ -386,6 +387,7 @@ recorded by [`archive/legacy-v0/`](./archive/legacy-v0/README.md).
 - [Lean canonical Packet faithfulness-table construction](./docs/lean_residual_terminal_packet_selector_faithfulness_table.md): the HB table's faithfulness function is now computed from canonical Packet payloads and binds by construction, while payload semantics and terminal-data derivation remain open.
 - [Lean total Packet selector first-route outcome](./docs/lean_residual_terminal_packet_selector_first_route_outcome.md): rejection now yields a concrete earliest typed route and canonical HB selector silence forces that outcome for every positive Packet, while external route semantics and decreasing global coverage remain open.
 - [Lean exact Packet first-route failure semantics](./docs/lean_residual_terminal_packet_selector_first_route_semantics.md): every route now carries the exact earliest supplied-field failure it names, while terminal-data derivation and external manuscript semantics remain open.
+- [Lean rank-reflected Packet descent route](./docs/lean_residual_terminal_packet_descent_route_reflection.md): the final descent field is computed from the ten-coordinate `RankWF` relation, while the first nine fields and complete global route integration remain open.
 
 ## Install and current package surface
 

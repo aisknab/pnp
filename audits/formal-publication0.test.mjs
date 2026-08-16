@@ -2833,6 +2833,29 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /does not derive.*terminal data/u);
   assert.match(terminalPacketSelectorFirstRouteSemantics.nonClaim,
     /does not prove.*external manuscript semantics/u);
+  const terminalPacketDescentRouteReflection = byId.get(
+    'residual-terminal-packet-descent-route-reflection',
+  );
+  assert.equal(terminalPacketDescentRouteReflection.status,
+    'formalized-residual-terminal-packet-descent-route-reflection');
+  assert.equal(terminalPacketDescentRouteReflection.earned, true);
+  assert.equal(
+    terminalPacketDescentRouteReflection
+      .axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.equal(
+    terminalPacketDescentRouteReflection.requiredTheorems.length,
+    9,
+  );
+  assert.match(terminalPacketDescentRouteReflection.scope,
+    /strict-descent.*ten-coordinate.*RankWF/u);
+  assert.match(terminalPacketDescentRouteReflection.scope,
+    /earlier.*route.*nondecreasing/u);
+  assert.match(terminalPacketDescentRouteReflection.nonClaim,
+    /first nine.*explicit/u);
+  assert.match(terminalPacketDescentRouteReflection.nonClaim,
+    /does not construct.*ranks/u);
   const lockedNANDThreshold = byId.get('global-locked-nand-threshold');
   assert.equal(lockedNANDThreshold.status,
     'formalized-concrete-locked-nand-threshold');

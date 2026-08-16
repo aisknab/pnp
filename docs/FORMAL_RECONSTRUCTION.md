@@ -1878,6 +1878,20 @@ outcome. Unconditional HB negative closure, ZeroSlack, and polynomial PCCMin
 remain open. See
 [`lean_residual_terminal_packet_selector_first_route_semantics.md`](./lean_residual_terminal_packet_selector_first_route_semantics.md).
 
+The rank-reflected Packet descent-route milestone in
+`ResidualTerminalPacketDescentRouteReflection` now removes the free Boolean at
+the final route. The canonical payload preserves the first nine fields and
+computes `strictDescentClear` from the exact ten-coordinate `RankWF`
+comparison. Acceptance yields an actual decreasing relation; a final descent
+failure yields its negation. The positive-Packet/HB endpoint therefore returns
+an earlier exact field route or a proof that the supplied transition is
+nondecreasing, without route-clear or descent-binding premises. The first nine
+fields, before/after ranks, grouped family, and HB data remain explicit, and
+the other nine routes are not yet mapped into the complete global outcome
+system. Complete route silence, unconditional HB negative closure, ZeroSlack,
+and polynomial PCCMin remain open. See
+[`lean_residual_terminal_packet_descent_route_reflection.md`](./lean_residual_terminal_packet_descent_route_reflection.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

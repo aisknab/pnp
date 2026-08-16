@@ -361,6 +361,14 @@ canonical positive-Packet/HB endpoint retains this proof alongside the route.
 This does not derive payload fields from terminal data, validate their external
 manuscript semantics, or yet provide a decreasing complete global outcome.
 
+Rank-reflected Packet descent now replaces the final caller-supplied Boolean
+with `terminalResidualRankLTBool after before`. The first nine fields are
+preserved exactly. A computed `.descent` failure therefore proves that the
+supplied transition is nondecreasing in the exact ten-coordinate `RankWF`
+relation, and the canonical Packet/HB endpoint returns that proof or an
+earlier exact route. The before/after ranks and remaining nine fields are still
+explicit inputs; this is one mapped route, not complete global routing.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its
@@ -398,6 +406,7 @@ positive residual slack
 => canonicalize the HB faithfulness table from those payload checks and remove the independent binding premise (formalized for supplied route-clear data)
 => totalize the canonical payload classifier and force one typed first route from every positive Packet under accepted canonical HB selector silence (formalized for supplied data)
 => identify every typed route with its exact earliest supplied-field failure and retain that proof at the positive-Packet/HB endpoint (formalized for supplied data)
+=> compute the final descent field from the exact ten-coordinate RankWF relation and retain either an earlier route or actual nondecrease (formalized for supplied ranks; remaining nine fields open)
 => terminal-data construction of route-clear payloads, the grouped family, and the remaining HB tables; external selector compatibility (open)
 => full unconditional HB negative closure (open)
 => ZeroSlack is impossible under positive slack
