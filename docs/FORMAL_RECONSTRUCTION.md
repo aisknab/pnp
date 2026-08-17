@@ -1892,6 +1892,22 @@ system. Complete route silence, unconditional HB negative closure, ZeroSlack,
 and polynomial PCCMin remain open. See
 [`lean_residual_terminal_packet_descent_route_reflection.md`](./lean_residual_terminal_packet_descent_route_reflection.md).
 
+The canonical Packet rank-tag route-reflection milestone in
+`ResidualTerminalPacketRankRouteReflection` now removes the second duplicate
+field at that boundary. The typed-realizer table already assigns every handle
+one authoritative finite rank, so
+`withComputedRankDescent expectedRank before after` copies that rank into the
+payload and retains the exact residual-rank descent computation. The
+classifier cannot return `.rank`; a final `.descent` route still proves actual
+nondecrease. The positive-Packet/HB endpoint carries the exact failure proof,
+rank-route exclusion, and final nondecrease alternative without route-clear,
+rank-binding, or descent-binding premises. The rank map, residual ranks, seven
+earlier Boolean fields, `exactRouteClear`, grouped family, and HB data remain
+explicit. The eight remaining routes are not yet mapped into the complete
+global outcome system. Complete route silence, unconditional HB negative
+closure, ZeroSlack, and polynomial PCCMin remain open. See
+[`lean_residual_terminal_packet_rank_route_reflection.md`](./lean_residual_terminal_packet_rank_route_reflection.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:
