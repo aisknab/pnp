@@ -811,6 +811,17 @@ remain explicit, and the other nine routes are not yet mapped into a complete
 global outcome. Complete route silence, unconditional HB negative closure,
 ZeroSlack, and polynomial PCCMin remain open.
 
+Canonical Packet rank-tag reflection now removes the payload's separate copy
+of the finite handle rank. The table-owned rank is copied into
+\code{rankTag}, while the exact residual-descent computation is retained. The
+canonical first-route classifier therefore cannot return \code{.rank}; a
+final \code{.descent} route still carries actual nondecrease. The finite rank
+map, before/after residual ranks, seven earlier Boolean fields,
+\code{exactRouteClear}, grouped family, and HB data remain explicit. The eight
+remaining routes are not mapped into a complete global outcome. Complete route
+silence, unconditional HB negative closure, ZeroSlack, and polynomial PCCMin
+remain open.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule

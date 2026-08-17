@@ -369,6 +369,15 @@ relation, and the canonical Packet/HB endpoint returns that proof or an
 earlier exact route. The before/after ranks and remaining nine fields are still
 explicit inputs; this is one mapped route, not complete global routing.
 
+Canonical Packet rank-tag reflection now removes the payload's separate copy
+of its finite handle rank. The table-owned `rankOf handle` is copied into
+`rankTag`, while the exact residual-descent computation is retained. The
+canonical classifier therefore cannot return `.rank`; its final `.descent`
+route still carries actual nondecrease. The rank map, residual ranks, seven
+earlier Boolean fields, and `exactRouteClear` remain explicit inputs. The eight
+remaining routes still lack complete external semantics and global routing,
+so this does not establish route silence, ZeroSlack, or polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

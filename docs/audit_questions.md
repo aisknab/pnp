@@ -739,6 +739,16 @@ Every positive packet has a representative in the polynomial selector universe; 
   nondecrease. The first nine fields and per-handle ranks remain explicit, and
   the other nine routes, complete route silence, unconditional ZeroSlack, and
   polynomial PCCMin remain open.
+- Canonical Packet rank-tag reflection is witnessed by
+  `PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedRankDescent_firstRoute_ne_some_rank`,
+  `PNP.DirectWire.TerminalBN6GroupedFamily.computedRankDescent_firstRoute_ne_some_rank`,
+  and
+  `PNP.DirectWire.terminalBN6_packet_rank_tag_reflected_hb_first_route_failure`.
+  The table-owned handle rank is copied into the canonical payload, so a
+  caller-supplied mismatching tag cannot produce `.rank`. The finite rank map,
+  residual ranks, and eight remaining routes remain explicit or externally
+  uninterpreted; complete route silence, unconditional ZeroSlack, and
+  polynomial PCCMin remain open.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -806,6 +816,11 @@ Every positive packet has a representative in the polynomial selector universe; 
     assert descent rather than nondecrease, alter preserved table inputs, or
     add a descent-binding premise. Require rejection before treating the final
     Packet route as evidence about `RankWF`.
+18. For canonical rank-tag reflection, restore the payload's original
+    `rankTag`, remove composition with computed descent, change the table-owned
+    rank used for one handle, permit a `.rank` result, alter a preserved field,
+    or add a rank-binding premise. Require rejection before treating the
+    finite rank copy as canonical.
 
 **What would count as a refutation or material defect**
 
@@ -839,6 +854,10 @@ Every positive packet has a representative in the polynomial selector universe; 
 - A supposedly rank-reflected payload that retains the original descent
   Boolean, compares ranks in the wrong direction, changes one of the first nine
   fields, or reports `.descent` without proving actual nondecrease.
+- A supposedly canonical rank-tag payload that retains its caller-supplied
+  rank, uses a rank other than the table-owned handle rank, permits `.rank`,
+  drops exact residual-descent computation, or promotes one of the eight
+  remaining routes without external adequacy evidence.
 
 ---
 
