@@ -403,6 +403,20 @@ remain explicit. Those six routes still lack complete external semantics and
 global routing, so this does not establish route silence, unconditional
 ZeroSlack, or polynomial PCCMin.
 
+Canonical Packet colour-route reflection now removes the payload's separate
+internal colour bit. Every canonical handle already has a grouped footprint
+proved to lie in the family carrier and to contain at least two atoms, so the
+active payload computes `colourChecked` from selector-relevant footprint size
+while retaining the carrier-sublist theorem, positive charge, internal source
+route, table-owned rank, and exact residual descent. The canonical classifier
+can return none of `.colour`, `.charge`, `.exactRoute`, or `.rank`; a final
+`.descent` route still carries actual nondecrease. This internal eligibility
+check is not full external manuscript colour equivalence. The five remaining
+semantic Boolean fields, grouped family, rank map, residual ranks, and HB data
+remain explicit. Those five routes still lack complete external semantics and
+global routing, so this does not establish route silence, unconditional
+ZeroSlack, or polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

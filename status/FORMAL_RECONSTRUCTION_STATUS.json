@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-17-158",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-18-159",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -935,6 +935,9 @@
   "leanResidualTerminalPacketChargeRouteReflectionFormalized": true,
   "leanResidualTerminalPacketChargeRouteReflectionAxiomAuditPassed": true,
   "leanResidualTerminalPacketChargeRouteReflectionScope": "all-arbitrary-finite-positive-source-charge-charge-route-excluded-exact-route-excluded-rank-route-excluded-exact-rankwf-nondecrease-or-six-earlier-semantic-routes-without-route-clear-or-binding-premises",
+  "leanResidualTerminalPacketColourRouteReflectionFormalized": true,
+  "leanResidualTerminalPacketColourRouteReflectionAxiomAuditPassed": true,
+  "leanResidualTerminalPacketColourRouteReflectionScope": "all-arbitrary-finite-grouped-footprint-colour-colour-route-excluded-charge-route-excluded-exact-route-excluded-rank-route-excluded-exact-rankwf-nondecrease-or-five-earlier-semantic-routes-without-route-clear-or-binding-premises",
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -1506,6 +1509,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketChargeRouteReflectionAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketChargeRouteReflection.lean",
     "node --test audits/lean-residual-terminal-packet-charge-route-reflection0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketColourRouteReflectionAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketColourRouteReflection.lean",
+    "node --test audits/lean-residual-terminal-packet-colour-route-reflection0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1548,6 +1554,7 @@
     "Canonical Packet rank-tag reflection copies the table-owned handle rank into the source payload while retaining exact residual-descent computation. The canonical first route cannot be rank, and a final descent route still proves actual nondecrease. The finite rank map, before/after residual ranks, seven earlier Boolean fields, exact-route field, grouped family, and HB data remain explicit; the eight remaining routes lack complete external semantics and global integration, so complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain open.",
     "Canonical Packet exact-route reflection marks the already proved internal handle-to-cell-to-positive-payload source route clear by construction, while retaining the table-owned rank and exact residual-descent computation. The canonical first route can return neither exactRoute nor rank, and a final descent route still proves actual nondecrease. The seven semantic Boolean fields, grouped family, rank map, residual ranks, and HB data remain explicit. This internal route is not an external exact minimum; the seven remaining routes lack complete external semantics and global integration, so complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain open.",
     "Canonical Packet charge-route reflection uses the selected source atom's proved positive mass to clear the internal charge field by construction while retaining exact-route, rank, and residual-descent reflection. The canonical first route can return none of charge, exactRoute, or rank, and a final descent route still proves actual nondecrease. Six semantic Boolean fields, the grouped family, rank map, residual ranks, and HB data remain explicit. Positive source mass is not full external charge-surplus or replacement semantics; the six remaining routes lack complete external semantics and global integration, so complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain open.",
+    "Canonical Packet colour-route reflection computes grouped-footprint eligibility from each canonical handle and clears the internal colour field by construction while retaining positive charge, the internal source route, authoritative rank, and residual-descent reflection. The canonical first route can return none of colour, charge, exactRoute, or rank, and a final descent route still proves actual nondecrease. Five semantic Boolean fields, the grouped family, rank map, residual ranks, and HB data remain explicit. The internal size check plus separately proved carrier-sublist membership is not full external manuscript colour equivalence; the five remaining routes lack complete external semantics and global integration, so complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain open.",
     "The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.",
     "The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.",
     "Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.",
@@ -1706,7 +1713,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "f89d2e351c9cfe7199ac655863bb3e228f81643443325aa4afb26303da9ecfb2",
+    "actualSourceClosureSha256": "62e439d2672e3c3b5f06dbd280632447a81f89e3d73abe5c0a8c7c15023d07c1",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1736,22 +1743,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-17-158",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-18-159",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "57a6835f56d18fe29569fb7de8b70b583bfe4d7bbd8ab1c4e46a3de27a2fa407",
+  "leanTheoremInventorySha256": "ad5609d62bfb336e08175e952ce073e6063d74373975d98cffd659150bb68ded",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 29006,
+  "leanTheoremInventoryDeclarationCount": 29042,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 15058,
-  "leanTheoremInventoryTheoremCount": 14981,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 7506,
-  "leanTheoremInventorySourceClosureModuleCount": 275,
-  "leanSourceClosureSha256": "f89d2e351c9cfe7199ac655863bb3e228f81643443325aa4afb26303da9ecfb2",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-17-158",
+  "leanTheoremInventoryTheoremCount": 15009,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 7507,
+  "leanTheoremInventorySourceClosureModuleCount": 276,
+  "leanSourceClosureSha256": "62e439d2672e3c3b5f06dbd280632447a81f89e3d73abe5c0a8c7c15023d07c1",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-18-159",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "87457f109923e808c2c9c352d9b170bc96c0e8864f5ddea471d7f74e6030a1d0",
+  "formalPublicationMapSha256": "6dad05c44f7150e98f21fa332198d6f5a51e2994a3ac6b2e8f3053eca7d1730d",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -41692,6 +41699,292 @@
       "status": "formalized-residual-terminal-packet-charge-route-reflection"
     },
     {
+      "classification": "formalized-residual-terminal-packet-colour-route-reflection",
+      "id": "residual-terminal-packet-colour-route-reflection",
+      "nonClaim": "The internal colour check proves only canonical grouped-footprint eligibility: selector-relevant size with carrier-sublist membership retained as a separate theorem. It is not the full external manuscript colour equivalence. The five remaining semantic Boolean payload fields, finite rank map, before/after residual ranks, grouped family, realizer claims, HN/BUD activity, dependency rows, and finite-to-exact rank map remain explicit inputs. The five remaining routes still lack complete external semantics and global integration. The result does not construct the grouped family or rank map from terminal data, derive those five fields from a terminal candidate, prove that a decreasing transition exists, or construct the no-lower ledger. It does not establish full external selector compatibility, complete route silence, unconditional HB.NegativeClosure, positive slack, SaturatePositive, BCELReady, unconditional ZeroSlack, PCCMin, encoded-size or polynomial-runtime bounds, SAT in P; remove a project assumption; or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_valid_iff",
+        "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_failureAt_colour_iff",
+        "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_failureAt_charge_iff_false",
+        "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_failureAt_rank_iff_false",
+        "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_failureAt_exactRoute_iff_false",
+        "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_firstRoute_ne_some_colour",
+        "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_firstRoute_ne_some_charge",
+        "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_firstRoute_ne_some_rank",
+        "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_firstRoute_ne_some_exactRoute",
+        "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_failureAt_descent_iff",
+        "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_firstRoute_eq_some_descent_iff",
+        "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.rankDescent_of_withComputedColourChargeExactRouteRankDescent_check",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorCanonicalColourEligibility",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRouteWithComputedColourChargeExactRouteRankDescent_eq_some_iff",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.computedColourChargeExactRouteRankDescent_firstRoute_ne_some_colour",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.computedColourChargeExactRouteRankDescent_firstRoute_ne_some_charge",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.computedColourChargeExactRouteRankDescent_firstRoute_ne_some_rank",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.computedColourChargeExactRouteRankDescent_firstRoute_ne_some_exactRoute",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.not_rankDescent_of_computedColourChargeExactRouteRankDescent_firstRoute_descent",
+        "PNP.DirectWire.TerminalPacketTypedRealizerTable.withComputedPacketSelectorColourChargeExactRouteRankDescentFaithfulness_preserves",
+        "PNP.DirectWire.TerminalBN6PacketConclusion.existsColourReflectedFirstRouteFailure_of_selectorSilence",
+        "PNP.DirectWire.terminalBN6_packet_colour_reflected_hb_first_route_failure"
+      ],
+      "scope": "For every arbitrary finite grouped BN6 family and selector-rank carrier, each canonical handle has a grouped footprint proved to lie in the family carrier and to have selector-relevant size. That internal grouped-footprint colour check is computed by construction while positive charge, the internal source route, authoritative handle rank, and exact ten-coordinate descent comparison remain canonical. The first-route classifier cannot return colour, charge, rank, or exactRoute; a final descent route proves nondecrease, and the positive Packet/HB endpoint carries exact failure evidence without route-clear or binding premises.",
+      "title": "Canonical Packet colour-route reflection",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_valid_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "13cf60a9b59211b3d9016ee029573acfa7467dcda53a87e09c4af6972bfca699",
+          "expectedKernelTypeSha256": "13cf60a9b59211b3d9016ee029573acfa7467dcda53a87e09c4af6972bfca699",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_failureAt_colour_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "fdaeb023ecb7e24a21f6e0e860db14f81a4faff24b657609f866df957d226e84",
+          "expectedKernelTypeSha256": "fdaeb023ecb7e24a21f6e0e860db14f81a4faff24b657609f866df957d226e84",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_failureAt_charge_iff_false",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8f83961e142179b83e7b1e5eaaed6e87902d768de74891e534454417c647c6a3",
+          "expectedKernelTypeSha256": "8f83961e142179b83e7b1e5eaaed6e87902d768de74891e534454417c647c6a3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_failureAt_rank_iff_false",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "cf89f76816274f4cdb889d3b0ac4cf2273834f51c4b7361cafc6b904b8254aea",
+          "expectedKernelTypeSha256": "cf89f76816274f4cdb889d3b0ac4cf2273834f51c4b7361cafc6b904b8254aea",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_failureAt_exactRoute_iff_false",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "bd31b87708d85c1578269d4d3f62f4ad64dd2528effe0e91e8325abcdd738c64",
+          "expectedKernelTypeSha256": "bd31b87708d85c1578269d4d3f62f4ad64dd2528effe0e91e8325abcdd738c64",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_firstRoute_ne_some_colour",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9195c6af2d2f5c8bad9809705f0bb0b9a8bf2c5ed0df197f75fbf903e6d4078b",
+          "expectedKernelTypeSha256": "9195c6af2d2f5c8bad9809705f0bb0b9a8bf2c5ed0df197f75fbf903e6d4078b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_firstRoute_ne_some_charge",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "027489d455bd433b3b89d3c18035e353673ff84644fa7af9a0a63ebe924b7257",
+          "expectedKernelTypeSha256": "027489d455bd433b3b89d3c18035e353673ff84644fa7af9a0a63ebe924b7257",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_firstRoute_ne_some_rank",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7406d63ed77542790d792d25df56dc2ab0014ba17a7c1863a33e620a36d186a1",
+          "expectedKernelTypeSha256": "7406d63ed77542790d792d25df56dc2ab0014ba17a7c1863a33e620a36d186a1",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_firstRoute_ne_some_exactRoute",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4d86dff39bbfe8dc952ad72e47b7b116ce7adeff55d581e2a6bdc50215af5ef2",
+          "expectedKernelTypeSha256": "4d86dff39bbfe8dc952ad72e47b7b116ce7adeff55d581e2a6bdc50215af5ef2",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_failureAt_descent_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e9b973369fc100336963a092a46f0db73b956b327bb872f6b85758a6e762dadf",
+          "expectedKernelTypeSha256": "e9b973369fc100336963a092a46f0db73b956b327bb872f6b85758a6e762dadf",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.withComputedColourChargeExactRouteRankDescent_firstRoute_eq_some_descent_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "85914d947e1896ec0f32f80e5a4e283401a0672ffe9d73fc94bf7a8debfc8c6e",
+          "expectedKernelTypeSha256": "85914d947e1896ec0f32f80e5a4e283401a0672ffe9d73fc94bf7a8debfc8c6e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorFaithfulnessPayload.rankDescent_of_withComputedColourChargeExactRouteRankDescent_check",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "877f74124eed4b20fb262519aa2772031eabf9560b53426fbcc8d06a92f694ed",
+          "expectedKernelTypeSha256": "877f74124eed4b20fb262519aa2772031eabf9560b53426fbcc8d06a92f694ed",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorCanonicalColourEligibility",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6f421fd3f25c39d38dbf14406abd12a0fdc6fb38149d22fd7f29d8306e94f3ee",
+          "expectedKernelTypeSha256": "6f421fd3f25c39d38dbf14406abd12a0fdc6fb38149d22fd7f29d8306e94f3ee",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRouteWithComputedColourChargeExactRouteRankDescent_eq_some_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "05f397f1ab24b451a6eb87dce58f2b186f4199ff1a3c171bf8283ddcf4ba06cb",
+          "expectedKernelTypeSha256": "05f397f1ab24b451a6eb87dce58f2b186f4199ff1a3c171bf8283ddcf4ba06cb",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.computedColourChargeExactRouteRankDescent_firstRoute_ne_some_colour",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a1d6785a715bbcdac10abacf2cb5e0bff74993469f9c3f7a9276a5fbe7361f88",
+          "expectedKernelTypeSha256": "a1d6785a715bbcdac10abacf2cb5e0bff74993469f9c3f7a9276a5fbe7361f88",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.computedColourChargeExactRouteRankDescent_firstRoute_ne_some_charge",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ffd8fc03864155f547f71fec0c208c3062e041f6c7b8f3896a842e5d60b38d09",
+          "expectedKernelTypeSha256": "ffd8fc03864155f547f71fec0c208c3062e041f6c7b8f3896a842e5d60b38d09",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.computedColourChargeExactRouteRankDescent_firstRoute_ne_some_rank",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "244243e90ef4ea78f1f24e5b50807dc251098f775cccc5721a748aa16779b319",
+          "expectedKernelTypeSha256": "244243e90ef4ea78f1f24e5b50807dc251098f775cccc5721a748aa16779b319",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.computedColourChargeExactRouteRankDescent_firstRoute_ne_some_exactRoute",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f20a9c4076457f211e841301ab4d1d880be939dc6f88d46bb83851c29346645d",
+          "expectedKernelTypeSha256": "f20a9c4076457f211e841301ab4d1d880be939dc6f88d46bb83851c29346645d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.not_rankDescent_of_computedColourChargeExactRouteRankDescent_firstRoute_descent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6cc93d3fc82e20b552ea17ec5b8eceef3619979b5b48df11966624bff9e4c781",
+          "expectedKernelTypeSha256": "6cc93d3fc82e20b552ea17ec5b8eceef3619979b5b48df11966624bff9e4c781",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketTypedRealizerTable.withComputedPacketSelectorColourChargeExactRouteRankDescentFaithfulness_preserves",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e36ad892e3f0784a8e4712b103ffbe871cb10aad4e2b4dd933190ccf12771106",
+          "expectedKernelTypeSha256": "e36ad892e3f0784a8e4712b103ffbe871cb10aad4e2b4dd933190ccf12771106",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6PacketConclusion.existsColourReflectedFirstRouteFailure_of_selectorSilence",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d3548531645b9a8c557c7c8e19960eb58ee1c178e79bf5f36d93eb2bcede891a",
+          "expectedKernelTypeSha256": "d3548531645b9a8c557c7c8e19960eb58ee1c178e79bf5f36d93eb2bcede891a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBN6_packet_colour_reflected_hb_first_route_failure",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "822b586ce4e908fb41fe4039ba7c96ae0d98dd1af685c5398856d7a8aed52983",
+          "expectedKernelTypeSha256": "822b586ce4e908fb41fe4039ba7c96ae0d98dd1af685c5398856d7a8aed52983",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-packet-colour-route-reflection"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -41725,7 +42018,7 @@
     {
       "classification": "not-formalized",
       "id": "global-zeroslack-pccmin",
-      "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; the exhaustive Packet scan verifies strict gains or exact no-gain over every canonical selector in one supplied explicit grouped family; an explicit global gain-coverage certificate conditionally upgrades that silence to a proof-bearing ZeroSlack result; the generic finite R-ChargeSurplus kernel derives strict gain from exact ledgers, an unmatched positive support charge, exact gate accounting, and separately proved semantics; the checked unit-charge blueprint realizer derives canonical ledgers and gains for every valid blueprint in one supplied family; the checked typed-realizer contract rejects every faithful-table row except a genuine blueprint gain or an explicitly active bounded-rank HN, budget, or strictly lower faithful seed bot; the checked exact-rank HB graph contract validates every edge in a supplied finite HN/BUD dependency graph; the checked total-table HB contract gives every finite HN/BUD node one row, materializes every listed dependency as an edge, and derives well-founded induction and cycle exclusion for that supplied table; the checked HB active-dependency closure combines an exhaustive active-to-active row condition with strict rank descent to prove every supplied HN/BUD activity bit false and remove HN/budget typed-bot branches; and the executable selector-silence induction exhaustively checks that every canonical realizer claim is a typed bottom, then combines supplied-table HB inactivity with strong finite-rank induction to prove every canonical handle in the accepted table nonfaithful without a global semantic no-gain premise. The Packet selector-faithfulness routing milestone checks ten canonical source-payload fields and derives a contradiction for every positive Packet under explicit route-clear inputs; the canonical table constructor now computes the HB faithfulness function from those payloads and removes the separate binding premise; and total first-route classification turns every canonical payload rejection into one earliest typed route, which canonical HB selector silence forces for a positive Packet without route-clear or binding premises. The exact first-route semantics milestone additionally identifies every returned route with its unique earliest failed supplied payload field. The descent-reflection milestone computes the final descent field from the exact ten-coordinate RankWF relation and proves a forced final route is genuinely nondecreasing. The rank-tag-reflection milestone then copies the table-owned handle rank into the payload and excludes the duplicate rank route. The exact-route-reflection milestone marks the already proved internal handle-to-cell-to-positive-payload source route clear by construction and excludes the duplicate exact-route result as well; this internal route is not an external exact minimum. The charge-route-reflection milestone then derives the internal charge check from the canonical source atom with strictly positive mass and excludes the charge result; that positive mass is not the full external charge-surplus or replacement semantics. The six semantic fields and routes and the finite rank map remain explicit. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, replacement blueprints, occurrence pairing, rank assignment, payload checks, exhaustive realizer claims, or blocker tables from terminal data; connect matching back to a contradiction; derive blocker semantics, semantic dependency completeness, or the checked local active-dependency premise from terminal data; prove the earlier reported routes' external semantics or map all residual routes into a decreasing complete global outcome system; or provide full external selector compatibility, an independently constructed realizer, unconditional global silence, and polynomial-runtime completeness. Global unconditional ZeroSlack and polynomial PCCMin therefore remain unformalized.",
+      "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; the exhaustive Packet scan verifies strict gains or exact no-gain over every canonical selector in one supplied explicit grouped family; an explicit global gain-coverage certificate conditionally upgrades that silence to a proof-bearing ZeroSlack result; the generic finite R-ChargeSurplus kernel derives strict gain from exact ledgers, an unmatched positive support charge, exact gate accounting, and separately proved semantics; the checked unit-charge blueprint realizer derives canonical ledgers and gains for every valid blueprint in one supplied family; the checked typed-realizer contract rejects every faithful-table row except a genuine blueprint gain or an explicitly active bounded-rank HN, budget, or strictly lower faithful seed bot; the checked exact-rank HB graph contract validates every edge in a supplied finite HN/BUD dependency graph; the checked total-table HB contract gives every finite HN/BUD node one row, materializes every listed dependency as an edge, and derives well-founded induction and cycle exclusion for that supplied table; the checked HB active-dependency closure combines an exhaustive active-to-active row condition with strict rank descent to prove every supplied HN/BUD activity bit false and remove HN/budget typed-bot branches; and the executable selector-silence induction exhaustively checks that every canonical realizer claim is a typed bottom, then combines supplied-table HB inactivity with strong finite-rank induction to prove every canonical handle in the accepted table nonfaithful without a global semantic no-gain premise. The Packet selector-faithfulness routing milestone checks ten canonical source-payload fields and derives a contradiction for every positive Packet under explicit route-clear inputs; the canonical table constructor now computes the HB faithfulness function from those payloads and removes the separate binding premise; and total first-route classification turns every canonical payload rejection into one earliest typed route, which canonical HB selector silence forces for a positive Packet without route-clear or binding premises. The exact first-route semantics milestone additionally identifies every returned route with its unique earliest failed supplied payload field. The descent-reflection milestone computes the final descent field from the exact ten-coordinate RankWF relation and proves a forced final route is genuinely nondecreasing. The rank-tag-reflection milestone then copies the table-owned handle rank into the payload and excludes the duplicate rank route. The exact-route-reflection milestone marks the already proved internal handle-to-cell-to-positive-payload source route clear by construction and excludes the duplicate exact-route result as well; this internal route is not an external exact minimum. The charge-route-reflection milestone then derives the internal charge check from the canonical source atom with strictly positive mass and excludes the charge result; that positive mass is not the full external charge-surplus or replacement semantics. The colour-route-reflection milestone then derives internal grouped-footprint eligibility from each canonical handle and excludes colour; this is not external manuscript colour equivalence. The five semantic fields and routes and the finite rank map remain explicit. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, replacement blueprints, occurrence pairing, rank assignment, payload checks, exhaustive realizer claims, or blocker tables from terminal data; connect matching back to a contradiction; derive blocker semantics, semantic dependency completeness, or the checked local active-dependency premise from terminal data; prove the earlier reported routes' external semantics or map all residual routes into a decreasing complete global outcome system; or provide full external selector compatibility, an independently constructed realizer, unconditional global silence, and polynomial-runtime completeness. Global unconditional ZeroSlack and polynomial PCCMin therefore remain unformalized.",
       "requiredTheorems": [
         "PNP.Main.pccmin_polynomial_exact",
         "PNP.Main.zero_slack_complete"
@@ -41789,7 +42082,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-17-158",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-18-159",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

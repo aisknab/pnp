@@ -888,10 +888,10 @@ jobs:
       - name: Audit locked-NAND global carrier and trace equivalence
         run: node --test audits/lean-locked-nand-carrier-trace0.test.mjs
 
-      - name: Build explicit PNP root
-        run: lake build PNP
-
-      - name: Re-export compiled theorem inventory
+      # The inventory exporter performs the authoritative root build before
+      # probing the compiled environment, so a separate lake build here would
+      # only repeat the same package gate.
+      - name: Build explicit PNP root and verify compiled theorem inventory
         run: npm run formal:inventory:check
 
       - name: Verify generated publication status and report source
@@ -4103,3 +4103,29 @@ jobs:
 
       - name: Run canonical Packet charge-route reflection hostile audit
         run: node --test audits/lean-residual-terminal-packet-charge-route-reflection0.test.mjs
+
+      - name: Print canonical Packet colour-route reflection axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketColourRouteReflectionAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketColourRouteReflectionAxiomAudit.lean)"
+          test "$expected_count" -gt 0
+          test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected canonical Packet colour-route reflection axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -Eq 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            printf '%s\n' "$normalized" >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
+
+      - name: Run canonical Packet colour-route reflection regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketColourRouteReflection.lean
+
+      - name: Run canonical Packet colour-route reflection hostile audit
+        run: node --test audits/lean-residual-terminal-packet-colour-route-reflection0.test.mjs

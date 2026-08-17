@@ -1238,6 +1238,18 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalPacketChargeRouteReflectionScope,
     'all-arbitrary-finite-positive-source-charge-charge-route-excluded-exact-route-excluded-rank-route-excluded-exact-rankwf-nondecrease-or-six-earlier-semantic-routes-without-route-clear-or-binding-premises',
   );
+  assert.equal(
+    out.leanResidualTerminalPacketColourRouteReflectionFormalized,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalPacketColourRouteReflectionAxiomAuditPassed,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalPacketColourRouteReflectionScope,
+    'all-arbitrary-finite-grouped-footprint-colour-colour-route-excluded-charge-route-excluded-exact-route-excluded-rank-route-excluded-exact-rankwf-nondecrease-or-five-earlier-semantic-routes-without-route-clear-or-binding-premises',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',
