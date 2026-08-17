@@ -749,6 +749,18 @@ Every positive packet has a representative in the polynomial selector universe; 
   residual ranks, and eight remaining routes remain explicit or externally
   uninterpreted; complete route silence, unconditional ZeroSlack, and
   polynomial PCCMin remain open.
+- Canonical Packet exact-route reflection is witnessed by
+  `PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorCanonicalSourceRoute`,
+  `PNP.DirectWire.TerminalBN6GroupedFamily.computedExactRouteRankDescent_firstRoute_ne_some_exactRoute`,
+  and
+  `PNP.DirectWire.terminalBN6_packet_exact_route_reflected_hb_first_route_failure`.
+  Each canonical handle selects an original positive payload atom from its
+  exact grouped cell and footprint, so the internal source route is marked
+  clear by construction and neither `.exactRoute` nor `.rank` can be returned.
+  This internal route is not an external exact minimum. The seven semantic
+  fields and seven remaining routes remain explicit or externally
+  uninterpreted; complete route silence, unconditional ZeroSlack, and
+  polynomial PCCMin remain open.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -821,6 +833,12 @@ Every positive packet has a representative in the polynomial selector universe; 
     rank used for one handle, permit a `.rank` result, alter a preserved field,
     or add a rank-binding premise. Require rejection before treating the
     finite rank copy as canonical.
+19. For canonical exact-route reflection, restore the payload's original
+    `exactRouteClear`, omit the canonical source cell or positive payload-atom
+    evidence, permit `.exactRoute` or `.rank`, drop computed descent, or promote
+    the internal route to an external exact minimum. Require rejection before
+    treating the source route or any of the seven remaining routes as complete
+    terminal semantics.
 
 **What would count as a refutation or material defect**
 
@@ -858,6 +876,11 @@ Every positive packet has a representative in the polynomial selector universe; 
   rank, uses a rank other than the table-owned handle rank, permits `.rank`,
   drops exact residual-descent computation, or promotes one of the eight
   remaining routes without external adequacy evidence.
+- A supposedly canonical exact-route payload that retains its caller-supplied
+  route bit, lacks exact cell/footprint/original-positive-atom evidence,
+  permits `.exactRoute` or `.rank`, drops exact residual-descent computation,
+  treats the internal route as an external exact minimum, or promotes one of
+  the seven remaining routes without external adequacy evidence.
 
 ---
 

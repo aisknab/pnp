@@ -822,6 +822,19 @@ remaining routes are not mapped into a complete global outcome. Complete route
 silence, unconditional HB negative closure, ZeroSlack, and polynomial PCCMin
 remain open.
 
+Canonical Packet exact-route reflection now removes the payload's separate
+internal source-route bit. Every canonical handle already selects an original
+positive payload atom from its exact grouped cell and footprint, so the active
+payload sets \code{exactRouteClear} by construction while retaining the
+table-owned rank and computed residual descent. The canonical classifier can
+return neither \code{.exactRoute} nor \code{.rank}; a final
+\code{.descent} route still carries actual nondecrease. This internal route is
+not an external exact minimum. The seven semantic Boolean fields, grouped
+family, rank map, residual ranks, and HB data remain explicit. The seven
+remaining routes still lack complete external semantics and global routing,
+so complete route silence, unconditional HB negative closure, ZeroSlack, and
+polynomial PCCMin remain open.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule
