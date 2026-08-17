@@ -194,8 +194,11 @@ test('Lean axiom audit distinguishes assumption-free status data from the condit
   assert.doesNotMatch(audit, /PNP\.Main\.p_eq_np/u);
 });
 
-test('Lean workflow pins the installer and performs a real explicit-root build', async () => {
-  const workflow = await text0('.github/workflows/lean-bridge.yml');
+test('Lean workflow pins the installer and performs one real explicit-root build', async () => {
+  const [workflow, inventoryExporter] = await Promise.all([
+    text0('.github/workflows/lean-bridge.yml'),
+    text0('scripts/export-lean-theorem-inventory.mjs'),
+  ]);
   assert.match(workflow, /runs-on: ubuntu-24\.04/u);
   assert.match(workflow, /actions\/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0/u);
   assert.match(workflow, /leanprover\/elan\/releases\/download\/v4\.2\.3\/elan-x86_64-unknown-linux-gnu\.tar\.gz/u);
@@ -203,7 +206,14 @@ test('Lean workflow pins the installer and performs a real explicit-root build',
   assert.match(workflow, /Lean \(version 4\.31\.0/u);
   assert.match(workflow, /68218e876d2a38b1985b8590fff244a83c321783/u);
   assert.match(workflow, /Lake version 5\.0\.0-src\+68218e8/u);
-  assert.match(workflow, /run: lake build PNP/u);
+  assert.match(workflow, /run: npm run formal:inventory:check/u);
+  assert.match(inventoryExporter,
+    /execFileAsync\('lake', \['build', 'PNP'\]/u);
+  assert.match(inventoryExporter, /const BUILD_TIMEOUT_MS = 1_800_000;/u);
+  assert.match(inventoryExporter, /const PROBE_TIMEOUT_MS = 600_000;/u);
+  assert.match(inventoryExporter,
+    /\['build', 'PNP'\][\s\S]*?timeout: BUILD_TIMEOUT_MS/u);
+  assert.doesNotMatch(workflow, /run: lake build PNP/u);
   assert.match(workflow, /lake env lean -DwarningAsError=true lean-audit\/PNPBridgeAxiomAudit\.lean/u);
   assert.doesNotMatch(workflow, /lean4:stable|elan\/master|\brun: lake build\s*$/mu);
 });

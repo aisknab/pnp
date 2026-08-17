@@ -773,6 +773,18 @@ Every positive packet has a representative in the polynomial selector universe; 
   selector-compatibility semantics. The six semantic fields and six remaining
   routes remain explicit or externally uninterpreted; complete route silence,
   unconditional ZeroSlack, and polynomial PCCMin remain open.
+- Canonical Packet colour-route reflection is witnessed by
+  `PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorCanonicalColourEligibility`,
+  `PNP.DirectWire.TerminalBN6GroupedFamily.computedColourChargeExactRouteRankDescent_firstRoute_ne_some_colour`,
+  and
+  `PNP.DirectWire.terminalBN6_packet_colour_reflected_hb_first_route_failure`.
+  Each canonical handle has a grouped footprint proved to lie in the family
+  carrier and to contain at least two atoms, so the internal colour check is
+  computed by construction and none of `.colour`, `.charge`, `.exactRoute`, or
+  `.rank` can be returned. This internal eligibility check is not full external
+  manuscript colour equivalence. The five semantic fields and five remaining
+  routes remain explicit or externally uninterpreted; complete route silence,
+  unconditional ZeroSlack, and polynomial PCCMin remain open.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -904,6 +916,12 @@ Every positive packet has a representative in the polynomial selector universe; 
   `.exactRoute`, or `.rank`, drops the other reflected computations, treats
   positive source mass as complete charge-surplus semantics, or promotes one
   of the six remaining routes without external adequacy evidence.
+- A supposedly colour-reflected payload that retains its caller-supplied
+  colour bit, lacks grouped-footprint carrier or size evidence, permits
+  `.colour`, `.charge`, `.exactRoute`, or `.rank`, drops the other reflected
+  computations, treats internal eligibility as external manuscript colour
+  equivalence, or promotes one of the five remaining routes without external
+  adequacy evidence.
 
 ---
 
