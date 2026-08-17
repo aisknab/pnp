@@ -72,6 +72,7 @@ import PNP.ResidualTerminalPacketRankRouteReflection
 import PNP.ResidualTerminalPacketExactRouteReflection
 import PNP.ResidualTerminalPacketChargeRouteReflection
 import PNP.ResidualTerminalPacketColourRouteReflection
+import PNP.ResidualTerminalPacketFrontierRouteReflection
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine

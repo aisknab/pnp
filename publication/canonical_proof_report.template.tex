@@ -864,6 +864,22 @@ Those five routes still lack complete external semantics and global routing,
 so complete route silence, unconditional HB negative closure, ZeroSlack, and
 polynomial PCCMin remain open.
 
+Canonical Packet typed-frontier route reflection now removes the payload's
+separate frontier bit. Each selected source payload carries explicit source
+and selector frontier signatures of one arbitrary decidable-equality type, so
+the active payload computes \code{frontierChecked} from signature equality
+while retaining canonical colour, positive charge, internal source route,
+table-owned rank, and exact residual descent. The \code{.frontier} route is
+equivalent to signature inequality; equal signatures exclude it. The
+classifier also continues to exclude \code{.colour}, \code{.charge},
+\code{.exactRoute}, and \code{.rank}; a final \code{.descent} route carries
+actual nondecrease. The supplied signatures are not constructed from terminal
+data or bound to the manuscript BN5 frontier. Obligation, activation,
+direction, and budget remain explicit. Those four remaining routes still lack
+complete external semantics and global routing, so complete route silence,
+unconditional HB negative closure, ZeroSlack, and polynomial PCCMin remain
+open.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule

@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '8819ac9c4efc71176d5a5fac31f507e43ddf6e2663ed7ee9fae3b82db5aca811';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '29cdaa7cd7e01233f01b2bc673fcc0b9f93b1775f8dff4c941ce5576b927977f';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -2604,6 +2604,29 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.TerminalPacketTypedRealizerTable.withComputedPacketSelectorColourChargeExactRouteRankDescentFaithfulness_preserves',
   'PNP.DirectWire.TerminalBN6PacketConclusion.existsColourReflectedFirstRouteFailure_of_selectorSilence',
   'PNP.DirectWire.terminalBN6_packet_colour_reflected_hb_first_route_failure',
+  'PNP.DirectWire.TerminalPacketSelectorTypedFrontierPayload.frontierCheck_eq_true_iff',
+  'PNP.DirectWire.TerminalPacketSelectorTypedFrontierPayload.frontierCheck_eq_false_iff',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedTypedFrontierColourChargeExactRouteRankDescent_fields',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedTypedFrontierColourChargeExactRouteRankDescent_valid_iff',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedTypedFrontierColourChargeExactRouteRankDescent_failureAt_colour_iff_false',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedTypedFrontierColourChargeExactRouteRankDescent_failureAt_frontier_iff',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedTypedFrontierColourChargeExactRouteRankDescent_failureAt_charge_iff_false',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedTypedFrontierColourChargeExactRouteRankDescent_failureAt_rank_iff_false',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedTypedFrontierColourChargeExactRouteRankDescent_failureAt_exactRoute_iff_false',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedTypedFrontierColourChargeExactRouteRankDescent_failureAt_descent_iff',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRouteWithComputedTypedFrontierColourChargeExactRouteRankDescent_eq_some_iff',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRouteWithComputedTypedFrontierColourChargeExactRouteRankDescent_eq_some_frontier_iff',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRouteWithComputedTypedFrontierColourChargeExactRouteRankDescent_ne_some_frontier_of_eq',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.computedTypedFrontierColourChargeExactRouteRankDescent_firstRoute_ne_some_colour',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.computedTypedFrontierColourChargeExactRouteRankDescent_firstRoute_ne_some_charge',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.computedTypedFrontierColourChargeExactRouteRankDescent_firstRoute_ne_some_rank',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.computedTypedFrontierColourChargeExactRouteRankDescent_firstRoute_ne_some_exactRoute',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.not_rankDescent_of_computedTypedFrontierColourChargeExactRouteRankDescent_firstRoute_descent',
+  'PNP.DirectWire.TerminalBN6GroupedFamily.rankDescent_of_packetSelectorPayloadFaithfulWithComputedTypedFrontierColourChargeExactRouteRankDescent',
+  'PNP.DirectWire.TerminalPacketTypedRealizerTable.withComputedPacketSelectorTypedFrontierColourChargeExactRouteRankDescentFaithfulness_preserves',
+  'PNP.DirectWire.TerminalPacketTypedRealizerTable.withComputedPacketSelectorTypedFrontierColourChargeExactRouteRankDescentFaithfulness_faithful',
+  'PNP.DirectWire.TerminalBN6PacketConclusion.existsTypedFrontierReflectedFirstRouteFailure_of_selectorSilence',
+  'PNP.DirectWire.terminalBN6_packet_typed_frontier_reflected_hb_first_route_failure',
   'PNP.DirectWire.allTerminalPrimitiveRecords_nodup',
   'PNP.DirectWire.filter_mem_terminalListSubsets',
   'PNP.DirectWire.TerminalFourCornerCarrier.boundaryDisposition?_eq_some_iff',
@@ -2882,7 +2905,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-18-159') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-18-160') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -3159,7 +3182,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-18-159') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-18-160') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

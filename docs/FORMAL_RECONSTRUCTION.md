@@ -1966,6 +1966,25 @@ unconditional HB negative closure, ZeroSlack, and polynomial PCCMin remain
 open. See
 [`lean_residual_terminal_packet_colour_route_reflection.md`](./lean_residual_terminal_packet_colour_route_reflection.md).
 
+The canonical Packet typed-frontier route reflection milestone in
+`ResidualTerminalPacketFrontierRouteReflection` removes the sixth
+caller-controlled field at the active source boundary. Each selected payload
+now carries explicit typed source and selector frontier signatures, and the
+canonical projection computes `frontierChecked` by executable equality. An
+exact `.frontier` route is therefore equivalent to signature inequality;
+equal signatures exclude that route. The classifier continues to exclude
+`.colour`, `.charge`, `.exactRoute`, and `.rank`, while a final `.descent`
+route still proves actual nondecrease. The positive-Packet/HB endpoint carries
+the exact failure proof, all four exclusions, frontier inequality when
+applicable, and the descent alternative without route-clear or binding
+premises. The signatures themselves are supplied rather than derived from
+terminal data or bound to the manuscript BN5 frontier. Obligation, activation,
+direction, and budget remain explicit, and the four remaining routes are not
+yet integrated into the complete global outcome system. Complete route
+silence, unconditional HB negative closure, ZeroSlack, and polynomial PCCMin
+remain open. See
+[`lean_residual_terminal_packet_frontier_route_reflection.md`](./lean_residual_terminal_packet_frontier_route_reflection.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:
