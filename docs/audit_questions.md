@@ -761,6 +761,18 @@ Every positive packet has a representative in the polynomial selector universe; 
   fields and seven remaining routes remain explicit or externally
   uninterpreted; complete route silence, unconditional ZeroSlack, and
   polynomial PCCMin remain open.
+- Canonical Packet charge-route reflection is witnessed by
+  `PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorCanonicalPositiveCharge`,
+  `PNP.DirectWire.TerminalBN6GroupedFamily.computedChargeExactRouteRankDescent_firstRoute_ne_some_charge`,
+  and
+  `PNP.DirectWire.terminalBN6_packet_charge_reflected_hb_first_route_failure`.
+  Each canonical handle selects an original source atom with strictly positive
+  mass, so the internal charge check is set by construction and none of
+  `.charge`, `.exactRoute`, or `.rank` can be returned. Positive source mass is
+  not the complete external charge-surplus, replacement, budget, or
+  selector-compatibility semantics. The six semantic fields and six remaining
+  routes remain explicit or externally uninterpreted; complete route silence,
+  unconditional ZeroSlack, and polynomial PCCMin remain open.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -839,6 +851,12 @@ Every positive packet has a representative in the polynomial selector universe; 
     the internal route to an external exact minimum. Require rejection before
     treating the source route or any of the seven remaining routes as complete
     terminal semantics.
+20. For canonical charge-route reflection, restore the payload's original
+    `chargeChecked` bit, omit the selected atom's positive-mass proof, permit
+    `.charge`, `.exactRoute`, or `.rank`, drop the other reflected fields, or
+    promote positive source mass to full charge-surplus semantics. Require
+    rejection before treating the charge route or any of the six remaining
+    routes as complete terminal semantics.
 
 **What would count as a refutation or material defect**
 
@@ -881,6 +899,11 @@ Every positive packet has a representative in the polynomial selector universe; 
   permits `.exactRoute` or `.rank`, drops exact residual-descent computation,
   treats the internal route as an external exact minimum, or promotes one of
   the seven remaining routes without external adequacy evidence.
+- A supposedly charge-reflected payload that retains its caller-supplied
+  charge bit, lacks positive source-atom mass evidence, permits `.charge`,
+  `.exactRoute`, or `.rank`, drops the other reflected computations, treats
+  positive source mass as complete charge-surplus semantics, or promotes one
+  of the six remaining routes without external adequacy evidence.
 
 ---
 
