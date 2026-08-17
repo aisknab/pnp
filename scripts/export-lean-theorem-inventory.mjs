@@ -15,7 +15,8 @@ import {
 
 const execFileAsync = promisify(execFile);
 const PROBE = 'lean-audit/PNPTheoremInventory.lean';
-const TIMEOUT_MS = 600_000;
+const BUILD_TIMEOUT_MS = 1_800_000;
+const PROBE_TIMEOUT_MS = 600_000;
 
 export function ParseLeanInventoryProbe0(result) {
   if (result.timedOut === true) throw new Error('Lean environment inventory probe timed out');
@@ -49,7 +50,7 @@ export async function RunLeanInventoryProbe0(root) {
   await execFileAsync('lake', ['build', 'PNP'], {
     cwd: root,
     encoding: 'utf8',
-    timeout: TIMEOUT_MS,
+    timeout: BUILD_TIMEOUT_MS,
     maxBuffer: 32 * 1024 * 1024,
   });
   try {
@@ -58,7 +59,7 @@ export async function RunLeanInventoryProbe0(root) {
     ], {
       cwd: root,
       encoding: 'utf8',
-      timeout: TIMEOUT_MS,
+      timeout: PROBE_TIMEOUT_MS,
       maxBuffer: 32 * 1024 * 1024,
     });
     return ParseLeanInventoryProbe0({ stdout, stderr, exitCode: 0, timedOut: false });

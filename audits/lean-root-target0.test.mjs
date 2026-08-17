@@ -209,6 +209,10 @@ test('Lean workflow pins the installer and performs one real explicit-root build
   assert.match(workflow, /run: npm run formal:inventory:check/u);
   assert.match(inventoryExporter,
     /execFileAsync\('lake', \['build', 'PNP'\]/u);
+  assert.match(inventoryExporter, /const BUILD_TIMEOUT_MS = 1_800_000;/u);
+  assert.match(inventoryExporter, /const PROBE_TIMEOUT_MS = 600_000;/u);
+  assert.match(inventoryExporter,
+    /\['build', 'PNP'\][\s\S]*?timeout: BUILD_TIMEOUT_MS/u);
   assert.doesNotMatch(workflow, /run: lake build PNP/u);
   assert.match(workflow, /lake env lean -DwarningAsError=true lean-audit\/PNPBridgeAxiomAudit\.lean/u);
   assert.doesNotMatch(workflow, /lean4:stable|elan\/master|\brun: lake build\s*$/mu);
