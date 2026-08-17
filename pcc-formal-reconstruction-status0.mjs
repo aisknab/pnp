@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-17-157';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-17-158';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -455,6 +455,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketExactRouteReflectionAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketExactRouteReflection.lean',
   'node --test audits/lean-residual-terminal-packet-exact-route-reflection0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketChargeRouteReflectionAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketChargeRouteReflection.lean',
+  'node --test audits/lean-residual-terminal-packet-charge-route-reflection0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -497,6 +500,7 @@ const NON_CLAIMS = Object.freeze([
   'The rank-reflected Packet descent route computes the final strict-descent field from the exact ten-coordinate RankWF comparison, ignoring its caller-supplied Boolean. A positive Packet under executable HB silence therefore returns an earlier exact field route or a proof that the supplied transition is nondecreasing. The first nine fields, per-handle ranks, grouped family, and HB data remain explicit; the other nine routes are not externally interpreted, and complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain open.',
   'Canonical Packet rank-tag reflection copies the table-owned handle rank into the source payload while retaining exact residual-descent computation. The canonical first route cannot be rank, and a final descent route still proves actual nondecrease. The finite rank map, before/after residual ranks, seven earlier Boolean fields, exact-route field, grouped family, and HB data remain explicit; the eight remaining routes lack complete external semantics and global integration, so complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain open.',
   'Canonical Packet exact-route reflection marks the already proved internal handle-to-cell-to-positive-payload source route clear by construction, while retaining the table-owned rank and exact residual-descent computation. The canonical first route can return neither exactRoute nor rank, and a final descent route still proves actual nondecrease. The seven semantic Boolean fields, grouped family, rank map, residual ranks, and HB data remain explicit. This internal route is not an external exact minimum; the seven remaining routes lack complete external semantics and global integration, so complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain open.',
+  'Canonical Packet charge-route reflection uses the selected source atom\'s proved positive mass to clear the internal charge field by construction while retaining exact-route, rank, and residual-descent reflection. The canonical first route can return none of charge, exactRoute, or rank, and a final descent route still proves actual nondecrease. Six semantic Boolean fields, the grouped family, rank map, residual ranks, and HB data remain explicit. Positive source mass is not full external charge-surplus or replacement semantics; the six remaining routes lack complete external semantics and global integration, so complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain open.',
   'The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.',
   'The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.',
   'Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.',
@@ -1741,6 +1745,10 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalPacketExactRouteReflectionAxiomAuditPassed: true,
   leanResidualTerminalPacketExactRouteReflectionScope:
     'all-arbitrary-finite-canonical-source-route-exact-route-excluded-rank-route-excluded-exact-rankwf-nondecrease-or-seven-earlier-semantic-routes-without-route-clear-or-binding-premises',
+  leanResidualTerminalPacketChargeRouteReflectionFormalized: true,
+  leanResidualTerminalPacketChargeRouteReflectionAxiomAuditPassed: true,
+  leanResidualTerminalPacketChargeRouteReflectionScope:
+    'all-arbitrary-finite-positive-source-charge-charge-route-excluded-exact-route-excluded-rank-route-excluded-exact-rankwf-nondecrease-or-six-earlier-semantic-routes-without-route-clear-or-binding-premises',
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
   leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2872,6 +2880,10 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalPacketExactRouteReflectionAxiomAuditPassed: true,
       leanResidualTerminalPacketExactRouteReflectionScope:
         'all-arbitrary-finite-canonical-source-route-exact-route-excluded-rank-route-excluded-exact-rankwf-nondecrease-or-seven-earlier-semantic-routes-without-route-clear-or-binding-premises',
+      leanResidualTerminalPacketChargeRouteReflectionFormalized: true,
+      leanResidualTerminalPacketChargeRouteReflectionAxiomAuditPassed: true,
+      leanResidualTerminalPacketChargeRouteReflectionScope:
+        'all-arbitrary-finite-positive-source-charge-charge-route-excluded-exact-route-excluded-rank-route-excluded-exact-rankwf-nondecrease-or-six-earlier-semantic-routes-without-route-clear-or-binding-premises',
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
       leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2951,7 +2963,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-17-157',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-17-158',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

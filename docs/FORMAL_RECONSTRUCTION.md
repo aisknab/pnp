@@ -1927,6 +1927,25 @@ silence, unconditional HB negative closure, ZeroSlack, and polynomial PCCMin
 remain open. See
 [`lean_residual_terminal_packet_exact_route_reflection.md`](./lean_residual_terminal_packet_exact_route_reflection.md).
 
+The canonical Packet charge-route reflection milestone in
+`ResidualTerminalPacketChargeRouteReflection` removes the fourth
+caller-controlled field at the active source boundary. Every canonical handle
+selects an original payload atom whose strictly positive mass is part of the
+grouped-family structure. The canonical payload therefore sets
+`chargeChecked` by construction while retaining the reflected internal source
+route, table-owned rank, and exact residual-descent comparison. The classifier
+can return none of `.charge`, `.exactRoute`, or `.rank`; a final `.descent`
+route still proves actual nondecrease. The positive-Packet/HB endpoint carries
+the exact failure proof, all three route exclusions, and the final
+nondecrease alternative without route-clear or binding premises. Positive
+source mass is not full external charge-surplus, replacement, or budget
+semantics. Six Boolean fields, the grouped family, finite rank map, residual
+ranks, and HB data remain explicit, and the six remaining routes are not yet
+integrated into the complete global outcome system. Complete route silence,
+unconditional HB negative closure, ZeroSlack, and polynomial PCCMin remain
+open. See
+[`lean_residual_terminal_packet_charge_route_reflection.md`](./lean_residual_terminal_packet_charge_route_reflection.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

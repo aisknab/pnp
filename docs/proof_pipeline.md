@@ -390,6 +390,19 @@ remain explicit. The seven remaining routes still lack complete external
 semantics and global routing, so this does not establish route silence,
 unconditional ZeroSlack, or polynomial PCCMin.
 
+Canonical Packet charge-route reflection now removes the payload's separate
+internal charge bit. The selected original source atom already carries a proof
+of strictly positive mass, so the active payload sets `chargeChecked` by
+construction while retaining exact-route, rank-tag, and residual-descent
+reflection. The canonical classifier can return none of `.charge`,
+`.exactRoute`, or `.rank`; a final `.descent` route still carries actual
+nondecrease. Positive source mass is not the complete external charge-surplus,
+replacement, budget, or selector-compatibility semantics. The six remaining
+semantic Boolean fields, grouped family, rank map, residual ranks, and HB data
+remain explicit. Those six routes still lack complete external semantics and
+global routing, so this does not establish route silence, unconditional
+ZeroSlack, or polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

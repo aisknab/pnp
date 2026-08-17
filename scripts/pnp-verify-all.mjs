@@ -165,6 +165,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-residual-terminal-packet-descent-route-reflection0.test.mjs',
   'audits/lean-residual-terminal-packet-rank-route-reflection0.test.mjs',
   'audits/lean-residual-terminal-packet-exact-route-reflection0.test.mjs',
+  'audits/lean-residual-terminal-packet-charge-route-reflection0.test.mjs',
   'audits/legacy-v0-archive0.test.mjs',
   'test/current-package-surface0.test.mjs',
   'test/current-verifier0.test.mjs',
