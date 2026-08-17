@@ -378,6 +378,18 @@ earlier Boolean fields, and `exactRouteClear` remain explicit inputs. The eight
 remaining routes still lack complete external semantics and global routing,
 so this does not establish route silence, ZeroSlack, or polynomial PCCMin.
 
+Canonical Packet exact-route reflection now removes the payload's separate
+internal source-route bit. Every canonical handle already selects an original
+positive payload atom from its exact grouped cell and footprint, so the active
+payload sets `exactRouteClear` by construction while retaining the table-owned
+rank and computed residual descent. The canonical classifier can return
+neither `.exactRoute` nor `.rank`; a final `.descent` route still carries actual
+nondecrease. This internal route is not an external exact minimum. The seven
+semantic Boolean fields, grouped family, rank map, residual ranks, and HB data
+remain explicit. The seven remaining routes still lack complete external
+semantics and global routing, so this does not establish route silence,
+unconditional ZeroSlack, or polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

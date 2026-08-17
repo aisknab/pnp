@@ -1908,6 +1908,25 @@ global outcome system. Complete route silence, unconditional HB negative
 closure, ZeroSlack, and polynomial PCCMin remain open. See
 [`lean_residual_terminal_packet_rank_route_reflection.md`](./lean_residual_terminal_packet_rank_route_reflection.md).
 
+The canonical Packet exact-route reflection milestone in
+`ResidualTerminalPacketExactRouteReflection` removes the third duplicate field
+at the active source boundary. Each canonical handle already comes with proofs
+that its selected cell is in the supplied grouped family, has exactly the
+decoded footprint, contains the selected original payload atom, and gives that
+atom positive mass. The canonical payload therefore sets the internal
+`exactRouteClear` bit by construction, while copying the table-owned handle
+rank and computing exact residual descent. The classifier can return neither
+`.exactRoute` nor `.rank`; a final `.descent` route still proves actual
+nondecrease. The positive-Packet/HB endpoint carries the exact failure proof,
+both route exclusions, and the final nondecrease alternative without
+route-clear or binding premises. This internal route is not an external exact
+minimum. The seven semantic Boolean fields, grouped family, finite rank map,
+residual ranks, and HB data remain explicit, and the seven remaining routes are
+not yet integrated into the complete global outcome system. Complete route
+silence, unconditional HB negative closure, ZeroSlack, and polynomial PCCMin
+remain open. See
+[`lean_residual_terminal_packet_exact_route_reflection.md`](./lean_residual_terminal_packet_exact_route_reflection.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:
