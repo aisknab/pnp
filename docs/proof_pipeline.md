@@ -417,6 +417,21 @@ remain explicit. Those five routes still lack complete external semantics and
 global routing, so this does not establish route silence, unconditional
 ZeroSlack, or polynomial PCCMin.
 
+Canonical Packet typed-frontier route reflection now removes the payload's
+separate frontier bit. The selected source payload carries explicit source and
+selector frontier signatures of one arbitrary decidable-equality type, so the
+active payload computes `frontierChecked` from their equality while retaining
+canonical colour, positive charge, internal source route, table-owned rank,
+and exact residual descent. The `.frontier` route is equivalent to signature
+inequality; equal signatures exclude it. The classifier also continues to
+exclude `.colour`, `.charge`, `.exactRoute`, and `.rank`, and a final
+`.descent` route carries actual nondecrease. The supplied signatures are not
+constructed from terminal data or bound to the manuscript BN5 frontier.
+Obligation, activation, direction, and budget remain explicit. Those four
+remaining routes still lack complete external semantics and global routing,
+so this does not establish route silence, unconditional ZeroSlack, or
+polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

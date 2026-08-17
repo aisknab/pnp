@@ -785,6 +785,19 @@ Every positive packet has a representative in the polynomial selector universe; 
   manuscript colour equivalence. The five semantic fields and five remaining
   routes remain explicit or externally uninterpreted; complete route silence,
   unconditional ZeroSlack, and polynomial PCCMin remain open.
+- Canonical Packet typed-frontier route reflection is witnessed by
+  `PNP.DirectWire.TerminalPacketSelectorTypedFrontierPayload.frontierCheck_eq_false_iff`,
+  `PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRouteWithComputedTypedFrontierColourChargeExactRouteRankDescent_eq_some_frontier_iff`,
+  and
+  `PNP.DirectWire.terminalBN6_packet_typed_frontier_reflected_hb_first_route_failure`.
+  The caller frontier bit is replaced with equality of explicit typed source
+  and selector frontier signatures. A `.frontier` route carries exact
+  inequality, while `.colour`, `.charge`, `.exactRoute`, and `.rank` remain
+  excluded. The supplied signatures are not derived from terminal data or
+  bound to the manuscript BN5 frontier. Obligation, activation, direction,
+  and budget and the four remaining routes remain explicit or externally
+  uninterpreted; complete route silence, unconditional ZeroSlack, and
+  polynomial PCCMin remain open.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -922,6 +935,11 @@ Every positive packet has a representative in the polynomial selector universe; 
   computations, treats internal eligibility as external manuscript colour
   equivalence, or promotes one of the five remaining routes without external
   adequacy evidence.
+- A supposedly typed-frontier-reflected payload that retains its caller bit,
+  weakens signature equality or inequality, permits `.colour`, `.charge`,
+  `.exactRoute`, or `.rank`, treats supplied signatures as terminal-derived or
+  BN5-bound, drops exact residual-descent computation, or promotes one of the
+  four remaining routes without external adequacy evidence.
 
 ---
 
