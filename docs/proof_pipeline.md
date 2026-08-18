@@ -475,6 +475,21 @@ Boolean field and route; it still lacks complete external semantics and global
 routing. This does not establish route silence, unconditional ZeroSlack, or
 polynomial PCCMin.
 
+Typed Packet budget-route reflection now ties the final supplied Packet check
+to equality of explicit source and selector values in an arbitrary budget
+type. The active payload retains computed BN5 frontier, obligation, BN4
+activation, and typed direction checks, canonical colour, positive charge,
+the internal source route, table-owned rank, and exact residual descent. A
+`.budget` first route carries prior frontier, obligation, activation, and
+direction equality plus exact typed-budget inequality. The classifier
+continues to exclude `.colour`, `.charge`, `.exactRoute`, and `.rank`, while
+`.descent` carries actual nondecrease. The budget values remain explicit
+rather than derived from terminal data and are not a complete construction of
+manuscript `Bud(u)`, its budget envelope, BudgetResolve, or HB budget activity.
+Every local Packet field is now computed, but external route adequacy and
+global route silence remain open. This does not establish unconditional
+ZeroSlack or polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

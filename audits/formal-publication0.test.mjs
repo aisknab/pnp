@@ -3040,6 +3040,29 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /sole remaining supplied Boolean/u);
   assert.match(terminalPacketDirectionRouteReflection.nonClaim,
     /does not construct those direction values from terminal data/u);
+  const terminalPacketBudgetRouteReflection = byId.get(
+    'residual-terminal-packet-budget-route-reflection',
+  );
+  assert.equal(terminalPacketBudgetRouteReflection.status,
+    'formalized-residual-terminal-packet-budget-route-reflection');
+  assert.equal(terminalPacketBudgetRouteReflection.earned, true);
+  assert.equal(
+    terminalPacketBudgetRouteReflection
+      .axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.equal(
+    terminalPacketBudgetRouteReflection.requiredTheorems.length,
+    30,
+  );
+  assert.match(terminalPacketBudgetRouteReflection.scope,
+    /typed budget values/u);
+  assert.match(terminalPacketBudgetRouteReflection.scope,
+    /budget first route.*frontier, obligation, activation, and direction equality.*typed-budget inequality/u);
+  assert.match(terminalPacketBudgetRouteReflection.nonClaim,
+    /does not construct those budget values from terminal data/u);
+  assert.match(terminalPacketBudgetRouteReflection.nonClaim,
+    /BudgetResolve or HB budget activity/u);
   const lockedNANDThreshold = byId.get('global-locked-nand-threshold');
   assert.equal(lockedNANDThreshold.status,
     'formalized-concrete-locked-nand-threshold');
