@@ -825,6 +825,19 @@ Every positive packet has a representative in the polynomial selector universe; 
   rather than terminal-derived. Direction and budget and the two remaining
   routes remain explicit or externally uninterpreted; complete route silence,
   unconditional ZeroSlack, and polynomial PCCMin remain open.
+- Typed Packet direction-route reflection is witnessed by
+  `PNP.DirectWire.TerminalPacketSelectorBN5DirectionPayload.directionCheck_eq_true_iff`,
+  `PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRouteWithComputedBN5FrontierObligationActivationDirectionRoutes_eq_some_direction_iff`,
+  and
+  `PNP.DirectWire.terminalBN6_packet_direction_reflected_hb_first_route_failure`.
+  The caller direction bit is replaced by equality of explicit typed source
+  and selector direction values. A `.direction` route carries prior frontier,
+  obligation, and activation equality plus typed-direction inequality, while
+  `.colour`, `.charge`, `.exactRoute`, and `.rank` remain excluded. The
+  direction values are explicit rather than terminal-derived and are not a
+  complete construction of manuscript `Dir(u)`. Budget is the sole remaining
+  supplied Boolean field and route; complete route silence, unconditional
+  ZeroSlack, and polynomial PCCMin remain open.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -979,6 +992,12 @@ Every positive packet has a representative in the polynomial selector universe; 
   and obligation equality, permits `.colour`, `.charge`, `.exactRoute`, or
   `.rank`, treats explicit coordinates as terminal-derived, or promotes one of
   the two remaining routes without external adequacy evidence.
+- A supposedly typed-direction Packet payload that retains the caller
+  direction bit, erases either typed direction value, reports `.direction`
+  without prior frontier, obligation, and activation equality, permits
+  `.colour`, `.charge`, `.exactRoute`, or `.rank`, treats explicit direction
+  values as terminal-derived manuscript semantics, or promotes the sole
+  remaining budget route without external adequacy evidence.
 
 ---
 

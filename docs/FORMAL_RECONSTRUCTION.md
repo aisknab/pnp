@@ -2016,6 +2016,21 @@ remaining fields and routes. Complete route silence, unconditional HB negative
 closure, ZeroSlack, and polynomial PCCMin remain open. See
 [`lean_residual_terminal_packet_bn4_activation_route_reflection.md`](./lean_residual_terminal_packet_bn4_activation_route_reflection.md).
 
+The typed Packet direction-route reflection milestone in
+`ResidualTerminalPacketDirectionRouteReflection` computes the next Packet
+field from equality of explicit source and selector values in an arbitrary
+direction type. A `.direction` route therefore carries prior frontier,
+obligation, and activation equality plus exact typed-direction inequality.
+Canonical colour, positive charge, the internal source route, table-owned
+rank, and exact residual descent remain computed, so `.colour`, `.charge`,
+`.exactRoute`, and `.rank` stay excluded and `.descent` still proves
+nondecrease. The direction values remain explicit rather than terminal-derived
+and are not a construction of the manuscript's complete `Dir(u)` semantics.
+Budget is the sole remaining supplied Boolean field and route. Complete route
+silence, unconditional HB negative closure, ZeroSlack, and polynomial PCCMin
+remain open. See
+[`lean_residual_terminal_packet_direction_route_reflection.md`](./lean_residual_terminal_packet_direction_route_reflection.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:
