@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-18-161';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-18-162';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -467,6 +467,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketBN5ObligationRouteReflectionAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketBN5ObligationRouteReflection.lean',
   'node --test audits/lean-residual-terminal-packet-bn5-obligation-route-reflection0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketBN4ActivationRouteReflectionAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketBN4ActivationRouteReflection.lean',
+  'node --test audits/lean-residual-terminal-packet-bn4-activation-route-reflection0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -513,6 +516,7 @@ const NON_CLAIMS = Object.freeze([
   'Canonical Packet colour-route reflection computes grouped-footprint eligibility from each canonical handle and clears the internal colour field by construction while retaining positive charge, the internal source route, authoritative rank, and residual-descent reflection. The canonical first route can return none of colour, charge, exactRoute, or rank, and a final descent route still proves actual nondecrease. Five semantic Boolean fields, the grouped family, rank map, residual ranks, and HB data remain explicit. The internal size check plus separately proved carrier-sublist membership is not full external manuscript colour equivalence; the five remaining routes lack complete external semantics and global integration, so complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain open.',
   'Canonical Packet frontier-route reflection replaces the caller frontier bit with executable equality of explicit typed source and selector frontier signatures while retaining canonical colour, positive charge, the internal source route, authoritative rank, and residual-descent reflection. A frontier first route carries exact signature inequality; colour, charge, exactRoute, and rank remain excluded, and a final descent route still proves actual nondecrease. Obligation, activation, direction, and budget remain explicit. The supplied signatures are not constructed from terminal data or bound to the manuscript BN5 frontier, so the four remaining routes still lack complete external semantics and global integration; complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain open.',
   'BN5-bound Packet frontier-and-obligation reflection compares exact frontier and obligation fields of explicit typed source and selector terminal BN5 coordinates while retaining canonical colour, positive charge, the internal source route, authoritative rank, and residual-descent reflection. A frontier route carries frontier inequality; an obligation route carries prior frontier equality and obligation inequality; colour, charge, exactRoute, and rank remain excluded; and a final descent route still proves actual nondecrease. Activation, direction, and budget are the three remaining explicit fields and routes. The BN5 coordinates are not constructed from terminal data, so complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain open.',
+  'BN4 activation-exact Packet route reflection computes the activation field from equality of the nested BN4 activation atoms in the explicit source and selector BN5 coordinates. That equality is equivalent to equality of the canonical activation predicates on every cut. An activation route carries prior BN5 frontier and obligation equality plus activation-atom inequality; colour, charge, exactRoute, and rank remain excluded; and a final descent route still proves actual nondecrease. Direction and budget are the two remaining explicit fields and routes. The coordinates are not constructed from terminal data, so complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain open.',
   'The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.',
   'The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.',
   'Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.',
@@ -1773,6 +1777,10 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalPacketBN5ObligationRouteReflectionAxiomAuditPassed: true,
   leanResidualTerminalPacketBN5ObligationRouteReflectionScope:
     'all-arbitrary-finite-BN5-coordinate-frontier-obligation-routes-reflected-colour-route-excluded-charge-route-excluded-exact-route-excluded-rank-route-excluded-exact-rankwf-nondecrease-or-three-earlier-semantic-routes-without-route-clear-or-binding-premises',
+  leanResidualTerminalPacketBN4ActivationRouteReflectionFormalized: true,
+  leanResidualTerminalPacketBN4ActivationRouteReflectionAxiomAuditPassed: true,
+  leanResidualTerminalPacketBN4ActivationRouteReflectionScope:
+    'all-arbitrary-finite-BN4-activation-predicate-route-reflected-BN5-frontier-obligation-routes-reflected-colour-route-excluded-charge-route-excluded-exact-route-excluded-rank-route-excluded-exact-rankwf-nondecrease-or-two-earlier-semantic-routes-without-route-clear-or-binding-premises',
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
   leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2920,6 +2928,10 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalPacketBN5ObligationRouteReflectionAxiomAuditPassed: true,
       leanResidualTerminalPacketBN5ObligationRouteReflectionScope:
         'all-arbitrary-finite-BN5-coordinate-frontier-obligation-routes-reflected-colour-route-excluded-charge-route-excluded-exact-route-excluded-rank-route-excluded-exact-rankwf-nondecrease-or-three-earlier-semantic-routes-without-route-clear-or-binding-premises',
+      leanResidualTerminalPacketBN4ActivationRouteReflectionFormalized: true,
+      leanResidualTerminalPacketBN4ActivationRouteReflectionAxiomAuditPassed: true,
+      leanResidualTerminalPacketBN4ActivationRouteReflectionScope:
+        'all-arbitrary-finite-BN4-activation-predicate-route-reflected-BN5-frontier-obligation-routes-reflected-colour-route-excluded-charge-route-excluded-exact-route-excluded-rank-route-excluded-exact-rankwf-nondecrease-or-two-earlier-semantic-routes-without-route-clear-or-binding-premises',
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
       leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -2999,7 +3011,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-18-161',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-18-162',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,
