@@ -461,6 +461,20 @@ and budget are the two remaining fields and routes; they still lack complete
 external semantics and global routing. This does not establish route silence,
 unconditional ZeroSlack, or polynomial PCCMin.
 
+Typed Packet direction-route reflection now ties the next check to equality of
+explicit source and selector values in an arbitrary direction type. The active
+payload retains computed BN5 frontier, obligation, and BN4 activation checks,
+canonical colour, positive charge, the internal source route, table-owned rank,
+and exact residual descent. A `.direction` first route carries prior frontier,
+obligation, and activation equality plus exact typed-direction inequality. The
+classifier continues to exclude `.colour`, `.charge`, `.exactRoute`, and
+`.rank`, while `.descent` carries actual nondecrease. The direction values
+remain explicit rather than derived from terminal data and are not a complete
+construction of manuscript `Dir(u)`. Budget is the sole remaining supplied
+Boolean field and route; it still lacks complete external semantics and global
+routing. This does not establish route silence, unconditional ZeroSlack, or
+polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its
