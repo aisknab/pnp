@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-18-161",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-18-162",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -944,6 +944,9 @@
   "leanResidualTerminalPacketBN5ObligationRouteReflectionFormalized": true,
   "leanResidualTerminalPacketBN5ObligationRouteReflectionAxiomAuditPassed": true,
   "leanResidualTerminalPacketBN5ObligationRouteReflectionScope": "all-arbitrary-finite-BN5-coordinate-frontier-obligation-routes-reflected-colour-route-excluded-charge-route-excluded-exact-route-excluded-rank-route-excluded-exact-rankwf-nondecrease-or-three-earlier-semantic-routes-without-route-clear-or-binding-premises",
+  "leanResidualTerminalPacketBN4ActivationRouteReflectionFormalized": true,
+  "leanResidualTerminalPacketBN4ActivationRouteReflectionAxiomAuditPassed": true,
+  "leanResidualTerminalPacketBN4ActivationRouteReflectionScope": "all-arbitrary-finite-BN4-activation-predicate-route-reflected-BN5-frontier-obligation-routes-reflected-colour-route-excluded-charge-route-excluded-exact-route-excluded-rank-route-excluded-exact-rankwf-nondecrease-or-two-earlier-semantic-routes-without-route-clear-or-binding-premises",
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -1524,6 +1527,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketBN5ObligationRouteReflectionAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketBN5ObligationRouteReflection.lean",
     "node --test audits/lean-residual-terminal-packet-bn5-obligation-route-reflection0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketBN4ActivationRouteReflectionAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketBN4ActivationRouteReflection.lean",
+    "node --test audits/lean-residual-terminal-packet-bn4-activation-route-reflection0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1569,6 +1575,7 @@
     "Canonical Packet colour-route reflection computes grouped-footprint eligibility from each canonical handle and clears the internal colour field by construction while retaining positive charge, the internal source route, authoritative rank, and residual-descent reflection. The canonical first route can return none of colour, charge, exactRoute, or rank, and a final descent route still proves actual nondecrease. Five semantic Boolean fields, the grouped family, rank map, residual ranks, and HB data remain explicit. The internal size check plus separately proved carrier-sublist membership is not full external manuscript colour equivalence; the five remaining routes lack complete external semantics and global integration, so complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain open.",
     "Canonical Packet frontier-route reflection replaces the caller frontier bit with executable equality of explicit typed source and selector frontier signatures while retaining canonical colour, positive charge, the internal source route, authoritative rank, and residual-descent reflection. A frontier first route carries exact signature inequality; colour, charge, exactRoute, and rank remain excluded, and a final descent route still proves actual nondecrease. Obligation, activation, direction, and budget remain explicit. The supplied signatures are not constructed from terminal data or bound to the manuscript BN5 frontier, so the four remaining routes still lack complete external semantics and global integration; complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain open.",
     "BN5-bound Packet frontier-and-obligation reflection compares exact frontier and obligation fields of explicit typed source and selector terminal BN5 coordinates while retaining canonical colour, positive charge, the internal source route, authoritative rank, and residual-descent reflection. A frontier route carries frontier inequality; an obligation route carries prior frontier equality and obligation inequality; colour, charge, exactRoute, and rank remain excluded; and a final descent route still proves actual nondecrease. Activation, direction, and budget are the three remaining explicit fields and routes. The BN5 coordinates are not constructed from terminal data, so complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain open.",
+    "BN4 activation-exact Packet route reflection computes the activation field from equality of the nested BN4 activation atoms in the explicit source and selector BN5 coordinates. That equality is equivalent to equality of the canonical activation predicates on every cut. An activation route carries prior BN5 frontier and obligation equality plus activation-atom inequality; colour, charge, exactRoute, and rank remain excluded; and a final descent route still proves actual nondecrease. Direction and budget are the two remaining explicit fields and routes. The coordinates are not constructed from terminal data, so complete route silence, unconditional ZeroSlack, and polynomial PCCMin remain open.",
     "The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.",
     "The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.",
     "Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.",
@@ -1727,7 +1734,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "6d5511abb43648f868cd212d6bbd4ebb8fc1fd2275288d46533d290a33576f02",
+    "actualSourceClosureSha256": "0a9b09ed72e42bb6cdee50a934df5ec8feaa36d77506c69e98d78c043e3b30da",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1757,22 +1764,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-18-161",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-18-162",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "bf78bfe81ea3f813cb23b5ea07766612ffd1621689696f7c535334bfa3694d58",
+  "leanTheoremInventorySha256": "ba154acdd554dc57cebb5f5921ac54670aa2918da1d61f2e7ff779e77b2c0445",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 29164,
+  "leanTheoremInventoryDeclarationCount": 29204,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 15058,
-  "leanTheoremInventoryTheoremCount": 15081,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 7519,
-  "leanTheoremInventorySourceClosureModuleCount": 278,
-  "leanSourceClosureSha256": "6d5511abb43648f868cd212d6bbd4ebb8fc1fd2275288d46533d290a33576f02",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-18-161",
+  "leanTheoremInventoryTheoremCount": 15114,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 7520,
+  "leanTheoremInventorySourceClosureModuleCount": 279,
+  "leanSourceClosureSha256": "0a9b09ed72e42bb6cdee50a934df5ec8feaa36d77506c69e98d78c043e3b30da",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-18-162",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "1f5001a11886e81d733328c004e34c7f69f7c85f56460ea79f3d0b234d54d65e",
+  "formalPublicationMapSha256": "e6af48428f21b6247550963e8fed2146add8b3ad3463b288adabe90559549114",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -42646,6 +42653,376 @@
       "status": "formalized-residual-terminal-packet-bn5-obligation-route-reflection"
     },
     {
+      "classification": "formalized-residual-terminal-packet-bn4-activation-route-reflection",
+      "id": "residual-terminal-packet-bn4-activation-route-reflection",
+      "nonClaim": "The source and selector terminal BN5 coordinates remain explicit inputs: this milestone does not construct those coordinates from terminal data or prove the manuscript's complete BN4, BN5, or Packet adequacy bridge. Direction and budget remain supplied Boolean fields. Those two remaining routes still lack complete external semantics and global integration. The result does not construct the grouped family or rank map from terminal data, prove that a decreasing transition exists, or construct the no-lower ledger. It does not establish full external selector compatibility, complete route silence, unconditional HB.NegativeClosure, positive slack, SaturatePositive, BCELReady, unconditional ZeroSlack, PCCMin, encoded-size or polynomial-runtime bounds, SAT in P; remove a project assumption; or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalPacketSelectorBN5ObligationPayload.activationCheck_eq_true_iff",
+        "PNP.DirectWire.TerminalPacketSelectorBN5ObligationPayload.activationCheck_eq_false_iff",
+        "PNP.DirectWire.TerminalPacketSelectorBN5ObligationPayload.activationCheck_eq_true_iff_activation",
+        "PNP.DirectWire.TerminalPacketSelectorBN5ObligationPayload.activationCheck_eq_false_iff_not_activation",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedBN5FrontierObligationActivationRoutes_fields",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedBN5FrontierObligationActivationRoutes_valid_iff",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedBN5FrontierObligationActivationRoutes_failureAt_colour_iff_false",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedBN5FrontierObligationActivationRoutes_failureAt_frontier_iff",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedBN5FrontierObligationActivationRoutes_failureAt_charge_iff_false",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedBN5FrontierObligationActivationRoutes_failureAt_obligation_iff",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedBN5FrontierObligationActivationRoutes_failureAt_activation_iff",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedBN5FrontierObligationActivationRoutes_failureAt_rank_iff_false",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedBN5FrontierObligationActivationRoutes_failureAt_exactRoute_iff_false",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedBN5FrontierObligationActivationRoutes_failureAt_descent_iff",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRouteWithComputedBN5FrontierObligationActivationRoutes_eq_some_iff",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRouteWithComputedBN5FrontierObligationActivationRoutes_eq_some_frontier_iff",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRouteWithComputedBN5FrontierObligationActivationRoutes_eq_some_obligation_iff",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRouteWithComputedBN5FrontierObligationActivationRoutes_eq_some_activation_iff",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.computedBN5FrontierObligationActivationRoutes_firstRoute_ne_some_colour",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.computedBN5FrontierObligationActivationRoutes_firstRoute_ne_some_charge",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.computedBN5FrontierObligationActivationRoutes_firstRoute_ne_some_rank",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.computedBN5FrontierObligationActivationRoutes_firstRoute_ne_some_exactRoute",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.not_rankDescent_of_computedBN5FrontierObligationActivationRoutes_firstRoute_descent",
+        "PNP.DirectWire.TerminalBN6GroupedFamily.rankDescent_of_packetSelectorPayloadFaithfulWithComputedBN5FrontierObligationActivationRoutes",
+        "PNP.DirectWire.TerminalPacketTypedRealizerTable.withComputedPacketSelectorBN5FrontierObligationActivationFaithfulness_preserves",
+        "PNP.DirectWire.TerminalPacketTypedRealizerTable.withComputedPacketSelectorBN5FrontierObligationActivationFaithfulness_faithful",
+        "PNP.DirectWire.TerminalBN6PacketConclusion.existsBN4ActivationReflectedFirstRouteFailure_of_selectorSilence",
+        "PNP.DirectWire.terminalBN6_packet_bn4_activation_reflected_hb_first_route_failure"
+      ],
+      "scope": "For every arbitrary finite grouped BN6 family, selector-rank carrier, and typed terminal BN5 coordinate with decidable equality of activation atoms, the canonical payload computes frontier and obligation acceptance from the corresponding BN5 fields and activation acceptance from equality of the nested BN4 activation atoms while retaining grouped colour, positive charge, the internal source route, authoritative handle rank, and exact ten-coordinate descent comparison. Activation-atom equality is equivalent to equality of the canonical BN4 activation predicates on every cut. An activation first route is prior frontier and obligation equality together with exact activation-atom inequality. The first-route classifier also cannot return colour, charge, rank, or exactRoute; a final descent route proves nondecrease, and the positive Packet/HB endpoint carries exact failure evidence without route-clear or binding premises.",
+      "title": "BN4 activation-exact Packet route reflection",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorBN5ObligationPayload.activationCheck_eq_true_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "867dc60cc56156ea58a390936d859c4a7e78e566e08a0e4f6b733a1dd0d98b3e",
+          "expectedKernelTypeSha256": "867dc60cc56156ea58a390936d859c4a7e78e566e08a0e4f6b733a1dd0d98b3e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorBN5ObligationPayload.activationCheck_eq_false_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "33227f5d456b764becbbd03f736dce6682d9fa5fde8af71acf2d727114d2bd59",
+          "expectedKernelTypeSha256": "33227f5d456b764becbbd03f736dce6682d9fa5fde8af71acf2d727114d2bd59",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorBN5ObligationPayload.activationCheck_eq_true_iff_activation",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "520c930b8ecf4c0968b08c9a5ba290328cadd3873d97dd6fd91946f30b8daed0",
+          "expectedKernelTypeSha256": "520c930b8ecf4c0968b08c9a5ba290328cadd3873d97dd6fd91946f30b8daed0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketSelectorBN5ObligationPayload.activationCheck_eq_false_iff_not_activation",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "36dd2bdc803bca6989ae8066d58dd769bc93e66a90929854caf24d018f2dd347",
+          "expectedKernelTypeSha256": "36dd2bdc803bca6989ae8066d58dd769bc93e66a90929854caf24d018f2dd347",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedBN5FrontierObligationActivationRoutes_fields",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a0c913b65e2ad91ebc2cc88433ccdb43b34d0a5f50aa7e658b7653d65d28069c",
+          "expectedKernelTypeSha256": "a0c913b65e2ad91ebc2cc88433ccdb43b34d0a5f50aa7e658b7653d65d28069c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedBN5FrontierObligationActivationRoutes_valid_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "82bc09367b318712dff44391f52f1cf241e156f90d78071bde60d5b7a2b85bb2",
+          "expectedKernelTypeSha256": "82bc09367b318712dff44391f52f1cf241e156f90d78071bde60d5b7a2b85bb2",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedBN5FrontierObligationActivationRoutes_failureAt_colour_iff_false",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "145bc42a327b3cf875ae8ff9b0f5c3fba186679ded86dee95f0a830ffe9139cf",
+          "expectedKernelTypeSha256": "145bc42a327b3cf875ae8ff9b0f5c3fba186679ded86dee95f0a830ffe9139cf",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedBN5FrontierObligationActivationRoutes_failureAt_frontier_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "15bc8682283535971f9d0fd636432944d0083d1daacbead3f11e4d210449ce88",
+          "expectedKernelTypeSha256": "15bc8682283535971f9d0fd636432944d0083d1daacbead3f11e4d210449ce88",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedBN5FrontierObligationActivationRoutes_failureAt_charge_iff_false",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "71ca7ce5fe41dba1dd4eace717f98d373dd10f22d83ea4ed3329c3f081db3e7d",
+          "expectedKernelTypeSha256": "71ca7ce5fe41dba1dd4eace717f98d373dd10f22d83ea4ed3329c3f081db3e7d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedBN5FrontierObligationActivationRoutes_failureAt_obligation_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b7750f0fba4cd161bf61e0f1119fd0d663372458e2eeb074eba1a3193a13a7d3",
+          "expectedKernelTypeSha256": "b7750f0fba4cd161bf61e0f1119fd0d663372458e2eeb074eba1a3193a13a7d3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedBN5FrontierObligationActivationRoutes_failureAt_activation_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0831b041c48b5756d237702df66de658680ea61f69bc8c8d06c5d772e6b9403e",
+          "expectedKernelTypeSha256": "0831b041c48b5756d237702df66de658680ea61f69bc8c8d06c5d772e6b9403e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedBN5FrontierObligationActivationRoutes_failureAt_rank_iff_false",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4e791b0060da3278263ce7a3467ecf4db8fe74e8385aa76fc52d3c51d9677623",
+          "expectedKernelTypeSha256": "4e791b0060da3278263ce7a3467ecf4db8fe74e8385aa76fc52d3c51d9677623",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedBN5FrontierObligationActivationRoutes_failureAt_exactRoute_iff_false",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "42bbb31c57dffa7cb42cace8ae48a7cf891a497a5e277ab19f4b1fe3d25fa990",
+          "expectedKernelTypeSha256": "42bbb31c57dffa7cb42cace8ae48a7cf891a497a5e277ab19f4b1fe3d25fa990",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadWithComputedBN5FrontierObligationActivationRoutes_failureAt_descent_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7360662ae21ed821756b6698b0d60710b33ac5d96a3103735922a7d10b23e179",
+          "expectedKernelTypeSha256": "7360662ae21ed821756b6698b0d60710b33ac5d96a3103735922a7d10b23e179",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRouteWithComputedBN5FrontierObligationActivationRoutes_eq_some_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "018e603af22e51a13ffd8868bbda1d2a05ee8c8a8c46c80ac916f556bb964dcd",
+          "expectedKernelTypeSha256": "018e603af22e51a13ffd8868bbda1d2a05ee8c8a8c46c80ac916f556bb964dcd",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRouteWithComputedBN5FrontierObligationActivationRoutes_eq_some_frontier_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "2d0f464bbd7d548790d9dc9b5ea36a0c54d97580166d75774b23db97319870f0",
+          "expectedKernelTypeSha256": "2d0f464bbd7d548790d9dc9b5ea36a0c54d97580166d75774b23db97319870f0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRouteWithComputedBN5FrontierObligationActivationRoutes_eq_some_obligation_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "19039f985e21b04eac7dc9e73d7cfbf3c149ef0505e1c0c3ab2d35bbecb18036",
+          "expectedKernelTypeSha256": "19039f985e21b04eac7dc9e73d7cfbf3c149ef0505e1c0c3ab2d35bbecb18036",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRouteWithComputedBN5FrontierObligationActivationRoutes_eq_some_activation_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4def1541b1476e78ffdca27f5235e0e73705fc714263dd3b798ced5a81d45a24",
+          "expectedKernelTypeSha256": "4def1541b1476e78ffdca27f5235e0e73705fc714263dd3b798ced5a81d45a24",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.computedBN5FrontierObligationActivationRoutes_firstRoute_ne_some_colour",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "df511f38d4027c7eb2145f67c1b864cb69795a1b04fa03f9069eaa423896e672",
+          "expectedKernelTypeSha256": "df511f38d4027c7eb2145f67c1b864cb69795a1b04fa03f9069eaa423896e672",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.computedBN5FrontierObligationActivationRoutes_firstRoute_ne_some_charge",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "de7dd10107a30def704279109aa08e1c8643b32f24481ec4503f86b11bd3e0c3",
+          "expectedKernelTypeSha256": "de7dd10107a30def704279109aa08e1c8643b32f24481ec4503f86b11bd3e0c3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.computedBN5FrontierObligationActivationRoutes_firstRoute_ne_some_rank",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "cc269256b584d4404512211d141af4fa104de4f3f2dfd186af3d896c17750851",
+          "expectedKernelTypeSha256": "cc269256b584d4404512211d141af4fa104de4f3f2dfd186af3d896c17750851",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.computedBN5FrontierObligationActivationRoutes_firstRoute_ne_some_exactRoute",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8b0d888392be3cbf603df918e3f793ece534ca009eb8efa8d3c71c10176010b4",
+          "expectedKernelTypeSha256": "8b0d888392be3cbf603df918e3f793ece534ca009eb8efa8d3c71c10176010b4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.not_rankDescent_of_computedBN5FrontierObligationActivationRoutes_firstRoute_descent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ac4c2916e58371fb305dc3e45156a76f5bd0c614f5cfba012f4df1e40729ba74",
+          "expectedKernelTypeSha256": "ac4c2916e58371fb305dc3e45156a76f5bd0c614f5cfba012f4df1e40729ba74",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6GroupedFamily.rankDescent_of_packetSelectorPayloadFaithfulWithComputedBN5FrontierObligationActivationRoutes",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e58e47c9ba5e34aeefb3022ec0e85675eee95d05bca6562ae23372929c85a863",
+          "expectedKernelTypeSha256": "e58e47c9ba5e34aeefb3022ec0e85675eee95d05bca6562ae23372929c85a863",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketTypedRealizerTable.withComputedPacketSelectorBN5FrontierObligationActivationFaithfulness_preserves",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7aff465daa6e5bf5070e20c83b4ad29a65663c09cb7a7342ba97597421decad8",
+          "expectedKernelTypeSha256": "7aff465daa6e5bf5070e20c83b4ad29a65663c09cb7a7342ba97597421decad8",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalPacketTypedRealizerTable.withComputedPacketSelectorBN5FrontierObligationActivationFaithfulness_faithful",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7752f2b774b0c7f9aae13bfee00180ba3e0a0dec7cb75ae6f186e04736119e12",
+          "expectedKernelTypeSha256": "7752f2b774b0c7f9aae13bfee00180ba3e0a0dec7cb75ae6f186e04736119e12",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6PacketConclusion.existsBN4ActivationReflectedFirstRouteFailure_of_selectorSilence",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f51b8b54f0154b14891ae93c2e11b1b8f869a18961d7a34cd10d0c9eb124d8b7",
+          "expectedKernelTypeSha256": "f51b8b54f0154b14891ae93c2e11b1b8f869a18961d7a34cd10d0c9eb124d8b7",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBN6_packet_bn4_activation_reflected_hb_first_route_failure",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9ba3eede1deb9433671ebf085abc57e786c9876a347d2b72be89a6012efd742a",
+          "expectedKernelTypeSha256": "9ba3eede1deb9433671ebf085abc57e786c9876a347d2b72be89a6012efd742a",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-packet-bn4-activation-route-reflection"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -42743,7 +43120,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-18-161",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-18-162",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

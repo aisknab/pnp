@@ -1274,6 +1274,18 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalPacketBN5ObligationRouteReflectionScope,
     'all-arbitrary-finite-BN5-coordinate-frontier-obligation-routes-reflected-colour-route-excluded-charge-route-excluded-exact-route-excluded-rank-route-excluded-exact-rankwf-nondecrease-or-three-earlier-semantic-routes-without-route-clear-or-binding-premises',
   );
+  assert.equal(
+    out.leanResidualTerminalPacketBN4ActivationRouteReflectionFormalized,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalPacketBN4ActivationRouteReflectionAxiomAuditPassed,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalPacketBN4ActivationRouteReflectionScope,
+    'all-arbitrary-finite-BN4-activation-predicate-route-reflected-BN5-frontier-obligation-routes-reflected-colour-route-excluded-charge-route-excluded-exact-route-excluded-rank-route-excluded-exact-rankwf-nondecrease-or-two-earlier-semantic-routes-without-route-clear-or-binding-premises',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',

@@ -811,6 +811,20 @@ Every positive packet has a representative in the polynomial selector universe; 
   Activation, direction, and budget and the three remaining routes remain
   explicit or externally uninterpreted; complete route silence, unconditional
   ZeroSlack, and polynomial PCCMin remain open.
+- BN4 activation-exact Packet route reflection is witnessed by
+  `PNP.DirectWire.TerminalPacketSelectorBN5ObligationPayload.activationCheck_eq_true_iff_activation`,
+  `PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRouteWithComputedBN5FrontierObligationActivationRoutes_eq_some_activation_iff`,
+  and
+  `PNP.DirectWire.terminalBN6_packet_bn4_activation_reflected_hb_first_route_failure`.
+  The caller activation bit is replaced by equality of the exact activation
+  atoms nested inside the source and selector BN5 coordinates. That equality
+  is equivalent to agreement of the canonical BN4 activation predicates on
+  every cut. An `.activation` route carries prior frontier and obligation
+  equality plus activation-atom inequality, while `.colour`, `.charge`,
+  `.exactRoute`, and `.rank` remain excluded. The coordinates are explicit
+  rather than terminal-derived. Direction and budget and the two remaining
+  routes remain explicit or externally uninterpreted; complete route silence,
+  unconditional ZeroSlack, and polynomial PCCMin remain open.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -959,6 +973,12 @@ Every positive packet has a representative in the polynomial selector universe; 
   `.charge`, `.exactRoute`, or `.rank`, treats explicit BN5 coordinates as
   terminal-derived, or promotes one of the three remaining routes without
   external adequacy evidence.
+- A supposedly activation-exact Packet payload that retains the caller
+  activation bit, erases the nested BN4 activation atoms, omits extensional
+  activation-predicate equality, reports `.activation` without prior frontier
+  and obligation equality, permits `.colour`, `.charge`, `.exactRoute`, or
+  `.rank`, treats explicit coordinates as terminal-derived, or promotes one of
+  the two remaining routes without external adequacy evidence.
 
 ---
 

@@ -2001,6 +2001,21 @@ route silence, unconditional HB negative closure, ZeroSlack, and polynomial
 PCCMin remain open. See
 [`lean_residual_terminal_packet_bn5_obligation_route_reflection.md`](./lean_residual_terminal_packet_bn5_obligation_route_reflection.md).
 
+The BN4 activation-exact Packet route reflection milestone in
+`ResidualTerminalPacketBN4ActivationRouteReflection` computes the next Packet
+field from equality of the activation atoms nested inside those same source
+and selector BN5 coordinates. The existing BN4 theorem proves that atom
+equality is equivalent to equality of the canonical activation predicates on
+every cut. An `.activation` route therefore carries prior frontier and
+obligation equality plus exact activation-atom inequality. Canonical colour,
+positive charge, the internal source route, table-owned rank, and exact
+residual descent remain computed, so `.colour`, `.charge`, `.exactRoute`, and
+`.rank` stay excluded and `.descent` still proves nondecrease. The coordinates
+remain explicit rather than terminal-derived. Direction and budget are the two
+remaining fields and routes. Complete route silence, unconditional HB negative
+closure, ZeroSlack, and polynomial PCCMin remain open. See
+[`lean_residual_terminal_packet_bn4_activation_route_reflection.md`](./lean_residual_terminal_packet_bn4_activation_route_reflection.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

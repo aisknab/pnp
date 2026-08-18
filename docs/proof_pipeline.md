@@ -446,6 +446,21 @@ fields and routes; they still lack complete external semantics and global
 routing. This does not establish route silence, unconditional ZeroSlack, or
 polynomial PCCMin.
 
+BN4 activation-exact Packet route reflection now ties the next check to the
+activation atoms nested inside the typed source and selector BN5 coordinates.
+The active payload compares those atoms while retaining computed BN5 frontier
+and obligation checks, canonical colour, positive charge, the internal source
+route, table-owned rank, and exact residual descent. The existing BN4 theorem
+proves that activation-atom equality is equivalent to equality of the
+canonical activation predicates on every cut. An `.activation` first route
+carries prior frontier and obligation equality plus exact activation-atom
+inequality. The classifier continues to exclude `.colour`, `.charge`,
+`.exactRoute`, and `.rank`, while `.descent` carries actual nondecrease. The
+coordinates remain explicit rather than derived from terminal data. Direction
+and budget are the two remaining fields and routes; they still lack complete
+external semantics and global routing. This does not establish route silence,
+unconditional ZeroSlack, or polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its
