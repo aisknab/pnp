@@ -798,6 +798,19 @@ Every positive packet has a representative in the polynomial selector universe; 
   and budget and the four remaining routes remain explicit or externally
   uninterpreted; complete route silence, unconditional ZeroSlack, and
   polynomial PCCMin remain open.
+- BN5-bound Packet frontier and obligation route reflection is witnessed by
+  `PNP.DirectWire.TerminalPacketSelectorBN5ObligationPayload.obligationCheck_eq_false_iff`,
+  `PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRouteWithComputedBN5FrontierObligationRoutes_eq_some_obligation_iff`,
+  and
+  `PNP.DirectWire.terminalBN6_packet_bn5_frontier_obligation_reflected_hb_first_route_failure`.
+  Both caller bits are replaced by equality of the exact source and selector
+  typed BN5 coordinate fields. A `.frontier` route carries frontier inequality;
+  an `.obligation` route carries prior frontier equality and obligation
+  inequality, while `.colour`, `.charge`, `.exactRoute`, and `.rank` remain
+  excluded. The BN5 coordinates are explicit rather than terminal-derived.
+  Activation, direction, and budget and the three remaining routes remain
+  explicit or externally uninterpreted; complete route silence, unconditional
+  ZeroSlack, and polynomial PCCMin remain open.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -940,6 +953,12 @@ Every positive packet has a representative in the polynomial selector universe; 
   `.exactRoute`, or `.rank`, treats supplied signatures as terminal-derived or
   BN5-bound, drops exact residual-descent computation, or promotes one of the
   four remaining routes without external adequacy evidence.
+- A supposedly BN5-bound frontier-and-obligation payload that retains either
+  caller bit, erases the coordinate fields, compares unrelated projections,
+  reports `.obligation` without prior frontier equality, permits `.colour`,
+  `.charge`, `.exactRoute`, or `.rank`, treats explicit BN5 coordinates as
+  terminal-derived, or promotes one of the three remaining routes without
+  external adequacy evidence.
 
 ---
 

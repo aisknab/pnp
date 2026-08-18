@@ -2971,6 +2971,29 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /four remaining routes/u);
   assert.match(terminalPacketFrontierRouteReflection.nonClaim,
     /does not construct the supplied signatures from terminal data/u);
+  const terminalPacketBN5ObligationRouteReflection = byId.get(
+    'residual-terminal-packet-bn5-obligation-route-reflection',
+  );
+  assert.equal(terminalPacketBN5ObligationRouteReflection.status,
+    'formalized-residual-terminal-packet-bn5-obligation-route-reflection');
+  assert.equal(terminalPacketBN5ObligationRouteReflection.earned, true);
+  assert.equal(
+    terminalPacketBN5ObligationRouteReflection
+      .axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.equal(
+    terminalPacketBN5ObligationRouteReflection.requiredTheorems.length,
+    26,
+  );
+  assert.match(terminalPacketBN5ObligationRouteReflection.scope,
+    /typed terminal BN5 coordinate.*frontier and obligation/u);
+  assert.match(terminalPacketBN5ObligationRouteReflection.scope,
+    /obligation first route.*frontier equality.*obligation inequality/u);
+  assert.match(terminalPacketBN5ObligationRouteReflection.nonClaim,
+    /three remaining routes/u);
+  assert.match(terminalPacketBN5ObligationRouteReflection.nonClaim,
+    /does not construct those coordinates from terminal data/u);
   const lockedNANDThreshold = byId.get('global-locked-nand-threshold');
   assert.equal(lockedNANDThreshold.status,
     'formalized-concrete-locked-nand-threshold');
