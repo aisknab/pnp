@@ -432,6 +432,20 @@ remaining routes still lack complete external semantics and global routing,
 so this does not establish route silence, unconditional ZeroSlack, or
 polynomial PCCMin.
 
+BN5-bound Packet frontier and obligation route reflection now ties both checks
+to the typed terminal BN5 coordinate. The active payload compares the exact
+source and selector `frontier` and `obligation` projections while retaining
+canonical colour, positive charge, the internal source route, table-owned
+rank, and exact residual descent. A `.frontier` first route is exact frontier
+inequality. An `.obligation` first route carries prior frontier equality and
+exact obligation inequality. The classifier also continues to exclude
+`.colour`, `.charge`, `.exactRoute`, and `.rank`, while `.descent` carries
+actual nondecrease. The BN5 coordinates remain explicit rather than derived
+from terminal data. Activation, direction, and budget are the three remaining
+fields and routes; they still lack complete external semantics and global
+routing. This does not establish route silence, unconditional ZeroSlack, or
+polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

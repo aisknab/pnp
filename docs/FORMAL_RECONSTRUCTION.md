@@ -1985,6 +1985,22 @@ silence, unconditional HB negative closure, ZeroSlack, and polynomial PCCMin
 remain open. See
 [`lean_residual_terminal_packet_frontier_route_reflection.md`](./lean_residual_terminal_packet_frontier_route_reflection.md).
 
+The BN5-bound Packet frontier-and-obligation route reflection milestone in
+`ResidualTerminalPacketBN5ObligationRouteReflection` replaces the separate
+typed-frontier wrapper with the terminal BN5 coordinate already retained by
+the formal reconstruction. The canonical projection compares the exact source
+and selector BN5 `frontier` and `obligation` fields. A `.frontier` route is
+equivalent to frontier inequality; an `.obligation` route carries prior
+frontier equality and exact obligation inequality. Canonical colour, positive
+charge, the internal source route, table-owned rank, and exact residual descent
+remain computed, so `.colour`, `.charge`, `.exactRoute`, and `.rank` stay
+excluded and `.descent` still proves nondecrease. The BN5 coordinates remain
+explicit inputs rather than being constructed from terminal data. Activation,
+direction, and budget are the three remaining fields and routes. Complete
+route silence, unconditional HB negative closure, ZeroSlack, and polynomial
+PCCMin remain open. See
+[`lean_residual_terminal_packet_bn5_obligation_route_reflection.md`](./lean_residual_terminal_packet_bn5_obligation_route_reflection.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:
