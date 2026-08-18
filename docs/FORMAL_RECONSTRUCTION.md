@@ -2031,6 +2031,22 @@ silence, unconditional HB negative closure, ZeroSlack, and polynomial PCCMin
 remain open. See
 [`lean_residual_terminal_packet_direction_route_reflection.md`](./lean_residual_terminal_packet_direction_route_reflection.md).
 
+The typed Packet budget-route reflection milestone in
+`ResidualTerminalPacketBudgetRouteReflection` computes the final supplied
+Packet Boolean from equality of explicit source and selector values in an
+arbitrary budget type. A `.budget` route therefore carries prior frontier,
+obligation, activation, and direction equality plus exact typed-budget
+inequality. Canonical colour, positive charge, the internal source route,
+table-owned rank, and exact residual descent remain computed, so `.colour`,
+`.charge`, `.exactRoute`, and `.rank` stay excluded and `.descent` still proves
+nondecrease. The budget values remain explicit rather than terminal-derived
+and are not a construction of the manuscript's complete `Bud(u)` envelope,
+BudgetResolve, or HB budget-activity semantics. Computing every local Packet
+field does not prove external route adequacy or global route silence.
+Unconditional HB negative closure, ZeroSlack, and polynomial PCCMin remain
+open. See
+[`lean_residual_terminal_packet_budget_route_reflection.md`](./lean_residual_terminal_packet_budget_route_reflection.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

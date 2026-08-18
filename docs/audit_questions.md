@@ -838,6 +838,20 @@ Every positive packet has a representative in the polynomial selector universe; 
   complete construction of manuscript `Dir(u)`. Budget is the sole remaining
   supplied Boolean field and route; complete route silence, unconditional
   ZeroSlack, and polynomial PCCMin remain open.
+- Typed Packet budget-route reflection is witnessed by
+  `PNP.DirectWire.TerminalPacketSelectorBN5BudgetPayload.budgetCheck_eq_true_iff`,
+  `PNP.DirectWire.TerminalBN6GroupedFamily.packetSelectorPayloadFirstRouteWithComputedBN5FrontierObligationActivationDirectionBudgetRoutes_eq_some_budget_iff`,
+  and
+  `PNP.DirectWire.terminalBN6_packet_budget_reflected_hb_first_route_failure`.
+  The caller budget bit is replaced by equality of explicit typed source and
+  selector budget values. A `.budget` route carries prior frontier,
+  obligation, activation, and direction equality plus typed-budget
+  inequality, while `.colour`, `.charge`, `.exactRoute`, and `.rank` remain
+  excluded. The budget values are explicit rather than terminal-derived and
+  are not a construction of manuscript `Bud(u)`, BudgetResolve, or HB budget
+  activity. Every local Packet field is computed, but external route adequacy,
+  global route silence, unconditional ZeroSlack, and polynomial PCCMin remain
+  open.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -998,6 +1012,12 @@ Every positive packet has a representative in the polynomial selector universe; 
   `.colour`, `.charge`, `.exactRoute`, or `.rank`, treats explicit direction
   values as terminal-derived manuscript semantics, or promotes the sole
   remaining budget route without external adequacy evidence.
+- A supposedly typed-budget Packet payload that retains the caller budget bit,
+  erases either typed budget value, reports `.budget` without prior frontier,
+  obligation, activation, and direction equality, permits `.colour`,
+  `.charge`, `.exactRoute`, or `.rank`, treats explicit budget equality as a
+  constructed budget envelope or as BudgetResolve/HB activity, or promotes
+  local field computation to complete external route silence.
 
 ---
 
