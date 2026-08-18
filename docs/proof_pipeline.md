@@ -490,6 +490,18 @@ Every local Packet field is now computed, but external route adequacy and
 global route silence remain open. This does not establish unconditional
 ZeroSlack or polynomial PCCMin.
 
+Checked Packet budget/HB activity binding now exhaustively requires every
+typed budget mismatch at a canonical handle to activate the HB budget node at
+the table-owned rank. The existing checked well-founded HB no-outcome closure
+forces that activity false, so an accepted binding yields exact typed budget
+equality at every handle and excludes the `.budget` first route. The remaining
+outcome is frontier, obligation, activation, direction, or exact residual
+nondecrease. The binding, rank map, activity environment, dependency table, and
+closure premise remain explicit rather than constructed from terminal data;
+this is not BudgetResolve, blocker semantic completeness, full Packet
+adequacy, or remaining-route exclusion. Unconditional HB negative closure,
+ZeroSlack, and polynomial PCCMin remain open.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

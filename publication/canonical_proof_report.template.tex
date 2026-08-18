@@ -941,6 +941,18 @@ BudgetResolve, or HB budget activity. Every local Packet field is now
 computed, but external route adequacy and global route silence remain open.
 Unconditional ZeroSlack and polynomial PCCMin remain open.
 
+Checked Packet budget/HB activity binding now exhaustively requires every
+typed budget mismatch at a canonical handle to activate the HB budget node at
+the table-owned rank. The supplied checked well-founded HB no-outcome closure
+forces that activity false, so an accepted binding yields exact typed budget
+equality at every handle and excludes the \code{.budget} first route. The
+remaining outcome is frontier, obligation, activation, direction, or exact
+residual nondecrease. The binding, rank map, activity environment, dependency
+table, and closure premise remain explicit rather than constructed from
+terminal data; this is not BudgetResolve, blocker semantic completeness, full
+Packet adequacy, or remaining-route exclusion. Unconditional HB negative
+closure, ZeroSlack, and polynomial PCCMin remain open.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule

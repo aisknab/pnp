@@ -852,6 +852,17 @@ Every positive packet has a representative in the polynomial selector universe; 
   activity. Every local Packet field is computed, but external route adequacy,
   global route silence, unconditional ZeroSlack, and polynomial PCCMin remain
   open.
+- Checked Packet budget/HB activity binding is witnessed by
+  `PNP.DirectWire.TerminalPacketTypedRealizerTable.checkPacketBudgetHBActivityBinding_eq_true_iff`,
+  `PNP.DirectWire.TerminalPacketTypedRealizerTable.packetBudget_eq_of_checkedHBActivityBinding`,
+  and
+  `PNP.DirectWire.terminalBN6_packet_budget_hb_activity_bound_first_route_failure`.
+  The executable checker requires every typed budget mismatch to activate the
+  HB budget node at the table-owned rank. Together with the supplied checked
+  well-founded HB no-outcome closure, this forces typed budget equality and
+  excludes `.budget`. The binding and HB data remain explicit rather than
+  terminal-derived; this is not BudgetResolve, blocker semantic completeness,
+  remaining-route exclusion, unconditional ZeroSlack, or polynomial PCCMin.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -1018,6 +1029,12 @@ Every positive packet has a representative in the polynomial selector universe; 
   `.charge`, `.exactRoute`, or `.rank`, treats explicit budget equality as a
   constructed budget envelope or as BudgetResolve/HB activity, or promotes
   local field computation to complete external route silence.
+- A supposedly checked Packet budget/HB binding that skips canonical handles,
+  accepts a budget mismatch without activity at the table-owned rank, assumes
+  inactivity instead of consuming the checked well-founded HB closure, hides a
+  caller success flag, or promotes local `.budget` exclusion to BudgetResolve,
+  terminal-data construction, semantic completeness, remaining-route silence,
+  unconditional ZeroSlack, or polynomial PCCMin.
 
 ---
 

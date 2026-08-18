@@ -2047,6 +2047,21 @@ Unconditional HB negative closure, ZeroSlack, and polynomial PCCMin remain
 open. See
 [`lean_residual_terminal_packet_budget_route_reflection.md`](./lean_residual_terminal_packet_budget_route_reflection.md).
 
+The checked Packet budget/HB activity-binding milestone in
+`ResidualTerminalPacketBudgetHBActivityBinding` exhaustively scans every
+canonical handle and requires each typed budget mismatch to activate the HB
+budget node at the table-owned rank. When that check and the supplied checked
+well-founded HB no-outcome closure both pass, every handle has equal typed
+budgets and the first-route classifier cannot return `.budget`. The positive
+Packet endpoint is therefore confined to frontier, obligation, activation,
+direction, or exact residual nondecrease. The binding, rank map, activity
+environment, dependency table, and closure premise remain explicit rather than
+constructed from terminal data. This is not `BudgetResolve`, blocker semantic
+completeness, full Packet adequacy, or an exclusion of the remaining routes.
+Unconditional HB negative closure, ZeroSlack, and polynomial PCCMin remain
+open. See
+[`lean_residual_terminal_packet_budget_hb_activity_binding.md`](./lean_residual_terminal_packet_budget_hb_activity_binding.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:
