@@ -528,6 +528,16 @@ supplied; the complete no-lower ledger, HResolve, BudgetResolve,
 normalization, named routes, saturation, replay, unconditional ZeroSlack, and
 polynomial PCCMin remain open.
 
+Checked Packet no-lower ledger composition now recomputes those five exact
+rows in one Boolean boundary: semantic/HN binding, budget/HB binding,
+selector silence, HB no-outcome closure, and Packet descent/no-lower. Its
+reflection theorem exposes exact acceptance, and an accepted ledger rules out
+a positive Packet conclusion for every supplied arbitrary finite grouped
+family. This closes the Packet branch only. The terminal inputs and bindings
+remain supplied, while the complete no-lower ledger, HResolve, BudgetResolve,
+normalization, other named obstructions, saturation, replay, unconditional
+ZeroSlack, and polynomial PCCMin remain open.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

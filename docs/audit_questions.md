@@ -886,6 +886,17 @@ Every positive packet has a representative in the polynomial selector universe; 
   silence, and HB closure forces that checker to reject. This is one local
   no-lower row over supplied data, not the complete manuscript ledger,
   terminal-data construction, unconditional ZeroSlack, or polynomial PCCMin.
+- Checked Packet no-lower ledger composition is witnessed by
+  `PNP.DirectWire.TerminalPacketTypedRealizerTable.checkPacketNoLowerLedger_eq_true_iff`,
+  `PNP.DirectWire.TerminalBN6PacketConclusion.checkPacketNoLowerLedger_eq_false`,
+  and
+  `PNP.DirectWire.terminalBN6_packet_no_lower_ledger_excludes_positive_packet`.
+  One executable checker recomputes the semantic/HN binding, budget/HB
+  binding, selector-silence, HB no-outcome closure, and Packet descent/no-lower
+  rows. Exact acceptance excludes a positive Packet over arbitrary finite
+  grouped families. This closes the Packet branch only, not the complete
+  no-lower ledger, terminal-data construction, unconditional ZeroSlack, or
+  polynomial PCCMin.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -1071,6 +1082,11 @@ Every positive packet has a representative in the polynomial selector universe; 
   rejection as an input, drops any checked positive-Packet binding, silence,
   or closure premise, or promotes one local contradiction to the complete
   no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin.
+- A supposedly checked Packet no-lower ledger that accepts a caller success
+  flag, omits or weakens any of its five executable rows, mixes rows computed
+  from different tables or ranks, assumes Packet impossibility, or promotes
+  the Packet branch to the complete no-lower ledger, unconditional ZeroSlack,
+  or polynomial PCCMin.
 
 ---
 

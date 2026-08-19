@@ -3129,6 +3129,25 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /one checked local Packet no-lower row/u);
   assert.match(terminalPacketDescentNoLowerBinding.nonClaim,
     /complete.*no-lower ledger.*HResolve.*BudgetResolve/u);
+  const terminalPacketNoLowerLedger = byId.get(
+    'residual-terminal-packet-no-lower-ledger',
+  );
+  assert.equal(terminalPacketNoLowerLedger.status,
+    'formalized-residual-terminal-packet-no-lower-ledger');
+  assert.equal(terminalPacketNoLowerLedger.earned, true);
+  assert.equal(
+    terminalPacketNoLowerLedger.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.equal(terminalPacketNoLowerLedger.requiredTheorems.length, 4);
+  assert.match(terminalPacketNoLowerLedger.scope,
+    /five executable checks.*positive Packet/u);
+  assert.match(terminalPacketNoLowerLedger.scope,
+    /accepted ledger excludes/u);
+  assert.match(terminalPacketNoLowerLedger.nonClaim,
+    /Packet branch.*not the complete no-lower ledger/u);
+  assert.match(terminalPacketNoLowerLedger.nonClaim,
+    /HResolve.*BudgetResolve.*normalization.*saturation.*replay/u);
   const lockedNANDThreshold = byId.get('global-locked-nand-threshold');
   assert.equal(lockedNANDThreshold.status,
     'formalized-concrete-locked-nand-threshold');

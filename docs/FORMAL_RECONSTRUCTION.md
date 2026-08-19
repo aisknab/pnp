@@ -2093,6 +2093,18 @@ replay, establish unconditional HB closure or ZeroSlack, or prove polynomial
 PCCMin. See
 [`lean_residual_terminal_packet_descent_no_lower_binding.md`](./lean_residual_terminal_packet_descent_no_lower_binding.md).
 
+`ResidualTerminalPacketNoLowerLedger` now composes that local result with the
+four independently executable semantic/HN binding, budget/HB binding,
+selector-silence, and HB no-outcome closure checks. Its Boolean reflection
+theorem identifies ledger acceptance with those five exact rows, without a
+caller-supplied success flag. An accepted ledger excludes a positive Packet
+conclusion over every supplied arbitrary finite grouped family. This closes
+only the Packet branch of the manuscript no-lower dependency, not the complete
+no-lower ledger or ZeroSlack: terminal data and bindings remain supplied, and
+HResolve, BudgetResolve, normalization, other named obstructions, saturation,
+and replay remain open. See
+[`lean_residual_terminal_packet_no_lower_ledger.md`](./lean_residual_terminal_packet_no_lower_ledger.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:
