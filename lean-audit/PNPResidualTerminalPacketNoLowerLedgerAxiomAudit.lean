@@ -1,0 +1,8 @@
+import PNP.ResidualTerminalPacketNoLowerLedger
+
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerTable.PacketNoLowerLedgerAccepted
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerTable.checkPacketNoLowerLedger
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerTable.checkPacketNoLowerLedger_eq_true_iff
+#print axioms PNP.DirectWire.TerminalBN6PacketConclusion.checkPacketNoLowerLedger_eq_false
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerTable.not_packetConclusion_of_checkedPacketNoLowerLedger
+#print axioms PNP.DirectWire.terminalBN6_packet_no_lower_ledger_excludes_positive_packet

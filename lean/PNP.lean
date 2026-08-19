@@ -80,6 +80,7 @@ import PNP.ResidualTerminalPacketBudgetRouteReflection
 import PNP.ResidualTerminalPacketBudgetHBActivityBinding
 import PNP.ResidualTerminalPacketSemanticHNActivityBinding
 import PNP.ResidualTerminalPacketDescentNoLowerBinding
+import PNP.ResidualTerminalPacketNoLowerLedger
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine
