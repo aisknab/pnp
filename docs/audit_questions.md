@@ -863,6 +863,19 @@ Every positive packet has a representative in the polynomial selector universe; 
   excludes `.budget`. The binding and HB data remain explicit rather than
   terminal-derived; this is not BudgetResolve, blocker semantic completeness,
   remaining-route exclusion, unconditional ZeroSlack, or polynomial PCCMin.
+- Checked Packet semantic/HN activity binding is witnessed by
+  `PNP.DirectWire.TerminalPacketTypedRealizerTable.checkPacketSemanticHNActivityBinding_eq_true_iff`,
+  `PNP.DirectWire.TerminalPacketTypedRealizerTable.packetSemanticFieldsAgree_of_checkedHNActivityBinding`,
+  and
+  `PNP.DirectWire.terminalBN6_packet_semantic_hn_activity_bound_descent_failure`.
+  The executable checker requires any frontier, obligation, activation, or
+  direction mismatch to activate the HN node at the table-owned rank. The
+  supplied checked HB closure forces all four fields to agree; the separate
+  budget/HB binding then leaves exact residual nondecrease as the sole route.
+  The semantic/HN binding and HB data remain explicit rather than constructed
+  from terminal data; this is not HN blocker semantics, semantic completeness,
+  a decreasing transition, a no-lower contradiction, unconditional ZeroSlack,
+  or polynomial PCCMin.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -1034,6 +1047,13 @@ Every positive packet has a representative in the polynomial selector universe; 
   inactivity instead of consuming the checked well-founded HB closure, hides a
   caller success flag, or promotes local `.budget` exclusion to BudgetResolve,
   terminal-data construction, semantic completeness, remaining-route silence,
+  unconditional ZeroSlack, or polynomial PCCMin.
+- A supposedly checked Packet semantic/HN binding that skips canonical
+  handles, erases any frontier, obligation, activation, or direction equality,
+  accepts a mismatch without HN activity at the table-owned rank, assumes
+  inactivity instead of consuming the checked HB closure, or promotes the
+  resulting residual nondecrease to HN blocker semantics, semantic
+  completeness, a decreasing transition, a no-lower contradiction,
   unconditional ZeroSlack, or polynomial PCCMin.
 
 ---

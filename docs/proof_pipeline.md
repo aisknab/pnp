@@ -502,6 +502,20 @@ this is not BudgetResolve, blocker semantic completeness, full Packet
 adequacy, or remaining-route exclusion. Unconditional HB negative closure,
 ZeroSlack, and polynomial PCCMin remain open.
 
+Checked Packet semantic/HN activity binding now exhaustively requires any
+failure of simultaneous frontier, obligation, activation, and direction
+agreement at a canonical handle to activate the HN node at the table-owned
+rank. The supplied checked well-founded HB no-outcome closure forces that
+activity false, so an accepted binding yields all four exact typed equalities
+and excludes their first routes. Together with the separately checked
+budget/HB binding, positive Packet existence, and executable selector silence,
+the sole route is `.descent` and carries exact residual nondecrease. The
+semantic/HN binding, typed fields, rank map, activity environment, dependency
+table, and closure premise remain explicit rather than constructed from
+terminal data. This does not prove HN blocker semantics, semantic dependency
+completeness, a decreasing transition, a no-lower contradiction,
+unconditional ZeroSlack, or polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

@@ -2062,6 +2062,22 @@ Unconditional HB negative closure, ZeroSlack, and polynomial PCCMin remain
 open. See
 [`lean_residual_terminal_packet_budget_hb_activity_binding.md`](./lean_residual_terminal_packet_budget_hb_activity_binding.md).
 
+The checked Packet semantic/HN activity-binding milestone in
+`ResidualTerminalPacketSemanticHNActivityBinding` exhaustively scans every
+canonical handle and requires any failure of simultaneous frontier,
+obligation, activation, and direction agreement to activate the HN node at
+the table-owned rank. The supplied checked well-founded HB no-outcome closure
+forces that activity false, so all four typed fields agree and their first
+routes are excluded. Composed with the separately checked budget/HB binding,
+positive Packet existence, and executable selector silence, the sole route is
+`.descent`, carrying exact residual nondecrease. The semantic/HN binding,
+typed fields, rank map, activity environment, dependency table, and closure
+premise remain explicit rather than constructed from terminal data. This is
+not HN blocker semantics, semantic dependency completeness, a decreasing
+transition, a no-lower contradiction, complete Packet adequacy,
+unconditional ZeroSlack, or polynomial PCCMin. See
+[`lean_residual_terminal_packet_semantic_hn_activity_binding.md`](./lean_residual_terminal_packet_semantic_hn_activity_binding.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:
