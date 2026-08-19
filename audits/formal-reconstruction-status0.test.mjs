@@ -1334,6 +1334,18 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalPacketSemanticHNActivityBindingScope,
     'all-arbitrary-finite-frontier-obligation-activation-direction-mismatch-to-HN-activity-checked-sole-descent-route-under-checked-semantic-HN-budget-HB-and-well-founded-HB-closure',
   );
+  assert.equal(
+    out.leanResidualTerminalPacketDescentNoLowerBindingFormalized,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalPacketDescentNoLowerBindingAxiomAuditPassed,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalPacketDescentNoLowerBindingScope,
+    'all-arbitrary-finite-canonical-packet-handles-exhaustive-local-descent-no-lower-row-rejected-under-checked-positive-packet-semantic-HN-budget-HB-selector-silence-and-HB-closure',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',

@@ -516,6 +516,18 @@ terminal data. This does not prove HN blocker semantics, semantic dependency
 completeness, a decreasing transition, a no-lower contradiction,
 unconditional ZeroSlack, or polynomial PCCMin.
 
+Checked Packet descent no-lower binding now exhaustively scans the exact
+canonical handle list and accepts precisely when no fully computed Packet
+first route is `.descent`. Positive Packet existence together with the checked
+semantic/HN and budget/HB bindings, executable selector silence, and checked
+well-founded HB no-outcome closure already forces one such residual-
+nondecrease route. The local no-lower checker therefore returns `false`, and
+an accepted row under the same premises is contradictory. This discharges one
+local Packet row only. The family, ranks, typed data, tables, and checks remain
+supplied; the complete no-lower ledger, HResolve, BudgetResolve,
+normalization, named routes, saturation, replay, unconditional ZeroSlack, and
+polynomial PCCMin remain open.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its
