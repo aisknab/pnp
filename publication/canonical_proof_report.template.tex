@@ -967,6 +967,18 @@ This does not prove HN blocker semantics, semantic completeness, a decreasing
 transition, a no-lower contradiction, unconditional ZeroSlack, or polynomial
 PCCMin.
 
+Checked Packet descent no-lower binding now scans every canonical handle and
+accepts exactly when no fully computed Packet first route is
+\code{.descent}. Positive Packet existence together with the checked
+semantic/HN and budget/HB bindings, executable selector silence, and checked
+well-founded HB no-outcome closure forces one such residual-nondecrease route.
+The exhaustive local no-lower checker therefore returns false, and accepting
+that same row is contradictory. This closes one local Packet ledger row over
+supplied data; it does not construct terminal inputs or the complete no-lower
+ledger, cover HResolve, BudgetResolve, normalization, named routes,
+saturation, or replay, establish unconditional ZeroSlack, or prove polynomial
+PCCMin.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule

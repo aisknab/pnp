@@ -3109,6 +3109,26 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /binding is still an explicit checked input/u);
   assert.match(terminalPacketSemanticHNActivityBinding.nonClaim,
     /HN blocker semantics.*semantic dependency completeness.*decreasing transition/u);
+  const terminalPacketDescentNoLowerBinding = byId.get(
+    'residual-terminal-packet-descent-no-lower-binding',
+  );
+  assert.equal(terminalPacketDescentNoLowerBinding.status,
+    'formalized-residual-terminal-packet-descent-no-lower-binding');
+  assert.equal(terminalPacketDescentNoLowerBinding.earned, true);
+  assert.equal(
+    terminalPacketDescentNoLowerBinding
+      .axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.equal(terminalPacketDescentNoLowerBinding.requiredTheorems.length, 4);
+  assert.match(terminalPacketDescentNoLowerBinding.scope,
+    /scans every canonical handle.*no fully computed first route/u);
+  assert.match(terminalPacketDescentNoLowerBinding.scope,
+    /checker is forced to reject/u);
+  assert.match(terminalPacketDescentNoLowerBinding.nonClaim,
+    /one checked local Packet no-lower row/u);
+  assert.match(terminalPacketDescentNoLowerBinding.nonClaim,
+    /complete.*no-lower ledger.*HResolve.*BudgetResolve/u);
   const lockedNANDThreshold = byId.get('global-locked-nand-threshold');
   assert.equal(lockedNANDThreshold.status,
     'formalized-concrete-locked-nand-threshold');

@@ -1,0 +1,8 @@
+import PNP.ResidualTerminalPacketDescentNoLowerBinding
+
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.PacketDescentNoLower
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.checkPacketDescentNoLower
+#print axioms PNP.DirectWire.TerminalBN6GroupedFamily.checkPacketDescentNoLower_eq_true_iff
+#print axioms PNP.DirectWire.TerminalBN6PacketConclusion.checkPacketDescentNoLower_eq_false_of_selectorSilence
+#print axioms PNP.DirectWire.TerminalBN6PacketConclusion.false_of_checkedPacketDescentNoLower_and_selectorSilence
+#print axioms PNP.DirectWire.terminalBN6_packet_descent_no_lower_rejected

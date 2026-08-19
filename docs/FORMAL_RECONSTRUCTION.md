@@ -2078,6 +2078,21 @@ transition, a no-lower contradiction, complete Packet adequacy,
 unconditional ZeroSlack, or polynomial PCCMin. See
 [`lean_residual_terminal_packet_semantic_hn_activity_binding.md`](./lean_residual_terminal_packet_semantic_hn_activity_binding.md).
 
+The checked Packet descent no-lower milestone in
+`ResidualTerminalPacketDescentNoLowerBinding` adds an exhaustive local ledger
+row over every canonical handle. Its Boolean checker accepts exactly when no
+fully computed Packet first route is `.descent`. Under positive Packet
+existence, the checked semantic/HN and budget/HB bindings, executable selector
+silence, and the checked well-founded HB no-outcome closure, the preceding
+milestone supplies a canonical `.descent` witness, so the new checker is
+forced to return `false`; assuming acceptance yields `False`. This is one
+local no-lower incompatibility over supplied data, not the complete
+manuscript no-lower ledger. It does not construct terminal data, cover
+HResolve, BudgetResolve, normalization, named descent routes, saturation, or
+replay, establish unconditional HB closure or ZeroSlack, or prove polynomial
+PCCMin. See
+[`lean_residual_terminal_packet_descent_no_lower_binding.md`](./lean_residual_terminal_packet_descent_no_lower_binding.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

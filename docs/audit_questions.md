@@ -876,6 +876,16 @@ Every positive packet has a representative in the polynomial selector universe; 
   from terminal data; this is not HN blocker semantics, semantic completeness,
   a decreasing transition, a no-lower contradiction, unconditional ZeroSlack,
   or polynomial PCCMin.
+- Checked Packet descent no-lower binding is witnessed by
+  `PNP.DirectWire.TerminalBN6GroupedFamily.checkPacketDescentNoLower_eq_true_iff`,
+  `PNP.DirectWire.TerminalBN6PacketConclusion.checkPacketDescentNoLower_eq_false_of_selectorSilence`,
+  and `PNP.DirectWire.terminalBN6_packet_descent_no_lower_rejected`.
+  The executable checker scans every canonical handle and accepts exactly
+  when none has `.descent` as its fully computed first route. Positive Packet
+  existence plus the checked semantic/HN and budget/HB bindings, selector
+  silence, and HB closure forces that checker to reject. This is one local
+  no-lower row over supplied data, not the complete manuscript ledger,
+  terminal-data construction, unconditional ZeroSlack, or polynomial PCCMin.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
@@ -1055,6 +1065,12 @@ Every positive packet has a representative in the polynomial selector universe; 
   resulting residual nondecrease to HN blocker semantics, semantic
   completeness, a decreasing transition, a no-lower contradiction,
   unconditional ZeroSlack, or polynomial PCCMin.
+- A supposedly checked Packet descent no-lower row that skips canonical
+  handles, compares a caller field instead of the fully computed first route,
+  excludes a route other than `.descent`, assumes a descent witness or checker
+  rejection as an input, drops any checked positive-Packet binding, silence,
+  or closure premise, or promotes one local contradiction to the complete
+  no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin.
 
 ---
 
