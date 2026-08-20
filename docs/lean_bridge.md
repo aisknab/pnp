@@ -1469,6 +1469,16 @@ proof that the predicates implement HN grammar, BWL exactness, H-disjointness,
 exact-minimum/gain semantics, blocker dependency semantics, or the full
 historical HResolve theorem.
 
+`lean/PNP/ResidualTerminalHResolveSupportResolver.lean` removes those two
+supplied constructive inputs for the canonical terminal support branch. It
+constructs every terminal support seed, proves the family duplicate-free,
+derives saturation from the candidate model, and computes exact versus gain
+from the extracted support's reference residual slack. Exact is reflected to
+semantic minimality and gain to a strict equivalent witness. The subset
+enumeration and reference minimum may be exponential, so this is not the HN
+grammar or BWL algorithm, ParseOrExit, H-disjointness, NoHereditary blocker
+semantics, or polynomial HResolve.
+
 `lean/PNP/PCCMin.lean` exposes the structured loop certificate and constructs the witness-model residual-band decider from it.
 
 Most fields in these certificate objects are still digest/ledger handles. Replacing those handles by actual propositions and proofs is a major remaining task.

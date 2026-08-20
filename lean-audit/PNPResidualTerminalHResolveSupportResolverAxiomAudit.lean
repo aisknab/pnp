@@ -1,0 +1,17 @@
+import PNP.ResidualTerminalHResolveSupportResolver
+
+#print axioms PNP.DirectWire.terminalListSubsets_nodup
+#print axioms PNP.DirectWire.terminalHResolveSupportFamily
+#print axioms PNP.DirectWire.terminalHResolveSupportFamily_nodup
+#print axioms PNP.DirectWire.canonicalTerminalSupportSeed_mem_terminalHResolveSupportFamily
+#print axioms PNP.DirectWire.terminalHResolveSupportImplementation
+#print axioms PNP.DirectWire.TerminalHResolveSupportExact
+#print axioms PNP.DirectWire.TerminalHResolveSupportGain
+#print axioms PNP.DirectWire.terminalHResolveSupportExact_iff_semanticallyMinimum
+#print axioms PNP.DirectWire.terminalHResolveSupportGain_iff_exists_strictEquivalentGain
+#print axioms PNP.DirectWire.terminalHResolveSupport_exact_or_gain
+#print axioms PNP.DirectWire.terminalHResolveSupportClassify
+#print axioms PNP.DirectWire.terminalHResolveSupportClassify_eq_exact_iff
+#print axioms PNP.DirectWire.terminalHResolveSupportClassify_eq_gain_iff
+#print axioms PNP.DirectWire.terminalHResolveSupportClassify_constructive
+#print axioms PNP.DirectWire.terminal_hresolve_support_resolver_constructive_complete

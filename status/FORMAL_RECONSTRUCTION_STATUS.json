@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-20-169",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-20-170",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -968,6 +968,9 @@
   "leanResidualTerminalHResolveCoverageLedgerFormalized": true,
   "leanResidualTerminalHResolveCoverageLedgerAxiomAuditPassed": true,
   "leanResidualTerminalHResolveCoverageLedgerScope": "all-arbitrary-finite-supplied-HResolve-candidates-unique-route-ledger-and-NoHereditary-sidecar-excludes-exact-and-gain-under-decidable-supplied-predicates",
+  "leanResidualTerminalHResolveSupportResolverFormalized": true,
+  "leanResidualTerminalHResolveSupportResolverAxiomAuditPassed": true,
+  "leanResidualTerminalHResolveSupportResolverScope": "all-finite-direct-wire-candidates-terminal-derived-duplicate-free-support-universe-computed-exact-or-gain-with-semantic-minimum-or-strict-equivalent-gain-evidence",
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -1783,7 +1786,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "52a78e46b9e0cddd5e62383f60976e6fd29746a651f43d107bb7afefecb064b3",
+    "actualSourceClosureSha256": "dbc693ed1057a21df9c46a0c2b51fca2d04d56da5f148d89629e1c9d9adfe6af",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1813,22 +1816,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-20-169",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-20-170",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "3a74f7cca0582e109212108d437fa61d2440d3d6a7f7af44f94c80ffed13365d",
+  "leanTheoremInventorySha256": "50d246b707757a179a5428e16ced026a3143c785465beff079a62e004042a314",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 29422,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 15058,
-  "leanTheoremInventoryTheoremCount": 15237,
+  "leanTheoremInventoryDeclarationCount": 29437,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 15067,
+  "leanTheoremInventoryTheoremCount": 15247,
   "leanTheoremInventoryAssumptionFreeTheoremCount": 7537,
-  "leanTheoremInventorySourceClosureModuleCount": 286,
-  "leanSourceClosureSha256": "52a78e46b9e0cddd5e62383f60976e6fd29746a651f43d107bb7afefecb064b3",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-20-169",
+  "leanTheoremInventorySourceClosureModuleCount": 287,
+  "leanSourceClosureSha256": "dbc693ed1057a21df9c46a0c2b51fca2d04d56da5f148d89629e1c9d9adfe6af",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-20-170",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "9bafdb272bcad3df7db85348610407223a5cca2920ceb0d89ad86be1d2be5c6b",
+  "formalPublicationMapSha256": "4cbf743affb706f3b8c7432c8dc074af762069311ce9e991a0facb139e1ce84b",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -44287,6 +44290,154 @@
       "status": "formalized-residual-terminal-hresolve-coverage-ledger"
     },
     {
+      "classification": "formalized-residual-terminal-hresolve-support-resolver",
+      "id": "residual-terminal-hresolve-support-resolver",
+      "nonClaim": "The reference search is exhaustive over the complete finite terminal support universe and may be exponential in the number of primitive records. This milestone does not implement the manuscript's HN grammar, BWL exactness, H-disjointness, blocker or NoHereditary semantics, polynomial HResolve, BudgetResolve, the complete no-lower ledger, unconditional ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalListSubsets_nodup",
+        "PNP.DirectWire.terminalHResolveSupportFamily_nodup",
+        "PNP.DirectWire.canonicalTerminalSupportSeed_mem_terminalHResolveSupportFamily",
+        "PNP.DirectWire.terminalHResolveSupportExact_iff_semanticallyMinimum",
+        "PNP.DirectWire.terminalHResolveSupportGain_iff_exists_strictEquivalentGain",
+        "PNP.DirectWire.terminalHResolveSupport_exact_or_gain",
+        "PNP.DirectWire.terminalHResolveSupportClassify_eq_exact_iff",
+        "PNP.DirectWire.terminalHResolveSupportClassify_eq_gain_iff",
+        "PNP.DirectWire.terminalHResolveSupportClassify_constructive",
+        "PNP.DirectWire.terminal_hresolve_support_resolver_constructive_complete"
+      ],
+      "scope": "For every finite direct-wire candidate and profile-width model, Lean constructs the complete duplicate-free family of canonical terminal support seeds, saturates each seed in the candidate-derived terminal system, and computes either an exact route with semantic-minimum evidence or a gain route with a strict-equivalent-gain witness.",
+      "title": "Terminal-derived HResolve support resolver",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.terminalListSubsets_nodup",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "20b2a4997693c2992627f3bd6bbac935529209ff80172a7e72c89822993ef3fa",
+          "expectedKernelTypeSha256": "20b2a4997693c2992627f3bd6bbac935529209ff80172a7e72c89822993ef3fa",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHResolveSupportFamily_nodup",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "12b545debd0204200afc5be09fd1e0c881f642bda7fbadefdbd76c824aef4596",
+          "expectedKernelTypeSha256": "12b545debd0204200afc5be09fd1e0c881f642bda7fbadefdbd76c824aef4596",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.canonicalTerminalSupportSeed_mem_terminalHResolveSupportFamily",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8524cf247dd11640bf472ed4c77b0ccac2411286bfc8f8c50137466ac5cd470b",
+          "expectedKernelTypeSha256": "8524cf247dd11640bf472ed4c77b0ccac2411286bfc8f8c50137466ac5cd470b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHResolveSupportExact_iff_semanticallyMinimum",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ecf50b36d176945b7e72e3cacf3439bf840c413b39cc2636baefcbcaaa671c90",
+          "expectedKernelTypeSha256": "ecf50b36d176945b7e72e3cacf3439bf840c413b39cc2636baefcbcaaa671c90",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHResolveSupportGain_iff_exists_strictEquivalentGain",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f1b66d49979d7aa5a03ffb01d219daf0241d41aa1b68df16a94d9cc93fcba73b",
+          "expectedKernelTypeSha256": "f1b66d49979d7aa5a03ffb01d219daf0241d41aa1b68df16a94d9cc93fcba73b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHResolveSupport_exact_or_gain",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "59a11a45ff57d9e3aa84fb66d458554111090797cff4e0ff6cfb6f6cef0da231",
+          "expectedKernelTypeSha256": "59a11a45ff57d9e3aa84fb66d458554111090797cff4e0ff6cfb6f6cef0da231",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHResolveSupportClassify_eq_exact_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9117a221c84b2c039fb4803d92d83988700ef51de0c70f8bf9ce88423e8d8b85",
+          "expectedKernelTypeSha256": "9117a221c84b2c039fb4803d92d83988700ef51de0c70f8bf9ce88423e8d8b85",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHResolveSupportClassify_eq_gain_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f155ba3303e3189f18777ca5aae2ac909cacfd08ca02c38ac71b020c401736ab",
+          "expectedKernelTypeSha256": "f155ba3303e3189f18777ca5aae2ac909cacfd08ca02c38ac71b020c401736ab",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHResolveSupportClassify_constructive",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "83f05b0a786470c8ac3af4c877755b8217d42ed473b9d28f99f5a09aa1e4ed61",
+          "expectedKernelTypeSha256": "83f05b0a786470c8ac3af4c877755b8217d42ed473b9d28f99f5a09aa1e4ed61",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminal_hresolve_support_resolver_constructive_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "40fffd11b3aa05581df958f8a2a4d13af5a108b373c18a91b45e782f7c672493",
+          "expectedKernelTypeSha256": "40fffd11b3aa05581df958f8a2a4d13af5a108b373c18a91b45e782f7c672493",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-hresolve-support-resolver"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -44384,7 +44535,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-20-169",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-20-170",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

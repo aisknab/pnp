@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-20-169';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-20-170';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -1837,6 +1837,10 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalHResolveCoverageLedgerAxiomAuditPassed: true,
   leanResidualTerminalHResolveCoverageLedgerScope:
     'all-arbitrary-finite-supplied-HResolve-candidates-unique-route-ledger-and-NoHereditary-sidecar-excludes-exact-and-gain-under-decidable-supplied-predicates',
+  leanResidualTerminalHResolveSupportResolverFormalized: true,
+  leanResidualTerminalHResolveSupportResolverAxiomAuditPassed: true,
+  leanResidualTerminalHResolveSupportResolverScope:
+    'all-finite-direct-wire-candidates-terminal-derived-duplicate-free-support-universe-computed-exact-or-gain-with-semantic-minimum-or-strict-equivalent-gain-evidence',
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
   leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -3016,6 +3020,10 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalHResolveCoverageLedgerAxiomAuditPassed: true,
       leanResidualTerminalHResolveCoverageLedgerScope:
         'all-arbitrary-finite-supplied-HResolve-candidates-unique-route-ledger-and-NoHereditary-sidecar-excludes-exact-and-gain-under-decidable-supplied-predicates',
+      leanResidualTerminalHResolveSupportResolverFormalized: true,
+      leanResidualTerminalHResolveSupportResolverAxiomAuditPassed: true,
+      leanResidualTerminalHResolveSupportResolverScope:
+        'all-finite-direct-wire-candidates-terminal-derived-duplicate-free-support-universe-computed-exact-or-gain-with-semantic-minimum-or-strict-equivalent-gain-evidence',
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
       leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -3095,7 +3103,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-20-169',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-20-170',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,
