@@ -538,6 +538,19 @@ remain supplied, while the complete no-lower ledger, HResolve, BudgetResolve,
 normalization, other named obstructions, saturation, replay, unconditional
 ZeroSlack, and polynomial PCCMin remain open.
 
+Checked finite HResolve coverage now generates one fixed-priority exact, gain,
+blocked, or unresolved route row for every member of an arbitrary supplied
+finite candidate family. The NoHereditary sidecar checker independently
+recomputes candidate uniqueness and all-candidate blocked coverage. Its exact
+reflection theorem makes acceptance equivalent to absence of both constructive
+routes plus a positive blocker predicate for every listed candidate, and the
+generated ledger is sound and complete for that supplied enumeration. The
+candidate family and decidable predicates remain explicit inputs. This is not
+a construction of the governed hereditary universe, HN grammar or BWL
+exactness, H-disjointness, exact-minimum/gain semantics, blocker dependency
+semantics, the full HResolve theorem, BudgetResolve, the complete no-lower
+ledger, unconditional ZeroSlack, or polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

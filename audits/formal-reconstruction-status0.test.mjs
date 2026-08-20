@@ -1358,6 +1358,18 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalPacketNoLowerLedgerScope,
     'all-arbitrary-finite-five-row-Packet-no-lower-ledger-positive-Packet-exclusion-under-computed-semantic-HN-budget-HB-selector-silence-and-HB-closure',
   );
+  assert.equal(
+    out.leanResidualTerminalHResolveCoverageLedgerFormalized,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalHResolveCoverageLedgerAxiomAuditPassed,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalHResolveCoverageLedgerScope,
+    'all-arbitrary-finite-supplied-HResolve-candidates-unique-route-ledger-and-NoHereditary-sidecar-excludes-exact-and-gain-under-decidable-supplied-predicates',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',

@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-19-168",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-20-169",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -965,6 +965,9 @@
   "leanResidualTerminalPacketNoLowerLedgerFormalized": true,
   "leanResidualTerminalPacketNoLowerLedgerAxiomAuditPassed": true,
   "leanResidualTerminalPacketNoLowerLedgerScope": "all-arbitrary-finite-five-row-Packet-no-lower-ledger-positive-Packet-exclusion-under-computed-semantic-HN-budget-HB-selector-silence-and-HB-closure",
+  "leanResidualTerminalHResolveCoverageLedgerFormalized": true,
+  "leanResidualTerminalHResolveCoverageLedgerAxiomAuditPassed": true,
+  "leanResidualTerminalHResolveCoverageLedgerScope": "all-arbitrary-finite-supplied-HResolve-candidates-unique-route-ledger-and-NoHereditary-sidecar-excludes-exact-and-gain-under-decidable-supplied-predicates",
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -1566,6 +1569,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketNoLowerLedgerAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketNoLowerLedger.lean",
     "node --test audits/lean-residual-terminal-packet-no-lower-ledger0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHResolveCoverageLedgerAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHResolveCoverageLedger.lean",
+    "node --test audits/lean-residual-terminal-hresolve-coverage-ledger0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1618,6 +1624,7 @@
     "The checked Packet semantic/HN activity binding exhaustively requires every failure of simultaneous frontier, obligation, activation, and direction agreement to activate the HN node at the table-owned handle rank. The independently checked well-founded no-outcome closure forces those four exact equalities; composing the separate budget/HB binding leaves only the exact residual-nondecrease route. Both bindings, coordinates, directions, budgets, grouped family, ranks, activity table, dependency rows, and realizer data remain explicit rather than terminal-derived. This does not prove HN blocker semantics or semantic dependency completeness, construct a decreasing transition or no-lower ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.",
     "The checked Packet descent no-lower binding exhaustively scans every canonical handle and recognizes exactly the absence of the fully computed residual-nondecrease first route. Under the supplied positive Packet conclusion, checked semantic/HN and budget/HB bindings, selector silence, and checked no-outcome HB closure, the checker is forced to reject; an accepted row is contradictory. This closes one local no-lower row only. It does not construct terminal data or the complete no-lower ledger, cover HResolve, BudgetResolve, normalization, saturation, replay, or named routes, establish unconditional HB or ZeroSlack, or prove polynomial PCCMin.",
     "The checked Packet no-lower ledger composes five independently executable rows: semantic/HN binding, budget/HB binding, selector silence, HB no-outcome closure, and Packet descent no-lower. Its reflection theorem proves exact acceptance, and an accepted ledger excludes a positive Packet conclusion over every supplied arbitrary finite grouped family. This closes only the Packet branch of the manuscript no-lower dependency. All terminal data and bindings remain explicit, while HResolve, BudgetResolve, normalization, other named obstructions, saturation, replay, the complete no-lower ledger, unconditional ZeroSlack, and polynomial PCCMin remain open.",
+    "The checked finite HResolve coverage ledger computes exact, gain, blocked, or unresolved classification for every member of an arbitrary supplied finite candidate family, recomputes duplicate-free enumeration, generates one route row per candidate, and accepts a NoHereditary sidecar exactly when every listed candidate has neither constructive route and carries a positive blocker predicate. The candidate family and all decidable predicates remain supplied; this does not construct the governed hereditary universe from terminal data, prove HN grammar, BWL exactness, H-disjointness, exact-minimum, strict-gain, or blocker dependency semantics, discharge full HResolve or BudgetResolve, complete the no-lower ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.",
     "The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.",
     "The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.",
     "Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.",
@@ -1776,7 +1783,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "e7f8da7888f27347bb67ef97d75a39bc3e8feb74f1491e9a624d3d1ee7dbea32",
+    "actualSourceClosureSha256": "52a78e46b9e0cddd5e62383f60976e6fd29746a651f43d107bb7afefecb064b3",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1806,22 +1813,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-19-168",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-20-169",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "c18bafdc91d3d903b915473a0ab641a3b5ddb4c1b8b4d47948f618b8daa3db4b",
+  "leanTheoremInventorySha256": "3a74f7cca0582e109212108d437fa61d2440d3d6a7f7af44f94c80ffed13365d",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 29357,
+  "leanTheoremInventoryDeclarationCount": 29422,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 15058,
-  "leanTheoremInventoryTheoremCount": 15214,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 7526,
-  "leanTheoremInventorySourceClosureModuleCount": 285,
-  "leanSourceClosureSha256": "e7f8da7888f27347bb67ef97d75a39bc3e8feb74f1491e9a624d3d1ee7dbea32",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-19-168",
+  "leanTheoremInventoryTheoremCount": 15237,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 7537,
+  "leanTheoremInventorySourceClosureModuleCount": 286,
+  "leanSourceClosureSha256": "52a78e46b9e0cddd5e62383f60976e6fd29746a651f43d107bb7afefecb064b3",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-20-169",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "8802c229d5fdba5c823dfce4e58200091972953eaab72d6f902f312e24924a69",
+  "formalPublicationMapSha256": "9bafdb272bcad3df7db85348610407223a5cca2920ceb0d89ad86be1d2be5c6b",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -44136,6 +44143,150 @@
       "status": "formalized-residual-terminal-packet-no-lower-ledger"
     },
     {
+      "classification": "formalized-residual-terminal-hresolve-coverage-ledger",
+      "id": "residual-terminal-hresolve-coverage-ledger",
+      "nonClaim": "The finite HResolve candidate family and its decidable exact, gain, and blocker predicates remain supplied. This milestone does not construct the governed hereditary universe from terminal data or prove that those predicates implement the manuscript's HN grammar, BWL exactness, H-disjointness, exact-minimum semantics, strict-gain semantics, or blocker dependency semantics. It does not discharge the full historical HResolve theorem, implement BudgetResolve, normalization, the complete no-lower ledger, saturation, or replay; establish unconditional HB closure or ZeroSlack; prove PCCMin, encoded-size or polynomial-runtime bounds, SAT in P; remove a project assumption; or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalHResolveClassify_eq_exact_iff",
+        "PNP.DirectWire.terminalHResolveClassify_eq_gain_iff",
+        "PNP.DirectWire.terminalHResolveClassify_eq_blocked_iff",
+        "PNP.DirectWire.terminalHResolveClassify_eq_unresolved_iff",
+        "PNP.DirectWire.TerminalHResolveFamily.routeLedger_sound",
+        "PNP.DirectWire.TerminalHResolveFamily.routeLedger_complete",
+        "PNP.DirectWire.TerminalHResolveFamily.checkNoHereditarySidecar_eq_true_iff",
+        "PNP.DirectWire.TerminalHResolveFamily.not_exact_of_checkedNoHereditarySidecar",
+        "PNP.DirectWire.TerminalHResolveFamily.not_gain_of_checkedNoHereditarySidecar",
+        "PNP.DirectWire.terminal_hresolve_checked_sidecar_excludes_constructive_routes"
+      ],
+      "scope": "For every arbitrary finite supplied HResolve candidate family with decidable equality and arbitrary decidable exact, gain, and blocker predicates, Lean computes a fixed-priority exact, gain, blocked, or unresolved route for every candidate, generates a sound and complete route ledger, and checks both duplicate-free enumeration and all-candidate blocked coverage. The checker accepts exactly a NoHereditary sidecar for that supplied family, and acceptance excludes exact and gain routes for every enumerated candidate.",
+      "title": "Checked finite HResolve coverage ledger",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.terminalHResolveClassify_eq_exact_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "fbf117b9fe425a364742a0f9310f056ed81326485a140a3c3315208ebc31bfa4",
+          "expectedKernelTypeSha256": "fbf117b9fe425a364742a0f9310f056ed81326485a140a3c3315208ebc31bfa4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHResolveClassify_eq_gain_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8d280c65ea8eefb7c9592a9674aa34d8f565575e571b7d22527b539c422d5ffb",
+          "expectedKernelTypeSha256": "8d280c65ea8eefb7c9592a9674aa34d8f565575e571b7d22527b539c422d5ffb",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHResolveClassify_eq_blocked_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a09c47ec9b07293b759d3c2f1d6a955df0a479b3b3bc8022086e72e8438a1e9d",
+          "expectedKernelTypeSha256": "a09c47ec9b07293b759d3c2f1d6a955df0a479b3b3bc8022086e72e8438a1e9d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHResolveClassify_eq_unresolved_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "754f7099a176615266cc3309566ad843290e0fc1dfebcb5d1c09e22250512a81",
+          "expectedKernelTypeSha256": "754f7099a176615266cc3309566ad843290e0fc1dfebcb5d1c09e22250512a81",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalHResolveFamily.routeLedger_sound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ef104717e64db666abafa383155d81596a7d1f508badfc3dfb4563bef8fc3727",
+          "expectedKernelTypeSha256": "ef104717e64db666abafa383155d81596a7d1f508badfc3dfb4563bef8fc3727",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalHResolveFamily.routeLedger_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6a40d0d984d3e418278030815c4db34591f1414785c9d38d2e8e7155754ed34a",
+          "expectedKernelTypeSha256": "6a40d0d984d3e418278030815c4db34591f1414785c9d38d2e8e7155754ed34a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalHResolveFamily.checkNoHereditarySidecar_eq_true_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a3bd27b58349e7e0d0a8bca62885d788e48f0959ef0687f266fe4466ce126f2d",
+          "expectedKernelTypeSha256": "a3bd27b58349e7e0d0a8bca62885d788e48f0959ef0687f266fe4466ce126f2d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalHResolveFamily.not_exact_of_checkedNoHereditarySidecar",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6e921a877da8b723eb0e03d698f3f4c1226a518c7a5aae98291dd686ebf5f624",
+          "expectedKernelTypeSha256": "6e921a877da8b723eb0e03d698f3f4c1226a518c7a5aae98291dd686ebf5f624",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalHResolveFamily.not_gain_of_checkedNoHereditarySidecar",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0ee82be4fa054e56a77c1b36e446b12188a0d3753cbb65f80a8a84023b4d5510",
+          "expectedKernelTypeSha256": "0ee82be4fa054e56a77c1b36e446b12188a0d3753cbb65f80a8a84023b4d5510",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminal_hresolve_checked_sidecar_excludes_constructive_routes",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "34a58ece01f76e5c93c809d514db65e2d09b3114c474d9a6385cea7d2ba35fa8",
+          "expectedKernelTypeSha256": "34a58ece01f76e5c93c809d514db65e2d09b3114c474d9a6385cea7d2ba35fa8",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-hresolve-coverage-ledger"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -44233,7 +44384,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-19-168",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-20-169",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

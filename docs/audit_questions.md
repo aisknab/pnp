@@ -385,6 +385,10 @@ The HN grammar and BUD dynamic programs return exact minima on their governed cl
 - `HN.LeafTightness`.
 - `HResolve.GlobalHereditaryResolver`.
 - `BUD.BudgetResolver`.
+- `ResidualTerminalHResolveCoverageLedger`, which mechanically checks
+  duplicate-free exact/gain/blocked/unresolved coverage for a supplied finite
+  family and supplied decidable predicates; it does not establish the broader
+  HN or HResolve semantics claimed in this question.
 - Local-package and global-proof-DAG records.
 
 **How to test or inspect it**
@@ -897,6 +901,18 @@ Every positive packet has a representative in the polynomial selector universe; 
   grouped families. This closes the Packet branch only, not the complete
   no-lower ledger, terminal-data construction, unconditional ZeroSlack, or
   polynomial PCCMin.
+- Checked finite HResolve coverage is witnessed by
+  `PNP.DirectWire.TerminalHResolveFamily.checkNoHereditarySidecar_eq_true_iff`,
+  `PNP.DirectWire.TerminalHResolveFamily.routeLedger_sound`,
+  `PNP.DirectWire.TerminalHResolveFamily.routeLedger_complete`, and
+  `PNP.DirectWire.terminal_hresolve_checked_sidecar_excludes_constructive_routes`.
+  The executable classifier generates exact, gain, blocked, or unresolved
+  rows for every candidate in an arbitrary supplied finite family. Sidecar
+  acceptance recomputes uniqueness and requires every listed candidate to be
+  blocked after both constructive routes fail. The family and predicates are
+  supplied; this is not HN grammar, BWL exactness, H-disjointness,
+  exact-minimum/gain or blocker semantics, full HResolve, BudgetResolve, the
+  complete no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.

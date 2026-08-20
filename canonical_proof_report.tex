@@ -46,7 +46,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-19-168}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-20-169}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -89,15 +89,15 @@
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 29357 \\
-Theorem-kind declarations & 15214 \\
-Assumption-free theorem-kind declarations & 7526 \\
+Compiled declarations & 29422 \\
+Theorem-kind declarations & 15237 \\
+Assumption-free theorem-kind declarations & 7537 \\
 Project-specific axioms & 4 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{c18bafdc91d3d903b915473a0ab641a3b5ddb4c1b8b4d47948f618b8daa3db4b}\par}
+{\small Inventory SHA-256: \code{3a74f7cca0582e109212108d437fa61d2440d3d6a7f7af44f94c80ffed13365d}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -989,6 +989,20 @@ not the complete no-lower ledger or ZeroSlack. Terminal inputs and bindings
 remain supplied, while HResolve, BudgetResolve, normalization, other named
 obstructions, saturation, replay, and polynomial PCCMin remain open.
 
+Checked finite HResolve coverage now computes one exact, gain, blocked, or
+unresolved route in fixed priority order for every member of an arbitrary
+supplied finite candidate family. The generated ledger has one computed row
+per supplied occurrence, while the NoHereditary sidecar checker independently
+recomputes duplicate-free enumeration and requires every candidate to be
+blocked after both constructive routes fail. Its reflection theorem
+characterizes exact acceptance, and accepted sidecar data excludes exact and
+gain routes for every listed candidate. The family and decidable predicates
+remain supplied; this does not construct the governed hereditary universe from
+terminal data, prove HN grammar, BWL exactness, H-disjointness, exact-minimum,
+strict-gain, or blocker dependency semantics, discharge full HResolve or
+BudgetResolve, complete the no-lower ledger, establish unconditional ZeroSlack,
+or prove polynomial PCCMin.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule
@@ -1075,7 +1089,7 @@ SAT completeness, SAT in P, and the root theorem remain absent.
 \section{Formal milestone ledger}
 
 Each earned row requires exact compiled names and theorem kinds, empty axiom closures, per-name
-domain-separated kernel-type SHA-256 matches for 2993 detailed candidates, and the pinned whole-Lean
+domain-separated kernel-type SHA-256 matches for 3003 detailed candidates, and the pinned whole-Lean
 source closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
 {\small
@@ -1229,6 +1243,7 @@ Checked Packet budget/HB activity binding & formalized-residual-terminal-packet-
 Checked Packet semantic/HN activity binding & formalized-residual-terminal-packet-semantic-hn-activity-binding & For every arbitrary finite grouped BN6 family, the executable binding checker exhaustively requires any failure of simultaneous frontier, obligation, activation, and direction agreement to imply activity of the HN node at the table-owned handle rank. When that check and the existing checked well-founded HB no-outcome closure both pass, all four typed semantic fields agree. Combined with the separately checked budget/HB binding and executable selector silence, every semantic first route is excluded and the positive Packet endpoint has the sole exact residual-nondecrease route. & The Packet-to-HN semantic binding is still an explicit checked input over a supplied grouped family, typed BN5 coordinates, activation atoms, direction values, rank map, activity environment, and dependency table; this milestone does not construct that binding or those values from terminal data. It does not establish HN blocker semantics, semantic dependency completeness, a decreasing transition, a no-lower contradiction, complete external Packet adequacy, or unconditional HB negative closure. It does not prove ZeroSlack, PCCMin, encoded-size or polynomial-runtime bounds, SAT in P; remove a project assumption; or prove P = NP. \\
 Checked Packet descent no-lower binding & formalized-residual-terminal-packet-descent-no-lower-binding & For every arbitrary finite grouped BN6 family and selector-rank carrier, the executable local Packet descent no-lower checker scans every canonical handle and accepts exactly when no fully computed first route is residual nondecrease. Under a supplied positive Packet conclusion, checked semantic/HN and budget/HB bindings, executable selector silence, and checked well-founded HB no-outcome closure, the checker is forced to reject; assuming that same local row accepted yields a contradiction. & This is one checked local Packet no-lower row over a supplied finite grouped family, rank map, residual ranks, typed fields, realizer table, dependency table, and accepted binding, silence, and closure checks. It does not construct those inputs from terminal data or complete the manuscript's no-lower ledger. It does not cover HResolve, BudgetResolve, normalization, named descent routes, saturation, or replay; derive unconditional HB closure; establish complete Packet adequacy or unconditional ZeroSlack; prove PCCMin, encoded-size or polynomial-runtime bounds, SAT in P; remove a project assumption; or prove P = NP. \\
 Checked Packet no-lower ledger & formalized-residual-terminal-packet-no-lower-ledger & For every supplied arbitrary finite grouped BN6 family, typed realizer table, HB dependency table, finite rank map, and before/after residual ranks, one Boolean recomputes the five executable checks for semantic/HN binding, budget/HB binding, selector silence, HB no-outcome closure, and Packet descent/no-lower. Its reflection theorem characterizes exact acceptance, a positive Packet forces rejection, and an accepted ledger excludes a positive Packet conclusion for those same inputs. & This closes the Packet branch only, not the complete no-lower ledger. The grouped family, BN5 coordinates, activation atoms, direction and budget values, rank map, residual ranks, realizer claims, activity environment, dependency rows, and all terminal data remain supplied. It does not implement HResolve, BudgetResolve, normalization, other named obstructions, saturation, or replay; derive unconditional HB closure; establish unconditional ZeroSlack; prove PCCMin, encoded-size or polynomial-runtime bounds, SAT in P; remove a project assumption; or prove P = NP. \\
+Checked finite HResolve coverage ledger & formalized-residual-terminal-hresolve-coverage-ledger & For every arbitrary finite supplied HResolve candidate family with decidable equality and arbitrary decidable exact, gain, and blocker predicates, Lean computes a fixed-priority exact, gain, blocked, or unresolved route for every candidate, generates a sound and complete route ledger, and checks both duplicate-free enumeration and all-candidate blocked coverage. The checker accepts exactly a NoHereditary sidecar for that supplied family, and acceptance excludes exact and gain routes for every enumerated candidate. & The finite HResolve candidate family and its decidable exact, gain, and blocker predicates remain supplied. This milestone does not construct the governed hereditary universe from terminal data or prove that those predicates implement the manuscript's HN grammar, BWL exactness, H-disjointness, exact-minimum semantics, strict-gain semantics, or blocker dependency semantics. It does not discharge the full historical HResolve theorem, implement BudgetResolve, normalization, the complete no-lower ledger, saturation, or replay; establish unconditional HB closure or ZeroSlack; prove PCCMin, encoded-size or polynomial-runtime bounds, SAT in P; remove a project assumption; or prove P = NP. \\
 Global locked-NAND construction and threshold & formalized-concrete-locked-nand-threshold & A uniform encoded polynomial-time SAT instance builder and the report-level locked-NAND threshold theorem linked to that builder. & This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP. \\
 Global ZeroSlack, PCCMin, and polynomial runtime & not-formalized & Complete residual routing, global ZeroSlack contradiction, exact minimization, and polynomial bounds. & The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; the exhaustive Packet scan verifies strict gains or exact no-gain over every canonical selector in one supplied explicit grouped family; an explicit global gain-coverage certificate conditionally upgrades that silence to a proof-bearing ZeroSlack result; the generic finite R-ChargeSurplus kernel derives strict gain from exact ledgers, an unmatched positive support charge, exact gate accounting, and separately proved semantics; the checked unit-charge blueprint realizer derives canonical ledgers and gains for every valid blueprint in one supplied family; the checked typed-realizer contract rejects every faithful-table row except a genuine blueprint gain or an explicitly active bounded-rank HN, budget, or strictly lower faithful seed bot; the checked exact-rank HB graph contract validates every edge in a supplied finite HN/BUD dependency graph; the checked total-table HB contract gives every finite HN/BUD node one row, materializes every listed dependency as an edge, and derives well-founded induction and cycle exclusion for that supplied table; the checked HB active-dependency closure combines an exhaustive active-to-active row condition with strict rank descent to prove every supplied HN/BUD activity bit false and remove HN/budget typed-bot branches; and the executable selector-silence induction exhaustively checks that every canonical realizer claim is a typed bottom, then combines supplied-table HB inactivity with strong finite-rank induction to prove every canonical handle in the accepted table nonfaithful without a global semantic no-gain premise. The Packet selector-faithfulness routing milestone checks ten canonical source-payload fields and derives a contradiction for every positive Packet under explicit route-clear inputs; the canonical table constructor now computes the HB faithfulness function from those payloads and removes the separate binding premise; and total first-route classification turns every canonical payload rejection into one earliest typed route, which canonical HB selector silence forces for a positive Packet without route-clear or binding premises. The exact first-route semantics milestone additionally identifies every returned route with its unique earliest failed supplied payload field. The descent-reflection milestone computes the final descent field from the exact ten-coordinate RankWF relation and proves a forced final route is genuinely nondecreasing. The rank-tag-reflection milestone then copies the table-owned handle rank into the payload and excludes the duplicate rank route. The exact-route-reflection milestone marks the already proved internal handle-to-cell-to-positive-payload source route clear by construction and excludes the duplicate exact-route result as well; this internal route is not an external exact minimum. The charge-route-reflection milestone then derives the internal charge check from the canonical source atom with strictly positive mass and excludes the charge result; that positive mass is not the full external charge-surplus or replacement semantics. The colour-route-reflection milestone then derives internal grouped-footprint eligibility from each canonical handle and excludes colour; this is not external manuscript colour equivalence. The typed-frontier-route-reflection milestone replaces the caller frontier bit with executable equality of explicit typed source and selector signatures, so a frontier route carries exact inequality. The BN5-bound frontier-and-obligation milestone then binds both checks to exact fields of explicit typed terminal BN5 coordinates: frontier and obligation routes carry their corresponding inequalities, with frontier equality preceding an obligation failure. The BN4 activation-exact milestone computes activation from the coordinates' nested activation atoms. The typed-direction milestone computes direction from equality of explicit source and selector direction values. The typed-budget milestone computes the last caller-supplied Packet Boolean from equality of explicit source and selector budget values. Those coordinates, direction values, and budget values are not constructed from terminal data, and local budget equality is not BudgetResolve or HB budget semantics. The checked Packet budget/HB activity-binding milestone now exhaustively maps each typed budget mismatch to budget-node activity at the table-owned rank and, with the supplied checked well-founded HB closure, proves typed budget equality and excludes the local budget route. The binding, rank map, activity environment, dependency table, and closure premise remain explicit; this is not BudgetResolve, a terminal-data construction, or semantic completeness. The checked Packet semantic/HN activity-binding milestone now maps any failure of simultaneous frontier, obligation, activation, and direction agreement to the HN node at the table-owned rank. With the same supplied checked HB closure and the separately checked budget/HB binding, it excludes every semantic first route and leaves exact residual nondecrease. That binding and all typed semantic and HB data remain explicit; it does not construct HN blocker semantics, semantic dependency completeness, a decreasing transition, or a no-lower contradiction. The checked Packet descent no-lower milestone now exhaustively connects that forced route to one local no-lower row and proves its checker rejects; it does not construct the complete ledger or terminal inputs. The finite rank map remains explicit. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, replacement blueprints, occurrence pairing, rank assignment, payload values, exhaustive realizer claims, or blocker tables from terminal data; connect matching back to a contradiction; derive blocker semantics, semantic dependency completeness, or the checked local active-dependency premise from terminal data; prove the reported routes' external semantics or map all residual routes into a decreasing complete global outcome system; or provide full external selector compatibility, an independently constructed realizer, unconditional global silence, and polynomial-runtime completeness. Global unconditional ZeroSlack and polynomial PCCMin therefore remain unformalized. \\
 Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-machine-linked complexity classes, concrete SAT completeness and a SAT decider, plus the publication root theorem. & The concrete target definition remains inactive: CNF-SAT now has a raw-machine verifier, NP-membership proof, and an all-input finite-machine polynomial reduction through NAND to the concrete locked target, but a deterministic polynomial-time CNF-SAT decider, the concrete-to-abstract threshold link, SAT NP-hardness and CNFSAT NP-completeness transport, and PNP.Main.p\_eq\_np remain absent; the legacy string-handle bridge is ineligible. \\
@@ -1238,8 +1253,8 @@ Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-mac
 
 \section{Compiled inventory summary}
 
-The inventory contains 29357 exported \code{PNP.*} kernel declarations from
-285 modules. It excludes 15058 private compiler auxiliaries.
+The inventory contains 29422 exported \code{PNP.*} kernel declarations from
+286 modules. It excludes 15058 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -1483,6 +1498,7 @@ PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}HBBlocker\allowbreak{
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}HBDependency\allowbreak{}Table\allowbreak{}Closure & 47 & 25 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}HBExecutable\allowbreak{}Selector\allowbreak{}Silence\allowbreak{}Induction & 11 & 8 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}HBSelector\allowbreak{}Silence\allowbreak{}Closure & 4 & 4 \\
+PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}HResolve\allowbreak{}Coverage\allowbreak{}Ledger & 65 & 23 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Interface\allowbreak{}Exposure\allowbreak{}Routing & 224 & 75 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Mode\allowbreak{}Firewall & 148 & 41 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Origin\allowbreak{}Kernel\allowbreak{}Obligation\allowbreak{}Routing & 330 & 97 \\
@@ -1595,10 +1611,10 @@ npm run report:check
 \end{verbatim}
 }
 
-The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-08-19-168}. Its exact byte digest is
-\code{c18bafdc91d3d903b915473a0ab641a3b5ddb4c1b8b4d47948f618b8daa3db4b}. The report is regenerated from that inventory and the reviewed
+The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-08-20-169}. Its exact byte digest is
+\code{3a74f7cca0582e109212108d437fa61d2440d3d6a7f7af44f94c80ffed13365d}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{e7f8da7888f27347bb67ef97d75a39bc3e8feb74f1491e9a624d3d1ee7dbea32}; the computed and pinned values match. Successful regeneration
+\code{52a78e46b9e0cddd5e62383f60976e6fd29746a651f43d107bb7afefecb064b3}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 
