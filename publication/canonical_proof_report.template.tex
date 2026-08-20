@@ -1003,6 +1003,20 @@ strict-gain, or blocker dependency semantics, discharge full HResolve or
 BudgetResolve, complete the no-lower ledger, establish unconditional ZeroSlack,
 or prove polynomial PCCMin.
 
+The terminal-derived HResolve support resolver now removes the supplied family
+and supplied exact/gain predicate boundary for canonical terminal supports.
+For every finite direct-wire candidate it constructs the complete support-seed
+family from the terminal primitive-record universe, proves duplicate-free
+coverage, saturates through the candidate-derived dependency system, and
+extracts the corresponding open support. Actual reference residual slack then
+computes the only two routes: zero gives semantic minimality, while positive
+slack gives a strict semantically equivalent gain witness. Thus every governed
+seed has a proof-bearing exact or gain route. Subset enumeration and reference
+minimization are exhaustive and may be exponential. This does not formalize HN
+grammar, BWL, ParseOrExit, H-disjointness, blocker dependencies or
+NoHereditary, polynomial HResolve, BudgetResolve, the complete no-lower ledger,
+unconditional ZeroSlack, or polynomial PCCMin.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule

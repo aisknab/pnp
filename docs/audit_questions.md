@@ -389,6 +389,10 @@ The HN grammar and BUD dynamic programs return exact minima on their governed cl
   duplicate-free exact/gain/blocked/unresolved coverage for a supplied finite
   family and supplied decidable predicates; it does not establish the broader
   HN or HResolve semantics claimed in this question.
+- `ResidualTerminalHResolveSupportResolver`, which constructs the complete
+  canonical terminal support-seed family and proves computed exact-or-gain
+  semantics for every member; its exhaustive reference minimum is not BWL or
+  a polynomial HResolve algorithm.
 - Local-package and global-proof-DAG records.
 
 **How to test or inspect it**
@@ -913,6 +917,18 @@ Every positive packet has a representative in the polynomial selector universe; 
   supplied; this is not HN grammar, BWL exactness, H-disjointness,
   exact-minimum/gain or blocker semantics, full HResolve, BudgetResolve, the
   complete no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin.
+- Terminal-derived HResolve support resolution is witnessed by
+  `PNP.DirectWire.terminalHResolveSupportFamily_nodup`,
+  `PNP.DirectWire.terminalHResolveSupportExact_iff_semanticallyMinimum`,
+  `PNP.DirectWire.terminalHResolveSupportGain_iff_exists_strictEquivalentGain`,
+  and
+  `PNP.DirectWire.terminal_hresolve_support_resolver_constructive_complete`.
+  The family is the complete canonical terminal support-seed universe and the
+  candidate-derived saturation path computes every exact or gain result from
+  actual residual slack. This is exhaustive and may be exponential; it is not
+  HN grammar, BWL, ParseOrExit, H-disjointness, NoHereditary blocker semantics,
+  polynomial HResolve, BudgetResolve, the complete no-lower ledger,
+  unconditional ZeroSlack, or polynomial PCCMin.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.

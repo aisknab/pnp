@@ -2121,6 +2121,22 @@ semantics, discharge full HResolve or BudgetResolve, complete the no-lower
 ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin. See
 [`lean_residual_terminal_hresolve_coverage_ledger.md`](./lean_residual_terminal_hresolve_coverage_ledger.md).
 
+`ResidualTerminalHResolveSupportResolver` now specializes that generic ledger
+boundary to a terminal-derived constructive universe. For every finite
+direct-wire candidate, it constructs the complete canonical terminal
+support-seed family, proves it duplicate-free, and proves every canonical
+Boolean-selected seed is present. Each seed is saturated through the
+candidate-derived dependency system, extracted as an open implementation, and
+classified from its actual residual slack. Zero slack is reflected to semantic
+minimality; positive slack is reflected to existence of a strict equivalent
+gain. The named endpoint therefore gives every governed seed a proof-bearing
+exact or gain route without supplied family or constructive predicates. The
+enumeration and reference minimum are exhaustive and may be exponential. This
+does not formalize HN grammar, BWL, ParseOrExit, H-disjointness, blocker
+dependencies or NoHereditary, polynomial HResolve, BudgetResolve, the complete
+no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin. See
+[`lean_residual_terminal_hresolve_support_resolver.md`](./lean_residual_terminal_hresolve_support_resolver.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

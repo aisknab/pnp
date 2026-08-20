@@ -1370,6 +1370,18 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalHResolveCoverageLedgerScope,
     'all-arbitrary-finite-supplied-HResolve-candidates-unique-route-ledger-and-NoHereditary-sidecar-excludes-exact-and-gain-under-decidable-supplied-predicates',
   );
+  assert.equal(
+    out.leanResidualTerminalHResolveSupportResolverFormalized,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalHResolveSupportResolverAxiomAuditPassed,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalHResolveSupportResolverScope,
+    'all-finite-direct-wire-candidates-terminal-derived-duplicate-free-support-universe-computed-exact-or-gain-with-semantic-minimum-or-strict-equivalent-gain-evidence',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',

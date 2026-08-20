@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-20-169",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-20-170",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3003,7 +3003,17 @@
     "PNP.DirectWire.terminalHResolveClassify_eq_exact_iff": "fbf117b9fe425a364742a0f9310f056ed81326485a140a3c3315208ebc31bfa4",
     "PNP.DirectWire.terminalHResolveClassify_eq_gain_iff": "8d280c65ea8eefb7c9592a9674aa34d8f565575e571b7d22527b539c422d5ffb",
     "PNP.DirectWire.terminalHResolveClassify_eq_unresolved_iff": "754f7099a176615266cc3309566ad843290e0fc1dfebcb5d1c09e22250512a81",
-    "PNP.DirectWire.terminal_hresolve_checked_sidecar_excludes_constructive_routes": "34a58ece01f76e5c93c809d514db65e2d09b3114c474d9a6385cea7d2ba35fa8"
+    "PNP.DirectWire.terminal_hresolve_checked_sidecar_excludes_constructive_routes": "34a58ece01f76e5c93c809d514db65e2d09b3114c474d9a6385cea7d2ba35fa8",
+    "PNP.DirectWire.terminalHResolveSupportExact_iff_semanticallyMinimum": "ecf50b36d176945b7e72e3cacf3439bf840c413b39cc2636baefcbcaaa671c90",
+    "PNP.DirectWire.terminalHResolveSupportGain_iff_exists_strictEquivalentGain": "f1b66d49979d7aa5a03ffb01d219daf0241d41aa1b68df16a94d9cc93fcba73b",
+    "PNP.DirectWire.canonicalTerminalSupportSeed_mem_terminalHResolveSupportFamily": "8524cf247dd11640bf472ed4c77b0ccac2411286bfc8f8c50137466ac5cd470b",
+    "PNP.DirectWire.terminalHResolveSupportClassify_constructive": "83f05b0a786470c8ac3af4c877755b8217d42ed473b9d28f99f5a09aa1e4ed61",
+    "PNP.DirectWire.terminalHResolveSupportClassify_eq_exact_iff": "9117a221c84b2c039fb4803d92d83988700ef51de0c70f8bf9ce88423e8d8b85",
+    "PNP.DirectWire.terminalHResolveSupportClassify_eq_gain_iff": "f155ba3303e3189f18777ca5aae2ac909cacfd08ca02c38ac71b020c401736ab",
+    "PNP.DirectWire.terminalHResolveSupportFamily_nodup": "12b545debd0204200afc5be09fd1e0c881f642bda7fbadefdbd76c824aef4596",
+    "PNP.DirectWire.terminalHResolveSupport_exact_or_gain": "59a11a45ff57d9e3aa84fb66d458554111090797cff4e0ff6cfb6f6cef0da231",
+    "PNP.DirectWire.terminalListSubsets_nodup": "20b2a4997693c2992627f3bd6bbac935529209ff80172a7e72c89822993ef3fa",
+    "PNP.DirectWire.terminal_hresolve_support_resolver_constructive_complete": "40fffd11b3aa05581df958f8a2a4d13af5a108b373c18a91b45e782f7c672493"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3021,7 +3031,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "52a78e46b9e0cddd5e62383f60976e6fd29746a651f43d107bb7afefecb064b3",
+  "milestoneSourceClosureSha256": "dbc693ed1057a21df9c46a0c2b51fca2d04d56da5f148d89629e1c9d9adfe6af",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -7554,6 +7564,25 @@
       ],
       "scope": "For every arbitrary finite supplied HResolve candidate family with decidable equality and arbitrary decidable exact, gain, and blocker predicates, Lean computes a fixed-priority exact, gain, blocked, or unresolved route for every candidate, generates a sound and complete route ledger, and checks both duplicate-free enumeration and all-candidate blocked coverage. The checker accepts exactly a NoHereditary sidecar for that supplied family, and acceptance excludes exact and gain routes for every enumerated candidate.",
       "title": "Checked finite HResolve coverage ledger"
+    },
+    {
+      "classification": "formalized-residual-terminal-hresolve-support-resolver",
+      "id": "residual-terminal-hresolve-support-resolver",
+      "nonClaim": "The reference search is exhaustive over the complete finite terminal support universe and may be exponential in the number of primitive records. This milestone does not implement the manuscript's HN grammar, BWL exactness, H-disjointness, blocker or NoHereditary semantics, polynomial HResolve, BudgetResolve, the complete no-lower ledger, unconditional ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalListSubsets_nodup",
+        "PNP.DirectWire.terminalHResolveSupportFamily_nodup",
+        "PNP.DirectWire.canonicalTerminalSupportSeed_mem_terminalHResolveSupportFamily",
+        "PNP.DirectWire.terminalHResolveSupportExact_iff_semanticallyMinimum",
+        "PNP.DirectWire.terminalHResolveSupportGain_iff_exists_strictEquivalentGain",
+        "PNP.DirectWire.terminalHResolveSupport_exact_or_gain",
+        "PNP.DirectWire.terminalHResolveSupportClassify_eq_exact_iff",
+        "PNP.DirectWire.terminalHResolveSupportClassify_eq_gain_iff",
+        "PNP.DirectWire.terminalHResolveSupportClassify_constructive",
+        "PNP.DirectWire.terminal_hresolve_support_resolver_constructive_complete"
+      ],
+      "scope": "For every finite direct-wire candidate and profile-width model, Lean constructs the complete duplicate-free family of canonical terminal support seeds, saturates each seed in the candidate-derived terminal system, and computes either an exact route with semantic-minimum evidence or a gain route with a strict-equivalent-gain witness.",
+      "title": "Terminal-derived HResolve support resolver"
     },
     {
       "classification": "formalized-concrete-locked-nand-threshold",

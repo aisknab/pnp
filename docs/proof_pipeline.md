@@ -551,6 +551,18 @@ exactness, H-disjointness, exact-minimum/gain semantics, blocker dependency
 semantics, the full HResolve theorem, BudgetResolve, the complete no-lower
 ledger, unconditional ZeroSlack, or polynomial PCCMin.
 
+The terminal-derived HResolve support resolver now removes the supplied family
+and supplied exact/gain predicates for the canonical terminal support branch.
+It enumerates every support seed from the complete primitive-record universe,
+proves the family duplicate-free, uses the candidate-derived saturation
+system, and classifies each extracted support from its actual residual slack.
+Every governed seed is proved either semantically minimum on an exact route or
+to admit a strict equivalent gain on a gain route. This is exhaustive reference
+computation and may be exponential; it does not implement HN grammar, BWL,
+ParseOrExit, H-disjointness, NoHereditary blockers, polynomial HResolve,
+BudgetResolve, the complete no-lower ledger, unconditional ZeroSlack, or
+polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its
