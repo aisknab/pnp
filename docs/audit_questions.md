@@ -942,6 +942,17 @@ Every positive packet has a representative in the polynomial selector universe; 
   manuscript budget-envelope dynamic program, blocker dependency semantics,
   polynomial BudgetResolve, the complete no-lower ledger, unconditional
   ZeroSlack, or polynomial PCCMin.
+- Terminal budget no-lower coverage is witnessed by
+  `PNP.DirectWire.terminalBudgetNoLowerClassify_eq_gain_iff`,
+  `PNP.DirectWire.terminalBudgetNoLowerRouteLedger_complete`,
+  `PNP.DirectWire.checkTerminalBudgetNoLowerLedger_eq_true_iff`, and
+  `PNP.DirectWire.terminal_budget_no_lower_ledger_excludes_feasible_gain`.
+  Every canonical support receives an exact, gain, or `NoBudget` route from
+  recomputed evidence. The exhaustive checker accepts only when all feasible
+  governed supports are semantic minima and no feasible strict gain exists.
+  Supplied caps and exponential reference computation remain; this is not
+  polynomial BudgetResolve, Packet or complete no-lower composition,
+  unconditional ZeroSlack, or polynomial PCCMin.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.

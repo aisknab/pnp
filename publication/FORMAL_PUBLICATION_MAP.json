@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-21-171",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-21-172",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3020,7 +3020,15 @@
     "PNP.DirectWire.findTerminalBudgetFeasibleSupport_eq_none_iff": "f73ec4a8c268deddaf7ab1f07e28c575163159649c1178fcc7c19219cd57d818",
     "PNP.DirectWire.findTerminalBudgetFeasibleSupport_unique": "96e01d4d3fb2e33fbe6cdc204980f3eb63a1353e8d72670cbc016a8fe3ccb01d",
     "PNP.DirectWire.TerminalBudgetEnvelopeOutcome.sound": "68d5a2989d51d6e06527cfa178d73418b15b64625a699df4a78569bf46692d84",
-    "PNP.DirectWire.terminal_budget_envelope_resolver_constructive_complete": "6cae4b93729bd09929234e66ef3bc836066dfe8a8c1fd81a7513828db1de251b"
+    "PNP.DirectWire.terminal_budget_envelope_resolver_constructive_complete": "6cae4b93729bd09929234e66ef3bc836066dfe8a8c1fd81a7513828db1de251b",
+    "PNP.DirectWire.terminalBudgetNoLowerClassify_eq_exact_iff": "41c86fdd39c37c99a7f836f74fdfb4bbfcd7be4750c797cb96a2ec24232498f6",
+    "PNP.DirectWire.terminalBudgetNoLowerClassify_eq_gain_iff": "91eb2fb51691fa4a633d45a1742ea1332c94c69999dd6eaaecee6728e0c1146f",
+    "PNP.DirectWire.terminalBudgetNoLowerClassify_eq_noBudget_iff": "b4d2167b67ba29a3a1171ebdafdc143ae1f878fa7bf8d8a9fed7832cf1ff3ea9",
+    "PNP.DirectWire.terminalBudgetNoLowerRouteLedger_complete": "ab09bb0e1000df6e81daa528f4dc4ab5ae93e4d0d746e2f8f8b866a44418cd12",
+    "PNP.DirectWire.terminalBudgetNoLowerRouteLedger_sound": "18305b5c8522e34cd549aea56f21101217169772556dfee709ed067d1d67645f",
+    "PNP.DirectWire.checkTerminalBudgetNoLowerLedger_eq_true_iff": "61315099cf4bf6e35c28e847dd3ec9a56118f2961a7d7143d3907669e4b6506f",
+    "PNP.DirectWire.TerminalBudgetNoLowerLedgerAccepted.iff_all_feasible_minimum": "36c035fb88bd174cb5dbc51ee20c9c4938f12b37a4af9c8623f8a1c430aa351c",
+    "PNP.DirectWire.terminal_budget_no_lower_ledger_excludes_feasible_gain": "9a3865e01a924f3ae5b649153cbf23c6e9f220b19906b8f28c525cc1b0bc01bb"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3038,7 +3046,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "fd7d4bc83334116e1e38a7578eeb8a5ea256df1657186a75359c18c7008339b2",
+  "milestoneSourceClosureSha256": "11e4dd1bb6fcc92bce76787ba93a4297fb290c02c05bf52b6f127a32ef05d071",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -7606,6 +7614,23 @@
       ],
       "scope": "For every finite direct-wire candidate, candidate-derived saturation model, and supplied natural resource caps, Lean scans the canonical terminal support universe, recomputes nonempty gate and interface feasibility plus gate and saturated-record caps, and returns a feasible semantic minimum, a feasible strict equivalent gain, or complete NoBudget exclusion for every canonical seed.",
       "title": "Terminal budget-envelope resolver"
+    },
+    {
+      "classification": "formalized-residual-terminal-budget-no-lower-ledger",
+      "id": "residual-terminal-budget-no-lower-ledger",
+      "nonClaim": "The budget caps remain supplied, and complete terminal subset enumeration, candidate-derived saturation, and reference minimization are exhaustive and may be exponential. This closes only the finite terminal-derived budget branch. It does not implement the manuscript's HN/BUD grammar, BWL or budget-envelope dynamic program, blocker dependency semantics, polynomial BudgetResolve, Packet or complete no-lower composition, unconditional ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalBudgetNoLowerClassify_eq_exact_iff",
+        "PNP.DirectWire.terminalBudgetNoLowerClassify_eq_gain_iff",
+        "PNP.DirectWire.terminalBudgetNoLowerClassify_eq_noBudget_iff",
+        "PNP.DirectWire.terminalBudgetNoLowerRouteLedger_complete",
+        "PNP.DirectWire.terminalBudgetNoLowerRouteLedger_sound",
+        "PNP.DirectWire.checkTerminalBudgetNoLowerLedger_eq_true_iff",
+        "PNP.DirectWire.TerminalBudgetNoLowerLedgerAccepted.iff_all_feasible_minimum",
+        "PNP.DirectWire.terminal_budget_no_lower_ledger_excludes_feasible_gain"
+      ],
+      "scope": "For every finite direct-wire candidate, candidate-derived saturation model, and supplied natural resource caps, Lean classifies every canonical terminal support as exact, strict gain, or NoBudget, materializes the complete route ledger, and proves that accepted exhaustive coverage makes every budget-feasible governed support a semantic minimum while excluding every feasible strict equivalent gain.",
+      "title": "Terminal budget no-lower ledger"
     },
     {
       "classification": "formalized-concrete-locked-nand-threshold",

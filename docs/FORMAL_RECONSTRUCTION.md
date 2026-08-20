@@ -2150,6 +2150,20 @@ program, blocker dependency semantics, polynomial BudgetResolve, the complete
 no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin. See
 [`lean_residual_terminal_budget_envelope_resolver.md`](./lean_residual_terminal_budget_envelope_resolver.md).
 
+`ResidualTerminalBudgetNoLowerLedger` now extends that first-feasible resolver
+to the complete canonical support universe. Each governed seed is classified
+from the same recomputed envelope and actual residual slack as exact, strict
+gain, or `NoBudget`; the materialized route ledger has soundness and
+completeness lemmas. Its executable no-lower checker accepts exactly when no
+row is a gain. Acceptance therefore makes every budget-feasible governed
+support a semantic minimum and excludes every feasible strict-equivalent-gain
+witness. The caps remain supplied and the scan, saturation, and reference
+minimum may be exponential. This closes only a finite terminal-derived budget
+branch, not the manuscript HN/BUD grammar or polynomial BudgetResolve, Packet
+or complete no-lower composition, unconditional ZeroSlack, or polynomial
+PCCMin. See
+[`lean_residual_terminal_budget_no_lower_ledger.md`](./lean_residual_terminal_budget_no_lower_ledger.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

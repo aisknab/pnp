@@ -179,6 +179,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-residual-terminal-hresolve-coverage-ledger0.test.mjs',
   'audits/lean-residual-terminal-hresolve-support-resolver0.test.mjs',
   'audits/lean-residual-terminal-budget-envelope-resolver0.test.mjs',
+  'audits/lean-residual-terminal-budget-no-lower-ledger0.test.mjs',
   'audits/legacy-v0-archive0.test.mjs',
   'test/current-package-surface0.test.mjs',
   'test/current-verifier0.test.mjs',

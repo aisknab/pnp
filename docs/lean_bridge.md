@@ -1490,6 +1490,16 @@ manuscript HN/BUD grammar, BWL, the budget-envelope dynamic program, blocker
 semantics, polynomial `BudgetResolve`, complete no-lower, unconditional
 `ZeroSlack`, or polynomial `PCCMin`.
 
+`lean/PNP/ResidualTerminalBudgetNoLowerLedger.lean` extends that resolver from
+one first-feasible result to an exhaustive route ledger. Every canonical seed
+is classified as exact, strict gain, or outside the supplied envelope. The
+no-lower Boolean accepts exactly when every budget-feasible governed seed is a
+semantic minimum, so its endpoint excludes every feasible strict-equivalent
+gain. Supplied caps, subset enumeration, saturation, and reference minimization
+remain; this is an exponential finite reference boundary, not polynomial
+`BudgetResolve`, Packet or complete no-lower composition, unconditional
+`ZeroSlack`, or polynomial `PCCMin`.
+
 `lean/PNP/PCCMin.lean` exposes the structured loop certificate and constructs the witness-model residual-band decider from it.
 
 Most fields in these certificate objects are still digest/ledger handles. Replacing those handles by actual propositions and proofs is a major remaining task.

@@ -1394,6 +1394,18 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalBudgetEnvelopeResolverScope,
     'all-finite-direct-wire-candidates-terminal-derived-computed-budget-envelope-exact-gain-or-NoBudget-over-canonical-support-universe',
   );
+  assert.equal(
+    out.leanResidualTerminalBudgetNoLowerLedgerFormalized,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalBudgetNoLowerLedgerAxiomAuditPassed,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalBudgetNoLowerLedgerScope,
+    'all-finite-direct-wire-candidates-terminal-derived-budget-feasible-gain-exclusion-over-complete-canonical-support-ledger',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',

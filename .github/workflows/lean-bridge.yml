@@ -269,6 +269,9 @@ on:
       - 'audits/lean-residual-terminal-budget-envelope-resolver0.test.mjs'
       - 'docs/lean_residual_terminal_budget_envelope_resolver.md'
       - 'docs/plans/2026-08-21-residual-terminal-budget-envelope-resolver.md'
+      - 'audits/lean-residual-terminal-budget-no-lower-ledger0.test.mjs'
+      - 'docs/lean_residual_terminal_budget_no_lower_ledger.md'
+      - 'docs/plans/2026-08-21-residual-terminal-budget-no-lower-ledger.md'
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_locked_nand_polynomial_reduction.md'
       - 'docs/lean_concrete_cnf_to_nand_semantic_compiler.md'
@@ -4444,3 +4447,29 @@ jobs:
 
       - name: Run terminal budget-envelope resolver hostile audit
         run: node --test audits/lean-residual-terminal-budget-envelope-resolver0.test.mjs
+
+      - name: Print terminal budget no-lower ledger axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBudgetNoLowerLedgerAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalBudgetNoLowerLedgerAxiomAudit.lean)"
+          test "$expected_count" -gt 0
+          test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected terminal budget no-lower ledger axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -Eq 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            printf '%s\n' "$normalized" >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
+
+      - name: Run terminal budget no-lower ledger regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBudgetNoLowerLedger.lean
+
+      - name: Run terminal budget no-lower ledger hostile audit
+        run: node --test audits/lean-residual-terminal-budget-no-lower-ledger0.test.mjs
