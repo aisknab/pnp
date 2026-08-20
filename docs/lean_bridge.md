@@ -1459,6 +1459,16 @@ ZeroSlackCertificate
 PCCOracleCertificate
 ```
 
+`lean/PNP/ResidualTerminalHResolveCoverageLedger.lean` now supplies the first
+typed executable refinement of that HResolve boundary. It generates
+exact/gain/blocked/unresolved rows for every candidate in an arbitrary finite
+supplied list, recomputes uniqueness, and accepts a NoHereditary sidecar only
+when every listed candidate is positively blocked after both constructive
+routes fail. This is coverage relative to supplied decidable predicates, not a
+proof that the predicates implement HN grammar, BWL exactness, H-disjointness,
+exact-minimum/gain semantics, blocker dependency semantics, or the full
+historical HResolve theorem.
+
 `lean/PNP/PCCMin.lean` exposes the structured loop certificate and constructs the witness-model residual-band decider from it.
 
 Most fields in these certificate objects are still digest/ledger handles. Replacing those handles by actual propositions and proofs is a major remaining task.

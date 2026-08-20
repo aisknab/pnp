@@ -1,0 +1,18 @@
+import PNP.ResidualTerminalHResolveCoverageLedger
+
+#print axioms PNP.DirectWire.TerminalHResolveRoute
+#print axioms PNP.DirectWire.terminalHResolveClassify
+#print axioms PNP.DirectWire.terminalHResolveClassify_eq_exact_iff
+#print axioms PNP.DirectWire.terminalHResolveClassify_eq_gain_iff
+#print axioms PNP.DirectWire.terminalHResolveClassify_eq_blocked_iff
+#print axioms PNP.DirectWire.terminalHResolveClassify_eq_unresolved_iff
+#print axioms PNP.DirectWire.TerminalHResolveFamily
+#print axioms PNP.DirectWire.TerminalHResolveFamily.routeLedger
+#print axioms PNP.DirectWire.TerminalHResolveFamily.NoHereditarySidecarAccepted
+#print axioms PNP.DirectWire.TerminalHResolveFamily.checkNoHereditarySidecar
+#print axioms PNP.DirectWire.TerminalHResolveFamily.routeLedger_sound
+#print axioms PNP.DirectWire.TerminalHResolveFamily.routeLedger_complete
+#print axioms PNP.DirectWire.TerminalHResolveFamily.checkNoHereditarySidecar_eq_true_iff
+#print axioms PNP.DirectWire.TerminalHResolveFamily.not_exact_of_checkedNoHereditarySidecar
+#print axioms PNP.DirectWire.TerminalHResolveFamily.not_gain_of_checkedNoHereditarySidecar
+#print axioms PNP.DirectWire.terminal_hresolve_checked_sidecar_excludes_constructive_routes

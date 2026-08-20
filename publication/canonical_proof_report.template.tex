@@ -989,6 +989,20 @@ not the complete no-lower ledger or ZeroSlack. Terminal inputs and bindings
 remain supplied, while HResolve, BudgetResolve, normalization, other named
 obstructions, saturation, replay, and polynomial PCCMin remain open.
 
+Checked finite HResolve coverage now computes one exact, gain, blocked, or
+unresolved route in fixed priority order for every member of an arbitrary
+supplied finite candidate family. The generated ledger has one computed row
+per supplied occurrence, while the NoHereditary sidecar checker independently
+recomputes duplicate-free enumeration and requires every candidate to be
+blocked after both constructive routes fail. Its reflection theorem
+characterizes exact acceptance, and accepted sidecar data excludes exact and
+gain routes for every listed candidate. The family and decidable predicates
+remain supplied; this does not construct the governed hereditary universe from
+terminal data, prove HN grammar, BWL exactness, H-disjointness, exact-minimum,
+strict-gain, or blocker dependency semantics, discharge full HResolve or
+BudgetResolve, complete the no-lower ledger, establish unconditional ZeroSlack,
+or prove polynomial PCCMin.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule

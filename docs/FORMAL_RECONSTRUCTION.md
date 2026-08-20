@@ -2105,6 +2105,22 @@ HResolve, BudgetResolve, normalization, other named obstructions, saturation,
 and replay remain open. See
 [`lean_residual_terminal_packet_no_lower_ledger.md`](./lean_residual_terminal_packet_no_lower_ledger.md).
 
+`ResidualTerminalHResolveCoverageLedger` now replaces the HResolve branch's
+string-only sidecar boundary with an executable finite-family coverage ledger.
+For every arbitrary supplied candidate list and decidable exact, gain, and
+blocker predicates, the classifier computes one fixed-priority route per
+candidate. The NoHereditary checker recomputes list uniqueness and accepts
+exactly when every listed candidate has neither constructive route and has a
+positive blocker predicate. Generated-ledger soundness and completeness tie
+every row to the supplied enumeration, while the named endpoint proves that
+accepted sidecar data excludes exact and gain routes for every listed
+candidate. The family and predicates remain supplied: this does not construct
+the governed hereditary universe from terminal data, prove HN grammar, BWL
+exactness, H-disjointness, exact-minimum, strict-gain, or blocker dependency
+semantics, discharge full HResolve or BudgetResolve, complete the no-lower
+ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin. See
+[`lean_residual_terminal_hresolve_coverage_ledger.md`](./lean_residual_terminal_hresolve_coverage_ledger.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

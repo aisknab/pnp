@@ -3148,6 +3148,25 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /Packet branch.*not the complete no-lower ledger/u);
   assert.match(terminalPacketNoLowerLedger.nonClaim,
     /HResolve.*BudgetResolve.*normalization.*saturation.*replay/u);
+  const terminalHResolveCoverageLedger = byId.get(
+    'residual-terminal-hresolve-coverage-ledger',
+  );
+  assert.equal(terminalHResolveCoverageLedger.status,
+    'formalized-residual-terminal-hresolve-coverage-ledger');
+  assert.equal(terminalHResolveCoverageLedger.earned, true);
+  assert.equal(
+    terminalHResolveCoverageLedger.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.equal(terminalHResolveCoverageLedger.requiredTheorems.length, 10);
+  assert.match(terminalHResolveCoverageLedger.scope,
+    /arbitrary finite supplied HResolve candidate family/u);
+  assert.match(terminalHResolveCoverageLedger.scope,
+    /NoHereditary sidecar.*excludes exact and gain routes/u);
+  assert.match(terminalHResolveCoverageLedger.nonClaim,
+    /candidate family.*decidable exact, gain, and blocker predicates remain supplied/u);
+  assert.match(terminalHResolveCoverageLedger.nonClaim,
+    /full historical HResolve theorem.*BudgetResolve.*complete no-lower ledger/u);
   const lockedNANDThreshold = byId.get('global-locked-nand-threshold');
   assert.equal(lockedNANDThreshold.status,
     'formalized-concrete-locked-nand-threshold');

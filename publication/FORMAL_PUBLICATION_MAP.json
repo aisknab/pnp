@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-19-168",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-20-169",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2993,7 +2993,17 @@
     "PNP.DirectWire.TerminalPacketTypedRealizerTable.checkPacketNoLowerLedger_eq_true_iff": "4933640232598ca15f5e59a1e44afc61cb3d0464b99acb85817b10a942756e0f",
     "PNP.DirectWire.TerminalBN6PacketConclusion.checkPacketNoLowerLedger_eq_false": "0823247a05acf3b9e710e938e5443fb4e0c600c5e73957a2e7c0bfb580a17d99",
     "PNP.DirectWire.TerminalPacketTypedRealizerTable.not_packetConclusion_of_checkedPacketNoLowerLedger": "fafceb9656698473415a9221ca9a36c63021be6f3d09f370dc73b63fc5d94615",
-    "PNP.DirectWire.terminalBN6_packet_no_lower_ledger_excludes_positive_packet": "67c93587e524fb98ecefa2f653fe2d398ffc283a17756d7d68e4dbfa78fa35a9"
+    "PNP.DirectWire.terminalBN6_packet_no_lower_ledger_excludes_positive_packet": "67c93587e524fb98ecefa2f653fe2d398ffc283a17756d7d68e4dbfa78fa35a9",
+    "PNP.DirectWire.TerminalHResolveFamily.checkNoHereditarySidecar_eq_true_iff": "a3bd27b58349e7e0d0a8bca62885d788e48f0959ef0687f266fe4466ce126f2d",
+    "PNP.DirectWire.TerminalHResolveFamily.not_exact_of_checkedNoHereditarySidecar": "6e921a877da8b723eb0e03d698f3f4c1226a518c7a5aae98291dd686ebf5f624",
+    "PNP.DirectWire.TerminalHResolveFamily.not_gain_of_checkedNoHereditarySidecar": "0ee82be4fa054e56a77c1b36e446b12188a0d3753cbb65f80a8a84023b4d5510",
+    "PNP.DirectWire.TerminalHResolveFamily.routeLedger_complete": "6a40d0d984d3e418278030815c4db34591f1414785c9d38d2e8e7155754ed34a",
+    "PNP.DirectWire.TerminalHResolveFamily.routeLedger_sound": "ef104717e64db666abafa383155d81596a7d1f508badfc3dfb4563bef8fc3727",
+    "PNP.DirectWire.terminalHResolveClassify_eq_blocked_iff": "a09c47ec9b07293b759d3c2f1d6a955df0a479b3b3bc8022086e72e8438a1e9d",
+    "PNP.DirectWire.terminalHResolveClassify_eq_exact_iff": "fbf117b9fe425a364742a0f9310f056ed81326485a140a3c3315208ebc31bfa4",
+    "PNP.DirectWire.terminalHResolveClassify_eq_gain_iff": "8d280c65ea8eefb7c9592a9674aa34d8f565575e571b7d22527b539c422d5ffb",
+    "PNP.DirectWire.terminalHResolveClassify_eq_unresolved_iff": "754f7099a176615266cc3309566ad843290e0fc1dfebcb5d1c09e22250512a81",
+    "PNP.DirectWire.terminal_hresolve_checked_sidecar_excludes_constructive_routes": "34a58ece01f76e5c93c809d514db65e2d09b3114c474d9a6385cea7d2ba35fa8"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3011,7 +3021,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "e7f8da7888f27347bb67ef97d75a39bc3e8feb74f1491e9a624d3d1ee7dbea32",
+  "milestoneSourceClosureSha256": "52a78e46b9e0cddd5e62383f60976e6fd29746a651f43d107bb7afefecb064b3",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -7525,6 +7535,25 @@
       ],
       "scope": "For every supplied arbitrary finite grouped BN6 family, typed realizer table, HB dependency table, finite rank map, and before/after residual ranks, one Boolean recomputes the five executable checks for semantic/HN binding, budget/HB binding, selector silence, HB no-outcome closure, and Packet descent/no-lower. Its reflection theorem characterizes exact acceptance, a positive Packet forces rejection, and an accepted ledger excludes a positive Packet conclusion for those same inputs.",
       "title": "Checked Packet no-lower ledger"
+    },
+    {
+      "classification": "formalized-residual-terminal-hresolve-coverage-ledger",
+      "id": "residual-terminal-hresolve-coverage-ledger",
+      "nonClaim": "The finite HResolve candidate family and its decidable exact, gain, and blocker predicates remain supplied. This milestone does not construct the governed hereditary universe from terminal data or prove that those predicates implement the manuscript's HN grammar, BWL exactness, H-disjointness, exact-minimum semantics, strict-gain semantics, or blocker dependency semantics. It does not discharge the full historical HResolve theorem, implement BudgetResolve, normalization, the complete no-lower ledger, saturation, or replay; establish unconditional HB closure or ZeroSlack; prove PCCMin, encoded-size or polynomial-runtime bounds, SAT in P; remove a project assumption; or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalHResolveClassify_eq_exact_iff",
+        "PNP.DirectWire.terminalHResolveClassify_eq_gain_iff",
+        "PNP.DirectWire.terminalHResolveClassify_eq_blocked_iff",
+        "PNP.DirectWire.terminalHResolveClassify_eq_unresolved_iff",
+        "PNP.DirectWire.TerminalHResolveFamily.routeLedger_sound",
+        "PNP.DirectWire.TerminalHResolveFamily.routeLedger_complete",
+        "PNP.DirectWire.TerminalHResolveFamily.checkNoHereditarySidecar_eq_true_iff",
+        "PNP.DirectWire.TerminalHResolveFamily.not_exact_of_checkedNoHereditarySidecar",
+        "PNP.DirectWire.TerminalHResolveFamily.not_gain_of_checkedNoHereditarySidecar",
+        "PNP.DirectWire.terminal_hresolve_checked_sidecar_excludes_constructive_routes"
+      ],
+      "scope": "For every arbitrary finite supplied HResolve candidate family with decidable equality and arbitrary decidable exact, gain, and blocker predicates, Lean computes a fixed-priority exact, gain, blocked, or unresolved route for every candidate, generates a sound and complete route ledger, and checks both duplicate-free enumeration and all-candidate blocked coverage. The checker accepts exactly a NoHereditary sidecar for that supplied family, and acceptance excludes exact and gain routes for every enumerated candidate.",
+      "title": "Checked finite HResolve coverage ledger"
     },
     {
       "classification": "formalized-concrete-locked-nand-threshold",

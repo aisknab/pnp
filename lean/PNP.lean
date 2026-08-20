@@ -6,6 +6,7 @@ import PNP.NANDMinimum
 import PNP.NANDComposition
 import PNP.NANDSlack
 import PNP.ResidualRoutes
+import PNP.ResidualTerminalHResolveCoverageLedger
 import PNP.ResidualGainChain
 import PNP.ResidualGainStopping
 import PNP.ResidualTerminalFullBridge
