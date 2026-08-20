@@ -574,6 +574,16 @@ exponential; it is not the manuscript HN/BUD grammar, BWL or budget-envelope
 dynamic program, blocker semantics, polynomial BudgetResolve, the complete
 no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin.
 
+The terminal budget no-lower ledger now evaluates that envelope for every
+canonical support rather than stopping at the first feasible one. Its route
+table records exact, strict gain, or `NoBudget` from recomputed evidence, and
+its Boolean accepts exactly when every feasible governed support is a semantic
+minimum. Acceptance excludes every feasible strict-equivalent-gain witness.
+The caps remain supplied and the reference computation may be exponential;
+this closes only the finite terminal-derived budget branch, not polynomial
+BudgetResolve, Packet or complete no-lower composition, unconditional
+ZeroSlack, or polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

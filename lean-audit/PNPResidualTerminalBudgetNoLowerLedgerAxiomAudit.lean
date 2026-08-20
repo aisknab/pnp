@@ -1,0 +1,15 @@
+import PNP.ResidualTerminalBudgetNoLowerLedger
+
+#print axioms PNP.DirectWire.TerminalBudgetNoLowerRoute
+#print axioms PNP.DirectWire.terminalBudgetNoLowerClassify
+#print axioms PNP.DirectWire.terminalBudgetNoLowerClassify_eq_exact_iff
+#print axioms PNP.DirectWire.terminalBudgetNoLowerClassify_eq_gain_iff
+#print axioms PNP.DirectWire.terminalBudgetNoLowerClassify_eq_noBudget_iff
+#print axioms PNP.DirectWire.terminalBudgetNoLowerRouteLedger
+#print axioms PNP.DirectWire.terminalBudgetNoLowerRouteLedger_complete
+#print axioms PNP.DirectWire.terminalBudgetNoLowerRouteLedger_sound
+#print axioms PNP.DirectWire.TerminalBudgetNoLowerLedgerAccepted
+#print axioms PNP.DirectWire.checkTerminalBudgetNoLowerLedger
+#print axioms PNP.DirectWire.checkTerminalBudgetNoLowerLedger_eq_true_iff
+#print axioms PNP.DirectWire.TerminalBudgetNoLowerLedgerAccepted.iff_all_feasible_minimum
+#print axioms PNP.DirectWire.terminal_budget_no_lower_ledger_excludes_feasible_gain
