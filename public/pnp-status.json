@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-20-170",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-21-171",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -971,6 +971,9 @@
   "leanResidualTerminalHResolveSupportResolverFormalized": true,
   "leanResidualTerminalHResolveSupportResolverAxiomAuditPassed": true,
   "leanResidualTerminalHResolveSupportResolverScope": "all-finite-direct-wire-candidates-terminal-derived-duplicate-free-support-universe-computed-exact-or-gain-with-semantic-minimum-or-strict-equivalent-gain-evidence",
+  "leanResidualTerminalBudgetEnvelopeResolverFormalized": true,
+  "leanResidualTerminalBudgetEnvelopeResolverAxiomAuditPassed": true,
+  "leanResidualTerminalBudgetEnvelopeResolverScope": "all-finite-direct-wire-candidates-terminal-derived-computed-budget-envelope-exact-gain-or-NoBudget-over-canonical-support-universe",
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -1575,6 +1578,12 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHResolveCoverageLedgerAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHResolveCoverageLedger.lean",
     "node --test audits/lean-residual-terminal-hresolve-coverage-ledger0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHResolveSupportResolverAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHResolveSupportResolver.lean",
+    "node --test audits/lean-residual-terminal-hresolve-support-resolver0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBudgetEnvelopeResolverAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBudgetEnvelopeResolver.lean",
+    "node --test audits/lean-residual-terminal-budget-envelope-resolver0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1628,6 +1637,8 @@
     "The checked Packet descent no-lower binding exhaustively scans every canonical handle and recognizes exactly the absence of the fully computed residual-nondecrease first route. Under the supplied positive Packet conclusion, checked semantic/HN and budget/HB bindings, selector silence, and checked no-outcome HB closure, the checker is forced to reject; an accepted row is contradictory. This closes one local no-lower row only. It does not construct terminal data or the complete no-lower ledger, cover HResolve, BudgetResolve, normalization, saturation, replay, or named routes, establish unconditional HB or ZeroSlack, or prove polynomial PCCMin.",
     "The checked Packet no-lower ledger composes five independently executable rows: semantic/HN binding, budget/HB binding, selector silence, HB no-outcome closure, and Packet descent no-lower. Its reflection theorem proves exact acceptance, and an accepted ledger excludes a positive Packet conclusion over every supplied arbitrary finite grouped family. This closes only the Packet branch of the manuscript no-lower dependency. All terminal data and bindings remain explicit, while HResolve, BudgetResolve, normalization, other named obstructions, saturation, replay, the complete no-lower ledger, unconditional ZeroSlack, and polynomial PCCMin remain open.",
     "The checked finite HResolve coverage ledger computes exact, gain, blocked, or unresolved classification for every member of an arbitrary supplied finite candidate family, recomputes duplicate-free enumeration, generates one route row per candidate, and accepts a NoHereditary sidecar exactly when every listed candidate has neither constructive route and carries a positive blocker predicate. The candidate family and all decidable predicates remain supplied; this does not construct the governed hereditary universe from terminal data, prove HN grammar, BWL exactness, H-disjointness, exact-minimum, strict-gain, or blocker dependency semantics, discharge full HResolve or BudgetResolve, complete the no-lower ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.",
+    "The canonical terminal HResolve support resolver removes caller-supplied candidate families and exact/gain predicates for the finite terminal-support branch. It enumerates every canonical seed, derives saturation from the candidate, and computes exact versus strict equivalent gain from reference residual slack. Its subset enumeration and reference minimization may be exponential, and it does not implement HN grammar, BWL, ParseOrExit, H-disjointness, NoHereditary blocker semantics, full or polynomial HResolve, BudgetResolve, complete no-lower, unconditional ZeroSlack, or polynomial PCCMin.",
+    "The finite terminal budget-envelope resolver searches every canonical terminal support seed against supplied natural gate and saturated-record caps, recomputes candidate-derived saturation, requires nonempty implementation and interface support, and returns a feasible semantic minimum, a feasible strict equivalent gain, or complete NoBudget exclusion for that canonical universe. The caps remain supplied and the support scan plus reference minimization may be exponential. It does not implement the manuscript HN/BUD grammar, BWL, the budget-envelope dynamic program, blocker semantics, polynomial BudgetResolve, complete no-lower, unconditional ZeroSlack, or polynomial PCCMin.",
     "The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.",
     "The pinned Lean library/root-status build is reconstruction data, not a proof of P = NP.",
     "Blank-delimited Tape.outputBits removes dependence on the unobservable represented-list boundary; Tape.handoffTarget itself is a pure canonical specification. PipelineOutputHandoff is a separate executable internal represented handoff, not terminal raw output normalization.",
@@ -1786,7 +1797,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "dbc693ed1057a21df9c46a0c2b51fca2d04d56da5f148d89629e1c9d9adfe6af",
+    "actualSourceClosureSha256": "fd7d4bc83334116e1e38a7578eeb8a5ea256df1657186a75359c18c7008339b2",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1816,22 +1827,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-20-170",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-21-171",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "50d246b707757a179a5428e16ced026a3143c785465beff079a62e004042a314",
+  "leanTheoremInventorySha256": "588d30907c045d6c75444a4905742c33ca26443955c526fc55ecfe3f4867dd2c",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 29437,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 15067,
-  "leanTheoremInventoryTheoremCount": 15247,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 7537,
-  "leanTheoremInventorySourceClosureModuleCount": 287,
-  "leanSourceClosureSha256": "dbc693ed1057a21df9c46a0c2b51fca2d04d56da5f148d89629e1c9d9adfe6af",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-20-170",
+  "leanTheoremInventoryDeclarationCount": 29532,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 15104,
+  "leanTheoremInventoryTheoremCount": 15283,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 7542,
+  "leanTheoremInventorySourceClosureModuleCount": 288,
+  "leanSourceClosureSha256": "fd7d4bc83334116e1e38a7578eeb8a5ea256df1657186a75359c18c7008339b2",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-21-171",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "4cbf743affb706f3b8c7432c8dc074af762069311ce9e991a0facb139e1ce84b",
+  "formalPublicationMapSha256": "9206725cab0f14e00c26e816f03f2d62cebcdbe006c386097f4f3992f043662c",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -44438,6 +44449,115 @@
       "status": "formalized-residual-terminal-hresolve-support-resolver"
     },
     {
+      "classification": "formalized-residual-terminal-budget-envelope-resolver",
+      "id": "residual-terminal-budget-envelope-resolver",
+      "nonClaim": "The budget caps remain supplied, and the complete terminal subset scan, candidate-derived saturation, and reference minimization are exhaustive and may be exponential. This milestone does not implement the manuscript's HN/BUD grammar, BWL or budget-envelope dynamic program, blocker dependency semantics, polynomial BudgetResolve, the complete no-lower ledger, unconditional ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalSupportBudget.check_eq_true_iff",
+        "PNP.DirectWire.findTerminalBudgetFeasibleSupport_sound",
+        "PNP.DirectWire.findTerminalBudgetFeasibleSupport_exists_of_seed",
+        "PNP.DirectWire.findTerminalBudgetFeasibleSupport_eq_none_iff",
+        "PNP.DirectWire.findTerminalBudgetFeasibleSupport_unique",
+        "PNP.DirectWire.TerminalBudgetEnvelopeOutcome.sound",
+        "PNP.DirectWire.terminal_budget_envelope_resolver_constructive_complete"
+      ],
+      "scope": "For every finite direct-wire candidate, candidate-derived saturation model, and supplied natural resource caps, Lean scans the canonical terminal support universe, recomputes nonempty gate and interface feasibility plus gate and saturated-record caps, and returns a feasible semantic minimum, a feasible strict equivalent gain, or complete NoBudget exclusion for every canonical seed.",
+      "title": "Terminal budget-envelope resolver",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.TerminalSupportBudget.check_eq_true_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "07a8a83678d8f91f6d962105d1bf46804dccaabbaf89464355a12df03c92f358",
+          "expectedKernelTypeSha256": "07a8a83678d8f91f6d962105d1bf46804dccaabbaf89464355a12df03c92f358",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.findTerminalBudgetFeasibleSupport_sound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d9cb114d80911cd43227315402c0bc3e563022fa043d236d5b9b26bb82ab4cdb",
+          "expectedKernelTypeSha256": "d9cb114d80911cd43227315402c0bc3e563022fa043d236d5b9b26bb82ab4cdb",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.findTerminalBudgetFeasibleSupport_exists_of_seed",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "05ea7628193e9525c57c8ce2236c13823cad985f9c25897d7eef6350bfe8beba",
+          "expectedKernelTypeSha256": "05ea7628193e9525c57c8ce2236c13823cad985f9c25897d7eef6350bfe8beba",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.findTerminalBudgetFeasibleSupport_eq_none_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f73ec4a8c268deddaf7ab1f07e28c575163159649c1178fcc7c19219cd57d818",
+          "expectedKernelTypeSha256": "f73ec4a8c268deddaf7ab1f07e28c575163159649c1178fcc7c19219cd57d818",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.findTerminalBudgetFeasibleSupport_unique",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "96e01d4d3fb2e33fbe6cdc204980f3eb63a1353e8d72670cbc016a8fe3ccb01d",
+          "expectedKernelTypeSha256": "96e01d4d3fb2e33fbe6cdc204980f3eb63a1353e8d72670cbc016a8fe3ccb01d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBudgetEnvelopeOutcome.sound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "68d5a2989d51d6e06527cfa178d73418b15b64625a699df4a78569bf46692d84",
+          "expectedKernelTypeSha256": "68d5a2989d51d6e06527cfa178d73418b15b64625a699df4a78569bf46692d84",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminal_budget_envelope_resolver_constructive_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6cae4b93729bd09929234e66ef3bc836066dfe8a8c1fd81a7513828db1de251b",
+          "expectedKernelTypeSha256": "6cae4b93729bd09929234e66ef3bc836066dfe8a8c1fd81a7513828db1de251b",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-budget-envelope-resolver"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -44535,7 +44655,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-20-170",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-21-171",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

@@ -1382,6 +1382,18 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalHResolveSupportResolverScope,
     'all-finite-direct-wire-candidates-terminal-derived-duplicate-free-support-universe-computed-exact-or-gain-with-semantic-minimum-or-strict-equivalent-gain-evidence',
   );
+  assert.equal(
+    out.leanResidualTerminalBudgetEnvelopeResolverFormalized,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalBudgetEnvelopeResolverAxiomAuditPassed,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalBudgetEnvelopeResolverScope,
+    'all-finite-direct-wire-candidates-terminal-derived-computed-budget-envelope-exact-gain-or-NoBudget-over-canonical-support-universe',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',

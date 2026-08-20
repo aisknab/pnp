@@ -83,6 +83,7 @@ import PNP.ResidualTerminalPacketSemanticHNActivityBinding
 import PNP.ResidualTerminalPacketDescentNoLowerBinding
 import PNP.ResidualTerminalPacketNoLowerLedger
 import PNP.ResidualTerminalHResolveSupportResolver
+import PNP.ResidualTerminalBudgetEnvelopeResolver
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine

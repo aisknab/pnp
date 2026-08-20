@@ -929,6 +929,19 @@ Every positive packet has a representative in the polynomial selector universe; 
   HN grammar, BWL, ParseOrExit, H-disjointness, NoHereditary blocker semantics,
   polynomial HResolve, BudgetResolve, the complete no-lower ledger,
   unconditional ZeroSlack, or polynomial PCCMin.
+- Terminal budget-envelope resolution is witnessed by
+  `PNP.DirectWire.TerminalSupportBudget.check_eq_true_iff`,
+  `PNP.DirectWire.findTerminalBudgetFeasibleSupport_eq_none_iff`,
+  `PNP.DirectWire.TerminalBudgetEnvelopeOutcome.sound`, and
+  `PNP.DirectWire.terminal_budget_envelope_resolver_constructive_complete`.
+  The canonical terminal support scan recomputes nonempty gate/interface
+  feasibility and supplied gate/record caps after candidate-derived
+  saturation. Its exact and gain routes carry semantic evidence, while search
+  failure excludes every canonical seed. The caps remain inputs and the
+  exhaustive reference computation may be exponential; this is not the
+  manuscript budget-envelope dynamic program, blocker dependency semantics,
+  polynomial BudgetResolve, the complete no-lower ledger, unconditional
+  ZeroSlack, or polynomial PCCMin.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.

@@ -3186,6 +3186,25 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /exhaustive.*may be exponential/u);
   assert.match(terminalHResolveSupportResolver.nonClaim,
     /HN grammar.*BWL.*polynomial HResolve.*ZeroSlack.*PCCMin/u);
+  const terminalBudgetEnvelopeResolver = byId.get(
+    'residual-terminal-budget-envelope-resolver',
+  );
+  assert.equal(terminalBudgetEnvelopeResolver.status,
+    'formalized-residual-terminal-budget-envelope-resolver');
+  assert.equal(terminalBudgetEnvelopeResolver.earned, true);
+  assert.equal(
+    terminalBudgetEnvelopeResolver.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.equal(terminalBudgetEnvelopeResolver.requiredTheorems.length, 7);
+  assert.match(terminalBudgetEnvelopeResolver.scope,
+    /canonical terminal support.*gate.*interface.*saturated-record caps/u);
+  assert.match(terminalBudgetEnvelopeResolver.scope,
+    /semantic minimum.*strict equivalent gain.*NoBudget/u);
+  assert.match(terminalBudgetEnvelopeResolver.nonClaim,
+    /exhaustive.*may be exponential/u);
+  assert.match(terminalBudgetEnvelopeResolver.nonClaim,
+    /budget-envelope dynamic program.*polynomial BudgetResolve.*ZeroSlack.*PCCMin/u);
   const lockedNANDThreshold = byId.get('global-locked-nand-threshold');
   assert.equal(lockedNANDThreshold.status,
     'formalized-concrete-locked-nand-threshold');

@@ -2137,6 +2137,19 @@ dependencies or NoHereditary, polynomial HResolve, BudgetResolve, the complete
 no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin. See
 [`lean_residual_terminal_hresolve_support_resolver.md`](./lean_residual_terminal_hresolve_support_resolver.md).
 
+`ResidualTerminalBudgetEnvelopeResolver` now places a computed finite budget
+boundary over that canonical support universe. For supplied natural gate and
+saturated-record caps, each seed is saturated in the candidate-derived system;
+the checker requires a nonempty gate and interface support and recomputes both
+resource bounds. The exhaustive resolver returns a governed feasible semantic
+minimum, a governed feasible strict equivalent gain, or a strong `NoBudget`
+branch excluding every canonical seed by the same predicate. The caps remain
+supplied and the scan, saturation, and reference minimum may be exponential.
+This is not the manuscript's HN/BUD grammar, BWL or budget-envelope dynamic
+program, blocker dependency semantics, polynomial BudgetResolve, the complete
+no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin. See
+[`lean_residual_terminal_budget_envelope_resolver.md`](./lean_residual_terminal_budget_envelope_resolver.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

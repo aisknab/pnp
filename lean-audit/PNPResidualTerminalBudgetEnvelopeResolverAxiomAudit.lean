@@ -1,0 +1,17 @@
+import PNP.ResidualTerminalBudgetEnvelopeResolver
+
+#print axioms PNP.DirectWire.TerminalSupportBudget
+#print axioms PNP.DirectWire.TerminalSupportBudget.Fits
+#print axioms PNP.DirectWire.TerminalSupportBudget.check
+#print axioms PNP.DirectWire.TerminalSupportBudget.check_eq_true_iff
+#print axioms PNP.DirectWire.TerminalBudgetFeasibleSupport
+#print axioms PNP.DirectWire.findTerminalBudgetFeasibleSupport
+#print axioms PNP.DirectWire.findTerminalBudgetFeasibleSupport_sound
+#print axioms PNP.DirectWire.findTerminalBudgetFeasibleSupport_exists_of_seed
+#print axioms PNP.DirectWire.findTerminalBudgetFeasibleSupport_eq_none_iff
+#print axioms PNP.DirectWire.findTerminalBudgetFeasibleSupport_unique
+#print axioms PNP.DirectWire.TerminalBudgetEnvelopeOutcome
+#print axioms PNP.DirectWire.resolveTerminalBudgetEnvelope
+#print axioms PNP.DirectWire.TerminalBudgetEnvelopeOutcome.Sound
+#print axioms PNP.DirectWire.TerminalBudgetEnvelopeOutcome.sound
+#print axioms PNP.DirectWire.terminal_budget_envelope_resolver_constructive_complete

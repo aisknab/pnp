@@ -1479,6 +1479,17 @@ enumeration and reference minimum may be exponential, so this is not the HN
 grammar or BWL algorithm, ParseOrExit, H-disjointness, NoHereditary blocker
 semantics, or polynomial HResolve.
 
+`lean/PNP/ResidualTerminalBudgetEnvelopeResolver.lean` adds the next finite BUD
+edge. For supplied natural gate and saturated-record caps, it searches the
+complete canonical terminal support universe, recomputes candidate-derived
+saturation, requires a nonempty implementation and interface, and returns a
+feasible semantic minimum, a feasible strict equivalent gain, or proof that no
+canonical seed fits the caps. The caps are inputs and the support scan plus
+reference minimization are exhaustive and may be exponential. This is not the
+manuscript HN/BUD grammar, BWL, the budget-envelope dynamic program, blocker
+semantics, polynomial `BudgetResolve`, complete no-lower, unconditional
+`ZeroSlack`, or polynomial `PCCMin`.
+
 `lean/PNP/PCCMin.lean` exposes the structured loop certificate and constructs the witness-model residual-band decider from it.
 
 Most fields in these certificate objects are still digest/ledger handles. Replacing those handles by actual propositions and proofs is a major remaining task.

@@ -563,6 +563,17 @@ ParseOrExit, H-disjointness, NoHereditary blockers, polynomial HResolve,
 BudgetResolve, the complete no-lower ledger, unconditional ZeroSlack, or
 polynomial PCCMin.
 
+The terminal budget-envelope resolver now scans that same canonical support
+universe under supplied gate and saturated-record caps. Feasibility is not a
+caller predicate: candidate-derived saturation must leave at least one gate
+and interface coordinate and must satisfy both computed caps. A feasible seed
+is routed by actual residual slack to semantic minimality or a strict
+equivalent gain. Exhaustive search failure proves a strong `NoBudget` sidecar
+for every canonical seed. This remains reference computation and may be
+exponential; it is not the manuscript HN/BUD grammar, BWL or budget-envelope
+dynamic program, blocker semantics, polynomial BudgetResolve, the complete
+no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its
