@@ -1017,6 +1017,18 @@ grammar, BWL, ParseOrExit, H-disjointness, blocker dependencies or
 NoHereditary, polynomial HResolve, BudgetResolve, the complete no-lower ledger,
 unconditional ZeroSlack, or polynomial PCCMin.
 
+The terminal budget-envelope resolver now places a computed finite resource
+boundary over that canonical support universe. Given supplied natural gate and
+saturated-record caps, it saturates each seed in the candidate-derived system,
+requires a nonempty gate and interface support, and recomputes both bounds. A
+feasible support carries either semantic-minimum or strict-equivalent-gain
+evidence; exhaustive search failure excludes every canonical seed and supplies
+the strong \code{NoBudget} branch. The caps remain supplied, and subset search,
+saturation, and reference minimization may be exponential. This is not the
+manuscript HN/BUD grammar, BWL or budget-envelope dynamic program, blocker
+dependency semantics, polynomial BudgetResolve, the complete no-lower ledger,
+unconditional ZeroSlack, or polynomial PCCMin.
+
 \begin{center}
 \begin{tabular}{>{\raggedright\arraybackslash}p{0.48\textwidth}p{0.38\textwidth}}
 \toprule
