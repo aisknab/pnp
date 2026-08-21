@@ -423,6 +423,14 @@ The HN grammar and BUD dynamic programs return exact minima on their governed cl
   strict equivalent gain meanings. The family, implementation, predicates,
   and blocker semantics remain supplied; this is not full HResolve or
   unconditional ZeroSlack.
+- `ResidualTerminalBudgetZeroSlackSidecar`, which replaces the report-facing
+  ZeroSlack certificate's Budget strings with a checked proof-bearing
+  `NoBudget` sidecar. Audit that the stored equation is the actual failed
+  exhaustive terminal-envelope search, that every canonical support is
+  excluded by the recomputed predicate, and that exact and gain routes retain
+  semantic minimum and strict equivalent gain meanings. The caps remain
+  supplied and the search may be exponential; this is not B0--B4 semantics,
+  full or polynomial BudgetResolve, or unconditional ZeroSlack.
 - Local-package and global-proof-DAG records.
 
 **How to test or inspect it**
@@ -969,6 +977,18 @@ Every positive packet has a representative in the polynomial selector universe; 
   Its family, implementation map, route predicates, decidability, and blocker
   semantics remain supplied; it is not full or polynomial HResolve, the
   complete no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin.
+- The proof-bearing Budget ZeroSlack boundary is witnessed by
+  `PNP.BudgetSidecarCertificate.excluded`,
+  `PNP.BudgetSidecarCertificate.no_feasible_support`,
+  `PNP.BudgetSidecarCertificate.exact_route_sound`,
+  `PNP.BudgetSidecarCertificate.gain_route_sound`, and
+  `PNP.budget_zeroslack_sidecar_checked_complete`. The certificate stores the
+  exact failed terminal-envelope search equation instead of strings and derives
+  route semantics from existing kernel theorems. The caps remain supplied and
+  exhaustive enumeration, saturation, and reference minimization may be
+  exponential; this is not the BUD grammar or B0--B4 sidecar, full or
+  polynomial BudgetResolve, the complete no-lower ledger, unconditional
+  ZeroSlack, or polynomial PCCMin.
 - Terminal budget-envelope resolution is witnessed by
   `PNP.DirectWire.TerminalSupportBudget.check_eq_true_iff`,
   `PNP.DirectWire.findTerminalBudgetFeasibleSupport_eq_none_iff`,

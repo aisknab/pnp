@@ -5,20 +5,15 @@ ZeroSlack and oracle certificate layer for the Lean bridge.
 
 This file replaces the opaque PCCMin string handles with structured certificate
 objects for the report's rank-ordered oracle and ZeroSlack contradiction.  The
-HResolve boundary is now a checked proof-bearing finite-family certificate;
+HResolve and Budget boundaries are now checked proof-bearing certificates;
 the remaining fields are still digest/ledger handles in this pass.
 -/
 
 import PNP.ResidualBand
 import PNP.ResidualTerminalHResolveZeroSlackSidecar
+import PNP.ResidualTerminalBudgetZeroSlackSidecar
 
 namespace PNP
-
-/-- Budget sidecar boundary for the oracle. -/
-structure BudgetSidecarCertificate where
-  noBudgetSidecar : String
-  exactMinimumRouteSound : String
-  gainRouteSound : String
 
 /-- Selector-silence ledger boundary. -/
 structure SelectorSilenceCertificate where
