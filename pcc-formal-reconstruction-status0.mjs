@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-21-176';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-22-177';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -512,6 +512,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHResolveCertifiedPathFamilyAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHResolveCertifiedPathFamily.lean',
   'node --test audits/lean-residual-terminal-hresolve-certified-path-family0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHResolveZeroSlackSidecarAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHResolveZeroSlackSidecar.lean',
+  'node --test audits/lean-residual-terminal-hresolve-zeroslack-sidecar0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -568,6 +571,9 @@ const NON_CLAIMS = Object.freeze([
   'The checked finite HResolve coverage ledger computes exact, gain, blocked, or unresolved classification for every member of an arbitrary supplied finite candidate family, recomputes duplicate-free enumeration, generates one route row per candidate, and accepts a NoHereditary sidecar exactly when every listed candidate has neither constructive route and carries a positive blocker predicate. The candidate family and all decidable predicates remain supplied; this does not construct the governed hereditary universe from terminal data, prove HN grammar, BWL exactness, H-disjointness, exact-minimum, strict-gain, or blocker dependency semantics, discharge full HResolve or BudgetResolve, complete the no-lower ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.',
   'The canonical terminal HResolve support resolver removes caller-supplied candidate families and exact/gain predicates for the finite terminal-support branch. It enumerates every canonical seed, derives saturation from the candidate, and computes exact versus strict equivalent gain from reference residual slack. Its subset enumeration and reference minimization may be exponential, and it does not implement HN grammar, BWL, ParseOrExit, H-disjointness, NoHereditary blocker semantics, full or polynomial HResolve, BudgetResolve, complete no-lower, unconditional ZeroSlack, or polynomial PCCMin.',
   'The terminal HResolve maximal H-disjoint-family constructor checks all eight exact interference domains over an arbitrary finite supplied footprint family, selects a governed duplicate-free maximal pairwise H-disjoint subfamily, and assigns every rejected governed candidate a selected blocker with its first exact route. The footprints remain supplied; this does not derive HN leaves, prove BWL or ParseOrExit, establish leaf tightness, construct the full NoHereditary sidecar, connect blockers to HB ranks, complete full or polynomial HResolve or the no-lower ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.',
+  'The terminal HN BWL certified-path minimum computes the exact four-coordinate lexicographic minimum over every nonempty finite supplied proof-bearing path family and extends list minimality to a supplied governed predicate through an explicit completeness premise. The path family and completeness remain supplied; this does not derive accepted HN grammar paths, prove grammar completeness, LN confluence, ParseOrExit, leaf tightness, the full BWL theorem, polynomial HResolve, the complete no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin.',
+  'The terminal HResolve certified-path family composes exact supplied-family BWL minima with maximal eight-domain H-disjoint selection. Every selected supplied candidate carries its minimum and coherence evidence, and every rejection carries a selected blocker and exact first interference route. Candidates, paths, footprints, governed predicates, completeness, and coherence remain supplied; this does not derive terminal candidates, prove HN grammar completeness, ParseOrExit, leaf tightness, the H0-H4 sidecar, full or polynomial HResolve, the complete no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin.',
+  'The proof-bearing HResolve ZeroSlack sidecar replaces three report-facing string handles with the exact executable NoHereditary checker equation and semantic proofs for exact-minimum and strict-equivalent-gain routes. Acceptance recomputes duplicate-free total blocked coverage and excludes both constructive predicates for every listed candidate. The governed family, implementation map, predicates, decidability witnesses, and blocker semantics remain supplied; this does not derive terminal candidates, prove H0-H4 blocker semantics, full or polynomial HResolve, the complete no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin.',
   'The finite terminal budget-envelope resolver searches every canonical terminal support seed against supplied natural gate and saturated-record caps, recomputes candidate-derived saturation, requires nonempty implementation and interface support, and returns a feasible semantic minimum, a feasible strict equivalent gain, or complete NoBudget exclusion for that canonical universe. The caps remain supplied and the support scan plus reference minimization may be exponential. It does not implement the manuscript HN/BUD grammar, BWL, the budget-envelope dynamic program, blocker semantics, polynomial BudgetResolve, complete no-lower, unconditional ZeroSlack, or polynomial PCCMin.',
   'The terminal budget no-lower ledger classifies every canonical terminal support from the same recomputed envelope and actual residual slack, materializes the complete route table, and accepts exactly when every budget-feasible governed support is a semantic minimum and no feasible strict equivalent gain exists. The caps remain supplied and enumeration, saturation, and reference minimization may be exponential. This closes only the finite terminal-derived budget branch; it does not implement the manuscript HN/BUD grammar or polynomial BudgetResolve, compose Packet or the complete no-lower ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.',
   'The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.',
@@ -1890,6 +1896,10 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalHResolveCertifiedPathFamilyAxiomAuditPassed: true,
   leanResidualTerminalHResolveCertifiedPathFamilyScope:
     'all-duplicate-free-finite-supplied-proof-bearing-hereditary-candidates-maximal-H-disjoint-family-with-exact-certified-path-minima-and-selected-blocker-routes',
+  leanResidualTerminalHResolveZeroSlackSidecarFormalized: true,
+  leanResidualTerminalHResolveZeroSlackSidecarAxiomAuditPassed: true,
+  leanResidualTerminalHResolveZeroSlackSidecarScope:
+    'all-arbitrary-finite-proof-bearing-HResolve-NoHereditary-sidecars-with-checked-coverage-and-semantic-exact-gain-bindings',
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
   leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -3097,6 +3107,10 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalHResolveCertifiedPathFamilyAxiomAuditPassed: true,
       leanResidualTerminalHResolveCertifiedPathFamilyScope:
         'all-duplicate-free-finite-supplied-proof-bearing-hereditary-candidates-maximal-H-disjoint-family-with-exact-certified-path-minima-and-selected-blocker-routes',
+      leanResidualTerminalHResolveZeroSlackSidecarFormalized: true,
+      leanResidualTerminalHResolveZeroSlackSidecarAxiomAuditPassed: true,
+      leanResidualTerminalHResolveZeroSlackSidecarScope:
+        'all-arbitrary-finite-proof-bearing-HResolve-NoHereditary-sidecars-with-checked-coverage-and-semantic-exact-gain-bindings',
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
       leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -3176,7 +3190,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-21-176',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-22-177',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

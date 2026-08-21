@@ -1511,6 +1511,17 @@ candidates remain supplied. This does not derive terminal candidates, HN
 grammar completeness, LN confluence, ParseOrExit, leaf tightness, the H0-H4
 sidecar, full or polynomial HResolve, ZeroSlack, or PCCMin.
 
+`lean/PNP/ResidualTerminalHResolveZeroSlackSidecar.lean` upgrades the
+report-facing ZeroSlack boundary itself. Its `HResolveSidecarCertificate`
+stores the exact executable `NoHereditary` checker equation for an arbitrary
+finite supplied governed family and semantic proofs for both exact-minimum and
+strict-equivalent-gain routes; the former three HResolve string fields are no
+longer accepted. Checker reflection yields duplicate-free total blocked
+coverage and constructive-route exclusion. The family, implementation map,
+predicates, decidability witnesses, and blocker semantics remain supplied.
+This is not terminal candidate generation, H0-H4 blocker semantics, full or
+polynomial HResolve, unconditional ZeroSlack, or PCCMin.
+
 `lean/PNP/ResidualTerminalBudgetEnvelopeResolver.lean` adds the next finite BUD
 edge. For supplied natural gate and saturated-record caps, it searches the
 complete canonical terminal support universe, recomputes candidate-derived

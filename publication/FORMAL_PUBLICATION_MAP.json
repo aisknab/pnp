@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-21-176",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-22-177",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3064,7 +3064,14 @@
     "PNP.DirectWire.terminalHResolveGreedyCertifiedPathFamily_nodup": "a133a454e5f3700d5c644bbab7f81649462c36bb77228caf96418361e4613aa4",
     "PNP.DirectWire.terminalHResolveGreedyCertifiedPathFamily_pairwise": "8327cf69dc20a587804765d4747097718daad235528d803169d22462c0f9c46b",
     "PNP.DirectWire.terminalHResolveGreedyCertifiedPathFamily_maximal": "53998173b2aa4fcdf6c200d830bd4081c9e7857c181469e3873372c822cadeae",
-    "PNP.DirectWire.terminal_hresolve_certified_path_family_complete": "afa671a255c4e3e1e840ad632863d9441604275906436d6ff40462af4ce008e9"
+    "PNP.DirectWire.terminal_hresolve_certified_path_family_complete": "afa671a255c4e3e1e840ad632863d9441604275906436d6ff40462af4ce008e9",
+    "PNP.HResolveSidecarCertificate.accepted": "55d744332baf2b97d8f09878f43fbc2a3f1321fb44c98875d1adddc333b0fba9",
+    "PNP.HResolveSidecarCertificate.not_exact": "150bbe27229f80035a9f909cade997afa2a8dc5d764208daa9ffb5c610c7f165",
+    "PNP.HResolveSidecarCertificate.not_gain": "be1830a305f072269dc4b87fcc83431b680c3ac5997228230a3a0e3b258fe552",
+    "PNP.HResolveSidecarCertificate.blocked_of_mem": "a4ef62fd886cc9790b082a46846385e82423096a2cd8441905943b0e495408b4",
+    "PNP.HResolveSidecarCertificate.exact_route_sound": "12972e8b0b6f869bdcca53829b3609cf214b2586eb6e0d5d1ac9541c7755f100",
+    "PNP.HResolveSidecarCertificate.gain_route_sound": "129f4d0176153b831ed957ee92a62c2073e09e09fb778caa66bb4893e629d56d",
+    "PNP.hresolve_zeroslack_sidecar_checked_complete": "fd970a799e2afdcc83b011d3d7476557efe33bdbc48decc563785d1602d89709"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3082,7 +3089,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "015f16685bdacbc122847cc72b17601d2748ed02a8a8ca432f84abff36ae7580",
+  "milestoneSourceClosureSha256": "aaa9e359b91852f852a82688ce61c78d4931fb36ff148e80292b4244f3c92a5b",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -7739,6 +7746,22 @@
       ],
       "scope": "For every duplicate-free finite supplied family of proof-bearing hereditary candidates, Lean constructs a duplicate-free maximal pairwise H-disjoint selected family. Every selected candidate has an exact four-coordinate certified-path minimum preserving semantic, frontier, block, shape, and footprint-coherence evidence; every rejected candidate has a selected blocker carrying the exact first interference route.",
       "title": "Terminal HResolve certified-path family"
+    },
+    {
+      "classification": "formalized-residual-terminal-hresolve-zeroslack-sidecar",
+      "id": "residual-terminal-hresolve-zeroslack-sidecar",
+      "nonClaim": "The governed candidate family, implementation map, exact, gain, and blocked predicates, their decidability, and blocker semantics remain supplied inputs. This milestone does not derive hereditary candidates from terminal data, prove HN grammar soundness or completeness, BWL, ParseOrExit, leaf tightness, H0-H4 blocker semantics, full or polynomial HResolve, complete the no-lower ledger, establish unconditional ZeroSlack, prove PCCMin or polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.HResolveSidecarCertificate.accepted",
+        "PNP.HResolveSidecarCertificate.not_exact",
+        "PNP.HResolveSidecarCertificate.not_gain",
+        "PNP.HResolveSidecarCertificate.blocked_of_mem",
+        "PNP.HResolveSidecarCertificate.exact_route_sound",
+        "PNP.HResolveSidecarCertificate.gain_route_sound",
+        "PNP.hresolve_zeroslack_sidecar_checked_complete"
+      ],
+      "scope": "For every arbitrary finite supplied governed HResolve family, the report-facing ZeroSlack boundary now consumes a checked proof-bearing NoHereditary sidecar: duplicate-free total blocked coverage is recomputed, exact and gain routes are excluded for every listed candidate, and those route predicates are separately bound to semantic minimum and strict equivalent gain propositions.",
+      "title": "Proof-bearing HResolve ZeroSlack sidecar"
     },
     {
       "classification": "formalized-concrete-locked-nand-threshold",

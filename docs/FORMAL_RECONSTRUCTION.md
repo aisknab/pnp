@@ -2178,6 +2178,18 @@ HResolve, the complete no-lower ledger, unconditional ZeroSlack, or PCCMin.
 See
 [`lean_residual_terminal_hresolve_certified_path_family.md`](./lean_residual_terminal_hresolve_certified_path_family.md).
 
+`ResidualTerminalHResolveZeroSlackSidecar` now replaces the report-facing
+ZeroSlack certificate's three HResolve string handles with a checked,
+proof-bearing `NoHereditary` boundary. For every arbitrary finite supplied
+governed family, Lean recomputes duplicate-free total blocked coverage,
+excludes exact and gain routes for every listed candidate, and binds those
+constructive predicates to semantic minimum and strict equivalent gain
+propositions. The family, implementation map, predicates, decidability
+witnesses, and blocker semantics remain supplied. This is not terminal
+candidate derivation, H0-H4 blocker semantics, full or polynomial HResolve,
+the complete no-lower ledger, unconditional ZeroSlack, or PCCMin. See
+[`lean_residual_terminal_hresolve_zeroslack_sidecar.md`](./lean_residual_terminal_hresolve_zeroslack_sidecar.md).
+
 `ResidualTerminalBudgetEnvelopeResolver` now places a computed finite budget
 boundary over that canonical support universe. For supplied natural gate and
 saturated-record caps, each seed is saturated in the candidate-derived system;
