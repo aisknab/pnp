@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-21-172",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-21-173",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3028,7 +3028,11 @@
     "PNP.DirectWire.terminalBudgetNoLowerRouteLedger_sound": "18305b5c8522e34cd549aea56f21101217169772556dfee709ed067d1d67645f",
     "PNP.DirectWire.checkTerminalBudgetNoLowerLedger_eq_true_iff": "61315099cf4bf6e35c28e847dd3ec9a56118f2961a7d7143d3907669e4b6506f",
     "PNP.DirectWire.TerminalBudgetNoLowerLedgerAccepted.iff_all_feasible_minimum": "36c035fb88bd174cb5dbc51ee20c9c4938f12b37a4af9c8623f8a1c430aa351c",
-    "PNP.DirectWire.terminal_budget_no_lower_ledger_excludes_feasible_gain": "9a3865e01a924f3ae5b649153cbf23c6e9f220b19906b8f28c525cc1b0bc01bb"
+    "PNP.DirectWire.terminal_budget_no_lower_ledger_excludes_feasible_gain": "9a3865e01a924f3ae5b649153cbf23c6e9f220b19906b8f28c525cc1b0bc01bb",
+    "PNP.DirectWire.checkTerminalPacketBudgetNoLowerComposition_eq_true_iff": "87b0c2ea3159533827c4a1a3f4c5db18a493304bb2db3d85990bbd7385105bfd",
+    "PNP.DirectWire.terminal_packet_budget_no_lower_composition_excludes_gain_and_packet": "bc323316e68622fca406fce8fe7bd74be6c9c15fcc13c9118f36a93a1b4ed451",
+    "PNP.DirectWire.checkTerminalPacketBudgetNoLowerComposition_eq_false_of_feasible_gain": "8e391c19bc0edcf5a2ddb5f22547cf9a98f3197c12901ebdf250339b01550007",
+    "PNP.DirectWire.TerminalBN6PacketConclusion.checkTerminalPacketBudgetNoLowerComposition_eq_false": "224e93639a4b61fa8be116750fd9bd29039d4f8cdc0cdf969338dfd4cb596cbb"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3046,7 +3050,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "11e4dd1bb6fcc92bce76787ba93a4297fb290c02c05bf52b6f127a32ef05d071",
+  "milestoneSourceClosureSha256": "a3c7d3419433bfb2ce7f27a2a3b34edee657e7283ba818b7e16db7270f720f4b",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -7631,6 +7635,19 @@
       ],
       "scope": "For every finite direct-wire candidate, candidate-derived saturation model, and supplied natural resource caps, Lean classifies every canonical terminal support as exact, strict gain, or NoBudget, materializes the complete route ledger, and proves that accepted exhaustive coverage makes every budget-feasible governed support a semantic minimum while excluding every feasible strict equivalent gain.",
       "title": "Terminal budget no-lower ledger"
+    },
+    {
+      "classification": "formalized-residual-terminal-packet-budget-no-lower-composition",
+      "id": "residual-terminal-packet-budget-no-lower-composition",
+      "nonClaim": "The caps, Packet family, typed payloads, ranks, realizer claims, activity environment, and dependency tables remain supplied. This is a finite two-branch composition, not the complete no-lower ledger. It does not construct Packet data from terminal data, implement HN/BUD grammar, polynomial HResolve or BudgetResolve, cover normalization, remaining named routes, saturation, or replay, establish unconditional ZeroSlack, prove PCCMin or polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.checkTerminalPacketBudgetNoLowerComposition_eq_true_iff",
+        "PNP.DirectWire.terminal_packet_budget_no_lower_composition_excludes_gain_and_packet",
+        "PNP.DirectWire.checkTerminalPacketBudgetNoLowerComposition_eq_false_of_feasible_gain",
+        "PNP.DirectWire.TerminalBN6PacketConclusion.checkTerminalPacketBudgetNoLowerComposition_eq_false"
+      ],
+      "scope": "For every finite direct-wire candidate, candidate-derived saturation model, supplied caps, and supplied Packet family and tables over that same direct-wire candidate, one Boolean recomputes both finite ledgers. Acceptance makes every governed budget-feasible canonical support a semantic minimum, excludes every feasible strict equivalent gain, and excludes a positive Packet conclusion.",
+      "title": "Terminal Packet-budget no-lower composition"
     },
     {
       "classification": "formalized-concrete-locked-nand-threshold",

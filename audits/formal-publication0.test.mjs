@@ -3224,6 +3224,29 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /caps remain supplied.*exhaustive.*may be exponential/u);
   assert.match(terminalBudgetNoLowerLedger.nonClaim,
     /polynomial BudgetResolve.*complete no-lower.*ZeroSlack.*PCCMin/u);
+  const terminalPacketBudgetNoLowerComposition = byId.get(
+    'residual-terminal-packet-budget-no-lower-composition',
+  );
+  assert.equal(terminalPacketBudgetNoLowerComposition.status,
+    'formalized-residual-terminal-packet-budget-no-lower-composition');
+  assert.equal(terminalPacketBudgetNoLowerComposition.earned, true);
+  assert.equal(
+    terminalPacketBudgetNoLowerComposition
+      .axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.equal(
+    terminalPacketBudgetNoLowerComposition.requiredTheorems.length,
+    4,
+  );
+  assert.match(terminalPacketBudgetNoLowerComposition.scope,
+    /same direct-wire candidate.*budget-feasible.*positive Packet/u);
+  assert.match(terminalPacketBudgetNoLowerComposition.scope,
+    /one Boolean|one checker/u);
+  assert.match(terminalPacketBudgetNoLowerComposition.nonClaim,
+    /caps.*Packet family.*tables.*supplied/u);
+  assert.match(terminalPacketBudgetNoLowerComposition.nonClaim,
+    /finite two-branch.*not.*complete no-lower.*ZeroSlack.*PCCMin/u);
   const lockedNANDThreshold = byId.get('global-locked-nand-threshold');
   assert.equal(lockedNANDThreshold.status,
     'formalized-concrete-locked-nand-threshold');

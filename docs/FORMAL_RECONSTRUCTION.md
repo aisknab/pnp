@@ -2164,6 +2164,19 @@ or complete no-lower composition, unconditional ZeroSlack, or polynomial
 PCCMin. See
 [`lean_residual_terminal_budget_no_lower_ledger.md`](./lean_residual_terminal_budget_no_lower_ledger.md).
 
+`ResidualTerminalPacketBudgetNoLowerComposition` now binds that canonical
+budget-support ledger to the checked five-row Packet ledger over the same
+direct-wire candidate. One Boolean recomputes both component checkers, and its
+reflection theorem exposes their exact conjunction. Acceptance simultaneously
+makes every budget-feasible governed support a semantic minimum, excludes
+every such support's strict-equivalent-gain witness, and excludes a positive
+Packet for the supplied grouped family and tables. The budget caps, Packet
+family, typed payloads, ranks, realizer claims, activity environment, and
+dependency rows remain supplied. This is a finite two-branch composition, not
+the complete no-lower ledger, unconditional ZeroSlack, polynomial PCCMin, or a
+derivation of Packet data from terminal data. See
+[`lean_residual_terminal_packet_budget_no_lower_composition.md`](./lean_residual_terminal_packet_budget_no_lower_composition.md).
+
 ## The only acceptable future activation gate
 
 Public theorem emission may be reconsidered only when all of the following are mechanically true:

@@ -1406,6 +1406,18 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalBudgetNoLowerLedgerScope,
     'all-finite-direct-wire-candidates-terminal-derived-budget-feasible-gain-exclusion-over-complete-canonical-support-ledger',
   );
+  assert.equal(
+    out.leanResidualTerminalPacketBudgetNoLowerCompositionFormalized,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalPacketBudgetNoLowerCompositionAxiomAuditPassed,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalPacketBudgetNoLowerCompositionScope,
+    'all-finite-direct-wire-candidates-same-candidate-terminal-budget-and-Packet-two-branch-no-lower-gain-and-positive-Packet-exclusion',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',

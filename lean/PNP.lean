@@ -85,6 +85,7 @@ import PNP.ResidualTerminalPacketNoLowerLedger
 import PNP.ResidualTerminalHResolveSupportResolver
 import PNP.ResidualTerminalBudgetEnvelopeResolver
 import PNP.ResidualTerminalBudgetNoLowerLedger
+import PNP.ResidualTerminalPacketBudgetNoLowerComposition
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine
