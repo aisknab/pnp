@@ -2149,6 +2149,20 @@ rank semantics, full or polynomial HResolve, the complete no-lower ledger,
 unconditional ZeroSlack, and PCCMin remain open. See
 [`lean_residual_terminal_hresolve_maximal_h_disjoint_family.md`](./lean_residual_terminal_hresolve_maximal_h_disjoint_family.md).
 
+`ResidualTerminalHNBWLCertifiedPathMinimum` now formalizes the separate
+finite minimization kernel at manuscript Section 8.1. Every supplied path
+carries a pair, tripod, spine, or non-flat shape, a nonempty block
+decomposition covering its support, a semantically equivalent direct-wire
+realization, and exact frontier fidelity. Its BWL objective derives cost from
+that realization and then compares residual rank, frontier deviation, and
+direct-wire code. The deterministic selector is proved to return a listed
+minimum; an explicit family-completeness premise lifts the lower bound to
+every governed path. The certified family and its completeness remain
+supplied. This is not path derivation, grammar completeness, LN confluence,
+ParseOrExit, leaf tightness, the full BWL theorem, polynomial HResolve, the
+complete no-lower ledger, unconditional ZeroSlack, or PCCMin. See
+[`lean_residual_terminal_hn_bwl_certified_path_minimum.md`](./lean_residual_terminal_hn_bwl_certified_path_minimum.md).
+
 `ResidualTerminalBudgetEnvelopeResolver` now places a computed finite budget
 boundary over that canonical support universe. For supplied natural gate and
 saturated-record caps, each seed is saturated in the candidate-derived system;

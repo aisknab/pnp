@@ -606,6 +606,16 @@ interference route. The footprints are not terminal-derived here, and HN,
 BWL, ParseOrExit, leaf tightness, the complete `NoHereditary` sidecar, full
 HResolve, the complete no-lower ledger, ZeroSlack, and PCCMin remain open.
 
+The terminal HN BWL certified-path-minimum milestone now formalizes exact
+four-coordinate lexicographic selection over a nonempty finite supplied path
+family. Every path carries a hereditary shape, nonempty block decomposition,
+semantic-equivalence proof, and frontier-fidelity proof; cost is derived from
+the realized gate count. The selected path is listed and lower-bounds every
+governed alternative under an explicit family-completeness premise. The path
+family remains supplied. This is not accepted-grammar generation or
+completeness, LN confluence, ParseOrExit, leaf tightness, the full BWL theorem,
+polynomial HResolve, the complete no-lower ledger, ZeroSlack, or PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

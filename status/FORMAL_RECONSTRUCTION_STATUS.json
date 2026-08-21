@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-21-174",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-21-175",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -983,6 +983,9 @@
   "leanResidualTerminalHResolveHDisjointFamilyFormalized": true,
   "leanResidualTerminalHResolveHDisjointFamilyAxiomAuditPassed": true,
   "leanResidualTerminalHResolveHDisjointFamilyScope": "all-arbitrary-finite-supplied-eight-domain-hereditary-footprints-deterministic-maximal-H-disjoint-family-with-exact-selected-blocker-routes",
+  "leanResidualTerminalHNBWLCertifiedPathMinimumFormalized": true,
+  "leanResidualTerminalHNBWLCertifiedPathMinimumAxiomAuditPassed": true,
+  "leanResidualTerminalHNBWLCertifiedPathMinimumScope": "all-nonempty-finite-supplied-four-coordinate-certified-path-families-exact-lexicographic-minimum-with-explicit-governed-family-completeness",
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -1602,6 +1605,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHResolveHDisjointFamilyAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHResolveHDisjointFamily.lean",
     "node --test audits/lean-residual-terminal-hresolve-maximal-h-disjoint-family0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHNBWLCertifiedPathMinimumAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHNBWLCertifiedPathMinimum.lean",
+    "node --test audits/lean-residual-terminal-hn-bwl-certified-path-minimum0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1817,7 +1823,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "b0890ab07937a7d9afbc8cafe20f7c4317db0466e684575392c017f3a4ea9fc3",
+    "actualSourceClosureSha256": "e5feefa96668283c5f690e80a9d68f0dd400e5c017e32d18491dd5ee593d2c6a",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1847,22 +1853,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-21-174",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-21-175",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "cb066150366ad0e870f5139ed056a028c16f887604b40371ef18adaefb5b414d",
+  "leanTheoremInventorySha256": "b5c50100ca3357c488a70c82f3a9cfc157cbc15aea3581c6266bdf0950f9b343",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 29699,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 15120,
-  "leanTheoremInventoryTheoremCount": 15353,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 7580,
-  "leanTheoremInventorySourceClosureModuleCount": 291,
-  "leanSourceClosureSha256": "b0890ab07937a7d9afbc8cafe20f7c4317db0466e684575392c017f3a4ea9fc3",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-21-174",
+  "leanTheoremInventoryDeclarationCount": 29836,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 15131,
+  "leanTheoremInventoryTheoremCount": 15403,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 7620,
+  "leanTheoremInventorySourceClosureModuleCount": 292,
+  "leanSourceClosureSha256": "e5feefa96668283c5f690e80a9d68f0dd400e5c017e32d18491dd5ee593d2c6a",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-21-175",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "35437ec7ff5312759a5b0a85caab29700a48c840f7eb7e24f9896d86f1747221",
+  "formalPublicationMapSha256": "08025055e79fc40b9d0f5baf98bf6d9abb3f9e77a1c29beba1d3b0defa11339f",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -44912,6 +44918,190 @@
       "status": "formalized-residual-terminal-hresolve-maximal-h-disjoint-family"
     },
     {
+      "classification": "formalized-residual-terminal-hn-bwl-certified-path-minimum",
+      "id": "residual-terminal-hn-bwl-certified-path-minimum",
+      "nonClaim": "The certified path family, governed predicate, and family completeness remain supplied inputs. This milestone does not derive accepted paths from terminal data, prove shape-grammar soundness or completeness, LN confluence, ParseOrExit, independent leaf tightness, or the full BWL theorem, solve a leaf, construct the H0-H4 NoHereditary sidecar, implement full HResolve, complete the no-lower ledger, establish unconditional ZeroSlack, prove PCCMin or polynomial generation and runtime, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.checkTerminalNatVectorLexLE_eq_true_iff",
+        "PNP.DirectWire.terminalNatVectorLexLE_total_of_length_eq",
+        "PNP.DirectWire.terminalNatVectorLexLE_refl",
+        "PNP.DirectWire.terminalNatVectorLexLE_trans",
+        "PNP.DirectWire.TerminalHNBWLObjective.checkLexLE_eq_true_iff",
+        "PNP.DirectWire.TerminalHNBWLObjective.lexLE_refl",
+        "PNP.DirectWire.TerminalHNBWLObjective.lexLE_total",
+        "PNP.DirectWire.TerminalHNBWLObjective.lexLE_trans",
+        "PNP.DirectWire.terminalHNBWLChoose_eq_left_or_right",
+        "PNP.DirectWire.terminalHNBWLChoose_lexLE_left",
+        "PNP.DirectWire.terminalHNBWLChoose_lexLE_right",
+        "PNP.DirectWire.terminalHNBWLMinimum?_eq_none_iff",
+        "PNP.DirectWire.terminalHNBWLMinimum?_sound",
+        "PNP.DirectWire.terminalHNBWLMinimum?_exists_of_ne_nil",
+        "PNP.DirectWire.terminal_hn_bwl_certified_path_minimum_complete"
+      ],
+      "scope": "For every nonempty finite supplied family of certified hereditary paths, Lean computes the exact four-coordinate lexicographic minimum by realized cost, residual rank, frontier deviation, and direct-wire code. The selected member preserves semantic fidelity, frontier fidelity, nonempty block coverage, and one of four HN shapes; an explicit completeness premise extends its lower bound to every path in the supplied governed predicate.",
+      "title": "Terminal HN BWL certified-path minimum",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.checkTerminalNatVectorLexLE_eq_true_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "1d06a97fd7f748cf57fa79b1a60a053e008e5274e145b42ec00c165b91440dc5",
+          "expectedKernelTypeSha256": "1d06a97fd7f748cf57fa79b1a60a053e008e5274e145b42ec00c165b91440dc5",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalNatVectorLexLE_total_of_length_eq",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "488506033db9fd823277f370c9d22109776728339e378c3d96999bd93f55851d",
+          "expectedKernelTypeSha256": "488506033db9fd823277f370c9d22109776728339e378c3d96999bd93f55851d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalNatVectorLexLE_refl",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "0ecda227d6cabf9cf9ffa51c1d7b8754cca8230b58a8293c3c35ad5ea62ea603",
+          "expectedKernelTypeSha256": "0ecda227d6cabf9cf9ffa51c1d7b8754cca8230b58a8293c3c35ad5ea62ea603",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalNatVectorLexLE_trans",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "d3acbda51a53d19fd5a10a04658aa727b1b77762efb09e9e4e3bd8cfdf7c8948",
+          "expectedKernelTypeSha256": "d3acbda51a53d19fd5a10a04658aa727b1b77762efb09e9e4e3bd8cfdf7c8948",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalHNBWLObjective.checkLexLE_eq_true_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "de254f24492b2bb71bba226789807e836329570ea943347b824693450cd98fdb",
+          "expectedKernelTypeSha256": "de254f24492b2bb71bba226789807e836329570ea943347b824693450cd98fdb",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalHNBWLObjective.lexLE_refl",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "531648222febca4b35e2df7fe2dab44a350aa50f1e77c4f601017fd289afee53",
+          "expectedKernelTypeSha256": "531648222febca4b35e2df7fe2dab44a350aa50f1e77c4f601017fd289afee53",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalHNBWLObjective.lexLE_total",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "4d311abcde5d778e771a8b1676df1bc2760e65d23cb59e47106f3feb2b071c6f",
+          "expectedKernelTypeSha256": "4d311abcde5d778e771a8b1676df1bc2760e65d23cb59e47106f3feb2b071c6f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalHNBWLObjective.lexLE_trans",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "eb9187fcf760208e67646c15d389b640007b9527456e1904f5714297c27d12ef",
+          "expectedKernelTypeSha256": "eb9187fcf760208e67646c15d389b640007b9527456e1904f5714297c27d12ef",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHNBWLChoose_eq_left_or_right",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "d62799fda97f2aee33ecf46682db164ec869203999b2f56547ca2865df171bda",
+          "expectedKernelTypeSha256": "d62799fda97f2aee33ecf46682db164ec869203999b2f56547ca2865df171bda",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHNBWLChoose_lexLE_left",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ff6c4ac17c938c02b5466df8abedce31acceaa04453e3e2a5e71a8b0c21141da",
+          "expectedKernelTypeSha256": "ff6c4ac17c938c02b5466df8abedce31acceaa04453e3e2a5e71a8b0c21141da",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHNBWLChoose_lexLE_right",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "96bf5e9bc018ff1f96e19018f9919cf083c5509abcdfe2d264290912def78a03",
+          "expectedKernelTypeSha256": "96bf5e9bc018ff1f96e19018f9919cf083c5509abcdfe2d264290912def78a03",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHNBWLMinimum?_eq_none_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "64141090dfed234bb678fb9d758bb2b7b0af8c470fee411a6c0593e400b42055",
+          "expectedKernelTypeSha256": "64141090dfed234bb678fb9d758bb2b7b0af8c470fee411a6c0593e400b42055",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHNBWLMinimum?_sound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "49fe1209297af83ac6d68bfa95c5e9c559b2f9d32176000ad2ad33231dd9309d",
+          "expectedKernelTypeSha256": "49fe1209297af83ac6d68bfa95c5e9c559b2f9d32176000ad2ad33231dd9309d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHNBWLMinimum?_exists_of_ne_nil",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9a53ee168de637d01731595a4d0b3c96af2039cecef531a0d4fe62a47888b634",
+          "expectedKernelTypeSha256": "9a53ee168de637d01731595a4d0b3c96af2039cecef531a0d4fe62a47888b634",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminal_hn_bwl_certified_path_minimum_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "fd5a191f5cc72cab4e766e663becaee9d07366c6ba347a897ad8a3b03d9e2d25",
+          "expectedKernelTypeSha256": "fd5a191f5cc72cab4e766e663becaee9d07366c6ba347a897ad8a3b03d9e2d25",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-hn-bwl-certified-path-minimum"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -45009,7 +45199,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-21-174",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-21-175",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

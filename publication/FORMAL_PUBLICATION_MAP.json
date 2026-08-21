@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-21-174",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-21-175",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3042,7 +3042,22 @@
     "PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_nodup": "896faf43d23d8e2d0210448545bca6de79ec0951a2cb9673112eaf6d3a3de042",
     "PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_pairwise": "e1c0f61959f5d6a31418a17f5e7009ac6eace3f2106763dd6fa9e0355714348a",
     "PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_maximal": "16910cce3352126a72da9cfb84ca13c65ebe04e8fc3f8aa7989d452745f2ee09",
-    "PNP.DirectWire.terminal_hresolve_maximal_hdisjoint_family_complete": "cd3be2c48949ee1746e78094c9459c1e8ea664f5b210a1243a27a0d7d1af472c"
+    "PNP.DirectWire.terminal_hresolve_maximal_hdisjoint_family_complete": "cd3be2c48949ee1746e78094c9459c1e8ea664f5b210a1243a27a0d7d1af472c",
+    "PNP.DirectWire.checkTerminalNatVectorLexLE_eq_true_iff": "1d06a97fd7f748cf57fa79b1a60a053e008e5274e145b42ec00c165b91440dc5",
+    "PNP.DirectWire.terminalNatVectorLexLE_total_of_length_eq": "488506033db9fd823277f370c9d22109776728339e378c3d96999bd93f55851d",
+    "PNP.DirectWire.terminalNatVectorLexLE_refl": "0ecda227d6cabf9cf9ffa51c1d7b8754cca8230b58a8293c3c35ad5ea62ea603",
+    "PNP.DirectWire.terminalNatVectorLexLE_trans": "d3acbda51a53d19fd5a10a04658aa727b1b77762efb09e9e4e3bd8cfdf7c8948",
+    "PNP.DirectWire.TerminalHNBWLObjective.checkLexLE_eq_true_iff": "de254f24492b2bb71bba226789807e836329570ea943347b824693450cd98fdb",
+    "PNP.DirectWire.TerminalHNBWLObjective.lexLE_refl": "531648222febca4b35e2df7fe2dab44a350aa50f1e77c4f601017fd289afee53",
+    "PNP.DirectWire.TerminalHNBWLObjective.lexLE_total": "4d311abcde5d778e771a8b1676df1bc2760e65d23cb59e47106f3feb2b071c6f",
+    "PNP.DirectWire.TerminalHNBWLObjective.lexLE_trans": "eb9187fcf760208e67646c15d389b640007b9527456e1904f5714297c27d12ef",
+    "PNP.DirectWire.terminalHNBWLChoose_eq_left_or_right": "d62799fda97f2aee33ecf46682db164ec869203999b2f56547ca2865df171bda",
+    "PNP.DirectWire.terminalHNBWLChoose_lexLE_left": "ff6c4ac17c938c02b5466df8abedce31acceaa04453e3e2a5e71a8b0c21141da",
+    "PNP.DirectWire.terminalHNBWLChoose_lexLE_right": "96bf5e9bc018ff1f96e19018f9919cf083c5509abcdfe2d264290912def78a03",
+    "PNP.DirectWire.terminalHNBWLMinimum?_eq_none_iff": "64141090dfed234bb678fb9d758bb2b7b0af8c470fee411a6c0593e400b42055",
+    "PNP.DirectWire.terminalHNBWLMinimum?_sound": "49fe1209297af83ac6d68bfa95c5e9c559b2f9d32176000ad2ad33231dd9309d",
+    "PNP.DirectWire.terminalHNBWLMinimum?_exists_of_ne_nil": "9a53ee168de637d01731595a4d0b3c96af2039cecef531a0d4fe62a47888b634",
+    "PNP.DirectWire.terminal_hn_bwl_certified_path_minimum_complete": "fd5a191f5cc72cab4e766e663becaee9d07366c6ba347a897ad8a3b03d9e2d25"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3060,7 +3075,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "b0890ab07937a7d9afbc8cafe20f7c4317db0466e684575392c017f3a4ea9fc3",
+  "milestoneSourceClosureSha256": "e5feefa96668283c5f690e80a9d68f0dd400e5c017e32d18491dd5ee593d2c6a",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -7677,6 +7692,30 @@
       ],
       "scope": "For every arbitrary finite duplicate-free family of supplied hereditary footprints over eight decidable coordinate domains, Lean deterministically constructs a governed duplicate-free maximal pairwise H-disjoint family. Every rejected governed candidate has a selected blocker carrying the exact first support, frontier, origin, kernel, obligation, prefix-tail, charge, or interface interference route.",
       "title": "Terminal HResolve maximal H-disjoint family"
+    },
+    {
+      "classification": "formalized-residual-terminal-hn-bwl-certified-path-minimum",
+      "id": "residual-terminal-hn-bwl-certified-path-minimum",
+      "nonClaim": "The certified path family, governed predicate, and family completeness remain supplied inputs. This milestone does not derive accepted paths from terminal data, prove shape-grammar soundness or completeness, LN confluence, ParseOrExit, independent leaf tightness, or the full BWL theorem, solve a leaf, construct the H0-H4 NoHereditary sidecar, implement full HResolve, complete the no-lower ledger, establish unconditional ZeroSlack, prove PCCMin or polynomial generation and runtime, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.checkTerminalNatVectorLexLE_eq_true_iff",
+        "PNP.DirectWire.terminalNatVectorLexLE_total_of_length_eq",
+        "PNP.DirectWire.terminalNatVectorLexLE_refl",
+        "PNP.DirectWire.terminalNatVectorLexLE_trans",
+        "PNP.DirectWire.TerminalHNBWLObjective.checkLexLE_eq_true_iff",
+        "PNP.DirectWire.TerminalHNBWLObjective.lexLE_refl",
+        "PNP.DirectWire.TerminalHNBWLObjective.lexLE_total",
+        "PNP.DirectWire.TerminalHNBWLObjective.lexLE_trans",
+        "PNP.DirectWire.terminalHNBWLChoose_eq_left_or_right",
+        "PNP.DirectWire.terminalHNBWLChoose_lexLE_left",
+        "PNP.DirectWire.terminalHNBWLChoose_lexLE_right",
+        "PNP.DirectWire.terminalHNBWLMinimum?_eq_none_iff",
+        "PNP.DirectWire.terminalHNBWLMinimum?_sound",
+        "PNP.DirectWire.terminalHNBWLMinimum?_exists_of_ne_nil",
+        "PNP.DirectWire.terminal_hn_bwl_certified_path_minimum_complete"
+      ],
+      "scope": "For every nonempty finite supplied family of certified hereditary paths, Lean computes the exact four-coordinate lexicographic minimum by realized cost, residual rank, frontier deviation, and direct-wire code. The selected member preserves semantic fidelity, frontier fidelity, nonempty block coverage, and one of four HN shapes; an explicit completeness premise extends its lower bound to every path in the supplied governed predicate.",
+      "title": "Terminal HN BWL certified-path minimum"
     },
     {
       "classification": "formalized-concrete-locked-nand-threshold",
