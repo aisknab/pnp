@@ -409,6 +409,13 @@ The HN grammar and BUD dynamic programs return exact minima on their governed cl
   family-completeness premise. Audit the missing connection from accepted HN
   grammar to that supplied family; this is not ParseOrExit, leaf tightness,
   the full BWL theorem, or polynomial HResolve.
+- `ResidualTerminalHResolveCertifiedPathFamily`, which equips every supplied
+  candidate with its own complete certified-path family and coherently
+  composes exact BWL minima with maximal eight-domain H-disjoint selection.
+  Audit the still-supplied candidates, paths, footprints, completeness, and
+  coherence proofs. This is not their terminal derivation, accepted-grammar
+  completeness, ParseOrExit, leaf tightness, the H0-H4 sidecar, or full or
+  polynomial HResolve.
 - Local-package and global-proof-DAG records.
 
 **How to test or inspect it**

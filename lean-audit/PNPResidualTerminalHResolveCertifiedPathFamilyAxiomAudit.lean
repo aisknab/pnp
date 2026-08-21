@@ -1,0 +1,15 @@
+import PNP.ResidualTerminalHResolveCertifiedPathFamily
+
+#print axioms PNP.DirectWire.TerminalHResolveCertifiedPathCandidate
+#print axioms PNP.DirectWire.TerminalHResolveCertifiedPathCandidate.HDisjoint
+#print axioms PNP.DirectWire.TerminalHResolveCertifiedPathCandidate.checkHDisjoint
+#print axioms PNP.DirectWire.TerminalHResolveCertifiedPathCandidate.checkHDisjoint_eq_true_iff
+#print axioms PNP.DirectWire.TerminalHResolveCertifiedPathCandidate.firstInterference?
+#print axioms PNP.DirectWire.TerminalHResolveCertifiedPathCandidate.minimum?
+#print axioms PNP.DirectWire.TerminalHResolveCertifiedPathCandidate.minimum?_complete
+#print axioms PNP.DirectWire.terminalHResolveGreedyCertifiedPathFamily
+#print axioms PNP.DirectWire.terminalHResolveGreedyCertifiedPathFamily_subset
+#print axioms PNP.DirectWire.terminalHResolveGreedyCertifiedPathFamily_nodup
+#print axioms PNP.DirectWire.terminalHResolveGreedyCertifiedPathFamily_pairwise
+#print axioms PNP.DirectWire.terminalHResolveGreedyCertifiedPathFamily_maximal
+#print axioms PNP.DirectWire.terminal_hresolve_certified_path_family_complete
