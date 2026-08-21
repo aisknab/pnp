@@ -8,6 +8,7 @@ import PNP.NANDComposition
 import PNP.NANDSlack
 import PNP.ResidualRoutes
 import PNP.ResidualTerminalHResolveCoverageLedger
+import PNP.ResidualTerminalHResolveZeroSlackSidecar
 import PNP.ResidualTerminalHResolveHDisjointFamily
 import PNP.ResidualTerminalHResolveCertifiedPathFamily
 import PNP.ResidualGainChain

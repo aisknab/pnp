@@ -1,0 +1,10 @@
+import PNP.ResidualTerminalHResolveZeroSlackSidecar
+
+#print axioms PNP.HResolveSidecarCertificate
+#print axioms PNP.HResolveSidecarCertificate.accepted
+#print axioms PNP.HResolveSidecarCertificate.not_exact
+#print axioms PNP.HResolveSidecarCertificate.not_gain
+#print axioms PNP.HResolveSidecarCertificate.blocked_of_mem
+#print axioms PNP.HResolveSidecarCertificate.exact_route_sound
+#print axioms PNP.HResolveSidecarCertificate.gain_route_sound
+#print axioms PNP.hresolve_zeroslack_sidecar_checked_complete

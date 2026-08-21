@@ -416,6 +416,13 @@ The HN grammar and BUD dynamic programs return exact minima on their governed cl
   coherence proofs. This is not their terminal derivation, accepted-grammar
   completeness, ParseOrExit, leaf tightness, the H0-H4 sidecar, or full or
   polynomial HResolve.
+- `ResidualTerminalHResolveZeroSlackSidecar`, which replaces the report-facing
+  ZeroSlack certificate's HResolve strings with a checked proof-bearing
+  `NoHereditary` sidecar. Audit that duplicate-free total blocked coverage is
+  recomputed and that exact and gain predicates carry semantic minimum and
+  strict equivalent gain meanings. The family, implementation, predicates,
+  and blocker semantics remain supplied; this is not full HResolve or
+  unconditional ZeroSlack.
 - Local-package and global-proof-DAG records.
 
 **How to test or inspect it**
@@ -953,6 +960,15 @@ Every positive packet has a representative in the polynomial selector universe; 
   HN grammar, BWL, ParseOrExit, H-disjointness, NoHereditary blocker semantics,
   polynomial HResolve, BudgetResolve, the complete no-lower ledger,
   unconditional ZeroSlack, or polynomial PCCMin.
+- The proof-bearing HResolve ZeroSlack boundary is witnessed by
+  `PNP.HResolveSidecarCertificate.accepted`,
+  `PNP.HResolveSidecarCertificate.exact_route_sound`,
+  `PNP.HResolveSidecarCertificate.gain_route_sound`, and
+  `PNP.hresolve_zeroslack_sidecar_checked_complete`. The certificate stores the
+  executable checker equation and semantic route proofs instead of strings.
+  Its family, implementation map, route predicates, decidability, and blocker
+  semantics remain supplied; it is not full or polynomial HResolve, the
+  complete no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin.
 - Terminal budget-envelope resolution is witnessed by
   `PNP.DirectWire.TerminalSupportBudget.check_eq_true_iff`,
   `PNP.DirectWire.findTerminalBudgetFeasibleSupport_eq_none_iff`,

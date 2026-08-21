@@ -627,6 +627,18 @@ terminal candidate generation, accepted-grammar completeness, LN confluence,
 ParseOrExit, leaf tightness, the H0-H4 sidecar, full or polynomial HResolve,
 the complete no-lower ledger, ZeroSlack, or PCCMin.
 
+The proof-bearing HResolve ZeroSlack sidecar milestone then upgrades the
+report-facing certificate boundary. Instead of accepting HResolve input,
+implementation, and `NoHereditary` strings, Lean consumes an arbitrary finite
+supplied governed family and the exact Boolean equation returned by the
+existing total-coverage checker. Acceptance proves duplicate-free blocked
+coverage and excludes exact and gain routes for every listed candidate; the
+two route predicates are separately bound to semantic minimum and strict
+equivalent gain propositions. The family, implementation map, predicates,
+decidability witnesses, and blocker semantics remain supplied. This is not
+full or polynomial HResolve, the complete no-lower ledger, unconditional
+ZeroSlack, or polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its
