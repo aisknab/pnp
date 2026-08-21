@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-21-173",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-21-174",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3032,7 +3032,17 @@
     "PNP.DirectWire.checkTerminalPacketBudgetNoLowerComposition_eq_true_iff": "87b0c2ea3159533827c4a1a3f4c5db18a493304bb2db3d85990bbd7385105bfd",
     "PNP.DirectWire.terminal_packet_budget_no_lower_composition_excludes_gain_and_packet": "bc323316e68622fca406fce8fe7bd74be6c9c15fcc13c9118f36a93a1b4ed451",
     "PNP.DirectWire.checkTerminalPacketBudgetNoLowerComposition_eq_false_of_feasible_gain": "8e391c19bc0edcf5a2ddb5f22547cf9a98f3197c12901ebdf250339b01550007",
-    "PNP.DirectWire.TerminalBN6PacketConclusion.checkTerminalPacketBudgetNoLowerComposition_eq_false": "224e93639a4b61fa8be116750fd9bd29039d4f8cdc0cdf969338dfd4cb596cbb"
+    "PNP.DirectWire.TerminalBN6PacketConclusion.checkTerminalPacketBudgetNoLowerComposition_eq_false": "224e93639a4b61fa8be116750fd9bd29039d4f8cdc0cdf969338dfd4cb596cbb",
+    "PNP.DirectWire.checkTerminalHCoordinateDisjoint_eq_true_iff": "005791015cc4d09ba0901036af84dca5e7260887531a603feaf64125700ca264",
+    "PNP.DirectWire.terminalHCoordinateDisjoint_symm": "695e82fd3e7b52a1868179504e74efdc886dc3e7ab0b1c964eecdfcd0268b638",
+    "PNP.DirectWire.TerminalHereditaryFootprint.checkHDisjoint_eq_true_iff": "12661a1dbd2ae24573724fbaa1f7f4c531d42f58af8819cf5275714b473f5078",
+    "PNP.DirectWire.TerminalHereditaryFootprint.hDisjoint_symm": "3e0cd6541bc41e20a07b64d34334fbeb37c7edef21ba3426e65800b45e98d941",
+    "PNP.DirectWire.TerminalHereditaryFootprint.firstInterference?_eq_none_iff_hDisjoint": "968780b78a938a588fcae3bf585b57acdcc9d7f4edae239979dbabd9939bb8fb",
+    "PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_subset": "515188d2371fa817cbc9320ff388e2f11009df76bda4751389342f73266beffb",
+    "PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_nodup": "896faf43d23d8e2d0210448545bca6de79ec0951a2cb9673112eaf6d3a3de042",
+    "PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_pairwise": "e1c0f61959f5d6a31418a17f5e7009ac6eace3f2106763dd6fa9e0355714348a",
+    "PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_maximal": "16910cce3352126a72da9cfb84ca13c65ebe04e8fc3f8aa7989d452745f2ee09",
+    "PNP.DirectWire.terminal_hresolve_maximal_hdisjoint_family_complete": "cd3be2c48949ee1746e78094c9459c1e8ea664f5b210a1243a27a0d7d1af472c"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3050,7 +3060,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "a3c7d3419433bfb2ce7f27a2a3b34edee657e7283ba818b7e16db7270f720f4b",
+  "milestoneSourceClosureSha256": "b0890ab07937a7d9afbc8cafe20f7c4317db0466e684575392c017f3a4ea9fc3",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -7648,6 +7658,25 @@
       ],
       "scope": "For every finite direct-wire candidate, candidate-derived saturation model, supplied caps, and supplied Packet family and tables over that same direct-wire candidate, one Boolean recomputes both finite ledgers. Acceptance makes every governed budget-feasible canonical support a semantic minimum, excludes every feasible strict equivalent gain, and excludes a positive Packet conclusion.",
       "title": "Terminal Packet-budget no-lower composition"
+    },
+    {
+      "classification": "formalized-residual-terminal-hresolve-maximal-h-disjoint-family",
+      "id": "residual-terminal-hresolve-maximal-h-disjoint-family",
+      "nonClaim": "The hereditary footprints remain supplied inputs. This milestone does not derive them from a terminal candidate, formalize the HN pair/tripod/spine/non-flat grammar, prove BWL exactness or ParseOrExit, establish leaf tightness or solve a leaf, construct the full H0-H4 NoHereditary sidecar, connect blockers to HB ranks, implement full HResolve, complete the no-lower ledger, establish unconditional ZeroSlack, prove PCCMin or polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.checkTerminalHCoordinateDisjoint_eq_true_iff",
+        "PNP.DirectWire.terminalHCoordinateDisjoint_symm",
+        "PNP.DirectWire.TerminalHereditaryFootprint.checkHDisjoint_eq_true_iff",
+        "PNP.DirectWire.TerminalHereditaryFootprint.hDisjoint_symm",
+        "PNP.DirectWire.TerminalHereditaryFootprint.firstInterference?_eq_none_iff_hDisjoint",
+        "PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_subset",
+        "PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_nodup",
+        "PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_pairwise",
+        "PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_maximal",
+        "PNP.DirectWire.terminal_hresolve_maximal_hdisjoint_family_complete"
+      ],
+      "scope": "For every arbitrary finite duplicate-free family of supplied hereditary footprints over eight decidable coordinate domains, Lean deterministically constructs a governed duplicate-free maximal pairwise H-disjoint family. Every rejected governed candidate has a selected blocker carrying the exact first support, frontier, origin, kernel, obligation, prefix-tail, charge, or interface interference route.",
+      "title": "Terminal HResolve maximal H-disjoint family"
     },
     {
       "classification": "formalized-concrete-locked-nand-threshold",

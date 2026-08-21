@@ -393,6 +393,14 @@ The HN grammar and BUD dynamic programs return exact minima on their governed cl
   canonical terminal support-seed family and proves computed exact-or-gain
   semantics for every member; its exhaustive reference minimum is not BWL or
   a polynomial HResolve algorithm.
+- `ResidualTerminalHResolveHDisjointFamily`, which checks support, frontier,
+  origin, kernel, obligation, prefix-tail, charge, and interface
+  noninterference for arbitrary finite supplied footprints and constructs a
+  duplicate-free maximal pairwise H-disjoint family. Audit that every rejected
+  governed candidate names a selected blocker through an exact first
+  interference route. The footprints remain supplied; do not read this as HN
+  parsing, BWL, ParseOrExit, leaf tightness, the full `NoHereditary` sidecar,
+  blocker-to-HB rank semantics, full HResolve, ZeroSlack, or PCCMin.
 - Local-package and global-proof-DAG records.
 
 **How to test or inspect it**

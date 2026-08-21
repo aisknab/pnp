@@ -596,6 +596,16 @@ supplied. This is a finite two-branch composition, not the complete no-lower
 ledger, a construction of Packet data from terminal data, unconditional
 ZeroSlack, or polynomial PCCMin.
 
+The terminal HResolve maximal H-disjoint-family milestone separately
+formalizes the family-assembly edge over arbitrary finite supplied hereditary
+footprints. Its executable checks cover support, frontier, origin, kernel,
+obligation, prefix-tail, charge, and interface noninterference. The selected
+family is governed, maximal, duplicate-free, and pairwise H-disjoint: every
+rejected governed candidate names a selected blocker and its exact first
+interference route. The footprints are not terminal-derived here, and HN,
+BWL, ParseOrExit, leaf tightness, the complete `NoHereditary` sidecar, full
+HResolve, the complete no-lower ledger, ZeroSlack, and PCCMin remain open.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

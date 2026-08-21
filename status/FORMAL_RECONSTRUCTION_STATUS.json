@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-21-173",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-21-174",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -980,6 +980,9 @@
   "leanResidualTerminalPacketBudgetNoLowerCompositionFormalized": true,
   "leanResidualTerminalPacketBudgetNoLowerCompositionAxiomAuditPassed": true,
   "leanResidualTerminalPacketBudgetNoLowerCompositionScope": "all-finite-direct-wire-candidates-same-candidate-terminal-budget-and-Packet-two-branch-no-lower-gain-and-positive-Packet-exclusion",
+  "leanResidualTerminalHResolveHDisjointFamilyFormalized": true,
+  "leanResidualTerminalHResolveHDisjointFamilyAxiomAuditPassed": true,
+  "leanResidualTerminalHResolveHDisjointFamilyScope": "all-arbitrary-finite-supplied-eight-domain-hereditary-footprints-deterministic-maximal-H-disjoint-family-with-exact-selected-blocker-routes",
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -1596,6 +1599,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketBudgetNoLowerCompositionAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketBudgetNoLowerComposition.lean",
     "node --test audits/lean-residual-terminal-packet-budget-no-lower-composition0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHResolveHDisjointFamilyAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHResolveHDisjointFamily.lean",
+    "node --test audits/lean-residual-terminal-hresolve-maximal-h-disjoint-family0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1650,6 +1656,7 @@
     "The checked Packet no-lower ledger composes five independently executable rows: semantic/HN binding, budget/HB binding, selector silence, HB no-outcome closure, and Packet descent no-lower. Its reflection theorem proves exact acceptance, and an accepted ledger excludes a positive Packet conclusion over every supplied arbitrary finite grouped family. This closes only the Packet branch of the manuscript no-lower dependency. All terminal data and bindings remain explicit, while HResolve, BudgetResolve, normalization, other named obstructions, saturation, replay, the complete no-lower ledger, unconditional ZeroSlack, and polynomial PCCMin remain open.",
     "The checked finite HResolve coverage ledger computes exact, gain, blocked, or unresolved classification for every member of an arbitrary supplied finite candidate family, recomputes duplicate-free enumeration, generates one route row per candidate, and accepts a NoHereditary sidecar exactly when every listed candidate has neither constructive route and carries a positive blocker predicate. The candidate family and all decidable predicates remain supplied; this does not construct the governed hereditary universe from terminal data, prove HN grammar, BWL exactness, H-disjointness, exact-minimum, strict-gain, or blocker dependency semantics, discharge full HResolve or BudgetResolve, complete the no-lower ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.",
     "The canonical terminal HResolve support resolver removes caller-supplied candidate families and exact/gain predicates for the finite terminal-support branch. It enumerates every canonical seed, derives saturation from the candidate, and computes exact versus strict equivalent gain from reference residual slack. Its subset enumeration and reference minimization may be exponential, and it does not implement HN grammar, BWL, ParseOrExit, H-disjointness, NoHereditary blocker semantics, full or polynomial HResolve, BudgetResolve, complete no-lower, unconditional ZeroSlack, or polynomial PCCMin.",
+    "The terminal HResolve maximal H-disjoint-family constructor checks all eight exact interference domains over an arbitrary finite supplied footprint family, selects a governed duplicate-free maximal pairwise H-disjoint subfamily, and assigns every rejected governed candidate a selected blocker with its first exact route. The footprints remain supplied; this does not derive HN leaves, prove BWL or ParseOrExit, establish leaf tightness, construct the full NoHereditary sidecar, connect blockers to HB ranks, complete full or polynomial HResolve or the no-lower ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.",
     "The finite terminal budget-envelope resolver searches every canonical terminal support seed against supplied natural gate and saturated-record caps, recomputes candidate-derived saturation, requires nonempty implementation and interface support, and returns a feasible semantic minimum, a feasible strict equivalent gain, or complete NoBudget exclusion for that canonical universe. The caps remain supplied and the support scan plus reference minimization may be exponential. It does not implement the manuscript HN/BUD grammar, BWL, the budget-envelope dynamic program, blocker semantics, polynomial BudgetResolve, complete no-lower, unconditional ZeroSlack, or polynomial PCCMin.",
     "The terminal budget no-lower ledger classifies every canonical terminal support from the same recomputed envelope and actual residual slack, materializes the complete route table, and accepts exactly when every budget-feasible governed support is a semantic minimum and no feasible strict equivalent gain exists. The caps remain supplied and enumeration, saturation, and reference minimization may be exponential. This closes only the finite terminal-derived budget branch; it does not implement the manuscript HN/BUD grammar or polynomial BudgetResolve, compose Packet or the complete no-lower ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.",
     "The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.",
@@ -1810,7 +1817,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "a3c7d3419433bfb2ce7f27a2a3b34edee657e7283ba818b7e16db7270f720f4b",
+    "actualSourceClosureSha256": "b0890ab07937a7d9afbc8cafe20f7c4317db0466e684575392c017f3a4ea9fc3",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1840,22 +1847,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-21-173",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-21-174",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "aee7598d21dadadc37f541b94dfc19acd1bb08840ef2b9c234c39b236e77db76",
+  "leanTheoremInventorySha256": "cb066150366ad0e870f5139ed056a028c16f887604b40371ef18adaefb5b414d",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 29584,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 15104,
-  "leanTheoremInventoryTheoremCount": 15306,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 7548,
-  "leanTheoremInventorySourceClosureModuleCount": 290,
-  "leanSourceClosureSha256": "a3c7d3419433bfb2ce7f27a2a3b34edee657e7283ba818b7e16db7270f720f4b",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-21-173",
+  "leanTheoremInventoryDeclarationCount": 29699,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 15120,
+  "leanTheoremInventoryTheoremCount": 15353,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 7580,
+  "leanTheoremInventorySourceClosureModuleCount": 291,
+  "leanSourceClosureSha256": "b0890ab07937a7d9afbc8cafe20f7c4317db0466e684575392c017f3a4ea9fc3",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-21-174",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "6536e6bd51b8bfe3ac561c7c93c10ea30a3a82bb97fd6b6947499ec41ae5580a",
+  "formalPublicationMapSha256": "35437ec7ff5312759a5b0a85caab29700a48c840f7eb7e24f9896d86f1747221",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -44763,6 +44770,148 @@
       "status": "formalized-residual-terminal-packet-budget-no-lower-composition"
     },
     {
+      "classification": "formalized-residual-terminal-hresolve-maximal-h-disjoint-family",
+      "id": "residual-terminal-hresolve-maximal-h-disjoint-family",
+      "nonClaim": "The hereditary footprints remain supplied inputs. This milestone does not derive them from a terminal candidate, formalize the HN pair/tripod/spine/non-flat grammar, prove BWL exactness or ParseOrExit, establish leaf tightness or solve a leaf, construct the full H0-H4 NoHereditary sidecar, connect blockers to HB ranks, implement full HResolve, complete the no-lower ledger, establish unconditional ZeroSlack, prove PCCMin or polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.checkTerminalHCoordinateDisjoint_eq_true_iff",
+        "PNP.DirectWire.terminalHCoordinateDisjoint_symm",
+        "PNP.DirectWire.TerminalHereditaryFootprint.checkHDisjoint_eq_true_iff",
+        "PNP.DirectWire.TerminalHereditaryFootprint.hDisjoint_symm",
+        "PNP.DirectWire.TerminalHereditaryFootprint.firstInterference?_eq_none_iff_hDisjoint",
+        "PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_subset",
+        "PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_nodup",
+        "PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_pairwise",
+        "PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_maximal",
+        "PNP.DirectWire.terminal_hresolve_maximal_hdisjoint_family_complete"
+      ],
+      "scope": "For every arbitrary finite duplicate-free family of supplied hereditary footprints over eight decidable coordinate domains, Lean deterministically constructs a governed duplicate-free maximal pairwise H-disjoint family. Every rejected governed candidate has a selected blocker carrying the exact first support, frontier, origin, kernel, obligation, prefix-tail, charge, or interface interference route.",
+      "title": "Terminal HResolve maximal H-disjoint family",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.checkTerminalHCoordinateDisjoint_eq_true_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "005791015cc4d09ba0901036af84dca5e7260887531a603feaf64125700ca264",
+          "expectedKernelTypeSha256": "005791015cc4d09ba0901036af84dca5e7260887531a603feaf64125700ca264",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHCoordinateDisjoint_symm",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "695e82fd3e7b52a1868179504e74efdc886dc3e7ab0b1c964eecdfcd0268b638",
+          "expectedKernelTypeSha256": "695e82fd3e7b52a1868179504e74efdc886dc3e7ab0b1c964eecdfcd0268b638",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalHereditaryFootprint.checkHDisjoint_eq_true_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "12661a1dbd2ae24573724fbaa1f7f4c531d42f58af8819cf5275714b473f5078",
+          "expectedKernelTypeSha256": "12661a1dbd2ae24573724fbaa1f7f4c531d42f58af8819cf5275714b473f5078",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalHereditaryFootprint.hDisjoint_symm",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "3e0cd6541bc41e20a07b64d34334fbeb37c7edef21ba3426e65800b45e98d941",
+          "expectedKernelTypeSha256": "3e0cd6541bc41e20a07b64d34334fbeb37c7edef21ba3426e65800b45e98d941",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalHereditaryFootprint.firstInterference?_eq_none_iff_hDisjoint",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "968780b78a938a588fcae3bf585b57acdcc9d7f4edae239979dbabd9939bb8fb",
+          "expectedKernelTypeSha256": "968780b78a938a588fcae3bf585b57acdcc9d7f4edae239979dbabd9939bb8fb",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_subset",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "515188d2371fa817cbc9320ff388e2f11009df76bda4751389342f73266beffb",
+          "expectedKernelTypeSha256": "515188d2371fa817cbc9320ff388e2f11009df76bda4751389342f73266beffb",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_nodup",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "896faf43d23d8e2d0210448545bca6de79ec0951a2cb9673112eaf6d3a3de042",
+          "expectedKernelTypeSha256": "896faf43d23d8e2d0210448545bca6de79ec0951a2cb9673112eaf6d3a3de042",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_pairwise",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e1c0f61959f5d6a31418a17f5e7009ac6eace3f2106763dd6fa9e0355714348a",
+          "expectedKernelTypeSha256": "e1c0f61959f5d6a31418a17f5e7009ac6eace3f2106763dd6fa9e0355714348a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_maximal",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "16910cce3352126a72da9cfb84ca13c65ebe04e8fc3f8aa7989d452745f2ee09",
+          "expectedKernelTypeSha256": "16910cce3352126a72da9cfb84ca13c65ebe04e8fc3f8aa7989d452745f2ee09",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminal_hresolve_maximal_hdisjoint_family_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "cd3be2c48949ee1746e78094c9459c1e8ea664f5b210a1243a27a0d7d1af472c",
+          "expectedKernelTypeSha256": "cd3be2c48949ee1746e78094c9459c1e8ea664f5b210a1243a27a0d7d1af472c",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-hresolve-maximal-h-disjoint-family"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -44860,7 +45009,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-21-173",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-21-174",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

@@ -3247,6 +3247,25 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /caps.*Packet family.*tables.*supplied/u);
   assert.match(terminalPacketBudgetNoLowerComposition.nonClaim,
     /finite two-branch.*not.*complete no-lower.*ZeroSlack.*PCCMin/u);
+  const terminalHResolveHDisjointFamily = byId.get(
+    'residual-terminal-hresolve-maximal-h-disjoint-family',
+  );
+  assert.equal(terminalHResolveHDisjointFamily.status,
+    'formalized-residual-terminal-hresolve-maximal-h-disjoint-family');
+  assert.equal(terminalHResolveHDisjointFamily.earned, true);
+  assert.equal(
+    terminalHResolveHDisjointFamily.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.equal(terminalHResolveHDisjointFamily.requiredTheorems.length, 10);
+  assert.match(terminalHResolveHDisjointFamily.scope,
+    /arbitrary finite.*eight.*coordinate.*maximal.*H-disjoint/u);
+  assert.match(terminalHResolveHDisjointFamily.scope,
+    /selected blocker.*interference route/u);
+  assert.match(terminalHResolveHDisjointFamily.nonClaim,
+    /footprints remain supplied.*HN.*BWL.*ParseOrExit/u);
+  assert.match(terminalHResolveHDisjointFamily.nonClaim,
+    /full HResolve.*ZeroSlack.*PCCMin.*polynomial/u);
   const lockedNANDThreshold = byId.get('global-locked-nand-threshold');
   assert.equal(lockedNANDThreshold.status,
     'formalized-concrete-locked-nand-threshold');
