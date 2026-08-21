@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-21-175",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-21-176",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3057,7 +3057,14 @@
     "PNP.DirectWire.terminalHNBWLMinimum?_eq_none_iff": "64141090dfed234bb678fb9d758bb2b7b0af8c470fee411a6c0593e400b42055",
     "PNP.DirectWire.terminalHNBWLMinimum?_sound": "49fe1209297af83ac6d68bfa95c5e9c559b2f9d32176000ad2ad33231dd9309d",
     "PNP.DirectWire.terminalHNBWLMinimum?_exists_of_ne_nil": "9a53ee168de637d01731595a4d0b3c96af2039cecef531a0d4fe62a47888b634",
-    "PNP.DirectWire.terminal_hn_bwl_certified_path_minimum_complete": "fd5a191f5cc72cab4e766e663becaee9d07366c6ba347a897ad8a3b03d9e2d25"
+    "PNP.DirectWire.terminal_hn_bwl_certified_path_minimum_complete": "fd5a191f5cc72cab4e766e663becaee9d07366c6ba347a897ad8a3b03d9e2d25",
+    "PNP.DirectWire.TerminalHResolveCertifiedPathCandidate.checkHDisjoint_eq_true_iff": "618f82dee094b60602bd719d146f6134b6b4847f7cd6d1b0aaa608a3132a1e65",
+    "PNP.DirectWire.TerminalHResolveCertifiedPathCandidate.minimum?_complete": "20fb52927e7c5f7ca6a4bf9e9af307a878d2f60b46fef3a3a2a78707f9ad4bbf",
+    "PNP.DirectWire.terminalHResolveGreedyCertifiedPathFamily_subset": "8aeb7125af254557137e52e763908fbb8f46fdc1cab001f4a49ae517e34c0b6a",
+    "PNP.DirectWire.terminalHResolveGreedyCertifiedPathFamily_nodup": "a133a454e5f3700d5c644bbab7f81649462c36bb77228caf96418361e4613aa4",
+    "PNP.DirectWire.terminalHResolveGreedyCertifiedPathFamily_pairwise": "8327cf69dc20a587804765d4747097718daad235528d803169d22462c0f9c46b",
+    "PNP.DirectWire.terminalHResolveGreedyCertifiedPathFamily_maximal": "53998173b2aa4fcdf6c200d830bd4081c9e7857c181469e3873372c822cadeae",
+    "PNP.DirectWire.terminal_hresolve_certified_path_family_complete": "afa671a255c4e3e1e840ad632863d9441604275906436d6ff40462af4ce008e9"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3075,7 +3082,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "e5feefa96668283c5f690e80a9d68f0dd400e5c017e32d18491dd5ee593d2c6a",
+  "milestoneSourceClosureSha256": "015f16685bdacbc122847cc72b17601d2748ed02a8a8ca432f84abff36ae7580",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -7716,6 +7723,22 @@
       ],
       "scope": "For every nonempty finite supplied family of certified hereditary paths, Lean computes the exact four-coordinate lexicographic minimum by realized cost, residual rank, frontier deviation, and direct-wire code. The selected member preserves semantic fidelity, frontier fidelity, nonempty block coverage, and one of four HN shapes; an explicit completeness premise extends its lower bound to every path in the supplied governed predicate.",
       "title": "Terminal HN BWL certified-path minimum"
+    },
+    {
+      "classification": "formalized-residual-terminal-hresolve-certified-path-family",
+      "id": "residual-terminal-hresolve-certified-path-family",
+      "nonClaim": "The candidates, certified paths, hereditary footprints, governed predicates, family-completeness proofs, and path-to-footprint coherence proofs remain supplied inputs. This milestone does not derive them from terminal data, prove HN grammar soundness or completeness, LN confluence, ParseOrExit, independent leaf tightness, or the H0-H4 NoHereditary sidecar, connect blockers to HB rank semantics, implement full or polynomial HResolve, complete the no-lower ledger, establish unconditional ZeroSlack, prove PCCMin or polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.TerminalHResolveCertifiedPathCandidate.checkHDisjoint_eq_true_iff",
+        "PNP.DirectWire.TerminalHResolveCertifiedPathCandidate.minimum?_complete",
+        "PNP.DirectWire.terminalHResolveGreedyCertifiedPathFamily_subset",
+        "PNP.DirectWire.terminalHResolveGreedyCertifiedPathFamily_nodup",
+        "PNP.DirectWire.terminalHResolveGreedyCertifiedPathFamily_pairwise",
+        "PNP.DirectWire.terminalHResolveGreedyCertifiedPathFamily_maximal",
+        "PNP.DirectWire.terminal_hresolve_certified_path_family_complete"
+      ],
+      "scope": "For every duplicate-free finite supplied family of proof-bearing hereditary candidates, Lean constructs a duplicate-free maximal pairwise H-disjoint selected family. Every selected candidate has an exact four-coordinate certified-path minimum preserving semantic, frontier, block, shape, and footprint-coherence evidence; every rejected candidate has a selected blocker carrying the exact first interference route.",
+      "title": "Terminal HResolve certified-path family"
     },
     {
       "classification": "formalized-concrete-locked-nand-threshold",

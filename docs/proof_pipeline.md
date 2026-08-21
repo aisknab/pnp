@@ -616,6 +616,17 @@ family remains supplied. This is not accepted-grammar generation or
 completeness, LN confluence, ParseOrExit, leaf tightness, the full BWL theorem,
 polynomial HResolve, the complete no-lower ledger, ZeroSlack, or PCCMin.
 
+The terminal HResolve certified-path-family milestone now composes that exact
+finite path minimum with maximal eight-domain H-disjoint selection. Every
+supplied candidate owns its frontier, footprint, nonempty finite path family,
+governed predicate, completeness proof, and path-to-footprint coherence.
+Selected candidates expose exact four-coordinate minima with all carried
+evidence, while each rejection exposes a selected blocker and exact first
+interference route. The proof-bearing candidates remain supplied. This is not
+terminal candidate generation, accepted-grammar completeness, LN confluence,
+ParseOrExit, leaf tightness, the H0-H4 sidecar, full or polynomial HResolve,
+the complete no-lower ledger, ZeroSlack, or PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

@@ -2163,6 +2163,21 @@ ParseOrExit, leaf tightness, the full BWL theorem, polynomial HResolve, the
 complete no-lower ledger, unconditional ZeroSlack, or PCCMin. See
 [`lean_residual_terminal_hn_bwl_certified_path_minimum.md`](./lean_residual_terminal_hn_bwl_certified_path_minimum.md).
 
+`ResidualTerminalHResolveCertifiedPathFamily` now composes that finite BWL
+minimum with the separate maximal H-disjoint-family selector. Every supplied
+candidate owns an expected frontier, eight-domain footprint, nonempty finite
+certified-path family, governed predicate, completeness proof, and
+path-to-footprint coherence proof. Lean constructs a duplicate-free maximal
+pairwise H-disjoint selected family. Each selected candidate exposes its exact
+four-coordinate minimum with semantic, frontier, block, shape, and footprint
+evidence, while every rejected candidate exposes a selected blocker and exact
+first interference route. The proof-bearing candidates remain supplied. This
+is not terminal candidate or path derivation, HN grammar completeness, LN
+confluence, ParseOrExit, leaf tightness, the H0-H4 sidecar, full or polynomial
+HResolve, the complete no-lower ledger, unconditional ZeroSlack, or PCCMin.
+See
+[`lean_residual_terminal_hresolve_certified_path_family.md`](./lean_residual_terminal_hresolve_certified_path_family.md).
+
 `ResidualTerminalBudgetEnvelopeResolver` now places a computed finite budget
 boundary over that canonical support universe. For supplied natural gate and
 saturated-record caps, each seed is saturated in the candidate-derived system;

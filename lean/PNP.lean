@@ -9,6 +9,7 @@ import PNP.NANDSlack
 import PNP.ResidualRoutes
 import PNP.ResidualTerminalHResolveCoverageLedger
 import PNP.ResidualTerminalHResolveHDisjointFamily
+import PNP.ResidualTerminalHResolveCertifiedPathFamily
 import PNP.ResidualGainChain
 import PNP.ResidualGainStopping
 import PNP.ResidualTerminalFullBridge

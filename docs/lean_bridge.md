@@ -1499,6 +1499,18 @@ does not derive or prove complete the accepted HN grammar, establish LN
 confluence, ParseOrExit, leaf tightness, the full BWL theorem, polynomial
 HResolve, ZeroSlack, or PCCMin.
 
+`lean/PNP/ResidualTerminalHResolveCertifiedPathFamily.lean` composes those two
+bounded kernels. Each supplied hereditary candidate carries its own expected
+frontier, eight-domain footprint, nonempty finite certified-path family,
+governed predicate, completeness proof, and path-to-footprint coherence.
+The selector produces a duplicate-free maximal pairwise H-disjoint family.
+Every retained candidate exposes an exact four-coordinate BWL minimum with
+semantic, frontier, block, shape, and footprint evidence; every rejected
+candidate exposes a selected blocker and exact first interference route. The
+candidates remain supplied. This does not derive terminal candidates, HN
+grammar completeness, LN confluence, ParseOrExit, leaf tightness, the H0-H4
+sidecar, full or polynomial HResolve, ZeroSlack, or PCCMin.
+
 `lean/PNP/ResidualTerminalBudgetEnvelopeResolver.lean` adds the next finite BUD
 edge. For supplied natural gate and saturated-record caps, it searches the
 complete canonical terminal support universe, recomputes candidate-derived
