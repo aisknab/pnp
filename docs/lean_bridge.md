@@ -1500,6 +1500,16 @@ remain; this is an exponential finite reference boundary, not polynomial
 `BudgetResolve`, Packet or complete no-lower composition, unconditional
 `ZeroSlack`, or polynomial `PCCMin`.
 
+`lean/PNP/ResidualTerminalPacketBudgetNoLowerComposition.lean` joins that
+canonical budget ledger to the independently checked five-row Packet ledger
+over the same direct-wire candidate. Its Boolean recomputes both components,
+and acceptance proves every budget-feasible canonical support minimum,
+excludes every feasible strict gain, and excludes a positive Packet for the
+supplied family and tables. The caps, Packet data, ranks, claims, activity
+environment, and dependency rows remain supplied. This is a finite two-branch
+composition, not the complete no-lower ledger, a terminal construction of the
+Packet inputs, unconditional `ZeroSlack`, or polynomial `PCCMin`.
+
 `lean/PNP/PCCMin.lean` exposes the structured loop certificate and constructs the witness-model residual-band decider from it.
 
 Most fields in these certificate objects are still digest/ledger handles. Replacing those handles by actual propositions and proofs is a major remaining task.

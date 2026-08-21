@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-21-172",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-21-173",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -977,6 +977,9 @@
   "leanResidualTerminalBudgetNoLowerLedgerFormalized": true,
   "leanResidualTerminalBudgetNoLowerLedgerAxiomAuditPassed": true,
   "leanResidualTerminalBudgetNoLowerLedgerScope": "all-finite-direct-wire-candidates-terminal-derived-budget-feasible-gain-exclusion-over-complete-canonical-support-ledger",
+  "leanResidualTerminalPacketBudgetNoLowerCompositionFormalized": true,
+  "leanResidualTerminalPacketBudgetNoLowerCompositionAxiomAuditPassed": true,
+  "leanResidualTerminalPacketBudgetNoLowerCompositionScope": "all-finite-direct-wire-candidates-same-candidate-terminal-budget-and-Packet-two-branch-no-lower-gain-and-positive-Packet-exclusion",
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -1590,6 +1593,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBudgetNoLowerLedgerAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBudgetNoLowerLedger.lean",
     "node --test audits/lean-residual-terminal-budget-no-lower-ledger0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketBudgetNoLowerCompositionAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketBudgetNoLowerComposition.lean",
+    "node --test audits/lean-residual-terminal-packet-budget-no-lower-composition0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1804,7 +1810,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "11e4dd1bb6fcc92bce76787ba93a4297fb290c02c05bf52b6f127a32ef05d071",
+    "actualSourceClosureSha256": "a3c7d3419433bfb2ce7f27a2a3b34edee657e7283ba818b7e16db7270f720f4b",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1834,22 +1840,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-21-172",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-21-173",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "846863be54eb7c95cd51297e7c3445e508abb837449a0c9c90885f64e8c6d821",
+  "leanTheoremInventorySha256": "aee7598d21dadadc37f541b94dfc19acd1bb08840ef2b9c234c39b236e77db76",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 29574,
+  "leanTheoremInventoryDeclarationCount": 29584,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 15104,
-  "leanTheoremInventoryTheoremCount": 15298,
+  "leanTheoremInventoryTheoremCount": 15306,
   "leanTheoremInventoryAssumptionFreeTheoremCount": 7548,
-  "leanTheoremInventorySourceClosureModuleCount": 289,
-  "leanSourceClosureSha256": "11e4dd1bb6fcc92bce76787ba93a4297fb290c02c05bf52b6f127a32ef05d071",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-21-172",
+  "leanTheoremInventorySourceClosureModuleCount": 290,
+  "leanSourceClosureSha256": "a3c7d3419433bfb2ce7f27a2a3b34edee657e7283ba818b7e16db7270f720f4b",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-21-173",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "f4c7d7d4191767dccc3719fe3626ebfc35940706c0eb7ecc9ff56729758c9b71",
+  "formalPublicationMapSha256": "6536e6bd51b8bfe3ac561c7c93c10ea30a3a82bb97fd6b6947499ec41ae5580a",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -44687,6 +44693,76 @@
       "status": "formalized-residual-terminal-budget-no-lower-ledger"
     },
     {
+      "classification": "formalized-residual-terminal-packet-budget-no-lower-composition",
+      "id": "residual-terminal-packet-budget-no-lower-composition",
+      "nonClaim": "The caps, Packet family, typed payloads, ranks, realizer claims, activity environment, and dependency tables remain supplied. This is a finite two-branch composition, not the complete no-lower ledger. It does not construct Packet data from terminal data, implement HN/BUD grammar, polynomial HResolve or BudgetResolve, cover normalization, remaining named routes, saturation, or replay, establish unconditional ZeroSlack, prove PCCMin or polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.checkTerminalPacketBudgetNoLowerComposition_eq_true_iff",
+        "PNP.DirectWire.terminal_packet_budget_no_lower_composition_excludes_gain_and_packet",
+        "PNP.DirectWire.checkTerminalPacketBudgetNoLowerComposition_eq_false_of_feasible_gain",
+        "PNP.DirectWire.TerminalBN6PacketConclusion.checkTerminalPacketBudgetNoLowerComposition_eq_false"
+      ],
+      "scope": "For every finite direct-wire candidate, candidate-derived saturation model, supplied caps, and supplied Packet family and tables over that same direct-wire candidate, one Boolean recomputes both finite ledgers. Acceptance makes every governed budget-feasible canonical support a semantic minimum, excludes every feasible strict equivalent gain, and excludes a positive Packet conclusion.",
+      "title": "Terminal Packet-budget no-lower composition",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.checkTerminalPacketBudgetNoLowerComposition_eq_true_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "87b0c2ea3159533827c4a1a3f4c5db18a493304bb2db3d85990bbd7385105bfd",
+          "expectedKernelTypeSha256": "87b0c2ea3159533827c4a1a3f4c5db18a493304bb2db3d85990bbd7385105bfd",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminal_packet_budget_no_lower_composition_excludes_gain_and_packet",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "bc323316e68622fca406fce8fe7bd74be6c9c15fcc13c9118f36a93a1b4ed451",
+          "expectedKernelTypeSha256": "bc323316e68622fca406fce8fe7bd74be6c9c15fcc13c9118f36a93a1b4ed451",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.checkTerminalPacketBudgetNoLowerComposition_eq_false_of_feasible_gain",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8e391c19bc0edcf5a2ddb5f22547cf9a98f3197c12901ebdf250339b01550007",
+          "expectedKernelTypeSha256": "8e391c19bc0edcf5a2ddb5f22547cf9a98f3197c12901ebdf250339b01550007",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalBN6PacketConclusion.checkTerminalPacketBudgetNoLowerComposition_eq_false",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "224e93639a4b61fa8be116750fd9bd29039d4f8cdc0cdf969338dfd4cb596cbb",
+          "expectedKernelTypeSha256": "224e93639a4b61fa8be116750fd9bd29039d4f8cdc0cdf969338dfd4cb596cbb",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-packet-budget-no-lower-composition"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -44784,7 +44860,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-21-172",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-21-173",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

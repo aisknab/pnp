@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-21-172';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-21-173';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -500,6 +500,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBudgetNoLowerLedgerAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBudgetNoLowerLedger.lean',
   'node --test audits/lean-residual-terminal-budget-no-lower-ledger0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketBudgetNoLowerCompositionAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketBudgetNoLowerComposition.lean',
+  'node --test audits/lean-residual-terminal-packet-budget-no-lower-composition0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -1861,6 +1864,10 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalBudgetNoLowerLedgerAxiomAuditPassed: true,
   leanResidualTerminalBudgetNoLowerLedgerScope:
     'all-finite-direct-wire-candidates-terminal-derived-budget-feasible-gain-exclusion-over-complete-canonical-support-ledger',
+  leanResidualTerminalPacketBudgetNoLowerCompositionFormalized: true,
+  leanResidualTerminalPacketBudgetNoLowerCompositionAxiomAuditPassed: true,
+  leanResidualTerminalPacketBudgetNoLowerCompositionScope:
+    'all-finite-direct-wire-candidates-same-candidate-terminal-budget-and-Packet-two-branch-no-lower-gain-and-positive-Packet-exclusion',
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
   leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -3052,6 +3059,10 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalBudgetNoLowerLedgerAxiomAuditPassed: true,
       leanResidualTerminalBudgetNoLowerLedgerScope:
         'all-finite-direct-wire-candidates-terminal-derived-budget-feasible-gain-exclusion-over-complete-canonical-support-ledger',
+      leanResidualTerminalPacketBudgetNoLowerCompositionFormalized: true,
+      leanResidualTerminalPacketBudgetNoLowerCompositionAxiomAuditPassed: true,
+      leanResidualTerminalPacketBudgetNoLowerCompositionScope:
+        'all-finite-direct-wire-candidates-same-candidate-terminal-budget-and-Packet-two-branch-no-lower-gain-and-positive-Packet-exclusion',
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
       leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -3131,7 +3142,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-21-172',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-21-173',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

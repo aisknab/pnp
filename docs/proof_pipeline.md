@@ -584,6 +584,18 @@ this closes only the finite terminal-derived budget branch, not polynomial
 BudgetResolve, Packet or complete no-lower composition, unconditional
 ZeroSlack, or polynomial PCCMin.
 
+The terminal Packet-budget no-lower composition now places the canonical
+terminal budget-support ledger and the five-row checked Packet ledger behind
+one Boolean over the same direct-wire candidate. Exact reflection exposes the
+conjunction of both independently checked propositions. Acceptance therefore
+makes every budget-feasible governed support a semantic minimum, excludes a
+feasible strict-equivalent-gain witness, and excludes a positive Packet over
+the supplied grouped family and tables. The caps, Packet family, typed data,
+ranks, realizer claims, activity environment, and dependency rows remain
+supplied. This is a finite two-branch composition, not the complete no-lower
+ledger, a construction of Packet data from terminal data, unconditional
+ZeroSlack, or polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

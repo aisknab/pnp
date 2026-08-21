@@ -953,6 +953,17 @@ Every positive packet has a representative in the polynomial selector universe; 
   Supplied caps and exponential reference computation remain; this is not
   polynomial BudgetResolve, Packet or complete no-lower composition,
   unconditional ZeroSlack, or polynomial PCCMin.
+- Terminal Packet-budget no-lower composition is witnessed by
+  `PNP.DirectWire.checkTerminalPacketBudgetNoLowerComposition_eq_true_iff`,
+  `PNP.DirectWire.terminal_packet_budget_no_lower_composition_excludes_gain_and_packet`,
+  `PNP.DirectWire.checkTerminalPacketBudgetNoLowerComposition_eq_false_of_feasible_gain`,
+  and
+  `PNP.DirectWire.TerminalBN6PacketConclusion.checkTerminalPacketBudgetNoLowerComposition_eq_false`.
+  One checker recomputes both finite ledgers over the same direct-wire
+  candidate. Verify that removing either component makes the hostile audit
+  reject, and do not infer that the supplied Packet family and tables were
+  constructed from terminal data. This joins only two branches; the complete
+  no-lower ledger, unconditional ZeroSlack, and polynomial PCCMin remain open.
 - `R.SelectorRealization`.
 - `HB.NegativeClosure`.
 - Package O's rank-ordered oracle records.
