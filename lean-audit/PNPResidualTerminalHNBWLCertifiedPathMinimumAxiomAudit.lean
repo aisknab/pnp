@@ -1,0 +1,29 @@
+import PNP.ResidualTerminalHNBWLCertifiedPathMinimum
+
+#print axioms PNP.DirectWire.TerminalHNShape
+#print axioms PNP.DirectWire.TerminalHNBWLObjective
+#print axioms PNP.DirectWire.terminalNatVectorLexLE
+#print axioms PNP.DirectWire.checkTerminalNatVectorLexLE
+#print axioms PNP.DirectWire.checkTerminalNatVectorLexLE_eq_true_iff
+#print axioms PNP.DirectWire.terminalNatVectorLexLE_total_of_length_eq
+#print axioms PNP.DirectWire.terminalNatVectorLexLE_refl
+#print axioms PNP.DirectWire.terminalNatVectorLexLE_trans
+#print axioms PNP.DirectWire.TerminalHNBWLObjective.coordinates
+#print axioms PNP.DirectWire.TerminalHNBWLObjective.LexLE
+#print axioms PNP.DirectWire.TerminalHNBWLObjective.checkLexLE
+#print axioms PNP.DirectWire.TerminalHNBWLObjective.checkLexLE_eq_true_iff
+#print axioms PNP.DirectWire.TerminalHNBWLObjective.lexLE_refl
+#print axioms PNP.DirectWire.TerminalHNBWLObjective.lexLE_total
+#print axioms PNP.DirectWire.TerminalHNBWLObjective.lexLE_trans
+#print axioms PNP.DirectWire.TerminalHNBWLCertifiedPath
+#print axioms PNP.DirectWire.TerminalHNBWLCertifiedPath.objective
+#print axioms PNP.DirectWire.terminalHNBWLChoose
+#print axioms PNP.DirectWire.terminalHNBWLChoose_eq_left_or_right
+#print axioms PNP.DirectWire.terminalHNBWLChoose_lexLE_left
+#print axioms PNP.DirectWire.terminalHNBWLChoose_lexLE_right
+#print axioms PNP.DirectWire.terminalHNBWLMinimum?
+#print axioms PNP.DirectWire.terminalHNBWLMinimum?_eq_none_iff
+#print axioms PNP.DirectWire.terminalHNBWLMinimum?_sound
+#print axioms PNP.DirectWire.terminalHNBWLMinimum?_exists_of_ne_nil
+#print axioms PNP.DirectWire.TerminalHNBWLFamilyComplete
+#print axioms PNP.DirectWire.terminal_hn_bwl_certified_path_minimum_complete

@@ -278,6 +278,9 @@ on:
       - 'audits/lean-residual-terminal-hresolve-maximal-h-disjoint-family0.test.mjs'
       - 'docs/lean_residual_terminal_hresolve_maximal_h_disjoint_family.md'
       - 'docs/plans/2026-08-21-residual-terminal-hresolve-maximal-h-disjoint-family.md'
+      - 'audits/lean-residual-terminal-hn-bwl-certified-path-minimum0.test.mjs'
+      - 'docs/lean_residual_terminal_hn_bwl_certified_path_minimum.md'
+      - 'docs/plans/2026-08-21-residual-terminal-hn-bwl-certified-path-minimum.md'
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_locked_nand_polynomial_reduction.md'
       - 'docs/lean_concrete_cnf_to_nand_semantic_compiler.md'
@@ -4531,3 +4534,29 @@ jobs:
 
       - name: Run terminal HResolve maximal H-disjoint-family hostile audit
         run: node --test audits/lean-residual-terminal-hresolve-maximal-h-disjoint-family0.test.mjs
+
+      - name: Print terminal HN BWL certified-path-minimum axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHNBWLCertifiedPathMinimumAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalHNBWLCertifiedPathMinimumAxiomAudit.lean)"
+          test "$expected_count" -gt 0
+          test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected terminal HN BWL certified-path-minimum axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -Eq 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            printf '%s\n' "$normalized" >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
+
+      - name: Run terminal HN BWL certified-path-minimum regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHNBWLCertifiedPathMinimum.lean
+
+      - name: Run terminal HN BWL certified-path-minimum hostile audit
+        run: node --test audits/lean-residual-terminal-hn-bwl-certified-path-minimum0.test.mjs

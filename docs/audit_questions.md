@@ -401,11 +401,20 @@ The HN grammar and BUD dynamic programs return exact minima on their governed cl
   interference route. The footprints remain supplied; do not read this as HN
   parsing, BWL, ParseOrExit, leaf tightness, the full `NoHereditary` sidecar,
   blocker-to-HB rank semantics, full HResolve, ZeroSlack, or PCCMin.
+- `ResidualTerminalHNBWLCertifiedPathMinimum`, which derives cost from each
+  supplied proof-bearing realization and computes the exact lexicographic
+  minimum by cost, residual rank, frontier deviation, and direct-wire code.
+  Its theorem preserves semantic, frontier, block, and shape evidence and
+  lifts list-minimality to a governed predicate only through an explicit
+  family-completeness premise. Audit the missing connection from accepted HN
+  grammar to that supplied family; this is not ParseOrExit, leaf tightness,
+  the full BWL theorem, or polynomial HResolve.
 - Local-package and global-proof-DAG records.
 
 **How to test or inspect it**
 
-1. Prove BWL exactness for the accepted grammar independently.
+1. Prove that accepted-grammar path generation is sound and complete for the
+   supplied certified family consumed by the finite BWL minimum kernel.
 2. Verify ParseOrExit completeness: every same-frontier equivalent word must parse or trigger a higher-priority exit.
 3. Check critical-pair coverage, termination, and confluence of local normal rules.
 4. Check that sidecars enumerate every governed candidate exactly once and carry a valid blocker or solved status.

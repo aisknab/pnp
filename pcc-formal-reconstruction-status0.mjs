@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-21-174';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-21-175';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -506,6 +506,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHResolveHDisjointFamilyAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHResolveHDisjointFamily.lean',
   'node --test audits/lean-residual-terminal-hresolve-maximal-h-disjoint-family0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHNBWLCertifiedPathMinimumAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHNBWLCertifiedPathMinimum.lean',
+  'node --test audits/lean-residual-terminal-hn-bwl-certified-path-minimum0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -1876,6 +1879,10 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalHResolveHDisjointFamilyAxiomAuditPassed: true,
   leanResidualTerminalHResolveHDisjointFamilyScope:
     'all-arbitrary-finite-supplied-eight-domain-hereditary-footprints-deterministic-maximal-H-disjoint-family-with-exact-selected-blocker-routes',
+  leanResidualTerminalHNBWLCertifiedPathMinimumFormalized: true,
+  leanResidualTerminalHNBWLCertifiedPathMinimumAxiomAuditPassed: true,
+  leanResidualTerminalHNBWLCertifiedPathMinimumScope:
+    'all-nonempty-finite-supplied-four-coordinate-certified-path-families-exact-lexicographic-minimum-with-explicit-governed-family-completeness',
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
   leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -3075,6 +3082,10 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalHResolveHDisjointFamilyAxiomAuditPassed: true,
       leanResidualTerminalHResolveHDisjointFamilyScope:
         'all-arbitrary-finite-supplied-eight-domain-hereditary-footprints-deterministic-maximal-H-disjoint-family-with-exact-selected-blocker-routes',
+      leanResidualTerminalHNBWLCertifiedPathMinimumFormalized: true,
+      leanResidualTerminalHNBWLCertifiedPathMinimumAxiomAuditPassed: true,
+      leanResidualTerminalHNBWLCertifiedPathMinimumScope:
+        'all-nonempty-finite-supplied-four-coordinate-certified-path-families-exact-lexicographic-minimum-with-explicit-governed-family-completeness',
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
       leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -3154,7 +3165,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-21-174',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-21-175',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

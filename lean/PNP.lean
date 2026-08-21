@@ -3,6 +3,7 @@ import PNP.NANDSemantics
 import PNP.NANDEnumerator
 import PNP.NANDTruthTable
 import PNP.NANDMinimum
+import PNP.ResidualTerminalHNBWLCertifiedPathMinimum
 import PNP.NANDComposition
 import PNP.NANDSlack
 import PNP.ResidualRoutes
