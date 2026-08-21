@@ -2137,6 +2137,18 @@ dependencies or NoHereditary, polynomial HResolve, BudgetResolve, the complete
 no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin. See
 [`lean_residual_terminal_hresolve_support_resolver.md`](./lean_residual_terminal_hresolve_support_resolver.md).
 
+`ResidualTerminalHResolveHDisjointFamily` now formalizes the separate finite
+family-assembly edge from manuscript Section 8.2. It checks simultaneous
+noninterference in the support, frontier, origin, kernel, obligation,
+prefix-tail, charge, and interface domains; deterministically constructs a
+governed duplicate-free maximal pairwise H-disjoint family; and attaches an
+exact first interference route from every rejected governed footprint to a
+selected blocker. The footprints remain supplied. HN grammar, BWL,
+ParseOrExit, leaf tightness, the full `NoHereditary` sidecar, blocker-to-HB
+rank semantics, full or polynomial HResolve, the complete no-lower ledger,
+unconditional ZeroSlack, and PCCMin remain open. See
+[`lean_residual_terminal_hresolve_maximal_h_disjoint_family.md`](./lean_residual_terminal_hresolve_maximal_h_disjoint_family.md).
+
 `ResidualTerminalBudgetEnvelopeResolver` now places a computed finite budget
 boundary over that canonical support universe. For supplied natural gate and
 saturated-record caps, each seed is saturated in the candidate-derived system;

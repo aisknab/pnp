@@ -1,0 +1,20 @@
+import PNP.ResidualTerminalHResolveHDisjointFamily
+
+#print axioms PNP.DirectWire.TerminalHereditaryFootprint
+#print axioms PNP.DirectWire.TerminalHInterferenceRoute
+#print axioms PNP.DirectWire.terminalHCoordinateDisjoint
+#print axioms PNP.DirectWire.checkTerminalHCoordinateDisjoint
+#print axioms PNP.DirectWire.checkTerminalHCoordinateDisjoint_eq_true_iff
+#print axioms PNP.DirectWire.terminalHCoordinateDisjoint_symm
+#print axioms PNP.DirectWire.TerminalHereditaryFootprint.HDisjoint
+#print axioms PNP.DirectWire.TerminalHereditaryFootprint.checkHDisjoint
+#print axioms PNP.DirectWire.TerminalHereditaryFootprint.checkHDisjoint_eq_true_iff
+#print axioms PNP.DirectWire.TerminalHereditaryFootprint.hDisjoint_symm
+#print axioms PNP.DirectWire.TerminalHereditaryFootprint.firstInterference?
+#print axioms PNP.DirectWire.TerminalHereditaryFootprint.firstInterference?_eq_none_iff_hDisjoint
+#print axioms PNP.DirectWire.terminalHResolveGreedyHDisjointFamily
+#print axioms PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_subset
+#print axioms PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_nodup
+#print axioms PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_pairwise
+#print axioms PNP.DirectWire.terminalHResolveGreedyHDisjointFamily_maximal
+#print axioms PNP.DirectWire.terminal_hresolve_maximal_hdisjoint_family_complete

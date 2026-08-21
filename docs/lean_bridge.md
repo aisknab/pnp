@@ -1479,6 +1479,15 @@ enumeration and reference minimum may be exponential, so this is not the HN
 grammar or BWL algorithm, ParseOrExit, H-disjointness, NoHereditary blocker
 semantics, or polynomial HResolve.
 
+`lean/PNP/ResidualTerminalHResolveHDisjointFamily.lean` closes the bounded
+family-assembly edge over supplied footprints. It computes exact
+noninterference across all eight manuscript domains, selects a duplicate-free
+maximal pairwise H-disjoint subfamily, and proves every rejected governed
+candidate has a selected blocker with its first exact interference route. It
+does not derive the footprints, prove HN grammar, BWL or ParseOrExit, build the
+full `NoHereditary` sidecar, connect blockers to HB ranks, or complete full or
+polynomial HResolve, ZeroSlack, or PCCMin.
+
 `lean/PNP/ResidualTerminalBudgetEnvelopeResolver.lean` adds the next finite BUD
 edge. For supplied natural gate and saturated-record caps, it searches the
 complete canonical terminal support universe, recomputes candidate-derived

@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-21-173';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-21-174';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -503,6 +503,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketBudgetNoLowerCompositionAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketBudgetNoLowerComposition.lean',
   'node --test audits/lean-residual-terminal-packet-budget-no-lower-composition0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHResolveHDisjointFamilyAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHResolveHDisjointFamily.lean',
+  'node --test audits/lean-residual-terminal-hresolve-maximal-h-disjoint-family0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -558,6 +561,7 @@ const NON_CLAIMS = Object.freeze([
   'The checked Packet no-lower ledger composes five independently executable rows: semantic/HN binding, budget/HB binding, selector silence, HB no-outcome closure, and Packet descent no-lower. Its reflection theorem proves exact acceptance, and an accepted ledger excludes a positive Packet conclusion over every supplied arbitrary finite grouped family. This closes only the Packet branch of the manuscript no-lower dependency. All terminal data and bindings remain explicit, while HResolve, BudgetResolve, normalization, other named obstructions, saturation, replay, the complete no-lower ledger, unconditional ZeroSlack, and polynomial PCCMin remain open.',
   'The checked finite HResolve coverage ledger computes exact, gain, blocked, or unresolved classification for every member of an arbitrary supplied finite candidate family, recomputes duplicate-free enumeration, generates one route row per candidate, and accepts a NoHereditary sidecar exactly when every listed candidate has neither constructive route and carries a positive blocker predicate. The candidate family and all decidable predicates remain supplied; this does not construct the governed hereditary universe from terminal data, prove HN grammar, BWL exactness, H-disjointness, exact-minimum, strict-gain, or blocker dependency semantics, discharge full HResolve or BudgetResolve, complete the no-lower ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.',
   'The canonical terminal HResolve support resolver removes caller-supplied candidate families and exact/gain predicates for the finite terminal-support branch. It enumerates every canonical seed, derives saturation from the candidate, and computes exact versus strict equivalent gain from reference residual slack. Its subset enumeration and reference minimization may be exponential, and it does not implement HN grammar, BWL, ParseOrExit, H-disjointness, NoHereditary blocker semantics, full or polynomial HResolve, BudgetResolve, complete no-lower, unconditional ZeroSlack, or polynomial PCCMin.',
+  'The terminal HResolve maximal H-disjoint-family constructor checks all eight exact interference domains over an arbitrary finite supplied footprint family, selects a governed duplicate-free maximal pairwise H-disjoint subfamily, and assigns every rejected governed candidate a selected blocker with its first exact route. The footprints remain supplied; this does not derive HN leaves, prove BWL or ParseOrExit, establish leaf tightness, construct the full NoHereditary sidecar, connect blockers to HB ranks, complete full or polynomial HResolve or the no-lower ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.',
   'The finite terminal budget-envelope resolver searches every canonical terminal support seed against supplied natural gate and saturated-record caps, recomputes candidate-derived saturation, requires nonempty implementation and interface support, and returns a feasible semantic minimum, a feasible strict equivalent gain, or complete NoBudget exclusion for that canonical universe. The caps remain supplied and the support scan plus reference minimization may be exponential. It does not implement the manuscript HN/BUD grammar, BWL, the budget-envelope dynamic program, blocker semantics, polynomial BudgetResolve, complete no-lower, unconditional ZeroSlack, or polynomial PCCMin.',
   'The terminal budget no-lower ledger classifies every canonical terminal support from the same recomputed envelope and actual residual slack, materializes the complete route table, and accepts exactly when every budget-feasible governed support is a semantic minimum and no feasible strict equivalent gain exists. The caps remain supplied and enumeration, saturation, and reference minimization may be exponential. This closes only the finite terminal-derived budget branch; it does not implement the manuscript HN/BUD grammar or polynomial BudgetResolve, compose Packet or the complete no-lower ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.',
   'The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.',
@@ -1868,6 +1872,10 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalPacketBudgetNoLowerCompositionAxiomAuditPassed: true,
   leanResidualTerminalPacketBudgetNoLowerCompositionScope:
     'all-finite-direct-wire-candidates-same-candidate-terminal-budget-and-Packet-two-branch-no-lower-gain-and-positive-Packet-exclusion',
+  leanResidualTerminalHResolveHDisjointFamilyFormalized: true,
+  leanResidualTerminalHResolveHDisjointFamilyAxiomAuditPassed: true,
+  leanResidualTerminalHResolveHDisjointFamilyScope:
+    'all-arbitrary-finite-supplied-eight-domain-hereditary-footprints-deterministic-maximal-H-disjoint-family-with-exact-selected-blocker-routes',
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
   leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -3063,6 +3071,10 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalPacketBudgetNoLowerCompositionAxiomAuditPassed: true,
       leanResidualTerminalPacketBudgetNoLowerCompositionScope:
         'all-finite-direct-wire-candidates-same-candidate-terminal-budget-and-Packet-two-branch-no-lower-gain-and-positive-Packet-exclusion',
+      leanResidualTerminalHResolveHDisjointFamilyFormalized: true,
+      leanResidualTerminalHResolveHDisjointFamilyAxiomAuditPassed: true,
+      leanResidualTerminalHResolveHDisjointFamilyScope:
+        'all-arbitrary-finite-supplied-eight-domain-hereditary-footprints-deterministic-maximal-H-disjoint-family-with-exact-selected-blocker-routes',
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
       leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -3142,7 +3154,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-21-173',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-21-174',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

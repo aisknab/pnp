@@ -1418,6 +1418,18 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanResidualTerminalPacketBudgetNoLowerCompositionScope,
     'all-finite-direct-wire-candidates-same-candidate-terminal-budget-and-Packet-two-branch-no-lower-gain-and-positive-Packet-exclusion',
   );
+  assert.equal(
+    out.leanResidualTerminalHResolveHDisjointFamilyFormalized,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalHResolveHDisjointFamilyAxiomAuditPassed,
+    true,
+  );
+  assert.equal(
+    out.leanResidualTerminalHResolveHDisjointFamilyScope,
+    'all-arbitrary-finite-supplied-eight-domain-hereditary-footprints-deterministic-maximal-H-disjoint-family-with-exact-selected-blocker-routes',
+  );
   for (const field of [
     'leanSaturatePositiveFormalized',
     'leanBCELReadyFormalized',

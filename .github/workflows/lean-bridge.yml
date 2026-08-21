@@ -275,6 +275,9 @@ on:
       - 'audits/lean-residual-terminal-packet-budget-no-lower-composition0.test.mjs'
       - 'docs/lean_residual_terminal_packet_budget_no_lower_composition.md'
       - 'docs/plans/2026-08-21-residual-terminal-packet-budget-no-lower-composition.md'
+      - 'audits/lean-residual-terminal-hresolve-maximal-h-disjoint-family0.test.mjs'
+      - 'docs/lean_residual_terminal_hresolve_maximal_h_disjoint_family.md'
+      - 'docs/plans/2026-08-21-residual-terminal-hresolve-maximal-h-disjoint-family.md'
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_locked_nand_polynomial_reduction.md'
       - 'docs/lean_concrete_cnf_to_nand_semantic_compiler.md'
@@ -4502,3 +4505,29 @@ jobs:
 
       - name: Run terminal Packet-budget no-lower composition hostile audit
         run: node --test audits/lean-residual-terminal-packet-budget-no-lower-composition0.test.mjs
+
+      - name: Print terminal HResolve maximal H-disjoint-family axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHResolveHDisjointFamilyAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalHResolveHDisjointFamilyAxiomAudit.lean)"
+          test "$expected_count" -gt 0
+          test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected terminal HResolve maximal H-disjoint-family axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -Eq 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            printf '%s\n' "$normalized" >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
+
+      - name: Run terminal HResolve maximal H-disjoint-family regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHResolveHDisjointFamily.lean
+
+      - name: Run terminal HResolve maximal H-disjoint-family hostile audit
+        run: node --test audits/lean-residual-terminal-hresolve-maximal-h-disjoint-family0.test.mjs
