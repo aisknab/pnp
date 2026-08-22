@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-23-182",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-23-183",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -2143,6 +2143,9 @@
     "PNP.DirectWire.TerminalComputedBN2SquareQuantities.sharedProjection": "cc534e9461c576cd0619a60217f19a2f8051d10ea4227dd07c315fbb462be0f4",
     "PNP.DirectWire.TerminalComputedBN2SquareQuantities.sharedRole": "50c7efac8a8400444fd8326e3d68ef103e2d5f7e5f05c15d089c510600b962e1",
     "PNP.DirectWire.TerminalComputedBN2SquareQuantities.transferIdentity": "716cb27271f5ee1c30b788d038c193a87b74e25984381192c602ce0e3a2fecf1",
+    "PNP.DirectWire.TerminalFiniteBCELReadyCertificate.anchorSizeAtLeastTwo": "949202faf572d7c7a1c21b70c6218f67c87fb2c339c86c898029e85e260801fa",
+    "PNP.DirectWire.TerminalFiniteBCELReadyCertificate.properCutConstantEquation": "4635f3630a32626934ee048659823d116bcde9688f091ad79b56b72a27ca5fba",
+    "PNP.DirectWire.TerminalFiniteBCELReadyCertificate.properCutLocalConclusion": "7a2596b6be371cfa7a484ead0d195c485ad9e384126662a37f3e91c2ba751167",
     "PNP.DirectWire.TerminalFiniteSaturatePositiveOutcome.sound": "5acc708881d1450e3e86abe5c1e0152ee6000d58ed0b5999c249d6efafcab69b",
     "PNP.DirectWire.TerminalFirstInterfaceExposureRoute.sound": "cef4ceb9d4650c0847c740c6126132dc9fa78100d83502b1c887cd6d3d31b8d0",
     "PNP.DirectWire.TerminalFourCornerCarrier.ambient_referenceMinimum_eq_corner": "de788866dd3f749d769ace9e19bddb3b2b9259dfb83934aafc49331763e855df",
@@ -2406,6 +2409,7 @@
     "PNP.DirectWire.classifyTerminalBN5FullShadowLocalization_exhaustive": "be1af480ae6864a553e86c154bcbc67ac7b72b01df96b5580c9b9eadeebb4cc3",
     "PNP.DirectWire.classifyTerminalBN5ShadowMatching_exhaustive": "daa39d3dc5252bc6eafa09474a9f1f91642c40957251fe7d69b1db28bbd35e29",
     "PNP.DirectWire.classifyTerminalFiniteSaturatePositive_exhaustive": "2f114bbe06ba71cfb038dcc5ff686516e7af0461d9a85e6dbda0e1104a814655",
+    "PNP.DirectWire.terminal_finite_saturate_positive_bcel_ready_checked_complete": "729a21c3ecfb2ae1fc36fcab7ef8bb3b183c00a63937eccf0add6667aec99f8c",
     "PNP.DirectWire.classifyTerminalPkgCAmbientBN4LedgerBinding_exhaustive": "f1d936219b9bd109c053dd7ab1ba812ab43a2d0ca1e58bc03540240620b24c89",
     "PNP.DirectWire.classifyTerminalPkgCAmbientBN4ResidualReduction_exhaustive": "a9a7ae5b7dfdf9f1d7e459535bf090da559792ed829a3272cc70f1fa0730451d",
     "PNP.DirectWire.classifyTerminalPkgCSameKeyCancellation_exhaustive": "c8c63bd0d8f1c967d9e4809d87f62692c9532dd52ea3f895b372baf3aacdfe95",
@@ -3117,7 +3121,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "3c7ef2e518e3b290a46a5e65b334e2729f38b794576ed56c83d1d2675d4bf26e",
+  "milestoneSourceClosureSha256": "3e91cc99bedfdac25795f923914ee765ce0f55200c7d1e6d05fcad58940c73ee",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -6693,6 +6697,19 @@
       ],
       "scope": "For every finite direct-wire candidate, executable ambient observer, forgetful projection, and proof-bearing candidate BCEL anchor problem whose normalized seed has positive full slack, Lean recognizes exact candidate-derived origin, kernel, and obligation closures in both gate/profile orientations; checks cost transparency, obligation discharge, and forgotten-profile stability; preserves positive full slack across an all-safe trace into the checked-lift or BCEL firewall; or returns the exact first interface, closure, or other fail-closed nontransparent route with its complete safe prefix.",
       "title": "Finite terminal SaturatePositive composition"
+    },
+    {
+      "classification": "formalized-residual-terminal-finite-bcel-ready-composition",
+      "id": "residual-terminal-finite-bcel-ready-composition",
+      "nonClaim": "The terminal candidate, executable model, candidate-derived anchor problem, and initial positive full-slack premise remain explicit. Rejection of another finite branch is not a mapping into the complete global route system. This does not derive positivity from residual slack, construct BN3--BN6 data or a grouped family, derive constant activation, establish manuscript-wide SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P; remove a project assumption; or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminal_finite_saturate_positive_bcel_ready_checked_complete",
+        "PNP.DirectWire.TerminalFiniteBCELReadyCertificate.anchorSizeAtLeastTwo",
+        "PNP.DirectWire.TerminalFiniteBCELReadyCertificate.properCutConstantEquation",
+        "PNP.DirectWire.TerminalFiniteBCELReadyCertificate.properCutLocalConclusion"
+      ],
+      "scope": "For every finite direct-wire candidate, executable terminal saturation model, and proof-bearing candidate BCEL anchor problem with explicit initial positive full slack, Lean reruns the recomputed finite SaturatePositive classifier and accepts only its positive-projection branch with a computed BCEL-ready anchor nucleus. The certificate retains the exact classifier equality, complete safe trace, positive final slack, positive whole-support defect, at-least-two anchor bound, exact constant-cut equation, and local full/quotient BN2 conclusion for every proper cut.",
+      "title": "Checked finite SaturatePositive-to-BCEL-ready composition"
     },
     {
       "classification": "formalized-residual-terminal-rank-wf",

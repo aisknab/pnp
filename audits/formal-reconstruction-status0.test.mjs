@@ -902,6 +902,8 @@ test('formal reconstruction status accepts the current source and public mirrors
     'leanResidualTerminalOriginKernelObligationRoutingAxiomAuditPassed',
     'leanResidualTerminalFiniteSaturatePositiveCompositionFormalized',
     'leanResidualTerminalFiniteSaturatePositiveCompositionAxiomAuditPassed',
+    'leanResidualTerminalFiniteBCELReadyCompositionFormalized',
+    'leanResidualTerminalFiniteBCELReadyCompositionAxiomAuditPassed',
     'leanResidualTerminalRankWFFormalized',
     'leanResidualTerminalRankWFAxiomAuditPassed',
     'leanResidualTerminalBN3RequestEnvelopeFormalized',
@@ -1016,6 +1018,10 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(
     out.leanResidualTerminalFiniteSaturatePositiveCompositionScope,
     'all-finite-direct-wire-candidates-executable-observers-forgetful-projections-proof-bearing-positive-full-slack-candidate-bcel-anchor-problems-total-finite-saturate-positive-composition',
+  );
+  assert.equal(
+    out.leanResidualTerminalFiniteBCELReadyCompositionScope,
+    'all-finite-direct-wire-candidates-executable-models-proof-bearing-positive-full-slack-anchor-problems-recomputed-finite-saturate-positive-to-computed-bcel-ready-branch',
   );
   assert.equal(
     out.leanResidualTerminalRankWFScope,
@@ -2279,6 +2285,8 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
     'leanResidualTerminalOriginKernelObligationRoutingAxiomAuditPassed',
     'leanResidualTerminalFiniteSaturatePositiveCompositionFormalized',
     'leanResidualTerminalFiniteSaturatePositiveCompositionAxiomAuditPassed',
+    'leanResidualTerminalFiniteBCELReadyCompositionFormalized',
+    'leanResidualTerminalFiniteBCELReadyCompositionAxiomAuditPassed',
     'leanResidualTerminalRankWFFormalized',
     'leanResidualTerminalRankWFAxiomAuditPassed',
     'leanResidualTerminalBN3RequestEnvelopeFormalized',
@@ -2367,6 +2375,10 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(
     status.leanResidualTerminalFiniteSaturatePositiveCompositionScope,
     'all-finite-direct-wire-candidates-executable-observers-forgetful-projections-proof-bearing-positive-full-slack-candidate-bcel-anchor-problems-total-finite-saturate-positive-composition',
+  );
+  assert.equal(
+    status.leanResidualTerminalFiniteBCELReadyCompositionScope,
+    'all-finite-direct-wire-candidates-executable-models-proof-bearing-positive-full-slack-anchor-problems-recomputed-finite-saturate-positive-to-computed-bcel-ready-branch',
   );
   assert.equal(
     status.leanResidualTerminalRankWFScope,
@@ -2882,6 +2894,8 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanResidualTerminalOriginKernelObligationRoutingAxiomAuditPassed',
     'leanResidualTerminalFiniteSaturatePositiveCompositionFormalized',
     'leanResidualTerminalFiniteSaturatePositiveCompositionAxiomAuditPassed',
+    'leanResidualTerminalFiniteBCELReadyCompositionFormalized',
+    'leanResidualTerminalFiniteBCELReadyCompositionAxiomAuditPassed',
     'leanResidualTerminalRankWFFormalized',
     'leanResidualTerminalRankWFAxiomAuditPassed',
     'leanResidualTerminalBN3RequestEnvelopeFormalized',

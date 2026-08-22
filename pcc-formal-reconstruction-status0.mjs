@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-182';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-183';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -528,6 +528,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalZeroSlackPacketSelectorHBCoherenceAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalZeroSlackPacketSelectorHBCoherence.lean',
   'node --test audits/lean-residual-terminal-zeroslack-packet-selector-hb-coherence0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFiniteBCELReadyAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFiniteBCELReady.lean',
+  'node --test audits/lean-residual-terminal-finite-bcel-ready0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -715,6 +718,7 @@ const NON_CLAIMS = Object.freeze([
   'Candidate-derived terminal saturation computes physical incidence from the actual circuit, profile incidence from exhaustive context-sensitive observer influence, and a deterministic rule-labelled trace without accepting a dependency relation or extraction certificate. Exact per-event cost classification and linked-history theorems close the finite terminal forms of transparentSaturationCostBalanced and firstNontransparentStepRecorded. Nontransparent events are recorded but not routed: interfaceExposureRoutesToE and originKernelObligationClosureRouted remain open, as do full SaturatePositive, Package E, BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP.',
   'Finite terminal interface-exposure routing recognizes only candidate-derived interface-consumer events and returns either exact transparency evidence or a proof-bearing local E-route. The production trace classifier preserves the complete transparent prefix and routes only its exact first nontransparent interface event; non-interface failures remain fail-closed. This closes only the finite local form of interfaceExposureRoutesToE. The local route is not Package E VerifyDW, and originKernelObligationClosureRouted, full SaturatePositive, BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.',
   'Finite terminal origin, kernel, and obligation routing recognizes only exact candidate-derived role, rule, orientation, and edge combinations. Safety requires transparent cost, discharged obligations, and stability of forgotten profiles; failures retain deterministic proof-bearing reasons and the exact safe prefix. A proof-bearing candidate BCEL anchor problem with positive initial full slack composes these routes with preservation and the existing checked-lift or BCEL firewall. This closes a finite local routing edge and finite composition only. Local routes are not the complete global outcome system or Package E, the positive premise remains explicit, and full SaturatePositive, BCELReady, RankWF, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.',
+  'The checked finite SaturatePositive-to-BCEL-ready composition reruns the production finite classifier and accepts only its positive-projection branch with a computed ready nucleus. Its certificate retains the exact classifier equality, safe trace, positive final slack, positive whole-support defect, nontrivial nucleus, constant-cut equations, and local BN2 conclusions. The terminal problem and initial positive premise remain supplied; local failure branches are not globally routed, BN3--BN6 data and constant activation are not derived, and manuscript-wide SaturatePositive, BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.',
   'Residual RankWF is now formalized for the manuscript\'s fixed ten-coordinate natural lexicographic rank, with an executable comparison, exact Boolean equivalence, coordinate-priority witnesses, accessibility, induction, and kernel-checked well-foundedness. This does not map current finite routes into the complete global outcome system, prove that any route decreases the rank, establish route completeness or Package E, remove the explicit positive premise, establish full SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
@@ -1698,6 +1702,10 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalFiniteSaturatePositiveCompositionAxiomAuditPassed: true,
   leanResidualTerminalFiniteSaturatePositiveCompositionScope:
     'all-finite-direct-wire-candidates-executable-observers-forgetful-projections-proof-bearing-positive-full-slack-candidate-bcel-anchor-problems-total-finite-saturate-positive-composition',
+  leanResidualTerminalFiniteBCELReadyCompositionFormalized: true,
+  leanResidualTerminalFiniteBCELReadyCompositionAxiomAuditPassed: true,
+  leanResidualTerminalFiniteBCELReadyCompositionScope:
+    'all-finite-direct-wire-candidates-executable-models-proof-bearing-positive-full-slack-anchor-problems-recomputed-finite-saturate-positive-to-computed-bcel-ready-branch',
   leanResidualTerminalRankWFFormalized: true,
   leanResidualTerminalRankWFAxiomAuditPassed: true,
   leanResidualTerminalRankWFScope:
@@ -2929,6 +2937,10 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalFiniteSaturatePositiveCompositionAxiomAuditPassed: true,
       leanResidualTerminalFiniteSaturatePositiveCompositionScope:
         'all-finite-direct-wire-candidates-executable-observers-forgetful-projections-proof-bearing-positive-full-slack-candidate-bcel-anchor-problems-total-finite-saturate-positive-composition',
+      leanResidualTerminalFiniteBCELReadyCompositionFormalized: true,
+      leanResidualTerminalFiniteBCELReadyCompositionAxiomAuditPassed: true,
+      leanResidualTerminalFiniteBCELReadyCompositionScope:
+        'all-finite-direct-wire-candidates-executable-models-proof-bearing-positive-full-slack-anchor-problems-recomputed-finite-saturate-positive-to-computed-bcel-ready-branch',
       leanResidualTerminalRankWFFormalized: true,
       leanResidualTerminalRankWFAxiomAuditPassed: true,
       leanResidualTerminalRankWFScope:
@@ -3248,7 +3260,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-23-182',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-23-183',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

@@ -692,6 +692,17 @@ inputs remain supplied. This does not derive those inputs or constant
 activation from positive residual slack, complete the no-lower ledger,
 establish unconditional ZeroSlack, or prove polynomial PCCMin.
 
+The checked finite `SaturatePositive`-to-BCEL-ready milestone closes the
+upstream local success seam without duplicating either classifier. One Boolean
+checker reruns the production finite composite and accepts only its
+positive-projection branch with a computed ready anchor nucleus. The result
+retains the exact selection equality, safe trace, positive final slack,
+positive whole-support defect, nontrivial nucleus, proper-cut equations, and
+local BN2 conclusions. Its terminal problem and initial positive premise
+remain supplied; local failures are not mapped globally, and BN3--BN6 data,
+constant activation, manuscript-wide `SaturatePositive` or `BCELReady`,
+ZeroSlack, and polynomial PCCMin remain open.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

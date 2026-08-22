@@ -1042,6 +1042,16 @@ Every positive packet has a representative in the polynomial selector universe; 
   This does not derive those inputs or constant activation from positive
   residual slack, establish unconditional ZeroSlack, or prove polynomial
   PCCMin.
+- The checked finite `SaturatePositive`-to-BCEL-ready bridge is witnessed by
+  `PNP.DirectWire.checkTerminalFiniteBCELReady`,
+  `terminal_finite_saturate_positive_bcel_ready_checked_complete`, and the
+  three `TerminalFiniteBCELReadyCertificate` projection theorems. Audit that
+  the checker reruns `classifyTerminalFiniteSaturatePositive`, accepts only the
+  nested ready branch, and retains its exact classifier equality rather than a
+  caller success flag or detached nucleus. The terminal problem and initial
+  positive premise remain supplied; rejection is not global route mapping,
+  and this is not manuscript-wide `SaturatePositive`, `BCELReady`, ZeroSlack,
+  or PCCMin.
 - Terminal budget-envelope resolution is witnessed by
   `PNP.DirectWire.TerminalSupportBudget.check_eq_true_iff`,
   `PNP.DirectWire.findTerminalBudgetFeasibleSupport_eq_none_iff`,
