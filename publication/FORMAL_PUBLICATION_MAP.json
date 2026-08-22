@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-22-179",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-22-180",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3083,7 +3083,12 @@
     "PNP.SelectorHBZeroSlackSidecarCertificate.hb_closure_valid": "467e8cbac6c5e66bc9f3d4c07b2a70d7f2123a3a94f3c1321dfd5a0ca4e390d2",
     "PNP.SelectorHBZeroSlackSidecarCertificate.no_hb_active": "4d124cd8d0a094b5afc6f65753a0fc25ebe3de53f7982e9c9c14baa3f42ab92e",
     "PNP.SelectorHBZeroSlackSidecarCertificate.depends_wellFounded": "5271acc313495928f3c92cd7af78837c8e40d4b4efbfc1b65e558b4e22877e8a",
-    "PNP.selector_hb_zeroslack_sidecar_checked_complete": "2a9dbe37bb6f13d6cb78be8d374fbcc826079845b2c9c724ac4f6d58ad2c51e3"
+    "PNP.selector_hb_zeroslack_sidecar_checked_complete": "2a9dbe37bb6f13d6cb78be8d374fbcc826079845b2c9c724ac4f6d58ad2c51e3",
+    "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.accepted": "91ab1ab5f4fb05d97c2d14ffa7bd712517c13457dc14a24121cad74570bfec5c",
+    "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.all_feasible_support_minimum": "f7168be59f47c908fba68a3c5905cf31991e7ec514952f13e43ded3fca2fab83",
+    "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.no_feasible_gain": "9a6e605bee0f9582e8e3b77618a43147015603bc725e56674b7ee52d52bf32c4",
+    "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.no_positive_packet": "d5348c9349c05723fe6de3cc006389afe55e03270906a946ef73041aa0b34ba2",
+    "PNP.packet_budget_no_lower_zeroslack_sidecar_checked_complete": "be5948772dac68e28bbda201620f74eb6d31ba1265eb263162f1ff8107c505db"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3101,7 +3106,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "3f746125b6e29864fa87312026c2a5e5422e3c850b76b8cfdc72b8c96a044079",
+  "milestoneSourceClosureSha256": "99bcce8eb3005173e6c199a5ac86956f627515f96253e45502964a46c58b8233",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -7804,6 +7809,20 @@
       ],
       "scope": "For arbitrary finite supplied grouped BN6, typed-realizer, and exact-rank HB dependency tables, the report-facing ZeroSlack boundary now consumes one checked proof-bearing Selector/HB sidecar. The exact executable checks yield all-canonical-selector nonfaithfulness, exact typed-bottom rows, complete no-outcome closure, all-node HN/BUD inactivity, and a well-founded dependency relation.",
       "title": "Proof-bearing Selector/HB ZeroSlack sidecar"
+    },
+    {
+      "classification": "formalized-residual-terminal-packet-budget-no-lower-zeroslack-sidecar",
+      "id": "residual-terminal-packet-budget-no-lower-zeroslack-sidecar",
+      "nonClaim": "The caps, candidate-derived model, grouped BN6 family, typed payloads, finite ranks, realizer claims, activity environment, dependency rows, and rank maps remain supplied inputs. This finite two-branch sidecar does not complete no-lower ledger coverage for the manuscript, derive its inputs from terminal data, establish unconditional ZeroSlack, prove PCCMin or polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.accepted",
+        "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.all_feasible_support_minimum",
+        "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.no_feasible_gain",
+        "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.no_positive_packet",
+        "PNP.packet_budget_no_lower_zeroslack_sidecar_checked_complete"
+      ],
+      "scope": "For arbitrary finite supplied same-candidate Packet and terminal-budget data, the report-facing ZeroSlack boundary now consumes one checked proof-bearing Packet/budget no-lower sidecar. Its exact executable composition equation proves every governed budget-feasible support semantically minimum, excludes every such strict equivalent gain, and excludes a positive Packet conclusion for the supplied family.",
+      "title": "Proof-bearing Packet/budget no-lower ZeroSlack sidecar"
     },
     {
       "classification": "formalized-concrete-locked-nand-threshold",
