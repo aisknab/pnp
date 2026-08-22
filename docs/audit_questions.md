@@ -1002,6 +1002,20 @@ Every positive packet has a representative in the polynomial selector universe; 
   tables, environment, claims, activity bits, and rank map remain supplied;
   this is not blocker semantics, semantic dependency completeness,
   unconditional ZeroSlack, or polynomial PCCMin.
+- The proof-bearing Packet/budget no-lower ZeroSlack boundary is witnessed by
+  `PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.accepted`,
+  `PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.all_feasible_support_minimum`,
+  `PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.no_feasible_gain`,
+  `PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.no_positive_packet`, and
+  `PNP.packet_budget_no_lower_zeroslack_sidecar_checked_complete`. The
+  certificate stores the exact same-candidate executable Packet/budget
+  composition equation instead of a no-lower string. Audit that acceptance
+  retains every governed budget-feasible support's semantic minimum, excludes
+  every such strict equivalent gain, and excludes a positive Packet conclusion
+  for the supplied family. The caps, candidate-derived model, grouped family,
+  payloads, ranks, claims, activity, dependencies, and rank maps remain
+  supplied; this finite two-branch result is not the complete manuscript
+  no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin.
 - Terminal budget-envelope resolution is witnessed by
   `PNP.DirectWire.TerminalSupportBudget.check_eq_true_iff`,
   `PNP.DirectWire.findTerminalBudgetFeasibleSupport_eq_none_iff`,
@@ -1227,6 +1241,11 @@ Every positive packet has a representative in the polynomial selector universe; 
   from different tables or ranks, assumes Packet impossibility, or promotes
   the Packet branch to the complete no-lower ledger, unconditional ZeroSlack,
   or polynomial PCCMin.
+- A supposedly proof-bearing Packet/budget ZeroSlack sidecar that replaces the
+  exact composition equation with a caller Boolean, string, or independent
+  conclusion proof; drops either the budget or Packet component; mixes
+  candidates between them; or promotes the finite two-branch exclusion to the
+  complete no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin.
 
 ---
 

@@ -661,6 +661,17 @@ tables, environment, claims, activity bits, and rank map remain supplied. This
 is not blocker semantics, semantic dependency completeness, the BCEL
 contradiction, unconditional ZeroSlack, or polynomial PCCMin.
 
+The proof-bearing Packet/budget no-lower ZeroSlack sidecar milestone then
+replaces the report-facing no-lower string with the exact executable
+same-candidate composition equation. Reflection reuses the existing component
+theorems to prove that every governed budget-feasible support is semantic
+minimum, no such support has a strict equivalent gain, and the supplied
+grouped family has no positive Packet conclusion. The caps,
+candidate-derived model, typed Packet data, ranks, claims, activity,
+dependencies, and rank maps remain supplied. This is the existing finite
+two-branch boundary, not the complete manuscript no-lower ledger,
+unconditional ZeroSlack, or polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

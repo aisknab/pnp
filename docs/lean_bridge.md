@@ -1577,6 +1577,17 @@ environment, and dependency rows remain supplied. This is a finite two-branch
 composition, not the complete no-lower ledger, a terminal construction of the
 Packet inputs, unconditional `ZeroSlack`, or polynomial `PCCMin`.
 
+`lean/PNP/ResidualTerminalPacketBudgetNoLowerZeroSlackSidecar.lean` upgrades
+the matching report-facing ZeroSlack field from a no-lower string to the exact
+same-candidate Packet/budget composition equation. Its proof-bearing
+`PacketBudgetNoLowerZeroSlackSidecarCertificate` reflects acceptance, proves
+every governed budget-feasible support semantically minimum, excludes every
+such strict equivalent gain, and excludes a positive Packet conclusion for the
+supplied family. The caps, candidate-derived model, grouped family, payloads,
+ranks, claims, activity, dependencies, and rank maps remain supplied. This is
+the existing finite two-branch boundary, not the complete manuscript no-lower
+ledger, unconditional `ZeroSlack`, or polynomial `PCCMin`.
+
 `lean/PNP/PCCMin.lean` exposes the structured loop certificate and constructs the witness-model residual-band decider from it.
 
 Most fields in these certificate objects are still digest/ledger handles. Replacing those handles by actual propositions and proofs is a major remaining task.

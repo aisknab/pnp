@@ -2218,6 +2218,20 @@ compatibility, blocker semantics, semantic dependency completeness, the BCEL
 contradiction, unconditional ZeroSlack, or polynomial PCCMin. See
 [`lean_residual_terminal_selector_hb_zeroslack_sidecar.md`](./lean_residual_terminal_selector_hb_zeroslack_sidecar.md).
 
+`ResidualTerminalPacketBudgetNoLowerZeroSlackSidecar` now replaces the
+report-facing `noLowerRouteLedgerComplete` string with one proof-bearing
+sidecar. It stores the actual executable same-candidate Packet/budget
+composition equation for arbitrary finite direct-wire, budget, saturation,
+typed Packet, realizer, dependency, and residual-rank data. Existing
+reflection proves every governed budget-feasible support semantic minimum,
+excludes every such strict equivalent gain, and excludes a positive Packet
+conclusion for the supplied family. The caps, candidate-derived model, family,
+payloads, ranks, claims, activity, dependency rows, and rank maps remain
+supplied. This is the existing finite two-branch boundary, not normalization,
+HResolve, saturation-loss, named-route, or replay coverage; the complete
+manuscript no-lower ledger; unconditional ZeroSlack; or polynomial PCCMin. See
+[`lean_residual_terminal_packet_budget_no_lower_zeroslack_sidecar.md`](./lean_residual_terminal_packet_budget_no_lower_zeroslack_sidecar.md).
+
 `ResidualTerminalBudgetEnvelopeResolver` now places a computed finite budget
 boundary over that canonical support universe. For supplied natural gate and
 saturated-record caps, each seed is saturated in the candidate-derived system;

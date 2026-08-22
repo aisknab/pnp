@@ -1,0 +1,8 @@
+import PNP.ResidualTerminalPacketBudgetNoLowerZeroSlackSidecar
+
+#print axioms PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate
+#print axioms PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.accepted
+#print axioms PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.all_feasible_support_minimum
+#print axioms PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.no_feasible_gain
+#print axioms PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.no_positive_packet
+#print axioms PNP.packet_budget_no_lower_zeroslack_sidecar_checked_complete

@@ -4,15 +4,17 @@ Copyright (c) 2026 PNP Labs.
 ZeroSlack and oracle certificate layer for the Lean bridge.
 
 This file replaces the opaque PCCMin string handles with structured certificate
-objects for the report's rank-ordered oracle and ZeroSlack contradiction.  The
-HResolve, Budget, and joint selector/HB boundaries are now checked proof-bearing
-certificates; the remaining fields are still digest/ledger handles in this pass.
+objects for the report's rank-ordered oracle and ZeroSlack contradiction. The
+HResolve, Budget, joint selector/HB, and finite Packet/budget no-lower
+boundaries are now checked proof-bearing certificates; the remaining fields
+are still digest or proof handles in this pass.
 -/
 
 import PNP.ResidualBand
 import PNP.ResidualTerminalHResolveZeroSlackSidecar
 import PNP.ResidualTerminalBudgetZeroSlackSidecar
 import PNP.ResidualTerminalSelectorHBZeroSlackSidecar
+import PNP.ResidualTerminalPacketBudgetNoLowerZeroSlackSidecar
 
 namespace PNP
 
@@ -31,10 +33,10 @@ actual Lean proofs about terminal MuBridge, SaturatePositive, BCELReady,
 BN2--BN6, selector realization, HB closure, and the final contradiction. -/
 structure ZeroSlackCertificate where
   normalizedInputRecord : String
-  noLowerRouteLedgerComplete : String
   hResolve : HResolveSidecarCertificate
   budget : BudgetSidecarCertificate
   selectorHBClosure : SelectorHBZeroSlackSidecarCertificate
+  packetBudgetNoLower : PacketBudgetNoLowerZeroSlackSidecarCertificate
   bcelContradiction : BCELContradictionCertificate
   certificateEncodingPolynomial : String
   certificatePolynomialSize : String
