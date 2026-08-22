@@ -1599,6 +1599,16 @@ supplied. This does not derive BCELReady or constant activation from positive
 residual slack, complete the no-lower ledger, establish unconditional
 `ZeroSlack`, or prove polynomial `PCCMin`.
 
+`lean/PNP/ResidualTerminalZeroSlackPacketSelectorHBCoherence.lean` closes
+the same-family Selector/HB, Packet, and BCEL seam in the report-facing
+certificate. It derives the Selector/HB sidecar from M180's exact grouped
+family, computed realizer table, and dependency table, so selector silence, HB
+closure, Packet exclusion, and the dependent M181 BCEL contradiction cannot be
+assembled from detached inputs. The family and all terminal, budget, Packet,
+realizer, dependency, rank, and BCEL inputs remain supplied. This does not
+derive those inputs or constant activation from positive residual slack,
+establish unconditional `ZeroSlack`, or prove polynomial `PCCMin`.
+
 `lean/PNP/PCCMin.lean` exposes the structured loop certificate and constructs the witness-model residual-band decider from it.
 
 Most fields in these certificate objects are still digest/ledger handles. Replacing those handles by actual propositions and proofs is a major remaining task.

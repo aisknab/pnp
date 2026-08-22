@@ -146,6 +146,18 @@ dependency, and rank data remain supplied. This does not derive BCELReady or
 constant activation from positive residual slack, complete the no-lower
 ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.
 
+### Current Lean same-family ZeroSlack coherence boundary
+
+`ResidualTerminalZeroSlackPacketSelectorHBCoherence` is the derived
+same-family Selector/HB, Packet, and BCEL boundary. The Selector/HB view uses
+the exact grouped family, computed realizer table, and dependency table already
+accepted by the Packet/budget certificate; the dependent BCEL certificate uses
+that same family. No second certificate or caller-supplied coherence witness is
+stored. The family and all terminal, budget, Packet, realizer, dependency,
+rank, and BCEL inputs remain supplied. This does not derive those inputs or
+constant activation from positive residual slack, establish unconditional
+ZeroSlack, or prove polynomial PCCMin.
+
 ## Ambiguity and naming rules
 
 1. **`Residual` must be qualified.** Use “residual slack,” “positive residual witness,” “BN4 residual cell,” or “quotient residual key.”
