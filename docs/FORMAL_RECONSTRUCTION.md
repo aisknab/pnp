@@ -2204,6 +2204,20 @@ grammar or B0--B4 sidecar, full or polynomial BudgetResolve, the complete
 no-lower ledger, unconditional ZeroSlack, or PCCMin. See
 [`lean_residual_terminal_budget_zeroslack_sidecar.md`](./lean_residual_terminal_budget_zeroslack_sidecar.md).
 
+`ResidualTerminalSelectorHBZeroSlackSidecar` now replaces the report-facing
+selector-silence and HB-closure string structures with one proof-bearing
+sidecar. It stores the actual all-row selector-silence and ranked no-outcome
+HB-closure checker equations for arbitrary finite supplied grouped-family,
+typed-realizer, and dependency-table data. Existing reflection and strong
+finite-rank induction prove every canonical selector nonfaithful, every claim
+an exact typed bottom, the complete closure proposition, all supplied HN/BUD
+activity false, and dependency well-foundedness. The family, tables,
+environment, claims, activity bits, dependency rows, and rank map remain
+supplied. This is not terminal-data derivation, selector faithfulness or
+compatibility, blocker semantics, semantic dependency completeness, the BCEL
+contradiction, unconditional ZeroSlack, or polynomial PCCMin. See
+[`lean_residual_terminal_selector_hb_zeroslack_sidecar.md`](./lean_residual_terminal_selector_hb_zeroslack_sidecar.md).
+
 `ResidualTerminalBudgetEnvelopeResolver` now places a computed finite budget
 boundary over that canonical support universe. For supplied natural gate and
 saturated-record caps, each seed is saturated in the candidate-derived system;

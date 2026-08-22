@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-22-178",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-22-179",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3076,7 +3076,14 @@
     "PNP.BudgetSidecarCertificate.no_feasible_support": "c43f95f6685ef2bfd1c74341121879e8800e14071c71551b6f52443214c3c9f5",
     "PNP.BudgetSidecarCertificate.exact_route_sound": "d8a95988cf255477a8e89a4677c8ab5acfa3129540dbf8aac0d9e477cb4e1922",
     "PNP.BudgetSidecarCertificate.gain_route_sound": "030c2b43009fff9c76409479aa0ed39d46451e011b4de89e09f604e0f0eb9968",
-    "PNP.budget_zeroslack_sidecar_checked_complete": "7829c7dd487dfec295ad0504483a30ebe0a22e43cd4da685920f8df8f40bce4b"
+    "PNP.budget_zeroslack_sidecar_checked_complete": "7829c7dd487dfec295ad0504483a30ebe0a22e43cd4da685920f8df8f40bce4b",
+    "PNP.SelectorHBZeroSlackSidecarCertificate.accepted": "67c70ec0e459367d654987206e3c2cd52553e82c8f23b7f16022a9762d1d261c",
+    "PNP.SelectorHBZeroSlackSidecarCertificate.no_faithful": "171fafc844fb693b973fa2ea791ac5750c9e598be66d8c1b2f590595cab72bff",
+    "PNP.SelectorHBZeroSlackSidecarCertificate.claim_eq_bot": "22e94e24106d10ddb099f0382892d7d1bc75620bd15a45d04123ddf98f1b791a",
+    "PNP.SelectorHBZeroSlackSidecarCertificate.hb_closure_valid": "467e8cbac6c5e66bc9f3d4c07b2a70d7f2123a3a94f3c1321dfd5a0ca4e390d2",
+    "PNP.SelectorHBZeroSlackSidecarCertificate.no_hb_active": "4d124cd8d0a094b5afc6f65753a0fc25ebe3de53f7982e9c9c14baa3f42ab92e",
+    "PNP.SelectorHBZeroSlackSidecarCertificate.depends_wellFounded": "5271acc313495928f3c92cd7af78837c8e40d4b4efbfc1b65e558b4e22877e8a",
+    "PNP.selector_hb_zeroslack_sidecar_checked_complete": "2a9dbe37bb6f13d6cb78be8d374fbcc826079845b2c9c724ac4f6d58ad2c51e3"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3094,7 +3101,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "a9b1e661dfcae428062fc340977abf316ca4fcfd1de6e2ee613351eaf22d9be4",
+  "milestoneSourceClosureSha256": "3f746125b6e29864fa87312026c2a5e5422e3c850b76b8cfdc72b8c96a044079",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -7781,6 +7788,22 @@
       ],
       "scope": "For arbitrary finite direct-wire candidates and supplied natural caps, the report-facing ZeroSlack boundary now consumes a checked proof-bearing NoBudget sidecar. A failed exhaustive search over the complete canonical terminal support universe excludes every budget-feasible support, while separately checked exact and gain routes entail semantic minimum and strict equivalent gain propositions.",
       "title": "Proof-bearing Budget ZeroSlack sidecar"
+    },
+    {
+      "classification": "formalized-residual-terminal-selector-hb-zeroslack-sidecar",
+      "id": "residual-terminal-selector-hb-zeroslack-sidecar",
+      "nonClaim": "The grouped BN6 family, typed-realizer and dependency tables, environment, realizer claims, activity bits, dependency rows, and finite rank map remain supplied inputs. This milestone does not derive them from terminal data, prove selector faithfulness or compatibility, establish HN/BUD blocker semantics or semantic dependency completeness, connect selector silence to the BCEL contradiction, complete the no-lower ledger, establish unconditional ZeroSlack, prove PCCMin or polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.SelectorHBZeroSlackSidecarCertificate.accepted",
+        "PNP.SelectorHBZeroSlackSidecarCertificate.no_faithful",
+        "PNP.SelectorHBZeroSlackSidecarCertificate.claim_eq_bot",
+        "PNP.SelectorHBZeroSlackSidecarCertificate.hb_closure_valid",
+        "PNP.SelectorHBZeroSlackSidecarCertificate.no_hb_active",
+        "PNP.SelectorHBZeroSlackSidecarCertificate.depends_wellFounded",
+        "PNP.selector_hb_zeroslack_sidecar_checked_complete"
+      ],
+      "scope": "For arbitrary finite supplied grouped BN6, typed-realizer, and exact-rank HB dependency tables, the report-facing ZeroSlack boundary now consumes one checked proof-bearing Selector/HB sidecar. The exact executable checks yield all-canonical-selector nonfaithfulness, exact typed-bottom rows, complete no-outcome closure, all-node HN/BUD inactivity, and a well-founded dependency relation.",
+      "title": "Proof-bearing Selector/HB ZeroSlack sidecar"
     },
     {
       "classification": "formalized-concrete-locked-nand-threshold",

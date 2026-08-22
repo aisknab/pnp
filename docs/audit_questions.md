@@ -989,6 +989,19 @@ Every positive packet has a representative in the polynomial selector universe; 
   exponential; this is not the BUD grammar or B0--B4 sidecar, full or
   polynomial BudgetResolve, the complete no-lower ledger, unconditional
   ZeroSlack, or polynomial PCCMin.
+- The proof-bearing Selector/HB ZeroSlack boundary is witnessed by
+  `PNP.SelectorHBZeroSlackSidecarCertificate.accepted`,
+  `PNP.SelectorHBZeroSlackSidecarCertificate.no_faithful`,
+  `PNP.SelectorHBZeroSlackSidecarCertificate.no_hb_active`, and
+  `PNP.selector_hb_zeroslack_sidecar_checked_complete`. The certificate stores
+  the exact executable all-row selector-silence and ranked no-outcome HB
+  closure equations instead of eight strings. Reflection proves every
+  canonical claim is a typed bottom; strong finite-rank induction proves all
+  canonical selectors nonfaithful, all supplied HN/BUD activity false, and
+  dependency well-foundedness. The grouped family, realizer and dependency
+  tables, environment, claims, activity bits, and rank map remain supplied;
+  this is not blocker semantics, semantic dependency completeness,
+  unconditional ZeroSlack, or polynomial PCCMin.
 - Terminal budget-envelope resolution is witnessed by
   `PNP.DirectWire.TerminalSupportBudget.check_eq_true_iff`,
   `PNP.DirectWire.findTerminalBudgetFeasibleSupport_eq_none_iff`,

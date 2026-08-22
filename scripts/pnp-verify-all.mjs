@@ -186,6 +186,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-residual-terminal-hresolve-certified-path-family0.test.mjs',
   'audits/lean-residual-terminal-hresolve-zeroslack-sidecar0.test.mjs',
   'audits/lean-residual-terminal-budget-zeroslack-sidecar0.test.mjs',
+  'audits/lean-residual-terminal-selector-hb-zeroslack-sidecar0.test.mjs',
   'audits/legacy-v0-archive0.test.mjs',
   'test/current-package-surface0.test.mjs',
   'test/current-verifier0.test.mjs',
