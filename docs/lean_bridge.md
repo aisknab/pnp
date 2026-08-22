@@ -1588,6 +1588,17 @@ ranks, claims, activity, dependencies, and rank maps remain supplied. This is
 the existing finite two-branch boundary, not the complete manuscript no-lower
 ledger, unconditional `ZeroSlack`, or polynomial `PCCMin`.
 
+`lean/PNP/ResidualTerminalBCELPacketNoLowerZeroSlackSidecar.lean` upgrades the
+remaining BCEL contradiction bundle from five strings to one dependent
+proof-bearing boundary. Its type ties the exact M180 certificate to the same
+grouped family, and its only stored equation checks that the carrier contains
+at least two anchors. BCEL constant activation would construct a positive BN6
+Packet by `terminalBN6_hypergraph_packet`; the accepted same-family no-lower
+certificate excludes that Packet. The family and all M180 inputs remain
+supplied. This does not derive BCELReady or constant activation from positive
+residual slack, complete the no-lower ledger, establish unconditional
+`ZeroSlack`, or prove polynomial `PCCMin`.
+
 `lean/PNP/PCCMin.lean` exposes the structured loop certificate and constructs the witness-model residual-band decider from it.
 
 Most fields in these certificate objects are still digest/ledger handles. Replacing those handles by actual propositions and proofs is a major remaining task.

@@ -672,6 +672,16 @@ dependencies, and rank maps remain supplied. This is the existing finite
 two-branch boundary, not the complete manuscript no-lower ledger,
 unconditional ZeroSlack, or polynomial PCCMin.
 
+The proof-bearing BCEL/Packet no-lower ZeroSlack sidecar milestone then
+replaces five BCEL contradiction strings with one dependent boundary tied to
+that exact M180 certificate. A decidable check establishes that its supplied
+grouped family has at least two anchors. If the same family satisfied BCEL
+constant activation, the arbitrary-finite BN6 theorem would construct a
+positive Packet, contradicting the accepted no-lower branch. The grouped
+family and all M180 inputs remain supplied. This does not derive BCELReady or
+constant activation from positive residual slack, complete the no-lower
+ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

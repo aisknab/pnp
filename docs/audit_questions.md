@@ -1016,6 +1016,18 @@ Every positive packet has a representative in the polynomial selector universe; 
   payloads, ranks, claims, activity, dependencies, and rank maps remain
   supplied; this finite two-branch result is not the complete manuscript
   no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin.
+- The proof-bearing BCEL/Packet no-lower ZeroSlack boundary is witnessed by
+  `PNP.BCELContradictionCertificate.carrier_at_least_two`,
+  `PNP.BCELContradictionCertificate.no_positive_packet`,
+  `PNP.BCELContradictionCertificate.not_constant_activation`, and
+  `PNP.bcel_packet_no_lower_zeroslack_sidecar_checked_complete`. Audit that the
+  certificate is dependently bound to the exact M180 evidence, that its only
+  stored field is the decidable carrier lower-bound equation, and that the
+  contradiction invokes `terminalBN6_hypergraph_packet` for the same supplied
+  family. The family and all M180 data remain supplied. This does not derive
+  BCELReady or constant activation from positive residual slack, complete the
+  no-lower ledger, establish unconditional ZeroSlack, or prove polynomial
+  PCCMin.
 - Terminal budget-envelope resolution is witnessed by
   `PNP.DirectWire.TerminalSupportBudget.check_eq_true_iff`,
   `PNP.DirectWire.findTerminalBudgetFeasibleSupport_eq_none_iff`,
