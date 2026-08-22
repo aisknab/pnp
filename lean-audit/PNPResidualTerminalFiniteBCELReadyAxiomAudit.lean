@@ -1,0 +1,8 @@
+import PNP.ResidualTerminalFiniteBCELReady
+
+#print axioms PNP.DirectWire.TerminalFiniteBCELReadyCertificate
+#print axioms PNP.DirectWire.checkTerminalFiniteBCELReady
+#print axioms PNP.DirectWire.terminal_finite_saturate_positive_bcel_ready_checked_complete
+#print axioms PNP.DirectWire.TerminalFiniteBCELReadyCertificate.anchorSizeAtLeastTwo
+#print axioms PNP.DirectWire.TerminalFiniteBCELReadyCertificate.properCutConstantEquation
+#print axioms PNP.DirectWire.TerminalFiniteBCELReadyCertificate.properCutLocalConclusion

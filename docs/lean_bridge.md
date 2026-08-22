@@ -1202,6 +1202,18 @@ sub-obligations only. It is not a mapping to the manuscript's complete global
 outcome set, Package E, RankWF, full `SaturatePositive`, or `BCELReady`. See
 `docs/lean_residual_terminal_finite_saturate_positive.md`.
 
+`lean/PNP/ResidualTerminalFiniteBCELReady.lean` runs one checked bridge across
+both existing classifiers. `checkTerminalFiniteBCELReady` recomputes the finite
+`SaturatePositive` outcome and accepts only a positive-projection branch whose
+nested BCEL result is `ready`. The proof-bearing certificate retains the exact
+selection equality, safe trace, both positivity facts, and computed nucleus;
+projection theorems expose the nontrivial anchor bound, exact proper-cut
+equation, and local BN2 conclusion. It does not infer the initial positivity
+premise, map rejected local branches globally, construct BN3--BN6 inputs,
+derive constant activation, or establish full `SaturatePositive`, `BCELReady`,
+ZeroSlack, or PCCMin. See
+`docs/lean_residual_terminal_finite_bcel_ready.md`.
+
 `lean/PNP/ResidualTerminalRankWF.lean` formalizes the fixed rank named after
 `RW-SaturatePositive`: witness type, span type, mode, frontier defect,
 projection defect, saturation defect, anchor count, charge size, profile size,

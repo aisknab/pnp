@@ -1370,6 +1370,21 @@ RankWF, route completeness, full `SaturatePositive`, `BCELReady`, ZeroSlack,
 PCCMin, polynomial runtime, and the root theorem remain open. See
 [`lean_residual_terminal_finite_saturate_positive.md`](./lean_residual_terminal_finite_saturate_positive.md).
 
+`ResidualTerminalFiniteBCELReady` now closes the checked finite success edge
+between that composite and the computed BCEL anchor-nucleus result. Its Boolean
+checker reruns the production classifier and accepts only the nested
+positive-projection / ready-nucleus branch. The reconstructed certificate keeps
+the exact classifier equality, all-safe trace, positive final full slack,
+positive whole-support projection defect, computed minimum positive nucleus,
+at-least-two anchor bound, exact constant-cut equation, and local full/quotient
+BN2 conclusion. The terminal problem and initial positive premise remain
+explicit, and rejected local branches are not mapped into the complete global
+route system. This therefore does not construct BN3--BN6 data or a grouped
+family, derive constant activation, establish manuscript-wide
+`SaturatePositive` or `BCELReady`, prove ZeroSlack, PCCMin, polynomial runtime,
+or the root theorem. See
+[`lean_residual_terminal_finite_bcel_ready.md`](./lean_residual_terminal_finite_bcel_ready.md).
+
 `ResidualTerminalRankWF` now reconstructs the named residual `RankWF` boundary.
 The rank is exactly the manuscript's ten natural coordinates in priority order:
 witness type, span type, mode, frontier defect, projection defect, saturation

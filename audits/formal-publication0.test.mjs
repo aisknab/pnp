@@ -2549,6 +2549,30 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   assert.match(terminalFiniteSaturatePositive.nonClaim, /local route/u);
   assert.match(terminalFiniteSaturatePositive.nonClaim, /Package E/u);
   assert.match(terminalFiniteSaturatePositive.nonClaim, /RankWF/u);
+  const terminalFiniteBCELReady = byId.get(
+    'residual-terminal-finite-bcel-ready-composition',
+  );
+  assert.equal(terminalFiniteBCELReady.status,
+    'formalized-residual-terminal-finite-bcel-ready-composition');
+  assert.equal(terminalFiniteBCELReady.earned, true);
+  assert.equal(
+    terminalFiniteBCELReady.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.deepEqual(terminalFiniteBCELReady.requiredTheorems, [
+    'PNP.DirectWire.terminal_finite_saturate_positive_bcel_ready_checked_complete',
+    'PNP.DirectWire.TerminalFiniteBCELReadyCertificate.anchorSizeAtLeastTwo',
+    'PNP.DirectWire.TerminalFiniteBCELReadyCertificate.properCutConstantEquation',
+    'PNP.DirectWire.TerminalFiniteBCELReadyCertificate.properCutLocalConclusion',
+  ]);
+  assert.match(terminalFiniteBCELReady.scope,
+    /recomputed finite SaturatePositive classifier/u);
+  assert.match(terminalFiniteBCELReady.scope,
+    /computed BCEL-ready anchor nucleus/u);
+  assert.match(terminalFiniteBCELReady.nonClaim,
+    /initial positive full-slack premise/u);
+  assert.match(terminalFiniteBCELReady.nonClaim, /BN3--BN6/u);
+  assert.match(terminalFiniteBCELReady.nonClaim, /ZeroSlack/u);
   const terminalRankWF = byId.get('residual-terminal-rank-wf');
   assert.equal(terminalRankWF.status,
     'formalized-residual-terminal-rank-wf');

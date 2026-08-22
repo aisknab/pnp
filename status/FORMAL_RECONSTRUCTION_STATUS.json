@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-182",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-183",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -827,6 +827,9 @@
   "leanResidualTerminalFiniteSaturatePositiveCompositionFormalized": true,
   "leanResidualTerminalFiniteSaturatePositiveCompositionAxiomAuditPassed": true,
   "leanResidualTerminalFiniteSaturatePositiveCompositionScope": "all-finite-direct-wire-candidates-executable-observers-forgetful-projections-proof-bearing-positive-full-slack-candidate-bcel-anchor-problems-total-finite-saturate-positive-composition",
+  "leanResidualTerminalFiniteBCELReadyCompositionFormalized": true,
+  "leanResidualTerminalFiniteBCELReadyCompositionAxiomAuditPassed": true,
+  "leanResidualTerminalFiniteBCELReadyCompositionScope": "all-finite-direct-wire-candidates-executable-models-proof-bearing-positive-full-slack-anchor-problems-recomputed-finite-saturate-positive-to-computed-bcel-ready-branch",
   "leanResidualTerminalRankWFFormalized": true,
   "leanResidualTerminalRankWFAxiomAuditPassed": true,
   "leanResidualTerminalRankWFScope": "fixed-ten-coordinate-natural-lexicographic-order-executable-comparison-accessibility-induction-and-kernel-well-foundedness",
@@ -1648,6 +1651,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalZeroSlackPacketSelectorHBCoherenceAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalZeroSlackPacketSelectorHBCoherence.lean",
     "node --test audits/lean-residual-terminal-zeroslack-packet-selector-hb-coherence0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFiniteBCELReadyAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFiniteBCELReady.lean",
+    "node --test audits/lean-residual-terminal-finite-bcel-ready0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1834,6 +1840,7 @@
     "Candidate-derived terminal saturation computes physical incidence from the actual circuit, profile incidence from exhaustive context-sensitive observer influence, and a deterministic rule-labelled trace without accepting a dependency relation or extraction certificate. Exact per-event cost classification and linked-history theorems close the finite terminal forms of transparentSaturationCostBalanced and firstNontransparentStepRecorded. Nontransparent events are recorded but not routed: interfaceExposureRoutesToE and originKernelObligationClosureRouted remain open, as do full SaturatePositive, Package E, BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP.",
     "Finite terminal interface-exposure routing recognizes only candidate-derived interface-consumer events and returns either exact transparency evidence or a proof-bearing local E-route. The production trace classifier preserves the complete transparent prefix and routes only its exact first nontransparent interface event; non-interface failures remain fail-closed. This closes only the finite local form of interfaceExposureRoutesToE. The local route is not Package E VerifyDW, and originKernelObligationClosureRouted, full SaturatePositive, BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.",
     "Finite terminal origin, kernel, and obligation routing recognizes only exact candidate-derived role, rule, orientation, and edge combinations. Safety requires transparent cost, discharged obligations, and stability of forgotten profiles; failures retain deterministic proof-bearing reasons and the exact safe prefix. A proof-bearing candidate BCEL anchor problem with positive initial full slack composes these routes with preservation and the existing checked-lift or BCEL firewall. This closes a finite local routing edge and finite composition only. Local routes are not the complete global outcome system or Package E, the positive premise remains explicit, and full SaturatePositive, BCELReady, RankWF, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.",
+    "The checked finite SaturatePositive-to-BCEL-ready composition reruns the production finite classifier and accepts only its positive-projection branch with a computed ready nucleus. Its certificate retains the exact classifier equality, safe trace, positive final slack, positive whole-support defect, nontrivial nucleus, constant-cut equations, and local BN2 conclusions. The terminal problem and initial positive premise remain supplied; local failure branches are not globally routed, BN3--BN6 data and constant activation are not derived, and manuscript-wide SaturatePositive, BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.",
     "Residual RankWF is now formalized for the manuscript's fixed ten-coordinate natural lexicographic rank, with an executable comparison, exact Boolean equivalence, coordinate-priority witnesses, accessibility, induction, and kernel-checked well-foundedness. This does not map current finite routes into the complete global outcome system, prove that any route decreases the rank, establish route completeness or Package E, remove the explicit positive premise, establish full SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.",
     "External review is optional audit evidence and is not a mathematical premise or release blocker.",
     "Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.",
@@ -1871,7 +1878,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "3c7ef2e518e3b290a46a5e65b334e2729f38b794576ed56c83d1d2675d4bf26e",
+    "actualSourceClosureSha256": "3e91cc99bedfdac25795f923914ee765ce0f55200c7d1e6d05fcad58940c73ee",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1901,22 +1908,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-23-182",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-23-183",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "28a4fff137c7219d372297dbdd81de2b86045544d8456b6fbd536dd2ea1dc6a5",
+  "leanTheoremInventorySha256": "8bb4f8bb4ce2bfdcfd3709d19c971b5c178bf1c2f437ec37d4360f80b6c49efc",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 29955,
+  "leanTheoremInventoryDeclarationCount": 29989,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 15135,
-  "leanTheoremInventoryTheoremCount": 15463,
+  "leanTheoremInventoryTheoremCount": 15480,
   "leanTheoremInventoryAssumptionFreeTheoremCount": 7617,
-  "leanTheoremInventorySourceClosureModuleCount": 299,
-  "leanSourceClosureSha256": "3c7ef2e518e3b290a46a5e65b334e2729f38b794576ed56c83d1d2675d4bf26e",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-23-182",
+  "leanTheoremInventorySourceClosureModuleCount": 300,
+  "leanSourceClosureSha256": "3e91cc99bedfdac25795f923914ee765ce0f55200c7d1e6d05fcad58940c73ee",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-23-183",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "5a92d95886747fb3d97219758f1798d8db43aef8f15454221ab91aa836199d37",
+  "formalPublicationMapSha256": "1738658fc96d7fad290060709af38d8791038e951e3a290457ff34b668e4f3a1",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -36891,6 +36898,76 @@
       "status": "formalized-residual-terminal-finite-saturate-positive-composition"
     },
     {
+      "classification": "formalized-residual-terminal-finite-bcel-ready-composition",
+      "id": "residual-terminal-finite-bcel-ready-composition",
+      "nonClaim": "The terminal candidate, executable model, candidate-derived anchor problem, and initial positive full-slack premise remain explicit. Rejection of another finite branch is not a mapping into the complete global route system. This does not derive positivity from residual slack, construct BN3--BN6 data or a grouped family, derive constant activation, establish manuscript-wide SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P; remove a project assumption; or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminal_finite_saturate_positive_bcel_ready_checked_complete",
+        "PNP.DirectWire.TerminalFiniteBCELReadyCertificate.anchorSizeAtLeastTwo",
+        "PNP.DirectWire.TerminalFiniteBCELReadyCertificate.properCutConstantEquation",
+        "PNP.DirectWire.TerminalFiniteBCELReadyCertificate.properCutLocalConclusion"
+      ],
+      "scope": "For every finite direct-wire candidate, executable terminal saturation model, and proof-bearing candidate BCEL anchor problem with explicit initial positive full slack, Lean reruns the recomputed finite SaturatePositive classifier and accepts only its positive-projection branch with a computed BCEL-ready anchor nucleus. The certificate retains the exact classifier equality, complete safe trace, positive final slack, positive whole-support defect, at-least-two anchor bound, exact constant-cut equation, and local full/quotient BN2 conclusion for every proper cut.",
+      "title": "Checked finite SaturatePositive-to-BCEL-ready composition",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.terminal_finite_saturate_positive_bcel_ready_checked_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "729a21c3ecfb2ae1fc36fcab7ef8bb3b183c00a63937eccf0add6667aec99f8c",
+          "expectedKernelTypeSha256": "729a21c3ecfb2ae1fc36fcab7ef8bb3b183c00a63937eccf0add6667aec99f8c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalFiniteBCELReadyCertificate.anchorSizeAtLeastTwo",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "949202faf572d7c7a1c21b70c6218f67c87fb2c339c86c898029e85e260801fa",
+          "expectedKernelTypeSha256": "949202faf572d7c7a1c21b70c6218f67c87fb2c339c86c898029e85e260801fa",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalFiniteBCELReadyCertificate.properCutConstantEquation",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4635f3630a32626934ee048659823d116bcde9688f091ad79b56b72a27ca5fba",
+          "expectedKernelTypeSha256": "4635f3630a32626934ee048659823d116bcde9688f091ad79b56b72a27ca5fba",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalFiniteBCELReadyCertificate.properCutLocalConclusion",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7a2596b6be371cfa7a484ead0d195c485ad9e384126662a37f3e91c2ba751167",
+          "expectedKernelTypeSha256": "7a2596b6be371cfa7a484ead0d195c485ad9e384126662a37f3e91c2ba751167",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-finite-bcel-ready-composition"
+    },
+    {
       "classification": "formalized-residual-terminal-rank-wf",
       "id": "residual-terminal-rank-wf",
       "nonClaim": "This establishes the fixed residual rank domain and RankWF only. It does not map the current finite terminal routes into the manuscript's complete global outcome system, prove that any existing route strictly decreases the rank, establish route completeness or Package E, remove the explicit positive premise from the finite composition, establish full manuscript-wide SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, remove a project assumption, or prove P = NP.",
@@ -45911,7 +45988,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-23-182",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-23-183",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

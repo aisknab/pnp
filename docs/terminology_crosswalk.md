@@ -158,6 +158,17 @@ rank, and BCEL inputs remain supplied. This does not derive those inputs or
 constant activation from positive residual slack, establish unconditional
 ZeroSlack, or prove polynomial PCCMin.
 
+### Current Lean finite BCEL-ready composition boundary
+
+`ResidualTerminalFiniteBCELReady` names a checked local composition, not the
+manuscript-wide `RW-BCELReady` theorem. Its checker reruns the finite
+`SaturatePositive` classifier and accepts only the nested ready-nucleus branch;
+the returned certificate retains the exact classifier equality and computed
+nucleus. The terminal problem and initial positive premise remain supplied,
+and no rejected local branch is thereby mapped into the complete global route
+system. Use “checked finite BCEL-ready branch” for this result; reserve
+“BCELReady” for the still-open manuscript theorem.
+
 ## Ambiguity and naming rules
 
 1. **`Residual` must be qualified.** Use “residual slack,” “positive residual witness,” “BN4 residual cell,” or “quotient residual key.”
