@@ -1028,6 +1028,20 @@ Every positive packet has a representative in the polynomial selector universe; 
   BCELReady or constant activation from positive residual slack, complete the
   no-lower ledger, establish unconditional ZeroSlack, or prove polynomial
   PCCMin.
+- Same-family Selector/HB, Packet, and BCEL ZeroSlack coherence is witnessed
+  by
+  `PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selectorHB_family`,
+  `selectorHB_realizerTable`, `selectorHB_dependencyTable`,
+  `PNP.packet_selector_hb_bcel_coherent_checked_complete`, and
+  `PNP.zeroslack_packet_selector_hb_bcel_coherent_checked_complete`. Audit
+  that `ZeroSlackCertificate` and `PCCOracleCertificate` do not store a
+  second Selector/HB certificate, that the derived sidecar uses the exact M180
+  family and tables by definition, and that no equality proof, digest, or
+  success Boolean is supplied by the caller. The family and all terminal,
+  budget, Packet, realizer, dependency, rank, and BCEL inputs remain supplied.
+  This does not derive those inputs or constant activation from positive
+  residual slack, establish unconditional ZeroSlack, or prove polynomial
+  PCCMin.
 - Terminal budget-envelope resolution is witnessed by
   `PNP.DirectWire.TerminalSupportBudget.check_eq_true_iff`,
   `PNP.DirectWire.findTerminalBudgetFeasibleSupport_eq_none_iff`,

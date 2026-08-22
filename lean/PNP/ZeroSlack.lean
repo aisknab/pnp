@@ -14,9 +14,8 @@ pass.
 import PNP.ResidualBand
 import PNP.ResidualTerminalHResolveZeroSlackSidecar
 import PNP.ResidualTerminalBudgetZeroSlackSidecar
-import PNP.ResidualTerminalSelectorHBZeroSlackSidecar
 import PNP.ResidualTerminalPacketBudgetNoLowerZeroSlackSidecar
-import PNP.ResidualTerminalBCELPacketNoLowerZeroSlackSidecar
+import PNP.ResidualTerminalZeroSlackPacketSelectorHBCoherence
 
 namespace PNP
 
@@ -30,7 +29,6 @@ structure ZeroSlackCertificate where
   normalizedInputRecord : String
   hResolve : HResolveSidecarCertificate
   budget : BudgetSidecarCertificate
-  selectorHBClosure : SelectorHBZeroSlackSidecarCertificate
   packetBudgetNoLower : PacketBudgetNoLowerZeroSlackSidecarCertificate
   bcelContradiction : BCELContradictionCertificate packetBudgetNoLower
   certificateEncodingPolynomial : String
@@ -41,8 +39,20 @@ structure PCCOracleCertificate where
   normalizedInputRecord : String
   hResolve : HResolveSidecarCertificate
   budget : BudgetSidecarCertificate
-  selectorHBClosure : SelectorHBZeroSlackSidecarCertificate
   zeroSlack : ZeroSlackCertificate
+
+/-- The Selector/HB boundary is derived from the exact Packet/budget family,
+    computed table, and dependency table rather than stored independently. -/
+def ZeroSlackCertificate.selectorHBClosure
+    (z : ZeroSlackCertificate) : SelectorHBZeroSlackSidecarCertificate :=
+  z.packetBudgetNoLower.selectorHB
+
+/-- The oracle exposes the same derived Selector/HB boundary as its dependent
+    ZeroSlack certificate. -/
+def PCCOracleCertificate.selectorHBClosure
+    (certificate : PCCOracleCertificate) :
+    SelectorHBZeroSlackSidecarCertificate :=
+  certificate.zeroSlack.selectorHBClosure
 
 /-- Exact bounded soundness proposition currently exposed at the report-facing
     ZeroSlack boundary. It is not unconditional ZeroSlack. -/
@@ -53,6 +63,23 @@ def zeroSlackSoundnessBoundary (z : ZeroSlackCertificate) : Prop :=
 theorem zeroSlackSoundnessBoundary_proved (z : ZeroSlackCertificate) :
     zeroSlackSoundnessBoundary z :=
   z.bcelContradiction.not_constant_activation
+
+/-- Named M182 report-facing endpoint: Selector/HB silence and closure,
+    positive-Packet exclusion, and the BCEL contradiction all use the exact
+    M180 family and computed dependency data. -/
+theorem zeroslack_packet_selector_hb_bcel_coherent_checked_complete
+    (z : ZeroSlackCertificate) :
+    (∀ handle : z.packetBudgetNoLower.family.PacketSelectorHandle,
+      z.selectorHBClosure.realizerTable.environment.faithful handle = false) ∧
+    z.selectorHBClosure.dependencyTable.NoOutcomeActiveClosureValid
+      z.selectorHBClosure.realizerTable.environment ∧
+    (∀ node,
+      z.selectorHBClosure.realizerTable.environment.hbActive node = false) ∧
+    (¬DirectWire.TerminalBN6PacketConclusion
+      z.packetBudgetNoLower.family) ∧
+    ¬z.packetBudgetNoLower.family.ConstantActivation := by
+  exact packet_selector_hb_bcel_coherent_checked_complete
+    z.packetBudgetNoLower z.bcelContradiction
 
 /-- Extract the polynomial-size certificate handle. -/
 def zeroSlackPolynomialSizeHandle (z : ZeroSlackCertificate) : String :=

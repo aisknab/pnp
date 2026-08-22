@@ -682,6 +682,16 @@ family and all M180 inputs remain supplied. This does not derive BCELReady or
 constant activation from positive residual slack, complete the no-lower
 ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.
 
+The same-family Selector/HB, Packet, and BCEL ZeroSlack coherence milestone
+removes the remaining detached certificate seam. It derives the Selector/HB
+sidecar from the exact grouped family, computed realizer table, and dependency
+table already checked by M180, then combines its silence and closure results
+with M180 Packet exclusion and the dependent M181 BCEL contradiction. The
+family and all terminal, budget, Packet, realizer, dependency, rank, and BCEL
+inputs remain supplied. This does not derive those inputs or constant
+activation from positive residual slack, complete the no-lower ledger,
+establish unconditional ZeroSlack, or prove polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

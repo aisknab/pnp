@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-22-181",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-182",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -1004,6 +1004,9 @@
   "leanResidualTerminalBCELPacketNoLowerZeroSlackSidecarFormalized": true,
   "leanResidualTerminalBCELPacketNoLowerZeroSlackSidecarAxiomAuditPassed": true,
   "leanResidualTerminalBCELPacketNoLowerZeroSlackSidecarScope": "all-arbitrary-finite-proof-bearing-BCEL-constant-activation-to-positive-Packet-contradiction-against-the-same-checked-no-lower-family",
+  "leanResidualTerminalZeroSlackPacketSelectorHBCoherenceFormalized": true,
+  "leanResidualTerminalZeroSlackPacketSelectorHBCoherenceAxiomAuditPassed": true,
+  "leanResidualTerminalZeroSlackPacketSelectorHBCoherenceScope": "all-arbitrary-finite-proof-bearing-same-family-Selector-HB-Packet-and-BCEL-ZeroSlack-coherence-derived-from-one-accepted-Packet-budget-certificate",
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -1642,6 +1645,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBCELPacketNoLowerZeroSlackSidecarAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBCELPacketNoLowerZeroSlackSidecar.lean",
     "node --test audits/lean-residual-terminal-bcel-packet-no-lower-zeroslack-sidecar0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalZeroSlackPacketSelectorHBCoherenceAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalZeroSlackPacketSelectorHBCoherence.lean",
+    "node --test audits/lean-residual-terminal-zeroslack-packet-selector-hb-coherence0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1704,6 +1710,7 @@
     "The proof-bearing Selector/HB ZeroSlack sidecar replaces eight report-facing string handles with the exact executable all-row selector-silence and ranked no-outcome HB-closure equations. Their checked finite-rank induction proves all canonical selectors nonfaithful, every claim a typed bottom, every supplied HN/BUD activity bit false, and the dependency relation well founded. The grouped family, realizer and dependency tables, environment, claims, activity bits, and rank map remain supplied; this does not prove blocker semantics, semantic dependency completeness, unconditional ZeroSlack, or polynomial PCCMin.",
     "The proof-bearing Packet/budget no-lower ZeroSlack sidecar replaces the report-facing no-lower string with the exact executable same-candidate composition equation. Reflection proves every governed budget-feasible support semantic minimum, excludes every such strict equivalent gain, and excludes a positive Packet conclusion for the supplied family. The caps, candidate-derived model, grouped family, typed payloads, ranks, realizer claims, activity environment, dependency rows, and rank maps remain supplied; this is the existing finite two-branch boundary, not the complete manuscript no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin.",
     "The proof-bearing BCEL/Packet no-lower ZeroSlack sidecar replaces five BCEL contradiction strings with one dependent boundary tied to the exact M180 certificate. A checked carrier lower bound and the arbitrary-finite BN6 theorem show that BCEL constant activation would produce the positive Packet excluded by the accepted same-family ledger. The grouped family and all M180 terminal, budget, Packet, realizer, dependency, and rank inputs remain supplied; this does not derive BCELReady or constant activation from positive residual slack, complete the no-lower ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.",
+    "The same-family Selector/HB, Packet, and BCEL ZeroSlack coherence milestone derives the report-facing Selector/HB sidecar from the exact computed table and dependency data already accepted by the M180 Packet/budget certificate, instead of storing a detached duplicate certificate. The grouped family and all terminal, budget, Packet, realizer, dependency, rank, and BCEL inputs remain supplied; this does not derive those inputs or BCEL constant activation from positive residual slack, establish unconditional ZeroSlack, or prove polynomial PCCMin.",
     "The finite terminal budget-envelope resolver searches every canonical terminal support seed against supplied natural gate and saturated-record caps, recomputes candidate-derived saturation, requires nonempty implementation and interface support, and returns a feasible semantic minimum, a feasible strict equivalent gain, or complete NoBudget exclusion for that canonical universe. The caps remain supplied and the support scan plus reference minimization may be exponential. It does not implement the manuscript HN/BUD grammar, BWL, the budget-envelope dynamic program, blocker semantics, polynomial BudgetResolve, complete no-lower, unconditional ZeroSlack, or polynomial PCCMin.",
     "The terminal budget no-lower ledger classifies every canonical terminal support from the same recomputed envelope and actual residual slack, materializes the complete route table, and accepts exactly when every budget-feasible governed support is a semantic minimum and no feasible strict equivalent gain exists. The caps remain supplied and enumeration, saturation, and reference minimization may be exponential. This closes only the finite terminal-derived budget branch; it does not implement the manuscript HN/BUD grammar or polynomial BudgetResolve, compose Packet or the complete no-lower ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.",
     "The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.",
@@ -1864,7 +1871,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "8460081a1d46638486a7c339dd1c77c7c834886630b3facfc0b67c6551050d6b",
+    "actualSourceClosureSha256": "3c7ef2e518e3b290a46a5e65b334e2729f38b794576ed56c83d1d2675d4bf26e",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1894,22 +1901,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-22-181",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-23-182",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "69013577c9f8e6765edd9f5ad262c55f0acb4c86d223bbf592c8261a94869812",
+  "leanTheoremInventorySha256": "28a4fff137c7219d372297dbdd81de2b86045544d8456b6fbd536dd2ea1dc6a5",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 29946,
+  "leanTheoremInventoryDeclarationCount": 29955,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 15135,
-  "leanTheoremInventoryTheoremCount": 15456,
+  "leanTheoremInventoryTheoremCount": 15463,
   "leanTheoremInventoryAssumptionFreeTheoremCount": 7617,
-  "leanTheoremInventorySourceClosureModuleCount": 298,
-  "leanSourceClosureSha256": "8460081a1d46638486a7c339dd1c77c7c834886630b3facfc0b67c6551050d6b",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-22-181",
+  "leanTheoremInventorySourceClosureModuleCount": 299,
+  "leanSourceClosureSha256": "3c7ef2e518e3b290a46a5e65b334e2729f38b794576ed56c83d1d2675d4bf26e",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-23-182",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "400cbeaef324fd9f4ce7732a10600abafd4c23df85cc8a0690a8421a0c3ec3c8",
+  "formalPublicationMapSha256": "5a92d95886747fb3d97219758f1798d8db43aef8f15454221ab91aa836199d37",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -45698,6 +45705,115 @@
       "status": "formalized-residual-terminal-bcel-packet-no-lower-zeroslack-sidecar"
     },
     {
+      "classification": "formalized-residual-terminal-zeroslack-packet-selector-hb-coherence",
+      "id": "residual-terminal-zeroslack-packet-selector-hb-coherence",
+      "nonClaim": "The grouped family and all terminal, budget, Packet, realizer, dependency, rank, and BCEL data remain supplied inputs. This milestone does not derive those inputs or BCEL constant activation from positive residual slack, establish unconditional ZeroSlack, complete the manuscript no-lower ledger, prove PCCMin or polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selector_silence_accepted",
+        "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.hb_closure_accepted",
+        "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selectorHB_family",
+        "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selectorHB_realizerTable",
+        "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selectorHB_dependencyTable",
+        "PNP.packet_selector_hb_bcel_coherent_checked_complete",
+        "PNP.zeroslack_packet_selector_hb_bcel_coherent_checked_complete"
+      ],
+      "scope": "For every arbitrary finite accepted M180 certificate and its dependent M181 boundary, the report-facing ZeroSlack layer now derives same-family Selector/HB, Packet, and BCEL evidence from the exact grouped family, computed realizer table, and dependency table. Definitional identities prevent a detached Selector/HB certificate from being paired with the checked Packet and BCEL exclusions.",
+      "title": "Same-family Selector/HB, Packet, and BCEL ZeroSlack coherence",
+      "theoremRows": [
+        {
+          "name": "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selector_silence_accepted",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "fed0bc5c88f8d9966ba42fa5ad61a73c3f662baa5c5d1f3f2d85a57086204efd",
+          "expectedKernelTypeSha256": "fed0bc5c88f8d9966ba42fa5ad61a73c3f662baa5c5d1f3f2d85a57086204efd",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.hb_closure_accepted",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f932e8665720dcfca05ddf7048cb434c79386f83aff931f576435530f02b1f74",
+          "expectedKernelTypeSha256": "f932e8665720dcfca05ddf7048cb434c79386f83aff931f576435530f02b1f74",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selectorHB_family",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "35f7733147bdf16a90f9df2d1ee7679bdc6e1ab3d8c75f4aea27bcf0c9d3a924",
+          "expectedKernelTypeSha256": "35f7733147bdf16a90f9df2d1ee7679bdc6e1ab3d8c75f4aea27bcf0c9d3a924",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selectorHB_realizerTable",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "2ada28647ecc16ef8f963b82a2b5738d64591bfb003b203431f6d24c89693649",
+          "expectedKernelTypeSha256": "2ada28647ecc16ef8f963b82a2b5738d64591bfb003b203431f6d24c89693649",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selectorHB_dependencyTable",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "2f94c5fb77d7c266f6958fbdabc97e450c2205bceace58fed7ce0fa14c1bd583",
+          "expectedKernelTypeSha256": "2f94c5fb77d7c266f6958fbdabc97e450c2205bceace58fed7ce0fa14c1bd583",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.packet_selector_hb_bcel_coherent_checked_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "97ce8e0d6988332dfd6387ccab2bf779721444534a9924f9b1198d4705ec01de",
+          "expectedKernelTypeSha256": "97ce8e0d6988332dfd6387ccab2bf779721444534a9924f9b1198d4705ec01de",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.zeroslack_packet_selector_hb_bcel_coherent_checked_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "119db0567f3e4b314f5e9347e700aa53c749813938a5cf3b1e26a6cbf3c0a48d",
+          "expectedKernelTypeSha256": "119db0567f3e4b314f5e9347e700aa53c749813938a5cf3b1e26a6cbf3c0a48d",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-zeroslack-packet-selector-hb-coherence"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -45795,7 +45911,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-22-181",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-23-182",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

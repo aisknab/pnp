@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-22-181",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-23-182",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3092,7 +3092,14 @@
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
     "PNP.BCELContradictionCertificate.not_constant_activation": "8f50f730be1a30e338bd5d773905aef8317bd6711e0d7a6d80fcfb22d0da89c5",
-    "PNP.bcel_packet_no_lower_zeroslack_sidecar_checked_complete": "cb6356f351ce9fe13f5fdcc0e71eb11174631c5a836e0c3f112bc924ccdba8d2"
+    "PNP.bcel_packet_no_lower_zeroslack_sidecar_checked_complete": "cb6356f351ce9fe13f5fdcc0e71eb11174631c5a836e0c3f112bc924ccdba8d2",
+    "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selector_silence_accepted": "fed0bc5c88f8d9966ba42fa5ad61a73c3f662baa5c5d1f3f2d85a57086204efd",
+    "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.hb_closure_accepted": "f932e8665720dcfca05ddf7048cb434c79386f83aff931f576435530f02b1f74",
+    "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selectorHB_family": "35f7733147bdf16a90f9df2d1ee7679bdc6e1ab3d8c75f4aea27bcf0c9d3a924",
+    "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selectorHB_realizerTable": "2ada28647ecc16ef8f963b82a2b5738d64591bfb003b203431f6d24c89693649",
+    "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selectorHB_dependencyTable": "2f94c5fb77d7c266f6958fbdabc97e450c2205bceace58fed7ce0fa14c1bd583",
+    "PNP.packet_selector_hb_bcel_coherent_checked_complete": "97ce8e0d6988332dfd6387ccab2bf779721444534a9924f9b1198d4705ec01de",
+    "PNP.zeroslack_packet_selector_hb_bcel_coherent_checked_complete": "119db0567f3e4b314f5e9347e700aa53c749813938a5cf3b1e26a6cbf3c0a48d"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3110,7 +3117,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "8460081a1d46638486a7c339dd1c77c7c834886630b3facfc0b67c6551050d6b",
+  "milestoneSourceClosureSha256": "3c7ef2e518e3b290a46a5e65b334e2729f38b794576ed56c83d1d2675d4bf26e",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -7840,6 +7847,22 @@
       ],
       "scope": "For every arbitrary finite supplied M180 Packet/budget no-lower certificate whose grouped carrier passes the exact at-least-two-anchor check, the report-facing ZeroSlack boundary now consumes one checked proof-bearing BCEL/Packet contradiction sidecar. BCEL constant activation would construct a positive BN6 Packet, contradicting the accepted same-family no-lower exclusion.",
       "title": "Proof-bearing BCEL/Packet no-lower ZeroSlack sidecar"
+    },
+    {
+      "classification": "formalized-residual-terminal-zeroslack-packet-selector-hb-coherence",
+      "id": "residual-terminal-zeroslack-packet-selector-hb-coherence",
+      "nonClaim": "The grouped family and all terminal, budget, Packet, realizer, dependency, rank, and BCEL data remain supplied inputs. This milestone does not derive those inputs or BCEL constant activation from positive residual slack, establish unconditional ZeroSlack, complete the manuscript no-lower ledger, prove PCCMin or polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selector_silence_accepted",
+        "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.hb_closure_accepted",
+        "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selectorHB_family",
+        "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selectorHB_realizerTable",
+        "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selectorHB_dependencyTable",
+        "PNP.packet_selector_hb_bcel_coherent_checked_complete",
+        "PNP.zeroslack_packet_selector_hb_bcel_coherent_checked_complete"
+      ],
+      "scope": "For every arbitrary finite accepted M180 certificate and its dependent M181 boundary, the report-facing ZeroSlack layer now derives same-family Selector/HB, Packet, and BCEL evidence from the exact grouped family, computed realizer table, and dependency table. Definitional identities prevent a detached Selector/HB certificate from being paired with the checked Packet and BCEL exclusions.",
+      "title": "Same-family Selector/HB, Packet, and BCEL ZeroSlack coherence"
     },
     {
       "classification": "formalized-concrete-locked-nand-threshold",

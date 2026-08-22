@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-22-181';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-182';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -525,6 +525,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBCELPacketNoLowerZeroSlackSidecarAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBCELPacketNoLowerZeroSlackSidecar.lean',
   'node --test audits/lean-residual-terminal-bcel-packet-no-lower-zeroslack-sidecar0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalZeroSlackPacketSelectorHBCoherenceAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalZeroSlackPacketSelectorHBCoherence.lean',
+  'node --test audits/lean-residual-terminal-zeroslack-packet-selector-hb-coherence0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -588,6 +591,7 @@ const NON_CLAIMS = Object.freeze([
   'The proof-bearing Selector/HB ZeroSlack sidecar replaces eight report-facing string handles with the exact executable all-row selector-silence and ranked no-outcome HB-closure equations. Their checked finite-rank induction proves all canonical selectors nonfaithful, every claim a typed bottom, every supplied HN/BUD activity bit false, and the dependency relation well founded. The grouped family, realizer and dependency tables, environment, claims, activity bits, and rank map remain supplied; this does not prove blocker semantics, semantic dependency completeness, unconditional ZeroSlack, or polynomial PCCMin.',
   'The proof-bearing Packet/budget no-lower ZeroSlack sidecar replaces the report-facing no-lower string with the exact executable same-candidate composition equation. Reflection proves every governed budget-feasible support semantic minimum, excludes every such strict equivalent gain, and excludes a positive Packet conclusion for the supplied family. The caps, candidate-derived model, grouped family, typed payloads, ranks, realizer claims, activity environment, dependency rows, and rank maps remain supplied; this is the existing finite two-branch boundary, not the complete manuscript no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin.',
   'The proof-bearing BCEL/Packet no-lower ZeroSlack sidecar replaces five BCEL contradiction strings with one dependent boundary tied to the exact M180 certificate. A checked carrier lower bound and the arbitrary-finite BN6 theorem show that BCEL constant activation would produce the positive Packet excluded by the accepted same-family ledger. The grouped family and all M180 terminal, budget, Packet, realizer, dependency, and rank inputs remain supplied; this does not derive BCELReady or constant activation from positive residual slack, complete the no-lower ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.',
+  'The same-family Selector/HB, Packet, and BCEL ZeroSlack coherence milestone derives the report-facing Selector/HB sidecar from the exact computed table and dependency data already accepted by the M180 Packet/budget certificate, instead of storing a detached duplicate certificate. The grouped family and all terminal, budget, Packet, realizer, dependency, rank, and BCEL inputs remain supplied; this does not derive those inputs or BCEL constant activation from positive residual slack, establish unconditional ZeroSlack, or prove polynomial PCCMin.',
   'The finite terminal budget-envelope resolver searches every canonical terminal support seed against supplied natural gate and saturated-record caps, recomputes candidate-derived saturation, requires nonempty implementation and interface support, and returns a feasible semantic minimum, a feasible strict equivalent gain, or complete NoBudget exclusion for that canonical universe. The caps remain supplied and the support scan plus reference minimization may be exponential. It does not implement the manuscript HN/BUD grammar, BWL, the budget-envelope dynamic program, blocker semantics, polynomial BudgetResolve, complete no-lower, unconditional ZeroSlack, or polynomial PCCMin.',
   'The terminal budget no-lower ledger classifies every canonical terminal support from the same recomputed envelope and actual residual slack, materializes the complete route table, and accepts exactly when every budget-feasible governed support is a semantic minimum and no feasible strict equivalent gain exists. The caps remain supplied and enumeration, saturation, and reference minimization may be exponential. This closes only the finite terminal-derived budget branch; it does not implement the manuscript HN/BUD grammar or polynomial BudgetResolve, compose Packet or the complete no-lower ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.',
   'The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.',
@@ -1930,6 +1934,10 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalBCELPacketNoLowerZeroSlackSidecarAxiomAuditPassed: true,
   leanResidualTerminalBCELPacketNoLowerZeroSlackSidecarScope:
     'all-arbitrary-finite-proof-bearing-BCEL-constant-activation-to-positive-Packet-contradiction-against-the-same-checked-no-lower-family',
+  leanResidualTerminalZeroSlackPacketSelectorHBCoherenceFormalized: true,
+  leanResidualTerminalZeroSlackPacketSelectorHBCoherenceAxiomAuditPassed: true,
+  leanResidualTerminalZeroSlackPacketSelectorHBCoherenceScope:
+    'all-arbitrary-finite-proof-bearing-same-family-Selector-HB-Packet-and-BCEL-ZeroSlack-coherence-derived-from-one-accepted-Packet-budget-certificate',
   leanSaturatePositiveFormalized: false,
   leanBCELReadyFormalized: false,
   leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -3157,6 +3165,10 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalBCELPacketNoLowerZeroSlackSidecarAxiomAuditPassed: true,
       leanResidualTerminalBCELPacketNoLowerZeroSlackSidecarScope:
         'all-arbitrary-finite-proof-bearing-BCEL-constant-activation-to-positive-Packet-contradiction-against-the-same-checked-no-lower-family',
+      leanResidualTerminalZeroSlackPacketSelectorHBCoherenceFormalized: true,
+      leanResidualTerminalZeroSlackPacketSelectorHBCoherenceAxiomAuditPassed: true,
+      leanResidualTerminalZeroSlackPacketSelectorHBCoherenceScope:
+        'all-arbitrary-finite-proof-bearing-same-family-Selector-HB-Packet-and-BCEL-ZeroSlack-coherence-derived-from-one-accepted-Packet-budget-certificate',
       leanSaturatePositiveFormalized: false,
       leanBCELReadyFormalized: false,
       leanZeroSlackPositiveSlackContradictionFormalized: false,
@@ -3236,7 +3248,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-22-181',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-23-182',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

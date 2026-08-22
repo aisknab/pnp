@@ -311,6 +311,12 @@ on:
       - 'audits/lean-residual-terminal-bcel-packet-no-lower-zeroslack-sidecar0.test.mjs'
       - 'docs/lean_residual_terminal_bcel_packet_no_lower_zeroslack_sidecar.md'
       - 'docs/plans/2026-08-22-residual-terminal-bcel-packet-no-lower-zeroslack-sidecar.md'
+      - 'lean/PNP/ResidualTerminalZeroSlackPacketSelectorHBCoherence.lean'
+      - 'lean-audit/PNPResidualTerminalZeroSlackPacketSelectorHBCoherenceAxiomAudit.lean'
+      - 'lean-regression/PNPResidualTerminalZeroSlackPacketSelectorHBCoherence.lean'
+      - 'audits/lean-residual-terminal-zeroslack-packet-selector-hb-coherence0.test.mjs'
+      - 'docs/lean_residual_terminal_zeroslack_packet_selector_hb_coherence.md'
+      - 'docs/plans/2026-08-23-zeroslack-packet-selector-hb-coherence.md'
       - 'docs/lean_bridge.md'
       - 'docs/lean_concrete_locked_nand_polynomial_reduction.md'
       - 'docs/lean_concrete_cnf_to_nand_semantic_compiler.md'
@@ -4746,3 +4752,29 @@ jobs:
 
       - name: Run proof-bearing BCEL/Packet no-lower ZeroSlack sidecar hostile audit
         run: node --test audits/lean-residual-terminal-bcel-packet-no-lower-zeroslack-sidecar0.test.mjs
+
+      - name: Print same-family Selector/HB, Packet, and BCEL ZeroSlack coherence axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalZeroSlackPacketSelectorHBCoherenceAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalZeroSlackPacketSelectorHBCoherenceAxiomAudit.lean)"
+          test "$expected_count" -gt 0
+          test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.")" -eq "$expected_count"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected same-family Selector/HB, Packet, and BCEL ZeroSlack coherence axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -Eq 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            printf '%s\n' "$normalized" >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
+
+      - name: Run same-family Selector/HB, Packet, and BCEL ZeroSlack coherence regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalZeroSlackPacketSelectorHBCoherence.lean
+
+      - name: Run same-family Selector/HB, Packet, and BCEL ZeroSlack coherence hostile audit
+        run: node --test audits/lean-residual-terminal-zeroslack-packet-selector-hb-coherence0.test.mjs

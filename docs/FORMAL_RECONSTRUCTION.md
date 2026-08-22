@@ -2245,6 +2245,19 @@ complete the manuscript no-lower ledger, establish unconditional ZeroSlack,
 or prove polynomial PCCMin. See
 [`lean_residual_terminal_bcel_packet_no_lower_zeroslack_sidecar.md`](./lean_residual_terminal_bcel_packet_no_lower_zeroslack_sidecar.md).
 
+`ResidualTerminalZeroSlackPacketSelectorHBCoherence` now closes the
+same-family Selector/HB, Packet, and BCEL certificate seam. The report-facing
+ZeroSlack structure no longer stores a detached Selector/HB sidecar; it derives
+that sidecar from the exact grouped family, computed realizer table, and
+dependency table already accepted by M180. The derived selector silence and HB
+closure therefore compose with M180's Packet exclusion and M181's dependent
+BCEL contradiction without caller-supplied coherence evidence. The family and
+all terminal, budget, Packet, realizer, dependency, rank, and BCEL inputs remain
+supplied. This does not derive those inputs or constant activation from
+positive residual slack, complete the manuscript no-lower ledger, establish
+unconditional ZeroSlack, or prove polynomial PCCMin. See
+[`lean_residual_terminal_zeroslack_packet_selector_hb_coherence.md`](./lean_residual_terminal_zeroslack_packet_selector_hb_coherence.md).
+
 `ResidualTerminalBudgetEnvelopeResolver` now places a computed finite budget
 boundary over that canonical support universe. For supplied natural gate and
 saturated-record caps, each seed is saturated in the candidate-derived system;

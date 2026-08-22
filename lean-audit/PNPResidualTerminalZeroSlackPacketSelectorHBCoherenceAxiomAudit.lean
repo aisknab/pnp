@@ -1,0 +1,13 @@
+import PNP.ZeroSlack
+
+#print axioms PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.computedSelectorHBTable
+#print axioms PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selector_silence_accepted
+#print axioms PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.hb_closure_accepted
+#print axioms PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selectorHB
+#print axioms PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selectorHB_family
+#print axioms PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selectorHB_realizerTable
+#print axioms PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.selectorHB_dependencyTable
+#print axioms PNP.packet_selector_hb_bcel_coherent_checked_complete
+#print axioms PNP.ZeroSlackCertificate.selectorHBClosure
+#print axioms PNP.PCCOracleCertificate.selectorHBClosure
+#print axioms PNP.zeroslack_packet_selector_hb_bcel_coherent_checked_complete
