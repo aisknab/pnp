@@ -1,0 +1,7 @@
+import PNP.ResidualTerminalBCELPacketNoLowerZeroSlackSidecar
+
+#print axioms PNP.BCELContradictionCertificate
+#print axioms PNP.BCELContradictionCertificate.carrier_at_least_two
+#print axioms PNP.BCELContradictionCertificate.no_positive_packet
+#print axioms PNP.BCELContradictionCertificate.not_constant_activation
+#print axioms PNP.bcel_packet_no_lower_zeroslack_sidecar_checked_complete

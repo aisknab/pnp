@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-22-180",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-22-181",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3088,7 +3088,11 @@
     "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.all_feasible_support_minimum": "f7168be59f47c908fba68a3c5905cf31991e7ec514952f13e43ded3fca2fab83",
     "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.no_feasible_gain": "9a6e605bee0f9582e8e3b77618a43147015603bc725e56674b7ee52d52bf32c4",
     "PNP.PacketBudgetNoLowerZeroSlackSidecarCertificate.no_positive_packet": "d5348c9349c05723fe6de3cc006389afe55e03270906a946ef73041aa0b34ba2",
-    "PNP.packet_budget_no_lower_zeroslack_sidecar_checked_complete": "be5948772dac68e28bbda201620f74eb6d31ba1265eb263162f1ff8107c505db"
+    "PNP.packet_budget_no_lower_zeroslack_sidecar_checked_complete": "be5948772dac68e28bbda201620f74eb6d31ba1265eb263162f1ff8107c505db",
+    "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
+    "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
+    "PNP.BCELContradictionCertificate.not_constant_activation": "8f50f730be1a30e338bd5d773905aef8317bd6711e0d7a6d80fcfb22d0da89c5",
+    "PNP.bcel_packet_no_lower_zeroslack_sidecar_checked_complete": "cb6356f351ce9fe13f5fdcc0e71eb11174631c5a836e0c3f112bc924ccdba8d2"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3106,7 +3110,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "99bcce8eb3005173e6c199a5ac86956f627515f96253e45502964a46c58b8233",
+  "milestoneSourceClosureSha256": "8460081a1d46638486a7c339dd1c77c7c834886630b3facfc0b67c6551050d6b",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -7823,6 +7827,19 @@
       ],
       "scope": "For arbitrary finite supplied same-candidate Packet and terminal-budget data, the report-facing ZeroSlack boundary now consumes one checked proof-bearing Packet/budget no-lower sidecar. Its exact executable composition equation proves every governed budget-feasible support semantically minimum, excludes every such strict equivalent gain, and excludes a positive Packet conclusion for the supplied family.",
       "title": "Proof-bearing Packet/budget no-lower ZeroSlack sidecar"
+    },
+    {
+      "classification": "formalized-residual-terminal-bcel-packet-no-lower-zeroslack-sidecar",
+      "id": "residual-terminal-bcel-packet-no-lower-zeroslack-sidecar",
+      "nonClaim": "The grouped BN6 family and all terminal, budget, Packet, realizer, dependency, and rank inputs inherited from M180 remain supplied. This milestone does not derive the family or BCEL constant activation from positive residual slack, construct BCELReady from a terminal candidate, complete the manuscript no-lower ledger, establish unconditional ZeroSlack, prove PCCMin or polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.BCELContradictionCertificate.carrier_at_least_two",
+        "PNP.BCELContradictionCertificate.no_positive_packet",
+        "PNP.BCELContradictionCertificate.not_constant_activation",
+        "PNP.bcel_packet_no_lower_zeroslack_sidecar_checked_complete"
+      ],
+      "scope": "For every arbitrary finite supplied M180 Packet/budget no-lower certificate whose grouped carrier passes the exact at-least-two-anchor check, the report-facing ZeroSlack boundary now consumes one checked proof-bearing BCEL/Packet contradiction sidecar. BCEL constant activation would construct a positive BN6 Packet, contradicting the accepted same-family no-lower exclusion.",
+      "title": "Proof-bearing BCEL/Packet no-lower ZeroSlack sidecar"
     },
     {
       "classification": "formalized-concrete-locked-nand-threshold",

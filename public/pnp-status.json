@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-22-180",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-22-181",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -1001,6 +1001,9 @@
   "leanResidualTerminalPacketBudgetNoLowerZeroSlackSidecarFormalized": true,
   "leanResidualTerminalPacketBudgetNoLowerZeroSlackSidecarAxiomAuditPassed": true,
   "leanResidualTerminalPacketBudgetNoLowerZeroSlackSidecarScope": "all-arbitrary-finite-proof-bearing-same-candidate-Packet-budget-two-branch-no-lower-sidecars-with-semantic-minimum-and-gain-and-positive-Packet-exclusion",
+  "leanResidualTerminalBCELPacketNoLowerZeroSlackSidecarFormalized": true,
+  "leanResidualTerminalBCELPacketNoLowerZeroSlackSidecarAxiomAuditPassed": true,
+  "leanResidualTerminalBCELPacketNoLowerZeroSlackSidecarScope": "all-arbitrary-finite-proof-bearing-BCEL-constant-activation-to-positive-Packet-contradiction-against-the-same-checked-no-lower-family",
   "leanSaturatePositiveFormalized": false,
   "leanBCELReadyFormalized": false,
   "leanZeroSlackPositiveSlackContradictionFormalized": false,
@@ -1636,6 +1639,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketBudgetNoLowerZeroSlackSidecarAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketBudgetNoLowerZeroSlackSidecar.lean",
     "node --test audits/lean-residual-terminal-packet-budget-no-lower-zeroslack-sidecar0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBCELPacketNoLowerZeroSlackSidecarAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBCELPacketNoLowerZeroSlackSidecar.lean",
+    "node --test audits/lean-residual-terminal-bcel-packet-no-lower-zeroslack-sidecar0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1697,6 +1703,7 @@
     "The proof-bearing Budget ZeroSlack sidecar replaces three report-facing string handles with the exact failed exhaustive terminal-envelope search equation, complete canonical-support exclusion, and semantic exact-minimum and strict-equivalent-gain bindings. The caps remain supplied and support enumeration, saturation, and reference minimization may be exponential; this does not implement the BUD grammar or B0-B4 sidecar, full or polynomial BudgetResolve, the complete no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin.",
     "The proof-bearing Selector/HB ZeroSlack sidecar replaces eight report-facing string handles with the exact executable all-row selector-silence and ranked no-outcome HB-closure equations. Their checked finite-rank induction proves all canonical selectors nonfaithful, every claim a typed bottom, every supplied HN/BUD activity bit false, and the dependency relation well founded. The grouped family, realizer and dependency tables, environment, claims, activity bits, and rank map remain supplied; this does not prove blocker semantics, semantic dependency completeness, unconditional ZeroSlack, or polynomial PCCMin.",
     "The proof-bearing Packet/budget no-lower ZeroSlack sidecar replaces the report-facing no-lower string with the exact executable same-candidate composition equation. Reflection proves every governed budget-feasible support semantic minimum, excludes every such strict equivalent gain, and excludes a positive Packet conclusion for the supplied family. The caps, candidate-derived model, grouped family, typed payloads, ranks, realizer claims, activity environment, dependency rows, and rank maps remain supplied; this is the existing finite two-branch boundary, not the complete manuscript no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin.",
+    "The proof-bearing BCEL/Packet no-lower ZeroSlack sidecar replaces five BCEL contradiction strings with one dependent boundary tied to the exact M180 certificate. A checked carrier lower bound and the arbitrary-finite BN6 theorem show that BCEL constant activation would produce the positive Packet excluded by the accepted same-family ledger. The grouped family and all M180 terminal, budget, Packet, realizer, dependency, and rank inputs remain supplied; this does not derive BCELReady or constant activation from positive residual slack, complete the no-lower ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.",
     "The finite terminal budget-envelope resolver searches every canonical terminal support seed against supplied natural gate and saturated-record caps, recomputes candidate-derived saturation, requires nonempty implementation and interface support, and returns a feasible semantic minimum, a feasible strict equivalent gain, or complete NoBudget exclusion for that canonical universe. The caps remain supplied and the support scan plus reference minimization may be exponential. It does not implement the manuscript HN/BUD grammar, BWL, the budget-envelope dynamic program, blocker semantics, polynomial BudgetResolve, complete no-lower, unconditional ZeroSlack, or polynomial PCCMin.",
     "The terminal budget no-lower ledger classifies every canonical terminal support from the same recomputed envelope and actual residual slack, materializes the complete route table, and accepts exactly when every budget-feasible governed support is a semantic minimum and no feasible strict equivalent gain exists. The caps remain supplied and enumeration, saturation, and reference minimization may be exponential. This closes only the finite terminal-derived budget branch; it does not implement the manuscript HN/BUD grammar or polynomial BudgetResolve, compose Packet or the complete no-lower ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.",
     "The current Lean bridge is partial and does not contain the required concrete, assumption-audited root theorem.",
@@ -1857,7 +1864,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "99bcce8eb3005173e6c199a5ac86956f627515f96253e45502964a46c58b8233",
+    "actualSourceClosureSha256": "8460081a1d46638486a7c339dd1c77c7c834886630b3facfc0b67c6551050d6b",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1887,22 +1894,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-22-180",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-22-181",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "d4bc2810502790504af9ebe0e1da7ef7f89b85971120300f57ce926bfa5b3e0b",
+  "leanTheoremInventorySha256": "69013577c9f8e6765edd9f5ad262c55f0acb4c86d223bbf592c8261a94869812",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 29954,
+  "leanTheoremInventoryDeclarationCount": 29946,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 15135,
-  "leanTheoremInventoryTheoremCount": 15452,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 7619,
-  "leanTheoremInventorySourceClosureModuleCount": 297,
-  "leanSourceClosureSha256": "99bcce8eb3005173e6c199a5ac86956f627515f96253e45502964a46c58b8233",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-22-180",
+  "leanTheoremInventoryTheoremCount": 15456,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 7617,
+  "leanTheoremInventorySourceClosureModuleCount": 298,
+  "leanSourceClosureSha256": "8460081a1d46638486a7c339dd1c77c7c834886630b3facfc0b67c6551050d6b",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-22-181",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "b63692b4c5069c36f97d7ca3a5e440a879d0c37f70545855271a0c81780d149f",
+  "formalPublicationMapSha256": "400cbeaef324fd9f4ce7732a10600abafd4c23df85cc8a0690a8421a0c3ec3c8",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -45622,6 +45629,75 @@
       "status": "formalized-residual-terminal-packet-budget-no-lower-zeroslack-sidecar"
     },
     {
+      "classification": "formalized-residual-terminal-bcel-packet-no-lower-zeroslack-sidecar",
+      "id": "residual-terminal-bcel-packet-no-lower-zeroslack-sidecar",
+      "nonClaim": "The grouped BN6 family and all terminal, budget, Packet, realizer, dependency, and rank inputs inherited from M180 remain supplied. This milestone does not derive the family or BCEL constant activation from positive residual slack, construct BCELReady from a terminal candidate, complete the manuscript no-lower ledger, establish unconditional ZeroSlack, prove PCCMin or polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.BCELContradictionCertificate.carrier_at_least_two",
+        "PNP.BCELContradictionCertificate.no_positive_packet",
+        "PNP.BCELContradictionCertificate.not_constant_activation",
+        "PNP.bcel_packet_no_lower_zeroslack_sidecar_checked_complete"
+      ],
+      "scope": "For every arbitrary finite supplied M180 Packet/budget no-lower certificate whose grouped carrier passes the exact at-least-two-anchor check, the report-facing ZeroSlack boundary now consumes one checked proof-bearing BCEL/Packet contradiction sidecar. BCEL constant activation would construct a positive BN6 Packet, contradicting the accepted same-family no-lower exclusion.",
+      "title": "Proof-bearing BCEL/Packet no-lower ZeroSlack sidecar",
+      "theoremRows": [
+        {
+          "name": "PNP.BCELContradictionCertificate.carrier_at_least_two",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
+          "expectedKernelTypeSha256": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.BCELContradictionCertificate.no_positive_packet",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
+          "expectedKernelTypeSha256": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.BCELContradictionCertificate.not_constant_activation",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8f50f730be1a30e338bd5d773905aef8317bd6711e0d7a6d80fcfb22d0da89c5",
+          "expectedKernelTypeSha256": "8f50f730be1a30e338bd5d773905aef8317bd6711e0d7a6d80fcfb22d0da89c5",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.bcel_packet_no_lower_zeroslack_sidecar_checked_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "cb6356f351ce9fe13f5fdcc0e71eb11174631c5a836e0c3f112bc924ccdba8d2",
+          "expectedKernelTypeSha256": "cb6356f351ce9fe13f5fdcc0e71eb11174631c5a836e0c3f112bc924ccdba8d2",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-bcel-packet-no-lower-zeroslack-sidecar"
+    },
+    {
       "classification": "formalized-concrete-locked-nand-threshold",
       "id": "global-locked-nand-threshold",
       "nonClaim": "This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.",
@@ -45719,7 +45795,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-22-180",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-22-181",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

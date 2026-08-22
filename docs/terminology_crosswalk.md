@@ -134,6 +134,18 @@ The following names are the package families listed in `pcc-local-packages0.mjs`
 | `Final` | Report §§18.4, 20.6, 20.13 | Framework match, SAT decision, polynomial bound, and theorem linkage combining O's minimizer with G's threshold. | Composition/interface theorem. | O and G are intentionally separate and must agree on syntax, size, outputs, minimum, and slack. | The final SAT procedure could combine incompatible models. | Confirm both packages count NAND gates and use the same output convention. | `pcc-final-framework0.mjs::CheckFinalIntegration0`; `pcc-final0.mjs::CheckFinal0`, `CheckRowFamFinal0`. | Theorem 18.2; Theorem 20.5; Theorem 20.12. |
 | `PACK` | Report §§18.2–19.5 | Top-level interface, manifest, rows, imports, reflection, bounds, firewalls, package-sufficiency theorem, and generated-package acceptance layer. | Whole-system proof package checker. No exact standard equivalent. | Local package acceptance must be composed under one global manifest and claim boundary. | A missing family, import cycle, reflection mismatch, bound failure, or hidden minimization could be omitted from final acceptance. | A manifest lists every required family and rejects one missing G row. | `pcc-pack-sufficiency0.mjs::CheckPackSufficiency0`; `pcc-check-pcc-pack-exp0.mjs::CheckPCCPackexp0`. | Theorem 18.1; Theorem 18.3; Theorem 19.1. |
 
+### Current Lean BCEL/Packet no-lower boundary
+
+`ResidualTerminalBCELPacketNoLowerZeroSlackSidecar` is the proof-bearing
+same-family boundary between the legacy BCEL constant-activation premise and
+the accepted Packet/budget no-lower branch. The certificate checks that the
+supplied grouped carrier has at least two anchors. Constant activation would
+construct a positive BN6 Packet, while the linked no-lower checker excludes
+that Packet. The family and all underlying terminal, budget, Packet, realizer,
+dependency, and rank data remain supplied. This does not derive BCELReady or
+constant activation from positive residual slack, complete the no-lower
+ledger, establish unconditional ZeroSlack, or prove polynomial PCCMin.
+
 ## Ambiguity and naming rules
 
 1. **`Residual` must be qualified.** Use “residual slack,” “positive residual witness,” “BN4 residual cell,” or “quotient residual key.”

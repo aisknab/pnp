@@ -2232,6 +2232,19 @@ HResolve, saturation-loss, named-route, or replay coverage; the complete
 manuscript no-lower ledger; unconditional ZeroSlack; or polynomial PCCMin. See
 [`lean_residual_terminal_packet_budget_no_lower_zeroslack_sidecar.md`](./lean_residual_terminal_packet_budget_no_lower_zeroslack_sidecar.md).
 
+`ResidualTerminalBCELPacketNoLowerZeroSlackSidecar` now replaces the five
+report-facing BCEL contradiction strings with a dependent proof-bearing
+boundary. It binds the exact M180 Packet/budget no-lower certificate to its
+same grouped family and reflects the decidable check that the carrier contains
+at least two anchors. BCEL constant activation would let the existing
+arbitrary-finite BN6 theorem construct a positive Packet, contradicting the
+accepted same-family no-lower exclusion. The family and all M180 terminal,
+budget, Packet, realizer, dependency, and rank inputs remain supplied. This
+does not derive BCELReady or constant activation from positive residual slack,
+complete the manuscript no-lower ledger, establish unconditional ZeroSlack,
+or prove polynomial PCCMin. See
+[`lean_residual_terminal_bcel_packet_no_lower_zeroslack_sidecar.md`](./lean_residual_terminal_bcel_packet_no_lower_zeroslack_sidecar.md).
+
 `ResidualTerminalBudgetEnvelopeResolver` now places a computed finite budget
 boundary over that canonical support universe. For supplied natural gate and
 saturated-record caps, each seed is saturated in the candidate-derived system;
