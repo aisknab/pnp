@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-22-177",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-22-178",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3071,7 +3071,12 @@
     "PNP.HResolveSidecarCertificate.blocked_of_mem": "a4ef62fd886cc9790b082a46846385e82423096a2cd8441905943b0e495408b4",
     "PNP.HResolveSidecarCertificate.exact_route_sound": "12972e8b0b6f869bdcca53829b3609cf214b2586eb6e0d5d1ac9541c7755f100",
     "PNP.HResolveSidecarCertificate.gain_route_sound": "129f4d0176153b831ed957ee92a62c2073e09e09fb778caa66bb4893e629d56d",
-    "PNP.hresolve_zeroslack_sidecar_checked_complete": "fd970a799e2afdcc83b011d3d7476557efe33bdbc48decc563785d1602d89709"
+    "PNP.hresolve_zeroslack_sidecar_checked_complete": "fd970a799e2afdcc83b011d3d7476557efe33bdbc48decc563785d1602d89709",
+    "PNP.BudgetSidecarCertificate.excluded": "a15cd6efe59fd66ddaab02635ee9f7aef0a82b43476ae57404cc7a1453fa5ba3",
+    "PNP.BudgetSidecarCertificate.no_feasible_support": "c43f95f6685ef2bfd1c74341121879e8800e14071c71551b6f52443214c3c9f5",
+    "PNP.BudgetSidecarCertificate.exact_route_sound": "d8a95988cf255477a8e89a4677c8ab5acfa3129540dbf8aac0d9e477cb4e1922",
+    "PNP.BudgetSidecarCertificate.gain_route_sound": "030c2b43009fff9c76409479aa0ed39d46451e011b4de89e09f604e0f0eb9968",
+    "PNP.budget_zeroslack_sidecar_checked_complete": "7829c7dd487dfec295ad0504483a30ebe0a22e43cd4da685920f8df8f40bce4b"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3089,7 +3094,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "aaa9e359b91852f852a82688ce61c78d4931fb36ff148e80292b4244f3c92a5b",
+  "milestoneSourceClosureSha256": "a9b1e661dfcae428062fc340977abf316ca4fcfd1de6e2ee613351eaf22d9be4",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -7762,6 +7767,20 @@
       ],
       "scope": "For every arbitrary finite supplied governed HResolve family, the report-facing ZeroSlack boundary now consumes a checked proof-bearing NoHereditary sidecar: duplicate-free total blocked coverage is recomputed, exact and gain routes are excluded for every listed candidate, and those route predicates are separately bound to semantic minimum and strict equivalent gain propositions.",
       "title": "Proof-bearing HResolve ZeroSlack sidecar"
+    },
+    {
+      "classification": "formalized-residual-terminal-budget-zeroslack-sidecar",
+      "id": "residual-terminal-budget-zeroslack-sidecar",
+      "nonClaim": "The natural terminal support caps are supplied inputs, and exhaustive enumeration, saturation, and reference minimization may be exponential. This milestone does not formalize the B0-B4 Budget grammar or blocker semantics, implement full or polynomial BudgetResolve, prove a complete no-lower ledger, establish unconditional ZeroSlack, prove PCCMin or polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.BudgetSidecarCertificate.excluded",
+        "PNP.BudgetSidecarCertificate.no_feasible_support",
+        "PNP.BudgetSidecarCertificate.exact_route_sound",
+        "PNP.BudgetSidecarCertificate.gain_route_sound",
+        "PNP.budget_zeroslack_sidecar_checked_complete"
+      ],
+      "scope": "For arbitrary finite direct-wire candidates and supplied natural caps, the report-facing ZeroSlack boundary now consumes a checked proof-bearing NoBudget sidecar. A failed exhaustive search over the complete canonical terminal support universe excludes every budget-feasible support, while separately checked exact and gain routes entail semantic minimum and strict equivalent gain propositions.",
+      "title": "Proof-bearing Budget ZeroSlack sidecar"
     },
     {
       "classification": "formalized-concrete-locked-nand-threshold",

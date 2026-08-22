@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '0c7356ab15bd29b895c0f4ba6e4f3552a3946dded13d0d002972f5d6c06c0975';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '992345755cc53192264b5e02bde042127c79bc5a7bd8e41788a6b4dc94e4abb1';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -2835,6 +2835,11 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.HResolveSidecarCertificate.exact_route_sound',
   'PNP.HResolveSidecarCertificate.gain_route_sound',
   'PNP.hresolve_zeroslack_sidecar_checked_complete',
+  'PNP.BudgetSidecarCertificate.excluded',
+  'PNP.BudgetSidecarCertificate.no_feasible_support',
+  'PNP.BudgetSidecarCertificate.exact_route_sound',
+  'PNP.BudgetSidecarCertificate.gain_route_sound',
+  'PNP.budget_zeroslack_sidecar_checked_complete',
   'PNP.DirectWire.allTerminalPrimitiveRecords_nodup',
   'PNP.DirectWire.filter_mem_terminalListSubsets',
   'PNP.DirectWire.TerminalFourCornerCarrier.boundaryDisposition?_eq_some_iff',
@@ -3113,7 +3118,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-22-177') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-22-178') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -3390,7 +3395,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-22-177') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-22-178') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

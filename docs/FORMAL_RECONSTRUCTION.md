@@ -2190,6 +2190,20 @@ candidate derivation, H0-H4 blocker semantics, full or polynomial HResolve,
 the complete no-lower ledger, unconditional ZeroSlack, or PCCMin. See
 [`lean_residual_terminal_hresolve_zeroslack_sidecar.md`](./lean_residual_terminal_hresolve_zeroslack_sidecar.md).
 
+`ResidualTerminalBudgetZeroSlackSidecar` now replaces the report-facing
+ZeroSlack certificate's three Budget strings with a checked, proof-bearing
+`NoBudget` boundary. For every finite direct-wire candidate and supplied
+natural gate/record caps, the certificate stores the actual equation showing
+that exhaustive search over the complete canonical terminal support universe
+returned no feasible support. Reflection excludes the recomputed budget
+predicate for every governed seed. Exact and gain routes retain semantic
+minimum and strict equivalent gain meanings through existing kernel theorems,
+not supplied proof handles. The caps remain supplied, and enumeration,
+saturation, and reference minimization may be exponential. This is not the BUD
+grammar or B0--B4 sidecar, full or polynomial BudgetResolve, the complete
+no-lower ledger, unconditional ZeroSlack, or PCCMin. See
+[`lean_residual_terminal_budget_zeroslack_sidecar.md`](./lean_residual_terminal_budget_zeroslack_sidecar.md).
+
 `ResidualTerminalBudgetEnvelopeResolver` now places a computed finite budget
 boundary over that canonical support universe. For supplied natural gate and
 saturated-record caps, each seed is saturated in the candidate-derived system;

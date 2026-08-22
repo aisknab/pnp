@@ -639,6 +639,17 @@ decidability witnesses, and blocker semantics remain supplied. This is not
 full or polynomial HResolve, the complete no-lower ledger, unconditional
 ZeroSlack, or polynomial PCCMin.
 
+The proof-bearing Budget ZeroSlack sidecar milestone applies the same trust
+boundary to `BudgetSidecarCertificate` without duplicating the underlying
+resolver. Lean stores the exact equation returned by the existing exhaustive
+terminal-envelope search, and reflection excludes every canonical support from
+the supplied gate/record caps. Existing exact-slack and positive-slack
+reflection theorems provide semantic minimum and strict equivalent gain route
+meanings, replacing the former strings. The caps remain supplied and the
+support scan, saturation, and reference minimization may be exponential. This
+is not the BUD grammar or B0--B4 sidecar, full or polynomial BudgetResolve, the
+complete no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

@@ -1,0 +1,8 @@
+import PNP.ResidualTerminalBudgetZeroSlackSidecar
+
+#print axioms PNP.BudgetSidecarCertificate
+#print axioms PNP.BudgetSidecarCertificate.excluded
+#print axioms PNP.BudgetSidecarCertificate.no_feasible_support
+#print axioms PNP.BudgetSidecarCertificate.exact_route_sound
+#print axioms PNP.BudgetSidecarCertificate.gain_route_sound
+#print axioms PNP.budget_zeroslack_sidecar_checked_complete

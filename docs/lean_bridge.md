@@ -1522,6 +1522,18 @@ predicates, decidability witnesses, and blocker semantics remain supplied.
 This is not terminal candidate generation, H0-H4 blocker semantics, full or
 polynomial HResolve, unconditional ZeroSlack, or PCCMin.
 
+`lean/PNP/ResidualTerminalBudgetZeroSlackSidecar.lean` upgrades the matching
+Budget boundary in the report-facing ZeroSlack record. Its
+`BudgetSidecarCertificate` stores the actual equation showing that exhaustive
+search over every canonical terminal support returned no feasible member;
+the former `NoBudget`, exact-soundness, and gain-soundness strings are no longer
+accepted. Reflection excludes the recomputed envelope predicate everywhere,
+while existing residual-slack theorems give every explicit exact or gain route
+its semantic minimum or strict equivalent gain meaning. The caps remain
+supplied and the scan, saturation, and reference minimum may be exponential.
+This is not the BUD grammar or B0--B4 sidecar, full or polynomial
+BudgetResolve, unconditional ZeroSlack, or PCCMin.
+
 `lean/PNP/ResidualTerminalBudgetEnvelopeResolver.lean` adds the next finite BUD
 edge. For supplied natural gate and saturated-record caps, it searches the
 complete canonical terminal support universe, recomputes candidate-derived
