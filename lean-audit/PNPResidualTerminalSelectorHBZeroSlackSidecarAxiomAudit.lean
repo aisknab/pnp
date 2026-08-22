@@ -1,0 +1,10 @@
+import PNP.ResidualTerminalSelectorHBZeroSlackSidecar
+
+#print axioms PNP.SelectorHBZeroSlackSidecarCertificate
+#print axioms PNP.SelectorHBZeroSlackSidecarCertificate.accepted
+#print axioms PNP.SelectorHBZeroSlackSidecarCertificate.no_faithful
+#print axioms PNP.SelectorHBZeroSlackSidecarCertificate.claim_eq_bot
+#print axioms PNP.SelectorHBZeroSlackSidecarCertificate.hb_closure_valid
+#print axioms PNP.SelectorHBZeroSlackSidecarCertificate.no_hb_active
+#print axioms PNP.SelectorHBZeroSlackSidecarCertificate.depends_wellFounded
+#print axioms PNP.selector_hb_zeroslack_sidecar_checked_complete

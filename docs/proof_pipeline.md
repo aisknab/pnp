@@ -650,6 +650,17 @@ support scan, saturation, and reference minimization may be exponential. This
 is not the BUD grammar or B0--B4 sidecar, full or polynomial BudgetResolve, the
 complete no-lower ledger, unconditional ZeroSlack, or polynomial PCCMin.
 
+The proof-bearing Selector/HB ZeroSlack sidecar milestone then replaces the
+two remaining selector-silence and HB-closure string structures without
+rerunning the underlying checks. Lean stores the exact executable all-row
+selector-silence and ranked no-outcome closure equations. Their existing
+strong finite-rank induction proves every canonical selector nonfaithful,
+every claim an exact typed bottom, all supplied HN/BUD activity false, and the
+dependency relation well founded. The grouped family, realizer and dependency
+tables, environment, claims, activity bits, and rank map remain supplied. This
+is not blocker semantics, semantic dependency completeness, the BCEL
+contradiction, unconditional ZeroSlack, or polynomial PCCMin.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

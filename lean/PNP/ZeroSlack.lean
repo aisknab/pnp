@@ -5,29 +5,16 @@ ZeroSlack and oracle certificate layer for the Lean bridge.
 
 This file replaces the opaque PCCMin string handles with structured certificate
 objects for the report's rank-ordered oracle and ZeroSlack contradiction.  The
-HResolve and Budget boundaries are now checked proof-bearing certificates;
-the remaining fields are still digest/ledger handles in this pass.
+HResolve, Budget, and joint selector/HB boundaries are now checked proof-bearing
+certificates; the remaining fields are still digest/ledger handles in this pass.
 -/
 
 import PNP.ResidualBand
 import PNP.ResidualTerminalHResolveZeroSlackSidecar
 import PNP.ResidualTerminalBudgetZeroSlackSidecar
+import PNP.ResidualTerminalSelectorHBZeroSlackSidecar
 
 namespace PNP
-
-/-- Selector-silence ledger boundary. -/
-structure SelectorSilenceCertificate where
-  finiteRankList : String
-  selectorUniverseEnumerated : String
-  realizerLogsTyped : String
-  noLowerFaithfulSelector : String
-
-/-- HN/BUD negative-closure boundary. -/
-structure HBClosureCertificate where
-  blockerGraphAcyclicByRank : String
-  hbBlockerGraphAcyclic : String
-  selectorSilenceRankComplete : String
-  hbNoCircularNegativeClosure : String
 
 /-- The BCEL-to-selector contradiction package used by ZeroSlack. -/
 structure BCELContradictionCertificate where
@@ -47,8 +34,7 @@ structure ZeroSlackCertificate where
   noLowerRouteLedgerComplete : String
   hResolve : HResolveSidecarCertificate
   budget : BudgetSidecarCertificate
-  selectorSilence : SelectorSilenceCertificate
-  hbClosure : HBClosureCertificate
+  selectorHBClosure : SelectorHBZeroSlackSidecarCertificate
   bcelContradiction : BCELContradictionCertificate
   certificateEncodingPolynomial : String
   certificatePolynomialSize : String
@@ -58,7 +44,7 @@ structure PCCOracleCertificate where
   normalizedInputRecord : String
   hResolve : HResolveSidecarCertificate
   budget : BudgetSidecarCertificate
-  selectorSilence : SelectorSilenceCertificate
+  selectorHBClosure : SelectorHBZeroSlackSidecarCertificate
   zeroSlack : ZeroSlackCertificate
 
 /-- Extract the report-facing ZeroSlack soundness handle. -/

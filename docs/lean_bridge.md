@@ -1452,8 +1452,7 @@ structure ResidualBandReductionTrust where
 ```text
 HResolveSidecarCertificate
 BudgetSidecarCertificate
-SelectorSilenceCertificate
-HBClosureCertificate
+SelectorHBZeroSlackSidecarCertificate
 BCELContradictionCertificate
 ZeroSlackCertificate
 PCCOracleCertificate
@@ -1533,6 +1532,19 @@ its semantic minimum or strict equivalent gain meaning. The caps remain
 supplied and the scan, saturation, and reference minimum may be exponential.
 This is not the BUD grammar or B0--B4 sidecar, full or polynomial
 BudgetResolve, unconditional ZeroSlack, or PCCMin.
+
+`lean/PNP/ResidualTerminalSelectorHBZeroSlackSidecar.lean` upgrades the joint
+selector/HB boundary in the report-facing ZeroSlack record. Its
+`SelectorHBZeroSlackSidecarCertificate` stores the exact all-row
+selector-silence and ranked no-outcome HB-closure equations instead of eight
+strings. Existing reflection and strong finite-rank induction prove every
+canonical selector nonfaithful, every realizer claim an exact typed bottom,
+every supplied HN/BUD activity bit false, and the dependency relation well
+founded. The grouped family, realizer and dependency tables, environment,
+claims, activity bits, and rank map remain supplied. This is not terminal-data
+construction, selector faithfulness or compatibility, blocker semantics,
+semantic dependency completeness, unconditional ZeroSlack, or polynomial
+PCCMin.
 
 `lean/PNP/ResidualTerminalBudgetEnvelopeResolver.lean` adds the next finite BUD
 edge. For supplied natural gate and saturated-record caps, it searches the
