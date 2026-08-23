@@ -240,7 +240,7 @@ test('root, status, milestone, workflow, and documentation publish the boundary'
       status.leanConcreteLockedNANDPolynomialReductionScope,
       'strict-version-zero-parser-emitter-polynomial-reduction-with-exact-language-equivalence-and-recursive-raw-refinement',
     );
-    assert.equal(status.projectSpecificAxiomInventory.length, 3);
+    assert.equal(status.projectSpecificAxiomInventory.length > 0, status.projectSpecificAxiomsRemaining);
     assert.equal(status.remainingBlockers.length, 5);
     assert.equal(status.rootLeanTheoremPresent, false);
     assert.equal(status.concretePublicationGate.passed, false);

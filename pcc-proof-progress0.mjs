@@ -10,7 +10,7 @@ const BASELINE_COORDINATE =
   'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184';
 const BASELINE_COVERAGE = Object.freeze({ earnedRows: 160, totalRows: 162 });
 const BASELINE_SCORE = 30;
-const CURRENT_SCORE = 32;
+const CURRENT_SCORE = 33;
 const FILES = Object.freeze({
   ledger: 'status/PROOF_PROGRESS.json',
   status: 'status/FORMAL_RECONSTRUCTION_STATUS.json',
@@ -81,12 +81,12 @@ const EXPECTED_TRACKS = Object.freeze([
     id: 'root-and-axioms',
     title: 'Root theorem and project-axiom elimination',
     pointsAvailable: 10,
-    pointsEarned: 1,
+    pointsEarned: 2,
     checkpoints: [
       ['axiom-remove-generate-pccpack', 1, 'open'],
       ['axiom-remove-check-pccpackexp', 1, 'open'],
       ['axiom-remove-locked-nand-threshold', 1, 'earned'],
-      ['axiom-remove-residual-band-minimum', 1, 'open'],
+      ['axiom-remove-residual-band-minimum', 1, 'earned'],
       ['root-deterministic-cnfsat-in-p', 2, 'open'],
       ['root-complexity-transport', 1, 'open'],
       ['root-eligible-theorem', 2, 'open'],
@@ -106,7 +106,6 @@ const EXPECTED_GATES = Object.freeze([
 const EXPECTED_PROJECT_AXIOMS = Object.freeze([
   'PNP.CheckPCCPackexp',
   'PNP.GeneratePCCPack',
-  'PNP.ResidualBandExactMinimization',
 ]);
 
 const REQUIRED_CHANGE_RECORD_FIELDS = Object.freeze([

@@ -67,6 +67,6 @@ supplied exact runs, preserves accept/reject, retains timeout for a supplied stu
 endpoint at the exact prefix budget, and compiles from paired raw input at six times the cumulative
 work cost. Later pipeline modules supply target termination, terminal raw output de-tagging,
 the external-input-size polynomial, and recursive composition/precomposition `RawRefinement`.
-Therefore `Formal.ConcreteComplexityMachineLink` is discharged. In the current M186 status, five
-global blockers remain, all reviewed activation fingerprints remain unset, three project-specific
+Therefore `Formal.ConcreteComplexityMachineLink` is discharged. In the current M187 status, five
+global blockers remain, all reviewed activation fingerprints remain unset, two project-specific
 axioms remain, `PNP.Main.p_eq_np` is absent, and the publication gate is false.

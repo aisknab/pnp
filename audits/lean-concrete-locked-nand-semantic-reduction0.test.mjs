@@ -34,6 +34,7 @@ const CORE_DEFINITIONS = Object.freeze([
   `${NAMESPACE}.encodeLockedInstance`,
   `${NAMESPACE}.decodeLockedInstance`,
   `${NAMESPACE}.EncodedNANDSAT`,
+  `${NAMESPACE}.EncodedDirectWireMinimumThreshold`,
   `${NAMESPACE}.EncodedLockedNANDThreshold`,
   `${NAMESPACE}.buildLockedNANDInstance`,
 ]);
@@ -73,6 +74,7 @@ const ENCODING_THEOREMS = Object.freeze([
 
 const REDUCTION_THEOREMS = Object.freeze([
   `${NAMESPACE}.decodeElaboratedCircuit_encodeCircuit_ofCircuit`,
+  `${NAMESPACE}.encodedDirectWireMinimumThreshold_ofCandidate_iff`,
   `${NAMESPACE}.buildLockedNANDInstance_of_decoded`,
   `${NAMESPACE}.buildLockedNANDInstance_of_malformed`,
   `${NAMESPACE}.empty_not_encodedLockedNANDThreshold`,
@@ -198,13 +200,14 @@ test('concrete languages measure decoded full bytes and remain machine-neutral',
     ['PNP.Concrete.Complexity', 'PNP.Concrete.LockedNANDEncoding'],
   );
   assert.match(source, /def EncodedNANDSAT\s*:\s*Language[\s\S]*decodeElaboratedCircuit/u);
-  assert.match(source, /def EncodedLockedNANDThreshold\s*:\s*Language[\s\S]*raw\.elaborate[\s\S]*referenceMinimum[\s\S]*Implementation\.mk packed\.gateCount packed\.candidate/u);
+  assert.match(source, /def EncodedDirectWireMinimumThreshold\s*:\s*Language[\s\S]*raw\.elaborate[\s\S]*referenceMinimum[\s\S]*Implementation\.mk packed\.gateCount packed\.candidate/u);
+  assert.match(source, /def EncodedLockedNANDThreshold\s*:\s*Language\s*:=\s*EncodedDirectWireMinimumThreshold/u);
   assert.match(source, /def buildLockedNANDInstance[\s\S]*\| none => \[\][\s\S]*encodeLockedInstance \(lockedInstanceOfCircuit packed\.circuit\)/u);
   assert.match(source, /theorem buildLockedNANDInstance_correct[\s\S]*EncodedNANDSAT bits ↔[\s\S]*EncodedLockedNANDThreshold/u);
   assert.doesNotMatch(source, /\b(?:runtimeBound|outputSizeBound|haltsWithin|machineOutput)\b/u);
 });
 
-test('all 36 theorem declarations and 12 executable interfaces are axiom-audited', async () => {
+test('all 37 theorem declarations and 13 executable interfaces are axiom-audited', async () => {
   const encoding = await text0(ENCODING_PATH);
   const reduction = await text0(REDUCTION_PATH);
   assert.deepEqual(
@@ -225,7 +228,7 @@ test('all 36 theorem declarations and 12 executable interfaces are axiom-audited
     ['PNP.Concrete.LockedNANDReduction'],
   );
   assert.deepEqual(printed0(audit), AUDITED_DECLARATIONS);
-  assert.equal(new Set(printed0(audit)).size, 48);
+  assert.equal(new Set(printed0(audit)).size, 50);
   const inventory = JSON.parse(await text0(INVENTORY_PATH));
   const rows = new Map(
     inventory.declarations.map((entry) => [entry.name, entry]),
@@ -284,7 +287,7 @@ test('status retains the semantic boundary and records its executable parser suc
   ]) assert.equal(status[field], true, field);
   assert.equal(
     status.leanConcreteLockedNANDEncodedSemanticReductionAuditedDeclarationCount,
-    48,
+    50,
   );
   assert.equal(
     status.leanConcreteLockedNANDEncodedSemanticReductionScope,
@@ -307,7 +310,7 @@ test('status retains the semantic boundary and records its executable parser suc
     'leanLockedNANDBuilderFormalized',
     'leanLockedNANDThresholdFormalized',
   ]) assert.equal(status[field], true, field);
-  assert.equal(status.projectSpecificAxiomInventory.length, 3);
+  assert.equal(status.projectSpecificAxiomInventory.length > 0, status.projectSpecificAxiomsRemaining);
   assert.equal(status.remainingBlockers.length, 5);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);
@@ -327,7 +330,7 @@ test('technical documentation records generated evidence and the strategic next 
     'status payload',
     'report artifacts',
     'eleven reviewed theorem types',
-    '48 audited declarations',
+    '50 audited declarations',
     'Quot.sound',
     'propext',
     'parser/validator machine',

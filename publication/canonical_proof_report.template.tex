@@ -528,8 +528,14 @@ abstract string-handle assumption. The M186 compatibility boundary now makes
 the report-facing SAT and locked-NAND languages definitionally equal to these
 concrete endpoints, reuses the compiled CNF verifier and reduction, and removes
 the duplicate locked-NAND axiom and caller trust field. Its named endpoint also
-uses only \code{propext} and \code{Quot.sound}. A deterministic target decider, concrete
-CNFSAT NP-hardness transport, residual-band and ZeroSlack/PCCMin completion,
+uses only \code{propext} and \code{Quot.sound}. The M187 compatibility boundary
+now defines the report-facing residual-band endpoint as the concrete encoded
+direct-wire minimum-threshold predicate, proves exact arbitrary-candidate
+semantics, and replaces the supplied locked-to-residual edge with an identity
+polynomial reduction. The former residual-band language axiom is absent; the
+exhaustive reference minimum is still only a semantic specification. A
+deterministic target decider, concrete CNFSAT NP-hardness transport,
+ZeroSlack/PCCMin completion,
 and \(P=NP\) remain unproved.
 
 The residual-gain chain milestone reconstructs the iteration-count edge from

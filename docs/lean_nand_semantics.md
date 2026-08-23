@@ -53,8 +53,9 @@ lake env lean -DwarningAsError=true lean-audit/PNPNANDSemanticsAxiomAudit.lean
 ```
 
 The dedicated audit prints no axioms for every explicit declaration in the module. The current
-repository-wide inventory reports three project-specific axioms; M186 replaced
-`PNP.LockedNANDThreshold` with the exact concrete encoded language definition.
+repository-wide inventory reports two project-specific axioms; M186 replaced
+`PNP.LockedNANDThreshold` and M187 replaced
+`PNP.ResidualBandExactMinimization` with exact concrete encoded language definitions.
 
 ## Not established here
 

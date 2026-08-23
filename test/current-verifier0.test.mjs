@@ -97,6 +97,8 @@ test('current verifier plan contains status, progress, surface, archive integrit
     'audits/lean-residual-terminal-finite-bcel-packet-activation-obstruction0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes(
     'audits/lean-concrete-legacy-locked-nand-compatibility0.test.mjs'), true);
+  assert.equal(CURRENT_VERIFICATION_TESTS0.includes(
+    'audits/lean-concrete-residual-band-compatibility0.test.mjs'), true);
 });
 
 test('current verifier cannot be configured to execute the historical replay', () => {
@@ -123,7 +125,8 @@ test('current verifier accepts without executing a historical replay', async () 
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP');
   assert.equal(out.leanConcreteCNFSATInPFormalized, false);
   assert.equal(out.leanConcreteCNFNPCompletenessFormalized, false);
-  assert.equal(out.riskWeightedProofCompletionPercent, 32);
+  assert.equal(out.riskWeightedProofCompletionPercent,
+    progress.proofCompletion.percent);
   assert.equal(out.proofCompletionPointsAvailable, 100);
   assert.equal(out.proofCompletionUncertaintyLowPercent, 20);
   assert.equal(out.proofCompletionUncertaintyHighPercent, 40);

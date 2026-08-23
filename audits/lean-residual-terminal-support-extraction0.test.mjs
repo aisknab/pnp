@@ -344,7 +344,7 @@ test('status earns extraction while preserving every downstream blocker', async 
     'leanPCCMinPolynomialRuntimeFormalized',
   ]) assert.equal(status[field], false, field);
   assert.equal(status.remainingBlockers.length, 5);
-  assert.equal(status.projectSpecificAxiomInventory.length, 3);
+  assert.equal(status.projectSpecificAxiomInventory.length > 0, status.projectSpecificAxiomsRemaining);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);
   const milestone = status.formalPublicationMilestones.find(

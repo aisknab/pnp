@@ -201,3 +201,4 @@ import PNP.ZeroSlack
 import PNP.PCCMin
 import PNP.Bridge
 import PNP.ConcreteLegacyLockedNANDCompatibility
+import PNP.ConcreteResidualBandCompatibility

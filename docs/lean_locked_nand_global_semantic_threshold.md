@@ -119,7 +119,7 @@ The module exposes exactly eight declarations:
 `lean-audit/PNPLockedNANDGlobalSemanticThresholdAxiomAudit.lean` prints the
 compiled axiom closure of all eight. Every declaration depends on exactly the
 Lean-standard pair `Quot.sound` and `propext`; none depends on
-`Classical.choice`, `sorryAx`, or any of the current three project axioms.
+`Classical.choice`, `sorryAx`, or either of the current two project axioms.
 
 `lean-regression/PNPLockedNANDGlobalSemanticThreshold.lean` exercises:
 

@@ -23,8 +23,8 @@ remain part of the theorem and fail closed; no well-formedness promise or
 caller-supplied semantic certificate is introduced.
 
 The compiled axiom transcript for the theorem contains only Lean's permitted
-standard axioms `propext` and `Quot.sound`. It contains none of the current
-three disclosed project axioms. M186 makes `PNP.LockedNANDThreshold` the exact
+standard axioms `propext` and `Quot.sound`. It contains neither of the current
+two disclosed project axioms. M186 makes `PNP.LockedNANDThreshold` the exact
 concrete endpoint and consumes this theorem directly; no string handle or
 caller-supplied reduction field remains.
 

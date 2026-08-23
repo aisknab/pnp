@@ -103,11 +103,11 @@ proved not to be a valid target instance.
 ## Kernel and regression evidence
 
 `lean-audit/PNPConcreteLockedNANDSemanticReductionAxiomAudit.lean` audits all
-36 theorem declarations and twelve executable interfaces. Of those 48
+37 theorem declarations and thirteen executable interfaces. Of those 50
 audited declarations:
 
 - four have empty axiom closure;
-- 37 use only `propext`; and
+- 39 use only `propext`; and
 - seven use only `propext` and `Quot.sound`.
 
 None reaches `Classical.choice`, `sorryAx`, a project axiom, host-side

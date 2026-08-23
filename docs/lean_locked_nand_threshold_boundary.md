@@ -111,7 +111,7 @@ semantic threshold, and global residual slack at most four are now true in
 formal status. The encoded polynomial builder, report-level threshold link,
 and polynomiality were not yet present at this historical module boundary;
 successor milestones now supply the builder and report linkage. The current
-status still has five open global gates, three project-specific axioms, and an
+status still has five open global gates, two project-specific axioms, and an
 absent `PNP.Main.p_eq_np` root theorem. The axiom-free inactive
 `PNP.Main.ConcretePEqualsNP` definition does not change this threshold boundary or activate the
 publication gate.

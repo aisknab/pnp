@@ -204,10 +204,16 @@ translation in polynomial time and packages both the direct
 strict locked-NAND reduction. M186 makes the report-facing SAT and locked-NAND
 interfaces exact aliases of these concrete languages, reuses the compiled NP
 verifier and all-bitstring reduction, and removes the duplicate locked-NAND
-project axiom and caller trust field. A deterministic target decider, the
+project axiom and caller trust field. M187 makes the report-facing residual-band
+language the general concrete encoded direct-wire minimum-threshold predicate
+and replaces the supplied locked-to-residual edge with the identity reduction.
+Exhaustive reference minimization remains a semantic specification, not a
+polynomial algorithm. A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See
 [`lean_concrete_legacy_locked_nand_compatibility.md`](lean_concrete_legacy_locked_nand_compatibility.md).
+See also
+[`lean_concrete_residual_band_compatibility.md`](lean_concrete_residual_band_compatibility.md).
 
 The reconstruction now also verifies the iteration-count subclaim used by
 `PCCMin`: for any finite supplied chain whose every adjacent replacement is a

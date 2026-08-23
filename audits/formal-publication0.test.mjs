@@ -84,11 +84,14 @@ test('historical activation and checker acceptance cannot override the concrete 
   }
 });
 
-test('status retains five blockers, three project axioms, and an absent compatibility root', async () => {
+test('status retains five blockers, two project axioms, and an absent compatibility root', async () => {
   const status = await status0();
   assert.equal(status.remainingBlockers.length, 5);
   assert.deepEqual(status.remainingBlockers, status.remainingFormalObligations);
-  assert.equal(status.projectSpecificAxiomInventory.length, 3);
+  assert.deepEqual(status.projectSpecificAxiomInventory, [
+    'PNP.CheckPCCPackexp',
+    'PNP.GeneratePCCPack',
+  ]);
   assert.equal(status.projectSpecificAxiomsRemaining, true);
   assert.equal(status.rootLeanTheorem, 'PNP.Main.p_eq_np');
   assert.equal(status.rootLeanTheoremPresent, false);
@@ -3367,6 +3370,22 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /exact compatibility names.*concrete finite-pipeline model/u);
   assert.match(concreteLegacyCompatibility.nonClaim,
     /does not put the concrete locked target in P/u);
+  const concreteResidualCompatibility = byId.get(
+    'concrete-residual-band-compatibility',
+  );
+  assert.equal(concreteResidualCompatibility.status,
+    'formalized-concrete-residual-band-compatibility');
+  assert.equal(concreteResidualCompatibility.earned, true);
+  assert.equal(concreteResidualCompatibility.allAssumptionFree, false);
+  assert.equal(
+    concreteResidualCompatibility.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.equal(concreteResidualCompatibility.requiredTheorems.length, 7);
+  assert.match(concreteResidualCompatibility.scope,
+    /concrete fail-closed direct-wire candidate\/threshold language/u);
+  assert.match(concreteResidualCompatibility.nonClaim,
+    /does not construct an executable PCCMin algorithm/u);
   for (const id of [
     'global-zeroslack-pccmin',
     'concrete-publication-root',

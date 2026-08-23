@@ -20,10 +20,8 @@ example (lockedInP : PClass LockedNANDThreshold) : PClass SAT :=
 
 example
     (pcc : AcceptedGeneratedPackage → PCCMinLoopCertificate)
-    (residual : ResidualBandReductionTrust)
     (hard : SATHard) : CheckerTrustModel :=
   { pccPackProducesPCCMinLoop := pcc
-    residualBandReduction := residual
     satHard := hard }
 
 example (loop : PCCMinLoopCertificate) :

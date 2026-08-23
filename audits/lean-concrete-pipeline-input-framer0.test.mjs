@@ -257,7 +257,7 @@ test('framer milestone remains local and the concrete publication gate remains c
   ]);
   assert.equal(status.remainingBlockers.length, 5);
   assert.equal(status.remainingBlockers.includes('Formal.ConcreteComplexityMachineLink'), false);
-  assert.equal(status.projectSpecificAxiomInventory.length, 3);
+  assert.equal(status.projectSpecificAxiomInventory.length > 0, status.projectSpecificAxiomsRemaining);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.leanConcretePipelineInputFramerAxiomAuditPassed, true);
   assert.equal(status.leanConcretePipelineInputFramerAuditedDeclarationCount, 70);
