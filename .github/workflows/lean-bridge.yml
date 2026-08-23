@@ -153,6 +153,7 @@ on:
       - 'audits/lean-residual-terminal-interface-exposure-routing0.test.mjs'
       - 'audits/lean-residual-terminal-finite-saturate-positive0.test.mjs'
       - 'audits/lean-residual-terminal-finite-bcel-ready0.test.mjs'
+      - 'audits/lean-residual-terminal-finite-bcel-packet-carrier-coherence0.test.mjs'
       - 'audits/lean-residual-terminal-rank-wf0.test.mjs'
       - 'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs'
       - 'audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs'
@@ -546,6 +547,7 @@ on:
       - 'audits/lean-residual-terminal-interface-exposure-routing0.test.mjs'
       - 'audits/lean-residual-terminal-finite-saturate-positive0.test.mjs'
       - 'audits/lean-residual-terminal-finite-bcel-ready0.test.mjs'
+      - 'audits/lean-residual-terminal-finite-bcel-packet-carrier-coherence0.test.mjs'
       - 'audits/lean-residual-terminal-rank-wf0.test.mjs'
       - 'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs'
       - 'audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs'
@@ -4804,3 +4806,29 @@ jobs:
 
       - name: Run same-family Selector/HB, Packet, and BCEL ZeroSlack coherence hostile audit
         run: node --test audits/lean-residual-terminal-zeroslack-packet-selector-hb-coherence0.test.mjs
+
+      - name: Print same-candidate finite BCEL-ready and Packet carrier coherence axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFiniteBCELPacketCarrierCoherenceAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalFiniteBCELPacketCarrierCoherenceAxiomAudit.lean)"
+          test "$expected_count" -gt 0
+          test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.")" -eq "$expected_count"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected same-candidate finite BCEL-ready and Packet carrier coherence axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -Eq 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            printf '%s\n' "$normalized" >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
+
+      - name: Run same-candidate finite BCEL-ready and Packet carrier coherence regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFiniteBCELPacketCarrierCoherence.lean
+
+      - name: Run same-candidate finite BCEL-ready and Packet carrier coherence hostile audit
+        run: node --test audits/lean-residual-terminal-finite-bcel-packet-carrier-coherence0.test.mjs

@@ -96,6 +96,7 @@ import PNP.ResidualTerminalPacketBudgetNoLowerComposition
 import PNP.ResidualTerminalPacketBudgetNoLowerZeroSlackSidecar
 import PNP.ResidualTerminalBCELPacketNoLowerZeroSlackSidecar
 import PNP.ResidualTerminalZeroSlackPacketSelectorHBCoherence
+import PNP.ResidualTerminalFiniteBCELPacketCarrierCoherence
 import PNP.DirectWireBaseline
 import PNP.Concrete.BitString
 import PNP.Concrete.Machine

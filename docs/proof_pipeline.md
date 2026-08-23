@@ -703,6 +703,18 @@ remain supplied; local failures are not mapped globally, and BN3--BN6 data,
 constant activation, manuscript-wide `SaturatePositive` or `BCELReady`,
 ZeroSlack, and polynomial PCCMin remain open.
 
+The same-candidate finite BCEL-ready and Packet carrier-coherence milestone
+connects that upstream ready branch to the exact grouped family already
+accepted by the Packet/budget no-lower checker. Its dependent terminal problem
+uses the same candidate and model. A proved injective and surjective anchor map
+and a reflected exact list equality identify the ready nucleus image with the
+Packet carrier, transferring the at-least-two bound without a second Boolean.
+The existing same-family positive-Packet exclusion then rules out constant
+activation. The terminal problem, positive premise, family, map, payloads,
+tables, and ranks remain supplied; activation weights are not identified with
+projection excess, constant activation is not derived from positive residual
+slack, and unconditional ZeroSlack and polynomial PCCMin remain open.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

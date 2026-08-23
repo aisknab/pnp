@@ -169,6 +169,18 @@ and no rejected local branch is thereby mapped into the complete global route
 system. Use “checked finite BCEL-ready branch” for this result; reserve
 “BCELReady” for the still-open manuscript theorem.
 
+### Current Lean BCEL-ready/Packet carrier-coherence boundary
+
+`ResidualTerminalFiniteBCELPacketCarrierCoherence` means one dependent
+same-candidate, same-model binding from a checked finite BCEL-ready nucleus to
+the exact grouped Packet family consumed by the report-facing ZeroSlack record.
+“Carrier coherence” includes an injective and surjective anchor map and a
+reflected exact mapped-list equality; it does not mean the supplied Packet
+activation weights equal the terminal projection excess. The family, map, and
+other terminal inputs remain supplied. Use “same-candidate finite BCEL-ready
+and Packet carrier coherence”; do not shorten this to manuscript-wide
+`BCELReady`, unconditional ZeroSlack, or a positive-slack contradiction.
+
 ## Ambiguity and naming rules
 
 1. **`Residual` must be qualified.** Use “residual slack,” “positive residual witness,” “BN4 residual cell,” or “quotient residual key.”

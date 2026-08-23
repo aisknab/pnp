@@ -904,6 +904,8 @@ test('formal reconstruction status accepts the current source and public mirrors
     'leanResidualTerminalFiniteSaturatePositiveCompositionAxiomAuditPassed',
     'leanResidualTerminalFiniteBCELReadyCompositionFormalized',
     'leanResidualTerminalFiniteBCELReadyCompositionAxiomAuditPassed',
+    'leanResidualTerminalFiniteBCELPacketCarrierCoherenceFormalized',
+    'leanResidualTerminalFiniteBCELPacketCarrierCoherenceAxiomAuditPassed',
     'leanResidualTerminalRankWFFormalized',
     'leanResidualTerminalRankWFAxiomAuditPassed',
     'leanResidualTerminalBN3RequestEnvelopeFormalized',
@@ -1022,6 +1024,10 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(
     out.leanResidualTerminalFiniteBCELReadyCompositionScope,
     'all-finite-direct-wire-candidates-executable-models-proof-bearing-positive-full-slack-anchor-problems-recomputed-finite-saturate-positive-to-computed-bcel-ready-branch',
+  );
+  assert.equal(
+    out.leanResidualTerminalFiniteBCELPacketCarrierCoherenceScope,
+    'all-arbitrary-finite-proof-bearing-same-candidate-model-bcel-ready-nuclei-bijectively-mapped-to-the-exact-packet-family-carrier',
   );
   assert.equal(
     out.leanResidualTerminalRankWFScope,
@@ -2287,6 +2293,8 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
     'leanResidualTerminalFiniteSaturatePositiveCompositionAxiomAuditPassed',
     'leanResidualTerminalFiniteBCELReadyCompositionFormalized',
     'leanResidualTerminalFiniteBCELReadyCompositionAxiomAuditPassed',
+    'leanResidualTerminalFiniteBCELPacketCarrierCoherenceFormalized',
+    'leanResidualTerminalFiniteBCELPacketCarrierCoherenceAxiomAuditPassed',
     'leanResidualTerminalRankWFFormalized',
     'leanResidualTerminalRankWFAxiomAuditPassed',
     'leanResidualTerminalBN3RequestEnvelopeFormalized',
@@ -2379,6 +2387,10 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(
     status.leanResidualTerminalFiniteBCELReadyCompositionScope,
     'all-finite-direct-wire-candidates-executable-models-proof-bearing-positive-full-slack-anchor-problems-recomputed-finite-saturate-positive-to-computed-bcel-ready-branch',
+  );
+  assert.equal(
+    status.leanResidualTerminalFiniteBCELPacketCarrierCoherenceScope,
+    'all-arbitrary-finite-proof-bearing-same-candidate-model-bcel-ready-nuclei-bijectively-mapped-to-the-exact-packet-family-carrier',
   );
   assert.equal(
     status.leanResidualTerminalRankWFScope,
@@ -2896,6 +2908,8 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanResidualTerminalFiniteSaturatePositiveCompositionAxiomAuditPassed',
     'leanResidualTerminalFiniteBCELReadyCompositionFormalized',
     'leanResidualTerminalFiniteBCELReadyCompositionAxiomAuditPassed',
+    'leanResidualTerminalFiniteBCELPacketCarrierCoherenceFormalized',
+    'leanResidualTerminalFiniteBCELPacketCarrierCoherenceAxiomAuditPassed',
     'leanResidualTerminalRankWFFormalized',
     'leanResidualTerminalRankWFAxiomAuditPassed',
     'leanResidualTerminalBN3RequestEnvelopeFormalized',

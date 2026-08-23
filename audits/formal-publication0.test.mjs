@@ -2573,6 +2573,31 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /initial positive full-slack premise/u);
   assert.match(terminalFiniteBCELReady.nonClaim, /BN3--BN6/u);
   assert.match(terminalFiniteBCELReady.nonClaim, /ZeroSlack/u);
+  const terminalFiniteBCELPacketCarrier = byId.get(
+    'residual-terminal-finite-bcel-packet-carrier-coherence',
+  );
+  assert.equal(terminalFiniteBCELPacketCarrier.status,
+    'formalized-residual-terminal-finite-bcel-packet-carrier-coherence');
+  assert.equal(terminalFiniteBCELPacketCarrier.earned, true);
+  assert.equal(
+    terminalFiniteBCELPacketCarrier.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.deepEqual(terminalFiniteBCELPacketCarrier.requiredTheorems, [
+    'PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.family_carrier_eq',
+    'PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.carrier_at_least_two',
+    'PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.no_positive_packet',
+    'PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.not_constant_activation',
+    'PNP.terminal_finite_bcel_packet_carrier_coherent_checked_complete',
+  ]);
+  assert.match(terminalFiniteBCELPacketCarrier.scope,
+    /same candidate and model/u);
+  assert.match(terminalFiniteBCELPacketCarrier.scope,
+    /bijective anchor map/u);
+  assert.match(terminalFiniteBCELPacketCarrier.nonClaim,
+    /activation weights.*projection excess/u);
+  assert.match(terminalFiniteBCELPacketCarrier.nonClaim,
+    /unconditional ZeroSlack/u);
   const terminalRankWF = byId.get('residual-terminal-rank-wf');
   assert.equal(terminalRankWF.status,
     'formalized-residual-terminal-rank-wf');

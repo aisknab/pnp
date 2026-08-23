@@ -204,8 +204,8 @@ function validateZeroSlack0(source) {
       'NoOutcomeActiveClosureValid',
       '¬DirectWire.TerminalBN6PacketConclusion',
       '¬z.packetBudgetNoLower.family.ConstantActivation',
-      'packet_selector_hb_bcel_coherent_checked_complete',
-      'z.packetBudgetNoLower z.bcelContradiction',
+      'z.bcelCarrierCoherence.no_positive_packet',
+      'z.bcelCarrierCoherence.not_constant_activation',
     ]);
   return [...new Set(failures)];
 }
@@ -217,9 +217,9 @@ test('ZeroSlack derives Selector/HB evidence from the exact M180 certificate', a
   assert.deepEqual(validateSource0(source), []);
   assert.deepEqual(validateZeroSlack0(zeroSlack), []);
   assert.match(zeroSlack,
-    /^import PNP\.ResidualTerminalZeroSlackPacketSelectorHBCoherence$/mu);
+    /^import PNP\.ResidualTerminalFiniteBCELPacketCarrierCoherence$/mu);
   assert.match(zeroSlack,
-    /bcelContradiction\s*:\s*BCELContradictionCertificate packetBudgetNoLower/u);
+    /bcelCarrierCoherence\s*:\s*TerminalFiniteBCELPacketCarrierCoherenceCertificate packetBudgetNoLower/u);
 });
 
 test('axiom transcript follows all M182 public declarations', async () => {
