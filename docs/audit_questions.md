@@ -1063,6 +1063,19 @@ Every positive packet has a representative in the polynomial selector universe; 
   map, payloads, tables, and ranks remain supplied; activation weights are not
   identified with projection excess, and unconditional ZeroSlack and
   polynomial PCCMin remain open.
+- The finite BCEL/Packet activation-coherence obstruction is witnessed by
+  `PNP.checkTerminalFiniteBCELPacketActivationCoherence_eq_true_iff`,
+  `PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.not_activation_coherent`,
+  and
+  `PNP.terminal_finite_bcel_packet_activation_obstruction_checked_complete`.
+  Audit that the defect comes from the exact M183 problem and nucleus, that the
+  checker covers the declared cut value and every canonical nonempty proper
+  M184 Packet cut, and that the deterministic classifier returns a
+  proof-bearing cut-value or first proper-cut activation mismatch. Reject
+  sampled cuts, a caller-supplied defect, success flag, contradiction, or
+  independent family. This is a diagnostic obstruction and does not prove
+  activation coherence; the terminal, Packet, and mapping inputs remain
+  supplied, and unconditional ZeroSlack and polynomial PCCMin remain open.
 - Terminal budget-envelope resolution is witnessed by
   `PNP.DirectWire.TerminalSupportBudget.check_eq_true_iff`,
   `PNP.DirectWire.findTerminalBudgetFeasibleSupport_eq_none_iff`,

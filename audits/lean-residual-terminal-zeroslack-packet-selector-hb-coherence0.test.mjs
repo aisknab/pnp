@@ -217,7 +217,7 @@ test('ZeroSlack derives Selector/HB evidence from the exact M180 certificate', a
   assert.deepEqual(validateSource0(source), []);
   assert.deepEqual(validateZeroSlack0(zeroSlack), []);
   assert.match(zeroSlack,
-    /^import PNP\.ResidualTerminalFiniteBCELPacketCarrierCoherence$/mu);
+    /^import PNP\.ResidualTerminalFiniteBCELPacketActivationObstruction$/mu);
   assert.match(zeroSlack,
     /bcelCarrierCoherence\s*:\s*TerminalFiniteBCELPacketCarrierCoherenceCertificate packetBudgetNoLower/u);
 });

@@ -1227,6 +1227,20 @@ activation weights are not identified with projection excess, and this is not
 unconditional ZeroSlack or polynomial PCCMin. See
 `docs/lean_residual_terminal_finite_bcel_packet_carrier_coherence.md`.
 
+`lean/PNP/ResidualTerminalFiniteBCELPacketActivationObstruction.lean` makes the
+remaining numerical compatibility question executable on that exact family.
+It computes the terminal defect from the M183 problem and nucleus, checks the
+Packet cut value, and exhaustively checks every canonical nonempty proper-cut
+activation weight. Acceptance would recover the mapped-cut projection
+equation, while M184's same-family Packet exclusion proves that complete
+activation coherence cannot hold. The deterministic result is therefore a
+proof-bearing cut-value mismatch or first proper-cut activation mismatch. This
+diagnoses, but does not repair, the missing bridge. All terminal, family, map,
+activation, payload, table, and rank data remain supplied; the scan may be
+exponential, and unconditional ZeroSlack and polynomial PCCMin remain open.
+See
+`docs/lean_residual_terminal_finite_bcel_packet_activation_obstruction.md`.
+
 `lean/PNP/ResidualTerminalRankWF.lean` formalizes the fixed rank named after
 `RW-SaturatePositive`: witness type, span type, mode, frontier defect,
 projection defect, saturation defect, anchor count, charge size, profile size,

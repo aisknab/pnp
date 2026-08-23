@@ -927,6 +927,8 @@ test('formal reconstruction status accepts the current source and public mirrors
     'leanResidualTerminalFiniteBCELReadyCompositionAxiomAuditPassed',
     'leanResidualTerminalFiniteBCELPacketCarrierCoherenceFormalized',
     'leanResidualTerminalFiniteBCELPacketCarrierCoherenceAxiomAuditPassed',
+    'leanResidualTerminalFiniteBCELPacketActivationObstructionFormalized',
+    'leanResidualTerminalFiniteBCELPacketActivationObstructionAxiomAuditPassed',
     'leanResidualTerminalRankWFFormalized',
     'leanResidualTerminalRankWFAxiomAuditPassed',
     'leanResidualTerminalBN3RequestEnvelopeFormalized',
@@ -1049,6 +1051,10 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(
     out.leanResidualTerminalFiniteBCELPacketCarrierCoherenceScope,
     'all-arbitrary-finite-proof-bearing-same-candidate-model-bcel-ready-nuclei-bijectively-mapped-to-the-exact-packet-family-carrier',
+  );
+  assert.equal(
+    out.leanResidualTerminalFiniteBCELPacketActivationObstructionScope,
+    'all-arbitrary-finite-coherently-mapped-bcel-ready-and-packet-families-exhaustive-cut-value-and-proper-cut-activation-coherence-check-with-proof-bearing-first-obstruction',
   );
   assert.equal(
     out.leanResidualTerminalRankWFScope,
@@ -2316,6 +2322,8 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
     'leanResidualTerminalFiniteBCELReadyCompositionAxiomAuditPassed',
     'leanResidualTerminalFiniteBCELPacketCarrierCoherenceFormalized',
     'leanResidualTerminalFiniteBCELPacketCarrierCoherenceAxiomAuditPassed',
+    'leanResidualTerminalFiniteBCELPacketActivationObstructionFormalized',
+    'leanResidualTerminalFiniteBCELPacketActivationObstructionAxiomAuditPassed',
     'leanResidualTerminalRankWFFormalized',
     'leanResidualTerminalRankWFAxiomAuditPassed',
     'leanResidualTerminalBN3RequestEnvelopeFormalized',
@@ -2412,6 +2420,10 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(
     status.leanResidualTerminalFiniteBCELPacketCarrierCoherenceScope,
     'all-arbitrary-finite-proof-bearing-same-candidate-model-bcel-ready-nuclei-bijectively-mapped-to-the-exact-packet-family-carrier',
+  );
+  assert.equal(
+    status.leanResidualTerminalFiniteBCELPacketActivationObstructionScope,
+    'all-arbitrary-finite-coherently-mapped-bcel-ready-and-packet-families-exhaustive-cut-value-and-proper-cut-activation-coherence-check-with-proof-bearing-first-obstruction',
   );
   assert.equal(
     status.leanResidualTerminalRankWFScope,
@@ -2931,6 +2943,8 @@ test('formal reconstruction status rejects disabling an earned NAND enumerator p
     'leanResidualTerminalFiniteBCELReadyCompositionAxiomAuditPassed',
     'leanResidualTerminalFiniteBCELPacketCarrierCoherenceFormalized',
     'leanResidualTerminalFiniteBCELPacketCarrierCoherenceAxiomAuditPassed',
+    'leanResidualTerminalFiniteBCELPacketActivationObstructionFormalized',
+    'leanResidualTerminalFiniteBCELPacketActivationObstructionAxiomAuditPassed',
     'leanResidualTerminalRankWFFormalized',
     'leanResidualTerminalRankWFAxiomAuditPassed',
     'leanResidualTerminalBN3RequestEnvelopeFormalized',
@@ -3108,10 +3122,11 @@ test('formal reconstruction status rejects contradictory non-claims', async () =
   assert.equal(out.coord, 'FormalReconstructionStatus.NonClaims');
 });
 
-test('proof progress accepts the fixed M184 baseline and derives independent coverage', async () => {
+test('proof progress preserves the fixed M184 baseline and derives current coverage', async () => {
+  const sources = await currentProofProgressSources0();
   const out = await CheckProofProgress0();
   assert.equal(out.tag, 'accept');
-  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184');
+  assert.equal(out.coordinate, sources.status.coordinate);
   assert.equal(out.modelId, 'fixed-risk-weighted-checkpoints-v0');
   assert.equal(out.trackCount, 5);
   assert.equal(out.checkpointCount, 35);
@@ -3119,7 +3134,11 @@ test('proof progress accepts the fixed M184 baseline and derives independent cov
   assert.equal(out.pointsAvailable, 100);
   assert.equal(out.uncertaintyLowPercent, 20);
   assert.equal(out.uncertaintyHighPercent, 40);
-  assert.deepEqual(out.formalArtefactCoverage, { earnedRows: 160, totalRows: 162 });
+  assert.deepEqual(out.formalArtefactCoverage, {
+    earnedRows: sources.status.formalPublicationMilestones.filter(
+      (row) => row.earned === true).length,
+    totalRows: sources.status.formalPublicationMilestones.length,
+  });
   assert.equal(out.globalGatesClosed, 0);
   assert.equal(out.globalGatesAvailable, 5);
   assert.equal(out.projectSpecificAxiomCount, 4);
@@ -3127,6 +3146,12 @@ test('proof progress accepts the fixed M184 baseline and derives independent cov
   assert.equal(out.publicationGatePassed, false);
   assert.equal(out.isProbabilityOfCorrectness, false);
   assert.equal(out.isTimeEstimate, false);
+  assert.deepEqual(sources.ledger.history[0].formalArtefactCoverage,
+    { earnedRows: 160, totalRows: 162 });
+  assert.equal(sources.ledger.history[0].asOfCoordinate,
+    'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184');
+  assert.equal(sources.ledger.history.at(-1).scoreChanged, false);
+  assert.deepEqual(sources.ledger.history.at(-1).changedCheckpointIds, []);
 });
 
 test('proof progress rejects changed weights and a stale stored total', async () => {
@@ -3167,8 +3192,8 @@ test('proof progress rejects formal coverage presented as proof completion or al
   );
 
   const stale = clone0(ledger);
-  stale.formalArtefactCoverage.earnedRows = 152;
-  stale.formalArtefactCoverage.totalRows = 154;
+  stale.formalArtefactCoverage.earnedRows -= 1;
+  stale.formalArtefactCoverage.totalRows -= 1;
   assert.throws(
     () => validateProofProgress0(stale, status, inventory),
     (error) => error.code === 'Coverage.EarnedRows',

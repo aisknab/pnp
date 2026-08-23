@@ -181,6 +181,19 @@ other terminal inputs remain supplied. Use “same-candidate finite BCEL-ready
 and Packet carrier coherence”; do not shorten this to manuscript-wide
 `BCELReady`, unconditional ZeroSlack, or a positive-slack contradiction.
 
+### Current Lean BCEL/Packet activation-coherence obstruction
+
+`ResidualTerminalFiniteBCELPacketActivationObstruction` means the exhaustive
+finite diagnostic on the exact M184 mapped family. “Activation coherence” is
+the conjunction that the Packet cut value and every canonical nonempty
+proper-cut activation weight equal the computed M183 terminal defect. Lean
+proves that this conjunction is impossible under the existing same-family
+Packet exclusion and returns a proof-bearing mismatch. Use “finite
+BCEL/Packet activation-coherence obstruction”; do not describe it as a proof
+of activation coherence, unconditional `BCELReady`, or `ZeroSlack`. The
+terminal problem, family, map, activation data, and other inputs remain
+supplied, and the exhaustive diagnostic may be exponential.
+
 ## Ambiguity and naming rules
 
 1. **`Residual` must be qualified.** Use “residual slack,” “positive residual witness,” “BN4 residual cell,” or “quotient residual key.”

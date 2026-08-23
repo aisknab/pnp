@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 
 import {
@@ -92,6 +93,8 @@ test('current verifier plan contains status, progress, surface, archive integrit
     'audits/lean-residual-terminal-pkgc-ambient-bn4-ledger0.test.mjs'), true);
   assert.equal(CURRENT_VERIFICATION_TESTS0.includes(
     'audits/lean-residual-terminal-pkgc-ambient-bn4-residual-reduction0.test.mjs'), true);
+  assert.equal(CURRENT_VERIFICATION_TESTS0.includes(
+    'audits/lean-residual-terminal-finite-bcel-packet-activation-obstruction0.test.mjs'), true);
 });
 
 test('current verifier cannot be configured to execute the historical replay', () => {
@@ -105,6 +108,8 @@ test('current verifier cannot be configured to execute the historical replay', (
 });
 
 test('current verifier accepts without executing a historical replay', async () => {
+  const progress = JSON.parse(await readFile(
+    new URL('../status/PROOF_PROGRESS.json', import.meta.url), 'utf8'));
   const out = await RunPNPVerifyAll0({ writeOutput: false, includeUnitTests: false });
   assert.equal(out.tag, 'accept');
   assert.equal(out.currentStatusAuthority, true);
@@ -120,7 +125,10 @@ test('current verifier accepts without executing a historical replay', async () 
   assert.equal(out.proofCompletionPointsAvailable, 100);
   assert.equal(out.proofCompletionUncertaintyLowPercent, 20);
   assert.equal(out.proofCompletionUncertaintyHighPercent, 40);
-  assert.deepEqual(out.formalArtefactCoverage, { earnedRows: 160, totalRows: 162 });
+  assert.deepEqual(out.formalArtefactCoverage, {
+    earnedRows: progress.formalArtefactCoverage.earnedRows,
+    totalRows: progress.formalArtefactCoverage.totalRows,
+  });
   assert.equal(out.globalGatesClosed, 0);
   assert.equal(out.globalGatesAvailable, 5);
   assert.equal(out.historicalReplayExecuted, false);

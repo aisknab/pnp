@@ -15,7 +15,7 @@ import PNP.ResidualBand
 import PNP.ResidualTerminalHResolveZeroSlackSidecar
 import PNP.ResidualTerminalBudgetZeroSlackSidecar
 import PNP.ResidualTerminalPacketBudgetNoLowerZeroSlackSidecar
-import PNP.ResidualTerminalFiniteBCELPacketCarrierCoherence
+import PNP.ResidualTerminalFiniteBCELPacketActivationObstruction
 
 namespace PNP
 
@@ -86,6 +86,31 @@ theorem zeroslack_packet_selector_hb_bcel_coherent_checked_complete
     z.packetBudgetNoLower.selectorHB.no_hb_active,
     z.bcelCarrierCoherence.no_positive_packet,
     z.bcelCarrierCoherence.not_constant_activation⟩
+
+/-- The report-facing certificate exposes the deterministic M185 obstruction
+    without storing another family, defect, cut sample, or caller flag. -/
+def ZeroSlackCertificate.bcelPacketActivationObstruction
+    (z : ZeroSlackCertificate) :
+    TerminalFiniteBCELPacketActivationObstruction
+      z.bcelCarrierCoherence :=
+  classifyTerminalFiniteBCELPacketActivationObstruction
+    z.bcelCarrierCoherence
+
+/-- Report-facing M185 endpoint: the exact finite BCEL/Packet activation-
+    coherence check rejects with a declared-value or proper-cut mismatch. This
+    is a diagnostic finite obstruction, not unconditional ZeroSlack. -/
+theorem zeroslack_bcel_packet_activation_obstruction_checked_complete
+    (z : ZeroSlackCertificate) :
+    checkTerminalFiniteBCELPacketActivationCoherence
+        z.bcelCarrierCoherence = false ∧
+    (z.packetBudgetNoLower.family.cutValue ≠
+        z.bcelCarrierCoherence.terminalDefect ∨
+      ∃ cut, cut.Sublist z.packetBudgetNoLower.family.carrier ∧ cut ≠ [] ∧
+        cut ≠ z.packetBudgetNoLower.family.carrier ∧
+        z.packetBudgetNoLower.family.activationWeight cut ≠
+          z.bcelCarrierCoherence.terminalDefect) :=
+  terminal_finite_bcel_packet_activation_obstruction_checked_complete
+    z.bcelCarrierCoherence
 
 /-- Extract the polynomial-size certificate handle. -/
 def zeroSlackPolynomialSizeHandle (z : ZeroSlackCertificate) : String :=

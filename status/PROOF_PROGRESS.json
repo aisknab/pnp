@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-185",
   "lastReviewedDate": "2026-08-23",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 160,
-    "totalRows": 162,
+    "earnedRows": 161,
+    "totalRows": 163,
     "percentRoundedOneDecimal": 98.8,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -605,6 +605,19 @@
       "globalGatesClosed": 0,
       "globalGatesAvailable": 5,
       "rationale": "The M184 authoritative ledger contains 160 earned rows out of 162, superseding the earlier 152 of 154 example. No named load-bearing checkpoint closed merely because additional local or supplied-data milestones were earned, so the fixed-weight baseline remains 30 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-185",
+      "formalArtefactCoverage": { "earnedRows": 161, "totalRows": 163 },
+      "riskWeightedProofCompletionPercent": 30,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "rationale": "M185 adds one machine-checked finite activation-coherence obstruction row, but it diagnoses rather than retires the supplied-data, unconditional BCELReady, or unconditional ZeroSlack obligations. No fixed checkpoint changed state, so the score remains 30 percent and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [

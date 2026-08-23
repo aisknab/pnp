@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '1eb8ddb7345e451be59f0b753c606dbe95ca7ba481cec8d16bdaf6b40f0c1533';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '6f97e3b0177eae0fbcad2d3e65703237839020f939da3efe7a9bdf8201aefd43';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -2242,6 +2242,12 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.no_positive_packet',
   'PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.not_constant_activation',
   'PNP.terminal_finite_bcel_packet_carrier_coherent_checked_complete',
+  'PNP.checkTerminalFiniteBCELPacketActivationCoherence_eq_true_iff',
+  'PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.activation_coherent_mapped_cut_equation',
+  'PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.not_activation_coherent',
+  'PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.activation_coherence_check_eq_false',
+  'PNP.terminal_finite_bcel_packet_activation_obstruction_checked_complete',
+  'PNP.zeroslack_bcel_packet_activation_obstruction_checked_complete',
   'PNP.DirectWire.TerminalResidualRank.coordinates_mk',
   'PNP.DirectWire.TerminalResidualRank.coordinates_length',
   'PNP.DirectWire.terminalResidualRankLTBool_eq_true_iff',
@@ -3150,7 +3156,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-23-184') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-23-185') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -3427,7 +3433,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-23-184') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-23-185') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

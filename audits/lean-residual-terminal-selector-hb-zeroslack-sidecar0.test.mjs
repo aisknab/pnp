@@ -182,7 +182,7 @@ test('Selector/HB ZeroSlack sidecar is checked, joint, and proof-bearing', async
   ]);
   assert.deepEqual(validateSource0(source), []);
   assert.match(zeroSlack,
-    /^import PNP\.ResidualTerminalFiniteBCELPacketCarrierCoherence$/mu);
+    /^import PNP\.ResidualTerminalFiniteBCELPacketActivationObstruction$/mu);
   assert.doesNotMatch(zeroSlack,
     /structure\s+(?:SelectorSilenceCertificate|HBClosureCertificate)\b/u);
   assert.doesNotMatch(zeroSlack,

@@ -147,7 +147,7 @@ test('BCEL/Packet no-lower ZeroSlack sidecar is dependent and proof-bearing', as
   ]);
   assert.deepEqual(validateSource0(source), []);
   assert.match(zeroSlack,
-    /^import PNP\.ResidualTerminalFiniteBCELPacketCarrierCoherence$/mu);
+    /^import PNP\.ResidualTerminalFiniteBCELPacketActivationObstruction$/mu);
   for (const field of [
     'positiveResidualWitnessYieldsBCELReady',
     'positivePacketYieldsFaithfulSelector',
