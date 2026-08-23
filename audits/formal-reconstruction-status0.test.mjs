@@ -6,9 +6,30 @@ import {
   CheckFormalReconstructionStatus0,
   FORMAL_RECONSTRUCTION_BLOCKERS0,
 } from '../pcc-formal-reconstruction-status0.mjs';
+import {
+  CheckProofProgress0,
+  validateProofProgress0,
+} from '../pcc-proof-progress0.mjs';
 
 async function currentStatus0() {
   return JSON.parse(await readFile(new URL('../status/FORMAL_RECONSTRUCTION_STATUS.json', import.meta.url), 'utf8'));
+}
+
+async function currentProofProgressSources0() {
+  const [ledger, status, inventory] = await Promise.all([
+    readFile(new URL('../status/PROOF_PROGRESS.json', import.meta.url), 'utf8'),
+    readFile(new URL('../status/FORMAL_RECONSTRUCTION_STATUS.json', import.meta.url), 'utf8'),
+    readFile(new URL('../status/LEAN_THEOREM_INVENTORY.json', import.meta.url), 'utf8'),
+  ]);
+  return {
+    ledger: JSON.parse(ledger),
+    status: JSON.parse(status),
+    inventory: JSON.parse(inventory),
+  };
+}
+
+function clone0(value) {
+  return JSON.parse(JSON.stringify(value));
 }
 
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
@@ -3085,4 +3106,112 @@ test('formal reconstruction status rejects contradictory non-claims', async () =
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false, statusOverride: status, siteOverride: status });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'FormalReconstructionStatus.NonClaims');
+});
+
+test('proof progress accepts the fixed M184 baseline and derives independent coverage', async () => {
+  const out = await CheckProofProgress0();
+  assert.equal(out.tag, 'accept');
+  assert.equal(out.coordinate, 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184');
+  assert.equal(out.modelId, 'fixed-risk-weighted-checkpoints-v0');
+  assert.equal(out.trackCount, 5);
+  assert.equal(out.checkpointCount, 35);
+  assert.equal(out.pointsEarned, 30);
+  assert.equal(out.pointsAvailable, 100);
+  assert.equal(out.uncertaintyLowPercent, 20);
+  assert.equal(out.uncertaintyHighPercent, 40);
+  assert.deepEqual(out.formalArtefactCoverage, { earnedRows: 160, totalRows: 162 });
+  assert.equal(out.globalGatesClosed, 0);
+  assert.equal(out.globalGatesAvailable, 5);
+  assert.equal(out.projectSpecificAxiomCount, 4);
+  assert.equal(out.rootTheoremPresent, false);
+  assert.equal(out.publicationGatePassed, false);
+  assert.equal(out.isProbabilityOfCorrectness, false);
+  assert.equal(out.isTimeEstimate, false);
+});
+
+test('proof progress rejects changed weights and a stale stored total', async () => {
+  const { ledger, status, inventory } = await currentProofProgressSources0();
+  const changedWeight = clone0(ledger);
+  changedWeight.tracks[0].pointsAvailable = 16;
+  assert.throws(
+    () => validateProofProgress0(changedWeight, status, inventory),
+    (error) => error.code === 'Track.PointsAvailable',
+  );
+
+  const staleTotal = clone0(ledger);
+  staleTotal.proofCompletion.pointsEarned = 31;
+  staleTotal.proofCompletion.percent = 31;
+  assert.throws(
+    () => validateProofProgress0(staleTotal, status, inventory),
+    (error) => error.code === 'ProofCompletion.StoredEarned',
+  );
+});
+
+test('proof progress rejects earned checkpoints without compiled or status evidence', async () => {
+  const { ledger, status, inventory } = await currentProofProgressSources0();
+  const mutation = clone0(ledger);
+  mutation.tracks[0].checkpoints[0].evidence = [];
+  assert.throws(
+    () => validateProofProgress0(mutation, status, inventory),
+    (error) => error.code === 'Checkpoint.EvidenceMissing',
+  );
+});
+
+test('proof progress rejects formal coverage presented as proof completion or allowed to drift', async () => {
+  const { ledger, status, inventory } = await currentProofProgressSources0();
+  const conflated = clone0(ledger);
+  conflated.formalArtefactCoverage.isProofCompletionMetric = true;
+  assert.throws(
+    () => validateProofProgress0(conflated, status, inventory),
+    (error) => error.code === 'Coverage.ProofCompletionBoundary',
+  );
+
+  const stale = clone0(ledger);
+  stale.formalArtefactCoverage.earnedRows = 152;
+  stale.formalArtefactCoverage.totalRows = 154;
+  assert.throws(
+    () => validateProofProgress0(stale, status, inventory),
+    (error) => error.code === 'Coverage.EarnedRows',
+  );
+});
+
+test('proof progress rejects an uncertainty range that excludes the estimate', async () => {
+  const { ledger, status, inventory } = await currentProofProgressSources0();
+  const mutation = clone0(ledger);
+  mutation.proofCompletion.uncertaintyLowPercent = 31;
+  assert.throws(
+    () => validateProofProgress0(mutation, status, inventory),
+    (error) => error.code === 'ProofCompletion.UncertaintyRange',
+  );
+});
+
+test('proof progress rejects forged global gate, project-axiom, root and publication states', async () => {
+  const sources = await currentProofProgressSources0();
+  const mutations = [
+    {
+      code: 'Gate.Status',
+      apply(ledger) { ledger.globalGates[0].status = 'closed'; },
+    },
+    {
+      code: 'Axioms.Ledger',
+      apply(ledger) { ledger.projectSpecificAxiomsRemaining.pop(); },
+    },
+    {
+      code: 'Root.Present',
+      apply(ledger) { ledger.rootTheorem.present = true; },
+    },
+    {
+      code: 'PublicationGate.Status',
+      apply(ledger) { ledger.publicationGate.passed = true; },
+    },
+  ];
+  for (const mutation of mutations) {
+    const ledger = clone0(sources.ledger);
+    mutation.apply(ledger);
+    assert.throws(
+      () => validateProofProgress0(ledger, sources.status, sources.inventory),
+      (error) => error.code === mutation.code,
+      mutation.code,
+    );
+  }
 });

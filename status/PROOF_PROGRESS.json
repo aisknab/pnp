@@ -1,0 +1,617 @@
+{
+  "kind": "PNPProofProgress0",
+  "version": 0,
+  "modelId": "fixed-risk-weighted-checkpoints-v0",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
+  "lastReviewedDate": "2026-08-23",
+  "proofCompletion": {
+    "label": "risk-weighted proof completion estimate",
+    "pointsEarned": 30,
+    "pointsAvailable": 100,
+    "percent": 30,
+    "uncertaintyLowPercent": 20,
+    "uncertaintyHighPercent": 40,
+    "isProbabilityOfCorrectness": false,
+    "isTimeEstimate": false,
+    "mayDecrease": true
+  },
+  "formalArtefactCoverage": {
+    "label": "formal artefact coverage",
+    "earnedRows": 160,
+    "totalRows": 162,
+    "percentRoundedOneDecimal": 98.8,
+    "isProofCompletionMetric": false,
+    "denominatorCanGrow": true
+  },
+  "tracks": [
+    {
+      "id": "formal-foundations",
+      "title": "Formal foundations and proof infrastructure",
+      "pointsAvailable": 15,
+      "pointsEarned": 13,
+      "checkpoints": [
+        {
+          "id": "foundations-concrete-kernel-interfaces",
+          "title": "Concrete finite machine kernel and formal P, NP, verifier and reduction interfaces",
+          "points": 4,
+          "status": "earned",
+          "evidence": [
+            { "kind": "milestone-earned", "id": "concrete-machine-cost-kernel" },
+            { "kind": "milestone-earned", "id": "concrete-complexity-classes" },
+            { "kind": "status-field", "field": "leanConcreteCNFVerifierCorrectnessFormalized", "expected": true }
+          ],
+          "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
+          "justification": "The concrete finite machine, complexity-class interfaces, verifier correctness and reduction interface are present in the checked status.",
+          "remainingLimitation": "This does not supply the final compatibility linkage required by the eligible root theorem.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "foundations-recursive-pipeline",
+          "title": "Recursive pipeline compilation and raw-machine refinement infrastructure",
+          "points": 4,
+          "status": "earned",
+          "evidence": [
+            { "kind": "status-field", "field": "leanConcretePipelineAllInputCompilationFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcretePipelineRawRefinementFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcretePipelineExternalInputSizePolynomialFormalized", "expected": true }
+          ],
+          "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
+          "justification": "The checked status records all-input pipeline compilation, recursive raw refinement and its external-input size bound.",
+          "remainingLimitation": "Infrastructure alone does not complete the final SAT construction or root theorem.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "foundations-inventory-gate",
+          "title": "Compiled theorem inventory, axiom auditing and fail-closed publication gate",
+          "points": 3,
+          "status": "earned",
+          "evidence": [
+            { "kind": "status-field", "field": "leanTheoremInventoryGeneratedFromCompiledEnvironment", "expected": true },
+            { "kind": "status-field", "field": "leanTheoremInventoryUsesCollectAxioms", "expected": true },
+            { "kind": "status-field", "field": "concretePublicationGate.unsetFingerprintIsIntentionalFailClosedMigrationGate", "expected": true }
+          ],
+          "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
+          "justification": "The theorem inventory is compiler-derived, records axiom closures and is consumed by an explicitly fail-closed publication gate.",
+          "remainingLimitation": "The publication gate remains false and therefore emits no final theorem claim.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "foundations-cnfsat-in-np",
+          "title": "Concrete machine-checked proof that CNFSAT is in NP",
+          "points": 2,
+          "status": "earned",
+          "evidence": [
+            { "kind": "status-field", "field": "leanConcreteCNFSATMembershipFormalized", "expected": true },
+            { "kind": "inventory-declaration", "name": "PNP.Concrete.FinalUniversalDesign.cnfSATInNP", "expectedPresent": true }
+          ],
+          "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
+          "justification": "The exact concrete CNFSAT-in-NP declaration is present in the compiled inventory and named by the checked status.",
+          "remainingLimitation": "NP membership is not a proof that CNFSAT is in P or NP-complete in the selected model.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "foundations-final-compatibility",
+          "title": "Final concrete-model compatibility and foundational linkage required by the eligible root theorem",
+          "points": 2,
+          "status": "open",
+          "evidence": [
+            { "kind": "status-field", "field": "rootLeanTheoremPresent", "expected": false },
+            { "kind": "status-field", "field": "concretePublicationGate.passed", "expected": false }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "The eligible root is absent and the concrete publication gate is still closed.",
+          "remainingLimitation": "The final concrete compatibility linkage must be formalized for the exact eligible root theorem.",
+          "lastReviewedDate": "2026-08-23"
+        }
+      ]
+    },
+    {
+      "id": "concrete-reductions",
+      "title": "Concrete reductions and locked-NAND route",
+      "pointsAvailable": 20,
+      "pointsEarned": 14,
+      "checkpoints": [
+        {
+          "id": "reductions-cook-levin-semantics",
+          "title": "Cook-Levin finite semantics, formula-size bounds and answer-independent schedule specification",
+          "points": 3,
+          "status": "earned",
+          "evidence": [
+            { "kind": "milestone-earned", "id": "concrete-cook-levin-tableau-cnf-semantics" },
+            { "kind": "milestone-earned", "id": "concrete-cook-levin-formula-size" },
+            { "kind": "milestone-earned", "id": "concrete-cook-levin-formula-schedule" }
+          ],
+          "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
+          "justification": "The finite Cook-Levin semantics, external formula-size bound and fixed schedule rows are all earned.",
+          "remainingLimitation": "These rows do not constitute the complete all-input formula builder.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "reductions-cnf-to-nand",
+          "title": "Concrete CNF-to-NAND polynomial reduction",
+          "points": 3,
+          "status": "earned",
+          "evidence": [
+            { "kind": "milestone-earned", "id": "concrete-cnf-to-nand-polynomial-reduction" },
+            { "kind": "status-field", "field": "leanConcreteCNFToNANDPolynomialReductionFormalized", "expected": true }
+          ],
+          "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
+          "justification": "The checked all-input CNF-to-NAND machine reduction and its polynomial bound are formalized.",
+          "remainingLimitation": "The downstream deterministic SAT and complexity transport obligations remain open.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "reductions-locked-nand",
+          "title": "Locked-NAND semantic threshold and strict encoded polynomial reduction",
+          "points": 4,
+          "status": "earned",
+          "evidence": [
+            { "kind": "milestone-earned", "id": "global-locked-nand-threshold" },
+            { "kind": "milestone-earned", "id": "concrete-locked-nand-polynomial-reduction" },
+            { "kind": "status-field", "field": "leanConcreteLockedNANDPolynomialReductionFormalized", "expected": true }
+          ],
+          "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
+          "justification": "The finite semantic threshold and strict-v0 encoded polynomial reduction are both checked.",
+          "remainingLimitation": "A project-specific locked-NAND threshold axiom still remains in the active project inventory.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "reductions-builder-prefixes",
+          "title": "Substantial literal finite-machine Cook-Levin builder prefixes",
+          "points": 2,
+          "status": "earned",
+          "evidence": [
+            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-first-clause-prefix" },
+            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-second-constraint-seventh-padding-or-unary-opportunity-step" },
+            { "kind": "status-field", "field": "leanConcreteCookLevinFormulaBuilderFormalized", "expected": false }
+          ],
+          "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
+          "justification": "Many literal raw-machine prefixes and fixed cursor steps are checked, while the status correctly keeps the full builder false.",
+          "remainingLimitation": "The complete uniform formula builder and packaged reduction are not yet formalized.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "reductions-report-locked-nand-linkage",
+          "title": "Report-facing all-bitstring concrete locked-NAND reduction linkage",
+          "points": 2,
+          "status": "earned",
+          "evidence": [
+            { "kind": "status-field", "field": "leanConcreteCNFToNANDAllInputExactFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCNFToNANDLockedReductionCompositionFormalized", "expected": true }
+          ],
+          "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
+          "justification": "The report-facing reduction is linked over all bitstrings to the concrete locked-NAND route.",
+          "remainingLimitation": "This linkage does not finish the Cook-Levin builder or deterministic SAT theorem.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "reductions-complete-cook-levin-builder",
+          "title": "Complete all-input polynomial Cook-Levin formula builder and packaged reduction",
+          "points": 3,
+          "status": "open",
+          "evidence": [
+            { "kind": "status-field", "field": "leanConcreteCookLevinFormulaBuilderFormalized", "expected": false },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPolynomialReductionFormalized", "expected": false }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "The checked status explicitly records both the complete builder and packaged polynomial reduction as false.",
+          "remainingLimitation": "All required formula positions must be emitted by one uniform polynomial machine.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "reductions-concrete-np-hardness",
+          "title": "Concrete NP-hardness or NP-completeness transport in the selected complexity model",
+          "points": 2,
+          "status": "open",
+          "evidence": [
+            { "kind": "status-field", "field": "leanConcreteCNFNPCompletenessFormalized", "expected": false },
+            { "kind": "status-blocker-open", "id": "Formal.ConcreteSAT" }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "The concrete NP-completeness field is false and the concrete SAT blocker remains open.",
+          "remainingLimitation": "The selected concrete complexity model still lacks the required NP-hardness transport.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "reductions-final-target-compatibility",
+          "title": "Final concrete SAT-to-target compatibility closure needed by the deterministic SAT theorem",
+          "points": 1,
+          "status": "open",
+          "evidence": [
+            { "kind": "status-field", "field": "leanConcreteCNFSATInPFormalized", "expected": false },
+            { "kind": "status-blocker-open", "id": "Formal.ConcreteSAT" }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "The deterministic concrete CNFSAT-in-P field is false.",
+          "remainingLimitation": "The complete construction must connect the concrete SAT source to the exact final target route.",
+          "lastReviewedDate": "2026-08-23"
+        }
+      ]
+    },
+    {
+      "id": "unconditional-residual-core",
+      "title": "Unconditional residual core and ZeroSlack",
+      "pointsAvailable": 35,
+      "pointsEarned": 2,
+      "checkpoints": [
+        {
+          "id": "residual-finite-stopping-foundations",
+          "title": "Finite semantic stopping, strict-gain chain and terminal residual foundations",
+          "points": 2,
+          "status": "earned",
+          "evidence": [
+            { "kind": "milestone-earned", "id": "residual-gain-chain-bound" },
+            { "kind": "milestone-earned", "id": "residual-gain-stopping-specification" },
+            { "kind": "status-field", "field": "leanResidualGainChainGlobalStoppingConsequenceFormalized", "expected": true }
+          ],
+          "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
+          "justification": "Finite strict-gain chains, semantic stopping and their terminal consequence are checked.",
+          "remainingLimitation": "The chain endpoint and downstream terminal data remain proof-bearing or supplied rather than globally constructed.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "residual-derive-terminal-objects",
+          "title": "Derive terminal candidates, supports, families, payloads, maps, ranks and tables from every valid input rather than supplying them",
+          "points": 5,
+          "status": "open",
+          "evidence": [
+            { "kind": "status-field", "field": "leanResidualBandMinimizerFormalized", "expected": false },
+            { "kind": "status-blocker-open", "id": "Formal.ResidualBandMinimizer" }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "The residual-band minimizer is not formalized and the relevant global blocker remains open.",
+          "remainingLimitation": "Current finite sidecars still consume important terminal families, payloads, maps, ranks or tables as supplied inputs.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "residual-pkgc-bn3-bn6-integration",
+          "title": "Complete PkgC and BN3-BN6 route integration under one terminal-derived family",
+          "points": 4,
+          "status": "open",
+          "evidence": [
+            { "kind": "status-blocker-open", "id": "Formal.ResidualBandMinimizer" },
+            { "kind": "status-blocker-open", "id": "Formal.ZeroSlack" }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "The global residual-minimizer and ZeroSlack blockers remain open despite substantial finite PkgC and BN rows.",
+          "remainingLimitation": "The route family must be derived from the terminal input and integrated without supplied global data.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "residual-hn-bud-hb-semantics",
+          "title": "Complete HN, BUD and HB blocker semantics and semantic dependency completeness",
+          "points": 4,
+          "status": "open",
+          "evidence": [
+            { "kind": "status-blocker-open", "id": "Formal.ZeroSlack" }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "Checked finite dependency tables and sidecars do not close the unconditional ZeroSlack blocker.",
+          "remainingLimitation": "Blocker activity and dependency closure must be derived with the full intended semantics.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "residual-global-route-coverage",
+          "title": "Complete global route coverage and prove every required route decreases the formal rank",
+          "points": 4,
+          "status": "open",
+          "evidence": [
+            { "kind": "status-field", "field": "leanResidualRoutesGlobalGainCompletenessFormalized", "expected": false },
+            { "kind": "status-blocker-open", "id": "Formal.ZeroSlack" }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "Global gain-route completeness is explicitly false.",
+          "remainingLimitation": "Every required terminal outcome must enter one complete decreasing route system.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "residual-unconditional-saturate-positive",
+          "title": "Prove unconditional manuscript-level SaturatePositive",
+          "points": 4,
+          "status": "open",
+          "evidence": [
+            { "kind": "status-field", "field": "leanSaturatePositiveFormalized", "expected": false }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "The manuscript-level SaturatePositive field is false.",
+          "remainingLimitation": "Finite compositions with explicit positive premises do not establish the unconditional theorem.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "residual-unconditional-bcel-ready",
+          "title": "Prove unconditional BCELReady, including the positive-slack-to-activation bridge",
+          "points": 4,
+          "status": "open",
+          "evidence": [
+            { "kind": "status-field", "field": "leanBCELReadyFormalized", "expected": false }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "The manuscript-level BCELReady field is false.",
+          "remainingLimitation": "Positive residual slack has not been turned into the required unconditional activation conclusion.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "residual-unconditional-zero-slack",
+          "title": "Prove unconditional global ZeroSlack",
+          "points": 8,
+          "status": "open",
+          "evidence": [
+            { "kind": "status-field", "field": "leanZeroSlackCompletenessFormalized", "expected": false },
+            { "kind": "status-blocker-open", "id": "Formal.ZeroSlack" }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "ZeroSlack completeness is false and the named global blocker remains open.",
+          "remainingLimitation": "Conditional finite sidecars and supplied-data coherence results do not prove unconditional global ZeroSlack.",
+          "lastReviewedDate": "2026-08-23"
+        }
+      ]
+    },
+    {
+      "id": "exact-pccmin",
+      "title": "Exact PCCMin algorithm, complexity and bounds",
+      "pointsAvailable": 20,
+      "pointsEarned": 1,
+      "checkpoints": [
+        {
+          "id": "pccmin-strict-gain-scaffold",
+          "title": "Formal strict-gain chain and semantic stopping scaffold",
+          "points": 1,
+          "status": "earned",
+          "evidence": [
+            { "kind": "status-field", "field": "leanResidualGainChainVerifierFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanResidualGainStoppingSpecificationFormalized", "expected": true }
+          ],
+          "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
+          "justification": "The strict-gain and semantic stopping scaffold needed by a future loop is formalized.",
+          "remainingLimitation": "No complete executable PCCMin loop or polynomial runtime theorem follows from the scaffold alone.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "pccmin-executable-loop",
+          "title": "Complete executable PCCMin algorithm and loop definition",
+          "points": 3,
+          "status": "open",
+          "evidence": [
+            { "kind": "status-field", "field": "leanPCCMinLoopExactnessFormalized", "expected": false }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "The checked status has no completed PCCMin loop exactness result.",
+          "remainingLimitation": "A total executable loop over the complete construction is required.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "pccmin-iteration-sound-descent",
+          "title": "Prove every iteration is sound and strictly decreases the required measure",
+          "points": 4,
+          "status": "open",
+          "evidence": [
+            { "kind": "status-field", "field": "leanPCCMinLoopExactnessFormalized", "expected": false },
+            { "kind": "status-blocker-open", "id": "Formal.ResidualBandMinimizer" }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "Local strict-gain facts have not been integrated into a complete PCCMin iteration theorem.",
+          "remainingLimitation": "Every branch of the executable loop must preserve semantics and decrease the formal measure.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "pccmin-termination-exactness",
+          "title": "Prove completeness and exactness at termination using unconditional ZeroSlack",
+          "points": 4,
+          "status": "open",
+          "evidence": [
+            { "kind": "status-field", "field": "leanPCCMinLoopExactnessFormalized", "expected": false },
+            { "kind": "status-field", "field": "leanZeroSlackCompletenessFormalized", "expected": false }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "Neither loop exactness nor unconditional ZeroSlack is established.",
+          "remainingLimitation": "Termination must yield the exact minimum rather than only a finite or supplied-instance result.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "pccmin-polynomial-objects",
+          "title": "Construct selectors, certificates, families, tables and supporting objects in polynomial encoded size",
+          "points": 4,
+          "status": "open",
+          "evidence": [
+            { "kind": "status-field", "field": "leanPCCMinPolynomialRuntimeFormalized", "expected": false },
+            { "kind": "status-blocker-open", "id": "Formal.PolynomialRuntimeAndCertificateBounds" }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "The polynomial-runtime field is false and the size-and-runtime blocker remains open.",
+          "remainingLimitation": "Exhaustive finite enumeration does not supply polynomial encoded-size constructions.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "pccmin-total-polynomial-bounds",
+          "title": "Prove total polynomial runtime, output-size and certificate-size bounds",
+          "points": 4,
+          "status": "open",
+          "evidence": [
+            { "kind": "status-field", "field": "leanPCCMinPolynomialRuntimeFormalized", "expected": false },
+            { "kind": "status-blocker-open", "id": "Formal.PolynomialRuntimeAndCertificateBounds" }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "No complete encoded-input polynomial runtime theorem is present.",
+          "remainingLimitation": "Termination and finite search are insufficient without uniform polynomial time and size bounds.",
+          "lastReviewedDate": "2026-08-23"
+        }
+      ]
+    },
+    {
+      "id": "root-and-axioms",
+      "title": "Root theorem and project-axiom elimination",
+      "pointsAvailable": 10,
+      "pointsEarned": 0,
+      "checkpoints": [
+        {
+          "id": "axiom-remove-generate-pccpack",
+          "title": "Remove PNP.GeneratePCCPack as a project-specific axiom",
+          "points": 1,
+          "status": "open",
+          "evidence": [
+            { "kind": "inventory-project-axiom", "name": "PNP.GeneratePCCPack", "expectedPresent": true }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "The compiled inventory still lists this project-specific axiom.",
+          "remainingLimitation": "The active route must no longer require this declaration as proof authority.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "axiom-remove-check-pccpackexp",
+          "title": "Remove PNP.CheckPCCPackexp as a project-specific axiom",
+          "points": 1,
+          "status": "open",
+          "evidence": [
+            { "kind": "inventory-project-axiom", "name": "PNP.CheckPCCPackexp", "expectedPresent": true }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "The compiled inventory still lists this project-specific axiom.",
+          "remainingLimitation": "The active route must no longer require this declaration as proof authority.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "axiom-remove-locked-nand-threshold",
+          "title": "Remove PNP.LockedNANDThreshold as a project-specific axiom",
+          "points": 1,
+          "status": "open",
+          "evidence": [
+            { "kind": "inventory-project-axiom", "name": "PNP.LockedNANDThreshold", "expectedPresent": true }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "The compiled inventory still lists this project-specific axiom.",
+          "remainingLimitation": "A parallel theorem does not earn the point while the active axiom-backed route remains.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "axiom-remove-residual-band-minimum",
+          "title": "Remove PNP.ResidualBandExactMinimization as a project-specific axiom",
+          "points": 1,
+          "status": "open",
+          "evidence": [
+            { "kind": "inventory-project-axiom", "name": "PNP.ResidualBandExactMinimization", "expectedPresent": true }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "The compiled inventory still lists this project-specific axiom.",
+          "remainingLimitation": "The exact minimization authority must be replaced on the active dependency route.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "root-deterministic-cnfsat-in-p",
+          "title": "Prove deterministic CNFSAT is in P in the concrete model",
+          "points": 2,
+          "status": "open",
+          "evidence": [
+            { "kind": "status-field", "field": "leanConcreteCNFSATInPFormalized", "expected": false },
+            { "kind": "status-blocker-open", "id": "Formal.ConcreteSAT" }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "The concrete CNFSAT-in-P field is false.",
+          "remainingLimitation": "A deterministic polynomial-time concrete SAT theorem is required.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "root-complexity-transport",
+          "title": "Complete the standard complexity transport required for the concrete P equals NP result",
+          "points": 1,
+          "status": "open",
+          "evidence": [
+            { "kind": "status-field", "field": "leanConcreteCNFNPCompletenessFormalized", "expected": false },
+            { "kind": "status-blocker-open", "id": "Formal.RootTheoremAndAxiomAudit" }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "The concrete NP-completeness transport is not formalized and the root gate remains blocked.",
+          "remainingLimitation": "The exact concrete SAT theorem must be transported through the selected standard complexity model.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "root-eligible-theorem",
+          "title": "Create and successfully build the exact eligible root theorem PNP.Main.p_eq_np",
+          "points": 2,
+          "status": "open",
+          "evidence": [
+            { "kind": "status-field", "field": "rootLeanTheoremPresent", "expected": false },
+            { "kind": "status-field", "field": "rootLeanTheoremBuilt", "expected": false },
+            { "kind": "inventory-declaration", "name": "PNP.Main.p_eq_np", "expectedPresent": false }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "The exact eligible root theorem is absent from both status and compiled inventory.",
+          "remainingLimitation": "The theorem must exist with the exact concrete type and build successfully.",
+          "lastReviewedDate": "2026-08-23"
+        },
+        {
+          "id": "root-publication-gate",
+          "title": "Pass the exact root axiom audit, fingerprints and publication gate",
+          "points": 1,
+          "status": "open",
+          "evidence": [
+            { "kind": "status-field", "field": "rootLeanTheoremAxiomAuditPassed", "expected": false },
+            { "kind": "status-field", "field": "concretePublicationGate.passed", "expected": false },
+            { "kind": "status-blocker-open", "id": "Formal.RootTheoremAndAxiomAudit" }
+          ],
+          "awardedAtCoordinate": null,
+          "justification": "The root axiom audit and publication gate are both false.",
+          "remainingLimitation": "Exact type, value, source and axiom-closure fingerprints must be configured and match.",
+          "lastReviewedDate": "2026-08-23"
+        }
+      ]
+    }
+  ],
+  "globalGates": [
+    { "id": "concrete-sat", "title": "Concrete SAT", "status": "open", "statusBlocker": "Formal.ConcreteSAT" },
+    { "id": "residual-band-minimizer", "title": "Residual-band minimiser", "status": "open", "statusBlocker": "Formal.ResidualBandMinimizer" },
+    { "id": "unconditional-zero-slack", "title": "Unconditional ZeroSlack", "status": "open", "statusBlocker": "Formal.ZeroSlack" },
+    { "id": "polynomial-runtime-bounds", "title": "Polynomial runtime and certificate bounds", "status": "open", "statusBlocker": "Formal.PolynomialRuntimeAndCertificateBounds" },
+    { "id": "root-theorem-axiom-audit", "title": "Root theorem and axiom audit", "status": "open", "statusBlocker": "Formal.RootTheoremAndAxiomAudit" }
+  ],
+  "projectSpecificAxiomsRemaining": [
+    "PNP.CheckPCCPackexp",
+    "PNP.GeneratePCCPack",
+    "PNP.LockedNANDThreshold",
+    "PNP.ResidualBandExactMinimization"
+  ],
+  "rootTheorem": {
+    "name": "PNP.Main.p_eq_np",
+    "present": false,
+    "built": false,
+    "axiomAuditPassed": false
+  },
+  "publicationGate": {
+    "passed": false
+  },
+  "scoreChangePolicy": {
+    "fixedCheckpointWeights": true,
+    "localMilestonesDoNotAutomaticallyChangeScore": true,
+    "externalReviewIsNotMathematicalPremise": true,
+    "requiredChangeRecordFields": [
+      "checkpointId",
+      "oldStatus",
+      "newStatus",
+      "compiledEvidence",
+      "sourceCoordinateOrCommit",
+      "loadBearingRationale",
+      "remainingTrackLimitations",
+      "oldAndNewTotal",
+      "uncertaintyRangeDecision"
+    ]
+  },
+  "history": [
+    {
+      "kind": "baseline",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
+      "formalArtefactCoverage": { "earnedRows": 160, "totalRows": 162 },
+      "riskWeightedProofCompletionPercent": 30,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "rationale": "The M184 authoritative ledger contains 160 earned rows out of 162, superseding the earlier 152 of 154 example. No named load-bearing checkpoint closed merely because additional local or supplied-data milestones were earned, so the fixed-weight baseline remains 30 percent."
+    }
+  ],
+  "nonClaims": [
+    "The risk-weighted score is not the probability that P equals NP or that the proposed route is correct.",
+    "The risk-weighted score is not a delivery or time-remaining estimate.",
+    "Formal artefact coverage is not proof completion and its denominator can grow.",
+    "External review may provide validation evidence but is not a mathematical premise.",
+    "This ledger does not alter any theorem statement or proof authority."
+  ]
+}
