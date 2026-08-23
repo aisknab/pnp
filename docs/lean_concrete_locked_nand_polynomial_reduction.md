@@ -68,6 +68,6 @@ closure, two use only `propext`, and twelve use only `propext` and
 records the exact function, output, language equivalence, reduction witness,
 and recursive raw refinement as earned.
 
-The concrete publication gate remains false. All three project assumptions,
+The concrete publication gate remains false. Both remaining project assumptions,
 all five blockers, unset activation fingerprints, and the absence of
 `PNP.Main.p_eq_np` are retained.

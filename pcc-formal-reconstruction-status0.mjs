@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-186';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-187';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -31,7 +31,6 @@ export const FORMAL_RECONSTRUCTION_BLOCKERS0 = Object.freeze([
 const PROJECT_SPECIFIC_AXIOM_INVENTORY = Object.freeze([
   'PNP.CheckPCCPackexp',
   'PNP.GeneratePCCPack',
-  'PNP.ResidualBandExactMinimization',
 ]);
 
 const LOCKED_NAND_THRESHOLD_HOSTILE_REVIEW_LEMMA_INVENTORY = Object.freeze([
@@ -539,6 +538,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteLegacyLockedNANDCompatibilityAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPConcreteLegacyLockedNANDCompatibility.lean',
   'node --test audits/lean-concrete-legacy-locked-nand-compatibility0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPConcreteResidualBandCompatibilityAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPConcreteResidualBandCompatibility.lean',
+  'node --test audits/lean-concrete-residual-band-compatibility0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -682,7 +684,7 @@ const NON_CLAIMS = Object.freeze([
   'The global locked-NAND BaselineDistinct milestone proves every exposed baseline coordinate is nonconstant, is not a positive carrier-input projection, and computes a Boolean function distinct from every other exposed coordinate. Consequently its exhaustive reference minimum is exactly B. By itself it does not prove either final branch law, residual slack at most four for the global family, or a uniform polynomial bitstring builder.',
   'The global locked-NAND unsatisfiable-final-zero milestone proves that unsatisfiability makes the full final coordinate false on every carrier valuation and makes the full exhaustive reference minimum exactly B. By itself it does not prove the satisfiable final-output conditions, residual slack at most four for the global family, or a uniform polynomial bitstring builder.',
   'The global locked-NAND semantic-threshold milestone discharges the satisfiable final-output conditions, all six typed premises, the exact satisfiable/unsatisfiable minimum split, and residual slack at most four for one answer-independent candidate over every finite topological NAND circuit. It uses exhaustive finite satisfiability decision only to eliminate a proposition-level case split and makes no polynomial-runtime claim.',
-  'The encoded locked-NAND semantic boundary fixes a strict version-zero grammar, proves direct legacy output-normalization semantics, serializes the complete candidate and source-derived baseline, rejects malformed input, and proves the pure bitstring transformation correct. Its 48 audited declarations use only propext and Quot.sound. It is not a parser/validator machine, emitter machine, RawRefinement, PolynomialReduction, runtime bound, abstract PNP.LockedNANDThreshold discharge, CNFSAT-in-P theorem, or P = NP theorem.',
+  'The encoded locked-NAND semantic boundary fixes a strict version-zero grammar, proves direct legacy output-normalization semantics, serializes the complete candidate and source-derived baseline, rejects malformed input, and proves the pure bitstring transformation correct. Its 50 audited declarations use only propext and Quot.sound. It is not a parser/validator machine, emitter machine, RawRefinement, PolynomialReduction, runtime bound, abstract PNP.LockedNANDThreshold discharge, CNFSAT-in-P theorem, or P = NP theorem.',
   'The strict-v0 locked-NAND source parser is one literal 228-state, 2,052-rule machine with unconditional exact behavior on every bitstring: valid sources accept and are preserved byte-for-byte, invalid sources reject with empty output, and the compiled six-for-one machine cannot time out within its explicit cubic bound. Its polynomial-time function and leaf RawRefinement validate source bytes only. The downstream target emitter now composes with it, but this parser alone supplies no PolynomialReduction, abstract threshold-language discharge, CNFSAT-in-P theorem, NP-hardness transport, or P = NP theorem.',
   'The strict-v0 locked-NAND target emitter is one fixed 1,387,921-rule grammar-only controller. It emits the exact direct raw target on every grammar-decoded circuit, including intrinsically invalid references, rejects malformed grammar with empty output, and has all-input polynomial runtime and output-size bounds. Composition with the strict source parser clears intrinsically invalid inputs and computes buildLockedNANDInstance with recursively compiled RawRefinement.',
   'The strict parser/emitter composition is packaged as a concrete PolynomialReduction from EncodedNANDSAT to EncodedLockedNANDThreshold, with exact output, all-bitstring language equivalence, a ReducesTo witness, and recursive RawRefinement. PNP.Main.locked_nand_threshold now consumes the composed CNFSAT reduction directly in the concrete charged-pipeline model.',
@@ -729,7 +731,8 @@ const NON_CLAIMS = Object.freeze([
   'The checked finite SaturatePositive-to-BCEL-ready composition reruns the production finite classifier and accepts only its positive-projection branch with a computed ready nucleus. Its certificate retains the exact classifier equality, safe trace, positive final slack, positive whole-support defect, nontrivial nucleus, constant-cut equations, and local BN2 conclusions. The terminal problem and initial positive premise remain supplied; local failure branches are not globally routed, BN3--BN6 data and constant activation are not derived, and manuscript-wide SaturatePositive, BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.',
   'The finite BCEL-ready and Packet carrier-coherence certificate uses the exact candidate and model already owned by one accepted Packet/budget no-lower certificate. An injective and surjective anchor map plus a reflected list equality identifies its computed ready nucleus with that exact grouped Packet carrier, transfers the nontrivial-size bound, and reuses the same-family Packet and constant-activation exclusions. The terminal problem, initial positive premise, family, anchor map, payloads, tables, and ranks remain supplied; activation weights are not identified with projection excess, constant activation is not derived from positive slack, and unconditional ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.',
   'The finite BCEL/Packet activation-coherence obstruction exhaustively compares the exact M183 nucleus defect with the declared cut value and every canonical nonempty proper activation weight on the coherently mapped M184 Packet family. Hypothetical acceptance reconstructs the mapped-cut projection equation, while the already checked same-family Packet exclusion forces deterministic rejection with either a cut-value mismatch or one proof-bearing proper-cut mismatch. This diagnoses rather than repairs the missing bridge: the terminal problem, positive premise, family, map, activation data, payloads, tables, and ranks remain supplied; unconditional BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.',
-  'The M186 concrete compatibility boundary makes every report-facing language, decider, verifier, reduction, P/NP class, and P-equals-NP witness an alias of the checked finite-pipeline model. SAT and LockedNANDThreshold are exact concrete definitions, the active bridge consumes the compiled all-bitstring reduction without caller trust, and PNP.LockedNANDThreshold is no longer a project axiom. This does not supply a locked-NAND decider, residual-band reduction, PCCMin or ZeroSlack soundness, concrete SAT NP-hardness, the eligible root theorem, or P = NP.',
+  'The M186 concrete compatibility boundary makes every report-facing language, decider, verifier, reduction, P/NP class, and P-equals-NP witness an alias of the checked finite-pipeline model. SAT and LockedNANDThreshold are exact concrete definitions, the active bridge consumes the compiled all-bitstring reduction without caller trust, and PNP.LockedNANDThreshold is no longer a project axiom. At M186 the residual-band compatibility edge remained open; M187 now closes that language-and-identity edge without supplying its polynomial decider. A locked-NAND decider, PCCMin or ZeroSlack soundness, concrete SAT NP-hardness, the eligible root theorem, and P = NP remain absent.',
+  'The M187 concrete residual-band compatibility boundary defines the report-facing residual-band endpoint as the fail-closed encoded direct-wire exact-minimum threshold predicate, proves exact arbitrary typed candidate semantics, and compiles the locked-to-residual compatibility edge as the identity polynomial reduction. PNP.ResidualBandExactMinimization is no longer a project axiom and the caller-supplied reduction field is gone. The definition still uses exhaustive finite reference minimization as a semantic specification: it does not construct PCCMin, prove polynomial runtime or encoded-size bounds, establish unconditional ZeroSlack, put SAT in P, open a global gate, create the eligible root theorem, or prove P = NP.',
   'Residual RankWF is now formalized for the manuscript\'s fixed ten-coordinate natural lexicographic rank, with an executable comparison, exact Boolean equivalence, coordinate-priority witnesses, accessibility, induction, and kernel-checked well-foundedness. This does not map current finite routes into the complete global outcome system, prove that any route decreases the rank, establish route completeness or Package E, remove the explicit positive premise, establish full SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
@@ -1423,7 +1426,7 @@ const EXACT_FIELDS = Object.freeze({
   leanConcreteLockedNANDCompleteCandidateCodecFormalized: true,
   leanConcreteLockedNANDEncodedSemanticReductionFormalized: true,
   leanConcreteLockedNANDEncodedSemanticReductionAxiomAuditPassed: true,
-  leanConcreteLockedNANDEncodedSemanticReductionAuditedDeclarationCount: 48,
+  leanConcreteLockedNANDEncodedSemanticReductionAuditedDeclarationCount: 50,
   leanConcreteLockedNANDEncodedSemanticReductionScope:
     'strict-version-zero-codec-direct-normalization-semantics-complete-candidate-bytes-and-fail-closed-semantic-reduction',
   leanConcreteLockedNANDParserMachineFormalized: true,
@@ -1493,6 +1496,13 @@ const EXACT_FIELDS = Object.freeze({
   leanConcreteLegacyLockedNANDCompatibilityEndpointProjectAssumptionFree: true,
   leanConcreteLegacyLockedNANDCompatibilityScope:
     'all-bitstring-report-facing-sat-and-locked-nand-identities-with-concrete-finite-pipeline-complexity-witnesses-and-direct-checked-reduction-reuse',
+  leanConcreteResidualBandCompatibilityFormalized: true,
+  leanConcreteResidualBandCompatibilityAxiomAuditPassed: true,
+  leanConcreteResidualBandCompatibilityAuditedDeclarationCount: 10,
+  leanConcreteResidualBandCompatibilityEndpointProjectAssumptionFree: true,
+  leanConcreteResidualBandCompatibilityCallerReductionRemoved: true,
+  leanConcreteResidualBandCompatibilityScope:
+    'all-bitstring-and-arbitrary-typed-candidate-exact-reference-minimum-threshold-semantics-with-fail-closed-decoding-and-identity-locked-to-residual-transport',
   leanLockedNANDPolynomialBuilderFormalized: true,
   leanCompatibleReplacementFormalized: false,
   leanGlobalSlackLawFormalized: false,
@@ -2672,7 +2682,7 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanConcreteLockedNANDCompleteCandidateCodecFormalized: true,
       leanConcreteLockedNANDEncodedSemanticReductionFormalized: true,
       leanConcreteLockedNANDEncodedSemanticReductionAxiomAuditPassed: true,
-      leanConcreteLockedNANDEncodedSemanticReductionAuditedDeclarationCount: 48,
+      leanConcreteLockedNANDEncodedSemanticReductionAuditedDeclarationCount: 50,
       leanConcreteLockedNANDEncodedSemanticReductionScope:
         'strict-version-zero-codec-direct-normalization-semantics-complete-candidate-bytes-and-fail-closed-semantic-reduction',
       leanConcreteLockedNANDParserMachineFormalized: true,
@@ -2742,6 +2752,13 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanConcreteLegacyLockedNANDCompatibilityEndpointProjectAssumptionFree: true,
       leanConcreteLegacyLockedNANDCompatibilityScope:
         'all-bitstring-report-facing-sat-and-locked-nand-identities-with-concrete-finite-pipeline-complexity-witnesses-and-direct-checked-reduction-reuse',
+      leanConcreteResidualBandCompatibilityFormalized: true,
+      leanConcreteResidualBandCompatibilityAxiomAuditPassed: true,
+      leanConcreteResidualBandCompatibilityAuditedDeclarationCount: 10,
+      leanConcreteResidualBandCompatibilityEndpointProjectAssumptionFree: true,
+      leanConcreteResidualBandCompatibilityCallerReductionRemoved: true,
+      leanConcreteResidualBandCompatibilityScope:
+        'all-bitstring-and-arbitrary-typed-candidate-exact-reference-minimum-threshold-semantics-with-fail-closed-decoding-and-identity-locked-to-residual-transport',
       leanLockedNANDPolynomialBuilderFormalized: true,
       leanCompatibleReplacementFormalized: false,
       leanGlobalSlackLawFormalized: false,
@@ -3299,7 +3316,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-23-186',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-24-187',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

@@ -124,6 +124,6 @@ counts, byte sizes, and SHA-256 identities are generated in
 `status/FORMAL_RECONSTRUCTION_STATUS.json`, and the root report artifacts.
 They are intentionally not duplicated in this milestone document.
 
-The concrete publication gate remains false. All three project assumptions,
+The concrete publication gate remains false. Both remaining project assumptions,
 all five blockers, unset activation fingerprints, and the absence of
 `PNP.Main.p_eq_np` are retained.

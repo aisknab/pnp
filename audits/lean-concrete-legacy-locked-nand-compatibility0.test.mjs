@@ -125,12 +125,12 @@ function validateCompatibility0(files) {
   const trust = declarationBlock0(files.bridge, 'CheckerTrustModel');
   for (const field of [
     'pccPackProducesPCCMinLoop',
-    'residualBandReduction',
     'satHard',
   ]) {
     if (!trust.includes(field)) failures.push('checker-trust-fields');
   }
-  if (trust.includes('lockedNANDReduction')) {
+  if (trust.includes('lockedNANDReduction') ||
+      trust.includes('residualBandReduction')) {
     failures.push('caller-locked-reduction');
   }
   if (!bridge.includes('sat_in_p_from_locked_nand_in_p (accepted_generated_package_implies_locked_nand_in_p T h)')) {
@@ -176,7 +176,6 @@ test('axiom transcript and generic regression pin the concrete boundary', async 
     'sat_reduces_to_locked_nand_checked',
     'sat_in_p_from_locked_nand_in_p lockedInP',
     'pccPackProducesPCCMinLoop := pcc',
-    'residualBandReduction := residual',
     'satHard := hard',
     'loop.residualBandDecider',
     'concrete_legacy_locked_nand_compatibility_checked_complete',
@@ -207,7 +206,6 @@ test('compiled inventory records the assumption-free M186 endpoint', async () =>
   assert.deepEqual(inventory.projectAxioms, [
     'PNP.CheckPCCPackexp',
     'PNP.GeneratePCCPack',
-    'PNP.ResidualBandExactMinimization',
   ]);
 });
 
@@ -229,8 +227,8 @@ test('hostile regressions reject every duplicate or weakened trust edge', async 
       'cert.loopCertificate.residualBandDecider',
       '{ code := "PCCMin" }')],
     ['bridge', files.bridge.replace(
-      'residualBandReduction : ResidualBandReductionTrust',
-      'residualBandReduction : ResidualBandReductionTrust\n  lockedNANDReduction : LockedNANDReductionTrust')],
+      'satHard : SATHard',
+      'residualBandReduction : ResidualBandReductionTrust\n  satHard : SATHard')],
     ['source', files.source.replaceAll(
       'SAT = Concrete.CNFSAT',
       'SAT = SAT')],

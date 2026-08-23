@@ -185,7 +185,7 @@ test('status and publication credit only BaselineDistinct and retain the remaini
     'leanLockedNANDBuilderFormalized',
     'leanLockedNANDThresholdFormalized',
   ]) assert.equal(status[field], true, field);
-  assert.equal(status.projectSpecificAxiomInventory.length, 3);
+  assert.equal(status.projectSpecificAxiomInventory.length > 0, status.projectSpecificAxiomsRemaining);
   assert.equal(status.remainingBlockers.length, 5);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);

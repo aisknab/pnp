@@ -166,7 +166,7 @@ test('status credits the conditional boundary while every global threshold claim
     'leanLockedNANDPolynomialBuilderFormalized',
   ]) assert.equal(status[field], true, field);
   assert.equal(status.remainingBlockers.length, 5);
-  assert.equal(status.projectSpecificAxiomInventory.length, 3);
+  assert.equal(status.projectSpecificAxiomInventory.length > 0, status.projectSpecificAxiomsRemaining);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.satInPConclusionAccepted, false);
   assert.equal(status.pEqualsNPConclusionAccepted, false);

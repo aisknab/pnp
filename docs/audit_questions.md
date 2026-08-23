@@ -1955,6 +1955,49 @@ or caller-supplied reduction field.
 
 ---
 
+## AQ-29 — Concrete report-facing residual-band compatibility
+
+**Claim**
+
+The active residual-band endpoint is the concrete fail-closed encoded
+direct-wire candidate/threshold predicate. Canonically encoding any typed
+candidate has exact reference-minimum threshold semantics, and the
+locked-to-residual compatibility edge is the identity polynomial reduction
+rather than caller-supplied trust.
+
+**Where it appears**
+
+- `lean/PNP/Concrete/LockedNANDReduction.lean` and
+  `lean/PNP/ResidualBand.lean`.
+- `lean/PNP/ConcreteResidualBandCompatibility.lean`.
+- `lean/PNP/Bridge.lean`.
+- `status/PROOF_PROGRESS.json`.
+
+**How to test or inspect it**
+
+1. Build the explicit `PNP` root.
+2. Compile the M187 axiom audit and regression.
+3. Confirm the compiled inventory records
+   `PNP.ResidualBandExactMinimization` as a definition, omits it from
+   `projectAxioms`, and records the M187 endpoint with only the allowed
+   Lean-standard closure.
+4. Mutate the source to restore a language axiom, caller-supplied reduction,
+   vacuous target predicate, or hidden P-membership conclusion and require the
+   hostile contract to reject it.
+
+**What would count as a refutation or material defect**
+
+- The external codec does not have the claimed arbitrary-candidate semantics.
+- Locked NAND and the residual-band endpoint are not the same concrete
+  language, or the active reduction can be supplied by a caller.
+- `PNP.ResidualBandExactMinimization` re-enters project-specific proof
+  authority.
+- Exhaustive reference minimization is described as an executable polynomial
+  algorithm, an encoded-size promise theorem, ZeroSlack/PCCMin, SAT in P, a
+  closed global gate, or `P = NP`.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

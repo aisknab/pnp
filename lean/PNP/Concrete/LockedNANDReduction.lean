@@ -40,11 +40,13 @@ def EncodedNANDSAT : Language := fun bits =>
   | none => False
   | some packed => packed.circuit.Satisfiable
 
-/-- Decode one complete candidate and ask the already-defined exhaustive
-reference minimum whether it crosses the encoded baseline.  The actual gate
-list is elaborated and measured; no descriptor or caller-supplied semantic
-certificate is accepted. -/
-def EncodedLockedNANDThreshold : Language := fun bits =>
+/-- Decode one complete direct-wire candidate and ask the already-defined
+exhaustive semantic reference minimum whether it crosses the encoded
+threshold.  The actual gate list is elaborated and measured; no descriptor or
+caller-supplied semantic certificate is accepted.  This is a language
+specification, not a claim that the exhaustive reference computation runs in
+polynomial time. -/
+def EncodedDirectWireMinimumThreshold : Language := fun bits =>
   match decodeLockedInstance bits with
   | none => False
   | some raw =>
@@ -54,6 +56,26 @@ def EncodedLockedNANDThreshold : Language := fun bits =>
           packed.baseline + 1 ≤
             referenceMinimum
               (Implementation.mk packed.gateCount packed.candidate)
+
+/-- The locked-NAND target uses the general encoded direct-wire exact-minimum
+threshold query.  Locked-shape correctness belongs to the source builder, not
+to a second target-language descriptor or premise. -/
+def EncodedLockedNANDThreshold : Language :=
+  EncodedDirectWireMinimumThreshold
+
+/-- Canonical encoding and intrinsic elaboration expose the exact semantic
+threshold for every finite typed direct-wire candidate. -/
+theorem encodedDirectWireMinimumThreshold_ofCandidate_iff
+    {inputs gates outputs : Nat}
+    (candidate : Candidate inputs gates outputs) (threshold : Nat) :
+    EncodedDirectWireMinimumThreshold
+        (encodeLockedInstance
+          (RawLockedInstance.ofCandidate candidate threshold)) ↔
+      threshold + 1 ≤
+        referenceMinimum (Implementation.mk gates candidate) := by
+  simp [EncodedDirectWireMinimumThreshold,
+    decodeLockedInstance_encodeLockedInstance,
+    RawLockedInstance.elaborate_ofCandidate]
 
 /-- The pure specification of the builder.  The successful branch emits the
 complete full candidate and exact source-derived baseline. -/
@@ -78,8 +100,8 @@ theorem buildLockedNANDInstance_of_malformed
 
 theorem empty_not_encodedLockedNANDThreshold :
     ¬ EncodedLockedNANDThreshold [] := by
-  simp [EncodedLockedNANDThreshold, decodeLockedInstance, decodeTokens,
-    decodeLockedInstanceTokens]
+  simp [EncodedLockedNANDThreshold, EncodedDirectWireMinimumThreshold,
+    decodeLockedInstance, decodeTokens, decodeLockedInstanceTokens]
 
 theorem encoded_fullCandidate_threshold_iff_satisfiable
     {inputs : Nat} (circuit : Circuit inputs) :
@@ -87,7 +109,7 @@ theorem encoded_fullCandidate_threshold_iff_satisfiable
         (encodeLockedInstance (lockedInstanceOfCircuit circuit)) ↔
       circuit.Satisfiable := by
   rw [fullCandidate_satisfiable_iff_referenceMinimum_ge_succ]
-  simp [EncodedLockedNANDThreshold,
+  simp [EncodedLockedNANDThreshold, EncodedDirectWireMinimumThreshold,
     decodeLockedInstance_encodeLockedInstance,
     lockedInstanceOfCircuit,
     RawLockedInstance.elaborate_ofCandidate]

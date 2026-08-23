@@ -263,7 +263,7 @@ test('status credits only local and conditional PR7 results', async () => {
     'leanLockedNANDPolynomialBuilderFormalized',
   ]) assert.equal(status[field], true, field);
   assert.equal(status.remainingBlockers.length, 5);
-  assert.equal(status.projectSpecificAxiomInventory.length, 3);
+  assert.equal(status.projectSpecificAxiomInventory.length > 0, status.projectSpecificAxiomsRemaining);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.satInPConclusionAccepted, false);
   assert.equal(status.pEqualsNPConclusionAccepted, false);

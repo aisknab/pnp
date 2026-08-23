@@ -2,13 +2,13 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-186",
-  "lastReviewedDate": "2026-08-23",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-187",
+  "lastReviewedDate": "2026-08-24",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
-    "pointsEarned": 32,
+    "pointsEarned": 33,
     "pointsAvailable": 100,
-    "percent": 32,
+    "percent": 33,
     "uncertaintyLowPercent": 20,
     "uncertaintyHighPercent": 40,
     "isProbabilityOfCorrectness": false,
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 162,
-    "totalRows": 164,
+    "earnedRows": 163,
+    "totalRows": 165,
     "percentRoundedOneDecimal": 98.8,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -442,7 +442,7 @@
       "id": "root-and-axioms",
       "title": "Root theorem and project-axiom elimination",
       "pointsAvailable": 10,
-      "pointsEarned": 1,
+      "pointsEarned": 2,
       "checkpoints": [
         {
           "id": "axiom-remove-generate-pccpack",
@@ -482,21 +482,23 @@
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-186",
           "justification": "LockedNANDThreshold is now a concrete definition used by the active bridge, and the compiled theorem inventory no longer lists it as an axiom.",
-          "remainingLimitation": "GeneratePCCPack, CheckPCCPackexp, and ResidualBandExactMinimization remain project-specific proof authority; the eligible root theorem is still absent.",
-          "lastReviewedDate": "2026-08-23"
+          "remainingLimitation": "GeneratePCCPack and CheckPCCPackexp remain project-specific proof authority; the eligible root theorem is still absent.",
+          "lastReviewedDate": "2026-08-24"
         },
         {
           "id": "axiom-remove-residual-band-minimum",
           "title": "Remove PNP.ResidualBandExactMinimization as a project-specific axiom",
           "points": 1,
-          "status": "open",
+          "status": "earned",
           "evidence": [
-            { "kind": "inventory-project-axiom", "name": "PNP.ResidualBandExactMinimization", "expectedPresent": true }
+            { "kind": "inventory-project-axiom", "name": "PNP.ResidualBandExactMinimization", "expectedPresent": false },
+            { "kind": "milestone-earned", "id": "concrete-residual-band-compatibility" },
+            { "kind": "status-field", "field": "leanConcreteResidualBandCompatibilityEndpointProjectAssumptionFree", "expected": true }
           ],
-          "awardedAtCoordinate": null,
-          "justification": "The compiled inventory still lists this project-specific axiom.",
-          "remainingLimitation": "The exact minimization authority must be replaced on the active dependency route.",
-          "lastReviewedDate": "2026-08-23"
+          "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-187",
+          "justification": "ResidualBandExactMinimization is now the concrete fail-closed direct-wire minimum-threshold language, the active compatibility edge is an identity reduction, and the compiled inventory no longer lists the former language axiom.",
+          "remainingLimitation": "No executable polynomial residual-band minimizer, PCCMin exactness proof, ZeroSlack theorem, or encoded-size polynomial bound follows from the concrete language definition.",
+          "lastReviewedDate": "2026-08-24"
         },
         {
           "id": "root-deterministic-cnfsat-in-p",
@@ -568,8 +570,7 @@
   ],
   "projectSpecificAxiomsRemaining": [
     "PNP.CheckPCCPackexp",
-    "PNP.GeneratePCCPack",
-    "PNP.ResidualBandExactMinimization"
+    "PNP.GeneratePCCPack"
   ],
   "rootTheorem": {
     "name": "PNP.Main.p_eq_np",
@@ -676,6 +677,43 @@
         }
       ],
       "rationale": "M186 replaces the duplicate name-only report bridge with exact concrete finite-pipeline interfaces, reuses the compiled all-bitstring SAT-to-locked-NAND reduction, and removes PNP.LockedNANDThreshold from project-specific proof authority. Exactly two fixed one-point checkpoints close, moving the score from 30 to 32 percent while all five global gates stay open and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-187",
+      "formalArtefactCoverage": { "earnedRows": 163, "totalRows": 165 },
+      "riskWeightedProofCompletionPercent": 33,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": true,
+      "changedCheckpointIds": [
+        "axiom-remove-residual-band-minimum"
+      ],
+      "changeRecords": [
+        {
+          "checkpointId": "axiom-remove-residual-band-minimum",
+          "oldStatus": "open",
+          "newStatus": "earned",
+          "compiledEvidence": [
+            { "kind": "inventory-project-axiom", "name": "PNP.ResidualBandExactMinimization", "expectedPresent": false },
+            { "kind": "inventory-declaration", "name": "PNP.concrete_residual_band_compatibility_checked_complete", "expectedPresent": true },
+            { "kind": "status-field", "field": "leanConcreteResidualBandCompatibilityEndpointProjectAssumptionFree", "expected": true }
+          ],
+          "sourceCoordinateOrCommit": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-187",
+          "loadBearingRationale": "The report-facing residual-band endpoint is now a concrete encoded candidate/threshold language, its exact arbitrary-candidate semantics are compiled, and the active locked-to-residual edge is an identity polynomial reduction rather than project-specific proof authority.",
+          "remainingTrackLimitations": "GeneratePCCPack and CheckPCCPackexp remain project axioms; deterministic CNFSAT-in-P and complexity transport are open; the eligible root theorem is absent; and the publication gate remains false.",
+          "oldAndNewTotal": { "old": 32, "new": 33 },
+          "uncertaintyRangeDecision": {
+            "lowPercent": 20,
+            "highPercent": 40,
+            "changed": false,
+            "rationale": "Removing one load-bearing language axiom is real progress, but the unresolved ZeroSlack, PCCMin, polynomial-runtime, deterministic-SAT, and root-theorem obligations still dominate the uncertainty."
+          }
+        }
+      ],
+      "rationale": "M187 replaces the residual-band language axiom and caller-supplied compatibility reduction with the concrete fail-closed encoded exact-minimum threshold predicate and a compiled identity reduction. Exactly one fixed one-point checkpoint closes, moving the score from 32 to 33 percent. Formal artefact coverage becomes 163 of 165, all five global gates remain open, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [

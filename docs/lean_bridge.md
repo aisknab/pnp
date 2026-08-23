@@ -8,7 +8,7 @@ The current Lean development contains a conditional theorem bridge corresponding
 CheckPCCPackexp(GeneratePCCPack()) = accept => P = NP
 ```
 
-That bridge still depends on three project-specific axioms and does **not** constitute a Lean proof of
+That bridge still depends on two project-specific axioms and does **not** constitute a Lean proof of
 `P = NP`. It is also not a complete Lean reproof of the custom JavaScript checker, the full
 residual-slack package, a deterministic SAT algorithm, or the concrete NP-hardness transport. The purpose of the Lean
 track is to replace each trust-base item with a checked theorem in visible stages.
@@ -1689,10 +1689,9 @@ accepted PCC package
 -> P = NP
 ```
 
-The source audit permits exactly these three project-specific axioms in the current root closure:
+The source audit permits exactly these two project-specific axioms in the current root closure:
 
 ```text
-PNP.ResidualBandExactMinimization
 PNP.GeneratePCCPack
 PNP.CheckPCCPackexp
 ```
@@ -1719,8 +1718,9 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 10. Exact supplied-list prefix coverage and the true-iff-all-checks theorem.
 11. The exact 2(n-1) prefix gate count for nonempty check lists.
 12. Prefix-node exposed-output distinctness and nonconstant/nonprojection checks.
-13. Conditional composition from PCCMin through residual band, locked NAND, SAT,
-    and the concrete equality proposition, assuming the three disclosed project axioms.
+13. Conditional composition from PCCMin through the concrete residual-band and
+    locked-NAND endpoints, SAT, and the concrete equality proposition, assuming
+    the two disclosed project axioms.
 14. Typed direct-wire realizations of all six local locked-NAND gadgets, with honest output widths and constant-free internal syntax.
 15. The semantic direct-wire lower bound `outputs ≤ gates` and conditional exactness for square baseline candidates.
 16. Source-derived locked-baseline occurrence, check, prefix, and displayed-gate accounting.

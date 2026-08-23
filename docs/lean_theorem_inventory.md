@@ -89,12 +89,14 @@ the composed locked-NAND reduction. M186 makes the report-level `PNP.SAT` and
 reduction without caller-supplied trust. A locked-NAND decider, CNFSAT-in-P theorem, remaining
 NP-hardness/NP-completeness transport, and `P = NP` root remain absent.
 
-The current three project-specific axioms remain visible as an independent inventory:
+M187 additionally makes `PNP.ResidualBandExactMinimization` the exact concrete encoded
+direct-wire minimum-threshold language and replaces the supplied locked-to-residual edge with
+the identity polynomial reduction. The current two project-specific axioms remain visible as an
+independent inventory:
 
 ```text
 PNP.CheckPCCPackexp
 PNP.GeneratePCCPack
-PNP.ResidualBandExactMinimization
 ```
 
 They are not on the publication gate's permitted Lean-standard axiom allowlist. `PNP.SAT` is now

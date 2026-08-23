@@ -624,7 +624,7 @@ test('formal reconstruction status accepts the current source and public mirrors
   ]) assert.equal(out[field], true, field);
   assert.equal(
     out.leanConcreteLockedNANDEncodedSemanticReductionAuditedDeclarationCount,
-    48,
+    50,
   );
   assert.equal(
     out.leanConcreteLockedNANDEncodedSemanticReductionScope,
@@ -1503,7 +1503,6 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.deepEqual(out.projectSpecificAxiomInventory, [
     'PNP.CheckPCCPackexp',
     'PNP.GeneratePCCPack',
-    'PNP.ResidualBandExactMinimization',
   ]);
   assert.equal(out.externalReviewIsMathematicalPremise, false);
   assert.deepEqual(out.remainingBlockers, FORMAL_RECONSTRUCTION_BLOCKERS0);
@@ -2033,7 +2032,7 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   ]) assert.equal(status[field], true, field);
   assert.equal(
     status.leanConcreteLockedNANDEncodedSemanticReductionAuditedDeclarationCount,
-    48,
+    50,
   );
   assert.equal(
     status.leanConcreteLockedNANDEncodedSemanticReductionScope,
@@ -3155,7 +3154,7 @@ test('proof progress preserves the fixed M184 baseline and derives current cover
   assert.equal(out.modelId, 'fixed-risk-weighted-checkpoints-v0');
   assert.equal(out.trackCount, 5);
   assert.equal(out.checkpointCount, 35);
-  assert.equal(out.pointsEarned, 32);
+  assert.equal(out.pointsEarned, 33);
   assert.equal(out.pointsAvailable, 100);
   assert.equal(out.uncertaintyLowPercent, 20);
   assert.equal(out.uncertaintyHighPercent, 40);
@@ -3166,7 +3165,7 @@ test('proof progress preserves the fixed M184 baseline and derives current cover
   });
   assert.equal(out.globalGatesClosed, 0);
   assert.equal(out.globalGatesAvailable, 5);
-  assert.equal(out.projectSpecificAxiomCount, 3);
+  assert.equal(out.projectSpecificAxiomCount, 2);
   assert.equal(out.rootTheoremPresent, false);
   assert.equal(out.publicationGatePassed, false);
   assert.equal(out.isProbabilityOfCorrectness, false);
@@ -3177,10 +3176,9 @@ test('proof progress preserves the fixed M184 baseline and derives current cover
     'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184');
   assert.equal(sources.ledger.history.at(-1).scoreChanged, true);
   assert.deepEqual(sources.ledger.history.at(-1).changedCheckpointIds, [
-    'reductions-final-target-compatibility',
-    'axiom-remove-locked-nand-threshold',
+    'axiom-remove-residual-band-minimum',
   ]);
-  assert.equal(sources.ledger.history.at(-1).changeRecords.length, 2);
+  assert.equal(sources.ledger.history.at(-1).changeRecords.length, 1);
 });
 
 test('proof progress rejects changed weights and a stale stored total', async () => {
@@ -3193,8 +3191,8 @@ test('proof progress rejects changed weights and a stale stored total', async ()
   );
 
   const staleTotal = clone0(ledger);
-  staleTotal.proofCompletion.pointsEarned = 31;
-  staleTotal.proofCompletion.percent = 31;
+  staleTotal.proofCompletion.pointsEarned = 32;
+  staleTotal.proofCompletion.percent = 32;
   assert.throws(
     () => validateProofProgress0(staleTotal, status, inventory),
     (error) => error.code === 'ProofCompletion.StoredEarned',
@@ -3211,9 +3209,9 @@ test('proof progress rejects incomplete or ungrounded score-change records', asy
   );
 
   const forgedTotal = clone0(ledger);
-  forgedTotal.history.at(-1).changeRecords[1].oldAndNewTotal = {
-    old: 31,
-    new: 33,
+  forgedTotal.history.at(-1).changeRecords[0].oldAndNewTotal = {
+    old: 32,
+    new: 34,
   };
   assert.throws(
     () => validateProofProgress0(forgedTotal, status, inventory),
@@ -3259,7 +3257,7 @@ test('proof progress rejects formal coverage presented as proof completion or al
 test('proof progress rejects an uncertainty range that excludes the estimate', async () => {
   const { ledger, status, inventory } = await currentProofProgressSources0();
   const mutation = clone0(ledger);
-  mutation.proofCompletion.uncertaintyLowPercent = 33;
+  mutation.proofCompletion.uncertaintyLowPercent = 34;
   assert.throws(
     () => validateProofProgress0(mutation, status, inventory),
     (error) => error.code === 'ProofCompletion.UncertaintyRange',

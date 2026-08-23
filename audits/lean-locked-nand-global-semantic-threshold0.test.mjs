@@ -274,7 +274,7 @@ test('status earns the typed semantic threshold without widening the project cla
     'leanLockedNANDBuilderFormalized',
     'leanLockedNANDThresholdFormalized',
   ]) assert.equal(status[field], true, field);
-  assert.equal(status.projectSpecificAxiomInventory.length, 3);
+  assert.equal(status.projectSpecificAxiomInventory.length > 0, status.projectSpecificAxiomsRemaining);
   assert.equal(status.remainingBlockers.length, 5);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);

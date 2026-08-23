@@ -42,18 +42,14 @@ separately by `lockedNANDMacroCertificate` and
 `lockedNANDPrefixCertificate`. Remaining fields are:
 * `pccPackProducesPCCMinLoop`: accepted PCC package emits an accepted PCCMin
   loop certificate with structured ZeroSlack/oracle evidence;
-* `residualBandReduction`: locked NAND threshold reduces to residual-band exact
-  minimization;
 * `satHard`: SAT is NP-hard for the witness-model reduction relation.
 
-The report-facing SAT and locked-NAND languages now reuse the concrete
-bitstring predicates and the checked all-input polynomial reduction directly,
-so no duplicate name-only language axiom or caller-supplied locked-NAND
-reduction remains.
+The report-facing SAT, locked-NAND, and residual-band languages now reuse the
+concrete bitstring predicates.  Their checked all-input or identity polynomial
+reductions are compiled directly, so neither reduction remains caller trust.
 -/
 structure CheckerTrustModel where
   pccPackProducesPCCMinLoop : AcceptedGeneratedPackage → PCCMinLoopCertificate
-  residualBandReduction : ResidualBandReductionTrust
   satHard : SATHard
 
 /-- The accepted package gives residual-band exact minimization in P through an
@@ -69,7 +65,6 @@ theorem accepted_generated_package_implies_locked_nand_in_p
     (T : CheckerTrustModel)
     (h : AcceptedGeneratedPackage) : PClass LockedNANDThreshold :=
   locked_nand_in_p_from_residual_band_in_p
-    T.residualBandReduction
     (accepted_generated_package_implies_residual_band_in_p T h)
 
 /-- The accepted package gives SAT in P through residual-band minimization and
@@ -129,13 +124,12 @@ def leanBridgeSummary : LeanBridgeSummary :=
       "Lean theorem: a nonempty n-check prefix tree uses exactly 2(n-1) NAND gates",
       "Lean computation: prefix-node exposed outputs are distinct, nonconstant, and nonprojection",
       "Lean theorem: structured PCCMin loop certificate constructs a residual-band exact-minimization decider witness",
-      "Lean theorem: residual-band exact minimization in P plus locked-NAND-to-residual-band reduction gives locked NAND threshold ∈ P",
+      "Lean theorem: the concrete locked-NAND and residual-band endpoints share one encoded exact-minimum predicate, so identity transport gives locked NAND threshold ∈ P from residual-band membership",
       "Lean theorem: concrete locked NAND threshold in P plus the compiled all-bitstring CNFSAT-to-locked-NAND reduction gives concrete SAT ∈ P"
     ]
     externalTrustBase := [
       "Checker/reflection soundness: accepted PCCPack emits an accepted structured PCCMin loop certificate",
       "Semantic adequacy of PCCMinLoopCertificate and ZeroSlackCertificate fields for the executable PCCMin algorithm",
-      "Residual-band reduction: locked NAND threshold reduces to residual-band exact minimization",
       "Concrete SAT NP-hardness in the finite-pipeline reduction model"
     ] }
 

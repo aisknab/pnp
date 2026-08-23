@@ -10,6 +10,7 @@ import PNP.Concrete.LockedNANDReduction
 #print axioms PNP.Concrete.LockedNAND.encodeLockedInstance
 #print axioms PNP.Concrete.LockedNAND.decodeLockedInstance
 #print axioms PNP.Concrete.LockedNAND.EncodedNANDSAT
+#print axioms PNP.Concrete.LockedNAND.EncodedDirectWireMinimumThreshold
 #print axioms PNP.Concrete.LockedNAND.EncodedLockedNANDThreshold
 #print axioms PNP.Concrete.LockedNAND.buildLockedNANDInstance
 
@@ -44,6 +45,7 @@ import PNP.Concrete.LockedNANDReduction
 #print axioms PNP.Concrete.LockedNAND.decodeLockedInstance_encodeLockedInstance
 #print axioms PNP.Concrete.LockedNAND.encodeTokens_length
 #print axioms PNP.Concrete.LockedNAND.decodeElaboratedCircuit_encodeCircuit_ofCircuit
+#print axioms PNP.Concrete.LockedNAND.encodedDirectWireMinimumThreshold_ofCandidate_iff
 #print axioms PNP.Concrete.LockedNAND.buildLockedNANDInstance_of_decoded
 #print axioms PNP.Concrete.LockedNAND.buildLockedNANDInstance_of_malformed
 #print axioms PNP.Concrete.LockedNAND.empty_not_encodedLockedNANDThreshold

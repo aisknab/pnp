@@ -99,12 +99,11 @@ target decider, the residual-band exact minimizer, ZeroSlack, or a root theorem
 The repository now pins `leanprover/lean4:v4.31.0` and builds the explicit `PNP` library root. That
 root imports every tracked Lean source module. `PNP.Main.rootTheoremStatus` is assumption-free data
 recording that the theorem is not released; it is not the target theorem. The current conditional
-bridge still depends on three disclosed project-specific axioms:
-`PNP.ResidualBandExactMinimization`, `PNP.GeneratePCCPack`, and
-`PNP.CheckPCCPackexp`. The active `PNP.SAT` and `PNP.LockedNANDThreshold`
-values are exact definitions of `PNP.Concrete.CNFSAT` and
-`PNP.Concrete.LockedNAND.EncodedLockedNANDThreshold`; the bridge consumes the
-compiled concrete reduction directly.
+bridge still depends on two disclosed project-specific axioms:
+`PNP.GeneratePCCPack` and `PNP.CheckPCCPackexp`. The active `PNP.SAT`,
+`PNP.LockedNANDThreshold`, and `PNP.ResidualBandExactMinimization` values are
+exact concrete finite-pipeline languages. The bridge consumes the compiled
+SAT-to-locked reduction and identity locked-to-residual reduction directly.
 
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
@@ -165,7 +164,7 @@ milestone credit until reviewed pins change.
 
 Declaration, theorem, module, excluded-private, and reviewed-candidate counts are emitted by the
 compiled inventory and are intentionally not duplicated here. The current Lean source closure has
-exactly three project-specific axioms; the generated inventory and publication outputs must be
+exactly two project-specific axioms; the generated inventory and publication outputs must be
 regenerated and byte-checked after source-closure changes before they may describe the revision.
 
 Inventory generation is deliberately separate from theorem publication. The concrete gate expects
