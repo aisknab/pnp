@@ -29,11 +29,10 @@ legacy report supplies the intended construction and dependency order.
 This closes the concrete polynomial-reduction packaging edge. The downstream
 CNF-to-NAND milestone now identifies CNFSAT with `EncodedNANDSAT` through a
 fixed finite machine, a polynomial-time function, and a direct polynomial
-reduction, then composes that reduction with this one. This milestone does not
-identify the concrete target with the
-abstract `PNP.LockedNANDThreshold` language, prove the report-level
-`PNP.Main.locked_nand_threshold`, establish CNFSAT NP-hardness or membership
-in P, finish ZeroSlack/PCCMin, or prove P = NP.
+reduction, then composes that reduction with this one. M186 subsequently
+identifies the report-facing target with the concrete language and reuses the
+compiled `PNP.Main.locked_nand_threshold` theorem. Those links do not establish
+CNFSAT NP-hardness or membership in P, finish ZeroSlack/PCCMin, or prove P = NP.
 
 ## Public interface
 
@@ -69,6 +68,6 @@ closure, two use only `propext`, and twelve use only `propext` and
 records the exact function, output, language equivalence, reduction witness,
 and recursive raw refinement as earned.
 
-The concrete publication gate remains false. All four project assumptions,
+The concrete publication gate remains false. All three project assumptions,
 all five blockers, unset activation fingerprints, and the absence of
 `PNP.Main.p_eq_np` are retained.

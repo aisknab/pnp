@@ -18,13 +18,13 @@ const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const TEMPLATE_PATH = 'publication/canonical_proof_report.template.tex';
 const REPORT_TEX_PATH = 'canonical_proof_report.tex';
-const STATUS_COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-185';
+const STATUS_COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-186';
 const PUBLIC_SURFACE_COORDINATE = 'PUBLIC-SURFACE-BASELINE-2026-08-10-CONCRETE-LOCKED-NAND-THRESHOLD-121';
-const REPORT_COORDINATE = 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-23-185';
+const REPORT_COORDINATE = 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-23-186';
 
 const NEW_NON_CLAIMS = Object.freeze([
   'The compiled Lean theorem inventory is declaration and axiom-dependency evidence; it does not widen any theorem beyond its exact type and stated scope.',
-  'PNP.PEqualsNP uses abstract string-handle witnesses rather than a concrete standard complexity model and is categorically ineligible for public theorem activation.',
+  'PNP.PEqualsNP is now a compatibility name for the concrete finite charged-pipeline target. The target remains inactive because deterministic CNFSAT membership in P, concrete NP-hardness transport, the eligible root theorem, and the exact publication fingerprints remain absent.',
   'PNP.Main.ConcretePEqualsNP now names the inactive finite charged-pipeline target, while PNP.Main.p_eq_np remains absent.',
   'All five reviewed activation fingerprints remain intentionally unset, so target presence alone cannot open the concrete publication gate.',
   'The current canonical TeX and PDF are generated non-claiming reconstruction reports; the historical 56-page direct-claim report remains historical audit material only.',
@@ -55,7 +55,7 @@ export async function BuildFormalPublication0(root) {
     inventoryBytes,
     sourceClosureSha256,
   );
-  if (publication.gate.passed !== false) throw new Error('Release-97 publication gate must remain intentionally fail-closed');
+  if (publication.gate.passed !== false) throw new Error('current publication gate must remain intentionally fail-closed');
   const mapSha256 = sha256Bytes0(mapBytes);
   const rootCandidate = inventory.compatibilityRootCandidate;
   const status = {

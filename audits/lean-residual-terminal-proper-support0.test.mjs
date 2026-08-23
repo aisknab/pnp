@@ -329,7 +329,7 @@ test('status earns only governed proper-positive support search', async () => {
     'leanPCCMinPolynomialRuntimeFormalized',
   ]) assert.equal(status[field], false, field);
   assert.equal(status.remainingBlockers.length, 5);
-  assert.equal(status.projectSpecificAxiomInventory.length, 4);
+  assert.equal(status.projectSpecificAxiomInventory.length, 3);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);
   const milestone = status.formalPublicationMilestones.find(

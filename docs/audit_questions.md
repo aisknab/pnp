@@ -1914,6 +1914,47 @@ No checker function can establish external acceptance. This is a publication-sta
 
 ---
 
+## AQ-28 — Concrete report-facing locked-NAND compatibility
+
+**Claim**
+
+The active report-facing complexity API uses the exact concrete finite-pipeline
+languages and proof-bearing witnesses. `PNP.SAT` is concrete `CNFSAT`,
+`PNP.LockedNANDThreshold` is concrete `EncodedLockedNANDThreshold`, and the
+bridge consumes the compiled all-bitstring reduction without a duplicate axiom
+or caller-supplied reduction field.
+
+**Where it appears**
+
+- `lean/PNP/Complexity.lean`, `lean/PNP/SAT.lean`, and
+  `lean/PNP/LockedNAND.lean`.
+- `lean/PNP/Bridge.lean`.
+- `lean/PNP/ConcreteLegacyLockedNANDCompatibility.lean`.
+- `status/PROOF_PROGRESS.json`.
+
+**How to test or inspect it**
+
+1. Build the explicit `PNP` root.
+2. Compile the M186 axiom audit and regression.
+3. Confirm the compiled inventory omits `PNP.LockedNANDThreshold` from
+   `projectAxioms` and records the named compatibility endpoint with only the
+   allowed Lean-standard closure.
+4. Mutate the source to restore a name-only language, axiom endpoint, or fourth
+   checker-trust field and require the hostile contract to reject it.
+
+**What would count as a refutation or material defect**
+
+- Either report-facing language differs from its concrete endpoint.
+- The active reduction can be supplied by a caller instead of derived from the
+  compiled theorem.
+- A string field can manufacture a P, NP, verifier, decider, or reduction
+  witness.
+- `PNP.LockedNANDThreshold` re-enters the project-axiom inventory.
+- The result is described as a target decider, concrete NP-hardness,
+  unconditional ZeroSlack, or `P = NP`.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

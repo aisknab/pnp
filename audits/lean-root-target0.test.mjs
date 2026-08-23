@@ -9,7 +9,6 @@ const LEAN_ROOT = path.join(ROOT, 'lean');
 const EXPECTED_AXIOMS = Object.freeze([
   'PNP.CheckPCCPackexp',
   'PNP.GeneratePCCPack',
-  'PNP.LockedNANDThreshold',
   'PNP.ResidualBandExactMinimization',
 ]);
 
@@ -171,7 +170,7 @@ test('PNP root import closure covers every tracked Lean source module', async ()
   assert.deepEqual(closure, Object.keys(sources).sort());
 });
 
-test('Lean source has exactly four disclosed project axioms and no hidden placeholders', async () => {
+test('Lean source has exactly three disclosed project axioms and no hidden placeholders', async () => {
   const inventory = declarationInventory0(await leanSources0());
   assert.deepEqual(inventory.forbiddenTokens, []);
   assert.deepEqual(inventory.declarations.filter(({ kind }) => kind !== 'axiom'), []);

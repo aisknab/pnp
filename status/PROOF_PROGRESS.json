@@ -2,13 +2,13 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-185",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-186",
   "lastReviewedDate": "2026-08-23",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
-    "pointsEarned": 30,
+    "pointsEarned": 32,
     "pointsAvailable": 100,
-    "percent": 30,
+    "percent": 32,
     "uncertaintyLowPercent": 20,
     "uncertaintyHighPercent": 40,
     "isProbabilityOfCorrectness": false,
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 161,
-    "totalRows": 163,
+    "earnedRows": 162,
+    "totalRows": 164,
     "percentRoundedOneDecimal": 98.8,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -109,7 +109,7 @@
       "id": "concrete-reductions",
       "title": "Concrete reductions and locked-NAND route",
       "pointsAvailable": 20,
-      "pointsEarned": 14,
+      "pointsEarned": 15,
       "checkpoints": [
         {
           "id": "reductions-cook-levin-semantics",
@@ -152,7 +152,7 @@
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
           "justification": "The finite semantic threshold and strict-v0 encoded polynomial reduction are both checked.",
-          "remainingLimitation": "A project-specific locked-NAND threshold axiom still remains in the active project inventory.",
+          "remainingLimitation": "The active compatibility layer is now concrete, but no deterministic locked-NAND decider or downstream residual-band construction follows from this reduction.",
           "lastReviewedDate": "2026-08-23"
         },
         {
@@ -216,14 +216,15 @@
           "id": "reductions-final-target-compatibility",
           "title": "Final concrete SAT-to-target compatibility closure needed by the deterministic SAT theorem",
           "points": 1,
-          "status": "open",
+          "status": "earned",
           "evidence": [
-            { "kind": "status-field", "field": "leanConcreteCNFSATInPFormalized", "expected": false },
-            { "kind": "status-blocker-open", "id": "Formal.ConcreteSAT" }
+            { "kind": "milestone-earned", "id": "concrete-legacy-locked-nand-compatibility" },
+            { "kind": "status-field", "field": "leanConcreteLegacyLockedNANDCompatibilityFormalized", "expected": true },
+            { "kind": "inventory-declaration", "name": "PNP.concrete_legacy_locked_nand_compatibility_checked_complete", "expectedPresent": true }
           ],
-          "awardedAtCoordinate": null,
-          "justification": "The deterministic concrete CNFSAT-in-P field is false.",
-          "remainingLimitation": "The complete construction must connect the concrete SAT source to the exact final target route.",
+          "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-186",
+          "justification": "The active report-facing SAT and locked-NAND endpoints are definitionally the concrete languages, and the bridge consumes the compiled all-bitstring polynomial reduction without a caller-supplied trust edge.",
+          "remainingLimitation": "The locked-NAND target still lacks a deterministic polynomial-time decider, and concrete SAT NP-hardness and CNFSAT-in-P remain open.",
           "lastReviewedDate": "2026-08-23"
         }
       ]
@@ -441,7 +442,7 @@
       "id": "root-and-axioms",
       "title": "Root theorem and project-axiom elimination",
       "pointsAvailable": 10,
-      "pointsEarned": 0,
+      "pointsEarned": 1,
       "checkpoints": [
         {
           "id": "axiom-remove-generate-pccpack",
@@ -473,13 +474,15 @@
           "id": "axiom-remove-locked-nand-threshold",
           "title": "Remove PNP.LockedNANDThreshold as a project-specific axiom",
           "points": 1,
-          "status": "open",
+          "status": "earned",
           "evidence": [
-            { "kind": "inventory-project-axiom", "name": "PNP.LockedNANDThreshold", "expectedPresent": true }
+            { "kind": "inventory-project-axiom", "name": "PNP.LockedNANDThreshold", "expectedPresent": false },
+            { "kind": "milestone-earned", "id": "concrete-legacy-locked-nand-compatibility" },
+            { "kind": "status-field", "field": "leanConcreteLegacyLockedNANDCompatibilityEndpointProjectAssumptionFree", "expected": true }
           ],
-          "awardedAtCoordinate": null,
-          "justification": "The compiled inventory still lists this project-specific axiom.",
-          "remainingLimitation": "A parallel theorem does not earn the point while the active axiom-backed route remains.",
+          "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-186",
+          "justification": "LockedNANDThreshold is now a concrete definition used by the active bridge, and the compiled theorem inventory no longer lists it as an axiom.",
+          "remainingLimitation": "GeneratePCCPack, CheckPCCPackexp, and ResidualBandExactMinimization remain project-specific proof authority; the eligible root theorem is still absent.",
           "lastReviewedDate": "2026-08-23"
         },
         {
@@ -566,7 +569,6 @@
   "projectSpecificAxiomsRemaining": [
     "PNP.CheckPCCPackexp",
     "PNP.GeneratePCCPack",
-    "PNP.LockedNANDThreshold",
     "PNP.ResidualBandExactMinimization"
   ],
   "rootTheorem": {
@@ -618,6 +620,62 @@
       "scoreChanged": false,
       "changedCheckpointIds": [],
       "rationale": "M185 adds one machine-checked finite activation-coherence obstruction row, but it diagnoses rather than retires the supplied-data, unconditional BCELReady, or unconditional ZeroSlack obligations. No fixed checkpoint changed state, so the score remains 30 percent and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-186",
+      "formalArtefactCoverage": { "earnedRows": 162, "totalRows": 164 },
+      "riskWeightedProofCompletionPercent": 32,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": true,
+      "changedCheckpointIds": [
+        "reductions-final-target-compatibility",
+        "axiom-remove-locked-nand-threshold"
+      ],
+      "changeRecords": [
+        {
+          "checkpointId": "reductions-final-target-compatibility",
+          "oldStatus": "open",
+          "newStatus": "earned",
+          "compiledEvidence": [
+            { "kind": "inventory-declaration", "name": "PNP.concrete_legacy_locked_nand_compatibility_checked_complete", "expectedPresent": true },
+            { "kind": "status-field", "field": "leanConcreteLegacyLockedNANDCompatibilityFormalized", "expected": true }
+          ],
+          "sourceCoordinateOrCommit": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-186",
+          "loadBearingRationale": "The report-facing SAT and locked-NAND endpoints now inhabit the exact concrete finite-pipeline model and the active bridge reuses the compiled all-bitstring polynomial reduction without caller-supplied reduction trust.",
+          "remainingTrackLimitations": "The locked-NAND target is not in P, concrete SAT NP-hardness remains absent, and the complete Cook-Levin formula builder remains open.",
+          "oldAndNewTotal": { "old": 30, "new": 31 },
+          "uncertaintyRangeDecision": {
+            "lowPercent": 20,
+            "highPercent": 40,
+            "changed": false,
+            "rationale": "One defined compatibility edge closes, but the unresolved global blockers still dominate the mathematical risk."
+          }
+        },
+        {
+          "checkpointId": "axiom-remove-locked-nand-threshold",
+          "oldStatus": "open",
+          "newStatus": "earned",
+          "compiledEvidence": [
+            { "kind": "inventory-project-axiom", "name": "PNP.LockedNANDThreshold", "expectedPresent": false },
+            { "kind": "status-field", "field": "leanConcreteLegacyLockedNANDCompatibilityEndpointProjectAssumptionFree", "expected": true }
+          ],
+          "sourceCoordinateOrCommit": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-186",
+          "loadBearingRationale": "The active LockedNANDThreshold endpoint is now a concrete definition rather than project-specific proof authority, and the compiled inventory removes that axiom from the active source closure.",
+          "remainingTrackLimitations": "Three project-specific axioms remain, deterministic CNFSAT-in-P and complexity transport are open, the eligible root theorem is absent, and the publication gate remains false.",
+          "oldAndNewTotal": { "old": 31, "new": 32 },
+          "uncertaintyRangeDecision": {
+            "lowPercent": 20,
+            "highPercent": 40,
+            "changed": false,
+            "rationale": "Removing one project axiom is load-bearing, but it does not reduce the unresolved ZeroSlack, PCCMin, deterministic SAT, or root-theorem uncertainty enough to narrow the range."
+          }
+        }
+      ],
+      "rationale": "M186 replaces the duplicate name-only report bridge with exact concrete finite-pipeline interfaces, reuses the compiled all-bitstring SAT-to-locked-NAND reduction, and removes PNP.LockedNANDThreshold from project-specific proof authority. Exactly two fixed one-point checkpoints close, moving the score from 30 to 32 percent while all five global gates stay open and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [

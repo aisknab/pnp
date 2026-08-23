@@ -44,13 +44,16 @@ separately by `lockedNANDMacroCertificate` and
   loop certificate with structured ZeroSlack/oracle evidence;
 * `residualBandReduction`: locked NAND threshold reduces to residual-band exact
   minimization;
-* `lockedNANDReduction`: the remaining global SAT builder/threshold theorem;
 * `satHard`: SAT is NP-hard for the witness-model reduction relation.
+
+The report-facing SAT and locked-NAND languages now reuse the concrete
+bitstring predicates and the checked all-input polynomial reduction directly,
+so no duplicate name-only language axiom or caller-supplied locked-NAND
+reduction remains.
 -/
 structure CheckerTrustModel where
   pccPackProducesPCCMinLoop : AcceptedGeneratedPackage → PCCMinLoopCertificate
   residualBandReduction : ResidualBandReductionTrust
-  lockedNANDReduction : LockedNANDReductionTrust
   satHard : SATHard
 
 /-- The accepted package gives residual-band exact minimization in P through an
@@ -75,7 +78,6 @@ theorem accepted_generated_package_implies_sat_in_p
     (T : CheckerTrustModel)
     (h : AcceptedGeneratedPackage) : PClass SAT :=
   sat_in_p_from_locked_nand_in_p
-    T.lockedNANDReduction
     (accepted_generated_package_implies_locked_nand_in_p T h)
 
 /-- Formal version of the report's bridge:
@@ -116,10 +118,10 @@ def leanBridgeSummary : LeanBridgeSummary :=
     consequentName := "PClass = NPClass"
     bridgeTheoremName := "final_report_bridge"
     dischargedByLean := [
-      "Witness-model theorem: P ⊆ NP by embedding a deterministic decider as a nondeterministic verifier",
-      "Witness-model theorem: polynomial reductions transport P membership by composing reduction and decider witnesses",
-      "Lean theorem: NP-complete language in P implies P = NP",
-      "Lean theorem: SAT-in-NP witness plus SAT-hardness gives SAT NP-completeness",
+      "Concrete finite-pipeline theorem: P ⊆ NP by embedding a deterministic decider as a bounded-certificate verifier",
+      "Concrete finite-pipeline theorem: polynomial reductions transport P membership by composing proved function and decision programs",
+      "Lean theorem: concrete NP-complete language in P implies mutual inclusion of concrete P and NP",
+      "Lean theorem: compiled concrete CNFSAT verifier plus concrete SAT-hardness gives SAT NP-completeness",
       "Lean theorem: concrete equality, constant-one, constant-zero, NAND-trace, and final-conjunction macro semantics",
       "Lean computation: exposed single-instance macro outputs are pairwise distinct, nonconstant, and nonprojection",
       "Lean theorem: two-gate prefix nodes compute conjunction and expose its negation",
@@ -128,15 +130,13 @@ def leanBridgeSummary : LeanBridgeSummary :=
       "Lean computation: prefix-node exposed outputs are distinct, nonconstant, and nonprojection",
       "Lean theorem: structured PCCMin loop certificate constructs a residual-band exact-minimization decider witness",
       "Lean theorem: residual-band exact minimization in P plus locked-NAND-to-residual-band reduction gives locked NAND threshold ∈ P",
-      "Lean theorem: locked NAND threshold in P plus SAT-to-locked-NAND reduction gives SAT ∈ P"
+      "Lean theorem: concrete locked NAND threshold in P plus the compiled all-bitstring CNFSAT-to-locked-NAND reduction gives concrete SAT ∈ P"
     ]
     externalTrustBase := [
       "Checker/reflection soundness: accepted PCCPack emits an accepted structured PCCMin loop certificate",
       "Semantic adequacy of PCCMinLoopCertificate and ZeroSlackCertificate fields for the executable PCCMin algorithm",
       "Residual-band reduction: locked NAND threshold reduces to residual-band exact minimization",
-      "Global locked NAND builder and threshold theorem beyond the checked local macro and prefix semantics",
-      "SAT NP-hardness for the witness-model reduction relation",
-      "Semantic adequacy of the witness model relative to a concrete machine model"
+      "Concrete SAT NP-hardness in the finite-pipeline reduction model"
     ] }
 
 end PNP

@@ -134,8 +134,9 @@ reviewed theorem types.
 `buildLockedNANDInstance` is a pure Lean specification. It is not a
 `PolynomialReduction`, not a `RawRefinement`, and not a finite work machine.
 This milestone proves no parser runtime, emitter runtime, output-size
-polynomial, CNFSAT-in-P theorem, NP-hardness transport, abstract
-`PNP.LockedNANDThreshold` discharge, or P = NP.
+polynomial, CNFSAT-in-P theorem, NP-hardness transport, or P = NP. M186 later
+binds the report-facing `PNP.LockedNANDThreshold` name to this concrete route;
+that compatibility step does not supply any of those missing results.
 
 The following milestones now supply both the executable parser/validator
 machine and the exact target emitter for this version-zero grammar. Their

@@ -14,7 +14,7 @@ The generated inventory is mirrored byte-for-byte at:
 
 The inventory records the pinned toolchain and root module, declaration kinds, each declaration's
 compiled axiom closure, the source-module closure, configured detailed milestone theorem types,
-excluded private compiler auxiliaries, and the four disclosed project-specific axioms. Declaration,
+excluded private compiler auxiliaries, and the three disclosed project-specific axioms. Declaration,
 theorem, assumption-free-theorem, module, and excluded-private counts are generated from the
 compiled environment and are intentionally not copied into this prose. Deterministic ordering and canonical JSON encoding
 make the two mirrors and their digest reproducible. This inventory is evidence about the compiled
@@ -24,9 +24,9 @@ environment; it does **not** establish `P = NP` or make an abstract theorem publ
 
 [`publication/FORMAL_PUBLICATION_MAP.json`](../publication/FORMAL_PUBLICATION_MAP.json) defines a
 separate, fail-closed publication gate. Its compatibility declaration is
-`PNP.Main.p_eq_np`, and its required concrete target is `PNP.Main.ConcretePEqualsNP`. The existing
-abstract proposition `PNP.PEqualsNP` uses witness-level code handles and is explicitly ineligible
-for publication.
+`PNP.Main.p_eq_np`, and its required concrete target is `PNP.Main.ConcretePEqualsNP`. The
+report-facing `PNP.PEqualsNP` name now aliases the same concrete finite-pipeline proposition, but
+that compatibility alias is not the eligible root theorem and does not activate publication.
 
 The gate requires all of its concrete-model, declaration-kind, exact-type, compiled-kernel
 fingerprint, axiom-closure, source-closure, and standard-axiom-allowlist checks to pass. In this
@@ -38,8 +38,8 @@ fingerprints remain unset. The compatibility/root theorem `PNP.Main.p_eq_np` is 
 pipeline development now proves all-input compilation, target termination from a supplied
 polynomial-time machine, ordinary output equality, external-input-size polynomial bounds, and
 recursive function/decision-program `RawRefinement`. Those machine-link results still do not
-provide a deterministic polynomial-time CNF-SAT decider, concrete CNF-SAT NP-hardness, the
-locked-NAND threshold, the residual-minimization chain, or the absent compatibility theorem.
+provide a deterministic polynomial-time CNF-SAT decider, concrete CNF-SAT NP-hardness, a
+locked-NAND decider, the residual-minimization chain, or the absent compatibility theorem.
 Consequently the gate is false, and every theorem-emission field derived from it remains false or
 `null`.
 
@@ -84,21 +84,22 @@ reduction. The composition is packaged as
 `PolynomialReduction EncodedNANDSAT EncodedLockedNANDThreshold`. A separate fixed
 all-input compiler computes the exact encoded CNF-to-NAND translation in polynomial time,
 retains raw refinement, packages `PolynomialReduction CNFSAT EncodedNANDSAT`, and exposes
-the composed locked-NAND reduction. The report-level `PNP.LockedNANDThreshold` link,
-CNFSAT-in-P theorem, remaining NP-hardness/NP-completeness transport, and `P = NP` root
-remain absent.
+the composed locked-NAND reduction. M186 makes the report-level `PNP.SAT` and
+`PNP.LockedNANDThreshold` names exact concrete definitions and reuses that compiled composed
+reduction without caller-supplied trust. A locked-NAND decider, CNFSAT-in-P theorem, remaining
+NP-hardness/NP-completeness transport, and `P = NP` root remain absent.
 
-The current four project-specific axioms remain visible as an independent inventory:
+The current three project-specific axioms remain visible as an independent inventory:
 
 ```text
 PNP.CheckPCCPackexp
 PNP.GeneratePCCPack
-PNP.LockedNANDThreshold
 PNP.ResidualBandExactMinimization
 ```
 
-They are not on the publication gate's permitted Lean-standard axiom allowlist. `PNP.SAT` is now a
-plain legacy witness-model label, not an axiom and not an alias for `PNP.Concrete.CNFSAT`.
+They are not on the publication gate's permitted Lean-standard axiom allowlist. `PNP.SAT` is now
+definitionally the concrete `PNP.Concrete.CNFSAT` bitstring language; this identity supplies no
+deterministic decider or NP-hardness theorem by itself.
 
 ## Reviewed intermediate milestone bindings
 

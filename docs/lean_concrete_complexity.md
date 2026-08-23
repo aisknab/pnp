@@ -150,13 +150,14 @@ does not prove the target. There is no `PNP.Main.p_eq_np` compatibility/root the
 
 The expected target type/value, compatibility-root type, axiom-closure, and source-closure
 activation fingerprints remain unset. The concrete target is visible to the compiled inventory,
-but the compatibility root is absent and the fail-closed publication gate remains false. The older
-string-handle proposition `PNP.PEqualsNP` remains publication-ineligible.
+but the compatibility root is absent and the fail-closed publication gate remains false. The
+report-facing `PNP.PEqualsNP` name now aliases the concrete proposition, but it is not the eligible
+root theorem and does not activate publication.
 
 The compiled-inventory generator supplies the exact declaration, theorem, module, private-
 auxiliary, and reviewed-candidate counts after each source-closure regeneration; this prose does
-not duplicate those moving totals. The current Lean source closure contains four project-specific
-axioms. Six blockers remain, beginning with `Formal.ConcreteSAT`.
+not duplicate those moving totals. The current Lean source closure contains three project-specific
+axioms. Five global blockers remain, beginning with `Formal.ConcreteSAT`.
 
 ## Audit
 

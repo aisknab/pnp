@@ -307,7 +307,7 @@ test('status retains the semantic boundary and records its executable parser suc
     'leanLockedNANDBuilderFormalized',
     'leanLockedNANDThresholdFormalized',
   ]) assert.equal(status[field], true, field);
-  assert.equal(status.projectSpecificAxiomInventory.length, 4);
+  assert.equal(status.projectSpecificAxiomInventory.length, 3);
   assert.equal(status.remainingBlockers.length, 5);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);

@@ -9,6 +9,8 @@ const VERSION = 0;
 const BASELINE_COORDINATE =
   'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184';
 const BASELINE_COVERAGE = Object.freeze({ earnedRows: 160, totalRows: 162 });
+const BASELINE_SCORE = 30;
+const CURRENT_SCORE = 32;
 const FILES = Object.freeze({
   ledger: 'status/PROOF_PROGRESS.json',
   status: 'status/FORMAL_RECONSTRUCTION_STATUS.json',
@@ -33,7 +35,7 @@ const EXPECTED_TRACKS = Object.freeze([
     id: 'concrete-reductions',
     title: 'Concrete reductions and locked-NAND route',
     pointsAvailable: 20,
-    pointsEarned: 14,
+    pointsEarned: 15,
     checkpoints: [
       ['reductions-cook-levin-semantics', 3, 'earned'],
       ['reductions-cnf-to-nand', 3, 'earned'],
@@ -42,7 +44,7 @@ const EXPECTED_TRACKS = Object.freeze([
       ['reductions-report-locked-nand-linkage', 2, 'earned'],
       ['reductions-complete-cook-levin-builder', 3, 'open'],
       ['reductions-concrete-np-hardness', 2, 'open'],
-      ['reductions-final-target-compatibility', 1, 'open'],
+      ['reductions-final-target-compatibility', 1, 'earned'],
     ],
   },
   {
@@ -79,11 +81,11 @@ const EXPECTED_TRACKS = Object.freeze([
     id: 'root-and-axioms',
     title: 'Root theorem and project-axiom elimination',
     pointsAvailable: 10,
-    pointsEarned: 0,
+    pointsEarned: 1,
     checkpoints: [
       ['axiom-remove-generate-pccpack', 1, 'open'],
       ['axiom-remove-check-pccpackexp', 1, 'open'],
-      ['axiom-remove-locked-nand-threshold', 1, 'open'],
+      ['axiom-remove-locked-nand-threshold', 1, 'earned'],
       ['axiom-remove-residual-band-minimum', 1, 'open'],
       ['root-deterministic-cnfsat-in-p', 2, 'open'],
       ['root-complexity-transport', 1, 'open'],
@@ -104,7 +106,6 @@ const EXPECTED_GATES = Object.freeze([
 const EXPECTED_PROJECT_AXIOMS = Object.freeze([
   'PNP.CheckPCCPackexp',
   'PNP.GeneratePCCPack',
-  'PNP.LockedNANDThreshold',
   'PNP.ResidualBandExactMinimization',
 ]);
 
@@ -212,7 +213,7 @@ export function validateProofProgress0(ledger, status, inventory) {
     pointsEarned += trackEarned;
   }
   requireValue(pointsAvailable, 100, 'ProofCompletion.TrackMaximumTotal');
-  requireValue(pointsEarned, 30, 'ProofCompletion.BaselineEarned');
+  requireValue(pointsEarned, CURRENT_SCORE, 'ProofCompletion.CurrentEarned');
   requireValue(ledger.proofCompletion.pointsEarned, pointsEarned, 'ProofCompletion.StoredEarned');
   requireValue(ledger.proofCompletion.percent, pointsEarned, 'ProofCompletion.StoredPercent');
   if (!(ledger.proofCompletion.uncertaintyLowPercent <= ledger.proofCompletion.percent
@@ -282,17 +283,20 @@ export function validateProofProgress0(ledger, status, inventory) {
   requireValue(baseline.kind, 'baseline', 'History.BaselineKind');
   requireValue(baseline.asOfCoordinate, BASELINE_COORDINATE, 'History.BaselineCoordinate');
   requireJson(baseline.formalArtefactCoverage, BASELINE_COVERAGE, 'History.BaselineCoverage');
-  requireValue(baseline.riskWeightedProofCompletionPercent, pointsEarned, 'History.BaselineScore');
+  requireValue(baseline.riskWeightedProofCompletionPercent, BASELINE_SCORE, 'History.BaselineScore');
   requireValue(baseline.uncertaintyLowPercent, 20, 'History.BaselineUncertaintyLow');
   requireValue(baseline.uncertaintyHighPercent, 40, 'History.BaselineUncertaintyHigh');
   requireValue(baseline.globalGatesClosed, 0, 'History.BaselineGatesClosed');
   requireValue(baseline.globalGatesAvailable, EXPECTED_GATES.length, 'History.BaselineGatesAvailable');
   requireString(baseline.rationale, 'History.BaselineRationale');
 
-  const currentReview = [...ledger.history].reverse().find((entry) =>
+  const currentReviewIndex = ledger.history.findLastIndex((entry) =>
     entry?.asOfCoordinate === ledger.asOfCoordinate);
+  const currentReview = ledger.history[currentReviewIndex];
   requirePlain(currentReview, 'History.CurrentShape',
     'progress history must include the current coordinate');
+  requireValue(currentReviewIndex, ledger.history.length - 1,
+    'History.CurrentMustBeLatest');
   requireJson(currentReview.formalArtefactCoverage, { earnedRows, totalRows },
     'History.CurrentCoverage');
   requireValue(currentReview.riskWeightedProofCompletionPercent, pointsEarned,
@@ -308,15 +312,26 @@ export function validateProofProgress0(ledger, status, inventory) {
     'History.CurrentGatesAvailable');
   requireString(currentReview.rationale, 'History.CurrentRationale');
   if (currentReview !== baseline) {
+    const previousReview = ledger.history[currentReviewIndex - 1];
+    requirePlain(previousReview, 'History.PreviousShape',
+      'current milestone review must follow a scored history entry');
+    const previousScore = previousReview.riskWeightedProofCompletionPercent;
+    requireValue(Number.isInteger(previousScore), true,
+      'History.PreviousScoreShape');
     requireValue(currentReview.kind, 'milestone-review', 'History.CurrentKind');
-    requireValue(currentReview.scoreChanged, pointsEarned !==
-      baseline.riskWeightedProofCompletionPercent, 'History.CurrentScoreChanged');
+    requireValue(currentReview.scoreChanged, pointsEarned !== previousScore,
+      'History.CurrentScoreChanged');
     requireArray(currentReview.changedCheckpointIds,
       'History.CurrentCheckpointChanges',
       'current milestone review must list changed checkpoint IDs');
     if (currentReview.scoreChanged === false) {
       requireValue(currentReview.changedCheckpointIds.length, 0,
         'History.CurrentUnexpectedCheckpointChange');
+      requireJson(currentReview.changeRecords ?? [], [],
+        'History.CurrentUnexpectedChangeRecords');
+    } else {
+      validateChangeRecords0(currentReview, ledger, status, inventory,
+        previousScore, pointsEarned);
     }
   }
 
@@ -373,6 +388,89 @@ export async function CheckProofProgress0(options = {}) {
       finalTheoremReady: false,
     };
   }
+}
+
+function validateChangeRecords0(review, ledger, status, inventory,
+  previousScore, currentScore) {
+  requireArray(review.changeRecords, 'History.ChangeRecordsShape',
+    'score-changing review must include one record per changed checkpoint');
+  requireValue(review.changeRecords.length, review.changedCheckpointIds.length,
+    'History.ChangeRecordCount');
+  const seenCheckpointIds = new Set();
+  let runningTotal = previousScore;
+  for (let index = 0; index < review.changeRecords.length; index += 1) {
+    const record = review.changeRecords[index];
+    const checkpointId = review.changedCheckpointIds[index];
+    requirePlain(record, 'History.ChangeRecordShape',
+      'score change record must be an object', { index, checkpointId });
+    requireJson(Object.keys(record).sort(),
+      [...REQUIRED_CHANGE_RECORD_FIELDS].sort(),
+      'History.ChangeRecordFields', { index, checkpointId });
+    requireValue(record.checkpointId, checkpointId,
+      'History.ChangeRecordCheckpoint', { index });
+    if (seenCheckpointIds.has(checkpointId)) {
+      fail('History.ChangeRecordDuplicateCheckpoint',
+        'score-changing review must not repeat a checkpoint', { checkpointId });
+    }
+    seenCheckpointIds.add(checkpointId);
+    const checkpoint = ledger.tracks.flatMap((track) => track.checkpoints)
+      .find((candidate) => candidate.id === checkpointId);
+    requirePlain(checkpoint, 'History.ChangeRecordKnownCheckpoint',
+      'score change record names an unknown checkpoint', { checkpointId });
+    if (!['open', 'earned'].includes(record.oldStatus)
+        || !['open', 'earned'].includes(record.newStatus)
+        || record.oldStatus === record.newStatus) {
+      fail('History.ChangeRecordTransition',
+        'score change must transition one checkpoint between open and earned',
+        { checkpointId, oldStatus: record.oldStatus, newStatus: record.newStatus });
+    }
+    requireValue(record.newStatus, checkpoint.status,
+      'History.ChangeRecordNewStatus', { checkpointId });
+    requireArray(record.compiledEvidence, 'History.ChangeRecordEvidenceShape',
+      'score change record must include compiled evidence', { checkpointId });
+    if (record.compiledEvidence.length === 0) {
+      fail('History.ChangeRecordEvidenceMissing',
+        'score change record must include compiled evidence', { checkpointId });
+    }
+    for (const evidence of record.compiledEvidence) {
+      validateEvidence(evidence, status, inventory, checkpointId);
+    }
+    if (record.sourceCoordinateOrCommit !== ledger.asOfCoordinate
+        && !/^[0-9a-f]{40}$/u.test(record.sourceCoordinateOrCommit)) {
+      fail('History.ChangeRecordCoordinate',
+        'score change evidence must name the current status coordinate or a full commit',
+        { checkpointId });
+    }
+    requireString(record.loadBearingRationale,
+      'History.ChangeRecordRationale', { checkpointId });
+    requireString(record.remainingTrackLimitations,
+      'History.ChangeRecordLimitations', { checkpointId });
+    requirePlain(record.oldAndNewTotal,
+      'History.ChangeRecordTotalShape',
+      'score change record total must be an object', { checkpointId });
+    const delta = record.newStatus === 'earned'
+      ? checkpoint.points
+      : -checkpoint.points;
+    requireJson(record.oldAndNewTotal,
+      { old: runningTotal, new: runningTotal + delta },
+      'History.ChangeRecordTotal', { checkpointId });
+    runningTotal += delta;
+    requirePlain(record.uncertaintyRangeDecision,
+      'History.ChangeRecordUncertaintyShape',
+      'uncertainty decision must be an object', { checkpointId });
+    requireValue(record.uncertaintyRangeDecision.lowPercent,
+      ledger.proofCompletion.uncertaintyLowPercent,
+      'History.ChangeRecordUncertaintyLow', { checkpointId });
+    requireValue(record.uncertaintyRangeDecision.highPercent,
+      ledger.proofCompletion.uncertaintyHighPercent,
+      'History.ChangeRecordUncertaintyHigh', { checkpointId });
+    requireValue(typeof record.uncertaintyRangeDecision.changed, 'boolean',
+      'History.ChangeRecordUncertaintyChangedShape', { checkpointId });
+    requireString(record.uncertaintyRangeDecision.rationale,
+      'History.ChangeRecordUncertaintyRationale', { checkpointId });
+  }
+  requireValue(runningTotal, currentScore,
+    'History.ChangeRecordFinalTotal');
 }
 
 function validateEvidence(evidence, status, inventory, checkpointId) {

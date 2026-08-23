@@ -91,7 +91,7 @@ function commonFailures0(source) {
   if (/\b(?:hostLookup|scheduleLookup|proofCertificate|callerCertificate|trustFlag)\b/u.test(stripped)) {
     failures.push('caller-or-host-certificate');
   }
-  if (/\bPNP\.(?:CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)\b/u.test(stripped)) {
+  if (/\bPNP\.(?:CheckPCCPackexp|GeneratePCCPack|ResidualBandExactMinimization)\b/u.test(stripped)) {
     failures.push('project-axiom');
   }
   if (/(?:def|theorem)\s+(?:p_eq_np|polynomialGainGenerator|completeGainRoute|pccminPolynomialExact|zeroSlackComplete)\b/u.test(stripped)) {
@@ -237,7 +237,7 @@ test('status earns only the semantic stopping specification', async () => {
     'leanResidualBandMinimizerFormalized',
   ]) assert.equal(status[field], false, field);
   assert.equal(status.remainingBlockers.length, 5);
-  assert.equal(status.projectSpecificAxiomInventory.length, 4);
+  assert.equal(status.projectSpecificAxiomInventory.length, 3);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);
   const milestone = status.formalPublicationMilestones.find(
@@ -299,7 +299,7 @@ test('hostile mutations revoke global quantification, strictness, closure, and s
     .includes('forbidden-shortcut'), true);
   assert.equal(validateStoppingSource0(`${source}\ndef hostLookup := true\n`)
     .includes('caller-or-host-certificate'), true);
-  assert.equal(validateStoppingSource0(`${source}\naxiom useProject : PNP.LockedNANDThreshold\n`)
+  assert.equal(validateStoppingSource0(`${source}\naxiom useProject : PNP.ResidualBandExactMinimization\n`)
     .includes('project-axiom'), true);
   assert.equal(validateStoppingSource0(`${source}\ntheorem p_eq_np : True := True.intro\n`)
     .includes('overclaim'), true);

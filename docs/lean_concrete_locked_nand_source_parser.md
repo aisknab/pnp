@@ -211,6 +211,7 @@ candidate emitter or, by itself, the composed source-to-target machine. Its
 leaf-machine `RawRefinement` validates source bytes only. The downstream
 target-emitter milestone now supplies exact target bytes, its own output-size
 bound, and recursive parser/emitter refinement. Their successor packages the
-language theorem and exact function as `PolynomialReduction`. These concrete
-modules do not discharge the abstract `PNP.LockedNANDThreshold` language, put
-CNF-SAT in P, establish CNF-SAT NP-hardness, or prove P = NP.
+language theorem and exact function as `PolynomialReduction`. M186 subsequently
+binds the report-facing endpoint to this exact concrete language and consumes
+the compiled reduction. The parser still does not put CNF-SAT in P, establish
+CNF-SAT NP-hardness, or prove P = NP.

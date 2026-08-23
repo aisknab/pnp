@@ -1,26 +1,29 @@
 /-
 Copyright (c) 2026 PNP Labs.
 
-SAT layer for the Lean bridge.
+SAT layer for the report-facing Lean bridge.
 
-This pass keeps the concrete Boolean-formula syntax abstract, but it separates
-SAT membership in NP from SAT hardness.  SAT-in-NP is represented by an
-explicit verifier witness in the current witness model; NP-hardness remains the
-standard reduction theorem to be discharged by a later concrete formalization.
+The active SAT endpoint is the exact canonical-CNF bitstring predicate from the
+concrete finite-pipeline model.  Its NP membership reuses the compiled verifier,
+certificate bound, runtime bound, and all-input correctness theorem already
+checked there.  Concrete NP-hardness remains the standard theorem to be
+discharged by a later formalization.
 -/
 
 import PNP.Complexity
+import PNP.Concrete.CNFWorkUniversalCorrectness
 
 namespace PNP
 
-/-- A SAT verifier witness in the current witness model.
+/-- The report-facing SAT language is definitionally the concrete canonical-CNF
+    bitstring language. -/
+def SAT : Language := Concrete.CNFSAT
 
-The witness handle is abstract at this layer.  Later passes should replace this
-by concrete CNF syntax, assignment certificates, and a polynomial verifier. -/
+/-- The exact compiled concrete SAT verifier, not a string handle. -/
 def satVerifierWitness : NondetPolyVerifier SAT :=
-  { code := "sat-assignment-verifier" }
+  Concrete.FinalUniversalDesign.cnfConcreteVerifier
 
-/-- SAT is in NP in the witness model. -/
+/-- SAT is in the concrete bounded-certificate NP model. -/
 theorem sat_in_np_witness_model : NPClass SAT :=
   ⟨satVerifierWitness⟩
 
@@ -34,5 +37,12 @@ def sat_np_complete_from_hardness (hHard : SATHard) : NPComplete SAT :=
     hard := by
       intro A hA
       exact hHard hA }
+
+/-- Concrete SAT NP-completeness plus a concrete SAT decider gives mutual
+    inclusion of the concrete P and NP classes. -/
+theorem sat_np_complete_and_sat_in_p_implies_p_eq_np
+    (hSATComplete : NPComplete SAT)
+    (hSATInP : PClass SAT) : PEqualsNP :=
+  np_complete_in_p_implies_p_eq_np hSATComplete hSATInP
 
 end PNP

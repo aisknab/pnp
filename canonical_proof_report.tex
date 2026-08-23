@@ -46,7 +46,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-185}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-186}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -82,22 +82,24 @@
   polynomial reductions. The report-facing theorem now publishes their all-bitstring concrete
   locked-NAND reduction. It does not decide CNF-SAT, put the locked target in P, or discharge
   residual-band/ZeroSlack/PCCMin. The reviewed activation fingerprints
-  are unset, no root theorem exists, and the abstract string-handle bridge is never an activation source.
+  are unset and no root theorem exists. The report-facing bridge now uses the
+  concrete finite-pipeline interfaces and exact locked-NAND target, but that
+  compatibility cannot activate publication without the missing mathematics.
   \vspace{0.3cm}
   \end{minipage}
 }
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 30056 \\
-Theorem-kind declarations & 15507 \\
-Assumption-free theorem-kind declarations & 7617 \\
-Project-specific axioms & 4 \\
+Compiled declarations & 29988 \\
+Theorem-kind declarations & 15497 \\
+Assumption-free theorem-kind declarations & 7613 \\
+Project-specific axioms & 3 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{d26de4965373fa55ee89c14e0884fb271efa3f6305b13fca429b316f5540ab78}\par}
+{\small Inventory SHA-256: \code{a5a8d78c4fd7bf90b2fb5b82fdc77087a6701981f8c06722aef8d2c696ae4c07}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -522,7 +524,11 @@ using only \code{propext}, and twelve using only \code{propext} and
 and strict locked-NAND reductions into an exact all-bitstring
 \code{ReducesTo CNFSAT EncodedLockedNANDThreshold} result. Its axiom
 transcript contains only \code{propext} and \code{Quot.sound}, not the legacy
-abstract string-handle assumption. A deterministic target decider, concrete
+abstract string-handle assumption. The M186 compatibility boundary now makes
+the report-facing SAT and locked-NAND languages definitionally equal to these
+concrete endpoints, reuses the compiled CNF verifier and reduction, and removes
+the duplicate locked-NAND axiom and caller trust field. Its named endpoint also
+uses only \code{propext} and \code{Quot.sound}. A deterministic target decider, concrete
 CNFSAT NP-hardness transport, residual-band and ZeroSlack/PCCMin completion,
 and \(P=NP\) remain unproved.
 
@@ -1255,7 +1261,6 @@ currently disclosed project axioms are:
 \setlength{\topsep}{3pt}
 \item \code{PNP.CheckPCCPackexp}
 \item \code{PNP.GeneratePCCPack}
-\item \code{PNP.LockedNANDThreshold}
 \item \code{PNP.ResidualBandExactMinimization}
 \end{itemize}
 \end{samepage}
@@ -1275,7 +1280,7 @@ SAT completeness, SAT in P, and the root theorem remain absent.
 \section{Formal milestone ledger}
 
 Each earned row requires exact compiled names and theorem kinds, empty axiom closures, per-name
-domain-separated kernel-type SHA-256 matches for 3114 detailed candidates, and the pinned whole-Lean
+domain-separated kernel-type SHA-256 matches for 3120 detailed candidates, and the pinned whole-Lean
 source closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
 {\small
@@ -1446,17 +1451,18 @@ Proof-bearing Selector/HB ZeroSlack sidecar & formalized-residual-terminal-selec
 Proof-bearing Packet/budget no-lower ZeroSlack sidecar & formalized-residual-terminal-packet-budget-no-lower-zeroslack-sidecar & For arbitrary finite supplied same-candidate Packet and terminal-budget data, the report-facing ZeroSlack boundary now consumes one checked proof-bearing Packet/budget no-lower sidecar. Its exact executable composition equation proves every governed budget-feasible support semantically minimum, excludes every such strict equivalent gain, and excludes a positive Packet conclusion for the supplied family. & The caps, candidate-derived model, grouped BN6 family, typed payloads, finite ranks, realizer claims, activity environment, dependency rows, and rank maps remain supplied inputs. This finite two-branch sidecar does not complete no-lower ledger coverage for the manuscript, derive its inputs from terminal data, establish unconditional ZeroSlack, prove PCCMin or polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP. \\
 Proof-bearing BCEL/Packet no-lower ZeroSlack sidecar & formalized-residual-terminal-bcel-packet-no-lower-zeroslack-sidecar & For every arbitrary finite supplied M180 Packet/budget no-lower certificate whose grouped carrier passes the exact at-least-two-anchor check, the report-facing ZeroSlack boundary now consumes one checked proof-bearing BCEL/Packet contradiction sidecar. BCEL constant activation would construct a positive BN6 Packet, contradicting the accepted same-family no-lower exclusion. & The grouped BN6 family and all terminal, budget, Packet, realizer, dependency, and rank inputs inherited from M180 remain supplied. This milestone does not derive the family or BCEL constant activation from positive residual slack, construct BCELReady from a terminal candidate, complete the manuscript no-lower ledger, establish unconditional ZeroSlack, prove PCCMin or polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP. \\
 Same-family Selector/HB, Packet, and BCEL ZeroSlack coherence & formalized-residual-terminal-zeroslack-packet-selector-hb-coherence & For every arbitrary finite accepted M180 certificate and its dependent M181 boundary, the report-facing ZeroSlack layer now derives same-family Selector/HB, Packet, and BCEL evidence from the exact grouped family, computed realizer table, and dependency table. Definitional identities prevent a detached Selector/HB certificate from being paired with the checked Packet and BCEL exclusions. & The grouped family and all terminal, budget, Packet, realizer, dependency, rank, and BCEL data remain supplied inputs. This milestone does not derive those inputs or BCEL constant activation from positive residual slack, establish unconditional ZeroSlack, complete the manuscript no-lower ledger, prove PCCMin or polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP. \\
-Global locked-NAND construction and threshold & formalized-concrete-locked-nand-threshold & A uniform encoded polynomial-time SAT instance builder and the report-level locked-NAND threshold theorem linked to that builder. & This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder and report-facing linkage in the finite charged-pipeline model. It does not put the concrete locked threshold language in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP. \\
+Global locked-NAND construction and threshold & formalized-concrete-locked-nand-threshold & A uniform encoded polynomial-time SAT instance builder and the report-level locked-NAND threshold theorem linked to that builder. & This closes the uniform all-bitstring CNFSAT-to-concrete-locked-threshold builder in the finite charged-pipeline model. The downstream M186 compatibility milestone now activates that exact reduction in the report-facing bridge. Neither milestone puts the concrete locked threshold language in P, discharges residual-band minimization, ZeroSlack or PCCMin, proves concrete CNFSAT NP-hardness, or proves P = NP. \\
+Concrete report-facing locked-NAND compatibility & formalized-concrete-legacy-locked-nand-compatibility & The report-facing language, decider, verifier, reduction, P/NP class, and P-equals-NP interfaces are exact compatibility names for the concrete finite-pipeline model. SAT and LockedNANDThreshold are definitionally the concrete CNFSAT and EncodedLockedNANDThreshold languages, and the active bridge reuses the checked all-bitstring reduction without a caller-supplied trust field. & This removes the duplicate locked-NAND project axiom and caller-supplied reduction edge, but it does not put the concrete locked target in P, construct the residual-band reduction, prove PCCMin or ZeroSlack soundness, prove concrete CNFSAT NP-hardness, create the eligible root theorem, open any global gate, or prove P = NP. \\
 Global ZeroSlack, PCCMin, and polynomial runtime & not-formalized & Complete residual routing, global ZeroSlack contradiction, exact minimization, and polynomial bounds. & The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; the exhaustive Packet scan verifies strict gains or exact no-gain over every canonical selector in one supplied explicit grouped family; an explicit global gain-coverage certificate conditionally upgrades that silence to a proof-bearing ZeroSlack result; the generic finite R-ChargeSurplus kernel derives strict gain from exact ledgers, an unmatched positive support charge, exact gate accounting, and separately proved semantics; the checked unit-charge blueprint realizer derives canonical ledgers and gains for every valid blueprint in one supplied family; the checked typed-realizer contract rejects every faithful-table row except a genuine blueprint gain or an explicitly active bounded-rank HN, budget, or strictly lower faithful seed bot; the checked exact-rank HB graph contract validates every edge in a supplied finite HN/BUD dependency graph; the checked total-table HB contract gives every finite HN/BUD node one row, materializes every listed dependency as an edge, and derives well-founded induction and cycle exclusion for that supplied table; the checked HB active-dependency closure combines an exhaustive active-to-active row condition with strict rank descent to prove every supplied HN/BUD activity bit false and remove HN/budget typed-bot branches; and the executable selector-silence induction exhaustively checks that every canonical realizer claim is a typed bottom, then combines supplied-table HB inactivity with strong finite-rank induction to prove every canonical handle in the accepted table nonfaithful without a global semantic no-gain premise. The Packet selector-faithfulness routing milestone checks ten canonical source-payload fields and derives a contradiction for every positive Packet under explicit route-clear inputs; the canonical table constructor now computes the HB faithfulness function from those payloads and removes the separate binding premise; and total first-route classification turns every canonical payload rejection into one earliest typed route, which canonical HB selector silence forces for a positive Packet without route-clear or binding premises. The exact first-route semantics milestone additionally identifies every returned route with its unique earliest failed supplied payload field. The descent-reflection milestone computes the final descent field from the exact ten-coordinate RankWF relation and proves a forced final route is genuinely nondecreasing. The rank-tag-reflection milestone then copies the table-owned handle rank into the payload and excludes the duplicate rank route. The exact-route-reflection milestone marks the already proved internal handle-to-cell-to-positive-payload source route clear by construction and excludes the duplicate exact-route result as well; this internal route is not an external exact minimum. The charge-route-reflection milestone then derives the internal charge check from the canonical source atom with strictly positive mass and excludes the charge result; that positive mass is not the full external charge-surplus or replacement semantics. The colour-route-reflection milestone then derives internal grouped-footprint eligibility from each canonical handle and excludes colour; this is not external manuscript colour equivalence. The typed-frontier-route-reflection milestone replaces the caller frontier bit with executable equality of explicit typed source and selector signatures, so a frontier route carries exact inequality. The BN5-bound frontier-and-obligation milestone then binds both checks to exact fields of explicit typed terminal BN5 coordinates: frontier and obligation routes carry their corresponding inequalities, with frontier equality preceding an obligation failure. The BN4 activation-exact milestone computes activation from the coordinates' nested activation atoms. The typed-direction milestone computes direction from equality of explicit source and selector direction values. The typed-budget milestone computes the last caller-supplied Packet Boolean from equality of explicit source and selector budget values. Those coordinates, direction values, and budget values are not constructed from terminal data, and local budget equality is not BudgetResolve or HB budget semantics. The checked Packet budget/HB activity-binding milestone now exhaustively maps each typed budget mismatch to budget-node activity at the table-owned rank and, with the supplied checked well-founded HB closure, proves typed budget equality and excludes the local budget route. The binding, rank map, activity environment, dependency table, and closure premise remain explicit; this is not BudgetResolve, a terminal-data construction, or semantic completeness. The checked Packet semantic/HN activity-binding milestone now maps any failure of simultaneous frontier, obligation, activation, and direction agreement to the HN node at the table-owned rank. With the same supplied checked HB closure and the separately checked budget/HB binding, it excludes every semantic first route and leaves exact residual nondecrease. That binding and all typed semantic and HB data remain explicit; it does not construct HN blocker semantics, semantic dependency completeness, a decreasing transition, or a no-lower contradiction. The checked Packet descent no-lower milestone now exhaustively connects that forced route to one local no-lower row and proves its checker rejects; it does not construct the complete ledger or terminal inputs. The finite rank map remains explicit. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, replacement blueprints, occurrence pairing, rank assignment, payload values, exhaustive realizer claims, or blocker tables from terminal data; connect matching back to a contradiction; derive blocker semantics, semantic dependency completeness, or the checked local active-dependency premise from terminal data; prove the reported routes' external semantics or map all residual routes into a decreasing complete global outcome system; or provide full external selector compatibility, an independently constructed realizer, unconditional global silence, and polynomial-runtime completeness. Global unconditional ZeroSlack and polynomial PCCMin therefore remain unformalized. \\
-Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-machine-linked complexity classes, concrete SAT completeness and a SAT decider, plus the publication root theorem. & The concrete target definition remains inactive: CNF-SAT now has a raw-machine verifier, NP-membership proof, and an all-input finite-machine polynomial reduction through NAND to the concrete locked target, but a deterministic polynomial-time CNF-SAT decider, the concrete-to-abstract threshold link, SAT NP-hardness and CNFSAT NP-completeness transport, and PNP.Main.p\_eq\_np remain absent; the legacy string-handle bridge is ineligible. \\
+Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-machine-linked complexity classes, concrete SAT completeness and a SAT decider, plus the publication root theorem. & The concrete target definition remains inactive: CNF-SAT has a raw-machine verifier, NP-membership proof, an all-input finite-machine polynomial reduction through NAND to the concrete locked target, and an exact report-facing compatibility link, but a deterministic polynomial-time CNF-SAT decider, SAT NP-hardness and CNFSAT NP-completeness transport, and PNP.Main.p\_eq\_np remain absent. \\
 \bottomrule
 \end{longtable}
 }
 
 \section{Compiled inventory summary}
 
-The inventory contains 30056 exported \code{PNP.*} kernel declarations from
-302 modules. It excludes 15141 private compiler auxiliaries.
+The inventory contains 29988 exported \code{PNP.*} kernel declarations from
+303 modules. It excludes 15141 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -1466,8 +1472,8 @@ Counts describe the compiled environment; they do not measure mathematical compl
 Module & Declarations & Theorems \\
 \midrule
 \endhead
-PNP.\allowbreak{}Bridge & 93 & 22 \\
-PNP.\allowbreak{}Complexity & 93 & 20 \\
+PNP.\allowbreak{}Bridge & 92 & 21 \\
+PNP.\allowbreak{}Complexity & 25 & 6 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Bit\allowbreak{}String & 123 & 60 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CNF & 247 & 60 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CNFSource\allowbreak{}Parser\allowbreak{}Compiled & 15 & 11 \\
@@ -1651,8 +1657,9 @@ PNP.\allowbreak{}Concrete.\allowbreak{}Work\allowbreak{}Machine\allowbreak{}Chai
 PNP.\allowbreak{}Concrete.\allowbreak{}Work\allowbreak{}Machine\allowbreak{}Program\allowbreak{}Graph & 225 & 118 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Work\allowbreak{}Machine\allowbreak{}Program\allowbreak{}Path & 23 & 8 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Work\allowbreak{}Machine\allowbreak{}Program\allowbreak{}Path\allowbreak{}Blank\allowbreak{}Equivalence & 1 & 1 \\
+PNP.\allowbreak{}Concrete\allowbreak{}Legacy\allowbreak{}Locked\allowbreak{}NANDCompatibility & 4 & 4 \\
 PNP.\allowbreak{}Direct\allowbreak{}Wire\allowbreak{}Baseline & 48 & 25 \\
-PNP.\allowbreak{}Locked\allowbreak{}NAND & 11 & 4 \\
+PNP.\allowbreak{}Locked\allowbreak{}NAND & 5 & 4 \\
 PNP.\allowbreak{}Locked\allowbreak{}NANDBaseline & 57 & 22 \\
 PNP.\allowbreak{}Locked\allowbreak{}NANDCarrier\allowbreak{}Trace & 324 & 198 \\
 PNP.\allowbreak{}Locked\allowbreak{}NANDDirect & 84 & 57 \\
@@ -1671,7 +1678,7 @@ PNP.\allowbreak{}NANDMinimum & 56 & 23 \\
 PNP.\allowbreak{}NANDSemantics & 198 & 80 \\
 PNP.\allowbreak{}NANDSlack & 15 & 12 \\
 PNP.\allowbreak{}NANDTruth\allowbreak{}Table & 72 & 28 \\
-PNP.\allowbreak{}PCCMin & 44 & 8 \\
+PNP.\allowbreak{}PCCMin & 45 & 8 \\
 PNP.\allowbreak{}Residual\allowbreak{}Band & 9 & 2 \\
 PNP.\allowbreak{}Residual\allowbreak{}Gain\allowbreak{}Chain & 22 & 9 \\
 PNP.\allowbreak{}Residual\allowbreak{}Gain\allowbreak{}Stopping & 14 & 12 \\
@@ -1766,7 +1773,7 @@ PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Side\allowbreak{}Tigh
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Support\allowbreak{}Extraction & 63 & 32 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Support\allowbreak{}Square\allowbreak{}Closure & 77 & 30 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Zero\allowbreak{}Slack\allowbreak{}Packet\allowbreak{}Selector\allowbreak{}HBCoherence & 8 & 6 \\
-PNP.\allowbreak{}SAT & 4 & 1 \\
+PNP.\allowbreak{}SAT & 6 & 2 \\
 PNP.\allowbreak{}Zero\allowbreak{}Slack & 50 & 9 \\
 \bottomrule
 \end{longtable}
@@ -1829,10 +1836,10 @@ npm run report:check
 \end{verbatim}
 }
 
-The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-08-23-185}. Its exact byte digest is
-\code{d26de4965373fa55ee89c14e0884fb271efa3f6305b13fca429b316f5540ab78}. The report is regenerated from that inventory and the reviewed
+The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-08-23-186}. Its exact byte digest is
+\code{a5a8d78c4fd7bf90b2fb5b82fdc77087a6701981f8c06722aef8d2c696ae4c07}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{2a55fe2ee63fd24a78e25aa548f83778a96cc4f7f9b07af8f46ac72891070455}; the computed and pinned values match. Successful regeneration
+\code{cfd4833f16ba9ee44b924950b4bd71d29f9ff6eea0a883feab087580de574975}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 

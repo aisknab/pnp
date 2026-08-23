@@ -41,6 +41,19 @@ Ordinary programming words are omitted where the repository uses their normal me
 - **Minimal example** is intentionally small and usually conceptual. It is not proof evidence. Runnable examples are a later documentation step.
 - **Checker module/function** identifies where enforcement is implemented or where the top-level acceptance chain checks the relevant record. A function accepting a record does not by itself establish that the encoded mathematical rule is sound.
 
+### Current concrete compatibility names
+
+In the active Lean reconstruction, the unqualified report-facing names
+`PNP.Language`, `PNP.PolyTimeDecider`, `PNP.NondetPolyVerifier`,
+`PNP.PolyTimeManyOneReduction`, `PNP.PClass`, `PNP.NPClass`, and
+`PNP.PEqualsNP` are compatibility aliases for the finite charged-pipeline
+definitions under `PNP.Concrete`. `PNP.SAT` and
+`PNP.LockedNANDThreshold` are exact definitions of concrete `CNFSAT` and
+`EncodedLockedNANDThreshold`. “Compatibility” here means definitional identity
+and theorem reuse; it does not mean that the target has a deterministic
+polynomial-time decider or that the eligible root theorem exists. See
+[`lean_concrete_legacy_locked_nand_compatibility.md`](lean_concrete_legacy_locked_nand_compatibility.md).
+
 ## Core mathematical and reduction terms
 
 | Internal term | First defined in file/section | Formal definition | Closest standard concept, if any | Why a new term is needed | What would break if this definition were wrong | Minimal example | Checker module/function that enforces it | Related theorem/lemma |

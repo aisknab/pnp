@@ -8,10 +8,9 @@ The current Lean development contains a conditional theorem bridge corresponding
 CheckPCCPackexp(GeneratePCCPack()) = accept => P = NP
 ```
 
-That bridge still depends on four project-specific axioms and does **not** constitute a Lean proof of
+That bridge still depends on three project-specific axioms and does **not** constitute a Lean proof of
 `P = NP`. It is also not a complete Lean reproof of the custom JavaScript checker, the full
-residual-slack package, the complete SAT reduction, or the compiler/refinement connecting the new
-finite charged-pipeline complexity interface to the raw machine kernel. The purpose of the Lean
+residual-slack package, a deterministic SAT algorithm, or the concrete NP-hardness transport. The purpose of the Lean
 track is to replace each trust-base item with a checked theorem in visible stages.
 
 ## Build
@@ -212,11 +211,12 @@ docs/lean_locked_nand_macros.md
 docs/lean_locked_nand_prefix.md
 docs/lean_locked_nand_baseline.md
 docs/lean_locked_nand_threshold_boundary.md
+docs/lean_concrete_legacy_locked_nand_compatibility.md
 docs/lean_residual_routes.md
 docs/lean_theorem_inventory.md
 ```
 
-## Concrete machine foundation, charged complexity interface, and legacy bridge
+## Concrete machine foundation, charged complexity interface, and report-facing bridge
 
 `lean/PNP/Concrete/BitString.lean` defines canonical executable bitstring codecs and natural
 polynomial syntax. `lean/PNP/Concrete/Machine.lean` defines finite rule-list machine programs,
@@ -359,10 +359,10 @@ dedicated CNF axiom transcripts cover the codec/semantics, work-input bridge, ge
 bridge, and every public universal-correctness declaration; their closures are empty.
 
 This proves `CNFSAT ∈ NP`. It does **not** prove `CNFSAT ∈ P`, supply a deterministic
-polynomial-time SAT algorithm, establish NP-hardness or NP-completeness, connect the legacy
-string-handle `PNP.SAT` label to `PNP.Concrete.CNFSAT`, or prove `P = NP`.
+polynomial-time SAT algorithm, establish NP-hardness or NP-completeness, or prove `P = NP`.
 
-`lean/PNP/Complexity.lean` defines the witness-level objects:
+`lean/PNP/Complexity.lean` now exposes report-facing compatibility names for
+the exact concrete objects:
 
 ```text
 Language
@@ -390,10 +390,11 @@ theorem np_complete_in_p_implies_p_eq_np
     (hInP : PClass L) : PEqualsNP
 ```
 
-These legacy witness objects still use abstract code handles and are not connected to the new
-machine kernel or charged interface. They remain publication-ineligible historical bridge
-objects. The finite `PNP.Concrete.*` definitions above, rather than abstract `PNP.PEqualsNP`, are
-the current concrete target vocabulary.
+These are abbreviations of the finite `PNP.Concrete.*` definitions, not
+parallel string or name handles. `PNP.SAT` and `PNP.LockedNANDThreshold` are
+likewise exact definitions of the concrete source and target languages. The
+compatibility identity is checked in
+[`lean_concrete_legacy_locked_nand_compatibility.md`](./lean_concrete_legacy_locked_nand_compatibility.md).
 
 ## Root status
 
@@ -425,7 +426,8 @@ axiom-free definition, but the compatibility/root theorem is absent. The expecte
 type/value, root type, axiom-closure, and source-closure fingerprints are intentionally `null`;
 unset fingerprints do not match and cannot activate the gate. The recursively compiled
 charged-pipeline model is now eligible, but model eligibility cannot replace the absent SAT
-completeness, SAT-in-P, and compatibility-root theorems. The abstract `PNP.PEqualsNP` bridge remains ineligible. See
+completeness, SAT-in-P, and compatibility-root theorems. The
+`PNP.PEqualsNP` compatibility alias cannot substitute for that root theorem. See
 [`lean_theorem_inventory.md`](./lean_theorem_inventory.md) for the full contract and commands.
 
 The inventory and false gate generate the current root TeX/PDF: a concise
@@ -616,8 +618,9 @@ its `baseline` parameter an arbitrary natural number; neither is identified with
 `lockedBaselineCount`. Later global modules now supply complete baseline/full candidates,
 cross-instance `BaselineDistinct`/`MacroDistinct`, both final-output laws,
 `FinalLockSeparation`, and all six fields for one answer-independent typed candidate. An encoded
-uniform polynomial builder and connection to `PNP.LockedNANDThreshold` remain outside the
-conditional module and are still missing. See
+uniform polynomial builder and report-facing compatibility remain outside the
+conditional module; downstream milestones now supply both. A deterministic
+target decider remains missing. See
 `docs/lean_locked_nand_threshold_boundary.md` for the exact premise and hostile-review inventories.
 
 ## Locked-NAND global carrier and trace equivalence
@@ -680,8 +683,10 @@ polynomial bounds, strict parser composition, and recursive raw refinement.
 The strict parser/emitter function is now packaged as
 `PolynomialReduction EncodedNANDSAT EncodedLockedNANDThreshold`. A separate
 all-input finite compiler packages `PolynomialReduction CNFSAT EncodedNANDSAT`
-and their explicit composition. Report-level locked-NAND language linkage
-remains absent. See
+and their explicit composition. M186 now makes the report-level SAT and
+locked-NAND endpoints exact definitions of those concrete languages and
+consumes the compiled composition directly. A target decider and the
+residual-band route remain absent. See
 `docs/lean_locked_nand_global_candidates.md` and
 `docs/lean_locked_nand_global_baseline_distinct.md`, then
 `docs/lean_locked_nand_global_unsatisfiable_final_zero.md` and
@@ -842,8 +847,8 @@ with `LockedNAND.strictLockedNANDPolynomialReduction` reduces the same source
 language to strict locked-NAND threshold instances.
 
 The machine performs only syntax-directed compilation. It does not itself
-decide CNF-SAT, prove CNF-SAT is in deterministic polynomial time, discharge
-the remaining locked-NAND threshold assumption, or establish `P = NP`.
+decide CNF-SAT, prove CNF-SAT is in deterministic polynomial time, put the
+locked-NAND threshold language in P, or establish `P = NP`.
 
 ```sh
 lake env lean -DwarningAsError=true \
@@ -860,13 +865,16 @@ for the executable architecture, exact theorem boundary, and non-claims.
 
 ## Global locked-NAND layer
 
-`lean/PNP/LockedNAND.lean` keeps the full SAT builder and threshold theorem abstract:
+`lean/PNP/LockedNAND.lean` now binds the report-facing endpoint to the exact
+strict concrete language and reuses the compiled all-bitstring reduction:
 
 ```lean
-axiom LockedNANDThreshold : Language
+def LockedNANDThreshold : Language :=
+  Concrete.LockedNAND.EncodedLockedNANDThreshold
 
-structure LockedNANDReductionTrust where
-  satReducesToLockedNAND : ReducesToPoly SAT LockedNANDThreshold
+theorem sat_reduces_to_locked_nand_checked :
+    ReducesToPoly SAT LockedNANDThreshold :=
+  Main.locked_nand_threshold
 ```
 
 The local macro truth laws, supplied-list prefix exactness, typed local candidates, source-derived
@@ -881,10 +889,11 @@ equivalence. Its strict-v0 source parser now has total exact correctness,
 compiled non-timeout, exact validated-byte output, polynomial machine/function
 witnesses, and leaf raw refinement. Its target emitter now adds exact raw
 target bytes, an all-input compiled polynomial, an output-size polynomial,
-strict parser composition, and recursive raw refinement. Remaining global
-work is the report-level language linkage; the concrete strict locked-NAND
-reduction and the all-input CNF-to-NAND direct and composed reductions are now
-packaged.
+strict parser composition, and recursive raw refinement. The report-level
+language linkage and reduction edge are therefore checked rather than caller
+supplied. Remaining global work is to put that concrete target in P through
+the unconditional residual-band/ZeroSlack/PCCMin route; concrete SAT
+NP-hardness and the eligible root theorem also remain open.
 
 ## Residual-band, ZeroSlack, and PCCMin layers
 
@@ -1680,10 +1689,9 @@ accepted PCC package
 -> P = NP
 ```
 
-The source audit permits exactly these four project-specific axioms in the current root closure:
+The source audit permits exactly these three project-specific axioms in the current root closure:
 
 ```text
-PNP.LockedNANDThreshold
 PNP.ResidualBandExactMinimization
 PNP.GeneratePCCPack
 PNP.CheckPCCPackexp
@@ -1697,11 +1705,11 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 ## Discharged by Lean so far
 
 ```text
-1. P is a subset of NP in the witness model.
-2. Polynomial reductions transport P membership in the witness model.
-3. An NP-complete language in P implies P = NP.
-4. The same three closure results for the finite charged-pipeline model, with concrete program
-   construction rather than closure fields.
+1. P is a subset of NP in the finite charged-pipeline model.
+2. Polynomial reductions transport P membership in that concrete model.
+3. An NP-complete language in P implies P = NP in that concrete model.
+4. Report-facing compatibility names reuse those same concrete interfaces rather
+   than parallel closure fields or string handles.
 5. Identity and composition of polynomial reductions, including polynomial substitution and
    intermediate-output handoff cost.
 6. SAT-in-NP plus SAT hardness gives SAT NP-completeness in the legacy witness layer.
@@ -1711,7 +1719,8 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 10. Exact supplied-list prefix coverage and the true-iff-all-checks theorem.
 11. The exact 2(n-1) prefix gate count for nonempty check lists.
 12. Prefix-node exposed-output distinctness and nonconstant/nonprojection checks.
-13. Conditional composition from PCCMin through residual band, locked NAND, SAT, and the witness-model equality proposition, assuming the disclosed project axioms.
+13. Conditional composition from PCCMin through residual band, locked NAND, SAT,
+    and the concrete equality proposition, assuming the three disclosed project axioms.
 14. Typed direct-wire realizations of all six local locked-NAND gadgets, with honest output widths and constant-free internal syntax.
 15. The semantic direct-wire lower bound `outputs ≤ gates` and conditional exactness for square baseline candidates.
 16. Source-derived locked-baseline occurrence, check, prefix, and displayed-gate accounting.
@@ -1745,6 +1754,9 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
     output on every bitstring, one external polynomial bound, compiled non-timeout,
     `PolynomialTimeFunction`, literal `RawRefinement`, a direct reduction from `CNFSAT` to
     `EncodedNANDSAT`, and explicit composition to `EncodedLockedNANDThreshold`.
+28. Exact report-facing identities for concrete CNFSAT and encoded locked-NAND,
+    direct reuse of the compiled NP verifier and all-bitstring reduction, removal
+    of the duplicate locked-NAND project axiom, and a three-field checker trust boundary.
 ```
 
 ## Explicit trust base after this pass
@@ -1753,14 +1765,8 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 1. Checker/reflection soundness: accepted PCCPack emits a semantically valid structured PCCMin loop certificate.
 2. Semantic adequacy of the PCCMin and ZeroSlack certificate fields.
 3. The locked-NAND-to-residual-band reduction theorem.
-4. The report-level link from the concrete encoded locked-NAND threshold language to the abstract threshold theorem.
-5. A deterministic polynomial-time decider proving `CNFSAT ∈ P`, together with concrete SAT
+4. A deterministic polynomial-time decider proving `CNFSAT ∈ P`, together with concrete SAT
    NP-hardness/NP-completeness; the current direct verifier proves only `CNFSAT ∈ NP`.
-6. A compiler/refinement proving that every finite charged function, decision, and verifier
-   pipeline is implemented with the stated input-size costs by the selected raw machine model. The
-   exact terminal bridge still does not provide this result because its complete trace requires a
-   caller-supplied exact target execution; target termination, external-input-size bounds, and the
-   complete refinement contract remain unproved.
 ```
 
 ## Next formalization targets
@@ -1768,11 +1774,10 @@ declaration, or a `sorry`/`admit` placeholder appears in the tracked root closur
 The highest-value next targets are:
 
 ```text
-1. Connect the concrete `EncodedLockedNANDThreshold` language to the report-level abstract
-   locked-NAND threshold theorem without adding an assumption.
+1. Construct the locked-NAND-to-residual-band route and deterministic target decider without adding an assumption.
 2. Complete the raw Cook--Levin formula builder and package its concrete polynomial reduction.
-3. Replace key ZeroSlack string handles with propositions and prove the contradiction chain.
-4. Formalize or import concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
+3. Replace the remaining supplied ZeroSlack objects with terminal-derived propositions and prove the contradiction chain.
+4. Formalize concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.
 5. Formalize checker/reflection soundness for the PCC package.
 ```
