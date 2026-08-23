@@ -29,11 +29,12 @@ example :
       ¬packetBudgetNoLower.family.ConstantActivation :=
   bcel_packet_no_lower_zeroslack_sidecar_checked_complete certificate
 
-/-- The report-facing ZeroSlack record binds the BCEL boundary to its exact
-    Packet/budget no-lower certificate rather than independent string handles. -/
+/-- The report-facing ZeroSlack record now binds the later finite ready nucleus
+    to this exact Packet/budget no-lower certificate and family. -/
 example (zeroSlack : ZeroSlackCertificate) :
-    BCELContradictionCertificate zeroSlack.packetBudgetNoLower :=
-  zeroSlack.bcelContradiction
+    TerminalFiniteBCELPacketCarrierCoherenceCertificate
+      zeroSlack.packetBudgetNoLower :=
+  zeroSlack.bcelCarrierCoherence
 
 /-- The report-facing boundary exposes the checked BCEL exclusion proposition. -/
 example (zeroSlack : ZeroSlackCertificate) :

@@ -5,17 +5,17 @@ ZeroSlack and oracle certificate layer for the Lean bridge.
 
 This file replaces the opaque PCCMin string handles with structured certificate
 objects for the report's rank-ordered oracle and ZeroSlack contradiction. The
-HResolve, Budget, joint selector/HB, finite Packet/budget no-lower, and bounded
-BCEL/Packet contradiction boundaries are now checked proof-bearing
-certificates; the remaining fields are still digest or proof handles in this
-pass.
+HResolve, Budget, joint selector/HB, finite Packet/budget no-lower, and
+same-candidate finite BCEL-ready/Packet carrier-coherence boundaries are now
+checked proof-bearing certificates; the remaining fields are still digest or
+proof handles in this pass.
 -/
 
 import PNP.ResidualBand
 import PNP.ResidualTerminalHResolveZeroSlackSidecar
 import PNP.ResidualTerminalBudgetZeroSlackSidecar
 import PNP.ResidualTerminalPacketBudgetNoLowerZeroSlackSidecar
-import PNP.ResidualTerminalZeroSlackPacketSelectorHBCoherence
+import PNP.ResidualTerminalFiniteBCELPacketCarrierCoherence
 
 namespace PNP
 
@@ -30,7 +30,8 @@ structure ZeroSlackCertificate where
   hResolve : HResolveSidecarCertificate
   budget : BudgetSidecarCertificate
   packetBudgetNoLower : PacketBudgetNoLowerZeroSlackSidecarCertificate
-  bcelContradiction : BCELContradictionCertificate packetBudgetNoLower
+  bcelCarrierCoherence :
+    TerminalFiniteBCELPacketCarrierCoherenceCertificate packetBudgetNoLower
   certificateEncodingPolynomial : String
   certificatePolynomialSize : String
 
@@ -54,19 +55,21 @@ def PCCOracleCertificate.selectorHBClosure
     SelectorHBZeroSlackSidecarCertificate :=
   certificate.zeroSlack.selectorHBClosure
 
-/-- Exact bounded soundness proposition currently exposed at the report-facing
+/-- Exact finite soundness proposition currently exposed at the report-facing
     ZeroSlack boundary. It is not unconditional ZeroSlack. -/
 def zeroSlackSoundnessBoundary (z : ZeroSlackCertificate) : Prop :=
   ¬z.packetBudgetNoLower.family.ConstantActivation
 
-/-- The dependent BCEL sidecar proves the current bounded soundness boundary. -/
+/-- The coherent finite BCEL-ready/Packet carrier certificate proves the
+    current report-facing soundness boundary. -/
 theorem zeroSlackSoundnessBoundary_proved (z : ZeroSlackCertificate) :
     zeroSlackSoundnessBoundary z :=
-  z.bcelContradiction.not_constant_activation
+  z.bcelCarrierCoherence.not_constant_activation
 
-/-- Named M182 report-facing endpoint: Selector/HB silence and closure,
-    positive-Packet exclusion, and the BCEL contradiction all use the exact
-    M180 family and computed dependency data. -/
+/-- Report-facing endpoint introduced in M182 and strengthened in M184:
+    Selector/HB silence and closure, positive-Packet exclusion, and the BCEL
+    contradiction use the exact M180 family, computed dependency data, and
+    coherently mapped M183 ready nucleus. -/
 theorem zeroslack_packet_selector_hb_bcel_coherent_checked_complete
     (z : ZeroSlackCertificate) :
     (∀ handle : z.packetBudgetNoLower.family.PacketSelectorHandle,
@@ -78,8 +81,11 @@ theorem zeroslack_packet_selector_hb_bcel_coherent_checked_complete
     (¬DirectWire.TerminalBN6PacketConclusion
       z.packetBudgetNoLower.family) ∧
     ¬z.packetBudgetNoLower.family.ConstantActivation := by
-  exact packet_selector_hb_bcel_coherent_checked_complete
-    z.packetBudgetNoLower z.bcelContradiction
+  exact ⟨z.packetBudgetNoLower.selectorHB.no_faithful,
+    z.packetBudgetNoLower.selectorHB.hb_closure_valid,
+    z.packetBudgetNoLower.selectorHB.no_hb_active,
+    z.bcelCarrierCoherence.no_positive_packet,
+    z.bcelCarrierCoherence.not_constant_activation⟩
 
 /-- Extract the polynomial-size certificate handle. -/
 def zeroSlackPolynomialSizeHandle (z : ZeroSlackCertificate) : String :=

@@ -1385,6 +1385,21 @@ family, derive constant activation, establish manuscript-wide
 or the root theorem. See
 [`lean_residual_terminal_finite_bcel_ready.md`](./lean_residual_terminal_finite_bcel_ready.md).
 
+`ResidualTerminalFiniteBCELPacketCarrierCoherence` now binds that exact checked
+ready nucleus to the grouped Packet family already used by the report-facing
+ZeroSlack boundary. The terminal problem is indexed by the same candidate and
+executable model as one accepted Packet/budget no-lower certificate. An anchor
+map with injectivity and surjectivity proofs plus a Boolean-reflected exact list
+equality identifies the computed nucleus image with that certificate's carrier.
+The M183 nontrivial-size result therefore replaces the older independent size
+check, while the M180 positive-Packet exclusion rules out constant activation
+on the same family. The terminal problem, positive premise, family, map,
+payloads, tables, and ranks remain supplied. Carrier identity does not identify
+Packet activation weights with projection excess or derive constant activation
+from positive residual slack; unconditional ZeroSlack, PCCMin, polynomial
+runtime, and the root theorem remain open. See
+[`lean_residual_terminal_finite_bcel_packet_carrier_coherence.md`](./lean_residual_terminal_finite_bcel_packet_carrier_coherence.md).
+
 `ResidualTerminalRankWF` now reconstructs the named residual `RankWF` boundary.
 The rank is exactly the manuscript's ten natural coordinates in priority order:
 witness type, span type, mode, frontier defect, projection defect, saturation

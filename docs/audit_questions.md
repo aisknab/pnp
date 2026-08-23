@@ -1052,6 +1052,17 @@ Every positive packet has a representative in the polynomial selector universe; 
   positive premise remain supplied; rejection is not global route mapping,
   and this is not manuscript-wide `SaturatePositive`, `BCELReady`, ZeroSlack,
   or PCCMin.
+- Same-candidate finite BCEL-ready and Packet carrier coherence is witnessed by
+  `PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate` and
+  `PNP.terminal_finite_bcel_packet_carrier_coherent_checked_complete`. Audit
+  that the terminal problem is indexed by the exact Packet certificate's
+  candidate and model, the anchor map has both injectivity and surjectivity
+  proofs, and the exact mapped-carrier list equality is reflected from
+  decidable data. Reject a detached candidate, one-way map, independent carrier
+  size Boolean, or caller conclusion. The problem, positive premise, family,
+  map, payloads, tables, and ranks remain supplied; activation weights are not
+  identified with projection excess, and unconditional ZeroSlack and
+  polynomial PCCMin remain open.
 - Terminal budget-envelope resolution is witnessed by
   `PNP.DirectWire.TerminalSupportBudget.check_eq_true_iff`,
   `PNP.DirectWire.findTerminalBudgetFeasibleSupport_eq_none_iff`,

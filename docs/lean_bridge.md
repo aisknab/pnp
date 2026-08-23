@@ -1214,6 +1214,19 @@ derive constant activation, or establish full `SaturatePositive`, `BCELReady`,
 ZeroSlack, or PCCMin. See
 `docs/lean_residual_terminal_finite_bcel_ready.md`.
 
+`lean/PNP/ResidualTerminalFiniteBCELPacketCarrierCoherence.lean` closes the
+next structural seam without rerunning either underlying classifier. Its
+certificate is indexed by the exact accepted Packet/budget no-lower record, so
+the M183 terminal problem uses the same candidate and model. An injective and
+surjective anchor map plus a reflected list equality identifies the ready
+nucleus image with the exact grouped Packet carrier. This transfers the
+nontrivial-size theorem and combines it with the existing same-family Packet
+exclusion to rule out constant activation. The problem, positive premise,
+family, map, payloads, realizer/dependency tables, and ranks remain supplied;
+activation weights are not identified with projection excess, and this is not
+unconditional ZeroSlack or polynomial PCCMin. See
+`docs/lean_residual_terminal_finite_bcel_packet_carrier_coherence.md`.
+
 `lean/PNP/ResidualTerminalRankWF.lean` formalizes the fixed rank named after
 `RW-SaturatePositive`: witness type, span type, mode, frontier defect,
 projection defect, saturation defect, anchor count, charge size, profile size,

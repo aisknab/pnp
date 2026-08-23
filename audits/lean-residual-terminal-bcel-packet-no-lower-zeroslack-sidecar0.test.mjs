@@ -147,7 +147,7 @@ test('BCEL/Packet no-lower ZeroSlack sidecar is dependent and proof-bearing', as
   ]);
   assert.deepEqual(validateSource0(source), []);
   assert.match(zeroSlack,
-    /^import PNP\.ResidualTerminalZeroSlackPacketSelectorHBCoherence$/mu);
+    /^import PNP\.ResidualTerminalFiniteBCELPacketCarrierCoherence$/mu);
   for (const field of [
     'positiveResidualWitnessYieldsBCELReady',
     'positivePacketYieldsFaithfulSelector',
@@ -158,11 +158,11 @@ test('BCEL/Packet no-lower ZeroSlack sidecar is dependent and proof-bearing', as
     assert.doesNotMatch(zeroSlack, new RegExp(`${field}\\s*:\\s*String`, 'u'));
   }
   assert.match(zeroSlack,
-    /bcelContradiction\s*:\s*BCELContradictionCertificate packetBudgetNoLower/u);
+    /bcelCarrierCoherence\s*:\s*TerminalFiniteBCELPacketCarrierCoherenceCertificate packetBudgetNoLower/u);
   assert.match(zeroSlack,
     /def zeroSlackSoundnessBoundary[\s\S]*¬z\.packetBudgetNoLower\.family\.ConstantActivation/u);
   assert.match(zeroSlack,
-    /theorem zeroSlackSoundnessBoundary_proved[\s\S]*bcelContradiction\.not_constant_activation/u);
+    /theorem zeroSlackSoundnessBoundary_proved[\s\S]*bcelCarrierCoherence\.not_constant_activation/u);
 });
 
 test('axiom transcript follows every public declaration in source order', async () => {
@@ -205,7 +205,7 @@ test('regression retains the dependent contradiction and ZeroSlack boundary', as
     'TerminalBN6PacketConclusion',
     'ConstantActivation',
     'bcel_packet_no_lower_zeroslack_sidecar_checked_complete',
-    'zeroSlack.bcelContradiction',
+    'zeroSlack.bcelCarrierCoherence',
     'zeroSlackSoundnessBoundary_proved',
   ]) assert.equal(regression.includes(token), true, token);
   assert.doesNotMatch(stripLeanCommentsAndStrings0(regression),

@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-183",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -830,6 +830,9 @@
   "leanResidualTerminalFiniteBCELReadyCompositionFormalized": true,
   "leanResidualTerminalFiniteBCELReadyCompositionAxiomAuditPassed": true,
   "leanResidualTerminalFiniteBCELReadyCompositionScope": "all-finite-direct-wire-candidates-executable-models-proof-bearing-positive-full-slack-anchor-problems-recomputed-finite-saturate-positive-to-computed-bcel-ready-branch",
+  "leanResidualTerminalFiniteBCELPacketCarrierCoherenceFormalized": true,
+  "leanResidualTerminalFiniteBCELPacketCarrierCoherenceAxiomAuditPassed": true,
+  "leanResidualTerminalFiniteBCELPacketCarrierCoherenceScope": "all-arbitrary-finite-proof-bearing-same-candidate-model-bcel-ready-nuclei-bijectively-mapped-to-the-exact-packet-family-carrier",
   "leanResidualTerminalRankWFFormalized": true,
   "leanResidualTerminalRankWFAxiomAuditPassed": true,
   "leanResidualTerminalRankWFScope": "fixed-ten-coordinate-natural-lexicographic-order-executable-comparison-accessibility-induction-and-kernel-well-foundedness",
@@ -1654,6 +1657,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFiniteBCELReadyAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFiniteBCELReady.lean",
     "node --test audits/lean-residual-terminal-finite-bcel-ready0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFiniteBCELPacketCarrierCoherenceAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFiniteBCELPacketCarrierCoherence.lean",
+    "node --test audits/lean-residual-terminal-finite-bcel-packet-carrier-coherence0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1841,6 +1847,7 @@
     "Finite terminal interface-exposure routing recognizes only candidate-derived interface-consumer events and returns either exact transparency evidence or a proof-bearing local E-route. The production trace classifier preserves the complete transparent prefix and routes only its exact first nontransparent interface event; non-interface failures remain fail-closed. This closes only the finite local form of interfaceExposureRoutesToE. The local route is not Package E VerifyDW, and originKernelObligationClosureRouted, full SaturatePositive, BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.",
     "Finite terminal origin, kernel, and obligation routing recognizes only exact candidate-derived role, rule, orientation, and edge combinations. Safety requires transparent cost, discharged obligations, and stability of forgotten profiles; failures retain deterministic proof-bearing reasons and the exact safe prefix. A proof-bearing candidate BCEL anchor problem with positive initial full slack composes these routes with preservation and the existing checked-lift or BCEL firewall. This closes a finite local routing edge and finite composition only. Local routes are not the complete global outcome system or Package E, the positive premise remains explicit, and full SaturatePositive, BCELReady, RankWF, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.",
     "The checked finite SaturatePositive-to-BCEL-ready composition reruns the production finite classifier and accepts only its positive-projection branch with a computed ready nucleus. Its certificate retains the exact classifier equality, safe trace, positive final slack, positive whole-support defect, nontrivial nucleus, constant-cut equations, and local BN2 conclusions. The terminal problem and initial positive premise remain supplied; local failure branches are not globally routed, BN3--BN6 data and constant activation are not derived, and manuscript-wide SaturatePositive, BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.",
+    "The finite BCEL-ready and Packet carrier-coherence certificate uses the exact candidate and model already owned by one accepted Packet/budget no-lower certificate. An injective and surjective anchor map plus a reflected list equality identifies its computed ready nucleus with that exact grouped Packet carrier, transfers the nontrivial-size bound, and reuses the same-family Packet and constant-activation exclusions. The terminal problem, initial positive premise, family, anchor map, payloads, tables, and ranks remain supplied; activation weights are not identified with projection excess, constant activation is not derived from positive slack, and unconditional ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.",
     "Residual RankWF is now formalized for the manuscript's fixed ten-coordinate natural lexicographic rank, with an executable comparison, exact Boolean equivalence, coordinate-priority witnesses, accessibility, induction, and kernel-checked well-foundedness. This does not map current finite routes into the complete global outcome system, prove that any route decreases the rank, establish route completeness or Package E, remove the explicit positive premise, establish full SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.",
     "External review is optional audit evidence and is not a mathematical premise or release blocker.",
     "Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.",
@@ -1878,7 +1885,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "3e91cc99bedfdac25795f923914ee765ce0f55200c7d1e6d05fcad58940c73ee",
+    "actualSourceClosureSha256": "b489621c479ec08ed7dd260170df8b3811044f34a1e4e68cf76fd7db4c44ec83",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1908,22 +1915,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-23-183",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-23-184",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "8bb4f8bb4ce2bfdcfd3709d19c971b5c178bf1c2f437ec37d4360f80b6c49efc",
+  "leanTheoremInventorySha256": "1de7ba070a3b7e9e2faafce2639805ade6cd4508afcb9a17c94594885a897c46",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 29989,
+  "leanTheoremInventoryDeclarationCount": 30015,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 15135,
-  "leanTheoremInventoryTheoremCount": 15480,
+  "leanTheoremInventoryTheoremCount": 15490,
   "leanTheoremInventoryAssumptionFreeTheoremCount": 7617,
-  "leanTheoremInventorySourceClosureModuleCount": 300,
-  "leanSourceClosureSha256": "3e91cc99bedfdac25795f923914ee765ce0f55200c7d1e6d05fcad58940c73ee",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-23-183",
+  "leanTheoremInventorySourceClosureModuleCount": 301,
+  "leanSourceClosureSha256": "b489621c479ec08ed7dd260170df8b3811044f34a1e4e68cf76fd7db4c44ec83",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-23-184",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "1738658fc96d7fad290060709af38d8791038e951e3a290457ff34b668e4f3a1",
+  "formalPublicationMapSha256": "d135c0114d74ba74788bd2b50f77747bf0b4f2886ecb254a5ea5b49bb3f3f9d5",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -36968,6 +36975,89 @@
       "status": "formalized-residual-terminal-finite-bcel-ready-composition"
     },
     {
+      "classification": "formalized-residual-terminal-finite-bcel-packet-carrier-coherence",
+      "id": "residual-terminal-finite-bcel-packet-carrier-coherence",
+      "nonClaim": "The terminal problem, initial positive full-slack premise, grouped Packet family, bijective anchor map, Packet payloads, budget, typed realizer table, dependency table, and rank maps remain supplied proof-bearing inputs. The carrier identity does not identify Packet-family activation weights with proper-cut projection excess or derive constant activation from positive residual slack. It does not construct BN3--BN6 data from terminal data, complete the no-lower ledger, prove unconditional ZeroSlack or PCCMin, establish polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.family_carrier_eq",
+        "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.carrier_at_least_two",
+        "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.no_positive_packet",
+        "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.not_constant_activation",
+        "PNP.terminal_finite_bcel_packet_carrier_coherent_checked_complete"
+      ],
+      "scope": "For every accepted finite Packet/budget no-lower certificate, Lean indexes a checked finite BCEL-ready problem by the same candidate and model, retains its computed ready nucleus, and uses a bijective anchor map with explicit injectivity and surjectivity proofs plus a Boolean-reflected exact list equality to identify that nucleus with the exact grouped Packet carrier. The inherited nontrivial-size bound, positive-Packet exclusion, and constant-activation exclusion therefore hold on one coherently bound family consumed by the report-facing ZeroSlack boundary.",
+      "title": "Same-candidate finite BCEL-ready and Packet carrier coherence",
+      "theoremRows": [
+        {
+          "name": "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.family_carrier_eq",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0a2af4eca087841ff04b5eca08e4b1847f55b16f372784fd045de455bcad2561",
+          "expectedKernelTypeSha256": "0a2af4eca087841ff04b5eca08e4b1847f55b16f372784fd045de455bcad2561",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.carrier_at_least_two",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f5581ef1cdc43ba0b956571157e987f924002f01684be03f149986f285745d4f",
+          "expectedKernelTypeSha256": "f5581ef1cdc43ba0b956571157e987f924002f01684be03f149986f285745d4f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.no_positive_packet",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6a41b5d36979d1af2913eda0d3a85588a0c01b21db58f43f228f50397bbb5afa",
+          "expectedKernelTypeSha256": "6a41b5d36979d1af2913eda0d3a85588a0c01b21db58f43f228f50397bbb5afa",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.not_constant_activation",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "64e3518d1af10892841b77d5d6c9dd4f654b97c6a9e9c7eac048cf1a4fd36f4b",
+          "expectedKernelTypeSha256": "64e3518d1af10892841b77d5d6c9dd4f654b97c6a9e9c7eac048cf1a4fd36f4b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.terminal_finite_bcel_packet_carrier_coherent_checked_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "1f2651016dabc74efe65d54a861f5508ca2477c5b3d677d453eba3720261479c",
+          "expectedKernelTypeSha256": "1f2651016dabc74efe65d54a861f5508ca2477c5b3d677d453eba3720261479c",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-finite-bcel-packet-carrier-coherence"
+    },
+    {
       "classification": "formalized-residual-terminal-rank-wf",
       "id": "residual-terminal-rank-wf",
       "nonClaim": "This establishes the fixed residual rank domain and RankWF only. It does not map the current finite terminal routes into the manuscript's complete global outcome system, prove that any existing route strictly decreases the rank, establish route completeness or Package E, remove the explicit positive premise from the finite composition, establish full manuscript-wide SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, remove a project assumption, or prove P = NP.",
@@ -45988,7 +46078,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-23-183",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-23-184",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true
