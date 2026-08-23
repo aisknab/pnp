@@ -84,11 +84,11 @@ test('historical activation and checker acceptance cannot override the concrete 
   }
 });
 
-test('status retains five blockers, four project axioms, and an absent compatibility root', async () => {
+test('status retains five blockers, three project axioms, and an absent compatibility root', async () => {
   const status = await status0();
   assert.equal(status.remainingBlockers.length, 5);
   assert.deepEqual(status.remainingBlockers, status.remainingFormalObligations);
-  assert.equal(status.projectSpecificAxiomInventory.length, 4);
+  assert.equal(status.projectSpecificAxiomInventory.length, 3);
   assert.equal(status.projectSpecificAxiomsRemaining, true);
   assert.equal(status.rootLeanTheorem, 'PNP.Main.p_eq_np');
   assert.equal(status.rootLeanTheoremPresent, false);
@@ -3349,7 +3349,24 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
   assert.equal(lockedNANDThreshold.axiomClosureUsesOnlyLeanStandardAllowlist, true);
   assert.deepEqual(lockedNANDThreshold.requiredTheorems,
     ['PNP.Main.locked_nand_threshold']);
-  assert.match(lockedNANDThreshold.nonClaim, /does not put the concrete locked threshold language in P/u);
+  assert.match(lockedNANDThreshold.nonClaim,
+    /Neither milestone puts the concrete locked threshold language in P/u);
+  const concreteLegacyCompatibility = byId.get(
+    'concrete-legacy-locked-nand-compatibility',
+  );
+  assert.equal(concreteLegacyCompatibility.status,
+    'formalized-concrete-legacy-locked-nand-compatibility');
+  assert.equal(concreteLegacyCompatibility.earned, true);
+  assert.equal(concreteLegacyCompatibility.allAssumptionFree, false);
+  assert.equal(
+    concreteLegacyCompatibility.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.equal(concreteLegacyCompatibility.requiredTheorems.length, 6);
+  assert.match(concreteLegacyCompatibility.scope,
+    /exact compatibility names.*concrete finite-pipeline model/u);
+  assert.match(concreteLegacyCompatibility.nonClaim,
+    /does not put the concrete locked target in P/u);
   for (const id of [
     'global-zeroslack-pccmin',
     'concrete-publication-root',

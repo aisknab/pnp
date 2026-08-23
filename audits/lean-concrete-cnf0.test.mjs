@@ -289,11 +289,15 @@ test('bounded work-machine regressions are reviewable, strict, and explicitly op
   ]) assert.doesNotMatch(workflow, new RegExp(name, 'u'));
 });
 
-test('legacy SAT is a non-authoritative label, not an axiom or concrete-CNF alias', async () => {
-  const source = await text0('lean/PNP/Complexity.lean');
-  assert.match(source, /^def SAT : Language := \{ name := "SAT" \}$/mu);
-  assert.doesNotMatch(source, /^\s*axiom\s+SAT\b/mu);
-  assert.doesNotMatch(stripLeanCommentsAndStrings0(source), /CNFSAT/u);
+test('report-facing SAT is the exact concrete-CNF language, not an axiom or name handle', async () => {
+  const [complexity, sat] = await Promise.all([
+    text0('lean/PNP/Complexity.lean'),
+    text0('lean/PNP/SAT.lean'),
+  ]);
+  assert.match(complexity, /^abbrev Language := Concrete\.Language$/mu);
+  assert.match(sat, /^def SAT : Language := Concrete\.CNFSAT$/mu);
+  assert.doesNotMatch(sat, /^\s*axiom\s+SAT\b/mu);
+  assert.doesNotMatch(stripLeanCommentsAndStrings0(sat), /\{\s*name\s*:=/u);
 });
 
 test('static audit rejects semantic shortcuts and transcript drift', async () => {

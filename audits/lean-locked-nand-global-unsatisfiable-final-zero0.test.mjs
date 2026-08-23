@@ -198,7 +198,7 @@ test('status credits only the unsatisfiable branch and leaves downstream claims 
     'leanLockedNANDBuilderFormalized',
     'leanLockedNANDThresholdFormalized',
   ]) assert.equal(status[field], true, field);
-  assert.equal(status.projectSpecificAxiomInventory.length, 4);
+  assert.equal(status.projectSpecificAxiomInventory.length, 3);
   assert.equal(status.remainingBlockers.length, 5);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);

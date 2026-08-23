@@ -23,6 +23,7 @@ on:
       - 'lean-regression/PNPConcreteCNFToNAND.lean'
       - 'formal-publication0.mjs'
       - 'pcc-formal-reconstruction-status0.mjs'
+      - 'pcc-proof-progress0.mjs'
       - 'pcc-formal-public-surface0.mjs'
       - 'package.json'
       - 'scripts/export-lean-theorem-inventory.mjs'
@@ -32,12 +33,15 @@ on:
       - 'publication/**'
       - 'status/LEAN_THEOREM_INVENTORY.json'
       - 'status/FORMAL_RECONSTRUCTION_STATUS.json'
+      - 'status/PROOF_PROGRESS.json'
       - 'public/pnp-theorem-inventory.json'
       - 'public/pnp-status.json'
       - 'canonical_proof_report.tex'
       - 'canonical_proof_report.pdf'
       - 'audits/lean-theorem-inventory0.test.mjs'
       - 'audits/formal-publication0.test.mjs'
+      - 'audits/formal-reconstruction-status0.test.mjs'
+      - 'audits/formal-public-surface0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
       - 'audits/lean-concrete-machine0.test.mjs'
       - 'audits/lean-concrete-tape-handoff0.test.mjs'
@@ -155,6 +159,7 @@ on:
       - 'audits/lean-residual-terminal-finite-bcel-ready0.test.mjs'
       - 'audits/lean-residual-terminal-finite-bcel-packet-carrier-coherence0.test.mjs'
       - 'audits/lean-residual-terminal-finite-bcel-packet-activation-obstruction0.test.mjs'
+      - 'audits/lean-concrete-legacy-locked-nand-compatibility0.test.mjs'
       - 'audits/lean-residual-terminal-rank-wf0.test.mjs'
       - 'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs'
       - 'audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs'
@@ -418,6 +423,7 @@ on:
       - 'lean-regression/PNPConcreteCNFToNAND.lean'
       - 'formal-publication0.mjs'
       - 'pcc-formal-reconstruction-status0.mjs'
+      - 'pcc-proof-progress0.mjs'
       - 'pcc-formal-public-surface0.mjs'
       - 'package.json'
       - 'scripts/export-lean-theorem-inventory.mjs'
@@ -427,12 +433,15 @@ on:
       - 'publication/**'
       - 'status/LEAN_THEOREM_INVENTORY.json'
       - 'status/FORMAL_RECONSTRUCTION_STATUS.json'
+      - 'status/PROOF_PROGRESS.json'
       - 'public/pnp-theorem-inventory.json'
       - 'public/pnp-status.json'
       - 'canonical_proof_report.tex'
       - 'canonical_proof_report.pdf'
       - 'audits/lean-theorem-inventory0.test.mjs'
       - 'audits/formal-publication0.test.mjs'
+      - 'audits/formal-reconstruction-status0.test.mjs'
+      - 'audits/formal-public-surface0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
       - 'audits/lean-concrete-machine0.test.mjs'
       - 'audits/lean-concrete-tape-handoff0.test.mjs'
@@ -550,6 +559,7 @@ on:
       - 'audits/lean-residual-terminal-finite-bcel-ready0.test.mjs'
       - 'audits/lean-residual-terminal-finite-bcel-packet-carrier-coherence0.test.mjs'
       - 'audits/lean-residual-terminal-finite-bcel-packet-activation-obstruction0.test.mjs'
+      - 'audits/lean-concrete-legacy-locked-nand-compatibility0.test.mjs'
       - 'audits/lean-residual-terminal-rank-wf0.test.mjs'
       - 'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs'
       - 'audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs'
@@ -4860,3 +4870,31 @@ jobs:
 
       - name: Run finite BCEL/Packet activation-coherence obstruction hostile audit
         run: node --test audits/lean-residual-terminal-finite-bcel-packet-activation-obstruction0.test.mjs
+
+      - name: Print concrete report-facing locked-NAND compatibility axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteLegacyLockedNANDCompatibilityAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPConcreteLegacyLockedNANDCompatibilityAxiomAudit.lean)"
+          test "$expected_count" -eq 9
+          test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.")" -eq "$expected_count"
+          printf '%s\n' "$normalized" | grep -Fqx "'PNP.report_sat_eq_concrete_cnfsat' does not depend on any axioms"
+          printf '%s\n' "$normalized" | grep -Fqx "'PNP.report_locked_nand_eq_concrete_threshold' depends on axioms: [propext]"
+          printf '%s\n' "$normalized" | grep -Fqx "'PNP.satVerifierWitness' does not depend on any axioms"
+          printf '%s\n' "$normalized" | grep -Fqx "'PNP.sat_in_np_witness_model' does not depend on any axioms"
+          printf '%s\n' "$normalized" | grep -Fqx "'PNP.sat_reduces_to_locked_nand_checked' depends on axioms: [propext, Quot.sound]"
+          printf '%s\n' "$normalized" | grep -Fqx "'PNP.sat_in_p_from_locked_nand_in_p' depends on axioms: [propext, Quot.sound]"
+          printf '%s\n' "$normalized" | grep -Fqx "'PNP.pccmin_concrete_decider_projection_exact' depends on axioms: [propext, PNP.ResidualBandExactMinimization, Quot.sound]"
+          printf '%s\n' "$normalized" | grep -Fqx "'PNP.concrete_legacy_locked_nand_compatibility_checked_complete' depends on axioms: [propext, Quot.sound]"
+          printf '%s\n' "$normalized" | grep -Fqx "'PNP.final_report_bridge' depends on axioms: [propext, PNP.CheckPCCPackexp, PNP.GeneratePCCPack, PNP.ResidualBandExactMinimization, Quot.sound]"
+          if printf '%s\n' "$normalized" | grep -Eq 'Classical\.choice|sorryAx|PNP\.LockedNANDThreshold'; then
+            printf '%s\n' "$normalized" >&2
+            exit 1
+          fi
+
+      - name: Run concrete report-facing locked-NAND compatibility regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPConcreteLegacyLockedNANDCompatibility.lean
+
+      - name: Run concrete report-facing locked-NAND compatibility hostile audit
+        run: node --test audits/lean-concrete-legacy-locked-nand-compatibility0.test.mjs

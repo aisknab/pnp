@@ -118,7 +118,7 @@ test('formal status preserves the semantics milestone and broad downstream bound
   assert.equal(status.leanLockedNANDBuilderFormalized, true);
   assert.equal(status.leanLockedNANDThresholdFormalized, true);
   assert.equal(status.remainingBlockers.includes('Formal.LockedNANDThreshold'), false);
-  assert.equal(status.projectSpecificAxiomInventory.includes('PNP.LockedNANDThreshold'), true);
+  assert.equal(status.projectSpecificAxiomInventory.includes('PNP.LockedNANDThreshold'), false);
   assert.equal(status.rootLeanTheoremPresent, false);
 });
 

@@ -119,7 +119,7 @@ The module exposes exactly eight declarations:
 `lean-audit/PNPLockedNANDGlobalSemanticThresholdAxiomAudit.lean` prints the
 compiled axiom closure of all eight. Every declaration depends on exactly the
 Lean-standard pair `Quot.sound` and `propext`; none depends on
-`Classical.choice`, `sorryAx`, or any of the four project axioms.
+`Classical.choice`, `sorryAx`, or any of the current three project axioms.
 
 `lean-regression/PNPLockedNANDGlobalSemanticThreshold.lean` exercises:
 
@@ -153,9 +153,10 @@ This milestone follows the legacy manuscript’s semantic construction and
 closes its typed threshold argument. Its successors fix the normalized
 version-zero bitstring semantics, provide a literal polynomial-time
 parser/validator and target emitter, and package their exact composition as a
-concrete `PolynomialReduction`. These milestones still do not connect the
-concrete target to the abstract `PNP.LockedNANDThreshold` language, prove
-CNFSAT in P, transport NP-hardness or NP-completeness, discharge the project
-axiom `PNP.LockedNANDThreshold`, or prove `P = NP`. If Lean exposes a
+concrete `PolynomialReduction`. At this milestone boundary those successors
+had not yet connected the concrete target to the report-facing endpoint.
+M186 now makes `PNP.LockedNANDThreshold` the exact concrete language, consumes
+the compiled reduction, and removes that project axiom. It still does not put
+CNFSAT in P, transport NP-hardness or NP-completeness, or prove `P = NP`. If Lean exposes a
 contradiction in the legacy route, the formalization must stop and repair or
 replace that step rather than add an assumption.

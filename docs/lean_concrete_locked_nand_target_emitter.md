@@ -74,9 +74,9 @@ polynomial bound on every input.
 The successor polynomial-reduction milestone now registers the strict
 composition as the repository's source-to-target `PolynomialReduction` and
 binds the already-proved encoded language equivalence to this exact compiled
-function. The abstract `PNP.LockedNANDThreshold` assumption, CNFSAT-in-P
-transport, NP-hardness transport, and `PNP.Main.p_eq_np` remain outside both
-milestones.
+function. M186 subsequently makes `PNP.LockedNANDThreshold` the exact concrete
+endpoint and removes the caller-supplied reduction edge. CNFSAT-in-P transport,
+NP-hardness transport, and `PNP.Main.p_eq_np` remain outside these milestones.
 
 ## Audit and regression
 
@@ -124,6 +124,6 @@ counts, byte sizes, and SHA-256 identities are generated in
 `status/FORMAL_RECONSTRUCTION_STATUS.json`, and the root report artifacts.
 They are intentionally not duplicated in this milestone document.
 
-The concrete publication gate remains false. All four project assumptions,
+The concrete publication gate remains false. All three project assumptions,
 all five blockers, unset activation fingerprints, and the absence of
 `PNP.Main.p_eq_np` are retained.

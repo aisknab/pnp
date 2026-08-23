@@ -718,6 +718,19 @@ test('formal reconstruction status accepts the current source and public mirrors
     out.leanConcreteCNFToNANDPolynomialReductionScope,
     'fixed-135070-rule-three-node-all-bitstring-cnf-to-nand-compiler-with-exact-output-polynomial-time-function-direct-reduction-locked-threshold-composition-and-recursive-raw-refinement',
   );
+  for (const field of [
+    'leanConcreteLegacyLockedNANDCompatibilityFormalized',
+    'leanConcreteLegacyLockedNANDCompatibilityAxiomAuditPassed',
+    'leanConcreteLegacyLockedNANDCompatibilityEndpointProjectAssumptionFree',
+  ]) assert.equal(out[field], true, field);
+  assert.equal(
+    out.leanConcreteLegacyLockedNANDCompatibilityAuditedDeclarationCount,
+    9,
+  );
+  assert.equal(
+    out.leanConcreteLegacyLockedNANDCompatibilityScope,
+    'all-bitstring-report-facing-sat-and-locked-nand-identities-with-concrete-finite-pipeline-complexity-witnesses-and-direct-checked-reduction-reuse',
+  );
   assert.equal(out.leanLockedNANDPolynomialBuilderFormalized, true);
   assert.equal(out.leanCompatibleReplacementFormalized, false);
   assert.equal(out.leanGlobalSlackLawFormalized, false);
@@ -1490,7 +1503,6 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.deepEqual(out.projectSpecificAxiomInventory, [
     'PNP.CheckPCCPackexp',
     'PNP.GeneratePCCPack',
-    'PNP.LockedNANDThreshold',
     'PNP.ResidualBandExactMinimization',
   ]);
   assert.equal(out.externalReviewIsMathematicalPremise, false);
@@ -2119,6 +2131,19 @@ test('formal status records the exhaustive direct-wire reference minimum conserv
   assert.equal(
     status.leanConcreteCNFToNANDPolynomialReductionScope,
     'fixed-135070-rule-three-node-all-bitstring-cnf-to-nand-compiler-with-exact-output-polynomial-time-function-direct-reduction-locked-threshold-composition-and-recursive-raw-refinement',
+  );
+  for (const field of [
+    'leanConcreteLegacyLockedNANDCompatibilityFormalized',
+    'leanConcreteLegacyLockedNANDCompatibilityAxiomAuditPassed',
+    'leanConcreteLegacyLockedNANDCompatibilityEndpointProjectAssumptionFree',
+  ]) assert.equal(status[field], true, field);
+  assert.equal(
+    status.leanConcreteLegacyLockedNANDCompatibilityAuditedDeclarationCount,
+    9,
+  );
+  assert.equal(
+    status.leanConcreteLegacyLockedNANDCompatibilityScope,
+    'all-bitstring-report-facing-sat-and-locked-nand-identities-with-concrete-finite-pipeline-complexity-witnesses-and-direct-checked-reduction-reuse',
   );
   assert.equal(status.leanLockedNANDPolynomialBuilderFormalized, true);
   assert.equal(status.leanCompatibleReplacementFormalized, false);
@@ -3130,7 +3155,7 @@ test('proof progress preserves the fixed M184 baseline and derives current cover
   assert.equal(out.modelId, 'fixed-risk-weighted-checkpoints-v0');
   assert.equal(out.trackCount, 5);
   assert.equal(out.checkpointCount, 35);
-  assert.equal(out.pointsEarned, 30);
+  assert.equal(out.pointsEarned, 32);
   assert.equal(out.pointsAvailable, 100);
   assert.equal(out.uncertaintyLowPercent, 20);
   assert.equal(out.uncertaintyHighPercent, 40);
@@ -3141,7 +3166,7 @@ test('proof progress preserves the fixed M184 baseline and derives current cover
   });
   assert.equal(out.globalGatesClosed, 0);
   assert.equal(out.globalGatesAvailable, 5);
-  assert.equal(out.projectSpecificAxiomCount, 4);
+  assert.equal(out.projectSpecificAxiomCount, 3);
   assert.equal(out.rootTheoremPresent, false);
   assert.equal(out.publicationGatePassed, false);
   assert.equal(out.isProbabilityOfCorrectness, false);
@@ -3150,8 +3175,12 @@ test('proof progress preserves the fixed M184 baseline and derives current cover
     { earnedRows: 160, totalRows: 162 });
   assert.equal(sources.ledger.history[0].asOfCoordinate,
     'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184');
-  assert.equal(sources.ledger.history.at(-1).scoreChanged, false);
-  assert.deepEqual(sources.ledger.history.at(-1).changedCheckpointIds, []);
+  assert.equal(sources.ledger.history.at(-1).scoreChanged, true);
+  assert.deepEqual(sources.ledger.history.at(-1).changedCheckpointIds, [
+    'reductions-final-target-compatibility',
+    'axiom-remove-locked-nand-threshold',
+  ]);
+  assert.equal(sources.ledger.history.at(-1).changeRecords.length, 2);
 });
 
 test('proof progress rejects changed weights and a stale stored total', async () => {
@@ -3169,6 +3198,33 @@ test('proof progress rejects changed weights and a stale stored total', async ()
   assert.throws(
     () => validateProofProgress0(staleTotal, status, inventory),
     (error) => error.code === 'ProofCompletion.StoredEarned',
+  );
+});
+
+test('proof progress rejects incomplete or ungrounded score-change records', async () => {
+  const { ledger, status, inventory } = await currentProofProgressSources0();
+  const missingEvidence = clone0(ledger);
+  missingEvidence.history.at(-1).changeRecords[0].compiledEvidence = [];
+  assert.throws(
+    () => validateProofProgress0(missingEvidence, status, inventory),
+    (error) => error.code === 'History.ChangeRecordEvidenceMissing',
+  );
+
+  const forgedTotal = clone0(ledger);
+  forgedTotal.history.at(-1).changeRecords[1].oldAndNewTotal = {
+    old: 31,
+    new: 33,
+  };
+  assert.throws(
+    () => validateProofProgress0(forgedTotal, status, inventory),
+    (error) => error.code === 'History.ChangeRecordTotal',
+  );
+
+  const unchangedCheckpoint = clone0(ledger);
+  unchangedCheckpoint.history.at(-1).changeRecords[0].oldStatus = 'earned';
+  assert.throws(
+    () => validateProofProgress0(unchangedCheckpoint, status, inventory),
+    (error) => error.code === 'History.ChangeRecordTransition',
   );
 });
 
@@ -3203,7 +3259,7 @@ test('proof progress rejects formal coverage presented as proof completion or al
 test('proof progress rejects an uncertainty range that excludes the estimate', async () => {
   const { ledger, status, inventory } = await currentProofProgressSources0();
   const mutation = clone0(ledger);
-  mutation.proofCompletion.uncertaintyLowPercent = 31;
+  mutation.proofCompletion.uncertaintyLowPercent = 33;
   assert.throws(
     () => validateProofProgress0(mutation, status, inventory),
     (error) => error.code === 'ProofCompletion.UncertaintyRange',

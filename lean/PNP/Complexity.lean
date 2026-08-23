@@ -1,116 +1,100 @@
 /-
 Copyright (c) 2026 PNP Labs.
 
-Witness-level complexity-theory layer for the Lean bridge.
-
-This file still does not choose a concrete Turing-machine or RAM model, but it
-no longer leaves the basic class-closure facts as fields of the checker trust
-model.  Instead, P, NP, and polynomial reduction are represented by explicit
-witness structures, and the usual closure facts are proved by constructing the
-corresponding witnesses.
+Report-facing compatibility names for the concrete finite-pipeline complexity
+model.  Earlier reconstruction passes used name-only language and witness
+structures here.  The active bridge now reuses the exact bitstring predicates,
+finite programs, encoded-size polynomial bounds, and correctness fields from
+`PNP.Concrete.Complexity`; it does not manufacture complexity witnesses from
+string handles.
 -/
+
+import PNP.Concrete.Complexity
 
 namespace PNP
 
-/-- An abstract formal language.  This pass does not choose a concrete machine
-model. -/
-structure Language where
-  name : String
+/-- Report-facing language compatibility name.  A language is now the exact
+    predicate on finite bitstrings used by the concrete model. -/
+abbrev Language := Concrete.Language
 
-/-- Complexity classes are represented extensionally as sets of languages. -/
-def ComplexityClass := Language → Prop
+/-- Complexity classes remain extensionally represented as predicates on
+    concrete languages. -/
+abbrev ComplexityClass := Language → Prop
 
-/-- A polynomial-time deterministic decider witness for a language.
+/-- Report-facing compatibility name for a proved concrete polynomial-time
+    deterministic decider. -/
+abbrev PolyTimeDecider := Concrete.PolynomialTimeDecider
 
-The `code` field is intentionally only a name/handle at this layer. Later
-passes should replace it by concrete machine syntax plus a polynomial bound. -/
-structure PolyTimeDecider (L : Language) where
-  code : String
+/-- Report-facing compatibility name for a proved bounded-certificate
+    concrete polynomial-time verifier. -/
+abbrev NondetPolyVerifier := Concrete.PolynomialTimeVerifier
 
-/-- A polynomial-time nondeterministic verifier witness for a language. -/
-structure NondetPolyVerifier (L : Language) where
-  code : String
+/-- Report-facing compatibility name for a proved concrete polynomial
+    many-one reduction. -/
+abbrev PolyTimeManyOneReduction := Concrete.PolynomialReduction
 
-/-- A polynomial-time many-one reduction witness from `A` to `B`. -/
-structure PolyTimeManyOneReduction (A B : Language) where
-  code : String
+/-- P in the report-facing bridge is the concrete finite-pipeline class P. -/
+abbrev PClass : ComplexityClass := Concrete.InP
 
-/-- P as languages with a deterministic polynomial-time decider witness. -/
-def PClass : ComplexityClass := fun L => Nonempty (PolyTimeDecider L)
+/-- NP in the report-facing bridge is the concrete bounded-certificate class
+    NP. -/
+abbrev NPClass : ComplexityClass := Concrete.InNP
 
-/-- NP as languages with a nondeterministic polynomial-time verifier witness. -/
-def NPClass : ComplexityClass := fun L => Nonempty (NondetPolyVerifier L)
+/-- Polynomial reducibility is the concrete finite-function-pipeline
+    relation. -/
+abbrev ReducesToPoly := Concrete.ReducesTo
 
-/-- Polynomial-time many-one reduction as a witness relation. -/
-def ReducesToPoly (A B : Language) : Prop := Nonempty (PolyTimeManyOneReduction A B)
+/-- The final compatibility statement is mutual inclusion of the concrete
+    finite-pipeline P and NP classes. -/
+abbrev PEqualsNP := Concrete.PEqualsNP
 
-/-- The final theorem statement. -/
-def PEqualsNP : Prop := PClass = NPClass
+/-- NP-completeness is the concrete verifier-and-reduction notion. -/
+abbrev NPComplete := Concrete.NPComplete
 
-/-- The legacy SAT label used by the string-handle locked-NAND bridge.
+/-- Embed a concrete deterministic decider as a verifier that ignores its
+    certificate. -/
+def nondetVerifierFromDecider {L : Language}
+    (decision : PolyTimeDecider L) : NondetPolyVerifier L :=
+  Concrete.verifierFromDecider decision
 
-This is deliberately only a named value in the non-authoritative witness
-model.  It is not identified with `PNP.Concrete.CNFSAT`, and making the label
-concrete does not supply SAT semantics, NP-hardness, or a decision procedure. -/
-def SAT : Language := { name := "SAT" }
-
-/-- NP-completeness over the reduction relation. -/
-structure NPComplete (L : Language) : Prop where
-  inNP : NPClass L
-  hard : ∀ {A : Language}, NPClass A → ReducesToPoly A L
-
-/-- Embed a deterministic decider as a nondeterministic verifier that ignores
-its certificate. -/
-def nondetVerifierFromDecider {L : Language} (d : PolyTimeDecider L) : NondetPolyVerifier L :=
-  { code := "ignore-certificate(" ++ d.code ++ ")" }
-
-/-- Compose a many-one reduction to `B` with a deterministic decider for `B`. -/
+/-- Compose a concrete polynomial reduction with a concrete deterministic
+    decider for its target language. -/
 def deciderFromReduction {A B : Language}
-    (r : PolyTimeManyOneReduction A B)
-    (d : PolyTimeDecider B) : PolyTimeDecider A :=
-  { code := "compose-reduction(" ++ r.code ++ ", " ++ d.code ++ ")" }
+    (reduction : PolyTimeManyOneReduction A B)
+    (decision : PolyTimeDecider B) : PolyTimeDecider A := by
+  let precomposed :=
+    Concrete.PolynomialTimeDecider.precompose reduction.function decision
+  exact Concrete.PolynomialTimeDecider.relabel precomposed (by
+    intro input
+    exact (reduction.correctness input).symm)
 
-/-- Standard closure facts needed for the usual NP-complete-in-P implication. -/
+/-- Standard closure facts used by the final complexity transport. -/
 structure StandardComplexityAxioms : Prop where
   pSubsetNP : ∀ {A : Language}, PClass A → NPClass A
-  reductionTransportsP : ∀ {A B : Language}, ReducesToPoly A B → PClass B → PClass A
+  reductionTransportsP : ∀ {A B : Language},
+    ReducesToPoly A B → PClass B → PClass A
 
-/-- P is a subset of NP in the witness model. -/
-theorem p_subset_np_witness_model {A : Language} : PClass A → NPClass A := by
-  intro hP
-  rcases hP with ⟨d⟩
-  exact ⟨nondetVerifierFromDecider d⟩
+/-- Concrete P is contained in concrete NP. -/
+theorem p_subset_np_witness_model {A : Language} : PClass A → NPClass A :=
+  Concrete.p_subset_np
 
-/-- Polynomial reductions transport membership in P in the witness model. -/
+/-- Concrete polynomial reductions transport concrete P membership. -/
 theorem reduction_transports_p_witness_model {A B : Language} :
-    ReducesToPoly A B → PClass B → PClass A := by
-  intro hRed hPB
-  rcases hRed with ⟨r⟩
-  rcases hPB with ⟨d⟩
-  exact ⟨deciderFromReduction r d⟩
+    ReducesToPoly A B → PClass B → PClass A :=
+  Concrete.reduction_transports_p
 
-/-- The standard closure facts are theorems for this witness model. -/
+/-- The standard closure facts are constructed from the concrete model. -/
 def standardComplexityAxioms : StandardComplexityAxioms :=
   { pSubsetNP := fun hP => p_subset_np_witness_model hP
-    reductionTransportsP := fun hRed hPB => reduction_transports_p_witness_model hRed hPB }
+    reductionTransportsP := fun hRed hPB =>
+      reduction_transports_p_witness_model hRed hPB }
 
-/-- If an NP-complete language is in P, then P = NP. -/
+/-- If a concretely NP-complete language has a concrete P decider, concrete P
+    and NP mutually include one another. -/
 theorem np_complete_in_p_implies_p_eq_np
     {L : Language}
     (hComplete : NPComplete L)
-    (hInP : PClass L) : PEqualsNP := by
-  funext A
-  apply propext
-  constructor
-  · intro hP
-    exact standardComplexityAxioms.pSubsetNP hP
-  · intro hNP
-    exact standardComplexityAxioms.reductionTransportsP (hComplete.hard hNP) hInP
-
-/-- SAT-specific form used by the report bridge. -/
-theorem sat_np_complete_and_sat_in_p_implies_p_eq_np
-    (hSATComplete : NPComplete SAT)
-    (hSATInP : PClass SAT) : PEqualsNP :=
-  np_complete_in_p_implies_p_eq_np hSATComplete hSATInP
+    (hInP : PClass L) : PEqualsNP :=
+  Concrete.np_complete_in_p_implies_p_eq_np hComplete hInP
 
 end PNP

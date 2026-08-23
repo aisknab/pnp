@@ -21,7 +21,6 @@ const TARGET_AUDIT_PATH = 'lean-audit/PNPConcreteTargetAxiomAudit.lean';
 const EXPECTED_AXIOMS = Object.freeze([
   'PNP.CheckPCCPackexp',
   'PNP.GeneratePCCPack',
-  'PNP.LockedNANDThreshold',
   'PNP.ResidualBandExactMinimization',
 ]);
 

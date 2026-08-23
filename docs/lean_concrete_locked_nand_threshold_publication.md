@@ -23,10 +23,10 @@ remain part of the theorem and fail closed; no well-formedness promise or
 caller-supplied semantic certificate is introduced.
 
 The compiled axiom transcript for the theorem contains only Lean's permitted
-standard axioms `propext` and `Quot.sound`.  It contains none of the four
-disclosed project axioms.  In particular, it does not use the legacy
-`PNP.LockedNANDThreshold` string handle, whose old conditional bridge remains
-publication-ineligible.
+standard axioms `propext` and `Quot.sound`. It contains none of the current
+three disclosed project axioms. M186 makes `PNP.LockedNANDThreshold` the exact
+concrete endpoint and consumes this theorem directly; no string handle or
+caller-supplied reduction field remains.
 
 This earns the global locked-NAND construction-and-threshold milestone.  It
 does not supply a polynomial decider for the concrete target, complete the
@@ -59,9 +59,11 @@ The canonical 218,897-byte TeX source has SHA-256
 its deterministic 85-page, 455,853-byte A4 PDF has SHA-256
 `fedbffc7877c0cf4da70f6eea77395f7ee413e48917a80ee3ea5f24d9c325fec`.
 
-The concrete publication gate remains false. All four disclosed project
-axioms, all five remaining blockers, unset activation fingerprints, and the
-absence of `PNP.Main.p_eq_np` are retained.
+At that pinned publication coordinate, the concrete publication gate remained
+false and all four then-disclosed project axioms, all five remaining blockers,
+unset activation fingerprints, and the absence of `PNP.Main.p_eq_np` were
+retained. The current inventory is generated separately and must not be
+inferred from these historical byte coordinates.
 
 ```sh
 lake build PNP.Concrete.LockedNANDThresholdPublication

@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '6f97e3b0177eae0fbcad2d3e65703237839020f939da3efe7a9bdf8201aefd43';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '5d7aff30ee551e78d8625abdc91e2e781833596b26634be75d0c96fdf8a40f74';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -3123,12 +3123,17 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.unresolved_positiveSlack_regression',
   'PNP.Main.concretePEqualsNP_iff',
   'PNP.Main.locked_nand_threshold',
+  'PNP.concrete_legacy_locked_nand_compatibility_checked_complete',
+  'PNP.report_locked_nand_eq_concrete_threshold',
+  'PNP.report_sat_eq_concrete_cnfsat',
+  'PNP.sat_in_np_witness_model',
+  'PNP.sat_in_p_from_locked_nand_in_p',
+  'PNP.sat_reduces_to_locked_nand_checked',
 ].sort());
 
 export const REQUIRED_PROJECT_AXIOMS0 = Object.freeze([
   'PNP.CheckPCCPackexp',
   'PNP.GeneratePCCPack',
-  'PNP.LockedNANDThreshold',
   'PNP.ResidualBandExactMinimization',
 ]);
 
@@ -3156,7 +3161,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-23-185') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-23-186') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -3204,7 +3209,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
     throw new Error('Lean excluded-private declaration count is invalid');
   }
   if (stableStringify0(inventory.projectAxioms) !== stableStringify0(REQUIRED_PROJECT_AXIOMS0)) {
-    throw new Error('Lean project axiom inventory must remain the disclosed four-axiom set');
+    throw new Error('Lean project axiom inventory must match the disclosed three-axiom set');
   }
   if (stableStringify0(inventory.projectAxioms) !== stableStringify0(axiomRows.map((entry) => entry.name))) {
     throw new Error('Lean project axiom side inventory drifted from compiled axiom declaration rows');
@@ -3433,7 +3438,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-23-185') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-23-186') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

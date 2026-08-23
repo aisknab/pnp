@@ -93,16 +93,18 @@ The development also provides one direct raw-machine instance: a universally
 correct polynomial-time verifier for canonically encoded finite CNF formulae and bounded assignment
 certificates, proving `PNP.Concrete.CNFSAT ∈ NP`. It does not provide a deterministic polynomial-time
 decider proving `CNFSAT ∈ P`, concrete NP-hardness or NP-completeness, the complete locked-NAND
-threshold theorem, the residual-band exact minimizer, ZeroSlack, or a root theorem
+target decider, the residual-band exact minimizer, ZeroSlack, or a root theorem
 `PNP.Main.p_eq_np` with an acceptable axiom audit.
 
 The repository now pins `leanprover/lean4:v4.31.0` and builds the explicit `PNP` library root. That
 root imports every tracked Lean source module. `PNP.Main.rootTheoremStatus` is assumption-free data
 recording that the theorem is not released; it is not the target theorem. The current conditional
-bridge still depends on four disclosed project-specific axioms: `PNP.LockedNANDThreshold`,
-`PNP.ResidualBandExactMinimization`, `PNP.GeneratePCCPack`, and `PNP.CheckPCCPackexp`. The legacy
-`PNP.SAT` value is now an ordinary non-authoritative label, not an axiom and not an alias for
-`PNP.Concrete.CNFSAT`.
+bridge still depends on three disclosed project-specific axioms:
+`PNP.ResidualBandExactMinimization`, `PNP.GeneratePCCPack`, and
+`PNP.CheckPCCPackexp`. The active `PNP.SAT` and `PNP.LockedNANDThreshold`
+values are exact definitions of `PNP.Concrete.CNFSAT` and
+`PNP.Concrete.LockedNAND.EncodedLockedNANDThreshold`; the bridge consumes the
+compiled concrete reduction directly.
 
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
@@ -163,15 +165,15 @@ milestone credit until reviewed pins change.
 
 Declaration, theorem, module, excluded-private, and reviewed-candidate counts are emitted by the
 compiled inventory and are intentionally not duplicated here. The current Lean source closure has
-exactly four project-specific axioms; the generated inventory and publication outputs must be
+exactly three project-specific axioms; the generated inventory and publication outputs must be
 regenerated and byte-checked after source-closure changes before they may describe the revision.
 
 Inventory generation is deliberately separate from theorem publication. The concrete gate expects
 the compatibility theorem `PNP.Main.p_eq_np` to have the exact concrete target
 `PNP.Main.ConcretePEqualsNP`. The target now exists as an axiom-free **definition** aliasing mutual
 inclusion for the finite charged-pipeline classes; it is not a proof. The compatibility/root theorem
-`PNP.Main.p_eq_np` remains absent. The existing witness-handle proposition `PNP.PEqualsNP` is
-abstract and explicitly publication-ineligible.
+`PNP.Main.p_eq_np` remains absent. `PNP.PEqualsNP` is now a compatibility name
+for that same concrete target, but target identity cannot replace the absent theorem.
 
 The expected kernel fingerprints for the concrete target type and value, compatibility-root type,
 axiom closure, and source closure are intentionally `null` in this migration step. Unset
@@ -815,8 +817,9 @@ indices. The missing fields at the candidate-assembly boundary were `baselineCon
 `unsatisfiableFinalZero`, and `satisfiableFinalConditions`. The following two milestones now
 instantiate `baselineConditions` and the whole-carrier `unsatisfiableFinalZero` law, leaving
 exactly `satisfiableFinalConditions`. The answer-independent uniform builder and its polynomial
-bound are not supplied. The conditional module is not yet connected to the abstract
-`PNP.LockedNANDThreshold` language.
+bound are not supplied by this conditional module. Downstream M186 compatibility
+now makes the report-facing locked-NAND endpoint exactly the concrete encoded
+language, without turning the conditional module into a decider.
 
 `LockedNANDCarrierTrace` now closes the next unbounded Section 17 dependency for arbitrary finite
 NAND circuits. It defines the exact disjoint `X ⊔ T ⊔ O ⊔ R ⊔ L ⊔ {z}` carrier with width
@@ -886,7 +889,8 @@ decidability instance is exhaustive finite input search and has no polynomial-ru
 
 The eight-declaration audit uses exactly `propext` and `Quot.sound`, never `Classical.choice` or a
 project axiom. This closes the typed semantic threshold, not the report's encoded polynomial-time
-builder or the abstract `PNP.LockedNANDThreshold` language. See
+builder or a deterministic target decider. Downstream milestones now supply the
+encoded reduction and active compatibility link. See
 [`lean_locked_nand_global_semantic_threshold.md`](./lean_locked_nand_global_semantic_threshold.md).
 
 `PNP.Concrete.LockedNANDEncoding` and `PNP.Concrete.LockedNANDReduction` now
@@ -958,8 +962,8 @@ reference is accepted at the standalone grammar boundary but cleared by the
 strict composition. The 3,295-declaration transcript permits only empty
 closure, `propext`, and `propext` with `Quot.sound`. This closes target
 emission and strict parser/emitter composition. The following reduction
-milestone packages that composition; this emitter module alone does not
-discharge the abstract `PNP.LockedNANDThreshold` assumption. See
+milestone packages that composition, and M186 supplies the active compatibility
+link; this emitter module alone is not a target decider. See
 [`lean_concrete_locked_nand_target_emitter.md`](./lean_concrete_locked_nand_target_emitter.md).
 
 `PNP.Concrete.LockedNANDPolynomialReduction` now packages the existing strict
@@ -974,9 +978,9 @@ The audit covers all seven new public declarations and nine reused boundary
 interfaces. It permits only the existing Lean-standard `propext` and
 `Quot.sound` closure, with no project axiom, `Classical.choice`, host lookup,
 or caller certificate. This closes the concrete polynomial-reduction
-packaging edge in the legacy locked-NAND route. It does not connect the
-concrete target language to the abstract `PNP.LockedNANDThreshold`, prove the
-report-level threshold theorem, put CNFSAT in P, establish NP-hardness, or
+packaging edge in the legacy locked-NAND route. M186 now connects this exact
+target language to the report-facing endpoint. This module alone does not put
+CNFSAT in P, establish NP-hardness, or
 prove P = NP. See
 [`lean_concrete_locked_nand_polynomial_reduction.md`](./lean_concrete_locked_nand_polynomial_reduction.md).
 
@@ -1003,8 +1007,8 @@ the corresponding `PolynomialTimeFunction` and literal `RawRefinement`.
 Lean packages the direct `PolynomialReduction CNFSAT EncodedNANDSAT` and its
 explicit composition with the strict locked-NAND polynomial reduction. This
 closes the general compiler/reduction edge rather than extending another
-finite formula prefix. It does not decide CNF-SAT, connect the concrete target
-to the abstract report-level threshold assumption, complete ZeroSlack/PCCMin,
+finite formula prefix. M186 now supplies the active concrete report-facing
+target identity. This compiler does not decide CNF-SAT, complete ZeroSlack/PCCMin,
 or prove P = NP. See
 [`lean_concrete_cnf_to_nand_polynomial_reduction.md`](./lean_concrete_cnf_to_nand_polynomial_reduction.md).
 
@@ -1016,10 +1020,23 @@ composed finite parser/compiler/emitter pipeline, so correctness, runtime,
 output-size bounds, malformed-input behavior, and recursive raw refinement
 all apply uniformly to every bitstring. The theorem's compiled closure uses
 only `propext` and `Quot.sound`; it does not depend on the legacy abstract
-string-handle axiom. This is still a many-one reduction, not a polynomial
+string-handle axiom. M186 now consumes this theorem directly in the active
+report-facing bridge. This is still a many-one reduction, not a polynomial
 decider for the target, a concrete CNFSAT NP-hardness result, a residual-band
 or ZeroSlack/PCCMin theorem, or the root theorem. See
 [`lean_concrete_locked_nand_threshold_publication.md`](./lean_concrete_locked_nand_threshold_publication.md).
+
+`PNP.ConcreteLegacyLockedNANDCompatibility` closes the duplicate compatibility
+boundary. The report-facing language, decider, verifier, reduction, P/NP class,
+and P-equals-NP interfaces are aliases of their concrete finite-pipeline
+counterparts. `SAT` and `LockedNANDThreshold` are exact concrete definitions,
+the CNF verifier and all-bitstring locked-NAND reduction are reused, and
+`CheckerTrustModel` no longer accepts a caller-supplied locked-NAND reduction.
+The named endpoint has only `propext` and `Quot.sound` in its compiled closure,
+and `PNP.LockedNANDThreshold` is absent from the project-axiom inventory. A
+target decider, residual-band construction, ZeroSlack/PCCMin soundness,
+concrete NP-hardness, and the root theorem remain open. See
+[`lean_concrete_legacy_locked_nand_compatibility.md`](./lean_concrete_legacy_locked_nand_compatibility.md).
 
 The historical hostile review named `DirectWireOutputLowerBound`, `MacroDistinct`,
 `TraceEquivalence`, `ZeroOutputConvention`, and `FinalLockSeparation`. The general output lower
@@ -1038,8 +1055,8 @@ parser composition, and recursive raw refinement. That composition is now
 packaged as the concrete
 `EncodedNANDSAT`-to-`EncodedLockedNANDThreshold` `PolynomialReduction`.
 The report-facing concrete all-bitstring reduction is now published as
-`PNP.Main.locked_nand_threshold`; the legacy abstract string-handle bridge
-remains quarantined and is not a premise of that theorem. See
+`PNP.Main.locked_nand_threshold`; M186 makes the active report-facing bridge
+consume that concrete theorem without a duplicate axiom or trust field. See
 [`lean_locked_nand_threshold_boundary.md`](./lean_locked_nand_threshold_boundary.md).
 
 The residual-route layer now performs one honest executable operation: it scans an explicit finite
@@ -2360,7 +2377,8 @@ Public theorem emission may be reconsidered only when all of the following are m
 8. public status and paper claims are generated from the checked Lean theorem inventory.
 
 The separate concrete gate enforces this boundary. Merely adding a declaration with the right name,
-relying on abstract `PNP.PEqualsNP`, or leaving an expected fingerprint unset cannot activate it.
+relying on the `PNP.PEqualsNP` compatibility alias without the exact root
+theorem, or leaving an expected fingerprint unset cannot activate it.
 
 Check the current non-activation outputs with:
 

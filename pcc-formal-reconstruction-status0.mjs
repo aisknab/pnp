@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-185';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-186';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -31,7 +31,6 @@ export const FORMAL_RECONSTRUCTION_BLOCKERS0 = Object.freeze([
 const PROJECT_SPECIFIC_AXIOM_INVENTORY = Object.freeze([
   'PNP.CheckPCCPackexp',
   'PNP.GeneratePCCPack',
-  'PNP.LockedNANDThreshold',
   'PNP.ResidualBandExactMinimization',
 ]);
 
@@ -537,6 +536,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFiniteBCELPacketActivationObstructionAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFiniteBCELPacketActivationObstruction.lean',
   'node --test audits/lean-residual-terminal-finite-bcel-packet-activation-obstruction0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPConcreteLegacyLockedNANDCompatibilityAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPConcreteLegacyLockedNANDCompatibility.lean',
+  'node --test audits/lean-concrete-legacy-locked-nand-compatibility0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -685,8 +687,8 @@ const NON_CLAIMS = Object.freeze([
   'The strict-v0 locked-NAND target emitter is one fixed 1,387,921-rule grammar-only controller. It emits the exact direct raw target on every grammar-decoded circuit, including intrinsically invalid references, rejects malformed grammar with empty output, and has all-input polynomial runtime and output-size bounds. Composition with the strict source parser clears intrinsically invalid inputs and computes buildLockedNANDInstance with recursively compiled RawRefinement.',
   'The strict parser/emitter composition is packaged as a concrete PolynomialReduction from EncodedNANDSAT to EncodedLockedNANDThreshold, with exact output, all-bitstring language equivalence, a ReducesTo witness, and recursive RawRefinement. PNP.Main.locked_nand_threshold now consumes the composed CNFSAT reduction directly in the concrete charged-pipeline model.',
   'Against the hostile-review inventory, DirectWireOutputLowerBound, global MacroDistinct, semantic-carrier TraceEquivalence, whole-carrier ZeroOutputConvention, FinalLockSeparation, the encoded uniform polynomial builder, and its report-facing linkage are discharged.',
-  'PNP.Main.locked_nand_threshold has exact type ReducesTo CNFSAT EncodedLockedNANDThreshold and depends only on Lean standard axioms propext and Quot.sound. It does not put the target in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, activate the legacy string-handle bridge, or prove P = NP.',
-  'The generic conditional module still quantifies an arbitrary satisfiable proposition and baseline natural number. The authoritative report-facing threshold theorem bypasses that legacy string-handle layer and links the concrete encoded CNFSAT builder directly to the concrete threshold language.',
+  'PNP.Main.locked_nand_threshold has exact type ReducesTo CNFSAT EncodedLockedNANDThreshold and depends only on Lean standard axioms propext and Quot.sound. It does not put the target in P, discharge residual-band minimization, ZeroSlack or PCCMin, prove concrete CNFSAT NP-hardness, or prove P = NP.',
+  'The generic conditional module still quantifies an arbitrary satisfiable proposition and baseline natural number. The active report-facing SAT and locked-NAND names now alias the concrete finite-pipeline languages and consume the checked all-bitstring reduction directly; no deterministic locked-NAND decider, residual-band reduction, or concrete NP-hardness transport follows.',
   'The executable residual-route scan is complete only for the explicit finite implementation list supplied by its caller; unresolved excludes no unlisted gain and does not imply global minimality or ZeroSlack.',
   'An empty-list scan is formally shown to remain unresolved on a positive-slack implementation, so search failure cannot be promoted to zero residual slack.',
   'Exact and ZeroSlack route results require Lean proofs of semantic minimality and are never manufactured by the executable gain scanner; no BCEL, HN/BUD, selector, PCCMin-loop, or residual-band completeness follows.',
@@ -727,12 +729,13 @@ const NON_CLAIMS = Object.freeze([
   'The checked finite SaturatePositive-to-BCEL-ready composition reruns the production finite classifier and accepts only its positive-projection branch with a computed ready nucleus. Its certificate retains the exact classifier equality, safe trace, positive final slack, positive whole-support defect, nontrivial nucleus, constant-cut equations, and local BN2 conclusions. The terminal problem and initial positive premise remain supplied; local failure branches are not globally routed, BN3--BN6 data and constant activation are not derived, and manuscript-wide SaturatePositive, BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.',
   'The finite BCEL-ready and Packet carrier-coherence certificate uses the exact candidate and model already owned by one accepted Packet/budget no-lower certificate. An injective and surjective anchor map plus a reflected list equality identifies its computed ready nucleus with that exact grouped Packet carrier, transfers the nontrivial-size bound, and reuses the same-family Packet and constant-activation exclusions. The terminal problem, initial positive premise, family, anchor map, payloads, tables, and ranks remain supplied; activation weights are not identified with projection excess, constant activation is not derived from positive slack, and unconditional ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.',
   'The finite BCEL/Packet activation-coherence obstruction exhaustively compares the exact M183 nucleus defect with the declared cut value and every canonical nonempty proper activation weight on the coherently mapped M184 Packet family. Hypothetical acceptance reconstructs the mapped-cut projection equation, while the already checked same-family Packet exclusion forces deterministic rejection with either a cut-value mismatch or one proof-bearing proper-cut mismatch. This diagnoses rather than repairs the missing bridge: the terminal problem, positive premise, family, map, activation data, payloads, tables, and ranks remain supplied; unconditional BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.',
+  'The M186 concrete compatibility boundary makes every report-facing language, decider, verifier, reduction, P/NP class, and P-equals-NP witness an alias of the checked finite-pipeline model. SAT and LockedNANDThreshold are exact concrete definitions, the active bridge consumes the compiled all-bitstring reduction without caller trust, and PNP.LockedNANDThreshold is no longer a project axiom. This does not supply a locked-NAND decider, residual-band reduction, PCCMin or ZeroSlack soundness, concrete SAT NP-hardness, the eligible root theorem, or P = NP.',
   'Residual RankWF is now formalized for the manuscript\'s fixed ten-coordinate natural lexicographic rank, with an executable comparison, exact Boolean equivalence, coordinate-priority witnesses, accessibility, induction, and kernel-checked well-foundedness. This does not map current finite routes into the complete global outcome system, prove that any route decreases the rank, establish route completeness or Package E, remove the explicit positive premise, establish full SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
   'The designated legacy-v0 command replays pinned assertion-checker behavior only; it is neither current theorem authority nor a mathematical proof.',
   'The compiled Lean theorem inventory is declaration and axiom-dependency evidence; it does not widen any theorem beyond its exact type and stated scope.',
-  'PNP.PEqualsNP uses abstract string-handle witnesses rather than a concrete standard complexity model and is categorically ineligible for public theorem activation.',
+  'PNP.PEqualsNP is now a compatibility name for the concrete finite charged-pipeline target. The target remains inactive because deterministic CNFSAT membership in P, concrete NP-hardness transport, the eligible root theorem, and the exact publication fingerprints remain absent.',
   'PNP.Main.ConcretePEqualsNP now names the inactive finite charged-pipeline target, while PNP.Main.p_eq_np remains absent.',
   'All five reviewed activation fingerprints remain intentionally unset, so target presence alone cannot open the concrete publication gate.',
   'The current canonical TeX and PDF are generated non-claiming reconstruction reports; the historical 56-page direct-claim report remains historical audit material only.',
@@ -1484,6 +1487,12 @@ const EXACT_FIELDS = Object.freeze({
     'fixed-135070-rule-three-node-all-bitstring-cnf-to-nand-compiler-with-exact-output-polynomial-time-function-direct-reduction-locked-threshold-composition-and-recursive-raw-refinement',
   leanConcreteCNFToNANDSemanticCompilerScope:
     'strict-canonical-cnf-to-intrinsically-topological-nand-semantic-compiler-with-exact-gate-count-quadratic-output-bound-and-all-bitstring-fail-closed-equivalence',
+  leanConcreteLegacyLockedNANDCompatibilityFormalized: true,
+  leanConcreteLegacyLockedNANDCompatibilityAxiomAuditPassed: true,
+  leanConcreteLegacyLockedNANDCompatibilityAuditedDeclarationCount: 9,
+  leanConcreteLegacyLockedNANDCompatibilityEndpointProjectAssumptionFree: true,
+  leanConcreteLegacyLockedNANDCompatibilityScope:
+    'all-bitstring-report-facing-sat-and-locked-nand-identities-with-concrete-finite-pipeline-complexity-witnesses-and-direct-checked-reduction-reuse',
   leanLockedNANDPolynomialBuilderFormalized: true,
   leanCompatibleReplacementFormalized: false,
   leanGlobalSlackLawFormalized: false,
@@ -2727,6 +2736,12 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
         'fixed-135070-rule-three-node-all-bitstring-cnf-to-nand-compiler-with-exact-output-polynomial-time-function-direct-reduction-locked-threshold-composition-and-recursive-raw-refinement',
       leanConcreteCNFToNANDSemanticCompilerScope:
         'strict-canonical-cnf-to-intrinsically-topological-nand-semantic-compiler-with-exact-gate-count-quadratic-output-bound-and-all-bitstring-fail-closed-equivalence',
+      leanConcreteLegacyLockedNANDCompatibilityFormalized: true,
+      leanConcreteLegacyLockedNANDCompatibilityAxiomAuditPassed: true,
+      leanConcreteLegacyLockedNANDCompatibilityAuditedDeclarationCount: 9,
+      leanConcreteLegacyLockedNANDCompatibilityEndpointProjectAssumptionFree: true,
+      leanConcreteLegacyLockedNANDCompatibilityScope:
+        'all-bitstring-report-facing-sat-and-locked-nand-identities-with-concrete-finite-pipeline-complexity-witnesses-and-direct-checked-reduction-reuse',
       leanLockedNANDPolynomialBuilderFormalized: true,
       leanCompatibleReplacementFormalized: false,
       leanGlobalSlackLawFormalized: false,
@@ -3284,7 +3299,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-23-185',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-23-186',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

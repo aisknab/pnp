@@ -278,7 +278,6 @@ test('first-token composition remains earned beneath the complete-header boundar
   assert.deepEqual(status.projectSpecificAxiomInventory, [
     'PNP.CheckPCCPackexp',
     'PNP.GeneratePCCPack',
-    'PNP.LockedNANDThreshold',
     'PNP.ResidualBandExactMinimization',
   ]);
   assert.equal(status.remainingBlockers.length, 5);

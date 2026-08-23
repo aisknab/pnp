@@ -201,9 +201,13 @@ bounds, and final strict-v0 `PolynomialReduction` package are now formalized.
 A separate fixed all-input machine computes the exact encoded CNF-to-NAND
 translation in polynomial time and packages both the direct
 `CNFSAT`-to-`EncodedNANDSAT` reduction and its explicit composition with the
-strict locked-NAND reduction. The abstract threshold-language discharge,
+strict locked-NAND reduction. M186 makes the report-facing SAT and locked-NAND
+interfaces exact aliases of these concrete languages, reuses the compiled NP
+verifier and all-bitstring reduction, and removes the duplicate locked-NAND
+project axiom and caller trust field. A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
-unproved.
+unproved. See
+[`lean_concrete_legacy_locked_nand_compatibility.md`](lean_concrete_legacy_locked_nand_compatibility.md).
 
 The reconstruction now also verifies the iteration-count subclaim used by
 `PCCMin`: for any finite supplied chain whose every adjacent replacement is a

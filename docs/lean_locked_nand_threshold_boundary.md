@@ -89,10 +89,11 @@ exhaustive finite decision is used only to eliminate a proposition-level case
 split in the final iff theorem; it is not a construction step and carries no
 polynomial-runtime claim.
 
-The remaining report-level work is different: construct the encoded
-locked-NAND instance with a proved polynomial-time machine and certificate-size
-bound, then connect the typed semantic object to the abstract
-`PNP.LockedNANDThreshold` language and reduction trust surface.
+Successor milestones construct the encoded locked-NAND instance with a proved
+polynomial-time machine and output-size bound. M186 then connects the typed
+semantic object to the exact concrete `PNP.LockedNANDThreshold` language and
+removes the caller-supplied reduction trust field. Putting that target in P
+through an unconditional residual-band route remains open.
 
 ## Audit boundary
 
@@ -108,9 +109,10 @@ trace equivalence, exact candidate assembly, global baseline distinctness,
 both whole-carrier branches, the complete six-field package, the typed
 semantic threshold, and global residual slack at most four are now true in
 formal status. The encoded polynomial builder, report-level threshold link,
-and polynomiality remain false. Six blockers remain, including that
-construction/link work. The four project-specific axioms and absent
-`PNP.Main.p_eq_np` root theorem also remain. The axiom-free inactive
+and polynomiality were not yet present at this historical module boundary;
+successor milestones now supply the builder and report linkage. The current
+status still has five open global gates, three project-specific axioms, and an
+absent `PNP.Main.p_eq_np` root theorem. The axiom-free inactive
 `PNP.Main.ConcretePEqualsNP` definition does not change this threshold boundary or activate the
 publication gate.
 
