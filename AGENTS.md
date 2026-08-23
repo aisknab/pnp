@@ -145,12 +145,56 @@ Every formal milestone published through both this repository and PNPLabs must
 pass a full PNPLabs publication-surface audit. This is a release invariant, not
 the mathematical subject or direction of the selected core milestone. Reconcile
 the homepage (including its current bottom line), formal status and complete
-milestone ledger, FAQ and editorial-percentage explanation, updates page, feed,
+milestone ledger, FAQ and progress-model explanation, updates page, feed,
 progress graphic, paper and architecture pages, README, reviewer and audit
 documentation, source links, download metadata, browser-rendered status, and
-negative tests. Preserve historical milestone coordinates, and keep the
-editorial progress estimate distinct from the number of earned formal-publication
-rows.
+negative tests. Preserve historical milestone coordinates, and keep formal
+artefact coverage distinct from the risk-weighted proof-completion estimate.
+
+### Proof-progress tracking policy
+
+The authoritative model is the versioned fixed-checkpoint ledger at
+[`status/PROOF_PROGRESS.json`](status/PROOF_PROGRESS.json). Its five tracks are
+fixed at 15, 20, 35, 20, and 10 points. Maintain it under these rules:
+
+1. Call the earned publication-row ratio **formal artefact coverage**, never
+   proof completion, solution progress, confidence, or likelihood of success.
+2. Derive every current public proof-completion percentage only from the earned
+   checkpoints in the canonical progress ledger.
+3. Do not add or subdivide checkpoint weight merely to award credit for a new
+   local milestone. Change the model itself only after a documented review of a
+   material change to the proof dependency graph.
+4. A score change requires a named checkpoint, compiled theorem/status evidence,
+   a source coordinate or commit, and the complete written rationale required by
+   the ledger's `scoreChangePolicy`.
+5. Finite, local, conditional, or supplied-data theorems do not earn an
+   unconditional checkpoint unless they actually discharge that checkpoint's
+   complete obligation.
+6. Award polynomial-runtime credit only for an encoded-input-size polynomial
+   theorem covering the complete construction, output, and certificates.
+7. Allow the score to decrease when an assumption returns, a dependency is
+   invalidated or weakened, hidden exponential work appears, or a new
+   load-bearing blocker is discovered.
+8. New publication rows may change formal artefact coverage without changing
+   proof completion.
+9. Generate current website and report values from the canonical ledger; do not
+   maintain page-specific percentages.
+10. Preserve historical records and immutable release coordinates. Explain old
+    scoped-row/editorial percentages as superseded coverage measures while
+    updating every active surface.
+11. Never change a theorem statement, proof, dependency, or claim merely to
+    improve the displayed score.
+12. Every current public update must report formal artefact coverage,
+    risk-weighted proof completion, its uncertainty range, and global gates
+    closed as separate fields.
+13. External review may be validation evidence, but it is not a mathematical
+    premise and cannot substitute for a formal checkpoint.
+14. The risk-weighted score is neither a probability that the route is correct
+    nor a delivery or time-remaining estimate.
+
+Run `npm run formal:progress` after status or inventory changes. Reconcile the
+ledger before generated publication work, and include hostile progress-contract
+tests with any score transition.
 
 Use the following publication order:
 

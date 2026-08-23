@@ -7,10 +7,11 @@ import {
   RunPNPVerifyAll0,
 } from '../scripts/pnp-verify-all.mjs';
 
-test('current verifier plan contains status, surface, archive integrity, and current tests only', () => {
+test('current verifier plan contains status, progress, surface, archive integrity, and current tests only', () => {
   const plan = MakeCurrentVerificationPlan0();
   assert.deepEqual(plan.map(({ id }) => id), [
     'formal-reconstruction-status',
+    'proof-progress',
     'formal-public-surface',
     'legacy-v0-archive-integrity',
     'current-authority-unit-tests',
@@ -115,6 +116,13 @@ test('current verifier accepts without executing a historical replay', async () 
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP');
   assert.equal(out.leanConcreteCNFSATInPFormalized, false);
   assert.equal(out.leanConcreteCNFNPCompletenessFormalized, false);
+  assert.equal(out.riskWeightedProofCompletionPercent, 30);
+  assert.equal(out.proofCompletionPointsAvailable, 100);
+  assert.equal(out.proofCompletionUncertaintyLowPercent, 20);
+  assert.equal(out.proofCompletionUncertaintyHighPercent, 40);
+  assert.deepEqual(out.formalArtefactCoverage, { earnedRows: 160, totalRows: 162 });
+  assert.equal(out.globalGatesClosed, 0);
+  assert.equal(out.globalGatesAvailable, 5);
   assert.equal(out.historicalReplayExecuted, false);
   assert.equal(out.legacyCheckerReplayAccepted, false);
   assert.equal(out.legacyCheckerReplayIsMathematicalProof, false);

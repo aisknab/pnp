@@ -10,6 +10,7 @@ import {
   CheckFormalReconstructionStatus0,
   FORMAL_RECONSTRUCTION_BLOCKERS0,
 } from '../pcc-formal-reconstruction-status0.mjs';
+import { CheckProofProgress0 } from '../pcc-proof-progress0.mjs';
 import { CheckFormalPublicSurface0 } from '../pcc-formal-public-surface0.mjs';
 import { CheckLegacyV0Archive0 } from '../pcc-legacy-v0-archive0.mjs';
 
@@ -201,6 +202,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
 export function MakeCurrentVerificationPlan0(options = {}) {
   return Object.freeze([
     Object.freeze({ id: 'formal-reconstruction-status', kind: 'checker' }),
+    Object.freeze({ id: 'proof-progress', kind: 'checker' }),
     Object.freeze({ id: 'formal-public-surface', kind: 'checker' }),
     Object.freeze({ id: 'legacy-v0-archive-integrity', kind: 'checker' }),
     ...(options.includeUnitTests === false
@@ -218,6 +220,7 @@ export async function RunPNPVerifyAll0(options = {}) {
 
   const checkers = [
     ['formal-reconstruction-status', () => CheckFormalReconstructionStatus0({ root, writeOutput: false })],
+    ['proof-progress', () => CheckProofProgress0({ root })],
     ['formal-public-surface', () => CheckFormalPublicSurface0({ root, writeOutput: false })],
     ['legacy-v0-archive-integrity', () => CheckLegacyV0Archive0({ root, writeOutput: false })],
   ];
@@ -250,6 +253,7 @@ export async function RunPNPVerifyAll0(options = {}) {
   }
 
   const statusStep = steps.find((step) => step.id === 'formal-reconstruction-status');
+  const progressStep = steps.find((step) => step.id === 'proof-progress');
   const surfaceStep = steps.find((step) => step.id === 'formal-public-surface');
   const archiveStep = steps.find((step) => step.id === 'legacy-v0-archive-integrity');
   return finish0(root, outputPath, writeOutput, {
@@ -280,6 +284,13 @@ export async function RunPNPVerifyAll0(options = {}) {
     activeFinalNodeIds: [],
     remainingFormalObligations: [...FORMAL_RECONSTRUCTION_BLOCKERS0],
     remainingBlockers: [...FORMAL_RECONSTRUCTION_BLOCKERS0],
+    riskWeightedProofCompletionPercent: progressStep?.pointsEarned ?? null,
+    proofCompletionPointsAvailable: progressStep?.pointsAvailable ?? null,
+    proofCompletionUncertaintyLowPercent: progressStep?.uncertaintyLowPercent ?? null,
+    proofCompletionUncertaintyHighPercent: progressStep?.uncertaintyHighPercent ?? null,
+    formalArtefactCoverage: progressStep?.formalArtefactCoverage ?? null,
+    globalGatesClosed: progressStep?.globalGatesClosed ?? null,
+    globalGatesAvailable: progressStep?.globalGatesAvailable ?? null,
     historicalReplayExecuted: false,
     legacyCheckerReplayAccepted: false,
     legacyCheckerReplayIsMathematicalProof: false,
