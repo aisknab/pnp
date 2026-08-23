@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184`, 160 of 162
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-185`, 161 of 163
 current scoped rows are earned, or 98.8 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M184 |
+| Track | Available | Earned at M185 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 14 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 0 |
 | **Total** | **100** | **30** |
 
-The M184 risk-weighted proof completion estimate is therefore 30 percent, with
+The M185 risk-weighted proof completion estimate is therefore 30 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -44,6 +44,13 @@ The five current global gates are open: Concrete SAT, residual-band minimisation
 unconditional ZeroSlack, polynomial runtime and certificate bounds, and the root
 theorem plus axiom audit. Four project-specific axioms remain,
 `PNP.Main.p_eq_np` is absent, and the publication gate is false.
+
+The immutable scoring baseline remains M184: 160 of 162 formal artefact rows,
+30 risk-weighted points, a 20-to-40-percent uncertainty range, and zero of five
+global gates closed. M185 adds a finite activation-coherence diagnostic row, so
+current coverage becomes 161 of 163. It does not close a fixed checkpoint and
+does not change the 30-percent estimate. Both reviews are recorded separately
+in the canonical ledger history; no retrospective score was invented.
 
 ## Changing the score
 

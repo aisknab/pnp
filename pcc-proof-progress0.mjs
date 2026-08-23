@@ -6,6 +6,9 @@ import process from 'node:process';
 
 const CHECKER = 'CheckProofProgress0';
 const VERSION = 0;
+const BASELINE_COORDINATE =
+  'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184';
+const BASELINE_COVERAGE = Object.freeze({ earnedRows: 160, totalRows: 162 });
 const FILES = Object.freeze({
   ledger: 'status/PROOF_PROGRESS.json',
   status: 'status/FORMAL_RECONSTRUCTION_STATUS.json',
@@ -117,6 +120,20 @@ const REQUIRED_CHANGE_RECORD_FIELDS = Object.freeze([
   'uncertaintyRangeDecision',
 ]);
 
+const BASELINE_EARNED_CHECKPOINT_IDS = new Set([
+  'foundations-concrete-kernel-interfaces',
+  'foundations-recursive-pipeline',
+  'foundations-inventory-gate',
+  'foundations-cnfsat-in-np',
+  'reductions-cook-levin-semantics',
+  'reductions-cnf-to-nand',
+  'reductions-locked-nand',
+  'reductions-builder-prefixes',
+  'reductions-report-locked-nand-linkage',
+  'residual-finite-stopping-foundations',
+  'pccmin-strict-gain-scaffold',
+]);
+
 class ProofProgressError extends Error {
   constructor(code, message, details = {}) {
     super(message);
@@ -171,7 +188,13 @@ export function validateProofProgress0(ledger, status, inventory) {
       if (checkpoint.evidence.length === 0) fail('Checkpoint.EvidenceMissing', 'checkpoint must retain exact evidence', { id: expectedId });
       for (const evidence of checkpoint.evidence) validateEvidence(evidence, status, inventory, expectedId);
       if (checkpoint.status === 'earned') {
-        requireValue(checkpoint.awardedAtCoordinate, ledger.asOfCoordinate, 'Checkpoint.AwardCoordinate', { id: expectedId });
+        if (BASELINE_EARNED_CHECKPOINT_IDS.has(expectedId)) {
+          requireValue(checkpoint.awardedAtCoordinate, BASELINE_COORDINATE,
+            'Checkpoint.AwardCoordinate', { id: expectedId });
+        } else {
+          requireString(checkpoint.awardedAtCoordinate,
+            'Checkpoint.AwardCoordinate', { id: expectedId });
+        }
         trackEarned += checkpoint.points;
       } else {
         requireValue(checkpoint.awardedAtCoordinate, null, 'Checkpoint.OpenAwardCoordinate', { id: expectedId });
@@ -253,17 +276,49 @@ export function validateProofProgress0(ledger, status, inventory) {
 
   requireArray(ledger.history, 'History.Shape', 'history must be an array');
   if (ledger.history.length === 0) fail('History.Empty', 'progress history must include the M184 baseline');
-  const baseline = ledger.history[0];
+  const baseline = ledger.history.find((entry) =>
+    entry?.kind === 'baseline' && entry?.asOfCoordinate === BASELINE_COORDINATE);
   requirePlain(baseline, 'History.BaselineShape', 'baseline history entry must be an object');
   requireValue(baseline.kind, 'baseline', 'History.BaselineKind');
-  requireValue(baseline.asOfCoordinate, ledger.asOfCoordinate, 'History.BaselineCoordinate');
-  requireJson(baseline.formalArtefactCoverage, { earnedRows, totalRows }, 'History.BaselineCoverage');
+  requireValue(baseline.asOfCoordinate, BASELINE_COORDINATE, 'History.BaselineCoordinate');
+  requireJson(baseline.formalArtefactCoverage, BASELINE_COVERAGE, 'History.BaselineCoverage');
   requireValue(baseline.riskWeightedProofCompletionPercent, pointsEarned, 'History.BaselineScore');
   requireValue(baseline.uncertaintyLowPercent, 20, 'History.BaselineUncertaintyLow');
   requireValue(baseline.uncertaintyHighPercent, 40, 'History.BaselineUncertaintyHigh');
   requireValue(baseline.globalGatesClosed, 0, 'History.BaselineGatesClosed');
   requireValue(baseline.globalGatesAvailable, EXPECTED_GATES.length, 'History.BaselineGatesAvailable');
   requireString(baseline.rationale, 'History.BaselineRationale');
+
+  const currentReview = [...ledger.history].reverse().find((entry) =>
+    entry?.asOfCoordinate === ledger.asOfCoordinate);
+  requirePlain(currentReview, 'History.CurrentShape',
+    'progress history must include the current coordinate');
+  requireJson(currentReview.formalArtefactCoverage, { earnedRows, totalRows },
+    'History.CurrentCoverage');
+  requireValue(currentReview.riskWeightedProofCompletionPercent, pointsEarned,
+    'History.CurrentScore');
+  requireValue(currentReview.uncertaintyLowPercent,
+    ledger.proofCompletion.uncertaintyLowPercent, 'History.CurrentUncertaintyLow');
+  requireValue(currentReview.uncertaintyHighPercent,
+    ledger.proofCompletion.uncertaintyHighPercent, 'History.CurrentUncertaintyHigh');
+  requireValue(currentReview.globalGatesClosed,
+    ledger.globalGates.filter((gate) => gate.status === 'closed').length,
+    'History.CurrentGatesClosed');
+  requireValue(currentReview.globalGatesAvailable, EXPECTED_GATES.length,
+    'History.CurrentGatesAvailable');
+  requireString(currentReview.rationale, 'History.CurrentRationale');
+  if (currentReview !== baseline) {
+    requireValue(currentReview.kind, 'milestone-review', 'History.CurrentKind');
+    requireValue(currentReview.scoreChanged, pointsEarned !==
+      baseline.riskWeightedProofCompletionPercent, 'History.CurrentScoreChanged');
+    requireArray(currentReview.changedCheckpointIds,
+      'History.CurrentCheckpointChanges',
+      'current milestone review must list changed checkpoint IDs');
+    if (currentReview.scoreChanged === false) {
+      requireValue(currentReview.changedCheckpointIds.length, 0,
+        'History.CurrentUnexpectedCheckpointChange');
+    }
+  }
 
   requireArray(ledger.nonClaims, 'NonClaims.Shape', 'nonClaims must be an array');
   const nonClaims = ledger.nonClaims.join(' ');

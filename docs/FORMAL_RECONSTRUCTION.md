@@ -1400,6 +1400,22 @@ from positive residual slack; unconditional ZeroSlack, PCCMin, polynomial
 runtime, and the root theorem remain open. See
 [`lean_residual_terminal_finite_bcel_packet_carrier_coherence.md`](./lean_residual_terminal_finite_bcel_packet_carrier_coherence.md).
 
+`ResidualTerminalFiniteBCELPacketActivationObstruction` now makes the remaining
+numerical seam executable. It computes the exact M183 terminal defect and
+checks it against both the declared M184 Packet cut value and every canonical
+nonempty proper-cut activation weight on that same mapped family. If those
+equalities hypothetically held, the M183 proper-cut theorem would reconstruct
+the mapped projection equation. M184's same-family positive-Packet exclusion
+instead proves that complete activation coherence is impossible, so a
+deterministic classifier returns either a cut-value mismatch or the first
+proof-bearing proper-cut activation mismatch. This diagnoses rather than
+repairs the missing bridge. The terminal problem, positive premise, family,
+map, activation data, payloads, tables, and ranks remain supplied; enumeration
+may be exponential, and manuscript-wide `SaturatePositive`, `BCELReady`,
+unconditional ZeroSlack, PCCMin, polynomial runtime, and the root theorem
+remain open. See
+[`lean_residual_terminal_finite_bcel_packet_activation_obstruction.md`](./lean_residual_terminal_finite_bcel_packet_activation_obstruction.md).
+
 `ResidualTerminalRankWF` now reconstructs the named residual `RankWF` boundary.
 The rank is exactly the manuscript's ten natural coordinates in priority order:
 witness type, span type, mode, frontier defect, projection defect, saturation

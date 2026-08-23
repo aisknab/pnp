@@ -2598,6 +2598,32 @@ test('milestone ledger is evidence-backed and keeps premise/global boundaries ex
     /activation weights.*projection excess/u);
   assert.match(terminalFiniteBCELPacketCarrier.nonClaim,
     /unconditional ZeroSlack/u);
+  const terminalFiniteBCELPacketActivation = byId.get(
+    'residual-terminal-finite-bcel-packet-activation-obstruction',
+  );
+  assert.equal(terminalFiniteBCELPacketActivation.status,
+    'formalized-residual-terminal-finite-bcel-packet-activation-obstruction');
+  assert.equal(terminalFiniteBCELPacketActivation.earned, true);
+  assert.equal(
+    terminalFiniteBCELPacketActivation.axiomClosureUsesOnlyLeanStandardAllowlist,
+    true,
+  );
+  assert.deepEqual(terminalFiniteBCELPacketActivation.requiredTheorems, [
+    'PNP.checkTerminalFiniteBCELPacketActivationCoherence_eq_true_iff',
+    'PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.activation_coherent_mapped_cut_equation',
+    'PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.not_activation_coherent',
+    'PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.activation_coherence_check_eq_false',
+    'PNP.terminal_finite_bcel_packet_activation_obstruction_checked_complete',
+    'PNP.zeroslack_bcel_packet_activation_obstruction_checked_complete',
+  ]);
+  assert.match(terminalFiniteBCELPacketActivation.scope,
+    /exhaustively checks.*cut value.*proper.*activation weight/iu);
+  assert.match(terminalFiniteBCELPacketActivation.scope,
+    /deterministic classifier.*mismatch/iu);
+  assert.match(terminalFiniteBCELPacketActivation.nonClaim,
+    /diagnoses|does not prove activation coherence/iu);
+  assert.match(terminalFiniteBCELPacketActivation.nonClaim,
+    /unconditional.*ZeroSlack/iu);
   const terminalRankWF = byId.get('residual-terminal-rank-wf');
   assert.equal(terminalRankWF.status,
     'formalized-residual-terminal-rank-wf');

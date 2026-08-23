@@ -154,6 +154,7 @@ on:
       - 'audits/lean-residual-terminal-finite-saturate-positive0.test.mjs'
       - 'audits/lean-residual-terminal-finite-bcel-ready0.test.mjs'
       - 'audits/lean-residual-terminal-finite-bcel-packet-carrier-coherence0.test.mjs'
+      - 'audits/lean-residual-terminal-finite-bcel-packet-activation-obstruction0.test.mjs'
       - 'audits/lean-residual-terminal-rank-wf0.test.mjs'
       - 'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs'
       - 'audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs'
@@ -548,6 +549,7 @@ on:
       - 'audits/lean-residual-terminal-finite-saturate-positive0.test.mjs'
       - 'audits/lean-residual-terminal-finite-bcel-ready0.test.mjs'
       - 'audits/lean-residual-terminal-finite-bcel-packet-carrier-coherence0.test.mjs'
+      - 'audits/lean-residual-terminal-finite-bcel-packet-activation-obstruction0.test.mjs'
       - 'audits/lean-residual-terminal-rank-wf0.test.mjs'
       - 'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs'
       - 'audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs'
@@ -4832,3 +4834,29 @@ jobs:
 
       - name: Run same-candidate finite BCEL-ready and Packet carrier coherence hostile audit
         run: node --test audits/lean-residual-terminal-finite-bcel-packet-carrier-coherence0.test.mjs
+
+      - name: Print finite BCEL/Packet activation-coherence obstruction axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFiniteBCELPacketActivationObstructionAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalFiniteBCELPacketActivationObstructionAxiomAudit.lean)"
+          test "$expected_count" -gt 0
+          test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.")" -eq "$expected_count"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected finite BCEL/Packet activation-coherence obstruction axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -Eq 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            printf '%s\n' "$normalized" >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
+
+      - name: Run finite BCEL/Packet activation-coherence obstruction regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFiniteBCELPacketActivationObstruction.lean
+
+      - name: Run finite BCEL/Packet activation-coherence obstruction hostile audit
+        run: node --test audits/lean-residual-terminal-finite-bcel-packet-activation-obstruction0.test.mjs

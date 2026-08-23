@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-23-184",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-23-185",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3108,7 +3108,13 @@
     "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.carrier_at_least_two": "f5581ef1cdc43ba0b956571157e987f924002f01684be03f149986f285745d4f",
     "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.no_positive_packet": "6a41b5d36979d1af2913eda0d3a85588a0c01b21db58f43f228f50397bbb5afa",
     "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.not_constant_activation": "64e3518d1af10892841b77d5d6c9dd4f654b97c6a9e9c7eac048cf1a4fd36f4b",
-    "PNP.terminal_finite_bcel_packet_carrier_coherent_checked_complete": "1f2651016dabc74efe65d54a861f5508ca2477c5b3d677d453eba3720261479c"
+    "PNP.terminal_finite_bcel_packet_carrier_coherent_checked_complete": "1f2651016dabc74efe65d54a861f5508ca2477c5b3d677d453eba3720261479c",
+    "PNP.checkTerminalFiniteBCELPacketActivationCoherence_eq_true_iff": "d1d9c0fce88b026c8bca38c875557775123ede99256086f99402bb30be62f2f5",
+    "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.activation_coherent_mapped_cut_equation": "6f925ca58235168efc29966ece2fdf00e67e47f4436547d27bd9b44a3c54fbdd",
+    "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.not_activation_coherent": "c50aa223787a105a548bed04a930fa3747193c156a0ec418986c7ad497598f10",
+    "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.activation_coherence_check_eq_false": "6d51a768a6af8ff8c8b72dbeb09b2ad04374658c36edf47610e47e715fb684d9",
+    "PNP.terminal_finite_bcel_packet_activation_obstruction_checked_complete": "e1121f82e5d955f69e29d28ce6b0819aec30268fe34e118632eb2e30f348b08d",
+    "PNP.zeroslack_bcel_packet_activation_obstruction_checked_complete": "6bfe3fda461aef5b96b6fbca726d8b3134b992b9c97b16bc365e5a410d4c0620"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3126,7 +3132,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "b489621c479ec08ed7dd260170df8b3811044f34a1e4e68cf76fd7db4c44ec83",
+  "milestoneSourceClosureSha256": "2a55fe2ee63fd24a78e25aa548f83778a96cc4f7f9b07af8f46ac72891070455",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -6729,6 +6735,21 @@
       ],
       "scope": "For every accepted finite Packet/budget no-lower certificate, Lean indexes a checked finite BCEL-ready problem by the same candidate and model, retains its computed ready nucleus, and uses a bijective anchor map with explicit injectivity and surjectivity proofs plus a Boolean-reflected exact list equality to identify that nucleus with the exact grouped Packet carrier. The inherited nontrivial-size bound, positive-Packet exclusion, and constant-activation exclusion therefore hold on one coherently bound family consumed by the report-facing ZeroSlack boundary.",
       "title": "Same-candidate finite BCEL-ready and Packet carrier coherence"
+    },
+    {
+      "classification": "formalized-residual-terminal-finite-bcel-packet-activation-obstruction",
+      "id": "residual-terminal-finite-bcel-packet-activation-obstruction",
+      "nonClaim": "The checker proves that the numerical bridge fails on the current accepted finite family; it does not prove activation coherence. The terminal problem, initial positive full-slack premise, grouped Packet family, bijective anchor map, activation cells and masses, payloads, budget, typed realizer table, dependency table, and rank maps remain supplied proof-bearing inputs. Exhaustive proper-cut enumeration may be exponential. This milestone does not derive the family or activation weights from positive residual slack, construct BN3--BN6 data from every valid input, complete the global route or no-lower systems, prove unconditional SaturatePositive, BCELReady, ZeroSlack or PCCMin, establish polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.checkTerminalFiniteBCELPacketActivationCoherence_eq_true_iff",
+        "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.activation_coherent_mapped_cut_equation",
+        "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.not_activation_coherent",
+        "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.activation_coherence_check_eq_false",
+        "PNP.terminal_finite_bcel_packet_activation_obstruction_checked_complete",
+        "PNP.zeroslack_bcel_packet_activation_obstruction_checked_complete"
+      ],
+      "scope": "For every arbitrary finite M184 carrier-coherence certificate, Lean computes the exact selected M183 nucleus defect and exhaustively checks the M180 Packet cut value plus every canonical nonempty proper Packet-cut activation weight. Acceptance reconstructs full finite activation coherence and identifies each mapped terminal cut's activation with its projection excess. The same-family Packet exclusion forces rejection, and a deterministic classifier returns either the declared cut-value mismatch or a proof-bearing proper-cut activation mismatch; the report-facing ZeroSlack record derives the same obstruction without duplicate family data or a caller flag.",
+      "title": "Finite BCEL/Packet activation-coherence obstruction"
     },
     {
       "classification": "formalized-residual-terminal-rank-wf",

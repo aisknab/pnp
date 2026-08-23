@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-185",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -833,6 +833,9 @@
   "leanResidualTerminalFiniteBCELPacketCarrierCoherenceFormalized": true,
   "leanResidualTerminalFiniteBCELPacketCarrierCoherenceAxiomAuditPassed": true,
   "leanResidualTerminalFiniteBCELPacketCarrierCoherenceScope": "all-arbitrary-finite-proof-bearing-same-candidate-model-bcel-ready-nuclei-bijectively-mapped-to-the-exact-packet-family-carrier",
+  "leanResidualTerminalFiniteBCELPacketActivationObstructionFormalized": true,
+  "leanResidualTerminalFiniteBCELPacketActivationObstructionAxiomAuditPassed": true,
+  "leanResidualTerminalFiniteBCELPacketActivationObstructionScope": "all-arbitrary-finite-coherently-mapped-bcel-ready-and-packet-families-exhaustive-cut-value-and-proper-cut-activation-coherence-check-with-proof-bearing-first-obstruction",
   "leanResidualTerminalRankWFFormalized": true,
   "leanResidualTerminalRankWFAxiomAuditPassed": true,
   "leanResidualTerminalRankWFScope": "fixed-ten-coordinate-natural-lexicographic-order-executable-comparison-accessibility-induction-and-kernel-well-foundedness",
@@ -1660,6 +1663,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFiniteBCELPacketCarrierCoherenceAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFiniteBCELPacketCarrierCoherence.lean",
     "node --test audits/lean-residual-terminal-finite-bcel-packet-carrier-coherence0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFiniteBCELPacketActivationObstructionAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFiniteBCELPacketActivationObstruction.lean",
+    "node --test audits/lean-residual-terminal-finite-bcel-packet-activation-obstruction0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1848,6 +1854,7 @@
     "Finite terminal origin, kernel, and obligation routing recognizes only exact candidate-derived role, rule, orientation, and edge combinations. Safety requires transparent cost, discharged obligations, and stability of forgotten profiles; failures retain deterministic proof-bearing reasons and the exact safe prefix. A proof-bearing candidate BCEL anchor problem with positive initial full slack composes these routes with preservation and the existing checked-lift or BCEL firewall. This closes a finite local routing edge and finite composition only. Local routes are not the complete global outcome system or Package E, the positive premise remains explicit, and full SaturatePositive, BCELReady, RankWF, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.",
     "The checked finite SaturatePositive-to-BCEL-ready composition reruns the production finite classifier and accepts only its positive-projection branch with a computed ready nucleus. Its certificate retains the exact classifier equality, safe trace, positive final slack, positive whole-support defect, nontrivial nucleus, constant-cut equations, and local BN2 conclusions. The terminal problem and initial positive premise remain supplied; local failure branches are not globally routed, BN3--BN6 data and constant activation are not derived, and manuscript-wide SaturatePositive, BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.",
     "The finite BCEL-ready and Packet carrier-coherence certificate uses the exact candidate and model already owned by one accepted Packet/budget no-lower certificate. An injective and surjective anchor map plus a reflected list equality identifies its computed ready nucleus with that exact grouped Packet carrier, transfers the nontrivial-size bound, and reuses the same-family Packet and constant-activation exclusions. The terminal problem, initial positive premise, family, anchor map, payloads, tables, and ranks remain supplied; activation weights are not identified with projection excess, constant activation is not derived from positive slack, and unconditional ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.",
+    "The finite BCEL/Packet activation-coherence obstruction exhaustively compares the exact M183 nucleus defect with the declared cut value and every canonical nonempty proper activation weight on the coherently mapped M184 Packet family. Hypothetical acceptance reconstructs the mapped-cut projection equation, while the already checked same-family Packet exclusion forces deterministic rejection with either a cut-value mismatch or one proof-bearing proper-cut mismatch. This diagnoses rather than repairs the missing bridge: the terminal problem, positive premise, family, map, activation data, payloads, tables, and ranks remain supplied; unconditional BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.",
     "Residual RankWF is now formalized for the manuscript's fixed ten-coordinate natural lexicographic rank, with an executable comparison, exact Boolean equivalence, coordinate-priority witnesses, accessibility, induction, and kernel-checked well-foundedness. This does not map current finite routes into the complete global outcome system, prove that any route decreases the rank, establish route completeness or Package E, remove the explicit positive premise, establish full SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.",
     "External review is optional audit evidence and is not a mathematical premise or release blocker.",
     "Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.",
@@ -1885,7 +1892,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "b489621c479ec08ed7dd260170df8b3811044f34a1e4e68cf76fd7db4c44ec83",
+    "actualSourceClosureSha256": "2a55fe2ee63fd24a78e25aa548f83778a96cc4f7f9b07af8f46ac72891070455",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -1915,22 +1922,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-23-184",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-23-185",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "1de7ba070a3b7e9e2faafce2639805ade6cd4508afcb9a17c94594885a897c46",
+  "leanTheoremInventorySha256": "d26de4965373fa55ee89c14e0884fb271efa3f6305b13fca429b316f5540ab78",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 30015,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 15135,
-  "leanTheoremInventoryTheoremCount": 15490,
+  "leanTheoremInventoryDeclarationCount": 30056,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 15141,
+  "leanTheoremInventoryTheoremCount": 15507,
   "leanTheoremInventoryAssumptionFreeTheoremCount": 7617,
-  "leanTheoremInventorySourceClosureModuleCount": 301,
-  "leanSourceClosureSha256": "b489621c479ec08ed7dd260170df8b3811044f34a1e4e68cf76fd7db4c44ec83",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-23-184",
+  "leanTheoremInventorySourceClosureModuleCount": 302,
+  "leanSourceClosureSha256": "2a55fe2ee63fd24a78e25aa548f83778a96cc4f7f9b07af8f46ac72891070455",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-23-185",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "d135c0114d74ba74788bd2b50f77747bf0b4f2886ecb254a5ea5b49bb3f3f9d5",
+  "formalPublicationMapSha256": "906aa80a473c5037df86baf06bd2d2d6c93632c6872981cfbc8d2bb2e641257e",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -37058,6 +37065,102 @@
       "status": "formalized-residual-terminal-finite-bcel-packet-carrier-coherence"
     },
     {
+      "classification": "formalized-residual-terminal-finite-bcel-packet-activation-obstruction",
+      "id": "residual-terminal-finite-bcel-packet-activation-obstruction",
+      "nonClaim": "The checker proves that the numerical bridge fails on the current accepted finite family; it does not prove activation coherence. The terminal problem, initial positive full-slack premise, grouped Packet family, bijective anchor map, activation cells and masses, payloads, budget, typed realizer table, dependency table, and rank maps remain supplied proof-bearing inputs. Exhaustive proper-cut enumeration may be exponential. This milestone does not derive the family or activation weights from positive residual slack, construct BN3--BN6 data from every valid input, complete the global route or no-lower systems, prove unconditional SaturatePositive, BCELReady, ZeroSlack or PCCMin, establish polynomial runtime, put SAT in P, remove a project assumption, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.checkTerminalFiniteBCELPacketActivationCoherence_eq_true_iff",
+        "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.activation_coherent_mapped_cut_equation",
+        "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.not_activation_coherent",
+        "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.activation_coherence_check_eq_false",
+        "PNP.terminal_finite_bcel_packet_activation_obstruction_checked_complete",
+        "PNP.zeroslack_bcel_packet_activation_obstruction_checked_complete"
+      ],
+      "scope": "For every arbitrary finite M184 carrier-coherence certificate, Lean computes the exact selected M183 nucleus defect and exhaustively checks the M180 Packet cut value plus every canonical nonempty proper Packet-cut activation weight. Acceptance reconstructs full finite activation coherence and identifies each mapped terminal cut's activation with its projection excess. The same-family Packet exclusion forces rejection, and a deterministic classifier returns either the declared cut-value mismatch or a proof-bearing proper-cut activation mismatch; the report-facing ZeroSlack record derives the same obstruction without duplicate family data or a caller flag.",
+      "title": "Finite BCEL/Packet activation-coherence obstruction",
+      "theoremRows": [
+        {
+          "name": "PNP.checkTerminalFiniteBCELPacketActivationCoherence_eq_true_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d1d9c0fce88b026c8bca38c875557775123ede99256086f99402bb30be62f2f5",
+          "expectedKernelTypeSha256": "d1d9c0fce88b026c8bca38c875557775123ede99256086f99402bb30be62f2f5",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.activation_coherent_mapped_cut_equation",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6f925ca58235168efc29966ece2fdf00e67e47f4436547d27bd9b44a3c54fbdd",
+          "expectedKernelTypeSha256": "6f925ca58235168efc29966ece2fdf00e67e47f4436547d27bd9b44a3c54fbdd",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.not_activation_coherent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c50aa223787a105a548bed04a930fa3747193c156a0ec418986c7ad497598f10",
+          "expectedKernelTypeSha256": "c50aa223787a105a548bed04a930fa3747193c156a0ec418986c7ad497598f10",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.TerminalFiniteBCELPacketCarrierCoherenceCertificate.activation_coherence_check_eq_false",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6d51a768a6af8ff8c8b72dbeb09b2ad04374658c36edf47610e47e715fb684d9",
+          "expectedKernelTypeSha256": "6d51a768a6af8ff8c8b72dbeb09b2ad04374658c36edf47610e47e715fb684d9",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.terminal_finite_bcel_packet_activation_obstruction_checked_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e1121f82e5d955f69e29d28ce6b0819aec30268fe34e118632eb2e30f348b08d",
+          "expectedKernelTypeSha256": "e1121f82e5d955f69e29d28ce6b0819aec30268fe34e118632eb2e30f348b08d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.zeroslack_bcel_packet_activation_obstruction_checked_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6bfe3fda461aef5b96b6fbca726d8b3134b992b9c97b16bc365e5a410d4c0620",
+          "expectedKernelTypeSha256": "6bfe3fda461aef5b96b6fbca726d8b3134b992b9c97b16bc365e5a410d4c0620",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-residual-terminal-finite-bcel-packet-activation-obstruction"
+    },
+    {
       "classification": "formalized-residual-terminal-rank-wf",
       "id": "residual-terminal-rank-wf",
       "nonClaim": "This establishes the fixed residual rank domain and RankWF only. It does not map the current finite terminal routes into the manuscript's complete global outcome system, prove that any existing route strictly decreases the rank, establish route completeness or Package E, remove the explicit positive premise from the finite composition, establish full manuscript-wide SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, remove a project assumption, or prove P = NP.",
@@ -46078,7 +46181,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-23-184",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-23-185",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

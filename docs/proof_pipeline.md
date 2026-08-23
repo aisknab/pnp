@@ -715,6 +715,17 @@ tables, and ranks remain supplied; activation weights are not identified with
 projection excess, constant activation is not derived from positive residual
 slack, and unconditional ZeroSlack and polynomial PCCMin remain open.
 
+The finite BCEL/Packet activation-coherence obstruction makes that exact
+missing equality fail closed. It compares the computed terminal defect with
+the Packet cut value and with every canonical nonempty proper-cut activation
+weight. If the whole check accepted, mapped-cut coherence would reproduce the
+M183 projection equation; M184's same-family Packet exclusion proves that this
+cannot happen. A deterministic classifier returns a proof-bearing cut-value
+or first proper-cut activation mismatch. This is a diagnostic obstruction, not
+a derivation of activation coherence. The terminal and Packet inputs remain
+supplied, exhaustive cut enumeration may be exponential, and unconditional
+ZeroSlack and polynomial PCCMin remain open.
+
 The reconstruction now also kernel-checks the direct-wire terminal
 whole-carrier bridge from report §8. A terminal full realization preserves the
 whole implementation's semantics at every input/output coordinate and its

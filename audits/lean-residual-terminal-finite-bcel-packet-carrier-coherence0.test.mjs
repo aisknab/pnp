@@ -190,7 +190,7 @@ function validateSource0(source) {
 
 function validateZeroSlack0(source) {
   const failures = [];
-  if (!/^import PNP\.ResidualTerminalFiniteBCELPacketCarrierCoherence$/mu.test(source)) {
+  if (!/^import PNP\.ResidualTerminalFiniteBCELPacketActivationObstruction$/mu.test(source)) {
     failures.push('zeroslack-import');
   }
   const certificate = declarationBlock0(source, 'ZeroSlackCertificate');
