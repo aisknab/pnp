@@ -164,6 +164,8 @@ on:
       - 'audits/lean-typed-pccpack-reflection0.test.mjs'
       - 'audits/lean-pccmin-total-oracle-loop0.test.mjs'
       - 'docs/lean_pccmin_total_oracle_loop.md'
+      - 'audits/lean-pccmin-normalize-oracle-composition0.test.mjs'
+      - 'docs/lean_pccmin_normalize_oracle_composition.md'
       - 'audits/lean-residual-terminal-rank-wf0.test.mjs'
       - 'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs'
       - 'audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs'
@@ -568,6 +570,8 @@ on:
       - 'audits/lean-typed-pccpack-reflection0.test.mjs'
       - 'audits/lean-pccmin-total-oracle-loop0.test.mjs'
       - 'docs/lean_pccmin_total_oracle_loop.md'
+      - 'audits/lean-pccmin-normalize-oracle-composition0.test.mjs'
+      - 'docs/lean_pccmin_normalize_oracle_composition.md'
       - 'audits/lean-residual-terminal-rank-wf0.test.mjs'
       - 'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs'
       - 'audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs'
@@ -4980,3 +4984,23 @@ jobs:
 
       - name: Run proof-bearing PCCMin total-oracle loop hostile audit
         run: node --test audits/lean-pccmin-total-oracle-loop0.test.mjs
+
+      - name: Print proof-bearing PCCMin normalization/oracle composition axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinNormalizeOracleCompositionAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPPCCMinNormalizeOracleCompositionAxiomAudit.lean)"
+          test "$expected_count" -eq 10
+          test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq "$expected_count"
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|depends on axioms:'; then
+            printf '%s\n' "$normalized" >&2
+            exit 1
+          fi
+
+      - name: Run proof-bearing PCCMin normalization/oracle composition regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPPCCMinNormalizeOracleComposition.lean
+
+      - name: Run proof-bearing PCCMin normalization/oracle composition hostile audit
+        run: node --test audits/lean-pccmin-normalize-oracle-composition0.test.mjs

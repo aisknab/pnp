@@ -137,6 +137,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-concrete-residual-band-compatibility0.test.mjs',
   'audits/lean-typed-pccpack-reflection0.test.mjs',
   'audits/lean-pccmin-total-oracle-loop0.test.mjs',
+  'audits/lean-pccmin-normalize-oracle-composition0.test.mjs',
   'audits/lean-residual-terminal-rank-wf0.test.mjs',
   'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs',
   'audits/bn3-joint-realizability-gap0.test.mjs',

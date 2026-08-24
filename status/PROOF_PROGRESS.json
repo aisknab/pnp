@@ -2,8 +2,8 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-189",
-  "lastReviewedDate": "2026-08-24",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-190",
+  "lastReviewedDate": "2026-08-25",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
     "pointsEarned": 35,
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 165,
-    "totalRows": 167,
+    "earnedRows": 166,
+    "totalRows": 168,
     "percentRoundedOneDecimal": 98.8,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -375,12 +375,15 @@
           "evidence": [
             { "kind": "status-field", "field": "leanPCCMinTotalOracleLoopFormalized", "expected": true },
             { "kind": "status-field", "field": "leanPCCMinTotalOracleLoopConstructsOracle", "expected": false },
+            { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionConstructsNormalizer", "expected": false },
+            { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionConstructsOracle", "expected": false },
             { "kind": "status-field", "field": "leanPCCMinLoopExactnessFormalized", "expected": false }
           ],
           "awardedAtCoordinate": null,
-          "justification": "M189 proves the general well-founded control flow under an explicit proof-bearing total oracle, but the checked status still has no constructed complete PCCMin algorithm.",
-          "remainingLimitation": "The total oracle and all of its routes must be constructed executably from the encoded source input.",
-          "lastReviewedDate": "2026-08-24"
+          "justification": "M190 composes the manuscript's proof-bearing normalization and oracle stages with the general well-founded loop, but the checked status still has no constructed complete PCCMin algorithm.",
+          "remainingLimitation": "The total normalizer, total oracle, and all of their routes must be constructed executably from the encoded source input.",
+          "lastReviewedDate": "2026-08-25"
         },
         {
           "id": "pccmin-iteration-sound-descent",
@@ -390,13 +393,16 @@
           "evidence": [
             { "kind": "status-field", "field": "leanPCCMinTotalOracleLoopGainIterationBoundFormalized", "expected": true },
             { "kind": "status-field", "field": "leanPCCMinTotalOracleLoopConstructsOracle", "expected": false },
+            { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionLiftedGainFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionConstructsNormalizer", "expected": false },
+            { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionConstructsOracle", "expected": false },
             { "kind": "status-field", "field": "leanPCCMinLoopExactnessFormalized", "expected": false },
             { "kind": "status-blocker-open", "id": "Formal.ResidualBandMinimizer" }
           ],
           "awardedAtCoordinate": null,
-          "justification": "M189 integrates proof-bearing oracle gain responses into one semantic-preserving strict-slack recursion, but it does not prove that every branch of a constructed algorithm returns such evidence.",
-          "remainingLimitation": "Every executable route of the constructed PCCMin algorithm must supply the checked gain or terminal evidence without assuming the total oracle.",
-          "lastReviewedDate": "2026-08-24"
+          "justification": "M190 proves that direct normalizer gains and gains after non-increasing semantic normalization are both sound strict-slack steps, but it does not construct either stage or prove that every executable route returns such evidence.",
+          "remainingLimitation": "Every executable route of the constructed PCCMin algorithm must supply the checked gain or terminal evidence without assuming the total normalizer or oracle.",
+          "lastReviewedDate": "2026-08-25"
         },
         {
           "id": "pccmin-termination-exactness",
@@ -406,13 +412,16 @@
           "evidence": [
             { "kind": "status-field", "field": "leanPCCMinTotalOracleLoopExactnessUnderOracleFormalized", "expected": true },
             { "kind": "status-field", "field": "leanPCCMinTotalOracleLoopConstructsOracle", "expected": false },
+            { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionExactEndpointTransportFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionConstructsNormalizer", "expected": false },
+            { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionConstructsOracle", "expected": false },
             { "kind": "status-field", "field": "leanPCCMinLoopExactnessFormalized", "expected": false },
             { "kind": "status-field", "field": "leanZeroSlackCompletenessFormalized", "expected": false }
           ],
           "awardedAtCoordinate": null,
-          "justification": "M189 proves exact termination when the explicit oracle returns exact-minimum or ZeroSlack evidence, but unconditional ZeroSlack and a constructed complete loop remain absent.",
-          "remainingLimitation": "Exactness must follow from a constructed algorithm and unconditional ZeroSlack rather than from proof-bearing terminal oracle responses.",
-          "lastReviewedDate": "2026-08-24"
+          "justification": "M190 transports proof-bearing exact-minimum and ZeroSlack endpoints through semantic normalization into the checked exact loop, but unconditional ZeroSlack and constructed stages remain absent.",
+          "remainingLimitation": "Exactness must follow from constructed normalization and oracle stages plus unconditional ZeroSlack rather than from supplied proof-bearing terminal responses.",
+          "lastReviewedDate": "2026-08-25"
         },
         {
           "id": "pccmin-polynomial-objects",
@@ -795,6 +804,20 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M189 formalizes the general proof-bearing PCCMin total-oracle control flow: strict gain responses preserve semantics and decrease residual slack, terminal responses carry exact-minimum or ZeroSlack evidence, recursion is well-founded, and gain iterations are bounded by the starting slack. The total oracle remains an explicit supplied boundary and the regression fixture is exhaustive rather than polynomial, so no fixed checkpoint or global gate closes. Formal artefact coverage becomes 165 of 167, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-190",
+      "formalArtefactCoverage": { "earnedRows": 166, "totalRows": 168 },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M190 composes the manuscript's proof-bearing NormalizeOrGain and PCCOracle stages for arbitrary finite direct-wire implementations. Non-increasing semantic normalization lifts subsequent oracle gains to strict gains from the original implementation, while exact-minimum and ZeroSlack endpoints transport back through normalization and reuse the checked well-founded loop. The total normalizer and total oracle remain explicit supplied boundaries and the regression fixtures are exhaustive rather than polynomial, so no fixed checkpoint or global gate closes. Formal artefact coverage becomes 166 of 168, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [

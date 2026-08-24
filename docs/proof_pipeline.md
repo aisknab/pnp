@@ -214,10 +214,14 @@ M189 adds general well-founded PCCMin control flow under an explicit
 proof-bearing `PCCMinTotalOracle`: strict gain responses preserve semantics and
 lower residual slack, while terminal responses carry exact-minimum or ZeroSlack
 evidence. The loop returns an exact minimum and has a checked gain-iteration
-bound for arbitrary finite direct-wire implementations. Exhaustive reference
-minimization remains only a regression fixture and semantic specification, not
-a polynomial algorithm, and the total oracle and explicit loop certificate are
-still not constructed. A deterministic target decider, the
+bound for arbitrary finite direct-wire implementations. M190 adds the preceding
+proof-bearing `PCCMinTotalNormalizer` stage: direct normalization gains remain
+strict, gains found by the following oracle lift through non-increasing semantic
+normalization, and exact or ZeroSlack endpoints transport back before the same
+recursive loop runs. Exhaustive reference minimization remains only a regression
+fixture and semantic specification, not a polynomial algorithm, and the total
+normalizer, total oracle, and explicit loop certificate are still not
+constructed. A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See
 [`lean_concrete_legacy_locked_nand_compatibility.md`](lean_concrete_legacy_locked_nand_compatibility.md).
@@ -227,6 +231,8 @@ See also
 [`lean_typed_pccpack_reflection.md`](lean_typed_pccpack_reflection.md).
 See also
 [`lean_pccmin_total_oracle_loop.md`](lean_pccmin_total_oracle_loop.md).
+See also
+[`lean_pccmin_normalize_oracle_composition.md`](lean_pccmin_normalize_oracle_composition.md).
 
 The reconstruction now also verifies the iteration-count subclaim used by
 `PCCMin`: for any finite supplied chain whose every adjacent replacement is a

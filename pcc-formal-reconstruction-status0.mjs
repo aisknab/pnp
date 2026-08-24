@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-189';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-190';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -542,6 +542,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPPCCMinTotalOracleLoopAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPPCCMinTotalOracleLoop.lean',
   'node --test audits/lean-pccmin-total-oracle-loop0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPPCCMinNormalizeOracleCompositionAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPPCCMinNormalizeOracleComposition.lean',
+  'node --test audits/lean-pccmin-normalize-oracle-composition0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -736,6 +739,7 @@ const NON_CLAIMS = Object.freeze([
   'The M187 concrete residual-band compatibility boundary defines the report-facing residual-band endpoint as the fail-closed encoded direct-wire exact-minimum threshold predicate, proves exact arbitrary typed candidate semantics, and compiles the locked-to-residual compatibility edge as the identity polynomial reduction. PNP.ResidualBandExactMinimization is no longer a project axiom and the caller-supplied reduction field is gone. The definition still uses exhaustive finite reference minimization as a semantic specification: it does not construct PCCMin, prove polynomial runtime or encoded-size bounds, establish unconditional ZeroSlack, put SAT in P, open a global gate, create the eligible root theorem, or prove P = NP.',
   'The M188 typed PCCPack reflection boundary makes GeneratePCCPack and CheckPCCPackexp transparent definitions over an explicit proof-bearing PCCMin loop certificate. Canonical generated identifiers accept by computation, mismatched identifiers reject, certificate projection is exact, and the active bridge no longer uses a caller-supplied checker-reflection field. No project axiom remains in the compiled root. The loop certificate itself and concrete SAT hardness remain explicit premises; this does not verify historical JavaScript package bytes, construct PCCMin, establish unconditional ZeroSlack or polynomial bounds, put SAT in P, open a global gate, create the eligible root theorem, or prove P = NP.',
   'The M189 proof-bearing PCCMin total-oracle loop formalizes general recursive control flow for every finite direct-wire implementation. Every gain response carries strict semantic equivalence and checked residual-slack descent; every terminal response carries exact minimum or ZeroSlack evidence; the transparent recursion returns an equivalent global minimum with zero slack and bounds gain iterations by the starting slack. The total oracle remains an explicit argument and the regression fixture uses exhaustive reference minimization: this does not construct an executable PCCMin oracle, derive terminal data or unconditional ZeroSlack, prove encoded-size polynomial runtime or certificate bounds, close a global gate, put SAT in P, create the eligible root theorem, or prove P = NP.',
+  'The M190 proof-bearing PCCMin normalization/oracle composition formalizes the manuscript\'s two-stage iteration for every finite direct-wire implementation. A normalizer may return a strict equivalent gain or a semantically equivalent non-increasing normal form; gains, exact minima, and ZeroSlack endpoints returned by the following total oracle transport back to the pre-normalized implementation, and the composed route reuses the checked well-founded exact loop. The total normalizer and total oracle remain explicit arguments and the regression fixtures use exhaustive reference minimization: this does not construct either executable stage, derive terminal data or unconditional ZeroSlack, prove encoded-size polynomial runtime or certificate bounds, close a global gate, put SAT in P, create the eligible root theorem, or prove P = NP.',
   'Residual RankWF is now formalized for the manuscript\'s fixed ten-coordinate natural lexicographic rank, with an executable comparison, exact Boolean equivalence, coordinate-priority witnesses, accessibility, induction, and kernel-checked well-foundedness. This does not map current finite routes into the complete global outcome system, prove that any route decreases the rank, establish route completeness or Package E, remove the explicit positive premise, establish full SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
@@ -1524,6 +1528,18 @@ const EXACT_FIELDS = Object.freeze({
   leanPCCMinTotalOracleLoopPolynomialRuntimeProved: false,
   leanPCCMinTotalOracleLoopScope:
     'all-finite-direct-wire-implementations-under-an-explicit-proof-bearing-total-oracle-with-strict-slack-descent-exact-terminal-evidence-and-gain-iteration-bound',
+  leanPCCMinNormalizeOracleCompositionFormalized: true,
+  leanPCCMinNormalizeOracleCompositionAxiomAuditPassed: true,
+  leanPCCMinNormalizeOracleCompositionAuditedDeclarationCount: 10,
+  leanPCCMinNormalizeOracleCompositionEndpointProjectAssumptionFree: true,
+  leanPCCMinNormalizeOracleCompositionHasUnresolvedOutcome: false,
+  leanPCCMinNormalizeOracleCompositionConstructsNormalizer: false,
+  leanPCCMinNormalizeOracleCompositionConstructsOracle: false,
+  leanPCCMinNormalizeOracleCompositionLiftedGainFormalized: true,
+  leanPCCMinNormalizeOracleCompositionExactEndpointTransportFormalized: true,
+  leanPCCMinNormalizeOracleCompositionPolynomialRuntimeProved: false,
+  leanPCCMinNormalizeOracleCompositionScope:
+    'all-finite-direct-wire-implementations-under-explicit-proof-bearing-normalizer-and-oracle-stages-with-nonincreasing-semantic-normalization-lifted-strict-gains-exact-endpoint-transport-and-the-checked-well-founded-loop',
   leanLockedNANDPolynomialBuilderFormalized: true,
   leanCompatibleReplacementFormalized: false,
   leanGlobalSlackLawFormalized: false,
@@ -2798,6 +2814,18 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanPCCMinTotalOracleLoopPolynomialRuntimeProved: false,
       leanPCCMinTotalOracleLoopScope:
         'all-finite-direct-wire-implementations-under-an-explicit-proof-bearing-total-oracle-with-strict-slack-descent-exact-terminal-evidence-and-gain-iteration-bound',
+      leanPCCMinNormalizeOracleCompositionFormalized: true,
+      leanPCCMinNormalizeOracleCompositionAxiomAuditPassed: true,
+      leanPCCMinNormalizeOracleCompositionAuditedDeclarationCount: 10,
+      leanPCCMinNormalizeOracleCompositionEndpointProjectAssumptionFree: true,
+      leanPCCMinNormalizeOracleCompositionHasUnresolvedOutcome: false,
+      leanPCCMinNormalizeOracleCompositionConstructsNormalizer: false,
+      leanPCCMinNormalizeOracleCompositionConstructsOracle: false,
+      leanPCCMinNormalizeOracleCompositionLiftedGainFormalized: true,
+      leanPCCMinNormalizeOracleCompositionExactEndpointTransportFormalized: true,
+      leanPCCMinNormalizeOracleCompositionPolynomialRuntimeProved: false,
+      leanPCCMinNormalizeOracleCompositionScope:
+        'all-finite-direct-wire-implementations-under-explicit-proof-bearing-normalizer-and-oracle-stages-with-nonincreasing-semantic-normalization-lifted-strict-gains-exact-endpoint-transport-and-the-checked-well-founded-loop',
       leanLockedNANDPolynomialBuilderFormalized: true,
       leanCompatibleReplacementFormalized: false,
       leanGlobalSlackLawFormalized: false,
@@ -3355,7 +3383,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-24-189',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-25-190',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,
