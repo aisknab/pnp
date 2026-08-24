@@ -18,11 +18,8 @@ example : ReducesToPoly SAT LockedNANDThreshold :=
 example (lockedInP : PClass LockedNANDThreshold) : PClass SAT :=
   sat_in_p_from_locked_nand_in_p lockedInP
 
-example
-    (pcc : AcceptedGeneratedPackage → PCCMinLoopCertificate)
-    (hard : SATHard) : CheckerTrustModel :=
-  { pccPackProducesPCCMinLoop := pcc
-    satHard := hard }
+example (hard : SATHard) : CheckerTrustModel :=
+  { satHard := hard }
 
 example (loop : PCCMinLoopCertificate) :
     residualBandDeciderFromPCCMinCertificate

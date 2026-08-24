@@ -1998,6 +1998,45 @@ rather than caller-supplied trust.
 
 ---
 
+## AQ-30 — Typed PCCPack generation and reflection
+
+**Claim**
+
+The active report bridge packages an explicit proof-bearing
+`PCCMinLoopCertificate` with transparent Lean definitions. Generated packages
+accept, preserve that exact certificate, and packages with a mismatched
+identifier reject. Neither package generation nor checking remains
+project-specific proof authority.
+
+**Where it appears**
+
+- `lean/PNP/Bridge.lean`.
+- `lean-audit/PNPTypedPCCPackReflectionAxiomAudit.lean`.
+- `lean-regression/PNPTypedPCCPackReflection.lean`.
+- `status/PROOF_PROGRESS.json`.
+
+**How to test or inspect it**
+
+1. Build the explicit `PNP` root.
+2. Compile the M188 axiom audit and generic regression.
+3. Confirm the compiled inventory records `PNP.GeneratePCCPack` and
+   `PNP.CheckPCCPackexp` as definitions and records an empty `projectAxioms`
+   array.
+4. Mutate the source to restore either opaque declaration, remove the typed
+   certificate, make the checker accept unconditionally, or restore a caller
+   trust field; require the hostile contract to reject it.
+
+**What would count as a refutation or material defect**
+
+- The generated package does not preserve the explicit loop certificate.
+- A mismatched package identifier can be accepted.
+- Either declaration re-enters project-specific proof authority.
+- Structural package acceptance is described as construction or semantic
+  verification of the certificate, unconditional ZeroSlack/PCCMin, polynomial
+  runtime, deterministic SAT in P, a closed global gate, or `P = NP`.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

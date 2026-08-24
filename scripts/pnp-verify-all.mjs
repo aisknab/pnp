@@ -135,6 +135,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-residual-terminal-finite-bcel-packet-activation-obstruction0.test.mjs',
   'audits/lean-concrete-legacy-locked-nand-compatibility0.test.mjs',
   'audits/lean-concrete-residual-band-compatibility0.test.mjs',
+  'audits/lean-typed-pccpack-reflection0.test.mjs',
   'audits/lean-residual-terminal-rank-wf0.test.mjs',
   'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs',
   'audits/bn3-joint-realizability-gap0.test.mjs',

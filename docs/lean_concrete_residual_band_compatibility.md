@@ -20,8 +20,10 @@ locked-to-residual reduction.
 
 The compiled M187 endpoint is
 `PNP.concrete_residual_band_compatibility_checked_complete`. Its axiom closure
-uses only `propext`; the full conditional bridge still depends on the two
-disclosed project axioms `PNP.GeneratePCCPack` and `PNP.CheckPCCPackexp`.
+uses only `propext`. At the M187 coordinate, the full conditional bridge still
+depended on the two disclosed project axioms `PNP.GeneratePCCPack` and
+`PNP.CheckPCCPackexp`; M188 subsequently replaces both with transparent typed
+definitions without changing this milestone's claim.
 
 ## Claim boundary
 

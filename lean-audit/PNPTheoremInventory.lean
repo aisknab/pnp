@@ -3191,7 +3191,8 @@ private def reviewedMilestoneTheoremNames : Array Name := #[
   `PNP.report_sat_eq_concrete_cnfsat,
   `PNP.sat_in_np_witness_model,
   `PNP.sat_in_p_from_locked_nand_in_p,
-  `PNP.sat_reduces_to_locked_nand_checked
+  `PNP.sat_reduces_to_locked_nand_checked,
+  `PNP.typed_pccpack_reflection_checked_complete
 ]
 
 private def inventory : CommandElabM Json := do
@@ -3250,7 +3251,7 @@ private def inventory : CommandElabM Json := do
   return Json.mkObj [
     ("kind", toJson "PNPLeanTheoremInventory0"),
     ("version", toJson 0),
-    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-08-24-187"),
+    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-08-24-188"),
     ("leanToolchain", toJson "leanprover/lean4:v4.31.0"),
     ("rootModule", toJson "PNP"),
     ("environmentProbeComplete", toJson true),

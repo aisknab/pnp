@@ -1499,11 +1499,8 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.rootLeanTheoremPresent, false);
   assert.equal(out.rootLeanTheoremBuilt, false);
   assert.equal(out.rootLeanTheoremAxiomAuditPassed, false);
-  assert.equal(out.projectSpecificAxiomsRemaining, true);
-  assert.deepEqual(out.projectSpecificAxiomInventory, [
-    'PNP.CheckPCCPackexp',
-    'PNP.GeneratePCCPack',
-  ]);
+  assert.equal(out.projectSpecificAxiomsRemaining, false);
+  assert.deepEqual(out.projectSpecificAxiomInventory, []);
   assert.equal(out.externalReviewIsMathematicalPremise, false);
   assert.deepEqual(out.remainingBlockers, FORMAL_RECONSTRUCTION_BLOCKERS0);
   assert.equal(out.remainingBlockers.length, 5);
@@ -2611,7 +2608,7 @@ test('formal status records a pinned Lean library root without claiming a root t
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.rootLeanTheoremBuilt, false);
   assert.equal(status.rootLeanTheoremAxiomAuditPassed, false);
-  assert.equal(status.projectSpecificAxiomsRemaining, true);
+  assert.equal(status.projectSpecificAxiomsRemaining, false);
   assert.equal(status.sorryOrAdmitInRootDependencyClosure, null);
   assert.equal(status.nonClaims.some((entry) => entry.includes('root-status build is reconstruction data')), true);
   assert.equal(status.verificationCommands.includes('node --test audits/lean-root-target0.test.mjs'), true);
@@ -3074,7 +3071,7 @@ test('formal reconstruction status rejects threshold-boundary inventory drift', 
 
 test('formal reconstruction status rejects a hidden project-specific axiom', async () => {
   const status = await currentStatus0();
-  status.projectSpecificAxiomInventory = status.projectSpecificAxiomInventory.slice(0, -1);
+  status.projectSpecificAxiomInventory = ['PNP.ForgedProjectAxiom'];
   const out = await CheckFormalReconstructionStatus0({ writeOutput: false, statusOverride: status, siteOverride: status });
   assert.equal(out.tag, 'reject');
   assert.equal(out.coord, 'FormalReconstructionStatus.ProjectSpecificAxiomInventory');
@@ -3154,7 +3151,7 @@ test('proof progress preserves the fixed M184 baseline and derives current cover
   assert.equal(out.modelId, 'fixed-risk-weighted-checkpoints-v0');
   assert.equal(out.trackCount, 5);
   assert.equal(out.checkpointCount, 35);
-  assert.equal(out.pointsEarned, 33);
+  assert.equal(out.pointsEarned, 35);
   assert.equal(out.pointsAvailable, 100);
   assert.equal(out.uncertaintyLowPercent, 20);
   assert.equal(out.uncertaintyHighPercent, 40);
@@ -3165,7 +3162,7 @@ test('proof progress preserves the fixed M184 baseline and derives current cover
   });
   assert.equal(out.globalGatesClosed, 0);
   assert.equal(out.globalGatesAvailable, 5);
-  assert.equal(out.projectSpecificAxiomCount, 2);
+  assert.equal(out.projectSpecificAxiomCount, 0);
   assert.equal(out.rootTheoremPresent, false);
   assert.equal(out.publicationGatePassed, false);
   assert.equal(out.isProbabilityOfCorrectness, false);
@@ -3176,9 +3173,10 @@ test('proof progress preserves the fixed M184 baseline and derives current cover
     'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184');
   assert.equal(sources.ledger.history.at(-1).scoreChanged, true);
   assert.deepEqual(sources.ledger.history.at(-1).changedCheckpointIds, [
-    'axiom-remove-residual-band-minimum',
+    'axiom-remove-generate-pccpack',
+    'axiom-remove-check-pccpackexp',
   ]);
-  assert.equal(sources.ledger.history.at(-1).changeRecords.length, 1);
+  assert.equal(sources.ledger.history.at(-1).changeRecords.length, 2);
 });
 
 test('proof progress rejects changed weights and a stale stored total', async () => {
@@ -3257,7 +3255,7 @@ test('proof progress rejects formal coverage presented as proof completion or al
 test('proof progress rejects an uncertainty range that excludes the estimate', async () => {
   const { ledger, status, inventory } = await currentProofProgressSources0();
   const mutation = clone0(ledger);
-  mutation.proofCompletion.uncertaintyLowPercent = 34;
+  mutation.proofCompletion.uncertaintyLowPercent = 36;
   assert.throws(
     () => validateProofProgress0(mutation, status, inventory),
     (error) => error.code === 'ProofCompletion.UncertaintyRange',
@@ -3273,7 +3271,7 @@ test('proof progress rejects forged global gate, project-axiom, root and publica
     },
     {
       code: 'Axioms.Ledger',
-      apply(ledger) { ledger.projectSpecificAxiomsRemaining.pop(); },
+      apply(ledger) { ledger.projectSpecificAxiomsRemaining.push('PNP.ForgedProjectAxiom'); },
     },
     {
       code: 'Root.Present',

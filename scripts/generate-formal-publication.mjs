@@ -18,9 +18,9 @@ const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const TEMPLATE_PATH = 'publication/canonical_proof_report.template.tex';
 const REPORT_TEX_PATH = 'canonical_proof_report.tex';
-const STATUS_COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-187';
+const STATUS_COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-188';
 const PUBLIC_SURFACE_COORDINATE = 'PUBLIC-SURFACE-BASELINE-2026-08-10-CONCRETE-LOCKED-NAND-THRESHOLD-121';
-const REPORT_COORDINATE = 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-24-187';
+const REPORT_COORDINATE = 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-24-188';
 
 const NEW_NON_CLAIMS = Object.freeze([
   'The compiled Lean theorem inventory is declaration and axiom-dependency evidence; it does not widen any theorem beyond its exact type and stated scope.',
@@ -139,7 +139,9 @@ function renderReport0(template, status, inventory, publication) {
     ['@@GATE_ROWS@@', Object.entries(publication.gate.subchecks)
       .map(([name, value]) => `${texEscape0(name)} & ${value ? '\\statustrue' : '\\statusfalse'} \\\\`)
       .join('\n')],
-    ['@@AXIOM_ITEMS@@', inventory.projectAxioms.map((name) => `\\item \\code{${texEscape0(name)}}`).join('\n')],
+    ['@@AXIOM_ITEMS@@', inventory.projectAxioms.length === 0
+      ? '\\item None. The compiled project-axiom inventory is empty.'
+      : inventory.projectAxioms.map((name) => `\\item \\code{${texEscape0(name)}}`).join('\n')],
     ['@@MILESTONE_ROWS@@', publication.milestones.map((milestone) => [
       texEscape0(milestone.title),
       texEscape0(milestone.status),

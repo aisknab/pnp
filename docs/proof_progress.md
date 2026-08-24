@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-187`, 163 of 165
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-188`, 164 of 166
 current scoped rows are earned, or 98.8 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,16 +19,16 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M187 |
+| Track | Available | Earned at M188 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
 | Unconditional residual core and ZeroSlack | 35 | 2 |
 | Exact PCCMin algorithm, complexity and bounds | 20 | 1 |
-| Root theorem and project-axiom elimination | 10 | 2 |
-| **Total** | **100** | **33** |
+| Root theorem and project-axiom elimination | 10 | 4 |
+| **Total** | **100** | **35** |
 
-The M187 risk-weighted proof completion estimate is therefore 33 percent, with
+The M188 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -42,7 +42,7 @@ machine-readable ledger:
 
 The five current global gates are open: Concrete SAT, residual-band minimisation,
 unconditional ZeroSlack, polynomial runtime and certificate bounds, and the root
-theorem plus axiom audit. Two project-specific axioms remain,
+theorem plus axiom audit. The compiled project-specific axiom inventory is empty,
 `PNP.Main.p_eq_np` is absent, and the publication gate is false.
 
 The immutable scoring baseline remains M184: 160 of 162 formal artefact rows,
@@ -62,8 +62,15 @@ semantics, replaces the supplied compatibility edge with an identity reduction,
 and removes `PNP.ResidualBandExactMinimization` from project-specific proof
 authority. That closes exactly `axiom-remove-residual-band-minimum`, moving the
 score from 32 to 33 and current coverage to 163 of 165. The uncertainty range
-remains 20 to 40 percent and all five global gates remain open. No retrospective
-score was invented.
+remains 20 to 40 percent and all five global gates remain open. M188 then makes
+the PCCPack generator and checker transparent typed definitions over an explicit
+loop certificate, removing `PNP.GeneratePCCPack` and
+`PNP.CheckPCCPackexp` from project-specific proof authority. Those two fixed
+one-point checkpoints move the score from 33 to 35 and coverage to 164 of 166.
+The certificate's existence, exactness construction, polynomial runtime,
+deterministic SAT theorem, and root theorem remain open; no global gate closes
+and the uncertainty range remains 20 to 40 percent. No retrospective score was
+invented.
 
 ## Changing the score
 
