@@ -215,7 +215,7 @@ test('compiled inventory records the M190 surface without project axioms', async
   assert.deepEqual(inventory.projectAxioms, []);
 });
 
-test('status, publication, progress, workflow, and documentation publish only M190', async () => {
+test('status, publication, progress, workflow, and documentation retain the M190 boundary', async () => {
   const [status, publication, progress, workflow, pkg, verifier, readme,
     formalDoc, bridgeDoc, focusedDoc] = await Promise.all([
     text0('status/FORMAL_RECONSTRUCTION_STATUS.json').then(JSON.parse),
@@ -229,8 +229,8 @@ test('status, publication, progress, workflow, and documentation publish only M1
     text0('docs/lean_bridge.md'),
     text0('docs/lean_pccmin_normalize_oracle_composition.md'),
   ]);
-  assert.equal(status.coordinate,
-    'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-190');
+  assert.match(status.coordinate,
+    /^PNP-FORMAL-RECONSTRUCTION-STATUS-/u);
   assert.equal(status.leanPCCMinNormalizeOracleCompositionFormalized, true);
   assert.equal(status.leanPCCMinNormalizeOracleCompositionAxiomAuditPassed, true);
   assert.equal(status.leanPCCMinNormalizeOracleCompositionAuditedDeclarationCount,
@@ -248,17 +248,13 @@ test('status, publication, progress, workflow, and documentation publish only M1
   assert.deepEqual(row?.requiredTheorems,
     ['PNP.DirectWire.pccmin_normalize_oracle_loop_checked_complete']);
   assert.equal(progress.asOfCoordinate, status.coordinate);
-  assert.deepEqual(progress.formalArtefactCoverage,
-    {
-      label: 'formal artefact coverage',
-      earnedRows: 166,
-      totalRows: 168,
-      percentRoundedOneDecimal: 98.8,
-      isProofCompletionMetric: false,
-      denominatorCanGrow: true,
-    });
+  assert.equal(progress.formalArtefactCoverage.isProofCompletionMetric, false);
+  const m190 = progress.history.find(({ asOfCoordinate }) =>
+    asOfCoordinate === 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-190');
+  assert.deepEqual(m190?.formalArtefactCoverage,
+    { earnedRows: 166, totalRows: 168 });
   assert.equal(progress.proofCompletion.percent, 35);
-  assert.equal(progress.history.at(-1).scoreChanged, false);
+  assert.equal(m190?.scoreChanged, false);
   for (const token of [
     'lean-audit/PNPPCCMinNormalizeOracleCompositionAxiomAudit.lean',
     'lean-regression/PNPPCCMinNormalizeOracleComposition.lean',

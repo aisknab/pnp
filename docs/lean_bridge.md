@@ -1738,6 +1738,20 @@ encoded-size polynomial bound follows. The bridge antecedent, unconditional
 ZeroSlack, PCCMin construction, deterministic SAT theorem, and root publication
 gate therefore remain open.
 
+M191 opens the supplied oracle boundary into the manuscript's exact stage
+order. `PCCMinRankOrderedOracleBuilder` provides a proof-bearing HResolve
+outcome, makes BudgetResolve depend on the actual NoHereditary evidence, and
+makes the selector plan depend on both negative resolver outcomes. The
+selector runner scans arbitrary finite rows through the complete canonical
+`allFin` rank list. It returns the first strict gain or retains a typed blocker
+equation for every selector at every rank; only the latter ledger can be passed
+to the explicit ZeroSlack closure. The adapter then reuses the M190
+normalization composition and M189 recursive loop. The component builders,
+blocker semantics, and ZeroSlack implication remain supplied, so this does not
+construct PCCMin, prove unconditional ZeroSlack, or establish polynomial
+runtime. See
+[`lean_pccmin_rank_ordered_oracle.md`](./lean_pccmin_rank_ordered_oracle.md).
+
 ## Discharged by Lean so far
 
 ```text

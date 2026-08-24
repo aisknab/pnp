@@ -221,7 +221,12 @@ normalization, and exact or ZeroSlack endpoints transport back before the same
 recursive loop runs. Exhaustive reference minimization remains only a regression
 fixture and semantic specification, not a polynomial algorithm, and the total
 normalizer, total oracle, and explicit loop certificate are still not
-constructed. A deterministic target decider, the
+constructed. M191 opens that oracle into proof-bearing HResolve and
+BudgetResolve outcomes followed by arbitrary finite selector rows scanned in
+canonical rank order. ZeroSlack is reachable only after the scan retains one
+typed blocker equation for every selector in every rank row. The resolver
+algorithms, selector rows, realizer, blocker semantics, and final ZeroSlack
+closure remain supplied rather than constructed. A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See
 [`lean_concrete_legacy_locked_nand_compatibility.md`](lean_concrete_legacy_locked_nand_compatibility.md).
@@ -233,6 +238,8 @@ See also
 [`lean_pccmin_total_oracle_loop.md`](lean_pccmin_total_oracle_loop.md).
 See also
 [`lean_pccmin_normalize_oracle_composition.md`](lean_pccmin_normalize_oracle_composition.md).
+See also
+[`lean_pccmin_rank_ordered_oracle.md`](lean_pccmin_rank_ordered_oracle.md).
 
 The reconstruction now also verifies the iteration-count subclaim used by
 `PCCMin`: for any finite supplied chain whose every adjacent replacement is a

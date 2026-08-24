@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-190",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-191",
   "lastReviewedDate": "2026-08-25",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 166,
-    "totalRows": 168,
+    "earnedRows": 167,
+    "totalRows": 169,
     "percentRoundedOneDecimal": 98.8,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -378,11 +378,15 @@
             { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionFormalized", "expected": true },
             { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionConstructsNormalizer", "expected": false },
             { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionConstructsOracle", "expected": false },
+            { "kind": "status-field", "field": "leanPCCMinRankOrderedOracleFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanPCCMinRankOrderedOracleConstructsResolvers", "expected": false },
+            { "kind": "status-field", "field": "leanPCCMinRankOrderedOracleConstructsSelectorRows", "expected": false },
+            { "kind": "status-field", "field": "leanPCCMinRankOrderedOracleProvesZeroSlackClosure", "expected": false },
             { "kind": "status-field", "field": "leanPCCMinLoopExactnessFormalized", "expected": false }
           ],
           "awardedAtCoordinate": null,
-          "justification": "M190 composes the manuscript's proof-bearing normalization and oracle stages with the general well-founded loop, but the checked status still has no constructed complete PCCMin algorithm.",
-          "remainingLimitation": "The total normalizer, total oracle, and all of their routes must be constructed executably from the encoded source input.",
+          "justification": "M191 reconstructs the manuscript's ordered HResolve, BudgetResolve, and complete finite-rank selector control flow inside the total oracle boundary, but the checked status still has no constructed component algorithms or complete PCCMin implementation.",
+          "remainingLimitation": "The normalizer, resolvers, selector rows, realizer, blocker semantics, ZeroSlack closure, and their encoded execution must be constructed from the source input.",
           "lastReviewedDate": "2026-08-25"
         },
         {
@@ -396,12 +400,15 @@
             { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionLiftedGainFormalized", "expected": true },
             { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionConstructsNormalizer", "expected": false },
             { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionConstructsOracle", "expected": false },
+            { "kind": "status-field", "field": "leanPCCMinRankOrderedOracleCanonicalAllRanksFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanPCCMinRankOrderedOracleConstructsResolvers", "expected": false },
+            { "kind": "status-field", "field": "leanPCCMinRankOrderedOracleConstructsSelectorRows", "expected": false },
             { "kind": "status-field", "field": "leanPCCMinLoopExactnessFormalized", "expected": false },
             { "kind": "status-blocker-open", "id": "Formal.ResidualBandMinimizer" }
           ],
           "awardedAtCoordinate": null,
-          "justification": "M190 proves that direct normalizer gains and gains after non-increasing semantic normalization are both sound strict-slack steps, but it does not construct either stage or prove that every executable route returns such evidence.",
-          "remainingLimitation": "Every executable route of the constructed PCCMin algorithm must supply the checked gain or terminal evidence without assuming the total normalizer or oracle.",
+          "justification": "M191 ensures every resolver or selector gain in the ordered oracle is proof-bearing and feeds the existing strict-slack loop, but it does not construct the route algorithms or prove their semantic completeness.",
+          "remainingLimitation": "Every constructed route must compute the checked gain or terminal evidence from encoded input, and complete routing must prove that no valid transition is omitted.",
           "lastReviewedDate": "2026-08-25"
         },
         {
@@ -415,12 +422,14 @@
             { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionExactEndpointTransportFormalized", "expected": true },
             { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionConstructsNormalizer", "expected": false },
             { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionConstructsOracle", "expected": false },
+            { "kind": "status-field", "field": "leanPCCMinRankOrderedOracleCompleteSilenceRequired", "expected": true },
+            { "kind": "status-field", "field": "leanPCCMinRankOrderedOracleProvesZeroSlackClosure", "expected": false },
             { "kind": "status-field", "field": "leanPCCMinLoopExactnessFormalized", "expected": false },
             { "kind": "status-field", "field": "leanZeroSlackCompletenessFormalized", "expected": false }
           ],
           "awardedAtCoordinate": null,
-          "justification": "M190 transports proof-bearing exact-minimum and ZeroSlack endpoints through semantic normalization into the checked exact loop, but unconditional ZeroSlack and constructed stages remain absent.",
-          "remainingLimitation": "Exactness must follow from constructed normalization and oracle stages plus unconditional ZeroSlack rather than from supplied proof-bearing terminal responses.",
+          "justification": "M191 permits the terminal ZeroSlack branch only after complete typed silence across every supplied finite rank row, but the implication from that ledger to genuine ZeroSlack remains an explicit supplied closure.",
+          "remainingLimitation": "Exactness must follow from constructed stages and an unconditional proof that the complete terminal-derived silence ledger implies ZeroSlack.",
           "lastReviewedDate": "2026-08-25"
         },
         {
@@ -818,6 +827,20 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M190 composes the manuscript's proof-bearing NormalizeOrGain and PCCOracle stages for arbitrary finite direct-wire implementations. Non-increasing semantic normalization lifts subsequent oracle gains to strict gains from the original implementation, while exact-minimum and ZeroSlack endpoints transport back through normalization and reuse the checked well-founded loop. The total normalizer and total oracle remain explicit supplied boundaries and the regression fixtures are exhaustive rather than polynomial, so no fixed checkpoint or global gate closes. Formal artefact coverage becomes 166 of 168, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-191",
+      "formalArtefactCoverage": { "earnedRows": 167, "totalRows": 169 },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M191 reconstructs the manuscript's rank-ordered PCCOracle control flow for arbitrary finite selector rows: HResolve precedes BudgetResolve, every canonical rank is scanned, proof-bearing gains return immediately, and ZeroSlack requires a complete typed-blocker ledger. The normalizer, resolver algorithms, selector rows, realizer, blocker semantics, and final ZeroSlack closure remain explicit supplied boundaries, so no fixed checkpoint or global gate closes. Formal artefact coverage becomes 167 of 169, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [
