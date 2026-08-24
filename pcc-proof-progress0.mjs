@@ -307,27 +307,39 @@ export function validateProofProgress0(ledger, status, inventory) {
   requireValue(currentReview.globalGatesAvailable, EXPECTED_GATES.length,
     'History.CurrentGatesAvailable');
   requireString(currentReview.rationale, 'History.CurrentRationale');
-  if (currentReview !== baseline) {
-    const previousReview = ledger.history[currentReviewIndex - 1];
+  requireValue(ledger.history.indexOf(baseline), 0,
+    'History.BaselineMustBeFirst');
+  for (let reviewIndex = 1; reviewIndex < ledger.history.length;
+    reviewIndex += 1) {
+    const review = ledger.history[reviewIndex];
+    const previousReview = ledger.history[reviewIndex - 1];
+    requirePlain(review, 'History.ReviewShape',
+      'every post-baseline history entry must be a milestone review',
+      { reviewIndex });
     requirePlain(previousReview, 'History.PreviousShape',
-      'current milestone review must follow a scored history entry');
+      'every milestone review must follow a scored history entry',
+      { reviewIndex });
     const previousScore = previousReview.riskWeightedProofCompletionPercent;
+    const reviewScore = review.riskWeightedProofCompletionPercent;
     requireValue(Number.isInteger(previousScore), true,
-      'History.PreviousScoreShape');
-    requireValue(currentReview.kind, 'milestone-review', 'History.CurrentKind');
-    requireValue(currentReview.scoreChanged, pointsEarned !== previousScore,
-      'History.CurrentScoreChanged');
-    requireArray(currentReview.changedCheckpointIds,
-      'History.CurrentCheckpointChanges',
-      'current milestone review must list changed checkpoint IDs');
-    if (currentReview.scoreChanged === false) {
-      requireValue(currentReview.changedCheckpointIds.length, 0,
-        'History.CurrentUnexpectedCheckpointChange');
-      requireJson(currentReview.changeRecords ?? [], [],
-        'History.CurrentUnexpectedChangeRecords');
+      'History.PreviousScoreShape', { reviewIndex });
+    requireValue(Number.isInteger(reviewScore), true,
+      'History.ReviewScoreShape', { reviewIndex });
+    requireValue(review.kind, 'milestone-review', 'History.ReviewKind',
+      { reviewIndex });
+    requireValue(review.scoreChanged, reviewScore !== previousScore,
+      'History.ReviewScoreChanged', { reviewIndex });
+    requireArray(review.changedCheckpointIds,
+      'History.ReviewCheckpointChanges',
+      'milestone review must list changed checkpoint IDs', { reviewIndex });
+    if (review.scoreChanged === false) {
+      requireValue(review.changedCheckpointIds.length, 0,
+        'History.ReviewUnexpectedCheckpointChange', { reviewIndex });
+      requireJson(review.changeRecords ?? [], [],
+        'History.ReviewUnexpectedChangeRecords', { reviewIndex });
     } else {
-      validateChangeRecords0(currentReview, ledger, status, inventory,
-        previousScore, pointsEarned);
+      validateChangeRecords0(review, ledger, status, inventory,
+        previousScore, reviewScore, reviewIndex === currentReviewIndex);
     }
   }
 
@@ -387,7 +399,7 @@ export async function CheckProofProgress0(options = {}) {
 }
 
 function validateChangeRecords0(review, ledger, status, inventory,
-  previousScore, currentScore) {
+  previousScore, currentScore, requireCurrentEvidence) {
   requireArray(review.changeRecords, 'History.ChangeRecordsShape',
     'score-changing review must include one record per changed checkpoint');
   requireValue(review.changeRecords.length, review.changedCheckpointIds.length,
@@ -420,8 +432,10 @@ function validateChangeRecords0(review, ledger, status, inventory,
         'score change must transition one checkpoint between open and earned',
         { checkpointId, oldStatus: record.oldStatus, newStatus: record.newStatus });
     }
-    requireValue(record.newStatus, checkpoint.status,
-      'History.ChangeRecordNewStatus', { checkpointId });
+    if (requireCurrentEvidence) {
+      requireValue(record.newStatus, checkpoint.status,
+        'History.ChangeRecordNewStatus', { checkpointId });
+    }
     requireArray(record.compiledEvidence, 'History.ChangeRecordEvidenceShape',
       'score change record must include compiled evidence', { checkpointId });
     if (record.compiledEvidence.length === 0) {
@@ -429,12 +443,18 @@ function validateChangeRecords0(review, ledger, status, inventory,
         'score change record must include compiled evidence', { checkpointId });
     }
     for (const evidence of record.compiledEvidence) {
-      validateEvidence(evidence, status, inventory, checkpointId);
+      if (requireCurrentEvidence) {
+        validateEvidence(evidence, status, inventory, checkpointId);
+      } else {
+        requirePlain(evidence, 'History.ChangeRecordEvidenceEntryShape',
+          'historical compiled evidence must remain an object',
+          { checkpointId });
+      }
     }
-    if (record.sourceCoordinateOrCommit !== ledger.asOfCoordinate
+    if (record.sourceCoordinateOrCommit !== review.asOfCoordinate
         && !/^[0-9a-f]{40}$/u.test(record.sourceCoordinateOrCommit)) {
       fail('History.ChangeRecordCoordinate',
-        'score change evidence must name the current status coordinate or a full commit',
+        'score change evidence must name its review coordinate or a full commit',
         { checkpointId });
     }
     requireString(record.loadBearingRationale,
@@ -455,10 +475,10 @@ function validateChangeRecords0(review, ledger, status, inventory,
       'History.ChangeRecordUncertaintyShape',
       'uncertainty decision must be an object', { checkpointId });
     requireValue(record.uncertaintyRangeDecision.lowPercent,
-      ledger.proofCompletion.uncertaintyLowPercent,
+      review.uncertaintyLowPercent,
       'History.ChangeRecordUncertaintyLow', { checkpointId });
     requireValue(record.uncertaintyRangeDecision.highPercent,
-      ledger.proofCompletion.uncertaintyHighPercent,
+      review.uncertaintyHighPercent,
       'History.ChangeRecordUncertaintyHigh', { checkpointId });
     requireValue(typeof record.uncertaintyRangeDecision.changed, 'boolean',
       'History.ChangeRecordUncertaintyChangedShape', { checkpointId });

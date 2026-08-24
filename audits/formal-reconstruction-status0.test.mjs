@@ -3171,12 +3171,15 @@ test('proof progress preserves the fixed M184 baseline and derives current cover
     { earnedRows: 160, totalRows: 162 });
   assert.equal(sources.ledger.history[0].asOfCoordinate,
     'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184');
-  assert.equal(sources.ledger.history.at(-1).scoreChanged, true);
-  assert.deepEqual(sources.ledger.history.at(-1).changedCheckpointIds, [
+  const latestScoreChange = sources.ledger.history.findLast(
+    (entry) => entry.scoreChanged === true);
+  assert.equal(sources.ledger.history.at(-1).scoreChanged, false);
+  assert.deepEqual(sources.ledger.history.at(-1).changedCheckpointIds, []);
+  assert.deepEqual(latestScoreChange.changedCheckpointIds, [
     'axiom-remove-generate-pccpack',
     'axiom-remove-check-pccpackexp',
   ]);
-  assert.equal(sources.ledger.history.at(-1).changeRecords.length, 2);
+  assert.equal(latestScoreChange.changeRecords.length, 2);
 });
 
 test('proof progress rejects changed weights and a stale stored total', async () => {
@@ -3200,14 +3203,18 @@ test('proof progress rejects changed weights and a stale stored total', async ()
 test('proof progress rejects incomplete or ungrounded score-change records', async () => {
   const { ledger, status, inventory } = await currentProofProgressSources0();
   const missingEvidence = clone0(ledger);
-  missingEvidence.history.at(-1).changeRecords[0].compiledEvidence = [];
+  const missingEvidenceChange = missingEvidence.history.findLast(
+    (entry) => entry.scoreChanged === true);
+  missingEvidenceChange.changeRecords[0].compiledEvidence = [];
   assert.throws(
     () => validateProofProgress0(missingEvidence, status, inventory),
     (error) => error.code === 'History.ChangeRecordEvidenceMissing',
   );
 
   const forgedTotal = clone0(ledger);
-  forgedTotal.history.at(-1).changeRecords[0].oldAndNewTotal = {
+  const forgedTotalChange = forgedTotal.history.findLast(
+    (entry) => entry.scoreChanged === true);
+  forgedTotalChange.changeRecords[0].oldAndNewTotal = {
     old: 32,
     new: 34,
   };
@@ -3217,7 +3224,9 @@ test('proof progress rejects incomplete or ungrounded score-change records', asy
   );
 
   const unchangedCheckpoint = clone0(ledger);
-  unchangedCheckpoint.history.at(-1).changeRecords[0].oldStatus = 'earned';
+  const unchangedCheckpointChange = unchangedCheckpoint.history.findLast(
+    (entry) => entry.scoreChanged === true);
+  unchangedCheckpointChange.changeRecords[0].oldStatus = 'earned';
   assert.throws(
     () => validateProofProgress0(unchangedCheckpoint, status, inventory),
     (error) => error.code === 'History.ChangeRecordTransition',

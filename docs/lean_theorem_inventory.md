@@ -105,6 +105,15 @@ or discharge its theorem premises. `PNP.SAT` is now definitionally the concrete
 `PNP.Concrete.CNFSAT` bitstring language; this identity supplies no deterministic
 decider or NP-hardness theorem by itself.
 
+M189 adds `PNP.PCCMinTotalOracleLoop`. Its dependent outcome type contains only
+proof-bearing gain, exact-minimum, and ZeroSlack branches; its transparent
+recursive runner terminates by strict residual-slack descent and returns an
+equivalent global minimum with a gain-iteration bound. The eight declarations
+in the focused audit have empty axiom closure. The total oracle is an explicit
+argument, not an inventory axiom or an executable construction, so this does
+not establish unconditional ZeroSlack, the complete PCCMin algorithm, or
+polynomial runtime.
+
 ## Reviewed intermediate milestone bindings
 
 Intermediate milestone credit has a separate evidence boundary from theorem publication. Every

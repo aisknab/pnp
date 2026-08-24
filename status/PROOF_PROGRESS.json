@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-188",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-189",
   "lastReviewedDate": "2026-08-24",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 164,
-    "totalRows": 166,
+    "earnedRows": 165,
+    "totalRows": 167,
     "percentRoundedOneDecimal": 98.8,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -373,12 +373,14 @@
           "points": 3,
           "status": "open",
           "evidence": [
+            { "kind": "status-field", "field": "leanPCCMinTotalOracleLoopFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanPCCMinTotalOracleLoopConstructsOracle", "expected": false },
             { "kind": "status-field", "field": "leanPCCMinLoopExactnessFormalized", "expected": false }
           ],
           "awardedAtCoordinate": null,
-          "justification": "The checked status has no completed PCCMin loop exactness result.",
-          "remainingLimitation": "A total executable loop over the complete construction is required.",
-          "lastReviewedDate": "2026-08-23"
+          "justification": "M189 proves the general well-founded control flow under an explicit proof-bearing total oracle, but the checked status still has no constructed complete PCCMin algorithm.",
+          "remainingLimitation": "The total oracle and all of its routes must be constructed executably from the encoded source input.",
+          "lastReviewedDate": "2026-08-24"
         },
         {
           "id": "pccmin-iteration-sound-descent",
@@ -386,13 +388,15 @@
           "points": 4,
           "status": "open",
           "evidence": [
+            { "kind": "status-field", "field": "leanPCCMinTotalOracleLoopGainIterationBoundFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanPCCMinTotalOracleLoopConstructsOracle", "expected": false },
             { "kind": "status-field", "field": "leanPCCMinLoopExactnessFormalized", "expected": false },
             { "kind": "status-blocker-open", "id": "Formal.ResidualBandMinimizer" }
           ],
           "awardedAtCoordinate": null,
-          "justification": "Local strict-gain facts have not been integrated into a complete PCCMin iteration theorem.",
-          "remainingLimitation": "Every branch of the executable loop must preserve semantics and decrease the formal measure.",
-          "lastReviewedDate": "2026-08-23"
+          "justification": "M189 integrates proof-bearing oracle gain responses into one semantic-preserving strict-slack recursion, but it does not prove that every branch of a constructed algorithm returns such evidence.",
+          "remainingLimitation": "Every executable route of the constructed PCCMin algorithm must supply the checked gain or terminal evidence without assuming the total oracle.",
+          "lastReviewedDate": "2026-08-24"
         },
         {
           "id": "pccmin-termination-exactness",
@@ -400,13 +404,15 @@
           "points": 4,
           "status": "open",
           "evidence": [
+            { "kind": "status-field", "field": "leanPCCMinTotalOracleLoopExactnessUnderOracleFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanPCCMinTotalOracleLoopConstructsOracle", "expected": false },
             { "kind": "status-field", "field": "leanPCCMinLoopExactnessFormalized", "expected": false },
             { "kind": "status-field", "field": "leanZeroSlackCompletenessFormalized", "expected": false }
           ],
           "awardedAtCoordinate": null,
-          "justification": "Neither loop exactness nor unconditional ZeroSlack is established.",
-          "remainingLimitation": "Termination must yield the exact minimum rather than only a finite or supplied-instance result.",
-          "lastReviewedDate": "2026-08-23"
+          "justification": "M189 proves exact termination when the explicit oracle returns exact-minimum or ZeroSlack evidence, but unconditional ZeroSlack and a constructed complete loop remain absent.",
+          "remainingLimitation": "Exactness must follow from a constructed algorithm and unconditional ZeroSlack rather than from proof-bearing terminal oracle responses.",
+          "lastReviewedDate": "2026-08-24"
         },
         {
           "id": "pccmin-polynomial-objects",
@@ -775,6 +781,20 @@
         }
       ],
       "rationale": "M188 replaces the two opaque PCCPack generator/checker declarations with transparent typed definitions and compiled reflection theorems. The project-specific axiom inventory falls from two to zero and exactly two fixed one-point checkpoints close, moving the score from 33 to 35 percent. Formal artefact coverage becomes 164 of 166, all five global gates remain open, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-189",
+      "formalArtefactCoverage": { "earnedRows": 165, "totalRows": 167 },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M189 formalizes the general proof-bearing PCCMin total-oracle control flow: strict gain responses preserve semantics and decrease residual slack, terminal responses carry exact-minimum or ZeroSlack evidence, recursion is well-founded, and gain iterations are bounded by the starting slack. The total oracle remains an explicit supplied boundary and the regression fixture is exhaustive rather than polynomial, so no fixed checkpoint or global gate closes. Formal artefact coverage becomes 165 of 167, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [
