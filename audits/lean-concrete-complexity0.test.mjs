@@ -18,10 +18,7 @@ const TARGET_PATH = 'lean/PNP/Concrete/Target.lean';
 const COMPLEXITY_AUDIT_PATH = 'lean-audit/PNPConcreteComplexityAxiomAudit.lean';
 const TARGET_AUDIT_PATH = 'lean-audit/PNPConcreteTargetAxiomAudit.lean';
 
-const EXPECTED_AXIOMS = Object.freeze([
-  'PNP.CheckPCCPackexp',
-  'PNP.GeneratePCCPack',
-]);
+const EXPECTED_AXIOMS = Object.freeze([]);
 
 const EXPECTED_BLOCKERS = Object.freeze([
   'Formal.ConcreteSAT',

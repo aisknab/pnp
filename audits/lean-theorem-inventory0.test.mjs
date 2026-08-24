@@ -110,7 +110,7 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
   assert.equal(inventory.assumptionFreeTheoremCount,
     inventory.declarations.filter(
       ({ kind, axioms }) => kind === 'theorem' && axioms.length === 0).length);
-  assert.equal(inventory.axiomCount, 2);
+  assert.equal(inventory.axiomCount, 0);
   assert.equal(inventory.sourceClosureModuleCount,
     new Set(inventory.declarations.map(({ module }) => module)).size);
   assert.deepEqual(inventory.declarationKindCounts,
@@ -118,10 +118,7 @@ test('compiled Lean inventory is canonical, complete, deterministic, and byte-mi
       (kind) => [kind,
         inventory.declarations.filter((entry) => entry.kind === kind).length],
     )));
-  assert.deepEqual(inventory.projectAxioms, [
-    'PNP.CheckPCCPackexp',
-    'PNP.GeneratePCCPack',
-  ]);
+  assert.deepEqual(inventory.projectAxioms, []);
   assert.equal(inventory.compatibilityRootCandidate, null);
   assert.deepEqual(inventory.concreteTargetCandidate, {
     axioms: [],
@@ -404,7 +401,7 @@ test('inventory validation rejects forged axioms, vacuous rows, stale coordinate
   const { inventory } = await fixture0();
   const mutations = [];
   const forged = structuredClone(inventory);
-  forged.projectAxioms = [];
+  forged.projectAxioms = ['PNP.ForgedProjectAxiom'];
   mutations.push(forged);
   const vacuous = structuredClone(inventory);
   vacuous.declarations = [];

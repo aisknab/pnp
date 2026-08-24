@@ -28,11 +28,8 @@ example (residualInP : PClass ResidualBandExactMinimization) :
     PClass LockedNANDThreshold :=
   locked_nand_in_p_from_residual_band_in_p residualInP
 
-example
-    (pcc : AcceptedGeneratedPackage → PCCMinLoopCertificate)
-    (hard : SATHard) : CheckerTrustModel :=
-  { pccPackProducesPCCMinLoop := pcc
-    satHard := hard }
+example (hard : SATHard) : CheckerTrustModel :=
+  { satHard := hard }
 
 example :
     ResidualBandExactMinimization =

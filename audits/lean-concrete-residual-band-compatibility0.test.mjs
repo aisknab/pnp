@@ -114,8 +114,9 @@ function validateCompatibility0(files) {
     failures.push('pccmin-decider-boundary');
   }
   const trust = declarationBlock0(files.bridge, 'CheckerTrustModel');
-  for (const field of ['pccPackProducesPCCMinLoop', 'satHard']) {
-    if (!trust.includes(field)) failures.push('checker-trust-fields');
+  if (!trust.includes('satHard') ||
+      trust.includes('pccPackProducesPCCMinLoop')) {
+    failures.push('checker-trust-fields');
   }
   if (/residualBandReduction|ResidualBandReductionTrust/u.test(trust)) {
     failures.push('caller-residual-reduction');
@@ -163,7 +164,6 @@ test('axiom transcript and generic regression pin the M187 boundary', async () =
     'residual_band_encoded_candidate_iff_reference_minimum candidate threshold',
     'locked_nand_reduces_to_residual_band_checked',
     'locked_nand_in_p_from_residual_band_in_p residualInP',
-    'pccPackProducesPCCMinLoop := pcc',
     'satHard := hard',
     'concrete_residual_band_compatibility_checked_complete',
   ]) assert.equal(regression.includes(token), true, token);
@@ -184,10 +184,7 @@ test('compiled inventory removes the residual-band project axiom', async () => {
         `${name}: ${axiom}`);
     }
   }
-  assert.deepEqual(inventory.projectAxioms, [
-    'PNP.CheckPCCPackexp',
-    'PNP.GeneratePCCPack',
-  ]);
+  assert.deepEqual(inventory.projectAxioms, []);
   assert.equal(rows.get('PNP.ResidualBandExactMinimization')?.kind,
     'definition');
 });

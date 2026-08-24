@@ -5,11 +5,14 @@ This directory contains the Lean formalization track for the PNP proof-certifica
 The current Lean development contains a conditional theorem bridge corresponding to the report:
 
 ```text
-CheckPCCPackexp(GeneratePCCPack()) = accept => P = NP
+exists loop : PCCMinLoopCertificate,
+  CheckPCCPackexp (GeneratePCCPack loop) = accept => P = NP
 ```
 
-That bridge still depends on two project-specific axioms and does **not** constitute a Lean proof of
-`P = NP`. It is also not a complete Lean reproof of the custom JavaScript checker, the full
+The compiled bridge has no project-specific axiom declarations, but it still
+requires the explicit loop-certificate existence premise and concrete SAT
+hardness. It therefore does **not** constitute a Lean proof of `P = NP`. It is
+also not a complete Lean reproof of the custom JavaScript checker, the full
 residual-slack package, a deterministic SAT algorithm, or the concrete NP-hardness transport. The purpose of the Lean
 track is to replace each trust-base item with a checked theorem in visible stages.
 
@@ -1674,7 +1677,8 @@ theorem final_report_bridge
 where:
 
 ```text
-FinalReportAntecedent = CheckPCCPackexp GeneratePCCPack = Verdict.accept
+FinalReportAntecedent = exists loop : PCCMinLoopCertificate,
+  CheckPCCPackexp (GeneratePCCPack loop) = Verdict.accept
 FinalReportConsequent = PClass = NPClass
 ```
 
@@ -1689,17 +1693,27 @@ accepted PCC package
 -> P = NP
 ```
 
-The source audit permits exactly these two project-specific axioms in the current root closure:
+M188 makes `PCCPack` a typed container for the exact explicit loop
+certificate. `GeneratePCCPack` is a transparent constructor and
+`CheckPCCPackexp` is a transparent canonical-identifier check. The current
+compiled project-specific axiom inventory is therefore empty:
 
 ```text
-PNP.GeneratePCCPack
-PNP.CheckPCCPackexp
+[]
 ```
 
 `lean-audit/PNPBridgeAxiomAudit.lean` confirms that the root-status declarations depend on no axioms
-and prints those project assumptions (along with Lean's logical infrastructure dependencies) for
-the conditional bridge. The audit fails closed if another `axiom`, a `constant`/`opaque`
+and prints the allowed Lean logical-infrastructure dependencies for the conditional bridge.
+`lean-audit/PNPTypedPCCPackReflectionAxiomAudit.lean` separately pins generated
+acceptance, exact certificate reflection, mismatched-identifier rejection, and
+the active bridge closure. The source audit fails closed if another `axiom`, a `constant`/`opaque`
 declaration, or a `sorry`/`admit` placeholder appears in the tracked root closure.
+
+The remaining burden has not disappeared: `FinalReportAntecedent` requires an
+explicit proof-bearing loop certificate to exist, and `CheckerTrustModel.satHard`
+remains an explicit theorem premise. Packaging and structural acceptance do not
+construct that certificate, prove unconditional ZeroSlack/PCCMin or polynomial
+runtime, establish deterministic SAT in P, or prove `P = NP`.
 
 ## Discharged by Lean so far
 

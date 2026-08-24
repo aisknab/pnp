@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-187';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-188';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -28,10 +28,7 @@ export const FORMAL_RECONSTRUCTION_BLOCKERS0 = Object.freeze([
   'Formal.RootTheoremAndAxiomAudit',
 ]);
 
-const PROJECT_SPECIFIC_AXIOM_INVENTORY = Object.freeze([
-  'PNP.CheckPCCPackexp',
-  'PNP.GeneratePCCPack',
-]);
+const PROJECT_SPECIFIC_AXIOM_INVENTORY = Object.freeze([]);
 
 const LOCKED_NAND_THRESHOLD_HOSTILE_REVIEW_LEMMA_INVENTORY = Object.freeze([
   'DirectWireOutputLowerBound',
@@ -541,6 +538,7 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteResidualBandCompatibilityAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPConcreteResidualBandCompatibility.lean',
   'node --test audits/lean-concrete-residual-band-compatibility0.test.mjs',
+  'node --test audits/lean-typed-pccpack-reflection0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -733,6 +731,7 @@ const NON_CLAIMS = Object.freeze([
   'The finite BCEL/Packet activation-coherence obstruction exhaustively compares the exact M183 nucleus defect with the declared cut value and every canonical nonempty proper activation weight on the coherently mapped M184 Packet family. Hypothetical acceptance reconstructs the mapped-cut projection equation, while the already checked same-family Packet exclusion forces deterministic rejection with either a cut-value mismatch or one proof-bearing proper-cut mismatch. This diagnoses rather than repairs the missing bridge: the terminal problem, positive premise, family, map, activation data, payloads, tables, and ranks remain supplied; unconditional BCELReady, ZeroSlack, PCCMin, polynomial runtime, SAT in P, and P = NP remain open.',
   'The M186 concrete compatibility boundary makes every report-facing language, decider, verifier, reduction, P/NP class, and P-equals-NP witness an alias of the checked finite-pipeline model. SAT and LockedNANDThreshold are exact concrete definitions, the active bridge consumes the compiled all-bitstring reduction without caller trust, and PNP.LockedNANDThreshold is no longer a project axiom. At M186 the residual-band compatibility edge remained open; M187 now closes that language-and-identity edge without supplying its polynomial decider. A locked-NAND decider, PCCMin or ZeroSlack soundness, concrete SAT NP-hardness, the eligible root theorem, and P = NP remain absent.',
   'The M187 concrete residual-band compatibility boundary defines the report-facing residual-band endpoint as the fail-closed encoded direct-wire exact-minimum threshold predicate, proves exact arbitrary typed candidate semantics, and compiles the locked-to-residual compatibility edge as the identity polynomial reduction. PNP.ResidualBandExactMinimization is no longer a project axiom and the caller-supplied reduction field is gone. The definition still uses exhaustive finite reference minimization as a semantic specification: it does not construct PCCMin, prove polynomial runtime or encoded-size bounds, establish unconditional ZeroSlack, put SAT in P, open a global gate, create the eligible root theorem, or prove P = NP.',
+  'The M188 typed PCCPack reflection boundary makes GeneratePCCPack and CheckPCCPackexp transparent definitions over an explicit proof-bearing PCCMin loop certificate. Canonical generated identifiers accept by computation, mismatched identifiers reject, certificate projection is exact, and the active bridge no longer uses a caller-supplied checker-reflection field. No project axiom remains in the compiled root. The loop certificate itself and concrete SAT hardness remain explicit premises; this does not verify historical JavaScript package bytes, construct PCCMin, establish unconditional ZeroSlack or polynomial bounds, put SAT in P, open a global gate, create the eligible root theorem, or prove P = NP.',
   'Residual RankWF is now formalized for the manuscript\'s fixed ten-coordinate natural lexicographic rank, with an executable comparison, exact Boolean equivalence, coordinate-priority witnesses, accessibility, induction, and kernel-checked well-foundedness. This does not map current finite routes into the complete global outcome system, prove that any route decreases the rank, establish route completeness or Package E, remove the explicit positive premise, establish full SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
@@ -1503,6 +1502,13 @@ const EXACT_FIELDS = Object.freeze({
   leanConcreteResidualBandCompatibilityCallerReductionRemoved: true,
   leanConcreteResidualBandCompatibilityScope:
     'all-bitstring-and-arbitrary-typed-candidate-exact-reference-minimum-threshold-semantics-with-fail-closed-decoding-and-identity-locked-to-residual-transport',
+  leanTypedPCCPackReflectionFormalized: true,
+  leanTypedPCCPackReflectionAxiomAuditPassed: true,
+  leanTypedPCCPackReflectionAuditedDeclarationCount: 15,
+  leanTypedPCCPackReflectionEndpointProjectAssumptionFree: true,
+  leanTypedPCCPackReflectionOpaqueDeclarationsRemoved: true,
+  leanTypedPCCPackReflectionScope:
+    'all-explicit-proof-bearing-pccmin-loop-certificates-with-transparent-canonical-packaging-structural-identifier-checking-exact-projection-and-mismatch-rejection',
   leanLockedNANDPolynomialBuilderFormalized: true,
   leanCompatibleReplacementFormalized: false,
   leanGlobalSlackLawFormalized: false,
@@ -2000,7 +2006,7 @@ const EXACT_FIELDS = Object.freeze({
   rootLeanTheoremPresent: false,
   rootLeanTheoremBuilt: false,
   rootLeanTheoremAxiomAuditPassed: false,
-  projectSpecificAxiomsRemaining: true,
+  projectSpecificAxiomsRemaining: false,
   sorryOrAdmitInRootDependencyClosure: null,
   checkerAcceptanceIsMathematicalProof: false,
   legacyCheckerStackStatus: 'historical-assertion-checker-evidence-only',
@@ -2759,6 +2765,13 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanConcreteResidualBandCompatibilityCallerReductionRemoved: true,
       leanConcreteResidualBandCompatibilityScope:
         'all-bitstring-and-arbitrary-typed-candidate-exact-reference-minimum-threshold-semantics-with-fail-closed-decoding-and-identity-locked-to-residual-transport',
+      leanTypedPCCPackReflectionFormalized: true,
+      leanTypedPCCPackReflectionAxiomAuditPassed: true,
+      leanTypedPCCPackReflectionAuditedDeclarationCount: 15,
+      leanTypedPCCPackReflectionEndpointProjectAssumptionFree: true,
+      leanTypedPCCPackReflectionOpaqueDeclarationsRemoved: true,
+      leanTypedPCCPackReflectionScope:
+        'all-explicit-proof-bearing-pccmin-loop-certificates-with-transparent-canonical-packaging-structural-identifier-checking-exact-projection-and-mismatch-rejection',
       leanLockedNANDPolynomialBuilderFormalized: true,
       leanCompatibleReplacementFormalized: false,
       leanGlobalSlackLawFormalized: false,
@@ -3255,7 +3268,7 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       rootLeanTheoremPresent: publicationExpected.rootLeanTheoremPresent,
       rootLeanTheoremBuilt: publicationExpected.rootLeanTheoremBuilt,
       rootLeanTheoremAxiomAuditPassed: publicationExpected.rootLeanTheoremAxiomAuditPassed,
-      projectSpecificAxiomsRemaining: true,
+      projectSpecificAxiomsRemaining: false,
       projectSpecificAxiomInventory: [...PROJECT_SPECIFIC_AXIOM_INVENTORY],
       lockedNANDThresholdHostileReviewLemmaInventory: [...LOCKED_NAND_THRESHOLD_HOSTILE_REVIEW_LEMMA_INVENTORY],
       leanLockedNANDThresholdPremiseInventory: [...LOCKED_NAND_THRESHOLD_PREMISE_INVENTORY],
@@ -3316,7 +3329,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-24-187',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-24-188',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

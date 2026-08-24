@@ -99,11 +99,26 @@ target decider, the residual-band exact minimizer, ZeroSlack, or a root theorem
 The repository now pins `leanprover/lean4:v4.31.0` and builds the explicit `PNP` library root. That
 root imports every tracked Lean source module. `PNP.Main.rootTheoremStatus` is assumption-free data
 recording that the theorem is not released; it is not the target theorem. The current conditional
-bridge still depends on two disclosed project-specific axioms:
-`PNP.GeneratePCCPack` and `PNP.CheckPCCPackexp`. The active `PNP.SAT`,
-`PNP.LockedNANDThreshold`, and `PNP.ResidualBandExactMinimization` values are
-exact concrete finite-pipeline languages. The bridge consumes the compiled
-SAT-to-locked reduction and identity locked-to-residual reduction directly.
+bridge has no project-specific axiom declarations in its compiled closure.
+`PNP.GeneratePCCPack` and `PNP.CheckPCCPackexp` are transparent typed definitions
+over an explicit `PCCMinLoopCertificate`; their reflection theorems use only the
+allowed Lean-standard closure. The active `PNP.SAT`, `PNP.LockedNANDThreshold`,
+and `PNP.ResidualBandExactMinimization` values are exact concrete finite-pipeline
+languages. The bridge consumes the compiled SAT-to-locked reduction and identity
+locked-to-residual reduction directly. Its antecedent still requires existence of
+the proof-bearing loop certificate, and its trust model still assumes concrete
+SAT hardness; neither obligation is constructed by packaging or checking.
+
+M188 is the typed PCCPack reflection boundary. `PCCPack` contains the exact
+supplied `PCCMinLoopCertificate`; `GeneratePCCPack` preserves it definitionally;
+and `CheckPCCPackexp` performs a fail-closed canonical-identifier check.
+Compiled theorems establish generated-package acceptance, exact certificate
+reflection, and rejection of a mismatched identifier. This removes the final
+two project-specific axiom declarations, but it does not construct the
+certificate, prove its semantic adequacy or encoded-size polynomial runtime,
+close unconditional ZeroSlack/PCCMin, establish deterministic SAT in P, or
+close any global gate. See
+[`lean_typed_pccpack_reflection.md`](./lean_typed_pccpack_reflection.md).
 
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
@@ -163,9 +178,11 @@ domain-separated kernel-type SHA-256 values, and match the pinned closure over e
 milestone credit until reviewed pins change.
 
 Declaration, theorem, module, excluded-private, and reviewed-candidate counts are emitted by the
-compiled inventory and are intentionally not duplicated here. The current Lean source closure has
-exactly two project-specific axioms; the generated inventory and publication outputs must be
-regenerated and byte-checked after source-closure changes before they may describe the revision.
+compiled inventory and are intentionally not duplicated here. The current compiled Lean source
+closure has no project-specific axiom declarations; the generated inventory and publication
+outputs must be regenerated and byte-checked after source-closure changes before they may describe
+the revision. This inventory result does not discharge explicit theorem premises or construct the
+missing PCCMin certificate.
 
 Inventory generation is deliberately separate from theorem publication. The concrete gate expects
 the compatibility theorem `PNP.Main.p_eq_np` to have the exact concrete target

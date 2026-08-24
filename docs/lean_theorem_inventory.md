@@ -91,17 +91,19 @@ NP-hardness/NP-completeness transport, and `P = NP` root remain absent.
 
 M187 additionally makes `PNP.ResidualBandExactMinimization` the exact concrete encoded
 direct-wire minimum-threshold language and replaces the supplied locked-to-residual edge with
-the identity polynomial reduction. The current two project-specific axioms remain visible as an
-independent inventory:
+the identity polynomial reduction. At that coordinate, two project-specific axioms remained.
+M188 replaces both with transparent typed definitions over an explicit
+`PCCMinLoopCertificate`; the current independent inventory is:
 
 ```text
-PNP.CheckPCCPackexp
-PNP.GeneratePCCPack
+[]
 ```
 
-They are not on the publication gate's permitted Lean-standard axiom allowlist. `PNP.SAT` is now
-definitionally the concrete `PNP.Concrete.CNFSAT` bitstring language; this identity supplies no
-deterministic decider or NP-hardness theorem by itself.
+The current bridge declarations use only the publication gate's permitted
+Lean-standard axiom allowlist. This does not construct the explicit certificate
+or discharge its theorem premises. `PNP.SAT` is now definitionally the concrete
+`PNP.Concrete.CNFSAT` bitstring language; this identity supplies no deterministic
+decider or NP-hardness theorem by itself.
 
 ## Reviewed intermediate milestone bindings
 

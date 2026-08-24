@@ -2,13 +2,13 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-187",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-188",
   "lastReviewedDate": "2026-08-24",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
-    "pointsEarned": 33,
+    "pointsEarned": 35,
     "pointsAvailable": 100,
-    "percent": 33,
+    "percent": 35,
     "uncertaintyLowPercent": 20,
     "uncertaintyHighPercent": 40,
     "isProbabilityOfCorrectness": false,
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 163,
-    "totalRows": 165,
+    "earnedRows": 164,
+    "totalRows": 166,
     "percentRoundedOneDecimal": 98.8,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -442,33 +442,39 @@
       "id": "root-and-axioms",
       "title": "Root theorem and project-axiom elimination",
       "pointsAvailable": 10,
-      "pointsEarned": 2,
+      "pointsEarned": 4,
       "checkpoints": [
         {
           "id": "axiom-remove-generate-pccpack",
           "title": "Remove PNP.GeneratePCCPack as a project-specific axiom",
           "points": 1,
-          "status": "open",
+          "status": "earned",
           "evidence": [
-            { "kind": "inventory-project-axiom", "name": "PNP.GeneratePCCPack", "expectedPresent": true }
+            { "kind": "inventory-project-axiom", "name": "PNP.GeneratePCCPack", "expectedPresent": false },
+            { "kind": "inventory-declaration", "name": "PNP.GeneratePCCPack", "expectedPresent": true },
+            { "kind": "milestone-earned", "id": "typed-pccpack-reflection" },
+            { "kind": "status-field", "field": "leanTypedPCCPackReflectionEndpointProjectAssumptionFree", "expected": true }
           ],
-          "awardedAtCoordinate": null,
-          "justification": "The compiled inventory still lists this project-specific axiom.",
-          "remainingLimitation": "The active route must no longer require this declaration as proof authority.",
-          "lastReviewedDate": "2026-08-23"
+          "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-188",
+          "justification": "GeneratePCCPack is now a transparent typed constructor from an explicit PCCMin loop certificate, and the compiled inventory no longer lists it as project-specific proof authority.",
+          "remainingLimitation": "The loop certificate remains an explicit input: no PCCMin construction, ZeroSlack theorem, or encoded-size polynomial bound follows from packaging it.",
+          "lastReviewedDate": "2026-08-24"
         },
         {
           "id": "axiom-remove-check-pccpackexp",
           "title": "Remove PNP.CheckPCCPackexp as a project-specific axiom",
           "points": 1,
-          "status": "open",
+          "status": "earned",
           "evidence": [
-            { "kind": "inventory-project-axiom", "name": "PNP.CheckPCCPackexp", "expectedPresent": true }
+            { "kind": "inventory-project-axiom", "name": "PNP.CheckPCCPackexp", "expectedPresent": false },
+            { "kind": "inventory-declaration", "name": "PNP.CheckPCCPackexp", "expectedPresent": true },
+            { "kind": "milestone-earned", "id": "typed-pccpack-reflection" },
+            { "kind": "status-field", "field": "leanTypedPCCPackReflectionEndpointProjectAssumptionFree", "expected": true }
           ],
-          "awardedAtCoordinate": null,
-          "justification": "The compiled inventory still lists this project-specific axiom.",
-          "remainingLimitation": "The active route must no longer require this declaration as proof authority.",
-          "lastReviewedDate": "2026-08-23"
+          "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-188",
+          "justification": "CheckPCCPackexp is now a transparent structural identifier check with compiled acceptance and mismatched-identifier rejection theorems, and the inventory no longer lists it as a project axiom.",
+          "remainingLimitation": "The checker does not construct or independently validate the supplied loop certificate, replay historical package bytes, or prove PCCMin exactness and runtime.",
+          "lastReviewedDate": "2026-08-24"
         },
         {
           "id": "axiom-remove-locked-nand-threshold",
@@ -482,7 +488,7 @@
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-186",
           "justification": "LockedNANDThreshold is now a concrete definition used by the active bridge, and the compiled theorem inventory no longer lists it as an axiom.",
-          "remainingLimitation": "GeneratePCCPack and CheckPCCPackexp remain project-specific proof authority; the eligible root theorem is still absent.",
+          "remainingLimitation": "The eligible root theorem, deterministic CNFSAT-in-P, and complexity transport remain absent.",
           "lastReviewedDate": "2026-08-24"
         },
         {
@@ -568,10 +574,7 @@
     { "id": "polynomial-runtime-bounds", "title": "Polynomial runtime and certificate bounds", "status": "open", "statusBlocker": "Formal.PolynomialRuntimeAndCertificateBounds" },
     { "id": "root-theorem-axiom-audit", "title": "Root theorem and axiom audit", "status": "open", "statusBlocker": "Formal.RootTheoremAndAxiomAudit" }
   ],
-  "projectSpecificAxiomsRemaining": [
-    "PNP.CheckPCCPackexp",
-    "PNP.GeneratePCCPack"
-  ],
+  "projectSpecificAxiomsRemaining": [],
   "rootTheorem": {
     "name": "PNP.Main.p_eq_np",
     "present": false,
@@ -714,6 +717,64 @@
         }
       ],
       "rationale": "M187 replaces the residual-band language axiom and caller-supplied compatibility reduction with the concrete fail-closed encoded exact-minimum threshold predicate and a compiled identity reduction. Exactly one fixed one-point checkpoint closes, moving the score from 32 to 33 percent. Formal artefact coverage becomes 163 of 165, all five global gates remain open, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-188",
+      "formalArtefactCoverage": { "earnedRows": 164, "totalRows": 166 },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": true,
+      "changedCheckpointIds": [
+        "axiom-remove-generate-pccpack",
+        "axiom-remove-check-pccpackexp"
+      ],
+      "changeRecords": [
+        {
+          "checkpointId": "axiom-remove-generate-pccpack",
+          "oldStatus": "open",
+          "newStatus": "earned",
+          "compiledEvidence": [
+            { "kind": "inventory-project-axiom", "name": "PNP.GeneratePCCPack", "expectedPresent": false },
+            { "kind": "inventory-declaration", "name": "PNP.GeneratePCCPack", "expectedPresent": true },
+            { "kind": "status-field", "field": "leanTypedPCCPackReflectionEndpointProjectAssumptionFree", "expected": true }
+          ],
+          "sourceCoordinateOrCommit": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-188",
+          "loadBearingRationale": "The active package generator is now a transparent typed constructor from an explicit loop certificate, so it no longer contributes project-specific proof authority.",
+          "remainingTrackLimitations": "The explicit PCCMin loop certificate still must be constructed and proved exact in polynomial time; deterministic CNFSAT-in-P, complexity transport, the root theorem, and publication gate remain open.",
+          "oldAndNewTotal": { "old": 33, "new": 34 },
+          "uncertaintyRangeDecision": {
+            "lowPercent": 20,
+            "highPercent": 40,
+            "changed": false,
+            "rationale": "One project axiom is removed, but the unresolved ZeroSlack, PCCMin, polynomial-runtime, deterministic-SAT, and root-theorem obligations still dominate the uncertainty."
+          }
+        },
+        {
+          "checkpointId": "axiom-remove-check-pccpackexp",
+          "oldStatus": "open",
+          "newStatus": "earned",
+          "compiledEvidence": [
+            { "kind": "inventory-project-axiom", "name": "PNP.CheckPCCPackexp", "expectedPresent": false },
+            { "kind": "inventory-declaration", "name": "PNP.CheckPCCPackexp", "expectedPresent": true },
+            { "kind": "status-field", "field": "leanTypedPCCPackReflectionEndpointProjectAssumptionFree", "expected": true }
+          ],
+          "sourceCoordinateOrCommit": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-188",
+          "loadBearingRationale": "The active package checker is now a transparent structural check with compiled generated-package acceptance and mismatched-identifier rejection theorems, so it no longer contributes project-specific proof authority.",
+          "remainingTrackLimitations": "The checker does not construct or independently certify the explicit loop witness, prove unconditional ZeroSlack or PCCMin exactness, establish polynomial runtime, or close any global gate.",
+          "oldAndNewTotal": { "old": 34, "new": 35 },
+          "uncertaintyRangeDecision": {
+            "lowPercent": 20,
+            "highPercent": 40,
+            "changed": false,
+            "rationale": "Removing the final project axiom is load-bearing, but the central constructive and complexity obligations remain fully open."
+          }
+        }
+      ],
+      "rationale": "M188 replaces the two opaque PCCPack generator/checker declarations with transparent typed definitions and compiled reflection theorems. The project-specific axiom inventory falls from two to zero and exactly two fixed one-point checkpoints close, moving the score from 33 to 35 percent. Formal artefact coverage becomes 164 of 166, all five global gates remain open, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [

@@ -6,10 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const LEAN_ROOT = path.join(ROOT, 'lean');
-const EXPECTED_AXIOMS = Object.freeze([
-  'PNP.CheckPCCPackexp',
-  'PNP.GeneratePCCPack',
-]);
+const EXPECTED_AXIOMS = Object.freeze([]);
 
 async function text0(relativePath) {
   return readFile(path.join(ROOT, relativePath), 'utf8');
@@ -169,7 +166,7 @@ test('PNP root import closure covers every tracked Lean source module', async ()
   assert.deepEqual(closure, Object.keys(sources).sort());
 });
 
-test('Lean source has exactly two disclosed project axioms and no hidden placeholders', async () => {
+test('Lean source has no project axioms or hidden placeholders', async () => {
   const inventory = declarationInventory0(await leanSources0());
   assert.deepEqual(inventory.forbiddenTokens, []);
   assert.deepEqual(inventory.declarations.filter(({ kind }) => kind !== 'axiom'), []);
