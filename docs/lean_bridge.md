@@ -1715,6 +1715,17 @@ remains an explicit theorem premise. Packaging and structural acceptance do not
 construct that certificate, prove unconditional ZeroSlack/PCCMin or polynomial
 runtime, establish deterministic SAT in P, or prove `P = NP`.
 
+M189 separately formalizes the general control flow that such a construction
+would drive. `PCCMinTotalOracle` must return either a checked strict equivalent
+gain, a checked exact minimum, or a checked ZeroSlack result for every current
+implementation. `runPCCMinTotalOracleLoop` is transparent well-founded
+recursion on residual slack, and its public endpoint returns semantic
+equivalence, global minimality, exact reference gate count, zero slack, and the
+strict-gain iteration bound. The oracle itself is not constructed or inferred
+from `PCCPack`; no encoded-size polynomial bound follows. The bridge antecedent,
+unconditional ZeroSlack, PCCMin construction, deterministic SAT theorem, and
+root publication gate therefore remain open.
+
 ## Discharged by Lean so far
 
 ```text

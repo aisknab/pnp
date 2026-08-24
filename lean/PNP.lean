@@ -199,6 +199,7 @@ import PNP.LockedNAND
 import PNP.ResidualBand
 import PNP.ZeroSlack
 import PNP.PCCMin
+import PNP.PCCMinTotalOracleLoop
 import PNP.Bridge
 import PNP.ConcreteLegacyLockedNANDCompatibility
 import PNP.ConcreteResidualBandCompatibility

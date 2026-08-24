@@ -210,9 +210,14 @@ and replaces the supplied locked-to-residual edge with the identity reduction.
 M188 then makes report-facing PCCPack generation and checking transparent typed
 definitions over an explicit `PCCMinLoopCertificate`, removing the final two
 project-specific axiom declarations and the generator/checker trust field.
-Exhaustive reference minimization remains a semantic specification, not a
-polynomial algorithm, and the explicit loop certificate is still not
-constructed. A deterministic target decider, the
+M189 adds general well-founded PCCMin control flow under an explicit
+proof-bearing `PCCMinTotalOracle`: strict gain responses preserve semantics and
+lower residual slack, while terminal responses carry exact-minimum or ZeroSlack
+evidence. The loop returns an exact minimum and has a checked gain-iteration
+bound for arbitrary finite direct-wire implementations. Exhaustive reference
+minimization remains only a regression fixture and semantic specification, not
+a polynomial algorithm, and the total oracle and explicit loop certificate are
+still not constructed. A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See
 [`lean_concrete_legacy_locked_nand_compatibility.md`](lean_concrete_legacy_locked_nand_compatibility.md).
@@ -220,6 +225,8 @@ See also
 [`lean_concrete_residual_band_compatibility.md`](lean_concrete_residual_band_compatibility.md).
 See also
 [`lean_typed_pccpack_reflection.md`](lean_typed_pccpack_reflection.md).
+See also
+[`lean_pccmin_total_oracle_loop.md`](lean_pccmin_total_oracle_loop.md).
 
 The reconstruction now also verifies the iteration-count subclaim used by
 `PCCMin`: for any finite supplied chain whose every adjacent replacement is a

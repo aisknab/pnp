@@ -162,6 +162,8 @@ on:
       - 'audits/lean-concrete-legacy-locked-nand-compatibility0.test.mjs'
       - 'audits/lean-concrete-residual-band-compatibility0.test.mjs'
       - 'audits/lean-typed-pccpack-reflection0.test.mjs'
+      - 'audits/lean-pccmin-total-oracle-loop0.test.mjs'
+      - 'docs/lean_pccmin_total_oracle_loop.md'
       - 'audits/lean-residual-terminal-rank-wf0.test.mjs'
       - 'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs'
       - 'audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs'
@@ -564,6 +566,8 @@ on:
       - 'audits/lean-concrete-legacy-locked-nand-compatibility0.test.mjs'
       - 'audits/lean-concrete-residual-band-compatibility0.test.mjs'
       - 'audits/lean-typed-pccpack-reflection0.test.mjs'
+      - 'audits/lean-pccmin-total-oracle-loop0.test.mjs'
+      - 'docs/lean_pccmin_total_oracle_loop.md'
       - 'audits/lean-residual-terminal-rank-wf0.test.mjs'
       - 'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs'
       - 'audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs'
@@ -4956,3 +4960,23 @@ jobs:
 
       - name: Run typed PCCPack reflection hostile audit
         run: node --test audits/lean-typed-pccpack-reflection0.test.mjs
+
+      - name: Print proof-bearing PCCMin total-oracle loop axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinTotalOracleLoopAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPPCCMinTotalOracleLoopAxiomAudit.lean)"
+          test "$expected_count" -eq 8
+          test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq "$expected_count"
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|depends on axioms:'; then
+            printf '%s\n' "$normalized" >&2
+            exit 1
+          fi
+
+      - name: Run proof-bearing PCCMin total-oracle loop regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPPCCMinTotalOracleLoop.lean
+
+      - name: Run proof-bearing PCCMin total-oracle loop hostile audit
+        run: node --test audits/lean-pccmin-total-oracle-loop0.test.mjs

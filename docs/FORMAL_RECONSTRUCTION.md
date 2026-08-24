@@ -120,6 +120,18 @@ close unconditional ZeroSlack/PCCMin, establish deterministic SAT in P, or
 close any global gate. See
 [`lean_typed_pccpack_reflection.md`](./lean_typed_pccpack_reflection.md).
 
+M189 is the general proof-bearing PCCMin total-oracle control-flow boundary.
+`PCCMinOracleOutcome` admits only a checked strict equivalent gain, an exact
+minimum, or a ZeroSlack result. `runPCCMinTotalOracleLoop` follows gains by
+well-founded recursion on residual slack, preserves complete Boolean semantics,
+returns a global semantic minimum with zero residual slack, and bounds gain
+iterations by the input slack. All eight audited declarations are
+assumption-free. The total oracle is still an explicit argument, however, and
+the regression fixture uses exhaustive reference minimization. This does not
+construct the active PCCMin algorithm, derive unconditional ZeroSlack, prove
+encoded-size polynomial construction or runtime, or close a global gate. See
+[`lean_pccmin_total_oracle_loop.md`](./lean_pccmin_total_oracle_loop.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

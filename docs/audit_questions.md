@@ -2037,6 +2037,47 @@ project-specific proof authority.
 
 ---
 
+## AQ-31 — Proof-bearing PCCMin total-oracle loop
+
+**Claim**
+
+For every finite direct-wire implementation and explicit proof-bearing total
+oracle, transparent well-founded recursion follows strict equivalent gains and
+returns an equivalent exact minimum with zero slack. The number of gain branches
+is at most the starting residual slack.
+
+**Where it appears**
+
+- `lean/PNP/PCCMinTotalOracleLoop.lean`.
+- `lean-audit/PNPPCCMinTotalOracleLoopAxiomAudit.lean`.
+- `lean-regression/PNPPCCMinTotalOracleLoop.lean`.
+- `audits/lean-pccmin-total-oracle-loop0.test.mjs`.
+- `status/PROOF_PROGRESS.json`.
+
+**How to test or inspect it**
+
+1. Build the explicit `PNP` root.
+2. Compile the M189 axiom audit and generic regression.
+3. Confirm the oracle outcome has exactly gain, exact, and ZeroSlack branches,
+   with no unresolved constructor.
+4. Confirm recursion terminates on `residualSlack current`, every gain carries
+   `StrictEquivalentGain`, and the public endpoint retains equivalence,
+   minimality, zero slack, exact gate count, and the iteration bound.
+5. Mutate those boundaries or add a polynomial-runtime claim; require the
+   hostile contract to reject the mutation.
+
+**What would count as a refutation or material defect**
+
+- A gain branch need not preserve semantics or strictly lower residual slack.
+- A terminal branch can succeed without exact-minimum or ZeroSlack evidence.
+- The recursion depends on unrelated fuel or lacks the initial-slack iteration
+  bound.
+- The explicit oracle or exhaustive fixture is described as a constructed
+  polynomial PCCMin algorithm, unconditional ZeroSlack, a closed global gate,
+  deterministic SAT in P, or `P = NP`.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:
