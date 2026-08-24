@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-189`, 165 of 167
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-190`, 166 of 168
 current scoped rows are earned, or 98.8 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M189 |
+| Track | Available | Earned at M190 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M189 risk-weighted proof completion estimate is therefore 35 percent, with
+The M190 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -76,8 +76,16 @@ is well-founded, and gain iterations are bounded by initial slack. Because the
 total oracle remains an explicit supplied boundary and the regression fixture
 uses exhaustive reference minimization, no fixed checkpoint closes. Coverage
 becomes 165 of 167 while the score remains 35 percent, the uncertainty range
-remains 20 to 40 percent, and all five gates remain open. No retrospective score
-was invented.
+remains 20 to 40 percent, and all five gates remain open. M190 then composes the
+manuscript's proof-bearing NormalizeOrGain and PCCOracle stages: semantic
+normalization cannot increase gate count, subsequent oracle gains lift to
+strict gains from the original implementation, and exact or ZeroSlack endpoints
+transport back through normalization into the checked recursive loop. Because
+the total normalizer and oracle remain explicit arguments and the regression
+fixtures use exhaustive reference minimization, no fixed checkpoint closes.
+Coverage becomes 166 of 168 while the score remains 35 percent, the uncertainty
+range remains 20 to 40 percent, and all five gates remain open. No retrospective
+score was invented.
 
 ## Changing the score
 

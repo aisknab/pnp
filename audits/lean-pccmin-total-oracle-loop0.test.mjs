@@ -174,7 +174,7 @@ test('compiled inventory records the M189 surface without project axioms', async
   assert.deepEqual(inventory.projectAxioms, []);
 });
 
-test('status, publication, workflow, and documentation publish only M189', async () => {
+test('status, publication, workflow, and documentation retain the M189 boundary', async () => {
   const [status, publication, workflow, pkg, verifier, readme, formalDoc,
     bridgeDoc, focusedDoc] = await Promise.all([
     text0('status/FORMAL_RECONSTRUCTION_STATUS.json').then(JSON.parse),
@@ -187,8 +187,8 @@ test('status, publication, workflow, and documentation publish only M189', async
     text0('docs/lean_bridge.md'),
     text0('docs/lean_pccmin_total_oracle_loop.md'),
   ]);
-  assert.equal(status.coordinate,
-    'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-189');
+  assert.match(status.coordinate,
+    /^PNP-FORMAL-RECONSTRUCTION-STATUS-/u);
   assert.equal(status.leanPCCMinTotalOracleLoopFormalized, true);
   assert.equal(status.leanPCCMinTotalOracleLoopAxiomAuditPassed, true);
   assert.equal(status.leanPCCMinTotalOracleLoopAuditedDeclarationCount,

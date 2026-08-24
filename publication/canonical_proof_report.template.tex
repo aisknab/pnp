@@ -87,10 +87,10 @@
   compatibility cannot activate publication without the missing mathematics.
   Its PCCPack generator and checker are transparent typed definitions over an
   explicit proof-bearing loop certificate, so the compiled project-axiom
-  inventory is empty. A general well-founded loop now consumes a proof-bearing
-  total oracle and returns an exact minimum with a strict-gain iteration bound.
-  The oracle itself is not constructed, so this does not complete PCCMin or
-  close any global gate.
+  inventory is empty. A general well-founded loop now consumes proof-bearing
+  normalization and oracle stages and returns an exact minimum with a
+  strict-gain iteration bound. Neither stage is constructed, so this does not
+  complete PCCMin or close any global gate.
   \vspace{0.3cm}
   \end{minipage}
 }
@@ -549,9 +549,13 @@ certificate remain open. The M189 boundary separately defines a total dependent
 oracle with only strict-gain, exact-minimum, and ZeroSlack outcomes and proves
 that transparent recursion on residual slack preserves semantics, terminates at
 an exact minimum, and uses no more gain branches than the starting slack. All
-eight focused declarations are assumption-free. The total oracle remains an
-explicit argument, and the exhaustive regression fixture is not a polynomial
-algorithm. A
+eight focused declarations are assumption-free. The M190 boundary then composes
+a proof-bearing NormalizeOrGain stage with that oracle. Semantic normalization
+cannot increase gate count, so subsequent oracle gains lift to strict gains
+from the original implementation; exact-minimum and ZeroSlack endpoints
+transport back through normalization. All ten focused declarations are
+assumption-free. The total normalizer and oracle remain explicit arguments, and
+the exhaustive regression fixtures are not polynomial algorithms. A
 deterministic target decider, concrete CNFSAT NP-hardness transport,
 ZeroSlack/PCCMin completion,
 and \(P=NP\) remain unproved.

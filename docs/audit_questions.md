@@ -2078,6 +2078,51 @@ is at most the starting residual slack.
 
 ---
 
+## AQ-32 — Proof-bearing PCCMin normalization/oracle composition
+
+**Claim**
+
+For every finite direct-wire implementation, explicit proof-bearing total
+normalizer, and explicit proof-bearing total oracle, the manuscript's two stages
+compose into the checked M189 recursive loop. A later oracle gain remains a
+strict equivalent gain from the pre-normalized implementation, and exact or
+ZeroSlack endpoints transport back through normalization.
+
+**Where it appears**
+
+- `lean/PNP/PCCMinNormalizeOracleComposition.lean`.
+- `lean-audit/PNPPCCMinNormalizeOracleCompositionAxiomAudit.lean`.
+- `lean-regression/PNPPCCMinNormalizeOracleComposition.lean`.
+- `audits/lean-pccmin-normalize-oracle-composition0.test.mjs`.
+- `status/PROOF_PROGRESS.json`.
+
+**How to test or inspect it**
+
+1. Build the explicit `PNP` root.
+2. Compile the M190 axiom audit and generic regression.
+3. Confirm the normalizer outcome has exactly gain and proof-bearing normal-form
+   branches, with no unresolved constructor.
+4. Confirm normalization carries complete semantics and non-increasing gate
+   count, oracle gains use both facts to lift strict descent, and exact and
+   ZeroSlack endpoints transport to the original implementation.
+5. Confirm the public endpoint retains equivalence, minimality, zero slack,
+   exact gate count, and the initial-slack iteration bound.
+6. Mutate those boundaries or add a polynomial-runtime claim; require the
+   hostile contract to reject the mutation.
+
+**What would count as a refutation or material defect**
+
+- Normalization can change semantics or increase gate count.
+- A gain after normalization is accepted without being a strict gain from the
+  pre-normalized implementation.
+- An exact or ZeroSlack endpoint is not transported through semantic
+  equivalence.
+- Either explicit stage or an exhaustive fixture is described as a constructed
+  polynomial PCCMin algorithm, unconditional ZeroSlack, a closed global gate,
+  deterministic SAT in P, or `P = NP`.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

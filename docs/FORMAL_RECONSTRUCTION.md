@@ -132,6 +132,19 @@ construct the active PCCMin algorithm, derive unconditional ZeroSlack, prove
 encoded-size polynomial construction or runtime, or close a global gate. See
 [`lean_pccmin_total_oracle_loop.md`](./lean_pccmin_total_oracle_loop.md).
 
+M190 is the proof-bearing normalization/oracle composition boundary.
+`PCCMinTotalNormalizer` either returns a checked strict equivalent gain or a
+semantically equivalent normal form whose gate count cannot increase. Oracle
+gains after normalization lift to strict gains from the original
+implementation; exact-minimum and ZeroSlack endpoints transport back through
+normalization; and the composed route reuses the M189 well-founded loop. All ten
+audited declarations are assumption-free. The normalizer and oracle are still
+explicit arguments, however, and the regression fixtures use exhaustive
+reference minimization. This does not construct the active PCCMin algorithm,
+derive unconditional ZeroSlack, prove encoded-size polynomial construction or
+runtime, or close a global gate. See
+[`lean_pccmin_normalize_oracle_composition.md`](./lean_pccmin_normalize_oracle_composition.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

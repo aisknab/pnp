@@ -1,0 +1,12 @@
+import PNP
+
+#print axioms PNP.DirectWire.PCCMinNormalizedResult
+#print axioms PNP.DirectWire.PCCMinNormalizeOutcome
+#print axioms PNP.DirectWire.PCCMinTotalNormalizer
+#print axioms PNP.DirectWire.PCCMinNormalizedResult.liftStrictEquivalentGain
+#print axioms PNP.DirectWire.PCCMinNormalizedResult.liftStrictEquivalentGain_strictResidualDescent
+#print axioms PNP.DirectWire.PCCMinNormalizedResult.transportExactMinimum
+#print axioms PNP.DirectWire.PCCMinNormalizedResult.exactMinimumOfZeroSlack
+#print axioms PNP.DirectWire.composePCCMinNormalizerOracle
+#print axioms PNP.DirectWire.runPCCMinNormalizeOracleLoop
+#print axioms PNP.DirectWire.pccmin_normalize_oracle_loop_checked_complete

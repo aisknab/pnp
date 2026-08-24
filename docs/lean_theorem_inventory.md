@@ -114,6 +114,15 @@ argument, not an inventory axiom or an executable construction, so this does
 not establish unconditional ZeroSlack, the complete PCCMin algorithm, or
 polynomial runtime.
 
+M190 adds `PNP.PCCMinNormalizeOracleComposition`. Its proof-bearing normalizer
+has only direct-gain and semantically equivalent non-increasing normal-form
+outcomes. The composition lifts later oracle gains to strict gains from the
+pre-normalized implementation, transports exact and ZeroSlack endpoints, and
+reuses the M189 recursive runner. The ten declarations in the focused audit
+have empty axiom closure. Both stages remain explicit arguments rather than
+inventory axioms or executable constructions, so this does not establish
+unconditional ZeroSlack, the complete PCCMin algorithm, or polynomial runtime.
+
 ## Reviewed intermediate milestone bindings
 
 Intermediate milestone credit has a separate evidence boundary from theorem publication. Every

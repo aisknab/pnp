@@ -1726,6 +1726,18 @@ from `PCCPack`; no encoded-size polynomial bound follows. The bridge antecedent,
 unconditional ZeroSlack, PCCMin construction, deterministic SAT theorem, and
 root publication gate therefore remain open.
 
+M190 now matches the manuscript's two-stage iteration more closely.
+`PCCMinTotalNormalizer` may produce a checked direct gain or a semantically
+equivalent non-increasing normal form. `composePCCMinNormalizerOracle` proves
+that an oracle gain after normalization is still a strict gain from the
+pre-normalized implementation and transports exact-minimum or ZeroSlack
+endpoints back through that equivalence. The resulting route reuses the M189
+well-founded loop and retains its exact result and iteration bound. Neither the
+normalizer nor the oracle is constructed or inferred from `PCCPack`, and no
+encoded-size polynomial bound follows. The bridge antecedent, unconditional
+ZeroSlack, PCCMin construction, deterministic SAT theorem, and root publication
+gate therefore remain open.
+
 ## Discharged by Lean so far
 
 ```text
