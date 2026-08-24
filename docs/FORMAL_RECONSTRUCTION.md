@@ -145,6 +145,20 @@ derive unconditional ZeroSlack, prove encoded-size polynomial construction or
 runtime, or close a global gate. See
 [`lean_pccmin_normalize_oracle_composition.md`](./lean_pccmin_normalize_oracle_composition.md).
 
+M191 is the rank-ordered PCCOracle orchestration boundary.
+`PCCMinRankOrderedOracleBuilder` separates proof-bearing HResolve,
+BudgetResolve, and arbitrary finite selector-rank rows. The executable scan
+uses the complete canonical finite rank list, returns immediately on any
+checked strict gain, and permits ZeroSlack only through an explicit closure
+over a typed blocker equation for every selector in every row. The constructed
+total-oracle adapter composes with the M190 normalizer and M189 well-founded
+loop. The focused declarations have no project-specific axiom or
+`Classical.choice`; list-membership proofs use only permitted Lean-standard
+`propext` and `Quot.sound` where required. M191 does not construct the
+normalizer, resolvers, selector rows, realizer, blocker semantics, or ZeroSlack
+closure and proves no encoded-size polynomial construction or runtime. See
+[`lean_pccmin_rank_ordered_oracle.md`](./lean_pccmin_rank_ordered_oracle.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

@@ -88,9 +88,10 @@
   Its PCCPack generator and checker are transparent typed definitions over an
   explicit proof-bearing loop certificate, so the compiled project-axiom
   inventory is empty. A general well-founded loop now consumes proof-bearing
-  normalization and oracle stages and returns an exact minimum with a
-  strict-gain iteration bound. Neither stage is constructed, so this does not
-  complete PCCMin or close any global gate.
+  normalization and a rank-ordered oracle whose HResolve, BudgetResolve, and
+  selector stages are explicit. It returns an exact minimum with a strict-gain
+  iteration bound. The component algorithms and ZeroSlack closure are not
+  constructed, so this does not complete PCCMin or close any global gate.
   \vspace{0.3cm}
   \end{minipage}
 }
@@ -555,7 +556,15 @@ cannot increase gate count, so subsequent oracle gains lift to strict gains
 from the original implementation; exact-minimum and ZeroSlack endpoints
 transport back through normalization. All ten focused declarations are
 assumption-free. The total normalizer and oracle remain explicit arguments, and
-the exhaustive regression fixtures are not polynomial algorithms. A
+the exhaustive regression fixtures are not polynomial algorithms. The M191
+boundary then reconstructs the oracle order itself: HResolve precedes
+BudgetResolve, arbitrary finite selector rows are scanned through every
+canonical rank, gains return immediately, and ZeroSlack requires a complete
+typed-blocker ledger. The fifteen focused declarations contain no project
+axiom or Classical choice; their executable membership proofs use only the
+permitted Lean-standard quotient and propositional-extensionality foundations.
+The resolver algorithms, selector rows, realizer, blocker semantics, and
+ZeroSlack closure remain explicit inputs. A
 deterministic target decider, concrete CNFSAT NP-hardness transport,
 ZeroSlack/PCCMin completion,
 and \(P=NP\) remain unproved.

@@ -123,6 +123,18 @@ have empty axiom closure. Both stages remain explicit arguments rather than
 inventory axioms or executable constructions, so this does not establish
 unconditional ZeroSlack, the complete PCCMin algorithm, or polynomial runtime.
 
+M191 adds `PNP.PCCMinRankOrderedOracle`. It separates HResolve,
+BudgetResolve, and arbitrary finite selector-rank rows, scans every canonical
+rank, and makes the ZeroSlack branch consume a complete typed-blocker ledger.
+`PCCMinRankOrderedOracleBuilder.toTotalOracle` connects that structure to the
+M190/M189 loop, whose public endpoint retains exactness and the gain-iteration
+bound. The fifteen focused declarations contain no project-specific axiom or
+`Classical.choice`; executable list membership uses permitted Lean-standard
+`propext` and `Quot.sound` where required. The resolver algorithms, rows,
+realizer, blocker meanings, and ZeroSlack closure remain explicit supplied
+boundaries, so this does not establish unconditional ZeroSlack, the complete
+PCCMin algorithm, or polynomial runtime.
+
 ## Reviewed intermediate milestone bindings
 
 Intermediate milestone credit has a separate evidence boundary from theorem publication. Every

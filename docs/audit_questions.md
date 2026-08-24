@@ -2123,6 +2123,53 @@ ZeroSlack endpoints transport back through normalization.
 
 ---
 
+## AQ-33 — Rank-ordered PCCOracle orchestration
+
+**Claim**
+
+For every finite direct-wire implementation and arbitrary finite selector-rank
+rows, the proof-bearing oracle runs HResolve before BudgetResolve and scans
+every canonical finite rank before ZeroSlack. Resolver or selector gains are
+strict equivalent gains. The ZeroSlack branch consumes an explicit typed
+blocker equation for every selector in every rank row.
+
+**Where it appears**
+
+- `lean/PNP/PCCMinRankOrderedOracle.lean`.
+- `lean-audit/PNPPCCMinRankOrderedOracleAxiomAudit.lean`.
+- `lean-regression/PNPPCCMinRankOrderedOracle.lean`.
+- `audits/lean-pccmin-rank-ordered-oracle0.test.mjs`.
+- `status/PROOF_PROGRESS.json`.
+
+**How to test or inspect it**
+
+1. Build the explicit `PNP` root.
+2. Compile the M191 axiom audit and branch regression.
+3. Confirm BudgetResolve depends on the actual NoHereditary value and the
+   selector plan depends on both negative resolver values.
+4. Confirm the complete selector scan uses `allFin rankCount` and discharges
+   arbitrary-rank membership with `mem_allFin`, not a fixed prefix.
+5. Confirm the regressions exercise HResolve exact/gain, BudgetResolve
+   exact/gain, first- and later-rank gains, and complete-silence ZeroSlack.
+6. Confirm the public endpoint retains equivalence, minimality, zero slack,
+   exact gate count, and the initial-slack iteration bound.
+7. Mutate the stage order, all-rank scan, silence ledger, or claim boundary;
+   require the hostile contract to reject the mutation.
+
+**What would count as a refutation or material defect**
+
+- BudgetResolve or selector realization can run while bypassing an earlier
+  proof-bearing stage.
+- A supplied rank prefix can stand in for the complete finite rank list.
+- A selector can return an unchecked, silent, or unresolved outcome.
+- ZeroSlack is available without a blocker equation for every scheduled
+  selector.
+- The supplied resolver algorithms, selector rows, realizer, blocker semantics,
+  or ZeroSlack closure are described as constructed, unconditional, or
+  polynomial.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:
