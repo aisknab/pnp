@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-193`, 169 of 171
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-194`, 170 of 172
 current scoped rows are earned, or 98.8 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M193 |
+| Track | Available | Earned at M194 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M193 risk-weighted proof completion estimate is therefore 35 percent, with
+The M194 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -106,6 +106,17 @@ contradiction. Because that positive-slack bridge, terminal data, resolvers,
 normalizer, and polynomial construction remain supplied or open, no fixed
 checkpoint closes. Coverage becomes 169 of 171 while the score remains 35
 percent, the uncertainty range remains 20 to 40 percent, and all five gates
+remain open. No retrospective score was invented.
+
+M194 then removes M193's arbitrary positive-slack-to-faithful-selector
+callback. Positive slack now supplies only the earlier constant-activation
+boundary; the existing general BN6 theorem constructs the positive Packet, and
+the route-clear payload checker constructs a faithful selector in the
+canonicalized table before the checked HB contradiction derives conditional
+ZeroSlack. Because constant activation, terminal data, route-clear evidence,
+resolvers, normalizer, and polynomial construction remain supplied or open, no
+fixed checkpoint closes. Coverage becomes 170 of 172 while the score remains
+35 percent, the uncertainty range remains 20 to 40 percent, and all five gates
 remain open. No retrospective score was invented.
 
 ## Changing the score

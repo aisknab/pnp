@@ -238,7 +238,13 @@ faithful handle. The exact remaining premise says that positive residual slack
 constructs a faithful canonical handle; under that supplied bridge, the final
 contradiction yields conditional ZeroSlack and feeds the same loop. Terminal
 data, that positive-slack bridge, resolver algorithms, normalizer, and
-polynomial bounds remain supplied or open. A deterministic target decider, the
+polynomial bounds remain supplied or open. M194 replaces the direct faithful-
+selector premise with the earlier positive-slack-to-constant-activation
+boundary: the general BN6 theorem constructs a Packet and executable
+route-clear payload checks construct faithfulness in the canonicalized table.
+Constant activation, terminal-family construction, payload and route-clear
+evidence, resolver algorithms, normalizer, and polynomial bounds remain
+supplied or open. A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See
 [`lean_concrete_legacy_locked_nand_compatibility.md`](lean_concrete_legacy_locked_nand_compatibility.md).
@@ -252,6 +258,8 @@ See also
 [`lean_pccmin_normalize_oracle_composition.md`](lean_pccmin_normalize_oracle_composition.md).
 See also
 [`lean_pccmin_rank_ordered_oracle.md`](lean_pccmin_rank_ordered_oracle.md).
+See also
+[`lean_pccmin_checked_packet_bn6_hb_zeroslack_bridge.md`](lean_pccmin_checked_packet_bn6_hb_zeroslack_bridge.md).
 See also
 [`lean_pccmin_checked_packet_ranked_selector.md`](lean_pccmin_checked_packet_ranked_selector.md).
 See also

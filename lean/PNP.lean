@@ -204,6 +204,7 @@ import PNP.PCCMinNormalizeOracleComposition
 import PNP.PCCMinRankOrderedOracle
 import PNP.PCCMinCheckedPacketRankedSelector
 import PNP.PCCMinCheckedPacketHBZeroSlackBridge
+import PNP.PCCMinCheckedPacketBN6HBZeroSlackBridge
 import PNP.Bridge
 import PNP.ConcreteLegacyLockedNANDCompatibility
 import PNP.ConcreteResidualBandCompatibility

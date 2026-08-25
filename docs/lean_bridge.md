@@ -1781,6 +1781,21 @@ ZeroSlack or polynomial PCCMin. The risk-weighted proof-completion estimate
 therefore remains 35 percent and zero of five global gates are closed. See
 [`lean_pccmin_checked_packet_hb_zeroslack_bridge.md`](./lean_pccmin_checked_packet_hb_zeroslack_bridge.md).
 
+The M194 BN6 computed-faithfulness bridge replaces M193's arbitrary
+positive-slack-to-faithful-selector premise. Positive slack now supplies only
+the earlier constant-activation premise for an arbitrary finite grouped
+family. The general BN6 theorem constructs the Packet conclusion; the
+route-clear payload checker and canonical table constructor then compute a
+faithful handle without an independent binding premise. The M193 checked HB
+contradiction derives conditional ZeroSlack and feeds the same total loop. The
+twelve focused declarations use no project-specific axiom or
+`Classical.choice`. Because constant activation, terminal data, route-clear
+evidence, resolvers, normalizer, and polynomial bounds remain supplied or open,
+this is not manuscript-wide SaturatePositive or BCELReady, unconditional
+ZeroSlack, or polynomial PCCMin. The risk-weighted proof-completion estimate
+therefore remains 35 percent and zero of five global gates are closed. See
+[`lean_pccmin_checked_packet_bn6_hb_zeroslack_bridge.md`](./lean_pccmin_checked_packet_bn6_hb_zeroslack_bridge.md).
+
 ## Discharged by Lean so far
 
 ```text

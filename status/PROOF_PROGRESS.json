@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-193",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-194",
   "lastReviewedDate": "2026-08-25",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 169,
-    "totalRows": 171,
+    "earnedRows": 170,
+    "totalRows": 172,
     "percentRoundedOneDecimal": 98.8,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -869,6 +869,20 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M193 replaces M192's opaque complete-silence-to-ZeroSlack callback with a kernel-checked derivation: complete claim acceptance and exact-rank silence feed the executable selector-silence induction, checked HB no-outcome closure eliminates every canonical faithful handle, and one explicit positive-residual-slack-to-faithful-selector premise supplies the final contradiction. That positive-slack bridge, terminal data, resolvers, normalizer, and polynomial construction remain supplied, so unconditional ZeroSlack, complete executable PCCMin, every global gate, and all fixed checkpoints remain open. Formal artefact coverage becomes 169 of 171, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-194",
+      "formalArtefactCoverage": { "earnedRows": 170, "totalRows": 172 },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M194 replaces M193's arbitrary positive-slack-to-faithful-selector callback with the manuscript's earlier general route: positive slack supplies the still-explicit constant-activation premise, the existing arbitrary-family BN6 theorem constructs a positive Packet, and the route-clear payload checker constructs a faithful selector in the canonicalized table before the checked HB contradiction derives conditional ZeroSlack. Constant activation, terminal-data construction, resolver algorithms, normalizer, and polynomial bounds remain supplied, so manuscript-wide SaturatePositive and BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, every global gate, and all fixed checkpoints remain open. Formal artefact coverage becomes 170 of 172, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [
