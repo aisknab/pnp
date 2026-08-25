@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-194`, 170 of 172
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-26-195`, 171 of 173
 current scoped rows are earned, or 98.8 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M194 |
+| Track | Available | Earned at M195 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M194 risk-weighted proof completion estimate is therefore 35 percent, with
+The M195 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -117,6 +117,19 @@ ZeroSlack. Because constant activation, terminal data, route-clear evidence,
 resolvers, normalizer, and polynomial construction remain supplied or open, no
 fixed checkpoint closes. Coverage becomes 170 of 172 while the score remains
 35 percent, the uncertainty range remains 20 to 40 percent, and all five gates
+remain open. No retrospective score was invented.
+
+M195 then removes M194's opaque positive-slack-to-constant-activation callback
+from the new endpoint. It binds a supplied Packet family to the same-candidate
+checked BCEL nucleus and exhaustively classifies its carrier, cut value, and
+every canonical nonempty proper-cut activation weight. The coherent branch
+derives constant activation and conditional ZeroSlack; each failure remains a
+typed mismatch route. Because the terminal problem, positive premise, checked
+ready certificate, family, tables, ranks, route-clear and HB data, resolvers,
+normalizer, and polynomial construction remain supplied or open, and the
+mismatch routes are not gains or globally decreasing transitions, no fixed
+checkpoint closes. Coverage becomes 171 of 173 while the score remains 35
+percent, the uncertainty range remains 20 to 40 percent, and all five gates
 remain open. No retrospective score was invented.
 
 ## Changing the score

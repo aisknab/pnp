@@ -201,6 +201,23 @@ SaturatePositive or BCELReady, unconditional ZeroSlack, or polynomial PCCMin.
 The score remains 35 percent and zero of five global gates are closed. See
 [`lean_pccmin_checked_packet_bn6_hb_zeroslack_bridge.md`](./lean_pccmin_checked_packet_bn6_hb_zeroslack_bridge.md).
 
+M195 replaces M194's opaque positive-slack-to-constant-activation callback at
+the new endpoint with a total same-candidate BCEL/Packet classifier. The
+classifier compares the supplied Packet carrier with the computed checked
+BCEL-ready nucleus, binds the cut value to the projection defect, and checks
+every canonical nonempty proper-cut activation weight. It returns one exact
+carrier, cut-value, or activation mismatch route, or derives constant
+activation and the projection-excess identity before reusing M194 for
+conditional ZeroSlack. All fifteen focused declarations avoid project axioms
+and `Classical.choice`. The terminal problem, positive premise, ready
+certificate, family, tables, ranks, route-clear and HB data, resolvers,
+normalizer, and polynomial bounds remain supplied or open. Mismatch routes are
+not yet gains or globally decreasing transitions, and the finite cut scan may
+be exponential. This is not manuscript-wide SaturatePositive or BCELReady,
+unconditional ZeroSlack, or polynomial PCCMin. The score remains 35 percent
+and zero of five global gates are closed. See
+[`lean_pccmin_checked_packet_bn6_bcel_activation_route.md`](./lean_pccmin_checked_packet_bn6_bcel_activation_route.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

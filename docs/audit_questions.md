@@ -2318,6 +2318,54 @@ exact PCCMin loop.
 
 ---
 
+### M195 same-candidate BCEL activation route
+
+**Claim**
+
+For every supplied finite same-candidate checked BCEL-ready nucleus and grouped
+BN6 Packet family, a total classifier returns one exact carrier, cut-value, or
+proper-cut activation mismatch route, or derives constant activation and the
+BCEL projection-excess identity. Under complete checked selector silence, the
+coherent branch reuses M194 to derive conditional ZeroSlack.
+
+**Where it appears**
+
+- `lean/PNP/PCCMinCheckedPacketBN6BCELActivationRoute.lean`.
+- `lean-audit/PNPPCCMinCheckedPacketBN6BCELActivationRouteAxiomAudit.lean`.
+- `lean-regression/PNPPCCMinCheckedPacketBN6BCELActivationRoute.lean`.
+- `audits/lean-pccmin-checked-packet-bn6-bcel-activation-route0.test.mjs`.
+- `status/PROOF_PROGRESS.json`.
+
+**How to test or inspect it**
+
+1. Build the explicit `PNP` root.
+2. Compile the M195 axiom audit and general regression.
+3. Confirm the data structure contains no supplied coherence result or
+   positive-slack-to-constant-activation callback.
+4. Confirm classification compares carrier equality, then cut-value equality,
+   then every canonical nonempty proper-cut activation weight.
+5. Confirm each failed comparison retains its exact proof-bearing mismatch.
+6. Confirm only the coherent result constructs M194's constant-activation
+   boundary and identifies activation with projection excess.
+7. Confirm the public endpoint returns a mismatch route or conditional
+   ZeroSlack, never discarding a mismatch as ZeroSlack.
+8. Mutate the classifier, adapter, route branches, or claim boundary and require
+   the hostile contract to reject the mutation.
+
+**What would count as a refutation or material defect**
+
+- Carrier or activation coherence is supplied rather than classified.
+- A mismatch is erased, converted to ZeroSlack, or claimed as a strict gain
+  without a separate semantic theorem.
+- The result holds only for a fixed carrier, cut, rank, family, or table rather
+  than arbitrary finite supplied data.
+- The powerset scan is described as polynomial without an encoded-size theorem.
+- The supporting terminal data are described as derived from every input.
+- Conditional ZeroSlack is described as manuscript-wide SaturatePositive,
+  BCELReady, unconditional ZeroSlack, or a closed global gate.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

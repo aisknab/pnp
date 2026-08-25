@@ -244,7 +244,13 @@ boundary: the general BN6 theorem constructs a Packet and executable
 route-clear payload checks construct faithfulness in the canonicalized table.
 Constant activation, terminal-family construction, payload and route-clear
 evidence, resolver algorithms, normalizer, and polynomial bounds remain
-supplied or open. A deterministic target decider, the
+supplied or open. M195 removes the opaque constant-activation callback from its
+new endpoint by exhaustively comparing the same-candidate checked BCEL nucleus
+with the Packet carrier, cut value, and every proper-cut activation weight.
+Coherence derives constant activation and conditional ZeroSlack; any failure is
+retained as an exact typed mismatch route. The supporting terminal data remain
+supplied, the routes are not yet gains or globally decreasing, and the subset
+scan may be exponential. A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See
 [`lean_concrete_legacy_locked_nand_compatibility.md`](lean_concrete_legacy_locked_nand_compatibility.md).

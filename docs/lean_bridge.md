@@ -1796,6 +1796,23 @@ ZeroSlack, or polynomial PCCMin. The risk-weighted proof-completion estimate
 therefore remains 35 percent and zero of five global gates are closed. See
 [`lean_pccmin_checked_packet_bn6_hb_zeroslack_bridge.md`](./lean_pccmin_checked_packet_bn6_hb_zeroslack_bridge.md).
 
+The M195 same-candidate BCEL activation-route classifier removes M194's opaque
+positive-slack-to-constant-activation callback from the new endpoint. It binds
+the supplied Packet carrier to the computed checked BCEL-ready nucleus, checks
+the exact cut value and every canonical nonempty proper-cut activation weight,
+and returns one proof-bearing mismatch route or coherent evidence. Coherence
+derives constant activation, identifies it with the BCEL projection excess,
+and feeds M194's conditional ZeroSlack bridge. The fifteen focused declarations
+use no project-specific axiom or `Classical.choice`. The terminal problem,
+positive premise, ready certificate, family, tables, ranks, route-clear and HB
+data, resolvers, normalizer, and polynomial bounds remain supplied or open.
+Mismatch routes are not yet constructed gains or globally decreasing routes,
+and the finite subset scan is not proved polynomial. This is not
+manuscript-wide SaturatePositive or BCELReady, unconditional ZeroSlack, or
+polynomial PCCMin. The risk-weighted proof-completion estimate therefore
+remains 35 percent and zero of five global gates are closed. See
+[`lean_pccmin_checked_packet_bn6_bcel_activation_route.md`](./lean_pccmin_checked_packet_bn6_bcel_activation_route.md).
+
 ## Discharged by Lean so far
 
 ```text
