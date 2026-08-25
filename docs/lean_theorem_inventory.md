@@ -14,7 +14,7 @@ The generated inventory is mirrored byte-for-byte at:
 
 The inventory records the pinned toolchain and root module, declaration kinds, each declaration's
 compiled axiom closure, the source-module closure, configured detailed milestone theorem types,
-excluded private compiler auxiliaries, and the three disclosed project-specific axioms. Declaration,
+excluded private compiler auxiliaries, and the compiled project-specific axiom inventory. Declaration,
 theorem, assumption-free-theorem, module, and excluded-private counts are generated from the
 compiled environment and are intentionally not copied into this prose. Deterministic ordering and canonical JSON encoding
 make the two mirrors and their digest reproducible. This inventory is evidence about the compiled
@@ -134,6 +134,19 @@ bound. The fifteen focused declarations contain no project-specific axiom or
 realizer, blocker meanings, and ZeroSlack closure remain explicit supplied
 boundaries, so this does not establish unconditional ZeroSlack, the complete
 PCCMin algorithm, or polynomial runtime.
+
+M192 adds `PNP.PCCMinCheckedPacketRankedSelector`. Its all-claim checker
+validates data-only gain or typed-blocker claims at every canonical handle in
+one supplied Packet family, and its exact-rank row constructor filters that
+complete handle list by the table-owned rank. The resulting adapter supplies
+M191 with checked outcomes rather than arbitrary caller rows and a
+proof-bearing realizer. The fifteen focused declarations contain no
+project-specific axiom or `Classical.choice`; only permitted Lean-standard
+`propext` and `Quot.sound` occur where required. The family, ranks, claims,
+resolver algorithms, blocker semantics, and ZeroSlack closure remain explicit
+supplied boundaries, so this does not derive terminal data, establish
+unconditional ZeroSlack, construct complete PCCMin, or prove polynomial
+runtime.
 
 ## Reviewed intermediate milestone bindings
 

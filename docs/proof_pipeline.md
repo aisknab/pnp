@@ -226,7 +226,12 @@ BudgetResolve outcomes followed by arbitrary finite selector rows scanned in
 canonical rank order. ZeroSlack is reachable only after the scan retains one
 typed blocker equation for every selector in every rank row. The resolver
 algorithms, selector rows, realizer, blocker semantics, and final ZeroSlack
-closure remain supplied rather than constructed. A deterministic target decider, the
+closure remain supplied rather than constructed. M192 removes the arbitrary
+row and proof-bearing realizer inputs at the selector stage: it checks
+data-only gain/HN/budget/lower-seed claims at every canonical Packet handle and
+derives exact rows from the complete handle list and supplied rank map. The
+family, ranks, claims, resolver algorithms, blocker semantics, and ZeroSlack
+closure are still supplied. A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See
 [`lean_concrete_legacy_locked_nand_compatibility.md`](lean_concrete_legacy_locked_nand_compatibility.md).
@@ -240,6 +245,8 @@ See also
 [`lean_pccmin_normalize_oracle_composition.md`](lean_pccmin_normalize_oracle_composition.md).
 See also
 [`lean_pccmin_rank_ordered_oracle.md`](lean_pccmin_rank_ordered_oracle.md).
+See also
+[`lean_pccmin_checked_packet_ranked_selector.md`](lean_pccmin_checked_packet_ranked_selector.md).
 
 The reconstruction now also verifies the iteration-count subclaim used by
 `PCCMin`: for any finite supplied chain whose every adjacent replacement is a

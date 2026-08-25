@@ -1752,6 +1752,19 @@ construct PCCMin, prove unconditional ZeroSlack, or establish polynomial
 runtime. See
 [`lean_pccmin_rank_ordered_oracle.md`](./lean_pccmin_rank_ordered_oracle.md).
 
+M192 narrows the M191 selector boundary to complete checked Packet data.
+`TerminalPacketTypedRealizerTable.checkEveryClaim` validates a data-only claim
+at every canonical handle. `selectorsAtRank` then derives each row from the
+complete handle list and the table-owned finite rank rather than accepting a
+caller-supplied row. An accepted gain blueprint reconstructs the existing
+strict equivalent-gain theorem; accepted HN, budget, and lower-seed claims
+become typed blockers. `PCCMinCheckedPacketRankOrderedOracleBuilder` converts
+that checked interface to M191 and reuses the M190/M189 loop. The grouped
+family, table, rank map, resolver algorithms, blocker meanings, and ZeroSlack
+silence closure remain supplied, so this does not construct PCCMin, prove
+unconditional ZeroSlack, or establish polynomial runtime. See
+[`lean_pccmin_checked_packet_ranked_selector.md`](./lean_pccmin_checked_packet_ranked_selector.md).
+
 ## Discharged by Lean so far
 
 ```text

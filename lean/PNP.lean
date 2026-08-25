@@ -202,6 +202,7 @@ import PNP.PCCMin
 import PNP.PCCMinTotalOracleLoop
 import PNP.PCCMinNormalizeOracleComposition
 import PNP.PCCMinRankOrderedOracle
+import PNP.PCCMinCheckedPacketRankedSelector
 import PNP.Bridge
 import PNP.ConcreteLegacyLockedNANDCompatibility
 import PNP.ConcreteResidualBandCompatibility

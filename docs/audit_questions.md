@@ -2170,6 +2170,52 @@ blocker equation for every selector in every rank row.
 
 ---
 
+## AQ-34 — Checked Packet-backed rank-selector construction
+
+**Claim**
+
+For every supplied finite grouped Packet family and typed-realizer table, the
+selector-stage adapter validates a data-only claim at every canonical handle,
+derives every exact-rank row from the complete handle list and the table-owned
+rank map, and exposes only a checked strict gain or typed HN, budget, or
+lower-seed blocker to the M191 rank-ordered oracle.
+
+**Where it appears**
+
+- `lean/PNP/PCCMinCheckedPacketRankedSelector.lean`.
+- `lean-audit/PNPPCCMinCheckedPacketRankedSelectorAxiomAudit.lean`.
+- `lean-regression/PNPPCCMinCheckedPacketRankedSelector.lean`.
+- `audits/lean-pccmin-checked-packet-ranked-selector0.test.mjs`.
+- `status/PROOF_PROGRESS.json`.
+
+**How to test or inspect it**
+
+1. Build the explicit `PNP` root.
+2. Compile the M192 axiom audit and executable regression.
+3. Confirm `checkEveryClaim` uses `all` over
+   `family.packetSelectorHandles`, without a faithfulness skip.
+4. Confirm `selectorsAtRank` filters that exact list by equality with
+   `environment.rankOf`, and every handle is covered at its assigned rank.
+5. Confirm accepted gain, HN, budget, and lower-seed claims execute, while a
+   malformed gain is rejected before a plan can be built.
+6. Confirm later-rank gain and complete-silence ZeroSlack branches compose with
+   M191 and the recursive loop.
+7. Mutate the complete checker, rank filter, acceptance proof, or adapter;
+   require the hostile contract to reject the mutation.
+
+**What would count as a refutation or material defect**
+
+- A canonical handle may be omitted from checking or its assigned rank row.
+- A gain is accepted without the checked unit-charge blueprint theorem.
+- A blocker is accepted without its exact HN, budget, or lower-seed validity
+  condition.
+- Arbitrary caller-supplied selector rows or a proof-bearing realizer re-enter
+  the M192 data boundary.
+- The supplied family, ranks, claims, resolver algorithms, blocker semantics,
+  or ZeroSlack closure are described as derived, unconditional, or polynomial.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:
