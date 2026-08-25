@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-191`, 167 of 169
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-192`, 168 of 170
 current scoped rows are earned, or 98.8 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M191 |
+| Track | Available | Earned at M192 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M191 risk-weighted proof completion estimate is therefore 35 percent, with
+The M192 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -91,8 +91,14 @@ rank, and ZeroSlack is reachable only through a complete typed-blocker ledger.
 Because the component algorithms, selector data, blocker semantics, and final
 ZeroSlack closure remain explicit supplied boundaries, no fixed checkpoint
 closes. Coverage becomes 167 of 169 while the score remains 35 percent, the
-uncertainty range remains 20 to 40 percent, and all five gates remain open. No
-retrospective score was invented.
+uncertainty range remains 20 to 40 percent, and all five gates remain open.
+M192 then replaces the arbitrary selector-row and proof-bearing realizer inputs
+with a complete checked data-only Packet table and derives exact rows from the
+canonical handle list plus supplied rank map. Because the family, rank map,
+claim data, resolvers, blocker semantics, and ZeroSlack closure remain supplied,
+no fixed checkpoint closes. Coverage becomes 168 of 170 while the score remains
+35 percent, the uncertainty range remains 20 to 40 percent, and all five gates
+remain open. No retrospective score was invented.
 
 ## Changing the score
 

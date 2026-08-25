@@ -1,0 +1,17 @@
+import PNP.PCCMinCheckedPacketRankedSelector
+
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerTable.checkEveryClaim
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerTable.checkEveryClaim_eq_true_iff
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerTable.checkedOutcome
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerTable.selectorsAtRank
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerTable.mem_selectorsAtRank_iff
+#print axioms PNP.DirectWire.TerminalPacketTypedRealizerTable.mem_assignedSelectorRank
+#print axioms PNP.DirectWire.PCCMinCheckedPacketSelectorData
+#print axioms PNP.DirectWire.PCCMinCheckedPacketSelectorData.toRankedSelectorPlan
+#print axioms PNP.DirectWire.PCCMinCheckedPacketSelectorData.canonical_handle_covered
+#print axioms PNP.DirectWire.PCCMinCheckedPacketRankOrderedOraclePlan
+#print axioms PNP.DirectWire.PCCMinCheckedPacketRankOrderedOraclePlan.toRankOrderedOraclePlan
+#print axioms PNP.DirectWire.PCCMinCheckedPacketRankOrderedOracleBuilder
+#print axioms PNP.DirectWire.PCCMinCheckedPacketRankOrderedOracleBuilder.toRankOrderedOracleBuilder
+#print axioms PNP.DirectWire.runPCCMinNormalizeCheckedPacketRankOrderedOracleLoop
+#print axioms PNP.DirectWire.pccmin_normalize_checked_packet_rank_ordered_oracle_loop_checked_complete

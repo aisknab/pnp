@@ -159,6 +159,20 @@ normalizer, resolvers, selector rows, realizer, blocker semantics, or ZeroSlack
 closure and proves no encoded-size polynomial construction or runtime. See
 [`lean_pccmin_rank_ordered_oracle.md`](./lean_pccmin_rank_ordered_oracle.md).
 
+M192 is the checked Packet rank-selector construction boundary. Instead of
+accepting arbitrary M191 selector rows and a proof-bearing realizer,
+`PCCMinCheckedPacketSelectorData` requires a complete accepted data-only table
+over the supplied family's canonical Packet handles. `selectorsAtRank` derives
+each exact row by filtering that exhaustive handle list with the table-owned
+rank map. Checked blueprints reconstruct strict gains; HN, budget, and
+lower-seed claims retain their typed blockers. The resulting builder composes
+with M191 and the checked loop. All fifteen focused declarations avoid project
+axioms and `Classical.choice`. The family, ranks, claims, resolver algorithms,
+blocker semantics, and complete-silence-to-ZeroSlack implication remain
+supplied, so M192 does not derive terminal objects, prove unconditional
+ZeroSlack, or establish encoded-size polynomial construction or runtime. See
+[`lean_pccmin_checked_packet_ranked_selector.md`](./lean_pccmin_checked_packet_ranked_selector.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

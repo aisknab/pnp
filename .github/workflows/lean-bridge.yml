@@ -168,6 +168,8 @@ on:
       - 'docs/lean_pccmin_normalize_oracle_composition.md'
       - 'audits/lean-pccmin-rank-ordered-oracle0.test.mjs'
       - 'docs/lean_pccmin_rank_ordered_oracle.md'
+      - 'audits/lean-pccmin-checked-packet-ranked-selector0.test.mjs'
+      - 'docs/lean_pccmin_checked_packet_ranked_selector.md'
       - 'audits/lean-residual-terminal-rank-wf0.test.mjs'
       - 'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs'
       - 'audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs'
@@ -576,6 +578,8 @@ on:
       - 'docs/lean_pccmin_normalize_oracle_composition.md'
       - 'audits/lean-pccmin-rank-ordered-oracle0.test.mjs'
       - 'docs/lean_pccmin_rank_ordered_oracle.md'
+      - 'audits/lean-pccmin-checked-packet-ranked-selector0.test.mjs'
+      - 'docs/lean_pccmin_checked_packet_ranked_selector.md'
       - 'audits/lean-residual-terminal-rank-wf0.test.mjs'
       - 'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs'
       - 'audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs'
@@ -5033,3 +5037,28 @@ jobs:
 
       - name: Run rank-ordered PCCOracle hostile audit
         run: node --test audits/lean-pccmin-rank-ordered-oracle0.test.mjs
+
+      - name: Print checked Packet ranked-selector axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketRankedSelectorAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPPCCMinCheckedPacketRankedSelectorAxiomAudit.lean)"
+          test "$expected_count" -eq 15
+          test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected checked Packet ranked-selector axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Checked Packet ranked-selector reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+
+      - name: Run checked Packet ranked-selector regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketRankedSelector.lean
+
+      - name: Run checked Packet ranked-selector hostile audit
+        run: node --test audits/lean-pccmin-checked-packet-ranked-selector0.test.mjs

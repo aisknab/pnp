@@ -224,7 +224,7 @@ test('compiled inventory records the M191 boundary without project axioms', asyn
   assert.deepEqual(inventory.projectAxioms, []);
 });
 
-test('status, publication, progress, workflow, and current docs publish only M191', async () => {
+test('status, publication, progress, workflow, and current docs retain M191', async () => {
   const [status, publication, progress, workflow, pkg, verifier, readme,
     formalDoc, bridgeDoc, focusedDoc] = await Promise.all([
     text0('status/FORMAL_RECONSTRUCTION_STATUS.json').then(JSON.parse),
@@ -238,8 +238,8 @@ test('status, publication, progress, workflow, and current docs publish only M19
     text0('docs/lean_bridge.md'),
     text0('docs/lean_pccmin_rank_ordered_oracle.md'),
   ]);
-  assert.equal(status.coordinate,
-    'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-191');
+  assert.match(status.coordinate,
+    /^PNP-FORMAL-RECONSTRUCTION-STATUS-/u);
   assert.equal(status.leanPCCMinRankOrderedOracleFormalized, true);
   assert.equal(status.leanPCCMinRankOrderedOracleAxiomAuditPassed, true);
   assert.equal(status.leanPCCMinRankOrderedOracleAuditedDeclarationCount,
@@ -255,10 +255,12 @@ test('status, publication, progress, workflow, and current docs publish only M19
   assert.deepEqual(row?.requiredTheorems,
     ['PNP.DirectWire.pccmin_normalize_rank_ordered_oracle_loop_checked_complete']);
   assert.equal(progress.asOfCoordinate, status.coordinate);
-  assert.equal(progress.formalArtefactCoverage.earnedRows, 167);
-  assert.equal(progress.formalArtefactCoverage.totalRows, 169);
+  const m191 = progress.history.find(({ asOfCoordinate }) =>
+    asOfCoordinate === 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-191');
+  assert.deepEqual(m191?.formalArtefactCoverage,
+    { earnedRows: 167, totalRows: 169 });
   assert.equal(progress.proofCompletion.percent, 35);
-  assert.equal(progress.history.at(-1).scoreChanged, false);
+  assert.equal(m191?.scoreChanged, false);
   for (const token of [
     'lean-audit/PNPPCCMinRankOrderedOracleAxiomAudit.lean',
     'lean-regression/PNPPCCMinRankOrderedOracle.lean',

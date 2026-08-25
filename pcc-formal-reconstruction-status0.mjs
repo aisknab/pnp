@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-191';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-192';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -548,6 +548,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPPCCMinRankOrderedOracleAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPPCCMinRankOrderedOracle.lean',
   'node --test audits/lean-pccmin-rank-ordered-oracle0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketRankedSelectorAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketRankedSelector.lean',
+  'node --test audits/lean-pccmin-checked-packet-ranked-selector0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -744,6 +747,7 @@ const NON_CLAIMS = Object.freeze([
   'The M189 proof-bearing PCCMin total-oracle loop formalizes general recursive control flow for every finite direct-wire implementation. Every gain response carries strict semantic equivalence and checked residual-slack descent; every terminal response carries exact minimum or ZeroSlack evidence; the transparent recursion returns an equivalent global minimum with zero slack and bounds gain iterations by the starting slack. The total oracle remains an explicit argument and the regression fixture uses exhaustive reference minimization: this does not construct an executable PCCMin oracle, derive terminal data or unconditional ZeroSlack, prove encoded-size polynomial runtime or certificate bounds, close a global gate, put SAT in P, create the eligible root theorem, or prove P = NP.',
   'The M190 proof-bearing PCCMin normalization/oracle composition formalizes the manuscript\'s two-stage iteration for every finite direct-wire implementation. A normalizer may return a strict equivalent gain or a semantically equivalent non-increasing normal form; gains, exact minima, and ZeroSlack endpoints returned by the following total oracle transport back to the pre-normalized implementation, and the composed route reuses the checked well-founded exact loop. The total normalizer and total oracle remain explicit arguments and the regression fixtures use exhaustive reference minimization: this does not construct either executable stage, derive terminal data or unconditional ZeroSlack, prove encoded-size polynomial runtime or certificate bounds, close a global gate, put SAT in P, create the eligible root theorem, or prove P = NP.',
   'The M191 rank-ordered PCCOracle boundary reconstructs the manuscript\'s HResolve-then-BudgetResolve-then-selector control flow for arbitrary finite rank rows. Resolver gains and exact minima are proof-bearing, every selector realizer returns a strict gain or typed blocker, and ZeroSlack is reachable only through a complete all-rank blocker ledger. The normalizer, resolver algorithms, rank rows, selector realizers, blocker semantics, and final ZeroSlack closure remain explicit supplied boundaries: this does not construct executable PCCMin, derive terminal data, establish unconditional ZeroSlack, prove encoded-size polynomial runtime or certificate bounds, close a global gate, put SAT in P, create the eligible root theorem, or prove P = NP.',
+  'The M192 checked Packet ranked-selector boundary replaces M191\'s arbitrary selector rows and proof-bearing realizer at the selector stage with a complete executable check of data-only claims over every canonical handle in one supplied grouped family. Exact rows are derived by filtering that exhaustive handle list with the table-owned rank map; an accepted blueprint reconstructs a strict equivalent gain, while accepted HN, budget, and lower-seed claims retain typed blockers. The normalizer, HResolve and BudgetResolve algorithms, family, ranks, claims, blocker semantics, and final ZeroSlack closure remain supplied: this does not derive terminal data, construct executable PCCMin, establish unconditional ZeroSlack, prove encoded-size polynomial runtime or certificate bounds, close a global gate, put SAT in P, create the eligible root theorem, or prove P = NP.',
   'Residual RankWF is now formalized for the manuscript\'s fixed ten-coordinate natural lexicographic rank, with an executable comparison, exact Boolean equivalence, coordinate-priority witnesses, accessibility, induction, and kernel-checked well-foundedness. This does not map current finite routes into the complete global outcome system, prove that any route decreases the rank, establish route completeness or Package E, remove the explicit positive premise, establish full SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
@@ -1557,6 +1561,18 @@ const EXACT_FIELDS = Object.freeze({
   leanPCCMinRankOrderedOraclePolynomialRuntimeProved: false,
   leanPCCMinRankOrderedOracleScope:
     'all-finite-direct-wire-implementations-under-explicit-proof-bearing-normalizer-hresolve-budgetresolve-arbitrary-finite-rank-selector-rows-typed-blocker-silence-and-zeroslack-closure-with-canonical-all-rank-scanning-and-the-checked-well-founded-loop',
+  leanPCCMinCheckedPacketRankedSelectorFormalized: true,
+  leanPCCMinCheckedPacketRankedSelectorAxiomAuditPassed: true,
+  leanPCCMinCheckedPacketRankedSelectorAuditedDeclarationCount: 15,
+  leanPCCMinCheckedPacketRankedSelectorEndpointProjectAssumptionFree: true,
+  leanPCCMinCheckedPacketRankedSelectorChecksEveryCanonicalHandle: true,
+  leanPCCMinCheckedPacketRankedSelectorDerivesExactRankRows: true,
+  leanPCCMinCheckedPacketRankedSelectorConstructsTerminalFamily: false,
+  leanPCCMinCheckedPacketRankedSelectorConstructsResolvers: false,
+  leanPCCMinCheckedPacketRankedSelectorProvesZeroSlackClosure: false,
+  leanPCCMinCheckedPacketRankedSelectorPolynomialRuntimeProved: false,
+  leanPCCMinCheckedPacketRankedSelectorScope:
+    'all-finite-direct-wire-implementations-under-explicit-normalizer-hresolve-budgetresolve-supplied-grouped-packet-family-rank-map-data-only-claim-table-complete-checker-acceptance-and-zeroslack-silence-closure-with-canonical-exact-rank-row-derivation-and-the-checked-well-founded-loop',
   leanLockedNANDPolynomialBuilderFormalized: true,
   leanCompatibleReplacementFormalized: false,
   leanGlobalSlackLawFormalized: false,
@@ -2856,6 +2872,18 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanPCCMinRankOrderedOraclePolynomialRuntimeProved: false,
       leanPCCMinRankOrderedOracleScope:
         'all-finite-direct-wire-implementations-under-explicit-proof-bearing-normalizer-hresolve-budgetresolve-arbitrary-finite-rank-selector-rows-typed-blocker-silence-and-zeroslack-closure-with-canonical-all-rank-scanning-and-the-checked-well-founded-loop',
+      leanPCCMinCheckedPacketRankedSelectorFormalized: true,
+      leanPCCMinCheckedPacketRankedSelectorAxiomAuditPassed: true,
+      leanPCCMinCheckedPacketRankedSelectorAuditedDeclarationCount: 15,
+      leanPCCMinCheckedPacketRankedSelectorEndpointProjectAssumptionFree: true,
+      leanPCCMinCheckedPacketRankedSelectorChecksEveryCanonicalHandle: true,
+      leanPCCMinCheckedPacketRankedSelectorDerivesExactRankRows: true,
+      leanPCCMinCheckedPacketRankedSelectorConstructsTerminalFamily: false,
+      leanPCCMinCheckedPacketRankedSelectorConstructsResolvers: false,
+      leanPCCMinCheckedPacketRankedSelectorProvesZeroSlackClosure: false,
+      leanPCCMinCheckedPacketRankedSelectorPolynomialRuntimeProved: false,
+      leanPCCMinCheckedPacketRankedSelectorScope:
+        'all-finite-direct-wire-implementations-under-explicit-normalizer-hresolve-budgetresolve-supplied-grouped-packet-family-rank-map-data-only-claim-table-complete-checker-acceptance-and-zeroslack-silence-closure-with-canonical-exact-rank-row-derivation-and-the-checked-well-founded-loop',
       leanLockedNANDPolynomialBuilderFormalized: true,
       leanCompatibleReplacementFormalized: false,
       leanGlobalSlackLawFormalized: false,
@@ -3413,7 +3441,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-25-191',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-25-192',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,
