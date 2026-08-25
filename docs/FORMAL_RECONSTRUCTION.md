@@ -186,6 +186,21 @@ ZeroSlack or polynomial PCCMin. The score remains 35 percent and zero of five
 global gates are closed. See
 [`lean_pccmin_checked_packet_hb_zeroslack_bridge.md`](./lean_pccmin_checked_packet_hb_zeroslack_bridge.md).
 
+M194 moves M193's final positive-slack premise earlier in the manuscript
+dependency graph. `PCCMinCheckedPacketBN6HBZeroSlackData` accepts positive
+slack only through a supplied constant-activation proof for an arbitrary finite
+grouped family. The general BN6 theorem then constructs a Packet, and the
+route-clear payload checker constructs a faithful selector in the
+canonicalized table without an independent binding premise. M193's checked HB
+contradiction yields conditional ZeroSlack and the same total loop endpoint.
+All twelve focused declarations avoid project axioms and
+`Classical.choice`. Constant activation, terminal-family and payload
+construction, route-clear evidence, resolvers, normalizer, and encoded-size
+polynomial bounds remain supplied or open, so this is not manuscript-wide
+SaturatePositive or BCELReady, unconditional ZeroSlack, or polynomial PCCMin.
+The score remains 35 percent and zero of five global gates are closed. See
+[`lean_pccmin_checked_packet_bn6_hb_zeroslack_bridge.md`](./lean_pccmin_checked_packet_bn6_hb_zeroslack_bridge.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

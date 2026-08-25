@@ -303,12 +303,16 @@ test('status, publication, progress, workflow, and docs retain exact conservativ
     'audits/lean-pccmin-checked-packet-hb-zeroslack-bridge0.test.mjs'), true);
   assert.equal(verifier.includes(
     "'audits/lean-pccmin-checked-packet-hb-zeroslack-bridge0.test.mjs'"), true);
-  for (const document of [readme, formalDoc, bridgeDoc, focusedDoc]) {
-    assert.match(document, /checked[\s-]+Packet[\s/]+HB/iu);
+  for (const document of [readme, formalDoc, bridgeDoc]) {
+    assert.match(document, /M193/u);
     assert.match(document,
       /positive[\s-]+slack[\s\S]{0,300}(?:remain|supplied|open)/iu);
     assert.match(document, /35(?:%| percent)/u);
   }
+  assert.match(focusedDoc, /checked[\s-]+Packet[\s/]+HB/iu);
+  assert.match(focusedDoc,
+    /positive[\s-]+slack[\s\S]{0,300}(?:remain|supplied|open)/iu);
+  assert.match(focusedDoc, /35(?:%| percent)/u);
 });
 
 test('hostile regressions reject opaque closure, missing checks, and inflated claims', async () => {

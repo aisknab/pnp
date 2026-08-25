@@ -2265,6 +2265,59 @@ premise yields conditional ZeroSlack and feeds the existing exact PCCMin loop.
 
 ---
 
+## AQ-36 — BN6 computed-faithfulness checked Packet/HB bridge
+
+**Claim**
+
+For every finite direct-wire implementation and supplied accepted
+Packet/BN6/HB table, positive residual slack plus the explicit constant-
+activation premise yields a general BN6 Packet. The route-clear payload check
+then constructs a faithful selector in the canonicalized table, so M193's
+checked HB contradiction yields conditional ZeroSlack and feeds the existing
+exact PCCMin loop.
+
+**Where it appears**
+
+- `lean/PNP/PCCMinCheckedPacketBN6HBZeroSlackBridge.lean`.
+- `lean-audit/PNPPCCMinCheckedPacketBN6HBZeroSlackBridgeAxiomAudit.lean`.
+- `lean-regression/PNPPCCMinCheckedPacketBN6HBZeroSlackBridge.lean`.
+- `audits/lean-pccmin-checked-packet-bn6-hb-zeroslack-bridge0.test.mjs`.
+- `status/PROOF_PROGRESS.json`.
+
+**How to test or inspect it**
+
+1. Build the explicit `PNP` root.
+2. Compile the M194 axiom audit and executable regression.
+3. Confirm positive slack reaches `terminalBN6_hypergraph_packet` through only
+   `constantActivationOfPositiveSlack` and the arbitrary-family carrier bound.
+4. Confirm `existsFaithfulHandle_of_computedTable` consumes the executable
+   route-clear equation and the raw table, then returns faithfulness in the
+   canonicalized table.
+5. Confirm the M193 adapter installs
+   `withComputedPacketSelectorFaithfulness`, not the raw faithfulness function
+   or a caller-supplied binding proof.
+6. Confirm complete checked rank-row silence and checked HB closure remain the
+   exact route to conditional ZeroSlack and the total loop endpoint.
+7. Mutate constant activation, BN6 construction, route clearance, computed
+   faithfulness, or the adapter; require the hostile contract to reject the
+   mutation.
+
+**What would count as a refutation or material defect**
+
+- A faithful selector is supplied directly rather than constructed from BN6
+  and executable route-clear payload checks.
+- The table uses an independent faithfulness function or accepts a separate
+  caller-supplied binding premise.
+- The result holds only for a fixed carrier, Packet, rank, or table rather than
+  every finite supplied family.
+- Constant activation, terminal-family construction, route-clear evidence,
+  resolvers, normalizer, or runtime is described as derived, unconditional, or
+  polynomial.
+- Conditional ZeroSlack is described as manuscript-wide SaturatePositive,
+  BCELReady, unconditional ZeroSlack, or a closed global gate.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

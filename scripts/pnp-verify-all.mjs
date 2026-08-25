@@ -141,6 +141,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-pccmin-rank-ordered-oracle0.test.mjs',
   'audits/lean-pccmin-checked-packet-ranked-selector0.test.mjs',
   'audits/lean-pccmin-checked-packet-hb-zeroslack-bridge0.test.mjs',
+  'audits/lean-pccmin-checked-packet-bn6-hb-zeroslack-bridge0.test.mjs',
   'audits/lean-residual-terminal-rank-wf0.test.mjs',
   'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs',
   'audits/bn3-joint-realizability-gap0.test.mjs',
