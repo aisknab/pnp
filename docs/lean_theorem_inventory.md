@@ -148,6 +148,18 @@ supplied boundaries, so this does not derive terminal data, establish
 unconditional ZeroSlack, construct complete PCCMin, or prove polynomial
 runtime.
 
+M193 adds `PNP.PCCMinCheckedPacketHBZeroSlackBridge`. It reflects complete
+checked rank-row silence into the executable selector-silence checker and
+combines that result with checked HB no-outcome closure to prove every
+canonical handle nonfaithful. One explicit positive-slack-to-faithful-selector
+premise then yields conditional ZeroSlack and constructs M192's former closure
+field. The fifteen focused declarations contain no project-specific axiom or
+`Classical.choice`; only permitted Lean-standard `propext` and `Quot.sound`
+occur where required. The positive-slack bridge, terminal data, resolver
+algorithms, normalizer, and encoded-size polynomial construction remain
+supplied or open, so unconditional ZeroSlack and complete polynomial PCCMin are
+not established.
+
 ## Reviewed intermediate milestone bindings
 
 Intermediate milestone credit has a separate evidence boundary from theorem publication. Every

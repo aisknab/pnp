@@ -239,7 +239,7 @@ test('compiled inventory records the M192 boundary without project axioms', asyn
   assert.deepEqual(inventory.projectAxioms, []);
 });
 
-test('status, publication, progress, workflow, and docs publish only M192 credit', async () => {
+test('status, publication, progress, workflow, and docs retain the exact M192 credit', async () => {
   const [status, publication, progress, workflow, pkg, verifier, readme,
     formalDoc, bridgeDoc, focusedDoc] = await Promise.all([
     text0('status/FORMAL_RECONSTRUCTION_STATUS.json').then(JSON.parse),
@@ -253,8 +253,6 @@ test('status, publication, progress, workflow, and docs publish only M192 credit
     text0('docs/lean_bridge.md'),
     text0('docs/lean_pccmin_checked_packet_ranked_selector.md'),
   ]);
-  assert.equal(status.coordinate,
-    'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-192');
   assert.equal(status.leanPCCMinCheckedPacketRankedSelectorFormalized, true);
   assert.equal(status.leanPCCMinCheckedPacketRankedSelectorAxiomAuditPassed, true);
   assert.equal(status.leanPCCMinCheckedPacketRankedSelectorAuditedDeclarationCount,
@@ -279,11 +277,16 @@ test('status, publication, progress, workflow, and docs publish only M192 credit
     'PNP.DirectWire.pccmin_normalize_checked_packet_rank_ordered_oracle_loop_checked_complete',
   ]);
   assert.equal(progress.asOfCoordinate, status.coordinate);
-  assert.equal(progress.formalArtefactCoverage.earnedRows, 168);
-  assert.equal(progress.formalArtefactCoverage.totalRows, 170);
-  assert.equal(progress.proofCompletion.percent, 35);
-  assert.equal(progress.history.at(-1).scoreChanged, false);
-  assert.deepEqual(progress.history.at(-1).changedCheckpointIds, []);
+  const m192History = progress.history.find(({ asOfCoordinate }) =>
+    asOfCoordinate === 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-192');
+  assert.notEqual(m192History, undefined);
+  assert.deepEqual(m192History.formalArtefactCoverage, {
+    earnedRows: 168,
+    totalRows: 170,
+  });
+  assert.equal(m192History.riskWeightedProofCompletionPercent, 35);
+  assert.equal(m192History.scoreChanged, false);
+  assert.deepEqual(m192History.changedCheckpointIds, []);
   for (const token of [
     'lean-audit/PNPPCCMinCheckedPacketRankedSelectorAxiomAudit.lean',
     'lean-regression/PNPPCCMinCheckedPacketRankedSelector.lean',

@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-192`, 168 of 170
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-193`, 169 of 171
 current scoped rows are earned, or 98.8 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M192 |
+| Track | Available | Earned at M193 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M192 risk-weighted proof completion estimate is therefore 35 percent, with
+The M193 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -98,6 +98,14 @@ canonical handle list plus supplied rank map. Because the family, rank map,
 claim data, resolvers, blocker semantics, and ZeroSlack closure remain supplied,
 no fixed checkpoint closes. Coverage becomes 168 of 170 while the score remains
 35 percent, the uncertainty range remains 20 to 40 percent, and all five gates
+remain open. M193 then removes the opaque complete-silence-to-ZeroSlack callback:
+accepted rank-row silence is reflected into the executable selector-silence
+checker, checked HB closure eliminates every faithful canonical handle, and an
+explicit positive-slack-to-faithful-selector premise supplies the final
+contradiction. Because that positive-slack bridge, terminal data, resolvers,
+normalizer, and polynomial construction remain supplied or open, no fixed
+checkpoint closes. Coverage becomes 169 of 171 while the score remains 35
+percent, the uncertainty range remains 20 to 40 percent, and all five gates
 remain open. No retrospective score was invented.
 
 ## Changing the score
