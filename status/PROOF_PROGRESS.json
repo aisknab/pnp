@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-192",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-193",
   "lastReviewedDate": "2026-08-25",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 168,
-    "totalRows": 170,
+    "earnedRows": 169,
+    "totalRows": 171,
     "percentRoundedOneDecimal": 98.8,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -855,6 +855,20 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M192 replaces M191's arbitrary selector rows and proof-bearing selector realizer with a complete executable check of data-only Packet claims at every canonical handle, then derives each exact-rank row by filtering that exhaustive handle list with the supplied table-owned rank map. The grouped family, rank assignment, claim data, HResolve and BudgetResolve algorithms, blocker semantics, normalizer, and final ZeroSlack closure remain supplied, so no fixed checkpoint or global gate closes. Formal artefact coverage becomes 168 of 170, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-193",
+      "formalArtefactCoverage": { "earnedRows": 169, "totalRows": 171 },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M193 replaces M192's opaque complete-silence-to-ZeroSlack callback with a kernel-checked derivation: complete claim acceptance and exact-rank silence feed the executable selector-silence induction, checked HB no-outcome closure eliminates every canonical faithful handle, and one explicit positive-residual-slack-to-faithful-selector premise supplies the final contradiction. That positive-slack bridge, terminal data, resolvers, normalizer, and polynomial construction remain supplied, so unconditional ZeroSlack, complete executable PCCMin, every global gate, and all fixed checkpoints remain open. Formal artefact coverage becomes 169 of 171, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [

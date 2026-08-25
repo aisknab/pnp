@@ -3196,7 +3196,8 @@ private def reviewedMilestoneTheoremNames : Array Name := #[
   `PNP.DirectWire.pccmin_total_oracle_loop_checked_complete,
   `PNP.DirectWire.pccmin_normalize_oracle_loop_checked_complete,
   `PNP.DirectWire.pccmin_normalize_rank_ordered_oracle_loop_checked_complete,
-  `PNP.DirectWire.pccmin_normalize_checked_packet_rank_ordered_oracle_loop_checked_complete
+  `PNP.DirectWire.pccmin_normalize_checked_packet_rank_ordered_oracle_loop_checked_complete,
+  `PNP.DirectWire.pccmin_normalize_checked_packet_hb_zeroslack_loop_checked_complete
 ]
 
 private def inventory : CommandElabM Json := do
@@ -3255,7 +3256,7 @@ private def inventory : CommandElabM Json := do
   return Json.mkObj [
     ("kind", toJson "PNPLeanTheoremInventory0"),
     ("version", toJson 0),
-    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-08-25-192"),
+    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-08-25-193"),
     ("leanToolchain", toJson "leanprover/lean4:v4.31.0"),
     ("rootModule", toJson "PNP"),
     ("environmentProbeComplete", toJson true),

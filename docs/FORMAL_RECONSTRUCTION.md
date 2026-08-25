@@ -173,6 +173,19 @@ supplied, so M192 does not derive terminal objects, prove unconditional
 ZeroSlack, or establish encoded-size polynomial construction or runtime. See
 [`lean_pccmin_checked_packet_ranked_selector.md`](./lean_pccmin_checked_packet_ranked_selector.md).
 
+M193 is the checked Packet/HB conditional ZeroSlack bridge. Complete accepted
+claims and silence across every derived exact-rank row are reflected into the
+executable selector-silence checker. The checked HB no-outcome closure then
+proves every canonical handle nonfaithful. One explicit premise that positive
+residual slack constructs a faithful canonical handle supplies the remaining
+contradiction and yields conditional ZeroSlack. All fifteen focused
+declarations avoid project axioms and `Classical.choice`. The positive-slack
+bridge, terminal family and tables, resolvers, normalizer, and encoded-size
+polynomial construction remain supplied or open, so this is not unconditional
+ZeroSlack or polynomial PCCMin. The score remains 35 percent and zero of five
+global gates are closed. See
+[`lean_pccmin_checked_packet_hb_zeroslack_bridge.md`](./lean_pccmin_checked_packet_hb_zeroslack_bridge.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

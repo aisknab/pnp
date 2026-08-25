@@ -1765,6 +1765,22 @@ silence closure remain supplied, so this does not construct PCCMin, prove
 unconditional ZeroSlack, or establish polynomial runtime. See
 [`lean_pccmin_checked_packet_ranked_selector.md`](./lean_pccmin_checked_packet_ranked_selector.md).
 
+The M193 checked Packet/HB bridge removes the remaining opaque
+silence-to-ZeroSlack callback at this boundary. Complete checked claims and
+all-rank blocked outcomes are reflected
+into the executable selector-silence Boolean. Together with checked HB
+no-outcome closure, the existing well-founded induction proves every canonical
+handle nonfaithful. `PCCMinCheckedPacketHBZeroSlackData` retains one exact
+load-bearing premise: positive residual slack supplies a faithful canonical
+handle. Its contradiction yields conditional ZeroSlack and constructs the
+M192 adapter before reusing the same rank scan and recursive loop. The fifteen
+focused declarations use no project-specific axiom or `Classical.choice`.
+Because the positive-slack bridge, terminal data, resolvers, normalizer, and
+polynomial bounds remain supplied or open, this is not unconditional
+ZeroSlack or polynomial PCCMin. The risk-weighted proof-completion estimate
+therefore remains 35 percent and zero of five global gates are closed. See
+[`lean_pccmin_checked_packet_hb_zeroslack_bridge.md`](./lean_pccmin_checked_packet_hb_zeroslack_bridge.md).
+
 ## Discharged by Lean so far
 
 ```text

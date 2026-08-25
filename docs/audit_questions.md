@@ -2216,6 +2216,55 @@ lower-seed blocker to the M191 rank-ordered oracle.
 
 ---
 
+## AQ-35 — Checked Packet/HB conditional ZeroSlack bridge
+
+**Claim**
+
+For every finite direct-wire implementation and supplied accepted Packet/HB
+table, complete blocked outcomes over all derived rank rows imply executable
+selector silence. Checked HB no-outcome closure then makes every canonical
+handle nonfaithful, so an explicit positive-residual-slack-to-faithful-selector
+premise yields conditional ZeroSlack and feeds the existing exact PCCMin loop.
+
+**Where it appears**
+
+- `lean/PNP/PCCMinCheckedPacketHBZeroSlackBridge.lean`.
+- `lean-audit/PNPPCCMinCheckedPacketHBZeroSlackBridgeAxiomAudit.lean`.
+- `lean-regression/PNPPCCMinCheckedPacketHBZeroSlackBridge.lean`.
+- `audits/lean-pccmin-checked-packet-hb-zeroslack-bridge0.test.mjs`.
+- `status/PROOF_PROGRESS.json`.
+
+**How to test or inspect it**
+
+1. Build the explicit `PNP` root.
+2. Compile the M193 axiom audit and executable regression.
+3. Confirm complete `checkEveryClaim` acceptance implies the faithful-only
+   checker, without replacing either check by a proof flag.
+4. Confirm every blocked outcome in every exact-rank row is reflected to the
+   stored bottom claim and makes `checkSelectorSilent` true.
+5. Confirm the existing checked HB no-outcome theorem consumes the exact
+   dependency table and closure acceptance to make every handle nonfaithful.
+6. Confirm the final contradiction consumes the explicit
+   `faithfulOfPositiveSlack` premise and does not accept a
+   `zeroSlackOfSilence` callback.
+7. Mutate the checker acceptance, rank coverage, HB closure, positive-slack
+   premise, or adapter; require the hostile contract to reject the mutation.
+
+**What would count as a refutation or material defect**
+
+- A canonical handle may be omitted from the complete check or exact-rank
+  silence ledger.
+- A blocked checked outcome need not correspond to the stored typed-bottom
+  claim.
+- The HB no-outcome conclusion is obtained without checked closure of the
+  supplied dependency table.
+- ZeroSlack is accepted through an opaque callback or without the explicit
+  positive-slack-to-faithful-selector contradiction.
+- The positive-slack bridge, terminal tables, resolvers, normalizer, or runtime
+  are described as derived, unconditional, or polynomial.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:
