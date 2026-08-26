@@ -7,8 +7,8 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-26-195`, 171 of 173
-current scoped rows are earned, or 98.8 percent of that evidence ledger.
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-26-196`, 172 of 174
+current scoped rows are earned, or 98.9 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
 difficulty, and the denominator can grow when a dependency is discovered or an
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M195 |
+| Track | Available | Earned at M196 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M195 risk-weighted proof completion estimate is therefore 35 percent, with
+The M196 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -131,6 +131,19 @@ mismatch routes are not gains or globally decreasing transitions, no fixed
 checkpoint closes. Coverage becomes 171 of 173 while the score remains 35
 percent, the uncertainty range remains 20 to 40 percent, and all five gates
 remain open. No retrospective score was invented.
+
+M196 then removes M195's independently supplied Packet carrier and cut value.
+The BN6 family skeleton now takes its carrier, carrier uniqueness, cut value,
+and cut-value positivity from the same checked BCEL nucleus. Carrier and
+cut-value mismatch routes are impossible by construction; the new endpoint
+retains only an exact proper-cut activation mismatch or conditional ZeroSlack.
+Because the grouped cells, payloads, grouping proofs, tables, ranks,
+route-clear and HB data, resolvers, normalizer, and polynomial construction
+remain supplied or open, and the remaining activation mismatch is not a gain
+or globally decreasing transition, no fixed checkpoint closes. Coverage
+becomes 172 of 174 while the score remains 35 percent, the uncertainty range
+remains 20 to 40 percent, and all five gates remain open. No retrospective
+score was invented.
 
 ## Changing the score
 

@@ -1813,6 +1813,23 @@ polynomial PCCMin. The risk-weighted proof-completion estimate therefore
 remains 35 percent and zero of five global gates are closed. See
 [`lean_pccmin_checked_packet_bn6_bcel_activation_route.md`](./lean_pccmin_checked_packet_bn6_bcel_activation_route.md).
 
+The M196 BCEL-derived-family boundary removes M195's duplicate carrier and cut
+value inputs. A grouped-cell ledger constructs the BN6 family over the exact
+computed nucleus, while carrier uniqueness, the cut value, and its positivity
+come from the checked BCEL result. This makes M195's carrier and cut-value
+mismatch routes impossible by reduction. The new endpoint preserves only the
+exact proper-cut activation mismatch or the conditional ZeroSlack branch. The
+fourteen focused declarations use no project-specific axiom or
+`Classical.choice`. The grouped cells, payloads, grouping proofs, tables,
+ranks, route-clear and HB data, resolvers, normalizer, and polynomial bounds
+remain supplied or open. The remaining mismatch is not a gain or decreasing
+global route, and the inherited finite subset scan is not proved polynomial.
+This does not complete PkgC/BN3--BN6 integration, prove manuscript-wide
+SaturatePositive or BCELReady, establish unconditional ZeroSlack, or construct
+polynomial PCCMin. The risk-weighted proof-completion estimate therefore
+remains 35 percent and zero of five global gates are closed. See
+[`lean_pccmin_checked_packet_bn6_bcel_derived_family.md`](./lean_pccmin_checked_packet_bn6_bcel_derived_family.md).
+
 ## Discharged by Lean so far
 
 ```text

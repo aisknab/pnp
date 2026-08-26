@@ -206,6 +206,7 @@ import PNP.PCCMinCheckedPacketRankedSelector
 import PNP.PCCMinCheckedPacketHBZeroSlackBridge
 import PNP.PCCMinCheckedPacketBN6HBZeroSlackBridge
 import PNP.PCCMinCheckedPacketBN6BCELActivationRoute
+import PNP.PCCMinCheckedPacketBN6BCELDerivedFamily
 import PNP.Bridge
 import PNP.ConcreteLegacyLockedNANDCompatibility
 import PNP.ConcreteResidualBandCompatibility

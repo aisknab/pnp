@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-26-195';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-26-196';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -560,6 +560,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketBN6BCELActivationRouteAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketBN6BCELActivationRoute.lean',
   'node --test audits/lean-pccmin-checked-packet-bn6-bcel-activation-route0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketBN6BCELDerivedFamilyAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketBN6BCELDerivedFamily.lean',
+  'node --test audits/lean-pccmin-checked-packet-bn6-bcel-derived-family0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -760,6 +763,7 @@ const NON_CLAIMS = Object.freeze([
   'The M193 checked Packet/HB ZeroSlack bridge removes M192\'s opaque complete-silence-to-ZeroSlack callback. Complete claim-checker acceptance, silence in every derived exact-rank row, executable selector-silence induction, and checked HB no-outcome closure now derive that every canonical handle is nonfaithful; one explicit positive-residual-slack-to-faithful-selector premise then yields the contradiction and a kernel-checked conditional ZeroSlack result. The positive-slack bridge, terminal family and table construction, HResolve and BudgetResolve algorithms, normalizer, and encoded-size polynomial bounds remain supplied: this does not establish unconditional ZeroSlack, construct executable polynomial PCCMin, close a global gate, put SAT in P, create the eligible root theorem, or prove P = NP.',
   'The M194 BN6 computed-faithfulness checked Packet/HB bridge removes M193\'s arbitrary positive-slack-to-faithful-selector callback. Positive slack now reaches the general BN6 Packet theorem through one earlier explicit constant-activation premise, and the route-clear payload checker constructs a faithful selector in the canonicalized table before the checked HB contradiction derives conditional ZeroSlack. Constant activation, the terminal family and payload construction, route-clear proof, HResolve and BudgetResolve algorithms, normalizer, and encoded-size polynomial bounds remain supplied: this does not prove manuscript-wide SaturatePositive or BCELReady, establish unconditional ZeroSlack, construct executable polynomial PCCMin, close a global gate, put SAT in P, create the eligible root theorem, or prove P = NP.',
   'The M195 BCEL activation-route classifier removes M194\'s opaque positive-slack-to-constant-activation callback from the new endpoint. It binds one supplied Packet family directly to the same-candidate checked finite BCEL nucleus, compares the exact carrier, cut value, and every canonical nonempty proper-cut activation weight, and returns a proof-bearing mismatch route or derives constant activation and M194\'s conditional ZeroSlack result. The terminal problem, positive premise, checked ready certificate, family, payloads, table, ranks, route-clear and HB data, resolvers, normalizer, and encoded-size polynomial bounds remain supplied. The mismatch routes are not yet gains or globally decreasing routes, and the finite cut scan may be exponential: this does not prove manuscript-wide SaturatePositive or BCELReady, establish unconditional ZeroSlack, construct executable polynomial PCCMin, close a global gate, put SAT in P, create the eligible root theorem, or prove P = NP.',
+  'The M196 BCEL-derived BN6 family boundary removes M195\'s independently supplied Packet carrier and cut value. It constructs both fields, their duplicate-freedom, and cut-value positivity from the same checked finite BCEL nucleus before reusing M195; carrier and cut-value mismatch branches are impossible by construction, leaving only an exact proper-cut activation mismatch or conditional ZeroSlack. The terminal problem, positive premise, checked ready certificate, grouped cells and payloads, exact grouping proofs, table, ranks, route-clear and HB data, resolvers, normalizer, and encoded-size polynomial bounds remain supplied. The remaining activation mismatch is not yet a gain or globally decreasing route, and the inherited finite cut scan may be exponential: this does not complete PkgC/BN3--BN6 integration, prove manuscript-wide SaturatePositive or BCELReady, establish unconditional ZeroSlack, construct executable polynomial PCCMin, close a global gate, put SAT in P, create the eligible root theorem, or prove P = NP.',
   'Residual RankWF is now formalized for the manuscript\'s fixed ten-coordinate natural lexicographic rank, with an executable comparison, exact Boolean equivalence, coordinate-priority witnesses, accessibility, induction, and kernel-checked well-foundedness. This does not map current finite routes into the complete global outcome system, prove that any route decreases the rank, establish route completeness or Package E, remove the explicit positive premise, establish full SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
@@ -1622,6 +1626,20 @@ const EXACT_FIELDS = Object.freeze({
   leanPCCMinCheckedPacketBN6BCELActivationRoutePolynomialRuntimeProved: false,
   leanPCCMinCheckedPacketBN6BCELActivationRouteScope:
     'arbitrary-finite-same-candidate-checked-bcel-nucleus-and-supplied-grouped-bn6-packet-family-with-total-carrier-cut-value-and-all-proper-cut-activation-classification-proof-bearing-mismatch-routes-derived-coherent-constant-activation-and-conditional-zeroslack',
+  leanPCCMinCheckedPacketBN6BCELDerivedFamilyFormalized: true,
+  leanPCCMinCheckedPacketBN6BCELDerivedFamilyAxiomAuditPassed: true,
+  leanPCCMinCheckedPacketBN6BCELDerivedFamilyAuditedDeclarationCount: 14,
+  leanPCCMinCheckedPacketBN6BCELDerivedFamilyEndpointProjectAssumptionFree: true,
+  leanPCCMinCheckedPacketBN6BCELDerivedFamilyConstructsFamilyFromBCEL: true,
+  leanPCCMinCheckedPacketBN6BCELDerivedFamilyDerivesCarrier: true,
+  leanPCCMinCheckedPacketBN6BCELDerivedFamilyDerivesCutValue: true,
+  leanPCCMinCheckedPacketBN6BCELDerivedFamilyEliminatesDuplicateMismatchRoutes: true,
+  leanPCCMinCheckedPacketBN6BCELDerivedFamilyRetainsActivationMismatchRoute: true,
+  leanPCCMinCheckedPacketBN6BCELDerivedFamilyDerivesConditionalZeroSlack: true,
+  leanPCCMinCheckedPacketBN6BCELDerivedFamilyUnconditionalZeroSlack: false,
+  leanPCCMinCheckedPacketBN6BCELDerivedFamilyPolynomialRuntimeProved: false,
+  leanPCCMinCheckedPacketBN6BCELDerivedFamilyScope:
+    'arbitrary-finite-same-candidate-checked-bcel-nucleus-and-supplied-grouped-cell-ledger-with-bcel-derived-family-carrier-cut-value-positivity-impossible-duplicate-data-routes-exact-proper-cut-activation-mismatch-or-conditional-zeroslack',
   leanLockedNANDPolynomialBuilderFormalized: true,
   leanCompatibleReplacementFormalized: false,
   leanGlobalSlackLawFormalized: false,
@@ -2970,6 +2988,20 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanPCCMinCheckedPacketBN6BCELActivationRoutePolynomialRuntimeProved: false,
       leanPCCMinCheckedPacketBN6BCELActivationRouteScope:
         'arbitrary-finite-same-candidate-checked-bcel-nucleus-and-supplied-grouped-bn6-packet-family-with-total-carrier-cut-value-and-all-proper-cut-activation-classification-proof-bearing-mismatch-routes-derived-coherent-constant-activation-and-conditional-zeroslack',
+      leanPCCMinCheckedPacketBN6BCELDerivedFamilyFormalized: true,
+      leanPCCMinCheckedPacketBN6BCELDerivedFamilyAxiomAuditPassed: true,
+      leanPCCMinCheckedPacketBN6BCELDerivedFamilyAuditedDeclarationCount: 14,
+      leanPCCMinCheckedPacketBN6BCELDerivedFamilyEndpointProjectAssumptionFree: true,
+      leanPCCMinCheckedPacketBN6BCELDerivedFamilyConstructsFamilyFromBCEL: true,
+      leanPCCMinCheckedPacketBN6BCELDerivedFamilyDerivesCarrier: true,
+      leanPCCMinCheckedPacketBN6BCELDerivedFamilyDerivesCutValue: true,
+      leanPCCMinCheckedPacketBN6BCELDerivedFamilyEliminatesDuplicateMismatchRoutes: true,
+      leanPCCMinCheckedPacketBN6BCELDerivedFamilyRetainsActivationMismatchRoute: true,
+      leanPCCMinCheckedPacketBN6BCELDerivedFamilyDerivesConditionalZeroSlack: true,
+      leanPCCMinCheckedPacketBN6BCELDerivedFamilyUnconditionalZeroSlack: false,
+      leanPCCMinCheckedPacketBN6BCELDerivedFamilyPolynomialRuntimeProved: false,
+      leanPCCMinCheckedPacketBN6BCELDerivedFamilyScope:
+        'arbitrary-finite-same-candidate-checked-bcel-nucleus-and-supplied-grouped-cell-ledger-with-bcel-derived-family-carrier-cut-value-positivity-impossible-duplicate-data-routes-exact-proper-cut-activation-mismatch-or-conditional-zeroslack',
       leanLockedNANDPolynomialBuilderFormalized: true,
       leanCompatibleReplacementFormalized: false,
       leanGlobalSlackLawFormalized: false,
@@ -3527,7 +3559,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-26-195',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-26-196',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,
