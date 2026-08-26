@@ -176,6 +176,8 @@ on:
       - 'docs/lean_pccmin_checked_packet_bn6_hb_zeroslack_bridge.md'
       - 'audits/lean-pccmin-checked-packet-bn6-bcel-activation-route0.test.mjs'
       - 'docs/lean_pccmin_checked_packet_bn6_bcel_activation_route.md'
+      - 'audits/lean-pccmin-checked-packet-bn6-bcel-derived-family0.test.mjs'
+      - 'docs/lean_pccmin_checked_packet_bn6_bcel_derived_family.md'
       - 'audits/lean-residual-terminal-rank-wf0.test.mjs'
       - 'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs'
       - 'audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs'
@@ -592,6 +594,8 @@ on:
       - 'docs/lean_pccmin_checked_packet_bn6_hb_zeroslack_bridge.md'
       - 'audits/lean-pccmin-checked-packet-bn6-bcel-activation-route0.test.mjs'
       - 'docs/lean_pccmin_checked_packet_bn6_bcel_activation_route.md'
+      - 'audits/lean-pccmin-checked-packet-bn6-bcel-derived-family0.test.mjs'
+      - 'docs/lean_pccmin_checked_packet_bn6_bcel_derived_family.md'
       - 'audits/lean-residual-terminal-rank-wf0.test.mjs'
       - 'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs'
       - 'audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs'
@@ -5149,3 +5153,28 @@ jobs:
 
       - name: Run checked Packet/BN6/BCEL activation-route hostile audit
         run: node --test audits/lean-pccmin-checked-packet-bn6-bcel-activation-route0.test.mjs
+
+      - name: Print checked Packet/BN6/BCEL derived-family axioms
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketBN6BCELDerivedFamilyAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPPCCMinCheckedPacketBN6BCELDerivedFamilyAxiomAudit.lean)"
+          test "$expected_count" -eq 14
+          test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected checked Packet/BN6/BCEL derived-family axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Checked Packet/BN6/BCEL derived family reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+
+      - name: Run checked Packet/BN6/BCEL derived-family regression
+        run: lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketBN6BCELDerivedFamily.lean
+
+      - name: Run checked Packet/BN6/BCEL derived-family hostile audit
+        run: node --test audits/lean-pccmin-checked-packet-bn6-bcel-derived-family0.test.mjs

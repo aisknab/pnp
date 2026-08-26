@@ -250,7 +250,15 @@ with the Packet carrier, cut value, and every proper-cut activation weight.
 Coherence derives constant activation and conditional ZeroSlack; any failure is
 retained as an exact typed mismatch route. The supporting terminal data remain
 supplied, the routes are not yet gains or globally decreasing, and the subset
-scan may be exponential. A deterministic target decider, the
+scan may be exponential. The
+M196 boundary then removes the independently supplied Packet carrier and cut
+value: both, carrier uniqueness, and cut-value positivity are constructed from
+the checked BCEL nucleus. The carrier and cut-value mismatch branches become
+impossible, leaving the exact proper-cut activation mismatch or conditional
+ZeroSlack. The grouped cells and payloads remain supplied, so this still does
+not complete PkgC/BN3--BN6 integration; the remaining route has no proved gain
+or global rank-decrease semantics, and the inherited subset scan may be
+exponential. A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See
 [`lean_concrete_legacy_locked_nand_compatibility.md`](lean_concrete_legacy_locked_nand_compatibility.md).
@@ -270,6 +278,10 @@ See also
 [`lean_pccmin_checked_packet_ranked_selector.md`](lean_pccmin_checked_packet_ranked_selector.md).
 See also
 [`lean_pccmin_checked_packet_hb_zeroslack_bridge.md`](lean_pccmin_checked_packet_hb_zeroslack_bridge.md).
+See also
+[`lean_pccmin_checked_packet_bn6_bcel_activation_route.md`](lean_pccmin_checked_packet_bn6_bcel_activation_route.md).
+See also
+[`lean_pccmin_checked_packet_bn6_bcel_derived_family.md`](lean_pccmin_checked_packet_bn6_bcel_derived_family.md).
 
 The reconstruction now also verifies the iteration-count subclaim used by
 `PCCMin`: for any finite supplied chain whose every adjacent replacement is a

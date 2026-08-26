@@ -218,6 +218,23 @@ unconditional ZeroSlack, or polynomial PCCMin. The score remains 35 percent
 and zero of five global gates are closed. See
 [`lean_pccmin_checked_packet_bn6_bcel_activation_route.md`](./lean_pccmin_checked_packet_bn6_bcel_activation_route.md).
 
+M196 removes the independently supplied Packet carrier and cut value from that
+boundary. A grouped-cell ledger constructs the BN6 family carrier from the
+computed BCEL nucleus, derives its duplicate-freedom from the nucleus, and
+uses the positive BCEL defect as the family cut value. Consequently M195's
+carrier and cut-value mismatch branches are impossible by construction; the
+new endpoint retains only an exact proper-cut activation mismatch or the
+conditional ZeroSlack branch. All fourteen focused declarations avoid project
+axioms and `Classical.choice`. The grouped cells, payloads, grouping proofs,
+tables, ranks, route-clear and HB data, resolvers, normalizer, and polynomial
+bounds remain supplied or open. The activation mismatch is not yet a gain or
+globally decreasing transition, and the inherited cut scan may be exponential.
+This does not complete PkgC/BN3--BN6 integration, prove manuscript-wide
+SaturatePositive or BCELReady, establish unconditional ZeroSlack, or construct
+polynomial PCCMin. The score remains 35 percent and zero of five global gates
+are closed. See
+[`lean_pccmin_checked_packet_bn6_bcel_derived_family.md`](./lean_pccmin_checked_packet_bn6_bcel_derived_family.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

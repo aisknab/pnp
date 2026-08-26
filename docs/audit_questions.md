@@ -2366,6 +2366,60 @@ coherent branch reuses M194 to derive conditional ZeroSlack.
 
 ---
 
+### M196 BCEL-derived BN6 family
+
+**Claim**
+
+For every supplied finite same-candidate checked BCEL-ready nucleus and
+grouped-cell ledger, construct the BN6 family carrier, carrier uniqueness, cut
+value, and cut-value positivity from the checked nucleus. Under complete
+checked selector silence, return either one exact proper-cut activation
+mismatch or reuse M195 to derive conditional ZeroSlack. Independently supplied
+carrier and cut-value mismatch cases are impossible by construction.
+
+**Where it appears**
+
+- `lean/PNP/PCCMinCheckedPacketBN6BCELDerivedFamily.lean`.
+- `lean-audit/PNPPCCMinCheckedPacketBN6BCELDerivedFamilyAxiomAudit.lean`.
+- `lean-regression/PNPPCCMinCheckedPacketBN6BCELDerivedFamily.lean`.
+- `audits/lean-pccmin-checked-packet-bn6-bcel-derived-family0.test.mjs`.
+- `status/PROOF_PROGRESS.json`.
+
+**How to test or inspect it**
+
+1. Build the explicit `PNP` root.
+2. Compile the M196 axiom audit and general regression.
+3. Confirm the grouped-cell ledger contains no carrier, cut value, family,
+   carrier equality, cut-value equality, or constant-activation proof.
+4. Confirm the family constructor takes its carrier and cut value from the
+   exact checked BCEL nucleus and proves their structural obligations there.
+5. Confirm the M195 adapter's carrier and cut-value equalities hold by
+   reduction, not from caller certificates.
+6. Confirm the carrier and cut-value mismatch branches are eliminated only by
+   those exact equalities.
+7. Confirm the activation mismatch retains its cut, inclusion, nonempty,
+   proper, and unequal-weight evidence.
+8. Confirm the public endpoint returns that mismatch or conditional ZeroSlack,
+   never erasing the route or claiming an unconditional result.
+9. Mutate the family constructor, adapter, route resolution, or claim boundary
+   and require the hostile contract to reject the mutation.
+
+**What would count as a refutation or material defect**
+
+- The carrier, cut value, family, or either equality is independently supplied.
+- A carrier or cut-value mismatch remains possible at the derived boundary.
+- An activation mismatch is erased, converted to ZeroSlack, or claimed as a
+  strict gain without a separate semantic theorem.
+- The result holds only for a fixed carrier, cut, rank, group ledger, or table.
+- The powerset scan is described as polynomial without an encoded-size theorem.
+- Grouped cells, payloads, tables, ranks, or routes are described as derived
+  from every terminal input.
+- Conditional ZeroSlack is described as complete PkgC/BN3--BN6 integration,
+  manuscript-wide SaturatePositive or BCELReady, unconditional ZeroSlack, or a
+  closed global gate.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

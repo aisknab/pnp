@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-26-195",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-26-196",
   "lastReviewedDate": "2026-08-26",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,9 +17,9 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 171,
-    "totalRows": 173,
-    "percentRoundedOneDecimal": 98.8,
+    "earnedRows": 172,
+    "totalRows": 174,
+    "percentRoundedOneDecimal": 98.9,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
   },
@@ -261,8 +261,8 @@
           ],
           "awardedAtCoordinate": null,
           "justification": "The residual-band minimizer is not formalized and the relevant global blocker remains open.",
-          "remainingLimitation": "Current finite sidecars still consume important terminal families, payloads, maps, ranks or tables as supplied inputs.",
-          "lastReviewedDate": "2026-08-23"
+          "remainingLimitation": "M196 derives the BN6 family carrier and cut value from checked BCEL data, but the grouped cells, payloads, maps, ranks and tables remain supplied rather than constructed from every valid input.",
+          "lastReviewedDate": "2026-08-26"
         },
         {
           "id": "residual-pkgc-bn3-bn6-integration",
@@ -275,8 +275,8 @@
           ],
           "awardedAtCoordinate": null,
           "justification": "The global residual-minimizer and ZeroSlack blockers remain open despite substantial finite PkgC and BN rows.",
-          "remainingLimitation": "The route family must be derived from the terminal input and integrated without supplied global data.",
-          "lastReviewedDate": "2026-08-23"
+          "remainingLimitation": "M196 fixes the family skeleton to one checked BCEL nucleus, but PkgC must still derive the grouped cells and activation equation from the terminal input and integrate every route without supplied global data.",
+          "lastReviewedDate": "2026-08-26"
         },
         {
           "id": "residual-hn-bud-hb-semantics",
@@ -897,6 +897,20 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M195 removes M194's opaque positive-slack-to-constant-activation callback from the new endpoint by binding one supplied Packet family to the same-candidate checked finite BCEL nucleus and exhaustively classifying the carrier, cut value, and every canonical nonempty proper-cut activation weight. A coherent result derives constant activation, identifies it with the BCEL projection excess, and reuses M194 for conditional ZeroSlack; each failure remains a typed carrier, cut-value, or activation mismatch route. The terminal problem, positive premise, checked ready certificate, family, tables, ranks, route-clear and HB data, resolvers, normalizer, and polynomial bounds remain supplied, while the mismatch routes are not gains or globally decreasing transitions and the finite cut scan may be exponential. Therefore manuscript-wide SaturatePositive and BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, every global gate, and all fixed checkpoints remain open. Formal artefact coverage becomes 171 of 173, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-26-196",
+      "formalArtefactCoverage": { "earnedRows": 172, "totalRows": 174 },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M196 removes M195's independently supplied Packet carrier and cut value by constructing the BN6 family skeleton from the same checked finite BCEL nucleus. Carrier duplicate-freedom and cut-value positivity are inherited from the computed nucleus, so the carrier and cut-value mismatch branches are impossible by construction; the new endpoint preserves only an exact proper-cut activation mismatch or reuses M195 for conditional ZeroSlack. The terminal problem, positive premise, checked ready certificate, grouped cells and payloads, exact grouping proofs, tables, ranks, route-clear and HB data, resolvers, normalizer, and polynomial bounds remain supplied. The remaining activation mismatch is not a gain or globally decreasing transition, and the inherited finite cut scan may be exponential. Therefore complete PkgC/BN3--BN6 integration, manuscript-wide SaturatePositive and BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, every global gate, and all fixed checkpoints remain open. Formal artefact coverage becomes 172 of 174, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [

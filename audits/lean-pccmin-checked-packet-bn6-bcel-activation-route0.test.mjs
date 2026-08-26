@@ -297,8 +297,11 @@ test('status, publication, progress, workflow, and docs retain exact conservativ
     'PNP.DirectWire.pccmin_checked_packet_bn6_bcel_activation_route_or_zeroslack_checked_complete',
   ]);
   assert.equal(progress.asOfCoordinate, status.coordinate);
-  assert.equal(progress.formalArtefactCoverage.earnedRows, 171);
-  assert.equal(progress.formalArtefactCoverage.totalRows, 173);
+  assert.equal(progress.formalArtefactCoverage.earnedRows,
+    publication.milestones.filter(({ classification }) =>
+      classification !== 'not-formalized').length);
+  assert.equal(progress.formalArtefactCoverage.totalRows,
+    publication.milestones.length);
   assert.equal(progress.formalArtefactCoverage.isProofCompletionMetric, false);
   assert.equal(progress.proofCompletion.pointsEarned, 35);
   assert.equal(progress.globalGates.filter(({ status: state }) => state === 'closed').length,
