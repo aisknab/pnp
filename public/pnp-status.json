@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-194",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-26-195",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -713,6 +713,17 @@
   "leanPCCMinCheckedPacketBN6HBZeroSlackBridgeUnconditionalZeroSlack": false,
   "leanPCCMinCheckedPacketBN6HBZeroSlackBridgePolynomialRuntimeProved": false,
   "leanPCCMinCheckedPacketBN6HBZeroSlackBridgeScope": "all-finite-direct-wire-implementations-under-explicit-normalizer-hresolve-budgetresolve-supplied-grouped-bn6-family-carrier-lower-bound-rank-map-route-clear-computed-payload-faithfulness-data-only-claim-table-positive-slack-to-constant-activation-bridge-and-checked-hb-no-outcome-closure-with-derived-conditional-zeroslack-and-the-checked-well-founded-loop",
+  "leanPCCMinCheckedPacketBN6BCELActivationRouteFormalized": true,
+  "leanPCCMinCheckedPacketBN6BCELActivationRouteAxiomAuditPassed": true,
+  "leanPCCMinCheckedPacketBN6BCELActivationRouteAuditedDeclarationCount": 15,
+  "leanPCCMinCheckedPacketBN6BCELActivationRouteEndpointProjectAssumptionFree": true,
+  "leanPCCMinCheckedPacketBN6BCELActivationRouteTotalClassifier": true,
+  "leanPCCMinCheckedPacketBN6BCELActivationRouteDerivesConstantActivation": true,
+  "leanPCCMinCheckedPacketBN6BCELActivationRouteRetainsMismatchRoutes": true,
+  "leanPCCMinCheckedPacketBN6BCELActivationRouteDerivesConditionalZeroSlack": true,
+  "leanPCCMinCheckedPacketBN6BCELActivationRouteUnconditionalZeroSlack": false,
+  "leanPCCMinCheckedPacketBN6BCELActivationRoutePolynomialRuntimeProved": false,
+  "leanPCCMinCheckedPacketBN6BCELActivationRouteScope": "arbitrary-finite-same-candidate-checked-bcel-nucleus-and-supplied-grouped-bn6-packet-family-with-total-carrier-cut-value-and-all-proper-cut-activation-classification-proof-bearing-mismatch-routes-derived-coherent-constant-activation-and-conditional-zeroslack",
   "leanLockedNANDPolynomialBuilderFormalized": true,
   "leanCompatibleReplacementFormalized": false,
   "leanGlobalSlackLawFormalized": false,
@@ -1770,6 +1781,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketBN6HBZeroSlackBridgeAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketBN6HBZeroSlackBridge.lean",
     "node --test audits/lean-pccmin-checked-packet-bn6-hb-zeroslack-bridge0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketBN6BCELActivationRouteAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketBN6BCELActivationRoute.lean",
+    "node --test audits/lean-pccmin-checked-packet-bn6-bcel-activation-route0.test.mjs",
     "node scripts/export-lean-theorem-inventory.mjs --check",
     "node scripts/generate-formal-publication.mjs --check",
     "node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs",
@@ -1968,6 +1982,7 @@
     "The M192 checked Packet ranked-selector boundary replaces M191's arbitrary selector rows and proof-bearing realizer at the selector stage with a complete executable check of data-only claims over every canonical handle in one supplied grouped family. Exact rows are derived by filtering that exhaustive handle list with the table-owned rank map; an accepted blueprint reconstructs a strict equivalent gain, while accepted HN, budget, and lower-seed claims retain typed blockers. The normalizer, HResolve and BudgetResolve algorithms, family, ranks, claims, blocker semantics, and final ZeroSlack closure remain supplied: this does not derive terminal data, construct executable PCCMin, establish unconditional ZeroSlack, prove encoded-size polynomial runtime or certificate bounds, close a global gate, put SAT in P, create the eligible root theorem, or prove P = NP.",
     "The M193 checked Packet/HB ZeroSlack bridge removes M192's opaque complete-silence-to-ZeroSlack callback. Complete claim-checker acceptance, silence in every derived exact-rank row, executable selector-silence induction, and checked HB no-outcome closure now derive that every canonical handle is nonfaithful; one explicit positive-residual-slack-to-faithful-selector premise then yields the contradiction and a kernel-checked conditional ZeroSlack result. The positive-slack bridge, terminal family and table construction, HResolve and BudgetResolve algorithms, normalizer, and encoded-size polynomial bounds remain supplied: this does not establish unconditional ZeroSlack, construct executable polynomial PCCMin, close a global gate, put SAT in P, create the eligible root theorem, or prove P = NP.",
     "The M194 BN6 computed-faithfulness checked Packet/HB bridge removes M193's arbitrary positive-slack-to-faithful-selector callback. Positive slack now reaches the general BN6 Packet theorem through one earlier explicit constant-activation premise, and the route-clear payload checker constructs a faithful selector in the canonicalized table before the checked HB contradiction derives conditional ZeroSlack. Constant activation, the terminal family and payload construction, route-clear proof, HResolve and BudgetResolve algorithms, normalizer, and encoded-size polynomial bounds remain supplied: this does not prove manuscript-wide SaturatePositive or BCELReady, establish unconditional ZeroSlack, construct executable polynomial PCCMin, close a global gate, put SAT in P, create the eligible root theorem, or prove P = NP.",
+    "The M195 BCEL activation-route classifier removes M194's opaque positive-slack-to-constant-activation callback from the new endpoint. It binds one supplied Packet family directly to the same-candidate checked finite BCEL nucleus, compares the exact carrier, cut value, and every canonical nonempty proper-cut activation weight, and returns a proof-bearing mismatch route or derives constant activation and M194's conditional ZeroSlack result. The terminal problem, positive premise, checked ready certificate, family, payloads, table, ranks, route-clear and HB data, resolvers, normalizer, and encoded-size polynomial bounds remain supplied. The mismatch routes are not yet gains or globally decreasing routes, and the finite cut scan may be exponential: this does not prove manuscript-wide SaturatePositive or BCELReady, establish unconditional ZeroSlack, construct executable polynomial PCCMin, close a global gate, put SAT in P, create the eligible root theorem, or prove P = NP.",
     "Residual RankWF is now formalized for the manuscript's fixed ten-coordinate natural lexicographic rank, with an executable comparison, exact Boolean equivalence, coordinate-priority witnesses, accessibility, induction, and kernel-checked well-foundedness. This does not map current finite routes into the complete global outcome system, prove that any route decreases the rank, establish route completeness or Package E, remove the explicit positive premise, establish full SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.",
     "External review is optional audit evidence and is not a mathematical premise or release blocker.",
     "Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.",
@@ -2005,7 +2020,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "dfd94559cc6df972ea0890e0c2ed09f176e9934376463a968616615ccc800669",
+    "actualSourceClosureSha256": "bf4ceffec9df35f688f40161376a113ccdd3cffc81cec6e3eb5236da8a9959a5",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -2035,22 +2050,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-25-194",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-26-195",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "f78ea2174cc1303598c9df1c3105c8ada7daa1db24a35eff2727796d4829c97a",
+  "leanTheoremInventorySha256": "5915d0fc9e7540281c18f7bea76778d50c80abfbfc2a000bb31cac232c55b88e",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 30569,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 15151,
-  "leanTheoremInventoryTheoremCount": 15667,
+  "leanTheoremInventoryDeclarationCount": 30689,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 15157,
+  "leanTheoremInventoryTheoremCount": 15702,
   "leanTheoremInventoryAssumptionFreeTheoremCount": 7690,
-  "leanTheoremInventorySourceClosureModuleCount": 310,
-  "leanSourceClosureSha256": "dfd94559cc6df972ea0890e0c2ed09f176e9934376463a968616615ccc800669",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-25-194",
+  "leanTheoremInventorySourceClosureModuleCount": 311,
+  "leanSourceClosureSha256": "bf4ceffec9df35f688f40161376a113ccdd3cffc81cec6e3eb5236da8a9959a5",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-26-195",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "083a94de64d62997e831ec68862b43798c6c173ff4ef57cf2810c70d286ca7ce",
+  "formalPublicationMapSha256": "eadd5a11e032468bd5a4bec22d7ec6d9efbaa68e69188c6306a0f381e75d1808",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -46630,6 +46645,37 @@
       "status": "formalized-pccmin-checked-packet-bn6-hb-zeroslack-bridge"
     },
     {
+      "classification": "formalized-pccmin-checked-packet-bn6-bcel-activation-route",
+      "id": "pccmin-checked-packet-bn6-bcel-activation-route",
+      "nonClaim": "The terminal problem, positive premise, checked finite BCEL-ready certificate, grouped Packet family, payloads, claim table, rank map, route-clear equation, dependency table, checked HB closure, HResolve and BudgetResolve algorithms, normalizer, blocker semantics, and encoded-size bounds remain explicit supplied inputs. The proper-cut classifier enumerates a finite powerset and is not proved polynomial. Its mismatch results are typed diagnostic routes, not constructed gains or globally decreasing transitions. This milestone does not derive the family or supporting data from every source input, prove manuscript-wide SaturatePositive or BCELReady, establish unconditional ZeroSlack, construct executable polynomial PCCMin, prove encoded-size polynomial construction, runtime, output-size, or certificate-size bounds, put CNFSAT in P, open a global gate, create the eligible root theorem, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.pccmin_checked_packet_bn6_bcel_activation_route_or_zeroslack_checked_complete"
+      ],
+      "scope": "For every finite same-candidate checked BCEL nucleus and supplied grouped BN6 Packet family, a total classifier compares the exact carrier, cut value, and every canonical nonempty proper-cut activation weight. It returns one proof-bearing carrier, cut-value, or activation mismatch route, or derives coherent constant activation, identifies it with the BCEL projection excess, and reuses M194 to derive conditional ZeroSlack under checked selector silence.",
+      "title": "Same-candidate BCEL activation-route classifier and conditional ZeroSlack bridge",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.pccmin_checked_packet_bn6_bcel_activation_route_or_zeroslack_checked_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d8f06c12a7a22514231020f3b257ba78372c532dfc39f019f66701d1b58af24f",
+          "expectedKernelTypeSha256": "d8f06c12a7a22514231020f3b257ba78372c532dfc39f019f66701d1b58af24f",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-pccmin-checked-packet-bn6-bcel-activation-route"
+    },
+    {
       "classification": "not-formalized",
       "id": "global-zeroslack-pccmin",
       "nonClaim": "The finite candidate-derived BN3 envelope supplies stable request identities and one jointly side-tight canonical basis family; the finite BN4 kernel supplies activation-exact same-key integer cancellation over an explicit typed cell ledger; the finite BN5 kernel localizes explicit full/shadow multiplicity failure to a strict Hall deficit and local X1 route; the exhaustive Packet scan verifies strict gains or exact no-gain over every canonical selector in one supplied explicit grouped family; an explicit global gain-coverage certificate conditionally upgrades that silence to a proof-bearing ZeroSlack result; the generic finite R-ChargeSurplus kernel derives strict gain from exact ledgers, an unmatched positive support charge, exact gate accounting, and separately proved semantics; the checked unit-charge blueprint realizer derives canonical ledgers and gains for every valid blueprint in one supplied family; the checked typed-realizer contract rejects every faithful-table row except a genuine blueprint gain or an explicitly active bounded-rank HN, budget, or strictly lower faithful seed bot; the checked exact-rank HB graph contract validates every edge in a supplied finite HN/BUD dependency graph; the checked total-table HB contract gives every finite HN/BUD node one row, materializes every listed dependency as an edge, and derives well-founded induction and cycle exclusion for that supplied table; the checked HB active-dependency closure combines an exhaustive active-to-active row condition with strict rank descent to prove every supplied HN/BUD activity bit false and remove HN/budget typed-bot branches; and the executable selector-silence induction exhaustively checks that every canonical realizer claim is a typed bottom, then combines supplied-table HB inactivity with strong finite-rank induction to prove every canonical handle in the accepted table nonfaithful without a global semantic no-gain premise. The Packet selector-faithfulness routing milestone checks ten canonical source-payload fields and derives a contradiction for every positive Packet under explicit route-clear inputs; the canonical table constructor now computes the HB faithfulness function from those payloads and removes the separate binding premise; and total first-route classification turns every canonical payload rejection into one earliest typed route, which canonical HB selector silence forces for a positive Packet without route-clear or binding premises. The exact first-route semantics milestone additionally identifies every returned route with its unique earliest failed supplied payload field. The descent-reflection milestone computes the final descent field from the exact ten-coordinate RankWF relation and proves a forced final route is genuinely nondecreasing. The rank-tag-reflection milestone then copies the table-owned handle rank into the payload and excludes the duplicate rank route. The exact-route-reflection milestone marks the already proved internal handle-to-cell-to-positive-payload source route clear by construction and excludes the duplicate exact-route result as well; this internal route is not an external exact minimum. The charge-route-reflection milestone then derives the internal charge check from the canonical source atom with strictly positive mass and excludes the charge result; that positive mass is not the full external charge-surplus or replacement semantics. The colour-route-reflection milestone then derives internal grouped-footprint eligibility from each canonical handle and excludes colour; this is not external manuscript colour equivalence. The typed-frontier-route-reflection milestone replaces the caller frontier bit with executable equality of explicit typed source and selector signatures, so a frontier route carries exact inequality. The BN5-bound frontier-and-obligation milestone then binds both checks to exact fields of explicit typed terminal BN5 coordinates: frontier and obligation routes carry their corresponding inequalities, with frontier equality preceding an obligation failure. The BN4 activation-exact milestone computes activation from the coordinates' nested activation atoms. The typed-direction milestone computes direction from equality of explicit source and selector direction values. The typed-budget milestone computes the last caller-supplied Packet Boolean from equality of explicit source and selector budget values. Those coordinates, direction values, and budget values are not constructed from terminal data, and local budget equality is not BudgetResolve or HB budget semantics. The checked Packet budget/HB activity-binding milestone now exhaustively maps each typed budget mismatch to budget-node activity at the table-owned rank and, with the supplied checked well-founded HB closure, proves typed budget equality and excludes the local budget route. The binding, rank map, activity environment, dependency table, and closure premise remain explicit; this is not BudgetResolve, a terminal-data construction, or semantic completeness. The checked Packet semantic/HN activity-binding milestone now maps any failure of simultaneous frontier, obligation, activation, and direction agreement to the HN node at the table-owned rank. With the same supplied checked HB closure and the separately checked budget/HB binding, it excludes every semantic first route and leaves exact residual nondecrease. That binding and all typed semantic and HB data remain explicit; it does not construct HN blocker semantics, semantic dependency completeness, a decreasing transition, or a no-lower contradiction. The checked Packet descent no-lower milestone now exhaustively connects that forced route to one local no-lower row and proves its checker rejects; it does not construct the complete ledger or terminal inputs. The finite rank map remains explicit. The construction still does not derive the BN4 ledger, BN5 payload/shadow universe, grouped BN6 family, replacement blueprints, occurrence pairing, rank assignment, payload values, exhaustive realizer claims, or blocker tables from terminal data; connect matching back to a contradiction; derive blocker semantics, semantic dependency completeness, or the checked local active-dependency premise from terminal data; prove the reported routes' external semantics or map all residual routes into a decreasing complete global outcome system; or provide full external selector compatibility, an independently constructed realizer, unconditional global silence, and polynomial-runtime completeness. Global unconditional ZeroSlack and polynomial PCCMin therefore remain unformalized.",
@@ -46696,7 +46742,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-25-194",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-26-195",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

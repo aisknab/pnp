@@ -2,8 +2,8 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-194",
-  "lastReviewedDate": "2026-08-25",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-26-195",
+  "lastReviewedDate": "2026-08-26",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
     "pointsEarned": 35,
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 170,
-    "totalRows": 172,
+    "earnedRows": 171,
+    "totalRows": 173,
     "percentRoundedOneDecimal": 98.8,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -883,6 +883,20 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M194 replaces M193's arbitrary positive-slack-to-faithful-selector callback with the manuscript's earlier general route: positive slack supplies the still-explicit constant-activation premise, the existing arbitrary-family BN6 theorem constructs a positive Packet, and the route-clear payload checker constructs a faithful selector in the canonicalized table before the checked HB contradiction derives conditional ZeroSlack. Constant activation, terminal-data construction, resolver algorithms, normalizer, and polynomial bounds remain supplied, so manuscript-wide SaturatePositive and BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, every global gate, and all fixed checkpoints remain open. Formal artefact coverage becomes 170 of 172, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-26-195",
+      "formalArtefactCoverage": { "earnedRows": 171, "totalRows": 173 },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M195 removes M194's opaque positive-slack-to-constant-activation callback from the new endpoint by binding one supplied Packet family to the same-candidate checked finite BCEL nucleus and exhaustively classifying the carrier, cut value, and every canonical nonempty proper-cut activation weight. A coherent result derives constant activation, identifies it with the BCEL projection excess, and reuses M194 for conditional ZeroSlack; each failure remains a typed carrier, cut-value, or activation mismatch route. The terminal problem, positive premise, checked ready certificate, family, tables, ranks, route-clear and HB data, resolvers, normalizer, and polynomial bounds remain supplied, while the mismatch routes are not gains or globally decreasing transitions and the finite cut scan may be exponential. Therefore manuscript-wide SaturatePositive and BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, every global gate, and all fixed checkpoints remain open. Formal artefact coverage becomes 171 of 173, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [

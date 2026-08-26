@@ -151,6 +151,24 @@ documentation, source links, download metadata, browser-rendered status, and
 negative tests. Preserve historical milestone coordinates, and keep formal
 artefact coverage distinct from the risk-weighted proof-completion estimate.
 
+### Verification evidence deduplication
+
+- Treat a successful check as evidence for its exact immutable source, command,
+  environment, and boundary. Reuse that evidence when all four are unchanged.
+- PNP owns the Lean source and mathematical proof checks. PNPLabs is a website
+  and publication boundary, so its validation must not rerun the complete PNP
+  Lean build or proof suite after the exact published PNP commit has already
+  passed the required core verification.
+- PNPLabs should verify its own rendering, generated mirrors, source pins,
+  links, downloads, metadata, browser-visible claims, negative publication
+  contracts, deployment provenance, and production responses.
+- Do not skip checks that establish a genuinely different boundary. PR CI,
+  exact post-merge reproduction, source-bound PNPLabs validation, deployment,
+  and production verification are distinct evidence when they test different
+  immutable objects or environments.
+- Prefer the smallest targeted check that can reject the current change before
+  a broad suite. Do not repeat an expensive green command merely for ceremony.
+
 ### Proof-progress tracking policy
 
 The authoritative model is the versioned fixed-checkpoint ledger at

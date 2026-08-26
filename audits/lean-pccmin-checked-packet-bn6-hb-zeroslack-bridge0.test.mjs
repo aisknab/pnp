@@ -273,8 +273,11 @@ test('status, publication, progress, workflow, and docs retain exact conservativ
     'PNP.DirectWire.pccmin_normalize_checked_packet_bn6_hb_zeroslack_loop_checked_complete',
   ]);
   assert.equal(progress.asOfCoordinate, status.coordinate);
-  assert.equal(progress.formalArtefactCoverage.earnedRows, 170);
-  assert.equal(progress.formalArtefactCoverage.totalRows, 172);
+  const currentEarnedRows = status.formalPublicationMilestones
+    .filter(({ earned }) => earned).length;
+  assert.equal(progress.formalArtefactCoverage.earnedRows, currentEarnedRows);
+  assert.equal(progress.formalArtefactCoverage.totalRows,
+    status.formalPublicationMilestones.length);
   assert.equal(progress.formalArtefactCoverage.isProofCompletionMetric, false);
   assert.equal(progress.proofCompletion.pointsEarned, 35);
   assert.equal(progress.globalGates.filter(({ status: state }) => state === 'closed').length,
