@@ -250,6 +250,22 @@ ZeroSlack, or construct polynomial PCCMin. The score remains 35 percent and
 zero of five global gates are closed. See
 [`lean_pccmin_checked_packet_bn6_bcel_canonical_grouping.md`](./lean_pccmin_checked_packet_bn6_bcel_canonical_grouping.md).
 
+M198 proves that M197's canonical duplicate-footprint coalescing preserves the
+exact direct raw positive-cell crossing-mass sum for every finite cut. The
+checked PCCMin endpoint now presents its remaining proper-cut BCEL obstruction
+as an equality failure between that raw positive-cell cut ledger and the
+checked defect, rather than only as a grouped-family activation mismatch. All
+nine focused declarations avoid project axioms and `Classical.choice`; permitted closures
+are limited to `propext` and `Quot.sound`. The raw cells and payloads are still
+supplied rather than derived from BN3, BN4, BN5, PkgC, or every terminal input;
+the constant-activation equation remains open; the mismatch is not a gain or
+globally decreasing transition; and the inherited finite cut scan may be
+exponential. This does not complete PkgC/BN3--BN6 integration, prove
+manuscript-wide SaturatePositive or BCELReady, establish unconditional
+ZeroSlack, or construct polynomial PCCMin. The score remains 35 percent and
+zero of five global gates are closed. See
+[`lean_pccmin_checked_packet_bn6_bcel_canonical_cut_ledger.md`](./lean_pccmin_checked_packet_bn6_bcel_canonical_cut_ledger.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and
