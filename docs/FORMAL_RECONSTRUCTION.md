@@ -235,6 +235,21 @@ polynomial PCCMin. The score remains 35 percent and zero of five global gates
 are closed. See
 [`lean_pccmin_checked_packet_bn6_bcel_derived_family.md`](./lean_pccmin_checked_packet_bn6_bcel_derived_family.md).
 
+M197 removes the supplied V54 consumer systems and exact grouping certificates
+from M196's boundary. Each supplied raw positive support is normalized inside
+the checked BCEL carrier, its singleton consumer system is constructed,
+duplicate footprints are coalesced, and every positive payload atom is
+preserved in the canonical group ledger before M196 is reused. All thirty-four
+focused declarations avoid project axioms and `Classical.choice`. The raw
+supports and payload atoms are not yet derived from BN3, BN4, BN5, PkgC, or
+every terminal input; the remaining activation mismatch is not a gain or
+globally decreasing transition; and the inherited finite cut scan may be
+exponential. This does not complete PkgC/BN3--BN6 integration, prove
+manuscript-wide SaturatePositive or BCELReady, establish unconditional
+ZeroSlack, or construct polynomial PCCMin. The score remains 35 percent and
+zero of five global gates are closed. See
+[`lean_pccmin_checked_packet_bn6_bcel_canonical_grouping.md`](./lean_pccmin_checked_packet_bn6_bcel_canonical_grouping.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

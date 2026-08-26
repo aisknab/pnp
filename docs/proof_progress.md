@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-26-196`, 172 of 174
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-26-197`, 173 of 175
 current scoped rows are earned, or 98.9 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M196 |
+| Track | Available | Earned at M197 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M196 risk-weighted proof completion estimate is therefore 35 percent, with
+The M197 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -144,6 +144,19 @@ or globally decreasing transition, no fixed checkpoint closes. Coverage
 becomes 172 of 174 while the score remains 35 percent, the uncertainty range
 remains 20 to 40 percent, and all five gates remain open. No retrospective
 score was invented.
+
+M197 then removes M196's supplied V54 consumer systems, singletonization
+certificates, exact group-footprint-size proofs, and duplicate-free grouping
+proof. Each supplied raw support is normalized inside the checked BCEL carrier,
+its singleton consumer system is constructed, duplicate footprints are
+coalesced, and every positive payload atom is preserved before the canonical
+grouped family reuses M196. The raw supports and payload atoms are still
+supplied rather than derived from BN3, BN4, BN5, PkgC, or every terminal input;
+the remaining activation mismatch is not a gain or globally decreasing route;
+and the inherited finite cut scan may be exponential. No fixed checkpoint or
+global gate closes. Coverage becomes 173 of 175 while the score remains 35
+percent, the uncertainty range remains 20 to 40 percent, and all five gates
+remain open. No retrospective score was invented.
 
 ## Changing the score
 
