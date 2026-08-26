@@ -1830,6 +1830,23 @@ polynomial PCCMin. The risk-weighted proof-completion estimate therefore
 remains 35 percent and zero of five global gates are closed. See
 [`lean_pccmin_checked_packet_bn6_bcel_derived_family.md`](./lean_pccmin_checked_packet_bn6_bcel_derived_family.md).
 
+The M197 canonical-grouping boundary removes the supplied V54 consumer
+systems, singletonization certificates, exact group-footprint-size proofs, and
+duplicate-free grouping proof from M196. It normalizes every supplied raw
+support inside the checked BCEL carrier, constructs the corresponding
+singleton consumer system, coalesces duplicate footprints, and preserves every
+positive payload atom in the canonical group ledger. The thirty-four focused
+declarations use no project-specific axiom or `Classical.choice`. The raw
+supports and payload atoms, terminal data, tables, ranks, route-clear and HB
+data, resolvers, normalizer, and polynomial bounds remain supplied or open.
+The remaining activation mismatch is not a gain or decreasing global route,
+and the inherited finite subset scan is not proved polynomial. This does not
+complete PkgC/BN3--BN6 integration, prove manuscript-wide SaturatePositive or
+BCELReady, establish unconditional ZeroSlack, or construct polynomial PCCMin.
+The risk-weighted proof-completion estimate therefore remains 35 percent and
+zero of five global gates are closed. See
+[`lean_pccmin_checked_packet_bn6_bcel_canonical_grouping.md`](./lean_pccmin_checked_packet_bn6_bcel_canonical_grouping.md).
+
 ## Discharged by Lean so far
 
 ```text

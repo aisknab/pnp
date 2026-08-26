@@ -17,6 +17,7 @@ const execFileAsync = promisify(execFile);
 const PROBE = 'lean-audit/PNPTheoremInventory.lean';
 const BUILD_TIMEOUT_MS = 1_800_000;
 const PROBE_TIMEOUT_MS = 600_000;
+const INVENTORY_MAX_BUFFER_BYTES = 64 * 1024 * 1024;
 
 export function ParseLeanInventoryProbe0(result) {
   if (result.timedOut === true) throw new Error('Lean environment inventory probe timed out');
@@ -51,7 +52,7 @@ export async function RunLeanInventoryProbe0(root) {
     cwd: root,
     encoding: 'utf8',
     timeout: BUILD_TIMEOUT_MS,
-    maxBuffer: 32 * 1024 * 1024,
+    maxBuffer: INVENTORY_MAX_BUFFER_BYTES,
   });
   try {
     const { stdout, stderr } = await execFileAsync('lake', [
@@ -60,7 +61,7 @@ export async function RunLeanInventoryProbe0(root) {
       cwd: root,
       encoding: 'utf8',
       timeout: PROBE_TIMEOUT_MS,
-      maxBuffer: 32 * 1024 * 1024,
+      maxBuffer: INVENTORY_MAX_BUFFER_BYTES,
     });
     return ParseLeanInventoryProbe0({ stdout, stderr, exitCode: 0, timedOut: false });
   } catch (error) {

@@ -258,7 +258,13 @@ impossible, leaving the exact proper-cut activation mismatch or conditional
 ZeroSlack. The grouped cells and payloads remain supplied, so this still does
 not complete PkgC/BN3--BN6 integration; the remaining route has no proved gain
 or global rank-decrease semantics, and the inherited subset scan may be
-exponential. A deterministic target decider, the
+exponential. M197 then constructs the structural grouping from supplied raw
+positive supports and payload atoms: supports are normalized inside the
+checked carrier, singleton consumer systems are built, duplicate footprints
+are coalesced, and every positive payload atom is retained in its canonical
+group. The raw cells still are not derived from terminal BN3, BN4, BN5, or PkgC
+data, so the risk-weighted estimate remains 35 percent and zero of five global
+gates are closed. A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See
 [`lean_concrete_legacy_locked_nand_compatibility.md`](lean_concrete_legacy_locked_nand_compatibility.md).
@@ -282,6 +288,8 @@ See also
 [`lean_pccmin_checked_packet_bn6_bcel_activation_route.md`](lean_pccmin_checked_packet_bn6_bcel_activation_route.md).
 See also
 [`lean_pccmin_checked_packet_bn6_bcel_derived_family.md`](lean_pccmin_checked_packet_bn6_bcel_derived_family.md).
+See also
+[`lean_pccmin_checked_packet_bn6_bcel_canonical_grouping.md`](lean_pccmin_checked_packet_bn6_bcel_canonical_grouping.md).
 
 The reconstruction now also verifies the iteration-count subclaim used by
 `PCCMin`: for any finite supplied chain whose every adjacent replacement is a

@@ -2420,6 +2420,63 @@ carrier and cut-value mismatch cases are impossible by construction.
 
 ---
 
+### M197 canonical BN6 positive-cell grouping
+
+**Claim**
+
+For every supplied finite same-candidate checked BCEL-ready nucleus and raw
+positive support/payload ledger, normalize each support inside the computed
+carrier, construct its singleton consumer system, coalesce equal footprints,
+and preserve every positive payload atom in the resulting canonical grouped
+family. Under complete checked selector silence, reuse M196 to return either
+one exact proper-cut activation mismatch or conditional ZeroSlack.
+
+**Where it appears**
+
+- `lean/PNP/ResidualTerminalBN6CanonicalPositiveCellGrouping.lean`.
+- `lean/PNP/PCCMinCheckedPacketBN6BCELCanonicalGrouping.lean`.
+- `lean-audit/PNPPCCMinCheckedPacketBN6BCELCanonicalGroupingAxiomAudit.lean`.
+- `lean-regression/PNPPCCMinCheckedPacketBN6BCELCanonicalGrouping.lean`.
+- `audits/lean-pccmin-checked-packet-bn6-bcel-canonical-grouping0.test.mjs`.
+- `status/PROOF_PROGRESS.json`.
+
+**How to test or inspect it**
+
+1. Build the explicit `PNP` root.
+2. Compile the M197 axiom audit and general regression.
+3. Confirm a raw positive cell supplies only a support, positive payload atom,
+   and proof that its carrier-normalized footprint has size at least two.
+4. Confirm normalization filters the checked carrier rather than trusting the
+   support's order, duplicates, or out-of-carrier atoms.
+5. Confirm each consumer system is constructed from footprint singletons and
+   its antichain/singletonization proofs are derived.
+6. Confirm equal footprints are coalesced and every source payload atom is
+   retained in the matching canonical group.
+7. Confirm the M196 adapter derives all structural grouping fields and does not
+   accept a parallel supplied grouped family.
+8. Confirm the public endpoint preserves the exact activation-mismatch or
+   conditional-ZeroSlack result without claiming unconditional closure.
+9. Mutate normalization, singletonization, coalescing, payload retention, the
+   adapter, or the claim boundary and require the hostile contract to reject it.
+
+**What would count as a refutation or material defect**
+
+- A consumer system, singletonization certificate, group carrier, footprint
+  size proof, or duplicate-free footprint ledger is still independently
+  supplied at the M197 boundary.
+- Normalization retains atoms outside the checked carrier or depends on raw
+  support order or duplicates.
+- Duplicate footprints discard any positive payload atom.
+- The result holds only for a fixed carrier, support, payload, rank, or table.
+- The finite cut scan or grouping is described as polynomial without an
+  encoded-size theorem.
+- Raw positive cells are described as derived from every terminal input.
+- Conditional ZeroSlack is described as complete PkgC/BN3--BN6 integration,
+  manuscript-wide SaturatePositive or BCELReady, unconditional ZeroSlack, or a
+  closed global gate.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

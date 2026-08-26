@@ -1,0 +1,36 @@
+import PNP.PCCMinCheckedPacketBN6BCELCanonicalGrouping
+
+#print axioms PNP.DirectWire.terminalBN6NormalizeSupport
+#print axioms PNP.DirectWire.terminalBN6NormalizeSupport_sublist
+#print axioms PNP.DirectWire.terminalBN6NormalizeSupport_nodup
+#print axioms PNP.DirectWire.TerminalBN6PositiveCell
+#print axioms PNP.DirectWire.TerminalBN6PositiveCell.footprint
+#print axioms PNP.DirectWire.TerminalBN6PositiveCell.footprint_sublist
+#print axioms PNP.DirectWire.TerminalBN6PositiveCell.footprint_nodup
+#print axioms PNP.DirectWire.terminalBN6SingletonConsumerSystem
+#print axioms PNP.DirectWire.terminalBN6SingletonConsumerSystem_singletonFootprint
+#print axioms PNP.DirectWire.terminalBN6SingletonConsumerSystem_singletonized
+#print axioms PNP.DirectWire.terminalBN6CanonicalPositiveFootprints
+#print axioms PNP.DirectWire.terminalBN6CanonicalPositiveFootprints_nodup
+#print axioms PNP.DirectWire.mem_terminalBN6CanonicalPositiveFootprints_iff
+#print axioms PNP.DirectWire.terminalBN6PositiveAtomsAt
+#print axioms PNP.DirectWire.TerminalBN6PositiveCell.payloadAtom_mem_positiveAtomsAt
+#print axioms PNP.DirectWire.terminalBN6CanonicalPositiveGroup
+#print axioms PNP.DirectWire.terminalBN6CanonicalPositiveGroup_carrier
+#print axioms PNP.DirectWire.terminalBN6CanonicalPositiveGroup_footprint
+#print axioms PNP.DirectWire.terminalBN6CanonicalPositiveGroup_footprintLarge
+#print axioms PNP.DirectWire.terminalBN6CanonicalPositiveGroups
+#print axioms PNP.DirectWire.terminalBN6CanonicalPositiveGroups_footprints
+#print axioms PNP.DirectWire.terminalBN6CanonicalPositiveGroups_footprintsNodup
+#print axioms PNP.DirectWire.terminalBN6CanonicalPositiveGroups_carrier
+#print axioms PNP.DirectWire.terminalBN6CanonicalPositiveGroups_footprintLarge
+#print axioms PNP.DirectWire.TerminalBN6PositiveCell.exists_canonical_group
+#print axioms PNP.DirectWire.PCCMinCheckedPacketBN6BCELPositiveCells
+#print axioms PNP.DirectWire.PCCMinCheckedPacketBN6BCELPositiveCells.carrier_nodup
+#print axioms PNP.DirectWire.PCCMinCheckedPacketBN6BCELPositiveCells.groupedCells
+#print axioms PNP.DirectWire.PCCMinCheckedPacketBN6BCELPositiveCells.groupedFamily_carrier
+#print axioms PNP.DirectWire.PCCMinCheckedPacketBN6BCELPositiveCells.groupedFamily_cutValue
+#print axioms PNP.DirectWire.PCCMinCheckedPacketBN6BCELPositiveCells.payload_preserved
+#print axioms PNP.DirectWire.PCCMinCheckedPacketBN6BCELCanonicalGroupingHBData
+#print axioms PNP.DirectWire.PCCMinCheckedPacketBN6BCELCanonicalGroupingHBData.toDerivedFamilyData
+#print axioms PNP.DirectWire.pccmin_checked_packet_bn6_bcel_canonical_grouping_route_or_zeroslack_checked_complete
