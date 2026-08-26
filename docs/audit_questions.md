@@ -2532,6 +2532,61 @@ ZeroSlack.
 
 ---
 
+### M199 canonical sparse V53 constant-cut basis
+
+**Claim**
+
+For every finite sparse V53 hypergraph with at least two carrier anchors, the
+shape-specific canonical basis is equivalent to the complete constant equation
+on all nonempty proper cuts. The checked PCCMin endpoint classifies this basis
+without enumerating the carrier powerset and returns either conditional
+ZeroSlack or one typed structural basis obstruction.
+
+**Where it appears**
+
+- `lean/PNP/ResidualTerminalV53CanonicalConstantCutBasis.lean`.
+- `lean/PNP/PCCMinCheckedPacketBN6BCELCanonicalConstantCutBasis.lean`.
+- `lean-audit/PNPPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisAxiomAudit.lean`.
+- `lean-regression/PNPPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasis.lean`.
+- `audits/lean-pccmin-checked-packet-bn6-bcel-canonical-constant-cut-basis0.test.mjs`.
+- `status/PROOF_PROGRESS.json`.
+
+**How to test or inspect it**
+
+1. Build the explicit `PNP` root.
+2. Compile the M199 axiom audit and arbitrary-finite regression.
+3. Confirm the two-anchor basis checks only the full-span weight.
+4. Confirm the three-anchor basis checks exactly three singleton cuts and
+   obtains pair cuts by exact complement symmetry.
+5. Confirm the four-plus basis checks full-span-only positive support and the
+   exact full-span weight, using V53 rigidity only in the converse direction.
+6. Confirm the executable classifier returns all five typed failure shapes and
+   contains no `terminalListSubsets` or inherited M195 classifier call.
+7. Confirm the checked adapter obtains constant activation from an accepted
+   basis, preserves M198's exact raw-ledger equality, and keeps every rejection
+   as a typed route.
+8. Confirm its axiom closure contains only the fixed Lean-standard allowlist.
+9. Mutate a basis branch, the non-full-cell search, raw-ledger reflection,
+   adapter call, or claim boundary and require the hostile contract to reject
+   the mutation.
+
+**What would count as a refutation or material defect**
+
+- The basis accepts while some nonempty proper cut has the wrong weight, or
+  rejects a system whose complete proper-cut equation holds.
+- The executable classifier scans the carrier powerset, calls the M195
+  all-proper-cut classifier, erases a failure, or accepts supplied constant-
+  activation evidence.
+- The result holds only for one fixed carrier, cell ledger, rank, or table.
+- A rejected basis is called a strict gain or globally decreasing transition.
+- Removing this one scan is described as a complete encoded-size polynomial
+  construction while upstream objects and subset searches remain supplied.
+- Conditional ZeroSlack is described as complete PkgC/BN3--BN6 integration,
+  manuscript-wide SaturatePositive or BCELReady, unconditional ZeroSlack, or a
+  closed global gate.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

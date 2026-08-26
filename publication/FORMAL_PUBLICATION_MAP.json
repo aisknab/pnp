@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-27-198",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-27-199",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3130,6 +3130,7 @@
     "PNP.DirectWire.pccmin_checked_packet_bn6_bcel_derived_family_route_or_zeroslack_checked_complete": "2d50a967736e342be58071bd6c39783abf0cc18d67ef398fdf22803e6d4bd76a",
     "PNP.DirectWire.pccmin_checked_packet_bn6_bcel_canonical_grouping_route_or_zeroslack_checked_complete": "2627394268f34bc51ed578bcc12fac9dd82223592387848816cd3af507a9137f",
     "PNP.DirectWire.pccmin_checked_packet_bn6_bcel_canonical_cut_ledger_route_or_zeroslack_checked_complete": "95f8a4d49ae159d8d3df6fd868ec11d03dfc1179df65d54c8c1f7745cad20891",
+    "PNP.DirectWire.pccmin_checked_packet_bn6_bcel_canonical_cut_basis_route_or_zeroslack_checked_complete": "0d72ea90cc0f14ce2dbd5baa16a2f0fd925dbef2d471236cfeff12cb7fbcdea9",
     "PNP.sat_in_p_from_locked_nand_in_p": "22e89ea9c9bb5a637be9b676789bd28c793be5cbb0b6cf6c4bc861f8c0a2a172",
     "PNP.concrete_legacy_locked_nand_compatibility_checked_complete": "15d121170c80cd88001bd80d49494382371880b070abf03d09eaaa2f1e0d820b",
     "PNP.Concrete.LockedNAND.encodedDirectWireMinimumThreshold_ofCandidate_iff": "a3389cacce2ed9318204b1f683565d78a15690d860eec12a7bb6ac57970f6d62",
@@ -3156,7 +3157,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "aa935790a3ef906d271926b39d3b726b89c03af6089c6de4c7ab16f67f785885",
+  "milestoneSourceClosureSha256": "9620dcacab57844d897c376351e36197cc72e4e216e760b57a500e3e81d20613",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -8095,6 +8096,16 @@
       ],
       "scope": "For every finite same-candidate checked BCEL nucleus, supplied raw positive-cell ledger, and cut, canonical coalescing preserves the exact direct crossing-mass sum. The M197 grouped-family activation mismatch is therefore exposed directly against the raw ledger, so checked selector silence yields either an exact proper-cut raw activation mismatch or conditional ZeroSlack.",
       "title": "Canonical BN6 raw cut-ledger conservation and conditional ZeroSlack bridge"
+    },
+    {
+      "classification": "formalized-pccmin-checked-packet-bn6-bcel-canonical-constant-cut-basis",
+      "id": "pccmin-checked-packet-bn6-bcel-canonical-constant-cut-basis",
+      "nonClaim": "The terminal problem, positive premise, checked finite BCEL-ready certificate, raw positive cells and payloads, claim table, rank map, route-clear equation, dependency table, checked HB closure, HResolve and BudgetResolve algorithms, normalizer, blocker semantics, and complete encoded-size bounds remain explicit supplied inputs. A rejected basis is a typed structural diagnostic route, not a constructed gain or globally decreasing transition. Removing this endpoint's proper-cut powerset scan does not prove that upstream terminal or BCEL construction avoids subset enumeration or that the complete construction is polynomial. This milestone does not derive the raw cells from BN3, BN4, BN5, PkgC, or every terminal input, force basis acceptance or route every rejection to a gain, complete PkgC/BN3--BN6 integration, prove manuscript-wide SaturatePositive or BCELReady, establish unconditional ZeroSlack, construct executable polynomial PCCMin, prove encoded-size polynomial construction, runtime, output-size, or certificate-size bounds, put CNFSAT in P, open a global gate, create the eligible root theorem, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.pccmin_checked_packet_bn6_bcel_canonical_cut_basis_route_or_zeroslack_checked_complete"
+      ],
+      "scope": "For every finite sparse V53 hypergraph with at least two anchors, a shape-specific basis is equivalent to the complete constant equation on every nonempty proper cut. A total classifier checks the two-anchor full weight, three singleton cuts, or four-plus full-span support and weight without enumerating carrier subsets. At the same-candidate checked BN6/BCEL/HB boundary, accepted evidence derives constant activation and conditional ZeroSlack under checked selector silence, while rejection preserves one typed structural route and every inspected cut retains M198's exact raw-ledger reflection.",
+      "title": "Canonical sparse V53 constant-cut basis and checked conditional ZeroSlack bridge"
     },
     {
       "classification": "not-formalized",

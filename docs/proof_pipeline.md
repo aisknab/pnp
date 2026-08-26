@@ -265,8 +265,11 @@ are coalesced, and every positive payload atom is retained in its canonical
 group. The raw cells still are not derived from terminal BN3, BN4, BN5, or PkgC
 data. M198 then proves that this coalescing preserves the exact direct raw
 positive-cell crossing-mass sum on every cut and exposes the surviving BCEL
-mismatch against that raw ledger. The raw cells, constant-activation equation,
-gain semantics, global descent, and polynomial bounds remain open, so the
+mismatch against that raw ledger. M199 replaces the resulting endpoint's
+all-proper-cut powerset scan with an exact two-anchor, three-singleton, or
+four-plus full-span basis and a total typed classifier. The raw cells, forced
+basis acceptance or decreasing rejection routes, global descent, and complete
+polynomial construction remain open, so the
 risk-weighted estimate remains 35 percent and zero of five global gates are
 closed. A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
@@ -296,6 +299,8 @@ See also
 [`lean_pccmin_checked_packet_bn6_bcel_canonical_grouping.md`](lean_pccmin_checked_packet_bn6_bcel_canonical_grouping.md).
 See also
 [`lean_pccmin_checked_packet_bn6_bcel_canonical_cut_ledger.md`](lean_pccmin_checked_packet_bn6_bcel_canonical_cut_ledger.md).
+See also
+[`lean_pccmin_checked_packet_bn6_bcel_canonical_constant_cut_basis.md`](lean_pccmin_checked_packet_bn6_bcel_canonical_constant_cut_basis.md).
 
 The reconstruction now also verifies the iteration-count subclaim used by
 `PCCMin`: for any finite supplied chain whose every adjacent replacement is a

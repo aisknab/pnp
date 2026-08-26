@@ -173,6 +173,19 @@ constant-activation equation, gain and global rank-decrease semantics, and
 encoded-size polynomial bounds remain supplied or open, so this does not
 establish unconditional ZeroSlack, complete PCCMin, or polynomial runtime.
 
+M199 adds `PNP.ResidualTerminalV53CanonicalConstantCutBasis` and
+`PNP.PCCMinCheckedPacketBN6BCELCanonicalConstantCutBasis`. It proves that a
+shape-specific sparse basis is equivalent to the complete V53 proper-cut
+constant equation on every carrier of size at least two, implements a total
+typed classifier without a carrier-powerset scan, and feeds accepted evidence
+directly into the checked Packet/BN6/BCEL/HB conditional ZeroSlack boundary.
+The twenty-two reviewed declarations contain no project-specific axiom or
+`Classical.choice`; only permitted Lean-standard `propext` and `Quot.sound`
+appear where required. Raw cells, payloads, terminal construction, gain and
+global rank-decrease semantics, and complete encoded-size polynomial bounds
+remain supplied or open, so this does not establish unconditional ZeroSlack,
+complete PCCMin, or polynomial runtime.
+
 ## Reviewed intermediate milestone bindings
 
 Intermediate milestone credit has a separate evidence boundary from theorem publication. Every

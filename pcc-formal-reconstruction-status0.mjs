@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-27-198';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-27-199';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -569,6 +569,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketBN6BCELCanonicalCutLedgerAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketBN6BCELCanonicalCutLedger.lean',
   'node --test audits/lean-pccmin-checked-packet-bn6-bcel-canonical-cut-ledger0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasis.lean',
+  'node --test audits/lean-pccmin-checked-packet-bn6-bcel-canonical-constant-cut-basis0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -772,6 +775,7 @@ const NON_CLAIMS = Object.freeze([
   'The M196 BCEL-derived BN6 family boundary removes M195\'s independently supplied Packet carrier and cut value. It constructs both fields, their duplicate-freedom, and cut-value positivity from the same checked finite BCEL nucleus before reusing M195; carrier and cut-value mismatch branches are impossible by construction, leaving only an exact proper-cut activation mismatch or conditional ZeroSlack. The terminal problem, positive premise, checked ready certificate, grouped cells and payloads, exact grouping proofs, table, ranks, route-clear and HB data, resolvers, normalizer, and encoded-size polynomial bounds remain supplied. The remaining activation mismatch is not yet a gain or globally decreasing route, and the inherited finite cut scan may be exponential: this does not complete PkgC/BN3--BN6 integration, prove manuscript-wide SaturatePositive or BCELReady, establish unconditional ZeroSlack, construct executable polynomial PCCMin, close a global gate, put SAT in P, create the eligible root theorem, or prove P = NP.',
   'The M197 canonical BCEL positive-cell grouping boundary removes M196\'s supplied V54 consumer systems, singletonization certificates, and exact grouping proofs. It normalizes each supplied raw support inside the checked BCEL carrier, constructs its singleton-consumer system, coalesces duplicate footprints, and preserves every positive payload atom before reusing M196. The terminal problem, positive premise, checked ready certificate, raw supports and payloads, table, ranks, route-clear and HB data, resolvers, normalizer, and encoded-size polynomial bounds remain supplied; the raw cells are not derived from BN3, BN4, BN5, PkgC, or every terminal input. The remaining activation mismatch is not yet a gain or globally decreasing route, and the inherited finite cut scan may be exponential: this does not complete PkgC/BN3--BN6 integration, prove manuscript-wide SaturatePositive or BCELReady, establish unconditional ZeroSlack, construct executable polynomial PCCMin, close a global gate, put SAT in P, create the eligible root theorem, or prove P = NP.',
   'The M198 canonical BN6 cut-ledger boundary proves that canonical duplicate-footprint coalescing preserves the direct raw positive-cell crossing-mass sum on every cut. The checked PCCMin endpoint now reports the remaining BCEL mismatch directly against that raw ledger rather than only through the derived grouped-family activation sum. The terminal problem, positive premise, checked ready certificate, raw cells and payloads, table, ranks, route-clear and HB data, resolvers, normalizer, and encoded-size polynomial bounds remain supplied; the raw cells are not derived from BN3, BN4, BN5, PkgC, or every terminal input. The raw-ledger mismatch is not yet a gain or globally decreasing route, the constant-activation equation remains open, and the inherited finite cut scan may be exponential: this does not complete PkgC/BN3--BN6 integration, prove manuscript-wide SaturatePositive or BCELReady, establish unconditional ZeroSlack, construct executable polynomial PCCMin, close a global gate, put SAT in P, create the eligible root theorem, or prove P = NP.',
+  'The M199 canonical constant-cut-basis boundary proves that, on every sparse positive V53 hypergraph with at least two anchors, a shape-specific sparse basis is equivalent to the complete proper-cut constant equation: the full-span weight at two anchors, three singleton cuts at three anchors, and full-span-only support plus its weight at four or more anchors. Its total classifier returns one typed structural obstruction or feeds the accepted basis directly into the checked Packet/BN6/BCEL/HB conditional ZeroSlack route while retaining M198\'s exact raw cut-ledger equality. This removes the inherited M195 powerset scan from the new endpoint, but the terminal problem, checked ready certificate, raw cells and payloads, table, ranks, route-clear and HB data, resolvers, normalizer, and encoded-size polynomial bounds remain supplied; rejected basis routes are not gains or globally decreasing transitions, upstream construction may still enumerate subsets, and the raw cells are not derived from every terminal input. This does not complete PkgC/BN3--BN6 integration, prove manuscript-wide SaturatePositive or BCELReady, establish unconditional ZeroSlack, construct executable polynomial PCCMin, close a global gate, put SAT in P, create the eligible root theorem, or prove P = NP.',
   'Residual RankWF is now formalized for the manuscript\'s fixed ten-coordinate natural lexicographic rank, with an executable comparison, exact Boolean equivalence, coordinate-priority witnesses, accessibility, induction, and kernel-checked well-foundedness. This does not map current finite routes into the complete global outcome system, prove that any route decreases the rank, establish route completeness or Package E, remove the explicit positive premise, establish full SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
@@ -1676,6 +1680,22 @@ const EXACT_FIELDS = Object.freeze({
   leanPCCMinCheckedPacketBN6BCELCanonicalCutLedgerPolynomialRuntimeProved: false,
   leanPCCMinCheckedPacketBN6BCELCanonicalCutLedgerScope:
     'arbitrary-finite-same-candidate-checked-bcel-nucleus-and-supplied-raw-positive-cell-ledger-with-exact-canonical-grouped-to-raw-cut-mass-conservation-and-direct-raw-proper-cut-mismatch-or-conditional-zeroslack',
+  leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisFormalized: true,
+  leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisAxiomAuditPassed: true,
+  leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisAuditedDeclarationCount: 22,
+  leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisEndpointProjectAssumptionFree: true,
+  leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisEquivalentToAllProperCuts: true,
+  leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisClassifierTotal: true,
+  leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisAvoidsProperCutPowerset: true,
+  leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisUsesDirectRawCutLedger: true,
+  leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisDerivesConstantActivation: true,
+  leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisDerivesConditionalZeroSlack: true,
+  leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisDerivesCellsFromTerminalInput: false,
+  leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisRejectedRouteIsGain: false,
+  leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisUnconditionalZeroSlack: false,
+  leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisPolynomialRuntimeProved: false,
+  leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisScope:
+    'arbitrary-finite-sparse-v53-shape-specific-constant-cut-basis-equivalent-to-all-proper-cuts-with-total-typed-classifier-and-direct-checked-bn6-bcel-hb-conditional-zeroslack-adapter-over-supplied-terminal-data',
   leanLockedNANDPolynomialBuilderFormalized: true,
   leanCompatibleReplacementFormalized: false,
   leanGlobalSlackLawFormalized: false,
@@ -3066,6 +3086,22 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanPCCMinCheckedPacketBN6BCELCanonicalCutLedgerPolynomialRuntimeProved: false,
       leanPCCMinCheckedPacketBN6BCELCanonicalCutLedgerScope:
         'arbitrary-finite-same-candidate-checked-bcel-nucleus-and-supplied-raw-positive-cell-ledger-with-exact-canonical-grouped-to-raw-cut-mass-conservation-and-direct-raw-proper-cut-mismatch-or-conditional-zeroslack',
+      leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisFormalized: true,
+      leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisAxiomAuditPassed: true,
+      leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisAuditedDeclarationCount: 22,
+      leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisEndpointProjectAssumptionFree: true,
+      leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisEquivalentToAllProperCuts: true,
+      leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisClassifierTotal: true,
+      leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisAvoidsProperCutPowerset: true,
+      leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisUsesDirectRawCutLedger: true,
+      leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisDerivesConstantActivation: true,
+      leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisDerivesConditionalZeroSlack: true,
+      leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisDerivesCellsFromTerminalInput: false,
+      leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisRejectedRouteIsGain: false,
+      leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisUnconditionalZeroSlack: false,
+      leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisPolynomialRuntimeProved: false,
+      leanPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisScope:
+        'arbitrary-finite-sparse-v53-shape-specific-constant-cut-basis-equivalent-to-all-proper-cuts-with-total-typed-classifier-and-direct-checked-bn6-bcel-hb-conditional-zeroslack-adapter-over-supplied-terminal-data',
       leanLockedNANDPolynomialBuilderFormalized: true,
       leanCompatibleReplacementFormalized: false,
       leanGlobalSlackLawFormalized: false,
@@ -3623,7 +3659,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-27-198',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-27-199',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,
