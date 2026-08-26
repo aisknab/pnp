@@ -2477,6 +2477,61 @@ one exact proper-cut activation mismatch or conditional ZeroSlack.
 
 ---
 
+### M198 canonical BN6 cut-ledger conservation
+
+**Claim**
+
+For every finite same-candidate checked BCEL nucleus, supplied raw positive-
+cell ledger, and cut, canonical duplicate-footprint coalescing preserves the
+exact direct crossing-mass sum. Under the same complete checked selector-
+silence premise as M197, the checked endpoint returns either an exact proper-
+cut mismatch between this raw ledger and the BCEL defect or conditional
+ZeroSlack.
+
+**Where it appears**
+
+- `lean/PNP/ResidualTerminalBN6CanonicalCutLedger.lean`.
+- `lean/PNP/PCCMinCheckedPacketBN6BCELCanonicalCutLedger.lean`.
+- `lean-audit/PNPPCCMinCheckedPacketBN6BCELCanonicalCutLedgerAxiomAudit.lean`.
+- `lean-regression/PNPPCCMinCheckedPacketBN6BCELCanonicalCutLedger.lean`.
+- `audits/lean-pccmin-checked-packet-bn6-bcel-canonical-cut-ledger0.test.mjs`.
+- `status/PROOF_PROGRESS.json`.
+
+**How to test or inspect it**
+
+1. Build the explicit `PNP` root.
+2. Compile the M198 axiom audit and arbitrary-finite regression.
+3. Confirm raw activation is defined directly by summing the payload mass of
+   exactly those raw cells whose normalized footprint crosses the cut.
+4. Confirm the generic theorem partitions raw cells by canonical footprint and
+   proves equality with the grouped-family activation weight for every cut.
+5. Confirm duplicate raw footprints add all payload atoms instead of dropping
+   or double-counting mass.
+6. Confirm the adapter rewrites M197's grouped activation mismatch into the raw
+   ledger equality without accepting a parallel supplied total.
+7. Confirm the public endpoint retains an exact proper, nonempty cut and unequal
+   raw mass, or conditional ZeroSlack.
+8. Confirm its axiom closure contains only the fixed Lean-standard allowlist.
+9. Mutate crossing, mass accumulation, partitioning, the adapter, or the claim
+   boundary and require the hostile contract to reject the mutation.
+
+**What would count as a refutation or material defect**
+
+- Grouped activation differs from the direct raw crossing-mass sum for any
+  finite cut, including duplicate-footprint inputs.
+- The adapter accepts an independently supplied raw total or erases a mismatch.
+- The result holds only for one fixed carrier, cut, cell ledger, rank, or table.
+- The raw cells or payloads are described as constructed from every terminal
+  input when they remain supplied.
+- The raw mismatch is called a strict gain, global rank decrease, or constant-
+  activation proof without the missing semantic theorem.
+- The finite cut scan is described as polynomial without an encoded-size bound.
+- Conditional ZeroSlack is described as complete PkgC/BN3--BN6 integration,
+  manuscript-wide SaturatePositive or BCELReady, unconditional ZeroSlack, or a
+  closed global gate.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

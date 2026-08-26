@@ -263,8 +263,12 @@ positive supports and payload atoms: supports are normalized inside the
 checked carrier, singleton consumer systems are built, duplicate footprints
 are coalesced, and every positive payload atom is retained in its canonical
 group. The raw cells still are not derived from terminal BN3, BN4, BN5, or PkgC
-data, so the risk-weighted estimate remains 35 percent and zero of five global
-gates are closed. A deterministic target decider, the
+data. M198 then proves that this coalescing preserves the exact direct raw
+positive-cell crossing-mass sum on every cut and exposes the surviving BCEL
+mismatch against that raw ledger. The raw cells, constant-activation equation,
+gain semantics, global descent, and polynomial bounds remain open, so the
+risk-weighted estimate remains 35 percent and zero of five global gates are
+closed. A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See
 [`lean_concrete_legacy_locked_nand_compatibility.md`](lean_concrete_legacy_locked_nand_compatibility.md).
@@ -290,6 +294,8 @@ See also
 [`lean_pccmin_checked_packet_bn6_bcel_derived_family.md`](lean_pccmin_checked_packet_bn6_bcel_derived_family.md).
 See also
 [`lean_pccmin_checked_packet_bn6_bcel_canonical_grouping.md`](lean_pccmin_checked_packet_bn6_bcel_canonical_grouping.md).
+See also
+[`lean_pccmin_checked_packet_bn6_bcel_canonical_cut_ledger.md`](lean_pccmin_checked_packet_bn6_bcel_canonical_cut_ledger.md).
 
 The reconstruction now also verifies the iteration-count subclaim used by
 `PCCMin`: for any finite supplied chain whose every adjacent replacement is a

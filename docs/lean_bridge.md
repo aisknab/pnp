@@ -1847,6 +1847,23 @@ The risk-weighted proof-completion estimate therefore remains 35 percent and
 zero of five global gates are closed. See
 [`lean_pccmin_checked_packet_bn6_bcel_canonical_grouping.md`](./lean_pccmin_checked_packet_bn6_bcel_canonical_grouping.md).
 
+The M198 canonical cut-ledger boundary proves that M197's coalescing operation
+preserves the direct raw positive-cell crossing-mass sum on every finite cut.
+The checked endpoint consequently exposes the remaining proper-cut BCEL
+mismatch directly against that raw positive-cell cut ledger rather than only
+against a derived grouped-family activation total. The nine focused
+declarations use no project-specific axiom or `Classical.choice`; only permitted `propext` and
+`Quot.sound` closure appears where required. Raw cells and payloads, terminal
+construction, the constant-activation equation, tables, ranks, route-clear and
+HB data, resolvers, normalizer, and polynomial bounds remain supplied or open.
+The mismatch is not yet a strict gain or decreasing global route, and the
+finite subset scan is not proved polynomial. This does not complete
+PkgC/BN3--BN6 integration, prove manuscript-wide SaturatePositive or BCELReady,
+establish unconditional ZeroSlack, or construct polynomial PCCMin. The
+risk-weighted proof-completion estimate therefore remains 35 percent and zero
+of five global gates are closed. See
+[`lean_pccmin_checked_packet_bn6_bcel_canonical_cut_ledger.md`](./lean_pccmin_checked_packet_bn6_bcel_canonical_cut_ledger.md).
+
 ## Discharged by Lean so far
 
 ```text

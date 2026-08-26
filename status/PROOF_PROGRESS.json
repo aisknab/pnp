@@ -2,8 +2,8 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-26-197",
-  "lastReviewedDate": "2026-08-26",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-27-198",
+  "lastReviewedDate": "2026-08-27",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
     "pointsEarned": 35,
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 173,
-    "totalRows": 175,
+    "earnedRows": 174,
+    "totalRows": 176,
     "percentRoundedOneDecimal": 98.9,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -261,8 +261,8 @@
           ],
           "awardedAtCoordinate": null,
           "justification": "The residual-band minimizer is not formalized and the relevant global blocker remains open.",
-          "remainingLimitation": "M197 constructs canonical BN6 grouping from supplied raw positive supports and payload atoms over checked BCEL data, but those raw cells, maps, ranks and tables remain supplied rather than constructed from every valid terminal input.",
-          "lastReviewedDate": "2026-08-26"
+          "remainingLimitation": "M198 proves exact cut-mass conservation when supplied raw positive cells are canonically grouped over checked BCEL data, but those raw cells, maps, ranks and tables remain supplied rather than constructed from every valid terminal input.",
+          "lastReviewedDate": "2026-08-27"
         },
         {
           "id": "residual-pkgc-bn3-bn6-integration",
@@ -275,8 +275,8 @@
           ],
           "awardedAtCoordinate": null,
           "justification": "The global residual-minimizer and ZeroSlack blockers remain open despite substantial finite PkgC and BN rows.",
-          "remainingLimitation": "M197 fixes grouping to the checked BCEL carrier, but PkgC/BN3--BN6 must still derive the raw positive cells and activation equation from the terminal input and integrate every route without supplied global data.",
-          "lastReviewedDate": "2026-08-26"
+          "remainingLimitation": "M198 identifies canonical grouped activation exactly with the raw positive-cell cut ledger, but PkgC/BN3--BN6 must still derive those raw cells and the constant-activation equation from terminal input and integrate every route without supplied global data.",
+          "lastReviewedDate": "2026-08-27"
         },
         {
           "id": "residual-hn-bud-hb-semantics",
@@ -925,6 +925,20 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M197 removes M196's supplied V54 consumer systems, singletonization certificates, exact group-footprint-size proofs, and duplicate-free grouping proof. Each supplied raw support is normalized inside the checked BCEL carrier, its singleton consumer system is constructed, duplicate footprints are coalesced, and every positive payload atom is preserved before the canonical grouped family reuses M196. The terminal problem, positive premise, checked ready certificate, raw supports and payloads, table, ranks, route-clear and HB data, resolvers, normalizer, and polynomial bounds remain supplied; the raw cells are not derived from BN3, BN4, BN5, PkgC, or every terminal input. The remaining activation mismatch is not a gain or globally decreasing transition, and the inherited finite cut scan may be exponential. Therefore complete PkgC/BN3--BN6 integration, manuscript-wide SaturatePositive and BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, every global gate, and all fixed checkpoints remain open. Formal artefact coverage becomes 173 of 175, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-27-198",
+      "formalArtefactCoverage": { "earnedRows": 174, "totalRows": 176 },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M198 proves an arbitrary-finite conservation theorem at the BN4/BN6 activation edge: collecting raw positive payload atoms by canonical normalized footprint and coalescing duplicate footprints preserves the exact crossing-mass sum on every cut. The checked PCCMin endpoint now expresses its sole surviving BCEL obstruction directly as a mismatch between that raw positive-cell cut ledger and the checked defect rather than through an opaque grouped-family activation total. The terminal problem, positive premise, checked ready certificate, raw cells and payloads, table, ranks, route-clear and HB data, resolvers, normalizer, and polynomial bounds remain supplied; the raw cells are not derived from terminal data, the constant-activation equation remains open, the mismatch is not a gain or globally decreasing transition, and the inherited finite cut scan may be exponential. Therefore complete PkgC/BN3--BN6 integration, manuscript-wide SaturatePositive and BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, every global gate, and all fixed checkpoints remain open. Formal artefact coverage becomes 174 of 176, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [

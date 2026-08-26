@@ -160,6 +160,19 @@ algorithms, normalizer, and encoded-size polynomial construction remain
 supplied or open, so unconditional ZeroSlack and complete polynomial PCCMin are
 not established.
 
+M198 adds `PNP.ResidualTerminalBN6CanonicalCutLedger` and
+`PNP.PCCMinCheckedPacketBN6BCELCanonicalCutLedger`. For every finite checked
+same-candidate BCEL nucleus and supplied raw positive-cell ledger, it proves
+that canonical duplicate-footprint coalescing preserves the direct crossing-
+mass sum on every cut. The checked PCCMin endpoint therefore exposes the
+surviving proper-cut activation mismatch directly against that raw ledger. The
+nine reviewed declarations contain no project-specific axiom or
+`Classical.choice`; only permitted Lean-standard `propext` and `Quot.sound`
+appear where required. Raw cells, payloads, terminal construction, the
+constant-activation equation, gain and global rank-decrease semantics, and
+encoded-size polynomial bounds remain supplied or open, so this does not
+establish unconditional ZeroSlack, complete PCCMin, or polynomial runtime.
+
 ## Reviewed intermediate milestone bindings
 
 Intermediate milestone credit has a separate evidence boundary from theorem publication. Every

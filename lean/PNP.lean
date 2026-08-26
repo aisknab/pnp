@@ -53,6 +53,8 @@ import PNP.ResidualTerminalPkgCAmbientBN4Ledger
 import PNP.ResidualTerminalPkgCAmbientBN4ResidualReduction
 import PNP.ResidualTerminalConstantCutHypergraphRigidity
 import PNP.ResidualTerminalBN6HypergraphPacket
+import PNP.ResidualTerminalBN6CanonicalPositiveCellGrouping
+import PNP.ResidualTerminalBN6CanonicalCutLedger
 import PNP.ResidualTerminalPacketSelectorSeeds
 import PNP.ResidualTerminalPacketSelectorUniverse
 import PNP.ResidualTerminalPacketSelectorHandles
@@ -208,6 +210,7 @@ import PNP.PCCMinCheckedPacketBN6HBZeroSlackBridge
 import PNP.PCCMinCheckedPacketBN6BCELActivationRoute
 import PNP.PCCMinCheckedPacketBN6BCELDerivedFamily
 import PNP.PCCMinCheckedPacketBN6BCELCanonicalGrouping
+import PNP.PCCMinCheckedPacketBN6BCELCanonicalCutLedger
 import PNP.Bridge
 import PNP.ConcreteLegacyLockedNANDCompatibility
 import PNP.ConcreteResidualBandCompatibility

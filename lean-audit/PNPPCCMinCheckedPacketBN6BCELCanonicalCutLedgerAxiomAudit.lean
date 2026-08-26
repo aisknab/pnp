@@ -1,0 +1,11 @@
+import PNP.PCCMinCheckedPacketBN6BCELCanonicalCutLedger
+
+#print axioms PNP.DirectWire.TerminalBN6PositiveCell.toHyperedge
+#print axioms PNP.DirectWire.TerminalBN6PositiveCell.cutContribution
+#print axioms PNP.DirectWire.terminalBN6PositiveCellsActivationWeight
+#print axioms PNP.DirectWire.terminalBN6FootprintCrossesBool
+#print axioms PNP.DirectWire.TerminalBN6PositiveCell.crossesBool_eq_footprintCrossesBool
+#print axioms PNP.DirectWire.terminalBN6PositiveAtomsAt_mass_sum
+#print axioms PNP.DirectWire.terminalBN6CanonicalPositiveGroups_activationWeight_eq_raw
+#print axioms PNP.DirectWire.PCCMinCheckedPacketBN6BCELPositiveCells.groupedFamily_activationWeight_eq_raw
+#print axioms PNP.DirectWire.pccmin_checked_packet_bn6_bcel_canonical_cut_ledger_route_or_zeroslack_checked_complete

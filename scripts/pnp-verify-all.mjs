@@ -145,6 +145,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-pccmin-checked-packet-bn6-bcel-activation-route0.test.mjs',
   'audits/lean-pccmin-checked-packet-bn6-bcel-derived-family0.test.mjs',
   'audits/lean-pccmin-checked-packet-bn6-bcel-canonical-grouping0.test.mjs',
+  'audits/lean-pccmin-checked-packet-bn6-bcel-canonical-cut-ledger0.test.mjs',
   'audits/lean-residual-terminal-rank-wf0.test.mjs',
   'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs',
   'audits/bn3-joint-realizability-gap0.test.mjs',
