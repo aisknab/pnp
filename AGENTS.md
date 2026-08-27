@@ -485,10 +485,11 @@ before pushing:
 - compare against `origin/main`;
 - reject deletions in the touched source files;
 - allow only blank lines or lines beginning with `/**`, `*`, `*/`, or `//`;
-- run syntax checks for every touched module.
+- run syntax checks for every touched module on the configured remote build host.
 
-Do this locally. Do not create a `finalize-*` workflow to apply comments, validate
-them, commit them, and remove itself.
+Perform only the read-only Git and text classification locally; dispatch every
+syntax check to the configured remote build host. Do not create a `finalize-*`
+workflow to apply comments, validate them, commit them, and remove itself.
 
 ## If A Temporary Workflow Already Exists
 
